@@ -8,72 +8,66 @@ export interface Fx {
     substitutions: Substitutions[];
 }
 
-export interface Substitutions {
-    match: RegExp;
-    remove: string;
-    replacement: string;
-    pos?: string;
+export interface Dictionary<T>{
+    [index: string]: T;
 }
 
+export interface Substitutions {
+    rule: RegExp;
+    remove: string;
+    attach: string;
+    extra: string[];
+}
+
+export interface Rep {
+    match: RegExp;
+    replaceWith: string;
+}
+
+export interface Conv {
+    from: string;
+    to: string;
+}
 
 export interface Aff {
-    encoding: string;
-    trySet: string;
-    keyboard: string;
-    lang: string;
-
-    // # do not offer split words (to prevent splitting up words)
-    // NOSPLITSUGS
-    noSplitSuggest: boolean;
-
-    // # maximum number of compound suggestions
-    // # limit to 1 to prevent nonsense suggestions
-    // MAXCPDSUGS
-    maxCompoundSuggestions: number;
-
-    // # max difference to be applied for all words (compounds and n-gram suggestions)
-    // ONLYMAXDIFF
-    isOnlyMaxDiff: boolean;
-
-    // # max difference in chars for n-gram suggestions
-    // # 3 limits wild suggestions a lot, but also drops suggestions for words with multiple errors
-    // MAXDIFF 3
-    maxDiff: number;
-
-    // # avoid wrong spelling of letter words in full uppercase (DVD should be dvd)
-    // KEEPCASE Kc
-    keepCase: string;
-
-    // # set the flag for warning with confusing words
-    // WARN Wn
-    warn: string;
-
-    // # force uppercase for some word ends
-    // FORCEUCASE Fu
-    forceUpperCase: string;
-
-    // # BREAK 0 causes the - to be seen as part of the word,
-    // # which is necessary to support the optional - in compounded words
-    // BREAK 0
-    break: string;
-
-    // # use double chars as flags, for more choice and readability
-    // # For readability reasons, use of flags is (mostly) restricted tu Upper-Lowercase combinations
-    // FLAG long
-    flag: string; // null, long, num
-
-    // # explicitly forbid words
-    // FORBIDDENWORD Fw
-    forbiddenWord: string;
-
-    // # don't suggest words with extra accents
-    // NOSUGGEST NS
-    noSuggest: string;
+    SET?: string;
+    TRY?: string;
+    KEY?: string;
+    WORDCHARS?: string;
+    NOSPLITSUGS?: boolean;
+    MAXCPDSUGS?: number;
+    ONLYMAXDIFF?: boolean;
+    MAXDIFF?: number;
+    KEEPCASE?: string;
+    WARN?: string;
+    FORCEUCASE?: string;
+    BREAK?: number;
+    FLAG?: string;  // 'long' | 'num'
+    FORBIDDENWORD?: string;
+    NOSUGGEST?: string;
+    MAP?: string[];
+    ICONV?: Conv[];
+    OCONV?: Conv[];
+    REP?: Rep[];
+    COMPOUNDMIN?: number;
+    COMPOUNDRULE?: string[];
+    CHECKCOMPOUNDCASE?: boolean;
+    COMPOUNDBEGIN?: string;
+    COMPOUNDMIDDLE?: string;
+    COMPOUNDEND?: string;
+    COMPOUNDPERMITFLAG?: string;
+    ONLYINCOMPOUND?: string;
+    CHECKCOMPOUNDDUP?: boolean;
+    CHECKCOMPOUNDREP?: boolean;
+    CHECKCOMPOUNDPATTERN?: string[][];
+    PFX?: Dictionary<Fx>;
+    SFX?: Dictionary<Fx>;
 }
 
 function simpleTable(fieldValue, field: string, args: string[]) {
     if (fieldValue === undefined) {
-        const [ count, extra ] = args;
+        const [ count, ...extraValues ] = args;
+        const extra = extraValues.length ? extraValues : undefined;
         return { count, extra, values: [] };
     } else {
         fieldValue.values.push(args);
@@ -81,33 +75,83 @@ function simpleTable(fieldValue, field: string, args: string[]) {
     return fieldValue;
 }
 
-function tablePfxOrSfx(fieldValue, field: string, args: string[]) {
+function tablePfxOrSfx(fieldValue, field: string, args: string[], type: string) {
     if (fieldValue === undefined) {
         fieldValue = { };
     }
     const [ subField, ...subValues ] = args;
     if (fieldValue[subField] === undefined) {
+        const id = subField;
         const [ combinable, count, ...extra ] = subValues;
-        fieldValue[subField] = { combinable, count, extra, values: [] };
+        fieldValue[subField] = { id, type, combinable, count, extra, substitutions: [] };
         return fieldValue;
     }
-    const [remove, attach, rule, ...extra] = subValues;
-    fieldValue[subField].values.push({ remove, attach, rule, extra });
+    const [removeValue, attach, ruleAsString = '.', ...extraValues] = subValues;
+    const extra = extraValues.length ? extraValues : undefined;
+    const remove = removeValue.replace('0', '');
+    const ruleRegExp = type === 'PFX' ? '^' + ruleAsString : ruleAsString + '$';
+    const rule = new RegExp(ruleRegExp);
+    fieldValue[subField].substitutions.push({ remove, attach, rule, extra });
 
     return fieldValue;
 }
 
+function asPfx(fieldValue, field: string, args: string[]) {
+    return tablePfxOrSfx(fieldValue, field, args, 'PFX');
+}
 
+function asSfx(fieldValue, field: string, args: string[]) {
+    return tablePfxOrSfx(fieldValue, field, args, 'SFX');
+}
+
+function asString(fieldValue, field: string, args: string[]) {
+    return args[0];
+}
+
+function asBoolean(fieldValue, field: string, args: string[]) {
+    const [ value = '1' ] = args;
+    const iValue = parseInt(value);
+    return !!iValue;
+}
+
+function asNumber(fieldValue, field: string, args: string[]) {
+    const [ value = '0' ] = args;
+    return parseInt(value);
+}
 
 const affTableField = {
-    MAP: simpleTable,
-    ICONV: simpleTable,
-    OCONV: simpleTable,
-    REP: simpleTable,
-    COMPOUNDRULE: simpleTable,
+    BREAK: asNumber,
+    CHECKCOMPOUNDCASE: asBoolean,
+    CHECKCOMPOUNDDUP: asBoolean,
     CHECKCOMPOUNDPATTERN: simpleTable,
-    SFX: tablePfxOrSfx,
-    PFX: tablePfxOrSfx,
+    CHECKCOMPOUNDREP: asBoolean,
+    COMPOUNDBEGIN: asString,
+    COMPOUNDEND: asString,
+    COMPOUNDMIDDLE: asString,
+    COMPOUNDMIN: asNumber,
+    COMPOUNDPERMITFLAG: asString,
+    COMPOUNDRULE: simpleTable,
+    FLAG: asString,  // 'long' | 'num'
+    FORBIDDENWORD: asString,
+    FORCEUCASE: asString,
+    ICONV: simpleTable,
+    KEEPCASE: asString,
+    KEY: asString,
+    MAP: simpleTable,
+    MAXCPDSUGS: asNumber,
+    MAXDIFF: asNumber,
+    NOSPLITSUGS: asBoolean,
+    NOSUGGEST: asString,
+    OCONV: simpleTable,
+    ONLYINCOMPOUND: asString,
+    ONLYMAXDIFF: asBoolean,
+    PFX: asPfx,
+    REP: simpleTable,
+    SET: asString,
+    SFX: asSfx,
+    TRY: asString,
+    WARN: asString,
+    WORDCHARS: asString,
 };
 
 
@@ -118,9 +162,10 @@ export function parseAffFile(filename: string, encoding: string = 'UTF-8') {
 export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8') {
     return lines
         .map(line => line.replace(/^\s*#.*/, ''))
+        .map(line => line.replace(/\s+#.*/, ''))
         .filter(line => line.trim() !== '')
         .map(line => line.split(/\s+/))
-        .reduce((aff, line) => {
+        .reduce<Aff>((aff, line): Aff => {
             const [ field, ...args ] = line;
             const fn = affTableField[field];
             if (fn) {
