@@ -1,5 +1,8 @@
+import * as _ from 'lodash';
+import {merge} from 'tsmerge';
+import * as util from 'util';
 
-import { lineReader } from './fileReader';
+const log = false;
 
 export interface Fx {
     type: string;
@@ -13,14 +16,16 @@ export interface Dictionary<T>{
 }
 
 export interface Substitutions {
-    rule: RegExp;
+    match: RegExp;
     remove: string;
     attach: string;
+    attachRules?: string;
+    replace: RegExp;
     extra: string[];
 }
 
 export interface Rep {
-    match: RegExp;
+    match: string;
     replaceWith: string;
 }
 
@@ -29,7 +34,7 @@ export interface Conv {
     to: string;
 }
 
-export interface Aff {
+export interface AffInfo {
     SET?: string;
     TRY?: string;
     KEY?: string;
@@ -64,115 +69,186 @@ export interface Aff {
     SFX?: Dictionary<Fx>;
 }
 
-function simpleTable(fieldValue, field: string, args: string[]) {
-    if (fieldValue === undefined) {
-        const [ count, ...extraValues ] = args;
-        const extra = extraValues.length ? extraValues : undefined;
-        return { count, extra, values: [] };
-    } else {
-        fieldValue.values.push(args);
+export interface Rule {
+    id: string;
+    type: string;
+    flags?: AffWordFlags;
+    pfx?: Fx;
+    sfx?: Fx;
+}
+
+export interface AffWordFlags {
+    isCompoundPermitted?: boolean;   // default false
+    canBeCompoundBegin?: boolean;    // default false
+    canBeCompoundMiddle?: boolean;   // default false
+    canBeCompoundEnd?: boolean;      // default false
+    isOnlyAllowedInCompound?: boolean; // default false
+    isWarning?: boolean;
+    isKeepCase?: boolean;
+    isForceUCase?: boolean;
+    isForbiddenWord?: boolean;
+    isNoSuggest?: boolean;
+}
+
+export interface AffWord {
+    word: string;
+    rules: string;
+    flags: AffWordFlags;
+    rulesApplied: string;
+}
+
+export class Aff {
+    protected rules: Dictionary<Rule>;
+
+    constructor(public affInfo: AffInfo) {
+        this.rules = processRules(affInfo);
     }
-    return fieldValue;
-}
 
-function tablePfxOrSfx(fieldValue, field: string, args: string[], type: string) {
-    if (fieldValue === undefined) {
-        fieldValue = { };
+    applyRulesToDicEntry(line: string): AffWord[] {
+        const [word, rules = ''] = line.split('/');
+        return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: ''});
     }
-    const [ subField, ...subValues ] = args;
-    if (fieldValue[subField] === undefined) {
-        const id = subField;
-        const [ combinable, count, ...extra ] = subValues;
-        fieldValue[subField] = { id, type, combinable, count, extra, substitutions: [] };
-        return fieldValue;
+
+    applyRulesToWord(affWord: AffWord): AffWord[] {
+        const { word } = affWord;
+        const allRules = this.getMatchingRules(affWord.rules);
+        const { rulesApplied, flags } = allRules
+            .filter(rule => !!rule.flags)
+            .reduce((acc, rule) => ({
+                rulesApplied: acc.rulesApplied + rule.id,
+                flags: merge(acc.flags, rule.flags)
+            }), { rulesApplied: affWord.rulesApplied, flags: inheritFlags(affWord.flags)});
+        const rules = allRules.filter(rule => !rule.flags);
+        const affixRules = allRules.map(rule => rule.sfx || rule.pfx).filter(a => !!a);
+        const wordWithFlags = {word, flags, rulesApplied, rules: ''};
+        return [
+            wordWithFlags,
+            ...this.applyAffixesToWord(affixRules, merge(wordWithFlags, { rules }))
+        ]
+        .map(affWord => logAffWord(affWord, 'applyRulesToWord'))
+        ;
     }
-    const [removeValue, attach, ruleAsString = '.', ...extraValues] = subValues;
-    const extra = extraValues.length ? extraValues : undefined;
-    const remove = removeValue.replace('0', '');
-    const ruleRegExp = type === 'PFX' ? '^' + ruleAsString : ruleAsString + '$';
-    const rule = new RegExp(ruleRegExp);
-    fieldValue[subField].substitutions.push({ remove, attach, rule, extra });
 
-    return fieldValue;
+    applyAffixesToWord(affixRules: Fx[], affWord: AffWord): AffWord[] {
+        const combinableSfx = affixRules
+            .filter(rule => rule.type === 'SFX')
+            .filter(rule => rule.combinable === true)
+            .map(({id}) => id)
+            .join('');
+        const r = affixRules
+            .map(affix => this.applyAffixToWord(affix, affWord, combinableSfx))
+            .reduce<AffWord[]>((acc, v) => [...acc, ...v], [])
+            .map(affWord => this.applyRulesToWord(affWord))
+            .reduce<AffWord[]>((acc, v) => [...acc, ...v], []);
+        return r;
+    }
+
+    applyAffixToWord(affix: Fx, affWord: AffWord, combinableSfx: string): AffWord[] {
+        const {word} = affWord;
+        const combineRules = (affix.type === 'PFX' && affix.combinable && !!combinableSfx)
+            ? combinableSfx
+            : '';
+        return affix.substitutions
+            .filter(sub => !!word.match(sub.match))
+            .map<AffWord>(sub => ({
+                word: word.replace(sub.replace, sub.attach),
+                rulesApplied: affWord.rulesApplied + affix.id,
+                rules: combineRules + (sub.attachRules || ''),
+                flags: affWord.flags
+            }))
+            .map(affWord => logAffWord(affWord, 'applyAffixToWord'))
+            ;
+    }
+
+    getMatchingRules(rules: string): Rule[] {
+        return this.separateRules(rules)
+            .map(key => this.rules[key])
+            .filter(a => !!a);
+    }
+
+    separateRules(rules: string): string[] {
+        if (this.affInfo.FLAG === 'long') {
+            return rules.replace(/(..)/g, '$1//').split('//').slice(0, -1);
+        } else {
+            return rules.split('');
+        }
+    }
 }
 
-function asPfx(fieldValue, field: string, args: string[]) {
-    return tablePfxOrSfx(fieldValue, field, args, 'PFX');
+export function processRules(affInfo: AffInfo): Dictionary<Rule> {
+    const sfxRules = _(affInfo.SFX).map((sfx: Fx) => ({ id: sfx.id, type: 'sfx', sfx }))
+        .reduce<Dictionary<Rule>>((acc, rule) => { acc[rule.id] = rule; return acc; }, Object.create(null));
+    const pfxRules = _(affInfo.PFX).map((pfx: Fx) => ({ id: pfx.id, type: 'pfx', pfx }))
+        .reduce<Dictionary<Rule>>((acc, rule) => { acc[rule.id] = rule; return acc; }, Object.create(null));
+    const flagRules = _(affInfo).map((value, key) => ({value, key}))
+        .filter(({key}) => !!affFlag[key])
+        .map(({value, key}) => ({ id: value, type: 'flag', flags: affFlag[key] }))
+        .reduce<Dictionary<Rule>>((acc, rule) => { acc[rule.id] = rule; return acc; }, Object.create(null));
+    return merge(sfxRules, pfxRules, flagRules);
 }
 
-function asSfx(fieldValue, field: string, args: string[]) {
-    return tablePfxOrSfx(fieldValue, field, args, 'SFX');
+export function inheritFlags(flags: AffWordFlags): AffWordFlags {
+    return _(flags).map((value: boolean, key: string) => ({key, value}))
+        .filter(({key}) => inheritedFlags[key])
+        .reduce<AffWordFlags>((acc, flag) => merge(acc, {[flag.key]: flag.value}), {});
 }
 
-function asString(fieldValue, field: string, args: string[]) {
-    return args[0];
-}
-
-function asBoolean(fieldValue, field: string, args: string[]) {
-    const [ value = '1' ] = args;
-    const iValue = parseInt(value);
-    return !!iValue;
-}
-
-function asNumber(fieldValue, field: string, args: string[]) {
-    const [ value = '0' ] = args;
-    return parseInt(value);
-}
-
-const affTableField = {
-    BREAK: asNumber,
-    CHECKCOMPOUNDCASE: asBoolean,
-    CHECKCOMPOUNDDUP: asBoolean,
-    CHECKCOMPOUNDPATTERN: simpleTable,
-    CHECKCOMPOUNDREP: asBoolean,
-    COMPOUNDBEGIN: asString,
-    COMPOUNDEND: asString,
-    COMPOUNDMIDDLE: asString,
-    COMPOUNDMIN: asNumber,
-    COMPOUNDPERMITFLAG: asString,
-    COMPOUNDRULE: simpleTable,
-    FLAG: asString,  // 'long' | 'num'
-    FORBIDDENWORD: asString,
-    FORCEUCASE: asString,
-    ICONV: simpleTable,
-    KEEPCASE: asString,
-    KEY: asString,
-    MAP: simpleTable,
-    MAXCPDSUGS: asNumber,
-    MAXDIFF: asNumber,
-    NOSPLITSUGS: asBoolean,
-    NOSUGGEST: asString,
-    OCONV: simpleTable,
-    ONLYINCOMPOUND: asString,
-    ONLYMAXDIFF: asBoolean,
-    PFX: asPfx,
-    REP: simpleTable,
-    SET: asString,
-    SFX: asSfx,
-    TRY: asString,
-    WARN: asString,
-    WORDCHARS: asString,
+const affFlag: Dictionary<AffWordFlags> = {
+    KEEPCASE: { isKeepCase: true },
+    WARN: { isWarning: true },
+    FORCEUCASE: { isForceUCase: true },
+    FORBIDDENWORD: { isForbiddenWord: true },
+    NOSUGGEST: { isNoSuggest: true },
+    CHECKCOMPOUNDCASE: {},
+    COMPOUNDBEGIN: { canBeCompoundBegin: true },
+    COMPOUNDMIDDLE: { canBeCompoundMiddle: true },
+    COMPOUNDEND: { canBeCompoundEnd: true },
+    COMPOUNDPERMITFLAG: { isCompoundPermitted: true },
+    ONLYINCOMPOUND: { isOnlyAllowedInCompound: true },
 };
 
+const inheritedFlags: Dictionary<boolean> = {
+    isCompoundPermitted: false,
+    canBeCompoundBegin: false,
+    canBeCompoundMiddle: false,
+    canBeCompoundEnd: true,
+    isOnlyAllowedInCompound: false,
+    isWarning: true,
+    isKeepCase: true,
+    isForceUCase: true,
+    isForbiddenWord: true,
+    isNoSuggest: true
+};
 
-export function parseAffFile(filename: string, encoding: string = 'UTF-8') {
-    return parseAff(lineReader(filename, encoding), encoding);
+const flagToStringMap: Dictionary<string> = {
+    isCompoundPermitted: 'C',
+    canBeCompoundBegin: 'B',
+    canBeCompoundMiddle: 'M',
+    canBeCompoundEnd: 'E',
+    isOnlyAllowedInCompound: 'O',
+    isWarning: 'W',
+    isKeepCase: 'K',
+    isForceUCase: 'U',
+    isForbiddenWord: 'F',
+    isNoSuggest: 'N',
+};
+
+export function logAffWord(affWord: AffWord, message: string) {
+    if (log) {
+        const dump = util.inspect(affWord, { showHidden: false, depth: 5, colors: true });
+        console.log(`${message}: ${dump}`);
+    }
+    return affWord;
 }
 
-export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8') {
-    return lines
-        .map(line => line.replace(/^\s*#.*/, ''))
-        .map(line => line.replace(/\s+#.*/, ''))
-        .filter(line => line.trim() !== '')
-        .map(line => line.split(/\s+/))
-        .reduce<Aff>((aff, line): Aff => {
-            const [ field, ...args ] = line;
-            const fn = affTableField[field];
-            if (fn) {
-                aff[field] = fn(aff[field], field, args);
-            } else {
-                aff[field] = args;
-            }
-            return aff;
-        }, {});
+export function flagsToString(flags: AffWordFlags) {
+    return _(flags)
+        // pair the key/value
+        .map((v: boolean, k: string) => ({ v, k }))
+        // remove any false values
+        .filter(({v}) => v)
+        // convert the key to a string
+        .map(({k}) => flagToStringMap[k])
+        .sort()
+        .join('_');
 }
