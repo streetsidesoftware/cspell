@@ -7,6 +7,11 @@ const fixRegex = {
     'PFX': { m: /^/, r: '^'},
 };
 
+const emptyZeroRegex = /^0$/;
+const yesRegex = /[yY]/;
+const spaceRegex = /\s+/;
+const commentRegex = /(?:^\s*#.*)|(?:\s+#.*)/;
+
 function convEntry(fieldValue, field: string, args: string[]) {
     if (fieldValue === undefined) {
         return [];
@@ -35,17 +40,18 @@ function tablePfxOrSfx(fieldValue, field: string, args: string[], type: string) 
     if (fieldValue[subField] === undefined) {
         const id = subField;
         const [ combinable, count, ...extra ] = subValues;
-        fieldValue[subField] = { id, type, combinable: !!combinable.match(/[yY]/), count, extra, substitutions: [] };
+        fieldValue[subField] = { id, type, combinable: !!combinable.match(yesRegex), count, extra, substitutions: [] };
         return fieldValue;
     }
     const [removeValue, attach, ruleAsString = '.', ...extraValues] = subValues;
     const [attachText, attachRules] = attach.split('/', 2);
     const extra = extraValues.length ? extraValues : undefined;
-    const remove = removeValue.replace('0', '');
+    const remove = removeValue.replace(emptyZeroRegex, '');
+    const insertText = attachText.replace(emptyZeroRegex, '');
     const fixUp = fixRegex[type];
     const match = new RegExp(ruleAsString.replace(fixUp.m, fixUp.r));
     const replace = new RegExp(remove.replace(fixUp.m, fixUp.r));
-    fieldValue[subField].substitutions.push({ match, remove, replace, attach: attachText, attachRules, extra });
+    fieldValue[subField].substitutions.push({ match, remove, replace, attach: insertText, attachRules, extra });
 
     return fieldValue;
 }
@@ -115,10 +121,9 @@ export function parseAffFile(filename: string, encoding: string = 'UTF-8') {
 
 export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8') {
     return lines
-        .map(line => line.replace(/^\s*#.*/, ''))
-        .map(line => line.replace(/\s+#.*/, ''))
+        .map(line => line.replace(commentRegex, ''))
         .filter(line => line.trim() !== '')
-        .map(line => line.split(/\s+/))
+        .map(line => line.split(spaceRegex))
         .reduce<AffInfo>((aff, line): AffInfo => {
             const [ field, ...args ] = line;
             const fn = affTableField[field];

@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {flagsToString, AffWord, affWordToColoredString} from './aff';
+import {AffWord, affWordToColoredString} from './aff';
 import {parseAffFileToAff} from './affReader';
-import {merge} from 'tsmerge';
 
 describe('Test Aff', () => {
     const nlAff = __dirname + '/../dictionaries/nl.aff';
     const enAff = __dirname + '/../dictionaries/en_US.aff';
+    const esAff = __dirname + '/../dictionaries/es_ANY.aff';
 
     it('test breaking up rules for nl', () => {
         return parseAffFileToAff(nlAff)
@@ -56,6 +56,21 @@ describe('Test Aff', () => {
                 });
             });
     });
+
+    it('tests applying rules for es', () => {
+        return parseAffFileToAff(esAff)
+            .then(aff => {
+                const lines = [
+                    'ababillar/E',
+                    // 'ababillar/RED',
+                ];
+                lines.forEach(line => {
+                    const r = aff.applyRulesToDicEntry(line);
+                    logApplyRulesResults(r);
+                });
+            });
+    });
+
 
     it('tests applying rules for en', () => {
         return parseAffFileToAff(enAff)
