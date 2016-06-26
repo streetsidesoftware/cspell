@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import {merge} from 'tsmerge';
 import * as util from 'util';
+import * as Conv from './converter';
 
 const log = false;
 
@@ -9,10 +10,6 @@ export interface Fx {
     id: string;
     combinable: boolean;
     substitutions: Substitutions[];
-}
-
-export interface Dictionary<T>{
-    [index: string]: T;
 }
 
 export interface Substitutions {
@@ -99,14 +96,19 @@ export interface AffWord {
 
 export class Aff {
     protected rules: Dictionary<Rule>;
+    protected _oConv: Conv.Converter;
+    protected _iConv: Conv.Converter;
 
     constructor(public affInfo: AffInfo) {
         this.rules = processRules(affInfo);
+        this._iConv = new Conv.Converter(affInfo.ICONV || []);
+        this._oConv = new Conv.Converter(affInfo.OCONV || []);
     }
 
     applyRulesToDicEntry(line: string): AffWord[] {
         const [word, rules = ''] = line.split('/');
-        return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: ''});
+        return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: ''})
+            .map(affWord => merge(affWord, { word: this._oConv.convert(affWord.word) }));
     }
 
     applyRulesToWord(affWord: AffWord): AffWord[] {
@@ -115,9 +117,9 @@ export class Aff {
         const { rulesApplied, flags } = allRules
             .filter(rule => !!rule.flags)
             .reduce((acc, rule) => ({
-                rulesApplied: acc.rulesApplied + rule.id,
+                rulesApplied: [acc.rulesApplied, rule.id].join(' '),
                 flags: merge(acc.flags, rule.flags)
-            }), { rulesApplied: affWord.rulesApplied, flags: inheritFlags(affWord.flags)});
+            }), { rulesApplied: affWord.rulesApplied, flags: affWord.flags});
         const rules = allRules.filter(rule => !rule.flags);
         const affixRules = allRules.map(rule => rule.sfx || rule.pfx).filter(a => !!a);
         const wordWithFlags = {word, flags, rulesApplied, rules: ''};
@@ -149,10 +151,10 @@ export class Aff {
             ? combinableSfx
             : '';
         return affix.substitutions
-            .filter(sub => !!word.match(sub.match))
+            .filter(sub => !!word.match(sub.match) && !!word.match(sub.replace))
             .map<AffWord>(sub => ({
                 word: word.replace(sub.replace, sub.attach),
-                rulesApplied: affWord.rulesApplied + affix.id,
+                rulesApplied: [affWord.rulesApplied, affix.id].join(' '),
                 rules: combineRules + (sub.attachRules || ''),
                 flags: affWord.flags
             }))
@@ -173,6 +175,14 @@ export class Aff {
             return rules.split('');
         }
     }
+
+    get iConv() {
+        return this._iConv;
+    }
+
+    get oConv() {
+        return this._oConv;
+    }
 }
 
 export function processRules(affInfo: AffInfo): Dictionary<Rule> {
@@ -187,12 +197,6 @@ export function processRules(affInfo: AffInfo): Dictionary<Rule> {
     return merge(sfxRules, pfxRules, flagRules);
 }
 
-export function inheritFlags(flags: AffWordFlags): AffWordFlags {
-    return _(flags).map((value: boolean, key: string) => ({key, value}))
-        .filter(({key}) => inheritedFlags[key])
-        .reduce<AffWordFlags>((acc, flag) => merge(acc, {[flag.key]: flag.value}), {});
-}
-
 const affFlag: Dictionary<AffWordFlags> = {
     KEEPCASE: { isKeepCase: true },
     WARN: { isWarning: true },
@@ -205,19 +209,6 @@ const affFlag: Dictionary<AffWordFlags> = {
     COMPOUNDEND: { canBeCompoundEnd: true },
     COMPOUNDPERMITFLAG: { isCompoundPermitted: true },
     ONLYINCOMPOUND: { isOnlyAllowedInCompound: true },
-};
-
-const inheritedFlags: Dictionary<boolean> = {
-    isCompoundPermitted: false,
-    canBeCompoundBegin: false,
-    canBeCompoundMiddle: false,
-    canBeCompoundEnd: true,
-    isOnlyAllowedInCompound: false,
-    isWarning: true,
-    isKeepCase: true,
-    isForceUCase: true,
-    isForbiddenWord: true,
-    isNoSuggest: true
 };
 
 const flagToStringMap: Dictionary<string> = {
@@ -241,6 +232,12 @@ export function logAffWord(affWord: AffWord, message: string) {
     return affWord;
 }
 
+export function affWordToColoredString(affWord: AffWord) {
+    return util.inspect(
+        merge(affWord, { flags: flagsToString(affWord.flags)}),
+        { showHidden: false, depth: 5, colors: true }).replace(/(\s|\n|\r)+/g, ' ');
+}
+
 export function flagsToString(flags: AffWordFlags) {
     return _(flags)
         // pair the key/value
@@ -252,3 +249,4 @@ export function flagsToString(flags: AffWordFlags) {
         .sort()
         .join('_');
 }
+

@@ -7,14 +7,23 @@ const fixRegex = {
     'PFX': { m: /^/, r: '^'},
 };
 
+function convEntry(fieldValue, field: string, args: string[]) {
+    if (fieldValue === undefined) {
+        return [];
+    }
+
+    fieldValue.push({ from: args[0], to: args[1] });
+    return fieldValue;
+}
+
 function simpleTable(fieldValue, field: string, args: string[]) {
     if (fieldValue === undefined) {
         const [ count, ...extraValues ] = args;
         const extra = extraValues.length ? extraValues : undefined;
         return { count, extra, values: [] };
-    } else {
-        fieldValue.values.push(args);
     }
+
+    fieldValue.values.push(args);
     return fieldValue;
 }
 
@@ -79,7 +88,7 @@ const affTableField = {
     FLAG: asString,  // 'long' | 'num'
     FORBIDDENWORD: asString,
     FORCEUCASE: asString,
-    ICONV: simpleTable,
+    ICONV: convEntry,
     KEEPCASE: asString,
     KEY: asString,
     MAP: simpleTable,
@@ -87,7 +96,7 @@ const affTableField = {
     MAXDIFF: asNumber,
     NOSPLITSUGS: asBoolean,
     NOSUGGEST: asString,
-    OCONV: simpleTable,
+    OCONV: convEntry,
     ONLYINCOMPOUND: asString,
     ONLYMAXDIFF: asBoolean,
     PFX: asPfx,
@@ -124,6 +133,9 @@ export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string) {
+    console.log(`parseAffFileToAff - ${filename}`);
     return parseAffFile(filename, encoding)
-        .then(affInfo => new Aff(affInfo));
+        .then(affInfo => new Aff(affInfo))
+        ;
 }
+

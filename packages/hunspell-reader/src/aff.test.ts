@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {flagsToString, AffWord} from './aff';
+import {flagsToString, AffWord, affWordToColoredString} from './aff';
 import {parseAffFileToAff} from './affReader';
 import {merge} from 'tsmerge';
 
@@ -45,10 +45,15 @@ describe('Test Aff', () => {
     it('tests applying rules for nl', () => {
         return parseAffFileToAff(nlAff)
             .then(aff => {
-                const r = aff.applyRulesToDicEntry('huis/CACcYbCQZhC0');
-                logApplyRulesResults(r);
-                const s = aff.applyRulesToDicEntry('pannenkoek/ZbCACcC0');
-                logApplyRulesResults(s);
+                const lines = [
+                'aak/Zf',
+                'huis/CACcYbCQZhC0',
+                'pannenkoek/ZbCACcC0',
+                ];
+                lines.forEach(line => {
+                    const r = aff.applyRulesToDicEntry(line);
+                    logApplyRulesResults(r);
+                });
             });
     });
 
@@ -67,5 +72,5 @@ function logApplyRulesResults(affWords: AffWord[]) {
 }
 
 function logApplyRulesResult(affWord: AffWord) {
-    console.log(merge(affWord, {flags: flagsToString(affWord.flags)}));
+    console.log(affWordToColoredString(affWord));
 }
