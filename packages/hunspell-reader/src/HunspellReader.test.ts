@@ -62,7 +62,7 @@ describe('HunspellReader Nl', function() {
         const words = hunspellReader.readWordsEx();
         expect(words).to.be.not.empty;
         return words
-            .skip(150000)
+            .skip(200000)
             // .skip(100)
             .take(200)
             .tap(info => { console.log(Aff.affWordToColoredString(info)); })

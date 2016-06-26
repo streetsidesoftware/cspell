@@ -133,7 +133,6 @@ export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string) {
-    console.log(`parseAffFileToAff - ${filename}`);
     return parseAffFile(filename, encoding)
         .then(affInfo => new Aff(affInfo))
         ;
