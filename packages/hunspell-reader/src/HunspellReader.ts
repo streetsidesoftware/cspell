@@ -17,8 +17,10 @@ export class HunspellReader {
     }
 
     readDicEntries(): Rx.Observable<string> {
-        return lineReader(this.dicFile)
-            .skip(1);   // Skip the first line -- it is the number of words in the file.
+        return Rx.Observable.fromPromise(this.aff)
+            .flatMap(aff => lineReader(this.dicFile, aff.affInfo.SET))
+            .skip(1)   // Skip the first line -- it is the number of words in the file.
+        ;
     }
 
 

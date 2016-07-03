@@ -2,6 +2,7 @@
 import * as fs from 'fs';
 import * as Rx from 'rx';
 import * as RxNode from 'rx-node';
+import * as iconv from 'iconv-lite';
 
 export function lineReader(filename: string, encoding?: string): Rx.Observable<string> {
     return stringsToLines(textFileStream(filename, encoding));
@@ -9,7 +10,9 @@ export function lineReader(filename: string, encoding?: string): Rx.Observable<s
 
 
 export function textFileStream(filename: string, encoding: string = 'UTF-8'): Rx.Observable<string> {
-    return RxNode.fromStream<string>(fs.createReadStream(filename, { encoding }));
+    return RxNode.fromStream<string>(
+        fs.createReadStream(filename).pipe(iconv.decodeStream(encoding))
+    );
 }
 
 

@@ -116,7 +116,13 @@ const affTableField = {
 
 
 export function parseAffFile(filename: string, encoding: string = 'UTF-8') {
-    return parseAff(lineReader(filename, encoding), encoding);
+    return parseAff(lineReader(filename, encoding), encoding)
+        .then(affInfo => {
+            if (affInfo.SET && affInfo.SET.toLowerCase() !== encoding.toLowerCase()) {
+                return parseAff(lineReader(filename, affInfo.SET), affInfo.SET);
+            }
+            return affInfo;
+        });
 }
 
 export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8') {
