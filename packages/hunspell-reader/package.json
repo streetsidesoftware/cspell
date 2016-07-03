@@ -5,7 +5,8 @@
   "main": "index.js",
   "typings": "dist/src/index.d.ts",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --recursive ./dist/*.test.js"
+    "test": "./node_modules/.bin/mocha --recursive ./dist/*.test.js",
+    "build": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "get-uri": "^2.0.0",
     "lodash": "^4.13.1",
     "rx": "^4.1.0",
+    "rx-node": "^1.0.2",
     "tsmerge": "^1.0.4"
   },
   "eslintConfig": {
