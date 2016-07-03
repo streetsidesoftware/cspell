@@ -16,16 +16,16 @@ export class HunspellReader {
         this.aff = parseAffFileToAff(affFile);
     }
 
-    readDicEntries(): Rx.Observable<string> {
-        return Rx.Observable.fromPromise(this.aff)
-            .flatMap(aff => lineReader(this.dicFile, aff.affInfo.SET))
+    readDicEntries(aff: Aff): Rx.Observable<string> {
+        return lineReader(this.dicFile, aff.affInfo.SET)
             .skip(1)   // Skip the first line -- it is the number of words in the file.
         ;
     }
 
 
     readDicWords(): Rx.Observable<WordInfo> {
-        return this.readDicEntries()
+        return Rx.Observable.fromPromise(this.aff)
+            .flatMap(aff => this.readDicEntries(aff))
             .map(line => {
                 const [word, rules] = line.split('/', 2);
                 return { word, rules };
@@ -34,18 +34,9 @@ export class HunspellReader {
 
     readWordsEx(): Rx.Observable<AffWord> {
         const r = Rx.Observable.fromPromise(this.aff)
-            .concatMap(aff => this.readDicEntries()
+            .concatMap(aff => this.readDicEntries(aff)
                 .concatMap(dicWord => aff.applyRulesToDicEntry(dicWord))
             );
-        return r;
-    }
-
-    // this method is very slow due to the way the promise is used.
-    readWordsEx2(): Rx.Observable<AffWord> {
-        const r = this.readDicEntries()
-            .concatMap(dicWord => this.aff.then(aff => aff.applyRulesToDicEntry(dicWord)))
-            .concatMap(a => a)
-            ;
         return r;
     }
 

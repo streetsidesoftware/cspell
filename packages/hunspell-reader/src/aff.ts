@@ -42,6 +42,7 @@ export interface AffInfo {
     MAXDIFF?: number;
     KEEPCASE?: string;
     WARN?: string;
+    NEEDAFFIX?: string;
     FORCEUCASE?: string;
     BREAK?: number;
     FLAG?: string;  // 'long' | 'num'
@@ -51,6 +52,7 @@ export interface AffInfo {
     ICONV?: Conv[];
     OCONV?: Conv[];
     REP?: Rep[];
+    AF?: string[];
     COMPOUNDMIN?: number;
     COMPOUNDRULE?: string[];
     CHECKCOMPOUNDCASE?: boolean;
@@ -85,6 +87,7 @@ export interface AffWordFlags {
     isForceUCase?: boolean;
     isForbiddenWord?: boolean;
     isNoSuggest?: boolean;
+    isNeedAffix?: boolean;
 }
 
 export interface AffWord {
@@ -106,7 +109,8 @@ export class Aff {
     }
 
     applyRulesToDicEntry(line: string): AffWord[] {
-        const [word, rules = ''] = line.split('/');
+        const [lineLeft] = line.split(/\s+/, 1);
+        const [word, rules = ''] = lineLeft.split('/', 2);
         return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: ''})
             .map(affWord => merge(affWord, { word: this._oConv.convert(affWord.word) }));
     }
@@ -127,6 +131,7 @@ export class Aff {
             wordWithFlags,
             ...this.applyAffixesToWord(affixRules, merge(wordWithFlags, { rules }))
         ]
+        .filter(({flags}) => !flags.isNeedAffix)
         .map(affWord => logAffWord(affWord, 'applyRulesToWord'))
         ;
     }
@@ -150,20 +155,23 @@ export class Aff {
         const combineRules = (affix.type === 'PFX' && affix.combinable && !!combinableSfx)
             ? combinableSfx
             : '';
+        const flags = merge(affWord.flags, { isNeedAffix: false });
         return affix.substitutions
             .filter(sub => !!word.match(sub.match) && !!word.match(sub.replace))
             .map<AffWord>(sub => ({
                 word: word.replace(sub.replace, sub.attach),
                 rulesApplied: [affWord.rulesApplied, affix.id].join(' '),
                 rules: combineRules + (sub.attachRules || ''),
-                flags: affWord.flags
+                flags
             }))
             .map(affWord => logAffWord(affWord, 'applyAffixToWord'))
             ;
     }
 
     getMatchingRules(rules: string): Rule[] {
-        return this.separateRules(rules)
+        const { AF = [] } = this.affInfo;
+        const rulesToSplit = AF[rules] || rules;
+        return this.separateRules(rulesToSplit)
             .map(key => this.rules[key])
             .filter(a => !!a);
     }
@@ -203,6 +211,7 @@ const affFlag: Dictionary<AffWordFlags> = {
     FORCEUCASE: { isForceUCase: true },
     FORBIDDENWORD: { isForbiddenWord: true },
     NOSUGGEST: { isNoSuggest: true },
+    NEEDAFFIX: { isNeedAffix: true },
     CHECKCOMPOUNDCASE: {},
     COMPOUNDBEGIN: { canBeCompoundBegin: true },
     COMPOUNDMIDDLE: { canBeCompoundMiddle: true },
@@ -222,6 +231,7 @@ const flagToStringMap: Dictionary<string> = {
     isForceUCase: 'U',
     isForbiddenWord: 'F',
     isNoSuggest: 'N',
+    isNeedAffix: 'A',
 };
 
 export function logAffWord(affWord: AffWord, message: string) {

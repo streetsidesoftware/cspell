@@ -6,6 +6,18 @@ describe('Test Aff', () => {
     const nlAff = __dirname + '/../dictionaries/nl.aff';
     const enAff = __dirname + '/../dictionaries/en_US.aff';
     const esAff = __dirname + '/../dictionaries/es_ANY.aff';
+    const frAff = __dirname + '/../dictionaries/fr-moderne.aff';
+
+    it('tests applying rules for fr', () => {
+        return parseAffFileToAff(frAff)
+            .then(aff => {
+                const r =  aff.applyRulesToDicEntry('avoir/180');
+                const w = r.map(affWord => affWord.word);
+                expect(w).to.contain('avoir');
+                expect(w).to.contain('n’avoir');
+                logApplyRulesResults(r);
+            });
+    });
 
     it('test breaking up rules for nl', () => {
         return parseAffFileToAff(nlAff)
@@ -75,8 +87,12 @@ describe('Test Aff', () => {
     it('tests applying rules for en', () => {
         return parseAffFileToAff(enAff)
             .then(aff => {
-                const r = aff.applyRulesToDicEntry('motivate/CDSG');
-                logApplyRulesResults(r);
+                const r =  aff.applyRulesToDicEntry('motivate/CDSG');
+                const w = r.map(affWord => affWord.word);
+                expect(w.sort()).to.be.deep.equal([
+                    'demotivate', 'demotivated', 'demotivates', 'demotivating',
+                    'motivate', 'motivated', 'motivates', 'motivating'
+                    ]);
             });
     });
 

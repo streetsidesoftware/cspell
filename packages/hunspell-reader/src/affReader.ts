@@ -21,6 +21,15 @@ function convEntry(fieldValue, field: string, args: string[]) {
     return fieldValue;
 }
 
+function afEntry(fieldValue, field: string, args: string[]) {
+    if (fieldValue === undefined) {
+        return [''];
+    }
+
+    fieldValue.push(args[0]);
+    return fieldValue;
+}
+
 function simpleTable(fieldValue, field: string, args: string[]) {
     if (fieldValue === undefined) {
         const [ count, ...extraValues ] = args;
@@ -80,6 +89,7 @@ function asNumber(fieldValue, field: string, args: string[]) {
 }
 
 const affTableField = {
+    AF: afEntry,
     BREAK: asNumber,
     CHECKCOMPOUNDCASE: asBoolean,
     CHECKCOMPOUNDDUP: asBoolean,
@@ -100,6 +110,7 @@ const affTableField = {
     MAP: simpleTable,
     MAXCPDSUGS: asNumber,
     MAXDIFF: asNumber,
+    NEEDAFFIX: asString,
     NOSPLITSUGS: asBoolean,
     NOSUGGEST: asString,
     OCONV: convEntry,
