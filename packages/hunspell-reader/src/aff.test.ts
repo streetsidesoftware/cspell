@@ -46,9 +46,10 @@ describe('Test Aff', () => {
         return parseAffFileToAff(nlAff)
             .then(aff => {
                 const lines = [
-                'aak/Zf',
-                'huis/CACcYbCQZhC0',
-                'pannenkoek/ZbCACcC0',
+                    'dc/ClCwKc',
+                    'aak/Zf',
+                    'huis/CACcYbCQZhC0',
+                    'pannenkoek/ZbCACcC0',
                 ];
                 lines.forEach(line => {
                     const r = aff.applyRulesToDicEntry(line);
@@ -61,8 +62,7 @@ describe('Test Aff', () => {
         return parseAffFileToAff(esAff)
             .then(aff => {
                 const lines = [
-                    'ababillar/E',
-                    // 'ababillar/RED',
+                    'ababillar/RED',
                 ];
                 lines.forEach(line => {
                     const r = aff.applyRulesToDicEntry(line);
