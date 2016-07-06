@@ -1,14 +1,18 @@
 import * as Rx from 'rx';
 
 const baseCountAscii = '0'.charCodeAt(0);
-export const multiDeleteChar = '\r';
-export const singleDeleteChar = '\b';
+export const multiDeleteChar = '=';
+export const singleDeleteChar = '_';
 const maxMultiCount = 64;
 const endOfWord = '\n';
+const escapeChar = '~';
+const escapeRegex = /[~=_]/g;
+const unescapeRegex = /~([~=_])/g;
 const multiDeleteMaxCountChar = multiDeleteChar + String.fromCharCode(baseCountAscii + maxMultiCount);
 
 export function trieCompactSortedWordList(words: Rx.Observable<string>): Rx.Observable<string> {
     return words
+        .map(escapeLetters)
         .scan((acc, word) => {
             const { prevWord } = acc;
             let len;
@@ -30,7 +34,9 @@ export function trieCompactExtract(stream: Rx.Observable<string>): Rx.Observable
         .scan((acc, char) => {
             let { word, isMultiDelete, canEmit } = acc;
             let emit = '';
-            switch (char) {
+            const lastLetter = word.slice(-1);
+            const step = lastLetter === escapeChar ? null : char;
+            switch (step) {
                 case singleDeleteChar:
                     emit = canEmit ? word : '';
                     canEmit = false;
@@ -57,6 +63,7 @@ export function trieCompactExtract(stream: Rx.Observable<string>): Rx.Observable
             return { emit, word, isMultiDelete, canEmit };
         }, { emit: '', word: '', isMultiDelete: false, canEmit: false })
         .map(acc => acc.emit)
+        .map(unescapeLetters)
         .filter(word => !!word)
         ;
 }
@@ -103,4 +110,12 @@ export function backSpaceEmitSequenceToLength(sequence: string) {
     }
 
     return { length: n, offset };
+}
+
+export function escapeLetters(letters: string): string {
+    return letters.replace(escapeRegex, `${escapeChar}$&`);
+}
+
+export function unescapeLetters(letters: string): string {
+    return letters.replace(unescapeRegex, '$1');
 }

@@ -7,6 +7,8 @@ import {
     multiDeleteChar,
     singleDeleteChar,
     trieCompactExtract,
+    escapeLetters,
+    unescapeLetters,
 } from './trieCompact';
 
 const words = [
@@ -29,23 +31,26 @@ const words = [
     'creativeness',
     'creativeness\'s',
     'creatives',
+    'do_not',
+    'do~not',
+    'do=not',
 ];
 
 describe('validate trieCompact functions', () => {
 
     it('tests backSpaceEmitSequenceToLength', () => {
-        expect(backSpaceEmitSequenceToLength('\b\b\bHello').length).to.be.equal(3);
-        expect(backSpaceEmitSequenceToLength('\b\b\bHello').offset).to.be.equal(3);
+        expect(backSpaceEmitSequenceToLength('___Hello').length).to.be.equal(3);
+        expect(backSpaceEmitSequenceToLength('___Hello').offset).to.be.equal(3);
         expect(backSpaceEmitSequenceToLength(singleDeleteChar + singleDeleteChar).length).to.be.equal(2);
         expect(backSpaceEmitSequenceToLength(multiDeleteChar + '3Hello').length).to.be.equal(3);
         expect(backSpaceEmitSequenceToLength(multiDeleteChar + '3Hello').offset).to.be.equal(2);
     });
 
     it('tests calcBackSpaceEmit', () => {
-        expect(calcBackSpaceEmit(1)).to.be.equal('\b');
+        expect(calcBackSpaceEmit(1)).to.be.equal('_');
         expect(calcBackSpaceEmit(2)).to.be.equal(multiDeleteChar + '2');
         expect(calcBackSpaceEmit(5)).to.be.equal(multiDeleteChar + '5');
-        expect(calcBackSpaceEmit(129)).to.be.equal(multiDeleteChar + 'p' + multiDeleteChar + 'p\b');
+        expect(calcBackSpaceEmit(129)).to.be.equal(multiDeleteChar + 'p' + multiDeleteChar + 'p_');
     });
 
     it('tests trieCompactSortedWordList', () => {
@@ -53,7 +58,7 @@ describe('validate trieCompact functions', () => {
             .toArray()
             .toPromise().then( values => {
                 const str = values.join('');
-                const expected = 'create\nd\bs\r2ing\r';
+                const expected = 'create\nd_s=2ing=';
                 const allWords = words.join('\n');
                 // const json = JSON.stringify(str);
                 expect(str.slice(0, expected.length)).to.be.equal(expected);
@@ -68,6 +73,19 @@ describe('validate trieCompact functions', () => {
             .toPromise().then( values => {
                 expect(values).to.be.deep.equal(words);
             });
+    });
 
+    it('tests escaping letters', () => {
+        const tests = [
+            ['this_is_a~test', 'this~_is~_a~~test'],
+            ['this=is_a~test', 'this~=is~_a~~test'],
+        ];
+
+        tests.forEach(([before, after]) => {
+            const r = escapeLetters(before);
+            expect(r).to.be.equal(after);
+            const s = unescapeLetters(r);
+            expect(s).to.be.equal(before);
+        });
     });
 });
