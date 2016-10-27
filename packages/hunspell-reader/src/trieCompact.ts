@@ -10,6 +10,13 @@ const escapeRegex = /[~=_]/g;
 const unescapeRegex = /~([~=_])/g;
 const multiDeleteMaxCountChar = multiDeleteChar + String.fromCharCode(baseCountAscii + maxMultiCount);
 
+/**
+ * Give a list of sorted words, output edit fragments to transform from the previous word to the next.
+ *
+ * @export
+ * @param {Rx.Observable<string>} words
+ * @returns {Rx.Observable<string>}
+ */
 export function trieCompactSortedWordList(words: Rx.Observable<string>): Rx.Observable<string> {
     return words
         .map(escapeLetters)
@@ -26,6 +33,13 @@ export function trieCompactSortedWordList(words: Rx.Observable<string>): Rx.Obse
         .filter(word => word !== endOfWord);  // remove duplicate words.
 }
 
+/**
+ * Take a stream of edit fragments and build up a list of word.
+ *
+ * @export
+ * @param {Rx.Observable<string>} stream
+ * @returns {Rx.Observable<string>}
+ */
 export function trieCompactExtract(stream: Rx.Observable<string>): Rx.Observable<string> {
     // We add a endOfWord to the end of the stream to make sure the last word is emitted.
     return Rx.Observable.from([stream, Rx.Observable.just(endOfWord)])
@@ -68,6 +82,13 @@ export function trieCompactExtract(stream: Rx.Observable<string>): Rx.Observable
         ;
 }
 
+/**
+ * generate the backspace character sequence that matches the number of characters to delete.
+ *
+ * @export
+ * @param {number} len
+ * @returns {string}
+ */
 export function calcBackSpaceEmit(len: number) {
     let emit = '';
 
@@ -88,6 +109,13 @@ export function calcBackSpaceEmit(len: number) {
     return emit;
 }
 
+/**
+ * The inverse of calcBackSpaceEmit
+ *
+ * @export
+ * @param {string} sequence
+ * @returns {number}
+ */
 export function backSpaceEmitSequenceToLength(sequence: string) {
     let n = 0;
     let offset = 0;

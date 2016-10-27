@@ -18,7 +18,7 @@ export class HunspellReader {
 
     readDicEntries(aff: Aff): Rx.Observable<string> {
         return lineReader(this.dicFile, aff.affInfo.SET)
-            .skip(1)   // Skip the first line -- it is the number of words in the file.
+            .skip(1)   // Skip the first line -- it's the number of words in the file context's.
         ;
     }
 

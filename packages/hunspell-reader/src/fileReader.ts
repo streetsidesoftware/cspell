@@ -24,5 +24,5 @@ export function stringsToLines(strings: Rx.Observable<string>): Rx.Observable<st
             const remainder = parts.slice(-1)[0];
             return {lines, remainder};
         }, { lines: [], remainder: ''})
-        .flatMap(emit => emit.lines);
+        .concatMap(emit => emit.lines);
 }
