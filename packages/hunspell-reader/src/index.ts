@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+// cSpell:ignore findup
 import * as commander from 'commander';
 import { HunspellReader } from './HunspellReader';
 const findup = require('findup-sync');
@@ -17,7 +18,7 @@ commander
 commander
     .command('words <hunspell_dic_file>')
     .option('-o, --output <file>', 'output file')
-    .option('--sort', 'sort the list of words')
+    .option('-s, --sort', 'sort the list of words')
     .description('list all the words in the <hunspell.dic> file.')
     .action((hunspellDicFilename, options) => {
         const outputFile = options.output;
