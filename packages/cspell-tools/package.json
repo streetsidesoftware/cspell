@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Tools to assist with the development of cSpell",
   "main": "dist/app.js",
+  "bin": {
+    "cspell-tools": "./bin/cspell-tools"
+  },
   "scripts": {
     "build": "tsc -p .",
     "watch": "tesc -p . -w",
@@ -33,6 +36,7 @@
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "rimraf": "^2.5.4",
+    "tslint": "^4.3.1",
     "typescript": "^2.1.5"
   },
   "dependencies": {
@@ -42,5 +46,8 @@
     "rx-node": "^1.0.2",
     "tsmerge": "^1.0.4",
     "xregexp": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }
