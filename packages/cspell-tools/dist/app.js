@@ -20,7 +20,8 @@ program
         wordListCompiler_1.compileWordList(src, dst);
     });
 });
-program
-    .help();
 program.parse(process.argv);
+if (!process.argv.slice(2).length) {
+    program.help();
+}
 //# sourceMappingURL=app.js.map
