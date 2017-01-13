@@ -1,6 +1,7 @@
+// cSpell:ignore ings ning gimuy
+// cSpell:words rxjs xregexp
 "use strict";
 const XRegExp = require("xregexp");
-const Rx = require("rx");
 const tsmerge_1 = require("tsmerge");
 const gensequence_1 = require("gensequence");
 const regExLines = /.*\r?\n/g;
@@ -14,10 +15,6 @@ const regExFirstUpper = XRegExp('^\\p{Lu}\\p{Ll}+$');
 const regExAllUpper = XRegExp('^\\p{Lu}+$');
 const regExAllLower = XRegExp('^\\p{Ll}+$');
 const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
-function splitCamelCaseWordWithOffsetRx(wo) {
-    return Rx.Observable.fromArray(splitCamelCaseWordWithOffset(wo));
-}
-exports.splitCamelCaseWordWithOffsetRx = splitCamelCaseWordWithOffsetRx;
 function splitCamelCaseWordWithOffset(wo) {
     return splitCamelCaseWord(wo.word)
         .map(gensequence_1.scanMap((last, word) => ({ word, offset: last.offset + last.word.length }), { word: '', offset: wo.offset }));
@@ -73,17 +70,6 @@ function extractLinesOfText(text) {
     return matchToTextOffset(regExLines, text);
 }
 exports.extractLinesOfText = extractLinesOfText;
-function extractLinesOfTextRx(text) {
-    return Rx.Observable.from(extractLinesOfText(text).toIterable());
-}
-exports.extractLinesOfTextRx = extractLinesOfTextRx;
-/**
- * Extract out whole words from a string of text.
- */
-function extractWordsFromTextRx(text) {
-    return Rx.Observable.from(extractWordsFromText(text).toIterable());
-}
-exports.extractWordsFromTextRx = extractWordsFromTextRx;
 /**
  * Extract out whole words from a string of text.
  */
@@ -97,11 +83,6 @@ function extractWordsFromText(text) {
         .filter(wo => !!wo.word);
 }
 exports.extractWordsFromText = extractWordsFromText;
-function extractWordsFromCodeRx(text) {
-    return extractWordsFromTextRx(text)
-        .concatMap(word => splitCamelCaseWordWithOffsetRx(word));
-}
-exports.extractWordsFromCodeRx = extractWordsFromCodeRx;
 function extractWordsFromCode(text) {
     return extractWordsFromText(text)
         .concatMap(splitCamelCaseWordWithOffset);

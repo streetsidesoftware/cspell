@@ -1,4 +1,3 @@
-import * as Rx from 'rx';
 import { Sequence } from 'gensequence';
 export interface WordOffset {
     word: string;
@@ -9,7 +8,6 @@ export interface TextOffset {
     offset: number;
 }
 export declare type STW = string | TextOffset | WordOffset;
-export declare function splitCamelCaseWordWithOffsetRx(wo: WordOffset): Rx.Observable<WordOffset>;
 export declare function splitCamelCaseWordWithOffset(wo: WordOffset): Array<WordOffset>;
 /**
  * Split camelCase words into an array of strings.
@@ -26,16 +24,10 @@ export declare function match(reg: RegExp, text: string): Sequence<RegExpExecArr
 export declare function matchToTextOffset(reg: RegExp, text: STW): Sequence<TextOffset>;
 export declare function matchToWordOffset(reg: RegExp, text: STW): Sequence<WordOffset>;
 export declare function extractLinesOfText(text: STW): Sequence<TextOffset>;
-export declare function extractLinesOfTextRx(text: string): Rx.Observable<TextOffset>;
-/**
- * Extract out whole words from a string of text.
- */
-export declare function extractWordsFromTextRx(text: string): Rx.Observable<WordOffset>;
 /**
  * Extract out whole words from a string of text.
  */
 export declare function extractWordsFromText(text: string): Sequence<WordOffset>;
-export declare function extractWordsFromCodeRx(text: string): Rx.Observable<WordOffset>;
 export declare function extractWordsFromCode(text: string): Sequence<WordOffset>;
 export declare function isUpperCase(word: string): boolean;
 export declare function isLowerCase(word: string): boolean;

@@ -42,7 +42,7 @@ function compileSetOfWords(lines) {
 }
 exports.compileSetOfWords = compileSetOfWords;
 function compileWordList(filename, destFilename) {
-    return compileSetOfWords(fileReader_1.lineReader(filename)).then(set => {
+    return compileSetOfWords(fileReader_1.lineReaderRx(filename)).then(set => {
         const data = gensequence_1.genSequence(set)
             .map(a => a + '\n')
             .toArray()

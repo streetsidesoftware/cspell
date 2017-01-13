@@ -1,7 +1,10 @@
+// cSpell:ignore ings ning gimuy
+// cSpell:words rxjs xregexp
+
 import * as XRegExp from 'xregexp';
-import * as Rx from 'rx';
 import {merge} from 'tsmerge';
 import {genSequence, scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
+import * as rxjs from 'rxjs';
 
 export interface WordOffset {
     word: string;
@@ -27,10 +30,6 @@ const regExAllLower = XRegExp('^\\p{Ll}+$');
 const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
 
 export type STW = string | TextOffset | WordOffset;
-
-export function splitCamelCaseWordWithOffsetRx(wo: WordOffset): Rx.Observable<WordOffset> {
-    return Rx.Observable.fromArray(splitCamelCaseWordWithOffset(wo));
-}
 
 export function splitCamelCaseWordWithOffset(wo: WordOffset): Array<WordOffset> {
     return splitCamelCaseWord(wo.word)
@@ -94,17 +93,6 @@ export function extractLinesOfText(text: STW): Sequence<TextOffset> {
     return matchToTextOffset(regExLines, text);
 }
 
-export function extractLinesOfTextRx(text: string): Rx.Observable<TextOffset> {
-    return Rx.Observable.from(extractLinesOfText(text).toIterable());
-}
-
-/**
- * Extract out whole words from a string of text.
- */
-export function extractWordsFromTextRx(text: string): Rx.Observable<WordOffset> {
-    return Rx.Observable.from(extractWordsFromText(text).toIterable());
-}
-
 /**
  * Extract out whole words from a string of text.
  */
@@ -118,12 +106,6 @@ export function extractWordsFromText(text: string): Sequence<WordOffset> {
         }))
         .filter(wo => !!wo.word);
 }
-
-export function extractWordsFromCodeRx(text: string): Rx.Observable<WordOffset> {
-    return extractWordsFromTextRx(text)
-        .concatMap(word => splitCamelCaseWordWithOffsetRx(word));
-}
-
 
 export function extractWordsFromCode(text: string): Sequence<WordOffset> {
     return extractWordsFromText(text)

@@ -1,10 +1,11 @@
-import * as Rx from 'rx';
+import * as Rx from 'rxjs/Rx';
 import * as fs from 'fs';
 import * as XRegExp from 'xregexp';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
-import { lineReader } from './fileReader';
+import { lineReaderRx } from './fileReader';
 import { writeToFile } from './fileWriter';
+import { Observable } from 'rxjs/Rx';
 
 const regNonWordOrSpace = XRegExp("[^\\p{L}' \\-]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
@@ -49,7 +50,7 @@ export function compileSetOfWords(lines: Rx.Observable<string>): Promise<Set<str
 }
 
 export function compileWordList(filename: string, destFilename: string): Promise<fs.WriteStream> {
-    return compileSetOfWords(lineReader(filename)).then(set => {
+    return compileSetOfWords(lineReaderRx(filename)).then(set => {
         const data = genSequence(set)
             .map(a => a + '\n')
             .toArray()

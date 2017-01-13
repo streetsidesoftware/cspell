@@ -1,6 +1,11 @@
+// cSpell:ignore jpegs outing dirs lcode
+// cSpell:enableCompoundWords
+
 
 import { expect } from 'chai';
-import { lineToWords } from './wordListCompiler';
+import { lineToWords, compileWordList } from './wordListCompiler';
+import * as path from 'path';
+import * as fs from 'fs';
 
 describe('Validate the wordListCompiler', function() {
     it('tests splitting lines', () => {
@@ -40,18 +45,41 @@ describe('Validate the wordListCompiler', function() {
             'symbols',
         ]);
     });
+
+    it('test reading and normalizing a file', () => {
+        const sourceName = path.join(__dirname, '..', 'Samples', 'cities.txt');
+        const destName = path.join(__dirname, '..', 'temp', 'cities.txt');
+        return compileWordList(sourceName, destName)
+        .then(s => {
+            expect(s).to.be.not.empty;
+            return new Promise((resolve, reject) => {
+                s.on('finish', () => resolve());
+                s.on('error', () => reject());
+            }).then(() => {
+                const output = fs.readFileSync(destName, 'UTF-8');
+                expect(output).to.be.equal(citiesResult);
+            });
+        });
+    });
 });
 
-const phpLines = `
-    apd_get_active_symbols
-    apd_set_pprof_trace
-    apd_set_session
-    apd_set_session_trace
-    apd_set_session_trace_socket
-    AppendIterator::append
-    AppendIterator::current
-    AppendIterator::getArrayIterator
-    AppendIterator::getInnerIterator
-    AppendIterator::getIteratorIndex
-    AppendIterator::key
+const citiesResult = `\
+amsterdam
+angles
+city
+delhi
+francisco
+las
+las angles
+london
+mexico
+mexico city
+new
+new amsterdam
+new delhi
+new york
+paris
+san
+san francisco
+york
 `;
