@@ -29,4 +29,7 @@ program
             });
     });
 
+program
+    .help();
+
 program.parse(process.argv);
