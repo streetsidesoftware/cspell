@@ -2,7 +2,8 @@
   "name": "hunspell-reader",
   "version": "0.1.0",
   "description": "A library for reading Hunspell Dictionary Files",
-  "main": "index.js",
+  "bin": "./dist/src/index.js",
+  "main": "dist/src/index.js",
   "typings": "dist/src/index.d.ts",
   "scripts": {
     "test": "mocha --recursive ./dist/*.test.js",
@@ -26,12 +27,12 @@
     "@types/commander": "^2.3.31",
     "@types/findup-sync": "^0.3.29",
     "@types/iconv-lite": "0.0.1",
-    "@types/lodash": "^4.14.48",
+    "@types/lodash": "^4.14.50",
     "@types/mocha": "^2.2.37",
     "@types/node": "^6.0.58",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
-    "typescript": "^2.1.4"
+    "typescript": "^2.1.5"
   },
   "dependencies": {
     "commander": "^2.9.0",
