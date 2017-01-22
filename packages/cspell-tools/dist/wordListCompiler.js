@@ -4,6 +4,8 @@ const gensequence_1 = require("gensequence");
 const Text = require("./text");
 const fileReader_1 = require("./fileReader");
 const fileWriter_1 = require("./fileWriter");
+const path = require("path");
+const fs_promise_1 = require("fs-promise");
 const regNonWordOrSpace = XRegExp("[^\\p{L}' \\-]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
 const regExpRepeatChars = /(.)\1{3,}/i;
@@ -42,7 +44,9 @@ function compileSetOfWords(lines) {
 }
 exports.compileSetOfWords = compileSetOfWords;
 function compileWordList(filename, destFilename) {
-    return compileSetOfWords(fileReader_1.lineReaderRx(filename)).then(set => {
+    const destDir = path.dirname(destFilename);
+    return fs_promise_1.mkdirp(destDir).then(() => compileSetOfWords(fileReader_1.lineReaderRx(filename)))
+        .then(set => {
         const data = gensequence_1.genSequence(set)
             .map(a => a + '\n')
             .toArray()

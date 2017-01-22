@@ -6,6 +6,8 @@ import * as Text from './text';
 import { lineReaderRx } from './fileReader';
 import { writeToFile } from './fileWriter';
 import { Observable } from 'rxjs/Rx';
+import * as path from 'path';
+import { mkdirp } from 'fs-promise';
 
 const regNonWordOrSpace = XRegExp("[^\\p{L}' \\-]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
@@ -50,7 +52,10 @@ export function compileSetOfWords(lines: Rx.Observable<string>): Promise<Set<str
 }
 
 export function compileWordList(filename: string, destFilename: string): Promise<fs.WriteStream> {
-    return compileSetOfWords(lineReaderRx(filename)).then(set => {
+    const destDir = path.dirname(destFilename);
+
+    return mkdirp(destDir).then(() => compileSetOfWords(lineReaderRx(filename)))
+    .then(set => {
         const data = genSequence(set)
             .map(a => a + '\n')
             .toArray()
