@@ -77,7 +77,7 @@ function extractWordsFromText(text) {
     const reg = XRegExp(regExWords);
     return matchToWordOffset(reg, text)
         .map(wo => ({
-        word: XRegExp.replace(wo.word, regExIgnoreCharacters, match => ' '.repeat(match.length)).trim(),
+        word: XRegExp.replace(wo.word, regExIgnoreCharacters, (match) => ' '.repeat(match.length)).trim(),
         offset: wo.offset
     }))
         .filter(wo => !!wo.word);

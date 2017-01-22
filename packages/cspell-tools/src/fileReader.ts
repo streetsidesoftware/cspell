@@ -15,7 +15,7 @@ export function lineReaderRx(filename: string, encoding?: string): Rx.Observable
 
 export function textFileStreamRx(filename: string, encoding: string = 'UTF-8'): Rx.Observable<string> {
     const subject = new Rx.Subject<string>();
-    const fnError = (e) => subject.error(e);
+    const fnError = (e: Error) => subject.error(e);
 
     const pipes: stream.Transform[] = [];
     if (filename.match(/\.gz$/i)) {

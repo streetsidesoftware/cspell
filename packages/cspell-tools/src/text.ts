@@ -101,7 +101,7 @@ export function extractWordsFromText(text: string): Sequence<WordOffset> {
     return matchToWordOffset(reg, text)
         // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
         .map(wo => ({
-            word: XRegExp.replace(wo.word, regExIgnoreCharacters, match => ' '.repeat(match.length)).trim(),
+            word: XRegExp.replace(wo.word, regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)).trim(),
             offset: wo.offset
         }))
         .filter(wo => !!wo.word);
@@ -167,11 +167,11 @@ export function matchCase(example: string, word: string): string {
 }
 
 
-export function isTextOffset(x): x is TextOffset {
+export function isTextOffset(x: any): x is TextOffset {
     return typeof x === 'object' && typeof x.text === 'string' && typeof x.offset === 'number';
 }
 
-export function isWordOffset(x): x is WordOffset {
+export function isWordOffset(x: any): x is WordOffset {
     return typeof x === 'object' && typeof x.word === 'string' && typeof x.offset === 'number';
 }
 
