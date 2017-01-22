@@ -1,5 +1,4 @@
 import * as Text from './util/text';
-import * as Rx from 'rxjs/Rx';
 import * as tds from './TextDocumentSettings';
 
 export const diagSource = 'cSpell Checker';
