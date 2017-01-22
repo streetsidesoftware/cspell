@@ -1,0 +1,13 @@
+export declare const regExMatchUrls: RegExp;
+export declare const regExHexDigits: RegExp;
+export declare const regExMatchCommonHexFormats: RegExp;
+export declare const regExSpellingGuard: RegExp;
+export declare const regExPublicKey: RegExp;
+export declare const regExCert: RegExp;
+export declare const regExEscapeCharacters: RegExp;
+export declare const regExBase64: RegExp;
+export declare const regExPhpHereDoc: RegExp;
+export declare const regExString: RegExp;
+export declare const regExCStyleComments: RegExp;
+export declare const regExEmail: RegExp;
+export declare const regExRepeatedChar: RegExp;
