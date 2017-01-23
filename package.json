@@ -1,6 +1,6 @@
 {
   "name": "cspell",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Spelling Checker for Code!",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -17,6 +17,10 @@
     "test-watch": "npm run build && mocha --compilers ts:ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "test": "mocha --recursive \"dist/**/*.test.js\""
   },
+  "files": [
+    "dist/",
+    "src/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jason3S/cspell.git"
