@@ -3,13 +3,10 @@ import { expect } from 'chai';
 import { wordSplitter, validateText, hasWordCheck } from './textValidator';
 import { SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 import { createSpellingDictionary } from './SpellingDictionary';
-import * as path from 'path';
 
 // cSpell:enableCompoundWords
 
 describe('Validate textValidator functions', () => {
-    const cwd = process.cwd();
-
     // cSpell:disable
     it('tests splitting words', () => {
         const results = [...wordSplitter('appleorange')];

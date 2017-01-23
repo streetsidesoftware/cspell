@@ -6,13 +6,22 @@
 		"sourceMap": true,
 		"alwaysStrict": true,
         "declaration": true,
-		"noImplicitAny": true,
+		"noImplicitAny": false,
 		"noImplicitThis": true,
 		"strictNullChecks": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
 		"outDir": "dist",
 		"lib": ["dom", "dom.iterable", "es2015", "es2015.iterable", "scripthost"]
 	},
 	"include": [
-		"src"
+		"src/**/*.ts",
+		"src/**/*.test.ts"
+	],
+	"exclude": [
+		"node_modules/*",
+		"node_modules/**/*.ts",
+		"dist",
+		"dictionaries"
 	]
 }

@@ -6,7 +6,7 @@ describe('Validate file reader', () => {
         return fileReader.textFileStream('./non-existent.txt')
             .toPromise()
             .then(
-                ok => {
+                () => {
                     expect(true).to.be.false;
                 },
                 error => {

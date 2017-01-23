@@ -2,6 +2,8 @@ import { splitCamelCaseWord } from './text';
 import * as Text from './text';
 import { expect } from 'chai';
 
+// cSpell:ignore Ápple DBAs ctrip γάμμα
+
 describe('Util Text', () => {
     it('tests build regexp from string', () => {
         const regEx1 = Text.stringToRegExp('');

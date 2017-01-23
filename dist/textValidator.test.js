@@ -5,7 +5,6 @@ const SpellingDictionaryCollection_1 = require("./SpellingDictionaryCollection")
 const SpellingDictionary_1 = require("./SpellingDictionary");
 // cSpell:enableCompoundWords
 describe('Validate textValidator functions', () => {
-    const cwd = process.cwd();
     // cSpell:disable
     it('tests splitting words', () => {
         const results = [...textValidator_1.wordSplitter('appleorange')];
