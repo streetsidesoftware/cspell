@@ -2,6 +2,7 @@
 const text_1 = require("./text");
 const Text = require("./text");
 const chai_1 = require("chai");
+// cSpell:ignore Ápple DBAs ctrip γάμμα
 describe('Util Text', () => {
     it('tests build regexp from string', () => {
         const regEx1 = Text.stringToRegExp('');

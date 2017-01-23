@@ -5,7 +5,7 @@ describe('Validate file reader', () => {
     it('Catches errors for non-existent files', () => {
         return fileReader.textFileStream('./non-existent.txt')
             .toPromise()
-            .then(ok => {
+            .then(() => {
             chai_1.expect(true).to.be.false;
         }, error => {
             chai_1.expect(error).to.be.instanceof(Error);
