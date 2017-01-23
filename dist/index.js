@@ -1,6 +1,21 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(require("./validator"));
+var validator_1 = require("./validator");
+exports.validateText = validator_1.validateText;
+var CSpellSettingsServer_1 = require("./CSpellSettingsServer");
+exports.mergeSettings = CSpellSettingsServer_1.mergeSettings;
+exports.readSettings = CSpellSettingsServer_1.readSettings;
+exports.readSettingsFiles = CSpellSettingsServer_1.readSettingsFiles;
+exports.defaultSettingsFilename = CSpellSettingsServer_1.defaultFileName;
+var SpellingDictionary_1 = require("./SpellingDictionary");
+exports.createSpellingDictionary = SpellingDictionary_1.createSpellingDictionary;
+exports.createSpellingDictionaryRx = SpellingDictionary_1.createSpellingDictionaryRx;
+var DefaultSettings_1 = require("./DefaultSettings");
+exports.getDefaultSettings = DefaultSettings_1.getDefaultSettings;
+var TextDocumentSettings_1 = require("./TextDocumentSettings");
+exports.constructSettingsForText = TextDocumentSettings_1.getSettings;
+exports.getDictionary = TextDocumentSettings_1.getDictionary;
+const Text = require("./util/text");
+exports.Text = Text;
+const ExclusionHelper = require("./exclusionHelper");
+exports.ExclusionHelper = ExclusionHelper;
 //# sourceMappingURL=index.js.map
