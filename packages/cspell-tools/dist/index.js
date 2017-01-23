@@ -5,4 +5,5 @@ function __export(m) {
 __export(require("./fileReader"));
 __export(require("./fileWriter"));
 __export(require("./wordListCompiler"));
+__export(require("./rxStreams"));
 //# sourceMappingURL=index.js.map

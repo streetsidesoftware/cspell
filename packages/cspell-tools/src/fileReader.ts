@@ -31,7 +31,6 @@ export function textFileStreamRx(filename: string, encoding: string = 'UTF-8'): 
     return subject;
 }
 
-
 export function stringsToLinesRx(strings: Rx.Observable<string>): Rx.Observable<string> {
     return Rx.Observable.concat(strings, Rx.Observable.of('\n'))
         .scan((last: { lines: string[], remainder: string }, curr: string) => {
