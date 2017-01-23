@@ -2,9 +2,12 @@
   "name": "hunspell-reader",
   "version": "0.1.0",
   "description": "A library for reading Hunspell Dictionary Files",
-  "bin": "./dist/index.js",
+  "bin": "./dist/app.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "test": "mocha --recursive ./dist/*.test.js",
     "build": "tsc"
@@ -26,6 +29,7 @@
     "@types/chai": "^3.4.34",
     "@types/commander": "^2.3.31",
     "@types/findup-sync": "^0.3.29",
+    "@types/fs-promise": "^1.0.1",
     "@types/iconv-lite": "0.0.1",
     "@types/lodash": "^4.14.50",
     "@types/mocha": "^2.2.37",
@@ -36,12 +40,12 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
+    "cspell-tools": "^1.0.5",
     "findup-sync": "^0.4.3",
+    "fs-promise": "^1.0.0",
     "get-uri": "^2.0.0",
     "iconv-lite": "^0.4.15",
     "lodash": "^4.17.4",
-    "rx": "^4.1.0",
-    "rx-node": "^1.0.2",
     "tsmerge": "^1.0.4"
   },
   "eslintConfig": {

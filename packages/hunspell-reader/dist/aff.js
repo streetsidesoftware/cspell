@@ -3,6 +3,7 @@ const _ = require("lodash");
 const tsmerge_1 = require("tsmerge");
 const util = require("util");
 const Conv = require("./converter");
+// cSpell:enableCompoundWords
 const log = false;
 class Aff {
     constructor(affInfo) {

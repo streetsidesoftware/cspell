@@ -38,7 +38,7 @@ function patternModeler(triEditFragments) {
 exports.patternModeler = patternModeler;
 const cutoffCount = 1000;
 const cutoffRatio = 0.10;
-const initialCutoffRatio = 0.001;
+// const initialCutoffRatio = 0.001;
 const cutoffTopPercent = 0.10;
 function prunePattern(root, denom, localCutoffRatio) {
     const { count, value } = root;

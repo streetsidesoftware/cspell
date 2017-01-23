@@ -1,7 +1,7 @@
 "use strict";
 const affReader_1 = require("./affReader");
 const fileReader_1 = require("./fileReader");
-const Rx = require("rx");
+const Rx = require("rxjs/Rx");
 class HunspellReader {
     constructor(affFile, dicFile) {
         this.affFile = affFile;

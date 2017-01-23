@@ -3,6 +3,8 @@ import {merge} from 'tsmerge';
 import * as util from 'util';
 import * as Conv from './converter';
 
+// cSpell:enableCompoundWords
+
 const log = false;
 
 export interface Fx {

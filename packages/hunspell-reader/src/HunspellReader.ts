@@ -1,7 +1,7 @@
 import {parseAffFileToAff} from './affReader';
 import {Aff, AffWord} from './aff';
 import {lineReader} from './fileReader';
-import * as Rx from 'rx';
+import * as Rx from 'rxjs/Rx';
 
 export interface WordInfo {
     word: string;
@@ -10,7 +10,7 @@ export interface WordInfo {
 
 export class HunspellReader {
 
-    public aff: Rx.Promise<Aff>;
+    public aff: Promise<Aff>;
 
     constructor(public affFile: string, public dicFile: string) {
         this.aff = parseAffFileToAff(affFile);

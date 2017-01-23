@@ -1,7 +1,7 @@
 
 import { expect } from 'chai';
 import * as fileReader from './fileReader';
-import * as Rx from 'rx';
+import * as Rx from 'rxjs/Rx';
 
 describe('validate stringsToLines', () => {
     it('tests stringsToLines', () => {
@@ -27,7 +27,7 @@ describe('validate stringsToLines', () => {
             ' thirteen '
         ];
 
-        return fileReader.stringsToLines(Rx.Observable.fromArray(strings))
+        return fileReader.stringsToLines(Rx.Observable.from(strings))
             .toArray()
             .toPromise()
             .then(result => {

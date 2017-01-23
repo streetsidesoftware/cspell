@@ -1,6 +1,7 @@
 "use strict";
 const fileReader_1 = require("./fileReader");
 const aff_1 = require("./aff");
+// cSpell:enableCompoundWords
 const fixRegex = {
     'SFX': { m: /$/, r: '$' },
     'PFX': { m: /^/, r: '^' },

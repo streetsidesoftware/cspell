@@ -1,4 +1,4 @@
-import * as Rx from 'rx';
+import * as Rx from 'rxjs/Rx';
 export declare const multiDeleteChar = "=";
 export declare const singleDeleteChar = "_";
 /**

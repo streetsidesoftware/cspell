@@ -15,7 +15,7 @@ describe('HunspellReader En', function() {
         return words
             .skip(10000)
             .take(10)
-            .tap(info => { console.log(info); })
+            .do(info => { console.log(info); })
             .toPromise();
     });
 
@@ -25,7 +25,7 @@ describe('HunspellReader En', function() {
         return words
             .skip(10000)
             .take(100)
-            .tap(info => { console.log(info); })
+            .do(info => { console.log(info); })
             .toPromise();
     });
 
@@ -35,7 +35,7 @@ describe('HunspellReader En', function() {
         return words
             .skip(10000)
             .take(100)
-            .tap(info => { console.log(info); })
+            .do(info => { console.log(info); })
             .toPromise();
     });
 });
@@ -65,7 +65,7 @@ describe('HunspellReader Nl', function() {
             .skip(200000)
             // .skip(100)
             .take(200)
-            .tap(info => { console.log(Aff.affWordToColoredString(info)); })
+            .do(info => { console.log(Aff.affWordToColoredString(info)); })
             .toPromise();
     });
 
@@ -76,7 +76,7 @@ describe('HunspellReader Nl', function() {
         return words
             .skip(100000)
             .take(100)
-            .tap(info => { console.log(info); })
+            .do(info => { console.log(info); })
             .toPromise();
     });
 */

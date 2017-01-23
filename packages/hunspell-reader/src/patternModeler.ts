@@ -1,5 +1,4 @@
-import * as Rx from 'rx';
-
+import * as Rx from 'rxjs/Rx';
 
 export interface PatternNode {
     count: number;
@@ -13,7 +12,7 @@ interface ActiveNodeSet {
     active: PatternNode[];
 }
 
-export function patternModeler(triEditFragments: Rx.Observable<string>) {
+export function patternModeler(triEditFragments: Rx.Observable<string>): Rx.Observable<Pattern[]> {
 
     const ans: ActiveNodeSet = {
         root: {
@@ -56,7 +55,7 @@ export function patternModeler(triEditFragments: Rx.Observable<string>) {
 
 const cutoffCount = 1000;
 const cutoffRatio = 0.10;
-const initialCutoffRatio = 0.001;
+// const initialCutoffRatio = 0.001;
 
 const cutoffTopPercent = 0.10;
 

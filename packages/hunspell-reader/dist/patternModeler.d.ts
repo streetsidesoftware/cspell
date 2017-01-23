@@ -1,4 +1,4 @@
-import * as Rx from 'rx';
+import * as Rx from 'rxjs/Rx';
 export interface PatternNode {
     count: number;
     connections: Map<string, PatternNode>;

@@ -1,6 +1,9 @@
 
 import { lineReader } from './fileReader';
 import { AffInfo, Aff } from './aff';
+import * as Rx from 'rxjs/Rx';
+
+// cSpell:enableCompoundWords
 
 const fixRegex = {
     'SFX': { m: /$/, r: '$'},
@@ -141,7 +144,7 @@ export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8
         .map(line => line.replace(commentRegex, ''))
         .filter(line => line.trim() !== '')
         .map(line => line.split(spaceRegex))
-        .reduce<AffInfo>((aff, line): AffInfo => {
+        .reduce<string[], AffInfo>((aff, line) => {
             const [ field, ...args ] = line;
             const fn = affTableField[field];
             if (fn) {

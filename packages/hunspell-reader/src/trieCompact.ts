@@ -1,4 +1,4 @@
-import * as Rx from 'rx';
+import * as Rx from 'rxjs/Rx';
 
 const baseCountAscii = '0'.charCodeAt(0);
 export const multiDeleteChar = '=';
@@ -42,7 +42,7 @@ export function trieCompactSortedWordList(words: Rx.Observable<string>): Rx.Obse
  */
 export function trieCompactExtract(stream: Rx.Observable<string>): Rx.Observable<string> {
     // We add a endOfWord to the end of the stream to make sure the last word is emitted.
-    return Rx.Observable.from([stream, Rx.Observable.just(endOfWord)])
+    return Rx.Observable.from([stream, Rx.Observable.of(endOfWord)])
         .concatAll()
         .concatMap(a => a) // get one letter at a time.
         .scan((acc, char) => {

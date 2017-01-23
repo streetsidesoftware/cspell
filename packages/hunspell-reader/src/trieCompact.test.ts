@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import * as Rx from 'rx';
+import * as Rx from 'rxjs/Rx';
 import {
     trieCompactSortedWordList,
     calcBackSpaceEmit,
@@ -54,7 +54,7 @@ describe('validate trieCompact functions', () => {
     });
 
     it('tests trieCompactSortedWordList', () => {
-        return trieCompactSortedWordList(Rx.Observable.fromArray(words))
+        return trieCompactSortedWordList(Rx.Observable.from(words))
             .toArray()
             .toPromise().then( values => {
                 const str = values.join('');
@@ -67,7 +67,7 @@ describe('validate trieCompact functions', () => {
     });
 
     it('makes sure a compacted trie can be extracted', () => {
-        const stream = trieCompactSortedWordList(Rx.Observable.fromArray(words));
+        const stream = trieCompactSortedWordList(Rx.Observable.from(words));
         return trieCompactExtract(stream)
             .toArray()
             .toPromise().then( values => {
