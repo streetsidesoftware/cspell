@@ -4,6 +4,7 @@ import * as fileReader from './fileReader';
 import * as Rx from 'rxjs/Rx';
 import * as loremIpsum from 'lorem-ipsum';
 import * as path from 'path';
+import { mkdirp } from 'fs-promise';
 
 describe('Validate the writer', () => {
     it('tests writing an Rx.Observable and reading it back.', () => {
@@ -11,9 +12,11 @@ describe('Validate the writer', () => {
         const data = text.split(/\b/);
         const filename = path.join(__dirname, '..', 'temp', 'tests-writing-an-observable.txt');
 
-        const obj = Rx.Observable.from(data);
-        const p = fileWriter.writeToFileRxP(filename, obj);
-        return Rx.Observable.from(p)
+        return Rx.Observable.from(mkdirp(path.dirname(filename)))
+            .flatMap(() => {
+                const obj = Rx.Observable.from(data);
+                return fileWriter.writeToFileRxP(filename, obj);
+            })
             .concatMap(() => fileReader.textFileStreamRx(filename))
             .reduce((a, b) => a + b)
             .toPromise()
