@@ -110,6 +110,10 @@ export class Aff {
         this._oConv = new Conv.Converter(affInfo.OCONV || []);
     }
 
+    /**
+     * @description Takes a line from a hunspell.dic file and applies the rules found in the aff file.
+     * @param {string} line - the line from the .dic file.
+     */
     applyRulesToDicEntry(line: string): AffWord[] {
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
@@ -117,6 +121,9 @@ export class Aff {
             .map(affWord => merge(affWord, { word: this._oConv.convert(affWord.word) }));
     }
 
+    /**
+     * @internal
+     */
     applyRulesToWord(affWord: AffWord): AffWord[] {
         const { word } = affWord;
         const allRules = this.getMatchingRules(affWord.rules);
@@ -208,32 +215,32 @@ export function processRules(affInfo: AffInfo): Dictionary<Rule> {
 }
 
 const affFlag: Dictionary<AffWordFlags> = {
-    KEEPCASE: { isKeepCase: true },
-    WARN: { isWarning: true },
-    FORCEUCASE: { isForceUCase: true },
-    FORBIDDENWORD: { isForbiddenWord: true },
-    NOSUGGEST: { isNoSuggest: true },
-    NEEDAFFIX: { isNeedAffix: true },
-    CHECKCOMPOUNDCASE: {},
-    COMPOUNDBEGIN: { canBeCompoundBegin: true },
-    COMPOUNDMIDDLE: { canBeCompoundMiddle: true },
-    COMPOUNDEND: { canBeCompoundEnd: true },
-    COMPOUNDPERMITFLAG: { isCompoundPermitted: true },
-    ONLYINCOMPOUND: { isOnlyAllowedInCompound: true },
+    KEEPCASE          : { isKeepCase             : true },
+    WARN              : { isWarning              : true },
+    FORCEUCASE        : { isForceUCase           : true },
+    FORBIDDENWORD     : { isForbiddenWord        : true },
+    NOSUGGEST         : { isNoSuggest            : true },
+    NEEDAFFIX         : { isNeedAffix            : true },
+    CHECKCOMPOUNDCASE : {},
+    COMPOUNDBEGIN     : { canBeCompoundBegin     : true },
+    COMPOUNDMIDDLE    : { canBeCompoundMiddle    : true },
+    COMPOUNDEND       : { canBeCompoundEnd       : true },
+    COMPOUNDPERMITFLAG: { isCompoundPermitted    : true },
+    ONLYINCOMPOUND    : { isOnlyAllowedInCompound: true },
 };
 
 const flagToStringMap: Dictionary<string> = {
-    isCompoundPermitted: 'C',
-    canBeCompoundBegin: 'B',
-    canBeCompoundMiddle: 'M',
-    canBeCompoundEnd: 'E',
+    isCompoundPermitted    : 'C',
+    canBeCompoundBegin     : 'B',
+    canBeCompoundMiddle    : 'M',
+    canBeCompoundEnd       : 'E',
     isOnlyAllowedInCompound: 'O',
-    isWarning: 'W',
-    isKeepCase: 'K',
-    isForceUCase: 'U',
-    isForbiddenWord: 'F',
-    isNoSuggest: 'N',
-    isNeedAffix: 'A',
+    isWarning              : 'W',
+    isKeepCase             : 'K',
+    isForceUCase           : 'U',
+    isForbiddenWord        : 'F',
+    isNoSuggest            : 'N',
+    isNeedAffix            : 'A',
 };
 
 export function logAffWord(affWord: AffWord, message: string) {

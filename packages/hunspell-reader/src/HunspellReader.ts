@@ -16,6 +16,9 @@ export class HunspellReader {
         this.aff = parseAffFileToAff(affFile);
     }
 
+    /**
+     * @internal
+     */
     readDicEntries(aff: Aff): Rx.Observable<string> {
         return lineReader(this.dicFile, aff.affInfo.SET)
             .skip(1)   // Skip the first line -- it's the number of words in the file context's.
@@ -23,6 +26,9 @@ export class HunspellReader {
     }
 
 
+    /**
+     * @internal
+     */
     readDicWords(): Rx.Observable<WordInfo> {
         return Rx.Observable.fromPromise(this.aff)
             .flatMap(aff => this.readDicEntries(aff))
@@ -32,6 +38,7 @@ export class HunspellReader {
             });
     }
 
+
     readWordsEx(): Rx.Observable<AffWord> {
         const r = Rx.Observable.fromPromise(this.aff)
             .concatMap(aff => this.readDicEntries(aff)
@@ -40,6 +47,10 @@ export class HunspellReader {
         return r;
     }
 
+    /**
+     * @description Reads all the word combinations out of a hunspell dictionary.
+     *
+     */
     readWords(): Rx.Observable<string> {
         return this.readWordsEx()
             .map(affWord => affWord.word);

@@ -89,7 +89,14 @@ export declare class Aff {
     protected _oConv: Conv.Converter;
     protected _iConv: Conv.Converter;
     constructor(affInfo: AffInfo);
+    /**
+     * @description Takes a line from a hunspell.dic file and applies the rules found in the aff file.
+     * @param {string} line - the line from the .dic file.
+     */
     applyRulesToDicEntry(line: string): AffWord[];
+    /**
+     * @internal
+     */
     applyRulesToWord(affWord: AffWord): AffWord[];
     applyAffixesToWord(affixRules: Fx[], affWord: AffWord): AffWord[];
     applyAffixToWord(affix: Fx, affWord: AffWord, combinableSfx: string): AffWord[];

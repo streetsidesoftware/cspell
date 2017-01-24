@@ -1,6 +1,3 @@
-// cSpell:ignore curr
-// cSpell:words zlib iconv
-// cSpell:enableCompoundWords
 "use strict";
 var cspell_tools_1 = require("cspell-tools");
 exports.lineReader = cspell_tools_1.lineReaderRx;

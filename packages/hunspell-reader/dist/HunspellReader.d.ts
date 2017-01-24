@@ -9,8 +9,18 @@ export declare class HunspellReader {
     dicFile: string;
     aff: Promise<Aff>;
     constructor(affFile: string, dicFile: string);
+    /**
+     * @internal
+     */
     readDicEntries(aff: Aff): Rx.Observable<string>;
+    /**
+     * @internal
+     */
     readDicWords(): Rx.Observable<WordInfo>;
     readWordsEx(): Rx.Observable<AffWord>;
+    /**
+     * @description Reads all the word combinations out of a hunspell dictionary.
+     *
+     */
     readWords(): Rx.Observable<string>;
 }

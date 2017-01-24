@@ -12,12 +12,19 @@ class Aff {
         this._iConv = new Conv.Converter(affInfo.ICONV || []);
         this._oConv = new Conv.Converter(affInfo.OCONV || []);
     }
+    /**
+     * @description Takes a line from a hunspell.dic file and applies the rules found in the aff file.
+     * @param {string} line - the line from the .dic file.
+     */
     applyRulesToDicEntry(line) {
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
         return this.applyRulesToWord({ word, rules, flags: {}, rulesApplied: '' })
             .map(affWord => tsmerge_1.merge(affWord, { word: this._oConv.convert(affWord.word) }));
     }
+    /**
+     * @internal
+     */
     applyRulesToWord(affWord) {
         const { word } = affWord;
         const allRules = this.getMatchingRules(affWord.rules);
