@@ -2,6 +2,7 @@ import { CSpellUserSettings, RegExpPatternDefinition, DictionaryDefinition } fro
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 
+// cspell:ignore filetypes
 
 const defaultRegExpExcludeList = [
     'SpellCheckerDisable',
@@ -37,6 +38,7 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'css',            file: 'css.txt.gz',           type: 'S' },
     { name: 'csharp',         file: 'csharp.txt.gz',        type: 'S' },
     { name: 'dotnet',         file: 'dotnet.txt.gz',        type: 'S' },
+    { name: 'filetypes',      file: 'filetypes.txt.gz',     type: 'S' },
     { name: 'fonts',          file: 'fonts.txt.gz',         type: 'S' },
     { name: 'go',             file: 'go.txt.gz',            type: 'S' },
     { name: 'html',           file: 'html.txt.gz',          type: 'S' },

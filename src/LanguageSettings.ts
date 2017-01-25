@@ -1,6 +1,8 @@
 import { LanguageSetting, CSpellUserSettings, LocalId, LanguageId } from './CSpellSettingsDef';
 import * as SpellSettings from './CSpellSettingsServer';
 
+// cspell:ignore filetypes
+
 // LanguageSettings are a collection of LanguageSetting.  They are applied in order, matching against the languageId.
 // Dictionaries are concatenated together.
 export type LanguageSettings = LanguageSetting[];
@@ -11,7 +13,7 @@ export const defaultLanguageSettings: LanguageSettings = [
     { languageId: '*',      local: 'en',                 dictionaries: ['wordsEn'], },
     { languageId: '*',      local: 'en-US',              dictionaries: ['wordsEn'], },
     { languageId: '*',      local: 'en-GB',              dictionaries: ['wordsEnGb'], },
-    { languageId: '*',                                   dictionaries: ['companies', 'softwareTerms', 'misc'], },
+    { languageId: '*',                                   dictionaries: ['companies', 'softwareTerms', 'misc', 'filetypes'], },
     { languageId: 'python', allowCompoundWords: true,    dictionaries: ['python']},
     { languageId: 'go',     allowCompoundWords: true,    dictionaries: ['go'], },
     { languageId: 'c',      allowCompoundWords: true,    dictionaries: ['cpp'], },

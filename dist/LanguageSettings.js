@@ -5,7 +5,7 @@ exports.defaultLanguageSettings = [
     { languageId: '*', local: 'en', dictionaries: ['wordsEn'], },
     { languageId: '*', local: 'en-US', dictionaries: ['wordsEn'], },
     { languageId: '*', local: 'en-GB', dictionaries: ['wordsEnGb'], },
-    { languageId: '*', dictionaries: ['companies', 'softwareTerms', 'misc'], },
+    { languageId: '*', dictionaries: ['companies', 'softwareTerms', 'misc', 'filetypes'], },
     { languageId: 'python', allowCompoundWords: true, dictionaries: ['python'] },
     { languageId: 'go', allowCompoundWords: true, dictionaries: ['go'], },
     { languageId: 'c', allowCompoundWords: true, dictionaries: ['cpp'], },
