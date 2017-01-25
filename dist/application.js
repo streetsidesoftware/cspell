@@ -82,7 +82,7 @@ class CSpellApplication {
                 .forEach(message => this.log(message));
         })
             .filter(info => !!info.issues.length)
-            .reduce((status) => (__assign({}, status, { issues: status.issues + 1 })), status)
+            .reduce((status, info) => (__assign({}, status, { issues: status.issues + info.issues.length })), status)
             .toPromise();
         return r;
     }

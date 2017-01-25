@@ -98,7 +98,7 @@ export class CSpellApplication {
                     .forEach(message => this.log(message));
             })
             .filter(info => !!info.issues.length)
-            .reduce((status) => ({...status, issues: status.issues + 1}), status)
+            .reduce((status, info) => ({...status, issues: status.issues + info.issues.length}), status)
             .toPromise();
         return r;
     }
