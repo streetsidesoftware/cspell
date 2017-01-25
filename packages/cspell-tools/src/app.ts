@@ -4,9 +4,10 @@ import { compileWordList } from './wordListCompiler';
 import * as path from 'path';
 
 const program = require('commander');
+const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
 program
-    .version('0.0.1');
+    .version(npmPackage.version);
 
 program
     .command('compile <src...>')
