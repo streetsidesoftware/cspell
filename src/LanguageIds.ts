@@ -41,10 +41,12 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
         'extensions': ['.cpp', '.cc', '.cxx', '.hpp', '.hh', '.hxx', '.h', '.mm', '.ino', '.inl'],
     },
     {
+        'id': 'csharp',
+        'extensions': ['.cs'],
+    },
+    {
         'id': 'css',
-        'extensions': [
-            '.css'
-        ],
+        'extensions': ['.css'],
     },
     {
         'id': 'diff',
@@ -104,16 +106,11 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     },
     {
         'id': 'javascriptreact',
-        'extensions': [
-            '.jsx'
-        ],
+        'extensions': ['.jsx'],
     },
     {
         'id': 'javascript',
-        'extensions': [
-            '.js',
-            '.es6'
-        ],
+        'extensions': ['.js', '.es6'],
     },
     {
         'id': 'json',
@@ -214,15 +211,11 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     },
     {
         'id': 'typescript',
-        'extensions': [
-            '.ts'
-        ],
+        'extensions': ['.ts'],
     },
     {
         'id': 'typescriptreact',
-        'extensions': [
-            '.tsx'
-        ],
+        'extensions': ['.tsx'],
     },
     {
         'id': 'vb',
@@ -290,10 +283,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     },
     {
         'id': 'xsl',
-        'extensions': [
-            '.xsl',
-            '.xslt'
-        ],
+        'extensions': ['.xsl', '.xslt'],
     },
     {
         'id': 'yaml',
