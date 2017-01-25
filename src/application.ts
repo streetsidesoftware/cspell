@@ -75,7 +75,11 @@ export class CSpellApplication {
             issues: 0,
         };
 
-        const r = Rx.Observable.combineLatest(configRx, filesRx, (config, {text, filename} ) => ({ config, text, filename }))
+        const r = Rx.Observable.combineLatest(
+                configRx,
+                filesRx,
+                (config, fileInfo) => ({ config, text: fileInfo.text, filename: fileInfo.filename })
+            )
             .do(() => status.files += 1)
             .flatMap(({config, filename, text}) => {
                 const ext = path.extname(filename);
