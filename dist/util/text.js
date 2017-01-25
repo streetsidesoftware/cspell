@@ -11,6 +11,7 @@ const XRegExp = require("xregexp");
 const Rx = require("rxjs/Rx");
 const tsmerge_1 = require("tsmerge");
 const gensequence_1 = require("gensequence");
+const search_1 = require("./search");
 const regExLines = /.*\r?\n/g;
 // const regExIdentifiers = XRegExp('(?:\\p{L}|[0-9_\'])+', 'gi');
 const regExUpperSOrIng = XRegExp('(\\p{Lu}+\'?(?:s|ing|ies|es|ings|ed|ning))(?!\\p{Ll})', 'g');
@@ -218,4 +219,18 @@ function stringToRegExp(pattern, defaultFlags = 'gim', forceFlags = 'g') {
     return undefined;
 }
 exports.stringToRegExp = stringToRegExp;
+function calculateTextDocumentOffsets(uri, text, wordOffsets) {
+    const lines = [-1, ...match(/\n/g, text).map(a => a.index), text.length];
+    function findRowCol(offset) {
+        const row = search_1.binarySearch(lines, offset);
+        const col = offset - lines[Math.max(0, row - 1)];
+        return [row, col];
+    }
+    return wordOffsets
+        .map(wo => {
+        const [row, col] = findRowCol(wo.offset);
+        return __assign({}, wo, { row, col, text, uri });
+    });
+}
+exports.calculateTextDocumentOffsets = calculateTextDocumentOffsets;
 //# sourceMappingURL=text.js.map

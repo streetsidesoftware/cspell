@@ -10,3 +10,4 @@ export { Text };
 import * as ExclusionHelper from './exclusionHelper';
 export { ExclusionHelper };
 export { ExcludeFilesGlobMap, ExclusionFunction, Glob } from './exclusionHelper';
+export { getLanguagesForExt } from './LanguageIds';

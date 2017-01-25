@@ -16,3 +16,5 @@ export {
     ExclusionFunction,
     Glob,
 } from './exclusionHelper';
+
+export { getLanguagesForExt } from './LanguageIds';

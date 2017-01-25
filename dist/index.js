@@ -18,4 +18,6 @@ const Text = require("./util/text");
 exports.Text = Text;
 const ExclusionHelper = require("./exclusionHelper");
 exports.ExclusionHelper = ExclusionHelper;
+var LanguageIds_1 = require("./LanguageIds");
+exports.getLanguagesForExt = LanguageIds_1.getLanguagesForExt;
 //# sourceMappingURL=index.js.map

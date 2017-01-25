@@ -6,7 +6,10 @@ const SpellingDictionaryCollection_1 = require("./SpellingDictionaryCollection")
 const SpellingDictionary_1 = require("./SpellingDictionary");
 const Dictionaries_1 = require("./Dictionaries");
 function getSettings(settings, text, languageId) {
-    const langSettings = LanguageSettings_1.calcUserSettingsForLanguage(settings, languageId);
+    const langIds = ['*'].concat(languageId instanceof Array ? languageId : [languageId]);
+    const langSettings = langIds.reduce((settings, languageId) => {
+        return LanguageSettings_1.calcUserSettingsForLanguage(settings, languageId);
+    }, settings);
     return CSpellSettings.finalizeSettings(CSpellSettings.mergeSettings(langSettings, InDocSettings_1.getInDocumentSettings(text)));
 }
 exports.getSettings = getSettings;

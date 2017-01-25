@@ -8,9 +8,20 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/dist/index.js",
+            "program": "${workspaceRoot}/dist/app.js",
+			"args": ["-v", "**/*.ts", "**/*.test.ts"],
             "cwd": "${workspaceRoot}",
-            "outFiles": [],
+			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run bad glob",
+            "program": "${workspaceRoot}/dist/app.js",
+			"args": ["-v", "src", "**/*.test.ts"],
+            "cwd": "${workspaceRoot}",
+			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
             "sourceMaps": true
         },
         {

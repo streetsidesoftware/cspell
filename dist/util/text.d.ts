@@ -8,6 +8,12 @@ export interface TextOffset {
     text: string;
     offset: number;
 }
+export interface TextDocumentOffset extends WordOffset {
+    uri?: string;
+    text: string;
+    row: number;
+    col: number;
+}
 export declare type STW = string | TextOffset | WordOffset;
 export declare function splitCamelCaseWordWithOffsetRx(wo: WordOffset): Rx.Observable<WordOffset>;
 export declare function splitCamelCaseWordWithOffset(wo: WordOffset): Array<WordOffset>;
@@ -51,3 +57,4 @@ export declare function isWordOffset(x: any): x is WordOffset;
 export declare function toWordOffset(text: string | WordOffset | TextOffset): WordOffset;
 export declare function toTextOffset(text: string | WordOffset | TextOffset): TextOffset;
 export declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
+export declare function calculateTextDocumentOffsets(uri: string, text: string, wordOffsets: WordOffset[]): TextDocumentOffset[];

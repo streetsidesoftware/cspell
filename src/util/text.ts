@@ -2,6 +2,7 @@ import * as XRegExp from 'xregexp';
 import * as Rx from 'rxjs/Rx';
 import {merge} from 'tsmerge';
 import {genSequence, scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
+import {binarySearch} from './search';
 
 // CSpell:ignore ings ning gimuy
 
@@ -13,6 +14,13 @@ export interface WordOffset {
 export interface TextOffset {
     text: string;
     offset: number;
+}
+
+export interface TextDocumentOffset extends WordOffset {
+    uri?: string;
+    text: string;
+    row: number;
+    col: number;
 }
 
 const regExLines = /.*\r?\n/g;
@@ -237,5 +245,21 @@ export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gim', f
     } catch (e) {
     }
     return undefined;
+}
+
+export function calculateTextDocumentOffsets(uri: string, text: string, wordOffsets: WordOffset[]): TextDocumentOffset[] {
+    const lines = [-1, ...match(/\n/g, text).map(a => a.index), text.length];
+
+    function findRowCol(offset): [number, number] {
+        const row = binarySearch(lines, offset);
+        const col = offset - lines[Math.max(0, row - 1)];
+        return [row, col];
+    }
+
+    return wordOffsets
+        .map(wo => {
+            const [row, col] = findRowCol(wo.offset);
+            return { ...wo, row, col, text, uri };
+        });
 }
 
