@@ -50,7 +50,12 @@ export class CSpellApplication {
             .do(configFiles => this.info(`Config Files Found:\n    ${configFiles.join('')}\n`))
             .map(filenames => cspell.readSettingsFiles(filenames));
 
-        const filesRx = Rx.Observable.from(this.files)
+        interface FileInfo {
+            filename: string;
+            text: string;
+        }
+
+        const filesRx: Rx.Observable<FileInfo> = Rx.Observable.from(this.files)
             .flatMap(pattern => globRx(pattern)
                 .catch((error: AppError) => {
                     return new Promise<string[]>((resolve) => resolve(Promise.reject({...error, message: 'Error with glob search.'})));
