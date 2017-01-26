@@ -2,8 +2,7 @@
 
 import { compileWordList } from './wordListCompiler';
 import * as path from 'path';
-
-const program = require('commander');
+import * as program from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
 program
