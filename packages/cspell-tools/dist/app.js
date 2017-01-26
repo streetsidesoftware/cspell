@@ -2,7 +2,7 @@
 "use strict";
 const wordListCompiler_1 = require("./wordListCompiler");
 const path = require("path");
-const program = require('commander');
+const program = require("commander");
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 program
     .version(npmPackage.version);
