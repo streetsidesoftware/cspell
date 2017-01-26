@@ -2,7 +2,7 @@ import { calcUserSettingsForLanguage } from './LanguageSettings';
 import { CSpellUserSettings } from './CSpellSettingsDef';
 import * as CSpellSettings from './CSpellSettingsServer';
 import { getInDocumentSettings } from './InDocSettings';
-import { createCollectionP } from './SpellingDictionaryCollection';
+import { createCollectionP } from './SpellingDictionary';
 import { createSpellingDictionary, SpellingDictionary } from './SpellingDictionary';
 import { loadDictionaries } from './Dictionaries';
 

@@ -1,8 +1,8 @@
 "use strict";
 const chai_1 = require("chai");
 const textValidator_1 = require("./textValidator");
-const SpellingDictionaryCollection_1 = require("./SpellingDictionaryCollection");
 const SpellingDictionary_1 = require("./SpellingDictionary");
+const SpellingDictionary_2 = require("./SpellingDictionary");
 // cSpell:enableCompoundWords
 describe('Validate textValidator functions', () => {
     // cSpell:disable
@@ -61,7 +61,7 @@ describe('Validate textValidator functions', () => {
         chai_1.expect(errors).to.deep.equal(['giraffe', 'xxxbxxxx', 'xxxkxxxx']);
     });
     it('tests trailing s, ed, ing, etc. are attached to the words', () => {
-        const dictEmpty = SpellingDictionary_1.createSpellingDictionary([]);
+        const dictEmpty = SpellingDictionary_2.createSpellingDictionary([]);
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = textValidator_1.validateText(text, dictEmpty, { allowCompoundWords: true });
         const errors = result.map(wo => wo.word).toArray();
@@ -77,13 +77,13 @@ describe('Validate textValidator functions', () => {
 });
 function getSpellingDictionaryCollection() {
     const dicts = [
-        SpellingDictionary_1.createSpellingDictionary(colors),
-        SpellingDictionary_1.createSpellingDictionary(fruit),
-        SpellingDictionary_1.createSpellingDictionary(animals),
-        SpellingDictionary_1.createSpellingDictionary(insects),
-        SpellingDictionary_1.createSpellingDictionary(words),
+        SpellingDictionary_2.createSpellingDictionary(colors),
+        SpellingDictionary_2.createSpellingDictionary(fruit),
+        SpellingDictionary_2.createSpellingDictionary(animals),
+        SpellingDictionary_2.createSpellingDictionary(insects),
+        SpellingDictionary_2.createSpellingDictionary(words),
     ];
-    return new SpellingDictionaryCollection_1.SpellingDictionaryCollection(dicts);
+    return new SpellingDictionary_1.SpellingDictionaryCollection(dicts);
 }
 const colors = ['red', 'green', 'blue', 'black', 'white', 'orange', 'purple', 'yellow', 'gray', 'brown'];
 const fruit = [

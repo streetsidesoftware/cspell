@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { wordSplitter, validateText, hasWordCheck } from './textValidator';
-import { SpellingDictionaryCollection } from './SpellingDictionaryCollection';
+import { SpellingDictionaryCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
 
 // cSpell:enableCompoundWords
