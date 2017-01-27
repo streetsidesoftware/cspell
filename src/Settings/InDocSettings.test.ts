@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { mergeInDocSettings } from './CSpellSettingsServer';
-import * as Text from './util/text';
-import * as TextRange from './util/TextRange';
+import * as Text from '../util/text';
+import * as TextRange from '../util/TextRange';
 import * as InDoc from './InDocSettings';
 
 const emptySettings = mergeInDocSettings({}, {});

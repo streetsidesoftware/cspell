@@ -1,17 +1,7 @@
 import { DictionaryDefinition, DictionaryId } from './CSpellSettingsDef';
-import { loadDictionary } from './DictionaryLoader';
-import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
 
-const dictionaryPath = () => path.join(__dirname, '..', 'dist', 'dictionaries');
-
-export function loadDictionaries(dictIds: DictionaryId[], defs: DictionaryDefinition[]): Promise<SpellingDictionary>[] {
-    const defsToLoad = filterDictDefsToLoad(dictIds, defs);
-
-    return defsToLoad
-        .map(e => e[1])
-        .map(def => loadDictionary(def.path!, { type: def.type}));
-}
+const dictionaryPath = () => path.join(__dirname, '..', '..', 'dist', 'dictionaries');
 
 export type DefMapArrayItem = [string, DictionaryDefinition];
 
@@ -48,3 +38,4 @@ export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: 
             path:  absPath
         };
 }
+

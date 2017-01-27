@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as TextRange from './util/TextRange';
+import * as TextRange from '../util/TextRange';
 import { regExMatchUrls, regExMatchCommonHexFormats } from './RegExpPatterns';
 import * as RegPat from './RegExpPatterns';
 

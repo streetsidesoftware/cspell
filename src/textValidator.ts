@@ -2,7 +2,7 @@ import * as Text from './util/text';
 import * as TextRange from './util/TextRange';
 import { SpellingDictionary } from './SpellingDictionary';
 import { Sequence, genSequence } from 'gensequence';
-import * as RxPat from './RegExpPatterns';
+import * as RxPat from './Settings/RegExpPatterns';
 
 export interface ValidationOptions {
     maxNumberOfProblems?: number;

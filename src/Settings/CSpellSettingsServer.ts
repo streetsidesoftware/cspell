@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as json from 'comment-json';
 import {CSpellUserSettingsWithComments, CSpellUserSettings, RegExpPatternDefinition} from './CSpellSettingsDef';
 import * as path from 'path';
-import { normalizePathForDictDefs } from './Dictionaries';
+import { normalizePathForDictDefs } from './DictionarySettings';
 
 const currentSettingsFileVersion = '0.1';
 

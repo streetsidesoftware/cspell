@@ -1,9 +1,8 @@
 import { expect } from 'chai';
-import { getDictionary } from './TextDocumentSettings';
-import { getDefaultSettings } from './DefaultSettings';
+import * as Dictionaries from './Dictionaries';
+import { getDefaultSettings } from '../Settings';
 
-
-describe('Validate TextDocumentSettings', () => {
+describe('Validate getDictionary', () => {
     it('tests that userWords are included in the dictionary', () => {
         const settings = {
             ...getDefaultSettings(),
@@ -11,7 +10,7 @@ describe('Validate TextDocumentSettings', () => {
             userWords: ['four', 'five', 'six'],
         };
 
-        return getDictionary(settings).then(dict => {
+        return Dictionaries.getDictionary(settings).then(dict => {
             settings.words.forEach(word => {
                 expect(dict.has(word)).to.be.true;
             });

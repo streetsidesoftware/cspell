@@ -1,8 +1,7 @@
 import { Sequence } from 'gensequence';
-import * as Text from './util/text';
+import * as Text from '../util/text';
 import { CSpellUserSettings } from './CSpellSettingsDef';
 import { mergeInDocSettings } from './CSpellSettingsServer';
-import { createSpellingDictionary, SpellingDictionary } from './SpellingDictionary';
 
 const regExMatchRegEx = /\/.*\/[gimuy]*/;
 const regExInFileSetting = /(?:spell-?checker|cSpell)::?\s*(.*)/gi;
@@ -12,6 +11,9 @@ export type CSpellUserSettingsKeys = keyof CSpellUserSettings;
 
 export function getInDocumentSettings(text: string): CSpellUserSettings {
     const settings = getPossibleInDocSettings(text)
+        .map(a => {
+            return a;
+        })
         .map(a => a[1] || '')
         .concatMap(a => parseSettingMatch(a))
         .reduce((s, setting) => {
@@ -74,10 +76,6 @@ function parseIncludeRegExp(match: string): CSpellUserSettings {
 
 function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
     return Text.match(regExInFileSetting, text);
-}
-
-export function getWordsDictionaryFromDoc(text: string): SpellingDictionary {
-    return createSpellingDictionary(getWordsFromDocument(text));
 }
 
 function getWordsFromDocument(text: string): string[] {

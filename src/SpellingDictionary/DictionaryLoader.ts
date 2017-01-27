@@ -1,7 +1,7 @@
 import {
     loadWordsRx,
     splitLineIntoWordsRx, splitLineIntoCodeWordsRx
-} from './wordListHelper';
+} from '../wordListHelper';
 import { SpellingDictionary, createSpellingDictionaryRx } from './SpellingDictionary';
 import * as Rx from 'rxjs/Rx';
 
