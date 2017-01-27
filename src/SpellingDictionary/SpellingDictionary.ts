@@ -10,7 +10,14 @@ export interface SpellingDictionary {
 }
 
 export class SpellingDictionaryInstance implements SpellingDictionary {
-    constructor(readonly words: Set<string>, readonly trie: Trie) {
+    private _trie: Trie;
+
+    constructor(readonly words: Set<string>) {
+    }
+
+    get trie() {
+        this._trie = this._trie || buildTrieFromSet(this.words);
+        return this._trie;
     }
 
     public has(word: string) {
@@ -26,29 +33,22 @@ export class SpellingDictionaryInstance implements SpellingDictionary {
     }
 }
 
-function reduceWordsToTrieSet(ws: {words: Set<string>, trie: Trie}, word: string): {words: Set<string>, trie: Trie} {
-    // @todo: figure out dealing with case in source words
-    word = word.toLowerCase().trim();
-
-    const {words, trie} = ws;
-    if (! words.has(word)) {
-        words.add(word);
-        addWordToTrie(trie, word);
-    }
-    return {words, trie};
+function buildTrieFromSet(words: Set<string>): Trie {
+    return genSequence(words)
+        .reduce((trie, word) => addWordToTrie(trie, word), createTrie());
 }
 
 export function createSpellingDictionary(wordList: string[] | Sequence<string>): SpellingDictionary {
-    const {words, trie} = genSequence(wordList)
-        .reduce(reduceWordsToTrieSet, { words: new Set<string>(), trie: createTrie() });
-    return new SpellingDictionaryInstance(words, trie);
+    const words = new Set(genSequence(wordList).map(word => word.toLowerCase().trim()));
+    return new SpellingDictionaryInstance(words);
 }
 
 export function createSpellingDictionaryRx(words: Rx.Observable<string>): Promise<SpellingDictionary> {
     const promise = words
-        .reduce(reduceWordsToTrieSet, { words: new Set<string>(), trie: createTrie() })
-        .map(({words, trie}) => new SpellingDictionaryInstance(words, trie))
+        .map(word => word.toLowerCase().trim())
+        .reduce((words, word) => words.add(word), new Set<string>())
+        .map(words => new SpellingDictionaryInstance(words))
         .toPromise();
-    return Promise.all([promise]).then(a => a[0]);
+    return promise;
 }
 
