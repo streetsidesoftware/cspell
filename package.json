@@ -18,7 +18,8 @@
     "watch": "tsc --watch -p .",
     "tsc": "tsc -p .",
     "tscv": "tsc -v",
-    "test2": "mocha --compilers ts:ts-node/register --recursive \"src/**/*.test.ts\"",
+    "cover": "NODE_ENV=test nyc npm run test2",
+    "test2": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
     "test-watch": "npm run build && mocha --compilers ts:ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "test": "mocha --recursive \"dist/**/*.test.js\""
   },
@@ -53,6 +54,7 @@
     "chai": "^3.5.0",
     "lorem-ipsum": "^1.0.3",
     "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",
@@ -71,5 +73,22 @@
   },
   "engines": {
     "node": ">=6.0.0"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
   }
 }
