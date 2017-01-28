@@ -24,6 +24,7 @@ export const defaultLanguageSettings: LanguageSettings = [
     { languageId: 'typescript',                          dictionaries: ['typescript', 'node', 'npm'] },
     { languageId: 'typescriptreact',                     dictionaries: ['typescript', 'node', 'npm'] },
     { languageId: 'html',                                dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
+    { languageId: 'latex',                               dictionaries: ['latex'] },
     { languageId: 'jade',                                dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
     { languageId: 'pug',                                 dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
     { languageId: 'php',                                 dictionaries: ['php', 'html', 'fonts', 'css', 'typescript', 'npm'] },

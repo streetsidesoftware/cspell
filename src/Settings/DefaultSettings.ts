@@ -42,6 +42,7 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'fonts',          file: 'fonts.txt.gz',         type: 'S' },
     { name: 'go',             file: 'go.txt.gz',            type: 'S' },
     { name: 'html',           file: 'html.txt.gz',          type: 'S' },
+    { name: 'latex',          file: 'latex.txt.gz',         type: 'S' },
     { name: 'misc',           file: 'miscTerms.txt.gz',     type: 'S' },
     { name: 'node',           file: 'node.txt.gz',          type: 'S' },
     { name: 'npm',            file: 'npm.txt.gz',           type: 'S' },
@@ -59,7 +60,8 @@ const defaultSettings: CSpellUserSettings = {
     language: 'en',
     enabledLanguageIds: [
         'csharp', 'go', 'javascript', 'javascriptreact', 'json', 'markdown',
-        'php', 'plaintext', 'python', 'text', 'typescript', 'typescriptreact'
+        'php', 'plaintext', 'python', 'text', 'typescript', 'typescriptreact',
+        'latex',
     ],
     maxNumberOfProblems: 100,
     numSuggestions: 10,
