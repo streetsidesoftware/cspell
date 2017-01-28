@@ -1,5 +1,5 @@
 export { CSpellUserSettings, CSpellUserSettingsWithComments } from './Settings';
-export { WordOffset } from './util/text';
+export { WordOffset, TextDocumentOffset } from './util/text';
 export { validateText } from './validator';
 export { mergeSettings, readSettings, readSettingsFiles, defaultFileName as defaultSettingsFilename } from './Settings';
 export { SpellingDictionary, createSpellingDictionary, createSpellingDictionaryRx, getDictionary } from './SpellingDictionary';

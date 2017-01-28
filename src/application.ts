@@ -5,6 +5,7 @@ import * as cspell from './index';
 import * as fsp from 'fs-promise';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
+import * as util from './util/util';
 
 // cspell:word nocase
 
@@ -21,13 +22,18 @@ export interface AppError extends NodeJS.ErrnoException {};
 
 export interface RunResult {
     files: number;
+    filesWithIssues: Set<string>;
     issues: number;
 }
+
+export type Issue = cspell.TextDocumentOffset;
 
 export class CSpellApplication {
 
     readonly info: (message?: any, ...args: any[]) => void;
     readonly debug: (message?: any, ...args: any[]) => void;
+    readonly logIssue: (issue: Issue) => void;
+    readonly uniqueFilter: (issue: Issue) => boolean;
     private configGlob = 'cspell.json';
     private configGlobOptions: minimatch.IOptions = { nocase: true };
     private excludeGlobs = [
@@ -43,6 +49,12 @@ export class CSpellApplication {
         const excludes         = options.exclude && options.exclude.split(/\s+/g);
         this.excludeGlobs      = excludes || this.excludeGlobs;
         this.excludes          = this.excludeGlobs.map(glob => minimatch.makeRe(glob));
+        this.logIssue          = options.wordsOnly
+            ? (issue: Issue) => this.log(issue.word)
+            : ({uri, row, col, word}) => this.log(`${uri}[${row}, ${col}]: Unknown word: ${word}`);
+        this.uniqueFilter      = options.unique
+            ? util.uniqueFilterFnGenerator((issue: Issue) => issue.word)
+            : () => true;
     }
 
     run(): Promise<RunResult> {
@@ -83,6 +95,7 @@ export class CSpellApplication {
 
         const status: RunResult = {
             files: 0,
+            filesWithIssues: new Set<string>(),
             issues: 0,
         };
 
@@ -111,10 +124,11 @@ export class CSpellApplication {
                 const {filename, issues} = info;
                 this.info(`Checking: ${filename} ... Issues: ${issues.length}`);
                 issues
-                    .map(({uri, row, col, word}) => `${uri}[${row}, ${col}]: Unknown word: ${word}`)
-                    .forEach(message => this.log(message));
+                    .filter(this.uniqueFilter)
+                    .forEach((issue) => this.logIssue(issue));
             })
             .filter(info => !!info.issues.length)
+            .do(issue => status.filesWithIssues.add(issue.filename))
             .reduce((status, info) => ({...status, issues: status.issues + info.issues.length}), status)
             .toPromise();
         return r;
@@ -125,10 +139,12 @@ export class CSpellApplication {
 cspell;
 Date: ${(new Date()).toUTCString()}
 Options:
-    verbose: ${yesNo(!!this.options.verbose)}
-    config:  ${this.configGlob}
-    exclude: ${this.excludeGlobs.join('\n             ')}
-    files:   ${this.files}
+    verbose:   ${yesNo(!!this.options.verbose)}
+    config:    ${this.configGlob}
+    exclude:   ${this.excludeGlobs.join('\n             ')}
+    files:     ${this.files}
+    wordsOnly: ${yesNo(!!this.options.wordsOnly)}
+    unique:    ${yesNo(!!this.options.unique)}
 `);
     }
 

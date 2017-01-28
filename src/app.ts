@@ -17,8 +17,8 @@ program
 program
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
     .option('-v, --verbose', 'display more information about the files being checked and the configuration')
-    // .option('-w, --wordsOnly', 'Only output the words not found in the dictionaries.')
-    // .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
+    .option('-w, --wordsOnly', 'Only output the words not found in the dictionaries.')
+    .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
     .option('--debug', 'Output information useful for debugging cspell.json files.')
     .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
     .arguments('<files...>')
@@ -27,7 +27,7 @@ program
         const app = new CSpellApplication(files, options, console.log);
         app.run().then(
             result => {
-                console.log('CSpell: Files checked: %d, Issues found: %d', result.files, result.issues);
+                console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);
                 process.exit(result.issues ? 1 : 0);
             },
             (error: AppError) => {
