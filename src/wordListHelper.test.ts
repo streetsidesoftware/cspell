@@ -50,6 +50,6 @@ describe('Validate wordListHelper', () => {
             .toPromise()
             .then(values => {
                 expect(values).to.be.empty;
-            })
+            });
     });
 });
