@@ -27,7 +27,6 @@ describe('Validate wordListHelper', () => {
                     'disable',
                     'Compound',
                     'Words',
-                    'extra',
                 ]);
             });
     });
@@ -40,7 +39,6 @@ describe('Validate wordListHelper', () => {
             .then(words => {
                 expect(words).to.be.deep.equal([
                     'New York City',
-                    'New', 'York', 'City',
                     'New', 'York', 'City',
                 ]);
             });

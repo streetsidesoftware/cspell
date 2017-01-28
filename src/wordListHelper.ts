@@ -38,8 +38,8 @@ export function splitLineIntoCodeWordsRx(line: string): Rx.Observable<string> {
     const asMultiWord = regExpWordsWithSpaces.test(line) ? [ line ] : [];
     const asWords = splitLine(line);
     const splitWords = splitCodeWords(asWords);
-    const wordsToAdd = [...asMultiWord, ...asWords, ...splitWords];
-    return Rx.Observable.from(wordsToAdd);
+    const wordsToAdd = new Set([...asMultiWord, ...asWords, ...splitWords]);
+    return Rx.Observable.from([...wordsToAdd]);
 }
 
 export function splitLineIntoWordsRx(line: string): Rx.Observable<string> {
