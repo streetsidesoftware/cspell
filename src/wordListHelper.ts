@@ -49,18 +49,3 @@ export function splitLineIntoWordsRx(line: string): Rx.Observable<string> {
 }
 
 
-export function rxSplitIntoWords(lines: Rx.Observable<string>): Rx.Observable<string> {
-    return lines.flatMap(line =>
-        Text.extractWordsFromTextRx(line)
-            .map(match => match.word)
-            .map(w => w.trim())
-            .filter(w => w !== '')
-    );
-}
-
-
-export function rxSplitCamelCaseWords(words: Rx.Observable<string>): Rx.Observable<string> {
-    return words.flatMap(word => Text.splitCamelCaseWord(word));
-}
-
-
