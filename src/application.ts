@@ -4,13 +4,17 @@ import * as minimatch from 'minimatch';
 import * as cspell from './index';
 import * as fsp from 'fs-promise';
 import * as path from 'path';
+import * as commentJson from 'comment-json';
 
 // cspell:word nocase
 
 export interface CSpellApplicationOptions {
-    verbose: boolean;
+    verbose?: boolean;
+    debug?: boolean;
     config?: string;
     exclude?: string;
+    wordsOnly?: boolean;
+    unique?: boolean;
 }
 
 export interface AppError extends NodeJS.ErrnoException {};
@@ -23,6 +27,7 @@ export interface RunResult {
 export class CSpellApplication {
 
     readonly info: (message?: any, ...args: any[]) => void;
+    readonly debug: (message?: any, ...args: any[]) => void;
     private configGlob = 'cspell.json';
     private configGlobOptions: minimatch.IOptions = { nocase: true };
     private excludeGlobs = [
@@ -32,6 +37,7 @@ export class CSpellApplication {
 
     constructor(readonly files: string[], readonly options: CSpellApplicationOptions, readonly log: (message?: any, ...args: any[]) => void) {
         this.info              = options.verbose ? log : () => {};
+        this.debug             = options.debug ? log : () => {};
         this.configGlob        = options.config || this.configGlob;
         this.configGlobOptions = options.config ? {} : this.configGlobOptions;
         const excludes         = options.exclude && options.exclude.split(/\s+/g);
@@ -91,6 +97,8 @@ export class CSpellApplication {
                 const languageIds = cspell.getLanguagesForExt(ext);
                 const settings = cspell.mergeSettings(cspell.getDefaultSettings(), config);
                 const fileSettings = cspell.constructSettingsForText(settings, text, languageIds);
+                this.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
+                this.debug(commentJson.stringify(fileSettings, undefined, 2));
                 return cspell.validateText(text, fileSettings)
                     .then(wordOffsets => {
                         return {
@@ -117,7 +125,7 @@ export class CSpellApplication {
 cspell;
 Date: ${(new Date()).toUTCString()}
 Options:
-    verbose: ${yesNo(this.options.verbose)}
+    verbose: ${yesNo(!!this.options.verbose)}
     config:  ${this.configGlob}
     exclude: ${this.excludeGlobs.join('\n             ')}
     files:   ${this.files}
