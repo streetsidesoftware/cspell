@@ -1,5 +1,6 @@
 import * as XRegExp from 'xregexp';
 import * as Rx from 'rxjs/Rx';
+import * as rxFrom from 'rxjs-from-iterable';
 import {merge} from 'tsmerge';
 import {genSequence, scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import {binarySearch} from './search';
@@ -114,8 +115,7 @@ export function extractLinesOfTextRx(text: string): Rx.Observable<TextOffset> {
 export function extractWordsFromTextRx(text: string): Rx.Observable<WordOffset> {
     // Comment out the correct implementation until rxjs types get fixed.
     // return Rx.Observable.from(extractWordsFromText(text));
-    // Pretend it is array like.
-    return Rx.Observable.from({...extractWordsFromText(text), length: 0} as ArrayLike<WordOffset>);
+    return rxFrom.observableFromIterable(extractWordsFromText(text));
 }
 
 /**
