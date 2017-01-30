@@ -134,6 +134,10 @@ export class CSpellApplication {
         return r;
     }
 
+    static createInit(_: CSpellApplicationOptions): Promise<void> {
+        return Promise.resolve();
+    }
+
     protected header() {
         this.info(`
 cspell;
