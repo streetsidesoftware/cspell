@@ -23,11 +23,15 @@ describe('Validate DictionarySettings', () => {
             .map(p => p[1])
             .map(def => def.path!)
             .map(path => fsp.access(path));
+        expect(mapDefs.length).to.be.greaterThan(0);
         return Promise.all(access);
     });
 
-    it('', () => {
-
+    it('tests normalizing the dictionary paths', () => {
+        const { dictionaryDefinitions } = defaultSettings;
+        expect(dictionaryDefinitions).to.not.be.empty;
+        const defs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
+        expect(defs.length).to.be.equal(dictionaryDefinitions!.length);
     });
 });
 
