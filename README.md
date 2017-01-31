@@ -20,7 +20,6 @@ Example: recursively spell check all javascript files in `src`
 cspell "src/**/*.js"
 ```
 
-
 ### Help
 
 ```sh

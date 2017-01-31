@@ -41,6 +41,7 @@ program
         );
     });
 
+/*
 program
     .command('init')
     .description('(Alpha) Initialize a cspell.json file.')
@@ -54,6 +55,7 @@ program
         );
         console.log('Init');
     });
+*/
 
 program.parse(process.argv);
 
