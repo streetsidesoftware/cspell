@@ -6,7 +6,7 @@ const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 import { CSpellApplication, CSpellApplicationOptions, AppError} from './application';
 
 interface Options extends CSpellApplicationOptions, program.IExportedCommand {}
-interface InitOptions extends Options {}
+// interface InitOptions extends Options {}
 
 let showHelp = true;
 
