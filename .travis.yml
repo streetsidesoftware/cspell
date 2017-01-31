@@ -4,7 +4,9 @@ node_js:
   - "6"
 script:
   - npm install
-  - npm run tscv
-  - npm run clean-build
-  - npm test
+  # the prepublish script run during install currently does clean-build and test
+  # with npm v5+ that will no longer be the case, so these will need to be added back.
+  # - npm run tscv
+  # - npm run clean-build
+  # - npm test
   - npm run lint-travis
