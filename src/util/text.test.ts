@@ -13,6 +13,8 @@ describe('Util Text', () => {
         const regEx3 = Text.stringToRegExp('/');
         expect(regEx3).not.to.be.undefined;
         expect(regEx3!.toString()).to.be.equal('/\\//gim');
+        const regEx4 = Text.stringToRegExp(/abc/);
+        expect(regEx4!.toString()).to.be.equal('/abc/');
     });
 
     it('splits words', () => {
@@ -162,6 +164,72 @@ describe('Util Text', () => {
         expect(r.join('')).to.be.equal(parts.join('\n'));
         const lines = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
         expect(lines.length).to.be.equal(64);
+    });
+
+    it('tests extractLinesOfTextRx', () => {
+        const linesA = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
+        return Text.extractLinesOfTextRx(sampleCode)
+            .map(m => m.text)
+            .toArray()
+            .toPromise()
+            .then(linesB => {
+                expect(linesB).to.be.deep.equal(linesA);
+            });
+    });
+});
+
+describe('Test the text matching functions', () => {
+    it('isUpperCase', () => {
+        expect(Text.isUpperCase('first')).to.be.false;
+        expect(Text.isUpperCase('First')).to.be.false;
+        expect(Text.isUpperCase('FIRST')).to.be.true;
+    });
+    it('isLowerCase', () => {
+        expect(Text.isLowerCase('first')).to.be.true;
+        expect(Text.isLowerCase('First')).to.be.false;
+        expect(Text.isLowerCase('FIRST')).to.be.false;
+    });
+    it('isFirstCharacterUpper', () => {
+        expect(Text.isFirstCharacterUpper('first')).to.be.false;
+        expect(Text.isFirstCharacterUpper('First')).to.be.true;
+        expect(Text.isFirstCharacterUpper('FIRST')).to.be.true;
+    });
+    it('isFirstCharacterLower', () => {
+        expect(Text.isFirstCharacterLower('first')).to.be.true;
+        expect(Text.isFirstCharacterLower('First')).to.be.false;
+        expect(Text.isFirstCharacterLower('FIRST')).to.be.false;
+    });
+    // cSpell:ignore áello firstname
+    it('ucFirst', () => {
+        expect(Text.ucFirst('hello')).to.be.equal('Hello');
+        expect(Text.ucFirst('Hello')).to.be.equal('Hello');
+        expect(Text.ucFirst('áello')).to.be.equal('Áello');
+    });
+    it('lcFirst', () => {
+        expect(Text.lcFirst('hello')).to.be.equal('hello');
+        expect(Text.lcFirst('Hello')).to.be.equal('hello');
+        expect(Text.lcFirst('áello')).to.be.equal('áello');
+        expect(Text.lcFirst('Áello')).to.be.equal('áello');
+    });
+    it('snakeToCamel', () => {
+        expect(Text.snakeToCamel('first')).to.be.equal('First');
+        expect(Text.snakeToCamel('firstName')).to.be.equal('FirstName');
+        expect(Text.snakeToCamel('first_name')).to.be.equal('FirstName');
+        expect(Text.snakeToCamel('FIRST_NAME')).to.be.equal('FIRSTNAME');
+    });
+    it('camelToSnake', () => {
+        expect(Text.camelToSnake('first')).to.be.equal('first');
+        expect(Text.camelToSnake('firstName')).to.be.equal('first_name');
+        expect(Text.camelToSnake('first_name')).to.be.equal('first_name');
+        expect(Text.camelToSnake('FIRSTName')).to.be.equal('first_name');
+        expect(Text.camelToSnake('FIRSTNAME')).to.be.equal('firstname');
+    });
+});
+
+
+describe('Validates offset conversions', () => {
+    it('calculateTextDocumentOffsets', () => {
+
     });
 });
 

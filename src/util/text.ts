@@ -63,26 +63,6 @@ export function splitCamelCaseWord(word: string): string[] {
 }
 
 /**
- * Extract out whole words from a string of text.
- */
-export function extractWordsFromText1(text: string): WordOffset[] {
-    const words: WordOffset[] = [];
-
-    const reg = XRegExp(regExWords);
-    let match: RegExpExecArray | null;
-
-    while ( match = reg.exec(text) ) {
-        words.push({
-            word: match[0],
-            offset: match.index
-        });
-    }
-
-    return words;
-}
-
-
-/**
  * This function lets you iterate over regular expression matches.
  */
 export function match(reg: RegExp, text: string): Sequence<RegExpExecArray> {
@@ -106,7 +86,7 @@ export function extractLinesOfText(text: STW): Sequence<TextOffset> {
 }
 
 export function extractLinesOfTextRx(text: string): Rx.Observable<TextOffset> {
-    return Rx.Observable.create(extractLinesOfText(text));
+    return rxFrom.observableFromIterable(extractLinesOfText(text));
 }
 
 /**

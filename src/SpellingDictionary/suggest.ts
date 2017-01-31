@@ -13,6 +13,10 @@ const maxNumChanges = 4;
 const defaultNumberOfSuggestions = 5;
 
 
+function compResults(a: SuggestionResult, b: SuggestionResult): number {
+    return a.cost - b.cost || a.word.length - b.word.length || (a.word < b.word ? -1 : 1);
+}
+
 export function suggest(trie: Trie, word: string, numSuggestions: number = defaultNumberOfSuggestions): SuggestionResult[] {
     return suggestA(trie, word, numSuggestions);
 }
@@ -81,14 +85,14 @@ export function suggestA(
     function emitSug(sug: SuggestionResult) {
         sugs.push(sug);
         if (sugs.length > numSuggestions) {
-            sugs.sort((a, b) => a.cost - b.cost);
+            sugs.sort(compResults);
             sugs.length = numSuggestions;
             costLimit = sugs[sugs.length - 1].cost;
         }
     }
 
     processTries(trie.c, 1);
-    sugs.sort((a, b) => a.cost - b.cost);
+    sugs.sort(compResults);
     return sugs;
 }
 
@@ -157,13 +161,13 @@ export function suggestAlt(trie: Trie, word: string, numSuggestions: number = de
     function emitSug(sug: SuggestionResult) {
         sugs.push(sug);
         if (sugs.length > numSuggestions) {
-            sugs.sort((a, b) => a.cost - b.cost);
+            sugs.sort(compResults);
             sugs.length = numSuggestions;
             costLimit = sugs[sugs.length - 1].cost;
         }
     }
 
     processTries(trie.c, 1);
-    sugs.sort((a, b) => a.cost - b.cost);
+    sugs.sort(compResults);
     return sugs;
 }

@@ -1,10 +1,19 @@
 import { expect } from 'chai';
-import { suggest } from './suggest';
+import { suggest as suggestPrime, suggestAlt, SuggestionResult } from './suggest';
 import { wordListToTrie } from './Trie';
+import * as Trie from './Trie';
 
 const loggingOn = false;
 
 const consoleLog = loggingOn ? console.log : () => {};
+const defaultNumberOfSuggestions = 5;
+
+function suggest(trie: Trie.Trie, word: string, numSuggestions: number = defaultNumberOfSuggestions): SuggestionResult[] {
+    const sugAlt = suggestAlt(trie, word, numSuggestions);
+    const sugPrime = suggestPrime(trie, word, numSuggestions);
+    expect(sugAlt).to.be.deep.equal(sugPrime);
+    return sugPrime;
+}
 
 describe('test building tries', () => {
     it('build', () => {
@@ -83,3 +92,42 @@ describe('test for duplicate suggestions', () => {
     });
 });
 
+describe('Validate that suggestion reduction', () => {
+    it('tests the case where there are more suggestions that wanted', () => {
+        const trie = wordListToTrie(wordsApp);
+        const results = suggest(trie, 'applauda');
+        const suggestions = results.map(({word}) => word);
+        consoleLog(suggestions);
+        expect(suggestions).to.contain('applaud');
+    });
+});
+
+
+const wordsApp = [
+    'applaud',
+    'applaudable',
+    'applaudably',
+    'applauded',
+    'applauder',
+    "applauder's",
+    'applauders',
+    'applauding',
+    'applauds',
+    'applause',
+    "applause's",
+    'applauses',
+    'apple',
+    "apple's",
+    'applejack',
+    "applejack's",
+    'apples',
+    'applesauce',
+    "applesauce's",
+    'appleseed',
+    "appleseed's",
+    'applet',
+    "applet's",
+    'appleton',
+    "appleton's",
+    'applets',
+];
