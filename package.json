@@ -18,10 +18,12 @@
     "watch": "tsc --watch -p .",
     "tsc": "tsc -p .",
     "tscv": "tsc -v",
-    "cover": "NODE_ENV=test nyc npm run test2",
-    "test2": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
+    "generate-code-coverage": "NODE_ENV=test nyc npm run test-ts",
+    "test-ts": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
     "test-watch": "npm run build && mocha --compilers ts:ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "prepublish": "npm run clean-build && npm test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test-coverage": "npm run generate-code-coverage && npm run coverage",
     "test": "mocha --recursive \"dist/**/*.test.js\""
   },
   "repository": {
@@ -53,6 +55,7 @@
     "@types/node": "^7.0.1",
     "@types/xregexp": "^3.0.28",
     "chai": "^3.5.0",
+    "coveralls": "^2.11.15",
     "lorem-ipsum": "^1.0.3",
     "mocha": "^3.2.0",
     "nyc": "^10.1.2",
