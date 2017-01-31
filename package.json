@@ -1,6 +1,6 @@
 {
   "name": "cspell",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Spelling Checker for Code!",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -21,6 +21,7 @@
     "cover": "NODE_ENV=test nyc npm run test2",
     "test2": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
     "test-watch": "npm run build && mocha --compilers ts:ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "prepublish": "npm run clean-build && npm test",
     "test": "mocha --recursive \"dist/**/*.test.js\""
   },
   "repository": {
