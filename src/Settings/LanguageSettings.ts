@@ -25,7 +25,9 @@ export const defaultLanguageSettings: LanguageSettings = [
     { languageId: 'typescriptreact',                     dictionaries: ['typescript', 'node', 'npm'] },
     { languageId: 'html',                                dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
     { languageId: 'latex',                               dictionaries: ['latex'] },
+    { languageId: 'markdown',                            dictionaries: ['npm'] },
     { languageId: 'jade',                                dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
+    { languageId: 'json',                                dictionaries: ['node', 'npm'] },
     { languageId: 'pug',                                 dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
     { languageId: 'php',                                 dictionaries: ['php', 'html', 'fonts', 'css', 'typescript', 'npm'] },
     { languageId: 'css',                                 dictionaries: ['fonts', 'css'] },
@@ -61,6 +63,14 @@ export function calcUserSettingsForLanguage(settings: CSpellUserSettings, langua
         dictionaryDefinitions
     } = calcSettingsForLanguage(languageSettings, languageId, local);
     return  SpellSettings.mergeSettings(settings, { allowCompoundWords, dictionaries, dictionaryDefinitions });
+}
+
+export function calcSettingsForLanguageId(baseSettings: CSpellUserSettings, languageId: LanguageId[] | LanguageId): CSpellUserSettings {
+    const langIds: string[] = ['*'].concat(languageId instanceof Array ? languageId : [languageId]);
+    const langSettings = langIds.reduce((settings, languageId) => {
+        return calcUserSettingsForLanguage(settings, languageId);
+    }, baseSettings);
+    return langSettings;
 }
 
 function mergeUnique(a: string[] = [], b: string[] = []) {

@@ -108,22 +108,10 @@ const sampleCode = `
 
 `;
 
-
+// cspell:ignore againxx
 const sampleText = `
 # cSpell:disableCompoundWords
 # cSpell:enableCOMPOUNDWords
 # happydays arehere againxx
 `;
-
-export function replaceRangesWith(text: string, ranges: TextRange.MatchRange[], w: string = '_') {
-    let pos = 0;
-    let result = '';
-    for (const r of ranges) {
-        result += text.slice(pos, r.startPos) + w.repeat(r.endPos - r.startPos);
-        pos = r.endPos;
-    }
-    result += text.slice(pos);
-
-    return result;
-}
 

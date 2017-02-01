@@ -4,8 +4,8 @@ export { validateText } from './validator';
 export { mergeSettings, readSettings, readSettingsFiles, defaultFileName as defaultSettingsFilename } from './Settings';
 export { SpellingDictionary, createSpellingDictionary, createSpellingDictionaryRx, getDictionary } from './SpellingDictionary';
 export { getDefaultSettings } from './Settings';
-export { extractSettingsFromText } from './Settings/TextDocumentSettings';
-export { extractSettingsFromText as constructSettingsForText } from './Settings/TextDocumentSettings';
+export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
+export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
 
 import * as Text from './util/text';
 export { Text };

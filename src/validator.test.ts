@@ -11,7 +11,7 @@ import { getDefaultSettings } from './Settings/DefaultSettings';
 const defaultSettings: CSpellUserSettings = { ...getDefaultSettings(), enabledLanguageIds: ['plaintext', 'javascript']};
 
 function getSettings(text: string, languageId: string) {
-    return tds.extractSettingsFromText(defaultSettings, text, languageId);
+    return tds.combineTextAndLanguageSettings(defaultSettings, text, languageId);
 }
 
 describe('Validator', function() {
