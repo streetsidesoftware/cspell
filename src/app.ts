@@ -5,22 +5,27 @@ import * as program from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 import { CSpellApplication, CSpellApplicationOptions, AppError } from './application';
 import * as App from './application';
+import * as chalk from 'chalk';
 
 interface Options extends CSpellApplicationOptions, program.IExportedCommand {}
 // interface InitOptions extends Options {}
 
 function issueEmitter(issue: App.Issue) {
-    const {uri, row, col, text} = issue;
-    console.log(`${uri}[${row}, ${col}]: Unknown word: ${text}`);
+    const {uri = '', row, col, text} = issue;
+    console.log(`${chalk.green(uri)}[${row}, ${col}]: Unknown word: ${chalk.red(text)}`);
 }
 
 function errorEmitter(message: string, error: Error) {
-    console.error(message, error);
+    console.error(chalk.red(message), error);
     return Promise.resolve();
 }
 
 function infoEmitter(message: string) {
-    console.info(message);
+    console.info(chalk.yellow(message));
+}
+
+function debugEmitter(message: string) {
+    console.info(chalk.cyan(message));
 }
 
 function nullEmitter(_: string) {}
@@ -39,6 +44,7 @@ program
     .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
     .option('--debug', 'Output information useful for debugging cspell.json files.')
     .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
+    .option('--no-color', 'Turn off color.')
     // The following options are planned features
     // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
     // .option('--force', 'Force the exit value to always be 0')
@@ -48,7 +54,7 @@ program
             issue: issueEmitter,
             error: errorEmitter,
             info: options.verbose ? infoEmitter : nullEmitter,
-            debug: options.debug ? infoEmitter : nullEmitter,
+            debug: options.debug ? debugEmitter : nullEmitter,
         };
         showHelp = false;
         const app = new CSpellApplication(files, options, emitters);
