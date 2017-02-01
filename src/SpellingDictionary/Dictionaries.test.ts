@@ -21,9 +21,3 @@ describe('Validate getDictionary', () => {
         });
     });
 });
-
-describe('', () => {
-    it('', () => {
-
-    });
-});
