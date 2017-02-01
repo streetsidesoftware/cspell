@@ -29,12 +29,13 @@ cspell --help
 
 ## How it works
 
-The concept is simple, split camelCase words before checking them against a list of known words.
-* `camelCase` -> `camel Case`
-* `HTMLInput` -> `HTML Input`
-* `srcCode` -> `src Code`
+The concept is simple, split camelCase and snake_case words before checking them against a list of known words.
+* `camelCase` -> `camel case`
+* `HTMLInput` -> `html input`
+* `srcCode` -> `src code`
 * `snake_case_words` -> `snake case words`
 * `camel2snake` -> `camel snake` -- (the 2 is ignored)
+* `function parseJson(text: string)` -> `function parse json text string`
 
 ### Special cases
 
@@ -45,7 +46,7 @@ The concept is simple, split camelCase words before checking them against a list
 
 ### Things to note
 
-* This spellchecker is case insensitive.  It will not catch errors like english which should be English.
+* This spellchecker is case insensitive.  It will not catch errors like `english` which should be `English`.
 * The spellchecker uses dictionaries stored locally.  It does not send anything outside your machine.
 * The words in the dictionaries can and do contain errors.
 * There are missing words.
@@ -117,7 +118,7 @@ const str = "goedemorgen";  // <- will NOT be flagged as an error.
 
 ### Ignore
 
-Ignore allows you the specify a list of words you want to ignore within the document.
+*Ignore* allows you the specify a list of words you want to ignore within the document.
 
 ```javascript
 // cSpell:ignore zaallano, wooorrdd
@@ -129,7 +130,7 @@ const wackyWord = ['zaallano', 'wooorrdd', 'zzooommmmmmmm'];
 
 ### Words
 
-The words list allows you to add words that will be considered correct and will be used as suggestions.
+The *words* list allows you to add words that will be considered correct and will be used as suggestions.
 
 ```javascript
 // cSpell:words woorxs sweeetbeat
@@ -209,7 +210,6 @@ def sum_it(self, seq):
 * `Urls`<sup>1</sup> -- Matches urls
 * `HexDigits` -- Matches hex digits: `/^x?[0-1a-f]+$/i`
 * `HexValues` -- Matches common hex format like #aaa, 0xfeef, \\u0134
-* `EscapeCharacters`<sup>1</sup> -- matches special characters: '\\n', '\\t' etc.
 * `Base64`<sup>1</sup> -- matches base64 blocks of text longer than 40 characters.
 * `Email` -- matches most email addresses.
 
@@ -222,6 +222,82 @@ def sum_it(self, seq):
 <sup>1.</sup> These patterns are part of the default include/exclude list for every file.
 
 ## Customization
+
+*cspell*'s behavior can be controlled through a config file.  By default it looks for any of the following files:
+* `cspell.json`
+* `.cspell.json`
+* `cSpell.json`
+
+Or you can specify a path to a config file with the `--config <path>` argument on the command line.
+
+### cSpell.json
+
+#### Example _cSpell.json_ file
+```javascript
+// cSpell Settings
+{
+    // Version of the setting file.  Always 0.1
+    "version": "0.1",
+    // language - current active spelling language
+    "language": "en",
+    // words - list of words to be always considered correct
+    "words": [
+        "mkdirp",
+        "tsmerge",
+        "githubusercontent",
+        "streetsidesoftware",
+        "vsmarketplacebadge",
+        "visualstudio"
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    // For example "hte" should be "the"
+    "flagWords": [
+        "hte"
+    ]
+}
+```
+
+### cspell.json sections
+
+* `version` - currently always 0.1
+* `language` - this specifies the language local to use in choosing the general dictionary.
+   For example: `"language": "en-GB"` tells cspell to use British English instead of US English.
+* `words` - a list of words to be considered correct.
+* `flagWords` - a list of words to be allways considered incorrect
+* `ignoreWords` - a list of words to be ignored (even if they are in the flagWords).
+* `ignorePaths` - a list of globs to specify which files are to be ignored.
+
+    **Example**
+    ```json
+    "ignorePaths": ["node_modules/**"]
+    ```
+     will cause cspell to ignore anything in the `node_modules` directory.
+* `maxNumberOfProblems` - defaults to ***100*** per file.
+* `minWordLength` - defaults to ***4*** - the minimum length of a word before it is checked.
+* `allowCompoundWords` - defaults to ***false***; set to **true** to allow compound words by default.
+* `dictionaries` - list of the names of the dictionaries to use.  See [Dictionaries](#Dictionaries) below.
+* `dictionaryDefinitions` - this list defines any custom dictionaries to use.  This is how you can include other langauges like Spanish.
+
+   **Example**
+   ```javascript
+   "language": "en",
+   // Dictionaries "spanish", "ruby", and "corp-term" will always be checked.
+   // Including "spanish" in the list of dictionaries means both Spanish and English
+   // words will be considered correct.
+   "dictionaries": ["spanish", "ruby", "corp-terms", "fonts"],
+   // Define each dictionary.  Relative paths are relative to the config file.
+   "dictionaryDefinitions": [
+       { "name": "spanish", "path": "./spanish-words.txt"},
+       { "name": "ruby", "path": "./ruby.txt"},
+       { "name": "company-terms", "path": "./corp-terms.txt"}
+   ],
+   ```
+* `ignoreRegExpList` - list of patterns to be ignored
+* `includeRegExpList` - *(Advanced)* limits the text checked to be only that matching the expressions in the list.
+* `patterns` - this allows you to define named patterns to be used with
+  `ignoreRegExpList` and `includeRegExpList`.
+* `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](#LanguageSettings)
 
 ## Dictionaries
 
@@ -254,6 +330,10 @@ The spell checker includes a set of default dictionaries.
 * **fonts** - long list of fonts - to assist with *css*
 * **filetypes** - list of file typescript
 * **npm** - list of top 500+ package names on npm.
+
+## LanguageSettings
+
+* todo
 
 <!---
     These are at the bottom because the VSCode Marketplace leaves a bit space at the top
