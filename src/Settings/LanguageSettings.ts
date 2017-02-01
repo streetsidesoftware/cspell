@@ -33,6 +33,9 @@ export const defaultLanguageSettings: LanguageSettings = [
     { languageId: 'css',                                 dictionaries: ['fonts', 'css'] },
     { languageId: 'less',                                dictionaries: ['fonts', 'css'] },
     { languageId: 'scss',                                dictionaries: ['fonts', 'css'] },
+    { languageId: 'map',    enabled: false },
+    { languageId: 'image',  enabled: false },
+    { languageId: 'binary', enabled: false },
 ];
 
 export function getDefaultLanguageSettings(): CSpellUserSettings {
@@ -49,9 +52,9 @@ export function calcSettingsForLanguage(languageSettings: LanguageSettings, lang
         .filter(s => s.languageId === '*' || s.languageId === languageId)
         .filter(s => !s.local || NormalizeLocal(s.local) === local || s.local === '*')
         .reduce((langSetting, setting) => {
-            const { allowCompoundWords = langSetting.allowCompoundWords } = setting;
+            const { allowCompoundWords = langSetting.allowCompoundWords, enabled } = setting;
             const dictionaries = mergeUnique(langSetting.dictionaries, setting.dictionaries);
-            return { languageId, local, allowCompoundWords, dictionaries };
+            return { languageId, local, allowCompoundWords, dictionaries, enabled };
         });
 }
 
@@ -60,9 +63,10 @@ export function calcUserSettingsForLanguage(settings: CSpellUserSettings, langua
     const {
         allowCompoundWords = settings.allowCompoundWords,
         dictionaries,
-        dictionaryDefinitions
+        dictionaryDefinitions,
+        enabled = settings.enabled,
     } = calcSettingsForLanguage(languageSettings, languageId, local);
-    return  SpellSettings.mergeSettings(settings, { allowCompoundWords, dictionaries, dictionaryDefinitions });
+    return  SpellSettings.mergeSettings(settings, { enabled, allowCompoundWords, dictionaries, dictionaryDefinitions });
 }
 
 export function calcSettingsForLanguageId(baseSettings: CSpellUserSettings, languageId: LanguageId[] | LanguageId): CSpellUserSettings {

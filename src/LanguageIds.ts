@@ -154,7 +154,9 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'xsl', extensions: ['.xsl', '.xslt'], },
     { id: 'yaml', extensions: ['.eyaml', '.eyml', '.yaml', '.yml'], },
     { id: 'latex', extensions: ['.tex'], },
-
+    { id: 'map', extensions: ['.map'], },
+    { id: 'image', extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif']},
+    { id: 'binary', extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o']},
 ];
 
 export const languageIds: string[] = languageExtensionDefinitions.map(({id}) => id);

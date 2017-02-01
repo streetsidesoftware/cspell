@@ -58,6 +58,7 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
 
 const defaultSettings: CSpellUserSettings = {
     language: 'en',
+    enabled: true,
     enabledLanguageIds: [
         'csharp', 'go', 'javascript', 'javascriptreact', 'json', 'markdown',
         'php', 'plaintext', 'python', 'text', 'typescript', 'typescriptreact',

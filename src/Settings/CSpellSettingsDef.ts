@@ -25,9 +25,6 @@ export interface CSpellUserSettings extends BaseSetting {
     // list of words to always be considered incorrect.
     flagWords?: string[];
 
-    // Enabled
-    enabled?: boolean;
-
     // Show status
     showStatus?: boolean;
 
@@ -55,6 +52,9 @@ export interface CSpellUserSettings extends BaseSetting {
 
 
 export interface BaseSetting {
+    // Enabled
+    enabled?: boolean;
+
     // True to enable compound word checking.
     allowCompoundWords?: boolean;
 

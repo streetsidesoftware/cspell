@@ -5,6 +5,55 @@ import * as path from 'path';
 describe('Validate CSpellSettingsServer', () => {
     it('tests mergeSettings', () => {
         expect(mergeSettings({}, {})).to.be.deep.equal({
+            enabled: undefined,
+            words: [],
+            userWords: [],
+            ignoreWords: [],
+            flagWords: [],
+            patterns: [],
+            enabledLanguageIds: [],
+            languageSettings: [],
+            ignoreRegExpList: [],
+            dictionaries: [],
+            dictionaryDefinitions: [],
+        });
+    });
+
+    it('tests mergeSettings', () => {
+        expect(mergeSettings({}, {enabled: true})).to.be.deep.equal({
+            enabled: true,
+            words: [],
+            userWords: [],
+            ignoreWords: [],
+            flagWords: [],
+            patterns: [],
+            enabledLanguageIds: [],
+            languageSettings: [],
+            ignoreRegExpList: [],
+            dictionaries: [],
+            dictionaryDefinitions: [],
+        });
+    });
+
+    it('tests mergeSettings', () => {
+        expect(mergeSettings({}, {enabled: false})).to.be.deep.equal({
+            enabled: false,
+            words: [],
+            userWords: [],
+            ignoreWords: [],
+            flagWords: [],
+            patterns: [],
+            enabledLanguageIds: [],
+            languageSettings: [],
+            ignoreRegExpList: [],
+            dictionaries: [],
+            dictionaryDefinitions: [],
+        });
+    });
+
+    it('tests mergeSettings', () => {
+        expect(mergeSettings({enabled: true}, {enabled: false})).to.be.deep.equal({
+            enabled: false,
             words: [],
             userWords: [],
             ignoreWords: [],

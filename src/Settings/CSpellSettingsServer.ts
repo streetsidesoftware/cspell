@@ -72,6 +72,7 @@ export function mergeSettings(left: CSpellUserSettings, ...settings: CSpellUserS
         dictionaryDefinitions: mergeList(left.dictionaryDefinitions, right.dictionaryDefinitions),
         dictionaries: mergeList(left.dictionaries, right.dictionaries),
         languageSettings: mergeList(left.languageSettings, right.languageSettings),
+        enabled: right.enabled !== undefined ? right.enabled : left.enabled,
     }), left);
 }
 
