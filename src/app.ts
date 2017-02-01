@@ -3,10 +3,27 @@
 import * as path from 'path';
 import * as program from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
-import { CSpellApplication, CSpellApplicationOptions, AppError} from './application';
+import { CSpellApplication, CSpellApplicationOptions, AppError } from './application';
+import * as App from './application';
 
 interface Options extends CSpellApplicationOptions, program.IExportedCommand {}
 // interface InitOptions extends Options {}
+
+function issueEmitter(issue: App.Issue) {
+    const {uri, row, col, text} = issue;
+    console.log(`${uri}[${row}, ${col}]: Unknown word: ${text}`);
+}
+
+function errorEmitter(message: string, error: Error) {
+    console.error(message, error);
+    return Promise.resolve();
+}
+
+function infoEmitter(message: string) {
+    console.info(message);
+}
+
+function nullEmitter(_: string) {}
 
 let showHelp = true;
 
@@ -27,8 +44,14 @@ program
     // .option('--force', 'Force the exit value to always be 0')
     .arguments('<files...>')
     .action((files: string[], options: Options) => {
+        const emitters: App.Emitters = {
+            issue: issueEmitter,
+            error: errorEmitter,
+            info: options.verbose ? infoEmitter : nullEmitter,
+            debug: options.debug ? infoEmitter : nullEmitter,
+        };
         showHelp = false;
-        const app = new CSpellApplication(files, options, console.log);
+        const app = new CSpellApplication(files, options, emitters);
         app.run().then(
             result => {
                 console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);

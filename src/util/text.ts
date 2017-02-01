@@ -5,7 +5,7 @@ import {merge} from 'tsmerge';
 import {scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import {binarySearch} from './search';
 
-// CSpell:ignore ings ning gimuy
+// CSpell:ignore ings ning gimuy tsmerge
 
 export interface TextOffset {
     text: string;
@@ -14,7 +14,7 @@ export interface TextOffset {
 
 export interface TextDocumentOffset extends TextOffset {
     uri?: string;
-    text: string;
+    doc: string;
     row: number;
     col: number;
 }
@@ -191,8 +191,8 @@ export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gim', f
     return undefined;
 }
 
-export function calculateTextDocumentOffsets(uri: string, text: string, wordOffsets: TextOffset[]): TextDocumentOffset[] {
-    const lines = [-1, ...match(/\n/g, text).map(a => a.index), text.length];
+export function calculateTextDocumentOffsets(uri: string, doc: string, wordOffsets: TextOffset[]): TextDocumentOffset[] {
+    const lines = [-1, ...match(/\n/g, doc).map(a => a.index), doc.length];
 
     function findRowCol(offset): [number, number] {
         const row = binarySearch(lines, offset);
@@ -203,7 +203,7 @@ export function calculateTextDocumentOffsets(uri: string, text: string, wordOffs
     return wordOffsets
         .map(wo => {
             const [row, col] = findRowCol(wo.offset);
-            return { ...wo, row, col, text, uri };
+            return { ...wo, row, col, doc, uri };
         });
 }
 

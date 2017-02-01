@@ -228,8 +228,25 @@ describe('Test the text matching functions', () => {
 
 
 describe('Validates offset conversions', () => {
-    it('calculateTextDocumentOffsets', () => {
+    function* getOffsets(haystack: string, needle: string) {
+        let offset = -1;
+        do {
+            offset = haystack.indexOf(needle, offset + 1);
+            if (offset > 0) {
+                yield { offset, text: needle } as Text.TextOffset;
+            } else {
+                break;
+            }
+        } while (true);
+    }
 
+    it('calculateTextDocumentOffsets', () => {
+        const offsets = [...getOffsets(sampleCode, 'const')];
+        const results = Text.calculateTextDocumentOffsets('uri', sampleCode, offsets);
+        expect(results).to.not.be.empty;
+        expect(results[0].row).to.be.equal(6);
+        expect(results[0].doc).to.be.equal(sampleCode);
+        expect(results[0].col).to.be.equal(1);
     });
 });
 
