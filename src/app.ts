@@ -15,6 +15,11 @@ function issueEmitter(issue: App.Issue) {
     console.log(`${chalk.green(uri)}[${row}, ${col}]: Unknown word: ${chalk.red(text)}`);
 }
 
+function issueEmitterWordsOnly(issue: App.Issue) {
+    const {text} = issue;
+    console.log(text);
+}
+
 function errorEmitter(message: string, error: Error) {
     console.error(chalk.red(message), error);
     return Promise.resolve();
@@ -51,7 +56,7 @@ program
     .arguments('<files...>')
     .action((files: string[], options: Options) => {
         const emitters: App.Emitters = {
-            issue: issueEmitter,
+            issue: options.wordsOnly ? issueEmitterWordsOnly : issueEmitter,
             error: errorEmitter,
             info: options.verbose ? infoEmitter : nullEmitter,
             debug: options.debug ? debugEmitter : nullEmitter,
