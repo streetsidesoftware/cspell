@@ -3,6 +3,7 @@ import * as Text from '../util/text';
 import { CSpellUserSettings } from './CSpellSettingsDef';
 import { mergeInDocSettings } from './CSpellSettingsServer';
 
+// cspell:ignore gimuy
 const regExMatchRegEx = /\/.*\/[gimuy]*/;
 const regExInFileSetting = /(?:spell-?checker|cSpell)::?\s*(.*)/gi;
 
