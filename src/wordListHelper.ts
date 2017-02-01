@@ -25,7 +25,7 @@ function logError(e: any) {
 }
 
 export function splitLine(line: string) {
-    return Text.extractWordsFromText(line).map(({word}) => word).toArray();
+    return Text.extractWordsFromText(line).map(({text}) => text).toArray();
 }
 
 export function splitCodeWords(words: string[]) {

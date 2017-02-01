@@ -48,14 +48,14 @@ describe('Validate textValidator functions', () => {
     it('tests textValidator no word compounds', () => {
         const dictCol = getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, {});
-        const errors = result.map(wo => wo.word).toArray();
+        const errors = result.map(wo => wo.text).toArray();
         expect(errors).to.deep.equal(['giraffe', 'lightbrown', 'whiteberry', 'redberry']);
     });
 
     it('tests textValidator with word compounds', () => {
         const dictCol = getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, { allowCompoundWords: true });
-        const errors = result.map(wo => wo.word).toArray();
+        const errors = result.map(wo => wo.text).toArray();
         expect(errors).to.deep.equal(['giraffe']);
     });
 
@@ -64,7 +64,7 @@ describe('Validate textValidator functions', () => {
         const dictCol = getSpellingDictionaryCollection();
         const text = ' tttt gggg xxxxxxx jjjjj xxxkxxxx xxxbxxxx \n' + sampleText;
         const result = validateText(text, dictCol, { allowCompoundWords: true });
-        const errors = result.map(wo => wo.word).toArray().sort();
+        const errors = result.map(wo => wo.text).toArray().sort();
         expect(errors).to.deep.equal(['giraffe', 'xxxbxxxx', 'xxxkxxxx']);
     });
 
@@ -72,7 +72,7 @@ describe('Validate textValidator functions', () => {
         const dictEmpty = createSpellingDictionary([]);
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictEmpty, { allowCompoundWords: true });
-        const errors = result.map(wo => wo.word).toArray();
+        const errors = result.map(wo => wo.text).toArray();
         expect(errors).to.deep.equal(['have', 'Published', 'multiple', 'Fixes', 'Problems']);
     });
 
@@ -80,7 +80,7 @@ describe('Validate textValidator functions', () => {
         const dictWords = getSpellingDictionaryCollection();
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictWords, { allowCompoundWords: true });
-        const errors = result.map(wo => wo.word).toArray().sort();
+        const errors = result.map(wo => wo.text).toArray().sort();
         expect(errors).to.deep.equal([]);
     });
 

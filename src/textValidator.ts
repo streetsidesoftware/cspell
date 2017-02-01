@@ -19,7 +19,7 @@ export interface ValidationOptions {
 }
 
 export interface WordRangeAcc {
-    word: Text.WordOffset;
+    textOffset: Text.TextOffset;
     isIncluded: boolean;
     rangePos: number;
 };
@@ -34,7 +34,7 @@ export function validateText(
     text: string,
     dict: SpellingDictionary,
     options: ValidationOptions
-): Sequence<Text.WordOffset> {
+): Sequence<Text.TextOffset> {
     const {
         maxNumberOfProblems  = defaultMaxNumberOfProblems,
         maxDuplicateProblems = defaultMaxDuplicateProblems,
@@ -59,10 +59,10 @@ export function validateText(
 
     return Text.extractWordsFromCode(text)
         // Filter out any words that are NOT in the include ranges.
-        .scan<WordRangeAcc>((acc, word) => {
+        .scan<WordRangeAcc>((acc, textOffset) => {
             let { rangePos } = acc;
-            const wordEndPos = word.offset + word.word.length;
-            const wordStartPos = word.offset;
+            const wordEndPos = textOffset.offset + textOffset.text.length;
+            const wordStartPos = textOffset.offset;
             while (includeRanges[rangePos] && includeRanges[rangePos].endPos <= wordStartPos) {
                 rangePos += 1;
             }
@@ -75,26 +75,26 @@ export function validateText(
                 const offsetEnd = Math.min(range.endPos, wordEndPos);
                 const a = offset - wordStartPos;
                 const b = offsetEnd - wordStartPos;
-                const text = word.word.slice(a, b);
-                return { rangePos, isIncluded, word: { ...word, word: text, offset } };
+                const text = textOffset.text.slice(a, b);
+                return { rangePos, isIncluded, textOffset: { ...textOffset, text, offset } };
             }
-            return { rangePos, isIncluded, word };
-        }, { word: { word: '', offset: 0 }, isIncluded: false, rangePos: 0})
+            return { rangePos, isIncluded, textOffset };
+        }, { textOffset: { text: '', offset: 0 }, isIncluded: false, rangePos: 0})
         .filter(wr => wr.isIncluded)
-        .map(wr => wr.word)
-        .map(wo => ({...wo, isFlagged: setOfFlagWords.has(wo.word) }))
-        .filter(wo => wo.isFlagged || wo.word.length >= minWordLength )
+        .map(wr => wr.textOffset)
+        .map(wo => ({...wo, isFlagged: setOfFlagWords.has(wo.text) }))
+        .filter(wo => wo.isFlagged || wo.text.length >= minWordLength )
         .map(wo => ({
             ...wo,
             isFound: isWordValid(dict, wo, text, allowCompoundWords)
         }))
         .filter(wo => wo.isFlagged || ! wo.isFound )
-        .filter(wo => !ignoreWordsSet.has(wo.word.toLowerCase()))
-        .filter(wo => !RxPat.regExHexDigits.test(wo.word))  // Filter out any hex numbers
-        .filter(wo => !RxPat.regExRepeatedChar.test(wo.word))  // Filter out any repeated characters like xxxxxxxxxx
+        .filter(wo => !ignoreWordsSet.has(wo.text.toLowerCase()))
+        .filter(wo => !RxPat.regExHexDigits.test(wo.text))  // Filter out any hex numbers
+        .filter(wo => !RxPat.regExRepeatedChar.test(wo.text))  // Filter out any repeated characters like xxxxxxxxxx
         // Remove anything that is in the ignore list.
         .filter(wo => {
-            const word = wo.word.toLowerCase();
+            const word = wo.text.toLowerCase();
             // Keep track of the number of times we have seen the same problem
             mapOfProblems.set(word, (mapOfProblems.get(word) || 0) + 1);
             // Filter out if there is too many
@@ -103,11 +103,11 @@ export function validateText(
         .take(maxNumberOfProblems);
 }
 
-export function isWordValid(dict: SpellingDictionary, wo: Text.WordOffset, text: string, allowCompounds: boolean) {
-    const firstTry = hasWordCheck(dict, wo.word, allowCompounds);
+export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, text: string, allowCompounds: boolean) {
+    const firstTry = hasWordCheck(dict, wo.text, allowCompounds);
     return firstTry
         // Drop the first letter if it is preceded by a '\'.
-        || (text[wo.offset - 1] === '\\') && hasWordCheck(dict, wo.word.slice(1), allowCompounds);
+        || (text[wo.offset - 1] === '\\') && hasWordCheck(dict, wo.text.slice(1), allowCompounds);
 }
 
 export function hasWordCheck(dict: SpellingDictionary, word: string, allowCompounds: boolean) {

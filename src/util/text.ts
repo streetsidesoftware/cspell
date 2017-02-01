@@ -2,22 +2,17 @@ import * as XRegExp from 'xregexp';
 import * as Rx from 'rxjs/Rx';
 import * as rxFrom from 'rxjs-from-iterable';
 import {merge} from 'tsmerge';
-import {genSequence, scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
+import {scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import {binarySearch} from './search';
 
 // CSpell:ignore ings ning gimuy
-
-export interface WordOffset {
-    word: string;
-    offset: number;
-}
 
 export interface TextOffset {
     text: string;
     offset: number;
 }
 
-export interface TextDocumentOffset extends WordOffset {
+export interface TextDocumentOffset extends TextOffset {
     uri?: string;
     text: string;
     row: number;
@@ -37,17 +32,15 @@ const regExAllLower = XRegExp('^\\p{Ll}+$');
 
 const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
 
-export type STW = string | TextOffset | WordOffset;
-
-export function splitCamelCaseWordWithOffsetRx(wo: WordOffset): Rx.Observable<WordOffset> {
+export function splitCamelCaseWordWithOffsetRx(wo: TextOffset): Rx.Observable<TextOffset> {
     return Rx.Observable.from(splitCamelCaseWordWithOffset(wo));
 }
 
-export function splitCamelCaseWordWithOffset(wo: WordOffset): Array<WordOffset> {
-    return splitCamelCaseWord(wo.word)
-        .map(scanMap<string, WordOffset>(
-            (last, word) => ({ word, offset: last.offset + last.word.length }),
-            { word: '', offset: wo.offset }
+export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
+    return splitCamelCaseWord(wo.text)
+        .map(scanMap<string, TextOffset>(
+            (last, text) => ({ text, offset: last.offset + last.text.length }),
+            { text: '', offset: wo.offset }
         ));
 }
 
@@ -69,20 +62,19 @@ export function match(reg: RegExp, text: string): Sequence<RegExpExecArray> {
     return sequenceFromRegExpMatch(reg, text);
 }
 
-export function matchToTextOffset(reg: RegExp, text: STW): Sequence<TextOffset> {
-    const textOffset = toTextOffset(text);
+export function matchStringToTextOffset(reg: RegExp, text: string) {
+    return matchToTextOffset(reg, { text, offset: 0 });
+}
+
+export function matchToTextOffset(reg: RegExp, text: TextOffset): Sequence<TextOffset> {
+    const textOffset = text;
     const fnOffsetMap = offsetMap(textOffset.offset);
     return match(reg, textOffset.text)
         .map(m => fnOffsetMap({ text: m[0], offset: m.index }));
 }
 
-export function matchToWordOffset(reg: RegExp, text: STW): Sequence<WordOffset> {
-    return genSequence(matchToTextOffset(reg, text))
-        .map(t => ({ word: t.text, offset: t.offset }));
-}
-
-export function extractLinesOfText(text: STW): Sequence<TextOffset> {
-    return matchToTextOffset(regExLines, text);
+export function extractLinesOfText(text: string): Sequence<TextOffset> {
+    return matchStringToTextOffset(regExLines, text);
 }
 
 export function extractLinesOfTextRx(text: string): Rx.Observable<TextOffset> {
@@ -92,7 +84,7 @@ export function extractLinesOfTextRx(text: string): Rx.Observable<TextOffset> {
 /**
  * Extract out whole words from a string of text.
  */
-export function extractWordsFromTextRx(text: string): Rx.Observable<WordOffset> {
+export function extractWordsFromTextRx(text: string): Rx.Observable<TextOffset> {
     // Comment out the correct implementation until rxjs types get fixed.
     // return Rx.Observable.from(extractWordsFromText(text));
     return rxFrom.observableFromIterable(extractWordsFromText(text));
@@ -101,24 +93,24 @@ export function extractWordsFromTextRx(text: string): Rx.Observable<WordOffset> 
 /**
  * Extract out whole words from a string of text.
  */
-export function extractWordsFromText(text: string): Sequence<WordOffset> {
+export function extractWordsFromText(text: string): Sequence<TextOffset> {
     const reg = XRegExp(regExWords);
-    return matchToWordOffset(reg, text)
+    return matchStringToTextOffset(reg, text)
         // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
         .map(wo => ({
-            word: XRegExp.replace(wo.word, regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)).trim(),
+            text: XRegExp.replace(wo.text, regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)).trim(),
             offset: wo.offset
         }))
-        .filter(wo => !!wo.word);
+        .filter(wo => !!wo.text);
 }
 
-export function extractWordsFromCodeRx(text: string): Rx.Observable<WordOffset> {
+export function extractWordsFromCodeRx(text: string): Rx.Observable<TextOffset> {
     return extractWordsFromTextRx(text)
         .concatMap(word => splitCamelCaseWordWithOffsetRx(word));
 }
 
 
-export function extractWordsFromCode(text: string): Sequence<WordOffset> {
+export function extractWordsFromCode(text: string): Sequence<TextOffset> {
     return extractWordsFromText(text)
         .concatMap(splitCamelCaseWordWithOffset);
 }
@@ -178,34 +170,6 @@ export function matchCase(example: string, word: string): string {
 }
 
 
-export function isTextOffset(x: any): x is TextOffset {
-    return typeof x === 'object' && typeof x.text === 'string' && typeof x.offset === 'number';
-}
-
-export function isWordOffset(x: any): x is WordOffset {
-    return typeof x === 'object' && typeof x.word === 'string' && typeof x.offset === 'number';
-}
-
-export function toWordOffset(text: string | WordOffset | TextOffset): WordOffset {
-    if (typeof text === 'string') {
-        return { word: text, offset: 0 };
-    }
-    if (isWordOffset(text)) {
-        return text;
-    }
-    return { word: text.text, offset: text.offset };
-}
-
-export function toTextOffset(text: string | WordOffset | TextOffset): TextOffset {
-    if (typeof text === 'string') {
-        return { text: text, offset: 0 };
-    }
-    if (isTextOffset(text)) {
-        return text;
-    }
-    return { text: text.word, offset: text.offset };
-}
-
 function offsetMap(offset: number) {
     return <T extends {offset: number}>(xo: T) => merge(xo, { offset: xo.offset + offset });
 }
@@ -227,7 +191,7 @@ export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gim', f
     return undefined;
 }
 
-export function calculateTextDocumentOffsets(uri: string, text: string, wordOffsets: WordOffset[]): TextDocumentOffset[] {
+export function calculateTextDocumentOffsets(uri: string, text: string, wordOffsets: TextOffset[]): TextDocumentOffset[] {
     const lines = [-1, ...match(/\n/g, text).map(a => a.index), text.length];
 
     function findRowCol(offset): [number, number] {

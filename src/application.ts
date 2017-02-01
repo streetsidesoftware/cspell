@@ -50,10 +50,10 @@ export class CSpellApplication {
         this.excludeGlobs      = excludes || this.excludeGlobs;
         this.excludes          = this.excludeGlobs.map(glob => minimatch.makeRe(glob));
         this.logIssue          = options.wordsOnly
-            ? (issue: Issue) => this.log(issue.word)
-            : ({uri, row, col, word}) => this.log(`${uri}[${row}, ${col}]: Unknown word: ${word}`);
+            ? (issue: Issue) => this.log(issue.text)
+            : ({uri, row, col, text}) => this.log(`${uri}[${row}, ${col}]: Unknown word: ${text}`);
         this.uniqueFilter      = options.unique
-            ? util.uniqueFilterFnGenerator((issue: Issue) => issue.word)
+            ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text)
             : () => true;
     }
 

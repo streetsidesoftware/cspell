@@ -31,12 +31,12 @@ describe('Util Text', () => {
         expect(Text.extractWordsFromText(`
             // could've, would've, couldn't've, wasn't, y'all, 'twas
         `).toArray()).to.deep.equal([
-                { word: "could've", offset: 16 },
-                { word: "would've", offset: 26 },
-                { word: "couldn't've", offset: 36 },
-                { word: "wasn't", offset: 49 },
-                { word: "y'all", offset: 57 },
-                { word: 'twas', offset: 65 },
+                { text: "could've", offset: 16 },
+                { text: "would've", offset: 26 },
+                { text: "couldn't've", offset: 36 },
+                { text: "wasn't", offset: 49 },
+                { text: "y'all", offset: 57 },
+                { text: 'twas', offset: 65 },
             ]);
     });
 
@@ -44,31 +44,31 @@ describe('Util Text', () => {
         expect(Text.extractWordsFromText(`
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
         `).toArray()).to.deep.equal([
-                { word: 'expect', offset: 13 },
-                { word: 'splitCamelCaseWord', offset: 20 },
-                { word: 'hello', offset: 40 },
-                { word: 'to', offset: 49 },
-                { word: 'deep', offset: 52 },
-                { word: 'equal', offset: 57 },
-                { word: 'hello', offset: 65 },
+                { text: 'expect', offset: 13 },
+                { text: 'splitCamelCaseWord', offset: 20 },
+                { text: 'hello', offset: 40 },
+                { text: 'to', offset: 49 },
+                { text: 'deep', offset: 52 },
+                { text: 'equal', offset: 57 },
+                { text: 'hello', offset: 65 },
             ]);
         expect(Text.extractWordsFromText(`
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
         `).toArray()).to.deep.equal([
-                { word: 'expect', offset: 13 },
-                { word: 'splitCamelCaseWord', offset: 20 },
-                { word: 'hello', offset: 40 },
-                { word: 'to', offset: 49 },
-                { word: 'deep', offset: 52 },
-                { word: 'equal', offset: 57 },
-                { word: 'hello', offset: 65 },
+                { text: 'expect', offset: 13 },
+                { text: 'splitCamelCaseWord', offset: 20 },
+                { text: 'hello', offset: 40 },
+                { text: 'to', offset: 49 },
+                { text: 'deep', offset: 52 },
+                { text: 'equal', offset: 57 },
+                { text: 'hello', offset: 65 },
             ]);
         expect(Text.extractWordsFromText(`
             expect(splitCamelCaseWord('hello'));
         `).toArray()).to.deep.equal([
-                { word: 'expect', offset: 13 },
-                { word: 'splitCamelCaseWord', offset: 20 },
-                { word: 'hello', offset: 40 },
+                { text: 'expect', offset: 13 },
+                { text: 'splitCamelCaseWord', offset: 20 },
+                { text: 'hello', offset: 40 },
             ]);
     });
 
@@ -76,39 +76,39 @@ describe('Util Text', () => {
         expect(Text.extractWordsFromCode(`
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
         `).toArray()).to.deep.equal([
-                { word: 'expect', offset: 13 },
-                { word: 'split', offset: 20 },
-                { word: 'Camel', offset: 25 },
-                { word: 'Case', offset: 30 },
-                { word: 'Word', offset: 34 },
-                { word: 'hello', offset: 40 },
-                { word: 'to', offset: 49 },
-                { word: 'deep', offset: 52 },
-                { word: 'equal', offset: 57 },
-                { word: 'hello', offset: 65 },
+                { text: 'expect', offset: 13 },
+                { text: 'split', offset: 20 },
+                { text: 'Camel', offset: 25 },
+                { text: 'Case', offset: 30 },
+                { text: 'Word', offset: 34 },
+                { text: 'hello', offset: 40 },
+                { text: 'to', offset: 49 },
+                { text: 'deep', offset: 52 },
+                { text: 'equal', offset: 57 },
+                { text: 'hello', offset: 65 },
             ]);
         expect(Text.extractWordsFromCode(`
             expect(regExp.match(first_line));
         `).toArray()).to.deep.equal([
-                { word: 'expect', offset: 13 },
-                { word: 'reg', offset: 20 },
-                { word: 'Exp', offset: 23 },
-                { word: 'match', offset: 27 },
-                { word: 'first', offset: 33 },
-                { word: 'line', offset: 39 },
+                { text: 'expect', offset: 13 },
+                { text: 'reg', offset: 20 },
+                { text: 'Exp', offset: 23 },
+                { text: 'match', offset: 27 },
+                { text: 'first', offset: 33 },
+                { text: 'line', offset: 39 },
             ]);
         expect(Text.extractWordsFromCode(`
             expect(aHELLO);
         `).toArray()).to.deep.equal([
-                { word: 'expect', offset: 13 },
-                { word: 'a', offset: 20 },
-                { word: 'HELLO', offset: 21 },
+                { text: 'expect', offset: 13 },
+                { text: 'a', offset: 20 },
+                { text: 'HELLO', offset: 21 },
             ]);
     });
 
     it('splits words like HTMLInput', () => {
         return Text.extractWordsFromCodeRx('var value = HTMLInput.value;')
-            .map(({word}) => word)
+            .map(({text}) => text)
             .toArray()
             .toPromise()
             .then(words => {
@@ -127,7 +127,7 @@ describe('Util Text', () => {
     it('tests skipping Chinese characters', () => {
         expect(Text.extractWordsFromCode(`
             <a href="http://www.ctrip.com" title="携程旅行网">携程旅行网</a>
-        `).map(wo => wo.word).toArray()).to.deep.equal(
+        `).map(wo => wo.text).toArray()).to.deep.equal(
             ['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']
             );
     });
@@ -135,7 +135,7 @@ describe('Util Text', () => {
     it('tests Greek characters', () => {
         expect(Text.extractWordsFromCode(`
             Γ γ	gamma, γάμμα
-        `).map(wo => wo.word).toArray()).to.deep.equal(
+        `).map(wo => wo.text).toArray()).to.deep.equal(
             ['Γ', 'γ', 'gamma', 'γάμμα']
             );
     });
