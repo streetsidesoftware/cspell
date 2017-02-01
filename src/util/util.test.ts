@@ -14,4 +14,10 @@ describe('Validate util', () => {
         const uniqFilter = util.uniqueFilterFnGenerator((w: Word) => w.word);
         expect(values.filter(uniqFilter)).to.be.deep.equal([values[0], values[1]]);
     });
+
+    it('tests unique', () => {
+        expect(util.unique([])).to.be.deep.equal([]);
+        expect(util.unique([4, 3, 2, 1])).to.be.deep.equal([4, 3, 2, 1]);
+        expect(util.unique([4, 4, 3, 2, 3, 1, 2])).to.be.deep.equal([4, 3, 2, 1]);
+    });
 });

@@ -11,3 +11,7 @@ export function uniqueFilterFnGenerator<T>(extractFn?: (v: T) => T): (v: T) => b
         return ret;
     };
 }
+
+export function unique<T>(src: T[]): T[] {
+    return [...(new Set(src))];
+}
