@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.2.1
+- Fix an issue with Spelling Issue reporting.
+- Make sure ignorePaths are included in the exclusions.
+
 ## 1.1.0
 - Load time speed improvement
 - Code refactor along lines of responsibility.
