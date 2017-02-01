@@ -72,7 +72,7 @@ const defaultSettings: CSpellUserSettings = {
     allowCompoundWords: false,
     patterns: defaultRegExpPatterns,
     ignoreRegExpList: defaultRegExpExcludeList,
-    languageSettings: LanguageSettings.defaultLanguageSettings,
+    languageSettings: LanguageSettings.getDefaultLanguageSettings().languageSettings,
     dictionaryDefinitions: defaultDictionaryDefs,
 };
 
