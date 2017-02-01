@@ -59,7 +59,7 @@ export class CSpellApplication {
     readonly debug: (message?: any, ...args: any[]) => void;
     readonly logIssue: (issue: Issue) => void;
     readonly uniqueFilter: (issue: Issue) => boolean;
-    private configGlob = 'cspell.json';
+    private configGlob = '{cspell.json,.cspell.json}';
     private configGlobOptions: minimatch.IOptions = { nocase: true };
     private static defaultExcludeGlobs = [
         'node_modules/**'
@@ -88,7 +88,7 @@ export class CSpellApplication {
 
         const configRx = globRx(this.configGlob, this.configGlobOptions)
             .map(util.unique)
-            .do(configFiles => this.info(`Config Files Found:\n    ${configFiles.join('')}\n`))
+            .do(configFiles => this.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`))
             .map(filenames => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)}))
             .share()
             ;
