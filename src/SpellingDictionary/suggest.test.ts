@@ -34,6 +34,7 @@ describe('test suggestions', () => {
 
     const trie = wordListToTrie(words);
 
+    // cSpell:ignore aple
     it('tests matches aple', () => {
         const results = suggest(trie, 'aple');
         const suggestions = results.map(({word}) => word);
@@ -43,6 +44,7 @@ describe('test suggestions', () => {
         expect(suggestions).to.not.contain('banana');
     });
 
+    // cSpell:ignore approch
     it('tests matches approch', () => {
         const results = suggest(trie, 'approch');
         const suggestions = results.map(({word}) => word);
@@ -61,6 +63,7 @@ describe('test suggestions', () => {
     });
 });
 
+// cspell:ignore hte
 describe('matching hte', () => {
     const words = [
         'ate', 'hoe', 'hot', 'the', 'how', 'toe'
@@ -79,6 +82,7 @@ describe('test for duplicate suggestions', () => {
         'apple', 'ape', 'able', 'apples', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
     ];
 
+    // cSpell:ignore beaet beeeet
     it('tests ', () => {
         const word = 'beaet';
         const expectWord = 'beeeet';
@@ -92,6 +96,7 @@ describe('test for duplicate suggestions', () => {
     });
 });
 
+// cspell:ignore applauda
 describe('Validate that suggestion reduction', () => {
     it('tests the case where there are more suggestions that wanted', () => {
         const trie = wordListToTrie(wordsApp);
