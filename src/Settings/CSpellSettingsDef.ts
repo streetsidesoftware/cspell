@@ -37,6 +37,9 @@ export interface CSpellUserSettings extends BaseSetting {
     // The maximum number of problems to report in a file.
     maxNumberOfProblems?: number;
 
+    // The maximum number of times the same word can be flagged as an error in a file.
+    maxDuplicateProblems?: number;
+
     // Words to add to dictionary -- should only be in the user config file.
     userWords?: string[];
 

@@ -1,5 +1,11 @@
 # Release Notes
 
+## 1.3.0
+- Add color output
+- Fixed the way excludes are handled
+- Fixed and issue with the cspell.json loading
+- updated rxjs to 5.1.0
+
 ## 1.2.1
 - Fix an issue with Spelling Issue reporting.
 - Make sure ignorePaths are included in the exclusions.

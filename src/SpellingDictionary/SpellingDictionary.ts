@@ -1,7 +1,8 @@
 import { suggest, SuggestionResult } from './suggest';
 import { Trie, createTrie, addWordToTrie } from './Trie';
-import { genSequence, Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import * as Rx from 'rxjs/Rx';
+import { IterableLike } from '../util/IterableLike';
 
 export interface SpellingDictionary {
     has(word: string): boolean;
@@ -38,7 +39,7 @@ function buildTrieFromSet(words: Set<string>): Trie {
         .reduce((trie, word) => addWordToTrie(trie, word), createTrie());
 }
 
-export function createSpellingDictionary(wordList: string[] | Sequence<string>): SpellingDictionary {
+export function createSpellingDictionary(wordList: string[] | IterableLike<string>): SpellingDictionary {
     const words = new Set(genSequence(wordList).map(word => word.toLowerCase().trim()));
     return new SpellingDictionaryInstance(words);
 }

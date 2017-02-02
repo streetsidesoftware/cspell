@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { wordSplitter, validateText, hasWordCheck } from './textValidator';
 import { SpellingDictionaryCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
+import { FreqCounter } from './util/FreqCounter';
 
 // cSpell:enableCompoundWords
 
@@ -84,6 +85,17 @@ describe('Validate textValidator functions', () => {
         expect(errors).to.deep.equal([]);
     });
 
+    it('tests maxDuplicateProblems', () => {
+        const dict = createSpellingDictionary([]);
+        const text = sampleText;
+        const result = validateText(text, dict, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 });
+        const freq = FreqCounter.create(result.map(t => t.text));
+        expect(freq.total).to.be.equal(freq.counters.size);
+        const words = freq.counters.keys();
+        const dict2 = createSpellingDictionary(words);
+        const result2 = [...validateText(text, dict2, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 })];
+        expect(result2.length).to.be.equal(0);
+    });
 });
 
 function getSpellingDictionaryCollection() {
