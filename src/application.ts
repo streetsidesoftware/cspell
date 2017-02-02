@@ -129,21 +129,21 @@ export class CSpellApplication {
         const r = Rx.Observable.combineLatest(
                 configRx,
                 filesRx,
-                (config, fileInfo) => ({ config, text: fileInfo.text, filename: fileInfo.filename })
+                (configInfo, fileInfo) => ({ configInfo, text: fileInfo.text, filename: fileInfo.filename })
             )
-            .map(({config, filename, text}) => {
+            .map(({configInfo, filename, text}) => {
                 const ext = path.extname(filename);
                 const languageIds = cspell.getLanguagesForExt(ext);
                 this.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
-                const settings = cspell.mergeSettings(cspell.getDefaultSettings(), config);
-                const fileSettings = cspell.constructSettingsForText(settings, text, languageIds);
-                return {config: fileSettings, filename, text}
+                const settings = cspell.mergeSettings(cspell.getDefaultSettings(), configInfo.config);
+                const config = cspell.constructSettingsForText(settings, text, languageIds);
+                return {configInfo: {...configInfo, config}, filename, text};
             })
-            .filter(info => info.config.enabled !== false)
+            .filter(info => info.configInfo.config.enabled !== false)
             .do(() => status.files += 1)
-            .flatMap(({config, filename, text}) => {
-                this.debug(commentJson.stringify(config, undefined, 2));
-                return cspell.validateText(text, config)
+            .flatMap(({configInfo, filename, text}) => {
+                this.debug(commentJson.stringify(configInfo, undefined, 2));
+                return cspell.validateText(text, configInfo.config)
                     .then(wordOffsets => {
                         return {
                             filename,
