@@ -89,10 +89,6 @@ export function getIgnoreWordsFromDocument(text: string): string[] {
     return ignoreWords;
 }
 
-export function getIgnoreWordsSetFromDocument(text: string) {
-    return new Set(getIgnoreWordsFromDocument(text).map(a => a.toLowerCase()));
-}
-
 export function getIgnoreRegExpFromDocument(text: string): (string|RegExp)[] {
     const { ignoreRegExpList = [] } = getInDocumentSettings(text);
     return ignoreRegExpList;

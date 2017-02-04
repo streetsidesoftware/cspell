@@ -1,7 +1,6 @@
-import { SpellingDictionary, createSpellingDictionaryRx } from './SpellingDictionary';
+import { SpellingDictionary } from './SpellingDictionary';
 import { genSequence } from 'gensequence';
 import { SuggestionResult } from './suggest';
-import * as Rx from 'rxjs/Rx';
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
     constructor(readonly dictionaries: SpellingDictionary[]) {
@@ -46,11 +45,6 @@ export function makeSuggestions(dicts: SpellingDictionary[], word: string, numSu
         .sort((a, b) => a.cost - b.cost);
 
     return allSuggestions.slice(0, numSuggestions);
-}
-
-export function createCollectionRx(wordLists: Rx.Observable<string>[]): Promise<SpellingDictionaryCollection> {
-    const dictionaries = wordLists.map(words => createSpellingDictionaryRx(words));
-    return createCollectionP(dictionaries);
 }
 
 export function createCollectionP(dicts: Promise<SpellingDictionary>[]): Promise<SpellingDictionaryCollection> {

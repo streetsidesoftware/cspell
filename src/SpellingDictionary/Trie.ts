@@ -1,5 +1,6 @@
-export class TrieMap extends Map<string, TrieNode> {};
 import * as Rx from 'rxjs/Rx';
+
+export class TrieMap extends Map<string, TrieNode> {};
 
 /**
  * See: https://en.wikipedia.org/wiki/Trie

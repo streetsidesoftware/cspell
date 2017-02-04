@@ -57,13 +57,13 @@ export function suggestA(
             let min = matrix[d][0];
             for (let i = 1; i <= mx; ++i) {
                 curLetter = x[i];
-                subCost =
-                    (w === curLetter)
-                    ? 0 : (curLetter === lastSugLetter ? (w === lastLetter ? psc : bc) : bc);
+                subCost = (w === curLetter)
+                    ? 0
+                    : (curLetter === lastSugLetter ? (w === lastLetter ? psc : bc) : bc);
                 matrix[d][i] = Math.min(
                     matrix[d - 1][i - 1] + subCost, // substitute
-                    matrix[d - 1][i] + bc,    // insert
-                    matrix[d][i - 1] + bc     // delete
+                    matrix[d - 1][i    ] + bc,      // insert
+                    matrix[d    ][i - 1] + bc       // delete
                 );
                 min = Math.min(min, matrix[d][i]);
                 lastLetter = curLetter;
