@@ -9,7 +9,7 @@ Cspell is a command line tool and library for spell checking code.
 
 ## Features
 * Spell Checks Code -- Able to spell check code by parsing it into words before checking against the dictionaries.
-  * Support CamelCase, snake_case, and compoundwords naming styles.
+  * Supports CamelCase, snake_case, and compoundwords naming styles.
 * Self contained -- does not depend upon OS libraries like Hunspell or aspell.  Nor does it depend upon online services.
 * Fast -- checks 1000's of lines of code in seconds.
 * Programming Language Specific Dictionaries -- Has dedicated support for:
