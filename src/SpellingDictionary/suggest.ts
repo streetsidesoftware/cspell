@@ -38,11 +38,11 @@ export function suggestA(
         matrix[0][i] = i * baseCost;
     }
 
-    function processTrie(trie: TrieNode, d: number) {
+    function processTrie(node: TrieNode, d: number) {
         const bc = baseCost;
         const psc = postSwapCost;
         let subCost, curLetter;
-        const { w, c } = trie;
+        const { w, c } = node;
         if (! w) {
             const cost = matrix[d - 1][mx];
             if (cost <= costLimit) {
