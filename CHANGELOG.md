@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.3.1
+- Code coverage improvements
+- Update the README
+
 ## 1.3.0
 - Add color output
 - Fixed the way excludes are handled
