@@ -13,7 +13,7 @@ import {mkdirp} from 'fs-promise';
 import * as Rx from 'rxjs/Rx';
 import * as path from 'path';
 
-const packageInfo = require(findup('package.json'));
+const packageInfo = require('../package.json');
 const version = packageInfo['version'];
 commander
     .version(version);
