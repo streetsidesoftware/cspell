@@ -39,10 +39,12 @@ export class HunspellReader {
     }
 
 
-    readWordsEx(): Rx.Observable<AffWord> {
+    readWordsRx(): Rx.Observable<AffWord> {
         const r = Rx.Observable.fromPromise(this.aff)
-            .concatMap(aff => this.readDicEntries(aff)
-                .concatMap(dicWord => aff.applyRulesToDicEntry(dicWord))
+            .flatMap(aff => this.readDicEntries(aff)
+                // .do(dicWord => console.log(dicWord))
+                // .take(100)
+                .flatMap(dicWord => aff.applyRulesToDicEntry(dicWord))
             );
         return r;
     }
@@ -52,7 +54,7 @@ export class HunspellReader {
      *
      */
     readWords(): Rx.Observable<string> {
-        return this.readWordsEx()
+        return this.readWordsRx()
             .map(affWord => affWord.word);
     }
 }

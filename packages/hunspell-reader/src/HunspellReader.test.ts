@@ -20,7 +20,7 @@ describe('HunspellReader En', function() {
     });
 
     it('reads words with info', () => {
-        const words = hunspellReader.readWordsEx();
+        const words = hunspellReader.readWordsRx();
         expect(words).to.be.not.empty;
         return words
             .skip(10000)
@@ -59,7 +59,7 @@ describe('HunspellReader Nl', function() {
     });
 */
     it('reads words with info', () => {
-        const words = hunspellReader.readWordsEx();
+        const words = hunspellReader.readWordsRx();
         expect(words).to.be.not.empty;
         return words
             .skip(200000)

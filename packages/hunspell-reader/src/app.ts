@@ -111,7 +111,7 @@ function sortWordList(words: Rx.Observable<string>, ignoreCase: boolean) {
         : compStr;
     return words
         .toArray()
-        .concatMap(a => a.sort(fnComp));
+        .flatMap(a => a.sort(fnComp));
 }
 
 function makeUnique(words: Rx.Observable<string>, ignoreCase: boolean) {
