@@ -25,6 +25,7 @@ commander
     .option('-u, --unique', 'make sure the words are unique.')
     .option('-i, --ignore_case', 'used with --unique and --sort')
     .option('-l, --lower_case', 'output in lower case')
+    .option('-T, --no-transform', 'Do not apply the prefix and suffix transforms.  Root words only.')
     .description('Output all the words in the <hunspell.dic> file.')
     .action((hunspellDicFilename, options) => {
         const {
@@ -33,6 +34,7 @@ commander
             ignore_case: ignoreCase = false,
             output: outputFile,
             lower_case: lowerCase = false,
+            transform = true,
         } = options;
         notify('Write words', !!outputFile);
         notify(`Sort: ${yesNo(sort)}`, !!outputFile);
@@ -46,8 +48,9 @@ commander
         notify(`Aff file: ${affFile}`, !!outputFile);
         notify(`Generating Words`, !!outputFile);
         const reader = new HunspellReader(affFile, dicFile);
+        const wordReader = transform ? () => reader.readWords() : () => reader.readRootWords();
 
-        const wordsRx = Rx.Observable.of(reader.readWords().map(a => a.trim()).filter(a => !!a))
+        const wordsRx = Rx.Observable.of(wordReader().map(a => a.trim()).filter(a => !!a))
             .map(wordsRx => unique ? makeUnique(wordsRx, ignoreCase) : wordsRx)
             .map(wordsRx => sort ? sortWordList(wordsRx, ignoreCase) : wordsRx)
             .map(wordsRx => lowerCase ? wordsRx.map(a => a.toLowerCase()) : wordsRx)

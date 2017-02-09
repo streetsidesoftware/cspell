@@ -56,4 +56,12 @@ export class HunspellReader {
         return this.readWordsRx()
             .map(affWord => affWord.word);
     }
+
+    /**
+     * Reads the words in the dictionary without applying the transformation rules.
+     */
+    readRootWords(): Rx.Observable<string> {
+        return this.readDicWords()
+            .map(w => w.word);
+    }
 }
