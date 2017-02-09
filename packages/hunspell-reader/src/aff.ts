@@ -111,14 +111,14 @@ export class Aff {
     }
 
     /**
-     * @description Takes a line from a hunspell.dic file and applies the rules found in the aff file.
+     * Takes a line from a hunspell.dic file and applies the rules found in the aff file.
      * @param {string} line - the line from the .dic file.
      */
     applyRulesToDicEntry(line: string): AffWord[] {
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
         return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: ''})
-            .map(affWord => merge(affWord, { word: this._oConv.convert(affWord.word) }));
+            .map(affWord => ({...affWord, word: this._oConv.convert(affWord.word) }));
     }
 
     /**

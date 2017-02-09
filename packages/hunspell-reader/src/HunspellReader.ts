@@ -50,8 +50,7 @@ export class HunspellReader {
     }
 
     /**
-     * @description Reads all the word combinations out of a hunspell dictionary.
-     *
+     * Reads all the word combinations out of a hunspell dictionary.
      */
     readWords(): Rx.Observable<string> {
         return this.readWordsRx()
