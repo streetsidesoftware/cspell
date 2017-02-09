@@ -8,7 +8,7 @@ describe('parse an aff file', () => {
     it ('reads an aff file', () => {
         return aff.parseAffFile(filename)
             .then(result => {
-                console.log(util.inspect(result, { showHidden: true, depth: 5, colors: true }));
+                // console.log(util.inspect(result, { showHidden: true, depth: 5, colors: true }));
             },
             error => {
                 expect(error, 'Error').to.be.empty;

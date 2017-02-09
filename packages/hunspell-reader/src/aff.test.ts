@@ -103,5 +103,5 @@ function logApplyRulesResults(affWords: AffWord[]) {
 }
 
 function logApplyRulesResult(affWord: AffWord) {
-    console.log(affWordToColoredString(affWord));
+    // console.log(affWordToColoredString(affWord));
 }
