@@ -36,6 +36,7 @@ Outputs:
     -u, --unique         make sure the words are unique.
     -i, --ignore_case    used with --unique and --sort
     -l, --lower_case     output in lower case
+    -T, --no-transform   Do not apply the prefix and suffix transforms.  Root words only.
 
 ```
 
