@@ -1,7 +1,7 @@
-import * as _ from 'lodash';
-import {merge} from 'tsmerge';
 import * as util from 'util';
 import * as Conv from './converter';
+import {genSequence as gs, Sequence} from 'gensequence';
+import * as GS from 'gensequence';
 
 // cSpell:enableCompoundWords
 
@@ -12,6 +12,8 @@ export interface Fx {
     id: string;
     combinable: boolean;
     substitutions: Substitutions[];
+    count?: string; // number of line items for this rule.
+    extra?: string[]; // extra items on the line.
 }
 
 export interface Substitutions {
@@ -20,7 +22,7 @@ export interface Substitutions {
     attach: string;
     attachRules?: string;
     replace: RegExp;
-    extra: string[];
+    extra?: string[];
 }
 
 export interface Rep {
@@ -33,7 +35,21 @@ export interface Conv {
     to: string;
 }
 
-export interface AffInfo {
+export interface AffTransformFlags {
+    KEEPCASE?: string;
+    WARN?: string;
+    NEEDAFFIX?: string;
+    FORCEUCASE?: string;
+    FORBIDDENWORD?: string;
+    NOSUGGEST?: string;
+    COMPOUNDBEGIN?: string;
+    COMPOUNDMIDDLE?: string;
+    COMPOUNDEND?: string;
+    COMPOUNDPERMITFLAG?: string;
+    ONLYINCOMPOUND?: string;
+};
+
+export interface AffInfo extends AffTransformFlags {
     SET?: string;
     TRY?: string;
     KEY?: string;
@@ -42,14 +58,8 @@ export interface AffInfo {
     MAXCPDSUGS?: number;
     ONLYMAXDIFF?: boolean;
     MAXDIFF?: number;
-    KEEPCASE?: string;
-    WARN?: string;
-    NEEDAFFIX?: string;
-    FORCEUCASE?: string;
     BREAK?: number;
     FLAG?: string;  // 'long' | 'num'
-    FORBIDDENWORD?: string;
-    NOSUGGEST?: string;
     MAP?: string[];
     ICONV?: Conv[];
     OCONV?: Conv[];
@@ -58,16 +68,11 @@ export interface AffInfo {
     COMPOUNDMIN?: number;
     COMPOUNDRULE?: string[];
     CHECKCOMPOUNDCASE?: boolean;
-    COMPOUNDBEGIN?: string;
-    COMPOUNDMIDDLE?: string;
-    COMPOUNDEND?: string;
-    COMPOUNDPERMITFLAG?: string;
-    ONLYINCOMPOUND?: string;
     CHECKCOMPOUNDDUP?: boolean;
     CHECKCOMPOUNDREP?: boolean;
     CHECKCOMPOUNDPATTERN?: string[][];
-    PFX?: Dictionary<Fx>;
-    SFX?: Dictionary<Fx>;
+    PFX?: Map<string, Fx>;
+    SFX?: Map<string, Fx>;
 }
 
 export interface Rule {
@@ -100,7 +105,7 @@ export interface AffWord {
 }
 
 export class Aff {
-    protected rules: Dictionary<Rule>;
+    protected rules: Map<string, Rule>;
     protected _oConv: Conv.Converter;
     protected _iConv: Conv.Converter;
 
@@ -131,14 +136,14 @@ export class Aff {
             .filter(rule => !!rule.flags)
             .reduce((acc, rule) => ({
                 rulesApplied: [acc.rulesApplied, rule.id].join(' '),
-                flags: merge(acc.flags, rule.flags)
+                flags: {...acc.flags, ...rule.flags},
             }), { rulesApplied: affWord.rulesApplied, flags: affWord.flags});
-        const rules = allRules.filter(rule => !rule.flags);
-        const affixRules = allRules.map(rule => rule.sfx || rule.pfx).filter(a => !!a);
+        const rules = allRules.filter(rule => !rule.flags).map(rule => rule.id).join('');
+        const affixRules = allRules.map(rule => rule.sfx! || rule.pfx!).filter(a => !!a);
         const wordWithFlags = {word, flags, rulesApplied, rules: ''};
         return [
             wordWithFlags,
-            ...this.applyAffixesToWord(affixRules, merge(wordWithFlags, { rules }))
+            ...this.applyAffixesToWord(affixRules, { ...wordWithFlags, rules })
         ]
         .filter(({flags}) => !flags.isNeedAffix)
         .map(affWord => logAffWord(affWord, 'applyRulesToWord'))
@@ -164,7 +169,7 @@ export class Aff {
         const combineRules = (affix.type === 'PFX' && affix.combinable && !!combinableSfx)
             ? combinableSfx
             : '';
-        const flags = merge(affWord.flags, { isNeedAffix: false });
+        const flags = { ...affWord.flags, isNeedAffix: false };
         return affix.substitutions
             .filter(sub => !!word.match(sub.match) && !!word.match(sub.replace))
             .map<AffWord>(sub => ({
@@ -202,16 +207,16 @@ export class Aff {
     }
 }
 
-export function processRules(affInfo: AffInfo): Dictionary<Rule> {
-    const sfxRules = _(affInfo.SFX).map((sfx: Fx) => ({ id: sfx.id, type: 'sfx', sfx }))
-        .reduce<Dictionary<Rule>>((acc, rule) => { acc[rule.id] = rule; return acc; }, Object.create(null));
-    const pfxRules = _(affInfo.PFX).map((pfx: Fx) => ({ id: pfx.id, type: 'pfx', pfx }))
-        .reduce<Dictionary<Rule>>((acc, rule) => { acc[rule.id] = rule; return acc; }, Object.create(null));
-    const flagRules = _(affInfo).map((value, key) => ({value, key}))
-        .filter(({key}) => !!affFlag[key])
-        .map(({value, key}) => ({ id: value, type: 'flag', flags: affFlag[key] }))
-        .reduce<Dictionary<Rule>>((acc, rule) => { acc[rule.id] = rule; return acc; }, Object.create(null));
-    return merge(sfxRules, pfxRules, flagRules);
+export function processRules(affInfo: AffInfo): Map<string, Rule> {
+    const sfxRules: Sequence<Rule> = gs(affInfo.SFX || []).map(([, sfx]) => sfx).map(sfx => ({ id: sfx.id, type: 'sfx', sfx }));
+    const pfxRules: Sequence<Rule> = gs(affInfo.PFX || []).map(([, pfx]) => pfx).map(pfx => ({ id: pfx.id, type: 'pfx', pfx }));
+    const flagRules: Sequence<Rule> = GS.sequenceFromObject(affInfo as AffTransformFlags)
+        .filter(([key, value]) => !!affFlag[key] && !!value)
+        .map(([key, value]) => ({ id: value!, type: 'flag', flags: affFlag[key]}));
+
+    const rules = sfxRules.concat(pfxRules).concat(flagRules)
+        .reduce<Map<string, Rule>>((acc, rule) => { acc[rule.id] = rule; return acc; }, new Map<string, Rule>());
+    return rules;
 }
 
 const affFlag: Dictionary<AffWordFlags> = {
@@ -221,7 +226,6 @@ const affFlag: Dictionary<AffWordFlags> = {
     FORBIDDENWORD     : { isForbiddenWord        : true },
     NOSUGGEST         : { isNoSuggest            : true },
     NEEDAFFIX         : { isNeedAffix            : true },
-    CHECKCOMPOUNDCASE : {},
     COMPOUNDBEGIN     : { canBeCompoundBegin     : true },
     COMPOUNDMIDDLE    : { canBeCompoundMiddle    : true },
     COMPOUNDEND       : { canBeCompoundEnd       : true },
@@ -253,18 +257,16 @@ export function logAffWord(affWord: AffWord, message: string) {
 
 export function affWordToColoredString(affWord: AffWord) {
     return util.inspect(
-        merge(affWord, { flags: flagsToString(affWord.flags)}),
+        {...affWord, flags: flagsToString(affWord.flags)},
         { showHidden: false, depth: 5, colors: true }).replace(/(\s|\n|\r)+/g, ' ');
 }
 
 export function flagsToString(flags: AffWordFlags) {
-    return _(flags)
-        // pair the key/value
-        .map((v: boolean, k: string) => ({ v, k }))
-        // remove any false values
-        .filter(({v}) => v)
+    return GS.sequenceFromObject(flags)
+        .filter(([, v]) => !!v)
         // convert the key to a string
-        .map(({k}) => flagToStringMap[k])
+        .map(([k]) => flagToStringMap[k])
+        .toArray()
         .sort()
         .join('_');
 }

@@ -1,6 +1,6 @@
 
 import { lineReader } from './fileReader';
-import { AffInfo, Aff } from './aff';
+import { AffInfo, Aff, Fx } from './aff';
 import * as Rx from 'rxjs/Rx';
 
 // cSpell:enableCompoundWords
@@ -15,7 +15,7 @@ const yesRegex = /[yY]/;
 const spaceRegex = /\s+/;
 const commentRegex = /(?:^\s*#.*)|(?:\s+#.*)/;
 
-function convEntry(fieldValue, field: string, args: string[]) {
+function convEntry(fieldValue, _: string, args: string[]) {
     if (fieldValue === undefined) {
         return [];
     }
@@ -24,7 +24,7 @@ function convEntry(fieldValue, field: string, args: string[]) {
     return fieldValue;
 }
 
-function afEntry(fieldValue, field: string, args: string[]) {
+function afEntry(fieldValue, _: string, args: string[]) {
     if (fieldValue === undefined) {
         return [''];
     }
@@ -33,7 +33,7 @@ function afEntry(fieldValue, field: string, args: string[]) {
     return fieldValue;
 }
 
-function simpleTable(fieldValue, field: string, args: string[]) {
+function simpleTable(fieldValue, _: string, args: string[]) {
     if (fieldValue === undefined) {
         const [ count, ...extraValues ] = args;
         const extra = extraValues.length ? extraValues : undefined;
@@ -44,15 +44,15 @@ function simpleTable(fieldValue, field: string, args: string[]) {
     return fieldValue;
 }
 
-function tablePfxOrSfx(fieldValue, field: string, args: string[], type: string) {
+function tablePfxOrSfx(fieldValue: Map<string, Fx>, _: string, args: string[], type: string) {
     if (fieldValue === undefined) {
-        fieldValue = Object.create(null);
+        fieldValue = new Map<string, Fx>();
     }
     const [ subField, ...subValues ] = args;
-    if (fieldValue[subField] === undefined) {
+    if (! fieldValue.has(subField)) {
         const id = subField;
         const [ combinable, count, ...extra ] = subValues;
-        fieldValue[subField] = { id, type, combinable: !!combinable.match(yesRegex), count, extra, substitutions: [] };
+        fieldValue.set(subField, { id, type, combinable: !!combinable.match(yesRegex), count, extra, substitutions: [] });
         return fieldValue;
     }
     const [removeValue, attach, ruleAsString = '.', ...extraValues] = subValues;
@@ -63,7 +63,7 @@ function tablePfxOrSfx(fieldValue, field: string, args: string[], type: string) 
     const fixUp = fixRegex[type];
     const match = new RegExp(ruleAsString.replace(fixUp.m, fixUp.r));
     const replace = new RegExp(remove.replace(fixUp.m, fixUp.r));
-    fieldValue[subField].substitutions.push({ match, remove, replace, attach: insertText, attachRules, extra });
+    fieldValue.get(subField)!.substitutions.push({ match, remove, replace, attach: insertText, attachRules, extra });
 
     return fieldValue;
 }
@@ -76,17 +76,17 @@ function asSfx(fieldValue, field: string, args: string[]) {
     return tablePfxOrSfx(fieldValue, field, args, 'SFX');
 }
 
-function asString(fieldValue, field: string, args: string[]) {
+function asString(_fieldValue, _field: string, args: string[]) {
     return args[0];
 }
 
-function asBoolean(fieldValue, field: string, args: string[]) {
+function asBoolean(_fieldValue, _field: string, args: string[]) {
     const [ value = '1' ] = args;
     const iValue = parseInt(value);
     return !!iValue;
 }
 
-function asNumber(fieldValue, field: string, args: string[]) {
+function asNumber(_fieldValue, _field: string, args: string[]) {
     const [ value = '0' ] = args;
     return parseInt(value);
 }
@@ -139,7 +139,7 @@ export function parseAffFile(filename: string, encoding: string = 'UTF-8') {
         });
 }
 
-export function parseAff(lines: Rx.Observable<string>, encoding: string = 'UTF-8') {
+export function parseAff(lines: Rx.Observable<string>, _encoding: string = 'UTF-8') {
     return lines
         .map(line => line.replace(commentRegex, ''))
         .filter(line => line.trim() !== '')

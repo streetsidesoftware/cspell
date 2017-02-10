@@ -87,7 +87,7 @@ export interface Pattern {
     value: string;
     count: number;
     savings: number;
-    ratio: number;
+    ratio?: number;
 }
 
 const patternSymbolCost = 2;
@@ -134,7 +134,7 @@ function topCandidatePatterns(candidates: Pattern[]): Pattern[] {
 
     let sortedCandidates = candidates.filter(a => a.savings > 0).sort(compare);
     while (topCandidates.length < numTopCandidates && candidates.length > 0) {
-        const top = sortedCandidates.pop();
+        const top = sortedCandidates.pop()!;
         topCandidates.push(top);
 
         sortedCandidates = sortedCandidates

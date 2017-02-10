@@ -3,7 +3,6 @@
 // cSpell:ignore findup
 import * as commander from 'commander';
 import { HunspellReader } from './HunspellReader';
-const findup = require('findup-sync');
 import * as fs from 'fs';
 import {lineReader} from './fileReader';
 import {trieCompactSortedWordList} from './trieCompact';
@@ -47,10 +46,14 @@ commander
         notify(`Dic file: ${dicFile}`, !!outputFile);
         notify(`Aff file: ${affFile}`, !!outputFile);
         notify(`Generating Words`, !!outputFile);
-        const reader = new HunspellReader(affFile, dicFile);
-        const wordReader = transform ? () => reader.readWords() : () => reader.readRootWords();
+        const pReader = HunspellReader.createFromFiles(affFile, dicFile);
+        const pWordReader = transform ? pReader.then(reader => reader.readWords()) : pReader.then(reader => reader.readRootWords());
 
-        const wordsRx = Rx.Observable.of(wordReader().map(a => a.trim()).filter(a => !!a))
+        const wordsRx = Rx.Observable.from(pWordReader)
+            .map(words => words
+                .map(a => a.trim())
+                .filter(a => !!a)
+            )
             .map(wordsRx => unique ? makeUnique(wordsRx, ignoreCase) : wordsRx)
             .map(wordsRx => sort ? sortWordList(wordsRx, ignoreCase) : wordsRx)
             .map(wordsRx => lowerCase ? wordsRx.map(a => a.toLowerCase()) : wordsRx)
@@ -79,18 +82,17 @@ commander
 commander
     .command('test_pattern_modeler <sorted_word_list_file>')
     .description('This is an experimental command used for experimenting with patterns in the text.')
-    .action((sortedWordListFilename, options) => {
+    .action((sortedWordListFilename, _options) => {
         const lines = lineReader(sortedWordListFilename);
         const compactStream = trieCompactSortedWordList(lines);
         let x: any;
         patternModeler(compactStream).subscribe(
             node => {
                 x = node;
-                const stopHere = node;
             },
             () => {},
             () => {
-                const stopHere = x;
+                x = x;
             }
         );
     });
