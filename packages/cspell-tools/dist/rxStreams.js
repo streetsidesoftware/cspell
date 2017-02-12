@@ -2,8 +2,12 @@
 const Rx = require("rxjs/Rx");
 const stream = require("stream");
 const iconv = require("iconv-lite");
-function observableToStream(data) {
-    const sourceStream = new stream.PassThrough();
+/**
+ * This is a simple implementation of converting an Observable into a stream.
+ * It does NOT correctly handle situations where the stream buffer is full.
+ */
+function observableToStream(data, options) {
+    const sourceStream = new stream.PassThrough(options);
     data.subscribe(data => sourceStream.write(data, 'UTF-8'), error => sourceStream.emit('error', error), () => sourceStream.end());
     return sourceStream;
 }

@@ -2,6 +2,10 @@ import * as Rx from 'rxjs/Rx';
 import * as stream from 'stream';
 import * as iconv from 'iconv-lite';
 
+/**
+ * This is a simple implementation of converting an Observable into a stream.
+ * It does NOT correctly handle situations where the stream buffer is full.
+ */
 export function observableToStream<T>(data: Rx.Observable<T>, options?: stream.TransformOptions) {
     const sourceStream = new stream.PassThrough(options);
 
