@@ -2,8 +2,8 @@ import * as Rx from 'rxjs/Rx';
 import * as stream from 'stream';
 import * as iconv from 'iconv-lite';
 
-export function observableToStream<T>(data: Rx.Observable<T>) {
-    const sourceStream = new stream.PassThrough();
+export function observableToStream<T>(data: Rx.Observable<T>, options?: stream.TransformOptions) {
+    const sourceStream = new stream.PassThrough(options);
 
     data.subscribe(
         data => sourceStream.write(data, 'UTF-8'),
