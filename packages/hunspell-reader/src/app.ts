@@ -7,10 +7,11 @@ import * as fs from 'fs';
 import {lineReader} from './fileReader';
 import {trieCompactSortedWordList} from './trieCompact';
 import {patternModeler} from './patternModeler';
-import {observableToStream} from 'cspell-tools';
+import {rxToStream} from 'rxjs-stream';
 import {mkdirp} from 'fs-promise';
 import * as Rx from 'rxjs/Rx';
 import * as path from 'path';
+// import * as monitor from './monitor';
 
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
@@ -61,7 +62,7 @@ commander
             .map(word => word + '\n');
 
         pOutputStream.then(writeStream => {
-            observableToStream(wordsRx).pipe(writeStream);
+            rxToStream(wordsRx.bufferCount(1024).map(words => words.join(''))).pipe(writeStream);
         });
     });
 
@@ -75,7 +76,7 @@ commander
         const lines = lineReader(sortedWordListFilename);
         const compactStream = trieCompactSortedWordList(lines);
         pOutputStream.then(writeStream => {
-            observableToStream(compactStream).pipe(writeStream);
+            rxToStream(compactStream).pipe(writeStream);
         });
     });
 

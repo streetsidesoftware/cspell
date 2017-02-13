@@ -21,7 +21,7 @@ describe('Basic Validation of the Reader', () => {
     });
     it('Validate Simple Words List', () => {
         return pSimpleAff.then(aff => {
-            const src = { aff, dic: wordsToStream(['place/AGJ'])};
+            const src = { aff, dic: wordsToStream(['place/AJ'])};
             const reader = new HunspellReader(src);
             return reader.readWords()
                 .toArray()
@@ -176,8 +176,15 @@ SFX G   e     ing        e
 SFX G   0     ing        [^e]
 
 SFX J Y 2
-SFX J   e     ings       e
-SFX J   0     ings       [^e]
+SFX J   e     ing/S      e
+SFX J   0     ing/S      [^e]
+
+SFX S Y 4
+SFX S   y     ies        [^aeiou]y
+SFX S   0     s          [aeiou]y
+SFX S   0     es         [sxzh]
+SFX S   0     s          [^sxzhy]
+
 `;
 
     return AffReader.parseAff(Rx.Observable.from(sampleAff.split('\n')))
@@ -186,9 +193,10 @@ SFX J   0     ings       [^e]
 
 
 const simpleWords = `
+2
 happy
-ring/AUGJ
+ring/AUJ
 `;
 
-// cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings AUGJ
+// cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings AUGJ aeiou sxzh sxzhy
 // cspell:enableCompoundWords

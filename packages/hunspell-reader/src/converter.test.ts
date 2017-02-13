@@ -51,7 +51,7 @@ describe('Test Converter', () => {
         expect(conv.convert('’hello’')).to.be.equal("'good-bye'");
     });
 
-    it('tests with regex characters in the from (regex is not supported as a pattern)', () => {
+    it('tests with regex characters in the "from" (regex is not supported as a pattern)', () => {
         const conv = new Conv.Converter([
             { from: '^h', to: 'g' },
             { from: '^g', to: 'f' },

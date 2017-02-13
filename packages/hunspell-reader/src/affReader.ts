@@ -1,6 +1,6 @@
 
 import { lineReader } from './fileReader';
-import { AffInfo, Aff, Fx } from './aff';
+import { AffInfo, Aff, Fx, SubstitutionSet } from './aff';
 import * as Rx from 'rxjs/Rx';
 
 // cSpell:enableCompoundWords
@@ -52,18 +52,34 @@ function tablePfxOrSfx(fieldValue: Map<string, Fx>, _: string, args: string[], t
     if (! fieldValue.has(subField)) {
         const id = subField;
         const [ combinable, count, ...extra ] = subValues;
-        fieldValue.set(subField, { id, type, combinable: !!combinable.match(yesRegex), count, extra, substitutions: [] });
+        fieldValue.set(subField, {
+            id,
+            type,
+            combinable: !!combinable.match(yesRegex),
+            count,
+            extra,
+            substitutionSets: new Map<string, SubstitutionSet>()
+        });
         return fieldValue;
     }
+    const fixRuleSet = fieldValue.get(subField)!;
+    const substitutionSets = fixRuleSet.substitutionSets;
     const [removeValue, attach, ruleAsString = '.', ...extraValues] = subValues;
     const [attachText, attachRules] = attach.split('/', 2);
     const extra = extraValues.length ? extraValues : undefined;
     const remove = removeValue.replace(emptyZeroRegex, '');
     const insertText = attachText.replace(emptyZeroRegex, '');
     const fixUp = fixRegex[type];
-    const match = new RegExp(ruleAsString.replace(fixUp.m, fixUp.r));
     const replace = new RegExp(remove.replace(fixUp.m, fixUp.r));
-    fieldValue.get(subField)!.substitutions.push({ match, remove, replace, attach: insertText, attachRules, extra });
+    if (!substitutionSets.has(ruleAsString)) {
+        const match = new RegExp(ruleAsString.replace(fixUp.m, fixUp.r));
+        substitutionSets.set(ruleAsString, {
+            match,
+            substitutions: [],
+        });
+    }
+    const substitutionSet = substitutionSets.get(ruleAsString)!;
+    substitutionSet.substitutions.push({ remove, replace, attach: insertText, attachRules, extra });
 
     return fieldValue;
 }

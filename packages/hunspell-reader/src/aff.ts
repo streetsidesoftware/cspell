@@ -11,18 +11,24 @@ export interface Fx {
     type: string;
     id: string;
     combinable: boolean;
-    substitutions: Substitutions[];
+    substitutionSets: Substitutions;
     count?: string; // number of line items for this rule.
     extra?: string[]; // extra items on the line.
 }
 
-export interface Substitutions {
-    match: RegExp;
+export type Substitutions = Map<string, SubstitutionSet>;
+
+export interface Substitution {
     remove: string;
     attach: string;
     attachRules?: string;
     replace: RegExp;
     extra?: string[];
+}
+
+export interface SubstitutionSet {
+    match: RegExp;
+    substitutions: Substitution[];
 }
 
 export interface Rep {
@@ -158,9 +164,10 @@ export class Aff {
             .join('');
         const r = affixRules
             .map(affix => this.applyAffixToWord(affix, affWord, combinableSfx))
-            .reduce<AffWord[]>((acc, v) => [...acc, ...v], [])
+            .reduce((a, b) => a.concat(b), [])
             .map(affWord => this.applyRulesToWord(affWord))
-            .reduce<AffWord[]>((acc, v) => [...acc, ...v], []);
+            .reduce((a, b) => a.concat(b), [])
+            ;
         return r;
     }
 
@@ -170,9 +177,12 @@ export class Aff {
             ? combinableSfx
             : '';
         const flags = { ...affWord.flags, isNeedAffix: false };
-        return affix.substitutions
-            .filter(sub => !!word.match(sub.match) && !!word.match(sub.replace))
-            .map<AffWord>(sub => ({
+        return [...affix.substitutionSets.values()]
+            .filter(sub => sub.match.test(word))
+            .map(sub => sub.substitutions)
+            .reduce((a, b) => a.concat(b), [])
+            .filter(sub => sub.replace.test(word))
+            .map(sub => ({
                 word: word.replace(sub.replace, sub.attach),
                 rulesApplied: [affWord.rulesApplied, affix.id].join(' '),
                 rules: combineRules + (sub.attachRules || ''),

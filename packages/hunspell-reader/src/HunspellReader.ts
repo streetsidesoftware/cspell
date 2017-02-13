@@ -2,6 +2,7 @@ import {parseAffFileToAff} from './affReader';
 import {Aff, AffWord} from './aff';
 import {lineReader} from './fileReader';
 import * as Rx from 'rxjs/Rx';
+import * as monitor from './monitor';
 
 export interface WordInfo {
     word: string;
@@ -13,65 +14,6 @@ export interface HunspellSrcInfo {
     aff: Aff;
     dic: Rx.Observable<string>;
 }
-
-export class HunspellReaderOld {
-
-    public aff: Promise<Aff>;
-
-    constructor(public affFile: string, public dicFile: string) {
-        this.aff = parseAffFileToAff(affFile);
-    }
-
-    /**
-     * @internal
-     */
-    readDicEntries(aff: Aff): Rx.Observable<string> {
-        return lineReader(this.dicFile, aff.affInfo.SET)
-            .skip(1)   // Skip the first line -- it's the number of words in the file context's.
-        ;
-    }
-
-
-    /**
-     * @internal
-     */
-    readDicWords(): Rx.Observable<WordInfo> {
-        return Rx.Observable.fromPromise(this.aff)
-            .flatMap(aff => this.readDicEntries(aff))
-            .map(line => {
-                const [word, rules] = line.split('/', 2);
-                return { word, rules };
-            });
-    }
-
-
-    readWordsRx(): Rx.Observable<AffWord> {
-        const r = Rx.Observable.fromPromise(this.aff)
-            .flatMap(aff => this.readDicEntries(aff)
-                // .do(dicWord => console.log(dicWord))
-                // .take(100)
-                .flatMap(dicWord => aff.applyRulesToDicEntry(dicWord))
-            );
-        return r;
-    }
-
-    /**
-     * Reads all the word combinations out of a hunspell dictionary.
-     */
-    readWords(): Rx.Observable<string> {
-        return this.readWordsRx()
-            .map(affWord => affWord.word);
-    }
-
-    /**
-     * Reads the words in the dictionary without applying the transformation rules.
-     */
-    readRootWords(): Rx.Observable<string> {
-        return this.readDicWords()
-            .map(w => w.word);
-    }
-}
-
 
 export class HunspellReader {
 
@@ -87,6 +29,7 @@ export class HunspellReader {
      */
     readDicWords(): Rx.Observable<WordInfo> {
         return this.src.dic
+            .skip(1) // The first entry is the count of entries.
             .map(line => {
                 const [word, rules] = line.split('/', 2);
                 return { word, rules };
@@ -96,7 +39,10 @@ export class HunspellReader {
 
     readWordsRx(): Rx.Observable<AffWord> {
         const r = this.src.dic
-            .flatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord));
+            .do(() => monitor.incCounter('cntIn'))
+            .flatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord))
+            .do(() => monitor.incCounter('cntOut'))
+            ;
         return r;
     }
 
@@ -120,9 +66,7 @@ export class HunspellReader {
      * @internal
      */
     private static readDicEntries(aff: Aff, dicFile: string): Rx.Observable<string> {
-        return lineReader(dicFile, aff.affInfo.SET)
-            .skip(1)   // Skip the first line -- it's the number of words in the file context's.
-        ;
+        return lineReader(dicFile, aff.affInfo.SET);
     }
 
     static createFromFiles(affFile: string, dicFile: string) {
