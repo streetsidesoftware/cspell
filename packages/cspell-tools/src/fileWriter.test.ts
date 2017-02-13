@@ -8,21 +8,20 @@ import { mkdirp } from 'fs-promise';
 
 describe('Validate the writer', () => {
     it('tests writing an Rx.Observable and reading it back.', () => {
-        const text = loremIpsum({ count: 100, format: 'plain'}) + ' éåáí';
+        const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
         const data = text.split(/\b/);
         const filename = path.join(__dirname, '..', 'temp', 'tests-writing-an-observable.txt');
 
         return Rx.Observable.from(mkdirp(path.dirname(filename)))
             .flatMap(() => {
-                const obj = Rx.Observable.from(data);
-                return fileWriter.writeToFileRxP(filename, obj);
+                return fileWriter.writeToFileRxP(filename, Rx.Observable.from(data));
             })
+            .do(() => console.log('HERE'))
             .concatMap(() => fileReader.textFileStreamRx(filename))
             .reduce((a, b) => a + b)
             .toPromise()
             .then(result => {
                 expect(result).to.equal(text);
             });
-
     });
 });
