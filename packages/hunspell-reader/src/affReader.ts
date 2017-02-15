@@ -15,7 +15,8 @@ const yesRegex = /[yY]/;
 const spaceRegex = /\s+/;
 const commentRegex = /(?:^\s*#.*)|(?:\s+#.*)/;
 
-function convEntry(fieldValue, _: string, args: string[]) {
+export interface ConvEntry { from: string; to: string; }
+function convEntry(fieldValue: ConvEntry[], _: string, args: string[]) {
     if (fieldValue === undefined) {
         return [];
     }
@@ -24,7 +25,7 @@ function convEntry(fieldValue, _: string, args: string[]) {
     return fieldValue;
 }
 
-function afEntry(fieldValue, _: string, args: string[]) {
+function afEntry(fieldValue: string[], _: string, args: string[]) {
     if (fieldValue === undefined) {
         return [''];
     }
@@ -32,6 +33,7 @@ function afEntry(fieldValue, _: string, args: string[]) {
     fieldValue.push(args[0]);
     return fieldValue;
 }
+
 
 function simpleTable(fieldValue, _: string, args: string[]) {
     if (fieldValue === undefined) {

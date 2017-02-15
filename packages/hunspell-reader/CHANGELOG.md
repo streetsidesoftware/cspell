@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.04
+- Update packages.
+
 ## 1.0.3
 - Improved speed of processing large dictionaries like Portuguese (Brazilian).
 - Fixed issue #1.

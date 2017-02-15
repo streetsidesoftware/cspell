@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --max_old_space_size=8192
 
 // cSpell:ignore findup
 import * as commander from 'commander';
@@ -12,6 +12,8 @@ import {mkdirp} from 'fs-promise';
 import * as Rx from 'rxjs/Rx';
 import * as path from 'path';
 // import * as monitor from './monitor';
+import * as Trie from './trie';
+import {observableFromIterable} from 'rxjs-from-iterable';
 
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
@@ -96,6 +98,50 @@ commander
                 x = x;
             }
         );
+    });
+
+commander
+    .command('test_trie <hunspell_dic_file>')
+    .option('-o, --output <file>', 'output file - defaults to stdout')
+    .option('-l, --lower_case', 'output in lower case')
+    .option('-T, --no-transform', 'Do not apply the prefix and suffix transforms.  Root words only.')
+    .option('-b, --base <number>', 'Use base n for reference ids.  Defaults to 32. Common values are 10, 16, 32')
+    .description('Experimental Trie file format')
+    .action((hunspellDicFilename, options) => {
+        const {
+            output: outputFile,
+            transform = true,
+            lower_case: lowerCase = false,
+            base = 32,
+        } = options;
+        notify('Write words', !!outputFile);
+        const pOutputStream = createWriteStream(outputFile);
+        const baseFile = hunspellDicFilename.replace(/(\.dic)?$/, '');
+        const dicFile = baseFile + '.dic';
+        const affFile = baseFile + '.aff';
+        notify(`Dic file: ${dicFile}`, !!outputFile);
+        notify(`Aff file: ${affFile}`, !!outputFile);
+        notify(`Generating Words`, !!outputFile);
+        const pReader = HunspellReader.createFromFiles(affFile, dicFile);
+        const pWordReader = transform ? pReader.then(reader => reader.readWords()) : pReader.then(reader => reader.readRootWords());
+
+        const wordsRx = Rx.Observable.from(pWordReader)
+            .map(wordsRx => lowerCase ? wordsRx.map(a => a.toLowerCase()) : wordsRx)
+            .flatMap(words => words)
+            .map(a => a.trim())
+            .filter(a => !!a);
+
+        const trieRx = wordsRx
+            .reduce((node, word) => Trie.insert(word, node), {} as Trie.TrieNode)
+            .do(() => notify('Processing Trie'))
+            .do(() => notify('Export Trie'))
+            .map(root => Trie.exportTrie(root, (base - 0) || 32))
+            .flatMap(seq => observableFromIterable(seq));
+
+        pOutputStream.then(writeStream => {
+            rxToStream(trieRx.bufferCount(1024).map(words => words.join(''))).pipe(writeStream);
+        });
+
     });
 
 commander.parse(process.argv);
