@@ -8,7 +8,6 @@ export class RefMap extends Map<string, number> {};
 export class ChildMap extends Map<string, TrieNode> {};
 
 export interface TrieNode {
-    h?: string; // hash
     f?: number; // flags
     c?: ChildMap;
 }
