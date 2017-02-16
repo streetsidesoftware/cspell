@@ -12,7 +12,7 @@ import {mkdirp} from 'fs-promise';
 import * as Rx from 'rxjs/Rx';
 import * as path from 'path';
 // import * as monitor from './monitor';
-import * as Trie from './trie';
+import * as Trie from 'cspell-trie';
 import {observableFromIterable} from 'rxjs-from-iterable';
 
 const packageInfo = require('../package.json');
@@ -101,12 +101,12 @@ commander
     });
 
 commander
-    .command('test_trie <hunspell_dic_file>')
+    .command('trie <hunspell_dic_file>')
     .option('-o, --output <file>', 'output file - defaults to stdout')
     .option('-l, --lower_case', 'output in lower case')
     .option('-T, --no-transform', 'Do not apply the prefix and suffix transforms.  Root words only.')
     .option('-b, --base <number>', 'Use base n for reference ids.  Defaults to 32. Common values are 10, 16, 32')
-    .description('Experimental Trie file format')
+    .description('Generate a file for use with cspell')
     .action((hunspellDicFilename, options) => {
         const {
             output: outputFile,
