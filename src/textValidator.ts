@@ -98,7 +98,7 @@ export function validateText(
             // Keep track of the number of times we have seen the same problem
             mapOfProblems.set(word, (mapOfProblems.get(word) || 0) + 1);
             // Filter out if there is too many
-            return mapOfProblems.get(word) < maxDuplicateProblems;
+            return mapOfProblems.get(word)! < maxDuplicateProblems;
         })
         .take(maxNumberOfProblems);
 }
