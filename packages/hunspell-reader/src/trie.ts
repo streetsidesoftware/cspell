@@ -103,7 +103,7 @@ function flattenToReferences(node: TrieNode): Sequence<TrieNode> {
 
         function hash(node: TrieRefNode): string {
             const flags = node.f ? '*' : '';
-            const refs = node.r ? '{' + [...node.r].map(a => a.join(':')).join(',') + '}' : '';
+            const refs = node.r ? '{' + [...node.r].sort((a, b) => a[0] < b[0] ? -1 : 1).map(a => a.join(':')).join(',') + '}' : '';
             return flags + refs;
         }
 
