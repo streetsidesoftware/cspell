@@ -3,7 +3,13 @@
 import { compileWordList } from './wordListCompiler';
 import * as path from 'path';
 import * as program from 'commander';
+import * as Rx from 'rxjs/Rx';
+import * as glob from 'glob';
+import * as minimatch from 'minimatch';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
+
+type GlobRx = (filename: string, options?: minimatch.IOptions) => Rx.Observable<string[]>;
+const globRx: GlobRx = Rx.Observable.bindNodeCallback<string, string[]>(glob);
 
 program
     .version(npmPackage.version);
@@ -21,8 +27,10 @@ program
 
         const ext = options.compress ? '.gz' : '';
 
-        src
-            .map<[string, string]>(s => [s, options.output ? path.join(options.output, path.basename(s) + ext) : s + ext])
+        Rx.Observable.from(src)
+            .flatMap(src => globRx(src))
+            .flatMap(s => s)
+            .map(s => [s, options.output ? path.join(options.output, path.basename(s) + ext) : s + ext])
             .forEach(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
                 compileWordList(src, dst);
