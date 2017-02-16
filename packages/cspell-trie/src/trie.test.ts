@@ -50,6 +50,7 @@ describe('Experiment with Tries', function() {
                 return Trie.insert(w, t);
             }, {} as Trie.TrieNode);
         const asString = [...Trie.exportTrie(trie, 10)].join('');
+        // console.log(asString);
         return Trie.importTrieRx(Rx.Observable.from(asString.split('\n')))
             .toArray()
             .toPromise()
@@ -68,41 +69,52 @@ describe('Experiment with Tries', function() {
 
 
 const sampleWords = [
-    'journal/MS',
-    'journalese/M',
-    'journalism/M',
-    'journalist/SM',
+    'walk',
+    'walked',
+    'walker',
+    'walking',
+    'walks',
+    'talk',
+    'talks',
+    'talked',
+    'talker',
+    'talking',
+    'lift',
+    'lifts',
+    'lifted',
+    'lifter',
+    'lifting',
+    'journal',
+    'journals',
+    'journalism',
+    'journalist',
     'journalistic',
-    'journey/ZGMDRS',
-    'journeyer/M',
-    'journeyman/M',
+    'journey',
+    'journeyer',
+    'journeyman',
     'journeymen',
-    'journo/S',
-    'joust/SZGMDR',
-    'jouster/M',
-    'jousting/M',
-    'jovial/Y',
-    'joviality/M',
-    'jowl/MS',
-    'jowly/TR',
-    'joy/SGMD',
-    'joyful/YP',
+    'joust',
+    'jouster',
+    'jousting',
+    'jovial',
+    'joviality',
+    'jowl',
+    'jowly',
+    'joy',
+    'joyful',
     'joyfuller',
     'joyfullest',
-    'joyfulness/M',
-    'joyless/PY',
-    'joylessness/M',
-    'joyous/YP',
-    'joyousness/M',
+    'joyfulness',
+    'joyless',
+    'joylessness',
+    'joyous',
+    'joyousness',
     'joyridden',
-    'joyride/RSMZG',
-    'joyrider/M',
-    'joyriding/M',
+    'joyride',
+    'joyrider',
+    'joyriding',
     'joyrode',
-    'joystick/SM',
+    'joystick',
 ];
 
 
-/*
-cspell:ignore ZGMDRS SZGMDR SGMD RSMZG COMPOUNDMIN COMPOUNDRULE WORDCHARS ication ications ieth ings iest iers sxzh sxzhy iness ment aeiou
-*/
