@@ -4,16 +4,11 @@
 import * as commander from 'commander';
 import { HunspellReader } from './HunspellReader';
 import * as fs from 'fs';
-import {lineReader} from './fileReader';
-import {trieCompactSortedWordList} from './trieCompact';
-import {patternModeler} from './patternModeler';
 import {rxToStream} from 'rxjs-stream';
 import {mkdirp} from 'fs-promise';
 import * as Rx from 'rxjs/Rx';
 import * as path from 'path';
 // import * as monitor from './monitor';
-import * as Trie from 'cspell-trie';
-import {observableFromIterable} from 'rxjs-from-iterable';
 
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
@@ -68,37 +63,8 @@ commander
         });
     });
 
-commander
-    .command('compact <sorted_word_list_file>')
-    .option('-o, --output <file>', 'output file')
-    .description('compacts the file into an experimental format.')
-    .action((sortedWordListFilename, options) => {
-        const outputFile = options.output;
-        const pOutputStream = createWriteStream(outputFile);
-        const lines = lineReader(sortedWordListFilename);
-        const compactStream = trieCompactSortedWordList(lines);
-        pOutputStream.then(writeStream => {
-            rxToStream(compactStream).pipe(writeStream);
-        });
-    });
-
-commander
-    .command('test_pattern_modeler <sorted_word_list_file>')
-    .description('This is an experimental command used for experimenting with patterns in the text.')
-    .action((sortedWordListFilename, _options) => {
-        const lines = lineReader(sortedWordListFilename);
-        const compactStream = trieCompactSortedWordList(lines);
-        let x: any;
-        patternModeler(compactStream).subscribe(
-            node => {
-                x = node;
-            },
-            () => {},
-            () => {
-                x = x;
-            }
-        );
-    });
+/*
+To be removed once the functionality has been put in cspell-tools.
 
 commander
     .command('trie <hunspell_dic_file>')
@@ -143,6 +109,7 @@ commander
         });
 
     });
+*/
 
 commander.parse(process.argv);
 
