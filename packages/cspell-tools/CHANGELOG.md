@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.3.1
+* Add command line tool for building trie files.
+
 ## 1.2.1
 * Hyphenated words are now treated as two words.
 
