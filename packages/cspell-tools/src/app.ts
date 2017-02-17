@@ -31,10 +31,11 @@ program
             .flatMap(src => globRx(src))
             .flatMap(s => s)
             .map(s => [s, options.output ? path.join(options.output, path.basename(s) + ext) : s + ext])
-            .forEach(([src, dst]) => {
+            .concatMap(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
-                compileWordList(src, dst);
-            });
+                return compileWordList(src, dst).then(() => src);
+            })
+            .forEach(name => console.log(`Complete.`));
     });
 
 program.parse(process.argv);
