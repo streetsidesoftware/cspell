@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.3.3
+- Use latest version of cspell-tools.
+
 ## 1.3.2
 - More terms Added
 - Now builds on appveyor to make sure we run on Windows.
