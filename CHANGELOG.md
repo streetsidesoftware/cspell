@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.3.2
+- More terms Added
+- Now builds on appveyor to make sure we run on Windows.
+- Update packages
+
 ## 1.3.1
 - Code coverage improvements
 - Update the README
