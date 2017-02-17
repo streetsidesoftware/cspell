@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.2.1
+* Hyphenated words are now treated as two words.
+
 ## 1.1.0
 * use cspell-lib for file i/o.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { compileWordList } from './wordListCompiler';
+import { compileWordList } from './compiler';
 import * as path from 'path';
 import * as program from 'commander';
 import * as Rx from 'rxjs/Rx';

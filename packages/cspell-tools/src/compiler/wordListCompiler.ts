@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 import * as path from 'path';
 import { mkdirp } from 'fs-promise';
 
-const regNonWordOrSpace = XRegExp("[^\\p{L}' \\-]+", 'gi');
+const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
 const regExpRepeatChars = /(.)\1{3,}/i;
 

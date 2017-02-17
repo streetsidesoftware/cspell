@@ -28,7 +28,7 @@ describe('Validate the wordListCompiler', function() {
         expect(lineToWords('AVGAspect').toArray()).to.deep.equal(['avg', 'aspect']);
         expect(lineToWords('New York').toArray()).to.deep.equal(['new york', 'new', 'york']);
         expect(lineToWords('Namespace DNSLookup').toArray()).to.deep.equal(['namespace', 'dns', 'lookup']);
-        expect(lineToWords('well-educated').toArray()).to.deep.equal(['well-educated', 'well', 'educated']);
+        expect(lineToWords('well-educated').toArray()).to.deep.equal(['well', 'educated']);
         // Sadly we cannot do this one correctly
         expect(lineToWords('CURLcode').toArray()).to.deep.equal(['cur', 'lcode']);
         expect(lineToWords('kDNSServiceErr_BadSig').toArray()).to.deep.equal([
@@ -47,8 +47,8 @@ describe('Validate the wordListCompiler', function() {
     });
 
     it('test reading and normalizing a file', () => {
-        const sourceName = path.join(__dirname, '..', 'Samples', 'cities.txt');
-        const destName = path.join(__dirname, '..', 'temp', 'cities.txt');
+        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+        const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
         return compileWordList(sourceName, destName)
         .then(s => {
             expect(s).to.be.not.empty;
