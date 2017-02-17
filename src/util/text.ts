@@ -1,7 +1,6 @@
 import * as XRegExp from 'xregexp';
 import * as Rx from 'rxjs/Rx';
 import * as rxFrom from 'rxjs-from-iterable';
-import {merge} from 'tsmerge';
 import {scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import {binarySearch} from './search';
 
@@ -169,9 +168,11 @@ export function matchCase(example: string, word: string): string {
     return word;
 }
 
-
+interface OffsetMap {
+    offset: number;
+}
 function offsetMap(offset: number) {
-    return <T extends {offset: number}>(xo: T) => merge(xo, { offset: xo.offset + offset });
+    return <T extends OffsetMap>(xo: T) => ({...(xo as Object), offset: xo.offset + offset }) as T;
 }
 
 export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gim', forceFlags = 'g') {
