@@ -16,7 +16,6 @@ describe('Validate the writer', () => {
             .flatMap(() => {
                 return fileWriter.writeToFileRxP(filename, Rx.Observable.from(data));
             })
-            .do(() => console.log('HERE'))
             .concatMap(() => fileReader.textFileStreamRx(filename))
             .reduce((a, b) => a + b)
             .toPromise()

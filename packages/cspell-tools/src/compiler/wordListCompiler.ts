@@ -4,10 +4,12 @@ import * as XRegExp from 'xregexp';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
 import { lineReaderRx } from './fileReader';
-import { writeToFile } from './fileWriter';
+import { writeToFile, writeToFileRxP} from 'cspell-lib';
 import { Observable } from 'rxjs/Rx';
 import * as path from 'path';
 import { mkdirp } from 'fs-promise';
+import { observableFromIterable } from 'rxjs-from-iterable';
+import * as Trie from 'cspell-trie';
 
 const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
@@ -63,4 +65,32 @@ export function compileWordList(filename: string, destFilename: string): Promise
             .join('');
         return writeToFile(destFilename, data);
     });
+}
+
+
+export function normalizeWordsToTrie(words: Rx.Observable<string>): Promise<Trie.TrieNode> {
+    const result = normalizeWords(words)
+        .reduce((node, word) => Trie.insert(word, node), {} as Trie.TrieNode)
+        .toPromise();
+    return result;
+}
+
+export function compileWordListToTrieFile(words: Rx.Observable<string>, destFilename: string): Promise<void> {
+    const destDir = path.dirname(destFilename);
+    const dir = mkdirp(destDir);
+    const root = normalizeWordsToTrie(words);
+
+    const data = Rx.Observable.zip(dir, root, (_: void, b: Trie.TrieNode) =>
+    b
+    )
+        .map(node => Trie.serializeTrie(node))
+        .flatMap(seq => observableFromIterable(seq));
+
+    return writeToFileRxP(destFilename, data.bufferCount(1024).map(a => a.join('')));
+}
+
+
+export function compileTrie(filename: string, destFilename: string): Promise<void> {
+    const words = lineReaderRx(filename);
+    return compileWordListToTrieFile(words, destFilename);
 }

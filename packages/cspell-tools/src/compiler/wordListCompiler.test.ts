@@ -3,9 +3,12 @@
 
 
 import { expect } from 'chai';
-import { lineToWords, compileWordList } from './wordListCompiler';
+import { lineToWords, compileWordList, compileTrie } from './wordListCompiler';
+import { normalizeWords, normalizeWordsToTrie } from './wordListCompiler';
+import * as fsp from 'fs-promise';
+import * as Trie from 'cspell-trie';
 import * as path from 'path';
-import * as fs from 'fs';
+import * as Rx from 'rxjs/Rx';
 
 describe('Validate the wordListCompiler', function() {
     it('tests splitting lines', () => {
@@ -55,9 +58,37 @@ describe('Validate the wordListCompiler', function() {
             return new Promise((resolve, reject) => {
                 s.on('finish', () => resolve());
                 s.on('error', () => reject());
-            }).then(() => {
-                const output = fs.readFileSync(destName, 'UTF-8');
+            })
+            .then(() => fsp.readFile(destName, 'UTF-8'))
+            .then(output => {
                 expect(output).to.be.equal(citiesResult);
+            });
+        });
+    });
+
+    it('tests normalized to a trie', () => {
+        const words = citiesResult.split('\n');
+        const nWords = normalizeWords(Rx.Observable.from(words)).toArray().toPromise();
+        const tWords = normalizeWordsToTrie(Rx.Observable.from(words))
+            .then(node => Trie.iteratorTrieWords(node))
+            .then(seq => [...seq]);
+        return Promise.all([nWords, tWords])
+            .then(([nWords, tWords]) => {
+                expect(tWords.sort()).to.be.deep.equal([...(new Set(nWords.sort()))]);
+            });
+    });
+
+    it('test reading and normalizing to a trie file', () => {
+        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+        const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie');
+        return compileTrie(sourceName, destName)
+        .then(() => fsp.readFile(destName, 'UTF-8'))
+        .then(output => output.split('\n'))
+        .then(words => {
+            return Trie.importTrieRx(Rx.Observable.from(words)).take(1).toPromise()
+            .then(node => {
+                expect([...Trie.iteratorTrieWords(node)].sort()).to.be.deep
+                    .equal(citiesResult.split('\n').filter(a => !!a).sort());
             });
         });
     });
