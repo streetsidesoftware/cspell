@@ -119,17 +119,18 @@ export interface ExportOptions {
 export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
+    const radix = base > 36 ? 36 : base < 10 ? 10 : base;
     const rows = flattenToReferences(root)
         .map(node => {
             const row = [
-                ...trieToExportString(node, base),
+                ...trieToExportString(node, radix),
                 '\n',
             ]
             .join('').replace(regExTrailingComma, '$1');
             return row;
         });
 
-    return generateHeader(base, comment)
+    return generateHeader(radix, comment)
         .concat(rows);
 }
 

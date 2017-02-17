@@ -1,7 +1,8 @@
 {
   "name": "cspell-trie",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Trie Data Structure and tools to support cspell.",
+  "bin": "./dist/app.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -28,6 +29,8 @@
   "homepage": "https://github.com/Jason3S/cspell-trie#readme",
   "devDependencies": {
     "@types/chai": "^3.4.34",
+    "@types/commander": "^2.3.31",
+    "@types/fs-promise": "^1.0.1",
     "@types/mocha": "^2.2.39",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
@@ -35,7 +38,12 @@
     "typescript": "^2.1.6"
   },
   "dependencies": {
+    "commander": "^2.9.0",
+    "cspell-lib": "^1.0.1",
+    "fs-promise": "^2.0.0",
     "gensequence": "^1.0.0",
-    "rxjs": "^5.1.1"
+    "rxjs": "^5.1.1",
+    "rxjs-from-iterable": "^1.0.5",
+    "rxjs-stream": "^1.0.4"
   }
 }

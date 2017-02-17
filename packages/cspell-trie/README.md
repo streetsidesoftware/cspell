@@ -8,6 +8,37 @@ The resulting trie can then be compressed into a
 [DAFSA|DAWG](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton).
 
 
+## Tool
+
+*cspell-trie* is both a tool and a library.
+
+Give a list of words, *cspell-trie* will turn it into a *trie* file.
+
+### Installation
+
+```sh
+npm install -g cspell-trie
+```
+
+### Usage
+
+```sh
+cspell-trie --help
+```
+
+### Creating a *trie* file
+
+```sh
+cspell-trie create filename.txt -o filename.trie
+```
+
+### Reading a *trie* file
+
+```sh
+cspell-trie reader filename.trie
+```
+
+
 ## File Format
 
 ### Header
