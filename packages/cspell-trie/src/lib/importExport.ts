@@ -74,19 +74,10 @@ function escapeChar(char: string): string {
     return char.replace(regExpEscapeChars, '\\$1');
 }
 
-export function trieToExportString(node: TrieNode, base = 16): Sequence<string> {
+function trieToExportString(node: TrieNode, base = 16): Sequence<string> {
     function* walk(node: TrieRefNode): IterableIterator<string> {
         if (node.f) {
             yield '*';
-        }
-        if (node.c) {
-            yield '[';
-            for (const n of node.c) {
-                yield escapeChar(n[0]) + '[';
-                yield* walk(n[1]);
-                yield ']';
-            }
-            yield ']';
         }
         if (node.r) {
             const refs = [...node.r].sort((a, b) => a[0] < b[0] ? -1 : 1);
@@ -102,18 +93,33 @@ export function trieToExportString(node: TrieNode, base = 16): Sequence<string> 
 }
 
 
-function generateHeader(base: number): Sequence<string> {
+function generateHeader(base: number, comment: string): Sequence<string> {
     const header = [
+        '#!/usr/bin/env cspell-trie reader',
         'TrieXv1',
         'base=' + base,
+        '# Data'
     ];
     return genSequence(header)
         .map(a => a + '\n');
 }
 
 
-export function exportTrie(node: TrieNode, base = 16): Sequence<string> {
-    const rows = flattenToReferences(node)
+export interface ExportOptions {
+    base?: number;
+    comment?: string;
+}
+
+/**
+ * Serialize a TrieNode.
+ * Note: This is destructive.  The node will no longer be usable.
+ * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
+ * Considering this is the last step before exporting, it was decided to let this be destructive.
+ */
+export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
+    options = typeof options === 'number' ? { base: options } : options;
+    const { base = 16, comment = '' } = options;
+    const rows = flattenToReferences(root)
         .map(node => {
             const row = [
                 ...trieToExportString(node, base),
@@ -123,7 +129,7 @@ export function exportTrie(node: TrieNode, base = 16): Sequence<string> {
             return row;
         });
 
-    return generateHeader(base)
+    return generateHeader(base, comment)
         .concat(rows);
 }
 
@@ -132,8 +138,11 @@ export function importTrieRx(lines: Rx.Observable<string>): Rx.Observable<TrieNo
     const headerLines = new Rx.Subject<string>();
 
     let radix = 16;
+    const comment = /^\s*#/;
 
     headerLines
+        .filter(a => !!a.trim())
+        .filter(a => !comment.test(a))
         .take(2)
         .map(a => a.trim())
         .toArray()

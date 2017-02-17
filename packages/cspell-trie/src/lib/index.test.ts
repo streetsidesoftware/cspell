@@ -49,7 +49,13 @@ describe('Experiment with Tries', function() {
             .reduce((t, w) => {
                 return Trie.insert(w, t);
             }, {} as Trie.TrieNode);
-        const asString = [...Trie.exportTrie(trie, 10)].join('');
+        const asString = [...Trie.serializeTrie(trie, 10)].join('');
+        const trie2 = words
+            .reduce((t, w) => {
+                return Trie.insert(w, t);
+            }, {} as Trie.TrieNode);
+        const asString2 = [...Trie.serializeTrie(trie2, { base: 10 })].join('');
+        expect(asString2).to.be.equal(asString);
         // console.log(asString);
         return Trie.importTrieRx(Rx.Observable.from(asString.split('\n')))
             .toArray()
@@ -66,7 +72,6 @@ describe('Experiment with Tries', function() {
             });
     });
 });
-
 
 const sampleWords = [
     'walk',

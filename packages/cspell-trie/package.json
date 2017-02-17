@@ -5,8 +5,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha --recursive ./dist/*.test.js",
+    "clean": "rimraf dist/**",
+    "test": "mocha --recursive \"./dist/**/*.test.js\"",
+    "test-watch": "mocha --watch --recursive ./dist/*.test.js",
     "build": "tsc",
+    "clean-build": "npm run clean ; npm run build",
     "watch": "tsc -w"
   },
   "repository": {
@@ -28,6 +31,7 @@
     "@types/mocha": "^2.2.39",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
+    "rimraf": "^2.5.4",
     "typescript": "^2.1.6"
   },
   "dependencies": {
