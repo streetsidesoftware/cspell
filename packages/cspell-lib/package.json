@@ -11,6 +11,7 @@
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
     "clean": "rimraf dist",
+    "clean-build": "npm run clean; npm run build",
     "coverage": "NODE_ENV=test nyc npm run test-ts",
     "test-ts": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
     "test": "mocha --recursive ./dist/**/*.test.js"
