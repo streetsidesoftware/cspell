@@ -1,5 +1,5 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, FLAG_WORD} from './TrieNode';
+import {TrieNode} from './TrieNode';
 import {
     iteratorTrieWords,
     walker,
