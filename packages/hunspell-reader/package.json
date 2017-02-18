@@ -12,6 +12,7 @@
   "scripts": {
     "test": "mocha --recursive ./dist/*.test.js",
     "build": "tsc",
+    "clean": "rimraf ./dist/",
     "watch": "tsc -w"
   },
   "repository": {
@@ -35,6 +36,7 @@
     "@types/node": "^6.0.58",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
+    "rimraf": "^2.5.4",
     "typescript": "^2.1.6"
   },
   "dependencies": {
