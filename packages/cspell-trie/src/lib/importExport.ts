@@ -98,8 +98,14 @@ function generateHeader(base: number, comment: string): Sequence<string> {
         '#!/usr/bin/env cspell-trie reader',
         'TrieXv1',
         'base=' + base,
-        '# Data'
-    ];
+    ]
+    .concat(comment
+        ? comment.split('\n').map(a => '# ' + a)
+        : []
+    )
+    .concat([
+        '# Data:'
+    ]);
     return genSequence(header)
         .map(a => a + '\n');
 }
@@ -198,9 +204,6 @@ export function importTrieRx(lines: Rx.Observable<string>): Rx.Observable<TrieNo
             nodes[lines] = root;
             return { lines: lines + 1, root, nodes };
         }, { lines: 0, nodes: [], root: {} })
-        .do(r => {
-            // console.log(r.lines);
-        })
         .map(r => r.root)
         ;
 

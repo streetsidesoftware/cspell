@@ -27,10 +27,7 @@ describe('Experiment with Tries', function() {
             // Make them unique
             .map(a => [...(new Set(a))])
             .reduce((a, b) => a.concat(b));
-        const trie = words
-            .reduce((t, w) => {
-                return Trie.insert(w, t);
-            }, {} as Trie.TrieNode);
+        const trie = Trie.createTriFromList(words);
         expect(trie.c).to.not.be.undefined;
         Trie.orderTrie(trie);
         const extractedWords = [...Trie.iteratorTrieWords(trie)];
@@ -45,17 +42,16 @@ describe('Experiment with Tries', function() {
             // Make them unique
             .map(a => [...(new Set(a))])
             .reduce((a, b) => a.concat(b));
-        const trie = words
-            .reduce((t, w) => {
-                return Trie.insert(w, t);
-            }, {} as Trie.TrieNode);
+        const trie = Trie.createTriFromList(words);
         const asString = [...Trie.serializeTrie(trie, 10)].join('');
-        const trie2 = words
-            .reduce((t, w) => {
-                return Trie.insert(w, t);
-            }, {} as Trie.TrieNode);
+        const trie2 = Trie.createTriFromList(words);
         const asString2 = [...Trie.serializeTrie(trie2, { base: 10 })].join('');
         expect(asString2).to.be.equal(asString);
+        const trie3 = Trie.createTriFromList(words);
+        const asString3 = [...Trie.serializeTrie(trie3, { base: 10, comment: 'one\ntwo\nthree' })].join('');
+        expect(asString3).to.not.be.equal(asString);
+        expect(asString3.slice(asString3.indexOf('# Data'))).to.be.equal(asString.slice(asString.indexOf('# Data')));
+        expect(asString3).to.contain('\n# one\n# two\n# three');
         // console.log(asString);
         return Trie.importTrieRx(Rx.Observable.from(asString.split('\n')))
             .toArray()
