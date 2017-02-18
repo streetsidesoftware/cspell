@@ -1,4 +1,4 @@
-#!/usr/bin/env node --max_old_space_size=4096
+#!/usr/bin/env node --max_old_space_size=8192
 
 // cSpell:ignore findup
 import * as commander from 'commander';
