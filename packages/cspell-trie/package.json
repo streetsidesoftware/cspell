@@ -11,6 +11,8 @@
     "test-watch": "mocha --watch --recursive ./dist/*.test.js",
     "build": "tsc",
     "clean-build": "npm run clean ; npm run build",
+    "coverage": "NODE_ENV=test nyc npm run test-ts",
+    "test-ts": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
     "watch": "tsc -w"
   },
   "repository": {
@@ -34,7 +36,9 @@
     "@types/mocha": "^2.2.39",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "rimraf": "^2.5.4",
+    "ts-node": "^2.1.0",
     "typescript": "^2.1.6"
   },
   "dependencies": {
@@ -45,5 +49,24 @@
     "rxjs": "^5.1.1",
     "rxjs-from-iterable": "^1.0.5",
     "rxjs-stream": "^1.0.4"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }
