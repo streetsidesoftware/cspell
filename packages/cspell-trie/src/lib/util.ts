@@ -1,5 +1,5 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, FLAG_WORD, ChildMap} from './trie';
+import {TrieNode, FLAG_WORD, ChildMap} from './TrieNode';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {
@@ -11,6 +11,10 @@ export function insert(text: string, node: TrieNode = {}): TrieNode {
         node.f = (node.f || 0) | FLAG_WORD;
     }
     return node;
+}
+
+export function isWordTerminationNode(node: TrieNode) {
+    return ((node.f || 0) & FLAG_WORD) === FLAG_WORD;
 }
 
 /**
@@ -32,30 +36,69 @@ export interface YieldResult {
     depth: number;
 }
 
-
 /**
  * Generator an iterator that will walk the Trie parent then children in a depth first fashion that preserves sorted order.
  */
-export function iterateTrie(node: TrieNode): Sequence<YieldResult> {
-    function* iterate(node: TrieNode, text: string, depth: number): IterableIterator<YieldResult> {
-        const r = { node, text, depth };
-        yield r;
-        if (node.c) {
-            for (const n of node.c) {
-                const [t, c] = n;
-                yield* iterate(c, text + t, depth + 1);
-            }
-        }
-    }
-
-    return genSequence(iterate(node, '', 0));
+export function walk(node: TrieNode): Sequence<YieldResult> {
+    return genSequence(walker(node));
 }
+
+export const iterateTrie = walk;
 
 /**
  * Generate a Iterator that can walk a Trie and yield the words.
  */
 export function iteratorTrieWords(node: TrieNode): Sequence<string> {
-    return genSequence(iterateTrie(node))
-        .filter(r => ((r.node.f || 0) & FLAG_WORD) === FLAG_WORD)
+    return genSequence(walker(node))
+        .filter(r => isWordTerminationNode(r.node))
         .map(r => r.text);
+}
+
+
+export interface WalkerIterator extends IterableIterator<YieldResult> {
+    /**
+     * Ask for the next result.
+     * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
+     * This can be used to limit the walker's depth.
+     */
+    next: (goDeeper?: boolean) => IteratorResult<YieldResult>;
+    [Symbol.iterator]: () => WalkerIterator;
+}
+
+/**
+ * Walks the Trie and yields a value at each node.
+ * next(goDeeper: boolean):
+ */
+export function* walker(root: TrieNode): WalkerIterator {
+    let depth = 0;
+    const stack: Iterator<[string, TrieNode]>[] = [];
+    let baseText = '';
+    stack[depth] = ((root.c || [])[Symbol.iterator])();
+    let ir: IteratorResult<[string, TrieNode]>;
+    while (depth >= 0) {
+        while (!(ir = stack[depth].next()).done) {
+            const [char, node] = ir.value;
+            const text = baseText + char;
+            const goDeeper = yield { text, node, depth } as YieldResult;
+            if (goDeeper === undefined || goDeeper) {
+                depth++;
+                baseText = text;
+                stack[depth] = ((node.c || [])[Symbol.iterator])();
+            }
+        }
+        depth -= 1;
+        baseText = baseText.slice(0, -1);
+    }
+}
+
+export function createRoot(): TrieNode {
+    return {};
+}
+
+export function createTriFromList(words: Iterable<string>): TrieNode {
+    const root = createRoot();
+    for (const word of words) {
+        insert(word, root);
+    }
+    return root;
 }

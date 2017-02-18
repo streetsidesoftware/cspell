@@ -1,4 +1,4 @@
-import { TrieNode, FLAG_WORD, ChildMap } from './trie';
+import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
 import { TrieRefNode, RefMap } from './trieRef';
 import { Sequence, genSequence } from 'gensequence';
 import * as Rx from 'rxjs/Rx';
