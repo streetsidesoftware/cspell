@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --max_old_space_size=4096
 
 import { compileWordList, compileTrie } from './compiler';
 import * as path from 'path';
@@ -25,12 +25,16 @@ program
             options.compress ? 'true' : 'false',
             src.join('\n  ') );
 
-        const ext = options.compress ? '.gz' : '';
+        const ext = '.txt' + (options.compress ? '.gz' : '');
 
         Rx.Observable.from(src)
             .flatMap(src => globRx(src))
             .flatMap(s => s)
-            .map(s => [s, options.output ? path.join(options.output, path.basename(s) + ext) : s + ext])
+            .map(s => {
+                const outFilename = path.basename(s).replace(/(\.txt|\.dic|\.aff)?$/, ext);
+                const dir = options.output ? options.output : path.dirname(s);
+                return [s, path.join(dir, outFilename)];
+            })
             .concatMap(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
                 return compileWordList(src, dst).then(() => src);
@@ -40,7 +44,7 @@ program
 
 program
     .command('compile-trie <src...>')
-    .description('compile words lists into simple dictionary files.')
+    .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
     .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
     .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
     .action((src: string[], options: { output?: string, compress: boolean }) => {
@@ -54,7 +58,11 @@ program
         Rx.Observable.from(src)
             .flatMap(src => globRx(src))
             .flatMap(s => s)
-            .map(s => [s, options.output ? path.join(options.output, path.basename(s, '.txt') + ext) : s + ext])
+            .map(s => {
+                const outFilename = path.basename(s).replace(/(\.txt|\.dic|\.aff)?$/, ext);
+                const dir = options.output ? options.output : path.dirname(s);
+                return [s, path.join(dir, outFilename)];
+            })
             .concatMap(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
                 return compileTrie(src, dst).then(() => src);

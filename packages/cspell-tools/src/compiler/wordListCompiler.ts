@@ -10,6 +10,7 @@ import * as path from 'path';
 import { mkdirp } from 'fs-promise';
 import { observableFromIterable } from 'rxjs-from-iterable';
 import * as Trie from 'cspell-trie';
+import * as HR from 'hunspell-reader';
 
 const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
@@ -54,9 +55,11 @@ export function compileSetOfWords(lines: Rx.Observable<string>): Promise<Set<str
 }
 
 export function compileWordList(filename: string, destFilename: string): Promise<fs.WriteStream> {
+    const words = regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
+
     const destDir = path.dirname(destFilename);
 
-    return mkdirp(destDir).then(() => compileSetOfWords(lineReaderRx(filename)))
+    return mkdirp(destDir).then(() => compileSetOfWords(words))
     .then(set => {
         const data = genSequence(set)
             .map(a => a + '\n')
@@ -80,17 +83,28 @@ export function compileWordListToTrieFile(words: Rx.Observable<string>, destFile
     const dir = mkdirp(destDir);
     const root = normalizeWordsToTrie(words);
 
-    const data = Rx.Observable.zip(dir, root, (_: void, b: Trie.TrieNode) =>
-    b
-    )
-        .map(node => Trie.serializeTrie(node))
+    const data = Rx.Observable.zip(dir, root, (_: void, b: Trie.TrieNode) => b)
+        .map(node => Trie.serializeTrie(node, { base: 32, comment: 'Built by cspell-tools.' }))
         .flatMap(seq => observableFromIterable(seq));
 
     return writeToFileRxP(destFilename, data.bufferCount(1024).map(a => a.join('')));
 }
 
+const regHunspellFile = /\.(dic|aff)$/i;
+
+function readHunspellFiles(filename: string): Rx.Observable<string> {
+    const dicFile = filename.replace(regHunspellFile, '.dic');
+    const affFile = filename.replace(regHunspellFile, '.aff');
+
+    const reader = HR.HunspellReader.createFromFiles(affFile, dicFile);
+
+    const r = Rx.Observable.fromPromise(reader)
+        .flatMap(reader => reader.readWordsRx())
+        .map(aff => aff.word);
+    return r;
+}
 
 export function compileTrie(filename: string, destFilename: string): Promise<void> {
-    const words = lineReaderRx(filename);
+    const words = regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
     return compileWordListToTrieFile(words, destFilename);
 }
