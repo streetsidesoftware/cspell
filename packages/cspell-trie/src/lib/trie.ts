@@ -38,6 +38,10 @@ export class Trie {
         return iteratorTrieWords(this.root);
     }
 
+    /**
+     * Allows iteration over the entire tree.
+     * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
+     */
     iterate(): WalkerIterator {
         return walker(this.root);
     }
