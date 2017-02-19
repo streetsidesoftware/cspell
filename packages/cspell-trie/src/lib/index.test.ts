@@ -4,12 +4,7 @@ import * as Rx from 'rxjs/Rx';
 
 describe('Experiment with Tries', function() {
     it('Adds words to a Trie and takes them back out.', () => {
-        const words = [sampleWords]
-            // Sort them.
-            .map(a => a.sort())
-            // Make them unique
-            .map(a => [...(new Set(a))])
-            .reduce((a, b) => a.concat(b));
+        const words = [...(new Set(sampleWords))];
         const trie = words
             .reduce((t, w) => {
                 return Trie.insert(w, t);
@@ -21,12 +16,7 @@ describe('Experiment with Tries', function() {
     });
 
     it('Adds words to a Trie sorts the trie and takes them back out.', () => {
-        const words = [sampleWords]
-            // Sort them.
-            .map(a => a.sort())
-            // Make them unique
-            .map(a => [...(new Set(a))])
-            .reduce((a, b) => a.concat(b));
+        const words = [...(new Set(sampleWords))];
         const trie = Trie.createTriFromList(words);
         expect(trie.c).to.not.be.undefined;
         Trie.orderTrie(trie);
@@ -36,12 +26,7 @@ describe('Experiment with Tries', function() {
     });
 
     it('buildReferenceTree', () => {
-        const words = [sampleWords]
-            // Sort them.
-            .map(a => a.sort())
-            // Make them unique
-            .map(a => [...(new Set(a))])
-            .reduce((a, b) => a.concat(b));
+        const words = [...(new Set(sampleWords))];
         const trie = Trie.createTriFromList(words);
         const asString = [...Trie.serializeTrie(trie, 10)].join('');
         const trie2 = Trie.createTriFromList(words);
