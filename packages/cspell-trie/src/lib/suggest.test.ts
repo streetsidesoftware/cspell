@@ -37,6 +37,22 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['journals', 'journal']);
     });
 
+    it('Tests suggestions for `juornals` (reduced cost for swap)', () => {
+        const trie = Trie.create(sampleWords);
+        // cspell:ignore juornals
+        const results = Sug.suggest(trie.root, 'juornals');
+        // console.log(JSON.stringify(results));
+        const suggestions = results.map(s => s.word);
+        expect(suggestions).to.deep.equal([
+            'journals',
+            'journal',
+            'journalism',
+            'journalist',
+            'journey',
+            'jovial',
+        ]);
+    });
+
     it('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfull
@@ -44,6 +60,23 @@ describe('Validate Suggest', () => {
         // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
+    });
+
+    it('Tests suggestions', () => {
+        const trie = Trie.create(sampleWords);
+        const results = Sug.suggest(trie.root, '');
+        // console.log(JSON.stringify(results));
+        const suggestions = results.map(s => s.word);
+        expect(suggestions).to.deep.equal([]);
+    });
+
+    it('Tests suggestions with low max num', () => {
+        const trie = Trie.create(sampleWords);
+        // cspell:ignore joyfull
+        const results = Sug.suggest(trie.root, 'joyfull', 3);
+        // console.log(JSON.stringify(results));
+        const suggestions = results.map(s => s.word);
+        expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller']);
     });
 });
 

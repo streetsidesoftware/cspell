@@ -48,7 +48,7 @@ export function suggest(
     for (let r = i.next(deeper); !r.done; r = i.next(deeper)) {
         const {text, node, depth} = r.value;
         const d = depth + 1;
-        const lastSugLetter = d ? text[d - 1] : '';
+        const lastSugLetter = d > 1 ? text[d - 2] : '';
         const w = text.slice(-1);
         matrix[d] = matrix[d] || [];
         matrix[d][0] = matrix[d - 1][0] + bc;
