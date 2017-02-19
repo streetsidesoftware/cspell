@@ -67,6 +67,31 @@ describe('Experiment with Tries', function() {
                 expect(extractedWords2.sort()).to.be.deep.equal(extractedWords1.sort());
             });
     });
+
+    it('buildReferenceTree default base', () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const text = [...Trie.serializeTrie(trie)].join('');
+        expect(text).to.contain('base=16');
+    });
+
+
+    it('buildReferenceTree too low base', () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const text = [...Trie.serializeTrie(trie, 5)].join('');
+        expect(text).to.contain('base=10');
+    });
+
+    it('buildReferenceTree too high base', () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const text = [...Trie.serializeTrie(trie, 100)].join('');
+        expect(text).to.contain('base=36');
+    });
+
+    it('buildReferenceTree undefined base', () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const text = [...Trie.serializeTrie(trie, {})].join('');
+        expect(text).to.contain('base=16');
+    });
 });
 
 const sampleWords = [

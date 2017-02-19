@@ -1,6 +1,6 @@
 import {Sequence, genSequence} from 'gensequence';
 import {TrieNode} from './TrieNode';
-import {suggest} from './suggest';
+import {suggest, SuggestionResult} from './suggest';
 import {
     iteratorTrieWords,
     walker,
@@ -36,9 +36,21 @@ export class Trie {
             .concat(n ? iteratorTrieWords(n).map(suffix => text + suffix) : []);
     }
 
-    suggest(text: string, numSuggestions: number): string[] {
-        return suggest(this.root, text, numSuggestions)
+    /**
+     * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
+     */
+    suggest(text: string, maxNumSuggestions: number): string[] {
+        return this.suggestWithCost(text, maxNumSuggestions)
             .map(a => a.word);
+    }
+
+
+    /**
+     * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
+     * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
+     */
+    suggestWithCost(text: string, maxNumSuggestions: number): SuggestionResult[] {
+        return suggest(this.root, text, maxNumSuggestions);
     }
 
     words(): Sequence<string> {

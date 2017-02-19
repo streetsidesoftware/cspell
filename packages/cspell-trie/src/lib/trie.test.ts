@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Trie} from './trie';
-import {isWordTerminationNode} from './util';
+import {isWordTerminationNode, orderTrie} from './util';
 
 describe('Validate Trie Class', () => {
     it('Tests creating a Trie', () => {
@@ -24,6 +24,23 @@ describe('Validate Trie Class', () => {
         expect([...trie.completeWord('lift')]).to.be.deep.equal(sampleWords.filter(w => w.slice(0, 4) === 'lift').sort());
         expect([...trie.completeWord('life')]).to.be.deep.equal([]);
         expect([...trie.completeWord('lifting')]).to.be.deep.equal(['lifting']);
+    });
+
+    it('Tests insert', () => {
+        const trie1 = Trie.create(sampleWords);
+        const trie2 = Trie.create([]);
+        sampleWords.forEach(word => trie2.insert(word));
+        orderTrie(trie2.root);
+
+        const words1 = [...trie1.words()];
+        const words2 = [...trie2.words()];
+        expect(words2).to.be.deep.equal(words1);
+    });
+
+    it('tests suggestions', () => {
+        const trie = Trie.create(sampleWords);
+        const suggestions = trie.suggest('wall', 10);
+        expect(suggestions).to.contain('walk');
     });
 
     it('Tests iterate', () => {

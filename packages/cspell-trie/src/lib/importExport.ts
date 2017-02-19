@@ -74,7 +74,7 @@ function escapeChar(char: string): string {
     return char.replace(regExpEscapeChars, '\\$1');
 }
 
-function trieToExportString(node: TrieNode, base = 16): Sequence<string> {
+function trieToExportString(node: TrieNode, base: number): Sequence<string> {
     function* walk(node: TrieRefNode): IterableIterator<string> {
         if (node.f) {
             yield '*';

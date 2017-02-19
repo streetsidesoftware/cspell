@@ -49,7 +49,7 @@ export const iterateTrie = walk;
  * Generate a Iterator that can walk a Trie and yield the words.
  */
 export function iteratorTrieWords(node: TrieNode): Sequence<string> {
-    return genSequence(walker(node))
+    return walk(node)
         .filter(r => isWordTerminationNode(r.node))
         .map(r => r.text);
 }
