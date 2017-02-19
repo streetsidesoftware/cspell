@@ -1,8 +1,8 @@
-import { suggest, SuggestionResult } from './suggest';
-import { Trie, createTrie, addWordToTrie } from './Trie';
+import { SuggestionResult } from './suggest';
 import { genSequence } from 'gensequence';
 import * as Rx from 'rxjs/Rx';
 import { IterableLike } from '../util/IterableLike';
+import {Trie, importTrieRx} from 'cspell-trie';
 
 export interface SpellingDictionary {
     has(word: string): boolean;
@@ -10,14 +10,16 @@ export interface SpellingDictionary {
     size: number;
 }
 
-export class SpellingDictionaryInstance implements SpellingDictionary {
+const defaultSuggestions = 10;
+
+export class SpellingDictionaryFromSet implements SpellingDictionary {
     private _trie: Trie;
 
     constructor(readonly words: Set<string>) {
     }
 
     get trie() {
-        this._trie = this._trie || buildTrieFromSet(this.words);
+        this._trie = this._trie || Trie.create(this.words);
         return this._trie;
     }
 
@@ -26,7 +28,7 @@ export class SpellingDictionaryInstance implements SpellingDictionary {
     }
 
     public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
-        return suggest(this.trie, word.toLowerCase(), numSuggestions);
+        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
     }
 
     public get size() {
@@ -34,22 +36,76 @@ export class SpellingDictionaryInstance implements SpellingDictionary {
     }
 }
 
-function buildTrieFromSet(words: Set<string>): Trie {
-    return genSequence(words)
-        .reduce((trie, word) => addWordToTrie(trie, word), createTrie());
-}
-
 export function createSpellingDictionary(wordList: string[] | IterableLike<string>): SpellingDictionary {
     const words = new Set(genSequence(wordList).map(word => word.toLowerCase().trim()));
-    return new SpellingDictionaryInstance(words);
+    return new SpellingDictionaryFromSet(words);
 }
 
 export function createSpellingDictionaryRx(words: Rx.Observable<string>): Promise<SpellingDictionary> {
     const promise = words
         .map(word => word.toLowerCase().trim())
         .reduce((words, word) => words.add(word), new Set<string>())
-        .map(words => new SpellingDictionaryInstance(words))
+        .map(words => new SpellingDictionaryFromSet(words))
         .toPromise();
     return promise;
 }
 
+
+
+export class SpellingDictionaryFromTrie implements SpellingDictionary {
+    static readonly unknownWordsLimit = 1000;
+    private _size: number = 0;
+    readonly knownWords = new Set<string>();
+    readonly unknownWords = new Set<string>();
+
+    constructor(readonly trie: Trie) {}
+
+    public get size() {
+        if (!this._size) {
+            // walk the trie and get the approximate size.
+            const i = this.trie.iterate();
+            let deeper = true;
+            for (let r = i.next(); !r.done; r = i.next(deeper)) {
+                // count all nodes even though they are not words.
+                // because we are not going to all the leaves, this should give a good enough approximation.
+                this._size += 1;
+                deeper = r.value.text.length < 5;
+            }
+        }
+
+        return this._size;
+    }
+
+    public has(word: string) {
+        word = word.toLowerCase();
+        if (this.knownWords.has(word)) return true;
+        if (this.unknownWords.has(word)) return false;
+
+        const r = this.trie.has(word);
+        // Cache the result.
+        if (r) {
+            this.knownWords.add(word);
+        } else {
+            // clear the unknown word list if it has grown too large.
+            if (this.unknownWords.size > SpellingDictionaryFromTrie.unknownWordsLimit) {
+                this.unknownWords.clear();
+            }
+            this.unknownWords.add(word);
+        }
+
+        return r;
+    }
+
+    public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
+        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
+    }
+}
+
+export function createSpellingDictionaryTrie(data: Rx.Observable<string>): Promise<SpellingDictionary> {
+    const promise = importTrieRx(data)
+        .map(node => new Trie(node))
+        .map(trie => new SpellingDictionaryFromTrie(trie))
+        .take(1)
+        .toPromise();
+    return promise;
+}

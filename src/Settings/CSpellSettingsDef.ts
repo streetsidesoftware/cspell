@@ -77,7 +77,7 @@ export interface BaseSetting {
     patterns?: RegExpPatternDefinition[];
 }
 
-export type DictionaryFileTypes = 'S'|'W'|'C';
+export type DictionaryFileTypes = 'S'|'W'|'C'|'T';
 
 export interface DictionaryDefinition {
     // The reference name of the dictionary, used with program language settings
