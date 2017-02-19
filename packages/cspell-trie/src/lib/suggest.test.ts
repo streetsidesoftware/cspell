@@ -6,33 +6,33 @@ describe('Validate Suggest', () => {
     it('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, 'talks');
+        // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
         expect(suggestions).to.contain('talks');
         expect(suggestions).to.contain('talk');
         expect(suggestions[0]).to.be.equal('talks');
         expect(suggestions[1]).to.be.equal('talk');
         expect(suggestions).to.deep.equal(['talks', 'talk', 'walks', 'talked', 'talker', 'walk']);
-        // console.log(JSON.stringify(results));
     });
 
     it('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore tallk
         const results = Sug.suggest(trie.root, 'tallk');
+        // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
         expect(suggestions).to.contain('talks');
         expect(suggestions).to.contain('talk');
         expect(suggestions[1]).to.be.equal('talks');
         expect(suggestions[0]).to.be.equal('talk');
         expect(suggestions).to.deep.equal(['talk', 'talks', 'walk']);
-        console.log(JSON.stringify(results));
     });
 
     it('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore jernals
         const results = Sug.suggest(trie.root, 'jernals');
-        console.log(JSON.stringify(results));
+        // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
         expect(suggestions).to.deep.equal(['journals', 'journal']);
     });
@@ -41,9 +41,9 @@ describe('Validate Suggest', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfull
         const results = Sug.suggest(trie.root, 'joyfull');
-        console.log(JSON.stringify(results));
+        // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.deep.equal(['journals', 'journal']);
+        expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
     });
 });
 
