@@ -1,5 +1,6 @@
 import {Sequence, genSequence} from 'gensequence';
 import {TrieNode} from './TrieNode';
+import {suggest} from './suggest';
 import {
     iteratorTrieWords,
     walker,
@@ -7,6 +8,7 @@ import {
     createTriFromList,
     orderTrie,
     isWordTerminationNode,
+    insert,
 } from './util';
 
 export class Trie {
@@ -28,10 +30,15 @@ export class Trie {
     /**
      * Provides an ordered sequence of words with the prefix of text.
      */
-    complete(text: string): Sequence<string> {
+    completeWord(text: string): Sequence<string> {
         const n = this.find(text);
         return genSequence(n && isWordTerminationNode(n) ? [text] : [])
             .concat(n ? iteratorTrieWords(n).map(suffix => text + suffix) : []);
+    }
+
+    suggest(text: string, numSuggestions: number): string[] {
+        return suggest(this.root, text, numSuggestions)
+            .map(a => a.word);
     }
 
     words(): Sequence<string> {
@@ -44,6 +51,11 @@ export class Trie {
      */
     iterate(): WalkerIterator {
         return walker(this.root);
+    }
+
+    insert(word: string) {
+        insert(word, this.root);
+        return this;
     }
 
     static create(words: Iterable<string> | IterableIterator<string>): Trie {

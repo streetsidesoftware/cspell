@@ -21,9 +21,9 @@ describe('Validate Trie Class', () => {
 
     it('Tests complete', () => {
         const trie = Trie.create(sampleWords);
-        expect([...trie.complete('lift')]).to.be.deep.equal(sampleWords.filter(w => w.slice(0, 4) === 'lift').sort());
-        expect([...trie.complete('life')]).to.be.deep.equal([]);
-        expect([...trie.complete('lifting')]).to.be.deep.equal(['lifting']);
+        expect([...trie.completeWord('lift')]).to.be.deep.equal(sampleWords.filter(w => w.slice(0, 4) === 'lift').sort());
+        expect([...trie.completeWord('life')]).to.be.deep.equal([]);
+        expect([...trie.completeWord('lifting')]).to.be.deep.equal(['lifting']);
     });
 
     it('Tests iterate', () => {
