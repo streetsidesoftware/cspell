@@ -52,17 +52,21 @@ describe('Validate the wordListCompiler', function() {
     it('test reading and normalizing a file', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
-        return compileWordList(sourceName, destName)
-        .then(s => {
+        return Rx.Observable.fromPromise(compileWordList(sourceName, destName))
+        .flatMap(s => {
             expect(s).to.be.not.empty;
             return new Promise((resolve, reject) => {
                 s.on('finish', () => resolve());
                 s.on('error', () => reject());
-            })
-            .then(() => fsp.readFile(destName, 'UTF-8'))
-            .then(output => {
-                expect(output).to.be.equal(citiesResult);
             });
+        })
+        .do(() => console.log('ONE'))
+        .delay(10)  // need to remove this.
+        .take(1)
+        .toPromise()
+        .then(() => fsp.readFile(destName, 'utf8'))
+        .then(output => {
+            expect(output).to.be.equal(citiesResult);
         });
     });
 

@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist ; rimraf temp",
     "test": "mocha --recursive ./dist/**/*.test.js"
   },
   "repository": {
