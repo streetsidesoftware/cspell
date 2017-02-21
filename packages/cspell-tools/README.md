@@ -24,7 +24,7 @@ To create a word list.
 cspell-tools compile keywords.txt -o ./dictionaries/
 ```
 
-This will filter the words from `keywords.txt` and write them to `/dictionaries/keywords.txt.gz`.
+This will filter the words from `keywords.txt` and write them to `./dictionaries/keywords.txt.gz`.
 
 To create a trie file from a hunspell file.
 
