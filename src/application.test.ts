@@ -2,7 +2,9 @@ import {expect} from 'chai';
 import * as App from './application';
 
 
-describe('Validate the Application', () => {
+describe('Validate the Application', function() {
+    this.timeout(10000);  // make sure we have enough time on Travis.
+
     it('Tests running the application', () => {
         const files = ['samples/text.txt'];
         const options = {};
