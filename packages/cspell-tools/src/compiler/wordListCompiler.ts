@@ -55,11 +55,11 @@ export function compileSetOfWords(lines: Rx.Observable<string>): Promise<Set<str
 }
 
 export function compileWordList(filename: string, destFilename: string): Promise<fs.WriteStream> {
-    const words = regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
+    const getWords = () => regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
 
     const destDir = path.dirname(destFilename);
 
-    return mkdirp(destDir).then(() => compileSetOfWords(words))
+    return mkdirp(destDir).then(() => compileSetOfWords(getWords()))
     .then(set => {
         const data = genSequence(set)
             .map(a => a + '\n')

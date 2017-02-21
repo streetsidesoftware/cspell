@@ -54,16 +54,12 @@ describe('Validate the wordListCompiler', function() {
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
         return Rx.Observable.fromPromise(compileWordList(sourceName, destName))
         .flatMap(s => {
-            console.log(s.path);
-            console.log(s.eventNames().join(', '));
             expect(s).to.be.not.empty;
             return new Promise((resolve, reject) => {
                 s.on('finish', () => resolve());
                 s.on('error', () => reject());
             });
         })
-        .do(() => console.log('ONE'))
-        .delay(10)  // need to remove this.
         .take(1)
         .toPromise()
         .then(() => fsp.readFile(destName, 'utf8'))
