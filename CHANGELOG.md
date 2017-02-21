@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.4.0
+- Support the new cspell-trie file format.  This is useful for very large dictionaries.
+
 ## 1.3.3
 - Use latest version of cspell-tools.
 
