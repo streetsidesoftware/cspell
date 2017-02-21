@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.3.2
+* Fix issue with writing files when the destination path does not exist.
+
 ## 1.3.1
 * Add command line tool for building trie files.
 
