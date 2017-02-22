@@ -69,9 +69,9 @@ The format of each line is:
 In other words, each line has an optional `*` followed by 0 or more (char, index) pairs.
 A missing index implies an index of 0, which is the end of word flag.
 
-**Example Line:** `*s1,e` -- The word can stop here, or add an s plus
+**Example Line:** `*s1,e` -- The word can stop here, or add an **s** and continue at node *1*, or add an **e**
 
-### Example Output
+### Example:
 
 **Word List:**
 - walk
@@ -87,7 +87,7 @@ A missing index implies an index of 0, which is the end of word flag.
 
 becomes
 
-**Output:** (Offset are added for clarity, but do not exist in output)
+**Output:** (Offsets are added for clarity, but do not exist in output)
 ```text
 Offset  Output
 ------- --------
