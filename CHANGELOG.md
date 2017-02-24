@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.4.0
+- Support the new cspell-trie file format.  This is useful for very large dictionaries.
+
 ## 1.3.3
 - Use latest version of cspell-tools.
 
@@ -33,3 +36,5 @@
 
 ## 1.0.0 - 1.0.8
 - These were the initial release used for the vscode spell checker.
+
+<!-- cspell:ignore appveyor -->

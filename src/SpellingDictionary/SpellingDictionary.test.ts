@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { createSpellingDictionaryRx, createSpellingDictionary, SpellingDictionaryInstance } from './SpellingDictionary';
+import { createSpellingDictionaryRx, createSpellingDictionary, SpellingDictionaryFromSet } from './SpellingDictionary';
 import * as Rx from 'rxjs/Rx';
 
 // cSpell:ignore aple
@@ -12,10 +12,10 @@ describe('Verify building Dictionary', () => {
 
         return createSpellingDictionaryRx(Rx.Observable.from(words))
             .then(dict => {
-                expect(dict).to.be.instanceof(SpellingDictionaryInstance);
-                if (dict instanceof SpellingDictionaryInstance) {
+                expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
+                if (dict instanceof SpellingDictionaryFromSet) {
                     expect(dict.words).to.be.instanceof(Set);
-                    expect(dict.trie.c).to.be.instanceof(Map);
+                    expect(dict.trie.root.c).to.be.instanceof(Map);
                 }
                 expect(dict.has('apple')).to.be.true;
                 const suggestions = dict.suggest('aple').map(({word}) => word);
@@ -31,10 +31,10 @@ describe('Verify building Dictionary', () => {
         ];
 
         const dict = createSpellingDictionary(words);
-        expect(dict).to.be.instanceof(SpellingDictionaryInstance);
-        if (dict instanceof SpellingDictionaryInstance) {
+        expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
+        if (dict instanceof SpellingDictionaryFromSet) {
             expect(dict.words).to.be.instanceof(Set);
-            expect(dict.trie.c).to.be.instanceof(Map);
+            expect(dict.trie.root.c).to.be.instanceof(Map);
         }
         expect(dict.has('apple')).to.be.true;
         const suggestions = dict.suggest('aple').map(({word}) => word);

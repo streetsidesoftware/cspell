@@ -10,7 +10,7 @@ describe('Validate DictionarySettings', () => {
         const mapDefs = DictSettings.filterDictDefsToLoad(['php', 'wordsEn', 'unknown'], defaultSettings.dictionaryDefinitions!);
         const files = mapDefs.map(a => a[1]).map(def => def.path!);
         expect(files.filter(a => a.includes('php.txt'))).to.be.lengthOf(1);
-        expect(files.filter(a => a.includes('wordsEn.txt'))).to.be.lengthOf(1);
+        expect(files.filter(a => a.includes('wordsEn.trie'))).to.be.lengthOf(1);
         expect(files.filter(a => a.includes('unknown'))).to.be.empty;
         // console.log(mapDefs);
     });
