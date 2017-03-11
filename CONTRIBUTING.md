@@ -8,6 +8,10 @@ These are some notes about contributing.
 
 * https://travis-ci.org/Jason3S/cspell
 
+### Appveyor
+
+* https://ci.appveyor.com/project/Jason3S/cspell
+
 ### Code Coverage
 
 * https://coveralls.io/github/Jason3S/cspell
