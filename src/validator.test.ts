@@ -106,6 +106,28 @@ describe('Validator', function() {
             expect(words).to.contain('mischecked');
         });
     });
+
+    it('Issue #7', () => {
+        const text = `Fails to detect obviously misspelt words, such as:
+            hellosd
+            applesq
+            bananasa
+            respectss
+        `;
+        const expected = [
+            'hellosd',
+            'applesq',
+            'bananasa',
+            'respectss',
+       ];
+        const languageId = 'plaintext';
+        const settings = getSettings(text, languageId);
+        const results = Validator.validateText(text, settings);
+        return results.then(results => {
+            const words = results.map(({text}) => text);
+            expect(words.sort()).to.be.deep.equal(expected.sort());
+        });
+    });
 });
 
 const sampleCode = `

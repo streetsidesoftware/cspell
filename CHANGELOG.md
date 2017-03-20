@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.5.0
+- Fix issue #7 - where trailing characters on long words were ignored.
+
 ## 1.4.0
 - Support the new cspell-trie file format.  This is useful for very large dictionaries.
 
