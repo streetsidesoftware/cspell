@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.4.0
+- fix an issue where words trailed by extra characters were considered correct, like: 'bananasttt'.
+
 ## 1.3.0
 - add generating suggestions from the Trie.
 

@@ -16,10 +16,11 @@ export class Trie {
 
     find(text: string): TrieNode | undefined {
         let n: TrieNode | undefined = this.root;
-        for (let p = 0; n && n.c && p < text.length; ++p) {
+        let p: number;
+        for (p = 0; n && n.c && p < text.length; ++p) {
             n = n.c.get(text[p]);
         }
-        return n;
+        return p === text.length ? n : undefined;
     }
 
     has(word: string): boolean {

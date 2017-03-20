@@ -50,6 +50,12 @@ describe('Validate Trie Class', () => {
             .map(r => r.text);
         expect(words).to.be.deep.equal(sampleWords.sort());
     });
+
+    it('Test where only part of the word is correct', () => {
+        const trie = Trie.create(sampleWords);
+        expect(trie.has('talking')).to.be.true;
+        expect(trie.has('talkings')).to.be.false;
+    });
 });
 
 const sampleWords = [
