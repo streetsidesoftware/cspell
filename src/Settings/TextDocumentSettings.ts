@@ -3,7 +3,7 @@ import { CSpellUserSettings } from './CSpellSettingsDef';
 import * as CSpellSettings from './CSpellSettingsServer';
 import { getInDocumentSettings } from './InDocSettings';
 
-export function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]) {
+export function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellUserSettings {
     const langSettings = calcSettingsForLanguageId(settings, languageId);
     return CSpellSettings.mergeSettings(langSettings, extractSettingsFromText(text));
 }
