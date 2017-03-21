@@ -107,6 +107,7 @@ describe('Validator', function() {
         });
     });
 
+    // cspell:ignore hellosd applesq bananasa respectss
     it('Issue #7', () => {
         const text = `Fails to detect obviously misspelt words, such as:
             hellosd
