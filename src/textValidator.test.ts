@@ -70,7 +70,7 @@ describe('Validate textValidator functions', () => {
     });
 
     it('tests trailing s, ed, ing, etc. are attached to the words', () => {
-        const dictEmpty = createSpellingDictionary([]);
+        const dictEmpty = createSpellingDictionary([], 'empty');
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictEmpty, { allowCompoundWords: true });
         const errors = result.map(wo => wo.text).toArray();
@@ -86,13 +86,13 @@ describe('Validate textValidator functions', () => {
     });
 
     it('tests maxDuplicateProblems', () => {
-        const dict = createSpellingDictionary([]);
+        const dict = createSpellingDictionary([], 'empty');
         const text = sampleText;
         const result = validateText(text, dict, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 });
         const freq = FreqCounter.create(result.map(t => t.text));
         expect(freq.total).to.be.equal(freq.counters.size);
         const words = freq.counters.keys();
-        const dict2 = createSpellingDictionary(words);
+        const dict2 = createSpellingDictionary(words, 'test');
         const result2 = [...validateText(text, dict2, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 })];
         expect(result2.length).to.be.equal(0);
     });
@@ -100,14 +100,14 @@ describe('Validate textValidator functions', () => {
 
 function getSpellingDictionaryCollection() {
     const dicts = [
-        createSpellingDictionary(colors),
-        createSpellingDictionary(fruit),
-        createSpellingDictionary(animals),
-        createSpellingDictionary(insects),
-        createSpellingDictionary(words),
+        createSpellingDictionary(colors, 'colors'),
+        createSpellingDictionary(fruit, 'fruit'),
+        createSpellingDictionary(animals, 'animals'),
+        createSpellingDictionary(insects, 'insects'),
+        createSpellingDictionary(words, 'words'),
     ];
 
-    return new SpellingDictionaryCollection(dicts);
+    return new SpellingDictionaryCollection(dicts, 'collection');
 }
 
 const colors = ['red', 'green', 'blue', 'black', 'white', 'orange', 'purple', 'yellow', 'gray', 'brown'];

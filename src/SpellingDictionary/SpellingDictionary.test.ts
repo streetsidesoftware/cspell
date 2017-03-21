@@ -10,7 +10,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
 
-        return createSpellingDictionaryRx(Rx.Observable.from(words))
+        return createSpellingDictionaryRx(Rx.Observable.from(words), 'test')
             .then(dict => {
                 expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
                 if (dict instanceof SpellingDictionaryFromSet) {
@@ -30,7 +30,8 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
 
-        const dict = createSpellingDictionary(words);
+        const dict = createSpellingDictionary(words, 'words');
+        expect(dict.name).to.be.equal('words');
         expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
         if (dict instanceof SpellingDictionaryFromSet) {
             expect(dict.words).to.be.instanceof(Set);

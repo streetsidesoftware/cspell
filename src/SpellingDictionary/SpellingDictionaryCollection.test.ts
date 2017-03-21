@@ -9,12 +9,12 @@ describe('Verify using multiple dictionaries', () => {
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
     it('checks for existence', () => {
         const dicts = [
-            createSpellingDictionary(wordsA),
-            createSpellingDictionary(wordsB),
-            createSpellingDictionary(wordsC),
+            createSpellingDictionary(wordsA, 'wordsA'),
+            createSpellingDictionary(wordsB, 'wordsB'),
+            createSpellingDictionary(wordsC, 'wordsC'),
         ];
 
-        const dictCollection = new SpellingDictionaryCollection(dicts);
+        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
         expect(dictCollection.has('mango')).to.be.true;
         expect(dictCollection.has('tree')).to.be.false;
         expect(dictCollection.size).to.be.equal(wordsA.length + wordsB.length + wordsC.length);
@@ -22,13 +22,13 @@ describe('Verify using multiple dictionaries', () => {
 
     it('checks for suggestions', () => {
         const dicts = [
-            createSpellingDictionary(wordsA),
-            createSpellingDictionary(wordsB),
-            createSpellingDictionary(wordsA),
-            createSpellingDictionary(wordsC),
+            createSpellingDictionary(wordsA, 'wordsA'),
+            createSpellingDictionary(wordsB, 'wordsB'),
+            createSpellingDictionary(wordsA, 'wordsA'),
+            createSpellingDictionary(wordsC, 'wordsC'),
         ];
 
-        const dictCollection = createCollection(dicts);
+        const dictCollection = createCollection(dicts, 'test');
         const sugsForTango = dictCollection.suggest('tango', 10);
         expect(sugsForTango).to.be.not.empty;
         expect(sugsForTango[0].word).to.be.equal('mango');
@@ -39,12 +39,12 @@ describe('Verify using multiple dictionaries', () => {
 
     it('checks for suggestions from mixed sources', () => {
         return Promise.all([
-            createSpellingDictionaryRx(Rx.Observable.from(wordsA)),
-            createSpellingDictionary(wordsB),
-            createSpellingDictionary(wordsC),
+            createSpellingDictionaryRx(Rx.Observable.from(wordsA), 'wordsA'),
+            createSpellingDictionary(wordsB, 'wordsB'),
+            createSpellingDictionary(wordsC, 'wordsC'),
         ])
         .then(dicts => {
-            const dictCollection = new SpellingDictionaryCollection(dicts);
+            const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
             expect(dictCollection.has('mango'));
             expect(dictCollection.has('lion'));
             expect(dictCollection.has('ant'));
@@ -65,12 +65,12 @@ describe('Verify using multiple dictionaries', () => {
 
     it('creates using createCollectionP', () => {
         const dicts = [
-            Promise.resolve(createSpellingDictionary(wordsA)),
-            Promise.resolve(createSpellingDictionary(wordsB)),
-            Promise.resolve(createSpellingDictionary(wordsC)),
+            Promise.resolve(createSpellingDictionary(wordsA, 'wordsA')),
+            Promise.resolve(createSpellingDictionary(wordsB, 'wordsB')),
+            Promise.resolve(createSpellingDictionary(wordsC, 'wordsC')),
         ];
 
-        return createCollectionP(dicts).then(dictCollection => {
+        return createCollectionP(dicts, 'test').then(dictCollection => {
             expect(dictCollection.has('mango')).to.be.true;
             expect(dictCollection.has('tree')).to.be.false;
             const sugs = dictCollection.suggest('mangos', 4);

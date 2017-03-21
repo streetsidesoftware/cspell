@@ -3,7 +3,7 @@ import { genSequence } from 'gensequence';
 import { SuggestionResult } from './suggest';
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
-    constructor(readonly dictionaries: SpellingDictionary[]) {
+    constructor(readonly dictionaries: SpellingDictionary[], readonly name: string) {
         this.dictionaries = this.dictionaries.filter(a => !!a.size);
     }
 
@@ -20,8 +20,8 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     }
 }
 
-export function createCollection(dictionaries: SpellingDictionary[]) {
-    return new SpellingDictionaryCollection(dictionaries);
+export function createCollection(dictionaries: SpellingDictionary[], name: string) {
+    return new SpellingDictionaryCollection(dictionaries, name);
 }
 
 export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string) {
@@ -47,7 +47,7 @@ export function makeSuggestions(dicts: SpellingDictionary[], word: string, numSu
     return allSuggestions.slice(0, numSuggestions);
 }
 
-export function createCollectionP(dicts: Promise<SpellingDictionary>[]): Promise<SpellingDictionaryCollection> {
+export function createCollectionP(dicts: Promise<SpellingDictionary>[], name: string): Promise<SpellingDictionaryCollection> {
     return Promise.all(dicts)
-        .then(dicts => new SpellingDictionaryCollection(dicts));
+        .then(dicts => new SpellingDictionaryCollection(dicts, name));
 }

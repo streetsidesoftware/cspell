@@ -3,6 +3,7 @@ import {
     splitLineIntoWordsRx, splitLineIntoCodeWordsRx
 } from '../wordListHelper';
 import { SpellingDictionary, createSpellingDictionaryRx, createSpellingDictionaryTrie } from './SpellingDictionary';
+import * as path from 'path';
 
 export interface LoadOptions {
     // Type of file:
@@ -50,17 +51,17 @@ function load(uri: string, type: string): Promise<SpellingDictionary>  {
 
 
 function loadSimpleWordList(filename: string) {
-    return createSpellingDictionaryRx(loadWordsRx(filename));
+    return createSpellingDictionaryRx(loadWordsRx(filename), path.basename(filename));
 }
 
 function loadWordList(filename: string) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoWordsRx));
+    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoWordsRx), path.basename(filename));
 }
 
 function loadCodeWordList(filename: string) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoCodeWordsRx));
+    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoCodeWordsRx), path.basename(filename));
 }
 
 function loadTrie(filename: string) {
-    return createSpellingDictionaryTrie(loadWordsRx(filename));
+    return createSpellingDictionaryTrie(loadWordsRx(filename), path.basename(filename));
 }

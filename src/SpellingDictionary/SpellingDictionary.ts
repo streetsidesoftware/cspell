@@ -5,9 +5,10 @@ import { IterableLike } from '../util/IterableLike';
 import {Trie, importTrieRx} from 'cspell-trie';
 
 export interface SpellingDictionary {
+    readonly name: string;
     has(word: string): boolean;
     suggest(word: string, numSuggestions?: number): SuggestionResult[];
-    size: number;
+    readonly size: number;
 }
 
 const defaultSuggestions = 10;
@@ -15,7 +16,7 @@ const defaultSuggestions = 10;
 export class SpellingDictionaryFromSet implements SpellingDictionary {
     private _trie: Trie;
 
-    constructor(readonly words: Set<string>) {
+    constructor(readonly words: Set<string>, readonly name: string) {
     }
 
     get trie() {
@@ -36,16 +37,16 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
     }
 }
 
-export function createSpellingDictionary(wordList: string[] | IterableLike<string>): SpellingDictionary {
+export function createSpellingDictionary(wordList: string[] | IterableLike<string>, name: string): SpellingDictionary {
     const words = new Set(genSequence(wordList).map(word => word.toLowerCase().trim()));
-    return new SpellingDictionaryFromSet(words);
+    return new SpellingDictionaryFromSet(words, name);
 }
 
-export function createSpellingDictionaryRx(words: Rx.Observable<string>): Promise<SpellingDictionary> {
+export function createSpellingDictionaryRx(words: Rx.Observable<string>, name: string): Promise<SpellingDictionary> {
     const promise = words
         .map(word => word.toLowerCase().trim())
         .reduce((words, word) => words.add(word), new Set<string>())
-        .map(words => new SpellingDictionaryFromSet(words))
+        .map(words => new SpellingDictionaryFromSet(words, name))
         .toPromise();
     return promise;
 }
@@ -58,7 +59,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly knownWords = new Set<string>();
     readonly unknownWords = new Set<string>();
 
-    constructor(readonly trie: Trie) {}
+    constructor(readonly trie: Trie, readonly name: string) {}
 
     public get size() {
         if (!this._size) {
@@ -101,10 +102,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 }
 
-export function createSpellingDictionaryTrie(data: Rx.Observable<string>): Promise<SpellingDictionary> {
+export function createSpellingDictionaryTrie(data: Rx.Observable<string>, name: string): Promise<SpellingDictionary> {
     const promise = importTrieRx(data)
         .map(node => new Trie(node))
-        .map(trie => new SpellingDictionaryFromTrie(trie))
+        .map(trie => new SpellingDictionaryFromTrie(trie, name))
         .take(1)
         .toPromise();
     return promise;
