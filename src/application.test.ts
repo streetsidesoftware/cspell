@@ -1,3 +1,5 @@
+/// <reference types="@types/mocha" />
+
 import {expect} from 'chai';
 import * as App from './application';
 
