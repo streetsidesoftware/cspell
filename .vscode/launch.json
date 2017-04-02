@@ -7,9 +7,19 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Run CSpell",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["-e", "src", "-v", "**/*.ts", "**/*.test.ts"],
+            "cwd": "${workspaceRoot}",
+			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run Trace",
+            "program": "${workspaceRoot}/dist/app.js",
+			"args": ["trace", "about"],
             "cwd": "${workspaceRoot}",
 			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
             "sourceMaps": true
