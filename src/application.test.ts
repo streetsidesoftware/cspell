@@ -9,8 +9,8 @@ describe('Validate the Application', function() {
         const files = ['samples/text.txt'];
         const options = {};
         const logger = new Logger();
-        const app = new App.CSpellApplication(files, options, logger);
-        return app.run()
+        const lint = App.lint(files, options, logger);
+        return lint
             .then(result => {
                 expect(logger.errorCount).to.be.equal(0);
                 expect(logger.infoCount).to.be.greaterThan(0);
@@ -23,8 +23,8 @@ describe('Validate the Application', function() {
         const files = ['samples/text.txt'];
         const options = { verbose: true };
         const logger = new Logger();
-        const app = new App.CSpellApplication(files, options, logger);
-        return app.run()
+        const lint = App.lint(files, options, logger);
+        return lint
             .then(result => {
                 expect(logger.errorCount).to.be.equal(0);
                 expect(logger.infoCount).to.be.greaterThan(0);
@@ -37,8 +37,8 @@ describe('Validate the Application', function() {
         const files = ['samples/text.txt'];
         const options = { wordsOnly: true, unique: true };
         const logger = new Logger();
-        const app = new App.CSpellApplication(files, options, logger);
-        return app.run()
+        const lint = App.lint(files, options, logger);
+        return lint
             .then(result => {
                 expect(logger.errorCount).to.be.equal(0);
                 expect(logger.infoCount).to.be.greaterThan(0);
