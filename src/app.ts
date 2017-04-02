@@ -8,6 +8,7 @@ import * as App from './application';
 import * as chalk from 'chalk';
 
 interface Options extends CSpellApplicationOptions, program.IExportedCommand {}
+interface TraceOptions extends App.TraceOptions, program.IExportedCommand {}
 // interface InitOptions extends Options {}
 
 function issueEmitter(issue: App.Issue) {
@@ -68,6 +69,22 @@ program
                 console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);
                 process.exit(result.issues ? 1 : 0);
             },
+            (error: AppError) => {
+                console.error(error.message);
+                process.exit(1);
+            }
+        );
+    });
+
+program
+    .command('trace')
+    .description('Trace words')
+    .arguments('<words...>')
+    .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .action((words: string[], options: TraceOptions) => {
+        showHelp = false;
+        App.trace(words, options).then(
+            () => process.exit(0),
             (error: AppError) => {
                 console.error(error.message);
                 process.exit(1);
