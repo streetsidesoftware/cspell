@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "node"
-  - "6"
+  - "6.10.0" # Fix it at 6.10.0 since 6.10.1 has a bug
 script:
   - npm install
   # the prepublish script run during install currently does clean-build and test
