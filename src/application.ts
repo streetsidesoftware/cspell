@@ -18,6 +18,10 @@ export interface CSpellApplicationOptions {
     unique?: boolean;
 }
 
+export interface TraceOptions {
+    config?: string;
+}
+
 export interface AppError extends NodeJS.ErrnoException {};
 
 export interface RunResult {
@@ -53,42 +57,52 @@ export interface Emitters {
     error: ErrorEmitter;
 }
 
-export class CSpellApplication {
-
+export class CSpellApplicationConfiguration {
     readonly info: (message?: any, ...args: any[]) => void;
     readonly debug: (message?: any, ...args: any[]) => void;
     readonly logIssue: (issue: Issue) => void;
     readonly uniqueFilter: (issue: Issue) => boolean;
-    private configGlob = '{cspell.json,.cspell.json}';
-    private configGlobOptions: minimatch.IOptions = { nocase: true };
-    private static defaultExcludeGlobs = [
-        'node_modules/**'
-    ];
-    private excludes: GlobSrcInfo[];
+
+    readonly configGlob: string = '{cspell.json,.cspell.json}';
+    readonly configGlobOptions: minimatch.IOptions = { nocase: true };
+    readonly excludes: GlobSrcInfo[];
 
     constructor(
         readonly files: string[],
         readonly options: CSpellApplicationOptions,
         readonly emitters: Emitters
     ) {
-        this.info              = emitters.info;
-        this.debug             = emitters.debug;
+        this.info              = emitters.info || this.info;
+        this.debug             = emitters.debug || this.debug;
         this.configGlob        = options.config || this.configGlob;
         this.configGlobOptions = options.config ? {} : this.configGlobOptions;
-        this.excludes          = this.calcExcludeGlobInfo(options.exclude);
-        this.logIssue          = emitters.issue;
+        this.excludes          = calcExcludeGlobInfo(options.exclude);
+        this.logIssue          = emitters.issue || this.logIssue;
         this.uniqueFilter      = options.unique
             ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text)
             : () => true;
     }
+}
 
-    run(): Promise<RunResult> {
+export function lint(
+    files: string[],
+    options: CSpellApplicationOptions,
+    emitters: Emitters
+) {
+    const cfg = new CSpellApplicationConfiguration(files, options, emitters);
+    return runLint(cfg);
+}
 
-        this.header();
+function runLint(cfg: CSpellApplicationConfiguration) {
+    return run();
 
-        const configRx = globRx(this.configGlob, this.configGlobOptions)
+    function run(): Promise<RunResult> {
+
+        header();
+
+        const configRx = globRx(cfg.configGlob, cfg.configGlobOptions)
             .map(util.unique)
-            .do(configFiles => this.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`))
+            .do(configFiles => cfg.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`))
             .map(filenames => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)}))
             .share()
             ;
@@ -100,15 +114,15 @@ export class CSpellApplication {
 
         // Get Exclusions from the config files.
         const exclusionGlobs = configRx
-            .map(({filename, config}) => CSpellApplication.extractGlobExcludesFromConfig(filename, config))
+            .map(({filename, config}) => extractGlobExcludesFromConfig(filename, config))
             .flatMap(a => a)
             .toArray()
-            .map(a => a.concat(this.excludes))
+            .map(a => a.concat(cfg.excludes))
             .toPromise();
 
 
 
-        const filesRx: Rx.Observable<FileInfo> = this.filterFiles(CSpellApplication.findFiles(this.files), exclusionGlobs)
+        const filesRx: Rx.Observable<FileInfo> = filterFiles(findFiles(cfg.files), exclusionGlobs)
             .flatMap(filename => {
                 return fsp.readFile(filename).then(
                     text => ({text: text.toString(), filename}),
@@ -134,7 +148,7 @@ export class CSpellApplication {
             .map(({configInfo, filename, text}) => {
                 const ext = path.extname(filename);
                 const languageIds = cspell.getLanguagesForExt(ext);
-                this.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
+                cfg.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
                 const settings = cspell.mergeSettings(cspell.getDefaultSettings(), configInfo.config);
                 const config = cspell.constructSettingsForText(settings, text, languageIds);
                 return {configInfo: {...configInfo, config}, filename, text};
@@ -142,7 +156,7 @@ export class CSpellApplication {
             .filter(info => info.configInfo.config.enabled !== false)
             .do(() => status.files += 1)
             .flatMap(({configInfo, filename, text}) => {
-                this.debug(commentJson.stringify(configInfo, undefined, 2));
+                cfg.debug(commentJson.stringify(configInfo, undefined, 2));
                 return cspell.validateText(text, configInfo.config)
                     .then(wordOffsets => {
                         return {
@@ -153,10 +167,10 @@ export class CSpellApplication {
             })
             .do(info => {
                 const {filename, issues} = info;
-                this.info(`Checking: ${filename} ... Issues: ${issues.length}`);
+                cfg.info(`Checking: ${filename} ... Issues: ${issues.length}`);
                 issues
-                    .filter(this.uniqueFilter)
-                    .forEach((issue) => this.logIssue(issue));
+                    .filter(cfg.uniqueFilter)
+                    .forEach((issue) => cfg.logIssue(issue));
             })
             .filter(info => !!info.issues.length)
             .do(issue => status.filesWithIssues.add(issue.filename))
@@ -165,76 +179,87 @@ export class CSpellApplication {
         return r;
     }
 
-    static createInit(_: CSpellApplicationOptions): Promise<void> {
-        return Promise.resolve();
-    }
-
-    protected header() {
-        this.info(`
+    function header() {
+        cfg.info(`
 cspell;
 Date: ${(new Date()).toUTCString()}
 Options:
-    verbose:   ${yesNo(!!this.options.verbose)}
-    config:    ${this.configGlob}
-    exclude:   ${this.excludes.map(a => a.glob).join('\n             ')}
-    files:     ${this.files}
-    wordsOnly: ${yesNo(!!this.options.wordsOnly)}
-    unique:    ${yesNo(!!this.options.unique)}
+    verbose:   ${yesNo(!!cfg.options.verbose)}
+    config:    ${cfg.configGlob}
+    exclude:   ${cfg.excludes.map(a => a.glob).join('\n             ')}
+    files:     ${cfg.files}
+    wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
+    unique:    ${yesNo(!!cfg.options.unique)}
 `);
     }
 
 
-    protected isExcluded(filename: string, globs: GlobSrcInfo[]) {
+    function isExcluded(filename: string, globs: GlobSrcInfo[]) {
         const cwd = process.cwd();
         const relFilename = (filename.slice(0, cwd.length) === cwd) ? filename.slice(cwd.length) : filename;
 
         for (const glob of globs) {
             if (glob.regex.test(relFilename)) {
-                this.info(`Excluded File: ${filename}; Excluded by ${glob.glob} from ${glob.source}`);
+                cfg.info(`Excluded File: ${filename}; Excluded by ${glob.glob} from ${glob.source}`);
                 return true;
             }
         }
         return false;
     }
 
-    static findFiles(globPatterns: string[]): Rx.Observable<string> {
-        const processed = new Set<string>();
-
-        return Rx.Observable.from(globPatterns)
-            .flatMap(pattern => globRx(pattern)
-                .catch((error: AppError) => {
-                    return new Promise<string[]>((resolve) => resolve(Promise.reject({...error, message: 'Error with glob search.'})));
-            }))
-            .flatMap(a => a)
-            .filter(filename => !processed.has(filename))
-            .do(filename => processed.add(filename));
-    }
-
-    protected filterFiles(files: Rx.Observable<string>, excludeGlobs: Promise<GlobSrcInfo[]>): Rx.Observable<string> {
+    function filterFiles(files: Rx.Observable < string >, excludeGlobs: Promise<GlobSrcInfo[]>): Rx.Observable < string > {
 
         excludeGlobs.then(excludeGlobs => {
             const excludeInfo = excludeGlobs.map(g => `Glob: ${g.glob} from ${g.source}`);
-            this.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`);
+            cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`);
         });
         return Rx.Observable.combineLatest(
             files,
             excludeGlobs,
-            (filename, globs) => ({filename, globs})
+            (filename, globs) => ({ filename, globs })
         )
-        .filter(({filename, globs}) => !this.isExcluded(filename, globs))
-        .map(({filename}) => filename);
-    }
-
-    protected calcExcludeGlobInfo(commandLineExclude: string | undefined): GlobSrcInfo[] {
-        const excludes = commandLineExclude && commandLineExclude.split(/\s+/g).map(glob => ({glob, source: 'arguments'}))
-            || CSpellApplication.defaultExcludeGlobs.map(glob => ({glob, source: 'default'}));
-        return excludes.map(({source, glob}) => ({source, glob, regex: minimatch.makeRe(glob)}));
-    }
-
-    private static extractGlobExcludesFromConfig(filename: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
-        return (config.ignorePaths || []).map(glob => ({ source: filename, glob, regex: minimatch.makeRe(glob)}));
+            .filter(({ filename, globs }) => !isExcluded(filename, globs))
+            .map(({ filename }) => filename);
     }
 }
+
+
+export function trace(_words: string[], _options: TraceOptions): Promise<void> {
+    return Promise.resolve();
+}
+
+export function createInit(_: CSpellApplicationOptions): Promise<void> {
+    return Promise.resolve();
+}
+
+const defaultExcludeGlobs = [
+    'node_modules/**'
+];
+
+function findFiles(globPatterns: string[]): Rx.Observable<string> {
+    const processed = new Set<string>();
+
+    return Rx.Observable.from(globPatterns)
+        .flatMap(pattern => globRx(pattern)
+            .catch((error: AppError) => {
+                return new Promise<string[]>((resolve) => resolve(Promise.reject({...error, message: 'Error with glob search.'})));
+        }))
+        .flatMap(a => a)
+        .filter(filename => !processed.has(filename))
+        .do(filename => processed.add(filename));
+}
+
+
+function calcExcludeGlobInfo(commandLineExclude: string | undefined): GlobSrcInfo[] {
+    const excludes = commandLineExclude && commandLineExclude.split(/\s+/g).map(glob => ({glob, source: 'arguments'}))
+        || defaultExcludeGlobs.map(glob => ({glob, source: 'default'}));
+    return excludes.map(({source, glob}) => ({source, glob, regex: minimatch.makeRe(glob)}));
+}
+
+function extractGlobExcludesFromConfig(filename: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
+    return (config.ignorePaths || []).map(glob => ({ source: filename, glob, regex: minimatch.makeRe(glob)}));
+}
+
 
 type GlobRx = (filename: string, options?: minimatch.IOptions) => Rx.Observable<string[]>;
 
