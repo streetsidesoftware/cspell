@@ -38,12 +38,16 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
 }
 
 export function createSpellingDictionary(wordList: string[] | IterableLike<string>, name: string): SpellingDictionary {
-    const words = new Set(genSequence(wordList).map(word => word.toLowerCase().trim()));
+    const words = new Set(genSequence(wordList)
+        .filter(word => typeof word === 'string')
+        .map(word => word.toLowerCase().trim())
+    );
     return new SpellingDictionaryFromSet(words, name);
 }
 
 export function createSpellingDictionaryRx(words: Rx.Observable<string>, name: string): Promise<SpellingDictionary> {
     const promise = words
+        .filter(word => typeof word === 'string')
         .map(word => word.toLowerCase().trim())
         .reduce((words, word) => words.add(word), new Set<string>())
         .map(words => new SpellingDictionaryFromSet(words, name))
