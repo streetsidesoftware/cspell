@@ -7,8 +7,8 @@ import { CSpellApplicationOptions, AppError } from './application';
 import * as App from './application';
 import * as chalk from 'chalk';
 
-interface Options extends CSpellApplicationOptions, program.IExportedCommand {}
-interface TraceOptions extends App.TraceOptions, program.IExportedCommand {}
+interface Options extends CSpellApplicationOptions {}
+interface TraceOptions extends App.TraceOptions {}
 // interface InitOptions extends Options {}
 
 function issueEmitter(issue: App.Issue) {
