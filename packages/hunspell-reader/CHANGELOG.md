@@ -1,6 +1,10 @@
 # Release Notes
 
-## 1.04
+## 1.1.0
+- Update packages.
+- Remove dependency on fs-promise
+
+## 1.0.4
 - Update packages.
 
 ## 1.0.3
