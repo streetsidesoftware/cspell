@@ -14,8 +14,8 @@
     "clean": "rimraf dist",
     "clean-build": "npm run clean; npm run build",
     "coverage": "NODE_ENV=test nyc npm run test-ts",
-    "test-ts": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
-    "test": "mocha --recursive ./dist/**/*.test.js"
+    "test-ts": "rimraf temp ; NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
+    "test": "rimraf temp ; mocha --recursive ./dist/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -31,31 +31,33 @@
   },
   "homepage": "https://github.com/Jason3S/cspell-lib#readme",
   "devDependencies": {
-    "@types/chai": "^3.4.34",
-    "@types/fs-promise": "^1.0.1",
-    "@types/lorem-ipsum": "^1.0.1",
-    "@types/mocha": "^2.2.39",
-    "@types/node": "^7.0.5",
+    "@types/chai": "^3.5.2",
+    "@types/fs-extra": "^3.0.0",
+    "@types/lorem-ipsum": "^1.0.2",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^7.0.18",
     "chai": "^3.5.0",
-    "lorem-ipsum": "^1.0.3",
-    "mocha": "^3.2.0",
-    "nyc": "^10.1.2",
-    "rimraf": "^2.5.4",
-    "ts-node": "^2.1.0",
-    "tslint": "^4.4.2",
-    "typescript": "^2.1.6"
+    "fs-extra": "^3.0.1",
+    "lorem-ipsum": "^1.0.4",
+    "mocha": "^3.3.0",
+    "nyc": "^10.3.2",
+    "rimraf": "^2.6.1",
+    "ts-node": "^3.0.4",
+    "tslint": "^5.2.0",
+    "typescript": "^2.3.2"
   },
   "dependencies": {
-    "fs-promise": "^2.0.0",
-    "iconv-lite": "^0.4.15",
-    "rxjs": "^5.1.1",
+    "iconv-lite": "^0.4.17",
+    "rxjs": "^5.4.0",
     "rxjs-stream": "^1.0.4"
   },
   "nyc": {
     "include": [
       "src/**/*.ts"
     ],
-    "exclude": [],
+    "exclude": [
+      "src/**/*.test.ts"
+    ],
     "extension": [
       ".ts"
     ],

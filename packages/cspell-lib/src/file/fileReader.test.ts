@@ -2,8 +2,22 @@ import { expect } from 'chai';
 import * as fReader from './fileReader';
 import * as Rx from 'rxjs/Rx';
 import * as fs from 'fs';
+import * as path from 'path';
 
 describe('Validate the fileReader', () => {
+    const fileCities = path.join(__dirname, '..', '..', 'samples', 'cities.txt');
+    const sampleCities = [
+        'New York',
+        'New Amsterdam',
+        'Las Angles',
+        'San Francisco',
+        'New Delhi',
+        'Mexico City',
+        'London',
+        'Paris',
+        ''
+    ];
+
     it('tests stringsToLines', () => {
         const strings = Rx.Observable.of('a1\n2\n3\n4', '5\n6');
         return fReader.stringsToLinesRx(strings).toArray().toPromise().then((a) => {
@@ -36,6 +50,15 @@ describe('Validate the fileReader', () => {
             .then(lines => {
                 const expected = fs.readFileSync(__filename, 'UTF-8').split('\n');
                 expect(lines).to.deep.equal(expected);
+            });
+    });
+
+    it('tests reading the cities sample', () => {
+        return fReader.lineReaderRx(fileCities)
+            .toArray()
+            .toPromise()
+            .then(lines => {
+                expect(lines).to.be.deep.equal(sampleCities);
             });
     });
 
