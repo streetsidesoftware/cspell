@@ -1,5 +1,9 @@
 #!/usr/bin/env node --max_old_space_size=4096
 
+// For large dictionaries, it is necessary to increase the memory limit.
+// # !/usr/bin/env node --max_old_space_size=8192
+
+
 import { compileWordList, compileTrie } from './compiler';
 import * as path from 'path';
 import * as program from 'commander';

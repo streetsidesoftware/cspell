@@ -7,7 +7,7 @@ import { lineReaderRx } from './fileReader';
 import { writeToFile, writeToFileRxP} from 'cspell-lib';
 import { Observable } from 'rxjs/Rx';
 import * as path from 'path';
-import { mkdirp } from 'fs-promise';
+import { mkdirp } from 'fs-extra';
 import { observableFromIterable } from 'rxjs-from-iterable';
 import * as Trie from 'cspell-trie';
 import * as HR from 'hunspell-reader';

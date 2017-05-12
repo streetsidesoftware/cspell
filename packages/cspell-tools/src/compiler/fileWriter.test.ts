@@ -4,7 +4,7 @@ import * as fileReader from './fileReader';
 import * as Rx from 'rxjs/Rx';
 import * as loremIpsum from 'lorem-ipsum';
 import * as path from 'path';
-import { mkdirp } from 'fs-promise';
+import { mkdirp } from 'fs-extra';
 
 describe('Validate the writer', () => {
     it('tests writing an Rx.Observable and reading it back.', () => {

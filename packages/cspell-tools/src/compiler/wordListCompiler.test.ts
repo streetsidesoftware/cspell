@@ -5,7 +5,7 @@
 import { expect } from 'chai';
 import { lineToWords, compileWordList, compileTrie } from './wordListCompiler';
 import { normalizeWords, normalizeWordsToTrie } from './wordListCompiler';
-import * as fsp from 'fs-promise';
+import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie';
 import * as path from 'path';
 import * as Rx from 'rxjs/Rx';
