@@ -5,7 +5,7 @@ import * as commander from 'commander';
 import * as fs from 'fs';
 import {lineReaderRx as lineReader} from 'cspell-lib';
 import {rxToStream} from 'rxjs-stream';
-import {mkdirp} from 'fs-promise';
+import {mkdirp} from 'fs-extra';
 import * as path from 'path';
 import * as Trie from './lib';
 import {observableFromIterable} from 'rxjs-from-iterable';
@@ -79,7 +79,7 @@ if (!commander.args.length) {
     commander.help();
 }
 
-function createWriteStream(filename?: string): Promise<fs.WriteStream> {
+function createWriteStream(filename?: string): Promise<NodeJS.WritableStream> {
     return !filename
         ? Promise.resolve(process.stdout)
         : mkdirp(path.dirname(filename)).then(() => fs.createWriteStream(filename));
