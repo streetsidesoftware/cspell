@@ -2,7 +2,7 @@ import * as Rx from 'rxjs/Rx';
 import * as glob from 'glob';
 import * as minimatch from 'minimatch';
 import * as cspell from './index';
-import * as fsp from 'fs-promise';
+import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';

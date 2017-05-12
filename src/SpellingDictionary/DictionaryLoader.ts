@@ -15,11 +15,15 @@ export interface LoadOptions {
     type?: keyof Loaders;
 }
 
+export type Loader = (filename: string) => Promise<SpellingDictionary>;
+
 export interface Loaders {
-    S: (filename: string) => Promise<SpellingDictionary>;
-    W: (filename: string) => Promise<SpellingDictionary>;
-    C: (filename: string) => Promise<SpellingDictionary>;
-    T: (filename: string) => Promise<SpellingDictionary>;
+    S: Loader;
+    W: Loader;
+    C: Loader;
+    T: Loader;
+    default: Loader;
+    [index: string]: Loader | undefined;
 }
 
 const loaders: Loaders = {
@@ -27,6 +31,7 @@ const loaders: Loaders = {
     W: loadWordList,
     C: loadCodeWordList,
     T: loadTrie,
+    default: loadSimpleWordList,
 };
 
 const dictionaryCache = new Map<string, Promise<SpellingDictionary>>();
@@ -45,7 +50,7 @@ export function loadDictionary(uri: string, options: LoadOptions): Promise<Spell
 function load(uri: string, type: string): Promise<SpellingDictionary>  {
     const regTrieTest = /\.trie\b/i;
     type = regTrieTest.test(uri) ? 'T' : type;
-    const loader = loaders[type];
+    const loader = loaders[type] || loaders.default;
     return loader(uri);
 }
 

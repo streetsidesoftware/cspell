@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import * as DictSettings from './DictionarySettings';
-import * as fsp from 'fs-promise';
+import * as fsp from 'fs-extra';
 import { getDefaultSettings } from './DefaultSettings';
 
 const defaultSettings = getDefaultSettings();

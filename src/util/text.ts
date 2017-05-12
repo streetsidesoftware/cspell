@@ -195,7 +195,7 @@ export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gim', f
 export function calculateTextDocumentOffsets(uri: string, doc: string, wordOffsets: TextOffset[]): TextDocumentOffset[] {
     const lines = [-1, ...match(/\n/g, doc).map(a => a.index), doc.length];
 
-    function findRowCol(offset): [number, number] {
+    function findRowCol(offset: number): [number, number] {
         const row = binarySearch(lines, offset);
         const col = offset - lines[Math.max(0, row - 1)];
         return [row, col];
