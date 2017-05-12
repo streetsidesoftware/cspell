@@ -22,7 +22,7 @@ export interface TraceOptions {
     config?: string;
 }
 
-export interface AppError extends NodeJS.ErrnoException {};
+export interface AppError extends NodeJS.ErrnoException {}
 
 export interface RunResult {
     files: number;
@@ -30,7 +30,7 @@ export interface RunResult {
     issues: number;
 }
 
-export interface Issue extends cspell.TextDocumentOffset {};
+export interface Issue extends cspell.TextDocumentOffset {}
 
 export interface GlobSrcInfo {
     glob: string;

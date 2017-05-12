@@ -9,7 +9,7 @@ describe('Validate util', () => {
     });
 
     it('tests uniqueFilterFnGenerator with extractor', () => {
-        interface Word { word: string; };
+        interface Word { word: string; }
         const values: Word[] = [{ word: 'hello'}, {word: 'there'}, {word: 'hello'}];
         const uniqFilter = util.uniqueFilterFnGenerator((w: Word) => w.word);
         expect(values.filter(uniqFilter)).to.be.deep.equal([values[0], values[1]]);

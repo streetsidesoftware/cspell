@@ -22,7 +22,7 @@ export interface WordRangeAcc {
     textOffset: Text.TextOffset;
     isIncluded: boolean;
     rangePos: number;
-};
+}
 
 export const defaultMaxNumberOfProblems = 200;
 export const defaultMaxDuplicateProblems = 5;
