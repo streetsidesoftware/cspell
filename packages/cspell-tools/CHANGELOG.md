@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.4.0
+* Update packages
+* Remove dependency on fs-promise
+
 ## 1.3.2
 * Fix issue with writing files when the destination path does not exist.
 
