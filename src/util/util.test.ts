@@ -20,4 +20,12 @@ describe('Validate util', () => {
         expect(util.unique([4, 3, 2, 1])).to.be.deep.equal([4, 3, 2, 1]);
         expect(util.unique([4, 4, 3, 2, 3, 1, 2])).to.be.deep.equal([4, 3, 2, 1]);
     });
+
+    it('tests clean up obj', () => {
+        const obj = {
+            a: undefined, b: 1, c: true, d: undefined, e: 'str'
+        };
+        const cleanObj = util.clean(obj);
+        expect([...Object.keys(cleanObj)]).to.be.deep.equal(['b', 'c', 'e']);
+    });
 });

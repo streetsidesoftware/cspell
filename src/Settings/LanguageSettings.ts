@@ -14,7 +14,6 @@ export const defaultLanguageSettings: LanguageSettings = [
     { languageId: '*',      local: 'en-US',              dictionaries: ['wordsEn'], },
     { languageId: '*',      local: 'en-GB',              dictionaries: ['wordsEnGb'], },
     { languageId: '*',                                   dictionaries: ['companies', 'softwareTerms', 'misc', 'filetypes'], },
-    { languageId: 'python', allowCompoundWords: true,    dictionaries: ['python']},
     { languageId: 'go',     allowCompoundWords: true,    dictionaries: ['go'], },
     { languageId: 'c',      allowCompoundWords: true,    dictionaries: ['cpp'], },
     { languageId: 'cpp',    allowCompoundWords: true,    dictionaries: ['cpp'], },
@@ -36,6 +35,16 @@ export const defaultLanguageSettings: LanguageSettings = [
     { languageId: 'map',    enabled: false },
     { languageId: 'image',  enabled: false },
     { languageId: 'binary', enabled: false },
+    {
+        languageId: 'python',
+        allowCompoundWords: true,
+        dictionaries: ['python'],
+        ignoreRegExpList: [ 'binary_string', 'unicode_string' ],
+        patterns: [
+            { name: 'binary_string', pattern: "\\bb'" },
+            { name: 'unicode_string', pattern: "\\bu'" }
+        ]
+    },
 ];
 
 export function getDefaultLanguageSettings(): CSpellUserSettings {
@@ -51,22 +60,24 @@ export function calcSettingsForLanguage(languageSettings: LanguageSettings, lang
     return defaultLanguageSettings.concat(languageSettings)
         .filter(s => s.languageId === '*' || s.languageId === languageId)
         .filter(s => !s.local || NormalizeLocal(s.local) === local || s.local === '*')
-        .reduce((langSetting, setting) => {
-            const { allowCompoundWords = langSetting.allowCompoundWords, enabled } = setting;
-            const dictionaries = mergeUnique(langSetting.dictionaries, setting.dictionaries);
-            return { languageId, local, allowCompoundWords, dictionaries, enabled };
-        });
+        .reduce((langSetting, setting) => ({
+            ...SpellSettings.mergeSettings(langSetting, setting),
+            languageId,
+            local,
+        }));
 }
 
 export function calcUserSettingsForLanguage(settings: CSpellUserSettings, languageId: string): CSpellUserSettings {
     const { languageSettings = [], language: local = defaultLocal } = settings;
-    const {
-        allowCompoundWords = settings.allowCompoundWords,
-        dictionaries,
-        dictionaryDefinitions,
-        enabled = settings.enabled,
-    } = calcSettingsForLanguage(languageSettings, languageId, local);
-    return  SpellSettings.mergeSettings(settings, { enabled, allowCompoundWords, dictionaries, dictionaryDefinitions });
+    const defaults = {
+        allowCompoundWords: settings.allowCompoundWords,
+        enabled: settings.enabled,
+    };
+    const langSettings = {
+        ...defaults,
+        ...calcSettingsForLanguage(languageSettings, languageId, local),
+    };
+    return  SpellSettings.mergeSettings(settings, langSettings);
 }
 
 export function calcSettingsForLanguageId(baseSettings: CSpellUserSettings, languageId: LanguageId[] | LanguageId): CSpellUserSettings {
@@ -77,7 +88,3 @@ export function calcSettingsForLanguageId(baseSettings: CSpellUserSettings, lang
     return langSettings;
 }
 
-function mergeUnique(a: string[] = [], b: string[] = []) {
-    // Merge and Make unique
-    return [...(new Set(a.concat(b)))];
-}

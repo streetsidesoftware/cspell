@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Run CSpell",
             "program": "${workspaceRoot}/dist/app.js",
-			"args": ["-e", "src", "-v", "**/*.ts", "**/*.test.ts"],
+			"args": ["-e", "src", "-v", "**/*.py"],
             "cwd": "${workspaceRoot}",
 			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
             "sourceMaps": true
@@ -62,7 +62,8 @@
 			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
 			"sourceMaps": true,
 			// Environment variables passed to the program.
-			"env": { "NODE_ENV": "test"}
+			"env": { "NODE_ENV": "test"},
+            "protocol": "inspector"
 		}
     ]
 }

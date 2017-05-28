@@ -3,6 +3,7 @@ import * as json from 'comment-json';
 import {CSpellUserSettingsWithComments, CSpellUserSettings, RegExpPatternDefinition} from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
+import * as util from '../util/util';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -59,7 +60,7 @@ function replaceIfNotEmpty<T>(left: Array<T> = [], right: Array<T> = []) {
 }
 
 export function mergeSettings(left: CSpellUserSettings, ...settings: CSpellUserSettings[]): CSpellUserSettings {
-    return settings.reduce((left, right) => ({
+    const rawSettings = settings.reduce((left, right) => ({
         ...left,
         ...right,
         words:     mergeList(left.words,     right.words),
@@ -74,6 +75,7 @@ export function mergeSettings(left: CSpellUserSettings, ...settings: CSpellUserS
         languageSettings: mergeList(left.languageSettings, right.languageSettings),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
     }), left);
+    return util.clean(rawSettings);
 }
 
 export function mergeInDocSettings(left: CSpellUserSettings, right: CSpellUserSettings): CSpellUserSettings {

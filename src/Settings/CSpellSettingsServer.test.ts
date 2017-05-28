@@ -5,7 +5,6 @@ import * as path from 'path';
 describe('Validate CSpellSettingsServer', () => {
     it('tests mergeSettings', () => {
         expect(mergeSettings({}, {})).to.be.deep.equal({
-            enabled: undefined,
             words: [],
             userWords: [],
             ignoreWords: [],
