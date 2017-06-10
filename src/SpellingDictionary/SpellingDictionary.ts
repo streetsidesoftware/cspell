@@ -1,8 +1,12 @@
-import { SuggestionResult } from './suggest';
 import { genSequence } from 'gensequence';
 import * as Rx from 'rxjs/Rx';
 import { IterableLike } from '../util/IterableLike';
 import {Trie, importTrieRx} from 'cspell-trie';
+
+export interface SuggestionResult {
+    word: string;
+    cost: number;
+}
 
 export interface SpellingDictionary {
     readonly name: string;

@@ -1,6 +1,5 @@
-import { SpellingDictionary } from './SpellingDictionary';
+import { SpellingDictionary, SuggestionResult } from './SpellingDictionary';
 import { genSequence } from 'gensequence';
-import { SuggestionResult } from './suggest';
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
     constructor(readonly dictionaries: SpellingDictionary[], readonly name: string) {
