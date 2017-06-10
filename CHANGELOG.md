@@ -1,5 +1,11 @@
 # Release Notes
 
+## 1.6.0
+- Updated package dependencies (removed deprecated packages)
+- Fix issue #9 - add a fix for Python unicode and byte strings.
+- Language level overrides now work
+    - It is now possible to add language level exclude / include patterns.
+
 ## 1.5.0
 - Fix issue #7 - where trailing characters on long words were ignored.
 
