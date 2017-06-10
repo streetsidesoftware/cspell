@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.2.1
+- Update packages.
+
 ## 1.2.0
 - Update packages.
 - Remove dependency on fs-promise
