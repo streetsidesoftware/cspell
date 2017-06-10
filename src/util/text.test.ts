@@ -122,6 +122,7 @@ describe('Util Text', () => {
         expect(Text.matchCase('apple', 'orange')).to.be.equal('orange');
         expect(Text.matchCase('APPLE', 'orange')).to.be.equal('ORANGE');
         expect(Text.matchCase('ApPlE', 'OrangE')).to.be.equal('OrangE');
+        expect(Text.matchCase('apPlE', 'OrangE')).to.be.equal('orangE');
     });
 
     it('tests skipping Chinese characters', () => {
