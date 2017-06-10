@@ -1,5 +1,8 @@
 # Release Notes
 
+#@ 1.6.1
+- Minor update of packages
+
 ## 1.6.0
 - Updated package dependencies (removed deprecated packages)
 - Fix issue #9 - add a fix for Python unicode and byte strings.
