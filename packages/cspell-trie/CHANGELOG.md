@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.5.1
+- update packages and remove dependency on fs-promise.
+
 ## 1.4.0
 - fix an issue where words trailed by extra characters were considered correct, like: 'bananasttt'.
 
