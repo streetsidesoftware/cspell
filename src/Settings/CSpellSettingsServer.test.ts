@@ -66,9 +66,27 @@ describe('Validate CSpellSettingsServer', () => {
         });
     });
 
-    it('tests loading a cSpell.json file', () => {
-        const filename = path.join(__dirname, '..', '..', '..', 'server', 'sampleSourceFiles', 'cSpell.json');
+    it('tests loading a missing cSpell.json file', () => {
+        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-missing.json');
         const settings = readSettings(filename);
         expect(settings).to.not.be.empty;
+        expect(settings.words).to.not.include('import');
+    });
+
+    it('tests loading a cSpell.json file', () => {
+        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import.json');
+        const settings = readSettings(filename);
+        expect(settings).to.not.be.empty;
+        expect(settings.words).to.include('import');
+    });
+
+    it('tests loading a cSpell.json with multiple imports file', () => {
+        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-imports.json');
+        const settings = readSettings(filename);
+        expect(settings).to.not.be.empty;
+        expect(settings.words).to.include('import');
+        expect(settings.words).to.include('imports');
+        // cspell:word leuk
+        expect(settings.words).to.include('leuk');
     });
 });

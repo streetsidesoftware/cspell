@@ -51,6 +51,9 @@ export interface CSpellUserSettings extends BaseSetting {
 
     // Additional settings for individual languages.
     languageSettings?: LanguageSetting[];
+
+    // Other settings files to be included
+    import?: string | string[];
 }
 
 
@@ -178,6 +181,9 @@ export interface CSpellUserSettingsWithComments extends CSpellUserSettings {
 
     // Compound Word settings
     '// allowCompoundWords'?: string[];
+
+    // Include other settings files.
+    '// import'?: string[];
 
     // comment at the end of the file
     '//$'?: string[];

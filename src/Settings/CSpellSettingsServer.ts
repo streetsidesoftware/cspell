@@ -15,18 +15,27 @@ const defaultSettings: CSpellUserSettingsWithComments = {
     version: currentSettingsFileVersion,
 };
 
-export function readSettings(filename: string, defaultValues: CSpellUserSettingsWithComments = defaultSettings): CSpellUserSettings {
+const cachedFiles = new Map<string, CSpellUserSettings>();
+
+function readJsonFile(file: string): CSpellUserSettings {
+    try {
+        return json.parse(fs.readFileSync(file).toString());
+    }
+    catch (err) {
+        console.error('Failed to read "%s"', file);
+    }
+    return {};
+}
+
+function importSettings(filename: string): CSpellUserSettings {
+    filename = path.resolve(filename);
+    if (cachedFiles.has(filename)) {
+        return cachedFiles.get(filename)!;
+    }
+    cachedFiles.set(filename, {}); // add an empty entry to prevent circular references.
     const settings: CSpellUserSettings = readJsonFile(filename);
     const pathToSettings = path.dirname(filename);
 
-    function readJsonFile(file: string): any {
-        try {
-            return json.parse(fs.readFileSync(file).toString());
-        }
-        catch (err) {
-        }
-        return defaultValues;
-    }
 
     // Fix up dictionaryDefinitions
     const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettings);
@@ -36,7 +45,20 @@ export function readSettings(filename: string, defaultValues: CSpellUserSettings
             dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions || [], pathToSettings)
         }));
 
-    return {...defaultValues, ...settings, dictionaryDefinitions, languageSettings};
+    const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
+
+    const fileSettings = {...settings, dictionaryDefinitions, languageSettings};
+    const importedSettings: CSpellUserSettings = imports
+        .map(name => resolveFilename(name, pathToSettings))
+        .map(name => importSettings(name))
+        .reduce((a, b) => mergeSettings(a, b), {});
+    const finalizeSettings = mergeSettings(importedSettings, fileSettings);
+    cachedFiles.set(filename, finalizeSettings);
+    return finalizeSettings;
+}
+
+export function readSettings(filename: string, defaultValues: CSpellUserSettingsWithComments = defaultSettings): CSpellUserSettings {
+    return mergeSettings(defaultValues, importSettings(filename));
 }
 
 export function readSettingsFiles(filenames: string[]): CSpellUserSettings {
@@ -103,4 +125,8 @@ function applyPatterns(regExpList: (string | RegExp)[] = [], patterns: RegExpPat
     );
 
     return regExpList.map(p => patternMap.get(p.toString().toLowerCase()) || p);
+}
+
+function resolveFilename(filename: string, relativeTo: string) {
+    return path.isAbsolute(filename) ? filename : path.resolve(relativeTo, filename);
 }
