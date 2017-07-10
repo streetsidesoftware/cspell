@@ -1,6 +1,11 @@
 # Release Notes
 
-#@ 1.6.1
+## 1.7.0
+- Use `configstore` to store persistent config settings. That way it is possible for settings to be changed programmatically.
+- The two English dictionaries have been moved into [cspell-dict](https://github.com/Jason3S/cspell-dicts) for easier maintenance.
+- It is now possible to import other settings files from with in a cspell.json file using `"import": ["../path/to/other/cspell.json"]`
+
+## 1.6.1
 - Minor update of packages
 
 ## 1.6.0
