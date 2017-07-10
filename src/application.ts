@@ -132,7 +132,8 @@ function runLint(cfg: CSpellApplicationConfiguration) {
                             : Promise.reject({...error, message: `Error reading file: "${filename}"`});
                     });
             })
-            .filter(a => !!a);
+            .filter(a => !!a)
+            .map(a => a!);
 
         const status: RunResult = {
             files: 0,

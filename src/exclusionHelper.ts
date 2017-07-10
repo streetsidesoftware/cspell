@@ -26,7 +26,7 @@ export function generateExclusionFunctionForUri(globs: Glob[], root: string): Ex
     const fns = globs.map(glob => minimatch.filter(glob, { matchBase: true }));
 
     function testPath(path: string): boolean {
-        return fns.reduce((prev: boolean, fn: ExclusionFunction) => prev || fn(path), false);
+        return fns.reduce<boolean>((prev: boolean, fn, idx) => prev || fn(path, idx, [path]), false);
     }
 
     function testPathStepByStep(path: string) {

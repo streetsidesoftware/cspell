@@ -36,7 +36,7 @@ describe('Validate LanguageSettings', () => {
     it('tests that settings at language level are merged', () => {
         const settings = {
             languageSettings: [],
-            ...mergeSettings(defaultLanguageSettings, extraSettings),
+            ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
         };
         const sPython = calcSettingsForLanguage(settings.languageSettings, 'python', 'en');
         expect(sPython).to.be.not.undefined;
@@ -46,7 +46,7 @@ describe('Validate LanguageSettings', () => {
     it('test that user settings include language overrides', () => {
         const settings = {
             languageSettings: [],
-            ...mergeSettings(defaultLanguageSettings, extraSettings),
+            ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
         };
         const sPython = calcUserSettingsForLanguage(settings, 'python');
         expect(sPython).to.be.not.undefined;
@@ -59,7 +59,7 @@ describe('Validate LanguageSettings', () => {
             enabled: true,
             allowCompoundWords: false,
             languageSettings: [],
-            ...mergeSettings(defaultLanguageSettings, extraSettings),
+            ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
         };
         const sPython = calcUserSettingsForLanguage(settings, 'python');
         expect(sPython).to.be.not.undefined;

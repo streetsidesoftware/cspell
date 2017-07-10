@@ -75,7 +75,7 @@ export function calcUserSettingsForLanguage(settings: CSpellUserSettings, langua
         ...defaults,
         ...calcSettingsForLanguage(languageSettings, languageId, local),
     };
-    return  SpellSettings.mergeSettings(settings, langSettings);
+    return  SpellSettings.mergeSettings(settings, langSettings as CSpellUserSettings);
 }
 
 export function calcSettingsForLanguageId(baseSettings: CSpellUserSettings, languageId: LanguageId[] | LanguageId): CSpellUserSettings {

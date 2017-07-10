@@ -49,7 +49,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'
         ];
 
-        return createSpellingDictionaryRx(Rx.Observable.from(words), 'test')
+        return createSpellingDictionaryRx(Rx.Observable.from(words as string[]), 'test')
             .then(dict => {
                 expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
                 if (dict instanceof SpellingDictionaryFromSet) {
