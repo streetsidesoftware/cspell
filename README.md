@@ -322,7 +322,7 @@ The spell checker includes a set of default dictionaries.
 ### General Dictionaries
 
 * **en_US** - Derived from Hunspell US English words.
-* **wordsEnGb** - Derived from Hunspell GB English words.
+* **en-gb** - Derived from Hunspell GB English words.
 * **companies** - List of well known companies
 * **softwareTerms** - Software Terms and concepts like "coroutine", "debounce", "tree", etc.
 * **misc** - Terms that do not belong in the other dictionaries.

@@ -10,7 +10,6 @@ export type LanguageSettings = LanguageSetting[];
 const defaultLocal: LocalId = 'en';
 
 export const defaultLanguageSettings: LanguageSettings = [
-    { languageId: '*',      local: 'en-GB',              dictionaries: ['wordsEnGb'], },
     { languageId: '*',                                   dictionaries: ['companies', 'softwareTerms', 'misc', 'filetypes'], },
     { languageId: 'go',     allowCompoundWords: true,    dictionaries: ['go'], },
     { languageId: 'c',      allowCompoundWords: true,    dictionaries: ['cpp'], },

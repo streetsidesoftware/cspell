@@ -21,16 +21,17 @@ const extraSettings: CSpellUserSettings = {
 describe('Validate LanguageSettings', () => {
     it('tests merging language settings', () => {
         const defaultSettings = getDefaultSettings();
-        const sPython = calcSettingsForLanguage(defaultSettings.languageSettings || [], 'python', 'en');
+        const languageSettings = defaultSettings.languageSettings || [];
+        const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
         expect(sPython.allowCompoundWords).to.be.true;
         expect(sPython.dictionaries).to.not.be.empty;
         expect((sPython.dictionaries!).sort()).to.be.deep.equal(['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc'].sort());
 
-        const sPhp = calcSettingsForLanguage(defaultLanguageSettings, 'php', 'en-gb');
+        const sPhp = calcSettingsForLanguage(languageSettings, 'php', 'en-gb');
         expect(sPhp.allowCompoundWords).to.be.undefined;
         expect(sPhp.dictionaries).to.not.be.empty;
         expect((sPhp.dictionaries!).sort())
-            .to.be.deep.equal(['wordsEnGb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'misc'].sort());
+            .to.be.deep.equal(['en-gb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'misc'].sort());
     });
 
     it('tests that settings at language level are merged', () => {
