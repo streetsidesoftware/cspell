@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { mergeSettings, readSettings } from './CSpellSettingsServer';
+import { mergeSettings, readSettings, getGlobalSettings } from './CSpellSettingsServer';
+import { getDefaultSettings } from './DefaultSettings';
 import * as path from 'path';
 
 describe('Validate CSpellSettingsServer', () => {
@@ -88,5 +89,12 @@ describe('Validate CSpellSettingsServer', () => {
         expect(settings.words).to.include('imports');
         // cspell:word leuk
         expect(settings.words).to.include('leuk');
+    });
+
+    it('makes sure global settings is an object', () => {
+        const settings = getGlobalSettings();
+        expect(settings).to.not.be.empty;
+        const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
+        expect(merged).to.not.be.empty;
     });
 });

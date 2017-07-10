@@ -37,7 +37,8 @@ const loaders: Loaders = {
 const dictionaryCache = new Map<string, Promise<SpellingDictionary>>();
 
 export function loadDictionary(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const { type = 'C' } = options;
+    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'C';
+    const { type = defType } = options;
     const key = [uri, type].join('|');
     if (!dictionaryCache.has(key)) {
         dictionaryCache.set(key, load(uri, type));

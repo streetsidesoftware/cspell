@@ -4,16 +4,21 @@ import {CSpellUserSettingsWithComments, CSpellUserSettings, RegExpPatternDefinit
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
+import * as ConfigStore from 'configstore';
 
 const currentSettingsFileVersion = '0.1';
 
 export const sectionCSpell = 'cSpell';
+const packageName = 'cspell';
+const globalConf = new ConfigStore(packageName);
 
 export const defaultFileName = 'cSpell.json';
 
 const defaultSettings: CSpellUserSettingsWithComments = {
     version: currentSettingsFileVersion,
 };
+
+let globalSettings: CSpellUserSettings | undefined;
 
 const cachedFiles = new Map<string, CSpellUserSettings>();
 
@@ -27,16 +32,7 @@ function readJsonFile(file: string): CSpellUserSettings {
     return {};
 }
 
-function importSettings(filename: string): CSpellUserSettings {
-    filename = path.resolve(filename);
-    if (cachedFiles.has(filename)) {
-        return cachedFiles.get(filename)!;
-    }
-    cachedFiles.set(filename, {}); // add an empty entry to prevent circular references.
-    const settings: CSpellUserSettings = readJsonFile(filename);
-    const pathToSettings = path.dirname(filename);
-
-
+function normalizeSettings(settings: CSpellUserSettings, pathToSettings: string) {
     // Fix up dictionaryDefinitions
     const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettings);
     const languageSettings = (settings.languageSettings || [])
@@ -53,6 +49,19 @@ function importSettings(filename: string): CSpellUserSettings {
         .map(name => importSettings(name))
         .reduce((a, b) => mergeSettings(a, b), {});
     const finalizeSettings = mergeSettings(importedSettings, fileSettings);
+    return finalizeSettings;
+}
+
+function importSettings(filename: string): CSpellUserSettings {
+    filename = path.resolve(filename);
+    if (cachedFiles.has(filename)) {
+        return cachedFiles.get(filename)!;
+    }
+    cachedFiles.set(filename, {}); // add an empty entry to prevent circular references.
+    const settings: CSpellUserSettings = readJsonFile(filename);
+    const pathToSettings = path.dirname(filename);
+
+    const finalizeSettings = normalizeSettings(settings, pathToSettings);
     cachedFiles.set(filename, finalizeSettings);
     return finalizeSettings;
 }
@@ -129,4 +138,11 @@ function applyPatterns(regExpList: (string | RegExp)[] = [], patterns: RegExpPat
 
 function resolveFilename(filename: string, relativeTo: string) {
     return path.isAbsolute(filename) ? filename : path.resolve(relativeTo, filename);
+}
+
+export function getGlobalSettings(): CSpellUserSettings {
+    if (!globalSettings) {
+        globalSettings = normalizeSettings(globalConf.all || {}, __dirname);
+    }
+    return globalSettings!;
 }

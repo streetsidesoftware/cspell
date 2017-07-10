@@ -1,5 +1,7 @@
 import { expect } from 'chai';
 import { calcSettingsForLanguage, defaultLanguageSettings, calcUserSettingsForLanguage } from './LanguageSettings';
+import { getGlobalSettings } from './CSpellSettingsServer';
+import { getDefaultSettings } from './DefaultSettings';
 import { CSpellUserSettings } from './CSpellSettingsDef';
 import { mergeSettings } from './CSpellSettingsServer';
 
@@ -18,10 +20,11 @@ const extraSettings: CSpellUserSettings = {
 
 describe('Validate LanguageSettings', () => {
     it('tests merging language settings', () => {
-        const sPython = calcSettingsForLanguage(defaultLanguageSettings, 'python', 'en');
+        const defaultSettings = getDefaultSettings();
+        const sPython = calcSettingsForLanguage(defaultSettings.languageSettings || [], 'python', 'en');
         expect(sPython.allowCompoundWords).to.be.true;
         expect(sPython.dictionaries).to.not.be.empty;
-        expect((sPython.dictionaries!).sort()).to.be.deep.equal(['wordsEn', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc'].sort());
+        expect((sPython.dictionaries!).sort()).to.be.deep.equal(['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc'].sort());
 
         const sPhp = calcSettingsForLanguage(defaultLanguageSettings, 'php', 'en-gb');
         expect(sPhp.allowCompoundWords).to.be.undefined;
@@ -62,5 +65,11 @@ describe('Validate LanguageSettings', () => {
         expect(sPython).to.be.not.undefined;
         expect(sPython.enabled).to.be.true;
         expect(sPython.allowCompoundWords).to.be.true;
+    });
+
+    it('test merged settings with global', () => {
+        const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
+        const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
+        expect(sPHP).to.not.be.empty;
     });
 });

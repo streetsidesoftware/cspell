@@ -7,7 +7,14 @@
     // words - list of words to be always considered correct
     "words": [
         "gensequence",
-        "xregexp"
+        "xregexp",
+        "configstore"
+    ],
+    // flagWords - list of words to be always considered incorrect
+    // This is useful for offensive words and common spelling errors.
+    // For example "hte" should be "the"
+    "flagWords": [
+        "hte"
     ],
     "maxNumberOfProblems": 10000,
     "ignorePaths": [
@@ -22,22 +29,24 @@
         ".vscode/**"
     ],
     "allowCompoundWords": true,
-
-    // flagWords - list of words to be always considered incorrect
-    // This is useful for offensive words and common spelling errors.
-    // For example "hte" should be "the"
-    "flagWords": [
-        "hte"
-    ],
-    "dictionaryDefinitions": [
-    ],
+    "dictionaryDefinitions": [],
     "languageSettings": [
         {
             "languageId": "python",
-            "ignoreRegExpList": [ "binary_string", "/appples/i", "unicode_string" ],
+            "ignoreRegExpList": [
+                "binary_string",
+                "/appples/i",
+                "unicode_string"
+            ],
             "patterns": [
-                { "name": "binary_string", "pattern": "\\bb'" },
-                { "name": "unicode_string", "pattern": "\\bu'" }
+                {
+                    "name": "binary_string",
+                    "pattern": "\\bb'"
+                },
+                {
+                    "name": "unicode_string",
+                    "pattern": "\\bu'"
+                }
             ]
         }
     ]

@@ -10,8 +10,6 @@ export type LanguageSettings = LanguageSetting[];
 const defaultLocal: LocalId = 'en';
 
 export const defaultLanguageSettings: LanguageSettings = [
-    { languageId: '*',      local: 'en',                 dictionaries: ['wordsEn'], },
-    { languageId: '*',      local: 'en-US',              dictionaries: ['wordsEn'], },
     { languageId: '*',      local: 'en-GB',              dictionaries: ['wordsEnGb'], },
     { languageId: '*',                                   dictionaries: ['companies', 'softwareTerms', 'misc', 'filetypes'], },
     { languageId: 'go',     allowCompoundWords: true,    dictionaries: ['go'], },
@@ -58,7 +56,7 @@ function NormalizeLocal(local: LocalId): LocalId {
 export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocalId): LanguageSetting {
     local = NormalizeLocal(local);
     return defaultLanguageSettings.concat(languageSettings)
-        .filter(s => s.languageId === '*' || s.languageId === languageId)
+        .filter(s => s.languageId === '*' || s.languageId.toLowerCase() === languageId)
         .filter(s => !s.local || NormalizeLocal(s.local) === local || s.local === '*')
         .reduce((langSetting, setting) => ({
             ...SpellSettings.mergeSettings(langSetting, setting),

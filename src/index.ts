@@ -3,7 +3,7 @@ export { TextOffset, TextDocumentOffset } from './util/text';
 export { validateText } from './validator';
 export { mergeSettings, readSettings, readSettingsFiles, defaultFileName as defaultSettingsFilename } from './Settings';
 export { SpellingDictionary, createSpellingDictionary, createSpellingDictionaryRx, getDictionary } from './SpellingDictionary';
-export { getDefaultSettings } from './Settings';
+export { getDefaultSettings, getGlobalSettings } from './Settings';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
 

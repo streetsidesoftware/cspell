@@ -321,7 +321,7 @@ The spell checker includes a set of default dictionaries.
 
 ### General Dictionaries
 
-* **wordsEn** - Derived from Hunspell US English words.
+* **en_US** - Derived from Hunspell US English words.
 * **wordsEnGb** - Derived from Hunspell GB English words.
 * **companies** - List of well known companies
 * **softwareTerms** - Software Terms and concepts like "coroutine", "debounce", "tree", etc.

@@ -1,6 +1,8 @@
 import { CSpellUserSettings, RegExpPatternDefinition, DictionaryDefinition } from './CSpellSettingsDef';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
+import { readSettings } from './CSpellSettingsServer';
+import * as Path from 'path';
 
 // cspell:ignore filetypes
 
@@ -11,6 +13,8 @@ const defaultRegExpExcludeList = [
     'RsaCert',
     'Base64',
 ];
+
+const defaultConfigFile = Path.join(__dirname, '..', '..', 'config', 'cspell-default.json');
 
 
 const defaultRegExpPatterns: RegExpPatternDefinition[] = [
@@ -51,7 +55,6 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'python',         file: 'python.txt.gz',        type: 'S' },
     { name: 'softwareTerms',  file: 'softwareTerms.txt.gz', type: 'S' },
     { name: 'typescript',     file: 'typescript.txt.gz',    type: 'S' },
-    { name: 'wordsEn',        file: 'wordsEn.trie.gz',      type: 'T' },
     { name: 'wordsEnGb',      file: 'wordsEnGb.trie.gz',    type: 'T' },
 ];
 
@@ -77,7 +80,16 @@ const defaultSettings: CSpellUserSettings = {
     dictionaryDefinitions: defaultDictionaryDefs,
 };
 
+const getSettings = function(){
+    let settings: CSpellUserSettings | undefined = undefined;
+    return function() {
+        if (!settings) {
+            settings = readSettings(defaultConfigFile, defaultSettings);
+        }
+        return settings!;
+    };
+}();
 
 export function getDefaultSettings(): CSpellUserSettings {
-    return {...defaultSettings};
+    return {...getSettings()};
 }

@@ -149,7 +149,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
                 const ext = path.extname(filename);
                 const languageIds = cspell.getLanguagesForExt(ext);
                 cfg.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
-                const settings = cspell.mergeSettings(cspell.getDefaultSettings(), configInfo.config);
+                const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configInfo.config);
                 const config = cspell.constructSettingsForText(settings, text, languageIds);
                 return {configInfo: {...configInfo, config}, filename, text};
             })
