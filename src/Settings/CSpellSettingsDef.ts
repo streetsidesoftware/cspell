@@ -102,7 +102,7 @@ export interface LanguageSetting extends BaseSetting {
     // The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages
     languageId: string;
     // The local filter, matches against the language
-    local?: LocalId;
+    local?: LocalId | LocalId[];
 }
 
 export type RegExpList = PatternRef[];

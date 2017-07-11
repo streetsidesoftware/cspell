@@ -48,15 +48,23 @@ export function getDefaultLanguageSettings(): CSpellUserSettings {
     return { languageSettings: defaultLanguageSettings };
 }
 
-function NormalizeLocal(local: LocalId): LocalId {
-    return local.toLowerCase().replace(/[^a-z]/g, '');
+function normalizeLocal(local: LocalId | LocalId[]): Set<LocalId> {
+    if (typeof local === 'string') {
+        local = local.split(',');
+    }
+    return new Set<LocalId>(local.map(local => local.toLowerCase().replace(/[^a-z]/g, '')));
 }
 
-export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocalId): LanguageSetting {
-    local = NormalizeLocal(local);
+function isLocalInSet(local: LocalId | LocalId[], setOfLocals: Set<LocalId>): boolean {
+    const locals = normalizeLocal(local);
+    return [...locals.values()].filter(local => setOfLocals.has(local)).length > 0;
+}
+
+export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocalId | LocalId[]): LanguageSetting {
+    const allowedLocals = normalizeLocal(local);
     return defaultLanguageSettings.concat(languageSettings)
         .filter(s => s.languageId === '*' || s.languageId.toLowerCase() === languageId)
-        .filter(s => !s.local || NormalizeLocal(s.local) === local || s.local === '*')
+        .filter(s => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals) )
         .reduce((langSetting, setting) => ({
             ...SpellSettings.mergeSettings(langSetting, setting),
             languageId,

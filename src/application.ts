@@ -16,6 +16,7 @@ export interface CSpellApplicationOptions {
     exclude?: string;
     wordsOnly?: boolean;
     unique?: boolean;
+    local?: string;
 }
 
 export interface TraceOptions {
@@ -62,6 +63,7 @@ export class CSpellApplicationConfiguration {
     readonly debug: (message?: any, ...args: any[]) => void;
     readonly logIssue: (issue: Issue) => void;
     readonly uniqueFilter: (issue: Issue) => boolean;
+    readonly local: string;
 
     readonly configGlob: string = '{cspell.json,.cspell.json}';
     readonly configGlobOptions: minimatch.IOptions = { nocase: true };
@@ -78,6 +80,7 @@ export class CSpellApplicationConfiguration {
         this.configGlobOptions = options.config ? {} : this.configGlobOptions;
         this.excludes          = calcExcludeGlobInfo(options.exclude);
         this.logIssue          = emitters.issue || this.logIssue;
+        this.local             = options.local || '';
         this.uniqueFilter      = options.unique
             ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text)
             : () => true;
@@ -104,6 +107,12 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             .map(util.unique)
             .do(configFiles => cfg.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`))
             .map(filenames => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)}))
+            .map(config => {
+                if (cfg.local) {
+                    config.config.language = cfg.local;
+                }
+                return config;
+            })
             .share()
             ;
 

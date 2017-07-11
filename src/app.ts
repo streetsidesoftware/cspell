@@ -46,6 +46,7 @@ program
 program
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
     .option('-v, --verbose', 'display more information about the files being checked and the configuration')
+    .option('--local <local>', 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.')
     .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
     .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
     .option('--debug', 'Output information useful for debugging cspell.json files.')
