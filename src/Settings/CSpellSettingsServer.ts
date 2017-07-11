@@ -27,7 +27,7 @@ function readJsonFile(file: string): CSpellUserSettings {
         return json.parse(fs.readFileSync(file).toString());
     }
     catch (err) {
-        console.error('Failed to read "%s"', file);
+        // console.error('Failed to read "%s"', file);
     }
     return {};
 }
