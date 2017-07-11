@@ -136,7 +136,12 @@ function applyPatterns(regExpList: (string | RegExp)[] = [], patterns: RegExpPat
     return regExpList.map(p => patternMap.get(p.toString().toLowerCase()) || p);
 }
 
+const testNodeModules = /^node_modules\//;
+
 function resolveFilename(filename: string, relativeTo: string) {
+    if (testNodeModules.test(filename)) {
+        filename = require.resolve(filename.replace(testNodeModules, ''));
+    }
     return path.isAbsolute(filename) ? filename : path.resolve(relativeTo, filename);
 }
 
