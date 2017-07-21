@@ -2,6 +2,7 @@
 
 ## 1.7.3
 - Be able to clear the cached settings files.
+- Make sure the global config file is not created by default.
 
 ## 1.7.0
 - Use `configstore` to store persistent config settings. That way it is possible for settings to be changed programmatically.
