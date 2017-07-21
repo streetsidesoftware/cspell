@@ -1,7 +1,13 @@
 export { CSpellUserSettings, CSpellUserSettingsWithComments } from './Settings';
 export { TextOffset, TextDocumentOffset } from './util/text';
 export { validateText } from './validator';
-export { mergeSettings, readSettings, readSettingsFiles, defaultFileName as defaultSettingsFilename } from './Settings';
+export {
+    mergeSettings,
+    readSettings,
+    readSettingsFiles,
+    defaultFileName as defaultSettingsFilename,
+    clearCachedFiles as clearCachedSettings,
+} from './Settings';
 export { SpellingDictionary, createSpellingDictionary, createSpellingDictionaryRx, getDictionary } from './SpellingDictionary';
 export { getDefaultSettings, getGlobalSettings } from './Settings';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';

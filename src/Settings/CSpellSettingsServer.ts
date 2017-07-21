@@ -151,3 +151,11 @@ export function getGlobalSettings(): CSpellUserSettings {
     }
     return globalSettings!;
 }
+
+export function getCachedFileSize() {
+    return cachedFiles.size;
+}
+
+export function clearCachedFiles() {
+    cachedFiles.clear();
+}

@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.7.3
+- Be able to clear the cached settings files.
+
 ## 1.7.0
 - Use `configstore` to store persistent config settings. That way it is possible for settings to be changed programmatically.
 - The two English dictionaries have been moved into [cspell-dict](https://github.com/Jason3S/cspell-dicts) for easier maintenance.

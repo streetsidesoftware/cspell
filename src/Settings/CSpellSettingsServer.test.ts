@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { mergeSettings, readSettings, getGlobalSettings } from './CSpellSettingsServer';
+import { mergeSettings, readSettings, getGlobalSettings, clearCachedFiles, getCachedFileSize } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
 import * as path from 'path';
 
@@ -96,5 +96,12 @@ describe('Validate CSpellSettingsServer', () => {
         expect(settings).to.not.be.empty;
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
         expect(merged).to.not.be.empty;
+    });
+
+    it('verify clearing the file cache works', () => {
+        mergeSettings(getDefaultSettings(), getGlobalSettings());
+        expect(getCachedFileSize()).to.be.gt(0);
+        clearCachedFiles();
+        expect(getCachedFileSize()).to.be.eq(0);
     });
 });
