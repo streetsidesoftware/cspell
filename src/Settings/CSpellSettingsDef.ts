@@ -100,8 +100,8 @@ export interface DictionaryDefinition {
 
 export interface LanguageSetting extends BaseSetting {
     // The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages
-    languageId: string;
-    // The local filter, matches against the language
+    languageId: LanguageId | LanguageId[];
+    // The local filter, matches against the language. This can be a comma separated list. "*" will match all locals.
     local?: LocalId | LocalId[];
 }
 

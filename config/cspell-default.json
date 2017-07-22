@@ -18,6 +18,33 @@
     "allowCompoundWords": false,
     "dictionaryDefinitions": [],
     "languageSettings": [
+        { "languageId": "*",                                   "dictionaries": ["companies", "softwareTerms", "misc", "filetypes"] },
+        { "languageId": "go",     "allowCompoundWords": true,  "dictionaries": ["go"] },
+        { "languageId": "c,cpp",  "allowCompoundWords": true,  "dictionaries": ["cpp"] },
+        { "languageId": "csharp", "allowCompoundWords": true,  "dictionaries": ["csharp", "dotnet", "npm"] },
+        { "languageId": "javascript,javascriptreact",          "dictionaries": ["typescript", "node", "npm"] },
+        { "languageId": "typescript,typescriptreact",          "dictionaries": ["typescript", "node", "npm"] },
+        { "languageId": "latex",                               "dictionaries": ["latex"] },
+        { "languageId": "markdown",                            "dictionaries": ["npm"] },
+        { "languageId": "html",                                "dictionaries": ["html", "fonts", "typescript", "css", "npm"] },
+        { "languageId": "jade",                                "dictionaries": ["html", "fonts", "typescript", "css", "npm"] },
+        { "languageId": "pug",                                 "dictionaries": ["html", "fonts", "typescript", "css", "npm"] },
+        { "languageId": "json",                                "dictionaries": ["node", "npm"] },
+        { "languageId": "php",                                 "dictionaries": ["php", "html", "fonts", "css", "typescript", "npm"] },
+        { "languageId": "css,less,scss",                       "dictionaries": ["fonts", "css"] },
+        { "languageId": "map",    "enabled": false },
+        { "languageId": "image",  "enabled": false },
+        { "languageId": "binary", "enabled": false },
+        {
+            "languageId": "python",
+            "allowCompoundWords": true,
+            "dictionaries": ["python"],
+            "ignoreRegExpList": [ "binary_string", "unicode_string" ],
+            "patterns": [
+                { "name": "binary_string", "pattern": "\\bb'" },
+                { "name": "unicode_string", "pattern": "\\bu'" }
+            ]
+        }
     ],
     "import": [
         "node_modules/cspell-dict-en_us/cspell-ext.json",

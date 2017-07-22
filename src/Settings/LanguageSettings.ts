@@ -9,61 +9,40 @@ export type LanguageSettings = LanguageSetting[];
 
 const defaultLocal: LocalId = 'en';
 
-export const defaultLanguageSettings: LanguageSettings = [
-    { languageId: '*',                                   dictionaries: ['companies', 'softwareTerms', 'misc', 'filetypes'], },
-    { languageId: 'go',     allowCompoundWords: true,    dictionaries: ['go'], },
-    { languageId: 'c',      allowCompoundWords: true,    dictionaries: ['cpp'], },
-    { languageId: 'cpp',    allowCompoundWords: true,    dictionaries: ['cpp'], },
-    { languageId: 'csharp', allowCompoundWords: true,    dictionaries: ['csharp', 'dotnet', 'npm'] },
-    { languageId: 'javascript',                          dictionaries: ['typescript', 'node', 'npm'] },
-    { languageId: 'javascriptreact',                     dictionaries: ['typescript', 'node', 'npm'] },
-    { languageId: 'typescript',                          dictionaries: ['typescript', 'node', 'npm'] },
-    { languageId: 'typescriptreact',                     dictionaries: ['typescript', 'node', 'npm'] },
-    { languageId: 'html',                                dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
-    { languageId: 'latex',                               dictionaries: ['latex'] },
-    { languageId: 'markdown',                            dictionaries: ['npm'] },
-    { languageId: 'jade',                                dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
-    { languageId: 'json',                                dictionaries: ['node', 'npm'] },
-    { languageId: 'pug',                                 dictionaries: ['html', 'fonts', 'typescript', 'css', 'npm'] },
-    { languageId: 'php',                                 dictionaries: ['php', 'html', 'fonts', 'css', 'typescript', 'npm'] },
-    { languageId: 'css',                                 dictionaries: ['fonts', 'css'] },
-    { languageId: 'less',                                dictionaries: ['fonts', 'css'] },
-    { languageId: 'scss',                                dictionaries: ['fonts', 'css'] },
-    { languageId: 'map',    enabled: false },
-    { languageId: 'image',  enabled: false },
-    { languageId: 'binary', enabled: false },
-    {
-        languageId: 'python',
-        allowCompoundWords: true,
-        dictionaries: ['python'],
-        ignoreRegExpList: [ 'binary_string', 'unicode_string' ],
-        patterns: [
-            { name: 'binary_string', pattern: "\\bb'" },
-            { name: 'unicode_string', pattern: "\\bu'" }
-        ]
-    },
+const defaultLanguageSettings: LanguageSettings = [
 ];
 
-export function getDefaultLanguageSettings(): CSpellUserSettings {
-    return { languageSettings: defaultLanguageSettings };
+export function getDefaultLanguageSettings(): LanguageSettings {
+    return defaultLanguageSettings;
 }
 
-function normalizeLocal(local: LocalId | LocalId[]): Set<LocalId> {
-    if (typeof local === 'string') {
-        local = local.split(',');
+function stringToList(sList: string | string[]): string[] {
+    if (typeof sList === 'string') {
+        sList = sList.replace(/\|/g, ',').replace(/\s/g, '').split(',');
     }
+    return sList;
+}
+
+export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<LanguageId> {
+    const langIds = stringToList(langId);
+    return new Set<LanguageId>(langIds.map(a => a.toLowerCase()));
+}
+
+export function normalizeLocal(local: LocalId | LocalId[]): Set<LocalId> {
+    local = stringToList(local);
     return new Set<LocalId>(local.map(local => local.toLowerCase().replace(/[^a-z]/g, '')));
 }
 
-function isLocalInSet(local: LocalId | LocalId[], setOfLocals: Set<LocalId>): boolean {
+export function isLocalInSet(local: LocalId | LocalId[], setOfLocals: Set<LocalId>): boolean {
     const locals = normalizeLocal(local);
     return [...locals.values()].filter(local => setOfLocals.has(local)).length > 0;
 }
 
 export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocalId | LocalId[]): LanguageSetting {
+    languageId = languageId.toLowerCase();
     const allowedLocals = normalizeLocal(local);
     return defaultLanguageSettings.concat(languageSettings)
-        .filter(s => s.languageId === '*' || s.languageId.toLowerCase() === languageId)
+        .filter(s => s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
         .filter(s => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals) )
         .reduce((langSetting, setting) => ({
             ...SpellSettings.mergeSettings(langSetting, setting),

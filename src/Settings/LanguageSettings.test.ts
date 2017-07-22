@@ -1,9 +1,10 @@
 import { expect } from 'chai';
-import { calcSettingsForLanguage, defaultLanguageSettings, calcUserSettingsForLanguage } from './LanguageSettings';
+import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
 import { getGlobalSettings } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
 import { CSpellUserSettings } from './CSpellSettingsDef';
 import { mergeSettings } from './CSpellSettingsServer';
+import * as LS from './LanguageSettings';
 
 const extraSettings: CSpellUserSettings = {
     ignoreRegExpList: ['binary'],
@@ -17,6 +18,9 @@ const extraSettings: CSpellUserSettings = {
         }
     ],
 };
+
+const defaultSettings = getDefaultSettings();
+const defaultLanguageSettings = defaultSettings.languageSettings;
 
 describe('Validate LanguageSettings', () => {
     it('tests merging language settings', () => {
@@ -72,5 +76,24 @@ describe('Validate LanguageSettings', () => {
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
         const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
         expect(sPHP).to.not.be.empty;
+    });
+
+    it('tests matching languageIds', () => {
+        const langSet = LS.normalizeLanguageId('PHP, Python | cpp,javascript');
+        expect(langSet.has('php')).to.be.true;
+        expect(langSet.has('cpp')).to.be.true;
+        expect(langSet.has('python')).to.be.true;
+        expect(langSet.has('javascript')).to.be.true;
+        expect(langSet.has('typescript')).to.be.false;
+    });
+
+    it('tests local matching', () => {
+        const localSet = LS.normalizeLocal('en, en-GB, fr-fr, nl_NL');
+        expect(localSet.has('en')).to.be.true;
+        expect(LS.isLocalInSet('nl-nl', localSet)).to.be.true;
+        expect(LS.isLocalInSet('nl_nl', localSet)).to.be.true;
+        expect(LS.isLocalInSet('en', localSet)).to.be.true;
+        expect(LS.isLocalInSet('en-US', localSet)).to.be.false;
+        expect(LS.isLocalInSet('enGB', localSet)).to.be.true;
     });
 });
