@@ -58,6 +58,9 @@ export interface Emitters {
     error: ErrorEmitter;
 }
 
+const matchBase = { matchBase: true };
+const defaultMinimatchOptions: minimatch.IOptions = { nocase: true };
+
 export class CSpellApplicationConfiguration {
     readonly info: (message?: any, ...args: any[]) => void;
     readonly debug: (message?: any, ...args: any[]) => void;
@@ -66,7 +69,7 @@ export class CSpellApplicationConfiguration {
     readonly local: string;
 
     readonly configGlob: string = '{cspell.json,.cspell.json}';
-    readonly configGlobOptions: minimatch.IOptions = { nocase: true };
+    readonly configGlobOptions: minimatch.IOptions = defaultMinimatchOptions;
     readonly excludes: GlobSrcInfo[];
 
     constructor(
@@ -157,10 +160,11 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             )
             .map(({configInfo, filename, text}) => {
                 const ext = path.extname(filename);
-                const languageIds = cspell.getLanguagesForExt(ext);
-                cfg.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
-                const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configInfo.config);
+                const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
+                const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), fileSettings);
+                const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
                 const config = cspell.constructSettingsForText(settings, text, languageIds);
+                cfg.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
                 return {configInfo: {...configInfo, config}, filename, text};
             })
             .filter(info => info.configInfo.config.enabled !== false)
@@ -263,11 +267,11 @@ function findFiles(globPatterns: string[]): Rx.Observable<string> {
 function calcExcludeGlobInfo(commandLineExclude: string | undefined): GlobSrcInfo[] {
     const excludes = commandLineExclude && commandLineExclude.split(/\s+/g).map(glob => ({glob, source: 'arguments'}))
         || defaultExcludeGlobs.map(glob => ({glob, source: 'default'}));
-    return excludes.map(({source, glob}) => ({source, glob, regex: minimatch.makeRe(glob)}));
+    return excludes.map(({source, glob}) => ({source, glob, regex: minimatch.makeRe(glob, matchBase)}));
 }
 
 function extractGlobExcludesFromConfig(filename: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
-    return (config.ignorePaths || []).map(glob => ({ source: filename, glob, regex: minimatch.makeRe(glob)}));
+    return (config.ignorePaths || []).map(glob => ({ source: filename, glob, regex: minimatch.makeRe(glob, matchBase)}));
 }
 
 

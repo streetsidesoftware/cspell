@@ -1,4 +1,4 @@
-import { LanguageSetting, CSpellUserSettings, LocalId, LanguageId } from './CSpellSettingsDef';
+import { LanguageSetting, CSpellUserSettings, LocalId, LanguageId, BaseSetting } from './CSpellSettingsDef';
 import * as SpellSettings from './CSpellSettingsServer';
 
 // cspell:ignore filetypes
@@ -38,17 +38,23 @@ export function isLocalInSet(local: LocalId | LocalId[], setOfLocals: Set<LocalI
     return [...locals.values()].filter(local => setOfLocals.has(local)).length > 0;
 }
 
-export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocalId | LocalId[]): LanguageSetting {
+export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocalId | LocalId[]): BaseSetting {
     languageId = languageId.toLowerCase();
     const allowedLocals = normalizeLocal(local);
     return defaultLanguageSettings.concat(languageSettings)
         .filter(s => s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
         .filter(s => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals) )
+        .map(langSetting => {
+            const s = {...langSetting};
+            delete s.languageId;
+            delete s.local;
+            return s as BaseSetting;
+        })
         .reduce((langSetting, setting) => ({
             ...SpellSettings.mergeSettings(langSetting, setting),
             languageId,
             local,
-        }));
+        }), {});
 }
 
 export function calcUserSettingsForLanguage(settings: CSpellUserSettings, languageId: string): CSpellUserSettings {

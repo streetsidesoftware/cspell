@@ -1,10 +1,11 @@
 import * as fs from 'fs';
 import * as json from 'comment-json';
-import {CSpellUserSettingsWithComments, CSpellUserSettings, RegExpPatternDefinition} from './CSpellSettingsDef';
+import {CSpellUserSettingsWithComments, CSpellUserSettings, RegExpPatternDefinition, Glob} from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
 import * as ConfigStore from 'configstore';
+import * as minimatch from 'minimatch';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -117,6 +118,14 @@ export function mergeInDocSettings(left: CSpellUserSettings, right: CSpellUserSe
     return merged;
 }
 
+export function calcOverrideSettings(settings: CSpellUserSettings, filename: string): CSpellUserSettings {
+    const overrides = settings.overrides || [];
+
+    const result = overrides
+        .filter(override => checkFilenameMatchesGlob(filename, override.filename))
+        .reduce((settings, override) => mergeSettings(settings, override), settings);
+    return result;
+}
 
 export function finalizeSettings(settings: CSpellUserSettings): CSpellUserSettings {
     // apply patterns to any RegExpLists.
@@ -158,4 +167,14 @@ export function getCachedFileSize() {
 
 export function clearCachedFiles() {
     cachedFiles.clear();
+}
+
+export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean {
+    if (typeof globs === 'string') {
+        globs = [globs];
+    }
+
+    const matches = globs
+        .filter(g => minimatch(filename, g, { matchBase: true }));
+    return matches.length > 0;
 }

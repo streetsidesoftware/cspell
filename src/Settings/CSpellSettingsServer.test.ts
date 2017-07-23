@@ -1,6 +1,9 @@
 import { expect } from 'chai';
-import { mergeSettings, readSettings, getGlobalSettings, clearCachedFiles, getCachedFileSize } from './CSpellSettingsServer';
+import {
+    mergeSettings, readSettings, getGlobalSettings, clearCachedFiles, getCachedFileSize, checkFilenameMatchesGlob, calcOverrideSettings
+} from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
+import { CSpellUserSettings } from './CSpellSettingsDef';
 import * as path from 'path';
 
 describe('Validate CSpellSettingsServer', () => {
@@ -105,3 +108,53 @@ describe('Validate CSpellSettingsServer', () => {
         expect(getCachedFileSize()).to.be.eq(0);
     });
 });
+
+describe('Validate Overrides', () => {
+    it('tests  checkFilenameMatchesGlob', () => {
+        const tests = [
+            { f: 'nested/dir/spell.test.ts', g: 'nested/**', e: true },
+            { f: 'nested/dir/spell.test.ts', g: 'nested', e: false },
+            { f: 'nested/dir/spell.test.ts', g: '*.ts', e: true },
+            { f: 'nested/dir/spell.test.ts', g: '**/*.ts', e: true },
+            { f: 'nested/dir/spell.test.ts', g: ['**/*.ts'], e: true },
+            { f: 'nested/dir/spell.test.ts', g: ['**/dir/**/*.ts'], e: true },
+            { f: 'nested/dir/spell.test.js', g: ['**/*.ts'], e: false },
+            { f: 'nested/dir/spell.test.js', g: ['*.ts', '*.test.js'], e: true },
+            { f: '/cspell-dicts/nl_NL/Dutch.txt', g: '**/nl_NL/**', e: true },
+        ];
+
+        tests.forEach(({f, g, e}) => expect(checkFilenameMatchesGlob(f, g), `f: ${f}, g: ${g}, e: ${e}`).to.be.equal(e));
+    });
+
+    it('test calcOverrideSettings', () => {
+        interface Test { f: string; e: [keyof CSpellUserSettings, string][]; }
+        const tests: Test[] = [
+            { f: 'nested/dir/spell.test.ts', e: [['languageId', 'typescript']]},
+        ];
+
+        tests.forEach(({f, e}) => {
+            const r = calcOverrideSettings(sampleSettings, f);
+            e.forEach(([k, v]) => expect(r[k]).to.be.equal(v));
+        });
+    });
+});
+
+
+const sampleSettings: CSpellUserSettings = {
+    language: 'en',
+    languageId: 'plaintext',
+    overrides: [
+        {
+            filename: '**/*.ts',
+            languageId: 'typescript',
+        },
+        {
+            filename: '**/*.lex',
+            languageId: 'lex',
+        },
+        {
+            filename: '**/NL/*.txt',
+            language: 'en,nl',
+        },
+    ],
+};

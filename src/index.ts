@@ -7,6 +7,7 @@ export {
     readSettingsFiles,
     defaultFileName as defaultSettingsFilename,
     clearCachedFiles as clearCachedSettings,
+    calcOverrideSettings
 } from './Settings';
 export { SpellingDictionary, createSpellingDictionary, createSpellingDictionaryRx, getDictionary } from './SpellingDictionary';
 export { getDefaultSettings, getGlobalSettings } from './Settings';
