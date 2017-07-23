@@ -87,7 +87,9 @@ describe('Validate textValidator functions', () => {
 
     it('test contractions', () => {
         const dictWords = getSpellingDictionaryCollection();
+        // cspell:disable
         const text = `We should’ve done a better job, but we couldn\\'t have known.`;
+        // cspell:enable
         const result = validateText(text, dictWords, { allowCompoundWords: false });
         const errors = result.map(wo => wo.text).toArray().sort();
         expect(errors).to.deep.equal([]);

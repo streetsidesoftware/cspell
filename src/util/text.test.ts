@@ -106,11 +106,11 @@ describe('Util Text', () => {
                 { text: 'HELLO', offset: 21 },
             ]);
         expect(Text.extractWordsFromCode(`
-            const x = 'should\'t';
+            const x = 'shouldn\'t';
         `).toArray()).to.deep.equal([
                 { text: 'const', offset: 13 },
                 { text: 'x', offset: 19 },
-                { text: 'should\'t', offset: 24 },
+                { text: 'shouldn\'t', offset: 24 },
             ]);
     });
 
