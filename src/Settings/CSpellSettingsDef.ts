@@ -8,7 +8,7 @@ export interface CSpellPackageSettings extends CSpellUserSettings {
 }
 
 
-export interface CSpellUserSettings extends BaseSetting {
+export interface CSpellUserSettings extends BaseSetting, LegacySettings {
     // Version of the setting file.
     version?: string;
 
@@ -51,6 +51,9 @@ export interface CSpellUserSettings extends BaseSetting {
     // Other settings files to be included
     import?: string | string[];
 
+}
+
+export interface LegacySettings {
     /***********************
      * VS Code Spell Checker Settings below
      * To be Removed
@@ -64,6 +67,17 @@ export interface CSpellUserSettings extends BaseSetting {
     /************************/
 }
 
+export interface OverrideSettings {
+    // Sets the programming language id
+    languageId?: LanguageId;
+
+    // Sets the local
+    language?: LocalId;
+}
+
+export interface OverrideFilterFields {
+    filename: Glob | Glob[];
+}
 
 export interface BaseSetting {
     // Enabled
