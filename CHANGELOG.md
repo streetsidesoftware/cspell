@@ -1,8 +1,8 @@
 # Release Notes
 
-## latest
+## 1.9.0
 - Add support to set the local / language within a file using in document settings.
-
+- Add support for overrides based upon the filename.
 
 ## 1.8.1
 - Add support for dictionary level replacement maps. This allows for things like ij -> ĳ because that is how it is stored in the dictionary.
