@@ -30,6 +30,7 @@ function parseSettingMatch(possibleSetting: string): CSpellUserSettings[] {
         [ /^ignore(?:words?)?\s/i, parseIgnoreWords ],
         [ /^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp ],
         [ /^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp ],
+        [ /^(?:local|language)/i, parseLocal ],
     ];
 
     return settingParsers
@@ -46,6 +47,12 @@ function parseCompoundWords(match: string): CSpellUserSettings {
 function parseWords(match: string): CSpellUserSettings {
     const words = match.split(/[,\s]+/g).slice(1);
     return { words };
+}
+
+function parseLocal(match: string): CSpellUserSettings {
+    const parts = match.trim().split(/\s+/);
+    const language = parts.slice(1).join(' ');
+    return language ? { language } : {};
 }
 
 function parseIgnoreWords(match: string): CSpellUserSettings {

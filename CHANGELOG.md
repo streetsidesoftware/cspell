@@ -1,5 +1,9 @@
 # Release Notes
 
+## latest
+- Add support to set the local / language within a file using in document settings.
+
+
 ## 1.8.1
 - Add support for dictionary level replacement maps. This allows for things like ij -> ĳ because that is how it is stored in the dictionary.
 - Fix issue [#10](https://github.com/Jason3S/cspell/issues/10) - handle right quotes.

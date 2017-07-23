@@ -23,6 +23,9 @@ describe('Validate InDocSettings', () => {
             'ignoreRegExp /faullts[/]?/ */',
             'ignore tripe, comment */',
             'ignoreWords tooo faullts',
+            'language en-US',
+            'local',
+            'local en, nl',
         ]);
     });
 
@@ -78,9 +81,13 @@ describe('Validate InDocSettings', () => {
         const ranges = TextRange.findMatchingRangesForPatterns(matches, sampleCode);
         // console.log(ranges);
         // console.log(replaceRangesWith(sampleCode, ranges));
-        expect(ranges.length).to.be.equal(31);
+        expect(ranges.length).to.be.equal(34);
     });
 
+    it('test fetching the local for the text', () => {
+        const settings = InDoc.getInDocumentSettings(sampleCode);
+        expect(settings.language).to.be.equal('en, nl');
+    });
 });
 // cSpell:ignore faullts straange
 // cSpell:ignoreRegExp \w+s{4}\w+
@@ -105,6 +112,9 @@ const sampleCode = `
     // misssspellings faullts
 
     // weirdberry can be straange.
+    // cSpell:language en-US
+    // cspell:local
+    // cspell:local en, nl
 
 `;
 
