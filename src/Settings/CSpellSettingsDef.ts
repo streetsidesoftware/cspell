@@ -13,6 +13,9 @@ export interface FileSettings extends Settings {
     // Version of the setting file.
     version?: string;
 
+    // Words to add to dictionary -- should only be in the user config file.
+    userWords?: string[];
+
     // Other settings files to be included
     import?: string | string[];
 }
@@ -42,9 +45,6 @@ export interface Settings extends BaseSetting {
     // The maximum number of times the same word can be flagged as an error in a file.
     maxDuplicateProblems?: number;
 
-    // Words to add to dictionary -- should only be in the user config file.
-    userWords?: string[];
-
     // The minimum length of a word before checking it against a dictionary.
     minWordLength?: number;
 
@@ -69,7 +69,7 @@ export interface LegacySettings {
     /************************/
 }
 
-export interface OverrideSettings {
+export interface OverrideSettings extends Settings {
     // Sets the programming language id
     languageId?: LanguageId;
 
