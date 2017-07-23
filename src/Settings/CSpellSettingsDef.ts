@@ -108,7 +108,10 @@ export interface DictionaryDefinition {
     repMap?: ReplaceMap;
 }
 
-export interface LanguageSetting extends BaseSetting {
+export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {
+}
+
+export interface LanguageSettingFilterFields {
     // The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages
     languageId: LanguageId | LanguageId[];
     // The local filter, matches against the language. This can be a comma separated list. "*" will match all locals.
