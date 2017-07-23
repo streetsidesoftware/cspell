@@ -27,12 +27,6 @@ export interface CSpellUserSettings extends BaseSetting {
     // list of words to always be considered incorrect.
     flagWords?: string[];
 
-    // Show status
-    showStatus?: boolean;
-
-    // Delay in ms after a document has changed before checking it for spelling errors.
-    spellCheckDelayMs?: number;
-
     // languageIds for the files to spell check.
     enabledLanguageIds?: LanguageId[];
 
@@ -56,6 +50,18 @@ export interface CSpellUserSettings extends BaseSetting {
 
     // Other settings files to be included
     import?: string | string[];
+
+    /***********************
+     * VS Code Spell Checker Settings below
+     * To be Removed
+     */
+
+    // Show status
+    showStatus?: boolean;
+
+    // Delay in ms after a document has changed before checking it for spelling errors.
+    spellCheckDelayMs?: number;
+    /************************/
 }
 
 
