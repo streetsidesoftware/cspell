@@ -7,8 +7,9 @@ import {ReplaceMap} from '../util/repMap';
 export interface CSpellPackageSettings extends CSpellUserSettings {
 }
 
+export interface CSpellUserSettings extends FileSettings, LegacySettings {}
 
-export interface CSpellUserSettings extends BaseSetting, LegacySettings {
+export interface FileSettings extends BaseSetting {
     // Version of the setting file.
     version?: string;
 
@@ -50,7 +51,6 @@ export interface CSpellUserSettings extends BaseSetting, LegacySettings {
 
     // Other settings files to be included
     import?: string | string[];
-
 }
 
 export interface LegacySettings {
