@@ -29,7 +29,7 @@ describe('Util Text', () => {
 
     it('extract word from text', () => {
         expect(Text.extractWordsFromText(`
-            // could've, would've, couldn't've, wasn't, y'all, 'twas
+            // could've, would've, couldn't've, wasn't, y'all, 'twas, shouldn’t
         `).toArray()).to.deep.equal([
                 { text: "could've", offset: 16 },
                 { text: "would've", offset: 26 },
@@ -37,6 +37,7 @@ describe('Util Text', () => {
                 { text: "wasn't", offset: 49 },
                 { text: "y'all", offset: 57 },
                 { text: 'twas', offset: 65 },
+                { text: 'shouldn’t', offset: 71 },
             ]);
     });
 
@@ -103,6 +104,13 @@ describe('Util Text', () => {
                 { text: 'expect', offset: 13 },
                 { text: 'a', offset: 20 },
                 { text: 'HELLO', offset: 21 },
+            ]);
+        expect(Text.extractWordsFromCode(`
+            const x = 'should\'t';
+        `).toArray()).to.deep.equal([
+                { text: 'const', offset: 13 },
+                { text: 'x', offset: 19 },
+                { text: 'should\'t', offset: 24 },
             ]);
     });
 

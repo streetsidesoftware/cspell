@@ -2,6 +2,8 @@ import { SpellingDictionary, SuggestionResult } from './SpellingDictionary';
 import { genSequence } from 'gensequence';
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
+    readonly options = {};
+    readonly mapWord = (word: string) => word;
     constructor(readonly dictionaries: SpellingDictionary[], readonly name: string) {
         this.dictionaries = this.dictionaries.filter(a => !!a.size);
     }

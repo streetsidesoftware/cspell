@@ -111,6 +111,7 @@ export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, text:
 }
 
 export function hasWordCheck(dict: SpellingDictionary, word: string, allowCompounds: boolean) {
+    word = word.replace(/\\/g, '');
     return dict.has(word) || (allowCompounds && hasCompoundWord(dict, word) );
 }
 

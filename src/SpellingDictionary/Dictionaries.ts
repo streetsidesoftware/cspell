@@ -10,7 +10,7 @@ export function loadDictionaries(dictIds: DictionaryId[], defs: DictionaryDefini
 
     return defsToLoad
         .map(e => e[1])
-        .map(def => loadDictionary(def.path!, { type: def.type}));
+        .map(def => loadDictionary(def.path!, def));
 }
 
 export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionary> {

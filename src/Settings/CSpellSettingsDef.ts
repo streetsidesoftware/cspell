@@ -1,4 +1,6 @@
 
+import {ReplaceMap} from '../util/repMap';
+
 /**
  * These settings come from user and workspace settings.
  */
@@ -96,6 +98,8 @@ export interface DictionaryDefinition {
     // Default is C
     // C is the slowest to load due to the need to split each line based upon code splitting rules.
     type?: DictionaryFileTypes;
+    // Replacement pairs
+    repMap?: ReplaceMap;
 }
 
 export interface LanguageSetting extends BaseSetting {
@@ -131,7 +135,6 @@ export interface RegExpPatternDefinition {
     name: PatternId;
     pattern: PatternRef;
 }
-
 
 export interface CSpellUserSettingsWithComments extends CSpellUserSettings {
     // comment at the beginning of the file

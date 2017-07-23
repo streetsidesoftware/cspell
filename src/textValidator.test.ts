@@ -85,6 +85,14 @@ describe('Validate textValidator functions', () => {
         expect(errors).to.deep.equal([]);
     });
 
+    it('test contractions', () => {
+        const dictWords = getSpellingDictionaryCollection();
+        const text = `We should’ve done a better job, but we couldn\'t have known.`;
+        const result = validateText(text, dictWords, { allowCompoundWords: false });
+        const errors = result.map(wo => wo.text).toArray().sort();
+        expect(errors).to.deep.equal([]);
+    });
+
     it('tests maxDuplicateProblems', () => {
         const dict = createSpellingDictionary([], 'empty');
         const text = sampleText;
@@ -104,7 +112,7 @@ function getSpellingDictionaryCollection() {
         createSpellingDictionary(fruit, 'fruit'),
         createSpellingDictionary(animals, 'animals'),
         createSpellingDictionary(insects, 'insects'),
-        createSpellingDictionary(words, 'words'),
+        createSpellingDictionary(words, 'words', { repMap: [['’', "'"]]}),
     ];
 
     return new SpellingDictionaryCollection(dicts, 'collection');
@@ -116,7 +124,12 @@ const fruit = [
 ];
 const animals = ['ape', 'lion', 'tiger', 'Elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
 const insects = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
-const words = ['the', 'and', 'is', 'has', 'ate', 'light', 'dark', 'little', 'big', 'we', 'have', 'published', 'multiple', 'fixes', 'to', 'the', 'problems'];
+const words = [
+    'the', 'and', 'is', 'has', 'ate', 'light', 'dark', 'little',
+    'big', 'we', 'have', 'published', 'multiple', 'fixes', 'to',
+    'the', 'problems', 'better', 'done', 'known',
+    "shouldn't", "couldn't", "should've",
+];
 
 const sampleText = `
     The elephant and giraffe

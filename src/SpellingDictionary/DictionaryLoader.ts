@@ -4,6 +4,7 @@ import {
 } from '../wordListHelper';
 import { SpellingDictionary, createSpellingDictionaryRx, createSpellingDictionaryTrie } from './SpellingDictionary';
 import * as path from 'path';
+import {ReplaceMap} from '../util/repMap';
 
 export interface LoadOptions {
     // Type of file:
@@ -12,10 +13,13 @@ export interface LoadOptions {
     //  C - each line is treated like code (Camel Case is allowed)
     // Default is C
     // C is the slowest to load due to the need to split each line based upon code splitting rules.
-    type?: keyof Loaders;
+    type?: LoaderType;
+    // Replacement Map
+    repMap?: ReplaceMap;
 }
 
-export type Loader = (filename: string) => Promise<SpellingDictionary>;
+export type LoaderType = keyof Loaders;
+export type Loader = (filename: string, options: LoadOptions) => Promise<SpellingDictionary>;
 
 export interface Loaders {
     S: Loader;
@@ -37,37 +41,42 @@ const loaders: Loaders = {
 const dictionaryCache = new Map<string, Promise<SpellingDictionary>>();
 
 export function loadDictionary(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'C';
-    const { type = defType } = options;
-    const key = [uri, type].join('|');
+    const loaderType = determineType(uri, options);
+    const key = [uri, loaderType].join('|');
     if (!dictionaryCache.has(key)) {
-        dictionaryCache.set(key, load(uri, type));
+        dictionaryCache.set(key, load(uri, options));
     }
 
     return dictionaryCache.get(key)!;
 }
 
 
-function load(uri: string, type: string): Promise<SpellingDictionary>  {
+function determineType(uri: string, options: LoadOptions): LoaderType {
+    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'C';
+    const { type = defType } = options;
     const regTrieTest = /\.trie\b/i;
-    type = regTrieTest.test(uri) ? 'T' : type;
+    return regTrieTest.test(uri) ? 'T' : type;
+}
+
+function load(uri: string, options: LoadOptions): Promise<SpellingDictionary>  {
+    const type = determineType(uri, options);
     const loader = loaders[type] || loaders.default;
-    return loader(uri);
+    return loader(uri, options);
 }
 
 
-function loadSimpleWordList(filename: string) {
-    return createSpellingDictionaryRx(loadWordsRx(filename), path.basename(filename));
+function loadSimpleWordList(filename: string, options: LoadOptions) {
+    return createSpellingDictionaryRx(loadWordsRx(filename), path.basename(filename), options);
 }
 
-function loadWordList(filename: string) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoWordsRx), path.basename(filename));
+function loadWordList(filename: string, options: LoadOptions) {
+    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoWordsRx), path.basename(filename), options);
 }
 
-function loadCodeWordList(filename: string) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoCodeWordsRx), path.basename(filename));
+function loadCodeWordList(filename: string, options: LoadOptions) {
+    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoCodeWordsRx), path.basename(filename), options);
 }
 
-function loadTrie(filename: string) {
-    return createSpellingDictionaryTrie(loadWordsRx(filename), path.basename(filename));
+function loadTrie(filename: string, options: LoadOptions) {
+    return createSpellingDictionaryTrie(loadWordsRx(filename), path.basename(filename), options);
 }

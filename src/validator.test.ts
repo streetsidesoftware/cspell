@@ -129,6 +129,20 @@ describe('Validator', function() {
             expect(words.sort()).to.be.deep.equal(expected.sort());
         });
     });
+
+    it('Validates contractions', () => {
+        const text = `
+            We have a bit of text to check. Don't look too hard.
+            Which single quote to use? Is it shouldn't or shouldn’t?
+        `;
+        const languageId = 'plaintext';
+        const settings = getSettings(text, languageId);
+        const results = Validator.validateText(text, settings);
+        return results.then(results => {
+            const words = results.map(({text}) => text);
+            expect(words.sort()).to.be.deep.equal([]);
+        });
+    });
 });
 
 const sampleCode = `
