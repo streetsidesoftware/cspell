@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.8.1
+- Add support for dictionary level replacement maps. This allows for things like ij -> ĳ because that is how it is stored in the dictionary.
+- Fix issue [#10](https://github.com/Jason3S/cspell/issues/10) - handle right quotes.
+- Fix an issue where \' should be seen as ' when checking contractions.
+
 ## 1.7.3
 - Be able to clear the cached settings files.
 - Make sure the global config file is not created by default.
