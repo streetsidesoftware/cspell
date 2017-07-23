@@ -9,10 +9,15 @@ export interface CSpellPackageSettings extends CSpellUserSettings {
 
 export interface CSpellUserSettings extends FileSettings, LegacySettings {}
 
-export interface FileSettings extends BaseSetting {
+export interface FileSettings extends Settings {
     // Version of the setting file.
     version?: string;
 
+    // Other settings files to be included
+    import?: string | string[];
+}
+
+export interface Settings extends BaseSetting {
     // current active spelling language
     language?: LocalId;
 
@@ -48,9 +53,6 @@ export interface FileSettings extends BaseSetting {
 
     // Additional settings for individual languages.
     languageSettings?: LanguageSetting[];
-
-    // Other settings files to be included
-    import?: string | string[];
 }
 
 export interface LegacySettings {
