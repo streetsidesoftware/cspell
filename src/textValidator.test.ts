@@ -87,7 +87,7 @@ describe('Validate textValidator functions', () => {
 
     it('test contractions', () => {
         const dictWords = getSpellingDictionaryCollection();
-        const text = `We should’ve done a better job, but we couldn\'t have known.`;
+        const text = `We should’ve done a better job, but we couldn\\'t have known.`;
         const result = validateText(text, dictWords, { allowCompoundWords: false });
         const errors = result.map(wo => wo.text).toArray().sort();
         expect(errors).to.deep.equal([]);
