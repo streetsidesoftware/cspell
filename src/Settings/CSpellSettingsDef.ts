@@ -9,7 +9,7 @@ export interface CSpellPackageSettings extends CSpellUserSettings {
 
 export interface CSpellUserSettings extends FileSettings, LegacySettings {}
 
-export interface FileSettings extends Settings {
+export interface FileSettings extends ExtendableSettings {
     // Version of the setting file.
     version?: string;
 
@@ -18,6 +18,11 @@ export interface FileSettings extends Settings {
 
     // Other settings files to be included
     import?: string | string[];
+}
+
+export interface ExtendableSettings extends Settings {
+    // Overrides to apply based upon the file path.
+    overrides?: OverrideSettings[];
 }
 
 export interface Settings extends BaseSetting {
@@ -53,6 +58,9 @@ export interface Settings extends BaseSetting {
 
     // Additional settings for individual languages.
     languageSettings?: LanguageSetting[];
+
+    // Forces the spell checker to assume a give language id. Used mainly as an Override.
+    languageId?: LanguageId;
 }
 
 export interface LegacySettings {
@@ -69,7 +77,7 @@ export interface LegacySettings {
     /************************/
 }
 
-export interface OverrideSettings extends Settings {
+export interface OverrideSettings extends Settings, OverrideFilterFields {
     // Sets the programming language id
     languageId?: LanguageId;
 
