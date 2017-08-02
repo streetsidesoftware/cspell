@@ -1,4 +1,4 @@
-#!/usr/bin/env node --max_old_space_size=4096
+#!/usr/bin/env node
 
 // For large dictionaries, it is necessary to increase the memory limit.
 // # !/usr/bin/env node --max_old_space_size=8192
