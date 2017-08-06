@@ -44,6 +44,13 @@
                 { "name": "binary_string", "pattern": "\\bb'" },
                 { "name": "unicode_string", "pattern": "\\bu'" }
             ]
+        },
+        {
+            "languageId": "c,cpp",
+            // Exclude includes
+            "ignoreRegExpList": [
+                "/#include.*/"
+            ]
         }
     ],
     "import": [
