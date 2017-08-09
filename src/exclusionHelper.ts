@@ -3,6 +3,8 @@ import * as minimatch from 'minimatch';
 
 const separator = '/';
 
+const allowedSchemes = new Set(['file', 'untitled']);
+
 export type ExclusionFunction = (filename: string) => boolean;
 
 export type Glob = string;
@@ -17,8 +19,8 @@ export function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap
     return globs;
 }
 
-export function pathToUri(filePath: string): string {
-    return Uri.file(filePath).toString();
+export function pathToUri(filePath: string): Uri {
+    return Uri.file(filePath);
 }
 
 export function generateExclusionFunctionForUri(globs: Glob[], root: string): ExclusionFunction {
@@ -42,13 +44,13 @@ export function generateExclusionFunctionForUri(globs: Glob[], root: string): Ex
 
     function testUriPath(uriPath: string): boolean {
         const uri = Uri.parse(uriPath);
-        if (uri.scheme !== 'file') {
+        if (!allowedSchemes.has(uri.scheme)) {
             return true;
         }
 
-        const relativeRoot = uriPath.slice(0, rootUri.length);
-        if (relativeRoot === rootUri) {
-            const relativeToRoot = uriPath.slice(rootUri.length);
+        const relativeRoot = uri.path.slice(0, rootUri.path.length);
+        if (relativeRoot === rootUri.path) {
+            const relativeToRoot = uriPath.slice(rootUri.path.length);
             return testPathStepByStep(relativeToRoot);
         }
 

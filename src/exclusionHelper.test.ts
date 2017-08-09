@@ -44,6 +44,7 @@ describe('Verify Exclusion Helper functions', function() {
         const filesMatching = [
             'file:///User/projects/myProject/node_modules/test/test.js',
             'file:///User/projects/myProject/node_modules/test/test.json',
+            'untitled:///User/projects/myProject/node_modules/test/test.js',
         ];
         const fn = generateExclusionFunctionForUri(globs, '/User/projects/myProject/node_modules/test');
 
