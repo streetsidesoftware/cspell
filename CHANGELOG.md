@@ -1,5 +1,13 @@
 # Release Notes
 
+## 1.9.3
+- Add support for 'untitled' file scheme types.
+- Add basic support for handlebars
+
+## 1.9.2
+- Add better support for .jsx and .tsx files.
+- Ignore #include lines on .cpp and .c files.
+
 ## 1.9.0
 - Add support to set the local / language within a file using in document settings.
 - Add support for overrides based upon the filename.
