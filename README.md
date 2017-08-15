@@ -5,7 +5,7 @@
 
 A Spell Checker for Code!
 
-Cspell is a command line tool and library for spell checking code.
+`cspell` is a command line tool and library for spell checking code.
 
 ## Features
 * Spell Checks Code -- Able to spell check code by parsing it into words before checking against the dictionaries.
@@ -13,7 +13,7 @@ Cspell is a command line tool and library for spell checking code.
 * Self contained -- does not depend upon OS libraries like Hunspell or aspell.  Nor does it depend upon online services.
 * Fast -- checks 1000's of lines of code in seconds.
 * Programming Language Specific Dictionaries -- Has dedicated support for:
-  * Javascript, Typescript, Python, PHP, C#, C++, LaTex, Go, Html, CSS, etc.
+  * JavaScript, TypeScript, Python, PHP, C#, C++, LaTex, Go, HTML, CSS, etc.
 * Customizable -- supports custom dictionaries and word lists.
 * Continuous Integration Support -- Can easily be added as a linter to Travis-CI.
 
