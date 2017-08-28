@@ -35,16 +35,6 @@
         { "languageId": "image",  "enabled": false },
         { "languageId": "binary", "enabled": false },
         {
-            "languageId": "python",
-            "allowCompoundWords": true,
-            "dictionaries": ["python"],
-            "ignoreRegExpList": [ "binary_string", "unicode_string" ],
-            "patterns": [
-                { "name": "binary_string", "pattern": "\\bb'" },
-                { "name": "unicode_string", "pattern": "\\bu'" }
-            ]
-        },
-        {
             "languageId": "c,cpp",
             // Exclude includes
             "ignoreRegExpList": [
@@ -55,6 +45,8 @@
     "import": [
         "node_modules/cspell-dict-en_us/cspell-ext.json",
         "node_modules/cspell-dict-en-gb/cspell-ext.json",
-        "node_modules/cspell-dict-golang/cspell-ext.json"
+        "node_modules/cspell-dict-golang/cspell-ext.json",
+        "node_modules/cspell-dict-django/cspell-ext.json",
+        "node_modules/cspell-dict-python/cspell-ext.json"
     ]
 }

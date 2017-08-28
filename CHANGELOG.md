@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.9.4
+- Migrate Go Lang dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
+- Migrate Python dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
+- Support Pyton Django Framework
+
 ## 1.9.3
 - Add support for 'untitled' file scheme types.
 - Add basic support for handlebars
