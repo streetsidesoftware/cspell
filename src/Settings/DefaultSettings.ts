@@ -44,7 +44,6 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'dotnet',         file: 'dotnet.txt.gz',        type: 'S' },
     { name: 'filetypes',      file: 'filetypes.txt.gz',     type: 'S' },
     { name: 'fonts',          file: 'fonts.txt.gz',         type: 'S' },
-    { name: 'go',             file: 'go.txt.gz',            type: 'S' },
     { name: 'html',           file: 'html.txt.gz',          type: 'S' },
     { name: 'latex',          file: 'latex.txt.gz',         type: 'S' },
     { name: 'misc',           file: 'miscTerms.txt.gz',     type: 'S' },
