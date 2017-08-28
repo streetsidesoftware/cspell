@@ -1,4 +1,4 @@
-export { CSpellUserSettings, CSpellUserSettingsWithComments } from './Settings';
+export * from './Settings';
 export { TextOffset, TextDocumentOffset } from './util/text';
 export { validateText } from './validator';
 export {
