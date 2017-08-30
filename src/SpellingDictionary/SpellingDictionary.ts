@@ -43,6 +43,7 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
     }
 
     public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
+        word = word.toLowerCase();
         return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
     }
 
@@ -119,6 +120,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 
     public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
+        word = word.toLowerCase();
         return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
     }
 }

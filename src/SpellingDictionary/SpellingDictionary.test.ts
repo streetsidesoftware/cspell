@@ -1,6 +1,7 @@
 import { expect } from 'chai';
-import { createSpellingDictionaryRx, createSpellingDictionary, SpellingDictionaryFromSet } from './SpellingDictionary';
+import { createSpellingDictionaryRx, createSpellingDictionary, SpellingDictionaryFromSet, SpellingDictionaryFromTrie } from './SpellingDictionary';
 import * as Rx from 'rxjs/Rx';
+import {Trie} from 'cspell-trie';
 
 // cSpell:ignore aple
 
@@ -41,6 +42,19 @@ describe('Verify building Dictionary', () => {
         const suggestions = dict.suggest('aple').map(({word}) => word);
         expect(suggestions).to.contain('apple');
         expect(suggestions).to.contain('ape');
+        expect(suggestions).to.not.contain('banana');
+    });
+
+    it('Test Suggest Trie', () => {
+        const words = [
+            'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear',
+            'cattle', 'rattle', 'battle',
+            'rattles', 'battles', 'tattles',
+        ];
+        const trie = Trie.create(words);
+        const dict = new SpellingDictionaryFromTrie(trie, 'trie');
+        const suggestions = dict.suggest('Cattles').map(({word}) => word);
+        expect(suggestions[0]).to.be.equal('cattle');
         expect(suggestions).to.not.contain('banana');
     });
 
