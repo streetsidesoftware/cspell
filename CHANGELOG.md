@@ -1,6 +1,9 @@
 # Release Notes
 
-## 1.9.5
+## 1.9.7
+- Fix [#16](https://github.com/Jason3S/cspell/issues/16) where words beginning with capitol letters were not getting good suggestions.
+
+## 1.9.6
 - Make sure all Settings interfaces are exposed.
 
 ## 1.9.4
