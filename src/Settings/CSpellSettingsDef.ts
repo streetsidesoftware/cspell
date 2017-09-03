@@ -90,6 +90,15 @@ export interface OverrideFilterFields {
 }
 
 export interface BaseSetting {
+    // Optional identifier
+    id?: string;
+
+    // Optional name of configuration
+    name?: string;
+
+    // Optional description of configuration
+    description?: string;
+
     // Enabled
     enabled?: boolean;
 
@@ -117,6 +126,8 @@ export type DictionaryFileTypes = 'S'|'W'|'C'|'T';
 export interface DictionaryDefinition {
     // The reference name of the dictionary, used with program language settings
     name: DictionaryId;
+    // Optional description
+    description?: string;
     // Path to the file, if undefined the path to the extension dictionaries is assumed
     path?: string;
     // File name
@@ -167,6 +178,7 @@ export type LanguageId = string;
 export interface RegExpPatternDefinition {
     name: PatternId;
     pattern: PatternRef;
+    description?: string;
 }
 
 export interface CSpellUserSettingsWithComments extends CSpellUserSettings {
@@ -175,6 +187,12 @@ export interface CSpellUserSettingsWithComments extends CSpellUserSettings {
 
     // Version of the setting file.
     '// version'?: string[];
+
+    // Name of configuration
+    '// name'?: string[];
+
+    // Description of configuration
+    '// description'?: string[];
 
     // current active spelling language
     '// language'?: string[];
