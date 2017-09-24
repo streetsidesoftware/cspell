@@ -8,36 +8,35 @@ const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
 
+export type Cost = number;
+export type MaxCost = Cost;
+
 export interface SuggestionResult {
     word: string;
-    cost: number;
+    cost: Cost;
 }
 export function suggest(
     root: TrieNode,
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions,
 ): SuggestionResult[] {
+    const collector = suggestionCollector(word, maxNumSuggestions);
+    genSuggestions(root, word, collector);
+    return collector.suggestions;
+}
+
+export function genSuggestions(
+    root: TrieNode,
+    word: string,
+    output: (suggestion: SuggestionResult) => MaxCost
+) {
     const bc = baseCost;
     const psc = postSwapCost;
-    const sugs: SuggestionResult[] = [];
     const matrix: number[][] = [[]];
     const x = ' ' + word;
     const mx = x.length - 1;
 
     let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
-
-    function comp(a: SuggestionResult, b: SuggestionResult): number {
-        return a.cost - b.cost || a.word.length - b.word.length || (a.word < b.word ? -1 : 1);
-    }
-
-    function emitSug(sug: SuggestionResult) {
-        sugs.push(sug);
-        if (sugs.length > maxNumSuggestions) {
-            sugs.sort(comp);
-            sugs.length = maxNumSuggestions;
-            costLimit = sugs[sugs.length - 1].cost;
-        }
-    }
 
     for (let i = 0; i <= mx; ++i) {
         matrix[0][i] = i * baseCost;
@@ -70,11 +69,45 @@ export function suggest(
         }
         let cost = matrix[d][mx];
         if (isWordTerminationNode(node) && cost <= costLimit) {
-            emitSug({ word: text, cost });
+            costLimit = output({ word: text, cost });
         }
         deeper = (min <= costLimit);
     }
-    sugs.sort(comp);
-    return sugs;
 }
 
+export interface SuggestionCollector {
+    (suggestion: SuggestionResult): MaxCost;
+    readonly suggestions: SuggestionResult[];
+    readonly maxCost: number;
+    readonly word: string;
+}
+
+export function suggestionCollector(word: string, maxNumSuggestions: number, filter: (word: string) => boolean = () => true): SuggestionCollector {
+    const sugs: SuggestionResult[] = [];
+    let maxCost: number = Math.min(baseCost * word.length / 2, baseCost * maxNumChanges);;
+
+    function comp(a: SuggestionResult, b: SuggestionResult): number {
+        return a.cost - b.cost || a.word.length - b.word.length || a.word.localeCompare(b.word);
+    }
+
+    function collector(suggestion: SuggestionResult): MaxCost {
+        if (suggestion.cost <= maxCost && filter(suggestion.word)) {
+            sugs.push(suggestion);
+            if (sugs.length > maxNumSuggestions) {
+                sugs.sort(comp);
+                sugs.length = maxNumSuggestions;
+                maxCost = sugs[sugs.length - 1].cost;
+            }
+        }
+        return maxCost;
+    }
+
+    const sugCollector = collector as SuggestionCollector;
+    Object.defineProperties(sugCollector, {
+        suggestions: { get: () => sugs.sort(comp) },
+        maxCost: { get: () => maxCost },
+        word: { get: () => word },
+    });
+
+    return sugCollector;
+}

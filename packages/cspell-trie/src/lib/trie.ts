@@ -1,14 +1,19 @@
 import {Sequence, genSequence} from 'gensequence';
 import {TrieNode} from './TrieNode';
-import {suggest, SuggestionResult} from './suggest';
 import {
+    genSuggestions,
+    suggest,
+    SuggestionCollector,
+    SuggestionResult,
+} from './suggest';
+import {
+    createTriFromList,
+    insert,
+    isWordTerminationNode,
     iteratorTrieWords,
+    orderTrie,
     walker,
     WalkerIterator,
-    createTriFromList,
-    orderTrie,
-    isWordTerminationNode,
-    insert,
 } from './util';
 
 export class Trie {
@@ -52,6 +57,15 @@ export class Trie {
      */
     suggestWithCost(text: string, maxNumSuggestions: number): SuggestionResult[] {
         return suggest(this.root, text, maxNumSuggestions);
+    }
+
+    /**
+     * genSuggestions will generate suggestions and send them to `collector`. `collector` is responsible for returning the max acceptable cost.
+     * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
+     * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
+     */
+    genSuggestions(collector: SuggestionCollector): void {
+        genSuggestions(this.root, collector.word, collector);
     }
 
     words(): Sequence<string> {

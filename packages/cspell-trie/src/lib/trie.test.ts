@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Trie} from './trie';
 import {isWordTerminationNode, orderTrie} from './util';
+import {suggestionCollector} from './suggest';
 
 describe('Validate Trie Class', () => {
     it('Tests creating a Trie', () => {
@@ -41,6 +42,13 @@ describe('Validate Trie Class', () => {
         const trie = Trie.create(sampleWords);
         const suggestions = trie.suggest('wall', 10);
         expect(suggestions).to.contain('walk');
+    });
+
+    it('tests genSuggestions', () => {
+        const trie = Trie.create(sampleWords);
+        const collector = suggestionCollector('wall', 10);
+        trie.genSuggestions(collector);
+        expect(collector.suggestions.map(a => a.word)).to.contain('walk');
     });
 
     it('Tests iterate', () => {
