@@ -1,18 +1,23 @@
 import { genSequence } from 'gensequence';
 import * as Rx from 'rxjs/Rx';
 import { IterableLike } from '../util/IterableLike';
-import {Trie, importTrieRx} from 'cspell-trie';
+import {Trie, importTrieRx, SuggestionCollector} from 'cspell-trie';
 import {ReplaceMap, createMapper} from '../util/repMap';
+
+export {SuggestionCollector, suggestionCollector } from 'cspell-trie';
 
 export interface SuggestionResult {
     word: string;
     cost: number;
 }
 
+export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
+
 export interface SpellingDictionary {
     readonly name: string;
     has(word: string): boolean;
     suggest(word: string, numSuggestions?: number): SuggestionResult[];
+    genSuggestions(collector: SuggestionCollector): void;
     mapWord(word: string): string;
     readonly size: number;
     readonly options: SpellingDictionaryOptions;
@@ -47,6 +52,10 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
         return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
     }
 
+    public genSuggestions(collector: SuggestionCollector): void {
+        this.trie.genSuggestions(collector);
+    }
+
     public get size() {
         return this.words.size;
     }
@@ -69,8 +78,6 @@ export function createSpellingDictionaryRx(words: Rx.Observable<string>, name: s
         .toPromise();
     return promise;
 }
-
-
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly unknownWordsLimit = 1000;
@@ -122,6 +129,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
         word = word.toLowerCase();
         return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
+    }
+
+    public genSuggestions(collector: SuggestionCollector): void {
+        this.trie.genSuggestions(collector);
     }
 }
 
