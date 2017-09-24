@@ -83,20 +83,36 @@ export interface SuggestionCollector {
 }
 
 export function suggestionCollector(word: string, maxNumSuggestions: number, filter: (word: string) => boolean = () => true): SuggestionCollector {
-    const sugs: SuggestionResult[] = [];
-    let maxCost: number = Math.min(baseCost * word.length / 2, baseCost * maxNumChanges);;
+    const sugs = new Map<string, SuggestionResult>();
+    let maxCost: number = Math.min(baseCost * word.length / 2, baseCost * maxNumChanges);
 
     function comp(a: SuggestionResult, b: SuggestionResult): number {
         return a.cost - b.cost || a.word.length - b.word.length || a.word.localeCompare(b.word);
     }
 
+    function dropMax() {
+        if (sugs.size < 2) {
+            return;
+        }
+        const sorted = [...sugs.values()].sort(comp);
+        const toRemove = sorted.pop()!;
+        const maxSug = sorted.pop()!;
+
+        sugs.delete(toRemove.word);
+        maxCost = maxSug.cost;
+    }
+
     function collector(suggestion: SuggestionResult): MaxCost {
-        if (suggestion.cost <= maxCost && filter(suggestion.word)) {
-            sugs.push(suggestion);
-            if (sugs.length > maxNumSuggestions) {
-                sugs.sort(comp);
-                sugs.length = maxNumSuggestions;
-                maxCost = sugs[sugs.length - 1].cost;
+        const {word, cost} = suggestion;
+        if (cost <= maxCost && filter(suggestion.word)) {
+            if (sugs.has(word)) {
+                const known = sugs.get(word)!;
+                known.cost = Math.min(known.cost, cost);
+            } else {
+                sugs.set(word, { word, cost });
+                if (sugs.size > maxNumSuggestions) {
+                    dropMax();
+                }
             }
         }
         return maxCost;
@@ -104,7 +120,7 @@ export function suggestionCollector(word: string, maxNumSuggestions: number, fil
 
     const sugCollector = collector as SuggestionCollector;
     Object.defineProperties(sugCollector, {
-        suggestions: { get: () => sugs.sort(comp) },
+        suggestions: { get: () => [...sugs.values()].sort(comp) },
         maxCost: { get: () => maxCost },
         word: { get: () => word },
     });
