@@ -78,6 +78,16 @@ describe('Validate Suggest', () => {
         const suggestions = results.map(s => s.word);
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller']);
     });
+
+    it('Test genSuggestions', () => {
+        const trie = Trie.create(sampleWords);
+        const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
+        Sug.genSuggestions(trie.root, collector.word, collector);
+        const suggestions = collector.suggestions.map(s => s.word);
+        expect(suggestions).to.not.contain('joyfully');
+        expect(suggestions).to.deep.equal(['joyful', 'joyfuller', 'joyfullest']);
+        expect(collector.maxCost).to.be.lessThan(300);
+    });
 });
 
 const sampleWords = [
