@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import { wordSplitter, validateText, hasWordCheck } from './textValidator';
-import { SpellingDictionaryCollection } from './SpellingDictionary';
+import { createCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
 
@@ -117,7 +117,7 @@ function getSpellingDictionaryCollection() {
         createSpellingDictionary(words, 'words', { repMap: [['’', "'"]]}),
     ];
 
-    return new SpellingDictionaryCollection(dicts, 'collection');
+    return createCollection(dicts, 'collection');
 }
 
 const colors = ['red', 'green', 'blue', 'black', 'white', 'orange', 'purple', 'yellow', 'gray', 'brown'];

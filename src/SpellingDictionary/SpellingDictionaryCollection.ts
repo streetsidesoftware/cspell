@@ -4,16 +4,23 @@ import { genSequence } from 'gensequence';
 export class SpellingDictionaryCollection implements SpellingDictionary {
     readonly options = {};
     readonly mapWord = (word: string) => word;
-    constructor(readonly dictionaries: SpellingDictionary[], readonly name: string) {
+    readonly wordsToFlag: Set<string>;
+    constructor(
+        readonly dictionaries: SpellingDictionary[],
+        readonly name: string,
+        wordsToFlag: string[],
+    ) {
         this.dictionaries = this.dictionaries.filter(a => !!a.size);
+        this.wordsToFlag = new Set(wordsToFlag.map(w => w.toLowerCase()));
     }
 
     public has(word: string) {
-        return isWordInAnyDictionary(this.dictionaries, word);
+        word = word.toLowerCase();
+        return !this.wordsToFlag.has(word) && isWordInAnyDictionary(this.dictionaries, word);
     }
 
     public suggest(word: string, numSuggestions: number): SuggestionResult[] {
-        const collector = this.genSuggestions(suggestionCollector(word, numSuggestions));
+        const collector = this.genSuggestions(suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word) ));
         return collector.suggestions;
     }
 
@@ -22,13 +29,13 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     }
 
     public genSuggestions(collector: SuggestionCollector): SuggestionCollector {
-        makeSuggestions(this.dictionaries, collector);
+        this.dictionaries.forEach(dict => dict.genSuggestions(collector));
         return collector;
     }
 }
 
-export function createCollection(dictionaries: SpellingDictionary[], name: string) {
-    return new SpellingDictionaryCollection(dictionaries, name);
+export function createCollection(dictionaries: SpellingDictionary[], name: string, wordsToFlag: string[] = []) {
+    return new SpellingDictionaryCollection(dictionaries, name, wordsToFlag);
 }
 
 export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string) {
@@ -36,11 +43,11 @@ export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string)
         .first(dict => dict.has(word));
 }
 
-export function makeSuggestions(dicts: SpellingDictionary[], collector: SuggestionCollector) {
-    dicts.forEach(dict => dict.genSuggestions(collector));
-}
-
-export function createCollectionP(dicts: Promise<SpellingDictionary>[], name: string): Promise<SpellingDictionaryCollection> {
+export function createCollectionP(
+    dicts: Promise<SpellingDictionary>[],
+    name: string,
+    wordsToFlag: string[],
+): Promise<SpellingDictionaryCollection> {
     return Promise.all(dicts)
-        .then(dicts => new SpellingDictionaryCollection(dicts, name));
+        .then(dicts => new SpellingDictionaryCollection(dicts, name, wordsToFlag));
 }

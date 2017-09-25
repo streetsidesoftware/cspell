@@ -9,7 +9,14 @@ export {
     clearCachedFiles as clearCachedSettings,
     calcOverrideSettings
 } from './Settings';
-export { SpellingDictionary, createSpellingDictionary, createSpellingDictionaryRx, getDictionary } from './SpellingDictionary';
+export {
+    SpellingDictionary,
+    createSpellingDictionary,
+    createSpellingDictionaryRx,
+    getDictionary,
+    SuggestionResult,
+    SuggestionCollector
+} from './SpellingDictionary';
 export { getDefaultSettings, getGlobalSettings } from './Settings';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';

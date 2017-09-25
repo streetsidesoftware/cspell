@@ -1,15 +1,10 @@
 import { genSequence } from 'gensequence';
 import * as Rx from 'rxjs/Rx';
 import { IterableLike } from '../util/IterableLike';
-import {Trie, importTrieRx, SuggestionCollector} from 'cspell-trie';
+import {Trie, importTrieRx, SuggestionCollector, SuggestionResult} from 'cspell-trie';
 import {ReplaceMap, createMapper} from '../util/repMap';
 
-export {SuggestionCollector, suggestionCollector } from 'cspell-trie';
-
-export interface SuggestionResult {
-    word: string;
-    cost: number;
-}
+export {SuggestionCollector, suggestionCollector, SuggestionResult } from 'cspell-trie';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
