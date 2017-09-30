@@ -45,4 +45,8 @@ describe('ReMap Tests', () => {
         expect(mapper('(apple)')).to.be.equal('_Apple)');
     });
 
+    it('test empty regex replacements', () => {
+        const mapper = repMap.createMapper([['', '_'], ['a', 'A']]);
+        expect(mapper('(apple)')).to.be.equal('(Apple)');
+    });
 });

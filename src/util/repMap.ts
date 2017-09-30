@@ -28,7 +28,9 @@ export function createMapper(repMap: ReplaceMap): ReplaceMapper {
         .join('|');
 
     const regEx = new RegExp(regExStr, 'g');
-    const values = repMap.map(([_, into]) => into);
+    const values = repMap
+        .filter(([match, _]) => !!match)
+        .map(([_, into]) => into);
 
     function resolve(m: string, ...matches: any[]) {
         const index = matches.findIndex(a => !!a);
