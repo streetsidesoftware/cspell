@@ -1,5 +1,6 @@
 
 import {ReplaceMap} from '../util/repMap';
+export {ReplaceMap} from '../util/repMap';
 
 /**
  * These settings come from user and workspace settings.
@@ -141,6 +142,8 @@ export interface DictionaryDefinition {
     type?: DictionaryFileTypes;
     // Replacement pairs
     repMap?: ReplaceMap;
+    // Use Compounds
+    useCompounds?: boolean;
 }
 
 export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { wordSplitter, validateText, hasWordCheck } from './textValidator';
+import { validateText, hasWordCheck } from './textValidator';
 import { createCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
@@ -8,42 +8,19 @@ import { FreqCounter } from './util/FreqCounter';
 // cSpell:enableCompoundWords
 
 describe('Validate textValidator functions', () => {
-    // cSpell:disable
-    it('tests splitting words', () => {
-        const results = [...wordSplitter('appleorange')];
-        expect(results).to.deep.equal([
-            ['app', 'leorange'],
-            ['appl', 'eorange'],
-            ['apple', 'orange'],
-            ['appleo', 'range'],
-            ['appleor', 'ange'],
-            ['appleora', 'nge'],
-        ]);
-    });
-    // cSpell:enable
-
-    it('tests trying to split words that are too small', () => {
-        expect([...wordSplitter('')]).to.be.deep.equal([]);
-        expect([...wordSplitter('a')]).to.be.deep.equal([]);
-        expect([...wordSplitter('ap')]).to.be.deep.equal([]);
-        expect([...wordSplitter('app')]).to.be.deep.equal([]);
-        // cSpell:disable
-        expect([...wordSplitter('appl')]).to.be.deep.equal([]);
-        // cSpell:enable
-        expect([...wordSplitter('apple')]).to.be.deep.equal([]);
-        expect([...wordSplitter('apples')]).to.be.deep.equal([
-            ['app', 'les']
-        ]);
-    });
-
     it('tests hasWordCheck', () => {
+        // cspell:ignore redgreenblueyellow strawberrymangobanana redwhiteblue
         const dictCol = getSpellingDictionaryCollection();
         expect(hasWordCheck(dictCol, 'brown', true)).to.be.true;
         expect(hasWordCheck(dictCol, 'white', true)).to.be.true;
         expect(hasWordCheck(dictCol, 'berry', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'whiteberry', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'redberry', true)).to.be.true;
+        // compound words do not cross dictionary boundaries
+        expect(hasWordCheck(dictCol, 'whiteberry', true)).to.be.false;
+        expect(hasWordCheck(dictCol, 'redmango', true)).to.be.true;
+        expect(hasWordCheck(dictCol, 'strawberrymangobanana', true)).to.be.true;
         expect(hasWordCheck(dictCol, 'lightbrown', true)).to.be.true;
+        expect(hasWordCheck(dictCol, 'redgreenblueyellow', true)).to.be.true;
+        expect(hasWordCheck(dictCol, 'redwhiteblue', true)).to.be.true;
     });
 
     it('tests textValidator no word compounds', () => {
@@ -57,7 +34,7 @@ describe('Validate textValidator functions', () => {
         const dictCol = getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, { allowCompoundWords: true });
         const errors = result.map(wo => wo.text).toArray();
-        expect(errors).to.deep.equal(['giraffe']);
+        expect(errors).to.deep.equal(['giraffe', 'whiteberry']);
     });
 
     // cSpell:ignore xxxkxxxx xxxbxxxx
@@ -66,7 +43,7 @@ describe('Validate textValidator functions', () => {
         const text = ' tttt gggg xxxxxxx jjjjj xxxkxxxx xxxbxxxx \n' + sampleText;
         const result = validateText(text, dictCol, { allowCompoundWords: true });
         const errors = result.map(wo => wo.text).toArray().sort();
-        expect(errors).to.deep.equal(['giraffe', 'xxxbxxxx', 'xxxkxxxx']);
+        expect(errors).to.deep.equal(['giraffe', 'whiteberry', 'xxxbxxxx', 'xxxkxxxx']);
     });
 
     it('tests trailing s, ed, ing, etc. are attached to the words', () => {
@@ -120,9 +97,9 @@ function getSpellingDictionaryCollection() {
     return createCollection(dicts, 'collection');
 }
 
-const colors = ['red', 'green', 'blue', 'black', 'white', 'orange', 'purple', 'yellow', 'gray', 'brown'];
+const colors = ['red', 'green', 'blue', 'black', 'white', 'orange', 'purple', 'yellow', 'gray', 'brown', 'light', 'dark'];
 const fruit = [
-    'apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry', 'berry'
+    'apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry', 'berry', 'red'
 ];
 const animals = ['ape', 'lion', 'tiger', 'Elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
 const insects = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];

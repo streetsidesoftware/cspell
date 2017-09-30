@@ -10,7 +10,7 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export interface SpellingDictionary {
     readonly name: string;
-    has(word: string): boolean;
+    has(word: string, useCompounds?: boolean): boolean;
     suggest(word: string, numSuggestions?: number): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector): void;
     mapWord(word: string): string;
@@ -20,6 +20,7 @@ export interface SpellingDictionary {
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
+    useCompounds?: boolean;
 }
 
 const defaultSuggestions = 10;
@@ -37,9 +38,13 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
         return this._trie;
     }
 
-    public has(word: string) {
+    public has(word: string, useCompounds?: boolean) {
+        useCompounds = useCompounds === undefined ? this.options.useCompounds : useCompounds;
+        useCompounds = useCompounds || false;
         const mWord = this.mapWord(word).toLowerCase();
-        return this.words.has(mWord);
+        return this.words.has(mWord)
+            || (useCompounds && this.trie.has(word, true))
+            || false;
     }
 
     public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
@@ -101,21 +106,24 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return this._size;
     }
 
-    public has(word: string) {
+    public has(word: string, useCompounds?: boolean) {
+        useCompounds = useCompounds === undefined ? this.options.useCompounds : useCompounds;
+        useCompounds = useCompounds || false;
         word = this.mapWord(word).toLowerCase();
-        if (this.knownWords.has(word)) return true;
-        if (this.unknownWords.has(word)) return false;
+        const wordX = word + '|' + useCompounds;
+        if (this.knownWords.has(wordX)) return true;
+        if (this.unknownWords.has(wordX)) return false;
 
-        const r = this.trie.has(word);
+        const r = this.trie.has(word, useCompounds);
         // Cache the result.
         if (r) {
-            this.knownWords.add(word);
+            this.knownWords.add(wordX);
         } else {
             // clear the unknown word list if it has grown too large.
             if (this.unknownWords.size > SpellingDictionaryFromTrie.unknownWordsLimit) {
                 this.unknownWords.clear();
             }
-            this.unknownWords.add(word);
+            this.unknownWords.add(wordX);
         }
 
         return r;

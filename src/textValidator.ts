@@ -1,7 +1,7 @@
 import * as Text from './util/text';
 import * as TextRange from './util/TextRange';
 import { SpellingDictionary } from './SpellingDictionary';
-import { Sequence, genSequence } from 'gensequence';
+import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 
 export interface ValidationOptions {
@@ -112,21 +112,8 @@ export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, text:
 
 export function hasWordCheck(dict: SpellingDictionary, word: string, allowCompounds: boolean) {
     word = word.replace(/\\/g, '');
-    return dict.has(word) || (allowCompounds && hasCompoundWord(dict, word) );
-}
-
-export function hasCompoundWord(dict: SpellingDictionary, word: string) {
-    const foundPair = wordSplitter(word).first(([a, b]) => dict.has(a) && dict.has(b));
-    return !!foundPair;
-}
-
-export function wordSplitter(word: string): Sequence<[string, string]> {
-    function* split(word: string): IterableIterator<[string, string]> {
-        for (let i = minWordSplitLen; i <= word.length - minWordSplitLen; ++i) {
-            yield [word.slice(0, i), word.slice(i)];
-        }
-    }
-    return genSequence(split(word));
+    // Do not pass allowCompounds down if it is false, that allows for the dictionary to override the value based upon its own settings.
+    return allowCompounds ? dict.has(word, allowCompounds) : dict.has(word);
 }
 
 

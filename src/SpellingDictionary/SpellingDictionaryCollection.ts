@@ -14,9 +14,9 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         this.wordsToFlag = new Set(wordsToFlag.map(w => w.toLowerCase()));
     }
 
-    public has(word: string) {
+    public has(word: string, useCompounds?: boolean) {
         word = word.toLowerCase();
-        return !this.wordsToFlag.has(word) && isWordInAnyDictionary(this.dictionaries, word);
+        return !this.wordsToFlag.has(word) && isWordInAnyDictionary(this.dictionaries, word, useCompounds);
     }
 
     public suggest(word: string, numSuggestions: number): SuggestionResult[] {
@@ -38,9 +38,9 @@ export function createCollection(dictionaries: SpellingDictionary[], name: strin
     return new SpellingDictionaryCollection(dictionaries, name, wordsToFlag);
 }
 
-export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string) {
+export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string, useCompounds?: boolean) {
     return !!genSequence(dicts)
-        .first(dict => dict.has(word));
+        .first(dict => dict.has(word, useCompounds));
 }
 
 export function createCollectionP(

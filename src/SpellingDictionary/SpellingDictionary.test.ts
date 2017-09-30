@@ -45,6 +45,19 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).to.not.contain('banana');
     });
 
+    it('Test compounds from word list', () => {
+        const words = [
+            'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
+        ];
+
+        const dict = createSpellingDictionary(words, 'words', { useCompounds: true });
+        expect(dict.has('apple')).to.be.true;
+        // cspell:ignore applebanana applebananas applebananaorange
+        expect(dict.has('applebanana')).to.be.true;
+        expect(dict.has('applebananaorange')).to.be.true;
+        expect(dict.has('applebananas')).to.be.false;
+    });
+
     it('Test Suggest Trie', () => {
         const words = [
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear',
@@ -53,6 +66,7 @@ describe('Verify building Dictionary', () => {
         ];
         const trie = Trie.create(words);
         const dict = new SpellingDictionaryFromTrie(trie, 'trie');
+        // cspell:ignore cattles
         const suggestions = dict.suggest('Cattles').map(({word}) => word);
         expect(suggestions[0]).to.be.equal('cattle');
         expect(suggestions).to.not.contain('banana');

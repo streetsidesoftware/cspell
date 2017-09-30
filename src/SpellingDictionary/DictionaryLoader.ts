@@ -16,6 +16,8 @@ export interface LoadOptions {
     type?: LoaderType;
     // Replacement Map
     repMap?: ReplaceMap;
+    // Use Compounds
+    useCompounds?: boolean;
 }
 
 export type LoaderType = keyof Loaders;
