@@ -73,10 +73,14 @@ describe('Validate Trie Class', () => {
         expect(trie.has('jaywalk', true)).to.be.true;
         expect(trie.has('jwalk', true)).to.be.false;
         expect(trie.has('joywalk', false)).to.be.false;
+        expect(trie.has('walked', true)).to.be.true;
     });
 });
 
 const sampleWords = [
+    'edit',
+    'end',
+    'edge',
     'walk',
     'walked',
     'walker',

@@ -32,7 +32,7 @@ export class Trie {
             q = p + 1;
             if (n && n.f && q < text.length) {
                 const r = this.findCompound(text.slice(q));
-                if (r) {
+                if (r && r.f) {
                     return r;
                 }
             }
