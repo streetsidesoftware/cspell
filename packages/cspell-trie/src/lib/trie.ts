@@ -19,7 +19,28 @@ import {
 export class Trie {
     constructor(readonly root: TrieNode) {}
 
-    find(text: string): TrieNode | undefined {
+    find(text: string, useCompounds: boolean = false): TrieNode | undefined {
+        return useCompounds ? this.findCompound(text) : this.findExact(text);
+    }
+
+    findCompound(text: string): TrieNode | undefined {
+        let n: TrieNode | undefined = this.root;
+        let p: number;
+        let q: number;
+        for (p = 0; n && n.c && p < text.length; p = q) {
+            n = n.c.get(text[p]);
+            q = p + 1;
+            if (n && n.f && q < text.length) {
+                const r = this.findCompound(text.slice(q));
+                if (r) {
+                    return r;
+                }
+            }
+        }
+        return p === text.length ? n : undefined;
+    }
+
+    findExact(text: string): TrieNode | undefined {
         let n: TrieNode | undefined = this.root;
         let p: number;
         for (p = 0; n && n.c && p < text.length; ++p) {
@@ -28,8 +49,8 @@ export class Trie {
         return p === text.length ? n : undefined;
     }
 
-    has(word: string): boolean {
-        const n = this.find(word);
+    has(word: string, useCompounds?: boolean): boolean {
+        const n = this.find(word, useCompounds);
         return !!n && isWordTerminationNode(n);
     }
 

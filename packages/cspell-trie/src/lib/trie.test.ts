@@ -64,6 +64,16 @@ describe('Validate Trie Class', () => {
         expect(trie.has('talking')).to.be.true;
         expect(trie.has('talkings')).to.be.false;
     });
+
+    it('Test compound words', () => {
+        // cspell:ignore talkinglift joywalk jwalk
+        const trie = Trie.create(sampleWords);
+        expect(trie.has('talkinglift', true)).to.be.true;
+        expect(trie.has('joywalk', true)).to.be.true;
+        expect(trie.has('jaywalk', true)).to.be.true;
+        expect(trie.has('jwalk', true)).to.be.false;
+        expect(trie.has('joywalk', false)).to.be.false;
+    });
 });
 
 const sampleWords = [
@@ -82,6 +92,7 @@ const sampleWords = [
     'lifted',
     'lifter',
     'lifting',
+    'jay',
     'journal',
     'journals',
     'journalism',
