@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.6.0 - 1.6.4
+- Add ability to combine the suggestion results from multiple tries (work in progress).
+- Add support for compounded word searches.
+- Add support for compound word suggestions.
+
 ## 1.5.1
 - update packages and remove dependency on fs-promise.
 
