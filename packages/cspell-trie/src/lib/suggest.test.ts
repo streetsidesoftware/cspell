@@ -89,6 +89,26 @@ describe('Validate Suggest', () => {
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
+    it('Tests genSuggestions with compounds', () => {
+        const trie = Trie.create(sampleWords);
+        // cspell:ignore joyfullwalk
+        const collector = Sug.suggestionCollector('joyfullwalk', 3);
+        Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundingMethod.SEPARATE_WORDS, collector);
+        const suggestions = collector.suggestions.map(s => s.word);
+        expect(suggestions).to.deep.equal(['joyful walk', 'joyful walks', 'joyfully walk']);
+        expect(collector.maxCost).to.be.lessThan(300);
+    });
+
+    it('Tests genSuggestions with compounds', () => {
+        const trie = Trie.create(sampleWords);
+        // cspell:ignore joyfullwalk joyfulwalk joyfulwalks joyfullywalk
+        const collector = Sug.suggestionCollector('joyfullwalk', 3);
+        Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundingMethod.SINGLE_WORD, collector);
+        const suggestions = collector.suggestions.map(s => s.word);
+        expect(suggestions).to.deep.equal(['joyfulwalks', 'joyfulwalk', 'joyfullywalk']);
+        expect(collector.maxCost).to.be.lessThan(300);
+    });
+
     it('Tests the collector with filter', () => {
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
         collector({ word: 'joyfully', cost: 100 });

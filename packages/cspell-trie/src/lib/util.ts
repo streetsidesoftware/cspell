@@ -65,11 +65,32 @@ export interface WalkerIterator extends IterableIterator<YieldResult> {
     [Symbol.iterator]: () => WalkerIterator;
 }
 
+export enum CompoundingMethod {
+    NONE = 0,
+    SEPARATE_WORDS,
+    SINGLE_WORD
+}
+
 /**
  * Walks the Trie and yields a value at each node.
  * next(goDeeper: boolean):
  */
-export function* walker(root: TrieNode): WalkerIterator {
+export function* walker(root: TrieNode, compoundingMethod?: CompoundingMethod): WalkerIterator {
+
+    const compoundRoot: Map<string, TrieNode> | [string, TrieNode][] = compoundingMethod
+        ? (compoundingMethod == CompoundingMethod.SINGLE_WORD ? root.c || [] : [[' ', root]])
+        : [];
+    const head = new Map<string, TrieNode>(compoundRoot);
+
+    function* children(n: TrieNode) {
+        if (n.c) {
+            yield *n.c;
+        }
+        if (n.f) {
+            yield *head;
+        }
+    }
+
     let depth = 0;
     const stack: Iterator<[string, TrieNode]>[] = [];
     let baseText = '';
@@ -83,7 +104,7 @@ export function* walker(root: TrieNode): WalkerIterator {
             if (goDeeper === undefined || goDeeper) {
                 depth++;
                 baseText = text;
-                stack[depth] = ((node.c || [])[Symbol.iterator])();
+                stack[depth] = children(node);
             }
         }
         depth -= 1;

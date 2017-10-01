@@ -1,5 +1,6 @@
 import {TrieNode} from './TrieNode';
-import {walker, isWordTerminationNode} from './util';
+import {walker, isWordTerminationNode, CompoundingMethod} from './util';
+export {CompoundingMethod} from './util';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -25,9 +26,20 @@ export function suggest(
     return collector.suggestions;
 }
 
+// @todo: convert this to use generators / iterators instead of `output` collector
+
 export function genSuggestions(
     root: TrieNode,
     word: string,
+    output: (suggestion: SuggestionResult) => MaxCost
+) {
+    genCompoundableSuggestions(root, word, CompoundingMethod.NONE, output);
+}
+
+export function genCompoundableSuggestions(
+    root: TrieNode,
+    word: string,
+    compoundMethod: CompoundingMethod,
     output: (suggestion: SuggestionResult) => MaxCost
 ) {
     const bc = baseCost;
@@ -42,20 +54,20 @@ export function genSuggestions(
         matrix[0][i] = i * baseCost;
     }
 
-    const i = walker(root);
+    const i = walker(root, compoundMethod);
     let deeper = true;
     for (let r = i.next(deeper); !r.done; r = i.next(deeper)) {
         const {text, node, depth} = r.value;
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
         const w = text.slice(-1);
+        const c = bc - d;
         matrix[d] = matrix[d] || [];
         matrix[d][0] = matrix[d - 1][0] + bc;
         let lastLetter = x[0];
         let min = matrix[d][0];
         for (let i = 1; i <= mx; ++i) {
             let curLetter = x[i];
-            const c = bc - d;
             let subCost = (w === curLetter)
                 ? 0
                 : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
