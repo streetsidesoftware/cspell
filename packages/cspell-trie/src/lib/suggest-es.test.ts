@@ -5,24 +5,44 @@ import * as Rx from 'rxjs/Rx';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as zlib from 'zlib';
+import * as cspellDict from 'cspell-dict-es-es';
 
-const pathToDict = path.dirname(require.resolve('cspell-dict-es-es'));
-const trieFileContents = fs.readFile(path.join(pathToDict, 'Spanish.trie.gz'))
-    .then(buffer => zlib.gunzipSync(buffer))
-    .then(buffer => buffer.toString('UTF-8'))
-    ;
 
-const trieLines = Rx.Observable
-    .fromPromise(trieFileContents.then(trieFileContents => trieFileContents.split('\n')))
-    .flatMap(a => a);
+let trie: Promise<Trie>;
 
-const trieNode = importTrieRx(trieLines).take(1).toPromise();
+function getTrie(): Promise<Trie> {
+    if (!trie) {
+        const configLocation = cspellDict.getConfigLocation();
 
-const trie = trieNode.then(node => new Trie(node));
+        const config = fs.readFile(configLocation)
+            .then(buffer => buffer.toString())
+            .then(json => JSON.parse(json.replace(/\/\/.*/g, '')));
+
+        const pathToDict = config.then(config => {
+            const dictDef = config && config.dictionaryDefinitions && config.dictionaryDefinitions[0] || {};
+            const dictPath = dictDef.file || '';
+            return path.join(path.dirname(configLocation), dictPath);
+        });
+
+        const trieFileContents = pathToDict.then(pathToDict => fs.readFile(pathToDict))
+            .then(buffer => zlib.gunzipSync(buffer))
+            .then(buffer => buffer.toString('UTF-8'))
+            ;
+
+        const trieLines = Rx.Observable
+            .fromPromise(trieFileContents.then(trieFileContents => trieFileContents.split('\n')))
+            .flatMap(a => a);
+
+        const trieNode = importTrieRx(trieLines).take(1).toPromise();
+
+        trie = trieNode.then(node => new Trie(node));
+    }
+    return trie;
+}
 
 describe('Validate Spanish Suggestions', () => {
     it('Tests suggestions', () => {
-        return trie.then(trie => {
+        return getTrie().then(trie => {
             // cspell:ignore Carmjen
             const results = trie.suggestWithCost('carmjen', 10);
             // console.log(JSON.stringify(results));
