@@ -16,32 +16,40 @@ export interface SuggestionResult {
     word: string;
     cost: Cost;
 }
+
+export interface SuggestionIterator extends IterableIterator<SuggestionResult | undefined> {
+    /**
+     * Ask for the next result.
+     * maxCost - sets the max cost for following suggestions
+     * This is used to limit which suggestions are emitted.
+     * If the iterator.next() returns `undefined`, it is to request a value for maxCost.
+     */
+    next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult | undefined>;
+    [Symbol.iterator]: () => SuggestionIterator;
+}
+
 export function suggest(
     root: TrieNode,
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions,
 ): SuggestionResult[] {
     const collector = suggestionCollector(word, maxNumSuggestions);
-    genSuggestions(root, word, collector);
+    collector.collect(genSuggestions(root, word));
     return collector.suggestions;
 }
 
-// @todo: convert this to use generators / iterators instead of `output` collector
-
-export function genSuggestions(
+export function* genSuggestions(
     root: TrieNode,
-    word: string,
-    output: (suggestion: SuggestionResult) => MaxCost
-) {
-    genCompoundableSuggestions(root, word, CompoundingMethod.NONE, output);
+    word: string
+): SuggestionIterator {
+    yield *genCompoundableSuggestions(root, word, CompoundingMethod.NONE);
 }
 
-export function genCompoundableSuggestions(
+export function* genCompoundableSuggestions(
     root: TrieNode,
     word: string,
     compoundMethod: CompoundingMethod,
-    output: (suggestion: SuggestionResult) => MaxCost
-) {
+): SuggestionIterator {
     const bc = baseCost;
     const psc = postSwapCost;
     const matrix: number[][] = [[]];
@@ -81,14 +89,20 @@ export function genCompoundableSuggestions(
         }
         let cost = matrix[d][mx];
         if (isWordTerminationNode(node) && cost <= costLimit) {
-            costLimit = output({ word: text, cost });
+            costLimit = (yield { word: text, cost }) || costLimit;
         }
         deeper = (min <= costLimit);
     }
 }
 
+export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
+    return a.cost - b.cost || a.word.length - b.word.length || a.word.localeCompare(b.word);
+}
+
 export interface SuggestionCollector {
-    (suggestion: SuggestionResult): MaxCost;
+    collect: (src: SuggestionIterator) => void;
+    add: (suggestion: SuggestionResult) => SuggestionCollector;
+    // (suggestion: SuggestionResult): MaxCost;
     readonly suggestions: SuggestionResult[];
     readonly maxCost: number;
     readonly word: string;
@@ -98,15 +112,12 @@ export function suggestionCollector(word: string, maxNumSuggestions: number, fil
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = Math.min(baseCost * word.length / 2, baseCost * maxNumChanges);
 
-    function comp(a: SuggestionResult, b: SuggestionResult): number {
-        return a.cost - b.cost || a.word.length - b.word.length || a.word.localeCompare(b.word);
-    }
-
     function dropMax() {
         if (sugs.size < 2) {
+            sugs.clear();
             return;
         }
-        const sorted = [...sugs.values()].sort(comp);
+        const sorted = [...sugs.values()].sort(compSuggestionResults);
         const toRemove = sorted.pop()!;
         const maxSug = sorted.pop()!;
 
@@ -130,12 +141,20 @@ export function suggestionCollector(word: string, maxNumSuggestions: number, fil
         return maxCost;
     }
 
-    const sugCollector = collector as SuggestionCollector;
-    Object.defineProperties(sugCollector, {
-        suggestions: { get: () => [...sugs.values()].sort(comp) },
-        maxCost: { get: () => maxCost },
-        word: { get: () => word },
-    });
+    function collect(src: SuggestionIterator) {
+        let ir: IteratorResult<SuggestionResult | undefined>;
+        while (!(ir = src.next(maxCost)).done) {
+            if (ir.value !== undefined) {
+                collector(ir.value);
+            }
+        }
+    }
 
-    return sugCollector;
+    return {
+        collect,
+        add: function (suggestion: SuggestionResult) { collector(suggestion); return this;},
+        get suggestions() { return [...sugs.values()].sort(compSuggestionResults) },
+        get maxCost() { return maxCost; },
+        get word() { return word; },
+    };
 }

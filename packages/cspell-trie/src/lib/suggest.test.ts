@@ -82,18 +82,49 @@ describe('Validate Suggest', () => {
     it('Tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
-        Sug.genSuggestions(trie.root, collector.word, collector);
+        collector.collect(
+            Sug.genSuggestions(trie.root, collector.word)
+        );
         const suggestions = collector.suggestions.map(s => s.word);
         expect(suggestions).to.not.contain('joyfully');
         expect(suggestions).to.deep.equal(['joyful', 'joyfuller', 'joyfullest']);
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
+    it('Tests genSuggestions wanting 0', () => {
+        const trie = Trie.create(sampleWords);
+        const collector = Sug.suggestionCollector('joyfull', 0);
+        collector.collect(
+            Sug.genSuggestions(trie.root, collector.word)
+        );
+        const suggestions = collector.suggestions.map(s => s.word);
+        expect(suggestions).to.be.length(0);
+    });
+
+    it('Tests genSuggestions wanting -10', () => {
+        const trie = Trie.create(sampleWords);
+        const collector = Sug.suggestionCollector('joyfull', -10);
+        collector.collect(
+            Sug.genSuggestions(trie.root, collector.word)
+        );
+        const suggestions = collector.suggestions.map(s => s.word);
+        expect(suggestions).to.be.length(0);
+    });
+
+    it('Tests genSuggestions as array', () => {
+        const trie = Trie.create(sampleWords);
+        const sr = [...Sug.genSuggestions(trie.root, 'joyfull')].sort(Sug.compSuggestionResults);
+        const suggestions = sr.map(s => s && s.word);
+        expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
+    });
+
     it('Tests genSuggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfullwalk
         const collector = Sug.suggestionCollector('joyfullwalk', 3);
-        Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundingMethod.SEPARATE_WORDS, collector);
+        collector.collect(
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundingMethod.SEPARATE_WORDS)
+        );
         const suggestions = collector.suggestions.map(s => s.word);
         expect(suggestions).to.deep.equal(['joyful walk', 'joyful walks', 'joyfully walk']);
         expect(collector.maxCost).to.be.lessThan(300);
@@ -101,31 +132,34 @@ describe('Validate Suggest', () => {
 
     it('Tests genSuggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
-        // cspell:ignore joyfullwalk joyfulwalk joyfulwalks joyfullywalk
+        // cspell:ignore joyfullwalk joyfulwalk joyfulwalks joyfullywalk, joyfullywalks
         const collector = Sug.suggestionCollector('joyfullwalk', 3);
-        Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundingMethod.SINGLE_WORD, collector);
+        collector.collect(
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundingMethod.SINGLE_WORD)
+        );
         const suggestions = collector.suggestions.map(s => s.word);
-        expect(suggestions).to.deep.equal(['joyfulwalks', 'joyfulwalk', 'joyfullywalk']);
+        expect(suggestions).to.deep.equal(['joyfullywalk', 'joyfulwalk', 'joyfullywalks', ]);
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
     it('Tests the collector with filter', () => {
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
-        collector({ word: 'joyfully', cost: 100 });
-        expect(collector.suggestions).to.be.empty;
+        collector.add({ word: 'joyfully', cost: 100 })
+            .add({ word: 'joyful', cost: 100 });
+        expect(collector.suggestions).to.be.length(1);
     });
 
     it('Tests the collector with duplicate words of different costs', () => {
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
-        collector({ word: 'joyful', cost: 100 });
+        collector.add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions.length).to.be.equal(1);
-        collector({ word: 'joyful', cost: 75 });
+        collector.add({ word: 'joyful', cost: 75 });
         expect(collector.suggestions.length).to.be.equal(1);
         expect(collector.suggestions[0].cost).to.be.equal(75);
-        collector({ word: 'joyfuller', cost: 200 });
-        collector({ word: 'joyfullest', cost: 300 });
-        collector({ word: 'joyfulness', cost: 340 });
-        collector({ word: 'joyful', cost: 85 });
+        collector.add({ word: 'joyfuller', cost: 200 })
+            .add({ word: 'joyfullest', cost: 300 })
+            .add({ word: 'joyfulness', cost: 340 })
+            .add({ word: 'joyful', cost: 85 });
         expect(collector.suggestions.length).to.be.equal(3);
         expect(collector.suggestions[0].cost).to.be.equal(75);
     });

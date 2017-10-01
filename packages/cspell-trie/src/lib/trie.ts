@@ -86,7 +86,7 @@ export class Trie {
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector): void {
-        genSuggestions(this.root, collector.word, collector);
+        collector.collect(genSuggestions(this.root, collector.word));
     }
 
     words(): Sequence<string> {
