@@ -65,20 +65,20 @@ export interface WalkerIterator extends IterableIterator<YieldResult> {
     [Symbol.iterator]: () => WalkerIterator;
 }
 
-export enum CompoundingMethod {
+export enum CompoundWordsMethod {
     NONE = 0,
     SEPARATE_WORDS,
-    SINGLE_WORD
+    JOIN_WORDS,
 }
 
 /**
  * Walks the Trie and yields a value at each node.
  * next(goDeeper: boolean):
  */
-export function* walker(root: TrieNode, compoundingMethod?: CompoundingMethod): WalkerIterator {
+export function* walker(root: TrieNode, compoundingMethod?: CompoundWordsMethod): WalkerIterator {
 
     const compoundRoot: Map<string, TrieNode> | [string, TrieNode][] = compoundingMethod
-        ? (compoundingMethod == CompoundingMethod.SINGLE_WORD ? root.c || [] : [[' ', root]])
+        ? (compoundingMethod == CompoundWordsMethod.JOIN_WORDS ? root.c || [] : [[' ', root]])
         : [];
     const head = new Map<string, TrieNode>(compoundRoot);
 

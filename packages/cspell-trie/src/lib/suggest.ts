@@ -1,6 +1,6 @@
 import {TrieNode} from './TrieNode';
-import {walker, isWordTerminationNode, CompoundingMethod} from './util';
-export {CompoundingMethod} from './util';
+import {walker, isWordTerminationNode, CompoundWordsMethod} from './util';
+export {CompoundWordsMethod} from './util';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -32,23 +32,25 @@ export function suggest(
     root: TrieNode,
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions,
+    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
 ): SuggestionResult[] {
     const collector = suggestionCollector(word, maxNumSuggestions);
-    collector.collect(genSuggestions(root, word));
+    collector.collect(genSuggestions(root, word, compoundMethod));
     return collector.suggestions;
 }
 
 export function* genSuggestions(
     root: TrieNode,
-    word: string
+    word: string,
+    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
 ): SuggestionIterator {
-    yield *genCompoundableSuggestions(root, word, CompoundingMethod.NONE);
+    yield *genCompoundableSuggestions(root, word, compoundMethod);
 }
 
 export function* genCompoundableSuggestions(
     root: TrieNode,
     word: string,
-    compoundMethod: CompoundingMethod,
+    compoundMethod: CompoundWordsMethod,
 ): SuggestionIterator {
     const bc = baseCost;
     const psc = postSwapCost;
