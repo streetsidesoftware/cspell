@@ -1,6 +1,7 @@
 import { expect } from 'chai';
+import * as Trie from 'cspell-trie';
 import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
-import { createSpellingDictionary, createSpellingDictionaryRx } from './SpellingDictionary';
+import { createSpellingDictionary, createSpellingDictionaryRx, SpellingDictionaryFromTrie, CompoundWordsMethod } from './SpellingDictionary';
 import * as Rx from 'rxjs/Rx';
 
 describe('Verify using multiple dictionaries', () => {
@@ -22,8 +23,9 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     it('checks for suggestions', () => {
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA'),
+            trie,
             createSpellingDictionary(wordsB, 'wordsB'),
             createSpellingDictionary(wordsA, 'wordsA'),
             createSpellingDictionary(wordsC, 'wordsC'),
@@ -35,6 +37,25 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugsForTango[0].word).to.be.equal('mango');
         // make sure there is only one mango suggestion.
         expect(sugsForTango.map(a => a.word).filter(a => a === 'mango')).to.be.deep.equal(['mango']);
+    });
+
+    it('checks for compound suggestions', () => {
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
+        trie.options.useCompounds = true;
+        const dicts = [
+            trie,
+            createSpellingDictionary(wordsB, 'wordsB'),
+            createSpellingDictionary(wordsA, 'wordsA'),
+            createSpellingDictionary(wordsC, 'wordsC'),
+        ];
+
+        // cspell:ignore appletango applemango
+        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS);
+        const sugs = sugResult.map(a => a.word);
+        expect(sugs).to.be.not.empty;
+        expect(sugs).to.contain('applemango');
+        expect(sugs).to.contain('apple mango');
     });
 
     it('checks for suggestions with flagged words', () => {

@@ -1,18 +1,18 @@
 import { genSequence } from 'gensequence';
 import * as Rx from 'rxjs/Rx';
 import { IterableLike } from '../util/IterableLike';
-import {Trie, importTrieRx, SuggestionCollector, SuggestionResult} from 'cspell-trie';
+import {Trie, importTrieRx, SuggestionCollector, SuggestionResult, CompoundWordsMethod} from 'cspell-trie';
 import {ReplaceMap, createMapper} from '../util/repMap';
 
-export {SuggestionCollector, suggestionCollector, SuggestionResult } from 'cspell-trie';
+export {SuggestionCollector, suggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export interface SpellingDictionary {
     readonly name: string;
     has(word: string, useCompounds?: boolean): boolean;
-    suggest(word: string, numSuggestions?: number): SuggestionResult[];
-    genSuggestions(collector: SuggestionCollector): void;
+    suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod): SuggestionResult[];
+    genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
     mapWord(word: string): string;
     readonly size: number;
     readonly options: SpellingDictionaryOptions;
@@ -43,17 +43,24 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
         useCompounds = useCompounds || false;
         const mWord = this.mapWord(word).toLowerCase();
         return this.words.has(mWord)
-            || (useCompounds && this.trie.has(word, true))
+            || (useCompounds && this.trie.has(mWord, true))
             || false;
     }
 
-    public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
-        word = word.toLowerCase();
-        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
+    public suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
+    ): SuggestionResult[] {
+        word = this.mapWord(word).toLowerCase();
+        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions, compoundMethod);
     }
 
-    public genSuggestions(collector: SuggestionCollector): void {
-        this.trie.genSuggestions(collector);
+    public genSuggestions(
+        collector: SuggestionCollector,
+        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
+    ): void {
+        this.trie.genSuggestions(collector, compoundMethod);
     }
 
     public get size() {
@@ -129,13 +136,22 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return r;
     }
 
-    public suggest(word: string, numSuggestions?: number): SuggestionResult[] {
-        word = word.toLowerCase();
-        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions);
+    public suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
+    ): SuggestionResult[] {
+        word = this.mapWord(word).toLowerCase();
+        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions, compoundMethod);
     }
 
-    public genSuggestions(collector: SuggestionCollector): void {
-        this.trie.genSuggestions(collector);
+    public genSuggestions(
+        collector: SuggestionCollector,
+        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
+    ): void {
+        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        this.trie.genSuggestions(collector, compoundMethod);
     }
 }
 

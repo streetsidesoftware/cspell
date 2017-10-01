@@ -1,8 +1,15 @@
-import { SpellingDictionary, SuggestionResult, SuggestionCollector, suggestionCollector } from './SpellingDictionary';
+import {
+    CompoundWordsMethod,
+    SpellingDictionary,
+    SpellingDictionaryOptions,
+    SuggestionCollector,
+    suggestionCollector,
+    SuggestionResult,
+} from './SpellingDictionary';
 import { genSequence } from 'gensequence';
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
-    readonly options = {};
+    readonly options: SpellingDictionaryOptions = {};
     readonly mapWord = (word: string) => word;
     readonly wordsToFlag: Set<string>;
     constructor(
@@ -19,8 +26,13 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         return !this.wordsToFlag.has(word) && isWordInAnyDictionary(this.dictionaries, word, useCompounds);
     }
 
-    public suggest(word: string, numSuggestions: number): SuggestionResult[] {
-        const collector = this.genSuggestions(suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word) ));
+    public suggest(word: string, numSuggestions: number, compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS): SuggestionResult[] {
+        word = word.toLowerCase();
+        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        const collector = this.genSuggestions(
+            suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word) ),
+            compoundMethod,
+        );
         return collector.suggestions;
     }
 
@@ -28,8 +40,9 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         return this.dictionaries.reduce((a, b) => a + b.size, 0);
     }
 
-    public genSuggestions(collector: SuggestionCollector): SuggestionCollector {
-        this.dictionaries.forEach(dict => dict.genSuggestions(collector));
+    public genSuggestions(collector: SuggestionCollector, compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS): SuggestionCollector {
+        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        this.dictionaries.forEach(dict => dict.genSuggestions(collector, compoundMethod));
         return collector;
     }
 }
