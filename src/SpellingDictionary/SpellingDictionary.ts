@@ -72,6 +72,7 @@ export function createSpellingDictionary(wordList: string[] | IterableLike<strin
     const words = new Set(genSequence(wordList)
         .filter(word => typeof word === 'string')
         .map(word => word.toLowerCase().trim())
+        .filter(word => !!word)
     );
     return new SpellingDictionaryFromSet(words, name, options);
 }
@@ -80,6 +81,7 @@ export function createSpellingDictionaryRx(words: Rx.Observable<string>, name: s
     const promise = words
         .filter(word => typeof word === 'string')
         .map(word => word.toLowerCase().trim())
+        .filter(word => !!word)
         .reduce((words, word) => words.add(word), new Set<string>())
         .map(words => new SpellingDictionaryFromSet(words, name, options))
         .toPromise();
@@ -94,6 +96,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly mapWord: (word: string) => string;
 
     constructor(readonly trie: Trie, readonly name: string, readonly options: SpellingDictionaryOptions = {}) {
+        trie.root.f = 0;
         this.mapWord = createMapper(options.repMap || []);
     }
 

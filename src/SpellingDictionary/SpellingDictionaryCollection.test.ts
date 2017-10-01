@@ -5,7 +5,7 @@ import { createSpellingDictionary, createSpellingDictionaryRx, SpellingDictionar
 import * as Rx from 'rxjs/Rx';
 
 describe('Verify using multiple dictionaries', () => {
-    const wordsA = ['apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry'];
+    const wordsA = ['', 'apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry'];
     const wordsB = ['ape', 'lion', 'tiger', 'elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
     it('checks for existence', () => {
@@ -19,7 +19,8 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.has('mango')).to.be.true;
         expect(dictCollection.has('tree')).to.be.false;
         expect(dictCollection.has('avocado')).to.be.false;
-        expect(dictCollection.size).to.be.equal(wordsA.length + wordsB.length + wordsC.length);
+        expect(dictCollection.has('')).to.be.false;
+        expect(dictCollection.size).to.be.equal(wordsA.length - 1 + wordsB.length + wordsC.length);
     });
 
     it('checks for suggestions', () => {
