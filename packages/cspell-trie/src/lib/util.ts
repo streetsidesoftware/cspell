@@ -66,8 +66,17 @@ export interface WalkerIterator extends IterableIterator<YieldResult> {
 }
 
 export enum CompoundWordsMethod {
+    /**
+     * Do not compound words.
+     */
     NONE = 0,
+    /**
+     * Create word compounds separated by spaces.
+     */
     SEPARATE_WORDS,
+    /**
+     * Create word compounds without separation.
+     */
     JOIN_WORDS,
 }
 

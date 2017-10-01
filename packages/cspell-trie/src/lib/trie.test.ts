@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Trie} from './trie';
 import {isWordTerminationNode, orderTrie} from './util';
-import {suggestionCollector} from './suggest';
+import {suggestionCollector, CompoundWordsMethod} from './suggest';
 
 describe('Validate Trie Class', () => {
     it('Tests creating a Trie', () => {
@@ -42,6 +42,13 @@ describe('Validate Trie Class', () => {
         const trie = Trie.create(sampleWords);
         const suggestions = trie.suggest('wall', 10);
         expect(suggestions).to.contain('walk');
+    });
+
+    it('tests suggestions with compounds', () => {
+        const trie = Trie.create(sampleWords);
+        // cspell:ignore joyostalkliftswak
+        const suggestions = trie.suggest('joyostalkliftswak', 10, CompoundWordsMethod.SEPARATE_WORDS);
+        expect(suggestions).to.contain('joyous talk lifts walk');
     });
 
     it('tests genSuggestions', () => {

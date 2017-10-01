@@ -5,6 +5,7 @@ import {
     suggest,
     SuggestionCollector,
     SuggestionResult,
+    CompoundWordsMethod,
 } from './suggest';
 import {
     createTriFromList,
@@ -66,8 +67,8 @@ export class Trie {
     /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      */
-    suggest(text: string, maxNumSuggestions: number): string[] {
-        return this.suggestWithCost(text, maxNumSuggestions)
+    suggest(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod): string[] {
+        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod)
             .map(a => a.word);
     }
 
@@ -76,8 +77,8 @@ export class Trie {
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
-    suggestWithCost(text: string, maxNumSuggestions: number): SuggestionResult[] {
-        return suggest(this.root, text, maxNumSuggestions);
+    suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod): SuggestionResult[] {
+        return suggest(this.root, text, maxNumSuggestions, compoundMethod);
     }
 
     /**
@@ -85,8 +86,8 @@ export class Trie {
      * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
-    genSuggestions(collector: SuggestionCollector): void {
-        collector.collect(genSuggestions(this.root, collector.word));
+    genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
+        collector.collect(genSuggestions(this.root, collector.word, compoundMethod));
     }
 
     words(): Sequence<string> {
