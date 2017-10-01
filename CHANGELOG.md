@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.10.0 - 1.10.2
+- Add support for compound word suggestion.
+- Add support for dictionaries that force compound words like Dutch and German
+- Fix an issue with all caps words net getting good suggestions.
+
 ## 1.9.7
 - Fix [#16](https://github.com/Jason3S/cspell/issues/16) where words beginning with capitol letters were not getting good suggestions.
 
