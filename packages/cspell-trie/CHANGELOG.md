@@ -1,8 +1,11 @@
 # Release Notes
 
+## 1.6.6
+- Expose the compound suggestions.
+
 ## 1.6.5
 - convert suggestion generator to actual javascript generators.
-  This is a breaking change to the genSuggestions interface. Other than cspell, there are no known consumers.
+  This is a breaking change to the genSuggestions interface. There are no known consumers.
 
 ## 1.6.0 - 1.6.4
 - Add ability to combine the suggestion results from multiple tries (work in progress).
