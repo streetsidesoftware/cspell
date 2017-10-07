@@ -15,4 +15,23 @@ describe('Validate the cspell API', () => {
                 expect(results.map(to => to.text)).to.contain('Jansons');
             });
     });
+
+    it('Tests suggestions', function() {
+        this.timeout(5000);
+        const ext = '.txt';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = cspell.getDefaultSettings();
+        // cspell:ignore jansons
+        const text = '{ "name": "Jansons"}';
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        const finalSettings = cspell.finalizeSettings(fileSettings);
+        const dict = cspell.getDictionary(finalSettings);
+
+        // cspell:ignore installsallnecessary
+        return dict.then(dict => {
+            const results = dict.suggest('installsallnecessary', 10, cspell.CompoundWordsMethod.SEPARATE_WORDS);
+            const sugs = results.map(a => a.word);
+            expect(sugs).to.contain('installs all necessary');
+        });
+    });
 });

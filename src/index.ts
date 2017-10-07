@@ -2,20 +2,21 @@ export * from './Settings';
 export { TextOffset, TextDocumentOffset } from './util/text';
 export { validateText } from './validator';
 export {
+    calcOverrideSettings,
+    clearCachedFiles as clearCachedSettings,
+    defaultFileName as defaultSettingsFilename,
     mergeSettings,
     readSettings,
     readSettingsFiles,
-    defaultFileName as defaultSettingsFilename,
-    clearCachedFiles as clearCachedSettings,
-    calcOverrideSettings
 } from './Settings';
 export {
-    SpellingDictionary,
+    CompoundWordsMethod,
     createSpellingDictionary,
     createSpellingDictionaryRx,
     getDictionary,
+    SpellingDictionary,
+    SuggestionCollector,
     SuggestionResult,
-    SuggestionCollector
 } from './SpellingDictionary';
 export { getDefaultSettings, getGlobalSettings } from './Settings';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';

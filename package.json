@@ -33,6 +33,7 @@
     "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
     "which": "which node && echo $PATH",
+    "test-spec": "mocha --recursive \"dist/**/*.spec.js\"",
     "test": "mocha --recursive \"dist/**/*.test.js\""
   },
   "repository": {
@@ -71,6 +72,7 @@
     "@types/xregexp": "^3.0.29",
     "chai": "^4.1.2",
     "coveralls": "^2.13.3",
+    "cspell-dict-nl-nl": "^1.0.10",
     "cspell-tools": "^1.4.2",
     "lorem-ipsum": "^1.0.4",
     "mocha": "^3.5.3",
@@ -109,7 +111,8 @@
       "src/**/*.ts"
     ],
     "exclude": [
-      "src/**/*.test.ts"
+      "src/**/*.test.ts",
+      "src/**/*.spec.ts"
     ],
     "extension": [
       ".ts"
