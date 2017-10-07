@@ -1,4 +1,7 @@
 
+// alias for uniqueFilterFnGenerator
+export const uniqueFn = uniqueFilterFnGenerator;
+
 export function uniqueFilterFnGenerator<T>(): (v: T) => boolean;
 export function uniqueFilterFnGenerator<T, U>(extractFn: (v: T) => U): (v: T) => boolean;
 export function uniqueFilterFnGenerator<T>(extractFn?: (v: T) => T): (v: T) => boolean {
