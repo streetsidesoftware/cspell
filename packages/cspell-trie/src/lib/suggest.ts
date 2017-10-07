@@ -1,6 +1,7 @@
 import {TrieNode} from './TrieNode';
-import {walker, isWordTerminationNode, CompoundWordsMethod} from './util';
-export {CompoundWordsMethod} from './util';
+import {isWordTerminationNode} from './util';
+import {walker, CompoundWordsMethod} from './walker';
+export {CompoundWordsMethod} from './walker';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -154,8 +155,8 @@ export function suggestionCollector(word: string, maxNumSuggestions: number, fil
 
     return {
         collect,
-        add: function (suggestion: SuggestionResult) { collector(suggestion); return this;},
-        get suggestions() { return [...sugs.values()].sort(compSuggestionResults) },
+        add: function (suggestion: SuggestionResult) { collector(suggestion); return this; },
+        get suggestions() { return [...sugs.values()].sort(compSuggestionResults); },
         get maxCost() { return maxCost; },
         get word() { return word; },
     };

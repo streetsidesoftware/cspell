@@ -13,9 +13,8 @@ import {
     isWordTerminationNode,
     iteratorTrieWords,
     orderTrie,
-    walker,
-    WalkerIterator,
 } from './util';
+import {walker, WalkerIterator} from './walker';
 
 export class Trie {
     constructor(readonly root: TrieNode) {}

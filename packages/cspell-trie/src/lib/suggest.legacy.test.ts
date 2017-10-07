@@ -1,5 +1,6 @@
 import {TrieNode} from './TrieNode';
-import {walker, isWordTerminationNode} from './util';
+import {isWordTerminationNode} from './util';
+import {walker} from './walker';
 import {SuggestionResult} from './suggest';
 
 import {expect} from 'chai';

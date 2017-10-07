@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import {walker, orderTrie, createTriFromList, YieldResult} from './util';
+import {walker, YieldResult} from './walker';
+import {orderTrie, createTriFromList} from './util';
 
 describe('Validate Util Functions', () => {
     it('Tests Walker', () => {
