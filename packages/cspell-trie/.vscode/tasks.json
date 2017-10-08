@@ -10,7 +10,10 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": "$tsc"
+            "problemMatcher": [
+                "$tsc",
+                "$tsc-watch"
+            ]
         },
         {
             "type": "npm",
@@ -25,6 +28,11 @@
             "type": "npm",
             "script": "clean-build",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "watch",
+            "problemMatcher": ["$tsc-watch"]
         }
     ]
 }
