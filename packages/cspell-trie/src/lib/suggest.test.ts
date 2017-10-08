@@ -68,7 +68,7 @@ describe('Validate Suggest', () => {
         const results = Sug.suggest(trie.root, 'walkingtalkingjoy', 1, Sug.CompoundWordsMethod.SEPARATE_WORDS);
         // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.deep.equal(['walking talking joy',]);
+        expect(suggestions).to.deep.equal(['walking talking joy', ]);
     });
 
     it('Tests suggestions', () => {

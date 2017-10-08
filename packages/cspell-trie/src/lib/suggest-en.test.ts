@@ -3,6 +3,7 @@ import {Trie} from './trie';
 import {
     genCompoundableSuggestions,
     genCompoundableSuggestions2,
+    genCompoundableSuggestions3,
     CompoundWordsMethod,
     suggestionCollector,
 } from './suggest';
@@ -19,7 +20,9 @@ function getTrie() {
     return trie;
 }
 
-describe('Validate English Suggestions', () => {
+describe('Validate English Suggestions', function() {
+    this.timeout(30000);
+
     it('Tests suggestions', () => {
         return getTrie().then(trie => {
             const collector = suggestionCollector('joyful', 8);
@@ -87,6 +90,22 @@ describe('Validate English Suggestions', () => {
         });
     });
 
+    it('Tests compound JOIN_WORDS suggestions', () => {
+        return getTrie().then(trie => {
+            // cspell:ignore onetwothrefour
+            const collector = suggestionCollector('onetwothreefour', 8);
+            collector.collect(genCompoundableSuggestions3(
+                trie.root,
+                collector.word,
+                CompoundWordsMethod.JOIN_WORDS
+            ));
+            const results = collector.suggestions;
+            const suggestions = results.map(s => s.word);
+            expect(suggestions).to.contain('one+two+three+four');
+            expect(suggestions).to.be.length(collector.maxNumSuggestions);
+        });
+    });
+
     it('Tests compound suggestions', () => {
         return getTrie().then(trie => {
             // cspell:ignore onetwothrefour
@@ -109,7 +128,7 @@ describe('Validate English Suggestions', () => {
         return getTrie().then(trie => {
             // cspell:ignore testslongcompundsugestions
             const collector = suggestionCollector('testslongcompundsugestions', 8);
-            collector.collect(genCompoundableSuggestions2(
+            collector.collect(genCompoundableSuggestions3(
                 trie.root,
                 collector.word,
                 CompoundWordsMethod.SEPARATE_WORDS

@@ -1,7 +1,7 @@
 import {TrieNode} from './TrieNode';
 import {isWordTerminationNode} from './util';
-import {walker, CompoundWordsMethod, } from './walker';
-export {CompoundWordsMethod} from './walker';
+import {walker, CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
+export {CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -10,6 +10,13 @@ const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
 const insertSpaceDiscount = 1;
+/*
+const Separators = {
+    [CompoundWordsMethod.NONE]: '',
+    [CompoundWordsMethod.JOIN_WORDS]: JOIN_SEPARATOR,
+    [CompoundWordsMethod.SEPARATE_WORDS]: WORD_SEPARATOR,
+}
+*/
 
 export type Cost = number;
 export type MaxCost = Cost;
@@ -60,9 +67,9 @@ export function* genCompoundableSuggestions(
     const x = ' ' + word;
     const mx = x.length - 1;
     const specialDiscounts: { [index: string]: number } = {
-        ' ': insertSpaceDiscount,
-        '~': insertSpaceDiscount,
-    }
+        [WORD_SEPARATOR]: insertSpaceDiscount,
+        [JOIN_SEPARATOR]: insertSpaceDiscount,
+    };
 
     let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
 
@@ -113,6 +120,11 @@ export function* genCompoundableSuggestions(
     }
 }
 
+interface Range {
+    a: number;
+    b: number;
+}
+
 export function* genCompoundableSuggestions2(
     root: TrieNode,
     word: string,
@@ -121,13 +133,13 @@ export function* genCompoundableSuggestions2(
     const bc = baseCost;
     const psc = postSwapCost;
     const matrix: number[][] = [[]];
-    const stack: {a: number, b: number}[] = [];
+    const stack: Range[] = [];
     const x = ' ' + word;
     const mx = x.length - 1;
     const specialDiscounts: { [index: string]: number } = {
-        ' ': insertSpaceDiscount,
-        '~': insertSpaceDiscount,
-    }
+        [WORD_SEPARATOR]: insertSpaceDiscount,
+        [JOIN_SEPARATOR]: insertSpaceDiscount,
+    };
 
     let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
     let a: number = 0;
@@ -152,7 +164,7 @@ export function* genCompoundableSuggestions2(
         let {a, b} = stack[depth];
         // Setup first column
         matrix[d] = matrix[d] || [];
-        matrix[d][a] = matrix[d - 1][a] + ci;
+        matrix[d][a] = matrix[d - 1][a] + ci + d - a;
         let lastLetter = x[a];
         let min = matrix[d][a];
         let i;
@@ -200,7 +212,6 @@ export function* genCompoundableSuggestions2(
 
         b = Math.min(b + 1, mx);
         stack[d] = {a, b};
-
         const cost = matrix[d][b];
         if (node.f && isWordTerminationNode(node) && cost <= costLimit) {
             costLimit = (yield { word: text, cost }) || costLimit;
@@ -208,6 +219,104 @@ export function* genCompoundableSuggestions2(
         goDeeper = (min <= costLimit);
     }
 }
+
+export function* genCompoundableSuggestions3(
+    root: TrieNode,
+    word: string,
+    compoundMethod: CompoundWordsMethod
+): SuggestionIterator {
+    const bc = baseCost;
+    const psc = postSwapCost;
+    const matrix: number[][] = [[]];
+    const stack: Range[] = [];
+    const x = ' ' + word;
+    const mx = x.length - 1;
+    const specialDiscounts: { [index: string]: number } = {
+        [WORD_SEPARATOR]: insertSpaceDiscount,
+        [JOIN_SEPARATOR]: insertSpaceDiscount,
+    };
+
+    let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
+    let a: number = 0;
+    let b: number = 0;
+    for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
+        c = i * baseCost;
+        matrix[0][i] = c;
+        b = i;
+    }
+    stack[0] = {a, b};
+
+    let hint = word.slice(a);
+    const i = hintedWalker(root, compoundMethod, hint);
+    let goDeeper = true;
+    for (let r = i.next({ goDeeper, hint }); !r.done; r = i.next({ goDeeper, hint })) {
+        const {text, node, depth} = r.value;
+        const d = depth + 1;
+        const lastSugLetter = d > 1 ? text[d - 2] : '';
+        const w = text.slice(-1);
+        const c = bc - d;
+        const ci = c - (specialDiscounts[w] || 0);
+
+        let {a, b} = stack[depth];
+        // Setup first column
+        matrix[d] = matrix[d] || [];
+        matrix[d][a] = matrix[d - 1][a] + ci + d - a;
+        let lastLetter = x[a];
+        let min = matrix[d][a];
+        let i;
+
+        // calc the core letters
+        for (i = a + 1; i <= b; ++i) {
+            const curLetter = x[i];
+            const subCost = (w === curLetter)
+                ? 0
+                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
+            const e = Math.min(
+                matrix[d - 1][i - 1] + subCost, // substitute
+                matrix[d - 1][i    ] + ci,      // insert
+                matrix[d    ][i - 1] + c        // delete
+            );
+            min = Math.min(min, e);
+            matrix[d][i] = e;
+            lastLetter = curLetter;
+        }
+
+        // fix the last column
+        b += 1;
+        if (b <= mx) {
+            i = b;
+            const curLetter = x[i];
+            const subCost = (w === curLetter)
+                ? 0
+                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
+            const e = Math.min(
+                matrix[d - 1][i - 1] + subCost, // substitute
+                matrix[d][i - 1] + c        // delete
+            );
+            min = Math.min(min, e);
+            matrix[d][i] = e;
+            lastLetter = curLetter;
+        } else {
+            b -= 1;
+        }
+
+        // Adjust the range between a and b
+        for (; b > a && matrix[d][b] > costLimit; b -= 1) {
+        }
+        for (; a < b && matrix[d][a] > costLimit; a += 1) {
+        }
+
+        b = Math.min(b + 1, mx);
+        stack[d] = {a, b};
+        const cost = matrix[d][b];
+        if (node.f && isWordTerminationNode(node) && cost <= costLimit) {
+            costLimit = (yield { word: text, cost }) || costLimit;
+        }
+        goDeeper = (min <= costLimit);
+        hint = word.slice(a, b);
+    }
+}
+
 
 // comparison function for Suggestion Results.
 export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
