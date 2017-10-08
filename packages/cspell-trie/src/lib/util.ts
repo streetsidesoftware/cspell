@@ -59,7 +59,9 @@ export function createRoot(): TrieNode {
 export function createTriFromList(words: Iterable<string>): TrieNode {
     const root = createRoot();
     for (const word of words) {
-        insert(word, root);
+        if (word.length) {
+            insert(word, root);
+        }
     }
     return root;
 }
