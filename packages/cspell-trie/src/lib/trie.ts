@@ -1,5 +1,5 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode} from './TrieNode';
+import {TrieNode, FLAG_WORD} from './TrieNode';
 import {
     genSuggestions,
     suggest,
@@ -17,7 +17,10 @@ import {
 import {walker, WalkerIterator} from './walker';
 
 export class Trie {
-    constructor(readonly root: TrieNode) {}
+    constructor(readonly root: TrieNode) {
+        // The root can be a word
+        root.f = root.f ? (root.f & ~FLAG_WORD) : root.f;
+    }
 
     find(text: string, useCompounds: boolean = false): TrieNode | undefined {
         return useCompounds ? this.findCompound(text) : this.findExact(text);
