@@ -147,7 +147,7 @@ describe('Validate Suggest', () => {
             Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
         );
         const suggestions = collector.suggestions.map(s => s.word);
-        expect(suggestions).to.deep.equal(['joyfullywalk', 'joyfulwalk', 'joyfullywalks', ]);
+        expect(suggestions).to.deep.equal(['joyful+walk', 'joyful+walks', 'joyfully+walk', ]);
         expect(collector.maxCost).to.be.lessThan(300);
     });
 

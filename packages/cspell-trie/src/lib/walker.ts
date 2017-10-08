@@ -1,4 +1,4 @@
-import {TrieNode} from './TrieNode';
+import {TrieNode, ChildMap} from './TrieNode';
 
 export interface YieldResult {
     text: string;
@@ -35,40 +35,44 @@ export enum CompoundWordsMethod {
  * Walks the Trie and yields a value at each node.
  * next(goDeeper: boolean):
  */
-export function* walker(root: TrieNode, compoundingMethod?: CompoundWordsMethod): WalkerIterator {
+export function* walker(
+    root: TrieNode,
+    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
+): WalkerIterator {
 
-    const compoundRoot: Map<string, TrieNode> | [string, TrieNode][] = compoundingMethod
-        ? (compoundingMethod === CompoundWordsMethod.JOIN_WORDS ? root.c || [] : [[' ', root]])
-        : [];
-    const head = new Map<string, TrieNode>(compoundRoot);
+        const roots: { [index: number]: ChildMap | [string, TrieNode][] } = {
+            [CompoundWordsMethod.NONE]: [],
+            [CompoundWordsMethod.JOIN_WORDS]: [['+', root]],
+            [CompoundWordsMethod.SEPARATE_WORDS]: [[' ', root]],
+        };
 
-    function* children(n: TrieNode) {
-        if (n.c) {
-            yield *n.c;
-        }
-        if (n.f) {
-            yield *head;
-        }
-    }
-
-    let depth = 0;
-    const stack: Iterator<[string, TrieNode]>[] = [];
-    let baseText = '';
-    stack[depth] = ((root.c || [])[Symbol.iterator])();
-    let ir: IteratorResult<[string, TrieNode]>;
-    while (depth >= 0) {
-        while (!(ir = stack[depth].next()).done) {
-            const [char, node] = ir.value;
-            const text = baseText + char;
-            const goDeeper = yield { text, node, depth };
-            if (goDeeper === undefined || goDeeper) {
-                depth++;
-                baseText = text;
-                stack[depth] = children(node);
+        function* children(n: TrieNode): IterableIterator<[string, TrieNode]> {
+            if (n.c) {
+                yield *n.c;
+            }
+            if (n.f) {
+                yield *roots[compoundingMethod];
             }
         }
-        depth -= 1;
-        baseText = baseText.slice(0, -1);
+
+        let depth = 0;
+        const stack: Iterator<[string, TrieNode]>[] = [];
+        let baseText = '';
+        stack[depth] = children(root);
+        let ir: IteratorResult<[string, TrieNode]>;
+        while (depth >= 0) {
+            while (!(ir = stack[depth].next()).done) {
+                const [char, node] = ir.value;
+                const text = baseText + char;
+                const goDeeper = (yield { text, node, depth });
+                if (goDeeper || goDeeper === undefined) {
+                    depth++;
+                    baseText = text;
+                    stack[depth] = children(node);
+                }
+            }
+            depth -= 1;
+            baseText = baseText.slice(0, -1);
+        }
     }
-}
 

@@ -1,6 +1,6 @@
 import {TrieNode} from './TrieNode';
 import {isWordTerminationNode} from './util';
-import {walker, CompoundWordsMethod} from './walker';
+import {walker, CompoundWordsMethod, } from './walker';
 export {CompoundWordsMethod} from './walker';
 
 const defaultMaxNumberSuggestions = 10;
@@ -9,6 +9,7 @@ const baseCost = 100;
 const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
+const insertSpaceDiscount = 1;
 
 export type Cost = number;
 export type MaxCost = Cost;
@@ -51,13 +52,17 @@ export function* genSuggestions(
 export function* genCompoundableSuggestions(
     root: TrieNode,
     word: string,
-    compoundMethod: CompoundWordsMethod,
+    compoundMethod: CompoundWordsMethod
 ): SuggestionIterator {
     const bc = baseCost;
     const psc = postSwapCost;
     const matrix: number[][] = [[]];
     const x = ' ' + word;
     const mx = x.length - 1;
+    const specialDiscounts: { [index: string]: number } = {
+        ' ': insertSpaceDiscount,
+        '~': insertSpaceDiscount,
+    }
 
     let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
 
@@ -66,38 +71,49 @@ export function* genCompoundableSuggestions(
     }
 
     const i = walker(root, compoundMethod);
-    let deeper = true;
-    for (let r = i.next(deeper); !r.done; r = i.next(deeper)) {
+    let goDeeper = true;
+    for (let r = i.next(goDeeper); !r.done; r = i.next(goDeeper)) {
         const {text, node, depth} = r.value;
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
         const w = text.slice(-1);
         const c = bc - d;
+        const ci = c - (specialDiscounts[w] || 0);
+
         matrix[d] = matrix[d] || [];
         matrix[d][0] = matrix[d - 1][0] + bc;
         let lastLetter = x[0];
         let min = matrix[d][0];
-        for (let i = 1; i <= mx; ++i) {
-            let curLetter = x[i];
-            let subCost = (w === curLetter)
+        let e = 0;
+        let i;
+        for (i = 1; i <= mx && (i <= d || e < costLimit); ++i) {
+            const curLetter = x[i];
+            const subCost = (w === curLetter)
                 ? 0
                 : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
-            matrix[d][i] = Math.min(
+            e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d - 1][i    ] + c,      // insert
-                matrix[d    ][i - 1] + c       // delete
+                matrix[d - 1][i    ] + ci,      // insert
+                matrix[d    ][i - 1] + c        // delete
             );
-            min = Math.min(min, matrix[d][i]);
+            min = Math.min(min, e);
+            matrix[d][i] = e;
             lastLetter = curLetter;
         }
+        const f = costLimit + baseCost;
+        for (let j = i; j <= mx; ++j) {
+            matrix[d][j] = f;
+        }
+
         let cost = matrix[d][mx];
         if (isWordTerminationNode(node) && cost <= costLimit) {
             costLimit = (yield { word: text, cost }) || costLimit;
         }
-        deeper = (min <= costLimit);
+        goDeeper = (min <= costLimit);
     }
 }
 
+// comparison function for Suggestion Results.
 export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
     return a.cost - b.cost || a.word.length - b.word.length || a.word.localeCompare(b.word);
 }
@@ -109,6 +125,7 @@ export interface SuggestionCollector {
     readonly suggestions: SuggestionResult[];
     readonly maxCost: number;
     readonly word: string;
+    readonly maxNumSuggestions: number;
 }
 
 export function suggestionCollector(word: string, maxNumSuggestions: number, filter: (word: string) => boolean = () => true): SuggestionCollector {
@@ -159,5 +176,6 @@ export function suggestionCollector(word: string, maxNumSuggestions: number, fil
         get suggestions() { return [...sugs.values()].sort(compSuggestionResults); },
         get maxCost() { return maxCost; },
         get word() { return word; },
+        get maxNumSuggestions() { return maxNumSuggestions; },
     };
 }
