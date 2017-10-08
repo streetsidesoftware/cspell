@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Trie} from './trie';
 import {
     genCompoundableSuggestions,
+    genCompoundableSuggestions2,
     CompoundWordsMethod,
     suggestionCollector,
 } from './suggest';
@@ -53,11 +54,11 @@ describe('Validate English Suggestions', () => {
         });
     });
 
-    it('Tests compound suggestions', () => {
+    it('Tests compound SEPARATE_WORDS suggestions', () => {
         return getTrie().then(trie => {
             // cspell:ignore onetwothreefour
             const collector = suggestionCollector('onetwothreefour', 8);
-            collector.collect(genCompoundableSuggestions(
+            collector.collect(genCompoundableSuggestions2(
                 trie.root,
                 collector.word,
                 CompoundWordsMethod.SEPARATE_WORDS
@@ -70,11 +71,11 @@ describe('Validate English Suggestions', () => {
         });
     });
 
-    it('Tests compound suggestions', () => {
+    it('Tests compound JOIN_WORDS suggestions', () => {
         return getTrie().then(trie => {
             // cspell:ignore onetwothrefour
             const collector = suggestionCollector('onetwothreefour', 8);
-            collector.collect(genCompoundableSuggestions(
+            collector.collect(genCompoundableSuggestions2(
                 trie.root,
                 collector.word,
                 CompoundWordsMethod.JOIN_WORDS
@@ -121,6 +122,5 @@ describe('Validate English Suggestions', () => {
         });
     });
     */
-
 });
 
