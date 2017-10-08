@@ -1,41 +1,14 @@
 import {expect} from 'chai';
 import {Trie} from './trie';
-import {importTrieRx} from './importExport';
-import * as Rx from 'rxjs/Rx';
-import * as fs from 'fs-extra';
-import * as path from 'path';
-import * as zlib from 'zlib';
+import {readTrieFile} from './reader.test';
 import * as cspellDict from 'cspell-dict-es-es';
 
 
 let trie: Promise<Trie>;
 
-function getTrie(): Promise<Trie> {
+function getTrie() {
     if (!trie) {
-        const configLocation = cspellDict.getConfigLocation();
-
-        const config = fs.readFile(configLocation)
-            .then(buffer => buffer.toString())
-            .then(json => JSON.parse(json.replace(/\/\/.*/g, '')));
-
-        const pathToDict = config.then(config => {
-            const dictDef = config && config.dictionaryDefinitions && config.dictionaryDefinitions[0] || {};
-            const dictPath = dictDef.file || '';
-            return path.join(path.dirname(configLocation), dictPath);
-        });
-
-        const trieFileContents = pathToDict.then(pathToDict => fs.readFile(pathToDict))
-            .then(buffer => zlib.gunzipSync(buffer))
-            .then(buffer => buffer.toString('UTF-8'))
-            ;
-
-        const trieLines = Rx.Observable
-            .fromPromise(trieFileContents.then(trieFileContents => trieFileContents.split('\n')))
-            .flatMap(a => a);
-
-        const trieNode = importTrieRx(trieLines).take(1).toPromise();
-
-        trie = trieNode.then(node => new Trie(node));
+        trie = readTrieFile(cspellDict.getConfigLocation());
     }
     return trie;
 }
