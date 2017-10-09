@@ -4,7 +4,14 @@ import { IterableLike } from '../util/IterableLike';
 import {Trie, importTrieRx, SuggestionCollector, SuggestionResult, CompoundWordsMethod} from 'cspell-trie';
 import {ReplaceMap, createMapper} from '../util/repMap';
 
-export {SuggestionCollector, suggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie';
+export {
+    CompoundWordsMethod,
+    JOIN_SEPARATOR,
+    SuggestionCollector,
+    suggestionCollector,
+    SuggestionResult,
+    WORD_SEPARATOR,
+} from 'cspell-trie';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 

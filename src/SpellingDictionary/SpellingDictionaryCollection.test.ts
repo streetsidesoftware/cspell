@@ -41,6 +41,7 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     it('checks for compound suggestions', () => {
+        // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         trie.options.useCompounds = true;
         const dicts = [
@@ -55,7 +56,25 @@ describe('Verify using multiple dictionaries', () => {
         const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS);
         const sugs = sugResult.map(a => a.word);
         expect(sugs).to.be.not.empty;
-        expect(sugs).to.contain('applemango');
+        expect(sugs).to.contain('apple+mango');
+        expect(sugs).to.contain('apple mango');
+    });
+
+    it('checks for compound suggestions', () => {
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
+        const dicts = [
+            trie,
+            createSpellingDictionary(wordsB, 'wordsB'),
+            createSpellingDictionary(wordsA, 'wordsA'),
+            createSpellingDictionary(wordsC, 'wordsC'),
+        ];
+
+        // cspell:ignore appletango applemango
+        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS);
+        const sugs = sugResult.map(a => a.word);
+        expect(sugs).to.be.not.empty;
+        expect(sugs).to.not.contain('apple+mango');
         expect(sugs).to.contain('apple mango');
     });
 
