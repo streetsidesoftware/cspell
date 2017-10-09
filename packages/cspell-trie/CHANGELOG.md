@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.6.7 - 1.6.9
+- Improve the speed of generating suggestions for long compound words.
+
 ## 1.6.6
 - Expose the compound suggestions.
 
