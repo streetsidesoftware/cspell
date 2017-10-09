@@ -2,8 +2,6 @@ import {expect} from 'chai';
 import {Trie} from './trie';
 import {
     genCompoundableSuggestions,
-    genCompoundableSuggestions2,
-    genCompoundableSuggestions3,
     CompoundWordsMethod,
     suggestionCollector,
 } from './suggest';
@@ -61,7 +59,7 @@ describe('Validate English Suggestions', function() {
         return getTrie().then(trie => {
             // cspell:ignore onetwothreefour
             const collector = suggestionCollector('onetwothreefour', 8);
-            collector.collect(genCompoundableSuggestions2(
+            collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
                 CompoundWordsMethod.SEPARATE_WORDS
@@ -78,23 +76,7 @@ describe('Validate English Suggestions', function() {
         return getTrie().then(trie => {
             // cspell:ignore onetwothrefour
             const collector = suggestionCollector('onetwothreefour', 8);
-            collector.collect(genCompoundableSuggestions2(
-                trie.root,
-                collector.word,
-                CompoundWordsMethod.JOIN_WORDS
-            ));
-            const results = collector.suggestions;
-            const suggestions = results.map(s => s.word);
-            expect(suggestions).to.contain('one+two+three+four');
-            expect(suggestions).to.be.length(collector.maxNumSuggestions);
-        });
-    });
-
-    it('Tests compound JOIN_WORDS suggestions', () => {
-        return getTrie().then(trie => {
-            // cspell:ignore onetwothrefour
-            const collector = suggestionCollector('onetwothreefour', 8);
-            collector.collect(genCompoundableSuggestions3(
+            collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
                 CompoundWordsMethod.JOIN_WORDS
@@ -122,24 +104,24 @@ describe('Validate English Suggestions', function() {
         });
     });
 
-    /*
-    // Takes too long.
+    // Takes a long time.
     it('Tests long compound suggestions', () => {
         return getTrie().then(trie => {
-            // cspell:ignore testslongcompundsugestions
-            const collector = suggestionCollector('testslongcompundsugestions', 8);
-            collector.collect(genCompoundableSuggestions3(
+            // cspell:ignore testslongcompundsuggestions
+            const collector = suggestionCollector('testslongcompundsuggestions', 1);
+            collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
                 CompoundWordsMethod.SEPARATE_WORDS
             ));
             const results = collector.suggestions;
             const suggestions = results.map(s => s.word);
+            // console.log('Results:');
+            // console.log(results.map((r, i) => `${i} ${r.cost} ${r.word}`).join('\n'));
+            expect(suggestions).to.be.length(collector.maxNumSuggestions);
             expect(suggestions).to.contain('tests long compound suggestions');
             expect(suggestions[0]).to.be.equal('tests long compound suggestions');
-            expect(suggestions).to.be.length(collector.maxNumSuggestions);
         });
     });
-    */
 });
 

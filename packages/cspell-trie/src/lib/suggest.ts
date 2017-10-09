@@ -10,13 +10,8 @@ const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
 const insertSpaceDiscount = 1;
-/*
-const Separators = {
-    [CompoundWordsMethod.NONE]: '',
-    [CompoundWordsMethod.JOIN_WORDS]: JOIN_SEPARATOR,
-    [CompoundWordsMethod.SEPARATE_WORDS]: WORD_SEPARATOR,
-}
-*/
+
+const setOfSeparators = new Set([ JOIN_SEPARATOR, WORD_SEPARATOR ]);
 
 export type Cost = number;
 export type MaxCost = Cost;
@@ -56,175 +51,26 @@ export function* genSuggestions(
     yield *genCompoundableSuggestions(root, word, compoundMethod);
 }
 
-export function* genCompoundableSuggestions(
-    root: TrieNode,
-    word: string,
-    compoundMethod: CompoundWordsMethod
-): SuggestionIterator {
-    const bc = baseCost;
-    const psc = postSwapCost;
-    const matrix: number[][] = [[]];
-    const x = ' ' + word;
-    const mx = x.length - 1;
-    const specialDiscounts: { [index: string]: number } = {
-        [WORD_SEPARATOR]: insertSpaceDiscount,
-        [JOIN_SEPARATOR]: insertSpaceDiscount,
-    };
-
-    let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
-
-    for (let i = 0; i <= mx; ++i) {
-        matrix[0][i] = i * baseCost;
-    }
-
-    const i = walker(root, compoundMethod);
-    let goDeeper = true;
-    for (let r = i.next(goDeeper); !r.done; r = i.next(goDeeper)) {
-        const {text, node, depth} = r.value;
-        const d = depth + 1;
-        const lastSugLetter = d > 1 ? text[d - 2] : '';
-        const w = text.slice(-1);
-        const c = bc - d;
-        const ci = c - (specialDiscounts[w] || 0);
-
-        matrix[d] = matrix[d] || [];
-        matrix[d][0] = matrix[d - 1][0] + bc;
-        let lastLetter = x[0];
-        let min = matrix[d][0];
-        let e = 0;
-        let i;
-        for (i = 1; i <= mx && (i <= d || e < costLimit); ++i) {
-            const curLetter = x[i];
-            const subCost = (w === curLetter)
-                ? 0
-                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
-            e = Math.min(
-                matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d - 1][i    ] + ci,      // insert
-                matrix[d    ][i - 1] + c        // delete
-            );
-            min = Math.min(min, e);
-            matrix[d][i] = e;
-            lastLetter = curLetter;
-        }
-        const f = costLimit + baseCost;
-        for (let j = i; j <= mx; ++j) {
-            matrix[d][j] = f;
-        }
-
-        let cost = matrix[d][mx];
-        if (isWordTerminationNode(node) && cost <= costLimit) {
-            costLimit = (yield { word: text, cost }) || costLimit;
-        }
-        goDeeper = (min <= costLimit);
-    }
-}
-
 interface Range {
     a: number;
     b: number;
 }
 
-export function* genCompoundableSuggestions2(
+export function* genCompoundableSuggestions(
     root: TrieNode,
     word: string,
     compoundMethod: CompoundWordsMethod
 ): SuggestionIterator {
-    const bc = baseCost;
-    const psc = postSwapCost;
-    const matrix: number[][] = [[]];
-    const stack: Range[] = [];
-    const x = ' ' + word;
-    const mx = x.length - 1;
-    const specialDiscounts: { [index: string]: number } = {
-        [WORD_SEPARATOR]: insertSpaceDiscount,
-        [JOIN_SEPARATOR]: insertSpaceDiscount,
-    };
+    interface History extends SuggestionResult {}
 
-    let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
-    let a: number = 0;
-    let b: number = 0;
-    for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
-        c = i * baseCost;
-        matrix[0][i] = c;
-        b = i;
+    interface HistoryTag {
+        i: number;
+        w: string;
+        m: number;
     }
-    stack[0] = {a, b};
 
-    const i = walker(root, compoundMethod);
-    let goDeeper = true;
-    for (let r = i.next(goDeeper); !r.done; r = i.next(goDeeper)) {
-        const {text, node, depth} = r.value;
-        const d = depth + 1;
-        const lastSugLetter = d > 1 ? text[d - 2] : '';
-        const w = text.slice(-1);
-        const c = bc - d;
-        const ci = c - (specialDiscounts[w] || 0);
-
-        let {a, b} = stack[depth];
-        // Setup first column
-        matrix[d] = matrix[d] || [];
-        matrix[d][a] = matrix[d - 1][a] + ci + d - a;
-        let lastLetter = x[a];
-        let min = matrix[d][a];
-        let i;
-
-        // calc the core letters
-        for (i = a + 1; i <= b; ++i) {
-            const curLetter = x[i];
-            const subCost = (w === curLetter)
-                ? 0
-                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
-            const e = Math.min(
-                matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d - 1][i    ] + ci,      // insert
-                matrix[d    ][i - 1] + c        // delete
-            );
-            min = Math.min(min, e);
-            matrix[d][i] = e;
-            lastLetter = curLetter;
-        }
-
-        // fix the last column
-        b += 1;
-        if (b <= mx) {
-            i = b;
-            const curLetter = x[i];
-            const subCost = (w === curLetter)
-                ? 0
-                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
-            const e = Math.min(
-                matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d][i - 1] + c        // delete
-            );
-            min = Math.min(min, e);
-            matrix[d][i] = e;
-            lastLetter = curLetter;
-        } else {
-            b -= 1;
-        }
-
-        // Adjust the range between a and b
-        for (; b > a && matrix[d][b] > costLimit; b -= 1) {
-        }
-        for (; a < b && matrix[d][a] > costLimit; a += 1) {
-        }
-
-        b = Math.min(b + 1, mx);
-        stack[d] = {a, b};
-        const cost = matrix[d][b];
-        if (node.f && isWordTerminationNode(node) && cost <= costLimit) {
-            costLimit = (yield { word: text, cost }) || costLimit;
-        }
-        goDeeper = (min <= costLimit);
-    }
-}
-
-export function* genCompoundableSuggestions3(
-    root: TrieNode,
-    word: string,
-    compoundMethod: CompoundWordsMethod
-): SuggestionIterator {
+    const history: History[] = [];
+    const historyTags = new Map<string, HistoryTag>();
     const bc = baseCost;
     const psc = postSwapCost;
     const matrix: number[][] = [[]];
@@ -251,13 +97,46 @@ export function* genCompoundableSuggestions3(
     let goDeeper = true;
     for (let r = i.next({ goDeeper, hint }); !r.done; r = i.next({ goDeeper, hint })) {
         const {text, node, depth} = r.value;
+        let {a, b} = stack[depth];
+        const w = text.slice(-1);
+        if (setOfSeparators.has(w)) {
+            const mxRange = matrix[depth].slice(a, b + 1);
+            const mxMin = Math.min(...mxRange);
+            const tag = [a].concat(mxRange.map(c => c - mxMin)).join();
+            if (historyTags.has(tag) && historyTags.get(tag)!.m <= mxMin) {
+                goDeeper = false;
+                const { i, w, m } = historyTags.get(tag)!;
+                if (i >= history.length) {
+                    continue;
+                }
+                const r = history[i];
+                if (r.word.slice(0, w.length) !== w) {
+                    continue;
+                }
+                const dc = mxMin - m;
+                for (let p = i; p < history.length; ++p) {
+                    const { word, cost: hCost } = history[p];
+                    const fix = word.slice(0, w.length);
+                    if (fix !== w) {
+                        break;
+                    }
+                    const cost = hCost + dc;
+                    if (cost <= costLimit) {
+                        const suffix = word.slice(w.length);
+                        const emit = text + suffix;
+                        costLimit = (yield { word: emit, cost }) || costLimit;
+                    }
+                }
+                continue;
+            } else {
+                historyTags.set(tag, { w: text, i: history.length, m: mxMin });
+            }
+        }
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
-        const w = text.slice(-1);
         const c = bc - d;
         const ci = c - (specialDiscounts[w] || 0);
 
-        let {a, b} = stack[depth];
         // Setup first column
         matrix[d] = matrix[d] || [];
         matrix[d][a] = matrix[d - 1][a] + ci + d - a;
@@ -291,7 +170,7 @@ export function* genCompoundableSuggestions3(
                 : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
             const e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d][i - 1] + c        // delete
+                matrix[d    ][i - 1] + c        // delete
             );
             min = Math.min(min, e);
             matrix[d][i] = e;
@@ -310,11 +189,15 @@ export function* genCompoundableSuggestions3(
         stack[d] = {a, b};
         const cost = matrix[d][b];
         if (node.f && isWordTerminationNode(node) && cost <= costLimit) {
-            costLimit = (yield { word: text, cost }) || costLimit;
+            const r = { word: text, cost };
+            history.push(r);
+            costLimit = (yield r) || costLimit;
         }
         goDeeper = (min <= costLimit);
         hint = word.slice(a, b);
     }
+    // console.log(`tag size: ${historyTags.size}, history size: ${history.length}`);
+    // console.log(history.map((r, i) => `${i} ${r.cost} ${r.word}`).join('\n'));
 }
 
 
@@ -333,9 +216,14 @@ export interface SuggestionCollector {
     readonly maxNumSuggestions: number;
 }
 
-export function suggestionCollector(word: string, maxNumSuggestions: number, filter: (word: string) => boolean = () => true): SuggestionCollector {
+export function suggestionCollector(
+    word: string,
+    maxNumSuggestions: number,
+    filter: (word: string) => boolean = () => true,
+    changeLimit: number = maxNumChanges
+): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = Math.min(baseCost * word.length / 2, baseCost * maxNumChanges);
+    let maxCost: number = Math.min(baseCost * word.length / 2, baseCost * changeLimit);
 
     function dropMax() {
         if (sugs.size < 2) {
