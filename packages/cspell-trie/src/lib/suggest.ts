@@ -1,6 +1,6 @@
 import {TrieNode} from './TrieNode';
 import {isWordTerminationNode} from './util';
-import {walker, CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
+import {CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
 export {CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
 
 const defaultMaxNumberSuggestions = 10;
@@ -95,7 +95,7 @@ export function* genCompoundableSuggestions(
     let hint = word.slice(a);
     const i = hintedWalker(root, compoundMethod, hint);
     let goDeeper = true;
-    for (let r = i.next({ goDeeper, hint }); !r.done; r = i.next({ goDeeper, hint })) {
+    for (let r = i.next({ goDeeper }); !r.done; r = i.next({ goDeeper })) {
         const {text, node, depth} = r.value;
         let {a, b} = stack[depth];
         const w = text.slice(-1);

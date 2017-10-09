@@ -80,7 +80,6 @@ export function* walker(
 }
 
 export interface Hinting {
-    hint: string;
     goDeeper: boolean;
 }
 
