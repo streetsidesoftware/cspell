@@ -110,7 +110,7 @@ export function* hintedWalker(
         [CompoundWordsMethod.SEPARATE_WORDS]: [[WORD_SEPARATOR, root]],
     };
 
-    const hints = new Set(hint);
+    const hints = new Set(hint.slice(0, 5));
 
     function* children(n: TrieNode): IterableIterator<[string, TrieNode]> {
         if (n.c) {
