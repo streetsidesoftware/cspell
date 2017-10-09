@@ -1,5 +1,14 @@
 # Release Notes
 
+## 1.10.4
+- Improved support for compound word suggestions.
+- Sped up suggestions on large compound words by a factor of 10x.
+  Large compound words suggestions are still slow: ~4000ms to generate 8 suggestions for a 27 character word.
+  This time can be reduced to about 1 second by changing the number of suggestions to 1.
+
+## 1.10.3
+- Initial support for compound word suggestions.
+
 ## 1.10.0 - 1.10.2
 - Add support for compound word suggestion.
 - Add support for dictionaries that force compound words like Dutch and German
