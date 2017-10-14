@@ -112,10 +112,10 @@ describe('Validate English Suggestions', function() {
 
     // Takes a long time.
     it('Tests long compound suggestions', function() {
-        this.timeout(timeout);
+        this.timeout(timeout * 2);
         return getTrie().then(trie => {
-            // cspell:ignore testslongcompundsuggestions
-            const collector = suggestionCollector('testslongcompundsuggestions', 1);
+            // cspell:ignore testscompundsuggestions
+            const collector = suggestionCollector('testscompundsuggestions', 1);
             collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
@@ -126,8 +126,8 @@ describe('Validate English Suggestions', function() {
             // console.log('Results:');
             // console.log(results.map((r, i) => `${i} ${r.cost} ${r.word}`).join('\n'));
             expect(suggestions).to.be.length(collector.maxNumSuggestions);
-            expect(suggestions).to.contain('tests long compound suggestions');
-            expect(suggestions[0]).to.be.equal('tests long compound suggestions');
+            expect(suggestions).to.contain('tests compound suggestions');
+            expect(suggestions[0]).to.be.equal('tests compound suggestions');
         });
     });
 });
