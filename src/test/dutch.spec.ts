@@ -10,9 +10,9 @@ const sampleFile = fsp.readFile(sampleFilename, 'UTF-8').then(buffer => buffer.t
 const dutchConfig = dutchDict.getConfigLocation();
 
 describe('Validate that Dutch text is correctly checked.', function() {
-    this.timeout(5000);
 
-    it('Tests the default configuration', () => {
+    it('Tests the default configuration', function() {
+        this.timeout(5000);
         return sampleFile.then(text => {
             expect(text).to.not.be.empty;
             const ext = path.extname(sampleFilename);
