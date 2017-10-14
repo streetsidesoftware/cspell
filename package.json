@@ -34,7 +34,8 @@
     "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
     "which": "which node && echo $PATH",
     "test-spec": "mocha --recursive \"dist/**/*.spec.js\"",
-    "test": "mocha --recursive \"dist/**/*.test.js\""
+    "test-unit": "mocha --recursive \"dist/**/*.test.js\"",
+    "test": "npm run test-unit && npm run test-spec"
   },
   "repository": {
     "type": "git",
