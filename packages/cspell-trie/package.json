@@ -17,6 +17,8 @@
     "clean-build": "npm run clean ; npm run build",
     "coverage": "NODE_ENV=test nyc npm run test-ts",
     "test-ts": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
+    "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "travis-coverage": "npm run coverage && npm run coverage-coveralls",
     "watch": "tsc -w"
   },
   "repository": {
