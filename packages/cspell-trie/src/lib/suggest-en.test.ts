@@ -19,9 +19,9 @@ function getTrie() {
 }
 
 describe('Validate English Suggestions', function() {
-    this.timeout(30000);
 
-    it('Tests suggestions', () => {
+    it('Tests suggestions', function() {
+        this.timeout(5000);
         return getTrie().then(trie => {
             const collector = suggestionCollector('joyful', 8);
             collector.collect(genCompoundableSuggestions(
@@ -37,7 +37,8 @@ describe('Validate English Suggestions', function() {
         });
     });
 
-    it('Tests suggestions', () => {
+    it('Tests suggestions', function() {
+        this.timeout(5000);
         return getTrie().then(trie => {
             // cspell:ignore joyfull
             const collector = suggestionCollector('joyfull', 8);
@@ -55,7 +56,8 @@ describe('Validate English Suggestions', function() {
         });
     });
 
-    it('Tests compound SEPARATE_WORDS suggestions', () => {
+    it('Tests compound SEPARATE_WORDS suggestions', function() {
+        this.timeout(5000);
         return getTrie().then(trie => {
             // cspell:ignore onetwothreefour
             const collector = suggestionCollector('onetwothreefour', 8);
@@ -72,7 +74,8 @@ describe('Validate English Suggestions', function() {
         });
     });
 
-    it('Tests compound JOIN_WORDS suggestions', () => {
+    it('Tests compound JOIN_WORDS suggestions', function() {
+        this.timeout(5000);
         return getTrie().then(trie => {
             // cspell:ignore onetwothrefour
             const collector = suggestionCollector('onetwothreefour', 8);
@@ -88,7 +91,8 @@ describe('Validate English Suggestions', function() {
         });
     });
 
-    it('Tests compound suggestions', () => {
+    it('Tests compound suggestions', function() {
+        this.timeout(5000);
         return getTrie().then(trie => {
             // cspell:ignore onetwothrefour
             const collector = suggestionCollector('onetwothreefour', 8);
@@ -105,7 +109,8 @@ describe('Validate English Suggestions', function() {
     });
 
     // Takes a long time.
-    it('Tests long compound suggestions', () => {
+    it('Tests long compound suggestions', function() {
+        this.timeout(5000);
         return getTrie().then(trie => {
             // cspell:ignore testslongcompundsuggestions
             const collector = suggestionCollector('testslongcompundsuggestions', 1);

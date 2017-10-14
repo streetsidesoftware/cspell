@@ -14,7 +14,8 @@ function getTrie() {
 }
 
 describe('Validate Spanish Suggestions', () => {
-    it('Tests suggestions', () => {
+    it('Tests suggestions', function() {
+        this.timeout(5000);
         return getTrie().then(trie => {
             // cspell:ignore Carmjen
             const results = trie.suggestWithCost('carmjen', 10);
