@@ -12,7 +12,8 @@ const dutchConfig = dutchDict.getConfigLocation();
 describe('Validate that Dutch text is correctly checked.', function() {
 
     it('Tests the default configuration', function() {
-        this.timeout(5000);
+        this.timeout(30000);
+
         return sampleFile.then(text => {
             expect(text).to.not.be.empty;
             const ext = path.extname(sampleFilename);
