@@ -16,7 +16,7 @@ const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
 const regExpRepeatChars = /(.)\1{3,}/i;
 
-export function normalizeWords(lines: Rx.Observable<string>) {
+export function normalizeWords(lines: Observable<string>) {
     return lines.flatMap(line => lineToWords(line).toArray());
 }
 
@@ -29,7 +29,7 @@ export function lineToWords(line: string): Sequence<string> {
         .concatMap(a => [a, ...a.split(regExpSpaceOrDash)])
         .concatMap(a => splitCamelCase(a))
         .map(a => a.trim())
-        .filter(s => s.length > 2)
+        .filter(a => !!a)
         .filter(s => !regExpRepeatChars.test(s))
         .map(a => a.toLowerCase())
         .reduceToSequence<string, Set<string>>((s, w) => s.add(w), new Set<string>());

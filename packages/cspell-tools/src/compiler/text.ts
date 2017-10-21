@@ -1,10 +1,9 @@
 // cSpell:ignore ings ning gimuy
-// cSpell:words rxjs xregexp
+// cSpell:words xregexp
 
 import * as XRegExp from 'xregexp';
 import {merge} from 'tsmerge';
 import {genSequence, scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
-import * as rxjs from 'rxjs';
 
 export interface WordOffset {
     word: string;

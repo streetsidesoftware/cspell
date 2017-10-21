@@ -35,6 +35,7 @@ describe('Validate the wordListCompiler', function() {
         // Sadly we cannot do this one correctly
         expect(lineToWords('CURLcode').toArray()).to.deep.equal(['cur', 'lcode']);
         expect(lineToWords('kDNSServiceErr_BadSig').toArray()).to.deep.equal([
+            'k',
             'dns',
             'service',
             'err',
