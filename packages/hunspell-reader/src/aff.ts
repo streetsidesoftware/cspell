@@ -258,6 +258,7 @@ const flagToStringMap: Dictionary<string> = {
 };
 
 export function logAffWord(affWord: AffWord, message: string) {
+    /* istanbul ignore if */
     if (log) {
         const dump = util.inspect(affWord, { showHidden: false, depth: 5, colors: true });
         console.log(`${message}: ${dump}`);
@@ -265,12 +266,14 @@ export function logAffWord(affWord: AffWord, message: string) {
     return affWord;
 }
 
+/* istanbul ignore next */
 export function affWordToColoredString(affWord: AffWord) {
     return util.inspect(
         {...affWord, flags: flagsToString(affWord.flags)},
         { showHidden: false, depth: 5, colors: true }).replace(/(\s|\n|\r)+/g, ' ');
 }
 
+/* istanbul ignore next */
 export function flagsToString(flags: AffWordFlags) {
     return GS.sequenceFromObject(flags)
         .filter(([, v]) => !!v)

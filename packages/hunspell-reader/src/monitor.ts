@@ -8,6 +8,7 @@ export function incCounter(name: string, count = 1) {
     return counters.get(name)!;
 }
 
+/* istanbul ignore next */
 export function log(message: string) {
     if (isLoggingOn) {
         const logMessage = [...counters]
