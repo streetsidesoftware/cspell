@@ -73,18 +73,56 @@ describe('Validate Trie Class', () => {
     });
 
     it('Test compound words', () => {
-        // cspell:ignore talkinglift joywalk jwalk
+        // cspell:ignore talkinglift joywalk jwalk awalk jayjay
         const trie = Trie.create(sampleWords);
         expect(trie.has('talkinglift', true)).to.be.true;
         expect(trie.has('joywalk', true)).to.be.true;
         expect(trie.has('jaywalk', true)).to.be.true;
         expect(trie.has('jwalk', true)).to.be.false;
+        expect(trie.has('awalk', true)).to.be.false;
+        expect(trie.has('jayjay', true)).to.be.true;
+        expect(trie.has('jayjay', 4)).to.be.false;
+        expect(trie.has('toto', true)).to.be.false;
+        expect(trie.has('toto', 2)).to.be.true;
+        expect(trie.has('toto', 1)).to.be.true;
+        expect(trie.has('iif', 1)).to.be.true;
+        expect(trie.has('uplift', true)).to.be.false;
+        expect(trie.has('endless', true)).to.be.true;
         expect(trie.has('joywalk', false)).to.be.false;
         expect(trie.has('walked', true)).to.be.true;
     });
 });
 
 const sampleWords = [
+    'a',
+    'i',
+    'an',
+    'as',
+    'at',
+    'be',
+    'bi',
+    'by',
+    'do',
+    'eh',
+    'go',
+    'he',
+    'hi',
+    'if',
+    'in',
+    'is',
+    'it',
+    'me',
+    'my',
+    'oh',
+    'ok',
+    'on',
+    'so',
+    'to',
+    'uh',
+    'um',
+    'up',
+    'us',
+    'we',
     'edit',
     'end',
     'edge',
@@ -98,6 +136,7 @@ const sampleWords = [
     'talked',
     'talker',
     'talking',
+    'less',
     'lift',
     'lifts',
     'lifted',

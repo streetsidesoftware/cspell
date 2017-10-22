@@ -22,18 +22,19 @@ export class Trie {
         root.f = root.f ? (root.f & ~FLAG_WORD) : root.f;
     }
 
-    find(text: string, useCompounds: boolean = false): TrieNode | undefined {
-        return useCompounds ? this.findCompound(text) : this.findExact(text);
+    find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {
+        const minLength: number | undefined = !minCompoundLength || minCompoundLength === true ? undefined : minCompoundLength;
+        return minCompoundLength ? this.findCompound(text, minLength) : this.findExact(text);
     }
 
-    findCompound(text: string): TrieNode | undefined {
+    findCompound(text: string, minCompoundLength: number = 3): TrieNode | undefined {
         let n: TrieNode | undefined = this.root;
         let p: number;
         let q: number;
         for (p = 0; n && n.c && p < text.length; p = q) {
             n = n.c.get(text[p]);
             q = p + 1;
-            if (n && n.f && q < text.length) {
+            if (n && n.f && q < text.length && q >= minCompoundLength) {
                 const r = this.findCompound(text.slice(q));
                 if (r && r.f) {
                     return r;
@@ -52,8 +53,8 @@ export class Trie {
         return p === text.length ? n : undefined;
     }
 
-    has(word: string, useCompounds?: boolean): boolean {
-        const n = this.find(word, useCompounds);
+    has(word: string, minCompoundLength?: boolean | number): boolean {
+        const n = this.find(word, minCompoundLength);
         return !!n && isWordTerminationNode(n);
     }
 
