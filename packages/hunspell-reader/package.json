@@ -13,6 +13,12 @@
     "test": "mocha --recursive ./dist/*.test.js",
     "build": "tsc",
     "clean": "rimraf ./dist/",
+    "coverage": "npm run generate-code-coverage",
+    "generate-code-coverage": "NODE_ENV=test nyc npm run test-ts",
+    "test-ts": "NODE_ENV=test mocha --compilers ts:ts-node/register --recursive --bail \"src/**/*.test.ts\"",
+    "test-watch": "npm run build && mocha --compilers ts:ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
     "watch": "tsc -w"
   },
   "repository": {
@@ -35,7 +41,9 @@
     "@types/mocha": "^2.2.43",
     "@types/node": "^7.0.46",
     "chai": "^3.5.0",
+    "coveralls": "^3.0.0",
     "mocha": "^3.5.3",
+    "nyc": "^11.2.1",
     "rimraf": "^2.6.2",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
@@ -63,5 +71,24 @@
   },
   "engines": {
     "node": ">=6.0.0"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.test.ts",
+      "src/**/*.spec.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
   }
 }
