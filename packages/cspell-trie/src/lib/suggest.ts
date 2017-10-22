@@ -9,9 +9,15 @@ const baseCost = 100;
 const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
-const insertSpaceDiscount = 1;
+const insertSpaceCost = -1;
 
 const setOfSeparators = new Set([ JOIN_SEPARATOR, WORD_SEPARATOR ]);
+
+const collator = new Intl.Collator();
+
+const regexSeparator = new RegExp(regexQuote(JOIN_SEPARATOR) + '|' + regexQuote(WORD_SEPARATOR), 'g');
+
+const wordLengthCost = [0, 50, 25, 0];
 
 export type Cost = number;
 export type MaxCost = Cost;
@@ -77,9 +83,9 @@ export function* genCompoundableSuggestions(
     const stack: Range[] = [];
     const x = ' ' + word;
     const mx = x.length - 1;
-    const specialDiscounts: { [index: string]: number } = {
-        [WORD_SEPARATOR]: insertSpaceDiscount,
-        [JOIN_SEPARATOR]: insertSpaceDiscount,
+    const specialCosts: { [index: string]: number } = {
+        [WORD_SEPARATOR]: insertSpaceCost,
+        [JOIN_SEPARATOR]: insertSpaceCost,
     };
 
     let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
@@ -135,7 +141,7 @@ export function* genCompoundableSuggestions(
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
         const c = bc - d;
-        const ci = c - (specialDiscounts[w] || 0);
+        const ci = c + (specialCosts[w] || 0);
 
         // Setup first column
         matrix[d] = matrix[d] || [];
@@ -203,7 +209,10 @@ export function* genCompoundableSuggestions(
 
 // comparison function for Suggestion Results.
 export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
-    return a.cost - b.cost || a.word.length - b.word.length || a.word.localeCompare(b.word);
+    return a.cost - b.cost
+    || a.word.length - b.word.length
+    || collator.compare(a.word, b.word)
+    ;
 }
 
 export interface SuggestionCollector {
@@ -238,8 +247,16 @@ export function suggestionCollector(
         maxCost = maxSug.cost;
     }
 
+    function adjustCost(sug: SuggestionResult): SuggestionResult {
+        const words = sug.word.split(regexSeparator);
+        const extraCost = words
+            .map(w => wordLengthCost[w.length] || 0)
+            .reduce((a, b) => a + b, 0);
+        return { word: sug.word, cost: sug.cost + extraCost };
+    }
+
     function collector(suggestion: SuggestionResult): MaxCost {
-        const {word, cost} = suggestion;
+        const {word, cost} = adjustCost(suggestion);
         if (cost <= maxCost && filter(suggestion.word)) {
             if (sugs.has(word)) {
                 const known = sugs.get(word)!;
@@ -271,4 +288,8 @@ export function suggestionCollector(
         get word() { return word; },
         get maxNumSuggestions() { return maxNumSuggestions; },
     };
+}
+
+function regexQuote(text: string): string {
+    return text.replace(/[\[\]\-+(){},|*.]/g, '\\$1');
 }
