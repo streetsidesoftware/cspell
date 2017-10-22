@@ -1,5 +1,5 @@
 import * as util from 'util';
-import * as Conv from './converter';
+import {Converter} from './converter';
 import {genSequence as gs, Sequence} from 'gensequence';
 import * as GS from 'gensequence';
 
@@ -112,13 +112,13 @@ export interface AffWord {
 
 export class Aff {
     protected rules: Map<string, Rule>;
-    protected _oConv: Conv.Converter;
-    protected _iConv: Conv.Converter;
+    protected _oConv: Converter;
+    protected _iConv: Converter;
 
     constructor(public affInfo: AffInfo) {
         this.rules = processRules(affInfo);
-        this._iConv = new Conv.Converter(affInfo.ICONV || []);
-        this._oConv = new Conv.Converter(affInfo.OCONV || []);
+        this._iConv = new Converter(affInfo.ICONV || []);
+        this._oConv = new Converter(affInfo.OCONV || []);
     }
 
     /**

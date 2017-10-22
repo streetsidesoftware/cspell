@@ -19,11 +19,25 @@
             "port": 5858,
             "outFiles": []
         },
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Run Mocha Current File",
+			"program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--timeout","999999",
+				"--colors",
+				"--compilers", "ts:ts-node/register",
+				"${file}"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"env": { "NODE_ENV": "test"}
+		},
         {
 			// Name of configuration; appears in the launch configuration drop down menu.
 			"name": "Run mocha",
 			// Type of configuration. Possible values: "node", "mono".
-			"type": "node2",
+			"type": "node",
             // Request type "launch" or "attach"
             "request": "launch",
 			// Workspace relative or absolute path to the program.
@@ -31,13 +45,18 @@
 			// Automatically stop program after launch.
 			"stopOnEntry": false,
 			// Command line arguments passed to the program.
-			"args": ["--recursive", "dist/**/*.test.js"],
+			"args": [
+				"--timeout","999999",
+				"--colors",
+				"--compilers", "ts:ts-node/register",
+                "--recursive",
+                "dist/**/*.test.js"
+            ],
 			// Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
 			"cwd": "${workspaceRoot}",
 			// Workspace relative or absolute path to the runtime executable to be used. Default is the runtime executable on the PATH.
 			"runtimeExecutable": null,
 			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
-			"sourceMaps": true,
 			// Environment variables passed to the program.
 			"env": { "NODE_ENV": "test"}
 		}
