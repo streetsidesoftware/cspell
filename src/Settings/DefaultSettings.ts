@@ -77,7 +77,7 @@ const defaultSettings: CSpellUserSettings = {
     dictionaryDefinitions: defaultDictionaryDefs,
 };
 
-const getSettings = function(){
+const getSettings = function() {
     let settings: CSpellUserSettings | undefined = undefined;
     return function() {
         if (!settings) {
