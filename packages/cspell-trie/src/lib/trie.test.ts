@@ -82,6 +82,7 @@ describe('Validate Trie Class', () => {
         expect(trie.has('awalk', true)).to.be.false;
         expect(trie.has('jayjay', true)).to.be.true;
         expect(trie.has('jayjay', 4)).to.be.false;
+        expect(trie.has('jayi', 3)).to.be.false;
         expect(trie.has('toto', true)).to.be.false;
         expect(trie.has('toto', 2)).to.be.true;
         expect(trie.has('toto', 1)).to.be.true;

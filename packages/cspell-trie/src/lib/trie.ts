@@ -27,7 +27,7 @@ export class Trie {
         return minCompoundLength ? this.findCompound(text, minLength) : this.findExact(text);
     }
 
-    findCompound(text: string, minCompoundLength: number = 3): TrieNode | undefined {
+    findCompound(text: string, minCompoundLength = 3, minLength = 0): TrieNode | undefined {
         let n: TrieNode | undefined = this.root;
         let p: number;
         let q: number;
@@ -35,13 +35,13 @@ export class Trie {
             n = n.c.get(text[p]);
             q = p + 1;
             if (n && n.f && q < text.length && q >= minCompoundLength) {
-                const r = this.findCompound(text.slice(q));
+                const r = this.findCompound(text.slice(q), minCompoundLength, minCompoundLength);
                 if (r && r.f) {
                     return r;
                 }
             }
         }
-        return p === text.length ? n : undefined;
+        return p === text.length && p >= minLength ? n : undefined;
     }
 
     findExact(text: string): TrieNode | undefined {
