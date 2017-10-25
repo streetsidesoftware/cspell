@@ -1,5 +1,8 @@
 # Release Notes
 
+## [un-released]
+- Migrate PHP dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
+
 ## 1.10.4
 - Improved support for compound word suggestions.
 - Sped up suggestions on large compound words by a factor of 10x.
