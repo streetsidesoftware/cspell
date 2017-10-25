@@ -19,7 +19,6 @@
     "dictionaryDefinitions": [],
     "languageSettings": [
         { "languageId": "*",                                   "dictionaries": ["companies", "softwareTerms", "misc", "filetypes"] },
-        { "languageId": "c,cpp",  "allowCompoundWords": true,  "dictionaries": ["cpp"] },
         { "languageId": "csharp", "allowCompoundWords": true,  "dictionaries": ["csharp", "dotnet", "npm"] },
         { "languageId": "javascript,javascriptreact",          "dictionaries": ["typescript", "node", "npm"] },
         { "languageId": "typescript,typescriptreact",          "dictionaries": ["typescript", "node", "npm"] },
@@ -35,21 +34,15 @@
         { "languageId": "css,less,scss",                       "dictionaries": ["fonts", "css"] },
         { "languageId": "map",    "enabled": false },
         { "languageId": "image",  "enabled": false },
-        { "languageId": "binary", "enabled": false },
-        {
-            "languageId": "c,cpp",
-            // Exclude includes
-            "ignoreRegExpList": [
-                "/#include.*/"
-            ]
-        }
+        { "languageId": "binary", "enabled": false }
     ],
     "import": [
+        "node_modules/cspell-dict-cpp/cspell-ext.json",
         "node_modules/cspell-dict-en_us/cspell-ext.json",
         "node_modules/cspell-dict-en-gb/cspell-ext.json",
         "node_modules/cspell-dict-golang/cspell-ext.json",
         "node_modules/cspell-dict-django/cspell-ext.json",
-        "node_modules/cspell-dict-python/cspell-ext.json",
-        "node_modules/cspell-dict-php/cspell-ext.json"
+        "node_modules/cspell-dict-php/cspell-ext.json",
+        "node_modules/cspell-dict-python/cspell-ext.json"
     ]
 }
