@@ -1,6 +1,6 @@
 # Release Notes
 
-## [un-released]
+## [1.10.5]
 - Migrate PHP dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
 - Migrate C++ dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
 
