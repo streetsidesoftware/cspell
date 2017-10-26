@@ -122,7 +122,8 @@ describe('Validate Suggest', () => {
 
     it('Tests genSuggestions as array', () => {
         const trie = Trie.create(sampleWords);
-        const sr = [...Sug.genSuggestions(trie.root, 'joyfull')].sort(Sug.compSuggestionResults);
+        const sugs = [...Sug.genSuggestions(trie.root, 'joyfull')];
+        const sr = sugs.sort(Sug.compSuggestionResults);
         const suggestions = sr.map(s => s && s.word);
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
     });
@@ -171,6 +172,28 @@ describe('Validate Suggest', () => {
             .add({ word: 'joyful', cost: 85 });
         expect(collector.suggestions.length).to.be.equal(3);
         expect(collector.suggestions[0].cost).to.be.equal(75);
+    });
+
+    it('Test that accents are closer', () => {
+        const trie = Trie.create(sampleWords);
+        // cspell:ignore wålk
+        const collector = Sug.suggestionCollector('wålk', 3);
+        collector.collect(
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
+        );
+        const suggestions = collector.suggestions.map(s => s.word);
+        expect(suggestions).to.deep.equal(['walk', 'walks', 'talk']);
+    });
+
+    it('Test that accents are closer', () => {
+        const trie = Trie.create(sampleWords);
+        // cspell:ignore wâlkéd
+        const collector = Sug.suggestionCollector('wâlkéd', 3);
+        collector.collect(
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
+        );
+        const suggestions = collector.suggestions.map(s => s.word);
+        expect(suggestions).to.deep.equal(['walked', 'walker', 'talked']);
     });
 });
 

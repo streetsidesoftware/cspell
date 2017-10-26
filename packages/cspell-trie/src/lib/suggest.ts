@@ -10,6 +10,10 @@ const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
 const insertSpaceCost = -1;
+const mapSubCost = 10;
+
+const intl = new Intl.Collator('en', { sensitivity: 'base' });
+const fnComp = intl.compare;
 
 const setOfSeparators = new Set([ JOIN_SEPARATOR, WORD_SEPARATOR ]);
 
@@ -27,14 +31,14 @@ export interface SuggestionResult {
     cost: Cost;
 }
 
-export interface SuggestionIterator extends IterableIterator<SuggestionResult | undefined> {
+export interface SuggestionIterator extends IterableIterator<SuggestionResult> {
     /**
      * Ask for the next result.
      * maxCost - sets the max cost for following suggestions
      * This is used to limit which suggestions are emitted.
      * If the iterator.next() returns `undefined`, it is to request a value for maxCost.
      */
-    next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult | undefined>;
+    next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult>;
     [Symbol.iterator]: () => SuggestionIterator;
 }
 
@@ -155,7 +159,11 @@ export function* genCompoundableSuggestions(
             const curLetter = x[i];
             const subCost = (w === curLetter)
                 ? 0
-                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
+                : !fnComp(w, curLetter)
+                ? mapSubCost
+                : curLetter === lastSugLetter
+                ? (w === lastLetter ? psc : c)
+                : c;
             const e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
                 matrix[d - 1][i    ] + ci,      // insert
@@ -173,7 +181,11 @@ export function* genCompoundableSuggestions(
             const curLetter = x[i];
             const subCost = (w === curLetter)
                 ? 0
-                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
+                : !fnComp(w, curLetter)
+                ? mapSubCost
+                : curLetter === lastSugLetter
+                ? (w === lastLetter ? psc : c)
+                : c;
             const e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
                 matrix[d    ][i - 1] + c        // delete
