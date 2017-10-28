@@ -1,5 +1,10 @@
 # Release Notes
 
+## 2.0.0
+- Move to ES2017 for speed improvements.
+- Require node >= 8
+- Improve suggestion when accents are involved.
+
 ## 1.6.7 - 1.6.9
 - Improve the speed of generating suggestions for long compound words.
 
