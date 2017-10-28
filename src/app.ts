@@ -5,7 +5,7 @@ import * as program from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 import { CSpellApplicationOptions, AppError } from './application';
 import * as App from './application';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 interface Options extends CSpellApplicationOptions {}
 interface TraceOptions extends App.TraceOptions {}
