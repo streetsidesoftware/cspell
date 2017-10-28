@@ -16,7 +16,7 @@ describe('Validate English', function() {
 
         // cspell:ignore installsallnecessary
         return dict.then(dict => {
-            const results = dict.suggest('installsallnecessary', 10, cspell.CompoundWordsMethod.SEPARATE_WORDS);
+            const results = dict.suggest('installsallnecessary', 5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 2);
             const sugs = results.map(a => a.word);
             expect(sugs).to.contain('installs all necessary');
         });

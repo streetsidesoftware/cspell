@@ -18,7 +18,7 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 export interface SpellingDictionary {
     readonly name: string;
     has(word: string, useCompounds?: boolean): boolean;
-    suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod): SuggestionResult[];
+    suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
     mapWord(word: string): string;
     readonly size: number;
@@ -57,10 +57,11 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
     public suggest(
         word: string,
         numSuggestions?: number,
-        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
+        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS,
+        numChanges?: number
     ): SuggestionResult[] {
         word = this.mapWord(word).toLowerCase();
-        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions, compoundMethod);
+        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions, compoundMethod, numChanges);
     }
 
     public genSuggestions(
@@ -149,11 +150,12 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     public suggest(
         word: string,
         numSuggestions?: number,
-        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
+        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS,
+        numChanges?: number
     ): SuggestionResult[] {
         word = this.mapWord(word).toLowerCase();
         compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions, compoundMethod);
+        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions, compoundMethod, numChanges);
     }
 
     public genSuggestions(

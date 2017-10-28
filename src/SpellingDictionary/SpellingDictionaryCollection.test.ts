@@ -71,7 +71,7 @@ describe('Verify using multiple dictionaries', () => {
 
         // cspell:ignore appletango applemango
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
-        const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS);
+        const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS, 2);
         const sugs = sugResult.map(a => a.word);
         expect(sugs).to.be.not.empty;
         expect(sugs).to.not.contain('apple+mango');

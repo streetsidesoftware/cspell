@@ -26,11 +26,16 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         return !this.wordsToFlag.has(word) && isWordInAnyDictionary(this.dictionaries, word, useCompounds);
     }
 
-    public suggest(word: string, numSuggestions: number, compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS): SuggestionResult[] {
+    public suggest(
+        word: string,
+        numSuggestions: number,
+        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS,
+        numChanges?: number
+    ): SuggestionResult[] {
         word = word.toLowerCase();
         compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
         const collector = this.genSuggestions(
-            suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word) ),
+            suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word), numChanges ),
             compoundMethod,
         );
         return collector.suggestions;
