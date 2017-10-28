@@ -2,6 +2,7 @@ import {TrieNode} from './TrieNode';
 import {isWordTerminationNode} from './util';
 import {CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
 export {CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
+import {visualLetterMap} from './orthography';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -11,9 +12,6 @@ const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
 const insertSpaceCost = -1;
 const mapSubCost = 10;
-
-const intl = new Intl.Collator('en', { sensitivity: 'base' });
-const fnComp = intl.compare;
 
 const setOfSeparators = new Set([ JOIN_SEPARATOR, WORD_SEPARATOR ]);
 
@@ -109,6 +107,7 @@ export function* genCompoundableSuggestions(
         const {text, node, depth} = r.value;
         let {a, b} = stack[depth];
         const w = text.slice(-1);
+        const wG = visualLetterMap.get(w) || -1;
         if (setOfSeparators.has(w)) {
             const mxRange = matrix[depth].slice(a, b + 1);
             const mxMin = Math.min(...mxRange);
@@ -157,9 +156,10 @@ export function* genCompoundableSuggestions(
         // calc the core letters
         for (i = a + 1; i <= b; ++i) {
             const curLetter = x[i];
+            const cG = visualLetterMap.get(curLetter) || -2;
             const subCost = (w === curLetter)
                 ? 0
-                : !fnComp(w, curLetter)
+                : wG === cG
                 ? mapSubCost
                 : curLetter === lastSugLetter
                 ? (w === lastLetter ? psc : c)
@@ -179,9 +179,10 @@ export function* genCompoundableSuggestions(
         if (b <= mx) {
             i = b;
             const curLetter = x[i];
+            const cG = visualLetterMap.get(curLetter) || -2;
             const subCost = (w === curLetter)
                 ? 0
-                : !fnComp(w, curLetter)
+                : wG === cG
                 ? mapSubCost
                 : curLetter === lastSugLetter
                 ? (w === lastLetter ? psc : c)
@@ -217,7 +218,6 @@ export function* genCompoundableSuggestions(
     // console.log(`tag size: ${historyTags.size}, history size: ${history.length}`);
     // console.log(history.map((r, i) => `${i} ${r.cost} ${r.word}`).join('\n'));
 }
-
 
 // comparison function for Suggestion Results.
 export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
