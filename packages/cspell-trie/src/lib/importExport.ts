@@ -48,6 +48,7 @@ function flattenToReferences(node: TrieNode): Sequence<TrieNode> {
                 }
 
                 // Fix up the parent
+                /* istanbul ignore else */
                 if (leaf.p && leaf.p.c) {
                     leaf.p.r = leaf.p.r || new RefMap();
                     leaf.p.r.set(leaf.k, m);
@@ -156,6 +157,7 @@ export function importTrieRx(lines: Rx.Observable<string>): Rx.Observable<TrieNo
         .subscribe(headerRows => {
             const header = headerRows.join('\n');
             const headerReg = /^TrieXv1\nbase=(\d+)$/;
+            /* istanbul ignore if */
             if (!headerReg.test(header)) throw new Error('Unknown file format');
             radix = Number.parseInt(header.replace(headerReg, '$1'), 10);
         });
