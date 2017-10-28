@@ -25,7 +25,7 @@ describe('Validate English Suggestions', function() {
     it('Tests suggestions', function() {
         this.timeout(timeout);
         return getTrie().then(trie => {
-            const collector = suggestionCollector('joyful', 8);
+            const collector = suggestionCollector('joyful', 8, undefined, 1);
             collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
@@ -35,7 +35,6 @@ describe('Validate English Suggestions', function() {
             const suggestions = results.map(s => s.word);
             expect(suggestions).to.contain('joyful');
             expect(suggestions[0]).to.be.equal('joyful');
-            expect(suggestions).to.be.length(collector.maxNumSuggestions);
         });
     });
 
@@ -62,7 +61,7 @@ describe('Validate English Suggestions', function() {
         this.timeout(timeout);
         return getTrie().then(trie => {
             // cspell:ignore onetwothreefour
-            const collector = suggestionCollector('onetwothreefour', 8);
+            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3.3);
             collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
@@ -80,7 +79,7 @@ describe('Validate English Suggestions', function() {
         this.timeout(timeout);
         return getTrie().then(trie => {
             // cspell:ignore onetwothrefour
-            const collector = suggestionCollector('onetwothreefour', 8);
+            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
             collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
@@ -97,7 +96,7 @@ describe('Validate English Suggestions', function() {
         this.timeout(timeout);
         return getTrie().then(trie => {
             // cspell:ignore onetwothrefour
-            const collector = suggestionCollector('onetwothreefour', 8);
+            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
             collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,
@@ -115,7 +114,7 @@ describe('Validate English Suggestions', function() {
         this.timeout(timeout * 2);
         return getTrie().then(trie => {
             // cspell:ignore testscompundsuggestions
-            const collector = suggestionCollector('testscompundsuggestions', 1);
+            const collector = suggestionCollector('testscompundsuggestions', 1, undefined, 3);
             collector.collect(genCompoundableSuggestions(
                 trie.root,
                 collector.word,

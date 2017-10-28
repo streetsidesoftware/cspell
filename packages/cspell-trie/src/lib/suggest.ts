@@ -45,8 +45,9 @@ export function suggest(
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions,
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
+    numChanges: number = maxNumChanges,
 ): SuggestionResult[] {
-    const collector = suggestionCollector(word, maxNumSuggestions);
+    const collector = suggestionCollector(word, maxNumSuggestions, undefined, numChanges);
     collector.collect(genSuggestions(root, word, compoundMethod));
     return collector.suggestions;
 }

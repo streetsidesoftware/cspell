@@ -69,9 +69,14 @@ export class Trie {
 
     /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
+     * @param text - the text to search for
+     * @param maxNumSuggestions - the maximum number of suggestions to return.
+     * @param compoundMethod - Use to control splitting words.
+     * @param numChanges - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
+     *                      the lower the value, the faster results are returned. Values less than 4 are best.
      */
-    suggest(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod): string[] {
-        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod)
+    suggest(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): string[] {
+        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges)
             .map(a => a.word);
     }
 
@@ -80,8 +85,8 @@ export class Trie {
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
-    suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod): SuggestionResult[] {
-        return suggest(this.root, text, maxNumSuggestions, compoundMethod);
+    suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[] {
+        return suggest(this.root, text, maxNumSuggestions, compoundMethod, numChanges);
     }
 
     /**
@@ -93,6 +98,9 @@ export class Trie {
         collector.collect(genSuggestions(this.root, collector.word, compoundMethod));
     }
 
+    /**
+     * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
+     */
     words(): Sequence<string> {
         return iteratorTrieWords(this.root);
     }
