@@ -42,20 +42,24 @@ export function generateExclusionFunctionForUri(globs: Glob[], root: string): Ex
         return false;
     }
 
-    function testUriPath(uriPath: string): boolean {
-        const uri = Uri.parse(uriPath);
+    function testUri(uri: Uri): boolean {
         if (!allowedSchemes.has(uri.scheme)) {
             return true;
         }
 
         const relativeRoot = uri.path.slice(0, rootUri.path.length);
         if (relativeRoot === rootUri.path) {
-            const relativeToRoot = uriPath.slice(rootUri.path.length);
+            const relativeToRoot = uri.path.slice(rootUri.path.length);
             return testPathStepByStep(relativeToRoot);
         }
 
         // the uri is not relative to the root.
         return testPathStepByStep(uri.path);
+    }
+
+    function testUriPath(uriPath: string): boolean {
+        const uri = Uri.parse(uriPath);
+        return testUri(uri);
     }
     return testUriPath;
 }
