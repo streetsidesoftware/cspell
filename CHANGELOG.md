@@ -1,5 +1,11 @@
 # Release Notes
 
+## [2.0.4]
+- Update Python dictionary
+
+## [2.0.0]
+- Better support for checking compound words.
+
 ## [1.10.5]
 - Migrate PHP dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
 - Migrate C++ dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
