@@ -1,5 +1,8 @@
 # Release Notes
 
+## [latest]
+- Experiment with improved suggestion speed.
+
 ## [2.0.4]
 - Update Python dictionary
 
