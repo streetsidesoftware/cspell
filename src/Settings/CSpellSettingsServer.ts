@@ -4,7 +4,7 @@ import {CSpellUserSettingsWithComments, CSpellUserSettings, RegExpPatternDefinit
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
-import * as ConfigStore from 'configstore';
+import * as ConfigStore from 'configstore-fork';
 import * as minimatch from 'minimatch';
 
 const currentSettingsFileVersion = '0.1';
