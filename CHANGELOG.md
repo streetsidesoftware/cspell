@@ -1,6 +1,9 @@
 # Release Notes
 
 ## [latest]
+
+## [2.0.5]
+- Use `configstore-fork` to enable cspell usage in a CI environment [#25](https://github.com/Jason3S/cspell/issues/25)
 - Experiment with improved suggestion speed.
 
 ## [2.0.4]
