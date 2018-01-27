@@ -17,6 +17,8 @@ test_script:
   # run tests
   - npm test
   - npm run test-spec
+  # run app
+  - node ./dist/app.js trace test
 
 # Don't actually build.
 build: off
