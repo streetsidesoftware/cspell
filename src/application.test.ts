@@ -46,6 +46,14 @@ describe('Validate the Application', function() {
                 expect(result.files).equals(1);
             });
     });
+
+    it('Tests running the trace command', async () => {
+        const result = await App.trace(['apple'], {});
+        expect(result.length).to.be.greaterThan(2);
+
+        const foundIn = result.filter(r => r.found).map(r => r.dictName);
+        expect(foundIn).to.contain('en_US.trie.gz');
+    });
 });
 
 
