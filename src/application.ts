@@ -6,7 +6,7 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
-import { traceWords } from './index';
+import { traceWords, TraceResult } from './index';
 
 // cspell:word nocase
 
@@ -244,7 +244,7 @@ Options:
 }
 
 
-export async function trace(words: string[], options: TraceOptions) {
+export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
 
