@@ -12,6 +12,9 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     readonly options: SpellingDictionaryOptions = {};
     readonly mapWord = (word: string) => word;
     readonly wordsToFlag: Set<string>;
+    readonly type = 'SpellingDictionaryCollection';
+    readonly source: string;
+
     constructor(
         readonly dictionaries: SpellingDictionary[],
         readonly name: string,
@@ -19,6 +22,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     ) {
         this.dictionaries = this.dictionaries.filter(a => !!a.size);
         this.wordsToFlag = new Set(wordsToFlag.map(w => w.toLowerCase()));
+        this.source = dictionaries.map(d => d.name).join(', ');
     }
 
     public has(word: string, useCompounds?: boolean) {

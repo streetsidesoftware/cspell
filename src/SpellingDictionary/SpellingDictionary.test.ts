@@ -11,7 +11,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
 
-        return createSpellingDictionaryRx(Rx.Observable.from(words), 'test')
+        return createSpellingDictionaryRx(Rx.Observable.from(words), 'test', 'test')
             .then(dict => {
                 expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
                 if (dict instanceof SpellingDictionaryFromSet) {
@@ -31,7 +31,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
 
-        const dict = createSpellingDictionary(words, 'words');
+        const dict = createSpellingDictionary(words, 'words', 'test');
         expect(dict.name).to.be.equal('words');
         expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
         if (dict instanceof SpellingDictionaryFromSet) {
@@ -50,7 +50,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
 
-        const dict = createSpellingDictionary(words, 'words', { useCompounds: true });
+        const dict = createSpellingDictionary(words, 'words', 'test', { useCompounds: true });
         expect(dict.has('apple')).to.be.true;
         // cspell:ignore applebanana applebananas applebananaorange
         expect(dict.has('applebanana')).to.be.true;
@@ -77,7 +77,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'
         ];
 
-        return createSpellingDictionaryRx(Rx.Observable.from(words as string[]), 'test')
+        return createSpellingDictionaryRx(Rx.Observable.from(words as string[]), 'test', 'test')
             .then(dict => {
                 expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
                 if (dict instanceof SpellingDictionaryFromSet) {
@@ -97,7 +97,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'
         ];
 
-        const dict = createSpellingDictionary(words as string[], 'words');
+        const dict = createSpellingDictionary(words as string[], 'words', 'test');
         expect(dict.name).to.be.equal('words');
         expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
         if (dict instanceof SpellingDictionaryFromSet) {

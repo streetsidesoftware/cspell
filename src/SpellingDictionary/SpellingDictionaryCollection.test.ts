@@ -10,9 +10,9 @@ describe('Verify using multiple dictionaries', () => {
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
     it('checks for existence', () => {
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA'),
-            createSpellingDictionary(wordsB, 'wordsB'),
-            createSpellingDictionary(wordsC, 'wordsC'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ];
 
         const dictCollection = new SpellingDictionaryCollection(dicts, 'test', ['Avocado']);
@@ -27,9 +27,9 @@ describe('Verify using multiple dictionaries', () => {
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         const dicts = [
             trie,
-            createSpellingDictionary(wordsB, 'wordsB'),
-            createSpellingDictionary(wordsA, 'wordsA'),
-            createSpellingDictionary(wordsC, 'wordsC'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
@@ -46,9 +46,9 @@ describe('Verify using multiple dictionaries', () => {
         trie.options.useCompounds = true;
         const dicts = [
             trie,
-            createSpellingDictionary(wordsB, 'wordsB'),
-            createSpellingDictionary(wordsA, 'wordsA'),
-            createSpellingDictionary(wordsC, 'wordsC'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ];
 
         // cspell:ignore appletango applemango
@@ -64,9 +64,9 @@ describe('Verify using multiple dictionaries', () => {
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         const dicts = [
             trie,
-            createSpellingDictionary(wordsB, 'wordsB'),
-            createSpellingDictionary(wordsA, 'wordsA'),
-            createSpellingDictionary(wordsC, 'wordsC'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ];
 
         // cspell:ignore appletango applemango
@@ -80,10 +80,10 @@ describe('Verify using multiple dictionaries', () => {
 
     it('checks for suggestions with flagged words', () => {
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA'),
-            createSpellingDictionary(wordsB, 'wordsB'),
-            createSpellingDictionary(wordsA, 'wordsA'),
-            createSpellingDictionary(wordsC, 'wordsC'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
@@ -93,9 +93,9 @@ describe('Verify using multiple dictionaries', () => {
 
     it('checks for suggestions from mixed sources', () => {
         return Promise.all([
-            createSpellingDictionaryRx(Rx.Observable.from(wordsA), 'wordsA'),
-            createSpellingDictionary(wordsB, 'wordsB'),
-            createSpellingDictionary(wordsC, 'wordsC'),
+            createSpellingDictionaryRx(Rx.Observable.from(wordsA), 'wordsA', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ])
         .then(dicts => {
             const dictCollection = new SpellingDictionaryCollection(dicts, 'test', []);
@@ -119,9 +119,9 @@ describe('Verify using multiple dictionaries', () => {
 
     it('creates using createCollectionP', () => {
         const dicts = [
-            Promise.resolve(createSpellingDictionary(wordsA, 'wordsA')),
-            Promise.resolve(createSpellingDictionary(wordsB, 'wordsB')),
-            Promise.resolve(createSpellingDictionary(wordsC, 'wordsC')),
+            Promise.resolve(createSpellingDictionary(wordsA, 'wordsA', 'test')),
+            Promise.resolve(createSpellingDictionary(wordsB, 'wordsB', 'test')),
+            Promise.resolve(createSpellingDictionary(wordsC, 'wordsC', 'test')),
         ];
 
         return createCollectionP(dicts, 'test', []).then(dictCollection => {

@@ -1,6 +1,7 @@
 # Release Notes
 
-## [latest]
+## [2.0.6]
+- Add `trace` command to the cli. This makes it easier to see if a word exists in one of the dictionaries
 
 ## [2.0.5]
 - Use `configstore-fork` to enable cspell usage in a CI environment [#25](https://github.com/Jason3S/cspell/issues/25)

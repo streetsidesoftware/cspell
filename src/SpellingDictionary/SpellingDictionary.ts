@@ -17,6 +17,8 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export interface SpellingDictionary {
     readonly name: string;
+    readonly type: string;
+    readonly source: string;
     has(word: string, useCompounds?: boolean): boolean;
     suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
@@ -35,8 +37,14 @@ const defaultSuggestions = 10;
 export class SpellingDictionaryFromSet implements SpellingDictionary {
     private _trie: Trie;
     readonly mapWord: (word: string) => string;
+    readonly type = 'SpellingDictionaryFromSet';
 
-    constructor(readonly words: Set<string>, readonly name: string, readonly options: SpellingDictionaryOptions = {}) {
+    constructor(
+        readonly words: Set<string>,
+        readonly name: string,
+        readonly options: SpellingDictionaryOptions = {},
+        readonly source = 'Set of words',
+    ) {
         this.mapWord = createMapper(options.repMap || []);
     }
 
@@ -76,22 +84,32 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
     }
 }
 
-export function createSpellingDictionary(wordList: string[] | IterableLike<string>, name: string, options?: SpellingDictionaryOptions): SpellingDictionary {
+export function createSpellingDictionary(
+    wordList: string[] | IterableLike<string>,
+    name: string,
+    source: string,
+    options?: SpellingDictionaryOptions
+): SpellingDictionary {
     const words = new Set(genSequence(wordList)
         .filter(word => typeof word === 'string')
         .map(word => word.toLowerCase().trim())
         .filter(word => !!word)
     );
-    return new SpellingDictionaryFromSet(words, name, options);
+    return new SpellingDictionaryFromSet(words, name, options, source);
 }
 
-export function createSpellingDictionaryRx(words: Rx.Observable<string>, name: string, options?: SpellingDictionaryOptions): Promise<SpellingDictionary> {
+export function createSpellingDictionaryRx(
+    words: Rx.Observable<string>,
+    name: string,
+    source: string,
+    options?: SpellingDictionaryOptions
+): Promise<SpellingDictionary> {
     const promise = words
         .filter(word => typeof word === 'string')
         .map(word => word.toLowerCase().trim())
         .filter(word => !!word)
         .reduce((words, word) => words.add(word), new Set<string>())
-        .map(words => new SpellingDictionaryFromSet(words, name, options))
+        .map(words => new SpellingDictionaryFromSet(words, name, options, source))
         .toPromise();
     return promise;
 }
@@ -102,8 +120,14 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly knownWords = new Set<string>();
     readonly unknownWords = new Set<string>();
     readonly mapWord: (word: string) => string;
+    readonly type = 'SpellingDictionaryFromTrie';
 
-    constructor(readonly trie: Trie, readonly name: string, readonly options: SpellingDictionaryOptions = {}) {
+    constructor(
+        readonly trie: Trie,
+        readonly name: string,
+        readonly options: SpellingDictionaryOptions = {},
+        readonly source = 'from trie',
+    ) {
         trie.root.f = 0;
         this.mapWord = createMapper(options.repMap || []);
     }
@@ -167,10 +191,15 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 }
 
-export function createSpellingDictionaryTrie(data: Rx.Observable<string>, name: string, options?: SpellingDictionaryOptions): Promise<SpellingDictionary> {
+export function createSpellingDictionaryTrie(
+    data: Rx.Observable<string>,
+    name: string,
+    source: string,
+    options?: SpellingDictionaryOptions
+): Promise<SpellingDictionary> {
     const promise = importTrieRx(data)
         .map(node => new Trie(node))
-        .map(trie => new SpellingDictionaryFromTrie(trie, name, options))
+        .map(trie => new SpellingDictionaryFromTrie(trie, name, options, source))
         .take(1)
         .toPromise();
     return promise;

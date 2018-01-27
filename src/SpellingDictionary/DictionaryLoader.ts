@@ -68,17 +68,17 @@ function load(uri: string, options: LoadOptions): Promise<SpellingDictionary>  {
 
 
 function loadSimpleWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename), path.basename(filename), options);
+    return createSpellingDictionaryRx(loadWordsRx(filename), path.basename(filename), filename, options);
 }
 
 function loadWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoWordsRx), path.basename(filename), options);
+    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoWordsRx), path.basename(filename), filename, options);
 }
 
 function loadCodeWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoCodeWordsRx), path.basename(filename), options);
+    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoCodeWordsRx), path.basename(filename), filename, options);
 }
 
 function loadTrie(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryTrie(loadWordsRx(filename), path.basename(filename), options);
+    return createSpellingDictionaryTrie(loadWordsRx(filename), path.basename(filename), filename, options);
 }

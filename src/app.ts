@@ -84,7 +84,10 @@ program
     .action((words: string[], options: TraceOptions) => {
         showHelp = false;
         App.trace(words, options).then(
-            () => process.exit(0),
+            result => {
+                result.forEach(emitTraceResult);
+                process.exit(0);
+            },
             (error: AppError) => {
                 console.error(error.message);
                 process.exit(1);
@@ -112,4 +115,29 @@ program.parse(process.argv);
 
 if (showHelp) {
     program.help();
+}
+
+function emitTraceResult(r: App.TraceResult) {
+    const widthSrc = 80;
+    const widthName = 20;
+    const w = chalk.green(r.word);
+    const f = r.found
+        ? chalk.whiteBright('*')
+        : chalk.dim('-');
+    const n = chalk.yellowBright(pad(r.dictName, widthName));
+    const s = chalk.white(trimMid(r.dictSource, widthSrc));
+    console.log([w, f, n, s].join(' '));
+}
+
+function pad(s: string, w: number): string {
+    return (s + ' '.repeat(w)).substr(0, w);
+}
+
+function trimMid(s: string, w: number): string {
+    if (s.length <= w) {
+        return s;
+    }
+    const l = Math.floor((w + 3) / 2);
+    const r = Math.ceil((w + 3) / 2);
+    return s.substr(0, l) + '...' + s.substr(-r);
 }
