@@ -1,5 +1,8 @@
 # Release Notes
 
+## [2.0.8]
+- Allow variable width output for trace based upon the terminal width.
+
 ## [2.0.6]
 - Add `trace` command to the cli. This makes it easier to see if a word exists in one of the dictionaries
 
