@@ -1,5 +1,8 @@
 # Release Notes
 
+## [2.0.9]
+- Correct the CSpellUserSettings interface for compatibility
+
 ## [2.0.8]
 - Allow variable width output for trace based upon the terminal width.
 

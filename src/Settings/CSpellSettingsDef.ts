@@ -8,11 +8,11 @@ export {ReplaceMap} from '../util/repMap';
 export interface CSpellPackageSettings extends CSpellUserSettings {
 }
 
-export interface CSpellSettings extends CSpellUserSettings {
+export interface CSpellUserSettings extends CSpellSettings {}
+
+export interface CSpellSettings extends FileSettings, LegacySettings {
     source?: Source;
 }
-
-export interface CSpellUserSettings extends FileSettings, LegacySettings {}
 
 export interface FileSettings extends ExtendableSettings {
     // Version of the setting file.
