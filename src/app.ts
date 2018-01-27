@@ -118,15 +118,19 @@ if (showHelp) {
 }
 
 function emitTraceResult(r: App.TraceResult) {
-    const widthSrc = 80;
+    const terminalWidth = process.stdout.columns || 120;
     const widthName = 20;
     const w = chalk.green(r.word);
     const f = r.found
         ? chalk.whiteBright('*')
         : chalk.dim('-');
     const n = chalk.yellowBright(pad(r.dictName, widthName));
+    const used = [r.word.length, 1, widthName].reduce((a, b) => a + b, 3);
+    const widthSrc = terminalWidth - used;
     const s = chalk.white(trimMid(r.dictSource, widthSrc));
-    console.log([w, f, n, s].join(' '));
+    const line = [w, f, n, s].join(' ');
+    console.log(line);
+
 }
 
 function pad(s: string, w: number): string {
@@ -137,7 +141,7 @@ function trimMid(s: string, w: number): string {
     if (s.length <= w) {
         return s;
     }
-    const l = Math.floor((w + 3) / 2);
-    const r = Math.ceil((w + 3) / 2);
+    const l = Math.floor((w - 3) / 2);
+    const r = Math.ceil((w - 3) / 2);
     return s.substr(0, l) + '...' + s.substr(-r);
 }
