@@ -6,9 +6,11 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
-import { CSpellUserSettings } from './index';
+import { traceWords } from './index';
 
 // cspell:word nocase
+
+export { TraceResult } from './index';
 
 export interface CSpellApplicationOptions {
     verbose?: boolean;
@@ -242,52 +244,17 @@ Options:
 }
 
 
-export interface TraceResult {
-    word: string;
-    found: boolean;
-    dictName: string;
-    dictSource: string;
-    configSource: string;
-}
-
 export async function trace(words: string[], options: TraceOptions) {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
 
-    const configs = await globRx(configGlob, configGlobOptions)
+    const results = await globRx(configGlob, configGlobOptions)
         .map(util.unique)
         .map(filenames => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)}))
         .map(({filename, config}) => ({filename, config: cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), config)}))
+        .flatMap(config => traceWords(words, config.config))
         .toArray()
         .toPromise();
-
-    const results: TraceResult[] = await Rx.Observable.from(words)
-        // Combine the words with the configs
-        .flatMap(word => configs.map(config => ({ word, config })))
-        // Load the dictionaries
-        .flatMap(async ({word, config}) => {
-            const settings = cspell.finalizeSettings(config.config);
-            const dictionaries = (settings.dictionaries || [])
-                .concat((settings.dictionaryDefinitions || []).map(d => d.name))
-                .filter(util.uniqueFn)
-            ;
-            const dictSettings: CSpellUserSettings = {...settings, dictionaries };
-            const dicts = await cspell.getDictionary(dictSettings);
-            return { word, config, dicts };
-        })
-        // Search each dictionary for the word
-        .flatMap(({word, config, dicts}) => {
-            return dicts.dictionaries.map(dict => ({
-                word,
-                found: dict.has(word),
-                dictName: dict.name,
-                dictSource: dict.source,
-                configSource: config.filename,
-            }));
-        })
-        .toArray()
-        .toPromise()
-        ;
 
     return results;
 }

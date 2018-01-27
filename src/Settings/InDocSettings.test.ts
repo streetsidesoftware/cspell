@@ -1,10 +1,7 @@
 import { expect } from 'chai';
-import { mergeInDocSettings } from './CSpellSettingsServer';
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';
 import * as InDoc from './InDocSettings';
-
-const emptySettings = mergeInDocSettings({}, {});
 
 describe('Validate InDocSettings', () => {
     it('tests matching settings', () => {
@@ -31,19 +28,13 @@ describe('Validate InDocSettings', () => {
 
     it('tests extracting in file settings for compound words', () => {
         expect(InDoc.getInDocumentSettings('')).to.deep.equal({});
-        expect(InDoc.getInDocumentSettings('cSpell:enableCompoundWords'), 'cSpell:enableCompoundWords')
-            .to.deep.equal({...emptySettings,  allowCompoundWords: true });
-        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords'), 'cSpell:ENABLECompoundWords')
-            .to.deep.equal({...emptySettings,  allowCompoundWords: true });
-        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords'), 'cSpell:disableCompoundWords')
-            .to.deep.equal({...emptySettings,  allowCompoundWords: false });
-        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWORDS'), 'cSpell:disableCompoundWORDS')
-            .to.deep.equal({...emptySettings, allowCompoundWords: false });
-        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords'))
-            .to.deep.equal({...emptySettings, allowCompoundWords: false });
-        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords\ncSpell:enableCompoundWords'))
-            .to.deep.equal({...emptySettings, allowCompoundWords: true });
-        expect(InDoc.getInDocumentSettings(sampleText)).to.deep.equal({...emptySettings, allowCompoundWords: true });
+        expect(InDoc.getInDocumentSettings('cSpell:enableCompoundWords').allowCompoundWords, 'cSpell:enableCompoundWords').to.be.true;
+        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords').allowCompoundWords, 'cSpell:ENABLECompoundWords').to.be.true;
+        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords').allowCompoundWords, 'cSpell:disableCompoundWords').to.be.false;
+        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWORDS').allowCompoundWords, 'cSpell:disableCompoundWORDS').to.be.false;
+        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords').allowCompoundWords).to.be.false;
+        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords\ncSpell:enableCompoundWords').allowCompoundWords).to.be.true;
+        expect(InDoc.getInDocumentSettings(sampleText).allowCompoundWords).to.be.true;
         expect(InDoc.getInDocumentSettings(sampleCode).allowCompoundWords).to.be.true;
     });
 

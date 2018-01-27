@@ -8,6 +8,10 @@ export {ReplaceMap} from '../util/repMap';
 export interface CSpellPackageSettings extends CSpellUserSettings {
 }
 
+export interface CSpellSettings extends CSpellUserSettings {
+    source?: Source;
+}
+
 export interface CSpellUserSettings extends FileSettings, LegacySettings {}
 
 export interface FileSettings extends ExtendableSettings {
@@ -246,3 +250,8 @@ export interface CSpellUserSettingsWithComments extends CSpellUserSettings {
     '//$'?: string[];
 }
 
+export interface Source {
+    name: string;
+    filename?: string;
+    sources?: CSpellSettings[];
+}

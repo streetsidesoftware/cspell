@@ -1,8 +1,9 @@
-import { CSpellUserSettings, RegExpPatternDefinition, DictionaryDefinition } from './CSpellSettingsDef';
+import { CSpellSettings, RegExpPatternDefinition, DictionaryDefinition } from './CSpellSettingsDef';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';
 import * as Path from 'path';
+import { mergeSettings } from './index';
 
 // cspell:ignore filetypes
 
@@ -56,8 +57,9 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
 ];
 
 
-const defaultSettings: CSpellUserSettings = {
+export const _defaultSettings: CSpellSettings = {
     language: 'en',
+    name: 'Static Defaults',
     enabled: true,
     enabledLanguageIds: [
         'csharp', 'go', 'javascript', 'javascriptreact', 'json', 'markdown',
@@ -75,18 +77,21 @@ const defaultSettings: CSpellUserSettings = {
     ignoreRegExpList: defaultRegExpExcludeList,
     languageSettings: LanguageSettings.getDefaultLanguageSettings(),
     dictionaryDefinitions: defaultDictionaryDefs,
+    source: {name: 'defaultSettings'},
 };
 
 const getSettings = function() {
-    let settings: CSpellUserSettings | undefined = undefined;
+    let settings: CSpellSettings | undefined = undefined;
     return function() {
         if (!settings) {
-            settings = readSettings(defaultConfigFile, defaultSettings);
+            const jsonSettings = readSettings(defaultConfigFile);
+            settings = mergeSettings(_defaultSettings, jsonSettings);
+            settings.name = jsonSettings.name || settings.name;
         }
         return settings!;
     };
 }();
 
-export function getDefaultSettings(): CSpellUserSettings {
-    return {...getSettings()};
+export function getDefaultSettings(): CSpellSettings {
+    return getSettings();
 }

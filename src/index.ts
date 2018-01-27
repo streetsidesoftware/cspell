@@ -34,3 +34,4 @@ export {
 } from './exclusionHelper';
 
 export { getLanguagesForExt } from './LanguageIds';
+export * from './trace';

@@ -1,11 +1,18 @@
 import * as fs from 'fs';
 import * as json from 'comment-json';
-import {CSpellUserSettingsWithComments, CSpellUserSettings, RegExpPatternDefinition, Glob} from './CSpellSettingsDef';
+import {
+    CSpellUserSettingsWithComments,
+    CSpellSettings,
+    RegExpPatternDefinition,
+    Glob,
+    Source,
+} from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
 import * as ConfigStore from 'configstore-fork';
 import * as minimatch from 'minimatch';
+import { finalize } from 'rxjs/operators/finalize';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -19,11 +26,11 @@ const defaultSettings: CSpellUserSettingsWithComments = {
     version: currentSettingsFileVersion,
 };
 
-let globalSettings: CSpellUserSettings | undefined;
+let globalSettings: CSpellSettings | undefined;
 
-const cachedFiles = new Map<string, CSpellUserSettings>();
+const cachedFiles = new Map<string, CSpellSettings>();
 
-function readJsonFile(file: string): CSpellUserSettings {
+function readJsonFile(file: string): CSpellSettings {
     try {
         return json.parse(fs.readFileSync(file).toString());
     }
@@ -33,7 +40,7 @@ function readJsonFile(file: string): CSpellUserSettings {
     return {};
 }
 
-function normalizeSettings(settings: CSpellUserSettings, pathToSettings: string) {
+function normalizeSettings(settings: CSpellSettings, pathToSettings: string): CSpellSettings {
     // Fix up dictionaryDefinitions
     const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettings);
     const languageSettings = (settings.languageSettings || [])
@@ -45,33 +52,41 @@ function normalizeSettings(settings: CSpellUserSettings, pathToSettings: string)
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
 
     const fileSettings = {...settings, dictionaryDefinitions, languageSettings};
-    const importedSettings: CSpellUserSettings = imports
+    if (!imports.length) {
+        return fileSettings;
+    }
+    const importedSettings: CSpellSettings = imports
         .map(name => resolveFilename(name, pathToSettings))
         .map(name => importSettings(name))
-        .reduce((a, b) => mergeSettings(a, b), {});
+        .reduce((a, b) => mergeSettings(a, b));
     const finalizeSettings = mergeSettings(importedSettings, fileSettings);
+    finalizeSettings.name = settings.name || finalizeSettings.name || '';
+    finalizeSettings.id = settings.id || finalizeSettings.id || '';
     return finalizeSettings;
 }
 
-function importSettings(filename: string): CSpellUserSettings {
+function importSettings(filename: string, defaultValues: CSpellUserSettingsWithComments | CSpellSettings = defaultSettings): CSpellSettings {
     filename = path.resolve(filename);
     if (cachedFiles.has(filename)) {
         return cachedFiles.get(filename)!;
     }
     cachedFiles.set(filename, {}); // add an empty entry to prevent circular references.
-    const settings: CSpellUserSettings = readJsonFile(filename);
+    const settings: CSpellSettings = {...defaultValues as CSpellSettings, ...readJsonFile(filename)};
     const pathToSettings = path.dirname(filename);
 
     const finalizeSettings = normalizeSettings(settings, pathToSettings);
+    const finalizeSrc = finalizeSettings.source || {};
+    const name = finalize.name || path.basename(filename);
+    finalizeSettings.source = { ...finalizeSrc, filename, name };
     cachedFiles.set(filename, finalizeSettings);
     return finalizeSettings;
 }
 
-export function readSettings(filename: string, defaultValues: CSpellUserSettingsWithComments = defaultSettings): CSpellUserSettings {
-    return mergeSettings(defaultValues, importSettings(filename));
+export function readSettings(filename: string, defaultValues?: CSpellUserSettingsWithComments): CSpellSettings {
+    return importSettings(filename, defaultValues);
 }
 
-export function readSettingsFiles(filenames: string[]): CSpellUserSettings {
+export function readSettingsFiles(filenames: string[]): CSpellSettings {
     return filenames.map(filename => readSettings(filename)).reduce((a, b) => mergeSettings(a, b), defaultSettings);
 }
 
@@ -91,10 +106,26 @@ function replaceIfNotEmpty<T>(left: Array<T> = [], right: Array<T> = []) {
     return left;
 }
 
-export function mergeSettings(left: CSpellUserSettings, ...settings: CSpellUserSettings[]): CSpellUserSettings {
-    const rawSettings = settings.reduce((left, right) => ({
+export function mergeSettings(left: CSpellSettings, ...settings: CSpellSettings[]): CSpellSettings {
+    const rawSettings = settings.reduce(merge, left);
+    return util.clean(rawSettings);
+}
+
+function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
+    if (left === right) {
+        return left;
+    }
+    if (hasLeftAncestor(right, left)) {
+        return right;
+    }
+    if (hasRightAncestor(left, right)) {
+        return left;
+    }
+    return {
         ...left,
         ...right,
+        id: [left.id || '', right.id || ''].join('|'),
+        name: [left.name || '', right.name || ''].join('|'),
         words:     mergeList(left.words,     right.words),
         userWords: mergeList(left.userWords, right.userWords),
         flagWords: mergeList(left.flagWords, right.flagWords),
@@ -106,11 +137,27 @@ export function mergeSettings(left: CSpellUserSettings, ...settings: CSpellUserS
         dictionaries: mergeList(left.dictionaries, right.dictionaries),
         languageSettings: mergeList(left.languageSettings, right.languageSettings),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
-    }), left);
-    return util.clean(rawSettings);
+        source: mergeSources(left, right),
+    };
 }
 
-export function mergeInDocSettings(left: CSpellUserSettings, right: CSpellUserSettings): CSpellUserSettings {
+function hasLeftAncestor(s: CSpellSettings, left: CSpellSettings): boolean {
+    return hasAncestor(s, left, 0);
+}
+
+function hasRightAncestor(s: CSpellSettings, right: CSpellSettings): boolean {
+    return hasAncestor(s, right, 1);
+}
+
+function hasAncestor(s: CSpellSettings, ancestor: CSpellSettings, side: number): boolean {
+    return s.source
+        && s.source.sources
+        && s.source.sources[side]
+        && (s.source.sources[side] === ancestor || hasAncestor(s.source.sources[side], ancestor, side))
+        || false;
+}
+
+export function mergeInDocSettings(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
     const merged = {
         ...mergeSettings(left, right),
         includeRegExpList: mergeList(left.includeRegExpList, right.includeRegExpList),
@@ -118,7 +165,7 @@ export function mergeInDocSettings(left: CSpellUserSettings, right: CSpellUserSe
     return merged;
 }
 
-export function calcOverrideSettings(settings: CSpellUserSettings, filename: string): CSpellUserSettings {
+export function calcOverrideSettings(settings: CSpellSettings, filename: string): CSpellSettings {
     const overrides = settings.overrides || [];
 
     const result = overrides
@@ -127,14 +174,19 @@ export function calcOverrideSettings(settings: CSpellUserSettings, filename: str
     return result;
 }
 
-export function finalizeSettings(settings: CSpellUserSettings): CSpellUserSettings {
+export function finalizeSettings(settings: CSpellSettings): CSpellSettings {
     // apply patterns to any RegExpLists.
 
-    return {
+    const finalized = {
         ...settings,
         ignoreRegExpList: applyPatterns(settings.ignoreRegExpList, settings.patterns),
         includeRegExpList: applyPatterns(settings.includeRegExpList, settings.patterns),
     };
+
+    finalized.name = 'Finalized ' + (finalized.name || '');
+    finalized.source = { name: settings.name || 'src', sources: [settings] };
+
+    return finalized;
 }
 
 function applyPatterns(regExpList: (string | RegExp)[] = [], patterns: RegExpPatternDefinition[] = []): (string|RegExp)[] {
@@ -154,7 +206,7 @@ function resolveFilename(filename: string, relativeTo: string) {
     return path.isAbsolute(filename) ? filename : path.resolve(relativeTo, filename);
 }
 
-export function getGlobalSettings(): CSpellUserSettings {
+export function getGlobalSettings(): CSpellSettings {
     if (!globalSettings) {
         globalSettings = normalizeSettings(globalConf.all || {}, __dirname);
     }
@@ -177,4 +229,26 @@ export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[])
     const matches = globs
         .filter(g => minimatch(filename, g, { matchBase: true }));
     return matches.length > 0;
+}
+
+function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
+    const { source: a = { name: 'left'} } = left;
+    const { source: b = { name: 'right'} } = right;
+    return {
+        name: [left.name || a.name, right.name || b.name].join('|'),
+        sources: [left, right],
+    };
+}
+
+/**
+ * Return a list of Setting Sources used to create this Setting.
+ * @param settings settings to search
+ */
+export function getSources(settings: CSpellSettings): CSpellSettings[] {
+    if (!settings.source || !settings.source.sources || !settings.source.sources.length) {
+        return [settings];
+    }
+    const left = settings.source.sources[0];
+    const right = settings.source.sources[1];
+    return right ? getSources(left).concat(getSources(right)) : getSources(left);
 }

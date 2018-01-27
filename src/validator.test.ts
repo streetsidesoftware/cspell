@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import * as Validator from './validator';
 const loremIpsum = require('lorem-ipsum');
-import { CSpellUserSettings } from './Settings';
+import { CSpellSettings } from './Settings';
 import * as tds from './Settings/TextDocumentSettings';
 
 import { getDefaultSettings } from './Settings/DefaultSettings';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 
-const defaultSettings: CSpellUserSettings = { ...getDefaultSettings(), enabledLanguageIds: ['plaintext', 'javascript']};
+const defaultSettings: CSpellSettings = { ...getDefaultSettings(), enabledLanguageIds: ['plaintext', 'javascript']};
 
 function getSettings(text: string, languageId: string) {
     return tds.combineTextAndLanguageSettings(defaultSettings, text, languageId);
