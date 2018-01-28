@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { validateText, hasWordCheck } from './textValidator';
+import { validateText, hasWordCheck, calcTextInclusionRanges, calcIncludeExcludeList } from './textValidator';
 import { createCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
@@ -82,6 +82,39 @@ describe('Validate textValidator functions', () => {
         const dict2 = createSpellingDictionary(words, 'test', 'test');
         const result2 = [...validateText(text, dict2, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 })];
         expect(result2.length).to.be.equal(0);
+    });
+
+    it('tests inclusion, exclusion', () => {
+        const result = calcTextInclusionRanges(sampleText, {});
+        expect(result.length).to.be.equal(1);
+        expect(result.map(a => [a.startPos, a.endPos])).to.deep.equal([[0, sampleText.length]]);
+    });
+
+    it('tests inclusion, exclusion', () => {
+        const result = calcTextInclusionRanges(sampleText, { ignoreRegExpList: [/The/g]});
+        expect(result.length).to.be.equal(5);
+        expect(result.map(a => [a.startPos, a.endPos])).to.deep.equal([
+            [0, 5],
+            [8, 34],
+            [37, 97],
+            [100, 142],
+            [145, 196],
+        ]);
+    });
+
+    it('tests calcIncludeExcludeList', () => {
+        const includes = calcTextInclusionRanges(sampleText, { ignoreRegExpList: [/The/g]});
+        const result = calcIncludeExcludeList(sampleText, includes);
+        expect(result).to.be.length(9);
+        expect(result.join('')).to.be.equal(sampleText);
+    });
+
+    it('tests calcIncludeExcludeList exclude everything', () => {
+        const includes = calcTextInclusionRanges(sampleText, { ignoreRegExpList: [/(.|\s)+/]});
+        const result = calcIncludeExcludeList(sampleText, includes);
+        expect(result).to.be.length(2);
+        expect(result.join('')).to.be.equal(sampleText);
+        expect(result).to.deep.equal(['', sampleText]);
     });
 });
 

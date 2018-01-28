@@ -40,21 +40,13 @@ export function validateText(
         maxDuplicateProblems = defaultMaxDuplicateProblems,
         minWordLength        = defaultMinWordLength,
         flagWords            = [],
-        ignoreRegExpList     = [],
-        includeRegExpList    = [],
         ignoreWords          = [],
         allowCompoundWords   = false,
     } = options;
 
-    const filteredIncludeList = includeRegExpList.filter(a => !!a);
-    const finalIncludeList = filteredIncludeList.length ? filteredIncludeList : ['.*'];
-
     const setOfFlagWords = new Set(flagWords);
     const mapOfProblems = new Map<string, number>();
-    const includeRanges = TextRange.excludeRanges(
-        TextRange.findMatchingRangesForPatterns(finalIncludeList, text),
-        TextRange.findMatchingRangesForPatterns(ignoreRegExpList, text)
-    );
+    const includeRanges = calcTextInclusionRanges(text, options);
     const ignoreWordsSet = new Set(ignoreWords.map(a => a.toLowerCase()));
 
     return Text.extractWordsFromCode(text)
@@ -101,6 +93,51 @@ export function validateText(
             return mapOfProblems.get(word)! < maxDuplicateProblems;
         })
         .take(maxNumberOfProblems);
+}
+
+export function calcTextInclusionRanges(
+    text: string,
+    options: ValidationOptions
+): TextRange.MatchRange[] {
+    const {
+        ignoreRegExpList     = [],
+        includeRegExpList    = [],
+    } = options;
+
+    const filteredIncludeList = includeRegExpList.filter(a => !!a);
+    const finalIncludeList = filteredIncludeList.length ? filteredIncludeList : ['.*'];
+
+    const includeRanges = TextRange.excludeRanges(
+        TextRange.findMatchingRangesForPatterns(finalIncludeList, text),
+        TextRange.findMatchingRangesForPatterns(ignoreRegExpList, text)
+    );
+    return includeRanges;
+}
+
+/**
+ * Generates a list of strings that alternate between includes and excluded text.
+ * text === [i,e,i,e,i,e,i,e].join('')
+ * @param text - the text related to the list of includeRanges
+ * @param includeRanges a list of ranges to be included.
+ * @returns a list of include/exclude string.
+ */
+export function calcIncludeExcludeList(
+    text: string,
+    includeRanges: TextRange.MatchRange[],
+): string[] {
+    includeRanges.sort((a, b) => a.startPos - b.startPos);
+    const result: string[] = [];
+    let lastPos = 0;
+    result.push('');
+    for (const { startPos, endPos } of includeRanges) {
+        result.push(text.slice(lastPos, startPos));
+        result.push(text.slice(startPos, endPos));
+        lastPos = endPos;
+    }
+    if (lastPos < text.length) {
+        result.push(text.slice(lastPos));
+    }
+    return result[0] === '' && result[1] === '' ? result.slice(2) : result;
 }
 
 export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, text: string, allowCompounds: boolean) {
