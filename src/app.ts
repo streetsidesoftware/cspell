@@ -112,12 +112,16 @@ program
         for (const filename of files) {
             console.log(chalk.yellowBright(`Display file: ${filename}`));
             console.log();
-            const result = await reportTextInclusionExclusion(filename, options);
-            for (const item of result.items) {
-                const t = item.type === IncludeExcludeType.EXCLUDE ? chalk.gray(item.text) : chalk.whiteBright(item.text);
-                process.stdout.write(t);
+            try {
+                const result = await reportTextInclusionExclusion(filename, options);
+                for (const item of result.items) {
+                    const t = item.type === IncludeExcludeType.EXCLUDE ? chalk.gray(item.text) : chalk.whiteBright(item.text);
+                    process.stdout.write(t);
+                }
+                console.log();
+            } catch (e) {
+                console.error(`Failed to read "${filename}"`);
             }
-            console.log();
             console.log();
         }
         process.exit(0);
