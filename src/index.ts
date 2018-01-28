@@ -1,6 +1,13 @@
 export * from './Settings';
 export { TextOffset, TextDocumentOffset } from './util/text';
-export { validateText } from './validator';
+export {
+    calcIncludeExcludeInfo,
+    IncludeExcludeInfo,
+    IncludeExcludeItem,
+    IncludeExcludeOptions,
+    IncludeExcludeType,
+    validateText,
+} from './validator';
 export {
     calcOverrideSettings,
     clearCachedFiles as clearCachedSettings,

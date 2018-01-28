@@ -7,8 +7,11 @@ import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
 import { traceWords, TraceResult } from './index';
+import { IncludeExcludeInfo, calcIncludeExcludeInfo } from './textValidator';
 
 // cspell:word nocase
+
+const UTF8: BufferEncoding = 'utf8';
 
 export { TraceResult } from './index';
 
@@ -22,7 +25,10 @@ export interface CSpellApplicationOptions {
     local?: string;
 }
 
-export interface TraceOptions {
+export interface TraceOptions extends ConfigOptions {
+}
+
+export interface ConfigOptions {
     config?: string;
 }
 
@@ -257,6 +263,28 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
         .toPromise();
 
     return results;
+}
+
+export interface ReportTextInclusionExclusionResult extends IncludeExcludeInfo {}
+
+export async function reportTextInclusionExclusion(filename: string, options: ConfigOptions): Promise<ReportTextInclusionExclusionResult> {
+    const configGlob = options.config || defaultConfigGlob;
+    const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
+    const pSettings = globRx(configGlob, configGlobOptions)
+        .first()
+        .map(util.unique)
+        .map(filenames => cspell.readSettingsFiles(filenames))
+        .toPromise();
+    const pBuffer = fsp.readFile(filename);
+    const [foundSettings, buffer] = await Promise.all([pSettings, pBuffer]);
+
+    const text = buffer.toString(UTF8);
+    const ext = path.extname(filename);
+    const fileSettings = cspell.calcOverrideSettings(foundSettings, path.resolve(filename));
+    const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), fileSettings);
+    const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
+    const config = cspell.constructSettingsForText(settings, text, languageIds);
+    return calcIncludeExcludeInfo(text, config);
 }
 
 export function createInit(_: CSpellApplicationOptions): Promise<void> {

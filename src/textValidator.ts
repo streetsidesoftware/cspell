@@ -4,19 +4,23 @@ import { SpellingDictionary } from './SpellingDictionary';
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 
-export interface ValidationOptions {
+export interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
     maxDuplicateProblems?: number;
     minWordLength?: number;
     // words to always flag as an error
     flagWords?: string[];
-    ignoreRegExpList?: (RegExp|string)[];
-    includeRegExpList?: (RegExp|string)[];
     ignoreWords?: string[];
     words?: string[];
     userWords?: string[];
     allowCompoundWords?: boolean;
 }
+
+export interface IncludeExcludeOptions {
+    ignoreRegExpList?: (RegExp|string)[];
+    includeRegExpList?: (RegExp|string)[];
+}
+
 
 export interface WordRangeAcc {
     textOffset: Text.TextOffset;
@@ -97,7 +101,7 @@ export function validateText(
 
 export function calcTextInclusionRanges(
     text: string,
-    options: ValidationOptions
+    options: IncludeExcludeOptions
 ): TextRange.MatchRange[] {
     const {
         ignoreRegExpList     = [],
@@ -114,30 +118,62 @@ export function calcTextInclusionRanges(
     return includeRanges;
 }
 
+export interface IncludeExcludeInfo {
+    // Full text
+    text: string;
+    // Set of include items
+    items: IncludeExcludeItem[];
+}
+
+export interface IncludeExcludeItem {
+    // the segment of text that is either include or excluded
+    text: string;
+    startPos: number;
+    endPos: number;
+    type: IncludeExcludeType;
+}
+
+export enum IncludeExcludeType {
+    INCLUDE = 'I',
+    EXCLUDE = 'E',
+}
+
 /**
- * Generates a list of strings that alternate between includes and excluded text.
- * text === [i,e,i,e,i,e,i,e].join('')
- * @param text - the text related to the list of includeRanges
- * @param includeRanges a list of ranges to be included.
- * @returns a list of include/exclude string.
+ * Calculate Include / Exclude Info
  */
-export function calcIncludeExcludeList(
+export function calcIncludeExcludeInfo(
     text: string,
-    includeRanges: TextRange.MatchRange[],
-): string[] {
-    includeRanges.sort((a, b) => a.startPos - b.startPos);
-    const result: string[] = [];
+    options: IncludeExcludeOptions,
+): IncludeExcludeInfo {
+    const includeRanges = calcTextInclusionRanges(text, options);
+    const result: IncludeExcludeItem[] = [];
     let lastPos = 0;
-    result.push('');
     for (const { startPos, endPos } of includeRanges) {
-        result.push(text.slice(lastPos, startPos));
-        result.push(text.slice(startPos, endPos));
+        result.push({
+            text: text.slice(lastPos, startPos),
+            startPos: lastPos,
+            endPos: startPos,
+            type: IncludeExcludeType.EXCLUDE,
+        });
+        result.push({
+            text: text.slice(startPos, endPos),
+            startPos,
+            endPos,
+            type: IncludeExcludeType.INCLUDE,
+        });
         lastPos = endPos;
     }
-    if (lastPos < text.length) {
-        result.push(text.slice(lastPos));
-    }
-    return result[0] === '' && result[1] === '' ? result.slice(2) : result;
+    result.push({
+        text: text.slice(lastPos),
+        startPos: lastPos,
+        endPos: text.length,
+        type: IncludeExcludeType.EXCLUDE,
+    });
+
+    return {
+        text,
+        items: result.filter(i => i.startPos !== i.endPos),
+    };
 }
 
 export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, text: string, allowCompounds: boolean) {

@@ -3,9 +3,10 @@
 import * as path from 'path';
 import * as program from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
-import { CSpellApplicationOptions, AppError } from './application';
+import { CSpellApplicationOptions, AppError, ConfigOptions, reportTextInclusionExclusion } from './application';
 import * as App from './application';
 import chalk from 'chalk';
+import { IncludeExcludeType } from './textValidator';
 
 interface Options extends CSpellApplicationOptions {}
 interface TraceOptions extends App.TraceOptions {}
@@ -93,6 +94,27 @@ program
                 process.exit(1);
             }
         );
+    });
+
+program
+    .command('disp')
+    .description('Display filtered file')
+    .arguments('<files...>')
+    .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .action(async (files: string[], options: ConfigOptions) => {
+        showHelp = false;
+
+        for (const filename of files) {
+            console.log(`Display file: ${filename}`);
+            const result = await reportTextInclusionExclusion(filename, options);
+            for (const item of result.items) {
+                const t = item.type === IncludeExcludeType.EXCLUDE ? chalk.gray(item.text) : chalk.whiteBright(item.text);
+                process.stdout.write(t);
+            }
+            console.log();
+            console.log();
+        }
+        process.exit(0);
     });
 
 /*

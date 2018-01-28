@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { validateText, hasWordCheck, calcTextInclusionRanges, calcIncludeExcludeList } from './textValidator';
+import { validateText, hasWordCheck, calcTextInclusionRanges, calcIncludeExcludeInfo, IncludeExcludeType } from './textValidator';
 import { createCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
@@ -102,19 +102,34 @@ describe('Validate textValidator functions', () => {
         ]);
     });
 
-    it('tests calcIncludeExcludeList', () => {
-        const includes = calcTextInclusionRanges(sampleText, { ignoreRegExpList: [/The/g]});
-        const result = calcIncludeExcludeList(sampleText, includes);
-        expect(result).to.be.length(9);
-        expect(result.join('')).to.be.equal(sampleText);
+    it('tests calcIncludeExcludeInfo', () => {
+        const info = calcIncludeExcludeInfo(sampleText, { ignoreRegExpList: [/The/g]});
+        const strings = info.items.map(a => a.text);
+        expect(strings).to.be.length(9);
+        expect(strings.join('')).to.be.equal(sampleText);
+
+        let last = 0;
+        info.items.forEach(i => {
+            expect(i.startPos).to.be.equal(last);
+            last = i.endPos;
+        });
+        expect(last).to.be.equal(sampleText.length);
     });
 
-    it('tests calcIncludeExcludeList exclude everything', () => {
-        const includes = calcTextInclusionRanges(sampleText, { ignoreRegExpList: [/(.|\s)+/]});
-        const result = calcIncludeExcludeList(sampleText, includes);
-        expect(result).to.be.length(2);
+    it('tests calcIncludeExcludeInfo exclude everything', () => {
+        const info = calcIncludeExcludeInfo(sampleText, { ignoreRegExpList: [/(.|\s)+/]});
+        const result = info.items.map(a => a.text);
+        expect(result).to.be.length(1);
         expect(result.join('')).to.be.equal(sampleText);
-        expect(result).to.deep.equal(['', sampleText]);
+        expect(info.items[0].type).to.be.equal(IncludeExcludeType.EXCLUDE);
+    });
+
+    it('tests calcIncludeExcludeInfo include everything', () => {
+        const info = calcIncludeExcludeInfo(sampleText, {});
+        const result = info.items.map(a => a.text);
+        expect(result).to.be.length(1);
+        expect(result.join('')).to.be.equal(sampleText);
+        expect(info.items[0].type).to.be.equal(IncludeExcludeType.INCLUDE);
     });
 });
 

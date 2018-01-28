@@ -7,6 +7,8 @@ export const diagSource = 'cSpell Checker';
 import { CSpellUserSettings } from './Settings';
 import * as TV from './textValidator';
 
+export { IncludeExcludeInfo, IncludeExcludeItem, IncludeExcludeOptions, IncludeExcludeType, calcIncludeExcludeInfo } from './textValidator';
+
 export function validateText(text: string, settings: CSpellUserSettings): Promise<Text.TextOffset[]> {
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = Dictionary.getDictionary(finalSettings);

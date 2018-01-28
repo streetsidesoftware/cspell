@@ -54,6 +54,12 @@ describe('Validate the Application', function() {
         const foundIn = result.filter(r => r.found).map(r => r.dictName);
         expect(foundIn).to.contain('en_US.trie.gz');
     });
+
+    it('tests reportTextInclusionExclusion', async () => {
+        const result = await App.reportTextInclusionExclusion('samples/latex/sample2.tex', {});
+        expect(result.items.length).to.be.gt(100);
+        expect(result.items.map(i => i.text).join('')).to.be.equal(result.text);
+    });
 });
 
 
