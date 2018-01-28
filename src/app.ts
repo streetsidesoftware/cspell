@@ -53,6 +53,7 @@ program
     .option('--debug', 'Output information useful for debugging cspell.json files.')
     .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
     .option('--no-color', 'Turn off color.')
+    .option('--color', 'Force color')
     // The following options are planned features
     // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
     // .option('--force', 'Force the exit value to always be 0')
@@ -82,6 +83,8 @@ program
     .description('Trace words')
     .arguments('<words...>')
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .option('--no-color', 'Turn off color.')
+    .option('--color', 'Force color')
     .action((words: string[], options: TraceOptions) => {
         showHelp = false;
         App.trace(words, options).then(
@@ -101,11 +104,14 @@ program
     .description('Display filtered file')
     .arguments('<files...>')
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .option('--no-color', 'Turn off color.')
+    .option('--color', 'Force color')
     .action(async (files: string[], options: ConfigOptions) => {
         showHelp = false;
 
         for (const filename of files) {
-            console.log(`Display file: ${filename}`);
+            console.log(chalk.yellowBright(`Display file: ${filename}`));
+            console.log();
             const result = await reportTextInclusionExclusion(filename, options);
             for (const item of result.items) {
                 const t = item.type === IncludeExcludeType.EXCLUDE ? chalk.gray(item.text) : chalk.whiteBright(item.text);
