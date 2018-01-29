@@ -1,11 +1,11 @@
 export * from './Settings';
 export { TextOffset, TextDocumentOffset } from './util/text';
 export {
-    calcIncludeExcludeInfo,
-    IncludeExcludeInfo,
-    IncludeExcludeItem,
+    checkText,
+    CheckTextInfo,
+    TextInfoItem,
     IncludeExcludeOptions,
-    IncludeExcludeType,
+    IncludeExcludeFlag,
     validateText,
 } from './validator';
 export {

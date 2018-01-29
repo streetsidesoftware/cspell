@@ -3,10 +3,9 @@
 import * as path from 'path';
 import * as program from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
-import { CSpellApplicationOptions, AppError, ConfigOptions, reportTextInclusionExclusion } from './application';
+import { CSpellApplicationOptions, AppError, ConfigOptions, checkText } from './application';
 import * as App from './application';
 import chalk from 'chalk';
-import { IncludeExcludeType } from './textValidator';
 
 interface Options extends CSpellApplicationOptions {}
 interface TraceOptions extends App.TraceOptions {}
@@ -113,9 +112,9 @@ program
             console.log(chalk.yellowBright(`Display file: ${filename}`));
             console.log();
             try {
-                const result = await reportTextInclusionExclusion(filename, options);
+                const result = await checkText(filename, options);
                 for (const item of result.items) {
-                    const t = item.type === IncludeExcludeType.EXCLUDE ? chalk.gray(item.text) : chalk.whiteBright(item.text);
+                    const t = item.flagIE === App.IncludeExcludeFlag.EXCLUDE ? chalk.gray(item.text) : chalk.whiteBright(item.text);
                     process.stdout.write(t);
                 }
                 console.log();

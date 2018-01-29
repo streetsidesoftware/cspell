@@ -6,6 +6,8 @@ import * as tds from './Settings/TextDocumentSettings';
 
 import { getDefaultSettings } from './Settings/DefaultSettings';
 
+import { IncludeExcludeFlag } from './validator';
+
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 
 const defaultSettings: CSpellSettings = { ...getDefaultSettings(), enabledLanguageIds: ['plaintext', 'javascript']};
@@ -143,6 +145,35 @@ describe('Validator', function() {
             expect(words.sort()).to.be.deep.equal([]);
         });
     });
+    it('tests calcIncludeExcludeInfo', () => {
+        const info = Validator.checkText(sampleText, { ignoreRegExpList: [/The/g]});
+        const strings = info.items.map(a => a.text);
+        expect(strings).to.be.length(9);
+        expect(strings.join('')).to.be.equal(sampleText);
+
+        let last = 0;
+        info.items.forEach(i => {
+            expect(i.startPos).to.be.equal(last);
+            last = i.endPos;
+        });
+        expect(last).to.be.equal(sampleText.length);
+    });
+
+    it('tests calcIncludeExcludeInfo exclude everything', () => {
+        const info = Validator.checkText(sampleText, { ignoreRegExpList: [/(.|\s)+/]});
+        const result = info.items.map(a => a.text);
+        expect(result).to.be.length(1);
+        expect(result.join('')).to.be.equal(sampleText);
+        expect(info.items[0].flagIE).to.be.equal(IncludeExcludeFlag.EXCLUDE);
+    });
+
+    it('tests calcIncludeExcludeInfo include everything', () => {
+        const info = Validator.checkText(sampleText, {});
+        const result = info.items.map(a => a.text);
+        expect(result).to.be.length(1);
+        expect(result.join('')).to.be.equal(sampleText);
+        expect(info.items[0].flagIE).to.be.equal(IncludeExcludeFlag.INCLUDE);
+    });
 });
 
 const sampleCode = `
@@ -165,4 +196,12 @@ const message = "\\nmove to next line";
 
 const hex = 0xBADC0FFEE;
 
+`;
+
+// cspell:ignore lightbrown whiteberry redberry
+const sampleText = `
+    The elephant and giraffe
+    The lightbrown worm ate the apple, mango, and, strawberry.
+    The little ant ate the big purple grape.
+    The orange tiger ate the whiteberry and the redberry.
 `;

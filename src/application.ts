@@ -7,13 +7,14 @@ import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
 import { traceWords, TraceResult } from './index';
-import { IncludeExcludeInfo, calcIncludeExcludeInfo } from './textValidator';
+import { CheckTextInfo } from './validator';
+import * as Validator from './validator';
 
 // cspell:word nocase
 
 const UTF8: BufferEncoding = 'utf8';
 
-export { TraceResult } from './index';
+export { TraceResult, IncludeExcludeFlag } from './index';
 
 export interface CSpellApplicationOptions {
     verbose?: boolean;
@@ -265,9 +266,9 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
     return results;
 }
 
-export interface ReportTextInclusionExclusionResult extends IncludeExcludeInfo {}
+export interface CheckTextResult extends CheckTextInfo {}
 
-export async function reportTextInclusionExclusion(filename: string, options: ConfigOptions): Promise<ReportTextInclusionExclusionResult> {
+export async function checkText(filename: string, options: ConfigOptions): Promise<CheckTextResult> {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
     const pSettings = globRx(configGlob, configGlobOptions)
@@ -284,7 +285,7 @@ export async function reportTextInclusionExclusion(filename: string, options: Co
     const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), fileSettings);
     const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
     const config = cspell.constructSettingsForText(settings, text, languageIds);
-    return calcIncludeExcludeInfo(text, config);
+    return Validator.checkText(text, config);
 }
 
 export function createInit(_: CSpellApplicationOptions): Promise<void> {

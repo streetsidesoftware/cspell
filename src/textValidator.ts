@@ -21,7 +21,6 @@ export interface IncludeExcludeOptions {
     includeRegExpList?: (RegExp|string)[];
 }
 
-
 export interface WordRangeAcc {
     textOffset: Text.TextOffset;
     isIncluded: boolean;
@@ -116,64 +115,6 @@ export function calcTextInclusionRanges(
         TextRange.findMatchingRangesForPatterns(ignoreRegExpList, text)
     );
     return includeRanges;
-}
-
-export interface IncludeExcludeInfo {
-    // Full text
-    text: string;
-    // Set of include items
-    items: IncludeExcludeItem[];
-}
-
-export interface IncludeExcludeItem {
-    // the segment of text that is either include or excluded
-    text: string;
-    startPos: number;
-    endPos: number;
-    type: IncludeExcludeType;
-}
-
-export enum IncludeExcludeType {
-    INCLUDE = 'I',
-    EXCLUDE = 'E',
-}
-
-/**
- * Calculate Include / Exclude Info
- */
-export function calcIncludeExcludeInfo(
-    text: string,
-    options: IncludeExcludeOptions,
-): IncludeExcludeInfo {
-    const includeRanges = calcTextInclusionRanges(text, options);
-    const result: IncludeExcludeItem[] = [];
-    let lastPos = 0;
-    for (const { startPos, endPos } of includeRanges) {
-        result.push({
-            text: text.slice(lastPos, startPos),
-            startPos: lastPos,
-            endPos: startPos,
-            type: IncludeExcludeType.EXCLUDE,
-        });
-        result.push({
-            text: text.slice(startPos, endPos),
-            startPos,
-            endPos,
-            type: IncludeExcludeType.INCLUDE,
-        });
-        lastPos = endPos;
-    }
-    result.push({
-        text: text.slice(lastPos),
-        startPos: lastPos,
-        endPos: text.length,
-        type: IncludeExcludeType.EXCLUDE,
-    });
-
-    return {
-        text,
-        items: result.filter(i => i.startPos !== i.endPos),
-    };
 }
 
 export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, text: string, allowCompounds: boolean) {
