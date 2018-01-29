@@ -1,5 +1,9 @@
 # Release Notes
 
+## [2.1.0]
+- Add `check` command to command line tool. This will check the text of a file and show any errors highlighted in red.
+- improve `LaTex` support by excluding macros. (Regex by [James-Yu](https://github.com/James-Yu))
+
 ## [2.0.9]
 - Correct the CSpellUserSettings interface for compatibility
 

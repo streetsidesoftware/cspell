@@ -41,7 +41,7 @@ cspell --help
 
 ## Requirements
 
-cspell needs Node 6 and above.
+cspell needs Node 8 and above.
 
 ## How it works
 
