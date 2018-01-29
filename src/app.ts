@@ -99,8 +99,8 @@ program
     });
 
 program
-    .command('disp')
-    .description('Display filtered file')
+    .command('check')
+    .description('Spell check file(s) and display the result. The full file is displayed in color.')
     .arguments('<files...>')
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
     .option('--no-color', 'Turn off color.')
@@ -109,12 +109,15 @@ program
         showHelp = false;
 
         for (const filename of files) {
-            console.log(chalk.yellowBright(`Display file: ${filename}`));
+            console.log(chalk.yellowBright(`Check file: ${filename}`));
             console.log();
             try {
                 const result = await checkText(filename, options);
                 for (const item of result.items) {
-                    const t = item.flagIE === App.IncludeExcludeFlag.EXCLUDE ? chalk.gray(item.text) : chalk.whiteBright(item.text);
+                    const fn = item.flagIE === App.IncludeExcludeFlag.EXCLUDE
+                        ? chalk.gray
+                        : item.isError ? chalk.red : chalk.whiteBright;
+                    const t = fn(item.text);
                     process.stdout.write(t);
                 }
                 console.log();

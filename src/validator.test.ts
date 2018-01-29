@@ -145,10 +145,11 @@ describe('Validator', function() {
             expect(words.sort()).to.be.deep.equal([]);
         });
     });
-    it('tests calcIncludeExcludeInfo', () => {
-        const info = Validator.checkText(sampleText, { ignoreRegExpList: [/The/g]});
+    it('tests calcIncludeExcludeInfo', async () => {
+        const words = sampleWords;
+        const info = await Validator.checkText(sampleText, { words, ignoreRegExpList: [/The/g]});
         const strings = info.items.map(a => a.text);
-        expect(strings).to.be.length(9);
+        expect(strings).to.be.length(17);
         expect(strings.join('')).to.be.equal(sampleText);
 
         let last = 0;
@@ -159,18 +160,20 @@ describe('Validator', function() {
         expect(last).to.be.equal(sampleText.length);
     });
 
-    it('tests calcIncludeExcludeInfo exclude everything', () => {
-        const info = Validator.checkText(sampleText, { ignoreRegExpList: [/(.|\s)+/]});
+    it('tests calcIncludeExcludeInfo exclude everything', async () => {
+        const words = sampleWords;
+        const info = await Validator.checkText(sampleText, { words, ignoreRegExpList: [/(.|\s)+/]});
         const result = info.items.map(a => a.text);
         expect(result).to.be.length(1);
         expect(result.join('')).to.be.equal(sampleText);
         expect(info.items[0].flagIE).to.be.equal(IncludeExcludeFlag.EXCLUDE);
     });
 
-    it('tests calcIncludeExcludeInfo include everything', () => {
-        const info = Validator.checkText(sampleText, {});
+    it('tests calcIncludeExcludeInfo include everything', async () => {
+        const words = sampleWords;
+        const info = await Validator.checkText(sampleText, { words });
         const result = info.items.map(a => a.text);
-        expect(result).to.be.length(1);
+        expect(result).to.be.length(9);
         expect(result.join('')).to.be.equal(sampleText);
         expect(info.items[0].flagIE).to.be.equal(IncludeExcludeFlag.INCLUDE);
     });
@@ -205,3 +208,21 @@ const sampleText = `
     The little ant ate the big purple grape.
     The orange tiger ate the whiteberry and the redberry.
 `;
+
+const sampleWords = [
+    'and',
+    'ant',
+    'apple',
+    'ate',
+    'big',
+    'elephant',
+    'giraffe',
+    'grape',
+    'little',
+    'mango',
+    'orange',
+    'purple',
+    'the',
+    'tiger',
+    'worm',
+];

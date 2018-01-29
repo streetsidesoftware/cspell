@@ -36,10 +36,11 @@ export enum IncludeExcludeFlag {
     EXCLUDE = 'E',
 }
 
-export function checkText(
+export async function checkText(
     text: string,
     settings: CSpellUserSettings,
-): CheckTextInfo {
+): Promise<CheckTextInfo> {
+    const validationResult = validateText(text, settings);
     const includeRanges = TV.calcTextInclusionRanges(text, settings);
     const result: TextInfoItem[] = [];
     let lastPos = 0;
@@ -65,9 +66,34 @@ export function checkText(
         flagIE: IncludeExcludeFlag.EXCLUDE,
     });
 
+    const issues = await validationResult;
+
+    function * merge() {
+        let i = 0;
+        for (const r of result) {
+            if (i >= issues.length || issues[i].offset >= r.endPos) {
+                yield r;
+                continue;
+            }
+            let span = {...r};
+            while (i < issues.length && issues[i].offset < span.endPos) {
+                const issue = issues[i];
+                const endPos = issue.offset;
+                const text = span.text.slice(0, endPos - span.startPos);
+                const endPosError = issue.offset + issue.text.length;
+                yield {...span, text, endPos};
+                yield {...span, isError: true, startPos: issue.offset, endPos: endPosError, text: issue.text};
+                span.text = span.text.slice(endPosError - span.startPos);
+                span.startPos = endPosError;
+                i += 1;
+            }
+            yield span;
+        }
+    }
+
     return {
         text,
-        items: result.filter(i => i.startPos !== i.endPos),
+        items: [...merge()].filter(i => i.startPos < i.endPos),
     };
 }
 
