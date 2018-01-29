@@ -55,7 +55,7 @@ describe('Validate the Application', function() {
         expect(foundIn).to.contain('en_US.trie.gz');
     });
 
-    it('tests reportTextInclusionExclusion', async () => {
+    it('Tests checkText', async () => {
         const result = await App.checkText('samples/latex/sample2.tex', {});
         expect(result.items.length).to.be.gt(100);
         expect(result.items.map(i => i.text).join('')).to.be.equal(result.text);
