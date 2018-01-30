@@ -41,7 +41,8 @@ export async function checkText(
     settings: CSpellUserSettings,
 ): Promise<CheckTextInfo> {
     const validationResult = validateText(text, settings);
-    const includeRanges = TV.calcTextInclusionRanges(text, settings);
+    const finalSettings = Settings.finalizeSettings(settings);
+    const includeRanges = TV.calcTextInclusionRanges(text, finalSettings);
     const result: TextInfoItem[] = [];
     let lastPos = 0;
     for (const { startPos, endPos } of includeRanges) {

@@ -8,6 +8,21 @@ const matchHexValues = regExMatchCommonHexFormats.source;
 
 describe('Validate InDocSettings', () => {
 
+    it('tests regExSpellingGuard', () => {
+        const m1 = sampleCode2.match(RegPat.regExSpellingGuard);
+        expect(m1).is.not.empty;
+        expect(m1).has.length(5);
+        // cspell:disable
+        expect(m1).is.deep.equal([
+            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
+            "cspell:disable-next\nconst verybadspelling = 'disable';\n",
+            "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
+            'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
+            'cSpell:disable\n\nNot checked.\n\n',
+        ]);
+        // cspell:enable
+    });
+
     it('tests finding a set of matching positions', () => {
         const text = sampleCode2;
         const ranges = TextRange.findMatchingRangesForPatterns([
@@ -15,7 +30,7 @@ describe('Validate InDocSettings', () => {
             RegPat.regExSpellingGuard,
             RegPat.regExMatchCommonHexFormats,
         ], text);
-        expect(ranges.length).to.be.equal(8);
+        expect(ranges.length).to.be.equal(10);
     });
 
     it('tests merging inclusion and exclusion patterns into an inclusion list', () => {
@@ -31,7 +46,7 @@ describe('Validate InDocSettings', () => {
             RegPat.regExMatchCommonHexFormats,
         ], text);
         const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
-        expect(mergedRanges.length).to.be.equal(21);
+        expect(mergedRanges.length).to.be.equal(24);
     });
 
     it('test for hex values', () => {
@@ -48,13 +63,13 @@ describe('Validate InDocSettings', () => {
         expect(hexRanges[2].startPos).to.be.equal(text.indexOf('0xbadc0ffee'));
 
         const disableChecker = TextRange.findMatchingRanges(RegPat.regExSpellingGuard, text);
-        expect(disableChecker.length).to.be.equal(3);
+        expect(disableChecker.length).to.be.equal(5);
 
         const hereDocs = TextRange.findMatchingRanges(RegPat.regExPhpHereDoc, text);
         expect(hereDocs.length).to.be.equal(3);
 
         const strings = TextRange.findMatchingRanges(RegPat.regExString, text);
-        expect(strings.length).to.be.equal(12);
+        expect(strings.length).to.be.equal(14);
     });
 
 
@@ -71,6 +86,12 @@ const url2 = 'http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';
 const cssHexValue = '#cccd';
 const cHexValue = 0x5612abcd;
 const cHexValueBadCoffee = 0xbadc0ffee;
+
+const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.
+// But not this line
+// cspell:disable-next
+const verybadspelling = 'disable';
+// And not this line
 
 // spell-checker:disable
 const unicodeHexValue = '\\uBABC';
