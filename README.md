@@ -48,6 +48,12 @@ cspell check <filename>
 It will produce something like this:
 ![image](https://user-images.githubusercontent.com/3740137/35588848-2a8f1bca-0602-11e8-9cda-fddee2742c35.png)
 
+### Tip for use with `less`
+
+To get color in less, use `--color` and `less -r`
+```sh
+cspell check <filename> --color | less -r
+```
 
 ## Requirements
 
