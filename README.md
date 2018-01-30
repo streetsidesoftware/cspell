@@ -39,6 +39,16 @@ cspell "src/**/*.js"
 cspell --help
 ```
 
+### Quick check
+
+```sh
+cspell check <filename>
+```
+
+It will produce something like this:
+![image](https://user-images.githubusercontent.com/3740137/35588848-2a8f1bca-0602-11e8-9cda-fddee2742c35.png)
+
+
 ## Requirements
 
 cspell needs Node 8 and above.
