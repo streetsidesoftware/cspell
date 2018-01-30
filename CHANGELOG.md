@@ -1,5 +1,9 @@
 # Release Notes
 
+## [2.1.1]
+- Add the ability to ignore the next line or the current line: `cspell:disable-line` and `cspell:disable-next` or `cspell:disable-next-line`
+See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
+
 ## [2.1.0]
 - Add `check` command to command line tool. This will check the text of a file and show any errors highlighted in red.
 - improve `LaTex` support by excluding macros. (Regex by [James-Yu](https://github.com/James-Yu))
