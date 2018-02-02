@@ -107,6 +107,8 @@ It is possible to disable / enable the spell checker by adding comments to your 
 * `/* cSpell:disable */`
 * `/* spell-checker: disable */`
 * `/* spellchecker: disable */`
+* `// cspell:disable-line` -- disables checking for the current line.
+* `/* cspell:disable-next-line */` -- disables checking till the end of the next line.
 <!--- cSpell:enable -->
 
 
@@ -123,7 +125,12 @@ It is possible to disable / enable the spell checker by adding comments to your 
 const wackyWord = ['zaallano', 'wooorrdd', 'zzooommmmmmmm'];
 /* cSpell:enable */
 
-// Nest disable / enable is not Supported
+const words = ['zaallano', 'wooorrdd', 'zzooommmmmmmm']; // cspell:disable-line disables this entire line
+
+// To disable the next line, use cspell:disable-next-line
+const moreWords = ['ieeees', 'beees', 'treeees'];
+
+// Nesting disable / enable is not Supported
 
 // spell-checker:disable
 // It is now disabled.
