@@ -188,13 +188,16 @@ function runLint(cfg: CSpellApplicationConfiguration) {
                     .then(wordOffsets => {
                         return {
                             filename,
-                            issues: cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets)
+                            issues: cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets),
+                            config: configInfo.config,
                         };
                     });
             })
             .do(info => {
-                const {filename, issues} = info;
-                cfg.info(`Checking: ${filename} ... Issues: ${issues.length}`);
+                const {filename, issues, config} = info;
+                const dictionaries = (config.dictionaries || []);
+                cfg.info(`Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${issues.length}`);
+                cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`);
                 issues
                     .filter(cfg.uniqueFilter)
                     .forEach((issue) => cfg.logIssue(issue));
