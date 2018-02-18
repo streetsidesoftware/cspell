@@ -39,10 +39,24 @@
         {
             "languageId": "latex",
             "dictionaries": ["latex"],
-            "ignoreRegExpList": [
-                "\\\\\\w*(\\[.*?\\])?(\\{.*?\\})?",
-                "\\$.+?\\$"
-              ]
+            "patterns": [
+                {
+                    "name": "LaTexMacros",
+                    "pattern": "\\\\\\w*(\\[.*?\\])?(\\{.*?\\})?",
+                    "description": "Match against all LaTex Macros"
+                },
+                {
+                    "name": "LaTexMacrosMultiLine",
+                    "pattern": "\\\\\\w+(?:\\[[^]*?\\]|\\{[^]*?\\})*",
+                    "description": "Match against all LaTex Macros"
+                },
+                {
+                    "name": "LaTexMath",
+                    "pattern": "\\$.+?\\$",
+                    "description": "Match against all LaTex Macros"
+                }
+            ],
+            "ignoreRegExpList": ["LaTexMacrosMultiLine", "LaTexMath"]
         }
     ],
     "import": [
