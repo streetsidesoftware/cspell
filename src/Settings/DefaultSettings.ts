@@ -64,7 +64,7 @@ export const _defaultSettings: CSpellSettings = {
     enabledLanguageIds: [
         'csharp', 'go', 'javascript', 'javascriptreact', 'json', 'markdown',
         'php', 'plaintext', 'python', 'text', 'typescript', 'typescriptreact',
-        'latex',
+        'latex', 'rust',
     ],
     maxNumberOfProblems: 100,
     numSuggestions: 10,
