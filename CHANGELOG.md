@@ -1,7 +1,13 @@
 # Release Notes
 
+## [2.1.2]
+- Add dictionary for Rust
+- Improved LaTex macro detection based upon [Bludkey's suggestion](https://github.com/Jason-Rev/vscode-spell-checker/issues/172#issuecomment-366523937)
+- Improved verbose output by displaying the language detected and dictionaries used.
+- Updated `cpp` dictionary to address: [incorrect spelling of "successful"](https://github.com/Jason-Rev/vscode-spell-checker/issues/176)
+
 ## [2.1.1]
-- Add the ability to ignore the next line or the current line: `cspell:disable-line` and `cspell:disable-next` or `cspell:disable-next-line`
+- Add the ability to ignore the next line or the current line: `cspell:disable-line` and `cspell:disable-next-line`
 See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
 
 ## [2.1.0]
@@ -131,4 +137,4 @@ See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
 ## 1.0.0 - 1.0.8
 - These were the initial release used for the vscode spell checker.
 
-<!-- cspell:ignore appveyor -->
+<!-- cspell:ignore appveyor Bludkey's -->
