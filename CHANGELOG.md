@@ -1,5 +1,8 @@
 # Release Notes
 
+## [2.1.3]
+- Make sure title, section, etc. is spell checked: [LaTeX: No spell check for chapter/section titles #179](https://github.com/Jason-Rev/vscode-spell-checker/issues/179)
+
 ## [2.1.2]
 - Add dictionary for Rust
 - Improved LaTex macro detection based upon [Bludkey's suggestion](https://github.com/Jason-Rev/vscode-spell-checker/issues/172#issuecomment-366523937)
