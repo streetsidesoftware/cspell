@@ -57,7 +57,7 @@ describe('Validate the Application', function() {
 
     it('Tests checkText', async () => {
         const result = await App.checkText('samples/latex/sample2.tex', {});
-        expect(result.items.length).to.be.gt(100);
+        expect(result.items.length).to.be.gt(50);
         expect(result.items.map(i => i.text).join('')).to.be.equal(result.text);
     });
 });
