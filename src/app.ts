@@ -77,16 +77,19 @@ program
         );
     });
 
+interface TraceCommandOptions {
+    parent: TraceOptions;
+}
 program
     .command('trace')
     .description('Trace words')
-    .arguments('<words...>')
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
     .option('--no-color', 'Turn off color.')
     .option('--color', 'Force color')
-    .action((words: string[], options: TraceOptions) => {
+    .arguments('<words...>')
+    .action((words: string[], options: TraceCommandOptions) => {
         showHelp = false;
-        App.trace(words, options).then(
+        App.trace(words, options.parent).then(
             result => {
                 result.forEach(emitTraceResult);
                 process.exit(0);
@@ -98,21 +101,24 @@ program
         );
     });
 
+interface CheckCommandOptions {
+    parent: ConfigOptions;
+}
+
 program
-    .command('check')
+    .command('check <files...>')
     .description('Spell check file(s) and display the result. The full file is displayed in color.')
-    .arguments('<files...>')
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
     .option('--no-color', 'Turn off color.')
     .option('--color', 'Force color')
-    .action(async (files: string[], options: ConfigOptions) => {
+    .action(async (files: string[], options: CheckCommandOptions) => {
         showHelp = false;
 
         for (const filename of files) {
             console.log(chalk.yellowBright(`Check file: ${filename}`));
             console.log();
             try {
-                const result = await checkText(filename, options);
+                const result = await checkText(filename, options.parent);
                 for (const item of result.items) {
                     const fn = item.flagIE === App.IncludeExcludeFlag.EXCLUDE
                         ? chalk.gray
