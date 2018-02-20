@@ -1,5 +1,8 @@
 # Release Notes
 
+## [2.1.6]
+- Update Golang dictionary
+
 ## [2.1.5]
 - Migrate LaTex to cspell-dicts
 
