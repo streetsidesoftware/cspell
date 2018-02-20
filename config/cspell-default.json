@@ -35,36 +35,15 @@
         { "languageId": "css,less,scss",                       "dictionaries": ["fonts", "css"] },
         { "languageId": "map",    "enabled": false },
         { "languageId": "image",  "enabled": false },
-        { "languageId": "binary", "enabled": false },
-        {
-            "languageId": "latex",
-            "dictionaries": ["latex"],
-            "patterns": [
-                {
-                    "name": "LaTexMacros",
-                    "pattern": "\\\\\\w*(\\[.*?\\])?(\\{.*?\\})?",
-                    "description": "Match against all LaTex Macros"
-                },
-                {
-                    "name": "LaTexMacrosMultiLine",
-                    "pattern": "\\\\(?!(?:title|color|section|subsection|footnote|chapter|part|caption|emph))\\w+(?:\\[[^]*?\\]|\\{[^]*?\\})*",
-                    "description": "Match against all LaTex Macros"
-                },
-                {
-                    "name": "LaTexMath",
-                    "pattern": "\\$.+?\\$",
-                    "description": "Match against all LaTex Macros"
-                }
-            ],
-            "ignoreRegExpList": ["LaTexMacrosMultiLine", "LaTexMath"]
-        }
+        { "languageId": "binary", "enabled": false }
     ],
     "import": [
         "node_modules/cspell-dict-cpp/cspell-ext.json",
+        "node_modules/cspell-dict-django/cspell-ext.json",
         "node_modules/cspell-dict-en_us/cspell-ext.json",
         "node_modules/cspell-dict-en-gb/cspell-ext.json",
         "node_modules/cspell-dict-golang/cspell-ext.json",
-        "node_modules/cspell-dict-django/cspell-ext.json",
+        "node_modules/cspell-dict-latex/cspell-ext.json",
         "node_modules/cspell-dict-php/cspell-ext.json",
         "node_modules/cspell-dict-python/cspell-ext.json",
         "node_modules/cspell-dict-rust/cspell-ext.json"

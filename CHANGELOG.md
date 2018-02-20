@@ -1,5 +1,8 @@
 # Release Notes
 
+## [2.1.5]
+- Migrate LaTex to cspell-dicts
+
 ## [2.1.4]
 - Fix an issue with the sub command where the options were not making it through. This prevented specifying the config file to use.
 - Improve LaTeX support for text commands.

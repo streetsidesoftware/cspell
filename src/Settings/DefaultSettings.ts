@@ -39,18 +39,15 @@ const defaultRegExpPatterns: RegExpPatternDefinition[] = [
 
 const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'companies',      file: 'companies.txt.gz',     type: 'S', description: 'List of companies.' },
-    { name: 'cpp',            file: 'cpp.txt.gz',           type: 'S', description: 'C & CPP keywords and common library functions.' },
     { name: 'css',            file: 'css.txt.gz',           type: 'S', description: 'CSS Keywords.' },
     { name: 'csharp',         file: 'csharp.txt.gz',        type: 'S', description: 'C# Keywords and common library functions.' },
     { name: 'dotnet',         file: 'dotnet.txt.gz',        type: 'S', description: '.Net keywords.' },
     { name: 'filetypes',      file: 'filetypes.txt.gz',     type: 'S', description: 'List of file types.' },
     { name: 'fonts',          file: 'fonts.txt.gz',         type: 'S', description: 'List of fonts.' },
     { name: 'html',           file: 'html.txt.gz',          type: 'S', description: 'HTML keywords.' },
-    { name: 'latex',          file: 'latex.txt.gz',         type: 'S', description: 'LaTeX keywords.' },
     { name: 'misc',           file: 'miscTerms.txt.gz',     type: 'S', description: 'List of miscellaneous terms.' },
     { name: 'node',           file: 'node.txt.gz',          type: 'S', description: 'List of NodeJS terms.' },
     { name: 'npm',            file: 'npm.txt.gz',           type: 'S', description: 'List of Top 500 NPM packages.' },
-    { name: 'php',            file: 'php.txt.gz',           type: 'S', description: 'PHP Keywords.' },
     { name: 'powershell',     file: 'powershell.txt.gz',    type: 'S', description: 'Powershell Keywords.' },
     { name: 'softwareTerms',  file: 'softwareTerms.txt.gz', type: 'S', description: 'Common Software Terms.' },
     { name: 'typescript',     file: 'typescript.txt.gz',    type: 'S', description: 'JavaScript and Typescript terms.' },
