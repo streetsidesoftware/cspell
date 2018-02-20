@@ -1,5 +1,10 @@
 # Release Notes
 
+## [2.1.4]
+- Fix an issue with the sub command where the options were not making it through. This prevented specifying the config file to use.
+- Improve LaTeX support for text commands.
+- Fix [String Regex too greedy](https://github.com/Jason-Rev/vscode-spell-checker/issues/185)
+
 ## [2.1.3]
 - Make sure title, section, etc. is spell checked: [LaTeX: No spell check for chapter/section titles #179](https://github.com/Jason-Rev/vscode-spell-checker/issues/179)
 
