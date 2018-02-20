@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "type": "node",
             "request": "launch",
@@ -20,6 +21,16 @@
             "name": "Run Trace",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["trace", "about"],
+            "cwd": "${workspaceRoot}",
+			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run Check",
+            "program": "${workspaceRoot}/dist/app.js",
+			"args": ["check", "--config", "${workspaceRoot}/samples/.cspell.json", "${workspaceRoot}/samples/src/sample.c"],
             "cwd": "${workspaceRoot}",
 			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
             "sourceMaps": true
