@@ -1,5 +1,8 @@
 # Release Notes
 
+## [2.1.7]
+- Add the ability to set the allowed URI schemas when filtering filenames.
+
 ## [2.1.6]
 - Update Golang dictionary
 
