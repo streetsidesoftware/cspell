@@ -3,7 +3,7 @@ import * as minimatch from 'minimatch';
 
 const separator = '/';
 
-const allowedSchemes = new Set(['file', 'untitled', 'vsls']);
+const defaultAllowedSchemes = new Set(['file', 'untitled', 'vsls']);
 
 export type ExclusionFunction = (filename: string) => boolean;
 
@@ -23,7 +23,7 @@ export function pathToUri(filePath: string): Uri {
     return Uri.file(filePath);
 }
 
-export function generateExclusionFunctionForUri(globs: Glob[], root: string): ExclusionFunction {
+export function generateExclusionFunctionForUri(globs: Glob[], root: string, allowedSchemes = defaultAllowedSchemes): ExclusionFunction {
     const rootUri = pathToUri(root || '/');
     const fns = globs.map(glob => minimatch.filter(glob, { matchBase: true }));
 
