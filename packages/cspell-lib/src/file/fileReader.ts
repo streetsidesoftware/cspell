@@ -5,15 +5,24 @@ import * as fs from 'fs';
 import * as Rx from 'rxjs/Rx';
 import * as iconv from 'iconv-lite';
 import * as zlib from 'zlib';
+import * as readline from 'readline';
 
+const defaultEncoding = 'utf8';
+
+/**
+ * Reads a file line by line. The last value emitted by the Observable is always an empty string.
+ * @param filename
+ * @param encoding defaults to 'utf8'
+ */
 export function lineReaderRx(filename: string, encoding?: string): Rx.Observable<string> {
     return stringsToLinesRx(textFileStreamRx(filename, encoding));
 }
 
-export function textFileStreamRx(filename: string, encoding: string = 'UTF-8'): Rx.Observable<string> {
-    const subject = new Rx.Subject<string>();
-    const fnError = (e: Error) => subject.error(e);
-
+function prepareFileStream(
+    filename: string,
+    encoding: string,
+    fnError: (e: Error) => void,
+) {
     const pipes: NodeJS.ReadWriteStream[] = [];
     if (filename.match(/\.gz$/i)) {
         pipes.push(zlib.createGunzip());
@@ -22,9 +31,45 @@ export function textFileStreamRx(filename: string, encoding: string = 'UTF-8'): 
     const fileStream = fs.createReadStream(filename);
     fileStream.on('error', fnError);
     const stream = pipes.reduce<NodeJS.ReadableStream>((s, p) => s.pipe(p!).on('error', fnError), fileStream);
-    stream.on('end', () => subject.complete());
-    const streamData = Rx.Observable.fromEvent<string>(stream, 'data');
-    streamData.subscribe(s => subject.next(s));
+    return stream;
+}
+
+export function textFileStreamRx(filename: string, encoding: string = defaultEncoding): Rx.Observable<string> {
+    const subject = new Rx.Subject<string>();
+    const fnError = (e: Error) => subject.error(e);
+    const fnComplete = () => subject.complete();
+    const stream = prepareFileStream(filename, encoding, fnError);
+    stream.on('end', fnComplete);
+    stream.on('data', s => subject.next(s));
+    return subject;
+}
+
+/**
+ * Emit a file line by line
+ * @param filename full path to the file to read.
+ * @param encoding defaults to 'utf8'
+ */
+export function streamFileLineByLineRx(filename: string, encoding: string = defaultEncoding): Rx.Observable<string> {
+    const subject = new Rx.Subject<string>();
+    let data = '.';
+    const fnError = (e: Error) => subject.error(e);
+    const fnComplete = () => {
+        // readline will consume the last newline without emitting an empty last line.
+        // If the last data read contains a new line, then emit an empty string.
+        if (data.match(/(?:(?:\r?\n)|(?:\r))$/)) {
+            subject.next('');
+        }
+        subject.complete();
+    };
+    const stream = prepareFileStream(filename, encoding, fnError);
+    // We want to capture the last line.
+    stream.on('data', d => data = d);
+    const rl = readline.createInterface({
+        input: stream,
+        terminal: false,
+    });
+    rl.on('close', fnComplete);
+    rl.on('line', (text: string) => subject.next(text));
     return subject;
 }
 
@@ -38,4 +83,3 @@ export function stringsToLinesRx(strings: Rx.Observable<string>): Rx.Observable<
         }, { lines: [], remainder: ''})
         .concatMap(emit => emit.lines);
 }
-

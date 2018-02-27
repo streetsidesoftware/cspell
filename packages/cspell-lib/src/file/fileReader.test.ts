@@ -1,22 +1,17 @@
 import { expect } from 'chai';
 import * as fReader from './fileReader';
 import * as Rx from 'rxjs/Rx';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
 import * as path from 'path';
 
 describe('Validate the fileReader', () => {
-    const fileCities = path.join(__dirname, '..', '..', 'samples', 'cities.txt');
-    const sampleCities = [
-        'New York',
-        'New Amsterdam',
-        'Las Angles',
-        'San Francisco',
-        'New Delhi',
-        'Mexico City',
-        'London',
-        'Paris',
-        ''
-    ];
+    const samplePath = path.join(__dirname, '..', '..', 'samples');
+    const fileCities = path.join(samplePath, 'cities.txt');
+    const sampleFiles = [
+        'cities.txt',
+        'cities.CRLF.txt',
+        'cities.noEOL.txt',
+    ].map(f => path.join(samplePath, f));
 
     it('tests stringsToLines', () => {
         const strings = Rx.Observable.of('a1\n2\n3\n4', '5\n6');
@@ -53,13 +48,31 @@ describe('Validate the fileReader', () => {
             });
     });
 
-    it('tests reading the cities sample', () => {
-        return fReader.lineReaderRx(fileCities)
+    it('tests reading the cities sample', async () => {
+        const lines = await fReader.lineReaderRx(fileCities)
             .toArray()
-            .toPromise()
-            .then(lines => {
-                expect(lines).to.be.deep.equal(sampleCities);
-            });
+            .toPromise();
+        const file = await fs.readFile(fileCities, 'utf8');
+        expect(lines).to.be.deep.equal(file.split('\n'));
+    });
+
+    it('tests streamFileLineByLineRx', async () => {
+        await Promise.all(sampleFiles
+            .map(async filename => {
+                const lines = await fReader.streamFileLineByLineRx(filename)
+                    .toArray()
+                    .toPromise();
+                const file = await fs.readFile(filename, 'utf8');
+                expect(lines, `compare to file: ${filename}`).to.be.deep.equal(file.split(/\r?\n/));
+            }));
+    });
+
+    it('tests streamFileLineByLineRx 2', async () => {
+        const lines = await fReader.streamFileLineByLineRx(__filename)
+            .toArray()
+            .toPromise();
+        const file = await fs.readFile(__filename, 'utf8');
+        expect(lines).to.be.deep.equal(file.split('\n'));
     });
 
     it('test missing file', () => {
