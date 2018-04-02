@@ -153,7 +153,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
                     text => ({text: text.toString(), filename}),
                     error => {
                         return error.code === 'EISDIR'
-                            ? Promise.resolve()
+                            ? Promise.resolve(undefined)
                             : Promise.reject({...error, message: `Error reading file: "${filename}"`});
                     });
             })
