@@ -1,5 +1,12 @@
 # Release Notes
 
+## [2.1.9]
+- Fix a common spelling mistake in the English Dictionary
+- Make cSpell aware of AsciiDocs.
+
+## [2.1.8]
+- Update the English dictionary.
+
 ## [2.1.7]
 - Add the ability to set the allowed URI schemas when filtering filenames.
 
