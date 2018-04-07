@@ -22,6 +22,7 @@ export type LanguageExtensionDefinitions = LanguageExtensionDefinition[];
 export type ExtensionToLanguageIdMap = Map<string, Set<string>>;
 
 export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
+    { id: 'asciidoc', extensions: ['.adoc', '.asc', '.asciidoc'], },
     { id: 'bat', extensions: ['.bat', '.cmd'], },
     { id: 'clojure', extensions: ['.clj', '.cljs', '.cljx', '.clojure', '.edn'], },
     { id: 'coffeescript', extensions: ['.coffee', '.cson'], },
