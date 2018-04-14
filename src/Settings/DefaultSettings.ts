@@ -29,6 +29,8 @@ const defaultRegExpPatterns: RegExpPatternDefinition[] = [
     { name: 'EscapeCharacters',     pattern: RegPat.regExEscapeCharacters },
     { name: 'Base64',               pattern: RegPat.regExBase64 },
     { name: 'Email',                pattern: RegPat.regExEmail },
+    { name: 'SHA',                  pattern: RegPat.regExSha },
+    { name: 'href',                 pattern: RegPat.regExHRef },
 
     // Include Patterns
     { name: 'PhpHereDoc',           pattern: RegPat.regExPhpHereDoc },
