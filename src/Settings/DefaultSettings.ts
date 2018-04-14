@@ -13,10 +13,10 @@ const defaultRegExpExcludeList = [
     'PublicKey',
     'RsaCert',
     'Base64',
+    'SHA',
 ];
 
 const defaultConfigFile = Path.join(__dirname, '..', '..', 'config', 'cspell-default.json');
-
 
 const defaultRegExpPatterns: RegExpPatternDefinition[] = [
     // Exclude patterns
