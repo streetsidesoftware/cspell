@@ -1,5 +1,12 @@
 # Release Notes
 
+## [2.1.10]
+- Fix an issue with matching too much text for a url:
+  [Misspelled first word after HTML element with absolute URL is not detected #201](https://github.com/Jason-Rev/vscode-spell-checker/issues/201)
+- [Better LaTeX support](https://github.com/Jason-Rev/vscode-spell-checker/issues/167#issuecomment-373682530)
+- Ignore SHA-1, SHA-256, SHA-512 hashes by default
+- Ignore HTML href urls by default.
+
 ## [2.1.9]
 - Fix a common spelling mistake in the English Dictionary
 - Make cSpell aware of AsciiDocs.
