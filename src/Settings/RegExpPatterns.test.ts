@@ -72,7 +72,50 @@ describe('Validate InDocSettings', () => {
         expect(strings.length).to.be.equal(14);
     });
 
+    it('test matching urls', () => {
+        RegPat.regExMatchUrls.lastIndex = 22;
+        const reg = new RegExp(RegPat.regExMatchUrls);
+        expect(reg.lastIndex).to.be.eq(0);
+        const text = `
+            <p>
+                some <b>bold</b> <i class='example'>text</i>
+                <a href="http://example.org">link to example</a>
+                <a href="/example/">another link</a>
+            </p>
+        `;
+        const matches = text.match(reg);
+        expect(matches).to.be.not.null;
+        expect(matches).to.have.length(1);
+        expect(matches![0]).to.be.equal('http://example.org');
+    });
 
+    it('test matching href', () => {
+        const reg = new RegExp(RegPat.regExHRef);
+        const text = `
+            <p>
+                some <b>bold</b> <i class='example'>text</i>
+                <a href="http://example.org">link to example</a>
+                <a href="/example/">another link</a>
+            </p>
+        `;
+        const matches = text.match(reg);
+        expect(matches).to.be.not.null;
+        expect(matches).to.have.length(2);
+        expect(matches![0]).to.be.equal('href="http://example.org"');
+        expect(matches![1]).to.be.equal('href="/example/"');
+    });
+
+    it('test sha regex', () => {
+        RegPat.regExSha.lastIndex = 0;
+        expect(RegPat.regExSha.test('')).to.be.false;
+        RegPat.regExSha.lastIndex = 0;
+        expect(RegPat.regExSha.test('sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w==')).to.be.true;
+        RegPat.regExSha.lastIndex = 0;
+        expect(RegPat.regExSha.test('sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g==')).to.be.true;
+        RegPat.regExSha.lastIndex = 0;
+        expect(RegPat.regExSha.test('sha1-RBT/dKUIecII7l/cgm4ywwNUnto=')).to.be.true;
+        RegPat.regExSha.lastIndex = 0;
+    });
 });
 
 const sampleCode2 = `

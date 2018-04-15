@@ -13,10 +13,10 @@ const defaultRegExpExcludeList = [
     'PublicKey',
     'RsaCert',
     'Base64',
+    'SHA',
 ];
 
 const defaultConfigFile = Path.join(__dirname, '..', '..', 'config', 'cspell-default.json');
-
 
 const defaultRegExpPatterns: RegExpPatternDefinition[] = [
     // Exclude patterns
@@ -29,6 +29,8 @@ const defaultRegExpPatterns: RegExpPatternDefinition[] = [
     { name: 'EscapeCharacters',     pattern: RegPat.regExEscapeCharacters },
     { name: 'Base64',               pattern: RegPat.regExBase64 },
     { name: 'Email',                pattern: RegPat.regExEmail },
+    { name: 'SHA',                  pattern: RegPat.regExSha },
+    { name: 'href',                 pattern: RegPat.regExHRef },
 
     // Include Patterns
     { name: 'PhpHereDoc',           pattern: RegPat.regExPhpHereDoc },
