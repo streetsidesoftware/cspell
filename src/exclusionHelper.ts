@@ -3,7 +3,7 @@ import * as minimatch from 'minimatch';
 
 const separator = '/';
 
-const defaultAllowedSchemes = new Set(['file', 'untitled', 'vsls']);
+const defaultAllowedSchemes = new Set(['file', 'untitled']);
 
 export type ExclusionFunction = (filename: string) => boolean;
 
