@@ -1,5 +1,8 @@
 # Release Notes
 
+## [2.1.11]
+- Merge [[Live Share] Remove VSLS from supported scheme list #31](https://github.com/Jason3S/cspell/pull/31)
+
 ## [2.1.10]
 - Fix an issue with matching too much text for a url:
   [Misspelled first word after HTML element with absolute URL is not detected #201](https://github.com/Jason-Rev/vscode-spell-checker/issues/201)
