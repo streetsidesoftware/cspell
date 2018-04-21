@@ -19,7 +19,7 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
         .concatMap(a => parseSettingMatch(a))
         .reduce((s, setting) => {
             return mergeInDocSettings(s, setting);
-        }, {} as CSpellUserSettings);
+        }, { id: 'in-doc-settings' } as CSpellUserSettings);
     return settings;
 }
 
@@ -41,23 +41,23 @@ function parseSettingMatch(possibleSetting: string): CSpellUserSettings[] {
 
 function parseCompoundWords(match: string): CSpellUserSettings {
     const allowCompoundWords = (/enable/i).test(match);
-    return { allowCompoundWords };
+    return { id: 'in-doc-allowCompoundWords', allowCompoundWords };
 }
 
 function parseWords(match: string): CSpellUserSettings {
     const words = match.split(/[,\s]+/g).slice(1);
-    return { words };
+    return { id: 'in-doc-words', words };
 }
 
 function parseLocal(match: string): CSpellUserSettings {
     const parts = match.trim().split(/\s+/);
     const language = parts.slice(1).join(' ');
-    return language ? { language } : {};
+    return language ? { id: 'in-doc-local', language } : {};
 }
 
 function parseIgnoreWords(match: string): CSpellUserSettings {
     const wordsSetting = parseWords(match);
-    return { ignoreWords: wordsSetting.words };
+    return { id: 'in-doc-ignore', ignoreWords: wordsSetting.words };
 }
 
 function parseRegEx(match: string): string[] {
@@ -74,12 +74,12 @@ function parseRegEx(match: string): string[] {
 
 function parseIgnoreRegExp(match: string): CSpellUserSettings {
     const ignoreRegExpList = parseRegEx(match);
-    return { ignoreRegExpList };
+    return { id: 'in-doc-ignoreRegExp', ignoreRegExpList };
 }
 
 function parseIncludeRegExp(match: string): CSpellUserSettings {
     const includeRegExpList = parseRegEx(match);
-    return { includeRegExpList };
+    return { id: 'in-doc-includeRegExp', includeRegExpList };
 }
 
 function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {

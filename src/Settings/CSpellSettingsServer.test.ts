@@ -35,11 +35,12 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     it('tests mergeSettings', () => {
-        const enabled = { name: 'enabled', enabled: true};
-        expect(mergeSettings({}, enabled)).to.be.deep.equal({
+        const left = { id: 'left' };
+        const enabled = { id: 'enabledId', name: 'enabledName', enabled: true};
+        expect(mergeSettings(left, enabled)).to.be.deep.equal({
             enabled: true,
-            name: '|enabled',
-            id: '|',
+            name: '|enabledName',
+            id: 'left|enabledId',
             words: [],
             userWords: [],
             ignoreWords: [],
@@ -50,15 +51,19 @@ describe('Validate CSpellSettingsServer', () => {
             ignoreRegExpList: [],
             dictionaries: [],
             dictionaryDefinitions: [],
-            source: { name: 'left|enabled', sources: [{}, enabled]},
+            source: { name: 'left|enabledName', sources: [left, enabled]},
         });
     });
 
     it('tests mergeSettings', () => {
-        expect(mergeSettings({}, {enabled: false})).to.be.deep.equal({
-            enabled: false,
+        const right = { id: 'right', enabled: false };
+        const left = { id: 'left', enabled: true };
+        expect(mergeSettings({}, right)).to.be.deep.equal(right);
+        expect(mergeSettings(left, {})).to.be.deep.equal(left);
+        expect(mergeSettings(left, right)).to.be.deep.equal({
+            enabled: right.enabled,
             name: '|',
-            id: '|',
+            id: [left.id, right.id].join('|'),
             words: [],
             userWords: [],
             ignoreWords: [],
@@ -69,7 +74,7 @@ describe('Validate CSpellSettingsServer', () => {
             ignoreRegExpList: [],
             dictionaries: [],
             dictionaryDefinitions: [],
-            source: { name: 'left|right', sources: [{}, {enabled: false}]},
+            source: { name: 'left|right', sources: [left, right]},
         });
     });
 
@@ -107,8 +112,8 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     it('tests mergeSettings when rights are the same', () => {
-        const base = mergeSettings(_defaultSettings, {});
-        const setting1 = mergeSettings({}, base);
+        const base = mergeSettings(_defaultSettings, { id: 'right' });
+        const setting1 = mergeSettings({ id: 'setting1' }, base);
         const setting2 = mergeSettings(setting1, base);
         expect(setting2).to.be.equal(setting1);
 

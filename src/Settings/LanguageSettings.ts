@@ -45,7 +45,8 @@ export function calcSettingsForLanguage(languageSettings: LanguageSettings, lang
         .filter(s => s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
         .filter(s => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals) )
         .map(langSetting => {
-            const s = {...langSetting};
+            const id = langSetting.local || langSetting.languageId || 'language';
+            const s = {id, ...langSetting};
             delete s.languageId;
             delete s.local;
             return s as BaseSetting;

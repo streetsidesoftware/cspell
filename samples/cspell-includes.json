@@ -1,0 +1,21 @@
+{
+    "id": "include-regex-example",
+    "languageSettings": [
+        // This one works with python
+        {
+            "languageId": "python",
+            "includeRegExpList": [
+                // Python Comments
+                "/#.*|(?:('''|\"\"\")[^\\1]+?\\1)/g"
+            ]
+        },
+        // this one works with javascript, C, typescript, etc,
+        {
+            "languageId": "javascript",
+            "includeRegExpList": [
+                // Javascript Comments
+                "/(?:\\/\\/.*)|(?:\\/\\*[\\s\\S]+?\\*\\/)/g"
+            ]
+        }
+    ]
+}
