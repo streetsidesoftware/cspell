@@ -11,9 +11,25 @@
         "dictionaries",
         ".vscode",
         "typings"
-    ]
-    ,
-    "typescript.tsdk": "./node_modules/typescript/lib",
+    ],
+    "cSpell.languageSettings": [
+        // This one works with python
+        {
+            "languageId": "python",
+            "includeRegExpList": [
+               // Python Comments
+               "/#.*|(?:('''|\"\"\")[^\\1]+?\\1)/g"
+            ]
+        },
+        // this one works with javascript, C, typescript, etc,
+        {
+            "languageId": "javascript",
+            "includeRegExpList": [
+               // Javascript Comments
+               "/(?:\\/\\/.*)|(?:\\/\\*[\\s\\S]+?\\*\\/)/g"
+            ]
+        }
+    ],
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,

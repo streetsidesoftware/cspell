@@ -18,6 +18,17 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Run CSpell against current file",
+            "program": "${workspaceRoot}/dist/app.js",
+			"args": ["-v", "${file}"],
+            "cwd": "${workspaceRoot}",
+			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
+            "sourceMaps": true,
+            "preLaunchTask": "npm: build"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Run Trace",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["trace", "about"],

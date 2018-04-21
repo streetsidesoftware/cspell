@@ -183,7 +183,8 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             .filter(info => info.configInfo.config.enabled !== false)
             .do(() => status.files += 1)
             .flatMap(({configInfo, filename, text}) => {
-                cfg.debug(commentJson.stringify(configInfo, undefined, 2));
+                const debugCfg = { config: {...configInfo.config, source: null}, filename: configInfo.filename };
+                cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
                 return cspell.validateText(text, configInfo.config)
                     .then(wordOffsets => {
                         return {

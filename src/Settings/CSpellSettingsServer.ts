@@ -6,6 +6,7 @@ import {
     RegExpPatternDefinition,
     Glob,
     Source,
+    LanguageSetting,
 } from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
@@ -23,6 +24,8 @@ const globalConf = new ConfigStore(packageName);
 export const defaultFileName = 'cSpell.json';
 
 const defaultSettings: CSpellUserSettingsWithComments = {
+    id: 'default',
+    name: 'default',
     version: currentSettingsFileVersion,
 };
 
@@ -35,7 +38,7 @@ function readJsonFile(file: string): CSpellSettings {
         return json.parse(fs.readFileSync(file).toString());
     }
     catch (err) {
-        // console.error('Failed to read "%s"', file);
+        console.error('Failed to read "%s": %s', file, err);
     }
     return {};
 }
@@ -70,11 +73,13 @@ function importSettings(filename: string, defaultValues: CSpellUserSettingsWithC
     if (cachedFiles.has(filename)) {
         return cachedFiles.get(filename)!;
     }
-    cachedFiles.set(filename, {}); // add an empty entry to prevent circular references.
-    const settings: CSpellSettings = {...defaultValues as CSpellSettings, ...readJsonFile(filename)};
+    const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
+    const finalizeSettings: CSpellSettings = { id };
+    cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
+    const settings: CSpellSettings = {...defaultValues as CSpellSettings, id, ...readJsonFile(filename)};
     const pathToSettings = path.dirname(filename);
 
-    const finalizeSettings = normalizeSettings(settings, pathToSettings);
+    Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
     const finalizeSrc = finalizeSettings.source || {};
     const name = finalize.name || path.basename(filename);
     finalizeSettings.source = { ...finalizeSrc, filename, name };
@@ -98,6 +103,13 @@ function mergeList<T>(left: T[] = [], right: T[] = []) {
     return [...setOfWords.keys()];
 }
 
+function tagLanguageSettings(tag: string, settings: LanguageSetting[] = []): LanguageSetting[] {
+    return settings.map(s => ({
+        id: tag + '.' + (s.id || s.local || s.languageId),
+        ...s
+    }));
+}
+
 function replaceIfNotEmpty<T>(left: Array<T> = [], right: Array<T> = []) {
     const filtered = right.filter(a => !!a);
     if (filtered.length) {
@@ -111,9 +123,19 @@ export function mergeSettings(left: CSpellSettings, ...settings: CSpellSettings[
     return util.clean(rawSettings);
 }
 
+function isEmpty(obj: any) {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+
 function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
     if (left === right) {
         return left;
+    }
+    if (isEmpty(right)) {
+        return left;
+    }
+    if (isEmpty(left)) {
+        return right;
     }
     if (hasLeftAncestor(right, left)) {
         return right;
@@ -121,10 +143,18 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
     if (hasRightAncestor(left, right)) {
         return left;
     }
+    const leftId = left.id || left.languageId || '';
+    const rightId = right.id || right.languageId || '';
+
+    const includeRegExpList = takeRightThenLeft(left.includeRegExpList, right.includeRegExpList);
+
+    const optionals = includeRegExpList.length ? { includeRegExpList } : {};
+
     return {
         ...left,
         ...right,
-        id: [left.id || '', right.id || ''].join('|'),
+        ...optionals,
+        id: [leftId, rightId].join('|'),
         name: [left.name || '', right.name || ''].join('|'),
         words:     mergeList(left.words,     right.words),
         userWords: mergeList(left.userWords, right.userWords),
@@ -135,7 +165,7 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         patterns: mergeList(left.patterns, right.patterns),
         dictionaryDefinitions: mergeList(left.dictionaryDefinitions, right.dictionaryDefinitions),
         dictionaries: mergeList(left.dictionaries, right.dictionaries),
-        languageSettings: mergeList(left.languageSettings, right.languageSettings),
+        languageSettings: mergeList(tagLanguageSettings(leftId, left.languageSettings), tagLanguageSettings(rightId, right.languageSettings)),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
         source: mergeSources(left, right),
     };
@@ -163,6 +193,13 @@ export function mergeInDocSettings(left: CSpellSettings, right: CSpellSettings):
         includeRegExpList: mergeList(left.includeRegExpList, right.includeRegExpList),
     };
     return merged;
+}
+
+function  takeRightThenLeft<T>(left: T[] = [], right: T[] = []) {
+    if (right.length) {
+        return right;
+    }
+    return left;
 }
 
 export function calcOverrideSettings(settings: CSpellSettings, filename: string): CSpellSettings {
@@ -208,7 +245,10 @@ function resolveFilename(filename: string, relativeTo: string) {
 
 export function getGlobalSettings(): CSpellSettings {
     if (!globalSettings) {
-        globalSettings = normalizeSettings(globalConf.all || {}, __dirname);
+        globalSettings = {
+            id: 'global_config',
+            ...normalizeSettings(globalConf.all || {}, __dirname)
+        };
     }
     return globalSettings!;
 }

@@ -57,6 +57,7 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
 
 
 export const _defaultSettings: CSpellSettings = {
+    id: 'static_defaults',
     language: 'en',
     name: 'Static Defaults',
     enabled: true,
