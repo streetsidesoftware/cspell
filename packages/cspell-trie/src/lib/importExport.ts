@@ -1,7 +1,7 @@
 import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
 import { TrieRefNode, RefMap } from './trieRef';
 import { Sequence, genSequence } from 'gensequence';
-import * as Rx from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs';
 
 interface LeafResult { n: TrieRefNode; p?: TrieRefNode; k: string; }
 
@@ -142,8 +142,8 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
 }
 
 
-export function importTrieRx(lines: Rx.Observable<string>): Rx.Observable<TrieNode> {
-    const headerLines = new Rx.Subject<string>();
+export function importTrieRx(lines: Observable<string>): Observable<TrieNode> {
+    const headerLines = new Subject<string>();
 
     let radix = 16;
     const comment = /^\s*#/;

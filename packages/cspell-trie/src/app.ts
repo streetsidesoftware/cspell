@@ -5,10 +5,10 @@ import * as commander from 'commander';
 import * as fs from 'fs';
 import {lineReaderRx as lineReader} from 'cspell-lib';
 import {rxToStream} from 'rxjs-stream';
+import {from} from 'rxjs';
 import {mkdirp} from 'fs-extra';
 import * as path from 'path';
 import * as Trie from './lib';
-import {observableFromIterable} from 'rxjs-from-iterable';
 
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
@@ -43,7 +43,7 @@ commander
             .do(() => notify('Processing Trie'))
             .do(() => notify('Export Trie'))
             .map(root => Trie.serializeTrie(root, (base - 0) || 32))
-            .flatMap(seq => observableFromIterable(seq));
+            .flatMap(seq => from(seq));
 
         pOutputStream.then(writeStream => {
             rxToStream(trieRx.bufferCount(1024).map(words => words.join(''))).pipe(writeStream);
@@ -64,7 +64,7 @@ commander
         const rxReader = lineReader(filename, 'utf8');
         const wordsRx = Trie.importTrieRx(rxReader)
             .map(root => Trie.iteratorTrieWords(root))
-            .flatMap(seq => observableFromIterable(seq))
+            .flatMap(seq => from(seq))
             .map(word => word + '\n');
 
         pOutputStream.then(writeStream => {
