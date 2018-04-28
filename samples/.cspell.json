@@ -62,5 +62,29 @@
             // Dictionary definitions can also be supplied here. They are only used iff "languageId" and "local" match.
             "dictionaryDefinitions": []
         }
+    ],
+
+    "overrides": [
+        {
+            "filename": "**/{*.py}",
+            "ignoreRegExpList": ["/'s\\b/"]
+        },
+        {
+            "language": "nl",
+            "filename": "**/{*.c,*.cpp}",
+            "ignoreRegExpList": ["/'s\\b/"],
+            "dictionaryDefinitions": [
+                {
+                    "name": "cpp",
+                    "path": "../dictionaries/companies.txt",
+                    "description": "C/C++ Keywords and common library functions."
+                }
+            ]
+        },
+        // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
+        {
+            "language": "nl",
+            "filename": "**/dutch/*.txt"
+        }
     ]
 }

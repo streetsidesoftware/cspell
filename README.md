@@ -372,7 +372,57 @@ The spell checker includes a set of default dictionaries.
 
 ## LanguageSettings
 
-* todo
+The Language Settings allow configuration to be based upon the programming langauge and/or the local.
+There are two selector fields `local` and `languageId`.
+
+* `languageId` defines which programming languages to match against.
+  A value of `"python,javascript"` will match against *python* and *javascript* files. To match against ALL programming languages,
+  use `"*"`.
+* `local` defines which spoken langauges to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
+  A value of `"*"` will match all spoken languages.
+* Most configuration values allowed in a `cspell.json` file can be define or redefine within the `languageSettings`.
+
+```javascript
+    "languageSettings": [
+        {
+            // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
+            // * will match against any file type.
+            "languageId": "c,cpp",
+            // Language local. i.e. en-US, de-AT, or ru. * will match all locals.
+            // Multiple locals can be specified like: "en, en-US" to match both English and English US.
+            "local": "*",
+            // To exclude patterns, add them to "ignoreRegExpList"
+            "ignoreRegExpList": [
+                "/#include.*/"
+            ],
+            // List of dictionaries to enable by name in `dictionaryDefinitions`
+            "dictionaries": ["cpp"],
+            // Dictionary definitions can also be supplied here. They are only used iff "languageId" and "local" match.
+            "dictionaryDefinitions": []
+        }
+    ]
+```
+
+## Overrides
+
+Overrides are useful for forcing configuration on a per file basis.
+
+Example:
+```javascript
+    "overrides": [
+        // Force `*.hrr` and `*.crr` files to be treated as `cpp` files:
+        {
+            "filename": "**/{*.hrr,*.crr}",
+            "languageId": "cpp"
+        },
+        // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
+        {
+            "language": "nl",
+            "filename": "**/dutch/**/*.txt"
+        }
+    ]
+```
+
 
 <!---
     These are at the bottom because the VSCode Marketplace leaves a bit space at the top
@@ -384,3 +434,4 @@ The spell checker includes a set of default dictionaries.
     cSpell:ignore mkdirp githubusercontent streetsidesoftware vsmarketplacebadge visualstudio
     cSpell:words Verdana
 -->
+
