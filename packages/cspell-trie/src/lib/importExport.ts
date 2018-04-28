@@ -2,6 +2,7 @@ import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
 import { TrieRefNode, RefMap } from './trieRef';
 import { Sequence, genSequence } from 'gensequence';
 import { Observable, Subject } from 'rxjs';
+import { map, filter, take, toArray, tap, skipWhile, reduce } from 'rxjs/operators';
 
 interface LeafResult { n: TrieRefNode; p?: TrieRefNode; k: string; }
 
@@ -148,13 +149,13 @@ export function importTrieRx(lines: Observable<string>): Observable<TrieNode> {
     let radix = 16;
     const comment = /^\s*#/;
 
-    headerLines
-        .filter(a => !!a.trim())
-        .filter(a => !comment.test(a))
-        .take(2)
-        .map(a => a.trim())
-        .toArray()
-        .subscribe(headerRows => {
+    headerLines.pipe(
+        filter(a => !!a.trim()),
+        filter(a => !comment.test(a)),
+        take(2),
+        map(a => a.trim()),
+        toArray(),
+    ).subscribe(headerRows => {
             const header = headerRows.join('\n');
             const headerReg = /^TrieXv1\nbase=(\d+)$/;
             /* istanbul ignore if */
@@ -195,19 +196,19 @@ export function importTrieRx(lines: Observable<string>): Observable<TrieNode> {
         return {...cNode, ...flags};
     }
 
-    const r = lines
-        .do<string>(headerLines)
-        .map(a => a.trim())
-        .skipWhile(line => line !== '*')
-        .filter(a => !!a)
-        .reduce<string, ReduceResults>((acc, line) => {
+    const r = lines.pipe(
+        tap<string>(headerLines),
+        map(a => a.trim()),
+        skipWhile(line => line !== '*'),
+        filter(a => !!a),
+        reduce<string, ReduceResults>((acc, line) => {
             const { lines, nodes } = acc;
             const root = decodeLine(line, nodes);
             nodes[lines] = root;
             return { lines: lines + 1, root, nodes };
-        }, { lines: 0, nodes: [], root: {} })
-        .map(r => r.root)
-        ;
+        }, { lines: 0, nodes: [], root: {} }),
+        map(r => r.root),
+    );
 
     return r;
 }

@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import {lineReaderRx as lineReader} from 'cspell-lib';
 import {rxToStream} from 'rxjs-stream';
 import {from} from 'rxjs';
+import {map, filter, reduce, tap, flatMap, bufferCount} from 'rxjs/operators';
 import {mkdirp} from 'fs-extra';
 import * as path from 'path';
 import * as Trie from './lib';
@@ -33,20 +34,25 @@ commander
         const rxReader = lineReader(filename, 'utf8');
         const toLower = lowerCase ? (a: string) => a.toLowerCase() : (a: string) => a;
 
-        const wordsRx = rxReader
-            .map(toLower)
-            .map(a => a.trim())
-            .filter(a => !!a);
+        const wordsRx = rxReader.pipe(
+            map(toLower),
+            map(a => a.trim()),
+            filter(a => !!a),
+        );
 
-        const trieRx = wordsRx
-            .reduce((node, word) => Trie.insert(word, node), {} as Trie.TrieNode)
-            .do(() => notify('Processing Trie'))
-            .do(() => notify('Export Trie'))
-            .map(root => Trie.serializeTrie(root, (base - 0) || 32))
-            .flatMap(seq => from(seq));
+        const trieRx = wordsRx.pipe(
+            reduce((node: Trie.TrieNode, word: string) => Trie.insert(word, node), {} as Trie.TrieNode),
+            tap(() => notify('Processing Trie')),
+            tap(() => notify('Export Trie')),
+            map(root => Trie.serializeTrie(root, (base - 0) || 32)),
+            flatMap(seq => from(seq)),
+        );
 
         pOutputStream.then(writeStream => {
-            rxToStream(trieRx.bufferCount(1024).map(words => words.join(''))).pipe(writeStream);
+            rxToStream(trieRx.pipe(
+                bufferCount(1024),
+                map(words => words.join('')))
+            ).pipe(writeStream);
         });
 
     });
@@ -62,15 +68,15 @@ commander
         notify('Reading Trie', !!outputFile);
         const pOutputStream = createWriteStream(outputFile);
         const rxReader = lineReader(filename, 'utf8');
-        const wordsRx = Trie.importTrieRx(rxReader)
-            .map(root => Trie.iteratorTrieWords(root))
-            .flatMap(seq => from(seq))
-            .map(word => word + '\n');
+        const wordsRx = Trie.importTrieRx(rxReader).pipe(
+            map(root => Trie.iteratorTrieWords(root)),
+            flatMap(seq => from(seq)),
+            map(word => word + '\n'),
+        );
 
         pOutputStream.then(writeStream => {
-            rxToStream(wordsRx.bufferCount(1024).map(words => words.join(''))).pipe(writeStream);
+            rxToStream(wordsRx.pipe(bufferCount(1024), map(words => words.join('')))).pipe(writeStream);
         });
-
     });
 
 commander.parse(process.argv);

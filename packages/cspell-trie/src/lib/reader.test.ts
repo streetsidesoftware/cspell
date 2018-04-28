@@ -1,6 +1,7 @@
 import {Trie} from './trie';
 import {importTrieRx} from './importExport';
-import * as Rx from 'rxjs/Rx';
+import {from} from 'rxjs';
+import {take} from 'rxjs/operators';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as zlib from 'zlib';
@@ -19,7 +20,7 @@ export async function readTrieFile(configLocation: string): Promise<Trie> {
         .then(buffer => buffer.toString('UTF-8'))
         ;
 
-    const trieLines = Rx.Observable.from(trieFileContents.split('\n'));
-    const trieNode = importTrieRx(trieLines).take(1).toPromise();
+    const trieLines = from(trieFileContents.split('\n'));
+    const trieNode = importTrieRx(trieLines).pipe(take(1)).toPromise();
     return trieNode.then(node => new Trie(node));
 }

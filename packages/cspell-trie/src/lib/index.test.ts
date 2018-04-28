@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import * as Trie from '.';
-import * as Rx from 'rxjs/Rx';
+import {from} from 'rxjs';
+import {toArray} from 'rxjs/operators';
 
 describe('Experiment with Tries', function() {
     it('Adds words to a Trie and takes them back out.', () => {
@@ -38,8 +39,8 @@ describe('Experiment with Tries', function() {
         expect(asString3.slice(asString3.indexOf('# Data'))).to.be.equal(asString.slice(asString.indexOf('# Data')));
         expect(asString3).to.contain('\n# one\n# two\n# three');
         // console.log(asString);
-        return Trie.importTrieRx(Rx.Observable.from(asString.split('\n')))
-            .toArray()
+        return Trie.importTrieRx(from(asString.split('\n')))
+            .pipe(toArray())
             .toPromise()
             .then(tries => {
                 const trie = words
