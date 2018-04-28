@@ -7,13 +7,14 @@
 import { compileWordList, compileTrie } from './compiler';
 import * as path from 'path';
 import * as program from 'commander';
-import * as Rx from 'rxjs/Rx';
+import { Observable, bindNodeCallback, from } from 'rxjs';
+import { flatMap, map, concatMap } from 'rxjs/operators';
 import * as glob from 'glob';
 import * as minimatch from 'minimatch';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
-type GlobRx = (filename: string, options?: minimatch.IOptions) => Rx.Observable<string[]>;
-const globRx: GlobRx = Rx.Observable.bindNodeCallback<string, string[]>(glob);
+type GlobRx = (filename: string, options?: minimatch.IOptions) => Observable<string[]>;
+const globRx: GlobRx = bindNodeCallback<string, string[]>(glob);
 
 program
     .version(npmPackage.version);
@@ -31,19 +32,20 @@ program
 
         const ext = '.txt' + (options.compress ? '.gz' : '');
 
-        Rx.Observable.from(src)
-            .flatMap(src => globRx(src))
-            .flatMap(s => s)
-            .map(s => {
+        from(src).pipe(
+            flatMap(src => globRx(src)),
+            flatMap(s => s),
+            map(s => {
                 const outFilename = path.basename(s).replace(/(\.txt|\.dic|\.aff)?$/, ext);
                 const dir = options.output ? options.output : path.dirname(s);
                 return [s, path.join(dir, outFilename)];
-            })
-            .concatMap(([src, dst]) => {
+            }),
+            concatMap(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
                 return compileWordList(src, dst).then(() => src);
-            })
-            .forEach(name => console.log(`Complete.`));
+            }),
+        )
+        .forEach(name => console.log(`Complete.`));
     });
 
 program
@@ -59,19 +61,20 @@ program
 
         const ext = '.trie' + (options.compress ? '.gz' : '');
 
-        Rx.Observable.from(src)
-            .flatMap(src => globRx(src))
-            .flatMap(s => s)
-            .map(s => {
+        from(src).pipe(
+            flatMap(src => globRx(src)),
+            flatMap(s => s),
+            map(s => {
                 const outFilename = path.basename(s).replace(/(\.txt|\.dic|\.aff)?$/, ext);
                 const dir = options.output ? options.output : path.dirname(s);
                 return [s, path.join(dir, outFilename)];
-            })
-            .concatMap(([src, dst]) => {
+            }),
+            concatMap(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
                 return compileTrie(src, dst).then(() => src);
             })
-            .forEach(name => console.log(`Complete.`));
+        )
+        .forEach(name => console.log(`Complete.`));
     });
 
 program.parse(process.argv);

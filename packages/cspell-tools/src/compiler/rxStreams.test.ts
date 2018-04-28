@@ -1,7 +1,8 @@
 import { expect } from 'chai';
 import * as rxStream from './rxStreams';
 import * as stream from 'stream';
-import * as Rx from 'rxjs/Rx';
+import { from } from 'rxjs';
+import { reduce } from 'rxjs/operators';
 
 describe('Validate the rxStreams', () => {
 
@@ -10,7 +11,7 @@ describe('Validate the rxStreams', () => {
         const bufferStream = new stream.PassThrough();
         bufferStream.end(data);
         return rxStream.streamToStringRx(bufferStream)
-            .reduce((a, b) => a + b)
+            .pipe(reduce((a, b) => a + b))
             .toPromise()
             .then(result => {
                 expect(result).to.equal(data);
@@ -19,11 +20,11 @@ describe('Validate the rxStreams', () => {
 
     it('tests Rx to stream', () => {
         const data: string = 'This is a bit of text to have some fun with';
-        const rxObs = Rx.Observable.from(data.split(' '));
+        const rxObs = from(data.split(' '));
         const stream = rxStream.observableToStream(rxObs);
 
         return rxStream.streamToStringRx(stream)
-            .reduce((a, b) => a + ' ' + b)
+            .pipe(reduce((a, b) => a + ' ' + b))
             .toPromise()
             .then(result => {
                 expect(result).to.equal(data);

@@ -1,5 +1,7 @@
 # Release Notes
 
+## 2.0
+* Update to rxjs 6
 ## 1.4.1
 * Update packages
 

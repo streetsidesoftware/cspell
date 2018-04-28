@@ -1,14 +1,13 @@
-import * as Rx from 'rxjs/Rx';
 import * as fs from 'fs';
 import * as XRegExp from 'xregexp';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
 import { lineReaderRx } from './fileReader';
 import { writeToFile, writeToFileRxP} from 'cspell-lib';
-import { Observable } from 'rxjs/Rx';
+import { Observable, zip, from } from 'rxjs';
+import { flatMap, reduce, map, bufferCount } from 'rxjs/operators';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
-import { observableFromIterable } from 'rxjs-from-iterable';
 import * as Trie from 'cspell-trie';
 import * as HR from 'hunspell-reader';
 
@@ -17,7 +16,7 @@ const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
 const regExpRepeatChars = /(.)\1{3,}/i;
 
 export function normalizeWords(lines: Observable<string>) {
-    return lines.flatMap(line => lineToWords(line).toArray());
+    return lines.pipe(flatMap(line => lineToWords(line).toArray()));
 }
 
 export function lineToWords(line: string): Sequence<string> {
@@ -46,9 +45,9 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
     return splitWords;
 }
 
-export function compileSetOfWords(lines: Rx.Observable<string>): Promise<Set<string>> {
+export function compileSetOfWords(lines: Observable<string>): Promise<Set<string>> {
     const set = normalizeWords(lines)
-            .reduce((s, w) => s.add(w), new Set<string>())
+            .pipe(reduce((s: Set<string>, w: string) => s.add(w), new Set<string>()))
             .toPromise();
 
     return Promise.all([set]).then(a => a[0]);
@@ -71,36 +70,38 @@ export function compileWordList(filename: string, destFilename: string): Promise
 }
 
 
-export function normalizeWordsToTrie(words: Rx.Observable<string>): Promise<Trie.TrieNode> {
+export function normalizeWordsToTrie(words: Observable<string>): Promise<Trie.TrieNode> {
     const result = normalizeWords(words)
-        .reduce((node, word) => Trie.insert(word, node), {} as Trie.TrieNode)
+        .pipe(reduce((node: Trie.TrieNode, word: string) => Trie.insert(word, node), {} as Trie.TrieNode))
         .toPromise();
     return result;
 }
 
-export function compileWordListToTrieFile(words: Rx.Observable<string>, destFilename: string): Promise<void> {
+export function compileWordListToTrieFile(words: Observable<string>, destFilename: string): Promise<void> {
     const destDir = path.dirname(destFilename);
     const dir = mkdirp(destDir);
     const root = normalizeWordsToTrie(words);
 
-    const data = Rx.Observable.zip(dir, root, (_: void, b: Trie.TrieNode) => b)
-        .map(node => Trie.serializeTrie(node, { base: 32, comment: 'Built by cspell-tools.' }))
-        .flatMap(seq => observableFromIterable(seq));
+    const data = zip(dir, root, (_: void, b: Trie.TrieNode) => b).pipe(
+        map(node => Trie.serializeTrie(node, { base: 32, comment: 'Built by cspell-tools.' })),
+        flatMap(seq => from(seq)),
+    );
 
-    return writeToFileRxP(destFilename, data.bufferCount(1024).map(a => a.join('')));
+    return writeToFileRxP(destFilename, data.pipe(bufferCount(1024), map(a => a.join(''))));
 }
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
-function readHunspellFiles(filename: string): Rx.Observable<string> {
+function readHunspellFiles(filename: string): Observable<string> {
     const dicFile = filename.replace(regHunspellFile, '.dic');
     const affFile = filename.replace(regHunspellFile, '.aff');
 
     const reader = HR.HunspellReader.createFromFiles(affFile, dicFile);
 
-    const r = Rx.Observable.fromPromise(reader)
-        .flatMap(reader => reader.readWordsRx())
-        .map(aff => aff.word);
+    const r = from(reader).pipe(
+        flatMap(reader => reader.readWordsRx()),
+        map(aff => aff.word),
+    );
     return r;
 }
 

@@ -2,7 +2,6 @@
 // cSpell:words xregexp
 
 import * as XRegExp from 'xregexp';
-import {merge} from 'tsmerge';
 import {genSequence, scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
 
 export interface WordOffset {
@@ -194,8 +193,10 @@ export function toTextOffset(text: string | WordOffset | TextOffset): TextOffset
     return { text: text.word, offset: text.offset };
 }
 
+
+
 function offsetMap(offset: number) {
-    return <T extends {offset: number}>(xo: T) => merge(xo, { offset: xo.offset + offset });
+    return <T extends {offset: number}>(xo: T) => Object.assign({}, xo, {offset: xo.offset + offset });
 }
 
 export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gim', forceFlags = 'g') {

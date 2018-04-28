@@ -8,7 +8,8 @@ import { normalizeWords, normalizeWordsToTrie } from './wordListCompiler';
 import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie';
 import * as path from 'path';
-import * as Rx from 'rxjs/Rx';
+import { from } from 'rxjs';
+import { flatMap, take, toArray } from 'rxjs/operators';
 
 describe('Validate the wordListCompiler', function() {
     it('tests splitting lines', () => {
@@ -53,16 +54,16 @@ describe('Validate the wordListCompiler', function() {
     it('test reading and normalizing a file', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
-        return Rx.Observable.fromPromise(compileWordList(sourceName, destName))
-        .flatMap(s => {
-            expect(s).to.be.not.empty;
-            return new Promise((resolve, reject) => {
-                s.on('finish', () => resolve());
-                s.on('error', () => reject());
-            });
-        })
-        .take(1)
-        .toPromise()
+        return from(compileWordList(sourceName, destName)).pipe(
+            flatMap(s => {
+                expect(s).to.be.not.empty;
+                return new Promise((resolve, reject) => {
+                    s.on('finish', () => resolve());
+                    s.on('error', () => reject());
+                });
+            }),
+            take(1),
+        ).toPromise()
         .then(() => fsp.readFile(destName, 'utf8'))
         .then(output => {
             expect(output).to.be.equal(citiesResult);
@@ -71,8 +72,8 @@ describe('Validate the wordListCompiler', function() {
 
     it('tests normalized to a trie', () => {
         const words = citiesResult.split('\n');
-        const nWords = normalizeWords(Rx.Observable.from(words)).toArray().toPromise();
-        const tWords = normalizeWordsToTrie(Rx.Observable.from(words))
+        const nWords = normalizeWords(from(words)).pipe(toArray()).toPromise();
+        const tWords = normalizeWordsToTrie(from(words))
             .then(node => Trie.iteratorTrieWords(node))
             .then(seq => [...seq]);
         return Promise.all([nWords, tWords])
@@ -88,7 +89,7 @@ describe('Validate the wordListCompiler', function() {
         .then(() => fsp.readFile(destName, 'UTF-8'))
         .then(output => output.split('\n'))
         .then(words => {
-            return Trie.importTrieRx(Rx.Observable.from(words)).take(1).toPromise()
+            return Trie.importTrieRx(from(words)).pipe(take(1)).toPromise()
             .then(node => {
                 expect([...Trie.iteratorTrieWords(node)].sort()).to.be.deep
                     .equal(citiesResult.split('\n').filter(a => !!a).sort());
