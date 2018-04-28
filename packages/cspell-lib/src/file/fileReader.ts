@@ -2,7 +2,8 @@
 // cSpell:words zlib iconv
 // cSpell:enableCompoundWords
 import * as fs from 'fs';
-import * as Rx from 'rxjs/Rx';
+import {Observable, Subject, concat, of} from 'rxjs';
+import {scan, concatMap} from 'rxjs/operators';
 import * as iconv from 'iconv-lite';
 import * as zlib from 'zlib';
 import * as readline from 'readline';
@@ -14,7 +15,7 @@ const defaultEncoding = 'utf8';
  * @param filename
  * @param encoding defaults to 'utf8'
  */
-export function lineReaderRx(filename: string, encoding?: string): Rx.Observable<string> {
+export function lineReaderRx(filename: string, encoding?: string): Observable<string> {
     return stringsToLinesRx(textFileStreamRx(filename, encoding));
 }
 
@@ -34,8 +35,8 @@ function prepareFileStream(
     return stream;
 }
 
-export function textFileStreamRx(filename: string, encoding: string = defaultEncoding): Rx.Observable<string> {
-    const subject = new Rx.Subject<string>();
+export function textFileStreamRx(filename: string, encoding: string = defaultEncoding): Observable<string> {
+    const subject = new Subject<string>();
     const fnError = (e: Error) => subject.error(e);
     const fnComplete = () => subject.complete();
     const stream = prepareFileStream(filename, encoding, fnError);
@@ -49,8 +50,8 @@ export function textFileStreamRx(filename: string, encoding: string = defaultEnc
  * @param filename full path to the file to read.
  * @param encoding defaults to 'utf8'
  */
-export function streamFileLineByLineRx(filename: string, encoding: string = defaultEncoding): Rx.Observable<string> {
-    const subject = new Rx.Subject<string>();
+export function streamFileLineByLineRx(filename: string, encoding: string = defaultEncoding): Observable<string> {
+    const subject = new Subject<string>();
     let data = '.';
     const fnError = (e: Error) => subject.error(e);
     const fnComplete = () => {
@@ -73,13 +74,13 @@ export function streamFileLineByLineRx(filename: string, encoding: string = defa
     return subject;
 }
 
-export function stringsToLinesRx(strings: Rx.Observable<string>): Rx.Observable<string> {
-    return Rx.Observable.concat(strings, Rx.Observable.of('\n'))
-        .scan((last: { lines: string[], remainder: string }, curr: string) => {
+export function stringsToLinesRx(strings: Observable<string>): Observable<string> {
+    return concat(strings, of('\n')).pipe(
+        scan((last: { lines: string[], remainder: string }, curr: string) => {
             const parts = (last.remainder + curr).split(/\r?\n/);
             const lines = parts.slice(0, -1);
             const remainder = parts.slice(-1)[0];
             return {lines, remainder};
-        }, { lines: [], remainder: ''})
-        .concatMap(emit => emit.lines);
+        }, { lines: [], remainder: ''}),
+        concatMap(emit => emit.lines));
 }

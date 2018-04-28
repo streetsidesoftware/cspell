@@ -2,7 +2,7 @@
 import * as fs from 'fs';
 import * as zlib from 'zlib';
 import * as stream from 'stream';
-import * as Rx from 'rxjs/Rx';
+import {Observable} from 'rxjs';
 import { rxToStream } from 'rxjs-stream';
 
 export function writeToFile(filename: string, data: string) {
@@ -14,7 +14,7 @@ export function writeToFile(filename: string, data: string) {
 }
 
 
-export function writeToFileRx(filename: string, data: Rx.Observable<string>): fs.WriteStream {
+export function writeToFileRx(filename: string, data: Observable<string>): fs.WriteStream {
     const sourceStream = rxToStream(data);
 
     const writeStream = fs.createWriteStream(filename);
@@ -23,7 +23,7 @@ export function writeToFileRx(filename: string, data: Rx.Observable<string>): fs
     return sourceStream.pipe(zip).pipe(writeStream);
 }
 
-export function writeToFileRxP(filename: string, data: Rx.Observable<string>): Promise<void> {
+export function writeToFileRxP(filename: string, data: Observable<string>): Promise<void> {
     const stream = writeToFileRx(filename, data);
     return new Promise<void>((resolve, reject) => {
         stream.on('finish', () => resolve());
