@@ -3,7 +3,7 @@ import {AffWord} from './aff';
 import {affWordToColoredString} from './aff';
 import {parseAffFileToAff} from './affReader';
 import * as AffReader from './affReader';
-import * as Rx from 'rxjs/Rx';
+import {from} from 'rxjs';
 
 const isLoggerOn = false;
 
@@ -184,7 +184,7 @@ SFX J   0     ings       [^e]
 `;
 
 function getSimpleAffAsStream() {
-    return Rx.Observable.from(simpleAff.split('\n'));
+    return from(simpleAff.split('\n'));
 }
 
 

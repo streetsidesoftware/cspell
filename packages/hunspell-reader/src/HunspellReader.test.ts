@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {HunspellReader} from './HunspellReader';
 import * as Aff from './aff';
-import * as Rx from 'rxjs/Rx';
+import {from} from 'rxjs';
+import {map, filter, toArray, skip, take} from 'rxjs/operators';
 import * as AffReader from './affReader';
 
 describe('Basic Validation of the Reader', () => {
@@ -12,7 +13,7 @@ describe('Basic Validation of the Reader', () => {
             const src = { aff, dic: textToStream(simpleWords)};
             const reader = new HunspellReader(src);
             return reader.readRootWords()
-                .toArray()
+                .pipe(toArray())
                 .toPromise()
                 .then(affWords => {
                     expect(affWords).to.be.deep.equal(['happy', 'ring']);
@@ -24,7 +25,7 @@ describe('Basic Validation of the Reader', () => {
             const src = { aff, dic: wordsToStream(['place/AJ'])};
             const reader = new HunspellReader(src);
             return reader.readWords()
-                .toArray()
+                .pipe(toArray())
                 .toPromise()
                 .then(affWords => {
                     expect(affWords).to.be.deep.equal(['place', 'replace', 'replacing', 'replacings', 'placing', 'placings']);
@@ -43,11 +44,11 @@ describe('HunspellReader En', function() {
 
     it('reads dict entries', () => {
         return pReader
-            .then(reader => reader.readDicWords()
-                .skip(10000)
-                .take(10)
-                .toArray()
-                .toPromise()
+            .then(reader => reader.readDicWords().pipe(
+                skip(10000),
+                take(10),
+                toArray(),
+            ).toPromise()
                 .then(values => {
                     expect(values.length).to.be.equal(10);
                 })
@@ -56,11 +57,11 @@ describe('HunspellReader En', function() {
 
     it('reads words with info', () => {
         return pReader
-            .then(reader => reader.readWordsRx()
-                .skip(10000)
-                .take(10)
-                .toArray()
-                .toPromise()
+            .then(reader => reader.readWordsRx().pipe(
+                skip(10000),
+                take(10),
+                toArray(),
+            ).toPromise()
                 .then(values => {
                     expect(values.length).to.be.equal(10);
                 })
@@ -69,11 +70,11 @@ describe('HunspellReader En', function() {
 
     it('reads words', () => {
         return pReader
-            .then(reader => reader.readWords()
-                .skip(10000)
-                .take(10)
-                .toArray()
-                .toPromise()
+            .then(reader => reader.readWords().pipe(
+                skip(10000),
+                take(10),
+                toArray(),
+            ).toPromise()
                 .then(values => {
                     expect(values.length).to.be.equal(10);
                 })
@@ -90,11 +91,11 @@ describe('HunspellReader Nl', function() {
 
     it('reads words with info', () => {
         return pReader
-            .then(reader => reader.readWordsRx()
-                .skip(10000)
-                .take(10)
-                .toArray()
-                .toPromise()
+            .then(reader => reader.readWordsRx().pipe(
+                skip(10000),
+                take(10),
+                toArray(),
+            ).toPromise()
                 .then(values => {
                     expect(values.length).to.be.equal(10);
                 })
@@ -112,12 +113,12 @@ describe('HunspellReader PT (Brazil)', function() {
 
     it('reads words with info', () => {
         return pReader
-        .then(reader => reader.readWordsRx()
-            .skip(200)
-            .take(200)
-            // .do(info => { console.log(Aff.affWordToColoredString(info)); })
-            .toArray()
-            .toPromise()
+        .then(reader => reader.readWordsRx().pipe(
+            skip(200),
+            take(200),
+            // .tap(info => { console.log(Aff.affWordToColoredString(info)); }),
+            toArray(),
+        ).toPromise()
             .then(values => {
                 expect(values.length).to.be.equal(200);
             })
@@ -131,9 +132,10 @@ function textToStream(text: string) {
 }
 
 function wordsToStream(words: string[]) {
-    return Rx.Observable.from(words)
-        .map(a => a.trim())
-        .filter(a => !!a);
+    return from(words).pipe(
+        map(a => a.trim()),
+        filter(a => !!a),
+    );
 }
 
 function getSimpleAff() {
@@ -187,7 +189,7 @@ SFX S   0     s          [^sxzhy]
 
 `;
 
-    return AffReader.parseAff(Rx.Observable.from(sampleAff.split('\n')))
+    return AffReader.parseAff(from(sampleAff.split('\n')))
         .then(affInfo => new Aff.Aff(affInfo));
 }
 

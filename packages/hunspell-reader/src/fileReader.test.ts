@@ -1,7 +1,8 @@
 
 import { expect } from 'chai';
 import * as fileReader from './fileReader';
-import * as Rx from 'rxjs/Rx';
+import {from} from 'rxjs';
+import {toArray, last} from 'rxjs/operators';
 
 describe('validate stringsToLines', () => {
     it('tests stringsToLines', () => {
@@ -27,8 +28,8 @@ describe('validate stringsToLines', () => {
             ' thirteen '
         ];
 
-        return fileReader.stringsToLines(Rx.Observable.from(strings))
-            .toArray()
+        return fileReader.stringsToLines(from(strings))
+            .pipe(toArray())
             .toPromise()
             .then(result => {
                 expect(result).to.deep.equal(expected);
@@ -40,7 +41,7 @@ describe('validate lineReader', () => {
     it('tests lineReader', () => {
         const expected = ['one', 'two', 'three'];
         return fileReader.lineReader(__dirname + '/../testData/smallfile.txt')
-            .toArray()
+            .pipe(toArray())
             .toPromise().then(results => {
                 expect(results).to.be.deep.equal(expected);
             });
@@ -49,7 +50,7 @@ describe('validate lineReader', () => {
     it('tests a nl.aff', () => {
         const expected = 'SFX Ax us sere uus	ts:AJce';
         return fileReader.lineReader(__dirname + '/../dictionaries/nl.aff')
-            .last()
+            .pipe(last())
             .toPromise().then(result => {
                 expect(result).to.be.equal(expected);
             });

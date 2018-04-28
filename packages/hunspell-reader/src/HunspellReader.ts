@@ -1,7 +1,8 @@
 import {parseAffFileToAff} from './affReader';
 import {Aff, AffWord} from './aff';
 import {lineReader} from './fileReader';
-import * as Rx from 'rxjs/Rx';
+import {Observable} from 'rxjs';
+import {map, skip, tap, flatMap} from 'rxjs/operators';
 import * as monitor from './monitor';
 
 export interface WordInfo {
@@ -12,7 +13,7 @@ export interface WordInfo {
 
 export interface HunspellSrcInfo {
     aff: Aff;
-    dic: Rx.Observable<string>;
+    dic: Observable<string>;
 }
 
 export class HunspellReader {
@@ -27,45 +28,46 @@ export class HunspellReader {
     /**
      * @internal
      */
-    readDicWords(): Rx.Observable<WordInfo> {
-        return this.src.dic
-            .skip(1) // The first entry is the count of entries.
-            .map(line => {
+    readDicWords(): Observable<WordInfo> {
+        return this.src.dic.pipe(
+            skip(1), // The first entry is the count of entries.
+            map(line => {
                 const [word, rules] = line.split('/', 2);
                 return { word, rules };
-            });
+            }),
+        );
     }
 
 
-    readWordsRx(): Rx.Observable<AffWord> {
-        const r = this.src.dic
-            .do(() => monitor.incCounter('cntIn'))
-            .flatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord))
-            .do(() => monitor.incCounter('cntOut'))
-            ;
+    readWordsRx(): Observable<AffWord> {
+        const r = this.src.dic.pipe(
+            tap(() => monitor.incCounter('cntIn')),
+            flatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord)),
+            tap(() => monitor.incCounter('cntOut')),
+        );
         return r;
     }
 
     /**
      * Reads all the word combinations out of a hunspell dictionary.
      */
-    readWords(): Rx.Observable<string> {
+    readWords(): Observable<string> {
         return this.readWordsRx()
-            .map(affWord => affWord.word);
+            .pipe(map(affWord => affWord.word));
     }
 
     /**
      * Reads the words in the dictionary without applying the transformation rules.
      */
-    readRootWords(): Rx.Observable<string> {
+    readRootWords(): Observable<string> {
         return this.readDicWords()
-            .map(w => w.word);
+            .pipe(map(w => w.word));
     }
 
     /**
      * @internal
      */
-    private static readDicEntries(aff: Aff, dicFile: string): Rx.Observable<string> {
+    private static readDicEntries(aff: Aff, dicFile: string): Observable<string> {
         return lineReader(dicFile, aff.affInfo.SET);
     }
 
@@ -79,8 +81,8 @@ export class HunspellReader {
 }
 
 export class HunspellSrcInfoWithGetDic implements HunspellSrcInfo {
-    constructor(public aff: Aff, readonly getDic: () => Rx.Observable<string>) {}
-    get dic(): Rx.Observable<string> {
+    constructor(public aff: Aff, readonly getDic: () => Observable<string>) {}
+    get dic(): Observable<string> {
         return this.getDic();
     }
 }

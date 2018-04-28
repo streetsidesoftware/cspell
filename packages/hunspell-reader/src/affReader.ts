@@ -1,7 +1,8 @@
 
 import { lineReader } from './fileReader';
 import { AffInfo, Aff, Fx, SubstitutionSet } from './aff';
-import * as Rx from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { map, filter, reduce } from 'rxjs/operators';
 
 // cSpell:enableCompoundWords
 
@@ -157,12 +158,12 @@ export function parseAffFile(filename: string, encoding: string = 'UTF-8') {
         });
 }
 
-export function parseAff(lines: Rx.Observable<string>, _encoding: string = 'UTF-8') {
-    return lines
-        .map(line => line.replace(commentRegex, ''))
-        .filter(line => line.trim() !== '')
-        .map(line => line.split(spaceRegex))
-        .reduce<string[], AffInfo>((aff, line) => {
+export function parseAff(lines: Observable<string>, _encoding: string = 'UTF-8') {
+    return lines.pipe(
+        map(line => line.replace(commentRegex, '')),
+        filter(line => line.trim() !== ''),
+        map(line => line.split(spaceRegex)),
+        reduce<string[], AffInfo>((aff, line) => {
             const [ field, ...args ] = line;
             const fn = affTableField[field];
             if (fn) {
@@ -172,7 +173,7 @@ export function parseAff(lines: Rx.Observable<string>, _encoding: string = 'UTF-
             }
             return aff;
         }, {})
-        .toPromise();
+    ).toPromise();
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string) {

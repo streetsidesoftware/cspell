@@ -6,7 +6,8 @@ import { HunspellReader } from './HunspellReader';
 import * as fs from 'fs';
 import {rxToStream} from 'rxjs-stream';
 import {mkdirp} from 'fs-extra';
-import * as Rx from 'rxjs/Rx';
+import {from, Observable} from 'rxjs';
+import {map, flatMap, filter, bufferCount, tap, toArray} from 'rxjs/operators';
 import * as path from 'path';
 // import * as monitor from './monitor';
 
@@ -47,19 +48,20 @@ commander
         const pReader = HunspellReader.createFromFiles(affFile, dicFile);
         const pWordReader = transform ? pReader.then(reader => reader.readWords()) : pReader.then(reader => reader.readRootWords());
 
-        const wordsRx = Rx.Observable.from(pWordReader)
-            .map(words => words
-                .map(a => a.trim())
-                .filter(a => !!a)
-            )
-            .map(wordsRx => unique ? makeUnique(wordsRx, ignoreCase) : wordsRx)
-            .map(wordsRx => sort ? sortWordList(wordsRx, ignoreCase) : wordsRx)
-            .map(wordsRx => lowerCase ? wordsRx.map(a => a.toLowerCase()) : wordsRx)
-            .flatMap(words => words)
-            .map(word => word + '\n');
+        const wordsRx = from(pWordReader).pipe(
+            map(words => words.pipe(
+                map(a => a.trim()),
+                filter(a => !!a),
+            )),
+            map(wordsRx => unique ? makeUnique(wordsRx, ignoreCase) : wordsRx),
+            map(wordsRx => sort ? sortWordList(wordsRx, ignoreCase) : wordsRx),
+            map(wordsRx => lowerCase ? wordsRx.pipe(map(a => a.toLowerCase())) : wordsRx),
+            flatMap(words => words),
+            map(word => word + '\n'),
+        );
 
         pOutputStream.then(writeStream => {
-            rxToStream(wordsRx.bufferCount(1024).map(words => words.join(''))).pipe(writeStream);
+            rxToStream(wordsRx.pipe(bufferCount(1024),map(words => words.join('')))).pipe(writeStream);
         });
     });
 
@@ -75,22 +77,24 @@ function createWriteStream(filename?: string): Promise<NodeJS.WritableStream> {
         : mkdirp(path.dirname(filename)).then(() => fs.createWriteStream(filename));
 }
 
-function sortWordList(words: Rx.Observable<string>, ignoreCase: boolean) {
+function sortWordList(words: Observable<string>, ignoreCase: boolean) {
     const compStr = (a, b) => a < b ? -1 : (a > b ? 1 : 0);
     const fnComp: (a: string, b: string) => number = ignoreCase
         ? ((a, b) => compStr(a.toLowerCase(), b.toLowerCase()))
         : compStr;
-    return words
-        .toArray()
-        .flatMap(a => a.sort(fnComp));
+    return words.pipe(
+        toArray(),
+        flatMap(a => a.sort(fnComp)),
+    );
 }
 
-function makeUnique(words: Rx.Observable<string>, ignoreCase: boolean) {
+function makeUnique(words: Observable<string>, ignoreCase: boolean) {
     const found = new Set<string>();
     const normalize: (a: string) => string = ignoreCase ? (a => a.toLowerCase()) : (a => a);
-    return words
-        .filter(w => !found.has(normalize(w)))
-        .do(w => found.add(normalize(w)));
+    return words.pipe(
+        filter(w => !found.has(normalize(w))),
+        tap(w => found.add(normalize(w))),
+    );
 }
 
 function notify(message: any, useStdOut = true) {
