@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { createSpellingDictionaryRx, createSpellingDictionary, SpellingDictionaryFromSet, SpellingDictionaryFromTrie } from './SpellingDictionary';
-import * as Rx from 'rxjs/Rx';
-import {Trie} from 'cspell-trie';
+import { from } from 'rxjs';
+import { Trie } from 'cspell-trie';
 
 // cSpell:ignore aple
 
@@ -11,7 +11,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
 
-        return createSpellingDictionaryRx(Rx.Observable.from(words), 'test', 'test')
+        return createSpellingDictionaryRx(from(words), 'test', 'test')
             .then(dict => {
                 expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
                 if (dict instanceof SpellingDictionaryFromSet) {
@@ -77,7 +77,7 @@ describe('Verify building Dictionary', () => {
             'apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'
         ];
 
-        return createSpellingDictionaryRx(Rx.Observable.from(words as string[]), 'test', 'test')
+        return createSpellingDictionaryRx(from(words as string[]), 'test', 'test')
             .then(dict => {
                 expect(dict).to.be.instanceof(SpellingDictionaryFromSet);
                 if (dict instanceof SpellingDictionaryFromSet) {

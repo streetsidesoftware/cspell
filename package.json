@@ -1,6 +1,6 @@
 {
   "name": "cspell",
-  "version": "2.1.11",
+  "version": "3.0.0",
   "description": "A Spelling Checker for Code!",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -10,6 +10,8 @@
   "files": [
     "dist/**",
     "src/**",
+    "!**/*.test.*",
+    "!**/*.spec.*",
     "config/**"
   ],
   "scripts": {
@@ -32,6 +34,7 @@
     "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
     "which": "which node && echo $PATH",
+    "zz": "set ZZZ=\"Hello\"",
     "test-spec": "mocha --recursive \"dist/**/*.spec.js\"",
     "test-unit": "mocha --recursive \"dist/**/*.test.js\"",
     "test": "npm run test-unit && npm run test-spec"
@@ -71,7 +74,7 @@
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
     "cspell-dict-nl-nl": "^1.0.10",
-    "cspell-tools": "^2.0.1",
+    "cspell-tools": "^3.0.1",
     "lorem-ipsum": "^1.0.4",
     "mocha": "^5.1.1",
     "nyc": "^11.7.1",
@@ -94,14 +97,13 @@
     "cspell-dict-php": "^1.0.2",
     "cspell-dict-python": "^1.0.3",
     "cspell-dict-rust": "^1.0.0",
-    "cspell-lib": "^2.0.2",
-    "cspell-trie": "^2.0.3",
+    "cspell-lib": "^3.0.1",
+    "cspell-trie": "^3.0.2",
     "fs-extra": "^5.0.0",
     "gensequence": "^2.1.1",
     "glob": "^7.1.2",
     "minimatch": "^3.0.4",
-    "rxjs": "^5.5.10",
-    "rxjs-from-iterable": "^1.0.5",
+    "rxjs": "^6.0.0",
     "vscode-uri": "^1.0.3",
     "xregexp": "^4.1.1"
   },

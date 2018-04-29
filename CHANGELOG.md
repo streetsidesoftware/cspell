@@ -4,6 +4,9 @@
 - Fix code coverage generation issues with respect to Node 10 builds.
 - Pull in English spelling fixes.
 
+## [2.x] to [3.x] Breaking changes
+- Move to RxJs version 6
+
 ## [2.1.10]
 - Fix an issue with matching too much text for a url:
   [Misspelled first word after HTML element with absolute URL is not detected #201](https://github.com/Jason-Rev/vscode-spell-checker/issues/201)

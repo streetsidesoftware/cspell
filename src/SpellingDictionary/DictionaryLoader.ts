@@ -1,10 +1,11 @@
 import {
     loadWordsRx,
-    splitLineIntoWordsRx, splitLineIntoCodeWordsRx
+    splitLineIntoWordsRx,
 } from '../wordListHelper';
 import { SpellingDictionary, createSpellingDictionaryRx, createSpellingDictionaryTrie } from './SpellingDictionary';
 import * as path from 'path';
 import {ReplaceMap} from '../util/repMap';
+import {flatMap} from 'rxjs/operators';
 
 export interface LoadOptions {
     // Type of file:
@@ -72,11 +73,11 @@ function loadSimpleWordList(filename: string, options: LoadOptions) {
 }
 
 function loadWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoWordsRx), path.basename(filename), filename, options);
+    return createSpellingDictionaryRx(loadWordsRx(filename).pipe(flatMap(splitLineIntoWordsRx)), path.basename(filename), filename, options);
 }
 
 function loadCodeWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).flatMap(splitLineIntoCodeWordsRx), path.basename(filename), filename, options);
+    return createSpellingDictionaryRx(loadWordsRx(filename).pipe(flatMap(splitLineIntoWordsRx)), path.basename(filename), filename, options);
 }
 
 function loadTrie(filename: string, options: LoadOptions) {

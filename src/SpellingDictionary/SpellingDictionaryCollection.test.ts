@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import * as Trie from 'cspell-trie';
 import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
 import { createSpellingDictionary, createSpellingDictionaryRx, SpellingDictionaryFromTrie, CompoundWordsMethod } from './SpellingDictionary';
-import * as Rx from 'rxjs/Rx';
+import { from } from 'rxjs';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = ['', 'apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry'];
@@ -93,7 +93,7 @@ describe('Verify using multiple dictionaries', () => {
 
     it('checks for suggestions from mixed sources', () => {
         return Promise.all([
-            createSpellingDictionaryRx(Rx.Observable.from(wordsA), 'wordsA', 'test'),
+            createSpellingDictionaryRx(from(wordsA), 'wordsA', 'test'),
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
             createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ])

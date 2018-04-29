@@ -13,7 +13,7 @@ import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
 import * as ConfigStore from 'configstore-fork';
 import * as minimatch from 'minimatch';
-import { finalize } from 'rxjs/operators/finalize';
+import { finalize } from 'rxjs/operators';
 
 const currentSettingsFileVersion = '0.1';
 

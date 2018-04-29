@@ -1,5 +1,6 @@
 // cSpell:enableCompoundWords
-import * as Rx from 'rxjs/Rx';
+import { Observable, from } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import * as Text from './util/text';
 import { lineReader } from './util/fileReader';
 import * as XRegExp from 'xregexp';
@@ -13,11 +14,11 @@ export interface WordDictionary {
 
 export type WordSet = Set<string>;
 
-export function loadWordsRx(filename: string): Rx.Observable<string> {
-    return lineReader(filename).catch((e: any) => {
+export function loadWordsRx(filename: string): Observable<string> {
+    return lineReader(filename).pipe(catchError((e: any) => {
         logError(e);
-        return Rx.Observable.from<string>([]);
-    });
+        return from<string>([]);
+    }));
 }
 
 function logError(e: any) {
@@ -34,18 +35,18 @@ export function splitCodeWords(words: string[]) {
         .reduce((a, b) => a.concat(b), []);
 }
 
-export function splitLineIntoCodeWordsRx(line: string): Rx.Observable<string> {
+export function splitLineIntoCodeWordsRx(line: string): Observable<string> {
     const asMultiWord = regExpWordsWithSpaces.test(line) ? [ line ] : [];
     const asWords = splitLine(line);
     const splitWords = splitCodeWords(asWords);
     const wordsToAdd = new Set([...asMultiWord, ...asWords, ...splitWords]);
-    return Rx.Observable.from([...wordsToAdd]);
+    return from([...wordsToAdd]);
 }
 
-export function splitLineIntoWordsRx(line: string): Rx.Observable<string> {
+export function splitLineIntoWordsRx(line: string): Observable<string> {
     const asWords = splitLine(line);
     const wordsToAdd = [line, ...asWords];
-    return Rx.Observable.from(wordsToAdd);
+    return from(wordsToAdd);
 }
 
 

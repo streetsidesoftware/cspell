@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import * as wlh from './wordListHelper';
+import {toArray} from 'rxjs/operators';
 
 describe('Validate wordListHelper', () => {
     it('tests splitLineIntoWordsRx', () => {
         const line = 'New York City';
         return wlh.splitLineIntoWordsRx(line)
-            .toArray()
-            .toPromise()
+        .pipe(toArray())
+        .toPromise()
             .then(words => {
                 expect(words).to.be.deep.equal([line, ...line.split(' ')]);
             });
@@ -15,8 +16,8 @@ describe('Validate wordListHelper', () => {
     it('tests splitLineIntoCodeWordsRx', () => {
         const line = 'cSpell:disableCompoundWords extra';
         return wlh.splitLineIntoCodeWordsRx(line)
-            .toArray()
-            .toPromise()
+        .pipe(toArray())
+        .toPromise()
             .then(words => {
                 expect(words).to.be.deep.equal([
                     'cSpell',
@@ -34,8 +35,8 @@ describe('Validate wordListHelper', () => {
     it('tests splitLineIntoCodeWordsRx', () => {
         const line = 'New York City';
         return wlh.splitLineIntoCodeWordsRx(line)
-            .toArray()
-            .toPromise()
+        .pipe(toArray())
+        .toPromise()
             .then(words => {
                 expect(words).to.be.deep.equal([
                     'New York City',
@@ -46,8 +47,8 @@ describe('Validate wordListHelper', () => {
 
     it('tests loadWordsRx error handling', () => {
         return wlh.loadWordsRx('not_found.txt')
-            .toArray()
-            .toPromise()
+        .pipe(toArray())
+        .toPromise()
             .then(values => {
                 expect(values).to.be.empty;
             });

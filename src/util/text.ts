@@ -1,6 +1,6 @@
 import * as XRegExp from 'xregexp';
-import * as Rx from 'rxjs/Rx';
-import * as rxFrom from 'rxjs-from-iterable';
+import {Observable, from} from 'rxjs';
+import {concatMap} from 'rxjs/operators';
 import {scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import {binarySearch} from './search';
 
@@ -31,8 +31,8 @@ const regExAllLower = XRegExp('^\\p{Ll}+$');
 
 const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
 
-export function splitCamelCaseWordWithOffsetRx(wo: TextOffset): Rx.Observable<TextOffset> {
-    return Rx.Observable.from(splitCamelCaseWordWithOffset(wo));
+export function splitCamelCaseWordWithOffsetRx(wo: TextOffset): Observable<TextOffset> {
+    return from(splitCamelCaseWordWithOffset(wo));
 }
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
@@ -76,17 +76,17 @@ export function extractLinesOfText(text: string): Sequence<TextOffset> {
     return matchStringToTextOffset(regExLines, text);
 }
 
-export function extractLinesOfTextRx(text: string): Rx.Observable<TextOffset> {
-    return rxFrom.observableFromIterable(extractLinesOfText(text));
+export function extractLinesOfTextRx(text: string): Observable<TextOffset> {
+    return from(extractLinesOfText(text));
 }
 
 /**
  * Extract out whole words from a string of text.
  */
-export function extractWordsFromTextRx(text: string): Rx.Observable<TextOffset> {
+export function extractWordsFromTextRx(text: string): Observable<TextOffset> {
     // Comment out the correct implementation until rxjs types get fixed.
     // return Rx.Observable.from(extractWordsFromText(text));
-    return rxFrom.observableFromIterable(extractWordsFromText(text));
+    return from(extractWordsFromText(text));
 }
 
 /**
@@ -103,9 +103,9 @@ export function extractWordsFromText(text: string): Sequence<TextOffset> {
         .filter(wo => !!wo.text);
 }
 
-export function extractWordsFromCodeRx(text: string): Rx.Observable<TextOffset> {
+export function extractWordsFromCodeRx(text: string): Observable<TextOffset> {
     return extractWordsFromTextRx(text)
-        .concatMap(word => splitCamelCaseWordWithOffsetRx(word));
+        .pipe(concatMap(word => splitCamelCaseWordWithOffsetRx(word)));
 }
 
 

@@ -1,8 +1,9 @@
 import { genSequence } from 'gensequence';
-import * as Rx from 'rxjs/Rx';
+import { Observable } from 'rxjs';
+import { filter, map, reduce, take } from 'rxjs/operators';
 import { IterableLike } from '../util/IterableLike';
-import {Trie, importTrieRx, SuggestionCollector, SuggestionResult, CompoundWordsMethod} from 'cspell-trie';
-import {ReplaceMap, createMapper} from '../util/repMap';
+import { Trie, importTrieRx, SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie';
+import { ReplaceMap, createMapper } from '../util/repMap';
 
 export {
     CompoundWordsMethod,
@@ -99,18 +100,18 @@ export function createSpellingDictionary(
 }
 
 export function createSpellingDictionaryRx(
-    words: Rx.Observable<string>,
+    words: Observable<string>,
     name: string,
     source: string,
     options?: SpellingDictionaryOptions
 ): Promise<SpellingDictionary> {
-    const promise = words
-        .filter(word => typeof word === 'string')
-        .map(word => word.toLowerCase().trim())
-        .filter(word => !!word)
-        .reduce((words, word) => words.add(word), new Set<string>())
-        .map(words => new SpellingDictionaryFromSet(words, name, options, source))
-        .toPromise();
+    const promise = words.pipe(
+        filter(word => typeof word === 'string'),
+        map(word => word.toLowerCase().trim()),
+        filter(word => !!word),
+        reduce((words: Set<string>, word: string) => words.add(word), new Set<string>()),
+        map(words => new SpellingDictionaryFromSet(words, name, options, source)),
+    ).toPromise();
     return promise;
 }
 
@@ -192,15 +193,15 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
 }
 
 export function createSpellingDictionaryTrie(
-    data: Rx.Observable<string>,
+    data: Observable<string>,
     name: string,
     source: string,
     options?: SpellingDictionaryOptions
 ): Promise<SpellingDictionary> {
-    const promise = importTrieRx(data)
-        .map(node => new Trie(node))
-        .map(trie => new SpellingDictionaryFromTrie(trie, name, options, source))
-        .take(1)
-        .toPromise();
+    const promise = importTrieRx(data).pipe(
+        map(node => new Trie(node)),
+        map(trie => new SpellingDictionaryFromTrie(trie, name, options, source)),
+        take(1),
+    ).toPromise();
     return promise;
 }
