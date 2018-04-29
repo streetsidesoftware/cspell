@@ -1,6 +1,9 @@
 # Release Notes
 
-## []
+## [3.0.1]
+- Move to RxJs 6
+
+## [3.0.0]
 - Fix code coverage generation issues with respect to Node 10 builds.
 - Pull in English spelling fixes.
 
