@@ -1,5 +1,8 @@
 # Release Notes
 
+## [3.0.2]
+- Do not crash if configstore is not available. [Server crashes on Ubuntu #207](https://github.com/Jason-Rev/vscode-spell-checker/issues/207)
+
 ## [3.0.1]
 - Move to RxJs 6
 

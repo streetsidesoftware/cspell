@@ -19,7 +19,6 @@ const currentSettingsFileVersion = '0.1';
 
 export const sectionCSpell = 'cSpell';
 const packageName = 'cspell';
-const globalConf = new ConfigStore(packageName);
 
 export const defaultFileName = 'cSpell.json';
 
@@ -245,9 +244,18 @@ function resolveFilename(filename: string, relativeTo: string) {
 
 export function getGlobalSettings(): CSpellSettings {
     if (!globalSettings) {
+        const globalConf = {};
+
+        try {
+            const cfgStore = new ConfigStore(packageName);
+            Object.assign(globalConf, cfgStore.all);
+        } catch (error) {
+            console.log(error);
+        }
+
         globalSettings = {
             id: 'global_config',
-            ...normalizeSettings(globalConf.all || {}, __dirname)
+            ...normalizeSettings(globalConf || {}, __dirname)
         };
     }
     return globalSettings!;
