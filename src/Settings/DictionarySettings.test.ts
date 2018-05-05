@@ -8,12 +8,29 @@ const defaultSettings = getDefaultSettings();
 describe('Validate DictionarySettings', () => {
     it('expects default to not be empty', () => {
         const mapDefs = DictSettings.filterDictDefsToLoad(['php', 'wordsEn', 'unknown', 'en_us'], defaultSettings.dictionaryDefinitions!);
-        const files = mapDefs.map(a => a[1]).map(def => def.path!);
-        expect(files.filter(a => a.includes('php.txt'))).to.be.lengthOf(1);
-        expect(files.filter(a => a.includes('wordsEn.trie'))).to.be.lengthOf(0);
-        expect(files.filter(a => a.includes('en_US.trie'))).to.be.lengthOf(1);
+        const files = mapDefs.map(a => a[1]).map(def => def.name!);
+        expect(mapDefs).to.be.lengthOf(2);
+        expect(files.filter(a => a.includes('php'))).to.be.lengthOf(1);
+        expect(files.filter(a => a.includes('wordsEn'))).to.be.lengthOf(0);
+        expect(files.filter(a => a.includes('en_us'))).to.be.lengthOf(1);
         expect(files.filter(a => a.includes('unknown'))).to.be.empty;
         // console.log(mapDefs);
+    });
+
+    it('tests exclusions and empty ids', () => {
+        const ids = [
+            'php',
+            'cpp',      // add cpp
+            'wordsEn',
+            '  ',       // empty entry
+            'unknown',
+            '!cpp',     // remove cpp
+            'en_us',
+        ];
+        const expected = ['php', 'en_us'].sort();
+        const mapDefs = DictSettings.filterDictDefsToLoad(ids, defaultSettings.dictionaryDefinitions!);
+        const dicts = mapDefs.map(a => a[1]).map(def => def.name!).sort();
+        expect(dicts).to.be.deep.equal(expected);
     });
 
     it('tests that the files exist', () => {

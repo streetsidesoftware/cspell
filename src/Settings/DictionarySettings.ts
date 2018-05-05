@@ -6,7 +6,18 @@ const dictionaryPath = () => path.join(__dirname, '..', '..', 'dist', 'dictionar
 export type DefMapArrayItem = [string, DictionaryDefinition];
 
 export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDefinition[]): DefMapArrayItem[]  {
-    const dictIdSet = new Set(dictIds);
+    // Process the dictIds in order, if it starts with a '!', remove it from the set.
+    const dictIdSet = dictIds
+        .map(id => id.trim())
+        .filter(id => !!id)
+        .reduce((dictSet, id) => {
+            if (id[0] === '!') {
+                dictSet.delete(id.slice(1));
+            } else {
+                dictSet.add(id);
+            }
+            return dictSet;
+        }, new Set<DictionaryId>());
     const activeDefs: DefMapArrayItem[] = defs
         .filter(({name}) => dictIdSet.has(name))
         .map(def => ({...def, path: getFullPathName(def)}))

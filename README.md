@@ -370,6 +370,42 @@ The spell checker includes a set of default dictionaries.
 * **filetypes** - list of file typescript
 * **npm** - list of top 500+ package names on npm.
 
+### Dictionary Definition
+
+* **name** - The reference name of the dictionary, used with program language settings
+* **description** - Optional description
+* **path** - Path to the file, can be relative or absolute. Relative path is relative to the
+    current `cspell.json` file.
+* **repMap** - Optional replacement map use to replace character prior to searching the dictionary.
+    Example:
+    ```javascript
+        // Replace various tick marks with a single '
+        "repMap": [["'|`|’", "'"]]
+    ```
+    // Use Compounds
+* **useCompounds** - allow compound words
+
+
+```javascript
+// Define each dictionary.  Relative paths are relative to the config file.
+"dictionaryDefinitions": [
+    { "name": "spanish", "path": "./spanish-words.txt"},
+    { "name": "ruby", "path": "./ruby.txt"},
+    { "name": "company-terms", "path": "./corp-terms.txt"}
+],
+```
+
+### Disabling a Dictionary
+
+It is possible to prevent a dictionary from being loaded. This is useful if you want to use your own dictionary or just
+off an existing dictionary.
+
+#### Disable Default cpp Dictionary
+
+```javascript
+"dictionaries": ["!cpp"],
+```
+
 ## LanguageSettings
 
 The Language Settings allow configuration to be based upon the programming langauge and/or the local.
