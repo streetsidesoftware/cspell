@@ -65,7 +65,7 @@ export const _defaultSettings: CSpellSettings = {
         'csharp', 'go', 'javascript', 'javascriptreact', 'json', 'markdown',
         'php', 'plaintext', 'python', 'text', 'typescript', 'typescriptreact',
         'html', 'css', 'less', 'scss',
-        'latex', 'rust',
+        'latex', 'rust', 'toml',
     ],
     maxNumberOfProblems: 100,
     numSuggestions: 10,

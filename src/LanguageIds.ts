@@ -90,6 +90,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     },
     { id: 'sql', extensions: ['.sql', '.dsql'], },
     { id: 'swift', extensions: ['.swift'], },
+    { id: 'toml', extensions: ['.toml'], },
     { id: 'typescript', extensions: ['.ts'], },
     { id: 'typescriptreact', extensions: ['.tsx'], },
     { id: 'vb', extensions: ['.vb', '.brs', '.vbs', '.bas'], },
