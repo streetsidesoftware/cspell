@@ -84,3 +84,6 @@ const promiseArrayOfWords = reader.readWords()
 
 ```
 
+## Reference
+
+* [Hunspell Docs](https://github.com/hunspell/hunspell/blob/master/docs/hunspell.5.md)

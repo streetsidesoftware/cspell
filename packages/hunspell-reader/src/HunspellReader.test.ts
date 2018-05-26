@@ -5,6 +5,8 @@ import {from} from 'rxjs';
 import {map, filter, toArray, skip, take} from 'rxjs/operators';
 import * as AffReader from './affReader';
 
+basicReadTests();
+
 describe('Basic Validation of the Reader', () => {
     const pSimpleAff = getSimpleAff();
 
@@ -82,51 +84,41 @@ describe('HunspellReader En', function() {
     });
 });
 
-describe('HunspellReader Nl', function() {
-    // We are reading big files, so we need to give it some time.
-    this.timeout(10000);
-    const aff = __dirname + '/../dictionaries/nl.aff';
-    const dic = __dirname + '/../dictionaries/nl.dic';
-    const pReader = HunspellReader.createFromFiles(aff, dic);
+function basicReadTests() {
+    const readerTests = [
+        'da_DK',
+        'nl',
+        'Portuguese (Brazilian)',
+        'en_US',
+    ];
 
-    it('reads words with info', () => {
-        return pReader
-            .then(reader => reader.readWordsRx().pipe(
-                skip(10000),
-                take(10),
-                toArray(),
-            ).toPromise()
-                .then(values => {
-                    expect(values.length).to.be.equal(10);
-                })
-            );
+    readerTests.forEach((hunDic: string) => {
+        describe(`HunspellReader ${hunDic}`, function() {
+            // We are reading big files, so we need to give it some time.
+            this.timeout(10000);
+            const aff = __dirname + `/../dictionaries/${hunDic}.aff`;
+            const dic = __dirname + `/../dictionaries/${hunDic}.dic`;
+
+            const pReader = HunspellReader.createFromFiles(aff, dic);
+
+            it('reads words with info', () => {
+                return pReader
+                .then(reader => reader.readWordsRx().pipe(
+                    skip(200),
+                    take(200),
+                    // .tap(info => { console.log(Aff.affWordToColoredString(info)); }),
+                    toArray(),
+                ).toPromise()
+                    .then(values => {
+                        expect(values.length).to.be.equal(200);
+                    })
+                );
+            });
+        });
     });
+}
 
-});
-
-describe('HunspellReader PT (Brazil)', function() {
-    // We are reading big files, so we need to give it some time.
-    this.timeout(10000);
-    const aff = __dirname + '/../dictionaries/Portuguese (Brazilian).aff';
-    const dic = __dirname + '/../dictionaries/Portuguese (Brazilian).dic';
-    const pReader = HunspellReader.createFromFiles(aff, dic);
-
-    it('reads words with info', () => {
-        return pReader
-        .then(reader => reader.readWordsRx().pipe(
-            skip(200),
-            take(200),
-            // .tap(info => { console.log(Aff.affWordToColoredString(info)); }),
-            toArray(),
-        ).toPromise()
-            .then(values => {
-                expect(values.length).to.be.equal(200);
-            })
-        );
-    });
-});
-
-
+// @ts-ignore
 function textToStream(text: string) {
     return wordsToStream(text.split('\n'));
 }
@@ -138,6 +130,7 @@ function wordsToStream(words: string[]) {
     );
 }
 
+// @ts-ignore
 function getSimpleAff() {
     const sampleAff = `
 SET UTF-8
@@ -193,7 +186,7 @@ SFX S   0     s          [^sxzhy]
         .then(affInfo => new Aff.Aff(affInfo));
 }
 
-
+// @ts-ignore
 const simpleWords = `
 2
 happy

@@ -16,6 +16,7 @@ const yesRegex = /[yY]/;
 const spaceRegex = /\s+/;
 const commentRegex = /(?:^\s*#.*)|(?:\s+#.*)/;
 
+
 export interface ConvEntry { from: string; to: string; }
 function convEntry(fieldValue: ConvEntry[], _: string, args: string[]) {
     if (fieldValue === undefined) {
@@ -47,7 +48,24 @@ function simpleTable(fieldValue, _: string, args: string[]) {
     return fieldValue;
 }
 
+const regExpStartsWithPlus = /^\+/;
+
 function tablePfxOrSfx(fieldValue: Map<string, Fx>, _: string, args: string[], type: string) {
+    /*
+    Fields of an affix rules:
+    (0) Option name
+    (1) Flag
+    (2) stripping characters from beginning (at prefix rules) or end (at suffix rules) of the word
+    (3) affix (optionally with flags of continuation classes, separated by a slash)
+    (4) condition.
+        Zero stripping or affix are indicated by zero. Zero condition is indicated by dot.
+        Condition is a simplified, regular expression-like pattern, which must be met before the affix can be applied.
+        (Dot signs an arbitrary character. Characters in braces sign an arbitrary character from the character subset.
+        Dash hasn't got special meaning, but circumflex (^) next the first brace sets the complementer character set.)
+    (5) Optional morphological fields separated by spaces or tabulators.
+     */
+    const posCondition = 2;
+
     if (fieldValue === undefined) {
         fieldValue = new Map<string, Fx>();
     }
@@ -64,6 +82,15 @@ function tablePfxOrSfx(fieldValue: Map<string, Fx>, _: string, args: string[], t
             substitutionSets: new Map<string, SubstitutionSet>()
         });
         return fieldValue;
+    }
+    if (subValues.length < 2) {
+        console.log(`Affix rule missing values: ${args.join(' ')}`);
+        return;
+    }
+    if (regExpStartsWithPlus.test(subValues[posCondition] || '')) {
+        // sometimes the condition is left off, but there are morphological fields
+        // so we need to inject a '.'.
+        subValues.splice(posCondition, 0, '.');
     }
     const fixRuleSet = fieldValue.get(subField)!;
     const substitutionSets = fixRuleSet.substitutionSets;

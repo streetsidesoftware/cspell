@@ -144,7 +144,7 @@ export class Aff {
                 rulesApplied: [acc.rulesApplied, rule.id].join(' '),
                 flags: {...acc.flags, ...rule.flags},
             }), { rulesApplied: affWord.rulesApplied, flags: affWord.flags});
-        const rules = allRules.filter(rule => !rule.flags).map(rule => rule.id).join('');
+        const rules = this.joinRules(allRules.filter(rule => !rule.flags).map(rule => rule.id));
         const affixRules = allRules.map(rule => rule.sfx! || rule.pfx!).filter(a => !!a);
         const wordWithFlags = {word, flags, rulesApplied, rules: ''};
         return [
@@ -157,11 +157,11 @@ export class Aff {
     }
 
     applyAffixesToWord(affixRules: Fx[], affWord: AffWord): AffWord[] {
-        const combinableSfx = affixRules
+        const combineableRules = affixRules
             .filter(rule => rule.type === 'SFX')
             .filter(rule => rule.combinable === true)
-            .map(({id}) => id)
-            .join('');
+            .map(({id}) => id);
+        const combinableSfx = this.joinRules(combineableRules);
         const r = affixRules
             .map(affix => this.applyAffixToWord(affix, affWord, combinableSfx))
             .reduce((a, b) => a.concat(b), [])
@@ -177,8 +177,9 @@ export class Aff {
             ? combinableSfx
             : '';
         const flags = { ...affWord.flags, isNeedAffix: false };
-        return [...affix.substitutionSets.values()]
-            .filter(sub => sub.match.test(word))
+        const matchingSubstitutions = [...affix.substitutionSets.values()]
+            .filter(sub => sub.match.test(word));
+        return matchingSubstitutions
             .map(sub => sub.substitutions)
             .reduce((a, b) => a.concat(b), [])
             .filter(sub => sub.replace.test(word))
@@ -200,12 +201,24 @@ export class Aff {
             .filter(a => !!a);
     }
 
-    separateRules(rules: string): string[] {
-        if (this.affInfo.FLAG === 'long') {
-            return rules.replace(/(..)/g, '$1//').split('//').slice(0, -1);
-        } else {
-            return rules.split('');
+    joinRules(rules: string[]): string {
+        switch (this.affInfo.FLAG) {
+            case 'long':
+                return rules.join('');
+            case 'num':
+                return rules.join(',');
         }
+        return rules.join('');
+    }
+
+    separateRules(rules: string): string[] {
+        switch (this.affInfo.FLAG) {
+            case 'long':
+                return rules.replace(/(..)/g, '$1//').split('//').slice(0, -1);
+            case 'num':
+                return rules.split(',');
+        }
+        return rules.split('');
     }
 
     get iConv() {
