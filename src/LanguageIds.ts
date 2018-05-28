@@ -55,7 +55,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'jade', extensions: ['.jade', '.pug'], },
     { id: 'java', extensions: ['.java', '.jav'], },
     { id: 'javascriptreact', extensions: ['.jsx'], },
-    { id: 'javascript', extensions: ['.js', '.es6'], },
+    { id: 'javascript', extensions: ['.js', '.mjs', '.es6'], },
     { id: 'json', extensions: [
             '.json',
             '.bowerrc',
