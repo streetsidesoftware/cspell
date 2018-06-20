@@ -33,7 +33,7 @@ function getFullPathName(def: DictionaryDefinition) {
         return '';
     }
     const dictPath = path.join(filePath || dictionaryPath(), file);
-    return dictPath;
+    return path.resolve(dictPath);
 }
 
 export function normalizePathForDictDefs(defs: DictionaryDefinition[], defaultPath: string): DictionaryDefinition[] {
