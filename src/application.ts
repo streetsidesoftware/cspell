@@ -17,21 +17,21 @@ const UTF8: BufferEncoding = 'utf8';
 
 export { TraceResult, IncludeExcludeFlag } from './index';
 
-export interface CSpellApplicationOptions {
+export interface CSpellApplicationOptions extends BaseOptions {
     verbose?: boolean;
     debug?: boolean;
-    config?: string;
     exclude?: string;
     wordsOnly?: boolean;
     unique?: boolean;
-    local?: string;
 }
 
-export interface TraceOptions extends ConfigOptions {
+export interface TraceOptions extends BaseOptions {
 }
 
-export interface ConfigOptions {
+export interface BaseOptions {
     config?: string;
+    languageId?: string;
+    local?: string;
 }
 
 export interface AppError extends NodeJS.ErrnoException {}
@@ -104,6 +104,14 @@ export class CSpellApplicationConfiguration {
     }
 }
 
+interface ConfigInfo { filename: string; config: cspell.CSpellUserSettings; }
+interface FileConfigInfo {
+    configInfo: ConfigInfo;
+    filename: string;
+    text: string;
+    languageIds: string[];
+}
+
 export function lint(
     files: string[],
     options: CSpellApplicationOptions,
@@ -120,20 +128,17 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         header();
 
-        interface ConfigInfo { filename: string; config: cspell.CSpellUserSettings; }
-        interface FileConfigInfo { configInfo: ConfigInfo; filename: string; text: string; }
+        const settingsFromCommandLine = util.clean({
+            languageId: cfg.options.languageId,
+            language: cfg.local,
+        });
+
         interface ResultInfo { filename: string; issues: cspell.TextDocumentOffset[]; config: cspell.CSpellUserSettings; }
 
         const configRx = globRx(cfg.configGlob, cfg.configGlobOptions).pipe(
             map(util.unique),
             tap(configFiles => cfg.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`)),
             map((filenames): ConfigInfo => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)})),
-            map(config => {
-                if (cfg.local) {
-                    config.config.language = cfg.local;
-                }
-                return config;
-            }),
             share(),
             );
 
@@ -175,16 +180,12 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         const r = combineLatest(
                 configRx,
                 filesRx,
-                (configInfo, fileInfo): FileConfigInfo => ({ configInfo, text: fileInfo.text, filename: fileInfo.filename })
+                (configInfo, fileInfo) => ({ configInfo, text: fileInfo.text, filename: fileInfo.filename })
         ).pipe(
             map(({configInfo, filename, text}): FileConfigInfo => {
-                const ext = path.extname(filename);
-                const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
-                const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), fileSettings);
-                const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
-                const config = cspell.constructSettingsForText(settings, text, languageIds);
-                cfg.debug(`Filename: ${filename}, Extension: ${ext}, LanguageIds: ${languageIds.toString()}`);
-                return {configInfo: {...configInfo, config}, filename, text};
+                const info = calcFinalConfigInfo(configInfo, settingsFromCommandLine, filename, text);
+                cfg.debug(`Filename: ${filename}, Extension: ${path.extname(filename)}, LanguageIds: ${info.languageIds.toString()}`);
+                return info;
             }),
             filter(info => info.configInfo.config.enabled !== false),
             tap(() => status.files += 1),
@@ -280,24 +281,24 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
 
 export interface CheckTextResult extends CheckTextInfo {}
 
-export async function checkText(filename: string, options: ConfigOptions): Promise<CheckTextResult> {
+export async function checkText(filename: string, options: BaseOptions): Promise<CheckTextResult> {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
     const pSettings = globRx(configGlob, configGlobOptions).pipe(
         first(),
         map(util.unique),
-        map(filenames => cspell.readSettingsFiles(filenames)),
+        map(filenames => ({filename: filenames[0], config: cspell.readSettingsFiles(filenames)})),
     ).toPromise();
     const pBuffer = fsp.readFile(filename);
     const [foundSettings, buffer] = await Promise.all([pSettings, pBuffer]);
 
     const text = buffer.toString(UTF8);
-    const ext = path.extname(filename);
-    const fileSettings = cspell.calcOverrideSettings(foundSettings, path.resolve(filename));
-    const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), fileSettings);
-    const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
-    const config = cspell.constructSettingsForText(settings, text, languageIds);
-    return Validator.checkText(text, config);
+    const settingsFromCommandLine = util.clean({
+        languageId: options.languageId,
+        local: options.local,
+    });
+    const info = calcFinalConfigInfo(foundSettings, settingsFromCommandLine, filename, text);
+    return Validator.checkText(text, info.configInfo.config);
 }
 
 export function createInit(_: CSpellApplicationOptions): Promise<void> {
@@ -334,6 +335,20 @@ function extractGlobExcludesFromConfig(filename: string, config: cspell.CSpellUs
     return (config.ignorePaths || []).map(glob => ({ source: filename, glob, regex: minimatch.makeRe(glob, matchBase)}));
 }
 
+
+function calcFinalConfigInfo(
+    configInfo: ConfigInfo,
+    settingsFromCommandLine: cspell.CSpellUserSettings,
+    filename: string,
+    text: string
+): FileConfigInfo {
+    const ext = path.extname(filename);
+    const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
+    const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), fileSettings, settingsFromCommandLine);
+    const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
+    const config = cspell.constructSettingsForText(settings, text, languageIds);
+    return {configInfo: {...configInfo, config}, filename, text, languageIds};
+}
 
 type GlobRx = (filename: string, options?: minimatch.IOptions) => Observable<string[]>;
 

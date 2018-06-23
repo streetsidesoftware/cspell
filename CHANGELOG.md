@@ -1,5 +1,12 @@
 # Release Notes
 
+## [3.1.0]
+- Change the default output for issues to address: [linter output format is not standardized #35](https://github.com/Jason3S/cspell/issues/35).
+  The old output can be achieved with the `--legacy` flag.
+- Added `--languageId` options to force the programming language. This is useful if the extension is unknown.
+- `check` command now supports overrides in the `cspell.json` file.
+- `check` command now supports `local` option.
+
 ## [3.0.3]
 - Add Scala and Java dictionaries.
 

@@ -3,22 +3,24 @@
 import * as path from 'path';
 import * as program from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
-import { CSpellApplicationOptions, AppError, ConfigOptions, checkText } from './application';
+import { CSpellApplicationOptions, AppError, BaseOptions, checkText } from './application';
 import * as App from './application';
 import chalk from 'chalk';
 
-interface Options extends CSpellApplicationOptions {}
+interface Options extends CSpellApplicationOptions {
+    legacy?: boolean;
+}
 interface TraceOptions extends App.TraceOptions {}
 // interface InitOptions extends Options {}
 
-function issueEmitter(issue: App.Issue) {
-    const {uri = '', row, col, text} = issue;
-    console.log(`${chalk.green(uri)}[${row}, ${col}]: Unknown word: ${chalk.red(text)}`);
-}
+const templateIssue = `${chalk.green('${uri}')}:${chalk.yellow('${row}:${col}')} - Unknown word (${chalk.red('${text}')})`;
+const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
+const templateIssueWordsOnly = '${text}';
 
-function issueEmitterWordsOnly(issue: App.Issue) {
-    const {text} = issue;
-    console.log(text);
+function genIssueEmitter(template: string) {
+    return function issueEmitter(issue: App.Issue) {
+        console.log(formatIssue(template, issue));
+    };
 }
 
 function errorEmitter(message: string, error: Error) {
@@ -47,6 +49,8 @@ program
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
     .option('-v, --verbose', 'display more information about the files being checked and the configuration')
     .option('--local <local>', 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.')
+    .option('--legacy', 'Legacy output')
+    .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
     .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
     .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
     .option('--debug', 'Output information useful for debugging cspell.json files.')
@@ -58,8 +62,11 @@ program
     // .option('--force', 'Force the exit value to always be 0')
     .arguments('<files...>')
     .action((files: string[], options: Options) => {
+        const issueTemplate = options.wordsOnly
+            ? templateIssueWordsOnly
+            : options.legacy ? templateIssueLegacy : templateIssue;
         const emitters: App.Emitters = {
-            issue: options.wordsOnly ? issueEmitterWordsOnly : issueEmitter,
+            issue: genIssueEmitter(issueTemplate),
             error: errorEmitter,
             info: options.verbose ? infoEmitter : nullEmitter,
             debug: options.debug ? debugEmitter : nullEmitter,
@@ -84,6 +91,8 @@ program
     .command('trace')
     .description('Trace words')
     .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .option('--local <local>', 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.')
+    .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
     .option('--no-color', 'Turn off color.')
     .option('--color', 'Force color')
     .arguments('<words...>')
@@ -102,7 +111,7 @@ program
     });
 
 interface CheckCommandOptions {
-    parent: ConfigOptions;
+    parent: BaseOptions;
 }
 
 program
@@ -184,4 +193,14 @@ function trimMid(s: string, w: number): string {
     const l = Math.floor((w - 3) / 2);
     const r = Math.ceil((w - 3) / 2);
     return s.substr(0, l) + '...' + s.substr(-r);
+}
+
+function formatIssue(template: string, issue: App.Issue) {
+    const {uri = '', row, col, text} = issue;
+    return template
+        .replace(/\$\{uri\}/, uri)
+        .replace(/\$\{row\}/, row.toString())
+        .replace(/\$\{col\}/, col.toString())
+        .replace(/\$\{text\}/, text)
+        ;
 }
