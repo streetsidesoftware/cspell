@@ -79,6 +79,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'razor', extensions: ['.cshtml'], },
     { id: 'ruby', extensions: ['.rb', '.rbx', '.rjs', '.gemspec', '.rake', '.ru'], },
     { id: 'rust', extensions: ['.rs'], },
+    { id: 'scala', extensions: ['.scala', '.sc'], },
     { id: 'scss', extensions: ['.scss'], },
     { id: 'shaderlab', extensions: ['.shader', '.cginc'], },
     { id: 'shellscript',
