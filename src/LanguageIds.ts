@@ -32,6 +32,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'css', extensions: ['.css'], },
     { id: 'diff', extensions: ['.diff', '.patch', '.rej'], },
     { id: 'dockerfile', extensions: ['.dockerfile'], },
+    { id: 'elixir', extensions: ['.ex', '.exs'], },
     { id: 'fsharp', extensions: ['.fs', '.fsi', '.fsx', '.fsscript'], },
     { id: 'go', extensions: ['.go'], },
     { id: 'groovy', extensions: ['.groovy', '.gvy', '.gradle'], },
