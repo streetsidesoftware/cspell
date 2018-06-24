@@ -1,5 +1,8 @@
 # Release Notes
 
+## [3.1.3]
+- Add `Elixir` dictionary to cspell.
+
 ## [3.1.2]
 - Add `lorem-ipsum` dictionary to cspell.
 
