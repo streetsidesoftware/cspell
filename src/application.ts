@@ -129,8 +129,8 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         header();
 
         const settingsFromCommandLine = util.clean({
-            languageId: cfg.options.languageId,
-            language: cfg.local,
+            languageId: cfg.options.languageId || undefined,
+            language: cfg.local || undefined,
         });
 
         interface ResultInfo { filename: string; issues: cspell.TextDocumentOffset[]; config: cspell.CSpellUserSettings; }
@@ -294,8 +294,8 @@ export async function checkText(filename: string, options: BaseOptions): Promise
 
     const text = buffer.toString(UTF8);
     const settingsFromCommandLine = util.clean({
-        languageId: options.languageId,
-        local: options.local,
+        languageId: options.languageId || undefined,
+        local: options.local || undefined,
     });
     const info = calcFinalConfigInfo(foundSettings, settingsFromCommandLine, filename, text);
     return Validator.checkText(text, info.configInfo.config);

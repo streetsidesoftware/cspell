@@ -1,5 +1,8 @@
 # Release Notes
 
+## [3.1.1]
+- Fix [Can't set language via config file #49](https://github.com/Jason3S/cspell/issues/49)
+
 ## [3.1.0]
 - Change the default output for issues to address: [linter output format is not standardized #35](https://github.com/Jason3S/cspell/issues/35).
   The old output can be achieved with the `--legacy` flag.
