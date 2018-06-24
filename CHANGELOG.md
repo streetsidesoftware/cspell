@@ -1,5 +1,8 @@
 # Release Notes
 
+## [3.1.2]
+- Add `lorem-ipsum` dictionary to cspell.
+
 ## [3.1.1]
 - Fix [Can't set language via config file #49](https://github.com/Jason3S/cspell/issues/49)
 
