@@ -4,6 +4,10 @@ node_js:
   - "9"
   - "8"
 script:
+  # run cspell on cspell using pre-commit
+  - pip install --user pre-commit
+  - pre-commit try-repo .
+  # normal testing
   - npm install
   # the prepublish script run during install currently does clean-build and test
   # with npm v5+ that will no longer be the case, so these will need to be added back.
