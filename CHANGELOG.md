@@ -1,5 +1,8 @@
 # Release Notes
 
+## [3.1.4]
+- Support `~/` references for dictionary files.
+
 ## [3.1.3]
 - Add `Elixir` dictionary to cspell.
 
