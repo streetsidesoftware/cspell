@@ -32,6 +32,7 @@
     "test-ts": "NODE_ENV=test mocha --require ts-node/register --recursive --bail \"src/**/*.test.ts\"",
     "test-watch": "npm run build && mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "prepare": "npm run lint && npm run clean-build && npm test",
+    "preinstall": "npm run compile",
     "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
     "which": "which node && echo $PATH",
@@ -81,8 +82,7 @@
     "nyc": "^11.9.0",
     "rimraf": "^2.6.2",
     "ts-node": "^6.2.0",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2"
+    "tslint": "^5.10.0"
   },
   "dependencies": {
     "chalk": "^2.4.1",
@@ -109,6 +109,7 @@
     "glob": "^7.1.2",
     "minimatch": "^3.0.4",
     "rxjs": "^6.2.1",
+    "typescript": "^2.9.2",
     "vscode-uri": "^1.0.5",
     "xregexp": "^4.2.0"
   },
