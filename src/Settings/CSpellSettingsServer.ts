@@ -11,7 +11,7 @@ import {
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
-import * as ConfigStore from 'configstore-fork';
+import * as ConfigStore from 'configstore';
 import * as minimatch from 'minimatch';
 import { finalize } from 'rxjs/operators';
 
