@@ -54,19 +54,20 @@ describe('Validate the wordListCompiler', function() {
     it('test reading and normalizing a file', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
-        return from(compileWordList(sourceName, destName)).pipe(
-            flatMap(s => {
-                expect(s).to.be.not.empty;
-                return new Promise((resolve, reject) => {
-                    s.on('finish', () => resolve());
-                    s.on('error', () => reject());
-                });
-            }),
-            take(1),
-        ).toPromise()
+        return compileWordList(sourceName, destName, { splitWords: true })
         .then(() => fsp.readFile(destName, 'utf8'))
         .then(output => {
             expect(output).to.be.equal(citiesResult);
+        });
+    });
+
+    it('test compiling to a file without split', () => {
+        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+        const destName = path.join(__dirname, '..', '..', 'temp', 'cities2.txt');
+        return compileWordList(sourceName, destName, { splitWords: false })
+        .then(() => fsp.readFile(destName, 'utf8'))
+        .then(output => {
+            expect(output).to.be.equal(cities.toLowerCase());
         });
     });
 
@@ -98,23 +99,34 @@ describe('Validate the wordListCompiler', function() {
     });
 });
 
+const cities = `\
+New York
+New Amsterdam
+Los Angeles
+San Francisco
+New Delhi
+Mexico City
+London
+Paris
+`;
+
 const citiesResult = `\
-amsterdam
-angles
-city
-delhi
-francisco
-las
-las angles
-london
-mexico
-mexico city
-new
-new amsterdam
-new delhi
 new york
-paris
-san
-san francisco
+new
 york
+new amsterdam
+amsterdam
+los angeles
+los
+angeles
+san francisco
+san
+francisco
+new delhi
+delhi
+mexico city
+mexico
+city
+london
+paris
 `;

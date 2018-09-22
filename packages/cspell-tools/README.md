@@ -37,4 +37,3 @@ This will read and expand the `english.dic` file based upon the rules in `englis
 For large files, this process can take a long time and us a lot of memory.
 
 The tool `cspell-trie` can be used to read the contents of a `.trie` or `.trie.gz` file.
-

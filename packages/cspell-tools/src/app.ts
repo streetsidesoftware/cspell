@@ -4,7 +4,7 @@
 // # !/usr/bin/env node --max_old_space_size=8192
 
 
-import { compileWordList, compileTrie } from './compiler';
+import { compileWordList, compileTrie, compileSimpleWordList } from './compiler';
 import * as path from 'path';
 import * as program from 'commander';
 import { Observable, bindNodeCallback, from } from 'rxjs';
@@ -24,7 +24,8 @@ program
     .description('compile words lists into simple dictionary files.')
     .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
     .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
-    .action((src: string[], options: { output?: string, compress: boolean }) => {
+    .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
+    .action((src: string[], options: { output?: string, compress: boolean, split: boolean, case: boolean }) => {
         console.log('Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
             options.output || 'default',
             options.compress ? 'true' : 'false',
@@ -42,7 +43,7 @@ program
             }),
             concatMap(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
-                return compileWordList(src, dst).then(() => src);
+                return compileWordList(src, dst, { splitWords: options.split }).then(() => src);
             }),
         )
         .forEach(name => console.log(`Complete.`));

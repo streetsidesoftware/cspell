@@ -3,9 +3,9 @@ import * as XRegExp from 'xregexp';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
 import { lineReaderRx } from './fileReader';
-import { writeToFile, writeToFileRxP} from 'cspell-lib';
+import { writeToFileRx, writeToFileRxP} from 'cspell-lib';
 import { Observable, zip, from } from 'rxjs';
-import { flatMap, reduce, map, bufferCount } from 'rxjs/operators';
+import { flatMap, reduce, map, bufferCount, take, filter, distinct } from 'rxjs/operators';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie';
@@ -47,28 +47,48 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
 
 export function compileSetOfWords(lines: Observable<string>): Promise<Set<string>> {
     const set = normalizeWords(lines)
-            .pipe(reduce((s: Set<string>, w: string) => s.add(w), new Set<string>()))
-            .toPromise();
+        .pipe(reduce((s: Set<string>, w: string) => s.add(w), new Set<string>()))
+        .toPromise();
 
     return Promise.all([set]).then(a => a[0]);
 }
 
-export function compileWordList(filename: string, destFilename: string): Promise<fs.WriteStream> {
+interface CompileWordListOptions {
+    splitWords: boolean;
+}
+
+export function compileWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
+    return options.splitWords
+        ? compileWordListWithSplit(filename, destFilename)
+        : compileSimpleWordList(filename, destFilename);
+}
+
+export function compileWordListWithSplit(filename: string, destFilename: string): Promise<void> {
     const getWords = () => regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
 
     const destDir = path.dirname(destFilename);
 
-    return mkdirp(destDir).then(() => compileSetOfWords(getWords()))
-    .then(set => {
-        const data = genSequence(set)
-            .map(a => a + '\n')
-            .toArray()
-            .sort()
-            .join('');
-        return writeToFile(destFilename, data);
-    });
+    return mkdirp(destDir).then(() => writeToFileRxP(destFilename, getWords().pipe(
+        flatMap(line => lineToWords(line).toArray()),
+        distinct(),
+        map(a => a + '\n'),
+        bufferCount(1024),
+        map(a => a.join('')),
+    )));
 }
 
+export function compileSimpleWordList(filename: string, destFilename: string): Promise<void> {
+    const getWords = () => regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
+    const destDir = path.dirname(destFilename);
+    return mkdirp(destDir).then(() => writeToFileRxP(destFilename, getWords().pipe(
+        map(a => a.toLowerCase()),
+        distinct(),
+        filter(a => !!a),
+        map(a => a + '\n'),
+        bufferCount(1024),
+        map(a => a.join('')),
+    )));
+}
 
 export function normalizeWordsToTrie(words: Observable<string>): Promise<Trie.TrieNode> {
     const result = normalizeWords(words)
