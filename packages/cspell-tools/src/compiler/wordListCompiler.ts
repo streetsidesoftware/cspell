@@ -3,9 +3,9 @@ import * as XRegExp from 'xregexp';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
 import { lineReaderRx } from './fileReader';
-import { writeToFileRx, writeToFileRxP} from 'cspell-lib';
+import { writeToFileRxP} from 'cspell-lib';
 import { Observable, zip, from } from 'rxjs';
-import { flatMap, reduce, map, bufferCount, take, filter, distinct } from 'rxjs/operators';
+import { flatMap, reduce, map, bufferCount, filter, distinct } from 'rxjs/operators';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie';
@@ -30,8 +30,7 @@ export function lineToWords(line: string): Sequence<string> {
         .map(a => a.trim())
         .filter(a => !!a)
         .filter(s => !regExpRepeatChars.test(s))
-        .map(a => a.toLowerCase())
-        .reduceToSequence<string, Set<string>>((s, w) => s.add(w), new Set<string>());
+        .map(a => a.toLowerCase());
 
     return words;
 }
@@ -43,14 +42,6 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
         return genSequence(splitWords).concatMap(w => w.split(regExpSpaceOrDash));
     }
     return splitWords;
-}
-
-export function compileSetOfWords(lines: Observable<string>): Promise<Set<string>> {
-    const set = normalizeWords(lines)
-        .pipe(reduce((s: Set<string>, w: string) => s.add(w), new Set<string>()))
-        .toPromise();
-
-    return Promise.all([set]).then(a => a[0]);
 }
 
 interface CompileWordListOptions {

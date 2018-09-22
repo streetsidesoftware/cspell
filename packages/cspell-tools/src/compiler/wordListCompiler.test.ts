@@ -9,12 +9,12 @@ import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie';
 import * as path from 'path';
 import { from } from 'rxjs';
-import { flatMap, take, toArray } from 'rxjs/operators';
+import { take, toArray } from 'rxjs/operators';
 
 describe('Validate the wordListCompiler', function() {
     it('tests splitting lines', () => {
         const line = 'AppendIterator::getArrayIterator';
-        expect(lineToWords(line).toArray()).to.deep.equal([
+        expect(lineToWords(line).filter(distinct()).toArray()).to.deep.equal([
             'append',
             'iterator',
             'get',
@@ -23,19 +23,19 @@ describe('Validate the wordListCompiler', function() {
         expect(lineToWords('Austin Martin').toArray()).to.deep.equal([
             'austin martin', 'austin', 'martin'
         ]);
-        expect(lineToWords('JPEGsBLOBs').toArray()).to.deep.equal(['jpegs', 'blobs']);
-        expect(lineToWords('CURLs CURLing').toArray()).to.deep.equal(['curls curling', 'curls', 'curling']);
-        expect(lineToWords('DNSTable Lookup').toArray()).to.deep.equal(['dns', 'table', 'lookup']);
-        expect(lineToWords('OUTRing').toArray()).to.deep.equal(['outring']);
-        expect(lineToWords('OUTRings').toArray()).to.deep.equal(['outrings']);
-        expect(lineToWords('DIRs').toArray()).to.deep.equal(['dirs']);
-        expect(lineToWords('AVGAspect').toArray()).to.deep.equal(['avg', 'aspect']);
-        expect(lineToWords('New York').toArray()).to.deep.equal(['new york', 'new', 'york']);
-        expect(lineToWords('Namespace DNSLookup').toArray()).to.deep.equal(['namespace', 'dns', 'lookup']);
-        expect(lineToWords('well-educated').toArray()).to.deep.equal(['well', 'educated']);
+        expect(lineToWords('JPEGsBLOBs').filter(distinct()).toArray()).to.deep.equal(['jpegs', 'blobs']);
+        expect(lineToWords('CURLs CURLing').filter(distinct()).toArray()).to.deep.equal(['curls curling', 'curls', 'curling']);
+        expect(lineToWords('DNSTable Lookup').filter(distinct()).toArray()).to.deep.equal(['dns', 'table', 'lookup']);
+        expect(lineToWords('OUTRing').filter(distinct()).toArray()).to.deep.equal(['outring']);
+        expect(lineToWords('OUTRings').filter(distinct()).toArray()).to.deep.equal(['outrings']);
+        expect(lineToWords('DIRs').filter(distinct()).toArray()).to.deep.equal(['dirs']);
+        expect(lineToWords('AVGAspect').filter(distinct()).toArray()).to.deep.equal(['avg', 'aspect']);
+        expect(lineToWords('New York').filter(distinct()).toArray()).to.deep.equal(['new york', 'new', 'york']);
+        expect(lineToWords('Namespace DNSLookup').filter(distinct()).toArray()).to.deep.equal(['namespace', 'dns', 'lookup']);
+        expect(lineToWords('well-educated').filter(distinct()).toArray()).to.deep.equal(['well', 'educated']);
         // Sadly we cannot do this one correctly
-        expect(lineToWords('CURLcode').toArray()).to.deep.equal(['cur', 'lcode']);
-        expect(lineToWords('kDNSServiceErr_BadSig').toArray()).to.deep.equal([
+        expect(lineToWords('CURLcode').filter(distinct()).toArray()).to.deep.equal(['cur', 'lcode']);
+        expect(lineToWords('kDNSServiceErr_BadSig').filter(distinct()).toArray()).to.deep.equal([
             'k',
             'dns',
             'service',
@@ -43,7 +43,7 @@ describe('Validate the wordListCompiler', function() {
             'bad',
             'sig',
         ]);
-        expect(lineToWords('apd_get_active_symbols').toArray()).to.deep.equal([
+        expect(lineToWords('apd_get_active_symbols').filter(distinct()).toArray()).to.deep.equal([
             'apd',
             'get',
             'active',
@@ -98,6 +98,11 @@ describe('Validate the wordListCompiler', function() {
         });
     });
 });
+
+function distinct(): (word: string) => boolean {
+    const known = new Set<String>();
+    return a => known.has(a) ? false : (known.add(a), true);
+}
 
 const cities = `\
 New York
