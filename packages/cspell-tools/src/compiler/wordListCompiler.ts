@@ -16,7 +16,7 @@ const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
 const regExpRepeatChars = /(.)\1{3,}/i;
 
 export function normalizeWords(lines: Observable<string>) {
-    return lines.pipe(flatMap(line => lineToWords(line).toArray()));
+    return lines.pipe(flatMap(line => lineToWords(line)));
 }
 
 export function lineToWords(line: string): Sequence<string> {
