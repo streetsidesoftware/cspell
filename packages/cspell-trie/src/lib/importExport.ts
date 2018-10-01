@@ -172,6 +172,7 @@ export function importTrieRx(lines: Observable<string>): Observable<TrieNode> {
     const regNotEscapedCommas = /(^|[^\\]),/g;
     const regUnescapeCommas = /__COMMA__/g;
     const regUnescape = /[\\](.)/g;
+    const flagsWord = { f: FLAG_WORD };
 
     function splitLine(line: string) {
         const pattern = '$1__COMMA__';
@@ -184,7 +185,7 @@ export function importTrieRx(lines: Observable<string>): Observable<TrieNode> {
     function decodeLine(line: string, nodes: TrieNode[]): TrieNode {
         const isWord = line[0] === '*';
         line = isWord ? line.slice(1) : line;
-        const flags = isWord ? { f: FLAG_WORD } : {};
+        const flags = isWord ? flagsWord : {};
         const children: [string, TrieNode][] = splitLine(line)
             .filter(a => !!a)
             .map<[string, number]>(a => [
@@ -198,7 +199,7 @@ export function importTrieRx(lines: Observable<string>): Observable<TrieNode> {
 
     const r = lines.pipe(
         tap<string>(headerLines),
-        map(a => a.trim()),
+        map(a => a.replace('\n', '')),
         skipWhile(line => line !== '*'),
         filter(a => !!a),
         reduce<string, ReduceResults>((acc, line) => {
