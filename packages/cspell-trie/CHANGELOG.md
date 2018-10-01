@@ -1,5 +1,11 @@
 # Release Notes
 
+## 3.0.7
+- Fix an issue with the decoder that messed up words with spaces.
+
+## 3.0.0
+- Update the major version due to a requirement on rxjs 6.
+
 ## 2.0.0
 - Move to ES2017 for speed improvements.
 - Require node >= 8
