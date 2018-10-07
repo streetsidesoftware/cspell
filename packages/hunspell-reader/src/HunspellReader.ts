@@ -2,7 +2,7 @@ import {parseAffFileToAff} from './affReader';
 import {Aff, AffWord} from './aff';
 import {lineReader} from './fileReader';
 import {Observable} from 'rxjs';
-import {map, skip, tap, flatMap} from 'rxjs/operators';
+import {map, skip, tap, concatMap} from 'rxjs/operators';
 import * as monitor from './monitor';
 
 export interface WordInfo {
@@ -42,7 +42,7 @@ export class HunspellReader {
     readWordsRx(): Observable<AffWord> {
         const r = this.src.dic.pipe(
             tap(() => monitor.incCounter('cntIn')),
-            flatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord)),
+            concatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord)),
             tap(() => monitor.incCounter('cntOut')),
         );
         return r;
