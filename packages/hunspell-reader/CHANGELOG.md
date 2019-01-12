@@ -1,5 +1,11 @@
 # Release Notes
 
+## 2.1.0
+- Add an Iterable Reader, this works much better for very large dictionaries.
+
+## 2.0.0
+- Move to RxJs 6 and Node 8
+
 ## 1.2.1
 - Update packages.
 
