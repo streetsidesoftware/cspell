@@ -1,3 +1,4 @@
+import { Dictionary } from './types';
 
 export interface ConvItem {
     from: string;

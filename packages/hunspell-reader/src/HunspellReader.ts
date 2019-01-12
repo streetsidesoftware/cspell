@@ -4,12 +4,7 @@ import {lineReader} from './fileReader';
 import {Observable} from 'rxjs';
 import {map, skip, tap, concatMap} from 'rxjs/operators';
 import * as monitor from './monitor';
-
-export interface WordInfo {
-    word: string;
-    rules: string;
-}
-
+import { WordInfo } from './types';
 
 export interface HunspellSrcInfo {
     aff: Aff;
@@ -23,7 +18,6 @@ export class HunspellReader {
     constructor(readonly src: HunspellSrcInfo) {
         this.aff = src.aff;
     }
-
 
     /**
      * @internal

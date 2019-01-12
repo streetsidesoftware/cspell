@@ -2,6 +2,7 @@ import * as util from 'util';
 import {Converter} from './converter';
 import {genSequence as gs, Sequence} from 'gensequence';
 import * as GS from 'gensequence';
+import { Dictionary } from './types';
 
 // cSpell:enableCompoundWords
 
@@ -56,7 +57,7 @@ export interface AffTransformFlags {
 };
 
 export interface AffInfo extends AffTransformFlags {
-    SET?: string;
+    SET?: string;       // Characterset encoding of the .aff and .dic file
     TRY?: string;
     KEY?: string;
     WORDCHARS?: string;
