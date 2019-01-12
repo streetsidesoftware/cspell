@@ -1,4 +1,4 @@
-#!/usr/bin/env node --max_old_space_size=8192
+#!/usr/bin/env node
 
 // cSpell:ignore findup
 import * as commander from 'commander';
@@ -6,12 +6,14 @@ import { IterableHunspellReader } from './IterableHunspellReader';
 import * as fs from 'fs';
 import { uniqueFilter, batch } from './util';
 import { genSequence } from 'gensequence';
-// import * as monitor from './monitor';
 
-const uniqueHistorySize = 50000;
+const uniqueHistorySize = 500000;
 
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
+
+let displayHelp = true;
+
 commander
     .version(version);
 
@@ -20,35 +22,32 @@ commander
     .option('-o, --output <file>', 'output file - defaults to stdout')
     .option('-s, --sort', 'sort the list of words')
     .option('-u, --unique', 'make sure the words are unique.')
-    .option('-i, --ignore_case', 'used with --unique and --sort')
     .option('-l, --lower_case', 'output in lower case')
     .option('-T, --no-transform', 'Do not apply the prefix and suffix transforms.  Root words only.')
     .description('Output all the words in the <hunspell.dic> file.')
-    .action(async (hunspellDicFilename, options) => {
+    .action(async function(hunspellDicFilename, options) {
+        displayHelp = false;
         const {
             sort = false,
             unique = false,
-            ignore_case: ignoreCase = false,
             output: outputFile,
             lower_case: lowerCase = false,
             transform = true,
         } = options;
-        notify('Write words', !!outputFile);
-        notify(`Sort: ${yesNo(sort)}`, !!outputFile);
-        notify(`Unique: ${yesNo(unique)}`, !!outputFile);
-        notify(`Ignore Case: ${yesNo(ignoreCase)}`, !!outputFile);
-        const baseFile = hunspellDicFilename.replace(/(\.dic)?$/, '');
+        const log = (msg: string) => notify(msg, !!outputFile);
+        log('Write words');
+        log(`Sort: ${yesNo(sort)}`);
+        log(`Unique: ${yesNo(unique)}`);
+        const baseFile = hunspellDicFilename.replace(/\.(dic|aff)$/, '');
         const dicFile = baseFile + '.dic';
         const affFile = baseFile + '.aff';
-        notify(`Dic file: ${dicFile}`, !!outputFile);
-        notify(`Aff file: ${affFile}`, !!outputFile);
-        notify(`Generating Words`, !!outputFile);
+        log(`Dic file: ${dicFile}`);
+        log(`Aff file: ${affFile}`);
+        log(`Generating Words...`);
         const reader = await IterableHunspellReader.createFromFiles(affFile, dicFile);
         const seqWords = transform ? reader.seqWords() : reader.seqRootWords();
-
         const normalize = lowerCase ? (a: string) => a.toLowerCase() : (a: string) => a;
         const filterUnique = unique ? uniqueFilter(uniqueHistorySize) : (_: string) => true;
-
         const fd = outputFile ? fs.openSync(outputFile, 'w') : 1;
 
         const words = seqWords
@@ -56,9 +55,10 @@ commander
             .filter(a => !!a)
             .map(normalize)
             .map(a => a + '\n')
-            .filter(filterUnique)
+            .filter(filterUnique);
 
         if (sort) {
+            log('Sorting...');
             const data = words.toArray().sort().join('');
             fs.writeSync(fd, data);
         } else {
@@ -66,11 +66,12 @@ commander
         }
 
         fs.closeSync(fd);
+        log('Done.');
     });
 
 commander.parse(process.argv);
 
-if (!commander.args.length) {
+if (displayHelp) {
     commander.help();
 }
 

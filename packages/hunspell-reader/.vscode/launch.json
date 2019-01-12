@@ -7,16 +7,17 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/dist/index.js",
-            "cwd": "${workspaceRoot}",
-            "outFiles": []
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach to Process",
-            "port": 5858,
+            "name": "Run Command Words",
+            "program": "${workspaceRoot}/dist/app.js",
+			"cwd": "${workspaceRoot}",
+			"args": [
+				"words",
+				"-s",
+				"-o",
+				"words_en.txt",
+				"-u",
+				"./dictionaries/en_US.dic"
+			],
             "outFiles": []
         },
 		{
