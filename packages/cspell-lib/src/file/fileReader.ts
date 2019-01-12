@@ -3,10 +3,11 @@
 // cSpell:enableCompoundWords
 import * as fs from 'fs';
 import {Observable, Subject, concat, of} from 'rxjs';
-import {scan, concatMap} from 'rxjs/operators';
+import {scan, concatMap, merge} from 'rxjs/operators';
 import * as iconv from 'iconv-lite';
 import * as zlib from 'zlib';
 import * as readline from 'readline';
+import { streamToStringRx } from 'rxjs-stream';
 
 const defaultEncoding = 'utf8';
 
@@ -15,7 +16,7 @@ const defaultEncoding = 'utf8';
  * @param filename
  * @param encoding defaults to 'utf8'
  */
-export function lineReaderRx(filename: string, encoding?: string): Observable<string> {
+export function lineReaderRx(filename: string, encoding: string = defaultEncoding): Observable<string> {
     return stringsToLinesRx(textFileStreamRx(filename, encoding));
 }
 
@@ -36,13 +37,11 @@ function prepareFileStream(
 }
 
 export function textFileStreamRx(filename: string, encoding: string = defaultEncoding): Observable<string> {
-    const subject = new Subject<string>();
-    const fnError = (e: Error) => subject.error(e);
-    const fnComplete = () => subject.complete();
+    const errorHandler = new Subject<string>();
+    const fnError = (e: Error) => errorHandler.error(e);
     const stream = prepareFileStream(filename, encoding, fnError);
-    stream.on('end', fnComplete);
-    stream.on('data', s => subject.next(s));
-    return subject;
+    stream.on('end', () => errorHandler.complete());
+    return streamToStringRx(stream, encoding).pipe(merge(errorHandler));
 }
 
 /**
@@ -65,6 +64,7 @@ export function streamFileLineByLineRx(filename: string, encoding: string = defa
     const stream = prepareFileStream(filename, encoding, fnError);
     // We want to capture the last line.
     stream.on('data', d => data = d);
+    stream.on('error', fnError);
     const rl = readline.createInterface({
         input: stream,
         terminal: false,
