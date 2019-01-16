@@ -109,9 +109,10 @@ export interface AffWord {
     rules: string;
     flags: AffWordFlags;
     rulesApplied: string;
-    base: string;
-    suffix: string;
-    prefix: string;
+    base: string;           // the base
+    suffix: string;         // suffixes applied
+    prefix: string;         // prefixes applied
+    dic: string;            // dictionary entry
 }
 
 export class Aff {
@@ -132,7 +133,7 @@ export class Aff {
     applyRulesToDicEntry(line: string): AffWord[] {
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
-        return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: '', base: word, suffix: '', prefix: ''})
+        return this.applyRulesToWord(asAffWord(word, rules))
             .map(affWord => ({...affWord, word: this._oConv.convert(affWord.word) }));
     }
 
@@ -140,7 +141,7 @@ export class Aff {
      * @internal
      */
     applyRulesToWord(affWord: AffWord): AffWord[] {
-        const { word, base, suffix, prefix } = affWord;
+        const { word, base, suffix, prefix, dic } = affWord;
         const allRules = this.getMatchingRules(affWord.rules);
         const { rulesApplied, flags } = allRules
             .filter(rule => !!rule.flags)
@@ -150,7 +151,7 @@ export class Aff {
             }), { rulesApplied: affWord.rulesApplied, flags: affWord.flags});
         const rules = this.joinRules(allRules.filter(rule => !rule.flags).map(rule => rule.id));
         const affixRules = allRules.map(rule => rule.sfx! || rule.pfx!).filter(a => !!a);
-        const wordWithFlags = {word, flags, rulesApplied, rules: '', base, suffix, prefix};
+        const wordWithFlags = {word, flags, rulesApplied, rules: '', base, suffix, prefix, dic};
         return [
             wordWithFlags,
             ...this.applyAffixesToWord(affixRules, { ...wordWithFlags, rules })
@@ -194,7 +195,7 @@ export class Aff {
     }
 
     substitute(affix: Fx, affWord: AffWord, sub: Substitution): AffWord {
-        const { word: origWord, rulesApplied, flags } = affWord;
+        const { word: origWord, rulesApplied, flags, dic } = affWord;
         const rules = affWord.rules + (sub.attachRules || '');
         const word = origWord.replace(sub.replace, sub.attach);
         const stripped = origWord.replace(sub.replace, '');
@@ -219,6 +220,7 @@ export class Aff {
             base,
             suffix,
             prefix,
+            dic,
         };
     }
 
@@ -326,3 +328,15 @@ export function flagsToString(flags: AffWordFlags) {
         .join('_');
 }
 
+export function asAffWord(word: string, rules: string = ''): AffWord {
+    return {
+        word,
+        base: word,
+        prefix: '',
+        suffix: '',
+        rulesApplied: '',
+        rules: rules || '',
+        flags: {},
+        dic: word + '/' + rules
+    };
+}

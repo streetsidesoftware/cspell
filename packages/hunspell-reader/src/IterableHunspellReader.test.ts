@@ -10,15 +10,25 @@ basicReadTests();
 describe('Basic Validation of the Reader', () => {
     const pSimpleAff = getSimpleAff();
 
+    it('Validate the dictionary', async () => {
+        const aff = await pSimpleAff;
+        const src = { aff, dic: textToArray(simpleWords)};
+        const reader = new IterableHunspellReader(src);
+        expect(reader.dic).to.be.deep.equal(textToArray(simpleWords));
+    });
+
     it('Validate Simple Words List', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: textToArray(simpleWords)};
         const reader = new IterableHunspellReader(src);
         expect([...reader.iterateRootWords()]).to.be.deep.equal(['happy', 'ring']);
-        const words = [...reader.seqAffWords().map(a => a.word)];
+        const tapped: string[] = [];
+        const words = [...reader.seqAffWords(w => tapped.push(w)).map(a => a.word)];
         const someExpectedWords = ['happy', 'unhappy', 'happily', 'unhappily'];
         expect(words).to.include.members(someExpectedWords);
+        expect(tapped).to.deep.equal([ 'happy/UY', 'ring/AUJ', ]);
     });
+
     it('Validate Simple Words List', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: (['place/AJ'])};

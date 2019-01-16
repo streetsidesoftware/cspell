@@ -25,6 +25,10 @@ export class IterableHunspellReader implements Iterable<string> {
         this.aff = src.aff;
     }
 
+    get dic() {
+        return this.src.dic;
+    }
+
     /**
      * @internal
      */
@@ -50,8 +54,11 @@ export class IterableHunspellReader implements Iterable<string> {
 
     [Symbol.iterator]() { return this.seqWords(); }
 
-    seqAffWords() {
-        return genSequence(this.src.dic)
+    seqAffWords(tapPreApplyRules?: (w: string) => any) {
+        const seq = genSequence(this.src.dic);
+        const dicWords = tapPreApplyRules ? seq.map(a => (tapPreApplyRules(a), a)) : seq;
+        return dicWords
+        .filter(a => !!a.trim())
         .concatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord));
     }
 
