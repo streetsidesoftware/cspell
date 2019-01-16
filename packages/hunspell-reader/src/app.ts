@@ -8,7 +8,6 @@ import { uniqueFilter, batch } from './util';
 import { genSequence, Sequence } from 'gensequence';
 import { AffWord, asAffWord } from './aff';
 import { iterableToStream } from './iterableToStream';
-import { EventEmitter } from 'events';
 
 const uniqueHistorySize = 500000;
 
