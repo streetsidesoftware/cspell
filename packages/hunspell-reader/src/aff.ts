@@ -197,9 +197,20 @@ export class Aff {
         const { word: origWord, rulesApplied, flags } = affWord;
         const rules = affWord.rules + (sub.attachRules || '');
         const word = origWord.replace(sub.replace, sub.attach);
-        const base = origWord.replace(sub.replace, '');
-        const prefix = affix.type === 'PFX' ? sub.attach : '';
-        const suffix = affix.type === 'SFX' ? sub.attach : '';
+        const stripped = origWord.replace(sub.replace, '');
+        let p = affWord.prefix.length;
+        let s = origWord.length - affWord.suffix.length;
+        if (affix.type === 'SFX') {
+            s = Math.min(stripped.length, s);
+            p = Math.min(p, s);
+        } else {
+            const d = word.length - origWord.length;
+            p = Math.max(p, word.length - stripped.length);
+            s = Math.max(s + d, p);
+        }
+        const base = word.slice(p, s);
+        const prefix = word.slice(0, p);
+        const suffix = word.slice(s);
         return {
             word,
             rulesApplied: rulesApplied + ' ' + affix.id,

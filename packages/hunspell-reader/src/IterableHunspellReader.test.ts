@@ -31,7 +31,7 @@ describe('Basic Validation of the Reader', () => {
         const src = { aff, dic: textToArray(simpleWords)};
         const reader = new IterableHunspellReader(src);
         const results = [...reader.seqAffWords().map(a => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
-        const someExpectedWords = ['<happy>', 'un<happy>', '<happ>ily', '<unhapp>ily'].sort();
+        const someExpectedWords = ['<happy>', 'un<happy>', '<happ>ily', 'un<happ>ily'].sort(); // cspell:ignore happ
         expect(results).to.include.members(someExpectedWords);
     });
 });
