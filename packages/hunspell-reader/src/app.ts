@@ -7,7 +7,7 @@ import * as fs from 'fs-extra';
 import { uniqueFilter, batch } from './util';
 import { genSequence, Sequence } from 'gensequence';
 import { AffWord, asAffWord } from './aff';
-import { iterableToStream } from './iteratorToStream';
+import { iterableToStream } from './iterableToStream';
 import { EventEmitter } from 'events';
 
 const uniqueHistorySize = 500000;
@@ -66,41 +66,41 @@ function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Pro
         let resolved = false;
         const out = outFile ? fs.createWriteStream(outFile) : process.stdout;
         const bufferedSeq = genSequence(batch(seq, 500)).map(batch => batch.join(''));
-        const stream = iterableToStream(bufferedSeq);
-        const fileStream = stream.pipe(out);
-        const streams = [stream, fileStream];
+        const dataStream = iterableToStream(bufferedSeq);
+        const fileStream = dataStream.pipe(out);
+        const endEvents = ['finish', 'close', 'end'];
 
         function resolvePromise() {
+            console.error('resolvePromise');
             if (!resolved) {
                 resolved = true;
                 resolve();
             }
         }
         const endHandler = () => {
-            cleanup();
-            setTimeout(resolvePromise, 1);
+            console.error('endHandler');
+            cleanupStreams();
+            setTimeout(resolvePromise, 10);
         };
         const errorHandler = (e: Error) => {
-            cleanup();
+            console.error('errorHandler');
+            cleanupStreams();
             reject(e);
         };
 
-        streams.forEach(listenToStream);
+        listenToStreams();
 
-        function listenToStream(stream: EventEmitter) {
-            stream.addListener('close', endHandler);
-            stream.addListener('end', endHandler);
-            stream.addListener('error', errorHandler);
+        function listenToStreams() {
+            endEvents.forEach(event => (fileStream.addListener(event, endHandler), console.error(`addListener ${event}`)));
+            fileStream.addListener('error', errorHandler);
+            dataStream.addListener('end', endHandler);
         }
 
-        function cleanupStream(stream: EventEmitter) {
-            stream.removeListener('close', endHandler);
-            stream.removeListener('end', endHandler);
-            stream.removeListener('error', errorHandler);
-        }
-
-        function cleanup() {
-            streams.forEach(cleanupStream);
+        function cleanupStreams() {
+            console.error('cleanupStream');
+            endEvents.forEach(event => fileStream.removeListener(event, endHandler));
+            fileStream.removeListener('error', errorHandler);
+            dataStream.removeListener('end', endHandler);
         }
     });
 }

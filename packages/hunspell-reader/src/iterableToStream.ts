@@ -43,10 +43,13 @@ class ReadableObservableStream<T> extends stream.Readable {
         }
         if (r.done) {
             this.done = true;
-            if (r.value !== null || r.value !== undefined) {
+            // since it is possible for r.value to have something meaningful, we must check.
+            if (r.value !== null && r.value !== undefined) {
                 this.push(r.value);
             }
             this.push(null);
         }
     }
 }
+
+export default iterableToStream;
