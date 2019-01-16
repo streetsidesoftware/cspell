@@ -6,6 +6,7 @@ import { IterableHunspellReader } from './IterableHunspellReader';
 import * as fs from 'fs';
 import { uniqueFilter, batch } from './util';
 import { genSequence } from 'gensequence';
+import { AffWord } from './aff';
 
 const uniqueHistorySize = 500000;
 
@@ -24,6 +25,7 @@ commander
     .option('-u, --unique', 'make sure the words are unique.')
     .option('-l, --lower_case', 'output in lower case')
     .option('-T, --no-transform', 'Do not apply the prefix and suffix transforms.  Root words only.')
+    .option('-x, --infix', 'Return words with prefix / suffix breaks. ex: "un<do>ing"')
     .description('Output all the words in the <hunspell.dic> file.')
     .action(async function(hunspellDicFilename, options) {
         displayHelp = false;
@@ -33,6 +35,7 @@ commander
             output: outputFile,
             lower_case: lowerCase = false,
             transform = true,
+            infix = false,
         } = options;
         const log = (msg: string) => notify(msg, !!outputFile);
         log('Write words');
@@ -45,7 +48,8 @@ commander
         log(`Aff file: ${affFile}`);
         log(`Generating Words...`);
         const reader = await IterableHunspellReader.createFromFiles(affFile, dicFile);
-        const seqWords = transform ? reader.seqWords() : reader.seqRootWords();
+        const seqToWords = infix ? reader.seqAffWords().map(affWordToInfix) : reader.seqWords();
+        const seqWords = transform ? seqToWords : reader.seqRootWords();
         const normalize = lowerCase ? (a: string) => a.toLowerCase() : (a: string) => a;
         const filterUnique = unique ? uniqueFilter(uniqueHistorySize) : (_: string) => true;
         const fd = outputFile ? fs.openSync(outputFile, 'w') : 1;
@@ -85,4 +89,8 @@ function notify(message: any, useStdOut = true) {
 
 function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
+}
+
+function affWordToInfix(aff: AffWord): string {
+    return aff.prefix + '<' + aff.base + '>' + aff.suffix;
 }

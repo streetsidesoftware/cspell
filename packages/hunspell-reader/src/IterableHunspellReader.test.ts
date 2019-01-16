@@ -10,19 +10,29 @@ basicReadTests();
 describe('Basic Validation of the Reader', () => {
     const pSimpleAff = getSimpleAff();
 
-    it('Validate Simple Words List', () => {
-        return pSimpleAff.then(aff => {
-            const src = { aff, dic: textToArray(simpleWords)};
-            const reader = new IterableHunspellReader(src);
-            return expect([...reader.iterateRootWords()]).to.be.deep.equal(['happy', 'ring']);
-        });
+    it('Validate Simple Words List', async () => {
+        const aff = await pSimpleAff;
+        const src = { aff, dic: textToArray(simpleWords)};
+        const reader = new IterableHunspellReader(src);
+        expect([...reader.iterateRootWords()]).to.be.deep.equal(['happy', 'ring']);
+        const words = [...reader.seqAffWords().map(a => a.word)];
+        const someExpectedWords = ['happy', 'unhappy', 'happily', 'unhappily'];
+        expect(words).to.include.members(someExpectedWords);
     });
-    it('Validate Simple Words List', () => {
-        return pSimpleAff.then(aff => {
-            const src = { aff, dic: (['place/AJ'])};
-            const reader = new IterableHunspellReader(src);
-            return expect([...reader]).to.be.deep.equal(['place', 'replace', 'replacing', 'replacings', 'placing', 'placings']);
-        });
+    it('Validate Simple Words List', async () => {
+        const aff = await pSimpleAff;
+        const src = { aff, dic: (['place/AJ'])};
+        const reader = new IterableHunspellReader(src);
+        expect([...reader]).to.be.deep.equal(['place', 'replace', 'replacing', 'replacings', 'placing', 'placings']);
+    });
+
+    it('Validates prefix/suffix/base', async () => {
+        const aff = await pSimpleAff;
+        const src = { aff, dic: textToArray(simpleWords)};
+        const reader = new IterableHunspellReader(src);
+        const results = [...reader.seqAffWords().map(a => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
+        const someExpectedWords = ['<happy>', 'un<happy>', '<happ>ily', '<unhapp>ily'].sort();
+        expect(results).to.include.members(someExpectedWords);
     });
 });
 
@@ -132,6 +142,10 @@ PFX X   0     re         .
 PFX X   0     in         .
 PFX X   0     a          .
 
+SFX Y Y 2
+SFX Y   0     ly         [^y]
+SFX Y   y     ily        [y]
+
 SFX G Y 2
 SFX G   e     ing        e
 SFX G   0     ing        [^e]
@@ -155,7 +169,7 @@ SFX S   0     s          [^sxzhy]
 // @ts-ignore
 const simpleWords = `
 2
-happy
+happy/UY
 ring/AUJ
 `;
 

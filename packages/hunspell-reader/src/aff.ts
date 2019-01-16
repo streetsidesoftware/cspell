@@ -109,6 +109,9 @@ export interface AffWord {
     rules: string;
     flags: AffWordFlags;
     rulesApplied: string;
+    base: string;
+    suffix: string;
+    prefix: string;
 }
 
 export class Aff {
@@ -129,7 +132,7 @@ export class Aff {
     applyRulesToDicEntry(line: string): AffWord[] {
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
-        return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: ''})
+        return this.applyRulesToWord({word, rules, flags: {}, rulesApplied: '', base: word, suffix: '', prefix: ''})
             .map(affWord => ({...affWord, word: this._oConv.convert(affWord.word) }));
     }
 
@@ -137,7 +140,7 @@ export class Aff {
      * @internal
      */
     applyRulesToWord(affWord: AffWord): AffWord[] {
-        const { word } = affWord;
+        const { word, base, suffix, prefix } = affWord;
         const allRules = this.getMatchingRules(affWord.rules);
         const { rulesApplied, flags } = allRules
             .filter(rule => !!rule.flags)
@@ -147,7 +150,7 @@ export class Aff {
             }), { rulesApplied: affWord.rulesApplied, flags: affWord.flags});
         const rules = this.joinRules(allRules.filter(rule => !rule.flags).map(rule => rule.id));
         const affixRules = allRules.map(rule => rule.sfx! || rule.pfx!).filter(a => !!a);
-        const wordWithFlags = {word, flags, rulesApplied, rules: ''};
+        const wordWithFlags = {word, flags, rulesApplied, rules: '', base, suffix, prefix};
         return [
             wordWithFlags,
             ...this.applyAffixesToWord(affixRules, { ...wordWithFlags, rules })
@@ -180,18 +183,32 @@ export class Aff {
         const flags = { ...affWord.flags, isNeedAffix: false };
         const matchingSubstitutions = [...affix.substitutionSets.values()]
             .filter(sub => sub.match.test(word));
+        const partialAffWord = {...affWord, flags, rules: combineRules};
         return matchingSubstitutions
             .map(sub => sub.substitutions)
             .reduce((a, b) => a.concat(b), [])
             .filter(sub => sub.replace.test(word))
-            .map(sub => ({
-                word: word.replace(sub.replace, sub.attach),
-                rulesApplied: [affWord.rulesApplied, affix.id].join(' '),
-                rules: combineRules + (sub.attachRules || ''),
-                flags
-            }))
+            .map(sub => this.substitute(affix, partialAffWord, sub))
             .map(affWord => logAffWord(affWord, 'applyAffixToWord'))
             ;
+    }
+
+    substitute(affix: Fx, affWord: AffWord, sub: Substitution): AffWord {
+        const { word: origWord, rulesApplied, flags } = affWord;
+        const rules = affWord.rules + (sub.attachRules || '');
+        const word = origWord.replace(sub.replace, sub.attach);
+        const base = origWord.replace(sub.replace, '');
+        const prefix = affix.type === 'PFX' ? sub.attach : '';
+        const suffix = affix.type === 'SFX' ? sub.attach : '';
+        return {
+            word,
+            rulesApplied: rulesApplied + ' ' + affix.id,
+            rules,
+            flags,
+            base,
+            suffix,
+            prefix,
+        };
     }
 
     getMatchingRules(rules: string): Rule[] {

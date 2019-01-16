@@ -32,7 +32,7 @@ export class IterableHunspellReader implements Iterable<string> {
         return genSequence(this.src.dic)
             .map(line => {
                 const [word, rules] = line.split('/', 2);
-                return { word, rules };
+                return { word, rules, prefixes: [], suffixes: [] };
             })
         ;
     }
@@ -50,13 +50,16 @@ export class IterableHunspellReader implements Iterable<string> {
 
     [Symbol.iterator]() { return this.seqWords(); }
 
+    seqAffWords() {
+        return genSequence(this.src.dic)
+        .concatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord));
+    }
+
     /**
      * @internal
      */
     seqWords() {
-        return genSequence(this.src.dic)
-        .concatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord))
-        .map(w => w.word);
+        return this.seqAffWords().map(w => w.word);
     }
 
     /**
