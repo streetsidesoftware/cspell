@@ -65,3 +65,27 @@ export function createTriFromList(words: Iterable<string>): TrieNode {
     }
     return root;
 }
+
+export function has(node: TrieNode, word: string): boolean {
+    let h = word.slice(0, 1);
+    let t = word.slice(1);
+    while (node.c && node.c.has(h)) {
+        node = node.c.get(h)!;
+        h = t.slice(0, 1);
+        t = t.slice(1);
+    }
+
+    return !h.length && !!((node.f || 0) & FLAG_WORD);
+}
+
+export function findNode(node: TrieNode, prefix: string): TrieNode | undefined {
+    let h = prefix.slice(0, 1);
+    let t = prefix.slice(1);
+    let n: TrieNode | undefined = node;
+    while (h.length && n && n.c) {
+        n = n.c.get(h);
+        h = t.slice(0, 1);
+        t = t.slice(1);
+    }
+    return n;
+}
