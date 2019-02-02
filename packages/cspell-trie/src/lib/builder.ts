@@ -1,20 +1,37 @@
 import { TrieNode, FLAG_WORD } from './TrieNode';
+import { xxHash32 }  from 'js-xxhash';
+// import * as crypto from 'crypto';
+// const hash = crypto.createHash('md5');
 
 export class DawgChildMap extends Map<string, DawgTrieNode> {}
 export interface DawgTrieNode extends TrieNode {
     c?: DawgChildMap;
     id: number;
     hash: number;
-    p: Set<DawgTrieNode>;
 }
 
-const EOW = '\r'.codePointAt(0)!;
+const EOW = '\r';
+const EOL = '\n';
+
+// cspell:word hasher
+function hasher() {
+    const cache: Map<string, number> = new Map();
+
+    return (s: string) => {
+        if (!cache.has(s)) {
+            cache.set(s, xxHash32(Buffer.from(s || EOW, 'utf16le')));
+        }
+
+        return cache.get(s)!;
+    };
+}
 
 export class DawgTrieBuilder {
+    private hasher = hasher();
     protected nextId = 1;
     protected nodes: Map<number, DawgTrieNode> = new Map();
     protected hashNodes: Map<number, Set<DawgTrieNode>> = new Map();
-    protected leaf: DawgTrieNode = { id: 0, hash: 0, p: new Set(), f: FLAG_WORD, };
+    protected leaf: DawgTrieNode = { id: 0, hash: 0, f: FLAG_WORD };
     protected root: DawgTrieNode = this.leaf;
 
     constructor() {
@@ -35,14 +52,14 @@ export class DawgTrieBuilder {
             if (curr.f || (curr.c && curr.c.has(s))) {
                 return curr;
             }
-            const c = curr.c || new Map([[s, this.leaf]]);
+            const c =  new Map([...(curr.c || []), [s, this.leaf]]);
             return this.createNode(c);
         }
 
         const h = s.slice(0, 1);
         const t = s.slice(1);
         const n0 = curr.c && curr.c.get(h);
-        const n = n0 || { id: -1, hash: -1, p: new Set() };
+        const n = n0 || { id: -1, hash: -1 };
         const c = this.addToNode(n, t);
         if (c === n0) {
             return curr;
@@ -50,18 +67,16 @@ export class DawgTrieBuilder {
         this.rememberNode(c);
         const children = curr.c ? new Map(curr.c) : new Map();
         children.set(h, c);
-        const newNode = this.createNode(children);
-        c.p.add(newNode);
-        return newNode;
+        return this.createNode(children);
     }
 
     protected createNode(children: DawgChildMap): DawgTrieNode {
         const n = {
             id: -1,
-            hash: this.hash(children),
-            p: new Set(),
+            hash: -1,
             c: children,
         };
+        n.hash = this.hash(n);
         const match = this.findHashMatch(n);
         if (match) {
             return match!;
@@ -72,17 +87,17 @@ export class DawgTrieBuilder {
         return n;
     }
 
-    protected hash(children: DawgChildMap | undefined): number {
-        if (!children) {
-            return 0;
+    protected hash(node: DawgTrieNode): number {
+        if (!node.c) {
+            return this.hasher(EOL);
         }
         let h = 0;
-        for (const [c, n] of children) {
-            const v = c.codePointAt(0) || EOW;
-            h += v * v + n.id * n.id + n.hash * n.hash;
+        for (const [c, n] of node.c) {
+            const v = this.hasher(c);
+            h = h ^ v ^ n.hash ^ n.id;
         }
 
-        return Math.sqrt(h);
+        return h;
     }
 
     protected rememberNode(n: DawgTrieNode) {
@@ -125,5 +140,31 @@ export class DawgTrieBuilder {
             }
         }
         return true;
+    }
+
+    static trieToString(r: DawgTrieNode): string {
+        const displayed: Map<number, number> = new Map();
+
+        function disp(n: DawgTrieNode, depth: number, prefix: string): string {
+            if (displayed.has(n.id)) {
+                const cnt = displayed.get(n.id)! + 1;
+                displayed.set(n.id, cnt);
+                return '  '.repeat(depth) + `${prefix}<${n.id}> (${cnt})\n`;
+            }
+            displayed.set(n.id, 1);
+            const parts: string[] = ['  '.repeat(depth) + `${prefix}{ id: ${n.id}, h: ${DawgTrieBuilder.hashToString(n.hash)}: f:${n.f || '-'} }\n`];
+            if (n.c) {
+                for (const c of n.c) {
+                    parts.push(disp(c[1], depth + 1, `"${c[0]}" --> `));
+                }
+            }
+            return parts.join('');
+        }
+
+        return [disp(r, 0, ''), `Nodes: ${displayed.size}`].join('\n');
+    }
+
+    static hashToString(n: number) {
+        return (n < 0 ? 4294967296 + n : n).toString(16).padStart(8, '0');
     }
 }

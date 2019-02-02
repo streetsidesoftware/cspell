@@ -59,23 +59,22 @@ export function* walker(
     }
 
     let depth = 0;
-    const stack: Iterator<[string, TrieNode]>[] = [];
-    let baseText = '';
-    stack[depth] = children(root);
+    const stack: {t: string, c: Iterator<[string, TrieNode]>}[] = [];
+    stack[depth] = {t: '', c: children(root)};
     let ir: IteratorResult<[string, TrieNode]>;
     while (depth >= 0) {
-        while (!(ir = stack[depth].next()).done) {
+        let baseText = stack[depth].t;
+        while (!(ir = stack[depth].c.next()).done) {
             const [char, node] = ir.value;
             const text = baseText + char;
             const goDeeper = (yield { text, node, depth });
             if (goDeeper || goDeeper === undefined) {
                 depth++;
                 baseText = text;
-                stack[depth] = children(node);
+                stack[depth] = { t: text, c: children(node) };
             }
         }
         depth -= 1;
-        baseText = baseText.slice(0, -1);
     }
 }
 
