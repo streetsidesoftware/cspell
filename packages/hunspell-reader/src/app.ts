@@ -70,19 +70,16 @@ function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Pro
         const endEvents = ['finish', 'close', 'end'];
 
         function resolvePromise() {
-            console.error('resolvePromise');
             if (!resolved) {
                 resolved = true;
                 resolve();
             }
         }
         const endHandler = () => {
-            console.error('endHandler');
             cleanupStreams();
             setTimeout(resolvePromise, 10);
         };
         const errorHandler = (e: Error) => {
-            console.error('errorHandler');
             cleanupStreams();
             reject(e);
         };
@@ -90,13 +87,12 @@ function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Pro
         listenToStreams();
 
         function listenToStreams() {
-            endEvents.forEach(event => (fileStream.addListener(event, endHandler), console.error(`addListener ${event}`)));
+            endEvents.forEach(event => fileStream.addListener(event, endHandler));
             fileStream.addListener('error', errorHandler);
             dataStream.addListener('end', endHandler);
         }
 
         function cleanupStreams() {
-            console.error('cleanupStream');
             endEvents.forEach(event => fileStream.removeListener(event, endHandler));
             fileStream.removeListener('error', errorHandler);
             dataStream.removeListener('end', endHandler);
