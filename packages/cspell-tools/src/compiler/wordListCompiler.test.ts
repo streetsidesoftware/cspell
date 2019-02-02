@@ -10,6 +10,7 @@ import * as Trie from 'cspell-trie';
 import * as path from 'path';
 import { from } from 'rxjs';
 import { take, toArray } from 'rxjs/operators';
+import { genSequence } from 'gensequence';
 
 describe('Validate the wordListCompiler', function() {
     it('tests splitting lines', () => {
@@ -73,14 +74,10 @@ describe('Validate the wordListCompiler', function() {
 
     it('tests normalized to a trie', () => {
         const words = citiesResult.split('\n');
-        const nWords = normalizeWords(from(words)).pipe(toArray()).toPromise();
-        const tWords = normalizeWordsToTrie(from(words))
-            .then(node => Trie.iteratorTrieWords(node))
-            .then(seq => [...seq]);
-        return Promise.all([nWords, tWords])
-            .then(([nWords, tWords]) => {
-                expect(tWords.sort()).to.be.deep.equal([...(new Set(nWords.sort()))]);
-            });
+        const nWords = normalizeWords(genSequence(words)).toArray();
+        const tWords = [...genSequence([normalizeWordsToTrie(genSequence(words))])
+            .concatMap(node => Trie.iteratorTrieWords(node))];
+        expect(tWords.sort()).to.be.deep.equal([...(new Set(nWords.sort()))]);
     });
 
     it('test reading and normalizing to a trie file', () => {
