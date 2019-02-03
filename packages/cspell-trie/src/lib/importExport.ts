@@ -11,8 +11,7 @@ function leaves(node: TrieNode): Sequence<LeafResult> {
         if (!node.c) {
             yield { n: node, p, k};
         } else {
-            const children = [...node.c];
-            for (const n of children) {
+            for (const n of node.c) {
                 yield* walk(n[1], n[0], node);
             }
         }
@@ -21,14 +20,14 @@ function leaves(node: TrieNode): Sequence<LeafResult> {
     return genSequence(walk(node, ''));
 }
 
-function flattenToReferences(node: TrieNode): Sequence<TrieNode> {
+function flattenToReferences(node: TrieNode): Sequence<TrieRefNode> {
 
-    function * walk() {
+    function * walk(): IterableIterator<TrieRefNode> {
         let iterations = 100;
         let processed = 0;
         let index = 0;
 
-        function hash(node: TrieRefNode): string {
+        function signature(node: TrieRefNode): string {
             const flags = node.f ? '*' : '';
             const refs = node.r ? '{' + [...node.r].sort((a, b) => a[0] < b[0] ? -1 : 1).map(a => a.join(':')).join(',') + '}' : '';
             return flags + refs;
@@ -36,15 +35,15 @@ function flattenToReferences(node: TrieNode): Sequence<TrieNode> {
 
         do {
             processed = 0;
-            let hashMap = new Map<string, number>();
+            let signatureMap = new Map<string, number>();
             for (const leaf of leaves(node)) {
-                const h = hash(leaf.n);
-                let m = hashMap.get(h);
+                const h = signature(leaf.n);
+                let m = signatureMap.get(h);
                 if (m === undefined) {
                     // first time, add it to hash
                     yield leaf.n;
                     m = index;
-                    hashMap.set(h, m);
+                    signatureMap.set(h, m);
                     index += 1;
                 }
 
