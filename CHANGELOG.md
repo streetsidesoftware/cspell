@@ -1,5 +1,12 @@
 # Release Notes
 
+## [3.2.1]
+- Updated dictionaries
+- Updated packages
+- Added a dictionary for fullstack development defaults on for `php` and `javascript`
+- Moved the companies dictionary to [cspell-dicts/packages/companies](https://github.com/Jason3S/cspell-dicts/tree/master/packages/companies)
+- Updated Tooling
+
 ## [3.1.4]
 - Support `~/` references for dictionary files.
 
