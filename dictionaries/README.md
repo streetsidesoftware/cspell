@@ -2,8 +2,6 @@
 
 This directory contains the raw dictionaries used.  They are compiled into simple word lists with the following command:
 
-```sh
-node tools/out/app.js compile ./dictionaries/*.txt -o ../client/dictionaries/
-```
+`npm run build-dictionaries`
 
-or use the following script `npm run build-dictionaries`
+Note: The dictionaries are being moved to [cspell-dicts: Various cspell dictionaries](https://github.com/Jason3S/cspell-dicts)

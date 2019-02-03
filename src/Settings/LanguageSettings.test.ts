@@ -35,7 +35,10 @@ describe('Validate LanguageSettings', () => {
         expect(sPhp.allowCompoundWords).to.be.undefined;
         expect(sPhp.dictionaries).to.not.be.empty;
         expect((sPhp.dictionaries!).sort())
-            .to.be.deep.equal(['en-gb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'misc'].sort());
+            .to.be.deep.equal([
+                'en-gb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html',
+                'npm', 'fonts', 'css', 'typescript', 'misc', 'fullstack'
+            ].sort());
     });
 
     it('tests that settings at language level are merged', () => {
