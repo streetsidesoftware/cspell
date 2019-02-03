@@ -189,7 +189,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             }),
             filter(info => info.configInfo.config.enabled !== false),
             tap(() => status.files += 1),
-            flatMap<FileConfigInfo, ResultInfo>((info) => {
+            flatMap((info) => {
                 const {configInfo, filename, text} = info;
                 const debugCfg = { config: {...configInfo.config, source: null}, filename: configInfo.filename };
                 cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
