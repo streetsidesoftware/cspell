@@ -9,6 +9,7 @@ import chalk from 'chalk';
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
+    summary: boolean;
 }
 interface TraceOptions extends App.TraceOptions {}
 // interface InitOptions extends Options {}
@@ -57,6 +58,7 @@ program
     .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
     .option('--no-color', 'Turn off color.')
     .option('--color', 'Force color')
+    .option('--no-summary', 'Turn off summary message in console')
     // The following options are planned features
     // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
     // .option('--force', 'Force the exit value to always be 0')
@@ -74,7 +76,9 @@ program
         showHelp = false;
         App.lint(files, options, emitters).then(
             result => {
-                console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);
+                if (options.summary) {
+                    console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);
+                }
                 process.exit(result.issues ? 1 : 0);
             },
             (error: AppError) => {
