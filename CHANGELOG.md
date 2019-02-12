@@ -1,5 +1,9 @@
 # Release Notes
 
+## [3.2.2]
+- cspell-cli: Added option to not show the summary at the end.
+- Updated dictionaries
+
 ## [3.2.1]
 - Updated dictionaries
 - Updated packages
