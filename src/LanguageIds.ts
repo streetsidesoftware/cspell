@@ -59,6 +59,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'javascript', extensions: ['.js', '.mjs', '.es6'], },
     { id: 'json', extensions: [
             '.json',
+            '.jsonc',
             '.bowerrc',
             '.jshintrc',
             '.jscsrc',
