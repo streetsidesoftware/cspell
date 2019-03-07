@@ -5,7 +5,7 @@ import * as Text from './text';
 import { lineReaderRx } from './fileReader';
 import { writeToFileRxP} from 'cspell-lib';
 import { Observable, from } from 'rxjs';
-import { flatMap, reduce, map, bufferCount, filter, distinct } from 'rxjs/operators';
+import { flatMap, map, bufferCount, distinct, toArray, filter } from 'rxjs/operators';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie';
@@ -48,40 +48,61 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
 
 interface CompileWordListOptions {
     splitWords: boolean;
+    sort: boolean;
 }
 
-export function compileWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
-    return options.splitWords
-        ? compileWordListWithSplit(filename, destFilename)
-        : compileSimpleWordList(filename, destFilename);
-}
-
-export function compileWordListWithSplit(filename: string, destFilename: string): Promise<void> {
+export async function compileWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
     const getWords = () => regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
 
     const destDir = path.dirname(destFilename);
 
-    return mkdirp(destDir).then(() => writeToFileRxP(destFilename, getWords().pipe(
-        flatMap(line => lineToWords(line).toArray()),
+    const pDir = mkdirp(destDir);
+
+    const stream = getWords().pipe(
+        options.splitWords ? compileWordListWithSplitRx : compileSimpleWordListRx,
+        filter(a => !!a),
         distinct(),
+        options.sort ? sort : map(a => a)
+    );
+
+    const buffered = stream.pipe(
         map(a => a + '\n'),
         bufferCount(1024),
         map(a => a.join('')),
-    )));
+    );
+
+    await pDir;
+
+    return writeToFileRxP(destFilename, buffered);
 }
 
-export async function compileSimpleWordList(filename: string, destFilename: string): Promise<void> {
-    const words = await streamWordsFromFile(filename);
-    const destDir = path.dirname(destFilename);
-    await mkdirp(destDir);
-    return writeToFileRxP(destFilename, from(words).pipe(
+
+
+export function compileWordListWithSplit(filename: string, destFilename: string): Promise<void> {
+    return compileWordList(filename, destFilename, { splitWords: true, sort: true });
+}
+
+export async function compileSimpleWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
+    return compileWordList(filename, destFilename, { splitWords: false, sort: true });
+}
+
+function sort(words: Observable<string>): Observable<string> {
+    return words.pipe(
+        toArray(),
+        flatMap(a => a.sort()),
+    );
+}
+
+function compileWordListWithSplitRx(words: Observable<string>): Observable<string> {
+    return words.pipe(
+        flatMap(line => lineToWords(line).toArray()),
+    );
+}
+
+function compileSimpleWordListRx(words: Observable<string>): Observable<string> {
+    return words.pipe(
         map(a => a.toLowerCase()),
-        distinct(),
-        filter(a => !!a),
-        map(a => a + '\n'),
-        bufferCount(1024),
-        map(a => a.join('')),
-    ));
+    );
 }
 
 export function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieNode {

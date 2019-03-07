@@ -55,20 +55,20 @@ describe('Validate the wordListCompiler', function() {
     it('test reading and normalizing a file', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
-        return compileWordList(sourceName, destName, { splitWords: true })
+        return compileWordList(sourceName, destName, { splitWords: true, sort: true })
         .then(() => fsp.readFile(destName, 'utf8'))
         .then(output => {
-            expect(output).to.be.equal(citiesResult);
+            expect(output).to.be.equal(citiesResultSorted);
         });
     });
 
     it('test compiling to a file without split', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities2.txt');
-        return compileWordList(sourceName, destName, { splitWords: false })
+        return compileWordList(sourceName, destName, { splitWords: false, sort: true })
         .then(() => fsp.readFile(destName, 'utf8'))
         .then(output => {
-            expect(output).to.be.equal(cities.toLowerCase());
+            expect(output).to.be.equal(citiesSorted.toLowerCase());
         });
     });
 
@@ -90,7 +90,7 @@ describe('Validate the wordListCompiler', function() {
             return Trie.importTrieRx(from(words)).pipe(take(1)).toPromise()
             .then(node => {
                 expect([...Trie.iteratorTrieWords(node)].sort()).to.be.deep
-                    .equal(citiesResult.split('\n').filter(a => !!a).sort());
+                .equal(citiesResult.split('\n').filter(a => !!a).sort());
             });
         });
     });
@@ -112,6 +112,17 @@ London
 Paris
 `;
 
+const citiesSorted = `\
+London
+Los Angeles
+Mexico City
+New Amsterdam
+New Delhi
+New York
+Paris
+San Francisco
+`;
+
 const citiesResult = `\
 new york
 new
@@ -131,4 +142,25 @@ mexico
 city
 london
 paris
+`;
+
+const citiesResultSorted = `\
+amsterdam
+angeles
+city
+delhi
+francisco
+london
+los
+los angeles
+mexico
+mexico city
+new
+new amsterdam
+new delhi
+new york
+paris
+san
+san francisco
+york
 `;

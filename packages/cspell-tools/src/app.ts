@@ -25,7 +25,8 @@ program
     .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
     .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
     .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
-    .action((src: string[], options: { output?: string, compress: boolean, split: boolean, case: boolean }) => {
+    .option('--no-sort', 'Do not sort the result')
+    .action((src: string[], options: { output?: string, compress: boolean, split: boolean, sort: boolean, case: boolean }) => {
         console.log('Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
             options.output || 'default',
             options.compress ? 'true' : 'false',
@@ -43,7 +44,7 @@ program
             }),
             concatMap(([src, dst]) => {
                 console.log('Process "%s" to "%s"', src, dst);
-                return compileWordList(src, dst, { splitWords: options.split }).then(() => src);
+                return compileWordList(src, dst, { splitWords: options.split, sort: options.sort }).then(() => src);
             }),
         )
         .forEach(name => console.log(`Complete.`));
