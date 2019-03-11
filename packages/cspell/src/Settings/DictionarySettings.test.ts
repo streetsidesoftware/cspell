@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import * as DictSettings from './DictionarySettings';
 import * as fsp from 'fs-extra';
+import * as path from 'path';
+import * as os from 'os';
 import { getDefaultSettings } from './DefaultSettings';
 
 const defaultSettings = getDefaultSettings();
@@ -50,6 +52,11 @@ describe('Validate DictionarySettings', () => {
         expect(dictionaryDefinitions).to.not.be.empty;
         const defs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
         expect(defs.length).to.be.equal(dictionaryDefinitions!.length);
+
+        const basePath = path.join('some', 'dir');
+        dictionaryDefinitions![0].path = path.join('~', basePath);
+        const tildeDefs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
+        expect(tildeDefs[0].path).to.be.equal(path.join(os.homedir(), basePath));
     });
 });
 
