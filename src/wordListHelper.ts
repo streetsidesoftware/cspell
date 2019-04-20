@@ -18,7 +18,7 @@ export function loadWordsRx(filename: string): Observable<string> {
     return lineReader(filename)
     .pipe(catchError((e: any) => {
         logError(e);
-        return from<string>([]);
+        return from<string[]>([]);
     }))
     ;
 }
