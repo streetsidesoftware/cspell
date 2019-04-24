@@ -42,7 +42,7 @@ export function calcSettingsForLanguage(languageSettings: LanguageSettings, lang
     languageId = languageId.toLowerCase();
     const allowedLocals = normalizeLocal(local);
     return defaultLanguageSettings.concat(languageSettings)
-        .filter(s => s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
+        .filter(s => !s.languageId || s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
         .filter(s => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals) )
         .map(langSetting => {
             const id = langSetting.local || langSetting.languageId || 'language';
