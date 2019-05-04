@@ -1,6 +1,4 @@
-export type ReplaceEntry = [string, string];
-
-export type ReplaceMap = ReplaceEntry[];
+import { ReplaceMap } from '../Settings';
 
 export type ReplaceMapper = (src: string) => string;
 

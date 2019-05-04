@@ -1,6 +1,6 @@
 
-import {ReplaceMap} from '../util/repMap';
-export {ReplaceMap} from '../util/repMap';
+export type ReplaceEntry = [string, string];
+export type ReplaceMap = ReplaceEntry[];
 
 /**
  * These settings come from user and workspace settings.
