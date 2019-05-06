@@ -4,8 +4,8 @@ import {
 } from '../wordListHelper';
 import { SpellingDictionary, createSpellingDictionaryRx, createSpellingDictionaryTrie } from './SpellingDictionary';
 import * as path from 'path';
-import {ReplaceMap} from '../util/repMap';
 import {flatMap} from 'rxjs/operators';
+import { ReplaceMap } from '../Settings';
 
 export interface LoadOptions {
     // Type of file:

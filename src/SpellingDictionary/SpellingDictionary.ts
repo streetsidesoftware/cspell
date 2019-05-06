@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { filter, map, reduce, take } from 'rxjs/operators';
 import { IterableLike } from '../util/IterableLike';
 import { Trie, importTrieRx, SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie';
-import { ReplaceMap, createMapper } from '../util/repMap';
+import { createMapper } from '../util/repMap';
+import { ReplaceMap } from '../Settings';
 
 export {
     CompoundWordsMethod,
