@@ -11,7 +11,7 @@ import {genSequence} from 'gensequence';
 // cspell:ignore cljs cljx cson iname pcregrep fsscript gradle shtml xhtml mdoc aspx jshtm gitconfig bowerrc
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
-// cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml
+// cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml adoc
 
 export interface LanguageExtensionDefinition {
     id: string;
