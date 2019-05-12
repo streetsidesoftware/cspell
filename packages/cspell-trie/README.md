@@ -118,3 +118,6 @@ How to walk the data to see if "talks" is in it.
 5. k found goto 4
 6. s found stop (goto 0 is stop).
 
+<!---
+    cspell:word DAFSA DAWG
+-->

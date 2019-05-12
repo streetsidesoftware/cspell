@@ -24,8 +24,8 @@ describe('Validate the fileReader', () => {
             .pipe(toArray())
             .toPromise()
             .then(lines => {
-                const actual = lines.join('\n');
-                const expected = fs.readFileSync(__filename, 'UTF-8');
+                const actual = lines.join('\n').replace(/\r/g, '');
+                const expected = fs.readFileSync(__filename, 'UTF-8').replace(/\r/g, '');
                 expect(actual).to.equal(expected);
             });
     });
@@ -35,7 +35,7 @@ describe('Validate the fileReader', () => {
             .pipe(toArray())
             .toPromise()
             .then(lines => {
-                const expected = fs.readFileSync(__filename, 'UTF-8').split('\n');
+                const expected = fs.readFileSync(__filename, 'UTF-8').split(/\r?\n/);
                 expect(lines).to.deep.equal(expected);
             });
     });

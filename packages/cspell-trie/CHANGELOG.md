@@ -41,3 +41,6 @@
 ## 1.1.0
 - added command line to read and write *.trie* files.
 
+<!---
+    cspell:ignore bananasttt
+-->

@@ -73,7 +73,7 @@ describe('Validate Trie Class', () => {
     });
 
     it('Test compound words', () => {
-        // cspell:ignore talkinglift joywalk jwalk awalk jayjay
+        // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
         expect(trie.has('talkinglift', true)).to.be.true;
         expect(trie.has('joywalk', true)).to.be.true;

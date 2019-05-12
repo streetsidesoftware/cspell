@@ -3,6 +3,7 @@ const intl = new Intl.Collator('en', { sensitivity: 'base' });
 export const compare = intl.compare;
 
 export const visualLetterGroups = [
+    // cspell:disable
     '', // keep empty
     'ǎàåÄÀAãâáǟặắấĀāăąaäæɐɑᾳαа',
     'Bbḃвъь',
@@ -30,6 +31,7 @@ export const visualLetterGroups = [
     'xXх',
     'ÿýYŷyÝỳУўу',
     'ZẓžŽżŻźz',
+    // cspell:enable
 ];
 
 export const visualLetterMap: Map<string, number> = calcVisualLetterMap(visualLetterGroups);
