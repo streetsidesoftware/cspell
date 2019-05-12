@@ -469,5 +469,6 @@ Example:
     cSpell:ignore hte variabele alinea
     cSpell:ignore mkdirp githubusercontent streetsidesoftware vsmarketplacebadge visualstudio
     cSpell:words Verdana
+    cSpell:ignore ieeees beees treeees
 -->
 

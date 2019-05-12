@@ -13,6 +13,8 @@ describe('Validate InDocSettings', () => {
         expect(m1).is.not.empty;
         expect(m1).has.length(5);
         // cspell:disable
+        // @todo: for some reason this is broken on Windows. (verybadspelling)
+        // cspell:ingore verybadspelling
         expect(m1).is.deep.equal([
             "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
             "cspell:disable-next\nconst verybadspelling = 'disable';\n",
