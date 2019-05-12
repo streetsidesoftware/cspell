@@ -14,15 +14,15 @@ install:
   # the prepare script run during install currently does clean-build
   - npm install
 
+script:
+  - npm test
+  - npm run test-spec
+  - node ./bin.js trace test
+  - node ./bin.js "**/{*.ts,*.md}"
+
+
 jobs:
   include:
-    - stage: "Tests"
-      script:
-        - npm test
-        - npm run test-spec
-        - node ./bin.js trace test
-        - node ./bin.js "**/{*.ts,*.md}"
     - stage: "Coverage"
-      if: os = linux AND node_js = node
       script:
         - npm run travis-coverage
