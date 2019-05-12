@@ -1,6 +1,6 @@
-image:
-  - Visual Studio 2017
-  - Ubuntu
+# image:
+#   - Visual Studio 2017
+#   - Ubuntu
 
 # Test against the latest version of this Node.js version
 environment:
@@ -20,6 +20,9 @@ install:
 
 # Post-install test scripts.
 test_script:
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
   # run tests
   - npm test
   - npm run test-spec
