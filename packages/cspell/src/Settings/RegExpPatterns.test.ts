@@ -6,9 +6,6 @@ import * as RegPat from './RegExpPatterns';
 const matchUrl = regExMatchUrls.source;
 const matchHexValues = regExMatchCommonHexFormats.source;
 
-// @todo: for some reason this is broken on Windows. (verybadspelling)
-// cspell:ignore verybadspelling
-
 describe('Validate InDocSettings', () => {
 
     it('tests regExSpellingGuard', () => {
@@ -23,6 +20,21 @@ describe('Validate InDocSettings', () => {
             'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
             'cSpell:disable\n\nNot checked.\n\n',
         ]);
+        // cspell:enable
+    });
+
+    it('tests regExSpellingGuard CRLF', () => {
+        const m1 = sampleCode2.replace(/\r?\n/g, '\r\n').match(RegPat.regExSpellingGuard);
+        expect(m1).is.not.empty;
+        expect(m1).has.length(5);
+        // cspell:disable
+        expect(m1).is.deep.equal([
+            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
+            "cspell:disable-next\nconst verybadspelling = 'disable';\n",
+            "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
+            'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
+            'cSpell:disable\n\nNot checked.\n\n',
+        ].map(a => a.replace(/\n/g, '\r\n')));
         // cspell:enable
     });
 
