@@ -2,4 +2,4 @@
 
 'use strict';
 
-require('./dist/app');
+require('./packages/cspell/bin');

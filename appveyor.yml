@@ -1,6 +1,10 @@
 # Test against the latest version of this Node.js version
 environment:
-  nodejs_version: "8"
+  matrix:
+    # node.js
+    # - nodejs_version: "12"
+    - nodejs_version: "10"
+    - nodejs_version: "8"
 
 # Install scripts. (runs after repo cloning)
 install:
@@ -11,14 +15,12 @@ install:
 
 # Post-install test scripts.
 test_script:
-  # Output useful info for debugging.
-  - node --version
-  - npm --version
   # run tests
   - npm test
   - npm run test-spec
   # run app
-  - node ./dist/app.js trace test
+  - node ./bin.js trace test
+  - node ./bin.js "**/{*.ts,*.md}"
 
 # Don't actually build.
 build: off

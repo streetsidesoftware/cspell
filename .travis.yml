@@ -1,20 +1,25 @@
+sudo: false
 language: node_js
+os:
+  - linux
+  - osx
 node_js:
   - "node"
+  - "12"
+  - "10"
   - "9"
   - "8"
 script:
   # run cspell on cspell using pre-commit
-  - pip install --user pre-commit
-  - pre-commit try-repo .
+  # - pip install --user pre-commit
+  # - pre-commit try-repo .
+
   # normal testing
   - npm install
-  # the prepublish script run during install currently does clean-build and test
-  # with npm v5+ that will no longer be the case, so these will need to be added back.
-  # - npm run tscv
-  # - npm run clean-build
-  # - npm test
-  - npm run lint-travis
+  # the prepare script run during install currently does clean-build
+  - npm test
+  # - npm run lint-travis
   - npm run travis-coverage
-  # - npm run test-spec
-  - node ./dist/app.js trace test
+  - npm run test-spec
+  - node ./bin.js trace test
+  - node ./bin.js "**/{*.ts,*.md}"
