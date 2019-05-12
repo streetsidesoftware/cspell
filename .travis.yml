@@ -9,17 +9,20 @@ node_js:
   - "10"
   - "9"
   - "8"
-script:
-  # run cspell on cspell using pre-commit
-  # - pip install --user pre-commit
-  # - pre-commit try-repo .
 
-  # normal testing
-  - npm install
+install:
   # the prepare script run during install currently does clean-build
-  - npm test
-  # - npm run lint-travis
-  - npm run travis-coverage
-  - npm run test-spec
-  - node ./bin.js trace test
-  - node ./bin.js "**/{*.ts,*.md}"
+  - npm install
+
+jobs:
+  include:
+    - stage: "Tests"
+      script:
+        - npm test
+        - npm run test-spec
+        - node ./bin.js trace test
+        - node ./bin.js "**/{*.ts,*.md}"
+    - stage: "Coverage"
+      if: os = linux AND node_js = node
+      script:
+        - npm run travis-coverage
