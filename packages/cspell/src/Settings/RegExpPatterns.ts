@@ -13,7 +13,7 @@ export const regExBase64 = /(?:[a-z0-9\/+]{40,}\s*)+(?:[a-z0-9\/+]+=*)?/gi;
 
 // Include Expressions
 export const regExPhpHereDoc = /<<<['"]?(\w+)['"]?[\s\S]+?^\1;/gm;
-export const regExString = /(?:(['"])(?:\\\\|(?:\\\1)|[^\1\n])+\1)|(?:([`])(?:\\\\|(?:\\\2)|[^\2])+?\2)/g;
+export const regExString = /(?:(['"])(?:\\\\|(?:\\\1)|[^\1\n])*?\1)|(?:([`])(?:\\\\|(?:\\\2)|[^\2])+?\2)/g;
 
 // Note: the C Style Comments incorrectly considers '/*' and '//' inside of strings as comments.
 export const regExCStyleComments = /(?:\/\/.*)|(?:\/\*[\s\S]+?\*\/)/g;
