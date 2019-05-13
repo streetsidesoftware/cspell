@@ -1,5 +1,10 @@
 # Release Notes
 
+## [3.2.14]
+- Updated `package.json` references to point to the new monorepo
+- [Resolve paths beginning with tilde as $HOME by `tribut` · Pull Request #83](https://github.com/streetsidesoftware/cspell/pull/83)
+- Fixed: [English words between Japanese characters are not correctly checked. · Issue #89](https://github.com/streetsidesoftware/cspell/issues/89)
+
 ## [3.2.10]
 - Move to a monorepo
 
@@ -220,4 +225,4 @@ See [No spell-checker:disable-line](https://github.com/streetsidesoftware/cspell
 ## 1.0.0 - 1.0.8
 - These were the initial release used for the vscode spell checker.
 
-<!-- cspell:ignore appveyor Bludkey's -->
+<!-- cspell:ignore appveyor Bludkey's tribut -->
