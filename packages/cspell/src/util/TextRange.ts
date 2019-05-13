@@ -129,3 +129,11 @@ export function excludeRanges(includeRanges: MatchRange[], excludeRanges: MatchR
 
     return result.ranges;
 }
+
+export function extractRangeText(text: string, ranges: MatchRange[]): MatchRangeWithText[] {
+    return ranges.map(({startPos, endPos}) => ({
+        startPos,
+        endPos,
+        text: text.slice(startPos, endPos),
+    }));
+}
