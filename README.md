@@ -2,7 +2,7 @@
 The cspell mono-repo, a spell checker for code.
 
 ## Packages
-- cspell
-- cspell-lib
-- cspell-trie
-- cspell-tools
+- [cspell](packages/cspell)
+- [cspell-lib](packages/cspell-lib)
+- [cspell-trie](packages/cspell-trie)
+- [cspell-tools](packages/cspell-tools)
