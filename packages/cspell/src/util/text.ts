@@ -24,7 +24,7 @@ const regExUpperSOrIng = XRegExp('(\\p{Lu}+\\\\?[\'’]?(?:s|ing|ies|es|ings|ed|
 const regExSplitWords = XRegExp('(\\p{Ll})(\\p{Lu})', 'g');
 const regExSplitWords2 = XRegExp('(\\p{Lu})(\\p{Lu}\\p{Ll})', 'g');
 const regExWords = XRegExp("\\p{L}(?:\\\\?['’]\\p{L}|\\p{L})+|\\p{L}", 'g');
-const regExIgnoreCharacters = XRegExp('\\p{Hiragana}|\\p{Han}|\\p{Katakana}', 'g');
+const regExIgnoreCharacters = XRegExp('\\p{Hiragana}|\\p{Han}|\\p{Katakana}|[\\u30A0-\\u30FF]|[\\p{Hangul}]', 'g');
 const regExFirstUpper = XRegExp('^\\p{Lu}\\p{Ll}+$');
 const regExAllUpper = XRegExp('^\\p{Lu}+$');
 const regExAllLower = XRegExp('^\\p{Ll}+$');
@@ -94,12 +94,14 @@ export function extractWordsFromTextRx(text: string): Observable<TextOffset> {
  */
 export function extractWordsFromText(text: string): Sequence<TextOffset> {
     const reg = XRegExp(regExWords);
+    const reg2 = XRegExp(regExWords);
     return matchStringToTextOffset(reg, text)
         // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
-        .map(wo => ({
-            text: XRegExp.replace(wo.text, regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)).trim(),
-            offset: wo.offset
+        .map(({ text, offset }) => ({
+            text: XRegExp.replace(text, regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)),
+            offset,
         }))
+        .concatMap(wo => matchToTextOffset(reg2, wo))
         .filter(wo => !!wo.text);
 }
 

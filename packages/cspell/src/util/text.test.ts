@@ -139,7 +139,17 @@ describe('Util Text', () => {
             <a href="http://www.ctrip.com" title="携程旅行网">携程旅行网</a>
         `).map(wo => wo.text).toArray()).to.deep.equal(
             ['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']
-            );
+        );
+    });
+
+    it('tests skipping Japanese characters', () => {
+        expect(Text.extractWordsFromCode(`
+            Example text: gitのpackageのみ際インストール
+            gitのpackageのみ際インストール
+            title="携程旅行网"
+        `).map(wo => wo.text).toArray()).to.deep.equal(
+            ['Example', 'text', 'git', 'package', 'git', 'package', 'title']
+        );
     });
 
     it('tests Greek characters', () => {
