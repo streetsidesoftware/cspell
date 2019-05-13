@@ -1,6 +1,6 @@
 # cSpell-Tools
 
-[![Build Status](https://travis-ci.org/Jason3S/cSpell-Tools.svg?branch=master)](https://travis-ci.org/Jason3S/cSpell-Tools)
+[![Build Status](https://travis-ci.org/streetsidesoftware/cspell.svg?branch=master)](https://travis-ci.org/streetsidesoftware/cspell)
 
 Tools used to assist cSpell Development.
 

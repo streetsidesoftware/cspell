@@ -1,7 +1,7 @@
 # cspell
 
-[![Build Status](https://travis-ci.org/Jason3S/cspell.svg?branch=master)](https://travis-ci.org/Jason3S/cspell)
-[![Coverage Status](https://coveralls.io/repos/github/Jason3S/cspell/badge.svg?branch=master)](https://coveralls.io/github/Jason3S/cspell?branch=master)
+[![Build Status](https://travis-ci.org/streetsidesoftware/cspell.svg?branch=master)](https://travis-ci.org/streetsidesoftware/cspell)
+[![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=master)](https://coveralls.io/github/streetsidesoftware/cspell?branch=master)
 
 A Spell Checker for Code!
 

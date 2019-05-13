@@ -11,7 +11,7 @@
 - Updated dictionaries
 - Updated packages
 - Added a dictionary for fullstack development defaults on for `php` and `javascript`
-- Moved the companies dictionary to [cspell-dicts/packages/companies](https://github.com/Jason3S/cspell-dicts/tree/master/packages/companies)
+- Moved the companies dictionary to [cspell-dicts/packages/companies](https://github.com/streetsidesoftware/cspell-dicts/tree/master/packages/companies)
 - Updated Tooling
 
 ## [3.1.4]
@@ -24,10 +24,10 @@
 - Add `lorem-ipsum` dictionary to cspell.
 
 ## [3.1.1]
-- Fix [Can't set language via config file #49](https://github.com/Jason3S/cspell/issues/49)
+- Fix [Can't set language via config file #49](https://github.com/streetsidesoftware/cspell/issues/49)
 
 ## [3.1.0]
-- Change the default output for issues to address: [linter output format is not standardized #35](https://github.com/Jason3S/cspell/issues/35).
+- Change the default output for issues to address: [linter output format is not standardized #35](https://github.com/streetsidesoftware/cspell/issues/35).
   The old output can be achieved with the `--legacy` flag.
 - Added `--languageId` options to force the programming language. This is useful if the extension is unknown.
 - `check` command now supports overrides in the `cspell.json` file.
@@ -37,7 +37,7 @@
 - Add Scala and Java dictionaries.
 
 ## [3.0.2]
-- Do not crash if configstore is not available. [Server crashes on Ubuntu #207](https://github.com/Jason-Rev/vscode-spell-checker/issues/207)
+- Do not crash if configstore is not available. [Server crashes on Ubuntu #207](https://github.com/streetsidesoftware/vscode-spell-checker/issues/207)
 
 ## [3.0.1]
 - Move to RxJs 6
@@ -51,8 +51,8 @@
 
 ## [2.1.10]
 - Fix an issue with matching too much text for a url:
-  [Misspelled first word after HTML element with absolute URL is not detected #201](https://github.com/Jason-Rev/vscode-spell-checker/issues/201)
-- [Better LaTeX support](https://github.com/Jason-Rev/vscode-spell-checker/issues/167#issuecomment-373682530)
+  [Misspelled first word after HTML element with absolute URL is not detected #201](https://github.com/streetsidesoftware/vscode-spell-checker/issues/201)
+- [Better LaTeX support](https://github.com/streetsidesoftware/vscode-spell-checker/issues/167#issuecomment-373682530)
 - Ignore SHA-1, SHA-256, SHA-512 hashes by default
 - Ignore HTML href urls by default.
 
@@ -75,20 +75,20 @@
 ## [2.1.4]
 - Fix an issue with the sub command where the options were not making it through. This prevented specifying the config file to use.
 - Improve LaTeX support for text commands.
-- Fix [String Regex too greedy](https://github.com/Jason-Rev/vscode-spell-checker/issues/185)
+- Fix [String Regex too greedy](https://github.com/streetsidesoftware/vscode-spell-checker/issues/185)
 
 ## [2.1.3]
-- Make sure title, section, etc. is spell checked: [LaTeX: No spell check for chapter/section titles #179](https://github.com/Jason-Rev/vscode-spell-checker/issues/179)
+- Make sure title, section, etc. is spell checked: [LaTeX: No spell check for chapter/section titles #179](https://github.com/streetsidesoftware/vscode-spell-checker/issues/179)
 
 ## [2.1.2]
 - Add dictionary for Rust
-- Improved LaTex macro detection based upon [Bludkey's suggestion](https://github.com/Jason-Rev/vscode-spell-checker/issues/172#issuecomment-366523937)
+- Improved LaTex macro detection based upon [Bludkey's suggestion](https://github.com/streetsidesoftware/vscode-spell-checker/issues/172#issuecomment-366523937)
 - Improved verbose output by displaying the language detected and dictionaries used.
-- Updated `cpp` dictionary to address: [incorrect spelling of "successful"](https://github.com/Jason-Rev/vscode-spell-checker/issues/176)
+- Updated `cpp` dictionary to address: [incorrect spelling of "successful"](https://github.com/streetsidesoftware/vscode-spell-checker/issues/176)
 
 ## [2.1.1]
 - Add the ability to ignore the next line or the current line: `cspell:disable-line` and `cspell:disable-next-line`
-See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
+See [No spell-checker:disable-line](https://github.com/streetsidesoftware/cspell/issues/24)
 
 ## [2.1.0]
 - Add `check` command to command line tool. This will check the text of a file and show any errors highlighted in red.
@@ -104,7 +104,7 @@ See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
 - Add `trace` command to the cli. This makes it easier to see if a word exists in one of the dictionaries
 
 ## [2.0.5]
-- Use `configstore-fork` to enable cspell usage in a CI environment [#25](https://github.com/Jason3S/cspell/issues/25)
+- Use `configstore-fork` to enable cspell usage in a CI environment [#25](https://github.com/streetsidesoftware/cspell/issues/25)
 - Experiment with improved suggestion speed.
 
 ## [2.0.4]
@@ -114,8 +114,8 @@ See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
 - Better support for checking compound words.
 
 ## [1.10.5]
-- Migrate PHP dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
-- Migrate C++ dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
+- Migrate PHP dictionary file to [cspell-dict](https://github.com/streetsidesoftware/cspell-dicts)
+- Migrate C++ dictionary file to [cspell-dict](https://github.com/streetsidesoftware/cspell-dicts)
 
 ## 1.10.4
 - Improved support for compound word suggestions.
@@ -132,14 +132,14 @@ See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
 - Fix an issue with all caps words net getting good suggestions.
 
 ## 1.9.7
-- Fix [#16](https://github.com/Jason3S/cspell/issues/16) where words beginning with capitol letters were not getting good suggestions.
+- Fix [#16](https://github.com/streetsidesoftware/cspell/issues/16) where words beginning with capitol letters were not getting good suggestions.
 
 ## 1.9.6
 - Make sure all Settings interfaces are exposed.
 
 ## 1.9.4
-- Migrate Go Lang dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
-- Migrate Python dictionary file to [cspell-dict](https://github.com/Jason3S/cspell-dicts)
+- Migrate Go Lang dictionary file to [cspell-dict](https://github.com/streetsidesoftware/cspell-dicts)
+- Migrate Python dictionary file to [cspell-dict](https://github.com/streetsidesoftware/cspell-dicts)
 - Support Python Django Framework
 
 ## 1.9.3
@@ -156,7 +156,7 @@ See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
 
 ## 1.8.1
 - Add support for dictionary level replacement maps. This allows for things like ij -> ĳ because that is how it is stored in the dictionary.
-- Fix issue [#10](https://github.com/Jason3S/cspell/issues/10) - handle right quotes.
+- Fix issue [#10](https://github.com/streetsidesoftware/cspell/issues/10) - handle right quotes.
 - Fix an issue where \' should be seen as ' when checking contractions.
 
 ## 1.7.3
@@ -165,7 +165,7 @@ See [No spell-checker:disable-line](https://github.com/Jason3S/cspell/issues/24)
 
 ## 1.7.0
 - Use `configstore` to store persistent config settings. That way it is possible for settings to be changed programmatically.
-- The two English dictionaries have been moved into [cspell-dict](https://github.com/Jason3S/cspell-dicts) for easier maintenance.
+- The two English dictionaries have been moved into [cspell-dict](https://github.com/streetsidesoftware/cspell-dicts) for easier maintenance.
 - It is now possible to import other settings files from with in a cspell.json file using `"import": ["../path/to/other/cspell.json"]`
 
 ## 1.6.1

@@ -6,15 +6,15 @@ These are some notes about contributing.
 
 ### Travis-CI
 
-* https://travis-ci.org/Jason3S/cspell
+* https://travis-ci.org/streetsidesoftware/cspell
 
 ### Appveyor
 
-* https://ci.appveyor.com/project/Jason3S/cspell
+* https://ci.appveyor.com/project/streetsidesoftware/cspell
 
 ### Code Coverage
 
-* https://coveralls.io/github/Jason3S/cspell
+* https://coveralls.io/github/streetsidesoftware/cspell
 
 ### NPM
 
