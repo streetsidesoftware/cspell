@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "test": "mocha --recursive \"./dist/**/*.test.js\"",
-    "test-watch": "mocha --watch --require ts-node/register --recursive \"src/**/*.test.ts\"",
+    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "build": "tsc -p .",
     "clean-build": "npm run clean && npm run build",
     "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",

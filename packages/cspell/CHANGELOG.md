@@ -1,5 +1,8 @@
 # Release Notes
 
+## [3.2.10]
+- Move to a monorepo
+
 ## [3.2.9]
 - Update dictionaries
 
