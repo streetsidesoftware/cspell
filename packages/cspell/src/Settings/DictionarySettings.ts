@@ -1,5 +1,6 @@
 import { DictionaryDefinition, DictionaryId } from './CSpellSettingsDef';
 import * as path from 'path';
+import * as os from 'os';
 
 const dictionaryPath = () => path.join(__dirname, '..', '..', 'dist', 'dictionaries');
 
@@ -46,7 +47,7 @@ export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: 
         const absPath = relPath.match(/^\./) ? path.join(defaultPath, relPath) : relPath;
         return {
             ...def,
-            path:  absPath
+            path:  absPath.replace(/^~/, os.homedir())
         };
 }
 
