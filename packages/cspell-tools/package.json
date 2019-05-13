@@ -15,7 +15,7 @@
     "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
     "lint": "tslint --project tsconfig.json",
     "test-ts": "NODE_ENV=test mocha --require ts-node/register --recursive --bail \"src/**/*.test.ts\"",
-    "test-watch": "npm run build && mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "test-watch": "mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "test": "mocha --recursive ./dist/**/*.test.js"
   },
   "repository": {

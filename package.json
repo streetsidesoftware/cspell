@@ -15,6 +15,7 @@
     "lint-travis": "lerna run lint-travis",
     "travis-coverage": "npm run coverage && nyc report --reporter=text-lcov | coveralls",
     "test-spec": "lerna run test-spec",
+    "test-watch": "lerna run --parallel test-watch",
     "test": "lerna run test"
   },
   "repository": {
