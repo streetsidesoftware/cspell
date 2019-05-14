@@ -29,6 +29,18 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Run CSpell against stdin",
+            "program": "${workspaceRoot}/dist/app.js",
+			"args": ["-v", "stdin"],
+            "cwd": "${workspaceRoot}",
+			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
+            "sourceMaps": true,
+            "preLaunchTask": "npm: build",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Run Trace",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["trace", "about"],
