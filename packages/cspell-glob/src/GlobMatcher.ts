@@ -5,7 +5,12 @@ import mm =  require('micromatch');
 
 export class GlobMatcher {
     readonly matcher: (filename: string) => boolean;
-    constructor(readonly patterns: string[], readonly root?: string) {
+    /**
+     * Construct a .gitignore emulator
+     * @param patterns the contents of a .gitignore style file or an array of individual glob rules.
+     * @param root the working directory
+     */
+    constructor(readonly patterns: string | string[], readonly root?: string) {
         this.matcher = buildMatcherFn(patterns, root);
     }
 
@@ -16,10 +21,14 @@ export class GlobMatcher {
 
 /**
  * This function attempts to emulate .gitignore functionality as much as possible.
- * @param patterns
- * @param root
+ * @param patterns the contents of a .gitignore style file or an array of individual glob rules.
+ * @param root the working directory
+ * @returns a function given a filename returns if it matches.
  */
-function buildMatcherFn(patterns: string[], root?: string): (filename: string) => boolean {
+function buildMatcherFn(patterns: string | string[], root?: string): (filename: string) => boolean {
+    if (typeof patterns == 'string') {
+        patterns = patterns.split(/\r?\n/g);
+    }
     const r = (root || '').replace(/\/$/, '') as string;
     const patternsEx = patterns.map(p => {
         p = p.trimLeft();
