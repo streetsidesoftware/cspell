@@ -1,9 +1,9 @@
 // cSpell Settings
 {
-    "id": "cspell-project-config",
-    "name": "cspell Project Config",
     // Version of the setting file.  Always 0.1
     "version": "0.1",
+    "id": "cspell-project-config",
+    "name": "cspell Project Config",
     // language - current active spelling language
     "language": "en",
     // words - list of words to be always considered correct
@@ -12,12 +12,6 @@
         "gensequence",
         "WORDCHARS",
         "xregexp"
-    ],
-    // flagWords - list of words to be always considered incorrect
-    // This is useful for offensive words and common spelling errors.
-    // For example "hte" should be "the"
-    "flagWords": [
-        "hte"
     ],
     "maxNumberOfProblems": 10000,
     "ignorePaths": [
@@ -33,5 +27,8 @@
         ".vscode/**"
     ],
     "allowCompoundWords": false,
-    "dictionaryDefinitions": []
+    "dictionaryDefinitions": [],
+    "ignoreWords": [
+        "istanbuljs"
+    ]
 }

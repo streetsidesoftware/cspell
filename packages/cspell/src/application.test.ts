@@ -1,5 +1,15 @@
+import mockRequire = require('mock-require');
+const getStdinResult = {
+    value: ''
+};
+mockRequire('get-stdin', () => {
+    return Promise.resolve(getStdinResult.value);
+});
+
 import {expect} from 'chai';
+
 import * as App from './application';
+
 
 describe('Validate the Application', function() {
     this.timeout(10000);  // make sure we have enough time on Travis.
@@ -60,26 +70,24 @@ describe('Validate the Application', function() {
         expect(result.items.map(i => i.text).join('')).to.be.equal(result.text);
     });
 
-    // it('Test running the application from stdin', async () => {
-    //     const files = ['stdin'];
-    //     const options = { wordsOnly: true, unique: true };
-    //     const logger = new Logger();
-    //     const stdinMock = mockSTDIN();
-    //     // cspell:ignore texxt
-    //     stdinMock.send(`
-    //         This is some texxt to test out reding from stdin.
-    //         cspell:ignore badspellingintext
-    //         We can ignore values within the text: badspellingintext
-    //     `, 'utf8');
-    //     const lint = App.lint(files, options, logger);
-    //     stdinMock.end();
-    //     const result = await lint;
-    //     stdinMock.restore();
-    //     expect(logger.errorCount).to.be.equal(0);
-    //     expect(logger.infoCount).to.be.greaterThan(0);
-    //     expect(logger.debugCount).to.be.greaterThan(0);
-    //     expect(result.files).equals(1);
-    // });
+    it('Test running the application from stdin', async () => {
+        const files = ['stdin'];
+        const options = { wordsOnly: true, unique: true };
+        const logger = new Logger();
+        // cspell:ignore texxt
+        getStdinResult.value = `
+            This is some texxt to test out reding from stdin.
+            cspell:ignore badspellingintext
+            We can ignore values within the text: badspellingintext
+        `;
+        const lint = App.lint(files, options, logger);
+        const result = await lint;
+        expect(result.files).equals(1);
+        expect(logger.errorCount).to.be.equal(0);
+        expect(logger.infoCount).to.be.greaterThan(0);
+        expect(logger.debugCount).to.be.greaterThan(0);
+        expect(logger.issues.map(i => i.text)).to.be.deep.equal(['texxt']);
+    });
 });
 
 
@@ -89,8 +97,10 @@ class Logger implements App.Emitters {
     errorCount: number = 0;
     debugCount: number = 0;
     infoCount: number = 0;
+    issues: App.Issue[] = [];
 
     issue = (issue: App.Issue) => {
+        this.issues.push(issue);
         this.issueCount += 1;
         const {uri, row, col, text} = issue;
         this.log.push(`Issue: ${uri}[${row}, ${col}]: Unknown word: ${text}`);
