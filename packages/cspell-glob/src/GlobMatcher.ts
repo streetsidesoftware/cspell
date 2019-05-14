@@ -6,8 +6,8 @@ import mm =  require('micromatch');
 export class GlobMatcher {
     readonly matcher: (filename: string) => boolean;
     /**
-     * Construct a .gitignore emulator
-     * @param patterns the contents of a .gitignore style file or an array of individual glob rules.
+     * Construct a `.gitignore` emulator
+     * @param patterns the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param root the working directory
      */
     constructor(readonly patterns: string | string[], readonly root?: string) {
@@ -30,7 +30,10 @@ function buildMatcherFn(patterns: string | string[], root?: string): (filename: 
         patterns = patterns.split(/\r?\n/g);
     }
     const r = (root || '').replace(/\/$/, '') as string;
-    const patternsEx = patterns.map(p => {
+    const patternsEx = patterns
+    .map(p => p.trim())
+    .filter(p => !!p)
+    .map(p => {
         p = p.trimLeft();
         const matchNeg = p.match(/^!+/);
         const neg = matchNeg && (matchNeg[0].length & 1) && true || false;

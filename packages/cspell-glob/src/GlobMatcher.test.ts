@@ -10,6 +10,43 @@ describe('Validate GlobMatcher', () => {
     });
 });
 
+describe('Tests .gitignore file contents', () => {
+    const pattern = `
+        # This is a comment
+
+        # ignore spec and test files.
+        src/*.{test|spec}.ts
+        node_modules/**
+        dist
+        *.js
+        !**/settings.js
+        !!*.txt
+    `;
+    const root = '/Users/code/project/cspell/';
+    const matcher = new GlobMatcher(pattern, root);
+
+    function t(filename: string, expected: boolean, comment: string) {
+        it(`Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `, () => {
+            expect(matcher.match(filename)).to.be.eq(expected);
+        });
+    }
+
+    t(root + 'src/code.ts', false, 'Ensure that .ts files are allowed');
+    t(root + 'dist/code.ts', true, 'Ensure that `dest` .ts files are not allowed');
+    t(root + 'src/code.js', true, 'Ensure that no .js files are allowed');
+    t(root + 'src/code.test.ts', true, 'Ensure that test.ts files are not allowed');
+    t(root + 'src/code.spec.ts', true, 'Ensure that spec.ts files are not allowed');
+    t('/Users/guest/code/' + 'src/code.test.ts', false, 'Ensure that test files in a different root are allowed');
+    t('/Users/guest/code/' + 'src/code.js', true, 'Ensure *.js files are never allowed even in a different root.');
+    t(root + 'node_modules/cspell/code.ts', true, 'Ensure that node modules are not allowed in the current root.');
+    t(root + 'nested/node_modules/cspell/code.ts', false, 'Ensure that nested node modules are allowed in the current root.');
+    t('/Users/guest/code/' + 'node_modules/cspell/code.ts', false, 'Ensure that node modules in a different root are allowed');
+    t(root + 'settings.js', false, 'Ensure that settings.js is kept');
+    t(root + 'dist/settings.js', false, 'Ensure that settings.js is kept');
+    t(root + 'node_modules/settings.js', false, 'Ensure that settings.js is kept');
+    t(root + 'src.txt', true, 'Ensure that double negative means block');
+});
+
 function tests(): [string[], string | undefined, string, boolean, string][] {
     return [
 
