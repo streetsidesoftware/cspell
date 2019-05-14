@@ -55,6 +55,25 @@ To get color in less, use `--color` and `less -r`
 cspell check <filename> --color | less -r
 ```
 
+## CI/CD Continuous Integration support
+
+### Git commit-hooks
+
+#### pre-commit
+
+**Setup**
+```
+npm install -SD cspell
+```
+
+**`.git/hooks/pre-commit`**
+```
+#!/bin/sh
+
+files=$(git diff --cached --name-only)
+exec npx cspell -- --no-summary $files
+```
+
 ## Requirements
 
 cspell needs Node 8 and above.
