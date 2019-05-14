@@ -12,7 +12,14 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"outDir": "dist",
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"baseUrl": "src",
+		"paths": {
+			"*": [
+				"*",
+				"types/*"
+			]
+	  	}
 	},
 	"include": [
 		"src/**/*.ts",

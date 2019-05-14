@@ -29,7 +29,7 @@
     "tscv": "tsc -v",
     "coverage": "npm run generate-code-coverage",
     "generate-code-coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
-    "test-ts": "NODE_ENV=test mocha --require ts-node/register --recursive --bail \"src/**/*.test.ts\"",
+    "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
     "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "prepublishOnly": "npm run lint && npm run clean-build && npm test",
     "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
@@ -60,7 +60,8 @@
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
   "devDependencies": {
-    "cspell-tools": "^3.0.8"
+    "cspell-tools": "^3.0.8",
+    "mock-stdin": "^0.3.1"
   },
   "dependencies": {
     "chalk": "^2.4.2",
@@ -86,6 +87,7 @@
     "cspell-trie": "^3.0.10",
     "fs-extra": "^7.0.1",
     "gensequence": "^2.1.2",
+    "get-stdin": "^7.0.0",
     "glob": "^7.1.4",
     "minimatch": "^3.0.4",
     "rxjs": "^6.5.2",

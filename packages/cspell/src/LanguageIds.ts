@@ -75,6 +75,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'perl', extensions: ['.pl', '.pm', '.pod', '.t', '.PL', '.psgi'], },
     { id: 'perl6', extensions: ['.p6', '.pl6', '.pm6', '.nqp'], },
     { id: 'php', extensions: ['.php', '.php4', '.php5', '.phtml', '.ctp'], },
+    { id: 'plaintext', extensions: ['.txt'], },
     { id: 'powershell', extensions: ['.ps1', '.psm1', '.psd1', '.pssc', '.psrc'], },
     { id: 'python', extensions: ['.py', '.rpy', '.pyw', '.cpy', '.gyp', '.gypi'], },
     { id: 'r', extensions: ['.r', '.rhistory', '.rprofile', '.rt'], },

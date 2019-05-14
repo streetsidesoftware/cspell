@@ -10,10 +10,12 @@ import * as util from './util/util';
 import { traceWords, TraceResult } from './index';
 import { CheckTextInfo } from './validator';
 import * as Validator from './validator';
+import getStdin = require('get-stdin');
 
 // cspell:word nocase
 
 const UTF8: BufferEncoding = 'utf8';
+const STDIN = 'stdin';
 
 export { TraceResult, IncludeExcludeFlag } from './index';
 
@@ -23,6 +25,7 @@ export interface CSpellApplicationOptions extends BaseOptions {
     exclude?: string;
     wordsOnly?: boolean;
     unique?: boolean;
+    stdin?: boolean;
 }
 
 export interface TraceOptions extends BaseOptions {
@@ -142,11 +145,6 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             share(),
             );
 
-        interface FileInfo {
-            filename: string;
-            text: string;
-        }
-
         // Get Exclusions from the config files.
         const exclusionGlobs = configRx.pipe(
             map(({filename, config}) => extractGlobExcludesFromConfig(filename, config)),
@@ -156,19 +154,9 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         ).toPromise();
 
 
-
         const filesRx: Observable<FileInfo> = filterFiles(findFiles(cfg.files), exclusionGlobs).pipe(
-            flatMap(filename => {
-                return fsp.readFile(filename).then(
-                    text => ({text: text.toString(), filename}),
-                    error => {
-                        return error.code === 'EISDIR'
-                            ? Promise.resolve(undefined)
-                            : Promise.reject({...error, message: `Error reading file: "${filename}"`});
-                    });
-            }),
-            filter(a => !!a),
-            map(a => a!),
+            flatMap(filename => readFileInfo(filename)),
+            filter(a => a && !!a.text),
         );
 
         const status: RunResult = {
@@ -289,10 +277,7 @@ export async function checkText(filename: string, options: BaseOptions): Promise
         map(util.unique),
         map(filenames => ({filename: filenames[0], config: cspell.readSettingsFiles(filenames)})),
     ).toPromise();
-    const pBuffer = fsp.readFile(filename);
-    const [foundSettings, buffer] = await Promise.all([pSettings, pBuffer]);
-
-    const text = buffer.toString(UTF8);
+    const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,
         local: options.local || undefined,
@@ -309,11 +294,31 @@ const defaultExcludeGlobs = [
     'node_modules/**'
 ];
 
+interface FileInfo {
+    filename: string;
+    text: string;
+}
+
+function readFileInfo(filename: string, encoding: string = UTF8): Promise<FileInfo> {
+    const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
+    return pText.then(
+        text => ({text, filename}),
+        error => {
+            return error.code === 'EISDIR'
+                ? Promise.resolve({ text: '', filename })
+                : Promise.reject({...error, message: `Error reading file: "${filename}"`});
+        });
+}
+
+function readFile(filename: string, encoding: string = UTF8): Promise<string> {
+    return readFileInfo(filename, encoding).then(info => info.text);
+}
+
 function findFiles(globPatterns: string[]): Observable<string> {
     const processed = new Set<string>();
 
     return from(globPatterns).pipe(
-        flatMap(pattern => globRx(pattern)
+        flatMap(pattern => pattern === STDIN ? Promise.resolve([pattern]) : globRx(pattern)
             .pipe(catchError((error: AppError) => {
                 return new Promise<string[]>((resolve) => resolve(Promise.reject({...error, message: 'Error with glob search.'})));
             }))

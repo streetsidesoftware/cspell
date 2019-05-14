@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import * as App from './application';
 
-
 describe('Validate the Application', function() {
     this.timeout(10000);  // make sure we have enough time on Travis.
 
@@ -60,6 +59,27 @@ describe('Validate the Application', function() {
         expect(result.items.length).to.be.gt(50);
         expect(result.items.map(i => i.text).join('')).to.be.equal(result.text);
     });
+
+    // it('Test running the application from stdin', async () => {
+    //     const files = ['stdin'];
+    //     const options = { wordsOnly: true, unique: true };
+    //     const logger = new Logger();
+    //     const stdinMock = mockSTDIN();
+    //     // cspell:ignore texxt
+    //     stdinMock.send(`
+    //         This is some texxt to test out reding from stdin.
+    //         cspell:ignore badspellingintext
+    //         We can ignore values within the text: badspellingintext
+    //     `, 'utf8');
+    //     const lint = App.lint(files, options, logger);
+    //     stdinMock.end();
+    //     const result = await lint;
+    //     stdinMock.restore();
+    //     expect(logger.errorCount).to.be.equal(0);
+    //     expect(logger.infoCount).to.be.greaterThan(0);
+    //     expect(logger.debugCount).to.be.greaterThan(0);
+    //     expect(result.files).equals(1);
+    // });
 });
 
 

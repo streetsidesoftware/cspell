@@ -44,10 +44,12 @@ let showHelp = true;
 program
     .version(npmPackage.version)
     .description('Spelling Checker for Code')
+    .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .option('--no-color', 'Turn off color.')
+    .option('--color', 'Force color')
     ;
 
 program
-    .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
     .option('-v, --verbose', 'display more information about the files being checked and the configuration')
     .option('--local <local>', 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.')
     .option('--legacy', 'Legacy output')
@@ -56,14 +58,12 @@ program
     .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
     .option('--debug', 'Output information useful for debugging cspell.json files.')
     .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
-    .option('--no-color', 'Turn off color.')
-    .option('--color', 'Force color')
     .option('--no-summary', 'Turn off summary message in console')
     // The following options are planned features
     // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
     // .option('--force', 'Force the exit value to always be 0')
     .arguments('<files...>')
-    .action((files: string[], options: Options) => {
+    .action((files: string[] | undefined, options: Options) => {
         const issueTemplate = options.wordsOnly
             ? templateIssueWordsOnly
             : options.legacy ? templateIssueLegacy : templateIssue;
@@ -73,6 +73,9 @@ program
             info: options.verbose ? infoEmitter : nullEmitter,
             debug: options.debug ? debugEmitter : nullEmitter,
         };
+        if (!files || !files.length) {
+            return;
+        }
         showHelp = false;
         App.lint(files, options, emitters).then(
             result => {
@@ -163,6 +166,20 @@ program
         console.log('Init');
     });
 */
+
+const usage = `
+
+Examples:
+    cspell "*.js"                   Check all .js files in the current directory
+    cspell "**/*.js"                Check all .js files from the current directory
+    cspell "src/**/*.js"            Only check .js under src
+    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
+    cat LICENSE | cspell stdin      Read from stdin the contents of LICENSE
+`;
+
+program.on('--help', function() {
+    console.log(usage);
+});
 
 program.parse(process.argv);
 
