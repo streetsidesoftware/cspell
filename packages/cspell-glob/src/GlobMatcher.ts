@@ -3,20 +3,51 @@ import mm =  require('micromatch');
 
 // cspell:ignore fname
 
+export type GlobMatch = GlobMatchRule | GlobMatchNoRule;
+
+export interface GlobMatchRule {
+    matched: boolean;
+    glob: string;
+    index: number;
+    isNeg: boolean;
+}
+
+export interface GlobMatchNoRule {
+    matched: false;
+}
+
 export class GlobMatcher {
-    readonly matcher: (filename: string) => boolean;
+    /**
+     * @param filename full path of file to match against.
+     * @returns a GlobMatch - information about the match.
+     */
+    readonly matchEx: (filename: string) => GlobMatch;
     /**
      * Construct a `.gitignore` emulator
      * @param patterns the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param root the working directory
      */
     constructor(readonly patterns: string | string[], readonly root?: string) {
-        this.matcher = buildMatcherFn(patterns, root);
+        this.matchEx = buildMatcherFn(patterns, root);
     }
 
+    /**
+     * Check to see if a filename matches any of the globs.
+     * @param filename full path of the file to check.
+     */
     match(filename: string): boolean {
-        return this.matcher(filename);
+        return this.matchEx(filename).matched;
     }
+}
+
+type GlobMatchFn = (filename: string) => GlobMatch;
+
+interface GlobRule {
+    glob: string;
+    index: number;
+    isNeg: boolean;
+    reg: RegExp;
+    fn: (filename: string) => boolean;
 }
 
 /**
@@ -25,46 +56,47 @@ export class GlobMatcher {
  * @param root the working directory
  * @returns a function given a filename returns if it matches.
  */
-function buildMatcherFn(patterns: string | string[], root?: string): (filename: string) => boolean {
+function buildMatcherFn(patterns: string | string[], root?: string): GlobMatchFn {
     if (typeof patterns == 'string') {
         patterns = patterns.split(/\r?\n/g);
     }
     const r = (root || '').replace(/\/$/, '') as string;
-    const patternsEx = patterns
-    .map(p => p.trim())
-    .filter(p => !!p)
-    .map(p => {
-        p = p.trimLeft();
-        const matchNeg = p.match(/^!+/);
-        const neg = matchNeg && (matchNeg[0].length & 1) && true || false;
-        const pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), p);
-        const reg = mm.makeRe(pattern);
-        const fn = (filename: string) => {
-            const match = filename.match(reg);
-            return !!match;
-        };
-        return { neg, fn };
-    });
-    const negFns = patternsEx.filter(pat => pat.neg).map(pat => pat.fn);
-    const fns = patternsEx.filter(pat => !pat.neg).map(pat => pat.fn);
-    return (filename: string) => {
+    const rules: GlobRule[] = patterns
+        .map(p => p.trim())
+        .map((p, index) => ({ glob: p, index }))
+        .filter(r => !!r.glob)
+        .map(({ glob, index }) => {
+            const matchNeg = glob.match(/^!+/);
+            const isNeg = matchNeg && (matchNeg[0].length & 1) && true || false;
+            const pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), glob);
+            const reg = mm.makeRe(pattern);
+            const fn = (filename: string) => {
+                const match = filename.match(reg);
+                return !!match;
+            };
+            return { glob, index, isNeg, fn, reg };
+        });
+    const negRules = rules.filter(r => r.isNeg);
+    const posRules = rules.filter(r => !r.isNeg);
+    const fn: GlobMatchFn = (filename: string) => {
         filename = filename.replace(/^[^/]/, '/$&');
         const offset = r === filename.slice(0, r.length) ? r.length : 0;
         const fname = filename.slice(offset);
 
-        for (const negFn of negFns) {
-            if (negFn(fname)) {
-                return false;
+        for (const rule of negRules) {
+            if (rule.fn(fname)) {
+                return { matched: false, glob: rule.glob, index: rule.index, isNeg: rule.isNeg };
             }
         }
 
-        for (const fn of fns) {
-            if (fn(fname)) {
-                return true;
+        for (const rule of posRules) {
+            if (rule.fn(fname)) {
+                return { matched: true, glob: rule.glob, index: rule.index, isNeg: rule.isNeg };
             }
         }
-        return false;
+        return { matched: false };
     }
+    return fn;
 }
 
 type MutationsToSupportGitIgnore = [RegExp, string];

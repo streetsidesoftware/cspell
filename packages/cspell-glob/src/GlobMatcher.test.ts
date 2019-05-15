@@ -1,4 +1,4 @@
-import { GlobMatcher } from './GlobMatcher';
+import { GlobMatcher, GlobMatch } from './GlobMatcher';
 import { expect } from 'chai';
 
 describe('Validate GlobMatcher', () => {
@@ -31,6 +31,12 @@ describe('Tests .gitignore file contents', () => {
         });
     }
 
+    function tt(filename: string, expected: GlobMatch, comment: string) {
+        it(`Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `, () => {
+            expect(matcher.matchEx(filename)).to.be.deep.eq(expected);
+        });
+    }
+
     t(root + 'src/code.ts', false, 'Ensure that .ts files are allowed');
     t(root + 'dist/code.ts', true, 'Ensure that `dest` .ts files are not allowed');
     t(root + 'src/code.js', true, 'Ensure that no .js files are allowed');
@@ -45,6 +51,12 @@ describe('Tests .gitignore file contents', () => {
     t(root + 'dist/settings.js', false, 'Ensure that settings.js is kept');
     t(root + 'node_modules/settings.js', false, 'Ensure that settings.js is kept');
     t(root + 'src.txt', true, 'Ensure that double negative means block');
+
+    tt(root + 'src/code.ts', { matched: false }, 'Ensure that .ts files are allowed');
+    tt(root + 'dist/code.ts', { matched: true, glob: 'dist', index: 6, isNeg: false }, 'Ensure that `dest` .ts files are not allowed');
+    tt(root + 'src/code.js', { matched: true, glob: '*.js', index: 7, isNeg: false }, 'Ensure that no .js files are allowed');
+    tt(root + 'dist/settings.js', { matched: false, glob: '!**/settings.js', index: 8, isNeg: true }, 'Ensure that settings.js is kept');
+
 });
 
 function tests(): [string[], string | undefined, string, boolean, string][] {
