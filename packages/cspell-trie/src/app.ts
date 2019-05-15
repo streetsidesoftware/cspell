@@ -2,14 +2,14 @@
 
 // cSpell:ignore findup
 import * as commander from 'commander';
-import * as fs from 'fs';
-import {lineReaderRx as lineReader} from 'cspell-lib';
-import {rxToStream} from 'rxjs-stream';
-import {from} from 'rxjs';
-import {map, filter, reduce, tap, flatMap, bufferCount} from 'rxjs/operators';
+import * as fs from 'fs-extra';
 import {mkdirp} from 'fs-extra';
 import * as path from 'path';
-import * as Trie from './lib';
+import * as Trie from 'cspell-trie-lib';
+import { Sequence, genSequence } from 'gensequence';
+import { iterableToStream } from 'iterable-to-stream';
+
+const UTF8: BufferEncoding = 'utf8';
 
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
@@ -22,7 +22,7 @@ commander
     .option('-l, --lower_case', 'output in lower case')
     .option('-b, --base <number>', 'Use base n for reference ids.  Defaults to 32. Common values are 10, 16, 32. Max of 36')
     .description('Generate a file for use with cspell')
-    .action((filename, options) => {
+    .action(async (filename, options) => {
         const {
             output: outputFile,
             lower_case: lowerCase = false,
@@ -31,51 +31,41 @@ commander
         notify('Create Trie', !!outputFile);
         const pOutputStream = createWriteStream(outputFile);
         notify(`Generating...`, !!outputFile);
-        const rxReader = lineReader(filename, 'utf8');
+        const lines = await fileToLines(filename);
         const toLower = lowerCase ? (a: string) => a.toLowerCase() : (a: string) => a;
 
-        const wordsRx = rxReader.pipe(
-            map(toLower),
-            map(a => a.trim()),
-            filter(a => !!a),
-        );
+        const wordsRx = lines
+            .map(toLower)
+            .map(a => a.trim())
+            .filter(a => !!a);
 
-        const trieRx = wordsRx.pipe(
-            reduce((node: Trie.TrieNode, word: string) => Trie.insert(word, node), {} as Trie.TrieNode),
-            tap(() => notify('Processing Trie')),
-            tap(() => notify('Export Trie')),
-            map(root => Trie.serializeTrie(root, (base - 0) || 32)),
-            flatMap(seq => from(seq)),
-        );
+        notify('Processing Trie');
+        const root = wordsRx.reduce((node: Trie.TrieNode, word: string) => Trie.insert(word, node), {} as Trie.TrieNode);
 
-        pOutputStream.then(writeStream => {
-            rxToStream(trieRx.pipe(
-                bufferCount(1024),
-                map(words => words.join('')))
-            ).pipe(writeStream);
+        notify('Export Trie');
+        const serialStream = iterableToStream(Trie.serializeTrie(root, (base - 0) || 32));
+        const outputStream = await pOutputStream;
+        return new Promise((resolve) => {
+            serialStream.pipe(outputStream).on('finish', () => resolve());
         });
-
     });
 
 commander
     .command('reader <file.trie>')
     .option('-o, --output <file>', 'output file - defaults to stdout')
     .description('Read a cspell trie file and output the list of words.')
-    .action((filename, options) => {
+    .action(async (filename, options) => {
         const {
             output: outputFile,
         } = options;
         notify('Reading Trie', !!outputFile);
         const pOutputStream = createWriteStream(outputFile);
-        const rxReader = lineReader(filename, 'utf8');
-        const wordsRx = Trie.importTrieRx(rxReader).pipe(
-            map(root => Trie.iteratorTrieWords(root)),
-            flatMap(seq => from(seq)),
-            map(word => word + '\n'),
-        );
-
-        pOutputStream.then(writeStream => {
-            rxToStream(wordsRx.pipe(bufferCount(1024), map(words => words.join('')))).pipe(writeStream);
+        const lines = await fileToLines(filename);
+        const root = Trie.importTrie(lines);
+        const words = Trie.iteratorTrieWords(root);
+        const outputStream = await pOutputStream;
+        return new Promise((resolve) => {
+            iterableToStream(words.map(a => a + '\n')).pipe(outputStream).on('finish', () => resolve());
         });
     });
 
@@ -83,6 +73,11 @@ commander.parse(process.argv);
 
 if (!commander.args.length) {
     commander.help();
+}
+
+async function fileToLines(filename: string): Promise<Sequence<string>> {
+    const file = await fs.readFile(filename, UTF8);
+    return genSequence(file.split(/\r?\n/));
 }
 
 function createWriteStream(filename?: string): Promise<NodeJS.WritableStream> {
@@ -98,4 +93,5 @@ function notify(message: any, useStdOut = true) {
         console.error(message);
     }
 }
+
 
