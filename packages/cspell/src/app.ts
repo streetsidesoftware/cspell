@@ -11,6 +11,7 @@ interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
     summary: boolean;
     issues: boolean;
+    silent: boolean;
 }
 interface TraceOptions extends App.TraceOptions {}
 // interface InitOptions extends Options {}
