@@ -1,0 +1,64 @@
+{
+  "name": "cspell-trie-lib",
+  "version": "3.0.10",
+  "description": "Trie Data Structure to support cspell.",
+  "bin": "./dist/app.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "src/**",
+    "!**/*.test.*"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "test": "mocha --recursive \"./dist/**/*.test.js\"",
+    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "build": "tsc -p .",
+    "clean-build": "npm run clean && npm run build",
+    "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
+    "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
+    "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "travis-coverage": "npm run coverage && npm run coverage-coveralls",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "keywords": [
+    "trie",
+    "cspell"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-trie"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell#readme",
+  "dependencies": {
+    "gensequence": "^2.1.2",
+    "js-xxhash": "^1.0.1"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.test.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
