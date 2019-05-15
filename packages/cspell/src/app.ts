@@ -10,6 +10,7 @@ import chalk from 'chalk';
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
     summary: boolean;
+    issues: boolean;
 }
 interface TraceOptions extends App.TraceOptions {}
 // interface InitOptions extends Options {}
@@ -37,7 +38,21 @@ function debugEmitter(message: string) {
     console.info(chalk.cyan(message));
 }
 
-function nullEmitter(_: string) {}
+function nullEmitter(_: string | App.Issue) {}
+async function asyncNullEmitter(_: string | App.Issue) {}
+
+function getEmitters(options: Options): App.Emitters {
+    const issueTemplate = options.wordsOnly
+        ? templateIssueWordsOnly
+        : options.legacy ? templateIssueLegacy : templateIssue;
+    const { silent = false, issues } = options;
+    return {
+        issue: silent ? nullEmitter      : issues ? genIssueEmitter(issueTemplate) : nullEmitter,
+        error: silent ? asyncNullEmitter : errorEmitter,
+        info:  silent ? nullEmitter      : options.verbose ? infoEmitter : nullEmitter,
+        debug: options.debug ? debugEmitter : nullEmitter,
+    };
+}
 
 let showHelp = true;
 
@@ -58,28 +73,22 @@ program
     .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
     .option('--debug', 'Output information useful for debugging cspell.json files.')
     .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
+    .option('--no-issues', 'Do not show the spelling errors.')
     .option('--no-summary', 'Turn off summary message in console')
+    .option('-s, --silent', 'Silent mode, suppress error messages')
     // The following options are planned features
     // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
     // .option('--force', 'Force the exit value to always be 0')
     .arguments('<files...>')
     .action((files: string[] | undefined, options: Options) => {
-        const issueTemplate = options.wordsOnly
-            ? templateIssueWordsOnly
-            : options.legacy ? templateIssueLegacy : templateIssue;
-        const emitters: App.Emitters = {
-            issue: genIssueEmitter(issueTemplate),
-            error: errorEmitter,
-            info: options.verbose ? infoEmitter : nullEmitter,
-            debug: options.debug ? debugEmitter : nullEmitter,
-        };
+        const emitters: App.Emitters = getEmitters(options);
         if (!files || !files.length) {
             return;
         }
         showHelp = false;
         App.lint(files, options, emitters).then(
             result => {
-                if (options.summary) {
+                if (options.summary && !options.silent) {
                     console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);
                 }
                 process.exit(result.issues ? 1 : 0);
