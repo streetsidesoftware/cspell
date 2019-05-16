@@ -3,8 +3,7 @@ import * as fileReader from './fileReader';
 
 describe('Validate file reader', () => {
     it('Catches errors for non-existent files', () => {
-        return fileReader.textFileStream('./non-existent.txt')
-            .toPromise()
+        return fileReader.readLines('./non-existent.txt')
             .then(
                 () => {
                     expect(true).to.be.false;

@@ -1,8 +1,6 @@
 import { genSequence } from 'gensequence';
-import { Observable } from 'rxjs';
-import { filter, map, reduce, take } from 'rxjs/operators';
 import { IterableLike } from '../util/IterableLike';
-import { Trie, importTrieRx, SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie';
+import { Trie, importTrie, SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
 import { createMapper } from '../util/repMap';
 import { ReplaceMap } from '../Settings';
 
@@ -86,34 +84,18 @@ export class SpellingDictionaryFromSet implements SpellingDictionary {
     }
 }
 
-export function createSpellingDictionary(
+export async function createSpellingDictionary(
     wordList: string[] | IterableLike<string>,
     name: string,
     source: string,
     options?: SpellingDictionaryOptions
-): SpellingDictionary {
+): Promise<SpellingDictionary> {
     const words = new Set(genSequence(wordList)
         .filter(word => typeof word === 'string')
         .map(word => word.toLowerCase().trim())
         .filter(word => !!word)
     );
     return new SpellingDictionaryFromSet(words, name, options, source);
-}
-
-export function createSpellingDictionaryRx(
-    words: Observable<string>,
-    name: string,
-    source: string,
-    options?: SpellingDictionaryOptions
-): Promise<SpellingDictionary> {
-    const promise = words.pipe(
-        filter(word => typeof word === 'string'),
-        map(word => word.toLowerCase().trim()),
-        filter(word => !!word),
-        reduce((words: Set<string>, word: string) => words.add(word), new Set<string>()),
-        map(words => new SpellingDictionaryFromSet(words, name, options, source)),
-    ).toPromise();
-    return promise;
 }
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
@@ -193,16 +175,13 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 }
 
-export function createSpellingDictionaryTrie(
-    data: Observable<string>,
+export async function createSpellingDictionaryTrie(
+    data: IterableLike<string>,
     name: string,
     source: string,
     options?: SpellingDictionaryOptions
 ): Promise<SpellingDictionary> {
-    const promise = importTrieRx(data).pipe(
-        map(node => new Trie(node)),
-        map(trie => new SpellingDictionaryFromTrie(trie, name, options, source)),
-        take(1),
-    ).toPromise();
-    return promise;
+    const trieNode = importTrie(data);
+    const trie = new Trie(trieNode);
+    return new SpellingDictionaryFromTrie(trie, name, options, source);
 }

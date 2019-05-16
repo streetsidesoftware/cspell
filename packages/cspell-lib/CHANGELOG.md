@@ -1,5 +1,8 @@
 # Change log
 
+## [4.0.0]
+* **Breaking Changes** drops dependency upon rxjs and moves to [AsyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator)
+
 ## [3.05]
 * Update dependencies and use `rxjs-stream` for reading files.
 

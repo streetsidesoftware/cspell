@@ -1,17 +1,14 @@
-import * as fs from 'fs';
 import * as XRegExp from 'xregexp';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
-import { lineReaderRx } from './fileReader';
-import { writeToFileRxP} from 'cspell-lib';
-import { Observable, from } from 'rxjs';
-import { flatMap, map, bufferCount, distinct, toArray, filter } from 'rxjs/operators';
+import * as lib from 'cspell-lib';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
 import * as HR from 'hunspell-reader';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { writeSeqToFile } from './fileWriter';
+import { uniqueFilter } from 'hunspell-reader/dist/util';
 
 const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
@@ -52,28 +49,24 @@ interface CompileWordListOptions {
 }
 
 export async function compileWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
-    const getWords = () => regHunspellFile.test(filename) ? readHunspellFiles(filename) : lineReaderRx(filename);
+    const getWords = () => regHunspellFile.test(filename) ? readHunspellFiles(filename) : lib.asyncIterableToArray(lib.lineReaderAsync(filename));
 
     const destDir = path.dirname(destFilename);
 
     const pDir = mkdirp(destDir);
 
-    const stream = getWords().pipe(
-        options.splitWords ? compileWordListWithSplitRx : compileSimpleWordListRx,
-        filter(a => !!a),
-        distinct(),
-        options.sort ? sort : map(a => a)
-    );
+    const compile = options.splitWords ? compileWordListWithSplitSeq : compileSimpleWordListSeq;
 
-    const buffered = stream.pipe(
-        map(a => a + '\n'),
-        bufferCount(1024),
-        map(a => a.join('')),
-    );
+    const words = genSequence(await getWords());
+    const seq = compile(words)
+        .filter(a => !!a)
+        .filter(uniqueFilter(10000));
+
+    const finalSeq = options.sort ? genSequence(sort(seq)) : seq;
 
     await pDir;
 
-    return writeToFileRxP(destFilename, buffered);
+    return writeSeqToFile(finalSeq.map(a => a + '\n'), destFilename);
 }
 
 
@@ -82,27 +75,20 @@ export function compileWordListWithSplit(filename: string, destFilename: string)
     return compileWordList(filename, destFilename, { splitWords: true, sort: true });
 }
 
-export async function compileSimpleWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
+export async function compileSimpleWordList(filename: string, destFilename: string, _options: CompileWordListOptions): Promise<void> {
     return compileWordList(filename, destFilename, { splitWords: false, sort: true });
 }
 
-function sort(words: Observable<string>): Observable<string> {
-    return words.pipe(
-        toArray(),
-        flatMap(a => a.sort()),
-    );
+function sort(words: Iterable<string>): Iterable<string> {
+    return [...words].sort();
 }
 
-function compileWordListWithSplitRx(words: Observable<string>): Observable<string> {
-    return words.pipe(
-        flatMap(line => lineToWords(line).toArray()),
-    );
+function compileWordListWithSplitSeq(words: Sequence<string>): Sequence<string> {
+    return words.concatMap(line => lineToWords(line).toArray());
 }
 
-function compileSimpleWordListRx(words: Observable<string>): Observable<string> {
-    return words.pipe(
-        map(a => a.toLowerCase()),
-    );
+function compileSimpleWordListSeq(words: Sequence<string>): Sequence<string> {
+    return words.map(a => a.toLowerCase());
 }
 
 export function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieNode {
@@ -115,24 +101,20 @@ export async function compileWordListToTrieFile(words: Sequence<string>, destFil
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
     const pRoot = normalizeWordsToTrie(words);
-    const [_, root] = await Promise.all([pDir, pRoot]);
+    const [root] = await Promise.all([pRoot, pDir]);
 
     return writeSeqToFile(Trie.serializeTrie(root, { base: 32, comment: 'Built by cspell-tools.' }), destFilename);
 }
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
-function readHunspellFiles(filename: string): Observable<string> {
+async function readHunspellFiles(filename: string): Promise<Sequence<string>> {
     const dicFile = filename.replace(regHunspellFile, '.dic');
     const affFile = filename.replace(regHunspellFile, '.aff');
 
-    const reader = HR.HunspellReader.createFromFiles(affFile, dicFile);
+    const reader = await HR.IterableHunspellReader.createFromFiles(affFile, dicFile);
 
-    const r = from(reader).pipe(
-        flatMap(reader => reader.readWordsRx()),
-        map(aff => aff.word),
-    );
-    return r;
+    return genSequence(reader.iterateWords());
 }
 
 export async function compileTrie(filename: string, destFilename: string): Promise<void> {

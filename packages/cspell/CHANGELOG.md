@@ -1,5 +1,8 @@
 # Release Notes
 
+## [4.0.0]
+- **Breaking Change** drop support for Node 8 and 9.
+
 ## [3.2.14]
 - Updated `package.json` references to point to the new monorepo
 - [Resolve paths beginning with tilde as $HOME by `tribut` · Pull Request #83](https://github.com/streetsidesoftware/cspell/pull/83)

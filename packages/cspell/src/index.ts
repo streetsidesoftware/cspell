@@ -19,7 +19,6 @@ export {
 export {
     CompoundWordsMethod,
     createSpellingDictionary,
-    createSpellingDictionaryRx,
     getDictionary,
     SpellingDictionary,
     SuggestionCollector,

@@ -1,4 +1,12 @@
-export {lineReaderRx as lineReader} from 'cspell-lib';
-export {textFileStreamRx as textFileStream} from 'cspell-lib';
-export {stringsToLinesRx as stringsToLines} from 'cspell-lib';
+import { readFile } from 'cspell-lib';
+import { toIterableIterator } from './iterableIteratorLib';
 
+export async function readLines(filename: string, encoding: BufferEncoding = 'utf8') {
+    try {
+
+        const content = await readFile(filename, encoding);
+        return toIterableIterator(content.split(/\r?\n/g));
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}

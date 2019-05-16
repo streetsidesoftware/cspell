@@ -1,11 +1,9 @@
-import {
-    loadWordsRx,
-    splitLineIntoWordsRx,
-} from '../wordListHelper';
-import { SpellingDictionary, createSpellingDictionaryRx, createSpellingDictionaryTrie } from './SpellingDictionary';
+import { splitLineIntoWords, splitLineIntoCodeWords, loadWordsNoError } from '../wordListHelper';
+import { SpellingDictionary, createSpellingDictionaryTrie, createSpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
-import {flatMap} from 'rxjs/operators';
 import { ReplaceMap } from '../Settings';
+import { genSequence } from 'gensequence';
+import { readLines } from '../util/fileReader';
 
 export interface LoadOptions {
     // Type of file:
@@ -68,18 +66,27 @@ function load(uri: string, options: LoadOptions): Promise<SpellingDictionary>  {
 }
 
 
-function loadSimpleWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename), path.basename(filename), filename, options);
+async function loadSimpleWordList(filename: string, options: LoadOptions) {
+    try {
+        const lines = await readLines(filename);
+        return createSpellingDictionary(lines, path.basename(filename), filename, options);
+    } catch (e) {
+        return Promise.reject(e);
+    }
 }
 
-function loadWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).pipe(flatMap(splitLineIntoWordsRx)), path.basename(filename), filename, options);
+async function loadWordList(filename: string, options: LoadOptions) {
+    const lines = genSequence(await readLines(filename));
+    const words = lines.concatMap(splitLineIntoWords);
+    return createSpellingDictionary(words, path.basename(filename), filename, options);
 }
 
-function loadCodeWordList(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryRx(loadWordsRx(filename).pipe(flatMap(splitLineIntoWordsRx)), path.basename(filename), filename, options);
+async function loadCodeWordList(filename: string, options: LoadOptions) {
+    const lines = genSequence(await readLines(filename));
+    const words = lines.concatMap(splitLineIntoCodeWords);
+    return createSpellingDictionary(words, path.basename(filename), filename, options);
 }
 
-function loadTrie(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryTrie(loadWordsRx(filename), path.basename(filename), filename, options);
+async function loadTrie(filename: string, options: LoadOptions) {
+    return createSpellingDictionaryTrie(await loadWordsNoError(filename), path.basename(filename), filename, options);
 }

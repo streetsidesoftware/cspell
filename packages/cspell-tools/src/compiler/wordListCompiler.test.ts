@@ -89,8 +89,9 @@ describe('Validate the wordListCompiler', function() {
         .then(words => {
             return Trie.importTrieRx(from(words)).pipe(take(1)).toPromise()
             .then(node => {
-                expect([...Trie.iteratorTrieWords(node)].sort()).to.be.deep
-                .equal(citiesResult.split('\n').filter(a => !!a).sort());
+                const expected = citiesResult.split('\n').filter(a => !!a).sort();
+                const words = [...Trie.iteratorTrieWords(node)].sort();
+                expect(words).to.be.deep.equal(expected);
             });
         });
     });
@@ -101,16 +102,16 @@ function distinct(): (word: string) => boolean {
     return a => known.has(a) ? false : (known.add(a), true);
 }
 
-const cities = `\
-New York
-New Amsterdam
-Los Angeles
-San Francisco
-New Delhi
-Mexico City
-London
-Paris
-`;
+// const cities = `\
+// New York
+// New Amsterdam
+// Los Angeles
+// San Francisco
+// New Delhi
+// Mexico City
+// London
+// Paris
+// `;
 
 const citiesSorted = `\
 London

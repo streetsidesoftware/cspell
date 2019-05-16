@@ -1,9 +1,8 @@
 // cSpell:enableCompoundWords
-import { Observable, from } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import * as Text from './util/text';
-import { lineReader } from './util/fileReader';
+import { readLines } from './util/fileReader';
 import * as XRegExp from 'xregexp';
+import { toIterableIterator, concatIterables } from './util/iterableIteratorLib';
 
 
 const regExpWordsWithSpaces = XRegExp('^\\s*\\p{L}+(?:\\s+\\p{L}+){0,3}$');
@@ -14,13 +13,14 @@ export interface WordDictionary {
 
 export type WordSet = Set<string>;
 
-export function loadWordsRx(filename: string): Observable<string> {
-    return lineReader(filename)
-    .pipe(catchError((e: any) => {
-        logError(e);
-        return from<string[]>([]);
-    }))
-    ;
+/**
+ * Reads words from a file. It will not throw and error.
+ * @param filename the file to read
+ */
+export function loadWordsNoError(filename: string) {
+    return readLines(filename).catch(
+        e => (logError(e), toIterableIterator<string>([]))
+    );
 }
 
 function logError(e: any) {
@@ -37,18 +37,15 @@ export function splitCodeWords(words: string[]) {
         .reduce((a, b) => a.concat(b), []);
 }
 
-export function splitLineIntoCodeWordsRx(line: string): Observable<string> {
+export function splitLineIntoCodeWords(line: string): IterableIterator<string> {
     const asMultiWord = regExpWordsWithSpaces.test(line) ? [ line ] : [];
     const asWords = splitLine(line);
     const splitWords = splitCodeWords(asWords);
-    const wordsToAdd = new Set([...asMultiWord, ...asWords, ...splitWords]);
-    return from([...wordsToAdd]);
+    const wordsToAdd = new Set(concatIterables(asMultiWord, asWords, splitWords));
+    return toIterableIterator(wordsToAdd);
 }
 
-export function splitLineIntoWordsRx(line: string): Observable<string> {
+export function splitLineIntoWords(line: string): IterableIterator<string> {
     const asWords = splitLine(line);
-    const wordsToAdd = [line, ...asWords];
-    return from(wordsToAdd);
+    return concatIterables([line], asWords);
 }
-
-
