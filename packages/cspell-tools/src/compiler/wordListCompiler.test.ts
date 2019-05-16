@@ -9,7 +9,7 @@ import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie';
 import * as path from 'path';
 import { from } from 'rxjs';
-import { take, toArray } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { genSequence } from 'gensequence';
 
 describe('Validate the wordListCompiler', function() {

@@ -8,7 +8,7 @@ import { Observable, from } from 'rxjs';
 import { flatMap, map, bufferCount, distinct, toArray, filter } from 'rxjs/operators';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
-import * as Trie from 'cspell-trie';
+import * as Trie from 'cspell-trie-lib';
 import * as HR from 'hunspell-reader';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { writeSeqToFile } from './fileWriter';

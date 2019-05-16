@@ -4,7 +4,7 @@
 // # !/usr/bin/env node --max_old_space_size=8192
 
 
-import { compileWordList, compileTrie, compileSimpleWordList } from './compiler';
+import { compileWordList, compileTrie } from './compiler';
 import * as path from 'path';
 import * as program from 'commander';
 import { Observable, bindNodeCallback, from } from 'rxjs';

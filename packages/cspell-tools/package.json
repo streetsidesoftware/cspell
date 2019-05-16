@@ -2,7 +2,6 @@
   "name": "cspell-tools",
   "version": "3.0.8",
   "description": "Tools to assist with the development of cSpell",
-  "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "bin": {
     "cspell-tools": "./dist/app.js"
@@ -14,7 +13,7 @@
     "clean": "rimraf dist && rimraf temp",
     "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
     "lint": "tslint --project tsconfig.json",
-    "test-ts": "NODE_ENV=test mocha --require ts-node/register --recursive --bail \"src/**/*.test.ts\"",
+    "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
     "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "test": "mocha --recursive ./dist/**/*.test.js"
   },
@@ -42,7 +41,7 @@
   "dependencies": {
     "commander": "^2.20.0",
     "cspell-lib": "^3.0.8",
-    "cspell-trie": "^3.0.10",
+    "cspell-trie-lib": "^3.0.13",
     "fs-extra": "^7.0.1",
     "gensequence": "^2.1.2",
     "glob": "^7.1.4",
