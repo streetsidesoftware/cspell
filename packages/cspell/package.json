@@ -22,7 +22,7 @@
     "build": "npm run compile",
     "clean-build": "npm run clean && npm run build && npm run build-dictionaries",
     "build-dictionaries": "npm run build_dictionaries-word-lists",
-    "build_dictionaries-word-lists": "node node_modules/cspell-tools/dist/app.js compile \"./dictionaries/!(words)*.txt\" -o ./dist/dictionaries/",
+    "build_dictionaries-word-lists": "node ../../node_modules/cspell-tools/dist/app.js compile \"./dictionaries/!(words)*.txt\" -o ./dist/dictionaries/",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
     "tsc": "tsc -p .",
@@ -60,7 +60,6 @@
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
   "devDependencies": {
-    "cspell-tools": "^3.0.8"
   },
   "dependencies": {
     "chalk": "^2.4.2",
