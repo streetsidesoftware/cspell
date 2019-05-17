@@ -7,14 +7,17 @@
 import { compileWordList, compileTrie } from './compiler';
 import * as path from 'path';
 import * as program from 'commander';
-import { Observable, bindNodeCallback, from } from 'rxjs';
-import { flatMap, map, concatMap } from 'rxjs/operators';
 import * as glob from 'glob';
-import * as minimatch from 'minimatch';
+import { genSequence } from 'gensequence';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
-type GlobRx = (filename: string, options?: minimatch.IOptions) => Observable<string[]>;
-const globRx: GlobRx = bindNodeCallback<string, string[]>(glob);
+function globP(pattern: string): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+        glob(pattern, (err, result) => {
+            err ? reject(err) : resolve(result);
+        });
+    });
+}
 
 program
     .version(npmPackage.version);
@@ -26,28 +29,13 @@ program
     .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
     .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
     .option('--no-sort', 'Do not sort the result')
-    .action((src: string[], options: { output?: string, compress: boolean, split: boolean, sort: boolean, case: boolean }) => {
-        console.log('Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
-            options.output || 'default',
-            options.compress ? 'true' : 'false',
-            src.join('\n  ') );
-
-        const ext = '.txt' + (options.compress ? '.gz' : '');
-
-        from(src).pipe(
-            flatMap(src => globRx(src)),
-            flatMap(s => s),
-            map(s => {
-                const outFilename = path.basename(s).replace(/(\.txt|\.dic|\.aff)?$/, ext);
-                const dir = options.output ? options.output : path.dirname(s);
-                return [s, path.join(dir, outFilename)];
-            }),
-            concatMap(([src, dst]) => {
-                console.log('Process "%s" to "%s"', src, dst);
-                return compileWordList(src, dst, { splitWords: options.split, sort: options.sort }).then(() => src);
-            }),
-        )
-        .forEach(name => console.log(`Complete.`));
+    .action(async (src: string[], options: { output?: string, compress: boolean, split: boolean, sort: boolean, case: boolean }) => {
+        return processAction(src, '.txt', options, async (src, dst) => {
+            console.log('Process "%s" to "%s"', src, dst);
+            await compileWordList(src, dst, { splitWords: options.split, sort: options.sort }).then(() => src);
+            console.log('Done "%s" to "%s"', src, dst);
+            return src;
+        });
     });
 
 program
@@ -56,28 +44,40 @@ program
     .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
     .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
     .action((src: string[], options: { output?: string, compress: boolean }) => {
-        console.log('Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
-            options.output || 'default',
-            options.compress ? 'true' : 'false',
-            src.join('\n  ') );
-
-        const ext = '.trie' + (options.compress ? '.gz' : '');
-
-        from(src).pipe(
-            flatMap(src => globRx(src)),
-            flatMap(s => s),
-            map(s => {
-                const outFilename = path.basename(s).replace(/(\.txt|\.dic|\.aff)?$/, ext);
-                const dir = options.output ? options.output : path.dirname(s);
-                return [s, path.join(dir, outFilename)];
-            }),
-            concatMap(([src, dst]) => {
-                console.log('Process "%s" to "%s"', src, dst);
-                return compileTrie(src, dst).then(() => src);
-            })
-        )
-        .forEach(name => console.log(`Complete.`));
+        return processAction(src, '.trie', options, async (src, dst) => {
+            console.log('Process "%s" to "%s"', src, dst);
+            return compileTrie(src, dst).then(() => src);
+        });
     });
+
+async function processAction(
+    src: string[],
+    fileExt: '.txt' | '.trie',
+    options: { output?: string, compress: boolean },
+    action: (src: string, dst: string) => Promise<any>)
+: Promise<void> {
+    console.log('Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
+    options.output || 'default',
+    options.compress ? 'true' : 'false',
+    src.join('\n  ') );
+
+    const ext = fileExt + (options.compress ? '.gz' : '');
+
+    const globResults = await Promise.all(src.map(s => globP(s)));
+    const toProcess = genSequence(globResults)
+        .concatMap(files => files)
+        .map(s => {
+            const outFilename = path.basename(s).replace(/(\.txt|\.dic|\.aff)?$/, ext);
+            const dir = options.output ? options.output : path.dirname(s);
+            return [s, path.join(dir, outFilename)] as [string, string];
+        })
+        .map(([src, dst]) => action(src, dst));
+
+    for (const p of toProcess) {
+        await p;
+    }
+    console.log(`Complete.`);
+}
 
 program.parse(process.argv);
 

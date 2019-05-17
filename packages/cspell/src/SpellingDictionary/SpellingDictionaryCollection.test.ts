@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as Trie from 'cspell-trie';
+import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
 import { createSpellingDictionary, SpellingDictionaryFromTrie, CompoundWordsMethod } from './SpellingDictionary';
 

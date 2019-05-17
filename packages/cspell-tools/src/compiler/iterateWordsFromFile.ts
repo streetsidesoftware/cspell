@@ -2,9 +2,6 @@ import { Sequence, genSequence } from 'gensequence';
 import * as HR from 'hunspell-reader';
 import * as fs from 'fs-extra';
 
-export * from 'rxjs-stream';
-export {rxToStream as observableToStream} from 'rxjs-stream';
-
 const regHunspellFile = /\.(dic|aff)$/i;
 
 export async function readHunspellFiles(filename: string): Promise<Sequence<string>> {

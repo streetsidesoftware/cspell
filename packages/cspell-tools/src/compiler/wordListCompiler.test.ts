@@ -1,15 +1,11 @@
-// cSpell:ignore jpegs outing dirs lcode
-// cSpell:enableCompoundWords
-
+// cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { expect } from 'chai';
 import { lineToWords, compileWordList, compileTrie } from './wordListCompiler';
 import { normalizeWords, normalizeWordsToTrie } from './wordListCompiler';
 import * as fsp from 'fs-extra';
-import * as Trie from 'cspell-trie';
+import * as Trie from 'cspell-trie-lib';
 import * as path from 'path';
-import { from } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { genSequence } from 'gensequence';
 
 describe('Validate the wordListCompiler', function() {
@@ -86,13 +82,11 @@ describe('Validate the wordListCompiler', function() {
         return compileTrie(sourceName, destName)
         .then(() => fsp.readFile(destName, 'UTF-8'))
         .then(output => output.split('\n'))
-        .then(words => {
-            return Trie.importTrieRx(from(words)).pipe(take(1)).toPromise()
-            .then(node => {
-                const expected = citiesResult.split('\n').filter(a => !!a).sort();
-                const words = [...Trie.iteratorTrieWords(node)].sort();
-                expect(words).to.be.deep.equal(expected);
-            });
+        .then(srcWords => {
+            const node = Trie.importTrie(srcWords);
+            const expected = citiesResult.split('\n').filter(a => !!a).sort();
+            const words = [...Trie.iteratorTrieWords(node)].sort();
+            expect(words).to.be.deep.equal(expected);
         });
     });
 });

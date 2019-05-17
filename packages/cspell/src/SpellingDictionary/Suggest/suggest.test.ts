@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import * as suggest from './suggest';
-import { Trie } from 'cspell-trie';
+import { Trie } from 'cspell-trie-lib';
 import { compareResults } from './helpers';
 
 describe('Validate Suggest', () => {

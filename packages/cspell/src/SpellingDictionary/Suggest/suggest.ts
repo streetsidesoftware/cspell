@@ -1,7 +1,7 @@
 import {
     Trie,
     WalkerIterator,
-} from 'cspell-trie';
+} from 'cspell-trie-lib';
 
 import {
     SuggestionResult,

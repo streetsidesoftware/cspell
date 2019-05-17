@@ -11,7 +11,7 @@ export {
     suggestionCollector,
     SuggestionResult,
     WORD_SEPARATOR,
-} from 'cspell-trie';
+} from 'cspell-trie-lib';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 

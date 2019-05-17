@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { createSpellingDictionary, SpellingDictionaryFromSet, SpellingDictionaryFromTrie } from './SpellingDictionary';
-import { Trie } from 'cspell-trie';
+import { Trie } from 'cspell-trie-lib';
 
 // cSpell:ignore aple
 
