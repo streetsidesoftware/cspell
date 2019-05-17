@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "test": "../../node_modules/.bin/mocha --recursive \"./dist/**/*.test.js\"",
+    "test": "mocha --recursive \"./dist/**/*.test.js\"",
     "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "build": "tsc -p .",
     "clean-build": "npm run clean && npm run build",
