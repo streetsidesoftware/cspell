@@ -13,7 +13,6 @@ import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
 import * as ConfigStore from 'configstore';
 import * as minimatch from 'minimatch';
-import { finalize } from 'rxjs/operators';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -79,8 +78,8 @@ function importSettings(filename: string, defaultValues: CSpellUserSettingsWithC
     const pathToSettings = path.dirname(filename);
 
     Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
-    const finalizeSrc = finalizeSettings.source || {};
-    const name = finalize.name || path.basename(filename);
+    const finalizeSrc = finalizeSettings.source || {} as Source;
+    const name = finalizeSrc.name || path.basename(filename);
     finalizeSettings.source = { ...finalizeSrc, filename, name };
     cachedFiles.set(filename, finalizeSettings);
     return finalizeSettings;

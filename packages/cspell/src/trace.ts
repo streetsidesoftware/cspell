@@ -1,8 +1,7 @@
 import { CSpellSettings, finalizeSettings } from './Settings';
 import { getDictionary } from './SpellingDictionary';
 import * as util from './util/util';
-import { Observable, from } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { genSequence } from 'gensequence';
 
 export interface TraceResult {
     word: string;
@@ -12,12 +11,12 @@ export interface TraceResult {
     configSource: string;
 }
 
-export function traceWords(words: string[], settings: CSpellSettings): Observable<TraceResult> {
-    const r = from(words).pipe(
+export async function traceWords(words: string[], settings: CSpellSettings): Promise<TraceResult[]> {
+    const r = await Promise.all(genSequence(words)
     // Combine the words with the configs
-    map(word => ({ word, config: settings })),
+    .map(word => ({ word, config: settings }))
     // Load the dictionaries
-    flatMap(async ({word, config}) => {
+    .map(async ({word, config}) => {
         const settings = finalizeSettings(config);
         const dictionaries = (settings.dictionaries || [])
             .concat((settings.dictionaryDefinitions || []).map(d => d.name))
@@ -26,9 +25,13 @@ export function traceWords(words: string[], settings: CSpellSettings): Observabl
         const dictSettings: CSpellSettings = {...settings, dictionaries };
         const dicts = await getDictionary(dictSettings);
         return { word, config, dicts };
-    }),
+    })
+    .toArray()
+    );
+
     // Search each dictionary for the word
-    flatMap(({word, config, dicts}) => {
+    const s = genSequence(r).concatMap(p => {
+        const {word, config, dicts} = p;
         return dicts.dictionaries.map(dict => ({
             word,
             found: dict.has(word),
@@ -36,8 +39,7 @@ export function traceWords(words: string[], settings: CSpellSettings): Observabl
             dictSource: dict.source,
             configSource: config.name || '',
         }));
-    }),
-    );
+    }).toArray();
 
-    return r;
+    return s;
 }

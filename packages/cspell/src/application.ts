@@ -261,7 +261,6 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
         map(filenames => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)})),
         map(({filename, config}) => ({filename, config: cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), config)})),
         flatMap(config => traceWords(words, config.config)),
-        toArray(),
     ).toPromise();
 
     return results;

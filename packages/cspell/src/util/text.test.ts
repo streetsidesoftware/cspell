@@ -1,7 +1,6 @@
 import { splitCamelCaseWord } from './text';
 import * as Text from './text';
 import { expect } from 'chai';
-import { map, toArray } from 'rxjs/operators';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 
@@ -116,13 +115,10 @@ describe('Util Text', () => {
     });
 
     it('splits words like HTMLInput', () => {
-        return Text.extractWordsFromCodeRx('var value = HTMLInput.value;').pipe(
-            map(({text}) => text),
-            toArray(),
-        ).toPromise()
-            .then(words => {
-                expect(words).to.deep.equal(['var', 'value', 'HTML', 'Input', 'value']);
-            });
+        const words = Text.extractWordsFromCode('var value = HTMLInput.value;')
+            .map(({text}) => text)
+            .toArray();
+        expect(words).to.deep.equal(['var', 'value', 'HTML', 'Input', 'value']);
     });
 
     it('tests matchCase', () => {
@@ -188,13 +184,10 @@ describe('Util Text', () => {
 
     it('tests extractLinesOfTextRx', () => {
         const linesA = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
-        return Text.extractLinesOfTextRx(sampleCode).pipe(
-            map(m => m.text),
-            toArray(),
-        ).toPromise()
-            .then(linesB => {
-                expect(linesB).to.be.deep.equal(linesA);
-            });
+        const linesB = Text.extractLinesOfText(sampleCode)
+            .map(m => m.text)
+            .toArray();
+        expect(linesB).to.be.deep.equal(linesA);
     });
 });
 

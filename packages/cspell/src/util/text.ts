@@ -1,6 +1,4 @@
 import * as XRegExp from 'xregexp';
-import {Observable, from} from 'rxjs';
-import {concatMap} from 'rxjs/operators';
 import {scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import {binarySearch} from './search';
 
@@ -30,10 +28,6 @@ const regExAllUpper = XRegExp('^\\p{Lu}+$');
 const regExAllLower = XRegExp('^\\p{Ll}+$');
 
 const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
-
-export function splitCamelCaseWordWithOffsetRx(wo: TextOffset): Observable<TextOffset> {
-    return from(splitCamelCaseWordWithOffset(wo));
-}
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
     return splitCamelCaseWord(wo.text)
@@ -76,19 +70,6 @@ export function extractLinesOfText(text: string): Sequence<TextOffset> {
     return matchStringToTextOffset(regExLines, text);
 }
 
-export function extractLinesOfTextRx(text: string): Observable<TextOffset> {
-    return from(extractLinesOfText(text));
-}
-
-/**
- * Extract out whole words from a string of text.
- */
-export function extractWordsFromTextRx(text: string): Observable<TextOffset> {
-    // Comment out the correct implementation until rxjs types get fixed.
-    // return Rx.Observable.from(extractWordsFromText(text));
-    return from(extractWordsFromText(text));
-}
-
 /**
  * Extract out whole words from a string of text.
  */
@@ -104,12 +85,6 @@ export function extractWordsFromText(text: string): Sequence<TextOffset> {
         .concatMap(wo => matchToTextOffset(reg2, wo))
         .filter(wo => !!wo.text);
 }
-
-export function extractWordsFromCodeRx(text: string): Observable<TextOffset> {
-    return extractWordsFromTextRx(text)
-        .pipe(concatMap(word => splitCamelCaseWordWithOffsetRx(word)));
-}
-
 
 export function extractWordsFromCode(text: string): Sequence<TextOffset> {
     return extractWordsFromText(text)
