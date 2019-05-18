@@ -7,6 +7,9 @@ import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
 import * as path from 'path';
 import { genSequence } from 'gensequence';
+import { readFile } from 'cspell-lib';
+
+const UTF8: BufferEncoding = 'utf8';
 
 describe('Validate the wordListCompiler', function() {
     it('tests splitting lines', () => {
@@ -80,7 +83,7 @@ describe('Validate the wordListCompiler', function() {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie');
         return compileTrie(sourceName, destName)
-        .then(() => fsp.readFile(destName, 'UTF-8'))
+        .then(() => fsp.readFile(destName, UTF8))
         .then(output => output.split('\n'))
         .then(srcWords => {
             const node = Trie.importTrie(srcWords);
@@ -88,6 +91,18 @@ describe('Validate the wordListCompiler', function() {
             const words = [...Trie.iteratorTrieWords(node)].sort();
             expect(words).to.be.deep.equal(expected);
         });
+    });
+
+    it('test reading and normalizing to a trie gz file', async () => {
+        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+        const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie.gz');
+        await compileTrie(sourceName, destName);
+        const resultFile = await readFile(destName, UTF8);
+        const srcWords = resultFile.split('\n');
+        const node = Trie.importTrie(srcWords);
+        const expected = citiesResult.split('\n').filter(a => !!a).sort();
+        const words = [...Trie.iteratorTrieWords(node)].sort();
+        expect(words).to.be.deep.equal(expected);
     });
 });
 
