@@ -14,6 +14,8 @@
   "scripts": {
     "test": "mocha --recursive ./dist/*.test.js",
     "build": "tsc -p .",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run test",
     "clean": "rimraf ./dist",
     "coverage": "npm run generate-code-coverage",
     "generate-code-coverage": "NODE_ENV=test nyc npm run test-ts",

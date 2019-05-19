@@ -2,6 +2,8 @@
 
 ## 3.0.0
 - **Breaking Change** dropping support for Node 8 and 9
+- Removed dependency upon `cspell-lib` and `rxjs`
+- Improved processing speed.
 
 ## 2.1.0
 - Add an Iterable Reader, this works much better for very large dictionaries.
