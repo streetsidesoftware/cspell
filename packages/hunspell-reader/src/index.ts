@@ -1,2 +1,2 @@
-export * from './HunspellReader';
 export * from './IterableHunspellReader';
+export { IterableHunspellReader as HunspellReader } from './IterableHunspellReader';

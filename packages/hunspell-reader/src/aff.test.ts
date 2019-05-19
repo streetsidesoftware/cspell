@@ -3,12 +3,11 @@ import {AffWord} from './aff';
 import {affWordToColoredString} from './aff';
 import {parseAffFileToAff} from './affReader';
 import * as AffReader from './affReader';
-import {from} from 'rxjs';
 
 const isLoggerOn = false;
 
 describe('Basic Aff Validation', () => {
-    const pAff = AffReader.parseAff(getSimpleAffAsStream());
+    const pAff = AffReader.parseAff(getSimpleAff());
     it('Reads Simple Aff', async () => {
         const aff = await pAff;
         expect(aff.SET).to.be.equal('UTF-8');
@@ -176,11 +175,6 @@ function getSimpleAff() {
     SFX J   0     ings       [^e]
     `;
 }
-
-function getSimpleAffAsStream() {
-    return from(getSimpleAff().split('\n').map(a => a.trim()));
-}
-
 
 // cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings
 // cspell:enableCompoundWords

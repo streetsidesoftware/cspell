@@ -1,23 +1,24 @@
 {
   "name": "hunspell-reader",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "A library for reading Hunspell Dictionary Files",
-  "bin": "./dist/app.js",
+  "bin": "bin.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist/",
-    "src/",
+    "dist",
+    "bin.js",
+    "!**/*.map",
     "!**/*.test.*"
   ],
   "scripts": {
     "test": "mocha --recursive ./dist/*.test.js",
-    "build": "tsc",
-    "clean": "rimraf ./dist/",
+    "build": "tsc -p .",
+    "clean": "rimraf ./dist",
     "coverage": "npm run generate-code-coverage",
     "generate-code-coverage": "NODE_ENV=test nyc npm run test-ts",
-    "test-ts": "NODE_ENV=test mocha --require ts-node/register --recursive --bail \"src/**/*.test.ts\"",
-    "test-watch": "npm run build && mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "test-ts": "NODE_ENV=test mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
+    "test-watch": "mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
     "watch": "tsc -w"
@@ -37,24 +38,23 @@
   "homepage": "https://github.com/Jason-Rev/hunspell-reader#readme",
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/fs-extra": "^5.0.4",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^8.10.39",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.14.7",
     "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
+    "coveralls": "^3.0.3",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
     "rimraf": "^2.6.3",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.2.2"
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
   },
   "dependencies": {
-    "commander": "^2.19.0",
-    "cspell-lib": "^3.0.5",
-    "fs-extra": "^7.0.1",
+    "commander": "^2.20.0",
+    "cspell-lib": "^4.0.3",
+    "fs-extra": "^8.0.1",
     "gensequence": "^2.1.2",
-    "rxjs": "^6.3.3",
-    "rxjs-stream": "^3.0.1"
+    "rxjs": "^6.5.2",
+    "rxjs-stream": "^3.0.2"
   },
   "eslintConfig": {
     "root": true,
@@ -69,7 +69,7 @@
     "rules": {}
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "nyc": {
     "include": [

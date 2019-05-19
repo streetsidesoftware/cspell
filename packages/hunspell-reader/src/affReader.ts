@@ -1,10 +1,6 @@
 
-import { lineReader } from './fileReader';
 import { AffInfo, Aff, Fx, SubstitutionSet } from './aff';
-import { Observable } from 'rxjs';
-import { map, filter, reduce } from 'rxjs/operators';
-
-// cSpell:enableCompoundWords
+import { readFile } from 'fs-extra';
 
 const fixRegex = {
     'SFX': { m: /$/, r: '$'},
@@ -15,6 +11,8 @@ const emptyZeroRegex = /^0$/;
 const yesRegex = /[yY]/;
 const spaceRegex = /\s+/;
 const commentRegex = /(?:^\s*#.*)|(?:\s+#.*)/;
+
+const UTF8 = 'UTF-8';
 
 
 export interface ConvEntry { from: string; to: string; }
@@ -174,23 +172,23 @@ const affTableField = {
     WORDCHARS           : asString,
 };
 
-
-export function parseAffFile(filename: string, encoding: string = 'UTF-8') {
-    return parseAff(lineReader(filename, encoding), encoding)
-        .then(affInfo => {
-            if (affInfo.SET && affInfo.SET.toLowerCase() !== encoding.toLowerCase()) {
-                return parseAff(lineReader(filename, affInfo.SET), affInfo.SET);
-            }
-            return affInfo;
-        });
+export async function parseAffFile(filename: string, encoding: string = UTF8) {
+    const file = await readFile(filename, encoding);
+    const affInfo = parseAff(file, encoding);
+    if (affInfo.SET && affInfo.SET.toLowerCase() !== encoding.toLowerCase()) {
+        return parseAff(await readFile(filename, affInfo.SET.toLowerCase()), affInfo.SET);
+    }
+    return affInfo;
 }
 
-export function parseAff(lines: Observable<string>, _encoding: string = 'UTF-8') {
-    return lines.pipe(
-        map(line => line.replace(commentRegex, '')),
-        filter(line => line.trim() !== ''),
-        map(line => line.split(spaceRegex)),
-        reduce<string[], AffInfo>((aff, line) => {
+export function parseAff(affFileContent: string, _encoding: string = UTF8): AffInfo {
+    const lines = affFileContent.split(/\r?\n/g);
+    return lines
+        .map(line => line.trimLeft())
+        .map(line => line.replace(commentRegex, ''))
+        .filter(line => line.trim() !== '')
+        .map(line => line.split(spaceRegex))
+        .reduce((aff: AffInfo, line: string[]) => {
             const [ field, ...args ] = line;
             const fn = affTableField[field];
             if (fn) {
@@ -199,8 +197,7 @@ export function parseAff(lines: Observable<string>, _encoding: string = 'UTF-8')
                 aff[field] = args;
             }
             return aff;
-        }, {})
-    ).toPromise();
+        }, {} as AffInfo);
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string) {

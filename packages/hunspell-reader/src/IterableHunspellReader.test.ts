@@ -1,7 +1,6 @@
 import {expect} from 'chai';
 import {IterableHunspellReader} from './IterableHunspellReader';
 import * as Aff from './aff';
-import {from} from 'rxjs';
 import * as AffReader from './affReader';
 import { genSequence } from 'gensequence';
 
@@ -172,8 +171,7 @@ SFX S   0     s          [^sxzhy]
 
 `;
 
-    return AffReader.parseAff(from(sampleAff.split('\n')))
-        .then(affInfo => new Aff.Aff(affInfo));
+    return new Aff.Aff(AffReader.parseAff(sampleAff));
 }
 
 // @ts-ignore
