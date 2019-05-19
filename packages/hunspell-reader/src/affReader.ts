@@ -1,6 +1,7 @@
 
 import { AffInfo, Aff, Fx, SubstitutionSet } from './aff';
 import { readFile } from 'fs-extra';
+import { decode } from 'iconv-lite';
 
 const fixRegex = {
     'SFX': { m: /$/, r: '$'},
@@ -135,6 +136,11 @@ function asNumber(_fieldValue, _field: string, args: string[]) {
     return parseInt(value);
 }
 
+/*
+cspell:ignore COMPOUNDBEGIN COMPOUNDEND COMPOUNDMIDDLE COMPOUNDMIN COMPOUNDPERMITFLAG COMPOUNDRULE FORBIDDENWORD KEEPCASE
+cspell:ignore MAXDIFF NEEDAFFIX WORDCHARS
+*/
+
 const affTableField = {
     AF                  : afEntry,
     BREAK               : asNumber,
@@ -173,10 +179,11 @@ const affTableField = {
 };
 
 export async function parseAffFile(filename: string, encoding: string = UTF8) {
-    const file = await readFile(filename, encoding);
+    const buffer = await readFile(filename);
+    const file = decode(buffer, encoding);
     const affInfo = parseAff(file, encoding);
     if (affInfo.SET && affInfo.SET.toLowerCase() !== encoding.toLowerCase()) {
-        return parseAff(await readFile(filename, affInfo.SET.toLowerCase()), affInfo.SET);
+        return parseAff(decode(buffer, affInfo.SET.toLowerCase()), affInfo.SET);
     }
     return affInfo;
 }

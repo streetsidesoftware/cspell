@@ -3,8 +3,16 @@ import {AffWord} from './aff';
 import {affWordToColoredString} from './aff';
 import {parseAffFileToAff} from './affReader';
 import * as AffReader from './affReader';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
 const isLoggerOn = false;
+const DICTIONARY_LOCATIONS = path.join(__dirname,  '..', 'dictionaries');
+const nlAff = path.join(DICTIONARY_LOCATIONS, 'nl.aff');
+const enAff = path.join(DICTIONARY_LOCATIONS, 'en_US.aff');
+// const enGbAff = path.join(DICTIONARY_LOCATIONS, 'en_GB.aff');
+const esAff = path.join(DICTIONARY_LOCATIONS, 'es_ANY.aff');
+const frAff = path.join(DICTIONARY_LOCATIONS, 'fr-moderne.aff');
 
 describe('Basic Aff Validation', () => {
     const pAff = AffReader.parseAff(getSimpleAff());
@@ -31,11 +39,6 @@ describe('Basic Aff Validation', () => {
 });
 
 describe('Test Aff', () => {
-    const nlAff = __dirname + '/../dictionaries/nl.aff';
-    const enAff = __dirname + '/../dictionaries/en_US.aff';
-    const esAff = __dirname + '/../dictionaries/es_ANY.aff';
-    const frAff = __dirname + '/../dictionaries/fr-moderne.aff';
-
     it('tests applying rules for fr', async () => {
         const aff = await parseAffFileToAff(frAff);
         const r =  aff.applyRulesToDicEntry('badger/10');
@@ -117,6 +120,25 @@ describe('Test Aff', () => {
         ]);
     });
 
+});
+
+describe('Validated loading all dictionaries in the `dictionaries` directory.', async () => {
+    const dictionaries = (await fs.readdir(DICTIONARY_LOCATIONS))
+        .filter(dic => !!dic.match(/\.aff$/))
+        .map(base => path.join(DICTIONARY_LOCATIONS, base));
+    it('Make sure we found some sample dictionaries', () => {
+        expect(dictionaries.length).to.be.greaterThan(4);
+    });
+
+    dictionaries.forEach(dicAff => {
+        // const dicDic = dicAff.replace(/\.aff$/, '.dic');
+        // const dicContent = fs.readFile(dicDic)
+        it(`Ensure we can load ${path.basename(dicAff)}`, async () => {
+            const aff = await AffReader.parseAffFile(dicAff);
+            expect(aff.PFX).to.be.instanceof(Map);
+            expect(aff.SFX).to.be.instanceof(Map);
+        });
+    });
 });
 
 function logApplyRulesResults(affWords: AffWord[]) {

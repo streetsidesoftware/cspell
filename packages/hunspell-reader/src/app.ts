@@ -30,6 +30,7 @@ commander
     .option('-x, --infix', 'Return words with prefix / suffix breaks. ex: "un<do>ing"')
     .option('-r, --rules', 'Append rules used to generate word.')
     .option('-p, --progress', 'Show progress.')
+    .option('-n, --number <limit>', 'Limit the number of words to output.')
     .description('Output all the words in the <hunspell.dic> file.')
     .action(action);
 
@@ -103,6 +104,7 @@ function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Pro
 function action(hunspellDicFilename: string, options: any): Promise<void> {
     return actionPrime(hunspellDicFilename, options).catch((reason: { code: string }) => {
         if (reason.code === 'EPIPE') {
+            console.log(reason);
             return;
         }
         console.error(reason);
@@ -116,8 +118,9 @@ interface Options {
     output?: string;
     transform?: boolean;
     infix?: boolean;
-    rules?: boolean;
-    progress?: boolean;
+    rules?: boolean;        // append rules
+    progress?: boolean;     // show progress
+    number?: number;        // limit the number to output
 }
 
 async function actionPrime(hunspellDicFilename: string, options: Options) {
@@ -164,12 +167,13 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
 
     const applyTransformers = (aff: AffWord) => transformers.reduce((aff, fn) => fn(aff), aff);
 
-    const words = seqWords
+    const allWords = seqWords
         .map(applyTransformers)
         .filter(filterUnique)
         .filter(a => !!a.word)
-        .map(a => a.word + '\n')
-        ;
+        .map(a => a.word + '\n');
+
+    const words = options.number ? allWords.take(options.number) : allWords;
 
     if (sort) {
         log('Sorting...');

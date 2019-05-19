@@ -3,6 +3,7 @@ import {Aff} from './aff';
 import { genSequence, Sequence } from 'gensequence';
 import { WordInfo } from './types';
 import * as fs from 'fs-extra';
+import { decode } from 'iconv-lite';
 
 const defaultEncoding = 'UTF-8';
 
@@ -78,7 +79,8 @@ export class IterableHunspellReader implements Iterable<string> {
 
     static async createFromFiles(affFile: string, dicFile: string) {
         const aff = await parseAffFileToAff(affFile);
-        const dicFileContent = await fs.readFile(dicFile, aff.affInfo.SET || defaultEncoding);
+        const buffer = await fs.readFile(dicFile);
+        const dicFileContent = decode(buffer, aff.affInfo.SET || defaultEncoding);
         const dic = dicFileContent.split('\n')
             .slice(1) // The first entry is the count of entries.
             .filter(line => !!line);

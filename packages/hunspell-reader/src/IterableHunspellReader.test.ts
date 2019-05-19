@@ -3,6 +3,10 @@ import {IterableHunspellReader} from './IterableHunspellReader';
 import * as Aff from './aff';
 import * as AffReader from './affReader';
 import { genSequence } from 'gensequence';
+import * as fs from 'fs-extra';
+import * as path from 'path';
+
+const DICTIONARY_LOCATIONS = path.join(__dirname,  '..', 'dictionaries');
 
 basicReadTests();
 
@@ -110,12 +114,34 @@ function basicReadTests() {
     });
 }
 
-// @ts-ignore
+describe('Validated loading all dictionaries in the `dictionaries` directory.', async () => {
+    const dictionaries = (await fs.readdir(DICTIONARY_LOCATIONS))
+        .filter(dic => !!dic.match(/\.aff$/))
+        .map(base => path.join(DICTIONARY_LOCATIONS, base));
+    it('Make sure we found some sample dictionaries', () => {
+        expect(dictionaries.length).to.be.greaterThan(4);
+    });
+
+    dictionaries.forEach(async dicAff => {
+        const dicDic = dicAff.replace(/\.aff$/, '.dic');
+        it(`Ensure we can load aff ${path.basename(dicAff)}`, async () => {
+            const aff = await AffReader.parseAffFile(dicAff);
+            expect(aff.PFX).to.be.instanceof(Map);
+            expect(aff.SFX).to.be.instanceof(Map);
+        });
+
+        it(`Ensure we can load the dictionary ${path.basename(dicDic)}`, async () => {
+            const reader = await IterableHunspellReader.createFromFiles(dicAff, dicDic);
+            const sample = reader.seqWords().take(100).toArray();
+            expect(sample).to.be.length(100);
+        });
+    });
+});
+
 function textToArray(text: string) {
     return text.split('\n').filter(a => !!a).slice(1);
 }
 
-// @ts-ignore
 function getSimpleAff() {
     const sampleAff = `
 SET UTF-8
@@ -174,7 +200,6 @@ SFX S   0     s          [^sxzhy]
     return new Aff.Aff(AffReader.parseAff(sampleAff));
 }
 
-// @ts-ignore
 const simpleWords = `
 2
 happy/UY
