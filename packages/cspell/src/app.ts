@@ -194,7 +194,8 @@ program.on('--help', function() {
 program.parse(process.argv);
 
 if (showHelp) {
-    program.help();
+    program.outputHelp();
+    process.exit(1);
 }
 
 function emitTraceResult(r: App.TraceResult) {
