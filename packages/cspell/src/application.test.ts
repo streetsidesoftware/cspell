@@ -90,7 +90,7 @@ describe('Validate the Application', function() {
 });
 
 describe('Application, Validate Samples', () => {
-    sampleTests().forEach(sample =>
+    const tests = sampleTests().map(sample =>
         it(`Test file: "${sample.file}"`, async () => {
             const logger = new Logger();
             const { file, issues, options = {wordsOnly: true, unique: false } } = sample;
@@ -100,6 +100,7 @@ describe('Application, Validate Samples', () => {
             expect(result.issues).to.be.equal(issues.length);
         })
     );
+    return Promise.all(tests);
 });
 
 interface SampleTest {
