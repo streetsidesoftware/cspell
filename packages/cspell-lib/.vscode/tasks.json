@@ -10,10 +10,21 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": [
-                "$tsc-watch"
-            ],
-            "isBackground": true
+            "problemMatcher": "$tsc"
+        },
+        {
+            "type": "npm",
+            "script": "test-ts",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Clean Build",
+            "type": "npm",
+            "script": "clean-build",
+            "problemMatcher": []
         }
     ]
 }

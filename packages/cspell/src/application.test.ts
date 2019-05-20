@@ -7,7 +7,6 @@ mockRequire('get-stdin', () => {
 });
 
 import {expect} from 'chai';
-
 import * as App from './application';
 
 
