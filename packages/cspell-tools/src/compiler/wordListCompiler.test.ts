@@ -7,7 +7,7 @@ import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
 import * as path from 'path';
 import { genSequence } from 'gensequence';
-import { readFile } from 'cspell-lib';
+import { readFile } from 'cspell-io';
 
 const UTF8: BufferEncoding = 'utf8';
 

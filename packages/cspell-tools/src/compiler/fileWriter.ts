@@ -1,8 +1,8 @@
 import { Sequence, genSequence } from 'gensequence';
 import { iterableToStream } from 'hunspell-reader/dist/iterableToStream';
 import { batch } from 'hunspell-reader/dist/util';
-import { writeToFileIterableP } from 'cspell-lib';
-export { writeToFile, writeToFileIterableP, writeToFileIterable } from 'cspell-lib';
+import { writeToFileIterableP } from 'cspell-io';
+export { writeToFile, writeToFileIterableP, writeToFileIterable } from 'cspell-io';
 
 export function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Promise<void> {
     if (outFile) {

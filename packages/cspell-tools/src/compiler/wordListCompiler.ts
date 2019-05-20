@@ -1,7 +1,7 @@
 import * as XRegExp from 'xregexp';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
-import * as lib from 'cspell-lib';
+import * as lib from 'cspell-io';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
