@@ -2,22 +2,21 @@ import { Observable, bindNodeCallback, from, combineLatest } from 'rxjs';
 import { map, share, tap, flatMap, filter, catchError, first, toArray, reduce } from 'rxjs/operators';
 import * as glob from 'glob';
 import * as minimatch from 'minimatch';
-import * as cspell from './index';
+import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
-import { traceWords, TraceResult } from './index';
-import { CheckTextInfo } from './validator';
-import * as Validator from './validator';
+import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
+import * as Validator from 'cspell-lib';
 import getStdin = require('get-stdin');
+export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 
 // cspell:word nocase
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
 
-export { TraceResult, IncludeExcludeFlag } from './index';
 
 export interface CSpellApplicationOptions extends BaseOptions {
     verbose?: boolean;

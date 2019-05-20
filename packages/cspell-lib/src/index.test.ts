@@ -1,8 +1,19 @@
-import { expect } from 'chai';
-import * as lib from './index';
+import {expect} from 'chai';
+import * as cspell from './index';
 
-describe('Validate cspell-lib', () => {
-    it('test an import', () => {
-        expect(typeof lib.readFile).to.be.equal('function');
+describe('Validate the cspell API', function() {
+    this.timeout(30000);
+    it('Tests the default configuration', () => {
+        const ext = '.json';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = cspell.getDefaultSettings();
+        // cspell:ignore jansons
+        const text = '{ "name": "Jansons"}';
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        return cspell.validateText(text, fileSettings)
+            .then(results => {
+                expect(results).to.not.be.empty;
+                expect(results.map(to => to.text)).to.contain('Jansons');
+            });
     });
 });
