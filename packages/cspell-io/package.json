@@ -1,0 +1,60 @@
+{
+  "name": "cspell-io",
+  "version": "4.0.4",
+  "description": "A library of useful I/O functions used across various cspell tools.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "!**/*.map",
+    "!**/*.test.*",
+    "!**/temp/**"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . -w",
+    "clean": "rimraf dist",
+    "clean-build": "npm run clean && npm run build",
+    "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
+    "test-ts": "../../node_modules/.bin/rimraf temp ; NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
+    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "test": "rimraf temp ; mocha --recursive ./dist/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "keywords": [
+    "cspell"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-lib"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell#readme",
+  "dependencies": {
+    "iconv-lite": "^0.4.24"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.test.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
