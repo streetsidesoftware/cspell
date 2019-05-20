@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist/**",
-    "src/**",
+    "!**/*.map",
     "!**/*.test.*",
     "!**/temp/**"
   ],
@@ -34,8 +34,7 @@
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
   "dependencies": {
-    "iconv-lite": "^0.4.24",
-    "iterable-to-stream": "^1.0.1"
+    "iconv-lite": "^0.4.24"
   },
   "nyc": {
     "include": [
