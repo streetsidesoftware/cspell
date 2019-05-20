@@ -50,7 +50,6 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'misc',           file: 'miscTerms.txt.gz',     type: 'S', description: 'List of miscellaneous terms.' },
     { name: 'node',           file: 'node.txt.gz',          type: 'S', description: 'List of NodeJS terms.' },
     { name: 'npm',            file: 'npm.txt.gz',           type: 'S', description: 'List of Top 500 NPM packages.' },
-    { name: 'powershell',     file: 'powershell.txt.gz',    type: 'S', description: 'Powershell Keywords.' },
     { name: 'softwareTerms',  file: 'softwareTerms.txt.gz', type: 'S', description: 'Common Software Terms.' },
     { name: 'typescript',     file: 'typescript.txt.gz',    type: 'S', description: 'JavaScript and Typescript terms.' },
 ];
