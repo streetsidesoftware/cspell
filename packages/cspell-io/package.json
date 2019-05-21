@@ -16,9 +16,9 @@
     "clean": "rimraf dist",
     "clean-build": "npm run clean && npm run build",
     "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
-    "test-ts": "../../node_modules/.bin/rimraf temp ; NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
+    "test-ts": "../../node_modules/.bin/rimraf temp && NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
     "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
-    "test": "rimraf temp ; mocha --recursive ./dist/**/*.test.js"
+    "test": "rimraf temp && mocha --recursive ./dist/**/*.test.js"
   },
   "repository": {
     "type": "git",
