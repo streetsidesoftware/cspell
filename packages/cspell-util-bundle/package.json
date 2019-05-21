@@ -1,0 +1,69 @@
+{
+  "name": "cspell-util-bundle",
+  "version": "4.0.0",
+  "description": "This is a bundle of external libraries used by cspell bundled into a single `.js`",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts",
+    "!**/*.map",
+    "!**/*.test.*",
+    "!**/temp/**"
+  ],
+  "scripts": {
+    "build": "webpack --mode none",
+    "build-production": "webpack --mode production",
+    "watch": "npm run build -- watch",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build-production",
+    "clean": "rimraf dist",
+    "clean-build": "npm run clean && npm run build",
+    "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
+    "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
+    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "test": "tsc -p . && npm run build && mocha --recursive ./dist/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "keywords": [],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/issues"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell#readme",
+  "dependencies": {
+    "xregexp": "^4.2.4"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.test.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.3",
+    "source-map-support": "^0.5.12",
+    "ts-loader": "^6.0.1",
+    "webpack": "^4.32.0",
+    "webpack-cli": "^3.3.2"
+  }
+}
