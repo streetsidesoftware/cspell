@@ -1,7 +1,7 @@
 // cSpell:enableCompoundWords
 import * as Text from './util/text';
 import { readLines } from './util/fileReader';
-import * as XRegExp from 'xregexp';
+import { xregexp as XRegExp } from 'cspell-util-bundle';
 import { toIterableIterator, concatIterables } from './util/iterableIteratorLib';
 
 

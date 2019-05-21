@@ -12,17 +12,16 @@
     "!**/temp/**"
   ],
   "scripts": {
-    "build": "webpack --mode none",
-    "build-production": "webpack --mode production",
+    "build": "tsc -p . && webpack --mode none",
+    "build-production": "rm -rf dist build && tsc -p . && webpack --mode production",
     "watch": "npm run build -- watch",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run build-production",
+    "prepare": "npm run build-production",
     "clean": "rimraf dist",
     "clean-build": "npm run clean && npm run build",
     "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
     "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
     "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
-    "test": "tsc -p . && npm run build && mocha --recursive ./dist/**/*.test.js"
+    "test": "mocha --recursive ./dist/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -35,9 +34,7 @@
     "url": "https://github.com/streetsidesoftware/cspell/issues"
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
-  "dependencies": {
-    "xregexp": "^4.2.4"
-  },
+  "dependencies": {},
   "nyc": {
     "include": [
       "src/**/*.ts"
@@ -60,10 +57,12 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
+    "@types/xregexp": "^3.0.30",
     "rimraf": "^2.6.3",
     "source-map-support": "^0.5.12",
     "ts-loader": "^6.0.1",
     "webpack": "^4.32.0",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^3.3.2",
+    "xregexp": "^4.2.4"
   }
 }
