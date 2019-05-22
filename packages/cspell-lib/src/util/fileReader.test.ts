@@ -9,7 +9,7 @@ describe('Validate file reader', () => {
                     expect(true).to.be.false;
                 },
                 error => {
-                    expect(error.toString()).to.be.equal("Error: ENOENT: no such file or directory, open './non-existent.txt'");
+                    expect(error.toString()).to.be.contains('Error: ENOENT: no such file or directory');
                     return true;  // convert the error into a success.
                 }
             );
