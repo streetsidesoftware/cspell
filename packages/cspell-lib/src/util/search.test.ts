@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import * as search from './search';
 
 describe('validate the search', () => {
-    it('test the results of binary search', () => {
+    test('test the results of binary search', () => {
         expect(search.binarySearch([], 5)).to.be.equal(0);
         expect(search.binarySearch([1, 3, 7, 11], 5)).to.be.equal(2);
         expect(search.binarySearch([1, 3, 7, 11], 1)).to.be.equal(0);

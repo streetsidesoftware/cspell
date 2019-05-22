@@ -32,7 +32,7 @@
     "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
     "test-spec": "mocha --recursive \"dist/**/*.spec.js\"",
     "test-unit": "mocha --recursive \"dist/**/*.test.js\"",
-    "test": "npm run test-unit && npm run test-spec"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -104,7 +104,7 @@
     ]
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.6",
+    "@types/jest": "^24.0.13",
     "cspell-tools": "^4.0.14"
   }
 }

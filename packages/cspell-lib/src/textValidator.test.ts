@@ -8,7 +8,7 @@ import { FreqCounter } from './util/FreqCounter';
 // cspell:ignore whiteberry redmango lightbrown redberry
 
 describe('Validate textValidator functions', () => {
-    it('tests hasWordCheck', async () => {
+    test('tests hasWordCheck', async () => {
         // cspell:ignore redgreenblueyellow strawberrymangobanana redwhiteblue
         const dictCol = await getSpellingDictionaryCollection();
         expect(hasWordCheck(dictCol, 'brown', true)).to.be.true;
@@ -23,14 +23,14 @@ describe('Validate textValidator functions', () => {
         expect(hasWordCheck(dictCol, 'redwhiteblue', true)).to.be.true;
     });
 
-    it('tests textValidator no word compounds', async () => {
+    test('tests textValidator no word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, {});
         const errors = result.map(wo => wo.text).toArray();
         expect(errors).to.deep.equal(['giraffe', 'lightbrown', 'whiteberry', 'redberry']);
     });
 
-    it('tests textValidator with word compounds', async () => {
+    test('tests textValidator with word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, { allowCompoundWords: true });
         const errors = result.map(wo => wo.text).toArray();
@@ -38,15 +38,18 @@ describe('Validate textValidator functions', () => {
     });
 
     // cSpell:ignore xxxkxxxx xxxbxxxx
-    it('tests ignoring words that consist of a single repeated letter', async () => {
-        const dictCol = await getSpellingDictionaryCollection();
-        const text = ' tttt gggg xxxxxxx jjjjj xxxkxxxx xxxbxxxx \n' + sampleText;
-        const result = validateText(text, dictCol, { allowCompoundWords: true });
-        const errors = result.map(wo => wo.text).toArray().sort();
-        expect(errors).to.deep.equal(['giraffe', 'whiteberry', 'xxxbxxxx', 'xxxkxxxx']);
-    });
+    test(
+        'tests ignoring words that consist of a single repeated letter',
+        async () => {
+            const dictCol = await getSpellingDictionaryCollection();
+            const text = ' tttt gggg xxxxxxx jjjjj xxxkxxxx xxxbxxxx \n' + sampleText;
+            const result = validateText(text, dictCol, { allowCompoundWords: true });
+            const errors = result.map(wo => wo.text).toArray().sort();
+            expect(errors).to.deep.equal(['giraffe', 'whiteberry', 'xxxbxxxx', 'xxxkxxxx']);
+        }
+    );
 
-    it('tests trailing s, ed, ing, etc. are attached to the words', async () => {
+    test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
         const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictEmpty, { allowCompoundWords: true });
@@ -54,7 +57,7 @@ describe('Validate textValidator functions', () => {
         expect(errors).to.deep.equal(['have', 'Published', 'multiple', 'Fixes', 'Problems']);
     });
 
-    it('tests trailing s, ed, ing, etc.', async () => {
+    test('tests trailing s, ed, ing, etc.', async () => {
         const dictWords = await getSpellingDictionaryCollection();
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictWords, { allowCompoundWords: true });
@@ -62,7 +65,7 @@ describe('Validate textValidator functions', () => {
         expect(errors).to.deep.equal([]);
     });
 
-    it('test contractions', async () => {
+    test('test contractions', async () => {
         const dictWords = await getSpellingDictionaryCollection();
         // cspell:disable
         const text = `We should’ve done a better job, but we couldn\\'t have known.`;
@@ -72,7 +75,7 @@ describe('Validate textValidator functions', () => {
         expect(errors).to.deep.equal([]);
     });
 
-    it('tests maxDuplicateProblems', async () => {
+    test('tests maxDuplicateProblems', async () => {
         const dict = await createSpellingDictionary([], 'empty', 'test');
         const text = sampleText;
         const result = validateText(text, dict, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 });
@@ -84,13 +87,13 @@ describe('Validate textValidator functions', () => {
         expect(result2.length).to.be.equal(0);
     });
 
-    it('tests inclusion, exclusion', () => {
+    test('tests inclusion, exclusion', () => {
         const result = calcTextInclusionRanges(sampleText, {});
         expect(result.length).to.be.equal(1);
         expect(result.map(a => [a.startPos, a.endPos])).to.deep.equal([[0, sampleText.length]]);
     });
 
-    it('tests inclusion, exclusion', () => {
+    test('tests inclusion, exclusion', () => {
         const result = calcTextInclusionRanges(sampleText, { ignoreRegExpList: [/The/g]});
         expect(result.length).to.be.equal(5);
         expect(result.map(a => [a.startPos, a.endPos])).to.deep.equal([

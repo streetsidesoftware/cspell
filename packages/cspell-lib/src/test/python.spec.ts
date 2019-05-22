@@ -8,7 +8,7 @@ const sampleFilename = path.join(__dirname, '..', '..', 'samples', 'src', 'sampl
 const sampleFile = fsp.readFile(sampleFilename, 'UTF-8').then(buffer => buffer.toString());
 
 describe('Validate that Python files are correctly checked.', () => {
-    it('Tests the default configuration', () => {
+    test('Tests the default configuration', () => {
         return sampleFile.then(text => {
             expect(text).to.not.be.empty;
             const ext = path.extname(sampleFilename);

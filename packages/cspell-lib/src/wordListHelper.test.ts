@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import * as wlh from './wordListHelper';
 
 describe('Validate wordListHelper', () => {
-    it('tests splitLineIntoWords', () => {
+    test('tests splitLineIntoWords', () => {
         const line = 'New York City';
         const words = wlh.splitLineIntoWords(line);
         expect([...words]).to.be.deep.equal([line, ...line.split(' ')]);
     });
 
-    it('tests splitLineIntoCodeWords', () => {
+    test('tests splitLineIntoCodeWords', () => {
         const line = 'cSpell:disableCompoundWords extra';
         const words = wlh.splitLineIntoCodeWords(line);
         expect([...words]).to.be.deep.equal([
@@ -23,7 +23,7 @@ describe('Validate wordListHelper', () => {
         ]);
     });
 
-    it('tests splitLineIntoCodeWordsRx', () => {
+    test('tests splitLineIntoCodeWordsRx', () => {
         const line = 'New York City';
         const words = wlh.splitLineIntoCodeWords(line);
         expect([...words]).to.be.deep.equal([
@@ -32,7 +32,7 @@ describe('Validate wordListHelper', () => {
         ]);
     });
 
-    it('tests loadWordsRx error handling', async () => {
+    test('tests loadWordsRx error handling', async () => {
         const values = await wlh.loadWordsNoError('not_found.txt');
         expect([...values]).to.be.empty;
     });

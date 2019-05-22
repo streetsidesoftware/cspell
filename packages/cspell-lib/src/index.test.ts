@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import * as cspell from './index';
 
-describe('Validate the cspell API', function() {
-    this.timeout(30000);
-    it('Tests the default configuration', () => {
+describe('Validate the cspell API', () => {
+    test('Tests the default configuration', () => {
         const ext = '.json';
         const languageIds = cspell.getLanguagesForExt(ext);
         const settings = cspell.getDefaultSettings();

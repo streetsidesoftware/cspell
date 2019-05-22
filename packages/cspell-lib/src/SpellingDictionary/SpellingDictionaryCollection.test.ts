@@ -7,7 +7,7 @@ describe('Verify using multiple dictionaries', () => {
     const wordsA = ['', 'apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry'];
     const wordsB = ['ape', 'lion', 'tiger', 'elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
-    it('checks for existence', async () => {
+    test('checks for existence', async () => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
@@ -22,7 +22,7 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.size).to.be.equal(wordsA.length - 1 + wordsB.length + wordsC.length);
     });
 
-    it('checks for suggestions', async () => {
+    test('checks for suggestions', async () => {
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         const dicts = await Promise.all([
             trie,
@@ -39,7 +39,7 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugsForTango.map(a => a.word).filter(a => a === 'mango')).to.be.deep.equal(['mango']);
     });
 
-    it('checks for compound suggestions', async () => {
+    test('checks for compound suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         trie.options.useCompounds = true;
@@ -59,7 +59,7 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugs).to.contain('apple mango');
     });
 
-    it('checks for compound suggestions', async () => {
+    test('checks for compound suggestions', async () => {
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         const dicts = await Promise.all([
             trie,
@@ -77,7 +77,7 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugs).to.contain('apple mango');
     });
 
-    it('checks for suggestions with flagged words', async () => {
+    test('checks for suggestions with flagged words', async () => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
@@ -90,7 +90,7 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugs.map(r => r.word)).to.be.not.contain('avocado');
     });
 
-    it('checks for suggestions from mixed sources', async () => {
+    test('checks for suggestions from mixed sources', async () => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
@@ -115,7 +115,7 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugsForCellipede.map(s => s.word)).to.contain('millipede');
     });
 
-    it('creates using createCollectionP', () => {
+    test('creates using createCollectionP', () => {
         const dicts = [
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsB, 'wordsB', 'test'),

@@ -3,7 +3,7 @@ import * as Dictionaries from './Dictionaries';
 import { getDefaultSettings } from '../Settings';
 
 describe('Validate getDictionary', () => {
-    it('tests that userWords are included in the dictionary', () => {
+    test('tests that userWords are included in the dictionary', () => {
         const settings = {
             ...getDefaultSettings(),
             words: ['one', 'two', 'three'],

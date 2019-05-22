@@ -8,7 +8,7 @@ import { getDefaultSettings } from './DefaultSettings';
 const defaultSettings = getDefaultSettings();
 
 describe('Validate DictionarySettings', () => {
-    it('expects default to not be empty', () => {
+    test('expects default to not be empty', () => {
         const mapDefs = DictSettings.filterDictDefsToLoad(['php', 'wordsEn', 'unknown', 'en_us'], defaultSettings.dictionaryDefinitions!);
         const files = mapDefs.map(a => a[1]).map(def => def.name!);
         expect(mapDefs).to.be.lengthOf(2);
@@ -19,7 +19,7 @@ describe('Validate DictionarySettings', () => {
         // console.log(mapDefs);
     });
 
-    it('tests exclusions and empty ids', () => {
+    test('tests exclusions and empty ids', () => {
         const ids = [
             'php',
             'cpp',      // add cpp
@@ -35,7 +35,7 @@ describe('Validate DictionarySettings', () => {
         expect(dicts).to.be.deep.equal(expected);
     });
 
-    it('tests that the files exist', () => {
+    test('tests that the files exist', () => {
         const defaultDicts = defaultSettings.dictionaryDefinitions!;
         const dictIds = defaultDicts.map(def => def.name);
         const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
@@ -47,7 +47,7 @@ describe('Validate DictionarySettings', () => {
         return Promise.all(access);
     });
 
-    it('tests normalizing the dictionary paths', () => {
+    test('tests normalizing the dictionary paths', () => {
         const { dictionaryDefinitions } = defaultSettings;
         expect(dictionaryDefinitions).to.not.be.empty;
         const defs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');

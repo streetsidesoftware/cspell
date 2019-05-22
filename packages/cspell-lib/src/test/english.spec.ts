@@ -1,10 +1,8 @@
 import {expect} from 'chai';
 import * as cspell from '../index';
 
-describe('Validate English', function() {
-    it('Tests suggestions', function() {
-        this.timeout(30000);
-
+describe('Validate English', () => {
+    test('Tests suggestions', () => {
         const ext = '.txt';
         const languageIds = cspell.getLanguagesForExt(ext);
         const settings = cspell.getDefaultSettings();

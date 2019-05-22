@@ -16,10 +16,8 @@ function getSettings(text: string, languageId: string) {
     return tds.combineTextAndLanguageSettings(defaultSettings, text, languageId);
 }
 
-describe('Validator', function() {
-    this.timeout(5000);
-
-    it('validates the validator', () => {
+describe('Validator', () => {
+    test('validates the validator', () => {
         const text = 'The quick brouwn fox jumpped over the lazzy dog.';
         const languageId = 'plaintext';
         const settings = getSettings(text, languageId);
@@ -30,7 +28,7 @@ describe('Validator', function() {
         });
     });
 
-    it('validates ignore Case', () => {
+    test('validates ignore Case', () => {
         const text = 'The Quick brown fox Jumped over the lazy dog.';
         const languageId = 'plaintext';
         const settings = getSettings(text, languageId);
@@ -41,7 +39,7 @@ describe('Validator', function() {
         });
     });
 
-    it('validate limit', () => {
+    test('validate limit', () => {
         const text = loremIpsum({ count: 5, unit: 'paragraphs' });
         const languageId = 'plaintext';
         const settings = {...getSettings(text, languageId), maxNumberOfProblems: 10 };
@@ -49,7 +47,7 @@ describe('Validator', function() {
         return results.then(results => expect(results).to.be.lengthOf(10));
     });
 
-    it('validates reserved words', () => {
+    test('validates reserved words', () => {
         const text = 'constructor const prototype type typeof null undefined';
         const languageId = 'javascript';
         const settings = {...getSettings(text, languageId), maxNumberOfProblems: 10 };
@@ -57,7 +55,7 @@ describe('Validator', function() {
         return results.then(results => expect(results).to.be.lengthOf(0));
     });
 
-    it('validates regex inclusions/exclusions', () => {
+    test('validates regex inclusions/exclusions', () => {
         const text = sampleCode;
         const languageId = 'plaintext';
         const settings = {...getSettings(text, languageId), maxNumberOfProblems: 10 };
@@ -73,7 +71,7 @@ describe('Validator', function() {
         });
     });
 
-    it('validates ignoreRegExpList', () => {
+    test('validates ignoreRegExpList', () => {
         const text = sampleCode;
         const languageId = 'plaintext';
         const settings = {...getSettings(text, languageId), maxNumberOfProblems: 10, ignoreRegExpList: ['^const [wy]RON[g]+', 'mis.*led'] };
@@ -86,7 +84,7 @@ describe('Validator', function() {
         });
     });
 
-    it('validates ignoreRegExpList 2', () => {
+    test('validates ignoreRegExpList 2', () => {
         const results = Validator.validateText(
             sampleCode,
             { ignoreRegExpList: ['/^const [wy]ron[g]+/gim', '/MIS...LED/g', '/mischecked'] }
@@ -99,7 +97,7 @@ describe('Validator', function() {
         });
     });
 
-    it('validates malformed ignoreRegExpList', () => {
+    test('validates malformed ignoreRegExpList', () => {
         const results = Validator.validateText(sampleCode, { ignoreRegExpList: ['/wrong[/gim', 'mis.*led'] });
         return results.then(results => {
             const words = results.map(wo => wo.text);
@@ -110,7 +108,7 @@ describe('Validator', function() {
     });
 
     // cspell:ignore hellosd applesq bananasa respectss
-    it('Issue #7', () => {
+    test('Issue #7', () => {
         const text = `Fails to detect obviously misspelt words, such as:
             hellosd
             applesq
@@ -132,7 +130,7 @@ describe('Validator', function() {
         });
     });
 
-    it('Validates contractions', () => {
+    test('Validates contractions', () => {
         const text = `
             We have a bit of text to check. Don't look too hard.
             Which single quote to use? Is it shouldn't or shouldn’t?
@@ -145,7 +143,7 @@ describe('Validator', function() {
             expect(words.sort()).to.be.deep.equal([]);
         });
     });
-    it('tests calcIncludeExcludeInfo', async () => {
+    test('tests calcIncludeExcludeInfo', async () => {
         const words = sampleWords;
         const info = await Validator.checkText(sampleText, { words, ignoreRegExpList: [/The/g]});
         const strings = info.items.map(a => a.text);
@@ -160,7 +158,7 @@ describe('Validator', function() {
         expect(last).to.be.equal(sampleText.length);
     });
 
-    it('tests calcIncludeExcludeInfo exclude everything', async () => {
+    test('tests calcIncludeExcludeInfo exclude everything', async () => {
         const words = sampleWords;
         const info = await Validator.checkText(sampleText, { words, ignoreRegExpList: [/(.|\s)+/]});
         const result = info.items.map(a => a.text);
@@ -169,7 +167,7 @@ describe('Validator', function() {
         expect(info.items[0].flagIE).to.be.equal(IncludeExcludeFlag.EXCLUDE);
     });
 
-    it('tests calcIncludeExcludeInfo include everything', async () => {
+    test('tests calcIncludeExcludeInfo include everything', async () => {
         const words = sampleWords;
         const info = await Validator.checkText(sampleText, { words });
         const result = info.items.map(a => a.text);

@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { traceWords, getDefaultSettings } from '.';
 
 describe('Verify trace', () => {
-    it('tests tracing a word', async () => {
+    test('tests tracing a word', async () => {
         const words = ['apple'];
         const config = getDefaultSettings();
         const result = await traceWords(words, config);

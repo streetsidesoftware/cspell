@@ -4,7 +4,7 @@ import { Trie } from 'cspell-trie-lib';
 import { compareResults } from './helpers';
 
 describe('Validate Suggest', () => {
-    it('test suggestions', () => {
+    test('test suggestions', () => {
         const words = [
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear',
             'cattle', 'rattle', 'battle',

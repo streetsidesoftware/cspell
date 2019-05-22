@@ -4,7 +4,7 @@ import { SuggestionResult, Feature } from './entities';
 import { FeatureMap } from './helpers';
 
 describe('Validate Suggest Helpers', () => {
-    it('test compareResult', () => {
+    test('test compareResult', () => {
         const sr: SuggestionResult[] = [
             { word: 'cone', score: 0.6 },
             { word: 'apple', score: 0.3 },
@@ -16,7 +16,7 @@ describe('Validate Suggest Helpers', () => {
         expect(r).to.be.deep.equal([sr[3], sr[0], sr[1], sr[2]]);
     });
 
-    it('test wordToSingleLetterFeatures', () => {
+    test('test wordToSingleLetterFeatures', () => {
         const tests = [
             { v: '',      e: []},
             { v: 'a',     e: [['a', 1] ]},
@@ -28,7 +28,7 @@ describe('Validate Suggest Helpers', () => {
         });
     });
 
-    it('test mergeFeatures', () => {
+    test('test mergeFeatures', () => {
         const tests = [
             { v: '',      e: []},
             { v: 'a',     e: [['a', 1] ]},
@@ -43,7 +43,7 @@ describe('Validate Suggest Helpers', () => {
         });
     });
 
-    it('test wordToTwoLetterFeatures', () => {
+    test('test wordToTwoLetterFeatures', () => {
         const tests = [
             { v: '',      e: []},
             { v: '^a$',     e: [['^a', 1], ['a$', 1], ]},
@@ -56,7 +56,7 @@ describe('Validate Suggest Helpers', () => {
     });
 
     // cspell:ignore ello
-    it('test segmentString', () => {
+    test('test segmentString', () => {
         const tests = [
             { v: 'a', s: 1, e: 'a'.split('')},
             { v: 'hello', s: 1, e: 'hello'.split('')},
@@ -73,7 +73,7 @@ describe('Validate Suggest Helpers', () => {
         });
     });
 
-    it('test wordToFeatures', () => {
+    test('test wordToFeatures', () => {
         const comp = (a: Feature, b: Feature) => a[0].localeCompare(b[0]);
         const features = helpers.wordToFeatures('^hello$');
         expect([...features].sort(comp)).to.be.deep.equal([
@@ -92,7 +92,7 @@ describe('Validate Suggest Helpers', () => {
         ].sort(comp));
     });
 
-    it('test intersectionScore', () => {
+    test('test intersectionScore', () => {
         const fA = helpers.wordToFeatures('^hello$');
         const fB = helpers.wordToFeatures('^goodbye$');
         expect(fA.intersectionScore(fA)).to.be.equal(fA.count);
@@ -101,7 +101,7 @@ describe('Validate Suggest Helpers', () => {
         expect(fA.intersectionScore(fB)).to.be.equal(4);
     });
 
-    it('test correlationScore', () => {
+    test('test correlationScore', () => {
         const fA = helpers.wordToFeatures('^hello$');
         const fB = helpers.wordToFeatures('^goodbye$');
         expect(fA.correlationScore(fA)).to.be.equal(1);

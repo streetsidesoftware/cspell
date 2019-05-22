@@ -5,7 +5,7 @@ import { Trie } from 'cspell-trie-lib';
 // cSpell:ignore aple
 
 describe('Verify building Dictionary', () => {
-    it('build from word list', async () => {
+    test('build from word list', async () => {
         const words = [
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
@@ -24,7 +24,7 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).to.not.contain('banana');
     });
 
-    it('Test compounds from word list', async () => {
+    test('Test compounds from word list', async () => {
         const words = [
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'
         ];
@@ -37,7 +37,7 @@ describe('Verify building Dictionary', () => {
         expect(dict.has('applebananas')).to.be.false;
     });
 
-    it('Test Suggest Trie', () => {
+    test('Test Suggest Trie', () => {
         const words = [
             'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear',
             'cattle', 'rattle', 'battle',
@@ -51,7 +51,7 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).to.not.contain('banana');
     });
 
-    it('build from list containing non-strings', async () => {
+    test('build from list containing non-strings', async () => {
         const words = [
             'apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'
         ];

@@ -4,7 +4,7 @@ import * as TextRange from '../util/TextRange';
 import * as InDoc from './InDocSettings';
 
 describe('Validate InDocSettings', () => {
-    it('tests matching settings', () => {
+    test('tests matching settings', () => {
         const matches = InDoc.internal.getPossibleInDocSettings(sampleCode)
             .map(a => a.slice(1).filter(a => !!a))
             .toArray();
@@ -26,7 +26,7 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    it('tests extracting in file settings for compound words', () => {
+    test('tests extracting in file settings for compound words', () => {
         expect(InDoc.getInDocumentSettings('')).to.deep.equal({ id: 'in-doc-settings' });
         expect(InDoc.getInDocumentSettings('cSpell:enableCompoundWords').allowCompoundWords, 'cSpell:enableCompoundWords').to.be.true;
         expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords').allowCompoundWords, 'cSpell:ENABLECompoundWords').to.be.true;
@@ -38,21 +38,21 @@ describe('Validate InDocSettings', () => {
         expect(InDoc.getInDocumentSettings(sampleCode).allowCompoundWords).to.be.true;
     });
 
-    it('tests finding words to add to dictionary', () => {
+    test('tests finding words to add to dictionary', () => {
         const words = InDoc.internal.getWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
         expect(words).to.deep.equal(['whiteberry', 'redberry', 'lightbrown']);
         expect(InDoc.getIgnoreWordsFromDocument('Hello')).to.be.deep.equal([]);
     });
 
-    it('tests finding words to ignore', () => {
+    test('tests finding words to ignore', () => {
         const words = InDoc.getIgnoreWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
         expect(words).to.deep.equal(['tripe', 'comment', '*/', 'tooo', 'faullts']);
         expect(InDoc.getIgnoreWordsFromDocument('Hello')).to.be.deep.equal([]);
     });
 
-    it('tests finding ignoreRegExp', () => {
+    test('tests finding ignoreRegExp', () => {
         const matches = InDoc.getIgnoreRegExpFromDocument(sampleCode);
         expect(matches).to.deep.equal([
             '/\\/\\/\\/.*/',
@@ -75,7 +75,7 @@ describe('Validate InDocSettings', () => {
         expect(ranges.length).to.be.equal(34);
     });
 
-    it('test fetching the local for the text', () => {
+    test('test fetching the local for the text', () => {
         const settings = InDoc.getInDocumentSettings(sampleCode);
         expect(settings.language).to.be.equal('en, nl');
     });

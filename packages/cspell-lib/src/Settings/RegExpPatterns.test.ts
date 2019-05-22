@@ -9,7 +9,7 @@ const matchHexValues = regExMatchCommonHexFormats.source;
 
 describe('Validate InDocSettings', () => {
 
-    it('tests regExSpellingGuard', () => {
+    test('tests regExSpellingGuard', () => {
         const m1 = sampleCode2LF.match(RegPat.regExSpellingGuard);
         expect(m1).is.not.empty;
         expect(m1).has.length(5);
@@ -24,7 +24,7 @@ describe('Validate InDocSettings', () => {
         // cspell:enable
     });
 
-    it('tests regExSpellingGuard CRLF', () => {
+    test('tests regExSpellingGuard CRLF', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuard);
         expect(m1).is.not.empty;
         expect(m1).has.length(5);
@@ -39,7 +39,7 @@ describe('Validate InDocSettings', () => {
         // cspell:enable
     });
 
-    it('tests finding a set of matching positions', () => {
+    test('tests finding a set of matching positions', () => {
         const text = sampleCode2LF;
         const ranges = TextRange.findMatchingRangesForPatterns([
             RegPat.regExMatchUrls,
@@ -60,7 +60,7 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    it('tests finding a set of matching positions CRLF', () => {
+    test('tests finding a set of matching positions CRLF', () => {
         const text = sampleCode2CRLF;
         const ranges = TextRange.findMatchingRangesForPatterns([
             RegPat.regExMatchUrls,
@@ -82,63 +82,23 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    it('tests merging inclusion and exclusion patterns into an inclusion list', () => {
-        const text = sampleCode2LF;
-        const includeRanges = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExString,
-            RegPat.regExPhpHereDoc,
-            RegPat.regExCStyleComments,
-        ], text);
-        const excludeRanges = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExSpellingGuard,
-            RegPat.regExMatchUrls,
-            RegPat.regExMatchCommonHexFormats,
-        ], text);
-        const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
-        expect(rangesToText(text, mergedRanges)).to.deep.eq([
-        '  2:  1 /*\n * this is a comment.\n */',
-        "  6: 14 'some nice text goes here'",
-        "  7: 13 '",
-        "  8: 14 '",
-        "  9: 21 '",
-        "  9: 27 '",
-        ' 14:  1 // But not this line',
-        ' 15:  1 // ',
-        ' 17:  1 // And not this line',
-        ' 19:  1 // ',
-        ' 25:  1 /* More code and comments */',
-        ' 27:  1 // Make sure /* this works.',
-        ' 29:  1 /* ',
-        ' 35: 31  <--> checking is now turned on.',
-        ' 37:  1 // This will be checked',
-        ' 39:  1 /*\n * spell-checker:enable  <-- this makes no difference because it was already turned back on.\n */',
-        " 43: 12 ''",
-        " 45: 13 ' '",
-        " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
-        ' 49: 17 "How about a double quote string?"',
-        " 50: 24 `\ncan contain \" and '\n\n `",
-        ' 55: 21 <<<SQL\n    SELECT * FROM users WHERE id in :ids;\nSQL;',
-        ' 59: 21 <<<"SQL"\n    SELECT * FROM users WHERE id in :ids;\nSQL;',
-        " 63: 20 <<<'SQL'\n    SELECT * FROM users WHERE id in :ids;\nSQL;",
-        ' 67:  1 // ',
-        ]);
-    });
-
-    it('tests merging inclusion and exclusion patterns into an inclusion list CRLF', () => {
-        const text = sampleCode2CRLF;
-        const includeRanges = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExString,
-            RegPat.regExPhpHereDoc,
-            RegPat.regExCStyleComments,
-        ], text);
-        const excludeRanges = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExSpellingGuard,
-            RegPat.regExMatchUrls,
-            RegPat.regExMatchCommonHexFormats,
-        ], text);
-        const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
-        expect(rangesToText(text, mergedRanges)).to.deep.eq([
-            '  2:  1 /*\r\n * this is a comment.\r\n */',
+    test(
+        'tests merging inclusion and exclusion patterns into an inclusion list',
+        () => {
+            const text = sampleCode2LF;
+            const includeRanges = TextRange.findMatchingRangesForPatterns([
+                RegPat.regExString,
+                RegPat.regExPhpHereDoc,
+                RegPat.regExCStyleComments,
+            ], text);
+            const excludeRanges = TextRange.findMatchingRangesForPatterns([
+                RegPat.regExSpellingGuard,
+                RegPat.regExMatchUrls,
+                RegPat.regExMatchCommonHexFormats,
+            ], text);
+            const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
+            expect(rangesToText(text, mergedRanges)).to.deep.eq([
+            '  2:  1 /*\n * this is a comment.\n */',
             "  6: 14 'some nice text goes here'",
             "  7: 13 '",
             "  8: 14 '",
@@ -153,24 +113,70 @@ describe('Validate InDocSettings', () => {
             ' 29:  1 /* ',
             ' 35: 31  <--> checking is now turned on.',
             ' 37:  1 // This will be checked',
-            ' 39:  1 /*\r\n * spell-checker:enable  <-- this makes no difference because it was already turned back on.\r\n */',
+            ' 39:  1 /*\n * spell-checker:enable  <-- this makes no difference because it was already turned back on.\n */',
             " 43: 12 ''",
             " 45: 13 ' '",
             " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
             ' 49: 17 "How about a double quote string?"',
-            " 50: 24 `\r\ncan contain \" and '\r\n\r\n `",
-            ' 55: 21 <<<SQL\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
-            ' 59: 21 <<<"SQL"\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
-            " 63: 20 <<<'SQL'\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;",
+            " 50: 24 `\ncan contain \" and '\n\n `",
+            ' 55: 21 <<<SQL\n    SELECT * FROM users WHERE id in :ids;\nSQL;',
+            ' 59: 21 <<<"SQL"\n    SELECT * FROM users WHERE id in :ids;\nSQL;',
+            " 63: 20 <<<'SQL'\n    SELECT * FROM users WHERE id in :ids;\nSQL;",
             ' 67:  1 // ',
-        ]);
-    });
+            ]);
+        }
+    );
 
-    it('test for hex values', () => {
+    test(
+        'tests merging inclusion and exclusion patterns into an inclusion list CRLF',
+        () => {
+            const text = sampleCode2CRLF;
+            const includeRanges = TextRange.findMatchingRangesForPatterns([
+                RegPat.regExString,
+                RegPat.regExPhpHereDoc,
+                RegPat.regExCStyleComments,
+            ], text);
+            const excludeRanges = TextRange.findMatchingRangesForPatterns([
+                RegPat.regExSpellingGuard,
+                RegPat.regExMatchUrls,
+                RegPat.regExMatchCommonHexFormats,
+            ], text);
+            const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
+            expect(rangesToText(text, mergedRanges)).to.deep.eq([
+                '  2:  1 /*\r\n * this is a comment.\r\n */',
+                "  6: 14 'some nice text goes here'",
+                "  7: 13 '",
+                "  8: 14 '",
+                "  9: 21 '",
+                "  9: 27 '",
+                ' 14:  1 // But not this line',
+                ' 15:  1 // ',
+                ' 17:  1 // And not this line',
+                ' 19:  1 // ',
+                ' 25:  1 /* More code and comments */',
+                ' 27:  1 // Make sure /* this works.',
+                ' 29:  1 /* ',
+                ' 35: 31  <--> checking is now turned on.',
+                ' 37:  1 // This will be checked',
+                ' 39:  1 /*\r\n * spell-checker:enable  <-- this makes no difference because it was already turned back on.\r\n */',
+                " 43: 12 ''",
+                " 45: 13 ' '",
+                " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
+                ' 49: 17 "How about a double quote string?"',
+                " 50: 24 `\r\ncan contain \" and '\r\n\r\n `",
+                ' 55: 21 <<<SQL\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
+                ' 59: 21 <<<"SQL"\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
+                " 63: 20 <<<'SQL'\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;",
+                ' 67:  1 // ',
+            ]);
+        }
+    );
+
+    test('test for hex values', () => {
         expect(RegPat.regExHexDigits.test('FFEE')).to.be.true;
     });
 
-    it('tests finding matching positions', () => {
+    test('tests finding matching positions', () => {
         const text = sampleCode2LF;
         const urls = TextRange.findMatchingRanges(matchUrl, text);
         expect(urls.length).equals(2);
@@ -205,7 +211,7 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    it('tests finding matching positions CRLF', () => {
+    test('tests finding matching positions CRLF', () => {
         const text = sampleCode2CRLF;
         const urls = TextRange.findMatchingRanges(matchUrl, text);
         expect(urls.length).equals(2);
@@ -240,7 +246,7 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    it('test matching urls', () => {
+    test('test matching urls', () => {
         RegPat.regExMatchUrls.lastIndex = 22;
         const reg = new RegExp(RegPat.regExMatchUrls);
         expect(reg.lastIndex).to.be.eq(0);
@@ -257,7 +263,7 @@ describe('Validate InDocSettings', () => {
         expect(matches![0]).to.be.equal('http://example.org');
     });
 
-    it('test matching href', () => {
+    test('test matching href', () => {
         const reg = new RegExp(RegPat.regExHRef);
         const text = `
             <p>
@@ -273,7 +279,7 @@ describe('Validate InDocSettings', () => {
         expect(matches![1]).to.be.equal('href="/example/"');
     });
 
-    it('test sha regex', () => {
+    test('test sha regex', () => {
         RegPat.regExSha.lastIndex = 0;
         expect(RegPat.regExSha.test('')).to.be.false;
         RegPat.regExSha.lastIndex = 0;

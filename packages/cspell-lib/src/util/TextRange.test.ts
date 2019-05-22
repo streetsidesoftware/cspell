@@ -3,7 +3,7 @@ import { expect } from 'chai';
 
 describe('Util Text', () => {
 
-    it('tests unionRanges', () => {
+    test('tests unionRanges', () => {
         const result1 = TextRange.unionRanges([]);
         expect(result1).to.deep.equal([]);
         const result2 = TextRange.unionRanges([{startPos: 0, endPos: 10}]);

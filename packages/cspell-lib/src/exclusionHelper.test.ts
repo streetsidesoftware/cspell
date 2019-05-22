@@ -6,9 +6,9 @@ import {
 
 // cSpell:words filepath
 
-describe('Verify Exclusion Helper functions', function() {
+describe('Verify Exclusion Helper functions', () => {
 
-    it('checks extractGlobsFromExcludeFilesGlobMap', function() {
+    test('checks extractGlobsFromExcludeFilesGlobMap', () => {
         const excludeDef = {
             '**/node_modules': true,
             '**/typings': true,
@@ -16,7 +16,7 @@ describe('Verify Exclusion Helper functions', function() {
         expect(extractGlobsFromExcludeFilesGlobMap(excludeDef), 'get list of globs').is.deep.equal(['**/node_modules', '**/typings']);
     });
 
-    it('Test the generated matching function', function() {
+    test('Test the generated matching function', () => {
         const globs = [
             '**/node_modules',
             '**/typings',
@@ -35,7 +35,7 @@ describe('Verify Exclusion Helper functions', function() {
         });
     });
 
-    it('Test the generated matching function for nested projects', function() {
+    test('Test the generated matching function for nested projects', () => {
         const globs = [
             '**/node_modules',
             '**/typings',
@@ -54,7 +54,7 @@ describe('Verify Exclusion Helper functions', function() {
         });
     });
 
-    it('Test against generated files', function() {
+    test('Test against generated files', () => {
         const globs = [
             'debug:/**',
             '**/*.rendered',
@@ -75,7 +75,7 @@ describe('Verify Exclusion Helper functions', function() {
         });
     });
 
-    it('Test to make sure normal files are loaded', function() {
+    test('Test to make sure normal files are loaded', () => {
         const globs = [
             'debug:/**',        // Files that are generated while debugging (generally from a .map file)
             'vscode:/**',       // VS Code generated files (settings.json for example)

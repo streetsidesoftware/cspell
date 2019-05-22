@@ -23,7 +23,7 @@ const defaultSettings = getDefaultSettings();
 const defaultLanguageSettings = defaultSettings.languageSettings;
 
 describe('Validate LanguageSettings', () => {
-    it('tests merging language settings', () => {
+    test('tests merging language settings', () => {
         const defaultSettings = getDefaultSettings();
         const languageSettings = defaultSettings.languageSettings || [];
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
@@ -41,7 +41,7 @@ describe('Validate LanguageSettings', () => {
             ].sort());
     });
 
-    it('tests that settings at language level are merged', () => {
+    test('tests that settings at language level are merged', () => {
         const settings = {
             languageSettings: [],
             ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
@@ -51,7 +51,7 @@ describe('Validate LanguageSettings', () => {
         expect(sPython.ignoreRegExpList).to.include('special');
     });
 
-    it('test that user settings include language overrides', () => {
+    test('test that user settings include language overrides', () => {
         const settings = {
             languageSettings: [],
             ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
@@ -62,26 +62,29 @@ describe('Validate LanguageSettings', () => {
         expect(sPython.ignoreRegExpList).to.include('binary');
     });
 
-    it("test that global settings are preserved if language setting doesn't exit.", () => {
-        const settings = {
-            enabled: true,
-            allowCompoundWords: false,
-            languageSettings: [],
-            ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
-        };
-        const sPython = calcUserSettingsForLanguage(settings, 'python');
-        expect(sPython).to.be.not.undefined;
-        expect(sPython.enabled).to.be.true;
-        expect(sPython.allowCompoundWords).to.be.true;
-    });
+    test(
+        "test that global settings are preserved if language setting doesn't exit.",
+        () => {
+            const settings = {
+                enabled: true,
+                allowCompoundWords: false,
+                languageSettings: [],
+                ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
+            };
+            const sPython = calcUserSettingsForLanguage(settings, 'python');
+            expect(sPython).to.be.not.undefined;
+            expect(sPython.enabled).to.be.true;
+            expect(sPython.allowCompoundWords).to.be.true;
+        }
+    );
 
-    it('test merged settings with global', () => {
+    test('test merged settings with global', () => {
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
         const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
         expect(sPHP).to.not.be.empty;
     });
 
-    it('tests matching languageIds', () => {
+    test('tests matching languageIds', () => {
         const langSet = LS.normalizeLanguageId('PHP, Python | cpp,javascript');
         expect(langSet.has('php')).to.be.true;
         expect(langSet.has('cpp')).to.be.true;
@@ -90,7 +93,7 @@ describe('Validate LanguageSettings', () => {
         expect(langSet.has('typescript')).to.be.false;
     });
 
-    it('tests local matching', () => {
+    test('tests local matching', () => {
         const localSet = LS.normalizeLocal('en, en-GB, fr-fr, nl_NL');
         expect(localSet.has('en')).to.be.true;
         expect(LS.isLocalInSet('nl-nl', localSet)).to.be.true;
