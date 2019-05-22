@@ -7,22 +7,15 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "trie: Launch Program",
             "program": "${workspaceRoot}/dist/index.js",
             "cwd": "${workspaceRoot}",
-            "outFiles": []
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach to Process",
-            "port": 5858,
             "outFiles": []
         },
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Run Mocha Test Current File",
+			"name": "trie: Run Mocha Test Current File",
 			"program": "${workspaceRoot}/../../node_modules/mocha/bin/_mocha",
 			"args": [
 				"--timeout","999999",
@@ -34,9 +27,9 @@
 		},
         {
 			// Name of configuration; appears in the launch configuration drop down menu.
-			"name": "Run mocha",
+			"name": "trie: Run mocha",
 			// Type of configuration. Possible values: "node", "mono".
-			"type": "node2",
+			"type": "node",
             // Request type "launch" or "attach"
             "request": "launch",
 			// Workspace relative or absolute path to the program.

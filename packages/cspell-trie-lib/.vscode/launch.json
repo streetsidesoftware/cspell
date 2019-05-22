@@ -4,25 +4,10 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/dist/index.js",
-            "cwd": "${workspaceRoot}",
-            "outFiles": []
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach to Process",
-            "port": 5858,
-            "outFiles": []
-        },
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Run Mocha Test Current File",
+			"name": "trie-lib: Run Mocha Test Current File",
 			"program": "${workspaceRoot}/../../node_modules/mocha/bin/_mocha",
 			"args": [
 				"-u",
@@ -37,9 +22,9 @@
 		},
         {
 			// Name of configuration; appears in the launch configuration drop down menu.
-			"name": "Run mocha",
+			"name": "trie-lib: Run mocha",
 			// Type of configuration. Possible values: "node", "mono".
-			"type": "node2",
+			"type": "node",
             // Request type "launch" or "attach"
             "request": "launch",
 			// Workspace relative or absolute path to the program.

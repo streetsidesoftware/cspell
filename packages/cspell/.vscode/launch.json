@@ -8,7 +8,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run CSpell",
+            "name": "cspell: Run",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["-e", "src", "-v", "**/*.py"],
             "cwd": "${workspaceRoot}",
@@ -18,7 +18,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run CSpell against current file",
+            "name": "cspell: Run CSpell against current file",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["-v", "${file}"],
             "cwd": "${workspaceRoot}",
@@ -29,7 +29,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run CSpell against stdin",
+            "name": "cspell: Run CSpell against stdin",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["-v", "stdin"],
             "cwd": "${workspaceRoot}",
@@ -41,7 +41,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run Trace",
+            "name": "cspell: Run Trace",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["trace", "about"],
             "cwd": "${workspaceRoot}",
@@ -51,7 +51,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run Check",
+            "name": "cspell: Run Check",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["check", "--config", "${workspaceRoot}/samples/.cspell.json", "${workspaceRoot}/samples/src/sample.c"],
             "cwd": "${workspaceRoot}",
@@ -61,7 +61,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Run bad glob",
+            "name": "cspell: Run bad glob",
             "program": "${workspaceRoot}/dist/app.js",
 			"args": ["-v", "src", "**/*.test.ts"],
             "cwd": "${workspaceRoot}",
@@ -71,7 +71,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Run Mocha Current File",
+			"name": "cspell: Run Mocha Current File",
 			"program": "${workspaceRoot}/../../node_modules/mocha/bin/_mocha",
 			"args": [
 				"--timeout","999999",
@@ -83,14 +83,14 @@
         {
             "type": "node",
             "request": "attach",
-            "name": "Attach to Process",
+            "name": "cspell: Attach to Process",
             "port": 5858,
             "outFiles": [],
             "sourceMaps": true
         },
         {
 			// Name of configuration; appears in the launch configuration drop down menu.
-			"name": "Run mocha",
+			"name": "cspell: Run mocha",
 			// Type of configuration. Possible values: "node", "mono".
 			"type": "node",
             // Request type "launch" or "attach"
