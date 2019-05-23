@@ -12,14 +12,11 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "test": "mocha --recursive \"./dist/**/*.test.js\"",
-    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "build": "tsc -p .",
     "clean-build": "npm run clean && npm run build",
-    "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
-    "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
-    "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "travis-coverage": "npm run coverage && npm run coverage-coveralls",
+    "coverage": "jest --coverage",
+    "test-watch": "../../node_modules/.bin/jest --watch",
+    "test": "jest",
     "watch": "tsc -w"
   },
   "repository": {
@@ -64,6 +61,6 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.6"
+    "@types/jest": "^24.0.13"
   }
 }
