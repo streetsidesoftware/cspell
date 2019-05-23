@@ -6,7 +6,7 @@ import { mkdirp } from 'fs-extra';
 import { readFile } from './fileReader';
 
 describe('Validate the writer', () => {
-    it('tests writing data and reading it back.', async () => {
+    test('tests writing data and reading it back.', async () => {
         // cspell:ignore éåáí
         const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
         const data = text.split(/\b/);
@@ -18,7 +18,7 @@ describe('Validate the writer', () => {
         expect(result).to.equal(text);
     });
 
-    it('tests writing data and reading it back. gz', async () => {
+    test('tests writing data and reading it back. gz', async () => {
         const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
         const data = text.split(/\b/);
         const filename = path.join(__dirname, '..', '..', 'temp', 'tests-writing-an-observable.txt.gz');
@@ -29,7 +29,7 @@ describe('Validate the writer', () => {
         expect(result).to.equal(text);
     });
 
-    it('tests writeToFile', async () => {
+    test('tests writeToFile', async () => {
         const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
         const filename = path.join(__dirname, '..', '..', 'temp', 'tests-writing.txt');
 
@@ -44,7 +44,7 @@ describe('Validate the writer', () => {
         expect(result).to.equal(text);
     });
 
-    it('tests writeToFile zip', async () => {
+    test('tests writeToFile zip', async () => {
         const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
         const filename = path.join(__dirname, '..', '..', 'temp', 'tests-writing.txt.gz');
 
