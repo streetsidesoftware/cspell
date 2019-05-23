@@ -65,30 +65,7 @@ export function validateText(
     };
 
     return Text.extractWordsFromCode(text)
-        // Filter out any words that are NOT in the include ranges.
-        .scan<WordRangeAcc>((acc, textOffset) => {
-            let { rangePos } = acc;
-            const wordEndPos = textOffset.offset + textOffset.text.length;
-            const wordStartPos = textOffset.offset;
-            while (includeRanges[rangePos] && includeRanges[rangePos].endPos <= wordStartPos) {
-                rangePos += 1;
-            }
-            const range = includeRanges[rangePos];
-            const isIncluded = range && range.startPos < wordEndPos;
-            const isPartial = isIncluded && (range.endPos < wordEndPos || range.startPos > wordStartPos);
-            if (isPartial) {
-                // We need to chop the text.
-                const offset = Math.max(range.startPos, wordStartPos);
-                const offsetEnd = Math.min(range.endPos, wordEndPos);
-                const a = offset - wordStartPos;
-                const b = offsetEnd - wordStartPos;
-                const text = textOffset.text.slice(a, b);
-                return { rangePos, isIncluded, textOffset: { ...textOffset, text, offset } };
-            }
-            return { rangePos, isIncluded, textOffset };
-        }, { textOffset: { text: '', offset: 0 }, isIncluded: false, rangePos: 0})
-        .filter(wr => wr.isIncluded)
-        .map(wr => wr.textOffset)
+        .concatMap(mapWordsAgainstRanges(includeRanges))
         .filter(filterAlreadyChecked)
         .map(wo => ({...wo, isFlagged: setOfFlagWords.has(wo.text) }))
         .filter(rememberFilter(wo => wo.isFlagged || wo.text.length >= minWordLength ))
@@ -143,4 +120,46 @@ export function hasWordCheck(dict: SpellingDictionary, word: string, allowCompou
     return allowCompounds ? dict.has(word, allowCompounds) : dict.has(word);
 }
 
+/**
+ * Returns a mapper function that will
+ * @param includeRanges Allowed ranges for words.
+ */
+function mapWordsAgainstRanges(includeRanges: TextRange.MatchRange[]): ((wo: TextOffset) => Iterable<TextOffset>) {
 
+    let rangePos = 0;
+
+    const mapper = (textOffset: TextOffset) => {
+        if (!includeRanges.length) {
+            return [];
+        }
+        const parts: TextOffset[] = [];
+        const { text, offset } = textOffset;
+        const wordEndPos = offset + text.length;
+        let wordStartPos = offset;
+        while (rangePos && (rangePos >= includeRanges.length || includeRanges[rangePos].startPos > wordStartPos)) {
+            rangePos -= 1;
+        }
+
+        while (wordStartPos < wordEndPos) {
+            while (includeRanges[rangePos] && includeRanges[rangePos].endPos <= wordStartPos) {
+                rangePos += 1;
+            }
+            if (!includeRanges[rangePos] || wordEndPos < includeRanges[rangePos].startPos) {
+                break;
+            }
+            const { startPos, endPos } = includeRanges[rangePos];
+            const a = Math.max(wordStartPos, startPos);
+            const b = Math.min(wordEndPos, endPos);
+            parts.push({ offset: a, text: text.slice(a - offset, b - offset) });
+            wordStartPos = b;
+        }
+
+        return parts.filter(wo => !!wo.text);
+    };
+
+    return mapper;
+}
+
+export const _testMethods = {
+    mapWordsAgainstRanges,
+};

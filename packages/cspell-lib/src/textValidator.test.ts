@@ -1,9 +1,11 @@
 import { expect } from 'chai';
 
-import { validateText, hasWordCheck, calcTextInclusionRanges } from './textValidator';
+import { validateText, hasWordCheck, calcTextInclusionRanges, _testMethods } from './textValidator';
 import { createCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
+import * as Text from './util/text';
+import { genSequence } from 'gensequence';
 
 // cspell:ignore whiteberry redmango lightbrown redberry
 
@@ -105,6 +107,29 @@ describe('Validate textValidator functions', () => {
         ]);
     });
 
+    test('tests words crossing exclude boundaries', async () => {
+        const text = '_Test the _line_breaks___from __begin to end__ _eol_';
+        const inclusionRanges = calcTextInclusionRanges(text, { ignoreRegExpList: [/_/g]});
+        const mapper = _testMethods.mapWordsAgainstRanges(inclusionRanges);
+        const results = Text.matchStringToTextOffset(/\w+/g, text)
+            .concatMap(mapper)
+            .toArray();
+        const words = results.map(r => r.text);
+        expect(words.join(' ')).to.equal('Test the line breaks from begin to end eol');
+    });
+
+    test('tests words crossing exclude boundaries out of order', async () => {
+        const text = '_Test the _line_breaks___from __begin to end__ _eol_';
+        const inclusionRanges = calcTextInclusionRanges(text, { ignoreRegExpList: [/_/g]});
+        const mapper = _testMethods.mapWordsAgainstRanges(inclusionRanges);
+        // sort the texts by the word so it is out of order.
+        const texts = [...Text.matchStringToTextOffset(/\w+/g, text)].sort((a, b) => a.text < b.text ? -1 : a.text > b.text ? 1 : 0);
+        const results = genSequence(texts)
+            .concatMap(mapper)
+            .toArray();
+        const words = results.sort((a, b) => a.offset - b.offset).map(r => r.text);
+        expect(words.join(' ')).to.equal('Test the line breaks from begin to end eol');
+    });
 });
 
 async function getSpellingDictionaryCollection() {
