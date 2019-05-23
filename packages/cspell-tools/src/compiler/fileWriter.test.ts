@@ -5,7 +5,7 @@ import * as path from 'path';
 import { mkdirp, readFile } from 'fs-extra';
 
 describe('Validate the writer', () => {
-    it('tests writing an Rx.Observable and reading it back.', async () => {
+    test('tests writing an Rx.Observable and reading it back.', async () => {
         // cspell:ignore éåáí
         const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
         const data = text.split(/\b/);

@@ -11,8 +11,8 @@ import { readFile } from 'cspell-io';
 
 const UTF8: BufferEncoding = 'utf8';
 
-describe('Validate the wordListCompiler', function() {
-    it('tests splitting lines', () => {
+describe('Validate the wordListCompiler', () => {
+    test('tests splitting lines', () => {
         const line = 'AppendIterator::getArrayIterator';
         expect(lineToWords(line).filter(distinct()).toArray()).to.deep.equal([
             'append',
@@ -51,7 +51,7 @@ describe('Validate the wordListCompiler', function() {
         ]);
     });
 
-    it('test reading and normalizing a file', () => {
+    test('test reading and normalizing a file', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
         return compileWordList(sourceName, destName, { splitWords: true, sort: true })
@@ -61,7 +61,7 @@ describe('Validate the wordListCompiler', function() {
         });
     });
 
-    it('test compiling to a file without split', () => {
+    test('test compiling to a file without split', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities2.txt');
         return compileWordList(sourceName, destName, { splitWords: false, sort: true })
@@ -71,7 +71,7 @@ describe('Validate the wordListCompiler', function() {
         });
     });
 
-    it('tests normalized to a trie', () => {
+    test('tests normalized to a trie', () => {
         const words = citiesResult.split('\n');
         const nWords = normalizeWords(genSequence(words)).toArray();
         const tWords = [...genSequence([normalizeWordsToTrie(genSequence(words))])
@@ -79,7 +79,7 @@ describe('Validate the wordListCompiler', function() {
         expect(tWords.sort()).to.be.deep.equal([...(new Set(nWords.sort()))]);
     });
 
-    it('test reading and normalizing to a trie file', () => {
+    test('test reading and normalizing to a trie file', () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie');
         return compileTrie(sourceName, destName)
@@ -93,7 +93,7 @@ describe('Validate the wordListCompiler', function() {
         });
     });
 
-    it('test reading and normalizing to a trie gz file', async () => {
+    test('test reading and normalizing to a trie gz file', async () => {
         const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie.gz');
         await compileTrie(sourceName, destName);
