@@ -25,8 +25,7 @@
     "tscv": "tsc -v",
     "coverage": "npm run generate-code-coverage",
     "generate-code-coverage": "jest --coverage",
-    "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --recursive \"src/**/*.test.ts\"",
-    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
+    "test-watch": "../../node_modules/.bin/jest --watch",
     "prepublishOnly": "npm run lint && npm run clean-build && npm test",
     "test": "jest"
   },
@@ -100,7 +99,6 @@
     ]
   },
   "devDependencies": {
-    "@types/jest": "^24.0.13",
     "cspell-tools": "^4.0.14"
   }
 }
