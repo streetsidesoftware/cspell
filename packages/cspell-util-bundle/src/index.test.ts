@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { xregexp } from '.';
 
 describe('Validate Bundled Libraries', () => {
-    it('Test xregexp', () => {
+    test('Test xregexp', () => {
         expect(typeof xregexp).to.be.equal('function');
 
         const x = xregexp('t$');

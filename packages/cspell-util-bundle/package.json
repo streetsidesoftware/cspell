@@ -18,10 +18,9 @@
     "prepare": "npm run build-production",
     "clean": "rimraf dist",
     "clean-build": "npm run clean && npm run build",
-    "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
-    "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --require ts-node/register --recursive \"src/**/*.test.ts\"",
-    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
-    "test": "mocha --recursive ./dist/**/*.test.js"
+    "coverage": "jest --coverage",
+    "test-watch": "../../node_modules/.bin/jest --watch",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -56,7 +55,7 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.6",
+    "@types/jest": "^24.0.13",
     "@types/xregexp": "^3.0.30",
     "rimraf": "^2.6.3",
     "xregexp": "^4.2.4"
