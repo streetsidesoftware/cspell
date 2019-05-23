@@ -1,4 +1,5 @@
 import * as Text from './util/text';
+import { TextOffset } from './util/text';
 import * as TextRange from './util/TextRange';
 import { SpellingDictionary } from './SpellingDictionary';
 import { Sequence } from 'gensequence';
@@ -51,6 +52,17 @@ export function validateText(
     const mapOfProblems = new Map<string, number>();
     const includeRanges = calcTextInclusionRanges(text, options);
     const ignoreWordsSet = new Set(ignoreWords.map(a => a.toLowerCase()));
+    const setOfOkWords = new Set<string>();
+    const rememberFilter = <T extends TextOffset>(fn: (v: T) => boolean) => ((v: T) => {
+        const keep = fn(v);
+        if (!keep) {
+            setOfOkWords.add(v.text);
+        }
+        return keep;
+    });
+    const filterAlreadyChecked = (wo: TextOffset) => {
+        return !setOfOkWords.has(wo.text);
+    };
 
     return Text.extractWordsFromCode(text)
         // Filter out any words that are NOT in the include ranges.
@@ -77,24 +89,25 @@ export function validateText(
         }, { textOffset: { text: '', offset: 0 }, isIncluded: false, rangePos: 0})
         .filter(wr => wr.isIncluded)
         .map(wr => wr.textOffset)
+        .filter(filterAlreadyChecked)
         .map(wo => ({...wo, isFlagged: setOfFlagWords.has(wo.text) }))
-        .filter(wo => wo.isFlagged || wo.text.length >= minWordLength )
+        .filter(rememberFilter(wo => wo.isFlagged || wo.text.length >= minWordLength ))
         .map(wo => ({
             ...wo,
             isFound: isWordValid(dict, wo, text, allowCompoundWords)
         }))
-        .filter(wo => wo.isFlagged || ! wo.isFound )
-        .filter(wo => !ignoreWordsSet.has(wo.text.toLowerCase()))
-        .filter(wo => !RxPat.regExHexDigits.test(wo.text))  // Filter out any hex numbers
-        .filter(wo => !RxPat.regExRepeatedChar.test(wo.text))  // Filter out any repeated characters like xxxxxxxxxx
+        .filter(rememberFilter(wo => wo.isFlagged || ! wo.isFound ))
+        .filter(rememberFilter(wo => !ignoreWordsSet.has(wo.text.toLowerCase())))
+        .filter(rememberFilter(wo => !RxPat.regExHexDigits.test(wo.text)))  // Filter out any hex numbers
+        .filter(rememberFilter(wo => !RxPat.regExRepeatedChar.test(wo.text)))  // Filter out any repeated characters like xxxxxxxxxx
         // Remove anything that is in the ignore list.
-        .filter(wo => {
+        .filter(rememberFilter(wo => {
             const word = wo.text.toLowerCase();
             // Keep track of the number of times we have seen the same problem
             mapOfProblems.set(word, (mapOfProblems.get(word) || 0) + 1);
             // Filter out if there is too many
             return mapOfProblems.get(word)! < maxDuplicateProblems;
-        })
+        }))
         .take(maxNumberOfProblems);
 }
 
