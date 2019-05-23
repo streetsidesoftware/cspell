@@ -1,19 +1,19 @@
-import mockRequire = require('mock-require');
 const getStdinResult = {
     value: ''
 };
-mockRequire('get-stdin', () => {
-    return Promise.resolve(getStdinResult.value);
+
+jest.mock('get-stdin', () => {
+    return jest.fn(() => Promise.resolve(getStdinResult.value));
 });
 
 import {expect} from 'chai';
 import * as App from './application';
 
 
-describe('Validate the Application', function() {
-    this.timeout(10000);  // make sure we have enough time on Travis.
+describe('Validate the Application', () => {
+    jest.setTimeout(10000);  // make sure we have enough time on Travis.
 
-    it('Tests running the application', () => {
+    test('Tests running the application', () => {
         const files = ['samples/text.txt'];
         const options = {};
         const logger = new Logger();
@@ -27,7 +27,7 @@ describe('Validate the Application', function() {
             });
     });
 
-    it('Tests running the application verbose', () => {
+    test('Tests running the application verbose', () => {
         const files = ['samples/text.txt'];
         const options = { verbose: true };
         const logger = new Logger();
@@ -41,7 +41,7 @@ describe('Validate the Application', function() {
             });
     });
 
-    it('Tests running the application words only', () => {
+    test('Tests running the application words only', () => {
         const files = ['samples/text.txt'];
         const options = { wordsOnly: true, unique: true };
         const logger = new Logger();
@@ -55,7 +55,7 @@ describe('Validate the Application', function() {
             });
     });
 
-    it('Tests running the trace command', async () => {
+    test('Tests running the trace command', async () => {
         const result = await App.trace(['apple'], {});
         expect(result.length).to.be.greaterThan(2);
 
@@ -63,13 +63,13 @@ describe('Validate the Application', function() {
         expect(foundIn).to.contain('en_US.trie.gz');
     });
 
-    it('Tests checkText', async () => {
+    test('Tests checkText', async () => {
         const result = await App.checkText('samples/latex/sample2.tex', {});
         expect(result.items.length).to.be.gt(50);
         expect(result.items.map(i => i.text).join('')).to.be.equal(result.text);
     });
 
-    it('Test running the application from stdin', async () => {
+    test('Test running the application from stdin', async () => {
         const files = ['stdin'];
         const options = { wordsOnly: true, unique: true };
         const logger = new Logger();
@@ -81,7 +81,7 @@ describe('Validate the Application', function() {
         `;
         const lint = App.lint(files, options, logger);
         const result = await lint;
-        expect(result.files).equals(1);
+        expect(result.files).to.be.equal(1);
         expect(logger.errorCount).to.be.equal(0);
         expect(logger.infoCount).to.be.greaterThan(0);
         expect(logger.debugCount).to.be.greaterThan(0);
@@ -90,8 +90,8 @@ describe('Validate the Application', function() {
 });
 
 describe('Application, Validate Samples', () => {
-    const tests = sampleTests().map(sample =>
-        it(`Test file: "${sample.file}"`, async () => {
+    sampleTests().map(sample =>
+        test(`Test file: "${sample.file}"`, async () => {
             const logger = new Logger();
             const { file, issues, options = {wordsOnly: true, unique: false } } = sample;
             const result = await App.lint([ file ], options, logger);
@@ -100,7 +100,6 @@ describe('Application, Validate Samples', () => {
             expect(result.issues).to.be.equal(issues.length);
         })
     );
-    return Promise.all(tests);
 });
 
 interface SampleTest {

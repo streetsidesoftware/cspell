@@ -24,14 +24,10 @@
     "tsc": "tsc -p .",
     "tscv": "tsc -v",
     "coverage": "npm run generate-code-coverage",
-    "generate-code-coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
+    "generate-code-coverage": "jest --coverage",
     "test-ts": "NODE_ENV=test ../../node_modules/.bin/mocha --recursive \"src/**/*.test.ts\"",
     "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
     "prepublishOnly": "npm run lint && npm run clean-build && npm test",
-    "coverage-coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "travis-coverage": "npm run generate-code-coverage && npm run coverage-coveralls",
-    "test-spec": "mocha --recursive \"dist/**/*.spec.js\"",
-    "test-unit": "mocha --recursive \"dist/**/*.test.js\"",
     "test": "jest"
   },
   "repository": {

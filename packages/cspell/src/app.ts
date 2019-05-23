@@ -233,6 +233,5 @@ function formatIssue(template: string, issue: App.Issue) {
         .replace(/\$\{uri\}/, uri)
         .replace(/\$\{row\}/, row.toString())
         .replace(/\$\{col\}/, col.toString())
-        .replace(/\$\{text\}/, text)
-        ;
+        .replace(/\$\{text\}/, text);
 }
