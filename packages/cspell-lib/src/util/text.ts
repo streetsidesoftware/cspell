@@ -16,7 +16,7 @@ export interface TextDocumentOffset extends TextOffset {
     col: number;
 }
 
-const regExLines = /.*\r?\n/g;
+const regExLines = /.*(\r?\n|$)/g;
 // const regExIdentifiers = XRegExp('(?:\\p{L}|[0-9_\'])+', 'gi');
 const regExUpperSOrIng = XRegExp('(\\p{Lu}+\\\\?[\'’]?(?:s|ing|ies|es|ings|ed|ning))(?!\\p{Ll})', 'g');
 const regExSplitWords = XRegExp('(\\p{Ll})(\\p{Lu})', 'g');
@@ -74,9 +74,16 @@ export function extractLinesOfText(text: string): Sequence<TextOffset> {
  * Extract out whole words from a string of text.
  */
 export function extractWordsFromText(text: string): Sequence<TextOffset> {
+    return extractWordsFromTextOffset(textOffset(text));
+}
+
+/**
+ * Extract out whole words from a string of text.
+ */
+export function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffset> {
     const reg = XRegExp(regExWords);
     const reg2 = XRegExp(regExWords);
-    return matchStringToTextOffset(reg, text)
+    return matchToTextOffset(reg, text)
         // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
         .map(({ text, offset }) => ({
             text: XRegExp.replace(text, regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)),
@@ -87,7 +94,11 @@ export function extractWordsFromText(text: string): Sequence<TextOffset> {
 }
 
 export function extractWordsFromCode(text: string): Sequence<TextOffset> {
-    return extractWordsFromText(text)
+    return extractWordsFromCodeTextOffset(textOffset(text));
+}
+
+export function extractWordsFromCodeTextOffset(textOffset: TextOffset): Sequence<TextOffset> {
+    return extractWordsFromTextOffset(textOffset)
         .concatMap(splitCamelCaseWordWithOffset);
 }
 
@@ -143,6 +154,10 @@ export function matchCase(example: string, word: string): string {
     }
 
     return word;
+}
+
+export function textOffset(text: string, offset: number = 0): TextOffset {
+    return { text, offset };
 }
 
 interface OffsetMap {

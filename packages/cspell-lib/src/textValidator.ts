@@ -64,8 +64,9 @@ export function validateText(
         return !setOfOkWords.has(wo.text);
     };
 
-    return Text.extractWordsFromCode(text)
+    return Text.extractLinesOfText(text)
         .concatMap(mapWordsAgainstRanges(includeRanges))
+        .concatMap(Text.extractWordsFromCodeTextOffset)
         .filter(filterAlreadyChecked)
         .map(wo => ({...wo, isFlagged: setOfFlagWords.has(wo.text) }))
         .filter(rememberFilter(wo => wo.isFlagged || wo.text.length >= minWordLength ))

@@ -54,8 +54,8 @@ describe('Validate textValidator functions', () => {
     test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
         const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
-        const result = validateText(text, dictEmpty, { allowCompoundWords: true });
-        const errors = result.map(wo => wo.text).toArray();
+        const result = validateText(text, dictEmpty, { allowCompoundWords: true }).toArray();
+        const errors = result.map(wo => wo.text);
         expect(errors).to.deep.equal(['have', 'Published', 'multiple', 'Fixes', 'Problems']);
     });
 
