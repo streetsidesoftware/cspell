@@ -170,19 +170,22 @@ describe('Util Text', () => {
             '',
         ];
         const sampleText = parts.join('\n');
-        const i = Text.extractLinesOfText(sampleText);
-        const r = [
-            i.next().value.text,
-            i.next().value.text,
-            i.next().value.text,
-            i.next().value.text,
-        ];
+        const r = Text.extractLinesOfText(sampleText).map(a => a.text).toArray();
         expect(r.join('')).to.be.equal(parts.join('\n'));
         const lines = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
-        expect(lines.length).to.be.equal(64);
+        expect(lines.length).to.be.equal(sampleCode.split('\n').length);
     });
 
-    test('tests extractLinesOfTextRx', () => {
+    test('tests breaking up text into lines (single line)', () => {
+        const parts = ['There is only one line.'];
+        const sampleText = parts.join('\n');
+        const r = Text.extractLinesOfText(sampleText).map(a => a.text).toArray();
+        const rText = r.join('');
+        expect(rText).to.be.equal(parts.join('\n'));
+        expect(rText).to.be.equal(sampleText);
+    });
+
+    test('tests extractLinesOfText', () => {
         const linesA = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
         const linesB = Text.extractLinesOfText(sampleCode)
             .map(m => m.text)
