@@ -25,10 +25,9 @@
     "watch": "tsc -p . -w",
     "clean": "rimraf lib",
     "clean-build": "npm run clean && npm run build",
-    "coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
-    "test-ts": "NODE_ENV=test mocha --require ts-node/register --recursive --bail \"src/**/*.test.ts\"",
-    "test-watch": "../../node_modules/.bin/mocha --require ts-node/register --watch --recursive \"src/**/*.test.ts\"",
-    "test": "mocha --recursive ./lib/**/*.test.js"
+    "coverage": "jest --coverage",
+    "test-watch": "../../node_modules/.bin/jest --watch",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -62,6 +61,6 @@
     "micromatch": "^4.0.2"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.6"
+    "@types/jest": "^24.0.13"
   }
 }

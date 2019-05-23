@@ -3,10 +3,13 @@ import { expect } from 'chai';
 
 describe('Validate GlobMatcher', () => {
     tests().forEach(([patterns, root, filename, expected, description], index) => {
-        it(`test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}"`, () => {
-            const matcher = new GlobMatcher(patterns, root);
-            expect(matcher.match(filename)).to.be.eq(expected);
-        });
+        test(
+            `test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}"`,
+            () => {
+                const matcher = new GlobMatcher(patterns, root);
+                expect(matcher.match(filename)).to.be.eq(expected);
+            }
+        );
     });
 });
 
@@ -26,15 +29,21 @@ describe('Tests .gitignore file contents', () => {
     const matcher = new GlobMatcher(pattern, root);
 
     function t(filename: string, expected: boolean, comment: string) {
-        it(`Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `, () => {
-            expect(matcher.match(filename)).to.be.eq(expected);
-        });
+        test(
+            `Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `,
+            () => {
+                expect(matcher.match(filename)).to.be.eq(expected);
+            }
+        );
     }
 
     function tt(filename: string, expected: GlobMatch, comment: string) {
-        it(`Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `, () => {
-            expect(matcher.matchEx(filename)).to.be.deep.eq(expected);
-        });
+        test(
+            `Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `,
+            () => {
+                expect(matcher.matchEx(filename)).to.be.deep.eq(expected);
+            }
+        );
     }
 
     t(root + 'src/code.ts', false, 'Ensure that .ts files are allowed');
