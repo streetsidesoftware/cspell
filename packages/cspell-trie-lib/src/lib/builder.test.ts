@@ -1,18 +1,18 @@
 import { expect } from 'chai';
 import { DawgTrieBuilder } from './builder';
 import { has, findNode, walk, iteratorTrieWords } from './util';
-import { readTrie } from './dictionaries.test';
+import { readTrie } from './dictionaries.test.helper';
 import { genSequence } from 'gensequence';
 
 describe('Validate the builder', () => {
-    it('test small set of words', () => {
+    test('test small set of words', () => {
         const words = ['run', 'runs', 'ran', 'running', 'runner'].sort();
         const builder = new DawgTrieBuilder();
         words.forEach(w => builder.addWord(w));
         expect([...walk(builder.trie).filter(r => !!r.node.f).map(r => r.text)].sort()).to.be.deep.equal(words);
     });
 
-    it('test adding a word', () => {
+    test('test adding a word', () => {
         const builder = new DawgTrieBuilder();
         builder.addWord('hello');
         expect(has(builder.trie, 'hello')).to.be.true;
@@ -30,15 +30,15 @@ describe('Validate the builder', () => {
         expect([...iteratorTrieWords(builder.trie)].sort()).to.be.deep.equal(sampleWords().sort());
     });
 
-    it('Test reading in a large dictionary', async function() {
-        this.timeout(50000);
+    test('Test reading in a large dictionary', async () => {
+        jest.setTimeout(50000);
         const trie = await readTrie('cspell-dict-en_us');
         const builder = new DawgTrieBuilder();
         genSequence(trie.words()).take(5000).forEach(w => builder.addWord(w));
         expect(has(builder.trie, 'acquired')).to.be.true;
     });
 
-    it('test tree view', () => {
+    test('test tree view', () => {
         const builder = new DawgTrieBuilder();
         builder.addWord('hello');
         builder.addWord('help');

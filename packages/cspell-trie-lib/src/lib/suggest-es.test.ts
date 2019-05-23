@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import { readTrie } from './dictionaries.test';
+import { readTrie } from './dictionaries.test.helper';
 
 function getTrie() {
     return readTrie('cspell-dict-es-es');
 }
 
 describe('Validate Spanish Suggestions', () => {
-    it('Tests suggestions', async function() {
-        this.timeout(5000);
+    test('Tests suggestions', async () => {
+        jest.setTimeout(5000);
         const trie = await getTrie();
         // cspell:ignore Carmjen
         const results = trie.suggestWithCost('carmjen', 10);

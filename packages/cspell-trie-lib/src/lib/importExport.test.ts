@@ -1,8 +1,8 @@
 import {expect} from 'chai';
 import * as Trie from '.';
 
-describe('Import/Export', function() {
-    it('tests serialize / deserialize', () => {
+describe('Import/Export', () => {
+    test('tests serialize / deserialize', () => {
         const trie = Trie.createTriFromList(sampleWords);
         const data = [...Trie.serializeTrie(trie, 10)];
         const root = Trie.importTrie(data);

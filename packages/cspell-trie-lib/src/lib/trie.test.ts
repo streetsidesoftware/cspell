@@ -4,30 +4,30 @@ import {isWordTerminationNode, orderTrie} from './util';
 import {suggestionCollector, CompoundWordsMethod} from './suggest';
 
 describe('Validate Trie Class', () => {
-    it('Tests creating a Trie', () => {
+    test('Tests creating a Trie', () => {
         const trie = Trie.create(sampleWords);
         expect(trie).to.be.instanceof(Trie);
     });
 
-    it('Tests getting words from a Trie', () => {
+    test('Tests getting words from a Trie', () => {
         const trie = Trie.create(sampleWords);
         expect([...trie.words()]).to.be.deep.equal(sampleWords.sort());
     });
 
-    it('Tests seeing if a Trie contains a word', () => {
+    test('Tests seeing if a Trie contains a word', () => {
         const trie = Trie.create(sampleWords);
         expect(trie.has('lift')).to.be.true;
         expect(trie.has('fork-lift')).to.be.false;
     });
 
-    it('Tests complete', () => {
+    test('Tests complete', () => {
         const trie = Trie.create(sampleWords);
         expect([...trie.completeWord('lift')]).to.be.deep.equal(sampleWords.filter(w => w.slice(0, 4) === 'lift').sort());
         expect([...trie.completeWord('life')]).to.be.deep.equal([]);
         expect([...trie.completeWord('lifting')]).to.be.deep.equal(['lifting']);
     });
 
-    it('Tests insert', () => {
+    test('Tests insert', () => {
         const trie1 = Trie.create(sampleWords);
         const trie2 = Trie.create([]);
         sampleWords.forEach(word => trie2.insert(word));
@@ -38,27 +38,27 @@ describe('Validate Trie Class', () => {
         expect(words2).to.be.deep.equal(words1);
     });
 
-    it('tests suggestions', () => {
+    test('tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         const suggestions = trie.suggest('wall', 10);
         expect(suggestions).to.contain('walk');
     });
 
-    it('tests suggestions with compounds', () => {
+    test('tests suggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyostalkliftswak
         const suggestions = trie.suggest('joyostalkliftswak', 10, CompoundWordsMethod.SEPARATE_WORDS);
         expect(suggestions).to.contain('joyous talk lifts walk');
     });
 
-    it('tests genSuggestions', () => {
+    test('tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('wall', 10);
         trie.genSuggestions(collector);
         expect(collector.suggestions.map(a => a.word)).to.contain('walk');
     });
 
-    it('Tests iterate', () => {
+    test('Tests iterate', () => {
         const trie = Trie.create(sampleWords);
         const words = [...trie.iterate()]
             .filter(r => isWordTerminationNode(r.node))
@@ -66,13 +66,13 @@ describe('Validate Trie Class', () => {
         expect(words).to.be.deep.equal(sampleWords.sort());
     });
 
-    it('Test where only part of the word is correct', () => {
+    test('Test where only part of the word is correct', () => {
         const trie = Trie.create(sampleWords);
         expect(trie.has('talking')).to.be.true;
         expect(trie.has('talkings')).to.be.false;
     });
 
-    it('Test compound words', () => {
+    test('Test compound words', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
         expect(trie.has('talkinglift', true)).to.be.true;

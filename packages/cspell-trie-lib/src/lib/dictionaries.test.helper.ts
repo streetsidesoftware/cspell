@@ -1,5 +1,5 @@
 import {Trie} from './trie';
-import {readTrieFile} from './reader.test';
+import {readTrieFile} from './reader.test.helper';
 
 const tries: Map<string, Promise<Trie>> = new Map();
 

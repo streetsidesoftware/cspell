@@ -3,7 +3,7 @@ import * as Sug from './suggest';
 import {Trie} from './trie';
 
 describe('Validate Suggest', () => {
-    it('Tests suggestions', () => {
+    test('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, 'talks');
         // console.log(JSON.stringify(results));
@@ -15,7 +15,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['talks', 'talk', 'walks', 'talked', 'talker', 'walk']);
     });
 
-    it('Tests suggestions', () => {
+    test('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore tallk
         const results = Sug.suggest(trie.root, 'tallk');
@@ -28,7 +28,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['talk', 'talks', 'walk']);
     });
 
-    it('Tests suggestions', () => {
+    test('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore jernals
         const results = Sug.suggest(trie.root, 'jernals');
@@ -37,7 +37,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['journals', 'journal']);
     });
 
-    it('Tests suggestions for `juornals` (reduced cost for swap)', () => {
+    test('Tests suggestions for `juornals` (reduced cost for swap)', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore juornals
         const results = Sug.suggest(trie.root, 'juornals');
@@ -53,7 +53,7 @@ describe('Validate Suggest', () => {
         ]);
     });
 
-    it('Tests suggestions', () => {
+    test('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfull
         const results = Sug.suggest(trie.root, 'joyfull');
@@ -62,7 +62,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
     });
 
-    it('Tests compound suggestions', () => {
+    test('Tests compound suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore walkingtalkingjoy
         const results = Sug.suggest(trie.root, 'walkingtalkingjoy', 1, Sug.CompoundWordsMethod.SEPARATE_WORDS);
@@ -71,7 +71,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['walking talking joy', ]);
     });
 
-    it('Tests suggestions', () => {
+    test('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, '');
         // console.log(JSON.stringify(results));
@@ -79,7 +79,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal([]);
     });
 
-    it('Tests suggestions with low max num', () => {
+    test('Tests suggestions with low max num', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfull
         const results = Sug.suggest(trie.root, 'joyfull', 3);
@@ -88,7 +88,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller']);
     });
 
-    it('Tests genSuggestions', () => {
+    test('Tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
         collector.collect(
@@ -100,7 +100,7 @@ describe('Validate Suggest', () => {
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
-    it('Tests genSuggestions wanting 0', () => {
+    test('Tests genSuggestions wanting 0', () => {
         const trie = Trie.create(sampleWords);
         const collector = Sug.suggestionCollector('joyfull', 0);
         collector.collect(
@@ -110,7 +110,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.be.length(0);
     });
 
-    it('Tests genSuggestions wanting -10', () => {
+    test('Tests genSuggestions wanting -10', () => {
         const trie = Trie.create(sampleWords);
         const collector = Sug.suggestionCollector('joyfull', -10);
         collector.collect(
@@ -120,7 +120,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.be.length(0);
     });
 
-    it('Tests genSuggestions as array', () => {
+    test('Tests genSuggestions as array', () => {
         const trie = Trie.create(sampleWords);
         const sugs = [...Sug.genSuggestions(trie.root, 'joyfull')];
         const sr = sugs.sort(Sug.compSuggestionResults);
@@ -128,7 +128,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
     });
 
-    it('Tests genSuggestions with compounds', () => {
+    test('Tests genSuggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfullwalk
         const collector = Sug.suggestionCollector('joyfullwalk', 3);
@@ -140,7 +140,7 @@ describe('Validate Suggest', () => {
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
-    it('Tests genSuggestions with compounds', () => {
+    test('Tests genSuggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfullwalk joyfulwalk joyfulwalks joyfullywalk, joyfullywalks
         const collector = Sug.suggestionCollector('joyfullwalk', 3);
@@ -152,14 +152,14 @@ describe('Validate Suggest', () => {
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
-    it('Tests the collector with filter', () => {
+    test('Tests the collector with filter', () => {
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
         collector.add({ word: 'joyfully', cost: 100 })
             .add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions).to.be.length(1);
     });
 
-    it('Tests the collector with duplicate words of different costs', () => {
+    test('Tests the collector with duplicate words of different costs', () => {
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
         collector.add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions.length).to.be.equal(1);
@@ -174,7 +174,7 @@ describe('Validate Suggest', () => {
         expect(collector.suggestions[0].cost).to.be.equal(75);
     });
 
-    it('Test that accents are closer', () => {
+    test('Test that accents are closer', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore wålk
         const collector = Sug.suggestionCollector('wålk', 3);
@@ -185,7 +185,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['walk', 'walks', 'talk']);
     });
 
-    it('Test that accents are closer', () => {
+    test('Test that accents are closer', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore wâlkéd
         const collector = Sug.suggestionCollector('wâlkéd', 3);

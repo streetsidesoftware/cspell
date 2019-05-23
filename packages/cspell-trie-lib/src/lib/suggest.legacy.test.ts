@@ -8,7 +8,7 @@ import * as Sug from './suggest';
 import {Trie} from './trie';
 
 describe('Validate Suggest', () => {
-    it('Tests suggestions against Legacy Suggestion generator', () => {
+    test('Tests suggestions against Legacy Suggestion generator', () => {
         const trie = Trie.create(sampleWords);
 
         function testWord(word: string) {

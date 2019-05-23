@@ -4,7 +4,7 @@ import {
     CompoundWordsMethod,
     suggestionCollector,
 } from './suggest';
-import { readTrie } from './dictionaries.test';
+import { readTrie } from './dictionaries.test.helper';
 
 
 function getTrie() {
@@ -14,10 +14,10 @@ function getTrie() {
 
 const timeout = 10000;
 
-describe('Validate English Suggestions', function() {
+describe('Validate English Suggestions', () => {
 
-    it('Tests suggestions', async function() {
-        this.timeout(timeout);
+    test('Tests suggestions', async () => {
+        jest.setTimeout(timeout);
         const trie = await getTrie();
         const collector = suggestionCollector('joyful', 8, undefined, 1);
         collector.collect(genCompoundableSuggestions(
@@ -31,8 +31,8 @@ describe('Validate English Suggestions', function() {
         expect(suggestions[0]).to.be.equal('joyful');
     });
 
-    it('Tests suggestions', async function() {
-        this.timeout(timeout);
+    test('Tests suggestions', async () => {
+        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore joyfull
         const collector = suggestionCollector('joyfull', 8);
@@ -49,8 +49,8 @@ describe('Validate English Suggestions', function() {
         expect(suggestions).to.be.length(collector.maxNumSuggestions);
     });
 
-    it('Tests compound SEPARATE_WORDS suggestions', async function() {
-        this.timeout(timeout);
+    test('Tests compound SEPARATE_WORDS suggestions', async () => {
+        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore onetwothreefour
         const collector = suggestionCollector('onetwothreefour', 8, undefined, 3.3);
@@ -66,8 +66,8 @@ describe('Validate English Suggestions', function() {
         expect(suggestions).to.be.length(collector.maxNumSuggestions);
     });
 
-    it('Tests compound JOIN_WORDS suggestions', async function() {
-        this.timeout(timeout);
+    test('Tests compound JOIN_WORDS suggestions', async () => {
+        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore onetwothrefour
         const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
@@ -82,8 +82,8 @@ describe('Validate English Suggestions', function() {
         expect(suggestions).to.be.length(collector.maxNumSuggestions);
     });
 
-    it('Tests compound suggestions', async function() {
-        this.timeout(timeout);
+    test('Tests compound suggestions', async () => {
+        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore onetwothrefour
         const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
@@ -99,8 +99,8 @@ describe('Validate English Suggestions', function() {
     });
 
     // Takes a long time.
-    it('Tests long compound suggestions', async function() {
-        this.timeout(timeout * 2);
+    test('Tests long compound suggestions', async () => {
+        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore testscompundsuggestions
         const collector = suggestionCollector('testscompundsuggestions', 1, undefined, 3);

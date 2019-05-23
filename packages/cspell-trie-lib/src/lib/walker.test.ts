@@ -3,7 +3,7 @@ import {walker, YieldResult} from './walker';
 import {orderTrie, createTriFromList} from './util';
 
 describe('Validate Util Functions', () => {
-    it('Tests Walker', () => {
+    test('Tests Walker', () => {
         const root = createTriFromList(sampleWords);
         orderTrie(root);
         const i = walker(root);
