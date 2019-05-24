@@ -5,6 +5,9 @@ import {
     SuggestionCollector,
     suggestionCollector,
     SuggestionResult,
+    HasOptions,
+    hasOptionToSearchOption,
+    SearchOptions,
 } from './SpellingDictionary';
 import { genSequence } from 'gensequence';
 
@@ -14,6 +17,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     readonly wordsToFlag: Set<string>;
     readonly type = 'SpellingDictionaryCollection';
     readonly source: string;
+    readonly isDictionaryCaseSensitive: boolean;
 
     constructor(
         readonly dictionaries: SpellingDictionary[],
@@ -23,11 +27,12 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         this.dictionaries = this.dictionaries.filter(a => !!a.size);
         this.wordsToFlag = new Set(wordsToFlag.map(w => w.toLowerCase()));
         this.source = dictionaries.map(d => d.name).join(', ');
+        this.isDictionaryCaseSensitive = this.dictionaries.reduce((a, b) => a || b.isDictionaryCaseSensitive, false);
     }
 
-    public has(word: string, useCompounds?: boolean) {
-        word = word.toLowerCase();
-        return !this.wordsToFlag.has(word) && isWordInAnyDictionary(this.dictionaries, word, useCompounds);
+    public has(word: string, hasOptions?: HasOptions) {
+        const options = hasOptionToSearchOption(hasOptions);
+        return !this.wordsToFlag.has(word.toLowerCase()) && isWordInAnyDictionary(this.dictionaries, word, options);
     }
 
     public suggest(
@@ -39,7 +44,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         word = word.toLowerCase();
         compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
         const collector = this.genSuggestions(
-            suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word), numChanges ),
+            suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word.toLowerCase()), numChanges ),
             compoundMethod,
         );
         return collector.suggestions;
@@ -60,9 +65,9 @@ export function createCollection(dictionaries: SpellingDictionary[], name: strin
     return new SpellingDictionaryCollection(dictionaries, name, wordsToFlag);
 }
 
-export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string, useCompounds?: boolean) {
+export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string, options: SearchOptions) {
     return !!genSequence(dicts)
-        .first(dict => dict.has(word, useCompounds));
+        .first(dict => dict.has(word, options));
 }
 
 export function createCollectionP(

@@ -29,6 +29,8 @@ const regExAllLower = XRegExp('^\\p{Ll}+$');
 
 const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
 
+const regExAccents = XRegExp('\\p{M}', 'g');
+
 export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
     return splitCamelCaseWord(wo.text)
         .map(scanMap<string, TextOffset>(
@@ -207,3 +209,6 @@ export function calculateTextDocumentOffsets(uri: string, doc: string, wordOffse
         });
 }
 
+export function removeAccents(text: string) {
+    return text.normalize('NFKD').replace(regExAccents, '');
+}

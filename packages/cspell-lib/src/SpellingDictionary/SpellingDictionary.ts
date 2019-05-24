@@ -5,6 +5,8 @@ import { createMapper } from '../util/repMap';
 import { ReplaceMap } from '../Settings';
 import { compareBy } from '../util/Comparable';
 import { uniqueFn } from '../util/util';
+import { ucFirst, removeAccents, isUpperCase } from '../util/text';
+import { memorizer } from '../util/Memorizer';
 
 export {
     CompoundWordsMethod,
@@ -17,16 +19,28 @@ export {
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
+export const PREFIX_NO_CASE = '>';
+
+export interface SearchOptions {
+    useCompounds?: boolean | number;
+    ignoreCase?: boolean;
+}
+
+export type HasOptions = boolean | SearchOptions;
+
 export interface SpellingDictionary {
     readonly name: string;
     readonly type: string;
     readonly source: string;
-    has(word: string, useCompounds?: boolean): boolean;
+    has(word: string, useCompounds: boolean): boolean;
+    has(word: string, options: HasOptions): boolean;
+    has(word: string, options?: HasOptions): boolean;
     suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
     mapWord(word: string): string;
     readonly size: number;
     readonly options: SpellingDictionaryOptions;
+    readonly isDictionaryCaseSensitive: boolean;
 }
 
 export interface SpellingDictionaryOptions {
@@ -37,92 +51,52 @@ export interface SpellingDictionaryOptions {
 
 const defaultSuggestions = 10;
 
-export class SpellingDictionaryFromSet implements SpellingDictionary {
-    private _trie: Trie;
-    readonly mapWord: (word: string) => string;
-    readonly type = 'SpellingDictionaryFromSet';
-    readonly isCaseSensitive: boolean;
-
-    constructor(
-        readonly words: Set<string>,
-        readonly name: string,
-        readonly options: SpellingDictionaryOptions = {},
-        readonly source = 'Set of words',
-    ) {
-        this.mapWord = createMapper(options.repMap || []);
-        this.isCaseSensitive = options.caseSensitive || false;
-    }
-
-    get trie() {
-        this._trie = this._trie || Trie.create(this.words);
-        return this._trie;
-    }
-
-    public has(word: string, useCompounds?: boolean) {
-        useCompounds = useCompounds === undefined ? this.options.useCompounds : useCompounds;
-        useCompounds = useCompounds || false;
-        const mWord = this.mapWord(word);
-        return this.words.has(mWord)
-            || this.words.has(mWord.toLowerCase())
-            || (useCompounds && this.trie.has(mWord, true))
-            || false;
-    }
-
-    public suggest(
-        word: string,
-        numSuggestions?: number,
-        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS,
-        numChanges?: number
-    ): SuggestionResult[] {
-        word = this.mapWord(word);
-        return this.trie.suggestWithCost(word, numSuggestions || defaultSuggestions, compoundMethod, numChanges);
-    }
-
-    public genSuggestions(
-        collector: SuggestionCollector,
-        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
-    ): void {
-        this.trie.genSuggestions(collector, compoundMethod);
-    }
-
-    public get size() {
-        return this.words.size;
-    }
-}
-
 export async function createSpellingDictionary(
     wordList: string[] | IterableLike<string>,
     name: string,
     source: string,
     options?: SpellingDictionaryOptions
 ): Promise<SpellingDictionary> {
-    const mapCase: (v: string) => string = options && options.caseSensitive ? a => a : a => a.toLowerCase();
-    const words = new Set(genSequence(wordList)
+    const { caseSensitive = false } = options || {};
+    const mapCase: (v: string) => string[] = !caseSensitive
+        ? a => [ a, a.toLowerCase(), removeAccents(a), removeAccents(a.toLowerCase()) ]
+        : a => {
+            const lc = a.toLowerCase();
+            return (a === lc
+                ? [a, PREFIX_NO_CASE + removeAccents(a)]
+                : [a, PREFIX_NO_CASE + a.toLowerCase(), PREFIX_NO_CASE + removeAccents(a.toLowerCase())]
+            );
+        };
+    const baseWords = genSequence(wordList)
         .filter(word => typeof word === 'string')
-        .map(mapCase)
-        .filter(word => !!word)
-    );
-    return new SpellingDictionaryFromSet(words, name, options, source);
+        .map(word => word.trim())
+        .filter(w => !!w)
+        .concatMap(mapCase);
+    const words = [...new Set(baseWords)];
+    const trie = Trie.create(words);
+    return new SpellingDictionaryFromTrie(trie, name, options, source, words.length);
 }
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
-    static readonly unknownWordsLimit = 1000;
+    static readonly cachedWordsLimit = 50000;
     private _size: number = 0;
     readonly knownWords = new Set<string>();
     readonly unknownWords = new Set<string>();
     readonly mapWord: (word: string) => string;
     readonly type = 'SpellingDictionaryFromTrie';
-    readonly isCaseSensitive: boolean;
+    readonly isDictionaryCaseSensitive: boolean;
 
     constructor(
         readonly trie: Trie,
         readonly name: string,
         readonly options: SpellingDictionaryOptions = {},
         readonly source = 'from trie',
+        size?: number,
     ) {
         trie.root.f = 0;
         this.mapWord = createMapper(options.repMap || []);
-        this.isCaseSensitive = options.caseSensitive || false;
+        this.isDictionaryCaseSensitive = options.caseSensitive || false;
+        this._size = size || 0;
     }
 
     public get size() {
@@ -141,33 +115,30 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return this._size;
     }
 
-    public has(word: string, useCompounds?: boolean) {
-        return this._has(word.toLowerCase(), useCompounds)
-            || (this.isCaseSensitive &&  this._has(word, useCompounds));
-    }
-
-    private _has(word: string, useCompounds?: boolean) {
-        useCompounds = useCompounds === undefined ? this.options.useCompounds : useCompounds;
-        useCompounds = useCompounds || false;
-        word = this.mapWord(word);
-        const wordX = word + '|' + useCompounds;
-        if (this.knownWords.has(wordX)) return true;
-        if (this.unknownWords.has(wordX)) return false;
-
-        const r = this.trie.has(word, useCompounds);
-        // Cache the result.
-        if (r) {
-            this.knownWords.add(wordX);
-        } else {
-            // clear the unknown word list if it has grown too large.
-            if (this.unknownWords.size > SpellingDictionaryFromTrie.unknownWordsLimit) {
-                this.unknownWords.clear();
+    public has(word: string, hasOptions?: HasOptions) {
+        const searchOptions = hasOptionToSearchOption(hasOptions);
+        const useCompounds = searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
+        const { ignoreCase = false } = searchOptions;
+        const mWord = this.mapWord(word);
+        const forms = wordForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
+        for (const w of forms) {
+            if (this._has(w, false, ignoreCase)) {
+                return true;
             }
-            this.unknownWords.add(wordX);
         }
-
-        return r;
+        if (useCompounds) {
+            for (const w of forms) {
+                if (this._has(w, true, ignoreCase)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
+    private _has = memorizer(
+        (word: string, useCompounds: boolean, _ignoreCase: boolean) => this.trie.has(word, useCompounds),
+        SpellingDictionaryFromTrie.cachedWordsLimit
+    );
 
     public suggest(
         word: string,
@@ -199,6 +170,25 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 }
 
+function wordForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
+    word = word.normalize('NFC');
+    const wordLc = word.toLowerCase();
+
+    if (!isDictionaryCaseSensitive) {
+        return [ word, wordLc ];
+    }
+
+    const forms = [ word, wordLc ];
+
+    if (ignoreCase) {
+        forms.push(PREFIX_NO_CASE + removeAccents(wordLc));
+    }
+    if (isUpperCase(word)) {
+        forms.push(ucFirst(wordLc));
+    }
+    return forms;
+}
+
 export async function createSpellingDictionaryTrie(
     data: IterableLike<string>,
     name: string,
@@ -226,4 +216,12 @@ function mergeSuggestions(maxNum: number, ...collections: SuggestionResult[][]):
     const sugs = sugsByWord.filter(uniqueFn(a => a.word)).sort(compareBy('cost', 'word'));
     sugs.length = Math.min(sugs.length, maxNum);
     return mergeSuggestions(maxNum, sugs, ...collections.slice(2));
+}
+
+export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
+    return !opt
+    ? {}
+    : typeof opt === 'object'
+    ? opt
+    : { useCompounds: opt };
 }
