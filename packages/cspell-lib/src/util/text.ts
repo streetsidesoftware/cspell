@@ -160,6 +160,13 @@ export function textOffset(text: string, offset: number = 0): TextOffset {
     return { text, offset };
 }
 
+export function extractText(textOffset: TextOffset, startPos: number, endPos: number) {
+    const { text, offset: orig } = textOffset;
+    const a = Math.max(startPos - orig, 0);
+    const b = Math.max(endPos - orig, 0);
+    return text.slice(a, b);
+}
+
 interface OffsetMap {
     offset: number;
 }

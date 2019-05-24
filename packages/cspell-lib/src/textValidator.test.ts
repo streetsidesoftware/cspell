@@ -54,9 +54,28 @@ describe('Validate textValidator functions', () => {
     test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
         const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
-        const result = validateText(text, dictEmpty, { allowCompoundWords: true }).toArray();
+        const result = validateText(text, dictEmpty, { }).toArray();
         const errors = result.map(wo => wo.text);
-        expect(errors).to.deep.equal(['have', 'Published', 'multiple', 'Fixes', 'Problems']);
+        expect(errors).to.deep.equal(['have', 'PUBLISHed', 'multiple', 'FIXes', 'PROBLEMs']);
+    });
+
+    test('tests case in ignore words', async () => {
+        const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
+        const text = 'We have PUBLISHed published multiple FIXesToThePROBLEMs';
+        const options = { caseSensitive: true, ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'] };
+        const result = validateText(text, dictEmpty, options).toArray();
+        const errors = result.map(wo => wo.text);
+        expect(errors).to.deep.equal(['have', 'published', 'multiple']);
+    });
+
+    test('tests case sensitive word list', async () => {
+        const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple'];
+        const dict = await createSpellingDictionary(wordList, 'empty', 'test', { caseSensitive: true });
+        const text = 'We have PUBLISHed published Multiple FIXesToThePROBLEMs';
+        const options = { allowCompoundWords: true };
+        const result = validateText(text, dict, options).toArray();
+        const errors = result.map(wo => wo.text);
+        expect(errors).to.deep.equal(['have', 'published']);
     });
 
     test('tests trailing s, ed, ing, etc.', async () => {

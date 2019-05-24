@@ -110,6 +110,9 @@ export interface BaseSetting {
     // True to enable compound word checking.
     allowCompoundWords?: boolean;
 
+    // Words must match case rules.
+    caseSensitive?: boolean;
+
     // Define additional available dictionaries
     dictionaryDefinitions?: DictionaryDefinition[];
 
@@ -242,6 +245,9 @@ export interface CSpellUserSettingsWithComments extends CSpellUserSettings {
 
     // Compound Word settings
     '// allowCompoundWords'?: string[];
+
+    // Case Sensitive setting
+    '// caseSensitive'?: string[];
 
     // Include other settings files.
     '// import'?: string[];

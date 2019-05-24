@@ -192,6 +192,14 @@ describe('Util Text', () => {
             .toArray();
         expect(linesB).to.be.deep.equal(linesA);
     });
+
+    test('test extractText', () => {
+        const line = Text.textOffset('This is a line of text to be processed.');
+        const words = Text.extractWordsFromTextOffset(line);
+        const results = words.map(wo => Text.extractText(line, wo.offset, wo.offset + wo.text.length)).toArray();
+        const expected = words.map(wo => wo.text).toArray();
+        expect(results).to.deep.equal(expected);
+    });
 });
 
 describe('Test the text matching functions', () => {
