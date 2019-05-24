@@ -15,8 +15,13 @@ export function loadDictionaries(dictIds: DictionaryId[], defs: DictionaryDefini
 }
 
 export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
-    const { words = [], userWords = [], dictionaries = [], dictionaryDefinitions = [], flagWords = [] } = settings;
+    const { words = [], userWords = [], dictionaries = [], dictionaryDefinitions = [], flagWords = [], caseSensitive = false } = settings;
     const spellDictionaries = loadDictionaries(dictionaries, dictionaryDefinitions);
-    const settingsDictionary = Promise.resolve(createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings'));
+    const settingsDictionary = createSpellingDictionary(
+        words.concat(userWords),
+        'user_words',
+        'From Settings',
+        { caseSensitive }
+    );
     return createCollectionP([...spellDictionaries, settingsDictionary], 'dictionary collection', flagWords);
 }

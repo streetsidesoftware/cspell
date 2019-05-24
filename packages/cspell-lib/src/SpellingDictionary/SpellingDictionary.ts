@@ -58,23 +58,37 @@ export async function createSpellingDictionary(
     options?: SpellingDictionaryOptions
 ): Promise<SpellingDictionary> {
     const { caseSensitive = false } = options || {};
-    const mapCase: (v: string) => string[] = !caseSensitive
-        ? a => [ a, a.toLowerCase(), removeAccents(a), removeAccents(a.toLowerCase()) ]
+    const mapCase: (v: string) => { w: string, p: boolean }[] = !caseSensitive
+        ? a => [
+            { w: a, p: false },
+            { w: a.toLowerCase(), p: false },
+            { w: removeAccents(a), p: false },
+            { w: removeAccents(a.toLowerCase()), p: false },
+        ]
         : a => {
             const lc = a.toLowerCase();
-            return (a === lc
-                ? [a, PREFIX_NO_CASE + removeAccents(a)]
-                : [a, PREFIX_NO_CASE + a.toLowerCase(), PREFIX_NO_CASE + removeAccents(a.toLowerCase())]
-            );
+            const na = removeAccents(a);
+            const lc_na = removeAccents(lc);
+            return [
+                { w: a, p: false },
+                { w: na, p: true },
+                { w: lc, p: true },
+                { w: lc_na, p: true },
+            ];
         };
-    const baseWords = genSequence(wordList)
+    const words = genSequence(wordList)
         .filter(word => typeof word === 'string')
         .map(word => word.trim())
         .filter(w => !!w)
-        .concatMap(mapCase);
-    const words = [...new Set(baseWords)];
+        .concatMap(mapCase)
+        .reduce((s, w) => {
+            if (!s.has(w.w)) {
+                s.add(w.p ? PREFIX_NO_CASE + w.w : w.w);
+            }
+            return s;
+        }, new Set<string>());
     const trie = Trie.create(words);
-    return new SpellingDictionaryFromTrie(trie, name, options, source, words.length);
+    return new SpellingDictionaryFromTrie(trie, name, options, source, words.size);
 }
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
@@ -152,7 +166,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const numSugs = numSuggestions || defaultSuggestions;
         const suggestions = this.trie.suggestWithCost(word, numSugs, compoundMethod, numChanges);
         if (word === wordLc) {
-            return suggestions
+            return suggestions;
         }
         return mergeSuggestions(
             numSugs,
