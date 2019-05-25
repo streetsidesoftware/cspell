@@ -1,12 +1,13 @@
 import { genSequence } from 'gensequence';
 import { IterableLike } from '../util/IterableLike';
-import { Trie, importTrie, SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
+import { Trie, importTrie, SuggestionCollector, suggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
 import { createMapper } from '../util/repMap';
-import { ReplaceMap } from '../Settings';
-import { compareBy } from '../util/Comparable';
-import { uniqueFn } from '../util/util';
+import { ReplaceMap, getDefaultSettings } from '../Settings';
 import { ucFirst, removeAccents, isUpperCase } from '../util/text';
 import { memorizer } from '../util/Memorizer';
+import { FunctionArgs } from '../util/types';
+
+// cspell:word café
 
 export {
     CompoundWordsMethod,
@@ -26,6 +27,13 @@ export interface SearchOptions {
     ignoreCase?: boolean;
 }
 
+export interface SuggestOptions {
+    compoundMethod?: CompoundWordsMethod;
+    numSuggestions?: number;
+    numChanges?: number;
+    ignoreCase?: boolean;
+}
+
 export type HasOptions = boolean | SearchOptions;
 
 export interface SpellingDictionary {
@@ -36,12 +44,16 @@ export interface SpellingDictionary {
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
     suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
-    genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
+    suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
+    genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
     mapWord(word: string): string;
     readonly size: number;
     readonly options: SpellingDictionaryOptions;
     readonly isDictionaryCaseSensitive: boolean;
 }
+
+export type SuggestArgs = FunctionArgs<SpellingDictionary['suggest']>
+    | FunctionArgs<(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number) => SuggestionResult[]>;
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
@@ -49,7 +61,7 @@ export interface SpellingDictionaryOptions {
     caseSensitive?: boolean;
 }
 
-const defaultSuggestions = 10;
+export const defaultNumSuggestions = 10;
 
 export async function createSpellingDictionary(
     wordList: string[] | IterableLike<string>,
@@ -58,37 +70,14 @@ export async function createSpellingDictionary(
     options?: SpellingDictionaryOptions
 ): Promise<SpellingDictionary> {
     const { caseSensitive = false } = options || {};
-    const mapCase: (v: string) => { w: string, p: boolean }[] = !caseSensitive
-        ? a => [
-            { w: a, p: false },
-            { w: a.toLowerCase(), p: false },
-            { w: removeAccents(a), p: false },
-            { w: removeAccents(a.toLowerCase()), p: false },
-        ]
-        : a => {
-            const lc = a.toLowerCase();
-            const na = removeAccents(a);
-            const lc_na = removeAccents(lc);
-            return [
-                { w: a, p: false },
-                { w: na, p: true },
-                { w: lc, p: true },
-                { w: lc_na, p: true },
-            ];
-        };
     const words = genSequence(wordList)
         .filter(word => typeof word === 'string')
         .map(word => word.trim())
         .filter(w => !!w)
-        .concatMap(mapCase)
-        .reduce((s, w) => {
-            if (!s.has(w.w)) {
-                s.add(w.p ? PREFIX_NO_CASE + w.w : w.w);
-            }
-            return s;
-        }, new Set<string>());
+        .concatMap(wordDictionaryFormsCollector(caseSensitive))
+        .toArray();
     const trie = Trie.create(words);
-    return new SpellingDictionaryFromTrie(trie, name, options, source, words.size);
+    return new SpellingDictionaryFromTrie(trie, name, options, source, words.length);
 }
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
@@ -132,9 +121,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     public has(word: string, hasOptions?: HasOptions) {
         const searchOptions = hasOptionToSearchOption(hasOptions);
         const useCompounds = searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
-        const { ignoreCase = false } = searchOptions;
+        const { ignoreCase = true } = searchOptions;
         const mWord = this.mapWord(word);
-        const forms = wordForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
+        const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
         for (const w of forms) {
             if (this._has(w, false, ignoreCase)) {
                 return true;
@@ -154,53 +143,126 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         SpellingDictionaryFromTrie.cachedWordsLimit
     );
 
-    public suggest(
-        word: string,
-        numSuggestions?: number,
-        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS,
-        numChanges?: number
-    ): SuggestionResult[] {
-        word = this.mapWord(word);
-        const wordLc = word.toLowerCase();
-        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        const numSugs = numSuggestions || defaultSuggestions;
-        const suggestions = this.trie.suggestWithCost(word, numSugs, compoundMethod, numChanges);
-        if (word === wordLc) {
-            return suggestions;
-        }
-        return mergeSuggestions(
-            numSugs,
-            suggestions,
-            this.trie.suggestWithCost(wordLc, numSugs, compoundMethod, numChanges)
-        );
+    public suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
+    public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
+    public suggest(...args: SuggestArgs): SuggestionResult[] {
+        const [word, options, compoundMethod, numChanges] = args;
+        const suggestOptions: SuggestOptions = (typeof options === 'object')
+            ? options
+            : {
+                numSuggestions: options,
+                compoundMethod,
+                numChanges
+            };
+        return this._suggest(word, suggestOptions);
+    }
+
+    private _suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[] {
+        const {
+            numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
+            numChanges,
+        } = suggestOptions;
+        const collector = suggestionCollector(word, numSuggestions, () => true, numChanges);
+        this.genSuggestions(collector, suggestOptions);
+        return collector.suggestions;
     }
 
     public genSuggestions(
         collector: SuggestionCollector,
-        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS
+        suggestOptions: SuggestOptions
     ): void {
-        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        this.trie.genSuggestions(collector, compoundMethod);
+        const {
+            compoundMethod = CompoundWordsMethod.SEPARATE_WORDS,
+            ignoreCase = true,
+        } = suggestOptions;
+        const _compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        wordSearchForms(collector.word, this.isDictionaryCaseSensitive, ignoreCase)
+            .forEach(w => this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod));
     }
 }
 
-function wordForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
+function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector {
+    return {
+        collect: collector.collect,
+        add: (suggestion: SuggestionResult) => collector.add(suggestion),
+        get suggestions() { return collector.suggestions; },
+        get maxCost() { return collector.maxCost; },
+        get word() { return word; },
+        get maxNumSuggestions() { return collector.maxNumSuggestions; },
+    };
+}
+
+function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
+    const wordNa = removeAccents(word);
+    const wordLcNa = removeAccents(wordLc);
+    const forms = new Set<string>();
+    function add(w: string, prefix: string = '') {
+        forms.add(prefix + w);
+    }
+
+    add(word);
+
+    // HOUSE -> House, house
+    if (isUpperCase(word)) {
+        add(wordLc);
+        add(ucFirst(wordLc));
+    }
 
     if (!isDictionaryCaseSensitive) {
-        return [ word, wordLc ];
+        add(wordLc);
+        add(wordNa);
+        add(wordLcNa);
+        return [ ...forms ];
     }
 
-    const forms = [ word, wordLc ];
+    // House -> house
+    if (word === ucFirst(wordLc)) {
+        add(wordLc);
+    }
 
+    // Café -> >café, >cafe
     if (ignoreCase) {
-        forms.push(PREFIX_NO_CASE + removeAccents(wordLc));
+        add(wordNa, PREFIX_NO_CASE);
+        add(wordLcNa, PREFIX_NO_CASE);
+        if (isUpperCase(word)) {
+            add(ucFirst(wordLcNa), PREFIX_NO_CASE);
+        }
     }
-    if (isUpperCase(word)) {
-        forms.push(ucFirst(wordLc));
+    return [ ...forms ];
+}
+
+interface DictionaryWordForm {
+    w: string;  // the word
+    p: string;  // prefix to add
+}
+function *wordDictionaryForms(word: string, isDictionaryCaseSensitive: boolean): IterableIterator<DictionaryWordForm> {
+    word = word.normalize('NFC');
+    const wordLc = word.toLowerCase();
+    const wordNa = removeAccents(word);
+    const wordLcNa = removeAccents(wordLc);
+    function wf(w: string, p: string = '') {
+        return { w, p };
     }
-    return forms;
+
+    const prefix = isDictionaryCaseSensitive ? PREFIX_NO_CASE : '';
+    yield wf(word);
+    yield wf(wordNa, prefix);
+    yield wf(wordLc, prefix);
+    yield wf(wordLcNa, prefix);
+}
+
+function wordDictionaryFormsCollector(isDictionaryCaseSensitive: boolean): (word: string) => Iterable<string> {
+    const knownWords = new Set<string>();
+
+    return (word: string) => {
+        return genSequence(wordDictionaryForms(word, isDictionaryCaseSensitive))
+        .filter(w => !knownWords.has(w.w))
+        .map(w => w.p + w.w)
+        .filter(w => !knownWords.has(w))
+        .map(w => (knownWords.add(w), w));
+    };
 }
 
 export async function createSpellingDictionaryTrie(
@@ -214,24 +276,6 @@ export async function createSpellingDictionaryTrie(
     return new SpellingDictionaryFromTrie(trie, name, options, source);
 }
 
-function mergeSuggestions(maxNum: number, ...collections: SuggestionResult[][]): SuggestionResult[] {
-    if (collections.length < 2) {
-        if (!collections.length) {
-            return [];
-        }
-        const sugs = collections[0];
-        sugs.length = Math.min(sugs.length, maxNum);
-        return sugs;
-    }
-
-    // Note would could make this a linear merge.
-    // Logic: make sure the word suggestions are unique (keep the cheapest) and sort by the cost.
-    const sugsByWord = collections[0].concat(collections[1]).sort(compareBy('word', 'cost'));
-    const sugs = sugsByWord.filter(uniqueFn(a => a.word)).sort(compareBy('cost', 'word'));
-    sugs.length = Math.min(sugs.length, maxNum);
-    return mergeSuggestions(maxNum, sugs, ...collections.slice(2));
-}
-
 export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
     return !opt
     ? {}
@@ -239,3 +283,9 @@ export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOpti
     ? opt
     : { useCompounds: opt };
 }
+
+export const __testMethods = {
+    wordSearchForms,
+    wordDictionaryForms,
+    wordDictionaryFormsCollector,
+};

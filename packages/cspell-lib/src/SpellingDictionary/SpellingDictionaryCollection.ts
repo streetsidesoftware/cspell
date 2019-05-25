@@ -8,8 +8,12 @@ import {
     HasOptions,
     hasOptionToSearchOption,
     SearchOptions,
+    SuggestOptions,
+    defaultNumSuggestions,
+    SuggestArgs,
 } from './SpellingDictionary';
 import { genSequence } from 'gensequence';
+import { getDefaultSettings } from '../Settings';
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
     readonly options: SpellingDictionaryOptions = {};
@@ -35,18 +39,33 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         return !this.wordsToFlag.has(word.toLowerCase()) && isWordInAnyDictionary(this.dictionaries, word, options);
     }
 
-    public suggest(
+    public suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
+    public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
+    public suggest(...args: SuggestArgs): SuggestionResult[] {
+        const [word, options, compoundMethod, numChanges] = args;
+        const suggestOptions: SuggestOptions = (typeof options === 'object')
+            ? options
+            : {
+                numSuggestions: options,
+                compoundMethod,
+                numChanges
+            };
+        return this._suggest(word, suggestOptions);
+    }
+
+    public _suggest(
         word: string,
-        numSuggestions: number,
-        compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS,
-        numChanges?: number
+        suggestOptions: SuggestOptions
     ): SuggestionResult[] {
-        word = word.toLowerCase();
-        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        const collector = this.genSuggestions(
-            suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word.toLowerCase()), numChanges ),
-            compoundMethod,
-        );
+        const _suggestOptions = {...suggestOptions};
+        const {
+            numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
+            numChanges,
+            compoundMethod
+        } = suggestOptions;
+        _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        const collector = suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word.toLowerCase()), numChanges );
+        this.genSuggestions(collector, _suggestOptions);
         return collector.suggestions;
     }
 
@@ -54,10 +73,14 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         return this.dictionaries.reduce((a, b) => a + b.size, 0);
     }
 
-    public genSuggestions(collector: SuggestionCollector, compoundMethod: CompoundWordsMethod = CompoundWordsMethod.SEPARATE_WORDS): SuggestionCollector {
-        compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        this.dictionaries.forEach(dict => dict.genSuggestions(collector, compoundMethod));
-        return collector;
+    public genSuggestions(
+        collector: SuggestionCollector,
+        suggestOptions: SuggestOptions
+    ): void {
+        const _suggestOptions = {...suggestOptions};
+        const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS } = suggestOptions;
+        _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        this.dictionaries.forEach(dict => dict.genSuggestions(collector, _suggestOptions));
     }
 }
 

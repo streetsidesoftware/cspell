@@ -239,13 +239,13 @@ export interface SuggestionCollector {
 }
 
 export function suggestionCollector(
-    word: string,
+    wordToMatch: string,
     maxNumSuggestions: number,
     filter: (word: string) => boolean = () => true,
     changeLimit: number = maxNumChanges
 ): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = Math.min(baseCost * word.length / 2, baseCost * changeLimit);
+    let maxCost: number = Math.min(baseCost * wordToMatch.length / 2, baseCost * changeLimit);
 
     function dropMax() {
         if (sugs.size < 2) {
@@ -298,7 +298,7 @@ export function suggestionCollector(
         add: function (suggestion: SuggestionResult) { collector(suggestion); return this; },
         get suggestions() { return [...sugs.values()].sort(compSuggestionResults); },
         get maxCost() { return maxCost; },
-        get word() { return word; },
+        get word() { return wordToMatch; },
         get maxNumSuggestions() { return maxNumSuggestions; },
     };
 }

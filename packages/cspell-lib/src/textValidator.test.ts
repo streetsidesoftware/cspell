@@ -1,6 +1,4 @@
-import { expect } from 'chai';
-
-import { validateText, hasWordCheck, calcTextInclusionRanges, _testMethods } from './textValidator';
+import { validateText, hasWordCheck, calcTextInclusionRanges, _testMethods, CheckOptions } from './textValidator';
 import { createCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
@@ -13,30 +11,35 @@ describe('Validate textValidator functions', () => {
     test('tests hasWordCheck', async () => {
         // cspell:ignore redgreenblueyellow strawberrymangobanana redwhiteblue
         const dictCol = await getSpellingDictionaryCollection();
-        expect(hasWordCheck(dictCol, 'brown', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'white', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'berry', true)).to.be.true;
+        const opt: CheckOptions = {
+            allowCompoundWords: true,
+            ignoreCase: true,
+            caseSensitive: dictCol.isDictionaryCaseSensitive
+        };
+        expect(hasWordCheck(dictCol, 'brown', opt)).toBe(true);
+        expect(hasWordCheck(dictCol, 'white', opt)).toBe(true);
+        expect(hasWordCheck(dictCol, 'berry', opt)).toBe(true);
         // compound words do not cross dictionary boundaries
-        expect(hasWordCheck(dictCol, 'whiteberry', true)).to.be.false;
-        expect(hasWordCheck(dictCol, 'redmango', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'strawberrymangobanana', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'lightbrown', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'redgreenblueyellow', true)).to.be.true;
-        expect(hasWordCheck(dictCol, 'redwhiteblue', true)).to.be.true;
+        expect(hasWordCheck(dictCol, 'whiteberry', opt)).toBe(false);
+        expect(hasWordCheck(dictCol, 'redmango', opt)).toBe(true);
+        expect(hasWordCheck(dictCol, 'strawberrymangobanana', opt)).toBe(true);
+        expect(hasWordCheck(dictCol, 'lightbrown', opt)).toBe(true);
+        expect(hasWordCheck(dictCol, 'redgreenblueyellow', opt)).toBe(true);
+        expect(hasWordCheck(dictCol, 'redwhiteblue', opt)).toBe(true);
     });
 
     test('tests textValidator no word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, {});
         const errors = result.map(wo => wo.text).toArray();
-        expect(errors).to.deep.equal(['giraffe', 'lightbrown', 'whiteberry', 'redberry']);
+        expect(errors).toEqual(['giraffe', 'lightbrown', 'whiteberry', 'redberry']);
     });
 
     test('tests textValidator with word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, { allowCompoundWords: true });
         const errors = result.map(wo => wo.text).toArray();
-        expect(errors).to.deep.equal(['giraffe', 'whiteberry']);
+        expect(errors).toEqual(['giraffe', 'whiteberry']);
     });
 
     // cSpell:ignore xxxkxxxx xxxbxxxx
@@ -47,7 +50,7 @@ describe('Validate textValidator functions', () => {
             const text = ' tttt gggg xxxxxxx jjjjj xxxkxxxx xxxbxxxx \n' + sampleText;
             const result = validateText(text, dictCol, { allowCompoundWords: true });
             const errors = result.map(wo => wo.text).toArray().sort();
-            expect(errors).to.deep.equal(['giraffe', 'whiteberry', 'xxxbxxxx', 'xxxkxxxx']);
+            expect(errors).toEqual(['giraffe', 'whiteberry', 'xxxbxxxx', 'xxxkxxxx']);
         }
     );
 
@@ -56,7 +59,7 @@ describe('Validate textValidator functions', () => {
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictEmpty, { }).toArray();
         const errors = result.map(wo => wo.text);
-        expect(errors).to.deep.equal(['have', 'PUBLISHed', 'multiple', 'FIXes', 'PROBLEMs']);
+        expect(errors).toEqual(['have', 'PUBLISHed', 'multiple', 'FIXes', 'PROBLEMs']);
     });
 
     test('tests case in ignore words', async () => {
@@ -65,17 +68,17 @@ describe('Validate textValidator functions', () => {
         const options = { caseSensitive: true, ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'] };
         const result = validateText(text, dictEmpty, options).toArray();
         const errors = result.map(wo => wo.text);
-        expect(errors).to.deep.equal(['have', 'published', 'multiple']);
+        expect(errors).toEqual(['have', 'published', 'multiple']);
     });
 
     test('tests case sensitive word list', async () => {
         const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple'];
         const dict = await createSpellingDictionary(wordList, 'empty', 'test', { caseSensitive: true });
         const text = 'We have PUBLISHed published Multiple FIXesToThePROBLEMs';
-        const options = { allowCompoundWords: true };
+        const options = { allowCompoundWords: true, ignoreCase: false };
         const result = validateText(text, dict, options).toArray();
         const errors = result.map(wo => wo.text);
-        expect(errors).to.deep.equal(['have', 'published']);
+        expect(errors).toEqual(['have', 'published']);
     });
 
     test('tests trailing s, ed, ing, etc.', async () => {
@@ -83,7 +86,7 @@ describe('Validate textValidator functions', () => {
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictWords, { allowCompoundWords: true });
         const errors = result.map(wo => wo.text).toArray().sort();
-        expect(errors).to.deep.equal([]);
+        expect(errors).toEqual([]);
     });
 
     test('test contractions', async () => {
@@ -93,7 +96,7 @@ describe('Validate textValidator functions', () => {
         // cspell:enable
         const result = validateText(text, dictWords, { allowCompoundWords: false });
         const errors = result.map(wo => wo.text).toArray().sort();
-        expect(errors).to.deep.equal([]);
+        expect(errors).toEqual([]);
     });
 
     test('tests maxDuplicateProblems', async () => {
@@ -101,23 +104,23 @@ describe('Validate textValidator functions', () => {
         const text = sampleText;
         const result = validateText(text, dict, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 });
         const freq = FreqCounter.create(result.map(t => t.text));
-        expect(freq.total).to.be.equal(freq.counters.size);
+        expect(freq.total).toBe(freq.counters.size);
         const words = freq.counters.keys();
         const dict2 = await createSpellingDictionary(words, 'test', 'test');
         const result2 = [...validateText(text, dict2, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 })];
-        expect(result2.length).to.be.equal(0);
+        expect(result2.length).toBe(0);
     });
 
     test('tests inclusion, exclusion', () => {
         const result = calcTextInclusionRanges(sampleText, {});
-        expect(result.length).to.be.equal(1);
-        expect(result.map(a => [a.startPos, a.endPos])).to.deep.equal([[0, sampleText.length]]);
+        expect(result.length).toBe(1);
+        expect(result.map(a => [a.startPos, a.endPos])).toEqual([[0, sampleText.length]]);
     });
 
     test('tests inclusion, exclusion', () => {
         const result = calcTextInclusionRanges(sampleText, { ignoreRegExpList: [/The/g]});
-        expect(result.length).to.be.equal(5);
-        expect(result.map(a => [a.startPos, a.endPos])).to.deep.equal([
+        expect(result.length).toBe(5);
+        expect(result.map(a => [a.startPos, a.endPos])).toEqual([
             [0, 5],
             [8, 34],
             [37, 97],
@@ -134,7 +137,7 @@ describe('Validate textValidator functions', () => {
             .concatMap(mapper)
             .toArray();
         const words = results.map(r => r.text);
-        expect(words.join(' ')).to.equal('Test the line breaks from begin to end eol');
+        expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
     });
 
     test('tests words crossing exclude boundaries out of order', async () => {
@@ -147,7 +150,7 @@ describe('Validate textValidator functions', () => {
             .concatMap(mapper)
             .toArray();
         const words = results.sort((a, b) => a.offset - b.offset).map(r => r.text);
-        expect(words.join(' ')).to.equal('Test the line breaks from begin to end eol');
+        expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
     });
 });
 

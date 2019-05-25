@@ -114,6 +114,22 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugsForCellipede.map(s => s.word)).toContain('millipede');
     });
 
+    // test('checks for duplicate suggestions', async () => {
+    //     const wordsA2 = wordsA.concat(['apples']);
+    //     const dicts = await Promise.all([
+    //         createSpellingDictionary(wordsA, 'wordsA', 'test'),
+    //         createSpellingDictionary(wordsB, 'wordsB', 'test'),
+    //         createSpellingDictionary(wordsA2, 'wordsA2', 'test'),
+    //         createSpellingDictionary(wordsC, 'wordsC', 'test'),
+    //     ]);
+
+    //     const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+    //     const sugs = dictCollection.suggest('Apples', 10);
+    //     expect(sugs).toEqual([
+
+    //     ]);
+    // });
+
     test('creates using createCollectionP', () => {
         const dicts = [
             createSpellingDictionary(wordsA, 'wordsA', 'test'),

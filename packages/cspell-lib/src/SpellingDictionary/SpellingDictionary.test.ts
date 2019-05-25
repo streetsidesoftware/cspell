@@ -1,5 +1,6 @@
-import { createSpellingDictionary, SpellingDictionaryFromTrie } from './SpellingDictionary';
+import { createSpellingDictionary, SpellingDictionaryFromTrie, __testMethods } from './SpellingDictionary';
 import { Trie } from 'cspell-trie-lib';
+import { FunctionArgs } from '../util/types';
 
 // cSpell:ignore aple
 
@@ -46,19 +47,20 @@ describe('Verify building Dictionary', () => {
 
         const dict = await createSpellingDictionary(words, 'words', 'test', { caseSensitive: true });
         const ignoreCase = { ignoreCase: true };
-        expect(dict.has('apple')).toBe(true);
+        const useCase = { ignoreCase: false };
+        expect(dict.has('apple', useCase)).toBe(true);
         expect(dict.has('Apple', ignoreCase)).toBe(true);
-        expect(dict.has('Apple')).toBe(true);
-        expect(dict.has('APPLE')).toBe(true);
-        expect(dict.has('Seattle')).toBe(true);
-        expect(dict.has('seattle')).toBe(false);
-        expect(dict.has('English')).toBe(true);
-        expect(dict.has('english')).toBe(false);
-        expect(dict.has('ENGLISH')).toBe(true);
-        expect(dict.has('McGreyer')).toBe(true);
-        expect(dict.has('mcgreyer')).toBe(false); // cspell:disable-line
+        expect(dict.has('Apple', useCase)).toBe(true);
+        expect(dict.has('APPLE', useCase)).toBe(true);
+        expect(dict.has('Seattle', useCase)).toBe(true);
+        expect(dict.has('seattle', useCase)).toBe(false);
+        expect(dict.has('English', useCase)).toBe(true);
+        expect(dict.has('english', useCase)).toBe(false);
+        expect(dict.has('ENGLISH', useCase)).toBe(true);
+        expect(dict.has('McGreyer', useCase)).toBe(true);
+        expect(dict.has('mcgreyer', useCase)).toBe(false); // cspell:disable-line
         // We do not support mixed case as all caps matching at this point.
-        expect(dict.has('MCGREYER')).toBe(false); // cspell:disable-line
+        expect(dict.has('MCGREYER', useCase)).toBe(false); // cspell:disable-line
         expect(dict.has('MCGREYER', ignoreCase)).toBe(true); // cspell:disable-line
     });
 
@@ -90,5 +92,104 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).toEqual(expect.arrayContaining(['ape']));
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
+
+    test('Test wordDictionaryFormsCollector', () => {
+        function test(word: string, isCaseSensitive: boolean, expected: string[]) {
+            const collector = __testMethods.wordDictionaryFormsCollector(isCaseSensitive);
+            expect([...collector(word)].sort()).toEqual(expected.sort());
+            expect([...collector(word)]).toEqual([]);
+        }
+        type Test = [string, boolean, string[]];
+        // cspell:ignore café
+        const tests: Test[] = [
+            ['house', false, ['house']],
+            ['House', false, ['House', 'house']],
+            ['café', false, ['cafe', 'café']],
+            ['Café', false, ['Cafe', 'Café', 'cafe', 'café']],
+            ['House', true, ['House', '>house']],
+            ['Café', true, ['Café', '>Cafe', '>cafe', '>café']],
+            // Make sure all accent forms work.
+            ['café'.normalize(), false, ['cafe', 'café']],
+            ['café'.normalize('NFD'), false, ['cafe', 'café']],
+            ['café'.normalize('NFKC'), false, ['cafe', 'café']],
+            ['café'.normalize('NFKD'), false, ['cafe', 'café']],
+        ];
+        tests.forEach(t => test(...t));
+    });
+
+
 });
 
+describe('Validate wordSearchForms', () => {
+        function testCase(word: string, isCaseSensitive: boolean, ignoreCase: boolean, expected: string[]) {
+            test(`${word} ${isCaseSensitive} ${ignoreCase} ${expected}`, () => {
+                const words = __testMethods.wordSearchForms(word, isCaseSensitive, ignoreCase);
+                expect(words.sort()).toEqual(expected.sort());
+            });
+        }
+        type TestCase = FunctionArgs<typeof testCase>;
+        // cspell:ignore café
+        const tests: TestCase[] = [
+            ['house', false, false, ['house']],
+            ['House', false, false, ['House', 'house']],
+            ['House', false, false, ['House', 'house']],
+            ['House', true,  false, ['House', 'house']],
+            ['HOUSE', false, false, ['HOUSE', 'House', 'house']],
+            ['HOUSE', true,  false, ['HOUSE', 'House', 'house']],
+            ['café',  false, false, ['cafe', 'café']],
+            ['café',  true,  false, ['café']],
+            ['café',  true,  true,  ['café', '>cafe']],
+            ['Café',  false, false, ['Cafe', 'Café', 'cafe', 'café']],
+            ['Café',  false, true,  ['Café', 'Cafe', 'cafe', 'café']],
+            ['Café',  true,  false, ['Café', 'café']],
+            ['Café',  true,  true,  ['Café', '>Cafe', '>cafe', 'café']],
+            ['CAFÉ',  false, false, ['CAFÉ', 'CAFE', 'Café', 'café', 'cafe']],
+            ['CAFÉ',  false, true,  ['CAFÉ', 'CAFE', 'Café', 'café', 'cafe']],
+            ['CAFÉ',  true,  false, ['CAFÉ', 'Café', 'café']],
+            ['CAFÉ',  true,  true,  ['CAFÉ', 'Café', 'café', '>CAFE', '>Cafe', '>cafe']],
+            // Make sure all accent forms work.
+            ['café'.normalize(), false, false, ['cafe', 'café']],
+            ['café'.normalize('NFD'), false, false, ['cafe', 'café']],
+            ['café'.normalize('NFKC'), false, false, ['cafe', 'café']],
+            ['café'.normalize('NFKD'), false, false, ['cafe', 'café']],
+        ];
+        tests.forEach(t => testCase(...t));
+});
+
+describe('Verify Case Sensitive Dictionaries', () => {
+    function testHas(word: string, ignoreCase: boolean | undefined, expected: boolean) {
+        test(`Has ${word} ${ignoreCase} ${expected}`, async () => {
+            const dict = await sameDict();
+            expect(dict.has(word, { ignoreCase })).toBe(expected);
+        });
+    }
+
+    const tests: FunctionArgs<typeof testHas>[] = [
+        ['Paris',   undefined,  true],
+        ['PARIS',   undefined,  true],
+        ['paris',   undefined,  true],
+        ['Paris',   true,       true],
+        ['PARIS',   true,       true],
+        ['paris',   true,       true],
+        ['Paris',   false,      true],
+        ['PARIS',   false,      true],
+        ['paris',   false,      false],
+    ];
+    tests.forEach(t => testHas(...t));
+});
+
+function sameDict() {
+    const words = sampleWords();
+    return createSpellingDictionary(words, 'words', 'test', { caseSensitive: true });
+}
+
+// cspell:words métro Rhône Köln Düsseldorf
+function sampleWords() {
+    return `
+        England Canada Netherlands France German China Belgium
+        Paris Chicago Amsterdam Antwerp Brussels Rhône Cologne Köln Düsseldorf
+        métro cafe café metro
+        apple apples ape apes around astound profound compound
+        table tables tabled
+    `.split(/\s+/g);
+}

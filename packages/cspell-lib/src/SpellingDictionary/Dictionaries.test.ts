@@ -19,13 +19,13 @@ describe('Validate getDictionary', () => {
             settings.userWords.forEach(word => {
                 expect(dict.has(word)).to.be.true;
             });
-            expect(dict.has('zero')).to.be.false;
-            expect(dict.has('Rhône')).to.be.true;
-            expect(dict.has('RHÔNE')).to.be.true;
-            expect(dict.has('Café')).to.be.true;
-            expect(dict.has('rhône')).to.be.true;
-            expect(dict.has('rhone')).to.be.true;
-            expect(dict.has('cafe')).to.be.true;
+            expect(dict.has('zero',     { ignoreCase: false })).to.be.false;
+            expect(dict.has('Rhône',    { ignoreCase: false })).to.be.true;
+            expect(dict.has('RHÔNE',    { ignoreCase: false })).to.be.true;
+            expect(dict.has('Café',     { ignoreCase: false })).to.be.true;
+            expect(dict.has('rhône',    { ignoreCase: false })).to.be.true;
+            expect(dict.has('rhone',    { ignoreCase: false })).to.be.true;
+            expect(dict.has('cafe',     { ignoreCase: false })).to.be.true;
             });
     });
 
@@ -44,16 +44,17 @@ describe('Validate getDictionary', () => {
         settings.userWords.forEach(word => {
             expect(dict.has(word)).to.be.true;
         });
+        const opts = { ignoreCase: false };
         expect(dict.has('zero')).to.be.false;
-        expect(dict.has('Rhône')).to.be.true;
-        expect(dict.has('RHÔNE')).to.be.true;
-        expect(dict.has('Café')).to.be.true;
-        expect(dict.has('rhône')).to.be.false;
-        expect(dict.has('rhone')).to.be.false;
-        expect(dict.has('café')).to.be.true;
-        expect(dict.has('rhône')).to.be.false;
-        expect(dict.has('rhone')).to.be.false;
-        expect(dict.has('cafe')).to.be.false;
+        expect(dict.has('Rhône', opts)).to.be.true;
+        expect(dict.has('RHÔNE', opts)).to.be.true;
+        expect(dict.has('Café', opts)).to.be.true;
+        expect(dict.has('rhône', opts)).to.be.false;
+        expect(dict.has('rhone', opts)).to.be.false;
+        expect(dict.has('café', opts)).to.be.true;
+        expect(dict.has('rhône', opts)).to.be.false;
+        expect(dict.has('rhone', opts)).to.be.false;
+        expect(dict.has('cafe', opts)).to.be.false;
         expect(dict.has('café', { ignoreCase: true })).to.be.true;
         expect(dict.has('rhône', { ignoreCase: true })).to.be.true;
         expect(dict.has('rhone', { ignoreCase: true })).to.be.true;

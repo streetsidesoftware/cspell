@@ -1,7 +1,7 @@
 import * as Text from './util/text';
 import { TextOffset } from './util/text';
 import * as TextRange from './util/TextRange';
-import { SpellingDictionary } from './SpellingDictionary';
+import { SpellingDictionary, HasOptions } from './SpellingDictionary';
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 
@@ -14,6 +14,13 @@ export interface ValidationOptions extends IncludeExcludeOptions {
     ignoreWords?: string[];
     allowCompoundWords?: boolean;
     caseSensitive?: boolean;
+    ignoreCase?: boolean;
+}
+
+export interface CheckOptions extends ValidationOptions {
+    allowCompoundWords: boolean;
+    caseSensitive: boolean;
+    ignoreCase: boolean;
 }
 
 export interface IncludeExcludeOptions {
@@ -98,7 +105,15 @@ function lineValidator(
         flagWords            = [],
         ignoreWords          = [],
         allowCompoundWords   = false,
+        ignoreCase           = true,
+        caseSensitive        = false,
     } = options;
+    const checkOptions: CheckOptions = {
+        ...options,
+        allowCompoundWords,
+        ignoreCase,
+        caseSensitive,
+    };
 
     const setOfFlagWords = new Set(flagWords);
     const mappedIgnoreWords = options.caseSensitive ? ignoreWords : ignoreWords.concat(ignoreWords.map(a => a.toLowerCase()));
@@ -119,9 +134,9 @@ function lineValidator(
         return setOfFlagWords.has(wo.text) || setOfFlagWords.has(wo.text.toLowerCase());
     }
 
-    function checkWord(word: ValidationResult, line: TextOffset, allowCompounds: boolean): ValidationResult {
+    function checkWord(word: ValidationResult, line: TextOffset, options: CheckOptions): ValidationResult {
         const isFlagged = testForFlaggedWord(word);
-        const isFound = isFlagged ? undefined : isWordValid(dict, word, line, allowCompounds);
+        const isFound = isFlagged ? undefined : isWordValid(dict, word, line, options);
         return { ...word, isFlagged, isFound };
     }
 
@@ -130,7 +145,7 @@ function lineValidator(
         const checkedWords: Sequence<ValidationResult> = Text.extractWordsFromTextOffset(lineSegment)
             .filter(filterAlreadyChecked)
             .filter(rememberFilter(wo => wo.text.length >= minWordLength))
-            .map(wo => checkWord(wo, lineSegment, false))
+            .map(wo => checkWord(wo, lineSegment, checkOptions))
             .filter(rememberFilter((wo) => !wo.isFound))
             .filter(rememberFilter(wo => !ignoreWordsSet.has(wo.text)))
         ;
@@ -142,7 +157,7 @@ function lineValidator(
                 const vr: ValidationResult = { ...wo, text: wo.text.toLowerCase() };
                 return vr;
             })
-            .map(wo => wo.isFlagged ? wo : checkWord(wo, lineSegment, allowCompoundWords))
+            .map(wo => wo.isFlagged ? wo : checkWord(wo, lineSegment, checkOptions))
             .filter(rememberFilter(wo => wo.isFlagged || !wo.isFound ))
             .filter(rememberFilter(wo => !ignoreWordsSet.has(wo.text)))
             .filter(rememberFilter(wo => !RxPat.regExHexDigits.test(wo.text)))  // Filter out any hex numbers
@@ -157,17 +172,25 @@ function lineValidator(
     return fn;
 }
 
-export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, line: TextOffset, allowCompounds: boolean) {
-    const firstTry = hasWordCheck(dict, wo.text, allowCompounds);
+export function isWordValid(dict: SpellingDictionary, wo: Text.TextOffset, line: TextOffset, options: CheckOptions) {
+    const firstTry = hasWordCheck(dict, wo.text, options);
     return firstTry
         // Drop the first letter if it is preceded by a '\'.
-        || (line.text[wo.offset - line.offset - 1] === '\\') && hasWordCheck(dict, wo.text.slice(1), allowCompounds);
+        || (line.text[wo.offset - line.offset - 1] === '\\') && hasWordCheck(dict, wo.text.slice(1), options);
 }
 
-export function hasWordCheck(dict: SpellingDictionary, word: string, allowCompounds: boolean) {
+export function hasWordCheck(dict: SpellingDictionary, word: string, options: CheckOptions) {
     word = word.replace(/\\/g, '');
     // Do not pass allowCompounds down if it is false, that allows for the dictionary to override the value based upon its own settings.
-    return allowCompounds ? dict.has(word, allowCompounds) : dict.has(word);
+    return dict.has(word, convertCheckOptionsToHasOptions(options));
+}
+
+function convertCheckOptionsToHasOptions(opt: CheckOptions): HasOptions {
+    const { ignoreCase, allowCompoundWords } = opt;
+    return {
+        ignoreCase,
+        useCompounds: allowCompoundWords || undefined,
+    };
 }
 
 /**
