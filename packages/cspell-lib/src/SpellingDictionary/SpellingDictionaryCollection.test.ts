@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
 import { createSpellingDictionary, SpellingDictionaryFromTrie, CompoundWordsMethod } from './SpellingDictionary';
@@ -15,11 +14,11 @@ describe('Verify using multiple dictionaries', () => {
         ]);
 
         const dictCollection = new SpellingDictionaryCollection(dicts, 'test', ['Avocado']);
-        expect(dictCollection.has('mango')).to.be.true;
-        expect(dictCollection.has('tree')).to.be.false;
-        expect(dictCollection.has('avocado')).to.be.false;
-        expect(dictCollection.has('')).to.be.false;
-        expect(dictCollection.size).to.be.equal(wordsA.length - 1 + wordsB.length + wordsC.length);
+        expect(dictCollection.has('mango')).toBe(true);
+        expect(dictCollection.has('tree')).toBe(false);
+        expect(dictCollection.has('avocado')).toBe(false);
+        expect(dictCollection.has('')).toBe(false);
+        expect(dictCollection.size).toEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
     });
 
     test('checks for suggestions', async () => {
@@ -33,10 +32,10 @@ describe('Verify using multiple dictionaries', () => {
 
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
         const sugsForTango = dictCollection.suggest('tango', 10);
-        expect(sugsForTango).to.be.not.empty;
-        expect(sugsForTango[0].word).to.be.equal('mango');
+        expect(sugsForTango).toHaveLength(1);
+        expect(sugsForTango[0].word).toEqual('mango');
         // make sure there is only one mango suggestion.
-        expect(sugsForTango.map(a => a.word).filter(a => a === 'mango')).to.be.deep.equal(['mango']);
+        expect(sugsForTango.map(a => a.word).filter(a => a === 'mango')).toEqual(['mango']);
     });
 
     test('checks for compound suggestions', async () => {
@@ -54,9 +53,9 @@ describe('Verify using multiple dictionaries', () => {
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
         const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS);
         const sugs = sugResult.map(a => a.word);
-        expect(sugs).to.be.not.empty;
-        expect(sugs).to.contain('apple+mango');
-        expect(sugs).to.contain('apple mango');
+        expect(sugs).toHaveLength(10);
+        expect(sugs).toContain('apple+mango');
+        expect(sugs).toContain('apple mango');
     });
 
     test('checks for compound suggestions', async () => {
@@ -72,9 +71,9 @@ describe('Verify using multiple dictionaries', () => {
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
         const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS, 2);
         const sugs = sugResult.map(a => a.word);
-        expect(sugs).to.be.not.empty;
-        expect(sugs).to.not.contain('apple+mango');
-        expect(sugs).to.contain('apple mango');
+        expect(sugs).toHaveLength(1);
+        expect(sugs).not.toContain('apple+mango');
+        expect(sugs).toContain('apple mango');
     });
 
     test('checks for suggestions with flagged words', async () => {
@@ -87,7 +86,7 @@ describe('Verify using multiple dictionaries', () => {
 
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
         const sugs = dictCollection.suggest('avocado', 10);
-        expect(sugs.map(r => r.word)).to.be.not.contain('avocado');
+        expect(sugs.map(r => r.word)).not.toContain('avocado');
     });
 
     test('checks for suggestions from mixed sources', async () => {
@@ -103,16 +102,16 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.has('ant'));
 
         const sugsForTango = dictCollection.suggest('tango', 10);
-        expect(sugsForTango).to.be.not.empty;
-        expect(sugsForTango[0].word).to.be.equal('mango');
+        expect(sugsForTango).toHaveLength(1);
+        expect(sugsForTango[0].word).toBe('mango');
         // make sure there is only one mango suggestion.
-        expect(sugsForTango.map(a => a.word).filter(a => a === 'mango')).to.be.deep.equal(['mango']);
+        expect(sugsForTango.map(a => a.word).filter(a => a === 'mango')).toEqual(['mango']);
 
         // cspell:ignore cellipede
         const sugsForCellipede = dictCollection.suggest('cellipede', 5);
-        expect(sugsForCellipede).to.not.be.empty;
-        expect(sugsForCellipede.map(s => s.word)).to.contain('centipede');
-        expect(sugsForCellipede.map(s => s.word)).to.contain('millipede');
+        expect(sugsForCellipede).toHaveLength(2);
+        expect(sugsForCellipede.map(s => s.word)).toContain('centipede');
+        expect(sugsForCellipede.map(s => s.word)).toContain('millipede');
     });
 
     test('creates using createCollectionP', () => {
@@ -123,11 +122,11 @@ describe('Verify using multiple dictionaries', () => {
         ];
 
         return createCollectionP(dicts, 'test', []).then(dictCollection => {
-            expect(dictCollection.has('mango')).to.be.true;
-            expect(dictCollection.has('tree')).to.be.false;
+            expect(dictCollection.has('mango')).toBe(true);
+            expect(dictCollection.has('tree')).toBe(false);
             const sugs = dictCollection.suggest('mangos', 4);
             const sugWords = sugs.map(s => s.word);
-            expect(sugWords[0]).to.be.equal('mango');
+            expect(sugWords[0]).toBe('mango');
         });
     });
 
