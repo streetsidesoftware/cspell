@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { traceWords, getDefaultSettings } from '.';
 
 describe('Verify trace', () => {
+    jest.setTimeout(10000);
     test('tests tracing a word', async () => {
         const words = ['apple'];
         const config = getDefaultSettings();
