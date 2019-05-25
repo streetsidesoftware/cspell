@@ -21,6 +21,7 @@ export {
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export const PREFIX_NO_CASE = '>';
+export const regexPrefix = /^[>]/;
 
 export interface SearchOptions {
     useCompounds?: boolean | number;
@@ -161,10 +162,14 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const {
             numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
             numChanges,
+            ignoreCase = true,
         } = suggestOptions;
-        const collector = suggestionCollector(word, numSuggestions, () => true, numChanges);
+        function filter(word: string): boolean {
+            return ignoreCase || word[0] !== PREFIX_NO_CASE;
+        }
+        const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
         this.genSuggestions(collector, suggestOptions);
-        return collector.suggestions;
+        return collector.suggestions.map(r => ({...r, word: r.word.replace(regexPrefix, '')}));
     }
 
     public genSuggestions(

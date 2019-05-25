@@ -11,6 +11,8 @@ import {
     SuggestOptions,
     defaultNumSuggestions,
     SuggestArgs,
+    regexPrefix,
+    PREFIX_NO_CASE,
 } from './SpellingDictionary';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
@@ -61,12 +63,17 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         const {
             numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
             numChanges,
-            compoundMethod
+            compoundMethod,
+            ignoreCase = true,
         } = suggestOptions;
         _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        const collector = suggestionCollector(word, numSuggestions, word => !this.wordsToFlag.has(word.toLowerCase()), numChanges );
-        this.genSuggestions(collector, _suggestOptions);
-        return collector.suggestions;
+        const filter = (word: string) => {
+            return !this.wordsToFlag.has(word.toLowerCase())
+                && (ignoreCase || word[0] !== PREFIX_NO_CASE)
+        }
+        const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
+        this.genSuggestions(collector, suggestOptions);
+        return collector.suggestions.map(r => ({...r, word: r.word.replace(regexPrefix, '')}));
     }
 
     public get size() {

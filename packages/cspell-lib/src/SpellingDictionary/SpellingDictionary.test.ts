@@ -158,8 +158,8 @@ describe('Validate wordSearchForms', () => {
 
 describe('Verify Case Sensitive Dictionaries', () => {
     function testHas(word: string, ignoreCase: boolean | undefined, expected: boolean) {
-        test(`Has ${word} ${ignoreCase} ${expected}`, async () => {
-            const dict = await sameDict();
+        test(`Has ${word} Case: ${ignoreCase} Exp: ${expected}`, async () => {
+            const dict = await sampleDict();
             expect(dict.has(word, { ignoreCase })).toBe(expected);
         });
     }
@@ -174,11 +174,37 @@ describe('Verify Case Sensitive Dictionaries', () => {
         ['Paris',   false,      true],
         ['PARIS',   false,      true],
         ['paris',   false,      false],
+        ['Köln',    false,      true],
+        ['köln',    false,      false],
+        ['KÖLN',    false,      true],
     ];
     tests.forEach(t => testHas(...t));
+
+    test('Suggestions 1', async () => {
+        // cspell:ignore koln
+        const dict = await sampleDict();
+        const sugs = dict.suggest('kuln'); // cspell:disable-line
+        const sugWords = sugs.map(s => s.word);
+        expect(sugWords).toEqual([
+            'koln',
+            'köln',
+            'Koln',
+            'Köln',
+        ]);
+    });
+
+    test('Suggestions 2', async () => {
+        // cspell:ignore koln
+        const dict = await sampleDict();
+        const sugs = dict.suggest('kuln', { ignoreCase: false }); // cspell:disable-line
+        const sugWords = sugs.map(s => s.word);
+        expect(sugWords).toEqual([
+            'Köln',
+        ]);
+    });
 });
 
-function sameDict() {
+function sampleDict() {
     const words = sampleWords();
     return createSpellingDictionary(words, 'words', 'test', { caseSensitive: true });
 }
