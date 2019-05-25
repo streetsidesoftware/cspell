@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import * as cspell from '../index';
 
 describe('Validate English', () => {
+    jest.setTimeout(10000);
     test('Tests suggestions', () => {
         const ext = '.txt';
         const languageIds = cspell.getLanguagesForExt(ext);

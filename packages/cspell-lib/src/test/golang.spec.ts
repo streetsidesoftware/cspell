@@ -8,6 +8,7 @@ const sampleFilename = path.join(__dirname, '..', '..', 'samples', 'src', 'sampl
 const sampleFile = fsp.readFile(sampleFilename, 'UTF-8').then(buffer => buffer.toString());
 
 describe('Validate that Go files are correctly checked.', () => {
+    jest.setTimeout(10000);
     test('Tests the default configuration', () => {
         return sampleFile.then(text => {
             expect(text).to.not.be.empty;

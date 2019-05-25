@@ -10,6 +10,7 @@ const sampleFile = fsp.readFile(sampleFilename, 'UTF-8').then(buffer => buffer.t
 const dutchConfig = dutchDict.getConfigLocation();
 
 describe('Validate that Dutch text is correctly checked.', () => {
+    jest.setTimeout(10000);
 
     test('Tests the default configuration', () => {
         return sampleFile.then(text => {
