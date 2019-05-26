@@ -23,6 +23,7 @@ How to store words in a case sensitive dictionary:
 | English | English, >english | |
 | café | café, >cafe | |
 | Rhône | Rhône, >Rhone, >rhone, >rhône | Multiple forms are given to allow for case-insensitive suggestions |
+| HOUSE | HOUSE, house |  |
 
 ### Word Lookup
 

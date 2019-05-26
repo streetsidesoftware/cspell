@@ -107,6 +107,7 @@ describe('Verify building Dictionary', () => {
             ['café', false, ['cafe', 'café']],
             ['Café', false, ['Cafe', 'Café', 'cafe', 'café']],
             ['House', true, ['House', '>house']],
+            ['HOUSE', true, ['HOUSE', '>house']],
             ['Café', true, ['Café', '>Cafe', '>cafe', '>café']],
             // Make sure all accent forms work.
             ['café'.normalize(), false, ['cafe', 'café']],
