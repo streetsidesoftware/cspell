@@ -73,12 +73,13 @@ describe('Validate textValidator functions', () => {
 
     test('tests case sensitive word list', async () => {
         const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple'];
+        const flagWords = ['VeryBadProblem'];
         const dict = await createSpellingDictionary(wordList, 'empty', 'test', { caseSensitive: true });
-        const text = 'We have PUBLISHed published Multiple FIXesToThePROBLEMs';
-        const options = { allowCompoundWords: true, ignoreCase: false };
+        const text = 'We have PUBLISHed published Multiple FIXesToThePROBLEMs VeryBadProblem';
+        const options = { allowCompoundWords: true, ignoreCase: false, flagWords };
         const result = validateText(text, dict, options).toArray();
         const errors = result.map(wo => wo.text);
-        expect(errors).toEqual(['have', 'published']);
+        expect(errors).toEqual(['have', 'published', 'VeryBadProblem']);
     });
 
     test('tests trailing s, ed, ing, etc.', async () => {
