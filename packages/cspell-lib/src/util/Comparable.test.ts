@@ -25,7 +25,7 @@ describe('Validate Comparable', () => {
         expect(samples().sort(compareBy('name', 'value')).map(a => a.id))
             .toEqual([0, 1, 3, 2, 4]);
         expect(samples().sort(compareBy('value', 'name')).map(a => a.id))
-            .toEqual([3, 4, 2, 0 ,1]);
+            .toEqual([3, 4, 2, 0 , 1]);
         expect(samples().sort(compareBy('name', 'maybe')).map(a => a.id))
             .toEqual([0, 1, 2, 3, 4]);
         // Expect undefined to be at the end.
@@ -53,7 +53,7 @@ describe('Validate Comparable', () => {
 });
 
 interface Sample {
-    id: number,
+    id: number;
     name: string;
     value: number;
     maybe: number | undefined;

@@ -69,8 +69,8 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
         const filter = (word: string) => {
             return !this.wordsToFlag.has(word.toLowerCase())
-                && (ignoreCase || word[0] !== PREFIX_NO_CASE)
-        }
+                && (ignoreCase || word[0] !== PREFIX_NO_CASE);
+        };
         const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map(r => ({...r, word: r.word.replace(regexPrefix, '')}));
