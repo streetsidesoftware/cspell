@@ -1,5 +1,11 @@
 # Release Notes
 
+## [4.0.16]
+- Speed improvements to address slowdown to support case sensitivity.
+
+## [4.0.14]
+- Add basic case sensitivity support.
+
 ## [4.0.0]
 - **Breaking Change** drop support for Node 8 and 9.
 
