@@ -35,6 +35,7 @@ export interface WordRangeAcc {
 }
 
 export interface ValidationResult extends TextOffset {
+    line: TextOffset;
     isFlagged?: boolean;
     isFound?: boolean;
 }
@@ -45,7 +46,6 @@ export const defaultMaxNumberOfProblems = 200;
 export const defaultMaxDuplicateProblems = 5;
 export const defaultMinWordLength       = 4;
 export const minWordSplitLen            = 3;
-
 
 export function validateText(
     text: string,
@@ -134,39 +134,59 @@ function lineValidator(
         return setOfFlagWords.has(wo.text) || setOfFlagWords.has(wo.text.toLowerCase());
     }
 
-    function checkWord(word: ValidationResult, line: TextOffset, options: CheckOptions): ValidationResult {
+    function checkFlagWords(word: ValidationResult): ValidationResult {
         const isFlagged = testForFlaggedWord(word);
-        const isFound = isFlagged ? undefined : isWordValid(dict, word, line, options);
+        word.isFlagged = isFlagged;
+        return word;
+    }
+
+    function checkWord(word: ValidationResult, options: CheckOptions): ValidationResult {
+        const isFlagged = testForFlaggedWord(word);
+        const isFound = isFlagged ? undefined : isWordValid(dict, word, word.line, options);
         return { ...word, isFlagged, isFound };
     }
 
     const fn: LineValidator = (lineSegment: TextOffset) => {
+        function checkFullWord(vr: ValidationResult): Iterable<ValidationResult> {
+            if (vr.isFlagged) {
+                return [vr];
+            }
+
+            const codeWordResults = Text.extractWordsFromCodeTextOffset(vr)
+                .filter(filterAlreadyChecked)
+                .filter(rememberFilter(wo => wo.text.length >= minWordLength))
+                .map(t => ({...t, line: vr.line}))
+                .map(wo => {
+                    const vr: ValidationResult = { ...wo, text: wo.text.toLowerCase() };
+                    return vr;
+                })
+                .map(wo => wo.isFlagged ? wo : checkWord(wo, checkOptions))
+                .filter(rememberFilter(wo => wo.isFlagged || !wo.isFound ))
+                .filter(rememberFilter(wo => !ignoreWordsSet.has(wo.text)))
+                .filter(rememberFilter(wo => !RxPat.regExHexDigits.test(wo.text)))  // Filter out any hex numbers
+                .filter(rememberFilter(wo => !RxPat.regExRepeatedChar.test(wo.text)))  // Filter out any repeated characters like xxxxxxxxxx
+                // get back the original text.
+                .map(wo => ({...wo, text: Text.extractText(lineSegment, wo.offset, wo.offset + wo.text.length)}))
+                .toArray();
+
+            if (!codeWordResults.length || ignoreWordsSet.has(vr.text) || checkWord(vr, checkOptions).isFound) {
+                rememberFilter(_ => false)(vr);
+                return [];
+            }
+
+            return codeWordResults;
+        }
+
         // Check the whole words, not yet split
         const checkedWords: Sequence<ValidationResult> = Text.extractWordsFromTextOffset(lineSegment)
             .filter(filterAlreadyChecked)
             .filter(rememberFilter(wo => wo.text.length >= minWordLength))
-            .map(wo => checkWord(wo, lineSegment, checkOptions))
-            .filter(rememberFilter((wo) => !wo.isFound))
-            .filter(rememberFilter(wo => !ignoreWordsSet.has(wo.text)))
+            .map(wo => ({...wo, line: lineSegment}))
+            .map(checkFlagWords)
+            .concatMap(checkFullWord)
         ;
 
-        const codeWords: Sequence<ValidationResult> = checkedWords
-            .concatMap(wo => wo.isFlagged ? [wo] : Text.extractWordsFromCodeTextOffset(wo))
-            .filter(rememberFilter(wo => wo.text.length >= minWordLength))
-            .map(wo => {
-                const vr: ValidationResult = { ...wo, text: wo.text.toLowerCase() };
-                return vr;
-            })
-            .map(wo => wo.isFlagged ? wo : checkWord(wo, lineSegment, checkOptions))
-            .filter(rememberFilter(wo => wo.isFlagged || !wo.isFound ))
-            .filter(rememberFilter(wo => !ignoreWordsSet.has(wo.text)))
-            .filter(rememberFilter(wo => !RxPat.regExHexDigits.test(wo.text)))  // Filter out any hex numbers
-            .filter(rememberFilter(wo => !RxPat.regExRepeatedChar.test(wo.text)))  // Filter out any repeated characters like xxxxxxxxxx
-            // get back the original text.
-            .map(wo => ({...wo, text: Text.extractText(lineSegment, wo.offset, wo.offset + wo.text.length)}))
-        ;
-
-        return codeWords;
+        return checkedWords;
     };
 
     return fn;
