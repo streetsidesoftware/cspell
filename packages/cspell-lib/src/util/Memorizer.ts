@@ -1,4 +1,4 @@
-export type ArgType = number | string | boolean;
+export type ArgType = number | string | boolean | undefined | null;
 type A = ArgType;
 const defaultSize = 50000;
 

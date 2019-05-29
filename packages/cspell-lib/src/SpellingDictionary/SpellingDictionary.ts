@@ -123,26 +123,30 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const searchOptions = hasOptionToSearchOption(hasOptions);
         const useCompounds = searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
         const { ignoreCase = true } = searchOptions;
+        return this._has(word, useCompounds, ignoreCase);
+    }
+    private _has = memorizer(
+        (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) => this.hasAnyForm(word, useCompounds, ignoreCase),
+        SpellingDictionaryFromTrie.cachedWordsLimit
+    );
+
+    private hasAnyForm(word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) {
         const mWord = this.mapWord(word);
         const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
         for (const w of forms) {
-            if (this._has(w, false, ignoreCase)) {
+            if (this.trie.has(w, false)) {
                 return true;
             }
         }
         if (useCompounds) {
             for (const w of forms) {
-                if (this._has(w, true, ignoreCase)) {
+                if (this.trie.has(w, useCompounds)) {
                     return true;
                 }
             }
         }
         return false;
     }
-    private _has = memorizer(
-        (word: string, useCompounds: boolean, _ignoreCase: boolean) => this.trie.has(word, useCompounds),
-        SpellingDictionaryFromTrie.cachedWordsLimit
-    );
 
     public suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
     public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
@@ -198,6 +202,9 @@ function impersonateCollector(collector: SuggestionCollector, word: string): Sug
 }
 
 function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
+    if (isDictionaryCaseSensitive) {
+        return [word.toLowerCase()];
+    }
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
     const wordNa = removeAccents(word);
