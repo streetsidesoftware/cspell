@@ -108,12 +108,14 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             // walk the trie and get the approximate size.
             const i = this.trie.iterate();
             let deeper = true;
+            let size = 0;
             for (let r = i.next(); !r.done; r = i.next(deeper)) {
                 // count all nodes even though they are not words.
                 // because we are not going to all the leaves, this should give a good enough approximation.
-                this._size += 1;
+                size += 1;
                 deeper = r.value.text.length < 5;
             }
+            this._size = size;
         }
 
         return this._size;
@@ -214,6 +216,9 @@ function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignor
         forms.add(prefix + w);
     }
 
+    if (!isDictionaryCaseSensitive) {
+        add(wordLc);
+    }
     add(word);
 
     // HOUSE -> House, house

@@ -30,7 +30,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         readonly name: string,
         wordsToFlag: string[],
     ) {
-        this.dictionaries = this.dictionaries.filter(a => !!a.size);
+        this.dictionaries = this.dictionaries.filter(a => !!a.size).sort((a, b) => b.size - a.size);
         this.wordsToFlag = new Set(wordsToFlag.map(w => w.toLowerCase()));
         this.source = dictionaries.map(d => d.name).join(', ');
         this.isDictionaryCaseSensitive = this.dictionaries.reduce((a, b) => a || b.isDictionaryCaseSensitive, false);
