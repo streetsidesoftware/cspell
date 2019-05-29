@@ -202,9 +202,9 @@ function impersonateCollector(collector: SuggestionCollector, word: string): Sug
 }
 
 function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
-    if (isDictionaryCaseSensitive) {
-        return [word.toLowerCase()];
-    }
+    // if (!isDictionaryCaseSensitive) {
+    //     return [word.toLowerCase()];
+    // }
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
     const wordNa = removeAccents(word);
