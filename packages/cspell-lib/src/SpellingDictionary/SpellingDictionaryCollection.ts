@@ -101,7 +101,7 @@ export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string,
 }
 
 export function createCollectionP(
-    dicts: Promise<SpellingDictionary>[],
+    dicts: (Promise<SpellingDictionary> | SpellingDictionary)[],
     name: string,
     wordsToFlag: string[],
 ): Promise<SpellingDictionaryCollection> {

@@ -23,5 +23,5 @@ export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDic
         'From Settings',
         { caseSensitive }
     );
-    return createCollectionP([...spellDictionaries, settingsDictionary], 'dictionary collection', flagWords);
+    return createCollectionP([...spellDictionaries, Promise.resolve(settingsDictionary)], 'dictionary collection', flagWords);
 }
