@@ -31,12 +31,16 @@ function errorEmitter(message: string, error: Error) {
     return Promise.resolve();
 }
 
-function infoEmitter(message: string) {
-    console.info(chalk.yellow(message));
+function infoEmitter(message: string, msgType: App.MessageType) {
+    switch (msgType) {
+        case 'Debug': console.info(chalk.cyan(message)); break;
+        case 'Info': console.info(chalk.yellow(message)); break;
+        case 'Progress': console.info(chalk.white(message)); break;
+    }
 }
 
 function debugEmitter(message: string) {
-    console.info(chalk.cyan(message));
+    infoEmitter(message, App.MessageTypes.Debug);
 }
 
 function nullEmitter(_: string | App.Issue) {}

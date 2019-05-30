@@ -1,5 +1,3 @@
-import { Observable, bindNodeCallback, from, combineLatest } from 'rxjs';
-import { map, share, tap, flatMap, filter, catchError, first, toArray, reduce } from 'rxjs/operators';
 import * as glob from 'glob';
 import * as minimatch from 'minimatch';
 import * as cspell from 'cspell-lib';
@@ -52,7 +50,23 @@ export interface GlobSrcInfo {
     source: string;
 }
 
+export type MessageType = 'Debug' | 'Info' | 'Progress';
+
+export type MessageTypeLookup = {
+    [key in MessageType]: key;
+};
+
+export const MessageTypes: MessageTypeLookup = {
+    Debug: 'Debug',
+    Info: 'Info',
+    Progress: 'Progress',
+};
+
 export interface MessageEmitter {
+    (message: string, msgType: MessageType): void;
+}
+
+export interface DebugEmitter {
     (message: string): void;
 }
 
@@ -67,7 +81,7 @@ export interface SpellingErrorEmitter {
 export interface Emitters {
     issue: SpellingErrorEmitter;
     info: MessageEmitter;
-    debug: MessageEmitter;
+    debug: DebugEmitter;
     error: ErrorEmitter;
 }
 
@@ -77,10 +91,12 @@ const defaultMinimatchOptions: minimatch.IOptions = { nocase: true };
 const defaultConfigGlob: string = '{cspell.json,.cspell.json}';
 const defaultConfigGlobOptions: minimatch.IOptions = defaultMinimatchOptions;
 
+const nullEmitter = () => {};
+
 export class CSpellApplicationConfiguration {
-    readonly info: (message?: any, ...args: any[]) => void;
-    readonly debug: (message?: any, ...args: any[]) => void;
-    readonly logIssue: (issue: Issue) => void;
+    readonly info: MessageEmitter;
+    readonly debug: DebugEmitter;
+    readonly logIssue: SpellingErrorEmitter;
     readonly uniqueFilter: (issue: Issue) => boolean;
     readonly local: string;
 
@@ -93,12 +109,12 @@ export class CSpellApplicationConfiguration {
         readonly options: CSpellApplicationOptions,
         readonly emitters: Emitters
     ) {
-        this.info              = emitters.info || this.info;
-        this.debug             = emitters.debug || this.debug;
+        this.info              = emitters.info || nullEmitter;
+        this.debug             = emitters.debug || ((msg: string) => this.info(msg, MessageTypes.Debug));
         this.configGlob        = options.config || this.configGlob;
         this.configGlobOptions = options.config ? {} : this.configGlobOptions;
         this.excludes          = calcExcludeGlobInfo(options.exclude);
-        this.logIssue          = emitters.issue || this.logIssue;
+        this.logIssue          = emitters.issue || nullEmitter;
         this.local             = options.local || '';
         this.uniqueFilter      = options.unique
             ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text)
@@ -106,7 +122,7 @@ export class CSpellApplicationConfiguration {
     }
 }
 
-interface ConfigInfo { filename: string; config: cspell.CSpellUserSettings; }
+interface ConfigInfo { source: string; config: cspell.CSpellUserSettings; }
 interface FileConfigInfo {
     configInfo: ConfigInfo;
     filename: string;
@@ -126,83 +142,85 @@ export function lint(
 function runLint(cfg: CSpellApplicationConfiguration) {
     return run();
 
-    function run(): Promise<RunResult> {
-
-        header();
-
+    async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<number> {
         const settingsFromCommandLine = util.clean({
             languageId: cfg.options.languageId || undefined,
             language: cfg.local || undefined,
         });
 
-        interface ResultInfo { filename: string; issues: cspell.TextDocumentOffset[]; config: cspell.CSpellUserSettings; }
+        const { filename, text } = fileInfo;
+        const info = calcFinalConfigInfo(configInfo, settingsFromCommandLine, filename, text);
+        const config = info.configInfo.config;
+        const source = info.configInfo.source;
+        cfg.debug(`Filename: ${filename}, Extension: ${path.extname(filename)}, LanguageIds: ${info.languageIds.toString()}`);
 
-        const configRx = globRx(cfg.configGlob, cfg.configGlobOptions).pipe(
-            map(util.unique),
-            tap(configFiles => cfg.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`)),
-            map((filenames): ConfigInfo => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)})),
-            share(),
-            );
+        if (!info.configInfo.config.enabled) return 0;
 
-        // Get Exclusions from the config files.
-        const exclusionGlobs = configRx.pipe(
-            map(({filename, config}) => extractGlobExcludesFromConfig(filename, config)),
-            flatMap(a => a),
-            toArray(),
-            map(a => a.concat(cfg.excludes)),
-        ).toPromise();
+        const debugCfg = { config: {...config, source: null}, source };
+        cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
+        const wordOffsets = await cspell.validateText(text, info.configInfo.config);
+        const issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets);
+        const dictionaries = config.dictionaries || [];
+        cfg.info(`Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${issues.length}`, MessageTypes.Info);
+        cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
+        issues
+            .filter(cfg.uniqueFilter)
+            .forEach((issue) => cfg.logIssue(issue));
+        return issues.length;
+    }
 
+    /**
+     * The file loader is written this way to cause files to be loaded in parallel while the previous one is being processed.
+     * @param fileNames names of files to load one at a time.
+     */
+    function *fileLoader(fileNames: string[]) {
+        for (const filename of fileNames) {
+            // console.log(`${Date.now()} Start reading       ${filename}`);
+            const file = readFileInfo(filename)
+                // .then(f => (console.log(`${Date.now()} Loaded              ${filename} (${f.text.length / 1024}K)`), f))
+            ;
+            // console.log(`${Date.now()} Waiting for request ${filename}`);
+            yield file;
+            // console.log(`${Date.now()} Yield               ${filename}`);
+        }
+    }
 
-        const filesRx: Observable<FileInfo> = filterFiles(findFiles(cfg.files), exclusionGlobs).pipe(
-            flatMap(filename => readFileInfo(filename)),
-            filter(a => a && !!a.text),
-        );
-
+    async function processFiles(files: Iterable<Promise<FileInfo>>, configInfo: ConfigInfo): Promise<RunResult> {
         const status: RunResult = {
             files: 0,
             filesWithIssues: new Set<string>(),
             issues: 0,
         };
 
-        const r = combineLatest(
-                configRx,
-                filesRx,
-                (configInfo, fileInfo) => ({ configInfo, text: fileInfo.text, filename: fileInfo.filename })
-        ).pipe(
-            map(({configInfo, filename, text}): FileConfigInfo => {
-                const info = calcFinalConfigInfo(configInfo, settingsFromCommandLine, filename, text);
-                cfg.debug(`Filename: ${filename}, Extension: ${path.extname(filename)}, LanguageIds: ${info.languageIds.toString()}`);
-                return info;
-            }),
-            filter(info => info.configInfo.config.enabled !== false),
-            tap(() => status.files += 1),
-            flatMap((info) => {
-                const {configInfo, filename, text} = info;
-                const debugCfg = { config: {...configInfo.config, source: null}, filename: configInfo.filename };
-                cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
-                return cspell.validateText(text, configInfo.config)
-                    .then(wordOffsets => {
-                        return {
-                            filename,
-                            issues: cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets),
-                            config: configInfo.config,
-                        };
-                    });
-            }),
-            tap(info => {
-                const {filename, issues, config} = info;
-                const dictionaries = (config.dictionaries || []);
-                cfg.info(`Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${issues.length}`);
-                cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`);
-                issues
-                    .filter(cfg.uniqueFilter)
-                    .forEach((issue) => cfg.logIssue(issue));
-            }),
-            filter(info => !!info.issues.length),
-            tap(issue => status.filesWithIssues.add(issue.filename)),
-            reduce((status: RunResult, info: ResultInfo) => ({...status, issues: status.issues + info.issues.length}), status),
-        ).toPromise();
-        return r;
+        for (const fileP of files) {
+            const file = await fileP;
+            if (!file || !file.text) {
+                continue;
+            }
+            const r = await processFile(file, configInfo);
+            status.files += 1;
+            if (r) {
+                status.filesWithIssues.add(file.filename);
+                status.issues += r;
+            }
+        }
+
+        return status;
+    }
+
+    async function run(): Promise<RunResult> {
+
+        header();
+
+        const configFiles = (await globP(cfg.configGlob, cfg.configGlobOptions)).filter(util.uniqueFn());
+        cfg.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`, MessageTypes.Info);
+        const config = cspell.readSettingsFiles(configFiles);
+        const configInfo: ConfigInfo = { source: configFiles.join(' || '), config };
+        // Get Exclusions from the config files.
+        const exclusionGlobs = extractGlobExcludesFromConfig(configInfo.source, configInfo.config);
+        const files = filterFiles(await findFiles(cfg.files), exclusionGlobs);
+
+        return processFiles(fileLoader(files), configInfo);
     }
 
     function header() {
@@ -216,7 +234,7 @@ Options:
     files:     ${cfg.files}
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
     unique:    ${yesNo(!!cfg.options.unique)}
-`);
+`, MessageTypes.Info);
     }
 
 
@@ -226,27 +244,18 @@ Options:
 
         for (const glob of globs) {
             if (glob.regex.test(relFilename)) {
-                cfg.info(`Excluded File: ${filename}; Excluded by ${glob.glob} from ${glob.source}`);
+                cfg.info(`Excluded File: ${filename}; Excluded by ${glob.glob} from ${glob.source}`, MessageTypes.Info);
                 return true;
             }
         }
         return false;
     }
 
-    function filterFiles(files: Observable < string >, excludeGlobs: Promise<GlobSrcInfo[]>): Observable < string > {
-
-        excludeGlobs.then(excludeGlobs => {
-            const excludeInfo = excludeGlobs.map(g => `Glob: ${g.glob} from ${g.source}`);
-            cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`);
-        });
-        return combineLatest(
-            files,
-            excludeGlobs,
-            (filename, globs) => ({ filename, globs })
-        ).pipe(
-            filter(({ filename, globs }) => !isExcluded(filename, globs)),
-            map(({ filename }) => filename),
-        );
+    function filterFiles(files: string[], excludeGlobs: GlobSrcInfo[]): string[] {
+        const excludeInfo = excludeGlobs.map(g => `Glob: ${g.glob} from ${g.source}`);
+        cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
+        const result = files.filter(filename => !isExcluded(filename, excludeGlobs));
+        return result;
     }
 }
 
@@ -255,13 +264,9 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
 
-    const results = await globRx(configGlob, configGlobOptions).pipe(
-        map(util.unique),
-        map(filenames => ({filename: filenames.join(' || '), config: cspell.readSettingsFiles(filenames)})),
-        map(({filename, config}) => ({filename, config: cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), config)})),
-        flatMap(config => traceWords(words, config.config)),
-    ).toPromise();
-
+    const configFiles = (await globP(configGlob, configGlobOptions)).filter(util.uniqueFn());
+    const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), cspell.readSettingsFiles(configFiles));
+    const results = await traceWords(words, config);
     return results;
 }
 
@@ -270,11 +275,7 @@ export interface CheckTextResult extends CheckTextInfo {}
 export async function checkText(filename: string, options: BaseOptions): Promise<CheckTextResult> {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
-    const pSettings = globRx(configGlob, configGlobOptions).pipe(
-        first(),
-        map(util.unique),
-        map(filenames => ({filename: filenames[0], config: cspell.readSettingsFiles(filenames)})),
-    ).toPromise();
+    const pSettings = globP(configGlob, configGlobOptions).then(filenames => ({source: filenames[0], config: cspell.readSettingsFiles(filenames)}));
     const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,
@@ -312,19 +313,15 @@ function readFile(filename: string, encoding: string = UTF8): Promise<string> {
     return readFileInfo(filename, encoding).then(info => info.text);
 }
 
-function findFiles(globPatterns: string[]): Observable<string> {
-    const processed = new Set<string>();
-
-    return from(globPatterns).pipe(
-        flatMap(pattern => pattern === STDIN ? Promise.resolve([pattern]) : globRx(pattern)
-            .pipe(catchError((error: AppError) => {
-                return new Promise<string[]>((resolve) => resolve(Promise.reject({...error, message: 'Error with glob search.'})));
-            }))
-        ),
-        flatMap(a => a),
-        filter(filename => !processed.has(filename)),
-        tap(filename => processed.add(filename)),
-    );
+/**
+ * Looks for matching glob patterns or stdin
+ * @param globPatterns patterns or stdin
+ */
+async function findFiles(globPatterns: string[]): Promise<string[]> {
+    const globPats = globPatterns.filter(filename => filename !== STDIN);
+    const stdin = globPats.length < globPatterns.length ? [ STDIN ] : [];
+    const globs = globPats.length ? (await globP(globPats)) : [];
+    return stdin.concat(globs);
 }
 
 
@@ -334,8 +331,8 @@ function calcExcludeGlobInfo(commandLineExclude: string | undefined): GlobSrcInf
     return excludes.map(({source, glob}) => ({source, glob, regex: minimatch.makeRe(glob, matchBase)}));
 }
 
-function extractGlobExcludesFromConfig(filename: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
-    return (config.ignorePaths || []).map(glob => ({ source: filename, glob, regex: minimatch.makeRe(glob, matchBase)}));
+function extractGlobExcludesFromConfig(source: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
+    return (config.ignorePaths || []).map(glob => ({ source, glob, regex: minimatch.makeRe(glob, matchBase)}));
 }
 
 
@@ -353,11 +350,31 @@ function calcFinalConfigInfo(
     return {configInfo: {...configInfo, config}, filename, text, languageIds};
 }
 
-type GlobRx = (filename: string, options?: minimatch.IOptions) => Observable<string[]>;
-
-
 function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
 }
 
-const globRx: GlobRx = bindNodeCallback<string, string[]>(glob);
+function globP(pattern: string | string[], options?: minimatch.IOptions): Promise<string[]> {
+    const globPattern = typeof pattern === 'string'
+        ? pattern
+        : pattern.length > 1
+        ? `{${pattern.join(',')}}`
+        : (pattern[0] || '');
+    if (!globPattern) {
+        return Promise.resolve([]);
+    }
+    return new Promise<string[]>((resolve, reject) => {
+        const cb = (err: Error, matches: string[]) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(matches);
+        };
+        if (options) {
+            glob(globPattern, options, cb);
+        } else {
+            glob(globPattern, cb);
+        }
+    });
+}
+
