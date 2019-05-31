@@ -10,7 +10,7 @@
             "request": "launch",
             "name": "cspell: Run",
             "program": "${workspaceRoot}/dist/app.js",
-			"args": ["-e", "src", "-v", "**/*.py"],
+			"args": ["--root=..", "-v", "**/*.ts" ],
             "cwd": "${workspaceRoot}",
 			"outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
             "sourceMaps": true

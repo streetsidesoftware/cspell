@@ -81,6 +81,7 @@ program
     .option('--no-issues', 'Do not show the spelling errors.')
     .option('--no-summary', 'Turn off summary message in console')
     .option('-s, --silent', 'Silent mode, suppress error messages')
+    .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
     // The following options are planned features
     // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
     // .option('--force', 'Force the exit value to always be 0')

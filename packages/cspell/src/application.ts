@@ -9,6 +9,7 @@ import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
 import * as Validator from 'cspell-lib';
 import getStdin = require('get-stdin');
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
+import { GlobMatcher } from 'cspell-glob';
 
 // cspell:word nocase
 
@@ -17,12 +18,30 @@ const STDIN = 'stdin';
 
 
 export interface CSpellApplicationOptions extends BaseOptions {
+    /**
+     * Display verbose information
+     */
     verbose?: boolean;
+    /**
+     * Show extensive output.
+     */
     debug?: boolean;
+    /**
+     * a glob to exclude files from being checked.
+     */
     exclude?: string;
+    /**
+     * Only report the words, no line numbers or file names.
+     */
     wordsOnly?: boolean;
+    /**
+     * unique errors per file only.
+     */
     unique?: boolean;
-    stdin?: boolean;
+    /**
+     * root directory, defaults to `cwd`
+     */
+    root?: string;
 }
 
 export interface TraceOptions extends BaseOptions {
@@ -45,8 +64,7 @@ export interface RunResult {
 export interface Issue extends cspell.TextDocumentOffset {}
 
 export interface GlobSrcInfo {
-    glob: string;
-    regex: RegExp;
+    matcher: GlobMatcher;
     source: string;
 }
 
@@ -85,9 +103,12 @@ export interface Emitters {
     error: ErrorEmitter;
 }
 
-const matchBase = { matchBase: true };
-const defaultMinimatchOptions: minimatch.IOptions = { nocase: true };
+interface GlobOptions extends minimatch.IOptions {
+    cwd?: string;
+    root?: string;
+}
 
+const defaultMinimatchOptions: minimatch.IOptions = { nocase: true };
 const defaultConfigGlob: string = '{cspell.json,.cspell.json}';
 const defaultConfigGlobOptions: minimatch.IOptions = defaultMinimatchOptions;
 
@@ -103,17 +124,19 @@ export class CSpellApplicationConfiguration {
     readonly configGlob: string = defaultConfigGlob;
     readonly configGlobOptions: minimatch.IOptions = defaultConfigGlobOptions;
     readonly excludes: GlobSrcInfo[];
+    readonly root: string;
 
     constructor(
         readonly files: string[],
         readonly options: CSpellApplicationOptions,
         readonly emitters: Emitters
     ) {
+        this.root              = path.resolve(options.root || process.cwd());
         this.info              = emitters.info || nullEmitter;
         this.debug             = emitters.debug || ((msg: string) => this.info(msg, MessageTypes.Debug));
         this.configGlob        = options.config || this.configGlob;
         this.configGlobOptions = options.config ? {} : this.configGlobOptions;
-        this.excludes          = calcExcludeGlobInfo(options.exclude);
+        this.excludes          = calcExcludeGlobInfo(this.root, options.exclude);
         this.logIssue          = emitters.issue || nullEmitter;
         this.local             = options.local || '';
         this.uniqueFilter      = options.unique
@@ -158,10 +181,15 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         const debugCfg = { config: {...config, source: null}, source };
         cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
+        const startTime = Date.now();
         const wordOffsets = await cspell.validateText(text, info.configInfo.config);
         const issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets);
+        const elapsed = (Date.now() - startTime) / 1000.0;
         const dictionaries = config.dictionaries || [];
-        cfg.info(`Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${issues.length}`, MessageTypes.Info);
+        cfg.info(
+            `Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${issues.length} ${elapsed}S`,
+            MessageTypes.Info
+        );
         cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
         issues
             .filter(cfg.uniqueFilter)
@@ -217,8 +245,10 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         const config = cspell.readSettingsFiles(configFiles);
         const configInfo: ConfigInfo = { source: configFiles.join(' || '), config };
         // Get Exclusions from the config files.
-        const exclusionGlobs = extractGlobExcludesFromConfig(configInfo.source, configInfo.config);
-        const files = filterFiles(await findFiles(cfg.files), exclusionGlobs);
+        const { root } = cfg;
+        const globOptions = { root, cwd: root };
+        const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(cfg.excludes);
+        const files = filterFiles(await findFiles(cfg.files, globOptions), exclusionGlobs);
 
         return processFiles(fileLoader(files), configInfo);
     }
@@ -230,7 +260,7 @@ Date: ${(new Date()).toUTCString()}
 Options:
     verbose:   ${yesNo(!!cfg.options.verbose)}
     config:    ${cfg.configGlob}
-    exclude:   ${cfg.excludes.map(a => a.glob).join('\n             ')}
+    exclude:   ${extractPatterns(cfg.excludes).map(a => a.glob).join('\n             ')}
     files:     ${cfg.files}
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
     unique:    ${yesNo(!!cfg.options.unique)}
@@ -239,12 +269,12 @@ Options:
 
 
     function isExcluded(filename: string, globs: GlobSrcInfo[]) {
-        const cwd = process.cwd();
-        const relFilename = (filename.slice(0, cwd.length) === cwd) ? filename.slice(cwd.length) : filename;
-
+        const { root } = cfg;
+        const absFilename = path.resolve(root, filename);
         for (const glob of globs) {
-            if (glob.regex.test(relFilename)) {
-                cfg.info(`Excluded File: ${filename}; Excluded by ${glob.glob} from ${glob.source}`, MessageTypes.Info);
+            const m = glob.matcher.matchEx(absFilename);
+            if (m.matched) {
+                cfg.info(`Excluded File: ${path.relative(root, absFilename)}; Excluded by ${m.glob} from ${glob.source}`, MessageTypes.Info);
                 return true;
             }
         }
@@ -252,11 +282,27 @@ Options:
     }
 
     function filterFiles(files: string[], excludeGlobs: GlobSrcInfo[]): string[] {
-        const excludeInfo = excludeGlobs.map(g => `Glob: ${g.glob} from ${g.source}`);
+        const excludeInfo = extractPatterns(excludeGlobs)
+            .map(g => `Glob: ${g.glob} from ${g.source}`);
         cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
         const result = files.filter(filename => !isExcluded(filename, excludeGlobs));
         return result;
     }
+}
+
+interface ExtractPatternResult {
+    glob: string;
+    source: string;
+}
+function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
+    const r = globs
+    .reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
+        const source = g.source;
+        const patterns = typeof g.matcher.patterns === 'string' ? [g.matcher.patterns] : g.matcher.patterns;
+        return info.concat(patterns.map(glob => ({ glob, source })));
+    }, []);
+
+    return r;
 }
 
 
@@ -317,22 +363,39 @@ function readFile(filename: string, encoding: string = UTF8): Promise<string> {
  * Looks for matching glob patterns or stdin
  * @param globPatterns patterns or stdin
  */
-async function findFiles(globPatterns: string[]): Promise<string[]> {
+async function findFiles(globPatterns: string[], options: GlobOptions): Promise<string[]> {
     const globPats = globPatterns.filter(filename => filename !== STDIN);
     const stdin = globPats.length < globPatterns.length ? [ STDIN ] : [];
-    const globs = globPats.length ? (await globP(globPats)) : [];
-    return stdin.concat(globs);
+    const globs = globPats.length ? (await globP(globPats, options)) : [];
+    const cwd = options.cwd || process.cwd();
+    return stdin.concat(globs.map(filename => path.resolve(cwd, filename)));
 }
 
 
-function calcExcludeGlobInfo(commandLineExclude: string | undefined): GlobSrcInfo[] {
-    const excludes = commandLineExclude && commandLineExclude.split(/\s+/g).map(glob => ({glob, source: 'arguments'}))
-        || defaultExcludeGlobs.map(glob => ({glob, source: 'default'}));
-    return excludes.map(({source, glob}) => ({source, glob, regex: minimatch.makeRe(glob, matchBase)}));
+function calcExcludeGlobInfo(root: string, commandLineExclude: string | undefined): GlobSrcInfo[] {
+    const commandLineExcludes =  {
+        globs: commandLineExclude ? commandLineExclude.split(/\s+/g) : [],
+        source: 'arguments'
+    };
+    const defaultExcludes = {
+        globs: defaultExcludeGlobs,
+        source: 'default'
+    };
+
+    const choice = commandLineExcludes.globs.length ? commandLineExcludes : defaultExcludes;
+    const matcher = new GlobMatcher(choice.globs, root);
+    return [{
+        matcher,
+        source: choice.source
+    }];
 }
 
-function extractGlobExcludesFromConfig(source: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
-    return (config.ignorePaths || []).map(glob => ({ source, glob, regex: minimatch.makeRe(glob, matchBase)}));
+function extractGlobExcludesFromConfig(root: string, source: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
+    if (!config.ignorePaths || !config.ignorePaths.length) {
+        return [];
+    }
+    const matcher = new GlobMatcher(config.ignorePaths, root);
+    return [{ source, matcher }];
 }
 
 
@@ -354,7 +417,7 @@ function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
 }
 
-function globP(pattern: string | string[], options?: minimatch.IOptions): Promise<string[]> {
+function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
     const globPattern = typeof pattern === 'string'
         ? pattern
         : pattern.length > 1
