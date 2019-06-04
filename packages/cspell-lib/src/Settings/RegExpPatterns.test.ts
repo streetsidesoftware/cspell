@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as TextRange from '../util/TextRange';
 import { regExMatchUrls, regExMatchCommonHexFormats } from './RegExpPatterns';
 import * as RegPat from './RegExpPatterns';
@@ -11,10 +10,10 @@ describe('Validate InDocSettings', () => {
 
     test('tests regExSpellingGuard', () => {
         const m1 = sampleCode2LF.match(RegPat.regExSpellingGuard);
-        expect(m1).is.not.empty;
-        expect(m1).has.length(5);
+        expect(m1).not.toBeFalsy();
+        expect(m1).toHaveLength(5);
         // cspell:disable
-        expect(m1).is.deep.equal([
+        expect(m1).toEqual([
             "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
             "cspell:disable-next\nconst verybadspelling = 'disable';\n",
             "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
@@ -26,10 +25,10 @@ describe('Validate InDocSettings', () => {
 
     test('tests regExSpellingGuard CRLF', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuard);
-        expect(m1).is.not.empty;
-        expect(m1).has.length(5);
+        expect(m1).not.toBeFalsy;
+        expect(m1).toHaveLength(5);
         // cspell:disable
-        expect(m1).to.deep.equal([
+        expect(m1).toEqual([
             "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
             "cspell:disable-next\nconst verybadspelling = 'disable';\n",
             "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
@@ -46,7 +45,7 @@ describe('Validate InDocSettings', () => {
             RegPat.regExSpellingGuard,
             RegPat.regExMatchCommonHexFormats,
         ], text);
-        expect(rangesToText(text, ranges)).to.deep.eq([
+        expect(rangesToText(text, ranges)).toEqual([
         "  7: 14 https://www.google.com?q=typescript';",
         "  8: 15 http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';",
         '  9: 22 #cccd',
@@ -67,7 +66,7 @@ describe('Validate InDocSettings', () => {
             RegPat.regExSpellingGuard,
             RegPat.regExMatchCommonHexFormats,
         ], text);
-        expect(rangesToText(text, ranges)).to.deep.eq([
+        expect(rangesToText(text, ranges)).toEqual([
         "  7: 14 https://www.google.com?q=typescript';",
         "  8: 15 http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';",
         '  9: 22 #cccd',
@@ -97,7 +96,7 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExMatchCommonHexFormats,
             ], text);
             const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
-            expect(rangesToText(text, mergedRanges)).to.deep.eq([
+            expect(rangesToText(text, mergedRanges)).toEqual([
             '  2:  1 /*\n * this is a comment.\n */',
             "  6: 14 'some nice text goes here'",
             "  7: 13 '",
@@ -142,7 +141,7 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExMatchCommonHexFormats,
             ], text);
             const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
-            expect(rangesToText(text, mergedRanges)).to.deep.eq([
+            expect(rangesToText(text, mergedRanges)).toEqual([
                 '  2:  1 /*\r\n * this is a comment.\r\n */',
                 "  6: 14 'some nice text goes here'",
                 "  7: 13 '",
@@ -173,26 +172,26 @@ describe('Validate InDocSettings', () => {
     );
 
     test('test for hex values', () => {
-        expect(RegPat.regExHexDigits.test('FFEE')).to.be.true;
+        expect(RegPat.regExHexDigits.test('FFEE')).toBe(true);
     });
 
     test('tests finding matching positions', () => {
         const text = sampleCode2LF;
         const urls = TextRange.findMatchingRanges(matchUrl, text);
-        expect(urls.length).equals(2);
+        expect(urls.length).toBe(2);
 
         const hexRanges = TextRange.findMatchingRanges(matchHexValues, text);
-        expect(hexRanges.length).to.be.equal(5);
-        expect(hexRanges[2].startPos).to.be.equal(text.indexOf('0xbadc0ffee'));
+        expect(hexRanges.length).toBe(5);
+        expect(hexRanges[2].startPos).toBe(text.indexOf('0xbadc0ffee'));
 
         const disableChecker = TextRange.findMatchingRanges(RegPat.regExSpellingGuard, text);
-        expect(disableChecker.length).to.be.equal(5);
+        expect(disableChecker.length).toBe(5);
 
         const hereDocs = TextRange.findMatchingRanges(RegPat.regExPhpHereDoc, text);
-        expect(hereDocs.length).to.be.equal(3);
+        expect(hereDocs.length).toBe(3);
 
         const ranges = TextRange.findMatchingRanges(RegPat.regExString, text);
-        expect(rangesToText(text, ranges)).to.deep.eq([
+        expect(rangesToText(text, ranges)).toEqual([
             "  6: 14 'some nice text goes here'",
             "  7: 13 'https://www.google.com?q=typescript'",
             "  8: 14 'http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe'",
@@ -214,20 +213,20 @@ describe('Validate InDocSettings', () => {
     test('tests finding matching positions CRLF', () => {
         const text = sampleCode2CRLF;
         const urls = TextRange.findMatchingRanges(matchUrl, text);
-        expect(urls.length).equals(2);
+        expect(urls.length).toBe(2);
 
         const hexRanges = TextRange.findMatchingRanges(matchHexValues, text);
-        expect(hexRanges.length).to.be.equal(5);
-        expect(hexRanges[2].startPos).to.be.equal(text.indexOf('0xbadc0ffee'));
+        expect(hexRanges.length).toBe(5);
+        expect(hexRanges[2].startPos).toBe(text.indexOf('0xbadc0ffee'));
 
         const disableChecker = TextRange.findMatchingRanges(RegPat.regExSpellingGuard, text);
-        expect(disableChecker.length).to.be.equal(5);
+        expect(disableChecker.length).toBe(5);
 
         const hereDocs = TextRange.findMatchingRanges(RegPat.regExPhpHereDoc, text);
-        expect(hereDocs.length).to.be.equal(3);
+        expect(hereDocs.length).toBe(3);
 
         const ranges = TextRange.findMatchingRanges(RegPat.regExString, text);
-        expect(rangesToText(text, ranges)).to.deep.eq([
+        expect(rangesToText(text, ranges)).toEqual([
             "  6: 14 'some nice text goes here'",
             "  7: 13 'https://www.google.com?q=typescript'",
             "  8: 14 'http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe'",
@@ -249,7 +248,7 @@ describe('Validate InDocSettings', () => {
     test('test matching urls', () => {
         RegPat.regExMatchUrls.lastIndex = 22;
         const reg = new RegExp(RegPat.regExMatchUrls);
-        expect(reg.lastIndex).to.be.eq(0);
+        expect(reg.lastIndex).toBe(0);
         const text = `
             <p>
                 some <b>bold</b> <i class='example'>text</i>
@@ -258,9 +257,9 @@ describe('Validate InDocSettings', () => {
             </p>
         `;
         const matches = text.match(reg);
-        expect(matches).to.be.not.null;
-        expect(matches).to.have.length(1);
-        expect(matches![0]).to.be.equal('http://example.org');
+        expect(matches).not.toBeNull();
+        expect(matches).toHaveLength(1);
+        expect(matches![0]).toBe('http://example.org');
     });
 
     test('test matching href', () => {
@@ -273,22 +272,36 @@ describe('Validate InDocSettings', () => {
             </p>
         `;
         const matches = text.match(reg);
-        expect(matches).to.be.not.null;
-        expect(matches).to.have.length(2);
-        expect(matches![0]).to.be.equal('href="http://example.org"');
-        expect(matches![1]).to.be.equal('href="/example/"');
+        expect(matches).not.toBeNull();
+        expect(matches).toHaveLength(2);
+        expect(matches![0]).toBe('href="http://example.org"');
+        expect(matches![1]).toBe('href="/example/"');
     });
 
     test('test sha regex', () => {
         RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('')).to.be.false;
+        expect(RegPat.regExSha.test('')).toBe(false);
         RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w==')).to.be.true;
+        expect(RegPat.regExSha.test('sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w==')).toBe(true);
         RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g==')).to.be.true;
+        expect(RegPat.regExSha.test('sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g==')).toBe(true);
         RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('sha1-RBT/dKUIecII7l/cgm4ywwNUnto=')).to.be.true;
+        expect(RegPat.regExSha.test('sha1-RBT/dKUIecII7l/cgm4ywwNUnto=')).toBe(true);
         RegPat.regExSha.lastIndex = 0;
+    });
+
+    test('test regExCert', () => {
+        RegPat.regExCert.lastIndex = 0;
+        const match = sampleCert.match(RegPat.regExCert);
+        expect(match).toHaveLength(3);
+        expect(nonCert.match(RegPat.regExCert)).toBeNull();
+    });
+
+    test('test regExPublicKey', () => {
+        RegPat.regExCert.lastIndex = 0;
+        const match = sampleCert.match(RegPat.regExPublicKey);
+        expect(match).toHaveLength(1);
+        expect(nonCert.match(RegPat.regExPublicKey)).toBeNull();
     });
 });
 
@@ -373,6 +386,52 @@ SQL;
 
 Not checked.
 
+`;
+
+const nonCert = `
+if [[ "\${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
+echo "\${certText}" | grep -A 1 "Subject Alternative Name:" \
+    | sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2;
+fi;
+`;
+
+const sampleCert = `
+-----BEGIN RSA PRIVATE KEY-----
+izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI
+MbS2U6wTS24SZk5RunJIUkitRKeWWMS28SLGfkDs1bBYlSPa5smAd3/q1OePi4ae
+dU6YgWuDxzBAKEKVSUu6pA2HOdyQ9N4F1dI+F8w9J990zE93EgyNqZFBBa2L70h4
+M7DrB0gJBWMdUMoxGnun5glLiCMo2JrHZ9RkMiallS1sHMhELx2UAlP8I1+0Mav8
+iMlHGyUW8EJy0paVf09MPpceEcVwDBeX0+G4UQlO551GTFtOSRjcD8U+GkCzka9W
+/SFQrSGe3Gh3SDaOw/4JEMAjWPDLiCglwh0rLIO4VwU6AxzTCuCw3d1ZxQsU6VFQ
+PqHA8haOUATZIrp3886PBThVqALBk9p1Nqn51bXLh13Zy9DZIVx4Z5Ioz/EGuzgR
+d68VW5wybLjYE2r6Q9nHpitSZ4ZderwjIZRes67HdxYFw8unm4Wo6kuGnb5jSSag
+8S86b6zEmkser+SDYgGketS2DZ4hB+vh2ujSXmS8Gkwrn+BfHMzkbtio8lWbGw0l
+eM1tfdFZ6wMTLkxRhBkBK4JiMiUMvpERyPib6a2L6iXTfH+3RUDS6A==
+-----END RSA PRIVATE KEY-----
+
+-----BEGIN RSA PUBLIC KEY-----
+izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI
+MbS2U6wTS24SZk5RunJIUkitRKeWWMS28SLGfkDs1bBYlSPa5smAd3/q1OePi4ae
+dU6YgWuDxzBAKEKVSUu6pA2HOdyQ9N4F1dI+F8w9J990zE93EgyNqZFBBa2L70h4
+M7DrB0gJBWMdUMoxGnun5glLiCMo2JrHZ9RkMiallS1sHMhELx2UAlP8I1+0Mav8
+iMlHGyUW8EJy0paVf09MPpceEcVwDBeX0+G4UQlO551GTFtOSRjcD8U+GkCzka9W
+/SFQrSGe3Gh3SDaOw/4JEMAjWPDLiCglwh0rLIO4VwU6AxzTCuCw3d1ZxQsU6VFQ
+PqHA8haOUATZIrp3886PBThVqALBk9p1Nqn51bXLh13Zy9DZIVx4Z5Ioz/EGuzgR
+d68VW5wybLjYE2r6Q9nHpitSZ4ZderwjIZRes67HdxYFw8unm4Wo6kuGnb5jSSag
+8S86b6zEmkser+SDYgGketS2DZ4hB+vh2ujSXmS8Gkwrn+BfHMzkbtio8lWbGw0l
+eM1tfdFZ6wMTLkxRhBkBK4JiMiUMvpERyPib6a2L6iXTfH+3RUDS6A==
+-----END RSA PUBLIC KEY-----
+
+-----BEGIN CERTIFICATE-----
+MIICMzCCAZygAwIBAgIJALiPnVsvq8dsMA0GCSqGSIb3DQEBBQUAMFMxCzAJBgNV
+BAYTAlVTMQwwCgYDVQQIEwNmb28xDDAKBgNVBAcTA2ZvbzEMMAoGA1UEChMDZm9v
+OveIHyc0E0KIbhjK5FkCBU4CiZrbfHagaW7ZEcN0tt3EvpbOMxxc/ZQU2WN/s/wP
+xph0pSfsfFsTKM4RhTWD2v4fgk+xZiKd1p0+L4hTtpwnEw0uXRVd0ki6muwV5y/P
++5FHUeldq+pgTcgzuK8CAwEAAaMPMA0wCwYDVR0PBAQDAgLkMA0GCSqGSIb3DQEB
+BQUAA4GBAJiDAAtY0mQQeuxWdzLRzXmjvdSuL9GoyT3BF/jSnpxz5/58dba8pWen
+v3pj4P3w5DoOso0rzkZy2jEsEitlVM2mLSbQpMM+MUVQCQoiG6W9xuCFuxSrwPIS
+pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
+-----END CERTIFICATE-----
 `;
 
 const sampleCode2LF = sampleCodeSrc.replace(/\r?\n/g, '\n');
