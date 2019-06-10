@@ -1,4 +1,4 @@
-import Uri from 'vscode-uri';
+import { URI as Uri} from 'vscode-uri';
 import * as minimatch from 'minimatch';
 
 const separator = '/';
