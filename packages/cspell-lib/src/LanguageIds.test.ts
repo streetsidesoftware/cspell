@@ -7,6 +7,7 @@ describe('Validate LanguageIds', () => {
         expect(LangId.getLanguagesForExt('ts')).to.contain('typescript');
         expect(LangId.getLanguagesForExt('.tex')).to.contain('latex');
         expect(LangId.getLanguagesForExt('tex')).to.contain('latex');
+        expect(LangId.getLanguagesForExt('hs')).to.contain('haskell');
     });
 
     test('test that all extensions start with a .', () => {

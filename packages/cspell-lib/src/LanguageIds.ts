@@ -37,6 +37,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'go', extensions: ['.go'], },
     { id: 'groovy', extensions: ['.groovy', '.gvy', '.gradle'], },
     { id: 'handlebars', extensions: ['.handlebars', '.hbs'], },
+    { id: 'haskell', extensions: ['.hs', '.lhs'], },
     { id: 'html', extensions: [
             '.html',
             '.htm',
