@@ -166,6 +166,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'map', extensions: ['.map'], },
     { id: 'image', extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif']},
     { id: 'binary', extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o']},
+    { id: 'apiblueprint', extensions: ['.apib', '.apiblueprint']},
 ];
 
 export const languageIds: string[] = languageExtensionDefinitions.map(({id}) => id);
