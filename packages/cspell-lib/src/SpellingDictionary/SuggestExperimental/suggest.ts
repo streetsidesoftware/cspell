@@ -17,13 +17,13 @@ const wPrefix = '^';
 const wSuffix = '$';
 // const wMidFix = '*';
 
-export interface SuggestionIterator extends IterableIterator<SuggestionResult> {
+export interface SuggestionIterator extends Generator<SuggestionResult, any, number | undefined> {
     /**
      * Ask for the next result.
      * minValue - is used to filter out all suggestions with a matching value less than minValue
      */
-    next: (minValue: number) => IteratorResult<SuggestionResult>;
-    [Symbol.iterator]: () => SuggestionIterator;
+    // next: (minValue: number) => IteratorResult<SuggestionResult>;
+    // [Symbol.iterator]: () => SuggestionIterator;
 }
 
 export function* suggest(
@@ -63,4 +63,3 @@ export function* suggestIteration(
         }
     }
 }
-

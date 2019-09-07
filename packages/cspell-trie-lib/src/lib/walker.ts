@@ -24,14 +24,13 @@ export enum CompoundWordsMethod {
     JOIN_WORDS,
 }
 
-export interface WalkerIterator extends IterableIterator<YieldResult> {
+export interface WalkerIterator extends Generator<YieldResult, any, boolean | undefined> {
     /**
      * Ask for the next result.
      * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
      * This can be used to limit the walker's depth.
      */
-    next: (goDeeper?: boolean) => IteratorResult<YieldResult>;
-    [Symbol.iterator]: () => WalkerIterator;
+    // next: (goDeeper?: boolean) => IteratorResult<YieldResult>;
 }
 
 /**
@@ -82,14 +81,14 @@ export interface Hinting {
     goDeeper: boolean;
 }
 
-export interface HintedWalkerIterator extends IterableIterator<YieldResult> {
+export interface HintedWalkerIterator extends Generator<YieldResult, any, Hinting | undefined> {
     /**
      * Ask for the next result.
      * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
      * This can be used to limit the walker's depth.
      */
-    next: (hinting?: Hinting) => IteratorResult<YieldResult>;
-    [Symbol.iterator]: () => WalkerIterator;
+    // next: (hinting?: Hinting) => IteratorResult<YieldResult>;
+    // [Symbol.iterator]: () => HintedWalkerIterator;
 }
 
 /**
@@ -142,4 +141,3 @@ export function* hintedWalker(
         baseText = baseText.slice(0, -1);
     }
 }
-

@@ -29,15 +29,14 @@ export interface SuggestionResult {
     cost: Cost;
 }
 
-export interface SuggestionIterator extends IterableIterator<SuggestionResult> {
+export interface SuggestionIterator extends Generator<SuggestionResult, any, MaxCost | undefined> {
     /**
      * Ask for the next result.
      * maxCost - sets the max cost for following suggestions
      * This is used to limit which suggestions are emitted.
      * If the iterator.next() returns `undefined`, it is to request a value for maxCost.
      */
-    next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult>;
-    [Symbol.iterator]: () => SuggestionIterator;
+    // next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult>;
 }
 
 export function suggest(
@@ -91,7 +90,7 @@ export function* genCompoundableSuggestions(
         [JOIN_SEPARATOR]: insertSpaceCost,
     };
 
-    let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
+    let costLimit: MaxCost = Math.min(bc * word.length / 2, bc * maxNumChanges);
     let a: number = 0;
     let b: number = 0;
     for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
