@@ -88,7 +88,7 @@ export interface HintedWalkerIterator extends IterableIterator<YieldResult> {
      * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
      * This can be used to limit the walker's depth.
      */
-    next: (hinting: Hinting) => IteratorResult<YieldResult>;
+    next: (hinting?: Hinting) => IteratorResult<YieldResult>;
     [Symbol.iterator]: () => WalkerIterator;
 }
 
