@@ -35,7 +35,7 @@
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
             // * will match against any file type.
             "languageId": "c,cpp",
-            "allowCompoundWords": true,
+            // "allowCompoundWords": false,
             // Language local. i.e. en-US, de-AT, or ru. * will match all locals.
             // Multiple locals can be specified like: "en, en-US" to match both English and English US.
             "local": "*",
@@ -71,16 +71,11 @@
             "ignoreRegExpList": ["/'s\\b/"]
         },
         {
-            "language": "nl",
+            "language": "en",
             "filename": "**/{*.c,*.cpp}",
             "ignoreRegExpList": ["/'s\\b/"],
-            "dictionaryDefinitions": [
-                {
-                    "name": "cpp",
-                    "path": "../dictionaries/companies.txt",
-                    "description": "C/C++ Keywords and common library functions."
-                }
-            ]
+            "dictionaryDefinitions": [],
+            "allowCompoundWords": false
         },
         // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
         {
