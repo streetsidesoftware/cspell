@@ -7,6 +7,7 @@ import {
     Glob,
     Source,
     LanguageSetting,
+    CSpellSettingsWithSourceTrace,
 } from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
@@ -66,13 +67,13 @@ function normalizeSettings(settings: CSpellSettings, pathToSettings: string): CS
     return finalizeSettings;
 }
 
-function importSettings(filename: string, defaultValues: CSpellUserSettingsWithComments | CSpellSettings = defaultSettings): CSpellSettings {
+function importSettings(filename: string, defaultValues: CSpellSettings = defaultSettings): CSpellSettings {
     filename = path.resolve(filename);
     if (cachedFiles.has(filename)) {
         return cachedFiles.get(filename)!;
     }
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-    const finalizeSettings: CSpellSettings = { id };
+    const finalizeSettings: CSpellSettingsWithSourceTrace = { id };
     cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
     const settings: CSpellSettings = {...defaultValues as CSpellSettings, id, ...readJsonFile(filename)};
     const pathToSettings = path.dirname(filename);
@@ -148,7 +149,7 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
 
     const optionals = includeRegExpList.length ? { includeRegExpList } : {};
 
-    return {
+    const settings: CSpellSettingsWithSourceTrace = {
         ...left,
         ...right,
         ...optionals,
@@ -167,6 +168,7 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
         source: mergeSources(left, right),
     };
+    return settings;
 }
 
 function hasLeftAncestor(s: CSpellSettings, left: CSpellSettings): boolean {
@@ -177,12 +179,19 @@ function hasRightAncestor(s: CSpellSettings, right: CSpellSettings): boolean {
     return hasAncestor(s, right, 1);
 }
 
-function hasAncestor(s: CSpellSettings, ancestor: CSpellSettings, side: number): boolean {
-    return s.source
+function isCSpellSettingsWithSourceTrace(s: CSpellSettings | CSpellSettingsWithSourceTrace): s is CSpellSettingsWithSourceTrace {
+    return !!(s as CSpellSettingsWithSourceTrace).source;
+}
+
+function hasAncestor(s: CSpellSettings | CSpellSettingsWithSourceTrace, ancestor: CSpellSettings, side: number): boolean {
+    if (isCSpellSettingsWithSourceTrace(s)) {
+        return s.source
         && s.source.sources
         && s.source.sources[side]
         && (s.source.sources[side] === ancestor || hasAncestor(s.source.sources[side], ancestor, side))
         || false;
+    }
+    return false;
 }
 
 export function mergeInDocSettings(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
@@ -212,7 +221,7 @@ export function calcOverrideSettings(settings: CSpellSettings, filename: string)
 export function finalizeSettings(settings: CSpellSettings): CSpellSettings {
     // apply patterns to any RegExpLists.
 
-    const finalized = {
+    const finalized: CSpellSettingsWithSourceTrace = {
         ...settings,
         ignoreRegExpList: applyPatterns(settings.ignoreRegExpList, settings.patterns),
         includeRegExpList: applyPatterns(settings.includeRegExpList, settings.patterns),
@@ -279,8 +288,8 @@ export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[])
 }
 
 function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
-    const { source: a = { name: 'left'} } = left;
-    const { source: b = { name: 'right'} } = right;
+    const { source: a = { name: 'left'} } = left as CSpellSettingsWithSourceTrace;
+    const { source: b = { name: 'right'} } = right as CSpellSettingsWithSourceTrace;
     return {
         name: [left.name || a.name, right.name || b.name].join('|'),
         sources: [left, right],
@@ -291,8 +300,8 @@ function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
  * Return a list of Setting Sources used to create this Setting.
  * @param settings settings to search
  */
-export function getSources(settings: CSpellSettings): CSpellSettings[] {
-    if (!settings.source || !settings.source.sources || !settings.source.sources.length) {
+export function getSources(settings: CSpellSettings | CSpellSettingsWithSourceTrace): CSpellSettings[] {
+    if (!isCSpellSettingsWithSourceTrace(settings) || !settings.source || !settings.source.sources || !settings.source.sources.length) {
         return [settings];
     }
     const left = settings.source.sources[0];
