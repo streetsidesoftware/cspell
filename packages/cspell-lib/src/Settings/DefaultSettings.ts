@@ -1,4 +1,4 @@
-import { CSpellSettings, RegExpPatternDefinition, DictionaryDefinition } from './CSpellSettingsDef';
+import { CSpellSettings, RegExpPatternDefinition, DictionaryDefinition, CSpellSettingsWithSourceTrace } from './CSpellSettingsDef';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';
@@ -50,7 +50,7 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
 ];
 
 
-export const _defaultSettings: CSpellSettings = {
+export const _defaultSettings: CSpellSettingsWithSourceTrace = {
     id: 'static_defaults',
     language: 'en',
     name: 'Static Defaults',
@@ -63,7 +63,6 @@ export const _defaultSettings: CSpellSettings = {
     ],
     maxNumberOfProblems: 100,
     numSuggestions: 10,
-    spellCheckDelayMs: 50,
     words: [],
     userWords: [],
     ignorePaths: [],

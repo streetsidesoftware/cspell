@@ -5,151 +5,196 @@ export type ReplaceMap = ReplaceEntry[];
 /**
  * These settings come from user and workspace settings.
  */
-export interface CSpellPackageSettings extends CSpellUserSettings {
-}
+export interface CSpellPackageSettings extends CSpellUserSettings {}
 
 export interface CSpellUserSettings extends CSpellSettings {}
 
 export interface CSpellSettings extends FileSettings, LegacySettings {
+}
+
+export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
     source?: Source;
 }
 
 export interface FileSettings extends ExtendableSettings {
-    // Version of the setting file.
+    /** Version of the setting file. */
     version?: string;
 
-    // Words to add to dictionary -- should only be in the user config file.
+    /** Words to add to dictionary -- should only be in the user config file. */
     userWords?: string[];
 
-    // Other settings files to be included
+    /** Other settings files to be included */
     import?: string | string[];
 }
 
 export interface ExtendableSettings extends Settings {
-    // Overrides to apply based upon the file path.
+    /** Overrides to apply based upon the file path. */
     overrides?: OverrideSettings[];
 }
 
 export interface Settings extends BaseSetting {
-    // current active spelling language
+    /**
+     * Current active spelling language
+     * Example: "en-GB" for British English
+     * Example: "en,nl" to enable both English and Dutch
+     * @default "en"
+     */
     language?: LocalId;
 
-    // list of words to be always considered correct
+    /** list of words to be always considered correct */
     words?: string[];
 
-    // list of words to be ignored
+    /** list of words to be ignored */
     ignoreWords?: string[];
 
-    // matching file paths will to be ignored
+    /** Glob file patterns to be ignored */
     ignorePaths?: Glob[];
 
-    // list of words to always be considered incorrect.
+    /** list of words to always be considered incorrect. */
     flagWords?: string[];
 
-    // languageIds for the files to spell check.
+    /** languageIds for the files to spell check. */
     enabledLanguageIds?: LanguageId[];
 
-    // The maximum number of problems to report in a file.
+    /**
+     * The maximum number of problems to report in a file.
+     * @default 100
+     */
     maxNumberOfProblems?: number;
 
-    // The maximum number of times the same word can be flagged as an error in a file.
+    /**
+     * The maximum number of times the same word can be flagged as an error in a file.
+     * @default 5
+     */
     maxDuplicateProblems?: number;
 
-    // The minimum length of a word before checking it against a dictionary.
+    /**
+     * The minimum length of a word before checking it against a dictionary.
+     * @default 4
+     */
     minWordLength?: number;
 
-    // Number of suggestions to make
+    /**
+     * Number of suggestions to make
+     * @default 10
+     */
     numSuggestions?: number;
 
-    // Additional settings for individual languages.
+    /** Additional settings for individual languages. */
     languageSettings?: LanguageSetting[];
 
-    // Forces the spell checker to assume a give language id. Used mainly as an Override.
+    /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
     languageId?: LanguageId;
 }
 
-export interface LegacySettings {
-    /***********************
-     * VS Code Spell Checker Settings below
+    /**
+     * VS Code Spell Checker Settings
      * To be Removed
+     * @deprecated
      */
+    export interface LegacySettings {
 
-    // Show status
+    /**
+     * Show status
+     * @deprecated
+     */
     showStatus?: boolean;
 
-    // Delay in ms after a document has changed before checking it for spelling errors.
+    /**
+     * Delay in ms after a document has changed before checking it for spelling errors.
+     * @deprecated
+     */
     spellCheckDelayMs?: number;
     /************************/
 }
 
 export interface OverrideSettings extends Settings, OverrideFilterFields {
-    // Sets the programming language id
+    /** Sets the programming language id */
     languageId?: LanguageId;
 
-    // Sets the local
+    /** Sets the local */
     language?: LocalId;
 }
 
 export interface OverrideFilterFields {
+    /** Glob pattern or patterns to match against */
     filename: Glob | Glob[];
 }
 
 export interface BaseSetting {
-    // Optional identifier
+    /** Optional identifier */
     id?: string;
 
-    // Optional name of configuration
+    /** Optional name of configuration */
     name?: string;
 
-    // Optional description of configuration
+    /** Optional description of configuration */
     description?: string;
 
-    // Enabled
+    /**
+     * Is the spell checker enabled
+     * @default true
+     */
     enabled?: boolean;
 
-    // True to enable compound word checking.
+    /**
+     * True to enable compound word checking.
+     * @default false
+     */
     allowCompoundWords?: boolean;
 
-    // Words must match case rules.
+    /**
+     * Words must match case rules.
+     * @default false
+     */
     caseSensitive?: boolean;
 
-    // Define additional available dictionaries
+    /** Define additional available dictionaries */
     dictionaryDefinitions?: DictionaryDefinition[];
 
-    // Optional list of dictionaries to use.
+    /** Optional list of dictionaries to use. */
     dictionaries?: DictionaryId[];
 
-    // List of patterns to exclude from spell checking
+    /**
+     * List of RegExp patterns or Pattern names to exclude from spell checking
+     * Example: ["href"] - to exclude html href
+     */
     ignoreRegExpList?: RegExpList;
 
-    // List of patterns to define the text to be included for spell checking
+    /**
+     * List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.
+     * If includeRegExpList is defined, ONLY, text matching the included patterns will be checked.
+     */
     includeRegExpList?: RegExpList;
 
-    // Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList
+    /** Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList */
     patterns?: RegExpPatternDefinition[];
 }
 
 export type DictionaryFileTypes = 'S'|'W'|'C'|'T';
 
 export interface DictionaryDefinition {
-    // The reference name of the dictionary, used with program language settings
+    /** The reference name of the dictionary, used with program language settings */
     name: DictionaryId;
-    // Optional description
+    /** Optional description */
     description?: string;
-    // Path to the file, if undefined the path to the extension dictionaries is assumed
+    /** Path to the file, if undefined the path to the extension dictionaries is assumed */
     path?: string;
-    // File name
+    /** File name */
     file: string;
-    // Type of file:
-    //  S - single word per line,
-    //  W - each line can contain one or more word separated by space,
-    //  C - each line is treated like code (Camel Case is allowed)
-    // Default is C
-    // C is the slowest to load due to the need to split each line based upon code splitting rules.
+    /**
+     * Type of file:
+     * S - single word per line,
+     * W - each line can contain one or more words separated by space,
+     * C - each line is treated like code (Camel Case is allowed)
+     * Default is S
+     * C is the slowest to load due to the need to split each line based upon code splitting rules.
+     * @default "S"
+     */
     type?: DictionaryFileTypes;
-    // Replacement pairs
+    /** Replacement pairs */
     repMap?: ReplaceMap;
-    // Use Compounds
+    /** Use Compounds */
     useCompounds?: boolean;
 }
 
@@ -157,104 +202,68 @@ export interface LanguageSetting extends LanguageSettingFilterFields, BaseSettin
 }
 
 export interface LanguageSettingFilterFields {
-    // The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages
+    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
     languageId: LanguageId | LanguageId[];
-    // The local filter, matches against the language. This can be a comma separated list. "*" will match all locals.
+    /** The local filter, matches against the language. This can be a comma separated list. "*" will match all locals. */
     local?: LocalId | LocalId[];
 }
 
 export type RegExpList = PatternRef[];
 
-// A PatternRef is a Pattern or PatternId.
+/** A PatternRef is a Pattern or PatternId. */
 export type PatternRef = Pattern | PatternId;
 
 export type Pattern = string | RegExp;
 
-// This matches the name in a pattern definition
-export type PatternId = string;
+export type PreDefinedPatterns =
+    'Base64' |
+    'CStyleComment' |
+    'Email' |
+    'EscapeCharacters' |
+    'HexDigits' |
+    'HexValues' |
+    'href' |
+    'PhpHereDoc' |
+    'PublicKey' |
+    'RsaCert' |
+    'SHA' |
+    'SpellCheckerDisable' |
+    'string' |
+    'Urls' |
+    'Everything';
 
-// This matches the name in a dictionary definition
+/** This matches the name in a pattern definition */
+export type PatternId = string | PreDefinedPatterns;
+
+/** This matches the name in a dictionary definition */
 export type DictionaryId = string;
 
-// This is a written language local like: 'en', 'en-UK', 'fr', 'es', 'de', etc.
+/** This is a written language local like: 'en', 'en-GB', 'fr', 'es', 'de', etc. */
 export type LocalId = string;
 
-// These are glob expressions
+/** These are glob expressions */
 export type Glob = string;
 
-// This can be '*', 'typescript', 'cpp', 'json', etc.
+/** This can be '*', 'typescript', 'cpp', 'json', etc. */
 export type LanguageId = string;
 
 export interface RegExpPatternDefinition {
+    /**
+     * Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList
+     * It is possible to redefine one of the predefined patterns to override its value.
+     */
     name: PatternId;
+    /**
+     * RegExp pattern
+     */
     pattern: PatternRef;
+    /**
+     * Description of the pattern.
+     */
     description?: string;
 }
 
-export interface CSpellUserSettingsWithComments extends CSpellUserSettings {
-    // comment at the beginning of the file
-    '//^'?: string[];
-
-    // Version of the setting file.
-    '// version'?: string[];
-
-    // Name of configuration
-    '// name'?: string[];
-
-    // Description of configuration
-    '// description'?: string[];
-
-    // current active spelling language
-    '// language'?: string[];
-
-    // list of words to be always considered correct
-    '// words'?: string[];  // comment for
-
-    // matching file paths will to be ignored
-    '// ignorePaths'?: string[];
-
-    // list of words to always be considered incorrect.
-    '// flagWords'?: string[];
-
-    // Enabled
-    '// enabled'?: string[];
-
-    // Show status
-    '// showStatus'?: string[];
-
-    // Delay after a document has changed before checking it for spelling errors.
-    '// spellCheckDelayMs'?: string[];
-
-    // languageIds for the files to spell check.
-    '// enabledLanguageIds'?: string[];
-
-    // The maximum number of problems to report in a file.
-    '// maxNumberOfProblems'?: string[];
-
-    // Words to add to dictionary -- should only be in the user config file.
-    '// userWords'?: string[];
-
-    // The minimum length of a word before checking it against a dictionary.
-    '// minWordLength'?: string[];
-
-    // Number of suggestions to make
-    '// numSuggestions'?: string[];
-
-    // List of patterns to exclude from spell checking
-    '// ignoreRegExpList'?: string[];
-
-    // Compound Word settings
-    '// allowCompoundWords'?: string[];
-
-    // Case Sensitive setting
-    '// caseSensitive'?: string[];
-
-    // Include other settings files.
-    '// import'?: string[];
-
-    // comment at the end of the file
-    '//$'?: string[];
-}
+export interface CSpellUserSettingsWithComments extends CSpellUserSettings {}
 
 export interface Source {
     name: string;
