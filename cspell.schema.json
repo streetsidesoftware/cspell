@@ -435,6 +435,9 @@
     }
   },
   "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "allowCompoundWords": {
       "default": false,
       "description": "True to enable compound word checking.",
@@ -592,7 +595,8 @@
       "type": "array"
     },
     "version": {
-      "description": "Version of the setting file.",
+      "default": "0.1",
+      "description": "Configuration format version of the setting file.",
       "type": "string"
     },
     "words": {

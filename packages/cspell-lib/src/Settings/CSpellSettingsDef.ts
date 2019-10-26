@@ -10,6 +10,7 @@ export interface CSpellPackageSettings extends CSpellUserSettings {}
 export interface CSpellUserSettings extends CSpellSettings {}
 
 export interface CSpellSettings extends FileSettings, LegacySettings {
+    $schema?: string;
 }
 
 export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
@@ -17,8 +18,11 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
 }
 
 export interface FileSettings extends ExtendableSettings {
-    /** Version of the setting file. */
-    version?: string;
+    /**
+     * Configuration format version of the setting file.
+     * @default "0.1"
+     */
+    version?: string | '0.1';
 
     /** Words to add to dictionary -- should only be in the user config file. */
     userWords?: string[];
