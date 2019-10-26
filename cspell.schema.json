@@ -1,0 +1,611 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "definitions": {
+    "DictionaryDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Optional description",
+          "type": "string"
+        },
+        "file": {
+          "description": "File name",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "The reference name of the dictionary, used with program language settings"
+        },
+        "path": {
+          "description": "Path to the file, if undefined the path to the extension dictionaries is assumed",
+          "type": "string"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs"
+        },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file:\nS - single word per line,\nW - each line can contain one or more words separated by space,\nC - each line is treated like code (Camel Case is allowed)\nDefault is S\nC is the slowest to load due to the need to split each line based upon code splitting rules."
+        },
+        "useCompounds": {
+          "description": "Use Compounds",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "file"
+      ],
+      "type": "object"
+    },
+    "DictionaryFileTypes": {
+      "enum": [
+        "S",
+        "W",
+        "C",
+        "T"
+      ],
+      "type": "string"
+    },
+    "DictionaryId": {
+      "description": "This matches the name in a dictionary definition",
+      "type": "string"
+    },
+    "Glob": {
+      "description": "These are glob expressions",
+      "type": "string"
+    },
+    "LanguageId": {
+      "description": "This can be '*', 'typescript', 'cpp', 'json', etc.",
+      "type": "string"
+    },
+    "LanguageSetting": {
+      "additionalProperties": false,
+      "properties": {
+        "allowCompoundWords": {
+          "default": false,
+          "description": "True to enable compound word checking.",
+          "type": "boolean"
+        },
+        "caseSensitive": {
+          "default": false,
+          "description": "Words must match case rules.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Optional description of configuration",
+          "type": "string"
+        },
+        "dictionaries": {
+          "description": "Optional list of dictionaries to use.",
+          "items": {
+            "$ref": "#/definitions/DictionaryId"
+          },
+          "type": "array"
+        },
+        "dictionaryDefinitions": {
+          "description": "Define additional available dictionaries",
+          "items": {
+            "$ref": "#/definitions/DictionaryDefinition"
+          },
+          "type": "array"
+        },
+        "enabled": {
+          "default": true,
+          "description": "Is the spell checker enabled",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Optional identifier",
+          "type": "string"
+        },
+        "ignoreRegExpList": {
+          "$ref": "#/definitions/RegExpList",
+          "description": "List of RegExp patterns or Pattern names to exclude from spell checking\nExample: [\"href\"] - to exclude html href"
+        },
+        "includeRegExpList": {
+          "$ref": "#/definitions/RegExpList",
+          "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
+        },
+        "languageId": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LanguageId"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/LanguageId"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "The language id.  Ex: \"typescript\", \"html\", or \"php\".  \"*\" -- will match all languages"
+        },
+        "local": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LocalId"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/LocalId"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "The local filter, matches against the language. This can be a comma separated list. \"*\" will match all locals."
+        },
+        "name": {
+          "description": "Optional name of configuration",
+          "type": "string"
+        },
+        "patterns": {
+          "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
+          "items": {
+            "$ref": "#/definitions/RegExpPatternDefinition"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "languageId"
+      ],
+      "type": "object"
+    },
+    "LocalId": {
+      "description": "This is a written language local like: 'en', 'en-GB', 'fr', 'es', 'de', etc.",
+      "type": "string"
+    },
+    "OverrideSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "allowCompoundWords": {
+          "default": false,
+          "description": "True to enable compound word checking.",
+          "type": "boolean"
+        },
+        "caseSensitive": {
+          "default": false,
+          "description": "Words must match case rules.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Optional description of configuration",
+          "type": "string"
+        },
+        "dictionaries": {
+          "description": "Optional list of dictionaries to use.",
+          "items": {
+            "$ref": "#/definitions/DictionaryId"
+          },
+          "type": "array"
+        },
+        "dictionaryDefinitions": {
+          "description": "Define additional available dictionaries",
+          "items": {
+            "$ref": "#/definitions/DictionaryDefinition"
+          },
+          "type": "array"
+        },
+        "enabled": {
+          "default": true,
+          "description": "Is the spell checker enabled",
+          "type": "boolean"
+        },
+        "enabledLanguageIds": {
+          "description": "languageIds for the files to spell check.",
+          "items": {
+            "$ref": "#/definitions/LanguageId"
+          },
+          "type": "array"
+        },
+        "filename": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Glob"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/Glob"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "Glob pattern or patterns to match against"
+        },
+        "flagWords": {
+          "description": "list of words to always be considered incorrect.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "Optional identifier",
+          "type": "string"
+        },
+        "ignorePaths": {
+          "description": "Glob file patterns to be ignored",
+          "items": {
+            "$ref": "#/definitions/Glob"
+          },
+          "type": "array"
+        },
+        "ignoreRegExpList": {
+          "$ref": "#/definitions/RegExpList",
+          "description": "List of RegExp patterns or Pattern names to exclude from spell checking\nExample: [\"href\"] - to exclude html href"
+        },
+        "ignoreWords": {
+          "description": "list of words to be ignored",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "includeRegExpList": {
+          "$ref": "#/definitions/RegExpList",
+          "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
+        },
+        "language": {
+          "$ref": "#/definitions/LocalId",
+          "default": "en",
+          "description": "Sets the local"
+        },
+        "languageId": {
+          "$ref": "#/definitions/LanguageId",
+          "description": "Sets the programming language id"
+        },
+        "languageSettings": {
+          "description": "Additional settings for individual languages.",
+          "items": {
+            "$ref": "#/definitions/LanguageSetting"
+          },
+          "type": "array"
+        },
+        "maxDuplicateProblems": {
+          "default": 5,
+          "description": "The maximum number of times the same word can be flagged as an error in a file.",
+          "type": "number"
+        },
+        "maxNumberOfProblems": {
+          "default": 100,
+          "description": "The maximum number of problems to report in a file.",
+          "type": "number"
+        },
+        "minWordLength": {
+          "default": 4,
+          "description": "The minimum length of a word before checking it against a dictionary.",
+          "type": "number"
+        },
+        "name": {
+          "description": "Optional name of configuration",
+          "type": "string"
+        },
+        "numSuggestions": {
+          "default": 10,
+          "description": "Number of suggestions to make",
+          "type": "number"
+        },
+        "patterns": {
+          "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
+          "items": {
+            "$ref": "#/definitions/RegExpPatternDefinition"
+          },
+          "type": "array"
+        },
+        "words": {
+          "description": "list of words to be always considered correct",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "filename"
+      ],
+      "type": "object"
+    },
+    "Pattern": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "global": {
+              "type": "boolean"
+            },
+            "ignoreCase": {
+              "type": "boolean"
+            },
+            "lastIndex": {
+              "type": "number"
+            },
+            "multiline": {
+              "type": "boolean"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source",
+            "global",
+            "ignoreCase",
+            "multiline",
+            "lastIndex"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "PatternId": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/PreDefinedPatterns"
+        }
+      ],
+      "description": "This matches the name in a pattern definition"
+    },
+    "PatternRef": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/Pattern"
+        },
+        {
+          "$ref": "#/definitions/PatternId"
+        }
+      ],
+      "description": "A PatternRef is a Pattern or PatternId."
+    },
+    "PreDefinedPatterns": {
+      "enum": [
+        "Base64",
+        "CStyleComment",
+        "Email",
+        "EscapeCharacters",
+        "HexDigits",
+        "HexValues",
+        "href",
+        "PhpHereDoc",
+        "PublicKey",
+        "RsaCert",
+        "SHA",
+        "SpellCheckerDisable",
+        "string",
+        "Urls",
+        "Everything"
+      ],
+      "type": "string"
+    },
+    "RegExpList": {
+      "items": {
+        "$ref": "#/definitions/PatternRef"
+      },
+      "type": "array"
+    },
+    "RegExpPatternDefinition": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Description of the pattern.",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/PatternId",
+          "description": "Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList\nIt is possible to redefine one of the predefined patterns to override its value."
+        },
+        "pattern": {
+          "$ref": "#/definitions/PatternRef",
+          "description": "RegExp pattern"
+        }
+      },
+      "required": [
+        "name",
+        "pattern"
+      ],
+      "type": "object"
+    },
+    "ReplaceEntry": {
+      "items": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "ReplaceMap": {
+      "items": {
+        "$ref": "#/definitions/ReplaceEntry"
+      },
+      "type": "array"
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "allowCompoundWords": {
+      "default": false,
+      "description": "True to enable compound word checking.",
+      "type": "boolean"
+    },
+    "caseSensitive": {
+      "default": false,
+      "description": "Words must match case rules.",
+      "type": "boolean"
+    },
+    "description": {
+      "description": "Optional description of configuration",
+      "type": "string"
+    },
+    "dictionaries": {
+      "description": "Optional list of dictionaries to use.",
+      "items": {
+        "$ref": "#/definitions/DictionaryId"
+      },
+      "type": "array"
+    },
+    "dictionaryDefinitions": {
+      "description": "Define additional available dictionaries",
+      "items": {
+        "$ref": "#/definitions/DictionaryDefinition"
+      },
+      "type": "array"
+    },
+    "enabled": {
+      "default": true,
+      "description": "Is the spell checker enabled",
+      "type": "boolean"
+    },
+    "enabledLanguageIds": {
+      "description": "languageIds for the files to spell check.",
+      "items": {
+        "$ref": "#/definitions/LanguageId"
+      },
+      "type": "array"
+    },
+    "flagWords": {
+      "description": "list of words to always be considered incorrect.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "id": {
+      "description": "Optional identifier",
+      "type": "string"
+    },
+    "ignorePaths": {
+      "description": "Glob file patterns to be ignored",
+      "items": {
+        "$ref": "#/definitions/Glob"
+      },
+      "type": "array"
+    },
+    "ignoreRegExpList": {
+      "$ref": "#/definitions/RegExpList",
+      "description": "List of RegExp patterns or Pattern names to exclude from spell checking\nExample: [\"href\"] - to exclude html href"
+    },
+    "ignoreWords": {
+      "description": "list of words to be ignored",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "import": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      ],
+      "description": "Other settings files to be included"
+    },
+    "includeRegExpList": {
+      "$ref": "#/definitions/RegExpList",
+      "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
+    },
+    "language": {
+      "$ref": "#/definitions/LocalId",
+      "default": "en",
+      "description": "Current active spelling language\nExample: \"en-GB\" for British English\nExample: \"en,nl\" to enable both English and Dutch"
+    },
+    "languageId": {
+      "$ref": "#/definitions/LanguageId",
+      "description": "Forces the spell checker to assume a give language id. Used mainly as an Override."
+    },
+    "languageSettings": {
+      "description": "Additional settings for individual languages.",
+      "items": {
+        "$ref": "#/definitions/LanguageSetting"
+      },
+      "type": "array"
+    },
+    "maxDuplicateProblems": {
+      "default": 5,
+      "description": "The maximum number of times the same word can be flagged as an error in a file.",
+      "type": "number"
+    },
+    "maxNumberOfProblems": {
+      "default": 100,
+      "description": "The maximum number of problems to report in a file.",
+      "type": "number"
+    },
+    "minWordLength": {
+      "default": 4,
+      "description": "The minimum length of a word before checking it against a dictionary.",
+      "type": "number"
+    },
+    "name": {
+      "description": "Optional name of configuration",
+      "type": "string"
+    },
+    "numSuggestions": {
+      "default": 10,
+      "description": "Number of suggestions to make",
+      "type": "number"
+    },
+    "overrides": {
+      "description": "Overrides to apply based upon the file path.",
+      "items": {
+        "$ref": "#/definitions/OverrideSettings"
+      },
+      "type": "array"
+    },
+    "patterns": {
+      "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
+      "items": {
+        "$ref": "#/definitions/RegExpPatternDefinition"
+      },
+      "type": "array"
+    },
+    "showStatus": {
+      "description": "Show status",
+      "type": "boolean"
+    },
+    "spellCheckDelayMs": {
+      "description": "Delay in ms after a document has changed before checking it for spelling errors.",
+      "type": "number"
+    },
+    "userWords": {
+      "description": "Words to add to dictionary -- should only be in the user config file.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "version": {
+      "default": "0.1",
+      "description": "Configuration format version of the setting file.",
+      "type": "string"
+    },
+    "words": {
+      "description": "list of words to be always considered correct",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

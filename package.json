@@ -19,7 +19,7 @@
     "test-ts": "lerna run test-ts",
     "test-watch": "lerna run --parallel test-watch",
     "travis-coverage": "npm run gen-coverage && globcat packages/*/coverage/lcov.info | coveralls",
-    "test": "lerna run test"
+    "test": "lerna run test && ajv -s ./cspell.schema.json -d cspell.json"
   },
   "repository": {
     "type": "git",
@@ -48,6 +48,7 @@
     "@types/minimatch": "^3.0.3",
     "@types/node": "^10.17.0",
     "@types/xregexp": "^3.0.30",
+    "ajv-cli": "^3.0.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.7",
     "cspell": "^4.0.30",
