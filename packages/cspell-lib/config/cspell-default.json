@@ -38,7 +38,14 @@
         { "languageId": "binary", "enabled": false },
 
         { "languageId": "markdown,html",                       "ignoreRegExpList": ["/&[a-z]+;/g"] },
-        { "languageId": "html",                                "ignoreRegExpList": ["href"] }
+        { "languageId": "html",                                "ignoreRegExpList": ["href"] },
+        {
+            "languageId": "markdown",
+            "ignoreRegExpList": [
+                "/(?<=\\])\\[[^\\]]+\\]/",
+                "/\\[[^\\]]+\\]:/"
+            ]
+        }
     ],
     "import": [
         "node_modules/cspell-dict-companies/cspell-ext.json",
