@@ -45,17 +45,11 @@ export interface Settings extends BaseSetting {
      */
     language?: LocalId;
 
-    /** list of words to be always considered correct */
-    words?: string[];
-
     /** list of words to be ignored */
     ignoreWords?: string[];
 
     /** Glob file patterns to be ignored */
     ignorePaths?: Glob[];
-
-    /** list of words to always be considered incorrect. */
-    flagWords?: string[];
 
     /** languageIds for the files to spell check. */
     enabledLanguageIds?: LanguageId[];
@@ -141,6 +135,12 @@ export interface BaseSetting {
      */
     enabled?: boolean;
 
+    /** list of words to be always considered correct */
+    words?: string[];
+
+    /** list of words to always be considered incorrect. */
+    flagWords?: string[];
+
     /**
      * True to enable compound word checking.
      * @default false
@@ -215,7 +215,7 @@ export interface LanguageSettingFilterFields {
 export type RegExpList = PatternRef[];
 
 /** A PatternRef is a Pattern or PatternId. */
-export type PatternRef = Pattern | PatternId;
+export type PatternRef = Pattern | PatternId | PreDefinedPatterns;
 
 export type Pattern = string | RegExp;
 
@@ -237,7 +237,7 @@ export type PreDefinedPatterns =
     'Everything';
 
 /** This matches the name in a pattern definition */
-export type PatternId = string | PreDefinedPatterns;
+export type PatternId = string;
 
 /** This matches the name in a dictionary definition */
 export type DictionaryId = string;
@@ -260,7 +260,7 @@ export interface RegExpPatternDefinition {
     /**
      * RegExp pattern
      */
-    pattern: PatternRef;
+    pattern: Pattern;
     /**
      * Description of the pattern.
      */

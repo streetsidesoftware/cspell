@@ -98,6 +98,13 @@
           "description": "Is the spell checker enabled",
           "type": "boolean"
         },
+        "flagWords": {
+          "description": "list of words to always be considered incorrect.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "id": {
           "description": "Optional identifier",
           "type": "string"
@@ -146,6 +153,13 @@
           "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
           "items": {
             "$ref": "#/definitions/RegExpPatternDefinition"
+          },
+          "type": "array"
+        },
+        "words": {
+          "description": "list of words to be always considered correct",
+          "items": {
+            "type": "string"
           },
           "type": "array"
         }
@@ -345,15 +359,8 @@
       ]
     },
     "PatternId": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "$ref": "#/definitions/PreDefinedPatterns"
-        }
-      ],
-      "description": "This matches the name in a pattern definition"
+      "description": "This matches the name in a pattern definition",
+      "type": "string"
     },
     "PatternRef": {
       "anyOf": [
@@ -362,6 +369,9 @@
         },
         {
           "$ref": "#/definitions/PatternId"
+        },
+        {
+          "$ref": "#/definitions/PreDefinedPatterns"
         }
       ],
       "description": "A PatternRef is a Pattern or PatternId."
@@ -404,7 +414,7 @@
           "description": "Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList\nIt is possible to redefine one of the predefined patterns to override its value."
         },
         "pattern": {
-          "$ref": "#/definitions/PatternRef",
+          "$ref": "#/definitions/Pattern",
           "description": "RegExp pattern"
         }
       },
