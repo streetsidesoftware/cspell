@@ -15,6 +15,7 @@
     "install": "lerna bootstrap --ci",
     "lint-travis": "lerna run lint-travis",
     "prepare": "npm run clean-build",
+    "pub": "npm install && npm test && lerna publish",
     "test-spec": "lerna run test-spec",
     "test-ts": "lerna run test-ts",
     "test-watch": "lerna run --parallel test-watch",
