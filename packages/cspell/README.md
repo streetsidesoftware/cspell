@@ -322,7 +322,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 * `language` - this specifies the language local to use in choosing the general dictionary.
    For example: `"language": "en-GB"` tells cspell to use British English instead of US English.
 * `words` - a list of words to be considered correct.
-* `flagWords` - a list of words to be allways considered incorrect
+* `flagWords` - a list of words to be always considered incorrect
 * `ignoreWords` - a list of words to be ignored (even if they are in the flagWords).
 * `ignorePaths` - a list of globs to specify which files are to be ignored.
 
@@ -335,7 +335,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 * `minWordLength` - defaults to ***4*** - the minimum length of a word before it is checked.
 * `allowCompoundWords` - defaults to ***false***; set to **true** to allow compound words by default.
 * `dictionaries` - list of the names of the dictionaries to use.  See [Dictionaries](#Dictionaries) below.
-* `dictionaryDefinitions` - this list defines any custom dictionaries to use.  This is how you can include other langauges like Spanish.
+* `dictionaryDefinitions` - this list defines any custom dictionaries to use.  This is how you can include other languages like Spanish.
 
    **Example**
    ```javascript
@@ -427,13 +427,13 @@ off an existing dictionary.
 
 ## LanguageSettings
 
-The Language Settings allow configuration to be based upon the programming langauge and/or the local.
+The Language Settings allow configuration to be based upon the programming language and/or the local.
 There are two selector fields `local` and `languageId`.
 
 * `languageId` defines which programming languages to match against.
   A value of `"python,javascript"` will match against *python* and *javascript* files. To match against ALL programming languages,
   use `"*"`.
-* `local` defines which spoken langauges to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
+* `local` defines which spoken languages to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
   A value of `"*"` will match all spoken languages.
 * Most configuration values allowed in a `cspell.json` file can be define or redefine within the `languageSettings`.
 
@@ -482,12 +482,12 @@ Example:
 <!---
     These are at the bottom because the VSCode Marketplace leaves a bit space at the top
 
+    cSpell:disableCompoundWords
+    cSpell:ignore  compoundwords stringlength errornumber
     cSpell:ignore jsja goededag alek wheerd behaviour tsmerge QQQQQ ncode
-    cSpell:enableCompoundWords
     cSpell:includeRegExp Everything
     cSpell:ignore hte variabele alinea
     cSpell:ignore mkdirp githubusercontent streetsidesoftware vsmarketplacebadge visualstudio
     cSpell:words Verdana
     cSpell:ignore ieeees beees treeees
 -->
-
