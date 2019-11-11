@@ -24,7 +24,7 @@ export interface Substitution {
     attach: string;
     attachRules?: string;
     replace: RegExp;
-    extra?: string[];
+    extra?: string;
 }
 
 export interface SubstitutionSet {
@@ -54,7 +54,7 @@ export interface AffTransformFlags {
     COMPOUNDEND?: string;
     COMPOUNDPERMITFLAG?: string;
     ONLYINCOMPOUND?: string;
-};
+}
 
 export interface AffInfo extends AffTransformFlags {
     SET?: string;       // Characterset encoding of the .aff and .dic file

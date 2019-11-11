@@ -13,6 +13,7 @@ const enAff = path.join(DICTIONARY_LOCATIONS, 'en_US.aff');
 // const enGbAff = path.join(DICTIONARY_LOCATIONS, 'en_GB.aff');
 const esAff = path.join(DICTIONARY_LOCATIONS, 'es_ANY.aff');
 const frAff = path.join(DICTIONARY_LOCATIONS, 'fr-moderne.aff');
+const huAff = path.join(DICTIONARY_LOCATIONS, 'hu', 'index.aff');
 
 describe('Basic Aff Validation', () => {
     const pAff = AffReader.parseAff(getSimpleAff());
@@ -138,6 +139,16 @@ describe('Validated loading all dictionaries in the `dictionaries` directory.', 
             expect(aff.PFX).to.be.instanceof(Map);
             expect(aff.SFX).to.be.instanceof(Map);
         });
+    });
+});
+
+describe('Validate loading Hungarian', async () => {
+    it('tests applying rules for hu', async () => {
+        const aff = await parseAffFileToAff(huAff);
+        const r =  aff.applyRulesToDicEntry('kemping/16');
+        const w = r.map(affWord => affWord.word);
+        expect(w).to.contain('kemping');
+        logApplyRulesResults(r);
     });
 });
 

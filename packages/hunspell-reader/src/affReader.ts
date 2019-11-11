@@ -8,35 +8,38 @@ const fixRegex = {
     'PFX': { m: /^/, r: '^'},
 };
 
-const emptyZeroRegex = /^0$/;
 const yesRegex = /[yY]/;
 const spaceRegex = /\s+/;
 const commentRegex = /(?:^\s*#.*)|(?:\s+#.*)/;
+const affixLine = /^\s*([^\s]+)\s+(.*)?$/;
 
 const UTF8 = 'UTF-8';
 
 
 export interface ConvEntry { from: string; to: string; }
-function convEntry(fieldValue: ConvEntry[], _: string, args: string[]) {
+function convEntry(fieldValue: ConvEntry[], line: AffLine) {
     if (fieldValue === undefined) {
         return [];
     }
 
+    const args = (line.value || '').split(spaceRegex);
     fieldValue.push({ from: args[0], to: args[1] });
     return fieldValue;
 }
 
-function afEntry(fieldValue: string[], _: string, args: string[]) {
+function afEntry(fieldValue: string[], line: AffLine) {
     if (fieldValue === undefined) {
         return [''];
     }
-
-    fieldValue.push(args[0]);
+    if (line.value) {
+        fieldValue.push(line.value);
+    }
     return fieldValue;
 }
 
 
-function simpleTable(fieldValue, _: string, args: string[]) {
+function simpleTable(fieldValue, line: AffLine) {
+    const args = (line.value || '').split(spaceRegex);
     if (fieldValue === undefined) {
         const [ count, ...extraValues ] = args;
         const extra = extraValues.length ? extraValues : undefined;
@@ -47,9 +50,7 @@ function simpleTable(fieldValue, _: string, args: string[]) {
     return fieldValue;
 }
 
-const regExpStartsWithPlus = /^\+/;
-
-function tablePfxOrSfx(fieldValue: Map<string, Fx>, _: string, args: string[], type: string) {
+function tablePfxOrSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
     /*
     Fields of an affix rules:
     (0) Option name
@@ -60,80 +61,142 @@ function tablePfxOrSfx(fieldValue: Map<string, Fx>, _: string, args: string[], t
         Zero stripping or affix are indicated by zero. Zero condition is indicated by dot.
         Condition is a simplified, regular expression-like pattern, which must be met before the affix can be applied.
         (Dot signs an arbitrary character. Characters in braces sign an arbitrary character from the character subset.
-        Dash hasn't got special meaning, but circumflex (^) next the first brace sets the complementer character set.)
+        Dash hasn't got special meaning, but circumflex (^) next the first brace sets the complimenter character set.)
     (5) Optional morphological fields separated by spaces or tabulators.
      */
-    const posCondition = 2;
-
     if (fieldValue === undefined) {
         fieldValue = new Map<string, Fx>();
     }
-    const [ subField, ...subValues ] = args;
+    const [ subField ] = (line.value || '').split(spaceRegex);
     if (! fieldValue.has(subField)) {
-        const id = subField;
-        const [ combinable, count, ...extra ] = subValues;
-        fieldValue.set(subField, {
-            id,
-            type,
-            combinable: !!combinable.match(yesRegex),
-            count,
-            extra,
-            substitutionSets: new Map<string, SubstitutionSet>()
-        });
+        const fx = parseAffixCreation(line);
+        fieldValue.set(fx.id, fx);
         return fieldValue;
     }
-    if (subValues.length < 2) {
-        console.log(`Affix rule missing values: ${args.join(' ')}`);
-        return;
+    const rule = parseAffixRule(line);
+    if (!rule) {
+        console.log(`Affix rule missing values: ${line.option} ${line.value}`);
+        return fieldValue;
     }
-    if (regExpStartsWithPlus.test(subValues[posCondition] || '')) {
-        // sometimes the condition is left off, but there are morphological fields
-        // so we need to inject a '.'.
-        subValues.splice(posCondition, 0, '.');
-    }
+
     const fixRuleSet = fieldValue.get(subField)!;
     const substitutionSets = fixRuleSet.substitutionSets;
-    const [removeValue, attach, ruleAsString = '.', ...extraValues] = subValues;
-    const [attachText, attachRules] = attach.split('/', 2);
-    const extra = extraValues.length ? extraValues : undefined;
-    const remove = removeValue.replace(emptyZeroRegex, '');
-    const insertText = attachText.replace(emptyZeroRegex, '');
-    const fixUp = fixRegex[type];
-    const replace = new RegExp(remove.replace(fixUp.m, fixUp.r));
+    const ruleAsString = rule.condition.source;
     if (!substitutionSets.has(ruleAsString)) {
-        const match = new RegExp(ruleAsString.replace(fixUp.m, fixUp.r));
         substitutionSets.set(ruleAsString, {
-            match,
+            match: rule.condition,
             substitutions: [],
         });
     }
     const substitutionSet = substitutionSets.get(ruleAsString)!;
-    substitutionSet.substitutions.push({ remove, replace, attach: insertText, attachRules, extra });
+    const [attachText, attachRules] = rule.affix.split('/', 2);
+    substitutionSet.substitutions.push({
+        remove: rule.stripping, replace: rule.replace, attach: attachText, attachRules, extra: rule.extra
+    });
 
     return fieldValue;
 }
 
-function asPfx(fieldValue, field: string, args: string[]) {
-    return tablePfxOrSfx(fieldValue, field, args, 'PFX');
+/**
+ * Parse Affix creation line:
+ * `PFX|SFX flag cross_product number`
+ */
+function parseAffixCreation(line: AffLine): Fx {
+    const [ flag, combinable, count, ...extra] = (line.value || '').split(spaceRegex);
+    const fx: Fx = {
+        id: flag,
+        type: line.option,
+        combinable: !!combinable.match(yesRegex),
+        count,
+        extra,
+        substitutionSets: new Map<string, SubstitutionSet>()
+    };
+    return fx;
 }
 
-function asSfx(fieldValue, field: string, args: string[]) {
-    return tablePfxOrSfx(fieldValue, field, args, 'SFX');
+interface AffixRule {
+    type: 'PFX' | 'SFX';
+    flag: string;
+    stripping: string;
+    replace: RegExp;
+    affix: string;
+    condition: RegExp;
+    extra?: string;
 }
 
-function asString(_fieldValue, _field: string, args: string[]) {
-    return args[0];
+const affixRuleRegEx = /^(\S+)\s+(\S+)\s+(\S+)\s*(.*)/;
+const affixRuleConditionRegEx = /^((?:\[.*\]|\S+)+)\s*(.*)/;
+
+/**
+ * `PFX|SFX flag stripping prefix [condition [morphological_fields...]]`
+ */
+function parseAffixRule(line: AffLine): AffixRule | undefined {
+    const [, flag, strip, affix, optional = ''] = (line.value || '').match(affixRuleRegEx) || [];
+    if (!flag || !strip || !affix) {
+        return undefined;
+    }
+    const [, rawCondition = '.', extra] = optional.match(affixRuleConditionRegEx) || [];
+
+    const type = line.option === 'SFX' ? 'SFX' : 'PFX';
+    const condition = fixMatch(type, rawCondition);
+
+    const affixRule: AffixRule = {
+        type,
+        flag,
+        stripping: strip,
+        replace: fixMatch(type, strip),
+        affix,
+        condition,
+        extra,
+    };
+    return affixRule;
 }
 
-function asBoolean(_fieldValue, _field: string, args: string[]) {
-    const [ value = '1' ] = args;
+function fixMatch(type: AffixRule['type'], match: string): RegExp {
+    const exp = affixMatchToRegExpString(match);
+    const fix = fixRegex[type];
+    return new RegExp(exp.replace(fix.m, fix.r));
+}
+
+function affixMatchToRegExpString(match: string): string {
+    if (match === '0') return '';
+    return match.replace(/[\-?*]/g, '\\$1');
+}
+
+function asPfx(fieldValue: Afx | undefined, line: AffLine): Afx {
+    return tablePfxOrSfx(fieldValue, line);
+}
+
+function asSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
+    return tablePfxOrSfx(fieldValue, line);
+}
+
+function asString(_fieldValue, line: AffLine) {
+    return line.value || '';
+}
+
+function asBoolean(_fieldValue, line: AffLine) {
+    const { value = '1' } = line;
     const iValue = parseInt(value);
     return !!iValue;
 }
 
-function asNumber(_fieldValue, _field: string, args: string[]) {
-    const [ value = '0' ] = args;
+function asNumber(_fieldValue, line: AffLine) {
+    const { value = '0' } = line;
     return parseInt(value);
+}
+
+type FieldFunction<T> = (value: T | undefined, line: AffLine) => T;
+type FieldFunctions = FieldFunction<string>
+    | FieldFunction<boolean>
+    | FieldFunction<number>
+    | FieldFunction<Afx>
+    | FieldFunction<string[]>
+    | FieldFunction<ConvEntry[]>
+    ;
+
+interface AffFieldFunctionTable {
+    [key: string]: FieldFunctions;
 }
 
 /*
@@ -141,7 +204,7 @@ cspell:ignore COMPOUNDBEGIN COMPOUNDEND COMPOUNDMIDDLE COMPOUNDMIN COMPOUNDPERMI
 cspell:ignore MAXDIFF NEEDAFFIX WORDCHARS
 */
 
-const affTableField = {
+const affTableField: AffFieldFunctionTable = {
     AF                  : afEntry,
     BREAK               : asNumber,
     CHECKCOMPOUNDCASE   : asBoolean,
@@ -194,14 +257,14 @@ export function parseAff(affFileContent: string, _encoding: string = UTF8): AffI
         .map(line => line.trimLeft())
         .map(line => line.replace(commentRegex, ''))
         .filter(line => line.trim() !== '')
-        .map(line => line.split(spaceRegex))
-        .reduce((aff: AffInfo, line: string[]) => {
-            const [ field, ...args ] = line;
+        .map(splitLine)
+        .reduce((aff: AffInfo, line: AffLine) => {
+            const field = line.option;
             const fn = affTableField[field];
             if (fn) {
-                aff[field] = fn(aff[field], field, args);
+                aff[field] = fn(aff[field], line);
             } else {
-                aff[field] = args;
+                aff[field] = line.value;
             }
             return aff;
         }, {} as AffInfo);
@@ -213,3 +276,15 @@ export function parseAffFileToAff(filename: string, encoding?: string) {
         ;
 }
 
+function splitLine(line: string): AffLine {
+    const result = line.match(affixLine) || ['', ''];
+    const [ , option, value] = result;
+    return { option, value: value || undefined };
+}
+
+interface AffLine {
+    option: string;
+    value: string | undefined;
+}
+
+type Afx = Map<string, Fx>;
