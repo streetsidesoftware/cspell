@@ -257,7 +257,7 @@ export function parseAff(affFileContent: string, _encoding: string = UTF8): AffI
         .map(line => line.trimLeft())
         .map(line => line.replace(commentRegex, ''))
         .filter(line => line.trim() !== '')
-        .map(splitLine)
+        .map(parseLine)
         .reduce((aff: AffInfo, line: AffLine) => {
             const field = line.option;
             const fn = affTableField[field];
@@ -276,15 +276,21 @@ export function parseAffFileToAff(filename: string, encoding?: string) {
         ;
 }
 
-function splitLine(line: string): AffLine {
+function parseLine(line: string): AffLine {
     const result = line.match(affixLine) || ['', ''];
     const [ , option, value] = result;
     return { option, value: value || undefined };
 }
 
-interface AffLine {
+export interface AffLine {
     option: string;
     value: string | undefined;
 }
 
 type Afx = Map<string, Fx>;
+
+export const testing = {
+    parseAffixRule,
+    tablePfxOrSfx,
+    parseLine,
+};
