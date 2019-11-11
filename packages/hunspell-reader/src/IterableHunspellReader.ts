@@ -7,11 +7,7 @@ import { decode } from 'iconv-lite';
 
 const defaultEncoding = 'UTF-8';
 
-export interface WordInfo {
-    word: string;
-    rules: string;
-}
-
+export { WordInfo } from './types';
 
 export interface HunspellSrcData {
     aff: Aff;
