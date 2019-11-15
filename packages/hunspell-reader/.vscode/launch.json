@@ -18,7 +18,25 @@
 				"words_en.txt",
 				"./dictionaries/en_US.dic"
 			],
-            "outFiles": []
+            "outFiles": [],
+            "sourceMaps": true,
+            "preLaunchTask": "npm: build"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "hunspell: Run Command Words Hungarian",
+            "program": "${workspaceRoot}/dist/app.js",
+			"cwd": "${workspaceRoot}",
+			"args": [
+				"words",
+				"-n", "100",
+				"-m", "0",
+				"./dictionaries/hu/hu.dic"
+			],
+            "outFiles": [],
+            "sourceMaps": true,
+            "preLaunchTask": "npm: build"
         },
 		{
 			"type": "node",

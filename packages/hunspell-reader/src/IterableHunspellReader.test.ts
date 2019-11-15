@@ -36,6 +36,7 @@ describe('Basic Validation of the Reader', () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: (['place/AJ'])};
         const reader = new IterableHunspellReader(src);
+        // cspell:ignore replacings
         expect([...reader]).to.be.deep.equal(['place', 'replace', 'replacing', 'replacings', 'placing', 'placings']);
     });
 
@@ -46,6 +47,26 @@ describe('Basic Validation of the Reader', () => {
         const results = [...reader.seqAffWords().map(a => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
         const someExpectedWords = ['<happy>', 'un<happy>', '<happ>ily', 'un<happ>ily'].sort(); // cspell:ignore happ
         expect(results).to.include.members(someExpectedWords);
+    });
+
+    it('sets the max depth', async () => {
+        const aff = await pSimpleAff;
+        const src = { aff, dic: textToArray(simpleWords)};
+        const reader = new IterableHunspellReader(src);
+        const depth = reader.maxDepth;
+        reader.maxDepth = 0;
+        const results = [...reader.seqAffWords().map(a => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
+        const expectedWords = ['<happy>', '<ring>'].sort(); // cspell:ignore happ
+        reader.maxDepth = depth;
+        expect(results).to.include.members(expectedWords);
+    });
+
+    it('Iterates a few words', async () => {
+        const aff = await pSimpleAff;
+        const src = { aff, dic: textToArray(simpleWords)};
+        const reader = new IterableHunspellReader(src);
+        const words = [...reader.iterateWords()];
+        expect(words).to.include.members(['happy', 'unhappy', 'happily', 'unhappily', 'ring']);
     });
 });
 
@@ -207,4 +228,4 @@ ring/AUJ
 `;
 
 // cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings AUGJ aeiou sxzh sxzhy
-// cspell:enableCompoundWords
+// cspell:words COMPOUNDMIN ONLYINCOMPOUND COMPOUNDRULE

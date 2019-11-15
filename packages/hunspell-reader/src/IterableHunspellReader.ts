@@ -26,6 +26,14 @@ export class IterableHunspellReader implements Iterable<string> {
         return this.src.dic;
     }
 
+    set maxDepth(value: number) {
+        this.aff.maxSuffixDepth = value;
+    }
+
+    get maxDepth(): number {
+        return this.aff.maxSuffixDepth;
+    }
+
     /**
      * @internal
      */
@@ -51,6 +59,12 @@ export class IterableHunspellReader implements Iterable<string> {
 
     [Symbol.iterator]() { return this.seqWords(); }
 
+    /**
+     * create an iterable sequence of the words in the dictionary.
+     *
+     * @param tapPreApplyRules -- optional function to be called before rules are applied to a word.
+     *                            It is mostly used for monitoring progress.
+     */
     seqAffWords(tapPreApplyRules?: (w: string) => any) {
         const seq = genSequence(this.src.dic);
         const dicWords = tapPreApplyRules ? seq.map(a => (tapPreApplyRules(a), a)) : seq;

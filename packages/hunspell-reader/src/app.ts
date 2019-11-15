@@ -30,6 +30,7 @@ commander
     .option('-x, --infix', 'Return words with prefix / suffix breaks. ex: "un<do>ing"')
     .option('-r, --rules', 'Append rules used to generate word.')
     .option('-p, --progress', 'Show progress.')
+    .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
     .option('-n, --number <limit>', 'Limit the number of words to output.')
     .description('Output all the words in the <hunspell.dic> file.')
     .action(action);
@@ -120,7 +121,8 @@ interface Options {
     infix?: boolean;
     rules?: boolean;        // append rules
     progress?: boolean;     // show progress
-    number?: number;        // limit the number to output
+    number?: string;        // limit the number to output
+    max_depth?: string;     // limit the recursive depth to apply suffixes.
 }
 
 async function actionPrime(hunspellDicFilename: string, options: Options) {
@@ -134,6 +136,7 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
         infix = false,
         rules = false,
         progress: showProgress = false,
+        max_depth,
     } = options;
     logStream = outputFile ? process.stdout : process.stderr;
     const log = notify;
@@ -147,6 +150,9 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     log(`Aff file: ${affFile}`);
     log(`Generating Words...`);
     const reader = await IterableHunspellReader.createFromFiles(affFile, dicFile);
+    if (max_depth && Number.parseInt(max_depth) >= 0) {
+        reader.maxDepth = Number.parseInt(max_depth);
+    }
     const transformers: ((_: AffWord) => AffWord)[] = [];
     if (infix) { transformers.push(affWordToInfix); }
     if (lowerCase) { transformers.push(mapWord(a => a.toLowerCase())); }
@@ -173,7 +179,7 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
         .filter(a => !!a.word)
         .map(a => a.word + '\n');
 
-    const words = options.number ? allWords.take(options.number) : allWords;
+    const words = options.number ? allWords.take(Number.parseInt(options.number)) : allWords;
 
     if (sort) {
         log('Sorting...');

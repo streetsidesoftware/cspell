@@ -13,7 +13,7 @@ const enAff = path.join(DICTIONARY_LOCATIONS, 'en_US.aff');
 // const enGbAff = path.join(DICTIONARY_LOCATIONS, 'en_GB.aff');
 const esAff = path.join(DICTIONARY_LOCATIONS, 'es_ANY.aff');
 const frAff = path.join(DICTIONARY_LOCATIONS, 'fr-moderne.aff');
-const huAff = path.join(DICTIONARY_LOCATIONS, 'hu', 'index.aff');
+const huAff = path.join(DICTIONARY_LOCATIONS, 'hu', 'hu.aff');
 
 describe('Basic Aff Validation', () => {
     const pAff = AffReader.parseAff(getSimpleAff());
@@ -68,7 +68,7 @@ describe('Test Aff', () => {
     it('test breaking up rules for en', async () => {
         const aff = await parseAffFileToAff(enAff);
         expect(aff.separateRules('ZbCcChC1')).to.not.be.deep.equal(['Zb', 'Cc', 'Ch', 'C1']);
-        expect(aff.separateRules('ZbCcChC1')).to.be.deep.equal('ZbCcChC1'.split(''));
+        expect(aff.separateRules('ZbCcChC1')).to.be.deep.equal('ZbCch1'.split(''));
     });
 
     it('test getting rules for nl', async () => {
@@ -123,32 +123,52 @@ describe('Test Aff', () => {
 
 });
 
-describe('Validated loading all dictionaries in the `dictionaries` directory.', async () => {
-    const dictionaries = (await fs.readdir(DICTIONARY_LOCATIONS))
+describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
+    async function getDictionaries() {
+        return (await fs.readdir(DICTIONARY_LOCATIONS))
         .filter(dic => !!dic.match(/\.aff$/))
         .map(base => path.join(DICTIONARY_LOCATIONS, base));
-    it('Make sure we found some sample dictionaries', () => {
+    }
+    const pDictionaries = getDictionaries();
+    it('Make sure we found some sample dictionaries', async () => {
+        const dictionaries = await pDictionaries;
         expect(dictionaries.length).to.be.greaterThan(4);
     });
 
-    dictionaries.forEach(dicAff => {
-        // const dicDic = dicAff.replace(/\.aff$/, '.dic');
-        // const dicContent = fs.readFile(dicDic)
-        it(`Ensure we can load ${path.basename(dicAff)}`, async () => {
-            const aff = await AffReader.parseAffFile(dicAff);
-            expect(aff.PFX).to.be.instanceof(Map);
-            expect(aff.SFX).to.be.instanceof(Map);
+    it('Loads all dictionaries', async () => {
+        const dictionaries = await pDictionaries;
+
+        dictionaries.forEach(dicAff => {
+            // const dicDic = dicAff.replace(/\.aff$/, '.dic');
+            // const dicContent = fs.readFile(dicDic)
+            it(`Ensure we can load ${path.basename(dicAff)}`, async () => {
+                const aff = await AffReader.parseAffFile(dicAff);
+                expect(aff.PFX).to.be.instanceof(Map);
+                expect(aff.SFX).to.be.instanceof(Map);
+            });
         });
     });
 });
 
-describe('Validate loading Hungarian', async () => {
-    it('tests applying rules for hu', async () => {
-        const aff = await parseAffFileToAff(huAff);
-        const r =  aff.applyRulesToDicEntry('kemping/16');
+describe('Validate loading Hungarian', () => {
+    const affP = parseAffFileToAff(huAff);
+
+    it('tests applying rules for hu Depth 0', async () => {
+        const aff = await affP;
+        aff.maxSuffixDepth = 0;
+        const r =  aff.applyRulesToDicEntry('kemping/17');
         const w = r.map(affWord => affWord.word);
         expect(w).to.contain('kemping');
-        logApplyRulesResults(r);
+        expect(w.length).to.equal(1);
+    });
+
+    it('tests applying rules for hu Depth 1', async () => {
+        const aff = await affP;
+        aff.maxSuffixDepth = 1;
+        const r =  aff.applyRulesToDicEntry('kemping/17');
+        const w = r.map(affWord => affWord.word);
+        expect(w).to.contain('kemping');
+        expect(w.length).to.be.greaterThan(1);
     });
 });
 

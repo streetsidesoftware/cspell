@@ -160,7 +160,7 @@ function fixMatch(type: AffixRule['type'], match: string): RegExp {
 
 function affixMatchToRegExpString(match: string): string {
     if (match === '0') return '';
-    return match.replace(/[\-?*]/g, '\\$1');
+    return match.replace(/([\-?*])/g, '\\$1');
 }
 
 function asPfx(fieldValue: Afx | undefined, line: AffLine): Afx {
