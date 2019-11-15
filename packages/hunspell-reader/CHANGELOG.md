@@ -1,5 +1,8 @@
 # Release Notes
 
+## 3.1.0
+- Support limiting the max depth to apply suffixes. This allows the reader to read the Hungarian dictionary.
+
 ## 3.0.0
 - **Breaking Change** dropping support for Node 8 and 9
 - Removed dependency upon `cspell-lib` and `rxjs`
