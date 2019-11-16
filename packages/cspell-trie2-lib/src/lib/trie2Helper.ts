@@ -1,4 +1,4 @@
-import { Trie2 } from './trie2';
+import { Trie2, isTrieNode2Branch } from './trie2';
 import { TrieNode2 } from './TrieNode2';
 
 export function displayTrie2(trie: Trie2, sort = false, dot = '.') {
@@ -9,12 +9,12 @@ export function displayTrie2(trie: Trie2, sort = false, dot = '.') {
             if (!n.s) {
                 yield prefix;
             }
-            if (n.c) {
+            if (isTrieNode2Branch(n)) {
                 yield *walk(n.c, prefix + n.s);
             }
             prefix = dots;
         }
     }
 
-    return [...walk(trie.root, ''), ''].join('\n');
+    return [...walk(trie.root.c, ''), ''].join('\n');
 }

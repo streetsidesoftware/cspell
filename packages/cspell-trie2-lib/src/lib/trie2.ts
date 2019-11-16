@@ -1,45 +1,78 @@
-import { TrieNode2 } from './TrieNode2';
+import { TrieNode2, TrieNode2EOW, TrieNode2Branch, TrieNode2Root } from './TrieNode2';
 
 export class Trie2 {
-    constructor(readonly root: TrieNode2[]) {
+    constructor(readonly root: TrieNode2Root) {
     }
 }
 
-const END_OF_WORD: TrieNode2 = Object.freeze({ i: 0, s: '' });
+const END_OF_WORD: TrieNode2EOW = Object.freeze({ i: 0, s: '' });
 
 export class Trie2Builder {
     protected nodes: TrieNode2[] = [END_OF_WORD];
-    protected root: TrieNode2[] = [];
+    protected root: TrieNode2Root = { i: -1, s: '', c: [] };
 
     insert(word: string): Trie2Builder {
-        this.insertRecursive(this.root, word);
+        const location = this.findInsertLocation(this.root, word);
+        this.splitNode(location);
         return this;
     }
 
-    protected insertRecursive(nodes: TrieNode2[], word: string) {
-        // Find matching node
-        let found: TrieNode2 | undefined;
-        for (const n of nodes) {
-            if (n.s === word.slice(0, n.s.length) && (n.s.length || n.s.length === word.length)) {
-                found = n;
-                break;
+    protected findInsertLocation(root: TrieNode2Branch, word: string): InsertLocation {
+        let n = root;
+        let p = 0;
+        let keepGoing = true;
+        while (p < word.length && keepGoing) {
+            keepGoing = false;
+            for (const c of n.c) {
+                if (!isTrieNode2Branch(c)) continue;
+                const s = c.s;
+                const limit = Math.min(s.length, word.length - p);
+                let i = 0;
+                for (; i < limit && word[p + i] === s[i]; ++i) {}
+                if (i) {
+                    p += i;
+                    if (i < s.length || p === word.length) {
+                        return {
+                            node: c,
+                            word: word.slice(p),
+                            splitPos: i,
+                        };
+                    }
+                    n = c;
+                    keepGoing = true;
+                    break;
+                }
             }
         }
-
-        if (!found) {
-            found = word ? this.createNode(word[0]) : END_OF_WORD;
-            nodes.push(found);
-        }
-
-        if (found.s) {
-            const c = found.c || [];
-            found.c = c;
-            this.insertRecursive(c, word.slice(found.s.length));
-        }
+        return {
+            node: n,
+            word: word.slice(p),
+            splitPos: n.s.length,
+        };
     }
 
-    protected createNode(s: string): TrieNode2 {
-        const n: TrieNode2 = { i: this.nodes.length, s };
+    protected splitNode(location: InsertLocation) {
+        const { node, word, splitPos } = location;
+        const wordNode = this.createNode(word);
+        if (node.s.length === splitPos) {
+            if (!node.c.includes(wordNode)) {
+                node.c.push(this.createNode(word));
+            }
+            return;
+        }
+        const s = node.s;
+        node.s = s.slice(0, splitPos);
+        node.c = [
+            this.createNode(s.slice(splitPos), node.c),
+            wordNode
+        ];
+    }
+
+    protected createNode(s: string, c: TrieNode2[] = [END_OF_WORD]): TrieNode2 {
+        if (s === '') {
+            return END_OF_WORD;
+        }
+        const n: TrieNode2 = { i: this.nodes.length, s, c };
         this.nodes.push(n);
         return n;
     }
@@ -47,4 +80,14 @@ export class Trie2Builder {
     build(): Trie2 {
         return new Trie2(this.root);
     }
+}
+
+export function isTrieNode2Branch(n: TrieNode2): n is TrieNode2Branch {
+    return !!(n as TrieNode2Branch).c;
+}
+
+interface InsertLocation {
+    node: TrieNode2Branch;
+    word: string;
+    splitPos: number;
 }

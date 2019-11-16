@@ -12,12 +12,15 @@ describe('Validate Trie2Builder', () => {
         .insert('rank')
         .insert('random')
         .insert('ran')
+        .insert('run')
         .insert('randomly')
+        .insert('ran')
         .insert('ramp')
         ;
         const trie = builder.build();
         // cspell:ignore ning
-        expect(displayTrie2(trie)).toBe(`
+        const r1 = displayTrie2(trie);
+        expect(r1).toBe(`
             run
             ...s
             ...ning
@@ -28,7 +31,8 @@ describe('Validate Trie2Builder', () => {
             ...
             ..mp
         `.replace(/^\s+/gm, ''));
-        expect(displayTrie2(trie, true, '+')).toBe(`
+        const r2 = displayTrie2(trie, true, '+');
+        expect(r2).toBe(`
             ramp
             ++n
             +++dom
