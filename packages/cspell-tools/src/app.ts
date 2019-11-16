@@ -27,12 +27,15 @@ program
     .description('compile words lists into simple dictionary files.')
     .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
     .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
+    .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
     .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
     .option('--no-sort', 'Do not sort the result')
-    .action(async (src: string[], options: { output?: string, compress: boolean, split: boolean, sort: boolean, case: boolean }) => {
+    .action(async (src: string[], options: { output?: string, compress: boolean, split: boolean, sort: boolean, case: boolean, max_depth?: string }) => {
+        const { max_depth } = options;
+        const maxDepth = max_depth !== undefined ? Number.parseInt(max_depth) : undefined;
         return processAction(src, '.txt', options, async (src, dst) => {
             console.log('Process "%s" to "%s"', src, dst);
-            await compileWordList(src, dst, { splitWords: options.split, sort: options.sort }).then(() => src);
+            await compileWordList(src, dst, { splitWords: options.split, sort: options.sort, maxDepth }).then(() => src);
             console.log('Done "%s" to "%s"', src, dst);
             return src;
         });
@@ -42,11 +45,14 @@ program
     .command('compile-trie <src...>')
     .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
     .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
+    .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
     .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
-    .action((src: string[], options: { output?: string, compress: boolean }) => {
+    .action((src: string[], options: { output?: string, compress: boolean, max_depth?: string }) => {
+        const { max_depth } = options;
+        const maxDepth = max_depth !== undefined ? Number.parseInt(max_depth) : undefined;
         return processAction(src, '.trie', options, async (src, dst) => {
             console.log('Process "%s" to "%s"', src, dst);
-            return compileTrie(src, dst).then(() => src);
+            return compileTrie(src, dst, { maxDepth } ).then(() => src);
         });
     });
 
@@ -84,4 +90,3 @@ program.parse(process.argv);
 if (!process.argv.slice(2).length) {
     program.help();
 }
-

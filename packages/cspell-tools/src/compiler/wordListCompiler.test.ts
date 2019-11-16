@@ -104,6 +104,26 @@ describe('Validate the wordListCompiler', () => {
         const words = [...Trie.iteratorTrieWords(node)].sort();
         expect(words).to.be.deep.equal(expected);
     });
+
+    test('test a simple hunspell dictionary depth 0', async () => {
+        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'hunspell', 'example.dic');
+        const destName = path.join(__dirname, '..', '..', 'temp', 'example0.txt');
+        return compileWordList(sourceName, destName, { splitWords: false, sort: true, maxDepth: 0 })
+        .then(() => fsp.readFile(destName, 'utf8'))
+        .then(output => {
+            expect(output).to.be.equal('hello\ntry\nwork\n');
+        });
+    });
+
+    test('test a simple hunspell dictionary depth 1', async () => {
+        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'hunspell', 'example.dic');
+        const destName = path.join(__dirname, '..', '..', 'temp', 'example0.txt');
+        return compileWordList(sourceName, destName, { splitWords: false, sort: true, maxDepth: 1 })
+        .then(() => fsp.readFile(destName, 'utf8'))
+        .then(output => {
+            expect(output.split('\n')).to.be.deep.equal(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
+        });
+    });
 });
 
 function distinct(): (word: string) => boolean {
