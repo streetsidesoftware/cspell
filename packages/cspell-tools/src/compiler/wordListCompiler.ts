@@ -6,7 +6,7 @@ import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
 import * as HR from 'hunspell-reader';
-import { streamWordsFromFile } from './iterateWordsFromFile';
+import { streamWordsFromFile, HunspellOptions } from './iterateWordsFromFile';
 import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 
@@ -43,21 +43,19 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
     return splitWords;
 }
 
-interface CompileWordListOptions {
+interface CompileWordListOptions extends HunspellOptions {
     splitWords: boolean;
     sort: boolean;
 }
 
 export async function compileWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
-    const getWords = () => regHunspellFile.test(filename) ? readHunspellFiles(filename) : lib.asyncIterableToArray(lib.lineReaderAsync(filename));
-
+    const pWords = streamWordsFromFile(filename, options);
     const destDir = path.dirname(destFilename);
 
     const pDir = mkdirp(destDir);
 
     const compile = options.splitWords ? compileWordListWithSplitSeq : compileSimpleWordListSeq;
-
-    const words = genSequence(await getWords());
+    const words = await pWords;
     const seq = compile(words)
         .filter(a => !!a)
         .filter(uniqueFilter(10000));
@@ -71,12 +69,22 @@ export async function compileWordList(filename: string, destFilename: string, op
 
 
 
-export function compileWordListWithSplit(filename: string, destFilename: string): Promise<void> {
-    return compileWordList(filename, destFilename, { splitWords: true, sort: true });
+export function compileWordListWithSplit(
+    filename: string,
+    destFilename: string,
+    options: CompileWordListOptions = { splitWords: true, sort: true }
+): Promise<void> {
+    const { sort = true } = options;
+    return compileWordList(filename, destFilename, { ...options, splitWords: true, sort });
 }
 
-export async function compileSimpleWordList(filename: string, destFilename: string, _options: CompileWordListOptions): Promise<void> {
-    return compileWordList(filename, destFilename, { splitWords: false, sort: true });
+export async function compileSimpleWordList(
+    filename: string,
+    destFilename: string,
+    options: CompileWordListOptions = { splitWords: false, sort: true }
+): Promise<void> {
+    const { sort = true } = options;
+    return compileWordList(filename, destFilename, { ...options, splitWords: false, sort });
 }
 
 function sort(words: Iterable<string>): Iterable<string> {
@@ -106,18 +114,7 @@ export async function compileWordListToTrieFile(words: Sequence<string>, destFil
     return writeSeqToFile(Trie.serializeTrie(root, { base: 32, comment: 'Built by cspell-tools.' }), destFilename);
 }
 
-const regHunspellFile = /\.(dic|aff)$/i;
-
-async function readHunspellFiles(filename: string): Promise<Sequence<string>> {
-    const dicFile = filename.replace(regHunspellFile, '.dic');
-    const affFile = filename.replace(regHunspellFile, '.aff');
-
-    const reader = await HR.IterableHunspellReader.createFromFiles(affFile, dicFile);
-
-    return genSequence(reader.iterateWords());
-}
-
-export async function compileTrie(filename: string, destFilename: string): Promise<void> {
-    const words = await streamWordsFromFile(filename);
+export async function compileTrie(filename: string, destFilename: string, options?: HunspellOptions): Promise<void> {
+    const words = await streamWordsFromFile(filename, options || {});
     return compileWordListToTrieFile(words, destFilename);
 }
