@@ -55,6 +55,7 @@ describe('Test Aff', () => {
         const w = r.map(affWord => affWord.word);
         expect(w).to.contain('avoir');
         expect(w).to.contain('n’avoir'); // cspell:ignore n’avoir
+        expect(r.map(affW => affW.word)).to.be.deep.equal(r.map(affW => aff.oConv.convert(affW.prefix + affW.base + affW.suffix)));
         logApplyRulesResults(r);
     });
 
