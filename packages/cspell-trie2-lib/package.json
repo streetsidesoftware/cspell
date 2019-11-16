@@ -1,0 +1,58 @@
+{
+  "name": "cspell-trie2-lib",
+  "version": "4.0.0",
+  "description": "Trie Data Structure to support cspell.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "!**/*.map",
+    "!**/*.test.*"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc -p .",
+    "clean-build": "npm run clean && npm run build",
+    "coverage": "jest --coverage",
+    "test-watch": "../../node_modules/.bin/jest --watch",
+    "test": "jest",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "keywords": [
+    "trie",
+    "cspell"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-trie"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell#readme",
+  "dependencies": {
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "src/**/*.test.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html"
+    ]
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
