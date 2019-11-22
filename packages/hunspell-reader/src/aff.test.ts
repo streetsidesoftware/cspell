@@ -59,6 +59,21 @@ describe('Test Aff', () => {
         logApplyRulesResults(r);
     });
 
+    it('tests applying rules for fr with maxDepth', async () => {
+        const aff = await parseAffFileToAff(frAff);
+        aff.maxSuffixDepth = 1;
+        const r0 =  aff.applyRulesToDicEntry('avoir/180').map(affWord => affWord.word);
+        expect(r0).to.contain('avoir');
+        expect(r0).to.not.contain('n’avoir'); // cspell:ignore n’avoir
+        aff.maxSuffixDepth = 2;
+        const r1 =  aff.applyRulesToDicEntry('avoir/180').map(affWord => affWord.word);
+        expect(r1).to.contain('avoir');
+        expect(r1).to.contain('n’avoir'); // cspell:ignore n’avoir
+        expect(r1).to.not.deep.equal(r0);
+        const r2 =  aff.applyRulesToDicEntry('avoir/180', 1).map(affWord => affWord.word);
+        expect(r2).to.deep.equal(r0);
+    });
+
     it('test breaking up rules for nl', async () => {
         const aff = await parseAffFileToAff(nlAff);
         expect(aff.separateRules('ZbCcChC1')).to.be.deep.equal(['Zb', 'Cc', 'Ch', 'C1']);

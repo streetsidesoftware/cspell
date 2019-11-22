@@ -145,11 +145,18 @@ function parseAffixRule(line: AffLine): AffixRule | undefined {
         flag,
         stripping: strip,
         replace: fixMatch(type, strip),
-        affix,
+        affix: cleanAffixAttach(affix),
         condition,
         extra,
     };
     return affixRule;
+}
+
+function cleanAffixAttach(affix: string): string {
+    const [ fix, rules ] = affix.split('/', 2);
+
+    const attach = fix === '0' ? '' : fix;
+    return attach + (rules ? '/' + rules : '');
 }
 
 function fixMatch(type: AffixRule['type'], match: string): RegExp {

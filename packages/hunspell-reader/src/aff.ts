@@ -3,6 +3,7 @@ import {Converter} from './converter';
 import {genSequence as gs, Sequence} from 'gensequence';
 import * as GS from 'gensequence';
 import { Dictionary } from './types';
+import { uniqueFilter } from './util';
 
 // cSpell:enableCompoundWords
 
@@ -141,11 +142,15 @@ export class Aff {
      * Takes a line from a hunspell.dic file and applies the rules found in the aff file.
      * @param {string} line - the line from the .dic file.
      */
-    applyRulesToDicEntry(line: string): AffWord[] {
+    applyRulesToDicEntry(line: string, maxDepth?: number): AffWord[] {
+        const maxSuffixDepth = maxDepth !== undefined ? maxDepth : this.maxSuffixDepth;
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
-        return this.applyRulesToWord(asAffWord(word, rules), this.maxSuffixDepth)
-            .map(affWord => ({...affWord, word: this._oConv.convert(affWord.word) }));
+        const results = this.applyRulesToWord(asAffWord(word, rules), maxSuffixDepth)
+            .map(affWord => ({...affWord, word: this._oConv.convert(affWord.word) }))
+            .filter(uniqueFilter(10000, a => a.word));
+        results.sort((a, b) => a.word < b.word ? -1 : 1);
+        return results;
     }
 
     /**
@@ -202,7 +207,7 @@ export class Aff {
         return matchingSubstitutions
             .map(sub => sub.substitutions)
             .reduce((a, b) => a.concat(b), [])
-            .filter(sub => sub.replace.test(word))
+            .filter(sub => sub.remove === '0' || sub.replace.test(word))
             .map(sub => this.substitute(affix, partialAffWord, sub))
             .map(affWord => logAffWord(affWord, 'applyAffixToWord'))
             ;

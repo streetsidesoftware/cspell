@@ -37,7 +37,7 @@ describe('Basic Validation of the Reader', () => {
         const src = { aff, dic: (['place/AJ'])};
         const reader = new IterableHunspellReader(src);
         // cspell:ignore replacings
-        expect([...reader]).to.be.deep.equal(['place', 'replace', 'replacing', 'replacings', 'placing', 'placings']);
+        expect([...reader]).to.be.deep.equal(['place', 'placing', 'placings', 'replace', 'replacing', 'replacings']);
     });
 
     it('Validates prefix/suffix/base', async () => {
