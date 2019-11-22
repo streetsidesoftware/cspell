@@ -10,10 +10,16 @@ strategy:
   matrix:
     linux:
       imageName: 'ubuntu-latest'
+      node_version: 12.x
     mac:
       imageName: 'macos-10.13'
+      node_version: 12.x
     windows:
       imageName: 'vs2017-win2016'
+      node_version: 12.x
+    node_10_x:
+      imageName: 'ubuntu-latest'
+      node_version: 10.x
 
 pool:
   vmImage: $(imageName)
@@ -21,7 +27,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: $(node_version)
   displayName: 'Install Node.js'
 
 - script: |
