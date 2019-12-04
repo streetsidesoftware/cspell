@@ -207,7 +207,8 @@ interface AffFieldFunctionTable {
 }
 
 /*
-cspell:ignore COMPOUNDBEGIN COMPOUNDEND COMPOUNDMIDDLE COMPOUNDMIN COMPOUNDPERMITFLAG COMPOUNDRULE FORBIDDENWORD KEEPCASE
+cspell:ignore COMPOUNDBEGIN COMPOUNDEND COMPOUNDMIDDLE COMPOUNDMIN COMPOUNDPERMITFLAG COMPOUNDRULE COMPOUNDFORBIDFLAG
+cspell:ignore FORBIDDENWORD KEEPCASE
 cspell:ignore MAXDIFF NEEDAFFIX WORDCHARS
 */
 
@@ -223,6 +224,7 @@ const affTableField: AffFieldFunctionTable = {
     COMPOUNDMIDDLE      : asString,
     COMPOUNDMIN         : asNumber,
     COMPOUNDPERMITFLAG  : asString,
+    COMPOUNDFORBIDFLAG  : asString,
     COMPOUNDRULE        : simpleTable,
     FLAG                : asString,  // 'long' | 'num'
     FORBIDDENWORD       : asString,

@@ -3,6 +3,10 @@ export interface WordInfo {
     rules: string;
 }
 
-export interface Dictionary<T>{
-    [index: string]: T;
-}
+export type Dictionary<T, K extends string | number = string> = {
+    [index in K]: T;
+};
+
+export type Filter<T, U> = T extends U ? T : never;
+
+export type Mapping<F, T> = (keyof F) extends string ? Dictionary<T, Filter<keyof F, string>> : never;

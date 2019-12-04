@@ -65,12 +65,12 @@ export class IterableHunspellReader implements Iterable<string> {
      * @param tapPreApplyRules -- optional function to be called before rules are applied to a word.
      *                            It is mostly used for monitoring progress.
      */
-    seqAffWords(tapPreApplyRules?: (w: string) => any) {
+    seqAffWords(tapPreApplyRules?: (w: string) => any, maxDepth?: number) {
         const seq = genSequence(this.src.dic);
         const dicWords = tapPreApplyRules ? seq.map(a => (tapPreApplyRules(a), a)) : seq;
         return dicWords
         .filter(a => !!a.trim())
-        .concatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord));
+        .concatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord, maxDepth));
     }
 
     /**
