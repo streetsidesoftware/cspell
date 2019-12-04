@@ -12,7 +12,9 @@
     "!**/*.test.*"
   ],
   "scripts": {
-    "test": "mocha --recursive ./dist/*.test.js",
+    "test-unit": "mocha --recursive ./dist/*.test.js",
+    "test-spelling": "cspell 'src/**/*.ts' '*.md'",
+    "test": "npm run test-unit && npm run test-spelling",
     "build": "tsc -p .",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
@@ -39,17 +41,18 @@
   },
   "homepage": "https://github.com/Jason-Rev/hunspell-reader#readme",
   "devDependencies": {
-    "@types/chai": "^4.2.4",
+    "@types/chai": "^4.2.6",
     "@types/fs-extra": "^8.0.1",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^10.17.5",
+    "@types/node": "^10.17.6",
     "chai": "^4.2.0",
-    "coveralls": "^3.0.8",
+    "coveralls": "^3.0.9",
+    "cspell": "^4.0.35",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "rimraf": "^2.7.1",
-    "ts-node": "^8.5.0",
-    "typescript": "^3.7.2"
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
   },
   "dependencies": {
     "commander": "^2.20.3",

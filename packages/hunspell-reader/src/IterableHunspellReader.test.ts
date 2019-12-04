@@ -228,4 +228,4 @@ ring/AUJ
 `;
 
 // cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings AUGJ aeiou sxzh sxzhy
-// cspell:words COMPOUNDMIN ONLYINCOMPOUND COMPOUNDRULE
+// cspell:words COMPOUNDMIN ONLYINCOMPOUND COMPOUNDRULE WORDCHARS
