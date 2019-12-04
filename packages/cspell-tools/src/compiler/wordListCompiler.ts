@@ -1,11 +1,9 @@
 import { xregexp as XRegExp } from 'cspell-util-bundle';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
-import * as lib from 'cspell-io';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
-import * as HR from 'hunspell-reader';
 import { streamWordsFromFile, HunspellOptions } from './iterateWordsFromFile';
 import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
