@@ -16,19 +16,21 @@ function getCommander() {
 describe('Validate the application', () => {
     test('test app compile-trie', async () => {
         const commander = getCommander();
-        const log = jest.spyOn(console, 'log');
+        const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
+        expect(log.mock.calls).toMatchSnapshot();
         log.mockRestore();
     });
 
     test('test app compile', async () => {
         const commander = getCommander();
-        const log = jest.spyOn(console, 'log');
+        const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
+        expect(log.mock.calls).toMatchSnapshot();
         log.mockRestore();
     });
 
