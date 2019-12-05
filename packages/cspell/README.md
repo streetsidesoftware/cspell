@@ -382,6 +382,7 @@ The spell checker includes a set of default dictionaries.
 * **cpp** - *C++* related keywords
 * **csharp** - *C#* related keywords
 * **latex** - LaTex related words
+* **bash** - Bash/shell script keywords
 
 
 ### Miscellaneous Dictionaries
