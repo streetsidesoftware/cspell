@@ -21,8 +21,6 @@ describe('Validate the application', () => {
         const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
-        const output = normalizeLogOutput(log.mock.calls);
-        expect(output).toMatchSnapshot();
         log.mockRestore();
     });
 
@@ -32,8 +30,6 @@ describe('Validate the application', () => {
         const args = argv('compile', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
-        const output = normalizeLogOutput(log.mock.calls);
-        expect(output).toMatchSnapshot();
         log.mockRestore();
     });
 
@@ -62,8 +58,3 @@ describe('Validate the application', () => {
     });
 
 });
-
-function normalizeLogOutput(calls: string[][]): string[][] {
-    const root = projectRoot.toString();
-    return calls.map(a => a.map(v => v.replace(root, '.')));
-}
