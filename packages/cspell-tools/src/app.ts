@@ -19,42 +19,65 @@ function globP(pattern: string): Promise<string[]> {
     });
 }
 
-program
-    .version(npmPackage.version);
+export function run(
+    program: program.Command,
+    argv: string[]
+): Promise<void> {
+    (program as any).exitOverride();
 
-program
-    .command('compile <src...>')
-    .description('compile words lists into simple dictionary files.')
-    .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
-    .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
-    .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
-    .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
-    .option('--no-sort', 'Do not sort the result')
-    .action(async (src: string[], options: { output?: string, compress: boolean, split: boolean, sort: boolean, case: boolean, max_depth?: string }) => {
-        const { max_depth } = options;
-        const maxDepth = max_depth !== undefined ? Number.parseInt(max_depth) : undefined;
-        return processAction(src, '.txt', options, async (src, dst) => {
-            console.log('Process "%s" to "%s"', src, dst);
-            await compileWordList(src, dst, { splitWords: options.split, sort: options.sort, maxDepth }).then(() => src);
-            console.log('Done "%s" to "%s"', src, dst);
-            return src;
-        });
-    });
+    return new Promise((resolve, rejects) => {
+        program
+            .version(npmPackage.version);
 
-program
-    .command('compile-trie <src...>')
-    .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
-    .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
-    .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
-    .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
-    .action((src: string[], options: { output?: string, compress: boolean, max_depth?: string }) => {
-        const { max_depth } = options;
-        const maxDepth = max_depth !== undefined ? Number.parseInt(max_depth) : undefined;
-        return processAction(src, '.trie', options, async (src, dst) => {
-            console.log('Process "%s" to "%s"', src, dst);
-            return compileTrie(src, dst, { maxDepth } ).then(() => src);
-        });
+        program
+            .command('compile <src...>')
+            .description('compile words lists into simple dictionary files.')
+            .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
+            .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
+            .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
+            .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
+            .option('--no-sort', 'Do not sort the result')
+            .action((src: string[], options: { output?: string, compress: boolean, split: boolean, sort: boolean, case: boolean, max_depth?: string }) => {
+                const { max_depth } = options;
+                const maxDepth = max_depth !== undefined ? Number.parseInt(max_depth) : undefined;
+                const result = processAction(src, '.txt', options, async (src, dst) => {
+                    console.log('Process "%s" to "%s"', src, dst);
+                    await compileWordList(src, dst, { splitWords: options.split, sort: options.sort, maxDepth }).then(() => src);
+                    console.log('Done "%s" to "%s"', src, dst);
+                    return src;
+                });
+                resolve(result);
+            });
+
+        program
+            .command('compile-trie <src...>')
+            .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
+            .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
+            .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
+            .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
+            .action((src: string[], options: { output?: string, compress: boolean, max_depth?: string }) => {
+                const { max_depth } = options;
+                const maxDepth = max_depth !== undefined ? Number.parseInt(max_depth) : undefined;
+                const result = processAction(src, '.trie', options, async (src, dst) => {
+                    console.log('Process "%s" to "%s"', src, dst);
+                    return compileTrie(src, dst, { maxDepth }).then(() => src);
+                });
+                resolve(result);
+            });
+
+        try {
+            program.parse(argv);
+            if (!argv.slice(2).length) {
+                program.help();
+            }
+        } catch (e) {
+            rejects(e);
+        }
+
+        resolve();
     });
+}
+
 
 async function processAction(
     src: string[],
@@ -63,9 +86,9 @@ async function processAction(
     action: (src: string, dst: string) => Promise<any>)
 : Promise<void> {
     console.log('Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
-    options.output || 'default',
-    options.compress ? 'true' : 'false',
-    src.join('\n  ') );
+        options.output || 'default',
+        options.compress ? 'true' : 'false',
+        src.join('\n  '));
 
     const ext = fileExt + (options.compress ? '.gz' : '');
 
@@ -85,8 +108,6 @@ async function processAction(
     console.log(`Complete.`);
 }
 
-program.parse(process.argv);
-
-if (!process.argv.slice(2).length) {
-    program.help();
+if (require.main === module) {
+    run(program, process.argv).catch(() => process.exit(1));
 }
