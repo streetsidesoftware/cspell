@@ -2,8 +2,9 @@ import * as app from './app';
 import * as Commander from 'commander';
 import * as path from 'path';
 
-const pathSamples = path.join(__dirname, '..', 'Samples');
-const pathTemp = path.join(__dirname, '..', 'temp');
+const projectRoot = path.join(__dirname, '..');
+const pathSamples = path.join(projectRoot, 'Samples');
+const pathTemp = path.join(projectRoot, 'temp');
 
 function argv(...args: string[]): string[] {
     return [...process.argv.slice(0, 2), ...args];
@@ -20,7 +21,8 @@ describe('Validate the application', () => {
         const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
-        expect(log.mock.calls).toMatchSnapshot();
+        const output = normalizeLogOutput(log.mock.calls);
+        expect(output).toMatchSnapshot();
         log.mockRestore();
     });
 
@@ -30,7 +32,8 @@ describe('Validate the application', () => {
         const args = argv('compile', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
-        expect(log.mock.calls).toMatchSnapshot();
+        const output = normalizeLogOutput(log.mock.calls);
+        expect(output).toMatchSnapshot();
         log.mockRestore();
     });
 
@@ -59,3 +62,8 @@ describe('Validate the application', () => {
     });
 
 });
+
+function normalizeLogOutput(calls: string[][]): string[][] {
+    const root = projectRoot.toString();
+    return calls.map(a => a.map(v => v.replace(root, '.')));
+}
