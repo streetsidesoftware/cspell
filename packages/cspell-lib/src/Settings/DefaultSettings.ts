@@ -59,7 +59,7 @@ export const _defaultSettings: CSpellSettingsWithSourceTrace = {
         'csharp', 'go', 'javascript', 'javascriptreact', 'json', 'markdown',
         'php', 'plaintext', 'python', 'text', 'typescript', 'typescriptreact',
         'html', 'css', 'less', 'scss',
-        'latex', 'rust', 'toml',
+        'latex', 'ruby', 'rust', 'shellscript', 'toml'
     ],
     maxNumberOfProblems: 100,
     numSuggestions: 10,
