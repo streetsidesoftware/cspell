@@ -65,26 +65,6 @@ export async function compileWordList(filename: string, destFilename: string, op
     return writeSeqToFile(finalSeq.map(a => a + '\n'), destFilename);
 }
 
-
-
-export function compileWordListWithSplit(
-    filename: string,
-    destFilename: string,
-    options: CompileWordListOptions = { splitWords: true, sort: true }
-): Promise<void> {
-    const { sort = true } = options;
-    return compileWordList(filename, destFilename, { ...options, splitWords: true, sort });
-}
-
-export async function compileSimpleWordList(
-    filename: string,
-    destFilename: string,
-    options: CompileWordListOptions = { splitWords: false, sort: true }
-): Promise<void> {
-    const { sort = true } = options;
-    return compileWordList(filename, destFilename, { ...options, splitWords: false, sort });
-}
-
 function sort(words: Iterable<string>): Iterable<string> {
     return [...words].sort();
 }
