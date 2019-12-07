@@ -4,7 +4,7 @@ import * as Text from './text';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
-import { streamWordsFromFile, HunspellOptions } from './iterateWordsFromFile';
+import { streamWordsFromFile, ReaderOptions } from './iterateWordsFromFile';
 import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 
@@ -41,7 +41,7 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
     return splitWords;
 }
 
-interface CompileWordListOptions extends HunspellOptions {
+interface CompileWordListOptions extends ReaderOptions {
     splitWords: boolean;
     sort: boolean;
 }
@@ -112,7 +112,7 @@ export async function compileWordListToTrieFile(words: Sequence<string>, destFil
     return writeSeqToFile(Trie.serializeTrie(root, { base: 32, comment: 'Built by cspell-tools.' }), destFilename);
 }
 
-export async function compileTrie(filename: string, destFilename: string, options?: HunspellOptions): Promise<void> {
+export async function compileTrie(filename: string, destFilename: string, options?: ReaderOptions): Promise<void> {
     const words = await streamWordsFromFile(filename, options || {});
     return compileWordListToTrieFile(words, destFilename);
 }
