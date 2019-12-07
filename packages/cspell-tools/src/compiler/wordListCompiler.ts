@@ -41,19 +41,17 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
     return splitWords;
 }
 
-interface CompileWordListOptions extends ReaderOptions {
+interface CompileWordListOptions {
     splitWords: boolean;
     sort: boolean;
 }
 
-export async function compileWordList(filename: string, destFilename: string, options: CompileWordListOptions): Promise<void> {
-    const pWords = streamWordsFromFile(filename, options);
+export async function compileWordList(words: Sequence<string>, destFilename: string, options: CompileWordListOptions): Promise<void> {
     const destDir = path.dirname(destFilename);
 
     const pDir = mkdirp(destDir);
 
     const compile = options.splitWords ? compileWordListWithSplitSeq : compileSimpleWordListSeq;
-    const words = await pWords;
     const seq = compile(words)
         .filter(a => !!a)
         .filter(uniqueFilter(10000));
@@ -83,16 +81,11 @@ export function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieNode {
     return result;
 }
 
-export async function compileWordListToTrieFile(words: Sequence<string>, destFilename: string): Promise<void> {
+export async function compileTrie(words: Sequence<string>, destFilename: string): Promise<void> {
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
     const pRoot = normalizeWordsToTrie(words);
     const [root] = await Promise.all([pRoot, pDir]);
 
     return writeSeqToFile(Trie.serializeTrie(root, { base: 32, comment: 'Built by cspell-tools.' }), destFilename);
-}
-
-export async function compileTrie(filename: string, destFilename: string, options?: ReaderOptions): Promise<void> {
-    const words = await streamWordsFromFile(filename, options || {});
-    return compileWordListToTrieFile(words, destFilename);
 }
