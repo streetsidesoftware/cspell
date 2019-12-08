@@ -18,7 +18,7 @@ describe('Validate the application', () => {
     test('test app compile-trie', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
+        const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'));
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
@@ -27,7 +27,16 @@ describe('Validate the application', () => {
     test('test app compile-trie compress', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile-trie', '-n', '-m', '0', path.join(pathSamples, 'cities.txt'));
+        const args = argv('compile-trie', path.join(pathSamples, 'cities.txt'));
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        expect(log).toHaveBeenCalled();
+        log.mockRestore();
+    });
+
+    test('test app compile-trie -o', async () => {
+        const commander = getCommander();
+        const log = jest.spyOn(console, 'log').mockImplementation();
+        const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
