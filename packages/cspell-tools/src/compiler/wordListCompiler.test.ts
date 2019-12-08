@@ -8,6 +8,7 @@ import * as Trie from 'cspell-trie-lib';
 import * as path from 'path';
 import { genSequence } from 'gensequence';
 import { readFile } from 'cspell-io';
+import { streamWordsFromFile } from './iterateWordsFromFile';
 
 const UTF8: BufferEncoding = 'utf8';
 
@@ -51,24 +52,20 @@ describe('Validate the wordListCompiler', () => {
         ]);
     });
 
-    test('test reading and normalizing a file', () => {
-        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+    test('test reading and normalizing a file', async () => {
+        const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'cities.txt'), {});
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.txt');
-        return compileWordList(sourceName, destName, { splitWords: true, sort: true })
-        .then(() => fsp.readFile(destName, 'utf8'))
-        .then(output => {
-            expect(output).to.be.equal(citiesResultSorted);
-        });
+        await compileWordList(sourceName, destName, { splitWords: true, sort: true });
+        const output = await fsp.readFile(destName, 'utf8');
+        expect(output).to.be.equal(citiesResultSorted);
     });
 
-    test('test compiling to a file without split', () => {
-        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+    test('test compiling to a file without split', async () => {
+        const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'cities.txt'), {});
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities2.txt');
-        return compileWordList(sourceName, destName, { splitWords: false, sort: true })
-        .then(() => fsp.readFile(destName, 'utf8'))
-        .then(output => {
-            expect(output).to.be.equal(citiesSorted.toLowerCase());
-        });
+        await compileWordList(sourceName, destName, { splitWords: false, sort: true })
+        const output = await fsp.readFile(destName, 'utf8');
+        expect(output).to.be.equal(citiesSorted.toLowerCase());
     });
 
     test('tests normalized to a trie', () => {
@@ -79,22 +76,19 @@ describe('Validate the wordListCompiler', () => {
         expect(tWords.sort()).to.be.deep.equal([...(new Set(nWords.sort()))]);
     });
 
-    test('test reading and normalizing to a trie file', () => {
-        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+    test('test reading and normalizing to a trie file', async () => {
+        const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'cities.txt'), {});
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie');
-        return compileTrie(sourceName, destName)
-        .then(() => fsp.readFile(destName, UTF8))
-        .then(output => output.split('\n'))
-        .then(srcWords => {
-            const node = Trie.importTrie(srcWords);
-            const expected = citiesResult.split('\n').filter(a => !!a).sort();
-            const words = [...Trie.iteratorTrieWords(node)].sort();
-            expect(words).to.be.deep.equal(expected);
-        });
+        await compileTrie(sourceName, destName);
+        const srcWords = (await fsp.readFile(destName, 'utf8')).split('\n');
+        const node = Trie.importTrie(srcWords);
+        const expected = citiesResult.split('\n').filter(a => !!a).sort();
+        const words = [...Trie.iteratorTrieWords(node)].sort();
+        expect(words).to.be.deep.equal(expected);
     });
 
     test('test reading and normalizing to a trie gz file', async () => {
-        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'cities.txt');
+        const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'cities.txt'), {});
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie.gz');
         await compileTrie(sourceName, destName);
         const resultFile = await readFile(destName, UTF8);
@@ -106,23 +100,19 @@ describe('Validate the wordListCompiler', () => {
     });
 
     test('test a simple hunspell dictionary depth 0', async () => {
-        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'hunspell', 'example.dic');
+        const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'hunspell', 'example.dic'), { maxDepth: 0});
         const destName = path.join(__dirname, '..', '..', 'temp', 'example0.txt');
-        return compileWordList(sourceName, destName, { splitWords: false, sort: true, maxDepth: 0 })
-        .then(() => fsp.readFile(destName, 'utf8'))
-        .then(output => {
-            expect(output).to.be.equal('hello\ntry\nwork\n');
-        });
+        await compileWordList(sourceName, destName, { splitWords: false, sort: true });
+        const output = await fsp.readFile(destName, 'utf8');
+        expect(output).to.be.equal('hello\ntry\nwork\n');
     });
 
     test('test a simple hunspell dictionary depth 1', async () => {
-        const sourceName = path.join(__dirname, '..', '..', 'Samples', 'hunspell', 'example.dic');
+        const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'hunspell', 'example.dic'), { maxDepth: 1});
         const destName = path.join(__dirname, '..', '..', 'temp', 'example0.txt');
-        return compileWordList(sourceName, destName, { splitWords: false, sort: true, maxDepth: 1 })
-        .then(() => fsp.readFile(destName, 'utf8'))
-        .then(output => {
-            expect(output.split('\n')).to.be.deep.equal(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
-        });
+        await compileWordList(sourceName, destName, { splitWords: false, sort: true });
+        const output = await fsp.readFile(destName, 'utf8');
+        expect(output.split('\n')).to.be.deep.equal(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
     });
 });
 
