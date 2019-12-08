@@ -2,4 +2,7 @@
 
 'use strict';
 
-require('./dist/app');
+const app = require('./dist/app');
+const program = require('commander');
+
+app.run(program, process.argv).catch(() => process.exit(1));
