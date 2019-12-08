@@ -25,7 +25,7 @@ interface CompileCommonOptions {
     compress: boolean;
     case: boolean;
     max_depth?: string;
-    merge: boolean;
+    merge: string;
 }
 
 interface CompileOptions extends CompileCommonOptions {
@@ -52,7 +52,7 @@ export function run(
             .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
             .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
-            .option('-M, --merge', 'Merge all files into a single files')
+            .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
             .option('--no-sort', 'Do not sort the result')
             .action((src: string[], options: CompileOptions) => {
@@ -67,7 +67,7 @@ export function run(
             .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
             .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
-            .option('-M, --merge', 'Merge all files into a single files')
+            .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
             .action((src: string[], options: CompileTrieOptions) => {
                 const result = processAction(src, '.trie', options, async (words: Sequence<string>, dst) => {
@@ -91,7 +91,6 @@ export function run(
 
 interface FileToProcess {
     src: string;
-    dst: string;
     words: Sequence<string>;
 }
 
@@ -118,15 +117,42 @@ async function processAction(
             const words = await streamWordsFromFile(s, readerOptions);
             const f: FileToProcess = {
                 src: s,
-                dst: toTargetFile(s, options.output, ext),
                 words,
             };
             return f;
         });
 
+    const r = options.merge
+    ? processFiles(action, filesToProcess, toMergeTargetFile(options.merge, options.output, ext))
+    : processFilesIndividually(action, filesToProcess, s => toTargetFile(s, options.output, ext));
+    await r;
+    console.log(`Complete.`);
+}
+
+function toFilename(name: string, ext: string) {
+    return path.basename(name).replace(/((\.txt|\.dic|\.aff)(\.gz)?)?$/, '') + ext;
+}
+
+function toTargetFile(filename: string, destination: string | undefined, ext: string) {
+    const outFileName = toFilename(filename, ext);
+    const dir = destination ?? path.dirname(filename);
+    return path.join(dir, outFileName);
+}
+
+function toMergeTargetFile(filename: string, destination: string | undefined, ext: string) {
+    const outFileName = toFilename(filename, ext);
+    return path.resolve(destination ?? './', outFileName);
+}
+
+async function processFilesIndividually(
+    action: (words: Sequence<string>, dst: string) => Promise<any>,
+    filesToProcess: Sequence<Promise<FileToProcess>>,
+    srcToTarget: (src: string) => string,
+) {
     const toProcess = filesToProcess
     .map(async pFtp => {
-        const { src, dst, words } = await pFtp;
+        const { src, words } = await pFtp;
+        const dst = srcToTarget(src);
         console.log('Process "%s" to "%s"', src, dst);
         await action(words, dst);
         console.log('Done "%s" to "%s"', src, dst);
@@ -135,13 +161,25 @@ async function processAction(
     for (const p of toProcess) {
         await p;
     }
-    console.log(`Complete.`);
 }
 
-function toTargetFile(filename: string, destination: string | undefined, ext: string) {
-    const outFilename = path.basename(filename).replace(/((\.txt|\.dic|\.aff)(\.gz)?)?$/, ext);
-    const dir = destination ?? path.dirname(filename);
-    return path.join(dir, outFilename);
+async function processFiles(
+    action: (words: Sequence<string>, dst: string) => Promise<any>,
+    filesToProcess: Sequence<Promise<FileToProcess>>,
+    mergeTarget: string,
+) {
+    const toProcess = await Promise.all([...filesToProcess]);
+    const dst = mergeTarget;
+
+    const words = genSequence(toProcess)
+    .map(ftp => {
+        const { src } = ftp;
+        console.log('Process "%s" to "%s"', src, dst);
+        return ftp;
+    })
+    .concatMap( ftp => ftp.words );
+    await action(words, dst);
+    console.log('Done "%s"', dst);
 }
 
 if (require.main === module) {
