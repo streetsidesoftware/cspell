@@ -34,6 +34,7 @@ interface CompileOptions extends CompileCommonOptions {
 }
 
 interface CompileTrieOptions extends CompileCommonOptions {
+    trie2: boolean;
 }
 
 export function run(
@@ -69,9 +70,10 @@ export function run(
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
             .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
+            .option('--trie2')
             .action((src: string[], options: CompileTrieOptions) => {
                 const result = processAction(src, '.trie', options, async (words: Sequence<string>, dst) => {
-                    return compileTrie(words, dst);
+                    return compileTrie(words, dst, options);
                 });
                 resolve(result);
             });
