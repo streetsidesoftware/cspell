@@ -27,6 +27,13 @@ describe('Import/Export', () => {
         expect(words).toEqual([...sampleWords].sort());
     });
 
+    test('tests serialize unknown version', async () => {
+        const sampleWords = (await pSampleWords).split('\n').filter(a => !!a);
+        const trie = Trie.createTriFromList(sampleWords);
+        const dataFn = () => serializeTrie(trie, { version: 99, base: 10, comment: 'Sample Words' });
+        expect(dataFn).toThrow('Unknown version: 99');
+    });
+
     test('bad format', async() => {
         const data = ['One', 'Two'];
         expect(() => importTrie(data)).toThrow('Unknown file format');

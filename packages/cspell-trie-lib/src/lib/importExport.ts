@@ -1,13 +1,28 @@
 import { Sequence, genSequence } from 'gensequence';
 import { TrieNode } from './TrieNode';
-import * as ieV1 from './importExportV1';
-import * as ieV2 from './importExportV2';
+import * as iv1 from './importExportV1';
+import * as iv2 from './importExportV2';
+import * as iv3 from './importExportV3';
 
 export interface ExportOptions {
     base?: number;
     comment?: string;
     version?: number;
 }
+
+const serializers = [
+    iv1.serializeTrie,
+    iv1.serializeTrie,
+    iv2.serializeTrie,
+    iv3.serializeTrie,
+];
+
+const deserializers = [
+    iv1.importTrie,
+    iv1.importTrie,
+    iv2.importTrie,
+    iv3.importTrie,
+];
 
 /**
  * Serialize a TrieNode.
@@ -16,11 +31,12 @@ export interface ExportOptions {
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
 export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
-    if (typeof options !== 'number' && options.version === 2) {
-        return ieV2.serializeTrie(root, options);
+    const version = typeof options !== 'number' && options.version ? options.version : 0;
+    const method = serializers[version];
+    if (!method) {
+        throw new Error(`Unknown version: ${version}`);
     }
-
-    return ieV1.serializeTrie(root, options);
+    return method(root, options);
 }
 
 
@@ -45,7 +61,7 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string>): 
             if (next.done) { break; }
             const line = next.value.trim();
             if (!line || comment.test(line)) { continue; }
-            if (line === ieV1.DATA || line === ieV2.DATA) { break; }
+            if (line === iv1.DATA || line === iv2.DATA) { break; }
             headerRows.push(line);
         }
 
@@ -56,10 +72,9 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string>): 
     const headerLines = readHeader(input);
     const version = parseHeaderRows(headerLines);
     const stream = genSequence(headerLines).concat(input);
-    switch (version) {
-        case 1: return ieV1.importTrie(stream);
-        case 2: return ieV2.importTrie(stream);
-        default:
-            throw new Error(`Unsupported version: ${version}`);
+    const method = deserializers[version];
+    if (!method) {
+        throw new Error(`Unsupported version: ${version}`);
     }
+    return method(stream);
 }

@@ -83,12 +83,12 @@ export function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieNode {
 
 export interface CompileTrieOptions {
     base?: number;
-    trie2?: boolean;
+    trie3?: boolean;
 }
 
 export async function compileTrie(words: Sequence<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {
     const base = options.base ?? 32;
-    const version = options.trie2 ? 2 : 1;
+    const version = options.trie3 ? 3 : 1;
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
     const pRoot = normalizeWordsToTrie(words);
