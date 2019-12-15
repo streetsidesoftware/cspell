@@ -1,15 +1,15 @@
-import { TrieNode2, TrieNode2EOW, TrieNode2Branch, TrieNode2Root } from './TrieNode2';
+import { TrieNode2, TrieNode2EOW, TrieNode2Branch, TrieNode2Root, END_OF_WORD as EOW } from './TrieNode2';
 
 export class Trie2 {
     constructor(readonly root: TrieNode2Root) {
     }
 }
 
-const END_OF_WORD: TrieNode2EOW = Object.freeze({ i: 0, s: '' });
+const END_OF_WORD: TrieNode2EOW = Object.freeze({ i: 0, s: EOW });
 
 export class Trie2Builder {
     protected nodes: TrieNode2[] = [END_OF_WORD];
-    protected root: TrieNode2Root = { i: -1, s: '', c: [] };
+    protected root: TrieNode2Root = { s: '', c: [] };
 
     insert(word: string): Trie2Builder {
         const location = this.findInsertLocation(this.root, word);
@@ -72,7 +72,7 @@ export class Trie2Builder {
         if (s === '') {
             return END_OF_WORD;
         }
-        const n: TrieNode2 = { i: this.nodes.length, s, c };
+        const n: TrieNode2 = { s, c };
         this.nodes.push(n);
         return n;
     }

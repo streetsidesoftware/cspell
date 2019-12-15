@@ -81,11 +81,18 @@ export function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieNode {
     return result;
 }
 
-export async function compileTrie(words: Sequence<string>, destFilename: string): Promise<void> {
+export interface CompileTrieOptions {
+    base?: number;
+    trie3?: boolean;
+}
+
+export async function compileTrie(words: Sequence<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {
+    const base = options.base ?? 32;
+    const version = options.trie3 ? 3 : 1;
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
     const pRoot = normalizeWordsToTrie(words);
     const [root] = await Promise.all([pRoot, pDir]);
 
-    return writeSeqToFile(Trie.serializeTrie(root, { base: 32, comment: 'Built by cspell-tools.' }), destFilename);
+    return writeSeqToFile(Trie.serializeTrie(root, { base, comment: 'Built by cspell-tools.', version }), destFilename);
 }

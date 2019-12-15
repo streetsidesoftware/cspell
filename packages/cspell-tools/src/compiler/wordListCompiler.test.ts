@@ -79,7 +79,7 @@ describe('Validate the wordListCompiler', () => {
     test('test reading and normalizing to a trie file', async () => {
         const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'cities.txt'), {});
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie');
-        await compileTrie(sourceName, destName);
+        await compileTrie(sourceName, destName, {});
         const srcWords = (await fsp.readFile(destName, 'utf8')).split('\n');
         const node = Trie.importTrie(srcWords);
         const expected = citiesResult.split('\n').filter(a => !!a).sort();
@@ -90,7 +90,7 @@ describe('Validate the wordListCompiler', () => {
     test('test reading and normalizing to a trie gz file', async () => {
         const sourceName = await streamWordsFromFile(path.join(__dirname, '..', '..', 'Samples', 'cities.txt'), {});
         const destName = path.join(__dirname, '..', '..', 'temp', 'cities.trie.gz');
-        await compileTrie(sourceName, destName);
+        await compileTrie(sourceName, destName, {});
         const resultFile = await readFile(destName, UTF8);
         const srcWords = resultFile.split('\n');
         const node = Trie.importTrie(srcWords);
