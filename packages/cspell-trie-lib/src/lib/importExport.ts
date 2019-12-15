@@ -44,6 +44,10 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
 export function importTrie(lines: Iterable<string> | IterableIterator<string>): TrieNode {
     const comment = /^\s*#/;
 
+    function *arrayToIterableIterator<T>(i: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
+        yield *i;
+    }
+
     function parseHeaderRows(headerRows: string[]): number {
         const header = headerRows.join('\n');
         const headerReg = /\bTrieXv(\d+)/;
@@ -53,7 +57,7 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string>): 
         return parseInt(match[1], 10);
     }
 
-    function readHeader(iter: Iterator<string>) {
+    function readHeader(iter: Iterator<string> | IterableIterator<string>) {
 
         const headerRows: string[] = [];
         while (true) {
@@ -61,14 +65,14 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string>): 
             if (next.done) { break; }
             const line = next.value.trim();
             if (!line || comment.test(line)) { continue; }
-            if (line === iv1.DATA || line === iv2.DATA) { break; }
             headerRows.push(line);
+            if (line === iv1.DATA || line === iv2.DATA) { break; }
         }
 
         return headerRows;
     }
 
-    const input = genSequence(lines);
+    const input = arrayToIterableIterator(lines);
     const headerLines = readHeader(input);
     const version = parseHeaderRows(headerLines);
     const stream = genSequence(headerLines).concat(input);
