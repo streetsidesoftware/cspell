@@ -47,9 +47,6 @@ export interface ExportOptions {
 
 /**
  * Serialize a TrieNode.
- * Note: This is destructive.  The node will no longer be usable.
- * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
- * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
 export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
     options = typeof options === 'number' ? { base: options } : options;
