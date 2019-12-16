@@ -1,72 +1,12 @@
 import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
-import { TrieRefNode, RefMap } from './trieRef';
+import { TrieRefNode, flattenToTrieRefNodeIterable } from './flatten';
 import { Sequence, genSequence } from 'gensequence';
 
 const EOW = '*';
 export const DATA = EOW;
 
-interface LeafResult { n: TrieRefNode; p?: TrieRefNode; k: string; }
-
-function leaves(node: TrieNode): Sequence<LeafResult> {
-    function *walk(node: TrieNode, k: string, p?: TrieNode): IterableIterator<LeafResult> {
-        if (!node.c) {
-            yield { n: node, p, k};
-        } else {
-            for (const n of node.c) {
-                yield* walk(n[1], n[0], node);
-            }
-        }
-    }
-
-    return genSequence(walk(node, ''));
-}
-
 function flattenToReferences(node: TrieNode): Sequence<TrieRefNode> {
-
-    function * walk(): IterableIterator<TrieRefNode> {
-        let iterations = 100;
-        let processed = 0;
-        let index = 0;
-
-        function signature(node: TrieRefNode): string {
-            const flags = node.f ? EOW : '';
-            const refs = node.r ? '{' + [...node.r].sort((a, b) => a[0] < b[0] ? -1 : 1).map(a => a.join(':')).join(',') + '}' : '';
-            return flags + refs;
-        }
-
-        do {
-            processed = 0;
-            let signatureMap = new Map<string, number>();
-            for (const leaf of leaves(node)) {
-                const h = signature(leaf.n);
-                let m = signatureMap.get(h);
-                if (m === undefined) {
-                    // first time, add it to hash
-                    yield leaf.n;
-                    m = index;
-                    signatureMap.set(h, m);
-                    index += 1;
-                }
-
-                // Fix up the parent
-                /* istanbul ignore else */
-                if (leaf.p && leaf.p.c) {
-                    leaf.p.r = leaf.p.r || new RefMap();
-                    leaf.p.r.set(leaf.k, m);
-                    leaf.p.c.delete(leaf.k);
-                    if (!leaf.p.c.size) {
-                        delete leaf.p.c;
-                    }
-                }
-                processed += 1;
-            }
-            iterations -= 1;
-        } while (processed && iterations && node.c);
-
-        yield node;
-    }
-
-    return genSequence(walk());
+    return genSequence(flattenToTrieRefNodeIterable(node));
 }
 
 const regExpEscapeChars = /([\[\]\\,:{}*])/;
