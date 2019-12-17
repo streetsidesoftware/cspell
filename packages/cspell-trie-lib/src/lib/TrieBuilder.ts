@@ -9,6 +9,7 @@ export class TrieBuilder {
     private count: number = 0;
     private readonly signatures = new Map<string, TrieNode>();
     private readonly cached = new Map<TrieNode, number>();
+    private readonly transforms = new Map<TrieNode, Map<string, TrieNode>>();
     private _root: TrieNode = { f: undefined, c: undefined };
     private _eow: TrieNode = Object.freeze({ f: 1 });
 
@@ -40,6 +41,12 @@ export class TrieBuilder {
         return true;
     }
 
+    private tryCacheFrozen(n: TrieNode) {
+        if (this.cached.has(n)) return n;
+        this.cached.set(n, this.count++);
+        return n;
+    }
+
     private freeze(n: TrieNode) {
         if (Object.isFrozen(n)) return n;
         // istanbul ignore else
@@ -69,7 +76,21 @@ export class TrieBuilder {
         return n;
     }
 
+    private storeTransform(src: TrieNode, s: string, result: TrieNode) {
+        if (!Object.isFrozen(result) || !Object.isFrozen(src)) return;
+        const t = this.transforms.get(src) ?? new Map<string, TrieNode>();
+        t.set(s, result);
+        this.transforms.set(src, t);
+    }
+
     private _insert(node: TrieNode, s: string): TrieNode {
+        const orig = node;
+        if (Object.isFrozen(node)) {
+            const n = this.transforms.get(node)?.get(s);
+            if (n) {
+                return this.tryCacheFrozen(n);
+            }
+        }
         if (!s) {
             if (!node.c) {
                 return this._eow;
@@ -90,7 +111,9 @@ export class TrieBuilder {
             node.c!.set(head, child);
         }
 
-        return Object.isFrozen(child) ? this.tryToCache(node) : node;
+        node = Object.isFrozen(child) ? this.tryToCache(node) : node;
+        this.storeTransform(orig, s, node);
+        return node;
     }
 
     insertWord(word: string) {

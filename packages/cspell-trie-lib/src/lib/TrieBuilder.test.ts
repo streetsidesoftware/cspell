@@ -7,7 +7,7 @@ describe('Validate TrieBuilder', () => {
         builder.insert(sampleWords);
         const trie = builder.build();
         expect([...trie.words()]).toEqual(sampleWords.sort());
-        expect(countNodes(trie.root)).toBe(108);
+        expect(countNodes(trie.root)).toBe(121);
     });
 
     test('builder duplicate inserts', () => {
@@ -92,4 +92,19 @@ const sampleWords = [
     'fun journey',
     'long walk',
     'fun walk',
-];
+]
+.concat(applyEndings('shock'))
+.concat(applyEndings('stock'))
+.concat(applyEndings('clock'))
+.concat(applyEndings('open'))
+.concat(applyEndings('lock'))
+.concat(applyEndings('hack'))
+.concat(applyEndings('will'))
+.concat(applyEndings('shell'))
+.concat(applyEndings('kill'))
+;
+
+
+function applyEndings(word: string): string[] {
+    return ['', 'ed', 'er', 'ing', 's'].map(s => word + s);
+}
