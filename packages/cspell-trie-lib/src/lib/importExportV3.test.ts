@@ -2,6 +2,7 @@ import * as Trie from '.';
 import { serializeTrie, importTrie } from './importExportV3';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
+import { consolidate } from './consolidate';
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {
@@ -17,6 +18,17 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {
         const trie = Trie.createTriFromList(sampleWords);
         const data = serializeTrie(trie, 10);
+        const root = importTrie(data);
+        const words = [...Trie.iteratorTrieWords(root)];
+        expect(words).toEqual([...sampleWords].sort());
+    });
+
+    test('tests serialize DAWG', async () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const trieDawg = consolidate(trie);
+        const data = [...serializeTrie(trieDawg, 10)];
+        // const raw = data.join('');
+        // expect(raw).toEqual('');
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());

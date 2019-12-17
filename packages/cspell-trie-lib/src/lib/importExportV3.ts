@@ -4,6 +4,8 @@ import { Sequence, genSequence } from 'gensequence';
 const EOW = '$';
 const BACK = '<';
 const EOL = '\n';
+const REF = '#';
+const EOR = ';';
 
 export const DATA = '__DATA__';
 
@@ -24,22 +26,6 @@ function generateHeader(base: number, comment: string): Sequence<string> {
     return genSequence(header).map(a => a + '\n');
 }
 
-function *walk(node: TrieNode, depth: number): Generator<string> {
-    if (node.f) {
-        yield EOW;
-        // yield EOL;
-    }
-    if (node.c) {
-        const c = [...node.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
-        for (const [s, n] of c) {
-            yield s;
-            yield *walk(n, depth + 1);
-            yield BACK;
-            if (depth === 0) yield EOL;
-        }
-    }
-}
-
 export interface ExportOptions {
     base?: number;
     comment?: string;
@@ -47,14 +33,40 @@ export interface ExportOptions {
 
 /**
  * Serialize a TrieNode.
- * Note: This is destructive.  The node will no longer be usable.
- * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
- * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
 export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
+    const cache = new Map<TrieNode, number>();
+    let count = 0;
+
+
+    function ref(n: number): string {
+        return '#' + n.toString(radix) + ';';
+    }
+
+    function *walk(node: TrieNode, depth: number): Generator<string> {
+        const r = cache.get(node);
+        if (r !== undefined) {
+            yield ref(r); // (node.f && !node.c) ? EOW : ref(r);
+            return;
+        }
+        cache.set(node, count++);
+        if (node.f) {
+            yield EOW;
+            // yield EOL;
+        }
+        if (node.c) {
+            const c = [...node.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
+            for (const [s, n] of c) {
+                yield s;
+                yield *walk(n, depth + 1);
+                yield BACK;
+                if (depth === 0) yield EOL;
+            }
+        }
+    }
 
     return generateHeader(radix, comment)
         .concat(walk(root, 0));
@@ -65,7 +77,7 @@ function *toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): Iterab
 }
 
 export function importTrie(linesX: Iterable<string> | IterableIterator<string>): TrieNode {
-    // let radix = 16;
+    let radix = 16;
     const comment = /^\s*#/;
     const iter = toIterableIterator(linesX);
 
@@ -74,7 +86,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
         const headerReg = /^TrieXv3\nbase=(\d+)$/;
         /* istanbul ignore if */
         if (!headerReg.test(header)) throw new Error('Unknown file format');
-        // radix = Number.parseInt(header.replace(headerReg, '$1'), 10);
+        radix = Number.parseInt(header.replace(headerReg, '$1'), 10);
     }
 
     function readHeader(iter: Iterator<string>) {
@@ -91,10 +103,17 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
         parseHeaderRows(headerRows);
     }
 
+    interface Stack {
+        node: TrieNode;
+        s: string;
+        p: TrieNode;
+    }
+
     interface ReduceResults {
-        stack: TrieNode[];
+        stack: Stack[];
         nodes: TrieNode[];
         root: TrieNode;
+        ref: string | undefined;
     }
 
     readHeader(iter);
@@ -105,7 +124,18 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
         .concatMap(a => a.split(''))
         .reduce((acc: ReduceResults, s) => {
             const { root, nodes, stack } = acc;
-            const node = stack[stack.length - 1];
+            const top = stack[stack.length - 1];
+            const node = top.node;
+            let ref = acc.ref;
+            if (ref !== undefined) {
+                const p = top.p;
+                if (s === EOR) {
+                    const r = parseInt(ref, radix);
+                    p.c?.set(top.s, nodes[r]);
+                    return { root, nodes, stack, ref: undefined };
+                }
+                return { root, nodes, stack, ref: ref + s };
+            }
             switch (s) {
                 case EOL:
                     // ignore line breaks;
@@ -116,14 +146,19 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
                 case BACK:
                     stack.pop();
                     break;
+                case REF:
+                    nodes.pop();
+                    ref = '';
+                    break;
                 default:
                     node.c = node.c ?? new Map<string, TrieNode>();
                     const n = {};
                     node.c.set(s, n);
-                    stack.push(n);
+                    stack.push({ node: n, p: node, s });
+                    nodes.push(n);
                     break;
             }
-            return { root, nodes, stack };
-        }, { nodes: [], root, stack: [root] });
+            return { root, nodes, stack, s, ref };
+        }, { nodes: [ root ], root, stack: [{ node: root, p: root, s: '' }], ref: undefined });
     return n.root;
 }
