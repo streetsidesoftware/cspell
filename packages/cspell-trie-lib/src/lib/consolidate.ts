@@ -1,4 +1,5 @@
 import { TrieNode } from './TrieNode';
+
 /**
  * Consolidate to DAWG
  * @param root the root of the Trie tree

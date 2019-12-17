@@ -19,7 +19,9 @@ import {walker, WalkerIterator} from './walker';
 export class Trie {
     constructor(readonly root: TrieNode) {
         // The root can be a word
-        root.f = root.f ? (root.f & ~FLAG_WORD) : root.f;
+        if (root.f) {
+            root.f = root.f ? (root.f & ~FLAG_WORD) : root.f;
+        }
     }
 
     find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {
