@@ -71,7 +71,13 @@ export class TrieBuilder {
 
     private _insert(node: TrieNode, s: string): TrieNode {
         if (!s) {
-            return this._eow;
+            if (!node.c) {
+                return this._eow;
+            } else {
+                node = Object.isFrozen(node) ? {...node} : node;
+                node.f = this._eow.f;
+                return node;
+            }
         }
         const head = s[0];
         const tail = s.slice(1);
