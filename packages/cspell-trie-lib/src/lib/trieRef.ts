@@ -1,6 +1,5 @@
-import { TrieNode } from './TrieNode';
-
-export class RefMap extends Map<string, number> {}
-export interface TrieRefNode extends TrieNode {
-    r?: RefMap;
+export type RefList = [string, number][];
+export interface TrieRefNode {
+    f?: number;
+    r?: RefList;
 }

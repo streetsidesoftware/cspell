@@ -1,5 +1,6 @@
 import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
-import { TrieRefNode, flattenToTrieRefNodeIterable } from './flatten';
+import { TrieRefNode } from './trieRef';
+import { flattenToTrieRefNodeIterable } from './flatten';
 import { Sequence, genSequence } from 'gensequence';
 
 const EOW = '*';

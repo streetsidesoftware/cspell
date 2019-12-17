@@ -1,10 +1,5 @@
 import { TrieNode } from './TrieNode';
-
-export type RefList = [string, number][];
-export interface TrieRefNode {
-    f?: number;
-    r?: RefList;
-}
+import { TrieRefNode } from './trieRef';
 
 export interface Emitter {
     push: (n: TrieRefNode) => number;
