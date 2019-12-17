@@ -4,7 +4,6 @@ import * as Text from './text';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
-import { streamWordsFromFile, ReaderOptions } from './iterateWordsFromFile';
 import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 
@@ -76,9 +75,8 @@ function compileSimpleWordListSeq(words: Sequence<string>): Sequence<string> {
 }
 
 export function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieNode {
-    const result = normalizeWords(words)
-        .reduce((node: Trie.TrieNode, word: string) => Trie.insert(word, node), {} as Trie.TrieNode);
-    return result;
+    const trie = Trie.buildTrie(normalizeWords(words));
+    return trie.root;
 }
 
 export interface CompileTrieOptions {

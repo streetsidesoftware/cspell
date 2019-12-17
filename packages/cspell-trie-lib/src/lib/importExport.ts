@@ -3,7 +3,6 @@ import { TrieNode } from './TrieNode';
 import * as iv1 from './importExportV1';
 import * as iv2 from './importExportV2';
 import * as iv3 from './importExportV3';
-import { consolidate } from './consolidate';
 
 export interface ExportOptions {
     base?: number;
@@ -17,7 +16,7 @@ const serializers: Serializer[] = [
     iv1.serializeTrie,
     iv1.serializeTrie,
     iv2.serializeTrie,
-    (root: TrieNode, options?: number | ExportOptions) => iv3.serializeTrie(consolidate(root), options),
+    iv3.serializeTrie,
 ];
 
 const deserializers = [
