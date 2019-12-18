@@ -8,6 +8,18 @@ const BACK = '<';
 const EOL = '\n';
 const REF = '#';
 const EOR = ';';
+const ESCAPE = '\\';
+
+const specialCharacters = new Set(
+    [EOW, BACK, EOL, REF, EOR, ESCAPE]
+    .concat('0123456789'.split(''))
+    .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
+);
+
+const specialCharacterMap = new Map([
+    ['\n', '\\n'], ['\r', '\\r'], ['\\', '\\\\'],
+]);
+const characterMap = new Map([...specialCharacterMap].map(a => [a[1], a[0]]));
 
 export const DATA = '__DATA__';
 
@@ -48,6 +60,10 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
         return '#' + n.toString(radix) + ';';
     }
 
+    function escape(s: string): string {
+        return (specialCharacters.has(s)) ? ESCAPE + (specialCharacterMap.get(s) || s) : s;
+    }
+
     function *walk(node: TrieNode, depth: number): Generator<string> {
         const r = cache.get(node);
         if (r !== undefined) {
@@ -62,7 +78,7 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
         if (node.c) {
             const c = [...node.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
             for (const [s, n] of c) {
-                yield s;
+                yield  escape(s);
                 yield *walk(n, depth + 1);
                 yield BACK;
                 if (depth === 0) yield EOL;
@@ -77,6 +93,20 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
 function *toIterableIterator<T>(iter: IterableLike<T>): IterableIterator<T> {
     yield *iter;
 }
+
+interface Stack {
+    node: TrieNode;
+    s: string;
+}
+
+interface ReduceResults {
+    stack: Stack[];
+    nodes: TrieNode[];
+    root: TrieNode;
+    parser: Reducer | undefined;
+}
+
+type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
 export function importTrie(linesX: IterableLike<string>): TrieNode {
     let radix = 16;
@@ -105,62 +135,93 @@ export function importTrie(linesX: IterableLike<string>): TrieNode {
         parseHeaderRows(headerRows);
     }
 
-    interface Stack {
-        node: TrieNode;
-        s: string;
-        p: TrieNode;
-    }
-
-    interface ReduceResults {
-        stack: Stack[];
-        nodes: TrieNode[];
-        root: TrieNode;
-        ref: string | undefined;
-    }
-
     readHeader(iter);
 
     const root: TrieNode = {};
 
     const n = genSequence(iter)
         .concatMap(a => a.split(''))
-        .reduce((acc: ReduceResults, s) => {
-            const { root, nodes, stack } = acc;
-            const top = stack[stack.length - 1];
-            const node = top.node;
-            let ref = acc.ref;
-            if (ref !== undefined) {
-                const p = top.p;
-                if (s === EOR) {
-                    const r = parseInt(ref, radix);
-                    p.c?.set(top.s, nodes[r]);
-                    return { root, nodes, stack, ref: undefined };
-                }
-                return { root, nodes, stack, ref: ref + s };
-            }
-            switch (s) {
-                case EOL:
-                    // ignore line breaks;
-                    break;
-                case EOW:
-                    node.f = FLAG_WORD;
-                    break;
-                case BACK:
-                    stack.pop();
-                    break;
-                case REF:
-                    nodes.pop();
-                    ref = '';
-                    break;
-                default:
-                    node.c = node.c ?? new Map<string, TrieNode>();
-                    const n = {};
-                    node.c.set(s, n);
-                    stack.push({ node: n, p: node, s });
-                    nodes.push(n);
-                    break;
-            }
-            return { root, nodes, stack, s, ref };
-        }, { nodes: [ root ], root, stack: [{ node: root, p: root, s: '' }], ref: undefined });
+        .reduce(
+            parseStream(radix),
+            { nodes: [ root ], root, stack: [{ node: root, s: '' }], parser: undefined  }
+        );
     return n.root;
+}
+
+function parseStream(radix: number): Reducer {
+    function parseReference() {
+        let ref = '';
+
+        function parser(acc: ReduceResults, s: string): ReduceResults {
+            if (s === EOR) {
+                const { root, nodes, stack } = acc;
+                const r = parseInt(ref, radix);
+                const top = stack[stack.length - 1];
+                const p = stack[stack.length - 2].node;
+                p.c?.set(top.s, nodes[r]);
+                return { root, nodes, stack, parser: undefined };
+            }
+            ref = ref + s;
+            return acc;
+        }
+
+        return parser;
+    }
+
+    function parseEscapeCharacter() {
+        let prev = '';
+        return function (acc: ReduceResults, s: string): ReduceResults {
+            if (prev) {
+                s = characterMap.get(prev + s) || s;
+                return parseCharacter({...acc, parser: undefined}, s);
+            }
+            if (s === ESCAPE) {
+                prev = s;
+                return acc;
+            }
+            return parseCharacter({...acc, parser: undefined}, s);
+        };
+    }
+
+    function parseCharacter(acc: ReduceResults, s: string): ReduceResults {
+        const parser = undefined;
+        const { root, nodes, stack } = acc;
+        const top = stack[stack.length - 1];
+        const node = top.node;
+        node.c = node.c ?? new Map<string, TrieNode>();
+        const n = { f: undefined, c: undefined };
+        node.c.set(s, n);
+        stack.push({ node: n, s });
+        nodes.push(n);
+        return { root, nodes, stack, parser };
+    }
+
+    return function (acc: ReduceResults, s: string): ReduceResults {
+        let { parser } = acc;
+        if (parser) return parser(acc, s);
+        const { root, nodes, stack } = acc;
+        const top = stack[stack.length - 1];
+        const node = top.node;
+        switch (s) {
+            case EOL:
+                // ignore line breaks;
+                break;
+            case EOW:
+                node.f = FLAG_WORD;
+                break;
+            case BACK:
+                stack.pop();
+                break;
+            case REF:
+                nodes.pop();
+                parser = parseReference();
+                break;
+            case ESCAPE:
+                parser = parseEscapeCharacter();
+                break;
+            default:
+                return parseCharacter(acc, s);
+        }
+        return { root, nodes, stack, parser };
+    };
 }

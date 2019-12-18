@@ -7,8 +7,18 @@ import { consolidate } from './consolidate';
 const sampleFile = path.join(__dirname, '..', '..', 'Samples', 'sampleV3.trie');
 
 describe('Import/Export', () => {
+
+    test('tests serialize / deserialize specialCharacters', async () => {
+        const trie = Trie.buildTrie(specialCharacters).root;
+        const data = [...serializeTrie(trie, 10)];
+        const root = importTrie(data);
+        const words = [...Trie.iteratorTrieWords(root)];
+        expect(words).toEqual([...specialCharacters].sort());
+    });
+
+
     test('tests serialize / deserialize', async () => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = Trie.buildTrie(sampleWords).root;
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
         const root = importTrie(data.split('\n'));
         const words = [...Trie.iteratorTrieWords(root)];
@@ -24,7 +34,7 @@ describe('Import/Export', () => {
     });
 
     test('tests serialize / deserialize', async () => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = Trie.buildTrie(sampleWords).root;
         const data = serializeTrie(trie, 10);
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
@@ -35,13 +45,21 @@ describe('Import/Export', () => {
         const trie = Trie.createTriFromList(sampleWords);
         const trieDawg = consolidate(trie);
         const data = [...serializeTrie(trieDawg, 10)];
-        // const raw = data.join('');
-        // expect(raw).toEqual('');
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
     });
 });
+
+const specialCharacters = [
+    'arrow <',
+    'escape \\',
+    'eol \n',
+    'eow $',
+    'ref #',
+    'Numbers 0123456789',
+    'Braces: {}[]()',
+];
 
 const sampleWords = [
     'journal',
@@ -97,4 +115,4 @@ const sampleWords = [
     'fun journey',
     'long walk',
     'fun walk',
-];
+].concat(specialCharacters);
