@@ -67,14 +67,12 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
     function *walk(node: TrieNode, depth: number): Generator<string> {
         const r = cache.get(node);
         if (r !== undefined) {
-            yield ref(r); // (node.f && !node.c) ? EOW : ref(r);
+            // EOW is only possible if children are yielded first.
+            // yield (node.f && !node.c) ? EOW : ref(r);
+            yield ref(r);
             return;
         }
         cache.set(node, count++);
-        if (node.f) {
-            yield EOW;
-            // yield EOL;
-        }
         if (node.c) {
             const c = [...node.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
             for (const [s, n] of c) {
@@ -83,6 +81,11 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
                 yield BACK;
                 if (depth === 0) yield EOL;
             }
+        }
+        // Output EOW after children so it can be optimized.
+        if (node.f) {
+            yield EOW;
+            // yield EOL;
         }
     }
 
@@ -107,6 +110,8 @@ interface ReduceResults {
 }
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
+
+const eow: TrieNode = Object.freeze({ f: 1 });
 
 export function importTrie(linesX: IterableLike<string>): TrieNode {
     let radix = 16;
@@ -149,7 +154,7 @@ export function importTrie(linesX: IterableLike<string>): TrieNode {
 }
 
 function parseStream(radix: number): Reducer {
-    function parseReference() {
+    function parseReference(acc: ReduceResults, _: string): ReduceResults {
         let ref = '';
 
         function parser(acc: ReduceResults, s: string): ReduceResults {
@@ -165,12 +170,14 @@ function parseStream(radix: number): Reducer {
             return acc;
         }
 
-        return parser;
+        const { nodes } = acc;
+        nodes.pop();
+        return {...acc, nodes, parser};
     }
 
-    function parseEscapeCharacter() {
+    function parseEscapeCharacter(acc: ReduceResults, _: string): ReduceResults {
         let prev = '';
-        return function (acc: ReduceResults, s: string): ReduceResults {
+        const parser = function (acc: ReduceResults, s: string): ReduceResults {
             if (prev) {
                 s = characterMap.get(prev + s) || s;
                 return parseCharacter({...acc, parser: undefined}, s);
@@ -181,6 +188,7 @@ function parseStream(radix: number): Reducer {
             }
             return parseCharacter({...acc, parser: undefined}, s);
         };
+        return {...acc, parser};
     }
 
     function parseCharacter(acc: ReduceResults, s: string): ReduceResults {
@@ -196,32 +204,37 @@ function parseStream(radix: number): Reducer {
         return { root, nodes, stack, parser };
     }
 
-    return function (acc: ReduceResults, s: string): ReduceResults {
-        let { parser } = acc;
-        if (parser) return parser(acc, s);
-        const { root, nodes, stack } = acc;
+    function parseEOW(acc: ReduceResults, _: string): ReduceResults {
+        const { root, nodes, stack, parser } = acc;
         const top = stack[stack.length - 1];
         const node = top.node;
-        switch (s) {
-            case EOL:
-                // ignore line breaks;
-                break;
-            case EOW:
-                node.f = FLAG_WORD;
-                break;
-            case BACK:
-                stack.pop();
-                break;
-            case REF:
-                nodes.pop();
-                parser = parseReference();
-                break;
-            case ESCAPE:
-                parser = parseEscapeCharacter();
-                break;
-            default:
-                return parseCharacter(acc, s);
+        node.f = FLAG_WORD;
+        if (!node.c) {
+            top.node = eow;
         }
         return { root, nodes, stack, parser };
+    }
+
+    function parseBack(acc: ReduceResults, _: string): ReduceResults {
+        const { stack } = acc;
+        stack.pop();
+        return acc;
+    }
+
+    function parseIgnore(acc: ReduceResults, _: string): ReduceResults {
+        return acc;
+    }
+
+    const parsers = new Map<string, Reducer>([
+        [EOW, parseEOW],
+        [BACK, parseBack],
+        [REF, parseReference],
+        [ESCAPE, parseEscapeCharacter],
+        [EOL, parseIgnore],
+    ]);
+
+    return function (acc: ReduceResults, s: string): ReduceResults {
+        const parser = acc.parser ?? parsers.get(s) ?? parseCharacter;
+        return parser(acc, s);
     };
 }

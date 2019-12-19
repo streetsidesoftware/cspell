@@ -20,7 +20,7 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {
         const trie = Trie.buildTrie(sampleWords).root;
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
-        const root = importTrie(data.split('\n'));
+        const root = importTrie(data.split('\n').map(a => a ? a + '\n' : a));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
         await writeFile(sampleFile, data);
