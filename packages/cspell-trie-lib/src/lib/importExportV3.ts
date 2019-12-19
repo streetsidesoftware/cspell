@@ -6,12 +6,13 @@ import { IterableLike } from './IterableLike';
 const EOW = '$';
 const BACK = '<';
 const EOL = '\n';
+const LF = '\r';
 const REF = '#';
 const EOR = ';';
 const ESCAPE = '\\';
 
 const specialCharacters = new Set(
-    [EOW, BACK, EOL, REF, EOR, ESCAPE]
+    [EOW, BACK, EOL, REF, EOR, ESCAPE, LF]
     .concat('0123456789'.split(''))
     .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
 );
@@ -132,7 +133,7 @@ export function importTrie(linesX: IterableLike<string>): TrieNode {
         while (true) {
             const next = iter.next();
             if (next.done) { break; }
-            const line = next.value.trim();
+            const line = next.value.trim().replace(/\r|\n/g, '');
             if (!line || comment.test(line)) { continue; }
             if (line === DATA) { break; }
             headerRows.push(line);
@@ -231,6 +232,7 @@ function parseStream(radix: number): Reducer {
         [REF, parseReference],
         [ESCAPE, parseEscapeCharacter],
         [EOL, parseIgnore],
+        [LF, parseIgnore],
     ]);
 
     return function (acc: ReduceResults, s: string): ReduceResults {

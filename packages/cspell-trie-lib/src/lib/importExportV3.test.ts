@@ -8,6 +8,14 @@ const sampleFile = path.join(__dirname, '..', '..', 'Samples', 'sampleV3.trie');
 
 describe('Import/Export', () => {
 
+    test('tests serialize / deserialize small sample', async () => {
+        const trie = Trie.buildTrie(smallSample).root;
+        const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
+        const root = importTrie(data.split('\n').map(a => a ? a + '\r\n' : a));
+        const words = [...Trie.iteratorTrieWords(root)];
+        expect(words).toEqual([...smallSample].sort());
+    });
+
     test('tests serialize / deserialize specialCharacters', async () => {
         const trie = Trie.buildTrie(specialCharacters).root;
         const data = [...serializeTrie(trie, 10)];
@@ -15,7 +23,6 @@ describe('Import/Export', () => {
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...specialCharacters].sort());
     });
-
 
     test('tests serialize / deserialize', async () => {
         const trie = Trie.buildTrie(sampleWords).root;
@@ -59,6 +66,24 @@ const specialCharacters = [
     'ref #',
     'Numbers 0123456789',
     'Braces: {}[]()',
+];
+
+const smallSample = [
+    'lift',
+    'lifted',
+    'lifter',
+    'lifting',
+    'lifts',
+    'talk',
+    'talked',
+    'talker',
+    'talking',
+    'talks',
+    'walk',
+    'walked',
+    'walker',
+    'walking',
+    'walks',
 ];
 
 const sampleWords = [
