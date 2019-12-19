@@ -3,6 +3,7 @@ import { serializeTrie, importTrie } from './importExportV3';
 import { readFile, writeFile } from 'fs-extra';
 import * as path from 'path';
 import { consolidate } from './consolidate';
+import { genSequence } from 'gensequence';
 
 const sampleFile = path.join(__dirname, '..', '..', 'Samples', 'sampleV3.trie');
 
@@ -11,7 +12,7 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize small sample', async () => {
         const trie = Trie.buildTrie(smallSample).root;
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
-        const root = importTrie(data.split('\n').map(a => a ? a + '\r\n' : a));
+        const root = importTrie(data.replace(/\[\d+\]/g, '').split('\n').map(a => a ? a + '\r\n' : a));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...smallSample].sort());
     });
@@ -68,23 +69,16 @@ const specialCharacters = [
     'Braces: {}[]()',
 ];
 
-const smallSample = [
+const smallSample = genSequence([
     'lift',
-    'lifted',
-    'lifter',
-    'lifting',
-    'lifts',
     'talk',
-    'talked',
-    'talker',
-    'talking',
-    'talks',
     'walk',
-    'walked',
-    'walker',
-    'walking',
-    'walks',
-];
+    'turn',
+    'burn',
+    'chalk',
+    'churn',
+]).concatMap(applyEndings)
+.toArray();
 
 const sampleWords = [
     'journal',
@@ -118,21 +112,6 @@ const sampleWords = [
     'joyriding',
     'joyrode',
     'joystick',
-    'lift',
-    'lifted',
-    'lifter',
-    'lifting',
-    'lifts',
-    'talk',
-    'talked',
-    'talker',
-    'talking',
-    'talks',
-    'walk',
-    'walked',
-    'walker',
-    'walking',
-    'walks',
     'Big Apple',
     'New York',
     'apple',
@@ -140,4 +119,10 @@ const sampleWords = [
     'fun journey',
     'long walk',
     'fun walk',
-].concat(specialCharacters);
+].concat(specialCharacters)
+.concat(smallSample);
+
+function applyEndings(s: string): string[] {
+    const endings = ['', 'ed', 'er', 'ing', 's'];
+    return endings.map(e => s + e);
+}
