@@ -1,11 +1,26 @@
 import { TrieNode, FLAG_WORD } from './TrieNode';
 import { Sequence, genSequence } from 'gensequence';
+import { bufferLines } from './bufferLines';
+import { IterableLike } from './IterableLike';
 
 const EOW = '$';
 const BACK = '<';
 const EOL = '\n';
+const LF = '\r';
 const REF = '#';
 const EOR = ';';
+const ESCAPE = '\\';
+
+const specialCharacters = new Set(
+    [EOW, BACK, EOL, REF, EOR, ESCAPE, LF]
+    .concat('0123456789'.split(''))
+    .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
+);
+
+const specialCharacterMap = new Map([
+    ['\n', '\\n'], ['\r', '\\r'], ['\\', '\\\\'],
+]);
+const characterMap = new Map([...specialCharacterMap].map(a => [a[1], a[0]]));
 
 export const DATA = '__DATA__';
 
@@ -46,37 +61,58 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
         return '#' + n.toString(radix) + ';';
     }
 
+    function escape(s: string): string {
+        return (specialCharacters.has(s)) ? ESCAPE + (specialCharacterMap.get(s) || s) : s;
+    }
+
     function *walk(node: TrieNode, depth: number): Generator<string> {
         const r = cache.get(node);
         if (r !== undefined) {
-            yield ref(r); // (node.f && !node.c) ? EOW : ref(r);
+            yield (node.f && !node.c) ? EOW : ref(r);
+            // yield ref(r);
             return;
         }
         cache.set(node, count++);
-        if (node.f) {
-            yield EOW;
-            // yield EOL;
-        }
         if (node.c) {
             const c = [...node.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
             for (const [s, n] of c) {
-                yield s;
+                yield  escape(s);
                 yield *walk(n, depth + 1);
                 yield BACK;
                 if (depth === 0) yield EOL;
             }
         }
+        // Output EOW after children so it can be optimized on read
+        if (node.f) {
+            yield EOW;
+            // yield EOL;
+        }
     }
 
     return generateHeader(radix, comment)
-        .concat(walk(root, 0));
+        .concat(bufferLines(bufferLines(walk(root, 0), 120, '\n'), 10, ''));
 }
 
-function *toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
+function *toIterableIterator<T>(iter: IterableLike<T>): IterableIterator<T> {
     yield *iter;
 }
 
-export function importTrie(linesX: Iterable<string> | IterableIterator<string>): TrieNode {
+interface Stack {
+    node: TrieNode;
+    s: string;
+}
+
+interface ReduceResults {
+    stack: Stack[];
+    nodes: TrieNode[];
+    root: TrieNode;
+    parser: Reducer | undefined;
+}
+
+type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
+
+
+export function importTrie(linesX: IterableLike<string>): TrieNode {
     let radix = 16;
     const comment = /^\s*#/;
     const iter = toIterableIterator(linesX);
@@ -95,25 +131,12 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
         while (true) {
             const next = iter.next();
             if (next.done) { break; }
-            const line = next.value.trim();
+            const line = next.value.trim().replace(/\r|\n/g, '');
             if (!line || comment.test(line)) { continue; }
             if (line === DATA) { break; }
             headerRows.push(line);
         }
         parseHeaderRows(headerRows);
-    }
-
-    interface Stack {
-        node: TrieNode;
-        s: string;
-        p: TrieNode;
-    }
-
-    interface ReduceResults {
-        stack: Stack[];
-        nodes: TrieNode[];
-        root: TrieNode;
-        ref: string | undefined;
     }
 
     readHeader(iter);
@@ -122,43 +145,105 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
 
     const n = genSequence(iter)
         .concatMap(a => a.split(''))
-        .reduce((acc: ReduceResults, s) => {
-            const { root, nodes, stack } = acc;
-            const top = stack[stack.length - 1];
-            const node = top.node;
-            let ref = acc.ref;
-            if (ref !== undefined) {
-                const p = top.p;
-                if (s === EOR) {
-                    const r = parseInt(ref, radix);
-                    p.c?.set(top.s, nodes[r]);
-                    return { root, nodes, stack, ref: undefined };
-                }
-                return { root, nodes, stack, ref: ref + s };
-            }
-            switch (s) {
-                case EOL:
-                    // ignore line breaks;
-                    break;
-                case EOW:
-                    node.f = FLAG_WORD;
-                    break;
-                case BACK:
-                    stack.pop();
-                    break;
-                case REF:
-                    nodes.pop();
-                    ref = '';
-                    break;
-                default:
-                    node.c = node.c ?? new Map<string, TrieNode>();
-                    const n = {};
-                    node.c.set(s, n);
-                    stack.push({ node: n, p: node, s });
-                    nodes.push(n);
-                    break;
-            }
-            return { root, nodes, stack, s, ref };
-        }, { nodes: [ root ], root, stack: [{ node: root, p: root, s: '' }], ref: undefined });
+        .reduce(
+            parseStream(radix),
+            { nodes: [ root ], root, stack: [{ node: root, s: '' }], parser: undefined  }
+        );
     return n.root;
+}
+
+function parseStream(radix: number): Reducer {
+    let eow: TrieNode | undefined;
+
+    function parseReference(acc: ReduceResults, _: string): ReduceResults {
+        let ref = '';
+
+        function parser(acc: ReduceResults, s: string): ReduceResults {
+            if (s === EOR) {
+                const { root, nodes, stack } = acc;
+                const r = parseInt(ref, radix);
+                const top = stack[stack.length - 1];
+                const p = stack[stack.length - 2].node;
+                p.c!.set(top.s, nodes[r]);
+                return { root, nodes, stack, parser: undefined };
+            }
+            ref = ref + s;
+            return acc;
+        }
+
+        const { nodes } = acc;
+        nodes.pop();
+        return {...acc, nodes, parser};
+    }
+
+    function parseEscapeCharacter(acc: ReduceResults, _: string): ReduceResults {
+        let prev = '';
+        const parser = function (acc: ReduceResults, s: string): ReduceResults {
+            if (prev) {
+                s = characterMap.get(prev + s) || s;
+                return parseCharacter({...acc, parser: undefined}, s);
+            }
+            if (s === ESCAPE) {
+                prev = s;
+                return acc;
+            }
+            return parseCharacter({...acc, parser: undefined}, s);
+        };
+        return {...acc, parser};
+    }
+
+    function parseCharacter(acc: ReduceResults, s: string): ReduceResults {
+        const parser = undefined;
+        const { root, nodes, stack } = acc;
+        const top = stack[stack.length - 1];
+        const node = top.node;
+        node.c = node.c ?? new Map<string, TrieNode>();
+        const n = { f: undefined, c: undefined };
+        node.c.set(s, n);
+        stack.push({ node: n, s });
+        nodes.push(n);
+        return { root, nodes, stack, parser };
+    }
+
+    function parseEOW(acc: ReduceResults, _: string): ReduceResults {
+        const { root, nodes, stack, parser } = acc;
+        const top = stack[stack.length - 1];
+        const node = top.node;
+        node.f = FLAG_WORD;
+        if (!node.c) {
+            if (eow) {
+                top.node = eow;
+                nodes.pop();
+                const p = stack[stack.length - 2].node;
+                p.c!.set(top.s, eow);
+            } else {
+                eow = node;
+            }
+        }
+        return { root, nodes, stack, parser };
+    }
+
+    function parseBack(acc: ReduceResults, _: string): ReduceResults {
+        const { stack } = acc;
+        stack.pop();
+        return acc;
+    }
+
+    function parseIgnore(acc: ReduceResults, _: string): ReduceResults {
+        return acc;
+    }
+
+    const parsers = new Map<string, Reducer>([
+        [EOW, parseEOW],
+        [BACK, parseBack],
+        [REF, parseReference],
+        [ESCAPE, parseEscapeCharacter],
+        [EOL, parseIgnore],
+        [LF, parseIgnore],
+    ]);
+
+    return function (acc: ReduceResults, s: string): ReduceResults {
+        const parser = acc.parser ?? parsers.get(s) ?? parseCharacter;
+        return parser(acc, s);
+    };
 }
