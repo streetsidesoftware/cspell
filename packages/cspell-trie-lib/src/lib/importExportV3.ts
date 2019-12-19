@@ -68,9 +68,8 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
     function *walk(node: TrieNode, depth: number): Generator<string> {
         const r = cache.get(node);
         if (r !== undefined) {
-            // EOW is only possible if children are yielded first.
-            // yield (node.f && !node.c) ? EOW : ref(r);
-            yield ref(r);
+            yield (node.f && !node.c) ? EOW : ref(r);
+            // yield ref(r);
             return;
         }
         cache.set(node, count++);
@@ -83,7 +82,7 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
                 if (depth === 0) yield EOL;
             }
         }
-        // Output EOW after children so it can be optimized.
+        // Output EOW after children so it can be optimized on read
         if (node.f) {
             yield EOW;
             // yield EOL;
@@ -112,7 +111,6 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-const eow: TrieNode = Object.freeze({ f: 1 });
 
 export function importTrie(linesX: IterableLike<string>): TrieNode {
     let radix = 16;
@@ -155,6 +153,8 @@ export function importTrie(linesX: IterableLike<string>): TrieNode {
 }
 
 function parseStream(radix: number): Reducer {
+    let eow: TrieNode | undefined;
+
     function parseReference(acc: ReduceResults, _: string): ReduceResults {
         let ref = '';
 
@@ -164,7 +164,7 @@ function parseStream(radix: number): Reducer {
                 const r = parseInt(ref, radix);
                 const top = stack[stack.length - 1];
                 const p = stack[stack.length - 2].node;
-                p.c?.set(top.s, nodes[r]);
+                p.c!.set(top.s, nodes[r]);
                 return { root, nodes, stack, parser: undefined };
             }
             ref = ref + s;
@@ -211,7 +211,14 @@ function parseStream(radix: number): Reducer {
         const node = top.node;
         node.f = FLAG_WORD;
         if (!node.c) {
-            top.node = eow;
+            if (eow) {
+                top.node = eow;
+                nodes.pop();
+                const p = stack[stack.length - 2].node;
+                p.c!.set(top.s, eow);
+            } else {
+                eow = node;
+            }
         }
         return { root, nodes, stack, parser };
     }
