@@ -23,7 +23,7 @@ describe('Import/Export', () => {
 
     test('tests serialize / deserialize specialCharacters', async () => {
         const trie = Trie.buildTrie(specialCharacters).root;
-        const data = [...serializeTrie(trie, 10)];
+        const data = [...serializeTrie(consolidate(trie), 10)];
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...specialCharacters].sort());
@@ -31,7 +31,7 @@ describe('Import/Export', () => {
 
     test('tests serialize / deserialize', async () => {
         const trie = Trie.buildTrie(sampleWords).root;
-        const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
+        const data = [...serializeTrie(consolidate(trie), { base: 10, comment: 'Sample Words' })].join('');
         const root = importTrie(data.split('\n').map(a => a ? a + '\n' : a));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());

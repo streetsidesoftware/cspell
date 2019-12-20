@@ -136,10 +136,10 @@ export class TrieBuilder {
         this.signatures.clear();
     }
 
-    build(): Trie {
+    build(consolidateSuffixes: boolean = false): Trie {
         const root = this._root;
         // Reset the builder to prevent updating the trie in the background.
         this.reset();
-        return new Trie(consolidate(root));
+        return new Trie(consolidateSuffixes ? consolidate(root) : root);
     }
 }

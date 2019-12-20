@@ -4,7 +4,8 @@
 // # !/usr/bin/env node --max_old_space_size=8192
 
 
-import { compileWordList, compileTrie } from './compiler';
+import { compileWordList, compileTrie, Logger } from './compiler';
+import * as compiler from './compiler';
 import * as path from 'path';
 import * as program from 'commander';
 import * as glob from 'glob';
@@ -36,6 +37,12 @@ interface CompileOptions extends CompileCommonOptions {
 interface CompileTrieOptions extends CompileCommonOptions {
     trie3: boolean;
 }
+
+const log: Logger = (message?: any, ...optionalParams: any[]) => {
+    console.log(`${new Date().toISOString()} ${message}`, ...optionalParams);
+};
+
+compiler.setLogger(log);
 
 export function run(
     program: program.Command,
@@ -115,10 +122,12 @@ async function processAction(
     const globResults = await Promise.all(src.map(s => globP(s)));
     const filesToProcess = genSequence(globResults)
         .concatMap(files => files)
-        .map(async s => {
-            const words = await streamWordsFromFile(s, readerOptions);
+        .map(async filename => {
+            log(`Reading ${path.basename(filename)}`);
+            const words = await streamWordsFromFile(filename, readerOptions);
+            log(`Done reading ${path.basename(filename)}`);
             const f: FileToProcess = {
-                src: s,
+                src: filename,
                 words,
             };
             return f;
@@ -128,7 +137,7 @@ async function processAction(
     ? processFiles(action, filesToProcess, toMergeTargetFile(options.merge, options.output, ext))
     : processFilesIndividually(action, filesToProcess, s => toTargetFile(s, options.output, ext));
     await r;
-    console.log(`Complete.`);
+    log(`Complete.`);
 }
 
 function toFilename(name: string, ext: string) {
@@ -155,9 +164,9 @@ async function processFilesIndividually(
     .map(async pFtp => {
         const { src, words } = await pFtp;
         const dst = srcToTarget(src);
-        console.log('Process "%s" to "%s"', src, dst);
+        log('Process "%s" to "%s"', src, dst);
         await action(words, dst);
-        console.log('Done "%s" to "%s"', src, dst);
+        log('Done "%s" to "%s"', src, dst);
     });
 
     for (const p of toProcess) {
@@ -176,12 +185,12 @@ async function processFiles(
     const words = genSequence(toProcess)
     .map(ftp => {
         const { src } = ftp;
-        console.log('Process "%s" to "%s"', src, dst);
+        log('Process "%s" to "%s"', src, dst);
         return ftp;
     })
     .concatMap( ftp => ftp.words );
     await action(words, dst);
-    console.log('Done "%s"', dst);
+    log('Done "%s"', dst);
 }
 
 if (require.main === module) {
