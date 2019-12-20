@@ -1,5 +1,6 @@
 import { TrieNode } from './TrieNode';
 import { Trie } from './trie';
+import { consolidate } from './consolidate';
 
 export function buildTrie(words: Iterable<string>): Trie {
     return new TrieBuilder(words).build();
@@ -139,6 +140,6 @@ export class TrieBuilder {
         const root = this._root;
         // Reset the builder to prevent updating the trie in the background.
         this.reset();
-        return new Trie(this.freeze(root));
+        return new Trie(consolidate(root));
     }
 }

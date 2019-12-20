@@ -8,6 +8,7 @@ export function consolidate(root: TrieNode, iterations = 5): TrieNode {
     let count: number = 0;
     const signatures = new Map<string, TrieNode>();
     const cached = new Map<TrieNode, number>();
+    const knownMap = new Map<TrieNode, TrieNode>();
 
     function signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
@@ -27,13 +28,37 @@ export function consolidate(root: TrieNode, iterations = 5): TrieNode {
         return true;
     }
 
+    function deepConvert(n: TrieNode): TrieNode {
+        if (knownMap.has(n)) {
+            return knownMap.get(n)!;
+        }
+        const orig = n;
+        n = Object.isFrozen(n) ? {...n} : n;
+        if (n.c) {
+            const children = [...n.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
+            n.c = new Map(children.map(c => [c[0], deepConvert(c[1])]));
+        }
+        const sig = signature(n);
+        const ref = signatures.get(sig);
+        if (ref) {
+            knownMap.set(orig, ref);
+            return ref;
+        }
+        signatures.set(sig, n);
+        cached.set(n, count++);
+        knownMap.set(orig, n);
+        return n;
+    }
+
     function convert(n: TrieNode): TrieNode {
         if (cached.has(n)) {
             return n;
         }
+        if (Object.isFrozen(n)) {
+            return knownMap.get(n) || deepConvert(n);
+        }
         if (n.c) {
             const children = [...n.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
-            n.c.clear();
             n.c = new Map(children.map(c => [c[0], convert(c[1])]));
         }
         if (!canCache(n)) {
@@ -41,7 +66,7 @@ export function consolidate(root: TrieNode, iterations = 5): TrieNode {
         }
         const sig = signature(n);
         const ref = signatures.get(sig);
-        if (ref !== undefined) {
+        if (ref) {
             if (!cached.has(ref) && ref !== n) {
                 cached.set(ref, count++);
             }

@@ -4,6 +4,7 @@ import { readFile, writeFile } from 'fs-extra';
 import * as path from 'path';
 import { consolidate } from './consolidate';
 import { genSequence } from 'gensequence';
+import { TrieNode } from './TrieNode';
 
 const sampleFile = path.join(__dirname, '..', '..', 'Samples', 'sampleV3.trie');
 
@@ -11,10 +12,13 @@ describe('Import/Export', () => {
 
     test('tests serialize / deserialize small sample', async () => {
         const trie = Trie.buildTrie(smallSample).root;
+        const expected = toTree(trie);
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
         const root = importTrie(data.replace(/\[\d+\]/g, '').split('\n').map(a => a ? a + '\r\n' : a));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...smallSample].sort());
+        const result = toTree(root);
+        expect(result).toBe(expected);
     });
 
     test('tests serialize / deserialize specialCharacters', async () => {
@@ -58,6 +62,23 @@ describe('Import/Export', () => {
         expect(words).toEqual([...sampleWords].sort());
     });
 });
+
+function toTree(root: TrieNode): string {
+    function *walk(n: TrieNode, prefix: string): Generator<string> {
+        const nextPrefix = '.'.repeat(prefix.length);
+        if (n.c) {
+            for (const c of [...n.c].sort((a, b) => a[0] < b[0] ? -1 : 1)) {
+                yield *walk(c[1], prefix + c[0]);
+                prefix = nextPrefix;
+            }
+        }
+        if (n.f) {
+            yield prefix + '$\n';
+        }
+    }
+
+    return ['\n', ...walk(root, '')].join('');
+}
 
 const specialCharacters = [
     'arrow <',

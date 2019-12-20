@@ -7,7 +7,7 @@ describe('Validate TrieBuilder', () => {
         builder.insert(sampleWords);
         const trie = builder.build();
         expect([...trie.words()]).toEqual(sampleWords.sort());
-        expect(countNodes(trie.root)).toBe(121);
+        expect(countNodes(trie.root)).toBe(113);
     });
 
     test('builder duplicate inserts', () => {
