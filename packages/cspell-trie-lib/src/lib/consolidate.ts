@@ -33,7 +33,7 @@ export function consolidate(root: TrieNode, iterations = 5): TrieNode {
             return knownMap.get(n)!;
         }
         const orig = n;
-        n = Object.isFrozen(n) ? {...n} : n;
+        n = Object.isFrozen(n) ? {...n, c: n.c && new Map(n.c)} : n;
         if (n.c) {
             const children = [...n.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
             n.c = new Map(children.map(c => [c[0], deepConvert(c[1])]));
@@ -42,8 +42,12 @@ export function consolidate(root: TrieNode, iterations = 5): TrieNode {
         const ref = signatures.get(sig);
         if (ref) {
             knownMap.set(orig, ref);
+            if (!cached.has(ref)) {
+                cached.set(ref, count++);
+            }
             return ref;
         }
+        Object.freeze(n);
         signatures.set(sig, n);
         cached.set(n, count++);
         knownMap.set(orig, n);
@@ -67,7 +71,7 @@ export function consolidate(root: TrieNode, iterations = 5): TrieNode {
         const sig = signature(n);
         const ref = signatures.get(sig);
         if (ref) {
-            if (!cached.has(ref) && ref !== n) {
+            if (!cached.has(ref)) {
                 cached.set(ref, count++);
             }
             return ref;
