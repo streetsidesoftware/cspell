@@ -11,6 +11,18 @@ const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
 const regExpRepeatChars = /(.)\1{3,}/i;
 
+export type Logger = (message?: any, ...optionalParams: any[]) => void;
+
+let log: Logger = defaultLogger;
+
+export function setLogger(logger?: Logger) {
+    log = logger ?? defaultLogger;
+}
+
+function defaultLogger(message?: any, ...optionalParams: any[]) {
+    console.log(message, ...optionalParams);
+}
+
 export function normalizeWords(lines: Sequence<string>) {
     return lines.concatMap(line => lineToWords(line));
 }
@@ -85,12 +97,17 @@ export interface CompileTrieOptions {
 }
 
 export async function compileTrie(words: Sequence<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {
+    log('Reading Words into Trie');
     const base = options.base ?? 32;
     const version = options.trie3 ? 3 : 1;
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
     const pRoot = normalizeWordsToTrie(words);
     const [root] = await Promise.all([pRoot, pDir]);
+    log('Reduce duplicate word endings');
+    const trie = Trie.consolidate(root);
 
-    return writeSeqToFile(Trie.serializeTrie(root, { base, comment: 'Built by cspell-tools.', version }), destFilename);
+    log(`Writing to file ${path.basename(destFilename)}`);
+    await writeSeqToFile(Trie.serializeTrie(trie, { base, comment: 'Built by cspell-tools.', version }), destFilename);
+    log(`Done writing to file ${path.basename(destFilename)}`);
 }
