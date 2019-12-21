@@ -5,4 +5,9 @@
 const app = require('./dist/app');
 const program = require('commander');
 
-app.run(program, process.argv).catch(() => process.exit(1));
+app.run(program, process.argv).catch(e => {
+    if (!(e instanceof program.CommanderError)) {
+        console.log(e);
+    }
+    process.exit(1);
+});

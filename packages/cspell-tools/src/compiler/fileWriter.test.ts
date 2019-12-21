@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as fileWriter from './fileWriter';
 import * as loremIpsum from 'lorem-ipsum';
 import * as path from 'path';
@@ -14,6 +13,6 @@ describe('Validate the writer', () => {
         await mkdirp(path.dirname(filename));
         await fileWriter.writeToFileIterableP(filename, data);
         const result = await readFile(filename, 'utf8');
-        expect(result).to.equal(text);
+        expect(result).toBe(text);
     });
 });

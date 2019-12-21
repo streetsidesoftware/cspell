@@ -1,7 +1,7 @@
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import * as path from 'path';
 
-const samples = path.join(__dirname, '..', '..', 'Samples');
+const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 
 describe('Validate the iterateWordsFromFile', () => {
     test('streamWordsFromFile: hunspell', async () => {

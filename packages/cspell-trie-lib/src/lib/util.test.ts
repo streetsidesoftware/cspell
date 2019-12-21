@@ -1,4 +1,4 @@
-import { createTriFromList, has, findNode } from './util';
+import { createTriFromList, has, findNode, countNodes, isCircular } from './util';
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {
@@ -24,6 +24,19 @@ describe('Validate Util Functions', () => {
         expect(n0?.f).toBeTruthy();
         expect(n1?.c?.get('e')).toBe(n0);
         expect(n2?.c?.get('l')).toBe(n1);
+    });
+
+    test('countNodes', () => {
+        const trie = createTriFromList(words);
+        expect(countNodes(trie)).toBe(61);
+    });
+
+    test('isCircular', () => {
+        const trie = createTriFromList(words);
+        expect(isCircular(trie)).toBe(false);
+        const n = findNode(trie, 'samp');
+        n?.c?.set('x', trie);
+        expect(isCircular(trie)).toBe(true);
     });
 });
 

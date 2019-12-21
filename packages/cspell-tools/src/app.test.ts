@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 
 const projectRoot = path.join(__dirname, '..');
-const pathSamples = path.join(projectRoot, 'Samples');
+const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
 const pathTemp = path.join(projectRoot, 'temp');
 
 function argv(...args: string[]): string[] {
