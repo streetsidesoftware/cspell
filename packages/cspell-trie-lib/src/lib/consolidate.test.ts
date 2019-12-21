@@ -2,6 +2,14 @@ import { createTriFromList } from '.';
 import { consolidate } from './consolidate';
 import { genSequence } from 'gensequence';
 import { TrieNode } from './TrieNode';
+import { readFile } from 'fs-extra';
+import * as path from 'path';
+import { iteratorTrieWords } from './util';
+import { buildTrie } from './TrieBuilder';
+
+const samples = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
+const sampleEnglish = path.join(samples, 'en_US.txt');
+const pSampleEnglishWords = readFile(sampleEnglish, 'utf8').then(a => a.split('\n').filter(a => !!a));
 
 describe('Validate Consolidate', () => {
     test('consolidate', () => {
@@ -25,6 +33,17 @@ describe('Validate Consolidate', () => {
         expect(countNodes(consolidate(createTriFromList(sampleWords), 3))).toBe(96);
         expect(countNodes(consolidate(createTriFromList(sampleWords), 4))).toBe(96);
         expect(countNodes(consolidate(createTriFromList(sampleWords), 5))).toBe(96);
+    });
+
+    test('larger trie', async () => {
+        const words = await pSampleEnglishWords;
+        words.length = Math.min(words.length, 1000);
+        const trie = consolidate(createTriFromList(words));
+        const result = [...iteratorTrieWords(trie)];
+        expect(result).toEqual(words);
+        const trie2 = consolidate(buildTrie(words).root);
+        const result2 = [...iteratorTrieWords(trie2)];
+        expect(result2).toEqual(words);
     });
 });
 

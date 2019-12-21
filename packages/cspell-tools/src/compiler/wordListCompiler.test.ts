@@ -1,6 +1,6 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
-import { lineToWords, compileWordList, compileTrie } from './wordListCompiler';
+import { lineToWords, compileWordList, compileTrie, consolidate } from './wordListCompiler';
 import { normalizeWords, normalizeWordsToTrie } from './wordListCompiler';
 import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
@@ -8,12 +8,14 @@ import * as path from 'path';
 import { genSequence } from 'gensequence';
 import { readFile } from 'cspell-io';
 import { streamWordsFromFile } from './iterateWordsFromFile';
-import { isCircular, iteratorTrieWords } from 'cspell-trie-lib';
+import { isCircular, iteratorTrieWords, serializeTrie, importTrie } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
+
 
 const UTF8: BufferEncoding = 'utf8';
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
+const sampleDictEn = path.join(samples, 'en_US.txt');
 const temp = path.join(__dirname, '..', '..', 'temp');
 
 describe('Validate the wordListCompiler', () => {
@@ -121,16 +123,31 @@ describe('Validate the wordListCompiler', () => {
 });
 
 describe('Validate Larger Dictionary', () => {
-    test('en_US', async () => {
+    test('en_US hunspell', async () => {
         const source = await streamWordsFromFile(sampleDictEnUS, {});
-        const words = source.take(3000).toArray();
+        const words = source.take(5000).toArray();
         const trie = normalizeWordsToTrie(genSequence(words));
         expect(isCircular(trie)).toBe(false);
         const nWords = normalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort().filter(uniqueFilter(1000));
-        expect(results.sort()).toEqual(nWords);
+        expect(results).toEqual(nWords);
+    }, 60000);
+
+    test('en_US word list', async () => {
+        const source = await streamWordsFromFile(sampleDictEn, {});
+        const words = source.toArray();
+        const trie = consolidate(normalizeWordsToTrie(genSequence(words)));
+        expect(isCircular(trie)).toBe(false);
+        const nWords = normalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
+        const results = iteratorTrieWords(trie).toArray().sort();
+        expect(results).toEqual(nWords);
+        const data = serializeTrie(trie, { base: 40 });
+        const trie2 = importTrie(data);
+        const results2 = iteratorTrieWords(trie2).toArray();
+        expect(results2).toEqual(results);
     }, 60000);
 });
+
 
 function distinct(): (word: string) => boolean {
     const known = new Set<String>();
