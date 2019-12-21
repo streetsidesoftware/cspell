@@ -1,6 +1,7 @@
 import { xregexp as XRegExp } from 'cspell-util-bundle';
-import {scanMap, Sequence, sequenceFromRegExpMatch } from 'gensequence';
+import {Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import {binarySearch} from './search';
+import { scanMap } from './util';
 
 // CSpell:ignore ings ning gimuy tsmerge
 

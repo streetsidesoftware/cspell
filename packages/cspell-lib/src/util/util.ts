@@ -30,3 +30,22 @@ export function clean<T extends Object>(src: T): T {
     }
     return r;
 }
+
+/**
+ * Creates a scan function that can be used in a map function.
+ */
+export function scanMap<T>(accFn: (acc: T, value: T) => T, init?: T): ((value: T) => T);
+export function scanMap<T, U>(accFn: (acc: U, value: T) => U, init: U): ((value: T) => U);
+export function scanMap<T>(accFn: (acc: T, value: T) => T, init?: T): ((value: T) => T) {
+    let acc = init;
+    let first = true;
+    return function(value: T): T {
+        if (first && acc === undefined) {
+            first = false;
+            acc = value;
+            return acc;
+        }
+        acc = accFn(acc as T, value);
+        return acc;
+    };
+}
