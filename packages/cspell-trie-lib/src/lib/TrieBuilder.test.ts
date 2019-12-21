@@ -11,7 +11,7 @@ describe('Validate TrieBuilder', () => {
         builder.insert(words);
         const trie = builder.build(true);
         expect([...trie.words()].sort()).toEqual(sampleWords.sort());
-        expect(countNodes(trie.root)).toBe(113);
+        expect(countNodes(trie.root)).toBe(109);
         expect(isCircular(trie.root)).toBe(false);
     });
 
@@ -20,7 +20,7 @@ describe('Validate TrieBuilder', () => {
         builder.insert(sampleWords);
         const trie = builder.build(false);
         expect([...trie.words()].sort()).toEqual(sampleWords.sort());
-        expect(countNodes(trie.root)).toBe(130);
+        expect(countNodes(trie.root)).toBe(121);
     });
 
     test('builder duplicate inserts', () => {

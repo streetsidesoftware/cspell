@@ -21,6 +21,7 @@ export class TrieBuilder {
     private _eow: TrieNode = Object.freeze({ f: 1 });
     /** position 0 of lastPath is always the root */
     private lastPath: PathNode[] = [{ s: '', n: { f: undefined, c: undefined } }];
+    private tails = new Map([['', this._eow]]);
 
     constructor(words?: Iterable<string>) {
         this._canBeCached(this._eow); // this line is just for coverage reasons
@@ -108,6 +109,23 @@ export class TrieBuilder {
         return Object.isFrozen(child) ? this.tryToCache(node) : node;
     }
 
+    private buildTail(s: string): TrieNode {
+        if (this.tails.has(s)) {
+            return this.tails.get(s)!;
+        }
+        const head = s[0];
+        const tail = s.slice(1);
+        const t = this.tails.get(tail);
+        const c = t || this.buildTail(tail);
+        const n = this.addChild({ f: undefined, c: undefined }, head, c);
+        if (!t) {
+            return n;
+        }
+        const cachedNode = this.tryCacheFrozen(Object.freeze(n));
+        this.tails.set(s, cachedNode);
+        return cachedNode;
+    }
+
     private _insert(node: TrieNode, s: string, d: number): TrieNode {
         const orig = node;
         if (Object.isFrozen(node)) {
@@ -127,8 +145,8 @@ export class TrieBuilder {
         }
         const head = s[0];
         const tail = s.slice(1);
-
-        const child = this._insert(node.c?.get(head) ?? { f: undefined, c: undefined }, tail, d + 1);
+        const cNode = node.c?.get(head);
+        const child = cNode ? this._insert(cNode, tail, d + 1) : this.buildTail(tail);
         node = this.addChild(node, head, child);
         this.storeTransform(orig, s, node);
         this.lastPath[d] = { s: head, n: child };
