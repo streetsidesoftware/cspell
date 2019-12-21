@@ -72,6 +72,7 @@ export class TrieBuilder {
                 .sort((a, b) => a[0] < b[0] ? -1 : 1)
                 .map(([k, n]) => [k, this.freeze(n)] as [string, TrieNode]);
             n.c = new Map(c);
+            Object.freeze(n.c);
         }
         return Object.freeze(n);
     }
@@ -119,7 +120,7 @@ export class TrieBuilder {
             if (!node.c) {
                 return this._eow;
             } else {
-                node = Object.isFrozen(node) ? {...node} : node;
+                node = copyIfFrozen(node);
                 node.f = this._eow.f;
                 return node;
             }
@@ -135,13 +136,13 @@ export class TrieBuilder {
     }
 
     insertWord(word: string) {
-        const letters = word.split('');
         let d = 1;
-        for (const s of letters) {
+        for (const s of word.split('')) {
             const p = this.lastPath[d];
             if (p?.s !== s) break;
             d++;
         }
+
         // remove the remaining part of the path because it doesn't match this word.
         if (word.length < d) {
             d = word.length;
@@ -184,4 +185,11 @@ export class TrieBuilder {
         this.reset();
         return new Trie(consolidateSuffixes ? consolidate(root) : root);
     }
+}
+
+
+function copyIfFrozen(n: TrieNode): TrieNode {
+    if (!Object.isFrozen(n)) return n;
+    const c = n.c ? new Map(n.c) : undefined;
+    return { f: n.f, c };
 }

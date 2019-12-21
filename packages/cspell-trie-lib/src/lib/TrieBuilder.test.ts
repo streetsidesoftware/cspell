@@ -1,13 +1,18 @@
-import { TrieNode } from './TrieNode';
+import { countNodes, isCircular } from './util';
 import { TrieBuilder, buildTrie } from './TrieBuilder';
+
 
 describe('Validate TrieBuilder', () => {
     test('builder', () => {
         const builder = new TrieBuilder();
-        builder.insert(sampleWords);
+        const words = sampleWords
+        .concat(applyEndings('shock'))
+        .concat(applyEndings('stock'));
+        builder.insert(words);
         const trie = builder.build(true);
         expect([...trie.words()].sort()).toEqual(sampleWords.sort());
         expect(countNodes(trie.root)).toBe(113);
+        expect(isCircular(trie.root)).toBe(false);
     });
 
     test('builder', () => {
@@ -30,21 +35,6 @@ describe('Validate TrieBuilder', () => {
         expect([...trie.words()]).toEqual(sampleWords.sort());
     });
 });
-
-function countNodes(root: TrieNode) {
-    const seen = new Set<TrieNode>();
-
-    function walk(n: TrieNode) {
-        if (seen.has(n)) return;
-        seen.add(n);
-        if (n.c) {
-            [...n.c].forEach(([, n]) => walk(n));
-        }
-    }
-
-    walk(root);
-    return seen.size;
-}
 
 const sampleWords = [
     'journal',

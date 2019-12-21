@@ -89,3 +89,50 @@ export function findNode(node: TrieNode, prefix: string): TrieNode | undefined {
     }
     return n;
 }
+
+export function countNodes(root: TrieNode) {
+    const seen = new Set<TrieNode>();
+
+    function walk(n: TrieNode) {
+        if (seen.has(n)) return;
+        seen.add(n);
+        if (n.c) {
+            [...n.c.values()].forEach(n => walk(n));
+        }
+    }
+
+    walk(root);
+    return seen.size;
+}
+
+export function isCircular(root: TrieNode) {
+    const seen = new Set<TrieNode>();
+    const inStack = new Set<TrieNode>();
+
+    interface Reduce {
+        isCircular: boolean;
+        allSeen: boolean;
+    }
+
+    function walk(n: TrieNode): Reduce {
+        if (seen.has(n)) return { isCircular: false, allSeen: true };
+        if (inStack.has(n)) return { isCircular: true, allSeen: false };
+        inStack.add(n);
+        let r: Reduce = { isCircular: false, allSeen: true };
+        if (n.c) {
+            r = [...n.c.values()].reduce((acc: Reduce, n: TrieNode) => {
+                if (acc.isCircular) return acc;
+                const r = walk(n);
+                r.allSeen = r.allSeen && acc.allSeen;
+                return r;
+            }, r);
+        }
+        if (r.allSeen) {
+            seen.add(n);
+        }
+        inStack.delete(n);
+        return r;
+    }
+
+    return walk(root).isCircular;
+}

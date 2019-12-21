@@ -96,18 +96,19 @@ export interface CompileTrieOptions {
     trie3?: boolean;
 }
 
+export const consolidate = Trie.consolidate;
+
 export async function compileTrie(words: Sequence<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {
     log('Reading Words into Trie');
     const base = options.base ?? 32;
     const version = options.trie3 ? 3 : 1;
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
-    const pRoot = normalizeWordsToTrie(words);
-    const [root] = await Promise.all([pRoot, pDir]);
+    const root = normalizeWordsToTrie(words);
     log('Reduce duplicate word endings');
-    const trie = Trie.consolidate(root);
-
+    const trie = consolidate(root);
     log(`Writing to file ${path.basename(destFilename)}`);
+    await pDir;
     await writeSeqToFile(Trie.serializeTrie(trie, { base, comment: 'Built by cspell-tools.', version }), destFilename);
     log(`Done writing to file ${path.basename(destFilename)}`);
 }
