@@ -6,13 +6,21 @@ export function buildTrie(words: Iterable<string>): Trie {
     return new TrieBuilder(words).build();
 }
 
+interface PathNode {
+    /** a single character */
+    s: string;
+    /** the corresponding child node after adding s */
+    n: TrieNode;
+}
+
 export class TrieBuilder {
     private count: number = 0;
     private readonly signatures = new Map<string, TrieNode>();
     private readonly cached = new Map<TrieNode, number>();
     private readonly transforms = new Map<TrieNode, Map<string, TrieNode>>();
-    private _root: TrieNode = { f: undefined, c: undefined };
     private _eow: TrieNode = Object.freeze({ f: 1 });
+    /** position 0 of lastPath is always the root */
+    private lastPath: PathNode[] = [{ s: '', n: { f: undefined, c: undefined } }];
 
     constructor(words?: Iterable<string>) {
         this._canBeCached(this._eow); // this line is just for coverage reasons
@@ -22,6 +30,14 @@ export class TrieBuilder {
         if (words) {
             this.insert(words);
         }
+    }
+
+    private set _root(n: TrieNode) {
+        this.lastPath[0].n = n;
+    }
+
+    private get _root() {
+        return this.lastPath[0].n;
     }
 
     private signature(n: TrieNode): string {
@@ -67,10 +83,7 @@ export class TrieBuilder {
         const sig = this.signature(n);
         const ref = this.signatures.get(sig);
         if (ref !== undefined) {
-            if (!this.cached.has(ref) && ref !== n) {
-                this.cached.set(ref, this.count++);
-            }
-            return ref;
+            return this.tryCacheFrozen(ref);
         }
 
         this.signatures.set(sig, this.freeze(n));
@@ -84,7 +97,17 @@ export class TrieBuilder {
         this.transforms.set(src, t);
     }
 
-    private _insert(node: TrieNode, s: string): TrieNode {
+    private addChild(node: TrieNode, head: string, child: TrieNode): TrieNode {
+        if (node.c?.get(head) !== child) {
+            if (!node.c || Object.isFrozen(node)) {
+                node = {...node, c: new Map(node.c ?? [])};
+            }
+            node.c!.set(head, child);
+        }
+        return Object.isFrozen(child) ? this.tryToCache(node) : node;
+    }
+
+    private _insert(node: TrieNode, s: string, d: number): TrieNode {
         const orig = node;
         if (Object.isFrozen(node)) {
             const n = this.transforms.get(node)?.get(s);
@@ -104,26 +127,45 @@ export class TrieBuilder {
         const head = s[0];
         const tail = s.slice(1);
 
-        const child = this._insert(node.c?.get(head) ?? { f: undefined, c: undefined }, tail);
-        if (node.c?.get(head) !== child) {
-            if (!node.c || Object.isFrozen(node)) {
-                node = {...node, c: new Map(node.c ?? [])};
-            }
-            node.c!.set(head, child);
-        }
-
-        node = Object.isFrozen(child) ? this.tryToCache(node) : node;
+        const child = this._insert(node.c?.get(head) ?? { f: undefined, c: undefined }, tail, d + 1);
+        node = this.addChild(node, head, child);
         this.storeTransform(orig, s, node);
+        this.lastPath[d] = { s: head, n: child };
         return node;
     }
 
     insertWord(word: string) {
-        this._root = this._insert(this._root, word);
+        const letters = word.split('');
+        let d = 1;
+        for (const s of letters) {
+            const p = this.lastPath[d];
+            if (p?.s !== s) break;
+            d++;
+        }
+        // remove the remaining part of the path because it doesn't match this word.
+        if (word.length < d) {
+            d = word.length;
+        }
+        this.lastPath.length = d;
+        d -= 1;
+        const { n } = this.lastPath[d];
+        const tail = word.slice(d);
+        this.lastPath[d].n = this._insert(n, tail, d + 1);
+        while (d > 0) {
+            const { s, n } = this.lastPath[d];
+            d -= 1;
+            const parent = this.lastPath[d];
+            const pn = parent.n;
+            parent.n = this.addChild(pn, s, n);
+            if (pn === parent.n) break;
+            const tail = word.slice(d);
+            this.storeTransform(pn, tail, parent.n);
+        }
     }
 
     insert(words: Iterable<string>) {
         for (const w of words) {
-            this.insertWord(w);
+            w && this.insertWord(w);
         }
     }
 
@@ -131,7 +173,7 @@ export class TrieBuilder {
      * Resets the builder
      */
     reset() {
-        this._root = {};
+        this._root = { f: undefined, c: undefined };
         this.cached.clear();
         this.signatures.clear();
     }
