@@ -2,15 +2,20 @@ import * as Trie from '.';
 import { serializeTrie, importTrie } from './importExportV1';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
+import { consolidate } from './consolidate';
+import { iteratorTrieWords } from './util';
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {
-        const trie = Trie.createTriFromList(sampleWords);
+        const trie = consolidate(Trie.createTriFromList(sampleWords));
         const data = [...serializeTrie(trie, 10)];
         const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV1.trie'), 'UTF-8')).replace(/\r/g, '');
-        expect(data.join('')).toBe(sample);
+        const rawData = data.join('');
+        expect(rawData.length).toBeLessThanOrEqual(sample.length);
+        const sampleRoot = importTrie(sample.split('\n'));
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
+        expect([...iteratorTrieWords(sampleRoot)]).toEqual(words);
         expect(words).toEqual([...sampleWords].sort());
     });
 });

@@ -4,7 +4,7 @@ import { genSequence } from 'gensequence';
 import { TrieNode } from './TrieNode';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
-import { iteratorTrieWords } from './util';
+import { iteratorTrieWords, countNodes } from './util';
 import { buildTrie } from './TrieBuilder';
 
 const samples = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
@@ -28,22 +28,26 @@ describe('Validate Consolidate', () => {
     });
 
     test('consolidate', () => {
-        expect(countNodes(consolidate(createTriFromList(sampleWords), 1))).toBe(112);
-        expect(countNodes(consolidate(createTriFromList(sampleWords), 2))).toBe(98);
-        expect(countNodes(consolidate(createTriFromList(sampleWords), 3))).toBe(96);
-        expect(countNodes(consolidate(createTriFromList(sampleWords), 4))).toBe(96);
-        expect(countNodes(consolidate(createTriFromList(sampleWords), 5))).toBe(96);
+        expect(countNodes(consolidate(createTriFromList(sampleWords)))).toBe(96);
+    });
+
+    test('consolidate empty trie', () => {
+        const root: TrieNode = {};
+        const result = consolidate(root);
+        expect(countNodes(result)).toBe(1);
+        expect(result).toBe(root);
     });
 
     test('larger trie', async () => {
         const words = await pSampleEnglishWords;
-        words.length = Math.min(words.length, 1000);
+        words.length = Math.min(words.length, 2000);
         const trie = consolidate(createTriFromList(words));
         const result = [...iteratorTrieWords(trie)];
         expect(result).toEqual(words);
         const trie2 = consolidate(buildTrie(words).root);
         const result2 = [...iteratorTrieWords(trie2)];
         expect(result2).toEqual(words);
+        expect(countNodes(trie)).toBe(countNodes(trie2));
     });
 });
 
@@ -58,21 +62,6 @@ function walk(root: TrieNode): IterableIterator<string> {
         }
     }
     return w(root, '');
-}
-
-function countNodes(root: TrieNode) {
-    const seen = new Set<TrieNode>();
-
-    function walk(n: TrieNode) {
-        if (seen.has(n)) return;
-        seen.add(n);
-        if (n.c) {
-            [...n.c].forEach(([, n]) => walk(n));
-        }
-    }
-
-    walk(root);
-    return seen.size;
 }
 
 const sampleWords = [
