@@ -9,8 +9,6 @@ describe('Import/Export', () => {
         const sampleWords = (await pSampleWords).split('\n').filter(a => !!a);
         const trie = Trie.createTriFromList(sampleWords);
         const data = [...serializeTrie(trie, 10)];
-        const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV1.trie'), 'UTF-8')).replace(/\r/g, '');
-        expect(data.join('')).toBe(sample);
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
@@ -20,8 +18,6 @@ describe('Import/Export', () => {
         const sampleWords = (await pSampleWords).split('\n').filter(a => !!a);
         const trie = Trie.createTriFromList(sampleWords);
         const data = [...serializeTrie(trie, { version: 2, base: 10, comment: 'Sample Words' })];
-        const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV2.trie'), 'UTF-8')).replace(/\r/g, '');
-        expect(data.join('')).toBe(sample);
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());

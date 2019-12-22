@@ -1,13 +1,13 @@
 import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
 import { TrieRefNode } from './trieRef';
-import { flattenToTrieRefNodeIterable } from './flatten';
 import { Sequence, genSequence } from 'gensequence';
+import { convertToTrieRefNodes } from './convertToTrieRefNodes';
 
 const EOW = '*';
 export const DATA = EOW;
 
-function flattenToReferences(node: TrieNode): Sequence<TrieRefNode> {
-    return genSequence(flattenToTrieRefNodeIterable(node));
+function toReferences(node: TrieNode): Sequence<TrieRefNode> {
+    return genSequence(convertToTrieRefNodes(node));
 }
 
 const regExpEscapeChars = /([\[\]\\,:{}*])/;
@@ -69,7 +69,7 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
-    const rows = flattenToReferences(root)
+    const rows = toReferences(root)
         .map(node => {
             const row = [
                 ...trieToExportString(node, radix),
