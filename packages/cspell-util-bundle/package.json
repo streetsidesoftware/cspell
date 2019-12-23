@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "build": "tsc -p . && webpack --mode none",
-    "build-production": "rm -rf dist build && tsc -p . && webpack --mode production",
+    "build-production": "rimraf dist build && tsc -p . && webpack --mode production",
     "watch": "npm run build -- watch",
     "prepare": "npm run build-production",
     "clean": "rimraf dist",
