@@ -1,5 +1,8 @@
 import { TrieNode, FLAG_WORD } from './TrieNode';
 import { TrieRefNode } from './trieRef';
+import { genSequence } from 'gensequence';
+
+const MinReferenceCount = 3;
 
 /**
  * An iterator that will emit TrieRefNodes mostly in descending frequency
@@ -44,6 +47,13 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
         return sum;
     }
 
+    function *walkByTallies(tallies: Map<TrieNode, number>): IterableIterator<TrieRefNode> {
+        const nodes = [...genSequence(tallies).filter(a => a[1] >= MinReferenceCount)].sort((a, b) => b[1] - a[1]);
+        for (const [n] of nodes) {
+            yield *walkByRollup(n);
+        }
+    }
+
     function *walkByRollup(n: TrieNode): IterableIterator<TrieRefNode> {
         if (cached.has(n)) return;
         if (n.f && !n.c) {
@@ -68,10 +78,13 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
         return rn;
     }
 
-    function *walk(n: TrieNode): IterableIterator<TrieRefNode> {
+    function *walk(root: TrieNode): IterableIterator<TrieRefNode> {
         cached.set(eow, count++);
         yield convert(eow);
-        yield *walkByRollup(n);
+        // Emit the highest referenced nodes first.
+        yield *walkByTallies(tallies);
+        // Emit the rest.
+        yield *walkByRollup(root);
     }
 
     tally(root);
