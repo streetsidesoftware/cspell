@@ -25,7 +25,7 @@
     "coverage": "jest --coverage",
     "generate-code-coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
     "test-ts": "../../node_modules/.bin/jest",
-    "test-watch": "../../node_modules/.bin/jest --watch",
+    "test-watch": "jest --watch",
     "prepublishOnly": "npm run lint && npm run clean-build && npm test",
     "test": "jest"
   },
