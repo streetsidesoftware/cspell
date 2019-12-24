@@ -1,4 +1,10 @@
-"""Roman Numbers"""
+"""
+Roman Numbers
+
+Sample Python file.
+
+with email address: ExampleCode <possiblyhelpfulcodeexamples@code.example.com>
+"""
 import re
 
 class OutOfRangeError(ValueError): pass
@@ -79,6 +85,8 @@ def to_number(roman):
             value += romanNumeralValues[numeral]
     return value
 
+binary = b'binary'
+unicode = u'unicode'
 
 if __name__ == '__main__':
     print(to_roman(1984))
