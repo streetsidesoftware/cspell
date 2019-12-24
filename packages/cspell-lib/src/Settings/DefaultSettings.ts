@@ -10,6 +10,7 @@ import { mergeSettings } from './index';
 const defaultRegExpExcludeList = [
     'SpellCheckerDisable',
     'Urls',
+    'Email',
     'PublicKey',
     'RsaCert',
     'Base64',
