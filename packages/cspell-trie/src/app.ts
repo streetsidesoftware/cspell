@@ -8,6 +8,8 @@ import * as path from 'path';
 import * as Trie from 'cspell-trie-lib';
 import { Sequence, genSequence } from 'gensequence';
 import { iterableToStream } from 'iterable-to-stream';
+import * as zlib from 'zlib';
+
 
 const UTF8: BufferEncoding = 'utf8';
 
@@ -76,7 +78,8 @@ if (!commander.args.length) {
 }
 
 async function fileToLines(filename: string): Promise<Sequence<string>> {
-    const file = await fs.readFile(filename, UTF8);
+    const buffer = await fs.readFile(filename);
+    const file = (filename.match(/\.gz$/) ? zlib.gunzipSync(buffer) : buffer).toString(UTF8);
     return genSequence(file.split(/\r?\n/));
 }
 
@@ -93,5 +96,3 @@ function notify(message: any, useStdOut = true) {
         console.error(message);
     }
 }
-
-
