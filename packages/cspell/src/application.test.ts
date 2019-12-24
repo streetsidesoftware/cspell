@@ -115,7 +115,7 @@ function sampleTests(): SampleTest[] {
         { file: 'samples/src/sample.c', issues: [] },
         { file: 'samples/src/sample.go', issues: ['garbbage'] },
         { file: 'samples/src/sample.py', issues: ['garbbage'] },
-        { file: 'samples/src/sample.tex', issues: ['hammersley', 'gmail', 'includegraphics', 'Zotero'] },
+        { file: 'samples/src/sample.tex', issues: ['includegraphics', 'Zotero'] },
     ];
     // cspell:enable
 }
