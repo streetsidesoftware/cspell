@@ -1,4 +1,4 @@
-import { createTriFromList, has, findNode, countNodes, isCircular } from './util';
+import { createTriFromList, has, findNode, countNodes, isCircular, countWords, iteratorTrieWords } from './util';
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {
@@ -28,7 +28,7 @@ describe('Validate Util Functions', () => {
 
     test('countNodes', () => {
         const trie = createTriFromList(words);
-        expect(countNodes(trie)).toBe(61);
+        expect(countNodes(trie)).toBe(73);
     });
 
     test('isCircular', () => {
@@ -38,7 +38,22 @@ describe('Validate Util Functions', () => {
         n?.c?.set('x', trie);
         expect(isCircular(trie)).toBe(true);
     });
+
+    test('countWords', () => {
+        const trie = createTriFromList(words);
+        expect(countWords(trie)).toBe(19);
+        const n = findNode(trie, 'samp');
+        n?.c?.set('x', trie);
+        expect(isCircular(trie)).toBe(true);
+        expect(countWords(trie)).toBe(19);
+    });
+
+    test('iteratorTrieWords', () => {
+        const trie = createTriFromList(words);
+        expect([...iteratorTrieWords(trie)].join(' '))
+        .toBe('These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no');
+    });
 });
 
-const sentence = 'These are some sample words for everyone to use, complete with extra    spaces.';
+const sentence = 'These are some sample words for everyone to use, complete with extra    spaces. There is no space for someone to worry.';
 const words = sentence.split(' ');

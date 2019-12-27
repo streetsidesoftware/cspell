@@ -105,6 +105,32 @@ export function countNodes(root: TrieNode) {
     return seen.size;
 }
 
+export function countWords(root: TrieNode): number {
+    const visited = new Map<TrieNode, number>();
+
+    function walk(n: TrieNode) {
+        if (visited.has(n)) {
+            return visited.get(n)!;
+        }
+
+        let cnt = n.f ? 1 : 0;
+        // add the node to the set to avoid getting stuck on circular references.
+        visited.set(n, cnt);
+
+        if (!n.c) {
+            return cnt;
+        }
+
+        for (const c of n.c.values()) {
+            cnt += walk(c);
+        }
+        visited.set(n, cnt);
+        return cnt;
+    }
+
+    return walk(root);
+}
+
 export function isCircular(root: TrieNode) {
     const seen = new Set<TrieNode>();
     const inStack = new Set<TrieNode>();
