@@ -3,6 +3,7 @@ import * as HR from 'hunspell-reader';
 import * as fs from 'fs-extra';
 import { Trie, importTrie } from 'cspell-trie-lib';
 import * as zlib from 'zlib';
+import { AffWordFlags } from 'hunspell-reader/dist/aff';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
@@ -17,9 +18,16 @@ interface ReaderSelector {
     method: ReaderFn;
 }
 
+export interface AnnotatedWord {
+    word: string;
+    flags: AffWordFlags;
+    dicEntry: string;
+}
+
 export interface Reader {
     size: number;
     [Symbol.iterator]: () => Sequence<string>;
+    annotatedWords: () => Sequence<AnnotatedWord>;
 }
 
 // Readers first match wins
@@ -38,6 +46,7 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
     return {
         size: reader.dic.length,
         [Symbol.iterator]: () => genSequence(reader),
+        annotatedWords() { return reader.seqAffWords().map(({word, flags, dic}) => ({ word, flags, dicEntry: dic })); }
     };
 }
 
@@ -47,6 +56,7 @@ async function trieFileReader(filename: string): Promise<Reader> {
     return {
         get size() { return trie.size(); },
         [Symbol.iterator]: () => trie.words(),
+        annotatedWords() { return trie.words().map(w => ({ word: w, flags: {}, dicEntry: w })); }
     };
 }
 
@@ -59,6 +69,7 @@ async function textFileReader(filename: string): Promise<Reader> {
     return {
         size: lines.length,
         [Symbol.iterator]: () => genSequence(lines),
+        annotatedWords() { return genSequence(lines).map(w => ({ word: w, flags: {}, dicEntry: w })); }
     };
 }
 
