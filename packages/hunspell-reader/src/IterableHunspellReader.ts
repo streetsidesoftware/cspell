@@ -10,7 +10,9 @@ const defaultEncoding = 'UTF-8';
 export { WordInfo } from './types';
 
 export interface HunspellSrcData {
+    /** The Aff rules to use with the dictionary entries */
     aff: Aff;
+    /** the hunspell dictionary entries complete with affix flags */
     dic: string[];
 }
 
@@ -32,6 +34,11 @@ export class IterableHunspellReader implements Iterable<string> {
 
     get maxDepth(): number {
         return this.aff.maxSuffixDepth;
+    }
+
+    /** the number of .dic entries */
+    get size(): number {
+        return this.src.dic.length;
     }
 
     /**
@@ -57,17 +64,22 @@ export class IterableHunspellReader implements Iterable<string> {
         return this.seqWords();
     }
 
+    /**
+     * Iterator for all the words in the dictionary. The words are in the order found in the .dic after the
+     * transformations have been applied. No filtering is done based upon the AFF flags.
+     */
     [Symbol.iterator]() { return this.seqWords(); }
 
     /**
      * create an iterable sequence of the words in the dictionary.
      *
      * @param tapPreApplyRules -- optional function to be called before rules are applied to a word.
-     *                            It is mostly used for monitoring progress.
+     *                            It is mostly used for monitoring progress in combination with `size`.
      */
-    seqAffWords(tapPreApplyRules?: (w: string) => any, maxDepth?: number) {
+    seqAffWords(tapPreApplyRules?: (w: string, index: number) => any, maxDepth?: number) {
         const seq = genSequence(this.src.dic);
-        const dicWords = tapPreApplyRules ? seq.map(a => (tapPreApplyRules(a), a)) : seq;
+        let count = 0;
+        const dicWords = tapPreApplyRules ? seq.map(a => (tapPreApplyRules(a, count++), a)) : seq;
         return dicWords
         .filter(a => !!a.trim())
         .concatMap(dicWord => this.aff.applyRulesToDicEntry(dicWord, maxDepth));

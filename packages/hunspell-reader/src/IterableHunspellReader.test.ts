@@ -38,6 +38,7 @@ describe('Basic Validation of the Reader', () => {
         const reader = new IterableHunspellReader(src);
         // cspell:ignore replacings
         expect([...reader]).to.be.deep.equal(['place', 'placing', 'placings', 'replace', 'replacing', 'replacings']);
+        expect(reader.size).to.be.equal(1);
     });
 
     it('Validates prefix/suffix/base', async () => {
