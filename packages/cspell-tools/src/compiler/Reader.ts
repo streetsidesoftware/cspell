@@ -1,0 +1,72 @@
+import { Sequence, genSequence } from 'gensequence';
+import * as HR from 'hunspell-reader';
+import * as fs from 'fs-extra';
+import { Trie, importTrie, countNodes } from 'cspell-trie-lib';
+import * as zlib from 'zlib';
+
+const regHunspellFile = /\.(dic|aff)$/i;
+
+export interface ReaderOptions {
+    maxDepth?: number;
+}
+
+type ReaderFn = (filename: string, options: ReaderOptions) => Promise<Reader>;
+
+interface ReaderSelector {
+    test: RegExp;
+    method: ReaderFn;
+}
+
+export interface Reader {
+    size: number;
+    [Symbol.iterator]: () => Sequence<string>;
+}
+
+// Readers first match wins
+const readers: ReaderSelector[] = [
+    { test: /\.trie\b/, method: trieFileReader },
+    { test: regHunspellFile, method: readHunspellFiles },
+];
+
+export async function readHunspellFiles(filename: string, options: ReaderOptions): Promise<Reader> {
+    const dicFile = filename.replace(regHunspellFile, '.dic');
+    const affFile = filename.replace(regHunspellFile, '.aff');
+
+    const reader = await HR.IterableHunspellReader.createFromFiles(affFile, dicFile);
+    reader.maxDepth = options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
+
+    return {
+        size: reader.dic.length,
+        [Symbol.iterator]: () => genSequence(reader),
+    };
+}
+
+async function trieFileReader(filename: string): Promise<Reader> {
+    const trieRoot = importTrie(await textFileReader(filename));
+    const trie = new Trie(trieRoot);
+    return {
+        get size() { return countNodes(trie.root); },
+        [Symbol.iterator]: () => trie.words(),
+    };
+}
+
+async function textFileReader(filename: string): Promise<Reader> {
+    const content = await fs.readFile(filename)
+        .then(buffer => (/\.gz$/).test(filename) ? zlib.gunzipSync(buffer) : buffer)
+        .then(buffer => buffer.toString('UTF-8'))
+        ;
+    const lines = content.split('\n');
+    return {
+        size: lines.length,
+        [Symbol.iterator]: () => genSequence(lines),
+    };
+}
+
+export function createReader(filename: string, options: ReaderOptions): Promise<Reader> {
+    for (const reader of readers) {
+        if (reader.test.test(filename)) {
+            return reader.method(filename, options);
+        }
+    }
+    return textFileReader(filename);
+}
