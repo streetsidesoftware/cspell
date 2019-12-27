@@ -1,5 +1,5 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, FLAG_WORD} from './TrieNode';
+import {TrieNode} from './TrieNode';
 import {
     genSuggestions,
     suggest,
@@ -13,15 +13,19 @@ import {
     isWordTerminationNode,
     iteratorTrieWords,
     orderTrie,
+    countWords,
 } from './util';
 import {walker, WalkerIterator} from './walker';
 
 export class Trie {
-    constructor(readonly root: TrieNode) {
-        // The root can be a word
-        if (root.f) {
-            root.f = root.f ? (root.f & ~FLAG_WORD) : root.f;
-        }
+    constructor(readonly root: TrieNode, private count?: number) {}
+
+    /**
+     * Number of words in the Trie
+     */
+    size(): number {
+        this.count = this.count ?? countWords(this.root);
+        return this.count;
     }
 
     find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {

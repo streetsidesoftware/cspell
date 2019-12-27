@@ -92,6 +92,13 @@ describe('Validate Trie Class', () => {
         expect(trie.has('joywalk', false)).to.be.false;
         expect(trie.has('walked', true)).to.be.true;
     });
+
+    test('size', () => {
+        const trie = Trie.create(sampleWords);
+        expect(trie.size()).to.equal(80);
+        // Request again to make sure it is the same value twice since the calculation is lazy.
+        expect(trie.size()).to.equal(80);
+    });
 });
 
 const sampleWords = [
@@ -176,4 +183,3 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
-

@@ -1,7 +1,7 @@
 import { Sequence, genSequence } from 'gensequence';
 import * as HR from 'hunspell-reader';
 import * as fs from 'fs-extra';
-import { Trie, importTrie, countNodes } from 'cspell-trie-lib';
+import { Trie, importTrie } from 'cspell-trie-lib';
 import * as zlib from 'zlib';
 
 const regHunspellFile = /\.(dic|aff)$/i;
@@ -45,7 +45,7 @@ async function trieFileReader(filename: string): Promise<Reader> {
     const trieRoot = importTrie(await textFileReader(filename));
     const trie = new Trie(trieRoot);
     return {
-        get size() { return countNodes(trie.root); },
+        get size() { return trie.size(); },
         [Symbol.iterator]: () => trie.words(),
     };
 }
