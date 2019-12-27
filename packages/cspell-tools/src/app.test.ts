@@ -52,6 +52,15 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
+    test('test app compile-trie max depth', async () => {
+        const commander = getCommander();
+        const log = jest.spyOn(console, 'log').mockImplementation();
+        const args = argv('compile-trie', '-n', '-m', '0', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        expect(log).toHaveBeenCalled();
+        log.mockRestore();
+    });
+
     test('test app compile with compression', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
