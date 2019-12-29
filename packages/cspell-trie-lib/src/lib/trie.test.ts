@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Trie} from './trie';
+import {Trie, defaultTrieOptions} from './trie';
 import {isWordTerminationNode, orderTrie} from './util';
 import {suggestionCollector, CompoundWordsMethod} from './suggest';
 
@@ -70,6 +70,21 @@ describe('Validate Trie Class', () => {
         const trie = Trie.create(sampleWords);
         expect(trie.has('talking')).to.be.true;
         expect(trie.has('talkings')).to.be.false;
+    });
+
+    test('Tests Trie default options', () => {
+        const trie = Trie.create(sampleWords);
+        expect(trie).to.be.instanceof(Trie);
+        const options = trie.options;
+        expect(options).to.be.deep.equal(defaultTrieOptions);
+    });
+
+    test('Tests Trie options', () => {
+        const trie = Trie.create(sampleWords, { forbiddenWordPrefix: '#'});
+        expect(trie).to.be.instanceof(Trie);
+        const options = trie.options;
+        expect(options).to.not.deep.equal(defaultTrieOptions);
+        expect(options.forbiddenWordPrefix).to.equal('#');
     });
 
     test('Test compound words', () => {
