@@ -62,7 +62,7 @@ export interface AffTransformFlags {
 }
 
 export interface AffInfo extends AffTransformFlags {
-    SET?: string;       // Character set encoding of the .aff and .dic file
+    SET: string;       // Character set encoding of the .aff and .dic file
     TRY?: string;
     KEY?: string;
     WORDCHARS?: string;

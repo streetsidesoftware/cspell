@@ -260,7 +260,7 @@ export async function parseAffFile(filename: string, encoding: string = UTF8) {
     return affInfo;
 }
 
-export function parseAff(affFileContent: string, _encoding: string = UTF8): AffInfo {
+export function parseAff(affFileContent: string, encoding: string = UTF8): AffInfo {
     const lines = affFileContent.split(/\r?\n/g);
     return lines
         .map(line => line.trimLeft())
@@ -276,7 +276,7 @@ export function parseAff(affFileContent: string, _encoding: string = UTF8): AffI
                 aff[field] = line.value;
             }
             return aff;
-        }, {} as AffInfo);
+        }, { SET: encoding } as AffInfo);
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string) {

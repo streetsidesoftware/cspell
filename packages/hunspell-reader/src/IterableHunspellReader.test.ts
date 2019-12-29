@@ -105,6 +105,24 @@ describe('HunspellReader En', function() {
             .toArray();
         expect(values.length).to.be.equal(10);
     });
+
+    it('tests iterating through dictionary entry transformations', async () => {
+        const reader = await pReader;
+        const dicEntries: { word: string; index: number }[] = [];
+
+        function recordEntries( word: string, index: number) {
+            dicEntries.push({ word, index });
+        }
+
+        const values = reader.seqTransformDictionaryEntries(recordEntries, 2)
+            .skip(100)
+            .take(10)
+            .toArray();
+        // Note the current implementation of Sequence will pre-fetch the next iteration
+        // causing 1 more than expected to be recorded.
+        expect(dicEntries).to.have.length(111);
+        expect(values[1][0].dic).to.be.equal(dicEntries[101].word);
+    });
 });
 
 function basicReadTests() {
