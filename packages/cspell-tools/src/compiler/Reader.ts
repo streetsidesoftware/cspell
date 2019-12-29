@@ -45,7 +45,8 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
 
     return {
         size: reader.dic.length,
-        [Symbol.iterator]: () => genSequence(reader),
+        // seqWords is used for backwards compatibility.
+        [Symbol.iterator]: () => genSequence(reader.seqWords()),
         annotatedWords() { return reader.seqAffWords().map(({word, flags, dic}) => ({ word, flags, dicEntry: dic })); }
     };
 }
