@@ -29,6 +29,32 @@ describe('Validate the iterateWordsFromFile', () => {
         expect(results.join(' ')).toBe('hello tried try rework reworked work worked');
     });
 
+    test('annotatedWords: hunspell Dutch', async () => {
+        const reader = await createReader(path.join(samples, 'hunspell', 'Dutch.aff'), {});
+        expect(reader.size).toBe(142518);
+        const regTest = /boek/; // cspell:ignore fiets koopman doek boek
+        const words = [...reader.annotatedWords()
+            .filter(word => regTest.test(word.word))
+            .take(10)
+        ];
+        const results = words.map(a => {
+            const { flags } = a;
+            let word = a.word;
+            if (flags.canBeCompoundBegin) word = word + '+';
+            if (flags.canBeCompoundEnd) word = '+' + word;
+            if (flags.canBeCompoundMiddle) word = '*' + word + '*';
+            if (flags.isCompoundPermitted) word = '%' + word + '%';
+            if (flags.isForbiddenWord) word = '!' + word;
+
+            return word;
+        });
+        // cspell:ignore aardboek boeken afboeking afboekingen basisboeken Bijbelboek Bijbelboeken
+        // this might break if the processing order of hunspell changes.
+        expect(results.join(' ')).toBe(
+            '!aardboek abc-boek %*abc-boeken+*% %*abc-boeken-+*% afboeking %*afboekingen+*% %*afboekingen-+*% !basisboeken Bijbelboek %*Bijbelboeken+*%'
+        );
+    });
+
     test('annotatedWords: trie', async () => {
         const reader = await createReader(path.join(samples, 'cities.trie.gz'), {});
         expect(reader.size).toBeGreaterThan(1);
