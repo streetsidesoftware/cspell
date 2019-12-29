@@ -1,8 +1,4 @@
-#!/usr/bin/env node
-
 // For large dictionaries, it is necessary to increase the memory limit.
-// # !/usr/bin/env node --max_old_space_size=8192
-
 
 import { compileWordList, compileTrie, Logger } from './compiler';
 import * as compiler from './compiler';
@@ -103,6 +99,11 @@ interface FileToProcess {
     words: Sequence<string>;
 }
 
+function parseNumber(s: string | undefined): number | undefined {
+    const n = parseInt(s ?? '');
+    return isNaN(n) ? undefined : n;
+}
+
 async function processAction(
     src: string[],
     fileExt: '.txt' | '.trie',
@@ -115,8 +116,7 @@ async function processAction(
         src.join('\n  '));
 
     const ext = fileExt + (options.compress ? '.gz' : '');
-    const { max_depth } = options;
-    const maxDepth = max_depth !== undefined ? Number.parseInt(max_depth) : undefined;
+    const maxDepth = parseNumber(options.max_depth);
     const readerOptions = { maxDepth };
 
     const globResults = await Promise.all(src.map(s => globP(s)));
@@ -152,7 +152,7 @@ function toTargetFile(filename: string, destination: string | undefined, ext: st
 
 function toMergeTargetFile(filename: string, destination: string | undefined, ext: string) {
     const outFileName = toFilename(filename, ext);
-    return path.resolve(destination ?? './', outFileName);
+    return path.resolve(destination ?? '.', outFileName);
 }
 
 async function processFilesIndividually(
@@ -191,8 +191,4 @@ async function processFiles(
     .concatMap( ftp => ftp.words );
     await action(words, dst);
     log('Done "%s"', dst);
-}
-
-if (require.main === module) {
-    run(program, process.argv).catch(() => process.exit(1));
 }

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Trie} from './trie';
+import {Trie, defaultTrieOptions} from './trie';
 import {isWordTerminationNode, orderTrie} from './util';
 import {suggestionCollector, CompoundWordsMethod} from './suggest';
 
@@ -72,6 +72,21 @@ describe('Validate Trie Class', () => {
         expect(trie.has('talkings')).to.be.false;
     });
 
+    test('Tests Trie default options', () => {
+        const trie = Trie.create(sampleWords);
+        expect(trie).to.be.instanceof(Trie);
+        const options = trie.options;
+        expect(options).to.be.deep.equal(defaultTrieOptions);
+    });
+
+    test('Tests Trie options', () => {
+        const trie = Trie.create(sampleWords, { forbiddenWordPrefix: '#'});
+        expect(trie).to.be.instanceof(Trie);
+        const options = trie.options;
+        expect(options).to.not.deep.equal(defaultTrieOptions);
+        expect(options.forbiddenWordPrefix).to.equal('#');
+    });
+
     test('Test compound words', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
@@ -91,6 +106,13 @@ describe('Validate Trie Class', () => {
         expect(trie.has('endless', true)).to.be.true;
         expect(trie.has('joywalk', false)).to.be.false;
         expect(trie.has('walked', true)).to.be.true;
+    });
+
+    test('size', () => {
+        const trie = Trie.create(sampleWords);
+        expect(trie.size()).to.equal(80);
+        // Request again to make sure it is the same value twice since the calculation is lazy.
+        expect(trie.size()).to.equal(80);
     });
 });
 
@@ -176,4 +198,3 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
-

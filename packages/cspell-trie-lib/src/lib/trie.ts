@@ -1,5 +1,5 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, FLAG_WORD} from './TrieNode';
+import {TrieNode} from './TrieNode';
 import {
     genSuggestions,
     suggest,
@@ -13,15 +13,54 @@ import {
     isWordTerminationNode,
     iteratorTrieWords,
     orderTrie,
+    countWords,
 } from './util';
 import {walker, WalkerIterator} from './walker';
 
+export interface TrieOptions {
+    compoundCharacter: string;
+    stripCaseAndAccentsPrefix: string;
+    forbiddenWordPrefix: string;
+}
+
+const _defaultTrieOptions: TrieOptions = {
+    compoundCharacter: '+',
+    stripCaseAndAccentsPrefix: '~',
+    forbiddenWordPrefix: '!'
+};
+export const defaultTrieOptions: TrieOptions = Object.freeze(_defaultTrieOptions);
+
+type Optional<T> = {
+    [key in keyof T]?: T[key];
+};
+
+type PartialTrieOptions = Optional<TrieOptions> | undefined;
+
+function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
+    const {
+        compoundCharacter           = defaultTrieOptions.compoundCharacter,
+        stripCaseAndAccentsPrefix   = defaultTrieOptions.stripCaseAndAccentsPrefix,
+        forbiddenWordPrefix         = defaultTrieOptions.forbiddenWordPrefix,
+    } = options || {};
+    return { compoundCharacter, stripCaseAndAccentsPrefix, forbiddenWordPrefix };
+}
+
 export class Trie {
-    constructor(readonly root: TrieNode) {
-        // The root can be a word
-        if (root.f) {
-            root.f = root.f ? (root.f & ~FLAG_WORD) : root.f;
-        }
+    private _options: TrieOptions;
+    constructor(readonly root: TrieNode, private count?: number, options?: PartialTrieOptions) {
+        this._options = mergeOptionalWithDefaults(options);
+    }
+
+    /**
+     * Number of words in the Trie
+     */
+    size(): number {
+        this.count = this.count ?? countWords(this.root);
+        return this.count;
+    }
+
+    get options() {
+        return this._options;
     }
 
     find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {
@@ -120,9 +159,12 @@ export class Trie {
         return this;
     }
 
-    static create(words: Iterable<string> | IterableIterator<string>): Trie {
+    static create(
+        words: Iterable<string> | IterableIterator<string>,
+        options?: PartialTrieOptions,
+    ): Trie {
         const root = createTriFromList(words);
         orderTrie(root);
-        return new Trie(root);
+        return new Trie(root, undefined, options);
     }
 }
