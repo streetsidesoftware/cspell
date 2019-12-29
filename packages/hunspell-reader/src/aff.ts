@@ -3,7 +3,7 @@ import {Converter} from './converter';
 import {genSequence as gs, Sequence} from 'gensequence';
 import * as GS from 'gensequence';
 import { Mapping } from './types';
-import { uniqueFilter } from './util';
+import { filterOrderedList } from './util';
 
 const log = false;
 
@@ -241,10 +241,10 @@ export class Aff {
         const [lineLeft] = line.split(/\s+/, 1);
         const [word, rules = ''] = lineLeft.split('/', 2);
         const results = this.applyRulesToWord(asAffWord(word, rules), maxSuffixDepth)
-            .map(affWord => ({...affWord, word: this._oConv.convert(affWord.word) }))
-            .filter(uniqueFilter(10000, a => a.word));
-        results.sort((a, b) => a.word < b.word ? -1 : 1);
-        return results;
+            .map(affWord => ({...affWord, word: this._oConv.convert(affWord.word) }));
+        results.sort(compareAff);
+        const filtered = results.filter(filterAff());
+        return filtered;
     }
 
     /**
@@ -374,6 +374,12 @@ export class Aff {
     }
 }
 
+function signature(aff: AffWord) {
+    const { word, flags } = aff;
+    const sig = Object.keys(flags).map(f => flagToStringMap[f]).sort().join('|');
+    return word + '|' + sig;
+}
+
 export function processRules(affInfo: AffInfo): Map<string, Rule> {
     const sfxRules: Sequence<Rule> = gs(affInfo.SFX || []).map(([, sfx]) => sfx).map(sfx => ({ id: sfx.id, type: 'sfx', sfx }));
     const pfxRules: Sequence<Rule> = gs(affInfo.PFX || []).map(([, pfx]) => pfx).map(pfx => ({ id: pfx.id, type: 'pfx', pfx }));
@@ -443,15 +449,32 @@ export function flagsToString(flags: AffWordFlags) {
         .join('_');
 }
 
-export function asAffWord(word: string, rules: string = ''): AffWord {
+export function asAffWord(word: string, rules: string = '', flags: AffWordFlags = {}): AffWord {
     return {
         word,
         base: word,
         prefix: '',
         suffix: '',
         rulesApplied: '',
-        rules: rules || '',
-        flags: {},
-        dic: word + '/' + rules
+        rules,
+        flags,
+        dic: rules ? word + '/' + rules : word,
     };
+}
+
+export function compareAff(a: AffWord, b: AffWord) {
+    if (a.word !== b.word) {
+        return a.word < b.word ? -1 : 1;
+    }
+    const sigA = signature(a);
+    const sigB = signature(b);
+    return sigA < sigB ? -1 : sigA > sigB ? 1 : 0;
+}
+
+/**
+ * Returns a filter function that will filter adjacent AffWords
+ * It compares the word and the flags.
+ */
+export function filterAff() {
+    return filterOrderedList<AffWord>((a, b) => a.word !== b.word || signature(a) !== signature(b));
 }

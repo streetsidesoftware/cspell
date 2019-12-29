@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {AffWord} from './aff';
+import {AffWord, compareAff, asAffWord, Aff, filterAff} from './aff';
 import {affWordToColoredString} from './aff';
 import {parseAffFileToAff} from './affReader';
 import * as AffReader from './affReader';
@@ -36,6 +36,17 @@ describe('Basic Aff Validation', () => {
         expect(aff.SFX!.has('J')).to.be.true;
         const fxJ = aff.SFX!.get('J');
         expect(fxJ).to.not.be.empty;
+    });
+
+    it('Checks ICONV OCONV', () => {
+        const aff = new Aff(AffReader.parseAff(getSampleAffIconvOconv()));
+        expect(aff.iConv.convert('abc')).to.be.equal('abc');
+        expect(aff.iConv.convert('ABC')).to.be.equal('abc');
+        expect(aff.iConv.convert('á Á')).to.be.equal('á á');
+
+        expect(aff.oConv.convert('abc')).to.be.equal('ABC');
+        expect(aff.oConv.convert('ABC')).to.be.equal('ABC');
+        expect(aff.oConv.convert('á Á')).to.be.equal('Á Á');
     });
 });
 
@@ -135,6 +146,32 @@ describe('Test Aff', () => {
             'demotivate', 'demotivated', 'demotivates', 'demotivating',
             'motivate', 'motivated', 'motivates', 'motivating'
         ]);
+    });
+
+    it('tests compareAff', () => {
+        expect(compareAff(asAffWord('word'), asAffWord('word'))).to.be.equal(0);
+        expect(compareAff(asAffWord('a word'), asAffWord('b word'))).to.be.equal(-1);
+        expect(compareAff(asAffWord('b word'), asAffWord('a word'))).to.be.equal(1);
+        const affA = asAffWord('word');
+        const affB = asAffWord('word');
+        affA.flags.isCompoundPermitted = true;
+        expect(compareAff(affA, affB)).to.be.equal(1);
+        affB.flags.isCompoundPermitted = true;
+        expect(compareAff(affA, affB)).to.be.equal(0);
+        affB.flags.canBeCompoundBegin = true;
+        expect(compareAff(affA, affB)).to.be.equal(1);
+    });
+
+    it('test filterAff', () => {
+        const fn = filterAff();
+        expect(fn(asAffWord('Hello'))).to.be.true;
+        expect(fn(asAffWord('Hello'))).to.be.false;
+        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).to.be.true;
+        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).to.be.false;
+        expect(fn(asAffWord('Hello'))).to.be.true;
+        expect(fn(asAffWord('Hello'))).to.be.false;
+        expect(fn(asAffWord('There'))).to.be.true;
+        expect(fn(asAffWord('There'))).to.be.false;
     });
 
 });
@@ -244,6 +281,33 @@ function getSimpleAff() {
     SFX J   0     ings       [^e]
     `;
 }
+
+function getSampleAffIconvOconv() {
+    return `
+# input output conversion
+SET UTF-8
+
+OCONV 7
+OCONV a A
+OCONV á Á
+OCONV b B
+OCONV c C
+OCONV d D
+OCONV e E
+OCONV é É
+
+ICONV 7
+ICONV A a
+ICONV Á á
+ICONV B b
+ICONV C c
+ICONV D d
+ICONV E e
+ICONV É é
+
+    `;
+}
+
 
 // cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings
 // cspell:enableCompoundWords

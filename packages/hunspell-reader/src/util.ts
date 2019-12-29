@@ -41,3 +41,16 @@ export function *batch<T>(i: Iterable<T>, size: number): Iterable<T[]> {
         yield data;
     }
 }
+
+/**
+ * Generate a filter function that will remove adjacent values that compare to falsy;
+ * @param compare function to evaluate if two values are considered the same.
+ */
+export function filterOrderedList<T>(compare: (a: T, b: T) => boolean | number) {
+    let last: T | undefined;
+    return function (t: T) {
+        const r = last === undefined ? (last !== t) : !!compare(last, t);
+        last = r ? t : last;
+        return r;
+    };
+}

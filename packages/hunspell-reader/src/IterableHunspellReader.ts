@@ -4,6 +4,7 @@ import { genSequence, Sequence } from 'gensequence';
 import { WordInfo } from './types';
 import * as fs from 'fs-extra';
 import { decode } from 'iconv-lite';
+import { filterOrderedList } from './util';
 
 const defaultEncoding = 'UTF-8';
 
@@ -89,7 +90,7 @@ export class IterableHunspellReader implements Iterable<string> {
      * @internal
      */
     seqWords() {
-        return this.seqAffWords().map(w => w.word);
+        return this.seqAffWords().map(w => w.word).filter(createMatchingWordsFilter());
     }
 
     /**
@@ -108,4 +109,8 @@ export class IterableHunspellReader implements Iterable<string> {
             .filter(line => !!line);
         return new IterableHunspellReader({ aff, dic });
     }
+}
+
+export function createMatchingWordsFilter() {
+    return filterOrderedList<string>((a, b) => a !== b);
 }
