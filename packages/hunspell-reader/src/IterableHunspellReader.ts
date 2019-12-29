@@ -67,9 +67,9 @@ export class IterableHunspellReader implements Iterable<string> {
 
     /**
      * Iterator for all the words in the dictionary. The words are in the order found in the .dic after the
-     * transformations have been applied. No filtering is done based upon the AFF flags.
+     * transformations have been applied. Forbidden and CompoundOnly words are filtered out.
      */
-    [Symbol.iterator]() { return this.seqWords(); }
+    [Symbol.iterator]() { return this.wholeWords(); }
 
     /**
      * create an iterable sequence of the words in the dictionary.
@@ -99,10 +99,26 @@ export class IterableHunspellReader implements Iterable<string> {
     }
 
     /**
+     * Iterator for all the words in the dictionary. The words are in the order found in the .dic after the
+     * transformations have been applied. Forbidden and CompoundOnly ARE INCLUDED.
+     *
      * @internal
      */
     seqWords() {
-        return this.seqAffWords().map(w => w.word).filter(createMatchingWordsFilter());
+        return this.seqAffWords()
+        .map(w => w.word)
+        .filter(createMatchingWordsFilter());
+    }
+
+    /**
+     * Returns an iterable that will only return stand alone words.
+     */
+    wholeWords() {
+        return this.seqAffWords()
+        // Filter out words that are forbidden or only allowed in Compounds.
+        .filter(w => !w.flags.isForbiddenWord && !w.flags.isOnlyAllowedInCompound)
+        .map(w => w.word)
+        .filter(createMatchingWordsFilter());
     }
 
     /**

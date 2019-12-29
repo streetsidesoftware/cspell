@@ -32,6 +32,9 @@ commander
     .option('-p, --progress', 'Show progress.')
     .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
     .option('-n, --number <limit>', 'Limit the number of words to output.')
+    .option('--forbidden', 'include forbidden words')
+    .option('--partial_compounds', 'include words that must be part of a compound word')
+    .option('--only_forbidden', 'includes only words that are forbidden')
     .description('Output all the words in the <hunspell.dic> file.')
     .action(action);
 
@@ -119,10 +122,13 @@ interface Options {
     output?: string;
     transform?: boolean;
     infix?: boolean;
-    rules?: boolean;        // append rules
-    progress?: boolean;     // show progress
-    number?: string;        // limit the number to output
-    max_depth?: string;     // limit the recursive depth to apply suffixes.
+    rules?: boolean;            // append rules
+    progress?: boolean;         // show progress
+    number?: string;            // limit the number to output
+    max_depth?: string;         // limit the recursive depth to apply suffixes.
+    forbidden: boolean;         // include forbidden words
+    only_forbidden: boolean;    // only include forbidden words
+    partial_compounds: boolean; // include partial word compounds
 }
 
 async function actionPrime(hunspellDicFilename: string, options: Options) {
@@ -137,6 +143,9 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
         rules = false,
         progress: showProgress = false,
         max_depth,
+        forbidden = false,
+        only_forbidden: onlyForbidden = false,
+        partial_compounds: partialCompoundsAllowed = false,
     } = options;
     logStream = outputFile ? process.stdout : process.stderr;
     const log = notify;
@@ -153,7 +162,11 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     if (max_depth && Number.parseInt(max_depth) >= 0) {
         reader.maxDepth = Number.parseInt(max_depth);
     }
-    const transformers: ((_: AffWord) => AffWord)[] = [];
+    const transformers: ((aff: AffWord) => AffWord)[] = [];
+    const filters: ((aff: AffWord) => boolean)[] = [];
+    if (!forbidden && !onlyForbidden) filters.push((aff => !aff.flags.isForbiddenWord));
+    if (onlyForbidden) filters.push((aff => !!aff.flags.isForbiddenWord));
+    if (!partialCompoundsAllowed) filters.push((aff => !aff.flags.isOnlyAllowedInCompound));
     if (infix) { transformers.push(affWordToInfix); }
     if (lowerCase) { transformers.push(mapWord(a => a.toLowerCase())); }
     if (rules) { transformers.push(appendRules); }
@@ -172,8 +185,10 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     const filterUnique = unique ? uniqueFilter(uniqueHistorySize, (aff: AffWord) => aff.word) : (_: AffWord) => true;
 
     const applyTransformers = (aff: AffWord) => transformers.reduce((aff, fn) => fn(aff), aff);
+    const applyFilters = (aff: AffWord) => filters.reduce((cur, fn) => cur && fn(aff), true);
 
     const allWords = seqWords
+        .filter(applyFilters)
         .map(applyTransformers)
         .filter(filterUnique)
         .filter(a => !!a.word)
