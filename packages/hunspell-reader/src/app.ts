@@ -182,7 +182,7 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
         }
     : () => {};
     const seqWords = transform ? reader.seqAffWords(callback) : reader.seqRootWords().map(asAffWord);
-    const filterUnique = unique ? uniqueFilter(uniqueHistorySize, (aff: AffWord) => aff.word) : (_: AffWord) => true;
+    const filterUnique = unique ? uniqueFilter(uniqueHistorySize) : (_) => true;
 
     const applyTransformers = (aff: AffWord) => transformers.reduce((aff, fn) => fn(aff), aff);
     const applyFilters = (aff: AffWord) => filters.reduce((cur, fn) => cur && fn(aff), true);
@@ -190,9 +190,10 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     const allWords = seqWords
         .filter(applyFilters)
         .map(applyTransformers)
+        .map(a => a.word)
+        .filter(a => !!a)
         .filter(filterUnique)
-        .filter(a => !!a.word)
-        .map(a => a.word + '\n');
+        .map(a => a + '\n');
 
     const words = options.number ? allWords.take(Number.parseInt(options.number)) : allWords;
 
