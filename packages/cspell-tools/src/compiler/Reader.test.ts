@@ -1,9 +1,11 @@
-import { createReader } from './Reader';
+import { createReader, AnnotatedWord } from './Reader';
 import * as path from 'path';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 
 describe('Validate the iterateWordsFromFile', () => {
+    const pReaderDutch = createReader(path.join(samples, 'hunspell', 'Dutch.aff'), {});
+
     test('streamWordsFromFile: hunspell', async () => {
         const reader = await createReader(path.join(samples, 'hunspell', 'example.aff'), {});
         expect(reader.size).toBe(3);
@@ -20,45 +22,36 @@ describe('Validate the iterateWordsFromFile', () => {
             + '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york');
     });
 
+    test('stream words from text', async () => {
+        const reader = await createReader(path.join(samples, 'cities.txt'), {});
+        expect(reader.size).toBeGreaterThan(1);
+        const results = [...reader];
+        expect(results.join('|')).toBe('New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|');
+    });
+
     test('annotatedWords: hunspell', async () => {
         const reader = await createReader(path.join(samples, 'hunspell', 'example.aff'), {});
         expect(reader.size).toBe(3);
-        const words = [...reader.annotatedWords()];
-        const results = words.map(a => a.word);
+        const results = [...reader.annotatedWords()];
         // this might break if the processing order of hunspell changes.
-        expect(results.join(' ')).toBe('hello tried try rework reworked work worked');
+        expect(results).toEqual('hello tried try rework reworked work worked'.split(' ').sort());
     });
 
     test('annotatedWords: hunspell Dutch', async () => {
-        const reader = await createReader(path.join(samples, 'hunspell', 'Dutch.aff'), {});
+        const reader = await pReaderDutch;
         expect(reader.size).toBe(142518);
-        const regTest = /boek/; // cspell:ignore fiets koopman doek boek
-        const words = [...reader.annotatedWords()
-            .filter(word => regTest.test(word.word))
-            .take(10)
+        const regBoek = /^.?boek\b/; // cspell:ignore fiets koopman doek boek boek
+        const results = [...reader.annotatedWords()
+            .filter(word => regBoek.test(word))
+            .take(8)
         ];
-        const results = words.map(a => {
-            const { flags } = a;
-            let word = a.word;
-            if (flags.canBeCompoundBegin) word = word + '+';
-            if (flags.canBeCompoundEnd) word = '+' + word;
-            if (flags.canBeCompoundMiddle) word = '*' + word + '*';
-            if (flags.isCompoundPermitted) word = '%' + word + '%';
-            if (flags.isForbiddenWord) word = '!' + word;
-
-            return word;
-        });
-        // cspell:ignore aardboek boeken afboeking afboekingen basisboeken Bijbelboek Bijbelboeken
-        // this might break if the processing order of hunspell changes.
-        expect(results.join(' ')).toBe(
-            '!aardboek abc-boek %*abc-boeken+*% %*abc-boeken-+*% afboeking %*afboekingen+*% %*afboekingen-+*% !basisboeken Bijbelboek %*Bijbelboeken+*%'
-        );
+        expect(results.join(' ')).toBe('+boek +boek+ +boek- +boek-+ boek boek+ boek- boek-+');
     });
 
     test('annotatedWords: trie', async () => {
         const reader = await createReader(path.join(samples, 'cities.trie.gz'), {});
         expect(reader.size).toBeGreaterThan(1);
-        const results = [...reader.annotatedWords()].map(a => a.word);
+        const results = [...reader.annotatedWords()];
         expect(results.join('|')).toBe('amsterdam|angeles|city|delhi|francisco|london|los|los angeles'
             + '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york');
     });
@@ -66,8 +59,23 @@ describe('Validate the iterateWordsFromFile', () => {
     test('annotatedWords: text', async () => {
         const reader = await createReader(path.join(samples, 'cities.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
-        const results = [...reader.annotatedWords()].map(a => a.word);
-        expect(results.join('|')).toBe('New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|');
+        const results = [...reader.annotatedWords()];
+        // the results are sorted
+        expect(results.join('|')).toBe(
+            'London|Los Angeles|Mexico City|New Amsterdam|New Delhi|New York|Paris|San Francisco' +
+            '|~london|~los angeles|~mexico city|~new amsterdam|~new delhi|~new york|~paris|~san francisco'
+        );
     });
 
+    test('annotatedWords: text', async () => {
+        const reader = await createReader(path.join(samples, 'sampleCodeDic.txt'), {});
+        expect(reader.size).toBeGreaterThan(1);
+        const results = [...reader.annotatedWords()];
+        // cspell:ignore codecode errorerror codemsg
+        // the results are sorted
+        expect(results.join('|')).toBe(
+            '!Codemsg|!Errorerror|!err|+code|+code+|+error|+error+|+msg|Café|Code|Code+|Error|Error+|msg' +
+            '|~!codecode|~!codemsg|~!errorerror|~cafe|~code|~code+|~error|~error+'
+        );
+    });
 });
