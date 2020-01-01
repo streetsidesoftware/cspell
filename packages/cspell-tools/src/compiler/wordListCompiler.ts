@@ -23,6 +23,8 @@ function defaultLogger(message?: any, ...optionalParams: any[]) {
     console.log(message, ...optionalParams);
 }
 
+type Normalizer = (lines: Sequence<string>) => Sequence<string>;
+
 export function normalizeWords(lines: Sequence<string>) {
     return lines.concatMap(line => lineToWords(line));
 }
@@ -52,7 +54,11 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
     return splitWords;
 }
 
-interface CompileWordListOptions {
+export interface CompileOptions {
+    skipNormalization?: boolean;
+}
+
+export interface CompileWordListOptions extends CompileOptions {
     splitWords: boolean;
     sort: boolean;
 }
@@ -62,7 +68,10 @@ export async function compileWordList(words: Sequence<string>, destFilename: str
 
     const pDir = mkdirp(destDir);
 
-    const compile = options.splitWords ? compileWordListWithSplitSeq : compileSimpleWordListSeq;
+    const compile: Normalizer =
+        options.skipNormalization ? a => a
+        : options.splitWords ? compileWordListWithSplitSeq
+        : compileSimpleWordListSeq;
     const seq = compile(words)
         .filter(a => !!a)
         .filter(uniqueFilter(10000));
@@ -86,12 +95,15 @@ function compileSimpleWordListSeq(words: Sequence<string>): Sequence<string> {
     return words.map(a => a.toLowerCase());
 }
 
-export function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieNode {
-    const trie = Trie.buildTrie(normalizeWords(words));
+export function normalizeWordsToTrie(
+    words: Sequence<string>,
+    normalizer: Normalizer = normalizeWords
+): Trie.TrieNode {
+    const trie = Trie.buildTrie(normalizer(words));
     return trie.root;
 }
 
-export interface CompileTrieOptions {
+export interface CompileTrieOptions extends CompileOptions {
     base?: number;
     trie3?: boolean;
 }
@@ -104,7 +116,8 @@ export async function compileTrie(words: Sequence<string>, destFilename: string,
     const version = options.trie3 ? 3 : 1;
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
-    const root = normalizeWordsToTrie(words);
+    const normalizer: Normalizer = options.skipNormalization ? a => a : normalizeWords;
+    const root = normalizeWordsToTrie(words, normalizer);
     log('Reduce duplicate word endings');
     const trie = consolidate(root);
     log(`Writing to file ${path.basename(destFilename)}`);
