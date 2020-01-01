@@ -19,14 +19,21 @@ import {walker, WalkerIterator} from './walker';
 
 export interface TrieOptions {
     compoundCharacter: string;
+    compoundOptionalCharacter: string;
     stripCaseAndAccentsPrefix: string;
     forbiddenWordPrefix: string;
 }
 
+export const COMPOUND = '+';
+export const OPTIONAL_COMPOUND = '*';
+export const NORMALIZED = '~';
+export const FORBID = '!';
+
 const _defaultTrieOptions: TrieOptions = {
-    compoundCharacter: '+',
-    stripCaseAndAccentsPrefix: '~',
-    forbiddenWordPrefix: '!'
+    compoundCharacter: COMPOUND,
+    compoundOptionalCharacter: OPTIONAL_COMPOUND,
+    stripCaseAndAccentsPrefix: NORMALIZED,
+    forbiddenWordPrefix: FORBID,
 };
 export const defaultTrieOptions: TrieOptions = Object.freeze(_defaultTrieOptions);
 
@@ -34,15 +41,16 @@ type Optional<T> = {
     [key in keyof T]?: T[key];
 };
 
-type PartialTrieOptions = Optional<TrieOptions> | undefined;
+export type PartialTrieOptions = Optional<TrieOptions> | undefined;
 
-function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
+export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
     const {
         compoundCharacter           = defaultTrieOptions.compoundCharacter,
+        compoundOptionalCharacter   = defaultTrieOptions.compoundOptionalCharacter,
         stripCaseAndAccentsPrefix   = defaultTrieOptions.stripCaseAndAccentsPrefix,
         forbiddenWordPrefix         = defaultTrieOptions.forbiddenWordPrefix,
     } = options || {};
-    return { compoundCharacter, stripCaseAndAccentsPrefix, forbiddenWordPrefix };
+    return { compoundCharacter, compoundOptionalCharacter, stripCaseAndAccentsPrefix, forbiddenWordPrefix };
 }
 
 export class Trie {
