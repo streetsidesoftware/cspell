@@ -22,7 +22,8 @@ interface CompileCommonOptions {
     compress: boolean;
     case: boolean;
     max_depth?: string;
-    merge: string;
+    merge?: string;
+    experimental?: string[];
 }
 
 interface CompileOptions extends CompileCommonOptions {
@@ -39,6 +40,10 @@ const log: Logger = (message?: any, ...optionalParams: any[]) => {
 };
 
 compiler.setLogger(log);
+
+function collect(value: string, previous: string[]) {
+       return previous.concat([value]);
+}
 
 export function run(
     program: program.Command,
@@ -58,6 +63,7 @@ export function run(
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
             .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
+            .option('-x, --experimental <flag', 'Experimental flags, used for testing new concepts', collect, [])
             .option('--no-sort', 'Do not sort the result')
             .action((src: string[], options: CompileOptions) => {
                 const result = processAction(src, '.txt', options, async (src, dst) => {
@@ -73,6 +79,7 @@ export function run(
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
             .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
+            .option('-x, --experimental <flag', 'Experimental flags, used for testing new concepts', collect, [])
             .option('--trie3', '[Beta] Use file format trie3')
             .action((src: string[], options: CompileTrieOptions) => {
                 const result = processAction(src, '.trie', options, async (words: Sequence<string>, dst) => {
@@ -151,7 +158,7 @@ function toTargetFile(filename: string, destination: string | undefined, ext: st
 }
 
 function toMergeTargetFile(filename: string, destination: string | undefined, ext: string) {
-    const outFileName = toFilename(filename, ext);
+    const outFileName = path.join(path.dirname(filename), toFilename(filename, ext));
     return path.resolve(destination ?? '.', outFileName);
 }
 
