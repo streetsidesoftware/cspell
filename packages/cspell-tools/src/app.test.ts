@@ -61,6 +61,36 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
+    test('test app compile-trie compound', async () => {
+        const commander = getCommander();
+        const log = jest.spyOn(console, 'log').mockImplementation();
+        const args = argv(
+            'compile-trie', '-n',
+            '--trie3',
+            '--experimental', 'compound',
+            '--merge', path.join('temp', 'cities.compound'),
+            '-o', path.dirname(pathTemp),
+            path.join(pathSamples, 'cities.txt')
+        );
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        expect(log).toHaveBeenCalled();
+        log.mockRestore();
+    });
+
+    test('test app compile compound', async () => {
+        const commander = getCommander();
+        const log = jest.spyOn(console, 'log').mockImplementation();
+        const args = argv(
+            'compile', '-n',
+            '--experimental', 'compound',
+            '--merge', path.join(pathTemp, 'cities.compound'),
+            path.join(pathSamples, 'cities.txt')
+        );
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        expect(log).toHaveBeenCalled();
+        log.mockRestore();
+    });
+
     test('test app compile with compression', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();

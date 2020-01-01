@@ -7,6 +7,7 @@ import * as program from 'commander';
 import * as glob from 'glob';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './compiler/iterateWordsFromFile';
+import { ReaderOptions } from './compiler/Reader';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
 function globP(pattern: string): Promise<string[]> {
@@ -22,7 +23,8 @@ interface CompileCommonOptions {
     compress: boolean;
     case: boolean;
     max_depth?: string;
-    merge: string;
+    merge?: string;
+    experimental: string[];
 }
 
 interface CompileOptions extends CompileCommonOptions {
@@ -39,6 +41,10 @@ const log: Logger = (message?: any, ...optionalParams: any[]) => {
 };
 
 compiler.setLogger(log);
+
+function collect(value: string, previous: string[]) {
+       return previous.concat([value]);
+}
 
 export function run(
     program: program.Command,
@@ -58,10 +64,13 @@ export function run(
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
             .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
+            .option('-x, --experimental <flag>', 'Experimental flags, used for testing new concepts. Flags: compound', collect, [])
             .option('--no-sort', 'Do not sort the result')
             .action((src: string[], options: CompileOptions) => {
+                const experimental = new Set(options.experimental);
+                const skipNormalization = experimental.has('compound');
                 const result = processAction(src, '.txt', options, async (src, dst) => {
-                    return compileWordList(src, dst, { splitWords: options.split, sort: options.sort }).then(() => src);
+                    return compileWordList(src, dst, { splitWords: options.split, sort: options.sort, skipNormalization }).then(() => src);
                 });
                 resolve(result);
             });
@@ -73,10 +82,14 @@ export function run(
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
             .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
+            .option('-x, --experimental <flag>', 'Experimental flags, used for testing new concepts. Flags: compound', collect, [])
             .option('--trie3', '[Beta] Use file format trie3')
             .action((src: string[], options: CompileTrieOptions) => {
+                const experimental = new Set(options.experimental);
+                const skipNormalization = experimental.has('compound');
+                const compileOptions = {...options, skipNormalization };
                 const result = processAction(src, '.trie', options, async (words: Sequence<string>, dst) => {
-                    return compileTrie(words, dst, options);
+                    return compileTrie(words, dst, compileOptions);
                 });
                 resolve(result);
             });
@@ -117,7 +130,9 @@ async function processAction(
 
     const ext = fileExt + (options.compress ? '.gz' : '');
     const maxDepth = parseNumber(options.max_depth);
-    const readerOptions = { maxDepth };
+    const experimental = new Set(options.experimental);
+    const useAnnotation = experimental.has('compound');
+    const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
 
     const globResults = await Promise.all(src.map(s => globP(s)));
     const filesToProcess = genSequence(globResults)
@@ -151,7 +166,7 @@ function toTargetFile(filename: string, destination: string | undefined, ext: st
 }
 
 function toMergeTargetFile(filename: string, destination: string | undefined, ext: string) {
-    const outFileName = toFilename(filename, ext);
+    const outFileName = path.join(path.dirname(filename), toFilename(filename, ext));
     return path.resolve(destination ?? '.', outFileName);
 }
 

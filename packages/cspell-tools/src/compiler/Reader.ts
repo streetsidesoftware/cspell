@@ -1,22 +1,18 @@
 import { Sequence, genSequence, operators } from 'gensequence';
 import * as HR from 'hunspell-reader';
 import * as fs from 'fs-extra';
-import { Trie, importTrie } from 'cspell-trie-lib';
+import { Trie, importTrie, COMPOUND, OPTIONAL_COMPOUND, NORMALIZED, FORBID, } from 'cspell-trie-lib';
 import * as zlib from 'zlib';
 import { AffWord } from 'hunspell-reader/dist/aff';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
 export interface ReaderOptions {
+    useAnnotation?: boolean;
     maxDepth?: number;
 }
 
-type ReaderFn = (filename: string, options: ReaderOptions) => Promise<Reader>;
-
-const COMPOUND = '+';
-const OPTIONAL_COMPOUND = '*';
-const NORMALIZED = '~';
-const FORBID = '!';
+type ReaderFn = (filename: string, options: ReaderOptions) => Promise<BaseReader>;
 
 // cspell:word dedupe
 const DEDUPE_SIZE = 1000;
@@ -28,10 +24,14 @@ interface ReaderSelector {
 
 export type AnnotatedWord = string;
 
-export interface Reader {
+interface BaseReader {
     size: number;
-    [Symbol.iterator]: () => Sequence<string>;
     annotatedWords: () => Sequence<AnnotatedWord>;
+    rawWords: () => Sequence<string>;
+}
+
+export interface Reader extends BaseReader {
+    [Symbol.iterator]: () => Sequence<string>;
 }
 
 const regExMatchComments = /\s*(#|\/\/).*/;
@@ -42,24 +42,32 @@ const readers: ReaderSelector[] = [
     { test: regHunspellFile, method: readHunspellFiles },
 ];
 
-export function createReader(filename: string, options: ReaderOptions): Promise<Reader> {
+function findMatchingReader(filename: string, options: ReaderOptions): Promise<BaseReader> {
     for (const reader of readers) {
         if (reader.test.test(filename)) {
             return reader.method(filename, options);
         }
     }
-    return textFileReader(filename);
+    return textFileReader(filename, options);
 }
 
-export function createArrayReader(lines: string[]): Reader {
+export async function createReader(filename: string, options: ReaderOptions): Promise<Reader> {
+    const baseReader = await findMatchingReader(filename, options);
+    return Object.assign(baseReader, { [Symbol.iterator]: options.useAnnotation ? baseReader.annotatedWords : baseReader.rawWords });
+}
+
+export function createArrayReader(lines: string[]): BaseReader {
+    const rawWords = () => genSequence(lines);
+    const annotatedWords = () => genSequence(lines).pipe(_mapText, dedupeAndSort);
+
     return {
         size: lines.length,
-        [Symbol.iterator]: () => genSequence(lines),
-        annotatedWords() { return genSequence(lines).pipe(_mapText).pipe(dedupeAndSort); },
+        annotatedWords,
+        rawWords,
     };
 }
 
-export async function readHunspellFiles(filename: string, options: ReaderOptions): Promise<Reader> {
+export async function readHunspellFiles(filename: string, options: ReaderOptions): Promise<BaseReader> {
     const dicFile = filename.replace(regHunspellFile, '.dic');
     const affFile = filename.replace(regHunspellFile, '.aff');
 
@@ -67,31 +75,37 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
     reader.maxDepth = options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
 
     const normalizeAndDedupe = operators.pipe(_stripCaseAndAccents, dedupeAndSort);
+    const rawWords = () => reader.seqWords();
 
     return {
         size: reader.dic.length,
-        // seqWords is used for backwards compatibility.
-        [Symbol.iterator]: () => reader.seqWords(),
         annotatedWords() { return reader.seqAffWords().pipe(_mapAffWords).pipe(normalizeAndDedupe); },
+        rawWords,
     };
 }
 
-async function trieFileReader(filename: string): Promise<Reader> {
-    const trieRoot = importTrie(await textFileReader(filename));
+async function trieFileReader(filename: string): Promise<BaseReader> {
+    const trieRoot = importTrie(await readTextFile(filename));
     const trie = new Trie(trieRoot);
+    const rawWords = () => trie.words();
     return {
         get size() { return trie.size(); },
-        [Symbol.iterator]: () => trie.words(),
-        annotatedWords() { return trie.words(); },
+        annotatedWords: rawWords,
+        rawWords,
     };
 }
 
-async function textFileReader(filename: string): Promise<Reader> {
-    const content = await fs.readFile(filename)
+function readTextFile(filename: string): Promise<string[]> {
+    const lines = fs.readFile(filename)
         .then(buffer => (/\.gz$/).test(filename) ? zlib.gunzipSync(buffer) : buffer)
         .then(buffer => buffer.toString('UTF-8'))
+        .then(content => content.split(/\r?\n/g))
         ;
-    const lines = content.split('\n');
+    return lines;
+}
+
+async function textFileReader(filename: string, options: ReaderOptions): Promise<BaseReader> {
+    const lines = await readTextFile(filename);
     return createArrayReader(lines);
 }
 
