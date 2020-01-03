@@ -146,12 +146,13 @@ const regNotLower = /[^a-z+!~]/;
 
 function *_stripCaseAndAccents(words: Iterable<AnnotatedWord>): Generator<AnnotatedWord> {
     for (const word of words) {
-        yield word;
-        if (regNotLower.test(word)) {
-            // covert to lower case and strip accents.
-            const n = word.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            yield NORMALIZED + n;
-        }
+        // Words are normalized to the compact format: e + ` => è
+        yield word.normalize();
+        // covert to lower case and strip accents.
+        const n = word.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        // All words are added for case-insensitive searches.
+        // It is a space / speed trade-off. In this case, speed is more important.
+        yield NORMALIZED + n;
     }
 }
 

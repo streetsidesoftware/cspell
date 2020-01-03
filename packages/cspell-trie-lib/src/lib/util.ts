@@ -162,3 +162,16 @@ export function isCircular(root: TrieNode) {
 
     return walk(root).isCircular;
 }
+
+export function mergeDefaults<T>(value: Partial<T> | undefined, defaultValue: T): T {
+    const result = { ...defaultValue };
+    if (value) {
+        for (const [k, v] of Object.entries(value) as ([keyof T, any][])) {
+            result[k] = v ?? result[k];
+        }
+    }
+    return result;
+}
+
+export const normalizeWord = (text: string) => text.normalize();
+export const normalizeWordToLowercase = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');

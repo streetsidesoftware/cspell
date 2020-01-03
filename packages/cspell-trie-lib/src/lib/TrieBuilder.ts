@@ -1,7 +1,6 @@
 import { TrieNode } from './TrieNode';
 import { Trie, PartialTrieOptions, TrieOptions, mergeOptionalWithDefaults } from './trie';
 import { consolidate } from './consolidate';
-import * as util from './util';
 
 export function buildTrie(words: Iterable<string>): Trie {
     return new TrieBuilder(words).build();
@@ -23,13 +22,13 @@ export class TrieBuilder {
     /** position 0 of lastPath is always the root */
     private lastPath: PathNode[] = [{ s: '', n: { f: undefined, c: undefined } }];
     private tails = new Map([['', this._eow]]);
-    private trieOptions: TrieOptions;
+    public trieOptions: TrieOptions;
 
     constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions) {
         this._canBeCached(this._eow); // this line is just for coverage reasons
         this.signatures.set(this.signature(this._eow), this._eow);
         this.cached.set(this._eow, this.count++);
-        this.trieOptions = mergeOptionalWithDefaults(trieOptions);
+        this.trieOptions = Object.freeze(mergeOptionalWithDefaults(trieOptions));
 
         if (words) {
             this.insert(words);
@@ -187,10 +186,6 @@ export class TrieBuilder {
 
     insert(words: Iterable<string>) {
         for (const w of words) {
-            if (w[0] === this.trieOptions.stripCaseAndAccentsPrefix && util.has(this._root, w.slice(1))) {
-                // Do not store the normalized form if it already exists in the trie.
-                continue;
-            }
             w && this.insertWord(w);
         }
     }
