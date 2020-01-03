@@ -14,8 +14,23 @@ import {
     iteratorTrieWords,
     orderTrie,
     countWords,
+    mergeDefaults,
 } from './util';
 import {walker, WalkerIterator} from './walker';
+
+import {
+    COMPOUND_FIX,
+    OPTIONAL_COMPOUND_FIX,
+    CASE_INSENSITIVE_PREFIX,
+    FORBID_PREFIX,
+} from './constants';
+
+export {
+    COMPOUND_FIX,
+    OPTIONAL_COMPOUND_FIX,
+    CASE_INSENSITIVE_PREFIX,
+    FORBID_PREFIX,
+} from './constants';
 
 export interface TrieOptions {
     compoundCharacter: string;
@@ -24,33 +39,28 @@ export interface TrieOptions {
     forbiddenWordPrefix: string;
 }
 
-export const COMPOUND = '+';
-export const OPTIONAL_COMPOUND = '*';
-export const NORMALIZED = '~';
-export const FORBID = '!';
+/** @deprecated */
+export const COMPOUND = COMPOUND_FIX;
+/** @deprecated */
+export const OPTIONAL_COMPOUND = OPTIONAL_COMPOUND_FIX;
+/** @deprecated */
+export const NORMALIZED = CASE_INSENSITIVE_PREFIX;
+/** @deprecated */
+export const FORBID = FORBID_PREFIX;
 
-const _defaultTrieOptions: TrieOptions = {
-    compoundCharacter: COMPOUND,
-    compoundOptionalCharacter: OPTIONAL_COMPOUND,
-    stripCaseAndAccentsPrefix: NORMALIZED,
-    forbiddenWordPrefix: FORBID,
+const _defaultTrieOptions: Readonly<TrieOptions> = {
+    compoundCharacter: COMPOUND_FIX,
+    compoundOptionalCharacter: OPTIONAL_COMPOUND_FIX,
+    stripCaseAndAccentsPrefix: CASE_INSENSITIVE_PREFIX,
+    forbiddenWordPrefix: FORBID_PREFIX,
 };
+
 export const defaultTrieOptions: TrieOptions = Object.freeze(_defaultTrieOptions);
 
-type Optional<T> = {
-    [key in keyof T]?: T[key];
-};
-
-export type PartialTrieOptions = Optional<TrieOptions> | undefined;
+export type PartialTrieOptions = Partial<TrieOptions> | undefined;
 
 export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
-    const {
-        compoundCharacter           = defaultTrieOptions.compoundCharacter,
-        compoundOptionalCharacter   = defaultTrieOptions.compoundOptionalCharacter,
-        stripCaseAndAccentsPrefix   = defaultTrieOptions.stripCaseAndAccentsPrefix,
-        forbiddenWordPrefix         = defaultTrieOptions.forbiddenWordPrefix,
-    } = options || {};
-    return { compoundCharacter, compoundOptionalCharacter, stripCaseAndAccentsPrefix, forbiddenWordPrefix };
+    return mergeDefaults(options, defaultTrieOptions);
 }
 
 export class Trie {

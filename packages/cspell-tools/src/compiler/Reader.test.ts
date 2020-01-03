@@ -34,7 +34,10 @@ describe('Validate the iterateWordsFromFile', () => {
         expect(reader.size).toBe(3);
         const results = [...reader.annotatedWords()];
         // this might break if the processing order of hunspell changes.
-        expect(results).toEqual('hello tried try rework reworked work worked'.split(' ').sort());
+        expect(results).toEqual((
+            'hello tried try rework reworked work worked ' +
+            '~hello ~tried ~try ~rework ~reworked ~work ~worked'
+        ).split(' ').sort());
     });
 
     test('annotatedWords: hunspell Dutch', async () => {
@@ -74,8 +77,8 @@ describe('Validate the iterateWordsFromFile', () => {
         // cspell:ignore codecode errorerror codemsg
         // the results are sorted
         expect(results.join('|')).toBe(
-            '!Codemsg|!Errorerror|!err|+code|+code+|+error|+error+|+msg|Café|Code|Code+|Error|Error+|msg' +
-            '|~!codecode|~!codemsg|~!errorerror|~cafe|~code|~code+|~error|~error+'
+            '!Codemsg|!Errorerror|!codecode|!err|+code|+code+|+error|+error+|+msg|Café|Code|Code+|Error|Error+|msg' +
+            '|~!codecode|~!codemsg|~!err|~!errorerror|~+code|~+code+|~+error|~+error+|~+msg|~cafe|~code|~code+|~error|~error+|~msg'
         );
     });
 });
