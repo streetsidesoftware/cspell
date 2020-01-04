@@ -1,7 +1,6 @@
 import { TrieNode, FLAG_WORD } from './TrieNode';
 import { Sequence, genSequence } from 'gensequence';
 import { bufferLines } from './bufferLines';
-import { IterableLike } from './IterableLike';
 
 const EOW = '$';
 const BACK = '<';
@@ -122,7 +121,7 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
         .concat(bufferLines(bufferLines(serialize(root), 120, '\n'), 10, ''));
 }
 
-function *toIterableIterator<T>(iter: IterableLike<T>): IterableIterator<T> {
+function *toIterableIterator<T>(iter: Iterable<T>): IterableIterator<T> {
     yield *iter;
 }
 
@@ -141,7 +140,7 @@ interface ReduceResults {
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
 
-export function importTrie(linesX: IterableLike<string>): TrieNode {
+export function importTrie(linesX: Iterable<string>): TrieNode {
     let radix = 16;
     const comment = /^\s*#/;
     const iter = toIterableIterator(linesX);
