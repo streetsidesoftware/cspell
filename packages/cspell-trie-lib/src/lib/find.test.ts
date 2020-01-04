@@ -1,11 +1,9 @@
-import { buildTrie } from './TrieBuilder';
-import { normalizeWordToLowercase } from './util';
 import { findWord, PartialFindOptions, FindResult } from './find';
-
-import { operators } from 'gensequence';
+import { parseDictionary } from './SimpleDictionaryParser';
+import { Trie } from './trie';
 
 describe('Validate findWord', () => {
-    const trie = buildTrie(dictionary()).root;
+    const trie = dictionary().root;
 
     test('test find exact words preserve case', () => {
         // Code is not allowed as a full word.
@@ -67,7 +65,7 @@ function frCompoundFound(found: string | false, forbidden: boolean = false, comp
 }
 
 // cspell:ignore blueerror
-function dictionary(): string[] {
+function dictionary(): Trie {
     // camel case dictionary
     return parseDictionary(`
         café*
@@ -86,46 +84,4 @@ function dictionary(): string[] {
         blue*
         !blueerror
     `);
-}
-
-
-function parseDictionary(text: string): string[] {
-    const lines = text
-    .replace(/#.*/g, '')
-    .split(/\r?\n/g)
-    .map(a => a.trim())
-    .filter(a => !!a)
-    ;
-
-    function *mapOptionalPrefix(line: string) {
-        if (line[0] === '*') {
-            const t = line.slice(1);
-            yield t;
-            yield '+' + t;
-        } else {
-            yield line;
-        }
-    }
-
-    function *mapOptionalSuffix(line: string) {
-        if (line.slice(-1) === '*') {
-            const t = line.slice(0, -1);
-            yield t;
-            yield t + '+';
-        } else {
-            yield line;
-        }
-    }
-
-    function *mapLowerCase(line: string) {
-        yield line;
-        if (line[0] !== '!') yield '~' + normalizeWordToLowercase(line);
-    }
-
-    const processLines = operators.pipe(
-        operators.concatMap(mapOptionalPrefix),
-        operators.concatMap(mapOptionalSuffix),
-        operators.concatMap(mapLowerCase),
-    );
-    return [...(new Set(processLines(lines)))].sort();
 }
