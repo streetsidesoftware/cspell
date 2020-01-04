@@ -2,8 +2,8 @@ import { TrieNode } from './TrieNode';
 import { Trie, PartialTrieOptions, TrieOptions, mergeOptionalWithDefaults } from './trie';
 import { consolidate } from './consolidate';
 
-export function buildTrie(words: Iterable<string>): Trie {
-    return new TrieBuilder(words).build();
+export function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
+    return new TrieBuilder(words, trieOptions).build();
 }
 
 interface PathNode {
