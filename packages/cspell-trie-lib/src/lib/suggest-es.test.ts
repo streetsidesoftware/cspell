@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import { readTrie } from './dictionaries.test.helper';
 
 function getTrie() {
@@ -13,8 +12,8 @@ describe('Validate Spanish Suggestions', () => {
         const results = trie.suggestWithCost('carmjen', 10);
         // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.contain('carmen');
-        expect(suggestions[0]).to.be.equal('carmen');
+        expect(suggestions).toEqual(expect.arrayContaining(['carmen']));
+        expect(suggestions[0]).toBe('carmen');
     });
 });
 

@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import {
     extractGlobsFromExcludeFilesGlobMap,
     generateExclusionFunctionForUri
@@ -13,7 +12,8 @@ describe('Verify Exclusion Helper functions', () => {
             '**/node_modules': true,
             '**/typings': true,
         };
-        expect(extractGlobsFromExcludeFilesGlobMap(excludeDef), 'get list of globs').is.deep.equal(['**/node_modules', '**/typings']);
+        // 'get list of globs'
+        expect(extractGlobsFromExcludeFilesGlobMap(excludeDef)).toEqual(['**/node_modules', '**/typings']);
     });
 
     test('Test the generated matching function', () => {
@@ -31,7 +31,8 @@ describe('Verify Exclusion Helper functions', () => {
 
         filesMatching.forEach(filepath => {
             const r = fn(filepath);
-            expect(r, `Path: ${filepath} to not be included.`).to.be.true;
+            // Path: ${filepath} to not be included.
+            expect(r).toBe(true);
         });
     });
 
@@ -50,7 +51,8 @@ describe('Verify Exclusion Helper functions', () => {
 
         filesMatching.forEach(filepath => {
             const r = fn(filepath);
-            expect(r, `Path: ${filepath} to not be excluded.`).to.be.false;
+            // Path: ${filepath} to not be excluded.
+            expect(r).toBe(false);
         });
     });
 
@@ -71,7 +73,8 @@ describe('Verify Exclusion Helper functions', () => {
 
         files.forEach(filepath => {
             const r = fn(filepath);
-            expect(r, `Path: ${filepath} to not be included.`).to.be.true;
+            // Path: ${filepath} to not be included.
+            expect(r).toBe(true);
         });
     });
 
@@ -93,7 +96,8 @@ describe('Verify Exclusion Helper functions', () => {
 
         files.forEach(filepath => {
             const r = fn(filepath);
-            expect(r, `Path: ${filepath} to not be excluded.`).to.be.false;
+            // Path: ${filepath} to not be excluded.
+            expect(r).toBe(false);
         });
     });
 

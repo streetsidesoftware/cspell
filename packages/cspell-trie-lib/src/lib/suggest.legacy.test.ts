@@ -3,7 +3,6 @@ import {isWordTerminationNode} from './util';
 import {walker} from './walker';
 import {SuggestionResult} from './suggest';
 
-import {expect} from 'chai';
 import * as Sug from './suggest';
 import {Trie} from './trie';
 
@@ -13,7 +12,8 @@ describe('Validate Suggest', () => {
 
         function testWord(word: string) {
             const results = Sug.suggest(trie.root, word);
-            expect(results, `results for ${word}`).to.deep.equal(legacySuggest(trie.root, word));
+            // results for ${word}
+            expect(results).toEqual(legacySuggest(trie.root, word));
         }
 
         // cspell:ignore tallk jernals juornals joyfull

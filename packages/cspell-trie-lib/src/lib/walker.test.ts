@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import {walker, YieldResult} from './walker';
 import {orderTrie, createTriFromList} from './util';
 
@@ -17,7 +16,7 @@ describe('Validate Util Functions', () => {
             }
             goDeeper = text.length < 4;
         }
-        expect(result).to.be.deep.equal(sampleWords.filter(a => a.length <= 4).sort());
+        expect(result).toEqual(sampleWords.filter(a => a.length <= 4).sort());
     });
 });
 

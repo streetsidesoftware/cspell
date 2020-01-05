@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as fileReader from './fileReader';
 
 describe('Validate file reader', () => {
@@ -6,10 +5,10 @@ describe('Validate file reader', () => {
         return fileReader.readLines('./non-existent.txt')
             .then(
                 () => {
-                    expect(true).to.be.false;
+                    expect(true).toBe(false);
                 },
                 error => {
-                    expect(error.toString()).to.be.contains('Error: ENOENT: no such file or directory');
+                    expect(error.toString()).toEqual(expect.stringContaining('Error: ENOENT: no such file or directory'));
                     return true;  // convert the error into a success.
                 }
             );

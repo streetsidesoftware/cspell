@@ -1,5 +1,4 @@
 import { GlobMatcher, GlobMatch } from './GlobMatcher';
-import { expect } from 'chai';
 
 describe('Validate GlobMatcher', () => {
     tests().forEach(([patterns, root, filename, expected, description], index) => {
@@ -7,7 +6,7 @@ describe('Validate GlobMatcher', () => {
             `test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}"`,
             () => {
                 const matcher = new GlobMatcher(patterns, root);
-                expect(matcher.match(filename)).to.be.eq(expected);
+                expect(matcher.match(filename)).toBe(expected);
             }
         );
     });
@@ -32,7 +31,7 @@ describe('Tests .gitignore file contents', () => {
         test(
             `Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `,
             () => {
-                expect(matcher.match(filename)).to.be.eq(expected);
+                expect(matcher.match(filename)).toBe(expected);
             }
         );
     }
@@ -41,7 +40,7 @@ describe('Tests .gitignore file contents', () => {
         test(
             `Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `,
             () => {
-                expect(matcher.matchEx(filename)).to.be.deep.eq(expected);
+                expect(matcher.matchEx(filename)).toEqual(expected);
             }
         );
     }

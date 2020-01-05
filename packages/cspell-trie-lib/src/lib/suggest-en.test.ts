@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import {
     genCompoundableSuggestions,
     CompoundWordsMethod,
@@ -27,8 +26,8 @@ describe('Validate English Suggestions', () => {
         ));
         const results = collector.suggestions;
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.contain('joyful');
-        expect(suggestions[0]).to.be.equal('joyful');
+        expect(suggestions).toEqual(expect.arrayContaining(['joyful']));
+        expect(suggestions[0]).toBe('joyful');
     });
 
     test('Tests suggestions', async () => {
@@ -43,10 +42,10 @@ describe('Validate English Suggestions', () => {
         ));
         const results = collector.suggestions;
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.contain('joyful');
-        expect(suggestions[0]).to.be.equal('joyfully');
-        expect(suggestions[1]).to.be.equal('joyful');
-        expect(suggestions).to.be.length(collector.maxNumSuggestions);
+        expect(suggestions).toEqual(expect.arrayContaining(['joyful']));
+        expect(suggestions[0]).toBe('joyfully');
+        expect(suggestions[1]).toBe('joyful');
+        expect(suggestions).toHaveLength(collector.maxNumSuggestions);
     });
 
     test('Tests compound SEPARATE_WORDS suggestions', async () => {
@@ -61,9 +60,9 @@ describe('Validate English Suggestions', () => {
         ));
         const results = collector.suggestions;
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.contain('one two three four');
-        expect(suggestions[0]).to.be.equal('one two three four');
-        expect(suggestions).to.be.length(collector.maxNumSuggestions);
+        expect(suggestions).toEqual(expect.arrayContaining(['one two three four']));
+        expect(suggestions[0]).toBe('one two three four');
+        expect(suggestions).toHaveLength(collector.maxNumSuggestions);
     });
 
     test('Tests compound JOIN_WORDS suggestions', async () => {
@@ -78,8 +77,8 @@ describe('Validate English Suggestions', () => {
         ));
         const results = collector.suggestions;
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.contain('one+two+three+four');
-        expect(suggestions).to.be.length(collector.maxNumSuggestions);
+        expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
+        expect(suggestions).toHaveLength(collector.maxNumSuggestions);
     });
 
     test('Tests compound suggestions', async () => {
@@ -94,8 +93,8 @@ describe('Validate English Suggestions', () => {
         ));
         const results = collector.suggestions;
         const suggestions = results.map(s => s.word);
-        expect(suggestions).to.contain('one+two+three+four');
-        expect(suggestions).to.be.length(collector.maxNumSuggestions);
+        expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
+        expect(suggestions).toHaveLength(collector.maxNumSuggestions);
     });
 
     // Takes a long time.
@@ -113,9 +112,9 @@ describe('Validate English Suggestions', () => {
         const suggestions = results.map(s => s.word);
         // console.log('Results:');
         // console.log(results.map((r, i) => `${i} ${r.cost} ${r.word}`).join('\n'));
-        expect(suggestions).to.be.length(collector.maxNumSuggestions);
-        expect(suggestions).to.contain('tests compound suggestions');
-        expect(suggestions[0]).to.be.equal('tests compound suggestions');
+        expect(suggestions).toHaveLength(collector.maxNumSuggestions);
+        expect(suggestions).toEqual(expect.arrayContaining(['tests compound suggestions']));
+        expect(suggestions[0]).toBe('tests compound suggestions');
     });
 });
 
