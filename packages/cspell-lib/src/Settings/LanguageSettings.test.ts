@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
 import { getGlobalSettings } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
@@ -27,15 +26,16 @@ describe('Validate LanguageSettings', () => {
         const defaultSettings = getDefaultSettings();
         const languageSettings = defaultSettings.languageSettings || [];
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
-        expect(sPython.allowCompoundWords).to.be.true;
-        expect(sPython.dictionaries).to.not.be.empty;
-        expect((sPython.dictionaries!).sort()).to.be.deep.equal(['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc', 'django'].sort());
+        expect(sPython.allowCompoundWords).toBe(true);
+        expect(sPython.dictionaries).not.toHaveLength(0);
+        expect((sPython.dictionaries!).sort()).toEqual(
+            ['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc', 'django'].sort()
+        );
 
         const sPhp = calcSettingsForLanguage(languageSettings, 'php', 'en-gb');
-        expect(sPhp.allowCompoundWords).to.be.undefined;
-        expect(sPhp.dictionaries).to.not.be.empty;
-        expect((sPhp.dictionaries!).sort())
-            .to.be.deep.equal([
+        expect(sPhp.allowCompoundWords).toBeUndefined();
+        expect(sPhp.dictionaries).not.toHaveLength(0);
+        expect((sPhp.dictionaries!).sort()).toEqual([
                 'en-gb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html',
                 'npm', 'fonts', 'css', 'typescript', 'misc', 'fullstack'
             ].sort());
@@ -47,8 +47,8 @@ describe('Validate LanguageSettings', () => {
             ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
         };
         const sPython = calcSettingsForLanguage(settings.languageSettings, 'python', 'en');
-        expect(sPython).to.be.not.undefined;
-        expect(sPython.ignoreRegExpList).to.include('special');
+        expect(sPython).toBeDefined();
+        expect(sPython.ignoreRegExpList).toEqual(expect.arrayContaining(['special']));
     });
 
     test('test that user settings include language overrides', () => {
@@ -57,9 +57,9 @@ describe('Validate LanguageSettings', () => {
             ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
         };
         const sPython = calcUserSettingsForLanguage(settings, 'python');
-        expect(sPython).to.be.not.undefined;
-        expect(sPython.ignoreRegExpList).to.include('special');
-        expect(sPython.ignoreRegExpList).to.include('binary');
+        expect(sPython).toBeDefined();
+        expect(sPython.ignoreRegExpList).toEqual(expect.arrayContaining(['special']));
+        expect(sPython.ignoreRegExpList).toEqual(expect.arrayContaining(['binary']));
     });
 
     test(
@@ -72,34 +72,34 @@ describe('Validate LanguageSettings', () => {
                 ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
             };
             const sPython = calcUserSettingsForLanguage(settings, 'python');
-            expect(sPython).to.be.not.undefined;
-            expect(sPython.enabled).to.be.true;
-            expect(sPython.allowCompoundWords).to.be.true;
+            expect(sPython).toBeDefined();
+            expect(sPython.enabled).toBe(true);
+            expect(sPython.allowCompoundWords).toBe(true);
         }
     );
 
     test('test merged settings with global', () => {
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
         const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
-        expect(sPHP).to.not.be.empty;
+        expect(Object.keys(sPHP)).not.toHaveLength(0);
     });
 
     test('tests matching languageIds', () => {
         const langSet = LS.normalizeLanguageId('PHP, Python | cpp,javascript');
-        expect(langSet.has('php')).to.be.true;
-        expect(langSet.has('cpp')).to.be.true;
-        expect(langSet.has('python')).to.be.true;
-        expect(langSet.has('javascript')).to.be.true;
-        expect(langSet.has('typescript')).to.be.false;
+        expect(langSet.has('php')).toBe(true);
+        expect(langSet.has('cpp')).toBe(true);
+        expect(langSet.has('python')).toBe(true);
+        expect(langSet.has('javascript')).toBe(true);
+        expect(langSet.has('typescript')).toBe(false);
     });
 
     test('tests local matching', () => {
         const localSet = LS.normalizeLocal('en, en-GB, fr-fr, nl_NL');
-        expect(localSet.has('en')).to.be.true;
-        expect(LS.isLocalInSet('nl-nl', localSet)).to.be.true;
-        expect(LS.isLocalInSet('nl_nl', localSet)).to.be.true;
-        expect(LS.isLocalInSet('en', localSet)).to.be.true;
-        expect(LS.isLocalInSet('en-US', localSet)).to.be.false;
-        expect(LS.isLocalInSet('enGB', localSet)).to.be.true;
+        expect(localSet.has('en')).toBe(true);
+        expect(LS.isLocalInSet('nl-nl', localSet)).toBe(true);
+        expect(LS.isLocalInSet('nl_nl', localSet)).toBe(true);
+        expect(LS.isLocalInSet('en', localSet)).toBe(true);
+        expect(LS.isLocalInSet('en-US', localSet)).toBe(false);
+        expect(LS.isLocalInSet('enGB', localSet)).toBe(true);
     });
 });

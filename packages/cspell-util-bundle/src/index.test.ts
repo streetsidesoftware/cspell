@@ -1,12 +1,11 @@
-import { expect } from 'chai';
 import { xregexp } from '.';
 
 describe('Validate Bundled Libraries', () => {
     test('Test xregexp', () => {
-        expect(typeof xregexp).to.be.equal('function');
+        expect(typeof xregexp).toEqual('function');
 
         const x = xregexp('t$');
-        expect(x.test('first')).to.be.true;
-        expect(x.test('second')).to.be.false;
+        expect(x.test('first')).toBe(true);
+        expect(x.test('second')).toBe(false);
     });
 });

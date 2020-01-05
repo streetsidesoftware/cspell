@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import {Trie, defaultTrieOptions} from './trie';
 import {isWordTerminationNode, orderTrie, normalizeWordToLowercase} from './util';
 import {suggestionCollector, CompoundWordsMethod} from './suggest';
@@ -7,25 +6,25 @@ import { parseDictionary } from './SimpleDictionaryParser';
 describe('Validate Trie Class', () => {
     test('Tests creating a Trie', () => {
         const trie = Trie.create(sampleWords);
-        expect(trie).to.be.instanceof(Trie);
+        expect(trie).toBeInstanceOf(Trie);
     });
 
     test('Tests getting words from a Trie', () => {
         const trie = Trie.create(sampleWords);
-        expect([...trie.words()]).to.be.deep.equal(sampleWords.sort());
+        expect([...trie.words()]).toEqual(sampleWords.sort());
     });
 
     test('Tests seeing if a Trie contains a word', () => {
         const trie = Trie.create(sampleWords);
-        expect(trie.has('lift')).to.be.true;
-        expect(trie.has('fork-lift')).to.be.false;
+        expect(trie.has('lift')).toBe(true);
+        expect(trie.has('fork-lift')).toBe(false);
     });
 
     test('Tests complete', () => {
         const trie = Trie.create(sampleWords);
-        expect([...trie.completeWord('lift')]).to.be.deep.equal(sampleWords.filter(w => w.slice(0, 4) === 'lift').sort());
-        expect([...trie.completeWord('life')]).to.be.deep.equal([]);
-        expect([...trie.completeWord('lifting')]).to.be.deep.equal(['lifting']);
+        expect([...trie.completeWord('lift')]).toEqual(sampleWords.filter(w => w.slice(0, 4) === 'lift').sort());
+        expect([...trie.completeWord('life')]).toEqual([]);
+        expect([...trie.completeWord('lifting')]).toEqual(['lifting']);
     });
 
     test('Tests insert', () => {
@@ -36,27 +35,27 @@ describe('Validate Trie Class', () => {
 
         const words1 = [...trie1.words()];
         const words2 = [...trie2.words()];
-        expect(words2).to.be.deep.equal(words1);
+        expect(words2).toEqual(words1);
     });
 
     test('tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         const suggestions = trie.suggest('wall', 10);
-        expect(suggestions).to.contain('walk');
+        expect(suggestions).toEqual(expect.arrayContaining(['walk']));
     });
 
     test('tests suggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyostalkliftswak
         const suggestions = trie.suggest('joyostalkliftswak', 10, CompoundWordsMethod.SEPARATE_WORDS);
-        expect(suggestions).to.contain('joyous talk lifts walk');
+        expect(suggestions).toEqual(expect.arrayContaining(['joyous talk lifts walk']));
     });
 
     test('tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('wall', 10);
         trie.genSuggestions(collector);
-        expect(collector.suggestions.map(a => a.word)).to.contain('walk');
+        expect(collector.suggestions.map(a => a.word)).toEqual(expect.arrayContaining(['walk']));
     });
 
     test('Tests iterate', () => {
@@ -64,77 +63,77 @@ describe('Validate Trie Class', () => {
         const words = [...trie.iterate()]
             .filter(r => isWordTerminationNode(r.node))
             .map(r => r.text);
-        expect(words).to.be.deep.equal(sampleWords.sort());
+        expect(words).toEqual(sampleWords.sort());
     });
 
     test('Test where only part of the word is correct', () => {
         const trie = Trie.create(sampleWords);
-        expect(trie.has('talking')).to.be.true;
-        expect(trie.has('talkings')).to.be.false;
+        expect(trie.has('talking')).toBe(true);
+        expect(trie.has('talkings')).toBe(false);
     });
 
     test('Tests Trie default options', () => {
         const trie = Trie.create(sampleWords);
-        expect(trie).to.be.instanceof(Trie);
+        expect(trie).toBeInstanceOf(Trie);
         const options = trie.options;
-        expect(options).to.be.deep.equal(defaultTrieOptions);
+        expect(options).toEqual(defaultTrieOptions);
     });
 
     test('Tests Trie options', () => {
         const trie = Trie.create(sampleWords, { forbiddenWordPrefix: '#'});
-        expect(trie).to.be.instanceof(Trie);
+        expect(trie).toBeInstanceOf(Trie);
         const options = trie.options;
-        expect(options).to.not.deep.equal(defaultTrieOptions);
-        expect(options.forbiddenWordPrefix).to.equal('#');
+        expect(options).not.toEqual(defaultTrieOptions);
+        expect(options.forbiddenWordPrefix).toBe('#');
     });
 
     test('Test compound words', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
-        expect(trie.has('talkinglift', true)).to.be.true;
-        expect(trie.has('joywalk', true)).to.be.true;
-        expect(trie.has('jaywalk', true)).to.be.true;
-        expect(trie.has('jwalk', true)).to.be.false;
-        expect(trie.has('awalk', true)).to.be.false;
-        expect(trie.has('jayjay', true)).to.be.true;
-        expect(trie.has('jayjay', 4)).to.be.false;
-        expect(trie.has('jayi', 3)).to.be.false;
-        expect(trie.has('toto', true)).to.be.false;
-        expect(trie.has('toto', 2)).to.be.true;
-        expect(trie.has('toto', 1)).to.be.true;
-        expect(trie.has('iif', 1)).to.be.true;
-        expect(trie.has('uplift', true)).to.be.false;
-        expect(trie.has('endless', true)).to.be.true;
-        expect(trie.has('joywalk', false)).to.be.false;
-        expect(trie.has('walked', true)).to.be.true;
+        expect(trie.has('talkinglift', true)).toBe(true);
+        expect(trie.has('joywalk', true)).toBe(true);
+        expect(trie.has('jaywalk', true)).toBe(true);
+        expect(trie.has('jwalk', true)).toBe(false);
+        expect(trie.has('awalk', true)).toBe(false);
+        expect(trie.has('jayjay', true)).toBe(true);
+        expect(trie.has('jayjay', 4)).toBe(false);
+        expect(trie.has('jayi', 3)).toBe(false);
+        expect(trie.has('toto', true)).toBe(false);
+        expect(trie.has('toto', 2)).toBe(true);
+        expect(trie.has('toto', 1)).toBe(true);
+        expect(trie.has('iif', 1)).toBe(true);
+        expect(trie.has('uplift', true)).toBe(false);
+        expect(trie.has('endless', true)).toBe(true);
+        expect(trie.has('joywalk', false)).toBe(false);
+        expect(trie.has('walked', true)).toBe(true);
     });
 
     test('Test compound find', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
-        expect(trie.find('talkinglift', true)?.f).to.be.equal(1);
-        expect(trie.find('joywalk', true)?.f).to.be.equal(1);
-        expect(trie.find('jaywalk', true)?.f).to.be.equal(1);
-        expect(trie.find('jwalk', true)?.f).to.be.undefined;
-        expect(trie.find('awalk', true)?.f).to.be.undefined;
-        expect(trie.find('jayjay', true)?.f).to.be.equal(1);
-        expect(trie.find('jayjay', 4)?.f).to.be.undefined;
-        expect(trie.find('jayi', 3)?.f).to.be.undefined;
-        expect(trie.find('toto', true)?.f).to.be.undefined;
-        expect(trie.find('toto', 2)?.f).to.be.equal(1);
-        expect(trie.find('toto', 1)?.f).to.be.equal(1);
-        expect(trie.find('iif', 1)?.f).to.be.equal(1);
-        expect(trie.find('uplift', true)?.f).to.be.undefined;
-        expect(trie.find('endless', true)?.f).to.be.equal(1);
-        expect(trie.find('joywalk', false)?.f).to.be.undefined;
-        expect(trie.find('walked', true)?.f).to.be.equal(1);
+        expect(trie.find('talkinglift', true)?.f).toBe(1);
+        expect(trie.find('joywalk', true)?.f).toBe(1);
+        expect(trie.find('jaywalk', true)?.f).toBe(1);
+        expect(trie.find('jwalk', true)?.f).toBeUndefined();
+        expect(trie.find('awalk', true)?.f).toBeUndefined();
+        expect(trie.find('jayjay', true)?.f).toBe(1);
+        expect(trie.find('jayjay', 4)?.f).toBeUndefined();
+        expect(trie.find('jayi', 3)?.f).toBeUndefined();
+        expect(trie.find('toto', true)?.f).toBeUndefined();
+        expect(trie.find('toto', 2)?.f).toBe(1);
+        expect(trie.find('toto', 1)?.f).toBe(1);
+        expect(trie.find('iif', 1)?.f).toBe(1);
+        expect(trie.find('uplift', true)?.f).toBeUndefined();
+        expect(trie.find('endless', true)?.f).toBe(1);
+        expect(trie.find('joywalk', false)?.f).toBeUndefined();
+        expect(trie.find('walked', true)?.f).toBe(1);
     });
 
     test('size', () => {
         const trie = Trie.create(sampleWords);
-        expect(trie.size()).to.equal(80);
+        expect(trie.size()).toBe(80);
         // Request again to make sure it is the same value twice since the calculation is lazy.
-        expect(trie.size()).to.equal(80);
+        expect(trie.size()).toBe(80);
     });
 
     test('isLegacy', () => {
@@ -146,8 +145,8 @@ describe('Validate Trie Class', () => {
         café
         `);
 
-        expect(trieLegacy.isLegacy).to.be.true;
-        expect(trieModern.isLegacy).to.be.false;
+        expect(trieLegacy.isLegacy).toBe(true);
+        expect(trieModern.isLegacy).toBe(false);
     });
 
     test('hasWord', () => {
@@ -162,29 +161,29 @@ describe('Validate Trie Class', () => {
         !playtime
         `);
 
-        expect(trie.hasWord('café', true)).to.be.true;
-        expect(trie.hasWord('Café', true)).to.be.false;
-        expect(trie.hasWord('café', false)).to.be.false;
-        expect(trie.hasWord('Café', false)).to.be.false;
-        expect(trie.hasWord(normalizeWordToLowercase('café'), false)).to.be.true;
-        expect(trie.hasWord(normalizeWordToLowercase('Café'), false)).to.be.true;
-        expect(trie.hasWord('BeginMiddleEnd', true)).to.be.true;
-        expect(trie.hasWord('BeginMiddleMiddleEnd', true)).to.be.true;
-        expect(trie.hasWord('BeginEnd', true)).to.be.true;
-        expect(trie.hasWord('MiddleEnd', true)).to.be.false;
-        expect(trie.hasWord('beginend', false)).to.be.true; // cspell:disable-line
+        expect(trie.hasWord('café', true)).toBe(true);
+        expect(trie.hasWord('Café', true)).toBe(false);
+        expect(trie.hasWord('café', false)).toBe(false);
+        expect(trie.hasWord('Café', false)).toBe(false);
+        expect(trie.hasWord(normalizeWordToLowercase('café'), false)).toBe(true);
+        expect(trie.hasWord(normalizeWordToLowercase('Café'), false)).toBe(true);
+        expect(trie.hasWord('BeginMiddleEnd', true)).toBe(true);
+        expect(trie.hasWord('BeginMiddleMiddleEnd', true)).toBe(true);
+        expect(trie.hasWord('BeginEnd', true)).toBe(true);
+        expect(trie.hasWord('MiddleEnd', true)).toBe(false);
+        expect(trie.hasWord('beginend', false)).toBe(true); // cspell:disable-line
 
         // Forbidden word
-        expect(trie.hasWord('playtime', true)).to.be.false;
-        expect(trie.hasWord('playtime', false)).to.be.false;
-        expect(trie.hasWord('playmiddletime', false)).to.be.true; // cspell:disable-line
+        expect(trie.hasWord('playtime', true)).toBe(false);
+        expect(trie.hasWord('playtime', false)).toBe(false);
+        expect(trie.hasWord('playmiddletime', false)).toBe(true); // cspell:disable-line
 
         // Check parity with has
-        expect(trie.has('playtime')).to.be.false;
-        expect(trie.has('play+time')).to.be.false;
-        expect(trie.has('play')).to.be.true;
-        expect(trie.has('play+')).to.be.true;
-        expect(trie.has('BeginMiddleEnd')).to.be.true;
+        expect(trie.has('playtime')).toBe(false);
+        expect(trie.has('play+time')).toBe(false);
+        expect(trie.has('play')).toBe(true);
+        expect(trie.has('play+')).toBe(true);
+        expect(trie.has('BeginMiddleEnd')).toBe(true);
     });
 
     test('find', () => {
@@ -199,13 +198,13 @@ describe('Validate Trie Class', () => {
         !playtime
         `);
 
-        expect(trie.find('Begin')?.f).to.equal(1);
-        expect(trie.find('Begin+')?.f).to.equal(1);
-        expect(trie.find('playtime')?.f).to.equal(1);
-        expect(trie.find('playtime', true)?.f).to.equal(1);
-        expect(trie.find('playtime', 99)?.f).to.be.undefined;
-        expect(trie.find('play+time', true)?.f).to.be.equal(1);
-        expect(trie.find('play++time', true)?.f).to.be.equal(1);
+        expect(trie.find('Begin')?.f).toBe(1);
+        expect(trie.find('Begin+')?.f).toBe(1);
+        expect(trie.find('playtime')?.f).toBe(1);
+        expect(trie.find('playtime', true)?.f).toBe(1);
+        expect(trie.find('playtime', 99)?.f).toBeUndefined();
+        expect(trie.find('play+time', true)?.f).toBe(1);
+        expect(trie.find('play++time', true)?.f).toBe(1);
     });
 });
 

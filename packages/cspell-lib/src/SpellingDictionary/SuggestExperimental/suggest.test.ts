@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as suggest from './suggest';
 import { Trie } from 'cspell-trie-lib';
 import { compareResults } from './helpers';
@@ -13,6 +12,6 @@ describe('Validate Suggest', () => {
         const trie = Trie.create(words);
         // cspell:ignore aple
         const suggestions = [...suggest.suggest(trie, 'aple')].sort(compareResults);
-        expect(suggestions).to.not.be.empty;
+        expect(Object.keys(suggestions)).not.toHaveLength(0);
     });
 });

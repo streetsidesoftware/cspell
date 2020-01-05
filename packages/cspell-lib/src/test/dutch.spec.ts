@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import * as cspell from '../index';
 import * as path from 'path';
 import * as fsp from 'fs-extra';
@@ -14,7 +13,7 @@ describe('Validate that Dutch text is correctly checked.', () => {
 
     test('Tests the default configuration', () => {
         return sampleFile.then(text => {
-            expect(text).to.not.be.empty;
+            expect(Object.keys(text)).not.toHaveLength(0);
             const ext = path.extname(sampleFilename);
             const languageIds = cspell.getLanguagesForExt(ext);
             const dutchSettings = cspell.readSettings(dutchConfig);
@@ -23,7 +22,7 @@ describe('Validate that Dutch text is correctly checked.', () => {
             return cspell.validateText(text, fileSettings)
                 .then(results => {
                     /* cspell:ignore ANBI RABO RABONL unported */
-                    expect(results.map(a => a.text).filter(util.uniqueFn()).sort()).deep.equals(['ANBI', 'RABO', 'RABONL', 'unported']);
+                    expect(results.map(a => a.text).filter(util.uniqueFn()).sort()).toEqual(['ANBI', 'RABO', 'RABONL', 'unported']);
                 });
         });
     });

@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import {
     mergeSettings,
     readSettings,
@@ -17,7 +16,7 @@ describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings', () => {
         const left = { name: 'Left' };
         const right = { name: 'Right' };
-        expect(mergeSettings(left, right)).to.be.deep.equal({
+        expect(mergeSettings(left, right)).toEqual({
             words: [],
             name: 'Left|Right',
             id: '|',
@@ -37,7 +36,7 @@ describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings', () => {
         const left = { id: 'left' };
         const enabled = { id: 'enabledId', name: 'enabledName', enabled: true};
-        expect(mergeSettings(left, enabled)).to.be.deep.equal({
+        expect(mergeSettings(left, enabled)).toEqual({
             enabled: true,
             name: '|enabledName',
             id: 'left|enabledId',
@@ -58,9 +57,9 @@ describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings', () => {
         const right = { id: 'right', enabled: false };
         const left = { id: 'left', enabled: true };
-        expect(mergeSettings({}, right)).to.be.deep.equal(right);
-        expect(mergeSettings(left, {})).to.be.deep.equal(left);
-        expect(mergeSettings(left, right)).to.be.deep.equal({
+        expect(mergeSettings({}, right)).toEqual(right);
+        expect(mergeSettings(left, {})).toEqual(left);
+        expect(mergeSettings(left, right)).toEqual({
             enabled: right.enabled,
             name: '|',
             id: [left.id, right.id].join('|'),
@@ -79,7 +78,7 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests mergeSettings', () => {
-        expect(mergeSettings({enabled: true}, {enabled: false})).to.be.deep.equal({
+        expect(mergeSettings({enabled: true}, {enabled: false})).toEqual({
             enabled: false,
             name: '|',
             id: '|',
@@ -98,68 +97,68 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests mergeSettings when left/right are the same', () => {
-        expect(mergeSettings(_defaultSettings, _defaultSettings)).to.be.equal(_defaultSettings);
+        expect(mergeSettings(_defaultSettings, _defaultSettings)).toBe(_defaultSettings);
     });
 
     test('tests mergeSettings when lefts are the same', () => {
         const base = mergeSettings(_defaultSettings, {});
         const setting1 = mergeSettings(base, {});
         const setting2 = mergeSettings(base, setting1);
-        expect(setting2).to.be.equal(setting1);
+        expect(setting2).toBe(setting1);
 
         const setting3 = mergeSettings(_defaultSettings, setting1);
-        expect(setting3).to.be.equal(setting1);
+        expect(setting3).toBe(setting1);
     });
 
     test('tests mergeSettings when rights are the same', () => {
         const base = mergeSettings(_defaultSettings, { id: 'right' });
         const setting1 = mergeSettings({ id: 'setting1' }, base);
         const setting2 = mergeSettings(setting1, base);
-        expect(setting2).to.be.equal(setting1);
+        expect(setting2).toBe(setting1);
 
         const setting3 = mergeSettings(_defaultSettings, setting1);
-        expect(setting3).to.be.not.equal(setting1);
+        expect(setting3).not.toBe(setting1);
 
         const setting4 = mergeSettings(setting3, base);
-        expect(setting4).to.be.equal(setting3);
+        expect(setting4).toBe(setting3);
     });
 
     test('tests loading a missing cSpell.json file', () => {
         const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-missing.json');
         const settings = readSettings(filename);
-        expect(settings).to.not.be.empty;
-        expect(settings.words).to.be.undefined;
+        expect(Object.keys(settings)).not.toHaveLength(0);
+        expect(settings.words).toBeUndefined();
     });
 
     test('tests loading a cSpell.json file', () => {
         const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import.json');
         const settings = readSettings(filename);
-        expect(settings).to.not.be.empty;
-        expect(settings.words).to.include('import');
+        expect(Object.keys(settings)).not.toHaveLength(0);
+        expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
     test('tests loading a cSpell.json with multiple imports file', () => {
         const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-imports.json');
         const settings = readSettings(filename);
-        expect(settings).to.not.be.empty;
-        expect(settings.words).to.include('import');
-        expect(settings.words).to.include('imports');
+        expect(Object.keys(settings)).not.toHaveLength(0);
+        expect(settings.words).toEqual(expect.arrayContaining(['import']));
+        expect(settings.words).toEqual(expect.arrayContaining(['imports']));
         // cspell:word leuk
-        expect(settings.words).to.include('leuk');
+        expect(settings.words).toEqual(expect.arrayContaining(['leuk']));
     });
 
     test('makes sure global settings is an object', () => {
         const settings = getGlobalSettings();
-        expect(settings).to.not.be.empty;
+        expect(Object.keys(settings)).not.toHaveLength(0);
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
-        expect(merged).to.not.be.empty;
+        expect(Object.keys(merged)).not.toHaveLength(0);
     });
 
     test('verify clearing the file cache works', () => {
         mergeSettings(getDefaultSettings(), getGlobalSettings());
-        expect(getCachedFileSize()).to.be.gt(0);
+        expect(getCachedFileSize()).toBeGreaterThan(0);
         clearCachedFiles();
-        expect(getCachedFileSize()).to.be.eq(0);
+        expect(getCachedFileSize()).toBe(0);
     });
 
     test('test the loaded defaults contain expected settings', () => {
@@ -167,7 +166,7 @@ describe('Validate CSpellSettingsServer', () => {
         const sources = getSources(settings);
         const sourceNames = sources
             .map(s => s.name || '?');
-        expect(sourceNames).to.contain(_defaultSettings.name!);
+        expect(sourceNames).toEqual(expect.arrayContaining([_defaultSettings.name!]));
     });
 });
 
@@ -185,7 +184,8 @@ describe('Validate Overrides', () => {
             { f: '/cspell-dicts/nl_NL/Dutch.txt', g: '**/nl_NL/**', e: true },
         ];
 
-        tests.forEach(({f, g, e}) => expect(checkFilenameMatchesGlob(f, g), `f: ${f}, g: ${g}, e: ${e}`).to.be.equal(e));
+        tests.forEach(({f, g, e}) => // f: ${f}, g: ${g}, e: ${e}
+        expect(checkFilenameMatchesGlob(f, g)).toBe(e));
     });
 
     test('test calcOverrideSettings', () => {
@@ -196,7 +196,7 @@ describe('Validate Overrides', () => {
 
         tests.forEach(({f, e}) => {
             const r = calcOverrideSettings(sampleSettings, f);
-            e.forEach(([k, v]) => expect(r[k]).to.be.equal(v));
+            e.forEach(([k, v]) => expect(r[k]).toBe(v));
         });
     });
 });

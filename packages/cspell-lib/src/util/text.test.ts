@@ -1,36 +1,35 @@
 import { splitCamelCaseWord } from './text';
 import * as Text from './text';
-import { expect } from 'chai';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 
 describe('Util Text', () => {
     test('tests build regexp from string', () => {
         const regEx1 = Text.stringToRegExp('');
-        expect(regEx1).to.be.undefined;
+        expect(regEx1).toBeUndefined();
         const regEx2 = Text.stringToRegExp('a');
-        expect(regEx2!.toString()).to.be.equal('/a/gim');
+        expect(regEx2!.toString()).toBe('/a/gim');
         const regEx3 = Text.stringToRegExp('/');
-        expect(regEx3).not.to.be.undefined;
-        expect(regEx3!.toString()).to.be.equal('/\\//gim');
+        expect(regEx3).not.toBeUndefined();
+        expect(regEx3!.toString()).toBe('/\\//gim');
         const regEx4 = Text.stringToRegExp(/abc/);
-        expect(regEx4!.toString()).to.be.equal('/abc/');
+        expect(regEx4!.toString()).toBe('/abc/');
     });
 
     test('splits words', () => {
-        expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        expect(splitCamelCaseWord('helloThere')).to.deep.equal(['hello', 'There']);
-        expect(splitCamelCaseWord('HelloThere')).to.deep.equal(['Hello', 'There']);
-        expect(splitCamelCaseWord('BigÁpple')).to.deep.equal(['Big', 'Ápple']);
-        expect(splitCamelCaseWord('ASCIIToUTF16')).to.deep.equal(['ASCII', 'To', 'UTF16']);
-        expect(splitCamelCaseWord('URLsAndDBAs')).to.deep.equal(['Urls', 'And', 'Dbas']);
-        expect(splitCamelCaseWord('WALKingRUNning')).to.deep.equal(['Walking', 'Running']);
+        expect(splitCamelCaseWord('hello')).toEqual(['hello']);
+        expect(splitCamelCaseWord('helloThere')).toEqual(['hello', 'There']);
+        expect(splitCamelCaseWord('HelloThere')).toEqual(['Hello', 'There']);
+        expect(splitCamelCaseWord('BigÁpple')).toEqual(['Big', 'Ápple']);
+        expect(splitCamelCaseWord('ASCIIToUTF16')).toEqual(['ASCII', 'To', 'UTF16']);
+        expect(splitCamelCaseWord('URLsAndDBAs')).toEqual(['Urls', 'And', 'Dbas']);
+        expect(splitCamelCaseWord('WALKingRUNning')).toEqual(['Walking', 'Running']);
     });
 
     test('extract word from text', () => {
         expect(Text.extractWordsFromText(`
             // could've, would've, couldn't've, wasn't, y'all, 'twas, shouldn’t
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: "could've", offset: 16 },
                 { text: "would've", offset: 26 },
                 { text: "couldn't've", offset: 36 },
@@ -44,7 +43,7 @@ describe('Util Text', () => {
     test('extract words', () => {
         expect(Text.extractWordsFromText(`
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: 'expect', offset: 13 },
                 { text: 'splitCamelCaseWord', offset: 20 },
                 { text: 'hello', offset: 40 },
@@ -55,7 +54,7 @@ describe('Util Text', () => {
             ]);
         expect(Text.extractWordsFromText(`
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: 'expect', offset: 13 },
                 { text: 'splitCamelCaseWord', offset: 20 },
                 { text: 'hello', offset: 40 },
@@ -66,7 +65,7 @@ describe('Util Text', () => {
             ]);
         expect(Text.extractWordsFromText(`
             expect(splitCamelCaseWord('hello'));
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: 'expect', offset: 13 },
                 { text: 'splitCamelCaseWord', offset: 20 },
                 { text: 'hello', offset: 40 },
@@ -76,7 +75,7 @@ describe('Util Text', () => {
     test('extract words from code', () => {
         expect(Text.extractWordsFromCode(`
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: 'expect', offset: 13 },
                 { text: 'split', offset: 20 },
                 { text: 'Camel', offset: 25 },
@@ -90,7 +89,7 @@ describe('Util Text', () => {
             ]);
         expect(Text.extractWordsFromCode(`
             expect(regExp.match(first_line));
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: 'expect', offset: 13 },
                 { text: 'reg', offset: 20 },
                 { text: 'Exp', offset: 23 },
@@ -100,14 +99,14 @@ describe('Util Text', () => {
             ]);
         expect(Text.extractWordsFromCode(`
             expect(aHELLO);
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: 'expect', offset: 13 },
                 { text: 'a', offset: 20 },
                 { text: 'HELLO', offset: 21 },
             ]);
         expect(Text.extractWordsFromCode(`
             const x = 'shouldn\'t';
-        `).toArray()).to.deep.equal([
+        `).toArray()).toEqual([
                 { text: 'const', offset: 13 },
                 { text: 'x', offset: 19 },
                 { text: 'shouldn\'t', offset: 24 },
@@ -118,24 +117,22 @@ describe('Util Text', () => {
         const words = Text.extractWordsFromCode('var value = HTMLInput.value;')
             .map(({text}) => text)
             .toArray();
-        expect(words).to.deep.equal(['var', 'value', 'HTML', 'Input', 'value']);
+        expect(words).toEqual(['var', 'value', 'HTML', 'Input', 'value']);
     });
 
     test('tests matchCase', () => {
-        expect(Text.matchCase('Apple', 'orange')).to.be.equal('Orange');
-        expect(Text.matchCase('apple', 'ORANGE')).to.be.equal('orange');
-        expect(Text.matchCase('apple', 'orange')).to.be.equal('orange');
-        expect(Text.matchCase('APPLE', 'orange')).to.be.equal('ORANGE');
-        expect(Text.matchCase('ApPlE', 'OrangE')).to.be.equal('OrangE');
-        expect(Text.matchCase('apPlE', 'OrangE')).to.be.equal('orangE');
+        expect(Text.matchCase('Apple', 'orange')).toBe('Orange');
+        expect(Text.matchCase('apple', 'ORANGE')).toBe('orange');
+        expect(Text.matchCase('apple', 'orange')).toBe('orange');
+        expect(Text.matchCase('APPLE', 'orange')).toBe('ORANGE');
+        expect(Text.matchCase('ApPlE', 'OrangE')).toBe('OrangE');
+        expect(Text.matchCase('apPlE', 'OrangE')).toBe('orangE');
     });
 
     test('tests skipping Chinese characters', () => {
         expect(Text.extractWordsFromCode(`
             <a href="http://www.ctrip.com" title="携程旅行网">携程旅行网</a>
-        `).map(wo => wo.text).toArray()).to.deep.equal(
-            ['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']
-        );
+        `).map(wo => wo.text).toArray()).toEqual(['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']);
     });
 
     test('tests skipping Japanese characters', () => {
@@ -143,22 +140,18 @@ describe('Util Text', () => {
             Example text: gitのpackageのみ際インストール
             gitのpackageのみ際インストール
             title="携程旅行网"
-        `).map(wo => wo.text).toArray()).to.deep.equal(
-            ['Example', 'text', 'git', 'package', 'git', 'package', 'title']
-        );
+        `).map(wo => wo.text).toArray()).toEqual(['Example', 'text', 'git', 'package', 'git', 'package', 'title']);
     });
 
     test('tests Greek characters', () => {
         expect(Text.extractWordsFromCode(`
             Γ γ	gamma, γάμμα
-        `).map(wo => wo.text).toArray()).to.deep.equal(
-            ['Γ', 'γ', 'gamma', 'γάμμα']
-            );
+        `).map(wo => wo.text).toArray()).toEqual(['Γ', 'γ', 'gamma', 'γάμμα']);
     });
 
     test('test case of Chinese characters', () => {
-        expect(Text.isUpperCase('携程旅行网')).to.be.false;
-        expect(Text.isLowerCase('携程旅行网')).to.be.false;
+        expect(Text.isUpperCase('携程旅行网')).toBe(false);
+        expect(Text.isLowerCase('携程旅行网')).toBe(false);
     });
 
     test('tests breaking up text into lines', () => {
@@ -171,9 +164,9 @@ describe('Util Text', () => {
         ];
         const sampleText = parts.join('\n');
         const r = Text.extractLinesOfText(sampleText).map(a => a.text).toArray();
-        expect(r.join('')).to.be.equal(parts.join('\n'));
+        expect(r.join('')).toBe(parts.join('\n'));
         const lines = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
-        expect(lines.length).to.be.equal(sampleCode.split('\n').length);
+        expect(lines.length).toBe(sampleCode.split('\n').length);
     });
 
     test('tests breaking up text into lines (single line)', () => {
@@ -181,8 +174,8 @@ describe('Util Text', () => {
         const sampleText = parts.join('\n');
         const r = Text.extractLinesOfText(sampleText).map(a => a.text).toArray();
         const rText = r.join('');
-        expect(rText).to.be.equal(parts.join('\n'));
-        expect(rText).to.be.equal(sampleText);
+        expect(rText).toBe(parts.join('\n'));
+        expect(rText).toBe(sampleText);
     });
 
     test('tests extractLinesOfText', () => {
@@ -190,7 +183,7 @@ describe('Util Text', () => {
         const linesB = Text.extractLinesOfText(sampleCode)
             .map(m => m.text)
             .toArray();
-        expect(linesB).to.be.deep.equal(linesA);
+        expect(linesB).toEqual(linesA);
     });
 
     test('test extractText', () => {
@@ -198,55 +191,55 @@ describe('Util Text', () => {
         const words = Text.extractWordsFromTextOffset(line);
         const results = words.map(wo => Text.extractText(line, wo.offset, wo.offset + wo.text.length)).toArray();
         const expected = words.map(wo => wo.text).toArray();
-        expect(results).to.deep.equal(expected);
+        expect(results).toEqual(expected);
     });
 });
 
 describe('Test the text matching functions', () => {
     test('isUpperCase', () => {
-        expect(Text.isUpperCase('first')).to.be.false;
-        expect(Text.isUpperCase('First')).to.be.false;
-        expect(Text.isUpperCase('FIRST')).to.be.true;
+        expect(Text.isUpperCase('first')).toBe(false);
+        expect(Text.isUpperCase('First')).toBe(false);
+        expect(Text.isUpperCase('FIRST')).toBe(true);
     });
     test('isLowerCase', () => {
-        expect(Text.isLowerCase('first')).to.be.true;
-        expect(Text.isLowerCase('First')).to.be.false;
-        expect(Text.isLowerCase('FIRST')).to.be.false;
+        expect(Text.isLowerCase('first')).toBe(true);
+        expect(Text.isLowerCase('First')).toBe(false);
+        expect(Text.isLowerCase('FIRST')).toBe(false);
     });
     test('isFirstCharacterUpper', () => {
-        expect(Text.isFirstCharacterUpper('first')).to.be.false;
-        expect(Text.isFirstCharacterUpper('First')).to.be.true;
-        expect(Text.isFirstCharacterUpper('FIRST')).to.be.true;
+        expect(Text.isFirstCharacterUpper('first')).toBe(false);
+        expect(Text.isFirstCharacterUpper('First')).toBe(true);
+        expect(Text.isFirstCharacterUpper('FIRST')).toBe(true);
     });
     test('isFirstCharacterLower', () => {
-        expect(Text.isFirstCharacterLower('first')).to.be.true;
-        expect(Text.isFirstCharacterLower('First')).to.be.false;
-        expect(Text.isFirstCharacterLower('FIRST')).to.be.false;
+        expect(Text.isFirstCharacterLower('first')).toBe(true);
+        expect(Text.isFirstCharacterLower('First')).toBe(false);
+        expect(Text.isFirstCharacterLower('FIRST')).toBe(false);
     });
     // cSpell:ignore áello firstname
     test('ucFirst', () => {
-        expect(Text.ucFirst('hello')).to.be.equal('Hello');
-        expect(Text.ucFirst('Hello')).to.be.equal('Hello');
-        expect(Text.ucFirst('áello')).to.be.equal('Áello');
+        expect(Text.ucFirst('hello')).toBe('Hello');
+        expect(Text.ucFirst('Hello')).toBe('Hello');
+        expect(Text.ucFirst('áello')).toBe('Áello');
     });
     test('lcFirst', () => {
-        expect(Text.lcFirst('hello')).to.be.equal('hello');
-        expect(Text.lcFirst('Hello')).to.be.equal('hello');
-        expect(Text.lcFirst('áello')).to.be.equal('áello');
-        expect(Text.lcFirst('Áello')).to.be.equal('áello');
+        expect(Text.lcFirst('hello')).toBe('hello');
+        expect(Text.lcFirst('Hello')).toBe('hello');
+        expect(Text.lcFirst('áello')).toBe('áello');
+        expect(Text.lcFirst('Áello')).toBe('áello');
     });
     test('snakeToCamel', () => {
-        expect(Text.snakeToCamel('first')).to.be.equal('First');
-        expect(Text.snakeToCamel('firstName')).to.be.equal('FirstName');
-        expect(Text.snakeToCamel('first_name')).to.be.equal('FirstName');
-        expect(Text.snakeToCamel('FIRST_NAME')).to.be.equal('FIRSTNAME');
+        expect(Text.snakeToCamel('first')).toBe('First');
+        expect(Text.snakeToCamel('firstName')).toBe('FirstName');
+        expect(Text.snakeToCamel('first_name')).toBe('FirstName');
+        expect(Text.snakeToCamel('FIRST_NAME')).toBe('FIRSTNAME');
     });
     test('camelToSnake', () => {
-        expect(Text.camelToSnake('first')).to.be.equal('first');
-        expect(Text.camelToSnake('firstName')).to.be.equal('first_name');
-        expect(Text.camelToSnake('first_name')).to.be.equal('first_name');
-        expect(Text.camelToSnake('FIRSTName')).to.be.equal('first_name');
-        expect(Text.camelToSnake('FIRSTNAME')).to.be.equal('firstname');
+        expect(Text.camelToSnake('first')).toBe('first');
+        expect(Text.camelToSnake('firstName')).toBe('first_name');
+        expect(Text.camelToSnake('first_name')).toBe('first_name');
+        expect(Text.camelToSnake('FIRSTName')).toBe('first_name');
+        expect(Text.camelToSnake('FIRSTNAME')).toBe('firstname');
     });
 });
 
@@ -267,10 +260,10 @@ describe('Validates offset conversions', () => {
     test('calculateTextDocumentOffsets', () => {
         const offsets = [...getOffsets(sampleCode, 'const')];
         const results = Text.calculateTextDocumentOffsets('uri', sampleCode, offsets);
-        expect(results).to.not.be.empty;
-        expect(results[0].row).to.be.equal(6);
-        expect(results[0].doc).to.be.equal(sampleCode);
-        expect(results[0].col).to.be.equal(1);
+        expect(Object.keys(results)).not.toHaveLength(0);
+        expect(results[0].row).toBe(6);
+        expect(results[0].doc).toBe(sampleCode);
+        expect(results[0].col).toBe(1);
     });
 });
 
