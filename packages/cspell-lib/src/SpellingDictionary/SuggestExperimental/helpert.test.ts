@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as helpers from './helpers';
 import { SuggestionResult, Feature } from './entities';
 import { FeatureMap } from './helpers';
@@ -13,7 +12,7 @@ describe('Validate Suggest Helpers', () => {
         ];
 
         const r = sr.concat([]).sort(helpers.compareResults);
-        expect(r).to.be.deep.equal([sr[3], sr[0], sr[1], sr[2]]);
+        expect(r).toEqual([sr[3], sr[0], sr[1], sr[2]]);
     });
 
     test('test wordToSingleLetterFeatures', () => {
@@ -24,7 +23,7 @@ describe('Validate Suggest Helpers', () => {
         ];
 
         tests.forEach(t => {
-            expect(helpers.wordToSingleLetterFeatures(t.v)).to.be.deep.equal(t.e);
+            expect(helpers.wordToSingleLetterFeatures(t.v)).toEqual(t.e);
         });
     });
 
@@ -38,8 +37,8 @@ describe('Validate Suggest Helpers', () => {
         tests.forEach(t => {
             const map = new FeatureMap();
             helpers.mergeFeatures(map, helpers.wordToSingleLetterFeatures(t.v));
-            expect([...map]).to.be.deep.equal(t.e);
-            expect(map.count).to.be.equal(t.e.map(kvp => kvp[1] as number).reduce((a, b) => a + b, 0));
+            expect([...map]).toEqual(t.e);
+            expect(map.count).toBe(t.e.map(kvp => kvp[1] as number).reduce((a, b) => a + b, 0));
         });
     });
 
@@ -51,7 +50,7 @@ describe('Validate Suggest Helpers', () => {
         ];
 
         tests.forEach(t => {
-            expect(helpers.wordToTwoLetterFeatures(t.v)).to.be.deep.equal(t.e);
+            expect(helpers.wordToTwoLetterFeatures(t.v)).toEqual(t.e);
         });
     });
 
@@ -69,14 +68,14 @@ describe('Validate Suggest Helpers', () => {
         ];
 
         tests.forEach(t => {
-            expect(helpers.segmentString(t.v, t.s)).to.be.deep.equal(t.e);
+            expect(helpers.segmentString(t.v, t.s)).toEqual(t.e);
         });
     });
 
     test('test wordToFeatures', () => {
         const comp = (a: Feature, b: Feature) => a[0].localeCompare(b[0]);
         const features = helpers.wordToFeatures('^hello$');
-        expect([...features].sort(comp)).to.be.deep.equal([
+        expect([...features].sort(comp)).toEqual([
             ['h', 1],
             ['e', 1],
             ['l', 2],
@@ -95,19 +94,19 @@ describe('Validate Suggest Helpers', () => {
     test('test intersectionScore', () => {
         const fA = helpers.wordToFeatures('^hello$');
         const fB = helpers.wordToFeatures('^goodbye$');
-        expect(fA.intersectionScore(fA)).to.be.equal(fA.count);
-        expect(fB.intersectionScore(fB)).to.be.equal(fB.count);
-        expect(fA.intersectionScore(fB)).to.be.equal(fB.intersectionScore(fA));
-        expect(fA.intersectionScore(fB)).to.be.equal(4);
+        expect(fA.intersectionScore(fA)).toBe(fA.count);
+        expect(fB.intersectionScore(fB)).toBe(fB.count);
+        expect(fA.intersectionScore(fB)).toBe(fB.intersectionScore(fA));
+        expect(fA.intersectionScore(fB)).toBe(4);
     });
 
     test('test correlationScore', () => {
         const fA = helpers.wordToFeatures('^hello$');
         const fB = helpers.wordToFeatures('^goodbye$');
-        expect(fA.correlationScore(fA)).to.be.equal(1);
-        expect(fB.correlationScore(fB)).to.be.equal(1);
-        expect(fA.correlationScore(fB)).to.be.equal(fB.correlationScore(fA));
-        expect(fA.correlationScore(fB)).to.be.equal( 4 / (fA.count + fB.count - 4));
+        expect(fA.correlationScore(fA)).toBe(1);
+        expect(fB.correlationScore(fB)).toBe(1);
+        expect(fA.correlationScore(fB)).toBe(fB.correlationScore(fA));
+        expect(fA.correlationScore(fB)).toBe(4 / (fA.count + fB.count - 4));
     });
 
 });

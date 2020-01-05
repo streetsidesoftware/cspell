@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import * as cspell from '../index';
 
 describe('Validate English', () => {
@@ -17,7 +16,7 @@ describe('Validate English', () => {
         return dict.then(dict => {
             const results = dict.suggest('installsallnecessary', 5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 2);
             const sugs = results.map(a => a.word);
-            expect(sugs).to.contain('installs all necessary');
+            expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
         });
     });
 });

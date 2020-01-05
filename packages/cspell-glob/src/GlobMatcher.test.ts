@@ -1,27 +1,26 @@
 import { GlobMatcher, GlobMatch } from './GlobMatcher';
-import { expect } from 'chai';
 import * as path from 'path';
 import mm =  require('micromatch');
 
 describe('Validate assumptions', () => {
     test('path relative', () => {
         const relCrossDevice = path.win32.relative('C:\\user\\home\\project', 'D:\\projects');
-        expect(relCrossDevice).to.be.eq('D:\\projects');
+        expect(relCrossDevice).toBe('D:\\projects');
         const relSubDir = path.win32.relative('/User/home/project', '/User/home/project/fun/with/coding');
-        expect(relSubDir).to.be.equal(path.win32.normalize('fun/with/coding'));
+        expect(relSubDir).toBe(path.win32.normalize('fun/with/coding'));
         const relSubDirPosix = path.posix.relative('/User/home/project', '/User/home/project/fun/with/coding');
-        expect(relSubDirPosix).to.be.equal(path.posix.normalize('fun/with/coding'));
+        expect(relSubDirPosix).toBe(path.posix.normalize('fun/with/coding'));
     });
 
     test('path parse', () => {
         const res1 = path.win32.parse('/user/home/project');
-        expect(res1.root).to.be.equal('/');
+        expect(res1.root).toBe('/');
         const res2 = path.win32.parse('user/home/project');
-        expect(res2.root).to.be.equal('');
+        expect(res2.root).toBe('');
         const res3 = path.win32.parse('C:\\user\\home\\project');
-        expect(res3.root).to.be.equal('C:\\');
+        expect(res3.root).toBe('C:\\');
         const res4 = path.win32.parse('C:user\\home\\project');
-        expect(res4.root).to.be.equal('C:');
+        expect(res4.root).toBe('C:');
     });
 });
 
@@ -56,7 +55,7 @@ describe('Validate Micromatch assumptions', () => {
     testsMicroMatch.forEach(({g: glob, f: filename, e: expectedToMatch}) => {
         test(`Test Micromatch glob: '${glob}', filename: '${filename}' expected: ${expectedToMatch ? 'true' : 'false'}`, () => {
             const reg1 = mm.makeRe(glob);
-            expect(reg1.test(filename)).to.eq(expectedToMatch);
+            expect(reg1.test(filename)).toBe(expectedToMatch);
         });
     })
 });
@@ -71,7 +70,7 @@ describe('Validate Micromatch assumptions', () => {
                 `test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${expect ? 'T' : 'F'}`,
                 () => {
                     const matcher = new GlobMatcher(patterns, root, pathInstance);
-                    expect(matcher.match(filename)).to.be.eq(expected);
+                    expect(matcher.match(filename)).toBe(expected);
                 }
             );
         });
@@ -97,7 +96,7 @@ describe('Tests .gitignore file contents', () => {
         test(
             `Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `,
             () => {
-                expect(matcher.match(filename)).to.be.eq(expected);
+                expect(matcher.match(filename)).toBe(expected);
             }
         );
     }
@@ -106,7 +105,7 @@ describe('Tests .gitignore file contents', () => {
         test(
             `Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `,
             () => {
-                expect(matcher.matchEx(filename)).to.be.deep.eq(expected);
+                expect(matcher.matchEx(filename)).toEqual(expected);
             }
         );
     }

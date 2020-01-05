@@ -1,13 +1,12 @@
-import {expect} from 'chai';
 import * as LangId from './LanguageIds';
 import {genSequence} from 'gensequence';
 
 describe('Validate LanguageIds', () => {
     test('tests looking up a few extensions', () => {
-        expect(LangId.getLanguagesForExt('ts')).to.contain('typescript');
-        expect(LangId.getLanguagesForExt('.tex')).to.contain('latex');
-        expect(LangId.getLanguagesForExt('tex')).to.contain('latex');
-        expect(LangId.getLanguagesForExt('hs')).to.contain('haskell');
+        expect(LangId.getLanguagesForExt('ts')).toEqual(expect.arrayContaining(['typescript']));
+        expect(LangId.getLanguagesForExt('.tex')).toEqual(expect.arrayContaining(['latex']));
+        expect(LangId.getLanguagesForExt('tex')).toEqual(expect.arrayContaining(['latex']));
+        expect(LangId.getLanguagesForExt('hs')).toEqual(expect.arrayContaining(['haskell']));
     });
 
     test('test that all extensions start with a .', () => {
@@ -15,7 +14,7 @@ describe('Validate LanguageIds', () => {
         const badExtensions = genSequence(ids.keys())
             .filter(ext => ext[0] !== '.')
             .toArray();
-        expect(badExtensions, 'All extensions are expected to begin with a .').to.be.empty;
+        expect(Object.keys(badExtensions)).toHaveLength(0);
     });
 
 });

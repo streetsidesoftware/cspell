@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import * as cspell from './index';
 
 describe('Validate the cspell API', () => {
@@ -11,8 +10,8 @@ describe('Validate the cspell API', () => {
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
         return cspell.validateText(text, fileSettings)
             .then(results => {
-                expect(results).to.not.be.empty;
-                expect(results.map(to => to.text)).to.contain('Jansons');
+                expect(Object.keys(results)).not.toHaveLength(0);
+                expect(results.map(to => to.text)).toEqual(expect.arrayContaining(['Jansons']));
             });
     });
 });

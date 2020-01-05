@@ -19,7 +19,7 @@
     "build-schema": "ts-json-schema-generator -r --path src/Settings/CSpellSettingsDef.ts --type CSpellSettings > ../../cspell.schema.json",
     "clean-build": "npm run clean && npm run build && npm run build-dictionaries",
     "build-dictionaries": "npm run build_dictionaries-word-lists",
-    "build_dictionaries-word-lists": "node ../../node_modules/cspell-tools/dist/app.js compile \"./dictionaries/!(words)*.txt\" -o ./dist/dictionaries/",
+    "build_dictionaries-word-lists": "node ../../node_modules/cspell-tools/bin.js compile \"./dictionaries/!(words)*.txt\" -o ./dist/dictionaries/",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
     "tsc": "tsc -p .",

@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import { memorizer } from './Memorizer';
 
 describe('Validate Memorizer', () => {
@@ -11,8 +10,8 @@ describe('Validate Memorizer', () => {
         const calc = memorizer(fn);
         const fnTest = (v: number, expected: number, repeat: number) => {
             for (; repeat > 0; repeat--) {
-                expect(calc(v)).to.be.equal(v);
-                expect(counts.get(v)).to.be.equal(expected);
+                expect(calc(v)).toBe(v);
+                expect(counts.get(v)).toBe(expected);
             }
         };
 
@@ -30,8 +29,8 @@ describe('Validate Memorizer', () => {
         const calc = memorizer(fn, 2);
         const fnTest = (v: number, expected: number, repeat: number) => {
             for (; repeat > 0; repeat--) {
-                expect(calc(v)).to.be.equal(v);
-                expect(counts.get(v)).to.be.equal(expected);
+                expect(calc(v)).toBe(v);
+                expect(counts.get(v)).toBe(expected);
             }
         };
 

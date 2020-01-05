@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as DictSettings from './DictionarySettings';
 import * as fsp from 'fs-extra';
 import * as path from 'path';
@@ -11,11 +10,11 @@ describe('Validate DictionarySettings', () => {
     test('expects default to not be empty', () => {
         const mapDefs = DictSettings.filterDictDefsToLoad(['php', 'wordsEn', 'unknown', 'en_us'], defaultSettings.dictionaryDefinitions!);
         const files = mapDefs.map(a => a[1]).map(def => def.name!);
-        expect(mapDefs).to.be.lengthOf(2);
-        expect(files.filter(a => a.includes('php'))).to.be.lengthOf(1);
-        expect(files.filter(a => a.includes('wordsEn'))).to.be.lengthOf(0);
-        expect(files.filter(a => a.includes('en_us'))).to.be.lengthOf(1);
-        expect(files.filter(a => a.includes('unknown'))).to.be.empty;
+        expect(mapDefs).toHaveLength(2);
+        expect(files.filter(a => a.includes('php'))).toHaveLength(1);
+        expect(files.filter(a => a.includes('wordsEn'))).toHaveLength(0);
+        expect(files.filter(a => a.includes('en_us'))).toHaveLength(1);
+        expect(files.filter(a => a.includes('unknown'))).toHaveLength(0);
         // console.log(mapDefs);
     });
 
@@ -32,7 +31,7 @@ describe('Validate DictionarySettings', () => {
         const expected = ['php', 'en_us'].sort();
         const mapDefs = DictSettings.filterDictDefsToLoad(ids, defaultSettings.dictionaryDefinitions!);
         const dicts = mapDefs.map(a => a[1]).map(def => def.name!).sort();
-        expect(dicts).to.be.deep.equal(expected);
+        expect(dicts).toEqual(expected);
     });
 
     test('tests that the files exist', () => {
@@ -43,20 +42,19 @@ describe('Validate DictionarySettings', () => {
             .map(p => p[1])
             .map(def => def.path!)
             .map(path => fsp.access(path));
-        expect(mapDefs.length).to.be.greaterThan(0);
+        expect(mapDefs.length).toBeGreaterThan(0);
         return Promise.all(access);
     });
 
     test('tests normalizing the dictionary paths', () => {
         const { dictionaryDefinitions } = defaultSettings;
-        expect(dictionaryDefinitions).to.not.be.empty;
+        expect(dictionaryDefinitions).not.toHaveLength(0);
         const defs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
-        expect(defs.length).to.be.equal(dictionaryDefinitions!.length);
+        expect(defs.length).toBe(dictionaryDefinitions!.length);
 
         const basePath = path.join('some', 'dir');
         dictionaryDefinitions![0].path = path.join('~', basePath);
         const tildeDefs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
-        expect(tildeDefs[0].path).to.be.equal(path.join(os.homedir(), basePath));
+        expect(tildeDefs[0].path).toBe(path.join(os.homedir(), basePath));
     });
 });
-

@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import * as Validator from './validator';
 const loremIpsum = require('lorem-ipsum');
 import { CSpellSettings } from './Settings';
@@ -24,7 +23,7 @@ describe('Validator', () => {
         const results = Validator.validateText(text, settings);
         return results.then(results => {
             const words = results.map(({text}) => text);
-            expect(words).to.be.deep.equal(['brouwn', 'jumpped', 'lazzy']);
+            expect(words).toEqual(['brouwn', 'jumpped', 'lazzy']);
         });
     });
 
@@ -35,7 +34,7 @@ describe('Validator', () => {
         const results = Validator.validateText(text, settings);
         return results.then(results => {
             const words = results.map(({text}) => text);
-            expect(words).to.be.deep.equal([]);
+            expect(words).toEqual([]);
         });
     });
 
@@ -44,7 +43,7 @@ describe('Validator', () => {
         const languageId = 'plaintext';
         const settings = {...getSettings(text, languageId), maxNumberOfProblems: 10 };
         const results = Validator.validateText(text, settings);
-        return results.then(results => expect(results).to.be.lengthOf(10));
+        return results.then(results => expect(results).toHaveLength(10));
     });
 
     test('validates reserved words', () => {
@@ -52,7 +51,7 @@ describe('Validator', () => {
         const languageId = 'javascript';
         const settings = {...getSettings(text, languageId), maxNumberOfProblems: 10 };
         const results = Validator.validateText(text, settings);
-        return results.then(results => expect(results).to.be.lengthOf(0));
+        return results.then(results => expect(results).toHaveLength(0));
     });
 
     test('validates regex inclusions/exclusions', () => {
@@ -62,12 +61,12 @@ describe('Validator', () => {
         const results = Validator.validateText(text, settings);
         return results.then(results => {
             const words = results.map(wo => wo.text);
-            expect(words).to.contain('wrongg');
-            expect(words).to.contain('mispelled');
-            expect(words).to.not.contain('xaccd');
-            expect(words).to.not.contain('ctrip');
-            expect(words).to.not.contain('FFEE');
-            expect(words).to.not.contain('nmove');
+            expect(words).toEqual(expect.arrayContaining(['wrongg']));
+            expect(words).toEqual(expect.arrayContaining(['mispelled']));
+            expect(words).toEqual(expect.not.arrayContaining(['xaccd']));
+            expect(words).toEqual(expect.not.arrayContaining(['ctrip']));
+            expect(words).toEqual(expect.not.arrayContaining(['FFEE']));
+            expect(words).toEqual(expect.not.arrayContaining(['nmove']));
         });
     });
 
@@ -78,9 +77,9 @@ describe('Validator', () => {
         const results = Validator.validateText(text, settings);
         return results.then(results => {
             const words = results.map(wo => wo.text);
-            expect(words).to.not.contain('wrongg');
-            expect(words).to.not.contain('mispelled');
-            expect(words).to.contain('mischecked');
+            expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
+            expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
+            expect(words).toEqual(expect.arrayContaining(['mischecked']));
         });
     });
 
@@ -91,9 +90,9 @@ describe('Validator', () => {
         );
         return results.then(results => {
             const words = results.map(wo => wo.text);
-            expect(words).to.not.contain('wrongg');
-            expect(words).to.contain('mispelled');
-            expect(words).to.contain('mischecked');
+            expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
+            expect(words).toEqual(expect.arrayContaining(['mispelled']));
+            expect(words).toEqual(expect.arrayContaining(['mischecked']));
         });
     });
 
@@ -101,9 +100,9 @@ describe('Validator', () => {
         const results = Validator.validateText(sampleCode, { ignoreRegExpList: ['/wrong[/gim', 'mis.*led'] });
         return results.then(results => {
             const words = results.map(wo => wo.text);
-            expect(words).to.contain('wrongg');
-            expect(words).to.not.contain('mispelled');
-            expect(words).to.contain('mischecked');
+            expect(words).toEqual(expect.arrayContaining(['wrongg']));
+            expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
+            expect(words).toEqual(expect.arrayContaining(['mischecked']));
         });
     });
 
@@ -126,7 +125,7 @@ describe('Validator', () => {
         const results = Validator.validateText(text, settings);
         return results.then(results => {
             const words = results.map(({text}) => text);
-            expect(words.sort()).to.be.deep.equal(expected.sort());
+            expect(words.sort()).toEqual(expected.sort());
         });
     });
 
@@ -140,40 +139,40 @@ describe('Validator', () => {
         const results = Validator.validateText(text, settings);
         return results.then(results => {
             const words = results.map(({text}) => text);
-            expect(words.sort()).to.be.deep.equal([]);
+            expect(words.sort()).toEqual([]);
         });
     });
     test('tests calcIncludeExcludeInfo', async () => {
         const words = sampleWords;
         const info = await Validator.checkText(sampleText, { words, ignoreRegExpList: [/The/g]});
         const strings = info.items.map(a => a.text);
-        expect(strings).to.be.length(17);
-        expect(strings.join('')).to.be.equal(sampleText);
+        expect(strings).toHaveLength(17);
+        expect(strings.join('')).toBe(sampleText);
 
         let last = 0;
         info.items.forEach(i => {
-            expect(i.startPos).to.be.equal(last);
+            expect(i.startPos).toBe(last);
             last = i.endPos;
         });
-        expect(last).to.be.equal(sampleText.length);
+        expect(last).toBe(sampleText.length);
     });
 
     test('tests calcIncludeExcludeInfo exclude everything', async () => {
         const words = sampleWords;
         const info = await Validator.checkText(sampleText, { words, ignoreRegExpList: [/(.|\s)+/]});
         const result = info.items.map(a => a.text);
-        expect(result).to.be.length(1);
-        expect(result.join('')).to.be.equal(sampleText);
-        expect(info.items[0].flagIE).to.be.equal(IncludeExcludeFlag.EXCLUDE);
+        expect(result).toHaveLength(1);
+        expect(result.join('')).toBe(sampleText);
+        expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.EXCLUDE);
     });
 
     test('tests calcIncludeExcludeInfo include everything', async () => {
         const words = sampleWords;
         const info = await Validator.checkText(sampleText, { words });
         const result = info.items.map(a => a.text);
-        expect(result).to.be.length(9);
-        expect(result.join('')).to.be.equal(sampleText);
-        expect(info.items[0].flagIE).to.be.equal(IncludeExcludeFlag.INCLUDE);
+        expect(result).toHaveLength(9);
+        expect(result.join('')).toBe(sampleText);
+        expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.INCLUDE);
     });
 });
 
