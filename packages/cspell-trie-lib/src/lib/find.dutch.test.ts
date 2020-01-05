@@ -1,4 +1,4 @@
-import { findWord, PartialFindOptions, FindResult } from './find';
+import { findWord, PartialFindOptions, FindFullResult } from './find';
 
 import * as fs from 'fs-extra';
 import * as zlib from 'zlib';
@@ -27,7 +27,7 @@ describe('Validate findWord', () => {
         .toEqual({ found: 'code', compoundUsed: false, forbidden: false });
     });
 
-    const tests: [string, PartialFindOptions, FindResult][] = [
+    const tests: [string, PartialFindOptions, FindFullResult][] = [
         ['Code', { matchCase: true,  compoundMode: 'none' }, frNotFound()],
         ['code', { matchCase: true,  compoundMode: 'none' }, frFound('code')],
         ['cafe', { matchCase: true,  compoundMode: 'none' }, frNotFound()],
@@ -68,7 +68,7 @@ describe('Validate findWord', () => {
         });
         test(`Find Word case insensitive: ${word}`, async () => {
             const trie = await pTrie;
-            const r = findWord(trie, word, { matchCase: false, compoundMode: 'compound'});
+            const r = findWord(trie, normalizeWordToLowercase(word), { matchCase: false, compoundMode: 'compound'});
             // console.log(r2);
             expect(r.found).toEqual(normalizeWordToLowercase(word));
             expect(r.forbidden).toBe(false);
@@ -88,13 +88,12 @@ describe('Validate findWord', () => {
         });
         test(`Check misspelled words case insensitive: ${word}`, async () => {
             const trie = await pTrie;
-            const r = findWord(trie, word, { matchCase: false, compoundMode: 'compound'});
+            const r = findWord(trie, normalizeWordToLowercase(word), { matchCase: false, compoundMode: 'compound'});
             // console.log(r2);
             expect(r.found).toEqual(false);
             expect(r.forbidden).toBe(false);
         });
      });
-
 });
 
 function sampleMisspellings(): string[] {
@@ -153,11 +152,11 @@ function processText(text: string): string[] {
     return [...new Set(text.replace(/[.0-9,"“():]/g, ' ').split(/\s+/).sort().filter(a => !!a))];
 }
 
-function testCompound(word: string, found: boolean = true): [string, PartialFindOptions, FindResult] {
+function testCompound(word: string, found: boolean = true): [string, PartialFindOptions, FindFullResult] {
     return [word, { matchCase: true, compoundMode: 'compound' }, frCompoundFound(found && word)];
 }
 
-function frNotFound(compoundUsed: boolean = false): FindResult {
+function frNotFound(compoundUsed: boolean = false): FindFullResult {
     return {
         found: false,
         forbidden: false,
@@ -165,7 +164,7 @@ function frNotFound(compoundUsed: boolean = false): FindResult {
     };
 }
 
-function frFound(found: string | false, forbidden: boolean = false, compoundUsed: boolean = false): FindResult {
+function frFound(found: string | false, forbidden: boolean = false, compoundUsed: boolean = false): FindFullResult {
     return {
         found,
         forbidden,
@@ -173,7 +172,7 @@ function frFound(found: string | false, forbidden: boolean = false, compoundUsed
     };
 }
 
-function frCompoundFound(found: string | false, forbidden: boolean = false, compoundUsed: boolean = true): FindResult {
+function frCompoundFound(found: string | false, forbidden: boolean = false, compoundUsed: boolean = true): FindFullResult {
     return frFound(found, forbidden, compoundUsed);
 }
 

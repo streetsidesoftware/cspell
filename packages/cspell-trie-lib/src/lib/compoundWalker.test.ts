@@ -9,7 +9,8 @@ describe('Verify compound walker', () => {
     test('compoundWords', () => {
         const trie = dictionary();
         expect(findWord(trie.root, 'errorerror').forbidden).toBe(true);
-        expect(findWord(trie.root, 'ErrorCodes').found).toBe('errorcodes');
+        expect(findWord(trie.root, 'errorerror').found).toBe('errorerror');
+        expect(findWord(trie.root, 'ErrorCodes').found).toBe(false);
         const words1 = [...compoundWords(trie, 1)];
         expect(words1).toEqual([
             'Code',
@@ -36,7 +37,7 @@ describe('Verify compound walker', () => {
 
     test('test compound edges', () => {
         const trie = dictionary();
-        const words1 = [...filterWalker(compoundWalker(trie), 1)];
+        const words1 = [...walkerToWords(compoundWalker(trie), 1)];
         expect(words1).toEqual([
             'Code',
             'Codes',
@@ -51,9 +52,19 @@ describe('Verify compound walker', () => {
             'Time+',
         ]);
     });
+
+    test('test that it is possible to break up the word into its compounds', () => {
+        const trie = dictionary();
+        const words2 = [...walkerToCompoundWords(compoundWalker(trie), 2)];
+        expect(words2).toEqual(expectedCompounds2());
+        const words3 = [...walkerToCompoundWords(compoundWalker(trie), 3)];
+        expect(words3).toContain('Prefix+Suffix');
+        expect(words3).toContain('Prefix+Middle+Suffix');
+        expect(words3).not.toContain('Codes+Suffix');
+    });
 });
 
-function *filterWalker(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
+function *walkerToWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
     let item = stream.next();
     while (!item.done) {
         const { n, s, c, d } = item.value;
@@ -62,6 +73,32 @@ function *filterWalker(stream: Generator<WalkItem, any, WalkNext>, maxDepth: num
         }
         if (c) {
             yield s + '+';
+        }
+        item = stream.next(d < maxDepth);
+    }
+}
+
+function *walkerToCompoundWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
+    let item = stream.next();
+    const compounds: string[] = [];
+
+    function compLen(n: number) {
+        let cnt = 0;
+        for (let i = 0; i < n; i++) {
+            cnt += compounds[i].length;
+        }
+        return cnt;
+    }
+
+    while (!item.done) {
+        const { n, s, c, d } = item.value;
+        if (c) {
+            // add the word to the compounds on the edge.
+            compounds[d - 1] = s.slice(compLen(d - 1));
+        }
+        if (n.f) {
+            compounds[d] = s.slice(compLen(d));
+            yield compounds.slice(0, d + 1).join('+');
         }
         item = stream.next(d < maxDepth);
     }
@@ -84,49 +121,52 @@ function dictionary(): Trie {
     !errorerror
     `);
 }
-
 function expected2() {
+    return expectedCompounds2().map(a => a.replace('+', ''));
+}
+
+function expectedCompounds2() {
     return [
         'Code',
         'Codes',
-        'CodeCode',
-        'CodeCodes',
-        'CodeError',
-        'CodeErrors',
-        'CodeMessage',
-        'CodeSuffix',
-        'CodeTime',
+        'Code+Code',
+        'Code+Codes',
+        'Code+Error',
+        'Code+Errors',
+        'Code+Message',
+        'Code+Suffix',
+        'Code+Time',
         'Error',
         'Errors',
-        'ErrorCode',
-        'ErrorCodes',
-        'ErrorError',
-        'ErrorErrors',
-        'ErrorMessage',
-        'ErrorSuffix',
-        'ErrorTime',
+        'Error+Code',
+        'Error+Codes',
+        'Error+Error',
+        'Error+Errors',
+        'Error+Message',
+        'Error+Suffix',
+        'Error+Time',
         'Message',
-        'MessageCode',
-        'MessageCodes',
-        'MessageError',
-        'MessageErrors',
-        'MessageMessage',
-        'MessageSuffix',
-        'MessageTime',
-        'PrefixCode',
-        'PrefixCodes',
-        'PrefixError',
-        'PrefixErrors',
-        'PrefixMessage',
-        'PrefixSuffix',
-        'PrefixTime',
+        'Message+Code',
+        'Message+Codes',
+        'Message+Error',
+        'Message+Errors',
+        'Message+Message',
+        'Message+Suffix',
+        'Message+Time',
+        'Prefix+Code',
+        'Prefix+Codes',
+        'Prefix+Error',
+        'Prefix+Errors',
+        'Prefix+Message',
+        'Prefix+Suffix',
+        'Prefix+Time',
         'Time',
-        'TimeCode',
-        'TimeCodes',
-        'TimeError',
-        'TimeErrors',
-        'TimeMessage',
-        'TimeSuffix',
-        'TimeTime',
+        'Time+Code',
+        'Time+Codes',
+        'Time+Error',
+        'Time+Errors',
+        'Time+Message',
+        'Time+Suffix',
+        'Time+Time',
     ];
 }

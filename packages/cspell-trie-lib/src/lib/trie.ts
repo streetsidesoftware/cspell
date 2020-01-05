@@ -24,6 +24,7 @@ import {
     CASE_INSENSITIVE_PREFIX,
     FORBID_PREFIX,
 } from './constants';
+import { findLegacyCompoundWord, findCompoundWord, isForbiddenWord, findLegacyCompoundNode, findCompoundNode } from './find';
 
 export {
     COMPOUND_FIX,
@@ -63,10 +64,14 @@ export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOpti
     return mergeDefaults(options, defaultTrieOptions);
 }
 
+const defaultLegacyMinCompoundLength = 3;
+
 export class Trie {
     private _options: TrieOptions;
+    readonly isLegacy: boolean;
     constructor(readonly root: TrieNode, private count?: number, options?: PartialTrieOptions) {
         this._options = mergeOptionalWithDefaults(options);
+        this.isLegacy = this.calcIsLegacy();
     }
 
     /**
@@ -86,35 +91,44 @@ export class Trie {
         return minCompoundLength ? this.findCompound(text, minLength) : this.findExact(text);
     }
 
-    findCompound(text: string, minCompoundLength = 3, minLength = 0): TrieNode | undefined {
-        let n: TrieNode | undefined = this.root;
-        let p: number;
-        let q: number;
-        for (p = 0; n && n.c && p < text.length; p = q) {
-            n = n.c.get(text[p]);
-            q = p + 1;
-            if (n && n.f && q < text.length && q >= minCompoundLength) {
-                const r = this.findCompound(text.slice(q), minCompoundLength, minCompoundLength);
-                if (r && r.f) {
-                    return r;
-                }
-            }
-        }
-        return p === text.length && p >= minLength ? n : undefined;
+    findCompound(text: string, minCompoundLength = defaultLegacyMinCompoundLength): TrieNode | undefined {
+        const r = findLegacyCompoundNode(this.root, text, minCompoundLength);
+        return r.node;
     }
 
     findExact(text: string): TrieNode | undefined {
-        let n: TrieNode | undefined = this.root;
-        let p: number;
-        for (p = 0; n && n.c && p < text.length; ++p) {
-            n = n.c.get(text[p]);
-        }
-        return p === text.length ? n : undefined;
+        const r = findCompoundNode(this.root, text, this.options.compoundCharacter);
+        return r.node;
     }
 
-    has(word: string, minCompoundLength?: boolean | number): boolean {
-        const n = this.find(word, minCompoundLength);
-        return !!n && isWordTerminationNode(n);
+    has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
+        if (this.isLegacy && minLegacyCompoundLength) {
+            const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : defaultLegacyMinCompoundLength;
+            return !!findLegacyCompoundWord(this.root, word, len).found;
+        }
+        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
+        if (f.found !== false && f.compoundUsed) {
+            // Make sure it is not a forbidden compound.
+            return !isForbiddenWord(this.root, f.found, this.options.forbiddenWordPrefix);
+        }
+        return !!f.found;
+    }
+
+    /**
+     * Determine if a word is in the dictionary.
+     * @param word - the exact word to search for - must be normalized - for non-case sensitive
+     *      searches, word must be lower case with accents removed.
+     * @param caseSensitive - false means searching a dictionary where the words were normalized to lower case and accents removed.
+     * @returns true if the word was found and is not forbidden.
+     */
+    hasWord(word: string, caseSensitive: boolean): boolean {
+        const root = !caseSensitive ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) || this.root : this.root;
+        const f = findCompoundWord(root, word, this.options.compoundCharacter);
+        if (f.found !== false && f.compoundUsed) {
+            // Make sure it is not a forbidden compound.
+            return !isForbiddenWord(this.root, f.found, this.options.forbiddenWordPrefix);
+        }
+        return !!f.found;
     }
 
     /**
@@ -122,8 +136,10 @@ export class Trie {
      */
     completeWord(text: string): Sequence<string> {
         const n = this.find(text);
+        const compoundChar = this.options.compoundCharacter;
+        const subNodes = iteratorTrieWords(n || {}).filter(w => w[w.length - 1] !== compoundChar).map(suffix => text + suffix);
         return genSequence(n && isWordTerminationNode(n) ? [text] : [])
-            .concat(n ? iteratorTrieWords(n).map(suffix => text + suffix) : []);
+            .concat(subNodes);
     }
 
     /**
@@ -175,6 +191,15 @@ export class Trie {
     insert(word: string) {
         insert(word, this.root);
         return this;
+    }
+
+    private calcIsLegacy(): boolean {
+        const c = this.root.c;
+        return !(
+            c?.get(this._options.compoundCharacter) ||
+            c?.get(this._options.stripCaseAndAccentsPrefix) ||
+            c?.get(this._options.forbiddenWordPrefix)
+        );
     }
 
     static create(

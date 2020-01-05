@@ -9,19 +9,19 @@ const sampleFile = fsp.readFile(sampleFilename, 'UTF-8').then(buffer => buffer.t
 
 describe('Validate that Go files are correctly checked.', () => {
     jest.setTimeout(10000);
-    test('Tests the default configuration', () => {
-        return sampleFile.then(text => {
-            expect(text).to.not.be.empty;
-            const ext = '.go';
-            const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = cspell.getDefaultSettings();
-            const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-            return cspell.validateText(text, fileSettings)
-                .then(results => {
-                    expect(results).to.be.length(1);
-                    /* cspell:ignore garbbage */
-                    expect(results.map(t => t.text)).to.contain('garbbage');
-                });
-        });
+    test('Tests the default configuration', async () => {
+        const text = await sampleFile;
+        expect(text).to.not.be.empty;
+        const ext = '.go';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = cspell.getDefaultSettings();
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        // cspell:ignore weirdd garbbage
+        const results1 = await cspell.validateText('some weirdd garbbage', fileSettings);
+        expect(results1.map(t => t.text)).to.contain('weirdd');
+        expect(results1.map(t => t.text)).to.contain('garbbage');
+        const results = await cspell.validateText(text, fileSettings);
+        expect(results).to.be.length(1);
+        expect(results.map(t => t.text)).to.contain('garbbage');
     });
 });
