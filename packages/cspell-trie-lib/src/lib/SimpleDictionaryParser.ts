@@ -2,7 +2,7 @@ import { operators } from 'gensequence';
 import { normalizeWordToLowercase, normalizeWord } from './util';
 import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, FORBID_PREFIX, CASE_INSENSITIVE_PREFIX, LINE_COMMENT } from './constants';
 import { Trie } from './trie';
-import { buildTrie } from './TrieBuilder';
+import { buildTrieFast } from './TrieBuilder';
 
 export interface ParseDictionaryOptions {
     compoundCharacter: string;
@@ -79,7 +79,7 @@ export function parseDictionaryLines(lines: Iterable<string>, options: ParseDict
 
 export function parseDictionary(text: string, options: ParseDictionaryOptions = _defaultOptions): Trie {
     const lines = parseDictionaryLines(text.split('\n'), options);
-    return buildTrie([...new Set(lines)].sort(), {
+    return buildTrieFast([...new Set(lines)].sort(), {
         compoundCharacter:          options.compoundCharacter,
         compoundOptionalCharacter:  options.optionalCompoundCharacter,
         forbiddenWordPrefix:        options.forbiddenPrefix,

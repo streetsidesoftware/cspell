@@ -1,9 +1,26 @@
 import { TrieNode } from './TrieNode';
 import { Trie, PartialTrieOptions, TrieOptions, mergeOptionalWithDefaults } from './trie';
 import { consolidate } from './consolidate';
+import { createTriFromList } from './util';
 
+/**
+ * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie
+ * by finding common endings.
+ * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
+ * @param trieOptions options for the Trie
+ */
 export function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
     return new TrieBuilder(words, trieOptions).build();
+}
+
+/**
+ * Builds a Trie from a Iterable<string>. NO attempt a reducing the size of the Trie is done.
+ * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
+ * @param trieOptions options for the Trie
+ */
+export function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
+    const root = createTriFromList(words);
+    return new Trie(root, undefined, trieOptions);
 }
 
 interface PathNode {
