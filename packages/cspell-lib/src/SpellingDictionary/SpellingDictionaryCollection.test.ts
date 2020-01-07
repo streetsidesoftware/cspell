@@ -1,6 +1,8 @@
 import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
-import { createSpellingDictionary, SpellingDictionaryFromTrie, CompoundWordsMethod } from './SpellingDictionary';
+import { CompoundWordsMethod } from './SpellingDictionaryMethods';
+import { createSpellingDictionary } from './createSpellingDictionary';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = ['', 'apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry'];
@@ -147,4 +149,3 @@ describe('Verify using multiple dictionaries', () => {
     });
 
 });
-

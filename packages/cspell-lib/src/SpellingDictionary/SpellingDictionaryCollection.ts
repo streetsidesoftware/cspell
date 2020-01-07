@@ -1,19 +1,15 @@
 import {
     CompoundWordsMethod,
-    SpellingDictionary,
-    SpellingDictionaryOptions,
     SuggestionCollector,
     suggestionCollector,
     SuggestionResult,
-    HasOptions,
     hasOptionToSearchOption,
-    SearchOptions,
-    SuggestOptions,
     defaultNumSuggestions,
     SuggestArgs,
     regexPrefix,
     PREFIX_NO_CASE,
-} from './SpellingDictionary';
+} from './SpellingDictionaryMethods';
+import { SpellingDictionary, HasOptions, SearchOptions, SuggestOptions, SpellingDictionaryOptions } from './SpellingDictionary';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
 

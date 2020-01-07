@@ -1,4 +1,6 @@
-import { createSpellingDictionary, SpellingDictionaryFromTrie, __testMethods } from './SpellingDictionary';
+import { __testMethods } from './SpellingDictionaryMethods';
+import { createSpellingDictionary } from "./createSpellingDictionary";
+import { SpellingDictionaryFromTrie } from "./SpellingDictionaryFromTrie";
 import { Trie } from 'cspell-trie-lib';
 import { FunctionArgs } from '../util/types';
 
