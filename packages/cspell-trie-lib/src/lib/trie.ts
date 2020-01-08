@@ -106,12 +106,13 @@ export class Trie {
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        if (this.isLegacy && minLegacyCompoundLength) {
+        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
+        if (!!f.found) return true;
+        if (minLegacyCompoundLength) {
             const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : defaultLegacyMinCompoundLength;
             return !!findLegacyCompoundWord(this.root, word, len).found;
         }
-        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
-        return !!f.found;
+        return false;
     }
 
     /**
@@ -165,7 +166,7 @@ export class Trie {
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
     suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[] {
-        return suggest(this.root, text, maxNumSuggestions, compoundMethod, numChanges);
+        return suggest(this.getSuggestRoot(), text, maxNumSuggestions, compoundMethod, numChanges);
     }
 
     /**
@@ -174,7 +175,7 @@ export class Trie {
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
-        collector.collect(genSuggestions(this.root, collector.word, compoundMethod));
+        collector.collect(genSuggestions(this.getSuggestRoot(), collector.word, compoundMethod));
     }
 
     /**
@@ -195,6 +196,16 @@ export class Trie {
     insert(word: string) {
         insert(word, this.root);
         return this;
+    }
+
+    private getSuggestRoot(): TrieNode {
+        if (!this.root.c) return {};
+        const blockNodes = new Set([
+            this._options.compoundCharacter,
+            this._options.forbiddenWordPrefix,
+            this._options.stripCaseAndAccentsPrefix,
+        ]);
+        return { c: new Map([...this.root.c].filter(([k]) => !blockNodes.has(k)))};
     }
 
     private calcIsLegacy(): boolean {
