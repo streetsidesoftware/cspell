@@ -174,12 +174,14 @@ describe('Validate Trie Class', () => {
         expect(trie.hasWord('beginend', false)).toBe(true); // cspell:disable-line
 
         // Forbidden word
-        expect(trie.hasWord('playtime', true)).toBe(false);
-        expect(trie.hasWord('playtime', false)).toBe(false);
+        expect(trie.isForbiddenWord('playtime')).toBe(true);
+        expect(trie.isForbiddenWord('Playtime')).toBe(false);
+        expect(trie.hasWord('playtime', true)).toBe(true);
+        expect(trie.hasWord('playtime', false)).toBe(true);
         expect(trie.hasWord('playmiddletime', false)).toBe(true); // cspell:disable-line
 
         // Check parity with has
-        expect(trie.has('playtime')).toBe(false);
+        expect(trie.has('playtime')).toBe(true);
         expect(trie.has('play+time')).toBe(false);
         expect(trie.has('play')).toBe(true);
         expect(trie.has('play+')).toBe(true);

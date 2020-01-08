@@ -82,6 +82,10 @@ export class Trie {
         return this.count;
     }
 
+    isSizeKnown(): boolean {
+        return this.count !== undefined;
+    }
+
     get options() {
         return this._options;
     }
@@ -107,10 +111,6 @@ export class Trie {
             return !!findLegacyCompoundWord(this.root, word, len).found;
         }
         const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
-        if (f.found !== false && f.compoundUsed) {
-            // Make sure it is not a forbidden compound.
-            return !isForbiddenWord(this.root, f.found, this.options.forbiddenWordPrefix);
-        }
         return !!f.found;
     }
 
@@ -124,11 +124,15 @@ export class Trie {
     hasWord(word: string, caseSensitive: boolean): boolean {
         const root = !caseSensitive ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) || this.root : this.root;
         const f = findCompoundWord(root, word, this.options.compoundCharacter);
-        if (f.found !== false && f.compoundUsed) {
-            // Make sure it is not a forbidden compound.
-            return !isForbiddenWord(this.root, f.found, this.options.forbiddenWordPrefix);
-        }
         return !!f.found;
+    }
+
+    /**
+     * Determine if a word is in the forbidden word list.
+     * @param word word to lookup.
+     */
+    isForbiddenWord(word: string): boolean {
+        return isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix);
     }
 
     /**
