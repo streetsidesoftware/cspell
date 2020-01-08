@@ -8,11 +8,13 @@ describe('Verify using multiple dictionaries', () => {
     const wordsA = ['', 'apple', 'banana', 'orange', 'pear', 'pineapple', 'mango', 'avocado', 'grape', 'strawberry', 'blueberry', 'blackberry'];
     const wordsB = ['ape', 'lion', 'tiger', 'elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
+    const wordsD = ['red*', 'green*', 'blue*', 'pink*', 'black*', '*berry', '+-fruit'];
     test('checks for existence', async () => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
             createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsD, 'wordsD', 'test'),
         ]);
 
         const dictCollection = new SpellingDictionaryCollection(dicts, 'test', ['Avocado']);
@@ -20,7 +22,10 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.has('tree')).toBe(false);
         expect(dictCollection.has('avocado')).toBe(false);
         expect(dictCollection.has('')).toBe(false);
-        expect(dictCollection.size).toEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
+        expect(dictCollection.has('red-fruit')).toBe(true);
+        expect(dictCollection.has('-fruit')).toBe(false);
+        expect(dictCollection.has('blackberry')).toBe(true);
+        expect(dictCollection.size).toBeGreaterThanOrEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
     });
 
     test('checks for suggestions', async () => {

@@ -13,9 +13,8 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     constructor(readonly trie: Trie, readonly name: string, readonly options: SpellingDictionaryOptions = {}, readonly source = 'from trie', size?: number) {
-        trie.root.f = 0;
         this.mapWord = createMapper(options.repMap || []);
-        this.isDictionaryCaseSensitive = options.caseSensitive || false;
+        this.isDictionaryCaseSensitive = options.caseSensitive || !trie.isLegacy;
         this._size = size || 0;
     }
     public get size() {
@@ -40,12 +39,15 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const { ignoreCase = true } = searchOptions;
         return this._has(word, useCompounds, ignoreCase);
     }
-    private _has = memorizer((word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) => this.hasAnyForm(word, useCompounds, ignoreCase), SpellingDictionaryFromTrie.cachedWordsLimit);
+    private _has = memorizer(
+        (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
+        this.hasAnyForm(word, useCompounds, ignoreCase), SpellingDictionaryFromTrie.cachedWordsLimit
+    );
     private hasAnyForm(word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) {
         const mWord = this.mapWord(word);
         const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
         for (const w of forms) {
-            if (this.trie.has(w, false)) {
+            if (this.trie.hasWord(w, !ignoreCase)) {
                 return true;
             }
         }

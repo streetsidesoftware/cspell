@@ -40,46 +40,30 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
     // if (!isDictionaryCaseSensitive) {
     //     return [word.toLowerCase()];
     // }
+    const forms = new Set<string>();
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
-    const wordNa = removeAccents(word);
     const wordLcNa = removeAccents(wordLc);
-    const forms = new Set<string>();
-    function add(w: string, prefix: string = '') {
-        forms.add(prefix + w);
-    }
-
-    if (!isDictionaryCaseSensitive) {
-        add(wordLc);
-    }
-    add(word);
-
-    // HOUSE -> House, house
-    if (isUpperCase(word)) {
-        add(wordLc);
-        add(ucFirst(wordLc));
-    }
-
-    if (!isDictionaryCaseSensitive) {
-        add(wordLc);
-        add(wordNa);
-        add(wordLcNa);
-        return [ ...forms ];
-    }
-
-    // House -> house
-    if (word === ucFirst(wordLc)) {
-        add(wordLc);
-    }
-
-    // Café -> >café, >cafe
     if (ignoreCase) {
-        add(wordNa, PREFIX_NO_CASE);
-        add(wordLcNa, PREFIX_NO_CASE);
-        if (isUpperCase(word)) {
-            add(ucFirst(wordLcNa), PREFIX_NO_CASE);
+        if (isDictionaryCaseSensitive) {
+            forms.add(wordLcNa);
+        } else {
+            forms.add(wordLc);
+            forms.add(wordLcNa);
+        }
+    } else {
+        if (isDictionaryCaseSensitive) {
+            forms.add(word);
+            forms.add(wordLc);
+            // HOUSE -> House, house
+            if (isUpperCase(word)) {
+                forms.add(ucFirst(wordLc));
+            }
+        } else {
+            forms.add(wordLc);
         }
     }
+
     return [ ...forms ];
 }
 
