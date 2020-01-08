@@ -33,6 +33,10 @@ export function parseDictionaryLines(lines: Iterable<string>, options: ParseDict
 
     const regexComment = new RegExp(escapeRegEx(commentCharacter) + '.*', 'g');
 
+    function filterLines(line: any | string): line is string {
+        return typeof line === 'string';
+    }
+
     function removeComments(line: string): string {
         return line.replace(regexComment, '').trim();
     }
@@ -67,6 +71,7 @@ export function parseDictionaryLines(lines: Iterable<string>, options: ParseDict
     }
 
     const processLines = operators.pipe(
+        operators.filter(filterLines),
         operators.map(removeComments),
         operators.filter(filterEmptyLines),
         operators.concatMap(mapOptionalPrefix),
