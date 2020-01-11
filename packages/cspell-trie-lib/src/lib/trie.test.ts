@@ -149,6 +149,19 @@ describe('Validate Trie Class', () => {
         expect(trieModern.isLegacy).toBe(false);
     });
 
+    test('isSizeKnown', () => {
+        const trieModern = parseDictionary(`
+        # Sample Word List
+        begin*
+        *end
+        café
+        `);
+
+        expect(trieModern.isSizeKnown()).toBe(false);
+        expect(trieModern.size()).toBe(10);
+        expect(trieModern.isSizeKnown()).toBe(true);
+    });
+
     test('hasWord', () => {
         const trie = parseDictionary(`
         # Sample Word List
