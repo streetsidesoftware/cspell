@@ -5,17 +5,15 @@ import {
 } from './suggest';
 import { readTrie } from './dictionaries.test.helper';
 
-
 function getTrie() {
     return readTrie('cspell-dict-en_us');
 }
-
 
 const timeout = 10000;
 
 describe('Validate English Suggestions', () => {
 
-    test('Tests suggestions', async () => {
+    test('Tests suggestions "joyful"', async () => {
         jest.setTimeout(timeout);
         const trie = await getTrie();
         const collector = suggestionCollector('joyful', 8, undefined, 1);
@@ -30,7 +28,7 @@ describe('Validate English Suggestions', () => {
         expect(suggestions[0]).toBe('joyful');
     });
 
-    test('Tests suggestions', async () => {
+    test('Tests suggestions "joyfull"', async () => {
         jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore joyfull
@@ -98,6 +96,26 @@ describe('Validate English Suggestions', () => {
     });
 
     // Takes a long time.
+    test('Tests long compound suggestions `testscomputesuggestions`', async () => {
+        jest.setTimeout(timeout);
+        const trie = await getTrie();
+        // cspell:ignore testscomputesuggestions
+        const collector = suggestionCollector('testscomputesuggestions', 2, undefined, 3, true);
+        collector.collect(genCompoundableSuggestions(
+            trie.root,
+            collector.word,
+            CompoundWordsMethod.SEPARATE_WORDS
+        ));
+        const results = collector.suggestions;
+        const suggestions = results.map(s => s.word);
+        expect(suggestions).toHaveLength(collector.maxNumSuggestions);
+        expect(suggestions).toEqual([
+            'tests compute suggestions', 'test compute suggestions'
+        ]);
+        expect(suggestions[0]).toBe('tests compute suggestions');
+    });
+
+    // Takes a long time.
     test('Tests long compound suggestions `testscompundsuggestions`', async () => {
         jest.setTimeout(timeout);
         const trie = await getTrie();
@@ -110,8 +128,6 @@ describe('Validate English Suggestions', () => {
         ));
         const results = collector.suggestions;
         const suggestions = results.map(s => s.word);
-        // console.log('Results:');
-        // console.log(results.map((r, i) => `${i} ${r.cost} ${r.word}`).join('\n'));
         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         expect(suggestions).toEqual(expect.arrayContaining(['tests compound suggestions']));
         expect(suggestions[0]).toBe('tests compound suggestions');

@@ -86,10 +86,10 @@ export function* genCompoundableSuggestions(
     const stack: Range[] = [];
     const x = ' ' + word;
     const mx = x.length - 1;
-    const specialCosts: { [index: string]: number } = {
-        [WORD_SEPARATOR]: insertSpaceCost,
-        [JOIN_SEPARATOR]: insertSpaceCost,
-    };
+    const specialCosts = new Map([
+        [WORD_SEPARATOR, insertSpaceCost],
+        [JOIN_SEPARATOR, insertSpaceCost],
+    ]);
 
     let costLimit: MaxCost = Math.min(bc * word.length / 2, bc * maxNumChanges);
     let a: number = 0;
@@ -145,7 +145,7 @@ export function* genCompoundableSuggestions(
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
         const c = bc - d;
-        const ci = c + (specialCosts[w] || 0);
+        const ci = c + (specialCosts.get(w) || 0);
 
         // Setup first column
         matrix[d] = matrix[d] || [];
@@ -226,18 +226,19 @@ export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult):
 export interface SuggestionCollector {
     collect: (src: SuggestionIterator) => void;
     add: (suggestion: SuggestionResult) => SuggestionCollector;
-    // (suggestion: SuggestionResult): MaxCost;
     readonly suggestions: SuggestionResult[];
     readonly maxCost: number;
     readonly word: string;
     readonly maxNumSuggestions: number;
+    readonly includesTies: boolean;
 }
 
 export function suggestionCollector(
     wordToMatch: string,
     maxNumSuggestions: number,
-    filter: (word: string) => boolean = () => true,
-    changeLimit: number = maxNumChanges
+    filter: (word: string, cost: number) => boolean = () => true,
+    changeLimit: number = maxNumChanges,
+    includeTies: boolean = false,
 ): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = Math.min(baseCost * wordToMatch.length / 2, baseCost * changeLimit);
@@ -249,12 +250,12 @@ export function suggestionCollector(
             return;
         }
         const sorted = [...sugs.values()].sort(compSuggestionResults);
-        let i = sorted.length - 1;
-        for (const toRemove = sorted[i]; i >= maxNumSuggestions && sorted[i].cost === toRemove.cost; --i) {
+        let i = maxNumSuggestions - 1;
+        maxCost = sorted[i].cost;
+        for (; i < sorted.length && sorted[i].cost <= maxCost; ++i) {}
+        for (; i < sorted.length; ++i) {
             sugs.delete(sorted[i].word);
         }
-        const maxSug = sorted[i];
-        maxCost = maxSug.cost;
     }
 
     function adjustCost(sug: SuggestionResult): SuggestionResult {
@@ -267,7 +268,7 @@ export function suggestionCollector(
 
     function collector(suggestion: SuggestionResult): MaxCost {
         const {word, cost} = adjustCost(suggestion);
-        if (cost <= maxCost && filter(suggestion.word)) {
+        if (cost <= maxCost && filter(suggestion.word, cost)) {
             if (sugs.has(word)) {
                 const known = sugs.get(word)!;
                 known.cost = Math.min(known.cost, cost);
@@ -292,7 +293,7 @@ export function suggestionCollector(
 
     function suggestions() {
         const sorted = [...sugs.values()].sort(compSuggestionResults);
-        if (sorted.length > maxNumSuggestions) {
+        if (!includeTies && sorted.length > maxNumSuggestions) {
             sorted.length = maxNumSuggestions;
         }
         return sorted;
@@ -305,6 +306,7 @@ export function suggestionCollector(
         get maxCost() { return maxCost; },
         get word() { return wordToMatch; },
         get maxNumSuggestions() { return maxNumSuggestions; },
+        includesTies: includeTies,
     };
 }
 
