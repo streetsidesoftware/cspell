@@ -41,10 +41,10 @@ commander
             .filter(a => !!a);
 
         notify('Processing Trie');
-        const root = wordsRx.reduce((node: Trie.TrieNode, word: string) => Trie.insert(word, node), {} as Trie.TrieNode);
+        const trie = Trie.buildTrie(wordsRx);
 
         notify('Export Trie');
-        const serialStream = iterableToStream(Trie.serializeTrie(root, (base - 0) || 32));
+        const serialStream = iterableToStream(Trie.serializeTrie(trie.root, (base - 0) || 32));
         const outputStream = await pOutputStream;
         return new Promise((resolve) => {
             serialStream.pipe(outputStream).on('finish', () => resolve());

@@ -33,6 +33,7 @@ export function impersonateCollector(collector: SuggestionCollector, word: strin
         get maxCost() { return collector.maxCost; },
         get word() { return word; },
         get maxNumSuggestions() { return collector.maxNumSuggestions; },
+        includesTies: false,
     };
 }
 
