@@ -1,7 +1,7 @@
 import * as Text from './util/text';
 import { TextOffset } from './util/text';
 import * as TextRange from './util/TextRange';
-import { SpellingDictionary, HasOptions } from './SpellingDictionary';
+import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDictionary';
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 

@@ -1,9 +1,26 @@
-import { TrieNode } from './TrieNode';
-import { Trie, PartialTrieOptions, TrieOptions, mergeOptionalWithDefaults } from './trie';
+import { TrieNode, TrieRoot } from './TrieNode';
+import { Trie, PartialTrieOptions, TrieOptions } from './trie';
 import { consolidate } from './consolidate';
+import { createTriFromList, mergeOptionalWithDefaults, trieNodeToRoot, createTrieRoot } from './util';
 
+/**
+ * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie
+ * by finding common endings.
+ * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
+ * @param trieOptions options for the Trie
+ */
 export function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
     return new TrieBuilder(words, trieOptions).build();
+}
+
+/**
+ * Builds a Trie from a Iterable<string>. NO attempt a reducing the size of the Trie is done.
+ * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
+ * @param trieOptions options for the Trie
+ */
+export function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
+    const root = createTriFromList(words, trieOptions);
+    return new Trie(root, undefined);
 }
 
 interface PathNode {
@@ -35,12 +52,12 @@ export class TrieBuilder {
         }
     }
 
-    private set _root(n: TrieNode) {
+    private set _root(n: TrieRoot) {
         this.lastPath[0].n = n;
     }
 
-    private get _root() {
-        return this.lastPath[0].n;
+    private get _root(): TrieRoot {
+        return trieNodeToRoot(this.lastPath[0].n, this.trieOptions);
     }
 
     private signature(n: TrieNode): string {
@@ -194,7 +211,7 @@ export class TrieBuilder {
      * Resets the builder
      */
     reset() {
-        this._root = { f: undefined, c: undefined };
+        this._root = createTrieRoot(this.trieOptions);
         this.cached.clear();
         this.signatures.clear();
     }

@@ -1,4 +1,6 @@
-import { createSpellingDictionary, SpellingDictionaryFromTrie, __testMethods } from './SpellingDictionary';
+import { __testMethods } from './SpellingDictionaryMethods';
+import { createSpellingDictionary } from './createSpellingDictionary';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { Trie } from 'cspell-trie-lib';
 import { FunctionArgs } from '../util/types';
 
@@ -131,28 +133,29 @@ describe('Validate wordSearchForms', () => {
         type TestCase = FunctionArgs<typeof testCase>;
         // cspell:ignore café
         const tests: TestCase[] = [
+            // word, dic is case sensitive, ignoreCase on lookup, expected
             ['house', false, false, ['house']],
-            ['House', false, false, ['House', 'house']],
-            ['House', false, false, ['House', 'house']],
+            ['House', false, false, ['house']],
+            ['House', false, false, ['house']],
             ['House', true,  false, ['House', 'house']],
-            ['HOUSE', false, false, ['HOUSE', 'House', 'house']],
+            ['HOUSE', false, false, ['house']],
             ['HOUSE', true,  false, ['HOUSE', 'House', 'house']],
-            ['café',  false, false, ['cafe', 'café']],
+            ['café',  false, false, ['café']],
             ['café',  true,  false, ['café']],
-            ['café',  true,  true,  ['café', '>cafe']],
-            ['Café',  false, false, ['Cafe', 'Café', 'cafe', 'café']],
-            ['Café',  false, true,  ['Café', 'Cafe', 'cafe', 'café']],
+            ['café',  true,  true,  ['cafe']],
+            ['Café',  false, false, ['café']],
+            ['Café',  false, true,  ['cafe', 'café']],
             ['Café',  true,  false, ['Café', 'café']],
-            ['Café',  true,  true,  ['Café', '>Cafe', '>cafe', 'café']],
-            ['CAFÉ',  false, false, ['CAFÉ', 'CAFE', 'Café', 'café', 'cafe']],
-            ['CAFÉ',  false, true,  ['CAFÉ', 'CAFE', 'Café', 'café', 'cafe']],
+            ['Café',  true,  true,  ['cafe']],
+            ['CAFÉ',  false, false, ['café']],
+            ['CAFÉ',  false, true,  ['cafe', 'café']],
             ['CAFÉ',  true,  false, ['CAFÉ', 'Café', 'café']],
-            ['CAFÉ',  true,  true,  ['CAFÉ', 'Café', 'café', '>CAFE', '>Cafe', '>cafe']],
+            ['CAFÉ',  true,  true,  ['cafe']],
             // Make sure all accent forms work.
-            ['café'.normalize(), false, false, ['cafe', 'café']],
-            ['café'.normalize('NFD'), false, false, ['cafe', 'café']],
-            ['café'.normalize('NFKC'), false, false, ['cafe', 'café']],
-            ['café'.normalize('NFKD'), false, false, ['cafe', 'café']],
+            ['café'.normalize(), false, false, ['café']],
+            ['café'.normalize('NFD'), false, false, ['café']],
+            ['café'.normalize('NFKC'), false, false, ['café']],
+            ['café'.normalize('NFKD'), false, false, ['café']],
         ];
         tests.forEach(t => testCase(...t));
 });
@@ -187,9 +190,6 @@ describe('Verify Case Sensitive Dictionaries', () => {
         const sugs = dict.suggest('kuln'); // cspell:disable-line
         const sugWords = sugs.map(s => s.word);
         expect(sugWords).toEqual([
-            'koln',
-            'köln',
-            'Koln',
             'Köln',
         ]);
     });

@@ -1,7 +1,8 @@
 import { DictionaryDefinition, DictionaryId, CSpellUserSettings } from '../Settings';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import { loadDictionary } from './DictionaryLoader';
-import { SpellingDictionary, createSpellingDictionary } from './SpellingDictionary';
+import { createSpellingDictionary } from "./createSpellingDictionary";
+import { SpellingDictionary } from "./SpellingDictionary";
 import { createCollectionP } from './SpellingDictionaryCollection';
 import { SpellingDictionaryCollection } from './index';
 

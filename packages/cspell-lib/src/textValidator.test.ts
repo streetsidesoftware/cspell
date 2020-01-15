@@ -1,6 +1,6 @@
 import { validateText, hasWordCheck, calcTextInclusionRanges, _testMethods, CheckOptions } from './textValidator';
 import { createCollection } from './SpellingDictionary';
-import { createSpellingDictionary } from './SpellingDictionary';
+import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
 import * as Text from './util/text';
 import { genSequence } from 'gensequence';

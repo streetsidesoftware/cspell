@@ -1,14 +1,25 @@
 import {Trie} from './trie';
-import {readTrieFile} from './reader.test.helper';
+import {readTrieFileFromConfig, readTrieFile} from './reader.test.helper';
+import * as path from 'path';
 
-const tries: Map<string, Promise<Trie>> = new Map();
+const tries = new Map<string, Promise<Trie>>();
 
 export function readTrie(name: string) {
     if (!tries.has(name)) {
         const pkg = require(name);
-        tries.set(name, readTrieFile(pkg.getConfigLocation()));
+        tries.set(name, readTrieFileFromConfig(pkg.getConfigLocation()));
     }
 
     return tries.get(name)!;
 }
 
+
+const sampleTries = new Map<string, Promise<Trie>>();
+const samplesLocation = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
+
+export function readSampleTrie(name: string) {
+    if (!sampleTries.has(name)) {
+        sampleTries.set(name, readTrieFile(path.resolve(samplesLocation, name)));
+    }
+    return sampleTries.get(name)!;
+}

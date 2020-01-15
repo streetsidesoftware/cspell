@@ -98,9 +98,8 @@ function compileSimpleWordListSeq(words: Sequence<string>): Sequence<string> {
 export function normalizeWordsToTrie(
     words: Sequence<string>,
     normalizer: Normalizer = normalizeWords
-): Trie.TrieNode {
-    const trie = Trie.buildTrie(normalizer(words));
-    return trie.root;
+): Trie.TrieRoot {
+    return Trie.buildTrie(normalizer(words)).root;
 }
 
 export interface CompileTrieOptions extends CompileOptions {

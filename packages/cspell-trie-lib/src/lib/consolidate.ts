@@ -1,10 +1,11 @@
-import { TrieNode, FLAG_WORD } from './TrieNode';
+import { TrieNode, FLAG_WORD, TrieRoot } from './TrieNode';
+import { trieNodeToRoot } from './util';
 
 /**
  * Consolidate to DAWG
  * @param root the root of the Trie tree
  */
-export function consolidate(root: TrieNode): TrieNode {
+export function consolidate(root: TrieRoot): TrieRoot {
     let count: number = 0;
     const signatures = new Map<string, TrieNode>();
     const cached = new Map<TrieNode, number>();
@@ -89,6 +90,5 @@ export function consolidate(root: TrieNode): TrieNode {
     const eow = findEow(root) || { f: FLAG_WORD, c: undefined };
     signatures.set(signature(eow), eow);
     cached.set(eow, count++);
-    root = process(root);
-    return root;
+    return trieNodeToRoot(process(root), root);
 }

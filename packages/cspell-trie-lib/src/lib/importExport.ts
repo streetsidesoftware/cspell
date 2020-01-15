@@ -1,5 +1,5 @@
 import { Sequence, genSequence } from 'gensequence';
-import { TrieNode } from './TrieNode';
+import { TrieRoot } from './TrieNode';
 import * as iv1 from './importExportV1';
 import * as iv2 from './importExportV2';
 import * as iv3 from './importExportV3';
@@ -10,7 +10,7 @@ export interface ExportOptions {
     version?: number;
 }
 
-type Serializer = (root: TrieNode, options?: number | ExportOptions) => Sequence<string>;
+type Serializer = (root: TrieRoot, options?: number | ExportOptions) => Sequence<string>;
 
 const serializers: Serializer[] = [
     iv1.serializeTrie,
@@ -32,7 +32,7 @@ const deserializers = [
  * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
-export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
     const version = typeof options !== 'number' && options.version ? options.version : 0;
     const method = serializers[version];
     if (!method) {
@@ -43,7 +43,7 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
 
 
 
-export function importTrie(lines: Iterable<string> | IterableIterator<string>): TrieNode {
+export function importTrie(lines: Iterable<string> | IterableIterator<string>): TrieRoot {
     const comment = /^\s*#/;
 
     function *arrayToIterableIterator<T>(i: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
