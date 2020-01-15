@@ -159,7 +159,7 @@ export class Trie {
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
-        const filter = (sug: SuggestionResult) => this.isForbiddenWord(sug.word);
+        const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
         const suggestions = genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod);
         function *filteredSuggestions() {
             let maxCost = collector.maxCost;

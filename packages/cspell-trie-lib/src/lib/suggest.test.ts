@@ -197,7 +197,7 @@ describe('Validate Suggest', () => {
     });
 
     test('Test that forbidden words are not included (collector)', () => {
-        // cspell:ignore walkingtree
+        // cspell:ignore walkingtree talkingtree
         const trie = parseDictionary(`
             walk
             walking*
@@ -209,8 +209,12 @@ describe('Validate Suggest', () => {
         expect(trie.suggest('walkingstick', 1)).toEqual(['walkingstick']);
         expect(trie.suggest('walkingtree', 1)).toEqual([]);
         expect(trie.suggest('walking*', 1)).toEqual(['walking']);
-        // const collector = Sug.suggestionCollector('walkingtree', 1);
-        // trie.genSuggestions(collector);
+        const collector = Sug.suggestionCollector('walkingtree', 2);
+        trie.genSuggestions(collector);
+        expect(collector.suggestions).toEqual([
+            { word: 'talkingtree', cost: 99 },
+            { word: 'walkingstick', cost: 359 },
+        ]);
     });
 });
 
