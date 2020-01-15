@@ -1,6 +1,7 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, FLAG_WORD, ChildMap} from './TrieNode';
+import {TrieNode, FLAG_WORD, ChildMap, TrieRoot, PartialTrieOptions, TrieOptions} from './TrieNode';
 import {YieldResult, walker} from './walker';
+import { defaultTrieOptions } from './constants';
 
 export {YieldResult} from './walker';
 
@@ -51,13 +52,20 @@ export function iteratorTrieWords(node: TrieNode): Sequence<string> {
         .map(r => r.text);
 }
 
-
-export function createRoot(): TrieNode {
-    return {};
+export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
+    return mergeDefaults(options, defaultTrieOptions);
 }
 
-export function createTriFromList(words: Iterable<string>): TrieNode {
-    const root = createRoot();
+export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
+    const fullOptions = mergeOptionalWithDefaults(options);
+    return {
+        ...fullOptions,
+        c: new Map<string, TrieNode>(),
+    };
+}
+
+export function createTriFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
+    const root = createTrieRoot(options);
     for (const word of words) {
         if (word.length) {
             insert(word, root);
@@ -163,14 +171,32 @@ export function isCircular(root: TrieNode) {
     return walk(root).isCircular;
 }
 
+/**
+ * Creates a new object of type T based upon the field values from `value`.
+ * n[k] = value[k] ?? default[k] where k must be a field in default.
+ * Note: it will remove fields not in defaultValue!
+ * @param value
+ * @param defaultValue
+ */
 export function mergeDefaults<T>(value: Partial<T> | undefined, defaultValue: T): T {
     const result = { ...defaultValue };
+    const allowedKeys = new Set(Object.keys(defaultValue));
     if (value) {
         for (const [k, v] of Object.entries(value) as ([keyof T, any][])) {
-            result[k] = v ?? result[k];
+            if (allowedKeys.has(k as string)) {
+                result[k] = v ?? result[k];
+            }
         }
     }
     return result;
+}
+
+export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): TrieRoot {
+    const newOptions = mergeOptionalWithDefaults(options);
+    return {
+        ...newOptions,
+        c: node.c || new Map<string, TrieNode>(),
+    };
 }
 
 export const normalizeWord = (text: string) => text.normalize();

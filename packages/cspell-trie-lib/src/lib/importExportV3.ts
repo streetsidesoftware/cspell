@@ -1,6 +1,7 @@
-import { TrieNode, FLAG_WORD } from './TrieNode';
+import { TrieNode, FLAG_WORD, TrieRoot } from './TrieNode';
 import { Sequence, genSequence } from 'gensequence';
 import { bufferLines } from './bufferLines';
+import { trieNodeToRoot } from './util';
 
 const EOW = '$';
 const BACK = '<';
@@ -46,9 +47,9 @@ export interface ExportOptions {
 }
 
 /**
- * Serialize a TrieNode.
+ * Serialize a TrieRoot.
  */
-export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
@@ -133,14 +134,16 @@ interface Stack {
 interface ReduceResults {
     stack: Stack[];
     nodes: TrieNode[];
-    root: TrieNode;
+    root: TrieRoot;
     parser: Reducer | undefined;
 }
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
 
-export function importTrie(linesX: Iterable<string>): TrieNode {
+export function importTrie(linesX: Iterable<string>): TrieRoot {
+    const root: TrieRoot = trieNodeToRoot({}, {});
+
     let radix = 16;
     const comment = /^\s*#/;
     const iter = toIterableIterator(linesX);
@@ -169,7 +172,6 @@ export function importTrie(linesX: Iterable<string>): TrieNode {
 
     readHeader(iter);
 
-    const root: TrieNode = {};
 
     const n = genSequence(iter)
         .concatMap(a => a.split(''))

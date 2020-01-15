@@ -86,7 +86,6 @@ export function parseDictionary(text: string, options: ParseDictionaryOptions = 
     const lines = parseDictionaryLines(text.split('\n'), options);
     return buildTrieFast([...new Set(lines)].sort(), {
         compoundCharacter:          options.compoundCharacter,
-        compoundOptionalCharacter:  options.optionalCompoundCharacter,
         forbiddenWordPrefix:        options.forbiddenPrefix,
         stripCaseAndAccentsPrefix:  options.caseInsensitivePrefix,
     });

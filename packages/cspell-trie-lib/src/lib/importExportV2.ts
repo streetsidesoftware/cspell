@@ -1,5 +1,6 @@
-import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
+import { TrieNode, FLAG_WORD, ChildMap, TrieRoot } from './TrieNode';
 import { Sequence, genSequence } from 'gensequence';
+import { trieNodeToRoot } from './util';
 
 const EOW = '*';
 export const DATA = '__DATA__';
@@ -121,7 +122,7 @@ export interface ExportOptions {
  * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
-export function serializeTrie(root: TrieNode, options: ExportOptions | number = 16): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
@@ -137,7 +138,7 @@ function *toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): Iterab
     yield *iter;
 }
 
-export function importTrie(linesX: Iterable<string> | IterableIterator<string>): TrieNode {
+export function importTrie(linesX: Iterable<string> | IterableIterator<string>): TrieRoot {
     let radix = 16;
     const comment = /^\s*#/;
     const iter = toIterableIterator(linesX);
@@ -204,6 +205,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
             const root = decodeLine(line, nodes);
             nodes.push(root);
             return { root, nodes };
-        }, { nodes: [], root: { s: '' } });
-    return n.root;
+        }, { nodes: [], root: { s: '', c: new Map<string, TrieNode>() } });
+
+    return trieNodeToRoot(n.root, {});
 }

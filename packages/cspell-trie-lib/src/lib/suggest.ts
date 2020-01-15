@@ -1,4 +1,4 @@
-import {TrieNode} from './TrieNode';
+import {TrieRoot} from './TrieNode';
 import {isWordTerminationNode} from './util';
 import {CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
 export {CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
@@ -19,7 +19,8 @@ const collator = new Intl.Collator();
 
 const regexSeparator = new RegExp(regexQuote(JOIN_SEPARATOR) + '|' + regexQuote(WORD_SEPARATOR), 'g');
 
-const wordLengthCost = [0, 50, 25, 0];
+const wordLengthCost = [0, 50, 25, 5, 0];
+const extraWordsCost = 5;
 
 export type Cost = number;
 export type MaxCost = Cost;
@@ -40,7 +41,7 @@ export interface SuggestionIterator extends Generator<SuggestionResult, any, Max
 }
 
 export function suggest(
-    root: TrieNode,
+    root: TrieRoot,
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions,
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
@@ -52,7 +53,7 @@ export function suggest(
 }
 
 export function* genSuggestions(
-    root: TrieNode,
+    root: TrieRoot,
     word: string,
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
 ): SuggestionIterator {
@@ -65,7 +66,7 @@ interface Range {
 }
 
 export function* genCompoundableSuggestions(
-    root: TrieNode,
+    root: TrieRoot,
     word: string,
     compoundMethod: CompoundWordsMethod
 ): SuggestionIterator {
@@ -100,7 +101,7 @@ export function* genCompoundableSuggestions(
     }
     stack[0] = {a, b};
 
-    let hint = word.slice(a);
+    const hint = word;
     const i = hintedWalker(root, compoundMethod, hint);
     let goDeeper = true;
     for (let r = i.next({ goDeeper }); !r.done; r = i.next({ goDeeper })) {
@@ -199,10 +200,8 @@ export function* genCompoundableSuggestions(
         }
 
         // Adjust the range between a and b
-        for (; b > a && matrix[d][b] > costLimit; b -= 1) {
-        }
-        for (; a < b && matrix[d][a] > costLimit; a += 1) {
-        }
+        for (; b > a && matrix[d][b] > costLimit; b -= 1) {}
+        for (; a < b && matrix[d][a] > costLimit; a += 1) {}
 
         b = Math.min(b + 1, mx);
         stack[d] = {a, b};
@@ -213,10 +212,7 @@ export function* genCompoundableSuggestions(
             costLimit = (yield r) || costLimit;
         }
         goDeeper = (min <= costLimit);
-        hint = word.slice(a, b);
     }
-    // console.log(`tag size: ${historyTags.size}, history size: ${history.length}`);
-    // console.log(history.map((r, i) => `${i} ${r.cost} ${r.word}`).join('\n'));
 }
 
 // comparison function for Suggestion Results.
@@ -245,6 +241,7 @@ export function suggestionCollector(
 ): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = Math.min(baseCost * wordToMatch.length / 2, baseCost * changeLimit);
+    maxNumSuggestions = Math.max(maxNumSuggestions, 0) || 0;
 
     function dropMax() {
         if (sugs.size < 2) {
@@ -252,10 +249,11 @@ export function suggestionCollector(
             return;
         }
         const sorted = [...sugs.values()].sort(compSuggestionResults);
-        const toRemove = sorted.pop()!;
-        const maxSug = sorted.pop()!;
-
-        sugs.delete(toRemove.word);
+        let i = sorted.length - 1;
+        for (const toRemove = sorted[i]; i >= maxNumSuggestions && sorted[i].cost === toRemove.cost; --i) {
+            sugs.delete(sorted[i].word);
+        }
+        const maxSug = sorted[i];
         maxCost = maxSug.cost;
     }
 
@@ -263,7 +261,7 @@ export function suggestionCollector(
         const words = sug.word.split(regexSeparator);
         const extraCost = words
             .map(w => wordLengthCost[w.length] || 0)
-            .reduce((a, b) => a + b, 0);
+            .reduce((a, b) => a + b, 0) + (words.length - 1) * extraWordsCost;
         return { word: sug.word, cost: sug.cost + extraCost };
     }
 
@@ -275,7 +273,7 @@ export function suggestionCollector(
                 known.cost = Math.min(known.cost, cost);
             } else {
                 sugs.set(word, { word, cost });
-                if (sugs.size > maxNumSuggestions) {
+                if (cost < maxCost && sugs.size > maxNumSuggestions) {
                     dropMax();
                 }
             }
@@ -292,10 +290,18 @@ export function suggestionCollector(
         }
     }
 
+    function suggestions() {
+        const sorted = [...sugs.values()].sort(compSuggestionResults);
+        if (sorted.length > maxNumSuggestions) {
+            sorted.length = maxNumSuggestions;
+        }
+        return sorted;
+    }
+
     return {
         collect,
         add: function (suggestion: SuggestionResult) { collector(suggestion); return this; },
-        get suggestions() { return [...sugs.values()].sort(compSuggestionResults); },
+        get suggestions() { return suggestions(); },
         get maxCost() { return maxCost; },
         get word() { return wordToMatch; },
         get maxNumSuggestions() { return maxNumSuggestions; },

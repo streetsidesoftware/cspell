@@ -5,16 +5,19 @@ import * as path from 'path';
 import * as zlib from 'zlib';
 
 
-export async function readTrieFile(configLocation: string): Promise<Trie> {
+export async function readTrieFileFromConfig(configLocation: string): Promise<Trie> {
     const buffer = await fs.readFile(configLocation);
     const json = buffer.toString();
     const config = JSON.parse(json.replace(/\/\/.*/g, ''));
     const dictDef = config && config.dictionaryDefinitions && config.dictionaryDefinitions[0] || {};
     const dictPath = dictDef.file || '';
     const pathToDict = path.join(path.dirname(configLocation), dictPath);
+    return readTrieFile(pathToDict);
+}
 
-    const trieFileContents = await fs.readFile(pathToDict)
-        .then(buffer => zlib.gunzipSync(buffer))
+export async function readTrieFile(filename: string): Promise<Trie> {
+    const trieFileContents = await fs.readFile(filename)
+        .then(buffer => filename.match(/\.gz$/) ? zlib.gunzipSync(buffer) : buffer)
         .then(buffer => buffer.toString('UTF-8'))
         ;
 

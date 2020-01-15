@@ -98,7 +98,7 @@ describe('Validate English Suggestions', () => {
     });
 
     // Takes a long time.
-    test('Tests long compound suggestions', async () => {
+    test('Tests long compound suggestions `testscompundsuggestions`', async () => {
         jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore testscompundsuggestions
@@ -117,4 +117,3 @@ describe('Validate English Suggestions', () => {
         expect(suggestions[0]).toBe('tests compound suggestions');
     });
 });
-

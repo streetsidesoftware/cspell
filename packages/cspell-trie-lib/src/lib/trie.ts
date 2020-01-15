@@ -1,5 +1,5 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode} from './TrieNode';
+import {TrieNode, TrieOptions, TrieRoot, PartialTrieOptions} from './TrieNode';
 import {
     genSuggestions,
     suggest,
@@ -14,7 +14,7 @@ import {
     iteratorTrieWords,
     orderTrie,
     countWords,
-    mergeDefaults,
+    mergeOptionalWithDefaults,
 } from './util';
 import {walker, WalkerIterator} from './walker';
 
@@ -33,12 +33,8 @@ export {
     FORBID_PREFIX,
 } from './constants';
 
-export interface TrieOptions {
-    compoundCharacter: string;
-    compoundOptionalCharacter: string;
-    stripCaseAndAccentsPrefix: string;
-    forbiddenWordPrefix: string;
-}
+export { TrieOptions, PartialTrieOptions } from './TrieNode';
+export { defaultTrieOptions } from './constants';
 
 /** @deprecated */
 export const COMPOUND = COMPOUND_FIX;
@@ -49,28 +45,13 @@ export const NORMALIZED = CASE_INSENSITIVE_PREFIX;
 /** @deprecated */
 export const FORBID = FORBID_PREFIX;
 
-const _defaultTrieOptions: Readonly<TrieOptions> = {
-    compoundCharacter: COMPOUND_FIX,
-    compoundOptionalCharacter: OPTIONAL_COMPOUND_FIX,
-    stripCaseAndAccentsPrefix: CASE_INSENSITIVE_PREFIX,
-    forbiddenWordPrefix: FORBID_PREFIX,
-};
-
-export const defaultTrieOptions: TrieOptions = Object.freeze(_defaultTrieOptions);
-
-export type PartialTrieOptions = Partial<TrieOptions> | undefined;
-
-export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
-    return mergeDefaults(options, defaultTrieOptions);
-}
-
 const defaultLegacyMinCompoundLength = 3;
 
 export class Trie {
     private _options: TrieOptions;
     readonly isLegacy: boolean;
-    constructor(readonly root: TrieNode, private count?: number, options?: PartialTrieOptions) {
-        this._options = mergeOptionalWithDefaults(options);
+    constructor(readonly root: TrieRoot, private count?: number) {
+        this._options = mergeOptionalWithDefaults(root);
         this.isLegacy = this.calcIsLegacy();
     }
 
@@ -166,7 +147,7 @@ export class Trie {
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
     suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[] {
-        return suggest(this.getSuggestRoot(), text, maxNumSuggestions, compoundMethod, numChanges);
+        return suggest(this.getSuggestRoot(true), text, maxNumSuggestions, compoundMethod, numChanges);
     }
 
     /**
@@ -175,7 +156,7 @@ export class Trie {
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
-        collector.collect(genSuggestions(this.getSuggestRoot(), collector.word, compoundMethod));
+        collector.collect(genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod));
     }
 
     /**
@@ -198,14 +179,14 @@ export class Trie {
         return this;
     }
 
-    private getSuggestRoot(): TrieNode {
-        if (!this.root.c) return {};
+    private getSuggestRoot(caseSensitive: boolean): TrieRoot {
+        const root = !caseSensitive && this.root.c?.get(this._options.stripCaseAndAccentsPrefix) || this.root;
+        if (!root.c) return { c: new Map<string, TrieNode>(), ...this._options };
         const blockNodes = new Set([
-            this._options.compoundCharacter,
             this._options.forbiddenWordPrefix,
             this._options.stripCaseAndAccentsPrefix,
         ]);
-        return { c: new Map([...this.root.c].filter(([k]) => !blockNodes.has(k)))};
+        return { c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))), ...this._options };
     }
 
     private calcIsLegacy(): boolean {
@@ -221,8 +202,8 @@ export class Trie {
         words: Iterable<string> | IterableIterator<string>,
         options?: PartialTrieOptions,
     ): Trie {
-        const root = createTriFromList(words);
+        const root = createTriFromList(words, options);
         orderTrie(root);
-        return new Trie(root, undefined, options);
+        return new Trie(root, undefined);
     }
 }
