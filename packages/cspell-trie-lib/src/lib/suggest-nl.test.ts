@@ -45,6 +45,6 @@ describe('Validate Dutch Suggestions', () => {
         const results = trie.suggestWithCost('mexico-stad', 2);
         const suggestions = results.map(s => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['Mexico-Stad']));
-        expect(results).toEqual([]);
+        expect(suggestions).not.toEqual(expect.arrayContaining(['Mexico-stad']));
     }, timeout);
 });
