@@ -14,7 +14,6 @@ const timeout = 10000;
 describe('Validate English Suggestions', () => {
 
     test('Tests suggestions "joyful"', async () => {
-        jest.setTimeout(timeout);
         const trie = await getTrie();
         const collector = suggestionCollector('joyful', 8, undefined, 1);
         collector.collect(genCompoundableSuggestions(
@@ -26,10 +25,9 @@ describe('Validate English Suggestions', () => {
         const suggestions = results.map(s => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['joyful']));
         expect(suggestions[0]).toBe('joyful');
-    });
+    }, timeout);
 
     test('Tests suggestions "joyfull"', async () => {
-        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore joyfull
         const collector = suggestionCollector('joyfull', 8);
@@ -44,10 +42,9 @@ describe('Validate English Suggestions', () => {
         expect(suggestions[0]).toBe('joyfully');
         expect(suggestions[1]).toBe('joyful');
         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    });
+    }, timeout);
 
     test('Tests compound SEPARATE_WORDS suggestions', async () => {
-        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore onetwothreefour
         const collector = suggestionCollector('onetwothreefour', 8, undefined, 3.3);
@@ -61,10 +58,9 @@ describe('Validate English Suggestions', () => {
         expect(suggestions).toEqual(expect.arrayContaining(['one two three four']));
         expect(suggestions[0]).toBe('one two three four');
         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    });
+    }, timeout);
 
     test('Tests compound JOIN_WORDS suggestions', async () => {
-        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore onetwothrefour
         const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
@@ -77,10 +73,9 @@ describe('Validate English Suggestions', () => {
         const suggestions = results.map(s => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    });
+    }, timeout);
 
     test('Tests compound suggestions', async () => {
-        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore onetwothrefour
         const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
@@ -93,11 +88,10 @@ describe('Validate English Suggestions', () => {
         const suggestions = results.map(s => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    });
+    }, timeout);
 
     // Takes a long time.
     test('Tests long compound suggestions `testscomputesuggestions`', async () => {
-        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore testscomputesuggestions
         const collector = suggestionCollector('testscomputesuggestions', 2, undefined, 3, true);
@@ -113,11 +107,10 @@ describe('Validate English Suggestions', () => {
             'tests compute suggestions', 'test compute suggestions'
         ]);
         expect(suggestions[0]).toBe('tests compute suggestions');
-    });
+    }, timeout);
 
     // Takes a long time.
     test('Tests long compound suggestions `testscompundsuggestions`', async () => {
-        jest.setTimeout(timeout);
         const trie = await getTrie();
         // cspell:ignore testscompundsuggestions
         const collector = suggestionCollector('testscompundsuggestions', 1, undefined, 3);
@@ -131,5 +124,5 @@ describe('Validate English Suggestions', () => {
         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         expect(suggestions).toEqual(expect.arrayContaining(['tests compound suggestions']));
         expect(suggestions[0]).toBe('tests compound suggestions');
-    });
+    }, timeout);
 });
