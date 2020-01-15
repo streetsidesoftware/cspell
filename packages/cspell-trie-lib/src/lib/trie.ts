@@ -1,5 +1,5 @@
 import {Sequence, genSequence} from 'gensequence';
-import {TrieNode} from './TrieNode';
+import {TrieNode, TrieOptions, TrieRoot, PartialTrieOptions} from './TrieNode';
 import {
     genSuggestions,
     suggest,
@@ -14,7 +14,7 @@ import {
     iteratorTrieWords,
     orderTrie,
     countWords,
-    mergeDefaults,
+    mergeOptionalWithDefaults,
 } from './util';
 import {walker, WalkerIterator} from './walker';
 
@@ -33,12 +33,8 @@ export {
     FORBID_PREFIX,
 } from './constants';
 
-export interface TrieOptions {
-    compoundCharacter: string;
-    compoundOptionalCharacter: string;
-    stripCaseAndAccentsPrefix: string;
-    forbiddenWordPrefix: string;
-}
+export { TrieOptions, PartialTrieOptions } from './TrieNode';
+export { defaultTrieOptions } from './constants';
 
 /** @deprecated */
 export const COMPOUND = COMPOUND_FIX;
@@ -49,29 +45,16 @@ export const NORMALIZED = CASE_INSENSITIVE_PREFIX;
 /** @deprecated */
 export const FORBID = FORBID_PREFIX;
 
-const _defaultTrieOptions: Readonly<TrieOptions> = {
-    compoundCharacter: COMPOUND_FIX,
-    compoundOptionalCharacter: OPTIONAL_COMPOUND_FIX,
-    stripCaseAndAccentsPrefix: CASE_INSENSITIVE_PREFIX,
-    forbiddenWordPrefix: FORBID_PREFIX,
-};
-
-export const defaultTrieOptions: TrieOptions = Object.freeze(_defaultTrieOptions);
-
-export type PartialTrieOptions = Partial<TrieOptions> | undefined;
-
-export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
-    return mergeDefaults(options, defaultTrieOptions);
-}
-
 const defaultLegacyMinCompoundLength = 3;
 
 export class Trie {
     private _options: TrieOptions;
     readonly isLegacy: boolean;
-    constructor(readonly root: TrieNode, private count?: number, options?: PartialTrieOptions) {
-        this._options = mergeOptionalWithDefaults(options);
+    private hasForbidden: boolean;
+    constructor(readonly root: TrieRoot, private count?: number) {
+        this._options = mergeOptionalWithDefaults(root);
         this.isLegacy = this.calcIsLegacy();
+        this.hasForbidden = !!root.c.get(root.forbiddenWordPrefix);
     }
 
     /**
@@ -80,6 +63,10 @@ export class Trie {
     size(): number {
         this.count = this.count ?? countWords(this.root);
         return this.count;
+    }
+
+    isSizeKnown(): boolean {
+        return this.count !== undefined;
     }
 
     get options() {
@@ -102,16 +89,13 @@ export class Trie {
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        if (this.isLegacy && minLegacyCompoundLength) {
+        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
+        if (!!f.found) return true;
+        if (minLegacyCompoundLength) {
             const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : defaultLegacyMinCompoundLength;
             return !!findLegacyCompoundWord(this.root, word, len).found;
         }
-        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
-        if (f.found !== false && f.compoundUsed) {
-            // Make sure it is not a forbidden compound.
-            return !isForbiddenWord(this.root, f.found, this.options.forbiddenWordPrefix);
-        }
-        return !!f.found;
+        return false;
     }
 
     /**
@@ -124,11 +108,15 @@ export class Trie {
     hasWord(word: string, caseSensitive: boolean): boolean {
         const root = !caseSensitive ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) || this.root : this.root;
         const f = findCompoundWord(root, word, this.options.compoundCharacter);
-        if (f.found !== false && f.compoundUsed) {
-            // Make sure it is not a forbidden compound.
-            return !isForbiddenWord(this.root, f.found, this.options.forbiddenWordPrefix);
-        }
         return !!f.found;
+    }
+
+    /**
+     * Determine if a word is in the forbidden word list.
+     * @param word word to lookup.
+     */
+    isForbiddenWord(word: string): boolean {
+        return this.hasForbidden && isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix);
     }
 
     /**
@@ -161,7 +149,8 @@ export class Trie {
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
     suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[] {
-        return suggest(this.root, text, maxNumSuggestions, compoundMethod, numChanges);
+        return suggest(this.getSuggestRoot(true), text, maxNumSuggestions, compoundMethod, numChanges)
+            .filter(sug => !this.isForbiddenWord(sug.word));
     }
 
     /**
@@ -170,7 +159,19 @@ export class Trie {
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
-        collector.collect(genSuggestions(this.root, collector.word, compoundMethod));
+        const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
+        const suggestions = genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod);
+        function *filteredSuggestions() {
+            let maxCost = collector.maxCost;
+            let ir: IteratorResult<SuggestionResult, undefined>;
+            while (!(ir = suggestions.next(maxCost)).done) {
+                if (ir.value !== undefined && filter(ir.value)) {
+                    maxCost = yield ir.value;
+                }
+            }
+            return undefined;
+        }
+        collector.collect(filteredSuggestions());
     }
 
     /**
@@ -193,6 +194,16 @@ export class Trie {
         return this;
     }
 
+    private getSuggestRoot(caseSensitive: boolean): TrieRoot {
+        const root = !caseSensitive && this.root.c?.get(this._options.stripCaseAndAccentsPrefix) || this.root;
+        if (!root.c) return { c: new Map<string, TrieNode>(), ...this._options };
+        const blockNodes = new Set([
+            this._options.forbiddenWordPrefix,
+            this._options.stripCaseAndAccentsPrefix,
+        ]);
+        return { c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))), ...this._options };
+    }
+
     private calcIsLegacy(): boolean {
         const c = this.root.c;
         return !(
@@ -206,8 +217,8 @@ export class Trie {
         words: Iterable<string> | IterableIterator<string>,
         options?: PartialTrieOptions,
     ): Trie {
-        const root = createTriFromList(words);
+        const root = createTriFromList(words, options);
         orderTrie(root);
-        return new Trie(root, undefined, options);
+        return new Trie(root, undefined);
     }
 }

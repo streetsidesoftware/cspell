@@ -4,7 +4,7 @@ import { genSequence } from 'gensequence';
 import { TrieNode } from './TrieNode';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
-import { iteratorTrieWords, countNodes } from './util';
+import { iteratorTrieWords, countNodes, createTrieRoot } from './util';
 import { buildTrie } from './TrieBuilder';
 
 const samples = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
@@ -32,10 +32,10 @@ describe('Validate Consolidate', () => {
     });
 
     test('consolidate empty trie', () => {
-        const root: TrieNode = {};
+        const root = createTrieRoot({});
         const result = consolidate(root);
         expect(countNodes(result)).toBe(1);
-        expect(result).toBe(root);
+        expect(result).toEqual(root);
     });
 
     test('larger trie', async () => {

@@ -1,5 +1,7 @@
 import { splitLineIntoWords, splitLineIntoCodeWords, loadWordsNoError } from '../wordListHelper';
-import { SpellingDictionary, createSpellingDictionaryTrie, createSpellingDictionary } from './SpellingDictionary';
+import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
+import { createSpellingDictionary } from './createSpellingDictionary';
+import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
 import { ReplaceMap } from '../Settings';
 import { genSequence } from 'gensequence';
