@@ -1,4 +1,4 @@
-import { TrieNode, ChildMap } from './TrieNode';
+import { TrieNode, ChildMap, TrieRoot } from './TrieNode';
 
 export const JOIN_SEPARATOR: string = '+';
 export const WORD_SEPARATOR: string = ' ';
@@ -40,6 +40,7 @@ export interface WalkerIterator extends Generator<YieldResult, any, boolean | un
 export function* walker(
     root: TrieNode,
     compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
+
 ): WalkerIterator {
 
     const roots: { [index: number]: ChildMap | [string, TrieNode][] } = {
@@ -48,12 +49,13 @@ export function* walker(
         [CompoundWordsMethod.SEPARATE_WORDS]: [[WORD_SEPARATOR, root]],
     };
 
+
     function* children(n: TrieNode): IterableIterator<[string, TrieNode]> {
         if (n.c) {
-            yield* n.c;
+            yield *n.c;
         }
         if (n.f) {
-            yield* roots[compoundingMethod];
+            yield *roots[compoundingMethod];
         }
     }
 
@@ -96,25 +98,38 @@ export interface HintedWalkerIterator extends Generator<YieldResult, any, Hintin
  * next(goDeeper: boolean):
  */
 export function* hintedWalker(
-    root: TrieNode,
+    root: TrieRoot,
     compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
     hint: string,
 ): HintedWalkerIterator {
 
+    const baseRoot = { c: new Map([...root.c].filter(n => n[0] !== root.compoundCharacter)) };
+
     const roots: { [index: number]: ChildMap | [string, TrieNode][] } = {
         [CompoundWordsMethod.NONE]: [],
-        [CompoundWordsMethod.JOIN_WORDS]: [[JOIN_SEPARATOR, root]],
-        [CompoundWordsMethod.SEPARATE_WORDS]: [[WORD_SEPARATOR, root]],
+        [CompoundWordsMethod.JOIN_WORDS]: [[JOIN_SEPARATOR, baseRoot]],
+        [CompoundWordsMethod.SEPARATE_WORDS]: [[WORD_SEPARATOR, baseRoot]],
     };
 
-    const hints = new Set(hint.slice(0, 5));
+    const compoundCharacter = root.compoundCharacter;
 
-    function* children(n: TrieNode): IterableIterator<[string, TrieNode]> {
+    function* children(n: TrieNode, depth: number): IterableIterator<[string, TrieNode]> {
         if (n.c) {
+            const h = hint.slice(depth, depth + 3) + hint.slice(Math.max(0, depth - 2), depth);
+            const hints = new Set<string>(h);
+
             // First yield the hints
             yield* [...hints].filter(a => n.c!.has(a)).map(a => [a, n.c!.get(a)!] as [string, TrieNode]);
+            // We don't want to suggest the compound character.
+            hints.add(compoundCharacter);
             // Then yield everything else.
             yield* [...n.c].filter(a => !hints.has(a[0]));
+            if (n.c.has(compoundCharacter)) {
+                const compoundRoot = root.c.get(compoundCharacter);
+                if (compoundRoot) {
+                    yield *children(compoundRoot, depth);
+                }
+            }
         }
         if (n.f) {
             yield* roots[compoundingMethod];
@@ -124,7 +139,7 @@ export function* hintedWalker(
     let depth = 0;
     const stack: Iterator<[string, TrieNode]>[] = [];
     let baseText = '';
-    stack[depth] = children(root);
+    stack[depth] = children(baseRoot, depth);
     let ir: IteratorResult<[string, TrieNode]>;
     while (depth >= 0) {
         while (!(ir = stack[depth].next()).done) {
@@ -134,7 +149,7 @@ export function* hintedWalker(
             if (hinting && hinting.goDeeper) {
                 depth++;
                 baseText = text;
-                stack[depth] = children(node);
+                stack[depth] = children(node, depth);
             }
         }
         depth -= 1;
