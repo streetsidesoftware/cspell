@@ -8,13 +8,34 @@ const timeout = 5000;
 const pTrieNL = getTrie();
 
 describe('Validate Dutch Suggestions', () => {
+    // cspell:ignore buurtbewoners
     test('Tests suggestions "buurtbewoners"', async () => {
         const trie = await pTrieNL;
-        // cspell:ignore buurtbewoners
-        const results = trie.suggestWithCost('buurtbewoners', 10);
-        // console.log(JSON.stringify(results));
+        const results = trie.suggestWithCost('buurtbewoners', 5);
         const suggestions = results.map(s => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
         expect(suggestions[0]).toBe('buurtbewoners');
+    }, timeout);
+
+    // cspell:ignore burtbewoners burgbewoners
+    test('Tests suggestions "burtbewoners"', async () => {
+        const trie = await pTrieNL;
+        const results = trie.suggestWithCost('burtbewoners', 5);
+        const suggestions = results.map(s => s.word);
+        expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners', 'burgbewoners']));
+    }, timeout);
+
+    // cspell:ignore buurtbwoners
+    test('Tests suggestions "buurtbwoners"', async () => {
+        const trie = await pTrieNL;
+        const results = trie.suggestWithCost('buurtbwoners', 1);
+        const suggestions = results.map(s => s.word);
+        expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
+    }, timeout);
+
+    test('Tests suggestions "buurtbewoners"', async () => {
+        const trie = await pTrieNL;
+        const results = trie.suggestWithCost('buurtbewoners', 1);
+        expect(results).toEqual([{ word: 'buurtbewoners', cost: 0}]);
     }, timeout);
 });
