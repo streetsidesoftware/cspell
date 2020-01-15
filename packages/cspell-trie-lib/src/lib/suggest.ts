@@ -30,7 +30,7 @@ export interface SuggestionResult {
     cost: Cost;
 }
 
-export interface SuggestionIterator extends Generator<SuggestionResult, any, MaxCost | undefined> {
+export interface SuggestionIterator extends Generator<SuggestionResult, undefined, MaxCost | undefined> {
     /**
      * Ask for the next result.
      * maxCost - sets the max cost for following suggestions
@@ -58,6 +58,7 @@ export function* genSuggestions(
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
 ): SuggestionIterator {
     yield *genCompoundableSuggestions(root, word, compoundMethod);
+    return undefined;
 }
 
 interface Range {
@@ -213,6 +214,7 @@ export function* genCompoundableSuggestions(
         }
         goDeeper = (min <= costLimit);
     }
+    return undefined;
 }
 
 // comparison function for Suggestion Results.
@@ -283,7 +285,7 @@ export function suggestionCollector(
     }
 
     function collect(src: SuggestionIterator) {
-        let ir: IteratorResult<SuggestionResult | undefined>;
+        let ir: IteratorResult<SuggestionResult, undefined>;
         while (!(ir = src.next(maxCost)).done) {
             if (ir.value !== undefined) {
                 collector(ir.value);

@@ -38,4 +38,13 @@ describe('Validate Dutch Suggestions', () => {
         const results = trie.suggestWithCost('buurtbewoners', 1);
         expect(results).toEqual([{ word: 'buurtbewoners', cost: 0}]);
     }, timeout);
+
+    // cspell:ignore mexico stad
+    test('Tests suggestions "mexico-stad"', async () => {
+        const trie = await pTrieNL;
+        const results = trie.suggestWithCost('mexico-stad', 2);
+        const suggestions = results.map(s => s.word);
+        expect(suggestions).toEqual(expect.arrayContaining(['Mexico-Stad']));
+        expect(results).toEqual([]);
+    }, timeout);
 });

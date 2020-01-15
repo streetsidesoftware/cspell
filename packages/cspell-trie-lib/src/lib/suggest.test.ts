@@ -1,5 +1,6 @@
 import * as Sug from './suggest';
 import {Trie} from './trie';
+import { parseDictionary } from './SimpleDictionaryParser';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions', () => {
@@ -194,6 +195,23 @@ describe('Validate Suggest', () => {
         const suggestions = collector.suggestions.map(s => s.word);
         expect(suggestions).toEqual(['walked', 'walker', 'talked']);
     });
+
+    test('Test that forbidden words are not included (collector)', () => {
+        // cspell:ignore walkingtree
+        const trie = parseDictionary(`
+            walk
+            walking*
+            *stick
+            talking*
+            *tree
+            !walkingtree
+        `);
+        expect(trie.suggest('walkingstick', 1)).toEqual(['walkingstick']);
+        expect(trie.suggest('walkingtree', 1)).toEqual([]);
+        expect(trie.suggest('walking*', 1)).toEqual(['walking']);
+        // const collector = Sug.suggestionCollector('walkingtree', 1);
+        // trie.genSuggestions(collector);
+    });
 });
 
 const sampleWords = [
@@ -245,4 +263,3 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
-

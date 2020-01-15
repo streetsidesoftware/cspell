@@ -50,9 +50,11 @@ const defaultLegacyMinCompoundLength = 3;
 export class Trie {
     private _options: TrieOptions;
     readonly isLegacy: boolean;
+    private hasForbidden: boolean;
     constructor(readonly root: TrieRoot, private count?: number) {
         this._options = mergeOptionalWithDefaults(root);
         this.isLegacy = this.calcIsLegacy();
+        this.hasForbidden = !!root.c.get(root.forbiddenWordPrefix);
     }
 
     /**
@@ -114,7 +116,7 @@ export class Trie {
      * @param word word to lookup.
      */
     isForbiddenWord(word: string): boolean {
-        return isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix);
+        return this.hasForbidden && isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix);
     }
 
     /**
@@ -147,7 +149,8 @@ export class Trie {
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
     suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[] {
-        return suggest(this.getSuggestRoot(true), text, maxNumSuggestions, compoundMethod, numChanges);
+        return suggest(this.getSuggestRoot(true), text, maxNumSuggestions, compoundMethod, numChanges)
+            .filter(sug => !this.isForbiddenWord(sug.word));
     }
 
     /**
@@ -156,7 +159,19 @@ export class Trie {
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
-        collector.collect(genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod));
+        const filter = (sug: SuggestionResult) => this.isForbiddenWord(sug.word);
+        const suggestions = genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod);
+        function *filteredSuggestions() {
+            let maxCost = collector.maxCost;
+            let ir: IteratorResult<SuggestionResult, undefined>;
+            while (!(ir = suggestions.next(maxCost)).done) {
+                if (ir.value !== undefined && filter(ir.value)) {
+                    maxCost = yield ir.value;
+                }
+            }
+            return undefined;
+        }
+        collector.collect(filteredSuggestions());
     }
 
     /**
