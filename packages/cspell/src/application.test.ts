@@ -6,6 +6,7 @@ jest.mock('get-stdin', () => {
     return jest.fn(() => Promise.resolve(getStdinResult.value));
 });
 
+import * as path from 'path';
 import * as App from './application';
 
 
@@ -88,6 +89,53 @@ describe('Validate the Application', () => {
     });
 });
 
+describe('Validate createInit', () => {
+    test('createInit', async () => {
+        async function worked() {
+            try {
+                await App.createInit({});
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+        expect(await worked()).toBe(false);
+    });
+});
+
+describe('Validate internal functions', () => {
+    test('_globP empty pattern', async () => {
+        expect(await App._testing_._globP('', {})).toEqual([]);
+    });
+
+    test('normalizePattern relative', () => {
+        const root = process.cwd();
+        const r = App._testing_.normalizePattern('../../packages/**/*.ts', root);
+        expect(r.root).toBe(path.dirname(path.dirname(root)));
+        expect(r.pattern).toBe('packages/**/*.ts');
+    });
+
+    test('normalizePattern relative absolute', () => {
+        const root = process.cwd();
+        const p = '/packages/**/*.ts';
+        const r = App._testing_.normalizePattern(p, root);
+        expect(r.root).toBe(root);
+        expect(r.pattern).toBe(p);
+    });
+
+    test('normalizePattern absolute', () => {
+        const root = process.cwd();
+        const p = path.join(__dirname, '**', '*.ts');
+        const r = App._testing_.normalizePattern(p, root);
+        expect(r.root).toBe(path.sep);
+        expect(r.pattern).toBe(p);
+    });
+
+    test('findFiles', async () => {
+
+    });
+});
+
 describe('Application, Validate Samples', () => {
     sampleTests().map(sample =>
         test(`Test file: "${sample.file}"`, async () => {
@@ -110,11 +158,15 @@ interface SampleTest {
 function sampleTests(): SampleTest[] {
     // cspell:disable
     return [
+        { file: path.resolve(path.join(__dirname, '../samples/src/drives.ps1')), issues: ['Woude', 'Woude'] },
+        { file: path.resolve(path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')), issues: ['Woude', 'Woude'] },
         { file: 'samples/src/drives.ps1', issues: ['Woude', 'Woude'] },
         { file: 'samples/src/sample.c', issues: [] },
         { file: 'samples/src/sample.go', issues: ['garbbage'] },
         { file: 'samples/src/sample.py', issues: ['garbbage'] },
         { file: 'samples/src/sample.tex', issues: ['includegraphics', 'Zotero'] },
+        { file: path.resolve(path.join(__dirname, '../samples/src/drives.ps1')), issues: ['Woude', 'Woude'] },
+        { file: path.resolve(path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')), issues: ['Woude', 'Woude'] },
     ];
     // cspell:enable
 }
