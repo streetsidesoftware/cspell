@@ -80,16 +80,20 @@ function buildMatcherFn(patterns: string | string[], root?: string): GlobMatchFn
     const negRules = rules.filter(r => r.isNeg);
     const posRules = rules.filter(r => !r.isNeg);
     const fn: GlobMatchFn = (filename: string) => {
-	// On Unixy systems, `root === '/'`, but on Windows this is `C:\` or similar.
-	if (process.platform !== 'win32') {
-	    filename = filename.replace(/^[^/]/, '/$&');
-	} else {
-	    const driveLetter = path.parse(process.cwd()).root[0] // "C" or "D" or similar.
-	    const prefix = `${driveLetter}:`
-	    if (filename.startsWith(prefix) === false) {
-		filename = `${prefix}${filename}`
-	    }
+	// Root character is / on Unix, or single letter on Windows.
+	const rootChar = path.parse(process.cwd()).root[0] 
+	const prefixChars = [rootChar]
+
+	if (process.platform === 'win32') {
+	    prefixChars.push(':')
 	}
+
+	const prefix = prefixChars.join('')
+
+	if (filename.startsWith(prefix) === false) {
+	    filename = `${prefix}${filename}`
+	}
+
 	const offset = r === filename.slice(0, r.length) ? r.length : 0;
 	const fname = filename.slice(offset);
 
