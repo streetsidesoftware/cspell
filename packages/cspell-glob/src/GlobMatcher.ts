@@ -1,4 +1,5 @@
 
+import path = require('path')
 import mm =  require('micromatch');
 
 // cspell:ignore fname
@@ -79,9 +80,18 @@ function buildMatcherFn(patterns: string | string[], root?: string): GlobMatchFn
     const negRules = rules.filter(r => r.isNeg);
     const posRules = rules.filter(r => !r.isNeg);
     const fn: GlobMatchFn = (filename: string) => {
-        filename = filename.replace(/^[^/]/, '/$&');
-        const offset = r === filename.slice(0, r.length) ? r.length : 0;
-        const fname = filename.slice(offset);
+	// On Unixy systems, `root === '/'`, but on Windows this is `C:\` or similar.
+	if (process.platform !== 'win32') {
+	    filename = filename.replace(/^[^/]/, '/$&');
+	} else {
+	    const driveLetter = path.parse(process.cwd()).root[0] // "C" or "D" or similar.
+	    const prefix = `${driveLetter}:`
+	    if (filename.startsWith(prefix) === false) {
+		filename = `${prefix}${filename}`
+	    }
+	}
+	const offset = r === filename.slice(0, r.length) ? r.length : 0;
+	const fname = filename.slice(offset);
 
         for (const rule of negRules) {
             if (rule.fn(fname)) {
