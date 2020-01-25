@@ -332,7 +332,7 @@ export async function checkText(filename: string, options: BaseOptions): Promise
 }
 
 export function createInit(_: CSpellApplicationOptions): Promise<void> {
-    return Promise.resolve();
+    return Promise.reject();
 }
 
 const defaultExcludeGlobs = [
@@ -366,9 +366,9 @@ function readFile(filename: string, encoding: string = UTF8): Promise<string> {
 async function findFiles(globPatterns: string[], options: GlobOptions): Promise<string[]> {
     const globPats = globPatterns.filter(filename => filename !== STDIN);
     const stdin = globPats.length < globPatterns.length ? [ STDIN ] : [];
-    const globs = globPats.length ? (await globP(globPats, options)) : [];
+    const globResults = globPats.length ? (await globP(globPats, options)) : [];
     const cwd = options.cwd || process.cwd();
-    return stdin.concat(globs.map(filename => path.resolve(cwd, filename)));
+    return stdin.concat(globResults.map(filename => path.resolve(cwd, filename)));
 }
 
 
@@ -417,13 +417,107 @@ function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
 }
 
-function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
-    const globPattern = typeof pattern === 'string'
-        ? pattern
-        : pattern.length > 1
-        ? `{${pattern.join(',')}}`
-        : (pattern[0] || '');
-    if (!globPattern) {
+interface PatternRoot {
+    pattern: string;
+    root: string;
+}
+
+function findBaseDir(pat: string) {
+    const globChars = /[*@()?|\[\]{},]/;
+    while (globChars.test(pat)) {
+        pat = path.dirname(pat);
+    }
+    return pat;
+}
+
+
+function exists(filename: string): boolean {
+    try {
+        fsp.accessSync(filename);
+    } catch (e) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * Attempt to normalize a pattern based upon the root.
+ * If the pattern is absolute, check to see if it exists and adjust the root, otherwise it is assumed to be based upon the current root.
+ * If the pattern starts with a relative path, adjust the root to match.
+ * The challenge is with the patterns that begin with `/`. Is is an absolute path or relative pattern?
+ * @param pat glob pattern
+ * @param root absolute path | empty
+ * @returns the adjusted root and pattern.
+ */
+function normalizePattern(pat: string, root: string): PatternRoot {
+    // Absolute pattern
+    if (path.isAbsolute(pat)) {
+        const dir = findBaseDir(pat);
+        if (dir.length > 1 && exists(dir)) {
+            // Assume it is an absolute path
+            return {
+                pattern: pat,
+                root: path.sep,
+            };
+        }
+    }
+    // normal pattern
+    if (!/^\.\./.test(pat)) {
+        return {
+            pattern: pat,
+            root,
+        };
+    }
+    // relative pattern
+    pat = (path.sep === '\\') ? pat.replace(/\\/g, '/') : pat;
+    const patParts = pat.split('/');
+    const rootParts = root.split(path.sep);
+    let i = 0;
+    for (; i < patParts.length && patParts[i] === '..'; ++i) {
+        rootParts.pop();
+    }
+    return {
+        pattern: patParts.slice(i).join('/'),
+        root: rootParts.join(path.sep),
+    };
+}
+
+function groupPatterns(patterns: PatternRoot[]): PatternRoot[] {
+    const groups = new Map<string, string[]>();
+    patterns.forEach(pat => {
+        const pats = groups.get(pat.root) || [];
+        pats.push(pat.pattern);
+        groups.set(pat.root, pats);
+    });
+    const resultPatterns: PatternRoot[] = [];
+    for (const [root, patterns] of groups) {
+        resultPatterns.push({
+            root,
+            pattern: patterns.join(','),
+        });
+    }
+    return resultPatterns;
+}
+
+async function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
+    const root = options?.root || process.cwd();
+    const opts = options || {};
+    const rawPatterns = typeof pattern === 'string' ? [ pattern ] : pattern;
+    const normPatterns = groupPatterns(rawPatterns.map(pat => normalizePattern(pat, root)));
+    const globResults = normPatterns.map(async pat => {
+        const opt: GlobOptions = {...opts, root: pat.root, cwd: pat.root};
+        const absolutePaths = (await _globP(pat.pattern, opt))
+        .map(filename => path.resolve(pat.root, filename));
+        const relativeToRoot = absolutePaths.map(absFilename => path.relative(root, absFilename));
+        return relativeToRoot;
+    });
+    const results = (await Promise.all(globResults)).reduce((prev, next) => prev.concat(next), []);
+    return results;
+}
+
+function _globP(pattern: string, options: GlobOptions): Promise<string[]> {
+    if (!pattern) {
         return Promise.resolve([]);
     }
     return new Promise<string[]>((resolve, reject) => {
@@ -433,11 +527,14 @@ function globP(pattern: string | string[], options?: GlobOptions): Promise<strin
             }
             resolve(matches);
         };
-        if (options) {
-            glob(globPattern, options, cb);
-        } else {
-            glob(globPattern, cb);
-        }
+        glob(pattern, options, cb);
     });
 }
 
+
+export const _testing_ = {
+    _globP,
+    findFiles,
+    groupPatterns,
+    normalizePattern,
+};

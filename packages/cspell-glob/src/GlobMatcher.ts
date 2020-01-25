@@ -1,7 +1,10 @@
 
 import mm =  require('micromatch');
+import * as path from 'path';
 
 // cspell:ignore fname
+
+export type PathInterface = typeof path.posix;
 
 export type GlobMatch = GlobMatchRule | GlobMatchNoRule;
 
@@ -22,17 +25,22 @@ export class GlobMatcher {
      * @returns a GlobMatch - information about the match.
      */
     readonly matchEx: (filename: string) => GlobMatch;
+    readonly path: PathInterface;
     /**
      * Construct a `.gitignore` emulator
      * @param patterns the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param root the working directory
      */
-    constructor(readonly patterns: string | string[], readonly root?: string) {
-        this.matchEx = buildMatcherFn(patterns, root);
+    constructor(readonly patterns: string | string[], readonly root?: string, nodePath?: PathInterface) {
+        this.path = nodePath ?? path;
+        this.matchEx = buildMatcherFn(this.path, patterns, root);
     }
 
     /**
      * Check to see if a filename matches any of the globs.
+     * If filename is relative, it is considered relative to the root.
+     * If filename is absolute and contained within the root, it will be made relative before being tested for a glob match.
+     * If filename is absolute and not contained within the root, it will be tested as is.
      * @param filename full path of the file to check.
      */
     match(filename: string): boolean {
@@ -52,15 +60,22 @@ interface GlobRule {
 
 /**
  * This function attempts to emulate .gitignore functionality as much as possible.
+ *
+ * The resulting matcher function: (filename: string) => GlobMatch
+ *
+ * If filename is relative, it is considered relative to the root.
+ * If filename is absolute and contained within the root, it will be made relative before being tested for a glob match.
+ * If filename is absolute and not contained within the root, it will be tested as is.
+ *
  * @param patterns the contents of a .gitignore style file or an array of individual glob rules.
  * @param root the working directory
- * @returns a function given a filename returns if it matches.
+ * @returns a function given a filename returns true if it matches.
  */
-function buildMatcherFn(patterns: string | string[], root?: string): GlobMatchFn {
+function buildMatcherFn(path: PathInterface, patterns: string | string[], root?: string): GlobMatchFn {
     if (typeof patterns == 'string') {
         patterns = patterns.split(/\r?\n/g);
     }
-    const r = (root || '').replace(/\/$/, '') as string;
+    const dirRoot = path.normalize(root || '/');
     const rules: GlobRule[] = patterns
         .map(p => p.trim())
         .map((p, index) => ({ glob: p, index }))
@@ -79,9 +94,12 @@ function buildMatcherFn(patterns: string | string[], root?: string): GlobMatchFn
     const negRules = rules.filter(r => r.isNeg);
     const posRules = rules.filter(r => !r.isNeg);
     const fn: GlobMatchFn = (filename: string) => {
-        filename = filename.replace(/^[^/]/, '/$&');
-        const offset = r === filename.slice(0, r.length) ? r.length : 0;
-        const fname = filename.slice(offset);
+        filename = path.normalize(filename);
+        const offset = dirRoot === filename.slice(0, dirRoot.length) ? dirRoot.length : 0;
+        const lName = filename.slice(offset);
+        const filePath = path.parse(lName);
+        const relPath = path.join(filePath.dir.slice(filePath.root.length), filePath.base);
+        const fname = relPath.split(path.sep).join('/');
 
         for (const rule of negRules) {
             if (rule.fn(fname)) {
@@ -104,6 +122,6 @@ type MutationsToSupportGitIgnore = [RegExp, string];
 const mutations: MutationsToSupportGitIgnore[] = [
     [/^!+/, ''],                                   // remove leading !
     [/^[^/#][^/]*$/, '**/{$&,$&/**}',],            // no slashes will match files names or folders
+    [/^\/(?!\/)/, ''],                             // remove leading slash to match from the root
     [/\/$/, '$&**',],                              // if it ends in a slash, make sure matches the folder
-    [/^(([^/*])|([*][^*])).*[/]/, '/$&',],         // if it contains a slash, prefix with a slash
 ];
