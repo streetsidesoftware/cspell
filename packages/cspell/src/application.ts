@@ -507,14 +507,12 @@ async function globP(pattern: string | string[], options?: GlobOptions): Promise
     const normPatterns = groupPatterns(rawPatterns.map(pat => normalizePattern(pat, root)));
     const globResults = normPatterns.map(async pat => {
         const opt: GlobOptions = {...opts, root: pat.root, cwd: pat.root};
-        console.log(pat);
         const absolutePaths = (await _globP(pat.pattern, opt))
         .map(filename => path.resolve(pat.root, filename));
         const relativeToRoot = absolutePaths.map(absFilename => path.relative(root, absFilename));
         return relativeToRoot;
     });
     const results = (await Promise.all(globResults)).reduce((prev, next) => prev.concat(next), []);
-    console.log(results);
     return results;
 }
 
