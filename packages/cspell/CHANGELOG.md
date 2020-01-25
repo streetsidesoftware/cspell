@@ -1,5 +1,8 @@
 # Release Notes
 
+## [4.0.45]
+- Fix issus with glob matching on Windows
+
 ## [4.0.16]
 - Speed improvements to address slowdown to support case sensitivity.
 
