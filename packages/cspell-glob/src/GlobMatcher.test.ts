@@ -1,15 +1,80 @@
 import { GlobMatcher, GlobMatch } from './GlobMatcher';
 import { expect } from 'chai';
+import * as path from 'path';
+import mm =  require('micromatch');
 
-describe('Validate GlobMatcher', () => {
-    tests().forEach(([patterns, root, filename, expected, description], index) => {
-        test(
-            `test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}"`,
-            () => {
-                const matcher = new GlobMatcher(patterns, root);
-                expect(matcher.match(filename)).to.be.eq(expected);
-            }
-        );
+describe('Validate assumptions', () => {
+    test('path relative', () => {
+        const relCrossDevice = path.win32.relative('C:\\user\\home\\project', 'D:\\projects');
+        expect(relCrossDevice).to.be.eq('D:\\projects');
+        const relSubDir = path.win32.relative('/User/home/project', '/User/home/project/fun/with/coding');
+        expect(relSubDir).to.be.equal(path.win32.normalize('fun/with/coding'));
+        const relSubDirPosix = path.posix.relative('/User/home/project', '/User/home/project/fun/with/coding');
+        expect(relSubDirPosix).to.be.equal(path.posix.normalize('fun/with/coding'));
+    });
+
+    test('path parse', () => {
+        const res1 = path.win32.parse('/user/home/project');
+        expect(res1.root).to.be.equal('/');
+        const res2 = path.win32.parse('user/home/project');
+        expect(res2.root).to.be.equal('');
+        const res3 = path.win32.parse('C:\\user\\home\\project');
+        expect(res3.root).to.be.equal('C:\\');
+        const res4 = path.win32.parse('C:user\\home\\project');
+        expect(res4.root).to.be.equal('C:');
+    });
+});
+
+describe('Validate Micromatch assumptions', () => {
+    interface MMTest {
+        g: string;  // glob
+        f: string;  // filename
+        e: boolean; // expected to match
+    }
+    const testsMicroMatch: MMTest[] = [
+        { g: '*.json', f: 'settings.json', e: true },
+        { g: '*.json', f: '/settings.json', e: false },
+        { g: '*.json', f: 'src/settings.json', e: false },
+        { g: '*.json', f: '/src/settings.json', e: false },
+        { g: '**/*.json', f: 'settings.json', e: true },
+        { g: '**/*.json', f: '/settings.json', e: true },
+        { g: '**/*.json', f: 'src/settings.json', e: true },
+        { g: '**/*.json', f: '/src/settings.json', e: true },
+        { g: 'src/*.json', f: 'src/settings.json', e: true },
+        { g: '**/{*.json,*.json/**}', f: 'settings.json', e: true },
+        { g: '**/{*.json,*.json/**}', f: '/settings.json', e: true },
+        { g: '**/{*.json,*.json/**}', f: 'src/settings.json', e: true },
+        { g: '**/{*.json,*.json/**}', f: 'src/settings.json/config', e: true },
+        { g: '**/{*.json,*.json/**}', f: 'settings.json/config', e: true },
+        { g: 'src/*.{test,spec}.ts', f: 'src/code.test.ts', e: true },
+        { g: 'src/*.(test|spec).ts', f: 'src/code.test.ts', e: true },
+        { g: 'src/*.(test|spec).ts', f: 'src/code.spec.ts', e: true },
+        { g: 'src/*.(test|spec).ts', f: 'src/deep.code.test.ts', e: true },
+        { g: 'src/*.(test|spec).ts', f: 'src/test.ts', e: false },
+    ];
+
+    testsMicroMatch.forEach(({g: glob, f: filename, e: expectedToMatch}) => {
+        test(`Test Micromatch glob: '${glob}', filename: '${filename}' expected: ${expectedToMatch ? 'true' : 'false'}`, () => {
+            const reg1 = mm.makeRe(glob);
+            expect(reg1.test(filename)).to.eq(expectedToMatch);
+        });
+    })
+});
+
+[path.posix, path.win32].forEach(pathInstance => {
+    describe(`Validate GlobMatcher ${pathInstance === path.win32 ? 'Windows': 'Posix'}`, () => {
+        tests().forEach(([patterns, root, filename, expected, description], index) => {
+            const rootPrefix = pathInstance === path.win32 ? 'C:' : '';
+            root = root ? pathInstance.normalize(pathInstance.join(rootPrefix, root)) : root;
+            filename = root ? pathInstance.normalize(pathInstance.join(rootPrefix, filename)) : pathInstance.normalize(filename);
+            test(
+                `test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${expect ? 'T' : 'F'}`,
+                () => {
+                    const matcher = new GlobMatcher(patterns, root, pathInstance);
+                    expect(matcher.match(filename)).to.be.eq(expected);
+                }
+            );
+        });
     });
 });
 
@@ -18,7 +83,7 @@ describe('Tests .gitignore file contents', () => {
         # This is a comment
 
         # ignore spec and test files.
-        src/*.{test|spec}.ts
+        src/*.(test|spec).ts
         node_modules/**
         dist
         *.js
@@ -110,6 +175,8 @@ function tests(): [string[], string | undefined, string, boolean, string][] {
         [['**/.vscode/'],           '/User/code/src', '/User/code/src/src/.vscode/settings.json', true, 'With Root should match nested .vscode/'],
         [['/User/user/Library/**'], '/User/code/src', '/src/User/user/Library/settings.json', false, 'With Root No match'],
         [['/User/user/Library/**'], '/User/code/src', '/User/user/Library/settings.json', true, 'With Root Match system root'],
+        [['tests/*.test.ts'],       '/User/code/src', 'tests/code.test.ts', true, 'Relative file with Root'],
+        [['tests/**/*.test.ts'],    '/User/code/src', 'tests/nested/code.test.ts', true, 'Relative file with Root'],
 
         // With non matching Root
         [['*.json'],                '/User/lib/src', '/User/code/src/settings.json', true, 'With non matching Root *.json'],
@@ -173,6 +240,12 @@ function tests(): [string[], string | undefined, string, boolean, string][] {
         [['**/{src,dist}/**'],      '', '/User/code/dist/settings.json',  true, 'Braces'],
         [['**/{src,dist}/**'],      '', '/User/code/lib/settings.json',  false, 'Braces'],
         [['{*.js,*.json}'],         '', '/User/code/src/settings.js',  true, 'Braces'],
+        [['(src|dist)'],            '', '/User/code/src/settings.json',  true, 'Parens'],
+        [['(src|dist)'],            '', '/User/code/dist/settings.json',  true, 'Parens'],
+        [['(src|dist)'],            '', '/User/code/distribution/settings.json',  false, 'Parens'],
+        [['**/(src|dist)/**'],      '', '/User/code/src/settings.json',  true, 'Parens'],
+        [['**/(src|dist)/**'],      '', '/User/code/dist/settings.json',  true, 'Parens'],
+        [['**/(src|dist)/**'],      '', '/User/code/lib/settings.json',  false, 'Parens'],
         [['#', '**/dist/', '*.js'], '', '/User/code/src/settings.js',  true, 'Multiple patterns'],
         [['#', '**/dist/', '*.js'], '', '/User/code/src/settings.json',  false, 'Multiple patterns'],
         [['#', '**/dist/', '*.js*'],'', '/User/code/src/settings.json',  true, 'Multiple patterns'],
