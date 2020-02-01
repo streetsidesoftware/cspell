@@ -19,7 +19,9 @@
     "test-spec": "lerna run test-spec",
     "test-ts": "lerna run test-ts",
     "test-watch": "lerna run --parallel test-watch",
-    "travis-coverage": "npm run gen-coverage && globcat packages/*/coverage/lcov.info | coveralls",
+    "travis-coverage": "npm run gen-coverage && npm run publish-coverage-coveralls && npm run publish-coverage-codecov",
+    "publish-coverage-coveralls": "globcat packages/*/coverage/lcov.info | coveralls",
+    "publish-coverage-codecov": "globcat packages/*/coverage/lcov.info | codecov",
     "test": "lerna run test && ajv -s ./cspell.schema.json -d cspell.json"
   },
   "repository": {
@@ -49,6 +51,7 @@
     "@types/node": "^10.17.11",
     "@types/xregexp": "^3.0.30",
     "ajv-cli": "^3.0.0",
+    "codecov": "^3.6.4",
     "coveralls": "^3.0.9",
     "cspell": "^4.0.44",
     "cspell-dict-en_us": "^1.2.24",
@@ -69,25 +72,6 @@
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
-  },
-  "nyc": {
-    "include": [
-      "**/src/**/*.ts"
-    ],
-    "exclude": [
-      "**/src/**/*.test.ts",
-      "**/src/**/*.spec.ts"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
-    "reporter": [
-      "json",
-      "html"
-    ]
   },
   "dependencies": {}
 }
