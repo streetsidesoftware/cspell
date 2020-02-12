@@ -217,7 +217,10 @@ export type RegExpList = PatternRef[];
 /** A PatternRef is a Pattern or PatternId. */
 export type PatternRef = Pattern | PatternId | PreDefinedPatterns;
 
-export type Pattern = string | RegExp;
+/** @hidden */
+type InternalRegExp = RegExp
+
+export type Pattern = string | InternalRegExp;
 
 export type PreDefinedPatterns =
     'Base64' |
