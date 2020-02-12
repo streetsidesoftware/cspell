@@ -324,38 +324,8 @@
       "type": "object"
     },
     "Pattern": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "additionalProperties": false,
-          "properties": {
-            "global": {
-              "type": "boolean"
-            },
-            "ignoreCase": {
-              "type": "boolean"
-            },
-            "lastIndex": {
-              "type": "number"
-            },
-            "multiline": {
-              "type": "boolean"
-            },
-            "source": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "source",
-            "global",
-            "ignoreCase",
-            "multiline",
-            "lastIndex"
-          ],
-          "type": "object"
-        }
+      "type": [
+        "string"
       ]
     },
     "PatternId": {
