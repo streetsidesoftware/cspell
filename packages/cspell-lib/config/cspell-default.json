@@ -45,6 +45,18 @@
                 "/(?<=\\])\\[[^\\]]+\\]/",
                 "/\\[[^\\]]+\\]:/"
             ]
+        },
+        {
+            "languageId": "*",
+            "local": "en,en-US,en-GB",
+            "description": "Do not check 's by default",
+            "ignoreRegExpList": ["possessive_s"],
+            "patterns": [
+                {
+                    "name": "possessive_s",
+                    "pattern": "/(?:'|`|’)s\\b/gi"
+                }
+            ]
         }
     ],
     "import": [
