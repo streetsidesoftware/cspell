@@ -45,6 +45,17 @@
                 "/(?<=\\])\\[[^\\]]+\\]/",
                 "/\\[[^\\]]+\\]:/"
             ]
+        },
+        {
+            "languageId": "*",
+            "local": "en,en-US,en-GB",
+            "description": "Define possessive_s",
+            "patterns": [
+                {
+                    "name": "possessive_s",
+                    "pattern": "/(?:'|`|’)s\\b/gi"
+                }
+            ]
         }
     ],
     "import": [
