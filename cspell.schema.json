@@ -3,6 +3,16 @@
   "additionalProperties": false,
   "definitions": {
     "DictionaryDefinition": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DictionaryDefinitionPreferred"
+        },
+        {
+          "$ref": "#/definitions/DictionaryDefinitionLegacy"
+        }
+      ]
+    },
+    "DictionaryDefinitionLegacy": {
       "additionalProperties": false,
       "properties": {
         "description": {
@@ -10,16 +20,16 @@
           "type": "string"
         },
         "file": {
-          "description": "File name",
-          "type": "string"
+          "$ref": "#/definitions/FsPath",
+          "description": "File name @deprecated use path"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
           "description": "The reference name of the dictionary, used with program language settings"
         },
         "path": {
-          "description": "Path to the file, if undefined the path to the extension dictionaries is assumed",
-          "type": "string"
+          "$ref": "#/definitions/FsPath",
+          "description": "Path to the file, if undefined the path to the extension dictionaries is assumed"
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
@@ -36,8 +46,38 @@
         }
       },
       "required": [
+        "file",
+        "name"
+      ],
+      "type": "object"
+    },
+    "DictionaryDefinitionPreferred": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Optional description",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "The reference name of the dictionary, used with program language settings"
+        },
+        "path": {
+          "$ref": "#/definitions/FsPath",
+          "description": "Path to the file, if undefined the path to the extension dictionaries is assumed"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs"
+        },
+        "useCompounds": {
+          "description": "Use Compounds",
+          "type": "boolean"
+        }
+      },
+      "required": [
         "name",
-        "file"
+        "path"
       ],
       "type": "object"
     },
@@ -52,6 +92,10 @@
     },
     "DictionaryId": {
       "description": "This matches the name in a dictionary definition",
+      "type": "string"
+    },
+    "FsPath": {
+      "description": "A File System Path",
       "type": "string"
     },
     "Glob": {
@@ -490,11 +534,11 @@
     "import": {
       "anyOf": [
         {
-          "type": "string"
+          "$ref": "#/definitions/FsPath"
         },
         {
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/FsPath"
           },
           "type": "array"
         }
