@@ -28,7 +28,7 @@ export interface FileSettings extends ExtendableSettings {
     userWords?: string[];
 
     /** Other settings files to be included */
-    import?: string | string[];
+    import?: FsPath | FsPath[];
 }
 
 export interface ExtendableSettings extends Settings {
@@ -177,15 +177,32 @@ export interface BaseSetting {
 
 export type DictionaryFileTypes = 'S'|'W'|'C'|'T';
 
-export interface DictionaryDefinition {
+export type DictionaryDefinition = DictionaryDefinitionPreferred | DictionaryDefinitionLegacy;
+
+export interface DictionaryDefinitionBase {
     /** The reference name of the dictionary, used with program language settings */
     name: DictionaryId;
     /** Optional description */
     description?: string;
+    /** Replacement pairs */
+    repMap?: ReplaceMap;
+    /** Use Compounds */
+    useCompounds?: boolean;
+}
+
+export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
     /** Path to the file, if undefined the path to the extension dictionaries is assumed */
-    path?: string;
-    /** File name */
-    file: string;
+    path: FsPath;
+}
+
+/**
+ * @deprecated
+ */
+export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
+    /** Path to the file, if undefined the path to the extension dictionaries is assumed */
+    path?: FsPath;
+    /** File name @deprecated use path */
+    file: FsPath;
     /**
      * Type of file:
      * S - single word per line,
@@ -196,10 +213,6 @@ export interface DictionaryDefinition {
      * @default "S"
      */
     type?: DictionaryFileTypes;
-    /** Replacement pairs */
-    repMap?: ReplaceMap;
-    /** Use Compounds */
-    useCompounds?: boolean;
 }
 
 export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {
@@ -253,6 +266,9 @@ export type Glob = string;
 
 /** This can be '*', 'typescript', 'cpp', 'json', etc. */
 export type LanguageId = string;
+
+/** A File System Path */
+export type FsPath = string;
 
 export interface RegExpPatternDefinition {
     /**
