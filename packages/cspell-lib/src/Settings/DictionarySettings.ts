@@ -1,4 +1,4 @@
-import { DictionaryDefinition, DictionaryId } from './CSpellSettingsDef';
+import { DictionaryDefinition, DictionaryId, DictionaryDefinitionLegacy } from './CSpellSettingsDef';
 import * as path from 'path';
 import * as os from 'os';
 
@@ -29,8 +29,8 @@ export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDe
 }
 
 function getFullPathName(def: DictionaryDefinition) {
-    const { path: filePath = '', file = '' } = def;
-    if (filePath + file === '') {
+    const { path: filePath = '', file = '' } = def as DictionaryDefinitionLegacy;
+    if (!filePath && !file) {
         return '';
     }
     const dictPath = path.join(filePath || dictionaryPath(), file);
@@ -50,4 +50,3 @@ export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: 
             path:  absPath.replace(/^~/, os.homedir())
         };
 }
-
