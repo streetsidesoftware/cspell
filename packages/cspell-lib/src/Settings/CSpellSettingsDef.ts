@@ -197,6 +197,7 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
 
 /**
  * @deprecated
+ * @hidden
  */
 export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     /** Path to the file, if undefined the path to the extension dictionaries is assumed */
