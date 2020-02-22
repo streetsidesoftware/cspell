@@ -43,7 +43,7 @@ export interface Settings extends BaseSetting {
      * Example: "en,nl" to enable both English and Dutch
      * @default "en"
      */
-    language?: LocalId;
+    language?: LocaleId;
 
     /** list of words to be ignored */
     ignoreWords?: string[];
@@ -110,8 +110,8 @@ export interface OverrideSettings extends Settings, OverrideFilterFields {
     /** Sets the programming language id */
     languageId?: LanguageId;
 
-    /** Sets the local */
-    language?: LocalId;
+    /** Sets the locale */
+    language?: LocaleId;
 }
 
 export interface OverrideFilterFields {
@@ -177,7 +177,7 @@ export interface BaseSetting {
 
 export type DictionaryFileTypes = 'S'|'W'|'C'|'T';
 
-export type DictionaryDefinition = DictionaryDefinitionPreferred | DictionaryDefinitionLegacy;
+export type DictionaryDefinition = DictionaryDefinitionPreferred | DictionaryDefinitionAlternate | DictionaryDefinitionLegacy;
 
 export interface DictionaryDefinitionBase {
     /** The reference name of the dictionary, used with program language settings */
@@ -193,6 +193,11 @@ export interface DictionaryDefinitionBase {
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
     /** Path to the file, if undefined the path to the extension dictionaries is assumed */
     path: FsPath;
+}
+
+export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
+    /** Path to the file, if undefined the path to the extension dictionaries is assumed */
+    file: FsPath;
 }
 
 /**
@@ -222,8 +227,8 @@ export interface LanguageSetting extends LanguageSettingFilterFields, BaseSettin
 export interface LanguageSettingFilterFields {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
     languageId: LanguageId | LanguageId[];
-    /** The local filter, matches against the language. This can be a comma separated list. "*" will match all locals. */
-    local?: LocalId | LocalId[];
+    /** The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. */
+    local?: LocaleId | LocaleId[];
 }
 
 export type RegExpList = PatternRef[];
@@ -259,8 +264,13 @@ export type PatternId = string;
 /** This matches the name in a dictionary definition */
 export type DictionaryId = string;
 
-/** This is a written language local like: 'en', 'en-GB', 'fr', 'es', 'de', etc. */
-export type LocalId = string;
+/** This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc. */
+export type LocaleId = string;
+
+/**
+ * @deprecatedMessage Use LocaleId instead
+ */
+export type LocalId = LocaleId;
 
 /** These are glob expressions */
 export type Glob = string;
