@@ -53,9 +53,10 @@ describe('Validate DictionarySettings', () => {
         const defs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
         expect(defs.length).toBe(dictionaryDefinitions!.length);
 
-        const basePath = path.join('some', 'dir');
+        const basePath = path.join('some', 'dir', 'words.txt');
         const legacyDictionaryDefinitions = (dictionaryDefinitions || []).map(a => ({...a}) as DictionaryDefinitionLegacy);
         legacyDictionaryDefinitions[0].path = path.join('~', basePath);
+        legacyDictionaryDefinitions[0].file = '';
         const tildeDefs = DictSettings.normalizePathForDictDefs(legacyDictionaryDefinitions!, '.');
         expect(tildeDefs[0].path).toBe(path.join(os.homedir(), basePath));
     });
