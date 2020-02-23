@@ -1,4 +1,4 @@
-import { LanguageSetting, CSpellUserSettings, LocalId, LanguageId, BaseSetting } from './CSpellSettingsDef';
+import { LanguageSetting, CSpellUserSettings, LocaleId, LanguageId, BaseSetting } from './CSpellSettingsDef';
 import * as SpellSettings from './CSpellSettingsServer';
 
 // cspell:ignore filetypes
@@ -7,7 +7,7 @@ import * as SpellSettings from './CSpellSettingsServer';
 // Dictionaries are concatenated together.
 export type LanguageSettings = LanguageSetting[];
 
-const defaultLocal: LocalId = 'en';
+const defaultLocal: LocaleId = 'en';
 
 const defaultLanguageSettings: LanguageSettings = [
 ];
@@ -28,17 +28,17 @@ export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<Lang
     return new Set<LanguageId>(langIds.map(a => a.toLowerCase()));
 }
 
-export function normalizeLocal(local: LocalId | LocalId[]): Set<LocalId> {
+export function normalizeLocal(local: LocaleId | LocaleId[]): Set<LocaleId> {
     local = stringToList(local);
-    return new Set<LocalId>(local.map(local => local.toLowerCase().replace(/[^a-z]/g, '')));
+    return new Set<LocaleId>(local.map(local => local.toLowerCase().replace(/[^a-z]/g, '')));
 }
 
-export function isLocalInSet(local: LocalId | LocalId[], setOfLocals: Set<LocalId>): boolean {
+export function isLocalInSet(local: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
     const locals = normalizeLocal(local);
     return [...locals.values()].filter(local => setOfLocals.has(local)).length > 0;
 }
 
-export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocalId | LocalId[]): BaseSetting {
+export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocaleId | LocaleId[]): BaseSetting {
     languageId = languageId.toLowerCase();
     const allowedLocals = normalizeLocal(local);
     return defaultLanguageSettings.concat(languageSettings)
@@ -78,4 +78,3 @@ export function calcSettingsForLanguageId(baseSettings: CSpellUserSettings, lang
     }, baseSettings);
     return langSettings;
 }
-
