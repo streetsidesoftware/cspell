@@ -191,12 +191,18 @@ export interface DictionaryDefinitionBase {
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
-    /** Path to the file, if undefined the path to the extension dictionaries is assumed */
+    /** Path to the file */
     path: FsPath;
+
+    /** @hidden */
+    file?: undefined;
 }
 
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
-    /** Path to the file, if undefined the path to the extension dictionaries is assumed */
+    /** @hidden */
+    path?: undefined;
+
+    /** Path to the file */
     file: FsPath;
 }
 
