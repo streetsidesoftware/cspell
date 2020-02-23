@@ -4,6 +4,7 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as os from 'os';
 import { getDefaultSettings } from './DefaultSettings';
+import { DictionaryDefinitionLegacy } from './CSpellSettingsDef';
 
 const defaultSettings = getDefaultSettings();
 
@@ -53,10 +54,11 @@ describe('Validate DictionarySettings', () => {
         const defs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
         expect(defs.length).to.be.equal(dictionaryDefinitions!.length);
 
-        const basePath = path.join('some', 'dir');
-        dictionaryDefinitions![0].path = path.join('~', basePath);
-        const tildeDefs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
+        const basePath = path.join('some', 'dir', 'words.txt');
+        const legacyDictionaryDefinitions = (dictionaryDefinitions || []).map(a => ({...a}) as DictionaryDefinitionLegacy);
+        legacyDictionaryDefinitions[0].path = path.join('~', basePath);
+        legacyDictionaryDefinitions[0].file = '';
+        const tildeDefs = DictSettings.normalizePathForDictDefs(legacyDictionaryDefinitions!, '.');
         expect(tildeDefs[0].path).to.be.equal(path.join(os.homedir(), basePath));
     });
 });
-

@@ -1,10 +1,10 @@
-import { DictionaryDefinition, DictionaryId, DictionaryDefinitionLegacy } from './CSpellSettingsDef';
+import { DictionaryDefinition, DictionaryId, DictionaryDefinitionLegacy, DictionaryDefinitionPreferred } from './CSpellSettingsDef';
 import * as path from 'path';
 import * as os from 'os';
 
 const dictionaryPath = () => path.join(__dirname, '..', '..', 'dist', 'dictionaries');
 
-export type DefMapArrayItem = [string, DictionaryDefinition];
+export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
 
 export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDefinition[]): DefMapArrayItem[]  {
     // Process the dictIds in order, if it starts with a '!', remove it from the set.
@@ -37,16 +37,18 @@ function getFullPathName(def: DictionaryDefinition) {
     return path.resolve(dictPath);
 }
 
-export function normalizePathForDictDefs(defs: DictionaryDefinition[], defaultPath: string): DictionaryDefinition[] {
+export function normalizePathForDictDefs(defs: DictionaryDefinition[], defaultPath: string): DictionaryDefinitionPreferred[] {
     return defs
         .map(def => normalizePathForDictDef(def, defaultPath));
 }
 
-export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: string): DictionaryDefinition {
-        const { path: relPath = '.' } = def;
-        const absPath = relPath.match(/^\./) ? path.join(defaultPath, relPath) : relPath;
+export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: string): DictionaryDefinitionPreferred {
+        const { path: relPath = '.', file, ...rest } = def as DictionaryDefinitionLegacy;
+        const nonRelPath = relPath.match(/^\./) ? path.join(defaultPath, relPath) : relPath;
+        const absPath = nonRelPath.replace(/^~/, os.homedir());
+        const fullPath = file ? path.join(absPath, file) : absPath;
         return {
-            ...def,
-            path:  absPath.replace(/^~/, os.homedir())
+            ...rest,
+            path: fullPath
         };
 }

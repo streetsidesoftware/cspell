@@ -3,7 +3,44 @@
   "additionalProperties": false,
   "definitions": {
     "DictionaryDefinition": {
-      "$ref": "#/definitions/DictionaryDefinitionPreferred"
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DictionaryDefinitionPreferred"
+        },
+        {
+          "$ref": "#/definitions/DictionaryDefinitionAlternate"
+        }
+      ]
+    },
+    "DictionaryDefinitionAlternate": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "description": "Optional description",
+          "type": "string"
+        },
+        "file": {
+          "$ref": "#/definitions/FsPath",
+          "description": "Path to the file, if undefined the path to the extension dictionaries is assumed"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "The reference name of the dictionary, used with program language settings"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs"
+        },
+        "useCompounds": {
+          "description": "Use Compounds",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "file",
+        "name"
+      ],
+      "type": "object"
     },
     "DictionaryDefinitionPreferred": {
       "additionalProperties": false,
@@ -123,16 +160,16 @@
         "local": {
           "anyOf": [
             {
-              "$ref": "#/definitions/LocalId"
+              "$ref": "#/definitions/LocaleId"
             },
             {
               "items": {
-                "$ref": "#/definitions/LocalId"
+                "$ref": "#/definitions/LocaleId"
               },
               "type": "array"
             }
           ],
-          "description": "The local filter, matches against the language. This can be a comma separated list. \"*\" will match all locals."
+          "description": "The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
         },
         "name": {
           "description": "Optional name of configuration",
@@ -158,8 +195,8 @@
       ],
       "type": "object"
     },
-    "LocalId": {
-      "description": "This is a written language local like: 'en', 'en-GB', 'fr', 'es', 'de', etc.",
+    "LocaleId": {
+      "description": "This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.",
       "type": "string"
     },
     "OverrideSettings": {
@@ -253,9 +290,9 @@
           "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
         },
         "language": {
-          "$ref": "#/definitions/LocalId",
+          "$ref": "#/definitions/LocaleId",
           "default": "en",
-          "description": "Sets the local"
+          "description": "Sets the locale"
         },
         "languageId": {
           "$ref": "#/definitions/LanguageId",
@@ -495,7 +532,7 @@
       "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
     },
     "language": {
-      "$ref": "#/definitions/LocalId",
+      "$ref": "#/definitions/LocaleId",
       "default": "en",
       "description": "Current active spelling language\nExample: \"en-GB\" for British English\nExample: \"en,nl\" to enable both English and Dutch"
     },
