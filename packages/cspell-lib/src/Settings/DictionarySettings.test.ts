@@ -3,7 +3,6 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as os from 'os';
 import { getDefaultSettings } from './DefaultSettings';
-import { DictionaryDefinitionLegacy } from './CSpellSettingsDef';
 
 const defaultSettings = getDefaultSettings();
 
@@ -54,7 +53,7 @@ describe('Validate DictionarySettings', () => {
         expect(defs.length).toBe(dictionaryDefinitions!.length);
 
         const basePath = path.join('some', 'dir', 'words.txt');
-        const legacyDictionaryDefinitions = (dictionaryDefinitions || []).map(a => ({...a}) as DictionaryDefinitionLegacy);
+        const legacyDictionaryDefinitions = (dictionaryDefinitions || []).map(a => ({...a}));
         legacyDictionaryDefinitions[0].path = path.join('~', basePath);
         legacyDictionaryDefinitions[0].file = '';
         const tildeDefs = DictSettings.normalizePathForDictDefs(legacyDictionaryDefinitions!, '.');
