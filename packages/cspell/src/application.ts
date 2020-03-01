@@ -483,28 +483,11 @@ function normalizePattern(pat: string, root: string): PatternRoot {
     };
 }
 
-function groupPatterns(patterns: PatternRoot[]): PatternRoot[] {
-    const groups = new Map<string, string[]>();
-    patterns.forEach(pat => {
-        const pats = groups.get(pat.root) || [];
-        pats.push(pat.pattern);
-        groups.set(pat.root, pats);
-    });
-    const resultPatterns: PatternRoot[] = [];
-    for (const [root, patterns] of groups) {
-        resultPatterns.push({
-            root,
-            pattern: patterns.join(','),
-        });
-    }
-    return resultPatterns;
-}
-
 async function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
     const root = options?.root || process.cwd();
     const opts = options || {};
     const rawPatterns = typeof pattern === 'string' ? [ pattern ] : pattern;
-    const normPatterns = groupPatterns(rawPatterns.map(pat => normalizePattern(pat, root)));
+    const normPatterns = rawPatterns.map(pat => normalizePattern(pat, root));
     const globResults = normPatterns.map(async pat => {
         const opt: GlobOptions = {...opts, root: pat.root, cwd: pat.root};
         const absolutePaths = (await _globP(pat.pattern, opt))
@@ -535,6 +518,5 @@ function _globP(pattern: string, options: GlobOptions): Promise<string[]> {
 export const _testing_ = {
     _globP,
     findFiles,
-    groupPatterns,
     normalizePattern,
 };
