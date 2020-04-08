@@ -89,7 +89,7 @@ export function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffse
     return matchToTextOffset(reg, text)
         // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
         .map(({ text, offset }) => ({
-            text: XRegExp.replace(text, regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)),
+            text: XRegExp.replace(text, regExIgnoreCharacters, match => ' '.repeat(match.length)),
             offset,
         }))
         .concatMap(wo => matchToTextOffset(reg2, wo))
