@@ -34,29 +34,13 @@
     "url": "https://github.com/streetsidesoftware/cspell/issues"
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
-  "nyc": {
-    "include": [
-      "src/**/*.ts"
-    ],
-    "exclude": [
-      "src/**/*.test.ts"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
-    "reporter": [
-      "json",
-      "html"
-    ]
-  },
   "engines": {
     "node": ">=10.0.0"
   },
+  "dependencies": {
+    "@types/xregexp": "^4.3.0"
+  },
   "devDependencies": {
-    "@types/xregexp": "^4.3.0",
     "rimraf": "^3.0.2",
     "xregexp": "^4.3.0"
   }
