@@ -65,6 +65,7 @@ export function validateText(
     return Text.extractLinesOfText(text)
         .concatMap(mapTextOffsetsAgainstRanges(includeRanges))
         .concatMap(validator)
+        .map(a => a as Text.TextOffset)
         .filter(wo => {
             const word = wo.text;
             // Keep track of the number of times we have seen the same problem
