@@ -1,6 +1,6 @@
 {
   "name": "cspell-io",
-  "version": "5.0.1-alpha.0",
+  "version": "5.0.2-alpha.0",
   "description": "A library of useful I/O functions used across various cspell tools.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -36,26 +36,7 @@
     "iconv-lite": "^0.4.24",
     "iterable-to-stream": "^1.0.1"
   },
-  "nyc": {
-    "include": [
-      "src/**/*.ts"
-    ],
-    "exclude": [
-      "src/**/*.test.ts"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
-    "reporter": [
-      "json",
-      "html"
-    ]
-  },
   "engines": {
     "node": ">=10.0.0"
-  },
-  "gitHead": "437efcc5f813402c695cfce56e8af65e16459275"
+  }
 }
