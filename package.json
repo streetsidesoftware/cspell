@@ -12,7 +12,7 @@
     "clean": "lerna run clean",
     "coverage": "npm run gen-coverage",
     "gen-coverage": "lerna run coverage",
-    "install": "lerna bootstrap --ci",
+    "install": "lerna bootstrap --no-ci",
     "lint-travis": "lerna run lint-travis",
     "prepare": "npm run clean-build",
     "pub": "npm install && npm test && lerna publish",
