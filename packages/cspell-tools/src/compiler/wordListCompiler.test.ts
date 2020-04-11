@@ -86,7 +86,7 @@ describe('Validate the wordListCompiler', () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities.trie');
         await compileTrie(source, destName, {});
-        const srcWords = (await fsp.readFile(destName, 'utf8')).split('\n');
+        const srcWords = (await fsp.readFile(destName, 'utf8')).split(/\r?\n/g);
         const node = Trie.importTrie(srcWords);
         const expected = citiesResult.split('\n').filter(a => !!a).sort();
         const words = [...Trie.iteratorTrieWords(node)].sort();

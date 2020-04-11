@@ -7,7 +7,7 @@
   "scripts": {
     "build": "lerna run build",
     "build-schema": "lerna run build-schema",
-    "check-spelling": "cspell **/{*.ts,*.md}",
+    "check-spelling": "npx cspell **/{*.ts,*.md}",
     "clean-build": "lerna run clean-build",
     "clean": "lerna run clean",
     "coverage": "npm run gen-coverage",
@@ -53,11 +53,9 @@
     "ajv-cli": "^3.0.0",
     "codecov": "^3.6.4",
     "coveralls": "^3.0.9",
-    "cspell": "^4.0.44",
     "cspell-dict-en_us": "^1.2.24",
     "cspell-dict-es-es": "^1.0.18",
     "cspell-dict-nl-nl": "^1.0.23",
-    "cspell-tools": "^4.1.12",
     "fs-extra": "^8.1.0",
     "globcat": "^1.2.0",
     "jest": "^24.9.0",
@@ -72,6 +70,5 @@
     "typescript": "^3.7.4",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
-  },
-  "dependencies": {}
+  }
 }
