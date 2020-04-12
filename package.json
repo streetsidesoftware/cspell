@@ -21,7 +21,7 @@
     "test-watch": "lerna run --parallel test-watch",
     "travis-coverage": "npm run gen-coverage && npm run publish-coverage-coveralls && npm run publish-coverage-codecov",
     "publish-coverage-coveralls": "globcat packages/*/coverage/lcov.info | coveralls",
-    "publish-coverage-codecov": "globcat packages/*/coverage/lcov.info | codecov",
+    "publish-coverage-codecov": "globcat packages/*/coverage/lcov.info | codecov --pipe",
     "test": "lerna run test && ajv -s ./cspell.schema.json -d cspell.json"
   },
   "repository": {
@@ -51,8 +51,8 @@
     "@types/node": "^10.17.11",
     "@types/xregexp": "^3.0.30",
     "ajv-cli": "^3.0.0",
-    "codecov": "^3.6.4",
-    "coveralls": "^3.0.9",
+    "codecov": "^3.6.5",
+    "coveralls": "^3.0.11",
     "cspell-dict-en_us": "^1.2.24",
     "cspell-dict-es-es": "^1.0.18",
     "cspell-dict-nl-nl": "^1.0.23",
