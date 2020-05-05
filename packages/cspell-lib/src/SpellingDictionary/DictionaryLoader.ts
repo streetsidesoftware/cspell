@@ -4,6 +4,10 @@ import * as path from 'path';
 import { ReplaceMap } from '../Settings';
 import { genSequence } from 'gensequence';
 import { readLines } from '../util/fileReader';
+import { Stats } from 'fs-extra';
+import * as fs from 'fs-extra';
+
+const MAX_AGE = 10000;
 
 export interface LoadOptions {
     // Type of file:
@@ -39,18 +43,62 @@ const loaders: Loaders = {
     default: loadSimpleWordList,
 };
 
-const dictionaryCache = new Map<string, Promise<SpellingDictionary>>();
-
-export function loadDictionary(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const loaderType = determineType(uri, options);
-    const key = [uri, loaderType].join('|');
-    if (!dictionaryCache.has(key)) {
-        dictionaryCache.set(key, load(uri, options));
-    }
-
-    return dictionaryCache.get(key)!;
+interface CacheEntry {
+    uri: string;
+    options: LoadOptions;
+    ts: number;
+    state: Promise<Stats>;
+    dictionary: Promise<SpellingDictionary>;
 }
 
+const dictionaryCache = new Map<string, CacheEntry>();
+
+export function loadDictionary(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
+    const key = calcKey(uri, options);
+    if (!dictionaryCache.has(key)) {
+        dictionaryCache.set(key, loadEntry(uri, options));
+    }
+    const entry = dictionaryCache.get(key)!;
+    return entry.dictionary;
+}
+
+function calcKey(uri: string, options: LoadOptions) {
+    const loaderType = determineType(uri, options);
+    return [uri, loaderType].join('|');
+}
+
+export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()) {
+    await Promise.all([...dictionaryCache]
+        .map(([, entry]) => refreshEntry(entry, maxAge, now))
+    );
+}
+
+async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now()) {
+    if (now - entry.ts >= maxAge) {
+        // Write to the ts, so the next one will not do it.
+        entry.ts = now;
+        const [state, oldState] = await Promise.all([fs.stat(entry.uri), entry.state]);
+        if (entry.ts === now && (
+            state.mtimeMs !== oldState.mtimeMs ||
+            state.size !== oldState.size
+        )) {
+            dictionaryCache.set(
+                calcKey(entry.uri, entry.options),
+                loadEntry(entry.uri, entry.options)
+            );
+        }
+    }
+}
+
+function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
+    return {
+        uri,
+        options,
+        ts: now,
+        state: fs.stat(uri),
+        dictionary: load(uri, options),
+    }
+}
 
 function determineType(uri: string, options: LoadOptions): LoaderType {
     const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'C';
@@ -90,3 +138,9 @@ async function loadCodeWordList(filename: string, options: LoadOptions) {
 async function loadTrie(filename: string, options: LoadOptions) {
     return createSpellingDictionaryTrie(await loadWordsNoError(filename), path.basename(filename), filename, options);
 }
+
+export const testing = {
+    dictionaryCache,
+    refreshEntry,
+    loadEntry
+};
