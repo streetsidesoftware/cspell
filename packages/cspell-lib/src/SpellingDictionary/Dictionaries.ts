@@ -1,6 +1,6 @@
 import { DictionaryDefinition, DictionaryId, CSpellUserSettings } from '../Settings';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
-import { loadDictionary } from './DictionaryLoader';
+import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';
 import { createSpellingDictionary } from "./createSpellingDictionary";
 import { SpellingDictionary } from "./SpellingDictionary";
 import { createCollectionP } from './SpellingDictionaryCollection';
@@ -13,6 +13,10 @@ export function loadDictionaries(dictIds: DictionaryId[], defs: DictionaryDefini
     return defsToLoad
         .map(e => e[1])
         .map(def => loadDictionary(def.path!, def));
+}
+
+export function refreshDictionaryCache(maxAge?: number) {
+    return refreshCacheEntries(maxAge);
 }
 
 export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
