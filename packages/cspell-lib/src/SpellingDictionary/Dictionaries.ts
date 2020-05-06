@@ -12,7 +12,10 @@ export function loadDictionaries(dictIds: DictionaryId[], defs: DictionaryDefini
 
     return defsToLoad
         .map(e => e[1])
-        .map(def => loadDictionary(def.path!, def));
+        .map(def => loadDictionary(def.path!, def))
+        .map(p => p.catch(() => undefined))
+        .filter(p => !!p)
+        .map(a => a  as Promise<SpellingDictionary>);
 }
 
 export function refreshDictionaryCache(maxAge?: number) {
