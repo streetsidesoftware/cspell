@@ -23,6 +23,7 @@ export {
     SpellingDictionary,
     SuggestionCollector,
     SuggestionResult,
+    refreshDictionaryCache,
 } from './SpellingDictionary';
 export { getDefaultSettings, getGlobalSettings } from './Settings';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
@@ -48,7 +49,7 @@ import { refreshDictionaryCache } from './SpellingDictionary'
 export async function clearCachedSettings() {
     await Promise.all([
         clearCachedFiles(),
-        refreshDictionaryCache(),
+        refreshDictionaryCache(0),
     ]);
 }
 
