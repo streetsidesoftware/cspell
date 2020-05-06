@@ -47,7 +47,7 @@ interface CacheEntry {
     uri: string;
     options: LoadOptions;
     ts: number;
-    state: Promise<Stats>;
+    state: Promise<Stats | undefined>;
     dictionary: Promise<SpellingDictionary>;
 }
 
@@ -77,10 +77,11 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
-        const [state, oldState] = await Promise.all([fs.stat(entry.uri), entry.state]);
+        const pStat = fs.stat(entry.uri).catch(() => undefined);
+        const [state, oldState] = await Promise.all([pStat, entry.state]);
         if (entry.ts === now && (
-            state.mtimeMs !== oldState.mtimeMs ||
-            state.size !== oldState.size
+            state?.mtimeMs !== oldState?.mtimeMs ||
+            state?.size !== oldState?.size
         )) {
             dictionaryCache.set(
                 calcKey(entry.uri, entry.options),
@@ -95,7 +96,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         uri,
         options,
         ts: now,
-        state: fs.stat(uri),
+        state: fs.stat(uri).catch(() => undefined),
         dictionary: load(uri, options),
     }
 }
@@ -124,15 +125,23 @@ async function loadSimpleWordList(filename: string, options: LoadOptions) {
 }
 
 async function loadWordList(filename: string, options: LoadOptions) {
-    const lines = genSequence(await readLines(filename));
-    const words = lines.concatMap(splitLineIntoWords);
-    return createSpellingDictionary(words, path.basename(filename), filename, options);
+    try {
+        const lines = genSequence(await readLines(filename));
+        const words = lines.concatMap(splitLineIntoWords);
+        return createSpellingDictionary(words, path.basename(filename), filename, options);
+    } catch (e) {
+        return Promise.reject(e);
+    }
 }
 
 async function loadCodeWordList(filename: string, options: LoadOptions) {
-    const lines = genSequence(await readLines(filename));
-    const words = lines.concatMap(splitLineIntoCodeWords);
-    return createSpellingDictionary(words, path.basename(filename), filename, options);
+    try {
+        const lines = genSequence(await readLines(filename));
+        const words = lines.concatMap(splitLineIntoCodeWords);
+        return createSpellingDictionary(words, path.basename(filename), filename, options);
+    } catch (e) {
+        return Promise.reject(e);
+    }
 }
 
 async function loadTrie(filename: string, options: LoadOptions) {
