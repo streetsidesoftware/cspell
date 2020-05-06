@@ -14,4 +14,8 @@ describe('Validate the cspell API', () => {
                 expect(results.map(to => to.text)).toEqual(expect.arrayContaining(['Jansons']));
             });
     });
+
+    test('clearCachedSettings', () => {
+        return cspell.clearCachedFiles();
+    });
 });

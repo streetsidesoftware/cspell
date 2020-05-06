@@ -1,5 +1,7 @@
 import * as Dictionaries from './Dictionaries';
 import { getDefaultSettings } from '../Settings';
+import * as path from 'path';
+import * as fs from 'fs-extra';
 
 // cspell:ignore café rhône
 
@@ -71,5 +73,47 @@ describe('Validate getDictionary', () => {
         expect(dict.has('rhône', { ignoreCase: true })).toBe(true);
         expect(dict.has('rhone', { ignoreCase: true })).toBe(true);
         expect(dict.has('cafe', { ignoreCase: true })).toBe(true);
+    });
+
+    test('Refresh Dictionary Cache', async () => {
+        const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words.txt');
+        await fs.mkdirp(path.dirname(tempDictPath));
+        await fs.writeFile(tempDictPath, "one\ntwo\nthree\n");
+
+        const settings = getDefaultSettings();
+        const defs = (settings.dictionaryDefinitions || []).concat([
+            {
+                name: 'temp',
+                path: tempDictPath
+            }
+        ]);
+        const toLoad = ['node', 'html', 'css', 'temp'];
+        const dicts = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+
+        expect(dicts[3].has('one')).toBe(true);
+        expect(dicts[3].has('four')).toBe(false);
+
+        await Dictionaries.refreshDictionaryCache(0);
+        const dicts2 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+
+        // Since noting changed, expect them to be the same.
+        expect(dicts.length).toEqual(toLoad.length);
+        expect(dicts2.length).toEqual(dicts.length);
+        dicts.forEach((d, i) => expect(dicts2[i]).toEqual(d));
+
+        // Update one of the dictionaries to see if it loads.
+        await fs.writeFile(tempDictPath, "one\ntwo\nthree\nfour\n");
+
+        const dicts3 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+        // Should be using cache and will not contain the new words.
+        expect(dicts3[3].has('one')).toBe(true);
+        expect(dicts3[3].has('four')).toBe(false);
+
+        await Dictionaries.refreshDictionaryCache(0);
+
+        const dicts4 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+        // Should be using the latest copy of the words.
+        expect(dicts4[3].has('one')).toBe(true);
+        expect(dicts4[3].has('four')).toBe(true);
     });
 });

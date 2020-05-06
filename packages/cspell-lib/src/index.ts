@@ -11,7 +11,6 @@ export {
 } from './validator';
 export {
     calcOverrideSettings,
-    clearCachedFiles as clearCachedSettings,
     defaultFileName as defaultSettingsFilename,
     mergeSettings,
     readSettings,
@@ -42,3 +41,15 @@ export {
 
 export { getLanguagesForExt } from './LanguageIds';
 export * from './trace';
+
+import { clearCachedFiles } from './Settings';
+import { refreshDictionaryCache } from './SpellingDictionary'
+
+export async function clearCachedSettings() {
+    await Promise.all([
+        clearCachedFiles(),
+        refreshDictionaryCache(),
+    ]);
+}
+
+export { clearCachedSettings as clearCachedFiles };
