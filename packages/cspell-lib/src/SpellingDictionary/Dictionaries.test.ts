@@ -73,9 +73,13 @@ describe('Validate getDictionary', () => {
             {
                 name: 'temp',
                 path: tempDictPath
+            },
+            {
+                name: 'not_found',
+                path: tempDictPath
             }
         ]);
-        const toLoad = ['node', 'html', 'css', 'temp'];
+        const toLoad = ['node', 'html', 'css', 'not_found', 'temp', ];
         const dicts = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
 
         expect(dicts[3].has('one')).to.be.true;
