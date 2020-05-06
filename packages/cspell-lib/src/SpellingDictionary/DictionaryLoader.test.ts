@@ -1,5 +1,7 @@
 import { testing, LoadOptions, loadDictionary } from './DictionaryLoader';
 import * as path from 'path';
+jest.mock('../util/logger');
+
 
 const root = path.join(__dirname, '..', '..');
 const dictionaries = path.join(root, 'dictionaries');
