@@ -125,15 +125,23 @@ async function loadSimpleWordList(filename: string, options: LoadOptions) {
 }
 
 async function loadWordList(filename: string, options: LoadOptions) {
-    const lines = genSequence(await readLines(filename));
-    const words = lines.concatMap(splitLineIntoWords);
-    return createSpellingDictionary(words, path.basename(filename), filename, options);
+    try {
+        const lines = genSequence(await readLines(filename));
+        const words = lines.concatMap(splitLineIntoWords);
+        return createSpellingDictionary(words, path.basename(filename), filename, options);
+    } catch (e) {
+        return Promise.reject(e);
+    }
 }
 
 async function loadCodeWordList(filename: string, options: LoadOptions) {
-    const lines = genSequence(await readLines(filename));
-    const words = lines.concatMap(splitLineIntoCodeWords);
-    return createSpellingDictionary(words, path.basename(filename), filename, options);
+    try {
+        const lines = genSequence(await readLines(filename));
+        const words = lines.concatMap(splitLineIntoCodeWords);
+        return createSpellingDictionary(words, path.basename(filename), filename, options);
+    } catch (e) {
+        return Promise.reject(e);
+    }
 }
 
 async function loadTrie(filename: string, options: LoadOptions) {
