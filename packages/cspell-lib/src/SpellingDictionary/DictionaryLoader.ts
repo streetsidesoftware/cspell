@@ -49,7 +49,7 @@ interface CacheEntry {
     uri: string;
     options: LoadOptions;
     ts: number;
-    state: Promise<Stats>;
+    state: Promise<Stats | undefined>;
     dictionary: Promise<SpellingDictionary>;
 }
 
@@ -81,8 +81,8 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
         entry.ts = now;
         const [state, oldState] = await Promise.all([fs.stat(entry.uri), entry.state]);
         if (entry.ts === now && (
-            state.mtimeMs !== oldState.mtimeMs ||
-            state.size !== oldState.size
+            state?.mtimeMs !== oldState?.mtimeMs ||
+            state?.size !== oldState?.size
         )) {
             dictionaryCache.set(
                 calcKey(entry.uri, entry.options),
@@ -97,7 +97,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         uri,
         options,
         ts: now,
-        state: fs.stat(uri),
+        state: fs.stat(uri).catch(() => undefined),
         dictionary: load(uri, options),
     }
 }
