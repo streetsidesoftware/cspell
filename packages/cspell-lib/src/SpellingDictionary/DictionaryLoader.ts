@@ -79,7 +79,8 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
-        const [state, oldState] = await Promise.all([fs.stat(entry.uri), entry.state]);
+        const pStat = fs.stat(entry.uri).catch(() => undefined);
+        const [state, oldState] = await Promise.all([pStat, entry.state]);
         if (entry.ts === now && (
             state?.mtimeMs !== oldState?.mtimeMs ||
             state?.size !== oldState?.size
