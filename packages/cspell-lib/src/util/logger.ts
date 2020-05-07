@@ -1,4 +1,4 @@
 
-export function logError(e: any) {
-    console.log(e);
+export function logError(...args: any[]) {
+    console.log(...args);
 }

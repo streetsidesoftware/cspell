@@ -12,6 +12,7 @@ import {
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
+import { logError } from '../util/logger';
 import * as ConfigStore from 'configstore';
 import * as minimatch from 'minimatch';
 
@@ -37,7 +38,7 @@ function readJsonFile(file: string): CSpellSettings {
         return json.parse(fs.readFileSync(file).toString());
     }
     catch (err) {
-        console.error('Failed to read "%s": %s', file, err);
+        logError('Failed to read "%s": %s', file, err);
     }
     return {};
 }
@@ -258,7 +259,7 @@ export function getGlobalSettings(): CSpellSettings {
             const cfgStore = new ConfigStore(packageName);
             Object.assign(globalConf, cfgStore.all);
         } catch (error) {
-            console.log(error);
+            logError(error);
         }
 
         globalSettings = {
