@@ -23,10 +23,30 @@ describe('Validate DictionaryLoader', () => {
         ];
 
         for (const t of tests) {
+            const dictionary = testing.load(t[0], t[1]);
+            await expect(dictionary).rejects.toEqual(expect.objectContaining(t[2]));
+        }
+    });
+
+    it('test not found', async () => {
+        const error = { code: 'ENOENT' };
+        const unknownFormatError = new Error('Unknown file format')
+        const tests: [string, LoadOptions, Object][] = [
+            ['./notfound.txt', {}, error],
+            ['./notfound.txt', { type: 'S' }, error],
+            ['./notfound.txt', { type: 'C' }, error],
+            ['./notfound.txt.gz', {}, error],
+            ['./notfound.txt.gz', { type: 'S' }, error],
+            ['./notfound.txt.gz', { type: 'C' }, error],
+            ['./notfound.trie', { }, unknownFormatError],
+            ['./notfound.trie.gz', { }, unknownFormatError],
+        ];
+
+        for (const t of tests) {
             const entry = testing.loadEntry(t[0], t[1]);
 
             await expect(entry.state).resolves.toBe(undefined);
-            await expect(entry.dictionary).rejects.toEqual(expect.objectContaining(t[2]));
+            await expect(entry.dictionary).resolves.not.toBe(undefined);
         }
     });
 
@@ -46,7 +66,7 @@ describe('Validate DictionaryLoader', () => {
 
         for (const t of tests) {
             const pDict = loadDictionary(t[0], t[1]);
-            await expect(pDict).rejects.toEqual(expect.objectContaining(t[2]));
+            await expect(pDict).resolves.not.toBe(undefined);
         }
     });
 
