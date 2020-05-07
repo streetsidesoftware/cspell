@@ -3,6 +3,7 @@ import * as Text from './util/text';
 import { readLines } from './util/fileReader';
 import { xregexp as XRegExp } from 'cspell-util-bundle';
 import { toIterableIterator, concatIterables } from './util/iterableIteratorLib';
+import { logError } from './util/logger';
 
 
 const regExpWordsWithSpaces = XRegExp('^\\s*\\p{L}+(?:\\s+\\p{L}+){0,3}$');
@@ -21,10 +22,6 @@ export function loadWordsNoError(filename: string) {
     return readLines(filename).catch(
         e => (logError(e), toIterableIterator<string>([]))
     );
-}
-
-function logError(e: any) {
-    console.log(e);
 }
 
 export function splitLine(line: string) {

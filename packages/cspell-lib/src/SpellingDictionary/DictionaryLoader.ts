@@ -1,4 +1,4 @@
-import { splitLineIntoWords, splitLineIntoCodeWords, loadWordsNoError } from '../wordListHelper';
+import { splitLineIntoCodeWords, loadWordsNoError } from '../wordListHelper';
 import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
@@ -14,7 +14,6 @@ const MAX_AGE = 10000;
 export interface LoadOptions {
     // Type of file:
     //  S - single word per line,
-    //  W - each line can contain one or more word separated by space,
     //  C - each line is treated like code (Camel Case is allowed)
     // Default is C
     // C is the slowest to load due to the need to split each line based upon code splitting rules.
@@ -30,7 +29,6 @@ export type Loader = (filename: string, options: LoadOptions) => Promise<Spellin
 
 export interface Loaders {
     S: Loader;
-    W: Loader;
     C: Loader;
     T: Loader;
     default: Loader;
@@ -39,7 +37,6 @@ export interface Loaders {
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
-    W: loadWordList,
     C: loadCodeWordList,
     T: loadTrie,
     default: loadSimpleWordList,
@@ -49,7 +46,7 @@ interface CacheEntry {
     uri: string;
     options: LoadOptions;
     ts: number;
-    state: Promise<Stats>;
+    state: Promise<Stats | undefined>;
     dictionary: Promise<SpellingDictionary>;
 }
 
@@ -79,10 +76,11 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
-        const [state, oldState] = await Promise.all([fs.stat(entry.uri), entry.state]);
+        const pStat = fs.stat(entry.uri).catch(() => undefined);
+        const [state, oldState] = await Promise.all([pStat, entry.state]);
         if (entry.ts === now && (
-            state.mtimeMs !== oldState.mtimeMs ||
-            state.size !== oldState.size
+            state?.mtimeMs !== oldState?.mtimeMs ||
+            state?.size !== oldState?.size
         )) {
             dictionaryCache.set(
                 calcKey(entry.uri, entry.options),
@@ -93,12 +91,13 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
 }
 
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
+    const dictionary = load(uri, options).catch(() => createSpellingDictionary([], path.basename(uri), uri, options));
     return {
         uri,
         options,
         ts: now,
-        state: fs.stat(uri),
-        dictionary: load(uri, options),
+        state: fs.stat(uri).catch(() => undefined),
+        dictionary,
     }
 }
 
@@ -115,20 +114,9 @@ function load(uri: string, options: LoadOptions): Promise<SpellingDictionary>  {
     return loader(uri, options);
 }
 
-
 async function loadSimpleWordList(filename: string, options: LoadOptions) {
-    try {
-        const lines = await readLines(filename);
-        return createSpellingDictionary(lines, path.basename(filename), filename, options);
-    } catch (e) {
-        return Promise.reject(e);
-    }
-}
-
-async function loadWordList(filename: string, options: LoadOptions) {
-    const lines = genSequence(await readLines(filename));
-    const words = lines.concatMap(splitLineIntoWords);
-    return createSpellingDictionary(words, path.basename(filename), filename, options);
+    const lines = await readLines(filename);
+    return createSpellingDictionary(lines, path.basename(filename), filename, options);
 }
 
 async function loadCodeWordList(filename: string, options: LoadOptions) {
@@ -144,5 +132,6 @@ async function loadTrie(filename: string, options: LoadOptions) {
 export const testing = {
     dictionaryCache,
     refreshEntry,
-    loadEntry
+    loadEntry,
+    load
 };

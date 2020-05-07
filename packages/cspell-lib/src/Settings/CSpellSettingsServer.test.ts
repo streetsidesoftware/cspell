@@ -12,6 +12,8 @@ import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellUserSettings } from './CSpellSettingsDef';
 import * as path from 'path';
 
+jest.mock('../util/logger');
+
 describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings', () => {
         const left = { name: 'Left' };

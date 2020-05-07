@@ -1,5 +1,7 @@
 import * as wlh from './wordListHelper';
 
+jest.mock('./util/logger');
+
 describe('Validate wordListHelper', () => {
     test('tests splitLineIntoWords', () => {
         const line = 'New York City';
