@@ -7,7 +7,7 @@
   "scripts": {
     "build": "lerna run build",
     "build-schema": "lerna run build-schema",
-    "check-spelling": "cspell **/{*.ts,*.md}",
+    "check-spelling": "npx cspell **/{*.ts,*.md}",
     "clean-build": "lerna run clean-build",
     "clean": "lerna run clean",
     "coverage": "npm run gen-coverage",
@@ -39,56 +39,34 @@
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
   "devDependencies": {
     "@types/chai": "^4.2.11",
-    "@types/comment-json": "^1.1.1",
     "@types/configstore": "^4.0.0",
-    "@types/fs-extra": "^8.1.0",
+    "@types/fs-extra": "^9.0.0",
     "@types/glob": "^7.1.1",
-    "@types/jest": "^25.2.1",
+    "@types/jest": "^25.2.2",
     "@types/lorem-ipsum": "^1.0.2",
     "@types/micromatch": "^3.1.1",
     "@types/minimatch": "^3.0.3",
-    "@types/node": "^10.17.19",
+    "@types/node": "^12.12.39",
     "@types/xregexp": "^4.3.0",
     "ajv-cli": "^3.1.0",
     "chai": "^4.2.0",
-    "coveralls": "^3.0.11",
-    "cspell": "^4.0.56",
-    "cspell-dict-en_us": "^1.2.25",
+    "coveralls": "^3.1.0",
+    "cspell-dict-en_us": "^1.2.26",
     "cspell-dict-es-es": "^1.0.18",
     "cspell-dict-nl-nl": "^1.0.23",
-    "cspell-tools": "^4.1.13",
     "globcat": "^1.2.2",
-    "jest": "^25.3.0",
-    "lerna": "^3.20.2",
+    "jest": "^25.5.4",
+    "lerna": "^3.21.0",
     "lorem-ipsum": "^1.0.6",
     "rimraf": "^3.0.2",
-    "source-map-support": "^0.5.16",
-    "ts-jest": "^25.3.1",
+    "source-map-support": "^0.5.19",
+    "ts-jest": "^25.5.1",
     "ts-json-schema-generator": "^0.65.0",
     "ts-loader": "^6.2.2",
-    "tslint": "^6.1.1",
-    "typescript": "^3.8.3",
-    "webpack": "^4.42.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.2",
+    "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
-  },
-  "nyc": {
-    "include": [
-      "**/src/**/*.ts"
-    ],
-    "exclude": [
-      "**/src/**/*.test.ts",
-      "**/src/**/*.spec.ts"
-    ],
-    "extension": [
-      ".ts"
-    ],
-    "require": [
-      "ts-node/register"
-    ],
-    "reporter": [
-      "json",
-      "html"
-    ]
   },
   "dependencies": {}
 }
