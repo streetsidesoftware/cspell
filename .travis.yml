@@ -13,6 +13,7 @@ node_js:
 install:
   # the prepare script run during install currently does clean-build
   - npm ci
+  - npm run bootstrap-ci
 
 script:
   - npm test
