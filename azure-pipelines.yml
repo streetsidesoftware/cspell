@@ -24,20 +24,20 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run bootstrap-ci
-  displayName: 'npm install and build'
+- script: npm install
+  displayName: 'install'
 
-- script: |
-    npm test
+- script: npm run bootstrap-ci
+  displayName: 'build'
+
+- script: npm test
   displayName: 'unit tests'
 
-- script: |
-    npm run test-spec
+- script: npm run test-spec
   displayName: 'spec tests'
 
-- bash: |
-    node ./bin.js trace test
-    node ./bin.js "**/{*.ts,*.md}"
-  displayName: 'Validation: run cspell'
+- bash: node ./bin.js trace test
+  displayName: 'Validation: run cspell (trace)'
+
+- bash: node ./bin.js "**/{*.ts,*.md}"
+  displayName: 'Validation: run cspell (spell check)'
