@@ -29,16 +29,16 @@ describe('Validate LanguageSettings', () => {
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
         expect(sPython.allowCompoundWords).to.be.true;
         expect(sPython.dictionaries).to.not.be.empty;
-        expect((sPython.dictionaries!).sort()).to.be.deep.equal(['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc', 'django'].sort());
+        expect(sPython.dictionaries!).to.include.members(['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc', 'django']);
 
         const sPhp = calcSettingsForLanguage(languageSettings, 'php', 'en-gb');
         expect(sPhp.allowCompoundWords).to.be.undefined;
         expect(sPhp.dictionaries).to.not.be.empty;
-        expect((sPhp.dictionaries!).sort())
-            .to.be.deep.equal([
+        expect(sPhp.dictionaries!)
+            .to.include.members([
                 'en-gb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html',
                 'npm', 'fonts', 'css', 'typescript', 'misc', 'fullstack'
-            ].sort());
+            ]);
     });
 
     test('tests that settings at language level are merged', () => {
