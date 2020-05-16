@@ -9,7 +9,7 @@ export function writeToFile(filename: string, data: string) {
 }
 
 export function writeToFileIterable(filename: string, data: Iterable<string>): fs.WriteStream {
-    const sourceStream = iterableToStream(data);
+    const sourceStream = stream.Readable.from ? stream.Readable.from(data) : iterableToStream(data);
     const writeStream = fs.createWriteStream(filename);
     const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new stream.PassThrough();
     return sourceStream.pipe(zip).pipe(writeStream);
