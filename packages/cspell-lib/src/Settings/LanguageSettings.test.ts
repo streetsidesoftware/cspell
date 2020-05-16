@@ -28,17 +28,17 @@ describe('Validate LanguageSettings', () => {
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
         expect(sPython.allowCompoundWords).toBe(true);
         expect(sPython.dictionaries).not.toHaveLength(0);
-        expect((sPython.dictionaries!).sort()).toEqual(
-            ['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc', 'django'].sort()
-        );
+        expect(sPython.dictionaries!).toEqual(expect.arrayContaining([
+            'en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'misc', 'django'
+        ]));
 
         const sPhp = calcSettingsForLanguage(languageSettings, 'php', 'en-gb');
         expect(sPhp.allowCompoundWords).toBeUndefined();
         expect(sPhp.dictionaries).not.toHaveLength(0);
-        expect((sPhp.dictionaries!).sort()).toEqual([
+        expect(sPhp.dictionaries!).toEqual(expect.arrayContaining([
                 'en-gb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html',
                 'npm', 'fonts', 'css', 'typescript', 'misc', 'fullstack'
-            ].sort());
+            ]));
     });
 
     test('tests that settings at language level are merged', () => {
