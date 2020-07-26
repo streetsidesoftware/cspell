@@ -1,0 +1,100 @@
+Delivered-To: info@streetsidesoftware.nl
+Received: by 2002:ac8:346c:0:0:0:0:0 with SMTP id v41csp2183359qtb;
+        Thu, 12 Sep 2019 07:13:41 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqzd8SOB6ne2u56s52epl6K4yY1DdmedtzJ+6JwygWcvlP7438XzgXUqYG+lUaPUzMq8dD7sExTLB
+X-Received: by 2002:ac8:46d9:: with SMTP id h25mr13140674qto.57.1568297621161;
+        Thu, 12 Sep 2019 07:13:41 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1568297621; cv=none;
+        d=google.com; s=arc-20160816;
+        b=cjcHZJCrsO9am9x00QEBoBrCa7qQNZ3d0/MNroPm81pzLhdCO7xb6AUN0zcCaSBNFN
+         Y4e3j50YejrorMnbcQIzSAoTdE0dKnhJGYH1819srgl1UQ4CqUI1N++L3JgJiVAQS+dL
+         Gm9Mo4bjh7K+SAlK5UaG+/NjMNI7ZTxwuru90PG2Pgss9D4sb5/wVXyWCFQbYeyJ4BTJ
+         Yy10GcIvrpxyS/Wr+buQQ6lIT10wLhrmEB6H31qp09uqHaCmPSZipbNL4lLjmaLFyBpD
+         PTyAoixjIZFHaBG7i2YnPu8/8hDAudPjkcBH+SwQMXXIxGPyluRYWnCBpI6WjImyeOk7
+         H6Ng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=list-unsubscribe:list-post:list-archive:list-id:precedence
+         :content-transfer-encoding:mime-version:subject:message-id:cc:to
+         :reply-to:from:date;
+        bh=4Ro0El8wyicaEvvJjoGWpo3JB0heo2oeUyIfWD6Ugxc=;
+        b=B0CY0b1coF1UkqVas/Jnr+SfiG11zT5cudYft6rNsh1R+YB1RpDfIOd3y8bddQX6DD
+         UJ4S5AyEi/3hb943NkZobQuqIKxjkvuAOiXLVdIjTsBv5AgG6NvBXaz6wlI580yED71K
+         tn0yLB6vil0uuzQxWOtdCXz/4RmtclciloTJ01nGxTrGUYKA7DfJiVjaNUzvn3cfLLiu
+         AidwktEgziiqOBN2RQL2+SC8l4kZ52erudCR8wedGXnkfywxBMUhaU7jI3YhVP2no4kg
+         zuMbTIfTGfYwu6D4OS0NEcgZyg301WbfhZch1cu0tXElvps4z4thjwABCvvNDziVvakX
+         l9Ow==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: domain of noreply@github.com designates 192.30.252.203 as permitted sender) smtp.mailfrom=noreply@github.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=github.com
+Return-Path: <noreply@github.com>
+Received: from out-20.smtp.github.com (out-20.smtp.github.com. [192.30.252.203])
+        by mx.google.com with ESMTPS id q12si17898597qkm.305.2019.09.12.07.13.41
+        for <info@streetsidesoftware.nl>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 12 Sep 2019 07:13:41 -0700 (PDT)
+Received-SPF: pass (google.com: domain of noreply@github.com designates 192.30.252.203 as permitted sender) client-ip=192.30.252.203;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of noreply@github.com designates 192.30.252.203 as permitted sender) smtp.mailfrom=noreply@github.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=github.com
+Received: from github-lowworker-19d82f6.ac4-iad.github.net (github-lowworker-19d82f6.ac4-iad.github.net [10.52.16.75]) by smtp.github.com (Postfix) with ESMTP id B78C18C04F6 for <info@streetsidesoftware.nl>; Thu, 12 Sep 2019 07:13:40 -0700 (PDT)
+Date: Thu, 12 Sep 2019 07:13:40 -0700
+From: Nigel Scott <notifications@github.com>
+Reply-To: "streetsidesoftware/vscode-spell-checker" <reply+AA4RD2J4GJ2OKZXTC6SLPW53Q6JSJEVBNHHB2YAJ4E@reply.github.com>
+To: "streetsidesoftware/vscode-spell-checker" <vscode-spell-checker@noreply.github.com>
+Cc: Subscribed <subscribed@noreply.github.com>
+Message-ID: <streetsidesoftware/vscode-spell-checker/issues/381@github.com>
+Subject: [streetsidesoftware/vscode-spell-checker] Ignore paths do not work with folders (#381)
+Mime-Version: 1.0
+Content-Type: multipart/alternative; boundary="--==_mimepart_5d7a5294a89c3_4cab3ff1e4ecd9648489e"; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+Precedence: list
+X-GitHub-Sender: Gruntfuggly
+X-GitHub-Recipient: Info3S
+X-GitHub-Reason: subscribed
+List-ID: streetsidesoftware/vscode-spell-checker <vscode-spell-checker.streetsidesoftware.github.com>
+List-Archive: https://github.com/streetsidesoftware/vscode-spell-checker
+List-Post: <mailto:reply+AA4RD2J4GDFDFJ2OKZXTC6SLPW53Q6JSJEVBNHHB2YAJ4E@reply.github.com>
+List-Unsubscribe: <mailto:unsub+AA4RD2J4GJ2OKJDHZXTC6SLPW53Q6JSJEVBNHHB2YAJ4E@reply.github.com>, <https://github.com/notifications/unsubscribe/AA4RD2MZAUNFKS7SBSNZSLDQJJFBJHGFJANCNFSM4IWFCFDA>
+X-Auto-Response-Suppress: All
+X-GitHub-Recipient-Address: info@streetsidesoftware.nl
+
+----==_mimepart_5d7a5294a89c3_4cab3ff1e4ecd9648489e
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+If I specify a filename in the ignorePaths it gets ignored. However, if I add any sort of path to the filename it is no longer ignored.
+
+I have tried using '**' and '*' and the explicit path and none of them seem to work.
+
+
+--
+You are receiving this because you are subscribed to this thread.
+Reply to this email directly or view it on GitHub:
+https://github.com/streetsidesoftware/vscode-spell-checker/issues/381
+----==_mimepart_5d7a5294a89c3_4cab3ff1e4ecd9648489e
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p>If I specify a filename in the ignorePaths it gets ignored. However, if I add any sort of path to the filename it is no longer ignored.</p>
+<p>I have tried using '**' and '*' and the explicit path and none of them seem to work.</p>
+
+<p style="font-size:small;-webkit-text-size-adjust:none;color:#666;">&mdash;<br />You are receiving this because you are subscribed to this thread.<br />Reply to this email directly, <a href="https://github.com/streetsidesoftware/vscode-spell-checker/issues/381?email_source=notifications&amp;email_token=AA4RD2IEPDPMT4F5YKNFBELQJJFBJA5CNFSM4IWFCFDKYY3PNVWWK3TUL52HS4DFUVEXG43VMWVGG33NNVSW45C7NFSM4HLABHQQ">view it on GitHub</a>, or <a href="https://github.com/notifications/unsubscribe-auth/AA4RD2J6PL5AZZCMQSWWWGDQJJFBJANCNFSM4IWFCFDA">mute the thread</a>.<img src="https://github.com/notifications/beacon/AA4RD2L6JO4NBHKYLQC7GLTQJJFBJA5CNFSM4IWFCFDKYY3PNVWWK3TUL52HS4DFUVEXG43VMWVGG33NNVSW45C7NFSM4HLABHQQ.gif" height="1" width="1" alt="" /></p>
+<script type="application/ld+json">[
+{
+"@context": "http://schema.org",
+"@type": "EmailMessage",
+"potentialAction": {
+"@type": "ViewAction",
+"target": "https://github.com/streetsidesoftware/vscode-spell-checker/issues/381?email_source=notifications\u0026email_token=AA4RD2IEPDPMT4F5FFURFYKNFBELQJJFBJA5CNFSM4IWFCFDKYY3PNVWWK3TUL52HS4DFUG43VMWVGG33NNVSW45C7NFSM4HLABH",
+"url": "https://github.com/streetsidesoftware/vscode-spell-checker/issues/381?email_source=notifications\u0026email_token=AA4RD2IEPDPMT4F5YKJEGSKNFBELQJJFBJAFSM4IWFCFDKYY3PNVWWK3TUL52HS4DFVEXG43VMWVGG33NNVSW45C7NFSM4HLABH",
+"name": "View Issue"
+},
+"description": "View this Issue on GitHub",
+"publisher": {
+"@type": "Organization",
+"name": "GitHub",
+"url": "https://github.com"
+}
+}
+]</script>
+----==_mimepart_5d7a5294a89c3_4cab3ff1e4ecd9648489e--
