@@ -1,5 +1,4 @@
 export * from 'cspell-io';
-export * from './Settings';
 export { TextOffset, TextDocumentOffset } from './util/text';
 export {
     checkText,
@@ -10,12 +9,9 @@ export {
     validateText,
 } from './validator';
 export {
-    // calcOverrideSettings,
     defaultFileName as defaultSettingsFilename,
-    // mergeSettings,
-    // readSettings,
-    // readSettingsFiles,
 } from './Settings';
+export * from './Settings';
 export {
     CompoundWordsMethod,
     createSpellingDictionary,
@@ -25,7 +21,6 @@ export {
     SuggestionResult,
     refreshDictionaryCache,
 } from './SpellingDictionary';
-// export { getDefaultSettings, getGlobalSettings } from './Settings';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
 
