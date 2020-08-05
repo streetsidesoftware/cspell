@@ -1,5 +1,4 @@
 module.exports = {
-    "browser": false,
     "roots": [
         "./src"
     ],
