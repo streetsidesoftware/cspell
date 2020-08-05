@@ -1,7 +1,6 @@
 import {TrieRoot} from './TrieNode';
 import {isWordTerminationNode} from './util';
 import {CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
-export {CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
 import {visualLetterMap} from './orthography';
 
 const defaultMaxNumberSuggestions = 10;

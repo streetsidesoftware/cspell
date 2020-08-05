@@ -68,7 +68,7 @@ describe('Validate Micromatch assumptions', () => {
             root = root ? pathInstance.normalize(pathInstance.join(rootPrefix, root)) : root;
             filename = root ? pathInstance.normalize(pathInstance.join(rootPrefix, filename)) : pathInstance.normalize(filename);
             test(
-                `test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${expect ? 'T' : 'F'}`,
+                `test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${expected ? 'T' : 'F'}`,
                 () => {
                     const matcher = new GlobMatcher(patterns, root, pathInstance);
                     expect(matcher.match(filename)).toEqual(expected);

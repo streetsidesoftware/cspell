@@ -1,8 +1,10 @@
 import {
     genCompoundableSuggestions,
-    CompoundWordsMethod,
     suggestionCollector,
 } from './suggest';
+import {
+    CompoundWordsMethod,
+} from './walker';
 import { readTrie } from './dictionaries.test.helper';
 
 function getTrie() {

@@ -5,7 +5,6 @@ import {
     suggest,
     SuggestionCollector,
     SuggestionResult,
-    CompoundWordsMethod,
 } from './suggest';
 import {
     createTriFromList,
@@ -16,7 +15,7 @@ import {
     countWords,
     mergeOptionalWithDefaults,
 } from './util';
-import {walker, WalkerIterator} from './walker';
+import {walker, WalkerIterator, CompoundWordsMethod} from './walker';
 
 import {
     COMPOUND_FIX,

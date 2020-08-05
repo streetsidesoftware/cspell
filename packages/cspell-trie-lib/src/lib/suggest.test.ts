@@ -1,6 +1,7 @@
 import * as Sug from './suggest';
 import {Trie} from './trie';
 import { parseDictionary } from './SimpleDictionaryParser';
+import * as Walker from './walker';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions', () => {
@@ -65,7 +66,7 @@ describe('Validate Suggest', () => {
     test('Tests compound suggestions', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore walkingtalkingjoy
-        const results = Sug.suggest(trie.root, 'walkingtalkingjoy', 1, Sug.CompoundWordsMethod.SEPARATE_WORDS);
+        const results = Sug.suggest(trie.root, 'walkingtalkingjoy', 1, Walker.CompoundWordsMethod.SEPARATE_WORDS);
         // console.log(JSON.stringify(results));
         const suggestions = results.map(s => s.word);
         expect(suggestions).toEqual(['walking talking joy', ]);
@@ -133,7 +134,7 @@ describe('Validate Suggest', () => {
         // cspell:ignore joyfullwalk
         const collector = Sug.suggestionCollector('joyfullwalk', 3);
         collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.SEPARATE_WORDS)
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.SEPARATE_WORDS)
         );
         const suggestions = collector.suggestions.map(s => s.word);
         expect(suggestions).toEqual(['joyful walk', 'joyful walks', 'joyfully walk']);
@@ -145,7 +146,7 @@ describe('Validate Suggest', () => {
         // cspell:ignore joyfullwalk joyfulwalk joyfulwalks joyfullywalk, joyfullywalks
         const collector = Sug.suggestionCollector('joyfullwalk', 3);
         collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
         );
         const suggestions = collector.suggestions.map(s => s.word);
         expect(suggestions).toEqual(['joyful+walk', 'joyful+walks', 'joyfully+walk', ]);
@@ -179,7 +180,7 @@ describe('Validate Suggest', () => {
         // cspell:ignore wålk
         const collector = Sug.suggestionCollector('wålk', 3);
         collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
         );
         const suggestions = collector.suggestions.map(s => s.word);
         expect(suggestions).toEqual(['walk', 'walks', 'talk']);
@@ -190,7 +191,7 @@ describe('Validate Suggest', () => {
         // cspell:ignore wâlkéd
         const collector = Sug.suggestionCollector('wâlkéd', 3);
         collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
+            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
         );
         const suggestions = collector.suggestions.map(s => s.word);
         expect(suggestions).toEqual(['walked', 'walker', 'talked']);
