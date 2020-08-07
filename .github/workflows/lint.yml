@@ -4,10 +4,14 @@ on:
     paths:
       - "**/*.ts"
       - "**/*.md"
+      - "**/package*.json"
+      - ".github/workflows/lint.yml"
   push:
     paths:
       - "**/*.ts"
       - "**/*.md"
+      - "**/package*.json"
+      - ".github/workflows/lint.yml"
 
 jobs:
   cspell:
@@ -15,3 +19,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx cspell "**/{*.ts,*.md}"
+    - run: npm ci
+    - run: npm run lint-ci

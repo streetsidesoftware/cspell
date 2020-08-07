@@ -13,7 +13,7 @@
     "coverage": "npm run gen-coverage",
     "gen-coverage": "lerna run coverage",
     "install": "lerna bootstrap --ci",
-    "lint-travis": "lerna run lint-travis",
+    "lint-ci": "lerna run lint-ci",
     "prepare": "npm run symlink && npm run clean-build",
     "pub": "npm install && npm test && lerna publish",
     "symlink": "node build_tools/bin/symlink.js packages",
