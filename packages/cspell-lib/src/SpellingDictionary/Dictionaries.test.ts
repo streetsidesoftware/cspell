@@ -78,7 +78,7 @@ describe('Validate getDictionary', () => {
     test('Refresh Dictionary Cache', async () => {
         const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
-        await fs.writeFile(tempDictPath, "one\ntwo\nthree\n");
+        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
 
         const settings = getDefaultSettings();
         const defs = (settings.dictionaryDefinitions || []).concat([
@@ -106,7 +106,7 @@ describe('Validate getDictionary', () => {
         dicts.forEach((d, i) => expect(dicts2[i]).toEqual(d));
 
         // Update one of the dictionaries to see if it loads.
-        await fs.writeFile(tempDictPath, "one\ntwo\nthree\nfour\n");
+        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
 
         const dicts3 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
         // Should be using cache and will not contain the new words.

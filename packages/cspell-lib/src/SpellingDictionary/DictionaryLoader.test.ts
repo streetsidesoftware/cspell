@@ -10,7 +10,7 @@ const samples = path.join(root, 'samples');
 describe('Validate DictionaryLoader', () => {
     it('test not found', async () => {
         const error = { code: 'ENOENT' };
-        const unknownFormatError = new Error('Unknown file format')
+        const unknownFormatError = new Error('Unknown file format');
         const tests: [string, LoadOptions, Object][] = [
             ['./notfound.txt', {}, error],
             ['./notfound.txt', { type: 'S' }, error],
@@ -30,7 +30,7 @@ describe('Validate DictionaryLoader', () => {
 
     it('test not found', async () => {
         const error = { code: 'ENOENT' };
-        const unknownFormatError = new Error('Unknown file format')
+        const unknownFormatError = new Error('Unknown file format');
         const tests: [string, LoadOptions, Object][] = [
             ['./notfound.txt', {}, error],
             ['./notfound.txt', { type: 'S' }, error],
@@ -52,7 +52,7 @@ describe('Validate DictionaryLoader', () => {
 
     it('loadDictionary not found', async () => {
         const error = { code: 'ENOENT' };
-        const unknownFormatError = new Error('Unknown file format')
+        const unknownFormatError = new Error('Unknown file format');
         const tests: [string, LoadOptions, Object][] = [
             ['./notfound.txt', {}, error],
             ['./notfound.txt', { type: 'S' }, error],

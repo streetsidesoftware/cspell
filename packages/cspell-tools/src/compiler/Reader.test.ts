@@ -1,4 +1,4 @@
-import { createReader, AnnotatedWord } from './Reader';
+import { createReader } from './Reader';
 import * as path from 'path';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');

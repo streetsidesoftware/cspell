@@ -142,8 +142,6 @@ function *_compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
     }
 }
 
-const regNotLower = /[^a-z+!~]/;
-
 function *_stripCaseAndAccents(words: Iterable<AnnotatedWord>): Generator<AnnotatedWord> {
     for (const word of words) {
         // Words are normalized to the compact format: e + ` => è

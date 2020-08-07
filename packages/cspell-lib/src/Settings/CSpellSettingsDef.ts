@@ -243,7 +243,7 @@ export type RegExpList = PatternRef[];
 export type PatternRef = Pattern | PatternId | PreDefinedPatterns;
 
 /** @hidden */
-type InternalRegExp = RegExp
+type InternalRegExp = RegExp;
 
 export type Pattern = string | InternalRegExp;
 
