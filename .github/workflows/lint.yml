@@ -1,7 +1,13 @@
 name: lint
-on: # rebuild any PRs and main branch changes
+on:
   pull_request:
+    paths:
+      - "**/*.ts"
+      - "**/*.md"
   push:
+    paths:
+      - "**/*.ts"
+      - "**/*.md"
 
 jobs:
   cspell:
