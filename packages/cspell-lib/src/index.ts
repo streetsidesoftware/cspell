@@ -10,11 +10,7 @@ export {
     validateText,
 } from './validator';
 export {
-    calcOverrideSettings,
     defaultFileName as defaultSettingsFilename,
-    mergeSettings,
-    readSettings,
-    readSettingsFiles,
 } from './Settings';
 export {
     CompoundWordsMethod,
@@ -25,7 +21,6 @@ export {
     SuggestionResult,
     refreshDictionaryCache,
 } from './SpellingDictionary';
-export { getDefaultSettings, getGlobalSettings } from './Settings';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
 

@@ -1,6 +1,6 @@
 import {Trie, defaultTrieOptions} from './trie';
 import {isWordTerminationNode, orderTrie, normalizeWordToLowercase} from './util';
-import {suggestionCollector, CompoundWordsMethod} from './suggest';
+import {suggestionCollector, CompoundWordsMethod} from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
 
 describe('Validate Trie Class', () => {
