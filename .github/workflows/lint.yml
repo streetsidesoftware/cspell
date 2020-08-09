@@ -1,11 +1,20 @@
-name: lint
-on: # rebuild any PRs and main branch changes
+name: TSLint
+on:
   pull_request:
+    paths:
+      - "**/*.ts"
+      - "**/package*.json"
+      - ".github/workflows/lint.yml"
   push:
+    paths:
+      - "**/*.ts"
+      - "**/package*.json"
+      - ".github/workflows/lint.yml"
 
 jobs:
-  cspell:
+  tslint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npx cspell "**/{*.ts,*.md}"
+    - run: npm ci
+    - run: npm run lint-ci

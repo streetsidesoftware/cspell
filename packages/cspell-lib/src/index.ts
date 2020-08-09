@@ -39,7 +39,7 @@ export { getLanguagesForExt } from './LanguageIds';
 export * from './trace';
 
 import { clearCachedFiles } from './Settings';
-import { refreshDictionaryCache } from './SpellingDictionary'
+import { refreshDictionaryCache } from './SpellingDictionary';
 
 export async function clearCachedSettings() {
     await Promise.all([

@@ -17,7 +17,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "lint-travis": "tslint \"src/**/*.ts\"",
+    "lint-ci": "tslint \"src/**/*.ts\"",
     "build": "npm run compile",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",

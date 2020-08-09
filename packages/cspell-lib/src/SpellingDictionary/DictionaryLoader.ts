@@ -98,7 +98,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         ts: now,
         state: fs.stat(uri).catch(() => undefined),
         dictionary,
-    }
+    };
 }
 
 function determineType(uri: string, options: LoadOptions): LoaderType {

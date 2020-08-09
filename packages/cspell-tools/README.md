@@ -1,7 +1,5 @@
 # cSpell-Tools
 
-[![Build Status](https://travis-ci.org/streetsidesoftware/cspell.svg?branch=master)](https://travis-ci.org/streetsidesoftware/cspell)
-
 Tools used to assist cSpell Development.
 
 The Primary use of this tool is to build dictionaries used by cspell.  This tool will convert a word list or a hunspell file into a file usable by cspell.
