@@ -1,15 +1,9 @@
 name: cSpell TS/MD
 on:
   pull_request:
-    paths:
-      - "**/*.ts"
-      - "**/*.md"
-      - ".github/workflows/cspell.yml"
   push:
-    paths:
-      - "**/*.ts"
-      - "**/*.md"
-      - ".github/workflows/cspell.yml"
+    branches:
+      - master
 
 jobs:
   cspell:
