@@ -39,7 +39,7 @@ describe('Import/Export', () => {
     });
 
     test('tests deserialize from file', async () => {
-        const sample = (await readFile(sampleFile, 'UTF-8')).replace(/\r?\n/g, '\n');
+        const sample = (await readFile(sampleFile, 'utf8')).replace(/\r?\n/g, '\n');
         const root = importTrie(sample.split('\n'));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());

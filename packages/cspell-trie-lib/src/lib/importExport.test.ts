@@ -4,7 +4,7 @@ import { readFile } from 'fs-extra';
 import * as path from 'path';
 
 describe('Import/Export', () => {
-    const pSampleWords = readFile(path.join(__dirname, '..', '..', 'Samples', 'sample.txt'), 'UTF-8');
+    const pSampleWords = readFile(path.join(__dirname, '..', '..', 'Samples', 'sample.txt'), 'utf8');
     test('tests serialize / deserialize V1', async () => {
         const sampleWords = (await pSampleWords).split('\n').filter(a => !!a);
         const trie = Trie.createTriFromList(sampleWords);
@@ -36,7 +36,7 @@ describe('Import/Export', () => {
     });
 
     test('Unsupported version', async() => {
-        const sample = await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV2.trie'), 'UTF-8');
+        const sample = await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV2.trie'), 'utf8');
         const data = sample.replace('TrieXv2', 'TrieXv9').split('\n');
         expect(() => importTrie(data)).toThrow('Unsupported version: 9');
     });

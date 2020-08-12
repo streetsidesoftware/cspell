@@ -6,7 +6,7 @@ import * as fsp from 'fs-extra';
 const samples = path.join(__dirname, '..', '..', 'samples');
 const sampleFilename = path.join(samples, 'src', 'sample.py');
 const sampleConfig = path.join(samples, '.cspell.json');
-const sampleFile = fsp.readFile(sampleFilename, 'UTF-8').then(buffer => buffer.toString());
+const sampleFile = fsp.readFile(sampleFilename, 'utf8').then(buffer => buffer.toString());
 
 describe('Validate that Python files are correctly checked.', () => {
     jest.setTimeout(10000);
