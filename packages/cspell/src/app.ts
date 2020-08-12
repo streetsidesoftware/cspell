@@ -196,7 +196,9 @@ program.on('--help', function() {
     console.log(usage);
 });
 
-program.parse(process.argv);
+if (process.argv.length > 2) {
+    program.parse(process.argv);
+}
 
 if (showHelp) {
     program.outputHelp();

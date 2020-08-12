@@ -35,13 +35,13 @@ describe('Validate the fileReader', () => {
     test('test the file reader', async () => {
         const lines = await asyncIterable.toArray(fReader.streamFileLineByLineAsync(__filename));
         const actual = lines.join('\n');
-        const expected = fs.readFileSync(__filename, 'UTF-8');
+        const expected = fs.readFileSync(__filename, 'utf8');
         expect(actual).to.equal(expected);
     });
 
     test('test the lineReaderAsync', async () => {
         const lines = await asyncIterable.toArray(fReader.lineReaderAsync(__filename));
-        const expected = fs.readFileSync(__filename, 'UTF-8').split('\n');
+        const expected = fs.readFileSync(__filename, 'utf8').split('\n');
         expect(lines).to.deep.equal(expected);
     });
 

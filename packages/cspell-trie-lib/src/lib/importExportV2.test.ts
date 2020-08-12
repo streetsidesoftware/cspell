@@ -7,7 +7,7 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {
         const trie = Trie.createTriFromList(sampleWords);
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
-        const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV2.trie'), 'UTF-8')).replace(/\r?\n/g, '\n');
+        const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV2.trie'), 'utf8')).replace(/\r?\n/g, '\n');
         expect(data).toBe(sample);
         const root = importTrie(data.split('\n'));
         const words = [...Trie.iteratorTrieWords(root)];

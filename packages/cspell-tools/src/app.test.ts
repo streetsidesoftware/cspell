@@ -79,7 +79,7 @@ describe('Validate the application', () => {
         const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile', '-n', '-M', target, cities, exampleHunspell, '-o', targetDir);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        const words = await fs.readFile(path.join(targetDir, target), 'UTF-8');
+        const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
         expect(log).toHaveBeenCalled();
 
