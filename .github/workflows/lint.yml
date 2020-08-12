@@ -1,15 +1,7 @@
 name: TSLint
 on:
   pull_request:
-    paths:
-      - "**/*.ts"
-      - "**/package*.json"
-      - ".github/workflows/lint.yml"
   push:
-    paths:
-      - "**/*.ts"
-      - "**/package*.json"
-      - ".github/workflows/lint.yml"
 
 jobs:
   tslint:
