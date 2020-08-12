@@ -1,14 +1,36 @@
-name: "build-test"
-on: # rebuild any PRs and main branch changes
+name: Test
+on:
   pull_request:
   push:
+    branches:
+      - master
 
 jobs:
-  test: # make sure build/ci work properly
-    runs-on: ubuntu-latest
+  test:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          - 10.x
+          - 12.x
+          - 14.x
+
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+
     steps:
     - uses: actions/checkout@v2
-    - run: |
-        node -v
-        npm install
-        npm test
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - run: npm ci
+    - run: npm test
+    - run: node ./bin.js trace test
+    - run: node ./bin.js "**/{*.ts,*.md}"
