@@ -9,7 +9,7 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {
         const trie = consolidate(Trie.createTriFromList(sampleWords));
         const data = [...serializeTrie(trie, 10)];
-        const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV1.trie'), 'UTF-8')).replace(/\r/g, '');
+        const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV1.trie'), 'utf8')).replace(/\r/g, '');
         const rawData = data.join('');
         expect(rawData.length).toBeLessThanOrEqual(sample.length);
         const sampleRoot = importTrie(sample.split('\n'));

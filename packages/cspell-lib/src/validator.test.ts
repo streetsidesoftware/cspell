@@ -1,5 +1,5 @@
 import * as Validator from './validator';
-const loremIpsum = require('lorem-ipsum');
+import { loremIpsum } from 'lorem-ipsum';
 import { CSpellSettings } from './Settings';
 import * as tds from './Settings/TextDocumentSettings';
 
@@ -39,7 +39,7 @@ describe('Validator', () => {
     });
 
     test('validate limit', () => {
-        const text = loremIpsum({ count: 5, unit: 'paragraphs' });
+        const text = loremIpsum({ count: 5, units: 'paragraphs' });
         const languageId = 'plaintext';
         const settings = {...getSettings(text, languageId), maxNumberOfProblems: 10 };
         const results = Validator.validateText(text, settings);

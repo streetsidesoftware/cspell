@@ -18,7 +18,7 @@ export async function readTrieFileFromConfig(configLocation: string): Promise<Tr
 export async function readTrieFile(filename: string): Promise<Trie> {
     const trieFileContents = await fs.readFile(filename)
         .then(buffer => filename.match(/\.gz$/) ? zlib.gunzipSync(buffer) : buffer)
-        .then(buffer => buffer.toString('UTF-8'))
+        .then(buffer => buffer.toString('utf8'))
         ;
 
     const trieLines = trieFileContents.split('\n');

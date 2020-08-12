@@ -5,7 +5,7 @@ import * as dutchDict from 'cspell-dict-nl-nl';
 import * as util from '../util/util';
 
 const sampleFilename = path.join(__dirname, '..', '..', 'samples', 'Dutch.txt');
-const sampleFile = fsp.readFile(sampleFilename, 'UTF-8').then(buffer => buffer.toString());
+const sampleFile = fsp.readFile(sampleFilename, 'utf8').then(buffer => buffer.toString());
 const dutchConfig = dutchDict.getConfigLocation();
 
 describe('Validate that Dutch text is correctly checked.', () => {
