@@ -220,9 +220,9 @@ Examples:
                 }
                 resolve();
             }).catch(reject);
-        } catch(e) {
+        } catch (e) {
             reject(e);
-        };
+        }
     });
 }
 

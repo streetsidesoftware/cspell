@@ -22,7 +22,7 @@ function pathSamples(...parts: string[]): string {
 
 // [message, args, resolve, error, log, info]
 type ErrorCheck = undefined | jest.Constructable | string | RegExp;
-type Test = [string, string[], ErrorCheck, boolean, boolean, boolean]
+type Test = [string, string[], ErrorCheck, boolean, boolean, boolean];
 
 const tests: Test[] = [
     t('test app no-args', [], 'outputHelp', true, true, false),
@@ -36,7 +36,7 @@ const tests: Test[] = [
 ];
 
 describe('Validate cli', () => {
-    let current = '';;
+    let current = '';
 
     test.each(tests)('%s', async (msg, testArgs: string[], errorCheck: ErrorCheck, eError: boolean, eLog: boolean, eInfo: boolean) => {
         expect(current).toBe('');
