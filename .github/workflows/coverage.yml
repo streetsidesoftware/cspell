@@ -1,14 +1,6 @@
 name: Coverage
-on: 
+on:
   pull_request:
-    paths:
-      - "src/**/*.ts"
-      - "!**/*.test.helper.ts"
-      - "!**/node_modules/**"
-      - "!**/vendor/**"
-      - "**/package*.json"
-      - ".github/workflows/coverage.yml"
-  push:
     paths:
       - "src/**/*.ts"
       - "!**/*.test.helper.ts"
