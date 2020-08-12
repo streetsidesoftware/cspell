@@ -89,7 +89,7 @@ async function trieFileReader(filename: string): Promise<Reader> {
 async function textFileReader(filename: string): Promise<Reader> {
     const content = await fs.readFile(filename)
         .then(buffer => (/\.gz$/).test(filename) ? zlib.gunzipSync(buffer) : buffer)
-        .then(buffer => buffer.toString('UTF-8'))
+        .then(buffer => buffer.toString('utf8'))
         ;
     const lines = content.split('\n');
     return createArrayReader(lines);

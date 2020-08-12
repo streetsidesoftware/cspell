@@ -1,5 +1,5 @@
 import * as fileWriter from './fileWriter';
-import * as loremIpsum from 'lorem-ipsum';
+import { loremIpsum } from 'lorem-ipsum';
 import * as path from 'path';
 import { mkdirp, readFile } from 'fs-extra';
 
