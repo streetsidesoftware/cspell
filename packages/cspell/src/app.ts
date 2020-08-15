@@ -5,7 +5,7 @@ import * as commander from 'commander';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 import { CSpellApplicationOptions, BaseOptions, checkText } from './application';
 import * as App from './application';
-import chalk from 'chalk';
+import chalk = require('chalk');
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
