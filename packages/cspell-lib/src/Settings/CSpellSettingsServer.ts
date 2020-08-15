@@ -15,6 +15,7 @@ import * as util from '../util/util';
 import { logError } from '../util/logger';
 import * as ConfigStore from 'configstore';
 import * as minimatch from 'minimatch';
+import * as resolveFrom from 'resolve-from';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -246,9 +247,19 @@ const testNodeModules = /^node_modules\//;
 
 function resolveFilename(filename: string, relativeTo: string) {
     if (testNodeModules.test(filename)) {
-        filename = require.resolve(filename.replace(testNodeModules, ''));
+        filename = filename.replace(testNodeModules, '');
     }
-    return path.isAbsolute(filename) ? filename : path.resolve(relativeTo, filename);
+
+    try {
+        return resolveFrom(relativeTo, filename);
+    } catch (error) {
+        if (filename.startsWith('.')) {
+            // Failed to resolve a relative module request
+            throw error;
+        }
+        // Try to resolve as a relative module
+        return resolveFrom(relativeTo, `./${filename}`);
+    }
 }
 
 export function getGlobalSettings(): CSpellSettings {
