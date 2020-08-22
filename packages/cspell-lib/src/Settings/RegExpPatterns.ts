@@ -12,14 +12,14 @@ export const regExSpellingGuardLine = /^.*\bc?spell(?:-?checker)?::?\s*disable-l
 export const regExPublicKey = /BEGIN\s+((?:RSA\s+)?PUBLIC)\s+KEY(?:[\w=+\-\/]*\r?\n)+?-*END\s+\1/g;
 export const regExCert = /BEGIN\s+(CERTIFICATE|RSA\s+(?:PRIVATE|PUBLIC)\s+KEY)(?:[\w=+\-\/]*\r?\n)+?-*END\s+\1/g;
 export const regExEscapeCharacters = /\\(?:[anrvtbf]|[xu][a-f0-9]+)/gi;
-export const regExBase64 = /(?:[a-z0-9\/+]{40,})(?:\s^\s*[a-z0-9\/+]{40,})*(?:\s^\s*[a-z0-9\/+]+=*)?/gim;
+export const regExBase64 = /(?<![a-z0-9\/+])(?:[a-z0-9\/+]{40,})(?:\s^\s*[a-z0-9\/+]{40,})*(?:\s^\s*[a-z0-9\/+]+=*)?/gim;
 
 // Include Expressions
 export const regExPhpHereDoc = /<<<['"]?(\w+)['"]?[\s\S]+?^\1;/gm;
 export const regExString = /(?:(['"]).*?(?<![^\\]\\(\\\\)*)\1)|(?:`[\s\S]*?(?<![^\\]\\(\\\\)*)`)/g;
 
 // Note: the C Style Comments incorrectly considers '/*' and '//' inside of strings as comments.
-export const regExCStyleComments = /(?:\/\/.*)|(?:\/\*[\s\S]+?\*\/)/g;
+export const regExCStyleComments = /(?<!\w:)(?:\/\/.*)|(?:\/\*[\s\S]*?\*\/)/g;
 export const rexExPythonStyleComments = /#.*|(?:('''|""")[^\1]+?\1)/gm;
 
 export const regExEmail = /<?[\w.\-+]+@\w+(\.\w+)+>?/gi;
