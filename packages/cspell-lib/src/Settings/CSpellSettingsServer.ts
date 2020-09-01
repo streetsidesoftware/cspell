@@ -258,7 +258,7 @@ function resolveFilename(filename: string, relativeTo: string) {
             throw error;
         }
         // Try to resolve as a relative module
-        const normalizedFilename = path.sep === '/' ? filename  : filename.split(path.sep).join('/')
+        const normalizedFilename = path.sep === '/' ? filename  : filename.split(path.sep).join('/');
         return resolveFrom(relativeTo, `./${normalizedFilename}`);
     }
 }
