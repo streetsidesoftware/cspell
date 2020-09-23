@@ -72,6 +72,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'lua', extensions: ['.lua'], },
     { id: 'makefile', extensions: ['.mk'], },
     { id: 'markdown', extensions: ['.md', '.mdown', '.markdown', '.markdn'], },
+    { id: 'mdx', extensions: ['.mdx'], },
     { id: 'objective-c', extensions: ['.m'], },
     { id: 'perl', extensions: ['.pl', '.pm', '.pod', '.t', '.PL', '.psgi'], },
     { id: 'perl6', extensions: ['.p6', '.pl6', '.pm6', '.nqp'], },
