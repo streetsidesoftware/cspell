@@ -118,6 +118,7 @@ All settings are prefixed with `cSpell:` or `spell-checker:`.
 * `ignoreRegExp` -- Any text matching the regular expression will NOT be checked for spelling.
 * `includeRegExp` -- Only text matching the collection of includeRegExp will be checked.
 * `enableCompoundWords` / `disableCompoundWords` -- Allow / disallow words like: "stringlength".
+* `dictionaries` -- specify a list of the names of the dictionaries to use.
 
 ### Enable / Disable checking sections of code
 It is possible to disable / enable the spell checker by adding comments to your code.
@@ -261,6 +262,17 @@ def sum_it(self, seq):
         yield variabele
 ```
 
+
+### Dictionaries
+
+The *dictionaries* list allows you to specify dictionaries to use for the file.
+
+```javascript
+// cSpell:dictionaries lorem-ipsum
+const companyName = 'Lorem ipsum dolor sit amet';
+```
+
+**Note:** dictionaries specified with `dictionaries` will be used for the entire file.
 
 ## Predefined RegExp expressions
 

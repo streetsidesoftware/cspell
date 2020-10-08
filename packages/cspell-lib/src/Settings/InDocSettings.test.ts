@@ -22,6 +22,7 @@ describe('Validate InDocSettings', () => {
             'language en-US',
             'local',
             'local en, nl',
+            'dictionaries lorem-ipsum'
         ]);
     });
 
@@ -83,12 +84,17 @@ describe('Validate InDocSettings', () => {
         const ranges = TextRange.findMatchingRangesForPatterns(matches, sampleCode);
         // console.log(ranges);
         // console.log(replaceRangesWith(sampleCode, ranges));
-        expect(ranges.length).toBe(34);
+        expect(ranges.length).toBe(35);
     });
 
     test('test fetching the local for the text', () => {
         const settings = InDoc.getInDocumentSettings(sampleCode);
         expect(settings.language).toBe('en, nl');
+    });
+
+    test('test setting dictionaries for file', () => {
+        const settings = InDoc.getInDocumentSettings(sampleCode);
+        expect(settings.dictionaries).toStrictEqual(['lorem-ipsum']);
     });
 });
 // cSpell:ignore faullts straange
@@ -118,6 +124,7 @@ const sampleCode = `
     // cspell:local
     // cspell:local en, nl
 
+    // cspell:dictionaries lorem-ipsum
 `;
 
 // cspell:ignore againxx
