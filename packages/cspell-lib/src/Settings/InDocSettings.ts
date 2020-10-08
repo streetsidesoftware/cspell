@@ -30,7 +30,7 @@ function parseSettingMatch(possibleSetting: string): CSpellUserSettings[] {
         [ /^ignore(?:words?)?\s/i, parseIgnoreWords ],
         [ /^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp ],
         [ /^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp ],
-        [ /^(?:local|language)/i, parseLocal ],
+        [ /^(?:local|language)\s/i, parseLocal ],
     ];
 
     return settingParsers
