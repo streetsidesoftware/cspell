@@ -240,17 +240,12 @@ export interface LanguageSettingFilterFields {
     local?: LocaleId | LocaleId[];
 }
 
-export type RegExpList = PatternRef[];
-
-/** A PatternRef is a Pattern or PatternId. */
-export type PatternRef = Pattern | PatternId | PreDefinedPatterns;
-
 /** @hidden */
 type InternalRegExp = RegExp
 
 export type Pattern = string | InternalRegExp;
 
-export type PreDefinedPatterns =
+export type PredefinedPatterns =
     'Base64' |
     'CStyleComment' |
     'Email' |
@@ -269,6 +264,10 @@ export type PreDefinedPatterns =
 
 /** This matches the name in a pattern definition */
 export type PatternId = string;
+
+/** A PatternRef is a Pattern or PatternId. */
+export type PatternRef = Pattern | PatternId | PredefinedPatterns;
+export type RegExpList = PatternRef[];
 
 /** This matches the name in a dictionary definition */
 export type DictionaryId = string;
@@ -297,9 +296,9 @@ export interface RegExpPatternDefinition {
      */
     name: PatternId;
     /**
-     * RegExp pattern
+     * RegExp pattern or array of RegExp patterns
      */
-    pattern: Pattern;
+    pattern: Pattern | Pattern[];
     /**
      * Description of the pattern.
      */

@@ -364,12 +364,12 @@
           "$ref": "#/definitions/PatternId"
         },
         {
-          "$ref": "#/definitions/PreDefinedPatterns"
+          "$ref": "#/definitions/PredefinedPatterns"
         }
       ],
       "description": "A PatternRef is a Pattern or PatternId."
     },
-    "PreDefinedPatterns": {
+    "PredefinedPatterns": {
       "enum": [
         "Base64",
         "CStyleComment",
@@ -407,8 +407,18 @@
           "description": "Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList. It is possible to redefine one of the predefined patterns to override its value."
         },
         "pattern": {
-          "$ref": "#/definitions/Pattern",
-          "description": "RegExp pattern"
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Pattern"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/Pattern"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "RegExp pattern or array of RegExp patterns"
         }
       },
       "required": [
