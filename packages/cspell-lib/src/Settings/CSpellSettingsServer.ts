@@ -8,6 +8,7 @@ import {
     Source,
     LanguageSetting,
     CSpellSettingsWithSourceTrace,
+    Pattern,
 } from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
@@ -76,12 +77,11 @@ function importSettings(filename: string, defaultValues: CSpellSettings = defaul
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
     const finalizeSettings: CSpellSettingsWithSourceTrace = { id };
     cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
-    const settings: CSpellSettings = {...defaultValues as CSpellSettings, id, ...readJsonFile(filename)};
+    const settings: CSpellSettings = {...defaultValues, id, ...readJsonFile(filename)};
     const pathToSettings = path.dirname(filename);
 
     Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
-    const finalizeSrc = finalizeSettings.source || {} as Source;
-    const name = finalizeSrc.name || path.basename(filename);
+    const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
     finalizeSettings.source = { ...finalizeSrc, filename, name };
     cachedFiles.set(filename, finalizeSettings);
     return finalizeSettings;
@@ -234,12 +234,23 @@ export function finalizeSettings(settings: CSpellSettings): CSpellSettings {
     return finalized;
 }
 
-function applyPatterns(regExpList: (string | RegExp)[] = [], patterns: RegExpPatternDefinition[] = []): (string|RegExp)[] {
-    const patternMap = new Map(patterns
-        .map(def => [def.name.toLowerCase(), def.pattern] as [string, string|RegExp])
+function applyPatterns(regExpList: (string | RegExp)[] = [], patternDefinitions: RegExpPatternDefinition[] = []): (string|RegExp)[] {
+    const patternMap = new Map(patternDefinitions
+        .map(def => [def.name.toLowerCase(), def.pattern])
     );
 
-    return regExpList.map(p => patternMap.get(p.toString().toLowerCase()) || p);
+    function *flatten(patterns: (Pattern | Pattern[])[]): IterableIterator<Pattern> {
+        for (const pattern of patterns) {
+            if (Array.isArray(pattern)) {
+                yield *flatten(pattern);
+            } else {
+                yield pattern;
+            }
+        }
+    }
+    const patternList = regExpList.map(p => patternMap.get(p.toString().toLowerCase()) || p);
+
+    return [...flatten(patternList)];
 }
 
 const testNodeModules = /^node_modules\//;

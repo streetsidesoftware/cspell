@@ -1,4 +1,4 @@
-import { CSpellSettings, RegExpPatternDefinition, DictionaryDefinition, CSpellSettingsWithSourceTrace } from './CSpellSettingsDef';
+import { CSpellSettings, RegExpPatternDefinition, DictionaryDefinition, CSpellSettingsWithSourceTrace, PredefinedPatterns } from './CSpellSettingsDef';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';
@@ -7,24 +7,16 @@ import { mergeSettings } from './index';
 
 // cspell:ignore filetypes
 
-const defaultRegExpExcludeList = [
-    'SpellCheckerDisable',
-    'Urls',
-    'Email',
-    'PublicKey',
-    'RsaCert',
-    'Base64',
-    'SHA',
-];
-
 const defaultConfigFile = Path.join(__dirname, '..', '..', 'config', 'cspell-default.json');
 
-const defaultRegExpPatterns: RegExpPatternDefinition[] = [
+const regExpSpellCheckerDisable = [ RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext ];
+
+const predefinedPatterns = [
     // Exclude patterns
     { name: 'Urls',                 pattern: RegPat.regExMatchUrls },
     { name: 'HexDigits',            pattern: RegPat.regExHexDigits },
     { name: 'HexValues',            pattern: RegPat.regExMatchCommonHexFormats },
-    { name: 'SpellCheckerDisable',  pattern: RegPat.regExSpellingGuard },
+    { name: 'SpellCheckerDisable',  pattern: regExpSpellCheckerDisable},
     { name: 'PublicKey',            pattern: RegPat.regExPublicKey },
     { name: 'RsaCert',              pattern: RegPat.regExCert },
     { name: 'EscapeCharacters',     pattern: RegPat.regExEscapeCharacters },
@@ -38,7 +30,28 @@ const defaultRegExpPatterns: RegExpPatternDefinition[] = [
     { name: 'string',               pattern: RegPat.regExString },
     { name: 'CStyleComment',        pattern: RegPat.regExCStyleComments },
     { name: 'Everything',           pattern: '.*' },
+] as const;
+
+type NameType<T> = T extends readonly ({ name: infer U })[] ? U : never;
+
+type ExtendsType<T, U> = T extends U ? T : never;
+
+type PredefinedPatternNames = ExtendsType<NameType<typeof predefinedPatterns>, PredefinedPatterns>;
+
+const defaultRegExpPatterns: RegExpPatternDefinition[] = [...predefinedPatterns];
+
+const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
+    'SpellCheckerDisable',
+    'Urls',
+    'Email',
+    'PublicKey',
+    'RsaCert',
+    'Base64',
+    'SHA',
 ];
+
+// This bit of copying is done to have the complier ensure that the defaults exist.
+const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
 
 const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'css',            file: 'css.txt.gz',           type: 'S', description: 'CSS Keywords.' },
@@ -49,7 +62,6 @@ const defaultDictionaryDefs: DictionaryDefinition[] = [
     { name: 'node',           file: 'node.txt.gz',          type: 'S', description: 'List of NodeJS terms.' },
     { name: 'npm',            file: 'npm.txt.gz',           type: 'S', description: 'List of Top 500 NPM packages.' },
 ];
-
 
 export const _defaultSettings: CSpellSettingsWithSourceTrace = {
     id: 'static_defaults',
