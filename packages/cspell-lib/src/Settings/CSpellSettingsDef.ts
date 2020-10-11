@@ -39,7 +39,9 @@ export interface ExtendableSettings extends Settings {
 export interface Settings extends BaseSetting {
     /**
      * Current active spelling language
+     *
      * Example: "en-GB" for British English
+     *
      * Example: "en,nl" to enable both English and Dutch
      * @default "en"
      */
@@ -161,6 +163,7 @@ export interface BaseSetting {
 
     /**
      * List of RegExp patterns or Pattern names to exclude from spell checking
+     *
      * Example: ["href"] - to exclude html href
      */
     ignoreRegExpList?: RegExpList;
@@ -289,7 +292,7 @@ export type FsPath = string;
 
 export interface RegExpPatternDefinition {
     /**
-     * Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList
+     * Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList.
      * It is possible to redefine one of the predefined patterns to override its value.
      */
     name: PatternId;
