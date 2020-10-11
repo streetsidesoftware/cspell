@@ -18,7 +18,7 @@ export function getDefaultLanguageSettings(): LanguageSettings {
 
 function stringToList(sList: string | string[]): string[] {
     if (typeof sList === 'string') {
-        sList = sList.replace(/\|/g, ',').replace(/\s/g, '').split(',');
+        sList = sList.replace(/[|;]/g, ',').split(',').map(s => s.trim());
     }
     return sList;
 }
@@ -26,6 +26,10 @@ function stringToList(sList: string | string[]): string[] {
 export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<LanguageId> {
     const langIds = stringToList(langId);
     return new Set<LanguageId>(langIds.map(a => a.toLowerCase()));
+}
+
+function normalizeLanguageIdToString(langId: LanguageId | LanguageId[]): string {
+    return [...normalizeLanguageId(langId)].join(',');
 }
 
 export function normalizeLocal(local: LocaleId | LocaleId[]): Set<LocaleId> {
@@ -45,11 +49,9 @@ export function calcSettingsForLanguage(languageSettings: LanguageSettings, lang
         .filter(s => !s.languageId || s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
         .filter(s => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals) )
         .map(langSetting => {
-            const id = langSetting.local || langSetting.languageId || 'language';
-            const s = {id, ...langSetting};
-            delete s.languageId;
-            delete s.local;
-            return s as BaseSetting;
+            const id = normalizeLanguageIdToString(langSetting.local || langSetting.languageId || 'language');
+            const {languageId, local, ...s} = {id, ...langSetting};
+            return s;
         })
         .reduce((langSetting, setting) => ({
             ...SpellSettings.mergeSettings(langSetting, setting),

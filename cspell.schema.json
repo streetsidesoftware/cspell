@@ -137,11 +137,11 @@
         },
         "ignoreRegExpList": {
           "$ref": "#/definitions/RegExpList",
-          "description": "List of RegExp patterns or Pattern names to exclude from spell checking\nExample: [\"href\"] - to exclude html href"
+          "description": "List of RegExp patterns or Pattern names to exclude from spell checking\n\nExample: [\"href\"] - to exclude html href"
         },
         "includeRegExpList": {
           "$ref": "#/definitions/RegExpList",
-          "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
+          "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking. If includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
         },
         "languageId": {
           "anyOf": [
@@ -276,7 +276,7 @@
         },
         "ignoreRegExpList": {
           "$ref": "#/definitions/RegExpList",
-          "description": "List of RegExp patterns or Pattern names to exclude from spell checking\nExample: [\"href\"] - to exclude html href"
+          "description": "List of RegExp patterns or Pattern names to exclude from spell checking\n\nExample: [\"href\"] - to exclude html href"
         },
         "ignoreWords": {
           "description": "list of words to be ignored",
@@ -287,7 +287,7 @@
         },
         "includeRegExpList": {
           "$ref": "#/definitions/RegExpList",
-          "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
+          "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking. If includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
         },
         "language": {
           "$ref": "#/definitions/LocaleId",
@@ -404,7 +404,7 @@
         },
         "name": {
           "$ref": "#/definitions/PatternId",
-          "description": "Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList\nIt is possible to redefine one of the predefined patterns to override its value."
+          "description": "Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList. It is possible to redefine one of the predefined patterns to override its value."
         },
         "pattern": {
           "$ref": "#/definitions/Pattern",
@@ -501,7 +501,7 @@
     },
     "ignoreRegExpList": {
       "$ref": "#/definitions/RegExpList",
-      "description": "List of RegExp patterns or Pattern names to exclude from spell checking\nExample: [\"href\"] - to exclude html href"
+      "description": "List of RegExp patterns or Pattern names to exclude from spell checking\n\nExample: [\"href\"] - to exclude html href"
     },
     "ignoreWords": {
       "description": "list of words to be ignored",
@@ -526,12 +526,12 @@
     },
     "includeRegExpList": {
       "$ref": "#/definitions/RegExpList",
-      "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.\nIf includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
+      "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking. If includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
     },
     "language": {
       "$ref": "#/definitions/LocaleId",
       "default": "en",
-      "description": "Current active spelling language\nExample: \"en-GB\" for British English\nExample: \"en,nl\" to enable both English and Dutch"
+      "description": "Current active spelling language\n\nExample: \"en-GB\" for British English\n\nExample: \"en,nl\" to enable both English and Dutch"
     },
     "languageId": {
       "$ref": "#/definitions/LanguageId",
