@@ -82,7 +82,7 @@ function importSettings(filename: string, defaultValues: CSpellSettings = defaul
 
     Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
     const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
-    finalizeSettings.source = { ...finalizeSrc, filename, name };
+    finalizeSettings.source = { ...finalizeSrc, filename };
     cachedFiles.set(filename, finalizeSettings);
     return finalizeSettings;
 }
