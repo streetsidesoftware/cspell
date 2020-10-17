@@ -85,12 +85,13 @@ describe('Validate LanguageSettings', () => {
     });
 
     test('tests matching languageIds', () => {
-        const langSet = LS.normalizeLanguageId('PHP, Python | cpp,javascript');
+        const langSet = LS.normalizeLanguageId('PHP; literate haskell, Python | cpp,javascript');
         expect(langSet.has('php')).toBe(true);
         expect(langSet.has('cpp')).toBe(true);
         expect(langSet.has('python')).toBe(true);
         expect(langSet.has('javascript')).toBe(true);
         expect(langSet.has('typescript')).toBe(false);
+        expect(langSet).toContain('literate haskell');
     });
 
     test('tests local matching', () => {
