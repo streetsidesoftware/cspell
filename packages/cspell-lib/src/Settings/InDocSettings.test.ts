@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';
 import * as InDoc from './InDocSettings';
@@ -8,7 +7,7 @@ describe('Validate InDocSettings', () => {
         const matches = InDoc.internal.getPossibleInDocSettings(sampleCode)
             .map(a => a.slice(1).filter(a => !!a))
             .toArray();
-        expect(matches.map(a => a[0])).to.deep.equal([
+        expect(matches.map(a => a[0])).toEqual([
             'enableCompoundWords',
             'disableCompoundWords',
             'enableCOMPOUNDWords',
@@ -23,38 +22,51 @@ describe('Validate InDocSettings', () => {
             'language en-US',
             'local',
             'local en, nl',
+            'dictionaries lorem-ipsum'
         ]);
     });
 
     test('tests extracting in file settings for compound words', () => {
-        expect(InDoc.getInDocumentSettings('')).to.deep.equal({ id: 'in-doc-settings' });
-        expect(InDoc.getInDocumentSettings('cSpell:enableCompoundWords').allowCompoundWords, 'cSpell:enableCompoundWords').to.be.true;
-        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords').allowCompoundWords, 'cSpell:ENABLECompoundWords').to.be.true;
-        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords').allowCompoundWords, 'cSpell:disableCompoundWords').to.be.false;
-        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWORDS').allowCompoundWords, 'cSpell:disableCompoundWORDS').to.be.false;
-        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords').allowCompoundWords).to.be.false;
-        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords\ncSpell:enableCompoundWords').allowCompoundWords).to.be.true;
-        expect(InDoc.getInDocumentSettings(sampleText).allowCompoundWords).to.be.true;
-        expect(InDoc.getInDocumentSettings(sampleCode).allowCompoundWords).to.be.true;
+        expect(InDoc.getInDocumentSettings('')).toEqual({ id: 'in-doc-settings' });
+        // 'cSpell:enableCompoundWords'
+        expect(
+            InDoc.getInDocumentSettings('cSpell:enableCompoundWords').allowCompoundWords
+        ).toBe(true);
+        // 'cSpell:ENABLECompoundWords'
+        expect(
+            InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords').allowCompoundWords
+        ).toBe(true);
+        // 'cSpell:disableCompoundWords'
+        expect(
+            InDoc.getInDocumentSettings('cSpell:disableCompoundWords').allowCompoundWords
+        ).toBe(false);
+        // 'cSpell:disableCompoundWORDS'
+        expect(
+            InDoc.getInDocumentSettings('cSpell:disableCompoundWORDS').allowCompoundWords
+        ).toBe(false);
+        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords').allowCompoundWords).toBe(false);
+        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords\ncSpell:enableCompoundWords').allowCompoundWords).toBe(true);
+        expect(InDoc.getInDocumentSettings(sampleText).allowCompoundWords).toBe(true);
+        expect(InDoc.getInDocumentSettings(sampleCode).allowCompoundWords).toBe(true);
     });
 
     test('tests finding words to add to dictionary', () => {
         const words = InDoc.internal.getWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
-        expect(words).to.deep.equal(['whiteberry', 'redberry', 'lightbrown']);
-        expect(InDoc.getIgnoreWordsFromDocument('Hello')).to.be.deep.equal([]);
+        expect(words).toEqual(['whiteberry', 'redberry', 'lightbrown']);
+        expect(InDoc.getIgnoreWordsFromDocument('Hello')).toEqual([]);
     });
 
     test('tests finding words to ignore', () => {
         const words = InDoc.getIgnoreWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
-        expect(words).to.deep.equal(['tripe', 'comment', '*/', 'tooo', 'faullts']);
-        expect(InDoc.getIgnoreWordsFromDocument('Hello')).to.be.deep.equal([]);
+        expect(words).toEqual(['tripe', 'comment', '*/', 'tooo', 'faullts']);
+        expect(InDoc.getIgnoreWordsFromDocument('Hello')).toEqual([]);
     });
 
     test('tests finding ignoreRegExp', () => {
         const matches = InDoc.getIgnoreRegExpFromDocument(sampleCode);
-        expect(matches).to.deep.equal([
+        expect(matches).toEqual([
             '/\\/\\/\\/.*/',
             'w\\w+berry',
             '/',
@@ -62,7 +74,7 @@ describe('Validate InDocSettings', () => {
             '/faullts[/]?/ */',
          ]);
         const regExpList = matches.map(s => Text.stringToRegExp(s)).map(a => a && a.toString() || '');
-        expect(regExpList).to.deep.equal([
+        expect(regExpList).toEqual([
             (/\/\/\/.*/g).toString(),
             (/w\w+berry/gim).toString(),
             (/\//gim).toString(),
@@ -72,12 +84,17 @@ describe('Validate InDocSettings', () => {
         const ranges = TextRange.findMatchingRangesForPatterns(matches, sampleCode);
         // console.log(ranges);
         // console.log(replaceRangesWith(sampleCode, ranges));
-        expect(ranges.length).to.be.equal(34);
+        expect(ranges.length).toBe(35);
     });
 
     test('test fetching the local for the text', () => {
         const settings = InDoc.getInDocumentSettings(sampleCode);
-        expect(settings.language).to.be.equal('en, nl');
+        expect(settings.language).toBe('en, nl');
+    });
+
+    test('test setting dictionaries for file', () => {
+        const settings = InDoc.getInDocumentSettings(sampleCode);
+        expect(settings.dictionaries).toStrictEqual(['lorem-ipsum']);
     });
 });
 // cSpell:ignore faullts straange
@@ -107,6 +124,7 @@ const sampleCode = `
     // cspell:local
     // cspell:local en, nl
 
+    // cspell:dictionaries lorem-ipsum
 `;
 
 // cspell:ignore againxx
