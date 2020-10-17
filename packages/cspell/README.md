@@ -503,5 +503,5 @@ Example:
     cSpell:ignore mkdirp githubusercontent streetsidesoftware vsmarketplacebadge visualstudio
     cSpell:words Verdana
     cSpell:ignore ieeees beees treeees
-    cSpell:amet
+    cSpell:ignore amet
 -->
