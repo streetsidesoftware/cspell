@@ -219,7 +219,7 @@ By default the flags `gim` are added if no flags are given.
 
 The spell checker works in the following way:
 1. Find all text matching `includeRegExp`
-2. Remove any text matching `excludeRegExp`
+2. Remove any text matching `ignoreRegExp`
 3. Check the remaining text.
 
 #### Exclude Example
