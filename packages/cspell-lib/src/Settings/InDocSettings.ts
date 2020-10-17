@@ -31,6 +31,8 @@ function parseSettingMatch(possibleSetting: string): CSpellUserSettings[] {
         [ /^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp ],
         [ /^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp ],
         [ /^(?:local|language)\s/i, parseLocal ],
+        [ /^(?:local|language)/i, parseLocal ],
+        [ /^dictionaries\s/i, parseDictionaries ],
     ];
 
     return settingParsers
@@ -80,6 +82,11 @@ function parseIgnoreRegExp(match: string): CSpellUserSettings {
 function parseIncludeRegExp(match: string): CSpellUserSettings {
     const includeRegExpList = parseRegEx(match);
     return { id: 'in-doc-includeRegExp', includeRegExpList };
+}
+
+function parseDictionaries(match: string): CSpellUserSettings {
+    const dictionaries = match.split(/[,\s]+/g).slice(1);
+    return { id: 'in-doc-dictionaries', dictionaries };
 }
 
 function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
