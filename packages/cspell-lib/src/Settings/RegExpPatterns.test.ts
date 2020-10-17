@@ -8,14 +8,11 @@ const matchHexValues = regExMatchCommonHexFormats.source;
 
 describe('Validate InDocSettings', () => {
 
-    test('tests regExSpellingGuard', () => {
-        const m1 = sampleCode2LF.match(RegPat.regExSpellingGuard);
+    test('tests regExSpellingGuardBlock', () => {
+        const m1 = sampleCode2LF.match(RegPat.regExSpellingGuardBlock);
         expect(m1).not.toBeFalsy();
-        expect(m1).toHaveLength(5);
         // cspell:disable
         expect(m1).toEqual([
-            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-            "cspell:disable-next\nconst verybadspelling = 'disable';\n",
             "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
             'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
             'cSpell:disable\n\nNot checked.\n\n',
@@ -23,17 +20,54 @@ describe('Validate InDocSettings', () => {
         // cspell:enable
     });
 
-    test('tests regExSpellingGuard CRLF', () => {
-        const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuard);
+    test('tests regExSpellingGuardBlock CRLF', () => {
+        const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardBlock);
         expect(m1).not.toBeFalsy;
-        expect(m1).toHaveLength(5);
         // cspell:disable
         expect(m1).toEqual([
-            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-            "cspell:disable-next\nconst verybadspelling = 'disable';\n",
             "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
             'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
             'cSpell:disable\n\nNot checked.\n\n',
+        ].map(a => a.replace(/\n/g, '\r\n')));
+        // cspell:enable
+    });
+
+    test('tests regExSpellingGuardLine', () => {
+        const m1 = sampleCode2LF.match(RegPat.regExSpellingGuardLine);
+        expect(m1).not.toBeFalsy();
+        // cspell:disable
+        expect(m1).toEqual([
+            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
+        ]);
+        // cspell:enable
+    });
+
+    test('tests regExSpellingGuardLine CRLF', () => {
+        const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardLine);
+        expect(m1).not.toBeFalsy;
+        // cspell:disable
+        expect(m1).toEqual([
+            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
+        ].map(a => a.replace(/\n/g, '\r\n')));
+        // cspell:enable
+    });
+
+    test('tests regExSpellingGuardNext', () => {
+        const m1 = sampleCode2LF.match(RegPat.regExSpellingGuardNext);
+        expect(m1).not.toBeFalsy();
+        // cspell:disable
+        expect(m1).toEqual([
+            "cspell:disable-next\nconst verybadspelling = 'disable';",
+        ]);
+        // cspell:enable
+    });
+
+    test('tests regExSpellingGuardNext CRLF', () => {
+        const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardNext);
+        expect(m1).not.toBeFalsy;
+        // cspell:disable
+        expect(m1).toEqual([
+            "cspell:disable-next\nconst verybadspelling = 'disable';",
         ].map(a => a.replace(/\n/g, '\r\n')));
         // cspell:enable
     });
@@ -42,7 +76,9 @@ describe('Validate InDocSettings', () => {
         const text = sampleCode2LF;
         const ranges = TextRange.findMatchingRangesForPatterns([
             RegPat.regExMatchUrls,
-            RegPat.regExSpellingGuard,
+            RegPat.regExSpellingGuardBlock,
+            RegPat.regExSpellingGuardLine,
+            RegPat.regExSpellingGuardNext,
             RegPat.regExMatchCommonHexFormats,
         ], text);
         expect(rangesToText(text, ranges)).toEqual([
@@ -52,7 +88,7 @@ describe('Validate InDocSettings', () => {
         ' 10: 19 0x5612abcd',
         ' 11: 28 0xbadc0ffee',
         " 13:  1 const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-        " 15:  4 cspell:disable-next\nconst verybadspelling = 'disable';\n",
+        " 15:  4 cspell:disable-next\nconst verybadspelling = 'disable';",
         " 19:  4 spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
         ' 29:  4 spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
         ' 67:  4 cSpell:disable\n\nNot checked.\n\n'        ,
@@ -63,7 +99,9 @@ describe('Validate InDocSettings', () => {
         const text = sampleCode2CRLF;
         const ranges = TextRange.findMatchingRangesForPatterns([
             RegPat.regExMatchUrls,
-            RegPat.regExSpellingGuard,
+            RegPat.regExSpellingGuardBlock,
+            RegPat.regExSpellingGuardLine,
+            RegPat.regExSpellingGuardNext,
             RegPat.regExMatchCommonHexFormats,
         ], text);
         expect(rangesToText(text, ranges)).toEqual([
@@ -73,7 +111,7 @@ describe('Validate InDocSettings', () => {
         ' 10: 19 0x5612abcd',
         ' 11: 28 0xbadc0ffee',
         " 13:  1 const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-        " 15:  4 cspell:disable-next\r\nconst verybadspelling = 'disable';\r\n",
+        " 15:  4 cspell:disable-next\r\nconst verybadspelling = 'disable';",
         " 19:  4 spell-checker:disable\r\nconst unicodeHexValue = '\\uBABC';\r\nconst unicodeHexValue2 = '\\x{abcd}';\r\n\r\n// spell-checker:enable",
         ' 29:  4 spell-checker:disable */\r\n\r\n// nested disabled checker is not supported.\r\n\r\n'
         + '// spell-checker:disable\r\n\r\n// nested spell-checker:enable',
@@ -91,7 +129,9 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExCStyleComments,
             ], text);
             const excludeRanges = TextRange.findMatchingRangesForPatterns([
-                RegPat.regExSpellingGuard,
+                RegPat.regExSpellingGuardBlock,
+                RegPat.regExSpellingGuardLine,
+                RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
             ], text);
@@ -136,7 +176,9 @@ describe('Validate InDocSettings', () => {
                 RegPat.regExCStyleComments,
             ], text);
             const excludeRanges = TextRange.findMatchingRangesForPatterns([
-                RegPat.regExSpellingGuard,
+                RegPat.regExSpellingGuardBlock,
+                RegPat.regExSpellingGuardLine,
+                RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
             ], text);
@@ -184,7 +226,11 @@ describe('Validate InDocSettings', () => {
         expect(hexRanges.length).toBe(5);
         expect(hexRanges[2].startPos).toBe(text.indexOf('0xbadc0ffee'));
 
-        const disableChecker = TextRange.findMatchingRanges(RegPat.regExSpellingGuard, text);
+        const disableChecker = TextRange.findMatchingRangesForPatterns([
+            RegPat.regExSpellingGuardBlock,
+            RegPat.regExSpellingGuardLine,
+            RegPat.regExSpellingGuardNext,
+        ], text);
         expect(disableChecker.length).toBe(5);
 
         const hereDocs = TextRange.findMatchingRanges(RegPat.regExPhpHereDoc, text);
@@ -219,7 +265,11 @@ describe('Validate InDocSettings', () => {
         expect(hexRanges.length).toBe(5);
         expect(hexRanges[2].startPos).toBe(text.indexOf('0xbadc0ffee'));
 
-        const disableChecker = TextRange.findMatchingRanges(RegPat.regExSpellingGuard, text);
+        const disableChecker = TextRange.findMatchingRangesForPatterns([
+            RegPat.regExSpellingGuardBlock,
+            RegPat.regExSpellingGuardLine,
+            RegPat.regExSpellingGuardNext,
+        ], text);
         expect(disableChecker.length).toBe(5);
 
         const hereDocs = TextRange.findMatchingRanges(RegPat.regExPhpHereDoc, text);
