@@ -10,11 +10,11 @@ function toReferences(node: TrieNode): Sequence<TrieRefNode> {
     return genSequence(convertToTrieRefNodes(node));
 }
 
-const regExpEscapeChars = /([\[\]\\,:{}*])/;
+const regExpEscapeChars = /([\[\]\\,:{}*])/g;
 const regExTrailingComma = /,(\}|\n)/g;
 
 function escapeChar(char: string): string {
-    return char.replace(regExpEscapeChars, '\\$1');
+    return char.replace(regExpEscapeChars, '\\$1'); // lgtm[js/incomplete-sanitization]
 }
 
 function trieToExportString(node: TrieNode, base: number): Sequence<string> {

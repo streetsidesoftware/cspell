@@ -302,6 +302,12 @@ export function suggestionCollector(
     };
 }
 
+/**
+ *
+ * @param text verbatim text to be inserted into a regexp
+ * @returns text that can be used in a regexp.
+ * note: suppress js/incomplete-sanitization warning about SQL injection.
+ */
 function regexQuote(text: string): string {
-    return text.replace(/[\[\]\-+(){},|*.]/g, '\\$1');
+    return text.replace(/[\[\]\-+(){},|*.]/g, '\\$1'); // lgtm[js/incomplete-sanitization]
 }
