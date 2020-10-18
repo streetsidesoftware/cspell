@@ -149,6 +149,11 @@ describe('Validate CSpellSettingsServer', () => {
         expect(settings.words).toEqual(expect.arrayContaining(['leuk']));
     });
 
+    test('tests loading a cSpell.json with a missing import file', () => {
+        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import-missing.json');
+        expect(() => readSettings(filename)).toThrow('Cannot find module \'../intentionally-missing-file.json\'');
+    });
+
     test('makes sure global settings is an object', () => {
         const settings = getGlobalSettings();
         expect(Object.keys(settings)).not.toHaveLength(0);
