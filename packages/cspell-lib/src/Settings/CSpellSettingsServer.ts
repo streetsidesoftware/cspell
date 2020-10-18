@@ -15,6 +15,7 @@ import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
 import * as ConfigStore from 'configstore';
 import * as minimatch from 'minimatch';
+import * as resolveFrom from 'resolve-from';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -256,9 +257,20 @@ const testNodeModules = /^node_modules\//;
 
 function resolveFilename(filename: string, relativeTo: string) {
     if (testNodeModules.test(filename)) {
-        filename = require.resolve(filename.replace(testNodeModules, ''));
+        filename = filename.replace(testNodeModules, '');
     }
-    return path.isAbsolute(filename) ? filename : path.resolve(relativeTo, filename);
+
+    try {
+        return resolveFrom(relativeTo, filename);
+    } catch (error) {
+        if (filename.startsWith('.')) {
+            // Failed to resolve a relative module request
+            throw error;
+        }
+        // Try to resolve as a relative module
+        const normalizedFilename = path.sep === '/' ? filename  : filename.split(path.sep).join('/');
+        return resolveFrom(relativeTo, `./${normalizedFilename}`);
+    }
 }
 
 export function getGlobalSettings(): CSpellSettings {
