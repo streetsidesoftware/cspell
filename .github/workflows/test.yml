@@ -35,3 +35,7 @@ jobs:
     - run: npm test
     - run: node ./bin.js trace test
     - run: node ./bin.js "**/{*.ts,*.md}"
+
+    # Ensure the repository is clean after build & test
+    # - run: git --no-pager diff --compact-summary --exit-code
+    - run: git --no-pager diff --compact-summary
