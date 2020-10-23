@@ -166,7 +166,8 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'latex', extensions: ['.tex'], },
     { id: 'map', extensions: ['.map'], },
     { id: 'image', extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif']},
-    { id: 'binary', extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o']},
+    // cspell:ignore woff
+    { id: 'binary', extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.tff', '.woff', '.woff2', '.eot', '.ico']},
     { id: 'apiblueprint', extensions: ['.apib', '.apiblueprint']},
 ];
 
