@@ -4,7 +4,6 @@ jest.mock('../util/logger');
 
 
 const root = path.join(__dirname, '..', '..');
-const dictionaries = path.join(root, 'dictionaries');
 const samples = path.join(root, 'samples');
 
 describe('Validate DictionaryLoader', () => {
@@ -75,9 +74,9 @@ describe('Validate DictionaryLoader', () => {
             [sample('words.txt'), {}, 'apple'],
             [sample('words.txt'), { type: 'S' }, 'pear'],
             [sample('words.txt'), { type: 'C' }, 'strawberry'],
-            [dict('csharp.txt'), {}, 'const'],
-            [dict('csharp.txt'), { type: 'S' }, 'const'],
-            [dict('csharp.txt'), { type: 'C' }, 'const'],
+            ['node_modules/cspell-dict-csharp/csharp.txt.gz', {}, 'const'],
+            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'S' }, 'const'],
+            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'C' }, 'const'],
         ];
 
         for (const t of tests) {
@@ -90,8 +89,4 @@ describe('Validate DictionaryLoader', () => {
 
 function sample(file: string): string {
     return path.join(samples, file);
-}
-
-function dict(file: string): string {
-    return path.join(dictionaries, file);
 }
