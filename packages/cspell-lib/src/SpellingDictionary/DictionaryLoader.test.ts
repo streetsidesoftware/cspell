@@ -91,7 +91,3 @@ describe('Validate DictionaryLoader', () => {
 function sample(file: string): string {
     return path.join(samples, file);
 }
-
-function dict(file: string): string {
-    return path.join(dictionaries, file);
-}
