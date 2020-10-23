@@ -1,4 +1,4 @@
-import { CSpellSettings, RegExpPatternDefinition, DictionaryDefinition, CSpellSettingsWithSourceTrace, PredefinedPatterns } from './CSpellSettingsDef';
+import { CSpellSettings, RegExpPatternDefinition, CSpellSettingsWithSourceTrace, PredefinedPatterns } from './CSpellSettingsDef';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';
@@ -53,16 +53,6 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
 // This bit of copying is done to have the complier ensure that the defaults exist.
 const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
 
-const defaultDictionaryDefs: DictionaryDefinition[] = [
-    { name: 'css',            file: 'css.txt.gz',           type: 'S', description: 'CSS Keywords.' },
-    { name: 'csharp',         file: 'csharp.txt.gz',        type: 'S', description: 'C# Keywords and common library functions.' },
-    { name: 'filetypes',      file: 'filetypes.txt.gz',     type: 'S', description: 'List of file types.' },
-    { name: 'html',           file: 'html.txt.gz',          type: 'S', description: 'HTML keywords.' },
-    { name: 'misc',           file: 'miscTerms.txt.gz',     type: 'S', description: 'List of miscellaneous terms.' },
-    { name: 'node',           file: 'node.txt.gz',          type: 'S', description: 'List of NodeJS terms.' },
-    { name: 'npm',            file: 'npm.txt.gz',           type: 'S', description: 'List of Top 500 NPM packages.' },
-];
-
 export const _defaultSettings: CSpellSettingsWithSourceTrace = {
     id: 'static_defaults',
     language: 'en',
@@ -83,7 +73,6 @@ export const _defaultSettings: CSpellSettingsWithSourceTrace = {
     patterns: defaultRegExpPatterns,
     ignoreRegExpList: defaultRegExpExcludeList,
     languageSettings: LanguageSettings.getDefaultLanguageSettings(),
-    dictionaryDefinitions: defaultDictionaryDefs,
     source: {name: 'defaultSettings'},
 };
 
