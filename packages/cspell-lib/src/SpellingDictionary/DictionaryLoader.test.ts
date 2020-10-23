@@ -75,9 +75,9 @@ describe('Validate DictionaryLoader', () => {
             [sample('words.txt'), {}, 'apple'],
             [sample('words.txt'), { type: 'S' }, 'pear'],
             [sample('words.txt'), { type: 'C' }, 'strawberry'],
-            [dict('node_modules/cspell-dict-csharp/csharp.txt.gz'), {}, 'const'],
-            [dict('node_modules/cspell-dict-csharp/csharp.txt.gz'), { type: 'S' }, 'const'],
-            [dict('node_modules/cspell-dict-csharp/csharp.txt.gz'), { type: 'C' }, 'const'],
+            ['node_modules/cspell-dict-csharp/csharp.txt.gz', {}, 'const'],
+            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'S' }, 'const'],
+            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'C' }, 'const'],
         ];
 
         for (const t of tests) {
