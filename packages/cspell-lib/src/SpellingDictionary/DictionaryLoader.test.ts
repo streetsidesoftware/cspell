@@ -4,7 +4,6 @@ jest.mock('../util/logger');
 
 
 const root = path.join(__dirname, '..', '..');
-const dictionaries = path.join(root, 'dictionaries');
 const samples = path.join(root, 'samples');
 
 describe('Validate DictionaryLoader', () => {
