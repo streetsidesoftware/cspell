@@ -4,7 +4,7 @@ export interface Config {
 }
 
 export interface Repository {
-    name?: string;
     path: string;
+    url: string;
     args: string[];
 }

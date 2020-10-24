@@ -1,5 +1,6 @@
 import * as Path from 'path';
 import { exec } from './sh';
+import * as Config from './config';
 import * as Shell from 'shelljs';
 import * as fs from 'fs';
 
@@ -12,13 +13,13 @@ export function addRepository(url: string): boolean {
         return false;
     }
     const httpsUrl = url.replace('git@github.com:', 'https://github.com/')
-    const owner = Path.basename(Path.dirname(url));
-    const dir = Path.join(repositoryDir, owner);
+    const relPath = httpsUrl.replace(/\.git$/, '').split('/').slice(3);
+    const dir = Path.join(repositoryDir, ...relPath);
+    const path = relPath.join('/');
 
-    Shell.mkdir(dir);
-    Shell.pushd(dir);
-    exec(`git submodule add --depth 1 ${JSON.stringify(url)}`, { echo: true, bail: true });
-    Shell.popd();
+    addToGit(dir, httpsUrl);
+    Config.addRepository(path, httpsUrl);
+
     return true;
 }
 
@@ -35,4 +36,12 @@ export function updateRepository(path: string | undefined = ''): boolean {
     exec(`git submodule update --depth 1 --remote -- ${JSON.stringify(submodule)}`, { echo: true, bail: true });
 
     return true;
+}
+
+function addToGit(dir: string, url: string) {
+    const p = Path.dirname(dir);
+    Shell.mkdir('-p', p);
+    Shell.pushd(p);
+    exec(`git submodule add --depth 1 ${JSON.stringify(url)} ${JSON.stringify(dir)}`, { echo: true, bail: true });
+    Shell.popd();
 }

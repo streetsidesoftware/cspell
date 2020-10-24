@@ -6,7 +6,7 @@ function run() {
 
     switch( command ) {
         case 'check': {
-            check();
+            check(process.argv[3] || '');
             break;
         }
         case 'add': {
