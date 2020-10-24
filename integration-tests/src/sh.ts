@@ -13,12 +13,6 @@ export function exec(command: string, options: ExecOptions = {}) {
     if (echo) {
         console.log(command);
     }
-    const result = Shell.exec(command);
-    if (echo && result.toString()) {
-        console.log(result.toString());
-    }
-    if (bail && result.code) {
-        process.exit(result.code);
-    }
+    const result = Shell.exec(command, { silent: !echo, fatal: bail });
     return result;
 }
