@@ -42,6 +42,6 @@ function addToGit(dir: string, url: string) {
     const p = Path.dirname(dir);
     Shell.mkdir('-p', p);
     Shell.pushd(p);
-    exec(`git submodule add --depth 1 ${JSON.stringify(url)} ${JSON.stringify(dir)}`, { echo: true, bail: true });
+    exec(`git submodule add --depth 1 ${JSON.stringify(url)}`, { echo: true, bail: true });
     Shell.popd();
 }

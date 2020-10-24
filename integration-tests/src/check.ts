@@ -50,12 +50,29 @@ function execCommand(dir: string, command: string, args: string[]): Result {
     const result = exec(fullCommand);
     Shell.popd('-q', '+0');
     const { stdout, stderr, code } = result;
-    return { stdout, stderr, code, elapsedTime: Date.now() - start};
+    return cleanResult({ stdout, stderr, code, elapsedTime: Date.now() - start});
 }
 
 function logResult(result: Result) {
     const { stdout, stderr, code, elapsedTime } = result;
     console.log(`${stdout} ${stderr} exit code: ${code} \n time: ${(elapsedTime / 1000).toFixed(3)}s`)
+}
+
+function cleanResult(result: Result): Result {
+    const { stderr, stdout, ...rest } = result;
+    return {
+        ...rest,
+        stderr: cleanOutput(stderr),
+        stdout: cleanOutput(stdout),
+    };
+}
+
+function cleanOutput(out: string): string {
+    const parent = Path.resolve(Path.join(__dirname, '..', '..'))
+    return out.split('\n')
+        .map(line => line.replace(repositoryDir, '.'))
+        .map(line => line.replace(parent, '.'))
+        .join('\n')
 }
 
 function compare(a: Result, b: Result): boolean {
