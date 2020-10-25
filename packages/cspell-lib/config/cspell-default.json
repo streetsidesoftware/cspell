@@ -121,7 +121,20 @@
         {
             "languageId": "html",
             "ignoreRegExpList": [
-                "href"
+                "href",
+                "id=\"(?:[^\\\"]+|\\.)*\"",
+                "src=\"(?:[^\\\"]+|\\.)*\"",
+                "class=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-activedescendant=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-controls=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-describedby=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-details=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-errormessage=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-flowto=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-labelledby=\"(?:[^\\\"]+|\\.)*\"",
+                "aria-owns=\"(?:[^\\\"]+|\\.)*\"",
+                "for=\"(?:[^\\\"]+|\\.)*\"",
+                "data-(.*[=> ]?)"
             ]
         },
         {
