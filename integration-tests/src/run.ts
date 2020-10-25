@@ -1,62 +1,36 @@
-import { check } from './check';
-import { addRepository, updateRepository } from './repositoryHelper';
+import { check, CheckOptions } from './check';
+import { addRepository, listRepositories } from './repositoryHelper';
+import { program, Command } from 'commander';
 
-function run() {
-    const command = process.argv[2];
+function run(program: Command) {
 
-    switch( command ) {
-        case 'check': {
-            check(process.argv[3] || '');
-            break;
-        }
-        case 'add': {
-            const url = process.argv[3];
-            if (!addRepository(url)) {
-                showUsage(usageAdd);
-            }
-            break;
-        }
-        case 'update': {
-            const path = process.argv[3];
-            if (!updateRepository(path)) {
-                showUsage(usageUpdate);
-            }
-            break;
-        }
-        default: {
-            showUsage();
-        }
-    }
+    program.command('check [pattern]')
+        .option('-u, --update', 'Update snapshot', false)
+        .option('-f, --fail', 'Fail on first error.', false)
+        .description('Run the integration tests, checking the spelling results against the various repositories', {
+            pattern: 'Only check repositories whose name contain the pattern.'
+        })
+        .action((pattern: string | undefined, options: CheckOptions) => {
+            check(pattern || '', options)
+        })
 
-    process.exit(0);
+    program.command('list [pattern]')
+        .description('List configured repositories.', {
+            pattern: 'GitHub Url'
+        })
+        .action((pattern?: string) => {
+            listRepositories(pattern);
+        })
+
+    program.command('add <url>')
+        .description('Add a repository to be checked. Example: add "https://github.com/streetsidesoftware/cspell.git". Note: to adjust the arguments, the configuration is found in `config/config.json`', {
+            url: 'GitHub Url'
+        })
+        .action((url: string) => {
+            addRepository(url);
+        })
+
+    program.parse(process.argv)
 }
 
-const usageAdd = `
-Add repository:
-    add <url-to-repository>
-    example: add https://github.com/bitjson/typescript-starter.git
-`
-
-const usageUpdate = `
-Update repository:
-    update <path-to-repository>
-    example: update bitjson/typescript-starter
-`
-
-const usage = `
-Integration test runner:
-
-Commands:
-    check - run all integration tests.
-    add <url> - adds a repository as a submodule
-    update <path> - update an integration test submodule
-`;
-
-function showUsage(msg = usage, exitWithCode = 1) {
-    console.log(msg);
-    if (exitWithCode) {
-        process.exit(exitWithCode);
-    }
-}
-
-run();
+run(program as Command);

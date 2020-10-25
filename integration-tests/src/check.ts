@@ -3,16 +3,14 @@ import * as Path from 'path';
 import { readConfig } from './config';
 import { Repository } from './configDef';
 import { exec } from './sh';
-import { repositoryDir } from './repositoryHelper';
+import { repositoryDir, updateRepository } from './repositoryHelper';
+import { checkAgainstSnapshot } from './snapshots';
 
 const config = readConfig();
-const cspell = require.resolve('cspell/bin.js');
 const cspellArgs = '-u'
-const jsCspell = JSON.stringify(cspell);
-const jsCurrent = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
+const jsCspell = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
 
 const cspellCommand = `node ${jsCspell} ${cspellArgs}`;
-const cspellCurrent = `node ${jsCurrent} ${cspellArgs}`;
 
 interface Result {
     stdout: string;
@@ -21,31 +19,34 @@ interface Result {
     elapsedTime: number;
 }
 
-function execCheck(rep: Repository) {
+function execCheck(rep: Repository, update: boolean): boolean {
     const name = rep.path;
     const path = Path.join(repositoryDir, rep.path);
     console.log(`
 Checking '${name}'...
 `);
+    updateRepository(rep.path);
     printTime();
     const cspellResult = execCommand(path, cspellCommand, rep.args);
     logResult(cspellResult);
+    const r = checkResult(rep, cspellResult, update);
     printTime();
-    const newResult = execCommand(path, cspellCurrent, rep.args);
-    logResult(newResult);
-    printTime();
-    return compare(cspellResult, newResult);
+    if (r.diff) {
+        console.log();
+        console.log(r.diff);
+    }
+    return r.match;
 }
 
 function printTime() {
     console.log((new Date()).toISOString());
 }
 
-function execCommand(dir: string, command: string, args: string[]): Result {
+function execCommand(path: string, command: string, args: string[]): Result {
     const start = Date.now();
     const argv = args.map(a => JSON.stringify(a)).join(' ');
     const fullCommand = command + ' ' + argv;
-    Shell.pushd('-q', dir);
+    Shell.pushd('-q', path);
     console.log(`Execute: '${fullCommand}'`)
     const result = exec(fullCommand);
     Shell.popd('-q', '+0');
@@ -54,8 +55,18 @@ function execCommand(dir: string, command: string, args: string[]): Result {
 }
 
 function logResult(result: Result) {
-    const { stdout, stderr, code, elapsedTime } = result;
-    console.log(`${stdout} ${stderr} exit code: ${code} \n time: ${(elapsedTime / 1000).toFixed(3)}s`)
+    const { elapsedTime } = result;
+    const output = assembleOutput(result)
+    console.log(`${output} \n time: ${(elapsedTime / 1000).toFixed(3)}s`)
+}
+
+function assembleOutput(result: Result) {
+    const { stdout, stderr, code } = result;
+    return `${stdout} ${stderr} exit code: ${code}`
+}
+
+function checkResult(rep: Repository, result: Result, update: boolean) {
+    return checkAgainstSnapshot(rep, assembleOutput(result), update);
 }
 
 function cleanResult(result: Result): Result {
@@ -81,11 +92,30 @@ function compare(a: Result, b: Result): boolean {
     && a.stdout === b.stdout
 }
 
-export function check(match: string) {
-    exec('git submodule update --init --recursive --depth 1', { echo: true, bail: true });
-    const failed = config.repositories
-        .filter(rep => rep.path.includes(match))
-        .filter(rep => !execCheck(rep));
+
+
+export interface CheckOptions {
+    /** Update snapshot */
+    update: boolean;
+    /** Stop on first error */
+    fail: boolean;
+}
+
+export function check(match: string, options: CheckOptions) {
+    const matching = config.repositories
+        .filter(rep => rep.path.includes(match));
+
+    const failed: Repository[] = [];
+    for (const rep of matching) {
+        const r = execCheck(rep, options.update);
+        if (!r) {
+            failed.push(rep);
+            if (options.fail) {
+                break;
+            }
+        }
+    }
+
     if (failed.length) {
         const failedChecks = failed
             .map(rep => rep.path)

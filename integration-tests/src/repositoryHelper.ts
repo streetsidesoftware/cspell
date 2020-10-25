@@ -23,7 +23,7 @@ export function addRepository(url: string): boolean {
     return true;
 }
 
-export function updateRepository(path: string | undefined = ''): boolean {
+export function updateRepository(path: string | undefined = '', useRemote: boolean = false): boolean {
     path = path.replace(/^repositories/, '');
 
     if (!path || !fs.existsSync(Path.join(repositoryDir, path))) {
@@ -32,10 +32,21 @@ export function updateRepository(path: string | undefined = ''): boolean {
         }
         return false;
     }
-    const submodule = Path.join(repositoryDir, path);
-    exec(`git submodule update --depth 1 --remote -- ${JSON.stringify(submodule)}`, { echo: true, bail: true });
+    const remote = useRemote ? '--remote' : ''
+    Shell.pushd(repositoryDir)
+    exec(`git submodule update --depth 1 ${remote} -- ${JSON.stringify(path)}`, { echo: true, bail: true });
+    Shell.popd()
 
     return true;
+}
+
+export function listRepositories(pattern: string = '') {
+    const config = Config.readConfig();
+    config.repositories
+    .filter(rep => rep.path.includes(pattern))
+    .forEach(rep => {
+        console.log(rep.path);
+    });
 }
 
 function addToGit(dir: string, url: string) {
