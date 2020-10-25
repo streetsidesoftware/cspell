@@ -33,8 +33,9 @@ export function updateRepository(path: string | undefined = '', useRemote: boole
         return false;
     }
     const remote = useRemote ? '--remote' : ''
+    const init = useRemote ? '' : '--init';
     Shell.pushd(repositoryDir)
-    exec(`git submodule update --depth 1 ${remote} -- ${JSON.stringify(path)}`, { echo: true, bail: true });
+    exec(`git submodule update --depth 1 ${remote} ${init} -- ${JSON.stringify(path)}`, { echo: true, bail: true });
     Shell.popd()
 
     return true;
