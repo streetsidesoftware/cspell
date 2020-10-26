@@ -3,6 +3,7 @@ import { exec } from './sh';
 import * as Config from './config';
 import * as Shell from 'shelljs';
 import * as fs from 'fs';
+import { ShouldCheckOptions, shouldCheckRepo } from './shouldCheckRepo';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'repositories'));
 
@@ -41,10 +42,13 @@ export function updateRepository(path: string | undefined = '', useRemote: boole
     return true;
 }
 
-export function listRepositories(pattern: string = '') {
+export interface ListRepositoryOptions extends ShouldCheckOptions {
+}
+
+export function listRepositories(options: ListRepositoryOptions) {
     const config = Config.readConfig();
     config.repositories
-    .filter(rep => rep.path.includes(pattern))
+    .filter(rep => shouldCheckRepo(rep, options))
     .forEach(rep => {
         console.log(rep.path);
     });
