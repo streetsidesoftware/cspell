@@ -1,0 +1,46 @@
+name: Integration Tests
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          - 14.x
+
+        os:
+          - ubuntu-latest
+
+        repo:
+          - aws-amplify/docs
+          - Azure/azure-rest-api-specs
+          - exonum/exonum
+          - bitjson/typescript-starter graphql/express-graphql graphql/graphql-relay-js
+          - graphql/graphql-js
+          - liriliri/licia
+          - microsoft/TypeScript-Website
+          - prettier/prettier
+          - pycontribs/jira SoftwareBrothers/admin-bro typescript-cheatsheets/react
+          - typescript-eslint/typescript-eslint webdeveric/webpack-assets-manifest
+          - w3c/aria-practices w3c/specberus
+          - webpack/webpack
+          - wireapp/wire-desktop wireapp/wire-webapp
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2.1.2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - run: npm ci
+    - run: cd integration-tests
+    - run: npm run integration-tests -- ${{ matrix.repo }}
