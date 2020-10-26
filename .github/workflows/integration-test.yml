@@ -42,5 +42,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - run: npm ci
-    - run: cd integration-tests
-    - run: npm run integration-tests -- ${{ matrix.repo }}
+    - run:  >
+      cd integration-tests
+      && npm ci
+      && npm run integration-tests -- ${{ matrix.repo }}
