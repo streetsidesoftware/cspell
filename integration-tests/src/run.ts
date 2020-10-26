@@ -1,25 +1,33 @@
 import { check, CheckOptions } from './check';
 import { addRepository, listRepositories } from './repositoryHelper';
-import { program, Command } from 'commander';
+import { createCommand } from 'commander';
+import * as commander from 'commander';
 
-function run(program: Command) {
+function run(program: commander.Command) {
 
-    program.command('check [pattern]')
+    program.command('check [patterns...]')
         .option('-u, --update', 'Update snapshot', false)
         .option('-f, --fail', 'Fail on first error.', false)
+        .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
         .description('Run the integration tests, checking the spelling results against the various repositories', {
             pattern: 'Only check repositories whose name contain the pattern.'
         })
-        .action((pattern: string | undefined, options: CheckOptions) => {
-            check(pattern || '', options)
+        .action((patterns: string[], options: { update?: boolean, fail?: boolean, exclude?: string[] }) => {
+            const { update = false, fail = false, exclude = [] } = options;
+            check(patterns || [], { update, fail, exclude })
         })
 
-    program.command('list [pattern]')
+    program.command('list [patterns...]')
+        .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
         .description('List configured repositories.', {
             pattern: 'GitHub Url'
         })
-        .action((pattern?: string) => {
-            listRepositories(pattern);
+        .action((patterns: string[] = [], options: { exclude?: string[] }) => {
+            const opts = {
+                patterns,
+                exclude: options?.exclude || []
+            }
+            listRepositories(opts);
         })
 
     program.command('add <url>')
@@ -33,4 +41,4 @@ function run(program: Command) {
     program.parse(process.argv)
 }
 
-run(program as Command);
+run(createCommand('tester'));

@@ -3,12 +3,12 @@
   "private": true,
   "version": "0.1.0",
   "description": "Integration tests for cspell. It will execute cspell against various repositories and compare the results.",
-  "bin": "bin.js",
+  "bin": "tester.js",
   "scripts": {
     "build": "tsc -p .",
     "postinstall": "npm run build",
-    "integration-test": "node bin.js check -f",
-    "update-snapshots": "node bin.js check -u"
+    "integration-tests": "node tester.js check -f",
+    "update-snapshots": "node tester.js check -u"
   },
   "author": "Jason Dent",
   "license": "MIT",

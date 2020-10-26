@@ -5,6 +5,7 @@ import { Repository } from './configDef';
 import { exec } from './sh';
 import { repositoryDir, updateRepository } from './repositoryHelper';
 import { checkAgainstSnapshot } from './snapshots';
+import { shouldCheckRepo } from './shouldCheckRepo';
 
 const config = readConfig();
 const cspellArgs = '-u'
@@ -92,42 +93,46 @@ function compare(a: Result, b: Result): boolean {
     && a.stdout === b.stdout
 }
 
+function report(reposChecked: Repository[], failed: Repository[]) {
+    const setFailed = new Set(failed);
+    const r = reposChecked.map(r => {
+        const mark = setFailed.has(r) ? '❌' : '✅';
+        return `\t ${mark} ${r.path}`
+    })
+    return r.join('\n');
+}
 
 
 export interface CheckOptions {
+    /** Exclusion patterns */
+    exclude: string[];
     /** Update snapshot */
     update: boolean;
     /** Stop on first error */
     fail: boolean;
 }
 
-export function check(match: string, options: CheckOptions) {
+export function check(patterns: string[], options: CheckOptions) {
+    const { exclude, update, fail } = options;
     const matching = config.repositories
-        .filter(rep => rep.path.includes(match));
+        .filter(rep => shouldCheckRepo(rep, { patterns, exclude }));
 
     const failed: Repository[] = [];
     for (const rep of matching) {
-        const r = execCheck(rep, options.update);
+        const r = execCheck(rep, update);
         if (!r) {
             failed.push(rep);
-            if (options.fail) {
+            if (fail) {
                 break;
             }
         }
     }
 
+    console.log(failed.length ? 'Some checks failed:' : 'All checks passed:');
+    console.log(report(matching, failed));
+
     if (failed.length) {
-        const failedChecks = failed
-            .map(rep => rep.path)
-            .map(name => `\t "${name}"`)
-            .join('\n')
-        const msg = `
-Some checks failed:
-${failedChecks}
-`;
-        console.error(msg);
         process.exit(1);
     }
-
     console.log('\nSuccess!');
 }
