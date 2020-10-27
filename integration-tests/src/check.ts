@@ -57,7 +57,8 @@ function execCommand(path: string, command: string, args: string[]): Result {
 
 function logResult(result: Result) {
     const { elapsedTime } = result;
-    const output = assembleOutput(result)
+    const fullOutputLines = assembleOutput(result).split('\n')
+    const output = (fullOutputLines.length > 5 ? '...\n' : '') + fullOutputLines.slice(-5).join('\n')
     console.log(`${output} \n time: ${(elapsedTime / 1000).toFixed(3)}s`)
 }
 
@@ -101,7 +102,6 @@ function report(reposChecked: Repository[], failed: Repository[]) {
     })
     return r.join('\n');
 }
-
 
 export interface CheckOptions {
     /** Exclusion patterns */

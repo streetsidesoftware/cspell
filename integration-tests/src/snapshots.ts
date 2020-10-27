@@ -37,7 +37,7 @@ export function checkAgainstSnapshot(rep: Repository, output: string, update: bo
     const cleanSnapText = linesToCleanText(snapLines);
 
     if (cleanText !== cleanSnapText) {
-        const diff = Diff.diffLinesUnified(snapLines, lines);
+        const diff = Diff.diffLinesUnified(snapLines, lines, { contextLines: 5, expand: false });
         return { match: false, diff };
     }
 
