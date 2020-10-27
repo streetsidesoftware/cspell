@@ -19,6 +19,7 @@ jobs:
           - ubuntu-latest
 
         repo:
+          - php/php-src
           - aws-amplify/docs
           - Azure/azure-rest-api-specs
           - exonum/exonum
@@ -34,7 +35,6 @@ jobs:
           - wireapp/wire-desktop wireapp/wire-webapp
           - django/django
           - TheAlgorithms/Python
-          - php/php-src
 
     steps:
     - uses: actions/checkout@v2
