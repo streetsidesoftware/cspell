@@ -1,8 +1,22 @@
 {
+    "ignorePaths": [
+        "**/timezonedb.h",
+        "**/data_file.c"
+    ],
+    "dictionaryDefinitions": [
+        {
+            "name": "mnemonics",
+            "path": "./mnemonics.txt"
+        },
+        {
+            "name": "Mime Types",
+            "path": "./mime-types.txt"
+        }
+    ],
+    "dictionaries": ["mnemonics", "Mime Types"],
     "languageSettings": [
         {
-            "languageId": "c,cpp,h",
-            "allowCompoundWords": false
+            "languageId": "c,cpp,h"
         }
     ]
 }
