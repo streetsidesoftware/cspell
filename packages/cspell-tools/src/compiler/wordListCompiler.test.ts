@@ -11,12 +11,12 @@ import { streamWordsFromFile } from './iterateWordsFromFile';
 import { isCircular, iteratorTrieWords, serializeTrie, importTrie } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 
-
+const testSuiteName = path.basename(__filename);
 const UTF8: BufferEncoding = 'utf8';
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
 const sampleDictEn = path.join(samples, 'en_US.txt');
-const temp = path.join(__dirname, '..', '..', 'temp');
+const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 
 describe('Validate the wordListCompiler', () => {
     test('tests splitting lines', () => {

@@ -2,10 +2,11 @@ import * as app from './app';
 import * as Commander from 'commander';
 import * as path from 'path';
 import * as fs from 'fs-extra';
+import * as shell from 'shelljs';
 
 const projectRoot = path.join(__dirname, '..');
-const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
-const pathTemp = path.join(projectRoot, 'temp');
+const pathTemp = path.join(projectRoot, 'temp', 'cspell-tools', path.basename(__filename));
+const relPathTemp = 'app-out'
 
 function argv(...args: string[]): string[] {
     return [...process.argv.slice(0, 2), ...args];
@@ -16,10 +17,20 @@ function getCommander() {
 }
 
 describe('Validate the application', () => {
+    beforeAll(() => {
+        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
+        shell.mkdir('-p', pathTemp);
+        shell.cp(path.join(pathSamples, 'cities.txt'), pathTemp)
+    });
+
+    beforeEach(() => {
+        shell.cd(pathTemp);
+    });
+
     test('test app compile-trie', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'));
+        const args = argv('compile-trie', '-n', 'cities.txt');
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
@@ -28,7 +39,7 @@ describe('Validate the application', () => {
     test('test app compile-trie compress', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile-trie', path.join(pathSamples, 'cities.txt'));
+        const args = argv('compile-trie', 'cities.txt');
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
@@ -37,7 +48,7 @@ describe('Validate the application', () => {
     test('test app compile-trie -o', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile-trie', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
+        const args = argv('compile-trie', '-n', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
@@ -46,7 +57,7 @@ describe('Validate the application', () => {
     test('test app compile', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile', '-n', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
+        const args = argv('compile', '-n', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
@@ -55,7 +66,7 @@ describe('Validate the application', () => {
     test('test app compile-trie max depth', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile-trie', '-n', '-m', '0', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
+        const args = argv('compile-trie', '-n', '-m', '0', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
@@ -70,7 +81,7 @@ describe('Validate the application', () => {
             '--experimental', 'compound',
             '--merge', path.join('temp', 'cities.compound'),
             '-o', path.dirname(pathTemp),
-            path.join(pathSamples, 'cities.txt')
+            'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
@@ -84,7 +95,7 @@ describe('Validate the application', () => {
             'compile', '-n',
             '--experimental', 'compound',
             '--merge', path.join(pathTemp, 'cities.compound'),
-            path.join(pathSamples, 'cities.txt')
+            'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
@@ -94,7 +105,7 @@ describe('Validate the application', () => {
     test('test app compile with compression', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
-        const args = argv('compile', path.join(pathSamples, 'cities.txt'), '-o', pathTemp);
+        const args = argv('compile', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         expect(log).toHaveBeenCalled();
         log.mockRestore();
@@ -102,8 +113,9 @@ describe('Validate the application', () => {
 
     test('test app compile merge', async () => {
         const commander = getCommander();
-        const targetDir = pathTemp;
+        const targetDir = relPathTemp;
         const target = 'merge.txt';
+        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
         const log = jest.spyOn(console, 'log').mockImplementation();

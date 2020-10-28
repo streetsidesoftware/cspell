@@ -10,7 +10,7 @@
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
     "clean-build": "npm run clean && npm run build",
-    "clean": "rimraf dist && rimraf temp",
+    "clean": "rimraf dist temp",
     "lint": "tslint --project tsconfig.json",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
