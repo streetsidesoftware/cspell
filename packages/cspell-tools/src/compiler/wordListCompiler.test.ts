@@ -11,12 +11,12 @@ import { streamWordsFromFile } from './iterateWordsFromFile';
 import { isCircular, iteratorTrieWords, serializeTrie, importTrie } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 
-
+const testSuiteName = path.basename(__filename);
 const UTF8: BufferEncoding = 'utf8';
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
 const sampleDictEn = path.join(samples, 'en_US.txt');
-const temp = path.join(__dirname, '..', '..', 'temp');
+const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 
 describe('Validate the wordListCompiler', () => {
     test('tests splitting lines', () => {
@@ -115,7 +115,7 @@ describe('Validate the wordListCompiler', () => {
 
     test('test a simple hunspell dictionary depth 1', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), { maxDepth: 1});
-        const destName = path.join(temp, 'example0.txt');
+        const destName = path.join(temp, 'example1.txt');
         await compileWordList(source, destName, { splitWords: false, sort: true });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output.split('\n')).toEqual(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
