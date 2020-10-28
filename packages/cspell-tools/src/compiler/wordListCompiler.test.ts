@@ -115,7 +115,7 @@ describe('Validate the wordListCompiler', () => {
 
     test('test a simple hunspell dictionary depth 1', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), { maxDepth: 1});
-        const destName = path.join(temp, 'example0.txt');
+        const destName = path.join(temp, 'example1.txt');
         await compileWordList(source, destName, { splitWords: false, sort: true });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output.split('\n')).toEqual(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
