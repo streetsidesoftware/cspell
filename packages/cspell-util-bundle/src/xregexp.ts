@@ -1,2 +1,2 @@
-import * as xr from 'xregexp';
-export const xregexp = xr;
+import XRegExp from 'xregexp';
+export const xregexp = XRegExp;

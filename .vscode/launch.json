@@ -13,6 +13,20 @@
             ],
             "program": "${workspaceFolder}/bin.js",
             "args": ["trace", "hello"]
+        },
+		{
+            "type": "node",
+            "request": "launch",
+            "name": "Jest current-file",
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": ["--runInBand", "${file}"],
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true,
+            "windows": {
+                "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            }
         }
     ]
 }
