@@ -15,6 +15,7 @@ module.exports = {
         "node"
     ],
     "coverageReporters": ["html", "json", ["lcov", {"projectRoot": "../../"}], "text"],
+    // "coverageProvider": "v8",
     "collectCoverageFrom": [
         "src/**/*.ts",
         "!**/*.test.helper.ts",
