@@ -60,6 +60,8 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path-to-lcov: ./packages/cspell-tools/coverage/lcov.info
 
+    - run: head ./packages/cspell-tools/coverage/lcov.info
+
     - name: Coveralls
       uses: coverallsapp/github-action@v1.1.2
       env:
