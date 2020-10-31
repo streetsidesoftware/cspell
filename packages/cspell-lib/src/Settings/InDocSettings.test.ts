@@ -141,4 +141,4 @@ const sampleText = `
 `;
 
 // cspell:disableCompoundWords
-// cspell:ignore localwords happydays
+// cspell:ignore localwords happydays arehere
