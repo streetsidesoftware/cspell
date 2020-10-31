@@ -23,7 +23,7 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
 }
 
 function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
-    const [ ,possibleSetting = ''] = matchArray;
+    const [ , possibleSetting = '' ] = matchArray;
     const settingParsers: [RegExp, (m: string) => CSpellUserSettings][] = [
         [ /^(?:enable|disable)(?:allow)?CompoundWords/i, parseCompoundWords ],
         [ /^words?\s/i , parseWords ],
@@ -93,7 +93,6 @@ function parseDictionaries(match: string): CSpellUserSettings {
 function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
     return genSequence(regExInFileSettings)
         .concatMap(regexp => Text.match(regexp, text));
-    ;
 }
 
 function getWordsFromDocument(text: string): string[] {
