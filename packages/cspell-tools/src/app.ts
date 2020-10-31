@@ -4,7 +4,7 @@ import { compileWordList, compileTrie, Logger } from './compiler';
 import * as compiler from './compiler';
 import * as path from 'path';
 import * as program from 'commander';
-import * as glob from 'glob';
+import glob from 'glob';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './compiler/iterateWordsFromFile';
 import { ReaderOptions } from './compiler/Reader';
