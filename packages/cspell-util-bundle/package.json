@@ -14,6 +14,8 @@
   "scripts": {
     "build": "tsc -p . && webpack --mode none",
     "build-production": "rimraf dist build && tsc -p . && webpack --mode production",
+    "lint": "eslint --fix \"src/**/*.ts\"",
+    "lint-ci": "eslint \"src/**/*.ts\"",
     "watch": "npm run build -- watch",
     "prepare": "npm run build-production",
     "clean": "rimraf dist",
@@ -55,6 +57,9 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "eslint": "^7.12.1",
     "rimraf": "^3.0.2",
     "xregexp": "^4.4.0"
   }
