@@ -24,6 +24,9 @@ const predefinedPatterns = [
     { name: 'Email',                pattern: RegPat.regExEmail },
     { name: 'SHA',                  pattern: RegPat.regExSha },
     { name: 'href',                 pattern: RegPat.regExHRef },
+    { name: 'regExSpellingGuardBlock', pattern: RegPat.regExSpellingGuardBlock },
+    { name: 'regExSpellingGuardLine',  pattern: RegPat.regExSpellingGuardLine },
+    { name: 'regExSpellingGuardNext',  pattern: RegPat.regExSpellingGuardNext },
 
     // Include Patterns
     { name: 'PhpHereDoc',           pattern: RegPat.regExPhpHereDoc },
