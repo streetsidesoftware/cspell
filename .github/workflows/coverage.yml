@@ -78,6 +78,8 @@ jobs:
         flag-name: cspell-trie-lib
         parallel: true
 
+    - run: head ./packages/cspell-trie-lib/coverage/lcov.info
+
     - name: Coveralls cspell-trie2-lib
       uses: coverallsapp/github-action@v1.1.2
       with:
