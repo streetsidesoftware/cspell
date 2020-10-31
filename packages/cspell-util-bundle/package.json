@@ -14,8 +14,8 @@
   "scripts": {
     "build": "tsc -p . && webpack --mode none",
     "build-production": "rimraf dist build && tsc -p . && webpack --mode production",
-    "lint": "eslint --fix \"src/**/*.ts\"",
-    "lint-ci": "eslint \"src/**/*.ts\"",
+    "lint": "eslint --fix .",
+    "lint-ci": "eslint .",
     "watch": "npm run build -- watch",
     "prepare": "npm run build-production",
     "clean": "rimraf dist",
