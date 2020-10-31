@@ -1,21 +1,20 @@
-import { Sequence } from 'gensequence';
+import { genSequence, Sequence } from 'gensequence';
 import * as Text from '../util/text';
 import { CSpellUserSettings } from './CSpellSettingsDef';
 import { mergeInDocSettings } from './CSpellSettingsServer';
 
 // cspell:ignore gimuy
 const regExMatchRegEx = /\/.*\/[gimuy]*/;
-const regExInFileSetting = /(?:spell-?checker|cSpell)::?\s*(.*)/gi;
+const regExInFileSettings = [
+    /(?:spell-?checker|cSpell)::?\s*(.*)/gi,
+    /(LocalWords:?\s+.*)/g,
+];
 
 export type CSpellUserSettingsKeys = keyof CSpellUserSettings;
 
 
 export function getInDocumentSettings(text: string): CSpellUserSettings {
     const settings = getPossibleInDocSettings(text)
-        .map(a => {
-            return a;
-        })
-        .map(a => a[1] || '')
         .concatMap(a => parseSettingMatch(a))
         .reduce((s, setting) => {
             return mergeInDocSettings(s, setting);
@@ -23,16 +22,18 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
     return settings;
 }
 
-function parseSettingMatch(possibleSetting: string): CSpellUserSettings[] {
+function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
+    const [ ,possibleSetting = ''] = matchArray;
     const settingParsers: [RegExp, (m: string) => CSpellUserSettings][] = [
         [ /^(?:enable|disable)(?:allow)?CompoundWords/i, parseCompoundWords ],
         [ /^words?\s/i , parseWords ],
         [ /^ignore(?:words?)?\s/i, parseIgnoreWords ],
         [ /^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp ],
         [ /^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp ],
-        [ /^(?:local|language)\s/i, parseLocal ],
-        [ /^(?:local|language)/i, parseLocal ],
+        [ /^locale?\s/i, parseLocal ],
+        [ /^language\s/i, parseLocal ],
         [ /^dictionaries\s/i, parseDictionaries ],
+        [ /^LocalWords:/, parseWords ],
     ];
 
     return settingParsers
@@ -90,7 +91,9 @@ function parseDictionaries(match: string): CSpellUserSettings {
 }
 
 function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
-    return Text.match(regExInFileSetting, text);
+    return genSequence(regExInFileSettings)
+        .concatMap(regexp => Text.match(regexp, text));
+    ;
 }
 
 function getWordsFromDocument(text: string): string[] {
