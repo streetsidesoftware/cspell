@@ -7,6 +7,7 @@
   "scripts": {
     "build": "lerna run build",
     "build-schema": "lerna run build-schema",
+    "build-integration-tests": "cd ./integration-tests && npm i",
     "check-spelling": "npx cspell **/{*.ts,*.md}",
     "clean-build": "lerna run clean-build",
     "clean": "lerna run clean",
@@ -22,6 +23,7 @@
     "test-ts": "lerna run test-ts",
     "test-watch": "lerna run --parallel test-watch",
     "test": "lerna run test && ajv -s ./cspell.schema.json -d cspell.json",
+    "test-integrations": "cd ./integration-tests && npm run integration-tests",
     "update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap"
   },
   "repository": {
