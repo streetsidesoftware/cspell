@@ -2,11 +2,11 @@
 
 'use strict';
 
-const app = require('./dist/app');
-const program = require('commander');
+import { run } from './dist/app';
+import program, { CommanderError } from 'commander';
 
-app.run(program, process.argv).catch(e => {
-    if (!(e instanceof program.CommanderError)) {
+run(program, process.argv).catch(e => {
+    if (!(e instanceof CommanderError)) {
         console.log(e);
     }
     process.exit(1);

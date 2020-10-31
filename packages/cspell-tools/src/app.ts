@@ -8,7 +8,7 @@ import glob from 'glob';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './compiler/iterateWordsFromFile';
 import { ReaderOptions } from './compiler/Reader';
-const npmPackage = require(path.join(__dirname, '..', 'package.json'));
+import { version } from '../package.json';
 
 function globP(pattern: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ export function run(
 
     return new Promise((resolve, rejects) => {
         program
-            .version(npmPackage.version);
+            .version(version);
 
         program
             .command('compile <src...>')

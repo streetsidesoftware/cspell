@@ -15,7 +15,7 @@ export type Logger = (message?: any, ...optionalParams: any[]) => void;
 
 let log: Logger = defaultLogger;
 
-export function setLogger(logger?: Logger) {
+export function setLogger(logger?: Logger):void {
     log = logger ?? defaultLogger;
 }
 
@@ -25,7 +25,7 @@ function defaultLogger(message?: any, ...optionalParams: any[]) {
 
 type Normalizer = (lines: Sequence<string>) => Sequence<string>;
 
-export function normalizeWords(lines: Sequence<string>) {
+export function normalizeWords(lines: Sequence<string>): Sequence<string> {
     return lines.concatMap(line => lineToWords(line));
 }
 

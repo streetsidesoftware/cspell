@@ -150,7 +150,7 @@ describe('Validate Larger Dictionary', () => {
 
 
 function distinct(): (word: string) => boolean {
-    const known = new Set<String>();
+    const known = new Set<string>();
     return a => known.has(a) ? false : (known.add(a), true);
 }
 
