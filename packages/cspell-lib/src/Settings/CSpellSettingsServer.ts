@@ -13,9 +13,9 @@ import {
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
-import * as ConfigStore from 'configstore';
-import * as minimatch from 'minimatch';
-import * as resolveFrom from 'resolve-from';
+import ConfigStore from 'configstore';
+import minimatch from 'minimatch';
+import resolveFrom from 'resolve-from';
 
 const currentSettingsFileVersion = '0.1';
 
