@@ -14,7 +14,7 @@ module.exports = {
         "json",
         "node"
     ],
-    "coverageReporters": ["html", "json", ["lcov", {"projectRoot": "../../"}], "text"],
+    "coverageReporters": ["html", "json", ["lcov", {"projectRoot": __dirname}], "text"],
     // "coverageProvider": "v8",
     "collectCoverageFrom": [
         "src/**/*.ts",
