@@ -21,8 +21,10 @@ describe('Validate InDocSettings', () => {
             'ignoreWords tooo faullts',
             'language en-US',
             'local',
+            'locale es-ES',
             'local en, nl',
-            'dictionaries lorem-ipsum'
+            'dictionaries lorem-ipsum',
+            'LocalWords: one two three',
         ]);
     });
 
@@ -53,7 +55,7 @@ describe('Validate InDocSettings', () => {
     test('tests finding words to add to dictionary', () => {
         const words = InDoc.internal.getWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
-        expect(words).toEqual(['whiteberry', 'redberry', 'lightbrown']);
+        expect(words).toEqual(['whiteberry', 'redberry', 'lightbrown', 'one', 'two', 'three']);
         expect(InDoc.getIgnoreWordsFromDocument('Hello')).toEqual([]);
     });
 
@@ -84,7 +86,7 @@ describe('Validate InDocSettings', () => {
         const ranges = TextRange.findMatchingRangesForPatterns(matches, sampleCode);
         // console.log(ranges);
         // console.log(replaceRangesWith(sampleCode, ranges));
-        expect(ranges.length).toBe(35);
+        expect(ranges.length).toBe(39);
     });
 
     test('test fetching the local for the text', () => {
@@ -122,9 +124,13 @@ const sampleCode = `
     // weirdberry can be straange.
     // cSpell:language en-US
     // cspell:local
+    // cspell:locale es-ES
     // cspell:local en, nl
 
     // cspell:dictionaries lorem-ipsum
+    // LocalWords: one two three
+    // LocalWords:four five six
+    // localwords: seven eight nine
 `;
 
 // cspell:ignore againxx
@@ -134,3 +140,5 @@ const sampleText = `
 # happydays arehere againxx
 `;
 
+// cspell:disableCompoundWords
+// cspell:ignore localwords happydays arehere
