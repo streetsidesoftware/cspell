@@ -116,8 +116,8 @@ export function excludeRanges(
         ranges: MatchRange[];
         lastExclude?: MatchRange;
     }
-    const tInclude: 'i' = 'i';
-    const tExclude: 'e' = 'e';
+    const tInclude = 'i' as const;
+    const tExclude = 'e' as const;
 
     const sortedRanges: MatchRangeWithType[] = [
         ...includeRanges.map((r) => ({ ...r, type: tInclude })),
