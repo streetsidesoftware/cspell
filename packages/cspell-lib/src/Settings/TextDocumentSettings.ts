@@ -1,6 +1,6 @@
 import { calcSettingsForLanguageId } from './LanguageSettings';
 import { CSpellUserSettings, CSpellSettings } from './CSpellSettingsDef';
-import * as CSpellSettings from './CSpellSettingsServer';
+import { mergeSettings } from './CSpellSettingsServer';
 import { getInDocumentSettings } from './InDocSettings';
 
 export function combineTextAndLanguageSettings(
@@ -9,10 +9,10 @@ export function combineTextAndLanguageSettings(
     languageId: string | string[]
 ): CSpellUserSettings {
     const docSettings = extractSettingsFromText(text);
-    const settingsForText = CSpellSettings.mergeSettings(settings, docSettings);
+    const settingsForText = mergeSettings(settings, docSettings);
     const langSettings = calcSettingsForLanguageId(settingsForText, languageId);
     // Merge again, to force In-Doc settings.
-    return CSpellSettings.mergeSettings(langSettings, docSettings);
+    return mergeSettings(langSettings, docSettings);
 }
 
 export function extractSettingsFromText(text: string): CSpellSettings {
