@@ -96,10 +96,6 @@ function cleanOutput(out: string): string {
         .join('\n');
 }
 
-function compare(a: Result, b: Result): boolean {
-    return a.code === b.code && a.stderr === b.stderr && a.stdout === b.stdout;
-}
-
 function report(reposChecked: Repository[], failed: Repository[]) {
     const setFailed = new Set(failed);
     const r = reposChecked.map((r) => {

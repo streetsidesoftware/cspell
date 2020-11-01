@@ -1,4 +1,4 @@
-import { check, CheckOptions } from './check';
+import { check } from './check';
 import { addRepository, listRepositories } from './repositoryHelper';
 import { createCommand } from 'commander';
 import * as commander from 'commander';
