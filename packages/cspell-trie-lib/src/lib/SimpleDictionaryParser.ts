@@ -107,5 +107,5 @@ export function parseDictionary(
 }
 
 function escapeRegEx(s: string) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
 }

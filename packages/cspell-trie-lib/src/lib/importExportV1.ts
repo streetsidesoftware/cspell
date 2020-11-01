@@ -11,7 +11,7 @@ function toReferences(node: TrieNode): Sequence<TrieRefNode> {
     return genSequence(convertToTrieRefNodes(node));
 }
 
-const regExpEscapeChars = /([\[\]\\,:{}*])/g;
+const regExpEscapeChars = /([[\]\\,:{}*])/g;
 const regExTrailingComma = /,(\}|\n)/g;
 
 function escapeChar(char: string): string {
