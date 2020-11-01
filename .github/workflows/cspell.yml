@@ -1,9 +1,19 @@
 name: cSpell TS/MD
 on:
   pull_request:
+    paths:
+      - "**/*.md"
+      - "**/*.ts"
+      - "cspell-dict.txt"
+      - "cspell.json"
   push:
     branches:
       - master
+    paths:
+      - "**/*.md"
+      - "**/*.ts"
+      - "cspell-dict.txt"
+      - "cspell.json"
 
 jobs:
   cspell:
