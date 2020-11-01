@@ -4,17 +4,19 @@ import { Repository } from './configDef';
 import * as Shell from 'shelljs';
 import * as Diff from 'jest-diff';
 
-export const snapshotDir = Path.resolve(Path.join(__dirname, '..', 'snapshots'));
+export const snapshotDir = Path.resolve(
+    Path.join(__dirname, '..', 'snapshots')
+);
 const snapshotFileName = 'snapshot.txt';
 
 export function writeSnapshot(rep: Repository, output: string) {
     const dir = Path.join(snapshotDir, rep.path);
     const filename = Path.join(dir, snapshotFileName);
-    Shell.mkdir('-p', dir)
+    Shell.mkdir('-p', dir);
 
     const text = prepareOutput(rep, output);
 
-    fs.writeFileSync(filename, text)
+    fs.writeFileSync(filename, text);
 }
 
 export interface SnapshotCompareResult {
@@ -22,7 +24,11 @@ export interface SnapshotCompareResult {
     diff?: string;
 }
 
-export function checkAgainstSnapshot(rep: Repository, output: string, update: boolean): SnapshotCompareResult {
+export function checkAgainstSnapshot(
+    rep: Repository,
+    output: string,
+    update: boolean
+): SnapshotCompareResult {
     if (update) {
         writeSnapshot(rep, output);
         return { match: true };
@@ -37,7 +43,10 @@ export function checkAgainstSnapshot(rep: Repository, output: string, update: bo
     const cleanSnapText = linesToCleanText(snapLines);
 
     if (cleanText !== cleanSnapText) {
-        const diff = Diff.diffLinesUnified(snapLines, lines, { contextLines: 5, expand: false });
+        const diff = Diff.diffLinesUnified(snapLines, lines, {
+            contextLines: 5,
+            expand: false,
+        });
         return { match: false, diff };
     }
 
@@ -46,8 +55,8 @@ export function checkAgainstSnapshot(rep: Repository, output: string, update: bo
 
 function linesToCleanText(lines: string[]): string {
     return lines
-        .map(t => t.trim())
-        .filter(t => !!t)
+        .map((t) => t.trim())
+        .filter((t) => !!t)
         .join('\n');
 }
 
@@ -55,15 +64,14 @@ export function readSnapshot(rep: Repository): string {
     const dir = Path.join(snapshotDir, rep.path);
     const filename = Path.join(dir, snapshotFileName);
     try {
-        return fs.readFileSync(filename, 'utf-8')
+        return fs.readFileSync(filename, 'utf-8');
     } catch (e) {
         return '';
     }
 }
 
 function prepareOutput(rep: Repository, output: string) {
-    const lines = output.split('\n')
-        .filter(line => !!line.trim());
+    const lines = output.split('\n').filter((line) => !!line.trim());
     lines.sort();
 
     const text = `

@@ -8,7 +8,7 @@ import { checkAgainstSnapshot } from './snapshots';
 import { shouldCheckRepo } from './shouldCheckRepo';
 
 const config = readConfig();
-const cspellArgs = '-u'
+const cspellArgs = '-u';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
 
 const cspellCommand = `node ${jsCspell} ${cspellArgs}`;
@@ -40,31 +40,38 @@ Checking '${name}'...
 }
 
 function printTime() {
-    console.log((new Date()).toISOString());
+    console.log(new Date().toISOString());
 }
 
 function execCommand(path: string, command: string, args: string[]): Result {
     const start = Date.now();
-    const argv = args.map(a => JSON.stringify(a)).join(' ');
+    const argv = args.map((a) => JSON.stringify(a)).join(' ');
     const fullCommand = command + ' ' + argv;
     Shell.pushd('-q', path);
-    console.log(`Execute: '${fullCommand}'`)
+    console.log(`Execute: '${fullCommand}'`);
     const result = exec(fullCommand);
     Shell.popd('-q', '+0');
     const { stdout, stderr, code } = result;
-    return cleanResult({ stdout, stderr, code, elapsedTime: Date.now() - start});
+    return cleanResult({
+        stdout,
+        stderr,
+        code,
+        elapsedTime: Date.now() - start,
+    });
 }
 
 function logResult(result: Result) {
     const { elapsedTime } = result;
-    const fullOutputLines = assembleOutput(result).split('\n')
-    const output = (fullOutputLines.length > 5 ? '...\n' : '') + fullOutputLines.slice(-5).join('\n')
-    console.log(`${output} \n time: ${(elapsedTime / 1000).toFixed(3)}s`)
+    const fullOutputLines = assembleOutput(result).split('\n');
+    const output =
+        (fullOutputLines.length > 5 ? '...\n' : '') +
+        fullOutputLines.slice(-5).join('\n');
+    console.log(`${output} \n time: ${(elapsedTime / 1000).toFixed(3)}s`);
 }
 
 function assembleOutput(result: Result) {
     const { stdout, stderr, code } = result;
-    return `${stdout} ${stderr} exit code: ${code}`
+    return `${stdout} ${stderr} exit code: ${code}`;
 }
 
 function checkResult(rep: Repository, result: Result, update: boolean) {
@@ -81,25 +88,24 @@ function cleanResult(result: Result): Result {
 }
 
 function cleanOutput(out: string): string {
-    const parent = Path.resolve(Path.join(__dirname, '..', '..'))
-    return out.split('\n')
-        .map(line => line.replace(repositoryDir, '.'))
-        .map(line => line.replace(parent, '.'))
-        .join('\n')
+    const parent = Path.resolve(Path.join(__dirname, '..', '..'));
+    return out
+        .split('\n')
+        .map((line) => line.replace(repositoryDir, '.'))
+        .map((line) => line.replace(parent, '.'))
+        .join('\n');
 }
 
 function compare(a: Result, b: Result): boolean {
-    return a.code === b.code
-    && a.stderr === b.stderr
-    && a.stdout === b.stdout
+    return a.code === b.code && a.stderr === b.stderr && a.stdout === b.stdout;
 }
 
 function report(reposChecked: Repository[], failed: Repository[]) {
     const setFailed = new Set(failed);
-    const r = reposChecked.map(r => {
+    const r = reposChecked.map((r) => {
         const mark = setFailed.has(r) ? '❌' : '✅';
-        return `\t ${mark} ${r.path}`
-    })
+        return `\t ${mark} ${r.path}`;
+    });
     return r.join('\n');
 }
 
@@ -114,8 +120,9 @@ export interface CheckOptions {
 
 export function check(patterns: string[], options: CheckOptions) {
     const { exclude, update, fail } = options;
-    const matching = config.repositories
-        .filter(rep => shouldCheckRepo(rep, { patterns, exclude }));
+    const matching = config.repositories.filter((rep) =>
+        shouldCheckRepo(rep, { patterns, exclude })
+    );
 
     const failed: Repository[] = [];
     for (const rep of matching) {
