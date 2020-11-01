@@ -1,4 +1,7 @@
-export function *buffer<T>(iter: Iterable<T>, bufferSize: number): IterableIterator<T[]> {
+export function* buffer<T>(
+    iter: Iterable<T>,
+    bufferSize: number
+): IterableIterator<T[]> {
     const buffer: T[] = [];
     for (const s of iter) {
         buffer.push(s);
@@ -13,7 +16,11 @@ export function *buffer<T>(iter: Iterable<T>, bufferSize: number): IterableItera
     }
 }
 
-export function* bufferLines(iter: Iterable<string>, bufferSize: number, eol: string): IterableIterator<string> {
+export function* bufferLines(
+    iter: Iterable<string>,
+    bufferSize: number,
+    eol: string
+): IterableIterator<string> {
     if (eol) {
         for (const s of buffer(iter, bufferSize)) {
             yield s.join('') + eol;

@@ -1,5 +1,10 @@
-import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, TrieOptions, TrieRoot, PartialTrieOptions} from './TrieNode';
+import { Sequence, genSequence } from 'gensequence';
+import {
+    TrieNode,
+    TrieOptions,
+    TrieRoot,
+    PartialTrieOptions,
+} from './TrieNode';
 import {
     genSuggestions,
     suggest,
@@ -15,7 +20,7 @@ import {
     countWords,
     mergeOptionalWithDefaults,
 } from './util';
-import {walker, WalkerIterator, CompoundWordsMethod} from './walker';
+import { walker, WalkerIterator, CompoundWordsMethod } from './walker';
 
 import {
     COMPOUND_FIX,
@@ -23,7 +28,13 @@ import {
     CASE_INSENSITIVE_PREFIX,
     FORBID_PREFIX,
 } from './constants';
-import { findLegacyCompoundWord, findCompoundWord, isForbiddenWord, findLegacyCompoundNode, findCompoundNode } from './find';
+import {
+    findLegacyCompoundWord,
+    findCompoundWord,
+    isForbiddenWord,
+    findLegacyCompoundNode,
+    findCompoundNode,
+} from './find';
 
 export {
     COMPOUND_FIX,
@@ -68,30 +79,52 @@ export class Trie {
         return this.count !== undefined;
     }
 
-    get options() {
+    get options(): TrieOptions {
         return this._options;
     }
 
-    find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {
-        const minLength: number | undefined = !minCompoundLength || minCompoundLength === true ? undefined : minCompoundLength;
-        return minCompoundLength ? this.findCompound(text, minLength) : this.findExact(text);
+    find(
+        text: string,
+        minCompoundLength: boolean | number = false
+    ): TrieNode | undefined {
+        const minLength: number | undefined =
+            !minCompoundLength || minCompoundLength === true
+                ? undefined
+                : minCompoundLength;
+        return minCompoundLength
+            ? this.findCompound(text, minLength)
+            : this.findExact(text);
     }
 
-    findCompound(text: string, minCompoundLength = defaultLegacyMinCompoundLength): TrieNode | undefined {
+    findCompound(
+        text: string,
+        minCompoundLength = defaultLegacyMinCompoundLength
+    ): TrieNode | undefined {
         const r = findLegacyCompoundNode(this.root, text, minCompoundLength);
         return r.node;
     }
 
     findExact(text: string): TrieNode | undefined {
-        const r = findCompoundNode(this.root, text, this.options.compoundCharacter);
+        const r = findCompoundNode(
+            this.root,
+            text,
+            this.options.compoundCharacter
+        );
         return r.node;
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
-        if (!!f.found) return true;
+        const f = findCompoundWord(
+            this.root,
+            word,
+            this.options.compoundCharacter
+        );
+        if (f.found) return true;
         if (minLegacyCompoundLength) {
-            const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : defaultLegacyMinCompoundLength;
+            const len =
+                minLegacyCompoundLength !== true
+                    ? minLegacyCompoundLength
+                    : defaultLegacyMinCompoundLength;
             return !!findLegacyCompoundWord(this.root, word, len).found;
         }
         return false;
@@ -105,7 +138,10 @@ export class Trie {
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean {
-        const root = !caseSensitive ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) || this.root : this.root;
+        const root = !caseSensitive
+            ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) ||
+              this.root
+            : this.root;
         const f = findCompoundWord(root, word, this.options.compoundCharacter);
         return !!f.found;
     }
@@ -115,7 +151,10 @@ export class Trie {
      * @param word word to lookup.
      */
     isForbiddenWord(word: string): boolean {
-        return this.hasForbidden && isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix);
+        return (
+            this.hasForbidden &&
+            isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix)
+        );
     }
 
     /**
@@ -124,9 +163,12 @@ export class Trie {
     completeWord(text: string): Sequence<string> {
         const n = this.find(text);
         const compoundChar = this.options.compoundCharacter;
-        const subNodes = iteratorTrieWords(n || {}).filter(w => w[w.length - 1] !== compoundChar).map(suffix => text + suffix);
-        return genSequence(n && isWordTerminationNode(n) ? [text] : [])
-            .concat(subNodes);
+        const subNodes = iteratorTrieWords(n || {})
+            .filter((w) => w[w.length - 1] !== compoundChar)
+            .map((suffix) => text + suffix);
+        return genSequence(n && isWordTerminationNode(n) ? [text] : []).concat(
+            subNodes
+        );
     }
 
     /**
@@ -137,19 +179,37 @@ export class Trie {
      * @param numChanges - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
      *                      the lower the value, the faster results are returned. Values less than 4 are best.
      */
-    suggest(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): string[] {
-        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges)
-            .map(a => a.word);
+    suggest(
+        text: string,
+        maxNumSuggestions: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): string[] {
+        return this.suggestWithCost(
+            text,
+            maxNumSuggestions,
+            compoundMethod,
+            numChanges
+        ).map((a) => a.word);
     }
-
 
     /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
-    suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[] {
-        return suggest(this.getSuggestRoot(true), text, maxNumSuggestions, compoundMethod, numChanges)
-            .filter(sug => !this.isForbiddenWord(sug.word));
+    suggestWithCost(
+        text: string,
+        maxNumSuggestions: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): SuggestionResult[] {
+        return suggest(
+            this.getSuggestRoot(true),
+            text,
+            maxNumSuggestions,
+            compoundMethod,
+            numChanges
+        ).filter((sug) => !this.isForbiddenWord(sug.word));
     }
 
     /**
@@ -157,10 +217,18 @@ export class Trie {
      * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
-    genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
-        const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
-        const suggestions = genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod);
-        function *filteredSuggestions() {
+    genSuggestions(
+        collector: SuggestionCollector,
+        compoundMethod?: CompoundWordsMethod
+    ): void {
+        const filter = (sug: SuggestionResult) =>
+            !this.isForbiddenWord(sug.word);
+        const suggestions = genSuggestions(
+            this.getSuggestRoot(true),
+            collector.word,
+            compoundMethod
+        );
+        function* filteredSuggestions() {
             let maxCost = collector.maxCost;
             let ir: IteratorResult<SuggestionResult, undefined>;
             while (!(ir = suggestions.next(maxCost)).done) {
@@ -188,19 +256,26 @@ export class Trie {
         return walker(this.root);
     }
 
-    insert(word: string) {
+    insert(word: string): this {
         insert(word, this.root);
         return this;
     }
 
     private getSuggestRoot(caseSensitive: boolean): TrieRoot {
-        const root = !caseSensitive && this.root.c?.get(this._options.stripCaseAndAccentsPrefix) || this.root;
-        if (!root.c) return { c: new Map<string, TrieNode>(), ...this._options };
+        const root =
+            (!caseSensitive &&
+                this.root.c?.get(this._options.stripCaseAndAccentsPrefix)) ||
+            this.root;
+        if (!root.c)
+            return { c: new Map<string, TrieNode>(), ...this._options };
         const blockNodes = new Set([
             this._options.forbiddenWordPrefix,
             this._options.stripCaseAndAccentsPrefix,
         ]);
-        return { c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))), ...this._options };
+        return {
+            c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))),
+            ...this._options,
+        };
     }
 
     private calcIsLegacy(): boolean {
@@ -214,7 +289,7 @@ export class Trie {
 
     static create(
         words: Iterable<string> | IterableIterator<string>,
-        options?: PartialTrieOptions,
+        options?: PartialTrieOptions
     ): Trie {
         const root = createTriFromList(words, options);
         orderTrie(root);

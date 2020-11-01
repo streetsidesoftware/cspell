@@ -1,13 +1,12 @@
 import { countNodes, isCircular } from './util';
 import { TrieBuilder, buildTrie } from './TrieBuilder';
 
-
 describe('Validate TrieBuilder', () => {
     test('builder', () => {
         const builder = new TrieBuilder();
         const words = sampleWords
-        .concat(applyEndings('shock'))
-        .concat(applyEndings('stock'));
+            .concat(applyEndings('shock'))
+            .concat(applyEndings('stock'));
         builder.insert(words);
         const trie = builder.build(true);
         expect([...trie.words()].sort()).toEqual(sampleWords.sort());
@@ -91,18 +90,16 @@ const sampleWords = [
     'long walk',
     'fun walk',
 ]
-.concat(applyEndings('shock'))
-.concat(applyEndings('stock'))
-.concat(applyEndings('clock'))
-.concat(applyEndings('open'))
-.concat(applyEndings('lock'))
-.concat(applyEndings('hack'))
-.concat(applyEndings('will'))
-.concat(applyEndings('shell'))
-.concat(applyEndings('kill'))
-;
-
+    .concat(applyEndings('shock'))
+    .concat(applyEndings('stock'))
+    .concat(applyEndings('clock'))
+    .concat(applyEndings('open'))
+    .concat(applyEndings('lock'))
+    .concat(applyEndings('hack'))
+    .concat(applyEndings('will'))
+    .concat(applyEndings('shell'))
+    .concat(applyEndings('kill'));
 
 function applyEndings(word: string): string[] {
-    return ['', 'ed', 'er', 'ing', 's'].map(s => word + s);
+    return ['', 'ed', 'er', 'ing', 's'].map((s) => word + s);
 }

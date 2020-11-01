@@ -4,7 +4,6 @@ import { TrieRefNode } from './trieRef';
 import { convertToTrieRefNodes } from './convertToTrieRefNodes';
 import { consolidate } from './consolidate';
 
-
 describe('Validate convertToTrieRefNodes', () => {
     test('Simple Convert', () => {
         const trie = consolidate(createTriFromList(sampleWords));
@@ -13,17 +12,19 @@ describe('Validate convertToTrieRefNodes', () => {
         const words = [...walk(nodes)];
         expect(words).toEqual(sampleWords.sort());
     });
-
 });
 
 function walk(nodes: TrieRefNode[]): IterableIterator<string> {
-    function *w(node: TrieRefNode, prefix: string): IterableIterator<string> {
+    function* w(node: TrieRefNode, prefix: string): IterableIterator<string> {
         if (node.f) {
             yield prefix;
         }
         if (node.r) {
-            yield *genSequence(node.r)
-            .concatMap(a => genSequence(w(nodes[a[1]], a[0])).map(suffix => prefix + suffix));
+            yield* genSequence(node.r).concatMap((a) =>
+                genSequence(w(nodes[a[1]], a[0])).map(
+                    (suffix) => prefix + suffix
+                )
+            );
         }
     }
     return w(nodes[nodes.length - 1], '');

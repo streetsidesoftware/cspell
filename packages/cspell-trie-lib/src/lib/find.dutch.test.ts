@@ -7,7 +7,10 @@ import { TrieNode } from './TrieNode';
 import * as path from 'path';
 import { normalizeWordToLowercase } from './util';
 
-const dutchDictionary = path.join(__dirname, ...'../../../Samples/dicts/nl_compound_trie3.trie.gz'.split('/'));
+const dutchDictionary = path.join(
+    __dirname,
+    ...'../../../Samples/dicts/nl_compound_trie3.trie.gz'.split('/')
+);
 
 describe('Validate findWord', () => {
     const pTrie = readTrie(dutchDictionary);
@@ -17,36 +20,59 @@ describe('Validate findWord', () => {
 
         // cspell:ignore aanvaardbaard
         // Code is not allowed as a full word.
-        expect(findWord(trie, 'aanvaardbaard', { matchCase: true, compoundMode: 'none' }))
-        .toEqual(frFound('aanvaardbaard', true));
+        expect(
+            findWord(trie, 'aanvaardbaard', {
+                matchCase: true,
+                compoundMode: 'none',
+            })
+        ).toEqual(frFound('aanvaardbaard', true));
 
-        expect(findWord(trie, 'code', { matchCase: true, compoundMode: 'none' }))
-        .toEqual({ found: 'code', compoundUsed: false, forbidden: false });
+        expect(
+            findWord(trie, 'code', { matchCase: true, compoundMode: 'none' })
+        ).toEqual({ found: 'code', compoundUsed: false, forbidden: false });
 
-        expect(findWord(trie, 'code', { matchCase: true, compoundMode: 'compound' }))
-        .toEqual({ found: 'code', compoundUsed: false, forbidden: false });
+        expect(
+            findWord(trie, 'code', {
+                matchCase: true,
+                compoundMode: 'compound',
+            })
+        ).toEqual({ found: 'code', compoundUsed: false, forbidden: false });
     });
 
     const tests: [string, PartialFindOptions, FindFullResult][] = [
-        ['Code', { matchCase: true,  compoundMode: 'none' }, frNotFound()],
-        ['code', { matchCase: true,  compoundMode: 'none' }, frFound('code')],
-        ['cafe', { matchCase: true,  compoundMode: 'none' }, frNotFound()],
+        ['Code', { matchCase: true, compoundMode: 'none' }, frNotFound()],
+        ['code', { matchCase: true, compoundMode: 'none' }, frFound('code')],
+        ['cafe', { matchCase: true, compoundMode: 'none' }, frNotFound()],
         ['cafe', { matchCase: false, compoundMode: 'none' }, frFound('cafe')],
 
         // Compounding enabled, but matching whole words (compounding not used).
-        ['Code', { matchCase: true,  compoundMode: 'compound' }, frCompoundFound(false)],
-        ['code', { matchCase: true,  compoundMode: 'compound' }, frFound('code')],
-        ['cafe', { matchCase: true,  compoundMode: 'compound' }, frFound(false)],
-        ['cafe', { matchCase: false, compoundMode: 'compound' }, frFound('cafe')],
+        [
+            'Code',
+            { matchCase: true, compoundMode: 'compound' },
+            frCompoundFound(false),
+        ],
+        [
+            'code',
+            { matchCase: true, compoundMode: 'compound' },
+            frFound('code'),
+        ],
+        ['cafe', { matchCase: true, compoundMode: 'compound' }, frFound(false)],
+        [
+            'cafe',
+            { matchCase: false, compoundMode: 'compound' },
+            frFound('cafe'),
+        ],
 
         // compound words
         testCompound('buurtbewoner'), // cspell:ignore buurtbewoner
         testCompound('buurtbewoners'), // cspell:ignore buurtbewoners
 
-
         // forbidden compounds
-        ['aanvaardbaard', { matchCase: true,  compoundMode: 'compound' }, frCompoundFound('aanvaardbaard', true)],
-
+        [
+            'aanvaardbaard',
+            { matchCase: true, compoundMode: 'compound' },
+            frCompoundFound('aanvaardbaard', true),
+        ],
     ];
 
     tests.forEach(function ([word, options, exResult]) {
@@ -54,46 +80,71 @@ describe('Validate findWord', () => {
             const trie = await pTrie;
             expect(findWord(trie, word, options)).toEqual(exResult);
         });
-     } );
+    });
 
-     sampleWords().forEach(word => {
+    sampleWords().forEach((word) => {
         test(`Find Word: ${word}`, async () => {
             const trie = await pTrie;
             const word2 = word[0].toLowerCase() + word.slice(1);
-            const r1 = findWord(trie, word, { matchCase: true, compoundMode: 'compound'});
-            const r2 = r1.found || word === word2 ? r1 : (word = word2, findWord(trie, word, { matchCase: true, compoundMode: 'compound'}));
+            const r1 = findWord(trie, word, {
+                matchCase: true,
+                compoundMode: 'compound',
+            });
+            const r2 =
+                r1.found || word === word2
+                    ? r1
+                    : ((word = word2),
+                      findWord(trie, word, {
+                          matchCase: true,
+                          compoundMode: 'compound',
+                      }));
             // console.log(r2);
             expect(r2.found).toEqual(word);
             expect(r2.forbidden).toBe(false);
         });
         test(`Find Word case insensitive: ${word}`, async () => {
             const trie = await pTrie;
-            const r = findWord(trie, normalizeWordToLowercase(word), { matchCase: false, compoundMode: 'compound'});
+            const r = findWord(trie, normalizeWordToLowercase(word), {
+                matchCase: false,
+                compoundMode: 'compound',
+            });
             // console.log(r2);
             expect(r.found).toEqual(normalizeWordToLowercase(word));
             expect(r.forbidden).toBe(false);
         });
-     });
+    });
 
-
-     sampleMisspellings().forEach(word => {
+    sampleMisspellings().forEach((word) => {
         test(`Check misspelled words: ${word}`, async () => {
             const trie = await pTrie;
             const word2 = word[0].toLowerCase() + word.slice(1);
-            const r1 = findWord(trie, word, { matchCase: true, compoundMode: 'compound'});
-            const r2 = r1.found || word === word2 ? r1 : (word = word2, findWord(trie, word, { matchCase: true, compoundMode: 'compound'}));
+            const r1 = findWord(trie, word, {
+                matchCase: true,
+                compoundMode: 'compound',
+            });
+            const r2 =
+                r1.found || word === word2
+                    ? r1
+                    : ((word = word2),
+                      findWord(trie, word, {
+                          matchCase: true,
+                          compoundMode: 'compound',
+                      }));
             // console.log(r2);
             expect(r2.found).toEqual(false);
             expect(r2.forbidden).toBe(false);
         });
         test(`Check misspelled words case insensitive: ${word}`, async () => {
             const trie = await pTrie;
-            const r = findWord(trie, normalizeWordToLowercase(word), { matchCase: false, compoundMode: 'compound'});
+            const r = findWord(trie, normalizeWordToLowercase(word), {
+                matchCase: false,
+                compoundMode: 'compound',
+            });
             // console.log(r2);
             expect(r.found).toEqual(false);
             expect(r.forbidden).toBe(false);
         });
-     });
+    });
 });
 
 function sampleMisspellings(): string[] {
@@ -149,14 +200,29 @@ function sampleWords(): string[] {
 }
 
 function processText(text: string): string[] {
-    return [...new Set(text.replace(/[.0-9,"“():]/g, ' ').split(/\s+/).sort().filter(a => !!a))];
+    return [
+        ...new Set(
+            text
+                .replace(/[.0-9,"“():]/g, ' ')
+                .split(/\s+/)
+                .sort()
+                .filter((a) => !!a)
+        ),
+    ];
 }
 
-function testCompound(word: string, found: boolean = true): [string, PartialFindOptions, FindFullResult] {
-    return [word, { matchCase: true, compoundMode: 'compound' }, frCompoundFound(found && word)];
+function testCompound(
+    word: string,
+    found = true
+): [string, PartialFindOptions, FindFullResult] {
+    return [
+        word,
+        { matchCase: true, compoundMode: 'compound' },
+        frCompoundFound(found && word),
+    ];
 }
 
-function frNotFound(compoundUsed: boolean = false): FindFullResult {
+function frNotFound(compoundUsed = false): FindFullResult {
     return {
         found: false,
         forbidden: false,
@@ -164,7 +230,11 @@ function frNotFound(compoundUsed: boolean = false): FindFullResult {
     };
 }
 
-function frFound(found: string | false, forbidden: boolean = false, compoundUsed: boolean = false): FindFullResult {
+function frFound(
+    found: string | false,
+    forbidden = false,
+    compoundUsed = false
+): FindFullResult {
     return {
         found,
         forbidden,
@@ -172,7 +242,11 @@ function frFound(found: string | false, forbidden: boolean = false, compoundUsed
     };
 }
 
-function frCompoundFound(found: string | false, forbidden: boolean = false, compoundUsed: boolean = true): FindFullResult {
+function frCompoundFound(
+    found: string | false,
+    forbidden = false,
+    compoundUsed = true
+): FindFullResult {
     return frFound(found, forbidden, compoundUsed);
 }
 
@@ -182,10 +256,12 @@ async function readTrie(filename: string): Promise<TrieNode> {
 }
 
 function readTextFile(filename: string): Promise<string[]> {
-    const lines = fs.readFile(filename)
-        .then(buffer => (/\.gz$/).test(filename) ? zlib.gunzipSync(buffer) : buffer)
-        .then(buffer => buffer.toString('utf8'))
-        .then(content => content.split(/\r?\n/g))
-        ;
+    const lines = fs
+        .readFile(filename)
+        .then((buffer) =>
+            /\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer
+        )
+        .then((buffer) => buffer.toString('utf8'))
+        .then((content) => content.split(/\r?\n/g));
     return lines;
 }

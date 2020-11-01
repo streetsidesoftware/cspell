@@ -1,10 +1,10 @@
-import {TrieNode} from './TrieNode';
-import {isWordTerminationNode} from './util';
-import {walker} from './walker';
-import {SuggestionResult} from './suggest';
+import { TrieNode } from './TrieNode';
+import { isWordTerminationNode } from './util';
+import { walker } from './walker';
+import { SuggestionResult } from './suggest';
 
 import * as Sug from './suggest';
-import {Trie} from './trie';
+import { Trie } from './trie';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions against Legacy Suggestion generator', () => {
@@ -17,7 +17,9 @@ describe('Validate Suggest', () => {
         }
 
         // cspell:ignore tallk jernals juornals joyfull
-        ['talks', 'tallk', 'jernals', 'juornals', 'joyfull', ''].forEach(testWord);
+        ['talks', 'tallk', 'jernals', 'juornals', 'joyfull', ''].forEach(
+            testWord
+        );
     });
 });
 
@@ -71,7 +73,6 @@ const sampleWords = [
     'joystick',
 ];
 
-
 const defaultMaxNumberSuggestions = 10;
 
 const baseCost = 100;
@@ -82,7 +83,7 @@ const maxNumChanges = 5;
 function legacySuggest(
     root: TrieNode,
     word: string,
-    maxNumSuggestions: number = defaultMaxNumberSuggestions,
+    maxNumSuggestions: number = defaultMaxNumberSuggestions
 ): SuggestionResult[] {
     const bc = baseCost;
     const psc = postSwapCost;
@@ -91,10 +92,14 @@ function legacySuggest(
     const x = ' ' + word;
     const mx = x.length - 1;
 
-    let costLimit = Math.min(bc * word.length / 2, bc * maxNumChanges);
+    let costLimit = Math.min((bc * word.length) / 2, bc * maxNumChanges);
 
     function comp(a: SuggestionResult, b: SuggestionResult): number {
-        return a.cost - b.cost || a.word.length - b.word.length || (a.word < b.word ? -1 : 1);
+        return (
+            a.cost - b.cost ||
+            a.word.length - b.word.length ||
+            (a.word < b.word ? -1 : 1)
+        );
     }
 
     function emitSug(sug: SuggestionResult) {
@@ -113,7 +118,7 @@ function legacySuggest(
     const i = walker(root);
     let deeper = true;
     for (let r = i.next(deeper); !r.done; r = i.next(deeper)) {
-        const {text, node, depth} = r.value;
+        const { text, node, depth } = r.value;
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
         const w = text.slice(-1);
@@ -122,26 +127,30 @@ function legacySuggest(
         let lastLetter = x[0];
         let min = matrix[d][0];
         for (let i = 1; i <= mx; ++i) {
-            let curLetter = x[i];
+            const curLetter = x[i];
             const c = bc - d;
-            let subCost = (w === curLetter)
-                ? 0
-                : (curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c);
+            const subCost =
+                w === curLetter
+                    ? 0
+                    : curLetter === lastSugLetter
+                    ? w === lastLetter
+                        ? psc
+                        : c
+                    : c;
             matrix[d][i] = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d - 1][i    ] + c,      // insert
-                matrix[d    ][i - 1] + c       // delete
+                matrix[d - 1][i] + c, // insert
+                matrix[d][i - 1] + c // delete
             );
             min = Math.min(min, matrix[d][i]);
             lastLetter = curLetter;
         }
-        let cost = matrix[d][mx];
+        const cost = matrix[d][mx];
         if (isWordTerminationNode(node) && cost <= costLimit) {
             emitSug({ word: text, cost });
         }
-        deeper = (min <= costLimit);
+        deeper = min <= costLimit;
     }
     sugs.sort(comp);
     return sugs;
 }
-

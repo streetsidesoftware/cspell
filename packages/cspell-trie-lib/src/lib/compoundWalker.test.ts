@@ -1,7 +1,12 @@
 import { parseDictionary } from './SimpleDictionaryParser';
 import { Trie } from './trie';
 import { findWord } from './find';
-import { WalkNext, WalkItem, compoundWalker, compoundWords } from './compoundWalker';
+import {
+    WalkNext,
+    WalkItem,
+    compoundWalker,
+    compoundWords,
+} from './compoundWalker';
 
 // cspell:ignore errorerror
 
@@ -26,13 +31,13 @@ describe('Verify compound walker', () => {
         expect(words3).toContain('PrefixMiddleSuffix');
         expect(words3).toContain('PrefixErrorCodes');
         expect(words3).toHaveLength(216);
-        words2.forEach(w2 => expect(words3).toContain(w2));
+        words2.forEach((w2) => expect(words3).toContain(w2));
     });
 
     test('compoundWords lowercase', () => {
         const trie = dictionary();
         const words2 = [...compoundWords(trie, 2, false)];
-        expect(words2).toEqual(expected2().map(a => a.toLowerCase()));
+        expect(words2).toEqual(expected2().map((a) => a.toLowerCase()));
     });
 
     test('test compound edges', () => {
@@ -64,7 +69,10 @@ describe('Verify compound walker', () => {
     });
 });
 
-function *walkerToWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
+function* walkerToWords(
+    stream: Generator<WalkItem, any, WalkNext>,
+    maxDepth: number
+): Generator<string> {
     let item = stream.next();
     while (!item.done) {
         const { n, s, c, d } = item.value;
@@ -78,7 +86,10 @@ function *walkerToWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: nu
     }
 }
 
-function *walkerToCompoundWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
+function* walkerToCompoundWords(
+    stream: Generator<WalkItem, any, WalkNext>,
+    maxDepth: number
+): Generator<string> {
     let item = stream.next();
     const compounds: string[] = [];
 
@@ -122,7 +133,7 @@ function dictionary(): Trie {
     `);
 }
 function expected2() {
-    return expectedCompounds2().map(a => a.replace('+', ''));
+    return expectedCompounds2().map((a) => a.replace('+', ''));
 }
 
 function expectedCompounds2() {

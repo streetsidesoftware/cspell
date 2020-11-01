@@ -1,9 +1,16 @@
-import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, FLAG_WORD, ChildMap, TrieRoot, PartialTrieOptions, TrieOptions} from './TrieNode';
-import {YieldResult, walker} from './walker';
+import { Sequence, genSequence } from 'gensequence';
+import {
+    TrieNode,
+    FLAG_WORD,
+    ChildMap,
+    TrieRoot,
+    PartialTrieOptions,
+    TrieOptions,
+} from './TrieNode';
+import { YieldResult, walker } from './walker';
 import { defaultTrieOptions } from './constants';
 
-export {YieldResult} from './walker';
+export { YieldResult } from './walker';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {
@@ -17,17 +24,17 @@ export function insert(text: string, node: TrieNode = {}): TrieNode {
     return node;
 }
 
-export function isWordTerminationNode(node: TrieNode) {
+export function isWordTerminationNode(node: TrieNode): boolean {
     return ((node.f || 0) & FLAG_WORD) === FLAG_WORD;
 }
 
 /**
  * Sorts the nodes in a trie in place.
  */
-export function orderTrie(node: TrieNode) {
+export function orderTrie(node: TrieNode): void {
     if (!node.c) return;
 
-    const nodes = [...node.c].sort(([a], [b]) => a < b ? -1 : 1);
+    const nodes = [...node.c].sort(([a], [b]) => (a < b ? -1 : 1));
     node.c = new Map(nodes);
     for (const n of node.c) {
         orderTrie(n[1]);
@@ -48,11 +55,13 @@ export const iterateTrie = walk;
  */
 export function iteratorTrieWords(node: TrieNode): Sequence<string> {
     return walk(node)
-        .filter(r => isWordTerminationNode(r.node))
-        .map(r => r.text);
+        .filter((r) => isWordTerminationNode(r.node))
+        .map((r) => r.text);
 }
 
-export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
+export function mergeOptionalWithDefaults(
+    options: PartialTrieOptions
+): TrieOptions {
     return mergeDefaults(options, defaultTrieOptions);
 }
 
@@ -64,7 +73,10 @@ export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
     };
 }
 
-export function createTriFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
+export function createTriFromList(
+    words: Iterable<string>,
+    options?: PartialTrieOptions
+): TrieRoot {
     const root = createTrieRoot(options);
     for (const word of words) {
         if (word.length) {
@@ -98,14 +110,14 @@ export function findNode(node: TrieNode, prefix: string): TrieNode | undefined {
     return n;
 }
 
-export function countNodes(root: TrieNode) {
+export function countNodes(root: TrieNode): number {
     const seen = new Set<TrieNode>();
 
     function walk(n: TrieNode) {
         if (seen.has(n)) return;
         seen.add(n);
         if (n.c) {
-            [...n.c.values()].forEach(n => walk(n));
+            [...n.c.values()].forEach((n) => walk(n));
         }
     }
 
@@ -139,7 +151,7 @@ export function countWords(root: TrieNode): number {
     return walk(root);
 }
 
-export function isCircular(root: TrieNode) {
+export function isCircular(root: TrieNode): boolean {
     const seen = new Set<TrieNode>();
     const inStack = new Set<TrieNode>();
 
@@ -178,11 +190,14 @@ export function isCircular(root: TrieNode) {
  * @param value
  * @param defaultValue
  */
-export function mergeDefaults<T>(value: Partial<T> | undefined, defaultValue: T): T {
+export function mergeDefaults<T>(
+    value: Partial<T> | undefined,
+    defaultValue: T
+): T {
     const result = { ...defaultValue };
     const allowedKeys = new Set(Object.keys(defaultValue));
     if (value) {
-        for (const [k, v] of Object.entries(value) as ([keyof T, any][])) {
+        for (const [k, v] of Object.entries(value) as [keyof T, any][]) {
             if (allowedKeys.has(k as string)) {
                 result[k] = v ?? result[k];
             }
@@ -191,7 +206,10 @@ export function mergeDefaults<T>(value: Partial<T> | undefined, defaultValue: T)
     return result;
 }
 
-export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): TrieRoot {
+export function trieNodeToRoot(
+    node: TrieNode,
+    options: PartialTrieOptions
+): TrieRoot {
     const newOptions = mergeOptionalWithDefaults(options);
     return {
         ...newOptions,
@@ -199,5 +217,9 @@ export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): Tri
     };
 }
 
-export const normalizeWord = (text: string) => text.normalize();
-export const normalizeWordToLowercase = (text: string) => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+export const normalizeWord = (text: string): string => text.normalize();
+export const normalizeWordToLowercase = (text: string): string =>
+    text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');

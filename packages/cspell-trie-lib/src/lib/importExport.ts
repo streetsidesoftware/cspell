@@ -10,7 +10,10 @@ export interface ExportOptions {
     version?: number;
 }
 
-type Serializer = (root: TrieRoot, options?: number | ExportOptions) => Sequence<string>;
+type Serializer = (
+    root: TrieRoot,
+    options?: number | ExportOptions
+) => Sequence<string>;
 
 const serializers: Serializer[] = [
     iv1.serializeTrie,
@@ -32,8 +35,12 @@ const deserializers = [
  * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
-export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
-    const version = typeof options !== 'number' && options.version ? options.version : 0;
+export function serializeTrie(
+    root: TrieRoot,
+    options: ExportOptions | number = 16
+): Sequence<string> {
+    const version =
+        typeof options !== 'number' && options.version ? options.version : 0;
     const method = serializers[version];
     if (!method) {
         throw new Error(`Unknown version: ${version}`);
@@ -41,13 +48,15 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     return method(root, options);
 }
 
-
-
-export function importTrie(lines: Iterable<string> | IterableIterator<string>): TrieRoot {
+export function importTrie(
+    lines: Iterable<string> | IterableIterator<string>
+): TrieRoot {
     const comment = /^\s*#/;
 
-    function *arrayToIterableIterator<T>(i: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
-        yield *i;
+    function* arrayToIterableIterator<T>(
+        i: Iterable<T> | IterableIterator<T>
+    ): IterableIterator<T> {
+        yield* i;
     }
 
     function parseHeaderRows(headerRows: string[]): number {
@@ -60,15 +69,20 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string>): 
     }
 
     function readHeader(iter: Iterator<string> | IterableIterator<string>) {
-
         const headerRows: string[] = [];
         while (true) {
             const next = iter.next();
-            if (next.done) { break; }
+            if (next.done) {
+                break;
+            }
             const line = next.value.trim();
-            if (!line || comment.test(line)) { continue; }
+            if (!line || comment.test(line)) {
+                continue;
+            }
             headerRows.push(line);
-            if (line === iv1.DATA || line === iv2.DATA) { break; }
+            if (line === iv1.DATA || line === iv2.DATA) {
+                break;
+            }
         }
 
         return headerRows;
