@@ -7,9 +7,17 @@ import { readFile } from './fileReader';
 describe('Validate the writer', () => {
     test('tests writing data and reading it back.', async () => {
         // cspell:ignore éåáí
-        const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
+        const text =
+            loremIpsum({ count: 1000, format: 'plain', units: 'words' }) +
+            ' éåáí';
         const data = text.split(/\b/);
-        const filename = path.join(__dirname, '..', '..', 'temp', 'tests-writing-an-observable.txt');
+        const filename = path.join(
+            __dirname,
+            '..',
+            '..',
+            'temp',
+            'tests-writing-an-observable.txt'
+        );
 
         await mkdirp(path.dirname(filename));
         await fileWriter.writeToFileIterableP(filename, data);
@@ -18,9 +26,17 @@ describe('Validate the writer', () => {
     });
 
     test('tests writing data and reading it back. gz', async () => {
-        const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
+        const text =
+            loremIpsum({ count: 1000, format: 'plain', units: 'words' }) +
+            ' éåáí';
         const data = text.split(/\b/);
-        const filename = path.join(__dirname, '..', '..', 'temp', 'tests-writing-an-observable.txt.gz');
+        const filename = path.join(
+            __dirname,
+            '..',
+            '..',
+            'temp',
+            'tests-writing-an-observable.txt.gz'
+        );
 
         await mkdirp(path.dirname(filename));
         await fileWriter.writeToFileIterableP(filename, data);
@@ -29,8 +45,16 @@ describe('Validate the writer', () => {
     });
 
     test('tests writeToFile', async () => {
-        const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
-        const filename = path.join(__dirname, '..', '..', 'temp', 'tests-writing.txt');
+        const text =
+            loremIpsum({ count: 1000, format: 'plain', units: 'words' }) +
+            ' éåáí';
+        const filename = path.join(
+            __dirname,
+            '..',
+            '..',
+            'temp',
+            'tests-writing.txt'
+        );
 
         await mkdirp(path.dirname(filename));
         const wStream = fileWriter.writeToFile(filename, text);
@@ -44,8 +68,16 @@ describe('Validate the writer', () => {
     });
 
     test('tests writeToFile zip', async () => {
-        const text = loremIpsum({ count: 1000, format: 'plain', units: 'words'}) + ' éåáí';
-        const filename = path.join(__dirname, '..', '..', 'temp', 'tests-writing.txt.gz');
+        const text =
+            loremIpsum({ count: 1000, format: 'plain', units: 'words' }) +
+            ' éåáí';
+        const filename = path.join(
+            __dirname,
+            '..',
+            '..',
+            'temp',
+            'tests-writing.txt.gz'
+        );
 
         await mkdirp(path.dirname(filename));
         const wStream = fileWriter.writeToFile(filename, text);
