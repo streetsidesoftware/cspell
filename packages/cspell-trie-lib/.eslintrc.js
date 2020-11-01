@@ -14,5 +14,7 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: ['@typescript-eslint'],
-    rules: {},
+    rules: {
+        'no-constant-condition': ['error', { checkLoops: false }],
+    },
 };
