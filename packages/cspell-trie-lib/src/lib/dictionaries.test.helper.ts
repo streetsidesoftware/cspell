@@ -6,6 +6,7 @@ const tries = new Map<string, Promise<Trie>>();
 
 export function readTrie(name: string): Promise<Trie> {
     if (!tries.has(name)) {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const pkg = require(name);
         tries.set(name, readTrieFileFromConfig(pkg.getConfigLocation()));
     }
