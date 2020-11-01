@@ -1,10 +1,25 @@
-# ignore test files
-**/*.test.js
-**/*.test.d.ts
-**/*.test.js.map
-
-Samples/**
-temp/**
+# Ignore Dev Env things
 .vscode
-coverage/**
+.nyc_output
 
+# no need to ship the source dictionaries
+/dictionaries
+/migrated_dictionaries
+
+# Source is allowed to make sure the .map files work.
+# /src
+
+# Ignore Unit test stuff
+/samples
+/temp
+/coverage
+/images
+/tmp
+**/*.test.*
+**/*.spec.*
+
+# Ignore non distribution files
+tsconfig.json
+tslint.json
+jest.config.js
+*.log
