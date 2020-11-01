@@ -5,10 +5,16 @@ on:
     branches:
       - master
       - cspell4
+    paths:
+      - "**/*.js"
+      - "**/*.ts"
   pull_request:
     branches:
       - master
       - cspell4
+    paths:
+      - "**/*.js"
+      - "**/*.ts"
   schedule:
     - cron: '0 23 * * 0'
 
