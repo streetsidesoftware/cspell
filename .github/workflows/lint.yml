@@ -1,10 +1,24 @@
-name: TSLint
+name: Lint
 on:
   pull_request:
+    paths:
+      - "**/tslint.json"
+      - "**/tsconfig.json"
+      - "**/.eslintrc.js"
+      - "**/.eslintignore"
+      - "**/package*.json"
+      - "**/*.ts"
   push:
+    paths:
+      - "**/tslint.json"
+      - "**/tsconfig.json"
+      - "**/.eslintrc.js"
+      - "**/.eslintignore"
+      - "**/package*.json"
+      - "**/*.ts"
 
 jobs:
-  tslint:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
