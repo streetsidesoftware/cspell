@@ -118,7 +118,7 @@ export interface CheckOptions {
     fail: boolean;
 }
 
-export function check(patterns: string[], options: CheckOptions) {
+export function check(patterns: string[], options: CheckOptions): void {
     const { exclude, update, fail } = options;
     const matching = config.repositories.filter((rep) =>
         shouldCheckRepo(rep, { patterns, exclude })

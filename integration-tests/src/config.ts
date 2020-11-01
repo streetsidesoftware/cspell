@@ -17,11 +17,11 @@ export function readConfig(): Config {
     }
 }
 
-export function writeConfig(config: Config) {
+export function writeConfig(config: Config): void {
     fs.writeFileSync(configFile, JSON.stringify(config, undefined, 2));
 }
 
-export function addRepository(path: string, url: string) {
+export function addRepository(path: string, url: string): void {
     const config = readConfig();
     const entries = new Map<string, Repository>(
         config.repositories.map((r) => [r.path, r])

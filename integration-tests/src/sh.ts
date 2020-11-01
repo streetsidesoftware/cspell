@@ -7,7 +7,10 @@ export interface ExecOptions {
     bail?: boolean;
 }
 
-export function exec(command: string, options: ExecOptions = {}) {
+export function exec(
+    command: string,
+    options: ExecOptions = {}
+): Shell.ShellString {
     const { echo = false, bail = false } = options;
     if (echo) {
         console.log(command);

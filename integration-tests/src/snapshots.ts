@@ -9,7 +9,7 @@ export const snapshotDir = Path.resolve(
 );
 const snapshotFileName = 'snapshot.txt';
 
-export function writeSnapshot(rep: Repository, output: string) {
+export function writeSnapshot(rep: Repository, output: string): void {
     const dir = Path.join(snapshotDir, rep.path);
     const filename = Path.join(dir, snapshotFileName);
     Shell.mkdir('-p', dir);

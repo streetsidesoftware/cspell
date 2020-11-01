@@ -57,7 +57,7 @@ export function updateRepository(
 
 export type ListRepositoryOptions = ShouldCheckOptions;
 
-export function listRepositories(options: ListRepositoryOptions) {
+export function listRepositories(options: ListRepositoryOptions): void {
     const config = Config.readConfig();
     config.repositories
         .filter((rep) => shouldCheckRepo(rep, options))
