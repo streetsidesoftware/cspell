@@ -127,7 +127,7 @@ describe('Verify building Dictionary', () => {
             'apple',
             'ape',
             'able',
-            ,
+            null,
             'apple',
             'banana',
             'orange',
