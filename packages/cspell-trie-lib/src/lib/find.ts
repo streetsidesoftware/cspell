@@ -140,7 +140,9 @@ export function findCompoundNode(
                 --i > 0 &&
                 (stack[i].usedCompound ||
                     !stack[i].n?.c?.has(compoundCharacter))
-            ) {}
+            ) {
+                /* empty */
+            }
             if (i > 0) {
                 compoundUsed = true;
                 const s = stack[i];

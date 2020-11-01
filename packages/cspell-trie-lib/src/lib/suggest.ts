@@ -225,8 +225,12 @@ export function* genCompoundableSuggestions(
         }
 
         // Adjust the range between a and b
-        for (; b > a && matrix[d][b] > costLimit; b -= 1) {}
-        for (; a < b && matrix[d][a] > costLimit; a += 1) {}
+        for (; b > a && matrix[d][b] > costLimit; b -= 1) {
+            /* empty */
+        }
+        for (; a < b && matrix[d][a] > costLimit; a += 1) {
+            /* empty */
+        }
 
         b = Math.min(b + 1, mx);
         stack[d] = { a, b };
@@ -285,7 +289,9 @@ export function suggestionCollector(
         const sorted = [...sugs.values()].sort(compSuggestionResults);
         let i = maxNumSuggestions - 1;
         maxCost = sorted[i].cost;
-        for (; i < sorted.length && sorted[i].cost <= maxCost; ++i) {}
+        for (; i < sorted.length && sorted[i].cost <= maxCost; ++i) {
+            /* empty */
+        }
         for (; i < sorted.length; ++i) {
             sugs.delete(sorted[i].word);
         }
