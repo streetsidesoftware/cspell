@@ -7,6 +7,7 @@ import {
     concatIterables,
 } from './util/iterableIteratorLib';
 import { logError } from './util/logger';
+import { IterableLike } from 'gensequence';
 
 const regExpWordsWithSpaces = XRegExp('^\\s*\\p{L}+(?:\\s+\\p{L}+){0,3}$');
 
@@ -22,7 +23,7 @@ export type WordSet = Set<string>;
  */
 export function loadWordsNoError(
     filename: string
-): Promise<Generator<unknown, void, undefined>> {
+): Promise<IterableLike<string>> {
     return readLines(filename).catch(
         (e) => (logError(e), toIterableIterator<string>([]))
     );
