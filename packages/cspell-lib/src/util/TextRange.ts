@@ -10,7 +10,10 @@ export interface MatchRangeWithText extends MatchRange {
     text: string;
 }
 
-export function findMatchingRanges(pattern: string | RegExp, text: string) {
+export function findMatchingRanges(
+    pattern: string | RegExp,
+    text: string
+): MatchRangeWithText[] | MatchRange[] {
     if (pattern === '.*') {
         return [{ startPos: 0, endPos: text.length }];
     }
@@ -45,7 +48,7 @@ function fnSortRanges(a: MatchRange, b: MatchRange) {
     return a.startPos - b.startPos || a.endPos - b.endPos;
 }
 
-export function unionRanges(ranges: MatchRange[]) {
+export function unionRanges(ranges: MatchRange[]): MatchRange[] {
     const sortedRanges = ranges.sort(fnSortRanges);
     const result = sortedRanges.slice(1).reduce((acc: MatchRange[], next) => {
         const last = acc[acc.length - 1];
@@ -66,7 +69,7 @@ export function unionRanges(ranges: MatchRange[]) {
 export function findMatchingRangesForPatterns(
     patterns: (string | RegExp)[],
     text: string
-) {
+): MatchRange[] {
     const matchedPatterns = GS.genSequence(patterns).concatMap((pattern) =>
         findMatchingRanges(pattern, text)
     );

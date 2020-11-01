@@ -1,5 +1,5 @@
 import { calcSettingsForLanguageId } from './LanguageSettings';
-import { CSpellUserSettings } from './CSpellSettingsDef';
+import { CSpellUserSettings, CSpellSettings } from './CSpellSettingsDef';
 import * as CSpellSettings from './CSpellSettingsServer';
 import { getInDocumentSettings } from './InDocSettings';
 
@@ -15,6 +15,6 @@ export function combineTextAndLanguageSettings(
     return CSpellSettings.mergeSettings(langSettings, docSettings);
 }
 
-export function extractSettingsFromText(text: string) {
+export function extractSettingsFromText(text: string): CSpellSettings {
     return getInDocumentSettings(text);
 }

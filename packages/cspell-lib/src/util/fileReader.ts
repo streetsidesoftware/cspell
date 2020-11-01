@@ -4,7 +4,7 @@ import { toIterableIterator } from './iterableIteratorLib';
 export async function readLines(
     filename: string,
     encoding: BufferEncoding = 'utf8'
-) {
+): Promise<Generator<unknown, void, undefined>> {
     try {
         const content = await readFile(filename, encoding);
         return toIterableIterator(content.split(/\r?\n/g));

@@ -15,7 +15,7 @@ export interface ExcludeFilesGlobMap {
 
 export function extractGlobsFromExcludeFilesGlobMap(
     globMap: ExcludeFilesGlobMap
-) {
+): string[] {
     const globs = Object.getOwnPropertyNames(globMap).filter(
         (glob) => globMap[glob]
     );

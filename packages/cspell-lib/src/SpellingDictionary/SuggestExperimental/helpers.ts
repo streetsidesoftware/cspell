@@ -5,7 +5,10 @@ import { SuggestionResult, Feature } from './entities';
  * @param a Result A
  * @param b Result B
  */
-export function compareResults(a: SuggestionResult, b: SuggestionResult) {
+export function compareResults(
+    a: SuggestionResult,
+    b: SuggestionResult
+): number {
     return b.score - a.score || a.word.localeCompare(b.word);
 }
 
@@ -16,7 +19,7 @@ export function wordToFeatures(word: string): FeatureMap {
     return map;
 }
 
-export function mergeFeatures(map: FeatureMap, features: Feature[]) {
+export function mergeFeatures(map: FeatureMap, features: Feature[]): void {
     map.append(features);
 }
 
@@ -48,7 +51,7 @@ export class FeatureMap extends Map<string, number> {
         return this._count;
     }
 
-    append(features: Feature[]) {
+    append(features: Feature[]): this {
         features.forEach(([k, v]) => {
             this.set(k, (this.get(k) || 0) + v);
             this._count += v;

@@ -72,7 +72,10 @@ function calcKey(uri: string, options: LoadOptions) {
     return [uri, loaderType].join('|');
 }
 
-export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()) {
+export async function refreshCacheEntries(
+    maxAge = MAX_AGE,
+    now = Date.now()
+): Promise<void> {
     await Promise.all(
         [...dictionaryCache].map(([, entry]) =>
             refreshEntry(entry, maxAge, now)
@@ -84,7 +87,7 @@ async function refreshEntry(
     entry: CacheEntry,
     maxAge = MAX_AGE,
     now = Date.now()
-) {
+): Promise<void> {
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
@@ -137,7 +140,10 @@ function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
     return loader(uri, options);
 }
 
-async function loadSimpleWordList(filename: string, options: LoadOptions) {
+async function loadSimpleWordList(
+    filename: string,
+    options: LoadOptions
+): Promise<SpellingDictionary> {
     const lines = await readLines(filename);
     return createSpellingDictionary(
         lines,

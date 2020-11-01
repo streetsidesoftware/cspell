@@ -20,19 +20,21 @@ export type WordSet = Set<string>;
  * Reads words from a file. It will not throw and error.
  * @param filename the file to read
  */
-export function loadWordsNoError(filename: string) {
+export function loadWordsNoError(
+    filename: string
+): Promise<Generator<unknown, void, undefined>> {
     return readLines(filename).catch(
         (e) => (logError(e), toIterableIterator<string>([]))
     );
 }
 
-export function splitLine(line: string) {
+export function splitLine(line: string): string[] {
     return Text.extractWordsFromText(line)
         .map(({ text }) => text)
         .toArray();
 }
 
-export function splitCodeWords(words: string[]) {
+export function splitCodeWords(words: string[]): string[] {
     return words.map(Text.splitCamelCaseWord).reduce((a, b) => a.concat(b), []);
 }
 

@@ -233,7 +233,7 @@ export function isWordValid(
     wo: Text.TextOffset,
     line: TextOffset,
     options: CheckOptions
-) {
+): boolean {
     const firstTry = hasWordCheck(dict, wo.text, options);
     return (
         firstTry ||
@@ -247,7 +247,7 @@ export function hasWordCheck(
     dict: SpellingDictionary,
     word: string,
     options: CheckOptions
-) {
+): boolean {
     word = word.replace(/\\/g, '');
     // Do not pass allowCompounds down if it is false, that allows for the dictionary to override the value based upon its own settings.
     return dict.has(word, convertCheckOptionsToHasOptions(options));

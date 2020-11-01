@@ -24,7 +24,7 @@ export function loadDictionaries(
         .map((a) => a as Promise<SpellingDictionary>);
 }
 
-export function refreshDictionaryCache(maxAge?: number) {
+export function refreshDictionaryCache(maxAge?: number): Promise<void> {
     return refreshCacheEntries(maxAge);
 }
 

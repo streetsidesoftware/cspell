@@ -388,11 +388,11 @@ export function getGlobalSettings(): CSpellSettings {
     return globalSettings!;
 }
 
-export function getCachedFileSize() {
+export function getCachedFileSize(): number {
     return cachedFiles.size;
 }
 
-export function clearCachedFiles() {
+export function clearCachedFiles(): void {
     cachedFiles.clear();
 }
 

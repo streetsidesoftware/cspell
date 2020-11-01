@@ -21,7 +21,7 @@ import { getDefaultSettings } from '../Settings';
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
     readonly options: SpellingDictionaryOptions = {};
-    readonly mapWord = (word: string) => word;
+    readonly mapWord = (word: string): string => word;
     readonly wordsToFlag: Set<string>;
     readonly type = 'SpellingDictionaryCollection';
     readonly source: string;
@@ -43,7 +43,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         );
     }
 
-    public has(word: string, hasOptions?: HasOptions) {
+    public has(word: string, hasOptions?: HasOptions): boolean {
         const options = hasOptionToSearchOption(hasOptions);
         return (
             !this.wordsToFlag.has(word.toLowerCase()) &&
@@ -108,7 +108,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         }));
     }
 
-    public get size() {
+    public get size(): number {
         return this.dictionaries.reduce((a, b) => a + b.size, 0);
     }
 
@@ -133,7 +133,7 @@ export function createCollection(
     dictionaries: SpellingDictionary[],
     name: string,
     wordsToFlag: string[] = []
-) {
+): SpellingDictionaryCollection {
     return new SpellingDictionaryCollection(dictionaries, name, wordsToFlag);
 }
 
@@ -141,7 +141,7 @@ export function isWordInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
     options: SearchOptions
-) {
+): boolean {
     return !!genSequence(dicts).first((dict) => dict.has(word, options));
 }
 

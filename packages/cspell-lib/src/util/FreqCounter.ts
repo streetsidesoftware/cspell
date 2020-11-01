@@ -4,38 +4,38 @@ export class FreqCounter<T> {
     private _total = 0;
     readonly _counters = new Map<T, number>();
 
-    get total() {
+    get total(): number {
         return this._total;
     }
-    get counters() {
+    get counters(): Map<T, number> {
         return this._counters;
     }
 
-    getCount(key: T) {
+    getCount(key: T): number | undefined {
         return this._counters.get(key);
     }
 
-    getFreq(key: T) {
+    getFreq(key: T): number {
         return (this.getCount(key) || 0) / (this._total || 1);
     }
 
-    addKeyCount(key: T, count: number) {
+    addKeyCount(key: T, count: number): this {
         this._total += count;
         this._counters.set(key, (this._counters.get(key) || 0) + count);
         return this;
     }
 
-    addKey(key: T) {
+    addKey(key: T): this {
         return this.addKeyCount(key, 1);
     }
 
-    addKeys(keys: IterableLike<T>) {
+    addKeys(keys: IterableLike<T>): void {
         for (const key of keys) {
             this.addKey(key);
         }
     }
 
-    addKeyCounts(values: IterableLike<[T, number]>) {
+    addKeyCounts(values: IterableLike<[T, number]>): void {
         for (const pair of values) {
             this.addKeyCount(pair[0], pair[1]);
         }

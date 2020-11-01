@@ -78,7 +78,10 @@ export function match(reg: RegExp, text: string): Sequence<RegExpExecArray> {
     return sequenceFromRegExpMatch(reg, text);
 }
 
-export function matchStringToTextOffset(reg: RegExp, text: string) {
+export function matchStringToTextOffset(
+    reg: RegExp,
+    text: string
+): Sequence<TextOffset> {
     return matchToTextOffset(reg, { text, offset: 0 });
 }
 
@@ -138,35 +141,35 @@ export function extractWordsFromCodeTextOffset(
     );
 }
 
-export function isUpperCase(word: string) {
+export function isUpperCase(word: string): boolean {
     return !!word.match(regExAllUpper);
 }
 
-export function isLowerCase(word: string) {
+export function isLowerCase(word: string): boolean {
     return !!word.match(regExAllLower);
 }
 
-export function isFirstCharacterUpper(word: string) {
+export function isFirstCharacterUpper(word: string): boolean {
     return isUpperCase(word.slice(0, 1));
 }
 
-export function isFirstCharacterLower(word: string) {
+export function isFirstCharacterLower(word: string): boolean {
     return isLowerCase(word.slice(0, 1));
 }
 
-export function ucFirst(word: string) {
+export function ucFirst(word: string): string {
     return word.slice(0, 1).toUpperCase() + word.slice(1);
 }
 
-export function lcFirst(word: string) {
+export function lcFirst(word: string): string {
     return word.slice(0, 1).toLowerCase() + word.slice(1);
 }
 
-export function snakeToCamel(word: string) {
+export function snakeToCamel(word: string): string {
     return word.split('_').map(ucFirst).join('');
 }
 
-export function camelToSnake(word: string) {
+export function camelToSnake(word: string): string {
     return splitCamelCaseWord(word).join('_').toLowerCase();
 }
 
@@ -200,7 +203,7 @@ export function extractText(
     textOffset: TextOffset,
     startPos: number,
     endPos: number
-) {
+): string {
     const { text, offset: orig } = textOffset;
     const a = Math.max(startPos - orig, 0);
     const b = Math.max(endPos - orig, 0);
@@ -219,7 +222,7 @@ export function stringToRegExp(
     pattern: string | RegExp,
     defaultFlags = 'gim',
     forceFlags = 'g'
-) {
+): RegExp | undefined {
     if (pattern instanceof RegExp) {
         return pattern;
     }
@@ -263,6 +266,6 @@ export function calculateTextDocumentOffsets(
     });
 }
 
-export function removeAccents(text: string) {
+export function removeAccents(text: string): string {
     return text.normalize('NFKD').replace(regExAccents, '');
 }

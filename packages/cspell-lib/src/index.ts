@@ -39,7 +39,7 @@ export * from './trace';
 import { clearCachedFiles } from './Settings';
 import { refreshDictionaryCache } from './SpellingDictionary';
 
-export async function clearCachedSettings() {
+export async function clearCachedSettings(): Promise<void> {
     await Promise.all([clearCachedFiles(), refreshDictionaryCache(0)]);
 }
 

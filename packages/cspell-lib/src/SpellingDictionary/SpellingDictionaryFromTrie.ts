@@ -44,7 +44,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             options.caseSensitive || !trie.isLegacy;
         this._size = size || 0;
     }
-    public get size() {
+    public get size(): number {
         if (!this._size) {
             // walk the trie and get the approximate size.
             const i = this.trie.iterate();
@@ -60,7 +60,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         }
         return this._size;
     }
-    public has(word: string, hasOptions?: HasOptions) {
+    public has(word: string, hasOptions?: HasOptions): boolean {
         const searchOptions = hasOptionToSearchOption(hasOptions);
         const useCompounds =
             searchOptions.useCompounds === undefined
