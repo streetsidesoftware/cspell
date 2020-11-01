@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc -p .",
     "lint": "eslint --fix .",
+    "lint-ci": "eslint .",
     "postinstall": "npm run build",
     "integration-tests": "node tester.js check -f",
     "update-snapshots": "node tester.js check -u"
