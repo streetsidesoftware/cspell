@@ -1,7 +1,10 @@
 import { IterableLike } from '../util/IterableLike';
 import { parseDictionaryLines, buildTrieFast } from 'cspell-trie-lib';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
-import { SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
+import {
+    SpellingDictionary,
+    SpellingDictionaryOptions,
+} from './SpellingDictionary';
 
 export function createSpellingDictionary(
     wordList: string[] | IterableLike<string>,

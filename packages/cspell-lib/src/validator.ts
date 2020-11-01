@@ -9,10 +9,13 @@ import * as TV from './textValidator';
 
 export { IncludeExcludeOptions } from './textValidator';
 
-export function validateText(text: string, settings: CSpellUserSettings): Promise<Text.TextOffset[]> {
+export function validateText(
+    text: string,
+    settings: CSpellUserSettings
+): Promise<Text.TextOffset[]> {
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = Dictionary.getDictionary(finalSettings);
-    return dict.then(dict => [...TV.validateText(text, dict, finalSettings)]);
+    return dict.then((dict) => [...TV.validateText(text, dict, finalSettings)]);
 }
 
 export interface CheckTextInfo {
@@ -38,7 +41,7 @@ export enum IncludeExcludeFlag {
 
 export async function checkText(
     text: string,
-    settings: CSpellUserSettings,
+    settings: CSpellUserSettings
 ): Promise<CheckTextInfo> {
     const validationResult = validateText(text, settings);
     const finalSettings = Settings.finalizeSettings(settings);
@@ -69,21 +72,27 @@ export async function checkText(
 
     const issues = await validationResult;
 
-    function * merge() {
+    function* merge() {
         let i = 0;
         for (const r of result) {
             if (i >= issues.length || issues[i].offset >= r.endPos) {
                 yield r;
                 continue;
             }
-            let span = {...r};
+            const span = { ...r };
             while (i < issues.length && issues[i].offset < span.endPos) {
                 const issue = issues[i];
                 const endPos = issue.offset;
                 const text = span.text.slice(0, endPos - span.startPos);
                 const endPosError = issue.offset + issue.text.length;
-                yield {...span, text, endPos};
-                yield {...span, isError: true, startPos: issue.offset, endPos: endPosError, text: issue.text};
+                yield { ...span, text, endPos };
+                yield {
+                    ...span,
+                    isError: true,
+                    startPos: issue.offset,
+                    endPos: endPosError,
+                    text: issue.text,
+                };
                 span.text = span.text.slice(endPosError - span.startPos);
                 span.startPos = endPosError;
                 i += 1;
@@ -94,9 +103,6 @@ export async function checkText(
 
     return {
         text,
-        items: [...merge()].filter(i => i.startPos < i.endPos),
+        items: [...merge()].filter((i) => i.startPos < i.endPos),
     };
 }
-
-
-

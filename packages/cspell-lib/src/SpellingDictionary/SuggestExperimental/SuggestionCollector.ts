@@ -4,8 +4,7 @@ import { compareResults } from './helpers';
 export class SuggestionCollector {
     private results: SuggestionResult[] = [];
 
-    constructor(readonly size: number, public minScore: number) {
-    }
+    constructor(readonly size: number, public minScore: number) {}
 
     get collection(): SuggestionResult[] {
         return this.results.concat([]);
@@ -15,4 +14,3 @@ export class SuggestionCollector {
         return this.collection.sort(compareResults);
     }
 }
-

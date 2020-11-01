@@ -4,4 +4,3 @@ export interface SuggestionResult {
     word: string;
     score: number;
 }
-

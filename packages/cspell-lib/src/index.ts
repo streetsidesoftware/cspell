@@ -9,9 +9,7 @@ export {
     IncludeExcludeFlag,
     validateText,
 } from './validator';
-export {
-    defaultFileName as defaultSettingsFilename,
-} from './Settings';
+export { defaultFileName as defaultSettingsFilename } from './Settings';
 export {
     CompoundWordsMethod,
     createSpellingDictionary,
@@ -42,10 +40,7 @@ import { clearCachedFiles } from './Settings';
 import { refreshDictionaryCache } from './SpellingDictionary';
 
 export async function clearCachedSettings() {
-    await Promise.all([
-        clearCachedFiles(),
-        refreshDictionaryCache(0),
-    ]);
+    await Promise.all([clearCachedFiles(), refreshDictionaryCache(0)]);
 }
 
 export { clearCachedSettings as clearCachedFiles };

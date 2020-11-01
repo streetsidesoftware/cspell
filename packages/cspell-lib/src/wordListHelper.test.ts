@@ -27,10 +27,7 @@ describe('Validate wordListHelper', () => {
     test('tests splitLineIntoCodeWordsRx', () => {
         const line = 'New York City';
         const words = wlh.splitLineIntoCodeWords(line);
-        expect([...words]).toEqual([
-            'New York City',
-            'New', 'York', 'City',
-        ]);
+        expect([...words]).toEqual(['New York City', 'New', 'York', 'City']);
     });
 
     test('tests loadWordsRx error handling', async () => {

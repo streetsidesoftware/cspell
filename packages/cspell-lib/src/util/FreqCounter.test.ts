@@ -1,4 +1,4 @@
-import {FreqCounter} from './FreqCounter';
+import { FreqCounter } from './FreqCounter';
 
 describe('Validate FreqCounter', () => {
     test('Test Creating an empty Counter', () => {

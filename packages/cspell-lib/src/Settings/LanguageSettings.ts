@@ -1,4 +1,10 @@
-import { LanguageSetting, CSpellUserSettings, LocaleId, LanguageId, BaseSetting } from './CSpellSettingsDef';
+import {
+    LanguageSetting,
+    CSpellUserSettings,
+    LocaleId,
+    LanguageId,
+    BaseSetting,
+} from './CSpellSettingsDef';
 import * as SpellSettings from './CSpellSettingsServer';
 
 // cspell:ignore filetypes
@@ -9,8 +15,7 @@ export type LanguageSettings = LanguageSetting[];
 
 const defaultLocal: LocaleId = 'en';
 
-const defaultLanguageSettings: LanguageSettings = [
-];
+const defaultLanguageSettings: LanguageSettings = [];
 
 export function getDefaultLanguageSettings(): LanguageSettings {
     return defaultLanguageSettings;
@@ -18,49 +23,87 @@ export function getDefaultLanguageSettings(): LanguageSettings {
 
 function stringToList(sList: string | string[]): string[] {
     if (typeof sList === 'string') {
-        sList = sList.replace(/[|;]/g, ',').split(',').map(s => s.trim());
+        sList = sList
+            .replace(/[|;]/g, ',')
+            .split(',')
+            .map((s) => s.trim());
     }
     return sList;
 }
 
-export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<LanguageId> {
+export function normalizeLanguageId(
+    langId: LanguageId | LanguageId[]
+): Set<LanguageId> {
     const langIds = stringToList(langId);
-    return new Set<LanguageId>(langIds.map(a => a.toLowerCase()));
+    return new Set<LanguageId>(langIds.map((a) => a.toLowerCase()));
 }
 
-function normalizeLanguageIdToString(langId: LanguageId | LanguageId[]): string {
+function normalizeLanguageIdToString(
+    langId: LanguageId | LanguageId[]
+): string {
     return [...normalizeLanguageId(langId)].join(',');
 }
 
 export function normalizeLocal(local: LocaleId | LocaleId[]): Set<LocaleId> {
     local = stringToList(local);
-    return new Set<LocaleId>(local.map(local => local.toLowerCase().replace(/[^a-z]/g, '')));
+    return new Set<LocaleId>(
+        local.map((local) => local.toLowerCase().replace(/[^a-z]/g, ''))
+    );
 }
 
-export function isLocalInSet(local: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
+export function isLocalInSet(
+    local: LocaleId | LocaleId[],
+    setOfLocals: Set<LocaleId>
+): boolean {
     const locals = normalizeLocal(local);
-    return [...locals.values()].filter(local => setOfLocals.has(local)).length > 0;
+    return (
+        [...locals.values()].filter((local) => setOfLocals.has(local)).length >
+        0
+    );
 }
 
-export function calcSettingsForLanguage(languageSettings: LanguageSettings, languageId: LanguageId, local: LocaleId | LocaleId[]): BaseSetting {
+export function calcSettingsForLanguage(
+    languageSettings: LanguageSettings,
+    languageId: LanguageId,
+    local: LocaleId | LocaleId[]
+): BaseSetting {
     languageId = languageId.toLowerCase();
     const allowedLocals = normalizeLocal(local);
-    return defaultLanguageSettings.concat(languageSettings)
-        .filter(s => !s.languageId || s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
-        .filter(s => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals) )
-        .map(langSetting => {
-            const id = normalizeLanguageIdToString(langSetting.local || langSetting.languageId || 'language');
-            const {languageId, local, ...s} = {id, ...langSetting};
+    return defaultLanguageSettings
+        .concat(languageSettings)
+        .filter(
+            (s) =>
+                !s.languageId ||
+                s.languageId === '*' ||
+                normalizeLanguageId(s.languageId).has(languageId)
+        )
+        .filter(
+            (s) =>
+                !s.local ||
+                s.local === '*' ||
+                isLocalInSet(s.local, allowedLocals)
+        )
+        .map((langSetting) => {
+            const id = normalizeLanguageIdToString(
+                langSetting.local || langSetting.languageId || 'language'
+            );
+            const { languageId, local, ...s } = { id, ...langSetting };
             return s;
         })
-        .reduce((langSetting, setting) => ({
-            ...SpellSettings.mergeSettings(langSetting, setting),
-            languageId,
-            local,
-        }), {});
+        .reduce(
+            (langSetting, setting) => ({
+                ...SpellSettings.mergeSettings(langSetting, setting),
+                languageId,
+                local,
+            }),
+            {}
+        );
 }
 
-export function calcUserSettingsForLanguage(settings: CSpellUserSettings, languageId: string): CSpellUserSettings {
+export function calcUserSettingsForLanguage(
+    settings: CSpellUserSettings,
+    languageId: string
+): CSpellUserSettings {
     const { languageSettings = [], language: local = defaultLocal } = settings;
     const defaults = {
         allowCompoundWords: settings.allowCompoundWords,
@@ -70,11 +113,19 @@ export function calcUserSettingsForLanguage(settings: CSpellUserSettings, langua
         ...defaults,
         ...calcSettingsForLanguage(languageSettings, languageId, local),
     };
-    return  SpellSettings.mergeSettings(settings, langSettings as CSpellUserSettings);
+    return SpellSettings.mergeSettings(
+        settings,
+        langSettings as CSpellUserSettings
+    );
 }
 
-export function calcSettingsForLanguageId(baseSettings: CSpellUserSettings, languageId: LanguageId[] | LanguageId): CSpellUserSettings {
-    const langIds: string[] = ['*'].concat(languageId instanceof Array ? languageId : [languageId]);
+export function calcSettingsForLanguageId(
+    baseSettings: CSpellUserSettings,
+    languageId: LanguageId[] | LanguageId
+): CSpellUserSettings {
+    const langIds: string[] = ['*'].concat(
+        languageId instanceof Array ? languageId : [languageId]
+    );
     const langSettings = langIds.reduce((settings, languageId) => {
         return calcUserSettingsForLanguage(settings, languageId);
     }, baseSettings);

@@ -1,13 +1,12 @@
-
 export type ReplaceEntry = [string, string];
 export type ReplaceMap = ReplaceEntry[];
 
 /**
  * These settings come from user and workspace settings.
  */
-export interface CSpellPackageSettings extends CSpellUserSettings {}
+export type CSpellPackageSettings = CSpellUserSettings;
 
-export interface CSpellUserSettings extends CSpellSettings {}
+export type CSpellUserSettings = CSpellSettings;
 
 export interface CSpellSettings extends FileSettings, LegacySettings {
     $schema?: string;
@@ -87,13 +86,12 @@ export interface Settings extends BaseSetting {
     languageId?: LanguageId;
 }
 
-    /**
-     * VS Code Spell Checker Settings
-     * To be Removed
-     * @deprecated
-     */
-    export interface LegacySettings {
-
+/**
+ * VS Code Spell Checker Settings
+ * To be Removed
+ * @deprecated
+ */
+export interface LegacySettings {
     /**
      * Show status
      * @deprecated
@@ -178,9 +176,12 @@ export interface BaseSetting {
     patterns?: RegExpPatternDefinition[];
 }
 
-export type DictionaryFileTypes = 'S'|'W'|'C'|'T';
+export type DictionaryFileTypes = 'S' | 'W' | 'C' | 'T';
 
-export type DictionaryDefinition = DictionaryDefinitionPreferred | DictionaryDefinitionAlternate | DictionaryDefinitionLegacy;
+export type DictionaryDefinition =
+    | DictionaryDefinitionPreferred
+    | DictionaryDefinitionAlternate
+    | DictionaryDefinitionLegacy;
 
 export interface DictionaryDefinitionBase {
     /** The reference name of the dictionary, used with program language settings */
@@ -193,7 +194,8 @@ export interface DictionaryDefinitionBase {
     useCompounds?: boolean;
 }
 
-export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
+export interface DictionaryDefinitionPreferred
+    extends DictionaryDefinitionBase {
     /** Path to the file */
     path: FsPath;
 
@@ -201,7 +203,8 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
     file?: undefined;
 }
 
-export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
+export interface DictionaryDefinitionAlternate
+    extends DictionaryDefinitionBase {
     /** @hidden */
     path?: undefined;
 
@@ -230,8 +233,9 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     type?: DictionaryFileTypes;
 }
 
-export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {
-}
+export interface LanguageSetting
+    extends LanguageSettingFilterFields,
+        BaseSetting {}
 
 export interface LanguageSettingFilterFields {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
@@ -246,21 +250,21 @@ type InternalRegExp = RegExp;
 export type Pattern = string | InternalRegExp;
 
 export type PredefinedPatterns =
-    'Base64' |
-    'CStyleComment' |
-    'Email' |
-    'EscapeCharacters' |
-    'HexDigits' |
-    'HexValues' |
-    'href' |
-    'PhpHereDoc' |
-    'PublicKey' |
-    'RsaCert' |
-    'SHA' |
-    'SpellCheckerDisable' |
-    'string' |
-    'Urls' |
-    'Everything';
+    | 'Base64'
+    | 'CStyleComment'
+    | 'Email'
+    | 'EscapeCharacters'
+    | 'HexDigits'
+    | 'HexValues'
+    | 'href'
+    | 'PhpHereDoc'
+    | 'PublicKey'
+    | 'RsaCert'
+    | 'SHA'
+    | 'SpellCheckerDisable'
+    | 'string'
+    | 'Urls'
+    | 'Everything';
 
 /** This matches the name in a pattern definition */
 export type PatternId = string;
@@ -305,7 +309,7 @@ export interface RegExpPatternDefinition {
     description?: string;
 }
 
-export interface CSpellUserSettingsWithComments extends CSpellUserSettings {}
+export type CSpellUserSettingsWithComments = CSpellUserSettings;
 
 export interface Source {
     name: string;

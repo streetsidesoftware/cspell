@@ -1,4 +1,8 @@
-import { SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
+import {
+    SuggestionCollector,
+    SuggestionResult,
+    CompoundWordsMethod,
+} from 'cspell-trie-lib';
 import { ReplaceMap } from '../Settings';
 
 export {
@@ -37,9 +41,17 @@ export interface SpellingDictionary {
     has(word: string, useCompounds: boolean): boolean;
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
-    suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
+    suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
-    genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
+    genSuggestions(
+        collector: SuggestionCollector,
+        suggestOptions: SuggestOptions
+    ): void;
     mapWord(word: string): string;
     readonly size: number;
     readonly options: SpellingDictionaryOptions;

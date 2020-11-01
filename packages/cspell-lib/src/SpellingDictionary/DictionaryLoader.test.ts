@@ -2,7 +2,6 @@ import { testing, LoadOptions, loadDictionary } from './DictionaryLoader';
 import * as path from 'path';
 jest.mock('../util/logger');
 
-
 const root = path.join(__dirname, '..', '..');
 const samples = path.join(root, 'samples');
 
@@ -17,13 +16,15 @@ describe('Validate DictionaryLoader', () => {
             ['./notfound.txt.gz', {}, error],
             ['./notfound.txt.gz', { type: 'S' }, error],
             ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', { }, unknownFormatError],
-            ['./notfound.trie.gz', { }, unknownFormatError],
+            ['./notfound.trie', {}, unknownFormatError],
+            ['./notfound.trie.gz', {}, unknownFormatError],
         ];
 
         for (const t of tests) {
             const dictionary = testing.load(t[0], t[1]);
-            await expect(dictionary).rejects.toEqual(expect.objectContaining(t[2]));
+            await expect(dictionary).rejects.toEqual(
+                expect.objectContaining(t[2])
+            );
         }
     });
 
@@ -37,8 +38,8 @@ describe('Validate DictionaryLoader', () => {
             ['./notfound.txt.gz', {}, error],
             ['./notfound.txt.gz', { type: 'S' }, error],
             ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', { }, unknownFormatError],
-            ['./notfound.trie.gz', { }, unknownFormatError],
+            ['./notfound.trie', {}, unknownFormatError],
+            ['./notfound.trie.gz', {}, unknownFormatError],
         ];
 
         for (const t of tests) {
@@ -59,8 +60,8 @@ describe('Validate DictionaryLoader', () => {
             ['./notfound.txt.gz', {}, error],
             ['./notfound.txt.gz', { type: 'S' }, error],
             ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', { }, unknownFormatError],
-            ['./notfound.trie.gz', { }, unknownFormatError],
+            ['./notfound.trie', {}, unknownFormatError],
+            ['./notfound.trie.gz', {}, unknownFormatError],
         ];
 
         for (const t of tests) {
@@ -75,8 +76,16 @@ describe('Validate DictionaryLoader', () => {
             [sample('words.txt'), { type: 'S' }, 'pear'],
             [sample('words.txt'), { type: 'C' }, 'strawberry'],
             ['node_modules/cspell-dict-csharp/csharp.txt.gz', {}, 'const'],
-            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'S' }, 'const'],
-            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'C' }, 'const'],
+            [
+                'node_modules/cspell-dict-csharp/csharp.txt.gz',
+                { type: 'S' },
+                'const',
+            ],
+            [
+                'node_modules/cspell-dict-csharp/csharp.txt.gz',
+                { type: 'C' },
+                'const',
+            ],
         ];
 
         for (const t of tests) {
@@ -85,7 +94,6 @@ describe('Validate DictionaryLoader', () => {
         }
     });
 });
-
 
 function sample(file: string): string {
     return path.join(samples, file);

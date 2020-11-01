@@ -13,8 +13,8 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "lint-ci": "tslint \"src/**/*.ts\"",
+    "lint": "eslint --fix .",
+    "lint-ci": "eslint .",
     "build": "npm run compile && npm run build-schema",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/Settings/CSpellSettingsDef.ts --type CSpellSettings --validationKeywords markdownDescription  --validationKeywords scope --validationKeywords deprecationMessage -o  ../../cspell.schema.json",
     "clean-build": "npm run clean && npm run build",
@@ -98,7 +98,13 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
     "cspell-tools": "^5.0.1-alpha.8",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2",
     "rimraf": "^3.0.2"
   }
 }
