@@ -3,7 +3,7 @@ import * as zlib from 'zlib';
 import * as stream from 'stream';
 import { iterableToStream } from 'iterable-to-stream';
 
-export function writeToFile(filename: string, data: string) {
+export function writeToFile(filename: string, data: string): fs.WriteStream {
     return writeToFileIterable(filename, [data]);
 }
 
