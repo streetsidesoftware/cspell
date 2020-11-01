@@ -5,22 +5,22 @@ describe('Validate Trie2Builder', () => {
     it('test builder', () => {
         const builder = new Trie2Builder();
         builder
-        .insert('run')
-        .insert('runs')
-        .insert('running')
-        .insert('runner')
-        .insert('rank')
-        .insert('random')
-        .insert('ran')
-        .insert('run')
-        .insert('randomly')
-        .insert('ran')
-        .insert('ramp')
-        ;
+            .insert('run')
+            .insert('runs')
+            .insert('running')
+            .insert('runner')
+            .insert('rank')
+            .insert('random')
+            .insert('ran')
+            .insert('run')
+            .insert('randomly')
+            .insert('ran')
+            .insert('ramp');
         const trie = builder.build();
         // cspell:ignore ning
         const r1 = displayTrie2(trie);
-        expect(r1).toBe(`
+        expect(r1).toBe(
+            `
             run
             ...s
             ...ning
@@ -30,9 +30,11 @@ describe('Validate Trie2Builder', () => {
             ......ly
             ...
             ..mp
-        `.replace(/^\s+/gm, ''));
+        `.replace(/^\s+/gm, '')
+        );
         const r2 = displayTrie2(trie, true, '+');
-        expect(r2).toBe(`
+        expect(r2).toBe(
+            `
             ramp
             ++n
             +++dom
@@ -42,6 +44,7 @@ describe('Validate Trie2Builder', () => {
             +++ner
             ++++ing
             +++s
-        `.replace(/^\s+/gm, ''));
+        `.replace(/^\s+/gm, '')
+        );
     });
 });
