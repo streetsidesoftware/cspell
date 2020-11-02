@@ -3,8 +3,7 @@ export const END_OF_WORD: END_OF_WORD = '\n';
 
 export type TrieNode2 = TrieNode2Root | TrieNode2Branch | TrieNode2EOW;
 
-export interface TrieNode2Branch extends TrieNode2Root {
-}
+export type TrieNode2Branch = TrieNode2Root;
 
 export interface TrieNode2Root {
     /** string value */
