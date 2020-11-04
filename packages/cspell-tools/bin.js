@@ -2,11 +2,13 @@
 
 'use strict';
 
-import { run } from './dist/app';
-import program, { CommanderError } from 'commander';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const app = require('./dist/app');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const program = require('commander');
 
-run(program, process.argv).catch((e) => {
-    if (!(e instanceof CommanderError)) {
+app.run(program, process.argv).catch((e) => {
+    if (!(e instanceof program.CommanderError)) {
         console.log(e);
     }
     process.exit(1);

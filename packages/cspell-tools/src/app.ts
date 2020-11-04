@@ -8,7 +8,8 @@ import glob from 'glob';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './compiler/iterateWordsFromFile';
 import { ReaderOptions } from './compiler/Reader';
-import { version } from '../package.json';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
 function globP(pattern: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
@@ -50,7 +51,7 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
     (program as any).exitOverride();
 
     return new Promise((resolve, rejects) => {
-        program.version(version);
+        program.version(npmPackage.version);
 
         program
             .command('compile <src...>')
