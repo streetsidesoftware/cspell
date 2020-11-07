@@ -21,12 +21,12 @@ export type WalkNext = boolean;
  *
  * @param trie the compound Trie to walk
  */
-export function* compoundWalker(trie: Trie, caseSensitive = true): Generator<WalkItem, any, WalkNext> {
+export function* compoundWalker(trie: Trie, caseSensitive = true): Generator<WalkItem, void, WalkNext> {
     const { compoundCharacter: cc, forbiddenWordPrefix: forbidden, stripCaseAndAccentsPrefix } = trie.options;
     const blockNode = new Set([cc, forbidden, stripCaseAndAccentsPrefix]);
     const root = (!caseSensitive && trie.root.c?.get(stripCaseAndAccentsPrefix)) || trie.root;
 
-    function* walk(n: TrieNode, s: string, c: boolean, d: number): Generator<WalkItem, any, WalkNext> {
+    function* walk(n: TrieNode, s: string, c: boolean, d: number): Generator<WalkItem, void, WalkNext> {
         const deeper = yield { n, s, c, d };
         if (deeper !== false && n.c) {
             for (const [k, cn] of n.c) {
@@ -34,7 +34,7 @@ export function* compoundWalker(trie: Trie, caseSensitive = true): Generator<Wal
                 yield* walk(cn, s + k, false, d);
             }
             if (n.c.has(cc)) {
-                const compoundNodes = root.c!.get(cc);
+                const compoundNodes = root.c?.get(cc);
                 if (compoundNodes) {
                     yield* walk(compoundNodes, s, true, d + 1);
                 }

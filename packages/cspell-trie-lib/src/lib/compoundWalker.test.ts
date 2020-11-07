@@ -57,7 +57,7 @@ describe('Verify compound walker', () => {
     });
 });
 
-function* walkerToWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
+function* walkerToWords(stream: Generator<WalkItem, void, WalkNext>, maxDepth: number): Generator<string> {
     let item = stream.next();
     while (!item.done) {
         const { n, s, c, d } = item.value;
@@ -71,7 +71,7 @@ function* walkerToWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: nu
     }
 }
 
-function* walkerToCompoundWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
+function* walkerToCompoundWords(stream: Generator<WalkItem, void, WalkNext>, maxDepth: number): Generator<string> {
     let item = stream.next();
     const compounds: string[] = [];
 

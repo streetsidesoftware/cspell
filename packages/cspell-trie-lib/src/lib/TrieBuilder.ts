@@ -119,15 +119,14 @@ export class TrieBuilder {
             if (!node.c || Object.isFrozen(node)) {
                 node = { ...node, c: new Map(node.c ?? []) };
             }
-            node.c!.set(head, child);
+            node.c?.set(head, child);
         }
         return Object.isFrozen(child) ? this.tryToCache(node) : node;
     }
 
     private buildTail(s: string): TrieNode {
-        if (this.tails.has(s)) {
-            return this.tails.get(s)!;
-        }
+        const v = this.tails.get(s);
+        if (v) return v;
         const head = s[0];
         const tail = s.slice(1);
         const t = this.tails.get(tail);
