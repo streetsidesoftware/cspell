@@ -19,7 +19,6 @@ describe('Validate DictionarySettings', () => {
         expect(files.filter((a) => a.includes('wordsEn'))).toHaveLength(0);
         expect(files.filter((a) => a.includes('en_us'))).toHaveLength(1);
         expect(files.filter((a) => a.includes('unknown'))).toHaveLength(0);
-        // console.log(mapDefs);
     });
 
     test('tests exclusions and empty ids', () => {

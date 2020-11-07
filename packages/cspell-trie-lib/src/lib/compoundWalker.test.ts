@@ -28,7 +28,7 @@ describe('Verify compound walker', () => {
         expect(words2).toEqual(expected2().map((a) => a.toLowerCase()));
     });
 
-    test('test compound edges', () => {
+    test('compound edges', () => {
         const trie = dictionary();
         const words1 = [...walkerToWords(compoundWalker(trie), 1)];
         expect(words1).toEqual([
@@ -46,7 +46,7 @@ describe('Verify compound walker', () => {
         ]);
     });
 
-    test('test that it is possible to break up the word into its compounds', () => {
+    test('that it is possible to break up the word into its compounds', () => {
         const trie = dictionary();
         const words2 = [...walkerToCompoundWords(compoundWalker(trie), 2)];
         expect(words2).toEqual(expectedCompounds2());

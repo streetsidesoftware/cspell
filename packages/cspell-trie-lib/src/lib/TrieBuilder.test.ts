@@ -2,7 +2,7 @@ import { countNodes, isCircular } from './util';
 import { TrieBuilder, buildTrie } from './TrieBuilder';
 
 describe('Validate TrieBuilder', () => {
-    test('builder', () => {
+    test('builder explicit consolidateSuffixes', () => {
         const builder = new TrieBuilder();
         const words = sampleWords.concat(applyEndings('shock')).concat(applyEndings('stock'));
         builder.insert(words);
@@ -12,7 +12,7 @@ describe('Validate TrieBuilder', () => {
         expect(isCircular(trie.root)).toBe(false);
     });
 
-    test('builder', () => {
+    test('builder no consolidateSuffixes', () => {
         const builder = new TrieBuilder();
         builder.insert(sampleWords);
         const trie = builder.build(false);

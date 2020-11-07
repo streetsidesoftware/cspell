@@ -1,7 +1,7 @@
 import { xregexp } from '.';
 
 describe('Validate Bundled Libraries', () => {
-    test('Test xregexp', () => {
+    test('xregexp', () => {
         expect(typeof xregexp).toEqual('function');
 
         const x = xregexp('t$');

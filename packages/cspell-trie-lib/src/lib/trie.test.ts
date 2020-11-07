@@ -64,7 +64,7 @@ describe('Validate Trie Class', () => {
         expect(words).toEqual(sampleWords.sort());
     });
 
-    test('Test where only part of the word is correct', () => {
+    test('where only part of the word is correct', () => {
         const trie = Trie.create(sampleWords);
         expect(trie.has('talking')).toBe(true);
         expect(trie.has('talkings')).toBe(false);
@@ -85,7 +85,7 @@ describe('Validate Trie Class', () => {
         expect(options.forbiddenWordPrefix).toBe('#');
     });
 
-    test('Test compound words', () => {
+    test('compound words', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
         expect(trie.has('talkinglift', true)).toBe(true);
@@ -106,7 +106,7 @@ describe('Validate Trie Class', () => {
         expect(trie.has('walked', true)).toBe(true);
     });
 
-    test('Test compound find', () => {
+    test('compound find', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
         expect(trie.find('talkinglift', true)?.f).toBe(1);

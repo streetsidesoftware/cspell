@@ -68,7 +68,7 @@ describe('Validate the iterateWordsFromFile', () => {
         );
     });
 
-    test('annotatedWords: text', async () => {
+    test('annotatedWords: text - cities.txt', async () => {
         const reader = await createReader(path.join(samples, 'cities.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader.annotatedWords()];
@@ -79,7 +79,7 @@ describe('Validate the iterateWordsFromFile', () => {
         );
     });
 
-    test('annotatedWords: text', async () => {
+    test('annotatedWords: text - sampleCodeDic.txt', async () => {
         const reader = await createReader(path.join(samples, 'sampleCodeDic.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader.annotatedWords()];

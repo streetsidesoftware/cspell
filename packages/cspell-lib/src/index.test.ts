@@ -12,9 +12,9 @@ describe('Validate the cspell API', () => {
             expect(Object.keys(results)).not.toHaveLength(0);
             expect(results.map((to) => to.text)).toEqual(expect.arrayContaining(['Jansons']));
         });
-    });
 
-    test('clearCachedSettings', () => {
-        return cspell.clearCachedFiles();
+        test('clearCachedSettings', async () => {
+            await expect(cspell.clearCachedFiles()).resolves.not.toThrow();
+        });
     });
 });

@@ -1,21 +1,21 @@
 import { FreqCounter } from './FreqCounter';
 
 describe('Validate FreqCounter', () => {
-    test('Test Creating an empty Counter', () => {
+    test('Creating an empty Counter', () => {
         const counter = FreqCounter.create();
         expect(counter).toBeInstanceOf(FreqCounter);
         expect(counter.total).toBe(0);
         expect(counter.getFreq(1)).toBe(0);
         expect(counter.counters).toBeInstanceOf(Map);
     });
-    test('Test Adding values to a counter', () => {
+    test('Adding values to a counter', () => {
         const counter = FreqCounter.create([1, 1, 2, 3]);
         expect(counter.total).toBe(4);
         expect(counter.getCount(1)).toBe(2);
         expect(counter.getCount(2)).toBe(1);
         expect(counter.getFreq(1)).toBe(0.5);
     });
-    test('Test merging counters', () => {
+    test('merging counters', () => {
         const counter = FreqCounter.create([1, 1, 2, 3]);
         const counter2 = FreqCounter.create([1, 2, 2, 3, 3]);
         expect(counter.total).toBe(4);

@@ -12,7 +12,7 @@ const dutchDictionary = path.join(__dirname, ...'../../../Samples/dicts/nl_compo
 describe('Validate findWord', () => {
     const pTrie = readTrie(dutchDictionary);
 
-    test('test find exact words preserve case', async () => {
+    test('find exact words preserve case', async () => {
         const trie = await pTrie;
 
         // cspell:ignore aanvaardbaard
@@ -81,7 +81,6 @@ describe('Validate findWord', () => {
                           matchCase: true,
                           compoundMode: 'compound',
                       }));
-            // console.log(r2);
             expect(r2.found).toEqual(word);
             expect(r2.forbidden).toBe(false);
         });
@@ -91,7 +90,6 @@ describe('Validate findWord', () => {
                 matchCase: false,
                 compoundMode: 'compound',
             });
-            // console.log(r2);
             expect(r.found).toEqual(normalizeWordToLowercase(word));
             expect(r.forbidden).toBe(false);
         });
@@ -113,7 +111,6 @@ describe('Validate findWord', () => {
                           matchCase: true,
                           compoundMode: 'compound',
                       }));
-            // console.log(r2);
             expect(r2.found).toEqual(false);
             expect(r2.forbidden).toBe(false);
         });
@@ -123,7 +120,6 @@ describe('Validate findWord', () => {
                 matchCase: false,
                 compoundMode: 'compound',
             });
-            // console.log(r2);
             expect(r.found).toEqual(false);
             expect(r.forbidden).toBe(false);
         });

@@ -12,10 +12,6 @@ describe('Verify building Dictionary', () => {
 
         const dict = await createSpellingDictionary(words, 'words', 'test');
         expect(dict.name).toBe('words');
-        // expect(dict).toBeInstanceOf(SpellingDictionaryFromTrie);
-        if (dict instanceof SpellingDictionaryFromTrie) {
-            expect(dict.trie.root.c).toBeInstanceOf(Map);
-        }
         expect(dict.has('apple')).toBe(true);
         const suggestions = dict.suggest('aple').map(({ word }) => word);
         expect(suggestions).toEqual(expect.arrayContaining(['apple']));
@@ -23,7 +19,7 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
 
-    test('Test compounds from word list', async () => {
+    test('compounds from word list', async () => {
         const words = [
             'apple',
             'apples',
@@ -50,7 +46,7 @@ describe('Verify building Dictionary', () => {
         expect(dict.has('applebananas')).toBe(false);
     });
 
-    test('Test case-sensitive word list', async () => {
+    test('case-sensitive word list', async () => {
         const words = ['apple', 'Seattle', 'Amsterdam', 'surf', 'words', 'English', 'McGreyer'];
 
         const dict = await createSpellingDictionary(words, 'words', 'test', {
@@ -74,7 +70,7 @@ describe('Verify building Dictionary', () => {
         expect(dict.has('MCGREYER', ignoreCase)).toBe(true); // cspell:disable-line
     });
 
-    test('Test Suggest Trie', () => {
+    test('Suggest Trie', () => {
         const words = [
             'apple',
             'ape',
@@ -115,8 +111,8 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
 
-    test('Test wordDictionaryFormsCollector', () => {
-        function test(word: string, isCaseSensitive: boolean, expected: string[]) {
+    test('wordDictionaryFormsCollector', () => {
+        function testCase(word: string, isCaseSensitive: boolean, expected: string[]) {
             const collector = __testMethods.wordDictionaryFormsCollector(isCaseSensitive);
             expect([...collector(word)].sort()).toEqual(expected.sort());
             expect([...collector(word)]).toEqual([]);
@@ -137,7 +133,7 @@ describe('Verify building Dictionary', () => {
             ['café'.normalize('NFKC'), false, ['cafe', 'café']],
             ['café'.normalize('NFKD'), false, ['cafe', 'café']],
         ];
-        tests.forEach((t) => test(...t));
+        tests.forEach((t) => testCase(...t));
     });
 });
 

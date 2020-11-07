@@ -61,7 +61,7 @@ describe('Validate LanguageSettings', () => {
         expect(sPython.ignoreRegExpList).toEqual(expect.arrayContaining(['special']));
     });
 
-    test('test that user settings include language overrides', () => {
+    test('that user settings include language overrides', () => {
         const settings = {
             languageSettings: [],
             ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
@@ -72,7 +72,7 @@ describe('Validate LanguageSettings', () => {
         expect(sPython.ignoreRegExpList).toEqual(expect.arrayContaining(['binary']));
     });
 
-    test("test that global settings are preserved if language setting doesn't exit.", () => {
+    test("that global settings are preserved if language setting doesn't exit.", () => {
         const settings = {
             enabled: true,
             allowCompoundWords: false,
@@ -85,7 +85,7 @@ describe('Validate LanguageSettings', () => {
         expect(sPython.allowCompoundWords).toBe(true);
     });
 
-    test('test merged settings with global', () => {
+    test('merged settings with global', () => {
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
         const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
         expect(Object.keys(sPHP)).not.toHaveLength(0);

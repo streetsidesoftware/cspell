@@ -46,7 +46,7 @@ describe('Validate Dutch Suggestions', () => {
     );
 
     test(
-        'Tests suggestions "buurtbewoners"',
+        'Tests suggestions "buurtbewoners" with cost',
         async () => {
             const trie = await pTrieNL;
             const results = trie.suggestWithCost('buurtbewoners', 1);

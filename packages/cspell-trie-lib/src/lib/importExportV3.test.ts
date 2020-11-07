@@ -54,7 +54,7 @@ describe('Import/Export', () => {
         expect(words).toEqual([...sampleWords].sort());
     });
 
-    test('tests serialize / deserialize', async () => {
+    test('tests serialize / deserialize trie', async () => {
         const trie = Trie.buildTrie(sampleWords).root;
         const data = serializeTrie(trie, 10);
         const root = importTrie(data);

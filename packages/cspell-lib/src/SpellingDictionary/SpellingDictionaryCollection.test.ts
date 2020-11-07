@@ -78,7 +78,7 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugs).toContain('apple mango');
     });
 
-    test('checks for compound suggestions', async () => {
+    test('checks for compound suggestions with numbChanges', async () => {
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         const dicts = await Promise.all([
             trie,
@@ -117,9 +117,9 @@ describe('Verify using multiple dictionaries', () => {
         ]);
 
         const dictCollection = new SpellingDictionaryCollection(dicts, 'test', []);
-        expect(dictCollection.has('mango'));
-        expect(dictCollection.has('lion'));
-        expect(dictCollection.has('ant'));
+        expect(dictCollection.has('mango')).toBe(true);
+        expect(dictCollection.has('lion')).toBe(true);
+        expect(dictCollection.has('ant')).toBe(true);
 
         const sugsForTango = dictCollection.suggest('tango', 10);
         expect(sugsForTango).toHaveLength(1);
@@ -133,22 +133,6 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugsForCellipede.map((s) => s.word)).toContain('centipede');
         expect(sugsForCellipede.map((s) => s.word)).toContain('millipede');
     });
-
-    // test('checks for duplicate suggestions', async () => {
-    //     const wordsA2 = wordsA.concat(['apples']);
-    //     const dicts = await Promise.all([
-    //         createSpellingDictionary(wordsA, 'wordsA', 'test'),
-    //         createSpellingDictionary(wordsB, 'wordsB', 'test'),
-    //         createSpellingDictionary(wordsA2, 'wordsA2', 'test'),
-    //         createSpellingDictionary(wordsC, 'wordsC', 'test'),
-    //     ]);
-
-    //     const dictCollection = createCollection(dicts, 'test', ['Avocado']);
-    //     const sugs = dictCollection.suggest('Apples', 10);
-    //     expect(sugs).toEqual([
-
-    //     ]);
-    // });
 
     test('creates using createCollectionP', () => {
         const dicts = [

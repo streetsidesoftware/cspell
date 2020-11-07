@@ -8,7 +8,7 @@ const samples = path.join(root, 'samples');
 type ErrorResults = Record<string, unknown> | Error;
 
 describe('Validate DictionaryLoader', () => {
-    it('test not found', async () => {
+    it('load not found', async () => {
         const error = { code: 'ENOENT' };
         const unknownFormatError = new Error('Unknown file format');
         const tests: [string, LoadOptions, ErrorResults][] = [
@@ -28,7 +28,7 @@ describe('Validate DictionaryLoader', () => {
         }
     });
 
-    it('test not found', async () => {
+    it('loadEntry not found', async () => {
         const error = { code: 'ENOENT' };
         const unknownFormatError = new Error('Unknown file format');
         const tests: [string, LoadOptions, ErrorResults][] = [

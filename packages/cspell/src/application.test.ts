@@ -65,7 +65,7 @@ describe('Validate the Application', () => {
         expect(result.items.map((i) => i.text).join('')).toBe(result.text);
     });
 
-    test('Test running the application from stdin', async () => {
+    test('running the application from stdin', async () => {
         const files = ['stdin'];
         const options = { wordsOnly: true, unique: true };
         const logger = new Logger();
