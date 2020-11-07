@@ -4,10 +4,11 @@ import * as InDoc from './InDocSettings';
 
 describe('Validate InDocSettings', () => {
     test('tests matching settings', () => {
-        const matches = InDoc.internal.getPossibleInDocSettings(sampleCode)
-            .map(a => a.slice(1).filter(a => !!a))
+        const matches = InDoc.internal
+            .getPossibleInDocSettings(sampleCode)
+            .map((a) => a.slice(1).filter((a) => !!a))
             .toArray();
-        expect(matches.map(a => a[0])).toEqual([
+        expect(matches.map((a) => a[0])).toEqual([
             'enableCompoundWords',
             'disableCompoundWords',
             'enableCOMPOUNDWords',
@@ -31,23 +32,19 @@ describe('Validate InDocSettings', () => {
     test('tests extracting in file settings for compound words', () => {
         expect(InDoc.getInDocumentSettings('')).toEqual({ id: 'in-doc-settings' });
         // 'cSpell:enableCompoundWords'
-        expect(
-            InDoc.getInDocumentSettings('cSpell:enableCompoundWords').allowCompoundWords
-        ).toBe(true);
+        expect(InDoc.getInDocumentSettings('cSpell:enableCompoundWords').allowCompoundWords).toBe(true);
         // 'cSpell:ENABLECompoundWords'
-        expect(
-            InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords').allowCompoundWords
-        ).toBe(true);
+        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords').allowCompoundWords).toBe(true);
         // 'cSpell:disableCompoundWords'
-        expect(
-            InDoc.getInDocumentSettings('cSpell:disableCompoundWords').allowCompoundWords
-        ).toBe(false);
+        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords').allowCompoundWords).toBe(false);
         // 'cSpell:disableCompoundWORDS'
+        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWORDS').allowCompoundWords).toBe(false);
         expect(
-            InDoc.getInDocumentSettings('cSpell:disableCompoundWORDS').allowCompoundWords
+            InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords').allowCompoundWords
         ).toBe(false);
-        expect(InDoc.getInDocumentSettings('cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords').allowCompoundWords).toBe(false);
-        expect(InDoc.getInDocumentSettings('cSpell:disableCompoundWords\ncSpell:enableCompoundWords').allowCompoundWords).toBe(true);
+        expect(
+            InDoc.getInDocumentSettings('cSpell:disableCompoundWords\ncSpell:enableCompoundWords').allowCompoundWords
+        ).toBe(true);
         expect(InDoc.getInDocumentSettings(sampleText).allowCompoundWords).toBe(true);
         expect(InDoc.getInDocumentSettings(sampleCode).allowCompoundWords).toBe(true);
     });
@@ -68,20 +65,14 @@ describe('Validate InDocSettings', () => {
 
     test('tests finding ignoreRegExp', () => {
         const matches = InDoc.getIgnoreRegExpFromDocument(sampleCode);
-        expect(matches).toEqual([
-            '/\\/\\/\\/.*/',
-            'w\\w+berry',
-            '/',
-            '\\w+s{4}\\w+',
-            '/faullts[/]?/ */',
-         ]);
-        const regExpList = matches.map(s => Text.stringToRegExp(s)).map(a => a && a.toString() || '');
+        expect(matches).toEqual(['/\\/\\/\\/.*/', 'w\\w+berry', '/', '\\w+s{4}\\w+', '/faullts[/]?/ */']);
+        const regExpList = matches.map((s) => Text.stringToRegExp(s)).map((a) => (a && a.toString()) || '');
         expect(regExpList).toEqual([
-            (/\/\/\/.*/g).toString(),
-            (/w\w+berry/gim).toString(),
-            (/\//gim).toString(),
-            (/\w+s{4}\w+/gim).toString(),
-            (/faullts[/]?\/ */g).toString(),
+            /\/\/\/.*/g.toString(),
+            /w\w+berry/gim.toString(),
+            /\//gim.toString(),
+            /\w+s{4}\w+/gim.toString(),
+            /faullts[/]?\/ */g.toString(),
         ]);
         const ranges = TextRange.findMatchingRangesForPatterns(matches, sampleCode);
         // console.log(ranges);

@@ -4,29 +4,18 @@ import * as path from 'path';
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 
 describe('Validate the iterateWordsFromFile', () => {
-    const pReaderDutch = createReader(
-        path.join(samples, 'hunspell', 'Dutch.aff'),
-        {}
-    );
+    const pReaderDutch = createReader(path.join(samples, 'hunspell', 'Dutch.aff'), {});
 
     test('streamWordsFromFile: hunspell', async () => {
-        const reader = await createReader(
-            path.join(samples, 'hunspell', 'example.aff'),
-            {}
-        );
+        const reader = await createReader(path.join(samples, 'hunspell', 'example.aff'), {});
         expect(reader.size).toBe(3);
         const results = [...reader];
         // this might break if the processing order of hunspell changes.
-        expect(results.join(' ')).toBe(
-            'hello tried try rework reworked work worked'
-        );
+        expect(results.join(' ')).toBe('hello tried try rework reworked work worked');
     });
 
     test('stream words from trie', async () => {
-        const reader = await createReader(
-            path.join(samples, 'cities.trie.gz'),
-            {}
-        );
+        const reader = await createReader(path.join(samples, 'cities.trie.gz'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader];
         expect(results.join('|')).toBe(
@@ -45,18 +34,12 @@ describe('Validate the iterateWordsFromFile', () => {
     });
 
     test('annotatedWords: hunspell', async () => {
-        const reader = await createReader(
-            path.join(samples, 'hunspell', 'example.aff'),
-            {}
-        );
+        const reader = await createReader(path.join(samples, 'hunspell', 'example.aff'), {});
         expect(reader.size).toBe(3);
         const results = [...reader.annotatedWords()];
         // this might break if the processing order of hunspell changes.
         expect(results).toEqual(
-            (
-                'hello tried try rework reworked work worked ' +
-                '~hello ~tried ~try ~rework ~reworked ~work ~worked'
-            )
+            ('hello tried try rework reworked work worked ' + '~hello ~tried ~try ~rework ~reworked ~work ~worked')
                 .split(' ')
                 .sort()
         );
@@ -72,16 +55,11 @@ describe('Validate the iterateWordsFromFile', () => {
                 .filter((word) => regBoek.test(word))
                 .take(8),
         ];
-        expect(results.join(' ')).toBe(
-            '+boek +boek+ +boek- +boek-+ boek boek+ boek- boek-+'
-        );
+        expect(results.join(' ')).toBe('+boek +boek+ +boek- +boek-+ boek boek+ boek- boek-+');
     });
 
     test('annotatedWords: trie', async () => {
-        const reader = await createReader(
-            path.join(samples, 'cities.trie.gz'),
-            {}
-        );
+        const reader = await createReader(path.join(samples, 'cities.trie.gz'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader.annotatedWords()];
         expect(results.join('|')).toBe(
@@ -102,10 +80,7 @@ describe('Validate the iterateWordsFromFile', () => {
     });
 
     test('annotatedWords: text', async () => {
-        const reader = await createReader(
-            path.join(samples, 'sampleCodeDic.txt'),
-            {}
-        );
+        const reader = await createReader(path.join(samples, 'sampleCodeDic.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader.annotatedWords()];
         // cspell:ignore codecode errorerror codemsg

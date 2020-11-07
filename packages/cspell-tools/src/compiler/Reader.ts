@@ -1,14 +1,7 @@
 import { Sequence, genSequence, operators } from 'gensequence';
 import * as HR from 'hunspell-reader';
 import * as fs from 'fs-extra';
-import {
-    Trie,
-    importTrie,
-    COMPOUND,
-    OPTIONAL_COMPOUND,
-    NORMALIZED,
-    FORBID,
-} from 'cspell-trie-lib';
+import { Trie, importTrie, COMPOUND, OPTIONAL_COMPOUND, NORMALIZED, FORBID } from 'cspell-trie-lib';
 import * as zlib from 'zlib';
 import { AffWord } from 'hunspell-reader/dist/aff';
 
@@ -19,10 +12,7 @@ export interface ReaderOptions {
     maxDepth?: number;
 }
 
-type ReaderFn = (
-    filename: string,
-    options: ReaderOptions
-) => Promise<BaseReader>;
+type ReaderFn = (filename: string, options: ReaderOptions) => Promise<BaseReader>;
 
 // cspell:word dedupe
 const DEDUPE_SIZE = 1000;
@@ -52,10 +42,7 @@ const readers: ReaderSelector[] = [
     { test: regHunspellFile, method: readHunspellFiles },
 ];
 
-function findMatchingReader(
-    filename: string,
-    options: ReaderOptions
-): Promise<BaseReader> {
+function findMatchingReader(filename: string, options: ReaderOptions): Promise<BaseReader> {
     for (const reader of readers) {
         if (reader.test.test(filename)) {
             return reader.method(filename, options);
@@ -64,22 +51,16 @@ function findMatchingReader(
     return textFileReader(filename, options);
 }
 
-export async function createReader(
-    filename: string,
-    options: ReaderOptions
-): Promise<Reader> {
+export async function createReader(filename: string, options: ReaderOptions): Promise<Reader> {
     const baseReader = await findMatchingReader(filename, options);
     return Object.assign(baseReader, {
-        [Symbol.iterator]: options.useAnnotation
-            ? baseReader.annotatedWords
-            : baseReader.rawWords,
+        [Symbol.iterator]: options.useAnnotation ? baseReader.annotatedWords : baseReader.rawWords,
     });
 }
 
 export function createArrayReader(lines: string[]): BaseReader {
     const rawWords = () => genSequence(lines);
-    const annotatedWords = () =>
-        genSequence(lines).pipe(_mapText, dedupeAndSort);
+    const annotatedWords = () => genSequence(lines).pipe(_mapText, dedupeAndSort);
 
     return {
         size: lines.length,
@@ -88,33 +69,20 @@ export function createArrayReader(lines: string[]): BaseReader {
     };
 }
 
-export async function readHunspellFiles(
-    filename: string,
-    options: ReaderOptions
-): Promise<BaseReader> {
+export async function readHunspellFiles(filename: string, options: ReaderOptions): Promise<BaseReader> {
     const dicFile = filename.replace(regHunspellFile, '.dic');
     const affFile = filename.replace(regHunspellFile, '.aff');
 
-    const reader = await HR.IterableHunspellReader.createFromFiles(
-        affFile,
-        dicFile
-    );
-    reader.maxDepth =
-        options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
+    const reader = await HR.IterableHunspellReader.createFromFiles(affFile, dicFile);
+    reader.maxDepth = options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
 
-    const normalizeAndDedupe = operators.pipe(
-        _stripCaseAndAccents,
-        dedupeAndSort
-    );
+    const normalizeAndDedupe = operators.pipe(_stripCaseAndAccents, dedupeAndSort);
     const rawWords = () => reader.seqWords();
 
     return {
         size: reader.dic.length,
         annotatedWords() {
-            return reader
-                .seqAffWords()
-                .pipe(_mapAffWords)
-                .pipe(normalizeAndDedupe);
+            return reader.seqAffWords().pipe(_mapAffWords).pipe(normalizeAndDedupe);
         },
         rawWords,
     };
@@ -136,28 +104,18 @@ async function trieFileReader(filename: string): Promise<BaseReader> {
 function readTextFile(filename: string): Promise<string[]> {
     const lines = fs
         .readFile(filename)
-        .then((buffer) =>
-            /\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer
-        )
+        .then((buffer) => (/\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer))
         .then((buffer) => buffer.toString('utf8'))
         .then((content) => content.split(/\r?\n/g));
     return lines;
 }
 
-async function textFileReader(
-    filename: string,
-    options: ReaderOptions
-): Promise<BaseReader> {
+async function textFileReader(filename: string, _options: ReaderOptions): Promise<BaseReader> {
     const lines = await readTextFile(filename);
     return createArrayReader(lines);
 }
 
-const _mapText = operators.pipe(
-    _comments,
-    _compoundBegin,
-    _compoundEnd,
-    _stripCaseAndAccents
-);
+const _mapText = operators.pipe(_comments, _compoundBegin, _compoundEnd, _stripCaseAndAccents);
 
 function* _comments(lines: Iterable<string>): Generator<AnnotatedWord> {
     for (const line of lines) {
@@ -190,9 +148,7 @@ function* _compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
     }
 }
 
-function* _stripCaseAndAccents(
-    words: Iterable<AnnotatedWord>
-): Generator<AnnotatedWord> {
+function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Generator<AnnotatedWord> {
     for (const word of words) {
         // Words are normalized to the compact format: e + ` => è
         yield word.normalize();
@@ -207,9 +163,7 @@ function* _stripCaseAndAccents(
     }
 }
 
-function* dedupeAndSort(
-    words: Iterable<AnnotatedWord>
-): Iterable<AnnotatedWord> {
+function* dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
     const buffer: AnnotatedWord[] = [];
 
     function sortDedupeClear() {

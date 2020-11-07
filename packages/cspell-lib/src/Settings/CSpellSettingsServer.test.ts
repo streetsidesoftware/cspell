@@ -31,13 +31,13 @@ describe('Validate CSpellSettingsServer', () => {
             ignoreRegExpList: [],
             dictionaries: [],
             dictionaryDefinitions: [],
-            source: { name: 'Left|Right', sources: [left, right]},
+            source: { name: 'Left|Right', sources: [left, right] },
         });
     });
 
     test('tests mergeSettings', () => {
         const left = { id: 'left' };
-        const enabled = { id: 'enabledId', name: 'enabledName', enabled: true};
+        const enabled = { id: 'enabledId', name: 'enabledName', enabled: true };
         expect(mergeSettings(left, enabled)).toEqual({
             enabled: true,
             name: '|enabledName',
@@ -52,7 +52,7 @@ describe('Validate CSpellSettingsServer', () => {
             ignoreRegExpList: [],
             dictionaries: [],
             dictionaryDefinitions: [],
-            source: { name: 'left|enabledName', sources: [left, enabled]},
+            source: { name: 'left|enabledName', sources: [left, enabled] },
         });
     });
 
@@ -75,12 +75,12 @@ describe('Validate CSpellSettingsServer', () => {
             ignoreRegExpList: [],
             dictionaries: [],
             dictionaryDefinitions: [],
-            source: { name: 'left|right', sources: [left, right]},
+            source: { name: 'left|right', sources: [left, right] },
         });
     });
 
     test('tests mergeSettings', () => {
-        expect(mergeSettings({enabled: true}, {enabled: false})).toEqual({
+        expect(mergeSettings({ enabled: true }, { enabled: false })).toEqual({
             enabled: false,
             name: '|',
             id: '|',
@@ -94,7 +94,7 @@ describe('Validate CSpellSettingsServer', () => {
             ignoreRegExpList: [],
             dictionaries: [],
             dictionaryDefinitions: [],
-            source: { name: 'left|right', sources: [{enabled: true}, {enabled: false}]},
+            source: { name: 'left|right', sources: [{ enabled: true }, { enabled: false }] },
         });
     });
 
@@ -151,7 +151,7 @@ describe('Validate CSpellSettingsServer', () => {
 
     test('tests loading a cSpell.json with a missing import file', () => {
         const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import-missing.json');
-        expect(() => readSettings(filename)).toThrow('Cannot find module \'../intentionally-missing-file.json\'');
+        expect(() => readSettings(filename)).toThrow("Cannot find module '../intentionally-missing-file.json'");
     });
 
     test('makes sure global settings is an object', () => {
@@ -171,9 +171,8 @@ describe('Validate CSpellSettingsServer', () => {
     test('test the loaded defaults contain expected settings', () => {
         const settings = getDefaultSettings();
         const sources = getSources(settings);
-        const sourceNames = sources
-            .map(s => s.name || '?');
-        expect(sourceNames).toEqual(expect.arrayContaining([_defaultSettings.name!]));
+        const sourceNames = sources.map((s) => s.name || '?');
+        expect(sourceNames).toEqual(expect.arrayContaining([_defaultSettings.name]));
     });
 });
 
@@ -191,23 +190,24 @@ describe('Validate Overrides', () => {
             { f: '/cspell-dicts/nl_NL/Dutch.txt', g: '**/nl_NL/**', e: true },
         ];
 
-        tests.forEach(({f, g, e}) => // f: ${f}, g: ${g}, e: ${e}
-        expect(checkFilenameMatchesGlob(f, g)).toBe(e));
+        tests.forEach((
+            { f, g, e } // f: ${f}, g: ${g}, e: ${e}
+        ) => expect(checkFilenameMatchesGlob(f, g)).toBe(e));
     });
 
     test('test calcOverrideSettings', () => {
-        interface Test { f: string; e: [keyof CSpellUserSettings, string][]; }
-        const tests: Test[] = [
-            { f: 'nested/dir/spell.test.ts', e: [['languageId', 'typescript']]},
-        ];
+        interface Test {
+            f: string;
+            e: [keyof CSpellUserSettings, string][];
+        }
+        const tests: Test[] = [{ f: 'nested/dir/spell.test.ts', e: [['languageId', 'typescript']] }];
 
-        tests.forEach(({f, e}) => {
+        tests.forEach(({ f, e }) => {
             const r = calcOverrideSettings(sampleSettings, f);
             e.forEach(([k, v]) => expect(r[k]).toBe(v));
         });
     });
 });
-
 
 const sampleSettings: CSpellUserSettings = {
     language: 'en',

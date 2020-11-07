@@ -4,9 +4,7 @@ import { Repository } from './configDef';
 import * as Shell from 'shelljs';
 import * as Diff from 'jest-diff';
 
-export const snapshotDir = Path.resolve(
-    Path.join(__dirname, '..', 'snapshots')
-);
+export const snapshotDir = Path.resolve(Path.join(__dirname, '..', 'snapshots'));
 const snapshotFileName = 'snapshot.txt';
 
 export function writeSnapshot(rep: Repository, output: string): void {
@@ -24,11 +22,7 @@ export interface SnapshotCompareResult {
     diff?: string;
 }
 
-export function checkAgainstSnapshot(
-    rep: Repository,
-    output: string,
-    update: boolean
-): SnapshotCompareResult {
+export function checkAgainstSnapshot(rep: Repository, output: string, update: boolean): SnapshotCompareResult {
     if (update) {
         writeSnapshot(rep, output);
         return { match: true };

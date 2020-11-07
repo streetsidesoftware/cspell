@@ -8,8 +8,10 @@ describe('Validate util', () => {
     });
 
     test('tests uniqueFilterFnGenerator with extractor', () => {
-        interface Word { word: string; }
-        const values: Word[] = [{ word: 'hello'}, {word: 'there'}, {word: 'hello'}];
+        interface Word {
+            word: string;
+        }
+        const values: Word[] = [{ word: 'hello' }, { word: 'there' }, { word: 'hello' }];
         const uniqFilter = util.uniqueFilterFnGenerator((w: Word) => w.word);
         expect(values.filter(uniqFilter)).toEqual([values[0], values[1]]);
     });
@@ -22,7 +24,11 @@ describe('Validate util', () => {
 
     test('tests clean up obj', () => {
         const obj = {
-            a: undefined, b: 1, c: true, d: undefined, e: 'str'
+            a: undefined,
+            b: 1,
+            c: true,
+            d: undefined,
+            e: 'str',
         };
         const cleanObj = util.clean(obj);
         expect([...Object.keys(cleanObj)]).toEqual(['b', 'c', 'e']);

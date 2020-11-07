@@ -1,11 +1,6 @@
 import { TrieRoot } from './TrieNode';
 import { isWordTerminationNode } from './util';
-import {
-    CompoundWordsMethod,
-    hintedWalker,
-    JOIN_SEPARATOR,
-    WORD_SEPARATOR,
-} from './walker';
+import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 import { visualLetterMap } from './orthography';
 
 const defaultMaxNumberSuggestions = 10;
@@ -21,10 +16,7 @@ const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 
 const collator = new Intl.Collator();
 
-const regexSeparator = new RegExp(
-    regexQuote(JOIN_SEPARATOR) + '|' + regexQuote(WORD_SEPARATOR),
-    'g'
-);
+const regexSeparator = new RegExp(regexQuote(JOIN_SEPARATOR) + '|' + regexQuote(WORD_SEPARATOR), 'g');
 
 const wordLengthCost = [0, 50, 25, 5, 0];
 const extraWordsCost = 5;
@@ -44,11 +36,7 @@ export interface SuggestionResult {
  * If the iterator.next() returns `undefined`, it is to request a value for maxCost.
  */
 // next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult>;
-export type SuggestionIterator = Generator<
-    SuggestionResult,
-    undefined,
-    MaxCost | undefined
->;
+export type SuggestionIterator = Generator<SuggestionResult, undefined, MaxCost | undefined>;
 
 export function suggest(
     root: TrieRoot,
@@ -57,12 +45,7 @@ export function suggest(
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
     numChanges: number = maxNumChanges
 ): SuggestionResult[] {
-    const collector = suggestionCollector(
-        word,
-        maxNumSuggestions,
-        undefined,
-        numChanges
-    );
+    const collector = suggestionCollector(word, maxNumSuggestions, undefined, numChanges);
     collector.collect(genSuggestions(root, word, compoundMethod));
     return collector.suggestions;
 }
@@ -107,10 +90,7 @@ export function* genCompoundableSuggestions(
         [JOIN_SEPARATOR, insertSpaceCost],
     ]);
 
-    let costLimit: MaxCost = Math.min(
-        (bc * word.length) / 2,
-        bc * maxNumChanges
-    );
+    let costLimit: MaxCost = Math.min((bc * word.length) / 2, bc * maxNumChanges);
     const a = 0;
     let b = 0;
     for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
@@ -132,9 +112,10 @@ export function* genCompoundableSuggestions(
             const mxRange = matrix[depth].slice(a, b + 1);
             const mxMin = Math.min(...mxRange);
             const tag = [a].concat(mxRange.map((c) => c - mxMin)).join();
-            if (historyTags.has(tag) && historyTags.get(tag)!.m <= mxMin) {
+            const ht = historyTags.get(tag);
+            if (ht && ht.m <= mxMin) {
                 goDeeper = false;
-                const { i, w, m } = historyTags.get(tag)!;
+                const { i, w, m } = ht;
                 if (i >= history.length) {
                     continue;
                 }
@@ -246,15 +227,8 @@ export function* genCompoundableSuggestions(
 }
 
 // comparison function for Suggestion Results.
-export function compSuggestionResults(
-    a: SuggestionResult,
-    b: SuggestionResult
-): number {
-    return (
-        a.cost - b.cost ||
-        a.word.length - b.word.length ||
-        collator.compare(a.word, b.word)
-    );
+export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
+    return a.cost - b.cost || a.word.length - b.word.length || collator.compare(a.word, b.word);
 }
 
 export interface SuggestionCollector {
@@ -275,10 +249,7 @@ export function suggestionCollector(
     includeTies = false
 ): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = Math.min(
-        (baseCost * wordToMatch.length) / 2,
-        baseCost * changeLimit
-    );
+    let maxCost: number = Math.min((baseCost * wordToMatch.length) / 2, baseCost * changeLimit);
     maxNumSuggestions = Math.max(maxNumSuggestions, 0) || 0;
 
     function dropMax() {
@@ -300,9 +271,7 @@ export function suggestionCollector(
     function adjustCost(sug: SuggestionResult): SuggestionResult {
         const words = sug.word.split(regexSeparator);
         const extraCost =
-            words
-                .map((w) => wordLengthCost[w.length] || 0)
-                .reduce((a, b) => a + b, 0) +
+            words.map((w) => wordLengthCost[w.length] || 0).reduce((a, b) => a + b, 0) +
             (words.length - 1) * extraWordsCost;
         return { word: sug.word, cost: sug.cost + extraCost };
     }
@@ -310,8 +279,8 @@ export function suggestionCollector(
     function collector(suggestion: SuggestionResult): MaxCost {
         const { word, cost } = adjustCost(suggestion);
         if (cost <= maxCost && filter(suggestion.word, cost)) {
-            if (sugs.has(word)) {
-                const known = sugs.get(word)!;
+            const known = sugs.get(word);
+            if (known) {
                 known.cost = Math.min(known.cost, cost);
             } else {
                 sugs.set(word, { word, cost });

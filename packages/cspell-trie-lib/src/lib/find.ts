@@ -1,10 +1,6 @@
 import { TrieNode, FLAG_WORD } from './TrieNode';
 import { mergeDefaults } from './util';
-import {
-    FORBID_PREFIX,
-    COMPOUND_FIX,
-    CASE_INSENSITIVE_PREFIX,
-} from './constants';
+import { FORBID_PREFIX, COMPOUND_FIX, CASE_INSENSITIVE_PREFIX } from './constants';
 
 export type CompoundModes = 'none' | 'compound' | 'legacy';
 
@@ -42,9 +38,7 @@ const _defaultFindOptions: FindOptions = {
 };
 
 const arrayCompoundModes: CompoundModes[] = ['none', 'compound', 'legacy'];
-const knownCompoundModes = new Map<CompoundModes, CompoundModes>(
-    arrayCompoundModes.map((a) => [a, a])
-);
+const knownCompoundModes = new Map<CompoundModes, CompoundModes>(arrayCompoundModes.map((a) => [a, a]));
 
 /**
  *
@@ -52,15 +46,9 @@ const knownCompoundModes = new Map<CompoundModes, CompoundModes>(
  * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
  * @param options
  */
-export function findWord(
-    root: TrieNode,
-    word: string,
-    options?: PartialFindOptions
-): FindFullResult {
+export function findWord(root: TrieNode, word: string, options?: PartialFindOptions): FindFullResult {
     const _options = mergeDefaults(options, _defaultFindOptions);
-    const compoundMode =
-        knownCompoundModes.get(_options.compoundMode) ||
-        _defaultFindOptions.compoundMode;
+    const compoundMode = knownCompoundModes.get(_options.compoundMode) || _defaultFindOptions.compoundMode;
     // word = _options.matchCase ? normalizeWord(word) : normalizeWordToLowercase(word);
 
     function __findCompound(r: TrieNode): FindFullResult {
@@ -94,9 +82,7 @@ export function findWord(
         return result;
     }
 
-    const r = _options.matchCase
-        ? root
-        : root.c?.get(_options.caseInsensitivePrefix) || root;
+    const r = _options.matchCase ? root : root.c?.get(_options.caseInsensitivePrefix) || root;
     switch (compoundMode) {
         case 'none':
             return __findExact(r);
@@ -124,6 +110,7 @@ export function findCompoundNode(
     let compoundUsed = false;
     let i = 0;
     let node: TrieNode | undefined;
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         const s = stack[i];
         const h = w[i++];
@@ -136,11 +123,7 @@ export function findCompoundNode(
             node = node || c;
 
             // We did not find the word backup and take the first unused compound branch
-            while (
-                --i > 0 &&
-                (stack[i].usedCompound ||
-                    !stack[i].n?.c?.has(compoundCharacter))
-            ) {
+            while (--i > 0 && (stack[i].usedCompound || !stack[i].n?.c?.has(compoundCharacter))) {
                 /* empty */
             }
             if (i > 0) {
@@ -162,16 +145,8 @@ export function findCompoundNode(
     return result;
 }
 
-export function findCompoundWord(
-    root: TrieNode | undefined,
-    word: string,
-    compoundCharacter: string
-): FindResult {
-    const { found, compoundUsed, node } = findCompoundNode(
-        root,
-        word,
-        compoundCharacter
-    );
+export function findCompoundWord(root: TrieNode | undefined, word: string, compoundCharacter: string): FindResult {
+    const { found, compoundUsed, node } = findCompoundNode(root, word, compoundCharacter);
     // Was it a word?
     if (!node || !node.f) {
         return { found: false, compoundUsed };
@@ -179,18 +154,12 @@ export function findCompoundWord(
     return { found, compoundUsed };
 }
 
-export function findWordExact(
-    root: TrieNode | undefined,
-    word: string
-): boolean {
+export function findWordExact(root: TrieNode | undefined, word: string): boolean {
     const { node } = findNodeExact(root, word);
     return (node?.f || 0) === FLAG_WORD;
 }
 
-export function findNodeExact(
-    root: TrieNode | undefined,
-    word: string
-): FindNodeResult {
+export function findNodeExact(root: TrieNode | undefined, word: string): FindNodeResult {
     const w = word;
     let n: TrieNode | undefined = root;
     let i = 0;
@@ -214,14 +183,13 @@ export function findLegacyCompoundNode(
     minCompoundLength: number
 ): FindFullNodeResult {
     // Approach - do a depth first search for the matching word.
-    const stack: FindLegacyCompoundChain[] = [
-        { n: root, usedCompound: true, subLength: 0, isCompound: false },
-    ];
+    const stack: FindLegacyCompoundChain[] = [{ n: root, usedCompound: true, subLength: 0, isCompound: false }];
     const compoundRoot = root;
     const w = word;
     let compoundUsed = false;
     let i = 0;
     let node: TrieNode | undefined;
+    // eslint-disable-next-line no-constant-condition
     while (true) {
         const s = stack[i];
         const h = w[i++];
@@ -238,11 +206,7 @@ export function findLegacyCompoundNode(
             // We did not find the word backup and take the first unused compound branch
             while (--i > 0) {
                 const s = stack[i];
-                if (
-                    !s.usedCompound &&
-                    s.n?.f &&
-                    s.subLength >= minCompoundLength
-                ) {
+                if (!s.usedCompound && s.n?.f && s.subLength >= minCompoundLength) {
                     break;
                 }
             }
@@ -267,23 +231,11 @@ export function findLegacyCompoundNode(
     return result;
 }
 
-export function findLegacyCompoundWord(
-    root: TrieNode | undefined,
-    word: string,
-    minCompoundLength = 3
-): FindResult {
-    const { found, compoundUsed } = findLegacyCompoundNode(
-        root,
-        word,
-        minCompoundLength
-    );
+export function findLegacyCompoundWord(root: TrieNode | undefined, word: string, minCompoundLength = 3): FindResult {
+    const { found, compoundUsed } = findLegacyCompoundNode(root, word, minCompoundLength);
     return { found, compoundUsed };
 }
 
-export function isForbiddenWord(
-    root: TrieNode | undefined,
-    word: string,
-    forbiddenPrefix: string
-): boolean {
+export function isForbiddenWord(root: TrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
     return findWordExact(root?.c?.get(forbiddenPrefix), word);
 }

@@ -6,23 +6,8 @@ describe('Validate BufferLines', () => {
         expect(r.join('')).toBe(sampleWords.join(',') + ',');
     });
     test('bufferLines', () => {
-        const r = [
-            ...bufferLines(
-                bufferLines(
-                    concat(sampleWords, sampleWords.concat().reverse()),
-                    1,
-                    ','
-                ),
-                10,
-                ''
-            ),
-        ];
-        expect(r.join('')).toBe(
-            sampleWords.join(',') +
-                ',' +
-                sampleWords.concat().reverse().join(',') +
-                ','
-        );
+        const r = [...bufferLines(bufferLines(concat(sampleWords, sampleWords.concat().reverse()), 1, ','), 10, '')];
+        expect(r.join('')).toBe(sampleWords.join(',') + ',' + sampleWords.concat().reverse().join(',') + ',');
     });
 });
 

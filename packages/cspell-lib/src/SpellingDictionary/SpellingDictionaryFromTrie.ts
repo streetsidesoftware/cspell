@@ -1,23 +1,44 @@
-import { Trie, SuggestionCollector, suggestionCollector, SuggestionResult, CompoundWordsMethod, importTrie } from 'cspell-trie-lib';
+import {
+    Trie,
+    SuggestionCollector,
+    suggestionCollector,
+    SuggestionResult,
+    CompoundWordsMethod,
+    importTrie,
+} from 'cspell-trie-lib';
 import { createMapper } from '../util/repMap';
 import { getDefaultSettings } from '../Settings';
 import { memorizer } from '../util/Memorizer';
-import { hasOptionToSearchOption, wordSearchForms, SuggestArgs, defaultNumSuggestions, PREFIX_NO_CASE, regexPrefix, impersonateCollector } from './SpellingDictionaryMethods';
+import {
+    hasOptionToSearchOption,
+    wordSearchForms,
+    SuggestArgs,
+    defaultNumSuggestions,
+    PREFIX_NO_CASE,
+    regexPrefix,
+    impersonateCollector,
+} from './SpellingDictionaryMethods';
 import { SpellingDictionary, HasOptions, SuggestOptions, SpellingDictionaryOptions } from './SpellingDictionary';
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly cachedWordsLimit = 50000;
-    private _size: number = 0;
+    private _size = 0;
     readonly knownWords = new Set<string>();
     readonly unknownWords = new Set<string>();
     readonly mapWord: (word: string) => string;
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
-    constructor(readonly trie: Trie, readonly name: string, readonly options: SpellingDictionaryOptions = {}, readonly source = 'from trie', size?: number) {
+    constructor(
+        readonly trie: Trie,
+        readonly name: string,
+        readonly options: SpellingDictionaryOptions = {},
+        readonly source = 'from trie',
+        size?: number
+    ) {
         this.mapWord = createMapper(options.repMap || []);
         this.isDictionaryCaseSensitive = options.caseSensitive || !trie.isLegacy;
         this._size = size || 0;
     }
-    public get size() {
+    public get size(): number {
         if (!this._size) {
             // walk the trie and get the approximate size.
             const i = this.trie.iterate();
@@ -33,15 +54,17 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         }
         return this._size;
     }
-    public has(word: string, hasOptions?: HasOptions) {
+    public has(word: string, hasOptions?: HasOptions): boolean {
         const searchOptions = hasOptionToSearchOption(hasOptions);
-        const useCompounds = searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
+        const useCompounds =
+            searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
         const { ignoreCase = true } = searchOptions;
         return this._has(word, useCompounds, ignoreCase);
     }
     private _has = memorizer(
         (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
-        this.hasAnyForm(word, useCompounds, ignoreCase), SpellingDictionaryFromTrie.cachedWordsLimit
+            this.hasAnyForm(word, useCompounds, ignoreCase),
+        SpellingDictionaryFromTrie.cachedWordsLimit
     );
     private hasAnyForm(word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) {
         const mWord = this.mapWord(word);
@@ -60,33 +83,44 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         }
         return false;
     }
-    public suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
+    public suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): SuggestionResult[];
     public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(...args: SuggestArgs): SuggestionResult[] {
         const [word, options, compoundMethod, numChanges] = args;
-        const suggestOptions: SuggestOptions = (typeof options === 'object')
-            ? options
-            : {
-                numSuggestions: options,
-                compoundMethod,
-                numChanges
-            };
+        const suggestOptions: SuggestOptions =
+            typeof options === 'object'
+                ? options
+                : {
+                      numSuggestions: options,
+                      compoundMethod,
+                      numChanges,
+                  };
         return this._suggest(word, suggestOptions);
     }
     private _suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[] {
-        const { numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions, numChanges, ignoreCase = true, } = suggestOptions;
+        const {
+            numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
+            numChanges,
+            ignoreCase = true,
+        } = suggestOptions;
         function filter(word: string): boolean {
             return ignoreCase || word[0] !== PREFIX_NO_CASE;
         }
         const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
         this.genSuggestions(collector, suggestOptions);
-        return collector.suggestions.map(r => ({ ...r, word: r.word.replace(regexPrefix, '') }));
+        return collector.suggestions.map((r) => ({ ...r, word: r.word.replace(regexPrefix, '') }));
     }
     public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
-        const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS, ignoreCase = true, } = suggestOptions;
+        const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS, ignoreCase = true } = suggestOptions;
         const _compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        wordSearchForms(collector.word, this.isDictionaryCaseSensitive, ignoreCase)
-            .forEach(w => this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod));
+        wordSearchForms(collector.word, this.isDictionaryCaseSensitive, ignoreCase).forEach((w) =>
+            this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod)
+        );
     }
 }
 

@@ -15,17 +15,11 @@ export function readTrie(name: string): Promise<Trie> {
 }
 
 const sampleTries = new Map<string, Promise<Trie>>();
-const samplesLocation = path.join(
-    __dirname,
-    ...'../../../Samples/dicts'.split('/')
-);
+const samplesLocation = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
 
 export function readSampleTrie(name: string): Promise<Trie> {
     if (!sampleTries.has(name)) {
-        sampleTries.set(
-            name,
-            readTrieFile(path.resolve(samplesLocation, name))
-        );
+        sampleTries.set(name, readTrieFile(path.resolve(samplesLocation, name)));
     }
     return sampleTries.get(name)!;
 }

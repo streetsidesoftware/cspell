@@ -37,6 +37,7 @@ interface CompileTrieOptions extends CompileCommonOptions {
     trie3: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const log: Logger = (message?: any, ...optionalParams: any[]) => {
     console.log(`${new Date().toISOString()} ${message}`, ...optionalParams);
 };
@@ -48,7 +49,7 @@ function collect(value: string, previous: string[]) {
 }
 
 export function run(program: program.Command, argv: string[]): Promise<void> {
-    (program as any).exitOverride();
+    program.exitOverride();
 
     return new Promise((resolve, rejects) => {
         program.version(npmPackage.version);
@@ -60,22 +61,10 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
                 '-o, --output <path>',
                 'Specify the output directory, otherwise files are written back to the same location.'
             )
-            .option(
-                '-n, --no-compress',
-                'By default the files are Gzipped, this will turn that off.'
-            )
-            .option(
-                '-m, --max_depth <limit>',
-                'Maximum depth to apply suffix rules.'
-            )
-            .option(
-                '-M, --merge <target>',
-                'Merge all files into a single target file (extensions are applied)'
-            )
-            .option(
-                '-s, --no-split',
-                'Treat each line as a dictionary entry, do not split'
-            )
+            .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
+            .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
+            .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
+            .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
             .option(
                 '-x, --experimental <flag>',
                 'Experimental flags, used for testing new concepts. Flags: compound',
@@ -86,42 +75,26 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
             .action((src: string[], options: CompileOptions) => {
                 const experimental = new Set(options.experimental);
                 const skipNormalization = experimental.has('compound');
-                const result = processAction(
-                    src,
-                    '.txt',
-                    options,
-                    async (src, dst) => {
-                        return compileWordList(src, dst, {
-                            splitWords: options.split,
-                            sort: options.sort,
-                            skipNormalization,
-                        }).then(() => src);
-                    }
-                );
+                const result = processAction(src, '.txt', options, async (src, dst) => {
+                    return compileWordList(src, dst, {
+                        splitWords: options.split,
+                        sort: options.sort,
+                        skipNormalization,
+                    }).then(() => src);
+                });
                 resolve(result);
             });
 
         program
             .command('compile-trie <src...>')
-            .description(
-                'Compile words lists or Hunspell dictionary into trie files used by cspell.'
-            )
+            .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
             .option(
                 '-o, --output <path>',
                 'Specify the output directory, otherwise files are written back to the same location.'
             )
-            .option(
-                '-m, --max_depth <limit>',
-                'Maximum depth to apply suffix rules.'
-            )
-            .option(
-                '-M, --merge <target>',
-                'Merge all files into a single target file (extensions are applied)'
-            )
-            .option(
-                '-n, --no-compress',
-                'By default the files are Gzipped, this will turn that off.'
-            )
+            .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
+            .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
+            .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
             .option(
                 '-x, --experimental <flag>',
                 'Experimental flags, used for testing new concepts. Flags: compound',
@@ -133,14 +106,9 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
                 const experimental = new Set(options.experimental);
                 const skipNormalization = experimental.has('compound');
                 const compileOptions = { ...options, skipNormalization };
-                const result = processAction(
-                    src,
-                    '.trie',
-                    options,
-                    async (words: Sequence<string>, dst) => {
-                        return compileTrie(words, dst, compileOptions);
-                    }
-                );
+                const result = processAction(src, '.trie', options, async (words: Sequence<string>, dst) => {
+                    return compileTrie(words, dst, compileOptions);
+                });
                 resolve(result);
             });
 
@@ -171,7 +139,7 @@ async function processAction(
     src: string[],
     fileExt: '.txt' | '.trie',
     options: CompileCommonOptions,
-    action: (words: Sequence<string>, dst: string) => Promise<any>
+    action: (words: Sequence<string>, dst: string) => Promise<unknown>
 ): Promise<void> {
     console.log(
         'Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
@@ -201,50 +169,29 @@ async function processAction(
         });
 
     const r = options.merge
-        ? processFiles(
-              action,
-              filesToProcess,
-              toMergeTargetFile(options.merge, options.output, ext)
-          )
-        : processFilesIndividually(action, filesToProcess, (s) =>
-              toTargetFile(s, options.output, ext)
-          );
+        ? processFiles(action, filesToProcess, toMergeTargetFile(options.merge, options.output, ext))
+        : processFilesIndividually(action, filesToProcess, (s) => toTargetFile(s, options.output, ext));
     await r;
     log(`Complete.`);
 }
 
 function toFilename(name: string, ext: string) {
-    return (
-        path
-            .basename(name)
-            .replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext
-    );
+    return path.basename(name).replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
 }
 
-function toTargetFile(
-    filename: string,
-    destination: string | undefined,
-    ext: string
-) {
+function toTargetFile(filename: string, destination: string | undefined, ext: string) {
     const outFileName = toFilename(filename, ext);
     const dir = destination ?? path.dirname(filename);
     return path.join(dir, outFileName);
 }
 
-function toMergeTargetFile(
-    filename: string,
-    destination: string | undefined,
-    ext: string
-) {
-    const outFileName = path.join(
-        path.dirname(filename),
-        toFilename(filename, ext)
-    );
+function toMergeTargetFile(filename: string, destination: string | undefined, ext: string) {
+    const outFileName = path.join(path.dirname(filename), toFilename(filename, ext));
     return path.resolve(destination ?? '.', outFileName);
 }
 
 async function processFilesIndividually(
-    action: (words: Sequence<string>, dst: string) => Promise<any>,
+    action: (words: Sequence<string>, dst: string) => Promise<unknown>,
     filesToProcess: Sequence<Promise<FileToProcess>>,
     srcToTarget: (src: string) => string
 ) {
@@ -262,7 +209,7 @@ async function processFilesIndividually(
 }
 
 async function processFiles(
-    action: (words: Sequence<string>, dst: string) => Promise<any>,
+    action: (words: Sequence<string>, dst: string) => Promise<unknown>,
     filesToProcess: Sequence<Promise<FileToProcess>>,
     mergeTarget: string
 ) {

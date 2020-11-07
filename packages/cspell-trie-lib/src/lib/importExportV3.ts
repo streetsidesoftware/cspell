@@ -27,11 +27,7 @@ const characterMap = new Map([...specialCharacterMap].map((a) => [a[1], a[0]]));
 export const DATA = '__DATA__';
 
 function generateHeader(base: number, comment: string): Sequence<string> {
-    const header = [
-        '#!/usr/bin/env cspell-trie reader',
-        'TrieXv3',
-        'base=' + base,
-    ]
+    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv3', 'base=' + base]
         .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
         .concat(['# Data:', DATA]);
     return genSequence(header).map((a) => a + '\n');
@@ -45,10 +41,7 @@ export interface ExportOptions {
 /**
  * Serialize a TrieRoot.
  */
-export function serializeTrie(
-    root: TrieRoot,
-    options: ExportOptions | number = 16
-): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
@@ -61,9 +54,7 @@ export function serializeTrie(
     }
 
     function escape(s: string): string {
-        return specialCharacters.has(s)
-            ? ESCAPE + (specialCharacterMap.get(s) || s)
-            : s;
+        return specialCharacters.has(s) ? ESCAPE + (specialCharacterMap.get(s) || s) : s;
     }
 
     function* flush() {
@@ -118,9 +109,7 @@ export function serializeTrie(
         yield* flush();
     }
 
-    return generateHeader(radix, comment).concat(
-        bufferLines(bufferLines(serialize(root), 120, '\n'), 10, '')
-    );
+    return generateHeader(radix, comment).concat(bufferLines(bufferLines(serialize(root), 120, '\n'), 10, ''));
 }
 
 function* toIterableIterator<T>(iter: Iterable<T>): IterableIterator<T> {
@@ -158,6 +147,7 @@ export function importTrie(linesX: Iterable<string>): TrieRoot {
 
     function readHeader(iter: Iterator<string>) {
         const headerRows: string[] = [];
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const next = iter.next();
             if (next.done) {
@@ -200,7 +190,7 @@ function parseStream(radix: number): Reducer {
                 const r = parseInt(ref, radix);
                 const top = stack[stack.length - 1];
                 const p = stack[stack.length - 2].node;
-                p.c!.set(top.s, nodes[r]);
+                p.c?.set(top.s, nodes[r]);
                 return { root, nodes, stack, parser: undefined };
             }
             ref = ref + s;
@@ -212,10 +202,7 @@ function parseStream(radix: number): Reducer {
         return { ...acc, nodes, parser };
     }
 
-    function parseEscapeCharacter(
-        acc: ReduceResults,
-        _: string
-    ): ReduceResults {
+    function parseEscapeCharacter(acc: ReduceResults, _: string): ReduceResults {
         let prev = '';
         const parser = function (acc: ReduceResults, s: string): ReduceResults {
             if (prev) {
@@ -253,7 +240,7 @@ function parseStream(radix: number): Reducer {
         if (!node.c) {
             top.node = eow;
             const p = stack[stack.length - 2].node;
-            p.c!.set(top.s, eow);
+            p.c?.set(top.s, eow);
             nodes.pop();
         }
         stack.pop();

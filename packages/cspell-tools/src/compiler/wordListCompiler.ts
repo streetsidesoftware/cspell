@@ -11,6 +11,7 @@ const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
 const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
 const regExpRepeatChars = /(.)\1{3,}/i;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Logger = (message?: any, ...optionalParams: any[]) => void;
 
 let log: Logger = defaultLogger;
@@ -19,7 +20,7 @@ export function setLogger(logger?: Logger): void {
     log = logger ?? defaultLogger;
 }
 
-function defaultLogger(message?: any, ...optionalParams: any[]) {
+function defaultLogger(message?: unknown, ...optionalParams: unknown[]) {
     console.log(message, ...optionalParams);
 }
 
@@ -49,9 +50,7 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
     const splitWords = Text.splitCamelCaseWord(word);
     // We only want to preserve this: "New York" and not "Namespace DNSLookup"
     if (splitWords.length > 1 && regExpSpaceOrDash.test(word)) {
-        return genSequence(splitWords).concatMap((w) =>
-            w.split(regExpSpaceOrDash)
-        );
+        return genSequence(splitWords).concatMap((w) => w.split(regExpSpaceOrDash));
     }
     return splitWords;
 }
@@ -97,9 +96,7 @@ function sort(words: Iterable<string>): Iterable<string> {
     return [...words].sort();
 }
 
-function compileWordListWithSplitSeq(
-    words: Sequence<string>
-): Sequence<string> {
+function compileWordListWithSplitSeq(words: Sequence<string>): Sequence<string> {
     return words.concatMap((line) => lineToWords(line).toArray());
 }
 
@@ -107,10 +104,7 @@ function compileSimpleWordListSeq(words: Sequence<string>): Sequence<string> {
     return words.map((a) => a.toLowerCase());
 }
 
-export function normalizeWordsToTrie(
-    words: Sequence<string>,
-    normalizer: Normalizer = normalizeWords
-): Trie.TrieRoot {
+export function normalizeWordsToTrie(words: Sequence<string>, normalizer: Normalizer = normalizeWords): Trie.TrieRoot {
     return Trie.buildTrie(normalizer(words)).root;
 }
 
@@ -131,9 +125,7 @@ export async function compileTrie(
     const version = options.trie3 ? 3 : 1;
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
-    const normalizer: Normalizer = options.skipNormalization
-        ? (a) => a
-        : normalizeWords;
+    const normalizer: Normalizer = options.skipNormalization ? (a) => a : normalizeWords;
     const root = normalizeWordsToTrie(words, normalizer);
     log('Reduce duplicate word endings');
     const trie = consolidate(root);

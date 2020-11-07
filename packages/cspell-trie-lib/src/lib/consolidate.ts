@@ -13,11 +13,7 @@ export function consolidate(root: TrieRoot): TrieRoot {
 
     function signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
-        const ref = n.c
-            ? JSON.stringify(
-                  [...n.c.entries()].map(([k, n]) => [k, cached.get(n)])
-              )
-            : '';
+        const ref = n.c ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, cached.get(n)])) : '';
         return isWord + ref;
     }
 
@@ -35,10 +31,7 @@ export function consolidate(root: TrieRoot): TrieRoot {
         return r;
     }
 
-    function compareMaps(
-        a: [string, TrieNode][],
-        b: Map<string, TrieNode>
-    ): boolean {
+    function compareMaps(a: [string, TrieNode][], b: Map<string, TrieNode>): boolean {
         for (const e of a) {
             if (b.get(e[0]) !== e[1]) return false;
         }
@@ -52,9 +45,7 @@ export function consolidate(root: TrieRoot): TrieRoot {
 
         const orig = n;
         if (n.c) {
-            const children = [...n.c].map(
-                (c) => [c[0], deepCopy(c[1])] as [string, TrieNode]
-            );
+            const children = [...n.c].map((c) => [c[0], deepCopy(c[1])] as [string, TrieNode]);
             if (!compareMaps(children, n.c)) {
                 n = { f: n.f, c: new Map(children) };
             }

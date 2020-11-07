@@ -1,14 +1,8 @@
-#!/usr/bin/env node
-
 import * as path from 'path';
 import * as commander from 'commander';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
-import {
-    CSpellApplicationOptions,
-    BaseOptions,
-    checkText,
-} from './application';
+import { CSpellApplicationOptions, BaseOptions, checkText } from './application';
 import * as App from './application';
 import chalk = require('chalk');
 
@@ -21,12 +15,10 @@ interface Options extends CSpellApplicationOptions {
 type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
 
-const templateIssue = `${chalk.green('${uri}')}:${chalk.yellow(
-    '${row}:${col}'
-)} - Unknown word (${chalk.red('${text}')})`;
-const templateIssueLegacy = `${chalk.green(
-    '${uri}'
-)}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
+const templateIssue = `${chalk.green('${uri}')}:${chalk.yellow('${row}:${col}')} - Unknown word (${chalk.red(
+    '${text}'
+)})`;
+const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
 const templateIssueWordsOnly = '${text}';
 
 function genIssueEmitter(template: string) {
@@ -80,17 +72,14 @@ function getEmitters(options: Options): App.Emitters {
     };
 }
 
-export async function run(
-    program?: commander.Command,
-    argv?: string[]
-): Promise<void> {
+export async function run(program?: commander.Command, argv?: string[]): Promise<void> {
     const prog = program || commander;
     const args = argv || process.argv;
 
     return new Promise((resolve, rejects) => {
         let showHelp = true;
 
-        (prog as any).exitOverride();
+        prog.exitOverride();
 
         prog.version(npmPackage.version)
             .description('Spelling Checker for Code')
@@ -101,10 +90,7 @@ export async function run(
             .option('--no-color', 'Turn off color.')
             .option('--color', 'Force color');
 
-        prog.option(
-            '-v, --verbose',
-            'display more information about the files being checked and the configuration'
-        )
+        prog.option('-v, --verbose', 'display more information about the files being checked and the configuration')
             .option(
                 '--local <local>',
                 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
@@ -114,29 +100,14 @@ export async function run(
                 '--languageId <language>',
                 'Force programming language for unknown extensions. i.e. "php" or "scala"'
             )
-            .option(
-                '--wordsOnly',
-                'Only output the words not found in the dictionaries.'
-            )
-            .option(
-                '-u, --unique',
-                'Only output the first instance of a word not found in the dictionaries.'
-            )
-            .option(
-                '--debug',
-                'Output information useful for debugging cspell.json files.'
-            )
-            .option(
-                '-e, --exclude <glob>',
-                'Exclude files matching the glob pattern'
-            )
+            .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
+            .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
+            .option('--debug', 'Output information useful for debugging cspell.json files.')
+            .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
             .option('--no-issues', 'Do not show the spelling errors.')
             .option('--no-summary', 'Turn off summary message in console')
             .option('-s, --silent', 'Silent mode, suppress error messages')
-            .option(
-                '-r, --root <root folder>',
-                'Root directory, defaults to current directory.'
-            )
+            .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
             // The following options are planned features
             // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
             // .option('--force', 'Force the exit value to always be 0')
@@ -194,9 +165,7 @@ export async function run(
         }
 
         prog.command('check <files...>')
-            .description(
-                'Spell check file(s) and display the result. The full file is displayed in color.'
-            )
+            .description('Spell check file(s) and display the result. The full file is displayed in color.')
             .option(
                 '-c, --config <cspell.json>',
                 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
@@ -210,10 +179,7 @@ export async function run(
                     console.log(chalk.yellowBright(`Check file: ${filename}`));
                     console.log();
                     try {
-                        const result = await checkText(
-                            filename,
-                            options.parent
-                        );
+                        const result = await checkText(filename, options.parent);
                         for (const item of result.items) {
                             const fn =
                                 item.flagIE === App.IncludeExcludeFlag.EXCLUDE
@@ -263,7 +229,7 @@ Examples:
             showHelp = false;
         });
 
-        function reject(e: any) {
+        function reject(e: unknown) {
             if (showHelp) {
                 prog.help();
             }

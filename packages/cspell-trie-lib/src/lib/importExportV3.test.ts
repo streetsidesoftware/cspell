@@ -12,9 +12,7 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize small sample', async () => {
         const trie = Trie.buildTrie(smallSample).root;
         const expected = toTree(trie);
-        const data = [
-            ...serializeTrie(trie, { base: 10, comment: 'Sample Words' }),
-        ].join('');
+        const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
         const root = importTrie(
             data
                 .replace(/\[\d+\]/g, '')
@@ -43,19 +41,14 @@ describe('Import/Export', () => {
                 comment: 'Sample Words',
             }),
         ].join('');
-        const root = importTrie(
-            data.split('\n').map((a) => (a ? a + '\n' : a))
-        );
+        const root = importTrie(data.split('\n').map((a) => (a ? a + '\n' : a)));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
         await writeFile(sampleFile, data);
     });
 
     test('tests deserialize from file', async () => {
-        const sample = (await readFile(sampleFile, 'utf8')).replace(
-            /\r?\n/g,
-            '\n'
-        );
+        const sample = (await readFile(sampleFile, 'utf8')).replace(/\r?\n/g, '\n');
         const root = importTrie(sample.split('\n'));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
@@ -96,25 +89,9 @@ function toTree(root: TrieNode): string {
     return ['\n', ...walk(root, '')].join('');
 }
 
-const specialCharacters = [
-    'arrow <',
-    'escape \\',
-    'eol \n',
-    'eow $',
-    'ref #',
-    'Numbers 0123456789',
-    'Braces: {}[]()',
-];
+const specialCharacters = ['arrow <', 'escape \\', 'eol \n', 'eow $', 'ref #', 'Numbers 0123456789', 'Braces: {}[]()'];
 
-const smallSample = genSequence([
-    'lift',
-    'talk',
-    'walk',
-    'turn',
-    'burn',
-    'chalk',
-    'churn',
-])
+const smallSample = genSequence(['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'])
     .concatMap(applyEndings)
     .toArray();
 

@@ -4,9 +4,7 @@ import { TrieBuilder, buildTrie } from './TrieBuilder';
 describe('Validate TrieBuilder', () => {
     test('builder', () => {
         const builder = new TrieBuilder();
-        const words = sampleWords
-            .concat(applyEndings('shock'))
-            .concat(applyEndings('stock'));
+        const words = sampleWords.concat(applyEndings('shock')).concat(applyEndings('stock'));
         builder.insert(words);
         const trie = builder.build(true);
         expect([...trie.words()].sort()).toEqual(sampleWords.sort());

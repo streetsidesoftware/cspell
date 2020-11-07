@@ -36,12 +36,8 @@ describe('Experiment with Tries', () => {
             }),
         ].join('');
         expect(asString3).not.toBe(asString);
-        expect(asString3.slice(asString3.indexOf('# Data'))).toBe(
-            asString.slice(asString.indexOf('# Data'))
-        );
-        expect(asString3).toEqual(
-            expect.stringContaining('\n# one\n# two\n# three')
-        );
+        expect(asString3.slice(asString3.indexOf('# Data'))).toBe(asString.slice(asString.indexOf('# Data')));
+        expect(asString3).toEqual(expect.stringContaining('\n# one\n# two\n# three'));
         // console.log(asString);
         const root = Trie.importTrie(asString.split('\n'));
         {

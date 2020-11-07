@@ -1,8 +1,5 @@
 import { createTriFromList } from '.';
-import {
-    flattenToTrieRefNodeArray,
-    flattenToTrieRefNodeIterable,
-} from './flatten';
+import { flattenToTrieRefNodeArray, flattenToTrieRefNodeIterable } from './flatten';
 import { genSequence } from 'gensequence';
 import { TrieRefNode } from './trieRef';
 
@@ -31,9 +28,7 @@ function walk(nodes: TrieRefNode[]): IterableIterator<string> {
         }
         if (node.r) {
             yield* genSequence(node.r).concatMap((a) =>
-                genSequence(w(nodes[a[1]], a[0])).map(
-                    (suffix) => prefix + suffix
-                )
+                genSequence(w(nodes[a[1]], a[0])).map((suffix) => prefix + suffix)
             );
         }
     }

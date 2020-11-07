@@ -7,7 +7,6 @@ const matchUrl = regExMatchUrls.source;
 const matchHexValues = regExMatchCommonHexFormats.source;
 
 describe('Validate InDocSettings', () => {
-
     test('tests regExSpellingGuardBlock', () => {
         const m1 = sampleCode2LF.match(RegPat.regExSpellingGuardBlock);
         expect(m1).not.toBeFalsy();
@@ -24,11 +23,13 @@ describe('Validate InDocSettings', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardBlock);
         expect(m1).not.toBeFalsy;
         // cspell:disable
-        expect(m1).toEqual([
-            "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
-            'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
-            'cSpell:disable\n\nNot checked.\n\n',
-        ].map(a => a.replace(/\n/g, '\r\n')));
+        expect(m1).toEqual(
+            [
+                "spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
+                'spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
+                'cSpell:disable\n\nNot checked.\n\n',
+            ].map((a) => a.replace(/\n/g, '\r\n'))
+        );
         // cspell:enable
     });
 
@@ -36,9 +37,7 @@ describe('Validate InDocSettings', () => {
         const m1 = sampleCode2LF.match(RegPat.regExSpellingGuardLine);
         expect(m1).not.toBeFalsy();
         // cspell:disable
-        expect(m1).toEqual([
-            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-        ]);
+        expect(m1).toEqual(["const badspelling = 'disable'; // spell-checker:disable-line, yes all of it."]);
         // cspell:enable
     });
 
@@ -46,9 +45,11 @@ describe('Validate InDocSettings', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardLine);
         expect(m1).not.toBeFalsy;
         // cspell:disable
-        expect(m1).toEqual([
-            "const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-        ].map(a => a.replace(/\n/g, '\r\n')));
+        expect(m1).toEqual(
+            ["const badspelling = 'disable'; // spell-checker:disable-line, yes all of it."].map((a) =>
+                a.replace(/\n/g, '\r\n')
+            )
+        );
         // cspell:enable
     });
 
@@ -56,9 +57,7 @@ describe('Validate InDocSettings', () => {
         const m1 = sampleCode2LF.match(RegPat.regExSpellingGuardNext);
         expect(m1).not.toBeFalsy();
         // cspell:disable
-        expect(m1).toEqual([
-            "cspell:disable-next\nconst verybadspelling = 'disable';",
-        ]);
+        expect(m1).toEqual(["cspell:disable-next\nconst verybadspelling = 'disable';"]);
         // cspell:enable
     });
 
@@ -66,77 +65,83 @@ describe('Validate InDocSettings', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardNext);
         expect(m1).not.toBeFalsy;
         // cspell:disable
-        expect(m1).toEqual([
-            "cspell:disable-next\nconst verybadspelling = 'disable';",
-        ].map(a => a.replace(/\n/g, '\r\n')));
+        expect(m1).toEqual(
+            ["cspell:disable-next\nconst verybadspelling = 'disable';"].map((a) => a.replace(/\n/g, '\r\n'))
+        );
         // cspell:enable
     });
 
     test('tests finding a set of matching positions', () => {
         const text = sampleCode2LF;
-        const ranges = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExMatchUrls,
-            RegPat.regExSpellingGuardBlock,
-            RegPat.regExSpellingGuardLine,
-            RegPat.regExSpellingGuardNext,
-            RegPat.regExMatchCommonHexFormats,
-        ], text);
+        const ranges = TextRange.findMatchingRangesForPatterns(
+            [
+                RegPat.regExMatchUrls,
+                RegPat.regExSpellingGuardBlock,
+                RegPat.regExSpellingGuardLine,
+                RegPat.regExSpellingGuardNext,
+                RegPat.regExMatchCommonHexFormats,
+            ],
+            text
+        );
         expect(rangesToText(text, ranges)).toEqual([
-        "  7: 14 https://www.google.com?q=typescript';",
-        "  8: 15 http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';",
-        '  9: 22 #cccd',
-        ' 10: 19 0x5612abcd',
-        ' 11: 28 0xbadc0ffee',
-        " 13:  1 const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-        " 15:  4 cspell:disable-next\nconst verybadspelling = 'disable';",
-        " 19:  4 spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
-        ' 29:  4 spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
-        ' 67:  4 cSpell:disable\n\nNot checked.\n\n'        ,
+            "  7: 14 https://www.google.com?q=typescript';",
+            "  8: 15 http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';",
+            '  9: 22 #cccd',
+            ' 10: 19 0x5612abcd',
+            ' 11: 28 0xbadc0ffee',
+            " 13:  1 const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
+            " 15:  4 cspell:disable-next\nconst verybadspelling = 'disable';",
+            " 19:  4 spell-checker:disable\nconst unicodeHexValue = '\\uBABC';\nconst unicodeHexValue2 = '\\x{abcd}';\n\n// spell-checker:enable",
+            ' 29:  4 spell-checker:disable */\n\n// nested disabled checker is not supported.\n\n// spell-checker:disable\n\n// nested spell-checker:enable',
+            ' 67:  4 cSpell:disable\n\nNot checked.\n\n',
         ]);
     });
 
     test('tests finding a set of matching positions CRLF', () => {
         const text = sampleCode2CRLF;
-        const ranges = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExMatchUrls,
-            RegPat.regExSpellingGuardBlock,
-            RegPat.regExSpellingGuardLine,
-            RegPat.regExSpellingGuardNext,
-            RegPat.regExMatchCommonHexFormats,
-        ], text);
+        const ranges = TextRange.findMatchingRangesForPatterns(
+            [
+                RegPat.regExMatchUrls,
+                RegPat.regExSpellingGuardBlock,
+                RegPat.regExSpellingGuardLine,
+                RegPat.regExSpellingGuardNext,
+                RegPat.regExMatchCommonHexFormats,
+            ],
+            text
+        );
         expect(rangesToText(text, ranges)).toEqual([
-        "  7: 14 https://www.google.com?q=typescript';",
-        "  8: 15 http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';",
-        '  9: 22 #cccd',
-        ' 10: 19 0x5612abcd',
-        ' 11: 28 0xbadc0ffee',
-        " 13:  1 const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
-        " 15:  4 cspell:disable-next\r\nconst verybadspelling = 'disable';",
-        " 19:  4 spell-checker:disable\r\nconst unicodeHexValue = '\\uBABC';\r\nconst unicodeHexValue2 = '\\x{abcd}';\r\n\r\n// spell-checker:enable",
-        ' 29:  4 spell-checker:disable */\r\n\r\n// nested disabled checker is not supported.\r\n\r\n'
-        + '// spell-checker:disable\r\n\r\n// nested spell-checker:enable',
-        ' 67:  4 cSpell:disable\r\n\r\nNot checked.\r\n\r\n'        ,
+            "  7: 14 https://www.google.com?q=typescript';",
+            "  8: 15 http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';",
+            '  9: 22 #cccd',
+            ' 10: 19 0x5612abcd',
+            ' 11: 28 0xbadc0ffee',
+            " 13:  1 const badspelling = 'disable'; // spell-checker:disable-line, yes all of it.",
+            " 15:  4 cspell:disable-next\r\nconst verybadspelling = 'disable';",
+            " 19:  4 spell-checker:disable\r\nconst unicodeHexValue = '\\uBABC';\r\nconst unicodeHexValue2 = '\\x{abcd}';\r\n\r\n// spell-checker:enable",
+            ' 29:  4 spell-checker:disable */\r\n\r\n// nested disabled checker is not supported.\r\n\r\n' +
+                '// spell-checker:disable\r\n\r\n// nested spell-checker:enable',
+            ' 67:  4 cSpell:disable\r\n\r\nNot checked.\r\n\r\n',
         ]);
     });
 
-    test(
-        'tests merging inclusion and exclusion patterns into an inclusion list',
-        () => {
-            const text = sampleCode2LF;
-            const includeRanges = TextRange.findMatchingRangesForPatterns([
-                RegPat.regExString,
-                RegPat.regExPhpHereDoc,
-                RegPat.regExCStyleComments,
-            ], text);
-            const excludeRanges = TextRange.findMatchingRangesForPatterns([
+    test('tests merging inclusion and exclusion patterns into an inclusion list', () => {
+        const text = sampleCode2LF;
+        const includeRanges = TextRange.findMatchingRangesForPatterns(
+            [RegPat.regExString, RegPat.regExPhpHereDoc, RegPat.regExCStyleComments],
+            text
+        );
+        const excludeRanges = TextRange.findMatchingRangesForPatterns(
+            [
                 RegPat.regExSpellingGuardBlock,
                 RegPat.regExSpellingGuardLine,
                 RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
-            ], text);
-            const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
-            expect(rangesToText(text, mergedRanges)).toEqual([
+            ],
+            text
+        );
+        const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
+        expect(rangesToText(text, mergedRanges)).toEqual([
             '  2:  1 /*\n * this is a comment.\n */',
             "  6: 14 'some nice text goes here'",
             "  7: 13 '",
@@ -157,61 +162,59 @@ describe('Validate InDocSettings', () => {
             " 45: 13 ' '",
             " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
             ' 49: 17 "How about a double quote string?"',
-            " 50: 24 `\ncan contain \" and '\n\n `",
+            ' 50: 24 `\ncan contain " and \'\n\n `',
             ' 55: 21 <<<SQL\n    SELECT * FROM users WHERE id in :ids;\nSQL;',
             ' 59: 21 <<<"SQL"\n    SELECT * FROM users WHERE id in :ids;\nSQL;',
             " 63: 20 <<<'SQL'\n    SELECT * FROM users WHERE id in :ids;\nSQL;",
             ' 67:  1 // ',
-            ]);
-        }
-    );
+        ]);
+    });
 
-    test(
-        'tests merging inclusion and exclusion patterns into an inclusion list CRLF',
-        () => {
-            const text = sampleCode2CRLF;
-            const includeRanges = TextRange.findMatchingRangesForPatterns([
-                RegPat.regExString,
-                RegPat.regExPhpHereDoc,
-                RegPat.regExCStyleComments,
-            ], text);
-            const excludeRanges = TextRange.findMatchingRangesForPatterns([
+    test('tests merging inclusion and exclusion patterns into an inclusion list CRLF', () => {
+        const text = sampleCode2CRLF;
+        const includeRanges = TextRange.findMatchingRangesForPatterns(
+            [RegPat.regExString, RegPat.regExPhpHereDoc, RegPat.regExCStyleComments],
+            text
+        );
+        const excludeRanges = TextRange.findMatchingRangesForPatterns(
+            [
                 RegPat.regExSpellingGuardBlock,
                 RegPat.regExSpellingGuardLine,
                 RegPat.regExSpellingGuardNext,
                 RegPat.regExMatchUrls,
                 RegPat.regExMatchCommonHexFormats,
-            ], text);
-            const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
-            expect(rangesToText(text, mergedRanges)).toEqual([
-                '  2:  1 /*\r\n * this is a comment.\r\n */',
-                "  6: 14 'some nice text goes here'",
-                "  7: 13 '",
-                "  8: 14 '",
-                "  9: 21 '",
-                "  9: 27 '",
-                ' 14:  1 // But not this line',
-                ' 15:  1 // ',
-                ' 17:  1 // And not this line',
-                ' 19:  1 // ',
-                ' 25:  1 /* More code and comments */',
-                ' 27:  1 // Make sure /* this works.',
-                ' 29:  1 /* ',
-                ' 35: 31  <--> checking is now turned on.',
-                ' 37:  1 // This will be checked',
-                ' 39:  1 /*\r\n * spell-checker:enable  <-- this makes no difference because it was already turned back on.\r\n */',
-                " 43: 12 ''",
-                " 45: 13 ' '",
-                " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
-                ' 49: 17 "How about a double quote string?"',
-                " 50: 24 `\r\ncan contain \" and '\r\n\r\n `",
-                ' 55: 21 <<<SQL\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
-                ' 59: 21 <<<"SQL"\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
-                " 63: 20 <<<'SQL'\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;",
-                ' 67:  1 // ',
-            ]);
-        }
-    );
+            ],
+            text
+        );
+        const mergedRanges = TextRange.excludeRanges(includeRanges, excludeRanges);
+        expect(rangesToText(text, mergedRanges)).toEqual([
+            '  2:  1 /*\r\n * this is a comment.\r\n */',
+            "  6: 14 'some nice text goes here'",
+            "  7: 13 '",
+            "  8: 14 '",
+            "  9: 21 '",
+            "  9: 27 '",
+            ' 14:  1 // But not this line',
+            ' 15:  1 // ',
+            ' 17:  1 // And not this line',
+            ' 19:  1 // ',
+            ' 25:  1 /* More code and comments */',
+            ' 27:  1 // Make sure /* this works.',
+            ' 29:  1 /* ',
+            ' 35: 31  <--> checking is now turned on.',
+            ' 37:  1 // This will be checked',
+            ' 39:  1 /*\r\n * spell-checker:enable  <-- this makes no difference because it was already turned back on.\r\n */',
+            " 43: 12 ''",
+            " 45: 13 ' '",
+            " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
+            ' 49: 17 "How about a double quote string?"',
+            ' 50: 24 `\r\ncan contain " and \'\r\n\r\n `',
+            ' 55: 21 <<<SQL\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
+            ' 59: 21 <<<"SQL"\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;',
+            " 63: 20 <<<'SQL'\r\n    SELECT * FROM users WHERE id in :ids;\r\nSQL;",
+            ' 67:  1 // ',
+        ]);
+    });
 
     test('test for hex values', () => {
         expect(RegPat.regExHexDigits.test('FFEE')).toBe(true);
@@ -226,11 +229,10 @@ describe('Validate InDocSettings', () => {
         expect(hexRanges.length).toBe(5);
         expect(hexRanges[2].startPos).toBe(text.indexOf('0xbadc0ffee'));
 
-        const disableChecker = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExSpellingGuardBlock,
-            RegPat.regExSpellingGuardLine,
-            RegPat.regExSpellingGuardNext,
-        ], text);
+        const disableChecker = TextRange.findMatchingRangesForPatterns(
+            [RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext],
+            text
+        );
         expect(disableChecker.length).toBe(5);
 
         const hereDocs = TextRange.findMatchingRanges(RegPat.regExPhpHereDoc, text);
@@ -250,7 +252,7 @@ describe('Validate InDocSettings', () => {
             " 45: 13 ' '",
             " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
             ' 49: 17 "How about a double quote string?"',
-            " 50: 24 `\ncan contain \" and '\n\n `",
+            ' 50: 24 `\ncan contain " and \'\n\n `',
             ' 59: 24 "SQL"',
             " 63: 23 'SQL'",
         ]);
@@ -265,11 +267,10 @@ describe('Validate InDocSettings', () => {
         expect(hexRanges.length).toBe(5);
         expect(hexRanges[2].startPos).toBe(text.indexOf('0xbadc0ffee'));
 
-        const disableChecker = TextRange.findMatchingRangesForPatterns([
-            RegPat.regExSpellingGuardBlock,
-            RegPat.regExSpellingGuardLine,
-            RegPat.regExSpellingGuardNext,
-        ], text);
+        const disableChecker = TextRange.findMatchingRangesForPatterns(
+            [RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext],
+            text
+        );
         expect(disableChecker.length).toBe(5);
 
         const hereDocs = TextRange.findMatchingRanges(RegPat.regExPhpHereDoc, text);
@@ -289,7 +290,7 @@ describe('Validate InDocSettings', () => {
             " 45: 13 ' '",
             " 48: 17 'This is a single quote string.  it\\'s a lot of fun.'",
             ' 49: 17 "How about a double quote string?"',
-            " 50: 24 `\r\ncan contain \" and '\r\n\r\n `",
+            ' 50: 24 `\r\ncan contain " and \'\r\n\r\n `',
             ' 59: 24 "SQL"',
             " 63: 23 'SQL'",
         ]);
@@ -309,7 +310,7 @@ describe('Validate InDocSettings', () => {
         const matches = text.match(reg);
         expect(matches).not.toBeNull();
         expect(matches).toHaveLength(1);
-        expect(matches![0]).toBe('http://example.org');
+        expect(matches?.[0]).toBe('http://example.org');
     });
 
     test('test matching href', () => {
@@ -324,17 +325,25 @@ describe('Validate InDocSettings', () => {
         const matches = text.match(reg);
         expect(matches).not.toBeNull();
         expect(matches).toHaveLength(2);
-        expect(matches![0]).toBe('href="http://example.org"');
-        expect(matches![1]).toBe('href="/example/"');
+        expect(matches?.[0]).toBe('href="http://example.org"');
+        expect(matches?.[1]).toBe('href="/example/"');
     });
 
     test('test sha regex', () => {
         RegPat.regExSha.lastIndex = 0;
         expect(RegPat.regExSha.test('')).toBe(false);
         RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w==')).toBe(true);
+        expect(
+            RegPat.regExSha.test(
+                'sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w=='
+            )
+        ).toBe(true);
         RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g==')).toBe(true);
+        expect(
+            RegPat.regExSha.test(
+                'sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g=='
+            )
+        ).toBe(true);
         RegPat.regExSha.lastIndex = 0;
         expect(RegPat.regExSha.test('sha1-RBT/dKUIecII7l/cgm4ywwNUnto=')).toBe(true);
         RegPat.regExSha.lastIndex = 0;
@@ -356,14 +365,12 @@ describe('Validate InDocSettings', () => {
 });
 
 function rangesToText(text: string, ranges: TextRange.MatchRange[]): string[] {
-
-    const textOffsets: TextOffset[] = TextRange.extractRangeText(text, ranges)
-        .map(r => ({
-            offset: r.startPos,
-            text: r.text,
-        }));
+    const textOffsets: TextOffset[] = TextRange.extractRangeText(text, ranges).map((r) => ({
+        offset: r.startPos,
+        text: r.text,
+    }));
     const offsets = calculateTextDocumentOffsets('', text, textOffsets);
-    return offsets.map(t => `${t.row.toString().padStart(3)}:${t.col.toString().padStart(3)} ${t.text}`);
+    return offsets.map((t) => `${t.row.toString().padStart(3)}:${t.col.toString().padStart(3)} ${t.text}`);
 }
 
 const sampleCodeSrc = `
@@ -386,7 +393,7 @@ const verybadspelling = 'disable';
 
 // spell-checker:disable
 const unicodeHexValue = '\\uBABC';
-const unicodeHexValue2 = '\\x\{abcd\}';
+const unicodeHexValue2 = '\\x{abcd}';
 
 // spell-checker:enable
 

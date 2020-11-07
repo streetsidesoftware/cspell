@@ -6,11 +6,11 @@ const dictionaryPath = () => path.join(__dirname, '..', '..', 'dist', 'dictionar
 
 export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
 
-export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDefinition[]): DefMapArrayItem[]  {
+export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDefinition[]): DefMapArrayItem[] {
     // Process the dictIds in order, if it starts with a '!', remove it from the set.
     const dictIdSet = dictIds
-        .map(id => id.trim())
-        .filter(id => !!id)
+        .map((id) => id.trim())
+        .filter((id) => !!id)
         .reduce((dictSet, id) => {
             if (id[0] === '!') {
                 dictSet.delete(id.slice(1));
@@ -20,12 +20,12 @@ export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDe
             return dictSet;
         }, new Set<DictionaryId>());
     const activeDefs: DefMapArrayItem[] = defs
-        .filter(({name}) => dictIdSet.has(name))
-        .map(def => ({...def, path: getFullPathName(def)}))
+        .filter(({ name }) => dictIdSet.has(name))
+        .map((def) => ({ ...def, path: getFullPathName(def) }))
         // Remove any empty paths.
-        .filter(def => !!def.path)
-        .map(def => [ def.name, def] as DefMapArrayItem);
-    return [...(new Map(activeDefs))];
+        .filter((def) => !!def.path)
+        .map((def) => [def.name, def] as DefMapArrayItem);
+    return [...new Map(activeDefs)];
 }
 
 function getFullPathName(def: DictionaryDefinition) {
@@ -37,18 +37,20 @@ function getFullPathName(def: DictionaryDefinition) {
     return path.resolve(dictPath);
 }
 
-export function normalizePathForDictDefs(defs: DictionaryDefinition[], defaultPath: string): DictionaryDefinitionPreferred[] {
-    return defs
-        .map(def => normalizePathForDictDef(def, defaultPath));
+export function normalizePathForDictDefs(
+    defs: DictionaryDefinition[],
+    defaultPath: string
+): DictionaryDefinitionPreferred[] {
+    return defs.map((def) => normalizePathForDictDef(def, defaultPath));
 }
 
 export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: string): DictionaryDefinitionPreferred {
-        const { path: relPath = '.', file, ...rest } = def;
-        const nonRelPath = relPath.match(/^\./) ? path.join(defaultPath, relPath) : relPath;
-        const absPath = nonRelPath.replace(/^~/, os.homedir());
-        const fullPath = file ? path.join(absPath, file) : absPath;
-        return {
-            ...rest,
-            path: fullPath
-        };
+    const { path: relPath = '.', file, ...rest } = def;
+    const nonRelPath = relPath.match(/^\./) ? path.join(defaultPath, relPath) : relPath;
+    const absPath = nonRelPath.replace(/^~/, os.homedir());
+    const fullPath = file ? path.join(absPath, file) : absPath;
+    return {
+        ...rest,
+        path: fullPath,
+    };
 }

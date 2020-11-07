@@ -106,10 +106,7 @@ describe('Validate internal functions', () => {
 
     test('normalizePattern relative', () => {
         const root = process.cwd();
-        const r = App._testing_.normalizePattern(
-            '../../packages/**/*.ts',
-            root
-        );
+        const r = App._testing_.normalizePattern('../../packages/**/*.ts', root);
         expect(r.root).toBe(path.dirname(path.dirname(root)));
         expect(r.pattern).toBe('packages/**/*.ts');
     });
@@ -135,11 +132,7 @@ describe('Application, Validate Samples', () => {
     sampleTests().map((sample) =>
         test(`Test file: "${sample.file}"`, async () => {
             const logger = new Logger();
-            const {
-                file,
-                issues,
-                options = { wordsOnly: true, unique: false },
-            } = sample;
+            const { file, issues, options = { wordsOnly: true, unique: false } } = sample;
             const result = await App.lint([file], options, logger);
             expect(result.files).toBe(1);
             expect(logger.issues.map((issue) => issue.text)).toEqual(issues);
@@ -158,15 +151,11 @@ function sampleTests(): SampleTest[] {
     // cspell:disable
     return [
         {
-            file: path.resolve(
-                path.join(__dirname, '../samples/src/drives.ps1')
-            ),
+            file: path.resolve(path.join(__dirname, '../samples/src/drives.ps1')),
             issues: ['Woude', 'Woude'],
         },
         {
-            file: path.resolve(
-                path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')
-            ),
+            file: path.resolve(path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')),
             issues: ['Woude', 'Woude'],
         },
         { file: 'samples/src/drives.ps1', issues: ['Woude', 'Woude'] },
@@ -178,15 +167,11 @@ function sampleTests(): SampleTest[] {
             issues: ['includegraphics', 'Zotero'],
         },
         {
-            file: path.resolve(
-                path.join(__dirname, '../samples/src/drives.ps1')
-            ),
+            file: path.resolve(path.join(__dirname, '../samples/src/drives.ps1')),
             issues: ['Woude', 'Woude'],
         },
         {
-            file: path.resolve(
-                path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')
-            ),
+            file: path.resolve(path.join(__dirname, '../../cspell-lib/samples/src/drives.ps1')),
             issues: ['Woude', 'Woude'],
         },
     ];

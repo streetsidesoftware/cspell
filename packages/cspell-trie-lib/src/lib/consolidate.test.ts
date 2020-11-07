@@ -9,9 +9,7 @@ import { buildTrie } from './TrieBuilder';
 
 const samples = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
 const sampleEnglish = path.join(samples, 'en_US.txt');
-const pSampleEnglishWords = readFile(sampleEnglish, 'utf8').then((a) =>
-    a.split('\n').filter((a) => !!a)
-);
+const pSampleEnglishWords = readFile(sampleEnglish, 'utf8').then((a) => a.split('\n').filter((a) => !!a));
 
 describe('Validate Consolidate', () => {
     test('consolidate', () => {
@@ -30,9 +28,7 @@ describe('Validate Consolidate', () => {
     });
 
     test('consolidate', () => {
-        expect(countNodes(consolidate(createTriFromList(sampleWords)))).toBe(
-            96
-        );
+        expect(countNodes(consolidate(createTriFromList(sampleWords)))).toBe(96);
     });
 
     test('consolidate empty trie', () => {
@@ -61,9 +57,7 @@ function walk(root: TrieNode): IterableIterator<string> {
             yield prefix;
         }
         if (node.c) {
-            yield* genSequence(node.c).concatMap((a) =>
-                genSequence(w(a[1], a[0])).map((suffix) => prefix + suffix)
-            );
+            yield* genSequence(node.c).concatMap((a) => genSequence(w(a[1], a[0])).map((suffix) => prefix + suffix));
         }
     }
     return w(root, '');

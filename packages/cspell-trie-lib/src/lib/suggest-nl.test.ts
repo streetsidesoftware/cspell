@@ -15,9 +15,7 @@ describe('Validate Dutch Suggestions', () => {
             const trie = await pTrieNL;
             const results = trie.suggestWithCost('buurtbewoners', 5);
             const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['buurtbewoners'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
             expect(suggestions[0]).toBe('buurtbewoners');
         },
         timeout
@@ -30,9 +28,7 @@ describe('Validate Dutch Suggestions', () => {
             const trie = await pTrieNL;
             const results = trie.suggestWithCost('burtbewoners', 5);
             const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['buurtbewoners', 'burgbewoners'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners', 'burgbewoners']));
         },
         timeout
     );
@@ -44,9 +40,7 @@ describe('Validate Dutch Suggestions', () => {
             const trie = await pTrieNL;
             const results = trie.suggestWithCost('buurtbwoners', 1);
             const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['buurtbewoners'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
         },
         timeout
     );
@@ -68,12 +62,8 @@ describe('Validate Dutch Suggestions', () => {
             const trie = await pTrieNL;
             const results = trie.suggestWithCost('mexico-stad', 2);
             const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['Mexico-Stad'])
-            );
-            expect(suggestions).not.toEqual(
-                expect.arrayContaining(['Mexico-stad'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['Mexico-Stad']));
+            expect(suggestions).not.toEqual(expect.arrayContaining(['Mexico-stad']));
         },
         timeout
     );
