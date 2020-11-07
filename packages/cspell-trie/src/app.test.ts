@@ -9,7 +9,7 @@ function argv(...args: string[]): string[] {
 }
 
 function getCommander() {
-    return new Commander.Command;
+    return new Commander.Command();
 }
 
 function pathRoot(...parts: string[]): string {
@@ -27,33 +27,49 @@ function pathTemp(...parts: string[]): string {
 type ErrorResult = undefined | jest.Constructable | string | RegExp;
 type Test = [string, string[], ErrorResult];
 const tests: Test[] = [
-    t("No Args", [], Commander.CommanderError),
-    t("create file", ['create', pathSamples('softwareTerms.txt'), '-o', pathTemp('samples.trie')], undefined),
-    t("read file", ['reader', pathTemp('samples.trie'), '-o', pathTemp('test.txt')], undefined),
+    t('No Args', [], Commander.CommanderError),
+    t(
+        'create file',
+        [
+            'create',
+            pathSamples('softwareTerms.txt'),
+            '-o',
+            pathTemp('samples.trie'),
+        ],
+        undefined
+    ),
+    t(
+        'read file',
+        ['reader', pathTemp('samples.trie'), '-o', pathTemp('test.txt')],
+        undefined
+    ),
 ];
 
 describe('Validate App', () => {
-    test.each(tests)('%s', async (_: string, args: string[], errorResult: ErrorResult) => {
-        const commander = getCommander();
-        (commander as any).exitOverride();
+    test.each(tests)(
+        '%s',
+        async (_: string, args: string[], errorResult: ErrorResult) => {
+            const commander = getCommander();
+            commander.exitOverride();
 
-        const error = jest.spyOn(console, 'error').mockImplementation();
-        const log = jest.spyOn(console, 'log').mockImplementation();
-        const info = jest.spyOn(console, 'info').mockImplementation();
+            const error = jest.spyOn(console, 'error').mockImplementation();
+            const log = jest.spyOn(console, 'log').mockImplementation();
+            const info = jest.spyOn(console, 'info').mockImplementation();
 
-        try {
-            const result = app.run(commander, argv(...args));
-            if (errorResult) {
-                await expect(result).rejects.toThrow(errorResult);
-            } else {
-                await expect(result).resolves.not.toThrow();
+            try {
+                const result = app.run(commander, argv(...args));
+                if (errorResult) {
+                    await expect(result).rejects.toThrow(errorResult);
+                } else {
+                    await expect(result).resolves.not.toThrow();
+                }
+            } finally {
+                error.mockRestore();
+                log.mockRestore();
+                info.mockRestore();
             }
-        } finally {
-            error.mockRestore();
-            log.mockRestore();
-            info.mockRestore();
         }
-    });
+    );
 });
 
 function t(testName: string, args: string[], errorResult: ErrorResult): Test {

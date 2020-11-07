@@ -2,27 +2,32 @@
 
 import * as commander from 'commander';
 import * as fs from 'fs-extra';
-import {mkdirp} from 'fs-extra';
+import { mkdirp } from 'fs-extra';
 import * as path from 'path';
 import * as Trie from 'cspell-trie-lib';
 import { Sequence, genSequence } from 'gensequence';
 import { iterableToStream } from 'iterable-to-stream';
 import * as zlib from 'zlib';
 
-
 const UTF8: BufferEncoding = 'utf8';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
-export function run(program: commander.Command, argv: string[]) {
-    program
-        .version(version);
+export function run(
+    program: commander.Command,
+    argv: string[]
+): Promise<commander.Command> {
+    program.version(version);
 
     program
         .command('create <file.txt>')
         .option('-o, --output <file>', 'output file - defaults to stdout')
         .option('-l, --lower_case', 'output in lower case')
-        .option('-b, --base <number>', 'Use base n for reference ids.  Defaults to 32. Common values are 10, 16, 32. Max of 36')
+        .option(
+            '-b, --base <number>',
+            'Use base n for reference ids.  Defaults to 32. Common values are 10, 16, 32. Max of 36'
+        )
         .description('Generate a file for use with cspell')
         .action(async (filename, options) => {
             const {
@@ -34,18 +39,22 @@ export function run(program: commander.Command, argv: string[]) {
             const pOutputStream = createWriteStream(outputFile);
             notify(`Generating...`, !!outputFile);
             const lines = await fileToLines(filename);
-            const toLower = lowerCase ? (a: string) => a.toLowerCase() : (a: string) => a;
+            const toLower = lowerCase
+                ? (a: string) => a.toLowerCase()
+                : (a: string) => a;
 
             const wordsRx = lines
                 .map(toLower)
-                .map(a => a.trim())
-                .filter(a => !!a);
+                .map((a) => a.trim())
+                .filter((a) => !!a);
 
             notify('Processing Trie');
             const trie = Trie.buildTrie(wordsRx);
 
             notify('Export Trie');
-            const serialStream = iterableToStream(Trie.serializeTrie(trie.root, (base - 0) || 32));
+            const serialStream = iterableToStream(
+                Trie.serializeTrie(trie.root, base - 0 || 32)
+            );
             const outputStream = await pOutputStream;
             return new Promise((resolve) => {
                 serialStream.pipe(outputStream).on('finish', () => resolve());
@@ -57,17 +66,17 @@ export function run(program: commander.Command, argv: string[]) {
         .option('-o, --output <file>', 'output file - defaults to stdout')
         .description('Read a cspell trie file and output the list of words.')
         .action(async (filename, options) => {
-            const {
-                output: outputFile,
-            } = options;
+            const { output: outputFile } = options;
             notify('Reading Trie', !!outputFile);
             const pOutputStream = createWriteStream(outputFile);
             const lines = await fileToLines(filename);
             const root = Trie.importTrie(lines);
-            const words = Trie.iteratorTrieWords(root);
+            const words: Sequence<string> = Trie.iteratorTrieWords(root);
             const outputStream = await pOutputStream;
             return new Promise((resolve) => {
-                iterableToStream(words.map(a => a + '\n')).pipe(outputStream).on('finish', () => resolve());
+                iterableToStream(words.map((a) => a + '\n'))
+                    .pipe(outputStream)
+                    .on('finish', () => resolve());
             });
         });
 
@@ -80,14 +89,19 @@ export function run(program: commander.Command, argv: string[]) {
 
 async function fileToLines(filename: string): Promise<Sequence<string>> {
     const buffer = await fs.readFile(filename);
-    const file = (filename.match(/\.gz$/) ? zlib.gunzipSync(buffer) : buffer).toString(UTF8);
+    const file = (filename.match(/\.gz$/)
+        ? zlib.gunzipSync(buffer)
+        : buffer
+    ).toString(UTF8);
     return genSequence(file.split(/\r?\n/));
 }
 
 function createWriteStream(filename?: string): Promise<NodeJS.WritableStream> {
     return !filename
         ? Promise.resolve(process.stdout)
-        : mkdirp(path.dirname(filename)).then(() => fs.createWriteStream(filename));
+        : mkdirp(path.dirname(filename)).then(() =>
+              fs.createWriteStream(filename)
+          );
 }
 
 function notify(message: any, useStdOut = true) {
