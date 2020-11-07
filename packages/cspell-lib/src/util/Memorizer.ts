@@ -7,7 +7,7 @@ export function memorizer<A0 extends A, A1 extends A, T>(
     fn: (arg: A0, arg1: A1) => T,
     size?: number
 ): (arg0: A0, arg1: A1) => T;
-// tslint:disable-next-line
+
 export function memorizer<A0 extends A, A1 extends A, A2 extends A, T>(
     fn: (arg: A0, arg1: A1, arg2: A2) => T,
     size?: number

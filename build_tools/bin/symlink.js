@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable @typescript-eslint/no-var-requires */
 
 // See: https://github.com/microsoft/vscode-languageserver-node/blob/master/build/bin/linking.js
 
@@ -67,8 +66,8 @@ async function readPackages(dir) {
     const packageDirs = await readdir(dir);
 
     const packages = [];
-    for (const package of packageDirs) {
-        const packageDir = path.join(dir, package);
+    for (const packageJson of packageDirs) {
+        const packageDir = path.join(dir, packageJson);
         const p = await readPackage(path.join(packageDir, 'package.json'));
         if (p) {
             p._packageDir = packageDir;
@@ -90,10 +89,10 @@ function mapByPackageName(packages) {
 
 /**
  *
- * @param {Package} package
+ * @param {Package} packageJson
  */
-function extractDependencies(package) {
-    return Object.keys(package.dependencies || {}).concat(Object.keys(package.devDependencies || {}));
+function extractDependencies(packageJson) {
+    return Object.keys(packageJson.dependencies || {}).concat(Object.keys(packageJson.devDependencies || {}));
 }
 
 /**
@@ -103,14 +102,14 @@ function extractDependencies(package) {
 async function symLinkPackages(packages) {
     const mapByName = mapByPackageName(packages);
 
-    for (const package of packages) {
-        console.log('Linking ' + package.name);
-        const deps = extractDependencies(package);
+    for (const packageJson of packages) {
+        console.log('Linking ' + packageJson.name);
+        const deps = extractDependencies(packageJson);
         for (const dep of deps) {
             const location = mapByName.get(dep);
             if (location) {
                 console.log('  SymLink ' + dep);
-                await symlink(package._packageDir, dep, location);
+                await symlink(packageJson._packageDir, dep, location);
             }
         }
     }
