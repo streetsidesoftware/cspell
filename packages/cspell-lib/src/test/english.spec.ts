@@ -13,9 +13,9 @@ describe('Validate English', () => {
         const dict = cspell.getDictionary(finalSettings);
 
         // cspell:ignore installsallnecessary
-        return dict.then(dict => {
+        return dict.then((dict) => {
             const results = dict.suggest('installsallnecessary', 5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 2);
-            const sugs = results.map(a => a.word);
+            const sugs = results.map((a) => a.word);
             expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
         });
     });

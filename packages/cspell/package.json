@@ -16,8 +16,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "lint": "eslint --fix .",
-    "lint-ci": "eslint .",
+    "eslint": "node ../../node_modules/eslint/bin/eslint",
+    "lint": "npm run eslint -- --fix .",
+    "lint-ci": "npm run eslint -- .",
     "build": "npm run compile",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
@@ -67,12 +68,6 @@
   },
   "devDependencies": {
     "@types/node": "^14.14.6",
-    "@typescript-eslint/eslint-plugin": "^4.6.0",
-    "@typescript-eslint/parser": "^4.6.0",
-    "eslint": "^7.12.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.1.2",
     "rimraf": "^3.0.2"
   }
 }

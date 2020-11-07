@@ -1,4 +1,4 @@
-import { URI as Uri} from 'vscode-uri';
+import { URI as Uri } from 'vscode-uri';
 import * as minimatch from 'minimatch';
 
 const separator = '/';
@@ -13,9 +13,8 @@ export interface ExcludeFilesGlobMap {
     [glob: string]: boolean;
 }
 
-export function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap) {
-    const globs = Object.getOwnPropertyNames(globMap)
-        .filter(glob => globMap[glob]);
+export function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap): string[] {
+    const globs = Object.getOwnPropertyNames(globMap).filter((glob) => globMap[glob]);
     return globs;
 }
 
@@ -23,9 +22,13 @@ export function pathToUri(filePath: string): Uri {
     return Uri.file(filePath);
 }
 
-export function generateExclusionFunctionForUri(globs: Glob[], root: string, allowedSchemes = defaultAllowedSchemes): ExclusionFunction {
+export function generateExclusionFunctionForUri(
+    globs: Glob[],
+    root: string,
+    allowedSchemes = defaultAllowedSchemes
+): ExclusionFunction {
     const rootUri = pathToUri(root || '/');
-    const fns = globs.map(glob => minimatch.filter(glob, { matchBase: true }));
+    const fns = globs.map((glob) => minimatch.filter(glob, { matchBase: true }));
 
     function testPath(path: string): boolean {
         return fns.reduce<boolean>((prev: boolean, fn, idx) => prev || fn(path, idx, [path]), false);

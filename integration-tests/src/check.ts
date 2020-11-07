@@ -63,9 +63,7 @@ function execCommand(path: string, command: string, args: string[]): Result {
 function logResult(result: Result) {
     const { elapsedTime } = result;
     const fullOutputLines = assembleOutput(result).split('\n');
-    const output =
-        (fullOutputLines.length > 5 ? '...\n' : '') +
-        fullOutputLines.slice(-5).join('\n');
+    const output = (fullOutputLines.length > 5 ? '...\n' : '') + fullOutputLines.slice(-5).join('\n');
     console.log(`${output} \n time: ${(elapsedTime / 1000).toFixed(3)}s`);
 }
 
@@ -116,9 +114,7 @@ export interface CheckOptions {
 
 export function check(patterns: string[], options: CheckOptions): void {
     const { exclude, update, fail } = options;
-    const matching = config.repositories.filter((rep) =>
-        shouldCheckRepo(rep, { patterns, exclude })
-    );
+    const matching = config.repositories.filter((rep) => shouldCheckRepo(rep, { patterns, exclude }));
 
     const failed: Repository[] = [];
     for (const rep of matching) {

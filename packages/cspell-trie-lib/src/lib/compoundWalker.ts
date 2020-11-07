@@ -21,26 +21,12 @@ export type WalkNext = boolean;
  *
  * @param trie the compound Trie to walk
  */
-export function* compoundWalker(
-    trie: Trie,
-    caseSensitive = true
-): Generator<WalkItem, any, WalkNext> {
-    const {
-        compoundCharacter: cc,
-        forbiddenWordPrefix: forbidden,
-        stripCaseAndAccentsPrefix,
-    } = trie.options;
+export function* compoundWalker(trie: Trie, caseSensitive = true): Generator<WalkItem, any, WalkNext> {
+    const { compoundCharacter: cc, forbiddenWordPrefix: forbidden, stripCaseAndAccentsPrefix } = trie.options;
     const blockNode = new Set([cc, forbidden, stripCaseAndAccentsPrefix]);
-    const root =
-        (!caseSensitive && trie.root.c?.get(stripCaseAndAccentsPrefix)) ||
-        trie.root;
+    const root = (!caseSensitive && trie.root.c?.get(stripCaseAndAccentsPrefix)) || trie.root;
 
-    function* walk(
-        n: TrieNode,
-        s: string,
-        c: boolean,
-        d: number
-    ): Generator<WalkItem, any, WalkNext> {
+    function* walk(n: TrieNode, s: string, c: boolean, d: number): Generator<WalkItem, any, WalkNext> {
         const deeper = yield { n, s, c, d };
         if (deeper !== false && n.c) {
             for (const [k, cn] of n.c) {
@@ -70,11 +56,7 @@ export function* compoundWalker(
  * @param maxDepth Max compound depth
  * @param caseSensitive case sensitive search.
  */
-export function* compoundWords(
-    trie: Trie,
-    maxDepth: number,
-    caseSensitive = true
-): Generator<string, void, unknown> {
+export function* compoundWords(trie: Trie, maxDepth: number, caseSensitive = true): Generator<string, void, unknown> {
     const stream = compoundWalker(trie, caseSensitive);
     let item = stream.next();
     while (!item.done) {

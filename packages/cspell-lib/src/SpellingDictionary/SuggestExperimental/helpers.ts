@@ -5,7 +5,7 @@ import { SuggestionResult, Feature } from './entities';
  * @param a Result A
  * @param b Result B
  */
-export function compareResults(a: SuggestionResult, b: SuggestionResult) {
+export function compareResults(a: SuggestionResult, b: SuggestionResult): number {
     return b.score - a.score || a.word.localeCompare(b.word);
 }
 
@@ -16,16 +16,16 @@ export function wordToFeatures(word: string): FeatureMap {
     return map;
 }
 
-export function mergeFeatures(map: FeatureMap, features: Feature[]) {
+export function mergeFeatures(map: FeatureMap, features: Feature[]): void {
     map.append(features);
 }
 
 export function wordToSingleLetterFeatures(word: string): Feature[] {
-    return word.split('').map(a => [a, 1] as Feature);
+    return word.split('').map((a) => [a, 1] as Feature);
 }
 
 export function wordToTwoLetterFeatures(word: string): Feature[] {
-    return segmentString(word, 2).map(s => [s, 1] as Feature);
+    return segmentString(word, 2).map((s) => [s, 1] as Feature);
 }
 
 export function segmentString(s: string, segLen: number): string[] {
@@ -36,7 +36,6 @@ export function segmentString(s: string, segLen: number): string[] {
     }
     return result;
 }
-
 
 export class FeatureMap extends Map<string, number> {
     private _count = 0;
@@ -49,7 +48,7 @@ export class FeatureMap extends Map<string, number> {
         return this._count;
     }
 
-    append(features: Feature[]) {
+    append(features: Feature[]): this {
         features.forEach(([k, v]) => {
             this.set(k, (this.get(k) || 0) + v);
             this._count += v;
@@ -64,7 +63,7 @@ export class FeatureMap extends Map<string, number> {
 
     intersectionScore(m: FeatureMap): number {
         let score = 0;
-        for (const [ k, v ] of this) {
+        for (const [k, v] of this) {
             score += Math.min(v, m.get(k) || 0);
         }
         return score;

@@ -1,12 +1,5 @@
 import { Sequence, genSequence } from 'gensequence';
-import {
-    TrieNode,
-    FLAG_WORD,
-    ChildMap,
-    TrieRoot,
-    PartialTrieOptions,
-    TrieOptions,
-} from './TrieNode';
+import { TrieNode, FLAG_WORD, ChildMap, TrieRoot, PartialTrieOptions, TrieOptions } from './TrieNode';
 import { YieldResult, walker } from './walker';
 import { defaultTrieOptions } from './constants';
 
@@ -59,9 +52,7 @@ export function iteratorTrieWords(node: TrieNode): Sequence<string> {
         .map((r) => r.text);
 }
 
-export function mergeOptionalWithDefaults(
-    options: PartialTrieOptions
-): TrieOptions {
+export function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
     return mergeDefaults(options, defaultTrieOptions);
 }
 
@@ -73,10 +64,7 @@ export function createTrieRoot(options: PartialTrieOptions): TrieRoot {
     };
 }
 
-export function createTriFromList(
-    words: Iterable<string>,
-    options?: PartialTrieOptions
-): TrieRoot {
+export function createTriFromList(words: Iterable<string>, options?: PartialTrieOptions): TrieRoot {
     const root = createTrieRoot(options);
     for (const word of words) {
         if (word.length) {
@@ -190,10 +178,7 @@ export function isCircular(root: TrieNode): boolean {
  * @param value
  * @param defaultValue
  */
-export function mergeDefaults<T>(
-    value: Partial<T> | undefined,
-    defaultValue: T
-): T {
+export function mergeDefaults<T>(value: Partial<T> | undefined, defaultValue: T): T {
     const result = { ...defaultValue };
     const allowedKeys = new Set(Object.keys(defaultValue));
     if (value) {
@@ -206,10 +191,7 @@ export function mergeDefaults<T>(
     return result;
 }
 
-export function trieNodeToRoot(
-    node: TrieNode,
-    options: PartialTrieOptions
-): TrieRoot {
+export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): TrieRoot {
     const newOptions = mergeOptionalWithDefaults(options);
     return {
         ...newOptions,

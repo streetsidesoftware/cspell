@@ -5,9 +5,22 @@ import { compareResults } from './helpers';
 describe('Validate Suggest', () => {
     test('test suggestions', () => {
         const words = [
-            'apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear',
-            'cattle', 'rattle', 'battle',
-            'rattles', 'battles', 'tattles',
+            'apple',
+            'ape',
+            'able',
+            'apple',
+            'banana',
+            'orange',
+            'pear',
+            'aim',
+            'approach',
+            'bear',
+            'cattle',
+            'rattle',
+            'battle',
+            'rattles',
+            'battles',
+            'tattles',
         ];
         const trie = Trie.create(words);
         // cspell:ignore aple

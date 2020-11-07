@@ -10,7 +10,11 @@ export interface MatchRangeWithText extends MatchRange {
     text: string;
 }
 
-export function findMatchingRanges(pattern: string | RegExp, text: string) {
+export interface MatchRangeOptionalText extends MatchRange {
+    text?: string;
+}
+
+export function findMatchingRanges(pattern: string | RegExp, text: string): MatchRangeOptionalText[] {
     if (pattern === '.*') {
         return [{ startPos: 0, endPos: text.length }];
     }
@@ -20,7 +24,11 @@ export function findMatchingRanges(pattern: string | RegExp, text: string) {
         const regex = pattern instanceof RegExp ? new RegExp(pattern) : Text.stringToRegExp(pattern, 'gim', 'g');
         if (regex) {
             for (const found of GS.sequenceFromRegExpMatch(regex, text)) {
-                ranges.push({ startPos: found.index, endPos: found.index + found[0].length, text: found[0] });
+                ranges.push({
+                    startPos: found.index,
+                    endPos: found.index + found[0].length,
+                    text: found[0],
+                });
                 if (!regex.global) {
                     break;
                 }
@@ -35,10 +43,10 @@ export function findMatchingRanges(pattern: string | RegExp, text: string) {
 }
 
 function fnSortRanges(a: MatchRange, b: MatchRange) {
-    return (a.startPos - b.startPos) || (a.endPos - b.endPos);
+    return a.startPos - b.startPos || a.endPos - b.endPos;
 }
 
-export function unionRanges(ranges: MatchRange[]) {
+export function unionRanges(ranges: MatchRange[]): MatchRange[] {
     const sortedRanges = ranges.sort(fnSortRanges);
     const result = sortedRanges.slice(1).reduce((acc: MatchRange[], next) => {
         const last = acc[acc.length - 1];
@@ -56,9 +64,8 @@ export function unionRanges(ranges: MatchRange[]) {
     return result;
 }
 
-export function findMatchingRangesForPatterns(patterns: (string | RegExp)[], text: string) {
-    const matchedPatterns = GS.genSequence(patterns)
-        .concatMap((pattern) => findMatchingRanges(pattern, text));
+export function findMatchingRangesForPatterns(patterns: (string | RegExp)[], text: string): MatchRange[] {
+    const matchedPatterns = GS.genSequence(patterns).concatMap((pattern) => findMatchingRanges(pattern, text));
     return unionRanges(matchedPatterns.toArray());
 }
 
@@ -79,7 +86,7 @@ function excludeRange(a: MatchRange, b: MatchRange) {
     const result: MatchRange[] = [];
 
     if (a.startPos < b.startPos) {
-        result.push({startPos: a.startPos, endPos: b.startPos });
+        result.push({ startPos: a.startPos, endPos: b.startPos });
     }
 
     if (a.endPos > b.endPos) {
@@ -88,50 +95,62 @@ function excludeRange(a: MatchRange, b: MatchRange) {
     return result;
 }
 
-
 /**
  * Create a new set of positions that have the excluded position ranges removed.
  */
 export function excludeRanges(includeRanges: MatchRange[], excludeRanges: MatchRange[]): MatchRange[] {
+    type TInclude = 'i';
+    type TExclude = 'e';
+
     interface MatchRangeWithType extends MatchRange {
-        type: 'i' | 'e';
+        type: TInclude | TExclude;
     }
     interface Result {
         ranges: MatchRange[];
         lastExclude?: MatchRange;
     }
-    const tInclude: 'i' = 'i';
-    const tExclude: 'e' = 'e';
+    const tInclude: TInclude = 'i';
+    const tExclude: TExclude = 'e';
 
     const sortedRanges: MatchRangeWithType[] = [
-        ...includeRanges.map(r => ({...r, type: tInclude })),
-        ...excludeRanges.map(r => ({...r, type: tExclude }))].sort(fnSortRanges);
+        ...includeRanges.map((r) => ({ ...r, type: tInclude })),
+        ...excludeRanges.map((r) => ({ ...r, type: tExclude })),
+    ].sort(fnSortRanges);
 
-    const result = sortedRanges.reduce((acc: Result, range: MatchRangeWithType) => {
-        const { ranges, lastExclude } = acc;
-        const lastInclude = ranges.length ? ranges[ranges.length - 1] : undefined;
-        if (range.type === tExclude) {
-            if (!lastInclude || lastInclude.endPos <= range.startPos) {
-                // if the exclude is beyond the current include, save it for later
-                return { ranges, lastExclude: range };
+    const result = sortedRanges.reduce(
+        (acc: Result, range: MatchRangeWithType) => {
+            const { ranges, lastExclude } = acc;
+            const lastInclude = ranges.length ? ranges[ranges.length - 1] : undefined;
+            if (range.type === tExclude) {
+                if (!lastInclude || lastInclude.endPos <= range.startPos) {
+                    // if the exclude is beyond the current include, save it for later
+                    return { ranges, lastExclude: range };
+                }
+                // we need to split the current include.
+                return {
+                    ranges: [...ranges.slice(0, -1), ...excludeRange(ranges[ranges.length - 1], range)],
+                    lastExclude: range,
+                };
             }
-            // we need to split the current include.
-            return { ranges: [...ranges.slice(0, -1), ...excludeRange(ranges[ranges.length - 1], range)], lastExclude: range };
-        }
 
-        // The range is an include, we need to check it against the last exclude
-        if (! lastExclude) {
-            return { ranges: ranges.concat([range]) };
-        }
-        const nextExclude = lastExclude.endPos > range.endPos ? lastExclude : undefined;
-        return { ranges: [...ranges, ...excludeRange(range, lastExclude)], lastExclude: nextExclude };
-    }, { ranges: [] });
+            // The range is an include, we need to check it against the last exclude
+            if (!lastExclude) {
+                return { ranges: ranges.concat([range]) };
+            }
+            const nextExclude = lastExclude.endPos > range.endPos ? lastExclude : undefined;
+            return {
+                ranges: [...ranges, ...excludeRange(range, lastExclude)],
+                lastExclude: nextExclude,
+            };
+        },
+        { ranges: [] }
+    );
 
     return result.ranges;
 }
 
 export function extractRangeText(text: string, ranges: MatchRange[]): MatchRangeWithText[] {
-    return ranges.map(({startPos, endPos}) => ({
+    return ranges.map(({ startPos, endPos }) => ({
         startPos,
         endPos,
         text: text.slice(startPos, endPos),

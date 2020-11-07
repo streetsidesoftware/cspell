@@ -8,10 +8,7 @@ import {} from 'stream';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 
-export function readFile(
-    filename: string,
-    encoding: BufferEncoding = defaultEncoding
-): Promise<string> {
+export function readFile(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<string> {
     return new Promise((resolve, reject) => {
         const data: string[] = [];
         const stream = prepareFileStream(filename, encoding, reject);
@@ -32,18 +29,11 @@ export function readFile(
  * @param filename
  * @param encoding defaults to 'utf8'
  */
-export function lineReaderAsync(
-    filename: string,
-    encoding: BufferEncoding = defaultEncoding
-): AsyncIterable<string> {
+export function lineReaderAsync(filename: string, encoding: BufferEncoding = defaultEncoding): AsyncIterable<string> {
     return streamFileLineByLineAsync(filename, encoding);
 }
 
-function prepareFileStream(
-    filename: string,
-    encoding: string,
-    fnError: (e: Error) => void
-) {
+function prepareFileStream(filename: string, encoding: string, fnError: (e: Error) => void) {
     const pipes: NodeJS.ReadWriteStream[] = [];
     if (filename.match(/\.gz$/i)) {
         pipes.push(zlib.createGunzip());
@@ -51,10 +41,7 @@ function prepareFileStream(
     pipes.push(iconv.decodeStream(encoding));
     const fileStream = fs.createReadStream(filename);
     fileStream.on('error', fnError);
-    const stream = pipes.reduce<NodeJS.ReadableStream>(
-        (s, p) => s.pipe(p!).on('error', fnError),
-        fileStream
-    );
+    const stream = pipes.reduce<NodeJS.ReadableStream>((s, p) => s.pipe(p).on('error', fnError), fileStream);
     return stream;
 }
 
@@ -76,6 +63,7 @@ export function streamFileLineByLineAsync(
 }
 
 type Resolve<T> = (value?: T | PromiseLike<T>) => void;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Reject = (reason?: any) => void;
 
 interface Resolvers<T = IteratorResult<string>> {
@@ -94,10 +82,10 @@ export function streamLineByLineAsync(
 ): AsyncIterableIterator<string> {
     let data = '.';
     let done = false;
-    let error: Error | any;
+    let error: Error | undefined;
     const buffer: string[] = [];
     const pending: Resolvers[] = [];
-    const fnError = (e: Error | any) => {
+    const fnError = (e: Error | undefined) => {
         error = e;
     };
     const fnComplete = () => {
@@ -122,31 +110,29 @@ export function streamLineByLineAsync(
         processBuffer();
     });
 
-    function registerPromise(
-        resolve: Resolve<IteratorResult<string>>,
-        reject: Reject
-    ) {
+    function registerPromise(resolve: Resolve<IteratorResult<string>>, reject: Reject) {
         pending.push({ resolve, reject });
         processBuffer();
     }
 
     function processBuffer() {
         if (error && pending.length && !buffer.length) {
-            const p = pending.shift()!;
-            p.reject(error);
+            const p = pending.shift();
+            p?.reject(error);
             return;
         }
         while (pending.length && buffer.length) {
-            const p = pending.shift()!;
-            const b = buffer.shift()!;
-            p.resolve({ done: false, value: b });
+            const p = pending.shift();
+            const b = buffer.shift();
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            p?.resolve({ done: false, value: b! });
         }
         if (!done) {
             pending.length ? rl.resume() : rl.pause();
         }
         if (done && pending.length && !buffer.length) {
-            const p = pending.shift()!;
-            p.resolve({ done } as IteratorResult<string>);
+            const p = pending.shift();
+            p?.resolve({ done } as IteratorResult<string>);
         }
     }
 
@@ -155,7 +141,7 @@ export function streamLineByLineAsync(
         next() {
             return new Promise(registerPromise);
         },
-        throw(e?: any) {
+        throw(e) {
             fnError(e);
             return new Promise(registerPromise);
         },
@@ -164,10 +150,7 @@ export function streamLineByLineAsync(
     return iter;
 }
 
-function dataToString(
-    data: string | Buffer,
-    encoding: BufferEncoding = 'utf8'
-): string {
+function dataToString(data: string | Buffer, encoding: BufferEncoding = 'utf8'): string {
     if (typeof data === 'string') {
         return data;
     }

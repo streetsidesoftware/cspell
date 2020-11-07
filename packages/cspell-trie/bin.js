@@ -7,10 +7,7 @@ const app = require('./dist/app');
 const program = require('commander');
 
 function reject(e) {
-    if (
-        !(e instanceof program.CommanderError) &&
-        !(e instanceof app.CheckFailed)
-    ) {
+    if (!(e instanceof program.CommanderError) && !(e instanceof app.CheckFailed)) {
         console.log(e);
     }
     process.exit(1);

@@ -5,9 +5,7 @@ import * as Shell from 'shelljs';
 import * as fs from 'fs';
 import { ShouldCheckOptions, shouldCheckRepo } from './shouldCheckRepo';
 
-export const repositoryDir = Path.resolve(
-    Path.join(__dirname, '..', 'repositories')
-);
+export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'repositories'));
 
 const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
@@ -29,10 +27,7 @@ export function addRepository(url: string): boolean {
     return true;
 }
 
-export function updateRepository(
-    path: string | undefined = '',
-    useRemote = false
-): boolean {
+export function updateRepository(path: string | undefined = '', useRemote = false): boolean {
     path = path.replace(/^repositories/, '');
 
     if (!path || !fs.existsSync(Path.join(repositoryDir, path))) {
@@ -44,12 +39,7 @@ export function updateRepository(
     const remote = useRemote ? '--remote' : '';
     const init = useRemote ? '' : '--init';
     Shell.pushd(repositoryDir);
-    exec(
-        `git submodule update --depth 1 ${remote} ${init} -- ${JSON.stringify(
-            path
-        )}`,
-        { echo: true, bail: true }
-    );
+    exec(`git submodule update --depth 1 ${remote} ${init} -- ${JSON.stringify(path)}`, { echo: true, bail: true });
     Shell.popd();
 
     return true;

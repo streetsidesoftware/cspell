@@ -2,23 +2,24 @@ import { testing, LoadOptions, loadDictionary } from './DictionaryLoader';
 import * as path from 'path';
 jest.mock('../util/logger');
 
-
 const root = path.join(__dirname, '..', '..');
 const samples = path.join(root, 'samples');
+
+type ErrorResults = Record<string, unknown> | Error;
 
 describe('Validate DictionaryLoader', () => {
     it('test not found', async () => {
         const error = { code: 'ENOENT' };
         const unknownFormatError = new Error('Unknown file format');
-        const tests: [string, LoadOptions, Object][] = [
+        const tests: [string, LoadOptions, ErrorResults][] = [
             ['./notfound.txt', {}, error],
             ['./notfound.txt', { type: 'S' }, error],
             ['./notfound.txt', { type: 'C' }, error],
             ['./notfound.txt.gz', {}, error],
             ['./notfound.txt.gz', { type: 'S' }, error],
             ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', { }, unknownFormatError],
-            ['./notfound.trie.gz', { }, unknownFormatError],
+            ['./notfound.trie', {}, unknownFormatError],
+            ['./notfound.trie.gz', {}, unknownFormatError],
         ];
 
         for (const t of tests) {
@@ -30,15 +31,15 @@ describe('Validate DictionaryLoader', () => {
     it('test not found', async () => {
         const error = { code: 'ENOENT' };
         const unknownFormatError = new Error('Unknown file format');
-        const tests: [string, LoadOptions, Object][] = [
+        const tests: [string, LoadOptions, ErrorResults][] = [
             ['./notfound.txt', {}, error],
             ['./notfound.txt', { type: 'S' }, error],
             ['./notfound.txt', { type: 'C' }, error],
             ['./notfound.txt.gz', {}, error],
             ['./notfound.txt.gz', { type: 'S' }, error],
             ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', { }, unknownFormatError],
-            ['./notfound.trie.gz', { }, unknownFormatError],
+            ['./notfound.trie', {}, unknownFormatError],
+            ['./notfound.trie.gz', {}, unknownFormatError],
         ];
 
         for (const t of tests) {
@@ -52,15 +53,15 @@ describe('Validate DictionaryLoader', () => {
     it('loadDictionary not found', async () => {
         const error = { code: 'ENOENT' };
         const unknownFormatError = new Error('Unknown file format');
-        const tests: [string, LoadOptions, Object][] = [
+        const tests: [string, LoadOptions, ErrorResults][] = [
             ['./notfound.txt', {}, error],
             ['./notfound.txt', { type: 'S' }, error],
             ['./notfound.txt', { type: 'C' }, error],
             ['./notfound.txt.gz', {}, error],
             ['./notfound.txt.gz', { type: 'S' }, error],
             ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', { }, unknownFormatError],
-            ['./notfound.trie.gz', { }, unknownFormatError],
+            ['./notfound.trie', {}, unknownFormatError],
+            ['./notfound.trie.gz', {}, unknownFormatError],
         ];
 
         for (const t of tests) {
@@ -85,7 +86,6 @@ describe('Validate DictionaryLoader', () => {
         }
     });
 });
-
 
 function sample(file: string): string {
     return path.join(samples, file);

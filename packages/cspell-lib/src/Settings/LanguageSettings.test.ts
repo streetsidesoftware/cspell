@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
 import { getGlobalSettings } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
@@ -10,11 +11,9 @@ const extraSettings: CSpellUserSettings = {
     languageSettings: [
         {
             languageId: 'python',
-            patterns: [ { name: 'special', pattern: 'special'} ],
-            ignoreRegExpList: [
-                'special'
-            ],
-        }
+            patterns: [{ name: 'special', pattern: 'special' }],
+            ignoreRegExpList: ['special'],
+        },
     ],
 };
 
@@ -28,17 +27,28 @@ describe('Validate LanguageSettings', () => {
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
         expect(sPython.allowCompoundWords).toBe(true);
         expect(sPython.dictionaries).not.toHaveLength(0);
-        expect(sPython.dictionaries!).toEqual(expect.arrayContaining([
-            'en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'django'
-        ]));
+        expect(sPython.dictionaries!).toEqual(
+            expect.arrayContaining(['en_us', 'filetypes', 'companies', 'softwareTerms', 'python', 'django'])
+        );
 
         const sPhp = calcSettingsForLanguage(languageSettings, 'php', 'en-gb');
         expect(sPhp.allowCompoundWords).toBeUndefined();
         expect(sPhp.dictionaries).not.toHaveLength(0);
-        expect(sPhp.dictionaries!).toEqual(expect.arrayContaining([
-                'en-gb', 'filetypes', 'companies', 'softwareTerms', 'php', 'html',
-                'npm', 'fonts', 'css', 'typescript', 'fullstack'
-            ]));
+        expect(sPhp.dictionaries!).toEqual(
+            expect.arrayContaining([
+                'en-gb',
+                'filetypes',
+                'companies',
+                'softwareTerms',
+                'php',
+                'html',
+                'npm',
+                'fonts',
+                'css',
+                'typescript',
+                'fullstack',
+            ])
+        );
     });
 
     test('tests that settings at language level are merged', () => {
@@ -62,21 +72,18 @@ describe('Validate LanguageSettings', () => {
         expect(sPython.ignoreRegExpList).toEqual(expect.arrayContaining(['binary']));
     });
 
-    test(
-        "test that global settings are preserved if language setting doesn't exit.",
-        () => {
-            const settings = {
-                enabled: true,
-                allowCompoundWords: false,
-                languageSettings: [],
-                ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
-            };
-            const sPython = calcUserSettingsForLanguage(settings, 'python');
-            expect(sPython).toBeDefined();
-            expect(sPython.enabled).toBe(true);
-            expect(sPython.allowCompoundWords).toBe(true);
-        }
-    );
+    test("test that global settings are preserved if language setting doesn't exit.", () => {
+        const settings = {
+            enabled: true,
+            allowCompoundWords: false,
+            languageSettings: [],
+            ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
+        };
+        const sPython = calcUserSettingsForLanguage(settings, 'python');
+        expect(sPython).toBeDefined();
+        expect(sPython.enabled).toBe(true);
+        expect(sPython.allowCompoundWords).toBe(true);
+    });
 
     test('test merged settings with global', () => {
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());

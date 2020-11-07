@@ -1,7 +1,4 @@
-import {
-    parseDictionary,
-    parseDictionaryLines,
-} from './SimpleDictionaryParser';
+import { parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';
 
 describe('Validate SimpleDictionaryParser', () => {
     test('test parsing lines', () => {
@@ -21,13 +18,9 @@ describe('Validate SimpleDictionaryParser', () => {
             '!forbid',
         ];
         // Basic test
-        expect([...parseDictionaryLines(dictionary().split('\n'))]).toEqual(
-            expected
-        );
+        expect([...parseDictionaryLines(dictionary().split('\n'))]).toEqual(expected);
         // Use expanded accents
-        expect([
-            ...parseDictionaryLines(dictionary().normalize('NFD').split('\n')),
-        ]).toEqual(expected);
+        expect([...parseDictionaryLines(dictionary().normalize('NFD').split('\n'))]).toEqual(expected);
     });
 
     test('basic test', () => {

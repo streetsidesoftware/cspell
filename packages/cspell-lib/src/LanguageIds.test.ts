@@ -1,5 +1,5 @@
 import * as LangId from './LanguageIds';
-import {genSequence} from 'gensequence';
+import { genSequence } from 'gensequence';
 
 describe('Validate LanguageIds', () => {
     test('tests looking up a few extensions', () => {
@@ -12,9 +12,8 @@ describe('Validate LanguageIds', () => {
     test('test that all extensions start with a .', () => {
         const ids = LangId.buildLanguageExtensionMap(LangId.languageExtensionDefinitions);
         const badExtensions = genSequence(ids.keys())
-            .filter(ext => ext[0] !== '.')
+            .filter((ext) => ext[0] !== '.')
             .toArray();
         expect(Object.keys(badExtensions)).toHaveLength(0);
     });
-
 });

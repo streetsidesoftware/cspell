@@ -23,9 +23,7 @@ export function writeConfig(config: Config): void {
 
 export function addRepository(path: string, url: string): void {
     const config = readConfig();
-    const entries = new Map<string, Repository>(
-        config.repositories.map((r) => [r.path, r])
-    );
+    const entries = new Map<string, Repository>(config.repositories.map((r) => [r.path, r]));
     const args = entries.get(path)?.args || ['**/*.*', '*.*'];
     const entry: Repository = {
         path,

@@ -14,31 +14,31 @@ describe('Validate getDictionary', () => {
         };
 
         const dict = await Dictionaries.getDictionary(settings);
-        settings.words.forEach(w => {
+        settings.words.forEach((w) => {
             const word = w.replace(/^[!+*]+(.*)[*+]+/, '$1');
             const found = w[0] !== '!';
-            const result = {word, found: dict.has(word)};
+            const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found });
         });
-        settings.userWords.forEach(w => {
+        settings.userWords.forEach((w) => {
             const word = w.replace(/^[!+*]+(.*)[*+]+/, '$1');
             const found = w[0] !== '!';
-            const result = {word, found: dict.has(word)};
+            const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found });
         });
-        expect(dict.has('zero',     { ignoreCase: false })).toBe(false);
-        expect(dict.has('Café',     { ignoreCase: false })).toBe(true);
-        expect(dict.has('CAFÉ',     { ignoreCase: false })).toBe(true);
-        expect(dict.has('café',     { ignoreCase: false })).toBe(true);
-        expect(dict.has('cafe',     { ignoreCase: true  })).toBe(true);
-        expect(dict.has('CAFE',     { ignoreCase: true  })).toBe(true);
-        expect(dict.has('Rhône',    { ignoreCase: false })).toBe(true);
-        expect(dict.has('RHÔNE',    { ignoreCase: false })).toBe(true);
-        expect(dict.has('rhône',    { ignoreCase: false })).toBe(false);
-        expect(dict.has('rhône',    { ignoreCase: true  })).toBe(true);
-        expect(dict.has('rhone',    { ignoreCase: false })).toBe(false);
-        expect(dict.has('rhone',    { ignoreCase: true  })).toBe(true);
-        expect(dict.has('snarf',    { ignoreCase: true  })).toBe(false);
+        expect(dict.has('zero', { ignoreCase: false })).toBe(false);
+        expect(dict.has('Café', { ignoreCase: false })).toBe(true);
+        expect(dict.has('CAFÉ', { ignoreCase: false })).toBe(true);
+        expect(dict.has('café', { ignoreCase: false })).toBe(true);
+        expect(dict.has('cafe', { ignoreCase: true })).toBe(true);
+        expect(dict.has('CAFE', { ignoreCase: true })).toBe(true);
+        expect(dict.has('Rhône', { ignoreCase: false })).toBe(true);
+        expect(dict.has('RHÔNE', { ignoreCase: false })).toBe(true);
+        expect(dict.has('rhône', { ignoreCase: false })).toBe(false);
+        expect(dict.has('rhône', { ignoreCase: true })).toBe(true);
+        expect(dict.has('rhone', { ignoreCase: false })).toBe(false);
+        expect(dict.has('rhone', { ignoreCase: true })).toBe(true);
+        expect(dict.has('snarf', { ignoreCase: true })).toBe(false);
     });
 
     test('Case sensitive', async () => {
@@ -50,12 +50,12 @@ describe('Validate getDictionary', () => {
         };
 
         const dict = await Dictionaries.getDictionary(settings);
-        settings.words.forEach(word => {
-            const result = {word, found: dict.has(word)};
+        settings.words.forEach((word) => {
+            const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found: true });
         });
-        settings.userWords.forEach(word => {
-            const result = {word, found: dict.has(word)};
+        settings.userWords.forEach((word) => {
+            const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found: true });
         });
         const opts = { ignoreCase: false };
@@ -84,14 +84,14 @@ describe('Validate getDictionary', () => {
         const defs = (settings.dictionaryDefinitions || []).concat([
             {
                 name: 'temp',
-                path: tempDictPath
+                path: tempDictPath,
             },
             {
                 name: 'not_found',
-                path: tempDictPath
-            }
+                path: tempDictPath,
+            },
         ]);
-        const toLoad = ['node', 'html', 'css', 'not_found', 'temp', ];
+        const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
         const dicts = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
 
         expect(dicts[3].has('one')).toBe(true);

@@ -4,27 +4,14 @@ describe('Validate util', () => {
     test('tests uniqueFilterFnGenerator', () => {
         const values = [1, 2, 4, 5, 3, 2, 1, 2, 3, 4, 5, 6, 7, 8];
         const uniqFilter = util.uniqueFilterFnGenerator<number>();
-        expect(values.filter(uniqFilter).sort()).toEqual([
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-        ]);
+        expect(values.filter(uniqFilter).sort()).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
     });
 
     test('tests uniqueFilterFnGenerator with extractor', () => {
         interface Word {
             word: string;
         }
-        const values: Word[] = [
-            { word: 'hello' },
-            { word: 'there' },
-            { word: 'hello' },
-        ];
+        const values: Word[] = [{ word: 'hello' }, { word: 'there' }, { word: 'hello' }];
         const uniqFilter = util.uniqueFilterFnGenerator((w: Word) => w.word);
         expect(values.filter(uniqFilter)).toEqual([values[0], values[1]]);
     });

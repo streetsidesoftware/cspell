@@ -1,9 +1,5 @@
 import { Trie, defaultTrieOptions } from './trie';
-import {
-    isWordTerminationNode,
-    orderTrie,
-    normalizeWordToLowercase,
-} from './util';
+import { isWordTerminationNode, orderTrie, normalizeWordToLowercase } from './util';
 import { suggestionCollector, CompoundWordsMethod } from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
 
@@ -26,9 +22,7 @@ describe('Validate Trie Class', () => {
 
     test('Tests complete', () => {
         const trie = Trie.create(sampleWords);
-        expect([...trie.completeWord('lift')]).toEqual(
-            sampleWords.filter((w) => w.slice(0, 4) === 'lift').sort()
-        );
+        expect([...trie.completeWord('lift')]).toEqual(sampleWords.filter((w) => w.slice(0, 4) === 'lift').sort());
         expect([...trie.completeWord('life')]).toEqual([]);
         expect([...trie.completeWord('lifting')]).toEqual(['lifting']);
     });
@@ -53,30 +47,20 @@ describe('Validate Trie Class', () => {
     test('tests suggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyostalkliftswak
-        const suggestions = trie.suggest(
-            'joyostalkliftswak',
-            10,
-            CompoundWordsMethod.SEPARATE_WORDS
-        );
-        expect(suggestions).toEqual(
-            expect.arrayContaining(['joyous talk lifts walk'])
-        );
+        const suggestions = trie.suggest('joyostalkliftswak', 10, CompoundWordsMethod.SEPARATE_WORDS);
+        expect(suggestions).toEqual(expect.arrayContaining(['joyous talk lifts walk']));
     });
 
     test('tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('wall', 10);
         trie.genSuggestions(collector);
-        expect(collector.suggestions.map((a) => a.word)).toEqual(
-            expect.arrayContaining(['walk'])
-        );
+        expect(collector.suggestions.map((a) => a.word)).toEqual(expect.arrayContaining(['walk']));
     });
 
     test('Tests iterate', () => {
         const trie = Trie.create(sampleWords);
-        const words = [...trie.iterate()]
-            .filter((r) => isWordTerminationNode(r.node))
-            .map((r) => r.text);
+        const words = [...trie.iterate()].filter((r) => isWordTerminationNode(r.node)).map((r) => r.text);
         expect(words).toEqual(sampleWords.sort());
     });
 
@@ -192,12 +176,8 @@ describe('Validate Trie Class', () => {
         expect(trie.hasWord('Café', true)).toBe(false);
         expect(trie.hasWord('café', false)).toBe(false);
         expect(trie.hasWord('Café', false)).toBe(false);
-        expect(trie.hasWord(normalizeWordToLowercase('café'), false)).toBe(
-            true
-        );
-        expect(trie.hasWord(normalizeWordToLowercase('Café'), false)).toBe(
-            true
-        );
+        expect(trie.hasWord(normalizeWordToLowercase('café'), false)).toBe(true);
+        expect(trie.hasWord(normalizeWordToLowercase('Café'), false)).toBe(true);
         expect(trie.hasWord('BeginMiddleEnd', true)).toBe(true);
         expect(trie.hasWord('BeginMiddleMiddleEnd', true)).toBe(true);
         expect(trie.hasWord('BeginEnd', true)).toBe(true);

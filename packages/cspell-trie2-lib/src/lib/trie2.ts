@@ -1,10 +1,4 @@
-import {
-    TrieNode2,
-    TrieNode2EOW,
-    TrieNode2Branch,
-    TrieNode2Root,
-    END_OF_WORD as EOW,
-} from './TrieNode2';
+import { TrieNode2, TrieNode2EOW, TrieNode2Branch, TrieNode2Root, END_OF_WORD as EOW } from './TrieNode2';
 
 export class Trie2 {
     constructor(readonly root: TrieNode2Root) {}
@@ -22,10 +16,7 @@ export class Trie2Builder {
         return this;
     }
 
-    protected findInsertLocation(
-        root: TrieNode2Branch,
-        word: string
-    ): InsertLocation {
+    protected findInsertLocation(root: TrieNode2Branch, word: string): InsertLocation {
         let n = root;
         let p = 0;
         let keepGoing = true;

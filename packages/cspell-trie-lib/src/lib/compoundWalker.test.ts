@@ -1,12 +1,7 @@
 import { parseDictionary } from './SimpleDictionaryParser';
 import { Trie } from './trie';
 import { findWord } from './find';
-import {
-    WalkNext,
-    WalkItem,
-    compoundWalker,
-    compoundWords,
-} from './compoundWalker';
+import { WalkNext, WalkItem, compoundWalker, compoundWords } from './compoundWalker';
 
 // cspell:ignore errorerror
 
@@ -17,14 +12,7 @@ describe('Verify compound walker', () => {
         expect(findWord(trie.root, 'errorerror').found).toBe('errorerror');
         expect(findWord(trie.root, 'ErrorCodes').found).toBe(false);
         const words1 = [...compoundWords(trie, 1)];
-        expect(words1).toEqual([
-            'Code',
-            'Codes',
-            'Error',
-            'Errors',
-            'Message',
-            'Time',
-        ]);
+        expect(words1).toEqual(['Code', 'Codes', 'Error', 'Errors', 'Message', 'Time']);
         const words2 = [...compoundWords(trie, 2)];
         expect(words2).toEqual(expected2());
         const words3 = [...compoundWords(trie, 3)];
@@ -69,10 +57,7 @@ describe('Verify compound walker', () => {
     });
 });
 
-function* walkerToWords(
-    stream: Generator<WalkItem, any, WalkNext>,
-    maxDepth: number
-): Generator<string> {
+function* walkerToWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
     let item = stream.next();
     while (!item.done) {
         const { n, s, c, d } = item.value;
@@ -86,10 +71,7 @@ function* walkerToWords(
     }
 }
 
-function* walkerToCompoundWords(
-    stream: Generator<WalkItem, any, WalkNext>,
-    maxDepth: number
-): Generator<string> {
+function* walkerToCompoundWords(stream: Generator<WalkItem, any, WalkNext>, maxDepth: number): Generator<string> {
     let item = stream.next();
     const compounds: string[] = [];
 

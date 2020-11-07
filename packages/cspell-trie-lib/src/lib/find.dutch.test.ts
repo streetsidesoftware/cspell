@@ -7,10 +7,7 @@ import { TrieNode } from './TrieNode';
 import * as path from 'path';
 import { normalizeWordToLowercase } from './util';
 
-const dutchDictionary = path.join(
-    __dirname,
-    ...'../../../Samples/dicts/nl_compound_trie3.trie.gz'.split('/')
-);
+const dutchDictionary = path.join(__dirname, ...'../../../Samples/dicts/nl_compound_trie3.trie.gz'.split('/'));
 
 describe('Validate findWord', () => {
     const pTrie = readTrie(dutchDictionary);
@@ -27,9 +24,11 @@ describe('Validate findWord', () => {
             })
         ).toEqual(frFound('aanvaardbaard', true));
 
-        expect(
-            findWord(trie, 'code', { matchCase: true, compoundMode: 'none' })
-        ).toEqual({ found: 'code', compoundUsed: false, forbidden: false });
+        expect(findWord(trie, 'code', { matchCase: true, compoundMode: 'none' })).toEqual({
+            found: 'code',
+            compoundUsed: false,
+            forbidden: false,
+        });
 
         expect(
             findWord(trie, 'code', {
@@ -46,33 +45,17 @@ describe('Validate findWord', () => {
         ['cafe', { matchCase: false, compoundMode: 'none' }, frFound('cafe')],
 
         // Compounding enabled, but matching whole words (compounding not used).
-        [
-            'Code',
-            { matchCase: true, compoundMode: 'compound' },
-            frCompoundFound(false),
-        ],
-        [
-            'code',
-            { matchCase: true, compoundMode: 'compound' },
-            frFound('code'),
-        ],
+        ['Code', { matchCase: true, compoundMode: 'compound' }, frCompoundFound(false)],
+        ['code', { matchCase: true, compoundMode: 'compound' }, frFound('code')],
         ['cafe', { matchCase: true, compoundMode: 'compound' }, frFound(false)],
-        [
-            'cafe',
-            { matchCase: false, compoundMode: 'compound' },
-            frFound('cafe'),
-        ],
+        ['cafe', { matchCase: false, compoundMode: 'compound' }, frFound('cafe')],
 
         // compound words
         testCompound('buurtbewoner'), // cspell:ignore buurtbewoner
         testCompound('buurtbewoners'), // cspell:ignore buurtbewoners
 
         // forbidden compounds
-        [
-            'aanvaardbaard',
-            { matchCase: true, compoundMode: 'compound' },
-            frCompoundFound('aanvaardbaard', true),
-        ],
+        ['aanvaardbaard', { matchCase: true, compoundMode: 'compound' }, frCompoundFound('aanvaardbaard', true)],
     ];
 
     tests.forEach(function ([word, options, exResult]) {
@@ -211,15 +194,8 @@ function processText(text: string): string[] {
     ];
 }
 
-function testCompound(
-    word: string,
-    found = true
-): [string, PartialFindOptions, FindFullResult] {
-    return [
-        word,
-        { matchCase: true, compoundMode: 'compound' },
-        frCompoundFound(found && word),
-    ];
+function testCompound(word: string, found = true): [string, PartialFindOptions, FindFullResult] {
+    return [word, { matchCase: true, compoundMode: 'compound' }, frCompoundFound(found && word)];
 }
 
 function frNotFound(compoundUsed = false): FindFullResult {
@@ -230,11 +206,7 @@ function frNotFound(compoundUsed = false): FindFullResult {
     };
 }
 
-function frFound(
-    found: string | false,
-    forbidden = false,
-    compoundUsed = false
-): FindFullResult {
+function frFound(found: string | false, forbidden = false, compoundUsed = false): FindFullResult {
     return {
         found,
         forbidden,
@@ -242,11 +214,7 @@ function frFound(
     };
 }
 
-function frCompoundFound(
-    found: string | false,
-    forbidden = false,
-    compoundUsed = true
-): FindFullResult {
+function frCompoundFound(found: string | false, forbidden = false, compoundUsed = true): FindFullResult {
     return frFound(found, forbidden, compoundUsed);
 }
 
@@ -258,9 +226,7 @@ async function readTrie(filename: string): Promise<TrieNode> {
 function readTextFile(filename: string): Promise<string[]> {
     const lines = fs
         .readFile(filename)
-        .then((buffer) =>
-            /\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer
-        )
+        .then((buffer) => (/\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer))
         .then((buffer) => buffer.toString('utf8'))
         .then((content) => content.split(/\r?\n/g));
     return lines;

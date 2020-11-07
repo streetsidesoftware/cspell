@@ -8,11 +8,7 @@ describe('Validate Iterable Iterators', () => {
     });
 
     test('test concatIterables', () => {
-        const values = [
-            [1, 2, 3],
-            toIterableIterator([4, 5, 6]),
-            new Set([7, 8, 9])
-        ];
+        const values = [[1, 2, 3], toIterableIterator([4, 5, 6]), new Set([7, 8, 9])];
         expect([...concatIterables(...values)]).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     });
 });

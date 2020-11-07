@@ -1,16 +1,6 @@
 import { Sequence, genSequence } from 'gensequence';
-import {
-    TrieNode,
-    TrieOptions,
-    TrieRoot,
-    PartialTrieOptions,
-} from './TrieNode';
-import {
-    genSuggestions,
-    suggest,
-    SuggestionCollector,
-    SuggestionResult,
-} from './suggest';
+import { TrieNode, TrieOptions, TrieRoot, PartialTrieOptions } from './TrieNode';
+import { genSuggestions, suggest, SuggestionCollector, SuggestionResult } from './suggest';
 import {
     createTriFromList,
     insert,
@@ -22,12 +12,7 @@ import {
 } from './util';
 import { walker, WalkerIterator, CompoundWordsMethod } from './walker';
 
-import {
-    COMPOUND_FIX,
-    OPTIONAL_COMPOUND_FIX,
-    CASE_INSENSITIVE_PREFIX,
-    FORBID_PREFIX,
-} from './constants';
+import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
 import {
     findLegacyCompoundWord,
     findCompoundWord,
@@ -36,12 +21,7 @@ import {
     findCompoundNode,
 } from './find';
 
-export {
-    COMPOUND_FIX,
-    OPTIONAL_COMPOUND_FIX,
-    CASE_INSENSITIVE_PREFIX,
-    FORBID_PREFIX,
-} from './constants';
+export { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
 
 export { TrieOptions, PartialTrieOptions } from './TrieNode';
 export { defaultTrieOptions } from './constants';
@@ -83,48 +63,27 @@ export class Trie {
         return this._options;
     }
 
-    find(
-        text: string,
-        minCompoundLength: boolean | number = false
-    ): TrieNode | undefined {
+    find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {
         const minLength: number | undefined =
-            !minCompoundLength || minCompoundLength === true
-                ? undefined
-                : minCompoundLength;
-        return minCompoundLength
-            ? this.findCompound(text, minLength)
-            : this.findExact(text);
+            !minCompoundLength || minCompoundLength === true ? undefined : minCompoundLength;
+        return minCompoundLength ? this.findCompound(text, minLength) : this.findExact(text);
     }
 
-    findCompound(
-        text: string,
-        minCompoundLength = defaultLegacyMinCompoundLength
-    ): TrieNode | undefined {
+    findCompound(text: string, minCompoundLength = defaultLegacyMinCompoundLength): TrieNode | undefined {
         const r = findLegacyCompoundNode(this.root, text, minCompoundLength);
         return r.node;
     }
 
     findExact(text: string): TrieNode | undefined {
-        const r = findCompoundNode(
-            this.root,
-            text,
-            this.options.compoundCharacter
-        );
+        const r = findCompoundNode(this.root, text, this.options.compoundCharacter);
         return r.node;
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        const f = findCompoundWord(
-            this.root,
-            word,
-            this.options.compoundCharacter
-        );
+        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
         if (f.found) return true;
         if (minLegacyCompoundLength) {
-            const len =
-                minLegacyCompoundLength !== true
-                    ? minLegacyCompoundLength
-                    : defaultLegacyMinCompoundLength;
+            const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : defaultLegacyMinCompoundLength;
             return !!findLegacyCompoundWord(this.root, word, len).found;
         }
         return false;
@@ -138,10 +97,7 @@ export class Trie {
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean {
-        const root = !caseSensitive
-            ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) ||
-              this.root
-            : this.root;
+        const root = !caseSensitive ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) || this.root : this.root;
         const f = findCompoundWord(root, word, this.options.compoundCharacter);
         return !!f.found;
     }
@@ -151,10 +107,7 @@ export class Trie {
      * @param word word to lookup.
      */
     isForbiddenWord(word: string): boolean {
-        return (
-            this.hasForbidden &&
-            isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix)
-        );
+        return this.hasForbidden && isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix);
     }
 
     /**
@@ -166,9 +119,7 @@ export class Trie {
         const subNodes = iteratorTrieWords(n || {})
             .filter((w) => w[w.length - 1] !== compoundChar)
             .map((suffix) => text + suffix);
-        return genSequence(n && isWordTerminationNode(n) ? [text] : []).concat(
-            subNodes
-        );
+        return genSequence(n && isWordTerminationNode(n) ? [text] : []).concat(subNodes);
     }
 
     /**
@@ -185,12 +136,7 @@ export class Trie {
         compoundMethod?: CompoundWordsMethod,
         numChanges?: number
     ): string[] {
-        return this.suggestWithCost(
-            text,
-            maxNumSuggestions,
-            compoundMethod,
-            numChanges
-        ).map((a) => a.word);
+        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges).map((a) => a.word);
     }
 
     /**
@@ -203,13 +149,9 @@ export class Trie {
         compoundMethod?: CompoundWordsMethod,
         numChanges?: number
     ): SuggestionResult[] {
-        return suggest(
-            this.getSuggestRoot(true),
-            text,
-            maxNumSuggestions,
-            compoundMethod,
-            numChanges
-        ).filter((sug) => !this.isForbiddenWord(sug.word));
+        return suggest(this.getSuggestRoot(true), text, maxNumSuggestions, compoundMethod, numChanges).filter(
+            (sug) => !this.isForbiddenWord(sug.word)
+        );
     }
 
     /**
@@ -217,17 +159,9 @@ export class Trie {
      * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
-    genSuggestions(
-        collector: SuggestionCollector,
-        compoundMethod?: CompoundWordsMethod
-    ): void {
-        const filter = (sug: SuggestionResult) =>
-            !this.isForbiddenWord(sug.word);
-        const suggestions = genSuggestions(
-            this.getSuggestRoot(true),
-            collector.word,
-            compoundMethod
-        );
+    genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
+        const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
+        const suggestions = genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod);
         function* filteredSuggestions() {
             let maxCost = collector.maxCost;
             let ir: IteratorResult<SuggestionResult, undefined>;
@@ -262,16 +196,9 @@ export class Trie {
     }
 
     private getSuggestRoot(caseSensitive: boolean): TrieRoot {
-        const root =
-            (!caseSensitive &&
-                this.root.c?.get(this._options.stripCaseAndAccentsPrefix)) ||
-            this.root;
-        if (!root.c)
-            return { c: new Map<string, TrieNode>(), ...this._options };
-        const blockNodes = new Set([
-            this._options.forbiddenWordPrefix,
-            this._options.stripCaseAndAccentsPrefix,
-        ]);
+        const root = (!caseSensitive && this.root.c?.get(this._options.stripCaseAndAccentsPrefix)) || this.root;
+        if (!root.c) return { c: new Map<string, TrieNode>(), ...this._options };
+        const blockNodes = new Set([this._options.forbiddenWordPrefix, this._options.stripCaseAndAccentsPrefix]);
         return {
             c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))),
             ...this._options,
@@ -287,10 +214,7 @@ export class Trie {
         );
     }
 
-    static create(
-        words: Iterable<string> | IterableIterator<string>,
-        options?: PartialTrieOptions
-    ): Trie {
+    static create(words: Iterable<string> | IterableIterator<string>, options?: PartialTrieOptions): Trie {
         const root = createTriFromList(words, options);
         orderTrie(root);
         return new Trie(root, undefined);

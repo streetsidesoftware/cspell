@@ -17,9 +17,7 @@ describe('Validate Suggest', () => {
         }
 
         // cspell:ignore tallk jernals juornals joyfull
-        ['talks', 'tallk', 'jernals', 'juornals', 'joyfull', ''].forEach(
-            testWord
-        );
+        ['talks', 'tallk', 'jernals', 'juornals', 'joyfull', ''].forEach(testWord);
     });
 });
 
@@ -95,11 +93,7 @@ function legacySuggest(
     let costLimit = Math.min((bc * word.length) / 2, bc * maxNumChanges);
 
     function comp(a: SuggestionResult, b: SuggestionResult): number {
-        return (
-            a.cost - b.cost ||
-            a.word.length - b.word.length ||
-            (a.word < b.word ? -1 : 1)
-        );
+        return a.cost - b.cost || a.word.length - b.word.length || (a.word < b.word ? -1 : 1);
     }
 
     function emitSug(sug: SuggestionResult) {
@@ -129,14 +123,7 @@ function legacySuggest(
         for (let i = 1; i <= mx; ++i) {
             const curLetter = x[i];
             const c = bc - d;
-            const subCost =
-                w === curLetter
-                    ? 0
-                    : curLetter === lastSugLetter
-                    ? w === lastLetter
-                        ? psc
-                        : c
-                    : c;
+            const subCost = w === curLetter ? 0 : curLetter === lastSugLetter ? (w === lastLetter ? psc : c) : c;
             matrix[d][i] = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
                 matrix[d - 1][i] + c, // insert

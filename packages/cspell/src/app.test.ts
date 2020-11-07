@@ -27,47 +27,12 @@ type Test = [string, string[], ErrorCheck, boolean, boolean, boolean];
 const tests: Test[] = [
     t('test app no-args', [], 'outputHelp', true, true, false),
     t('test app current_file', [__filename], undefined, true, false, false),
-    t(
-        'test app trace hello',
-        ['trace', 'hello'],
-        undefined,
-        false,
-        true,
-        false
-    ),
-    t(
-        'test app check LICENSE',
-        ['check', pathRoot('LICENSE')],
-        undefined,
-        false,
-        true,
-        false
-    ),
+    t('test app trace hello', ['trace', 'hello'], undefined, false, true, false),
+    t('test app check LICENSE', ['check', pathRoot('LICENSE')], undefined, false, true, false),
     t('test app LICENSE', [pathRoot('LICENSE')], undefined, true, false, false),
-    t(
-        'test app samples/Dutch.txt',
-        [pathSamples('Dutch.txt')],
-        app.CheckFailed,
-        true,
-        true,
-        false
-    ),
-    t(
-        'test app current_file --verbose',
-        ['--verbose', __filename],
-        undefined,
-        true,
-        false,
-        true
-    ),
-    t(
-        'test app bad config',
-        ['-c', __filename, __filename],
-        undefined,
-        true,
-        true,
-        false
-    ),
+    t('test app samples/Dutch.txt', [pathSamples('Dutch.txt')], app.CheckFailed, true, true, false),
+    t('test app current_file --verbose', ['--verbose', __filename], undefined, true, false, true),
+    t('test app bad config', ['-c', __filename, __filename], undefined, true, true, false),
 ];
 
 describe('Validate cli', () => {
@@ -75,14 +40,7 @@ describe('Validate cli', () => {
 
     test.each(tests)(
         '%s',
-        async (
-            msg,
-            testArgs: string[],
-            errorCheck: ErrorCheck,
-            eError: boolean,
-            eLog: boolean,
-            eInfo: boolean
-        ) => {
+        async (msg, testArgs: string[], errorCheck: ErrorCheck, eError: boolean, eLog: boolean, eInfo: boolean) => {
             expect(current).toBe('');
             current = msg;
             const commander = getCommander();
@@ -97,15 +55,9 @@ describe('Validate cli', () => {
                 } else {
                     await expect(result).rejects.toThrowError(errorCheck);
                 }
-                eError
-                    ? expect(error).toHaveBeenCalled()
-                    : expect(error).not.toHaveBeenCalled();
-                eLog
-                    ? expect(log).toHaveBeenCalled()
-                    : expect(log).not.toHaveBeenCalled();
-                eInfo
-                    ? expect(info).toHaveBeenCalled()
-                    : expect(info).not.toHaveBeenCalled();
+                eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+                eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+                eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
                 expect(current).toBe(msg);
             } finally {
                 info.mockRestore();

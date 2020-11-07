@@ -20,8 +20,16 @@ export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 export const PREFIX_NO_CASE = '>';
 export const regexPrefix = /^[>]/;
 
-export type SuggestArgs = FunctionArgs<SpellingDictionary['suggest']>
-    | FunctionArgs<(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number) => SuggestionResult[]>;
+export type SuggestArgs =
+    | FunctionArgs<SpellingDictionary['suggest']>
+    | FunctionArgs<
+          (
+              word: string,
+              numSuggestions?: number,
+              compoundMethod?: CompoundWordsMethod,
+              numChanges?: number
+          ) => SuggestionResult[]
+      >;
 
 export const defaultNumSuggestions = 10;
 
@@ -29,10 +37,18 @@ export function impersonateCollector(collector: SuggestionCollector, word: strin
     return {
         collect: collector.collect,
         add: (suggestion: SuggestionResult) => collector.add(suggestion),
-        get suggestions() { return collector.suggestions; },
-        get maxCost() { return collector.maxCost; },
-        get word() { return word; },
-        get maxNumSuggestions() { return collector.maxNumSuggestions; },
+        get suggestions() {
+            return collector.suggestions;
+        },
+        get maxCost() {
+            return collector.maxCost;
+        },
+        get word() {
+            return word;
+        },
+        get maxNumSuggestions() {
+            return collector.maxNumSuggestions;
+        },
         includesTies: false,
     };
 }
@@ -65,19 +81,19 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
         }
     }
 
-    return [ ...forms ];
+    return [...forms];
 }
 
 interface DictionaryWordForm {
-    w: string;  // the word
-    p: string;  // prefix to add
+    w: string; // the word
+    p: string; // prefix to add
 }
-function *wordDictionaryForms(word: string, isDictionaryCaseSensitive: boolean): IterableIterator<DictionaryWordForm> {
+function* wordDictionaryForms(word: string, isDictionaryCaseSensitive: boolean): IterableIterator<DictionaryWordForm> {
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
     const wordNa = removeAccents(word);
     const wordLcNa = removeAccents(wordLc);
-    function wf(w: string, p: string = '') {
+    function wf(w: string, p = '') {
         return { w, p };
     }
 
@@ -93,19 +109,15 @@ export function wordDictionaryFormsCollector(isDictionaryCaseSensitive: boolean)
 
     return (word: string) => {
         return genSequence(wordDictionaryForms(word, isDictionaryCaseSensitive))
-        .filter(w => !knownWords.has(w.w))
-        .map(w => w.p + w.w)
-        .filter(w => !knownWords.has(w))
-        .map(w => (knownWords.add(w), w));
+            .filter((w) => !knownWords.has(w.w))
+            .map((w) => w.p + w.w)
+            .filter((w) => !knownWords.has(w))
+            .map((w) => (knownWords.add(w), w));
     };
 }
 
 export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
-    return !opt
-    ? {}
-    : typeof opt === 'object'
-    ? opt
-    : { useCompounds: opt };
+    return !opt ? {} : typeof opt === 'object' ? opt : { useCompounds: opt };
 }
 
 export const __testMethods = {

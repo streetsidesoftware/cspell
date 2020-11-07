@@ -24,13 +24,7 @@ export enum CompoundWordsMethod {
     JOIN_WORDS,
 }
 
-/**
- * Ask for the next result.
- * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
- * This can be used to limit the walker's depth.
- */
-// next: (goDeeper?: boolean) => IteratorResult<YieldResult>;
-export type WalkerIterator = Generator<YieldResult, any, boolean | undefined>;
+export type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
 
 /**
  * Walks the Trie and yields a value at each node.
@@ -86,11 +80,7 @@ export interface Hinting {
  */
 // next: (hinting?: Hinting) => IteratorResult<YieldResult>;
 // [Symbol.iterator]: () => HintedWalkerIterator;
-export type HintedWalkerIterator = Generator<
-    YieldResult,
-    any,
-    Hinting | undefined
->;
+export type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefined>;
 
 /**
  * Walks the Trie and yields a value at each node.
@@ -124,30 +114,30 @@ export function* hintedWalker(
 
     function* children(n: TrieNode, hintOffset: number): StackItem {
         if (n.c) {
-            const h =
-                hint.slice(hintOffset, hintOffset + 3) +
-                hint.slice(Math.max(0, hintOffset - 2), hintOffset);
+            const h = hint.slice(hintOffset, hintOffset + 3) + hint.slice(Math.max(0, hintOffset - 2), hintOffset);
             const hints = new Set<string>(h);
+            const c = n.c;
 
             // First yield the hints
             yield* [...hints]
-                .filter((a) => n.c!.has(a))
+                .filter((a) => c.has(a))
                 .map((letter) => ({
                     letter,
-                    node: n.c!.get(letter)!,
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    node: c.get(letter)!,
                     hintOffset: hintOffset + 1,
                 }));
             // We don't want to suggest the compound character.
             hints.add(compoundCharacter);
             // Then yield everything else.
-            yield* [...n.c]
+            yield* [...c]
                 .filter((a) => !hints.has(a[0]))
                 .map(([letter, node]) => ({
                     letter,
                     node,
                     hintOffset: hintOffset + 1,
                 }));
-            if (n.c.has(compoundCharacter)) {
+            if (c.has(compoundCharacter)) {
                 const compoundRoot = root.c.get(compoundCharacter);
                 if (compoundRoot) {
                     yield* children(compoundRoot, hintOffset);

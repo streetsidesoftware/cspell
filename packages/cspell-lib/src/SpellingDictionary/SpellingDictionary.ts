@@ -37,7 +37,12 @@ export interface SpellingDictionary {
     has(word: string, useCompounds: boolean): boolean;
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
-    suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
+    suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
     mapWord(word: string): string;

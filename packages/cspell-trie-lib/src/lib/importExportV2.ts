@@ -28,11 +28,7 @@ function leaves(node: TrieRefNode): Sequence<LeafResult> {
         return refNode;
     }
 
-    function* walk(
-        node: TrieNode,
-        k: string,
-        p?: TrieRefNode
-    ): IterableIterator<LeafResult> {
+    function* walk(node: TrieNode, k: string, p?: TrieRefNode): IterableIterator<LeafResult> {
         const ref = toRefNode(node, k);
         if (!ref.c) {
             yield { n: ref, p };
@@ -105,11 +101,7 @@ function toLine(node: TrieRefNode, base: number): string {
 }
 
 function generateHeader(base: number, comment: string): Sequence<string> {
-    const header = [
-        '#!/usr/bin/env cspell-trie reader',
-        'TrieXv2',
-        'base=' + base,
-    ]
+    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv2', 'base=' + base]
         .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
         .concat(['# Data:', DATA]);
     return genSequence(header);
@@ -126,10 +118,7 @@ export interface ExportOptions {
  * Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
-export function serializeTrie(
-    root: TrieRoot,
-    options: ExportOptions | number = 16
-): Sequence<string> {
+export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
@@ -141,15 +130,11 @@ export function serializeTrie(
         .map((a) => a + '\n');
 }
 
-function* toIterableIterator<T>(
-    iter: Iterable<T> | IterableIterator<T>
-): IterableIterator<T> {
+function* toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
     yield* iter;
 }
 
-export function importTrie(
-    linesX: Iterable<string> | IterableIterator<string>
-): TrieRoot {
+export function importTrie(linesX: Iterable<string> | IterableIterator<string>): TrieRoot {
     let radix = 16;
     const comment = /^\s*#/;
     const iter = toIterableIterator(linesX);
@@ -164,6 +149,7 @@ export function importTrie(
 
     function readHeader(iter: Iterator<string>) {
         const headerRows: string[] = [];
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const next = iter.next();
             if (next.done) {

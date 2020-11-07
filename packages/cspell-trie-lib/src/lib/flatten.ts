@@ -23,9 +23,7 @@ export function flattenToTrieRefNode(root: TrieNode, nodes: Emitter): number {
         const r = copy(n);
         if (n.c) {
             const children = [...n.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
-            r.r = children.map(
-                (c) => [c[0], convert(c[1])] as [string, number]
-            );
+            r.r = children.map((c) => [c[0], convert(c[1])] as [string, number]);
         }
 
         if (!canCache(r)) {
@@ -46,9 +44,7 @@ export function flattenToTrieRefNode(root: TrieNode, nodes: Emitter): number {
     return convert(root);
 }
 
-export function flattenToTrieRefNodeIterable(
-    root: TrieNode
-): IterableIterator<TrieRefNode> {
+export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<TrieRefNode> {
     const signatures = new Map<string, number>();
     const cached = new Set([0]); // The end of word is always a 0 and is always cached.
 
@@ -71,10 +67,7 @@ export function flattenToTrieRefNodeIterable(
         }
         const stack: StackElement[] = [];
 
-        function addToStack(
-            c: Map<string, TrieNode> | undefined,
-            p: TrieRefNode
-        ) {
+        function addToStack(c: Map<string, TrieNode> | undefined, p: TrieRefNode) {
             if (!c) return;
             const children = [...c.entries()]
                 .map(([k, n]) => ({ k, n, p, r: undefined }))

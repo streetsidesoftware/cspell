@@ -14,13 +14,7 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             const collector = suggestionCollector('joyful', 8, undefined, 1);
-            collector.collect(
-                genCompoundableSuggestions(
-                    trie.root,
-                    collector.word,
-                    CompoundWordsMethod.NONE
-                )
-            );
+            collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.NONE));
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toEqual(expect.arrayContaining(['joyful']));
@@ -36,11 +30,7 @@ describe('Validate English Suggestions', () => {
             // cspell:ignore joyfull
             const collector = suggestionCollector('joyfull', 8);
             collector.collect(
-                genCompoundableSuggestions(
-                    trie.root,
-                    collector.word,
-                    CompoundWordsMethod.SEPARATE_WORDS
-                )
+                genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -57,24 +47,13 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore onetwothreefour
-            const collector = suggestionCollector(
-                'onetwothreefour',
-                8,
-                undefined,
-                3.3
-            );
+            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3.3);
             collector.collect(
-                genCompoundableSuggestions(
-                    trie.root,
-                    collector.word,
-                    CompoundWordsMethod.SEPARATE_WORDS
-                )
+                genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['one two three four'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['one two three four']));
             expect(suggestions[0]).toBe('one two three four');
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         },
@@ -86,24 +65,11 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore onetwothrefour
-            const collector = suggestionCollector(
-                'onetwothreefour',
-                8,
-                undefined,
-                3
-            );
-            collector.collect(
-                genCompoundableSuggestions(
-                    trie.root,
-                    collector.word,
-                    CompoundWordsMethod.JOIN_WORDS
-                )
-            );
+            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
+            collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.JOIN_WORDS));
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['one+two+three+four'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         },
         timeout
@@ -114,24 +80,11 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore onetwothrefour
-            const collector = suggestionCollector(
-                'onetwothreefour',
-                8,
-                undefined,
-                3
-            );
-            collector.collect(
-                genCompoundableSuggestions(
-                    trie.root,
-                    collector.word,
-                    CompoundWordsMethod.JOIN_WORDS
-                )
-            );
+            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
+            collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.JOIN_WORDS));
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['one+two+three+four'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
         },
         timeout
@@ -143,27 +96,14 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore testscomputesuggestions
-            const collector = suggestionCollector(
-                'testscomputesuggestions',
-                2,
-                undefined,
-                3,
-                true
-            );
+            const collector = suggestionCollector('testscomputesuggestions', 2, undefined, 3, true);
             collector.collect(
-                genCompoundableSuggestions(
-                    trie.root,
-                    collector.word,
-                    CompoundWordsMethod.SEPARATE_WORDS
-                )
+                genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-            expect(suggestions).toEqual([
-                'tests compute suggestions',
-                'test compute suggestions',
-            ]);
+            expect(suggestions).toEqual(['tests compute suggestions', 'test compute suggestions']);
             expect(suggestions[0]).toBe('tests compute suggestions');
         },
         timeout
@@ -175,25 +115,14 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore testscompundsuggestions
-            const collector = suggestionCollector(
-                'testscompundsuggestions',
-                1,
-                undefined,
-                3
-            );
+            const collector = suggestionCollector('testscompundsuggestions', 1, undefined, 3);
             collector.collect(
-                genCompoundableSuggestions(
-                    trie.root,
-                    collector.word,
-                    CompoundWordsMethod.SEPARATE_WORDS
-                )
+                genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-            expect(suggestions).toEqual(
-                expect.arrayContaining(['tests compound suggestions'])
-            );
+            expect(suggestions).toEqual(expect.arrayContaining(['tests compound suggestions']));
             expect(suggestions[0]).toBe('tests compound suggestions');
         },
         timeout

@@ -54,11 +54,13 @@ const dictionaryCache = new Map<string, CacheEntry>();
 
 export function loadDictionary(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
     const key = calcKey(uri, options);
-    if (!dictionaryCache.has(key)) {
-        dictionaryCache.set(key, loadEntry(uri, options));
+    const entry = dictionaryCache.get(key);
+    if (entry) {
+        return entry.dictionary;
     }
-    const entry = dictionaryCache.get(key)!;
-    return entry.dictionary;
+    const loadedEntry = loadEntry(uri, options);
+    dictionaryCache.set(key, loadedEntry);
+    return loadedEntry.dictionary;
 }
 
 function calcKey(uri: string, options: LoadOptions) {
@@ -66,26 +68,18 @@ function calcKey(uri: string, options: LoadOptions) {
     return [uri, loaderType].join('|');
 }
 
-export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()) {
-    await Promise.all([...dictionaryCache]
-        .map(([, entry]) => refreshEntry(entry, maxAge, now))
-    );
+export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()): Promise<void> {
+    await Promise.all([...dictionaryCache].map(([, entry]) => refreshEntry(entry, maxAge, now)));
 }
 
-async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now()) {
+async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now()): Promise<void> {
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
         const pStat = fs.stat(entry.uri).catch(() => undefined);
         const [state, oldState] = await Promise.all([pStat, entry.state]);
-        if (entry.ts === now && (
-            state?.mtimeMs !== oldState?.mtimeMs ||
-            state?.size !== oldState?.size
-        )) {
-            dictionaryCache.set(
-                calcKey(entry.uri, entry.options),
-                loadEntry(entry.uri, entry.options)
-            );
+        if (entry.ts === now && (state?.mtimeMs !== oldState?.mtimeMs || state?.size !== oldState?.size)) {
+            dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
         }
     }
 }
@@ -108,7 +102,7 @@ function determineType(uri: string, options: LoadOptions): LoaderType {
     return regTrieTest.test(uri) ? 'T' : type;
 }
 
-function load(uri: string, options: LoadOptions): Promise<SpellingDictionary>  {
+function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
     const type = determineType(uri, options);
     const loader = loaders[type] || loaders.default;
     return loader(uri, options);
@@ -133,5 +127,5 @@ export const testing = {
     dictionaryCache,
     refreshEntry,
     loadEntry,
-    load
+    load,
 };

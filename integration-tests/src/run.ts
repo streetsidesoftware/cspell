@@ -9,13 +9,9 @@ function run(program: commander.Command) {
         .option('-u, --update', 'Update snapshot', false)
         .option('-f, --fail', 'Fail on first error.', false)
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
-        .description(
-            'Run the integration tests, checking the spelling results against the various repositories',
-            {
-                pattern:
-                    'Only check repositories whose name contain the pattern.',
-            }
-        )
+        .description('Run the integration tests, checking the spelling results against the various repositories', {
+            pattern: 'Only check repositories whose name contain the pattern.',
+        })
         .action(
             (
                 patterns: string[],
