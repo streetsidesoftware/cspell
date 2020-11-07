@@ -16,9 +16,6 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "eslint": "node ../../node_modules/eslint/bin/eslint",
-    "lint": "npm run eslint -- --fix .",
-    "lint-ci": "npm run eslint -- .",
     "build": "npm run compile",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",

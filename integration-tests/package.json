@@ -6,9 +6,6 @@
   "bin": "tester.js",
   "scripts": {
     "build": "tsc -p .",
-    "eslint": "node ../node_modules/eslint/bin/eslint",
-    "lint": "npm run eslint -- --fix .",
-    "lint-ci": "npm run eslint -- .",
     "postinstall": "npm run build",
     "integration-tests": "node tester.js check -f",
     "update-snapshots": "node tester.js check -u"

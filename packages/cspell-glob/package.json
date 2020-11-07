@@ -23,9 +23,6 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
-    "eslint": "node ../../node_modules/eslint/bin/eslint",
-    "lint": "npm run eslint -- --fix .",
-    "lint-ci": "npm run eslint -- .",
     "clean": "rimraf lib",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",
