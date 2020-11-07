@@ -2,32 +2,28 @@ name: Lint
 on:
   pull_request:
     paths:
-      - ".github/workflows/lint.yml"
-      - "**/tslint.json"
-      - "**/tsconfig.json"
-      - "**/.eslintrc.js"
-      - "**/.eslintignore"
-      - "**/package*.json"
-      - "**/*.ts"
+      - '.github/workflows/lint.yml'
+      - '**/tslint.json'
+      - '**/tsconfig.json'
+      - '**/.eslintrc.js'
+      - '**/.eslintignore'
+      - '**/package*.json'
+      - '**/*.ts'
   push:
     paths:
-      - ".github/workflows/lint.yml"
-      - "**/tslint.json"
-      - "**/tsconfig.json"
-      - "**/.eslintrc.js"
-      - "**/.eslintignore"
-      - "**/package*.json"
-      - "**/*.ts"
+      - '.github/workflows/lint.yml'
+      - '**/tslint.json'
+      - '**/tsconfig.json'
+      - '**/.eslintrc.js'
+      - '**/.eslintignore'
+      - '**/package*.json'
+      - '**/*.ts'
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2.1.2
-    - run: npm ci
-    - run: npm run lint-ci
-    - run: |
-        cd integration-tests
-        npm ci
-        npm run lint-ci
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.2
+      - run: npm ci
+      - run: npm run lint-ci
