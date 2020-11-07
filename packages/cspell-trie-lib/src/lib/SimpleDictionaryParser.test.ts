@@ -1,7 +1,7 @@
 import { parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';
 
 describe('Validate SimpleDictionaryParser', () => {
-    test('test parsing lines', () => {
+    test('parsing lines', () => {
         const expected = [
             'Begin',
             '~begin',

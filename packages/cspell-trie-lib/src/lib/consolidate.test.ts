@@ -25,9 +25,6 @@ describe('Validate Consolidate', () => {
         const trie3 = consolidate(trie);
         const countTrie3 = countNodes(trie3);
         expect(countTrie3).toBe(countTrie2);
-    });
-
-    test('consolidate', () => {
         expect(countNodes(consolidate(createTriFromList(sampleWords)))).toBe(96);
     });
 

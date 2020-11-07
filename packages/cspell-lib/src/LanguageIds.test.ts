@@ -9,7 +9,7 @@ describe('Validate LanguageIds', () => {
         expect(LangId.getLanguagesForExt('hs')).toEqual(expect.arrayContaining(['haskell']));
     });
 
-    test('test that all extensions start with a .', () => {
+    test('that all extensions start with a .', () => {
         const ids = LangId.buildLanguageExtensionMap(LangId.languageExtensionDefinitions);
         const badExtensions = genSequence(ids.keys())
             .filter((ext) => ext[0] !== '.')

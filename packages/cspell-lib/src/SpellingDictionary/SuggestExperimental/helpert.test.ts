@@ -3,7 +3,7 @@ import { SuggestionResult, Feature } from './entities';
 import { FeatureMap } from './helpers';
 
 describe('Validate Suggest Helpers', () => {
-    test('test compareResult', () => {
+    test('compareResult', () => {
         const sr: SuggestionResult[] = [
             { word: 'cone', score: 0.6 },
             { word: 'apple', score: 0.3 },
@@ -15,7 +15,7 @@ describe('Validate Suggest Helpers', () => {
         expect(r).toEqual([sr[3], sr[0], sr[1], sr[2]]);
     });
 
-    test('test wordToSingleLetterFeatures', () => {
+    test('wordToSingleLetterFeatures', () => {
         const tests = [
             { v: '', e: [] },
             { v: 'a', e: [['a', 1]] },
@@ -36,7 +36,7 @@ describe('Validate Suggest Helpers', () => {
         });
     });
 
-    test('test mergeFeatures', () => {
+    test('mergeFeatures', () => {
         const tests = [
             { v: '', e: [] },
             { v: 'a', e: [['a', 1]] },
@@ -60,7 +60,7 @@ describe('Validate Suggest Helpers', () => {
         });
     });
 
-    test('test wordToTwoLetterFeatures', () => {
+    test('wordToTwoLetterFeatures', () => {
         const tests = [
             { v: '', e: [] },
             {
@@ -88,7 +88,7 @@ describe('Validate Suggest Helpers', () => {
     });
 
     // cspell:ignore ello
-    test('test segmentString', () => {
+    test('segmentString', () => {
         const tests = [
             { v: 'a', s: 1, e: 'a'.split('') },
             { v: 'hello', s: 1, e: 'hello'.split('') },
@@ -105,7 +105,7 @@ describe('Validate Suggest Helpers', () => {
         });
     });
 
-    test('test wordToFeatures', () => {
+    test('wordToFeatures', () => {
         const comp = (a: Feature, b: Feature) => a[0].localeCompare(b[0]);
         const features = helpers.wordToFeatures('^hello$');
         expect([...features].sort(comp)).toEqual(
@@ -126,7 +126,7 @@ describe('Validate Suggest Helpers', () => {
         );
     });
 
-    test('test intersectionScore', () => {
+    test('intersectionScore', () => {
         const fA = helpers.wordToFeatures('^hello$');
         const fB = helpers.wordToFeatures('^goodbye$');
         expect(fA.intersectionScore(fA)).toBe(fA.count);
@@ -135,7 +135,7 @@ describe('Validate Suggest Helpers', () => {
         expect(fA.intersectionScore(fB)).toBe(4);
     });
 
-    test('test correlationScore', () => {
+    test('correlationScore', () => {
         const fA = helpers.wordToFeatures('^hello$');
         const fB = helpers.wordToFeatures('^goodbye$');
         expect(fA.correlationScore(fA)).toBe(1);

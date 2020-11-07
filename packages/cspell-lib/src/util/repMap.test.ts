@@ -1,18 +1,18 @@
 import * as repMap from './repMap';
 
 describe('ReMap Tests', () => {
-    test('test basic replace', () => {
+    test('empty replace map', () => {
         const mapper = repMap.createMapper([]);
         expect(mapper('hello')).toBe('hello');
     });
 
-    test('test basic replace', () => {
+    test('punctuation replacement', () => {
         const mapper = repMap.createMapper([['`', "'"]]);
         expect(mapper('hello')).toBe('hello');
         expect(mapper('don`t')).toBe("don't");
     });
 
-    test('test multiple replacements', () => {
+    test('multiple replacements', () => {
         const mapper = repMap.createMapper([
             ['a', 'A'],
             ['b', 'B'],
@@ -21,7 +21,7 @@ describe('ReMap Tests', () => {
         expect(mapper('banana')).toBe('BAnAnA');
     });
 
-    test('test empty replacements', () => {
+    test('empty replacements', () => {
         const mapper = repMap.createMapper([
             ['a', 'A'],
             ['b', 'B'],
@@ -31,7 +31,7 @@ describe('ReMap Tests', () => {
         expect(mapper('banana')).toBe('BAnAnA');
     });
 
-    test('test regex replacements', () => {
+    test('regex replacements', () => {
         const mapper = repMap.createMapper([
             ['!|@|#|\\$', '_'],
             ['a', 'A'],
@@ -39,7 +39,7 @@ describe('ReMap Tests', () => {
         expect(mapper('$apple!!')).toBe('_Apple__');
     });
 
-    test('test repeated replacements', () => {
+    test('repeated replacements', () => {
         const mapper = repMap.createMapper([
             ['a', 'A'],
             ['a', 'X'],
@@ -47,7 +47,7 @@ describe('ReMap Tests', () => {
         expect(mapper('apples')).toBe('Apples');
     });
 
-    test('test nested regex replacements', () => {
+    test('nested regex replacements', () => {
         const mapper = repMap.createMapper([
             ['(!)', '_'],
             ['((\\$))', '#'],
@@ -56,7 +56,7 @@ describe('ReMap Tests', () => {
         expect(mapper('$apple!!')).toBe('#Apple__');
     });
 
-    test('test bad regex replacements', () => {
+    test('bad regex replacements', () => {
         const mapper = repMap.createMapper([
             ['(', '_'],
             ['a', 'A'],
@@ -64,7 +64,7 @@ describe('ReMap Tests', () => {
         expect(mapper('(apple)')).toBe('_Apple)');
     });
 
-    test('test empty regex replacements', () => {
+    test('empty regex replacements', () => {
         const mapper = repMap.createMapper([
             ['', '_'],
             ['a', 'A'],

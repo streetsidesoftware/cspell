@@ -196,7 +196,7 @@ describe('Util Text', () => {
         ).toEqual(['Γ', 'γ', 'gamma', 'γάμμα']);
     });
 
-    test('test case of Chinese characters', () => {
+    test('case of Chinese characters', () => {
         expect(Text.isUpperCase('携程旅行网')).toBe(false);
         expect(Text.isLowerCase('携程旅行网')).toBe(false);
     });
@@ -231,7 +231,7 @@ describe('Util Text', () => {
         expect(linesB).toEqual(linesA);
     });
 
-    test('test extractText', () => {
+    test('extractText', () => {
         const line = Text.textOffset('This is a line of text to be processed.');
         const words = Text.extractWordsFromTextOffset(line);
         const results = words.map((wo) => Text.extractText(line, wo.offset, wo.offset + wo.text.length)).toArray();

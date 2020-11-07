@@ -19,7 +19,7 @@ describe('Validate Util Functions', () => {
         expect(result).toEqual(sampleWords.filter((a) => a.length <= 4).sort());
     });
 
-    test('Test Hinted Walker', () => {
+    test('Hinted Walker', () => {
         const root = createTriFromList(sampleWords);
         orderTrie(root);
         // cspell:ignore joty

@@ -4,7 +4,7 @@ import { readFile } from 'fs-extra';
 import * as path from 'path';
 
 describe('Import/Export', () => {
-    test('tests serialize / deserialize', async () => {
+    test('tests serialize / deserialize from trie', async () => {
         const trie = Trie.createTriFromList(sampleWords);
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
         const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV2.trie'), 'utf8')).replace(
@@ -17,7 +17,7 @@ describe('Import/Export', () => {
         expect(words).toEqual([...sampleWords].sort());
     });
 
-    test('tests serialize / deserialize', async () => {
+    test('serialize / deserialize with object', async () => {
         const trie = Trie.createTriFromList(sampleWords);
         const data = [...serializeTrie(trie, 10)].join('');
         const root = importTrie(data.split('\n'));

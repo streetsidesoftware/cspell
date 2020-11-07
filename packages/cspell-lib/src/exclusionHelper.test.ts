@@ -12,7 +12,7 @@ describe('Verify Exclusion Helper functions', () => {
         expect(extractGlobsFromExcludeFilesGlobMap(excludeDef)).toEqual(['**/node_modules', '**/typings']);
     });
 
-    test('Test the generated matching function', () => {
+    test('the generated matching function', () => {
         const globs = ['**/node_modules', '**/typings', '.vscode'];
         const filesMatching = [
             'file:///project/myProject/node_modules',
@@ -28,7 +28,7 @@ describe('Verify Exclusion Helper functions', () => {
         });
     });
 
-    test('Test the generated matching function for nested projects', () => {
+    test('the generated matching function for nested projects', () => {
         const globs = ['**/node_modules', '**/typings', '.vscode'];
         const filesMatching = [
             'file:///User/projects/myProject/node_modules/test/test.js',
@@ -44,7 +44,7 @@ describe('Verify Exclusion Helper functions', () => {
         });
     });
 
-    test('Test against generated files', () => {
+    test('against generated files', () => {
         const globs = ['debug:/**', '**/*.rendered', 'git-index:/**'];
         const files = [
             'debug://internal/1014/extHostCommands.ts',
@@ -62,7 +62,7 @@ describe('Verify Exclusion Helper functions', () => {
         });
     });
 
-    test('Test to make sure normal files are loaded', () => {
+    test('to make sure normal files are loaded', () => {
         const globs = [
             'debug:/**', // Files that are generated while debugging (generally from a .map file)
             'vscode:/**', // VS Code generated files (settings.json for example)

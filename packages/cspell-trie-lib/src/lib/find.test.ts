@@ -5,7 +5,7 @@ import { Trie } from './trie';
 describe('Validate findWord', () => {
     const trie = dictionary().root;
 
-    test('test find exact words preserve case', () => {
+    test('find exact words preserve case', () => {
         // Code is not allowed as a full word.
         expect(
             findWord(trie, 'blueerror', {
@@ -82,7 +82,7 @@ describe('Validate findWord', () => {
 });
 
 describe('Validate Legacy Compound lookup', () => {
-    test('Test compound words', () => {
+    test('compound words', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
         function has(word: string, compoundLen: true | number): boolean {

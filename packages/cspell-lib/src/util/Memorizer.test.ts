@@ -1,7 +1,7 @@
 import { memorizer } from './Memorizer';
 
 describe('Validate Memorizer', () => {
-    test('Test the memorizer works', () => {
+    test('the memorizer works', () => {
         const counts = new Map<number, number>();
         const fn = (a: number) => {
             counts.set(a, (counts.get(a) || 0) + 1);
@@ -20,7 +20,7 @@ describe('Validate Memorizer', () => {
         fnTest(0, 1, 5);
     });
 
-    test('Test cache reset', () => {
+    test('cache reset', () => {
         const counts = new Map<number, number>();
         const fn = (a: number) => {
             counts.set(a, (counts.get(a) || 0) + 1);

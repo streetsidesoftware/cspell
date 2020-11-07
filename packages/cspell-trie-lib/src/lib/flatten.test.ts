@@ -4,7 +4,7 @@ import { genSequence } from 'gensequence';
 import { TrieRefNode } from './trieRef';
 
 describe('Validate Flatten', () => {
-    test('Simple flatten', () => {
+    test('Simple flatten Array', () => {
         const trie = createTriFromList(sampleWords);
         const nodes = flattenToTrieRefNodeArray(trie);
         expect(nodes).toHaveLength(112);
@@ -12,7 +12,7 @@ describe('Validate Flatten', () => {
         expect(words).toEqual(sampleWords.sort());
     });
 
-    test('Simple flatten', () => {
+    test('Simple flatten Iterable', () => {
         const trie = createTriFromList(sampleWords);
         const nodes = [...flattenToTrieRefNodeIterable(trie)];
         expect(nodes).toHaveLength(112);

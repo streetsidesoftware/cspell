@@ -24,6 +24,7 @@ const config = {
         },
         {
             files: '**/*.test.{ts,js}',
+            extends: 'plugin:jest/recommended',
             env: {
                 jest: true,
             },

@@ -27,14 +27,14 @@ describe('Validate the fileReader', () => {
         expect(a).toEqual(['a1', '2', '3', '45', '6', '']);
     });
 
-    test('test the file reader', async () => {
+    test('the file reader', async () => {
         const lines = await asyncIterable.toArray(fReader.streamFileLineByLineAsync(__filename));
         const actual = lines.join('\n');
         const expected = fs.readFileSync(__filename, 'utf8');
         expect(actual).toBe(expected);
     });
 
-    test('test the lineReaderAsync', async () => {
+    test('the lineReaderAsync', async () => {
         const lines = await asyncIterable.toArray(fReader.lineReaderAsync(__filename));
         const expected = fs.readFileSync(__filename, 'utf8').split('\n');
         expect(lines).toEqual(expected);
@@ -63,7 +63,7 @@ describe('Validate the fileReader', () => {
         expect(lines).toEqual(file.split('\n'));
     });
 
-    test('test missing file', async () => {
+    test('missing file', async () => {
         const result = asyncIterable.toArray(fReader.lineReaderAsync(__filename + 'not.found'));
         return result.then(
             () => {

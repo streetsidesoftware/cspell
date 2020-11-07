@@ -15,7 +15,7 @@ import * as path from 'path';
 jest.mock('../util/logger');
 
 describe('Validate CSpellSettingsServer', () => {
-    test('tests mergeSettings', () => {
+    test('tests mergeSettings with conflicting "name"', () => {
         const left = { name: 'Left' };
         const right = { name: 'Right' };
         expect(mergeSettings(left, right)).toEqual({
@@ -35,7 +35,7 @@ describe('Validate CSpellSettingsServer', () => {
         });
     });
 
-    test('tests mergeSettings', () => {
+    test('tests mergeSettings with conflicting "id"', () => {
         const left = { id: 'left' };
         const enabled = { id: 'enabledId', name: 'enabledName', enabled: true };
         expect(mergeSettings(left, enabled)).toEqual({
@@ -56,7 +56,7 @@ describe('Validate CSpellSettingsServer', () => {
         });
     });
 
-    test('tests mergeSettings', () => {
+    test('tests mergeSettings with conflicting "enabled"', () => {
         const right = { id: 'right', enabled: false };
         const left = { id: 'left', enabled: true };
         expect(mergeSettings({}, right)).toEqual(right);
@@ -79,7 +79,7 @@ describe('Validate CSpellSettingsServer', () => {
         });
     });
 
-    test('tests mergeSettings', () => {
+    test('tests mergeSettings with inline object', () => {
         expect(mergeSettings({ enabled: true }, { enabled: false })).toEqual({
             enabled: false,
             name: '|',
@@ -168,7 +168,7 @@ describe('Validate CSpellSettingsServer', () => {
         expect(getCachedFileSize()).toBe(0);
     });
 
-    test('test the loaded defaults contain expected settings', () => {
+    test('the loaded defaults contain expected settings', () => {
         const settings = getDefaultSettings();
         const sources = getSources(settings);
         const sourceNames = sources.map((s) => s.name || '?');
@@ -195,7 +195,7 @@ describe('Validate Overrides', () => {
         ) => expect(checkFilenameMatchesGlob(f, g)).toBe(e));
     });
 
-    test('test calcOverrideSettings', () => {
+    test('calcOverrideSettings', () => {
         interface Test {
             f: string;
             e: [keyof CSpellUserSettings, string][];

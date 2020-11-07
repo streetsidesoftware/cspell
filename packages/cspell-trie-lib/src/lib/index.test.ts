@@ -17,7 +17,6 @@ describe('Experiment with Tries', () => {
         expect(trie.c).toBeDefined();
         Trie.orderTrie(trie);
         const extractedWords = [...Trie.iteratorTrieWords(trie)];
-        // console.log(extractedWords);
         expect(extractedWords).toEqual(words.sort());
     });
 
@@ -38,7 +37,6 @@ describe('Experiment with Tries', () => {
         expect(asString3).not.toBe(asString);
         expect(asString3.slice(asString3.indexOf('# Data'))).toBe(asString.slice(asString.indexOf('# Data')));
         expect(asString3).toEqual(expect.stringContaining('\n# one\n# two\n# three'));
-        // console.log(asString);
         const root = Trie.importTrie(asString.split('\n'));
         {
             const trie = words.reduce((t, w) => {

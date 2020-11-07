@@ -55,7 +55,7 @@ describe('Validate the wordListCompiler', () => {
         ]);
     });
 
-    test('test reading and normalizing a file', async () => {
+    test('reading and normalizing a file', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities.txt');
         await compileWordList(source, destName, {
@@ -66,7 +66,7 @@ describe('Validate the wordListCompiler', () => {
         expect(output).toBe(citiesResultSorted);
     });
 
-    test('test compiling to a file without split', async () => {
+    test('compiling to a file without split', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities2.txt');
         await compileWordList(source, destName, {
@@ -88,7 +88,7 @@ describe('Validate the wordListCompiler', () => {
         expect(tWords.sort()).toEqual([...new Set(nWords.sort())]);
     });
 
-    test('test reading and normalizing to a trie file', async () => {
+    test('reading and normalizing to a trie file', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities.trie');
         await compileTrie(source, destName, {});
@@ -102,7 +102,7 @@ describe('Validate the wordListCompiler', () => {
         expect(words).toEqual(expected);
     });
 
-    test('test reading and normalizing to a trie gz file', async () => {
+    test('reading and normalizing to a trie gz file', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities.trie.gz');
         await compileTrie(source, destName, {});
@@ -117,7 +117,7 @@ describe('Validate the wordListCompiler', () => {
         expect(words).toEqual(expected);
     });
 
-    test('test a simple hunspell dictionary depth 0', async () => {
+    test('a simple hunspell dictionary depth 0', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), {
             maxDepth: 0,
         });
@@ -130,7 +130,7 @@ describe('Validate the wordListCompiler', () => {
         expect(output).toBe('hello\ntry\nwork\n');
     });
 
-    test('test a simple hunspell dictionary depth 1', async () => {
+    test('a simple hunspell dictionary depth 1', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'hunspell', 'example.dic'), {
             maxDepth: 1,
         });

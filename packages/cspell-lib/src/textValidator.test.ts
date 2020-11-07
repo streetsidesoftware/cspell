@@ -95,7 +95,7 @@ describe('Validate textValidator functions', () => {
         expect(errors).toEqual([]);
     });
 
-    test('test contractions', async () => {
+    test('contractions', async () => {
         const dictWords = await getSpellingDictionaryCollection();
         // cspell:disable
         const text = `We should’ve done a better job, but we couldn\\'t have known.`;
@@ -123,7 +123,7 @@ describe('Validate textValidator functions', () => {
         expect(result2.length).toBe(0);
     });
 
-    test('tests inclusion, exclusion', () => {
+    test('tests inclusion, no exclusions', () => {
         const result = calcTextInclusionRanges(sampleText, {});
         expect(result.length).toBe(1);
         expect(result.map((a) => [a.startPos, a.endPos])).toEqual([[0, sampleText.length]]);

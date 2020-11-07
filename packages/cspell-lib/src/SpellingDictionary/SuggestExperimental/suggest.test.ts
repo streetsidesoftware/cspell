@@ -3,7 +3,7 @@ import { Trie } from 'cspell-trie-lib';
 import { compareResults } from './helpers';
 
 describe('Validate Suggest', () => {
-    test('test suggestions', () => {
+    test('suggestions', () => {
         const words = [
             'apple',
             'ape',
