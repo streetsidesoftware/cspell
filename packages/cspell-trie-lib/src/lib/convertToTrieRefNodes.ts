@@ -37,11 +37,11 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
             return c;
         }
         if (!n.c) {
-            const sum = tallies.get(eow)!;
+            const sum = tallies.get(eow) || 0;
             rollupTally.set(n, sum);
             return sum;
         }
-        const sum = [...n.c.values()].reduce((acc, v) => acc + rollup(v), tallies.get(n)!);
+        const sum = [...n.c.values()].reduce((acc, v) => acc + rollup(v), tallies.get(n) || 0);
         rollupTally.set(n, sum);
         return sum;
     }
@@ -56,11 +56,14 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
     function* walkByRollup(n: TrieNode): IterableIterator<TrieRefNode> {
         if (cached.has(n)) return;
         if (n.f && !n.c) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             cached.set(n, cached.get(eow)!);
             return;
         }
 
-        const children = [...(n.c?.values() || [])].sort((a, b) => rollupTally.get(b)! - rollupTally.get(a)!);
+        const children = [...(n.c?.values() || [])].sort(
+            (a, b) => (rollupTally.get(b) || 0) - (rollupTally.get(a) || 0)
+        );
 
         for (const c of children) {
             yield* walkByRollup(c);

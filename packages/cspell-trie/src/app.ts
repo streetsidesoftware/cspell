@@ -88,6 +88,7 @@ function createWriteStream(filename?: string): Promise<NodeJS.WritableStream> {
         : mkdirp(path.dirname(filename)).then(() => fs.createWriteStream(filename));
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function notify(message: any, useStdOut = true) {
     if (useStdOut) {
         console.log(message);

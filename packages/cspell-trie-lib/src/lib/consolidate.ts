@@ -39,8 +39,9 @@ export function consolidate(root: TrieRoot): TrieRoot {
     }
 
     function deepCopy(n: TrieNode): TrieNode {
-        if (knownMap.has(n)) {
-            return knownMap.get(n)!;
+        const k = knownMap.get(n);
+        if (k) {
+            return k;
         }
 
         const orig = n;

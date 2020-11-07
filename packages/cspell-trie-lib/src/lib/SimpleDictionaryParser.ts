@@ -36,6 +36,7 @@ export function parseDictionaryLines(
 
     const regexComment = new RegExp(escapeRegEx(commentCharacter) + '.*', 'g');
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function filterLines(line: any | string): line is string {
         return typeof line === 'string';
     }

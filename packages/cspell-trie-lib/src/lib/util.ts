@@ -78,6 +78,7 @@ export function has(node: TrieNode, word: string): boolean {
     let h = word.slice(0, 1);
     let t = word.slice(1);
     while (node.c && node.c.has(h)) {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         node = node.c.get(h)!;
         h = t.slice(0, 1);
         t = t.slice(1);
@@ -118,6 +119,7 @@ export function countWords(root: TrieNode): number {
 
     function walk(n: TrieNode) {
         if (visited.has(n)) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             return visited.get(n)!;
         }
 
@@ -182,6 +184,7 @@ export function mergeDefaults<T>(value: Partial<T> | undefined, defaultValue: T)
     const result = { ...defaultValue };
     const allowedKeys = new Set(Object.keys(defaultValue));
     if (value) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         for (const [k, v] of Object.entries(value) as [keyof T, any][]) {
             if (allowedKeys.has(k as string)) {
                 result[k] = v ?? result[k];
