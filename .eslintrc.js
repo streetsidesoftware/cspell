@@ -6,21 +6,11 @@ const config = {
         es2020: true,
         node: true,
     },
-    extends: [ 'eslint:recommended', 'plugin:prettier/recommended' ],
+    extends: ['eslint:recommended', 'plugin:prettier/recommended'],
     parserOptions: {
         ecmaVersion: 11,
         sourceType: 'module',
     },
-    ignorePatterns: [
-        '.eslintrc.js',
-        'packages/*/dist',
-        'packages/*/temp',
-        'packages/*/Temp',
-        '**/samples',
-        '**/Samples',
-        'integration-tests/repositories',
-        'integration-tests/dist',
-    ],
     overrides: [
         {
             files: '**/*.ts',
