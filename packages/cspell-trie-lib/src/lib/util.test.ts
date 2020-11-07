@@ -1,4 +1,13 @@
-import { createTriFromList, has, findNode, countNodes, isCircular, countWords, iteratorTrieWords, mergeDefaults } from './util';
+import {
+    createTriFromList,
+    has,
+    findNode,
+    countNodes,
+    isCircular,
+    countWords,
+    iteratorTrieWords,
+    mergeDefaults,
+} from './util';
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {
@@ -50,8 +59,9 @@ describe('Validate Util Functions', () => {
 
     test('iteratorTrieWords', () => {
         const trie = createTriFromList(words);
-        expect([...iteratorTrieWords(trie)].join(' '))
-        .toBe('These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no');
+        expect([...iteratorTrieWords(trie)].join(' ')).toBe(
+            'These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no'
+        );
     });
 
     test('mergeDefaults', () => {
@@ -59,9 +69,10 @@ describe('Validate Util Functions', () => {
         const b = { a: 3, b: 'bb' };
 
         expect(mergeDefaults(a, b)).toEqual({ a: 1, b: 'b' });
-        expect(mergeDefaults(b, a)).toEqual({ a: 3, b: 'bb', c: 'c'});
+        expect(mergeDefaults(b, a)).toEqual({ a: 3, b: 'bb', c: 'c' });
     });
 });
 
-const sentence = 'These are some sample words for everyone to use, complete with extra    spaces. There is no space for someone to worry.';
+const sentence =
+    'These are some sample words for everyone to use, complete with extra    spaces. There is no space for someone to worry.';
 const words = sentence.split(' ');

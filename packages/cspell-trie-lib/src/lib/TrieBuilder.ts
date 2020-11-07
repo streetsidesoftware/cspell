@@ -1,7 +1,12 @@
 import { TrieNode, TrieRoot } from './TrieNode';
 import { Trie, PartialTrieOptions, TrieOptions } from './trie';
 import { consolidate } from './consolidate';
-import { createTriFromList, mergeOptionalWithDefaults, trieNodeToRoot, createTrieRoot } from './util';
+import {
+    createTriFromList,
+    mergeOptionalWithDefaults,
+    trieNodeToRoot,
+    createTrieRoot,
+} from './util';
 
 /**
  * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie
@@ -9,7 +14,10 @@ import { createTriFromList, mergeOptionalWithDefaults, trieNodeToRoot, createTri
  * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
  * @param trieOptions options for the Trie
  */
-export function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
+export function buildTrie(
+    words: Iterable<string>,
+    trieOptions?: PartialTrieOptions
+): Trie {
     return new TrieBuilder(words, trieOptions).build();
 }
 
@@ -18,7 +26,10 @@ export function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOpti
  * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
  * @param trieOptions options for the Trie
  */
-export function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie {
+export function buildTrieFast(
+    words: Iterable<string>,
+    trieOptions?: PartialTrieOptions
+): Trie {
     const root = createTriFromList(words, trieOptions);
     return new Trie(root, undefined);
 }
@@ -31,13 +42,15 @@ interface PathNode {
 }
 
 export class TrieBuilder {
-    private count: number = 0;
+    private count = 0;
     private readonly signatures = new Map<string, TrieNode>();
     private readonly cached = new Map<TrieNode, number>();
     private readonly transforms = new Map<TrieNode, Map<string, TrieNode>>();
     private _eow: TrieNode = Object.freeze({ f: 1 });
     /** position 0 of lastPath is always the root */
-    private lastPath: PathNode[] = [{ s: '', n: { f: undefined, c: undefined } }];
+    private lastPath: PathNode[] = [
+        { s: '', n: { f: undefined, c: undefined } },
+    ];
     private tails = new Map([['', this._eow]]);
     public trieOptions: TrieOptions;
 
@@ -45,7 +58,9 @@ export class TrieBuilder {
         this._canBeCached(this._eow); // this line is just for coverage reasons
         this.signatures.set(this.signature(this._eow), this._eow);
         this.cached.set(this._eow, this.count++);
-        this.trieOptions = Object.freeze(mergeOptionalWithDefaults(trieOptions));
+        this.trieOptions = Object.freeze(
+            mergeOptionalWithDefaults(trieOptions)
+        );
 
         if (words) {
             this.insert(words);
@@ -63,17 +78,17 @@ export class TrieBuilder {
     private signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
         const ref = n.c
-            ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, this.cached.get(n)]))
+            ? JSON.stringify(
+                  [...n.c.entries()].map(([k, n]) => [k, this.cached.get(n)])
+              )
             : '';
         return isWord + ref;
     }
 
     private _canBeCached(n: TrieNode): boolean {
-        if (!n.c)
-            return true;
+        if (!n.c) return true;
         for (const v of n.c) {
-            if (!this.cached.has(v[1]))
-                return false;
+            if (!this.cached.has(v[1])) return false;
         }
         return true;
     }
@@ -89,7 +104,7 @@ export class TrieBuilder {
         // istanbul ignore else
         if (n.c) {
             const c = [...n.c]
-                .sort((a, b) => a[0] < b[0] ? -1 : 1)
+                .sort((a, b) => (a[0] < b[0] ? -1 : 1))
                 .map(([k, n]) => [k, this.freeze(n)] as [string, TrieNode]);
             n.c = new Map(c);
             Object.freeze(n.c);
@@ -121,7 +136,7 @@ export class TrieBuilder {
     private addChild(node: TrieNode, head: string, child: TrieNode): TrieNode {
         if (node.c?.get(head) !== child) {
             if (!node.c || Object.isFrozen(node)) {
-                node = {...node, c: new Map(node.c ?? [])};
+                node = { ...node, c: new Map(node.c ?? []) };
             }
             node.c!.set(head, child);
         }
@@ -165,14 +180,16 @@ export class TrieBuilder {
         const head = s[0];
         const tail = s.slice(1);
         const cNode = node.c?.get(head);
-        const child = cNode ? this._insert(cNode, tail, d + 1) : this.buildTail(tail);
+        const child = cNode
+            ? this._insert(cNode, tail, d + 1)
+            : this.buildTail(tail);
         node = this.addChild(node, head, child);
         this.storeTransform(orig, s, node);
         this.lastPath[d] = { s: head, n: child };
         return node;
     }
 
-    insertWord(word: string) {
+    insertWord(word: string): void {
         let d = 1;
         for (const s of word.split('')) {
             const p = this.lastPath[d];
@@ -201,7 +218,7 @@ export class TrieBuilder {
         }
     }
 
-    insert(words: Iterable<string>) {
+    insert(words: Iterable<string>): void {
         for (const w of words) {
             w && this.insertWord(w);
         }
@@ -210,20 +227,19 @@ export class TrieBuilder {
     /**
      * Resets the builder
      */
-    reset() {
+    reset(): void {
         this._root = createTrieRoot(this.trieOptions);
         this.cached.clear();
         this.signatures.clear();
     }
 
-    build(consolidateSuffixes: boolean = false): Trie {
+    build(consolidateSuffixes = false): Trie {
         const root = this._root;
         // Reset the builder to prevent updating the trie in the background.
         this.reset();
         return new Trie(consolidateSuffixes ? consolidate(root) : root);
     }
 }
-
 
 function copyIfFrozen(n: TrieNode): TrieNode {
     if (!Object.isFrozen(n)) return n;

@@ -1,7 +1,6 @@
 import { Trie } from './trie';
 import { TrieNode } from './TrieNode';
 
-
 export interface WalkItem {
     /** prefix so far */
     s: string;
@@ -22,22 +21,36 @@ export type WalkNext = boolean;
  *
  * @param trie the compound Trie to walk
  */
-export function *compoundWalker(trie: Trie, caseSensitive: boolean = true): Generator<WalkItem, any, WalkNext> {
-    const { compoundCharacter: cc, forbiddenWordPrefix: forbidden, stripCaseAndAccentsPrefix } = trie.options;
+export function* compoundWalker(
+    trie: Trie,
+    caseSensitive = true
+): Generator<WalkItem, any, WalkNext> {
+    const {
+        compoundCharacter: cc,
+        forbiddenWordPrefix: forbidden,
+        stripCaseAndAccentsPrefix,
+    } = trie.options;
     const blockNode = new Set([cc, forbidden, stripCaseAndAccentsPrefix]);
-    const root = !caseSensitive && trie.root.c?.get(stripCaseAndAccentsPrefix) || trie.root;
+    const root =
+        (!caseSensitive && trie.root.c?.get(stripCaseAndAccentsPrefix)) ||
+        trie.root;
 
-    function *walk(n: TrieNode, s: string, c: boolean, d: number): Generator<WalkItem, any, WalkNext> {
-        const deeper = yield {n, s, c, d};
+    function* walk(
+        n: TrieNode,
+        s: string,
+        c: boolean,
+        d: number
+    ): Generator<WalkItem, any, WalkNext> {
+        const deeper = yield { n, s, c, d };
         if (deeper !== false && n.c) {
             for (const [k, cn] of n.c) {
                 if (blockNode.has(k)) continue;
-                yield *walk(cn, s + k, false, d);
+                yield* walk(cn, s + k, false, d);
             }
             if (n.c.has(cc)) {
                 const compoundNodes = root.c!.get(cc);
                 if (compoundNodes) {
-                    yield *walk(compoundNodes, s, true, d + 1);
+                    yield* walk(compoundNodes, s, true, d + 1);
                 }
             }
         }
@@ -46,7 +59,7 @@ export function *compoundWalker(trie: Trie, caseSensitive: boolean = true): Gene
     // Make sure we do not walk forbidden and compound only words from the root.
     for (const n of root.c || []) {
         if (!blockNode.has(n[0])) {
-            yield *walk(n[1], n[0], false, 0);
+            yield* walk(n[1], n[0], false, 0);
         }
     }
 }
@@ -57,7 +70,11 @@ export function *compoundWalker(trie: Trie, caseSensitive: boolean = true): Gene
  * @param maxDepth Max compound depth
  * @param caseSensitive case sensitive search.
  */
-export function *compoundWords(trie: Trie, maxDepth: number, caseSensitive: boolean = true) {
+export function* compoundWords(
+    trie: Trie,
+    maxDepth: number,
+    caseSensitive = true
+): Generator<string, void, unknown> {
     const stream = compoundWalker(trie, caseSensitive);
     let item = stream.next();
     while (!item.done) {

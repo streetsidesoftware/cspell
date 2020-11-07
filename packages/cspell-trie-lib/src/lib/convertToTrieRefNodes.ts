@@ -8,7 +8,9 @@ const MinReferenceCount = 3;
  * An iterator that will emit TrieRefNodes mostly in descending frequency
  * @param root Root of the Trie -- a DAWG is preferred to keep the number of duplicates down.
  */
-export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefNode> {
+export function convertToTrieRefNodes(
+    root: TrieNode
+): IterableIterator<TrieRefNode> {
     const eow = { f: FLAG_WORD, c: undefined };
     const tallies = new Map<TrieNode, number>([[eow, 0]]);
     let count = 0;
@@ -41,30 +43,38 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
             rollupTally.set(n, sum);
             return sum;
         }
-        const sum = [...(n.c.values())]
-            .reduce((acc, v) => acc + rollup(v), tallies.get(n)!);
+        const sum = [...n.c.values()].reduce(
+            (acc, v) => acc + rollup(v),
+            tallies.get(n)!
+        );
         rollupTally.set(n, sum);
         return sum;
     }
 
-    function *walkByTallies(tallies: Map<TrieNode, number>): IterableIterator<TrieRefNode> {
-        const nodes = [...genSequence(tallies).filter(a => a[1] >= MinReferenceCount)].sort((a, b) => b[1] - a[1]);
+    function* walkByTallies(
+        tallies: Map<TrieNode, number>
+    ): IterableIterator<TrieRefNode> {
+        const nodes = [
+            ...genSequence(tallies).filter((a) => a[1] >= MinReferenceCount),
+        ].sort((a, b) => b[1] - a[1]);
         for (const [n] of nodes) {
-            yield *walkByRollup(n);
+            yield* walkByRollup(n);
         }
     }
 
-    function *walkByRollup(n: TrieNode): IterableIterator<TrieRefNode> {
+    function* walkByRollup(n: TrieNode): IterableIterator<TrieRefNode> {
         if (cached.has(n)) return;
         if (n.f && !n.c) {
             cached.set(n, cached.get(eow)!);
             return;
         }
 
-        const children = [...(n.c?.values() || [])].sort((a, b) => rollupTally.get(b)! - rollupTally.get(a)!);
+        const children = [...(n.c?.values() || [])].sort(
+            (a, b) => rollupTally.get(b)! - rollupTally.get(a)!
+        );
 
         for (const c of children) {
-            yield *walkByRollup(c);
+            yield* walkByRollup(c);
         }
 
         cached.set(n, count++);
@@ -73,18 +83,22 @@ export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefN
 
     function convert(n: TrieNode): TrieRefNode {
         const { f, c } = n;
-        const r = c ? [...c].sort((a, b) => a[0] < b[0] ? -1 : 1).map(([s, n]) => [s, cached.get(n)] as [string, number]) : undefined;
-        const rn: TrieRefNode = r ? f ? { f, r } : { r } : { f };
+        const r = c
+            ? [...c]
+                  .sort((a, b) => (a[0] < b[0] ? -1 : 1))
+                  .map(([s, n]) => [s, cached.get(n)] as [string, number])
+            : undefined;
+        const rn: TrieRefNode = r ? (f ? { f, r } : { r }) : { f };
         return rn;
     }
 
-    function *walk(root: TrieNode): IterableIterator<TrieRefNode> {
+    function* walk(root: TrieNode): IterableIterator<TrieRefNode> {
         cached.set(eow, count++);
         yield convert(eow);
         // Emit the highest referenced nodes first.
-        yield *walkByTallies(tallies);
+        yield* walkByTallies(tallies);
         // Emit the rest.
-        yield *walkByRollup(root);
+        yield* walkByRollup(root);
     }
 
     tally(root);

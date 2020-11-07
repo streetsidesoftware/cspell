@@ -1,6 +1,12 @@
 import { operators } from 'gensequence';
 import { normalizeWordToLowercase, normalizeWord } from './util';
-import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, FORBID_PREFIX, CASE_INSENSITIVE_PREFIX, LINE_COMMENT } from './constants';
+import {
+    COMPOUND_FIX,
+    OPTIONAL_COMPOUND_FIX,
+    FORBID_PREFIX,
+    CASE_INSENSITIVE_PREFIX,
+    LINE_COMMENT,
+} from './constants';
 import { Trie } from './trie';
 import { buildTrieFast } from './TrieBuilder';
 
@@ -20,9 +26,14 @@ const _defaultOptions: ParseDictionaryOptions = {
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
 };
 
-export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
+export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(
+    _defaultOptions
+);
 
-export function parseDictionaryLines(lines: Iterable<string>, options: ParseDictionaryOptions = _defaultOptions): Iterable<string> {
+export function parseDictionaryLines(
+    lines: Iterable<string>,
+    options: ParseDictionaryOptions = _defaultOptions
+): Iterable<string> {
     const {
         commentCharacter,
         optionalCompoundCharacter: optionalCompound,
@@ -45,7 +56,7 @@ export function parseDictionaryLines(lines: Iterable<string>, options: ParseDict
         return !!line;
     }
 
-    function *mapOptionalPrefix(line: string) {
+    function* mapOptionalPrefix(line: string) {
         if (line[0] === optionalCompound) {
             const t = line.slice(1);
             yield t;
@@ -55,7 +66,7 @@ export function parseDictionaryLines(lines: Iterable<string>, options: ParseDict
         }
     }
 
-    function *mapOptionalSuffix(line: string) {
+    function* mapOptionalSuffix(line: string) {
         if (line.slice(-1) === optionalCompound) {
             const t = line.slice(0, -1);
             yield t;
@@ -65,9 +76,10 @@ export function parseDictionaryLines(lines: Iterable<string>, options: ParseDict
         }
     }
 
-    function *mapNormalize(line: string) {
+    function* mapNormalize(line: string) {
         yield normalizeWord(line);
-        if (line[0] !== forbidden) yield ignoreCase + normalizeWordToLowercase(line);
+        if (line[0] !== forbidden)
+            yield ignoreCase + normalizeWordToLowercase(line);
     }
 
     const processLines = operators.pipe(
@@ -76,21 +88,24 @@ export function parseDictionaryLines(lines: Iterable<string>, options: ParseDict
         operators.filter(filterEmptyLines),
         operators.concatMap(mapOptionalPrefix),
         operators.concatMap(mapOptionalSuffix),
-        operators.concatMap(mapNormalize),
+        operators.concatMap(mapNormalize)
     );
 
     return processLines(lines);
 }
 
-export function parseDictionary(text: string, options: ParseDictionaryOptions = _defaultOptions): Trie {
+export function parseDictionary(
+    text: string,
+    options: ParseDictionaryOptions = _defaultOptions
+): Trie {
     const lines = parseDictionaryLines(text.split('\n'), options);
     return buildTrieFast([...new Set(lines)].sort(), {
-        compoundCharacter:          options.compoundCharacter,
-        forbiddenWordPrefix:        options.forbiddenPrefix,
-        stripCaseAndAccentsPrefix:  options.caseInsensitivePrefix,
+        compoundCharacter: options.compoundCharacter,
+        forbiddenWordPrefix: options.forbiddenPrefix,
+        stripCaseAndAccentsPrefix: options.caseInsensitivePrefix,
     });
 }
 
 function escapeRegEx(s: string) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
 }

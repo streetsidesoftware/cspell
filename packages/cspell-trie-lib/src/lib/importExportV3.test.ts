@@ -9,12 +9,18 @@ import { TrieNode } from './TrieNode';
 const sampleFile = path.join(__dirname, '..', '..', 'Samples', 'sampleV3.trie');
 
 describe('Import/Export', () => {
-
     test('tests serialize / deserialize small sample', async () => {
         const trie = Trie.buildTrie(smallSample).root;
         const expected = toTree(trie);
-        const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
-        const root = importTrie(data.replace(/\[\d+\]/g, '').split('\n').map(a => a ? a + '\r\n' : a));
+        const data = [
+            ...serializeTrie(trie, { base: 10, comment: 'Sample Words' }),
+        ].join('');
+        const root = importTrie(
+            data
+                .replace(/\[\d+\]/g, '')
+                .split('\n')
+                .map((a) => (a ? a + '\r\n' : a))
+        );
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...smallSample].sort());
         const result = toTree(root);
@@ -31,15 +37,25 @@ describe('Import/Export', () => {
 
     test('tests serialize / deserialize', async () => {
         const trie = Trie.buildTrie(sampleWords).root;
-        const data = [...serializeTrie(consolidate(trie), { base: 10, comment: 'Sample Words' })].join('');
-        const root = importTrie(data.split('\n').map(a => a ? a + '\n' : a));
+        const data = [
+            ...serializeTrie(consolidate(trie), {
+                base: 10,
+                comment: 'Sample Words',
+            }),
+        ].join('');
+        const root = importTrie(
+            data.split('\n').map((a) => (a ? a + '\n' : a))
+        );
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
         await writeFile(sampleFile, data);
     });
 
     test('tests deserialize from file', async () => {
-        const sample = (await readFile(sampleFile, 'utf8')).replace(/\r?\n/g, '\n');
+        const sample = (await readFile(sampleFile, 'utf8')).replace(
+            /\r?\n/g,
+            '\n'
+        );
         const root = importTrie(sample.split('\n'));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
@@ -64,11 +80,11 @@ describe('Import/Export', () => {
 });
 
 function toTree(root: TrieNode): string {
-    function *walk(n: TrieNode, prefix: string): Generator<string> {
+    function* walk(n: TrieNode, prefix: string): Generator<string> {
         const nextPrefix = '.'.repeat(prefix.length);
         if (n.c) {
-            for (const c of [...n.c].sort((a, b) => a[0] < b[0] ? -1 : 1)) {
-                yield *walk(c[1], prefix + c[0]);
+            for (const c of [...n.c].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
+                yield* walk(c[1], prefix + c[0]);
                 prefix = nextPrefix;
             }
         }
@@ -98,8 +114,9 @@ const smallSample = genSequence([
     'burn',
     'chalk',
     'churn',
-]).concatMap(applyEndings)
-.toArray();
+])
+    .concatMap(applyEndings)
+    .toArray();
 
 const sampleWords = [
     'journal',
@@ -140,10 +157,11 @@ const sampleWords = [
     'fun journey',
     'long walk',
     'fun walk',
-].concat(specialCharacters)
-.concat(smallSample);
+]
+    .concat(specialCharacters)
+    .concat(smallSample);
 
 function applyEndings(s: string): string[] {
     const endings = ['', 'ed', 'er', 'ing', 's'];
-    return endings.map(e => s + e);
+    return endings.map((e) => s + e);
 }

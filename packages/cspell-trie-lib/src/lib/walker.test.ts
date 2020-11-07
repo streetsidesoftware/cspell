@@ -1,5 +1,5 @@
-import {walker, YieldResult, hintedWalker} from './walker';
-import {orderTrie, createTriFromList} from './util';
+import { walker, YieldResult, hintedWalker } from './walker';
+import { orderTrie, createTriFromList } from './util';
 
 describe('Validate Util Functions', () => {
     test('Tests Walker', () => {
@@ -16,7 +16,7 @@ describe('Validate Util Functions', () => {
             }
             goDeeper = text.length < 4;
         }
-        expect(result).toEqual(sampleWords.filter(a => a.length <= 4).sort());
+        expect(result).toEqual(sampleWords.filter((a) => a.length <= 4).sort());
     });
 
     test('Test Hinted Walker', () => {
