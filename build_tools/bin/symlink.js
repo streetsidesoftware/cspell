@@ -1,8 +1,9 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 // See: https://github.com/microsoft/vscode-languageserver-node/blob/master/build/bin/linking.js
 
-const path  = require('path');
+const path = require('path');
 const shell = require('shelljs');
 
 const fs = require('fs');
@@ -21,12 +22,12 @@ async function symlink(module, name, source) {
     const current = process.cwd();
     try {
         const nodeModules = path.join(module, 'node_modules');
-        if (!await exists(nodeModules)) {
+        if (!(await exists(nodeModules))) {
             await mkdir(nodeModules);
         }
         process.chdir(nodeModules);
         if (await exists(name)) {
-            shell.rm('-rf' , name);
+            shell.rm('-rf', name);
         }
         shell.ln('-s', source, name);
     } finally {
@@ -49,9 +50,18 @@ async function readPackage(file) {
 }
 
 /**
+ * @typedef Package
+ * @type {object}
+ * @property {string} name - package name
+ * @property {string} _packageDir - package location
+ * @property {object} dependencies
+ * @property {object} devDependencies
+ */
+
+/**
  *
  * @param {string} dir
- * @returns {Object[]} returns the contents of package.json keyed by the directory
+ * @returns {Package[]} returns the contents of package.json keyed by the directory
  */
 async function readPackages(dir) {
     const packageDirs = await readdir(dir);
@@ -70,18 +80,18 @@ async function readPackages(dir) {
 }
 
 /**
- * @param {Object[]} packages
+ * @param {Package[]} packages
  * @returns {Map<string,string}
  */
 function mapByPackageName(packages) {
-    const map = new Map(
-        packages
-        .filter(p => !!p.name)
-        .map(p => [p.name, p._packageDir])
-    );
+    const map = new Map(packages.filter((p) => !!p.name).map((p) => [p.name, p._packageDir]));
     return map;
 }
 
+/**
+ *
+ * @param {Package} package
+ */
 function extractDependencies(package) {
     return Object.keys(package.dependencies || {}).concat(Object.keys(package.devDependencies || {}));
 }
@@ -94,13 +104,13 @@ async function symLinkPackages(packages) {
     const mapByName = mapByPackageName(packages);
 
     for (const package of packages) {
-        console.log('Linking ' + package.name)
+        console.log('Linking ' + package.name);
         const deps = extractDependencies(package);
-        for (dep of deps) {
+        for (const dep of deps) {
             const location = mapByName.get(dep);
             if (location) {
-                console.log('  SymLink ' + dep)
-                await symlink(package._packageDir, dep, location)
+                console.log('  SymLink ' + dep);
+                await symlink(package._packageDir, dep, location);
             }
         }
     }
