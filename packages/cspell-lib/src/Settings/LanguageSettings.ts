@@ -1,8 +1,6 @@
 import { LanguageSetting, CSpellUserSettings, LocaleId, LanguageId, BaseSetting } from './CSpellSettingsDef';
 import * as SpellSettings from './CSpellSettingsServer';
 
-// cspell:ignore filetypes
-
 // LanguageSettings are a collection of LanguageSetting.  They are applied in order, matching against the languageId.
 // Dictionaries are concatenated together.
 export type LanguageSettings = LanguageSetting[];

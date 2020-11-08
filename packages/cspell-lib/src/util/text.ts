@@ -18,7 +18,6 @@ export interface TextDocumentOffset extends TextOffset {
 }
 
 const regExLines = /.*(\r?\n|$)/g;
-// const regExIdentifiers = XRegExp('(?:\\p{L}|[0-9_\'])+', 'gi');
 const regExUpperSOrIng = XRegExp("(\\p{Lu}+\\\\?['’]?(?:s|ing|ies|es|ings|ed|ning))(?!\\p{Ll})", 'g');
 const regExSplitWords = XRegExp('(\\p{Ll})(\\p{Lu})', 'g');
 const regExSplitWords2 = XRegExp('(\\p{Lu})(\\p{Lu}\\p{Ll})', 'g');

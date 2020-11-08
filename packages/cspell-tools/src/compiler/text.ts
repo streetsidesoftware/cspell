@@ -1,5 +1,4 @@
 // cSpell:ignore ings ning gimuy
-// cSpell:words xregexp
 
 import { xregexp as XRegExp } from 'cspell-util-bundle';
 

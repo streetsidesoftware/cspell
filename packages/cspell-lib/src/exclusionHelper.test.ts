@@ -1,7 +1,5 @@
 import { extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForUri } from './exclusionHelper';
 
-// cSpell:words filepath
-
 describe('Verify Exclusion Helper functions', () => {
     test('checks extractGlobsFromExcludeFilesGlobMap', () => {
         const excludeDef = {
