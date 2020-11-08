@@ -12,15 +12,13 @@
     "!**/temp/**"
   ],
   "scripts": {
-    "build": "tsc -p . && webpack --mode none",
-    "build-production": "rimraf dist build && tsc -p . && webpack --mode production",
-    "watch": "npm run build -- watch",
-    "prepare": "npm run build-production",
     "clean": "rimraf dist",
+    "build": "tsc -p .",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
-    "test": "jest"
+    "test": "jest",
+    "watch": "tsc -w"
   },
   "repository": {
     "type": "git",
@@ -38,13 +36,9 @@
   },
   "devDependencies": {
     "jest": "^26.6.1",
-    "rimraf": "^3.0.2",
-    "ts-loader": "^8.0.10",
-    "webpack": "^5.3.2",
-    "webpack-cli": "^4.2.0"
+    "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "@types/xregexp": "^4.3.0",
     "xregexp": "^4.4.0"
   }
 }
