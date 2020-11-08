@@ -24,7 +24,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell/coverage/lcov.info
-          flag-name: cspell ${{ job.container.id }}
+          flag-name: cspell ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - name: Coveralls cspell-glob
@@ -32,7 +32,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-glob/coverage/lcov.info
-          flag-name: cspell-glob ${{ job.container.id }}
+          flag-name: cspell-glob ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - name: Coveralls cspell-io
@@ -40,7 +40,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-io/coverage/lcov.info
-          flag-name: cspell-io ${{ job.container.id }}
+          flag-name: cspell-io ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - name: Coveralls cspell-lib
@@ -48,7 +48,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-lib/coverage/lcov.info
-          flag-name: cspell-lib ${{ job.container.id }}
+          flag-name: cspell-lib ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - name: Coveralls cspell-tools
@@ -56,7 +56,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-tools/coverage/lcov.info
-          flag-name: cspell-tools ${{ job.container.id }}
+          flag-name: cspell-tools ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - run: head ./packages/cspell-tools/coverage/lcov.info
@@ -66,7 +66,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-trie/coverage/lcov.info
-          flag-name: cspell-trie ${{ job.container.id }}
+          flag-name: cspell-trie ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - name: Coveralls cspell-trie-lib
@@ -74,7 +74,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-trie-lib/coverage/lcov.info
-          flag-name: cspell-trie-lib ${{ job.container.id }}
+          flag-name: cspell-trie-lib ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - run: head ./packages/cspell-trie-lib/coverage/lcov.info
@@ -84,7 +84,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-trie2-lib/coverage/lcov.info
-          flag-name: cspell-trie2-lib ${{ job.container.id }}
+          flag-name: cspell-trie2-lib ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - name: Coveralls cspell-util-bundle
@@ -92,7 +92,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./packages/cspell-util-bundle/coverage/lcov.info
-          flag-name: cspell-util-bundle ${{ job.container.id }}
+          flag-name: cspell-util-bundle ${{ github.run_id }} ${{ github. run_number }}
           parallel: true
 
       - name: Upload coverage to Codecov
