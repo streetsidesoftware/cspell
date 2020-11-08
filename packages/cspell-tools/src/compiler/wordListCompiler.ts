@@ -1,4 +1,4 @@
-import { xregexp as XRegExp } from 'cspell-util-bundle';
+import XRegExp = require('xregexp');
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
 import * as path from 'path';

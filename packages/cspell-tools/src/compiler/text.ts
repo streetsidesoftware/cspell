@@ -1,6 +1,6 @@
 // cSpell:ignore ings ning gimuy
 
-import { xregexp as XRegExp } from 'cspell-util-bundle';
+import XRegExp = require('xregexp');
 
 const regExUpperSOrIng = XRegExp("(\\p{Lu}+'?(?:s|ing|ies|es|ings|ed|ning))(?!\\p{Ll})", 'g');
 const regExSplitWords = XRegExp('(\\p{Ll})(\\p{Lu})', 'g');

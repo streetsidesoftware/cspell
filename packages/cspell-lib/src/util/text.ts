@@ -1,4 +1,4 @@
-import { xregexp as XRegExp } from 'cspell-util-bundle';
+import XRegExp = require('xregexp');
 import { Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import { binarySearch } from './search';
 import { scanMap } from './util';
