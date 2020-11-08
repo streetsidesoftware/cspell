@@ -33,4 +33,12 @@ describe('Validate util', () => {
         const cleanObj = util.clean(obj);
         expect([...Object.keys(cleanObj)]).toEqual(['b', 'c', 'e']);
     });
+
+    test('scan map with no init', () => {
+        const v = [1, 2, 3, 4, 5, 6];
+        let sum = 0;
+        const r = v.map(util.scanMap((a, v) => ((sum += v - a), v)));
+        expect(r).toEqual(v);
+        expect(sum).toBe(5);
+    });
 });

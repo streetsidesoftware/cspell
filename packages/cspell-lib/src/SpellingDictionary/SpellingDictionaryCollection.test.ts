@@ -41,6 +41,13 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.size).toBeGreaterThanOrEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
     });
 
+    test('checks mapWord is identity', async () => {
+        const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test')]);
+
+        const dictCollection = new SpellingDictionaryCollection(dicts, 'test', []);
+        expect(dictCollection.mapWord('Hello')).toBe('Hello');
+    });
+
     test('checks for suggestions', async () => {
         const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
         const dicts = await Promise.all([
