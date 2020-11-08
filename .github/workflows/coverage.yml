@@ -7,102 +7,105 @@ on:
 
 jobs:
   coverage:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Use Node.js
-      uses: actions/setup-node@v2.1.2
+      - name: Use Node.js
+        uses: actions/setup-node@v2.1.2
 
-    - run: npm ci
+      - run: npm ci
 
-    - run: npm run gen-coverage
+      - run: npm run gen-coverage
 
-    - name: Coveralls cspell
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell/coverage/lcov.info
-        flag-name: cspell
-        parallel: true
+      - name: Coveralls cspell
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell/coverage/lcov.info
+          flag-name: cspell ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - name: Coveralls cspell-glob
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-glob/coverage/lcov.info
-        flag-name: cspell-glob
-        parallel: true
+      - name: Coveralls cspell-glob
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-glob/coverage/lcov.info
+          flag-name: cspell-glob ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - name: Coveralls cspell-io
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-io/coverage/lcov.info
-        flag-name: cspell-io
-        parallel: true
+      - name: Coveralls cspell-io
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-io/coverage/lcov.info
+          flag-name: cspell-io ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - name: Coveralls cspell-lib
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-lib/coverage/lcov.info
-        flag-name: cspell-lib
-        parallel: true
+      - name: Coveralls cspell-lib
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-lib/coverage/lcov.info
+          flag-name: cspell-lib ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - name: Coveralls cspell-tools
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-tools/coverage/lcov.info
-        flag-name: cspell-tools
-        parallel: true
+      - name: Coveralls cspell-tools
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-tools/coverage/lcov.info
+          flag-name: cspell-tools ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - run: head ./packages/cspell-tools/coverage/lcov.info
+      - run: head ./packages/cspell-tools/coverage/lcov.info
 
-    - name: Coveralls cspell-trie
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-trie/coverage/lcov.info
-        flag-name: cspell-trie
-        parallel: true
+      - name: Coveralls cspell-trie
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-trie/coverage/lcov.info
+          flag-name: cspell-trie ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - name: Coveralls cspell-trie-lib
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-trie-lib/coverage/lcov.info
-        flag-name: cspell-trie-lib
-        parallel: true
+      - name: Coveralls cspell-trie-lib
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-trie-lib/coverage/lcov.info
+          flag-name: cspell-trie-lib ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - run: head ./packages/cspell-trie-lib/coverage/lcov.info
+      - run: head ./packages/cspell-trie-lib/coverage/lcov.info
 
-    - name: Coveralls cspell-trie2-lib
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-trie2-lib/coverage/lcov.info
-        flag-name: cspell-trie2-lib
-        parallel: true
+      - name: Coveralls cspell-trie2-lib
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-trie2-lib/coverage/lcov.info
+          flag-name: cspell-trie2-lib ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - name: Coveralls cspell-util-bundle
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./packages/cspell-util-bundle/coverage/lcov.info
-        flag-name: cspell-util-bundle
-        parallel: true
+      - name: Coveralls cspell-util-bundle
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./packages/cspell-util-bundle/coverage/lcov.info
+          flag-name: cspell-util-bundle ${{ github.run_id }} ${{ github. run_number }}
+          parallel: true
 
-    - name: Coveralls Finished
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        parallel-finished: true
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          directory: ./packages/*/coverage/
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        directory: ./packages/*/coverage/
+  finished:
+    needs: coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
