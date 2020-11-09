@@ -10,7 +10,7 @@ function toReferences(node: TrieNode): Sequence<TrieRefNode> {
     return genSequence(convertToTrieRefNodes(node));
 }
 
-const regExpEscapeChars = /([\[\]\\,:{}*])/g;
+const regExpEscapeChars = /([[\]\\,:{}*])/g;
 const regExTrailingComma = /,(\}|\n)/g;
 
 function escapeChar(char: string): string {
@@ -23,7 +23,7 @@ function trieToExportString(node: TrieNode, base: number): Sequence<string> {
             yield EOW;
         }
         if (node.r) {
-            const refs = [...node.r].sort((a, b) => a[0] < b[0] ? -1 : 1);
+            const refs = [...node.r].sort((a, b) => (a[0] < b[0] ? -1 : 1));
             for (const n of refs) {
                 const [c, r] = n;
                 const ref = r ? r.toString(base) : '';
@@ -35,24 +35,12 @@ function trieToExportString(node: TrieNode, base: number): Sequence<string> {
     return genSequence(walk(node));
 }
 
-
 function generateHeader(base: number, comment: string): Sequence<string> {
-    const header = [
-        '#!/usr/bin/env cspell-trie reader',
-        'TrieXv1',
-        'base=' + base,
-    ]
-    .concat(comment
-        ? comment.split('\n').map(a => '# ' + a)
-        : []
-    )
-    .concat([
-        '# Data:'
-    ]);
-    return genSequence(header)
-        .map(a => a + '\n');
+    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv1', 'base=' + base]
+        .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
+        .concat(['# Data:']);
+    return genSequence(header).map((a) => a + '\n');
 }
-
 
 export interface ExportOptions {
     base?: number;
@@ -69,22 +57,16 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
     options = typeof options === 'number' ? { base: options } : options;
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
-    const rows = toReferences(root)
-        .map(node => {
-            const row = [
-                ...trieToExportString(node, radix),
-                '\n',
-            ]
-            .join('').replace(regExTrailingComma, '$1');
-            return row;
-        });
+    const rows = toReferences(root).map((node) => {
+        const row = [...trieToExportString(node, radix), '\n'].join('').replace(regExTrailingComma, '$1');
+        return row;
+    });
 
-    return generateHeader(radix, comment)
-        .concat(rows);
+    return generateHeader(radix, comment).concat(rows);
 }
 
-function *toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
-    yield *iter;
+function* toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
+    yield* iter;
 }
 
 export function importTrie(linesX: Iterable<string> | IterableIterator<string>): TrieNode {
@@ -101,14 +83,20 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
     }
 
     function readHeader(iter: Iterator<string>) {
-
         const headerRows: string[] = [];
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const next = iter.next();
-            if (next.done) { break; }
+            if (next.done) {
+                break;
+            }
             const line = next.value.trim();
-            if (!line || comment.test(line)) { continue; }
-            if (line === DATA) { break; }
+            if (!line || comment.test(line)) {
+                continue;
+            }
+            if (line === DATA) {
+                break;
+            }
             headerRows.push(line);
         }
         parseHeaderRows(headerRows);
@@ -130,7 +118,7 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
         return line
             .replace(regNotEscapedCommas, pattern)
             .split(regUnescapeCommas)
-            .map(a => a.replace(regUnescape, '$1'));
+            .map((a) => a.replace(regUnescape, '$1'));
     }
 
     function decodeLine(line: string, nodes: TrieNode[]): TrieNode {
@@ -138,26 +126,27 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
         line = isWord ? line.slice(1) : line;
         const flags = isWord ? flagsWord : {};
         const children: [string, TrieNode][] = splitLine(line)
-            .filter(a => !!a)
-            .map<[string, number]>(a => [
-                a[0],
-                Number.parseInt((a.slice(1) || '0'), radix),
-            ])
+            .filter((a) => !!a)
+            .map<[string, number]>((a) => [a[0], Number.parseInt(a.slice(1) || '0', radix)])
             .map<[string, TrieNode]>(([k, i]) => [k, nodes[i]]);
         const cNode = children.length ? { c: new ChildMap(children) } : {};
-        return {...cNode, ...flags};
+        return { ...cNode, ...flags };
     }
 
     readHeader(iter);
 
-    const n = genSequence([DATA]).concat(iter)
-        .map(a => a.replace(/\r?\n/, ''))
-        .filter(a => !!a)
-        .reduce((acc: ReduceResults, line) => {
-            const { lines, nodes } = acc;
-            const root = decodeLine(line, nodes);
-            nodes[lines] = root;
-            return { lines: lines + 1, root, nodes };
-        }, { lines: 0, nodes: [], root: {} });
+    const n = genSequence([DATA])
+        .concat(iter)
+        .map((a) => a.replace(/\r?\n/, ''))
+        .filter((a) => !!a)
+        .reduce(
+            (acc: ReduceResults, line) => {
+                const { lines, nodes } = acc;
+                const root = decodeLine(line, nodes);
+                nodes[lines] = root;
+                return { lines: lines + 1, root, nodes };
+            },
+            { lines: 0, nodes: [], root: {} }
+        );
     return n.root;
 }

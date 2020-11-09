@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-expect */
 import { expect } from 'chai';
 import * as fReader from './fileReader';
 import * as fs from 'fs-extra';
@@ -8,11 +9,7 @@ import * as asyncIterable from '../async/asyncIterable';
 describe('Validate the fileReader', () => {
     const samplePath = path.join(__dirname, '..', '..', 'samples');
     const fileCities = path.join(samplePath, 'cities.txt');
-    const sampleFiles = [
-        'cities.txt',
-        'cities.CRLF.txt',
-        'cities.noEOL.txt',
-    ].map(f => path.join(samplePath, f));
+    const sampleFiles = ['cities.txt', 'cities.CRLF.txt', 'cities.noEOL.txt'].map((f) => path.join(samplePath, f));
 
     test('tests reading a file', async () => {
         const expected = await fs.readFile(__filename, 'utf8');
@@ -32,14 +29,14 @@ describe('Validate the fileReader', () => {
         expect(a).to.be.deep.equal(['a1', '2', '3', '45', '6', '']);
     });
 
-    test('test the file reader', async () => {
+    test('the file reader', async () => {
         const lines = await asyncIterable.toArray(fReader.streamFileLineByLineAsync(__filename));
         const actual = lines.join('\n');
         const expected = fs.readFileSync(__filename, 'utf8');
         expect(actual).to.equal(expected);
     });
 
-    test('test the lineReaderAsync', async () => {
+    test('the lineReaderAsync', async () => {
         const lines = await asyncIterable.toArray(fReader.lineReaderAsync(__filename));
         const expected = fs.readFileSync(__filename, 'utf8').split('\n');
         expect(lines).to.deep.equal(expected);
@@ -52,12 +49,13 @@ describe('Validate the fileReader', () => {
     });
 
     test('tests streamFileLineByLineAsync', async () => {
-        await Promise.all(sampleFiles
-            .map(async filename => {
+        await Promise.all(
+            sampleFiles.map(async (filename) => {
                 const lines = await asyncIterable.toArray(fReader.streamFileLineByLineAsync(filename));
                 const file = await fs.readFile(filename, 'utf8');
                 expect(lines, `compare to file: ${filename}`).to.be.deep.equal(file.split(/\r?\n/));
-            }));
+            })
+        );
     });
 
     test('tests streamFileLineByLineAsync 2', async () => {
@@ -66,7 +64,7 @@ describe('Validate the fileReader', () => {
         expect(lines).to.be.deep.equal(file.split('\n'));
     });
 
-    test('test missing file', async () => {
+    test('missing file', async () => {
         const result = asyncIterable.toArray(fReader.lineReaderAsync(__filename + 'not.found'));
         return result.then(
             () => {
@@ -82,11 +80,11 @@ describe('Validate the fileReader', () => {
 
 function stringToStream(...strings: string[]): NodeJS.ReadableStream {
     return new Readable({
-        read: function() {
+        read: function () {
             for (const s of strings) {
                 this.push(s);
             }
             this.push(null);
-        }
+        },
     });
 }

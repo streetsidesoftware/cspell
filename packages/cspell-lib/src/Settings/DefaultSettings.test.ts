@@ -1,7 +1,7 @@
 import * as DefaultSettings from './DefaultSettings';
 
 describe('Validate Default Settings', () => {
-    test('test the static default settings', () => {
+    test('the static default settings', () => {
         const df = DefaultSettings._defaultSettings;
         expect(df.name).toBe('Static Defaults');
     });

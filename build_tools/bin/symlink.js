@@ -2,7 +2,7 @@
 
 // See: https://github.com/microsoft/vscode-languageserver-node/blob/master/build/bin/linking.js
 
-const path  = require('path');
+const path = require('path');
 const shell = require('shelljs');
 
 const fs = require('fs');
@@ -21,12 +21,12 @@ async function symlink(module, name, source) {
     const current = process.cwd();
     try {
         const nodeModules = path.join(module, 'node_modules');
-        if (!await exists(nodeModules)) {
+        if (!(await exists(nodeModules))) {
             await mkdir(nodeModules);
         }
         process.chdir(nodeModules);
         if (await exists(name)) {
-            shell.rm('-rf' , name);
+            shell.rm('-rf', name);
         }
         shell.ln('-s', source, name);
     } finally {
@@ -57,8 +57,8 @@ async function readPackages(dir) {
     const packageDirs = await readdir(dir);
 
     const packages = [];
-    for (const package of packageDirs) {
-        const packageDir = path.join(dir, package);
+    for (const pkg of packageDirs) {
+        const packageDir = path.join(dir, pkg);
         const p = await readPackage(path.join(packageDir, 'package.json'));
         if (p) {
             p._packageDir = packageDir;
@@ -74,16 +74,12 @@ async function readPackages(dir) {
  * @returns {Map<string,string}
  */
 function mapByPackageName(packages) {
-    const map = new Map(
-        packages
-        .filter(p => !!p.name)
-        .map(p => [p.name, p._packageDir])
-    );
+    const map = new Map(packages.filter((p) => !!p.name).map((p) => [p.name, p._packageDir]));
     return map;
 }
 
-function extractDependencies(package) {
-    return Object.keys(package.dependencies || {}).concat(Object.keys(package.devDependencies || {}));
+function extractDependencies(pkg) {
+    return Object.keys(pkg.dependencies || {}).concat(Object.keys(pkg.devDependencies || {}));
 }
 
 /**
@@ -93,14 +89,14 @@ function extractDependencies(package) {
 async function symLinkPackages(packages) {
     const mapByName = mapByPackageName(packages);
 
-    for (const package of packages) {
-        console.log('Linking ' + package.name)
-        const deps = extractDependencies(package);
-        for (dep of deps) {
+    for (const pkg of packages) {
+        console.log('Linking ' + pkg.name);
+        const deps = extractDependencies(pkg);
+        for (const dep of deps) {
             const location = mapByName.get(dep);
             if (location) {
-                console.log('  SymLink ' + dep)
-                await symlink(package._packageDir, dep, location)
+                console.log('  SymLink ' + dep);
+                await symlink(pkg._packageDir, dep, location);
             }
         }
     }

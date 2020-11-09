@@ -8,9 +8,7 @@ export {
     IncludeExcludeFlag,
     validateText,
 } from './validator';
-export {
-    defaultFileName as defaultSettingsFilename,
-} from './Settings';
+export { defaultFileName as defaultSettingsFilename } from './Settings';
 export * from './Settings';
 export {
     CompoundWordsMethod,
@@ -29,23 +27,16 @@ export { Text };
 
 import * as ExclusionHelper from './exclusionHelper';
 export { ExclusionHelper };
-export {
-    ExcludeFilesGlobMap,
-    ExclusionFunction,
-    Glob,
-} from './exclusionHelper';
+export { ExcludeFilesGlobMap, ExclusionFunction, Glob } from './exclusionHelper';
 
 export { getLanguagesForExt } from './LanguageIds';
 export * from './trace';
 
 import { clearCachedFiles } from './Settings';
-import { refreshDictionaryCache } from './SpellingDictionary'
+import { refreshDictionaryCache } from './SpellingDictionary';
 
 export async function clearCachedSettings() {
-    await Promise.all([
-        clearCachedFiles(),
-        refreshDictionaryCache(0),
-    ]);
+    await Promise.all([clearCachedFiles(), refreshDictionaryCache(0)]);
 }
 
 export { clearCachedSettings as clearCachedFiles };

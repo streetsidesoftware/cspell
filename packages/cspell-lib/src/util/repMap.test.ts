@@ -1,52 +1,74 @@
-import {expect} from 'chai';
 import * as repMap from './repMap';
 
 describe('ReMap Tests', () => {
-    test('test basic replace', () => {
+    test('basic replace', () => {
         const mapper = repMap.createMapper([]);
-        expect(mapper('hello')).to.be.equal('hello');
+        expect(mapper('hello')).toEqual('hello');
     });
 
-    test('test basic replace', () => {
+    test('basic replace quotes', () => {
         const mapper = repMap.createMapper([['`', "'"]]);
-        expect(mapper('hello')).to.be.equal('hello');
-        expect(mapper('don`t')).to.be.equal("don't");
+        expect(mapper('hello')).toEqual('hello');
+        expect(mapper('don`t')).toEqual("don't");
     });
 
-    test('test multiple replacements', () => {
-        const mapper = repMap.createMapper([['a', 'A'], ['b', 'B']]);
-        expect(mapper('apple')).to.be.equal('Apple');
-        expect(mapper('banana')).to.be.equal('BAnAnA');
+    test('multiple replacements', () => {
+        const mapper = repMap.createMapper([
+            ['a', 'A'],
+            ['b', 'B'],
+        ]);
+        expect(mapper('apple')).toEqual('Apple');
+        expect(mapper('banana')).toEqual('BAnAnA');
     });
 
-    test('test empty replacements', () => {
-        const mapper = repMap.createMapper([['a', 'A'], ['b', 'B'], ['', '']]);
-        expect(mapper('apple')).to.be.equal('Apple');
-        expect(mapper('banana')).to.be.equal('BAnAnA');
+    test('empty replacements', () => {
+        const mapper = repMap.createMapper([
+            ['a', 'A'],
+            ['b', 'B'],
+            ['', ''],
+        ]);
+        expect(mapper('apple')).toEqual('Apple');
+        expect(mapper('banana')).toEqual('BAnAnA');
     });
 
-    test('test regex replacements', () => {
-        const mapper = repMap.createMapper([['!|@|#|\\$', '_'], ['a', 'A']]);
-        expect(mapper('$apple!!')).to.be.equal('_Apple__');
+    test('regex replacements', () => {
+        const mapper = repMap.createMapper([
+            ['!|@|#|\\$', '_'],
+            ['a', 'A'],
+        ]);
+        expect(mapper('$apple!!')).toEqual('_Apple__');
     });
 
-    test('test repeated replacements', () => {
-        const mapper = repMap.createMapper([['a', 'A'], ['a', 'X']]);
-        expect(mapper('apples')).to.be.equal('Apples');
+    test('repeated replacements', () => {
+        const mapper = repMap.createMapper([
+            ['a', 'A'],
+            ['a', 'X'],
+        ]);
+        expect(mapper('apples')).toEqual('Apples');
     });
 
-    test('test nested regex replacements', () => {
-        const mapper = repMap.createMapper([['(!)', '_'], ['((\\$))', '#'], ['a', 'A']]);
-        expect(mapper('$apple!!')).to.be.equal('#Apple__');
+    test('nested regex replacements', () => {
+        const mapper = repMap.createMapper([
+            ['(!)', '_'],
+            ['((\\$))', '#'],
+            ['a', 'A'],
+        ]);
+        expect(mapper('$apple!!')).toEqual('#Apple__');
     });
 
-    test('test bad regex replacements', () => {
-        const mapper = repMap.createMapper([['(', '_'], ['a', 'A']]);
-        expect(mapper('(apple)')).to.be.equal('_Apple)');
+    test('bad regex replacements', () => {
+        const mapper = repMap.createMapper([
+            ['(', '_'],
+            ['a', 'A'],
+        ]);
+        expect(mapper('(apple)')).toEqual('_Apple)');
     });
 
-    test('test empty regex replacements', () => {
-        const mapper = repMap.createMapper([['', '_'], ['a', 'A']]);
-        expect(mapper('(apple)')).to.be.equal('(Apple)');
+    test('empty regex replacements', () => {
+        const mapper = repMap.createMapper([
+            ['', '_'],
+            ['a', 'A'],
+        ]);
+        expect(mapper('(apple)')).toEqual('(Apple)');
     });
 });

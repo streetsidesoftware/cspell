@@ -1,6 +1,6 @@
 import { IterableLike } from './IterableLike';
 
-export function *buffer<T>(iter: IterableLike<T>, bufferSize: number): IterableIterator<T[]> {
+export function* buffer<T>(iter: IterableLike<T>, bufferSize: number): IterableIterator<T[]> {
     const buffer: T[] = [];
     for (const s of iter) {
         buffer.push(s);

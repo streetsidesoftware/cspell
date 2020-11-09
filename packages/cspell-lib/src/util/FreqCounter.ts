@@ -1,11 +1,15 @@
-import {IterableLike} from './IterableLike';
+import { IterableLike } from './IterableLike';
 
 export class FreqCounter<T> {
-    private _total: number = 0;
+    private _total = 0;
     readonly _counters = new Map<T, number>();
 
-    get total() { return this._total; }
-    get counters() { return this._counters; }
+    get total() {
+        return this._total;
+    }
+    get counters() {
+        return this._counters;
+    }
 
     getCount(key: T) {
         return this._counters.get(key);

@@ -12,24 +12,24 @@ describe('Validate Flatten', () => {
         expect(words).toEqual(sampleWords.sort());
     });
 
-    test('Simple flatten', () => {
+    test('Simple flatten 2', () => {
         const trie = createTriFromList(sampleWords);
         const nodes = [...flattenToTrieRefNodeIterable(trie)];
         expect(nodes).toHaveLength(112);
         const words = [...walk(nodes)];
         expect(words).toEqual(sampleWords.sort());
     });
-
 });
 
 function walk(nodes: TrieRefNode[]): IterableIterator<string> {
-    function *w(node: TrieRefNode, prefix: string): IterableIterator<string> {
+    function* w(node: TrieRefNode, prefix: string): IterableIterator<string> {
         if (node.f) {
             yield prefix;
         }
         if (node.r) {
-            yield *genSequence(node.r)
-            .concatMap(a => genSequence(w(nodes[a[1]], a[0])).map(suffix => prefix + suffix));
+            yield* genSequence(node.r).concatMap((a) =>
+                genSequence(w(nodes[a[1]], a[0])).map((suffix) => prefix + suffix)
+            );
         }
     }
     return w(nodes[nodes.length - 1], '');

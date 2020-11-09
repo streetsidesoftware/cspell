@@ -1,7 +1,8 @@
-import {expect} from 'chai';
-import {Trie, defaultTrieOptions} from './trie';
-import {isWordTerminationNode, orderTrie} from './util';
-import {suggestionCollector, CompoundWordsMethod} from './suggest';
+/* eslint-disable jest/valid-expect */
+import { expect } from 'chai';
+import { Trie, defaultTrieOptions } from './trie';
+import { isWordTerminationNode, orderTrie } from './util';
+import { suggestionCollector, CompoundWordsMethod } from './suggest';
 
 describe('Validate Trie Class', () => {
     test('Tests creating a Trie', () => {
@@ -22,7 +23,9 @@ describe('Validate Trie Class', () => {
 
     test('Tests complete', () => {
         const trie = Trie.create(sampleWords);
-        expect([...trie.completeWord('lift')]).to.be.deep.equal(sampleWords.filter(w => w.slice(0, 4) === 'lift').sort());
+        expect([...trie.completeWord('lift')]).to.be.deep.equal(
+            sampleWords.filter((w) => w.slice(0, 4) === 'lift').sort()
+        );
         expect([...trie.completeWord('life')]).to.be.deep.equal([]);
         expect([...trie.completeWord('lifting')]).to.be.deep.equal(['lifting']);
     });
@@ -30,7 +33,7 @@ describe('Validate Trie Class', () => {
     test('Tests insert', () => {
         const trie1 = Trie.create(sampleWords);
         const trie2 = Trie.create([]);
-        sampleWords.forEach(word => trie2.insert(word));
+        sampleWords.forEach((word) => trie2.insert(word));
         orderTrie(trie2.root);
 
         const words1 = [...trie1.words()];
@@ -55,18 +58,16 @@ describe('Validate Trie Class', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('wall', 10);
         trie.genSuggestions(collector);
-        expect(collector.suggestions.map(a => a.word)).to.contain('walk');
+        expect(collector.suggestions.map((a) => a.word)).to.contain('walk');
     });
 
     test('Tests iterate', () => {
         const trie = Trie.create(sampleWords);
-        const words = [...trie.iterate()]
-            .filter(r => isWordTerminationNode(r.node))
-            .map(r => r.text);
+        const words = [...trie.iterate()].filter((r) => isWordTerminationNode(r.node)).map((r) => r.text);
         expect(words).to.be.deep.equal(sampleWords.sort());
     });
 
-    test('Test where only part of the word is correct', () => {
+    test('where only part of the word is correct', () => {
         const trie = Trie.create(sampleWords);
         expect(trie.has('talking')).to.be.true;
         expect(trie.has('talkings')).to.be.false;
@@ -80,14 +81,14 @@ describe('Validate Trie Class', () => {
     });
 
     test('Tests Trie options', () => {
-        const trie = Trie.create(sampleWords, { forbiddenWordPrefix: '#'});
+        const trie = Trie.create(sampleWords, { forbiddenWordPrefix: '#' });
         expect(trie).to.be.instanceof(Trie);
         const options = trie.options;
         expect(options).to.not.deep.equal(defaultTrieOptions);
         expect(options.forbiddenWordPrefix).to.equal('#');
     });
 
-    test('Test compound words', () => {
+    test('compound words', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
         expect(trie.has('talkinglift', true)).to.be.true;

@@ -1,8 +1,8 @@
-import {TrieNode} from './TrieNode';
-import {isWordTerminationNode} from './util';
-import {CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
-export {CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR} from './walker';
-import {visualLetterMap} from './orthography';
+import { TrieNode } from './TrieNode';
+import { isWordTerminationNode } from './util';
+import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
+export { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
+import { visualLetterMap } from './orthography';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -13,7 +13,7 @@ const maxNumChanges = 5;
 const insertSpaceCost = -1;
 const mapSubCost = 10;
 
-const setOfSeparators = new Set([ JOIN_SEPARATOR, WORD_SEPARATOR ]);
+const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 
 const collator = new Intl.Collator();
 
@@ -29,22 +29,14 @@ export interface SuggestionResult {
     cost: Cost;
 }
 
-export interface SuggestionIterator extends Generator<SuggestionResult, any, MaxCost | undefined> {
-    /**
-     * Ask for the next result.
-     * maxCost - sets the max cost for following suggestions
-     * This is used to limit which suggestions are emitted.
-     * If the iterator.next() returns `undefined`, it is to request a value for maxCost.
-     */
-    // next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult>;
-}
+export type SuggestionIterator = Generator<SuggestionResult, any, MaxCost | undefined>;
 
 export function suggest(
     root: TrieNode,
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions,
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
-    numChanges: number = maxNumChanges,
+    numChanges: number = maxNumChanges
 ): SuggestionResult[] {
     const collector = suggestionCollector(word, maxNumSuggestions, undefined, numChanges);
     collector.collect(genSuggestions(root, word, compoundMethod));
@@ -54,9 +46,9 @@ export function suggest(
 export function* genSuggestions(
     root: TrieNode,
     word: string,
-    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
+    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
 ): SuggestionIterator {
-    yield *genCompoundableSuggestions(root, word, compoundMethod);
+    yield* genCompoundableSuggestions(root, word, compoundMethod);
 }
 
 interface Range {
@@ -69,7 +61,7 @@ export function* genCompoundableSuggestions(
     word: string,
     compoundMethod: CompoundWordsMethod
 ): SuggestionIterator {
-    interface History extends SuggestionResult {}
+    type History = SuggestionResult;
 
     interface HistoryTag {
         i: number;
@@ -90,28 +82,28 @@ export function* genCompoundableSuggestions(
         [JOIN_SEPARATOR]: insertSpaceCost,
     };
 
-    let costLimit: MaxCost = Math.min(bc * word.length / 2, bc * maxNumChanges);
-    let a: number = 0;
-    let b: number = 0;
+    let costLimit: MaxCost = Math.min((bc * word.length) / 2, bc * maxNumChanges);
+    const a = 0;
+    let b = 0;
     for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
         c = i * baseCost;
         matrix[0][i] = c;
         b = i;
     }
-    stack[0] = {a, b};
+    stack[0] = { a, b };
 
     let hint = word.slice(a);
     const i = hintedWalker(root, compoundMethod, hint);
     let goDeeper = true;
     for (let r = i.next({ goDeeper }); !r.done; r = i.next({ goDeeper })) {
-        const {text, node, depth} = r.value;
-        let {a, b} = stack[depth];
+        const { text, node, depth } = r.value;
+        let { a, b } = stack[depth];
         const w = text.slice(-1);
         const wG = visualLetterMap.get(w) || -1;
         if (setOfSeparators.has(w)) {
             const mxRange = matrix[depth].slice(a, b + 1);
             const mxMin = Math.min(...mxRange);
-            const tag = [a].concat(mxRange.map(c => c - mxMin)).join();
+            const tag = [a].concat(mxRange.map((c) => c - mxMin)).join();
             if (historyTags.has(tag) && historyTags.get(tag)!.m <= mxMin) {
                 goDeeper = false;
                 const { i, w, m } = historyTags.get(tag)!;
@@ -157,17 +149,20 @@ export function* genCompoundableSuggestions(
         for (i = a + 1; i <= b; ++i) {
             const curLetter = x[i];
             const cG = visualLetterMap.get(curLetter) || -2;
-            const subCost = (w === curLetter)
-                ? 0
-                : wG === cG
-                ? mapSubCost
-                : curLetter === lastSugLetter
-                ? (w === lastLetter ? psc : c)
-                : c;
+            const subCost =
+                w === curLetter
+                    ? 0
+                    : wG === cG
+                    ? mapSubCost
+                    : curLetter === lastSugLetter
+                    ? w === lastLetter
+                        ? psc
+                        : c
+                    : c;
             const e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d - 1][i    ] + ci,      // insert
-                matrix[d    ][i - 1] + c        // delete
+                matrix[d - 1][i] + ci, // insert
+                matrix[d][i - 1] + c // delete
             );
             min = Math.min(min, e);
             matrix[d][i] = e;
@@ -180,16 +175,19 @@ export function* genCompoundableSuggestions(
             i = b;
             const curLetter = x[i];
             const cG = visualLetterMap.get(curLetter) || -2;
-            const subCost = (w === curLetter)
-                ? 0
-                : wG === cG
-                ? mapSubCost
-                : curLetter === lastSugLetter
-                ? (w === lastLetter ? psc : c)
-                : c;
+            const subCost =
+                w === curLetter
+                    ? 0
+                    : wG === cG
+                    ? mapSubCost
+                    : curLetter === lastSugLetter
+                    ? w === lastLetter
+                        ? psc
+                        : c
+                    : c;
             const e = Math.min(
                 matrix[d - 1][i - 1] + subCost, // substitute
-                matrix[d    ][i - 1] + c        // delete
+                matrix[d][i - 1] + c // delete
             );
             min = Math.min(min, e);
             matrix[d][i] = e;
@@ -200,19 +198,21 @@ export function* genCompoundableSuggestions(
 
         // Adjust the range between a and b
         for (; b > a && matrix[d][b] > costLimit; b -= 1) {
+            /* empty */
         }
         for (; a < b && matrix[d][a] > costLimit; a += 1) {
+            /* empty */
         }
 
         b = Math.min(b + 1, mx);
-        stack[d] = {a, b};
+        stack[d] = { a, b };
         const cost = matrix[d][b];
         if (node.f && isWordTerminationNode(node) && cost <= costLimit) {
             const r = { word: text, cost };
             history.push(r);
             costLimit = (yield r) || costLimit;
         }
-        goDeeper = (min <= costLimit);
+        goDeeper = min <= costLimit;
         hint = word.slice(a, b);
     }
     // console.log(`tag size: ${historyTags.size}, history size: ${history.length}`);
@@ -221,10 +221,7 @@ export function* genCompoundableSuggestions(
 
 // comparison function for Suggestion Results.
 export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
-    return a.cost - b.cost
-    || a.word.length - b.word.length
-    || collator.compare(a.word, b.word)
-    ;
+    return a.cost - b.cost || a.word.length - b.word.length || collator.compare(a.word, b.word);
 }
 
 export interface SuggestionCollector {
@@ -244,7 +241,7 @@ export function suggestionCollector(
     changeLimit: number = maxNumChanges
 ): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = Math.min(baseCost * wordToMatch.length / 2, baseCost * changeLimit);
+    let maxCost: number = Math.min((baseCost * wordToMatch.length) / 2, baseCost * changeLimit);
 
     function dropMax() {
         if (sugs.size < 2) {
@@ -261,14 +258,12 @@ export function suggestionCollector(
 
     function adjustCost(sug: SuggestionResult): SuggestionResult {
         const words = sug.word.split(regexSeparator);
-        const extraCost = words
-            .map(w => wordLengthCost[w.length] || 0)
-            .reduce((a, b) => a + b, 0);
+        const extraCost = words.map((w) => wordLengthCost[w.length] || 0).reduce((a, b) => a + b, 0);
         return { word: sug.word, cost: sug.cost + extraCost };
     }
 
     function collector(suggestion: SuggestionResult): MaxCost {
-        const {word, cost} = adjustCost(suggestion);
+        const { word, cost } = adjustCost(suggestion);
         if (cost <= maxCost && filter(suggestion.word)) {
             if (sugs.has(word)) {
                 const known = sugs.get(word)!;
@@ -294,11 +289,22 @@ export function suggestionCollector(
 
     return {
         collect,
-        add: function (suggestion: SuggestionResult) { collector(suggestion); return this; },
-        get suggestions() { return [...sugs.values()].sort(compSuggestionResults); },
-        get maxCost() { return maxCost; },
-        get word() { return wordToMatch; },
-        get maxNumSuggestions() { return maxNumSuggestions; },
+        add: function (suggestion: SuggestionResult) {
+            collector(suggestion);
+            return this;
+        },
+        get suggestions() {
+            return [...sugs.values()].sort(compSuggestionResults);
+        },
+        get maxCost() {
+            return maxCost;
+        },
+        get word() {
+            return wordToMatch;
+        },
+        get maxNumSuggestions() {
+            return maxNumSuggestions;
+        },
     };
 }
 
@@ -308,5 +314,5 @@ export function suggestionCollector(
  * @returns text that can be used in a regexp.
  */
 function regexQuote(text: string): string {
-    return text.replace(/[\[\]\-+(){},|*.\\]/g, '\\$1');
+    return text.replace(/[[\]\-+(){},|*.\\]/g, '\\$1');
 }

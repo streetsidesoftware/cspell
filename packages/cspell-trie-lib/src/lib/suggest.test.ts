@@ -1,13 +1,14 @@
-import {expect} from 'chai';
+/* eslint-disable jest/valid-expect */
+import { expect } from 'chai';
 import * as Sug from './suggest';
-import {Trie} from './trie';
+import { Trie } from './trie';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, 'talks');
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
+        const suggestions = results.map((s) => s.word);
         expect(suggestions).to.contain('talks');
         expect(suggestions).to.contain('talk');
         expect(suggestions[0]).to.be.equal('talks');
@@ -15,12 +16,12 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['talks', 'talk', 'walks', 'talked', 'talker', 'walk']);
     });
 
-    test('Tests suggestions', () => {
+    test('Tests suggestions 2', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore tallk
         const results = Sug.suggest(trie.root, 'tallk');
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
+        const suggestions = results.map((s) => s.word);
         expect(suggestions).to.contain('talks');
         expect(suggestions).to.contain('talk');
         expect(suggestions[1]).to.be.equal('talks');
@@ -28,12 +29,12 @@ describe('Validate Suggest', () => {
         expect(suggestions).to.deep.equal(['talk', 'talks', 'walk']);
     });
 
-    test('Tests suggestions', () => {
+    test('Tests suggestions 3', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore jernals
         const results = Sug.suggest(trie.root, 'jernals');
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
+        const suggestions = results.map((s) => s.word);
         expect(suggestions).to.deep.equal(['journals', 'journal']);
     });
 
@@ -42,23 +43,16 @@ describe('Validate Suggest', () => {
         // cspell:ignore juornals
         const results = Sug.suggest(trie.root, 'juornals');
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
-        expect(suggestions).to.deep.equal([
-            'journals',
-            'journal',
-            'journalism',
-            'journalist',
-            'journey',
-            'jovial',
-        ]);
+        const suggestions = results.map((s) => s.word);
+        expect(suggestions).to.deep.equal(['journals', 'journal', 'journalism', 'journalist', 'journey', 'jovial']);
     });
 
-    test('Tests suggestions', () => {
+    test('Tests suggestions 4', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfull
         const results = Sug.suggest(trie.root, 'joyfull');
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
+        const suggestions = results.map((s) => s.word);
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
     });
 
@@ -67,15 +61,15 @@ describe('Validate Suggest', () => {
         // cspell:ignore walkingtalkingjoy
         const results = Sug.suggest(trie.root, 'walkingtalkingjoy', 1, Sug.CompoundWordsMethod.SEPARATE_WORDS);
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
-        expect(suggestions).to.deep.equal(['walking talking joy', ]);
+        const suggestions = results.map((s) => s.word);
+        expect(suggestions).to.deep.equal(['walking talking joy']);
     });
 
-    test('Tests suggestions', () => {
+    test('Tests suggestions 5', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, '');
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
+        const suggestions = results.map((s) => s.word);
         expect(suggestions).to.deep.equal([]);
     });
 
@@ -84,17 +78,15 @@ describe('Validate Suggest', () => {
         // cspell:ignore joyfull
         const results = Sug.suggest(trie.root, 'joyfull', 3);
         // console.log(JSON.stringify(results));
-        const suggestions = results.map(s => s.word);
+        const suggestions = results.map((s) => s.word);
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller']);
     });
 
     test('Tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
-        collector.collect(
-            Sug.genSuggestions(trie.root, collector.word)
-        );
-        const suggestions = collector.suggestions.map(s => s.word);
+        collector.collect(Sug.genSuggestions(trie.root, collector.word));
+        const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).to.not.contain('joyfully');
         expect(suggestions).to.deep.equal(['joyful', 'joyfuller', 'joyfullest']);
         expect(collector.maxCost).to.be.lessThan(300);
@@ -103,20 +95,16 @@ describe('Validate Suggest', () => {
     test('Tests genSuggestions wanting 0', () => {
         const trie = Trie.create(sampleWords);
         const collector = Sug.suggestionCollector('joyfull', 0);
-        collector.collect(
-            Sug.genSuggestions(trie.root, collector.word)
-        );
-        const suggestions = collector.suggestions.map(s => s.word);
+        collector.collect(Sug.genSuggestions(trie.root, collector.word));
+        const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).to.be.length(0);
     });
 
     test('Tests genSuggestions wanting -10', () => {
         const trie = Trie.create(sampleWords);
         const collector = Sug.suggestionCollector('joyfull', -10);
-        collector.collect(
-            Sug.genSuggestions(trie.root, collector.word)
-        );
-        const suggestions = collector.suggestions.map(s => s.word);
+        collector.collect(Sug.genSuggestions(trie.root, collector.word));
+        const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).to.be.length(0);
     });
 
@@ -124,7 +112,7 @@ describe('Validate Suggest', () => {
         const trie = Trie.create(sampleWords);
         const sugs = [...Sug.genSuggestions(trie.root, 'joyfull')];
         const sr = sugs.sort(Sug.compSuggestionResults);
-        const suggestions = sr.map(s => s && s.word);
+        const suggestions = sr.map((s) => s && s.word);
         expect(suggestions).to.deep.equal(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
     });
 
@@ -135,27 +123,26 @@ describe('Validate Suggest', () => {
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.SEPARATE_WORDS)
         );
-        const suggestions = collector.suggestions.map(s => s.word);
+        const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).to.deep.equal(['joyful walk', 'joyful walks', 'joyfully walk']);
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
-    test('Tests genSuggestions with compounds', () => {
+    test('Tests genSuggestions with compounds 2', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyfullwalk joyfulwalk joyfulwalks joyfullywalk, joyfullywalks
         const collector = Sug.suggestionCollector('joyfullwalk', 3);
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
         );
-        const suggestions = collector.suggestions.map(s => s.word);
-        expect(suggestions).to.deep.equal(['joyful+walk', 'joyful+walks', 'joyfully+walk', ]);
+        const suggestions = collector.suggestions.map((s) => s.word);
+        expect(suggestions).to.deep.equal(['joyful+walk', 'joyful+walks', 'joyfully+walk']);
         expect(collector.maxCost).to.be.lessThan(300);
     });
 
     test('Tests the collector with filter', () => {
         const collector = Sug.suggestionCollector('joyfull', 3, (word) => word !== 'joyfully');
-        collector.add({ word: 'joyfully', cost: 100 })
-            .add({ word: 'joyful', cost: 100 });
+        collector.add({ word: 'joyfully', cost: 100 }).add({ word: 'joyful', cost: 100 });
         expect(collector.suggestions).to.be.length(1);
     });
 
@@ -166,7 +153,8 @@ describe('Validate Suggest', () => {
         collector.add({ word: 'joyful', cost: 75 });
         expect(collector.suggestions.length).to.be.equal(1);
         expect(collector.suggestions[0].cost).to.be.equal(75);
-        collector.add({ word: 'joyfuller', cost: 200 })
+        collector
+            .add({ word: 'joyfuller', cost: 200 })
             .add({ word: 'joyfullest', cost: 300 })
             .add({ word: 'joyfulness', cost: 340 })
             .add({ word: 'joyful', cost: 85 });
@@ -174,25 +162,25 @@ describe('Validate Suggest', () => {
         expect(collector.suggestions[0].cost).to.be.equal(75);
     });
 
-    test('Test that accents are closer', () => {
+    test('that accents are closer', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore wålk
         const collector = Sug.suggestionCollector('wålk', 3);
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
         );
-        const suggestions = collector.suggestions.map(s => s.word);
+        const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).to.deep.equal(['walk', 'walks', 'talk']);
     });
 
-    test('Test that accents are closer', () => {
+    test('that accents are closer 2', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore wâlkéd
         const collector = Sug.suggestionCollector('wâlkéd', 3);
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Sug.CompoundWordsMethod.JOIN_WORDS)
         );
-        const suggestions = collector.suggestions.map(s => s.word);
+        const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).to.deep.equal(['walked', 'walker', 'talked']);
     });
 });
@@ -246,4 +234,3 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
-

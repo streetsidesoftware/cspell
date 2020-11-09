@@ -2,6 +2,7 @@
 
 import * as path from 'path';
 import * as program from 'commander';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 import { CSpellApplicationOptions, AppError, BaseOptions, checkText } from './application';
 import * as App from './application';
@@ -13,10 +14,12 @@ interface Options extends CSpellApplicationOptions {
     issues: boolean;
     silent: boolean;
 }
-interface TraceOptions extends App.TraceOptions {}
+type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
 
-const templateIssue = `${chalk.green('${uri}')}:${chalk.yellow('${row}:${col}')} - Unknown word (${chalk.red('${text}')})`;
+const templateIssue = `${chalk.green('${uri}')}:${chalk.yellow('${row}:${col}')} - Unknown word (${chalk.red(
+    '${text}'
+)})`;
 const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
 const templateIssueWordsOnly = '${text}';
 
@@ -33,9 +36,15 @@ function errorEmitter(message: string, error: Error) {
 
 function infoEmitter(message: string, msgType: App.MessageType) {
     switch (msgType) {
-        case 'Debug': console.info(chalk.cyan(message)); break;
-        case 'Info': console.info(chalk.yellow(message)); break;
-        case 'Progress': console.info(chalk.white(message)); break;
+        case 'Debug':
+            console.info(chalk.cyan(message));
+            break;
+        case 'Info':
+            console.info(chalk.yellow(message));
+            break;
+        case 'Progress':
+            console.info(chalk.white(message));
+            break;
     }
 }
 
@@ -43,18 +52,24 @@ function debugEmitter(message: string) {
     infoEmitter(message, App.MessageTypes.Debug);
 }
 
-function nullEmitter(_: string | App.Issue) {}
-async function asyncNullEmitter(_: string | App.Issue) {}
+function nullEmitter(_: string | App.Issue) {
+    /* empty */
+}
+async function asyncNullEmitter(_: string | App.Issue) {
+    /* empty */
+}
 
 function getEmitters(options: Options): App.Emitters {
     const issueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
-        : options.legacy ? templateIssueLegacy : templateIssue;
+        : options.legacy
+        ? templateIssueLegacy
+        : templateIssue;
     const { silent = false, issues } = options;
     return {
-        issue: silent ? nullEmitter      : issues ? genIssueEmitter(issueTemplate) : nullEmitter,
+        issue: silent ? nullEmitter : issues ? genIssueEmitter(issueTemplate) : nullEmitter,
         error: silent ? asyncNullEmitter : errorEmitter,
-        info:  silent ? nullEmitter      : options.verbose ? infoEmitter : nullEmitter,
+        info: silent ? nullEmitter : options.verbose ? infoEmitter : nullEmitter,
         debug: options.debug ? debugEmitter : nullEmitter,
     };
 }
@@ -64,14 +79,19 @@ let showHelp = true;
 program
     .version(npmPackage.version)
     .description('Spelling Checker for Code')
-    .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .option(
+        '-c, --config <cspell.json>',
+        'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+    )
     .option('--no-color', 'Turn off color.')
-    .option('--color', 'Force color')
-    ;
+    .option('--color', 'Force color');
 
 program
     .option('-v, --verbose', 'display more information about the files being checked and the configuration')
-    .option('--local <local>', 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.')
+    .option(
+        '--local <local>',
+        'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+    )
     .option('--legacy', 'Legacy output')
     .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
     .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
@@ -93,9 +113,14 @@ program
         }
         showHelp = false;
         App.lint(files, options, emitters).then(
-            result => {
+            (result) => {
                 if (options.summary && !options.silent) {
-                    console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);
+                    console.error(
+                        'CSpell: Files checked: %d, Issues found: %d in %d files',
+                        result.files,
+                        result.issues,
+                        result.filesWithIssues.size
+                    );
                 }
                 process.exit(result.issues ? 1 : 0);
             },
@@ -112,8 +137,14 @@ interface TraceCommandOptions {
 program
     .command('trace')
     .description('Trace words')
-    .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
-    .option('--local <local>', 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.')
+    .option(
+        '-c, --config <cspell.json>',
+        'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+    )
+    .option(
+        '--local <local>',
+        'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+    )
     .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
     .option('--no-color', 'Turn off color.')
     .option('--color', 'Force color')
@@ -121,7 +152,7 @@ program
     .action((words: string[], options: TraceCommandOptions) => {
         showHelp = false;
         App.trace(words, options.parent).then(
-            result => {
+            (result) => {
                 result.forEach(emitTraceResult);
                 process.exit(0);
             },
@@ -139,7 +170,10 @@ interface CheckCommandOptions {
 program
     .command('check <files...>')
     .description('Spell check file(s) and display the result. The full file is displayed in color.')
-    .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+    .option(
+        '-c, --config <cspell.json>',
+        'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+    )
     .option('--no-color', 'Turn off color.')
     .option('--color', 'Force color')
     .action(async (files: string[], options: CheckCommandOptions) => {
@@ -151,9 +185,12 @@ program
             try {
                 const result = await checkText(filename, options.parent);
                 for (const item of result.items) {
-                    const fn = item.flagIE === App.IncludeExcludeFlag.EXCLUDE
-                        ? chalk.gray
-                        : item.isError ? chalk.red : chalk.whiteBright;
+                    const fn =
+                        item.flagIE === App.IncludeExcludeFlag.EXCLUDE
+                            ? chalk.gray
+                            : item.isError
+                            ? chalk.red
+                            : chalk.whiteBright;
                     const t = fn(item.text);
                     process.stdout.write(t);
                 }
@@ -192,7 +229,7 @@ Examples:
     cat LICENSE | cspell stdin      Read from stdin the contents of LICENSE
 `;
 
-program.on('--help', function() {
+program.on('--help', function () {
     console.log(usage);
 });
 
@@ -209,16 +246,13 @@ function emitTraceResult(r: App.TraceResult) {
     const terminalWidth = process.stdout.columns || 120;
     const widthName = 20;
     const w = chalk.green(r.word);
-    const f = r.found
-        ? chalk.whiteBright('*')
-        : chalk.dim('-');
+    const f = r.found ? chalk.whiteBright('*') : chalk.dim('-');
     const n = chalk.yellowBright(pad(r.dictName, widthName));
     const used = [r.word.length, 1, widthName].reduce((a, b) => a + b, 3);
     const widthSrc = terminalWidth - used;
     const s = chalk.white(trimMid(r.dictSource, widthSrc));
     const line = [w, f, n, s].join(' ');
     console.log(line);
-
 }
 
 function pad(s: string, w: number): string {
@@ -235,7 +269,7 @@ function trimMid(s: string, w: number): string {
 }
 
 function formatIssue(template: string, issue: App.Issue) {
-    const {uri = '', row, col, text} = issue;
+    const { uri = '', row, col, text } = issue;
     return template
         .replace(/\$\{uri\}/, uri)
         .replace(/\$\{row\}/, row.toString())

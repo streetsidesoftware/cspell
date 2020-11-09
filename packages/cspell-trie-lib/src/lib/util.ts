@@ -1,8 +1,8 @@
-import {Sequence, genSequence} from 'gensequence';
-import {TrieNode, FLAG_WORD, ChildMap} from './TrieNode';
-import {YieldResult, walker} from './walker';
+import { Sequence, genSequence } from 'gensequence';
+import { TrieNode, FLAG_WORD, ChildMap } from './TrieNode';
+import { YieldResult, walker } from './walker';
 
-export {YieldResult} from './walker';
+export { YieldResult } from './walker';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {
@@ -26,7 +26,7 @@ export function isWordTerminationNode(node: TrieNode) {
 export function orderTrie(node: TrieNode) {
     if (!node.c) return;
 
-    const nodes = [...node.c].sort(([a], [b]) => a < b ? -1 : 1);
+    const nodes = [...node.c].sort(([a], [b]) => (a < b ? -1 : 1));
     node.c = new Map(nodes);
     for (const n of node.c) {
         orderTrie(n[1]);
@@ -47,10 +47,9 @@ export const iterateTrie = walk;
  */
 export function iteratorTrieWords(node: TrieNode): Sequence<string> {
     return walk(node)
-        .filter(r => isWordTerminationNode(r.node))
-        .map(r => r.text);
+        .filter((r) => isWordTerminationNode(r.node))
+        .map((r) => r.text);
 }
-
 
 export function createRoot(): TrieNode {
     return {};
@@ -97,7 +96,7 @@ export function countNodes(root: TrieNode) {
         if (seen.has(n)) return;
         seen.add(n);
         if (n.c) {
-            [...n.c.values()].forEach(n => walk(n));
+            [...n.c.values()].forEach((n) => walk(n));
         }
     }
 

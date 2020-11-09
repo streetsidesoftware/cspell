@@ -55,7 +55,9 @@ export function createArrayReader(lines: string[]): Reader {
     return {
         size: lines.length,
         [Symbol.iterator]: () => genSequence(lines),
-        annotatedWords() { return genSequence(lines).pipe(_mapText).pipe(dedupeAndSort); },
+        annotatedWords() {
+            return genSequence(lines).pipe(_mapText).pipe(dedupeAndSort);
+        },
     };
 }
 
@@ -72,7 +74,9 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
         size: reader.dic.length,
         // seqWords is used for backwards compatibility.
         [Symbol.iterator]: () => reader.seqWords(),
-        annotatedWords() { return reader.seqAffWords().pipe(_mapAffWords).pipe(normalizeAndDedupe); },
+        annotatedWords() {
+            return reader.seqAffWords().pipe(_mapAffWords).pipe(normalizeAndDedupe);
+        },
     };
 }
 
@@ -80,31 +84,35 @@ async function trieFileReader(filename: string): Promise<Reader> {
     const trieRoot = importTrie(await textFileReader(filename));
     const trie = new Trie(trieRoot);
     return {
-        get size() { return trie.size(); },
+        get size() {
+            return trie.size();
+        },
         [Symbol.iterator]: () => trie.words(),
-        annotatedWords() { return trie.words(); },
+        annotatedWords() {
+            return trie.words();
+        },
     };
 }
 
 async function textFileReader(filename: string): Promise<Reader> {
-    const content = await fs.readFile(filename)
-        .then(buffer => (/\.gz$/).test(filename) ? zlib.gunzipSync(buffer) : buffer)
-        .then(buffer => buffer.toString('utf8'))
-        ;
+    const content = await fs
+        .readFile(filename)
+        .then((buffer) => (/\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer))
+        .then((buffer) => buffer.toString('utf8'));
     const lines = content.split('\n');
     return createArrayReader(lines);
 }
 
 const _mapText = operators.pipe(_comments, _compoundBegin, _compoundEnd, _stripCaseAndAccents);
 
-function *_comments(lines: Iterable<string>): Generator<AnnotatedWord> {
+function* _comments(lines: Iterable<string>): Generator<AnnotatedWord> {
     for (const line of lines) {
         const w = line.replace(regExMatchComments, '').trim();
         if (w) yield w;
     }
 }
 
-function *_compoundEnd(lines: Iterable<string>): Generator<AnnotatedWord> {
+function* _compoundEnd(lines: Iterable<string>): Generator<AnnotatedWord> {
     for (const line of lines) {
         if (line[0] !== OPTIONAL_COMPOUND) {
             yield line;
@@ -116,7 +124,7 @@ function *_compoundEnd(lines: Iterable<string>): Generator<AnnotatedWord> {
     }
 }
 
-function *_compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
+function* _compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
     for (const line of lines) {
         if (line[line.length - 1] !== OPTIONAL_COMPOUND) {
             yield line;
@@ -130,18 +138,21 @@ function *_compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
 
 const regNotLower = /[^a-z+!~]/;
 
-function *_stripCaseAndAccents(words: Iterable<AnnotatedWord>): Generator<AnnotatedWord> {
+function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Generator<AnnotatedWord> {
     for (const word of words) {
         yield word;
         if (regNotLower.test(word)) {
             // covert to lower case and strip accents.
-            const n = word.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const n = word
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '');
             yield NORMALIZED + n;
         }
     }
 }
 
-function *dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
+function* dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
     const buffer: AnnotatedWord[] = [];
 
     function sortDedupeClear() {
@@ -153,13 +164,13 @@ function *dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord>
     for (const word of words) {
         buffer.push(word);
         if (buffer.length >= DEDUPE_SIZE) {
-            yield *sortDedupeClear();
+            yield* sortDedupeClear();
         }
     }
-    yield *sortDedupeClear();
+    yield* sortDedupeClear();
 }
 
-function *_mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
+function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
     for (const affWord of affWords) {
         const { word, flags } = affWord;
         const compound = flags.isCompoundForbidden ? '' : COMPOUND;

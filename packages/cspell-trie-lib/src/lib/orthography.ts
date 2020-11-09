@@ -39,8 +39,6 @@ export const visualLetterMap: Map<string, number> = calcVisualLetterMap(visualLe
 function calcVisualLetterMap(groups: string[]): Map<string, number> {
     // map each letter in a group to the index of the group.
     const map = new Map<string, number>();
-    groups
-        .map(g => g.split(''))
-        .forEach((g, i) => g.forEach(c => map.set(c, i)))
+    groups.map((g) => g.split('')).forEach((g, i) => g.forEach((c) => map.set(c, i)));
     return map;
 }

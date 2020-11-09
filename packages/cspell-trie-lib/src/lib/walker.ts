@@ -1,7 +1,7 @@
 import { TrieNode, ChildMap } from './TrieNode';
 
-export const JOIN_SEPARATOR: string = '+';
-export const WORD_SEPARATOR: string = ' ';
+export const JOIN_SEPARATOR = '+';
+export const WORD_SEPARATOR = ' ';
 
 export interface YieldResult {
     text: string;
@@ -24,14 +24,7 @@ export enum CompoundWordsMethod {
     JOIN_WORDS,
 }
 
-export interface WalkerIterator extends Generator<YieldResult, any, boolean | undefined> {
-    /**
-     * Ask for the next result.
-     * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
-     * This can be used to limit the walker's depth.
-     */
-    // next: (goDeeper?: boolean) => IteratorResult<YieldResult>;
-}
+export type WalkerIterator = Generator<YieldResult, any, boolean | undefined>;
 
 /**
  * Walks the Trie and yields a value at each node.
@@ -39,9 +32,8 @@ export interface WalkerIterator extends Generator<YieldResult, any, boolean | un
  */
 export function* walker(
     root: TrieNode,
-    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
+    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
 ): WalkerIterator {
-
     const roots: { [index: number]: ChildMap | [string, TrieNode][] } = {
         [CompoundWordsMethod.NONE]: [],
         [CompoundWordsMethod.JOIN_WORDS]: [[JOIN_SEPARATOR, root]],
@@ -58,15 +50,15 @@ export function* walker(
     }
 
     let depth = 0;
-    const stack: {t: string, c: Iterator<[string, TrieNode]>}[] = [];
-    stack[depth] = {t: '', c: children(root)};
+    const stack: { t: string; c: Iterator<[string, TrieNode]> }[] = [];
+    stack[depth] = { t: '', c: children(root) };
     let ir: IteratorResult<[string, TrieNode]>;
     while (depth >= 0) {
         let baseText = stack[depth].t;
         while (!(ir = stack[depth].c.next()).done) {
             const [char, node] = ir.value;
             const text = baseText + char;
-            const goDeeper = (yield { text, node, depth });
+            const goDeeper = yield { text, node, depth };
             if (goDeeper || goDeeper === undefined) {
                 depth++;
                 baseText = text;
@@ -81,15 +73,7 @@ export interface Hinting {
     goDeeper: boolean;
 }
 
-export interface HintedWalkerIterator extends Generator<YieldResult, any, Hinting | undefined> {
-    /**
-     * Ask for the next result.
-     * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
-     * This can be used to limit the walker's depth.
-     */
-    // next: (hinting?: Hinting) => IteratorResult<YieldResult>;
-    // [Symbol.iterator]: () => HintedWalkerIterator;
-}
+export type HintedWalkerIterator = Generator<YieldResult, any, Hinting | undefined>;
 
 /**
  * Walks the Trie and yields a value at each node.
@@ -98,9 +82,8 @@ export interface HintedWalkerIterator extends Generator<YieldResult, any, Hintin
 export function* hintedWalker(
     root: TrieNode,
     compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
-    hint: string,
+    hint: string
 ): HintedWalkerIterator {
-
     const roots: { [index: number]: ChildMap | [string, TrieNode][] } = {
         [CompoundWordsMethod.NONE]: [],
         [CompoundWordsMethod.JOIN_WORDS]: [[JOIN_SEPARATOR, root]],
@@ -112,9 +95,9 @@ export function* hintedWalker(
     function* children(n: TrieNode): IterableIterator<[string, TrieNode]> {
         if (n.c) {
             // First yield the hints
-            yield* [...hints].filter(a => n.c!.has(a)).map(a => [a, n.c!.get(a)!] as [string, TrieNode]);
+            yield* [...hints].filter((a) => n.c!.has(a)).map((a) => [a, n.c!.get(a)!] as [string, TrieNode]);
             // Then yield everything else.
-            yield* [...n.c].filter(a => !hints.has(a[0]));
+            yield* [...n.c].filter((a) => !hints.has(a[0]));
         }
         if (n.f) {
             yield* roots[compoundingMethod];

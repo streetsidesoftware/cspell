@@ -7,6 +7,7 @@ import * as program from 'commander';
 import glob from 'glob';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './compiler/iterateWordsFromFile';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
 function globP(pattern: string): Promise<string[]> {
@@ -40,20 +41,19 @@ const log: Logger = (message?: any, ...optionalParams: any[]) => {
 
 compiler.setLogger(log);
 
-export function run(
-    program: program.Command,
-    argv: string[]
-): Promise<void> {
+export function run(program: program.Command, argv: string[]): Promise<void> {
     (program as any).exitOverride();
 
     return new Promise((resolve, rejects) => {
-        program
-            .version(npmPackage.version);
+        program.version(npmPackage.version);
 
         program
             .command('compile <src...>')
             .description('compile words lists into simple dictionary files.')
-            .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
+            .option(
+                '-o, --output <path>',
+                'Specify the output directory, otherwise files are written back to the same location.'
+            )
             .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
             .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
@@ -69,7 +69,10 @@ export function run(
         program
             .command('compile-trie <src...>')
             .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
-            .option('-o, --output <path>', 'Specify the output directory, otherwise files are written back to the same location.')
+            .option(
+                '-o, --output <path>',
+                'Specify the output directory, otherwise files are written back to the same location.'
+            )
             .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
             .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
             .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
@@ -108,21 +111,23 @@ async function processAction(
     src: string[],
     fileExt: '.txt' | '.trie',
     options: CompileCommonOptions,
-    action: (words: Sequence<string>, dst: string) => Promise<any>)
-: Promise<void> {
-    console.log('Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
+    action: (words: Sequence<string>, dst: string) => Promise<any>
+): Promise<void> {
+    console.log(
+        'Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
         options.output || 'default',
         options.compress ? 'true' : 'false',
-        src.join('\n  '));
+        src.join('\n  ')
+    );
 
     const ext = fileExt + (options.compress ? '.gz' : '');
     const maxDepth = parseNumber(options.max_depth);
     const readerOptions = { maxDepth };
 
-    const globResults = await Promise.all(src.map(s => globP(s)));
+    const globResults = await Promise.all(src.map((s) => globP(s)));
     const filesToProcess = genSequence(globResults)
-        .concatMap(files => files)
-        .map(async filename => {
+        .concatMap((files) => files)
+        .map(async (filename) => {
             log(`Reading ${path.basename(filename)}`);
             const words = await streamWordsFromFile(filename, readerOptions);
             log(`Done reading ${path.basename(filename)}`);
@@ -134,8 +139,8 @@ async function processAction(
         });
 
     const r = options.merge
-    ? processFiles(action, filesToProcess, toMergeTargetFile(options.merge, options.output, ext))
-    : processFilesIndividually(action, filesToProcess, s => toTargetFile(s, options.output, ext));
+        ? processFiles(action, filesToProcess, toMergeTargetFile(options.merge, options.output, ext))
+        : processFilesIndividually(action, filesToProcess, (s) => toTargetFile(s, options.output, ext));
     await r;
     log(`Complete.`);
 }
@@ -158,10 +163,9 @@ function toMergeTargetFile(filename: string, destination: string | undefined, ex
 async function processFilesIndividually(
     action: (words: Sequence<string>, dst: string) => Promise<any>,
     filesToProcess: Sequence<Promise<FileToProcess>>,
-    srcToTarget: (src: string) => string,
+    srcToTarget: (src: string) => string
 ) {
-    const toProcess = filesToProcess
-    .map(async pFtp => {
+    const toProcess = filesToProcess.map(async (pFtp) => {
         const { src, words } = await pFtp;
         const dst = srcToTarget(src);
         log('Process "%s" to "%s"', src, dst);
@@ -177,18 +181,18 @@ async function processFilesIndividually(
 async function processFiles(
     action: (words: Sequence<string>, dst: string) => Promise<any>,
     filesToProcess: Sequence<Promise<FileToProcess>>,
-    mergeTarget: string,
+    mergeTarget: string
 ) {
     const toProcess = await Promise.all([...filesToProcess]);
     const dst = mergeTarget;
 
     const words = genSequence(toProcess)
-    .map(ftp => {
-        const { src } = ftp;
-        log('Process "%s" to "%s"', src, dst);
-        return ftp;
-    })
-    .concatMap( ftp => ftp.words );
+        .map((ftp) => {
+            const { src } = ftp;
+            log('Process "%s" to "%s"', src, dst);
+            return ftp;
+        })
+        .concatMap((ftp) => ftp.words);
     await action(words, dst);
     log('Done "%s"', dst);
 }

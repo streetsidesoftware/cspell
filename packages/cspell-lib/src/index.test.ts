@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import * as cspell from './index';
 
 describe('Validate the cspell API', () => {
@@ -9,14 +8,12 @@ describe('Validate the cspell API', () => {
         // cspell:ignore jansons
         const text = '{ "name": "Jansons"}';
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-        return cspell.validateText(text, fileSettings)
-            .then(results => {
-                expect(results).to.not.be.empty;
-                expect(results.map(to => to.text)).to.contain('Jansons');
-            });
+        return cspell.validateText(text, fileSettings).then((results) => {
+            expect(results.map((to) => to.text)).toContain('Jansons');
+        });
     });
 
     test('clearCachedSettings', () => {
-        return cspell.clearCachedFiles();
+        return expect(cspell.clearCachedFiles()).resolves.not.toThrow();
     });
 });

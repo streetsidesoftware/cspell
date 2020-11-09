@@ -5,4 +5,3 @@ export interface TrieNode {
     f?: number; // flags
     c?: ChildMap;
 }
-

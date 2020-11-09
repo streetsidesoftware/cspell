@@ -65,9 +65,7 @@ function calcKey(uri: string, options: LoadOptions) {
 }
 
 export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()) {
-    await Promise.all([...dictionaryCache]
-        .map(([, entry]) => refreshEntry(entry, maxAge, now))
-    );
+    await Promise.all([...dictionaryCache].map(([, entry]) => refreshEntry(entry, maxAge, now)));
 }
 
 async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now()) {
@@ -76,14 +74,8 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
         entry.ts = now;
         const pStat = fs.stat(entry.uri).catch(() => undefined);
         const [state, oldState] = await Promise.all([pStat, entry.state]);
-        if (entry.ts === now && (
-            state?.mtimeMs !== oldState?.mtimeMs ||
-            state?.size !== oldState?.size
-        )) {
-            dictionaryCache.set(
-                calcKey(entry.uri, entry.options),
-                loadEntry(entry.uri, entry.options)
-            );
+        if (entry.ts === now && (state?.mtimeMs !== oldState?.mtimeMs || state?.size !== oldState?.size)) {
+            dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
         }
     }
 }
@@ -96,7 +88,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         ts: now,
         state: fs.stat(uri).catch(() => undefined),
         dictionary,
-    }
+    };
 }
 
 function determineType(uri: string, options: LoadOptions): LoaderType {
@@ -106,7 +98,7 @@ function determineType(uri: string, options: LoadOptions): LoaderType {
     return regTrieTest.test(uri) ? 'T' : type;
 }
 
-function load(uri: string, options: LoadOptions): Promise<SpellingDictionary>  {
+function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
     const type = determineType(uri, options);
     const loader = loaders[type] || loaders.default;
     return loader(uri, options);
@@ -131,5 +123,5 @@ export const testing = {
     dictionaryCache,
     refreshEntry,
     loadEntry,
-    load
+    load,
 };

@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable jest/valid-expect */
 import { splitCamelCaseWord } from './text';
 import * as Text from './text';
 import { expect } from 'chai';
@@ -28,95 +30,127 @@ describe('Util Text', () => {
     });
 
     test('extract word from text', () => {
-        expect(Text.extractWordsFromText(`
+        expect(
+            Text.extractWordsFromText(
+                `
             // could've, would've, couldn't've, wasn't, y'all, 'twas, shouldn’t
-        `).toArray()).to.deep.equal([
-                { text: "could've", offset: 16 },
-                { text: "would've", offset: 26 },
-                { text: "couldn't've", offset: 36 },
-                { text: "wasn't", offset: 49 },
-                { text: "y'all", offset: 57 },
-                { text: 'twas', offset: 65 },
-                { text: 'shouldn’t', offset: 71 },
-            ]);
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: "could've", offset: 16 },
+            { text: "would've", offset: 26 },
+            { text: "couldn't've", offset: 36 },
+            { text: "wasn't", offset: 49 },
+            { text: "y'all", offset: 57 },
+            { text: 'twas', offset: 65 },
+            { text: 'shouldn’t', offset: 71 },
+        ]);
     });
 
     test('extract words', () => {
-        expect(Text.extractWordsFromText(`
+        expect(
+            Text.extractWordsFromText(
+                `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `).toArray()).to.deep.equal([
-                { text: 'expect', offset: 13 },
-                { text: 'splitCamelCaseWord', offset: 20 },
-                { text: 'hello', offset: 40 },
-                { text: 'to', offset: 49 },
-                { text: 'deep', offset: 52 },
-                { text: 'equal', offset: 57 },
-                { text: 'hello', offset: 65 },
-            ]);
-        expect(Text.extractWordsFromText(`
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: 'expect', offset: 13 },
+            { text: 'splitCamelCaseWord', offset: 20 },
+            { text: 'hello', offset: 40 },
+            { text: 'to', offset: 49 },
+            { text: 'deep', offset: 52 },
+            { text: 'equal', offset: 57 },
+            { text: 'hello', offset: 65 },
+        ]);
+        expect(
+            Text.extractWordsFromText(
+                `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `).toArray()).to.deep.equal([
-                { text: 'expect', offset: 13 },
-                { text: 'splitCamelCaseWord', offset: 20 },
-                { text: 'hello', offset: 40 },
-                { text: 'to', offset: 49 },
-                { text: 'deep', offset: 52 },
-                { text: 'equal', offset: 57 },
-                { text: 'hello', offset: 65 },
-            ]);
-        expect(Text.extractWordsFromText(`
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: 'expect', offset: 13 },
+            { text: 'splitCamelCaseWord', offset: 20 },
+            { text: 'hello', offset: 40 },
+            { text: 'to', offset: 49 },
+            { text: 'deep', offset: 52 },
+            { text: 'equal', offset: 57 },
+            { text: 'hello', offset: 65 },
+        ]);
+        expect(
+            Text.extractWordsFromText(
+                `
             expect(splitCamelCaseWord('hello'));
-        `).toArray()).to.deep.equal([
-                { text: 'expect', offset: 13 },
-                { text: 'splitCamelCaseWord', offset: 20 },
-                { text: 'hello', offset: 40 },
-            ]);
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: 'expect', offset: 13 },
+            { text: 'splitCamelCaseWord', offset: 20 },
+            { text: 'hello', offset: 40 },
+        ]);
     });
 
     test('extract words from code', () => {
-        expect(Text.extractWordsFromCode(`
+        expect(
+            Text.extractWordsFromCode(
+                `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
-        `).toArray()).to.deep.equal([
-                { text: 'expect', offset: 13 },
-                { text: 'split', offset: 20 },
-                { text: 'Camel', offset: 25 },
-                { text: 'Case', offset: 30 },
-                { text: 'Word', offset: 34 },
-                { text: 'hello', offset: 40 },
-                { text: 'to', offset: 49 },
-                { text: 'deep', offset: 52 },
-                { text: 'equal', offset: 57 },
-                { text: 'hello', offset: 65 },
-            ]);
-        expect(Text.extractWordsFromCode(`
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: 'expect', offset: 13 },
+            { text: 'split', offset: 20 },
+            { text: 'Camel', offset: 25 },
+            { text: 'Case', offset: 30 },
+            { text: 'Word', offset: 34 },
+            { text: 'hello', offset: 40 },
+            { text: 'to', offset: 49 },
+            { text: 'deep', offset: 52 },
+            { text: 'equal', offset: 57 },
+            { text: 'hello', offset: 65 },
+        ]);
+        expect(
+            Text.extractWordsFromCode(
+                `
             expect(regExp.match(first_line));
-        `).toArray()).to.deep.equal([
-                { text: 'expect', offset: 13 },
-                { text: 'reg', offset: 20 },
-                { text: 'Exp', offset: 23 },
-                { text: 'match', offset: 27 },
-                { text: 'first', offset: 33 },
-                { text: 'line', offset: 39 },
-            ]);
-        expect(Text.extractWordsFromCode(`
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: 'expect', offset: 13 },
+            { text: 'reg', offset: 20 },
+            { text: 'Exp', offset: 23 },
+            { text: 'match', offset: 27 },
+            { text: 'first', offset: 33 },
+            { text: 'line', offset: 39 },
+        ]);
+        expect(
+            Text.extractWordsFromCode(
+                `
             expect(aHELLO);
-        `).toArray()).to.deep.equal([
-                { text: 'expect', offset: 13 },
-                { text: 'a', offset: 20 },
-                { text: 'HELLO', offset: 21 },
-            ]);
-        expect(Text.extractWordsFromCode(`
-            const x = 'shouldn\'t';
-        `).toArray()).to.deep.equal([
-                { text: 'const', offset: 13 },
-                { text: 'x', offset: 19 },
-                { text: 'shouldn\'t', offset: 24 },
-            ]);
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: 'expect', offset: 13 },
+            { text: 'a', offset: 20 },
+            { text: 'HELLO', offset: 21 },
+        ]);
+        expect(
+            Text.extractWordsFromCode(
+                `
+            const x = "shouldn't";
+        `
+            ).toArray()
+        ).to.deep.equal([
+            { text: 'const', offset: 13 },
+            { text: 'x', offset: 19 },
+            { text: "shouldn't", offset: 24 },
+        ]);
     });
 
     test('splits words like HTMLInput', () => {
         const words = Text.extractWordsFromCode('var value = HTMLInput.value;')
-            .map(({text}) => text)
+            .map(({ text }) => text)
             .toArray();
         expect(words).to.deep.equal(['var', 'value', 'HTML', 'Input', 'value']);
     });
@@ -131,73 +165,83 @@ describe('Util Text', () => {
     });
 
     test('tests skipping Chinese characters', () => {
-        expect(Text.extractWordsFromCode(`
+        expect(
+            Text.extractWordsFromCode(
+                `
             <a href="http://www.ctrip.com" title="携程旅行网">携程旅行网</a>
-        `).map(wo => wo.text).toArray()).to.deep.equal(
-            ['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']
-        );
+        `
+            )
+                .map((wo) => wo.text)
+                .toArray()
+        ).to.deep.equal(['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']);
     });
 
     test('tests skipping Japanese characters', () => {
-        expect(Text.extractWordsFromCode(`
+        expect(
+            Text.extractWordsFromCode(
+                `
             Example text: gitのpackageのみ際インストール
             gitのpackageのみ際インストール
             title="携程旅行网"
-        `).map(wo => wo.text).toArray()).to.deep.equal(
-            ['Example', 'text', 'git', 'package', 'git', 'package', 'title']
-        );
+        `
+            )
+                .map((wo) => wo.text)
+                .toArray()
+        ).to.deep.equal(['Example', 'text', 'git', 'package', 'git', 'package', 'title']);
     });
 
     test('tests Greek characters', () => {
-        expect(Text.extractWordsFromCode(`
+        expect(
+            Text.extractWordsFromCode(
+                `
             Γ γ	gamma, γάμμα
-        `).map(wo => wo.text).toArray()).to.deep.equal(
-            ['Γ', 'γ', 'gamma', 'γάμμα']
-            );
+        `
+            )
+                .map((wo) => wo.text)
+                .toArray()
+        ).to.deep.equal(['Γ', 'γ', 'gamma', 'γάμμα']);
     });
 
-    test('test case of Chinese characters', () => {
+    test('case of Chinese characters', () => {
         expect(Text.isUpperCase('携程旅行网')).to.be.false;
         expect(Text.isLowerCase('携程旅行网')).to.be.false;
     });
 
     test('tests breaking up text into lines', () => {
-        const parts = [
-            '',
-            '/*',
-            ' * this is a comment.\r',
-            ' */',
-            '',
-        ];
+        const parts = ['', '/*', ' * this is a comment.\r', ' */', ''];
         const sampleText = parts.join('\n');
-        const r = Text.extractLinesOfText(sampleText).map(a => a.text).toArray();
+        const r = Text.extractLinesOfText(sampleText)
+            .map((a) => a.text)
+            .toArray();
         expect(r.join('')).to.be.equal(parts.join('\n'));
-        const lines = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
+        const lines = [...Text.extractLinesOfText(sampleCode)].map((m) => m.text);
         expect(lines.length).to.be.equal(sampleCode.split('\n').length);
     });
 
     test('tests breaking up text into lines (single line)', () => {
         const parts = ['There is only one line.'];
         const sampleText = parts.join('\n');
-        const r = Text.extractLinesOfText(sampleText).map(a => a.text).toArray();
+        const r = Text.extractLinesOfText(sampleText)
+            .map((a) => a.text)
+            .toArray();
         const rText = r.join('');
         expect(rText).to.be.equal(parts.join('\n'));
         expect(rText).to.be.equal(sampleText);
     });
 
     test('tests extractLinesOfText', () => {
-        const linesA = [...Text.extractLinesOfText(sampleCode)].map(m => m.text);
+        const linesA = [...Text.extractLinesOfText(sampleCode)].map((m) => m.text);
         const linesB = Text.extractLinesOfText(sampleCode)
-            .map(m => m.text)
+            .map((m) => m.text)
             .toArray();
         expect(linesB).to.be.deep.equal(linesA);
     });
 
-    test('test extractText', () => {
+    test('extractText', () => {
         const line = Text.textOffset('This is a line of text to be processed.');
         const words = Text.extractWordsFromTextOffset(line);
-        const results = words.map(wo => Text.extractText(line, wo.offset, wo.offset + wo.text.length)).toArray();
-        const expected = words.map(wo => wo.text).toArray();
+        const results = words.map((wo) => Text.extractText(line, wo.offset, wo.offset + wo.text.length)).toArray();
+        const expected = words.map((wo) => wo.text).toArray();
         expect(results).to.deep.equal(expected);
     });
 });
@@ -249,7 +293,6 @@ describe('Test the text matching functions', () => {
         expect(Text.camelToSnake('FIRSTNAME')).to.be.equal('firstname');
     });
 });
-
 
 describe('Validates offset conversions', () => {
     function* getOffsets(haystack: string, needle: string) {

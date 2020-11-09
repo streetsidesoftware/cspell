@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import * as wlh from './wordListHelper';
 
 jest.mock('./util/logger');
@@ -7,13 +6,13 @@ describe('Validate wordListHelper', () => {
     test('tests splitLineIntoWords', () => {
         const line = 'New York City';
         const words = wlh.splitLineIntoWords(line);
-        expect([...words]).to.be.deep.equal([line, ...line.split(' ')]);
+        expect([...words]).toEqual([line, ...line.split(' ')]);
     });
 
     test('tests splitLineIntoCodeWords', () => {
         const line = 'cSpell:disableCompoundWords extra';
         const words = wlh.splitLineIntoCodeWords(line);
-        expect([...words]).to.be.deep.equal([
+        expect([...words]).toEqual([
             'cSpell',
             'disableCompoundWords',
             'extra',
@@ -28,14 +27,11 @@ describe('Validate wordListHelper', () => {
     test('tests splitLineIntoCodeWordsRx', () => {
         const line = 'New York City';
         const words = wlh.splitLineIntoCodeWords(line);
-        expect([...words]).to.be.deep.equal([
-            'New York City',
-            'New', 'York', 'City',
-        ]);
+        expect([...words]).toEqual(['New York City', 'New', 'York', 'City']);
     });
 
     test('tests loadWordsRx error handling', async () => {
         const values = await wlh.loadWordsNoError('not_found.txt');
-        expect([...values]).to.be.empty;
+        expect([...values]).toHaveLength(0);
     });
 });

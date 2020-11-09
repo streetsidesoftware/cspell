@@ -1,10 +1,8 @@
-
 /**
  * Search for an item in a sorted array.
  * The value returned is either the position of the item or where it should be inserted.
  */
 export function binarySearch<T>(arr: Array<T>, item: T): number {
-
     let left = 0;
     let right = arr.length;
 

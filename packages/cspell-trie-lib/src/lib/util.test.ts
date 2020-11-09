@@ -50,10 +50,12 @@ describe('Validate Util Functions', () => {
 
     test('iteratorTrieWords', () => {
         const trie = createTriFromList(words);
-        expect([...iteratorTrieWords(trie)].join(' '))
-        .toBe('These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no');
+        expect([...iteratorTrieWords(trie)].join(' ')).toBe(
+            'These There are some someone sample space spaces. words worry. with for everyone extra to use, complete is no'
+        );
     });
 });
 
-const sentence = 'These are some sample words for everyone to use, complete with extra    spaces. There is no space for someone to worry.';
+const sentence =
+    'These are some sample words for everyone to use, complete with extra    spaces. There is no space for someone to worry.';
 const words = sentence.split(' ');

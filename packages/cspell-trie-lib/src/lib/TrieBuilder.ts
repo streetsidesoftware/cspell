@@ -14,7 +14,7 @@ interface PathNode {
 }
 
 export class TrieBuilder {
-    private count: number = 0;
+    private count = 0;
     private readonly signatures = new Map<string, TrieNode>();
     private readonly cached = new Map<TrieNode, number>();
     private readonly transforms = new Map<TrieNode, Map<string, TrieNode>>();
@@ -43,18 +43,14 @@ export class TrieBuilder {
 
     private signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
-        const ref = n.c
-            ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, this.cached.get(n)]))
-            : '';
+        const ref = n.c ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, this.cached.get(n)])) : '';
         return isWord + ref;
     }
 
     private _canBeCached(n: TrieNode): boolean {
-        if (!n.c)
-            return true;
+        if (!n.c) return true;
         for (const v of n.c) {
-            if (!this.cached.has(v[1]))
-                return false;
+            if (!this.cached.has(v[1])) return false;
         }
         return true;
     }
@@ -70,7 +66,7 @@ export class TrieBuilder {
         // istanbul ignore else
         if (n.c) {
             const c = [...n.c]
-                .sort((a, b) => a[0] < b[0] ? -1 : 1)
+                .sort((a, b) => (a[0] < b[0] ? -1 : 1))
                 .map(([k, n]) => [k, this.freeze(n)] as [string, TrieNode]);
             n.c = new Map(c);
             Object.freeze(n.c);
@@ -102,7 +98,7 @@ export class TrieBuilder {
     private addChild(node: TrieNode, head: string, child: TrieNode): TrieNode {
         if (node.c?.get(head) !== child) {
             if (!node.c || Object.isFrozen(node)) {
-                node = {...node, c: new Map(node.c ?? [])};
+                node = { ...node, c: new Map(node.c ?? []) };
             }
             node.c!.set(head, child);
         }
@@ -197,14 +193,13 @@ export class TrieBuilder {
         this.signatures.clear();
     }
 
-    build(consolidateSuffixes: boolean = false): Trie {
+    build(consolidateSuffixes = false): Trie {
         const root = this._root;
         // Reset the builder to prevent updating the trie in the background.
         this.reset();
         return new Trie(consolidateSuffixes ? consolidate(root) : root);
     }
 }
-
 
 function copyIfFrozen(n: TrieNode): TrieNode {
     if (!Object.isFrozen(n)) return n;

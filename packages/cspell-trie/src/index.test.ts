@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import * as lib from './index';
 import { Trie } from 'cspell-trie-lib';
 
@@ -9,6 +8,6 @@ describe('Validate Library', () => {
         const s = lib.serializeTrie(w);
         const t = lib.importTrie(s);
         const tt = new Trie(t);
-        expect([...tt.words()]).to.be.deep.equal(words);
+        expect([...tt.words()]).toEqual(words);
     });
 });

@@ -5,16 +5,14 @@ import { TrieNode, FLAG_WORD } from './TrieNode';
  * @param root the root of the Trie tree
  */
 export function consolidate(root: TrieNode): TrieNode {
-    let count: number = 0;
+    let count = 0;
     const signatures = new Map<string, TrieNode>();
     const cached = new Map<TrieNode, number>();
     const knownMap = new Map<TrieNode, TrieNode>();
 
     function signature(n: TrieNode): string {
         const isWord = n.f ? '*' : '';
-        const ref = n.c
-            ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, cached.get(n)]))
-            : '';
+        const ref = n.c ? JSON.stringify([...n.c.entries()].map(([k, n]) => [k, cached.get(n)])) : '';
         return isWord + ref;
     }
 
@@ -46,9 +44,9 @@ export function consolidate(root: TrieNode): TrieNode {
 
         const orig = n;
         if (n.c) {
-            const children = [...n.c].map(c => [c[0], deepCopy(c[1])] as [string, TrieNode]);
+            const children = [...n.c].map((c) => [c[0], deepCopy(c[1])] as [string, TrieNode]);
             if (!compareMaps(children, n.c)) {
-                n = {f: n.f, c: new Map(children)};
+                n = { f: n.f, c: new Map(children) };
             }
         }
         const sig = signature(n);
@@ -72,7 +70,9 @@ export function consolidate(root: TrieNode): TrieNode {
             return knownMap.get(n) || deepCopy(n);
         }
         if (n.c) {
-            const children = [...n.c].sort((a, b) => a[0] < b[0] ? -1 : 1).map(c => [c[0], process(c[1])] as [string, TrieNode]);
+            const children = [...n.c]
+                .sort((a, b) => (a[0] < b[0] ? -1 : 1))
+                .map((c) => [c[0], process(c[1])] as [string, TrieNode]);
             n.c = new Map(children);
         }
         const sig = signature(n);

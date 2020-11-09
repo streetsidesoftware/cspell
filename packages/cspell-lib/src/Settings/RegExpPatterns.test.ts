@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import * as TextRange from '../util/TextRange';
 import { regExMatchUrls, regExMatchCommonHexFormats } from './RegExpPatterns';
 import * as RegPat from './RegExpPatterns';
@@ -23,7 +24,7 @@ describe('Validate InDocSettings', () => {
 
     test('tests regExSpellingGuardBlock CRLF', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardBlock);
-        expect(m1).not.toBeFalsy;
+        expect(m1).not.toBeFalsy();
         // cspell:disable
         expect(m1).toEqual(
             [
@@ -45,7 +46,7 @@ describe('Validate InDocSettings', () => {
 
     test('tests regExSpellingGuardLine CRLF', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardLine);
-        expect(m1).not.toBeFalsy;
+        expect(m1).not.toBeFalsy();
         // cspell:disable
         expect(m1).toEqual(
             ["const badspelling = 'disable'; // spell-checker:disable-line, yes all of it."].map((a) =>
@@ -65,7 +66,7 @@ describe('Validate InDocSettings', () => {
 
     test('tests regExSpellingGuardNext CRLF', () => {
         const m1 = sampleCode2CRLF.match(RegPat.regExSpellingGuardNext);
-        expect(m1).not.toBeFalsy;
+        expect(m1).not.toBeFalsy();
         // cspell:disable
         expect(m1).toEqual(
             ["cspell:disable-next\nconst verybadspelling = 'disable';"].map((a) => a.replace(/\n/g, '\r\n'))
@@ -218,7 +219,7 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    test('test for hex values', () => {
+    test('for hex values', () => {
         expect(RegPat.regExHexDigits.test('FFEE')).toBe(true);
     });
 
@@ -298,7 +299,7 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    test('test matching urls', () => {
+    test('matching urls', () => {
         RegPat.regExMatchUrls.lastIndex = 22;
         const reg = new RegExp(RegPat.regExMatchUrls);
         expect(reg.lastIndex).toBe(0);
@@ -315,7 +316,7 @@ describe('Validate InDocSettings', () => {
         expect(matches![0]).toBe('http://example.org');
     });
 
-    test('test matching href', () => {
+    test('matching href', () => {
         const reg = new RegExp(RegPat.regExHRef);
         const text = `
             <p>
@@ -331,7 +332,7 @@ describe('Validate InDocSettings', () => {
         expect(matches![1]).toBe('href="/example/"');
     });
 
-    test('test sha regex', () => {
+    test('sha regex', () => {
         RegPat.regExSha.lastIndex = 0;
         expect(RegPat.regExSha.test('')).toBe(false);
         RegPat.regExSha.lastIndex = 0;
@@ -351,14 +352,14 @@ describe('Validate InDocSettings', () => {
         RegPat.regExSha.lastIndex = 0;
     });
 
-    test('test regExCert', () => {
+    test('regExCert', () => {
         RegPat.regExCert.lastIndex = 0;
         const match = sampleCert.match(RegPat.regExCert);
         expect(match).toHaveLength(3);
         expect(nonCert.match(RegPat.regExCert)).toBeNull();
     });
 
-    test('test regExPublicKey', () => {
+    test('regExPublicKey', () => {
         RegPat.regExCert.lastIndex = 0;
         const match = sampleCert.match(RegPat.regExPublicKey);
         expect(match).toHaveLength(1);

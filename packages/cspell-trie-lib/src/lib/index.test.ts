@@ -1,21 +1,20 @@
-import {expect} from 'chai';
+/* eslint-disable jest/valid-expect */
+import { expect } from 'chai';
 import * as Trie from '.';
 
 describe('Experiment with Tries', () => {
     test('Adds words to a Trie and takes them back out.', () => {
-        const words = [...(new Set(sampleWords))];
-        const trie = words
-            .reduce((t, w) => {
-                return Trie.insert(w, t);
-            }, {} as Trie.TrieNode);
+        const words = [...new Set(sampleWords)];
+        const trie = words.reduce((t, w) => {
+            return Trie.insert(w, t);
+        }, {} as Trie.TrieNode);
         expect(trie.c).to.not.be.undefined;
         const extractedWords = [...Trie.iteratorTrieWords(trie)];
         expect(extractedWords).to.be.deep.equal(words);
-
     });
 
     test('Adds words to a Trie sorts the trie and takes them back out.', () => {
-        const words = [...(new Set(sampleWords))];
+        const words = [...new Set(sampleWords)];
         const trie = Trie.createTriFromList(words);
         expect(trie.c).to.not.be.undefined;
         Trie.orderTrie(trie);
@@ -25,7 +24,7 @@ describe('Experiment with Tries', () => {
     });
 
     test('buildReferenceTree', () => {
-        const words = [...(new Set(sampleWords))];
+        const words = [...new Set(sampleWords)];
         const trie = Trie.createTriFromList(words);
         const asString = [...Trie.serializeTrie(trie, 10)].join('');
         const trie2 = Trie.createTriFromList(words);
@@ -39,10 +38,9 @@ describe('Experiment with Tries', () => {
         // console.log(asString);
         const root = Trie.importTrie(asString.split('\n'));
         {
-            const trie = words
-                .reduce((t, w) => {
-                    return Trie.insert(w, t);
-                }, {} as Trie.TrieNode);
+            const trie = words.reduce((t, w) => {
+                return Trie.insert(w, t);
+            }, {} as Trie.TrieNode);
             const trie2 = root;
             const extractedWords1 = [...Trie.iteratorTrieWords(trie)];
             const extractedWords2 = [...Trie.iteratorTrieWords(trie2)];
@@ -55,7 +53,6 @@ describe('Experiment with Tries', () => {
         const text = [...Trie.serializeTrie(trie)].join('');
         expect(text).to.contain('base=16');
     });
-
 
     test('buildReferenceTree too low base', () => {
         const trie = Trie.createTriFromList(sampleWords);
@@ -124,5 +121,3 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
-
-
