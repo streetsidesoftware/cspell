@@ -1,4 +1,5 @@
 # cspell-trie
+
 Trie library for use with cspell
 
 This library allows easily building of a [Trie](https://en.wikipedia.org/wiki/Trie)
@@ -7,13 +8,11 @@ from a word list.
 The resulting trie can then be compressed into a
 [DAFSA|DAWG](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton).
 
-
 ### Installation
 
 ```sh
 npm install -S cspell-trie-lib
 ```
-
 
 ## File Format
 
@@ -25,11 +24,13 @@ base=10
 ```
 
 The header has two parts.
-* TrieXv1 -- the identifiers
-* base -- offsets are stored using the base (10, 16, 32) are common.
-  higher the base, the smaller the file.  Max is 36
+
+- TrieXv1 -- the identifiers
+- base -- offsets are stored using the base (10, 16, 32) are common.
+  higher the base, the smaller the file. Max is 36
 
 ### Data
+
 The first line of data is always a `*`
 
 Each line is a node in the Trie.
@@ -38,18 +39,19 @@ The format of each line is:
 
 `star [char index [, char index]*]`
 
-* star - the presence of a star indicates that the node is the ending of a word.
-* char - a character that can be appended to the word followed by the node at index.
-* index - the offset in the list of nodes to continue appending
+- star - the presence of a star indicates that the node is the ending of a word.
+- char - a character that can be appended to the word followed by the node at index.
+- index - the offset in the list of nodes to continue appending
 
 In other words, each line has an optional `*` followed by 0 or more (char, index) pairs.
 A missing index implies an index of 0, which is the end of word flag.
 
-**Example Line:** `*s1,e` -- The word can stop here, or add an **s** and continue at node *1*, or add an **e**
+**Example Line:** `*s1,e` -- The word can stop here, or add an **s** and continue at node _1_, or add an **e**
 
 ### Example:
 
 **Word List:**
+
 - walk
 - walked
 - walker
@@ -64,6 +66,7 @@ A missing index implies an index of 0, which is the end of word flag.
 becomes
 
 **Output:** (Offsets are added for clarity, but do not exist in output)
+
 ```text
 Offset  Output
 ------- --------

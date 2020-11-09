@@ -7,11 +7,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package cspell-util-bundle
 
-
-
-
-
 # Change log
 
 ## [4.0.0]
-* Initial version - 4.x to match the other cspell modules.
+
+- Initial version - 4.x to match the other cspell modules.

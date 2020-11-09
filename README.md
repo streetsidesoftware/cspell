@@ -1,7 +1,9 @@
 # cspell
+
 The cspell mono-repo, a spell checker for code.
 
 ## Packages
+
 - [cspell](packages/cspell) -- cspell command-line application
 - [cspell-glob](packages/cspell-glob) -- glob library.
 - [cspell-io](packages/cspell-io) -- i/o library.
