@@ -1,4 +1,3 @@
-
 export type ReplaceEntry = [string, string];
 export type ReplaceMap = ReplaceEntry[];
 
@@ -87,13 +86,12 @@ export interface Settings extends BaseSetting {
     languageId?: LanguageId;
 }
 
-    /**
-     * VS Code Spell Checker Settings
-     * To be Removed
-     * @deprecated
-     */
-    export interface LegacySettings {
-
+/**
+ * VS Code Spell Checker Settings
+ * To be Removed
+ * @deprecated
+ */
+export interface LegacySettings {
     /**
      * Show status
      * @deprecated
@@ -178,7 +176,7 @@ export interface BaseSetting {
     patterns?: RegExpPatternDefinition[];
 }
 
-export type DictionaryFileTypes = 'S'|'W'|'C'|'T';
+export type DictionaryFileTypes = 'S' | 'W' | 'C' | 'T';
 
 export type DictionaryDefinition = DictionaryDefinitionPreferred | DictionaryDefinitionAlternate | DictionaryDefinitionLegacy;
 
@@ -230,8 +228,7 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     type?: DictionaryFileTypes;
 }
 
-export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {
-}
+export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {}
 
 export interface LanguageSettingFilterFields {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
@@ -241,26 +238,30 @@ export interface LanguageSettingFilterFields {
 }
 
 /** @hidden */
-type InternalRegExp = RegExp
+type InternalRegExp = RegExp;
 
 export type Pattern = string | InternalRegExp;
 
 export type PredefinedPatterns =
-    'Base64' |
-    'CStyleComment' |
-    'Email' |
-    'EscapeCharacters' |
-    'HexDigits' |
-    'HexValues' |
-    'href' |
-    'PhpHereDoc' |
-    'PublicKey' |
-    'RsaCert' |
-    'SHA' |
-    'SpellCheckerDisable' |
-    'string' |
-    'Urls' |
-    'Everything';
+    | 'Base64'
+    | 'CStyleComment'
+    | 'Email'
+    | 'EscapeCharacters'
+    | 'HexDigits'
+    | 'HexValues'
+    | 'href'
+    | 'PhpHereDoc'
+    | 'PublicKey'
+    | 'RsaCert'
+    | 'SHA'
+    | 'SpellCheckerDisable'
+    | 'SpellCheckerDisableBlock'
+    | 'SpellCheckerDisableLine'
+    | 'SpellCheckerDisableNext'
+    | 'SpellCheckerIgnoreInDocSetting'
+    | 'string'
+    | 'Urls'
+    | 'Everything';
 
 /** This matches the name in a pattern definition */
 export type PatternId = string;
