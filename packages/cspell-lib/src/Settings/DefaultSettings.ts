@@ -33,6 +33,10 @@ const predefinedPatterns = [
     { name: 'Email', pattern: RegPat.regExEmail },
     { name: 'SHA', pattern: RegPat.regExSha },
     { name: 'href', pattern: RegPat.regExHRef },
+    { name: 'SpellCheckerDisableBlock', pattern: RegPat.regExSpellingGuardBlock },
+    { name: 'SpellCheckerDisableLine', pattern: RegPat.regExSpellingGuardLine },
+    { name: 'SpellCheckerDisableNext', pattern: RegPat.regExSpellingGuardNext },
+    { name: 'SpellCheckerIgnoreInDocSetting', pattern: RegPat.regExIgnoreSpellingDirectives },
 
     // Include Patterns
     { name: 'PhpHereDoc', pattern: RegPat.regExPhpHereDoc },
@@ -51,6 +55,7 @@ const defaultRegExpPatterns: RegExpPatternDefinition[] = [...predefinedPatterns]
 
 const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'SpellCheckerDisable',
+    'SpellCheckerIgnoreInDocSetting',
     'Urls',
     'Email',
     'PublicKey',

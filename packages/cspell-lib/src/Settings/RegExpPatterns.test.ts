@@ -2,6 +2,8 @@ import * as TextRange from '../util/TextRange';
 import { regExMatchUrls, regExMatchCommonHexFormats } from './RegExpPatterns';
 import * as RegPat from './RegExpPatterns';
 import { calculateTextDocumentOffsets, TextOffset } from '../util/text';
+import fs from 'fs';
+import Path from 'path';
 
 const matchUrl = regExMatchUrls.source;
 const matchHexValues = regExMatchCommonHexFormats.source;
@@ -362,6 +364,11 @@ describe('Validate InDocSettings', () => {
         expect(match).toHaveLength(1);
         expect(nonCert.match(RegPat.regExPublicKey)).toBeNull();
     });
+
+    test('regExIgnoreSpellingDirectives', () => {
+        const match = sampleBug345.match(RegPat.regExIgnoreSpellingDirectives);
+        expect(match?.[0]).toBe('cspell:ignoreRegExp "(foobar|foobaz)"');
+    });
 });
 
 function rangesToText(text: string, ranges: TextRange.MatchRange[]): string[] {
@@ -493,3 +500,5 @@ pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
 
 const sampleCode2LF = sampleCodeSrc.replace(/\r?\n/g, '\n');
 const sampleCode2CRLF = sampleCode2LF.replace(/\n/g, '\r\n');
+
+const sampleBug345 = fs.readFileSync(Path.join(__dirname, '../../samples/bug-fixes/bug345.ts'), 'utf-8');
