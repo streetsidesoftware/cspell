@@ -1,63 +1,57 @@
 {
-  // Default cspell.json configuration file.
-  // The Language local to use when spell checking. "en" and "en-GB" are currently supported.
-  "language": "en",
+    // Default cspell.json configuration file.
+    // The Language local to use when spell checking. "en" and "en-GB" are currently supported.
+    "language": "en",
 
-  // Controls the maximum number of spelling errors per document.
-  "maxNumberOfProblems": 100,
+    // Controls the maximum number of spelling errors per document.
+    "maxNumberOfProblems": 100,
 
-  // Controls the number of suggestions shown.
-  "numSuggestions": 8,
+    // Controls the number of suggestions shown.
+    "numSuggestions": 8,
 
-  // The minimum length of a word before checking it against a dictionary.
-  "minWordLength": 4,
+    // The minimum length of a word before checking it against a dictionary.
+    "minWordLength": 4,
 
-  // Words to add to the dictionary
-  "words": [],
+    // Words to add to the dictionary
+    "words": [],
 
-  // Specify paths/files to ignore. (Supports Globs)
-  "ignorePaths": [
-    "**/node_modules/**",
-    "**/vscode-extension/**",
-    "**/.git/**",
-    ".vscode"
-  ],
+    // Specify paths/files to ignore. (Supports Globs)
+    "ignorePaths": ["**/node_modules/**", "**/vscode-extension/**", "**/.git/**", ".vscode"],
 
-  // Words to always be flagged as an error.
-  "flagWords": [
-  ],
+    // Words to always be flagged as an error.
+    "flagWords": [],
 
-  // Defines a list of named regular expression patterns that can be used in exclusion or inclusion lists.
-  "patterns": [],
+    // Defines a list of named regular expression patterns that can be used in exclusion or inclusion lists.
+    "patterns": [],
 
-  // List of regular expressions used to exclude the matching text from being checked.
-  //  Example: "0x[a-f0-9]+" to skip 0x hex values.
-  //  By default the flags are 'gim'.
-  //  You can specify them like this:
-  //  "/0x[A-F0-9]/g" to match only upper case hex numbers.
-  //  Example to match email: "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
-  /*
+    // List of regular expressions used to exclude the matching text from being checked.
+    //  Example: "0x[a-f0-9]+" to skip 0x hex values.
+    //  By default the flags are 'gim'.
+    //  You can specify them like this:
+    //  "/0x[A-F0-9]/g" to match only upper case hex numbers.
+    //  Example to match email: "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"
+    /*
   "ignoreRegExpList": [
     "<?[\\w.\\-+]+@\\w+(\\.\\w+)+>?"   // do not check email.
   ],
   */
-  "ignoreRegExpList": [],
+    "ignoreRegExpList": [],
 
-  // List of regular expressions used to include text to be spell checked.
-  // By default, all text is checked.  Adding regular expresses to this list will
-  // limit the text to be spell checked to only text that matches any of the expressions in the list.
-  // Logic: text to be checked = include - exclude
-  // Note: Slashes need to be double: \\ because it is in a json string.
-  // Examples:
-  // * ".*" -- include everything.
-  // * "'(?:[^'\\n]|\\\\')*'" -- single quote strings.
-  //
-  "includeRegExpList": [],
+    // List of regular expressions used to include text to be spell checked.
+    // By default, all text is checked.  Adding regular expresses to this list will
+    // limit the text to be spell checked to only text that matches any of the expressions in the list.
+    // Logic: text to be checked = include - exclude
+    // Note: Slashes need to be double: \\ because it is in a json string.
+    // Examples:
+    // * ".*" -- include everything.
+    // * "'(?:[^'\\n]|\\\\')*'" -- single quote strings.
+    //
+    "includeRegExpList": [],
 
-  // Enable / Disable allowing word compounds. true means 'arraylength' would be ok, false means it would not pass.
-  "allowCompoundWords": false,
+    // Enable / Disable allowing word compounds. true means 'arraylength' would be ok, false means it would not pass.
+    "allowCompoundWords": false,
 
-  /*
+    /*
   // Define settings on a per programming language basis.
   "languageSettings": [
     {
@@ -72,17 +66,17 @@
     }
   ],
   */
-  "languageSettings": [],
+    "languageSettings": [],
 
-  /*
+    /*
   // List of dictionaries to use when checking files.
   "dictionaries": [
     "cities"  // name of dictionary to include
   ],
   */
-  "dictionaries": [],
+    "dictionaries": [],
 
-  /*
+    /*
   // A List of Dictionary Definitions.
   "dictionaryDefinitions": [
     {
@@ -95,7 +89,7 @@
     }
   ]
   */
-  "dictionaryDefinitions": []
+    "dictionaryDefinitions": []
 }
 
 // cspell:ignore arraylength
