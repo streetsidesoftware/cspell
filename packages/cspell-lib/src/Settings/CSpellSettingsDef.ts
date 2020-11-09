@@ -258,6 +258,10 @@ export type PredefinedPatterns =
     | 'RsaCert'
     | 'SHA'
     | 'SpellCheckerDisable'
+    | 'SpellCheckerDisableBlock'
+    | 'SpellCheckerDisableLine'
+    | 'SpellCheckerDisableNext'
+    | 'SpellCheckerIgnoreInDocSetting'
     | 'string'
     | 'Urls'
     | 'Everything';
