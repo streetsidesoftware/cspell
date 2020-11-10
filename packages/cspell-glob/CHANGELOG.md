@@ -7,11 +7,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package cspell-glob
 
-
-
-
-
 # Release Notes
 
 ## [0.1.16]
+
 - Fix issues with Windows.

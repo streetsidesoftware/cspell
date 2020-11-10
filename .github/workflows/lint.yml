@@ -2,22 +2,14 @@ name: Lint
 on:
   pull_request:
     paths:
-      - '.github/workflows/lint.yml'
-      - '**/tsconfig.json'
-      - '**/.eslintrc.js'
-      - '**/.eslintignore'
-      - '**/package*.json'
-      - '**/*.ts'
+      - "**/.eslintignore"
+      - "**/*.{js,ts,md,yaml,yml,json}"
   push:
     paths:
-      - '.github/workflows/lint.yml'
-      - '**/tsconfig.json'
-      - '**/.eslintrc.js'
-      - '**/.eslintignore'
-      - '**/package*.json'
-      - '**/*.ts'
+      - "**/.eslintignore"
+      - "**/*.{js,ts,md,yaml,yml,json}"
     branches-ignore:
-      - 'dependabot/*'
+      - "dependabot/*"
 
 jobs:
   lint:

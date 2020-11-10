@@ -2,7 +2,6 @@
 
 ## Supported Versions
 
-
 | Version | Supported          |
 | ------- | ------------------ |
 | 5.x     | :white_check_mark: |
