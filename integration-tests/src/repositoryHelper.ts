@@ -7,14 +7,17 @@ import { ShouldCheckOptions, shouldCheckRepo } from './shouldCheckRepo';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'repositories'));
 
-const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i
+const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
 export function addRepository(url: string): boolean {
     if (!url || !githubUrlRegexp.test(url)) {
         return false;
     }
-    const httpsUrl = url.replace('git@github.com:', 'https://github.com/')
-    const relPath = httpsUrl.replace(/\.git$/, '').split('/').slice(3);
+    const httpsUrl = url.replace('git@github.com:', 'https://github.com/');
+    const relPath = httpsUrl
+        .replace(/\.git$/, '')
+        .split('/')
+        .slice(3);
     const dir = Path.join(repositoryDir, ...relPath);
     const path = relPath.join('/');
 
@@ -24,34 +27,33 @@ export function addRepository(url: string): boolean {
     return true;
 }
 
-export function updateRepository(path: string | undefined = '', useRemote: boolean = false): boolean {
+export function updateRepository(path: string | undefined = '', useRemote = false): boolean {
     path = path.replace(/^repositories/, '');
 
     if (!path || !fs.existsSync(Path.join(repositoryDir, path))) {
         if (path) {
-            console.log(`Repository: '${path}' not found.`)
+            console.log(`Repository: '${path}' not found.`);
         }
         return false;
     }
-    const remote = useRemote ? '--remote' : ''
+    const remote = useRemote ? '--remote' : '';
     const init = useRemote ? '' : '--init';
-    Shell.pushd(repositoryDir)
+    Shell.pushd(repositoryDir);
     exec(`git submodule update --depth 1 ${remote} ${init} -- ${JSON.stringify(path)}`, { echo: true, bail: true });
-    Shell.popd()
+    Shell.popd();
 
     return true;
 }
 
-export interface ListRepositoryOptions extends ShouldCheckOptions {
-}
+export type ListRepositoryOptions = ShouldCheckOptions;
 
 export function listRepositories(options: ListRepositoryOptions) {
     const config = Config.readConfig();
     config.repositories
-    .filter(rep => shouldCheckRepo(rep, options))
-    .forEach(rep => {
-        console.log(rep.path);
-    });
+        .filter((rep) => shouldCheckRepo(rep, options))
+        .forEach((rep) => {
+            console.log(rep.path);
+        });
 }
 
 function addToGit(dir: string, url: string) {

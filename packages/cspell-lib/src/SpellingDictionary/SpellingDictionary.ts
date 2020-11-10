@@ -1,6 +1,13 @@
 import { genSequence } from 'gensequence';
 import { IterableLike } from '../util/IterableLike';
-import { Trie, importTrie, SuggestionCollector, suggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
+import {
+    Trie,
+    importTrie,
+    SuggestionCollector,
+    suggestionCollector,
+    SuggestionResult,
+    CompoundWordsMethod,
+} from 'cspell-trie-lib';
 import { createMapper } from '../util/repMap';
 import { ReplaceMap, getDefaultSettings } from '../Settings';
 import { ucFirst, removeAccents, isUpperCase } from '../util/text';
@@ -44,7 +51,12 @@ export interface SpellingDictionary {
     has(word: string, useCompounds: boolean): boolean;
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
-    suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
+    suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
     mapWord(word: string): string;
@@ -53,8 +65,16 @@ export interface SpellingDictionary {
     readonly isDictionaryCaseSensitive: boolean;
 }
 
-export type SuggestArgs = FunctionArgs<SpellingDictionary['suggest']>
-    | FunctionArgs<(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number) => SuggestionResult[]>;
+export type SuggestArgs =
+    | FunctionArgs<SpellingDictionary['suggest']>
+    | FunctionArgs<
+          (
+              word: string,
+              numSuggestions?: number,
+              compoundMethod?: CompoundWordsMethod,
+              numChanges?: number
+          ) => SuggestionResult[]
+      >;
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
@@ -73,11 +93,12 @@ export function createSpellingDictionary(
     // console.log(`createSpellingDictionary ${name} ${source}`);
     const opts = options || {};
     const { caseSensitive = false } = opts;
-    const words = new Set(genSequence(wordList)
-        .filter(word => typeof word === 'string')
-        .map(word => word.trim())
-        .filter(w => !!w)
-        .concatMap(wordDictionaryFormsCollector(caseSensitive))
+    const words = new Set(
+        genSequence(wordList)
+            .filter((word) => typeof word === 'string')
+            .map((word) => word.trim())
+            .filter((w) => !!w)
+            .concatMap(wordDictionaryFormsCollector(caseSensitive))
     );
     const mapWord = createMapper(opts.repMap || []);
     let trieDict: SpellingDictionaryFromTrie | undefined;
@@ -86,7 +107,7 @@ export function createSpellingDictionary(
             return trieDict;
         }
         // console.log(`Build Trie ${name}`);
-        return trieDict = new SpellingDictionaryFromTrie(Trie.create(words), name, options, source, words.size);
+        return (trieDict = new SpellingDictionaryFromTrie(Trie.create(words), name, options, source, words.size));
     }
     const isDictionaryCaseSensitive = opts.caseSensitive || false;
 
@@ -112,22 +133,24 @@ export function createSpellingDictionary(
                 }
             }
 
-            const useCompounds = searchOptions.useCompounds === undefined ? opts.useCompounds : searchOptions.useCompounds;
+            const useCompounds =
+                searchOptions.useCompounds === undefined ? opts.useCompounds : searchOptions.useCompounds;
             if (isDictionaryCaseSensitive || useCompounds || searchOptions.ignoreCase === false) {
                 return getTrie().has(word, hasOptions);
             }
 
             return false;
         },
-        suggest: (...args: SuggestArgs) => getTrie().suggest(...args as FunctionArgs<SpellingDictionary['suggest']>),
-        genSuggestions: (collector: SuggestionCollector, suggestOptions: SuggestOptions) => getTrie().genSuggestions(collector, suggestOptions),
+        suggest: (...args: SuggestArgs) => getTrie().suggest(...(args as FunctionArgs<SpellingDictionary['suggest']>)),
+        genSuggestions: (collector: SuggestionCollector, suggestOptions: SuggestOptions) =>
+            getTrie().genSuggestions(collector, suggestOptions),
     };
     return dict;
 }
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly cachedWordsLimit = 50000;
-    private _size: number = 0;
+    private _size = 0;
     readonly knownWords = new Set<string>();
     readonly unknownWords = new Set<string>();
     readonly mapWord: (word: string) => string;
@@ -139,7 +162,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         readonly name: string,
         readonly options: SpellingDictionaryOptions = {},
         readonly source = 'from trie',
-        size?: number,
+        size?: number
     ) {
         trie.root.f = 0;
         this.mapWord = createMapper(options.repMap || []);
@@ -167,12 +190,14 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
 
     public has(word: string, hasOptions?: HasOptions) {
         const searchOptions = hasOptionToSearchOption(hasOptions);
-        const useCompounds = searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
+        const useCompounds =
+            searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
         const { ignoreCase = true } = searchOptions;
         return this._has(word, useCompounds, ignoreCase);
     }
     private _has = memorizer(
-        (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) => this.hasAnyForm(word, useCompounds, ignoreCase),
+        (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
+            this.hasAnyForm(word, useCompounds, ignoreCase),
         SpellingDictionaryFromTrie.cachedWordsLimit
     );
 
@@ -194,17 +219,23 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return false;
     }
 
-    public suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[];
+    public suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): SuggestionResult[];
     public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(...args: SuggestArgs): SuggestionResult[] {
         const [word, options, compoundMethod, numChanges] = args;
-        const suggestOptions: SuggestOptions = (typeof options === 'object')
-            ? options
-            : {
-                numSuggestions: options,
-                compoundMethod,
-                numChanges
-            };
+        const suggestOptions: SuggestOptions =
+            typeof options === 'object'
+                ? options
+                : {
+                      numSuggestions: options,
+                      compoundMethod,
+                      numChanges,
+                  };
         return this._suggest(word, suggestOptions);
     }
 
@@ -219,20 +250,15 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         }
         const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
         this.genSuggestions(collector, suggestOptions);
-        return collector.suggestions.map(r => ({...r, word: r.word.replace(regexPrefix, '')}));
+        return collector.suggestions.map((r) => ({ ...r, word: r.word.replace(regexPrefix, '') }));
     }
 
-    public genSuggestions(
-        collector: SuggestionCollector,
-        suggestOptions: SuggestOptions
-    ): void {
-        const {
-            compoundMethod = CompoundWordsMethod.SEPARATE_WORDS,
-            ignoreCase = true,
-        } = suggestOptions;
+    public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
+        const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS, ignoreCase = true } = suggestOptions;
         const _compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        wordSearchForms(collector.word, this.isDictionaryCaseSensitive, ignoreCase)
-            .forEach(w => this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod));
+        wordSearchForms(collector.word, this.isDictionaryCaseSensitive, ignoreCase).forEach((w) =>
+            this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod)
+        );
     }
 }
 
@@ -240,10 +266,18 @@ function impersonateCollector(collector: SuggestionCollector, word: string): Sug
     return {
         collect: collector.collect,
         add: (suggestion: SuggestionResult) => collector.add(suggestion),
-        get suggestions() { return collector.suggestions; },
-        get maxCost() { return collector.maxCost; },
-        get word() { return word; },
-        get maxNumSuggestions() { return collector.maxNumSuggestions; },
+        get suggestions() {
+            return collector.suggestions;
+        },
+        get maxCost() {
+            return collector.maxCost;
+        },
+        get word() {
+            return word;
+        },
+        get maxNumSuggestions() {
+            return collector.maxNumSuggestions;
+        },
     };
 }
 
@@ -256,7 +290,7 @@ function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignor
     const wordNa = removeAccents(word);
     const wordLcNa = removeAccents(wordLc);
     const forms = new Set<string>();
-    function add(w: string, prefix: string = '') {
+    function add(w: string, prefix = '') {
         forms.add(prefix + w);
     }
 
@@ -275,7 +309,7 @@ function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignor
         add(wordLc);
         add(wordNa);
         add(wordLcNa);
-        return [ ...forms ];
+        return [...forms];
     }
 
     // House -> house
@@ -291,19 +325,19 @@ function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignor
             add(ucFirst(wordLcNa), PREFIX_NO_CASE);
         }
     }
-    return [ ...forms ];
+    return [...forms];
 }
 
 interface DictionaryWordForm {
-    w: string;  // the word
-    p: string;  // prefix to add
+    w: string; // the word
+    p: string; // prefix to add
 }
-function *wordDictionaryForms(word: string, isDictionaryCaseSensitive: boolean): IterableIterator<DictionaryWordForm> {
+function* wordDictionaryForms(word: string, isDictionaryCaseSensitive: boolean): IterableIterator<DictionaryWordForm> {
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
     const wordNa = removeAccents(word);
     const wordLcNa = removeAccents(wordLc);
-    function wf(w: string, p: string = '') {
+    function wf(w: string, p = '') {
         return { w, p };
     }
 
@@ -319,10 +353,10 @@ function wordDictionaryFormsCollector(isDictionaryCaseSensitive: boolean): (word
 
     return (word: string) => {
         return genSequence(wordDictionaryForms(word, isDictionaryCaseSensitive))
-        .filter(w => !knownWords.has(w.w))
-        .map(w => w.p + w.w)
-        .filter(w => !knownWords.has(w))
-        .map(w => (knownWords.add(w), w));
+            .filter((w) => !knownWords.has(w.w))
+            .map((w) => w.p + w.w)
+            .filter((w) => !knownWords.has(w))
+            .map((w) => (knownWords.add(w), w));
     };
 }
 
@@ -338,11 +372,7 @@ export async function createSpellingDictionaryTrie(
 }
 
 export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
-    return !opt
-    ? {}
-    : typeof opt === 'object'
-    ? opt
-    : { useCompounds: opt };
+    return !opt ? {} : typeof opt === 'object' ? opt : { useCompounds: opt };
 }
 
 export const __testMethods = {

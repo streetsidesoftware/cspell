@@ -9,7 +9,10 @@ interface TrieRefNode extends TrieNode {
     r?: number[];
 }
 
-interface LeafResult { n: TrieRefNode; p?: TrieRefNode; }
+interface LeafResult {
+    n: TrieRefNode;
+    p?: TrieRefNode;
+}
 
 interface Line {
     letter: string;
@@ -24,7 +27,7 @@ function leaves(node: TrieRefNode): Sequence<LeafResult> {
         return refNode;
     }
 
-    function *walk(node: TrieNode, k: string, p?: TrieRefNode): IterableIterator<LeafResult> {
+    function* walk(node: TrieNode, k: string, p?: TrieRefNode): IterableIterator<LeafResult> {
         const ref = toRefNode(node, k);
         if (!ref.c) {
             yield { n: ref, p };
@@ -39,15 +42,14 @@ function leaves(node: TrieRefNode): Sequence<LeafResult> {
 }
 
 function flattenToReferences(node: TrieRefNode): Sequence<TrieRefNode> {
-
-    function * walk(): IterableIterator<TrieRefNode> {
+    function* walk(): IterableIterator<TrieRefNode> {
         let iterations = 100;
         let processed = 0;
         let index = 0;
 
         do {
             processed = 0;
-            let signatureMap = new Map<string, number>();
+            const signatureMap = new Map<string, number>();
             for (const leaf of leaves(node)) {
                 const h = signature(leaf.n);
                 let m = signatureMap.get(h);
@@ -88,27 +90,21 @@ function signature(node: TrieRefNode): string {
 
 function toLine(node: TrieRefNode, base: number): string {
     const flags = node.f ? EOW : '';
-    const refs = node.r ? node.r.sort((a, b) => a - b).map(r => r.toString(base)).join(',') : '';
+    const refs = node.r
+        ? node.r
+              .sort((a, b) => a - b)
+              .map((r) => r.toString(base))
+              .join(',')
+        : '';
     return node.s + flags + refs;
 }
 
 function generateHeader(base: number, comment: string): Sequence<string> {
-    const header = [
-        '#!/usr/bin/env cspell-trie reader',
-        'TrieXv2',
-        'base=' + base,
-    ]
-    .concat(comment
-        ? comment.split('\n').map(a => '# ' + a)
-        : []
-    )
-    .concat([
-        '# Data:',
-        DATA,
-    ]);
+    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv2', 'base=' + base]
+        .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
+        .concat(['# Data:', DATA]);
     return genSequence(header);
 }
-
 
 export interface ExportOptions {
     base?: number;
@@ -126,15 +122,15 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
     const rootRef: TrieRefNode = { ...root, s: '^' };
-    const rows = flattenToReferences(rootRef).map(n => toLine(n, base));
+    const rows = flattenToReferences(rootRef).map((n) => toLine(n, base));
 
     return generateHeader(radix, comment)
         .concat(rows)
-        .map(a => a + '\n');
+        .map((a) => a + '\n');
 }
 
-function *toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
-    yield *iter;
+function* toIterableIterator<T>(iter: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
+    yield* iter;
 }
 
 export function importTrie(linesX: Iterable<string> | IterableIterator<string>): TrieNode {
@@ -151,14 +147,20 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
     }
 
     function readHeader(iter: Iterator<string>) {
-
         const headerRows: string[] = [];
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const next = iter.next();
-            if (next.done) { break; }
+            if (next.done) {
+                break;
+            }
             const line = next.value.trim();
-            if (!line || comment.test(line)) { continue; }
-            if (line === DATA) { break; }
+            if (!line || comment.test(line)) {
+                continue;
+            }
+            if (line === DATA) {
+                break;
+            }
             headerRows.push(line);
         }
         parseHeaderRows(headerRows);
@@ -172,7 +174,11 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
     function parseLine(line: string, base: number): Line {
         const isWord = line[1] === EOW;
         const refOffset = isWord ? 2 : 1;
-        const refs = line.slice(refOffset).split(',').filter(a => !!a).map(r => parseInt(r, base));
+        const refs = line
+            .slice(refOffset)
+            .split(',')
+            .filter((a) => !!a)
+            .map((r) => parseInt(r, base));
         return {
             letter: line[0],
             isWord,
@@ -182,14 +188,13 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
 
     const flagsWord = { f: FLAG_WORD };
 
-
     function decodeLine(line: string, nodes: TrieRefNode[]): TrieRefNode {
         const { letter, isWord, refs } = parseLine(line, radix);
         const flags = isWord ? flagsWord : {};
         const children: [string, TrieRefNode][] = refs
-            .map(r => nodes[r])
-            .sort((a, b) => a.s < b.s ? -1 : 1)
-            .map(n => [n.s, n]);
+            .map((r) => nodes[r])
+            .sort((a, b) => (a.s < b.s ? -1 : 1))
+            .map((n) => [n.s, n]);
         const cNode = children.length ? { c: new ChildMap(children) } : {};
         return { s: letter, ...cNode, ...flags };
     }
@@ -197,13 +202,16 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
     readHeader(iter);
 
     const n = genSequence(iter)
-        .map(a => a.replace(/\r?\n/, ''))
-        .filter(a => !!a)
-        .reduce((acc: ReduceResults, line) => {
-            const { nodes } = acc;
-            const root = decodeLine(line, nodes);
-            nodes.push(root);
-            return { root, nodes };
-        }, { nodes: [], root: { s: '' } });
+        .map((a) => a.replace(/\r?\n/, ''))
+        .filter((a) => !!a)
+        .reduce(
+            (acc: ReduceResults, line) => {
+                const { nodes } = acc;
+                const root = decodeLine(line, nodes);
+                nodes.push(root);
+                return { root, nodes };
+            },
+            { nodes: [], root: { s: '' } }
+        );
     return n.root;
 }

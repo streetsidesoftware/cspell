@@ -6,6 +6,6 @@ export function* toIterableIterator<T>(i: IterableLike<T>) {
 
 export function* concatIterables<T>(...iterables: IterableLike<T>[]) {
     for (const i of iterables) {
-        yield *i;
+        yield* i;
     }
 }

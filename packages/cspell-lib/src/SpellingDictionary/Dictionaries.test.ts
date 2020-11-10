@@ -1,3 +1,4 @@
+/* eslint-disable jest/valid-expect */
 import { expect } from 'chai';
 import * as Dictionaries from './Dictionaries';
 import { getDefaultSettings } from '../Settings';
@@ -14,21 +15,21 @@ describe('Validate getDictionary', () => {
             userWords: ['four', 'five', 'six', 'Rhône'],
         };
 
-        return Dictionaries.getDictionary(settings).then(dict => {
-            settings.words.forEach(word => {
+        return Dictionaries.getDictionary(settings).then((dict) => {
+            settings.words.forEach((word) => {
                 expect(dict.has(word)).to.be.true;
             });
-            settings.userWords.forEach(word => {
+            settings.userWords.forEach((word) => {
                 expect(dict.has(word)).to.be.true;
             });
-            expect(dict.has('zero',     { ignoreCase: false })).to.be.false;
-            expect(dict.has('Rhône',    { ignoreCase: false })).to.be.true;
-            expect(dict.has('RHÔNE',    { ignoreCase: false })).to.be.true;
-            expect(dict.has('Café',     { ignoreCase: false })).to.be.true;
-            expect(dict.has('rhône',    { ignoreCase: false })).to.be.true;
-            expect(dict.has('rhone',    { ignoreCase: false })).to.be.true;
-            expect(dict.has('cafe',     { ignoreCase: false })).to.be.true;
-            });
+            expect(dict.has('zero', { ignoreCase: false })).to.be.false;
+            expect(dict.has('Rhône', { ignoreCase: false })).to.be.true;
+            expect(dict.has('RHÔNE', { ignoreCase: false })).to.be.true;
+            expect(dict.has('Café', { ignoreCase: false })).to.be.true;
+            expect(dict.has('rhône', { ignoreCase: false })).to.be.true;
+            expect(dict.has('rhone', { ignoreCase: false })).to.be.true;
+            expect(dict.has('cafe', { ignoreCase: false })).to.be.true;
+        });
     });
 
     test('Case sensitive', async () => {
@@ -40,10 +41,10 @@ describe('Validate getDictionary', () => {
         };
 
         const dict = await Dictionaries.getDictionary(settings);
-        settings.words.forEach(word => {
+        settings.words.forEach((word) => {
             expect(dict.has(word)).to.be.true;
         });
-        settings.userWords.forEach(word => {
+        settings.userWords.forEach((word) => {
             expect(dict.has(word)).to.be.true;
         });
         const opts = { ignoreCase: false };
@@ -66,20 +67,20 @@ describe('Validate getDictionary', () => {
     test('Refresh Dictionary Cache', async () => {
         const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
-        await fs.writeFile(tempDictPath, "one\ntwo\nthree\n");
+        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
 
         const settings = getDefaultSettings();
         const defs = (settings.dictionaryDefinitions || []).concat([
             {
                 name: 'temp',
-                path: tempDictPath
+                path: tempDictPath,
             },
             {
                 name: 'not_found',
-                path: tempDictPath
-            }
+                path: tempDictPath,
+            },
         ]);
-        const toLoad = ['node', 'html', 'css', 'not_found', 'temp', ];
+        const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
         const dicts = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
 
         expect(dicts[3].has('one')).to.be.true;
@@ -94,7 +95,7 @@ describe('Validate getDictionary', () => {
         dicts.forEach((d, i) => expect(dicts2[i]).to.be.equal(d));
 
         // Update one of the dictionaries to see if it loads.
-        await fs.writeFile(tempDictPath, "one\ntwo\nthree\nfour\n");
+        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
 
         const dicts3 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
         // Should be using cache and will not contain the new words.

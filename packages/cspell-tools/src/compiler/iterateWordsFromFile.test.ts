@@ -14,7 +14,9 @@ describe('Validate the iterateWordsFromFile', () => {
     test('stream words from trie', async () => {
         const reader = await streamWordsFromFile(path.join(samples, 'cities.trie.gz'), {});
         const results = [...reader];
-        expect(results.join('|')).toBe('amsterdam|angeles|city|delhi|francisco|london|los|los angeles'
-            + '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york');
+        expect(results.join('|')).toBe(
+            'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
+                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
+        );
     });
 });

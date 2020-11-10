@@ -1,20 +1,19 @@
 import { bufferLines } from './bufferLines';
 
-
 describe('Validate BufferLines', () => {
     test('bufferLines', () => {
         const r = [...bufferLines(bufferLines(sampleWords, 1, ','), 10, '')];
         expect(r.join('')).toBe(sampleWords.join(',') + ',');
     });
-    test('bufferLines', () => {
+    test('bufferLines 2', () => {
         const r = [...bufferLines(bufferLines(concat(sampleWords, sampleWords.concat().reverse()), 1, ','), 10, '')];
         expect(r.join('')).toBe(sampleWords.join(',') + ',' + sampleWords.concat().reverse().join(',') + ',');
     });
 });
 
-function *concat<T>(a: Iterable<T>, b: Iterable<T>) {
-    yield *a;
-    yield *b;
+function* concat<T>(a: Iterable<T>, b: Iterable<T>) {
+    yield* a;
+    yield* b;
 }
 
 const sampleWords = [

@@ -1,15 +1,8 @@
-import {
-    Trie,
-    WalkerIterator,
-} from 'cspell-trie-lib';
+import { Trie, WalkerIterator } from 'cspell-trie-lib';
 
-import {
-    SuggestionResult,
-} from './entities';
+import { SuggestionResult } from './entities';
 
-import {
-    wordToFeatures
-} from './helpers';
+import { wordToFeatures } from './helpers';
 
 const defaultMinScore = 0.35;
 
@@ -17,21 +10,10 @@ const wPrefix = '^';
 const wSuffix = '$';
 // const wMidFix = '*';
 
-export interface SuggestionIterator extends Generator<SuggestionResult, any, number | undefined> {
-    /**
-     * Ask for the next result.
-     * minValue - is used to filter out all suggestions with a matching value less than minValue
-     */
-    // next: (minValue: number) => IteratorResult<SuggestionResult>;
-    // [Symbol.iterator]: () => SuggestionIterator;
-}
+export type SuggestionIterator = Generator<SuggestionResult, any, number | undefined>;
 
-export function* suggest(
-    trie: Trie,
-    word: string,
-    minScore: number = defaultMinScore,
-): SuggestionIterator {
-    yield *suggestIteration(trie.iterate(), word, minScore);
+export function* suggest(trie: Trie, word: string, minScore: number = defaultMinScore): SuggestionIterator {
+    yield* suggestIteration(trie.iterate(), word, minScore);
 }
 
 export function* suggestIteration(
@@ -39,13 +21,12 @@ export function* suggestIteration(
     word: string,
     minScore: number = defaultMinScore
 ): SuggestionIterator {
-
-    let goDeeper: boolean = true;
+    let goDeeper = true;
 
     const fA = wordToFeatures(wPrefix + word + wSuffix);
 
     for (let r = i.next(goDeeper); !r.done; r = i.next(goDeeper)) {
-        const {text, node} = r.value;
+        const { text, node } = r.value;
 
         const fB = wordToFeatures(wPrefix + text);
         const rawScore = fA.intersectionScore(fB);

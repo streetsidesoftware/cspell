@@ -1,21 +1,8 @@
-import {Sequence, genSequence} from 'gensequence';
-import {TrieNode} from './TrieNode';
-import {
-    genSuggestions,
-    suggest,
-    SuggestionCollector,
-    SuggestionResult,
-    CompoundWordsMethod,
-} from './suggest';
-import {
-    createTriFromList,
-    insert,
-    isWordTerminationNode,
-    iteratorTrieWords,
-    orderTrie,
-    countWords,
-} from './util';
-import {walker, WalkerIterator} from './walker';
+import { Sequence, genSequence } from 'gensequence';
+import { TrieNode } from './TrieNode';
+import { genSuggestions, suggest, SuggestionCollector, SuggestionResult, CompoundWordsMethod } from './suggest';
+import { createTriFromList, insert, isWordTerminationNode, iteratorTrieWords, orderTrie, countWords } from './util';
+import { walker, WalkerIterator } from './walker';
 
 export interface TrieOptions {
     compoundCharacter: string;
@@ -26,7 +13,7 @@ export interface TrieOptions {
 const _defaultTrieOptions: TrieOptions = {
     compoundCharacter: '+',
     stripCaseAndAccentsPrefix: '~',
-    forbiddenWordPrefix: '!'
+    forbiddenWordPrefix: '!',
 };
 export const defaultTrieOptions: TrieOptions = Object.freeze(_defaultTrieOptions);
 
@@ -38,9 +25,9 @@ type PartialTrieOptions = Optional<TrieOptions> | undefined;
 
 function mergeOptionalWithDefaults(options: PartialTrieOptions): TrieOptions {
     const {
-        compoundCharacter           = defaultTrieOptions.compoundCharacter,
-        stripCaseAndAccentsPrefix   = defaultTrieOptions.stripCaseAndAccentsPrefix,
-        forbiddenWordPrefix         = defaultTrieOptions.forbiddenWordPrefix,
+        compoundCharacter = defaultTrieOptions.compoundCharacter,
+        stripCaseAndAccentsPrefix = defaultTrieOptions.stripCaseAndAccentsPrefix,
+        forbiddenWordPrefix = defaultTrieOptions.forbiddenWordPrefix,
     } = options || {};
     return { compoundCharacter, stripCaseAndAccentsPrefix, forbiddenWordPrefix };
 }
@@ -64,7 +51,8 @@ export class Trie {
     }
 
     find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {
-        const minLength: number | undefined = !minCompoundLength || minCompoundLength === true ? undefined : minCompoundLength;
+        const minLength: number | undefined =
+            !minCompoundLength || minCompoundLength === true ? undefined : minCompoundLength;
         return minCompoundLength ? this.findCompound(text, minLength) : this.findExact(text);
     }
 
@@ -104,8 +92,9 @@ export class Trie {
      */
     completeWord(text: string): Sequence<string> {
         const n = this.find(text);
-        return genSequence(n && isWordTerminationNode(n) ? [text] : [])
-            .concat(n ? iteratorTrieWords(n).map(suffix => text + suffix) : []);
+        return genSequence(n && isWordTerminationNode(n) ? [text] : []).concat(
+            n ? iteratorTrieWords(n).map((suffix) => text + suffix) : []
+        );
     }
 
     /**
@@ -116,17 +105,25 @@ export class Trie {
      * @param numChanges - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
      *                      the lower the value, the faster results are returned. Values less than 4 are best.
      */
-    suggest(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): string[] {
-        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges)
-            .map(a => a.word);
+    suggest(
+        text: string,
+        maxNumSuggestions: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): string[] {
+        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges).map((a) => a.word);
     }
-
 
     /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
-    suggestWithCost(text: string, maxNumSuggestions: number, compoundMethod?: CompoundWordsMethod, numChanges?: number): SuggestionResult[] {
+    suggestWithCost(
+        text: string,
+        maxNumSuggestions: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number
+    ): SuggestionResult[] {
         return suggest(this.root, text, maxNumSuggestions, compoundMethod, numChanges);
     }
 
@@ -159,10 +156,7 @@ export class Trie {
         return this;
     }
 
-    static create(
-        words: Iterable<string> | IterableIterator<string>,
-        options?: PartialTrieOptions,
-    ): Trie {
+    static create(words: Iterable<string> | IterableIterator<string>, options?: PartialTrieOptions): Trie {
         const root = createTriFromList(words);
         orderTrie(root);
         return new Trie(root, undefined, options);

@@ -16,7 +16,6 @@ import { GlobMatcher } from 'cspell-glob';
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
 
-
 export interface CSpellApplicationOptions extends BaseOptions {
     /**
      * Display verbose information
@@ -44,8 +43,7 @@ export interface CSpellApplicationOptions extends BaseOptions {
     root?: string;
 }
 
-export interface TraceOptions extends BaseOptions {
-}
+export type TraceOptions = BaseOptions;
 
 export interface BaseOptions {
     config?: string;
@@ -53,7 +51,7 @@ export interface BaseOptions {
     local?: string;
 }
 
-export interface AppError extends NodeJS.ErrnoException {}
+export type AppError = NodeJS.ErrnoException;
 
 export interface RunResult {
     files: number;
@@ -61,7 +59,7 @@ export interface RunResult {
     issues: number;
 }
 
-export interface Issue extends cspell.TextDocumentOffset {}
+export type Issue = cspell.TextDocumentOffset;
 
 export interface GlobSrcInfo {
     matcher: GlobMatcher;
@@ -109,10 +107,12 @@ interface GlobOptions extends minimatch.IOptions {
 }
 
 const defaultMinimatchOptions: minimatch.IOptions = { nocase: true };
-const defaultConfigGlob: string = '{cspell.json,.cspell.json}';
+const defaultConfigGlob = '{cspell.json,.cspell.json}';
 const defaultConfigGlobOptions: minimatch.IOptions = defaultMinimatchOptions;
 
-const nullEmitter = () => {};
+const nullEmitter = () => {
+    /* empty */
+};
 
 export class CSpellApplicationConfiguration {
     readonly info: MessageEmitter;
@@ -126,26 +126,23 @@ export class CSpellApplicationConfiguration {
     readonly excludes: GlobSrcInfo[];
     readonly root: string;
 
-    constructor(
-        readonly files: string[],
-        readonly options: CSpellApplicationOptions,
-        readonly emitters: Emitters
-    ) {
-        this.root              = path.resolve(options.root || process.cwd());
-        this.info              = emitters.info || nullEmitter;
-        this.debug             = emitters.debug || ((msg: string) => this.info(msg, MessageTypes.Debug));
-        this.configGlob        = options.config || this.configGlob;
+    constructor(readonly files: string[], readonly options: CSpellApplicationOptions, readonly emitters: Emitters) {
+        this.root = path.resolve(options.root || process.cwd());
+        this.info = emitters.info || nullEmitter;
+        this.debug = emitters.debug || ((msg: string) => this.info(msg, MessageTypes.Debug));
+        this.configGlob = options.config || this.configGlob;
         this.configGlobOptions = options.config ? {} : this.configGlobOptions;
-        this.excludes          = calcExcludeGlobInfo(this.root, options.exclude);
-        this.logIssue          = emitters.issue || nullEmitter;
-        this.local             = options.local || '';
-        this.uniqueFilter      = options.unique
-            ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text)
-            : () => true;
+        this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
+        this.logIssue = emitters.issue || nullEmitter;
+        this.local = options.local || '';
+        this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
     }
 }
 
-interface ConfigInfo { source: string; config: cspell.CSpellUserSettings; }
+interface ConfigInfo {
+    source: string;
+    config: cspell.CSpellUserSettings;
+}
 interface FileConfigInfo {
     configInfo: ConfigInfo;
     filename: string;
@@ -153,11 +150,7 @@ interface FileConfigInfo {
     languageIds: string[];
 }
 
-export function lint(
-    files: string[],
-    options: CSpellApplicationOptions,
-    emitters: Emitters
-) {
+export function lint(files: string[], options: CSpellApplicationOptions, emitters: Emitters) {
     const cfg = new CSpellApplicationConfiguration(files, options, emitters);
     return runLint(cfg);
 }
@@ -175,11 +168,13 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         const info = calcFinalConfigInfo(configInfo, settingsFromCommandLine, filename, text);
         const config = info.configInfo.config;
         const source = info.configInfo.source;
-        cfg.debug(`Filename: ${filename}, Extension: ${path.extname(filename)}, LanguageIds: ${info.languageIds.toString()}`);
+        cfg.debug(
+            `Filename: ${filename}, Extension: ${path.extname(filename)}, LanguageIds: ${info.languageIds.toString()}`
+        );
 
         if (!info.configInfo.config.enabled) return 0;
 
-        const debugCfg = { config: {...config, source: null}, source };
+        const debugCfg = { config: { ...config, source: null }, source };
         cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
         const startTime = Date.now();
         const wordOffsets = await cspell.validateText(text, info.configInfo.config);
@@ -191,9 +186,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             MessageTypes.Info
         );
         cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
-        issues
-            .filter(cfg.uniqueFilter)
-            .forEach((issue) => cfg.logIssue(issue));
+        issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
         return issues.length;
     }
 
@@ -201,12 +194,11 @@ function runLint(cfg: CSpellApplicationConfiguration) {
      * The file loader is written this way to cause files to be loaded in parallel while the previous one is being processed.
      * @param fileNames names of files to load one at a time.
      */
-    function *fileLoader(fileNames: string[]) {
+    function* fileLoader(fileNames: string[]) {
         for (const filename of fileNames) {
             // console.log(`${Date.now()} Start reading       ${filename}`);
-            const file = readFileInfo(filename)
-                // .then(f => (console.log(`${Date.now()} Loaded              ${filename} (${f.text.length / 1024}K)`), f))
-            ;
+            const file = readFileInfo(filename);
+            // .then(f => (console.log(`${Date.now()} Loaded              ${filename} (${f.text.length / 1024}K)`), f))
             // console.log(`${Date.now()} Waiting for request ${filename}`);
             yield file;
             // console.log(`${Date.now()} Yield               ${filename}`);
@@ -237,7 +229,6 @@ function runLint(cfg: CSpellApplicationConfiguration) {
     }
 
     async function run(): Promise<RunResult> {
-
         header();
 
         const configFiles = (await globP(cfg.configGlob, cfg.configGlobOptions)).filter(util.uniqueFn());
@@ -247,26 +238,32 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         // Get Exclusions from the config files.
         const { root } = cfg;
         const globOptions = { root, cwd: root };
-        const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(cfg.excludes);
+        const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(
+            cfg.excludes
+        );
         const files = filterFiles(await findFiles(cfg.files, globOptions), exclusionGlobs);
 
         return processFiles(fileLoader(files), configInfo);
     }
 
     function header() {
-        cfg.info(`
+        cfg.info(
+            `
 cspell;
-Date: ${(new Date()).toUTCString()}
+Date: ${new Date().toUTCString()}
 Options:
     verbose:   ${yesNo(!!cfg.options.verbose)}
     config:    ${cfg.configGlob}
-    exclude:   ${extractPatterns(cfg.excludes).map(a => a.glob).join('\n             ')}
+    exclude:   ${extractPatterns(cfg.excludes)
+        .map((a) => a.glob)
+        .join('\n             ')}
     files:     ${cfg.files}
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
     unique:    ${yesNo(!!cfg.options.unique)}
-`, MessageTypes.Info);
+`,
+            MessageTypes.Info
+        );
     }
-
 
     function isExcluded(filename: string, globs: GlobSrcInfo[]) {
         const { root } = cfg;
@@ -274,7 +271,10 @@ Options:
         for (const glob of globs) {
             const m = glob.matcher.matchEx(absFilename);
             if (m.matched) {
-                cfg.info(`Excluded File: ${path.relative(root, absFilename)}; Excluded by ${m.glob} from ${glob.source}`, MessageTypes.Info);
+                cfg.info(
+                    `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${m.glob} from ${glob.source}`,
+                    MessageTypes.Info
+                );
                 return true;
             }
         }
@@ -282,10 +282,9 @@ Options:
     }
 
     function filterFiles(files: string[], excludeGlobs: GlobSrcInfo[]): string[] {
-        const excludeInfo = extractPatterns(excludeGlobs)
-            .map(g => `Glob: ${g.glob} from ${g.source}`);
+        const excludeInfo = extractPatterns(excludeGlobs).map((g) => `Glob: ${g.glob} from ${g.source}`);
         cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
-        const result = files.filter(filename => !isExcluded(filename, excludeGlobs));
+        const result = files.filter((filename) => !isExcluded(filename, excludeGlobs));
         return result;
     }
 }
@@ -295,33 +294,38 @@ interface ExtractPatternResult {
     source: string;
 }
 function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
-    const r = globs
-    .reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
+    const r = globs.reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
         const source = g.source;
         const patterns = typeof g.matcher.patterns === 'string' ? [g.matcher.patterns] : g.matcher.patterns;
-        return info.concat(patterns.map(glob => ({ glob, source })));
+        return info.concat(patterns.map((glob) => ({ glob, source })));
     }, []);
 
     return r;
 }
-
 
 export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
 
     const configFiles = (await globP(configGlob, configGlobOptions)).filter(util.uniqueFn());
-    const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), cspell.readSettingsFiles(configFiles));
+    const config = cspell.mergeSettings(
+        cspell.getDefaultSettings(),
+        cspell.getGlobalSettings(),
+        cspell.readSettingsFiles(configFiles)
+    );
     const results = await traceWords(words, config);
     return results;
 }
 
-export interface CheckTextResult extends CheckTextInfo {}
+export type CheckTextResult = CheckTextInfo;
 
 export async function checkText(filename: string, options: BaseOptions): Promise<CheckTextResult> {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
-    const pSettings = globP(configGlob, configGlobOptions).then(filenames => ({source: filenames[0], config: cspell.readSettingsFiles(filenames)}));
+    const pSettings = globP(configGlob, configGlobOptions).then((filenames) => ({
+        source: filenames[0],
+        config: cspell.readSettingsFiles(filenames),
+    }));
     const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,
@@ -335,9 +339,7 @@ export function createInit(_: CSpellApplicationOptions): Promise<void> {
     return Promise.reject();
 }
 
-const defaultExcludeGlobs = [
-    'node_modules/**'
-];
+const defaultExcludeGlobs = ['node_modules/**'];
 
 interface FileInfo {
     filename: string;
@@ -347,16 +349,17 @@ interface FileInfo {
 function readFileInfo(filename: string, encoding: string = UTF8): Promise<FileInfo> {
     const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
     return pText.then(
-        text => ({text, filename}),
-        error => {
+        (text) => ({ text, filename }),
+        (error) => {
             return error.code === 'EISDIR'
                 ? Promise.resolve({ text: '', filename })
-                : Promise.reject({...error, message: `Error reading file: "${filename}"`});
-        });
+                : Promise.reject({ ...error, message: `Error reading file: "${filename}"` });
+        }
+    );
 }
 
 function readFile(filename: string, encoding: string = UTF8): Promise<string> {
-    return readFileInfo(filename, encoding).then(info => info.text);
+    return readFileInfo(filename, encoding).then((info) => info.text);
 }
 
 /**
@@ -364,30 +367,31 @@ function readFile(filename: string, encoding: string = UTF8): Promise<string> {
  * @param globPatterns patterns or stdin
  */
 async function findFiles(globPatterns: string[], options: GlobOptions): Promise<string[]> {
-    const globPats = globPatterns.filter(filename => filename !== STDIN);
-    const stdin = globPats.length < globPatterns.length ? [ STDIN ] : [];
-    const globResults = globPats.length ? (await globP(globPats, options)) : [];
+    const globPats = globPatterns.filter((filename) => filename !== STDIN);
+    const stdin = globPats.length < globPatterns.length ? [STDIN] : [];
+    const globResults = globPats.length ? await globP(globPats, options) : [];
     const cwd = options.cwd || process.cwd();
-    return stdin.concat(globResults.map(filename => path.resolve(cwd, filename)));
+    return stdin.concat(globResults.map((filename) => path.resolve(cwd, filename)));
 }
 
-
 function calcExcludeGlobInfo(root: string, commandLineExclude: string | undefined): GlobSrcInfo[] {
-    const commandLineExcludes =  {
+    const commandLineExcludes = {
         globs: commandLineExclude ? commandLineExclude.split(/\s+/g) : [],
-        source: 'arguments'
+        source: 'arguments',
     };
     const defaultExcludes = {
         globs: defaultExcludeGlobs,
-        source: 'default'
+        source: 'default',
     };
 
     const choice = commandLineExcludes.globs.length ? commandLineExcludes : defaultExcludes;
     const matcher = new GlobMatcher(choice.globs, root);
-    return [{
-        matcher,
-        source: choice.source
-    }];
+    return [
+        {
+            matcher,
+            source: choice.source,
+        },
+    ];
 }
 
 function extractGlobExcludesFromConfig(root: string, source: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
@@ -398,7 +402,6 @@ function extractGlobExcludesFromConfig(root: string, source: string, config: csp
     return [{ source, matcher }];
 }
 
-
 function calcFinalConfigInfo(
     configInfo: ConfigInfo,
     settingsFromCommandLine: cspell.CSpellUserSettings,
@@ -407,10 +410,15 @@ function calcFinalConfigInfo(
 ): FileConfigInfo {
     const ext = path.extname(filename);
     const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
-    const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), fileSettings, settingsFromCommandLine);
+    const settings = cspell.mergeSettings(
+        cspell.getDefaultSettings(),
+        cspell.getGlobalSettings(),
+        fileSettings,
+        settingsFromCommandLine
+    );
     const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
     const config = cspell.constructSettingsForText(settings, text, languageIds);
-    return {configInfo: {...configInfo, config}, filename, text, languageIds};
+    return { configInfo: { ...configInfo, config }, filename, text, languageIds };
 }
 
 function yesNo(value: boolean) {
@@ -423,13 +431,12 @@ interface PatternRoot {
 }
 
 function findBaseDir(pat: string) {
-    const globChars = /[*@()?|\[\]{},]/;
+    const globChars = /[*@()?|[\]{},]/;
     while (globChars.test(pat)) {
         pat = path.dirname(pat);
     }
     return pat;
 }
-
 
 function exists(filename: string): boolean {
     try {
@@ -470,7 +477,7 @@ function normalizePattern(pat: string, root: string): PatternRoot {
         };
     }
     // relative pattern
-    pat = (path.sep === '\\') ? pat.replace(/\\/g, '/') : pat;
+    pat = path.sep === '\\' ? pat.replace(/\\/g, '/') : pat;
     const patParts = pat.split('/');
     const rootParts = root.split(path.sep);
     let i = 0;
@@ -486,13 +493,12 @@ function normalizePattern(pat: string, root: string): PatternRoot {
 async function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
     const root = options?.root || process.cwd();
     const opts = options || {};
-    const rawPatterns = typeof pattern === 'string' ? [ pattern ] : pattern;
-    const normPatterns = rawPatterns.map(pat => normalizePattern(pat, root));
-    const globResults = normPatterns.map(async pat => {
-        const opt: GlobOptions = {...opts, root: pat.root, cwd: pat.root};
-        const absolutePaths = (await _globP(pat.pattern, opt))
-        .map(filename => path.resolve(pat.root, filename));
-        const relativeToRoot = absolutePaths.map(absFilename => path.relative(root, absFilename));
+    const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
+    const normPatterns = rawPatterns.map((pat) => normalizePattern(pat, root));
+    const globResults = normPatterns.map(async (pat) => {
+        const opt: GlobOptions = { ...opts, root: pat.root, cwd: pat.root };
+        const absolutePaths = (await _globP(pat.pattern, opt)).map((filename) => path.resolve(pat.root, filename));
+        const relativeToRoot = absolutePaths.map((absFilename) => path.relative(root, absFilename));
         return relativeToRoot;
     });
     const results = (await Promise.all(globResults)).reduce((prev, next) => prev.concat(next), []);
@@ -513,7 +519,6 @@ function _globP(pattern: string, options: GlobOptions): Promise<string[]> {
         glob(pattern, options, cb);
     });
 }
-
 
 export const _testing_ = {
     _globP,

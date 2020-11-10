@@ -1,4 +1,5 @@
-import {expect} from 'chai';
+/* eslint-disable jest/valid-expect */
+import { expect } from 'chai';
 import * as util from './util';
 
 describe('Validate util', () => {
@@ -9,8 +10,10 @@ describe('Validate util', () => {
     });
 
     test('tests uniqueFilterFnGenerator with extractor', () => {
-        interface Word { word: string; }
-        const values: Word[] = [{ word: 'hello'}, {word: 'there'}, {word: 'hello'}];
+        interface Word {
+            word: string;
+        }
+        const values: Word[] = [{ word: 'hello' }, { word: 'there' }, { word: 'hello' }];
         const uniqFilter = util.uniqueFilterFnGenerator((w: Word) => w.word);
         expect(values.filter(uniqFilter)).to.be.deep.equal([values[0], values[1]]);
     });
@@ -23,7 +26,11 @@ describe('Validate util', () => {
 
     test('tests clean up obj', () => {
         const obj = {
-            a: undefined, b: 1, c: true, d: undefined, e: 'str'
+            a: undefined,
+            b: 1,
+            c: true,
+            d: undefined,
+            e: 'str',
         };
         const cleanObj = util.clean(obj);
         expect([...Object.keys(cleanObj)]).to.be.deep.equal(['b', 'c', 'e']);

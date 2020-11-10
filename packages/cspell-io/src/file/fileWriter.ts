@@ -1,4 +1,3 @@
-
 import * as fs from 'fs';
 import * as zlib from 'zlib';
 import * as stream from 'stream';

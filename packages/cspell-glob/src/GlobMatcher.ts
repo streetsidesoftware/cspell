@@ -1,5 +1,4 @@
-
-import mm =  require('micromatch');
+import mm = require('micromatch');
 import * as path from 'path';
 
 // cspell:ignore fname
@@ -77,12 +76,12 @@ function buildMatcherFn(path: PathInterface, patterns: string | string[], root?:
     }
     const dirRoot = path.normalize(root || '/');
     const rules: GlobRule[] = patterns
-        .map(p => p.trim())
+        .map((p) => p.trim())
         .map((p, index) => ({ glob: p, index }))
-        .filter(r => !!r.glob)
+        .filter((r) => !!r.glob)
         .map(({ glob, index }) => {
             const matchNeg = glob.match(/^!+/);
-            const isNeg = matchNeg && (matchNeg[0].length & 1) && true || false;
+            const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
             const pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), glob);
             const reg = mm.makeRe(pattern);
             const fn = (filename: string) => {
@@ -91,8 +90,8 @@ function buildMatcherFn(path: PathInterface, patterns: string | string[], root?:
             };
             return { glob, index, isNeg, fn, reg };
         });
-    const negRules = rules.filter(r => r.isNeg);
-    const posRules = rules.filter(r => !r.isNeg);
+    const negRules = rules.filter((r) => r.isNeg);
+    const posRules = rules.filter((r) => !r.isNeg);
     const fn: GlobMatchFn = (filename: string) => {
         filename = path.normalize(filename);
         const offset = dirRoot === filename.slice(0, dirRoot.length) ? dirRoot.length : 0;
@@ -113,15 +112,15 @@ function buildMatcherFn(path: PathInterface, patterns: string | string[], root?:
             }
         }
         return { matched: false };
-    }
+    };
     return fn;
 }
 
 type MutationsToSupportGitIgnore = [RegExp, string];
 
 const mutations: MutationsToSupportGitIgnore[] = [
-    [/^!+/, ''],                                   // remove leading !
-    [/^[^/#][^/]*$/, '**/{$&,$&/**}',],            // no slashes will match files names or folders
-    [/^\/(?!\/)/, ''],                             // remove leading slash to match from the root
-    [/\/$/, '$&**',],                              // if it ends in a slash, make sure matches the folder
+    [/^!+/, ''], // remove leading !
+    [/^[^/#][^/]*$/, '**/{$&,$&/**}'], // no slashes will match files names or folders
+    [/^\/(?!\/)/, ''], // remove leading slash to match from the root
+    [/\/$/, '$&**'], // if it ends in a slash, make sure matches the folder
 ];

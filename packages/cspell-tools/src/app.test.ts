@@ -6,28 +6,28 @@ import * as shell from 'shelljs';
 
 const projectRoot = path.join(__dirname, '..');
 const pathTemp = path.join(projectRoot, 'temp', 'cspell-tools', path.basename(__filename));
-const relPathTemp = 'app-out'
+const relPathTemp = 'app-out';
 
 function argv(...args: string[]): string[] {
     return [...process.argv.slice(0, 2), ...args];
 }
 
 function getCommander() {
-    return new Commander.Command;
+    return new Commander.Command();
 }
 
 describe('Validate the application', () => {
     beforeAll(() => {
         const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         shell.mkdir('-p', pathTemp);
-        shell.cp(path.join(pathSamples, 'cities.txt'), pathTemp)
+        shell.cp(path.join(pathSamples, 'cities.txt'), pathTemp);
     });
 
     beforeEach(() => {
         shell.cd(pathTemp);
     });
 
-    test('test app compile-trie', async () => {
+    test('app compile-trie', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile-trie', '-n', 'cities.txt');
@@ -36,7 +36,7 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
-    test('test app compile-trie compress', async () => {
+    test('app compile-trie compress', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile-trie', 'cities.txt');
@@ -45,7 +45,7 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
-    test('test app compile-trie -o', async () => {
+    test('app compile-trie -o', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile-trie', '-n', 'cities.txt', '-o', relPathTemp);
@@ -54,7 +54,7 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
-    test('test app compile', async () => {
+    test('app compile', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile', '-n', 'cities.txt', '-o', relPathTemp);
@@ -63,7 +63,7 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
-    test('test app compile-trie max depth', async () => {
+    test('app compile-trie max depth', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile-trie', '-n', '-m', '0', 'cities.txt', '-o', relPathTemp);
@@ -72,7 +72,7 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
-    test('test app compile with compression', async () => {
+    test('app compile with compression', async () => {
         const commander = getCommander();
         const log = jest.spyOn(console, 'log').mockImplementation();
         const args = argv('compile', 'cities.txt', '-o', relPathTemp);
@@ -81,7 +81,7 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
-    test('test app compile merge', async () => {
+    test('app compile merge', async () => {
         const commander = getCommander();
         const targetDir = relPathTemp;
         const target = 'merge.txt';
@@ -98,15 +98,15 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
-    test('test app no args', () => {
+    test('app no args', async () => {
         const commander = getCommander();
         const mock = jest.fn();
         commander.on('--help', mock);
-        expect(app.run(commander, argv())).rejects.toThrowError(Commander.CommanderError);
+        await expect(app.run(commander, argv())).rejects.toThrowError(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
     });
 
-    test('test app --help', async () => {
+    test('app --help', async () => {
         const commander = getCommander();
         const mock = jest.fn();
         commander.on('--help', mock);
@@ -114,12 +114,11 @@ describe('Validate the application', () => {
         expect(mock.mock.calls.length).toBe(1);
     });
 
-    test('test app -V', async () => {
+    test('app -V', async () => {
         const commander = getCommander();
         const mock = jest.fn();
         commander.on('option:version', mock);
-        await expect(app.run(commander, argv('-V')) ).rejects.toThrowError(Commander.CommanderError);
+        await expect(app.run(commander, argv('-V'))).rejects.toThrowError(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
     });
-
 });

@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { traceWords, getDefaultSettings } from '.';
 
 describe('Verify trace', () => {
@@ -7,9 +6,9 @@ describe('Verify trace', () => {
         const words = ['apple'];
         const config = getDefaultSettings();
         const result = await traceWords(words, config);
-        expect(result).to.not.be.empty;
+        expect(result).not.toHaveLength(0);
 
-        const foundIn = result.filter(r => r.found).map(r => r.dictName);
-        expect(foundIn).to.contain('en_US.trie.gz');
+        const foundIn = result.filter((r) => r.found).map((r) => r.dictName);
+        expect(foundIn).toContain('en_US.trie.gz');
     });
 });

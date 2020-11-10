@@ -33,11 +33,7 @@ export function lineReaderAsync(filename: string, encoding: BufferEncoding = def
     return streamFileLineByLineAsync(filename, encoding);
 }
 
-function prepareFileStream(
-    filename: string,
-    encoding: string,
-    fnError: (e: Error) => void,
-) {
+function prepareFileStream(filename: string, encoding: string, fnError: (e: Error) => void) {
     const pipes: NodeJS.ReadWriteStream[] = [];
     if (filename.match(/\.gz$/i)) {
         pipes.push(zlib.createGunzip());
@@ -54,7 +50,10 @@ function prepareFileStream(
  * @param filename full path to the file to read.
  * @param encoding defaults to 'utf8'
  */
-export function streamFileLineByLineAsync(filename: string, encoding: BufferEncoding = defaultEncoding): AsyncIterableIterator<string> {
+export function streamFileLineByLineAsync(
+    filename: string,
+    encoding: BufferEncoding = defaultEncoding
+): AsyncIterableIterator<string> {
     const fnError = (e: Error) => {
         iter.throw && iter.throw(e);
     };
@@ -76,13 +75,18 @@ interface Resolvers<T = IteratorResult<string>> {
  * @param filename full path to the file to read.
  * @param encoding defaults to 'utf8'
  */
-export function streamLineByLineAsync(stream: NodeJS.ReadableStream, encoding: BufferEncoding = defaultEncoding): AsyncIterableIterator<string> {
+export function streamLineByLineAsync(
+    stream: NodeJS.ReadableStream,
+    encoding: BufferEncoding = defaultEncoding
+): AsyncIterableIterator<string> {
     let data = '.';
     let done = false;
     let error: Error | any;
     const buffer: string[] = [];
     const pending: Resolvers[] = [];
-    const fnError = (e: Error | any) => { error = e; };
+    const fnError = (e: Error | any) => {
+        error = e;
+    };
     const fnComplete = () => {
         // readline will consume the last newline without emitting an empty last line.
         // If the last data read contains a new line, then emit an empty string.
@@ -93,7 +97,7 @@ export function streamLineByLineAsync(stream: NodeJS.ReadableStream, encoding: B
         done = true;
     };
     // We want to capture the last line.
-    stream.on('data', d => data = dataToString(d, encoding));
+    stream.on('data', (d) => (data = dataToString(d, encoding)));
     stream.on('error', fnError);
     const rl = readline.createInterface({
         input: stream,
@@ -126,13 +130,15 @@ export function streamLineByLineAsync(stream: NodeJS.ReadableStream, encoding: B
         }
         if (done && pending.length && !buffer.length) {
             const p = pending.shift()!;
-            p.resolve({ done } as IteratorResult<string>)
+            p.resolve({ done } as IteratorResult<string>);
         }
     }
 
     const iter: AsyncIterableIterator<string> = {
         [Symbol.asyncIterator]: () => iter,
-        next() { return new Promise(registerPromise); },
+        next() {
+            return new Promise(registerPromise);
+        },
         throw(e?: any) {
             fnError(e);
             return new Promise(registerPromise);

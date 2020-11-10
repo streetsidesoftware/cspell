@@ -4,9 +4,9 @@ export type ReplaceMap = ReplaceEntry[];
 /**
  * These settings come from user and workspace settings.
  */
-export interface CSpellPackageSettings extends CSpellUserSettings {}
+export type CSpellPackageSettings = CSpellUserSettings;
 
-export interface CSpellUserSettings extends CSpellSettings {}
+export type CSpellUserSettings = CSpellSettings;
 
 export interface CSpellSettings extends FileSettings, LegacySettings {
     $schema?: string;
@@ -178,7 +178,10 @@ export interface BaseSetting {
 
 export type DictionaryFileTypes = 'S' | 'W' | 'C' | 'T';
 
-export type DictionaryDefinition = DictionaryDefinitionPreferred | DictionaryDefinitionAlternate | DictionaryDefinitionLegacy;
+export type DictionaryDefinition =
+    | DictionaryDefinitionPreferred
+    | DictionaryDefinitionAlternate
+    | DictionaryDefinitionLegacy;
 
 export interface DictionaryDefinitionBase {
     /** The reference name of the dictionary, used with program language settings */
@@ -306,7 +309,7 @@ export interface RegExpPatternDefinition {
     description?: string;
 }
 
-export interface CSpellUserSettingsWithComments extends CSpellUserSettings {}
+export type CSpellUserSettingsWithComments = CSpellUserSettings;
 
 export interface Source {
     name: string;

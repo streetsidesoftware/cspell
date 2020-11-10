@@ -7,7 +7,6 @@ export interface ExecOptions {
     bail?: boolean;
 }
 
-
 export function exec(command: string, options: ExecOptions = {}) {
     const { echo = false, bail = false } = options;
     if (echo) {

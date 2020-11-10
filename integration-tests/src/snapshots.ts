@@ -10,11 +10,11 @@ const snapshotFileName = 'snapshot.txt';
 export function writeSnapshot(rep: Repository, output: string) {
     const dir = Path.join(snapshotDir, rep.path);
     const filename = Path.join(dir, snapshotFileName);
-    Shell.mkdir('-p', dir)
+    Shell.mkdir('-p', dir);
 
     const text = prepareOutput(rep, output);
 
-    fs.writeFileSync(filename, text)
+    fs.writeFileSync(filename, text);
 }
 
 export interface SnapshotCompareResult {
@@ -46,8 +46,8 @@ export function checkAgainstSnapshot(rep: Repository, output: string, update: bo
 
 function linesToCleanText(lines: string[]): string {
     return lines
-        .map(t => t.trim())
-        .filter(t => !!t)
+        .map((t) => t.trim())
+        .filter((t) => !!t)
         .join('\n');
 }
 
@@ -55,15 +55,14 @@ export function readSnapshot(rep: Repository): string {
     const dir = Path.join(snapshotDir, rep.path);
     const filename = Path.join(dir, snapshotFileName);
     try {
-        return fs.readFileSync(filename, 'utf-8')
+        return fs.readFileSync(filename, 'utf-8');
     } catch (e) {
         return '';
     }
 }
 
 function prepareOutput(rep: Repository, output: string) {
-    const lines = output.split('\n')
-        .filter(line => !!line.trim());
+    const lines = output.split('\n').filter((line) => !!line.trim());
     lines.sort();
 
     const text = `

@@ -13,32 +13,24 @@ const ESCAPE = '\\';
 
 const specialCharacters = new Set(
     [EOW, BACK, EOL, REF, EOR, ESCAPE, LF]
-    .concat('0123456789'.split(''))
-    .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
+        .concat('0123456789'.split(''))
+        .concat('`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'.split(''))
 );
 
 const specialCharacterMap = new Map([
-    ['\n', '\\n'], ['\r', '\\r'], ['\\', '\\\\'],
+    ['\n', '\\n'],
+    ['\r', '\\r'],
+    ['\\', '\\\\'],
 ]);
-const characterMap = new Map([...specialCharacterMap].map(a => [a[1], a[0]]));
+const characterMap = new Map([...specialCharacterMap].map((a) => [a[1], a[0]]));
 
 export const DATA = '__DATA__';
 
 function generateHeader(base: number, comment: string): Sequence<string> {
-    const header = [
-        '#!/usr/bin/env cspell-trie reader',
-        'TrieXv3',
-        'base=' + base,
-    ]
-    .concat(comment
-        ? comment.split('\n').map(a => '# ' + a)
-        : []
-    )
-    .concat([
-        '# Data:',
-        DATA,
-    ]);
-    return genSequence(header).map(a => a + '\n');
+    const header = ['#!/usr/bin/env cspell-trie reader', 'TrieXv3', 'base=' + base]
+        .concat(comment ? comment.split('\n').map((a) => '# ' + a) : [])
+        .concat(['# Data:', DATA]);
+    return genSequence(header).map((a) => a + '\n');
 }
 
 export interface ExportOptions {
@@ -57,28 +49,27 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
     let count = 0;
     const backBuffer = { last: '', count: 0 };
 
-
     function ref(n: number): string {
         return '#' + n.toString(radix) + ';';
     }
 
     function escape(s: string): string {
-        return (specialCharacters.has(s)) ? ESCAPE + (specialCharacterMap.get(s) || s) : s;
+        return specialCharacters.has(s) ? ESCAPE + (specialCharacterMap.get(s) || s) : s;
     }
 
-    function *flush() {
+    function* flush() {
         while (backBuffer.count) {
             const n = Math.min(9, backBuffer.count);
-            yield (n > 1) ? backBuffer.last + n : backBuffer.last;
+            yield n > 1 ? backBuffer.last + n : backBuffer.last;
             backBuffer.last = BACK;
             backBuffer.count -= n;
         }
     }
 
-    function *emit(s: string): Generator<string> {
+    function* emit(s: string): Generator<string> {
         switch (s) {
             case EOW:
-                yield *flush();
+                yield* flush();
                 backBuffer.last = EOW;
                 backBuffer.count = 0;
                 break;
@@ -86,44 +77,43 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
                 backBuffer.count++;
                 break;
             default:
-                yield *flush();
+                yield* flush();
                 yield s;
         }
     }
 
-    function *walk(node: TrieNode, depth: number): Generator<string> {
+    function* walk(node: TrieNode, depth: number): Generator<string> {
         const r = cache.get(node);
         if (r !== undefined) {
-            yield *emit(ref(r));
+            yield* emit(ref(r));
             return;
         }
         if (node.c) {
             cache.set(node, count++);
-            const c = [...node.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
+            const c = [...node.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
             for (const [s, n] of c) {
-                yield *emit(escape(s));
-                yield *walk(n, depth + 1);
-                yield *emit(BACK);
-                if (depth === 0) yield *emit(EOL);
+                yield* emit(escape(s));
+                yield* walk(n, depth + 1);
+                yield* emit(BACK);
+                if (depth === 0) yield* emit(EOL);
             }
         }
         // Output EOW after children so it can be optimized on read
         if (node.f) {
-            yield *emit(EOW);
+            yield* emit(EOW);
         }
     }
 
-    function *serialize(node: TrieNode): Generator<string> {
-        yield *walk(node, 0);
-        yield *flush();
+    function* serialize(node: TrieNode): Generator<string> {
+        yield* walk(node, 0);
+        yield* flush();
     }
 
-    return generateHeader(radix, comment)
-        .concat(bufferLines(bufferLines(serialize(root), 120, '\n'), 10, ''));
+    return generateHeader(radix, comment).concat(bufferLines(bufferLines(serialize(root), 120, '\n'), 10, ''));
 }
 
-function *toIterableIterator<T>(iter: IterableLike<T>): IterableIterator<T> {
-    yield *iter;
+function* toIterableIterator<T>(iter: IterableLike<T>): IterableIterator<T> {
+    yield* iter;
 }
 
 interface Stack {
@@ -140,7 +130,6 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-
 export function importTrie(linesX: IterableLike<string>): TrieNode {
     let radix = 16;
     const comment = /^\s*#/;
@@ -155,14 +144,20 @@ export function importTrie(linesX: IterableLike<string>): TrieNode {
     }
 
     function readHeader(iter: Iterator<string>) {
-
         const headerRows: string[] = [];
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const next = iter.next();
-            if (next.done) { break; }
+            if (next.done) {
+                break;
+            }
             const line = next.value.trim().replace(/\r|\n/g, '');
-            if (!line || comment.test(line)) { continue; }
-            if (line === DATA) { break; }
+            if (!line || comment.test(line)) {
+                continue;
+            }
+            if (line === DATA) {
+                break;
+            }
             headerRows.push(line);
         }
         parseHeaderRows(headerRows);
@@ -173,11 +168,8 @@ export function importTrie(linesX: IterableLike<string>): TrieNode {
     const root: TrieNode = {};
 
     const n = genSequence(iter)
-        .concatMap(a => a.split(''))
-        .reduce(
-            parseStream(radix),
-            { nodes: [ root ], root, stack: [{ node: root, s: '' }], parser: undefined  }
-        );
+        .concatMap((a) => a.split(''))
+        .reduce(parseStream(radix), { nodes: [root], root, stack: [{ node: root, s: '' }], parser: undefined });
     return n.root;
 }
 
@@ -202,7 +194,7 @@ function parseStream(radix: number): Reducer {
 
         const { nodes } = acc;
         nodes.pop();
-        return {...acc, nodes, parser};
+        return { ...acc, nodes, parser };
     }
 
     function parseEscapeCharacter(acc: ReduceResults, _: string): ReduceResults {
@@ -210,15 +202,15 @@ function parseStream(radix: number): Reducer {
         const parser = function (acc: ReduceResults, s: string): ReduceResults {
             if (prev) {
                 s = characterMap.get(prev + s) || s;
-                return parseCharacter({...acc, parser: undefined}, s);
+                return parseCharacter({ ...acc, parser: undefined }, s);
             }
             if (s === ESCAPE) {
                 prev = s;
                 return acc;
             }
-            return parseCharacter({...acc, parser: undefined}, s);
+            return parseCharacter({ ...acc, parser: undefined }, s);
         };
-        return {...acc, parser};
+        return { ...acc, parser };
     }
 
     function parseCharacter(acc: ReduceResults, s: string): ReduceResults {
@@ -233,7 +225,6 @@ function parseStream(radix: number): Reducer {
         nodes.push(n);
         return { root, nodes, stack, parser };
     }
-
 
     function parseEOW(acc: ReduceResults, _: string): ReduceResults {
         const parser = parseBack;
@@ -254,7 +245,7 @@ function parseStream(radix: number): Reducer {
     const charactersBack = new Set((BACK + '23456789').split(''));
     function parseBack(acc: ReduceResults, s: string): ReduceResults {
         if (!charactersBack.has(s)) {
-            return parserMain({...acc, parser: undefined }, s);
+            return parserMain({ ...acc, parser: undefined }, s);
         }
         let n = s === BACK ? 1 : parseInt(s, 10) - 1;
         const { stack } = acc;

@@ -1,6 +1,7 @@
-import {expect} from 'chai';
+/* eslint-disable jest/valid-expect */
+import { expect } from 'chai';
 import * as LangId from './LanguageIds';
-import {genSequence} from 'gensequence';
+import { genSequence } from 'gensequence';
 
 describe('Validate LanguageIds', () => {
     test('tests looking up a few extensions', () => {
@@ -10,12 +11,11 @@ describe('Validate LanguageIds', () => {
         expect(LangId.getLanguagesForExt('hs')).to.contain('haskell');
     });
 
-    test('test that all extensions start with a .', () => {
+    test('that all extensions start with a .', () => {
         const ids = LangId.buildLanguageExtensionMap(LangId.languageExtensionDefinitions);
         const badExtensions = genSequence(ids.keys())
-            .filter(ext => ext[0] !== '.')
+            .filter((ext) => ext[0] !== '.')
             .toArray();
         expect(badExtensions, 'All extensions are expected to begin with a .').to.be.empty;
     });
-
 });

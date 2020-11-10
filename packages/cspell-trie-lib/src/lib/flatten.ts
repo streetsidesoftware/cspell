@@ -7,7 +7,7 @@ export interface Emitter {
 
 export function flattenToTrieRefNode(root: TrieNode, nodes: Emitter): number {
     const signatures = new Map<string, number>();
-    const cached = new Set([0]);  // The end of word is always a 0 and is always cached.
+    const cached = new Set([0]); // The end of word is always a 0 and is always cached.
 
     function canCache(n: TrieRefNode) {
         if (!n.r) return true;
@@ -22,8 +22,8 @@ export function flattenToTrieRefNode(root: TrieNode, nodes: Emitter): number {
     function convert(n: TrieNode): number {
         const r = copy(n);
         if (n.c) {
-            const children = [...n.c].sort((a, b) => a[0] < b[0] ? -1 : 1);
-            r.r = children.map(c => [c[0], convert(c[1])] as [string, number]);
+            const children = [...n.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
+            r.r = children.map((c) => [c[0], convert(c[1])] as [string, number]);
         }
 
         if (!canCache(r)) {
@@ -46,7 +46,7 @@ export function flattenToTrieRefNode(root: TrieNode, nodes: Emitter): number {
 
 export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<TrieRefNode> {
     const signatures = new Map<string, number>();
-    const cached = new Set([0]);  // The end of word is always a 0 and is always cached.
+    const cached = new Set([0]); // The end of word is always a 0 and is always cached.
 
     function canCache(n: TrieRefNode) {
         if (!n.r) return true;
@@ -58,8 +58,7 @@ export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<T
         return true;
     }
 
-
-    function *convert(root: TrieNode): IterableIterator<TrieRefNode> {
+    function* convert(root: TrieNode): IterableIterator<TrieRefNode> {
         interface StackElement {
             k: string;
             n: TrieNode;
@@ -71,8 +70,8 @@ export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<T
         function addToStack(c: Map<string, TrieNode> | undefined, p: TrieRefNode) {
             if (!c) return;
             const children = [...c.entries()]
-            .map(([k, n]) => ( { k, n, p, r: undefined } ))
-            .sort((a, b) => a.k < b.k ? 1 : -1);
+                .map(([k, n]) => ({ k, n, p, r: undefined }))
+                .sort((a, b) => (a.k < b.k ? 1 : -1));
             stack.push(...children);
         }
 
@@ -82,7 +81,7 @@ export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<T
         let t: StackElement | undefined;
         let count = 0;
 
-        function calcRef(r: TrieRefNode): { ref: number, emit: boolean } {
+        function calcRef(r: TrieRefNode): { ref: number; emit: boolean } {
             if (!canCache(r)) {
                 return { ref: count++, emit: true };
             }
@@ -97,7 +96,7 @@ export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<T
             return { ref: idx, emit: true };
         }
 
-        while (t = stack.pop()) {
+        while ((t = stack.pop())) {
             if (t.r) {
                 // We are on the way out.
                 const ref = calcRef(t.r);
@@ -135,7 +134,6 @@ function signature(n: TrieRefNode): string {
     return isWord + refs;
 }
 
-
 function copy(n: TrieNode): TrieRefNode {
-    return n.f ? { f: n.f, r: undefined } : { f: undefined, r: undefined} ;
+    return n.f ? { f: n.f, r: undefined } : { f: undefined, r: undefined };
 }

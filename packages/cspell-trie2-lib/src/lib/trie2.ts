@@ -1,8 +1,7 @@
 import { TrieNode2, TrieNode2EOW, TrieNode2Branch, TrieNode2Root, END_OF_WORD as EOW } from './TrieNode2';
 
 export class Trie2 {
-    constructor(readonly root: TrieNode2Root) {
-    }
+    constructor(readonly root: TrieNode2Root) {}
 }
 
 const END_OF_WORD: TrieNode2EOW = Object.freeze({ i: 0, s: EOW });
@@ -28,7 +27,9 @@ export class Trie2Builder {
                 const s = c.s;
                 const limit = Math.min(s.length, word.length - p);
                 let i = 0;
-                for (; i < limit && word[p + i] === s[i]; ++i) {}
+                for (; i < limit && word[p + i] === s[i]; ++i) {
+                    /* empty */
+                }
                 if (i) {
                     p += i;
                     if (i < s.length || p === word.length) {
@@ -62,10 +63,7 @@ export class Trie2Builder {
         }
         const s = node.s;
         node.s = s.slice(0, splitPos);
-        node.c = [
-            this.createNode(s.slice(splitPos), node.c),
-            wordNode
-        ];
+        node.c = [this.createNode(s.slice(splitPos), node.c), wordNode];
     }
 
     protected createNode(s: string, c: TrieNode2[] = [END_OF_WORD]): TrieNode2 {

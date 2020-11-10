@@ -1,4 +1,4 @@
-import { createReader, AnnotatedWord } from './Reader';
+import { createReader } from './Reader';
 import * as path from 'path';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
@@ -18,15 +18,19 @@ describe('Validate the iterateWordsFromFile', () => {
         const reader = await createReader(path.join(samples, 'cities.trie.gz'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader];
-        expect(results.join('|')).toBe('amsterdam|angeles|city|delhi|francisco|london|los|los angeles'
-            + '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york');
+        expect(results.join('|')).toBe(
+            'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
+                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
+        );
     });
 
     test('stream words from text', async () => {
         const reader = await createReader(path.join(samples, 'cities.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader];
-        expect(results.join('|')).toBe('New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|');
+        expect(results.join('|')).toBe(
+            'New York|New Amsterdam|Los Angeles|San Francisco|New Delhi|Mexico City|London|Paris|'
+        );
     });
 
     test('annotatedWords: hunspell', async () => {
@@ -41,9 +45,11 @@ describe('Validate the iterateWordsFromFile', () => {
         const reader = await pReaderDutch;
         expect(reader.size).toBe(142518);
         const regBoek = /^.?boek\b/; // cspell:ignore fiets koopman doek boek boek
-        const results = [...reader.annotatedWords()
-            .filter(word => regBoek.test(word))
-            .take(8)
+        const results = [
+            ...reader
+                .annotatedWords()
+                .filter((word) => regBoek.test(word))
+                .take(8),
         ];
         expect(results.join(' ')).toBe('+boek +boek+ +boek- +boek-+ boek boek+ boek- boek-+');
     });
@@ -52,22 +58,24 @@ describe('Validate the iterateWordsFromFile', () => {
         const reader = await createReader(path.join(samples, 'cities.trie.gz'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader.annotatedWords()];
-        expect(results.join('|')).toBe('amsterdam|angeles|city|delhi|francisco|london|los|los angeles'
-            + '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york');
+        expect(results.join('|')).toBe(
+            'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
+                '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york'
+        );
     });
 
-    test('annotatedWords: text', async () => {
+    test('annotatedWords: cities.txt', async () => {
         const reader = await createReader(path.join(samples, 'cities.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader.annotatedWords()];
         // the results are sorted
         expect(results.join('|')).toBe(
             'London|Los Angeles|Mexico City|New Amsterdam|New Delhi|New York|Paris|San Francisco' +
-            '|~london|~los angeles|~mexico city|~new amsterdam|~new delhi|~new york|~paris|~san francisco'
+                '|~london|~los angeles|~mexico city|~new amsterdam|~new delhi|~new york|~paris|~san francisco'
         );
     });
 
-    test('annotatedWords: text', async () => {
+    test('annotatedWords: ampleCodeDic.txt', async () => {
         const reader = await createReader(path.join(samples, 'sampleCodeDic.txt'), {});
         expect(reader.size).toBeGreaterThan(1);
         const results = [...reader.annotatedWords()];
@@ -75,7 +83,7 @@ describe('Validate the iterateWordsFromFile', () => {
         // the results are sorted
         expect(results.join('|')).toBe(
             '!Codemsg|!Errorerror|!err|+code|+code+|+error|+error+|+msg|Café|Code|Code+|Error|Error+|msg' +
-            '|~!codecode|~!codemsg|~!errorerror|~cafe|~code|~code+|~error|~error+'
+                '|~!codecode|~!codemsg|~!errorerror|~cafe|~code|~code+|~error|~error+'
         );
     });
 });

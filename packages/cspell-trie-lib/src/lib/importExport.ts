@@ -12,19 +12,9 @@ export interface ExportOptions {
 
 type Serializer = (root: TrieNode, options?: number | ExportOptions) => Sequence<string>;
 
-const serializers: Serializer[] = [
-    iv1.serializeTrie,
-    iv1.serializeTrie,
-    iv2.serializeTrie,
-    iv3.serializeTrie,
-];
+const serializers: Serializer[] = [iv1.serializeTrie, iv1.serializeTrie, iv2.serializeTrie, iv3.serializeTrie];
 
-const deserializers = [
-    iv1.importTrie,
-    iv1.importTrie,
-    iv2.importTrie,
-    iv3.importTrie,
-];
+const deserializers = [iv1.importTrie, iv1.importTrie, iv2.importTrie, iv3.importTrie];
 
 /**
  * Serialize a TrieNode.
@@ -41,13 +31,11 @@ export function serializeTrie(root: TrieNode, options: ExportOptions | number = 
     return method(root, options);
 }
 
-
-
 export function importTrie(lines: Iterable<string> | IterableIterator<string>): TrieNode {
     const comment = /^\s*#/;
 
-    function *arrayToIterableIterator<T>(i: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
-        yield *i;
+    function* arrayToIterableIterator<T>(i: Iterable<T> | IterableIterator<T>): IterableIterator<T> {
+        yield* i;
     }
 
     function parseHeaderRows(headerRows: string[]): number {
@@ -60,15 +48,21 @@ export function importTrie(lines: Iterable<string> | IterableIterator<string>): 
     }
 
     function readHeader(iter: Iterator<string> | IterableIterator<string>) {
-
         const headerRows: string[] = [];
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             const next = iter.next();
-            if (next.done) { break; }
+            if (next.done) {
+                break;
+            }
             const line = next.value.trim();
-            if (!line || comment.test(line)) { continue; }
+            if (!line || comment.test(line)) {
+                continue;
+            }
             headerRows.push(line);
-            if (line === iv1.DATA || line === iv2.DATA) { break; }
+            if (line === iv1.DATA || line === iv2.DATA) {
+                break;
+            }
         }
 
         return headerRows;

@@ -1,4 +1,9 @@
-import { CSpellSettings, RegExpPatternDefinition, CSpellSettingsWithSourceTrace, PredefinedPatterns } from './CSpellSettingsDef';
+import {
+    CSpellSettings,
+    RegExpPatternDefinition,
+    CSpellSettingsWithSourceTrace,
+    PredefinedPatterns,
+} from './CSpellSettingsDef';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';
@@ -9,7 +14,11 @@ import { mergeSettings } from './index';
 
 const defaultConfigFile = Path.join(__dirname, '..', '..', 'config', 'cspell-default.json');
 
-const regExpSpellCheckerDisable = [RegPat.regExSpellingGuardBlock, RegPat.regExSpellingGuardLine, RegPat.regExSpellingGuardNext];
+const regExpSpellCheckerDisable = [
+    RegPat.regExSpellingGuardBlock,
+    RegPat.regExSpellingGuardLine,
+    RegPat.regExSpellingGuardNext,
+];
 
 const predefinedPatterns = [
     // Exclude patterns

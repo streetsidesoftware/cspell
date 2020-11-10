@@ -6,7 +6,7 @@ const configFile = Path.join(__dirname, '..', 'config', 'config.json');
 
 const defaultConfig: Config = {
     repositories: [],
-}
+};
 
 export function readConfig(): Config {
     try {
@@ -18,18 +18,18 @@ export function readConfig(): Config {
 }
 
 export function writeConfig(config: Config) {
-    fs.writeFileSync(configFile, JSON.stringify(config, undefined, 2))
+    fs.writeFileSync(configFile, JSON.stringify(config, undefined, 2));
 }
 
 export function addRepository(path: string, url: string) {
     const config = readConfig();
-    const entries = new Map<string, Repository>(config.repositories.map(r => [r.path, r]));
+    const entries = new Map<string, Repository>(config.repositories.map((r) => [r.path, r]));
     const args = entries.get(path)?.args || ['**/*.*', '*.*'];
     const entry: Repository = {
         path,
         url,
-        args
-    }
+        args,
+    };
 
     entries.set(path, entry);
     config.repositories = [...entries.values()];
