@@ -1,5 +1,5 @@
 import { createSpellingDictionary, SpellingDictionaryFromTrie, __testMethods } from './SpellingDictionary';
-import { ChildMap, Trie } from 'cspell-trie-lib';
+import { Trie } from 'cspell-trie-lib';
 import { FunctionArgs } from '../util/types';
 
 // cSpell:ignore aple
@@ -10,12 +10,6 @@ describe('Verify building Dictionary', () => {
 
         const dict = await createSpellingDictionary(words, 'words', 'test');
         expect(dict.name).toBe('words');
-        // expect(dict).toBeInstanceOf(SpellingDictionaryFromTrie);
-        let c: ChildMap | undefined;
-        if (dict instanceof SpellingDictionaryFromTrie) {
-            c = dict.trie.root.c;
-        }
-        expect(c).toBeInstanceOf(Map);
         expect(dict.has('apple')).toBe(true);
         const suggestions = dict.suggest('aple').map(({ word }) => word);
         expect(suggestions).toEqual(expect.arrayContaining(['apple']));
