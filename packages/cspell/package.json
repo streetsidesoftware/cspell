@@ -21,7 +21,6 @@
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
     "coverage": "jest --coverage",
-    "generate-code-coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
     "test-ts": "../../node_modules/.bin/jest",
     "test-watch": "jest --watch",
     "prepublishOnly": "npm run clean-build && npm test",
@@ -49,7 +48,6 @@
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
   "dependencies": {
-    "@types/minimatch": "^3.0.3",
     "chalk": "^4.1.0",
     "commander": "^6.2.0",
     "comment-json": "^4.1.0",
@@ -66,6 +64,7 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.3",
     "@types/glob": "^7.1.3",
+    "@types/minimatch": "^3.0.3",
     "rimraf": "^3.0.2"
   }
 }
