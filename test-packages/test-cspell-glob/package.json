@@ -1,0 +1,21 @@
+{
+  "name": "test-cspell-glob",
+  "version": "5.0.1-alpha.11",
+  "description": "Pure testing package for cspell-io. It purpose is to verify cspell-io dependencies.",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run compile",
+    "clean-build": "npm run clean && npm run build",
+    "compile": "tsc -p .",
+    "coverage": "jest --coverage",
+    "prepare": "npm run compile",
+    "test": "node dist"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "cspell-glob": "^5.0.1-alpha.11"
+  }
+}

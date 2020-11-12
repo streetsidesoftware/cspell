@@ -4,7 +4,6 @@ import * as fs from 'fs';
 import * as iconv from 'iconv-lite';
 import * as zlib from 'zlib';
 import * as readline from 'readline';
-import {} from 'stream';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 
