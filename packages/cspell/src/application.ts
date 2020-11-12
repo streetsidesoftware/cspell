@@ -1,5 +1,4 @@
 import * as glob from 'glob';
-import * as minimatch from 'minimatch';
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
 import * as path from 'path';
@@ -10,6 +9,7 @@ import * as Validator from 'cspell-lib';
 import getStdin = require('get-stdin');
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { GlobMatcher } from 'cspell-glob';
+import { IOptions } from './IOptions';
 
 // cspell:word nocase
 
@@ -101,14 +101,14 @@ export interface Emitters {
     error: ErrorEmitter;
 }
 
-interface GlobOptions extends minimatch.IOptions {
+interface GlobOptions extends IOptions {
     cwd?: string;
     root?: string;
 }
 
-const defaultMinimatchOptions: minimatch.IOptions = { nocase: true };
+const defaultMinimatchOptions: IOptions = { nocase: true };
 const defaultConfigGlob = '{cspell.json,.cspell.json}';
-const defaultConfigGlobOptions: minimatch.IOptions = defaultMinimatchOptions;
+const defaultConfigGlobOptions: IOptions = defaultMinimatchOptions;
 
 const nullEmitter = () => {
     /* empty */
@@ -122,7 +122,7 @@ export class CSpellApplicationConfiguration {
     readonly local: string;
 
     readonly configGlob: string = defaultConfigGlob;
-    readonly configGlobOptions: minimatch.IOptions = defaultConfigGlobOptions;
+    readonly configGlobOptions: IOptions = defaultConfigGlobOptions;
     readonly excludes: GlobSrcInfo[];
     readonly root: string;
 

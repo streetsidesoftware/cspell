@@ -7,6 +7,24 @@
   "bin": {
     "cspell": "bin.js"
   },
+  "exports": {
+    ".": "./dist/index",
+    "./application": "./dist/application.js",
+    "./cli": "./dist/app.js"
+  },
+  "typesVersions": {
+    ">=4.0": {
+      "cli": [
+        "dist/app"
+      ],
+      "dist/*": [
+        "dist/*"
+      ],
+      "*": [
+        "dist/*"
+      ]
+    }
+  },
   "files": [
     "bin.js",
     "dist/**",
