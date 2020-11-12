@@ -9,7 +9,7 @@ import { shouldCheckRepo } from './shouldCheckRepo';
 
 const config = readConfig();
 const cspellArgs = '-u';
-const jsCspell = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
+const jsCspell = Path.resolve(__dirname, '..', '..', 'packages', 'cspell', 'bin.js');
 
 const cspellCommand = `node ${jsCspell} ${cspellArgs}`;
 

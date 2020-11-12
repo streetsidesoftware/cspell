@@ -35,9 +35,9 @@ jobs:
 
       - run: npm run test-spec
 
-      - run: node ./bin.js trace test
+      - run: node ./packages/cspell/bin.js trace test
 
-      - run: node ./bin.js "**/{*.ts,*.md}"
+      - run: node ./packages/cspell/bin.js "**/{*.ts,*.md}"
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
