@@ -1,6 +1,6 @@
 /**
  * Mirror of minimatch.IOptions
- * cspell:ignore nobrace noglobstar extglob noext nonull nocomment nonegate
+ * cspell:ignore nobrace noglobstar extglob noext nocase nonull nocomment nonegate
  */
 export interface IOptions {
     /**
