@@ -6,8 +6,7 @@ import * as path from 'path';
 import { ReplaceMap } from '../Settings';
 import { genSequence } from 'gensequence';
 import { readLines } from '../util/fileReader';
-import { Stats } from 'fs-extra';
-import * as fs from 'fs-extra';
+import { stat } from 'fs-extra';
 
 const MAX_AGE = 10000;
 
@@ -76,7 +75,7 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
-        const pStat = fs.stat(entry.uri).catch(() => undefined);
+        const pStat = stat(entry.uri).catch(() => undefined);
         const [state, oldState] = await Promise.all([pStat, entry.state]);
         if (entry.ts === now && (state?.mtimeMs !== oldState?.mtimeMs || state?.size !== oldState?.size)) {
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
@@ -90,7 +89,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         uri,
         options,
         ts: now,
-        state: fs.stat(uri).catch(() => undefined),
+        state: stat(uri).catch(() => undefined),
         dictionary,
     };
 }
@@ -129,3 +128,37 @@ export const testing = {
     loadEntry,
     load,
 };
+
+/**
+ * Copied from the Node definition to avoid a dependency upon a specific version of Node
+ */
+interface StatsBase<T> {
+    isFile(): boolean;
+    isDirectory(): boolean;
+    isBlockDevice(): boolean;
+    isCharacterDevice(): boolean;
+    isSymbolicLink(): boolean;
+    isFIFO(): boolean;
+    isSocket(): boolean;
+
+    dev: T;
+    ino: T;
+    mode: T;
+    nlink: T;
+    uid: T;
+    gid: T;
+    rdev: T;
+    size: T;
+    blksize: T;
+    blocks: T;
+    atimeMs: T;
+    mtimeMs: T;
+    ctimeMs: T;
+    birthtimeMs: T;
+    atime: Date;
+    mtime: Date;
+    ctime: Date;
+    birthtime: Date;
+}
+
+export type Stats = StatsBase<number>;
