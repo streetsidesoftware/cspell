@@ -23,7 +23,7 @@
     "pub-version-grad": "lerna version --conventional-graduate",
     "pub": "npm install && npm test && lerna publish from-git",
     "pub-next": "npm install && npm test && lerna publish from-git --dist-tag next",
-    "symlink": "node build_tools/bin/symlink.js packages",
+    "symlink": "node build_tools/bin/symlink.js packages test-packages",
     "test-spec": "lerna run test-spec",
     "test-ts": "lerna run test-ts",
     "test-watch": "lerna run --parallel test-watch",

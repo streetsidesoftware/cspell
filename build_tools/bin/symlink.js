@@ -59,10 +59,20 @@ async function readPackage(file) {
 
 /**
  *
+ * @param {string[]} dirs
+ * @returns {Package[]} returns the contents of package.json keyed by the directory
+ */
+async function readPackages(dirs) {
+    const packagesFoundInDirs = await Promise.all(dirs.map(readPackagesForDir));
+    return packagesFoundInDirs.reduce((acc, dirs) => acc.concat(dirs), []);
+}
+
+/**
+ *
  * @param {string} dir
  * @returns {Package[]} returns the contents of package.json keyed by the directory
  */
-async function readPackages(dir) {
+async function readPackagesForDir(dir) {
     const packageDirs = await readdir(dir);
 
     const packages = [];
@@ -116,8 +126,10 @@ async function symLinkPackages(packages) {
 }
 
 async function main() {
-    const packagesRoot = path.resolve(process.argv[2] || 'packages');
-    const packages = await readPackages(packagesRoot);
+    const params = process.argv.slice(2);
+    const packageDirs = params.length ? params : ['packages'];
+    const packagesRoots = packageDirs.map((p) => path.resolve(p));
+    const packages = await readPackages(packagesRoots);
     symLinkPackages(packages);
 }
 
