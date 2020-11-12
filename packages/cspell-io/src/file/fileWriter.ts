@@ -3,11 +3,11 @@ import * as zlib from 'zlib';
 import * as stream from 'stream';
 import { iterableToStream } from 'iterable-to-stream';
 
-export function writeToFile(filename: string, data: string): fs.WriteStream {
+export function writeToFile(filename: string, data: string): NodeJS.WritableStream {
     return writeToFileIterable(filename, [data]);
 }
 
-export function writeToFileIterable(filename: string, data: Iterable<string>): fs.WriteStream {
+export function writeToFileIterable(filename: string, data: Iterable<string>): NodeJS.WritableStream {
     const sourceStream = iterableToStream(data);
     const writeStream = fs.createWriteStream(filename);
     const zip = filename.match(/\.gz$/) ? zlib.createGzip() : new stream.PassThrough();
