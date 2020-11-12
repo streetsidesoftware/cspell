@@ -1,5 +1,5 @@
-# Test cspell-io
+# External Dependency Test
 
 This package is NOT to be published.
 
-External dependency test of cspell-io.
+External dependency test of `cspell`.
