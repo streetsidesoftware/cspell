@@ -44,6 +44,7 @@ function readJsonFile(fileRef: ImportFileRef): CSpellSettings {
         s = json.parse(fs.readFileSync(filename).toString());
     } catch (err) {
         fileRef.error = format('Failed to read "%s": %o', filename, err);
+        logError(fileRef.error);
     }
     s.__importRef = fileRef;
     return s;
