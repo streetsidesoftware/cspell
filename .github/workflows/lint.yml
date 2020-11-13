@@ -2,12 +2,24 @@ name: Lint
 on:
   pull_request:
     paths:
-      - "**/.eslintignore"
-      - "**/*.{js,ts,md,yaml,yml,json}"
+      - ".eslint*"
+      - ".prettier*"
+      - "**/*.js"
+      - "**/*.ts"
+      - "**/*.md"
+      - "**/*.json"
+      - "**/*.yml"
+      - "**/*.yaml"
   push:
     paths:
-      - "**/.eslintignore"
-      - "**/*.{js,ts,md,yaml,yml,json}"
+      - ".eslint*"
+      - ".prettier*"
+      - "**/*.js"
+      - "**/*.ts"
+      - "**/*.md"
+      - "**/*.json"
+      - "**/*.yml"
+      - "**/*.yaml"
     branches-ignore:
       - "dependabot/*"
 
