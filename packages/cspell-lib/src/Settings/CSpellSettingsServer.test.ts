@@ -7,6 +7,7 @@ import {
     checkFilenameMatchesGlob,
     calcOverrideSettings,
     getSources,
+    extractImportErrors,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellUserSettings } from './CSpellSettingsDef';
@@ -149,7 +150,16 @@ describe('Validate CSpellSettingsServer', () => {
 
     test('tests loading a cSpell.json with a missing import file', () => {
         const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import-missing.json');
-        expect(() => readSettings(filename)).toThrow("Cannot find module '../intentionally-missing-file.json'");
+        const settings = readSettings(filename);
+        expect(settings.__importRef).toBeUndefined();
+        expect(settings.__imports?.size).toBe(2);
+        const errors = extractImportErrors(settings);
+        expect(errors).toHaveLength(1);
+        expect(errors.map((ref) => ref.error)).toContainEqual(
+            expect.stringMatching('ENOENT: no such file or directory')
+        );
+        expect(errors.map((ref) => ref.error)).toContainEqual(expect.stringMatching('intentionally-missing-file.json'));
+        expect(errors.map((ref) => ref.error)).toContainEqual(expect.stringMatching('Failed to read'));
     });
 
     test('makes sure global settings is an object', () => {
@@ -170,6 +180,7 @@ describe('Validate CSpellSettingsServer', () => {
         const settings = getDefaultSettings();
         const sources = getSources(settings);
         const sourceNames = sources.map((s) => s.name || '?');
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         expect(sourceNames).toEqual(expect.arrayContaining([_defaultSettings.name!]));
     });
 });

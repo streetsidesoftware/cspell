@@ -116,7 +116,7 @@ const getSettings = (function () {
             settings = mergeSettings(_defaultSettings, jsonSettings);
             settings.name = jsonSettings.name || settings.name;
         }
-        return settings!;
+        return settings;
     };
 })();
 
