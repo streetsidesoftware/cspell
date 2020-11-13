@@ -1,9 +1,10 @@
 import * as Path from 'path';
-import { exec } from './sh';
+import { exec, execAsync } from './sh';
 import * as Config from './config';
 import * as Shell from 'shelljs';
 import * as fs from 'fs';
 import { ShouldCheckOptions, shouldCheckRepo } from './shouldCheckRepo';
+import { formatExecOutput, logWithPrefix } from './outputHelper';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'repositories'));
 
@@ -38,10 +39,33 @@ export function updateRepository(path: string | undefined = '', useRemote = fals
     }
     const remote = useRemote ? '--remote' : '';
     const init = useRemote ? '' : '--init';
-    Shell.pushd(repositoryDir);
+    Shell.pushd('-q', repositoryDir);
     exec(`git submodule update --depth 1 ${remote} ${init} -- ${JSON.stringify(path)}`, { echo: true, bail: true });
-    Shell.popd();
+    Shell.popd('-q');
 
+    return true;
+}
+
+export async function updateRepositoryAsync(prefix: string, path: string, useRemote = false): Promise<boolean> {
+    path = path.replace(/^repositories/, '');
+
+    if (!path || !fs.existsSync(Path.join(repositoryDir, path))) {
+        if (path) {
+            console.log(`${prefix}Repository: '${path}' not found.`);
+        }
+        return Promise.resolve(false);
+    }
+    const remote = useRemote ? '--remote' : '';
+    const init = useRemote ? '' : '--init';
+    const command = `git submodule update --depth 1 ${remote} ${init} -- ${JSON.stringify(path)}`;
+    logWithPrefix(prefix, command);
+    Shell.pushd('-q', repositoryDir);
+    const r = execAsync(command, { echo: false, bail: false });
+    Shell.popd('-q');
+    const output = formatExecOutput(await r);
+    if (output) {
+        logWithPrefix(prefix, output);
+    }
     return true;
 }
 

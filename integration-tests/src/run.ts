@@ -2,6 +2,14 @@ import { check } from './check';
 import { addRepository, listRepositories } from './repositoryHelper';
 import { createCommand } from 'commander';
 import * as commander from 'commander';
+import os from 'os';
+
+const defaultParallel = Math.max(os.cpus().length / 2, 1);
+
+function processParallelArg(value: string): number {
+    const v = parseInt(value, 10);
+    return v < 1 ? defaultParallel : v;
+}
 
 function run(program: commander.Command) {
     program
@@ -9,6 +17,7 @@ function run(program: commander.Command) {
         .option('-u, --update', 'Update snapshot', false)
         .option('-f, --fail', 'Fail on first error.', false)
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
+        .option('-p, --parallelLimit <number>', 'Max number of parallel checks.', /^[1-9][0-9]?$/, `${defaultParallel}`)
         .description('Run the integration tests, checking the spelling results against the various repositories', {
             pattern: 'Only check repositories whose name contain the pattern.',
         })
@@ -19,10 +28,12 @@ function run(program: commander.Command) {
                     update?: boolean;
                     fail?: boolean;
                     exclude?: string[];
+                    parallelLimit: string;
                 }
             ) => {
                 const { update = false, fail = false, exclude = [] } = options;
-                check(patterns || [], { update, fail, exclude });
+                const parallelLimit = processParallelArg(options.parallelLimit);
+                check(patterns || [], { update, fail, exclude, parallelLimit });
             }
         );
 
