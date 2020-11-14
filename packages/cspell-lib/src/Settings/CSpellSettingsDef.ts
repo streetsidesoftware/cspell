@@ -14,7 +14,7 @@ export interface CSpellSettings extends FileSettings, LegacySettings {
 
 export interface ImportFileRef {
     filename: string;
-    error?: string;
+    error?: Error;
     sources?: Source[];
 }
 
