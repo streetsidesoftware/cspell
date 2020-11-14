@@ -3,6 +3,7 @@
 // See: https://github.com/microsoft/vscode-languageserver-node/blob/master/build/bin/linking.js
 
 const path = require('path');
+// eslint-disable-next-line node/no-unpublished-require
 const shell = require('shelljs');
 
 const fs = require('fs');
