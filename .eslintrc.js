@@ -6,7 +6,13 @@ const config = {
         es2020: true,
         node: true,
     },
-    extends: ['eslint:recommended', 'plugin:node/recommended', 'plugin:prettier/recommended'],
+    extends: [
+        'eslint:recommended',
+        'plugin:node/recommended',
+        'plugin:import/errors',
+        'plugin:import/warnings',
+        'plugin:prettier/recommended',
+    ],
     parserOptions: {
         ecmaVersion: 11,
         sourceType: 'module',
@@ -14,7 +20,7 @@ const config = {
     overrides: [
         {
             files: '**/*.ts',
-            extends: 'plugin:@typescript-eslint/recommended',
+            extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
             parser: '@typescript-eslint/parser',
             plugins: ['@typescript-eslint'],
             rules: {
