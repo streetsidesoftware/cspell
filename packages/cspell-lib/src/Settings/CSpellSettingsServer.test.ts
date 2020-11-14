@@ -155,11 +155,10 @@ describe('Validate CSpellSettingsServer', () => {
         expect(settings.__imports?.size).toBe(2);
         const errors = extractImportErrors(settings);
         expect(errors).toHaveLength(1);
-        expect(errors.map((ref) => ref.error)).toContainEqual(
-            expect.stringMatching('ENOENT: no such file or directory')
+        expect(errors.map((ref) => ref.error.toString())).toContainEqual(
+            expect.stringMatching('intentionally-missing-file.json')
         );
-        expect(errors.map((ref) => ref.error)).toContainEqual(expect.stringMatching('intentionally-missing-file.json'));
-        expect(errors.map((ref) => ref.error)).toContainEqual(expect.stringMatching('Failed to read'));
+        expect(errors.map((ref) => ref.error.toString())).toContainEqual(expect.stringMatching('Failed to read'));
     });
 
     test('makes sure global settings is an object', () => {

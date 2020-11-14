@@ -15,7 +15,6 @@ import * as util from '../util/util';
 import ConfigStore from 'configstore';
 import minimatch from 'minimatch';
 import resolveFrom from 'resolve-from';
-import { format } from 'util';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -42,7 +41,7 @@ function readJsonFile(fileRef: ImportFileRef): CSpellSettings {
     try {
         s = json.parse(fs.readFileSync(filename).toString());
     } catch (err) {
-        fileRef.error = format('Failed to read "%s": %o', filename, err);
+        fileRef.error = new Error(`Failed to read config file: "${filename}"`);
     }
     s.__importRef = fileRef;
     return s;
@@ -306,7 +305,7 @@ function tryResolve(filename: string, relativeTo: string): ImportFileRef {
         // Failed to resolve a relative module request
         return {
             filename: filename,
-            error: 'Failed to resolve file path.',
+            error: new Error(`Failed to resolve file: "${filename}"`),
         };
     }
 }
@@ -386,7 +385,15 @@ function mergeImportRefs(left: CSpellSettings, right: CSpellSettings): Imports {
     return imports.size ? imports : undefined;
 }
 
-export function extractImportErrors(settings: CSpellSettings): ImportFileRef[] {
+export interface ImportFileRefWithError extends ImportFileRef {
+    error: Error;
+}
+
+function isImportFileRefWithError(ref: ImportFileRef): ref is ImportFileRefWithError {
+    return !!ref.error;
+}
+
+export function extractImportErrors(settings: CSpellSettings): ImportFileRefWithError[] {
     const imports = mergeImportRefs(settings, {});
-    return !imports ? [] : [...imports.values()].filter((ref) => ref.error);
+    return !imports ? [] : [...imports.values()].filter(isImportFileRefWithError);
 }

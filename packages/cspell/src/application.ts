@@ -5,7 +5,7 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
-import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
+import { traceWords, TraceResult, CheckTextInfo, extractImportErrors } from 'cspell-lib';
 import * as Validator from 'cspell-lib';
 import getStdin = require('get-stdin');
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
@@ -57,6 +57,7 @@ export interface RunResult {
     files: number;
     filesWithIssues: Set<string>;
     issues: number;
+    errors: number;
 }
 
 export type Issue = cspell.TextDocumentOffset;
@@ -86,9 +87,15 @@ export interface DebugEmitter {
     (message: string): void;
 }
 
-export interface ErrorEmitter {
+export interface ErrorEmitterVoid {
+    (message: string, error: Error): void;
+}
+
+export interface ErrorEmitterPromise {
     (message: string, error: Error): Promise<void>;
 }
+
+type ErrorEmitter = ErrorEmitterVoid | ErrorEmitterPromise;
 
 export interface SpellingErrorEmitter {
     (issue: Issue): void;
@@ -150,19 +157,39 @@ interface FileConfigInfo {
     languageIds: string[];
 }
 
-export function lint(files: string[], options: CSpellApplicationOptions, emitters: Emitters) {
+interface FileResult {
+    fileInfo: FileInfo;
+    processed: boolean;
+    issues: cspell.TextDocumentOffset[];
+    errors: number;
+    configErrors: number;
+    elapsedTimeMs: number;
+}
+
+export function lint(files: string[], options: CSpellApplicationOptions, emitters: Emitters): Promise<RunResult> {
     const cfg = new CSpellApplicationConfiguration(files, options, emitters);
     return runLint(cfg);
 }
 
 function runLint(cfg: CSpellApplicationConfiguration) {
+    const configErrors = new Set<string>();
+
     return run();
 
-    async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<number> {
+    async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<FileResult> {
         const settingsFromCommandLine = util.clean({
             languageId: cfg.options.languageId || undefined,
             language: cfg.local || undefined,
         });
+
+        const result: FileResult = {
+            fileInfo,
+            issues: [],
+            processed: false,
+            errors: 0,
+            configErrors: 0,
+            elapsedTimeMs: 0,
+        };
 
         const { filename, text } = fileInfo;
         const info = calcFinalConfigInfo(configInfo, settingsFromCommandLine, filename, text);
@@ -172,22 +199,37 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             `Filename: ${filename}, Extension: ${path.extname(filename)}, LanguageIds: ${info.languageIds.toString()}`
         );
 
-        if (!info.configInfo.config.enabled) return 0;
+        if (!info.configInfo.config.enabled) return result;
+        const importErrors = extractImportErrors(info.configInfo.config);
+        importErrors.forEach((ref) => {
+            const key = ref.error.toString();
+            if (configErrors.has(key)) return;
+            configErrors.add(key);
+            result.configErrors += 1;
+            cfg.emitters.error('Import Error', ref.error);
+        });
 
         const debugCfg = { config: { ...config, source: null }, source };
         cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
         const startTime = Date.now();
-        const wordOffsets = await cspell.validateText(text, info.configInfo.config);
-        const issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets);
-        const elapsed = (Date.now() - startTime) / 1000.0;
+        try {
+            const wordOffsets = await cspell.validateText(text, info.configInfo.config);
+            result.processed = true;
+            result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets);
+        } catch (e) {
+            cfg.emitters.error(`Failed to process "${filename}"`, e);
+            result.errors += 1;
+        }
+        result.elapsedTimeMs = Date.now() - startTime;
+        const elapsed = result.elapsedTimeMs / 1000.0;
         const dictionaries = config.dictionaries || [];
         cfg.info(
-            `Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${issues.length} ${elapsed}S`,
+            `Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`,
             MessageTypes.Info
         );
         cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
-        issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
-        return issues.length;
+        result.issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
+        return result;
     }
 
     /**
@@ -210,6 +252,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             files: 0,
             filesWithIssues: new Set<string>(),
             issues: 0,
+            errors: 0,
         };
 
         for (const fileP of files) {
@@ -219,10 +262,12 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             }
             const r = await processFile(file, configInfo);
             status.files += 1;
-            if (r) {
+            if (r.issues || r.errors) {
                 status.filesWithIssues.add(file.filename);
-                status.issues += r;
+                status.issues += r.issues.length;
+                status.errors += r.errors;
             }
+            status.errors += r.configErrors;
         }
 
         return status;
