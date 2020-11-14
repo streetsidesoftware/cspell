@@ -28,8 +28,7 @@ function genIssueEmitter(template: string) {
 }
 
 function errorEmitter(message: string, error: Error) {
-    console.error(chalk.red(message), error);
-    return Promise.resolve();
+    console.error(chalk.red(message), error.toString());
 }
 
 function infoEmitter(message: string, msgType: App.MessageType) {
