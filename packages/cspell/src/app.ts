@@ -11,6 +11,7 @@ interface Options extends CSpellApplicationOptions {
     summary: boolean;
     issues: boolean;
     silent: boolean;
+    mustFindFiles: boolean;
 }
 type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
@@ -75,6 +76,8 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
     const prog = program || commander;
     const args = argv || process.argv;
 
+    prog.passCommandToAction(false);
+
     return new Promise((resolve, rejects) => {
         let showHelp = true;
 
@@ -94,7 +97,10 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                 '--local <local>',
                 'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
             )
-            .option('--legacy', 'Legacy output')
+            .option(
+                '--language-id <language>',
+                'Force programming language for unknown extensions. i.e. "php" or "scala"'
+            )
             .option(
                 '--languageId <language>',
                 'Force programming language for unknown extensions. i.e. "php" or "scala"'
@@ -107,11 +113,15 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .option('--no-summary', 'Turn off summary message in console')
             .option('-s, --silent', 'Silent mode, suppress error messages')
             .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
+            .option('--must-find-files', 'Error if no files are found', true)
+            .option('--no-must-find-files', 'Do not error is no files are found')
             // The following options are planned features
             // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
             // .option('--force', 'Force the exit value to always be 0')
+            .option('--legacy', 'Legacy output')
             .arguments('<files...>')
             .action((files: string[] | undefined, options: Options) => {
+                const { mustFindFiles } = options;
                 const emitters: App.Emitters = getEmitters(options);
                 if (!files || !files.length) {
                     return;
@@ -126,15 +136,14 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                             result.filesWithIssues.size
                         );
                     }
-                    if (result.issues) {
+                    if (result.issues || result.errors || (mustFindFiles && !result.files)) {
                         throw new CheckFailed('check failed', 1);
                     }
                 });
             });
 
-        interface TraceCommandOptions {
-            parent: TraceOptions;
-        }
+        type TraceCommandOptions = TraceOptions;
+
         prog.command('trace')
             .description('Trace words')
             .option(
@@ -154,14 +163,12 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .arguments('<words...>')
             .action((words: string[], options: TraceCommandOptions) => {
                 showHelp = false;
-                return App.trace(words, options.parent).then((result) => {
+                return App.trace(words, options).then((result) => {
                     result.forEach(emitTraceResult);
                 });
             });
 
-        interface CheckCommandOptions {
-            parent: BaseOptions;
-        }
+        type CheckCommandOptions = BaseOptions;
 
         prog.command('check <files...>')
             .description('Spell check file(s) and display the result. The full file is displayed in color.')
@@ -178,7 +185,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                     console.log(chalk.yellowBright(`Check file: ${filename}`));
                     console.log();
                     try {
-                        const result = await checkText(filename, options.parent);
+                        const result = await checkText(filename, options);
                         for (const item of result.items) {
                             const fn =
                                 item.flagIE === App.IncludeExcludeFlag.EXCLUDE
