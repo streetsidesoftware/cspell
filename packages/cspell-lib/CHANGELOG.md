@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.3](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.2...cspell-lib@4.3.3) (2020-11-14)
+
+
+### Bug Fixes
+
+* Clean up handling of configuration errors. ([#572](https://github.com/streetsidesoftware/cspell/issues/572)) ([98f7b15](https://github.com/streetsidesoftware/cspell/commit/98f7b152d7c6d9674a81e9122c3f236057647191))
+* Issue with crash on missing files. ([#569](https://github.com/streetsidesoftware/cspell/issues/569)) ([52cf0b9](https://github.com/streetsidesoftware/cspell/commit/52cf0b9aad944fcdee1490aaea4a4696e7dd6444))
+
+
+
+
+
 ## [4.3.2](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.1...cspell-lib@4.3.2) (2020-11-09)
 
 
