@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-
 import * as path from 'path';
-import * as program from 'commander';
+import * as commander from 'commander';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
-import { CSpellApplicationOptions, AppError, BaseOptions, checkText } from './application';
+import { CSpellApplicationOptions, BaseOptions, checkText } from './application';
 import * as App from './application';
 import chalk = require('chalk');
 
@@ -30,8 +28,7 @@ function genIssueEmitter(template: string) {
 }
 
 function errorEmitter(message: string, error: Error) {
-    console.error(chalk.red(message), error);
-    return Promise.resolve();
+    console.error(chalk.red(message), error.toString());
 }
 
 function infoEmitter(message: string, msgType: App.MessageType) {
@@ -67,159 +64,156 @@ function getEmitters(options: Options): App.Emitters {
         : templateIssue;
     const { silent = false, issues } = options;
     return {
-        issue: silent ? nullEmitter : issues ? genIssueEmitter(issueTemplate) : nullEmitter,
+        issue: silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate),
         error: silent ? asyncNullEmitter : errorEmitter,
-        info: silent ? nullEmitter : options.verbose ? infoEmitter : nullEmitter,
+        info: silent || !options.verbose ? nullEmitter : infoEmitter,
         debug: options.debug ? debugEmitter : nullEmitter,
     };
 }
 
-let showHelp = true;
+export async function run(program?: commander.Command, argv?: string[]): Promise<void> {
+    const prog = program || commander;
+    const args = argv || process.argv;
 
-program
-    .version(npmPackage.version)
-    .description('Spelling Checker for Code')
-    .option(
-        '-c, --config <cspell.json>',
-        'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
-    )
-    .option('--no-color', 'Turn off color.')
-    .option('--color', 'Force color');
+    return new Promise((resolve, rejects) => {
+        let showHelp = true;
 
-program
-    .option('-v, --verbose', 'display more information about the files being checked and the configuration')
-    .option(
-        '--local <local>',
-        'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
-    )
-    .option('--legacy', 'Legacy output')
-    .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
-    .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
-    .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
-    .option('--debug', 'Output information useful for debugging cspell.json files.')
-    .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
-    .option('--no-issues', 'Do not show the spelling errors.')
-    .option('--no-summary', 'Turn off summary message in console')
-    .option('-s, --silent', 'Silent mode, suppress error messages')
-    .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
-    // The following options are planned features
-    // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
-    // .option('--force', 'Force the exit value to always be 0')
-    .arguments('<files...>')
-    .action((files: string[] | undefined, options: Options) => {
-        const emitters: App.Emitters = getEmitters(options);
-        if (!files || !files.length) {
-            return;
-        }
-        showHelp = false;
-        App.lint(files, options, emitters).then(
-            (result) => {
-                if (options.summary && !options.silent) {
-                    console.error(
-                        'CSpell: Files checked: %d, Issues found: %d in %d files',
-                        result.files,
-                        result.issues,
-                        result.filesWithIssues.size
-                    );
+        prog.exitOverride();
+
+        prog.version(npmPackage.version)
+            .description('Spelling Checker for Code')
+            .option(
+                '-c, --config <cspell.json>',
+                'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+            )
+            .option('--no-color', 'Turn off color.')
+            .option('--color', 'Force color');
+
+        prog.option('-v, --verbose', 'display more information about the files being checked and the configuration')
+            .option(
+                '--local <local>',
+                'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+            )
+            .option('--legacy', 'Legacy output')
+            .option(
+                '--languageId <language>',
+                'Force programming language for unknown extensions. i.e. "php" or "scala"'
+            )
+            .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
+            .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
+            .option('--debug', 'Output information useful for debugging cspell.json files.')
+            .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
+            .option('--no-issues', 'Do not show the spelling errors.')
+            .option('--no-summary', 'Turn off summary message in console')
+            .option('-s, --silent', 'Silent mode, suppress error messages')
+            .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
+            // The following options are planned features
+            // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
+            // .option('--force', 'Force the exit value to always be 0')
+            .arguments('<files...>')
+            .action((files: string[] | undefined, options: Options) => {
+                const emitters: App.Emitters = getEmitters(options);
+                if (!files || !files.length) {
+                    return;
                 }
-                process.exit(result.issues ? 1 : 0);
-            },
-            (error: AppError) => {
-                console.error(error.message);
-                process.exit(1);
-            }
-        );
-    });
+                showHelp = false;
+                return App.lint(files, options, emitters).then((result) => {
+                    if (options.summary && !options.silent) {
+                        console.error(
+                            'CSpell: Files checked: %d, Issues found: %d in %d files',
+                            result.files,
+                            result.issues,
+                            result.filesWithIssues.size
+                        );
+                    }
+                    if (result.issues) {
+                        throw new CheckFailed('check failed', 1);
+                    }
+                });
+            });
 
-interface TraceCommandOptions {
-    parent: TraceOptions;
-}
-program
-    .command('trace')
-    .description('Trace words')
-    .option(
-        '-c, --config <cspell.json>',
-        'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
-    )
-    .option(
-        '--local <local>',
-        'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
-    )
-    .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
-    .option('--no-color', 'Turn off color.')
-    .option('--color', 'Force color')
-    .arguments('<words...>')
-    .action((words: string[], options: TraceCommandOptions) => {
-        showHelp = false;
-        App.trace(words, options.parent).then(
-            (result) => {
-                result.forEach(emitTraceResult);
-                process.exit(0);
-            },
-            (error: AppError) => {
-                console.error(error.message);
-                process.exit(1);
-            }
-        );
-    });
-
-interface CheckCommandOptions {
-    parent: BaseOptions;
-}
-
-program
-    .command('check <files...>')
-    .description('Spell check file(s) and display the result. The full file is displayed in color.')
-    .option(
-        '-c, --config <cspell.json>',
-        'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
-    )
-    .option('--no-color', 'Turn off color.')
-    .option('--color', 'Force color')
-    .action(async (files: string[], options: CheckCommandOptions) => {
-        showHelp = false;
-
-        for (const filename of files) {
-            console.log(chalk.yellowBright(`Check file: ${filename}`));
-            console.log();
-            try {
-                const result = await checkText(filename, options.parent);
-                for (const item of result.items) {
-                    const fn =
-                        item.flagIE === App.IncludeExcludeFlag.EXCLUDE
-                            ? chalk.gray
-                            : item.isError
-                            ? chalk.red
-                            : chalk.whiteBright;
-                    const t = fn(item.text);
-                    process.stdout.write(t);
-                }
-                console.log();
-            } catch (e) {
-                console.error(`Failed to read "${filename}"`);
-            }
-            console.log();
+        interface TraceCommandOptions {
+            parent: TraceOptions;
         }
-        process.exit(0);
-    });
+        prog.command('trace')
+            .description('Trace words')
+            .option(
+                '-c, --config <cspell.json>',
+                'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+            )
+            .option(
+                '--local <local>',
+                'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+            )
+            .option(
+                '--languageId <language>',
+                'Force programming language for unknown extensions. i.e. "php" or "scala"'
+            )
+            .option('--no-color', 'Turn off color.')
+            .option('--color', 'Force color')
+            .arguments('<words...>')
+            .action((words: string[], options: TraceCommandOptions) => {
+                showHelp = false;
+                return App.trace(words, options.parent).then((result) => {
+                    result.forEach(emitTraceResult);
+                });
+            });
 
-/*
-program
-    .command('init')
-    .description('(Alpha) Initialize a cspell.json file.')
-    .option('-o, --output <cspell.json>', 'define where to write file.')
-    .option('--extends <cspell.json>', 'extend an existing cspell.json file.')
-    .action((options: InitOptions) => {
-        showHelp = false;
-        CSpellApplication.createInit(options).then(
-            () => process.exit(0),
-            () => process.exit(1)
-        );
-        console.log('Init');
-    });
-*/
+        interface CheckCommandOptions {
+            parent: BaseOptions;
+        }
 
-const usage = `
+        prog.command('check <files...>')
+            .description('Spell check file(s) and display the result. The full file is displayed in color.')
+            .option(
+                '-c, --config <cspell.json>',
+                'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
+            )
+            .option('--no-color', 'Turn off color.')
+            .option('--color', 'Force color')
+            .action(async (files: string[], options: CheckCommandOptions) => {
+                showHelp = false;
+
+                for (const filename of files) {
+                    console.log(chalk.yellowBright(`Check file: ${filename}`));
+                    console.log();
+                    try {
+                        const result = await checkText(filename, options.parent);
+                        for (const item of result.items) {
+                            const fn =
+                                item.flagIE === App.IncludeExcludeFlag.EXCLUDE
+                                    ? chalk.gray
+                                    : item.isError
+                                    ? chalk.red
+                                    : chalk.whiteBright;
+                            const t = fn(item.text);
+                            process.stdout.write(t);
+                        }
+                        console.log();
+                    } catch (e) {
+                        console.error(`Failed to read "${filename}"`);
+                    }
+                    console.log();
+                }
+            });
+
+        /*
+        program
+            .command('init')
+            .description('(Alpha) Initialize a cspell.json file.')
+            .option('-o, --output <cspell.json>', 'define where to write file.')
+            .option('--extends <cspell.json>', 'extend an existing cspell.json file.')
+            .action((options: InitOptions) => {
+                showHelp = false;
+                CSpellApplication.createInit(options).then(
+                    () => process.exit(0),
+                    () => process.exit(1)
+                );
+                console.log('Init');
+            });
+        */
+
+        const usage = `
 
 Examples:
     cspell "*.js"                   Check all .js files in the current directory
@@ -229,17 +223,31 @@ Examples:
     cat LICENSE | cspell stdin      Read from stdin the contents of LICENSE
 `;
 
-program.on('--help', function () {
-    console.log(usage);
-});
+        prog.on('--help', function () {
+            console.log(usage);
+            showHelp = false;
+        });
 
-if (process.argv.length > 2) {
-    program.parse(process.argv);
-}
+        function reject(e: unknown) {
+            if (showHelp) {
+                prog.help();
+            }
+            rejects(e);
+        }
 
-if (showHelp) {
-    program.outputHelp();
-    process.exit(1);
+        try {
+            prog.parseAsync(args)
+                .then(() => {
+                    if (showHelp) {
+                        prog.help();
+                    }
+                    resolve();
+                })
+                .catch(reject);
+        } catch (e) {
+            reject(e);
+        }
+    });
 }
 
 function emitTraceResult(r: App.TraceResult) {
@@ -275,4 +283,10 @@ function formatIssue(template: string, issue: App.Issue) {
         .replace(/\$\{row\}/, row.toString())
         .replace(/\$\{col\}/, col.toString())
         .replace(/\$\{text\}/, text);
+}
+
+export class CheckFailed extends Error {
+    constructor(message: string, readonly errorCode: number) {
+        super(message);
+    }
 }
