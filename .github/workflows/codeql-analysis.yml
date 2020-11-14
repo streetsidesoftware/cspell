@@ -10,7 +10,7 @@ on:
       - master
       - cspell4
   schedule:
-    - cron: '0 23 * * 0'
+    - cron: "0 23 * * 0"
 
 jobs:
   analyze:
@@ -18,13 +18,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: 'javascript'
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: "javascript"
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
