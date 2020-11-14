@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/streetsidesoftware/cspell/compare/cspell@4.1.6...cspell@4.2.0) (2020-11-14)
+
+
+### Features
+
+* mark fail on config error a feature ([5a41967](https://github.com/streetsidesoftware/cspell/commit/5a41967a69ef32d83c32264fa807b3db4dbcc794))
+
+
+
+
+
 ## [4.1.6](https://github.com/streetsidesoftware/cspell/compare/cspell@4.1.5...cspell@4.1.6) (2020-11-14)
 
 ### Bug Fixes
