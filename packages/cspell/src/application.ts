@@ -5,7 +5,7 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
-import { traceWords, TraceResult, CheckTextInfo, extractImportErrors } from 'cspell-lib';
+import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
 import * as Validator from 'cspell-lib';
 import getStdin = require('get-stdin');
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
@@ -128,6 +128,7 @@ export class CSpellApplicationConfiguration {
     readonly uniqueFilter: (issue: Issue) => boolean;
     readonly local: string;
 
+    readonly configFile: string | undefined;
     readonly configGlob: string = defaultConfigGlob;
     readonly configGlobOptions: minimatch.IOptions = defaultConfigGlobOptions;
     readonly excludes: GlobSrcInfo[];
@@ -137,8 +138,7 @@ export class CSpellApplicationConfiguration {
         this.root = path.resolve(options.root || process.cwd());
         this.info = emitters.info || nullEmitter;
         this.debug = emitters.debug || ((msg: string) => this.info(msg, MessageTypes.Debug));
-        this.configGlob = options.config || this.configGlob;
-        this.configGlobOptions = options.config ? {} : this.configGlobOptions;
+        this.configFile = options.config;
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.logIssue = emitters.issue || nullEmitter;
         this.local = options.local || '';
@@ -200,14 +200,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         );
 
         if (!info.configInfo.config.enabled) return result;
-        const importErrors = extractImportErrors(info.configInfo.config);
-        importErrors.forEach((ref) => {
-            const key = ref.error.toString();
-            if (configErrors.has(key)) return;
-            configErrors.add(key);
-            result.configErrors += 1;
-            cfg.emitters.error('Import Error', ref.error);
-        });
+        result.configErrors += reportConfigurationErrors(info.configInfo.config);
 
         const debugCfg = { config: { ...config, source: null }, source };
         cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
@@ -248,12 +241,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
     }
 
     async function processFiles(files: Iterable<Promise<FileInfo>>, configInfo: ConfigInfo): Promise<RunResult> {
-        const status: RunResult = {
-            files: 0,
-            filesWithIssues: new Set<string>(),
-            issues: 0,
-            errors: 0,
-        };
+        const status: RunResult = runResult();
 
         for (const fileP of files) {
             const file = await fileP;
@@ -262,7 +250,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             }
             const r = await processFile(file, configInfo);
             status.files += 1;
-            if (r.issues || r.errors) {
+            if (r.issues.length || r.errors) {
                 status.filesWithIssues.add(file.filename);
                 status.issues += r.issues.length;
                 status.errors += r.errors;
@@ -273,13 +261,42 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         return status;
     }
 
-    async function run(): Promise<RunResult> {
-        header();
+    function reportConfigurationErrors(config: cspell.CSpellSettings): number {
+        const errors = cspell.extractImportErrors(config);
+        let count = 0;
+        errors.forEach((ref) => {
+            const key = ref.error.toString();
+            if (configErrors.has(key)) return;
+            configErrors.add(key);
+            count += 1;
+            cfg.emitters.error('Configuration', ref.error);
+        });
+        return count;
+    }
 
+    async function readConfig(): Promise<ConfigInfo> {
+        if (cfg.configFile) {
+            const config = cspell.readSettings(cfg.configFile);
+            return { source: cfg.configFile, config };
+        }
         const configFiles = (await globP(cfg.configGlob, cfg.configGlobOptions)).filter(util.uniqueFn());
         cfg.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`, MessageTypes.Info);
         const config = cspell.readSettingsFiles(configFiles);
-        const configInfo: ConfigInfo = { source: configFiles.join(' || '), config };
+        return { source: configFiles.join(' || '), config };
+    }
+
+    function countConfigErrors(configInfo: ConfigInfo): number {
+        return reportConfigurationErrors(configInfo.config);
+    }
+
+    async function run(): Promise<RunResult> {
+        header();
+
+        const configInfo: ConfigInfo = await readConfig();
+
+        const configErrors = countConfigErrors(configInfo);
+        if (configErrors) return runResult({ errors: configErrors });
+
         // Get Exclusions from the config files.
         const { root } = cfg;
         const globOptions = { root, cwd: root };
@@ -332,6 +349,11 @@ Options:
         const result = files.filter((filename) => !isExcluded(filename, excludeGlobs));
         return result;
     }
+}
+
+function runResult(init: Partial<RunResult> = {}): RunResult {
+    const { files = 0, filesWithIssues = new Set<string>(), issues = 0, errors = 0 } = init;
+    return { files, filesWithIssues, issues, errors };
 }
 
 interface ExtractPatternResult {
