@@ -23,7 +23,7 @@ const config = {
                 'node/no-missing-import': [
                     'error',
                     {
-                        tryExtensions: ['.d.ts', '.ts'],
+                        tryExtensions: ['.js', '.d.ts', '.ts'],
                     },
                 ],
                 'node/no-unsupported-features/es-syntax': [
@@ -35,13 +35,10 @@ const config = {
             },
         },
         {
-            files: '**/*.test.{ts,js}',
+            files: ['**/*.test.ts', '**/*.spec.ts'],
             extends: 'plugin:jest/recommended',
             env: {
                 jest: true,
-            },
-            rules: {
-                'node/no-unpublished-require': 0,
             },
         },
     ],
