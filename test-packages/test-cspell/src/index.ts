@@ -1,9 +1,3 @@
-console.log(process.version);
-
-if (process.version < 'v12') {
-    throw new Error('Exports are only supported by Node 12 and above.');
-}
-
 import { assert } from 'console';
 import * as cspell from 'cspell';
 import * as cli from 'cspell/dist/app';
