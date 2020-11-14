@@ -1,4 +1,5 @@
 # cspell-trie
+
 Trie library for use with cspell
 
 This library allows easily building of a [Trie](https://en.wikipedia.org/wiki/Trie)
@@ -7,12 +8,11 @@ from a word list.
 The resulting trie can then be compressed into a
 [DAFSA|DAWG](https://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton).
 
-
 ## Tool
 
-*cspell-trie* is both a tool and a library.
+_cspell-trie_ is both a tool and a library.
 
-Give a list of words, *cspell-trie* will turn it into a *trie* file.
+Give a list of words, _cspell-trie_ will turn it into a _trie_ file.
 
 ### Installation
 
@@ -26,18 +26,17 @@ npm install -g cspell-trie
 cspell-trie --help
 ```
 
-### Creating a *trie* file
+### Creating a _trie_ file
 
 ```sh
 cspell-trie create filename.txt -o filename.trie
 ```
 
-### Reading a *trie* file
+### Reading a _trie_ file
 
 ```sh
 cspell-trie reader filename.trie
 ```
-
 
 ## File Format
 
@@ -49,11 +48,13 @@ base=10
 ```
 
 The header has two parts.
-* TrieXv1 -- the identifiers
-* base -- offsets are stored using the base (10, 16, 32) are common.
-  higher the base, the smaller the file.  Max is 36
+
+-   TrieXv1 -- the identifiers
+-   base -- offsets are stored using the base (10, 16, 32) are common.
+    higher the base, the smaller the file. Max is 36
 
 ### Data
+
 The first line of data is always a `*`
 
 Each line is a node in the Trie.
@@ -62,32 +63,34 @@ The format of each line is:
 
 `star [char index [, char index]*]`
 
-* star - the presence of a star indicates that the node is the ending of a word.
-* char - a character that can be appended to the word followed by the node at index.
-* index - the offset in the list of nodes to continue appending
+-   star - the presence of a star indicates that the node is the ending of a word.
+-   char - a character that can be appended to the word followed by the node at index.
+-   index - the offset in the list of nodes to continue appending
 
 In other words, each line has an optional `*` followed by 0 or more (char, index) pairs.
 A missing index implies an index of 0, which is the end of word flag.
 
-**Example Line:** `*s1,e` -- The word can stop here, or add an **s** and continue at node *1*, or add an **e**
+**Example Line:** `*s1,e` -- The word can stop here, or add an **s** and continue at node _1_, or add an **e**
 
 ### Example:
 
 **Word List:**
-- walk
-- walked
-- walker
-- walking
-- walks
-- talk
-- talks
-- talked
-- talker
-- talking
+
+-   walk
+-   walked
+-   walker
+-   walking
+-   walks
+-   talk
+-   talks
+-   talked
+-   talker
+-   talking
 
 becomes
 
 **Output:** (Offsets are added for clarity, but do not exist in output)
+
 ```text
 Offset  Output
 ------- --------

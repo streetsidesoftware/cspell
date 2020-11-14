@@ -8,7 +8,6 @@ on:
 
 jobs:
   test:
-
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -24,17 +23,17 @@ jobs:
           - macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2.1.2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - run: npm ci
-    - run: npm test
-    - run: node ./bin.js trace test
-    - run: node ./bin.js "**/{*.ts,*.md}"
+      - run: npm ci
+      - run: npm test
+      - run: node ./bin.js trace test
+      - run: node ./bin.js "**/{*.ts,*.md}"
 
-    # Ensure the repository is clean after build & test
-    - run: git --no-pager diff --compact-summary --exit-code
+      # Ensure the repository is clean after build & test
+      - run: git --no-pager diff --compact-summary --exit-code
