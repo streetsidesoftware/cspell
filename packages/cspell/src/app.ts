@@ -113,7 +113,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .option('--no-summary', 'Turn off summary message in console')
             .option('-s, --silent', 'Silent mode, suppress error messages')
             .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
-            .option('--must-find-files', 'Error if no files are found', false)
+            .option('--must-find-files', 'Error if no files are found', true)
             .option('--no-must-find-files', 'Do not error is no files are found')
             // The following options are planned features
             // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
