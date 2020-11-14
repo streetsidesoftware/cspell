@@ -27,18 +27,20 @@ type Test = [string, string[], ErrorCheck, boolean, boolean, boolean];
 const tests: Test[] = [
     t('test app no-args', [], 'outputHelp', true, true, false),
     t('test app current_file', [__filename], undefined, true, false, false),
+    t('test app current_file languageId', [__filename, '--languageId=typescript'], undefined, true, false, false),
     t('test app trace hello', ['trace', 'hello'], undefined, false, true, false),
     t('test app check LICENSE', ['check', pathRoot('LICENSE')], undefined, false, true, false),
     t('test app check missing', ['check', pathRoot('missing-file.txt')], undefined, true, true, false),
     t('test app LICENSE', [pathRoot('LICENSE')], undefined, true, false, false),
     t('test app samples/Dutch.txt', [pathSamples('Dutch.txt')], app.CheckFailed, true, true, false),
     t('test app current_file --verbose', ['--verbose', __filename], undefined, true, false, true),
-    t('test app bad config', ['-c', __filename, __filename], undefined, true, false, false),
+    t('test app bad config', ['-c', __filename, __filename], app.CheckFailed, true, false, false),
+    t('test app must find', ['*.not', '--must-find-files'], app.CheckFailed, true, false, false),
     t('test app cspell-bad.json', ['-c', pathSamples('cspell-bad.json'), __filename], undefined, true, false, false),
     t(
         'test app cspell-import-missing.json',
         ['-c', pathSamples('linked/cspell-import-missing.json'), __filename],
-        undefined,
+        app.CheckFailed,
         true,
         false,
         false
