@@ -33,8 +33,6 @@ jobs:
 
       - run: npm test
 
-      - run: npm run test-spec
-
       - run: node ./bin.js trace test
 
       - run: node ./bin.js "**/{*.ts,*.md}"
