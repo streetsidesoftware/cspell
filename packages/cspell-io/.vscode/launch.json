@@ -13,21 +13,6 @@
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
             ]
-        },
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Run Mocha Current File",
-            "program": "${workspaceRoot}/../../node_modules/mocha/bin/_mocha",
-            "runtimeArgs": [
-            ],
-			"args": [
-				"--timeout","999999",
-				"--colors",
-				"--require", "ts-node/register",
-				"${file}"
-			],
-			"internalConsoleOptions": "openOnSessionStart"
-		}
+        }
     ]
 }
