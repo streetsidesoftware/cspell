@@ -1,5 +1,3 @@
-#!/usr/bin/env node --max_old_space_size=8192
-
 import * as commander from 'commander';
 import * as fs from 'fs-extra';
 import { mkdirp } from 'fs-extra';
