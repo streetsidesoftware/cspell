@@ -12,7 +12,7 @@ const mkdir = promisify(fs.mkdir);
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
 /** @type {(s: string) => Promise<boolean>} */
-const exists = (s) => new Promise(r => fs.access(s, fs.F_OK, e => r(!e)))
+const exists = (s) => new Promise((r) => fs.access(s, fs.F_OK, (e) => r(!e)));
 
 /**
  * @param {string} module
