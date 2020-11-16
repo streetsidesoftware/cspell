@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
-import { getGlobalSettings } from './CSpellSettingsServer';
+import { getGlobalSettings, mergeSettings } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
 import { CSpellUserSettings } from './CSpellSettingsDef';
-import { mergeSettings } from './CSpellSettingsServer';
+
 import * as LS from './LanguageSettings';
 
 const extraSettings: CSpellUserSettings = {

@@ -5,7 +5,6 @@ import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
 import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
-import * as Validator from 'cspell-lib';
 import getStdin = require('get-stdin');
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { GlobMatcher } from 'cspell-glob';
@@ -395,7 +394,7 @@ export async function checkText(filename: string, options: BaseOptions): Promise
         local: options.local || undefined,
     });
     const info = calcFinalConfigInfo(foundSettings, settingsFromCommandLine, filename, text);
-    return Validator.checkText(text, info.configInfo.config);
+    return cspell.checkText(text, info.configInfo.config);
 }
 
 export function createInit(): Promise<void> {

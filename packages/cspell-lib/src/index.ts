@@ -27,7 +27,7 @@ export { Text };
 
 import * as ExclusionHelper from './exclusionHelper';
 export { ExclusionHelper };
-export { ExcludeFilesGlobMap, ExclusionFunction, Glob } from './exclusionHelper';
+export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 
 export { getLanguagesForExt } from './LanguageIds';
 export * from './trace';
@@ -35,8 +35,6 @@ export * from './trace';
 import { clearCachedFiles } from './Settings';
 import { refreshDictionaryCache } from './SpellingDictionary';
 
-export async function clearCachedSettings(): Promise<void> {
+export async function refreshCachedSettings(): Promise<void> {
     await Promise.all([clearCachedFiles(), refreshDictionaryCache(0)]);
 }
-
-export { clearCachedSettings as clearCachedFiles };

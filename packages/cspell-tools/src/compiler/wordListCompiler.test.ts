@@ -1,7 +1,14 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
-import { lineToWords, compileWordList, compileTrie, consolidate } from './wordListCompiler';
-import { normalizeWords, normalizeWordsToTrie } from './wordListCompiler';
+import {
+    lineToWords,
+    compileWordList,
+    compileTrie,
+    consolidate,
+    normalizeWords,
+    normalizeWordsToTrie,
+} from './wordListCompiler';
+
 import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
 import * as path from 'path';

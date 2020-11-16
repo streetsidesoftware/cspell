@@ -3,12 +3,13 @@
 // See: https://github.com/microsoft/vscode-languageserver-node/blob/master/build/bin/linking.js
 
 const path = require('path');
+// eslint-disable-next-line node/no-unpublished-require
 const shell = require('shelljs');
 
 const fs = require('fs');
 const promisify = require('util').promisify;
 const mkdir = promisify(fs.mkdir);
-const exists = promisify(fs.exists);
+const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
 
@@ -21,11 +22,11 @@ async function symlink(module, name, source) {
     const current = process.cwd();
     try {
         const nodeModules = path.join(module, 'node_modules');
-        if (!(await exists(nodeModules))) {
+        if (!(await stat(nodeModules))) {
             await mkdir(nodeModules);
         }
         process.chdir(nodeModules);
-        if (await exists(name)) {
+        if (await stat(name)) {
             shell.rm('-rf', name);
         }
         shell.ln('-s', source, name);
@@ -40,7 +41,7 @@ async function symlink(module, name, source) {
  * @returns {Object|undefined}
  */
 async function readPackage(file) {
-    if (!(await exists(file))) {
+    if (!(await stat(file))) {
         return undefined;
     }
 

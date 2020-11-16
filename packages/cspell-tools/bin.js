@@ -9,5 +9,5 @@ app.run(program, process.argv).catch((e) => {
     if (!(e instanceof program.CommanderError)) {
         console.log(e);
     }
-    process.exit(1);
+    process.exitCode = 1;
 });

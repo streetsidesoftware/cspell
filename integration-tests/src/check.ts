@@ -242,7 +242,8 @@ Stop on fail:   ${tf(fail)}
     console.log(report(matching, results));
 
     if (!success) {
-        process.exit(1);
+        process.exitCode = 1;
+    } else {
+        console.log('\nSuccess!');
     }
-    console.log('\nSuccess!');
 }
