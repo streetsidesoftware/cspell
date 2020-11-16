@@ -3,14 +3,16 @@
 // See: https://github.com/microsoft/vscode-languageserver-node/blob/master/build/bin/linking.js
 
 const path = require('path');
+// eslint-disable-next-line node/no-unpublished-require
 const shell = require('shelljs');
 
 const fs = require('fs');
 const promisify = require('util').promisify;
 const mkdir = promisify(fs.mkdir);
-const exists = promisify(fs.exists);
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
+/** @type {(s: string) => Promise<boolean>} */
+const exists = (s) => new Promise((r) => fs.access(s, fs.F_OK, (e) => r(!e)));
 
 /**
  * @param {string} module

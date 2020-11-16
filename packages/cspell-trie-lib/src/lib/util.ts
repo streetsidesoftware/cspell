@@ -3,8 +3,6 @@ import { TrieNode, FLAG_WORD, ChildMap, TrieRoot, PartialTrieOptions, TrieOption
 import { YieldResult, walker } from './walker';
 import { defaultTrieOptions } from './constants';
 
-export { YieldResult } from './walker';
-
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {
         const head = text[0];

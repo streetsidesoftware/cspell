@@ -1,5 +1,5 @@
 export * from './trie';
-export * from './TrieNode';
+export { TrieNode, FLAG_WORD, ChildMap, TrieRoot } from './TrieNode';
 export * from './util';
 export * from './walker';
 export * from './importExport';
