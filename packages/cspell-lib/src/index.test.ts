@@ -14,7 +14,7 @@ describe('Validate the cspell API', () => {
         });
     });
 
-    test('refreshCachedSettings', async () => {
-        await expect(cspell.refreshCachedSettings()).resolves.not.toThrow();
+    test('clearCachedFiles', async () => {
+        await expect(cspell.clearCachedFiles()).resolves.not.toThrow();
     });
 });

@@ -2,7 +2,7 @@ import {
     mergeSettings,
     readSettings,
     getGlobalSettings,
-    clearCachedFiles,
+    clearCachedSettingsFiles,
     getCachedFileSize,
     checkFilenameMatchesGlob,
     calcOverrideSettings,
@@ -173,7 +173,7 @@ describe('Validate CSpellSettingsServer', () => {
     test('verify clearing the file cache works', () => {
         mergeSettings(getDefaultSettings(), getGlobalSettings());
         expect(getCachedFileSize()).toBeGreaterThan(0);
-        clearCachedFiles();
+        clearCachedSettingsFiles();
         expect(getCachedFileSize()).toBe(0);
     });
 

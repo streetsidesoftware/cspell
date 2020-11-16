@@ -334,7 +334,7 @@ export function getCachedFileSize(): number {
     return cachedFiles.size;
 }
 
-export function clearCachedFiles(): void {
+export function clearCachedSettingsFiles(): void {
     cachedFiles.clear();
 }
 
