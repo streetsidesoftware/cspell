@@ -33,11 +33,11 @@ jobs:
 
       - run: npm test
 
-      - run: npm run test-spec
+      - name: verify trace command
+        run: node ./bin.js trace test
 
-      - run: node ./bin.js trace test
-
-      - run: node ./bin.js "**/{*.ts,*.md}"
+      - name: verify the spell checker runs
+        run: node ./bin.js "**/*.*"
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code

@@ -9,10 +9,8 @@
     ],
     "dictionaries": ["workspace"],
     "ignorePaths": [
-        "azure-pipelines.yml",
         "**/jest.config.js",
-        "packages/cspell-lib/dictionaries/**",
-        "packages/cspell-lib/migrated_dictionaries/**",
+        "**/integration-tests/config/config.json",
         "**/integration-tests/repositories/**",
         "**/integration-tests/snapshots/**",
         "package*.json",
@@ -25,16 +23,14 @@
         "**/package*.json",
         "**/temp/**/*",
         "**/node_modules/**",
+        "**/coverage/**",
         "**/.gitignore",
         "**/dist/**",
         "**/*.trie",
+        "**/*.snap",
+        "**/tsconfig.json",
         "**/.vscode/**"
     ],
     "ignoreWords": [
-        "xregexp",
-        "lcov",
-        "repo",
-        "tscv",
-        "tsdk"
     ]
 }
