@@ -9,9 +9,10 @@ const shell = require('shelljs');
 const fs = require('fs');
 const promisify = require('util').promisify;
 const mkdir = promisify(fs.mkdir);
-const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
+/** @type {(s: string) => Promise<boolean>} */
+const exists = (s) => new Promise(r => fs.access(s, fs.F_OK, e => r(!e)))
 
 /**
  * @param {string} module
@@ -22,11 +23,11 @@ async function symlink(module, name, source) {
     const current = process.cwd();
     try {
         const nodeModules = path.join(module, 'node_modules');
-        if (!(await stat(nodeModules))) {
+        if (!(await exists(nodeModules))) {
             await mkdir(nodeModules);
         }
         process.chdir(nodeModules);
-        if (await stat(name)) {
+        if (await exists(name)) {
             shell.rm('-rf', name);
         }
         shell.ln('-s', source, name);
@@ -41,7 +42,7 @@ async function symlink(module, name, source) {
  * @returns {Object|undefined}
  */
 async function readPackage(file) {
-    if (!(await stat(file))) {
+    if (!(await exists(file))) {
         return undefined;
     }
 
