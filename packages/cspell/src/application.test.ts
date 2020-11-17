@@ -22,6 +22,7 @@ describe('Validate the Application', () => {
             expect(logger.infoCount).toBeGreaterThan(0);
             expect(logger.debugCount).toBeGreaterThan(0);
             expect(result.files).toBe(1);
+            return;
         });
     });
 
@@ -35,6 +36,7 @@ describe('Validate the Application', () => {
             expect(logger.infoCount).toBeGreaterThan(0);
             expect(logger.debugCount).toBeGreaterThan(0);
             expect(result.files).toBe(1);
+            return;
         });
     });
 
@@ -48,6 +50,7 @@ describe('Validate the Application', () => {
             expect(logger.infoCount).toBeGreaterThan(0);
             expect(logger.debugCount).toBeGreaterThan(0);
             expect(result.files).toBe(1);
+            return;
         });
     });
 

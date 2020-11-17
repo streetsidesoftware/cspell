@@ -78,7 +78,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
 
     prog.passCommandToAction(false);
 
-    return new Promise((resolve, rejects) => {
+    return new Promise((resolve, reject) => {
         let showHelp = true;
 
         prog.exitOverride();
@@ -139,6 +139,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                     if (result.issues || result.errors || (mustFindFiles && !result.files)) {
                         throw new CheckFailed('check failed', 1);
                     }
+                    return;
                 });
             });
 
@@ -165,6 +166,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                 showHelp = false;
                 return App.trace(words, options).then((result) => {
                     result.forEach(emitTraceResult);
+                    return;
                 });
             });
 
@@ -235,11 +237,11 @@ Examples:
             showHelp = false;
         });
 
-        function reject(e: unknown) {
+        function showHelpAndReject(e: unknown) {
             if (showHelp) {
                 prog.help();
             }
-            rejects(e);
+            reject(e);
         }
 
         try {
@@ -249,10 +251,11 @@ Examples:
                         prog.help();
                     }
                     resolve();
+                    return;
                 })
-                .catch(reject);
+                .catch(showHelpAndReject);
         } catch (e) {
-            reject(e);
+            showHelpAndReject(e);
         }
     });
 }

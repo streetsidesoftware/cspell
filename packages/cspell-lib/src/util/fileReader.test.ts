@@ -5,6 +5,7 @@ describe('Validate file reader', () => {
         return fileReader.readLines('./non-existent.txt').then(
             () => {
                 expect(true).toBe(false);
+                return;
             },
             (error) => {
                 expect(error.toString()).toEqual(expect.stringContaining('Error: ENOENT: no such file or directory'));

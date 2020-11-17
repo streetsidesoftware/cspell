@@ -51,7 +51,7 @@ function collect(value: string, previous: string[]) {
 export function run(program: program.Command, argv: string[]): Promise<void> {
     program.exitOverride();
 
-    return new Promise((resolve, rejects) => {
+    return new Promise((resolve, reject) => {
         program.version(npmPackage.version);
 
         program
@@ -118,7 +118,7 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
                 program.help();
             }
         } catch (e) {
-            rejects(e);
+            reject(e);
         }
 
         resolve();

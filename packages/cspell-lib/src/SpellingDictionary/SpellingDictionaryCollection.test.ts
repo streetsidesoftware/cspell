@@ -154,6 +154,7 @@ describe('Verify using multiple dictionaries', () => {
             const sugs = dictCollection.suggest('mangos', 4);
             const sugWords = sugs.map((s) => s.word);
             expect(sugWords[0]).toBe('mango');
+            return;
         });
     });
 });
