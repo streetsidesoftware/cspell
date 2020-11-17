@@ -27,8 +27,12 @@ jobs:
           ref: ${{ github.event.inputs.branch }}
       - name: Install 
         run: npm install
-      - name: Test
-        run: npm test
+#       - name: Test
+#         run: npm test
+      - name: Setup Git
+        run: |
+          git config --global user.name 'Jason Dent'
+          git config --global user.email 'jason@streetsidesoftware.nl'
       - name: Version Master
         if: ${{ github.event.inputs.branch == 'master' }}
         run: npm run pub-version-pre -- -y
