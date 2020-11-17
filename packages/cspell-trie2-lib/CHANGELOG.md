@@ -5,32 +5,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 4.1.4 (2020-11-17)
 
-
 ### Bug Fixes
 
-* do not use node resolver for relative files. ([0df8562](https://github.com/streetsidesoftware/cspell/commit/0df85625da5b667f5817fc710b44fa74b636d9a1))
-
-
-
-
+-   do not use node resolver for relative files. ([0df8562](https://github.com/streetsidesoftware/cspell/commit/0df85625da5b667f5817fc710b44fa74b636d9a1))
 
 ## [4.1.3](https://github.com/streetsidesoftware/cspell/compare/cspell-trie2-lib@4.1.2...cspell-trie2-lib@4.1.3) (2020-11-14)
 
 **Note:** Version bump only for package cspell-trie2-lib
 
-
-
-
-
 ## [4.1.2](https://github.com/streetsidesoftware/cspell/compare/cspell-trie2-lib@4.1.1...cspell-trie2-lib@4.1.2) (2020-11-14)
 
 **Note:** Version bump only for package cspell-trie2-lib
 
-
-
-
-
 # Release Notes
 
 ## 4.0.0
-- Separated from `cspell-trie-lib`
+
+-   Separated from `cspell-trie-lib`

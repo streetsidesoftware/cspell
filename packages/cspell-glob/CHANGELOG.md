@@ -5,24 +5,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.24 (2020-11-17)
 
-
 ### Bug Fixes
 
-* do not use node resolver for relative files. ([0df8562](https://github.com/streetsidesoftware/cspell/commit/0df85625da5b667f5817fc710b44fa74b636d9a1))
-
-
-
-
+-   do not use node resolver for relative files. ([0df8562](https://github.com/streetsidesoftware/cspell/commit/0df85625da5b667f5817fc710b44fa74b636d9a1))
 
 ## [0.1.23](https://github.com/streetsidesoftware/cspell/compare/cspell-glob@0.1.21...cspell-glob@0.1.23) (2020-11-14)
 
 **Note:** Version bump only for package cspell-glob
 
-
-
-
-
 # Release Notes
 
 ## [0.1.16]
-- Fix issues with Windows.
+
+-   Fix issues with Windows.
