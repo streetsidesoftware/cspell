@@ -5,14 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 5.0.1-alpha.14 (2020-11-17)
 
-**Note:** Version bump only for package cspell-trie2-lib
-
-
-
-
-
-# Release Notes
-
-## 4.0.0
-
-- Separated from `cspell-trie-lib`
+**Note:** Version bump only for package test-cspell-util-bundle
