@@ -1,3 +1,4 @@
+/* eslint-disable node/no-missing-require */
 import { resolveFile } from './resolveFile';
 import * as path from 'path';
 import { parse } from 'comment-json';
