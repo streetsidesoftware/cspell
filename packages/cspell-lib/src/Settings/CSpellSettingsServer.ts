@@ -15,7 +15,7 @@ import * as util from '../util/util';
 import { logError } from '../util/logger';
 import ConfigStore from 'configstore';
 import minimatch from 'minimatch';
-import resolveFrom from 'resolve-from';
+import { resolveFile } from '../util/resolveFile';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -282,33 +282,13 @@ function applyPatterns(
     return [...flatten(patternList)];
 }
 
-const testNodeModules = /^node_modules\//;
-
 function resolveFilename(filename: string, relativeTo: string): ImportFileRef {
-    if (testNodeModules.test(filename)) {
-        filename = filename.replace(testNodeModules, '');
-    }
+    const r = resolveFile(filename, relativeTo);
 
-    const try1 = tryResolve(filename, relativeTo);
-    if (!try1.error || filename.startsWith('.')) {
-        return try1;
-    }
-
-    // Try to resolve as a relative module
-    const normalizedFilename = './' + (path.sep === '/' ? filename : filename.split(path.sep).join('/'));
-    return tryResolve(normalizedFilename, relativeTo);
-}
-
-function tryResolve(filename: string, relativeTo: string): ImportFileRef {
-    try {
-        return { filename: resolveFrom(relativeTo, filename) };
-    } catch (error) {
-        // Failed to resolve a relative module request
-        return {
-            filename: filename,
-            error: new Error(`Failed to resolve file: "${filename}"`),
-        };
-    }
+    return {
+        filename: r.filename,
+        error: r.found ? undefined : new Error(`Failed to resolve file: "${filename}"`),
+    };
 }
 
 export function getGlobalSettings(): CSpellSettings {
