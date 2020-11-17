@@ -24,6 +24,7 @@ export { combineTextAndLanguageSettings as constructSettingsForText } from './Se
 
 import * as Text from './util/text';
 export { Text };
+export { resolveFile } from './util/resolveFile';
 
 import * as ExclusionHelper from './exclusionHelper';
 export { ExclusionHelper };

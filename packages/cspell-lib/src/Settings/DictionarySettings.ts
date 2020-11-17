@@ -1,8 +1,6 @@
 import { DictionaryDefinition, DictionaryId, DictionaryDefinitionPreferred } from './CSpellSettingsDef';
 import * as path from 'path';
-import * as os from 'os';
-
-const dictionaryPath = () => path.join(__dirname, '..', '..', 'dist', 'dictionaries');
+import { resolveFile } from '../util/resolveFile';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
 
@@ -33,8 +31,7 @@ function getFullPathName(def: DictionaryDefinition) {
     if (!filePath && !file) {
         return '';
     }
-    const dictPath = path.join(filePath || dictionaryPath(), file);
-    return path.resolve(dictPath);
+    return path.join(filePath, file);
 }
 
 export function normalizePathForDictDefs(
@@ -45,12 +42,12 @@ export function normalizePathForDictDefs(
 }
 
 export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: string): DictionaryDefinitionPreferred {
-    const { path: relPath = '.', file, ...rest } = def;
-    const nonRelPath = relPath.match(/^\./) ? path.join(defaultPath, relPath) : relPath;
-    const absPath = nonRelPath.replace(/^~/, os.homedir());
-    const fullPath = file ? path.join(absPath, file) : absPath;
+    const { path: relPath = '', file = '', ...rest } = def;
+    const filePath = path.join(relPath, file);
+
+    const r = resolveFile(filePath, defaultPath);
     return {
         ...rest,
-        path: fullPath,
+        path: r.filename,
     };
 }

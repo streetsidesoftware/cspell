@@ -4,6 +4,7 @@ import { resolveFile } from './resolveFile';
 import * as path from 'path';
 import { parse } from 'comment-json';
 import * as fs from 'fs';
+import * as os from 'os';
 
 interface Config {
     import: string[];
@@ -14,6 +15,8 @@ const config: Config = parse(
 );
 
 const ext = path.extname(__filename);
+const notFound = '1fgh0dld6y56cr1wls.r9bp0ckc00ds0gna.json';
+const userNotFound = path.join('~', notFound);
 
 describe('Validate resolveFile', () => {
     interface ResolveFileTest {
@@ -23,14 +26,17 @@ describe('Validate resolveFile', () => {
         found: boolean;
     }
     test.each`
-        filename                                | relativeTo   | expected                                              | found
-        ${__filename}                           | ${__dirname} | ${__filename}                                         | ${true}
-        ${path.relative(__dirname, __filename)} | ${__dirname} | ${__filename}                                         | ${true}
-        ${'cspell-dict-cpp/cspell-ext.json'}    | ${__dirname} | ${require.resolve('cspell-dict-cpp/cspell-ext.json')} | ${true}
-        ${'cspell-ext.json'}                    | ${__dirname} | ${'cspell-ext.json'}                                  | ${false}
-        ${`./resolveFile${ext}`}                | ${__dirname} | ${require.resolve('./resolveFile')}                   | ${true}
-        ${`resolveFile${ext}`}                  | ${__dirname} | ${require.resolve('./resolveFile')}                   | ${true}
-        ${'lerna'}                              | ${__dirname} | ${require.resolve('lerna')}                           | ${true}
+        filename                                      | relativeTo   | expected                                              | found
+        ${__filename}                                 | ${__dirname} | ${__filename}                                         | ${true}
+        ${'.' + path.sep + path.basename(__filename)} | ${__dirname} | ${__filename}                                         | ${true}
+        ${'.' + path.sep + notFound}                  | ${__dirname} | ${path.resolve(__dirname, notFound)}                  | ${false}
+        ${path.relative(__dirname, __filename)}       | ${__dirname} | ${__filename}                                         | ${true}
+        ${'cspell-dict-cpp/cspell-ext.json'}          | ${__dirname} | ${require.resolve('cspell-dict-cpp/cspell-ext.json')} | ${true}
+        ${'cspell-ext.json'}                          | ${__dirname} | ${path.resolve(__dirname, 'cspell-ext.json')}         | ${false}
+        ${`./resolveFile${ext}`}                      | ${__dirname} | ${require.resolve('./resolveFile')}                   | ${true}
+        ${`resolveFile${ext}`}                        | ${__dirname} | ${require.resolve('./resolveFile')}                   | ${true}
+        ${'lerna'}                                    | ${__dirname} | ${require.resolve('lerna')}                           | ${true}
+        ${userNotFound}                               | ${__dirname} | ${path.resolve(path.join(os.homedir(), notFound))}    | ${false}
     `('resolveFile "$filename" rel "$relativeTo"', validateResolveFile);
 
     test.each(
