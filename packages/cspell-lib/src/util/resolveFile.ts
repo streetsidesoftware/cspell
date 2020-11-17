@@ -24,7 +24,6 @@ export function resolveFile(filename: string, relativeTo: string): ResolveFileRe
         { filename: path.resolve(filename), fn: tryResolveExists },
         { filename: filename, fn: methodResolveFrom },
         { filename: filename.replace(testNodeModules, ''), fn: methodResolveFrom },
-        { filename: './' + (path.sep === '/' ? filename : filename.split(path.sep).join('/')), fn: methodResolveFrom },
     ];
 
     for (const step of steps) {
