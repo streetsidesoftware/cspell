@@ -1,9 +1,5 @@
-# This is a basic workflow that is manually triggered
-
 name: Publish
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   push:
     # Sequence of patterns matched against refs/tags
@@ -23,9 +19,7 @@ on:
         # Input has to be provided for the workflow to run
         required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   publish-manual:
     runs-on: ubuntu-latest
     if: github.event.inputs.branch == 'master' || github.event.inputs.branch == 'cspell4'
@@ -68,11 +62,11 @@ jobs:
         run: npm install
       - name: Test
         run: npm test
-      - name: Setup Git
       - name: Echo context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+  #     - name: Setup Git
   #       run: |
   #         git config --global user.name 'Jason Dent'
   #         git config --global user.email 'jason@streetsidesoftware.nl'
