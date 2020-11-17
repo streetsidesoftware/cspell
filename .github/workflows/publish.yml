@@ -9,17 +9,19 @@ on:
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
-      branch:
-        description: 'Branch to run on "master" or "cspell4"'
-        # Default value if no value is explicitly provided
+      ref:
+        description: "branch, release, or tag to publish, like v5.0.1-alpha.14"
         default: master
-        # Input has to be provided for the workflow to run
+        required: true
+      npm_tag:
+        description: "Tag to add to NPM release 'latest' or 'next'"
+        default: next
         required: true
 
 jobs:
   publish-manual:
     runs-on: ubuntu-latest
-    if: github.event.inputs.branch == 'master' || github.event.inputs.branch == 'cspell4'
+    if: github.event.inputs
     steps:
       - name: Echo context
         env:
@@ -28,8 +30,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.branch }}
-          fetch-depth: 10
+          ref: ${{ github.event.inputs.ref }}
       - name: Install
         run: npm install
       - name: Test
@@ -38,20 +39,15 @@ jobs:
         run: |
           git config --global user.name 'Jason Dent'
           git config --global user.email 'jason@streetsidesoftware.nl'
-      - name: Publish Master
-        if: ${{ github.event.inputs.branch == 'master' }}
-        run: npm run pub-lerna -- -y --dist-tag next
+      - name: Publish
+        run: npm run pub-lerna -- -y --dist-tag "$NPM_TAG"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Publish cspell4
-        if: ${{ github.event.inputs.branch == 'cspell4' }}
-        run: npm run pub-lerna -- -y --dist-tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TAG: ${{ github.event.inputs.npm_tag }}
 
   publish-tag:
     runs-on: ubuntu-latest
-    if: ${{ !github.event.inputs.branch }}
+    if: ${{ !github.event.inputs }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -67,6 +63,7 @@ jobs:
         run: |
           git config --global user.name 'Jason Dent'
           git config --global user.email 'jason@streetsidesoftware.nl'
+
 #       - name: Publish Master
 #         if: ${{ github.ref == 'refs/heads/master' }}
 #         run: npm run pub-lerna -- -y --dist-tag next
