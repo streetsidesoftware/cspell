@@ -27,17 +27,19 @@ jobs:
           ref: ${{ github.event.inputs.branch }}
       - name: Install
         run: npm install
+      - name: Test
+        run: npm test
       - name: Setup Git
         run: |
           git config --global user.name 'Jason Dent'
           git config --global user.email 'jason@streetsidesoftware.nl'
       - name: Publish Master
         if: ${{ github.event.inputs.branch == 'master' }}
-        run: npm run pub-next -- -y
+        run: npm run pub-lerna -- -y --dist-tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish cspell4
         if: ${{ github.event.inputs.branch == 'cspell4' }}
-        run: npm run pub -- -y
+        run: npm run pub-lerna -- -y --dist-tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

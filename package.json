@@ -22,6 +22,7 @@
     "lint": "eslint . --fix && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "prepare": "npm run symlink && npm run clean-build",
+    "pub-lerna": "lerna publish from-git",
     "pub-version": "lerna version --conventional-commits",
     "pub-version-pre": "lerna version --conventional-commits --conventional-prerelease",
     "pub-version-grad": "lerna version --conventional-commits --conventional-graduate",
