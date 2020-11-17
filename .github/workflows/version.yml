@@ -25,14 +25,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.branch }}
-#       - name: Install 
-#         run: npm install
-#       - name: Test
-#         run: npm test
+      - name: Install 
+        run: npm install
+      - name: Test
+        run: npm test
       - name: Version Master
         if: ${{ github.event.inputs.branch == 'master' }}
-        run: echo npm run pub-version-pre -- -y
+        run: npm run pub-version-pre -- -y
       - name: Versoin cspell4
         if: ${{ github.event.inputs.branch == 'cspell4' }}
-        run: echo npm run pub-version -- -y
+        run: npm run pub-version -- -y
  
