@@ -5,9 +5,6 @@ on:
     # Sequence of patterns matched against refs/tags
     tags:
       - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
-    branches:
-      - master
-      - cspell4
 
   workflow_dispatch:
     # Inputs the workflow accepts.
@@ -66,17 +63,17 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-  #     - name: Setup Git
-  #       run: |
-  #         git config --global user.name 'Jason Dent'
-  #         git config --global user.email 'jason@streetsidesoftware.nl'
-  #     - name: Publish Master
-  #       if: ${{ github.event.inputs.branch == 'master' }}
-  #       run: npm run pub-lerna -- -y --dist-tag next
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #     - name: Publish cspell4
-  #       if: ${{ github.event.inputs.branch == 'cspell4' }}
-  #       run: npm run pub-lerna -- -y --dist-tag latest
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Git
+        run: |
+          git config --global user.name 'Jason Dent'
+          git config --global user.email 'jason@streetsidesoftware.nl'
+#       - name: Publish Master
+#         if: ${{ github.ref == 'refs/heads/master' }}
+#         run: npm run pub-lerna -- -y --dist-tag next
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Publish cspell4
+#         if: ${{ github.ref == 'refs/heads/cspell4' }}
+#         run: npm run pub-lerna -- -y --dist-tag latest
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
