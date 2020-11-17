@@ -1,3 +1,4 @@
+/* eslint-disable node/no-extraneous-require */
 /* eslint-disable node/no-missing-require */
 import { resolveFile } from './resolveFile';
 import * as path from 'path';
