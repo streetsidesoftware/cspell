@@ -32,7 +32,7 @@ jobs:
       - name: Version Master
         if: ${{ github.event.inputs.branch == 'master' }}
         run: npm run pub-version-pre -- -y
-      - name: Versoin cspell4
+      - name: Version cspell4
         if: ${{ github.event.inputs.branch == 'cspell4' }}
         run: npm run pub-version -- -y
  
