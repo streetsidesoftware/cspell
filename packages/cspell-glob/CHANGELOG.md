@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.25](https://github.com/streetsidesoftware/cspell/compare/cspell-glob@0.1.24...cspell-glob@0.1.25) (2020-11-17)
+
+
+### Bug Fixes
+
+* format changelog to bump version ([f9c98ff](https://github.com/streetsidesoftware/cspell/commit/f9c98ff2c5c2fe9d2c801d9f93fc7a25feb445f6))
+
+
+
+
+
 ## 0.1.24 (2020-11-17)
 
 ### Bug Fixes

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.2](https://github.com/streetsidesoftware/cspell/compare/cspell@4.2.1...cspell@4.2.2) (2020-11-17)
+
+
+### Bug Fixes
+
+* format changelog to bump version ([f9c98ff](https://github.com/streetsidesoftware/cspell/commit/f9c98ff2c5c2fe9d2c801d9f93fc7a25feb445f6))
+
+
+
+
+
 ## 4.2.1 (2020-11-17)
 
 ### Bug Fixes
