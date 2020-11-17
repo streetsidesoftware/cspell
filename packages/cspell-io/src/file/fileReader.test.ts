@@ -68,6 +68,7 @@ describe('Validate the fileReader', () => {
         return result.then(
             () => {
                 expect('not to be here').toBe(true);
+                return;
             },
             (e) => {
                 // expect(e).to.be.instanceof(Error); // Since jest currently mocks Error, this test fails.

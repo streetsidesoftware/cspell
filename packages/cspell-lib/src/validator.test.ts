@@ -27,6 +27,7 @@ describe('Validator', () => {
         return results.then((results) => {
             const words = results.map(({ text }) => text);
             expect(words).toEqual(['brouwn', 'jumpped', 'lazzy']);
+            return;
         });
     });
 
@@ -38,6 +39,7 @@ describe('Validator', () => {
         return results.then((results) => {
             const words = results.map(({ text }) => text);
             expect(words).toEqual([]);
+            return;
         });
     });
 
@@ -70,6 +72,7 @@ describe('Validator', () => {
             expect(words).toEqual(expect.not.arrayContaining(['ctrip']));
             expect(words).toEqual(expect.not.arrayContaining(['FFEE']));
             expect(words).toEqual(expect.not.arrayContaining(['nmove']));
+            return;
         });
     });
 
@@ -87,6 +90,7 @@ describe('Validator', () => {
             expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
             expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
             expect(words).toEqual(expect.arrayContaining(['mischecked']));
+            return;
         });
     });
 
@@ -99,6 +103,7 @@ describe('Validator', () => {
             expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
             expect(words).toEqual(expect.arrayContaining(['mispelled']));
             expect(words).toEqual(expect.arrayContaining(['mischecked']));
+            return;
         });
     });
 
@@ -111,6 +116,7 @@ describe('Validator', () => {
             expect(words).toEqual(expect.arrayContaining(['wrongg']));
             expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
             expect(words).toEqual(expect.arrayContaining(['mischecked']));
+            return;
         });
     });
 
@@ -129,6 +135,7 @@ describe('Validator', () => {
         return results.then((results) => {
             const words = results.map(({ text }) => text);
             expect(words.sort()).toEqual(expected.sort());
+            return;
         });
     });
 
@@ -143,6 +150,7 @@ describe('Validator', () => {
         return results.then((results) => {
             const words = results.map(({ text }) => text);
             expect(words.sort()).toEqual([]);
+            return;
         });
     });
     test('tests calcIncludeExcludeInfo', async () => {

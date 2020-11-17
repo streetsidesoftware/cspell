@@ -17,6 +17,7 @@ describe('Validate English', () => {
             const results = dict.suggest('installsallnecessary', 5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 2);
             const sugs = results.map((a) => a.word);
             expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
+            return;
         });
     });
 });

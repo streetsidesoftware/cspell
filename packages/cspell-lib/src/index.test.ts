@@ -11,6 +11,7 @@ describe('Validate the cspell API', () => {
         return cspell.validateText(text, fileSettings).then((results) => {
             expect(Object.keys(results)).not.toHaveLength(0);
             expect(results.map((to) => to.text)).toEqual(expect.arrayContaining(['Jansons']));
+            return;
         });
     });
 
