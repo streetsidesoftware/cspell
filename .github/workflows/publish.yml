@@ -5,6 +5,14 @@ name: Publish
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches:
+      - master
+      - cspell4
+
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
@@ -18,13 +26,19 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "greet"
-  publish:
+  publish-manual:
     runs-on: ubuntu-latest
+    if: github.event.inputs.branch == 'master' || github.event.inputs.branch == 'cspell4'
     steps:
+      - name: Echo context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.branch }}
+          fetch-depth: 10
       - name: Install
         run: npm install
       - name: Test
@@ -43,3 +57,32 @@ jobs:
         run: npm run pub-lerna -- -y --dist-tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-tag:
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.inputs.branch }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install
+        run: npm install
+      - name: Test
+        run: npm test
+      - name: Setup Git
+      - name: Echo context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+  #       run: |
+  #         git config --global user.name 'Jason Dent'
+  #         git config --global user.email 'jason@streetsidesoftware.nl'
+  #     - name: Publish Master
+  #       if: ${{ github.event.inputs.branch == 'master' }}
+  #       run: npm run pub-lerna -- -y --dist-tag next
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Publish cspell4
+  #       if: ${{ github.event.inputs.branch == 'cspell4' }}
+  #       run: npm run pub-lerna -- -y --dist-tag latest
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
