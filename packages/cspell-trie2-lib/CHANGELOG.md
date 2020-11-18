@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package cspell-trie2-lib
 
-
-
-
-
 # Release Notes
 
 ## 4.0.0

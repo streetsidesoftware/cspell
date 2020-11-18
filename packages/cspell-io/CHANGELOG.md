@@ -7,10 +7,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package cspell-io
 
-
-
-
-
 ## [5.0.1-alpha.0](https://github.com/streetsidesoftware/cspell/compare/cspell-io@4.0.20...cspell-io@5.0.1-alpha.0) (2020-02-20)
 
 **Note:** Version bump only for package cspell-io
