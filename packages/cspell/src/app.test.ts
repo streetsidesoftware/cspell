@@ -22,72 +22,62 @@ function pathSamples(...parts: string[]): string {
 
 // [message, args, resolve, error, log, info]
 type ErrorCheck = undefined | jest.Constructable | string | RegExp;
-type Test = [string, string[], ErrorCheck, boolean, boolean, boolean];
 
-const tests: Test[] = [
-    t('test app no-args', [], 'outputHelp', true, true, false),
-    t('test app current_file', [__filename], undefined, true, false, false),
-    t('test app current_file languageId', [__filename, '--languageId=typescript'], undefined, true, false, false),
-    t('test app trace hello', ['trace', 'hello'], undefined, false, true, false),
-    t('test app check LICENSE', ['check', pathRoot('LICENSE')], undefined, false, true, false),
-    t('test app check missing', ['check', pathRoot('missing-file.txt')], undefined, true, true, false),
-    t('test app LICENSE', [pathRoot('LICENSE')], undefined, true, false, false),
-    t('test app samples/Dutch.txt', [pathSamples('Dutch.txt')], app.CheckFailed, true, true, false),
-    t('test app current_file --verbose', ['--verbose', __filename], undefined, true, false, true),
-    t('test app bad config', ['-c', __filename, __filename], app.CheckFailed, true, false, false),
-    t('test app must find', ['*.not', '--must-find-files'], app.CheckFailed, true, false, false),
-    t('test app cspell-bad.json', ['-c', pathSamples('cspell-bad.json'), __filename], undefined, true, false, false),
-    t(
-        'test app cspell-import-missing.json',
-        ['-c', pathSamples('linked/cspell-import-missing.json'), __filename],
-        app.CheckFailed,
-        true,
-        false,
-        false
-    ),
-];
+interface TestCase {
+    msg: string;
+    testArgs: string[];
+    errorCheck: ErrorCheck;
+    eError: boolean;
+    eLog: boolean;
+    eInfo: boolean;
+}
 
 describe('Validate cli', () => {
     let current = '';
 
-    test.each(tests)(
-        '%s',
-        async (msg, testArgs: string[], errorCheck: ErrorCheck, eError: boolean, eLog: boolean, eInfo: boolean) => {
-            expect(current).toBe('');
-            current = msg;
-            const commander = getCommander();
-            const error = jest.spyOn(console, 'error').mockImplementation();
-            const log = jest.spyOn(console, 'log').mockImplementation();
-            const info = jest.spyOn(console, 'info').mockImplementation();
-            const args = argv(...testArgs);
-            try {
-                const result = app.run(commander, args);
-                if (!errorCheck) {
-                    await expect(result).resolves.toBeUndefined();
-                } else {
-                    await expect(result).rejects.toThrowError(errorCheck);
-                }
-                eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
-                eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
-                eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-                expect(current).toBe(msg);
-            } finally {
-                info.mockRestore();
-                log.mockRestore();
-                error.mockRestore();
-                current = '';
+    test.each`
+        msg                              | testArgs                                                                | errorCheck         | eError   | eLog     | eInfo
+        ${'no-args'}                     | ${[]}                                                                   | ${'outputHelp'}    | ${true}  | ${true}  | ${false}
+        ${'current_file'}                | ${[__filename]}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'with spelling errors'}        | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'current_file languageId'}     | ${[__filename, '--languageId=typescript']}                              | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'trace hello'}                 | ${['trace', 'hello']}                                                   | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace not-in-any-dictionary'} | ${['trace', 'not-in-any-dictionary']}                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'check LICENSE'}               | ${['check', pathRoot('LICENSE')]}                                       | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'check missing'}               | ${['check', pathRoot('missing-file.txt')]}                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'LICENSE'}                     | ${[pathRoot('LICENSE')]}                                                | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'samples/Dutch.txt'}           | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'current_file --verbose'}      | ${['--verbose', __filename]}                                            | ${undefined}       | ${true}  | ${false} | ${true}
+        ${'bad config'}                  | ${['-c', __filename, __filename]}                                       | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'not found error by default'}  | ${['*.not']}                                                            | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'must find with error'}        | ${['*.not', '--must-find-files']}                                       | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'must find force no error'}    | ${['*.not', '--no-must-find-files']}                                    | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'cspell-bad.json'}             | ${['-c', pathSamples('cspell-bad.json'), __filename]}                   | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'cspell-import-missing.json'}  | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]} | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+    `('app $msg $testArgs', async ({ msg, testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        expect(current).toBe('');
+        current = msg;
+        const commander = getCommander();
+        const error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation();
+        const log = jest.spyOn(console, 'log').mockName('console.log').mockImplementation();
+        const info = jest.spyOn(console, 'info').mockName('console.info').mockImplementation();
+        const args = argv(...testArgs);
+        try {
+            const result = app.run(commander, args);
+            if (!errorCheck) {
+                await expect(result).resolves.toBeUndefined();
+            } else {
+                await expect(result).rejects.toThrowError(errorCheck);
             }
+            eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+            eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+            eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+            expect(current).toBe(msg);
+        } finally {
+            info.mockRestore();
+            log.mockRestore();
+            error.mockRestore();
+            current = '';
         }
-    );
+    });
 });
-
-function t(
-    msg: string,
-    args: string[],
-    errorCheck: ErrorCheck,
-    emitError: boolean,
-    emitLog: boolean,
-    emitInfo: boolean
-): Test {
-    return [msg, args, errorCheck, emitError, emitLog, emitInfo];
-}
