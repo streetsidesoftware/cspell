@@ -22,8 +22,10 @@ export function execAsync(command: string, options: ExecOptions = {}): Promise<S
         console.log(command);
     }
     return new Promise<Shell.ExecOutputReturnValue>((resolve) => {
-        Shell.exec(command, { silent: !echo, fatal: bail }, (code, stdout, stderr) =>
-            resolve({ code, stdout, stderr })
+        Shell.exec(
+            command /* lgtm[js/shell-command-injection-from-environment] */,
+            { silent: !echo, fatal: bail },
+            (code, stdout, stderr) => resolve({ code, stdout, stderr })
         );
     });
 }
