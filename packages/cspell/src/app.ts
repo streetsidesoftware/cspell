@@ -162,12 +162,15 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .option('--no-color', 'Turn off color.')
             .option('--color', 'Force color')
             .arguments('<words...>')
-            .action((words: string[], options: TraceCommandOptions) => {
+            .action(async (words: string[], options: TraceCommandOptions) => {
                 showHelp = false;
-                return App.trace(words, options).then((result) => {
-                    result.forEach(emitTraceResult);
-                    return;
-                });
+                const results = await App.trace(words, options);
+                results.forEach(emitTraceResult);
+                const numFound = results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
+                if (!numFound) {
+                    console.error('No matches found');
+                    throw new CheckFailed('no matches', 1);
+                }
             });
 
         type CheckCommandOptions = BaseOptions;
@@ -182,11 +185,13 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .option('--color', 'Force color')
             .action(async (files: string[], options: CheckCommandOptions) => {
                 showHelp = false;
-
+                let issueCount = 0;
+                let fileCount = 0;
                 for (const filename of files) {
                     console.log(chalk.yellowBright(`Check file: ${filename}`));
                     console.log();
                     try {
+                        fileCount++;
                         const result = await checkText(filename, options);
                         for (const item of result.items) {
                             const fn =
@@ -197,12 +202,21 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                                     : chalk.whiteBright;
                             const t = fn(item.text);
                             process.stdout.write(t);
+                            issueCount += item.isError ? 1 : 0;
                         }
                         console.log();
                     } catch (e) {
-                        console.error(`Failed to read "${filename}"`);
+                        console.error(`File not found "${filename}"`);
+                        throw new CheckFailed('File not found', 1);
                     }
                     console.log();
+                }
+                if (issueCount) {
+                    throw new CheckFailed('Issues found', 1);
+                }
+                if (!fileCount) {
+                    console.error('No files found');
+                    throw new CheckFailed('No files found', 1);
                 }
             });
 
