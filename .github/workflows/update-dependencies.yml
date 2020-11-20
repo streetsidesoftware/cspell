@@ -14,7 +14,7 @@ jobs:
           - cspell4
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-${{ github.run_id }}"
+      NEW_BRANCH: "update-dependencies-${{ matrix.branch }}-${{ github.run_id }}"
       REF_BRANCH: ${{ matrix.branch }}
     steps:
       - name: Checkout code
