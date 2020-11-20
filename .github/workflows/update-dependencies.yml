@@ -2,6 +2,8 @@ name: Update Dependencies
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron:  '3 5 * * *'
 
 jobs:
   update-dependencies:
@@ -31,6 +33,12 @@ jobs:
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+          git --no-pager diff --compact-summary
+      - name: Gen Body
+        run: |
+          echo 'git_body<<DIFF' >> $GITHUB_ENV
+          git --no-pager diff --compact-summary >> $GITHUB_ENV
+          echo 'DIFF' >> $GITHUB_ENV
       - name: Echo git_status
         run: echo ${{ env.git_status }}
       - uses: tibdex/github-app-token@v1
@@ -48,4 +56,5 @@ jobs:
           base: ${{ env.REF_BRANCH }}
           title: "ci: Workflow Bot -- Update ALL Dependencies (${{ env.REF_BRANCH }})"
           token: ${{ steps.generate-token.outputs.token }}
-
+          body: ${{ env.git_body }}
+          delete-branch: true
