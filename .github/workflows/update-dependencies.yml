@@ -1,6 +1,13 @@
 name: Update Dependencies
 
 on:
+  push:
+    branches:
+      - master
+      - cspell4
+    paths:
+      - "**/package.json"
+      - "**/package-lock.json"
   workflow_dispatch:
   schedule:
     - cron: "3 5 * * *"
