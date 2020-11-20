@@ -1,24 +1,33 @@
 name: Update Dependencies
 
 on:
+  push:
+    branches:
+      - master
+      - cspell4
+    paths:
+      - "**/package.json"
+      - "**/package-lock.json"
   workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      branch:
-        description: 'Branch to run on "master" or "cspell4"'
-        default: master
-        required: true
+  schedule:
+    - cron: "3 5 * * *"
 
 jobs:
   update-dependencies:
+    strategy:
+      matrix:
+        branch:
+          - master
+          - cspell4
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-${{ github.run_id }}"
+      NEW_BRANCH: "update-dependencies-${{ matrix.branch }}-${{ github.run_id }}"
+      REF_BRANCH: ${{ matrix.branch }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.branch }}
+          ref: ${{ env.REF_BRANCH }}
       - name: Update Root
         run: |
           rm -rf package-lock.json
@@ -31,20 +40,28 @@ jobs:
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+          git --no-pager diff --compact-summary
+      - name: Gen Body
+        run: |
+          echo 'git_body<<DIFF' >> $GITHUB_ENV
+          git --no-pager diff --compact-summary >> $GITHUB_ENV
+          echo 'DIFF' >> $GITHUB_ENV
       - name: Echo git_status
         run: echo ${{ env.git_status }}
-      - name: Setup Git
-        run: |
-          git config --local user.name 'Jason Dent'
-          git config --local user.email 'jason+workflow@streetsidesoftware.nl'
-      - name: Create Remote Branch ${{ env.NEW_BRANCH }}
-        uses: peterjgrainger/action-create-branch@v2.0.1 # cspell:ignore peterjgrainger
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: tibdex/github-app-token@v1 # cspell:ignore tibdex
+        if: env.git_status == 'dirty'
+        id: generate-token
         with:
-          branch: ${{ env.NEW_BRANCH }}
-      - name: Push to branch ${{ env.NEW_BRANCH }}
-        uses: ad-m/github-push-action@master
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Create Pull Request
+        if: env.git_status == 'dirty'
+        uses: peter-evans/create-pull-request@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "ci: Workflow Bot -- Update ALL Dependencies"
           branch: ${{ env.NEW_BRANCH }}
+          base: ${{ env.REF_BRANCH }}
+          title: "ci: Workflow Bot -- Update ALL Dependencies (${{ env.REF_BRANCH }})"
+          token: ${{ steps.generate-token.outputs.token }}
+          body: ${{ env.git_body }}
+          delete-branch: true
