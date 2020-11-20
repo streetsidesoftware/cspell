@@ -25,24 +25,19 @@ jobs:
           npm update -S
       - name: Install
         run: npm install
-#       - name: Update packages
-#         run: |
-#           npm run update-packages
+      - name: Update packages
+        run: |
+          npm run update-packages
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
       - name: Echo git_status
         run: echo ${{ env.git_status }}
-      - name: Setup Git
-        if: env.git_status == 'dirty'
-        run: |
-          git config --local user.name 'Jason Dent'
-          git config --local user.email 'jason+workflow@streetsidesoftware.nl'
       - name: Create Pull Request
         if: env.git_status == 'dirty'
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: "ci: Auto Bot -- Update ALL Dependencies"
+          commit-message: "ci: Auto Bot -- Update ALL Dependencies (${{ github.event.inputs.branch }})"
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ github.event.inputs.branch }}
           title: "ci: Auto Bot -- Update ALL Dependencies"
