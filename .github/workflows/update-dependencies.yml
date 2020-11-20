@@ -38,17 +38,29 @@ jobs:
       - name: Echo git_status
         run: echo ${{ env.git_status }}
       - name: Setup Git
+        if: env.git_status == 'dirty'
         run: |
           git config --local user.name 'Jason Dent'
           git config --local user.email 'jason+workflow@streetsidesoftware.nl'
+          git commit -m "ci: Auto Bot -- Update ALL Dependencies" -a
       - name: Create Remote Branch ${{ env.NEW_BRANCH }}
+        if: env.git_status == 'dirty'
         uses: peterjgrainger/action-create-branch@v2.0.1 # cspell:ignore peterjgrainger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: ${{ env.NEW_BRANCH }}
       - name: Push to branch ${{ env.NEW_BRANCH }}
+        if: env.git_status == 'dirty'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.NEW_BRANCH }}
+      - name: Create Pull Request
+        if: env.git_status == 'dirty'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "ci: Auto Bot -- Update ALL Dependencies"
+          branch: ${{ env.NEW_BRANCH }}
+          base: ${{ github.event.inputs.branch }}
+          title: "ci: Auto Bot -- Update ALL Dependencies"
