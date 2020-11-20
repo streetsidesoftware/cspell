@@ -37,8 +37,8 @@ jobs:
         run: npm test
       - name: Setup Git
         run: |
-          git config --global user.name 'Jason Dent'
-          git config --global user.email 'jason@streetsidesoftware.nl'
+          git config --local user.name 'Jason Dent'
+          git config --local user.email 'jason@streetsidesoftware.nl'
       - name: Publish
         run: npm run pub-lerna -- -y --dist-tag "$NPM_TAG"
         env:

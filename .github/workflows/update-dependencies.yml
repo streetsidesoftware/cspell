@@ -1,0 +1,50 @@
+name: Update Dependencies
+
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      branch:
+        description: 'Branch to run on "master" or "cspell4"'
+        default: master
+        required: true
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    env:
+      NEW_BRANCH: "update-dependencies-${{ github.run_id }}"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - name: Update Root
+        run: |
+          rm -rf package-lock.json
+          npm update -S
+      - name: Install
+        run: npm install
+      - name: Update packages
+        run: |
+          npm run update-packages
+      - name: Has changes
+        run: |
+          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+      - name: Echo git_status
+        run: echo ${{ env.git_status }}
+      - name: Setup Git
+        run: |
+          git config --local user.name 'Jason Dent'
+          git config --local user.email 'jason+workflow@streetsidesoftware.nl'
+      - name: Create Remote Branch ${{ env.NEW_BRANCH }}
+        uses: peterjgrainger/action-create-branch@v2.0.1 # cspell:ignore peterjgrainger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: ${{ env.NEW_BRANCH }}
+      - name: Push to branch ${{ env.NEW_BRANCH }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.NEW_BRANCH }}

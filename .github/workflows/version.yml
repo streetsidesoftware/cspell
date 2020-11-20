@@ -1,23 +1,14 @@
-# This is a basic workflow that is manually triggered
-
 name: Version
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
     inputs:
       branch:
         description: 'Branch to run on "master" or "cspell4"'
-        # Default value if no value is explicitly provided
         default: master
-        # Input has to be provided for the workflow to run
         required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
   version:
     runs-on: ubuntu-latest
     steps:
@@ -31,8 +22,8 @@ jobs:
       #         run: npm test
       - name: Setup Git
         run: |
-          git config --global user.name 'Jason Dent'
-          git config --global user.email 'jason@streetsidesoftware.nl'
+          git config --local user.name 'Jason Dent'
+          git config --local user.email 'jason@streetsidesoftware.nl'
       - name: Version Master
         if: ${{ github.event.inputs.branch == 'master' }}
         run: npm run pub-version-pre -- -y
