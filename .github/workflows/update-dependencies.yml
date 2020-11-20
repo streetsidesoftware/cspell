@@ -37,7 +37,7 @@ jobs:
         if: env.git_status == 'dirty'
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: "ci: Auto Bot -- Update ALL Dependencies (${{ github.event.inputs.branch }})"
+          commit-message: "ci: Workflow Bot -- Update ALL Dependencies"
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ github.event.inputs.branch }}
-          title: "ci: Auto Bot -- Update ALL Dependencies"
+          title: "ci: Workflow Bot -- Update ALL Dependencies (${{ github.event.inputs.branch }})"
