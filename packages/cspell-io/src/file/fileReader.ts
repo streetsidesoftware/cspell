@@ -61,7 +61,7 @@ export function streamFileLineByLineAsync(
     return iter;
 }
 
-type Resolve<T> = (value?: T | PromiseLike<T>) => void;
+type Resolve<T> = (value: T | Promise<T>) => void;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Reject = (reason?: any) => void;
 
@@ -131,7 +131,7 @@ export function streamLineByLineAsync(
         }
         if (done && pending.length && !buffer.length) {
             const p = pending.shift();
-            p?.resolve({ done } as IteratorResult<string>);
+            p?.resolve({ done, value: undefined });
         }
     }
 
