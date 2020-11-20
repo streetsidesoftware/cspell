@@ -2,23 +2,23 @@ name: Update Dependencies
 
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
-      branch:
-        description: 'Branch to run on "master" or "cspell4"'
-        default: master
-        required: true
 
 jobs:
   update-dependencies:
+    strategy:
+      matrix:
+        branch:
+          - master
+          - cspell4
     runs-on: ubuntu-latest
     env:
       NEW_BRANCH: "update-dependencies-${{ github.run_id }}"
+      REF_BRANCH: ${{ matrix.branch }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.inputs.branch }}
+          ref: ${{ env.REF_BRANCH }}
       - name: Update Root
         run: |
           rm -rf package-lock.json
@@ -45,7 +45,7 @@ jobs:
         with:
           commit-message: "ci: Workflow Bot -- Update ALL Dependencies"
           branch: ${{ env.NEW_BRANCH }}
-          base: ${{ github.event.inputs.branch }}
-          title: "ci: Workflow Bot -- Update ALL Dependencies (${{ github.event.inputs.branch }})"
+          base: ${{ env.REF_BRANCH }}
+          title: "ci: Workflow Bot -- Update ALL Dependencies (${{ env.REF_BRANCH }})"
           token: ${{ steps.generate-token.outputs.token }}
 
