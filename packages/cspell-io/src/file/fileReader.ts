@@ -62,7 +62,8 @@ export function streamFileLineByLineAsync(
     return iter;
 }
 
-type Resolve<T> = (value?: T | PromiseLike<T>) => void;
+type Resolve<T> = (value: T | Promise<T>) => void;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Reject = (reason?: any) => void;
 
 interface Resolvers<T = IteratorResult<string>> {
@@ -116,21 +117,23 @@ export function streamLineByLineAsync(
 
     function processBuffer() {
         if (error && pending.length && !buffer.length) {
-            const p = pending.shift()!;
-            p.reject(error);
+            const p = pending.shift();
+            p?.reject(error);
             return;
         }
         while (pending.length && buffer.length) {
-            const p = pending.shift()!;
-            const b = buffer.shift()!;
-            p.resolve({ done: false, value: b });
+            const p = pending.shift();
+            const b = buffer.shift();
+            if (b !== undefined && p) {
+                p.resolve({ done: false, value: b });
+            }
         }
         if (!done) {
             pending.length ? rl.resume() : rl.pause();
         }
         if (done && pending.length && !buffer.length) {
-            const p = pending.shift()!;
-            p.resolve({ done } as IteratorResult<string>);
+            const p = pending.shift();
+            p?.resolve({ done, value: undefined });
         }
     }
 
