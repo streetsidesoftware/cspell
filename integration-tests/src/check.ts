@@ -166,7 +166,7 @@ function asPendingPromise<T>(promise: Promise<T>): PendingPromise<T> {
 /**
  * Parallel Process some values using the mapFn while limiting the number
  * running in parallel.
- * @param values values to map
+ * @param values the values to map
  * @param mapFn a mapping function that returns a promise
  * @param limit the max number of pending promises.
  */
