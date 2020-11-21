@@ -30,7 +30,7 @@ export interface MatchSubString extends String {
     [propName: string]: any;
 
     /**
-     * This is only present if the the `namespacing` feature is installed
+     * This is only present if the `namespacing` feature is installed
      * using the `XRegExp.install` method.
      */
     groups?: NamedGroupsArray;
