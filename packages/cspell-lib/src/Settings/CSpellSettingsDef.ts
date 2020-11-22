@@ -324,3 +324,7 @@ export interface Source {
     filename?: string;
     sources?: CSpellSettings[];
 }
+
+export interface GlobalCSpellSettings {
+    import: CSpellSettings['import'];
+}

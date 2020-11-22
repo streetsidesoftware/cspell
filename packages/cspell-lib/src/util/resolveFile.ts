@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import resolveFrom from 'resolve-from';
 import * as os from 'os';
+import resolveGlobal from 'resolve-global';
 
 export interface ResolveFileResult {
     filename: string;
@@ -24,6 +25,7 @@ export function resolveFile(filename: string, relativeTo: string): ResolveFileRe
         { filename: path.resolve(filename), fn: tryResolveExists },
         { filename: filename, fn: methodResolveFrom },
         { filename: filename.replace(testNodeModules, ''), fn: methodResolveFrom },
+        { filename: filename, fn: tryResolveGlobal },
     ];
 
     for (const step of steps) {
@@ -31,6 +33,11 @@ export function resolveFile(filename: string, relativeTo: string): ResolveFileRe
         if (r.found) return r;
     }
     return { filename: path.resolve(relativeTo, filename), found: false };
+}
+
+function tryResolveGlobal(filename: string): ResolveFileResult {
+    const r = resolveGlobal.silent(filename);
+    return { filename: r || filename, found: !!r };
 }
 
 function tryResolveExists(filename: string): ResolveFileResult {

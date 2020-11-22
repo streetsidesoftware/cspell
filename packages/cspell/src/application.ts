@@ -1,14 +1,15 @@
-import * as glob from 'glob';
+import glob from 'glob';
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
 import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
-import getStdin = require('get-stdin');
+import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { GlobMatcher } from 'cspell-glob';
 import { IOptions } from './IOptions';
+export { listGlobalImports } from './link';
 
 // cspell:word nocase
 

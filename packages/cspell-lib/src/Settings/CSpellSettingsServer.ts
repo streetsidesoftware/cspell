@@ -8,6 +8,7 @@ import {
     Pattern,
     CSpellSettingsWithSourceTrace,
     ImportFileRef,
+    GlobalCSpellSettings,
 } from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
@@ -57,12 +58,16 @@ function normalizeSettings(settings: CSpellSettings, pathToSettings: string): CS
     }));
 
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
-    const source: Source = settings.source || { name: settings.name || settings.id || pathToSettings };
+    const source: Source = settings.source || {
+        name: settings.name || settings.id || pathToSettings,
+        filename: pathToSettings,
+    };
 
     const fileSettings = { ...settings, dictionaryDefinitions, languageSettings };
     if (!imports.length) {
         return fileSettings;
     }
+    fileSettings.import = undefined;
     const importedSettings: CSpellSettings = imports
         .map((name) => resolveFilename(name, pathToSettings))
         .map((ref) => ((ref.sources = [source]), ref))
@@ -111,8 +116,19 @@ function importSettings(fileRef: ImportFileRef, defaultValues: CSpellSettings = 
     return finalizeSettings;
 }
 
-export function readSettings(filename: string, defaultValues?: CSpellSettings): CSpellSettings {
-    return importSettings({ filename }, defaultValues);
+export function readSettings(filename: string): CSpellSettings;
+export function readSettings(filename: string, defaultValues: CSpellSettings): CSpellSettings;
+export function readSettings(filename: string, relativeTo: string): CSpellSettings;
+export function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettings): CSpellSettings;
+export function readSettings(
+    filename: string,
+    relativeToOrDefault?: CSpellSettings | string,
+    defaultValue?: CSpellSettings
+): CSpellSettings {
+    const relativeTo = typeof relativeToOrDefault === 'string' ? relativeToOrDefault : process.cwd();
+    defaultValue = defaultValue || (typeof relativeToOrDefault !== 'string' ? relativeToOrDefault : undefined);
+    const ref = resolveFilename(filename, relativeTo);
+    return importSettings(ref, defaultValue);
 }
 
 export function readSettingsFiles(filenames: string[]): CSpellSettings {
@@ -291,16 +307,41 @@ function resolveFilename(filename: string, relativeTo: string): ImportFileRef {
     };
 }
 
+export function getRawGlobalSettings(): CSpellSettings {
+    const globalConf: CSpellSettings = {};
+
+    try {
+        const cfgStore = new ConfigStore(packageName);
+        Object.assign(globalConf, cfgStore.all);
+        globalConf.source = {
+            name: 'CSpell Configstore',
+            filename: cfgStore.path,
+        };
+    } catch (error) {
+        logError(error);
+    }
+
+    return globalConf;
+}
+
+export function writeRawGlobalSettings(settings: GlobalCSpellSettings): Error | undefined {
+    const toWrite: GlobalCSpellSettings = {
+        import: settings.import,
+    };
+
+    try {
+        const cfgStore = new ConfigStore(packageName);
+        cfgStore.set(toWrite);
+        return undefined;
+    } catch (error) {
+        if (error instanceof Error) return error;
+        return new Error(error.toString());
+    }
+}
+
 export function getGlobalSettings(): CSpellSettings {
     if (!globalSettings) {
-        const globalConf = {};
-
-        try {
-            const cfgStore = new ConfigStore(packageName);
-            Object.assign(globalConf, cfgStore.all);
-        } catch (error) {
-            logError(error);
-        }
+        const globalConf = getRawGlobalSettings();
 
         globalSettings = {
             id: 'global_config',
@@ -315,6 +356,7 @@ export function getCachedFileSize(): number {
 }
 
 export function clearCachedSettingsFiles(): void {
+    globalSettings = undefined;
     cachedFiles.clear();
 }
 
