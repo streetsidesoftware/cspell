@@ -89,6 +89,13 @@ export interface RemovePathsFromGlobalImportsResult {
     removed: string[];
 }
 
+/**
+ * Remove files from the global setting.
+ * @param paths match against the partial file path, or package name, or id.
+ *   To match against a partial file path, it must match against the subdirectory and filename.
+ * Note: for Idempotent reasons, asking to remove a path that is not in the global settings is considered a success.
+ *   It is possible to check for this by looking at the returned list of removed paths.
+ */
 export function removePathsFromGlobalImports(paths: string[]): RemovePathsFromGlobalImportsResult {
     const listResult = listGlobalImports();
 
@@ -100,8 +107,17 @@ export function removePathsFromGlobalImports(paths: string[]): RemovePathsFromGl
         return ({ package: pkg, id }) => pathToRemove === pkg?.name || pathToRemove === id;
     }
 
+    function compareFilenames(fullPath: string, partialPath: string): boolean {
+        if (fullPath === partialPath) return true;
+        if (!fullPath.endsWith(partialPath)) return false;
+        const c = fullPath[fullPath.length - partialPath.length - 1];
+        return c === Path.sep || c === Path.posix.sep;
+    }
+
     function matchFilename(pathToRemove: string): TestResultToExclude {
-        return Path.dirname(pathToRemove) ? ({ filename }) => filename.endsWith(pathToRemove) : () => false;
+        return Path.dirname(pathToRemove) != '.'
+            ? ({ filename }) => compareFilenames(filename, pathToRemove)
+            : () => false;
     }
 
     paths
