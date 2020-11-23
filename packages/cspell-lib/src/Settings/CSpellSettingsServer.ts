@@ -8,20 +8,17 @@ import {
     Pattern,
     CSpellSettingsWithSourceTrace,
     ImportFileRef,
-    GlobalCSpellSettings,
 } from './CSpellSettingsDef';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
-import { logError } from '../util/logger';
-import ConfigStore from 'configstore';
 import minimatch from 'minimatch';
 import { resolveFile } from '../util/resolveFile';
+import { getRawGlobalSettings } from './GlobalSettings';
 
 const currentSettingsFileVersion = '0.1';
 
 export const sectionCSpell = 'cSpell';
-const packageName = 'cspell';
 
 export const defaultFileName = 'cSpell.json';
 
@@ -307,45 +304,13 @@ function resolveFilename(filename: string, relativeTo: string): ImportFileRef {
     };
 }
 
-export function getRawGlobalSettings(): CSpellSettings {
-    const globalConf: CSpellSettings = {};
-
-    try {
-        const cfgStore = new ConfigStore(packageName);
-        Object.assign(globalConf, cfgStore.all);
-        globalConf.source = {
-            name: 'CSpell Configstore',
-            filename: cfgStore.path,
-        };
-    } catch (error) {
-        logError(error);
-    }
-
-    return globalConf;
-}
-
-export function writeRawGlobalSettings(settings: GlobalCSpellSettings): Error | undefined {
-    const toWrite: GlobalCSpellSettings = {
-        import: settings.import,
-    };
-
-    try {
-        const cfgStore = new ConfigStore(packageName);
-        cfgStore.set(toWrite);
-        return undefined;
-    } catch (error) {
-        if (error instanceof Error) return error;
-        return new Error(error.toString());
-    }
-}
-
 export function getGlobalSettings(): CSpellSettings {
     if (!globalSettings) {
         const globalConf = getRawGlobalSettings();
 
         globalSettings = {
             id: 'global_config',
-            ...normalizeSettings(globalConf || {}, __dirname),
+            ...normalizeSettings(globalConf || {}, '.'),
         };
     }
     return globalSettings;

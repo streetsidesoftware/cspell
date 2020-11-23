@@ -32,15 +32,25 @@ export function clearMocks() {
     clearData();
 }
 
-const mock = jest.fn().mockImplementation(() => {
+export function getConfigstoreLocation(id?: string) {
+    id = id || 'cspell';
+    return `/User/local/data/.config/configstore/${id}.json`;
+}
+
+const mock = jest.fn().mockImplementation((id: string) => {
     const r = {
-        path: '/User/local/data/config/configstore',
-        all: data,
+        path: getConfigstoreLocation(id),
         set: mockSetData,
         size: 0,
         clear: mockClearData,
     };
-    Object.defineProperty(r, 'all', { get: mockAll });
+    Object.defineProperty(r, 'all', {
+        get: mockAll,
+        set: (v) => {
+            clearData();
+            setData(v);
+        },
+    });
     return r;
 });
 

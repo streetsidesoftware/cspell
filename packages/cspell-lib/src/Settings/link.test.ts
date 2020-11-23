@@ -6,11 +6,14 @@ import {
     setData as setConfigstore,
     clearMocks,
     mockSetData,
+    getConfigstoreLocation,
 } from '../__mocks__/configstore';
 
 jest.mock('configstore');
 
 const mockConfigstore = Configstore as jest.Mock<Configstore>;
+
+const configFileLocation = getConfigstoreLocation();
 
 describe('Validate Link.ts', () => {
     beforeEach(() => {
@@ -24,7 +27,7 @@ describe('Validate Link.ts', () => {
         expect(r).toEqual({
             list: [],
             globalSettings: {
-                source: { filename: '/User/local/data/config/configstore', name: 'CSpell Configstore' },
+                source: { filename: configFileLocation, name: 'CSpell Configstore' },
             },
         });
         expect(mockSetData).not.toHaveBeenCalled();
@@ -38,7 +41,7 @@ describe('Validate Link.ts', () => {
         expect(r).toEqual({
             list: [],
             globalSettings: {
-                source: { filename: '/User/local/data/config/configstore', name: 'CSpell Configstore' },
+                source: { filename: configFileLocation, name: 'CSpell Configstore' },
                 import: [],
             },
         });
@@ -59,7 +62,7 @@ describe('Validate Link.ts', () => {
                     }),
                 ],
                 globalSettings: expect.objectContaining({
-                    source: { filename: '/User/local/data/config/configstore', name: 'CSpell Configstore' },
+                    source: { filename: configFileLocation, name: 'CSpell Configstore' },
                 }),
             })
         );
@@ -80,7 +83,7 @@ describe('Validate Link.ts', () => {
                     }),
                 ],
                 globalSettings: expect.objectContaining({
-                    source: { filename: '/User/local/data/config/configstore', name: 'CSpell Configstore' },
+                    source: { filename: configFileLocation, name: 'CSpell Configstore' },
                 }),
             })
         );

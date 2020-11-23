@@ -1,7 +1,8 @@
 import * as Path from 'path';
 import * as fs from 'fs';
 import { CSpellSettingsWithSourceTrace } from './CSpellSettingsDef';
-import { getRawGlobalSettings, readSettings, writeRawGlobalSettings } from './CSpellSettingsServer';
+import { readSettings } from './CSpellSettingsServer';
+import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 
 export interface ListGlobalImportsResult {
     filename: string;
