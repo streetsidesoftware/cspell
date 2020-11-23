@@ -128,6 +128,12 @@ export function readSettings(
     return importSettings(ref, defaultValue);
 }
 
+export function readRawSettings(filename: string, relativeTo?: string): CSpellSettings {
+    relativeTo = relativeTo || process.cwd();
+    const ref = resolveFilename(filename, relativeTo);
+    return readJsonFile(ref);
+}
+
 export function readSettingsFiles(filenames: string[]): CSpellSettings {
     return filenames.map((filename) => readSettings(filename)).reduce((a, b) => mergeSettings(a, b), defaultSettings);
 }

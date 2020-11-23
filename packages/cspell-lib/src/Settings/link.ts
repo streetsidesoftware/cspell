@@ -1,7 +1,7 @@
 import * as Path from 'path';
 import * as fs from 'fs';
 import { CSpellSettingsWithSourceTrace } from './CSpellSettingsDef';
-import { readSettings } from './CSpellSettingsServer';
+import { readRawSettings } from './CSpellSettingsServer';
 import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 
 export interface ListGlobalImportsResult {
@@ -158,13 +158,15 @@ export interface ResolveSettingsResult {
 }
 
 function resolveSettings(filename: string): ResolveSettingsResult {
-    const settings = readSettings(filename, {});
+    const settings = readRawSettings(filename);
     const ref = settings.__importRef;
+    const resolvedToFilename = ref?.filename;
+    const error = ref?.error?.message || (!resolvedToFilename && 'File not Found') || undefined;
 
     return {
         filename,
-        resolvedToFilename: ref?.filename,
-        error: ref?.error?.message,
+        resolvedToFilename,
+        error,
         settings,
     };
 }
