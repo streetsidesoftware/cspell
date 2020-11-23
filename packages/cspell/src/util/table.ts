@@ -1,16 +1,49 @@
 import strip from 'strip-ansi';
+import chalk from 'chalk';
 
-export function tableToLines(data: string[][], deliminator = ' | '): string[] {
+export interface Table {
+    header: string[];
+    rows: string[][];
+    deliminator?: string;
+}
+
+export function tableToLines(table: Table, deliminator?: string): string[] {
+    deliminator = deliminator || table.deliminator || ' | ';
     const columnWidths: number[] = [];
 
-    data.forEach((line) =>
-        line.forEach((col, idx) => {
-            columnWidths[idx] = Math.max(strip(col).length, columnWidths[idx] || 0);
-        })
-    );
+    const { header, rows } = table;
 
-    const r = data.map((line) =>
-        line.map((col, i) => col + ' '.repeat(columnWidths[i] - strip(col).length)).join(deliminator)
-    );
-    return r;
+    function recordWidths(row: string[]) {
+        row.forEach((col, idx) => {
+            columnWidths[idx] = Math.max(strip(col).length, columnWidths[idx] || 0);
+        });
+    }
+
+    function justifyRow(c: string, i: number) {
+        return c + ' '.repeat(columnWidths[i] - strip(c).length);
+    }
+
+    function toLine(row: string[]) {
+        return decorateRowWith(row, justifyRow).join(deliminator);
+    }
+
+    function* process() {
+        yield toLine(decorateRowWith(header, headerDecorator));
+        yield* rows.map(toLine);
+    }
+
+    recordWidths(header);
+    rows.forEach(recordWidths);
+
+    return [...process()];
+}
+
+type TextDecorator = (t: string, index: number) => string;
+
+function headerDecorator(t: string): string {
+    return chalk.bold(chalk.underline(t));
+}
+
+export function decorateRowWith(row: string[], ...decorators: TextDecorator[]): string[] {
+    return decorators.reduce((row, decorator) => row.map(decorator), row);
 }

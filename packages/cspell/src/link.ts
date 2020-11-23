@@ -1,12 +1,13 @@
 import { Link } from 'cspell-lib';
 import chalk from 'chalk';
+import { Table } from './util/table';
 
 export const listGlobalImports = Link.listGlobalImports;
+export const addPathsToGlobalImports = Link.addPathsToGlobalImports;
+export const removePathsFromGlobalImports = Link.removePathsFromGlobalImports;
 
-export function listGlobalImportsResultToTable(results: Link.ListGlobalImportsResult[]): string[][] {
-    const table: string[][] = [];
-    const b = (s: string) => chalk.underline(chalk.bold(s));
-    const header = ['id', 'package', 'name', 'filename', 'dictionaries', 'errors'].map(b);
+export function listGlobalImportsResultToTable(results: Link.ListGlobalImportsResult[]): Table {
+    const header = ['id', 'package', 'name', 'filename', 'dictionaries', 'errors'];
     const decorate = (isError: boolean) => (isError ? (s: string) => chalk.red(s) : (s: string) => s);
 
     function toColumns(r: Link.ListGlobalImportsResult): string[] {
@@ -22,17 +23,14 @@ export function listGlobalImportsResultToTable(results: Link.ListGlobalImportsRe
             .map(decorate(!!r.error));
     }
 
-    table.push(header);
-    results.map(toColumns).forEach((row) => table.push(row));
-    return table;
+    return {
+        header,
+        rows: results.map(toColumns),
+    };
 }
 
-export const addPathsToGlobalImports = Link.addPathsToGlobalImports;
-
-export function addPathsToGlobalImportsResultToTable(results: Link.AddPathsToGlobalImportsResults): string[][] {
-    const table: string[][] = [];
-    const b = (s: string) => chalk.underline(chalk.bold(s));
-    const header = ['filename', 'errors'].map(b);
+export function addPathsToGlobalImportsResultToTable(results: Link.AddPathsToGlobalImportsResults): Table {
+    const header = ['filename', 'errors'];
     const decorate = (isError: boolean) => (isError ? (s: string) => chalk.red(s) : (s: string) => s);
 
     function toColumns(r: Link.ResolveSettingsResult): string[] {
@@ -41,9 +39,8 @@ export function addPathsToGlobalImportsResultToTable(results: Link.AddPathsToGlo
             .map(decorate(!!r.error));
     }
 
-    table.push(header);
-    results.resolvedSettings.map(toColumns).forEach((row) => table.push(row));
-    return table;
+    return {
+        header,
+        rows: results.resolvedSettings.map(toColumns),
+    };
 }
-
-export const removePathsFromGlobalImports = Link.removePathsFromGlobalImports;

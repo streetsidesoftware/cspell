@@ -241,7 +241,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .command('list', { isDefault: true })
             .alias('ls')
             .description('List currently linked configurations.')
-            .action(async () => {
+            .action(() => {
                 showHelp = false;
                 const imports = listGlobalImports();
                 const table = listGlobalImportsResultToTable(imports.list);
@@ -253,7 +253,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .command('add <dictionaries...>')
             .alias('a')
             .description('Add dictionaries any other settings to the cspell global config.')
-            .action(async (dictionaries: string[]) => {
+            .action((dictionaries: string[]) => {
                 showHelp = false;
                 const r = addPathsToGlobalImports(dictionaries);
                 const table = addPathsToGlobalImportsResultToTable(r);
@@ -269,7 +269,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             .command('remove <paths...>')
             .alias('r')
             .description('Remove matching paths / packages from the global config.')
-            .action(async (dictionaries: string[]) => {
+            .action((dictionaries: string[]) => {
                 showHelp = false;
                 const r = removePathsFromGlobalImports(dictionaries);
                 console.log('Removing:');

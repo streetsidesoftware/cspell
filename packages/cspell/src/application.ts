@@ -9,7 +9,6 @@ import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { GlobMatcher } from 'cspell-glob';
 import { IOptions } from './IOptions';
-export { listGlobalImports } from './link';
 
 // cspell:word nocase
 
