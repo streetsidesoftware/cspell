@@ -23,7 +23,8 @@ export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings'
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
 
 import * as Text from './util/text';
-export { Text };
+import * as Link from './Settings/link';
+export { Text, Link };
 export { resolveFile } from './util/resolveFile';
 
 import * as ExclusionHelper from './exclusionHelper';

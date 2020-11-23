@@ -5,6 +5,14 @@ const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 import { CSpellApplicationOptions, BaseOptions, checkText } from './application';
 import * as App from './application';
 import chalk = require('chalk');
+import {
+    addPathsToGlobalImports,
+    addPathsToGlobalImportsResultToTable,
+    listGlobalImports,
+    listGlobalImportsResultToTable,
+    removePathsFromGlobalImports,
+} from './link';
+import { tableToLines } from './util/table';
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
@@ -218,6 +226,58 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                     console.error('No files found');
                     throw new CheckFailed('No files found', 1);
                 }
+            });
+
+        // interface LinkOptions extends BaseOptions {
+        //     delete: boolean;
+        //     doctor: boolean;
+        // }
+
+        const linkCommand = prog
+            .command('link')
+            .description('Link dictionaries any other settings to the cspell global config.');
+
+        linkCommand
+            .command('list', { isDefault: true })
+            .alias('ls')
+            .description('List currently linked configurations.')
+            .action(() => {
+                showHelp = false;
+                const imports = listGlobalImports();
+                const table = listGlobalImportsResultToTable(imports.list);
+                tableToLines(table).forEach((line) => console.log(line));
+                return;
+            });
+
+        linkCommand
+            .command('add <dictionaries...>')
+            .alias('a')
+            .description('Add dictionaries any other settings to the cspell global config.')
+            .action((dictionaries: string[]) => {
+                showHelp = false;
+                const r = addPathsToGlobalImports(dictionaries);
+                const table = addPathsToGlobalImportsResultToTable(r);
+                console.log('Adding:');
+                tableToLines(table).forEach((line) => console.log(line));
+                if (r.error) {
+                    throw new CheckFailed(r.error, 1);
+                }
+                return;
+            });
+
+        linkCommand
+            .command('remove <paths...>')
+            .alias('r')
+            .description('Remove matching paths / packages from the global config.')
+            .action((dictionaries: string[]) => {
+                showHelp = false;
+                const r = removePathsFromGlobalImports(dictionaries);
+                console.log('Removing:');
+                if (r.error) {
+                    throw new CheckFailed(r.error, 1);
+                }
+                r.removed.map((f) => console.log(f));
+                return;
             });
 
         /*

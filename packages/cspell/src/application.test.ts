@@ -1,3 +1,6 @@
+import * as path from 'path';
+import * as App from './application';
+
 const getStdinResult = {
     value: '',
 };
@@ -5,9 +8,6 @@ const getStdinResult = {
 jest.mock('get-stdin', () => {
     return jest.fn(() => Promise.resolve(getStdinResult.value));
 });
-
-import * as path from 'path';
-import * as App from './application';
 
 describe('Validate the Application', () => {
     jest.setTimeout(10000); // make sure we have enough time on Travis.
