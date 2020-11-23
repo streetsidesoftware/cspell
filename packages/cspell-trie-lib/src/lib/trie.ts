@@ -104,7 +104,7 @@ export class Trie {
 
     /**
      * Determine if a word is in the forbidden word list.
-     * @param word word to lookup.
+     * @param word the word to lookup.
      */
     isForbiddenWord(word: string): boolean {
         return this.hasForbidden && isForbiddenWord(this.root, word, this.options.forbiddenWordPrefix);
