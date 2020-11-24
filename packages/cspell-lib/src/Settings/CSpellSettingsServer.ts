@@ -64,7 +64,6 @@ function normalizeSettings(settings: CSpellSettings, pathToSettings: string): CS
     if (!imports.length) {
         return fileSettings;
     }
-    fileSettings.import = undefined;
     const importedSettings: CSpellSettings = imports
         .map((name) => resolveFilename(name, pathToSettings))
         .map((ref) => ((ref.sources = [source]), ref))
@@ -101,7 +100,7 @@ function importSettings(fileRef: ImportFileRef, defaultValues: CSpellSettings = 
         return cached;
     }
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-    const finalizeSettings: CSpellSettings = { id };
+    const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
     cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
     const settings: CSpellSettings = { ...defaultValues, id, ...readJsonFile(importRef) };
     const pathToSettings = path.dirname(filename);
@@ -215,6 +214,7 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         ),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
         source: mergeSources(left, right),
+        import: undefined,
         __imports: mergeImportRefs(left, right),
         __importRef: undefined,
     };

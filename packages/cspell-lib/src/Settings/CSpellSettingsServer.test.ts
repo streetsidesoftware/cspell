@@ -127,6 +127,14 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests loading a missing cSpell.json file', () => {
+        const filename = path.join(__dirname, '..', '..', 'cSpell.json');
+        const settings = readSettings(filename);
+        expect(settings.__importRef?.filename).toBe(path.resolve(filename));
+        expect(settings.__importRef?.error).toBeUndefined();
+        expect(settings.import).toBeUndefined();
+    });
+
+    test('tests loading project cspell.json file', () => {
         const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-missing.json');
         const settings = readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
