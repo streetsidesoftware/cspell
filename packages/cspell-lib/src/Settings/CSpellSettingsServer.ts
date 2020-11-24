@@ -66,7 +66,7 @@ function normalizeSettings(settings: CSpellSettings, pathToSettings: string): CS
     }
     const importedSettings: CSpellSettings = imports
         .map((name) => resolveFilename(name, pathToSettings))
-        .map((ref) => ((ref.sources = [source]), ref))
+        .map((ref) => ((ref.referencedBy = [source]), ref))
         .map((ref) => importSettings(ref))
         .reduce((a, b) => mergeSettings(a, b));
     const finalizeSettings = mergeSettings(importedSettings, fileSettings);
@@ -95,7 +95,7 @@ function importSettings(fileRef: ImportFileRef, defaultValues: CSpellSettings = 
     const cached = cachedFiles.get(filename);
     if (cached) {
         const cachedImportRef = cached.__importRef || importRef;
-        cachedImportRef.sources = mergeSourceList(cachedImportRef.sources || [], importRef.sources);
+        cachedImportRef.referencedBy = mergeSourceList(cachedImportRef.referencedBy || [], importRef.referencedBy);
         cached.__importRef = cachedImportRef;
         return cached;
     }
