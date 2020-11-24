@@ -64,10 +64,9 @@ function normalizeSettings(settings: CSpellSettings, pathToSettings: string): CS
     if (!imports.length) {
         return fileSettings;
     }
-    fileSettings.import = undefined;
     const importedSettings: CSpellSettings = imports
         .map((name) => resolveFilename(name, pathToSettings))
-        .map((ref) => ((ref.sources = [source]), ref))
+        .map((ref) => ((ref.referencedBy = [source]), ref))
         .map((ref) => importSettings(ref))
         .reduce((a, b) => mergeSettings(a, b));
     const finalizeSettings = mergeSettings(importedSettings, fileSettings);
@@ -96,12 +95,12 @@ function importSettings(fileRef: ImportFileRef, defaultValues: CSpellSettings = 
     const cached = cachedFiles.get(filename);
     if (cached) {
         const cachedImportRef = cached.__importRef || importRef;
-        cachedImportRef.sources = mergeSourceList(cachedImportRef.sources || [], importRef.sources);
+        cachedImportRef.referencedBy = mergeSourceList(cachedImportRef.referencedBy || [], importRef.referencedBy);
         cached.__importRef = cachedImportRef;
         return cached;
     }
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-    const finalizeSettings: CSpellSettings = { id };
+    const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
     cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
     const settings: CSpellSettings = { ...defaultValues, id, ...readJsonFile(importRef) };
     const pathToSettings = path.dirname(filename);
@@ -215,6 +214,7 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         ),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
         source: mergeSources(left, right),
+        import: undefined,
         __imports: mergeImportRefs(left, right),
         __importRef: undefined,
     };
