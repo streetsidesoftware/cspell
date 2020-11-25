@@ -2,6 +2,7 @@ import * as app from './app';
 import * as Commander from 'commander';
 import * as Path from 'path';
 import * as Link from './link';
+import stripAnsi from 'strip-ansi';
 // import { listGlobalImports /* addPathsToGlobalImports, removePathsFromGlobalImports */ } from './link';
 
 const projectRoot = Path.join(__dirname, '..');
@@ -136,7 +137,7 @@ describe('Validate cli', () => {
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(capture.text).toMatchSnapshot();
+        expect(capture.text.map(stripAnsi)).toMatchSnapshot();
     }
 
     test.each`
@@ -163,7 +164,7 @@ describe('Validate cli', () => {
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(capture.text).toMatchSnapshot();
+        expect(capture.text.map(stripAnsi)).toMatchSnapshot();
     }
 });
 
