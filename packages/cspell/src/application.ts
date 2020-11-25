@@ -9,6 +9,15 @@ import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { GlobMatcher } from 'cspell-glob';
 import { IOptions } from './IOptions';
+import { measurePromise } from './util/timer';
+import {
+    DebugEmitter,
+    Emitters,
+    MessageEmitter,
+    MessageTypes,
+    ProgressEmitter,
+    SpellingErrorEmitter,
+} from './emitters';
 
 // cspell:word nocase
 
@@ -66,47 +75,6 @@ export interface GlobSrcInfo {
     source: string;
 }
 
-export type MessageType = 'Debug' | 'Info' | 'Progress';
-
-export type MessageTypeLookup = {
-    [key in MessageType]: key;
-};
-
-export const MessageTypes: MessageTypeLookup = {
-    Debug: 'Debug',
-    Info: 'Info',
-    Progress: 'Progress',
-};
-
-export interface MessageEmitter {
-    (message: string, msgType: MessageType): void;
-}
-
-export interface DebugEmitter {
-    (message: string): void;
-}
-
-export interface ErrorEmitterVoid {
-    (message: string, error: Error): void;
-}
-
-export interface ErrorEmitterPromise {
-    (message: string, error: Error): Promise<void>;
-}
-
-type ErrorEmitter = ErrorEmitterVoid | ErrorEmitterPromise;
-
-export interface SpellingErrorEmitter {
-    (issue: Issue): void;
-}
-
-export interface Emitters {
-    issue: SpellingErrorEmitter;
-    info: MessageEmitter;
-    debug: DebugEmitter;
-    error: ErrorEmitter;
-}
-
 interface GlobOptions extends IOptions {
     cwd?: string;
     root?: string;
@@ -122,6 +90,7 @@ const nullEmitter = () => {
 
 export class CSpellApplicationConfiguration {
     readonly info: MessageEmitter;
+    readonly progress: ProgressEmitter;
     readonly debug: DebugEmitter;
     readonly logIssue: SpellingErrorEmitter;
     readonly uniqueFilter: (issue: Issue) => boolean;
@@ -142,6 +111,7 @@ export class CSpellApplicationConfiguration {
         this.logIssue = emitters.issue || nullEmitter;
         this.local = options.local || '';
         this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
+        this.progress = emitters.progress || nullEmitter;
     }
 }
 
@@ -235,15 +205,32 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         }
     }
 
-    async function processFiles(files: Iterable<Promise<FileInfo>>, configInfo: ConfigInfo): Promise<RunResult> {
+    async function processFiles(
+        files: Iterable<Promise<FileInfo>>,
+        configInfo: ConfigInfo,
+        fileCount: number
+    ): Promise<RunResult> {
         const status: RunResult = runResult();
-
+        let n = 0;
         for (const fileP of files) {
+            ++n;
             const file = await fileP;
-            if (!file || !file.text) {
+            const emitProgress = (elapsedTimeMs?: number) =>
+                cfg.progress({
+                    type: 'ProgressFileComplete',
+                    fileNum: n,
+                    fileCount,
+                    filename: file.filename,
+                    elapsedTimeMs,
+                });
+            if (!file.text) {
+                emitProgress();
                 continue;
             }
-            const r = await processFile(file, configInfo);
+            const p = processFile(file, configInfo);
+            const { elapsedTimeMs } = await measurePromise(p);
+            emitProgress(elapsedTimeMs);
+            const r = await p;
             status.files += 1;
             if (r.issues.length || r.errors) {
                 status.filesWithIssues.add(file.filename);
@@ -300,7 +287,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         );
         const files = filterFiles(await findFiles(cfg.files, globOptions), exclusionGlobs);
 
-        return processFiles(fileLoader(files), configInfo);
+        return processFiles(fileLoader(files), configInfo, files.length);
     }
 
     function header() {

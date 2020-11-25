@@ -13,6 +13,7 @@ import {
     removePathsFromGlobalImports,
 } from './link';
 import { tableToLines } from './util/table';
+import { Emitters, isProgressFileComplete, MessageType, ProgressItem } from './emitters';
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
@@ -20,6 +21,7 @@ interface Options extends CSpellApplicationOptions {
     issues: boolean;
     silent: boolean;
     mustFindFiles: boolean;
+    progress?: boolean;
 }
 type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
@@ -40,40 +42,54 @@ function errorEmitter(message: string, error: Error) {
     console.error(chalk.red(message), error.toString());
 }
 
-function infoEmitter(message: string, msgType: App.MessageType) {
-    switch (msgType) {
-        case 'Debug':
-            console.info(chalk.cyan(message));
-            break;
-        case 'Info':
-            console.info(chalk.yellow(message));
-            break;
-        case 'Progress':
-            console.info(chalk.white(message));
-            break;
-    }
-}
+type InfoEmitter = Record<MessageType, (msg: string) => void>;
 
-function debugEmitter(message: string) {
-    infoEmitter(message, App.MessageTypes.Debug);
-}
-
-function nullEmitter(_: string | App.Issue) {
+function nullEmitter() {
     /* empty */
 }
 
-function getEmitters(options: Options): App.Emitters {
+function relativeFilename(filename: string): string {
+    const cwd = process.cwd();
+    if (filename.startsWith(cwd)) {
+        return '.' + filename.slice(cwd.length);
+    }
+    return filename;
+}
+
+function reportProgress(p: ProgressItem) {
+    if (isProgressFileComplete(p)) {
+        const fc = '' + p.fileCount;
+        const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
+        const idx = fn + '/' + fc;
+        const filename = chalk.gray(relativeFilename(p.filename));
+        const time = p.elapsedTimeMs !== undefined ? chalk.white(p.elapsedTimeMs.toFixed(2) + 'ms') : '-';
+        console.error(`${idx} ${filename} ${time}`);
+    }
+}
+
+function getEmitters(options: Options): Emitters {
     const issueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
         : options.legacy
         ? templateIssueLegacy
         : templateIssue;
-    const { silent = false, issues } = options;
+    const { silent, issues, progress, verbose, debug } = options;
+
+    const emitters: InfoEmitter = {
+        Debug: !silent && debug ? (s) => console.info(chalk.cyan(s)) : nullEmitter,
+        Info: !silent && verbose ? (s) => console.info(chalk.yellow(s)) : nullEmitter,
+    };
+
+    function infoEmitter(message: string, msgType: MessageType): void {
+        emitters[msgType]?.(message);
+    }
+
     return {
         issue: silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate),
         error: silent ? nullEmitter : errorEmitter,
-        info: silent || !options.verbose ? nullEmitter : infoEmitter,
-        debug: options.debug ? debugEmitter : nullEmitter,
+        info: infoEmitter,
+        debug: emitters.Debug,
+        progress: !silent && progress ? reportProgress : nullEmitter,
     };
 }
 
@@ -110,6 +126,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
         .option('--no-issues', 'Do not show the spelling errors.')
+        .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console')
         .option('-s, --silent', 'Silent mode, suppress error messages')
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
@@ -122,7 +139,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .arguments('[files...]')
         .action((files: string[], options: Options) => {
             const { mustFindFiles } = options;
-            const emitters: App.Emitters = getEmitters(options);
+            const emitters: Emitters = getEmitters(options);
             if (!files.length) {
                 spellCheckCommand.help((text) => text + usage);
                 return;

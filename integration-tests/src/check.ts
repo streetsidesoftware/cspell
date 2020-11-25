@@ -10,7 +10,7 @@ import Chalk from 'chalk';
 import { formatExecOutput, logWithPrefix } from './outputHelper';
 
 const config = readConfig();
-const cspellArgs = '-u';
+const cspellArgs = '-u --no-progress';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
 
 const cspellCommand = `node ${jsCspell} ${cspellArgs}`;

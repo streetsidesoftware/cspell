@@ -7,12 +7,14 @@
             "description": "Custom Workspace Dictionary"
         }
     ],
-    "dictionaries": ["workspace"],
+    "dictionaries": [
+        "workspace"
+    ],
     "ignorePaths": [
         "**/jest.config.js",
-        "**/integration-tests/config/config.json",
-        "**/integration-tests/repositories/**",
-        "**/integration-tests/snapshots/**",
+        "integration-tests/config/config.json",
+        "integration-tests/repositories/**",
+        "integration-tests/snapshots/**",
         "package*.json",
         ".gitattributes",
         ".gitignore",
@@ -24,6 +26,7 @@
         "**/temp/**/*",
         "**/node_modules/**",
         "**/coverage/**",
+        "lcov.info",
         "**/.gitignore",
         "**/dist/**",
         "**/*.trie",
@@ -31,6 +34,5 @@
         "**/tsconfig.json",
         "**/.vscode/**"
     ],
-    "ignoreWords": [
-    ]
+    "ignoreWords": []
 }
