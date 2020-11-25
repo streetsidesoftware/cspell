@@ -2,7 +2,7 @@ import * as app from './app';
 import * as Commander from 'commander';
 import * as Path from 'path';
 import * as Link from './link';
-import stripAnsi from 'strip-ansi';
+import chalk from 'chalk';
 // import { listGlobalImports /* addPathsToGlobalImports, removePathsFromGlobalImports */ } from './link';
 
 const projectRoot = Path.join(__dirname, '..');
@@ -63,7 +63,10 @@ class RecordStdout {
         const encoding = typeof encodingOrCb === 'string' ? encodingOrCb : undefined;
         cb = cb || (typeof encodingOrCb === 'function' ? encodingOrCb : undefined);
         if (typeof str === 'string') {
-            this.text.push(...str.split(/\r?\n/g));
+            const t = this.text.pop() || '';
+            const lines = str.split(/\r?\n/g);
+            lines[0] = t + lines[0];
+            this.text.push(...lines);
         }
         return encoding ? this.write(str, encoding, cb) : this.write(str, cb);
     }
@@ -72,6 +75,8 @@ class RecordStdout {
         this.text.length = 0;
     }
 }
+
+const colorLevel = chalk.level;
 
 describe('Validate cli', () => {
     const error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation();
@@ -86,6 +91,7 @@ describe('Validate cli', () => {
 
     beforeEach(() => {
         capture.startCapture();
+        chalk.level = 3;
     });
 
     afterEach(() => {
@@ -97,33 +103,34 @@ describe('Validate cli', () => {
         removePathsFromGlobalImports.mockClear();
         capture.stopCapture();
         capture.clear();
+        chalk.level = colorLevel;
     });
 
     test.each`
-        msg                              | testArgs                                                                | errorCheck         | eError   | eLog     | eInfo
-        ${'no-args'}                     | ${[]}                                                                   | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'current_file'}                | ${[__filename]}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'with spelling errors'}        | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with spelling errors'}        | ${['--debug', pathSamples('Dutch.txt')]}                                | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
-        ${'with spelling errors'}        | ${['--silent', pathSamples('Dutch.txt')]}                               | ${app.CheckFailed} | ${false} | ${false} | ${false}
-        ${'current_file languageId'}     | ${[__filename, '--languageId=typescript']}                              | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'trace hello'}                 | ${['trace', 'hello']}                                                   | ${undefined}       | ${false} | ${true}  | ${false}
-        ${'trace help'}                  | ${['trace', '-h']}                                                      | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'trace not-in-any-dictionary'} | ${['trace', 'not-in-any-dictionary']}                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'check help'}                  | ${['check', '--help']}                                                  | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'check LICENSE'}               | ${['check', pathRoot('LICENSE')]}                                       | ${undefined}       | ${false} | ${true}  | ${false}
-        ${'check missing'}               | ${['check', pathRoot('missing-file.txt')]}                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'check with spelling errors'}  | ${['check', pathSamples('Dutch.txt')]}                                  | ${app.CheckFailed} | ${false} | ${true}  | ${false}
-        ${'LICENSE'}                     | ${[pathRoot('LICENSE')]}                                                | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'samples/Dutch.txt'}           | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'current_file --verbose'}      | ${['--verbose', __filename]}                                            | ${undefined}       | ${true}  | ${false} | ${true}
-        ${'bad config'}                  | ${['-c', __filename, __filename]}                                       | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-        ${'not found error by default'}  | ${['*.not']}                                                            | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-        ${'must find with error'}        | ${['*.not', '--must-find-files']}                                       | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-        ${'must find force no error'}    | ${['*.not', '--no-must-find-files']}                                    | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'cspell-bad.json'}             | ${['-c', pathSamples('cspell-bad.json'), __filename]}                   | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'cspell-import-missing.json'}  | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]} | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-    `('app $msg $testArgs', executeTest);
+        msg                                          | testArgs                                                                | errorCheck         | eError   | eLog     | eInfo
+        ${'no-args'}                                 | ${[]}                                                                   | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'current_file'}                            | ${[__filename]}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'with spelling errors Dutch.txt'}          | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with spelling errors --debug Dutch.txt'}  | ${['--debug', pathSamples('Dutch.txt')]}                                | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
+        ${'with spelling errors --silent Dutch.txt'} | ${['--silent', pathSamples('Dutch.txt')]}                               | ${app.CheckFailed} | ${false} | ${false} | ${false}
+        ${'current_file languageId'}                 | ${[__filename, '--languageId=typescript']}                              | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'trace hello'}                             | ${['trace', 'hello']}                                                   | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace help'}                              | ${['trace', '-h']}                                                      | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'trace not-in-any-dictionary'}             | ${['trace', 'not-in-any-dictionary']}                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'check help'}                              | ${['check', '--help']}                                                  | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'check LICENSE'}                           | ${['check', pathRoot('LICENSE')]}                                       | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'check missing'}                           | ${['check', pathRoot('missing-file.txt')]}                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'check with spelling errors'}              | ${['check', pathSamples('Dutch.txt')]}                                  | ${app.CheckFailed} | ${false} | ${true}  | ${false}
+        ${'LICENSE'}                                 | ${[pathRoot('LICENSE')]}                                                | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'samples/Dutch.txt'}                       | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'current_file --verbose'}                  | ${['--verbose', __filename]}                                            | ${undefined}       | ${true}  | ${false} | ${true}
+        ${'bad config'}                              | ${['-c', __filename, __filename]}                                       | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'not found error by default'}              | ${['*.not']}                                                            | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'must find with error'}                    | ${['*.not', '--must-find-files']}                                       | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'must find force no error'}                | ${['*.not', '--no-must-find-files']}                                    | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'cspell-bad.json'}                         | ${['-c', pathSamples('cspell-bad.json'), __filename]}                   | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'cspell-import-missing.json'}              | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]} | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+    `('app $msg', executeTest);
 
     async function executeTest({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) {
         const commander = getCommander();
@@ -137,17 +144,17 @@ describe('Validate cli', () => {
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(capture.text.map(stripAnsi)).toMatchSnapshot();
+        expect(capture.text).toMatchSnapshot();
     }
 
     test.each`
-        msg       | testArgs                                                 | errorCheck   | eError   | eLog    | eInfo
-        ${'link'} | ${['link']}                                              | ${undefined} | ${false} | ${true} | ${false}
-        ${'link'} | ${['link', 'ls']}                                        | ${undefined} | ${false} | ${true} | ${false}
-        ${'link'} | ${['link', 'list']}                                      | ${undefined} | ${false} | ${true} | ${false}
-        ${'link'} | ${['link', 'add', 'cspell-dict-cpp/cspell-ext.json']}    | ${undefined} | ${false} | ${true} | ${false}
-        ${'link'} | ${['link', 'remove', 'cspell-dict-cpp/cspell-ext.json']} | ${undefined} | ${false} | ${true} | ${false}
-    `('app $msg $testArgs', executeLinkTest);
+        msg              | testArgs                                                 | errorCheck   | eError   | eLog    | eInfo
+        ${'link'}        | ${['link']}                                              | ${undefined} | ${false} | ${true} | ${false}
+        ${'link ls'}     | ${['link', 'ls']}                                        | ${undefined} | ${false} | ${true} | ${false}
+        ${'link list'}   | ${['link', 'list']}                                      | ${undefined} | ${false} | ${true} | ${false}
+        ${'link add'}    | ${['link', 'add', 'cspell-dict-cpp/cspell-ext.json']}    | ${undefined} | ${false} | ${true} | ${false}
+        ${'link remove'} | ${['link', 'remove', 'cspell-dict-cpp/cspell-ext.json']} | ${undefined} | ${false} | ${true} | ${false}
+    `('app $msg', executeLinkTest);
 
     async function executeLinkTest({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) {
         listGlobalImports.mockImplementation(_listGlobalImports());
@@ -164,7 +171,7 @@ describe('Validate cli', () => {
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(capture.text.map(stripAnsi)).toMatchSnapshot();
+        expect(capture.text).toMatchSnapshot();
     }
 });
 
