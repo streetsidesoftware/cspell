@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as App from './application';
+import { Emitters, ProgressFileComplete } from './emitters';
 
 const getStdinResult = {
     value: '',
@@ -181,12 +182,13 @@ function sampleTests(): SampleTest[] {
     // cspell:enable
 }
 
-class Logger implements App.Emitters {
+class Logger implements Emitters {
     log: string[] = [];
     issueCount = 0;
     errorCount = 0;
     debugCount = 0;
     infoCount = 0;
+    progressCount = 0;
     issues: App.Issue[] = [];
 
     issue = (issue: App.Issue) => {
@@ -210,5 +212,10 @@ class Logger implements App.Emitters {
     debug = (message: string) => {
         this.debugCount += 1;
         this.log.push(`Debug: ${message}`);
+    };
+
+    progress = (p: ProgressFileComplete) => {
+        this.progressCount += 1;
+        this.log.push(`Progress: ${p.type} ${p.fileNum} ${p.fileCount} ${p.filename}`);
     };
 }

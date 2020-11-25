@@ -62,8 +62,8 @@ function reportProgress(p: ProgressItem) {
         const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
         const idx = fn + '/' + fc;
         const filename = chalk.gray(relativeFilename(p.filename));
-        const time = chalk.white(p.elapsedTimeMs.toFixed(2) + 'ms');
-        console.info(`${idx} ${filename} ${time}`);
+        const time = p.elapsedTimeMs !== undefined ? chalk.white(p.elapsedTimeMs.toFixed(2) + 'ms') : '-';
+        console.error(`${idx} ${filename} ${time}`);
     }
 }
 

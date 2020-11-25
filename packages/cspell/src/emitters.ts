@@ -44,7 +44,7 @@ export interface ProgressFileComplete extends ProgressItem {
     fileNum: number;
     fileCount: number;
     filename: string;
-    elapsedTimeMs: number;
+    elapsedTimeMs: number | undefined;
 }
 export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
 

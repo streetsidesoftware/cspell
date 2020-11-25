@@ -9,7 +9,7 @@ import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { GlobMatcher } from 'cspell-glob';
 import { IOptions } from './IOptions';
-import { measurePromiseExecution } from './util/timer';
+import { measurePromise } from './util/timer';
 import {
     DebugEmitter,
     Emitters,
@@ -215,17 +215,22 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         for (const fileP of files) {
             ++n;
             const file = await fileP;
-            if (!file || !file.text) {
+            const emitProgress = (elapsedTimeMs?: number) =>
+                cfg.progress({
+                    type: 'ProgressFileComplete',
+                    fileNum: n,
+                    fileCount,
+                    filename: file.filename,
+                    elapsedTimeMs,
+                });
+            if (!file.text) {
+                emitProgress();
                 continue;
             }
-            const { r, elapsedTimeMs } = await measurePromiseExecution(() => processFile(file, configInfo));
-            cfg.progress({
-                type: 'ProgressFileComplete',
-                fileNum: n,
-                fileCount,
-                filename: file.filename,
-                elapsedTimeMs,
-            });
+            const p = processFile(file, configInfo);
+            const { elapsedTimeMs } = await measurePromise(p);
+            emitProgress(elapsedTimeMs);
+            const r = await p;
             status.files += 1;
             if (r.issues.length || r.errors) {
                 status.filesWithIssues.add(file.filename);

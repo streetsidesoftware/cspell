@@ -1,25 +1,20 @@
-interface MeasureResult<T> {
+export interface MeasurePromiseResult {
     elapsedTimeMs: number;
-    r: T;
+    success: boolean;
 }
 
-export function measureExecution<T>(fn: () => T): MeasureResult<T> {
+export async function measurePromise<T>(p: Promise<T>): Promise<MeasurePromiseResult> {
     const start = process.hrtime();
-    const r = fn();
+    let success = true;
+    try {
+        await p;
+    } catch (e) {
+        success = false;
+    }
     const elapsedTimeMs = hrTimeToMs(process.hrtime(start));
     return {
         elapsedTimeMs,
-        r,
-    };
-}
-
-export async function measurePromiseExecution<T>(fn: () => Promise<T>): Promise<MeasureResult<T>> {
-    const start = process.hrtime();
-    const r = await fn();
-    const elapsedTimeMs = hrTimeToMs(process.hrtime(start));
-    return {
-        elapsedTimeMs,
-        r,
+        success,
     };
 }
 
@@ -29,14 +24,4 @@ export function elapsedTimeMsFrom(relativeTo: [number, number]): number {
 
 export function hrTimeToMs(hrTime: [number, number]): number {
     return hrTime[0] * 1.0e3 + hrTime[1] * 1.0e-6;
-}
-
-export async function measurePromise<T>(fn: () => Promise<T> | T): Promise<MeasureResult<T>> {
-    const start = process.hrtime();
-    const r = await fn();
-    const elapsedTimeMs = hrTimeToMs(process.hrtime(start));
-    return {
-        elapsedTimeMs,
-        r,
-    };
 }
