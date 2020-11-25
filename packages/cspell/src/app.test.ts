@@ -34,6 +34,44 @@ interface TestCase {
     eInfo: boolean;
 }
 
+class RecordStdout {
+    private static columnWidth = 80;
+    private write = process.stdout.write.bind(process.stdout);
+    private stdoutWrite: StdoutWrite | undefined;
+    private columns: number = process.stdout.columns;
+    readonly text: string[] = [];
+
+    startCapture() {
+        this.stopCapture();
+        this.stdoutWrite = process.stdout.write;
+        process.stdout.write = this.capture.bind(this);
+        process.stdout.columns = RecordStdout.columnWidth;
+    }
+
+    stopCapture() {
+        if (this.stdoutWrite) {
+            process.stdout.write = this.stdoutWrite;
+            process.stdout.columns = this.columns;
+        }
+        this.stdoutWrite = undefined;
+    }
+
+    private capture(buffer: Uint8Array | string, cb?: Callback): boolean;
+    private capture(str: Uint8Array | string, encoding?: BufferEncoding, cb?: Callback): boolean;
+    private capture(str: Uint8Array | string, encodingOrCb?: BufferEncoding | Callback, cb?: Callback): boolean {
+        const encoding = typeof encodingOrCb === 'string' ? encodingOrCb : undefined;
+        cb = cb || (typeof encodingOrCb === 'function' ? encodingOrCb : undefined);
+        if (typeof str === 'string') {
+            this.text.push(...str.split(/\r?\n/g));
+        }
+        return encoding ? this.write(str, encoding, cb) : this.write(str, cb);
+    }
+
+    clear() {
+        this.text.length = 0;
+    }
+}
+
 describe('Validate cli', () => {
     const error = jest.spyOn(console, 'error').mockName('console.error').mockImplementation();
     const log = jest.spyOn(console, 'log').mockName('console.log').mockImplementation();
@@ -43,6 +81,11 @@ describe('Validate cli', () => {
     const removePathsFromGlobalImports = jest
         .spyOn(Link, 'removePathsFromGlobalImports')
         .mockName('removePathsFromGlobalImports');
+    const capture = new RecordStdout();
+
+    beforeEach(() => {
+        capture.startCapture();
+    });
 
     afterEach(() => {
         info.mockClear();
@@ -51,18 +94,25 @@ describe('Validate cli', () => {
         listGlobalImports.mockClear();
         addPathsToGlobalImports.mockClear();
         removePathsFromGlobalImports.mockClear();
+        capture.stopCapture();
+        capture.clear();
     });
 
     test.each`
         msg                              | testArgs                                                                | errorCheck         | eError   | eLog     | eInfo
-        ${'no-args'}                     | ${[]}                                                                   | ${'outputHelp'}    | ${true}  | ${true}  | ${false}
+        ${'no-args'}                     | ${[]}                                                                   | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'current_file'}                | ${[__filename]}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
         ${'with spelling errors'}        | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with spelling errors'}        | ${['--debug', pathSamples('Dutch.txt')]}                                | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
+        ${'with spelling errors'}        | ${['--silent', pathSamples('Dutch.txt')]}                               | ${app.CheckFailed} | ${false} | ${false} | ${false}
         ${'current_file languageId'}     | ${[__filename, '--languageId=typescript']}                              | ${undefined}       | ${true}  | ${false} | ${false}
         ${'trace hello'}                 | ${['trace', 'hello']}                                                   | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace help'}                  | ${['trace', '-h']}                                                      | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'trace not-in-any-dictionary'} | ${['trace', 'not-in-any-dictionary']}                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'check help'}                  | ${['check', '--help']}                                                  | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'check LICENSE'}               | ${['check', pathRoot('LICENSE')]}                                       | ${undefined}       | ${false} | ${true}  | ${false}
         ${'check missing'}               | ${['check', pathRoot('missing-file.txt')]}                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'check with spelling errors'}  | ${['check', pathSamples('Dutch.txt')]}                                  | ${app.CheckFailed} | ${false} | ${true}  | ${false}
         ${'LICENSE'}                     | ${[pathRoot('LICENSE')]}                                                | ${undefined}       | ${true}  | ${false} | ${false}
         ${'samples/Dutch.txt'}           | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'current_file --verbose'}      | ${['--verbose', __filename]}                                            | ${undefined}       | ${true}  | ${false} | ${true}
@@ -86,6 +136,7 @@ describe('Validate cli', () => {
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+        expect(capture.text).toMatchSnapshot();
     }
 
     test.each`
@@ -112,6 +163,7 @@ describe('Validate cli', () => {
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+        expect(capture.text).toMatchSnapshot();
     }
 });
 
@@ -143,3 +195,6 @@ function _removePathsFromGlobalImports(): typeof Link['removePathsFromGlobalImpo
         };
     };
 }
+
+type StdoutWrite = typeof process.stdout.write;
+type Callback = (err?: Error) => void;
