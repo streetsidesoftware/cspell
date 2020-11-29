@@ -60,6 +60,17 @@ cspell check <filename> --color | less -r
 
 ## CI/CD Continuous Integration support
 
+### Mega-Linter
+
+[Mega-Linter](https://nvuillam.github.io/mega-linter/) aggregates 70 linters ready to use out of the box, including [cspell](https://nvuillam.github.io/mega-linter/descriptors/spell_cspell/)
+
+- Can run as a GitHub Action, on other CI tools and locally
+- Provides an updated `.cspell.json` file with new unknown words
+
+**Setup**
+
+Quick setup following installation guide in [Mega-Linter documentation](https://nvuillam.github.io/mega-linter/)
+
 ### Git commit-hooks
 
 #### pre-commit
