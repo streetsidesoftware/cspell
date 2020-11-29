@@ -6,6 +6,7 @@ import resolveGlobal from 'resolve-global';
 
 export interface ResolveFileResult {
     filename: string;
+    relativeTo: string | undefined;
     found: boolean;
 }
 
@@ -19,36 +20,45 @@ const testNodeModules = /^node_modules\//;
  */
 export function resolveFile(filename: string, relativeTo: string): ResolveFileResult {
     filename = filename.replace(/^~/, os.homedir());
-    const methodResolveFrom = (filename: string) => tryResolveFrom(filename, relativeTo);
-    const steps: { filename: string; fn: (f: string) => ResolveFileResult }[] = [
+    const steps: { filename: string; fn: (f: string, r: string) => ResolveFileResult }[] = [
+        { filename: filename, fn: tryNodeResolve },
         { filename: path.resolve(relativeTo, filename), fn: tryResolveExists },
         { filename: path.resolve(filename), fn: tryResolveExists },
-        { filename: filename, fn: methodResolveFrom },
-        { filename: filename.replace(testNodeModules, ''), fn: methodResolveFrom },
+        { filename: filename, fn: tryResolveFrom },
+        { filename: filename.replace(testNodeModules, ''), fn: tryResolveFrom },
         { filename: filename, fn: tryResolveGlobal },
     ];
 
     for (const step of steps) {
-        const r = step.fn(step.filename);
+        const r = step.fn(step.filename, relativeTo);
         if (r.found) return r;
     }
-    return { filename: path.resolve(relativeTo, filename), found: false };
+    return { filename: path.resolve(relativeTo, filename), relativeTo, found: false };
+}
+
+function tryNodeResolve(filename: string, relativeTo: string): ResolveFileResult {
+    try {
+        const r = require.resolve(filename, { paths: [path.resolve(relativeTo)] });
+        return { filename: r, relativeTo, found: true };
+    } catch (_) {
+        return { filename, relativeTo, found: false };
+    }
 }
 
 function tryResolveGlobal(filename: string): ResolveFileResult {
     const r = resolveGlobal.silent(filename);
-    return { filename: r || filename, found: !!r };
+    return { filename: r || filename, relativeTo: undefined, found: !!r };
 }
 
 function tryResolveExists(filename: string): ResolveFileResult {
-    return { filename, found: fs.existsSync(filename) };
+    return { filename, relativeTo: undefined, found: fs.existsSync(filename) };
 }
 
 function tryResolveFrom(filename: string, relativeTo: string): ResolveFileResult {
     try {
-        return { filename: resolveFrom(relativeTo, filename), found: true };
+        return { filename: resolveFrom(relativeTo, filename), relativeTo, found: true };
     } catch (error) {
         // Failed to resolve a relative module request
-        return { filename: filename, found: false };
+        return { filename: filename, relativeTo, found: false };
     }
 }
