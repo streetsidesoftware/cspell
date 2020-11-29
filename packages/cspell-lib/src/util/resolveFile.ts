@@ -21,6 +21,7 @@ const testNodeModules = /^node_modules\//;
 export function resolveFile(filename: string, relativeTo: string): ResolveFileResult {
     filename = filename.replace(/^~/, os.homedir());
     const steps: { filename: string; fn: (f: string, r: string) => ResolveFileResult }[] = [
+        { filename: filename, fn: tryNodeResolveDefaultPaths },
         { filename: filename, fn: tryNodeResolve },
         { filename: path.resolve(relativeTo, filename), fn: tryResolveExists },
         { filename: path.resolve(filename), fn: tryResolveExists },
@@ -36,9 +37,27 @@ export function resolveFile(filename: string, relativeTo: string): ResolveFileRe
     return { filename: path.resolve(relativeTo, filename), relativeTo, found: false };
 }
 
-function tryNodeResolve(filename: string, relativeTo: string): ResolveFileResult {
+function tryNodeResolveDefaultPaths(filename: string): ResolveFileResult {
     try {
-        const r = require.resolve(filename, { paths: [path.resolve(relativeTo)] });
+        const r = require.resolve(filename);
+        return { filename: r, relativeTo: undefined, found: true };
+    } catch (_) {
+        return { filename, relativeTo: undefined, found: false };
+    }
+}
+
+function tryNodeResolve(filename: string, relativeTo: string): ResolveFileResult {
+    const home = os.homedir();
+    function calcPaths(p: string) {
+        const paths = [p];
+        for (; p && path.dirname(p) !== p && p !== home; p = path.dirname(p)) {
+            paths.push(p);
+        }
+        return paths;
+    }
+    const paths = calcPaths(path.resolve(relativeTo));
+    try {
+        const r = require.resolve(filename, { paths });
         return { filename: r, relativeTo, found: true };
     } catch (_) {
         return { filename, relativeTo, found: false };
