@@ -50,6 +50,13 @@ function tryNodeResolve(filename: string, relativeTo: string): ResolveFileResult
     const home = os.homedir();
     function calcPaths(p: string) {
         const paths = [p];
+        // Do not progress towards the root if it is a relative filename.
+        if (
+            filename.startsWith('.') &&
+            (filename.startsWith('./') || filename.startsWith('.' + path.sep) || filename.startsWith('..'))
+        ) {
+            return paths;
+        }
         for (; p && path.dirname(p) !== p && p !== home; p = path.dirname(p)) {
             paths.push(p);
         }
