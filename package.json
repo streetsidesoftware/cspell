@@ -32,7 +32,8 @@
     "test-watch": "lerna run --parallel test-watch",
     "test": "lerna run test && ajv -s ./cspell.schema.json -d cspell.json",
     "test-integrations": "cd ./integration-tests && npm run integration-tests",
-    "update-packages": "lerna exec \"npm update -S && rimraf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci"
+    "update-packages": "lerna exec \"npm update -S && rimraf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci",
+    "update-snapshot": "lerna run update-snapshot"
   },
   "repository": {
     "type": "git",
