@@ -14,7 +14,7 @@
     "build-integration-tests": "cd ./integration-tests && npm i",
     "check-spelling": "npx cspell **/*.*",
     "clean-build": "lerna run clean-build",
-    "clean": "lerna run clean",
+    "clean": "lerna run clean && rimraf lcov.info",
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
     "coverage-collect": "globcat packages/*/coverage/lcov.info > lcov.info",
     "install": "lerna bootstrap --ci",
