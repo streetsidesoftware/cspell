@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.8](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.7...cspell-lib@4.3.8) (2020-11-30)
+
+
+### Bug Fixes
+
+* improve resolve search logic ([#696](https://github.com/streetsidesoftware/cspell/issues/696)) ([e39dea2](https://github.com/streetsidesoftware/cspell/commit/e39dea2badbfc88219690954024035408fc959be))
+
+
+
+
+
 ## [4.3.7](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.6...cspell-lib@4.3.7) (2020-11-29)
 
 
