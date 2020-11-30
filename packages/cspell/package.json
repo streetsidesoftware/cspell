@@ -16,17 +16,10 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "lint-travis": "tslint \"src/**/*.ts\"",
-    "build": "npm run compile",
+    "build": "tsc -p .",
     "clean-build": "npm run clean && npm run build",
-    "compile": "tsc -p .",
-    "watch": "tsc --watch -p .",
     "coverage": "jest --coverage",
-    "generate-code-coverage": "NODE_ENV=test nyc --silent --no-clean --temp-dir=../../.nyc_output npm run test-ts",
-    "test-ts": "../../node_modules/.bin/jest",
-    "test-watch": "jest --watch",
-    "prepublishOnly": "npm run lint && npm run clean-build && npm test",
+    "prepublishOnly": "npm run clean-build && npm test",
     "test": "jest"
   },
   "repository": {

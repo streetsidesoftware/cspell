@@ -26,7 +26,6 @@
     "test-spec": "lerna run test-spec",
     "test-ts": "lerna run test-ts",
     "test-watch": "lerna run --parallel test-watch",
-    "travis-coverage": "npm run gen-coverage && globcat packages/*/coverage/lcov.info | coveralls",
     "test": "lerna run test && ajv -s ./cspell.schema.json -d cspell.json",
     "update-packages": "lerna exec \"npm update -S && rm -rf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci"
   },
