@@ -5,8 +5,7 @@ import * as path from 'path';
 import * as zlib from 'zlib';
 
 export async function readTrieFileFromConfig(configLocation: string): Promise<Trie> {
-    const buffer = await fs.readFile(configLocation);
-    const json = buffer.toString();
+    const json = await fs.readFile(configLocation, 'utf-8');
     const config = JSON.parse(json.replace(/\/\/.*/g, ''));
     const dictDef = (config && config.dictionaryDefinitions && config.dictionaryDefinitions[0]) || {};
     const dictPath = dictDef.file || '';

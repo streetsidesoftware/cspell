@@ -3,7 +3,7 @@ import { CompoundWordsMethod } from './walker';
 import { readTrie } from './dictionaries.test.helper';
 
 function getTrie() {
-    return readTrie('cspell-dict-en_us');
+    return readTrie('@cspell/dict-en_us/cspell-ext.json');
 }
 
 const timeout = 10000;

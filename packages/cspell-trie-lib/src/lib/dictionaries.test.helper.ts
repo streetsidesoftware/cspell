@@ -7,8 +7,8 @@ const tries = new Map<string, Promise<Trie>>();
 export function readTrie(name: string): Promise<Trie> {
     return memorize(name, tries, (name) => {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const pkg = require(name);
-        return readTrieFileFromConfig(pkg.getConfigLocation());
+        const pkgLocation = require.resolve(name);
+        return readTrieFileFromConfig(pkgLocation);
     });
 }
 
