@@ -1,7 +1,7 @@
 import { readTrie } from './dictionaries.test.helper';
 
 function getTrie() {
-    return readTrie('cspell-dict-es-es');
+    return readTrie('@cspell/dict-es-es/cspell-ext.json');
 }
 
 describe('Validate Spanish Suggestions', () => {

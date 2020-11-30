@@ -21,10 +21,10 @@ const testNodeModules = /^node_modules\//;
 export function resolveFile(filename: string, relativeTo: string): ResolveFileResult {
     filename = filename.replace(/^~/, os.homedir());
     const steps: { filename: string; fn: (f: string, r: string) => ResolveFileResult }[] = [
-        { filename: filename, fn: tryNodeResolveDefaultPaths },
         { filename: filename, fn: tryNodeResolve },
         { filename: path.resolve(relativeTo, filename), fn: tryResolveExists },
         { filename: path.resolve(filename), fn: tryResolveExists },
+        { filename: filename, fn: tryNodeResolveDefaultPaths },
         { filename: filename, fn: tryResolveFrom },
         { filename: filename.replace(testNodeModules, ''), fn: tryResolveFrom },
         { filename: filename, fn: tryResolveGlobal },

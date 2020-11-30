@@ -2,12 +2,11 @@ import { expect } from 'chai';
 import * as cspell from '../index';
 import * as path from 'path';
 import * as fsp from 'fs-extra';
-import * as dutchDict from 'cspell-dict-nl-nl';
 import * as util from '../util/util';
 
 const sampleFilename = path.join(__dirname, '..', '..', 'samples', 'Dutch.txt');
 const sampleFile = fsp.readFile(sampleFilename, 'utf8').then((buffer) => buffer.toString());
-const dutchConfig = dutchDict.getConfigLocation();
+const dutchConfig = require.resolve('@cspell/dict-nl-nl/cspell-ext.json');
 
 describe('Validate that Dutch text is correctly checked.', () => {
     jest.setTimeout(10000);

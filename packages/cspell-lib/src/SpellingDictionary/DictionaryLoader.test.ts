@@ -69,13 +69,14 @@ describe('Validate DictionaryLoader', () => {
     });
 
     it('loadDictionary', async () => {
+        const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');
         const tests: [string, LoadOptions, string][] = [
             [sample('words.txt'), {}, 'apple'],
             [sample('words.txt'), { type: 'S' }, 'pear'],
             [sample('words.txt'), { type: 'C' }, 'strawberry'],
-            ['node_modules/cspell-dict-csharp/csharp.txt.gz', {}, 'const'],
-            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'S' }, 'const'],
-            ['node_modules/cspell-dict-csharp/csharp.txt.gz', { type: 'C' }, 'const'],
+            [csharp, {}, 'const'],
+            [csharp, { type: 'S' }, 'const'],
+            [csharp, { type: 'C' }, 'const'],
         ];
 
         for (const t of tests) {
