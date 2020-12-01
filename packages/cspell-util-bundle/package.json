@@ -17,7 +17,7 @@
     "build-production": "rimraf dist build && tsc -p . && webpack --mode production",
     "watch": "npm run build -- watch",
     "prepare": "npm run build-production",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist coverage",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",

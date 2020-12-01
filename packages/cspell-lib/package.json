@@ -12,7 +12,7 @@
     "config/**"
   ],
   "scripts": {
-    "clean": "rimraf dist temp",
+    "clean": "rimraf dist temp coverage",
     "build": "npm run compile && npm run build-schema",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/Settings/CSpellSettingsDef.ts --type CSpellSettings --validationKeywords markdownDescription  --validationKeywords scope --validationKeywords deprecationMessage -o  ../../cspell.schema.json",
     "clean-build": "npm run clean && npm run build",
