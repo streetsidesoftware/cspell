@@ -13,19 +13,12 @@
   ],
   "scripts": {
     "clean": "rimraf dist",
-    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "lint-travis": "tslint \"src/**/*.ts\"",
     "build": "npm run compile && npm run build-schema",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/Settings/CSpellSettingsDef.ts --type CSpellSettings --validationKeywords markdownDescription  --validationKeywords scope --validationKeywords deprecationMessage -o  ../../cspell.schema.json",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
-    "watch": "tsc --watch -p .",
-    "tsc": "tsc -p .",
-    "tscv": "tsc -v",
-    "coverage": "npm run generate-code-coverage",
-    "generate-code-coverage": "jest --coverage",
-    "test-watch": "jest --watch",
-    "prepublishOnly": "npm run lint && npm run clean-build && npm test",
+    "coverage": "jest --coverage",
+    "prepublishOnly": "npm run clean-build && npm test",
     "test": "jest"
   },
   "repository": {
