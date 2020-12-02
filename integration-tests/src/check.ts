@@ -1,6 +1,6 @@
 import * as Shell from 'shelljs';
 import * as Path from 'path';
-import { readConfig } from './config';
+import { readConfig, resolveArgs } from './config';
 import { Repository } from './configDef';
 import { execAsync } from './sh';
 import { checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
@@ -212,7 +212,7 @@ function tf(v: boolean | undefined): 'true' | 'false' {
 
 export async function check(patterns: string[], options: CheckOptions): Promise<void> {
     const { exclude, update, fail, parallelLimit } = options;
-    const matching = config.repositories.filter((rep) => shouldCheckRepo(rep, { patterns, exclude }));
+    const matching = config.repositories.filter((rep) => shouldCheckRepo(rep, { patterns, exclude })).map(resolveArgs);
 
     console.log(`
 Check

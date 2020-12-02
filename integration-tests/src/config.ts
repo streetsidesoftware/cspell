@@ -4,7 +4,7 @@ import * as Path from 'path';
 
 const configLocation = Path.resolve(Path.join(__dirname, '..', 'config'));
 const configFile = Path.join(configLocation, 'config.json');
-const repoConfigs = Path.join(configLocation, 'repositories');
+const repoConfigs = 'config/repositories';
 
 const defaultConfig: Config = {
     repositories: [],
@@ -21,7 +21,7 @@ export function readConfig(): Config {
 }
 
 export function resolveArgs(rep: Repository): Repository {
-    const repoConfigLocation = Path.join(repoConfigs, rep.path);
+    const repoConfigLocation = Path.join('..', '..', '..', '..', repoConfigs, rep.path);
     const args = rep.args.map((a) => a.replace('${repoConfig}', repoConfigLocation));
     return { ...rep, args };
 }
