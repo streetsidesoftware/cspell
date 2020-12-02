@@ -1,11 +1,16 @@
-import { checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
+import { checkoutRepositoryAsync, repositoryDir, addRepository } from './repositoryHelper';
 import { CaptureLogger } from './CaptureLogger';
 import rimraf from 'rimraf';
 import { join } from 'path';
 import { promisify } from 'util';
+import { addRepository as configAddRepository } from './config';
 
 const rm = promisify(rimraf);
 const defaultTimeout = 60000;
+
+jest.mock('./config');
+
+const mockAddRepository = configAddRepository as jest.Mock<typeof configAddRepository>;
 
 describe('Validate repository helper', () => {
     interface TestCase {
@@ -17,12 +22,10 @@ describe('Validate repository helper', () => {
     }
 
     test.each`
-        msg           | repo                                                           | path                                           | commit                                        | expected
-        ${'master'}   | ${'https://github.com/streetsidesoftware/hunspell-reader.git'} | ${'test/streetsidesoftware/hunspell-reader-1'} | ${undefined}                                  | ${true}
-        ${'hash'}     | ${'https://github.com/streetsidesoftware/hunspell-reader.git'} | ${'test/streetsidesoftware/hunspell-reader-2'} | ${'de9543cf1716299ca45c02d4c411dbdd6a5df233'} | ${true}
-        ${'tag'}      | ${'https://github.com/streetsidesoftware/hunspell-reader.git'} | ${'test/streetsidesoftware/hunspell-reader-3'} | ${'v3.1.5'}                                   | ${true}
-        ${'bad url'}  | ${'https://github.com/missing/hunspell-reader.git'}            | ${'test/streetsidesoftware/hunspell-reader-3'} | ${'v3.1.5'}                                   | ${false}
-        ${'bad hash'} | ${'https://github.com/streetsidesoftware/hunspell-reader.git'} | ${'test/streetsidesoftware/hunspell-reader-2'} | ${'de9543cf171629badbadbad'}                  | ${false}
+        msg           | repo                                                         | path                                         | commit                       | expected
+        ${'master'}   | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'test/streetsidesoftware/regexp-worker-1'} | ${undefined}                 | ${true}
+        ${'bad url'}  | ${'https://github.com/streetsidesoftware/missing.git'}       | ${'test/streetsidesoftware/regexp-worker-4'} | ${undefined}                 | ${false}
+        ${'bad hash'} | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'test/streetsidesoftware/regexp-worker-5'} | ${'de9543cf171629badbadbad'} | ${false}
     `(
         'checkoutRepositoryAsync $msg $repo $path $commit',
         async ({ repo, path, commit, expected }: TestCase) => {
@@ -31,6 +34,19 @@ describe('Validate repository helper', () => {
             expect(await checkoutRepositoryAsync(logger, repo, path, commit)).toBe(expected);
             // console.log(logger.logs);
             // console.log(logger.errors);
+        },
+        defaultTimeout
+    );
+
+    test.each`
+        msg         | repo                                                         | path
+        ${'master'} | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'streetsidesoftware/regexp-worker'}
+    `(
+        'addRepository $msg $repo $path $commit',
+        async ({ repo, path }: TestCase) => {
+            const logger = new CaptureLogger();
+            expect(await addRepository(logger, repo)).toBe(true);
+            expect(mockAddRepository).toHaveBeenCalledWith(path, repo, expect.any(String));
         },
         defaultTimeout
     );

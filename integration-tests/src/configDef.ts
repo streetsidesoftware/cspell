@@ -5,5 +5,6 @@ export interface Config {
 export interface Repository {
     path: string;
     url: string;
+    commit: string;
     args: string[];
 }

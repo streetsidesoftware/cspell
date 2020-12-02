@@ -3,11 +3,13 @@ import * as Path from 'path';
 import { readConfig } from './config';
 import { Repository } from './configDef';
 import { execAsync } from './sh';
-import { repositoryDir, updateRepositoryAsync } from './repositoryHelper';
+import { checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
 import { checkAgainstSnapshot } from './snapshots';
 import { shouldCheckRepo } from './shouldCheckRepo';
 import Chalk from 'chalk';
-import { formatExecOutput, logWithPrefix } from './outputHelper';
+import { formatExecOutput } from './outputHelper';
+import { PrefixLogger } from './PrefixLogger';
+import { Logger } from './types';
 
 const config = readConfig();
 const cspellArgs = '-u --no-progress';
@@ -31,41 +33,42 @@ async function execCheck(rep: Repository, update: boolean): Promise<CheckResult>
     const path = Path.join(repositoryDir, rep.path);
     const color = colors[checkCount % colors.length];
     const prefix = color(name + '\t ');
+    const logger = new PrefixLogger(prefix);
+    const { log } = logger;
     ++checkCount;
 
-    logWithPrefix(prefix, '');
-    logWithPrefix(prefix, color`**********************************************`);
-    logWithPrefix(prefix, color`*  Checking: `);
-    logWithPrefix(prefix, color`*    '${name}'`);
-    logWithPrefix(prefix, color`**********************************************\n`);
-    if (!(await updateRepositoryAsync(prefix, rep.path))) {
-        logWithPrefix(prefix, '******** fail ********');
+    log('');
+    log(color`**********************************************`);
+    log(color`*  Checking: `);
+    log(color`*    '${name}'`);
+    log(color`**********************************************\n`);
+    if (!(await checkoutRepositoryAsync(logger, rep.url, rep.path, rep.commit))) {
+        logger.log('******** fail ********');
         return Promise.resolve({ success: false, rep, elapsedTime: 0 });
     }
-    printTime(prefix);
-    const cspellResult = await execCommand(prefix, path, cspellCommand, rep.args);
-    logResult(prefix, cspellResult);
+    log(time());
+    const cspellResult = await execCommand(logger, path, cspellCommand, rep.args);
+    log(resultReport(cspellResult));
     const r = checkResult(rep, cspellResult, update);
-    printTime(prefix);
+    log(time());
     if (r.diff) {
-        logWithPrefix(prefix, r.diff);
-        logWithPrefix(prefix, '');
+        log(r.diff);
+        log('');
     }
-    logWithPrefix(prefix, color`\n************ Done: ${name} ************\n`);
+    log(color`\n************ Done: ${name} ************\n`);
     return { success: r.match, rep, elapsedTime: cspellResult.elapsedTime };
 }
 
-function printTime(prefix: string) {
-    const time = new Date().toISOString();
-    logWithPrefix(prefix, time);
+function time() {
+    return new Date().toISOString();
 }
 
-async function execCommand(prefix: string, path: string, command: string, args: string[]): Promise<Result> {
+async function execCommand(logger: Logger, path: string, command: string, args: string[]): Promise<Result> {
     const start = Date.now();
     const argv = args.map((a) => JSON.stringify(a)).join(' ');
     const fullCommand = command + ' ' + argv;
     Shell.pushd('-q', path);
-    logWithPrefix(prefix, `Execute: '${fullCommand}'`);
+    logger.log(`Execute: '${fullCommand}'`);
     const pResult = execAsync(fullCommand);
     Shell.popd('-q', '+0');
     const result = await pResult;
@@ -78,10 +81,9 @@ async function execCommand(prefix: string, path: string, command: string, args: 
     });
 }
 
-function logResult(prefix: string, result: Result) {
+function resultReport(result: Result) {
     const fullOutputLines = formatExecOutput(result).split('\n');
-    const output = (fullOutputLines.length > 7 ? '...\n' : '') + fullOutputLines.slice(-7).join('\n');
-    logWithPrefix(prefix, output);
+    return (fullOutputLines.length > 7 ? '...\n' : '') + fullOutputLines.slice(-7).join('\n');
 }
 
 function assembleOutput(result: Result) {

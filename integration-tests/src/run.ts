@@ -60,7 +60,7 @@ function run(program: commander.Command) {
             }
         )
         .action((url: string) => {
-            addRepository(url);
+            addRepository(console, url);
         });
 
     program.parse(process.argv);
