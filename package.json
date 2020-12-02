@@ -7,7 +7,8 @@
   "scripts": {
     "build": "lerna run build",
     "build-schema": "lerna run build-schema",
-    "check-spelling": "cspell **/{*.ts,*.md}",
+    "build-integration-tests": "cd ./integration-tests && npm i",
+    "check-spelling": "npx cspell '**/*.*'",
     "clean-build": "lerna run clean-build",
     "clean": "lerna run clean",
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
