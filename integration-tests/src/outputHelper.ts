@@ -45,3 +45,8 @@ export function logWithPrefix(pfx: string, text: string, ...params: unknown[]): 
     const s = text ? format(text, ...params) : '';
     console.log(prefix(pfx, s));
 }
+
+export function errorWithPrefix(pfx: string, text: string, ...params: unknown[]): void {
+    const s = text ? format(text, ...params) : '';
+    console.error(prefix(pfx, red(s)));
+}

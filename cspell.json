@@ -7,20 +7,22 @@
             "description": "Custom Workspace Dictionary"
         }
     ],
-    "dictionaries": ["workspace"],
+    "dictionaries": [
+        "workspace"
+    ],
     "ignorePaths": [
         "azure-pipelines.yml",
         "**/jest.config.js",
-        "packages/cspell-lib/dictionaries/**",
-        "packages/cspell-lib/migrated_dictionaries/**",
-        "**/integration-tests/repositories/**",
-        "**/integration-tests/snapshots/**",
+        "integration-tests/config/config.json",
+        "integration-tests/config/repositories/**",
+        "integration-tests/snapshots/**",
         "package*.json",
         ".gitattributes",
         ".gitignore",
         "cspell.json",
         "packages/Samples/**",
         "packages/*/samples/**",
+        "temp/**",
         "**/{cspell.json,cSpell.json,.cspell.json}",
         "**/package*.json",
         "**/temp/**/*",
