@@ -5,8 +5,11 @@ import * as Shell from 'shelljs';
 import * as fs from 'fs';
 import { ShouldCheckOptions, shouldCheckRepo } from './shouldCheckRepo';
 import { formatExecOutput, logWithPrefix } from './outputHelper';
+import { Logger } from './types';
+import simpleGit from 'simple-git';
+import mkdirp from 'mkdirp';
 
-export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'repositories'));
+export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'temp', 'repositories'));
 
 const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
@@ -28,27 +31,62 @@ export function addRepository(url: string): boolean {
     return true;
 }
 
-export function updateRepository(path: string | undefined = '', useRemote = false): boolean {
-    path = path.replace(/^repositories/, '');
-
-    if (!path || !fs.existsSync(Path.join(repositoryDir, path))) {
-        if (path) {
-            console.log(`Repository: '${path}' not found.`);
+export async function checkoutRepositoryAsync(
+    logger: Logger,
+    url: string,
+    path: string,
+    commit: string | undefined
+): Promise<boolean> {
+    const { log, error } = logger;
+    path = Path.resolve(Path.join(repositoryDir, path));
+    commit = commit || 'master';
+    if (!fs.existsSync(path)) {
+        const c = await cloneRepo(logger, url, path, commit === 'master' ? 1 : 1000);
+        if (!c) {
+            return false;
         }
+    }
+    log(`checkout ${url}`);
+    Shell.pushd('-q', path);
+    const git = simpleGit(path);
+    const pCheckout = git.checkout(commit, ['--force']);
+    Shell.popd('-q');
+    try {
+        const r = await pCheckout;
+        log(`checked out ${r}`);
+    } catch (e) {
+        error(e);
         return false;
     }
-    const remote = useRemote ? '--remote' : '';
-    const init = useRemote ? '' : '--init';
-    Shell.pushd('-q', repositoryDir);
-    exec(`git submodule update --depth 1 ${remote} ${init} -- ${JSON.stringify(path)}`, { echo: true, bail: true });
-    Shell.popd('-q');
+    return true;
+}
 
+async function cloneRepo(
+    { log, error }: Logger,
+    url: string,
+    path: string,
+    depth: number | undefined
+): Promise<boolean> {
+    depth = depth || 1;
+    log(`Cloning ${url}`);
+    await mkdirp(Path.dirname(path));
+    try {
+        const git = simpleGit();
+        const c = await git.clone(url, path, [
+            '--single-branch',
+            '--no-checkout',
+            `--depth=${depth}`,
+            '--shallow-submodules',
+        ]);
+        log(`Cloned: ${c}`);
+    } catch (e) {
+        error(e);
+        return false;
+    }
     return true;
 }
 
 export async function updateRepositoryAsync(prefix: string, path: string, useRemote = false): Promise<boolean> {
-    path = path.replace(/^repositories/, '');
-
     if (!path || !fs.existsSync(Path.join(repositoryDir, path))) {
         if (path) {
             console.log(`${prefix}Repository: '${path}' not found.`);
