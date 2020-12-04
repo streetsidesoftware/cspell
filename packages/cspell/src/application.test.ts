@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as App from './application';
-import { Emitters, ProgressFileComplete } from './emitters';
+import { Emitters, ProgressFileComplete, Issue } from './emitters';
 
 const getStdinResult = {
     value: '',
@@ -189,9 +189,9 @@ class Logger implements Emitters {
     debugCount = 0;
     infoCount = 0;
     progressCount = 0;
-    issues: App.Issue[] = [];
+    issues: Issue[] = [];
 
-    issue = (issue: App.Issue) => {
+    issue = (issue: Issue) => {
         this.issues.push(issue);
         this.issueCount += 1;
         const { uri, row, col, text } = issue;
