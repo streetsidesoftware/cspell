@@ -17,6 +17,7 @@ import {
     MessageTypes,
     ProgressEmitter,
     SpellingErrorEmitter,
+    Issue,
 } from './emitters';
 
 // cspell:word nocase
@@ -67,8 +68,6 @@ export interface RunResult {
     issues: number;
     errors: number;
 }
-
-export type Issue = cspell.TextDocumentOffset;
 
 export interface GlobSrcInfo {
     matcher: GlobMatcher;

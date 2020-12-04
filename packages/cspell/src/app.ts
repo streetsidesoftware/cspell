@@ -13,7 +13,7 @@ import {
     removePathsFromGlobalImports,
 } from './link';
 import { tableToLines } from './util/table';
-import { Emitters, isProgressFileComplete, MessageType, ProgressItem } from './emitters';
+import { Emitters, isProgressFileComplete, MessageType, ProgressItem, Issue } from './emitters';
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
@@ -33,7 +33,7 @@ const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown
 const templateIssueWordsOnly = '${text}';
 
 function genIssueEmitter(template: string) {
-    return function issueEmitter(issue: App.Issue) {
+    return function issueEmitter(issue: Issue) {
         console.log(formatIssue(template, issue));
     };
 }
@@ -332,7 +332,7 @@ function trimMid(s: string, w: number): string {
     return s.substr(0, l) + '...' + s.substr(-r);
 }
 
-function formatIssue(template: string, issue: App.Issue) {
+function formatIssue(template: string, issue: Issue) {
     const { uri = '', row, col, text } = issue;
     return template
         .replace(/\$\{uri\}/, uri)
