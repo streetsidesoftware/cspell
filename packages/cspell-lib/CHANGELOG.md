@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.3](https://github.com/streetsidesoftware/cspell/compare/v5.0.2...v5.0.3) (2020-12-04)
+
+
+### Bug Fixes
+
+* improve resolve search logic ([#697](https://github.com/streetsidesoftware/cspell/issues/697)) ([75be89b](https://github.com/streetsidesoftware/cspell/commit/75be89b17bb0f5515db1eafbda04c3a35f70aadd))
+* use node resolver by default ([#695](https://github.com/streetsidesoftware/cspell/issues/695)) ([0d95869](https://github.com/streetsidesoftware/cspell/commit/0d958692741d5d06f888bfe2d400f399b32988f4))
+
+
+
+
+
 ## [5.0.2](https://github.com/streetsidesoftware/cspell/compare/v5.0.2-alpha.1...v5.0.2) (2020-11-26)
 
 **Note:** Version bump only for package cspell-lib
