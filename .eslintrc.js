@@ -25,7 +25,7 @@ const config = {
             parser: '@typescript-eslint/parser',
             plugins: ['@typescript-eslint'],
             rules: {
-                'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+                'no-unused-vars': 0, // off - caught by the compiler
                 '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
                 'node/no-missing-import': [
                     'error',

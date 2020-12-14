@@ -135,11 +135,14 @@ function parseNumber(s: string | undefined): number | undefined {
     return isNaN(n) ? undefined : n;
 }
 
+// eslint-disable-next-line no-unused-vars
+type ActionFn = (words: Sequence<string>, dst: string) => Promise<unknown>;
+
 async function processAction(
     src: string[],
     fileExt: '.txt' | '.trie',
     options: CompileCommonOptions,
-    action: (words: Sequence<string>, dst: string) => Promise<unknown>
+    action: ActionFn
 ): Promise<void> {
     console.log(
         'Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
@@ -191,9 +194,9 @@ function toMergeTargetFile(filename: string, destination: string | undefined, ex
 }
 
 async function processFilesIndividually(
-    action: (words: Sequence<string>, dst: string) => Promise<unknown>,
+    action: ActionFn,
     filesToProcess: Sequence<Promise<FileToProcess>>,
-    srcToTarget: (src: string) => string
+    srcToTarget: (_src: string) => string
 ) {
     const toProcess = filesToProcess.map(async (pFtp) => {
         const { src, words } = await pFtp;
@@ -208,11 +211,7 @@ async function processFilesIndividually(
     }
 }
 
-async function processFiles(
-    action: (words: Sequence<string>, dst: string) => Promise<unknown>,
-    filesToProcess: Sequence<Promise<FileToProcess>>,
-    mergeTarget: string
-) {
+async function processFiles(action: ActionFn, filesToProcess: Sequence<Promise<FileToProcess>>, mergeTarget: string) {
     const toProcess = await Promise.all([...filesToProcess]);
     const dst = mergeTarget;
 
