@@ -1,9 +1,11 @@
 // alias for uniqueFilterFnGenerator
 export const uniqueFn = uniqueFilterFnGenerator;
 
-export function uniqueFilterFnGenerator<T>(): (v: T) => boolean;
-export function uniqueFilterFnGenerator<T, U>(extractFn: (v: T) => U): (v: T) => boolean;
-export function uniqueFilterFnGenerator<T>(extractFn?: (v: T) => T): (v: T) => boolean {
+type FilterFn<T> = (_v: T) => boolean;
+
+export function uniqueFilterFnGenerator<T>(): FilterFn<T>;
+export function uniqueFilterFnGenerator<T, U>(extractFn: (v: T) => U): FilterFn<T>;
+export function uniqueFilterFnGenerator<T>(extractFn?: (v: T) => T): FilterFn<T> {
     const values = new Set<T>();
     const extractor = extractFn || ((a) => a);
     return (v: T) => {
