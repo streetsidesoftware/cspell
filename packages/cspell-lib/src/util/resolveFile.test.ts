@@ -10,9 +10,10 @@ interface Config {
     import: string[];
 }
 
-const config: Config = parse(
-    fs.readFileSync(path.join(__dirname, '..', '..', 'config', 'cspell-default.json'), 'utf-8')
-);
+const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
+const defaultConfigLocation = path.dirname(defaultConfigFile);
+
+const config: Config = parse(fs.readFileSync(defaultConfigFile, 'utf-8'));
 
 const ext = path.extname(__filename);
 const notFound = '1fgh0dld6y56cr1wls.r9bp0ckc00ds0gna.json';
@@ -41,11 +42,10 @@ describe('Validate resolveFile', () => {
 
     test.each(
         config.import
-            .concat(config.import.map((f) => f.replace('node_modules/', '')))
             .map((f) => ({
                 filename: f,
-                relativeTo: __dirname,
-                expected: require.resolve(f.replace('node_modules/', '')),
+                relativeTo: defaultConfigLocation,
+                expected: require.resolve(f, { paths: [defaultConfigLocation] }),
                 found: true,
             }))
             .map(({ filename, relativeTo, expected, found }) => [filename, relativeTo, expected, found])

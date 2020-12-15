@@ -15,6 +15,12 @@ const mockConfigstore = Configstore as jest.Mock<Configstore>;
 
 const configFileLocation = getConfigstoreLocation();
 
+const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
+const pathCpp = require.resolve('@cspell/dict-cpp/cspell-ext.json');
+const pathHtml = require.resolve('@cspell/dict-html/cspell-ext.json');
+const pathCss = require.resolve('@cspell/dict-css/cspell-ext.json');
+const python = require.resolve('@cspell/dict-python/cspell-ext.json');
+
 describe('Validate Link.ts', () => {
     beforeEach(() => {
         mockConfigstore.mockClear();
@@ -48,7 +54,6 @@ describe('Validate Link.ts', () => {
     });
 
     test('listGlobalImports with imports', () => {
-        const python = require.resolve('@cspell/dict-python/cspell-ext.json');
         setConfigstore({
             import: [python],
         });
@@ -91,11 +96,6 @@ describe('Validate Link.ts', () => {
     });
 
     test('addPathsToGlobalImports', () => {
-        const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
-        const pathCpp = require.resolve('@cspell/dict-cpp/cspell-ext.json');
-        const pathHtml = require.resolve('@cspell/dict-html/cspell-ext.json');
-        const pathCss = require.resolve('@cspell/dict-css/cspell-ext.json');
-
         setConfigstore({
             import: [pathPython, pathCss],
         });
@@ -118,8 +118,6 @@ describe('Validate Link.ts', () => {
     });
 
     test('addPathsToGlobalImports with errors', () => {
-        const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
-        const pathCpp = require.resolve('@cspell/dict-cpp/cspell-ext.json');
         const pathNotFound = '__not_found_file_.ext';
 
         setConfigstore({
@@ -145,11 +143,6 @@ describe('Validate Link.ts', () => {
     });
 
     test('removePathsFromGlobalImports', () => {
-        const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
-        const pathCpp = require.resolve('@cspell/dict-cpp/cspell-ext.json');
-        const pathHtml = require.resolve('@cspell/dict-html/cspell-ext.json');
-        const pathCss = require.resolve('@cspell/dict-css/cspell-ext.json');
-
         setConfigstore({
             import: [pathCpp, pathPython, pathCss, pathHtml],
         });
@@ -168,11 +161,6 @@ describe('Validate Link.ts', () => {
     });
 
     test('removePathsFromGlobalImports with unknown', () => {
-        const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
-        const pathCpp = require.resolve('@cspell/dict-cpp/cspell-ext.json');
-        const pathHtml = require.resolve('@cspell/dict-html/cspell-ext.json');
-        const pathCss = require.resolve('@cspell/dict-css/cspell-ext.json');
-
         setConfigstore({
             import: [pathCpp, pathPython, pathCss, pathHtml],
         });
@@ -197,11 +185,6 @@ describe('Validate Link.ts', () => {
     });
 
     test('removePathsFromGlobalImports with nothing to remove', () => {
-        const pathPython = require.resolve('@cspell/dict-python/cspell-ext.json');
-        const pathCpp = require.resolve('@cspell/dict-cpp/cspell-ext.json');
-        const pathHtml = require.resolve('@cspell/dict-html/cspell-ext.json');
-        const pathCss = require.resolve('@cspell/dict-css/cspell-ext.json');
-
         setConfigstore({
             import: [pathCpp, pathPython, pathCss, pathHtml],
         });
