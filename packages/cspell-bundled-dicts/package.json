@@ -5,7 +5,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [],
+  "main": "cspell-default.json",
+  "files": [
+    "cspell-default.json"
+  ],
+  "exports": {
+    ".": "./cspell-default.json",
+    "./cspell-default.json": "./cspell-default.json"
+  },
   "scripts": {},
   "repository": {
     "type": "git",
@@ -23,9 +30,6 @@
     "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-bundled-dicts"
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
-  "exports": {
-    "./cspell-default.json": "./cspell-default.json"
-  },
   "dependencies": {
     "@cspell/dict-aws": "^1.0.12",
     "@cspell/dict-bash": "^1.0.10",
