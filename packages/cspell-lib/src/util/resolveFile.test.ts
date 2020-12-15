@@ -10,9 +10,9 @@ interface Config {
     import: string[];
 }
 
-const config: Config = parse(
-    fs.readFileSync(path.join(__dirname, '..', '..', 'config', 'cspell-default.json'), 'utf-8')
-);
+const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
+
+const config: Config = parse(fs.readFileSync(defaultConfigFile, 'utf-8'));
 
 const ext = path.extname(__filename);
 const notFound = '1fgh0dld6y56cr1wls.r9bp0ckc00ds0gna.json';

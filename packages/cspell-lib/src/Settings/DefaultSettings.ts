@@ -7,12 +7,11 @@ import {
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';
-import * as Path from 'path';
 import { mergeSettings } from './index';
 
 // cspell:ignore filetypes
 
-const defaultConfigFile = Path.join(__dirname, '..', '..', 'config', 'cspell-default.json');
+const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
 
 const regExpSpellCheckerDisable = [
     RegPat.regExSpellingGuardBlock,
