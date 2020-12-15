@@ -1,4 +1,3 @@
-/* eslint-disable node/no-extraneous-require */
 import { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';
 import Configstore from 'configstore';
 // eslint-disable-next-line jest/no-mocks-import

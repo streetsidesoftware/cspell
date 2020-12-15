@@ -71,7 +71,6 @@ describe('Validate DictionaryLoader', () => {
     });
 
     it('loadDictionary', async () => {
-        // eslint-disable-next-line node/no-extraneous-require
         const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');
         const tests: [string, LoadOptions, string][] = [
             [sample('words.txt'), {}, 'apple'],
