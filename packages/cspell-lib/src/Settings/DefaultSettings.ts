@@ -8,10 +8,12 @@ import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';
 import { mergeSettings } from './index';
+import { resolveFile } from '../util/resolveFile';
 
-// cspell:ignore filetypes
+const defaultConfigFileModuleRef = '@cspell/cspell-bundled-dicts/cspell-default.json';
 
-const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
+// Do not use require.resolve because webpack will mess it up.
+const defaultConfigFile = resolveConfigModule(defaultConfigFileModuleRef);
 
 const regExpSpellCheckerDisable = [
     RegPat.regExSpellingGuardBlock,
@@ -19,6 +21,7 @@ const regExpSpellCheckerDisable = [
     RegPat.regExSpellingGuardNext,
 ];
 
+// cspell:ignore filetypes
 const predefinedPatterns = [
     // Exclude patterns
     { name: 'Urls', pattern: RegPat.regExMatchUrls },
@@ -118,6 +121,10 @@ const getSettings = (function () {
         return settings;
     };
 })();
+
+function resolveConfigModule(configModuleName: string) {
+    return resolveFile(configModuleName, __dirname).filename;
+}
 
 export function getDefaultSettings(): CSpellSettings {
     return getSettings();
