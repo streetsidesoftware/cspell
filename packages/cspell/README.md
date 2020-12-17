@@ -81,7 +81,7 @@ exec npx cspell -- --no-summary $files
 
 ## Requirements
 
-cspell needs Node 8 and above.
+cspell needs Node 12 and above.
 
 ## How it works
 
