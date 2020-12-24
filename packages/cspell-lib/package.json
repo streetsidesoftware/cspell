@@ -14,7 +14,7 @@
   "scripts": {
     "clean": "rimraf dist temp coverage",
     "build": "npm run compile && npm run build-schema",
-    "build-schema": "ts-json-schema-generator --no-top-ref --path src/Settings/CSpellSettingsDef.ts --type CSpellSettings --validationKeywords markdownDescription  --validationKeywords scope --validationKeywords deprecationMessage -o  ../../cspell.schema.json",
+    "build-schema": "ts-json-schema-generator --no-top-ref --path src/Settings/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecationMessage -o  ../../cspell.schema.json",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
@@ -77,6 +77,6 @@
     "jest": "^26.6.3",
     "lorem-ipsum": "^2.0.3",
     "rimraf": "^3.0.2",
-    "ts-json-schema-generator": "^0.80.0"
+    "ts-json-schema-generator": "^0.82.0"
   }
 }
