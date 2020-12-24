@@ -21,7 +21,7 @@ export const regExString = /(?:(['"]).*?(?<![^\\]\\(\\\\)*)\1)|(?:`[\s\S]*?(?<![
 export const regExCStyleComments = /(?<!\w:)(?:\/\/.*)|(?:\/\*[\s\S]*?\*\/)/g;
 export const rexExPythonStyleComments = /#.*|(?:('''|""")[^\1]+?\1)/gm;
 
-export const regExEmail = /<?[\w.\-+]+@\w+(\.\w+)+>?/gi;
+export const regExEmail = /<?\b[\w.\-+]{1,128}@\w{1,63}(\.\w{1,63}){1,4}\b>?/gi;
 
 export const regExRepeatedChar = /^(\w)\1{3,}$/;
 
