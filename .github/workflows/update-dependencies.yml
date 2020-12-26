@@ -9,6 +9,10 @@ on:
       - "**/package.json"
       - "**/package-lock.json"
   workflow_dispatch:
+    inputs:
+      updateSnapshots:
+        description: "Update Integration Test snapshots (true/false)"
+        default: "true"
   schedule:
     - cron: "0 12 * * 0"
 
@@ -39,6 +43,7 @@ jobs:
         run: |
           npm run update-packages
       - name: Update Integration Test Snapshots
+        if: ${{ github.event.inputs.updateSnapshots }} == 'true'
         run: |
           npm run update-snapshots
       - name: Has changes
