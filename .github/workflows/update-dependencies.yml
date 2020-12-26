@@ -38,6 +38,9 @@ jobs:
       - name: Update packages
         run: |
           npm run update-packages
+      - name: Update Integration Test Snapshots
+        run: |
+          npm run update-snapshots
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
