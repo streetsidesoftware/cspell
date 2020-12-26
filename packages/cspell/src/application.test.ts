@@ -105,7 +105,7 @@ describe('Validate createInit', () => {
 
 describe('Validate internal functions', () => {
     test('_globP empty pattern', async () => {
-        expect(await App._testing_._globP('', {})).toEqual([]);
+        expect(await App._testing_._globP('', { options: {} })).toEqual([]);
     });
 
     test('normalizePattern relative', () => {

@@ -1,4 +1,4 @@
-import glob from 'glob';
+import glob, { IGlob } from 'glob';
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
 import * as path from 'path';
@@ -37,7 +37,7 @@ export interface CSpellApplicationOptions extends BaseOptions {
     /**
      * a globs to exclude files from being checked.
      */
-    exclude?: string[];
+    exclude?: string[] | string;
     /**
      * Only report the words, no line numbers or file names.
      */
@@ -281,7 +281,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globOptions = { root, cwd: root };
+        const globOptions = { root, cwd: root, ignore: configInfo.config.ignorePaths };
         const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(
             cfg.excludes
         );
@@ -328,7 +328,7 @@ Options:
     function filterFiles(files: string[], excludeGlobs: GlobSrcInfo[]): string[] {
         const excludeInfo = extractPatterns(excludeGlobs).map((g) => `Glob: ${g.glob} from ${g.source}`);
         cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
-        const result = files.filter((filename) => !isExcluded(filename, excludeGlobs));
+        const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, excludeGlobs));
         return result;
     }
 }
@@ -426,7 +426,8 @@ async function findFiles(globPatterns: string[], options: GlobOptions): Promise<
     return stdin.concat(globResults.map((filename) => path.resolve(cwd, filename)));
 }
 
-function calcExcludeGlobInfo(root: string, commandLineExclude: string[] | undefined): GlobSrcInfo[] {
+function calcExcludeGlobInfo(root: string, commandLineExclude: string[] | string | undefined): GlobSrcInfo[] {
+    commandLineExclude = typeof commandLineExclude === 'string' ? [commandLineExclude] : commandLineExclude;
     const choice = calcGlobs(commandLineExclude);
     const matcher = new GlobMatcher(choice.globs, root);
     return [
@@ -563,9 +564,15 @@ async function globP(pattern: string | string[], options?: GlobOptions): Promise
     const opts = options || {};
     const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
     const normPatterns = rawPatterns.map((pat) => normalizePattern(pat, root));
+    const globPState: GlobPState = {
+        options: { ...opts },
+    };
+
     const globResults = normPatterns.map(async (pat) => {
-        const opt: GlobOptions = { ...opts, root: pat.root, cwd: pat.root };
-        const absolutePaths = (await _globP(pat.pattern, opt)).map((filename) => path.resolve(pat.root, filename));
+        globPState.options = { ...opts, root: pat.root, cwd: pat.root };
+        const absolutePaths = (await _globP(pat.pattern, globPState)).map((filename) =>
+            path.resolve(pat.root, filename)
+        );
         const relativeToRoot = absolutePaths.map((absFilename) => path.relative(root, absFilename));
         return relativeToRoot;
     });
@@ -573,7 +580,12 @@ async function globP(pattern: string | string[], options?: GlobOptions): Promise
     return results;
 }
 
-function _globP(pattern: string, options: GlobOptions): Promise<string[]> {
+interface GlobPState {
+    options: GlobOptions;
+    glob?: IGlob;
+}
+
+function _globP(pattern: string, state: GlobPState): Promise<string[]> {
     if (!pattern) {
         return Promise.resolve([]);
     }
@@ -584,7 +596,8 @@ function _globP(pattern: string, options: GlobOptions): Promise<string[]> {
             }
             resolve(matches);
         };
-        glob(pattern, options, cb);
+        const options = state.glob ? { ...state.glob, ...state.options } : state.options;
+        state.glob = glob(pattern, options, cb);
     });
 }
 
