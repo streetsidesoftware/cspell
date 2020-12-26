@@ -130,6 +130,28 @@ describe('Validate internal functions', () => {
         expect(r.root).toBe(path.sep);
         expect(r.pattern).toBe(p);
     });
+
+    test('exclude globs default', () => {
+        const ex: string[] = [];
+        const r = App._testing_.calcGlobs(ex);
+        expect(r).toEqual(
+            expect.objectContaining({
+                source: 'default',
+            })
+        );
+    });
+
+    test('exclude globs with space', () => {
+        const ex: string[] = ['*/test\\ files/'];
+        const r = App._testing_.calcGlobs(ex);
+        expect(r).toEqual({ globs: ['*/test files/'], source: 'arguments' });
+    });
+
+    test('exclude globs mixed', () => {
+        const ex: string[] = ['*/test\\ files/ node_modules', '**/*.dat'];
+        const r = App._testing_.calcGlobs(ex);
+        expect(r).toEqual({ globs: ['*/test files/', 'node_modules', '**/*.dat'], source: 'arguments' });
+    });
 });
 
 describe('Application, Validate Samples', () => {

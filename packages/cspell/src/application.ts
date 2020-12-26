@@ -35,9 +35,9 @@ export interface CSpellApplicationOptions extends BaseOptions {
      */
     debug?: boolean;
     /**
-     * a glob to exclude files from being checked.
+     * a globs to exclude files from being checked.
      */
-    exclude?: string;
+    exclude?: string[];
     /**
      * Only report the words, no line numbers or file names.
      */
@@ -57,7 +57,8 @@ export type TraceOptions = BaseOptions;
 export interface BaseOptions {
     config?: string;
     languageId?: string;
-    local?: string;
+    locale?: string;
+    local?: string; // deprecated
 }
 
 export type AppError = NodeJS.ErrnoException;
@@ -93,7 +94,7 @@ export class CSpellApplicationConfiguration {
     readonly debug: DebugEmitter;
     readonly logIssue: SpellingErrorEmitter;
     readonly uniqueFilter: (issue: Issue) => boolean;
-    readonly local: string;
+    readonly locale: string;
 
     readonly configFile: string | undefined;
     readonly configGlob: string = defaultConfigGlob;
@@ -108,7 +109,7 @@ export class CSpellApplicationConfiguration {
         this.configFile = options.config;
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.logIssue = emitters.issue || nullEmitter;
-        this.local = options.local || '';
+        this.locale = options.locale || options.local || '';
         this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
         this.progress = emitters.progress || nullEmitter;
     }
@@ -147,7 +148,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
     async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<FileResult> {
         const settingsFromCommandLine = util.clean({
             languageId: cfg.options.languageId || undefined,
-            language: cfg.local || undefined,
+            language: cfg.locale || undefined,
         });
 
         const result: FileResult = {
@@ -425,17 +426,8 @@ async function findFiles(globPatterns: string[], options: GlobOptions): Promise<
     return stdin.concat(globResults.map((filename) => path.resolve(cwd, filename)));
 }
 
-function calcExcludeGlobInfo(root: string, commandLineExclude: string | undefined): GlobSrcInfo[] {
-    const commandLineExcludes = {
-        globs: commandLineExclude ? commandLineExclude.split(/\s+/g) : [],
-        source: 'arguments',
-    };
-    const defaultExcludes = {
-        globs: defaultExcludeGlobs,
-        source: 'default',
-    };
-
-    const choice = commandLineExcludes.globs.length ? commandLineExcludes : defaultExcludes;
+function calcExcludeGlobInfo(root: string, commandLineExclude: string[] | undefined): GlobSrcInfo[] {
+    const choice = calcGlobs(commandLineExclude);
     const matcher = new GlobMatcher(choice.globs, root);
     return [
         {
@@ -443,6 +435,26 @@ function calcExcludeGlobInfo(root: string, commandLineExclude: string | undefine
             source: choice.source,
         },
     ];
+}
+
+function calcGlobs(commandLineExclude: string[] | undefined): { globs: string[]; source: string } {
+    const globs = (commandLineExclude || [])
+        .map((glob) => glob.split(/(?<!\\)\s+/g))
+        .map((globs) => globs.map((g) => g.replace(/\\ /g, ' ')))
+        .reduce((s, globs) => {
+            globs.forEach((g) => s.add(g));
+            return s;
+        }, new Set<string>());
+    const commandLineExcludes = {
+        globs: [...globs],
+        source: 'arguments',
+    };
+    const defaultExcludes = {
+        globs: defaultExcludeGlobs,
+        source: 'default',
+    };
+
+    return commandLineExcludes.globs.length ? commandLineExcludes : defaultExcludes;
 }
 
 function extractGlobExcludesFromConfig(root: string, source: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
@@ -580,4 +592,5 @@ export const _testing_ = {
     _globP,
     findFiles,
     normalizePattern,
+    calcGlobs,
 };
