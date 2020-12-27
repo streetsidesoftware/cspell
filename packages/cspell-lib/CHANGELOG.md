@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.11](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.10...cspell-lib@4.3.11) (2020-12-27)
+
+
+### Bug Fixes
+
+* Improve speed of testing for email ([#779](https://github.com/streetsidesoftware/cspell/issues/779)) ([#788](https://github.com/streetsidesoftware/cspell/issues/788)) ([63f7f6a](https://github.com/streetsidesoftware/cspell/commit/63f7f6a78b3dd3a93c1ca7b00b1ea4882005c218))
+
+
+
+
+
 ## [4.3.10](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.9...cspell-lib@4.3.10) (2020-12-15)
 
 **Note:** Version bump only for package cspell-lib

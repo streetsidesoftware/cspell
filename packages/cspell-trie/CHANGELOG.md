@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.11](https://github.com/streetsidesoftware/cspell/compare/cspell-trie@4.2.10...cspell-trie@4.2.11) (2020-12-27)
+
+**Note:** Version bump only for package cspell-trie
+
+
+
+
+
 ## [4.2.10](https://github.com/streetsidesoftware/cspell/compare/cspell-trie@4.2.9...cspell-trie@4.2.10) (2020-12-15)
 
 **Note:** Version bump only for package cspell-trie
