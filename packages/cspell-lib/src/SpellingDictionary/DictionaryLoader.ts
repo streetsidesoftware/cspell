@@ -1,4 +1,4 @@
-import { splitLineIntoCodeWords, loadWordsNoError } from '../wordListHelper';
+import { splitLineIntoCodeWords } from '../wordListHelper';
 import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
@@ -78,7 +78,7 @@ export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()): P
     await Promise.all([...dictionaryCache].map(([, entry]) => refreshEntry(entry, maxAge, now)));
 }
 
-async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now()): Promise<void> {
+async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Promise<void> {
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
@@ -94,16 +94,14 @@ type StatsOrError = Stats | Error;
 
 function isEqual(a: StatsOrError, b: StatsOrError): boolean {
     if (isError(a)) {
-        if (isError(b)) {
-            return a.message === b.message && a.name === b.name;
-        }
-        return false;
+        return isError(b) && a.message === b.message && a.name === b.name;
     }
     return !isError(b) && (a.mtimeMs === b.mtimeMs || a.size === b.size);
 }
 
-function isError(e: Error | unknown): e is Error {
-    return e instanceof Error;
+function isError(e: StatsOrError): e is Error {
+    const err = e as Partial<Error>;
+    return !!(err.name && err.message);
 }
 
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
@@ -144,12 +142,8 @@ async function loadCodeWordList(filename: string, options: LoadOptions) {
 }
 
 async function loadTrie(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryTrie(
-        await loadWordsNoError(filename),
-        determineName(filename, options),
-        filename,
-        options
-    );
+    const lines = await readLines(filename);
+    return createSpellingDictionaryTrie(lines, determineName(filename, options), filename, options);
 }
 
 function determineName(filename: string, options: LoadOptions): string {

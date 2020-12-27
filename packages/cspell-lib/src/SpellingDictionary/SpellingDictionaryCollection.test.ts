@@ -1,7 +1,7 @@
 import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
 import { CompoundWordsMethod } from './SpellingDictionaryMethods';
-import { createSpellingDictionary } from './createSpellingDictionary';
+import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
 describe('Verify using multiple dictionaries', () => {
@@ -55,9 +55,11 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createFailedToLoadDictionary('error', './missing.txt', 'error', [new Error('error')]),
         ]);
 
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        expect(dictCollection.getErrors?.()).toHaveLength(1);
         const sugsForTango = dictCollection.suggest('tango', 10);
         expect(sugsForTango).toHaveLength(1);
         expect(sugsForTango[0].word).toEqual('mango');
@@ -141,20 +143,19 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugsForCellipede.map((s) => s.word)).toContain('millipede');
     });
 
-    test('creates using createCollectionP', () => {
+    test('creates using createCollectionP', async () => {
         const dicts = [
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
             createSpellingDictionary(wordsC, 'wordsC', 'test'),
         ];
 
-        return createCollectionP(dicts, 'test', []).then((dictCollection) => {
-            expect(dictCollection.has('mango')).toBe(true);
-            expect(dictCollection.has('tree')).toBe(false);
-            const sugs = dictCollection.suggest('mangos', 4);
-            const sugWords = sugs.map((s) => s.word);
-            expect(sugWords[0]).toBe('mango');
-            return;
-        });
+        const dictCollection = await createCollectionP(dicts, 'test', []);
+        expect(dictCollection.has('mango')).toBe(true);
+        expect(dictCollection.has('tree')).toBe(false);
+        const sugs = dictCollection.suggest('mangos', 4);
+        const sugWords = sugs.map((s) => s.word);
+        expect(sugWords[0]).toBe('mango');
+        expect(dictCollection.getErrors?.()).toHaveLength(0);
     });
 });
