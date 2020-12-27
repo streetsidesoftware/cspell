@@ -116,15 +116,19 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         )
         .option('-v, --verbose', 'display more information about the files being checked and the configuration')
         .option(
-            '--local <local>',
-            'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+            '--locale <local>',
+            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
         )
         .option('--language-id <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
         .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
         .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
         .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
         .option('--debug', 'Output information useful for debugging cspell.json files.')
-        .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern')
+        .option(
+            '-e, --exclude <glob>',
+            'Exclude files matching the glob pattern. This option can be used multiple times to add multiple globs. ',
+            collect
+        )
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
         .option('--no-summary', 'Turn off summary message in console')
@@ -136,6 +140,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
         // .option('--force', 'Force the exit value to always be 0')
         .option('--legacy', 'Legacy output')
+        .option('--local <local>', 'Deprecated -- Use: --locale')
         .arguments('[files...]')
         .action((files: string[], options: Options) => {
             const { mustFindFiles } = options;
@@ -304,6 +309,14 @@ Examples:
     return prog.parseAsync(args).then(() => {
         return;
     });
+}
+
+function collect(value: string, previous: string[] | undefined): string[] {
+    if (!previous) {
+        return [value];
+    }
+    console.log(previous);
+    return previous.concat([value]);
 }
 
 function emitTraceResult(r: App.TraceResult) {
