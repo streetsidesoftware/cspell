@@ -616,7 +616,6 @@ function _globP(pattern: string, state: GlobPState): Promise<string[]> {
 }
 
 export const _testing_ = {
-    _globP,
     findFiles,
     normalizePattern,
     calcGlobs,

@@ -129,10 +129,6 @@ describe('Validate createInit', () => {
 });
 
 describe('Validate internal functions', () => {
-    test('_globP empty pattern', async () => {
-        expect(await App._testing_._globP('', { options: {} })).toEqual([]);
-    });
-
     test('normalizePattern relative', () => {
         const root = process.cwd();
         const r = App._testing_.normalizePattern('../../packages/**/*.ts', root);
