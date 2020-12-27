@@ -2,6 +2,8 @@ import glob, { IGlob } from 'glob';
 import * as path from 'path';
 import * as fsp from 'fs-extra';
 import { IOptions } from './IOptions';
+import { GlobMatcher } from 'cspell-glob';
+import * as cspell from 'cspell-lib';
 
 export interface GlobOptions extends IOptions {
     cwd?: string;
@@ -137,6 +139,50 @@ export function calcGlobs(commandLineExclude: string[] | undefined): { globs: st
     return commandLineExcludes.globs.length ? commandLineExcludes : defaultExcludes;
 }
 
+export interface GlobSrcInfo {
+    matcher: GlobMatcher;
+    source: string;
+}
+
+interface ExtractPatternResult {
+    glob: string;
+    source: string;
+}
+
+export function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
+    const r = globs.reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
+        const source = g.source;
+        const patterns = typeof g.matcher.patterns === 'string' ? [g.matcher.patterns] : g.matcher.patterns;
+        return info.concat(patterns.map((glob) => ({ glob, source })));
+    }, []);
+
+    return r;
+}
+
 export const _testing_ = {
     normalizePattern,
 };
+
+export function calcExcludeGlobInfo(root: string, commandLineExclude: string[] | string | undefined): GlobSrcInfo[] {
+    commandLineExclude = typeof commandLineExclude === 'string' ? [commandLineExclude] : commandLineExclude;
+    const choice = calcGlobs(commandLineExclude);
+    const matcher = new GlobMatcher(choice.globs, root);
+    return [
+        {
+            matcher,
+            source: choice.source,
+        },
+    ];
+}
+
+export function extractGlobExcludesFromConfig(
+    root: string,
+    source: string,
+    config: cspell.CSpellUserSettings
+): GlobSrcInfo[] {
+    if (!config.ignorePaths || !config.ignorePaths.length) {
+        return [];
+    }
+    const matcher = new GlobMatcher(config.ignorePaths, root);
+    return [{ source, matcher }];
+}

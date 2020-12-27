@@ -1,4 +1,11 @@
-import { globP, GlobOptions, calcGlobs } from './util/glob';
+import {
+    globP,
+    GlobOptions,
+    GlobSrcInfo,
+    calcExcludeGlobInfo,
+    extractGlobExcludesFromConfig,
+    extractPatterns,
+} from './util/glob';
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
 import * as path from 'path';
@@ -7,7 +14,6 @@ import * as util from './util/util';
 import { traceWords, TraceResult, CheckTextInfo, getDictionary } from 'cspell-lib';
 import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
-import { GlobMatcher } from 'cspell-glob';
 import { IOptions } from './util/IOptions';
 import { measurePromise } from './util/timer';
 import {
@@ -68,11 +74,6 @@ export interface RunResult {
     filesWithIssues: Set<string>;
     issues: number;
     errors: number;
-}
-
-export interface GlobSrcInfo {
-    matcher: GlobMatcher;
-    source: string;
 }
 
 const defaultMinimatchOptions: IOptions = { nocase: true };
@@ -347,20 +348,6 @@ function runResult(init: Partial<RunResult> = {}): RunResult {
     return { files, filesWithIssues, issues, errors };
 }
 
-interface ExtractPatternResult {
-    glob: string;
-    source: string;
-}
-function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
-    const r = globs.reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
-        const source = g.source;
-        const patterns = typeof g.matcher.patterns === 'string' ? [g.matcher.patterns] : g.matcher.patterns;
-        return info.concat(patterns.map((glob) => ({ glob, source })));
-    }, []);
-
-    return r;
-}
-
 export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
     const configGlob = options.config || defaultConfigGlob;
     const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
@@ -431,26 +418,6 @@ async function findFiles(globPatterns: string[], options: GlobOptions): Promise<
     const globResults = globPats.length ? await globP(globPats, options) : [];
     const cwd = options.cwd || process.cwd();
     return stdin.concat(globResults.map((filename) => path.resolve(cwd, filename)));
-}
-
-function calcExcludeGlobInfo(root: string, commandLineExclude: string[] | string | undefined): GlobSrcInfo[] {
-    commandLineExclude = typeof commandLineExclude === 'string' ? [commandLineExclude] : commandLineExclude;
-    const choice = calcGlobs(commandLineExclude);
-    const matcher = new GlobMatcher(choice.globs, root);
-    return [
-        {
-            matcher,
-            source: choice.source,
-        },
-    ];
-}
-
-function extractGlobExcludesFromConfig(root: string, source: string, config: cspell.CSpellUserSettings): GlobSrcInfo[] {
-    if (!config.ignorePaths || !config.ignorePaths.length) {
-        return [];
-    }
-    const matcher = new GlobMatcher(config.ignorePaths, root);
-    return [{ source, matcher }];
 }
 
 function calcFinalConfigInfo(
