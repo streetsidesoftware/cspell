@@ -1,5 +1,5 @@
 import { CSpellSettings, finalizeSettings } from './Settings';
-import { getDictionary } from './SpellingDictionary';
+import { getDictionary, SpellingDictionaryCollection } from './SpellingDictionary';
 import * as util from './util/util';
 import { genSequence } from 'gensequence';
 
@@ -13,26 +13,35 @@ export interface TraceResult {
 }
 
 export async function traceWords(words: string[], settings: CSpellSettings): Promise<TraceResult[]> {
+    async function finalize(
+        config: CSpellSettings
+    ): Promise<{
+        config: CSpellSettings;
+        dicts: SpellingDictionaryCollection;
+    }> {
+        const settings = finalizeSettings(config);
+        const dictionaries = (settings.dictionaries || [])
+            .concat((settings.dictionaryDefinitions || []).map((d) => d.name))
+            .filter(util.uniqueFn);
+        const dictSettings: CSpellSettings = { ...settings, dictionaries };
+        const dicts = await getDictionary(dictSettings);
+        return {
+            config: settings,
+            dicts,
+        };
+    }
+    const { config, dicts } = await finalize(settings);
+
     const r = await Promise.all(
         genSequence(words)
             // Combine the words with the configs
-            .map((word) => ({ word, config: settings }))
-            // Load the dictionaries
-            .map(async ({ word, config }) => {
-                const settings = finalizeSettings(config);
-                const dictionaries = (settings.dictionaries || [])
-                    .concat((settings.dictionaryDefinitions || []).map((d) => d.name))
-                    .filter(util.uniqueFn);
-                const dictSettings: CSpellSettings = { ...settings, dictionaries };
-                const dicts = await getDictionary(dictSettings);
-                return { word, config, dicts };
-            })
+            .map((word) => ({ word, config, dicts }))
             .toArray()
     );
 
     function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
-        if (!errors) return undefined;
-        return errors.length ? errors : undefined;
+        if (!errors?.length) return undefined;
+        return errors;
     }
 
     // Search each dictionary for the word
