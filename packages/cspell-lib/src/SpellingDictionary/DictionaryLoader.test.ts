@@ -1,4 +1,4 @@
-import { testing, LoadOptions, loadDictionary } from './DictionaryLoader';
+import { testing, LoadOptions, loadDictionary, refreshCacheEntries } from './DictionaryLoader';
 import * as path from 'path';
 jest.mock('../util/logger');
 
@@ -45,7 +45,7 @@ describe('Validate DictionaryLoader', () => {
         for (const t of tests) {
             const entry = testing.loadEntry(t[0], t[1]);
 
-            await expect(entry.state).resolves.toBe(undefined);
+            await expect(entry.state).resolves.toEqual(expect.objectContaining(error));
             await expect(entry.dictionary).resolves.not.toBe(undefined);
         }
     });
@@ -70,22 +70,45 @@ describe('Validate DictionaryLoader', () => {
         }
     });
 
-    it('loadDictionary', async () => {
-        const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');
-        const tests: [string, LoadOptions, string][] = [
-            [sample('words.txt'), {}, 'apple'],
-            [sample('words.txt'), { type: 'S' }, 'pear'],
-            [sample('words.txt'), { type: 'C' }, 'strawberry'],
-            [csharp, {}, 'const'],
-            [csharp, { type: 'S' }, 'const'],
-            [csharp, { type: 'C' }, 'const'],
-        ];
-
-        for (const t of tests) {
-            const d = await loadDictionary(t[0], t[1]);
-            expect(d.has(t[2])).toBe(true);
+    const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');
+    test.each`
+        testCase            | file                          | options          | word            | maxAge       | hasWord  | hasErrors
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}      | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}      | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'S' }} | ${'pear'}       | ${undefined} | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'strawberry'} | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'tree'}       | ${1}         | ${false} | ${false}
+        ${'unknown loader'} | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}      | ${1}         | ${true}  | ${false}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{}}            | ${'apple'}      | ${1}         | ${false} | ${true}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'S' }} | ${'pear'}       | ${undefined} | ${false} | ${true}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'C' }} | ${'strawberry'} | ${1}         | ${false} | ${true}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{}}            | ${'tree'}       | ${1}         | ${false} | ${true}
+        ${'csharp type {}'} | ${csharp}                     | ${{}}            | ${'const'}      | ${1}         | ${true}  | ${false}
+        ${'csharp type S'}  | ${csharp}                     | ${{ type: 'S' }} | ${'const'}      | ${1}         | ${true}  | ${false}
+        ${'csharp type C'}  | ${csharp}                     | ${{ type: 'C' }} | ${'const'}      | ${1}         | ${true}  | ${false}
+    `(
+        '$testCase $word',
+        async ({
+            file,
+            options,
+            word,
+            maxAge,
+            hasWord,
+            hasErrors,
+        }: {
+            file: string;
+            options: LoadOptions;
+            word: string;
+            maxAge: number | undefined;
+            hasWord: boolean;
+            hasErrors: boolean;
+        }) => {
+            await refreshCacheEntries(maxAge, Date.now());
+            const d = await loadDictionary(file, options);
+            expect(d.has(word)).toBe(hasWord);
+            expect(!!d.getErrors?.().length).toBe(hasErrors);
         }
-    });
+    );
 });
 
 function sample(file: string): string {

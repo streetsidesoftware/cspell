@@ -189,6 +189,11 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                 console.error('No matches found');
                 throw new CheckFailed('no matches', 1);
             }
+            const numErrors = results.map((r) => r.errors?.length || 0).reduce((n, r) => n + r, 0);
+            if (numErrors) {
+                console.error('Dictionary Errors.');
+                throw new CheckFailed('dictionary errors', 1);
+            }
         });
 
     type CheckCommandOptions = BaseOptions;
@@ -230,11 +235,6 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                 throw new CheckFailed('Issues found', 1);
             }
         });
-
-    // interface LinkOptions extends BaseOptions {
-    //     delete: boolean;
-    //     doctor: boolean;
-    // }
 
     const linkCommand = prog
         .command('link')
@@ -294,7 +294,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
                 );
                 console.log('Init');
             });
-        */
+    */
 
     const usage = `
 
@@ -322,14 +322,19 @@ function collect(value: string, previous: string[] | undefined): string[] {
 function emitTraceResult(r: App.TraceResult) {
     const terminalWidth = process.stdout.columns || 120;
     const widthName = 20;
+    const errors = r.errors?.map((e) => e.message)?.join('\n\t') || '';
     const w = chalk.green(r.word);
-    const f = r.found ? chalk.whiteBright('*') : chalk.dim('-');
+    const f = r.found ? chalk.whiteBright('*') : errors ? chalk.red('X') : chalk.dim('-');
     const n = chalk.yellowBright(pad(r.dictName, widthName));
     const used = [r.word.length, 1, widthName].reduce((a, b) => a + b, 3);
     const widthSrc = terminalWidth - used;
-    const s = chalk.white(trimMid(r.dictSource, widthSrc));
+    const c = errors ? chalk.red : chalk.white;
+    const s = c(trimMid(r.dictSource, widthSrc));
     const line = [w, f, n, s].join(' ');
     console.log(line);
+    if (errors) {
+        console.error('\t' + chalk.red(errors));
+    }
 }
 
 function pad(s: string, w: number): string {
@@ -337,6 +342,7 @@ function pad(s: string, w: number): string {
 }
 
 function trimMid(s: string, w: number): string {
+    s = s.trim();
     if (s.length <= w) {
         return s;
     }

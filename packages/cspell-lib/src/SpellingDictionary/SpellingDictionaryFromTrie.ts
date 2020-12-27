@@ -122,6 +122,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod)
         );
     }
+
+    public getErrors(): Error[] {
+        return [];
+    }
 }
 
 export async function createSpellingDictionaryTrie(

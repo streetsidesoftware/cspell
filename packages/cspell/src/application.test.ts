@@ -59,8 +59,33 @@ describe('Validate the Application', () => {
         const result = await App.trace(['apple'], {});
         expect(result.length).toBeGreaterThan(2);
 
-        const foundIn = result.filter((r) => r.found).map((r) => r.dictName);
-        expect(foundIn).toEqual(expect.arrayContaining(['en_US.trie.gz']));
+        const foundIn = result.filter((r) => r.found);
+        expect(foundIn).toContainEqual(
+            expect.objectContaining({
+                dictName: 'en_us',
+                dictSource: expect.stringContaining('en_US.trie.gz'),
+            })
+        );
+        expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
+    });
+
+    test('Tests running the trace command with missing dictionary', async () => {
+        const result = await App.trace(['apple'], { config: 'samples/cspell-missing-dict.json' });
+        expect(result.length).toBeGreaterThan(2);
+        expect(result).toContainEqual(
+            expect.objectContaining({
+                dictName: 'missing-dictionary',
+                dictSource: expect.stringContaining('missing.txt'),
+            })
+        );
+        const errors = result.filter((r) => r.errors).map((r) => r.errors);
+        expect(errors).toContainEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    message: expect.stringContaining('no such file'),
+                }),
+            ])
+        );
     });
 
     test('Tests checkText', async () => {
