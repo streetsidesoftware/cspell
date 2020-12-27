@@ -9,10 +9,10 @@ import * as TV from './textValidator';
 
 export { IncludeExcludeOptions } from './textValidator';
 
-export function validateText(text: string, settings: CSpellUserSettings): Promise<Text.TextOffset[]> {
+export async function validateText(text: string, settings: CSpellUserSettings): Promise<Text.TextOffset[]> {
     const finalSettings = Settings.finalizeSettings(settings);
-    const dict = Dictionary.getDictionary(finalSettings);
-    return dict.then((dict) => [...TV.validateText(text, dict, finalSettings)]);
+    const dict = await Dictionary.getDictionary(finalSettings);
+    return [...TV.validateText(text, dict, finalSettings)];
 }
 
 export interface CheckTextInfo {

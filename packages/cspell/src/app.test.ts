@@ -117,6 +117,7 @@ describe('Validate cli', () => {
         ${'trace hello'}                             | ${['trace', 'hello']}                                                   | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace help'}                              | ${['trace', '-h']}                                                      | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'trace not-in-any-dictionary'}             | ${['trace', 'not-in-any-dictionary']}                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'trace missing dictionary'}                | ${['trace', 'hello', '-c', 'samples/cspell-missing-dict.json']}         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'check help'}                              | ${['check', '--help']}                                                  | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'check LICENSE'}                           | ${['check', pathRoot('LICENSE')]}                                       | ${undefined}       | ${false} | ${true}  | ${false}
         ${'check missing'}                           | ${['check', pathRoot('missing-file.txt')]}                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}

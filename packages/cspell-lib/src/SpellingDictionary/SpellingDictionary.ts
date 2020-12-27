@@ -49,4 +49,5 @@ export interface SpellingDictionary {
     readonly size: number;
     readonly options: SpellingDictionaryOptions;
     readonly isDictionaryCaseSensitive: boolean;
+    getErrors?(): Error[];
 }

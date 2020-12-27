@@ -1,6 +1,6 @@
 import { splitLineIntoCodeWords, loadWordsNoError } from '../wordListHelper';
 import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
-import { createSpellingDictionary } from './createSpellingDictionary';
+import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
 import { ReplaceMap } from '../Settings';
@@ -11,15 +11,22 @@ import { stat } from 'fs-extra';
 const MAX_AGE = 10000;
 
 export interface LoadOptions {
-    // Type of file:
-    //  S - single word per line,
-    //  C - each line is treated like code (Camel Case is allowed)
-    // Default is C
-    // C is the slowest to load due to the need to split each line based upon code splitting rules.
+    /**
+     * Optional name of the dictionary.
+     */
+    name?: string;
+
+    /**
+     * Type of file:
+     *  S - single word per line,
+     *  C - each line is treated like code (Camel Case is allowed)
+     * Default is C
+     * C is the slowest to load due to the need to split each line based upon code splitting rules.
+     */
     type?: LoaderType;
-    // Replacement Map
+    /** Replacement Map */
     repMap?: ReplaceMap;
-    // Use Compounds
+    /** Use Compounds */
     useCompounds?: boolean;
 }
 
@@ -45,7 +52,7 @@ interface CacheEntry {
     uri: string;
     options: LoadOptions;
     ts: number;
-    state: Promise<Stats | undefined>;
+    state: Promise<Stats | Error>;
     dictionary: Promise<SpellingDictionary>;
 }
 
@@ -75,21 +82,39 @@ async function refreshEntry(entry: CacheEntry, maxAge = MAX_AGE, now = Date.now(
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
-        const pStat = stat(entry.uri).catch(() => undefined);
+        const pStat = stat(entry.uri).catch((e) => e as Error);
         const [state, oldState] = await Promise.all([pStat, entry.state]);
-        if (entry.ts === now && (state?.mtimeMs !== oldState?.mtimeMs || state?.size !== oldState?.size)) {
+        if (entry.ts === now && !isEqual(state, oldState)) {
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
         }
     }
 }
 
+type StatsOrError = Stats | Error;
+
+function isEqual(a: StatsOrError, b: StatsOrError): boolean {
+    if (isError(a)) {
+        if (isError(b)) {
+            return a.message === b.message && a.name === b.name;
+        }
+        return false;
+    }
+    return !isError(b) && (a.mtimeMs === b.mtimeMs || a.size === b.size);
+}
+
+function isError(e: Error | unknown): e is Error {
+    return e instanceof Error;
+}
+
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
-    const dictionary = load(uri, options).catch(() => createSpellingDictionary([], path.basename(uri), uri, options));
+    const dictionary = load(uri, options).catch((e) =>
+        createFailedToLoadDictionary(determineName(uri, options), uri, 'error', [e])
+    );
     return {
         uri,
         options,
         ts: now,
-        state: stat(uri).catch(() => undefined),
+        state: stat(uri).catch((e) => e),
         dictionary,
     };
 }
@@ -109,17 +134,26 @@ function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
 
 async function loadSimpleWordList(filename: string, options: LoadOptions) {
     const lines = await readLines(filename);
-    return createSpellingDictionary(lines, path.basename(filename), filename, options);
+    return createSpellingDictionary(lines, determineName(filename, options), filename, options);
 }
 
 async function loadCodeWordList(filename: string, options: LoadOptions) {
     const lines = genSequence(await readLines(filename));
     const words = lines.concatMap(splitLineIntoCodeWords);
-    return createSpellingDictionary(words, path.basename(filename), filename, options);
+    return createSpellingDictionary(words, determineName(filename, options), filename, options);
 }
 
 async function loadTrie(filename: string, options: LoadOptions) {
-    return createSpellingDictionaryTrie(await loadWordsNoError(filename), path.basename(filename), filename, options);
+    return createSpellingDictionaryTrie(
+        await loadWordsNoError(filename),
+        determineName(filename, options),
+        filename,
+        options
+    );
+}
+
+function determineName(filename: string, options: LoadOptions): string {
+    return options.name || path.basename(filename);
 }
 
 export const testing = {

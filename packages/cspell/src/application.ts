@@ -4,7 +4,7 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
-import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
+import { traceWords, TraceResult, CheckTextInfo, getDictionary } from 'cspell-lib';
 import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { GlobMatcher } from 'cspell-glob';
@@ -169,7 +169,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         );
 
         if (!info.configInfo.config.enabled) return result;
-        result.configErrors += reportConfigurationErrors(info.configInfo.config);
+        result.configErrors += await reportConfigurationErrors(info.configInfo.config);
 
         const debugCfg = { config: { ...config, source: null }, source };
         cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
@@ -243,7 +243,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         return status;
     }
 
-    function reportConfigurationErrors(config: cspell.CSpellSettings): number {
+    async function reportConfigurationErrors(config: cspell.CSpellSettings): Promise<number> {
         const errors = cspell.extractImportErrors(config);
         let count = 0;
         errors.forEach((ref) => {
@@ -253,6 +253,20 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             count += 1;
             cfg.emitters.error('Configuration', ref.error);
         });
+
+        const dictCollection = await getDictionary(config);
+        dictCollection.dictionaries.forEach((dict) => {
+            const dictErrors = dict.getErrors?.() || [];
+            const msg = `Dictionary Error with (${dict.name})`;
+            dictErrors.forEach((error) => {
+                const key = msg + error.toString();
+                if (configErrors.has(key)) return;
+                configErrors.add(key);
+                count += 1;
+                cfg.emitters.error(msg, error);
+            });
+        });
+
         return count;
     }
 
@@ -267,7 +281,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         return { source: configFiles.join(' || '), config };
     }
 
-    function countConfigErrors(configInfo: ConfigInfo): number {
+    function countConfigErrors(configInfo: ConfigInfo): Promise<number> {
         return reportConfigurationErrors(configInfo.config);
     }
 
@@ -276,7 +290,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         const configInfo: ConfigInfo = await readConfig();
 
-        const configErrors = countConfigErrors(configInfo);
+        const configErrors = await countConfigErrors(configInfo);
         if (configErrors) return runResult({ errors: configErrors });
 
         // Get Exclusions from the config files.

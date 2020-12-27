@@ -45,7 +45,7 @@ describe('Validate DictionaryLoader', () => {
         for (const t of tests) {
             const entry = testing.loadEntry(t[0], t[1]);
 
-            await expect(entry.state).resolves.toBe(undefined);
+            await expect(entry.state).resolves.toEqual(expect.objectContaining(error));
             await expect(entry.dictionary).resolves.not.toBe(undefined);
         }
     });

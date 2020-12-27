@@ -14,3 +14,26 @@ export function createSpellingDictionary(
     const trie = buildTrieFast(words);
     return new SpellingDictionaryFromTrie(trie, name, options, source);
 }
+
+export function createFailedToLoadDictionary(
+    name: string,
+    source: string,
+    type: string,
+    errors: Error[]
+): SpellingDictionary {
+    return {
+        name,
+        source,
+        type,
+        has: () => false,
+        suggest: () => [],
+        mapWord: (a) => a,
+        genSuggestions: () => {
+            return;
+        },
+        size: 0,
+        options: {},
+        isDictionaryCaseSensitive: false,
+        getErrors: () => errors,
+    };
+}

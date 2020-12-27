@@ -9,6 +9,7 @@ export interface TraceResult {
     dictName: string;
     dictSource: string;
     configSource: string;
+    errors: Error[] | undefined;
 }
 
 export async function traceWords(words: string[], settings: CSpellSettings): Promise<TraceResult[]> {
@@ -29,6 +30,11 @@ export async function traceWords(words: string[], settings: CSpellSettings): Pro
             .toArray()
     );
 
+    function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
+        if (!errors) return undefined;
+        return errors.length ? errors : undefined;
+    }
+
     // Search each dictionary for the word
     const s = genSequence(r)
         .concatMap((p) => {
@@ -39,6 +45,7 @@ export async function traceWords(words: string[], settings: CSpellSettings): Pro
                 dictName: dict.name,
                 dictSource: dict.source,
                 configSource: config.name || '',
+                errors: normalizeErrors(dict.getErrors?.()),
             }));
         })
         .toArray();
