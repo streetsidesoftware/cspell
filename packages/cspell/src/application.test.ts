@@ -128,57 +128,6 @@ describe('Validate createInit', () => {
     });
 });
 
-describe('Validate internal functions', () => {
-    test('_globP empty pattern', async () => {
-        expect(await App._testing_._globP('', { options: {} })).toEqual([]);
-    });
-
-    test('normalizePattern relative', () => {
-        const root = process.cwd();
-        const r = App._testing_.normalizePattern('../../packages/**/*.ts', root);
-        expect(r.root).toBe(path.dirname(path.dirname(root)));
-        expect(r.pattern).toBe('packages/**/*.ts');
-    });
-
-    test('normalizePattern relative absolute', () => {
-        const root = process.cwd();
-        const p = '/packages/**/*.ts';
-        const r = App._testing_.normalizePattern(p, root);
-        expect(r.root).toBe(root);
-        expect(r.pattern).toBe(p);
-    });
-
-    test('normalizePattern absolute', () => {
-        const root = process.cwd();
-        const p = path.join(__dirname, '**', '*.ts');
-        const r = App._testing_.normalizePattern(p, root);
-        expect(r.root).toBe(path.sep);
-        expect(r.pattern).toBe(p);
-    });
-
-    test('exclude globs default', () => {
-        const ex: string[] = [];
-        const r = App._testing_.calcGlobs(ex);
-        expect(r).toEqual(
-            expect.objectContaining({
-                source: 'default',
-            })
-        );
-    });
-
-    test('exclude globs with space', () => {
-        const ex: string[] = ['*/test\\ files/'];
-        const r = App._testing_.calcGlobs(ex);
-        expect(r).toEqual({ globs: ['*/test files/'], source: 'arguments' });
-    });
-
-    test('exclude globs mixed', () => {
-        const ex: string[] = ['*/test\\ files/ node_modules', '**/*.dat'];
-        const r = App._testing_.calcGlobs(ex);
-        expect(r).toEqual({ globs: ['*/test files/', 'node_modules', '**/*.dat'], source: 'arguments' });
-    });
-});
-
 describe('Application, Validate Samples', () => {
     sampleTests().map((sample) =>
         test(`Test file: "${sample.file}"`, async () => {
