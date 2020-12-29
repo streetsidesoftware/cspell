@@ -22,15 +22,20 @@ function globP(pattern: string): Promise<string[]> {
 interface CompileCommonOptions {
     output?: string;
     compress: boolean;
-    case: boolean;
     max_depth?: string;
     merge?: string;
     experimental: string[];
+    split: boolean;
+    sort?: boolean;
+    keepCase?: boolean;
+    trie?: boolean;
+    trie3?: boolean;
+    base?: string;
 }
 
 interface CompileOptions extends CompileCommonOptions {
-    split: boolean;
     sort: boolean;
+    keepCase: boolean;
 }
 
 interface CompileTrieOptions extends CompileCommonOptions {
@@ -48,67 +53,51 @@ function collect(value: string, previous: string[]) {
     return previous.concat([value]);
 }
 
+function addCompileOptions(compileCommand: program.Command): program.Command {
+    return compileCommand
+        .option(
+            '-o, --output <path>',
+            'Specify the output directory, otherwise files are written back to the same location.'
+        )
+        .option('-n, --no-compress', 'By default the files are Gzipped, this will turn off GZ compression.')
+        .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
+        .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
+        .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
+        .option('--keep-case', 'Do not convert words to lower case.', false)
+        .option(
+            '-x, --experimental <flag>',
+            'Experimental flags, used for testing new concepts. Flags: compound',
+            collect,
+            []
+        )
+        .option('--trie3', '[Beta] Use file format trie3', false);
+}
+
 export function run(program: program.Command, argv: string[]): Promise<void> {
     program.exitOverride();
+    program.storeOptionsAsProperties(false).passCommandToAction(false);
 
     return new Promise((resolve, reject) => {
         program.version(npmPackage.version);
 
-        program
-            .command('compile <src...>')
-            .description('compile words lists into simple dictionary files.')
-            .option(
-                '-o, --output <path>',
-                'Specify the output directory, otherwise files are written back to the same location.'
-            )
-            .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
-            .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
-            .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
-            .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
-            .option(
-                '-x, --experimental <flag>',
-                'Experimental flags, used for testing new concepts. Flags: compound',
-                collect,
-                []
-            )
+        addCompileOptions(
+            program.command('compile <src...>').description('compile words lists into simple dictionary files.')
+        )
+            .option('--trie', 'Compile into a trie file.', false)
             .option('--no-sort', 'Do not sort the result')
             .action((src: string[], options: CompileOptions) => {
-                const experimental = new Set(options.experimental);
-                const skipNormalization = experimental.has('compound');
-                const result = processAction(src, '.txt', options, async (src, dst) => {
-                    return compileWordList(src, dst, {
-                        splitWords: options.split,
-                        sort: options.sort,
-                        skipNormalization,
-                    }).then(() => src);
-                });
+                const result = processAction(src, options);
                 resolve(result);
             });
 
-        program
-            .command('compile-trie <src...>')
-            .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
-            .option(
-                '-o, --output <path>',
-                'Specify the output directory, otherwise files are written back to the same location.'
-            )
-            .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
-            .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
-            .option('-n, --no-compress', 'By default the files are Gzipped, this will turn that off.')
-            .option(
-                '-x, --experimental <flag>',
-                'Experimental flags, used for testing new concepts. Flags: compound',
-                collect,
-                []
-            )
-            .option('--trie3', '[Beta] Use file format trie3')
+        addCompileOptions(
+            program
+                .command('compile-trie <src...>')
+                .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
+        )
+            .option('--base <number>', 'Advanced: Set the trie base number. A value between 10 and 36')
             .action((src: string[], options: CompileTrieOptions) => {
-                const experimental = new Set(options.experimental);
-                const skipNormalization = experimental.has('compound');
-                const compileOptions = { ...options, skipNormalization };
-                const result = processAction(src, '.trie', options, async (words: Sequence<string>, dst) => {
-                    return compileTrie(words, dst, compileOptions);
-                });
+                const result = processAction(src, { ...options, trie: true });
                 resolve(result);
             });
 
@@ -138,22 +127,39 @@ function parseNumber(s: string | undefined): number | undefined {
 // eslint-disable-next-line no-unused-vars
 type ActionFn = (words: Sequence<string>, dst: string) => Promise<unknown>;
 
-async function processAction(
-    src: string[],
-    fileExt: '.txt' | '.trie',
-    options: CompileCommonOptions,
-    action: ActionFn
-): Promise<void> {
+async function processAction(src: string[], options: CompileCommonOptions): Promise<void> {
+    const useTrie = options.trie || options.trie3;
+    const fileExt = useTrie ? '.trie' : '.txt';
     console.log(
         'Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
         options.output || 'default',
         options.compress ? 'true' : 'false',
         src.join('\n  ')
     );
+    const experimental = new Set(options.experimental);
+    const skipNormalization = experimental.has('compound');
+    const { keepCase = false, split, sort = true } = options;
 
+    const action = useTrie
+        ? async (words: Sequence<string>, dst: string) => {
+              return compileTrie(words, dst, {
+                  ...options,
+                  skipNormalization,
+                  splitWords: split,
+                  keepCase,
+                  base: parseNumber(options.base),
+              });
+          }
+        : async (src: Sequence<string>, dst: string) => {
+              return compileWordList(src, dst, {
+                  splitWords: split,
+                  sort,
+                  skipNormalization,
+                  keepCase,
+              }).then(() => src);
+          };
     const ext = fileExt + (options.compress ? '.gz' : '');
     const maxDepth = parseNumber(options.max_depth);
-    const experimental = new Set(options.experimental);
     const useAnnotation = experimental.has('compound');
     const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
 
@@ -225,3 +231,7 @@ async function processFiles(action: ActionFn, filesToProcess: Sequence<Promise<F
     await action(words, dst);
     log('Done "%s"', dst);
 }
+
+export const __testing__ = {
+    processAction,
+};
