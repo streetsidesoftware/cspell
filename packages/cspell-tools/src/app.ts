@@ -63,9 +63,10 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         .option('-n, --no-compress', 'By default the files are Gzipped, this will turn off GZ compression.')
         .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
         .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
-        .option('--no-split', 'Treat each line as a dictionary entry, do not split', undefined)
-        .option('--use-legacy-splitter', 'Use legacy line splitter logic.')
-        .option('--keep-case', 'Preserve the case of the source words.')
+        .option('--split', 'Split each line', undefined)
+        .option('--no-split', 'Treat each line as a dictionary entry, do not split')
+        .option('--use-legacy-splitter', 'Do not use legacy line splitter logic.')
+        .option('--no-keep-case', 'Force words to lower case')
         .option(
             '-x, --experimental <flag>',
             'Experimental flags, used for testing new concepts. Flags: compound',
@@ -141,8 +142,9 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
     );
     const experimental = new Set(options.experimental);
     const skipNormalization = experimental.has('compound');
-    const { keepCase = false, split, sort = true, useLegacySplitter } = options;
+    const { keepCase: _keepCase = true, split = false, sort = true, useLegacySplitter } = options;
     const splitWords = useLegacySplitter ? undefined : split;
+    const keepCase = useLegacySplitter ? false : _keepCase;
 
     const action = useTrie
         ? async (words: Sequence<string>, dst: string) => {
