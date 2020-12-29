@@ -60,12 +60,7 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
 }
 
 export interface CompileOptions {
-    skipNormalization?: boolean;
-    splitWords?: boolean;
-    keepCase?: boolean;
-}
-
-export interface CompileWordListOptions extends CompileOptions {
+    skipNormalization: boolean;
     splitWords: boolean;
     keepCase: boolean;
     sort: boolean;
@@ -94,7 +89,7 @@ function createNormalizer(options: CompileOptions): Normalizer {
 export async function compileWordList(
     lines: Sequence<string>,
     destFilename: string,
-    options: CompileWordListOptions
+    options: CompileOptions
 ): Promise<void> {
     const normalizer = createNormalizer(options);
     const seq = normalizer(lines);
@@ -175,10 +170,12 @@ export function normalizeWordsToTrie(
     return Trie.buildTrie(normalizer(words)).root;
 }
 
-export interface CompileTrieOptions extends CompileOptions {
+export interface TrieOptions {
     base?: number;
     trie3?: boolean;
 }
+
+export interface CompileTrieOptions extends CompileOptions, TrieOptions {}
 
 export const consolidate = Trie.consolidate;
 
@@ -187,23 +184,32 @@ export async function compileTrie(
     destFilename: string,
     options: CompileTrieOptions
 ): Promise<void> {
-    log('Reading Words into Trie');
-    const base = options.base ?? 32;
-    const version = options.trie3 ? 3 : 1;
     const normalizer = createNormalizer(options);
-    const root = normalizeWordsToTrie(words, normalizer);
-    log('Reduce duplicate word endings');
-    const trie = consolidate(root);
-    log(`Writing to file ${path.basename(destFilename)}`);
+    await createTrieTarget(destFilename, options)(normalizer(words));
+}
+
+export function createTrieTarget(
+    destFilename: string,
+    options: TrieOptions
+): (words: Sequence<string>) => Promise<void> {
     const target = createTarget(destFilename);
-    await target(
-        Trie.serializeTrie(trie, {
-            base,
-            comment: 'Built by cspell-tools.',
-            version,
-        })
-    );
-    log(`Done writing to file ${path.basename(destFilename)}`);
+    return async (words: Sequence<string>) => {
+        log('Reading Words into Trie');
+        const base = options.base ?? 32;
+        const version = options.trie3 ? 3 : 1;
+        const root = Trie.buildTrie(words).root;
+        log('Reduce duplicate word endings');
+        const trie = consolidate(root);
+        log(`Writing to file ${path.basename(destFilename)}`);
+        await target(
+            Trie.serializeTrie(trie, {
+                base,
+                comment: 'Built by cspell-tools.',
+                version,
+            })
+        );
+        log(`Done writing to file ${path.basename(destFilename)}`);
+    };
 }
 
 /**
