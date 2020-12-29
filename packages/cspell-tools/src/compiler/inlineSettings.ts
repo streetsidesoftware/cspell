@@ -13,7 +13,7 @@ export function extractInlineSettings(line: string): InlineSettings | undefined 
 
     const settings: InlineSettings = {};
 
-    for (const flag in flags) {
+    for (const flag of flags) {
         switch (flag) {
             case 'split':
                 settings.split = true;
@@ -31,4 +31,5 @@ export function extractInlineSettings(line: string): InlineSettings | undefined 
                 throw new Error(`Unknown inline setting: "${flag}" allowed values are ${allowedSettings.join(', ')}`);
         }
     }
+    return settings;
 }

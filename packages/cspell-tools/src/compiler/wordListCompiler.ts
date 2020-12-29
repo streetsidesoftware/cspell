@@ -60,19 +60,19 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
 }
 
 export interface CompileOptions {
-    skipNormalization: boolean;
-    splitWords: boolean;
+    skipNormalization: boolean | undefined;
+    splitWords: boolean | undefined;
     keepCase: boolean;
     sort: boolean;
 }
 
 function createNormalizer(options: CompileOptions): Normalizer {
-    const { skipNormalization = false, splitWords = true } = options;
+    const { skipNormalization = false, splitWords, keepCase } = options;
     if (skipNormalization) {
         return (lines: Sequence<string>) => lines;
     }
-    const lineProcessor = splitWords ? legacyLineToWords : noSplitLine;
-    const wordMapper = mapWordToLower;
+    const lineProcessor = splitWords === undefined ? legacyLineToWords : splitWords ? splitLine : noSplit;
+    const wordMapper = keepCase ? mapWordIdentity : mapWordToLower;
 
     const initialState: CompilerState = {
         inlineSettings: {},
@@ -81,7 +81,7 @@ function createNormalizer(options: CompileOptions): Normalizer {
     };
 
     return (lines: Iterable<string>) =>
-        compileWordListSeq(lines, initialState)
+        normalizeWordListSeq(lines, initialState)
             .filter((a) => !!a)
             .filter(uniqueFilter(10000));
 }
@@ -120,25 +120,41 @@ function mapWordToLower(a: string): string {
 function mapWordIdentity(a: string): string {
     return a;
 }
-
 interface CompilerState {
     inlineSettings: InlineSettings;
     lineProcessor: LineProcessor;
     wordMapper: WordMapper;
 }
 
-function compileWordListSeq(lines: Iterable<string>, initialState: CompilerState): Sequence<string> {
-    return genSequence(compileWordListGen(lines, initialState));
+function normalizeWordListSeq(lines: Iterable<string>, initialState: CompilerState): Sequence<string> {
+    return genSequence(normalizeWordListGen(lines, initialState));
 }
 
-function* compileWordListGen(lines: Iterable<string>, initialState: CompilerState): Iterable<string> {
+function* adjustComments(lines: Iterable<string>): Iterable<string> {
+    for (const line of lines) {
+        const idx = line.indexOf('#');
+        if (idx <= 0) {
+            yield line;
+        } else {
+            // Move the comment above.
+            yield line.substr(idx);
+            yield line.substr(0, idx);
+        }
+    }
+}
+
+function* normalizeWordListGen(lines: Iterable<string>, initialState: CompilerState): Iterable<string> {
     let state = initialState;
 
-    for (const line of lines) {
+    for (const line of adjustComments(lines)) {
         state = adjustState(state, line);
+        if (line[0] === '#') {
+            yield line.trim();
+            continue;
+        }
         for (const word of state.lineProcessor(line)) {
             if (!word) continue;
-            yield state.wordMapper(word);
+            yield state.wordMapper(word).trim();
         }
     }
 }
@@ -154,20 +170,12 @@ function adjustState(state: CompilerState, line: string): CompilerState {
             : inlineSettings.keepCase
             ? mapWordIdentity
             : mapWordToLower;
-    r.lineProcessor =
-        inlineSettings.split === undefined ? r.lineProcessor : inlineSettings.split ? splitDirtyLine : noSplitLine;
+    r.lineProcessor = inlineSettings.split === undefined ? r.lineProcessor : inlineSettings.split ? splitLine : noSplit;
     return r;
 }
 
 function sort(words: Iterable<string>): Iterable<string> {
     return [...words].sort();
-}
-
-export function normalizeWordsToTrie(
-    words: Sequence<string>,
-    normalizer: Normalizer = legacyNormalizeWords
-): Trie.TrieRoot {
-    return Trie.buildTrie(normalizer(words)).root;
 }
 
 export interface TrieOptions {
@@ -221,7 +229,7 @@ export function createTrieTarget(
  * @example `don't` => ['don't']
  * @example `Event: 'SIGCONT'` => ['Event', 'SIGCONT']
  */
-function splitDirtyLine(line: string): string[] {
+function splitLine(line: string): string[] {
     line = line.replace(/#.*/, ''); // remove comment
     line = line.trim();
     line = line.replace(regNonWordOrDigit, '|');
@@ -237,10 +245,11 @@ function splitDirtyLine(line: string): string[] {
     return line.split('|').filter((a) => !!a);
 }
 
-function noSplitLine(line: string): string[] {
+function noSplit(line: string): string[] {
     return [line];
 }
 
 export const __testing__ = {
-    splitLine: splitDirtyLine,
+    splitLine: splitLine,
+    createNormalizer,
 };

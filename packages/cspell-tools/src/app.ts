@@ -25,12 +25,13 @@ interface CompileCommonOptions {
     max_depth?: string;
     merge?: string;
     experimental: string[];
-    split: boolean;
+    split?: boolean;
     sort?: boolean;
     keepCase?: boolean;
     trie?: boolean;
     trie3?: boolean;
-    base?: string;
+    trieBase?: string;
+    useLegacySplitter?: boolean;
 }
 
 interface CompileOptions extends CompileCommonOptions {
@@ -62,8 +63,9 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         .option('-n, --no-compress', 'By default the files are Gzipped, this will turn off GZ compression.')
         .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
         .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
-        .option('--split', 'Treat each line as a dictionary entry, do not split')
-        .option('--no-keep-case', 'Convert words to lower case.')
+        .option('--no-split', 'Treat each line as a dictionary entry, do not split', undefined)
+        .option('--use-legacy-splitter', 'Use legacy line splitter logic.')
+        .option('--keep-case', 'Preserve the case of the source words.')
         .option(
             '-x, --experimental <flag>',
             'Experimental flags, used for testing new concepts. Flags: compound',
@@ -139,21 +141,23 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
     );
     const experimental = new Set(options.experimental);
     const skipNormalization = experimental.has('compound');
-    const { keepCase = false, split, sort = true } = options;
+    const { keepCase = false, split, sort = true, useLegacySplitter } = options;
+    const splitWords = useLegacySplitter ? undefined : split;
 
     const action = useTrie
         ? async (words: Sequence<string>, dst: string) => {
               return compileTrie(words, dst, {
                   ...options,
                   skipNormalization,
-                  splitWords: split,
+                  splitWords,
                   keepCase,
-                  base: parseNumber(options.base),
+                  base: parseNumber(options.trieBase),
+                  sort: false,
               });
           }
         : async (src: Sequence<string>, dst: string) => {
               return compileWordList(src, dst, {
-                  splitWords: split,
+                  splitWords,
                   sort,
                   skipNormalization,
                   keepCase,
