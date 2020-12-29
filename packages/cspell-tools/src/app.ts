@@ -62,15 +62,16 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         .option('-n, --no-compress', 'By default the files are Gzipped, this will turn off GZ compression.')
         .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
         .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
-        .option('-s, --no-split', 'Treat each line as a dictionary entry, do not split')
-        .option('--keep-case', 'Do not convert words to lower case.', false)
+        .option('--split', 'Treat each line as a dictionary entry, do not split')
+        .option('--no-keep-case', 'Convert words to lower case.')
         .option(
             '-x, --experimental <flag>',
             'Experimental flags, used for testing new concepts. Flags: compound',
             collect,
             []
         )
-        .option('--trie3', '[Beta] Use file format trie3', false);
+        .option('--trie3', '[Beta] Use file format trie3', false)
+        .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36');
 }
 
 export function run(program: program.Command, argv: string[]): Promise<void> {
@@ -81,7 +82,7 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
         program.version(npmPackage.version);
 
         addCompileOptions(
-            program.command('compile <src...>').description('compile words lists into simple dictionary files.')
+            program.command('compile <src...>').description('Compile words into a cspell dictionary files.')
         )
             .option('--trie', 'Compile into a trie file.', false)
             .option('--no-sort', 'Do not sort the result')
@@ -93,13 +94,13 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
         addCompileOptions(
             program
                 .command('compile-trie <src...>')
-                .description('Compile words lists or Hunspell dictionary into trie files used by cspell.')
-        )
-            .option('--base <number>', 'Advanced: Set the trie base number. A value between 10 and 36')
-            .action((src: string[], options: CompileTrieOptions) => {
-                const result = processAction(src, { ...options, trie: true });
-                resolve(result);
-            });
+                .description(
+                    'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`'
+                )
+        ).action((src: string[], options: CompileTrieOptions) => {
+            const result = processAction(src, { ...options, trie: true });
+            resolve(result);
+        });
 
         try {
             program.parse(argv);
