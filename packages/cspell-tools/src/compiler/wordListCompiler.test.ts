@@ -1,12 +1,13 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import {
-    lineToWords,
+    legacyLineToWords,
     compileWordList,
     compileTrie,
     consolidate,
-    normalizeWords,
+    legacyNormalizeWords,
     normalizeWordsToTrie,
+    __testing__,
 } from './wordListCompiler';
 
 import * as fsp from 'fs-extra';
@@ -28,25 +29,29 @@ const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 describe('Validate the wordListCompiler', () => {
     test('tests splitting lines', () => {
         const line = 'AppendIterator::getArrayIterator';
-        expect(lineToWords(line).filter(distinct()).toArray()).toEqual(['append', 'iterator', 'get', 'array']);
-        expect(lineToWords('Austin Martin').toArray()).toEqual(['austin martin', 'austin', 'martin']);
-        expect(lineToWords('JPEGsBLOBs').filter(distinct()).toArray()).toEqual(['jpegs', 'blobs']);
-        expect(lineToWords('CURLs CURLing').filter(distinct()).toArray()).toEqual([
+        expect(legacyLineToWords(line).filter(distinct()).toArray()).toEqual(['append', 'iterator', 'get', 'array']);
+        expect(legacyLineToWords('Austin Martin').toArray()).toEqual(['austin martin', 'austin', 'martin']);
+        expect(legacyLineToWords('JPEGsBLOBs').filter(distinct()).toArray()).toEqual(['jpegs', 'blobs']);
+        expect(legacyLineToWords('CURLs CURLing').filter(distinct()).toArray()).toEqual([
             'curls curling',
             'curls',
             'curling',
         ]);
-        expect(lineToWords('DNSTable Lookup').filter(distinct()).toArray()).toEqual(['dns', 'table', 'lookup']);
-        expect(lineToWords('OUTRing').filter(distinct()).toArray()).toEqual(['outring']);
-        expect(lineToWords('OUTRings').filter(distinct()).toArray()).toEqual(['outrings']);
-        expect(lineToWords('DIRs').filter(distinct()).toArray()).toEqual(['dirs']);
-        expect(lineToWords('AVGAspect').filter(distinct()).toArray()).toEqual(['avg', 'aspect']);
-        expect(lineToWords('New York').filter(distinct()).toArray()).toEqual(['new york', 'new', 'york']);
-        expect(lineToWords('Namespace DNSLookup').filter(distinct()).toArray()).toEqual(['namespace', 'dns', 'lookup']);
-        expect(lineToWords('well-educated').filter(distinct()).toArray()).toEqual(['well', 'educated']);
+        expect(legacyLineToWords('DNSTable Lookup').filter(distinct()).toArray()).toEqual(['dns', 'table', 'lookup']);
+        expect(legacyLineToWords('OUTRing').filter(distinct()).toArray()).toEqual(['outring']);
+        expect(legacyLineToWords('OUTRings').filter(distinct()).toArray()).toEqual(['outrings']);
+        expect(legacyLineToWords('DIRs').filter(distinct()).toArray()).toEqual(['dirs']);
+        expect(legacyLineToWords('AVGAspect').filter(distinct()).toArray()).toEqual(['avg', 'aspect']);
+        expect(legacyLineToWords('New York').filter(distinct()).toArray()).toEqual(['new york', 'new', 'york']);
+        expect(legacyLineToWords('Namespace DNSLookup').filter(distinct()).toArray()).toEqual([
+            'namespace',
+            'dns',
+            'lookup',
+        ]);
+        expect(legacyLineToWords('well-educated').filter(distinct()).toArray()).toEqual(['well', 'educated']);
         // Sadly we cannot do this one correctly
-        expect(lineToWords('CURLcode').filter(distinct()).toArray()).toEqual(['cur', 'lcode']);
-        expect(lineToWords('kDNSServiceErr_BadSig').filter(distinct()).toArray()).toEqual([
+        expect(legacyLineToWords('CURLcode').filter(distinct()).toArray()).toEqual(['cur', 'lcode']);
+        expect(legacyLineToWords('kDNSServiceErr_BadSig').filter(distinct()).toArray()).toEqual([
             'k',
             'dns',
             'service',
@@ -54,7 +59,7 @@ describe('Validate the wordListCompiler', () => {
             'bad',
             'sig',
         ]);
-        expect(lineToWords('apd_get_active_symbols').filter(distinct()).toArray()).toEqual([
+        expect(legacyLineToWords('apd_get_active_symbols').filter(distinct()).toArray()).toEqual([
             'apd',
             'get',
             'active',
@@ -68,6 +73,7 @@ describe('Validate the wordListCompiler', () => {
         await compileWordList(source, destName, {
             splitWords: true,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(citiesResultSorted);
@@ -79,6 +85,7 @@ describe('Validate the wordListCompiler', () => {
         await compileWordList(source, destName, {
             splitWords: false,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(citiesSorted.toLowerCase());
@@ -86,7 +93,7 @@ describe('Validate the wordListCompiler', () => {
 
     test('tests normalized to a trie', () => {
         const words = citiesResult.split('\n');
-        const nWords = normalizeWords(genSequence(words)).toArray();
+        const nWords = legacyNormalizeWords(genSequence(words)).toArray();
         const tWords = [
             ...genSequence([normalizeWordsToTrie(genSequence(words))]).concatMap((node) =>
                 Trie.iteratorTrieWords(node)
@@ -132,6 +139,7 @@ describe('Validate the wordListCompiler', () => {
         await compileWordList(source, destName, {
             splitWords: false,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe('hello\ntry\nwork\n');
@@ -145,9 +153,27 @@ describe('Validate the wordListCompiler', () => {
         await compileWordList(source, destName, {
             splitWords: false,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output.split('\n')).toEqual(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
+    });
+
+    test.each`
+        testCase                                        | line                                            | expectedResult
+        ${'hello'}                                      | ${'hello'}                                      | ${['hello']}
+        ${'array_intersect_assoc'}                      | ${'array_intersect_assoc'}                      | ${['array', 'intersect', 'assoc']}
+        ${'AppendIterator::__construct'}                | ${'AppendIterator::__construct'}                | ${['AppendIterator', 'construct']}
+        ${'db2_client_info'}                            | ${'db2_client_info'}                            | ${['db2', 'client', 'info']}
+        ${"'db2_client_info'"}                          | ${"'db2_client_info'"}                          | ${['db2', 'client', 'info']}
+        ${"don't"}                                      | ${"don't"}                                      | ${["don't"]}
+        ${'New York'}                                   | ${'New York'}                                   | ${['New', 'York']}
+        ${'MongoDB\\Driver\\Server::getLatency'}        | ${'MongoDB\\Driver\\Server::getLatency'}        | ${['MongoDB', 'Driver', 'Server', 'getLatency']}
+        ${'socket.connect(options[, connectListener])'} | ${'socket.connect(options[, connectListener])'} | ${['socket', 'connect', 'options', 'connectListener']}
+        ${"Event: 'SIGINT'"}                            | ${"Event: 'SIGINT'"}                            | ${['Event', 'SIGINT']}
+    `('splitLine $testCase', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
+        const r = __testing__.splitLine(line);
+        expect(r).toEqual(expectedResult);
     });
 });
 
@@ -157,7 +183,7 @@ describe('Validate Larger Dictionary', () => {
         const words = source.take(5000).toArray();
         const trie = normalizeWordsToTrie(genSequence(words));
         expect(isCircular(trie)).toBe(false);
-        const nWords = normalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
+        const nWords = legacyNormalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort().filter(uniqueFilter(1000));
         expect(results).toEqual(nWords);
     }, 60000);
@@ -167,7 +193,7 @@ describe('Validate Larger Dictionary', () => {
         const words = source.toArray();
         const trie = consolidate(normalizeWordsToTrie(genSequence(words)));
         expect(isCircular(trie)).toBe(false);
-        const nWords = normalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
+        const nWords = legacyNormalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort();
         expect(results).toEqual(nWords);
         const data = serializeTrie(trie, { base: 40 });

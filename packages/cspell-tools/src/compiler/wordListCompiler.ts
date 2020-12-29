@@ -6,10 +6,12 @@ import { mkdirp } from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
 import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
+import { extractInlineSettings, InlineSettings } from './inlineSettings';
 
 const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
-const regExpSpaceOrDash = /(?:\s+)|(?:-+)/g;
-const regExpRepeatChars = /(.)\1{3,}/i;
+const regNonWordOrDigit = XRegExp("[^\\p{L}'0-9]+", 'gi');
+const regExpSpaceOrDash = /[- ]+/g;
+const regExpRepeatChars = /(.)\1{4,}/i;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Logger = (message?: any, ...optionalParams: any[]) => void;
@@ -25,12 +27,14 @@ function defaultLogger(message?: unknown, ...optionalParams: unknown[]) {
 }
 
 type Normalizer = (lines: Sequence<string>) => Sequence<string>;
+type LineProcessor = (line: string) => Iterable<string>;
+type WordMapper = (word: string) => string;
 
-export function normalizeWords(lines: Sequence<string>): Sequence<string> {
-    return lines.concatMap((line) => lineToWords(line));
+export function legacyNormalizeWords(lines: Sequence<string>): Sequence<string> {
+    return lines.concatMap((line) => legacyLineToWords(line));
 }
 
-export function lineToWords(line: string): Sequence<string> {
+export function legacyLineToWords(line: string): Sequence<string> {
     // Remove punctuation and non-letters.
     const filteredLine = line.replace(regNonWordOrSpace, '|');
     const wordGroups = filteredLine.split('|');
@@ -57,54 +61,117 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
 
 export interface CompileOptions {
     skipNormalization?: boolean;
+    splitWords?: boolean;
+    keepCase?: boolean;
 }
 
 export interface CompileWordListOptions extends CompileOptions {
     splitWords: boolean;
+    keepCase: boolean;
     sort: boolean;
 }
 
+function createNormalizer(options: CompileOptions): Normalizer {
+    const { skipNormalization = false, splitWords = true } = options;
+    if (skipNormalization) {
+        return (lines: Sequence<string>) => lines;
+    }
+    const lineProcessor = splitWords ? legacyLineToWords : noSplitLine;
+    const wordMapper = mapWordToLower;
+
+    const initialState: CompilerState = {
+        inlineSettings: {},
+        lineProcessor,
+        wordMapper,
+    };
+
+    return (lines: Iterable<string>) =>
+        compileWordListSeq(lines, initialState)
+            .filter((a) => !!a)
+            .filter(uniqueFilter(10000));
+}
+
 export async function compileWordList(
-    words: Sequence<string>,
+    lines: Sequence<string>,
     destFilename: string,
     options: CompileWordListOptions
 ): Promise<void> {
-    const destDir = path.dirname(destFilename);
-
-    const pDir = mkdirp(destDir);
-
-    const compile: Normalizer = options.skipNormalization
-        ? (a) => a
-        : options.splitWords
-        ? compileWordListWithSplitSeq
-        : compileSimpleWordListSeq;
-    const seq = compile(words)
-        .filter((a) => !!a)
-        .filter(uniqueFilter(10000));
+    const normalizer = createNormalizer(options);
+    const seq = normalizer(lines);
 
     const finalSeq = options.sort ? genSequence(sort(seq)) : seq;
 
-    await pDir;
+    return createWordListTarget(destFilename)(finalSeq);
+}
 
-    return writeSeqToFile(
-        finalSeq.map((a) => a + '\n'),
-        destFilename
-    );
+export function createWordListTarget(destFilename: string): (seq: Sequence<string>) => Promise<void> {
+    const target = createTarget(destFilename);
+    return (seq: Sequence<string>) => target(seq.map((a) => a + '\n'));
+}
+
+function createTarget(destFilename: string): (seq: Sequence<string>) => Promise<void> {
+    const destDir = path.dirname(destFilename);
+    const pDir = mkdirp(destDir);
+    return async (seq: Sequence<string>) => {
+        await pDir;
+        return writeSeqToFile(seq, destFilename);
+    };
+}
+
+function mapWordToLower(a: string): string {
+    return a.toLowerCase();
+}
+
+function mapWordIdentity(a: string): string {
+    return a;
+}
+
+interface CompilerState {
+    inlineSettings: InlineSettings;
+    lineProcessor: LineProcessor;
+    wordMapper: WordMapper;
+}
+
+function compileWordListSeq(lines: Iterable<string>, initialState: CompilerState): Sequence<string> {
+    return genSequence(compileWordListGen(lines, initialState));
+}
+
+function* compileWordListGen(lines: Iterable<string>, initialState: CompilerState): Iterable<string> {
+    let state = initialState;
+
+    for (const line of lines) {
+        state = adjustState(state, line);
+        for (const word of state.lineProcessor(line)) {
+            if (!word) continue;
+            yield state.wordMapper(word);
+        }
+    }
+}
+
+function adjustState(state: CompilerState, line: string): CompilerState {
+    const inlineSettings = extractInlineSettings(line);
+    if (!inlineSettings) return state;
+    const r = { ...state };
+    r.inlineSettings = { ...r.inlineSettings, ...inlineSettings };
+    r.wordMapper =
+        inlineSettings.keepCase === undefined
+            ? r.wordMapper
+            : inlineSettings.keepCase
+            ? mapWordIdentity
+            : mapWordToLower;
+    r.lineProcessor =
+        inlineSettings.split === undefined ? r.lineProcessor : inlineSettings.split ? splitDirtyLine : noSplitLine;
+    return r;
 }
 
 function sort(words: Iterable<string>): Iterable<string> {
     return [...words].sort();
 }
 
-function compileWordListWithSplitSeq(words: Sequence<string>): Sequence<string> {
-    return words.concatMap((line) => lineToWords(line).toArray());
-}
-
-function compileSimpleWordListSeq(words: Sequence<string>): Sequence<string> {
-    return words.map((a) => a.toLowerCase());
-}
-
-export function normalizeWordsToTrie(words: Sequence<string>, normalizer: Normalizer = normalizeWords): Trie.TrieRoot {
+export function normalizeWordsToTrie(
+    words: Sequence<string>,
+    normalizer: Normalizer = legacyNormalizeWords
+): Trie.TrieRoot {
     return Trie.buildTrie(normalizer(words)).root;
 }
 
@@ -123,21 +190,51 @@ export async function compileTrie(
     log('Reading Words into Trie');
     const base = options.base ?? 32;
     const version = options.trie3 ? 3 : 1;
-    const destDir = path.dirname(destFilename);
-    const pDir = mkdirp(destDir);
-    const normalizer: Normalizer = options.skipNormalization ? (a) => a : normalizeWords;
+    const normalizer = createNormalizer(options);
     const root = normalizeWordsToTrie(words, normalizer);
     log('Reduce duplicate word endings');
     const trie = consolidate(root);
     log(`Writing to file ${path.basename(destFilename)}`);
-    await pDir;
-    await writeSeqToFile(
+    const target = createTarget(destFilename);
+    await target(
         Trie.serializeTrie(trie, {
             base,
             comment: 'Built by cspell-tools.',
             version,
-        }),
-        destFilename
+        })
     );
     log(`Done writing to file ${path.basename(destFilename)}`);
 }
+
+/**
+ * Splits a line of text into words, but does not split words.
+ * @param line text line to split.
+ * @returns array of words
+ * @example `readline.clearLine(stream, dir)` => ['readline', 'clearLine', 'stream', 'dir']
+ * @example `New York` => ['New', 'York']
+ * @example `don't` => ['don't']
+ * @example `Event: 'SIGCONT'` => ['Event', 'SIGCONT']
+ */
+function splitDirtyLine(line: string): string[] {
+    line = line.replace(/#.*/, ''); // remove comment
+    line = line.trim();
+    line = line.replace(regNonWordOrDigit, '|');
+    line = line.replace(/\W\d+\W/g, '|'); // remove isolated digits
+    line = line.replace(/'(?=\|)/, ''); // remove trailing '
+    line = line.replace(/'$/, ''); // remove trailing '
+    line = line.replace(/(?<=\|)'/, ''); // remove leading '
+    line = line.replace(/^'/, ''); // remove leading '
+    line = line.replace(/\s*\|\s*/, '|'); // remove spaces around |
+    line = line.replace(/[|]+/g, '|'); // reduce repeated |
+    line = line.replace(/^\|/, ''); // remove leading |
+    line = line.replace(/\|$/, ''); // remove trailing |
+    return line.split('|').filter((a) => !!a);
+}
+
+function noSplitLine(line: string): string[] {
+    return [line];
+}
+
+export const __testing__ = {
+    splitLine: splitDirtyLine,
+};
