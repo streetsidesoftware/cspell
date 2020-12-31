@@ -27,6 +27,10 @@ export function extractInlineSettings(line: string): InlineSettings | undefined 
             case 'no-keep-case':
                 settings.keepCase = false;
                 break;
+            case 'flag':
+            case 'flags':
+                // Ignore flags
+                break;
             default:
                 throw new Error(`Unknown inline setting: "${flag}" allowed values are ${allowedSettings.join(', ')}`);
         }
