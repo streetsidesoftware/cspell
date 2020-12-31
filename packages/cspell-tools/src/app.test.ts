@@ -118,7 +118,51 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
+    test('app compile merge legacy', async () => {
+        const commander = getCommander();
+        const targetDir = relPathTemp;
+        const target = 'merge.txt';
+        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
+        const cities = path.join(pathSamples, 'cities.txt');
+        const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
+        const log = jest.spyOn(console, 'log').mockImplementation();
+        const args = argv(
+            'compile',
+            '-n',
+            '--use-legacy-splitter',
+            '-M',
+            target,
+            cities,
+            exampleHunspell,
+            '-o',
+            targetDir
+        );
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const words = await fs.readFile(path.join(targetDir, target), 'utf8');
+        expect(words).toMatchSnapshot();
+        expect(log).toHaveBeenCalled();
+
+        log.mockRestore();
+    });
+
     test('app compile merge', async () => {
+        const commander = getCommander();
+        const targetDir = relPathTemp;
+        const target = 'merge.txt';
+        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
+        const cities = path.join(pathSamples, 'cities.txt');
+        const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
+        const log = jest.spyOn(console, 'log').mockImplementation();
+        const args = argv('compile', '-n', '--split', '-M', target, cities, exampleHunspell, '-o', targetDir);
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const words = await fs.readFile(path.join(targetDir, target), 'utf8');
+        expect(words).toMatchSnapshot();
+        expect(log).toHaveBeenCalled();
+
+        log.mockRestore();
+    });
+
+    test('app compile merge with defaults', async () => {
         const commander = getCommander();
         const targetDir = relPathTemp;
         const target = 'merge.txt';

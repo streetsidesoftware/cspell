@@ -1,18 +1,19 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import {
-    lineToWords,
+    legacyLineToWords,
     compileWordList,
     compileTrie,
     consolidate,
-    normalizeWords,
-    normalizeWordsToTrie,
+    legacyNormalizeWords,
+    __testing__,
+    CompileOptions,
 } from './wordListCompiler';
 
 import * as fsp from 'fs-extra';
 import * as Trie from 'cspell-trie-lib';
 import * as path from 'path';
-import { genSequence } from 'gensequence';
+import { genSequence, Sequence } from 'gensequence';
 import { readFile } from 'cspell-io';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { isCircular, iteratorTrieWords, serializeTrie, importTrie } from 'cspell-trie-lib';
@@ -26,48 +27,115 @@ const sampleDictEn = path.join(samples, 'en_US.txt');
 const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 
 describe('Validate the wordListCompiler', () => {
-    test('tests splitting lines', () => {
-        const line = 'AppendIterator::getArrayIterator';
-        expect(lineToWords(line).filter(distinct()).toArray()).toEqual(['append', 'iterator', 'get', 'array']);
-        expect(lineToWords('Austin Martin').toArray()).toEqual(['austin martin', 'austin', 'martin']);
-        expect(lineToWords('JPEGsBLOBs').filter(distinct()).toArray()).toEqual(['jpegs', 'blobs']);
-        expect(lineToWords('CURLs CURLing').filter(distinct()).toArray()).toEqual([
-            'curls curling',
-            'curls',
-            'curling',
-        ]);
-        expect(lineToWords('DNSTable Lookup').filter(distinct()).toArray()).toEqual(['dns', 'table', 'lookup']);
-        expect(lineToWords('OUTRing').filter(distinct()).toArray()).toEqual(['outring']);
-        expect(lineToWords('OUTRings').filter(distinct()).toArray()).toEqual(['outrings']);
-        expect(lineToWords('DIRs').filter(distinct()).toArray()).toEqual(['dirs']);
-        expect(lineToWords('AVGAspect').filter(distinct()).toArray()).toEqual(['avg', 'aspect']);
-        expect(lineToWords('New York').filter(distinct()).toArray()).toEqual(['new york', 'new', 'york']);
-        expect(lineToWords('Namespace DNSLookup').filter(distinct()).toArray()).toEqual(['namespace', 'dns', 'lookup']);
-        expect(lineToWords('well-educated').filter(distinct()).toArray()).toEqual(['well', 'educated']);
-        // Sadly we cannot do this one correctly
-        expect(lineToWords('CURLcode').filter(distinct()).toArray()).toEqual(['cur', 'lcode']);
-        expect(lineToWords('kDNSServiceErr_BadSig').filter(distinct()).toArray()).toEqual([
-            'k',
-            'dns',
-            'service',
-            'err',
-            'bad',
-            'sig',
-        ]);
-        expect(lineToWords('apd_get_active_symbols').filter(distinct()).toArray()).toEqual([
-            'apd',
-            'get',
-            'active',
-            'symbols',
-        ]);
+    test.each`
+        line                                                           | expectedResult
+        ${'hello'}                                                     | ${['hello']}
+        ${'AppendIterator::getArrayIterator'}                          | ${['append', 'iterator', 'get', 'array']}
+        ${'Austin Martin'}                                             | ${['austin martin', 'austin', 'martin']}
+        ${'JPEGsBLOBs'}                                                | ${['jpegs', 'blobs']}
+        ${'CURLs CURLing' /* Sadly we cannot do this one correctly */} | ${['curls curling', 'curls', 'curling']}
+        ${'DNSTable Lookup'}                                           | ${['dns', 'table', 'lookup']}
+        ${'OUTRing'}                                                   | ${['outring']}
+        ${'OUTRings'}                                                  | ${['outrings']}
+        ${'DIRs'}                                                      | ${['dirs']}
+        ${'AVGAspect'}                                                 | ${['avg', 'aspect']}
+        ${'New York'}                                                  | ${['new york', 'new', 'york']}
+        ${'Namespace DNSLookup'}                                       | ${['namespace', 'dns', 'lookup']}
+        ${'well-educated'}                                             | ${['well', 'educated']}
+        ${'CURLcode'}                                                  | ${['cur', 'lcode']}
+        ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
+        ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
+    `('test legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
+        expect(legacyLineToWords(line).filter(distinct()).toArray()).toEqual(expectedResult);
+    });
+
+    test.each`
+        lines                                                          | expectedResult
+        ${'hello'}                                                     | ${['hello']}
+        ${'AppendIterator::getArrayIterator'}                          | ${['append', 'iterator', 'get', 'array']}
+        ${'Austin Martin'}                                             | ${['austin martin', 'austin', 'martin']}
+        ${'JPEGsBLOBs'}                                                | ${['jpegs', 'blobs']}
+        ${'CURLs CURLing' /* Sadly we cannot do this one correctly */} | ${['curls curling', 'curls', 'curling']}
+        ${'DNSTable Lookup'}                                           | ${['dns', 'table', 'lookup']}
+        ${'OUTRing'}                                                   | ${['outring']}
+        ${'OUTRings'}                                                  | ${['outrings']}
+        ${'DIRs'}                                                      | ${['dirs']}
+        ${'AVGAspect'}                                                 | ${['avg', 'aspect']}
+        ${'New York'}                                                  | ${['new york', 'new', 'york']}
+        ${'Namespace DNSLookup'}                                       | ${['namespace', 'dns', 'lookup']}
+        ${'well-educated'}                                             | ${['well', 'educated']}
+        ${'CURLcode'}                                                  | ${['cur', 'lcode']}
+        ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
+        ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
+    `(
+        'test normalizer uses legacy line splitting $lines',
+        ({ lines, expectedResult }: { lines: string; expectedResult: string[] }) => {
+            const normalizer = __testing__.createNormalizer({
+                skipNormalization: false,
+                splitWords: undefined,
+                keepCase: false,
+                sort: false,
+            });
+            const r = normalizer(genSequence(lines.split('\n'))).toArray();
+            expect(r).toEqual(expectedResult);
+        }
+    );
+
+    interface NormalizeTestCase extends Partial<CompileOptions> {
+        lines: string;
+        expectedResult: string[];
+    }
+
+    test.each`
+        lines                                       | expectedResult                                  | splitWords | keepCase
+        ${'hello'}                                  | ${['hello']}                                    | ${true}    | ${true}
+        ${'AppendIterator::getArrayIterator'}       | ${['AppendIterator', 'getArrayIterator']}       | ${true}    | ${true}
+        ${'Austin Martin'}                          | ${['Austin', 'Martin']}                         | ${true}    | ${true}
+        ${'# cspell-tools:no-split\nAustin Martin'} | ${['# cspell-tools:no-split', 'Austin Martin']} | ${true}    | ${true}
+        ${'Austin Martin # Proper name'}            | ${['# Proper name', 'Austin Martin']}           | ${false}   | ${true}
+        ${'Austin Martin # Proper name '}           | ${['# Proper name', 'austin martin']}           | ${false}   | ${false}
+        ${'Austin Martin # Proper name '}           | ${['# Proper name', 'austin', 'martin']}        | ${true}    | ${false}
+        ${'JPEGsBLOBs'}                             | ${['JPEGsBLOBs']}                               | ${true}    | ${true}
+        ${'CURLs CURLing'}                          | ${['CURLs', 'CURLing']}                         | ${true}    | ${true}
+        ${'DNSTable Lookup'}                        | ${['DNSTable', 'Lookup']}                       | ${true}    | ${true}
+        ${'OUTRing'}                                | ${['OUTRing']}                                  | ${true}    | ${true}
+        ${'OUTRings'}                               | ${['OUTRings']}                                 | ${true}    | ${true}
+        ${'DIRs'}                                   | ${['DIRs']}                                     | ${true}    | ${true}
+        ${'AVGAspect'}                              | ${['AVGAspect']}                                | ${true}    | ${true}
+        ${'New York'}                               | ${['New', 'York']}                              | ${true}    | ${true}
+        ${'New York'}                               | ${['New York']}                                 | ${false}   | ${true}
+        ${'Namespace DNSLookup'}                    | ${['Namespace', 'DNSLookup']}                   | ${true}    | ${true}
+        ${'well-educated'}                          | ${['well', 'educated']}                         | ${true}    | ${true}
+        ${'CURLcode'}                               | ${['CURLcode']}                                 | ${true}    | ${true}
+        ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr', 'BadSig']}                 | ${true}    | ${true}
+        ${'apd_get_active_symbols'}                 | ${['apd', 'get', 'active', 'symbols']}          | ${true}    | ${true}
+    `('test normalizer line splitting $lines $splitWords $keepCase', (testCase: NormalizeTestCase) => {
+        const {
+            skipNormalization = false,
+            splitWords = false,
+            keepCase = false,
+            sort = false,
+            lines,
+            expectedResult,
+        } = testCase;
+        const normalizer = __testing__.createNormalizer({
+            skipNormalization,
+            splitWords,
+            keepCase,
+            sort,
+        });
+        const r = normalizer(genSequence(lines.split('\n'))).toArray();
+        expect(r).toEqual(expectedResult);
     });
 
     test('reading and normalizing a file', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities.txt');
         await compileWordList(source, destName, {
-            splitWords: true,
+            skipNormalization: false,
+            splitWords: undefined,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(citiesResultSorted);
@@ -77,8 +145,10 @@ describe('Validate the wordListCompiler', () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities2.txt');
         await compileWordList(source, destName, {
+            skipNormalization: false,
             splitWords: false,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(citiesSorted.toLowerCase());
@@ -86,7 +156,7 @@ describe('Validate the wordListCompiler', () => {
 
     test('tests normalized to a trie', () => {
         const words = citiesResult.split('\n');
-        const nWords = normalizeWords(genSequence(words)).toArray();
+        const nWords = legacyNormalizeWords(genSequence(words)).toArray();
         const tWords = [
             ...genSequence([normalizeWordsToTrie(genSequence(words))]).concatMap((node) =>
                 Trie.iteratorTrieWords(node)
@@ -98,7 +168,12 @@ describe('Validate the wordListCompiler', () => {
     test('reading and normalizing to a trie file', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities.trie');
-        await compileTrie(source, destName, {});
+        await compileTrie(source, destName, {
+            skipNormalization: false,
+            splitWords: undefined,
+            keepCase: false,
+            sort: false,
+        });
         const srcWords = (await fsp.readFile(destName, 'utf8')).split(/\r?\n/g);
         const node = Trie.importTrie(srcWords);
         const expected = citiesResult
@@ -112,7 +187,12 @@ describe('Validate the wordListCompiler', () => {
     test('reading and normalizing to a trie gz file', async () => {
         const source = await streamWordsFromFile(path.join(samples, 'cities.txt'), {});
         const destName = path.join(temp, 'cities.trie.gz');
-        await compileTrie(source, destName, {});
+        await compileTrie(source, destName, {
+            skipNormalization: false,
+            splitWords: undefined,
+            keepCase: false,
+            sort: false,
+        });
         const resultFile = await readFile(destName, UTF8);
         const srcWords = resultFile.split('\n');
         const node = Trie.importTrie(srcWords);
@@ -130,8 +210,10 @@ describe('Validate the wordListCompiler', () => {
         });
         const destName = path.join(temp, 'example0.txt');
         await compileWordList(source, destName, {
-            splitWords: false,
+            skipNormalization: false,
+            splitWords: undefined,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe('hello\ntry\nwork\n');
@@ -143,11 +225,30 @@ describe('Validate the wordListCompiler', () => {
         });
         const destName = path.join(temp, 'example1.txt');
         await compileWordList(source, destName, {
-            splitWords: false,
+            skipNormalization: false,
+            splitWords: undefined,
             sort: true,
+            keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output.split('\n')).toEqual(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
+    });
+
+    test.each`
+        testCase                                        | line                                            | expectedResult
+        ${'hello'}                                      | ${'hello'}                                      | ${['hello']}
+        ${'array_intersect_assoc'}                      | ${'array_intersect_assoc'}                      | ${['array', 'intersect', 'assoc']}
+        ${'AppendIterator::__construct'}                | ${'AppendIterator::__construct'}                | ${['AppendIterator', 'construct']}
+        ${'db2_client_info'}                            | ${'db2_client_info'}                            | ${['db2', 'client', 'info']}
+        ${"'db2_client_info'"}                          | ${"'db2_client_info'"}                          | ${['db2', 'client', 'info']}
+        ${"don't"}                                      | ${"don't"}                                      | ${["don't"]}
+        ${'New York'}                                   | ${'New York'}                                   | ${['New', 'York']}
+        ${'MongoDB\\Driver\\Server::getLatency'}        | ${'MongoDB\\Driver\\Server::getLatency'}        | ${['MongoDB', 'Driver', 'Server', 'getLatency']}
+        ${'socket.connect(options[, connectListener])'} | ${'socket.connect(options[, connectListener])'} | ${['socket', 'connect', 'options', 'connectListener']}
+        ${"Event: 'SIGINT'"}                            | ${"Event: 'SIGINT'"}                            | ${['Event', 'SIGINT']}
+    `('splitLine $testCase', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
+        const r = __testing__.splitLine(line);
+        expect(r).toEqual(expectedResult);
     });
 });
 
@@ -157,7 +258,7 @@ describe('Validate Larger Dictionary', () => {
         const words = source.take(5000).toArray();
         const trie = normalizeWordsToTrie(genSequence(words));
         expect(isCircular(trie)).toBe(false);
-        const nWords = normalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
+        const nWords = legacyNormalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort().filter(uniqueFilter(1000));
         expect(results).toEqual(nWords);
     }, 60000);
@@ -167,7 +268,7 @@ describe('Validate Larger Dictionary', () => {
         const words = source.toArray();
         const trie = consolidate(normalizeWordsToTrie(genSequence(words)));
         expect(isCircular(trie)).toBe(false);
-        const nWords = normalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
+        const nWords = legacyNormalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort();
         expect(results).toEqual(nWords);
         const data = serializeTrie(trie, { base: 40 });
@@ -176,6 +277,10 @@ describe('Validate Larger Dictionary', () => {
         expect(results2).toEqual(results);
     }, 60000);
 });
+
+function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieRoot {
+    return Trie.buildTrie(legacyNormalizeWords(words)).root;
+}
 
 function distinct(): (word: string) => boolean {
     const known = new Set<string>();
