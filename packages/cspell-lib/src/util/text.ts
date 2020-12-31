@@ -83,8 +83,8 @@ export function extractWordsFromText(text: string): Sequence<TextOffset> {
  * Extract out whole words from a string of text.
  */
 export function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffset> {
-    const reg = XRegExp(regExWords);
-    const reg2 = XRegExp(regExWords);
+    const reg = new RegExp(regExWords);
+    const reg2 = new RegExp(regExWords);
     return (
         matchToTextOffset(reg, text)
             // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
