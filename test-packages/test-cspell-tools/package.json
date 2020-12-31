@@ -1,0 +1,22 @@
+{
+  "name": "test-cspell-tools",
+  "version": "5.1.1",
+  "description": "Pure testing package for @cspell/cspell-tools.",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run compile && npm run build-dictionaries",
+    "clean-build": "npm run clean && npm run build",
+    "build-dictionaries": "cspell-tools compile -o dist src/php.txt src/companies.txt src/node.txt",
+    "compile": "tsc -p .",
+    "test": "node dist"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@cspell/cspell-tools": "^5.1.0",
+    "cspell": "^5.1.0"
+  },
+  "main": "index.js",
+  "keywords": []
+}
