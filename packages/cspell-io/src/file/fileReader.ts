@@ -25,8 +25,8 @@ export function readFile(filename: string, encoding: BufferEncoding = defaultEnc
 
 /**
  * Reads a file line by line. The last value emitted by the Observable is always an empty string.
- * @param filename
- * @param encoding defaults to 'utf8'
+ * @param filename - the file name to be read
+ * @param encoding - defaults to 'utf8'
  */
 export function lineReaderAsync(filename: string, encoding: BufferEncoding = defaultEncoding): AsyncIterable<string> {
     return streamFileLineByLineAsync(filename, encoding);
@@ -46,8 +46,8 @@ function prepareFileStream(filename: string, encoding: string, fnError: (e: Erro
 
 /**
  * Emit a file line by line
- * @param filename full path to the file to read.
- * @param encoding defaults to 'utf8'
+ * @param filename - full path to the file to read.
+ * @param encoding - defaults to 'utf8'
  */
 export function streamFileLineByLineAsync(
     filename: string,
@@ -72,8 +72,8 @@ interface Resolvers<T = IteratorResult<string>> {
 
 /**
  * Emit a file line by line
- * @param filename full path to the file to read.
- * @param encoding defaults to 'utf8'
+ * @param filename - full path to the file to read.
+ * @param encoding - defaults to 'utf8'
  */
 export function streamLineByLineAsync(
     stream: NodeJS.ReadableStream,

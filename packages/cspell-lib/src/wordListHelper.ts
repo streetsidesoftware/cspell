@@ -15,7 +15,7 @@ export type WordSet = Set<string>;
 
 /**
  * Reads words from a file. It will not throw and error.
- * @param filename the file to read
+ * @param filename - the file to read
  */
 export function loadWordsNoError(filename: string): Promise<IterableIterator<string>> {
     return readLines(filename).catch((e) => (logError(e), toIterableIterator<string>([])));

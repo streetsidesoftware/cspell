@@ -48,15 +48,15 @@ export interface GlobMatchNoRule {
 
 export class GlobMatcher {
     /**
-     * @param filename full path of file to match against.
+     * @param filename - full path of file to match against.
      * @returns a GlobMatch - information about the match.
      */
     readonly matchEx: (filename: string) => GlobMatch;
     readonly path: PathInterface;
     /**
      * Construct a `.gitignore` emulator
-     * @param patterns the contents of a `.gitignore` style file or an array of individual glob rules.
-     * @param root the working directory
+     * @param patterns - the contents of a `.gitignore` style file or an array of individual glob rules.
+     * @param root - the working directory
      */
     constructor(readonly patterns: string | string[], readonly root?: string, nodePath?: PathInterface) {
         this.path = nodePath ?? path;
@@ -68,7 +68,7 @@ export class GlobMatcher {
      * If filename is relative, it is considered relative to the root.
      * If filename is absolute and contained within the root, it will be made relative before being tested for a glob match.
      * If filename is absolute and not contained within the root, it will be tested as is.
-     * @param filename full path of the file to check.
+     * @param filename - full path of the file to check.
      */
     match(filename: string): boolean {
         return this.matchEx(filename).matched;
@@ -94,8 +94,8 @@ interface GlobRule {
  * If filename is absolute and contained within the root, it will be made relative before being tested for a glob match.
  * If filename is absolute and not contained within the root, it will be tested as is.
  *
- * @param patterns the contents of a .gitignore style file or an array of individual glob rules.
- * @param root the working directory
+ * @param patterns - the contents of a .gitignore style file or an array of individual glob rules.
+ * @param root - the working directory
  * @returns a function given a filename returns true if it matches.
  */
 function buildMatcherFn(path: PathInterface, patterns: string | string[], root?: string): GlobMatchFn {

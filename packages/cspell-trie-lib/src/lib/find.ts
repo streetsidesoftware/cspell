@@ -42,9 +42,9 @@ const knownCompoundModes = new Map<CompoundModes, CompoundModes>(arrayCompoundMo
 
 /**
  *
- * @param root Trie root node. root.c contains the compound root and forbidden root.
- * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
- * @param options
+ * @param root - Trie root node. root.c contains the compound root and forbidden root.
+ * @param word - A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param options - The find options to mere with defaults
  */
 export function findWord(root: TrieNode, word: string, options?: PartialFindOptions): FindFullResult {
     const _options = mergeDefaults(options, _defaultFindOptions);

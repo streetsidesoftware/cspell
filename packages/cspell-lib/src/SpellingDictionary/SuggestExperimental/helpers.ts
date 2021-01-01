@@ -2,8 +2,8 @@ import { SuggestionResult, Feature } from './entities';
 
 /**
  * Comparison function to return the best (highest score) results first.
- * @param a Result A
- * @param b Result B
+ * @param a - Result A
+ * @param b - Result B
  */
 export function compareResults(a: SuggestionResult, b: SuggestionResult): number {
     return b.score - a.score || a.word.localeCompare(b.word);

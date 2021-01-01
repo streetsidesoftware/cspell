@@ -3,7 +3,7 @@ import { trieNodeToRoot } from './util';
 
 /**
  * Consolidate to DAWG
- * @param root the root of the Trie tree
+ * @param root - the root of the Trie tree
  */
 export function consolidate(root: TrieRoot): TrieRoot {
     let count = 0;

@@ -17,8 +17,8 @@ const defaultExcludeGlobs = ['node_modules/**'];
  * If the pattern is absolute, check to see if it exists and adjust the root, otherwise it is assumed to be based upon the current root.
  * If the pattern starts with a relative path, adjust the root to match.
  * The challenge is with the patterns that begin with `/`. Is is an absolute path or relative pattern?
- * @param pat glob pattern
- * @param root absolute path | empty
+ * @param pat - glob pattern
+ * @param root - absolute path | empty
  * @returns the adjusted root and pattern.
  */
 function normalizePattern(pat: string, root: string): PatternRoot {

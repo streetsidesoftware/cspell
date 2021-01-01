@@ -168,9 +168,9 @@ function asPendingPromise<T>(promise: Promise<T>): PendingPromise<T> {
 /**
  * Parallel Process some values using the mapFn while limiting the number
  * running in parallel.
- * @param values the values to map
- * @param mapFn a mapping function that returns a promise
- * @param limit the max number of pending promises.
+ * @param values - the values to map
+ * @param mapFn - a mapping function that returns a promise
+ * @param limit - the max number of pending promises.
  */
 async function* asyncBuffer<T, U>(
     values: Iterable<T> | AsyncIterable<T>,

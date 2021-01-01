@@ -92,7 +92,7 @@ export interface RemovePathsFromGlobalImportsResult {
 
 /**
  * Remove files from the global setting.
- * @param paths match against the partial file path, or package name, or id.
+ * @param paths - match against the partial file path, or package name, or id.
  *   To match against a partial file path, it must match against the subdirectory and filename.
  * Note: for Idempotent reasons, asking to remove a path that is not in the global settings is considered a success.
  *   It is possible to check for this by looking at the returned list of removed paths.

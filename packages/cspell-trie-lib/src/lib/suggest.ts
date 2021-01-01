@@ -333,7 +333,7 @@ export function suggestionCollector(
 
 /**
  *
- * @param text verbatim text to be inserted into a regexp
+ * @param text - verbatim text to be inserted into a regexp
  * @returns text that can be used in a regexp.
  */
 function regexQuote(text: string): string {

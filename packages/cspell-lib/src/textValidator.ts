@@ -217,7 +217,7 @@ function convertCheckOptionsToHasOptions(opt: CheckOptions): HasOptions {
 
 /**
  * Returns a mapper function that will
- * @param includeRanges Allowed ranges for words.
+ * @param includeRanges - Allowed ranges for words.
  */
 function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (wo: TextOffset) => Iterable<TextOffset> {
     let rangePos = 0;

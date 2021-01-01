@@ -192,7 +192,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
     /**
      * The file loader is written this way to cause files to be loaded in parallel while the previous one is being processed.
-     * @param fileNames names of files to load one at a time.
+     * @param fileNames - names of files to load one at a time.
      */
     function* fileLoader(fileNames: string[]) {
         for (const filename of fileNames) {
@@ -410,7 +410,7 @@ function readFile(filename: string, encoding: string = UTF8): Promise<string> {
 
 /**
  * Looks for matching glob patterns or stdin
- * @param globPatterns patterns or stdin
+ * @param globPatterns - patterns or stdin
  */
 async function findFiles(globPatterns: string[], options: GlobOptions): Promise<string[]> {
     const globPats = globPatterns.filter((filename) => filename !== STDIN);

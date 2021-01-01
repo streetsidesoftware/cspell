@@ -6,7 +6,7 @@ const MinReferenceCount = 3;
 
 /**
  * An iterator that will emit TrieRefNodes mostly in descending frequency
- * @param root Root of the Trie -- a DAWG is preferred to keep the number of duplicates down.
+ * @param root - Root of the Trie -- a DAWG is preferred to keep the number of duplicates down.
  */
 export function convertToTrieRefNodes(root: TrieNode): IterableIterator<TrieRefNode> {
     const eow = { f: FLAG_WORD, c: undefined };

@@ -351,7 +351,7 @@ function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
 
 /**
  * Return a list of Setting Sources used to create this Setting.
- * @param settings the settings to search
+ * @param settings - the settings to search
  */
 export function getSources(settings: CSpellSettings): CSpellSettings[] {
     if (!settings.source?.sources?.length) {

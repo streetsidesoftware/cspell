@@ -222,7 +222,7 @@ export function createTrieTarget(
 
 /**
  * Splits a line of text into words, but does not split words.
- * @param line text line to split.
+ * @param line - text line to split.
  * @returns array of words
  * @example `readline.clearLine(stream, dir)` => ['readline', 'clearLine', 'stream', 'dir']
  * @example `New York` => ['New', 'York']

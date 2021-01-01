@@ -19,7 +19,7 @@ export type WalkNext = boolean;
  * If there are compound, this becomes an infinite iterator.
  * Use i.next(false) to prevent the walker from going deeper into the trie.
  *
- * @param trie the compound Trie to walk
+ * @param trie - the compound Trie to walk
  */
 export function* compoundWalker(trie: Trie, caseSensitive = true): Generator<WalkItem, void, WalkNext> {
     const { compoundCharacter: cc, forbiddenWordPrefix: forbidden, stripCaseAndAccentsPrefix } = trie.options;
@@ -52,9 +52,9 @@ export function* compoundWalker(trie: Trie, caseSensitive = true): Generator<Wal
 
 /**
  *
- * @param trie Trie to walk
- * @param maxDepth Max compound depth
- * @param caseSensitive case sensitive search.
+ * @param trie - Trie to walk
+ * @param maxDepth - Max compound depth
+ * @param caseSensitive - case sensitive search.
  */
 export function* compoundWords(trie: Trie, maxDepth: number, caseSensitive = true): Generator<string, void, unknown> {
     const stream = compoundWalker(trie, caseSensitive);

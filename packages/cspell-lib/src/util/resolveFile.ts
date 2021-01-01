@@ -15,8 +15,8 @@ const testNodeModules = /^node_modules\//;
 /**
  * Resolve filename to absolute paths.
  * It tries to look for local files as well as node_modules
- * @param filename an absolute path, relative path, `~` path, or a node_module.
- * @param relativeTo absolute path
+ * @param filename - an absolute path, relative path, `~` path, or a node_module.
+ * @param relativeTo - absolute path
  */
 export function resolveFile(filename: string, relativeTo: string): ResolveFileResult {
     filename = filename.replace(/^~/, os.homedir());
