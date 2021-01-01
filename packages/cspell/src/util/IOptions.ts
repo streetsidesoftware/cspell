@@ -6,21 +6,21 @@ export interface IOptions {
     /**
      * Dump a ton of stuff to stderr.
      *
-     * @default false
+     * @defaultValue false
      */
     debug?: boolean;
 
     /**
      * Do not expand {a,b} and {1..3} brace sets.
      *
-     * @default false
+     * @defaultValue false
      */
     nobrace?: boolean;
 
     /**
      * Disable ** matching against multiple folder names.
      *
-     * @default false
+     * @defaultValue false
      */
     noglobstar?: boolean;
 
@@ -28,21 +28,21 @@ export interface IOptions {
      * Allow patterns to match filenames starting with a period,
      * even if the pattern does not explicitly have a period in that spot.
      *
-     * @default false
+     * @defaultValue false
      */
     dot?: boolean;
 
     /**
      * Disable "extglob" style patterns like +(a|b).
      *
-     * @default false
+     * @defaultValue false
      */
     noext?: boolean;
 
     /**
      * Perform a case-insensitive match.
      *
-     * @default false
+     * @defaultValue false
      */
     nocase?: boolean;
 
@@ -51,7 +51,7 @@ export interface IOptions {
      * return a list containing the pattern itself if this option is set.
      * Otherwise, an empty list is returned if there are no matches.
      *
-     * @default false
+     * @defaultValue false
      */
     nonull?: boolean;
 
@@ -59,7 +59,7 @@ export interface IOptions {
      * If set, then patterns without slashes will be matched against
      * the basename of the path if it contains slashes.
      *
-     * @default false
+     * @defaultValue false
      */
     matchBase?: boolean;
 
@@ -67,14 +67,14 @@ export interface IOptions {
      * Suppress the behavior of treating #
      * at the start of a pattern as a comment.
      *
-     * @default false
+     * @defaultValue false
      */
     nocomment?: boolean;
 
     /**
      * Suppress the behavior of treating a leading ! character as negation.
      *
-     * @default false
+     * @defaultValue false
      */
     nonegate?: boolean;
 
@@ -82,7 +82,7 @@ export interface IOptions {
      * Returns from negate expressions the same as if they were not negated.
      * (Ie, true on a hit, false on a miss.)
      *
-     * @default false
+     * @defaultValue false
      */
     flipNegate?: boolean;
 }

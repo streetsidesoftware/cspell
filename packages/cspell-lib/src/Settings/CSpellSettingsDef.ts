@@ -27,7 +27,7 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
 export interface FileSettings extends ExtendableSettings {
     /**
      * Configuration format version of the setting file.
-     * @default "0.1"
+     * @defaultValue "0.1"
      */
     version?: string | '0.1';
 
@@ -50,7 +50,7 @@ export interface Settings extends BaseSetting {
      * Example: "en-GB" for British English
      *
      * Example: "en,nl" to enable both English and Dutch
-     * @default "en"
+     * @defaultValue "en"
      */
     language?: LocaleId;
 
@@ -65,25 +65,25 @@ export interface Settings extends BaseSetting {
 
     /**
      * The maximum number of problems to report in a file.
-     * @default 100
+     * @defaultValue 100
      */
     maxNumberOfProblems?: number;
 
     /**
      * The maximum number of times the same word can be flagged as an error in a file.
-     * @default 5
+     * @defaultValue 5
      */
     maxDuplicateProblems?: number;
 
     /**
      * The minimum length of a word before checking it against a dictionary.
-     * @default 4
+     * @defaultValue 4
      */
     minWordLength?: number;
 
     /**
      * Number of suggestions to make
-     * @default 10
+     * @defaultValue 10
      */
     numSuggestions?: number;
 
@@ -139,7 +139,7 @@ export interface BaseSetting {
 
     /**
      * Is the spell checker enabled
-     * @default true
+     * @defaultValue true
      */
     enabled?: boolean;
 
@@ -151,13 +151,13 @@ export interface BaseSetting {
 
     /**
      * True to enable compound word checking.
-     * @default false
+     * @defaultValue false
      */
     allowCompoundWords?: boolean;
 
     /**
      * Words must match case rules.
-     * @default false
+     * @defaultValue false
      */
     caseSensitive?: boolean;
 
@@ -234,7 +234,7 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
      * C - each line is treated like code (Camel Case is allowed)
      * Default is S
      * C is the slowest to load due to the need to split each line based upon code splitting rules.
-     * @default "S"
+     * @defaultValue "S"
      */
     type?: DictionaryFileTypes;
 }
