@@ -26,13 +26,13 @@ export { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PR
 export { TrieOptions, PartialTrieOptions } from './TrieNode';
 export { defaultTrieOptions } from './constants';
 
-/** @deprecated */
+/** @deprecated Use COMPOUND_FIX */
 export const COMPOUND = COMPOUND_FIX;
-/** @deprecated */
+/** @deprecated Use OPTIONAL_COMPOUND_FIX */
 export const OPTIONAL_COMPOUND = OPTIONAL_COMPOUND_FIX;
-/** @deprecated */
+/** @deprecated Use CASE_INSENSITIVE_PREFIX */
 export const NORMALIZED = CASE_INSENSITIVE_PREFIX;
-/** @deprecated */
+/** @deprecated Use FORBID_PREFIX */
 export const FORBID = FORBID_PREFIX;
 
 const defaultLegacyMinCompoundLength = 3;

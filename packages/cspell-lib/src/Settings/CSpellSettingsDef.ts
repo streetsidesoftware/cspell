@@ -95,20 +95,19 @@ export interface Settings extends BaseSetting {
 }
 
 /**
- * VS Code Spell Checker Settings
- * To be Removed
- * @deprecated
+ * Legacy VS Code Spell Checker Settings
+ * @deprecated To be Removed
  */
 export interface LegacySettings {
     /**
      * Show status
-     * @deprecated
+     * @deprecated To be Removed
      */
     showStatus?: boolean;
 
     /**
      * Delay in ms after a document has changed before checking it for spelling errors.
-     * @deprecated
+     * @deprecated To be Removed
      */
     spellCheckDelayMs?: number;
     /************************/
@@ -219,7 +218,7 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
 }
 
 /**
- * @deprecated
+ * @deprecated To be Removed
  * @hidden
  */
 export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
@@ -288,7 +287,7 @@ export type DictionaryId = string;
 export type LocaleId = string;
 
 /**
- * @deprecatedMessage Use LocaleId instead
+ * @deprecated Use LocaleId instead
  */
 export type LocalId = LocaleId;
 
