@@ -23,7 +23,7 @@ const config = {
             files: '**/*.ts',
             extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
             parser: '@typescript-eslint/parser',
-            plugins: ['@typescript-eslint'],
+            plugins: ['@typescript-eslint', 'eslint-plugin-tsdoc'],
             rules: {
                 'no-unused-vars': 0, // off - caught by the compiler
                 '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
@@ -39,6 +39,7 @@ const config = {
                         ignores: ['modules'],
                     },
                 ],
+                'tsdoc/syntax': 'error',
             },
         },
         {
