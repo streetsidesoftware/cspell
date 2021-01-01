@@ -48,12 +48,12 @@ export interface NamedGroupsArray {
 
 /**
  *   Replacement functions are invoked with three or more arguments:
- *     - {string}        substring  - The matched substring (corresponds to `$&` above). Named backreferences are accessible as
+ *     - `{string}`        substring  - The matched substring (corresponds to `$&` above). Named backreferences are accessible as
  *       properties of this first argument if the `namespacing` feature is off.
- *     - {string}        args[1..n] - arguments, one for each backreference (corresponding to `$1`, `$2`, etc. above).
- *     - {number}        args[n+1]  - The zero-based index of the match within the total search string.
- *     - {string}        args[n+2]  - The total string being searched.
- *     - {XRegExp.NamedGroups} args[n+3]  - If the `namespacing` feature is turned on, the last parameter is the groups object. If the
+ *     - `{string}`        args[1..n] - arguments, one for each backreference (corresponding to `$1`, `$2`, etc. above).
+ *     - `{number}`        args[n+1]  - The zero-based index of the match within the total search string.
+ *     - `{string}`        args[n+2]  - The total string being searched.
+ *     - `{XRegExp.NamedGroups}` args[n+3]  - If the `namespacing` feature is turned on, the last parameter is the groups object. If the
  *       `namespacing` feature is off, then this argument is not present.
  */
 export type ReplacementFunction = (
@@ -82,7 +82,7 @@ export interface XRegExp {
      *        flag g, `scope` is 'all'.
      * @returns New string with one or all matches replaced.
      * @example
-     *
+     * ```
      * // Regex search, using named backreferences in replacement string
      * const name = XRegExp('(?<first>\\w+) (?<last>\\w+)');
      * XRegExp.replace('John Smith', name, '$<last>, $<first>');
@@ -95,6 +95,7 @@ export interface XRegExp {
      * // String search, with replace-all
      * XRegExp.replace('RegExp builds RegExps', 'RegExp', 'XRegExp', 'all');
      * // -> 'XRegExp builds XRegExps'
+     * ```
      */
     replace(str: string, search: Pattern, replacement: ReplacementValue, scope?: MatchScope): string;
 
@@ -110,7 +111,7 @@ export interface XRegExp {
      * @param limit - Maximum number of items to include in the result array.
      * @returns Array of substrings.
      * @example
-     *
+     * ```
      * // Basic use
      * XRegExp.split('a b c', ' ');
      * // -> ['a', 'b', 'c']
@@ -122,6 +123,7 @@ export interface XRegExp {
      * // Backreferences in result array
      * XRegExp.split('..word1..', /([a-z]+)(\d+)/i);
      * // -> ['..', 'word', '1', '..']
+     * ```
      */
     split(str: string, separator: Pattern, limit?: number): string[];
 }

@@ -11,7 +11,7 @@ export interface IOptions {
     debug?: boolean;
 
     /**
-     * Do not expand {a,b} and {1..3} brace sets.
+     * Do not expand `{a,b}` and `{1..3}` brace sets.
      *
      * @defaultValue false
      */

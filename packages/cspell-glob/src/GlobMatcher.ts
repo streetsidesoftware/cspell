@@ -9,7 +9,15 @@ export interface ParsedPath {
      */
     root: string;
     /**
-     * The full directory path such as '/home/user/dir' or 'c:\path\dir'
+     * The full directory path
+     * @example
+     * ```
+     * '/home/user/dir'
+     * ```
+     * @example
+     * ```
+     * 'c:\path\dir'
+     * ```
      */
     dir: string;
     /**
@@ -88,7 +96,11 @@ interface GlobRule {
 /**
  * This function attempts to emulate .gitignore functionality as much as possible.
  *
- * The resulting matcher function: (filename: string) => GlobMatch
+ * @example
+ * The resulting matcher function:
+ * ```
+ * (filename: string) => GlobMatch
+ * ```
  *
  * If filename is relative, it is considered relative to the root.
  * If filename is absolute and contained within the root, it will be made relative before being tested for a glob match.

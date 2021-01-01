@@ -157,7 +157,7 @@ export class Trie {
     /**
      * genSuggestions will generate suggestions and send them to `collector`. `collector` is responsible for returning the max acceptable cost.
      * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
-     * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
+     * Returning a `MaxCost < 0` will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
         const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
