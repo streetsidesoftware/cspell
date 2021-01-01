@@ -9,6 +9,46 @@
         },
         {
           "$ref": "#/definitions/DictionaryDefinitionAlternate"
+        },
+        {
+          "additionalProperties": false,
+          "deprecated": "To be Removed",
+          "properties": {
+            "description": {
+              "description": "Optional description",
+              "type": "string"
+            },
+            "file": {
+              "$ref": "#/definitions/FsPath",
+              "description": "File name @deprecated use path"
+            },
+            "name": {
+              "$ref": "#/definitions/DictionaryId",
+              "description": "The reference name of the dictionary, used with program language settings"
+            },
+            "path": {
+              "$ref": "#/definitions/FsPath",
+              "description": "Path to the file, if undefined the path to the extension dictionaries is assumed"
+            },
+            "repMap": {
+              "$ref": "#/definitions/ReplaceMap",
+              "description": "Replacement pairs"
+            },
+            "type": {
+              "$ref": "#/definitions/DictionaryFileTypes",
+              "defaultValue": "S",
+              "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed) Default is S C is the slowest to load due to the need to split each line based upon code splitting rules."
+            },
+            "useCompounds": {
+              "description": "Use Compounds",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "file",
+            "name"
+          ],
+          "type": "object"
         }
       ]
     },
@@ -26,6 +66,10 @@
         "name": {
           "$ref": "#/definitions/DictionaryId",
           "description": "The reference name of the dictionary, used with program language settings"
+        },
+        "path": {
+          "not": {
+          }
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
@@ -48,6 +92,10 @@
         "description": {
           "description": "Optional description",
           "type": "string"
+        },
+        "file": {
+          "not": {
+          }
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
@@ -72,6 +120,15 @@
       ],
       "type": "object"
     },
+    "DictionaryFileTypes": {
+      "enum": [
+        "S",
+        "W",
+        "C",
+        "T"
+      ],
+      "type": "string"
+    },
     "DictionaryId": {
       "description": "This matches the name in a dictionary definition",
       "type": "string"
@@ -92,12 +149,12 @@
       "additionalProperties": false,
       "properties": {
         "allowCompoundWords": {
-          "default": false,
+          "defaultValue": false,
           "description": "True to enable compound word checking.",
           "type": "boolean"
         },
         "caseSensitive": {
-          "default": false,
+          "defaultValue": false,
           "description": "Words must match case rules.",
           "type": "boolean"
         },
@@ -120,7 +177,7 @@
           "type": "array"
         },
         "enabled": {
-          "default": true,
+          "defaultValue": true,
           "description": "Is the spell checker enabled",
           "type": "boolean"
         },
@@ -203,12 +260,12 @@
       "additionalProperties": false,
       "properties": {
         "allowCompoundWords": {
-          "default": false,
+          "defaultValue": false,
           "description": "True to enable compound word checking.",
           "type": "boolean"
         },
         "caseSensitive": {
-          "default": false,
+          "defaultValue": false,
           "description": "Words must match case rules.",
           "type": "boolean"
         },
@@ -231,7 +288,7 @@
           "type": "array"
         },
         "enabled": {
-          "default": true,
+          "defaultValue": true,
           "description": "Is the spell checker enabled",
           "type": "boolean"
         },
@@ -305,17 +362,17 @@
           "type": "array"
         },
         "maxDuplicateProblems": {
-          "default": 5,
+          "defaultValue": 5,
           "description": "The maximum number of times the same word can be flagged as an error in a file.",
           "type": "number"
         },
         "maxNumberOfProblems": {
-          "default": 100,
+          "defaultValue": 100,
           "description": "The maximum number of problems to report in a file.",
           "type": "number"
         },
         "minWordLength": {
-          "default": 4,
+          "defaultValue": 4,
           "description": "The minimum length of a word before checking it against a dictionary.",
           "type": "number"
         },
@@ -324,7 +381,7 @@
           "type": "string"
         },
         "numSuggestions": {
-          "default": 10,
+          "defaultValue": 10,
           "description": "Number of suggestions to make",
           "type": "number"
         },
@@ -456,12 +513,12 @@
       "type": "string"
     },
     "allowCompoundWords": {
-      "default": false,
+      "defaultValue": false,
       "description": "True to enable compound word checking.",
       "type": "boolean"
     },
     "caseSensitive": {
-      "default": false,
+      "defaultValue": false,
       "description": "Words must match case rules.",
       "type": "boolean"
     },
@@ -484,7 +541,7 @@
       "type": "array"
     },
     "enabled": {
-      "default": true,
+      "defaultValue": true,
       "description": "Is the spell checker enabled",
       "type": "boolean"
     },
@@ -544,7 +601,7 @@
     },
     "language": {
       "$ref": "#/definitions/LocaleId",
-      "default": "en",
+      "defaultValue": "en",
       "description": "Current active spelling language.\n\nExample: \"en-GB\" for British English\n\nExample: \"en,nl\" to enable both English and Dutch"
     },
     "languageId": {
@@ -559,17 +616,17 @@
       "type": "array"
     },
     "maxDuplicateProblems": {
-      "default": 5,
+      "defaultValue": 5,
       "description": "The maximum number of times the same word can be flagged as an error in a file.",
       "type": "number"
     },
     "maxNumberOfProblems": {
-      "default": 100,
+      "defaultValue": 100,
       "description": "The maximum number of problems to report in a file.",
       "type": "number"
     },
     "minWordLength": {
-      "default": 4,
+      "defaultValue": 4,
       "description": "The minimum length of a word before checking it against a dictionary.",
       "type": "number"
     },
@@ -578,7 +635,7 @@
       "type": "string"
     },
     "numSuggestions": {
-      "default": 10,
+      "defaultValue": 10,
       "description": "Number of suggestions to make",
       "type": "number"
     },
@@ -597,10 +654,12 @@
       "type": "array"
     },
     "showStatus": {
+      "deprecated": "To be Removed",
       "description": "Show status",
       "type": "boolean"
     },
     "spellCheckDelayMs": {
+      "deprecated": "To be Removed",
       "description": "Delay in ms after a document has changed before checking it for spelling errors.",
       "type": "number"
     },
@@ -612,7 +671,7 @@
       "type": "array"
     },
     "version": {
-      "default": "0.1",
+      "defaultValue": "0.1",
       "description": "Configuration format version of the setting file.",
       "type": "string"
     },
