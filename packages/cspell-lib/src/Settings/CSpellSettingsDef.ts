@@ -205,12 +205,12 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
     /** Path to the file */
     path: FsPath;
 
-    /** @hidden */
+    /** @internal */
     file?: undefined;
 }
 
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
-    /** @hidden */
+    /** @internal */
     path?: undefined;
 
     /** Path to the file */
@@ -219,7 +219,7 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
 
 /**
  * @deprecated To be Removed
- * @hidden
+ * @internal
  */
 export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     /** Path to the file, if undefined the path to the extension dictionaries is assumed */
@@ -247,7 +247,7 @@ export interface LanguageSettingFilterFields {
     local?: LocaleId | LocaleId[];
 }
 
-/** @hidden */
+/** @internal */
 type InternalRegExp = RegExp;
 
 export type Pattern = string | InternalRegExp;
