@@ -1,4 +1,4 @@
-name: Update Dependencies
+name: Update Dependencies Master
 
 on:
   push:
@@ -19,15 +19,10 @@ on:
 jobs:
   update-dependencies:
     if: github.repository_owner == 'streetsidesoftware'
-    strategy:
-      matrix:
-        branch:
-          - master
-          - cspell4
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-${{ matrix.branch }}"
-      REF_BRANCH: ${{ matrix.branch }}
+      NEW_BRANCH: "update-dependencies-master"
+      REF_BRANCH: master
     steps:
       - name: Start
         run: |
