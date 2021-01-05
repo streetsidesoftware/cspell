@@ -29,6 +29,9 @@ jobs:
       NEW_BRANCH: "update-dependencies-${{ matrix.branch }}"
       REF_BRANCH: ${{ matrix.branch }}
     steps:
+      - name: Start
+        run: |
+          echo ${{ github.event.inputs }}
       - name: Checkout code
         uses: actions/checkout@v2
         with:
