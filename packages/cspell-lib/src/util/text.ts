@@ -21,7 +21,8 @@ const regExLines = /.*(\r?\n|$)/g;
 const regExUpperSOrIng = XRegExp("(\\p{Lu}+\\\\?['’]?(?:s|ing|ies|es|ings|ed|ning))(?!\\p{Ll})", 'g');
 const regExSplitWords = XRegExp('(\\p{Ll})(\\p{Lu})', 'g');
 const regExSplitWords2 = XRegExp('(\\p{Lu})(\\p{Lu}\\p{Ll})', 'g');
-const regExWords = XRegExp("\\p{L}(?:\\\\?['’]\\p{L}|\\p{L})+|\\p{L}", 'g');
+const regExWords = XRegExp("\\p{L}(?:(?:\\\\?['’])?\\p{L})*", 'g');
+const regExWordsAndDigits = XRegExp("(?:\\d+(?=\\p{L}))?[\\p{L}](?:(?:\\\\?['’])?[\\p{L}\\d])*", 'g');
 const regExIgnoreCharacters = XRegExp('\\p{Hiragana}|\\p{Han}|\\p{Katakana}|[\\u30A0-\\u30FF]|[\\p{Hangul}]', 'g');
 const regExFirstUpper = XRegExp('^\\p{Lu}\\p{Ll}+$');
 const regExAllUpper = XRegExp('^\\p{Lu}+$');
@@ -83,8 +84,8 @@ export function extractWordsFromText(text: string): Sequence<TextOffset> {
  * Extract out whole words from a string of text.
  */
 export function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffset> {
-    const reg = XRegExp(regExWords);
-    const reg2 = XRegExp(regExWords);
+    const reg = new RegExp(regExWords);
+    const reg2 = new RegExp(regExWords);
     return (
         matchToTextOffset(reg, text)
             // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
@@ -95,6 +96,14 @@ export function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffse
             .concatMap((wo) => matchToTextOffset(reg2, wo))
             .filter((wo) => !!wo.text)
     );
+}
+
+/**
+ * Extract out whole words and words containing numbers from a string of text.
+ */
+export function extractPossibleWordsFromTextOffset(text: TextOffset): Sequence<TextOffset> {
+    const reg = new RegExp(regExWordsAndDigits);
+    return matchToTextOffset(reg, text);
 }
 
 export function extractWordsFromCode(text: string): Sequence<TextOffset> {
@@ -217,3 +226,8 @@ export function calculateTextDocumentOffsets(
 export function removeAccents(text: string): string {
     return text.normalize('NFKD').replace(regExAccents, '');
 }
+
+export const __testing__ = {
+    regExWords,
+    regExWordsAndDigits,
+};

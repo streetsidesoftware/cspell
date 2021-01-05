@@ -174,14 +174,30 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
             return codeWordResults;
         }
 
-        // Check the whole words, not yet split
-        const checkedWords: Sequence<ValidationResult> = Text.extractWordsFromTextOffset(lineSegment)
+        function checkPossibleWords(possibleWord: TextOffset) {
+            const mismatches: ValidationResult[] = Text.extractWordsFromTextOffset(possibleWord)
+                .filter(filterAlreadyChecked)
+                .filter(rememberFilter((wo) => wo.text.length >= minWordLength))
+                .map((wo) => ({ ...wo, line: lineSegment }))
+                .map(checkFlagWords)
+                .concatMap(checkFullWord)
+                .toArray();
+            if (mismatches.length) {
+                // Try the whole word.
+                const vr = { ...possibleWord, line: lineSegment };
+                if (ignoreWordsSet.has(vr.text) || checkWord(vr, checkOptions).isFound) {
+                    rememberFilter((_) => false)(vr);
+                    return [];
+                }
+                // console.log(vr.text);
+            }
+            return mismatches;
+        }
+
+        const checkedPossibleWords: Sequence<ValidationResult> = Text.extractPossibleWordsFromTextOffset(lineSegment)
             .filter(filterAlreadyChecked)
-            .filter(rememberFilter((wo) => wo.text.length >= minWordLength))
-            .map((wo) => ({ ...wo, line: lineSegment }))
-            .map(checkFlagWords)
-            .concatMap(checkFullWord);
-        return checkedWords;
+            .concatMap(checkPossibleWords);
+        return checkedPossibleWords;
     };
 
     return fn;

@@ -72,16 +72,19 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests case sensitive word list', async () => {
-        const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple'];
+        const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple', 'VeryBadProblem', 'with'].concat(specialWords);
         const flagWords = ['VeryBadProblem'];
         const dict = await createSpellingDictionary(wordList, 'empty', 'test', {
             caseSensitive: true,
         });
-        const text = 'We have PUBLISHed published Multiple FIXesToThePROBLEMs VeryBadProblem';
-        const options = { allowCompoundWords: true, ignoreCase: false, flagWords };
+        const text = `
+            We have PUBLISHed published Multiple FIXesToThePROBLEMs.
+            VeryBadProblem with the 4wheel of the Range8 in Amsterdam, Berlin, and paris.
+        `;
+        const options = { allowCompoundWords: false, ignoreCase: false, flagWords };
         const result = validateText(text, dict, options).toArray();
         const errors = result.map((wo) => wo.text);
-        expect(errors).toEqual(['have', 'published', 'VeryBadProblem']);
+        expect(errors).toEqual(['have', 'published', 'VeryBadProblem', 'paris']);
     });
 
     test('tests trailing s, ed, ing, etc.', async () => {
@@ -232,6 +235,8 @@ const words = [
     "couldn't",
     "should've",
 ];
+
+const specialWords = ['Range8', '4wheel', 'db2Admin', 'Amsterdam', 'Berlin', 'Paris'];
 
 const sampleText = `
     The elephant and giraffe
