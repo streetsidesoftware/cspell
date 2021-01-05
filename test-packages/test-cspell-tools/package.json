@@ -9,7 +9,9 @@
     "clean-build": "npm run clean && npm run build",
     "build-dictionaries": "cspell-tools compile -o dist src/php.txt src/companies.txt src/node.txt",
     "compile": "tsc -p .",
-    "test": "node dist"
+    "test-dist": "node dist",
+    "test-cspell": "cspell src/*",
+    "test": "npm run test-dist && npm run test-cspell"
   },
   "author": "",
   "license": "MIT",

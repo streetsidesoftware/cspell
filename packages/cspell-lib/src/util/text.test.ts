@@ -288,6 +288,31 @@ describe('Test the text matching functions', () => {
     });
 });
 
+const regExWordsAndDigits = Text.__testing__.regExWordsAndDigits;
+
+describe('Validate individual regexp', () => {
+    interface RegExpTestCase {
+        testName: string;
+        regexp: RegExp;
+        text: string;
+        expectedResult: (string | number)[];
+    }
+    test.each`
+        testName                 | regexp                 | text                     | expectedResult
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${''}                    | ${[]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${" x = 'Don\\'t'"}      | ${['x', 1, "Don\\'t", 6]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345'}               | ${[]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345a'}              | ${['12345a', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345'}              | ${['b12345', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345a'}             | ${['b12345a', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12_345a'}            | ${['b12', 0, '345a', 4]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'DB\\Driver\\Manager'} | ${['DB', 0, 'Driver', 3, 'Manager', 10]}
+    `('$testName `$text`', ({ regexp, text, expectedResult }: RegExpTestCase) => {
+        const r = match(regexp, text);
+        expect(r).toEqual(expectedResult);
+    });
+});
+
 describe('Validates offset conversions', () => {
     function* getOffsets(haystack: string, needle: string) {
         let offset = -1;
@@ -310,6 +335,13 @@ describe('Validates offset conversions', () => {
         expect(results[0].col).toBe(1);
     });
 });
+
+function match(regexp: RegExp, text: string): (string | number)[] {
+    const x = Text.matchStringToTextOffset(regexp, text)
+        .concatMap((t) => [t.text, t.offset])
+        .toArray();
+    return x;
+}
 
 const sampleCode = `
 /*
