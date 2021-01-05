@@ -11,8 +11,8 @@ on:
   workflow_dispatch:
     inputs:
       updateSnapshots:
-        description: "Update Integration Test snapshots (true/false)"
-        default: "true"
+        description: "Update Integration Test snapshots (yes/no)"
+        default: "yes"
   schedule:
     - cron: "0 12 * * 0"
 
@@ -43,7 +43,7 @@ jobs:
         run: |
           npm run update-packages
       - name: Update Integration Test Snapshots
-        if: ${{ github.event.inputs.updateSnapshots }} == 'true'
+        if: github.event.inputs.updateSnapshots == 'yes'
         run: |
           npm run update-snapshots
       - name: Has changes
