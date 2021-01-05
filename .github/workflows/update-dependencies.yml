@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: Start
         run: |
-          echo ${{ github.event.inputs }}
+          echo "${{ toJson(github.event.inputs) }}"
       - name: Checkout code
         uses: actions/checkout@v2
         with:
