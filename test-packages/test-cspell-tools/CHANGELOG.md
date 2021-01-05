@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.3](https://github.com/streetsidesoftware/cspell/compare/v5.1.2...v5.1.3) (2021-01-05)
+
+
+### Bug Fixes
+
+* Support dictionaries having words with numbers. ([#828](https://github.com/streetsidesoftware/cspell/issues/828)) ([856f04a](https://github.com/streetsidesoftware/cspell/commit/856f04a3bec45088ec7d79dd089fe0c80e517d5e))
+
+
+
+
+
 ## [5.1.1](https://github.com/streetsidesoftware/cspell/compare/v5.1.0...v5.1.1) (2020-12-28)
 
 **Note:** Version bump only for package test-cspell-glob
