@@ -22,7 +22,7 @@ const regExUpperSOrIng = XRegExp("(\\p{Lu}+\\\\?['’]?(?:s|ing|ies|es|ings|ed|n
 const regExSplitWords = XRegExp('(\\p{Ll})(\\p{Lu})', 'g');
 const regExSplitWords2 = XRegExp('(\\p{Lu})(\\p{Lu}\\p{Ll})', 'g');
 const regExWords = XRegExp("\\p{L}(?:(?:\\\\?['’])?\\p{L})*", 'g');
-const regExWordsAndDigits = XRegExp("(?:\\d+(?=\\p{L}))?[\\p{L}](?:(?:\\\\?['’])?[\\p{L}\\d])*", 'g');
+const regExWordsAndDigits = XRegExp("(?:\\d+)?[\\p{L}_\\-](?:(?:\\\\?['’])?[\\p{L}\\w\\-])*", 'g');
 const regExIgnoreCharacters = XRegExp('\\p{Hiragana}|\\p{Han}|\\p{Katakana}|[\\u30A0-\\u30FF]|[\\p{Hangul}]', 'g');
 const regExFirstUpper = XRegExp('^\\p{Lu}\\p{Ll}+$');
 const regExAllUpper = XRegExp('^\\p{Lu}+$');

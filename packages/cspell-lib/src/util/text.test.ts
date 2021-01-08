@@ -305,7 +305,8 @@ describe('Validate individual regexp', () => {
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345a'}              | ${['12345a', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345'}              | ${['b12345', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345a'}             | ${['b12345a', 0]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12_345a'}            | ${['b12', 0, '345a', 4]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12_345a'}            | ${['b12_345a', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'well-educated'}       | ${['well-educated', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'DB\\Driver\\Manager'} | ${['DB', 0, 'Driver', 3, 'Manager', 10]}
     `('$testName `$text`', ({ regexp, text, expectedResult }: RegExpTestCase) => {
         const r = match(regexp, text);

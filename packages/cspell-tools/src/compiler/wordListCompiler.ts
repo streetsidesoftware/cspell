@@ -9,9 +9,15 @@ import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { extractInlineSettings, InlineSettings } from './inlineSettings';
 
 const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
-const regNonWordOrDigit = XRegExp("[^\\p{L}'0-9]+", 'gi');
+const regNonWordOrDigit = XRegExp("[^\\p{L}'\\w-]+", 'gi');
 const regExpSpaceOrDash = /[- ]+/g;
 const regExpRepeatChars = /(.)\1{4,}/i;
+
+// Indicate that a word list has already been processed.
+const wordListHeader = `
+# cspell-tools: keep-case no-split
+`;
+const wordListHeaderLines = wordListHeader.split('\n').map((a) => a.trim());
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Logger = (message?: any, ...optionalParams: any[]) => void;
@@ -94,7 +100,8 @@ export async function compileWordList(
     const normalizer = createNormalizer(options);
     const seq = normalizer(lines);
 
-    const finalSeq = options.sort ? genSequence(sort(seq)) : seq;
+    const header = genSequence(wordListHeaderLines);
+    const finalSeq = header.concat(options.sort ? genSequence(sort(seq)) : seq);
 
     return createWordListTarget(destFilename)(finalSeq);
 }
@@ -130,31 +137,16 @@ function normalizeWordListSeq(lines: Iterable<string>, initialState: CompilerSta
     return genSequence(normalizeWordListGen(lines, initialState));
 }
 
-function* adjustComments(lines: Iterable<string>): Iterable<string> {
-    for (const line of lines) {
-        const idx = line.indexOf('#');
-        if (idx <= 0) {
-            yield line;
-        } else {
-            // Move the comment above.
-            yield line.substr(idx);
-            yield line.substr(0, idx);
-        }
-    }
-}
-
 function* normalizeWordListGen(lines: Iterable<string>, initialState: CompilerState): Iterable<string> {
     let state = initialState;
 
-    for (const line of adjustComments(lines)) {
+    for (let line of lines) {
+        line = line.normalize('NFC');
         state = adjustState(state, line);
-        if (line[0] === '#') {
-            yield line.trim();
-            continue;
-        }
         for (const word of state.lineProcessor(line)) {
-            if (!word) continue;
-            yield state.wordMapper(word).trim();
+            const w = word.trim();
+            if (!w) continue;
+            yield state.wordMapper(w);
         }
     }
 }
@@ -226,30 +218,41 @@ export function createTrieTarget(
  * @returns array of words
  * @example `readline.clearLine(stream, dir)` => ['readline', 'clearLine', 'stream', 'dir']
  * @example `New York` => ['New', 'York']
- * @example `don't` => ['don't']
+ * @example `don't` => [`don't`]
  * @example `Event: 'SIGCONT'` => ['Event', 'SIGCONT']
  */
 function splitLine(line: string): string[] {
     line = line.replace(/#.*/, ''); // remove comment
     line = line.trim();
+    line = line.replace(/\bU\+[0-9A-F]+\b/gi, '|'); // Remove Unicode Definitions
     line = line.replace(regNonWordOrDigit, '|');
-    line = line.replace(/\W\d+\W/g, '|'); // remove isolated digits
-    line = line.replace(/'(?=\|)/, ''); // remove trailing '
+    line = line.replace(/'(?=\|)/g, ''); // remove trailing '
     line = line.replace(/'$/, ''); // remove trailing '
-    line = line.replace(/(?<=\|)'/, ''); // remove leading '
+    line = line.replace(/(?<=\|)'/g, ''); // remove leading '
     line = line.replace(/^'/, ''); // remove leading '
-    line = line.replace(/\s*\|\s*/, '|'); // remove spaces around |
+    line = line.replace(/\s*\|\s*/g, '|'); // remove spaces around |
     line = line.replace(/[|]+/g, '|'); // reduce repeated |
     line = line.replace(/^\|/, ''); // remove leading |
     line = line.replace(/\|$/, ''); // remove trailing |
-    return line.split('|').filter((a) => !!a);
+    const lines = line
+        .split('|')
+        .map((a) => a.trim())
+        .filter((a) => !!a)
+        .filter((a) => !a.match(/^[0-9_-]+$/)) // pure numbers and symbols
+        .filter((a) => !a.match(/^[ux][0-9A-F]*$/i)) // hex digits
+        .filter((a) => !a.match(/^0[xo][0-9A-F]*$/i)); // c-style hex/octal digits
+
+    return lines;
 }
 
 function noSplit(line: string): string[] {
-    return [line];
+    line = line.replace(/#.*/, ''); // remove comment
+    line = line.trim();
+    return !line ? [] : [line];
 }
 
 export const __testing__ = {
     splitLine: splitLine,
     createNormalizer,
+    wordListHeader,
 };

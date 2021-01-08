@@ -26,6 +26,8 @@ const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
 const sampleDictEn = path.join(samples, 'en_US.txt');
 const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 
+const wordListHeader = __testing__.wordListHeader;
+
 describe('Validate the wordListCompiler', () => {
     test.each`
         line                                                           | expectedResult
@@ -82,40 +84,46 @@ describe('Validate the wordListCompiler', () => {
     );
 
     interface NormalizeTestCase extends Partial<CompileOptions> {
-        lines: string;
+        text: string;
         expectedResult: string[];
     }
 
+    // cspell:ignore niño
+
     test.each`
-        lines                                       | expectedResult                                  | splitWords | keepCase
-        ${'hello'}                                  | ${['hello']}                                    | ${true}    | ${true}
-        ${'AppendIterator::getArrayIterator'}       | ${['AppendIterator', 'getArrayIterator']}       | ${true}    | ${true}
-        ${'Austin Martin'}                          | ${['Austin', 'Martin']}                         | ${true}    | ${true}
-        ${'# cspell-tools:no-split\nAustin Martin'} | ${['# cspell-tools:no-split', 'Austin Martin']} | ${true}    | ${true}
-        ${'Austin Martin # Proper name'}            | ${['# Proper name', 'Austin Martin']}           | ${false}   | ${true}
-        ${'Austin Martin # Proper name '}           | ${['# Proper name', 'austin martin']}           | ${false}   | ${false}
-        ${'Austin Martin # Proper name '}           | ${['# Proper name', 'austin', 'martin']}        | ${true}    | ${false}
-        ${'JPEGsBLOBs'}                             | ${['JPEGsBLOBs']}                               | ${true}    | ${true}
-        ${'CURLs CURLing'}                          | ${['CURLs', 'CURLing']}                         | ${true}    | ${true}
-        ${'DNSTable Lookup'}                        | ${['DNSTable', 'Lookup']}                       | ${true}    | ${true}
-        ${'OUTRing'}                                | ${['OUTRing']}                                  | ${true}    | ${true}
-        ${'OUTRings'}                               | ${['OUTRings']}                                 | ${true}    | ${true}
-        ${'DIRs'}                                   | ${['DIRs']}                                     | ${true}    | ${true}
-        ${'AVGAspect'}                              | ${['AVGAspect']}                                | ${true}    | ${true}
-        ${'New York'}                               | ${['New', 'York']}                              | ${true}    | ${true}
-        ${'New York'}                               | ${['New York']}                                 | ${false}   | ${true}
-        ${'Namespace DNSLookup'}                    | ${['Namespace', 'DNSLookup']}                   | ${true}    | ${true}
-        ${'well-educated'}                          | ${['well', 'educated']}                         | ${true}    | ${true}
-        ${'CURLcode'}                               | ${['CURLcode']}                                 | ${true}    | ${true}
-        ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr', 'BadSig']}                 | ${true}    | ${true}
-        ${'apd_get_active_symbols'}                 | ${['apd', 'get', 'active', 'symbols']}          | ${true}    | ${true}
-    `('test normalizer line splitting $lines $splitWords $keepCase', (testCase: NormalizeTestCase) => {
+        text                                        | expectedResult                            | splitWords | keepCase
+        ${'hello'}                                  | ${['hello']}                              | ${true}    | ${true}
+        ${'AppendIterator::getArrayIterator'}       | ${['AppendIterator', 'getArrayIterator']} | ${true}    | ${true}
+        ${'Austin Martin'}                          | ${['Austin', 'Martin']}                   | ${true}    | ${true}
+        ${'# cspell-tools:no-split\nAustin Martin'} | ${['Austin Martin']}                      | ${true}    | ${true}
+        ${'Austin Martin # Proper name'}            | ${['Austin Martin']}                      | ${false}   | ${true}
+        ${'Austin Martin # Proper name '}           | ${['austin martin']}                      | ${false}   | ${false}
+        ${'Austin Martin # Proper name '}           | ${['austin', 'martin']}                   | ${true}    | ${false}
+        ${'JPEGsBLOBs'}                             | ${['JPEGsBLOBs']}                         | ${true}    | ${true}
+        ${'CURLs CURLing'}                          | ${['CURLs', 'CURLing']}                   | ${true}    | ${true}
+        ${'DNSTable Lookup'}                        | ${['DNSTable', 'Lookup']}                 | ${true}    | ${true}
+        ${'OUTRing'}                                | ${['OUTRing']}                            | ${true}    | ${true}
+        ${'OUTRings'}                               | ${['OUTRings']}                           | ${true}    | ${true}
+        ${'DIRs'}                                   | ${['DIRs']}                               | ${true}    | ${true}
+        ${'AVGAspect'}                              | ${['AVGAspect']}                          | ${true}    | ${true}
+        ${'New York'}                               | ${['New', 'York']}                        | ${true}    | ${true}
+        ${'New York'}                               | ${['New York']}                           | ${false}   | ${true}
+        ${'Namespace DNSLookup'}                    | ${['Namespace', 'DNSLookup']}             | ${true}    | ${true}
+        ${'well-educated'}                          | ${['well-educated']}                      | ${true}    | ${true}
+        ${'--abort-on-uncaught-exception'}          | ${['--abort-on-uncaught-exception']}      | ${true}    | ${true}
+        ${'corner café'}                            | ${['corner', 'café']}                     | ${true}    | ${true}
+        ${'El Niño'}                                | ${['El', 'Niño']}                         | ${true}    | ${true}
+        ${'El Nin\u0303o'}                          | ${['El', 'Niño']}                         | ${true}    | ${true}
+        ${'CURLcode'}                               | ${['CURLcode']}                           | ${true}    | ${true}
+        ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr_BadSig']}              | ${true}    | ${true}
+        ${'apd_get_active_symbols'}                 | ${['apd_get_active_symbols']}             | ${true}    | ${true}
+    `('test normalizer line splitting $text $splitWords $keepCase', (testCase: NormalizeTestCase) => {
         const {
             skipNormalization = false,
             splitWords = false,
             keepCase = false,
             sort = false,
-            lines,
+            text,
             expectedResult,
         } = testCase;
         const normalizer = __testing__.createNormalizer({
@@ -124,7 +132,7 @@ describe('Validate the wordListCompiler', () => {
             keepCase,
             sort,
         });
-        const r = normalizer(genSequence(lines.split('\n'))).toArray();
+        const r = normalizer(genSequence(text.split('\n'))).toArray();
         expect(r).toEqual(expectedResult);
     });
 
@@ -138,7 +146,7 @@ describe('Validate the wordListCompiler', () => {
             keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output).toBe(citiesResultSorted);
+        expect(output).toBe(wordListHeader + '\n' + citiesResultSorted);
     });
 
     test('compiling to a file without split', async () => {
@@ -151,7 +159,7 @@ describe('Validate the wordListCompiler', () => {
             keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output).toBe(citiesSorted.toLowerCase());
+        expect(output).toBe(wordListHeader + '\n' + citiesSorted.toLowerCase());
     });
 
     test('tests normalized to a trie', () => {
@@ -216,7 +224,7 @@ describe('Validate the wordListCompiler', () => {
             keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output).toBe('hello\ntry\nwork\n');
+        expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\ntry\nwork\n');
     });
 
     test('a simple hunspell dictionary depth 1', async () => {
@@ -231,21 +239,34 @@ describe('Validate the wordListCompiler', () => {
             keepCase: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output.split('\n')).toEqual(['hello', 'rework', 'tried', 'try', 'work', 'worked', '']);
+        expect(output.split('\n')).toEqual([
+            '',
+            '# cspell-tools: keep-case no-split',
+            '',
+            'hello',
+            'rework',
+            'tried',
+            'try',
+            'work',
+            'worked',
+            '',
+        ]);
     });
 
     test.each`
-        testCase                                        | line                                            | expectedResult
-        ${'hello'}                                      | ${'hello'}                                      | ${['hello']}
-        ${'array_intersect_assoc'}                      | ${'array_intersect_assoc'}                      | ${['array', 'intersect', 'assoc']}
-        ${'AppendIterator::__construct'}                | ${'AppendIterator::__construct'}                | ${['AppendIterator', 'construct']}
-        ${'db2_client_info'}                            | ${'db2_client_info'}                            | ${['db2', 'client', 'info']}
-        ${"'db2_client_info'"}                          | ${"'db2_client_info'"}                          | ${['db2', 'client', 'info']}
-        ${"don't"}                                      | ${"don't"}                                      | ${["don't"]}
-        ${'New York'}                                   | ${'New York'}                                   | ${['New', 'York']}
-        ${'MongoDB\\Driver\\Server::getLatency'}        | ${'MongoDB\\Driver\\Server::getLatency'}        | ${['MongoDB', 'Driver', 'Server', 'getLatency']}
-        ${'socket.connect(options[, connectListener])'} | ${'socket.connect(options[, connectListener])'} | ${['socket', 'connect', 'options', 'connectListener']}
-        ${"Event: 'SIGINT'"}                            | ${"Event: 'SIGINT'"}                            | ${['Event', 'SIGINT']}
+        testCase                                        | line                                                   | expectedResult
+        ${'hello'}                                      | ${'hello'}                                             | ${['hello']}
+        ${'array_intersect_assoc'}                      | ${'array_intersect_assoc'}                             | ${['array_intersect_assoc']}
+        ${'AppendIterator::__construct'}                | ${'AppendIterator::__construct'}                       | ${['AppendIterator', '__construct']}
+        ${'db2_client_info'}                            | ${'db2_client_info'}                                   | ${['db2_client_info']}
+        ${"'db2_client_info'"}                          | ${"'db2_client_info'"}                                 | ${['db2_client_info']}
+        ${"don't"}                                      | ${"don't"}                                             | ${["don't"]}
+        ${'New York'}                                   | ${'New York'}                                          | ${['New', 'York']}
+        ${'MongoDB\\Driver\\Server::getLatency'}        | ${'MongoDB\\Driver\\Server::getLatency'}               | ${['MongoDB', 'Driver', 'Server', 'getLatency']}
+        ${'socket.connect(options[, connectListener])'} | ${'socket.connect(options[, connectListener])'}        | ${['socket', 'connect', 'options', 'connectListener']}
+        ${"Event: 'SIGINT'"}                            | ${"Event: 'SIGINT'"}                                   | ${['Event', 'SIGINT']}
+        ${'Rav4'}                                       | ${'Rav4'}                                              | ${['Rav4']}
+        ${'Numbers 128 0x0 0o37 65001'}                 | ${'Numbers 128 0x0 0o37 65001 \\u00E9 U+1F436 \\x0F '} | ${['Numbers']}
     `('splitLine $testCase', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
         const r = __testing__.splitLine(line);
         expect(r).toEqual(expectedResult);
