@@ -118,7 +118,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
 }
 
 function determineType(uri: string, options: LoadOptions): LoaderType {
-    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'C';
+    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'S';
     const { type = defType } = options;
     const regTrieTest = /\.trie\b/i;
     return regTrieTest.test(uri) ? 'T' : type;
