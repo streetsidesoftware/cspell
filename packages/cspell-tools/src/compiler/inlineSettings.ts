@@ -1,9 +1,12 @@
+import { set } from 'shelljs';
+
 export interface InlineSettings {
     split?: boolean;
     keepCase?: boolean;
+    caseSensitive?: boolean;
 }
 
-const allowedSettings = ['split', 'no-split', 'keep-case', 'no-keep-case'];
+const allowedSettings = ['split', 'no-split', 'keep-case', 'no-keep-case', 'case-sensitive'];
 
 export function extractInlineSettings(line: string): InlineSettings | undefined {
     const m = line.match(/cspell-tools:(.*)/);
@@ -26,6 +29,9 @@ export function extractInlineSettings(line: string): InlineSettings | undefined 
                 break;
             case 'no-keep-case':
                 settings.keepCase = false;
+                break;
+            case 'case-sensitive':
+                settings.caseSensitive = true;
                 break;
             case 'flag':
             case 'flags':

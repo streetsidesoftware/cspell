@@ -77,6 +77,7 @@ describe('Validate the wordListCompiler', () => {
                 splitWords: undefined,
                 keepCase: false,
                 sort: false,
+                legacy: true,
             });
             const r = normalizer(genSequence(lines.split('\n'))).toArray();
             expect(r).toEqual(expectedResult);
@@ -91,32 +92,35 @@ describe('Validate the wordListCompiler', () => {
     // cspell:ignore niño
 
     test.each`
-        text                                        | expectedResult                            | splitWords | keepCase
-        ${'hello'}                                  | ${['hello']}                              | ${true}    | ${true}
-        ${'AppendIterator::getArrayIterator'}       | ${['AppendIterator', 'getArrayIterator']} | ${true}    | ${true}
-        ${'Austin Martin'}                          | ${['Austin', 'Martin']}                   | ${true}    | ${true}
-        ${'# cspell-tools:no-split\nAustin Martin'} | ${['Austin Martin']}                      | ${true}    | ${true}
-        ${'Austin Martin # Proper name'}            | ${['Austin Martin']}                      | ${false}   | ${true}
-        ${'Austin Martin # Proper name '}           | ${['austin martin']}                      | ${false}   | ${false}
-        ${'Austin Martin # Proper name '}           | ${['austin', 'martin']}                   | ${true}    | ${false}
-        ${'JPEGsBLOBs'}                             | ${['JPEGsBLOBs']}                         | ${true}    | ${true}
-        ${'CURLs CURLing'}                          | ${['CURLs', 'CURLing']}                   | ${true}    | ${true}
-        ${'DNSTable Lookup'}                        | ${['DNSTable', 'Lookup']}                 | ${true}    | ${true}
-        ${'OUTRing'}                                | ${['OUTRing']}                            | ${true}    | ${true}
-        ${'OUTRings'}                               | ${['OUTRings']}                           | ${true}    | ${true}
-        ${'DIRs'}                                   | ${['DIRs']}                               | ${true}    | ${true}
-        ${'AVGAspect'}                              | ${['AVGAspect']}                          | ${true}    | ${true}
-        ${'New York'}                               | ${['New', 'York']}                        | ${true}    | ${true}
-        ${'New York'}                               | ${['New York']}                           | ${false}   | ${true}
-        ${'Namespace DNSLookup'}                    | ${['Namespace', 'DNSLookup']}             | ${true}    | ${true}
-        ${'well-educated'}                          | ${['well-educated']}                      | ${true}    | ${true}
-        ${'--abort-on-uncaught-exception'}          | ${['--abort-on-uncaught-exception']}      | ${true}    | ${true}
-        ${'corner café'}                            | ${['corner', 'café']}                     | ${true}    | ${true}
-        ${'El Niño'}                                | ${['El', 'Niño']}                         | ${true}    | ${true}
-        ${'El Nin\u0303o'}                          | ${['El', 'Niño']}                         | ${true}    | ${true}
-        ${'CURLcode'}                               | ${['CURLcode']}                           | ${true}    | ${true}
-        ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr_BadSig']}              | ${true}    | ${true}
-        ${'apd_get_active_symbols'}                 | ${['apd_get_active_symbols']}             | ${true}    | ${true}
+        text                                        | expectedResult                                | splitWords | keepCase
+        ${'hello'}                                  | ${['hello']}                                  | ${true}    | ${true}
+        ${'English'}                                | ${['English']}                                | ${true}    | ${true}
+        ${'English'}                                | ${['English', '~english']}                    | ${true}    | ${false}
+        ${'café'}                                   | ${['café', '~cafe']}                          | ${true}    | ${false}
+        ${'AppendIterator::getArrayIterator'}       | ${['AppendIterator', 'getArrayIterator']}     | ${true}    | ${true}
+        ${'Austin Martin'}                          | ${['Austin', 'Martin']}                       | ${true}    | ${true}
+        ${'# cspell-tools:no-split\nAustin Martin'} | ${['Austin Martin']}                          | ${true}    | ${true}
+        ${'Austin Martin # Proper name'}            | ${['Austin Martin']}                          | ${false}   | ${true}
+        ${'Austin Martin # Proper name '}           | ${['Austin Martin', '~austin martin']}        | ${false}   | ${false}
+        ${'Austin Martin # Proper name '}           | ${['Austin', '~austin', 'Martin', '~martin']} | ${true}    | ${false}
+        ${'JPEGsBLOBs'}                             | ${['JPEGsBLOBs']}                             | ${true}    | ${true}
+        ${'CURLs CURLing'}                          | ${['CURLs', 'CURLing']}                       | ${true}    | ${true}
+        ${'DNSTable Lookup'}                        | ${['DNSTable', 'Lookup']}                     | ${true}    | ${true}
+        ${'OUTRing'}                                | ${['OUTRing']}                                | ${true}    | ${true}
+        ${'OUTRings'}                               | ${['OUTRings']}                               | ${true}    | ${true}
+        ${'DIRs'}                                   | ${['DIRs']}                                   | ${true}    | ${true}
+        ${'AVGAspect'}                              | ${['AVGAspect']}                              | ${true}    | ${true}
+        ${'New York'}                               | ${['New', 'York']}                            | ${true}    | ${true}
+        ${'New York'}                               | ${['New York']}                               | ${false}   | ${true}
+        ${'Namespace DNSLookup'}                    | ${['Namespace', 'DNSLookup']}                 | ${true}    | ${true}
+        ${'well-educated'}                          | ${['well-educated']}                          | ${true}    | ${true}
+        ${'--abort-on-uncaught-exception'}          | ${['--abort-on-uncaught-exception']}          | ${true}    | ${true}
+        ${'corner café'}                            | ${['corner', 'café']}                         | ${true}    | ${true}
+        ${'El Niño'}                                | ${['El', 'Niño']}                             | ${true}    | ${true}
+        ${'El Nin\u0303o'}                          | ${['El', 'Niño']}                             | ${true}    | ${true}
+        ${'CURLcode'}                               | ${['CURLcode']}                               | ${true}    | ${true}
+        ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr_BadSig']}                  | ${true}    | ${true}
+        ${'apd_get_active_symbols'}                 | ${['apd_get_active_symbols']}                 | ${true}    | ${true}
     `('test normalizer line splitting $text $splitWords $keepCase', (testCase: NormalizeTestCase) => {
         const {
             skipNormalization = false,
@@ -131,6 +135,7 @@ describe('Validate the wordListCompiler', () => {
             splitWords,
             keepCase,
             sort,
+            legacy: false,
         });
         const r = normalizer(genSequence(text.split('\n'))).toArray();
         expect(r).toEqual(expectedResult);
@@ -144,6 +149,7 @@ describe('Validate the wordListCompiler', () => {
             splitWords: undefined,
             sort: true,
             keepCase: false,
+            legacy: true,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(wordListHeader + '\n' + citiesResultSorted);
@@ -157,9 +163,21 @@ describe('Validate the wordListCompiler', () => {
             splitWords: false,
             sort: true,
             keepCase: false,
+            legacy: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
-        expect(output).toBe(wordListHeader + '\n' + citiesSorted.toLowerCase());
+        expect(output).toBe(
+            wordListHeader +
+                '\n' +
+                citiesSorted +
+                citiesSorted
+                    .toLowerCase()
+                    .split('\n')
+                    .filter((a) => !!a)
+                    .map((a) => '~' + a)
+                    .join('\n') +
+                '\n'
+        );
     });
 
     test('tests normalized to a trie', () => {
@@ -181,6 +199,7 @@ describe('Validate the wordListCompiler', () => {
             splitWords: undefined,
             keepCase: false,
             sort: false,
+            legacy: true,
         });
         const srcWords = (await fsp.readFile(destName, 'utf8')).split(/\r?\n/g);
         const node = Trie.importTrie(srcWords);
@@ -200,6 +219,7 @@ describe('Validate the wordListCompiler', () => {
             splitWords: undefined,
             keepCase: false,
             sort: false,
+            legacy: true,
         });
         const resultFile = await readFile(destName, UTF8);
         const srcWords = resultFile.split('\n');
@@ -222,6 +242,7 @@ describe('Validate the wordListCompiler', () => {
             splitWords: undefined,
             sort: true,
             keepCase: false,
+            legacy: true,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\ntry\nwork\n');
@@ -237,6 +258,7 @@ describe('Validate the wordListCompiler', () => {
             splitWords: undefined,
             sort: true,
             keepCase: false,
+            legacy: true,
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output.split('\n')).toEqual([

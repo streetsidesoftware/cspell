@@ -34,7 +34,7 @@ function defaultLogger(message?: unknown, ...optionalParams: unknown[]) {
 
 type Normalizer = (lines: Sequence<string>) => Sequence<string>;
 type LineProcessor = (line: string) => Iterable<string>;
-type WordMapper = (word: string) => string;
+type WordMapper = (word: string) => Iterable<string>;
 
 export function legacyNormalizeWords(lines: Sequence<string>): Sequence<string> {
     return lines.concatMap((line) => legacyLineToWords(line));
@@ -70,14 +70,15 @@ export interface CompileOptions {
     splitWords: boolean | undefined;
     keepCase: boolean;
     sort: boolean;
+    legacy: boolean | undefined;
 }
 
 function createNormalizer(options: CompileOptions): Normalizer {
-    const { skipNormalization = false, splitWords, keepCase } = options;
+    const { skipNormalization = false, splitWords, keepCase, legacy } = options;
     if (skipNormalization) {
         return (lines: Sequence<string>) => lines;
     }
-    const lineProcessor = splitWords === undefined ? legacyLineToWords : splitWords ? splitLine : noSplit;
+    const lineProcessor = legacy ? legacyLineToWords : splitWords ? splitLine : noSplit;
     const wordMapper = keepCase ? mapWordIdentity : mapWordToLower;
 
     const initialState: CompilerState = {
@@ -86,10 +87,12 @@ function createNormalizer(options: CompileOptions): Normalizer {
         wordMapper,
     };
 
-    return (lines: Iterable<string>) =>
+    const fnNormalizeLines = (lines: Iterable<string>) =>
         normalizeWordListSeq(lines, initialState)
             .filter((a) => !!a)
             .filter(uniqueFilter(10000));
+
+    return fnNormalizeLines;
 }
 
 export async function compileWordList(
@@ -120,12 +123,12 @@ function createTarget(destFilename: string): (seq: Sequence<string>) => Promise<
     };
 }
 
-function mapWordToLower(a: string): string {
-    return a.toLowerCase();
+function mapWordToLower(w: string): Iterable<string> {
+    return Trie.parseDictionaryLines([w]);
 }
 
-function mapWordIdentity(a: string): string {
-    return a;
+function mapWordIdentity(w: string): string[] {
+    return [w];
 }
 interface CompilerState {
     inlineSettings: InlineSettings;
@@ -146,7 +149,7 @@ function* normalizeWordListGen(lines: Iterable<string>, initialState: CompilerSt
         for (const word of state.lineProcessor(line)) {
             const w = word.trim();
             if (!w) continue;
-            yield state.wordMapper(w);
+            yield* state.wordMapper(w);
         }
     }
 }
