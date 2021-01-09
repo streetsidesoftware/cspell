@@ -23,7 +23,7 @@ export const rexExPythonStyleComments = /#.*|(?:('''|""")[^\1]+?\1)/gm;
 
 export const regExEmail = /<?\b[\w.\-+]{1,128}@\w{1,63}(\.\w{1,63}){1,4}\b>?/gi;
 
-export const regExRepeatedChar = /^(\w)\1{3,}$/;
+export const regExRepeatedChar = /^(\w)\1{3,}$/i;
 
 // cSpell:ignore bsha
 export const regExSha = /\bsha\d+-[a-z0-9+/=]+/gi;
