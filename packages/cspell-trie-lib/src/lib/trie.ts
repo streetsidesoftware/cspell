@@ -14,11 +14,13 @@ import { walker, WalkerIterator, CompoundWordsMethod } from './walker';
 
 import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
 import {
-    findLegacyCompoundWord,
-    findCompoundWord,
     isForbiddenWord,
-    findLegacyCompoundNode,
-    findCompoundNode,
+    findLegacyCompound,
+    createFindOptions,
+    FindOptions,
+    PartialFindOptions,
+    findWord,
+    findWordNode,
 } from './find';
 
 export { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
@@ -63,43 +65,60 @@ export class Trie {
         return this._options;
     }
 
+    /**
+     * @param text - text to find in the Trie
+     * @param minCompoundLength - deprecated - allows words to be glued together
+     */
     find(text: string, minCompoundLength: boolean | number = false): TrieNode | undefined {
-        const minLength: number | undefined =
-            !minCompoundLength || minCompoundLength === true ? undefined : minCompoundLength;
-        return minCompoundLength ? this.findCompound(text, minLength) : this.findExact(text);
+        const minLength: number | undefined = !minCompoundLength
+            ? undefined
+            : minCompoundLength === true
+            ? defaultLegacyMinCompoundLength
+            : minCompoundLength;
+        const options = this.createFindOptions({
+            compoundMode: minLength ? 'legacy' : 'compound',
+            legacyMinCompoundLength: minLength,
+        });
+        return findWordNode(this.root, text, options).node;
     }
 
+    /**
+     *
+     * @param text - text to search for
+     * @param minCompoundLength - minimum word compound length
+     * @deprecated - this method is no longer needed since compounding can be explicitly defined by the dictionary words.
+     */
     findCompound(text: string, minCompoundLength = defaultLegacyMinCompoundLength): TrieNode | undefined {
-        const r = findLegacyCompoundNode(this.root, text, minCompoundLength);
+        const options = this.createFindOptions({ legacyMinCompoundLength: minCompoundLength });
+        const r = findLegacyCompound(this.root, text, options);
         return r.node;
     }
 
     findExact(text: string): TrieNode | undefined {
-        const r = findCompoundNode(this.root, text, this.options.compoundCharacter);
-        return r.node;
+        const options = this.createFindOptions({ compoundMode: 'none' });
+        return findWordNode(this.root, text, options).node;
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        const f = findCompoundWord(this.root, word, this.options.compoundCharacter);
-        if (f.found) return true;
+        if (this.hasWord(word, true)) return true;
         if (minLegacyCompoundLength) {
             const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : defaultLegacyMinCompoundLength;
-            return !!findLegacyCompoundWord(this.root, word, len).found;
+            const findOptions = createFindOptions({ legacyMinCompoundLength: len });
+            return !!findLegacyCompound(this.root, word, findOptions).found;
         }
         return false;
     }
 
     /**
      * Determine if a word is in the dictionary.
-     * @param word - the exact word to search for - must be normalized - for non-case sensitive
-     *      searches, word must be lower case with accents removed.
-     * @param caseSensitive - false means searching a dictionary where the words were normalized to lower case and accents removed.
+     * @param word - the exact word to search for - must be normalized.
+     * @param caseSensitive - false means also searching a dictionary where the words were normalized to lower case and accents removed.
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean {
-        const root = !caseSensitive ? this.root.c?.get(this.options.stripCaseAndAccentsPrefix) || this.root : this.root;
-        const f = findCompoundWord(root, word, this.options.compoundCharacter);
-        return !!f.found;
+        const findOptions = this.createFindOptions({ matchCase: caseSensitive });
+        const f = findWord(this.root, word, findOptions);
+        return !!f.found && !f.forbidden;
     }
 
     /**
@@ -218,5 +237,20 @@ export class Trie {
         const root = createTriFromList(words, options);
         orderTrie(root);
         return new Trie(root, undefined);
+    }
+
+    private createFindOptions(options: PartialFindOptions = {}): FindOptions {
+        const {
+            caseInsensitivePrefix = this._options.stripCaseAndAccentsPrefix,
+            compoundFix = this._options.compoundCharacter,
+            forbidPrefix = this._options.forbiddenWordPrefix,
+        } = options;
+        const findOptions = createFindOptions({
+            ...options,
+            caseInsensitivePrefix,
+            compoundFix,
+            forbidPrefix,
+        });
+        return findOptions;
     }
 }

@@ -10,7 +10,7 @@ describe('Verify compound walker', () => {
         const trie = dictionary();
         expect(findWord(trie.root, 'errorerror').forbidden).toBe(true);
         expect(findWord(trie.root, 'errorerror').found).toBe('errorerror');
-        expect(findWord(trie.root, 'ErrorCodes').found).toBe(false);
+        expect(findWord(trie.root, 'ErrorCodes').found).toBe('ErrorCodes');
         const words1 = [...compoundWords(trie, 1)];
         expect(words1).toEqual(['Code', 'Codes', 'Error', 'Errors', 'Message', 'Time']);
         const words2 = [...compoundWords(trie, 2)];
@@ -111,7 +111,8 @@ function dictionary(): Trie {
     Prefix+
     +Suffix
 
-    !errorerror
+    !ErrorError
+    ~!errorerror
     `);
 }
 function expected2() {

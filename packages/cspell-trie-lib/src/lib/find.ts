@@ -4,12 +4,14 @@ import { FORBID_PREFIX, COMPOUND_FIX, CASE_INSENSITIVE_PREFIX } from './constant
 
 export type CompoundModes = 'none' | 'compound' | 'legacy';
 
+const defaultLegacyMinCompoundLength = 3;
 export interface FindOptions {
     matchCase: boolean;
     compoundMode: CompoundModes;
     forbidPrefix: string;
     compoundFix: string;
     caseInsensitivePrefix: string;
+    legacyMinCompoundLength: number;
 }
 
 export type PartialFindOptions = Partial<FindOptions> | undefined;
@@ -21,13 +23,14 @@ export interface FindNodeResult {
 export interface FindResult {
     found: string | false;
     compoundUsed: boolean;
+    caseMatched: boolean;
 }
-
-export interface FindFullNodeResult extends FindNodeResult, FindResult {}
 
 export interface FindFullResult extends FindResult {
     forbidden: boolean;
 }
+
+export interface FindFullNodeResult extends FindNodeResult, FindFullResult {}
 
 const _defaultFindOptions: FindOptions = {
     matchCase: false,
@@ -35,6 +38,7 @@ const _defaultFindOptions: FindOptions = {
     forbidPrefix: FORBID_PREFIX,
     compoundFix: COMPOUND_FIX,
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
+    legacyMinCompoundLength: defaultLegacyMinCompoundLength,
 };
 
 const arrayCompoundModes: CompoundModes[] = ['none', 'compound', 'legacy'];
@@ -47,119 +51,190 @@ const knownCompoundModes = new Map<CompoundModes, CompoundModes>(arrayCompoundMo
  * @param options
  */
 export function findWord(root: TrieNode, word: string, options?: PartialFindOptions): FindFullResult {
-    const _options = mergeDefaults(options, _defaultFindOptions);
-    const compoundMode = knownCompoundModes.get(_options.compoundMode) || _defaultFindOptions.compoundMode;
-    // word = _options.matchCase ? normalizeWord(word) : normalizeWordToLowercase(word);
+    return _findWord(root, word, createFindOptions(options));
+}
 
-    function __findCompound(r: TrieNode): FindFullResult {
-        const f = findCompoundWord(r, word, _options.compoundFix);
+/**
+ *
+ * @param root Trie root node. root.c contains the compound root and forbidden root.
+ * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param options
+ */
+export function findWordNode(root: TrieNode, word: string, options?: PartialFindOptions): FindFullNodeResult {
+    return _findWordNode(root, word, createFindOptions(options));
+}
+
+/**
+ *
+ * @param root Trie root node. root.c contains the compound root and forbidden root.
+ * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param options
+ */
+function _findWord(root: TrieNode, word: string, options: FindOptions): FindFullResult {
+    const { found, forbidden, compoundUsed, caseMatched } = _findWordNode(root, word, options);
+    return { found, forbidden, compoundUsed, caseMatched };
+}
+
+/**
+ *
+ * @param root Trie root node. root.c contains the compound root and forbidden root.
+ * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
+ * @param options
+ */
+function _findWordNode(root: TrieNode, word: string, options: FindOptions): FindFullNodeResult {
+    const compoundMode = knownCompoundModes.get(options.compoundMode) || _defaultFindOptions.compoundMode;
+    const compoundPrefix = options.compoundMode === 'compound' ? options.compoundFix : '';
+    const possiblePrefix = options.matchCase ? '' : options.caseInsensitivePrefix;
+
+    function __findCompound(): FindFullNodeResult {
+        const f = findCompoundWord(root, word, compoundPrefix, possiblePrefix);
         let forbidden = false;
         if (f.found !== false && f.compoundUsed) {
-            forbidden = isForbiddenWord(root, word, _options.forbidPrefix);
+            // If case was ignored when searching for the word, the check the forbidden
+            // in the ignore case forbidden list.
+            const r = !f.caseMatched ? walk(root, options.caseInsensitivePrefix) : root;
+            forbidden = isForbiddenWord(r, word, options.forbidPrefix);
         }
-        const result: FindFullResult = { ...f, forbidden };
+        const result: FindFullNodeResult = { ...f, forbidden };
         return result;
     }
 
-    function __findLegacyCompound(r: TrieNode): FindFullResult {
-        const f = findLegacyCompoundWord(r, word);
-        const forbidden = false;
-        const result: FindFullResult = { ...f, forbidden };
-        return result;
-    }
-
-    function __findExact(r: TrieNode): FindFullResult {
-        const isFound = findWordExact(r, word);
+    function __findExact(): FindFullNodeResult {
+        const n = walk(root, word);
+        const isFound = isEndOfWordNode(n);
         let forbidden = false;
         if (!isFound) {
-            forbidden = isForbiddenWord(root, word, _options.forbidPrefix);
+            forbidden = isForbiddenWord(root, word, options.forbidPrefix);
         }
-        const result: FindFullResult = {
+        const result: FindFullNodeResult = {
             found: (isFound || forbidden) && word,
             compoundUsed: false,
             forbidden,
+            node: n,
+            caseMatched: true,
         };
         return result;
     }
 
-    const r = _options.matchCase ? root : root.c?.get(_options.caseInsensitivePrefix) || root;
     switch (compoundMode) {
         case 'none':
-            return __findExact(r);
+            return options.matchCase ? __findExact() : __findCompound();
         case 'compound':
-            return __findCompound(r);
+            return __findCompound();
         case 'legacy':
-            return __findLegacyCompound(r);
+            return findLegacyCompound(root, word, options);
     }
+}
+
+export function findLegacyCompound(root: TrieNode, word: string, options: FindOptions): FindFullNodeResult {
+    const roots: (TrieNode | undefined)[] = [root];
+    if (!options.matchCase) {
+        roots.push(walk(root, options.caseInsensitivePrefix));
+    }
+    const f = findLegacyCompoundNode(roots, word, options.legacyMinCompoundLength);
+    const forbidden = false;
+    const result: FindFullNodeResult = { ...f, forbidden };
+    return result;
 }
 
 interface FindCompoundChain {
     n: TrieNode | undefined;
-    usedCompound: boolean;
+    cr: TrieNode | undefined;
+    compoundPrefix: string;
+    caseMatched: boolean;
 }
 
 export function findCompoundNode(
     root: TrieNode | undefined,
     word: string,
-    compoundCharacter: string
+    compoundCharacter: string,
+    possiblePrefix: string
 ): FindFullNodeResult {
     // Approach - do a depth first search for the matching word.
-    const stack: FindCompoundChain[] = [{ n: root, usedCompound: true }];
-    const compoundRoot = root?.c?.get(compoundCharacter);
+    const stack: FindCompoundChain[] = [{ n: root, compoundPrefix: possiblePrefix, cr: undefined, caseMatched: true }];
+    const compoundPrefix = compoundCharacter || possiblePrefix;
+    const possibleCompoundPrefix = possiblePrefix && compoundCharacter ? possiblePrefix + compoundCharacter : '';
     const w = word;
+
+    function determineRoot(s: FindCompoundChain): FindCompoundChain {
+        const prefix = s.compoundPrefix;
+        let r = root;
+        let i;
+        for (i = 0; i < prefix.length && r; ++i) {
+            r = r.c?.get(prefix[i]);
+        }
+        const caseMatched = s.caseMatched && prefix !== possiblePrefix;
+        return {
+            n: s.n,
+            compoundPrefix: prefix === compoundPrefix ? possibleCompoundPrefix : '',
+            cr: r,
+            caseMatched,
+        };
+    }
+
     let compoundUsed = false;
+    let caseMatched = true;
     let i = 0;
     let node: TrieNode | undefined;
     // eslint-disable-next-line no-constant-condition
     while (true) {
         const s = stack[i];
         const h = w[i++];
-        const c = s.n?.c?.get(h);
+        const n = s.cr || s.n;
+        const c = n?.c?.get(h);
         if (c && i < word.length) {
             // Go deeper.
-            stack[i] = { n: c, usedCompound: false };
+            caseMatched = s.caseMatched;
+            stack[i] = { n: c, compoundPrefix, cr: undefined, caseMatched };
         } else if (!c || !c.f) {
             // Remember the first matching node for possible auto completion.
             node = node || c;
 
             // We did not find the word backup and take the first unused compound branch
-            while (--i > 0 && (stack[i].usedCompound || !stack[i].n?.c?.has(compoundCharacter))) {
+            while (--i > 0 && (!stack[i].compoundPrefix || !stack[i].n?.c?.has(compoundCharacter))) {
                 /* empty */
             }
-            if (i > 0) {
-                compoundUsed = true;
-                const s = stack[i];
-                s.n = compoundRoot;
-                s.usedCompound = true;
+            if (i >= 0 && stack[i].compoundPrefix) {
+                compoundUsed = i > 0;
+                stack[i] = determineRoot(stack[i]);
             } else {
                 break;
             }
         } else {
             node = c;
+            caseMatched = s.caseMatched;
             break;
         }
     }
 
     const found = (i && i === word.length && word) || false;
-    const result: FindFullNodeResult = { found, compoundUsed, node };
+    const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: false, caseMatched };
     return result;
 }
 
-export function findCompoundWord(root: TrieNode | undefined, word: string, compoundCharacter: string): FindResult {
-    const { found, compoundUsed, node } = findCompoundNode(root, word, compoundCharacter);
+function findCompoundWord(
+    root: TrieNode | undefined,
+    word: string,
+    compoundCharacter: string,
+    possiblePrefix: string
+): FindFullNodeResult {
+    const { found, compoundUsed, node, caseMatched } = findCompoundNode(root, word, compoundCharacter, possiblePrefix);
     // Was it a word?
     if (!node || !node.f) {
-        return { found: false, compoundUsed };
+        return { found: false, compoundUsed, node, forbidden: false, caseMatched };
     }
-    return { found, compoundUsed };
+    return { found, compoundUsed, node, forbidden: false, caseMatched };
 }
 
 export function findWordExact(root: TrieNode | undefined, word: string): boolean {
-    const { node } = findNodeExact(root, word);
-    return (node?.f || 0) === FLAG_WORD;
+    return isEndOfWordNode(walk(root, word));
 }
 
-export function findNodeExact(root: TrieNode | undefined, word: string): FindNodeResult {
+export function isEndOfWordNode(n: TrieNode | undefined): boolean {
+    return n?.f === FLAG_WORD;
+}
+
+function walk(root: TrieNode | undefined, word: string): TrieNode | undefined {
     const w = word;
     let n: TrieNode | undefined = root;
     let i = 0;
@@ -168,74 +243,95 @@ export function findNodeExact(root: TrieNode | undefined, word: string): FindNod
         n = n.c?.get(h);
     }
 
-    return { node: n };
+    return n;
 }
 
-interface FindLegacyCompoundChain extends FindCompoundChain {
+interface FindLegacyCompoundChain {
+    n: TrieNode | undefined;
+    cr: TrieNode | undefined;
+    usedRoots: number;
+    caseMatched: boolean;
     /** Length of sub compound */
     subLength: number;
     isCompound: boolean;
 }
 
-export function findLegacyCompoundNode(
-    root: TrieNode | undefined,
+function findLegacyCompoundNode(
+    roots: (TrieNode | undefined)[],
     word: string,
     minCompoundLength: number
 ): FindFullNodeResult {
+    const root = roots[0];
+    const numRoots = roots.length;
     // Approach - do a depth first search for the matching word.
-    const stack: FindLegacyCompoundChain[] = [{ n: root, usedCompound: true, subLength: 0, isCompound: false }];
-    const compoundRoot = root;
+    const stack: FindLegacyCompoundChain[] = [
+        { n: root, usedRoots: 1, subLength: 0, isCompound: false, cr: undefined, caseMatched: true },
+    ];
+
     const w = word;
     let compoundUsed = false;
+    let caseMatched = true;
     let i = 0;
     let node: TrieNode | undefined;
     // eslint-disable-next-line no-constant-condition
     while (true) {
         const s = stack[i];
         const h = w[i++];
-        const c = s.n?.c?.get(h);
+        const n = s.cr || s.n;
+        const c = n?.c?.get(h);
         if (c && i < word.length) {
             // Go deeper.
             stack[i] = {
                 n: c,
-                usedCompound: false,
+                usedRoots: 0,
                 subLength: s.subLength + 1,
                 isCompound: s.isCompound,
+                cr: undefined,
+                caseMatched: s.caseMatched,
             };
         } else if (!c || !c.f || (c.f && s.subLength < minCompoundLength - 1)) {
             // We did not find the word backup and take the first unused compound branch
             while (--i > 0) {
                 const s = stack[i];
-                if (!s.usedCompound && s.n?.f && s.subLength >= minCompoundLength) {
+                if (s.usedRoots < numRoots && s.n?.f && s.subLength >= minCompoundLength) {
                     break;
                 }
             }
-            if (i > 0) {
-                compoundUsed = true;
+            if (i > 0 || stack[i].usedRoots < numRoots) {
+                compoundUsed = i > 0;
                 const s = stack[i];
-                s.n = compoundRoot;
-                s.usedCompound = true;
+                s.cr = roots[s.usedRoots++];
                 s.subLength = 0;
-                s.isCompound = true;
+                s.isCompound = i > 0;
+                s.caseMatched = s.caseMatched && s.usedRoots <= 1;
             } else {
                 break;
             }
         } else {
             node = c;
+            caseMatched = s.caseMatched;
             break;
         }
     }
 
     const found = (i && i === word.length && word) || false;
-    const result: FindFullNodeResult = { found, compoundUsed, node };
+    const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: false, caseMatched };
     return result;
 }
 
-export function findLegacyCompoundWord(root: TrieNode | undefined, word: string, minCompoundLength = 3): FindResult {
-    const { found, compoundUsed } = findLegacyCompoundNode(root, word, minCompoundLength);
-    return { found, compoundUsed };
+function findLegacyCompoundWord(roots: (TrieNode | undefined)[], word: string, minCompoundLength: number): FindResult {
+    const { found, compoundUsed, caseMatched } = findLegacyCompoundNode(roots, word, minCompoundLength);
+    return { found, compoundUsed, caseMatched };
 }
 
 export function isForbiddenWord(root: TrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
     return findWordExact(root?.c?.get(forbiddenPrefix), word);
 }
+
+export function createFindOptions(options: PartialFindOptions | undefined): FindOptions {
+    return mergeDefaults(options, _defaultFindOptions);
+}
+
+export const __testing__ = {
+    findLegacyCompoundWord,
+};

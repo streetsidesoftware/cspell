@@ -69,9 +69,18 @@ export function parseDictionaryLines(
         }
     }
 
-    function* mapNormalize(line: string) {
-        yield normalizeWord(line);
-        if (line[0] !== forbidden) yield ignoreCase + normalizeWordToLowercase(line);
+    const doNotNormalizePrefix = new Set([forbidden, ignoreCase]);
+
+    function removeDoublePrefix(w: string): string {
+        return w.startsWith(ignoreCase + ignoreCase) ? w.slice(1) : w;
+    }
+
+    function* mapNormalize(word: string) {
+        yield normalizeWord(word);
+        if (!doNotNormalizePrefix.has(word[0])) {
+            const n = normalizeWordToLowercase(word);
+            if (n !== word) yield ignoreCase + n;
+        }
     }
 
     const processLines = operators.pipe(
@@ -80,19 +89,27 @@ export function parseDictionaryLines(
         operators.filter(filterEmptyLines),
         operators.concatMap(mapOptionalPrefix),
         operators.concatMap(mapOptionalSuffix),
-        operators.concatMap(mapNormalize)
+        operators.concatMap(mapNormalize),
+        operators.map(removeDoublePrefix)
     );
 
     return processLines(lines);
 }
 
-export function parseDictionary(text: string, options: ParseDictionaryOptions = _defaultOptions): Trie {
-    const lines = parseDictionaryLines(text.split('\n'), options);
-    return buildTrieFast([...new Set(lines)].sort(), {
+export function parseLinesToDictionary(
+    lines: Iterable<string>,
+    options: ParseDictionaryOptions = _defaultOptions
+): Trie {
+    const dictLines = parseDictionaryLines(lines, options);
+    return buildTrieFast([...new Set(dictLines)].sort(), {
         compoundCharacter: options.compoundCharacter,
         forbiddenWordPrefix: options.forbiddenPrefix,
         stripCaseAndAccentsPrefix: options.caseInsensitivePrefix,
     });
+}
+
+export function parseDictionary(text: string, options: ParseDictionaryOptions = _defaultOptions): Trie {
+    return parseLinesToDictionary(text.split('\n'), options);
 }
 
 function escapeRegEx(s: string) {

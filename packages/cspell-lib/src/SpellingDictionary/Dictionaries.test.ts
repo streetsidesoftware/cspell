@@ -15,13 +15,13 @@ describe('Validate getDictionary', () => {
 
         const dict = await Dictionaries.getDictionary(settings);
         settings.words.forEach((w) => {
-            const word = w.replace(/^[!+*]+(.*)[*+]+/, '$1');
+            const word = w.replace(/^[!+*]*(.*?)[*+]*$/, '$1');
             const found = w[0] !== '!';
             const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found });
         });
         settings.userWords.forEach((w) => {
-            const word = w.replace(/^[!+*]+(.*)[*+]+/, '$1');
+            const word = w.replace(/^[!+*]*(.*?)[*+]*$/, '$1');
             const found = w[0] !== '!';
             const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found });

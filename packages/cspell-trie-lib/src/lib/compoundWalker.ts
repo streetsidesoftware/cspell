@@ -16,7 +16,7 @@ export type WalkNext = boolean;
 /**
  *
  * Depth first walk of a compound trie.
- * If there are compound, this becomes an infinite iterator.
+ * If there are compounds, this becomes an infinite iterator.
  * Use i.next(false) to prevent the walker from going deeper into the trie.
  *
  * @param trie the compound Trie to walk
