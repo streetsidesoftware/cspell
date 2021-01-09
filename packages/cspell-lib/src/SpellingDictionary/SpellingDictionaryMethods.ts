@@ -54,9 +54,6 @@ export function impersonateCollector(collector: SuggestionCollector, word: strin
 }
 
 export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
-    // if (!isDictionaryCaseSensitive) {
-    //     return [word.toLowerCase()];
-    // }
     const forms = new Set<string>();
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();

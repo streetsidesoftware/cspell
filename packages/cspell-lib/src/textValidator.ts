@@ -151,7 +151,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 .filter(rememberFilter((wo) => wo.text.length >= minWordLength))
                 .map((t) => ({ ...t, line: vr.line }))
                 .map((wo) => {
-                    const vr: ValidationResult = { ...wo, text: wo.text.toLowerCase() };
+                    const vr: ValidationResult = wo;
                     return vr;
                 })
                 .map((wo) => (wo.isFlagged ? wo : checkWord(wo, checkOptions)))

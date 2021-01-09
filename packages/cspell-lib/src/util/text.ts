@@ -224,7 +224,7 @@ export function calculateTextDocumentOffsets(
 }
 
 export function removeAccents(text: string): string {
-    return text.normalize('NFKD').replace(regExAccents, '');
+    return text.normalize('NFD').replace(regExAccents, '');
 }
 
 export const __testing__ = {
