@@ -92,44 +92,6 @@ function findNextWordText({ text, offset }: TextOffset): TextOffset {
     };
 }
 
-function extractBreaks(pwb: PossibleWordBreak[]): number[] {
-    const r: number[] = [];
-    for (const b of pwb) {
-        const br = b.breaks[0];
-        if (br) {
-            r.splice(r.length, 0, ...br);
-        }
-    }
-    return r;
-}
-
-function applyWordBreaks(text: TextOffset, breaks: number[]): TextOffset[] {
-    const a = text.offset;
-    const t = text.text;
-    const words: TextOffset[] = [];
-    let i = 0;
-    for (let p = 0; p < breaks.length; p += 2) {
-        const start = breaks[p];
-        const end = breaks[p + 1];
-        if (i !== start) {
-            words.push({
-                text: t.slice(i, start),
-                offset: a + i,
-            });
-        }
-        i = end;
-    }
-
-    if (i < t.length) {
-        words.push({
-            text: t.slice(i),
-            offset: a + i,
-        });
-    }
-
-    return words;
-}
-
 type BreakPairs = readonly number[];
 
 interface PossibleWordBreak {
@@ -148,10 +110,10 @@ export type SortedBreaks = PossibleWordBreak[];
 function generateWordBreaks(text: string): SortedBreaks {
     const camelBreaks = genWordBreakCamel(text);
     const symbolBreaks = genSymbolBreaks(text);
-    return [...mergeSortedBreakMap(camelBreaks, symbolBreaks).values()];
+    return mergeSortedBreaks(...camelBreaks, ...symbolBreaks);
 }
 
-function genWordBreakCamel(text: string): SortedBreaks {
+function genWordBreakCamel(text: string): SortedBreaks[] {
     const breaksCamel1: SortedBreaks = [];
 
     // lower,Upper: camelCase -> camel|Case
@@ -181,10 +143,10 @@ function genWordBreakCamel(text: string): SortedBreaks {
         });
     }
 
-    return mergeSortedBreakMap(breaksCamel1, breaksCamel2);
+    return [breaksCamel1, breaksCamel2];
 }
 
-function genSymbolBreaks(text: string): SortedBreaks {
+function genSymbolBreaks(text: string): SortedBreaks[] {
     function calcBreaks(m: RegExpMatchArray): PossibleWordBreak | undefined {
         const i = m.index;
         if (i === undefined) return;
@@ -212,52 +174,7 @@ function genSymbolBreaks(text: string): SortedBreaks {
         return sb;
     }
 
-    return mergeSortedBreakMap(calcBreaksForRegEx(regExPossibleWordBreaks), calcBreaksForRegEx(/\d+/g));
-}
-
-function mergeSortedBreakMap(...maps: SortedBreaks[]): SortedBreaks {
-    if (maps.length !== 2) {
-        if (maps.length === 1) return maps[0];
-        if (!maps.length) return [];
-        const m = Math.floor(maps.length / 2);
-        return mergeSortedBreakMap(mergeSortedBreakMap(...maps.slice(0, m)), mergeSortedBreakMap(...maps.slice(m)));
-    }
-
-    const result: SortedBreaks = [];
-
-    const mapA = maps[0];
-    const mapB = maps[1];
-    const iA = mapA.values();
-    const iB = mapB.values();
-    let vA = iA.next();
-    let vB = iB.next();
-
-    while (!vA.done && !vB.done) {
-        if (vA.value.offset < vB.value.offset) {
-            result.push(vA.value);
-            vA = iA.next();
-        } else if (vA.value.offset > vB.value.offset) {
-            result.push(vB.value);
-            vB = iB.next();
-        } else {
-            result.push({
-                offset: vA.value.offset,
-                breaks: vA.value.breaks.concat(vB.value.breaks),
-            });
-            vA = iA.next();
-            vB = iB.next();
-        }
-    }
-    while (!vA.done) {
-        result.push(vA.value);
-        vA = iA.next();
-    }
-    while (!vB.done) {
-        result.push(vB.value);
-        vB = iB.next();
-    }
-
-    return result;
+    return [calcBreaksForRegEx(regExPossibleWordBreaks), calcBreaksForRegEx(/\d+/g)];
 }
 
 interface Candidate {
@@ -273,8 +190,6 @@ interface Candidate {
     c: number;
     /** expected cost */
     ec: number;
-    /** max cost */
-    mc: number;
     /** the extracted text */
     text: TextOffsetWithValid | undefined;
 }
@@ -294,9 +209,8 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
         }
         const br = breaks[bi];
         function c(bp: BreakPairs): Candidate {
-            const d = bp.length < 2 ? len - i : bp[0] - i + len - bp[1];
-            const mc = currentCost + d;
-            const ec = currentCost + d / 2;
+            const d = bp.length < 2 ? len - i : (bp[0] - i) * 0.5 + len - bp[1];
+            const ec = currentCost + d;
             return {
                 p,
                 i,
@@ -304,7 +218,6 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
                 bp,
                 c: currentCost,
                 ec,
-                mc,
                 text: undefined,
             };
         }
@@ -321,7 +234,7 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
     }
 
     function compare(a: Candidate, b: Candidate): number {
-        return a.ec - b.ec || a.mc - b.mc;
+        return a.ec - b.ec || b.i - a.i;
     }
 
     const results: TextOffsetWithValid[] = [];
@@ -334,22 +247,21 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
         /** Best Candidate Index */
         const best = candidates.dequeue();
         if (!best || best.c >= maxCost) {
-            break;
+            continue;
         }
         // Does it have a split?
         if (best.bp.length) {
             // yes
             const i = best.bp[0];
             const j = best.bp[1];
-            const t = toTextOffset(text.slice(best.i, i), best.i);
-            const cost = has(t) ? 0 : t.text.length;
+            const t = i > best.i ? toTextOffset(text.slice(best.i, i), best.i) : undefined;
+            const cost = !t || t.valid ? 0 : t.text.length;
             const mc = text.length - j;
             best.c += cost;
-            best.ec = best.c + mc / 2;
-            best.mc = best.c + mc;
+            best.ec = best.c + mc;
             best.text = t;
             if (best.c < maxCost) {
-                const c = makeCandidates(best, j, best.bi + 1, best.c);
+                const c = makeCandidates(t ? best : best.p, j, best.bi + 1, best.c);
                 candidates.concat(c);
             }
         } else {
@@ -357,15 +269,22 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
             const c = makeCandidates(best.p, best.i, best.bi + 1, best.c);
             candidates.concat(c);
             if (!c.length) {
-                const t = toTextOffset(text.slice(best.i), best.i);
-                const cost = has(t) ? 0 : t.text.length;
+                const t = text.length > best.i ? toTextOffset(text.slice(best.i), best.i) : undefined;
+                const cost = !t || t.valid ? 0 : t.text.length;
                 best.c += cost;
                 best.ec = best.c;
-                best.mc = best.c;
                 best.text = t;
                 if (!bestPath || bestPath.c > best.c) {
-                    bestPath = { ...best, text: t };
+                    const segText = t || best.p?.text || toTextOffset('', best.i);
+                    if (t) {
+                        bestPath = { ...best, text: segText };
+                    } else {
+                        bestPath = { ...best, ...best.p, text: segText };
+                    }
                     maxCost = best.c;
+                    if (!maxCost) {
+                        break;
+                    }
                 }
             }
         }
@@ -380,8 +299,10 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
     return results.reverse();
 }
 
+function mergeSortedBreaks(...maps: SortedBreaks[]): SortedBreaks {
+    return ([] as SortedBreaks).concat(...maps).sort((a, b) => a.offset - b.offset);
+}
+
 export const __testing__ = {
-    applyWordBreaks,
     generateWordBreaks,
-    extractBreaks,
 };
