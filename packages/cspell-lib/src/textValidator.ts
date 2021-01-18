@@ -4,6 +4,7 @@ import * as TextRange from './util/TextRange';
 import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDictionary';
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
+import { split } from './util/wordSplitter';
 
 export interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
@@ -124,7 +125,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         return !setOfKnownSuccessfulWords.has(wo.text);
     };
 
-    function testForFlaggedWord(wo: ValidationResult): boolean {
+    function testForFlaggedWord(wo: TextOffset): boolean {
         return setOfFlagWords.has(wo.text) || setOfFlagWords.has(wo.text.toLowerCase());
     }
 
@@ -141,6 +142,13 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     }
 
     const fn: LineValidator = (lineSegment: TextOffset) => {
+        function splitterIsValid(word: TextOffset): boolean {
+            return (
+                setOfKnownSuccessfulWords.has(word.text) ||
+                (!testForFlaggedWord(word) && isWordValid(dict, word, lineSegment, checkOptions))
+            );
+        }
+
         function checkFullWord(vr: ValidationResult): Iterable<ValidationResult> {
             if (vr.isFlagged) {
                 return [vr];
@@ -185,13 +193,12 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 .concatMap(checkFullWord)
                 .toArray();
             if (mismatches.length) {
-                // Try the whole word.
-                const vr = { ...possibleWord, line: lineSegment };
-                if (ignoreWordsSet.has(vr.text) || checkWord(vr, checkOptions).isFound) {
-                    rememberFilter((_) => false)(vr);
-                    return [];
+                // Try the more expensive word splitter
+                const splitResult = split(lineSegment, possibleWord.offset, splitterIsValid);
+                const nonMatching = splitResult.words.filter((w) => !w.isFound);
+                if (nonMatching.length < mismatches.length) {
+                    return nonMatching.map((w) => ({ ...w, line: lineSegment })).map(checkFlagWords);
                 }
-                // console.log(vr.text);
             }
             return mismatches;
         }
