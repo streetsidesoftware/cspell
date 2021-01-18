@@ -1,4 +1,3 @@
-import { xregexp as XRegExp } from 'cspell-util-bundle';
 import { Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import { binarySearch } from './search';
 import { scanMap } from './util';
@@ -18,19 +17,20 @@ export interface TextDocumentOffset extends TextOffset {
 }
 
 const regExLines = /.*(\r?\n|$)/g;
-const regExUpperSOrIng = XRegExp("(\\p{Lu}+\\\\?['’]?(?:s|ing|ies|es|ings|ed|ning))(?!\\p{Ll})", 'g');
-const regExSplitWords = XRegExp('(\\p{Ll})(\\p{Lu})', 'g');
-const regExSplitWords2 = XRegExp('(\\p{Lu})(\\p{Lu}\\p{Ll})', 'g');
-const regExWords = XRegExp("\\p{L}(?:(?:\\\\?['’])?\\p{L})*", 'g');
-const regExWordsAndDigits = XRegExp("(?:\\d+)?[\\p{L}_\\-](?:(?:\\\\?['’])?[\\p{L}\\w\\-])*", 'g');
-const regExIgnoreCharacters = XRegExp('\\p{Hiragana}|\\p{Han}|\\p{Katakana}|[\\u30A0-\\u30FF]|[\\p{Hangul}]', 'g');
-const regExFirstUpper = XRegExp('^\\p{Lu}\\p{Ll}+$');
-const regExAllUpper = XRegExp('^\\p{Lu}+$');
-const regExAllLower = XRegExp('^\\p{Ll}+$');
+const regExUpperSOrIng = /(\p{Lu}+\\?['’]?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
+export const regExSplitWords = /(\p{Ll})(\p{Lu})/gu;
+export const regExSplitWords2 = /(\p{Lu})(\p{Lu}\p{Ll})/gu;
+const regExWords = /\p{L}(?:(?:\\?['’])?\p{L})*/gu;
+export const regExWordsAndDigits = /(?:\d+)?[\p{L}_-](?:(?:\\?['’])?[\p{L}\w-])*/gu;
+const regExIgnoreCharacters = /\p{sc=Hiragana}|\p{sc=Han}|\p{sc=Katakana}|[\u30A0-\u30FF]|[\p{sc=Hangul}]/gu;
+const regExFirstUpper = /^\p{Lu}\p{Ll}+$/u;
+const regExAllUpper = /^\p{Lu}+$/u;
+const regExAllLower = /^\p{Ll}+$/u;
+export const regExPossibleWordBreaks = /[_'-]/g;
 
 const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
 
-const regExAccents = XRegExp('\\p{M}', 'g');
+const regExAccents = /\p{M}/gu;
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
     return splitCamelCaseWord(wo.text).map(
@@ -47,9 +47,9 @@ export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> 
 export function splitCamelCaseWord(word: string): string[] {
     const wPrime = word.replace(regExUpperSOrIng, (s) => s[0] + s.substr(1).toLowerCase());
     const separator = '_<^*_*^>_';
-    const pass1 = XRegExp.replace(wPrime, regExSplitWords, '$1' + separator + '$2');
-    const pass2 = XRegExp.replace(pass1, regExSplitWords2, '$1' + separator + '$2');
-    return XRegExp.split(pass2, separator);
+    const pass1 = wPrime.replace(regExSplitWords, '$1' + separator + '$2');
+    const pass2 = pass1.replace(regExSplitWords2, '$1' + separator + '$2');
+    return pass2.split(separator);
 }
 
 /**
@@ -85,17 +85,19 @@ export function extractWordsFromText(text: string): Sequence<TextOffset> {
  */
 export function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffset> {
     const reg = new RegExp(regExWords);
-    const reg2 = new RegExp(regExWords);
-    return (
-        matchToTextOffset(reg, text)
-            // remove characters that match against \p{L} but are not letters (Chinese characters are an example).
-            .map(({ text, offset }) => ({
-                text: XRegExp.replace(text, regExIgnoreCharacters, (match) => ' '.repeat(match.length)),
-                offset,
-            }))
-            .concatMap((wo) => matchToTextOffset(reg2, wo))
-            .filter((wo) => !!wo.text)
-    );
+    return matchToTextOffset(reg, cleanTextOffset(text));
+}
+
+export function cleanText(text: string): string {
+    text = text.replace(regExIgnoreCharacters, (match: string) => ' '.repeat(match.length));
+    return text;
+}
+
+export function cleanTextOffset(text: TextOffset): TextOffset {
+    return {
+        text: text.text.replace(regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)),
+        offset: text.offset,
+    };
 }
 
 /**
