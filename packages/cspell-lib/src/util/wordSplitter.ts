@@ -119,8 +119,7 @@ function genWordBreakCamel(text: string): SortedBreaks[] {
     // lower,Upper: camelCase -> camel|Case
     for (const m of text.matchAll(regExSplitWords)) {
         if (m.index === undefined) continue;
-        const code = text.charCodeAt(m.index);
-        const i = m.index + (code < 0xd800 || code > 0xdfff ? 1 : 2);
+        const i = m.index + 1;
         breaksCamel1.push({
             offset: m.index,
             breaks: [[i, i], ignoreBreak],
@@ -133,10 +132,8 @@ function genWordBreakCamel(text: string): SortedBreaks[] {
     // Upper,Upper,lower: ERRORCodes -> ERROR|Codes, ERRORC|odes
     for (const m of text.matchAll(regExSplitWords2)) {
         if (m.index === undefined) continue;
-        const code = text.charCodeAt(m.index);
-        const i = m.index + (code < 0xd800 || code > 0xdfff ? 1 : 2);
-        const code2 = text.charCodeAt(i);
-        const j = i + (code2 < 0xd800 || code2 > 0xdfff ? 1 : 2);
+        const i = m.index + 1;
+        const j = i + 1;
         breaksCamel2.push({
             offset: m.index,
             breaks: [[i, i], [j, j], ignoreBreak],
