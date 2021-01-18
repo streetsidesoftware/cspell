@@ -53,7 +53,7 @@ describe('Validate wordSplitter', () => {
     interface PartialTextOffsetWithValid {
         text: string;
         offset?: number;
-        valid?: boolean;
+        isFound?: boolean;
     }
 
     interface TestSplit {
@@ -65,8 +65,8 @@ describe('Validate wordSplitter', () => {
         if (typeof p === 'string') {
             p = { text: p };
         }
-        const { valid = isValid } = p;
-        return { ...p, valid };
+        const { isFound = isValid } = p;
+        return { ...p, isFound };
     }
 
     function splitTov(t: string): PartialTextOffsetWithValid[] {

@@ -19,7 +19,7 @@ export interface SplitResult {
 }
 
 export interface TextOffsetWithValid extends TextOffset {
-    valid: boolean;
+    isFound: boolean;
 }
 
 export function split(line: TextOffset, offset: number, isValidWord: IsValidWordFn): SplitResult {
@@ -43,7 +43,7 @@ export function split(line: TextOffset, offset: number, isValidWord: IsValidWord
             line,
             offset,
             text,
-            words: [{ ...text, valid: isValidWord(text) }],
+            words: [{ ...text, isFound: isValidWord(text) }],
             endOffset: textOffset + text.text.length,
         };
     }
@@ -226,7 +226,7 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
         return {
             text,
             offset,
-            valid,
+            isFound: valid,
         };
     }
 
@@ -252,7 +252,7 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
             const i = best.bp[0];
             const j = best.bp[1];
             const t = i > best.i ? toTextOffset(text.slice(best.i, i), best.i) : undefined;
-            const cost = !t || t.valid ? 0 : t.text.length;
+            const cost = !t || t.isFound ? 0 : t.text.length;
             const mc = text.length - j;
             best.c += cost;
             best.ec = best.c + mc;
@@ -267,7 +267,7 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
             candidates.concat(c);
             if (!c.length) {
                 const t = text.length > best.i ? toTextOffset(text.slice(best.i), best.i) : undefined;
-                const cost = !t || t.valid ? 0 : t.text.length;
+                const cost = !t || t.isFound ? 0 : t.text.length;
                 best.c += cost;
                 best.ec = best.c;
                 best.text = t;
