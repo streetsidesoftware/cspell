@@ -15,3 +15,5 @@ export const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
 export const regExAccents = /\p{M}/gu;
 export const regExEscapeCharacters = /(?<=\\)[anrvtbf]/gi;
 export const regExDanglingQuote = /(?<=\P{L}\p{L}?)[']/gu;
+/** Match tailing endings after CAPS words */
+export const regExTrailingEndings = /(?<=\p{Lu}{2})['’]?(?:s|d|ing[s]|ies|e[ds]|ning|th|nth)(?!\p{Ll})/gu;

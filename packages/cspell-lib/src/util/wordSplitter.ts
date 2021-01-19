@@ -6,6 +6,7 @@ import {
     regExPossibleWordBreaks,
     regExEscapeCharacters,
     regExDanglingQuote,
+    regExTrailingEndings,
 } from './textRegex';
 import { SortedQueue } from './SortedQueue';
 import { escapeRegEx } from './regexHelper';
@@ -227,7 +228,10 @@ function genOptionalWordBreaks(line: LineSegment, optionalBreakCharacters: strin
         };
     }
 
-    const breaks: SortedBreaks[] = [calcBreaksForRegEx(line, regExDanglingQuote, calcBreaks)];
+    const breaks: SortedBreaks[] = [
+        calcBreaksForRegEx(line, regExDanglingQuote, calcBreaks),
+        calcBreaksForRegEx(line, regExTrailingEndings, calcBreaks),
+    ];
 
     if (optionalBreakCharacters) {
         const regex = new RegExp(`[${escapeRegEx(optionalBreakCharacters)}]`, 'gu');

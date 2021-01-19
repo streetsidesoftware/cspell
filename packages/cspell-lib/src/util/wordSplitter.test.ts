@@ -166,17 +166,18 @@ describe('Validate wordSplitter', () => {
         calls: number;
     }
 
-    // cspell:ignore nstatic techo n'cpp n'log
+    // cspell:ignore nstatic techo n'cpp n'log refactor'd
     test.each`
-        text         | expectedWords | calls
-        ${'static'}  | ${'static'}   | ${1}
-        ${'nstatic'} | ${'static'}   | ${1}
-        ${'techo'}   | ${'echo'}     | ${1}
-        ${`n'cpp`}   | ${'cpp'}      | ${1}
-        ${`n'log`}   | ${'log'}      | ${4}
-        ${'64-bit'}  | ${'bit'}      | ${1}
-        ${'128-bit'} | ${'bit'}      | ${1}
-        ${'256-sha'} | ${'256-sha'}  | ${6}
+        text            | expectedWords | calls
+        ${'static'}     | ${'static'}   | ${1}
+        ${'nstatic'}    | ${'static'}   | ${1}
+        ${'techo'}      | ${'echo'}     | ${1}
+        ${`n'cpp`}      | ${'cpp'}      | ${1}
+        ${`n'log`}      | ${'log'}      | ${4}
+        ${'64-bit'}     | ${'bit'}      | ${1}
+        ${'128-bit'}    | ${'bit'}      | ${1}
+        ${'256-sha'}    | ${'256-sha'}  | ${6}
+        ${`REFACTOR'd`} | ${'REFACTOR'} | ${2}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
         const expectedWordSegments = splitTov(expectedWords);
         const doc = sampleText();
@@ -336,6 +337,8 @@ function sampleText() {
     references to groups numbered less than 10 we can't use more than two items
     in parsed_pattern because they may be just two characters in the input (and
     in a 64-bit world an offset may need two elements). So for them, the offset
+    ERROR's
+    REFACTOR'd
     of the first occurrent is held in a special vector. */
 
     256-sha
