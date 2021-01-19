@@ -1,4 +1,3 @@
-import { xregexp as XRegExp } from 'cspell-util-bundle';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from './text';
 import * as path from 'path';
@@ -8,8 +7,8 @@ import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { extractInlineSettings, InlineSettings } from './inlineSettings';
 
-const regNonWordOrSpace = XRegExp("[^\\p{L}' ]+", 'gi');
-const regNonWordOrDigit = XRegExp("[^\\p{L}'\\w-]+", 'gi');
+const regNonWordOrSpace = /[^\p{L}' ]+/giu;
+const regNonWordOrDigit = /[^\p{L}'\w-]+/giu;
 const regExpSpaceOrDash = /[- ]+/g;
 const regExpRepeatChars = /(.)\1{4,}/i;
 

@@ -2,7 +2,7 @@
 
 const regExUpperSOrIng = /(\p{Lu}+'?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
 const regExSplitWords = /(\p{Ll})(\p{Lu})/gu;
-const regExSplitWords2 = /(\\p{Lu})(\\p{Lu}\\p{Ll})/gu;
+const regExSplitWords2 = /(\p{Lu})(\p{Lu}\p{Ll})/gu;
 
 /**
  * Split camelCase words into an array of strings.
