@@ -22,14 +22,19 @@ describe('Validate wordSplitter', () => {
         ${'32bit-checksum'} | ${['bit', 'checksum']}
         ${'camelCase'}      | ${['camel', 'Case']}
     `('Apply word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
-        const textOffset = {
+        const line = {
             text,
             offset: 42,
         };
-        const posBreaks = generateWordBreaks(text);
+        const lineSeg = {
+            line: line,
+            relStart: 0,
+            relEnd: text.length,
+        };
+        const posBreaks = generateWordBreaks(lineSeg, {});
 
         const breaks = extractBreaks(posBreaks);
-        const r = applyWordBreaks(textOffset, breaks);
+        const r = applyWordBreaks(line, breaks);
         expect(r.map((t) => t.text)).toEqual(expected);
     });
 
@@ -42,7 +47,17 @@ describe('Validate wordSplitter', () => {
         ${'ERRORCode'}      | ${['ERROR|Code']}
         ${'camelCase'}      | ${['camel|Case', 'camelCase']}
     `('Apply word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
-        const posBreaks = generateWordBreaks(text);
+        const line = {
+            text,
+            offset: 42,
+        };
+        const lineSeg = {
+            line: line,
+            relStart: 0,
+            relEnd: text.length,
+        };
+
+        const posBreaks = generateWordBreaks(lineSeg, {});
         const r = genAllPossibleResults(text, posBreaks);
         expect(r[0]).toEqual(expected[0]); // Expect the first candidate to be the one with the shortest words.
         expect(r).toEqual(expect.arrayContaining(expected));
@@ -70,6 +85,7 @@ describe('Validate wordSplitter', () => {
     }
 
     function splitTov(t: string): PartialTextOffsetWithValid[] {
+        if (!t) return [];
         const parts = t.split('|');
         return parts.map((p) => tov(p, has({ text: p, offset: 0 })));
     }
@@ -88,7 +104,7 @@ describe('Validate wordSplitter', () => {
         ${'CVTTSD2SI_r_xm'}                 | ${splitTov('CVTTSD|SI|r|xm')}
         ${'error_code42_one_two'}           | ${splitTov('error|code42|one|two')}
         ${'_errorcode42_one_two'}           | ${splitTov('_errorcode42|one|two')}
-        ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')}
+        ${"words'separated'by_singleQuote"} | ${splitTov(`words'separated'by|singleQuote`)}
         ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}
     `('split $text', ({ text, expectedWords }: TestSplit) => {
         const prefix = 'this is some';
@@ -110,20 +126,19 @@ describe('Validate wordSplitter', () => {
 
     test.each`
         text                                | expectedWords                                 | calls
-        ${'camelCase'}                      | ${splitTov('camel|Case')}                     | ${2}
         ${'hello'}                          | ${[tov({ text: 'hello', offset: 142 })]}      | ${1}
         ${''}                               | ${[]}                                         | ${0}
         ${'#@()&*'}                         | ${[]}                                         | ${0}
         ${'well-educated'}                  | ${[tov('well'), tov('educated')]}             | ${2}
-        ${'MOVSX_r_rm16'}                   | ${splitTov('MOVSX_r_rm16')}                   | ${10}
+        ${'MOVSX_r_rm16'}                   | ${splitTov('MOVSX_r_rm16')}                   | ${8}
         ${'32bit-checksum'}                 | ${splitTov('bit|checksum')}                   | ${2}
         ${'ERRORCodesTwo'}                  | ${splitTov('ERROR|Codes|Two')}                | ${4}
         ${'camelCase'}                      | ${splitTov('camel|Case')}                     | ${2}
-        ${'CVTPD2PS_x_xm'}                  | ${splitTov('CVTPD2PS|x|xm')}                  | ${9}
-        ${'CVTSI2SD_x_rm'}                  | ${splitTov('CVTSI|SD|x|rm')}                  | ${13}
-        ${'errCVTTSD2SI_r_xm'}              | ${splitTov('err|CVTTSD|SI|r|xm')}             | ${15}
+        ${'CVTPD2PS_x_xm'}                  | ${splitTov('CVTPD2PS|x|xm')}                  | ${6}
+        ${'CVTSI2SD_x_rm'}                  | ${splitTov('CVTSI|SD|x|rm')}                  | ${10}
+        ${'errCVTTSD2SI_r_xm'}              | ${splitTov('err|CVTTSD|SI|r|xm')}             | ${12}
         ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')} | ${6}
-        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${7}
+        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${4}
     `('split edge cases `$text`', ({ text, expectedWords, calls }: TestSplitWithCalls) => {
         const line = {
             text,
@@ -136,7 +151,7 @@ describe('Validate wordSplitter', () => {
             hasCalls.push(t.text);
             return has(t);
         });
-        const r = split(line, offset, h);
+        const r = split(line, offset, h, { optionalWordBreakCharacters: `'` });
         // console.log(hasCalls);
         expect(r.offset).toBe(offset);
         expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
@@ -144,32 +159,44 @@ describe('Validate wordSplitter', () => {
         expect(r.words).toHaveLength(expectedWords.length);
         expect(h).toHaveBeenCalledTimes(calls);
     });
+
+    interface TestSplit2 {
+        text: string;
+        expectedWords: string;
+        calls: number;
+    }
+
+    // cspell:ignore nstatic techo n'cpp n'log
+    test.each`
+        text         | expectedWords | calls
+        ${'static'}  | ${'static'}   | ${1}
+        ${'nstatic'} | ${'static'}   | ${1}
+        ${'techo'}   | ${'echo'}     | ${1}
+        ${`n'cpp`}   | ${'cpp'}      | ${1}
+        ${`n'log`}   | ${'log'}      | ${4}
+        ${'64-bit'}  | ${'bit'}      | ${1}
+        ${'128-bit'} | ${'bit'}      | ${1}
+        ${'256-sha'} | ${'256-sha'}  | ${6}
+    `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
+        const expectedWordSegments = splitTov(expectedWords);
+        const doc = sampleText();
+        const line = findLine(doc, text);
+        const offset = line.offset + line.text.indexOf(text);
+        expect(offset).toBeGreaterThan(0);
+        const h = jest.fn();
+        const hasCalls: string[] = [];
+        h.mockImplementation((t) => {
+            hasCalls.push(t.text);
+            return has(t);
+        });
+        const r = split(line, offset, h);
+        // console.log(hasCalls);
+        expect(r.endOffset).toBe(r.text.offset + r.text.text.length);
+        expect(r.words).toEqual(expect.arrayContaining(expectedWordSegments.map(expect.objectContaining)));
+        expect(r.words).toHaveLength(expectedWordSegments.length);
+        expect(h).toHaveBeenCalledTimes(calls);
+    });
 });
-
-function sampleWordSet() {
-    const words = `
-    these are some sample words
-    hello
-    words separated by singleQuote
-    Tom's hardware
-    one two
-    code42
-    _errorcode42
-    error codes
-    well educated
-    bit checksum
-    camel case
-    MOVSX_r_rm16
-    CVTPD2PS
-    CVTTSD
-    2SD
-
-    `
-        .split(/\s+/g)
-        .map((a) => a.trim())
-        .filter((a) => !!a);
-    return new Set(words);
-}
 
 function has({ text }: TextOffset): boolean {
     return text.length < 3 || !regHasLetters.test(text) || words.has(text) || words.has(text.toLowerCase());
@@ -244,4 +271,77 @@ function genAllPossibleResults(text: string, breaks: SortedBreaks): string[] {
     }
 
     return [...genResults(0, 0)];
+}
+
+function findLine(doc: string, text: string): TextOffset {
+    const index = doc.indexOf(text);
+    let lastLine: RegExpMatchArray | undefined = undefined;
+    for (const line of doc.matchAll(/.*/g)) {
+        if ((line.index || 0) < index) {
+            lastLine = line;
+        }
+    }
+    if (lastLine && lastLine.index) {
+        return {
+            text: lastLine[0],
+            offset: lastLine.index,
+        };
+    }
+    return {
+        text: '',
+        offset: -1,
+    };
+}
+
+function sampleWordSet() {
+    const words = `
+    _errorcode42
+    2SD
+    64-bit
+    bit checksum
+    camel case
+    can't
+    code42
+    const
+    cpp
+    CVTPD2PS
+    CVTTSD
+    echo
+    error codes
+    hello
+    MOVSX_r_rm16
+    one two
+    static
+    these are some sample words
+    Tom's hardware
+    well educated
+    words separated by singleQuote
+    256-sha
+    `
+        .split(/\s+/g)
+        .map((a) => a.trim())
+        .filter((a) => !!a);
+    return new Set(words);
+}
+
+function sampleText() {
+    return `
+    static const char new_stub1_1[] = "\\techo"
+    \\n'log' => 'text/plain'
+	static const char new_stub2[] = "';\\nconst LEN = ";
+    static const char new_stub3_0[] = ";\\n\\nstatic function go($return = false)\\n'cpp'"
+
+    /* The escape was a back (or forward) reference. We keep the offset in
+    order to give a more useful diagnostic for a bad forward reference. For
+    references to groups numbered less than 10 we can't use more than two items
+    in parsed_pattern because they may be just two characters in the input (and
+    in a 64-bit world an offset may need two elements). So for them, the offset
+    of the first occurrent is held in a special vector. */
+
+    256-sha
+
+    128-bit values
+
+
+`;
 }

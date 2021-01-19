@@ -1,5 +1,14 @@
-import { TextOffset, regExWordsAndDigits, regExSplitWords, regExSplitWords2, regExPossibleWordBreaks } from './text';
+import { TextOffset } from './text';
+import {
+    regExWordsAndDigits,
+    regExSplitWords,
+    regExSplitWords2,
+    regExPossibleWordBreaks,
+    regExEscapeCharacters,
+    regExDanglingQuote,
+} from './textRegex';
 import { SortedQueue } from './SortedQueue';
+import { escapeRegEx } from './regexHelper';
 
 const ignoreBreak: readonly number[] = Object.freeze([] as number[]);
 
@@ -18,58 +27,90 @@ export interface SplitResult {
     endOffset: number;
 }
 
+export interface LineSegment {
+    line: TextOffset;
+    relStart: number;
+    relEnd: number;
+}
+
 export interface TextOffsetWithValid extends TextOffset {
     isFound: boolean;
 }
 
-export function split(line: TextOffset, offset: number, isValidWord: IsValidWordFn): SplitResult {
-    const text = findNextWordText({ text: line.text, offset: offset - line.offset });
-    text.offset = line.offset + text.offset;
-    const textOffset = text.offset;
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface SplitOptions extends WordBreakOptions {}
 
-    if (!text.text) {
+export function split(
+    line: TextOffset,
+    offset: number,
+    isValidWord: IsValidWordFn,
+    options: SplitOptions = {}
+): SplitResult {
+    const relWordToSplit = findNextWordText({ text: line.text, offset: offset - line.offset });
+    const lineOffset = line.offset;
+    const requested = new Map<number, Map<string, boolean>>();
+
+    if (!relWordToSplit.text) {
+        const text = rebaseTextOffset(relWordToSplit);
         return {
             line,
             offset,
-            text,
+            text: text,
             words: [],
-            endOffset: textOffset,
+            endOffset: text.offset + text.text.length,
         };
     }
 
-    const possibleBreaks = generateWordBreaks(text.text);
+    const lineSegment: LineSegment = {
+        line,
+        relStart: relWordToSplit.offset,
+        relEnd: relWordToSplit.offset + relWordToSplit.text.length,
+    };
+
+    const possibleBreaks = generateWordBreaks(lineSegment, options);
     if (!possibleBreaks.length) {
+        const text = rebaseTextOffset(relWordToSplit);
         return {
             line,
             offset,
-            text,
+            text: text,
             words: [{ ...text, isFound: isValidWord(text) }],
-            endOffset: textOffset + text.text.length,
+            endOffset: text.offset + text.text.length,
         };
     }
 
     function rebaseTextOffset<T extends TextOffset>(relText: T): T {
         return {
             ...relText,
-            offset: relText.offset + textOffset,
+            offset: relText.offset + lineOffset,
         };
     }
 
     function has(word: TextOffset): boolean {
-        return isValidWord(rebaseTextOffset(word));
+        let a = requested.get(word.offset);
+        const b = a?.get(word.text);
+        if (b !== undefined) return b;
+        if (!a) {
+            a = new Map<string, boolean>();
+            requested.set(word.offset, a);
+        }
+        const r = isValidWord(rebaseTextOffset(word));
+        a.set(word.text, r);
+        return r;
     }
 
+    // Add a dummy break at the end to avoid needing to check for last break.
     possibleBreaks.push({
-        offset: text.text.length,
+        offset: lineSegment.relEnd,
         breaks: [ignoreBreak],
     });
 
     const result: SplitResult = {
         line,
         offset,
-        text,
-        words: splitIntoWords(text.text, possibleBreaks, has).map(rebaseTextOffset),
-        endOffset: textOffset + text.text.length,
+        text: rebaseTextOffset(relWordToSplit),
+        words: splitIntoWords(lineSegment, possibleBreaks, has).map(rebaseTextOffset),
+        endOffset: lineOffset + lineSegment.relEnd,
     };
 
     return result;
@@ -107,18 +148,30 @@ interface PossibleWordBreak {
 
 export type SortedBreaks = PossibleWordBreak[];
 
-function generateWordBreaks(text: string): SortedBreaks {
-    const camelBreaks = genWordBreakCamel(text);
-    const symbolBreaks = genSymbolBreaks(text);
-    return mergeSortedBreaks(...camelBreaks, ...symbolBreaks);
+interface WordBreakOptions {
+    optionalWordBreakCharacters?: string;
 }
 
-function genWordBreakCamel(text: string): SortedBreaks[] {
+function generateWordBreaks(line: LineSegment, options: WordBreakOptions): SortedBreaks {
+    const camelBreaks = genWordBreakCamel(line);
+    const symbolBreaks = genSymbolBreaks(line);
+    const optionalBreaks = genOptionalWordBreaks(line, options.optionalWordBreakCharacters);
+    return mergeSortedBreaks(...camelBreaks, ...symbolBreaks, ...optionalBreaks);
+}
+
+function offsetRegEx(reg: RegExp, offset: number) {
+    const r = new RegExp(reg);
+    r.lastIndex = offset;
+    return r;
+}
+
+function genWordBreakCamel(line: LineSegment): SortedBreaks[] {
     const breaksCamel1: SortedBreaks = [];
+    const text = line.line.text.slice(0, line.relEnd);
 
     // lower,Upper: camelCase -> camel|Case
-    for (const m of text.matchAll(regExSplitWords)) {
-        if (m.index === undefined) continue;
+    for (const m of text.matchAll(offsetRegEx(regExSplitWords, line.relStart))) {
+        if (m.index === undefined) break;
         const i = m.index + 1;
         breaksCamel1.push({
             offset: m.index,
@@ -130,9 +183,9 @@ function genWordBreakCamel(text: string): SortedBreaks[] {
 
     // cspell:ignore ERRORC
     // Upper,Upper,lower: ERRORCodes -> ERROR|Codes, ERRORC|odes
-    for (const m of text.matchAll(regExSplitWords2)) {
-        if (m.index === undefined) continue;
-        const i = m.index + 1;
+    for (const m of text.matchAll(offsetRegEx(regExSplitWords2, line.relStart))) {
+        if (m.index === undefined) break;
+        const i = m.index + m[1].length;
         const j = i + 1;
         breaksCamel2.push({
             offset: m.index,
@@ -143,7 +196,48 @@ function genWordBreakCamel(text: string): SortedBreaks[] {
     return [breaksCamel1, breaksCamel2];
 }
 
-function genSymbolBreaks(text: string): SortedBreaks[] {
+function calcBreaksForRegEx(
+    line: LineSegment,
+    reg: RegExp,
+    calcBreak: (m: RegExpMatchArray) => PossibleWordBreak | undefined
+): SortedBreaks {
+    const sb: SortedBreaks = [];
+    const text = line.line.text.slice(0, line.relEnd);
+    for (const m of text.matchAll(offsetRegEx(reg, line.relStart))) {
+        const b = calcBreak(m);
+        if (b) {
+            sb.push(b);
+        }
+    }
+    return sb;
+}
+
+function genOptionalWordBreaks(line: LineSegment, optionalBreakCharacters: string | undefined): SortedBreaks[] {
+    function calcBreaks(m: RegExpMatchArray): PossibleWordBreak | undefined {
+        const i = m.index;
+        if (i === undefined) return;
+        const j = i + m[0].length;
+
+        return {
+            offset: i,
+            breaks: [
+                [i, j], // Remove the characters
+                ignoreBreak,
+            ],
+        };
+    }
+
+    const breaks: SortedBreaks[] = [calcBreaksForRegEx(line, regExDanglingQuote, calcBreaks)];
+
+    if (optionalBreakCharacters) {
+        const regex = new RegExp(`[${escapeRegEx(optionalBreakCharacters)}]`, 'gu');
+        breaks.push(calcBreaksForRegEx(line, regex, calcBreaks));
+    }
+
+    return breaks;
+}
+
+function genSymbolBreaks(line: LineSegment): SortedBreaks[] {
     function calcBreaks(m: RegExpMatchArray): PossibleWordBreak | undefined {
         const i = m.index;
         if (i === undefined) return;
@@ -160,18 +254,11 @@ function genSymbolBreaks(text: string): SortedBreaks[] {
         };
     }
 
-    function calcBreaksForRegEx(reg: RegExp): SortedBreaks {
-        const sb: SortedBreaks = [];
-        for (const m of text.matchAll(reg)) {
-            const b = calcBreaks(m);
-            if (b) {
-                sb.push(b);
-            }
-        }
-        return sb;
-    }
-
-    return [calcBreaksForRegEx(regExPossibleWordBreaks), calcBreaksForRegEx(/\d+/g)];
+    return [
+        calcBreaksForRegEx(line, regExPossibleWordBreaks, calcBreaks),
+        calcBreaksForRegEx(line, /\d+/g, calcBreaks),
+        calcBreaksForRegEx(line, regExEscapeCharacters, calcBreaks),
+    ];
 }
 
 interface Candidate {
@@ -195,9 +282,22 @@ interface CandidateWithText extends Candidate {
     text: TextOffsetWithValid;
 }
 
-function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffset) => boolean): TextOffsetWithValid[] {
+function splitIntoWords(
+    lineSeg: LineSegment,
+    breaks: SortedBreaks,
+    has: (word: TextOffset) => boolean
+): TextOffsetWithValid[] {
+    const maxIndex = lineSeg.relEnd;
+
+    /**
+     * Create a set of possible candidate to consider
+     * @param p - prev candidate that lead to this one
+     * @param i - offset within the string
+     * @param bi - current index into the set of breaks
+     * @param currentCost - current cost accrued
+     */
     function makeCandidates(p: Candidate | undefined, i: number, bi: number, currentCost: number): Candidate[] {
-        const len = text.length;
+        const len = maxIndex;
         while (bi < breaks.length && breaks[bi].offset < i) {
             bi += 1;
         }
@@ -236,9 +336,10 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
 
     const results: TextOffsetWithValid[] = [];
     let bestPath: CandidateWithText | undefined = undefined;
-    let maxCost = text.length;
+    let maxCost = lineSeg.relEnd - lineSeg.relStart;
     const candidates = new SortedQueue<Candidate>(compare);
-    candidates.concat(makeCandidates(undefined, 0, 0, 0));
+    const text = lineSeg.line.text;
+    candidates.concat(makeCandidates(undefined, lineSeg.relStart, 0, 0));
 
     while (candidates.length) {
         /** Best Candidate Index */
@@ -253,7 +354,7 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
             const j = best.bp[1];
             const t = i > best.i ? toTextOffset(text.slice(best.i, i), best.i) : undefined;
             const cost = !t || t.isFound ? 0 : t.text.length;
-            const mc = text.length - j;
+            const mc = maxIndex - j;
             best.c += cost;
             best.ec = best.c + mc;
             best.text = t;
@@ -266,7 +367,7 @@ function splitIntoWords(text: string, breaks: SortedBreaks, has: (word: TextOffs
             const c = makeCandidates(best.p, best.i, best.bi + 1, best.c);
             candidates.concat(c);
             if (!c.length) {
-                const t = text.length > best.i ? toTextOffset(text.slice(best.i), best.i) : undefined;
+                const t = maxIndex > best.i ? toTextOffset(text.slice(best.i, maxIndex), best.i) : undefined;
                 const cost = !t || t.isFound ? 0 : t.text.length;
                 best.c += cost;
                 best.ec = best.c;

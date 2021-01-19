@@ -1,5 +1,19 @@
 import { Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import { binarySearch } from './search';
+import {
+    regExLines,
+    regExUpperSOrIng,
+    regExSplitWords,
+    regExSplitWords2,
+    regExWords,
+    regExWordsAndDigits,
+    regExIgnoreCharacters,
+    regExFirstUpper,
+    regExAllUpper,
+    regExAllLower,
+    regExMatchRegExParts,
+    regExAccents,
+} from './textRegex';
 import { scanMap } from './util';
 
 // CSpell:ignore ings ning gimuy tsmerge
@@ -15,22 +29,6 @@ export interface TextDocumentOffset extends TextOffset {
     row: number;
     col: number;
 }
-
-const regExLines = /.*(\r?\n|$)/g;
-const regExUpperSOrIng = /(\p{Lu}+\\?['’]?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
-export const regExSplitWords = /(\p{Ll})(\p{Lu})/gu;
-export const regExSplitWords2 = /(\p{Lu})(\p{Lu}\p{Ll})/gu;
-const regExWords = /\p{L}(?:(?:\\?['’])?\p{L})*/gu;
-export const regExWordsAndDigits = /(?:\d+)?[\p{L}_-](?:(?:\\?['’])?[\p{L}\w-])*/gu;
-const regExIgnoreCharacters = /\p{sc=Hiragana}|\p{sc=Han}|\p{sc=Katakana}|[\u30A0-\u30FF]|[\p{sc=Hangul}]/gu;
-const regExFirstUpper = /^\p{Lu}\p{Ll}+$/u;
-const regExAllUpper = /^\p{Lu}+$/u;
-const regExAllLower = /^\p{Ll}+$/u;
-export const regExPossibleWordBreaks = /[_'-]/g;
-
-const regExMatchRegExParts = /^\/(.*)\/([gimuy]*)$/;
-
-const regExAccents = /\p{M}/gu;
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
     return splitCamelCaseWord(wo.text).map(
