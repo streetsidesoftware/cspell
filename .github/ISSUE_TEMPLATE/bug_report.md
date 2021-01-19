@@ -34,7 +34,6 @@ _Issue with supporting library?_
 - [ ] cspell-io -- thin file i/o library
 - [ ] cspell-trie-lib - trie lib
 - [ ] cspell-trie2-lib - trie lib alternate format
-- [ ] cspell-util-bundle - util bundle to reduce install size
 
 **OS:**
 
