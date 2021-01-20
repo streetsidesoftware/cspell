@@ -106,7 +106,7 @@ describe('Validate Trie Class', () => {
         expect(trie.has('walked', true)).toBe(true);
     });
 
-    test('compound find', () => {
+    test('legacy compound find', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
         const trie = Trie.create(sampleWords);
         expect(trie.find('talkinglift', true)?.f).toBe(1);
@@ -156,11 +156,33 @@ describe('Validate Trie Class', () => {
         `);
 
         expect(trieModern.isSizeKnown()).toBe(false);
-        expect(trieModern.size()).toBe(10);
+        expect(trieModern.size()).toBe(6); // begin, begin+, end, +end, café ~cafe
         expect(trieModern.isSizeKnown()).toBe(true);
     });
 
-    test('hasWord', () => {
+    interface HasWordTestCase {
+        word: string;
+        caseSensitive: boolean;
+        found: boolean;
+    }
+
+    test.each`
+        word                                | caseSensitive | found    | comment
+        ${'café'}                           | ${true}       | ${true}  | ${''}
+        ${'Café'}                           | ${true}       | ${false} | ${''}
+        ${'café'}                           | ${false}      | ${true}  | ${''}
+        ${'Café'}                           | ${false}      | ${false} | ${''}
+        ${normalizeWordToLowercase('café')} | ${false}      | ${true}  | ${''}
+        ${normalizeWordToLowercase('Café')} | ${false}      | ${true}  | ${''}
+        ${'BeginMiddleEnd'}                 | ${true}       | ${true}  | ${''}
+        ${'BeginMiddleMiddleEnd'}           | ${true}       | ${true}  | ${''}
+        ${'BeginEnd'}                       | ${true}       | ${true}  | ${''}
+        ${'MiddleEnd'}                      | ${true}       | ${false} | ${''}
+        ${'beginend'}                       | ${false}      | ${true}  | ${'cspell:disable-line'}
+        ${'playtime'}                       | ${true}       | ${false} | ${''}
+        ${'playtime'}                       | ${false}      | ${false} | ${''}
+        ${'playmiddletime'}                 | ${false}      | ${true}  | ${'cspell:disable-line'}
+    `('hasWord $word $caseSensitive $found', ({ word, caseSensitive, found }: HasWordTestCase) => {
         const trie = parseDictionary(`
         # Sample Word List
         Begin*
@@ -172,27 +194,37 @@ describe('Validate Trie Class', () => {
         !playtime
         `);
 
-        expect(trie.hasWord('café', true)).toBe(true);
-        expect(trie.hasWord('Café', true)).toBe(false);
-        expect(trie.hasWord('café', false)).toBe(false);
-        expect(trie.hasWord('Café', false)).toBe(false);
-        expect(trie.hasWord(normalizeWordToLowercase('café'), false)).toBe(true);
-        expect(trie.hasWord(normalizeWordToLowercase('Café'), false)).toBe(true);
-        expect(trie.hasWord('BeginMiddleEnd', true)).toBe(true);
-        expect(trie.hasWord('BeginMiddleMiddleEnd', true)).toBe(true);
-        expect(trie.hasWord('BeginEnd', true)).toBe(true);
-        expect(trie.hasWord('MiddleEnd', true)).toBe(false);
-        expect(trie.hasWord('beginend', false)).toBe(true); // cspell:disable-line
+        expect(trie.hasWord(word, caseSensitive)).toBe(found);
+    });
+
+    // cspell:ignore begintime
+    test('hasWord', () => {
+        const trie = parseDictionary(`
+        # Sample Word List
+        Begin*
+        *End
+        +Middle+
+        café
+        play*
+        *time
+        !playtime
+        ~!begintime
+        `);
 
         // Forbidden word
         expect(trie.isForbiddenWord('playtime')).toBe(true);
         expect(trie.isForbiddenWord('Playtime')).toBe(false);
-        expect(trie.hasWord('playtime', true)).toBe(true);
-        expect(trie.hasWord('playtime', false)).toBe(true);
+
+        expect(trie.hasWord('playtime', true)).toBe(false);
+        expect(trie.hasWord('playtime', false)).toBe(false);
         expect(trie.hasWord('playmiddletime', false)).toBe(true); // cspell:disable-line
+        expect(trie.hasWord('Begintime', true)).toBe(true);
+        expect(trie.hasWord('Begintime', false)).toBe(true);
+        expect(trie.hasWord('begintime', true)).toBe(false);
+        expect(trie.hasWord('begintime', false)).toBe(false);
 
         // Check parity with has
-        expect(trie.has('playtime')).toBe(true);
+        expect(trie.has('playtime')).toBe(false);
         expect(trie.has('play+time')).toBe(false);
         expect(trie.has('play')).toBe(true);
         expect(trie.has('play+')).toBe(true);

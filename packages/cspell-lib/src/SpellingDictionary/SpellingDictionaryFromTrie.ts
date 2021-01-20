@@ -56,8 +56,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
     public has(word: string, hasOptions?: HasOptions): boolean {
         const searchOptions = hasOptionToSearchOption(hasOptions);
-        const useCompounds =
-            searchOptions.useCompounds === undefined ? this.options.useCompounds : searchOptions.useCompounds;
+        const useCompounds = searchOptions.useCompounds ?? this.options.useCompounds;
         const { ignoreCase = true } = searchOptions;
         return this._has(word, useCompounds, ignoreCase);
     }

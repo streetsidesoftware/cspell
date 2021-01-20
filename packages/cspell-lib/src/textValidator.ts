@@ -4,6 +4,7 @@ import * as TextRange from './util/TextRange';
 import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDictionary';
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
+import { split } from './util/wordSplitter';
 
 export interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
@@ -124,7 +125,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         return !setOfKnownSuccessfulWords.has(wo.text);
     };
 
-    function testForFlaggedWord(wo: ValidationResult): boolean {
+    function testForFlaggedWord(wo: TextOffset): boolean {
         return setOfFlagWords.has(wo.text) || setOfFlagWords.has(wo.text.toLowerCase());
     }
 
@@ -141,6 +142,13 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     }
 
     const fn: LineValidator = (lineSegment: TextOffset) => {
+        function splitterIsValid(word: TextOffset): boolean {
+            return (
+                setOfKnownSuccessfulWords.has(word.text) ||
+                (!testForFlaggedWord(word) && isWordValid(dict, word, lineSegment, checkOptions))
+            );
+        }
+
         function checkFullWord(vr: ValidationResult): Iterable<ValidationResult> {
             if (vr.isFlagged) {
                 return [vr];
@@ -151,12 +159,14 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 .filter(rememberFilter((wo) => wo.text.length >= minWordLength))
                 .map((t) => ({ ...t, line: vr.line }))
                 .map((wo) => {
-                    const vr: ValidationResult = { ...wo, text: wo.text.toLowerCase() };
+                    const vr: ValidationResult = wo;
                     return vr;
                 })
                 .map((wo) => (wo.isFlagged ? wo : checkWord(wo, checkOptions)))
                 .filter(rememberFilter((wo) => wo.isFlagged || !wo.isFound))
-                .filter(rememberFilter((wo) => !ignoreWordsSet.has(wo.text)))
+                .filter(
+                    rememberFilter((wo) => !ignoreWordsSet.has(wo.text.toLowerCase()) && !ignoreWordsSet.has(wo.text))
+                )
                 .filter(rememberFilter((wo) => !RxPat.regExHexDigits.test(wo.text))) // Filter out any hex numbers
                 .filter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))) // Filter out any repeated characters like xxxxxxxxxx
                 // get back the original text.
@@ -183,13 +193,12 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 .concatMap(checkFullWord)
                 .toArray();
             if (mismatches.length) {
-                // Try the whole word.
-                const vr = { ...possibleWord, line: lineSegment };
-                if (ignoreWordsSet.has(vr.text) || checkWord(vr, checkOptions).isFound) {
-                    rememberFilter((_) => false)(vr);
-                    return [];
+                // Try the more expensive word splitter
+                const splitResult = split(lineSegment, possibleWord.offset, splitterIsValid);
+                const nonMatching = splitResult.words.filter((w) => !w.isFound);
+                if (nonMatching.length < mismatches.length) {
+                    return nonMatching.map((w) => ({ ...w, line: lineSegment })).map(checkFlagWords);
                 }
-                // console.log(vr.text);
             }
             return mismatches;
         }

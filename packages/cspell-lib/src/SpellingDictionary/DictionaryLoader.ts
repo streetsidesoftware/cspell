@@ -1,10 +1,8 @@
-import { splitLineIntoCodeWords } from '../wordListHelper';
 import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
 import { ReplaceMap } from '../Settings';
-import { genSequence } from 'gensequence';
 import { readLines } from '../util/fileReader';
 import { stat } from 'fs-extra';
 
@@ -43,7 +41,7 @@ export interface Loaders {
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
-    C: loadCodeWordList,
+    C: loadSimpleWordList,
     T: loadTrie,
     default: loadSimpleWordList,
 };
@@ -118,7 +116,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
 }
 
 function determineType(uri: string, options: LoadOptions): LoaderType {
-    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'C';
+    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'S';
     const { type = defType } = options;
     const regTrieTest = /\.trie\b/i;
     return regTrieTest.test(uri) ? 'T' : type;
@@ -133,12 +131,6 @@ function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
 async function loadSimpleWordList(filename: string, options: LoadOptions) {
     const lines = await readLines(filename);
     return createSpellingDictionary(lines, determineName(filename, options), filename, options);
-}
-
-async function loadCodeWordList(filename: string, options: LoadOptions) {
-    const lines = genSequence(await readLines(filename));
-    const words = lines.concatMap(splitLineIntoCodeWords);
-    return createSpellingDictionary(words, determineName(filename, options), filename, options);
 }
 
 async function loadTrie(filename: string, options: LoadOptions) {

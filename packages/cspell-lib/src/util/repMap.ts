@@ -1,4 +1,5 @@
 import { ReplaceMap } from '../Settings';
+import { escapeRegEx } from './regexHelper';
 
 export type ReplaceMapper = (src: string) => string;
 
@@ -17,7 +18,7 @@ export function createMapper(repMap: ReplaceMap): ReplaceMapper {
                 new RegExp(r);
                 s = r;
             } catch (err) {
-                return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+                return escapeRegEx(s);
             }
             return s;
         })

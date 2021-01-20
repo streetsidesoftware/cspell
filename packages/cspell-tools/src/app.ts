@@ -142,9 +142,7 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
     );
     const experimental = new Set(options.experimental);
     const skipNormalization = experimental.has('compound');
-    const { keepCase: _keepCase = true, split = false, sort = true, useLegacySplitter } = options;
-    const splitWords = useLegacySplitter ? undefined : split;
-    const keepCase = useLegacySplitter ? false : _keepCase;
+    const { keepCase: keepCase = true, split: splitWords = false, sort = true, useLegacySplitter: legacy } = options;
 
     const action = useTrie
         ? async (words: Sequence<string>, dst: string) => {
@@ -153,6 +151,7 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
                   skipNormalization,
                   splitWords,
                   keepCase,
+                  legacy,
                   base: parseNumber(options.trieBase),
                   sort: false,
               });
@@ -163,6 +162,7 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
                   sort,
                   skipNormalization,
                   keepCase,
+                  legacy,
               }).then(() => src);
           };
     const ext = fileExt + (options.compress ? '.gz' : '');

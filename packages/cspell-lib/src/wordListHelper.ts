@@ -1,11 +1,10 @@
 // cSpell:enableCompoundWords
 import * as Text from './util/text';
 import { readLines } from './util/fileReader';
-import { xregexp as XRegExp } from 'cspell-util-bundle';
 import { toIterableIterator, concatIterables } from './util/iterableIteratorLib';
 import { logError } from './util/logger';
 
-const regExpWordsWithSpaces = XRegExp('^\\s*\\p{L}+(?:\\s+\\p{L}+){0,3}$');
+const regExpWordsWithSpaces = /^\s*\p{L}+(?:\s+\p{L}+){0,3}$/u;
 
 export interface WordDictionary {
     [index: string]: boolean;

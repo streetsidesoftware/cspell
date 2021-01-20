@@ -159,3 +159,49 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.getErrors?.()).toHaveLength(0);
     });
 });
+
+describe('Validate looking up words', () => {
+    const wordsA = [
+        '',
+        'apple',
+        'banana',
+        'orange',
+        'pear',
+        'pineapple',
+        'mango',
+        'avocado',
+        'grape',
+        'strawberry',
+        'blueberry',
+        'blackberry',
+    ];
+    const wordsB = ['ape', 'lion', 'tiger', 'elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
+    const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
+    const wordsD = ['red*', 'green*', 'blue*', 'pink*', 'black*', '*berry', '+-fruit'];
+    const cities = ['Seattle', 'Berlin', 'Amsterdam', 'Rome', 'London', 'Mumbai', 'Tokyo'];
+
+    const testDicts = [
+        createSpellingDictionary(wordsA, 'wordsA', 'test'),
+        createSpellingDictionary(wordsB, 'wordsB', 'test'),
+        createSpellingDictionary(wordsC, 'wordsC', 'test'),
+        createSpellingDictionary(wordsD, 'wordsD', 'test'),
+        createSpellingDictionary(cities, 'cities', 'test'),
+    ];
+
+    const testDictCollection = new SpellingDictionaryCollection(testDicts, 'test', ['Avocado']);
+
+    interface HasWordTest {
+        word: string;
+        found: boolean;
+    }
+
+    test.each`
+        word             | found
+        ${'Amsterdam'}   | ${true}
+        ${'amsterdam'}   | ${true}
+        ${'Black'}       | ${true}
+        ${'black-fruit'} | ${true}
+    `('Has word "$word" $found', ({ word, found }: HasWordTest) => {
+        expect(testDictCollection.has(word)).toBe(found);
+    });
+});

@@ -72,14 +72,18 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests case sensitive word list', async () => {
-        const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple', 'VeryBadProblem', 'with'].concat(specialWords);
+        const wordList = ['PUBLISHed', 'FIXesToThePROBLEMs', 'multiple', 'VeryBadProblem', 'with'].concat(
+            ['define', '_ERROR_CODE_42', 'NETWORK', '_ERROR42'],
+            specialWords
+        );
         const flagWords = ['VeryBadProblem'];
-        const dict = await createSpellingDictionary(wordList, 'empty', 'test', {
+        const dict = createSpellingDictionary(wordList, 'empty', 'test', {
             caseSensitive: true,
         });
         const text = `
             We have PUBLISHed published Multiple FIXesToThePROBLEMs.
             VeryBadProblem with the 4wheel of the Range8 in Amsterdam, Berlin, and paris.
+            #define _ERROR_CODE_42 = NETWORK_ERROR42
         `;
         const options = { allowCompoundWords: false, ignoreCase: false, flagWords };
         const result = validateText(text, dict, options).toArray();
