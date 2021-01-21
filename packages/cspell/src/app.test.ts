@@ -37,7 +37,7 @@ describe('Validate cli', () => {
 
     test.each`
         msg                                | testArgs                                                                | errorCheck         | eError   | eLog     | eInfo
-        ${'no-args'}                       | ${[]}                                                                   | ${'outputHelp'}    | ${true}  | ${true}  | ${false}
+        ${'no-args'}                       | ${[]}                                                                   | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'current_file'}                  | ${[__filename]}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
         ${'with spelling errors'}          | ${[pathSamples('Dutch.txt')]}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'current_file languageId'}       | ${[__filename, '--languageId=typescript']}                              | ${undefined}       | ${true}  | ${false} | ${false}
