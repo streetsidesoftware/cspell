@@ -11,12 +11,15 @@ const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
 const insertSpaceCost = -1;
 const mapSubCost = 10;
+const maxCostScale = 0.5;
+// max allowed cost scale should be a bit over 50% to allow for suggestions to short words, but not too high to have too many suggestions.
+const maxAllowedCostScale = 1.03 * maxCostScale;
 
 const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 
 const collator = new Intl.Collator();
 
-const regexSeparator = new RegExp(regexQuote(JOIN_SEPARATOR) + '|' + regexQuote(WORD_SEPARATOR), 'g');
+const regexSeparator = new RegExp(`[${regexQuote(JOIN_SEPARATOR + WORD_SEPARATOR)}]`, 'g');
 
 const wordLengthCost = [0, 50, 25, 5, 0];
 const extraWordsCost = 5;
@@ -90,7 +93,7 @@ export function* genCompoundableSuggestions(
         [JOIN_SEPARATOR, insertSpaceCost],
     ]);
 
-    let costLimit: MaxCost = Math.min((bc * word.length) / 2, bc * maxNumChanges);
+    let costLimit: MaxCost = Math.min(bc * word.length * maxCostScale, bc * maxNumChanges);
     const a = 0;
     let b = 0;
     for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
@@ -249,7 +252,7 @@ export function suggestionCollector(
     includeTies = false
 ): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = Math.min((baseCost * wordToMatch.length) / 2, baseCost * changeLimit);
+    let maxCost: number = Math.min(baseCost * wordToMatch.length * maxAllowedCostScale, baseCost * changeLimit);
     maxNumSuggestions = Math.max(maxNumSuggestions, 0) || 0;
 
     function dropMax() {
