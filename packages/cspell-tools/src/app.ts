@@ -79,7 +79,6 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
 
 export function run(program: program.Command, argv: string[]): Promise<void> {
     program.exitOverride();
-    program.storeOptionsAsProperties(false).passCommandToAction(false);
 
     return new Promise((resolve, reject) => {
         program.version(npmPackage.version);
