@@ -18,7 +18,7 @@
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
     "coverage-collect": "globcat packages/*/coverage/lcov.info > lcov.info",
     "install": "lerna bootstrap --ci",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --no-ci",
     "lint": "eslint . --fix && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "prepare": "npm run symlink && npm run clean-build",
