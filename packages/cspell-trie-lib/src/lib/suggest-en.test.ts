@@ -1,4 +1,4 @@
-import { genCompoundableSuggestions, suggestionCollector } from './suggest';
+import { genCompoundableSuggestions, suggestionCollector, suggest, SuggestionResult } from './suggest';
 import { CompoundWordsMethod } from './walker';
 import { readTrie } from './dictionaries.test.helper';
 
@@ -8,7 +8,31 @@ function getTrie() {
 
 const timeout = 10000;
 
+interface ExpectedSuggestion extends Partial<SuggestionResult> {
+    word: string;
+}
+
 describe('Validate English Suggestions', () => {
+    interface WordSuggestionsTest {
+        word: string;
+        expected: ExpectedSuggestion[];
+    }
+
+    test.each`
+        word       | expected
+        ${'hello'} | ${sr({ word: 'hello', cost: 0 })}
+        ${'apple'} | ${sr({ word: 'apple', cost: 0 }, { word: 'apples', cost: 94 })}
+        ${'im'}    | ${sr("i'm")}
+        ${'id'}    | ${sr("i'd")}
+        ${'ba'}    | ${sr('bad', 'bag', 'ban', 'bar')}
+        ${'bd'}    | ${sr('bad', 'bed', 'bid')}
+        ${'ct'}    | ${sr('cat', 'cot')}
+    `('suggestions for $word', async ({ word, expected }: WordSuggestionsTest) => {
+        const trie = await getTrie();
+        const x = suggest(trie.root, word);
+        expect(x).toEqual(expect.arrayContaining(expected.map((e) => expect.objectContaining(e))));
+    });
+
     test(
         'Tests suggestions "joyful"',
         async () => {
@@ -128,3 +152,10 @@ describe('Validate English Suggestions', () => {
         timeout
     );
 });
+
+function sr(...sugs: (string | ExpectedSuggestion)[]): ExpectedSuggestion[] {
+    return sugs.map((s) => {
+        if (typeof s === 'string') return { word: s };
+        return s;
+    });
+}
