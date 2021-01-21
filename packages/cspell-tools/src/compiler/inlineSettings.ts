@@ -1,5 +1,3 @@
-import { set } from 'shelljs';
-
 export interface InlineSettings {
     split?: boolean;
     keepCase?: boolean;
