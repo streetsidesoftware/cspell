@@ -97,8 +97,6 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
     const prog = program || commander;
     const args = argv || process.argv;
 
-    prog.passCommandToAction(false);
-
     prog.exitOverride();
 
     prog.version(npmPackage.version)
@@ -141,12 +139,13 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         // .option('--force', 'Force the exit value to always be 0')
         .option('--legacy', 'Legacy output')
         .option('--local <local>', 'Deprecated -- Use: --locale')
+        .addHelpText('after', usage)
         .arguments('[files...]')
         .action((files: string[], options: Options) => {
             const { mustFindFiles } = options;
             const emitters: Emitters = getEmitters(options);
             if (!files.length) {
-                spellCheckCommand.help((text) => text + usage);
+                spellCheckCommand.outputHelp();
                 return;
             }
             return App.lint(files, options, emitters).then((result) => {
@@ -296,20 +295,21 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             });
     */
 
-    const usage = `
+    return prog.parseAsync(args).then(() => {
+        return;
+    });
+}
+
+const usage = `
 
 Examples:
     cspell "*.js"                   Check all .js files in the current directory
     cspell "**/*.js"                Check all .js files from the current directory
     cspell "src/**/*.js"            Only check .js under src
     cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
-    cat LICENSE | cspell stdin      Read from stdin the contents of LICENSE
+    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
+    cat LICENSE | cspell stdin      Check stdin
 `;
-
-    return prog.parseAsync(args).then(() => {
-        return;
-    });
-}
 
 function collect(value: string, previous: string[] | undefined): string[] {
     if (!previous) {
