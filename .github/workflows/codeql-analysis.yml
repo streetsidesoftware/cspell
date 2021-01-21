@@ -12,9 +12,6 @@ on:
     branches:
       - master
       - cspell4
-    paths:
-      - "**/*.js"
-      - "**/*.ts"
   schedule:
     - cron: "0 23 * * 0"
 
@@ -26,6 +23,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
           # Make sure it goes back far enough to find where the branch split from master
           fetch-depth: 20
 
