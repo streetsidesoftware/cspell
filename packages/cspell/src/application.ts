@@ -77,7 +77,6 @@ export interface RunResult {
 }
 
 const defaultMinimatchOptions: IOptions = { nocase: true };
-const defaultConfigGlob = '{cspell.json,.cspell.json}';
 const defaultConfigGlobOptions: IOptions = defaultMinimatchOptions;
 
 const nullEmitter = () => {
@@ -93,7 +92,6 @@ export class CSpellApplicationConfiguration {
     readonly locale: string;
 
     readonly configFile: string | undefined;
-    readonly configGlob: string = defaultConfigGlob;
     readonly configGlobOptions: IOptions = defaultConfigGlobOptions;
     readonly excludes: GlobSrcInfo[];
     readonly root: string;
@@ -266,17 +264,6 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         return count;
     }
 
-    async function readConfig(): Promise<ConfigInfo> {
-        if (cfg.configFile) {
-            const config = cspell.readSettings(cfg.configFile);
-            return { source: cfg.configFile, config };
-        }
-        const configFiles = (await globP(cfg.configGlob, cfg.configGlobOptions)).filter(util.uniqueFn());
-        cfg.info(`Config Files Found:\n    ${configFiles.join('\n    ')}\n`, MessageTypes.Info);
-        const config = cspell.readSettingsFiles(configFiles);
-        return { source: configFiles.join(' || '), config };
-    }
-
     function countConfigErrors(configInfo: ConfigInfo): Promise<number> {
         return reportConfigurationErrors(configInfo.config);
     }
@@ -284,7 +271,8 @@ function runLint(cfg: CSpellApplicationConfiguration) {
     async function run(): Promise<RunResult> {
         header();
 
-        const configInfo: ConfigInfo = await readConfig();
+        const configInfo: ConfigInfo = await readConfig(cfg.configFile);
+        cfg.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
         const configErrors = await countConfigErrors(configInfo);
         if (configErrors) return runResult({ errors: configErrors });
@@ -307,7 +295,7 @@ cspell;
 Date: ${new Date().toUTCString()}
 Options:
     verbose:   ${yesNo(!!cfg.options.verbose)}
-    config:    ${cfg.configGlob}
+    config:    ${cfg.configFile || 'default'}
     exclude:   ${extractPatterns(cfg.excludes)
         .map((a) => a.glob)
         .join('\n             ')}
@@ -343,21 +331,23 @@ Options:
     }
 }
 
+async function readConfig(configFile: string | undefined): Promise<ConfigInfo> {
+    if (configFile) {
+        const config = (await cspell.loadConfig(configFile)) || {};
+        return { source: configFile, config };
+    }
+    const config = await cspell.searchForConfig();
+    return { source: config?.__importRef?.filename || 'not found', config: config || {} };
+}
+
 function runResult(init: Partial<RunResult> = {}): RunResult {
     const { files = 0, filesWithIssues = new Set<string>(), issues = 0, errors = 0 } = init;
     return { files, filesWithIssues, issues, errors };
 }
 
 export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
-    const configGlob = options.config || defaultConfigGlob;
-    const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
-
-    const configFiles = (await globP(configGlob, configGlobOptions)).filter(util.uniqueFn());
-    const config = cspell.mergeSettings(
-        cspell.getDefaultSettings(),
-        cspell.getGlobalSettings(),
-        cspell.readSettingsFiles(configFiles)
-    );
+    const configFile = await readConfig(options.config);
+    const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configFile.config);
     const results = await traceWords(words, config);
     return results;
 }
@@ -365,12 +355,7 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
 export type CheckTextResult = CheckTextInfo;
 
 export async function checkText(filename: string, options: BaseOptions): Promise<CheckTextResult> {
-    const configGlob = options.config || defaultConfigGlob;
-    const configGlobOptions = options.config ? {} : defaultConfigGlobOptions;
-    const pSettings = globP(configGlob, configGlobOptions).then((filenames) => ({
-        source: filenames[0],
-        config: cspell.readSettingsFiles(filenames),
-    }));
+    const pSettings = readConfig(options.config);
     const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,

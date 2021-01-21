@@ -8,10 +8,16 @@ import {
     calcOverrideSettings,
     getSources,
     extractImportErrors,
+    searchForConfig,
+    loadConfig,
+    ImportFileRefWithError,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
-import { CSpellUserSettings } from './CSpellSettingsDef';
+import { CSpellSettingsWithSourceTrace, CSpellUserSettings } from './CSpellSettingsDef';
 import * as path from 'path';
+
+const samplesDir = path.resolve(path.join(__dirname, '../../samples'));
+const samplesSrc = path.join(samplesDir, 'src');
 
 jest.mock('../util/logger');
 
@@ -225,6 +231,69 @@ describe('Validate Overrides', () => {
         });
     });
 });
+
+describe('Validate search/load config files', () => {
+    function importError(filename: string): ImportFileRefWithError {
+        return {
+            filename,
+            error: new Error(`Failed to resolve file: "${filename}"`),
+        };
+    }
+
+    function cfg(
+        filename: string | ImportFileRefWithError,
+        values: CSpellSettingsWithSourceTrace = {}
+    ): CSpellSettingsWithSourceTrace {
+        const __importRef = typeof filename === 'string' ? { filename, error: undefined } : filename;
+        return {
+            __importRef,
+            ...values,
+        };
+    }
+
+    function s(filename: string): string {
+        return relSamples(filename);
+    }
+
+    interface TestSearchFrom {
+        dir: string;
+        expectedConfig: CSpellSettingsWithSourceTrace;
+    }
+
+    test.each`
+        dir                         | expectedConfig
+        ${samplesSrc}               | ${cfg(s('.cspell.json'))}
+        ${s('bug-fixes/bug345.ts')} | ${cfg(s('bug-fixes/cspell.json'))}
+        ${s('linked')}              | ${cfg(s('linked/cspell.js'))}
+        ${s('yaml-config')}         | ${cfg(s('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })}
+    `('Search from $dir', async ({ dir, expectedConfig }: TestSearchFrom) => {
+        const searchResult = await searchForConfig(dir);
+        expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
+        if (searchResult?.__importRef) {
+            const loadResult = await loadConfig(searchResult.__importRef?.filename);
+            expect(loadResult).toEqual(searchResult);
+        }
+    });
+
+    interface TestLoadConfig {
+        file: string;
+        expectedConfig: CSpellSettingsWithSourceTrace;
+    }
+
+    test.each`
+        file                     | expectedConfig
+        ${samplesSrc}            | ${cfg(importError(samplesSrc))}
+        ${s('bug-fixes')}        | ${cfg(importError(s('bug-fixes')))}
+        ${s('linked/cspell.js')} | ${cfg(s('linked/cspell.js'))}
+    `('Load from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
+        const searchResult = await loadConfig(file);
+        expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
+    });
+});
+
+function relSamples(file: string) {
+    return path.resolve(samplesDir, file);
+}
 
 const sampleSettings: CSpellUserSettings = {
     language: 'en',

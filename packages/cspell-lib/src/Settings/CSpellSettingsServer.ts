@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import * as json from 'comment-json';
 import {
     RegExpPatternDefinition,
@@ -15,12 +14,36 @@ import * as util from '../util/util';
 import minimatch from 'minimatch';
 import { resolveFile } from '../util/resolveFile';
 import { getRawGlobalSettings } from './GlobalSettings';
+import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
 
 const currentSettingsFileVersion = '0.1';
 
 export const sectionCSpell = 'cSpell';
 
-export const defaultFileName = 'cSpell.json';
+export const defaultFileName = 'cspell.json';
+
+const cspellCosmiconfig = {
+    searchPlaces: [
+        'package.json',
+        'cspell.json',
+        'cSpell.json',
+        '.cspell.json',
+        '.vscode/cspell.json',
+        '.vscode/cSpell.json',
+        '.vscode/.cspell.json',
+        '.cSpell.json',
+        'cspell.yaml',
+        'cspell.yml',
+        'cspell.js',
+        'cspell.cjs',
+    ],
+    loaders: {
+        '.json': (_filename: string, content: string) => json.parse(content),
+    },
+};
+
+const cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
+const cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);
 
 type CSpellSettings = CSpellSettingsWithSourceTrace;
 
@@ -34,11 +57,14 @@ let globalSettings: CSpellSettings | undefined;
 
 const cachedFiles = new Map<string, CSpellSettings>();
 
-function readJsonFile(fileRef: ImportFileRef): CSpellSettings {
+function readConfig(fileRef: ImportFileRef): CSpellSettings {
+    // cspellConfigExplorerSync
     const { filename } = fileRef;
-    let s: CSpellSettings = {};
+    const s: CSpellSettings = {};
     try {
-        s = json.parse(fs.readFileSync(filename).toString());
+        const r = cspellConfigExplorerSync.load(filename);
+        if (!r?.config) throw 'not found';
+        Object.assign(s, r.config);
     } catch (err) {
         fileRef.error = new Error(`Failed to read config file: "${filename}"`);
     }
@@ -102,7 +128,7 @@ function importSettings(fileRef: ImportFileRef, defaultValues: CSpellSettings = 
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
     const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
     cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
-    const settings: CSpellSettings = { ...defaultValues, id, ...readJsonFile(importRef) };
+    const settings: CSpellSettings = { ...defaultValues, id, ...readConfig(importRef) };
     const pathToSettings = path.dirname(filename);
 
     Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
@@ -127,10 +153,50 @@ export function readSettings(
     return importSettings(ref, defaultValue);
 }
 
+interface SearchForConfigResult {
+    config: CSpellSettings | undefined;
+    filepath: string;
+    isEmpty?: boolean;
+}
+
+async function normalizeSearchForConfigResult(
+    filename: string,
+    searchResult: Promise<SearchForConfigResult | null>
+): Promise<CSpellSettings> {
+    let result: SearchForConfigResult | undefined;
+    try {
+        result = (await searchResult) || undefined;
+    } catch (e) {
+        /* empty */
+    }
+
+    filename = result?.filepath ?? filename;
+    const importRef: ImportFileRef = { filename };
+    if (!result) {
+        importRef.error = new Error(`Failed to resolve file: "${filename}"`);
+        result = { filepath: filename, config: {} };
+    }
+
+    const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
+    const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
+    const settings: CSpellSettings = { id, ...result.config };
+    const pathToSettings = path.dirname(filename);
+    Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
+    return finalizeSettings;
+}
+
+export function searchForConfig(searchFrom?: string): Promise<CSpellSettings | undefined> {
+    return normalizeSearchForConfigResult(searchFrom || process.cwd(), cspellConfigExplorer.search(searchFrom));
+}
+
+export function loadConfig(file: string): Promise<CSpellSettings | undefined> {
+    return normalizeSearchForConfigResult(file, cspellConfigExplorer.load(file));
+}
+
 export function readRawSettings(filename: string, relativeTo?: string): CSpellSettings {
     relativeTo = relativeTo || process.cwd();
     const ref = resolveFilename(filename, relativeTo);
-    return readJsonFile(ref);
+    return readConfig(ref);
 }
 
 export function readSettingsFiles(filenames: string[]): CSpellSettings {
