@@ -146,7 +146,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             const emitters: Emitters = getEmitters(options);
             if (!files.length) {
                 spellCheckCommand.outputHelp();
-                return;
+                throw new CheckFailed('outputHelp', 1);
             }
             return App.lint(files, options, emitters).then((result) => {
                 if (options.summary && !options.silent) {
