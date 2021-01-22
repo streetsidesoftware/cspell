@@ -31,7 +31,6 @@ import {
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
 const defaultContextRange = 20;
-
 export interface CSpellApplicationOptions extends BaseOptions {
     /**
      * Display verbose information
@@ -63,6 +62,10 @@ export interface CSpellApplicationOptions extends BaseOptions {
      * if a number, it will shat number of characters on either side.
      */
     showContext?: boolean | number;
+    /**
+     * Show suggestions for spelling errors.
+     */
+    showSuggestions?: boolean;
 }
 
 export type TraceOptions = BaseOptions;
@@ -179,7 +182,8 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
         const startTime = Date.now();
         try {
-            const wordOffsets = await cspell.validateText(text, info.configInfo.config);
+            const validateOptions = { generateSuggestions: cfg.options.showSuggestions, numSuggestions: 5 };
+            const wordOffsets = await cspell.validateText(text, info.configInfo.config, validateOptions);
             result.processed = true;
             result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets).map(mapIssue);
         } catch (e) {
