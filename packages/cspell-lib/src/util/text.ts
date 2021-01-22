@@ -28,6 +28,7 @@ export interface TextDocumentOffset extends TextOffset {
     doc: string;
     row: number;
     col: number;
+    line: TextOffset;
 }
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
@@ -211,15 +212,36 @@ export function calculateTextDocumentOffsets(
 ): TextDocumentOffset[] {
     const lines = [-1, ...match(/\n/g, doc).map((a) => a.index), doc.length];
 
+    let lastRow = -1;
+    let lastOffset = doc.length + 1;
+    let lastLineRow = -1;
+    let lastLine: TextOffset | undefined;
+
     function findRowCol(offset: number): [number, number] {
-        const row = binarySearch(lines, offset);
+        const row = binarySearch(lines, offset, offset >= lastOffset ? lastRow : undefined);
         const col = offset - lines[Math.max(0, row - 1)];
+        lastOffset = offset;
+        lastRow = row;
         return [row, col];
+    }
+
+    function extractLine(row: number): TextOffset {
+        const offset = lines[row - 1] + 1;
+        const text = doc.slice(offset, lines[row] + 1);
+        return { text, offset };
+    }
+
+    function calcLine(row: number): TextOffset {
+        const last = lastLineRow === row ? lastLine : undefined;
+        lastLineRow = row;
+        const r = last ?? extractLine(row);
+        lastLine = r;
+        return r;
     }
 
     return wordOffsets.map((wo) => {
         const [row, col] = findRowCol(wo.offset);
-        return { ...wo, row, col, doc, uri };
+        return { ...wo, row, col, doc, uri, line: calcLine(row) };
     });
 }
 

@@ -327,13 +327,22 @@ describe('Validates offset conversions', () => {
         } while (true);
     }
 
-    test('calculateTextDocumentOffsets', () => {
-        const offsets = [...getOffsets(sampleCode, 'const')];
+    test.each`
+        text
+        ${'const'}
+        ${'disable'}
+        ${'text'}
+    `('calculateTextDocumentOffsets for $text', ({ text }) => {
+        const offsets = [...getOffsets(sampleCode, text)];
         const results = Text.calculateTextDocumentOffsets('uri', sampleCode, offsets);
         expect(Object.keys(results)).not.toHaveLength(0);
-        expect(results[0].row).toBe(6);
-        expect(results[0].doc).toBe(sampleCode);
-        expect(results[0].col).toBe(1);
+        results.forEach(({ doc, text, offset, line }) => {
+            expect(doc).toBe(sampleCode);
+            const offsetInLine = offset - line.offset;
+            expect(line.text.slice(offsetInLine, offsetInLine + text.length)).toBe(text);
+        });
+
+        expect(results.map(({ doc: _doc, ...rest }) => rest)).toMatchSnapshot();
     });
 });
 
