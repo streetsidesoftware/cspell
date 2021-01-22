@@ -30,8 +30,8 @@ interface Options extends CSpellApplicationOptions {
 type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
 
-const templateIssue = `{green $uri}:{yellow $row:$col} - Unknown word {red $text}`;
-const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word {red $text}$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
+const templateIssue = `{green $uri}:{yellow $row:$col} - Unknown word ({red $text})`;
+const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
 const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
 const templateIssueWordsOnly = '${text}';
 
