@@ -7,7 +7,7 @@ import simpleGit from 'simple-git';
 import mkdirp from 'mkdirp';
 import { Octokit } from '@octokit/rest';
 
-export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'temp', 'repositories'));
+export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
 
 const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
