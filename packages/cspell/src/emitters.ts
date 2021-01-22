@@ -1,6 +1,9 @@
-import { TextDocumentOffset } from 'cspell-lib';
+import { TextDocumentOffset, TextOffset } from 'cspell-lib';
 
-export type Issue = TextDocumentOffset;
+export interface Issue extends TextDocumentOffset {
+    /** text surrounding the issue text */
+    context: TextOffset;
+}
 
 export type MessageType = 'Debug' | 'Info';
 

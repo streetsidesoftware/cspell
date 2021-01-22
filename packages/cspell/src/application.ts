@@ -30,6 +30,7 @@ import {
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
+const defaultContextRange = 20;
 
 export interface CSpellApplicationOptions extends BaseOptions {
     /**
@@ -56,6 +57,12 @@ export interface CSpellApplicationOptions extends BaseOptions {
      * root directory, defaults to `cwd`
      */
     root?: string;
+    /**
+     * Show part of a line where an issue is found.
+     * if true, it will show the default number of characters on either side.
+     * if a number, it will shat number of characters on either side.
+     */
+    showContext?: boolean | number;
 }
 
 export type TraceOptions = BaseOptions;
@@ -95,6 +102,7 @@ export class CSpellApplicationConfiguration {
     readonly configGlobOptions: IOptions = defaultConfigGlobOptions;
     readonly excludes: GlobSrcInfo[];
     readonly root: string;
+    readonly showContext: number;
 
     constructor(readonly files: string[], readonly options: CSpellApplicationOptions, readonly emitters: Emitters) {
         this.root = path.resolve(options.root || process.cwd());
@@ -106,6 +114,8 @@ export class CSpellApplicationConfiguration {
         this.locale = options.locale || options.local || '';
         this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
         this.progress = emitters.progress || nullEmitter;
+        this.showContext =
+            options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0;
     }
 }
 
@@ -123,7 +133,7 @@ interface FileConfigInfo {
 interface FileResult {
     fileInfo: FileInfo;
     processed: boolean;
-    issues: cspell.TextDocumentOffset[];
+    issues: Issue[];
     errors: number;
     configErrors: number;
     elapsedTimeMs: number;
@@ -171,7 +181,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         try {
             const wordOffsets = await cspell.validateText(text, info.configInfo.config);
             result.processed = true;
-            result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets);
+            result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets).map(mapIssue);
         } catch (e) {
             cfg.emitters.error(`Failed to process "${filename}"`, e);
             result.errors += 1;
@@ -186,6 +196,13 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
         result.issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
         return result;
+    }
+
+    function mapIssue(tdo: cspell.TextDocumentOffset): Issue {
+        const context = cfg.showContext
+            ? extractContext(tdo, cfg.showContext)
+            : { text: tdo.line.text.trimEnd(), offset: tdo.line.offset };
+        return { ...tdo, context };
     }
 
     /**
@@ -427,6 +444,36 @@ function calcFinalConfigInfo(
         text,
         languageIds,
     };
+}
+
+function extractContext(tdo: cspell.TextDocumentOffset, contextRange: number): cspell.TextOffset {
+    const { line, offset } = tdo;
+    const textOffsetInLine = offset - line.offset;
+    let left = Math.max(textOffsetInLine - contextRange, 0);
+    let right = Math.min(line.text.length, textOffsetInLine + contextRange + tdo.text.length);
+    const lineText = line.text;
+
+    const isLetter = /^[a-z]$/i;
+    const isSpace = /^\s$/;
+
+    for (let n = contextRange / 2; n > 0 && left > 0 && isLetter.test(lineText[left - 1]); n--, left--) {
+        /* do nothing */
+    }
+
+    for (let n = contextRange / 2; n > 0 && right < lineText.length && isLetter.test(lineText[right]); n--, right++) {
+        /* do nothing */
+    }
+
+    // remove leading space
+    for (; left < textOffsetInLine && isSpace.test(lineText[left]); left++) {
+        /* do nothing */
+    }
+
+    const context = {
+        text: line.text.slice(left, right).trimEnd(),
+        offset: left + line.offset,
+    };
+    return context;
 }
 
 function yesNo(value: boolean) {

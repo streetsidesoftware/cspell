@@ -22,19 +22,31 @@ interface Options extends CSpellApplicationOptions {
     silent: boolean;
     mustFindFiles: boolean;
     progress?: boolean;
+    /**
+     * issues are shown with a relative path to the root or `cwd`
+     */
+    relative?: boolean;
 }
 type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
 
-const templateIssue = `${chalk.green('${uri}')}:${chalk.yellow('${row}:${col}')} - Unknown word (${chalk.red(
-    '${text}'
-)})`;
+const templateIssue = `{green $uri}:{yellow $row:$col} - Unknown word {red $text}`;
+const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word {red $text}$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
 const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
 const templateIssueWordsOnly = '${text}';
 
 function genIssueEmitter(template: string) {
+    const defaultWidth = 10;
+    let maxWidth = defaultWidth;
+    let uri: string | undefined;
+
     return function issueEmitter(issue: Issue) {
-        console.log(formatIssue(template, issue));
+        if (uri !== issue.uri) {
+            maxWidth = defaultWidth;
+            uri = issue.uri;
+        }
+        maxWidth = Math.max(maxWidth * 0.999, issue.text.length, 10);
+        console.log(formatIssue(template, issue, Math.ceil(maxWidth)));
     };
 }
 
@@ -48,12 +60,10 @@ function nullEmitter() {
     /* empty */
 }
 
-function relativeFilename(filename: string): string {
-    const cwd = process.cwd();
-    if (filename.startsWith(cwd)) {
-        return '.' + filename.slice(cwd.length);
-    }
-    return filename;
+function relativeFilename(filename: string, cwd = process.cwd()): string {
+    const rel = path.relative(cwd, filename);
+    if (rel.startsWith('..')) return filename;
+    return '.' + path.sep + rel;
 }
 
 function reportProgress(p: ProgressItem) {
@@ -72,6 +82,8 @@ function getEmitters(options: Options): Emitters {
         ? templateIssueWordsOnly
         : options.legacy
         ? templateIssueLegacy
+        : options.showContext
+        ? templateIssueWithContext
         : templateIssue;
     const { silent, issues, progress, verbose, debug } = options;
 
@@ -84,8 +96,18 @@ function getEmitters(options: Options): Emitters {
         emitters[msgType]?.(message);
     }
 
+    const root = options.root || process.cwd();
+    function relativeIssue(fn: (i: Issue) => void): (i: Issue) => void {
+        if (!options.relative) return fn;
+        return (i: Issue) => {
+            const r = { ...i };
+            r.uri = r.uri ? relativeFilename(r.uri, root) : r.uri;
+            fn(r);
+        };
+    }
+
     return {
-        issue: silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate),
+        issue: relativeIssue(silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate)),
         error: silent ? nullEmitter : errorEmitter,
         info: infoEmitter,
         debug: emitters.Debug,
@@ -132,6 +154,8 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .option('--no-summary', 'Turn off summary message in console')
         .option('-s, --silent', 'Silent mode, suppress error messages')
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
+        .option('--relative', 'Issues are displayed relative to root.')
+        .option('--show-context', 'Show the surrounding text around an issue.')
         .option('--must-find-files', 'Error if no files are found', true)
         .option('--no-must-find-files', 'Do not error is no files are found')
         // The following options are planned features
@@ -351,13 +375,42 @@ function trimMid(s: string, w: number): string {
     return s.substr(0, l) + '...' + s.substr(-r);
 }
 
-function formatIssue(template: string, issue: Issue) {
-    const { uri = '', row, col, text } = issue;
-    return template
-        .replace(/\$\{uri\}/, uri)
-        .replace(/\$\{row\}/, row.toString())
-        .replace(/\$\{col\}/, col.toString())
-        .replace(/\$\{text\}/, text);
+function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: number) {
+    const { uri = '', row, col, text, context, offset } = issue;
+    const contextLeft = context.text.slice(0, offset - context.offset);
+    const contextRight = context.text.slice(offset + text.length - context.offset);
+    const contextFull = context.text;
+    const padContext = ' '.repeat(Math.max(maxIssueTextWidth - text.length, 0));
+    const rowText = row.toString();
+    const colText = col.toString();
+    const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
+    const t = template(templateStr);
+    return chalk(t)
+        .replace(/\$\{col\}/g, colText)
+        .replace(/\$\{row\}/g, rowText)
+        .replace(/\$\{text\}/g, text)
+        .replace(/\$\{uri\}/g, uri)
+        .replace(/\$col/g, colText)
+        .replace(/\$contextFull/g, contextFull)
+        .replace(/\$contextLeft/g, contextLeft)
+        .replace(/\$contextRight/g, contextRight)
+        .replace(/\$padContext/g, padContext)
+        .replace(/\$padRowCol/g, padRowCol)
+        .replace(/\$row/g, rowText)
+        .replace(/\$text/g, text)
+        .replace(/\$uri/g, uri);
+}
+
+class TS extends Array<string> {
+    raw: string[];
+    constructor(s: string) {
+        super(s);
+        this.raw = [s];
+    }
+}
+
+function template(s: string): TemplateStringsArray {
+    return new TS(s);
 }
 
 export class CheckFailed extends Error {

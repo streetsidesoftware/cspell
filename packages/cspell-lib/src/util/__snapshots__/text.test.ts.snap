@@ -1,0 +1,256 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validates offset conversions calculateTextDocumentOffsets for const 1`] = `
+Array [
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 32,
+      "text": "const text = 'some nice text goes here';
+",
+    },
+    "offset": 32,
+    "row": 6,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 73,
+      "text": "const url = 'https://www.google.com?q=typescript';
+",
+    },
+    "offset": 73,
+    "row": 7,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 124,
+      "text": "const url2 = 'http://www.weirddomain.com?key=jdhehdjsiijdkejshaijncjfhe';
+",
+    },
+    "offset": 124,
+    "row": 8,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 198,
+      "text": "const cssHexValue = '#cccd';
+",
+    },
+    "offset": 198,
+    "row": 9,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 227,
+      "text": "const cHexValue = 0x5612abcd;
+",
+    },
+    "offset": 227,
+    "row": 10,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 257,
+      "text": "const cHexValueBadCoffee = 0xbadc0ffee;
+",
+    },
+    "offset": 257,
+    "row": 11,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 323,
+      "text": "const unicodeHexValue = '\\\\uBABC';
+",
+    },
+    "offset": 323,
+    "row": 14,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 357,
+      "text": "const unicodeHexValue2 = '\\\\x{abcd}';
+",
+    },
+    "offset": 357,
+    "row": 15,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 840,
+      "text": "const string1 = 'This is a single quote string.  it\\\\'s a lot of fun.'
+",
+    },
+    "offset": 840,
+    "row": 42,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 910,
+      "text": "const string2 = \\"How about a double quote string?\\";
+",
+    },
+    "offset": 910,
+    "row": 43,
+    "text": "const",
+    "uri": "uri",
+  },
+  Object {
+    "col": 1,
+    "line": Object {
+      "offset": 962,
+      "text": "const templateString = \`
+",
+    },
+    "offset": 962,
+    "row": 44,
+    "text": "const",
+    "uri": "uri",
+  },
+]
+`;
+
+exports[`Validates offset conversions calculateTextDocumentOffsets for disable 1`] = `
+Array [
+  Object {
+    "col": 18,
+    "line": Object {
+      "offset": 298,
+      "text": "// spell-checker:disable
+",
+    },
+    "offset": 315,
+    "row": 13,
+    "text": "disable",
+    "uri": "uri",
+  },
+  Object {
+    "col": 18,
+    "line": Object {
+      "offset": 479,
+      "text": "/* spell-checker:disable */
+",
+    },
+    "offset": 496,
+    "row": 23,
+    "text": "disable",
+    "uri": "uri",
+  },
+  Object {
+    "col": 11,
+    "line": Object {
+      "offset": 508,
+      "text": "// nested disabled checker is not supported.
+",
+    },
+    "offset": 518,
+    "row": 25,
+    "text": "disable",
+    "uri": "uri",
+  },
+  Object {
+    "col": 18,
+    "line": Object {
+      "offset": 554,
+      "text": "// spell-checker:disable
+",
+    },
+    "offset": 571,
+    "row": 27,
+    "text": "disable",
+    "uri": "uri",
+  },
+  Object {
+    "col": 11,
+    "line": Object {
+      "offset": 1241,
+      "text": "// cSpell:disable
+",
+    },
+    "offset": 1251,
+    "row": 61,
+    "text": "disable",
+    "uri": "uri",
+  },
+]
+`;
+
+exports[`Validates offset conversions calculateTextDocumentOffsets for text 1`] = `
+Array [
+  Object {
+    "col": 7,
+    "line": Object {
+      "offset": 32,
+      "text": "const text = 'some nice text goes here';
+",
+    },
+    "offset": 38,
+    "row": 6,
+    "text": "text",
+    "uri": "uri",
+  },
+  Object {
+    "col": 25,
+    "line": Object {
+      "offset": 32,
+      "text": "const text = 'some nice text goes here';
+",
+    },
+    "offset": 56,
+    "row": 6,
+    "text": "text",
+    "uri": "uri",
+  },
+  Object {
+    "col": 5,
+    "line": Object {
+      "offset": 770,
+      "text": "let text = '';
+",
+    },
+    "offset": 774,
+    "row": 37,
+    "text": "text",
+    "uri": "uri",
+  },
+  Object {
+    "col": 5,
+    "line": Object {
+      "offset": 816,
+      "text": "    text += ' ' + i;
+",
+    },
+    "offset": 820,
+    "row": 39,
+    "text": "text",
+    "uri": "uri",
+  },
+]
+`;
