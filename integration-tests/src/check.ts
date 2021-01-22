@@ -12,7 +12,7 @@ import { PrefixLogger } from './PrefixLogger';
 import { Logger } from './types';
 
 const config = readConfig();
-const cspellArgs = '-u --no-progress --relative';
+const cspellArgs = '-u --no-progress --relative --show-context';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '..', '..', 'bin.js'));
 
 const cspellCommand = `node ${jsCspell} ${cspellArgs}`;

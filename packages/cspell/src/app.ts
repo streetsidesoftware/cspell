@@ -376,10 +376,13 @@ function trimMid(s: string, w: number): string {
 }
 
 function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: number) {
+    function clean(t: string) {
+        return t.replace(/\s+/, ' ');
+    }
     const { uri = '', row, col, text, context, offset } = issue;
-    const contextLeft = context.text.slice(0, offset - context.offset);
-    const contextRight = context.text.slice(offset + text.length - context.offset);
-    const contextFull = context.text;
+    const contextLeft = clean(context.text.slice(0, offset - context.offset));
+    const contextRight = clean(context.text.slice(offset + text.length - context.offset));
+    const contextFull = clean(context.text);
     const padContext = ' '.repeat(Math.max(maxIssueTextWidth - text.length, 0));
     const rowText = row.toString();
     const colText = col.toString();
