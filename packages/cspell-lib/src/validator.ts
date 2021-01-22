@@ -6,13 +6,36 @@ export const diagSource = 'cSpell Checker';
 
 import { CSpellUserSettings } from './Settings';
 import * as TV from './textValidator';
+import { CompoundWordsMethod } from './SpellingDictionary';
 
 export { IncludeExcludeOptions } from './textValidator';
 
-export async function validateText(text: string, settings: CSpellUserSettings): Promise<Text.TextOffset[]> {
+export interface ValidationIssue extends Text.TextOffset {
+    suggestions?: string[];
+}
+
+export interface ValidateTextOptions {
+    generateSuggestions?: boolean;
+    numSuggestions?: number;
+}
+
+export async function validateText(
+    text: string,
+    settings: CSpellUserSettings,
+    options: ValidateTextOptions = {}
+): Promise<ValidationIssue[]> {
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = await Dictionary.getDictionary(finalSettings);
-    return [...TV.validateText(text, dict, finalSettings)];
+    const issues = [...TV.validateText(text, dict, finalSettings)];
+    if (!options.generateSuggestions) {
+        return issues;
+    }
+    const withSugs = issues.map((t) => {
+        const suggestions = dict.suggest(t.text, options.numSuggestions, CompoundWordsMethod.NONE).map((r) => r.word);
+        return { ...t, suggestions };
+    });
+
+    return withSugs;
 }
 
 export interface CheckTextInfo {

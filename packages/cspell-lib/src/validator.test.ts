@@ -168,6 +168,17 @@ describe('Validator', () => {
         expect(last).toBe(sampleText.length);
     });
 
+    // cspell:ignore witth feww mistaks
+    test('validateText with suggestions', async () => {
+        const text = `
+            Here is a bit of text witth a feww mistaks.
+        `;
+        const languageId = 'plaintext';
+        const settings = getSettings(text, languageId);
+        const result = await Validator.validateText(text, settings, { generateSuggestions: true, numSuggestions: 5 });
+        expect(result).toMatchSnapshot();
+    });
+
     test('tests calcIncludeExcludeInfo exclude everything', async () => {
         const words = sampleWords;
         const info = await Validator.checkText(sampleText, {

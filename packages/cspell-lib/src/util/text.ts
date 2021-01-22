@@ -205,11 +205,11 @@ export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gim', f
     return undefined;
 }
 
-export function calculateTextDocumentOffsets(
+export function calculateTextDocumentOffsets<T extends TextOffset>(
     uri: string,
     doc: string,
-    wordOffsets: TextOffset[]
-): TextDocumentOffset[] {
+    wordOffsets: T[]
+): (TextDocumentOffset & T)[] {
     const lines = [-1, ...match(/\n/g, doc).map((a) => a.index), doc.length];
 
     let lastRow = -1;

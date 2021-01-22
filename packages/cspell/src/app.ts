@@ -31,7 +31,9 @@ type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
 
 const templateIssue = `{green $uri}:{yellow $row:$col} - Unknown word ({red $text})`;
+const templateIssueWithSuggestions = `{green $uri}:{yellow $row:$col} - Unknown word ({red $text}) Suggestions: {yellow [$suggestions]}`;
 const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
+const templateIssueWithContextWithSuggestions = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
 const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
 const templateIssueWordsOnly = '${text}';
 
@@ -83,7 +85,11 @@ function getEmitters(options: Options): Emitters {
         : options.legacy
         ? templateIssueLegacy
         : options.showContext
-        ? templateIssueWithContext
+        ? options.showSuggestions
+            ? templateIssueWithContextWithSuggestions
+            : templateIssueWithContext
+        : options.showSuggestions
+        ? templateIssueWithSuggestions
         : templateIssue;
     const { silent, issues, progress, verbose, debug } = options;
 
@@ -156,6 +162,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
         .option('--relative', 'Issues are displayed relative to root.')
         .option('--show-context', 'Show the surrounding text around an issue.')
+        .option('--show-suggestions', 'Show spelling suggestions.')
         .option('--must-find-files', 'Error if no files are found', true)
         .option('--no-must-find-files', 'Do not error is no files are found')
         // The following options are planned features
@@ -387,6 +394,7 @@ function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: numbe
     const rowText = row.toString();
     const colText = col.toString();
     const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
+    const suggestions = issue.suggestions?.join(', ') || '';
     const t = template(templateStr);
     return chalk(t)
         .replace(/\$\{col\}/g, colText)
@@ -400,6 +408,7 @@ function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: numbe
         .replace(/\$padContext/g, padContext)
         .replace(/\$padRowCol/g, padRowCol)
         .replace(/\$row/g, rowText)
+        .replace(/\$suggestions/g, suggestions)
         .replace(/\$text/g, text)
         .replace(/\$uri/g, uri);
 }
