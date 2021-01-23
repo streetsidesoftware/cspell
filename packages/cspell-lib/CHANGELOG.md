@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.12](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.11...cspell-lib@4.3.12) (2021-01-23)
+
+**Note:** Version bump only for package cspell-lib
+
+
+
+
+
 ## [4.3.11](https://github.com/streetsidesoftware/cspell/compare/cspell-lib@4.3.10...cspell-lib@4.3.11) (2020-12-27)
 
 

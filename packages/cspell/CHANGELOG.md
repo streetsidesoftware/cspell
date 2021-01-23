@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.8](https://github.com/streetsidesoftware/cspell/compare/cspell@4.2.7...cspell@4.2.8) (2021-01-23)
+
+
+### Bug Fixes
+
+* cspell4 [#880](https://github.com/streetsidesoftware/cspell/issues/880) ([#882](https://github.com/streetsidesoftware/cspell/issues/882)) ([709d76e](https://github.com/streetsidesoftware/cspell/commit/709d76e63e351f86a867b19fc0309e7f45379ae8))
+
+
+
+
+
 ## [4.2.7](https://github.com/streetsidesoftware/cspell/compare/cspell@4.2.6...cspell@4.2.7) (2020-12-27)
 
 **Note:** Version bump only for package cspell
