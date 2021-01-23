@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/streetsidesoftware/cspell/compare/v5.1.3...v5.2.0) (2021-01-23)
+
+**Note:** Version bump only for package @cspell/cspell-bundled-dicts
+
+
+
+
+
 # [5.1.0](https://github.com/streetsidesoftware/cspell/compare/v5.0.8...v5.1.0) (2020-12-27)
 
 **Note:** Version bump only for package @cspell/cspell-bundled-dicts
