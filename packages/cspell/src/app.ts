@@ -269,7 +269,9 @@ function formatIssue(template: string, issue: App.Issue) {
 }
 
 export class CheckFailed extends Error {
-    constructor(message: string, readonly _errorCode: number) {
+    readonly exitCode: number;
+    constructor(message: string, exitCode = 1) {
         super(message);
+        this.exitCode = exitCode;
     }
 }
