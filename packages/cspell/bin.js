@@ -9,5 +9,7 @@ app.run(program, process.argv).catch((e) => {
     if (!(e instanceof program.CommanderError) && !(e instanceof app.CheckFailed)) {
         console.log(e);
     }
-    process.exitCode = 1;
+    if (e instanceof app.CheckFailed) {
+        process.exitCode = e.exitCode;
+    }
 });

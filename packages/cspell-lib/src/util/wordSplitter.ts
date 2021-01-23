@@ -49,7 +49,7 @@ export function split(
 ): SplitResult {
     const relWordToSplit = findNextWordText({ text: line.text, offset: offset - line.offset });
     const lineOffset = line.offset;
-    const requested = new Map<number, Map<string, boolean>>();
+    const requested = new Map<number, boolean>();
 
     if (!relWordToSplit.text) {
         const text = rebaseTextOffset(relWordToSplit);
@@ -88,15 +88,19 @@ export function split(
     }
 
     function has(word: TextOffset): boolean {
-        let a = requested.get(word.offset);
-        const b = a?.get(word.text);
-        if (b !== undefined) return b;
-        if (!a) {
-            a = new Map<string, boolean>();
-            requested.set(word.offset, a);
+        const i = word.offset;
+        const j = word.text.length;
+        let v = i + (j << 20);
+        if (i < 1 << 20 && j < 1 << 11) {
+            const b = requested.get(v);
+            if (b !== undefined) return b;
+        } else {
+            v = -1;
         }
         const r = isValidWord(rebaseTextOffset(word));
-        a.set(word.text, r);
+        if (v >= 0) {
+            requested.set(v, r);
+        }
         return r;
     }
 
