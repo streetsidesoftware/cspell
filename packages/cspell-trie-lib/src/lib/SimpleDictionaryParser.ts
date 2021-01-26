@@ -113,5 +113,5 @@ export function parseDictionary(text: string, options: ParseDictionaryOptions = 
 }
 
 function escapeRegEx(s: string) {
-    return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+    return s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
 }
