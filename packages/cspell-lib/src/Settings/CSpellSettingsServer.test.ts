@@ -11,6 +11,7 @@ import {
     searchForConfig,
     loadConfig,
     ImportFileRefWithError,
+    readRawSettings,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings } from './CSpellSettingsDef';
@@ -240,6 +241,13 @@ describe('Validate search/load config files', () => {
         };
     }
 
+    function readError(filename: string): ImportFileRefWithError {
+        return {
+            filename,
+            error: new Error(`Failed to read config file: "${filename}"`),
+        };
+    }
+
     function cfg(
         filename: string | ImportFileRefWithError,
         values: CSpellSettingsWithSourceTrace = {}
@@ -281,12 +289,26 @@ describe('Validate search/load config files', () => {
     }
 
     test.each`
-        file                     | expectedConfig
-        ${samplesSrc}            | ${cfg(importError(samplesSrc))}
-        ${s('bug-fixes')}        | ${cfg(importError(s('bug-fixes')))}
-        ${s('linked/cspell.js')} | ${cfg(s('linked/cspell.js'))}
+        file                        | expectedConfig
+        ${samplesSrc}               | ${cfg(importError(samplesSrc))}
+        ${s('bug-fixes')}           | ${cfg(importError(s('bug-fixes')))}
+        ${s('linked/cspell.js')}    | ${cfg(s('linked/cspell.js'))}
+        ${s('js-config/cspell.js')} | ${cfg(s('js-config/cspell.js'))}
     `('Load from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         const searchResult = await loadConfig(file);
+        expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
+    });
+
+    test.each`
+        file                                  | expectedConfig
+        ${samplesSrc}                         | ${cfg(readError(samplesSrc))}
+        ${s('bug-fixes')}                     | ${cfg(readError(s('bug-fixes')))}
+        ${s('linked/cspell.js')}              | ${cfg(s('linked/cspell.js'), { description: 'cspell.js file in samples/linked', import: ['./cspell-imports.json'] })}
+        ${s('js-config/cspell.js')}           | ${cfg(s('js-config/cspell.js'), { description: 'cspell.js file in samples/js-config' })}
+        ${s('js-config/cspell-no-export.js')} | ${cfg(s('js-config/cspell-no-export.js'))}
+        ${s('js-config/cspell-bad.js')}       | ${cfg(readError(s('js-config/cspell-bad.js')))}
+    `('ReadRawSettings from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
+        const searchResult = await readRawSettings(file);
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
     });
 });

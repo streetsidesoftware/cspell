@@ -2,6 +2,7 @@
 {
     // Version of the setting file.  Always 0.1
     "version": "0.1",
+    "description": "Sample .cspell.json file with comments.",
     // language - current active spelling language
     "language": "en",
     "allowCompoundWords": true,
@@ -20,16 +21,13 @@
         ".git/**",
         ".vscode/**"
     ],
-
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.
     // For example "hte" should be "the"
     "flagWords": [
         "hte"
     ],
-    "dictionaryDefinitions": [
-
-    ],
+    "dictionaryDefinitions": [],
     "languageSettings": [
         {
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
@@ -59,7 +57,9 @@
                 }
             ],
             // List of dictionaries to enable by name in `dictionaryDefinitions`
-            "dictionaries": ["cpp"],
+            "dictionaries": [
+                "cpp"
+            ],
             // Dictionary definitions can also be supplied here. They are only used iff "languageId" and "local" match.
             "dictionaryDefinitions": []
         },
@@ -69,16 +69,19 @@
             "allowCompoundWords": false
         }
     ],
-
     "overrides": [
         {
             "filename": "**/{*.py}",
-            "ignoreRegExpList": ["/'s\\b/"]
+            "ignoreRegExpList": [
+                "/'s\\b/"
+            ]
         },
         {
             "language": "nl",
             "filename": "**/{*.c,*.cpp}",
-            "ignoreRegExpList": ["/'s\\b/"],
+            "ignoreRegExpList": [
+                "/'s\\b/"
+            ],
             "dictionaryDefinitions": [
                 {
                     "name": "cpp",
