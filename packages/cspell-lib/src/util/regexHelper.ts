@@ -4,5 +4,5 @@
  * @returns - the escaped string.
  */
 export function escapeRegEx(s: string): string {
-    return s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+    return s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
 }

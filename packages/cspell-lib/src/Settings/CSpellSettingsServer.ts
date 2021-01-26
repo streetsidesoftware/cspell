@@ -36,6 +36,8 @@ const cspellCosmiconfig = {
         'cspell.yml',
         'cspell.js',
         'cspell.cjs',
+        '.cspell.js',
+        '.cspell.cjs',
     ],
     loaders: {
         '.json': (_filename: string, content: string) => json.parse(content),
