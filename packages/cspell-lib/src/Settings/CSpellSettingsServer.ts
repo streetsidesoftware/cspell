@@ -24,19 +24,18 @@ export const defaultFileName = 'cspell.json';
 
 const cspellCosmiconfig = {
     searchPlaces: [
+        'cspell.config.js',
+        'cspell.config.cjs',
         'cspell.config.json',
         'cspell.config.yaml',
         'cspell.config.yml',
-        'cspell.config.js',
-        'cspell.config.cjs',
         'cspell.yaml',
         'cspell.yml',
-        '.cspell.js',
-        '.cspell.cjs',
-        'cspell.json',
-        'cSpell.json',
         '.cspell.json',
+        'cspell.json',
+        // Alternate locations
         '.cSpell.json',
+        'cSpell.json',
         '.vscode/cspell.json',
         '.vscode/cSpell.json',
         '.vscode/.cspell.json',
