@@ -1,7 +1,7 @@
 'use strict';
 
 const cspell = {
-    description: 'cspell.js file in samples/linked',
+    description: 'cspell.config.js file in samples/linked',
     import: ['./cspell-imports.json'],
 };
 

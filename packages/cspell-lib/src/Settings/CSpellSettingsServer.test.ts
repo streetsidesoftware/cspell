@@ -272,7 +272,7 @@ describe('Validate search/load config files', () => {
         dir                         | expectedConfig
         ${samplesSrc}               | ${cfg(s('.cspell.json'))}
         ${s('bug-fixes/bug345.ts')} | ${cfg(s('bug-fixes/cspell.json'))}
-        ${s('linked')}              | ${cfg(s('linked/cspell.js'))}
+        ${s('linked')}              | ${cfg(s('linked/cspell.config.js'))}
         ${s('yaml-config')}         | ${cfg(s('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })}
     `('Search from $dir', async ({ dir, expectedConfig }: TestSearchFrom) => {
         const searchResult = await searchForConfig(dir);
@@ -289,11 +289,11 @@ describe('Validate search/load config files', () => {
     }
 
     test.each`
-        file                        | expectedConfig
-        ${samplesSrc}               | ${cfg(importError(samplesSrc))}
-        ${s('bug-fixes')}           | ${cfg(importError(s('bug-fixes')))}
-        ${s('linked/cspell.js')}    | ${cfg(s('linked/cspell.js'))}
-        ${s('js-config/cspell.js')} | ${cfg(s('js-config/cspell.js'))}
+        file                               | expectedConfig
+        ${samplesSrc}                      | ${cfg(importError(samplesSrc))}
+        ${s('bug-fixes')}                  | ${cfg(importError(s('bug-fixes')))}
+        ${s('linked/cspell.config.js')}    | ${cfg(s('linked/cspell.config.js'))}
+        ${s('js-config/cspell.config.js')} | ${cfg(s('js-config/cspell.config.js'))}
     `('Load from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         const searchResult = await loadConfig(file);
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
@@ -303,8 +303,8 @@ describe('Validate search/load config files', () => {
         file                                  | expectedConfig
         ${samplesSrc}                         | ${cfg(readError(samplesSrc))}
         ${s('bug-fixes')}                     | ${cfg(readError(s('bug-fixes')))}
-        ${s('linked/cspell.js')}              | ${cfg(s('linked/cspell.js'), { description: 'cspell.js file in samples/linked', import: ['./cspell-imports.json'] })}
-        ${s('js-config/cspell.js')}           | ${cfg(s('js-config/cspell.js'), { description: 'cspell.js file in samples/js-config' })}
+        ${s('linked/cspell.config.js')}       | ${cfg(s('linked/cspell.config.js'), { description: 'cspell.config.js file in samples/linked', import: ['./cspell-imports.json'] })}
+        ${s('js-config/cspell.config.js')}    | ${cfg(s('js-config/cspell.config.js'), { description: 'cspell.config.js file in samples/js-config' })}
         ${s('js-config/cspell-no-export.js')} | ${cfg(s('js-config/cspell-no-export.js'))}
         ${s('js-config/cspell-bad.js')}       | ${cfg(readError(s('js-config/cspell-bad.js')))}
     `('ReadRawSettings from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
