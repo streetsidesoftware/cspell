@@ -24,7 +24,6 @@ export const defaultFileName = 'cspell.json';
 
 const cspellCosmiconfig = {
     searchPlaces: [
-        'package.json',
         'cspell.config.json',
         'cspell.config.yaml',
         'cspell.config.yml',
