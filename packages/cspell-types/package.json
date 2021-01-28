@@ -1,0 +1,44 @@
+{
+  "name": "@cspell/cspell-types",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "5.0.0",
+  "description": "Types for cspell and cspell-lib",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./cspell.schema.json": "./cspell.schema.json"
+  },
+  "scripts": {
+    "clean": "rimraf dist coverage",
+    "build": "npm run compile && npm run build-schema",
+    "build-schema": "ts-json-schema-generator --no-top-ref --path src/settings/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecationMessage -o  ./cspell.schema.json",
+    "clean-build": "npm run clean && npm run build",
+    "compile": "tsc -p .",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "files": [
+    "dist/**",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "keywords": [
+    "cspell",
+    "types"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "rimraf": "^3.0.2",
+    "ts-json-schema-generator": "^0.83.2",
+    "typescript": "^4.1.3"
+  }
+}
