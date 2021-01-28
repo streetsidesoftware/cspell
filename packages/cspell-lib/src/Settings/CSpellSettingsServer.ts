@@ -7,7 +7,7 @@ import {
     Pattern,
     CSpellSettingsWithSourceTrace,
     ImportFileRef,
-} from './CSpellSettingsDef';
+} from '@cspell/cspell-types';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';

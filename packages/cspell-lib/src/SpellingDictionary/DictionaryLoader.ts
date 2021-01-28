@@ -2,7 +2,7 @@ import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
-import { ReplaceMap } from '../Settings';
+import { ReplaceMap } from '@cspell/cspell-types';
 import { readLines } from '../util/fileReader';
 import { stat } from 'fs-extra';
 

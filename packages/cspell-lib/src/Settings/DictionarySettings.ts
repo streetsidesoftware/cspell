@@ -1,4 +1,4 @@
-import { DictionaryDefinition, DictionaryId, DictionaryDefinitionPreferred } from './CSpellSettingsDef';
+import { DictionaryDefinition, DictionaryId, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
 import * as path from 'path';
 import { resolveFile } from '../util/resolveFile';
 

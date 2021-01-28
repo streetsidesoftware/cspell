@@ -1,5 +1,6 @@
 export * from 'cspell-io';
 export * from './Settings';
+export * from '@cspell/cspell-types';
 export { TextOffset, TextDocumentOffset } from './util/text';
 export {
     checkText,
