@@ -1,4 +1,4 @@
-import { DictionaryDefinition, DictionaryId, CSpellUserSettings } from '../Settings';
+import { DictionaryDefinition, DictionaryId, CSpellUserSettings } from '@cspell/cspell-types';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';
 import { createSpellingDictionary } from './createSpellingDictionary';

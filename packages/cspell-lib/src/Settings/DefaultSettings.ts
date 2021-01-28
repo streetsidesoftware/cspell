@@ -3,7 +3,7 @@ import {
     RegExpPatternDefinition,
     CSpellSettingsWithSourceTrace,
     PredefinedPatterns,
-} from './CSpellSettingsDef';
+} from '@cspell/cspell-types';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
 import { readSettings } from './CSpellSettingsServer';

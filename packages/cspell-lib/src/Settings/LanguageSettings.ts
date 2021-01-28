@@ -1,4 +1,4 @@
-import { LanguageSetting, CSpellUserSettings, LocaleId, LanguageId, BaseSetting } from './CSpellSettingsDef';
+import { LanguageSetting, CSpellUserSettings, LocaleId, LanguageId, BaseSetting } from '@cspell/cspell-types';
 import * as SpellSettings from './CSpellSettingsServer';
 
 // LanguageSettings are a collection of LanguageSetting.  They are applied in order, matching against the languageId.

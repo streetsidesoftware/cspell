@@ -1,4 +1,4 @@
-import { CSpellSettings, CSpellSettingsWithSourceTrace } from './CSpellSettingsDef';
+import { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import { logError } from '../util/logger';
 import ConfigStore from 'configstore';
 

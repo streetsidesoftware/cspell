@@ -4,7 +4,7 @@ import * as Settings from './Settings';
 
 export const diagSource = 'cSpell Checker';
 
-import { CSpellUserSettings } from './Settings';
+import { CSpellUserSettings } from '@cspell/cspell-types';
 import * as TV from './textValidator';
 import { CompoundWordsMethod } from './SpellingDictionary';
 

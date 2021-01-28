@@ -1,4 +1,5 @@
-import { CSpellSettings, finalizeSettings } from './Settings';
+import { finalizeSettings } from './Settings';
+import { CSpellSettings } from '@cspell/cspell-types';
 import { getDictionary, SpellingDictionaryCollection } from './SpellingDictionary';
 import * as util from './util/util';
 import { genSequence } from 'gensequence';

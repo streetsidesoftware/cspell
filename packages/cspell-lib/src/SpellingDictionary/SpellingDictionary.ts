@@ -1,5 +1,5 @@
 import { SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
-import { ReplaceMap } from '../Settings';
+import { ReplaceMap } from '@cspell/cspell-types';
 
 export {
     CompoundWordsMethod,

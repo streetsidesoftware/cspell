@@ -2,7 +2,7 @@
 import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
 import { getGlobalSettings, mergeSettings } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
-import { CSpellUserSettings } from './CSpellSettingsDef';
+import { CSpellUserSettings } from '@cspell/cspell-types';
 
 import * as LS from './LanguageSettings';
 

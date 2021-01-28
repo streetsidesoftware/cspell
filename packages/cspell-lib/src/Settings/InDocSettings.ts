@@ -1,6 +1,6 @@
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from '../util/text';
-import { CSpellUserSettings } from './CSpellSettingsDef';
+import { CSpellUserSettings } from '@cspell/cspell-types';
 import { mergeInDocSettings } from './CSpellSettingsServer';
 
 // cspell:ignore gimuy

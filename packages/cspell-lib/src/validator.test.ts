@@ -1,6 +1,6 @@
 import * as Validator from './validator';
 import { loremIpsum } from 'lorem-ipsum';
-import { CSpellSettings } from './Settings';
+import { CSpellSettings } from '@cspell/cspell-types';
 import * as tds from './Settings/TextDocumentSettings';
 
 import { getDefaultSettings } from './Settings/DefaultSettings';

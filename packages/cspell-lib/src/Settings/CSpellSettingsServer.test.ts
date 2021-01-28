@@ -14,7 +14,7 @@ import {
     readRawSettings,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
-import { CSpellSettingsWithSourceTrace, CSpellUserSettings } from './CSpellSettingsDef';
+import { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
 
 const samplesDir = path.resolve(path.join(__dirname, '../../samples'));
