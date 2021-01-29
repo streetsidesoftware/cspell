@@ -87,6 +87,15 @@ describe('Validate InDocSettings', () => {
         const settings = InDoc.getInDocumentSettings(sampleCode);
         expect(settings.dictionaries).toStrictEqual(['lorem-ipsum']);
     });
+
+    test('bad ignoreRegExp', () => {
+        // I currently does not check the validity of the expressions.
+        expect(InDoc.getInDocumentSettings(sampleTextWithBadRegexp)).toEqual(
+            expect.objectContaining({
+                ignoreRegExpList: [`"(foobar|foo_baz)"');`],
+            })
+        );
+    });
 });
 // cSpell:ignore faullts straange
 // cSpell:ignoreRegExp \w+s{4}\w+
@@ -128,6 +137,12 @@ const sampleText = `
 # cSpell:enableCOMPOUNDWords
 # happydays arehere againxx
 `;
+
+// cspell:disable
+const sampleTextWithBadRegexp = `
+# cspell\x3AignoreRegExp  "(foobar|foo_baz)"');
+`;
+// cspell:enable
 
 // cspell:disableCompoundWords
 // cspell:ignore localwords happydays arehere
