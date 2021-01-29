@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "clean": "rimraf dist temp",
+    "clean": "rimraf dist temp repositories/temp",
     "postinstall": "npm run build",
     "integration-tests": "node tester.js check -f",
     "test-jest": "jest",
