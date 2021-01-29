@@ -5,7 +5,7 @@
     "description": "Sample .cspell.json file with comments.",
     // language - current active spelling language
     "language": "en",
-    "allowCompoundWords": true,
+    "allowCompoundWords": false,
     // words - list of words to be always considered correct
     "words": [
         "gensequence",
@@ -33,7 +33,6 @@
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
             // * will match against any file type.
             "languageId": "c,cpp",
-            "allowCompoundWords": true,
             // Language local. i.e. en-US, de-AT, or ru. * will match all locals.
             // Multiple locals can be specified like: "en, en-US" to match both English and English US.
             "local": "*",
@@ -77,18 +76,9 @@
             ]
         },
         {
-            "language": "nl",
             "filename": "**/{*.c,*.cpp}",
             "ignoreRegExpList": [
                 "/'s\\b/"
-            ],
-            "dictionaryDefinitions": [
-                {
-                    "name": "cpp",
-                    "path": "../dictionaries",
-                    "file": "companies.txt",
-                    "description": "C/C++ Keywords and common library functions."
-                }
             ]
         },
         // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
