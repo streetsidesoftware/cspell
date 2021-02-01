@@ -17,10 +17,10 @@ export function createSpellingDictionary(
 }
 
 export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError): SpellingDictionary {
-    const { name, uri: source } = error;
+    const { options, uri: source } = error;
     const errors = [error];
     return {
-        name,
+        name: options.name,
         source,
         type: 'error',
         has: () => false,
@@ -30,7 +30,7 @@ export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError)
             return;
         },
         size: 0,
-        options: {},
+        options,
         isDictionaryCaseSensitive: false,
         getErrors: () => errors,
     };

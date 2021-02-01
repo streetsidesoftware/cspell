@@ -86,9 +86,7 @@ function isError(e: StatsOrError): e is Error {
 
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
     const dictionary = load(uri, options).catch((e) =>
-        createFailedToLoadDictionary(
-            new SpellingDictionaryLoadError(determineName(uri, options), uri, options, e, 'failed to load')
-        )
+        createFailedToLoadDictionary(new SpellingDictionaryLoadError(uri, options, e, 'failed to load'))
     );
     return {
         uri,

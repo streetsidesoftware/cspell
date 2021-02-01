@@ -42,7 +42,7 @@ function getFullPathName(def: DictionaryDefinition) {
 export function normalizePathForDictDefs(
     defs: DictionaryDefinition[],
     pathToSettingsFile: string
-): DictionaryDefinitionPreferred[] {
+): DictionaryDefinitionWithSource[] {
     return defs.map((def) => normalizePathForDictDef(def, pathToSettingsFile));
 }
 
@@ -53,6 +53,7 @@ export function normalizePathForDictDef(
     const defaultPath = path.dirname(pathToSettingsFile);
     const { path: relPath = '', file = '', ...rest } = def;
     const filePath = path.join(relPath, file);
+    const name = determineName(filePath, def);
 
     if (isDictionaryDefinitionWithSource(def)) {
         if (def.__source !== pathToSettingsFile) {
@@ -64,6 +65,7 @@ export function normalizePathForDictDef(
     const r = resolveFile(filePath, defaultPath);
     return {
         ...rest,
+        name,
         path: r.filename,
         __source: pathToSettingsFile,
     };
@@ -73,4 +75,8 @@ export function isDictionaryDefinitionWithSource(
     d: DictionaryDefinition | DictionaryDefinitionWithSource
 ): d is DictionaryDefinitionWithSource {
     return (d as DictionaryDefinitionWithSource).__source !== undefined;
+}
+
+function determineName(filename: string, options: DictionaryDefinition): string {
+    return options.name || path.basename(filename);
 }
