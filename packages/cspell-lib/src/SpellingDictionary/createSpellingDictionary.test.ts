@@ -7,7 +7,7 @@ describe('Validate createSpellingDictionary', () => {
         const loaderError = new SpellingDictionaryLoadError(
             'failed dict',
             './missing.txt',
-            {},
+            { name: 'failed dict', path: './missing.txt' },
             error,
             'Failed to load'
         );

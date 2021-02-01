@@ -1,4 +1,4 @@
-import { LoadOptions } from './DictionaryLoaderTypes';
+import { LoadOptions } from './DictionaryLoader';
 
 export class SpellingDictionaryLoadError extends Error {
     constructor(

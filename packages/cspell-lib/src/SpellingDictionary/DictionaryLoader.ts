@@ -2,10 +2,10 @@ import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
-import { Loaders, LoaderType, LoadOptions } from './DictionaryLoaderTypes';
 import { readLines } from '../util/fileReader';
 import { stat } from 'fs-extra';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
+import { DictionaryDefinitionPreferred } from '@cspell/cspell-types';
 
 const MAX_AGE = 10000;
 
@@ -16,6 +16,8 @@ const loaders: Loaders = {
     default: loadSimpleWordList,
 };
 
+export type LoadOptions = DictionaryDefinitionPreferred;
+
 interface CacheEntry {
     uri: string;
     options: LoadOptions;
@@ -24,10 +26,20 @@ interface CacheEntry {
     dictionary: Promise<SpellingDictionary>;
 }
 
+export type LoaderType = keyof Loaders;
+export type Loader = (filename: string, options: LoadOptions) => Promise<SpellingDictionary>;
+
+export interface Loaders {
+    S: Loader;
+    C: Loader;
+    T: Loader;
+    default: Loader;
+}
+
 const dictionaryCache = new Map<string, CacheEntry>();
 
-export function loadDictionary(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const key = calcKey(uri, options);
+export function loadDictionary(uri: string, options: DictionaryDefinitionPreferred): Promise<SpellingDictionary> {
+    const key = calcKey(uri);
     const entry = dictionaryCache.get(key);
     if (entry) {
         return entry.dictionary;
@@ -37,8 +49,8 @@ export function loadDictionary(uri: string, options: LoadOptions): Promise<Spell
     return loadedEntry.dictionary;
 }
 
-function calcKey(uri: string, options: LoadOptions) {
-    const loaderType = determineType(uri, options);
+function calcKey(uri: string) {
+    const loaderType = determineType(uri);
     return [uri, loaderType].join('|');
 }
 
@@ -53,7 +65,7 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const pStat = stat(entry.uri).catch((e) => e as Error);
         const [state, oldState] = await Promise.all([pStat, entry.state]);
         if (entry.ts === now && !isEqual(state, oldState)) {
-            dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
+            dictionaryCache.set(calcKey(entry.uri), loadEntry(entry.uri, entry.options));
         }
     }
 }
@@ -87,15 +99,14 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
     };
 }
 
-function determineType(uri: string, options: LoadOptions): LoaderType {
+function determineType(uri: string): LoaderType {
     const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'S';
-    const { type = defType } = options;
     const regTrieTest = /\.trie\b/i;
-    return regTrieTest.test(uri) ? 'T' : type;
+    return regTrieTest.test(uri) ? 'T' : defType;
 }
 
 function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const type = determineType(uri, options);
+    const type = determineType(uri);
     const loader = loaders[type] || loaders.default;
     return loader(uri, options);
 }

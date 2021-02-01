@@ -1,5 +1,4 @@
-import { LoadOptions } from './DictionaryLoaderTypes';
-import { testing, loadDictionary, refreshCacheEntries } from './DictionaryLoader';
+import { testing, loadDictionary, refreshCacheEntries, LoadOptions } from './DictionaryLoader';
 import * as path from 'path';
 jest.mock('../util/logger');
 
@@ -9,66 +8,59 @@ const samples = path.join(root, 'samples');
 type ErrorResults = Record<string, unknown> | Error;
 
 describe('Validate DictionaryLoader', () => {
-    it('load not found', async () => {
-        const error = { code: 'ENOENT' };
-        const unknownFormatError = new Error('Unknown file format');
-        const tests: [string, LoadOptions, ErrorResults][] = [
-            ['./notfound.txt', {}, error],
-            ['./notfound.txt', { type: 'S' }, error],
-            ['./notfound.txt', { type: 'C' }, error],
-            ['./notfound.txt.gz', {}, error],
-            ['./notfound.txt.gz', { type: 'S' }, error],
-            ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', {}, unknownFormatError],
-            ['./notfound.trie.gz', {}, unknownFormatError],
-        ];
+    const errorENOENT = { code: 'ENOENT' };
+    const unknownFormatError = new Error('Unknown file format');
 
-        for (const t of tests) {
-            const dictionary = testing.load(t[0], t[1]);
-            await expect(dictionary).rejects.toEqual(expect.objectContaining(t[2]));
-        }
+    interface TestLoadEntryNotFound {
+        filename: string;
+        expectedError: ErrorResults;
+    }
+
+    test.each`
+        filename                | expectedError
+        ${'./notfound.txt'}     | ${errorENOENT}
+        ${'./notfound.txt.gz'}  | ${errorENOENT}
+        ${'./notfound.trie'}    | ${unknownFormatError}
+        ${'./notfound.trie.gz'} | ${unknownFormatError}
+    `('load not found $filename', async ({ filename, expectedError }: TestLoadEntryNotFound) => {
+        const def: LoadOptions = {
+            path: filename,
+            name: filename,
+        };
+        const dictionary = testing.load(filename, def);
+        await expect(dictionary).rejects.toEqual(expect.objectContaining(expectedError));
     });
 
-    it('loadEntry not found', async () => {
-        const error = { code: 'ENOENT' };
-        const unknownFormatError = new Error('Unknown file format');
-        const tests: [string, LoadOptions, ErrorResults][] = [
-            ['./notfound.txt', {}, error],
-            ['./notfound.txt', { type: 'S' }, error],
-            ['./notfound.txt', { type: 'C' }, error],
-            ['./notfound.txt.gz', {}, error],
-            ['./notfound.txt.gz', { type: 'S' }, error],
-            ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', {}, unknownFormatError],
-            ['./notfound.trie.gz', {}, unknownFormatError],
-        ];
+    test.each`
+        filename                | expectedError
+        ${'./notfound.txt'}     | ${errorENOENT}
+        ${'./notfound.txt.gz'}  | ${errorENOENT}
+        ${'./notfound.trie'}    | ${unknownFormatError}
+        ${'./notfound.trie.gz'} | ${unknownFormatError}
+    `('loadEntry not found $filename', async ({ filename, expectedError }: TestLoadEntryNotFound) => {
+        const def: LoadOptions = {
+            path: filename,
+            name: filename,
+        };
+        const entry = testing.loadEntry(filename, def);
 
-        for (const t of tests) {
-            const entry = testing.loadEntry(t[0], t[1]);
-
-            await expect(entry.state).resolves.toEqual(expect.objectContaining(error));
-            await expect(entry.dictionary).resolves.not.toBe(undefined);
-        }
+        await expect(entry.state).resolves.toEqual(expect.objectContaining(expectedError));
+        await expect(entry.dictionary).resolves.not.toBe(undefined);
     });
 
-    it('loadDictionary not found', async () => {
-        const error = { code: 'ENOENT' };
-        const unknownFormatError = new Error('Unknown file format');
-        const tests: [string, LoadOptions, ErrorResults][] = [
-            ['./notfound.txt', {}, error],
-            ['./notfound.txt', { type: 'S' }, error],
-            ['./notfound.txt', { type: 'C' }, error],
-            ['./notfound.txt.gz', {}, error],
-            ['./notfound.txt.gz', { type: 'S' }, error],
-            ['./notfound.txt.gz', { type: 'C' }, error],
-            ['./notfound.trie', {}, unknownFormatError],
-            ['./notfound.trie.gz', {}, unknownFormatError],
-        ];
-
-        for (const t of tests) {
-            const pDict = loadDictionary(t[0], t[1]);
-            await expect(pDict).resolves.not.toBe(undefined);
-        }
+    test.each`
+        filename
+        ${'./notfound.txt'}
+        ${'./notfound.txt.gz'}
+        ${'./notfound.trie'}
+        ${'./notfound.trie.gz'}
+    `('loadDictionary not found $filename', async ({ filename }: { filename: string }) => {
+        const def: LoadOptions = {
+            path: filename,
+            name: filename,
+        };
+        const dict = await loadDictionary(filename, def);
+        expect(dict.getErrors?.()).toHaveLength(1);
     });
 
     const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');

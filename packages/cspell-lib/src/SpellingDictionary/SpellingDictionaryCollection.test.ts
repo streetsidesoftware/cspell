@@ -57,7 +57,13 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsC, 'wordsC', 'test'),
             createFailedToLoadDictionary(
-                new SpellingDictionaryLoadError('error', './missing.txt', {}, new Error('error'), 'failed to load')
+                new SpellingDictionaryLoadError(
+                    'error',
+                    './missing.txt',
+                    { name: 'error', path: './missing.txt' },
+                    new Error('error'),
+                    'failed to load'
+                )
             ),
         ]);
 
