@@ -60,6 +60,10 @@ let globalSettings: CSpellSettings | undefined;
 
 const cachedFiles = new Map<string, CSpellSettings>();
 
+/**
+ * Read a config file and inject the fileRef.
+ * @param fileRef - filename plus context, injected into the resulting config.
+ */
 function readConfig(fileRef: ImportFileRef): CSpellSettings {
     // cspellConfigExplorerSync
     const { filename } = fileRef;
@@ -69,24 +73,25 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
         if (!r?.config) throw 'not found';
         Object.assign(s, r.config);
     } catch (err) {
-        fileRef.error = new Error(`Failed to read config file: "${filename}"`);
+        fileRef.error = new ImportError(`Failed to read config file: "${filename}"`, err);
     }
     s.__importRef = fileRef;
     return s;
 }
 
-function normalizeSettings(settings: CSpellSettings, pathToSettings: string): CSpellSettings {
+function normalizeSettings(settings: CSpellSettings, pathToSettingsFile: string): CSpellSettings {
     // Fix up dictionaryDefinitions
-    const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettings);
+    const pathToSettings = path.dirname(pathToSettingsFile);
+    const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettingsFile);
     const languageSettings = (settings.languageSettings || []).map((langSetting) => ({
         ...langSetting,
-        dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions || [], pathToSettings),
+        dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions || [], pathToSettingsFile),
     }));
 
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
     const source: Source = settings.source || {
-        name: settings.name || settings.id || pathToSettings,
-        filename: pathToSettings,
+        name: settings.name || settings.id || pathToSettingsFile,
+        filename: pathToSettingsFile,
     };
 
     const fileSettings = { ...settings, dictionaryDefinitions, languageSettings };
@@ -132,9 +137,8 @@ function importSettings(fileRef: ImportFileRef, defaultValues: CSpellSettings = 
     const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
     cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
     const settings: CSpellSettings = { ...defaultValues, id, ...readConfig(importRef) };
-    const pathToSettings = path.dirname(filename);
 
-    Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
+    Object.assign(finalizeSettings, normalizeSettings(settings, filename));
     const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
     finalizeSettings.source = { ...finalizeSrc, filename };
     cachedFiles.set(filename, finalizeSettings);
@@ -167,24 +171,21 @@ async function normalizeSearchForConfigResult(
     searchResult: Promise<SearchForConfigResult | null>
 ): Promise<CSpellSettings> {
     let result: SearchForConfigResult | undefined;
+    let error: Error | undefined;
     try {
         result = (await searchResult) || undefined;
-    } catch (e) {
-        /* empty */
+    } catch (cause) {
+        error = new ImportError(`Failed to resolve file: "${filename}"`, cause);
     }
 
     filename = result?.filepath ?? filename;
-    const importRef: ImportFileRef = { filename };
-    if (!result) {
-        importRef.error = new Error(`Failed to resolve file: "${filename}"`);
-        result = { filepath: filename, config: {} };
-    }
+    const importRef: ImportFileRef = { filename, error };
+    const config = result?.config || {};
 
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
     const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
-    const settings: CSpellSettings = { id, ...result.config };
-    const pathToSettings = path.dirname(filename);
-    Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
+    const settings: CSpellSettings = { id, ...config };
+    Object.assign(finalizeSettings, normalizeSettings(settings, filename));
     return finalizeSettings;
 }
 
@@ -385,7 +386,7 @@ export function getGlobalSettings(): CSpellSettings {
 
         globalSettings = {
             id: 'global_config',
-            ...normalizeSettings(globalConf || {}, '.'),
+            ...normalizeSettings(globalConf || {}, './global_config'),
         };
     }
     return globalSettings;
@@ -459,4 +460,10 @@ function isImportFileRefWithError(ref: ImportFileRef): ref is ImportFileRefWithE
 export function extractImportErrors(settings: CSpellSettings): ImportFileRefWithError[] {
     const imports = mergeImportRefs(settings, {});
     return !imports ? [] : [...imports.values()].filter(isImportFileRefWithError);
+}
+
+class ImportError extends Error {
+    constructor(msg: string, readonly cause?: Error) {
+        super(msg);
+    }
 }

@@ -2,30 +2,28 @@ import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
-import { ReplaceMap } from '@cspell/cspell-types';
 import { readLines } from '../util/fileReader';
 import { stat } from 'fs-extra';
+import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
+import { DictionaryDefinitionPreferred } from '@cspell/cspell-types';
 
 const MAX_AGE = 10000;
 
-export interface LoadOptions {
-    /**
-     * Optional name of the dictionary.
-     */
-    name?: string;
+const loaders: Loaders = {
+    S: loadSimpleWordList,
+    C: loadSimpleWordList,
+    T: loadTrie,
+    default: loadSimpleWordList,
+};
 
-    /**
-     * Type of file:
-     *  S - single word per line,
-     *  C - each line is treated like code (Camel Case is allowed)
-     * Default is C
-     * C is the slowest to load due to the need to split each line based upon code splitting rules.
-     */
-    type?: LoaderType;
-    /** Replacement Map */
-    repMap?: ReplaceMap;
-    /** Use Compounds */
-    useCompounds?: boolean;
+export type LoadOptions = DictionaryDefinitionPreferred;
+
+interface CacheEntry {
+    uri: string;
+    options: LoadOptions;
+    ts: number;
+    state: Promise<Stats | Error>;
+    dictionary: Promise<SpellingDictionary>;
 }
 
 export type LoaderType = keyof Loaders;
@@ -36,28 +34,12 @@ export interface Loaders {
     C: Loader;
     T: Loader;
     default: Loader;
-    [index: string]: Loader | undefined;
-}
-
-const loaders: Loaders = {
-    S: loadSimpleWordList,
-    C: loadSimpleWordList,
-    T: loadTrie,
-    default: loadSimpleWordList,
-};
-
-interface CacheEntry {
-    uri: string;
-    options: LoadOptions;
-    ts: number;
-    state: Promise<Stats | Error>;
-    dictionary: Promise<SpellingDictionary>;
 }
 
 const dictionaryCache = new Map<string, CacheEntry>();
 
-export function loadDictionary(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const key = calcKey(uri, options);
+export function loadDictionary(uri: string, options: DictionaryDefinitionPreferred): Promise<SpellingDictionary> {
+    const key = calcKey(uri);
     const entry = dictionaryCache.get(key);
     if (entry) {
         return entry.dictionary;
@@ -67,8 +49,8 @@ export function loadDictionary(uri: string, options: LoadOptions): Promise<Spell
     return loadedEntry.dictionary;
 }
 
-function calcKey(uri: string, options: LoadOptions) {
-    const loaderType = determineType(uri, options);
+function calcKey(uri: string) {
+    const loaderType = determineType(uri);
     return [uri, loaderType].join('|');
 }
 
@@ -83,7 +65,7 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const pStat = stat(entry.uri).catch((e) => e as Error);
         const [state, oldState] = await Promise.all([pStat, entry.state]);
         if (entry.ts === now && !isEqual(state, oldState)) {
-            dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
+            dictionaryCache.set(calcKey(entry.uri), loadEntry(entry.uri, entry.options));
         }
     }
 }
@@ -104,7 +86,7 @@ function isError(e: StatsOrError): e is Error {
 
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
     const dictionary = load(uri, options).catch((e) =>
-        createFailedToLoadDictionary(determineName(uri, options), uri, 'error', [e])
+        createFailedToLoadDictionary(new SpellingDictionaryLoadError(uri, options, e, 'failed to load'))
     );
     return {
         uri,
@@ -115,15 +97,14 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
     };
 }
 
-function determineType(uri: string, options: LoadOptions): LoaderType {
+function determineType(uri: string): LoaderType {
     const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'S';
-    const { type = defType } = options;
     const regTrieTest = /\.trie\b/i;
-    return regTrieTest.test(uri) ? 'T' : type;
+    return regTrieTest.test(uri) ? 'T' : defType;
 }
 
 function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const type = determineType(uri, options);
+    const type = determineType(uri);
     const loader = loaders[type] || loaders.default;
     return loader(uri, options);
 }

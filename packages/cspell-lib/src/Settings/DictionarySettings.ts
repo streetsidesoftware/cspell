@@ -2,6 +2,11 @@ import { DictionaryDefinition, DictionaryId, DictionaryDefinitionPreferred } fro
 import * as path from 'path';
 import { resolveFile } from '../util/resolveFile';
 
+export interface DictionaryDefinitionWithSource extends DictionaryDefinitionPreferred {
+    /** The path to the config file that contains this dictionary definition */
+    __source: string;
+}
+
 export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
 
 export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDefinition[]): DefMapArrayItem[] {
@@ -36,18 +41,42 @@ function getFullPathName(def: DictionaryDefinition) {
 
 export function normalizePathForDictDefs(
     defs: DictionaryDefinition[],
-    defaultPath: string
-): DictionaryDefinitionPreferred[] {
-    return defs.map((def) => normalizePathForDictDef(def, defaultPath));
+    pathToSettingsFile: string
+): DictionaryDefinitionWithSource[] {
+    return defs.map((def) => normalizePathForDictDef(def, pathToSettingsFile));
 }
 
-export function normalizePathForDictDef(def: DictionaryDefinition, defaultPath: string): DictionaryDefinitionPreferred {
+export function normalizePathForDictDef(
+    def: DictionaryDefinition,
+    pathToSettingsFile: string
+): DictionaryDefinitionWithSource {
+    const defaultPath = path.dirname(pathToSettingsFile);
     const { path: relPath = '', file = '', ...rest } = def;
     const filePath = path.join(relPath, file);
+    const name = determineName(filePath, def);
+
+    if (isDictionaryDefinitionWithSource(def)) {
+        if (def.__source !== pathToSettingsFile) {
+            throw new Error('Trying to normalize a dictionary definition with a different source.');
+        }
+        return def;
+    }
 
     const r = resolveFile(filePath, defaultPath);
     return {
         ...rest,
+        name,
         path: r.filename,
+        __source: pathToSettingsFile,
     };
+}
+
+export function isDictionaryDefinitionWithSource(
+    d: DictionaryDefinition | DictionaryDefinitionWithSource
+): d is DictionaryDefinitionWithSource {
+    return (d as DictionaryDefinitionWithSource).__source !== undefined;
+}
+
+function determineName(filename: string, options: DictionaryDefinition): string {
+    return options.name || path.basename(filename);
 }

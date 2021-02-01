@@ -1,9 +1,14 @@
 import * as Dictionaries from './Dictionaries';
-import { getDefaultSettings } from '../Settings';
+import { getDefaultSettings, loadConfig } from '../Settings';
 import * as path from 'path';
 import * as fs from 'fs-extra';
+import { CSpellUserSettings } from '@cspell/cspell-types';
+import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 // cspell:ignore café rhône
+
+const root = path.resolve(__dirname, '../..');
+const samples = path.join(root, 'samples');
 
 describe('Validate getDictionary', () => {
     test('tests that userWords are included in the dictionary', async () => {
@@ -120,4 +125,42 @@ describe('Validate getDictionary', () => {
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
     });
+
+    interface TestLoadFromConfig {
+        configFile: string;
+        expectedErrors: Error[];
+    }
+
+    test.each`
+        configFile                              | expectedErrors
+        ${sample('yaml-config/cspell.yaml')}    | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
+        ${sample('.cspell.json')}               | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
+        ${sample('js-config/cspell.config.js')} | ${[]}
+    `(
+        'Load related dictionaries for config $configFile',
+        async ({ configFile, expectedErrors }: TestLoadFromConfig) => {
+            const settings = await loadConfig(configFile);
+            if (!settings) {
+                expect(settings).toBeDefined();
+                return;
+            }
+            // Enable ALL dictionaries
+            settings.dictionaries = getAllDictionaryNames(settings);
+            const d = await Dictionaries.getDictionary(settings);
+            const errors = d.getErrors();
+            expect(errors).toHaveLength(expectedErrors.length);
+            errors.forEach((e) => expect(isSpellingDictionaryLoadError(e)).toBe(true));
+            expect(errors).toEqual(expect.arrayContaining(expectedErrors.map((e) => expect.objectContaining(e))));
+        }
+    );
 });
+
+function sample(file: string): string {
+    return path.join(samples, file);
+}
+
+function getAllDictionaryNames(settings: CSpellUserSettings): string[] {
+    const { dictionaries = [], dictionaryDefinitions = [] } = settings;
+
+    return dictionaries.concat(dictionaryDefinitions.map((d) => d.name));
+}

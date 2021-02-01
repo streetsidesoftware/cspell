@@ -82,7 +82,7 @@ describe('Validate the Application', () => {
         expect(errors).toContainEqual(
             expect.arrayContaining([
                 expect.objectContaining({
-                    message: expect.stringContaining('no such file'),
+                    message: expect.stringContaining('failed to load'),
                 }),
             ])
         );

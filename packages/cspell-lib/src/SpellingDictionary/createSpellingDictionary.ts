@@ -2,6 +2,7 @@ import { IterableLike } from '../util/IterableLike';
 import { parseDictionaryLines, buildTrieFast } from 'cspell-trie-lib';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
+import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 export function createSpellingDictionary(
     wordList: string[] | IterableLike<string>,
@@ -15,16 +16,13 @@ export function createSpellingDictionary(
     return new SpellingDictionaryFromTrie(trie, name, options, source);
 }
 
-export function createFailedToLoadDictionary(
-    name: string,
-    source: string,
-    type: string,
-    errors: Error[]
-): SpellingDictionary {
+export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError): SpellingDictionary {
+    const { options, uri: source } = error;
+    const errors = [error];
     return {
-        name,
+        name: options.name,
         source,
-        type,
+        type: 'error',
         has: () => false,
         suggest: () => [],
         mapWord: (a) => a,
@@ -32,7 +30,7 @@ export function createFailedToLoadDictionary(
             return;
         },
         size: 0,
-        options: {},
+        options,
         isDictionaryCaseSensitive: false,
         getErrors: () => errors,
     };

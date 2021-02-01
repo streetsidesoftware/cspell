@@ -4,6 +4,7 @@ import * as fsp from 'fs-extra';
 import * as path from 'path';
 import * as os from 'os';
 import { getDefaultSettings } from './DefaultSettings';
+import { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
 
 const defaultSettings = getDefaultSettings();
 
@@ -45,24 +46,65 @@ describe('Validate DictionarySettings', () => {
         const dictIds = defaultDicts.map((def) => def.name);
         const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
         const access = mapDefs
-            .map((p) => p[1])
+            .map(([_, def]) => def)
             .map((def) => def.path!)
             .map((path) => fsp.access(path));
         expect(mapDefs.length).toBeGreaterThan(0);
         return Promise.all(access);
     });
 
-    test('tests normalizing the dictionary paths', () => {
+    test('tests default dictionary settings have been normalized', () => {
         const { dictionaryDefinitions } = defaultSettings;
-        expect(dictionaryDefinitions).not.toHaveLength(0);
-        const defs = DictSettings.normalizePathForDictDefs(dictionaryDefinitions!, '.');
-        expect(defs.length).toBe(dictionaryDefinitions!.length);
+        expect(dictionaryDefinitions?.length).toBeGreaterThan(1);
+        dictionaryDefinitions?.forEach((def) => {
+            expect(DictSettings.isDictionaryDefinitionWithSource(def)).toBe(true);
+            expect(path.isAbsolute(def.path || '')).toBe(true);
+        });
+    });
 
+    test('tests normalizing home dir', () => {
+        const pathToConfig = './cspell.json';
         const basePath = path.join('some', 'dir', 'words.txt');
-        const legacyDictionaryDefinitions = (dictionaryDefinitions || []).map((a) => ({ ...a }));
-        legacyDictionaryDefinitions[0].path = path.join('~', basePath);
-        legacyDictionaryDefinitions[0].file = '';
-        const tildeDefs = DictSettings.normalizePathForDictDefs(legacyDictionaryDefinitions!, '.');
-        expect(tildeDefs[0].path).toBe(path.join(os.homedir(), basePath));
+        const absolutePath = path.join(os.homedir(), basePath);
+        const def: DictionaryDefinition = {
+            name: 'words',
+            path: path.join('~', basePath),
+        };
+
+        const nDef = DictSettings.normalizePathForDictDef(def, pathToConfig);
+        expect(nDef).toEqual({
+            name: 'words',
+            path: absolutePath,
+            __source: pathToConfig,
+        });
+
+        const legacyDef: DictionaryDefinitionLegacy = {
+            name: 'words',
+            path: path.dirname(path.join('~', basePath)),
+            file: path.basename(basePath),
+        };
+
+        const nLegacyDef = DictSettings.normalizePathForDictDef(legacyDef, pathToConfig);
+
+        expect(nLegacyDef).toEqual(nDef);
+    });
+
+    test('Double normalize', () => {
+        const configFile = './cspell.json';
+        const def: DictionaryDefinition = {
+            name: 'Text Dict',
+            path: './words.txt',
+        };
+
+        const normalizedDef = DictSettings.normalizePathForDictDef(def, configFile);
+        expect(DictSettings.isDictionaryDefinitionWithSource(normalizedDef)).toBe(true);
+        expect(normalizedDef).toEqual(expect.objectContaining({ __source: configFile }));
+
+        const normalizedDef2 = DictSettings.normalizePathForDictDef(normalizedDef, configFile);
+        expect(normalizedDef2).toBe(normalizedDef);
+
+        expect(() => DictSettings.normalizePathForDictDef(normalizedDef, './different.config.json')).toThrowError(
+            'Trying to normalize a dictionary definition with a different source.'
+        );
     });
 });

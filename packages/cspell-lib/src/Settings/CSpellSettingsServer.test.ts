@@ -14,7 +14,7 @@ import {
     readRawSettings,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
-import { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
 
 const samplesDir = path.resolve(path.join(__dirname, '../../samples'));
@@ -234,7 +234,7 @@ describe('Validate Overrides', () => {
 });
 
 describe('Validate search/load config files', () => {
-    function importError(filename: string): ImportFileRefWithError {
+    function importRefWithError(filename: string): ImportFileRefWithError {
         return {
             filename,
             error: new Error(`Failed to resolve file: "${filename}"`),
@@ -252,11 +252,26 @@ describe('Validate search/load config files', () => {
         filename: string | ImportFileRefWithError,
         values: CSpellSettingsWithSourceTrace = {}
     ): CSpellSettingsWithSourceTrace {
-        const __importRef = typeof filename === 'string' ? { filename, error: undefined } : filename;
+        const __importRef = importFileRef(filename);
         return {
             __importRef,
             ...values,
         };
+    }
+
+    /**
+     * Create an ImportFileRef that has an `error` field.
+     */
+    function importFileRef(filenameOrRef: string | ImportFileRef | ImportFileRefWithError): ImportFileRef {
+        const { filename, error } = iRef(filenameOrRef);
+        return { filename, error };
+    }
+
+    /**
+     * Create an ImportFileRef with an optional `error` field.
+     */
+    function iRef(filenameOrRef: string | ImportFileRef | ImportFileRefWithError): ImportFileRef {
+        return typeof filenameOrRef === 'string' ? { filename: filenameOrRef } : filenameOrRef;
     }
 
     function s(filename: string): string {
@@ -266,21 +281,31 @@ describe('Validate search/load config files', () => {
     interface TestSearchFrom {
         dir: string;
         expectedConfig: CSpellSettingsWithSourceTrace;
+        expectedImportErrors: string[];
     }
 
     test.each`
-        dir                         | expectedConfig
-        ${samplesSrc}               | ${cfg(s('.cspell.json'))}
-        ${s('bug-fixes/bug345.ts')} | ${cfg(s('bug-fixes/cspell.json'))}
-        ${s('linked')}              | ${cfg(s('linked/cspell.config.js'))}
-        ${s('yaml-config')}         | ${cfg(s('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })}
-    `('Search from $dir', async ({ dir, expectedConfig }: TestSearchFrom) => {
+        dir                         | expectedConfig                                                      | expectedImportErrors
+        ${samplesSrc}               | ${cfg(s('.cspell.json'))}                                           | ${[]}
+        ${s('bug-fixes/bug345.ts')} | ${cfg(s('bug-fixes/cspell.json'))}                                  | ${[]}
+        ${s('linked')}              | ${cfg(s('linked/cspell.config.js'))}                                | ${[]}
+        ${s('yaml-config')}         | ${cfg(s('yaml-config/cspell.yaml'), { id: 'Yaml Example Config' })} | ${['cspell-imports.json']}
+    `('Search from $dir', async ({ dir, expectedConfig, expectedImportErrors }: TestSearchFrom) => {
         const searchResult = await searchForConfig(dir);
-        expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
+        expect(searchResult).toEqual(expect.objectContaining(expectedConfig));
         if (searchResult?.__importRef) {
             const loadResult = await loadConfig(searchResult.__importRef?.filename);
             expect(loadResult).toEqual(searchResult);
         }
+        const errors = extractImportErrors(searchResult || {});
+        expect(errors).toHaveLength(expectedImportErrors.length);
+        expect(errors).toEqual(
+            expect.arrayContaining(
+                expectedImportErrors.map((filename) =>
+                    expect.objectContaining({ filename: expect.stringContaining(filename) })
+                )
+            )
+        );
     });
 
     interface TestLoadConfig {
@@ -290,8 +315,8 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                               | expectedConfig
-        ${samplesSrc}                      | ${cfg(importError(samplesSrc))}
-        ${s('bug-fixes')}                  | ${cfg(importError(s('bug-fixes')))}
+        ${samplesSrc}                      | ${cfg(importRefWithError(samplesSrc))}
+        ${s('bug-fixes')}                  | ${cfg(importRefWithError(s('bug-fixes')))}
         ${s('linked/cspell.config.js')}    | ${cfg(s('linked/cspell.config.js'))}
         ${s('js-config/cspell.config.js')} | ${cfg(s('js-config/cspell.config.js'))}
     `('Load from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
