@@ -2,42 +2,12 @@ import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import * as path from 'path';
-import { ReplaceMap } from '@cspell/cspell-types';
+import { Loaders, LoaderType, LoadOptions } from './DictionaryLoaderTypes';
 import { readLines } from '../util/fileReader';
 import { stat } from 'fs-extra';
+import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 const MAX_AGE = 10000;
-
-export interface LoadOptions {
-    /**
-     * Optional name of the dictionary.
-     */
-    name?: string;
-
-    /**
-     * Type of file:
-     *  S - single word per line,
-     *  C - each line is treated like code (Camel Case is allowed)
-     * Default is C
-     * C is the slowest to load due to the need to split each line based upon code splitting rules.
-     */
-    type?: LoaderType;
-    /** Replacement Map */
-    repMap?: ReplaceMap;
-    /** Use Compounds */
-    useCompounds?: boolean;
-}
-
-export type LoaderType = keyof Loaders;
-export type Loader = (filename: string, options: LoadOptions) => Promise<SpellingDictionary>;
-
-export interface Loaders {
-    S: Loader;
-    C: Loader;
-    T: Loader;
-    default: Loader;
-    [index: string]: Loader | undefined;
-}
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
@@ -104,7 +74,9 @@ function isError(e: StatsOrError): e is Error {
 
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
     const dictionary = load(uri, options).catch((e) =>
-        createFailedToLoadDictionary(determineName(uri, options), uri, 'error', [e])
+        createFailedToLoadDictionary(
+            new SpellingDictionaryLoadError(determineName(uri, options), uri, options, e, 'failed to load')
+        )
     );
     return {
         uri,

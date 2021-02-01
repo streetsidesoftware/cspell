@@ -60,6 +60,10 @@ let globalSettings: CSpellSettings | undefined;
 
 const cachedFiles = new Map<string, CSpellSettings>();
 
+/**
+ * Read a config file and inject the fileRef.
+ * @param fileRef - filename plus context, injected into the resulting config.
+ */
 function readConfig(fileRef: ImportFileRef): CSpellSettings {
     // cspellConfigExplorerSync
     const { filename } = fileRef;
@@ -69,7 +73,7 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
         if (!r?.config) throw 'not found';
         Object.assign(s, r.config);
     } catch (err) {
-        fileRef.error = new Error(`Failed to read config file: "${filename}"`);
+        fileRef.error = new ImportError(`Failed to read config file: "${filename}"`, err);
     }
     s.__importRef = fileRef;
     return s;
@@ -167,16 +171,16 @@ async function normalizeSearchForConfigResult(
     searchResult: Promise<SearchForConfigResult | null>
 ): Promise<CSpellSettings> {
     let result: SearchForConfigResult | undefined;
+    let error: Error | undefined;
     try {
         result = (await searchResult) || undefined;
-    } catch (e) {
-        /* empty */
+    } catch (cause) {
+        error = new ImportError(`Failed to resolve file: "${filename}"`, cause);
     }
 
     filename = result?.filepath ?? filename;
-    const importRef: ImportFileRef = { filename };
+    const importRef: ImportFileRef = { filename, error };
     if (!result) {
-        importRef.error = new Error(`Failed to resolve file: "${filename}"`);
         result = { filepath: filename, config: {} };
     }
 
@@ -459,4 +463,10 @@ function isImportFileRefWithError(ref: ImportFileRef): ref is ImportFileRefWithE
 export function extractImportErrors(settings: CSpellSettings): ImportFileRefWithError[] {
     const imports = mergeImportRefs(settings, {});
     return !imports ? [] : [...imports.values()].filter(isImportFileRefWithError);
+}
+
+class ImportError extends Error {
+    constructor(msg: string, readonly cause?: Error) {
+        super(msg);
+    }
 }

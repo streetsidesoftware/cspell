@@ -53,7 +53,7 @@ describe('Verify trace', () => {
                 dictSource: 'missing.txt',
                 errors: expect.arrayContaining([
                     expect.objectContaining({
-                        message: expect.stringContaining('ENOENT: no such file'),
+                        message: expect.stringContaining('failed to load'),
                     }),
                 ]),
             })

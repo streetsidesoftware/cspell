@@ -1,4 +1,5 @@
-import { testing, LoadOptions, loadDictionary, refreshCacheEntries } from './DictionaryLoader';
+import { LoadOptions } from './DictionaryLoaderTypes';
+import { testing, loadDictionary, refreshCacheEntries } from './DictionaryLoader';
 import * as path from 'path';
 jest.mock('../util/logger');
 

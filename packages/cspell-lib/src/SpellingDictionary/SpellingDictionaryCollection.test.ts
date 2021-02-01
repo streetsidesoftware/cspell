@@ -3,6 +3,7 @@ import { SpellingDictionaryCollection, createCollectionP, createCollection } fro
 import { CompoundWordsMethod } from './SpellingDictionaryMethods';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [
@@ -55,7 +56,9 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test'),
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
             createSpellingDictionary(wordsC, 'wordsC', 'test'),
-            createFailedToLoadDictionary('error', './missing.txt', 'error', [new Error('error')]),
+            createFailedToLoadDictionary(
+                new SpellingDictionaryLoadError('error', './missing.txt', {}, new Error('error'), 'failed to load')
+            ),
         ]);
 
         const dictCollection = createCollection(dicts, 'test', ['Avocado']);
