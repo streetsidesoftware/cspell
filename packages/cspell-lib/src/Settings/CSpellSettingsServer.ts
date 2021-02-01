@@ -180,13 +180,11 @@ async function normalizeSearchForConfigResult(
 
     filename = result?.filepath ?? filename;
     const importRef: ImportFileRef = { filename, error };
-    if (!result) {
-        result = { filepath: filename, config: {} };
-    }
+    const config = result?.config || {};
 
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
     const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
-    const settings: CSpellSettings = { id, ...result.config };
+    const settings: CSpellSettings = { id, ...config };
     const pathToSettings = path.dirname(filename);
     Object.assign(finalizeSettings, normalizeSettings(settings, pathToSettings));
     return finalizeSettings;
