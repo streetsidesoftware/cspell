@@ -79,7 +79,7 @@ export class GlobMatcher {
     /**
      * Construct a `.gitignore` emulator
      * @param patterns - the contents of a `.gitignore` style file or an array of individual glob rules.
-     * @param options - to set the root and othe options
+     * @param options - to set the root and other options
      */
     constructor(patterns: string | string[], options?: GlobMatchOptions);
     constructor(patterns: string | string[], rootOrOptions?: string | GlobMatchOptions);
