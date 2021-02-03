@@ -85,7 +85,7 @@ describe('Validate Micromatch assumptions', () => {
             root = root ? pathInstance.normalize(pathInstance.join(rootPrefix, root)) : root;
             filename = filename.replace('${cwd}', cwd);
             const fileIsAbsolute = filename.startsWith('/');
-            filename = path.normalize(fileIsAbsolute ? pathInstance.join(rootPrefix, filename) : filename);
+            filename = pathInstance.normalize(fileIsAbsolute ? pathInstance.join(rootPrefix, filename) : filename);
             test(`test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${
                 expected ? 'T' : 'F'
             }`, () => {
