@@ -1,7 +1,20 @@
-import { GlobMatcher, GlobMatch } from './GlobMatcher';
+import { GlobMatcher, GlobMatch, PathInterface, GlobMatchOptions } from './GlobMatcher';
 
 import * as path from 'path';
 import mm = require('micromatch');
+
+const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
+const defaultCwdPosix = '/user/home/project/testing';
+
+const pathWin32: PathInterface = {
+    ...path.win32,
+    resolve: (...paths) => path.win32.resolve(defaultCwdWin32, ...paths),
+};
+
+const pathPosix: PathInterface = {
+    ...path.posix,
+    resolve: (...paths) => path.posix.resolve(defaultCwdPosix, ...paths),
+};
 
 describe('Validate assumptions', () => {
     test('path relative', () => {
@@ -63,14 +76,16 @@ describe('Validate Micromatch assumptions', () => {
     });
 });
 
-[path.posix, path.win32].forEach((pathInstance) => {
-    describe(`Validate GlobMatcher ${pathInstance === path.win32 ? 'Windows' : 'Posix'}`, () => {
+[pathPosix, pathWin32].forEach((pathInstance) => {
+    describe(`Validate GlobMatcher ${pathInstance === pathWin32 ? 'Windows' : 'Posix'}`, () => {
         tests().forEach(([patterns, root, filename, expected, description], index) => {
-            const rootPrefix = pathInstance === path.win32 ? 'C:' : '';
+            const rootPrefix = pathInstance === pathWin32 ? 'C:\\' : '';
+            const cwd = pathInstance === pathWin32 ? defaultCwdWin32 : defaultCwdPosix;
+            root = root?.replace('${cwd}', cwd);
             root = root ? pathInstance.normalize(pathInstance.join(rootPrefix, root)) : root;
-            filename = root
-                ? pathInstance.normalize(pathInstance.join(rootPrefix, filename))
-                : pathInstance.normalize(filename);
+            filename = filename.replace('${cwd}', cwd);
+            const fileIsAbsolute = filename.startsWith('/');
+            filename = pathInstance.normalize(fileIsAbsolute ? pathInstance.join(rootPrefix, filename) : filename);
             test(`test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${
                 expected ? 'T' : 'F'
             }`, () => {
@@ -114,7 +129,7 @@ describe('Tests .gitignore file contents', () => {
     t(root + 'src/code.test.ts', true, 'Ensure that test.ts files are not allowed');
     t(root + 'src/code.spec.ts', true, 'Ensure that spec.ts files are not allowed');
     t('/Users/guest/code/' + 'src/code.test.ts', false, 'Ensure that test files in a different root are allowed');
-    t('/Users/guest/code/' + 'src/code.js', true, 'Ensure *.js files are never allowed even in a different root.');
+    t('/Users/guest/code/' + 'src/code.js', false, 'Ensure *.js files are allowed under a different root.');
     t(root + 'node_modules/cspell/code.ts', true, 'Ensure that node modules are not allowed in the current root.');
     t(
         root + 'nested/node_modules/cspell/code.ts',
@@ -149,21 +164,68 @@ describe('Tests .gitignore file contents', () => {
     );
 });
 
-function tests(): [string[], string | undefined, string, boolean, string][] {
-    return [
-        [['*.json'], undefined, '/settings.json', true, '*.json'],
-        [['.vscode'], undefined, '/.vscode/settings.json', true, '.vscode'],
-        [['/*.json'], undefined, '/settings.json', true, 'Matches only root level files, /*.json'], // .
-        [['/*.json'], undefined, '/src/settings.json', false, 'Matches only root level files, /*.json'], // .
-        [['*.js'], undefined, '/src/settings.js', true, '// Matches nested files, *.js'],
-        [['.vscode/'], undefined, '/.vscode/settings.json', true, '.vscode/'],
-        [['.vscode/'], undefined, '/.vscode', true, '.vscode/'], // This one shouldn't match, but micromatch says it should. :-(
-        [['.vscode/'], undefined, '/src/.vscode/settings.json', false, "shouldn't match nested .vscode/"],
-        [['**/.vscode/'], undefined, '/src/.vscode/settings.json', true, 'should match nested .vscode/'],
-        [['**/.vscode'], undefined, '/src/.vscode/settings.json', false, 'should not match nested **/.vscode'],
-        [['**/.vscode/**'], undefined, '/src/.vscode/settings.json', true, 'should match nested **/.vscode'],
+describe('Validate Options', () => {
+    interface TestCase {
+        pattern: string;
+        text: string;
+        options: string | GlobMatchOptions | undefined;
+        expected: Partial<GlobMatch> | boolean;
+    }
+    test.each`
+        pattern                   | text                                     | options           | expected
+        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{}}             | ${{ matched: false }}
+        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}  | ${{ matched: true, glob: '*.yaml' }}
+        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}  | ${true}
+        ${'.github/**/*.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}  | ${true}
+        ${'.github/**/*.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{ dot: false }} | ${true}
+        ${'.github/**/*.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{}}             | ${true}
+        ${'.github/**/*.yaml'}    | ${'.github/test.yaml'}                   | ${{}}             | ${true}
+        ${'.github/**/*.yaml'}    | ${'package/.github/workflows/test.yaml'} | ${{}}             | ${false}
+        ${'**/.github/**/*.yaml'} | ${'package/.github/workflows/test.yaml'} | ${{}}             | ${true}
+        ${'.github'}              | ${'package/.github/workflows/test.yaml'} | ${{}}             | ${true}
+        ${'**/.github/**'}        | ${'package/.github/workflows/test.yaml'} | ${{}}             | ${true}
+        ${'package/**'}           | ${'package/.github/workflows/test.yaml'} | ${{}}             | ${false}
+        ${'package/**'}           | ${'package/.github/workflows/test.yaml'} | ${{ dot: true }}  | ${true}
+        ${'workflows'}            | ${'package/.github/workflows/test.yaml'} | ${{}}             | ${false}
+        ${'workflows'}            | ${'package/.github/workflows/test.yaml'} | ${{ dot: true }}  | ${true}
+        ${'*.yaml|!test.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}  | ${{ matched: false, glob: '!test.yaml', isNeg: true }}
+        ${'*.{!yml}'}             | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}  | ${false}
+    `('Test options: $pattern, $text, $options', ({ pattern, text, options, expected }: TestCase) => {
+        const root = '/Users/code/project/cspell/';
+        const patterns = pattern.split('|');
+        options == options ?? root;
+        if (typeof options !== 'string' && typeof options !== 'undefined') {
+            options.root = options.root ?? root;
+        }
+        expected = typeof expected === 'boolean' ? { matched: expected } : expected;
+        const matcher = new GlobMatcher(patterns, options);
+        const r = matcher.matchEx(text);
+        expect(r).toEqual(expect.objectContaining(expected));
+    });
+});
+
+type TestCase = [string[] | string, string | undefined, string, boolean, string];
+
+function tests(): TestCase[] {
+    const from = 70;
+    const limit = 100;
+
+    const testCases: TestCase[] = [
+        [['*.json'], undefined, './settings.json', true, '*.json'],
+        [['*.json'], undefined, 'settings.json', true, '*.json'],
+        [['*.json'], undefined, '${cwd}/settings.json', true, '*.json'],
+        [['.vscode'], undefined, '.vscode/settings.json', true, '.vscode'],
+        [['/*.json'], '/', '/settings.json', true, 'Matches only root level files, /*.json'], // .
+        [['/*.json'], undefined, '/src/settings.json', false, 'Matches pattern but not cwd /*.json'], // .
+        [['*.js'], undefined, '${cwd}/src/settings.js', true, '// Matches nested files, *.js'],
+        [['.vscode/'], undefined, '${cwd}/.vscode/settings.json', true, '.vscode/'],
+        [['.vscode/'], undefined, '${cwd}/.vscode', true, '.vscode/'],
+        [['.vscode/'], undefined, '${cwd}/src/.vscode/settings.json', false, "shouldn't match nested .vscode/"],
+        [['**/.vscode/'], undefined, '${cwd}/src/.vscode/settings.json', true, 'should match nested .vscode/'],
+        [['**/.vscode'], undefined, '${cwd}/src/.vscode/settings.json', false, 'should not match nested **/.vscode'],
+        [['**/.vscode/**'], undefined, '${cwd}/src/.vscode/settings.json', true, 'should match nested **/.vscode'],
         [['/User/user/Library/**'], undefined, '/src/User/user/Library/settings.json', false, 'No match'],
-        [['/User/user/Library/**'], undefined, '/User/user/Library/settings.json', true, 'Match system root'],
+        [['/User/user/Library/**'], '/', '/User/user/Library/settings.json', true, 'Match system root'],
 
         [['*.json'], undefined, 'settings.json', true, '*.json'],
         [['.vscode'], undefined, '.vscode/settings.json', true, '.vscode'],
@@ -171,7 +233,7 @@ function tests(): [string[], string | undefined, string, boolean, string][] {
         [['/*.json'], undefined, 'src/settings.json', false, 'Matches only root level files, /*.json'], // .
         [['*.js'], undefined, 'src/settings.js', true, '// Matches nested files, *.js'],
         [['.vscode/'], undefined, '.vscode/settings.json', true, '.vscode/'],
-        [['.vscode/'], undefined, '.vscode', true, '.vscode/'], // This one shouldn't match, but micromatch says it should. :-(
+        [['.vscode/'], undefined, '.vscode', true, '.vscode/'],
         [['.vscode/'], undefined, 'src/.vscode/settings.json', false, "shouldn't match nested .vscode/"],
         [['**/.vscode/'], undefined, 'src/.vscode/settings.json', true, 'should match nested .vscode/'],
         [['**/.vscode'], undefined, 'src/.vscode/settings.json', false, 'should not match nested **/.vscode'],
@@ -217,65 +279,15 @@ function tests(): [string[], string | undefined, string, boolean, string][] {
             ['/User/user/Library/**'],
             '/User/code/src',
             '/User/user/Library/settings.json',
-            true,
-            'With Root Match system root',
+            false,
+            'File has but does not match root',
         ],
         [['tests/*.test.ts'], '/User/code/src', 'tests/code.test.ts', true, 'Relative file with Root'],
         [['tests/**/*.test.ts'], '/User/code/src', 'tests/nested/code.test.ts', true, 'Relative file with Root'],
 
         // With non matching Root
-        [['*.json'], '/User/lib/src', '/User/code/src/settings.json', true, 'With non matching Root *.json'],
-        [['.vscode'], '/User/lib/src', '/User/code/src/.vscode/settings.json', true, 'With non matching Root .vscode'],
-        [
-            ['/*.json'],
-            '/User/lib/src',
-            '/User/code/src/settings.json',
-            false,
-            'With non matching Root Matches only root level files, /*.json',
-        ], // .
-        [
-            ['*.js'],
-            '/User/lib/src',
-            '/User/code/src/src/settings.js',
-            true,
-            'With non matching Root Matches nested files, *.js',
-        ],
-        [
-            ['.vscode/'],
-            '/User/lib/src',
-            '/User/code/src/.vscode/settings.json',
-            false,
-            'With non matching Root .vscode/',
-        ],
-        [['.vscode/'], '/User/lib/src', '/User/code/src/.vscode', false, 'With non matching Root .vscode/'], // This one shouldn't match, but micromatch says it should. :-(
-        [
-            ['.vscode/'],
-            '/User/lib/src',
-            '/User/code/src/src/.vscode/settings.json',
-            false,
-            "With non matching Root shouldn't match nested .vscode/",
-        ],
-        [
-            ['**/.vscode/'],
-            '/User/lib/src',
-            '/User/code/src/src/.vscode/settings.json',
-            true,
-            'With non matching Root should match nested .vscode/',
-        ],
-        [
-            ['/User/user/Library/**'],
-            '/User/lib/src',
-            '/src/User/user/Library/settings.json',
-            false,
-            'With non matching Root No match',
-        ],
-        [
-            ['/User/user/Library/**'],
-            '/User/lib/src',
-            '/User/user/Library/settings.json',
-            true,
-            'With non matching Root Match system root',
-        ],
+        [['*.json'], '/User/lib/src', '/User/code/src/settings.json', false, 'With non matching Root *.json'],
+        [['.vscode'], '/User/lib/src', '/User/code/src/.vscode/settings.json', false, 'With non matching Root .vscode'],
 
         // Root with trailing /
         [['*.json'], '/User/code/src/', '/User/code/src/settings.json', true, '*.json'],
@@ -305,7 +317,7 @@ function tests(): [string[], string | undefined, string, boolean, string][] {
             'should match nested .vscode/',
         ],
         [['/User/user/Library/**'], '/User/code/src/', '/src/User/user/Library/settings.json', false, 'No match'],
-        [['/User/user/Library/**'], '/User/code/src/', '/User/user/Library/settings.json', true, 'Match system root'],
+        [['/User/user/Library/**'], '/User/code/src/', '/User/user/Library/settings.json', false, 'Match system root'],
 
         // System Root /
         [['*.json'], '/', '/User/code/src/settings.json', true, '*.json'],
@@ -313,54 +325,58 @@ function tests(): [string[], string | undefined, string, boolean, string][] {
         [['/*.json'], '/', '/settings.json', true, 'Matches only root level files, /*.json'], // .
         [['*.js'], '/', '/src/settings.js', true, '// Matches nested files, *.js'],
         [['.vscode/'], '/', '/.vscode/settings.json', true, '.vscode/'],
-        [['.vscode/'], '/', '/.vscode', true, '.vscode/'], // This one shouldn't match, but micromatch says it should. :-(
+        [['.vscode/'], '/', '/.vscode', true, '.vscode/'],
         [['.vscode/'], '/', '/src/.vscode/settings.json', false, "shouldn't match nested .vscode/"],
         [['**/.vscode/'], '/', '/src/.vscode/settings.json', true, 'should match nested .vscode/'],
         [['/User/user/Library/**'], '/', '/src/User/user/Library/settings.json', false, 'No match'],
         [['/User/user/Library/**'], '/', '/User/user/Library/settings.json', true, 'Match system root'],
 
         // Empty Root /
-        [['*.json'], '', '/User/code/src/settings.json', true, '*.json'],
-        [['.vscode'], '', '/.vscode/settings.json', true, '.vscode'],
-        [['/*.json'], '', '/settings.json', true, 'Matches only root level files, /*.json'], // .
-        [['*.js'], '', '/src/settings.js', true, '// Matches nested files, *.js'],
-        [['.vscode/'], '', '/.vscode/settings.json', true, '.vscode/'],
-        [['.vscode/'], '', '/.vscode', true, '.vscode/'], // This one shouldn't match, but micromatch says it should. :-(
-        [['.vscode/'], '', '/src/.vscode/settings.json', false, "shouldn't match nested .vscode/"],
-        [['**/.vscode/'], '', '/src/.vscode/settings.json', true, 'should match nested .vscode/'],
-        [['/User/user/Library/**'], '', '/src/User/user/Library/settings.json', false, 'No match'],
-        [['/User/user/Library/**'], '', '/User/user/Library/settings.json', true, 'Match system root'],
+        [['*.json'], '', '${cwd}/User/code/src/settings.json', true, '*.json'],
+        [['.vscode'], '', '${cwd}/.vscode/settings.json', true, '.vscode'],
+        [['/*.json'], '', '${cwd}/settings.json', true, 'Matches only root level files, /*.json'], // .
+        [['*.js'], '', '${cwd}/src/settings.js', true, '// Matches nested files, *.js'],
+        [['.vscode/'], '', '${cwd}/.vscode/settings.json', true, '.vscode/'],
+        [['.vscode/'], '', '${cwd}/.vscode', true, '.vscode/'],
+        [['.vscode/'], '', '${cwd}/src/.vscode/settings.json', false, "shouldn't match nested .vscode/"],
+        [['**/.vscode/'], '', '${cwd}/src/.vscode/settings.json', true, 'should match nested .vscode/'],
+        [['/User/user/Library/**'], '', '${cwd}/src/User/user/Library/settings.json', false, 'No match'],
+        [['/User/user/Library/**'], '', '${cwd}/User/user/Library/settings.json', true, 'Match system root'],
 
         // Special characters
         [['#'], '', '/User/code/src/settings.json', false, 'Only comments'],
         [[' #'], '', '/User/code/src/settings.json', false, 'Only comments'],
-        [['#', '*.json', '#'], '', '/User/code/src/settings.json', true, 'Comments'],
-        [['#', '*.json', '*.js'], '', '/User/code/src/settings.js', true, 'Multiple patterns'],
-        [['#', '**/src/', '*.js'], '', '/User/code/src/settings.js', true, 'Multiple patterns'],
-        [['{*.js,*.json}'], '', '/User/code/src/settings.js', true, 'Braces'],
-        [['{src,dist}'], '', '/User/code/src/settings.json', true, 'Braces'],
-        [['{src,dist}'], '', '/User/code/dist/settings.json', true, 'Braces'],
-        [['{src,dist}'], '', '/User/code/distribution/settings.json', false, 'Braces'],
-        [['**/{src,dist}/**'], '', '/User/code/src/settings.json', true, 'Braces'],
-        [['**/{src,dist}/**'], '', '/User/code/dist/settings.json', true, 'Braces'],
-        [['**/{src,dist}/**'], '', '/User/code/lib/settings.json', false, 'Braces'],
-        [['{*.js,*.json}'], '', '/User/code/src/settings.js', true, 'Braces'],
-        [['(src|dist)'], '', '/User/code/src/settings.json', true, 'Parens'],
-        [['(src|dist)'], '', '/User/code/dist/settings.json', true, 'Parens'],
-        [['(src|dist)'], '', '/User/code/distribution/settings.json', false, 'Parens'],
-        [['**/(src|dist)/**'], '', '/User/code/src/settings.json', true, 'Parens'],
-        [['**/(src|dist)/**'], '', '/User/code/dist/settings.json', true, 'Parens'],
-        [['**/(src|dist)/**'], '', '/User/code/lib/settings.json', false, 'Parens'],
-        [['#', '**/dist/', '*.js'], '', '/User/code/src/settings.js', true, 'Multiple patterns'],
-        [['#', '**/dist/', '*.js'], '', '/User/code/src/settings.json', false, 'Multiple patterns'],
-        [['#', '**/dist/', '*.js*'], '', '/User/code/src/settings.json', true, 'Multiple patterns'],
-        [['settings.js'], '', '/User/code/src/settings.js', true, 'settings.js'],
-        [['!settings.js'], '', '/User/code/src/settings.js', false, 'Negations'],
-        [['!!settings.js'], '', '/User/code/src/settings.js', true, 'Negations'],
-        [['!!!settings.js'], '', '/User/code/src/settings.js', false, 'Negations'],
-        [['!/**/settings.js'], '', '/User/code/src/settings.js', false, 'Negations'],
-        [['!!/**/settings.js'], '', '/User/code/src/settings.js', true, 'Negations'],
-        [['!**/settings.js'], '', '/User/code/src/settings.js', false, 'Negations'],
-        [['#', '**/src/', '*.js', '!**/settings.js'], '', '/User/code/src/settings.js', false, 'Negations'],
+        [['#', '*.json', '#'], '', '${cwd}/User/code/src/settings.json', true, 'Comments'],
+        [['#', '*.json', '*.js'], '', '${cwd}/User/code/src/settings.js', true, 'Multiple patterns'],
+        ['#\n*.json\n*.js', '', '${cwd}/User/code/src/settings.js', true, 'Multiple patterns'],
+        ['#\n*.json\n*.jsx', '', '${cwd}/User/code/src/settings.js', false, 'Multiple patterns'],
+        [['#', '**/src/', '*.js'], '', '${cwd}/User/code/src/settings.js', true, 'Multiple patterns'],
+        [['{*.js,*.json}'], '', '${cwd}/User/code/src/settings.js', true, 'Braces'],
+        [['{src,dist}'], '', '${cwd}/User/code/src/settings.json', true, 'Braces'],
+        [['{src,dist}'], '', '${cwd}/User/code/dist/settings.json', true, 'Braces'],
+        [['{src,dist}'], '', '${cwd}/User/code/distribution/settings.json', false, 'Braces'],
+        [['**/{src,dist}/**'], '', '${cwd}/User/code/src/settings.json', true, 'Braces'],
+        [['**/{src,dist}/**'], '', '${cwd}/User/code/dist/settings.json', true, 'Braces'],
+        [['**/{src,dist}/**'], '', '${cwd}/User/code/lib/settings.json', false, 'Braces'],
+        [['{*.js,*.json}'], '', '${cwd}/User/code/src/settings.js', true, 'Braces'],
+        [['(src|dist)'], '', '${cwd}/User/code/src/settings.json', true, 'Parens'],
+        [['(src|dist)'], '', '${cwd}/User/code/dist/settings.json', true, 'Parens'],
+        [['(src|dist)'], '', '${cwd}/User/code/distribution/settings.json', false, 'Parens'],
+        [['**/(src|dist)/**'], '', '${cwd}/User/code/src/settings.json', true, 'Parens'],
+        [['**/(src|dist)/**'], '', '${cwd}/User/code/dist/settings.json', true, 'Parens'],
+        [['**/(src|dist)/**'], '', '${cwd}/User/code/lib/settings.json', false, 'Parens'],
+        [['#', '**/dist/', '*.js'], '', '${cwd}/User/code/src/settings.js', true, 'Multiple patterns'],
+        [['#', '**/dist/', '*.js'], '', '${cwd}/User/code/src/settings.json', false, 'Multiple patterns'],
+        [['#', '**/dist/', '*.js*'], '', '${cwd}/User/code/src/settings.json', true, 'Multiple patterns'],
+        [['settings.js'], '', '${cwd}/User/code/src/settings.js', true, 'settings.js'],
+        [['!settings.js'], '', '${cwd}/User/code/src/settings.js', false, 'Negations'],
+        [['!!settings.js'], '', '${cwd}/User/code/src/settings.js', true, 'Negations'],
+        [['!!!settings.js'], '', '${cwd}/User/code/src/settings.js', false, 'Negations'],
+        [['!/**/settings.js'], '', '${cwd}/User/code/src/settings.js', false, 'Negations'],
+        [['!!/**/settings.js'], '', '${cwd}/User/code/src/settings.js', true, 'Negations'],
+        [['!**/settings.js'], '', '${cwd}/User/code/src/settings.js', false, 'Negations'],
+        [['#', '**/src/', '*.js', '!**/settings.js'], '', '${cwd}/User/code/src/settings.js', false, 'Negations'],
     ];
+
+    return limit ? testCases.slice(from, from + limit) : testCases;
 }
