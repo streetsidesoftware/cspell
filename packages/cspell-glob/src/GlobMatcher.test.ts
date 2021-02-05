@@ -111,57 +111,37 @@ describe('Tests .gitignore file contents', () => {
     const root = '/Users/code/project/cspell/';
     const matcher = new GlobMatcher(pattern, root);
 
-    function t(filename: string, expected: boolean, comment: string) {
-        test(`Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `, () => {
-            expect(matcher.match(filename)).toBe(expected);
-        });
+    interface TestCase {
+        filename: string;
+        expected: boolean | Partial<GlobMatch>;
+        comment: string;
     }
 
-    function tt(filename: string, expected: GlobMatch, comment: string) {
-        test(`Test: "${comment}" File: "${filename}" (${expected ? 'Block' : 'Allow'}) `, () => {
-            expect(matcher.matchEx(filename)).toEqual(expected);
-        });
-    }
-
-    t(root + 'src/code.ts', false, 'Ensure that .ts files are allowed');
-    t(root + 'dist/code.ts', true, 'Ensure that `dest` .ts files are not allowed');
-    t(root + 'src/code.js', true, 'Ensure that no .js files are allowed');
-    t(root + 'src/code.test.ts', true, 'Ensure that test.ts files are not allowed');
-    t(root + 'src/code.spec.ts', true, 'Ensure that spec.ts files are not allowed');
-    t('/Users/guest/code/' + 'src/code.test.ts', false, 'Ensure that test files in a different root are allowed');
-    t('/Users/guest/code/' + 'src/code.js', false, 'Ensure *.js files are allowed under a different root.');
-    t(root + 'node_modules/cspell/code.ts', true, 'Ensure that node modules are not allowed in the current root.');
-    t(
-        root + 'nested/node_modules/cspell/code.ts',
-        false,
-        'Ensure that nested node modules are allowed in the current root.'
-    );
-    t(
-        '/Users/guest/code/' + 'node_modules/cspell/code.ts',
-        false,
-        'Ensure that node modules in a different root are allowed'
-    );
-    t(root + 'settings.js', false, 'Ensure that settings.js is kept');
-    t(root + 'dist/settings.js', false, 'Ensure that settings.js is kept');
-    t(root + 'node_modules/settings.js', false, 'Ensure that settings.js is kept');
-    t(root + 'src.txt', true, 'Ensure that double negative means block');
-
-    tt(root + 'src/code.ts', { matched: false }, 'Ensure that .ts files are allowed');
-    tt(
-        root + 'dist/code.ts',
-        { matched: true, glob: 'dist', index: 6, isNeg: false },
-        'Ensure that `dest` .ts files are not allowed'
-    );
-    tt(
-        root + 'src/code.js',
-        { matched: true, glob: '*.js', index: 7, isNeg: false },
-        'Ensure that no .js files are allowed'
-    );
-    tt(
-        root + 'dist/settings.js',
-        { matched: false, glob: '!**/settings.js', index: 8, isNeg: true },
-        'Ensure that settings.js is kept'
-    );
+    test.each`
+        filename                                                | expected                                                              | comment
+        ${root + 'src/code.ts'}                                 | ${false}                                                              | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${true}                                                               | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${true}                                                               | ${'Ensure that no .js files are allowed'}
+        ${root + 'src/code.test.ts'}                            | ${true}                                                               | ${'Ensure that test.ts files are not allowed'}
+        ${root + 'src/code.spec.ts'}                            | ${true}                                                               | ${'Ensure that spec.ts files are not allowed'}
+        ${'/Users/guest/code/' + 'src/code.test.ts'}            | ${false}                                                              | ${'Ensure that test files in a different root are allowed'}
+        ${'/Users/guest/code/' + 'src/code.js'}                 | ${false}                                                              | ${'Ensure *.js files are allowed under a different root.'}
+        ${root + 'node_modules/cspell/code.ts'}                 | ${true}                                                               | ${'Ensure that node modules are not allowed in the current root.'}
+        ${root + 'nested/node_modules/cspell/code.ts'}          | ${false}                                                              | ${'Ensure that nested node modules are allowed in the current root.'}
+        ${'/Users/guest/code/' + 'node_modules/cspell/code.ts'} | ${false}                                                              | ${'Ensure that node modules in a different root are allowed'}
+        ${root + 'settings.js'}                                 | ${false}                                                              | ${'Ensure that settings.js is kept'}
+        ${root + 'dist/settings.js'}                            | ${false}                                                              | ${'Ensure that settings.js is kept'}
+        ${root + 'node_modules/settings.js'}                    | ${false}                                                              | ${'Ensure that settings.js is kept'}
+        ${root + 'src.txt'}                                     | ${true}                                                               | ${'Ensure that double negative means block'}
+        ${root + 'src/code.ts'}                                 | ${{ matched: false }}                                                 | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${{ matched: true, glob: 'dist', index: 6, isNeg: false }}            | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${{ matched: true, glob: '*.js', index: 7, isNeg: false }}            | ${'Ensure that no .js files are allowed'}
+        ${root + 'dist/settings.js'}                            | ${{ matched: false, glob: '!**/settings.js', index: 8, isNeg: true }} | ${'Ensure that settings.js is kept'}
+    `('match && matchEx "$comment" File: "$filename" $expected', ({ filename, expected }: TestCase) => {
+        expected = typeof expected === 'boolean' ? { matched: expected } : expected;
+        expect(matcher.match(filename)).toBe(expected.matched);
+        expect(matcher.matchEx(filename)).toEqual(expect.objectContaining(expected));
+    });
 });
 
 describe('Validate Options', () => {

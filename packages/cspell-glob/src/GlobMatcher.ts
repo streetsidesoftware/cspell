@@ -3,33 +3,9 @@ import * as Path from 'path';
 
 // cspell:ignore fname
 
-export interface ParsedPath {
-    /**
-     * The root of the path such as '/' or 'c:\'
-     */
-    root: string;
-    /**
-     * The full directory path such as '/home/user/dir' or 'c:\path\dir'
-     */
-    dir: string;
-    /**
-     * The file name including extension (if any) such as 'index.html'
-     */
-    base: string;
-    /**
-     * The file extension (if any) such as '.html'
-     */
-    ext: string;
-    /**
-     * The file name without extension (if any) such as 'index'
-     */
-    name: string;
-}
-
 export interface PathInterface {
     normalize(p: string): string;
     join(...paths: string[]): string;
-    parse(p: string): ParsedPath;
     resolve(...paths: string[]): string;
     relative(from: string, to: string): string;
     isAbsolute(p: string): boolean;
@@ -41,6 +17,7 @@ export type GlobMatch = GlobMatchRule | GlobMatchNoRule;
 export interface GlobMatchRule {
     matched: boolean;
     glob: string;
+    root: string;
     index: number;
     isNeg: boolean;
 }
@@ -186,38 +163,26 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
         const absPath = path.resolve(filename);
         const useAbs = path.isAbsolute(filename) || filename.startsWith('..');
 
-        for (const rule of negRules) {
-            const relPath = useAbs ? path.relative(rule.root, absPath) : filename;
-            if (relPath.startsWith('..')) {
-                continue;
-            }
-            const fname = relPath.split(path.sep).join('/');
-            if (rule.fn(fname)) {
-                return {
-                    matched: false,
-                    glob: rule.glob,
-                    index: rule.index,
-                    isNeg: rule.isNeg,
-                };
+        function testRules(rules: GlobRule[], matched: boolean): GlobMatch | undefined {
+            for (const rule of rules) {
+                const relPath = useAbs ? path.relative(rule.root, absPath) : filename;
+                if (relPath.startsWith('..')) {
+                    continue;
+                }
+                const fname = relPath.split(path.sep).join('/');
+                if (rule.fn(fname)) {
+                    return {
+                        matched,
+                        glob: rule.glob,
+                        root: rule.root,
+                        index: rule.index,
+                        isNeg: rule.isNeg,
+                    };
+                }
             }
         }
 
-        for (const rule of posRules) {
-            const relPath = useAbs ? path.relative(rule.root, absPath) : filename;
-            if (relPath.startsWith('..')) {
-                continue;
-            }
-            const fname = relPath.split(path.sep).join('/');
-            if (rule.fn(fname)) {
-                return {
-                    matched: true,
-                    glob: rule.glob,
-                    index: rule.index,
-                    isNeg: rule.isNeg,
-                };
-            }
-        }
-        return { matched: false };
+        return testRules(negRules, false) || testRules(posRules, true) || { matched: false };
     };
     return fn;
 }
