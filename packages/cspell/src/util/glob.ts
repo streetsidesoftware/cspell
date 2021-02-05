@@ -2,8 +2,8 @@ import glob, { IGlob } from 'glob';
 import * as path from 'path';
 import * as fsp from 'fs-extra';
 import { IOptions } from './IOptions';
-import { GlobMatcher } from 'cspell-glob';
-import * as cspell from 'cspell-lib';
+import { GlobMatcher, GlobPatternWithRoot } from 'cspell-glob';
+import { CSpellUserSettings } from '@cspell/cspell-types';
 
 export interface GlobOptions extends IOptions {
     cwd?: string;
@@ -145,7 +145,7 @@ export interface GlobSrcInfo {
 }
 
 interface ExtractPatternResult {
-    glob: string;
+    glob: GlobPatternWithRoot;
     source: string;
 }
 
@@ -175,11 +175,7 @@ export function calcExcludeGlobInfo(root: string, commandLineExclude: string[] |
     ];
 }
 
-export function extractGlobExcludesFromConfig(
-    root: string,
-    source: string,
-    config: cspell.CSpellUserSettings
-): GlobSrcInfo[] {
+export function extractGlobExcludesFromConfig(root: string, source: string, config: CSpellUserSettings): GlobSrcInfo[] {
     if (!config.ignorePaths || !config.ignorePaths.length) {
         return [];
     }

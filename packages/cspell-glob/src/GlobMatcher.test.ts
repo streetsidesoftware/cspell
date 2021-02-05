@@ -207,8 +207,8 @@ describe('Validate Options', () => {
 type TestCase = [string[] | string, string | undefined, string, boolean, string];
 
 function tests(): TestCase[] {
-    const from = 70;
-    const limit = 100;
+    const from = 0;
+    const limit = 0;
 
     const testCases: TestCase[] = [
         [['*.json'], undefined, './settings.json', true, '*.json'],

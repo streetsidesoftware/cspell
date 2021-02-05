@@ -7,6 +7,7 @@ import {
     Pattern,
     CSpellSettingsWithSourceTrace,
     ImportFileRef,
+    GlobDef,
 } from '@cspell/cspell-types';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
@@ -402,11 +403,15 @@ export function clearCachedSettingsFiles(): void {
 }
 
 export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean {
-    if (typeof globs === 'string') {
+    if (!Array.isArray(globs)) {
         globs = [globs];
     }
+    const globDefs = globs.map(toGlobDef).filter((g) => !g.root || filename.startsWith(g.root));
 
-    const matches = globs.filter((g) => minimatch(filename, g, { matchBase: true }));
+    const matches = globDefs.filter((g) => {
+        const f = g.root ? filename.slice(g.root.length) : filename;
+        return minimatch(f, g.glob, { matchBase: true });
+    });
     return matches.length > 0;
 }
 
@@ -466,4 +471,16 @@ class ImportError extends Error {
     constructor(msg: string, readonly cause?: Error) {
         super(msg);
     }
+}
+
+function isGlobDef(g: Glob): g is GlobDef {
+    return typeof g !== 'string';
+}
+
+function toGlobDef(g: Glob): GlobDef {
+    if (isGlobDef(g)) return g;
+    return {
+        glob: g,
+        root: undefined,
+    };
 }

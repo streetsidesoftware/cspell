@@ -57,6 +57,18 @@ interface NormalizedGlobMatchOptions {
     nodePath: PathInterface;
 }
 
+export type GlobPattern = SimpleGlobPattern | GlobPatternWithRoot | GlobPatternWithOptionalRoot;
+
+export type SimpleGlobPattern = string;
+export interface GlobPatternWithOptionalRoot {
+    glob: string;
+    root?: string;
+}
+
+export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {
+    root: string;
+}
+
 export class GlobMatcher {
     /**
      * @param filename full path of file to match against.
@@ -64,7 +76,7 @@ export class GlobMatcher {
      */
     readonly matchEx: (filename: string) => GlobMatch;
     readonly path: PathInterface;
-    readonly patterns: string[];
+    readonly patterns: GlobPatternWithRoot[];
     readonly root: string;
     readonly dot: boolean;
     readonly options: NormalizedGlobMatchOptions;
@@ -74,17 +86,21 @@ export class GlobMatcher {
      * @param patterns - the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param root - the working directory
      */
-    constructor(patterns: string | string[], root?: string, nodePath?: PathInterface);
+    constructor(patterns: GlobPattern | GlobPattern[], root?: string, nodePath?: PathInterface);
 
     /**
      * Construct a `.gitignore` emulator
      * @param patterns - the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param options - to set the root and other options
      */
-    constructor(patterns: string | string[], options?: GlobMatchOptions);
-    constructor(patterns: string | string[], rootOrOptions?: string | GlobMatchOptions);
+    constructor(patterns: GlobPattern | GlobPattern[], options?: GlobMatchOptions);
+    constructor(patterns: GlobPattern | GlobPattern[], rootOrOptions?: string | GlobMatchOptions);
 
-    constructor(patterns: string | string[], rootOrOptions?: string | GlobMatchOptions, _nodePath?: PathInterface) {
+    constructor(
+        patterns: GlobPattern | GlobPattern[],
+        rootOrOptions?: string | GlobMatchOptions,
+        _nodePath?: PathInterface
+    ) {
         _nodePath = _nodePath ?? Path;
 
         const options =
@@ -92,10 +108,18 @@ export class GlobMatcher {
 
         const { root = _nodePath.resolve(), dot = false, nodePath = _nodePath } = options;
 
-        this.options = { root, dot, nodePath };
+        const normalizedRoot = nodePath.resolve(nodePath.normalize(root));
+        this.options = { root: normalizedRoot, dot, nodePath };
 
-        this.patterns = Array.isArray(patterns) ? patterns : patterns.split(/\r?\n/g);
-        this.root = root;
+        patterns = Array.isArray(patterns)
+            ? patterns
+            : typeof patterns === 'string'
+            ? patterns.split(/\r?\n/g)
+            : [patterns];
+        const globPatterns = patterns.map((p) => toGlobPatternWithRoot(p, normalizedRoot));
+
+        this.patterns = globPatterns;
+        this.root = normalizedRoot;
         this.path = nodePath;
         this.dot = dot;
         this.matchEx = buildMatcherFn(this.patterns, this.options);
@@ -117,6 +141,7 @@ type GlobMatchFn = (filename: string) => GlobMatch;
 
 interface GlobRule {
     glob: string;
+    root: string;
     index: number;
     isNeg: boolean;
     reg: RegExp;
@@ -136,15 +161,13 @@ interface GlobRule {
  * @param options - defines root and other options
  * @returns a function given a filename returns true if it matches.
  */
-function buildMatcherFn(patterns: string[], options: NormalizedGlobMatchOptions): GlobMatchFn {
+function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions): GlobMatchFn {
     const path = options.nodePath;
-    const dirRoot = path.resolve(path.normalize(options.root));
     const rules: GlobRule[] = patterns
-        .map((p) => p.trim())
-        .map((p, index) => ({ glob: p, index }))
+        .map((p, index) => ({ ...p, index }))
         .filter((r) => !!r.glob)
         .filter((r) => !r.glob.startsWith('#'))
-        .map(({ glob, index }) => {
+        .map(({ glob, root, index }) => {
             const matchNeg = glob.match(/^!+/);
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
             const pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), glob);
@@ -153,7 +176,7 @@ function buildMatcherFn(patterns: string[], options: NormalizedGlobMatchOptions)
                 const match = filename.match(reg);
                 return !!match;
             };
-            return { glob, index, isNeg, fn, reg };
+            return { glob, root, index, isNeg, fn, reg };
         });
     const negRules = rules.filter((r) => r.isNeg);
     const posRules = rules.filter((r) => !r.isNeg);
@@ -162,15 +185,13 @@ function buildMatcherFn(patterns: string[], options: NormalizedGlobMatchOptions)
 
         const absPath = path.resolve(filename);
         const useAbs = path.isAbsolute(filename) || filename.startsWith('..');
-        const relPath = useAbs ? path.relative(dirRoot, absPath) : filename;
-
-        if (relPath.startsWith('..')) {
-            return { matched: false };
-        }
-
-        const fname = relPath.split(path.sep).join('/');
 
         for (const rule of negRules) {
+            const relPath = useAbs ? path.relative(rule.root, absPath) : filename;
+            if (relPath.startsWith('..')) {
+                continue;
+            }
+            const fname = relPath.split(path.sep).join('/');
             if (rule.fn(fname)) {
                 return {
                     matched: false,
@@ -182,6 +203,11 @@ function buildMatcherFn(patterns: string[], options: NormalizedGlobMatchOptions)
         }
 
         for (const rule of posRules) {
+            const relPath = useAbs ? path.relative(rule.root, absPath) : filename;
+            if (relPath.startsWith('..')) {
+                continue;
+            }
+            const fname = relPath.split(path.sep).join('/');
             if (rule.fn(fname)) {
                 return {
                     matched: true,
@@ -204,3 +230,22 @@ const mutations: MutationsToSupportGitIgnore[] = [
     [/^\/(?!\/)/, ''], // remove leading slash to match from the root
     [/\/$/, '$&**'], // if it ends in a slash, make sure matches the folder
 ];
+
+export function isGlobPatternWithOptionalRoot(g: GlobPattern): g is GlobPatternWithOptionalRoot {
+    return typeof g !== 'string' && typeof g.glob === 'string';
+}
+
+export function isGlobPatternWithRoot(g: GlobPatternWithRoot | GlobPatternWithOptionalRoot): g is GlobPatternWithRoot {
+    return !!g.root;
+}
+
+function toGlobPatternWithRoot(g: GlobPattern, root: string): GlobPatternWithRoot {
+    if (!isGlobPatternWithOptionalRoot(g)) {
+        return {
+            glob: g.trim(),
+            root,
+        };
+    }
+
+    return isGlobPatternWithRoot(g) ? g : { ...g, root };
+}

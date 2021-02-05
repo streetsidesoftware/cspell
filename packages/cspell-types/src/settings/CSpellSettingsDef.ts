@@ -36,6 +36,28 @@ export interface FileSettings extends ExtendableSettings {
 
     /** Other settings files to be included */
     import?: FsPath | FsPath[];
+
+    /**
+     * The root to use for glop patterns found in this configuration.
+     * Default: location of the configuration file.
+     *
+     * Use `globRoot` to define a different location.
+     * `globRoot` can be relative to the location of this configuration file.
+     * Defining globRoot, does not impact imported configurations.
+     */
+    globRoot?: FsPath;
+
+    // /**
+    //  * Glob patterns of files to be checked.
+    //  * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+    //  */
+    // files?: Glob[];
+
+    /**
+     * Glob patterns of files to be ignored
+     * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+     */
+    ignorePaths?: Glob[];
 }
 
 export interface ExtendableSettings extends Settings {
@@ -56,9 +78,6 @@ export interface Settings extends BaseSetting {
 
     /** list of words to be ignored */
     ignoreWords?: string[];
-
-    /** Glob file patterns to be ignored */
-    ignorePaths?: Glob[];
 
     /** languageIds for the files to spell check. */
     enabledLanguageIds?: LanguageId[];
@@ -172,13 +191,13 @@ export interface BaseSetting {
      *
      * Example: ["href"] - to exclude html href
      */
-    ignoreRegExpList?: RegExpList;
+    ignoreRegExpList?: RegExpPatternList;
 
     /**
      * List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.
      * If includeRegExpList is defined, ONLY, text matching the included patterns will be checked.
      */
-    includeRegExpList?: RegExpList;
+    includeRegExpList?: RegExpPatternList;
 
     /** Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList */
     patterns?: RegExpPatternDefinition[];
@@ -279,7 +298,9 @@ export type PatternId = string;
 
 /** A PatternRef is a Pattern or PatternId. */
 export type PatternRef = Pattern | PatternId | PredefinedPatterns;
-export type RegExpList = PatternRef[];
+
+/** A list of pattern names or regular expressions */
+export type RegExpPatternList = PatternRef[];
 
 /** This matches the name in a dictionary definition */
 export type DictionaryId = string;
@@ -293,7 +314,24 @@ export type LocaleId = string;
 export type LocalId = LocaleId;
 
 /** These are glob expressions */
-export type Glob = string;
+export type Glob = SimpleGlob | GlobDef;
+
+/** Simple Glob string, the root will be globRoot */
+export type SimpleGlob = string;
+
+/**
+ * Used to define fully qualified glob patterns.
+ * It is currently hidden to make the json-schema a bit easier to use
+ * when crafting cspell.json files by hand.
+ * @hidden
+ */
+export interface GlobDef {
+    /** Glob pattern to match */
+    glob: string;
+
+    /** Optional root to use when matching the glob. Defaults to current working dir. */
+    root?: string;
+}
 
 /** This can be '*', 'typescript', 'cpp', 'json', etc. */
 export type LanguageId = string;

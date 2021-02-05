@@ -318,7 +318,7 @@ Options:
     verbose:   ${yesNo(!!cfg.options.verbose)}
     config:    ${cfg.configFile || 'default'}
     exclude:   ${extractPatterns(cfg.excludes)
-        .map((a) => a.glob)
+        .map((a) => a.glob.glob)
         .join('\n             ')}
     files:     ${cfg.files}
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
@@ -345,7 +345,7 @@ Options:
     }
 
     function filterFiles(files: string[], excludeGlobs: GlobSrcInfo[]): string[] {
-        const excludeInfo = extractPatterns(excludeGlobs).map((g) => `Glob: ${g.glob} from ${g.source}`);
+        const excludeInfo = extractPatterns(excludeGlobs).map((g) => `Glob: ${g.glob.glob} from ${g.source}`);
         cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
         const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, excludeGlobs));
         return result;
