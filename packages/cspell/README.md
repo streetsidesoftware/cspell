@@ -29,7 +29,7 @@ npm install -g cspell
 
 ## Usage
 
-Example: recursively spell check all javascript files in `src`
+Example: recursively spell check all JavaScript files in `src`
 
 ```sh
 cspell "src/**/*.js"
@@ -410,7 +410,7 @@ The spell checker includes a set of default dictionaries.
 
 ### Programming Language Dictionaries
 
-- **typescript** - keywords for Typescript and Javascript
+- **typescript** - keywords for TypeScript and JavaScript
 - **node** - terms related to using nodejs.
 - **php** - _php_ keywords and library methods
 - **go** - _go_ keywords and library methods
