@@ -5,6 +5,7 @@ import {
     calcExcludeGlobInfo,
     extractGlobExcludesFromConfig,
     extractPatterns,
+    normalizeExcludeGlobsToRoot,
 } from './util/glob';
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
@@ -12,6 +13,7 @@ import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
 import { traceWords, TraceResult, CheckTextInfo, getDictionary } from 'cspell-lib';
+import { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
 import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { IOptions } from './util/IOptions';
@@ -124,7 +126,7 @@ export class CSpellApplicationConfiguration {
 
 interface ConfigInfo {
     source: string;
-    config: cspell.CSpellUserSettings;
+    config: CSpellUserSettings;
 }
 interface FileConfigInfo {
     configInfo: ConfigInfo;
@@ -258,7 +260,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         return status;
     }
 
-    async function reportConfigurationErrors(config: cspell.CSpellSettings): Promise<number> {
+    async function reportConfigurationErrors(config: CSpellSettings): Promise<number> {
         const errors = cspell.extractImportErrors(config);
         let count = 0;
         errors.forEach((ref) => {
@@ -300,7 +302,8 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globOptions = { root, cwd: root, ignore: configInfo.config.ignorePaths };
+        const ignoreGlobs = normalizeExcludeGlobsToRoot(configInfo.config.ignorePaths || [], root);
+        const globOptions = { root, cwd: root, ignore: ignoreGlobs };
         const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(
             cfg.excludes
         );
@@ -428,7 +431,7 @@ async function findFiles(globPatterns: string[], options: GlobOptions): Promise<
 
 function calcFinalConfigInfo(
     configInfo: ConfigInfo,
-    settingsFromCommandLine: cspell.CSpellUserSettings,
+    settingsFromCommandLine: CSpellUserSettings,
     filename: string,
     text: string
 ): FileConfigInfo {

@@ -93,7 +93,7 @@ export class GlobMatcher {
             : typeof patterns === 'string'
             ? patterns.split(/\r?\n/g)
             : [patterns];
-        const globPatterns = patterns.map((p) => toGlobPatternWithRoot(p, normalizedRoot));
+        const globPatterns = patterns.map((p) => normalizeGlobPatternWithRoot(p, normalizedRoot, nodePath));
 
         this.patterns = globPatterns;
         this.root = normalizedRoot;
@@ -145,9 +145,9 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
         .filter((r) => !!r.glob)
         .filter((r) => !r.glob.startsWith('#'))
         .map(({ glob, root, index }) => {
-            const matchNeg = glob.match(/^!+/);
+            const matchNeg = glob.match(/^!/);
+            const pattern = glob.replace(/^!/, '');
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
-            const pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), glob);
             const reg = mm.makeRe(pattern, { dot: options.dot });
             const fn = (filename: string) => {
                 const match = filename.match(reg);
@@ -158,18 +158,15 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
     const negRules = rules.filter((r) => r.isNeg);
     const posRules = rules.filter((r) => !r.isNeg);
     const fn: GlobMatchFn = (filename: string) => {
-        filename = path.normalize(filename);
-
-        const absPath = path.resolve(filename);
-        const useAbs = path.isAbsolute(filename) || filename.startsWith('..');
+        filename = path.resolve(path.normalize(filename));
 
         function testRules(rules: GlobRule[], matched: boolean): GlobMatch | undefined {
             for (const rule of rules) {
-                const relPath = useAbs ? path.relative(rule.root, absPath) : filename;
-                if (relPath.startsWith('..')) {
+                if (!filename.startsWith(rule.root)) {
                     continue;
                 }
-                const fname = relPath.split(path.sep).join('/');
+                const relName = path.relative(rule.root, filename);
+                const fname = relName.split(path.sep).join('/');
                 if (rule.fn(fname)) {
                     return {
                         matched,
@@ -190,7 +187,6 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
 type MutationsToSupportGitIgnore = [RegExp, string];
 
 const mutations: MutationsToSupportGitIgnore[] = [
-    [/^!+/, ''], // remove leading !
     [/^[^/#][^/]*$/, '**/{$&,$&/**}'], // no slashes will match files names or folders
     [/^\/(?!\/)/, ''], // remove leading slash to match from the root
     [/\/$/, '$&**'], // if it ends in a slash, make sure matches the folder
@@ -204,13 +200,28 @@ export function isGlobPatternWithRoot(g: GlobPatternWithRoot | GlobPatternWithOp
     return !!g.root;
 }
 
-function toGlobPatternWithRoot(g: GlobPattern, root: string): GlobPatternWithRoot {
-    if (!isGlobPatternWithOptionalRoot(g)) {
-        return {
-            glob: g.trim(),
-            root,
-        };
-    }
+function normalizePattern(pattern: string): string {
+    pattern = pattern.replace(/^(!!)+/, '');
+    const isNeg = pattern.startsWith('!');
+    pattern = isNeg ? pattern.slice(1) : pattern;
+    pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), pattern);
+    return isNeg ? '!' + pattern : pattern;
+}
 
-    return isGlobPatternWithRoot(g) ? g : { ...g, root };
+function normalizeGlobPatternWithRoot(g: GlobPattern, root: string, path: PathInterface): GlobPatternWithRoot {
+    g = !isGlobPatternWithOptionalRoot(g)
+        ? {
+              glob: g.trim(),
+              root,
+          }
+        : g;
+
+    const gr = isGlobPatternWithRoot(g) ? g : { ...g, root };
+    if (gr.root.startsWith('${cwd}')) {
+        gr.root = path.join(path.resolve(), gr.root.replace('${cwd}', ''));
+    }
+    gr.root = path.resolve(root, path.normalize(gr.root));
+    gr.glob = normalizePattern(gr.glob);
+
+    return gr;
 }
