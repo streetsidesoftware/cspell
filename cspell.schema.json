@@ -81,8 +81,8 @@
       "type": "string"
     },
     "Glob": {
-      "description": "These are glob expressions",
-      "type": "string"
+      "$ref": "#/definitions/SimpleGlob",
+      "description": "These are glob expressions"
     },
     "LanguageId": {
       "description": "This can be '*', 'typescript', 'cpp', 'json', etc.",
@@ -136,11 +136,11 @@
           "type": "string"
         },
         "ignoreRegExpList": {
-          "$ref": "#/definitions/RegExpList",
+          "$ref": "#/definitions/RegExpPatternList",
           "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
         },
         "includeRegExpList": {
-          "$ref": "#/definitions/RegExpList",
+          "$ref": "#/definitions/RegExpPatternList",
           "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking. If includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
         },
         "languageId": {
@@ -267,15 +267,8 @@
           "description": "Optional identifier",
           "type": "string"
         },
-        "ignorePaths": {
-          "description": "Glob file patterns to be ignored",
-          "items": {
-            "$ref": "#/definitions/Glob"
-          },
-          "type": "array"
-        },
         "ignoreRegExpList": {
-          "$ref": "#/definitions/RegExpList",
+          "$ref": "#/definitions/RegExpPatternList",
           "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
         },
         "ignoreWords": {
@@ -286,7 +279,7 @@
           "type": "array"
         },
         "includeRegExpList": {
-          "$ref": "#/definitions/RegExpList",
+          "$ref": "#/definitions/RegExpPatternList",
           "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking. If includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
         },
         "language": {
@@ -393,12 +386,6 @@
       ],
       "type": "string"
     },
-    "RegExpList": {
-      "items": {
-        "$ref": "#/definitions/PatternRef"
-      },
-      "type": "array"
-    },
     "RegExpPatternDefinition": {
       "additionalProperties": false,
       "properties": {
@@ -431,6 +418,13 @@
       ],
       "type": "object"
     },
+    "RegExpPatternList": {
+      "description": "A list of pattern names or regular expressions",
+      "items": {
+        "$ref": "#/definitions/PatternRef"
+      },
+      "type": "array"
+    },
     "ReplaceEntry": {
       "items": [
         {
@@ -449,6 +443,10 @@
         "$ref": "#/definitions/ReplaceEntry"
       },
       "type": "array"
+    },
+    "SimpleGlob": {
+      "description": "Simple Glob string, the root will be globRoot",
+      "type": "string"
     }
   },
   "properties": {
@@ -502,19 +500,23 @@
       },
       "type": "array"
     },
+    "globRoot": {
+      "$ref": "#/definitions/FsPath",
+      "description": "The root to use for glop patterns found in this configuration. Default: location of the configuration file.\n\nUse `globRoot` to define a different location. `globRoot` can be relative to the location of this configuration file. Defining globRoot, does not impact imported configurations."
+    },
     "id": {
       "description": "Optional identifier",
       "type": "string"
     },
     "ignorePaths": {
-      "description": "Glob file patterns to be ignored",
+      "description": "Glob patterns of files to be ignored Glob patterns are relative to the `globRoot` of the configuration file that defines them.",
       "items": {
         "$ref": "#/definitions/Glob"
       },
       "type": "array"
     },
     "ignoreRegExpList": {
-      "$ref": "#/definitions/RegExpList",
+      "$ref": "#/definitions/RegExpPatternList",
       "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
     },
     "ignoreWords": {
@@ -539,7 +541,7 @@
       "description": "Other settings files to be included"
     },
     "includeRegExpList": {
-      "$ref": "#/definitions/RegExpList",
+      "$ref": "#/definitions/RegExpPatternList",
       "description": "List of RegExp patterns or defined Pattern names to define the text to be included for spell checking. If includeRegExpList is defined, ONLY, text matching the included patterns will be checked."
     },
     "language": {

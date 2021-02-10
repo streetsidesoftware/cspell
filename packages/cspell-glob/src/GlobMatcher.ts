@@ -3,33 +3,9 @@ import * as Path from 'path';
 
 // cspell:ignore fname
 
-export interface ParsedPath {
-    /**
-     * The root of the path such as '/' or 'c:\'
-     */
-    root: string;
-    /**
-     * The full directory path such as '/home/user/dir' or 'c:\path\dir'
-     */
-    dir: string;
-    /**
-     * The file name including extension (if any) such as 'index.html'
-     */
-    base: string;
-    /**
-     * The file extension (if any) such as '.html'
-     */
-    ext: string;
-    /**
-     * The file name without extension (if any) such as 'index'
-     */
-    name: string;
-}
-
 export interface PathInterface {
     normalize(p: string): string;
     join(...paths: string[]): string;
-    parse(p: string): ParsedPath;
     resolve(...paths: string[]): string;
     relative(from: string, to: string): string;
     isAbsolute(p: string): boolean;
@@ -41,6 +17,7 @@ export type GlobMatch = GlobMatchRule | GlobMatchNoRule;
 export interface GlobMatchRule {
     matched: boolean;
     glob: string;
+    root: string;
     index: number;
     isNeg: boolean;
 }
@@ -57,6 +34,18 @@ interface NormalizedGlobMatchOptions {
     nodePath: PathInterface;
 }
 
+export type GlobPattern = SimpleGlobPattern | GlobPatternWithRoot | GlobPatternWithOptionalRoot;
+
+export type SimpleGlobPattern = string;
+export interface GlobPatternWithOptionalRoot {
+    glob: string;
+    root?: string;
+}
+
+export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {
+    root: string;
+}
+
 export class GlobMatcher {
     /**
      * @param filename full path of file to match against.
@@ -64,7 +53,7 @@ export class GlobMatcher {
      */
     readonly matchEx: (filename: string) => GlobMatch;
     readonly path: PathInterface;
-    readonly patterns: string[];
+    readonly patterns: GlobPatternWithRoot[];
     readonly root: string;
     readonly dot: boolean;
     readonly options: NormalizedGlobMatchOptions;
@@ -74,17 +63,21 @@ export class GlobMatcher {
      * @param patterns - the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param root - the working directory
      */
-    constructor(patterns: string | string[], root?: string, nodePath?: PathInterface);
+    constructor(patterns: GlobPattern | GlobPattern[], root?: string, nodePath?: PathInterface);
 
     /**
      * Construct a `.gitignore` emulator
      * @param patterns - the contents of a `.gitignore` style file or an array of individual glob rules.
      * @param options - to set the root and other options
      */
-    constructor(patterns: string | string[], options?: GlobMatchOptions);
-    constructor(patterns: string | string[], rootOrOptions?: string | GlobMatchOptions);
+    constructor(patterns: GlobPattern | GlobPattern[], options?: GlobMatchOptions);
+    constructor(patterns: GlobPattern | GlobPattern[], rootOrOptions?: string | GlobMatchOptions);
 
-    constructor(patterns: string | string[], rootOrOptions?: string | GlobMatchOptions, _nodePath?: PathInterface) {
+    constructor(
+        patterns: GlobPattern | GlobPattern[],
+        rootOrOptions?: string | GlobMatchOptions,
+        _nodePath?: PathInterface
+    ) {
         _nodePath = _nodePath ?? Path;
 
         const options =
@@ -92,10 +85,18 @@ export class GlobMatcher {
 
         const { root = _nodePath.resolve(), dot = false, nodePath = _nodePath } = options;
 
-        this.options = { root, dot, nodePath };
+        const normalizedRoot = nodePath.resolve(nodePath.normalize(root));
+        this.options = { root: normalizedRoot, dot, nodePath };
 
-        this.patterns = Array.isArray(patterns) ? patterns : patterns.split(/\r?\n/g);
-        this.root = root;
+        patterns = Array.isArray(patterns)
+            ? patterns
+            : typeof patterns === 'string'
+            ? patterns.split(/\r?\n/g)
+            : [patterns];
+        const globPatterns = patterns.map((p) => normalizeGlobPatternWithRoot(p, normalizedRoot, nodePath));
+
+        this.patterns = globPatterns;
+        this.root = normalizedRoot;
         this.path = nodePath;
         this.dot = dot;
         this.matchEx = buildMatcherFn(this.patterns, this.options);
@@ -117,6 +118,7 @@ type GlobMatchFn = (filename: string) => GlobMatch;
 
 interface GlobRule {
     glob: string;
+    root: string;
     index: number;
     isNeg: boolean;
     reg: RegExp;
@@ -136,62 +138,48 @@ interface GlobRule {
  * @param options - defines root and other options
  * @returns a function given a filename returns true if it matches.
  */
-function buildMatcherFn(patterns: string[], options: NormalizedGlobMatchOptions): GlobMatchFn {
+function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions): GlobMatchFn {
     const path = options.nodePath;
-    const dirRoot = path.resolve(path.normalize(options.root));
     const rules: GlobRule[] = patterns
-        .map((p) => p.trim())
-        .map((p, index) => ({ glob: p, index }))
+        .map((p, index) => ({ ...p, index }))
         .filter((r) => !!r.glob)
         .filter((r) => !r.glob.startsWith('#'))
-        .map(({ glob, index }) => {
-            const matchNeg = glob.match(/^!+/);
+        .map(({ glob, root, index }) => {
+            const matchNeg = glob.match(/^!/);
+            const pattern = glob.replace(/^!/, '');
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
-            const pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), glob);
             const reg = mm.makeRe(pattern, { dot: options.dot });
             const fn = (filename: string) => {
                 const match = filename.match(reg);
                 return !!match;
             };
-            return { glob, index, isNeg, fn, reg };
+            return { glob, root, index, isNeg, fn, reg };
         });
     const negRules = rules.filter((r) => r.isNeg);
     const posRules = rules.filter((r) => !r.isNeg);
     const fn: GlobMatchFn = (filename: string) => {
-        filename = path.normalize(filename);
+        filename = path.resolve(path.normalize(filename));
 
-        const absPath = path.resolve(filename);
-        const useAbs = path.isAbsolute(filename) || filename.startsWith('..');
-        const relPath = useAbs ? path.relative(dirRoot, absPath) : filename;
-
-        if (relPath.startsWith('..')) {
-            return { matched: false };
-        }
-
-        const fname = relPath.split(path.sep).join('/');
-
-        for (const rule of negRules) {
-            if (rule.fn(fname)) {
-                return {
-                    matched: false,
-                    glob: rule.glob,
-                    index: rule.index,
-                    isNeg: rule.isNeg,
-                };
+        function testRules(rules: GlobRule[], matched: boolean): GlobMatch | undefined {
+            for (const rule of rules) {
+                if (!filename.startsWith(rule.root)) {
+                    continue;
+                }
+                const relName = path.relative(rule.root, filename);
+                const fname = relName.split(path.sep).join('/');
+                if (rule.fn(fname)) {
+                    return {
+                        matched,
+                        glob: rule.glob,
+                        root: rule.root,
+                        index: rule.index,
+                        isNeg: rule.isNeg,
+                    };
+                }
             }
         }
 
-        for (const rule of posRules) {
-            if (rule.fn(fname)) {
-                return {
-                    matched: true,
-                    glob: rule.glob,
-                    index: rule.index,
-                    isNeg: rule.isNeg,
-                };
-            }
-        }
-        return { matched: false };
+        return testRules(negRules, false) || testRules(posRules, true) || { matched: false };
     };
     return fn;
 }
@@ -199,8 +187,41 @@ function buildMatcherFn(patterns: string[], options: NormalizedGlobMatchOptions)
 type MutationsToSupportGitIgnore = [RegExp, string];
 
 const mutations: MutationsToSupportGitIgnore[] = [
-    [/^!+/, ''], // remove leading !
     [/^[^/#][^/]*$/, '**/{$&,$&/**}'], // no slashes will match files names or folders
     [/^\/(?!\/)/, ''], // remove leading slash to match from the root
     [/\/$/, '$&**'], // if it ends in a slash, make sure matches the folder
 ];
+
+export function isGlobPatternWithOptionalRoot(g: GlobPattern): g is GlobPatternWithOptionalRoot {
+    return typeof g !== 'string' && typeof g.glob === 'string';
+}
+
+export function isGlobPatternWithRoot(g: GlobPatternWithRoot | GlobPatternWithOptionalRoot): g is GlobPatternWithRoot {
+    return !!g.root;
+}
+
+function normalizePattern(pattern: string): string {
+    pattern = pattern.replace(/^(!!)+/, '');
+    const isNeg = pattern.startsWith('!');
+    pattern = isNeg ? pattern.slice(1) : pattern;
+    pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), pattern);
+    return isNeg ? '!' + pattern : pattern;
+}
+
+function normalizeGlobPatternWithRoot(g: GlobPattern, root: string, path: PathInterface): GlobPatternWithRoot {
+    g = !isGlobPatternWithOptionalRoot(g)
+        ? {
+              glob: g.trim(),
+              root,
+          }
+        : g;
+
+    const gr = isGlobPatternWithRoot(g) ? g : { ...g, root };
+    if (gr.root.startsWith('${cwd}')) {
+        gr.root = path.join(path.resolve(), gr.root.replace('${cwd}', ''));
+    }
+    gr.root = path.resolve(root, path.normalize(gr.root));
+    gr.glob = normalizePattern(gr.glob);
+
+    return gr;
+}

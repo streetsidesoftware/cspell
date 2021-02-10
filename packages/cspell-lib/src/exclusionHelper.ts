@@ -28,7 +28,7 @@ export function generateExclusionFunctionForUri(
     allowedSchemes = defaultAllowedSchemes
 ): ExclusionFunction {
     const rootUri = pathToUri(root || '/');
-    const fns = globs.map((glob) => minimatch.filter(glob, { matchBase: true }));
+    const fns = globs.map((glob) => minimatch.filter(glob, { dot: true, matchBase: true }));
 
     function testPath(path: string): boolean {
         return fns.reduce<boolean>((prev: boolean, fn, idx) => prev || fn(path, idx, [path]), false);
