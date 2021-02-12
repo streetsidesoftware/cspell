@@ -23,6 +23,8 @@ export const sectionCSpell = 'cSpell';
 
 export const defaultFileName = 'cspell.json';
 
+export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
+
 const cspellCosmiconfig = {
     searchPlaces: [
         'cspell.config.js',
@@ -82,11 +84,12 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
 
 /**
  * normalizeSettings handles correcting all relative paths, anchoring globs, and importing other config files.
- * @param settings - raw configuration settings
+ * @param rawSettings - raw configuration settings
  * @param pathToSettingsFile - path to the source file of the configuration settings.
  */
-function normalizeSettings(settings: CSpellSettings, pathToSettingsFile: string): CSpellSettings {
+function normalizeSettings(rawSettings: CSpellSettings, pathToSettingsFile: string): CSpellSettings {
     // Fix up dictionaryDefinitions
+    const settings = { ...rawSettings, globRoot: resolveGlobRoot(rawSettings, pathToSettingsFile) };
     const pathToSettings = path.dirname(pathToSettingsFile);
     const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, pathToSettingsFile);
     const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
@@ -484,6 +487,18 @@ class ImportError extends Error {
     constructor(msg: string, readonly cause?: Error) {
         super(msg);
     }
+}
+
+function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): string {
+    const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
+    const defaultGlobRoot = envGlobRoot ?? '${cwd}';
+    const rawRoot =
+        settings.globRoot ??
+        (settings.version === '0.1' || (envGlobRoot && !settings.version)
+            ? defaultGlobRoot
+            : path.dirname(pathToSettingsFile));
+    const globRoot = rawRoot.replace('${cwd}', process.cwd());
+    return globRoot;
 }
 
 function toGlobDef(g: undefined, root: string | undefined): undefined;

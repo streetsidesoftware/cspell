@@ -13,6 +13,7 @@ import {
     ImportFileRefWithError,
     readRawSettings,
     __testing__,
+    ENV_CSPELL_GLOB_ROOT,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
@@ -234,6 +235,49 @@ describe('Validate Overrides', () => {
     });
 });
 
+describe('Validate Glob resolution', () => {
+    beforeAll(() => {
+        delete process.env[ENV_CSPELL_GLOB_ROOT];
+    });
+
+    test('normalized settings', () => {
+        expect(sampleSettings).not.toEqual(sampleSettingsV1);
+        expect(sampleSettings.globRoot).not.toEqual(sampleSettingsV1.globRoot);
+        expect(sampleSettings.globRoot).toBe(__dirname);
+        expect(sampleSettingsV1.globRoot).toBe(process.cwd());
+        expect(sampleSettings.ignorePaths).toEqual(
+            expect.arrayContaining([{ glob: 'node_modules', root: sampleSettings.globRoot }])
+        );
+        expect(sampleSettingsV1.ignorePaths).toEqual(
+            expect.arrayContaining([{ glob: 'node_modules', root: sampleSettingsV1.globRoot }])
+        );
+    });
+
+    test('Using ENV_CSPELL_GLOB_ROOT as __dirname', () => {
+        process.env[ENV_CSPELL_GLOB_ROOT] = __dirname;
+        const settingsV = normalizeSettings(rawSampleSettings, __filename);
+        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename);
+
+        expect(settingsV).toEqual(sampleSettings);
+        expect(settingsV1).not.toEqual(sampleSettingsV1);
+
+        delete settingsV1.version;
+        expect(settingsV1).toEqual(sampleSettings);
+    });
+
+    test('Using ENV_CSPELL_GLOB_ROOT as __dirname/..', () => {
+        process.env[ENV_CSPELL_GLOB_ROOT] = path.resolve(__dirname, '..');
+        const settingsV = normalizeSettings(rawSampleSettings, __filename);
+        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename);
+
+        expect(settingsV).not.toEqual(sampleSettings);
+        expect(settingsV1).not.toEqual(sampleSettingsV1);
+
+        delete settingsV1.version;
+        expect(settingsV1).toEqual(settingsV);
+    });
+});
+
 describe('Validate search/load config files', () => {
     function importRefWithError(filename: string): ImportFileRefWithError {
         return {
@@ -343,24 +387,28 @@ function relSamples(file: string) {
     return path.resolve(samplesDir, file);
 }
 
-const sampleSettings: CSpellUserSettings = normalizeSettings(
-    {
-        language: 'en',
-        languageId: 'plaintext',
-        overrides: [
-            {
-                filename: '**/*.ts',
-                languageId: 'typescript',
-            },
-            {
-                filename: '**/*.lex',
-                languageId: 'lex',
-            },
-            {
-                filename: '**/NL/*.txt',
-                language: 'en,nl',
-            },
-        ],
-    },
-    __filename
-);
+const rawSampleSettings: CSpellUserSettings = {
+    language: 'en',
+    languageId: 'plaintext',
+    ignorePaths: ['node_modules'],
+    overrides: [
+        {
+            filename: '**/*.ts',
+            languageId: 'typescript',
+        },
+        {
+            filename: '**/*.lex',
+            languageId: 'lex',
+        },
+        {
+            filename: '**/NL/*.txt',
+            language: 'en,nl',
+        },
+    ],
+};
+
+const rawSampleSettingsV1: CSpellUserSettings = { ...rawSampleSettings, version: '0.1' };
+
+const sampleSettings: CSpellUserSettings = normalizeSettings(rawSampleSettings, __filename);
+
+const sampleSettingsV1: CSpellUserSettings = normalizeSettings(rawSampleSettingsV1, __filename);
