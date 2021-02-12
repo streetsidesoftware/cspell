@@ -1,14 +1,13 @@
 import { URI as Uri } from 'vscode-uri';
-import * as minimatch from 'minimatch';
-
-const separator = '/';
+import { Glob } from '@cspell/cspell-types';
+import { GlobMatcher } from 'cspell-glob';
 
 const defaultAllowedSchemes = new Set(['file', 'untitled']);
 
-export type ExclusionFunction = (filename: string) => boolean;
+export type ExclusionFunction = (fileUri: string) => boolean;
+export type FileExclusionFunction = (file: string) => boolean;
 
-export type Glob = string;
-
+/** The structure of the VS Code search.exclude settings */
 export interface ExcludeFilesGlobMap {
     [glob: string]: boolean;
 }
@@ -22,42 +21,41 @@ export function pathToUri(filePath: string): Uri {
     return Uri.file(filePath);
 }
 
+const leadingGlobPattern = /^\*\*\/([^/*{}]+)$/;
+
+function adjustGlobPatternForBackwardsCompatibility(g: string): string {
+    return g.replace(leadingGlobPattern, '**/{$1,$1/**}');
+}
+
+function adjustGlobPatternsForBackwardsCompatibility(globs: Glob[]): Glob[] {
+    return globs.map((g) => {
+        if (typeof g === 'string') {
+            return adjustGlobPatternForBackwardsCompatibility(g);
+        }
+        return { ...g, glob: adjustGlobPatternForBackwardsCompatibility(g.glob) };
+    });
+}
+
+/**
+ * @todo Support multi root globs.
+ * @param globs - glob patterns
+ * @param root - root directory
+ * @param allowedSchemes - allowed schemas
+ */
 export function generateExclusionFunctionForUri(
     globs: Glob[],
     root: string,
     allowedSchemes = defaultAllowedSchemes
 ): ExclusionFunction {
-    const rootUri = pathToUri(root || '/');
-    const fns = globs.map((glob) => minimatch.filter(glob, { dot: true, matchBase: true }));
-
-    function testPath(path: string): boolean {
-        return fns.reduce<boolean>((prev: boolean, fn, idx) => prev || fn(path, idx, [path]), false);
-    }
-
-    function testPathStepByStep(path: string) {
-        const parts = path.split(separator);
-        for (let i = 0; i < parts.length; ++i) {
-            const p = parts.slice(0, i + 1).join(separator);
-            if (testPath(p)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    const adjustedGlobs = adjustGlobPatternsForBackwardsCompatibility(globs);
+    const matchFn = generateExclusionFunctionForFiles(adjustedGlobs, root);
 
     function testUri(uri: Uri): boolean {
         if (!allowedSchemes.has(uri.scheme)) {
             return true;
         }
 
-        const relativeRoot = uri.path.slice(0, rootUri.path.length);
-        if (relativeRoot === rootUri.path) {
-            const relativeToRoot = uri.path.slice(rootUri.path.length);
-            return testPathStepByStep(relativeToRoot);
-        }
-
-        // the uri is not relative to the root.
-        return testPathStepByStep(uri.path);
+        return matchFn(uri.scheme === 'file' ? uri.fsPath : uri.path);
     }
 
     function testUriPath(uriPath: string): boolean {
@@ -65,4 +63,16 @@ export function generateExclusionFunctionForUri(
         return testUri(uri);
     }
     return testUriPath;
+}
+
+/**
+ * @todo Support multi root globs.
+ * @param globs - glob patterns
+ * @param root - root directory
+ * @param allowedSchemes - allowed schemas
+ */
+export function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction {
+    const matcher = new GlobMatcher(globs, { root, dot: true });
+
+    return (file: string) => matcher.match(file);
 }

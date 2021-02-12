@@ -12,10 +12,10 @@ import {
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
-import minimatch from 'minimatch';
 import { resolveFile } from '../util/resolveFile';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
+import { GlobMatcher } from 'cspell-glob';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -80,14 +80,17 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
     return s;
 }
 
+/**
+ * normalizeSettings handles correcting all relative paths, anchoring globs, and importing other config files.
+ * @param settings - raw configuration settings
+ * @param pathToSettingsFile - path to the source file of the configuration settings.
+ */
 function normalizeSettings(settings: CSpellSettings, pathToSettingsFile: string): CSpellSettings {
     // Fix up dictionaryDefinitions
     const pathToSettings = path.dirname(pathToSettingsFile);
-    const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettingsFile);
-    const languageSettings = (settings.languageSettings || []).map((langSetting) => ({
-        ...langSetting,
-        dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions || [], pathToSettingsFile),
-    }));
+    const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, pathToSettingsFile);
+    const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
+    const normalizedOverrides = normalizeOverrides(settings, pathToSettingsFile);
 
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
     const source: Source = settings.source || {
@@ -95,7 +98,12 @@ function normalizeSettings(settings: CSpellSettings, pathToSettingsFile: string)
         filename: pathToSettingsFile,
     };
 
-    const fileSettings = { ...settings, dictionaryDefinitions, languageSettings };
+    const fileSettings = {
+        ...settings,
+        ...normalizedDictionaryDefs,
+        ...normalizedSettingsGlobs,
+        ...normalizedOverrides,
+    };
     if (!imports.length) {
         return fileSettings;
     }
@@ -402,17 +410,22 @@ export function clearCachedSettingsFiles(): void {
     cachedFiles.clear();
 }
 
-export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean {
-    if (!Array.isArray(globs)) {
-        globs = [globs];
-    }
-    const globDefs = globs.map(toGlobDef).filter((g) => !g.root || filename.startsWith(g.root));
+const globMatcherCache = new Map<Glob | Glob[], GlobMatcher>();
+const globMatcherCacheMaxSize = 1000;
 
-    const matches = globDefs.filter((g) => {
-        const f = g.root ? filename.slice(g.root.length) : filename;
-        return minimatch(f, g.glob, { matchBase: true });
-    });
-    return matches.length > 0;
+export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean {
+    const matcher = globMatcherCache.get(globs);
+    if (matcher) {
+        return matcher.match(filename);
+    }
+
+    if (globMatcherCache.size >= globMatcherCacheMaxSize) {
+        globMatcherCache.clear();
+    }
+
+    const m = new GlobMatcher(globs);
+    globMatcherCache.set(globs, m);
+    return m.match(filename);
 }
 
 function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
@@ -473,14 +486,85 @@ class ImportError extends Error {
     }
 }
 
-function isGlobDef(g: Glob): g is GlobDef {
-    return typeof g !== 'string';
+function toGlobDef(g: undefined, root: string | undefined): undefined;
+function toGlobDef(g: Glob, root: string | undefined): GlobDef;
+function toGlobDef(g: Glob[], root: string | undefined): GlobDef[];
+function toGlobDef(g: Glob | Glob[], root: string | undefined): GlobDef | GlobDef[];
+function toGlobDef(g: Glob | Glob[] | undefined, root: string | undefined): GlobDef | GlobDef[] | undefined {
+    if (g === undefined) return undefined;
+    if (Array.isArray(g)) {
+        return g.map((g) => toGlobDef(g, root));
+    }
+    if (typeof g === 'string')
+        return {
+            glob: g,
+            root,
+        };
+    return g;
 }
 
-function toGlobDef(g: Glob): GlobDef {
-    if (isGlobDef(g)) return g;
+interface NormalizeDictionaryDefsParams {
+    dictionaryDefinitions?: CSpellSettings['dictionaryDefinitions'];
+    languageSettings?: CSpellSettings['languageSettings'];
+}
+
+function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathToSettingsFile: string) {
+    const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettingsFile);
+    const languageSettings = (settings.languageSettings || []).map((langSetting) => ({
+        ...langSetting,
+        dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions || [], pathToSettingsFile),
+    }));
+
     return {
-        glob: g,
-        root: undefined,
+        dictionaryDefinitions,
+        languageSettings,
     };
 }
+
+interface NormalizeOverrides {
+    globRoot?: CSpellSettings['globRoot'];
+    overrides?: CSpellSettings['overrides'];
+}
+
+interface NormalizeOverridesResult {
+    overrides: CSpellSettings['overrides'];
+}
+
+function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: string): NormalizeOverridesResult {
+    const { globRoot = path.dirname(pathToSettingsFile) } = settings;
+    const overrides = (settings.overrides || []).map((override) => {
+        const filename = toGlobDef(override.filename, globRoot);
+        const { dictionaryDefinitions, languageSettings } = normalizeDictionaryDefs(override, pathToSettingsFile);
+        return { ...override, filename, dictionaryDefinitions, languageSettings };
+    });
+
+    return {
+        overrides,
+    };
+}
+
+interface NormalizeSettingsGlobs {
+    globRoot?: CSpellSettings['globRoot'];
+    ignorePaths?: CSpellSettings['ignorePaths'];
+}
+
+interface NormalizeSettingsGlobsResult {
+    ignorePaths?: GlobDef[];
+}
+
+function normalizeSettingsGlobs(
+    settings: NormalizeSettingsGlobs,
+    pathToSettingsFile: string
+): NormalizeSettingsGlobsResult {
+    const { globRoot = path.dirname(pathToSettingsFile) } = settings;
+    if (settings.ignorePaths === undefined) return {};
+
+    const ignorePaths = toGlobDef(settings.ignorePaths, globRoot);
+    return {
+        ignorePaths,
+    };
+}
+
+export const __testing__ = {
+    normalizeSettings,
+};

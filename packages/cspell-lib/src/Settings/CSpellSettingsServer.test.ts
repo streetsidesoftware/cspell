@@ -12,10 +12,13 @@ import {
     loadConfig,
     ImportFileRefWithError,
     readRawSettings,
+    __testing__,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
+
+const { normalizeSettings } = __testing__;
 
 const samplesDir = path.resolve(path.join(__dirname, '../../samples'));
 const samplesSrc = path.join(samplesDir, 'src');
@@ -201,35 +204,33 @@ describe('Validate CSpellSettingsServer', () => {
 });
 
 describe('Validate Overrides', () => {
-    test('tests  checkFilenameMatchesGlob', () => {
-        const tests = [
-            { f: 'nested/dir/spell.test.ts', g: 'nested/**', e: true },
-            { f: 'nested/dir/spell.test.ts', g: 'nested', e: false },
-            { f: 'nested/dir/spell.test.ts', g: '*.ts', e: true },
-            { f: 'nested/dir/spell.test.ts', g: '**/*.ts', e: true },
-            { f: 'nested/dir/spell.test.ts', g: ['**/*.ts'], e: true },
-            { f: 'nested/dir/spell.test.ts', g: ['**/dir/**/*.ts'], e: true },
-            { f: 'nested/dir/spell.test.js', g: ['**/*.ts'], e: false },
-            { f: 'nested/dir/spell.test.js', g: ['*.ts', '*.test.js'], e: true },
-            { f: '/cspell-dicts/nl_NL/Dutch.txt', g: '**/nl_NL/**', e: true },
-        ];
-
-        tests.forEach((
-            { f, g, e } // f: ${f}, g: ${g}, e: ${e}
-        ) => expect(checkFilenameMatchesGlob(f, g)).toBe(e));
+    test.each`
+        file                               | glob                                      | expected
+        ${'nested/dir/spell.test.ts'}      | ${'nested/**'}                            | ${false /* nested/** tests against the current dir not __dirname */}
+        ${'nested/dir/spell.test.ts'}      | ${{ glob: 'nested/**', root: __dirname }} | ${true /* setting the root to __dirname will allow this to be true. */}
+        ${'nested/dir/spell.test.ts'}      | ${'nested'}                               | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${'*.ts'}                                 | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${'**/*.ts'}                              | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${['**/*.ts']}                            | ${true}
+        ${'nested/dir/spell.test.ts'}      | ${['**/dir/**/*.ts']}                     | ${true}
+        ${'nested/dir/spell.test.js'}      | ${['**/*.ts']}                            | ${false}
+        ${'nested/dir/spell.test.js'}      | ${['*.ts', '*.test.js']}                  | ${true}
+        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'**/nl_NL/**'}                          | ${false /* the file is a root filename */}
+        ${'cspell-dicts/nl_NL/Dutch.txt'}  | ${'**/nl_NL/**'}                          | ${true}
+    `('checkFilenameMatchesGlob "$file" against "$glob" expect: $expected', ({ file, glob, expected }) => {
+        file = path.resolve(__dirname, file);
+        expect(checkFilenameMatchesGlob(file, glob)).toBe(expected);
     });
 
-    test('calcOverrideSettings', () => {
-        interface Test {
-            f: string;
-            e: [keyof CSpellUserSettings, string][];
-        }
-        const tests: Test[] = [{ f: 'nested/dir/spell.test.ts', e: [['languageId', 'typescript']] }];
-
-        tests.forEach(({ f, e }) => {
-            const r = calcOverrideSettings(sampleSettings, f);
-            e.forEach(([k, v]) => expect(r[k]).toBe(v));
-        });
+    test.each`
+        file                          | expected
+        ${'nested/dir/spell.test.ts'} | ${{ languageId: 'typescript' }}
+        ${'nested/docs/NL/myDoc.lex'} | ${{ languageId: 'lex', language: 'en' }}
+        ${'nested/docs/NL/myDoc.txt'} | ${{ languageId: 'plaintext', language: 'en,nl' }}
+    `('calcOverrideSettings $file expected $expected', ({ file, expected }) => {
+        file = path.resolve(__dirname, file);
+        const r = calcOverrideSettings(sampleSettings, file);
+        expect(r).toEqual(expect.objectContaining(expected));
     });
 });
 
@@ -342,21 +343,24 @@ function relSamples(file: string) {
     return path.resolve(samplesDir, file);
 }
 
-const sampleSettings: CSpellUserSettings = {
-    language: 'en',
-    languageId: 'plaintext',
-    overrides: [
-        {
-            filename: '**/*.ts',
-            languageId: 'typescript',
-        },
-        {
-            filename: '**/*.lex',
-            languageId: 'lex',
-        },
-        {
-            filename: '**/NL/*.txt',
-            language: 'en,nl',
-        },
-    ],
-};
+const sampleSettings: CSpellUserSettings = normalizeSettings(
+    {
+        language: 'en',
+        languageId: 'plaintext',
+        overrides: [
+            {
+                filename: '**/*.ts',
+                languageId: 'typescript',
+            },
+            {
+                filename: '**/*.lex',
+                languageId: 'lex',
+            },
+            {
+                filename: '**/NL/*.txt',
+                language: 'en,nl',
+            },
+        ],
+    },
+    __filename
+);

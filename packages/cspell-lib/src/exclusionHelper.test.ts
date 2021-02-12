@@ -10,6 +10,19 @@ describe('Verify Exclusion Helper functions', () => {
         expect(extractGlobsFromExcludeFilesGlobMap(excludeDef)).toEqual(['**/node_modules', '**/typings']);
     });
 
+    const excludeGlobs = ['**/node_modules', '**/typings', '.vscode'];
+    const fnExcludeGlobs = generateExclusionFunctionForUri(excludeGlobs, '/project/myProject');
+
+    test.each`
+        uri                                                             | expected
+        ${'file:///project/myProject/node_modules'}                     | ${true}
+        ${'file:///project/myProject/node_modules/test/test.js'}        | ${true}
+        ${'file:///project/myProject/.vscode/cSpell.json'}              | ${true}
+        ${'file:///project/myProject/.github/node_modules/cSpell.json'} | ${true}
+    `('test generated matching function "$uri" expected: $expected', ({ uri, expected }) => {
+        expect(fnExcludeGlobs(uri)).toBe(expected);
+    });
+
     test('the generated matching function', () => {
         const globs = ['**/node_modules', '**/typings', '.vscode'];
         const filesMatching = [
