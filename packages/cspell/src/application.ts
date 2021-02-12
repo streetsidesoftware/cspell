@@ -294,6 +294,10 @@ function runLint(cfg: CSpellApplicationConfiguration) {
     async function run(): Promise<RunResult> {
         header();
 
+        if (cfg.root) {
+            process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
+        }
+
         const configInfo: ConfigInfo = await readConfig(cfg.configFile);
         cfg.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 

@@ -27,9 +27,9 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
 export interface FileSettings extends ExtendableSettings {
     /**
      * Configuration format version of the setting file.
-     * @default "0.1"
+     * @default "0.2"
      */
-    version?: string | '0.1';
+    version?: string | '0.2' | '0.1';
 
     /** Words to add to dictionary -- should only be in the user config file. */
     userWords?: string[];
@@ -40,10 +40,17 @@ export interface FileSettings extends ExtendableSettings {
     /**
      * The root to use for glop patterns found in this configuration.
      * Default: location of the configuration file.
+     *   For compatibility reasons, config files with version 0.1, the glob root will
+     *   default to be `${cwd}`.
      *
      * Use `globRoot` to define a different location.
      * `globRoot` can be relative to the location of this configuration file.
      * Defining globRoot, does not impact imported configurations.
+     *
+     * Special Values:
+     * - `${cwd}` - will be replaced with the current working directory.
+     * - `.` - will be the location of the containing configuration file.
+     *
      */
     globRoot?: FsPath;
 
