@@ -222,9 +222,16 @@ export function readSettingsFiles(filenames: string[]): CSpellSettings {
 /**
  * Merges two lists of strings and removes duplicates.  Order is NOT preserved.
  */
-function mergeList<T>(left: T[] = [], right: T[] = []) {
-    const setOfWords = new Set([...left, ...right]);
-    return [...setOfWords.keys()];
+function mergeList(left: undefined, right: undefined): undefined;
+function mergeList<T>(left: T[], right: T[]): T[];
+function mergeList<T>(left: undefined, right: T[]): T[];
+function mergeList<T>(left: T[], right: undefined): T[];
+function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
+function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
+    if (left === undefined) return right;
+    if (right === undefined) return left;
+    const uniqueItems = new Set([...left, ...right]);
+    return [...uniqueItems.keys()];
 }
 
 function tagLanguageSettings(tag: string, settings: LanguageSetting[] = []): LanguageSetting[] {
@@ -271,9 +278,9 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
     const leftId = left.id || left.languageId || '';
     const rightId = right.id || right.languageId || '';
 
-    const includeRegExpList = takeRightThenLeft(left.includeRegExpList, right.includeRegExpList);
+    const includeRegExpList = takeRightOtherwiseLeft(left.includeRegExpList, right.includeRegExpList);
 
-    const optionals = includeRegExpList.length ? { includeRegExpList } : {};
+    const optionals = includeRegExpList?.length ? { includeRegExpList } : {};
 
     const settings: CSpellSettings = {
         ...left,
@@ -295,12 +302,27 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
             tagLanguageSettings(rightId, right.languageSettings)
         ),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
+        files: mergeList(left.files, right.files),
+        ignorePaths: versionBasedMergeList(left.ignorePaths, right.ignorePaths, right.version),
+        overrides: versionBasedMergeList(left.overrides, right.overrides, right.version),
         source: mergeSources(left, right),
+        globRoot: undefined,
         import: undefined,
         __imports: mergeImportRefs(left, right),
         __importRef: undefined,
     };
     return settings;
+}
+
+function versionBasedMergeList<T>(
+    left: T[] | undefined,
+    right: T[] | undefined,
+    version: CSpellSettings['version']
+): T[] | undefined {
+    if (version === '0.1') {
+        return takeRightOtherwiseLeft(left, right);
+    }
+    return mergeList(left, right);
 }
 
 function hasLeftAncestor(s: CSpellSettings, left: CSpellSettings): boolean {
@@ -332,11 +354,20 @@ export function mergeInDocSettings(left: CSpellSettings, right: CSpellSettings):
     return merged;
 }
 
-function takeRightThenLeft<T>(left: T[] = [], right: T[] = []) {
-    if (right.length) {
+/**
+ * If right is non-empty return right, otherwise return left.
+ * @param left - left hand values
+ * @param right - right hand values
+ */
+function takeRightOtherwiseLeft(left: undefined, right: undefined): undefined;
+function takeRightOtherwiseLeft<T>(left: T[], right: undefined): T[];
+function takeRightOtherwiseLeft<T>(left: undefined, right: T[]): T[];
+function takeRightOtherwiseLeft<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
+function takeRightOtherwiseLeft<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
+    if (right?.length) {
         return right;
     }
-    return left;
+    return left || right;
 }
 
 export function calcOverrideSettings(settings: CSpellSettings, filename: string): CSpellSettings {

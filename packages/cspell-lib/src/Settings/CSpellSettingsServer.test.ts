@@ -31,18 +31,10 @@ describe('Validate CSpellSettingsServer', () => {
         const left = { name: 'Left' };
         const right = { name: 'Right' };
         expect(mergeSettings(left, right)).toEqual({
-            words: [],
             name: 'Left|Right',
             id: '|',
-            userWords: [],
-            ignoreWords: [],
-            flagWords: [],
-            patterns: [],
             enabledLanguageIds: [],
             languageSettings: [],
-            ignoreRegExpList: [],
-            dictionaries: [],
-            dictionaryDefinitions: [],
             source: { name: 'Left|Right', sources: [left, right] },
         });
     });
@@ -54,16 +46,8 @@ describe('Validate CSpellSettingsServer', () => {
             enabled: true,
             name: '|enabledName',
             id: 'left|enabledId',
-            words: [],
-            userWords: [],
-            ignoreWords: [],
-            flagWords: [],
-            patterns: [],
             enabledLanguageIds: [],
             languageSettings: [],
-            ignoreRegExpList: [],
-            dictionaries: [],
-            dictionaryDefinitions: [],
             source: { name: 'left|enabledName', sources: [left, enabled] },
         });
     });
@@ -77,16 +61,8 @@ describe('Validate CSpellSettingsServer', () => {
             enabled: right.enabled,
             name: '|',
             id: [left.id, right.id].join('|'),
-            words: [],
-            userWords: [],
-            ignoreWords: [],
-            flagWords: [],
-            patterns: [],
             enabledLanguageIds: [],
             languageSettings: [],
-            ignoreRegExpList: [],
-            dictionaries: [],
-            dictionaryDefinitions: [],
             source: { name: 'left|right', sources: [left, right] },
         });
     });
@@ -96,17 +72,78 @@ describe('Validate CSpellSettingsServer', () => {
             enabled: false,
             name: '|',
             id: '|',
-            words: [],
-            userWords: [],
-            ignoreWords: [],
-            flagWords: [],
-            patterns: [],
             enabledLanguageIds: [],
             languageSettings: [],
-            ignoreRegExpList: [],
-            dictionaries: [],
-            dictionaryDefinitions: [],
             source: { name: 'left|right', sources: [{ enabled: true }, { enabled: false }] },
+        });
+    });
+
+    test('tests mergeSettings with ignorePaths, files, and overrides', () => {
+        const left: CSpellUserSettings = {
+            id: 'left',
+            files: ['left/**/*.*'],
+            ignorePaths: ['node_modules'],
+            overrides: [
+                {
+                    filename: '*.ts',
+                    dictionaries: ['ts-extra'],
+                },
+            ],
+        };
+        const right: CSpellUserSettings = {
+            id: 'right',
+            enabled: true,
+            files: ['right/**/*.*'],
+            overrides: [{ filename: '*.jsxx', languageId: 'javascript' }], // cspell:ignore jsxx
+        };
+        expect(mergeSettings({}, right)).toEqual(right);
+        expect(mergeSettings(left, {})).toEqual(left);
+        expect(mergeSettings(left, right)).toEqual({
+            enabled: right.enabled,
+            name: '|',
+            id: [left.id, right.id].join('|'),
+            enabledLanguageIds: [],
+            languageSettings: [],
+            files: left.files?.concat(right.files || []),
+            ignorePaths: left.ignorePaths?.concat(right.ignorePaths || []),
+            overrides: left.overrides?.concat(right.overrides || []),
+            source: { name: 'left|right', sources: [left, right] },
+        });
+    });
+
+    test('tests mergeSettings with ignorePaths, files, and overrides compatibility', () => {
+        const left: CSpellUserSettings = {
+            id: 'left',
+            files: ['left/**/*.*'],
+            ignorePaths: ['node_modules'],
+            overrides: [
+                {
+                    filename: '*.ts',
+                    dictionaries: ['ts-extra'],
+                },
+            ],
+        };
+        const right: CSpellUserSettings = {
+            id: 'right',
+            version: '0.1',
+            enabled: true,
+            files: ['right/**/*.*'],
+            ignorePaths: ['node_modules'],
+            overrides: [{ filename: '*.jsxx', languageId: 'javascript' }], // cspell:ignore jsxx
+        };
+        expect(mergeSettings({}, right)).toEqual(right);
+        expect(mergeSettings(left, {})).toEqual(left);
+        expect(mergeSettings(left, right)).toEqual({
+            enabled: right.enabled,
+            name: '|',
+            id: [left.id, right.id].join('|'),
+            version: right.version,
+            enabledLanguageIds: [],
+            languageSettings: [],
+            files: left.files?.concat(right.files || []),
+            ignorePaths: right.ignorePaths,
+            overrides: right.overrides,
+            source: { name: 'left|right', sources: [left, right] },
         });
     });
 

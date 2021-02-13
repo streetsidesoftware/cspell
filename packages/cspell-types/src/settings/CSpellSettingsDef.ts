@@ -29,7 +29,7 @@ export interface FileSettings extends ExtendableSettings {
      * Configuration format version of the setting file.
      * @default "0.2"
      */
-    version?: string | '0.2' | '0.1';
+    version?: '0.2' | '0.1';
 
     /** Words to add to dictionary -- should only be in the user config file. */
     userWords?: string[];
@@ -54,11 +54,11 @@ export interface FileSettings extends ExtendableSettings {
      */
     globRoot?: FsPath;
 
-    // /**
-    //  * Glob patterns of files to be checked.
-    //  * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
-    //  */
-    // files?: Glob[];
+    /**
+     * Glob patterns of files to be checked.
+     * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+     */
+    files?: Glob[];
 
     /**
      * Glob patterns of files to be ignored
