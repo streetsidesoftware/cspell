@@ -5,7 +5,7 @@ import {
     calcExcludeGlobInfo,
     extractGlobExcludesFromConfig,
     extractPatterns,
-    normalizeExcludeGlobsToRoot,
+    normalizeGlobsToRoot,
 } from './util/glob';
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
@@ -13,7 +13,7 @@ import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
 import { traceWords, TraceResult, CheckTextInfo, getDictionary } from 'cspell-lib';
-import { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellSettings, CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { IOptions } from './util/IOptions';
@@ -292,13 +292,20 @@ function runLint(cfg: CSpellApplicationConfiguration) {
     }
 
     async function run(): Promise<RunResult> {
-        header();
-
         if (cfg.root) {
             process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
         }
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile);
+        const cliGlobs: Glob[] = cfg.files;
+        const allGlobs: Glob[] = cliGlobs.concat(configInfo.config.files || []);
+        const fileGlobs: string[] = normalizeGlobsToRoot(allGlobs, cfg.root);
+        if (!fileGlobs.length) {
+            // Nothing to do.
+            return runResult();
+        }
+        header(fileGlobs);
+
         cfg.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
         const configErrors = await countConfigErrors(configInfo);
@@ -306,17 +313,19 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const ignoreGlobs = normalizeExcludeGlobsToRoot(configInfo.config.ignorePaths || [], root);
+        const ignoreGlobs = normalizeGlobsToRoot(configInfo.config.ignorePaths || [], root);
         const globOptions = { root, cwd: root, ignore: ignoreGlobs };
         const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(
             cfg.excludes
         );
-        const files = filterFiles(await findFiles(cfg.files, globOptions), exclusionGlobs);
+        const files = filterFiles(await findFiles(fileGlobs, globOptions), exclusionGlobs);
 
         return processFiles(fileLoader(files), configInfo, files.length);
     }
 
-    function header() {
+    function header(files: string[]) {
+        const formattedFiles = files.length > 100 ? files.slice(0, 100).concat(['...']) : files;
+
         cfg.info(
             `
 cspell;
@@ -327,7 +336,7 @@ Options:
     exclude:   ${extractPatterns(cfg.excludes)
         .map((a) => a.glob.glob)
         .join('\n             ')}
-    files:     ${cfg.files}
+    files:     ${formattedFiles}
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
     unique:    ${yesNo(!!cfg.options.unique)}
 `,

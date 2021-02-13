@@ -168,7 +168,7 @@ export const _testing_ = {
 export function calcExcludeGlobInfo(root: string, commandLineExclude: string[] | string | undefined): GlobSrcInfo[] {
     commandLineExclude = typeof commandLineExclude === 'string' ? [commandLineExclude] : commandLineExclude;
     const choice = calcGlobs(commandLineExclude);
-    const matcher = new GlobMatcher(choice.globs, root);
+    const matcher = new GlobMatcher(choice.globs, { root, dot: true });
     return [
         {
             matcher,
@@ -181,7 +181,7 @@ export function extractGlobExcludesFromConfig(root: string, source: string, conf
     if (!config.ignorePaths || !config.ignorePaths.length) {
         return [];
     }
-    const matcher = new GlobMatcher(config.ignorePaths, root);
+    const matcher = new GlobMatcher(config.ignorePaths, { root, dot: true });
     return [{ source, matcher }];
 }
 
@@ -267,7 +267,7 @@ function mapToGlobPatternWithRoot(g: Glob, root: string): GlobPatternWithRoot {
  * @param globs Glob patterns.
  * @param root
  */
-export function normalizeExcludeGlobsToRoot(globs: Glob[], root: string): string[] {
+export function normalizeGlobsToRoot(globs: Glob[], root: string): string[] {
     const withRoots = globs.map((g) => mapToGlobPatternWithRoot(g, root));
     return flatten(withRoots.map((g) => mapGlobToRoot(g, root)).filter(isNotUndefined));
 }

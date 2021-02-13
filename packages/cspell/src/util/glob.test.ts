@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { _testing_, calcGlobs, normalizeExcludeGlobsToRoot } from './glob';
+import { _testing_, calcGlobs, normalizeGlobsToRoot } from './glob';
 import { GlobMatcher } from 'cspell-glob';
 import mm = require('micromatch');
 // import minimatch = require('minimatch');
@@ -84,7 +84,7 @@ describe('Validate internal functions', () => {
             file = path.resolve(file);
             const globMatcher = new GlobMatcher(glob, globRoot);
             const patterns = globMatcher.patterns;
-            const r = normalizeExcludeGlobsToRoot(patterns, root);
+            const r = normalizeGlobsToRoot(patterns, root);
             expect(r).toEqual(expectedGlob);
 
             const relToRoot = path.relative(root, file);
