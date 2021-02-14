@@ -1,3 +1,9 @@
-export { GlobMatchOptions, GlobMatcher, isGlobPatternWithRoot, isGlobPatternWithOptionalRoot } from './GlobMatcher';
+export { GlobMatchOptions, GlobMatcher } from './GlobMatcher';
 export * from './GlobMatcherTypes';
-export { fileOrGlobToGlob } from './globHelper';
+export {
+    fileOrGlobToGlob,
+    isGlobPatternWithRoot,
+    isGlobPatternWithOptionalRoot,
+    normalizeGlobPatterns,
+    NormalizeOptions,
+} from './globHelper';
