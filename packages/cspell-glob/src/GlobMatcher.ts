@@ -1,49 +1,66 @@
 import mm = require('micromatch');
 import * as Path from 'path';
+const { posix } = Path;
+const { relative } = posix;
+import {
+    PathInterface,
+    GlobMatch,
+    GlobPattern,
+    GlobPatternWithRoot,
+    GlobPatternNormalized,
+    GlobPatternWithOptionalRoot,
+} from './GlobMatcherTypes';
 
 // cspell:ignore fname
 
-export interface PathInterface {
-    normalize(p: string): string;
-    join(...paths: string[]): string;
-    resolve(...paths: string[]): string;
-    relative(from: string, to: string): string;
-    isAbsolute(p: string): boolean;
-    sep: string;
-}
-
-export type GlobMatch = GlobMatchRule | GlobMatchNoRule;
-
-export interface GlobMatchRule {
-    matched: boolean;
-    glob: string;
-    root: string;
-    index: number;
-    isNeg: boolean;
-}
-
-export interface GlobMatchNoRule {
-    matched: false;
-}
-
 export type GlobMatchOptions = Partial<NormalizedGlobMatchOptions>;
 
+export type MatcherMode = 'exclude' | 'include';
+
 interface NormalizedGlobMatchOptions {
+    /**
+     * The matcher has two modes (`include` or `exclude`) that impact how globs behave.
+     *
+     * `include` - designed for searching for file. By default it matches a sub-set of file.
+     *   In include mode, the globs need to be more explicit to match.
+     * - `dot` is by default false.
+     * - `nested` is by default false.
+     *
+     * `exclude` - designed to emulate `.gitignore`. By default it matches a larger range of files.
+     * - `dot` is by default true.
+     * - `nested` is by default true.
+     *
+     * @default: 'exclude'
+     */
+    mode: MatcherMode;
+
+    /**
+     * The default directory from which a glob is relative.
+     * Any globs that are not relative to the root will ignored.
+     * @default: process.cwd()
+     */
     root: string;
+
+    /**
+     * Allows matching against directories with a leading `.`.
+     *
+     * @default: mode == 'exclude'
+     */
     dot: boolean;
+
+    /**
+     * Allows matching against nested directories or files without needing to add `**`
+     *
+     * @default: mode == 'exclude'
+     */
+    nested: boolean;
+
+    /**
+     * Mostly used for testing purposes. It allows explicitly specifying `path.win32` or `path.posix`.
+     *
+     * @default: require('path')
+     */
     nodePath: PathInterface;
-}
-
-export type GlobPattern = SimpleGlobPattern | GlobPatternWithRoot | GlobPatternWithOptionalRoot;
-
-export type SimpleGlobPattern = string;
-export interface GlobPatternWithOptionalRoot {
-    glob: string;
-    root?: string;
-}
-
-export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {
-    root: string;
 }
 
 export class GlobMatcher {
@@ -82,18 +99,27 @@ export class GlobMatcher {
 
         const options =
             typeof rootOrOptions === 'string' ? { root: rootOrOptions, nodePath: _nodePath } : rootOrOptions ?? {};
+        const { mode = 'exclude' } = options;
+        const isExcludeMode = mode !== 'include';
 
-        const { root = _nodePath.resolve(), dot = false, nodePath = _nodePath } = options;
+        const {
+            root = _nodePath.resolve(),
+            dot = isExcludeMode,
+            nodePath = _nodePath,
+            nested = isExcludeMode,
+        } = options;
 
         const normalizedRoot = nodePath.resolve(nodePath.normalize(root));
-        this.options = { root: normalizedRoot, dot, nodePath };
+        this.options = { root: normalizedRoot, dot, nodePath, nested, mode };
 
         patterns = Array.isArray(patterns)
             ? patterns
             : typeof patterns === 'string'
             ? patterns.split(/\r?\n/g)
             : [patterns];
-        const globPatterns = patterns.map((p) => normalizeGlobPatternWithRoot(p, normalizedRoot, nodePath));
+        const globPatterns = normalizeGlobPatterns(patterns, this.options)
+            // Only keep globs that do not match the root when using exclude mode.
+            .filter((g) => isExcludeMode || g.root === normalizedRoot);
 
         this.patterns = globPatterns;
         this.root = normalizedRoot;
@@ -186,11 +212,17 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
 
 type MutationsToSupportGitIgnore = [RegExp, string];
 
-const mutations: MutationsToSupportGitIgnore[] = [
+const mutationsNestedOnly: MutationsToSupportGitIgnore[] = [
     [/^[^/#][^/]*$/, '**/{$&,$&/**}'], // no slashes will match files names or folders
-    [/^\/(?!\/)/, ''], // remove leading slash to match from the root
-    [/\/$/, '$&**'], // if it ends in a slash, make sure matches the folder
+    [/^[^/#][^/]*\/$/, '**/$&**/*'], // ending slash, should match any nested directory
 ];
+
+const mutationsGeneral: MutationsToSupportGitIgnore[] = [
+    [/^\//, ''], // remove leading slash to match from the root
+    [/\/$/, '$&**/*'], // if it ends in a slash, make sure matches the folder
+];
+
+const mutationsNested = mutationsNestedOnly.concat(mutationsGeneral);
 
 export function isGlobPatternWithOptionalRoot(g: GlobPattern): g is GlobPatternWithOptionalRoot {
     return typeof g !== 'string' && typeof g.glob === 'string';
@@ -200,15 +232,36 @@ export function isGlobPatternWithRoot(g: GlobPatternWithRoot | GlobPatternWithOp
     return !!g.root;
 }
 
-function normalizePattern(pattern: string): string {
+function normalizePattern(pattern: string, nested: boolean): string {
     pattern = pattern.replace(/^(!!)+/, '');
     const isNeg = pattern.startsWith('!');
     pattern = isNeg ? pattern.slice(1) : pattern;
+    const mutations = nested ? mutationsNested : mutationsGeneral;
     pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), pattern);
     return isNeg ? '!' + pattern : pattern;
 }
 
-function normalizeGlobPatternWithRoot(g: GlobPattern, root: string, path: PathInterface): GlobPatternWithRoot {
+interface NormalizeOptions {
+    nested: boolean;
+    root: string;
+    nodePath: PathInterface;
+}
+
+/**
+ *
+ * @param patterns - glob patterns to normalize.
+ * @param options - Normalization options.
+ */
+export function normalizeGlobPatterns(patterns: GlobPattern[], options: NormalizeOptions): GlobPatternNormalized[] {
+    return patterns
+        .map((g) => normalizeGlobPatternWithRoot(g, options))
+        .map((g) => mapGlobToRoot(g, options.root))
+        .filter(isNotUndefined);
+}
+
+function normalizeGlobPatternWithRoot(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized {
+    const { root, nodePath: path, nested } = options;
+
     g = !isGlobPatternWithOptionalRoot(g)
         ? {
               glob: g.trim(),
@@ -216,12 +269,75 @@ function normalizeGlobPatternWithRoot(g: GlobPattern, root: string, path: PathIn
           }
         : g;
 
-    const gr = isGlobPatternWithRoot(g) ? g : { ...g, root };
+    const gr = isGlobPatternWithRoot(g) ? { ...g } : { ...g, root };
     if (gr.root.startsWith('${cwd}')) {
         gr.root = path.join(path.resolve(), gr.root.replace('${cwd}', ''));
     }
     gr.root = path.resolve(root, path.normalize(gr.root));
-    gr.glob = normalizePattern(gr.glob);
+    gr.glob = normalizePattern(gr.glob, nested);
 
-    return gr;
+    const gn: GlobPatternNormalized = { ...gr, rawGlob: g.glob, rawRoot: g.root };
+    return gn;
+}
+
+function makeRelative(from: string, to: string): string {
+    const rel = relative(from.replace(/\\/g, '/'), to.replace(/\\/g, '/'));
+    return rel;
+}
+
+function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNormalized | undefined {
+    if (glob.root === root) {
+        return glob;
+    }
+
+    const globIsUnderRoot = glob.root.startsWith(root);
+    const rootIsUnderGlob = root.startsWith(glob.root);
+
+    // Root and Glob are not in the same part of the directory tree.
+    if (!globIsUnderRoot && !rootIsUnderGlob) return undefined;
+
+    // prefix with root
+    if (globIsUnderRoot) {
+        const rel = makeRelative(root, glob.root);
+
+        return {
+            ...glob,
+            glob: posix.join(rel, glob.glob),
+            root,
+        };
+    }
+
+    // The root is under the glob root
+    // The more difficult case, the glob is higher than the root
+    // A best effort is made, but does not do advanced matching.
+
+    // no slashes matches everything "*.json"
+
+    if (glob.glob.startsWith('**')) return { ...glob, root };
+
+    const rel = makeRelative(glob.root, root) + '/';
+    if (glob.glob.startsWith(rel)) {
+        return { ...glob, glob: glob.glob.slice(rel.length), root };
+    }
+
+    const relParts = rel.split('/');
+    const globParts = glob.glob.split('/');
+
+    for (let i = 0; i < relParts.length && i < globParts.length; ++i) {
+        const relSeg = relParts[i];
+        const globSeg = globParts[i];
+        // the trailing / allows for us to test against an empty segment.
+        if (!relSeg || globSeg === '**') {
+            return { ...glob, glob: globParts.slice(i).join('/'), root };
+        }
+        if (relSeg !== globSeg && globSeg !== '*') {
+            break;
+        }
+    }
+
+    return glob;
+}
+
+function isNotUndefined<T>(a: T | undefined): a is T {
+    return a !== undefined;
 }
