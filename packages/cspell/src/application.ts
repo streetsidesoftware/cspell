@@ -299,7 +299,10 @@ function runLint(cfg: CSpellApplicationConfiguration) {
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.concat(configInfo.config.files || []);
-        const fileGlobs: string[] = normalizeGlobsToRoot(allGlobs, cfg.root);
+        const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
+        const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
+        const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!'));
+        const fileGlobs: string[] = includeGlobs;
         if (!fileGlobs.length) {
             // Nothing to do.
             return runResult();
@@ -313,7 +316,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const ignoreGlobs = normalizeGlobsToRoot(configInfo.config.ignorePaths || [], root);
+        const ignoreGlobs = normalizeGlobsToRoot(configInfo.config.ignorePaths || [], root, true).concat(excludeGlobs);
         const globOptions = { root, cwd: root, ignore: ignoreGlobs };
         const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(
             cfg.excludes
