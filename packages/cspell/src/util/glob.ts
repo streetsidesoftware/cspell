@@ -12,6 +12,9 @@ export interface GlobOptions extends IOptions {
 
 const defaultExcludeGlobs = ['node_modules/**'];
 
+// Note this is to allow experimenting with using a single glob
+const useJoinPatterns = process.env['CSPELL_SINGLE_GLOB'];
+
 /**
  *
  * @param pattern - glob patterns and NOT file paths. It can be a file path turned into a glob.
@@ -21,7 +24,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const root = options?.root || process.cwd();
     const opts = options || { root };
     const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
-    const normPatterns = joinPatterns(rawPatterns);
+    const normPatterns = useJoinPatterns ? joinPatterns(rawPatterns) : rawPatterns;
     const globPState: GlobPState = {
         options: { ...opts, root },
     };
