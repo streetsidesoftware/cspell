@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { _testing_, calcGlobs, normalizeGlobsToRoot } from './glob';
+import { calcGlobs, normalizeGlobsToRoot } from './glob';
 import { GlobMatcher } from 'cspell-glob';
 import mm = require('micromatch');
 import minimatch = require('minimatch');
@@ -61,29 +61,6 @@ describe('Validate minimatch assumptions', () => {
 });
 
 describe('Validate internal functions', () => {
-    test('normalizePattern relative', () => {
-        const root = process.cwd();
-        const r = _testing_.normalizePattern('../../packages/**/*.ts', root);
-        expect(r.root).toBe(path.dirname(path.dirname(root)));
-        expect(r.pattern).toBe('packages/**/*.ts');
-    });
-
-    test('normalizePattern relative absolute', () => {
-        const root = process.cwd();
-        const p = '/packages/**/*.ts';
-        const r = _testing_.normalizePattern(p, root);
-        expect(r.root).toBe(root);
-        expect(r.pattern).toBe(p);
-    });
-
-    test('normalizePattern absolute', () => {
-        const root = process.cwd();
-        const p = path.join(__dirname, '**', '*.ts');
-        const r = _testing_.normalizePattern(p, root);
-        expect(r.root).toBe(path.sep);
-        expect(r.pattern).toBe(p);
-    });
-
     test('exclude globs default', () => {
         const ex: string[] = [];
         const r = calcGlobs(ex);
