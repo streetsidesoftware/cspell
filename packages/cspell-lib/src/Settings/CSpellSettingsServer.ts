@@ -26,22 +26,32 @@ export const defaultFileName = 'cspell.json';
 export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
 
 const cspellCosmiconfig = {
+    /*
+     * Logic of the locations:
+     * - Support backward compatibility with the VS Code Spell Checker
+     *   the spell checker extension can only write to `.json` files because
+     *   it would be too difficult to automatically modify a `.js` or `.cjs` file.
+     * - To support `cspell.config.js` in a VS Code environment, have a `cspell.json` import
+     *   the `cspell.config.js`.
+     */
     searchPlaces: [
-        'cspell.config.js',
-        'cspell.config.cjs',
+        // Original locations
+        '.cspell.json',
+        'cspell.json',
+        '.cSpell.json',
+        'cSpell.json',
+        // Alternate locations
+        '.vscode/cspell.json',
+        '.vscode/cSpell.json',
+        '.vscode/.cspell.json',
+        // Standard Locations
+        'cspell.config.js', // Supports dynamic config
+        'cspell.config.cjs', // Supports dynamic config
         'cspell.config.json',
         'cspell.config.yaml',
         'cspell.config.yml',
         'cspell.yaml',
         'cspell.yml',
-        '.cspell.json',
-        'cspell.json',
-        // Alternate locations
-        '.cSpell.json',
-        'cSpell.json',
-        '.vscode/cspell.json',
-        '.vscode/cSpell.json',
-        '.vscode/.cspell.json',
     ],
     loaders: {
         '.json': (_filename: string, content: string) => json.parse(content),
