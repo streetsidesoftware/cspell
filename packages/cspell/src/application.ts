@@ -5,7 +5,7 @@ import {
     calcExcludeGlobInfo,
     extractGlobExcludesFromConfig,
     extractPatterns,
-    normalizeExcludeGlobsToRoot,
+    normalizeGlobsToRoot,
 } from './util/glob';
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
@@ -13,7 +13,7 @@ import * as path from 'path';
 import * as commentJson from 'comment-json';
 import * as util from './util/util';
 import { traceWords, TraceResult, CheckTextInfo, getDictionary } from 'cspell-lib';
-import { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellSettings, CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
 import { IOptions } from './util/IOptions';
@@ -292,13 +292,23 @@ function runLint(cfg: CSpellApplicationConfiguration) {
     }
 
     async function run(): Promise<RunResult> {
-        header();
-
         if (cfg.root) {
             process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
         }
 
-        const configInfo: ConfigInfo = await readConfig(cfg.configFile);
+        const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
+        const cliGlobs: Glob[] = cfg.files;
+        const allGlobs: Glob[] = cliGlobs.concat(configInfo.config.files || []);
+        const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
+        const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
+        const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!'));
+        const fileGlobs: string[] = includeGlobs;
+        if (!fileGlobs.length) {
+            // Nothing to do.
+            return runResult();
+        }
+        header(fileGlobs);
+
         cfg.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
         const configErrors = await countConfigErrors(configInfo);
@@ -306,17 +316,19 @@ function runLint(cfg: CSpellApplicationConfiguration) {
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const ignoreGlobs = normalizeExcludeGlobsToRoot(configInfo.config.ignorePaths || [], root);
+        const ignoreGlobs = normalizeGlobsToRoot(configInfo.config.ignorePaths || [], root, true).concat(excludeGlobs);
         const globOptions = { root, cwd: root, ignore: ignoreGlobs };
         const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(
             cfg.excludes
         );
-        const files = filterFiles(await findFiles(cfg.files, globOptions), exclusionGlobs);
+        const files = filterFiles(await findFiles(fileGlobs, globOptions), exclusionGlobs);
 
         return processFiles(fileLoader(files), configInfo, files.length);
     }
 
-    function header() {
+    function header(files: string[]) {
+        const formattedFiles = files.length > 100 ? files.slice(0, 100).concat(['...']) : files;
+
         cfg.info(
             `
 cspell;
@@ -327,7 +339,7 @@ Options:
     exclude:   ${extractPatterns(cfg.excludes)
         .map((a) => a.glob.glob)
         .join('\n             ')}
-    files:     ${cfg.files}
+    files:     ${formattedFiles}
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
     unique:    ${yesNo(!!cfg.options.unique)}
 `,
@@ -359,12 +371,12 @@ Options:
     }
 }
 
-async function readConfig(configFile: string | undefined): Promise<ConfigInfo> {
+async function readConfig(configFile: string | undefined, root: string | undefined): Promise<ConfigInfo> {
     if (configFile) {
         const config = (await cspell.loadConfig(configFile)) || {};
         return { source: configFile, config };
     }
-    const config = await cspell.searchForConfig();
+    const config = await cspell.searchForConfig(root);
     return { source: config?.__importRef?.filename || 'not found', config: config || {} };
 }
 
@@ -374,7 +386,7 @@ function runResult(init: Partial<RunResult> = {}): RunResult {
 }
 
 export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
-    const configFile = await readConfig(options.config);
+    const configFile = await readConfig(options.config, undefined);
     const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configFile.config);
     const results = await traceWords(words, config);
     return results;
@@ -383,7 +395,7 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
 export type CheckTextResult = CheckTextInfo;
 
 export async function checkText(filename: string, options: BaseOptions): Promise<CheckTextResult> {
-    const pSettings = readConfig(options.config);
+    const pSettings = readConfig(options.config, path.dirname(filename));
     const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,

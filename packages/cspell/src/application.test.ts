@@ -6,6 +6,10 @@ const getStdinResult = {
     value: '',
 };
 
+const samplesRoot = path.resolve(__dirname, '../samples');
+
+const sampleOptions = { root: samplesRoot };
+
 jest.mock('get-stdin', () => {
     return jest.fn(() => Promise.resolve(getStdinResult.value));
 });
@@ -14,8 +18,8 @@ describe('Validate the Application', () => {
     jest.setTimeout(10000); // make sure we have enough time on Travis.
 
     test('Tests running the application', () => {
-        const files = ['samples/text.txt'];
-        const options = {};
+        const files = ['text.txt'];
+        const options = sampleOptions;
         const logger = new Logger();
         const lint = App.lint(files, options, logger);
         return lint.then((result) => {
@@ -28,8 +32,8 @@ describe('Validate the Application', () => {
     });
 
     test('Tests running the application verbose', () => {
-        const files = ['samples/text.txt'];
-        const options = { verbose: true };
+        const files = ['text.txt'];
+        const options = { ...sampleOptions, verbose: true };
         const logger = new Logger();
         const lint = App.lint(files, options, logger);
         return lint.then((result) => {
@@ -42,8 +46,8 @@ describe('Validate the Application', () => {
     });
 
     test('Tests running the application words only', () => {
-        const files = ['samples/text.txt'];
-        const options = { wordsOnly: true, unique: true };
+        const files = ['text.txt'];
+        const options = { ...sampleOptions, wordsOnly: true, unique: true };
         const logger = new Logger();
         const lint = App.lint(files, options, logger);
         return lint.then((result) => {
@@ -96,7 +100,7 @@ describe('Validate the Application', () => {
 
     test('running the application from stdin', async () => {
         const files = ['stdin'];
-        const options = { wordsOnly: true, unique: true };
+        const options = { ...sampleOptions, wordsOnly: true, unique: true };
         const logger = new Logger();
         // cspell:ignore texxt
         getStdinResult.value = `
@@ -132,8 +136,14 @@ describe('Application, Validate Samples', () => {
     sampleTests().map((sample) =>
         test(`Test file: "${sample.file}"`, async () => {
             const logger = new Logger();
-            const { file, issues, options = { wordsOnly: true, unique: false } } = sample;
-            const result = await App.lint([file], options, logger);
+            const root = path.resolve(path.dirname(sample.file));
+            const { file, issues, options: sampleOptions = {} } = sample;
+            const options = {
+                root,
+                ...sampleOptions,
+            };
+
+            const result = await App.lint([path.resolve(file)], options, logger);
             expect(result.files).toBe(1);
             expect(logger.issues.map((issue) => issue.text)).toEqual(issues);
             expect(result.issues).toBe(issues.length);

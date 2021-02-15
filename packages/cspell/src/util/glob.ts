@@ -1,10 +1,8 @@
 import glob, { IGlob } from 'glob';
 import * as path from 'path';
-import * as fsp from 'fs-extra';
 import { IOptions } from './IOptions';
-import { GlobMatcher, GlobPatternWithRoot } from 'cspell-glob';
+import { GlobMatcher, GlobPatternWithRoot, fileOrGlobToGlob, normalizeGlobPatterns } from 'cspell-glob';
 import { CSpellUserSettings, Glob } from '@cspell/cspell-types';
-import { posix, relative } from 'path';
 
 export interface GlobOptions extends IOptions {
     cwd?: string;
@@ -14,67 +12,35 @@ export interface GlobOptions extends IOptions {
 
 const defaultExcludeGlobs = ['node_modules/**'];
 
-/**
- * Attempt to normalize a pattern based upon the root.
- * If the pattern is absolute, check to see if it exists and adjust the root, otherwise it is assumed to be based upon the current root.
- * If the pattern starts with a relative path, adjust the root to match.
- * The challenge is with the patterns that begin with `/`. Is is an absolute path or relative pattern?
- * @param pat glob pattern
- * @param root absolute path | empty
- * @returns the adjusted root and pattern.
- */
-function normalizePattern(pat: string, root: string): PatternRoot {
-    // Absolute pattern
-    if (path.isAbsolute(pat)) {
-        const dir = findBaseDir(pat);
-        if (dir.length > 1 && exists(dir)) {
-            // Assume it is an absolute path
-            return {
-                pattern: pat,
-                root: path.sep,
-            };
-        }
-    }
-    // normal pattern
-    if (!/^\.\./.test(pat)) {
-        return {
-            pattern: pat,
-            root,
-        };
-    }
-    // relative pattern
-    pat = path.sep === '\\' ? pat.replace(/\\/g, '/') : pat;
-    const patParts = pat.split('/');
-    const rootParts = root.split(path.sep);
-    let i = 0;
-    for (; i < patParts.length && patParts[i] === '..'; ++i) {
-        rootParts.pop();
-    }
-    return {
-        pattern: patParts.slice(i).join('/'),
-        root: rootParts.join(path.sep),
-    };
-}
+// Note this is to allow experimenting with using a single glob
+const useJoinPatterns = process.env['CSPELL_SINGLE_GLOB'];
 
+/**
+ *
+ * @param pattern - glob patterns and NOT file paths. It can be a file path turned into a glob.
+ * @param options - search options.
+ */
 export async function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
     const root = options?.root || process.cwd();
-    const opts = options || {};
+    const opts = options || { root };
     const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
-    const normPatterns = rawPatterns.map((pat) => normalizePattern(pat, root));
+    const normPatterns = useJoinPatterns ? joinPatterns(rawPatterns) : rawPatterns;
     const globPState: GlobPState = {
-        options: { ...opts },
+        options: { ...opts, root },
     };
 
     const globResults = normPatterns.map(async (pat) => {
-        globPState.options = { ...opts, root: pat.root, cwd: pat.root };
-        const absolutePaths = (await _globP(pat.pattern, globPState)).map((filename) =>
-            path.resolve(pat.root, filename)
-        );
+        globPState.options = { ...opts, root: root, cwd: root };
+        const absolutePaths = (await _globP(pat, globPState)).map((filename) => path.resolve(root, filename));
         const relativeToRoot = absolutePaths.map((absFilename) => path.relative(root, absFilename));
         return relativeToRoot;
     });
-    const results = (await Promise.all(globResults)).reduce((prev, next) => prev.concat(next), []);
-    return results;
+    const results = new Set(flatten(await Promise.all(globResults)));
+    return [...results];
+}
+
+function joinPatterns(globs: string[]): string[] {
+    return globs.length <= 1 ? globs : [`{${globs.join(',')}}`];
 }
 
 interface GlobPState {
@@ -96,29 +62,6 @@ function _globP(pattern: string, state: GlobPState): Promise<string[]> {
         const options = state.glob ? { ...state.glob, ...state.options } : state.options;
         state.glob = glob(pattern, options, cb);
     });
-}
-
-interface PatternRoot {
-    pattern: string;
-    root: string;
-}
-
-function findBaseDir(pat: string) {
-    const globChars = /[*@()?|[\]{},]/;
-    while (globChars.test(pat)) {
-        pat = path.dirname(pat);
-    }
-    return pat;
-}
-
-function exists(filename: string): boolean {
-    try {
-        fsp.accessSync(filename);
-    } catch (e) {
-        return false;
-    }
-
-    return true;
 }
 
 export function calcGlobs(commandLineExclude: string[] | undefined): { globs: string[]; source: string } {
@@ -161,14 +104,10 @@ export function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
     return r;
 }
 
-export const _testing_ = {
-    normalizePattern,
-};
-
 export function calcExcludeGlobInfo(root: string, commandLineExclude: string[] | string | undefined): GlobSrcInfo[] {
     commandLineExclude = typeof commandLineExclude === 'string' ? [commandLineExclude] : commandLineExclude;
     const choice = calcGlobs(commandLineExclude);
-    const matcher = new GlobMatcher(choice.globs, root);
+    const matcher = new GlobMatcher(choice.globs, { root, dot: true });
     return [
         {
             matcher,
@@ -181,85 +120,8 @@ export function extractGlobExcludesFromConfig(root: string, source: string, conf
     if (!config.ignorePaths || !config.ignorePaths.length) {
         return [];
     }
-    const matcher = new GlobMatcher(config.ignorePaths, root);
+    const matcher = new GlobMatcher(config.ignorePaths, { root, dot: true });
     return [{ source, matcher }];
-}
-
-function makeRelative(from: string, to: string): string {
-    const rel = relative(from, to);
-    return rel.split(/[\\/]/g).join('/');
-}
-
-function mapGlobToRoot(glob: GlobPatternWithRoot, root: string): string | string[] | undefined {
-    if (glob.root === root) {
-        return glob.glob;
-    }
-
-    const globHasSlash = glob.glob.indexOf('/') >= 0;
-    const globIsUnderRoot = glob.root.startsWith(root);
-    const rootIsUnderGlob = root.startsWith(glob.root);
-
-    // Root and Glob are not in the same part of the directory tree.
-    if (!globIsUnderRoot && !rootIsUnderGlob) return undefined;
-
-    // prefix with root
-    if (globIsUnderRoot) {
-        const rel = makeRelative(root, glob.root);
-
-        const globs = [posix.join(rel, glob.glob)];
-        if (!globHasSlash) {
-            // need to add ** to be able to match deeper.
-            globs.push(posix.join(rel, '**', glob.glob));
-        }
-        return globs;
-    }
-
-    // The root is under the glob root
-    // The more difficult case, the glob is higher than the root
-    // A best effort is made, but does not do advanced matching.
-
-    // no slashes matches everything "*.json"
-    if (!globHasSlash) return glob.glob;
-
-    if (glob.glob.startsWith('**')) return glob.glob;
-
-    const rel = makeRelative(glob.root, root);
-    if (glob.glob.startsWith(rel)) {
-        return glob.glob.slice(rel.length);
-    }
-
-    const rel2 = '/' + rel;
-    if (glob.glob.startsWith(rel2)) return glob.glob.slice(rel2.length);
-
-    return undefined;
-}
-
-function flatten(s: (string | string[])[]): string[] {
-    function* f(): Iterable<string> {
-        for (const i of s) {
-            if (Array.isArray(i)) {
-                yield* i;
-                continue;
-            }
-            yield i;
-        }
-    }
-
-    return [...f()];
-}
-
-function mapToGlobPatternWithRoot(g: Glob, root: string): GlobPatternWithRoot {
-    if (typeof g === 'string') {
-        return {
-            glob: g,
-            root,
-        };
-    }
-
-    return {
-        glob: g.glob,
-        root: g.root || root,
-    };
 }
 
 /**
@@ -267,11 +129,23 @@ function mapToGlobPatternWithRoot(g: Glob, root: string): GlobPatternWithRoot {
  * @param globs Glob patterns.
  * @param root
  */
-export function normalizeExcludeGlobsToRoot(globs: Glob[], root: string): string[] {
-    const withRoots = globs.map((g) => mapToGlobPatternWithRoot(g, root));
-    return flatten(withRoots.map((g) => mapGlobToRoot(g, root)).filter(isNotUndefined));
+export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
+    const withRoots = globs.map((g) => {
+        const source = typeof g === 'string' ? 'command line' : undefined;
+        return { source, ...fileOrGlobToGlob(g, root) };
+    });
+
+    const normalized = normalizeGlobPatterns(withRoots, { root, nested: isExclude, nodePath: path });
+    const filteredGlobs = normalized.filter((g) => g.root === root).map((g) => g.glob);
+    return filteredGlobs;
 }
 
-function isNotUndefined<T>(t: T | undefined): t is T {
-    return t !== undefined;
+function* flatten<T>(src: Iterable<T | T[]>): IterableIterator<T> {
+    for (const item of src) {
+        if (Array.isArray(item)) {
+            yield* item;
+        } else {
+            yield item;
+        }
+    }
 }

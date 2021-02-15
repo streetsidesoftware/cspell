@@ -488,6 +488,13 @@
       },
       "type": "array"
     },
+    "files": {
+      "description": "Glob patterns of files to be checked. Glob patterns are relative to the `globRoot` of the configuration file that defines them.",
+      "items": {
+        "$ref": "#/definitions/Glob"
+      },
+      "type": "array"
+    },
     "flagWords": {
       "description": "list of words to always be considered incorrect.",
       "items": {
@@ -611,6 +618,10 @@
     "version": {
       "default": "0.2",
       "description": "Configuration format version of the setting file.",
+      "enum": [
+        "0.2",
+        "0.1"
+      ],
       "type": "string"
     },
     "words": {

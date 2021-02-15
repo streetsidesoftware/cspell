@@ -175,11 +175,11 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .action((files: string[], options: Options) => {
             const { mustFindFiles } = options;
             const emitters: Emitters = getEmitters(options);
-            if (!files.length) {
-                spellCheckCommand.outputHelp();
-                throw new CheckFailed('outputHelp', 1);
-            }
             return App.lint(files, options, emitters).then((result) => {
+                if (!files.length && !result.files) {
+                    spellCheckCommand.outputHelp();
+                    throw new CheckFailed('outputHelp', 1);
+                }
                 if (options.summary && !options.silent) {
                     console.error(
                         'CSpell: Files checked: %d, Issues found: %d in %d files',

@@ -131,9 +131,7 @@ describe('Validate cli', () => {
         ${'must find force no error'}                | ${['*.not', '--no-must-find-files']}                                    | ${undefined}       | ${true}  | ${false} | ${false}
         ${'cspell-bad.json'}                         | ${['-c', pathSamples('cspell-bad.json'), __filename]}                   | ${undefined}       | ${true}  | ${false} | ${false}
         ${'cspell-import-missing.json'}              | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]} | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-    `('app $msg', executeTest);
-
-    async function executeTest({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) {
+    `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
@@ -146,7 +144,7 @@ describe('Validate cli', () => {
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
-    }
+    });
 
     test.each`
         msg              | testArgs                                                 | errorCheck   | eError   | eLog    | eInfo
@@ -155,9 +153,7 @@ describe('Validate cli', () => {
         ${'link list'}   | ${['link', 'list']}                                      | ${undefined} | ${false} | ${true} | ${false}
         ${'link add'}    | ${['link', 'add', 'cspell-dict-cpp/cspell-ext.json']}    | ${undefined} | ${false} | ${true} | ${false}
         ${'link remove'} | ${['link', 'remove', 'cspell-dict-cpp/cspell-ext.json']} | ${undefined} | ${false} | ${true} | ${false}
-    `('app $msg', executeLinkTest);
-
-    async function executeLinkTest({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) {
+    `('app $msg', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         listGlobalImports.mockImplementation(_listGlobalImports());
         addPathsToGlobalImports.mockImplementation(_addPathsToGlobalImports());
         removePathsFromGlobalImports.mockImplementation(_removePathsFromGlobalImports());
@@ -173,7 +169,7 @@ describe('Validate cli', () => {
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
-    }
+    });
 });
 
 function _listGlobalImports(): typeof Link['listGlobalImports'] {
