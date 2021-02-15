@@ -21,7 +21,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const root = options?.root || process.cwd();
     const opts = options || { root };
     const rawPatterns = typeof pattern === 'string' ? [pattern] : pattern;
-    const normPatterns = rawPatterns;
+    const normPatterns = joinPatterns(rawPatterns);
     const globPState: GlobPState = {
         options: { ...opts, root },
     };
@@ -34,6 +34,10 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     });
     const results = new Set(flatten(await Promise.all(globResults)));
     return [...results];
+}
+
+function joinPatterns(globs: string[]): string[] {
+    return globs.length <= 1 ? globs : [`{${globs.join(',')}}`];
 }
 
 interface GlobPState {
