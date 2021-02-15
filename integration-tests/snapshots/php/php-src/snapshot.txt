@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1858, Issues found: 22964 in 1097 files
+ CSpell: Files checked: 1858, Issues found: 22931 in 1097 files
  exit code: 1
 ./CODING_STANDARDS.md:107:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:128:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -31,7 +31,6 @@ Lines:
 ./CONTRIBUTING.md:123:28    - Unknown word (Fnet)       -- php.pecl channel on [EFnet](http://www.efnet.org
 ./CONTRIBUTING.md:125:18    - Unknown word (winphp)     -- is available at #winphp-dev on FreeNode.
 ./CONTRIBUTING.md:136:5     - Unknown word (TSRM)       -- ├─ TSRM/
-./CONTRIBUTING.md:147:8     - Unknown word (libtool)    -- ├─ libtool.m4
 ./CONTRIBUTING.md:148:8     - Unknown word (ltmain)     -- ├─ ltmain.sh
 ./CONTRIBUTING.md:149:8     - Unknown word (shtool)     -- ├─ shtool
 ./CONTRIBUTING.md:153:8     - Unknown word (bcmath)     -- └─ bcmath/
@@ -55,7 +54,6 @@ Lines:
 ./CONTRIBUTING.md:385:43    - Unknown word (PTHREDS)    -- compilation with NO_PTHREDS
 ./CONTRIBUTING.md:396:23    - Unknown word (pgsql)      -- Fixed bug #14016 (pgsql notice handler double
 ./CONTRIBUTING.md:401:14    - Unknown word (gitweb)     -- You can use [gitweb](https://git.php.net
-./README.md:43:45     - Unknown word (libxml)     -- will additionally need libxml2 and libsqlite3. On
 ./README.md:43:57     - Unknown word (libsqlite)  -- additionally need libxml2 and libsqlite3. On Ubuntu,
 ./README.md:66:26     - Unknown word (nproc)      -- be determined using `nproc`.
 ./TSRM/TSRM.c:581:38    - Unknown word (mythreadid) -- created thread: %d\n",mythreadid());
@@ -288,7 +286,6 @@ Lines:
 ./docs/parameter-parsing-api.md:74:11     - Unknown word (fcall)      -- zend_fcall_info and zend_fcall
 ./docs/release-process.md:117:16    - Unknown word (YOURKEYID)  -- git tag -u YOURKEYID php-7.4.2RC2
 ./docs/release-process.md:137:25    - Unknown word (makedist)   -- Run: `./scripts/dev/makedist php-7.4.0RC2`, this
-./docs/release-process.md:144:31    - Unknown word (rsync)      -- those tarballs (scp, rsync) to downloads.php.net
 ./docs/release-process.md:170:27    - Unknown word (phpweb)     -- Add a short notice to phpweb stating that there is
 ./docs/release-process.md:175:8     - Unknown word (frontpage)  -- "frontpage" *and* "releases" for
 ./docs/release-process.md:200:6     - Unknown word (Hannes)     -- (Hannes, Dan, Derick) run the
@@ -1774,7 +1771,6 @@ Lines:
 ./ext/ldap/ldap.c:4129:12   - Unknown word (lttl)       -- ber_int_t lttl;
 ./ext/ldap/ldap.c:605:17    - Unknown word (sortp)      -- LDAPSortKey** sortp = sort_keys;
 ./ext/ldap/ldap.c:647:6     - Unknown word (ncontrols)  -- int ncontrols;
-./ext/ldap/ldap.stub.php:256:32    - Unknown word (OPENLDAP)   -- defined(LDAP_API_FEATURE_X_OPENLDAP) && defined(HAVE_3ARG
 ./ext/ldap/ldap.stub.php:256:63    - Unknown word (SETREBINDPROC) -- & defined(HAVE_3ARG_SETREBINDPROC)
 ./ext/ldap/ldap.stub.php:282:15    - Unknown word (exop)          -- function ldap_exop($ldap, string $request
 ./ext/ldap/ldap.stub.php:33:158    - Unknown word (authz)      -- id = null, ?string $authz_id = null, ?string
@@ -1793,23 +1789,19 @@ Lines:
 ./ext/ldap/tests/README.md:144:3     - Unknown word (Davide)         -- * Davide Mendolia (idaf1er@gmail
 ./ext/ldap/tests/README.md:145:11    - Unknown word (Allaert)        -- * Patrick Allaert (patrick.allaert@gmail
 ./ext/ldap/tests/README.md:146:8     - Unknown word (Bernigaud)      -- * Côme Bernigaud (mcmic@php.net)
-./ext/ldap/tests/README.md:1:7       - Unknown word (ldap)       -- # The ldap extension tests
 ./ext/ldap/tests/README.md:20:17     - Unknown word (noninteractive) -- DEBIAN_FRONTEND=noninteractive aptitude install -q
-./ext/ldap/tests/README.md:20:55     - Unknown word (slapd)          -- aptitude install -q -y slapd ldap-utils
 ./ext/ldap/tests/README.md:22:18     - Unknown word (slappasswd)     -- export SLAPPASS=`slappasswd -s password`
 ./ext/ldap/tests/README.md:22:8      - Unknown word (SLAPPASS)       -- export SLAPPASS=`slappasswd -s password
 ./ext/ldap/tests/README.md:25:1      - Unknown word (changetype)     -- changetype: modify
 ./ext/ldap/tests/README.md:27:15     - Unknown word (nodomain)       -- olcSuffix: dc=nodomain
 ./ext/ldap/tests/README.md:33:27     - Unknown word (ldapmodify)     -- olcRootPW: ${SLAPPASS}" | ldapmodify -Y EXTERNAL -H ldapi
 ./ext/ldap/tests/README.md:33:53     - Unknown word (ldapi)          -- ldapmodify -Y EXTERNAL -H ldapi:///
-./ext/ldap/tests/README.md:3:17      - Unknown word (LDAP)       -- To ease testing LDAP-Setups we've created
 ./ext/ldap/tests/README.md:41:8      - Unknown word (extldap)        -- dn: ou=extldap,dc=nodomain
 ./ext/ldap/tests/README.md:43:16     - Unknown word (ldapadd)        -- ou: extldap" | ldapadd -c -x -H ldap://localhost
 ./ext/ldap/tests/README.md:87:18     - Unknown word (newkey)         -- openssl req -newkey rsa:1024 -x509 -nodes
 ./ext/ldap/tests/README.md:87:64     - Unknown word (keyout)         -- nodes -out server.pem -keyout server.pem -days 36
 ./ext/ldap/tests/README.md:91:10     - Unknown word (REQCERT)        -- `TLS_REQCERT never` in client configuratio
 ./ext/ldap/tests/README.md:96:60     - Unknown word (dpkg)           -- prefer the use of `dpkg-reconfigure`.
-./ext/ldap/tests/README.md:99:12     - Unknown word (openldap)       -- #### (/etc/openldap/)slapd.conf
 ./ext/libxml/libxml.c:249:21    - Unknown word (ssbuf)      -- php_stream_statbuf ssbuf;
 ./ext/libxml/libxml.c:255:6     - Unknown word (isescaped)  -- int isescaped=0;
 ./ext/libxml/libxml.c:423:31    - Unknown word (alloc'd)    -- will free the libxml alloc'd memory */
@@ -2122,7 +2114,6 @@ Lines:
 ./ext/opcache/ZendAccelerator.c:3873:19   - Unknown word (clases)     -- /* Move unlinked clases (and with unresolved
 ./ext/opcache/ZendAccelerator.c:901:28    - Unknown word (fdata)      -- FILE_ATTRIBUTE_DATA fdata;
 ./ext/opcache/jit/README.md:1:1       - Unknown word (Opcache)    -- Opcache JIT
-./ext/opcache/jit/README.md:21:43     - Unknown word (LLVM)       -- In the past we tried LLVM, but its code generation
 ./ext/opcache/jit/README.md:27:15     - Unknown word (dasc)       -- `zend_jit_x86.dasc` gets automatically
 ./ext/opcache/jit/README.md:28:2      - Unknown word (dynasm)     -- `dynasm` during `make`.
 ./ext/opcache/jit/README.md:4:31      - Unknown word (Opcache's)  -- the implementation of Opcache's JIT (Just-In-Time compiler
@@ -2415,7 +2406,6 @@ Lines:
 ./ext/opcache/jit/libudis86/itab.c:3274:19   - Unknown word (Iaaa)       -- /* 0001 */ { UD_Iaaa, O_NONE, O_NONE, O_NONE
 ./ext/opcache/jit/libudis86/itab.c:3275:19   - Unknown word (Iaad)       -- /* 0002 */ { UD_Iaad, O_Ib, O_NONE, O_NONE
 ./ext/opcache/jit/libudis86/itab.c:3276:19   - Unknown word (Iaam)       -- /* 0003 */ { UD_Iaam, O_Ib, O_NONE, O_NONE
-./ext/opcache/jit/libudis86/itab.c:3277:19   - Unknown word (Iaas)       -- /* 0004 */ { UD_Iaas, O_NONE, O_NONE, O_NONE
 ./ext/opcache/jit/libudis86/itab.c:3278:19   - Unknown word (Iadc)       -- /* 0005 */ { UD_Iadc, O_Eb, O_Gb, O_NONE
 ./ext/opcache/jit/libudis86/itab.c:3288:19   - Unknown word (Iadd)       -- /* 0015 */ { UD_Iadd, O_Eb, O_Gb, O_NONE
 ./ext/opcache/jit/libudis86/itab.c:3299:19   - Unknown word (Ivaddpd)    -- /* 0026 */ { UD_Ivaddpd, O_Vx, O_Hx, O_Wx, O
@@ -5389,7 +5379,6 @@ Lines:
 ./main/strlcat.c:21:55     - Unknown word (dtucker)    -- 2016/10/16 17:37:39 dtucker Exp $    */
 ./pear/fetch.php:59:22     - Unknown word (fulluri)    -- 'request_fulluri' => true,
 ./pear/fetch.php:5:49      - Unknown word (localfile)  -- /example.com/file> <localfile>\n", $argv[0]);
-./run-tests.php:1022:44   - Unknown word (Libtool)      -- tests_data .= "Bundled Libtool:\n$libtool\n";
 ./run-tests.php:1034:56   - Unknown word (ddisplay)     -- shell_exec($php . ' -ddisplay_errors=stderr -dhtml
 ./run-tests.php:112:66    - Unknown word (valgrind)    -- between them 'diff' or the valgrind log
 ./run-tests.php:1193:57   - Unknown word (MSVC)         -- recognizable to Emacs or MSVC.
@@ -5593,7 +5582,6 @@ Lines:
 ./sapi/litespeed/lsapilib.c:147:14    - Unknown word (inited)     -- static int g_inited = 0;
 ./sapi/litespeed/lsapilib.c:1941:9    - Unknown word (gsendfile)  -- ssize_t gsendfile( int fdOut, int fdIn
 ./sapi/litespeed/lsapilib.c:1986:19   - Unknown word (sendfilev)  -- ssize_t ret = sendfilev( fdOut, vec, n, &written
-./sapi/litespeed/lsapilib.c:2989:54   - Unknown word (lsof)       -- PATH=$PATH:/usr/sbin lsof -p %d >&2",
 ./sapi/litespeed/lsapilib.c:3001:9    - Unknown word (tobekilled) -- int tobekilled;
 ./sapi/litespeed/lsapilib.c:387:23    - Unknown word (nblock)     -- static int lsapi_set_nblock( int fd, int nonblock
 ./sapi/litespeed/lsapilib.c:767:15    - Unknown word (CAGEFS)     -- #define LSAPI_CAGEFS_ENABLED 2
@@ -5705,7 +5693,6 @@ Lines:
 ./sapi/phpdbg/xml.md:207:4     - Unknown word (internalfunction)   -- - internalfunction: one cannot break on
 ./sapi/phpdbg/xml.md:208:4     - Unknown word (notregular)         -- - notregular: tries to set a breakpoint
 ./sapi/phpdbg/xml.md:209:5     - Unknown word (invalidparameter)   -- - (invalidparameter: should not happen:
-./sapi/phpdbg/xml.md:216:71    - Unknown word (backtrace)          -- when contained in &lt;backtrace> tag
 ./sapi/phpdbg/xml.md:228:4     - Unknown word (maxnum)             -- - maxnum: tried to access a frame
 ./sapi/phpdbg/xml.md:235:7     - Unknown word (subcommands)        -- info (subcommands)
 ./sapi/phpdbg/xml.md:245:7     - Unknown word (includedfileinfo)   -- - &lt;includedfileinfo num="" /> with num having
@@ -5717,7 +5704,6 @@ Lines:
 ./sapi/phpdbg/xml.md:263:27    - Unknown word (refcount)           -- variable address="" refcount="" type="" name=""
 ./sapi/phpdbg/xml.md:268:4     - Unknown word (refstatus)          -- - refstatus: empty if the zval is
 ./sapi/phpdbg/xml.md:274:7     - Unknown word (literalinfo)        -- - &lt;literalinfo num="" /> with num having
-./sapi/phpdbg/xml.md:286:9     - Unknown word (meminfo)            -- &lt;meminfo />
 ./sapi/phpdbg/xml.md:298:7     - Unknown word (classinfo)          -- - &lt;classinfo num="" /> with num having
 ./sapi/phpdbg/xml.md:299:108   - Unknown word (classsource)        -- container and then a &lt;classsource> element
 ./sapi/phpdbg/xml.md:301:38    - Unknown word (methodcount)        -- "" flags="" name="" methodcount="" />
@@ -5755,8 +5741,8 @@ Lines:
 ./sapi/phpdbg/xml.md:536:7     - Unknown word (setcolor)           -- - &lt;setcolor type="" color="" code
 ./sapi/phpdbg/xml.md:542:4     - Unknown word (invalidtype)        -- - invalidtype: type wasn't one of
 ./sapi/phpdbg/xml.md:547:69    - Unknown word (setcolors)          -- current state in a &lt;setcolors active="" /> where active
-./sapi/phpdbg/xml.md:553:22    - Unknown word (closingold)        -- &lt;setoplog type="closingold" /> is emitted when
-./sapi/phpdbg/xml.md:559:69    - Unknown word (setquiet)          -- current state in a &lt;setquiet active="" /> where active
+./sapi/phpdbg/xml.md:553:22    - Unknown word (closingold)         -- &lt;setoplog type="closingold" /> is emitted when
+./sapi/phpdbg/xml.md:559:69    - Unknown word (setquiet)           -- current state in a &lt;setquiet active="" /> where active
 ./sapi/phpdbg/xml.md:561:5     - Unknown word (setpping)          -- ### setpping ###
 ./sapi/phpdbg/xml.md:569:69    - Unknown word (setrefcount)       -- current state in a &lt;setrefcount active="" /> where active
 ./sapi/phpdbg/xml.md:579:17    - Unknown word (missingextension)  -- - missingmodule/missingextension: modules/extensions
