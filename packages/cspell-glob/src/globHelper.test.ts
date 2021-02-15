@@ -30,7 +30,9 @@ describe('Validate fileOrGlobToGlob', () => {
         ${pw('./*.json')}                           | ${'.'} | ${win32} | ${g('*.json', pw('.'))}                            | ${''}
         ${pp('./package.json')}                     | ${'.'} | ${posix} | ${g('package.json', pp('.'))}                      | ${''}
         ${pw('.\\package.json')}                    | ${'.'} | ${win32} | ${g('package.json', pw('.'))}                      | ${''}
-        ${pp('./a/package.json')}                   | ${'.'} | ${posix} | ${g('a/package.json', pp('.'))}                    | ${''}
+        ${pp('./package.json')}                     | ${'.'} | ${posix} | ${g('package.json', pp('.'))}                      | ${''}
+        ${'.\\package.json'}                        | ${'.'} | ${win32} | ${g('package.json', pw('.'))}                      | ${''}
+        ${'./a/package.json'}                       | ${'.'} | ${posix} | ${g('a/package.json', pp('.'))}                    | ${''}
         ${pw('.\\a\\package.json')}                 | ${'.'} | ${win32} | ${g('a/package.json', pw('.'))}                    | ${''}
         ${'/user/tester/projects'}                  | ${'.'} | ${posix} | ${g('/user/tester/projects', pp('.'))}             | ${'Directory not matching root.'}
         ${'C:\\user\\tester\\projects'}             | ${'.'} | ${win32} | ${g('C:/user/tester/projects', pw('.'))}           | ${'Directory not matching root.'}

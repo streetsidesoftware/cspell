@@ -10,6 +10,8 @@ import * as Path from 'path';
 const { posix } = Path;
 const { relative } = posix;
 
+const relRegExp = /^\.[\\/]/;
+
 /**
  * This function tries its best to determine if `fileOrGlob` is a path to a file or a glob pattern.
  * @param fileOrGlob - file (with absolute path) or glob.
@@ -27,8 +29,8 @@ export function fileOrGlobToGlob(
         return { root, ...fileOrGlob };
     }
 
-    if (fileOrGlob.startsWith(root)) {
-        const rel = path.relative(root, fileOrGlob);
+    if (fileOrGlob.startsWith(root) || relRegExp.test(fileOrGlob)) {
+        const rel = path.relative(root, path.resolve(root, fileOrGlob));
         return {
             glob: pathToGlob(rel),
             root,
