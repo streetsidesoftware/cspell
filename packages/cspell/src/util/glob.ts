@@ -32,8 +32,8 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
         const relativeToRoot = absolutePaths.map((absFilename) => path.relative(root, absFilename));
         return relativeToRoot;
     });
-    const results = (await Promise.all(globResults)).reduce((prev, next) => prev.concat(next), []);
-    return results;
+    const results = new Set(flatten(await Promise.all(globResults)));
+    return [...results];
 }
 
 interface GlobPState {
@@ -131,4 +131,14 @@ export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boo
     const normalized = normalizeGlobPatterns(withRoots, { root, nested: isExclude, nodePath: path });
     const filteredGlobs = normalized.filter((g) => g.root === root).map((g) => g.glob);
     return filteredGlobs;
+}
+
+function* flatten<T>(src: Iterable<T | T[]>): IterableIterator<T> {
+    for (const item of src) {
+        if (Array.isArray(item)) {
+            yield* item;
+        } else {
+            yield item;
+        }
+    }
 }
