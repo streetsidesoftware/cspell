@@ -1,22 +1,14 @@
-import {expect} from 'chai';
-import {IterableHunspellReader} from './IterableHunspellReader';
+import { IterableHunspellReader } from './IterableHunspellReader';
 import * as AffReader from './affReader';
 import * as Aff from './aff';
 
-describe('HunspellReader DE', function() {
+describe('HunspellReader DE', function () {
     it('tests transforming some entries', () => {
         const affInfo = AffReader.parseAff(deAff());
         const aff = new Aff.Aff(affInfo);
         const reader = new IterableHunspellReader({ aff, dic: ['Arbeit/A-'] });
         const words = [...reader.seqWords()];
-        expect(words).to.be.deep.equal([
-            '-Arbeit',
-            '-Arbeits',
-            'Arbeit',
-            'Arbeits',
-            'arbeit',
-            'arbeits',
-        ]);
+        expect(words).toEqual(['-Arbeit', '-Arbeits', 'Arbeit', 'Arbeits', 'arbeit', 'arbeits']);
     });
 
     it('tests transforming some entries', () => {
@@ -24,24 +16,16 @@ describe('HunspellReader DE', function() {
         const aff = new Aff.Aff(affInfo);
         const reader = new IterableHunspellReader({ aff, dic: deDic() });
         const words = [...reader];
-        expect(words).to.be.deep.equal([
-            '-Arbeit',
-            'Arbeit',
-            '-Computer',
-            '-Computern',
-            'Computer',
-            'Computern',
-            '-',
-        ]);
+        expect(words).toEqual(['-Arbeit', 'Arbeit', '-Computer', '-Computern', 'Computer', 'Computern', '-']);
     });
 
     it('tests transforming a small dictionary', () => {
         const affInfo = AffReader.parseAff(deAff());
         const aff = new Aff.Aff(affInfo);
         const reader = new IterableHunspellReader({ aff, dic: deDic() });
-        const words = [...reader.seqAffWords()].map(w => Aff.debug.signature(w));
+        const words = [...reader.seqAffWords()].map((w) => Aff.debug.signature(w));
         // cspell:ignore CEO BCO BCMO CMO CEMO
-        expect(words).to.be.deep.equal([
+        expect(words).toEqual([
             '-Arbeit|C',
             '-Arbeit|CEO',
             '-Arbeits|BCO',
@@ -76,7 +60,11 @@ function deDic() {
     -/W
     Arbeitsnehmer/Z
     `;
-    return dic.split('\n').map(a => a.trim()).filter(a => !!a).slice(1);
+    return dic
+        .split('\n')
+        .map((a) => a.trim())
+        .filter((a) => !!a)
+        .slice(1);
 }
 
 function deAff() {

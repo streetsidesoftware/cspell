@@ -1,12 +1,11 @@
-import {expect} from 'chai';
-import {IterableHunspellReader} from './IterableHunspellReader';
+import { IterableHunspellReader } from './IterableHunspellReader';
 import * as Aff from './aff';
 import * as AffReader from './affReader';
 import { genSequence } from 'gensequence';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
-const DICTIONARY_LOCATIONS = path.join(__dirname,  '..', 'dictionaries');
+const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
 
 basicReadTests();
 
@@ -15,128 +14,110 @@ describe('Basic Validation of the Reader', () => {
 
     it('Validate the dictionary', async () => {
         const aff = await pSimpleAff;
-        const src = { aff, dic: textToArray(simpleWords)};
+        const src = { aff, dic: textToArray(simpleWords) };
         const reader = new IterableHunspellReader(src);
-        expect(reader.dic).to.be.deep.equal(textToArray(simpleWords));
+        expect(reader.dic).toEqual(textToArray(simpleWords));
     });
 
     it('Validate Simple Words List', async () => {
         const aff = await pSimpleAff;
-        const src = { aff, dic: textToArray(simpleWords)};
+        const src = { aff, dic: textToArray(simpleWords) };
         const reader = new IterableHunspellReader(src);
-        expect([...reader.iterateRootWords()]).to.be.deep.equal(['happy', 'ring']);
+        expect([...reader.iterateRootWords()]).toEqual(['happy', 'ring']);
         const tapped: string[] = [];
-        const words = [...reader.seqAffWords(w => tapped.push(w)).map(a => a.word)];
+        const words = [...reader.seqAffWords((w) => tapped.push(w)).map((a) => a.word)];
         const someExpectedWords = ['happy', 'unhappy', 'happily', 'unhappily'];
-        expect(words).to.include.members(someExpectedWords);
-        expect(tapped).to.deep.equal([ 'happy/UY', 'ring/AUJ', ]);
+        expect(words).toEqual(expect.arrayContaining(someExpectedWords));
+        expect(tapped).toEqual(['happy/UY', 'ring/AUJ']);
     });
 
     it('Validate Simple Words List', async () => {
         const aff = await pSimpleAff;
-        const src = { aff, dic: (['place/AJ'])};
+        const src = { aff, dic: ['place/AJ'] };
         const reader = new IterableHunspellReader(src);
         // cspell:ignore replacings
-        expect([...reader]).to.be.deep.equal(['place', 'placing', 'placings', 'replace', 'replacing', 'replacings']);
-        expect(reader.size).to.be.equal(1);
+        expect([...reader]).toEqual(['place', 'placing', 'placings', 'replace', 'replacing', 'replacings']);
+        expect(reader.size).toBe(1);
     });
 
     it('Validates prefix/suffix/base', async () => {
         const aff = await pSimpleAff;
-        const src = { aff, dic: textToArray(simpleWords)};
+        const src = { aff, dic: textToArray(simpleWords) };
         const reader = new IterableHunspellReader(src);
-        const results = [...reader.seqAffWords().map(a => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
-        const someExpectedWords = ['<happy>', 'un<happy>', '<happ>ily', 'un<happ>ily'].sort(); // cspell:ignore happ
-        expect(results).to.include.members(someExpectedWords);
+        const results = [...reader.seqAffWords().map((a) => a.prefix + '<' + a.base + '>' + a.suffix)];
+        const someExpectedWords = ['<happy>', 'un<happy>', '<happ>ily', 'un<happ>ily']; // cspell:ignore happ
+        expect(results).toEqual(expect.arrayContaining(someExpectedWords));
     });
 
     it('sets the max depth', async () => {
         const aff = await pSimpleAff;
-        const src = { aff, dic: textToArray(simpleWords)};
+        const src = { aff, dic: textToArray(simpleWords) };
         const reader = new IterableHunspellReader(src);
         const depth = reader.maxDepth;
         reader.maxDepth = 0;
-        const results = [...reader.seqAffWords().map(a => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
+        const results = [...reader.seqAffWords().map((a) => a.prefix + '<' + a.base + '>' + a.suffix)].sort();
         const expectedWords = ['<happy>', '<ring>'].sort(); // cspell:ignore happ
         reader.maxDepth = depth;
-        expect(results).to.include.members(expectedWords);
+        expect(results).toEqual(expectedWords);
     });
 
     it('Iterates a few words', async () => {
         const aff = await pSimpleAff;
-        const src = { aff, dic: textToArray(simpleWords)};
+        const src = { aff, dic: textToArray(simpleWords) };
         const reader = new IterableHunspellReader(src);
         const words = [...reader.iterateWords()];
-        expect(words).to.include.members(['happy', 'unhappy', 'happily', 'unhappily', 'ring']);
+        expect(words).toEqual(expect.arrayContaining(['happy', 'unhappy', 'happily', 'unhappily', 'ring']));
     });
 });
 
-
-describe('HunspellReader En', function() {
+describe('HunspellReader En', function () {
     // We are reading big files, so we need to give it some time.
-    this.timeout(10000);
+    jest.setTimeout(10000);
     const aff = __dirname + '/../dictionaries/en_US.aff';
     const dic = __dirname + '/../dictionaries/en_US.dic';
     const pReader = IterableHunspellReader.createFromFiles(aff, dic);
 
     it('reads dict entries', async () => {
         const reader = await pReader;
-        const values = reader.dicWordsSeq()
-            .skip(10000)
-            .take(10)
-            .toArray();
-        expect(values.length).to.be.equal(10);
+        const values = reader.dicWordsSeq().skip(10000).take(10).toArray();
+        expect(values.length).toBe(10);
     });
 
     it('reads words with info', async () => {
         const reader = await pReader;
-        const values = reader.seqWords()
-            .skip(10000)
-            .take(10)
-            .toArray();
-        expect(values.length).to.be.equal(10);
+        const values = reader.seqWords().skip(10000).take(10).toArray();
+        expect(values.length).toBe(10);
     });
 
     it('reads words', async () => {
         const reader = await pReader;
-        const values = genSequence(reader)
-            .skip(10000)
-            .take(10)
-            .toArray();
-        expect(values.length).to.be.equal(10);
+        const values = genSequence(reader).skip(10000).take(10).toArray();
+        expect(values.length).toBe(10);
     });
 
     it('tests iterating through dictionary entry transformations', async () => {
         const reader = await pReader;
         const dicEntries: { word: string; index: number }[] = [];
 
-        function recordEntries( word: string, index: number) {
+        function recordEntries(word: string, index: number) {
             dicEntries.push({ word, index });
         }
 
-        const values = reader.seqTransformDictionaryEntries(recordEntries, 2)
-            .skip(100)
-            .take(10)
-            .toArray();
+        const values = reader.seqTransformDictionaryEntries(recordEntries, 2).skip(100).take(10).toArray();
         // Note the current implementation of Sequence will pre-fetch the next iteration
         // causing 1 more than expected to be recorded.
-        expect(dicEntries).to.have.length(111);
-        expect(values[1][0].dic).to.be.equal(dicEntries[101].word);
+        expect(dicEntries).toHaveLength(111);
+        expect(values[1][0].dic).toBe(dicEntries[101].word);
     });
 });
 
 function basicReadTests() {
-    const readerTests = [
-        'da_DK',
-        'nl',
-        'Portuguese (Brazilian)',
-        'en_US',
-    ];
+    const readerTests = ['da_DK', 'nl', 'Portuguese (Brazilian)', 'en_US'];
 
     readerTests.forEach((hunDic: string) => {
-        describe(`HunspellReader ${hunDic}`, function() {
+        describe(`HunspellReader ${hunDic}`, function () {
             // We are reading big files, so we need to give it some time.
-            this.timeout(10000);
+            jest.setTimeout(10000);
             const aff = __dirname + `/../dictionaries/${hunDic}.aff`;
             const dic = __dirname + `/../dictionaries/${hunDic}.dic`;
 
@@ -144,42 +125,43 @@ function basicReadTests() {
 
             it('reads words with info', async () => {
                 const reader = await pReader;
-                const values = reader.seqWords()
-                    .skip(200)
-                    .take(200)
-                    .toArray();
-                expect(values.length).to.be.equal(200);
+                const values = reader.seqWords().skip(200).take(200).toArray();
+                expect(values.length).toBe(200);
             });
         });
     });
 }
 
-describe('Validated loading all dictionaries in the `dictionaries` directory.', async () => {
-    const dictionaries = (await fs.readdir(DICTIONARY_LOCATIONS))
-        .filter(dic => !!dic.match(/\.aff$/))
-        .map(base => path.join(DICTIONARY_LOCATIONS, base));
+describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
+    const dictionaries = fs
+        .readdirSync(DICTIONARY_LOCATIONS)
+        .filter((dic) => !!dic.match(/\.aff$/))
+        .map((base) => path.join(DICTIONARY_LOCATIONS, base));
     it('Make sure we found some sample dictionaries', () => {
-        expect(dictionaries.length).to.be.greaterThan(4);
+        expect(dictionaries.length).toBeGreaterThan(4);
     });
 
-    dictionaries.forEach(async dicAff => {
+    dictionaries.forEach((dicAff) => {
         const dicDic = dicAff.replace(/\.aff$/, '.dic');
         it(`Ensure we can load aff ${path.basename(dicAff)}`, async () => {
             const aff = await AffReader.parseAffFile(dicAff);
-            expect(aff.PFX).to.be.instanceof(Map);
-            expect(aff.SFX).to.be.instanceof(Map);
+            expect(aff.PFX).toBeInstanceOf(Map);
+            expect(aff.SFX).toBeInstanceOf(Map);
         });
 
         it(`Ensure we can load the dictionary ${path.basename(dicDic)}`, async () => {
             const reader = await IterableHunspellReader.createFromFiles(dicAff, dicDic);
             const sample = reader.seqWords().take(100).toArray();
-            expect(sample).to.be.length(100);
+            expect(sample).toHaveLength(100);
         });
     });
 });
 
 function textToArray(text: string) {
-    return text.split('\n').filter(a => !!a).slice(1);
+    return text
+        .split('\n')
+        .filter((a) => !!a)
+        .slice(1);
 }
 
 function getSimpleAff() {

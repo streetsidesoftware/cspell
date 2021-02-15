@@ -12,10 +12,13 @@ export class Converter {
     private _map: Dictionary<string>;
 
     constructor(convList: ConvItem[]) {
-        const match = convList.map(({from}) => from.replace(regexSpecialCharacters, '\\$&')).join('|');
+        const match = convList.map(({ from }) => from.replace(regexSpecialCharacters, '\\$&')).join('|');
         this._match = new RegExp(match, 'g');
         this._map = Object.create(null);
-        convList.reduce((map, {from, to}) => { map[from] = to; return map; }, this._map);
+        convList.reduce((map, { from, to }) => {
+            map[from] = to;
+            return map;
+        }, this._map);
     }
 
     convert(input: string) {

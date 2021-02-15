@@ -17,8 +17,7 @@ const version = packageInfo['version'];
 let displayHelp = true;
 let logStream = process.stderr;
 
-commander
-    .version(version);
+commander.version(version);
 
 commander
     .command('words <hunspell_dic_file>')
@@ -66,10 +65,10 @@ function appendRules(aff: AffWord): AffWord {
 }
 
 function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Promise<void> {
-    return new Promise((resolve, reject)  => {
+    return new Promise((resolve, reject) => {
         let resolved = false;
         const out = outFile ? fs.createWriteStream(outFile) : process.stdout;
-        const bufferedSeq = genSequence(batch(seq, 500)).map(batch => batch.join(''));
+        const bufferedSeq = genSequence(batch(seq, 500)).map((batch) => batch.join(''));
         const dataStream = iterableToStream(bufferedSeq);
         const fileStream = dataStream.pipe(out);
         const endEvents = ['finish', 'close', 'end'];
@@ -92,13 +91,13 @@ function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Pro
         listenToStreams();
 
         function listenToStreams() {
-            endEvents.forEach(event => fileStream.addListener(event, endHandler));
+            endEvents.forEach((event) => fileStream.addListener(event, endHandler));
             fileStream.addListener('error', errorHandler);
             dataStream.addListener('end', endHandler);
         }
 
         function cleanupStreams() {
-            endEvents.forEach(event => fileStream.removeListener(event, endHandler));
+            endEvents.forEach((event) => fileStream.removeListener(event, endHandler));
             fileStream.removeListener('error', errorHandler);
             dataStream.removeListener('end', endHandler);
         }
@@ -122,12 +121,12 @@ interface Options {
     output?: string;
     transform?: boolean;
     infix?: boolean;
-    rules?: boolean;            // append rules
-    progress?: boolean;         // show progress
-    number?: string;            // limit the number to output
-    max_depth?: string;         // limit the recursive depth to apply suffixes.
-    forbidden: boolean;         // include forbidden words
-    only_forbidden: boolean;    // only include forbidden words
+    rules?: boolean; // append rules
+    progress?: boolean; // show progress
+    number?: string; // limit the number to output
+    max_depth?: string; // limit the recursive depth to apply suffixes.
+    forbidden: boolean; // include forbidden words
+    only_forbidden: boolean; // only include forbidden words
     partial_compounds: boolean; // include partial word compounds
 }
 
@@ -164,23 +163,29 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     }
     const transformers: ((aff: AffWord) => AffWord)[] = [];
     const filters: ((aff: AffWord) => boolean)[] = [];
-    if (!forbidden && !onlyForbidden) filters.push((aff => !aff.flags.isForbiddenWord));
-    if (onlyForbidden) filters.push((aff => !!aff.flags.isForbiddenWord));
-    if (!partialCompoundsAllowed) filters.push((aff => !aff.flags.isOnlyAllowedInCompound));
-    if (infix) { transformers.push(affWordToInfix); }
-    if (lowerCase) { transformers.push(mapWord(a => a.toLowerCase())); }
-    if (rules) { transformers.push(appendRules); }
-    transformers.push(mapWord(a => a.trim()));
+    if (!forbidden && !onlyForbidden) filters.push((aff) => !aff.flags.isForbiddenWord);
+    if (onlyForbidden) filters.push((aff) => !!aff.flags.isForbiddenWord);
+    if (!partialCompoundsAllowed) filters.push((aff) => !aff.flags.isOnlyAllowedInCompound);
+    if (infix) {
+        transformers.push(affWordToInfix);
+    }
+    if (lowerCase) {
+        transformers.push(mapWord((a) => a.toLowerCase()));
+    }
+    if (rules) {
+        transformers.push(appendRules);
+    }
+    transformers.push(mapWord((a) => a.trim()));
     const dicSize = reader.dic.length;
     let current = 0;
     const calcProgress = () => '\r' + current + ' / ' + dicSize;
     const reportProgressRate = 253;
     const callback = showProgress
-    ? () => {
-            current++;
-            !(current % reportProgressRate) && process.stderr.write(calcProgress(), 'UTF-8');
-        }
-    : () => {};
+        ? () => {
+              current++;
+              !(current % reportProgressRate) && process.stderr.write(calcProgress(), 'UTF-8');
+          }
+        : () => {};
     const seqWords = transform ? reader.seqAffWords(callback) : reader.seqRootWords().map(asAffWord);
     const filterUnique = unique ? uniqueFilter(uniqueHistorySize) : (_) => true;
 
@@ -190,10 +195,10 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     const allWords = seqWords
         .filter(applyFilters)
         .map(applyTransformers)
-        .map(a => a.word)
-        .filter(a => !!a)
+        .map((a) => a.word)
+        .filter((a) => !!a)
         .filter(filterUnique)
-        .map(a => a + '\n');
+        .map((a) => a + '\n');
 
     const words = options.number ? allWords.take(Number.parseInt(options.number)) : allWords;
 
@@ -205,6 +210,8 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     } else {
         await writeSeqToFile(words, outputFile);
     }
-    if (showProgress) { console.error(calcProgress()); }
+    if (showProgress) {
+        console.error(calcProgress());
+    }
     log('Done.');
 }

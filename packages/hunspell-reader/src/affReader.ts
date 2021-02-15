@@ -1,11 +1,10 @@
-
 import { AffInfo, Aff, Fx, SubstitutionSet } from './aff';
 import { readFile } from 'fs-extra';
 import { decode } from 'iconv-lite';
 
 const fixRegex = {
-    'SFX': { m: /$/, r: '$'},
-    'PFX': { m: /^/, r: '^'},
+    SFX: { m: /$/, r: '$' },
+    PFX: { m: /^/, r: '^' },
 };
 
 const yesRegex = /[yY]/;
@@ -15,8 +14,10 @@ const affixLine = /^\s*([^\s]+)\s+(.*)?$/;
 
 const UTF8 = 'UTF-8';
 
-
-export interface ConvEntry { from: string; to: string; }
+export interface ConvEntry {
+    from: string;
+    to: string;
+}
 function convEntry(fieldValue: ConvEntry[], line: AffLine) {
     if (fieldValue === undefined) {
         return [];
@@ -37,11 +38,10 @@ function afEntry(fieldValue: string[], line: AffLine) {
     return fieldValue;
 }
 
-
 function simpleTable(fieldValue, line: AffLine) {
     const args = (line.value || '').split(spaceRegex);
     if (fieldValue === undefined) {
-        const [ count, ...extraValues ] = args;
+        const [count, ...extraValues] = args;
         const extra = extraValues.length ? extraValues : undefined;
         return { count, extra, values: [] };
     }
@@ -67,8 +67,8 @@ function tablePfxOrSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
     if (fieldValue === undefined) {
         fieldValue = new Map<string, Fx>();
     }
-    const [ subField ] = (line.value || '').split(spaceRegex);
-    if (! fieldValue.has(subField)) {
+    const [subField] = (line.value || '').split(spaceRegex);
+    if (!fieldValue.has(subField)) {
         const fx = parseAffixCreation(line);
         fieldValue.set(fx.id, fx);
         return fieldValue;
@@ -91,7 +91,11 @@ function tablePfxOrSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
     const substitutionSet = substitutionSets.get(ruleAsString)!;
     const [attachText, attachRules] = rule.affix.split('/', 2);
     substitutionSet.substitutions.push({
-        remove: rule.stripping, replace: rule.replace, attach: attachText, attachRules, extra: rule.extra
+        remove: rule.stripping,
+        replace: rule.replace,
+        attach: attachText,
+        attachRules,
+        extra: rule.extra,
     });
 
     return fieldValue;
@@ -102,14 +106,14 @@ function tablePfxOrSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
  * `PFX|SFX flag cross_product number`
  */
 function parseAffixCreation(line: AffLine): Fx {
-    const [ flag, combinable, count, ...extra] = (line.value || '').split(spaceRegex);
+    const [flag, combinable, count, ...extra] = (line.value || '').split(spaceRegex);
     const fx: Fx = {
         id: flag,
         type: line.option,
         combinable: !!combinable.match(yesRegex),
         count,
         extra,
-        substitutionSets: new Map<string, SubstitutionSet>()
+        substitutionSets: new Map<string, SubstitutionSet>(),
     };
     return fx;
 }
@@ -153,7 +157,7 @@ function parseAffixRule(line: AffLine): AffixRule | undefined {
 }
 
 function cleanAffixAttach(affix: string): string {
-    const [ fix, rules ] = affix.split('/', 2);
+    const [fix, rules] = affix.split('/', 2);
 
     const attach = fix === '0' ? '' : fix;
     return attach + (rules ? '/' + rules : '');
@@ -167,7 +171,7 @@ function fixMatch(type: AffixRule['type'], match: string): RegExp {
 
 function affixMatchToRegExpString(match: string): string {
     if (match === '0') return '';
-    return match.replace(/([\-?*])/g, '\\$1');
+    return match.replace(/([\\\-?*])/g, '\\$1');
 }
 
 function asPfx(fieldValue: Afx | undefined, line: AffLine): Afx {
@@ -194,13 +198,13 @@ function asNumber(_fieldValue, line: AffLine) {
 }
 
 type FieldFunction<T> = (value: T | undefined, line: AffLine) => T;
-type FieldFunctions = FieldFunction<string>
+type FieldFunctions =
+    | FieldFunction<string>
     | FieldFunction<boolean>
     | FieldFunction<number>
     | FieldFunction<Afx>
     | FieldFunction<string[]>
-    | FieldFunction<ConvEntry[]>
-    ;
+    | FieldFunction<ConvEntry[]>;
 
 interface AffFieldFunctionTable {
     [key: string]: FieldFunctions;
@@ -212,6 +216,7 @@ cspell:ignore FORBIDDENWORD KEEPCASE
 cspell:ignore MAXDIFF NEEDAFFIX WORDCHARS
 */
 
+// prettier-ignore
 const affTableField: AffFieldFunctionTable = {
     AF                  : afEntry,
     BREAK               : asNumber,
@@ -226,7 +231,7 @@ const affTableField: AffFieldFunctionTable = {
     COMPOUNDPERMITFLAG  : asString,
     COMPOUNDFORBIDFLAG  : asString,
     COMPOUNDRULE        : simpleTable,
-    FLAG                : asString,  // 'long' | 'num'
+    FLAG                : asString, // 'long' | 'num'
     FORBIDDENWORD       : asString,
     FORCEUCASE          : asString,
     ICONV               : convEntry,
@@ -263,31 +268,32 @@ export async function parseAffFile(filename: string, encoding: string = UTF8) {
 export function parseAff(affFileContent: string, encoding: string = UTF8): AffInfo {
     const lines = affFileContent.split(/\r?\n/g);
     return lines
-        .map(line => line.trimLeft())
-        .map(line => line.replace(commentRegex, ''))
-        .filter(line => line.trim() !== '')
+        .map((line) => line.trimLeft())
+        .map((line) => line.replace(commentRegex, ''))
+        .filter((line) => line.trim() !== '')
         .map(parseLine)
-        .reduce((aff: AffInfo, line: AffLine) => {
-            const field = line.option;
-            const fn = affTableField[field];
-            if (fn) {
-                aff[field] = fn(aff[field], line);
-            } else {
-                aff[field] = line.value;
-            }
-            return aff;
-        }, { SET: encoding } as AffInfo);
+        .reduce(
+            (aff: AffInfo, line: AffLine) => {
+                const field = line.option;
+                const fn = affTableField[field];
+                if (fn) {
+                    aff[field] = fn(aff[field], line);
+                } else {
+                    aff[field] = line.value;
+                }
+                return aff;
+            },
+            { SET: encoding } as AffInfo
+        );
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string) {
-    return parseAffFile(filename, encoding)
-        .then(affInfo => new Aff(affInfo))
-        ;
+    return parseAffFile(filename, encoding).then((affInfo) => new Aff(affInfo));
 }
 
 function parseLine(line: string): AffLine {
     const result = line.match(affixLine) || ['', ''];
-    const [ , option, value] = result;
+    const [, option, value] = result;
     return { option, value: value || undefined };
 }
 

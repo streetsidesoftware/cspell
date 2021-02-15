@@ -4,36 +4,33 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  - master
 
 strategy:
   matrix:
     linux:
-      imageName: 'ubuntu-latest'
+      imageName: "ubuntu-latest"
       node_version: 12.x
     mac:
-      imageName: 'macos-latest'
+      imageName: "macos-latest"
       node_version: 12.x
     windows:
-      imageName: 'windows-latest'
+      imageName: "windows-latest"
       node_version: 12.x
-    node_10_x:
-      imageName: 'ubuntu-latest'
-      node_version: 10.x
 
 pool:
   vmImage: $(imageName)
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: $(node_version)
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: $(node_version)
+    displayName: "Install Node.js"
 
-- script: |
-    npm install
-  displayName: 'npm install and build'
+  - script: |
+      npm install
+    displayName: "npm install and build"
 
-- script: |
-    npm test
-  displayName: 'unit tests'
+  - script: |
+      npm test
+    displayName: "unit tests"

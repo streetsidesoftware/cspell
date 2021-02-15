@@ -1,9 +1,11 @@
 # hunspell-reader
+
 [![Build Status](https://travis-ci.org/streetsidesoftware/hunspell-reader.svg?branch=master)](https://travis-ci.org/streetsidesoftware/hunspell-reader)
 
 A library for reading Hunspell Dictionary files
 
 ## Application
+
 This reader can be used as a tool for converting Hunspell files into a simple text file
 with one word per line.
 
@@ -22,6 +24,7 @@ hunspell-reader words --help
 ```
 
 Outputs:
+
 ```
 
   Usage: words [options] <hunspell_dic_file>
@@ -78,12 +81,9 @@ const affFile = baseFile + '.aff';
 const reader = new HunspellReader(affFile, dicFile);
 
 // Get the words as an array
-const promiseArrayOfWords = reader.readWords()
-    .toArray()
-    .toPromise();
-
+const promiseArrayOfWords = reader.readWords().toArray().toPromise();
 ```
 
 ## Reference
 
-* [Hunspell Docs](https://github.com/hunspell/hunspell/blob/master/docs/hunspell.5.md)
+- [Hunspell Docs](https://github.com/hunspell/hunspell/blob/master/docs/hunspell.5.md)

@@ -9,4 +9,4 @@ export type Dictionary<T, K extends string | number = string> = {
 
 export type Filter<T, U> = T extends U ? T : never;
 
-export type Mapping<F, T> = (keyof F) extends string ? Dictionary<T, Filter<keyof F, string>> : never;
+export type Mapping<F, T> = keyof F extends string ? Dictionary<T, Filter<keyof F, string>> : never;

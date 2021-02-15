@@ -1,13 +1,12 @@
-import {expect} from 'chai';
-import {AffWord, compareAff, asAffWord, Aff, filterAff} from './aff';
-import {affWordToColoredString} from './aff';
-import {parseAffFileToAff} from './affReader';
+import { AffWord, compareAff, asAffWord, Aff, filterAff } from './aff';
+import { affWordToColoredString } from './aff';
+import { parseAffFileToAff } from './affReader';
 import * as AffReader from './affReader';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
 const isLoggerOn = false;
-const DICTIONARY_LOCATIONS = path.join(__dirname,  '..', 'dictionaries');
+const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
 const nlAff = path.join(DICTIONARY_LOCATIONS, 'nl.aff');
 const enAff = path.join(DICTIONARY_LOCATIONS, 'en_US.aff');
 // const enGbAff = path.join(DICTIONARY_LOCATIONS, 'en_GB.aff');
@@ -19,109 +18,125 @@ describe('Basic Aff Validation', () => {
     const pAff = AffReader.parseAff(getSimpleAff());
     it('Reads Simple Aff', async () => {
         const aff = await pAff;
-        expect(aff.SET).to.be.equal('UTF-8');
-        expect(aff.PFX).to.be.instanceof(Map);
-        expect(aff.SFX).to.be.instanceof(Map);
+        expect(aff.SET).toBe('UTF-8');
+        expect(aff.PFX).toBeInstanceOf(Map);
+        expect(aff.SFX).toBeInstanceOf(Map);
     });
     it('Checks the PFX values', async () => {
         const aff = await pAff;
-        expect(aff.PFX).to.be.instanceof(Map);
-        expect(aff.PFX!.has('X')).to.be.true;
+        expect(aff.PFX).toBeInstanceOf(Map);
+        expect(aff.PFX!.has('X')).toBe(true);
         const fx = aff.PFX!.get('X');
-        expect(fx).to.not.be.empty;
+        expect(fx).toBeDefined();
     });
     it('Checks the SFX values', async () => {
         const aff = await pAff;
-        expect(aff.SFX).to.be.instanceof(Map);
-        expect(aff.SFX!.has('J')).to.be.true;
+        expect(aff.SFX).toBeInstanceOf(Map);
+        expect(aff.SFX!.has('J')).toBe(true);
         const fxJ = aff.SFX!.get('J');
-        expect(fxJ).to.not.be.empty;
+        expect(fxJ).toBeDefined();
     });
 
     it('Checks ICONV OCONV', () => {
         const aff = new Aff(AffReader.parseAff(getSampleAffIconvOconv()));
-        expect(aff.iConv.convert('abc')).to.be.equal('abc');
-        expect(aff.iConv.convert('ABC')).to.be.equal('abc');
-        expect(aff.iConv.convert('á Á')).to.be.equal('á á');
+        expect(aff.iConv.convert('abc')).toBe('abc');
+        expect(aff.iConv.convert('ABC')).toBe('abc');
+        expect(aff.iConv.convert('á Á')).toBe('á á');
 
-        expect(aff.oConv.convert('abc')).to.be.equal('ABC');
-        expect(aff.oConv.convert('ABC')).to.be.equal('ABC');
-        expect(aff.oConv.convert('á Á')).to.be.equal('Á Á');
+        expect(aff.oConv.convert('abc')).toBe('ABC');
+        expect(aff.oConv.convert('ABC')).toBe('ABC');
+        expect(aff.oConv.convert('á Á')).toBe('Á Á');
     });
 });
 
 describe('Test Aff', () => {
     it('tests applying rules for fr', async () => {
         const aff = await parseAffFileToAff(frAff);
-        const r =  aff.applyRulesToDicEntry('badger/10');
-        const w = r.map(affWord => affWord.word);
-        expect(w).to.contain('badger');
-        expect(w).to.contain('badgeant');
+        const r = aff.applyRulesToDicEntry('badger/10');
+        const w = r.map((affWord) => affWord.word);
+        expect(w).toEqual(expect.arrayContaining(['badger']));
+        expect(w).toEqual(expect.arrayContaining(['badgeant']));
         logApplyRulesResults(r);
     });
 
     it('tests applying rules for fr', async () => {
         const aff = await parseAffFileToAff(frAff);
-        const r =  aff.applyRulesToDicEntry('avoir/180');
-        const w = r.map(affWord => affWord.word);
-        expect(w).to.contain('avoir');
-        expect(w).to.contain('n’avoir'); // cspell:ignore n’avoir
-        expect(r.map(affW => affW.word)).to.be.deep.equal(r.map(affW => aff.oConv.convert(affW.prefix + affW.base + affW.suffix)));
+        const r = aff.applyRulesToDicEntry('avoir/180');
+        const w = r.map((affWord) => affWord.word);
+        expect(w).toEqual(expect.arrayContaining(['avoir']));
+        expect(w).toEqual(expect.arrayContaining(['n’avoir'])); // cspell:ignore n’avoir
+        expect(r.map((affW) => affW.word)).toEqual(
+            r.map((affW) => aff.oConv.convert(affW.prefix + affW.base + affW.suffix))
+        );
         logApplyRulesResults(r);
     });
 
     it('tests applying rules for fr with maxDepth', async () => {
         const aff = await parseAffFileToAff(frAff);
         aff.maxSuffixDepth = 1;
-        const r0 =  aff.applyRulesToDicEntry('avoir/180').map(affWord => affWord.word);
-        expect(r0).to.contain('avoir');
-        expect(r0).to.not.contain('n’avoir'); // cspell:ignore n’avoir
+        const r0 = aff.applyRulesToDicEntry('avoir/180').map((affWord) => affWord.word);
+        expect(r0).toEqual(expect.arrayContaining(['avoir']));
+        expect(r0).toEqual(expect.not.arrayContaining(['n’avoir'])); // cspell:ignore n’avoir
         aff.maxSuffixDepth = 2;
-        const r1 =  aff.applyRulesToDicEntry('avoir/180').map(affWord => affWord.word);
-        expect(r1).to.contain('avoir');
-        expect(r1).to.contain('n’avoir'); // cspell:ignore n’avoir
-        expect(r1).to.not.deep.equal(r0);
-        const r2 =  aff.applyRulesToDicEntry('avoir/180', 1).map(affWord => affWord.word);
-        expect(r2).to.deep.equal(r0);
+        const r1 = aff.applyRulesToDicEntry('avoir/180').map((affWord) => affWord.word);
+        expect(r1).toEqual(expect.arrayContaining(['avoir']));
+        expect(r1).toEqual(expect.arrayContaining(['n’avoir'])); // cspell:ignore n’avoir
+        expect(r1).not.toEqual(r0);
+        const r2 = aff.applyRulesToDicEntry('avoir/180', 1).map((affWord) => affWord.word);
+        expect(r2).toEqual(r0);
     });
 
     it('test breaking up rules for nl', async () => {
         const aff = await parseAffFileToAff(nlAff);
-        expect(aff.separateRules('ZbCcChC1')).to.be.deep.equal(['Zb', 'Cc', 'Ch', 'C1']);
-        expect(aff.separateRules('ZbCcChC199')).to.be.deep.equal(['Zb', 'Cc', 'Ch', 'C1', '99']);
+        expect(aff.separateRules('ZbCcChC1')).toEqual(['Zb', 'Cc', 'Ch', 'C1']);
+        expect(aff.separateRules('ZbCcChC199')).toEqual(['Zb', 'Cc', 'Ch', 'C1', '99']);
     });
-
 
     it('test breaking up rules for en', async () => {
         const aff = await parseAffFileToAff(enAff);
-        expect(aff.separateRules('ZbCcChC1')).to.not.be.deep.equal(['Zb', 'Cc', 'Ch', 'C1']);
-        expect(aff.separateRules('ZbCcChC1')).to.be.deep.equal('ZbCch1'.split(''));
+        expect(aff.separateRules('ZbCcChC1')).not.toEqual(['Zb', 'Cc', 'Ch', 'C1']);
+        expect(aff.separateRules('ZbCcChC1')).toEqual('ZbCch1'.split(''));
     });
 
     it('test getting rules for nl', async () => {
         const aff = await parseAffFileToAff(nlAff);
         // console.log(aff.getMatchingRules('ZbCcChC1'));
-        expect(aff.getMatchingRules('ZbCcChC1').filter(a => !!a).map(({id}) => id))
-            .to.be.deep.equal(['Zb', 'Cc', 'Ch']);
-        expect(aff.getMatchingRules('ZbCcChC199').filter(a => !!a).map(({id}) => id))
-            .to.be.deep.equal(['Zb', 'Cc', 'Ch']);
-        expect(aff.getMatchingRules('AaAbAcAdAeAi').filter(a => !!a).map(({id}) => id))
-            .to.be.deep.equal(['Aa', 'Ab', 'Ac', 'Ad', 'Ae', 'Ai']);
-        expect(aff.getMatchingRules('AaAbAcAdAeAi').filter(a => !!a).map(({type}) => type))
-            .to.be.deep.equal(['sfx', 'sfx', 'sfx', 'sfx', 'sfx', 'sfx']);
-        expect(aff.getMatchingRules('PaPbPc').filter(a => !!a).map(({type}) => type))
-            .to.be.deep.equal(['pfx', 'pfx', 'pfx', ]);
+        expect(
+            aff
+                .getMatchingRules('ZbCcChC1')
+                .filter((a) => !!a)
+                .map(({ id }) => id)
+        ).toEqual(['Zb', 'Cc', 'Ch']);
+        expect(
+            aff
+                .getMatchingRules('ZbCcChC199')
+                .filter((a) => !!a)
+                .map(({ id }) => id)
+        ).toEqual(['Zb', 'Cc', 'Ch']);
+        expect(
+            aff
+                .getMatchingRules('AaAbAcAdAeAi')
+                .filter((a) => !!a)
+                .map(({ id }) => id)
+        ).toEqual(['Aa', 'Ab', 'Ac', 'Ad', 'Ae', 'Ai']);
+        expect(
+            aff
+                .getMatchingRules('AaAbAcAdAeAi')
+                .filter((a) => !!a)
+                .map(({ type }) => type)
+        ).toEqual(['sfx', 'sfx', 'sfx', 'sfx', 'sfx', 'sfx']);
+        expect(
+            aff
+                .getMatchingRules('PaPbPc')
+                .filter((a) => !!a)
+                .map(({ type }) => type)
+        ).toEqual(['pfx', 'pfx', 'pfx']);
     });
 
     it('tests applying rules for nl', async () => {
         const aff = await parseAffFileToAff(nlAff);
-        const lines = [
-            'dc/ClCwKc',
-            'aak/Zf',
-            'huis/CACcYbCQZhC0',
-            'pannenkoek/ZbCACcC0',
-        ];
-        lines.forEach(line => {
+        const lines = ['dc/ClCwKc', 'aak/Zf', 'huis/CACcYbCQZhC0', 'pannenkoek/ZbCACcC0'];
+        lines.forEach((line) => {
             const r = aff.applyRulesToDicEntry(line);
             logApplyRulesResults(r);
         });
@@ -129,10 +144,8 @@ describe('Test Aff', () => {
 
     it('tests applying rules for es', async () => {
         const aff = await parseAffFileToAff(esAff);
-        const lines = [
-            'ababillar/RED',
-        ];
-        lines.forEach(line => {
+        const lines = ['ababillar/RED'];
+        lines.forEach((line) => {
             const r = aff.applyRulesToDicEntry(line);
             logApplyRulesResults(r);
         });
@@ -140,65 +153,66 @@ describe('Test Aff', () => {
 
     it('tests applying rules for en', async () => {
         const aff = await parseAffFileToAff(enAff);
-        const r =  aff.applyRulesToDicEntry('motivate/CDSG');
-        const w = r.map(affWord => affWord.word);
-        expect(w.sort()).to.be.deep.equal([
-            'demotivate', 'demotivated', 'demotivates', 'demotivating',
-            'motivate', 'motivated', 'motivates', 'motivating'
+        const r = aff.applyRulesToDicEntry('motivate/CDSG');
+        const w = r.map((affWord) => affWord.word);
+        expect(w.sort()).toEqual([
+            'demotivate',
+            'demotivated',
+            'demotivates',
+            'demotivating',
+            'motivate',
+            'motivated',
+            'motivates',
+            'motivating',
         ]);
     });
 
     it('tests compareAff', () => {
-        expect(compareAff(asAffWord('word'), asAffWord('word'))).to.be.equal(0);
-        expect(compareAff(asAffWord('a word'), asAffWord('b word'))).to.be.equal(-1);
-        expect(compareAff(asAffWord('b word'), asAffWord('a word'))).to.be.equal(1);
+        expect(compareAff(asAffWord('word'), asAffWord('word'))).toBe(0);
+        expect(compareAff(asAffWord('a word'), asAffWord('b word'))).toBe(-1);
+        expect(compareAff(asAffWord('b word'), asAffWord('a word'))).toBe(1);
         const affA = asAffWord('word');
         const affB = asAffWord('word');
         affA.flags.isCompoundPermitted = true;
-        expect(compareAff(affA, affB)).to.be.equal(1);
+        expect(compareAff(affA, affB)).toBe(1);
         affB.flags.isCompoundPermitted = true;
-        expect(compareAff(affA, affB)).to.be.equal(0);
+        expect(compareAff(affA, affB)).toBe(0);
         affB.flags.canBeCompoundBegin = true;
-        expect(compareAff(affA, affB)).to.be.equal(1);
+        expect(compareAff(affA, affB)).toBe(1);
     });
 
     it('test filterAff', () => {
         const fn = filterAff();
-        expect(fn(asAffWord('Hello'))).to.be.true;
-        expect(fn(asAffWord('Hello'))).to.be.false;
-        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).to.be.true;
-        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).to.be.false;
-        expect(fn(asAffWord('Hello'))).to.be.true;
-        expect(fn(asAffWord('Hello'))).to.be.false;
-        expect(fn(asAffWord('There'))).to.be.true;
-        expect(fn(asAffWord('There'))).to.be.false;
+        expect(fn(asAffWord('Hello'))).toBe(true);
+        expect(fn(asAffWord('Hello'))).toBe(false);
+        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).toBe(true);
+        expect(fn(asAffWord('Hello', '', { canBeCompoundBegin: true }))).toBe(false);
+        expect(fn(asAffWord('Hello'))).toBe(true);
+        expect(fn(asAffWord('Hello'))).toBe(false);
+        expect(fn(asAffWord('There'))).toBe(true);
+        expect(fn(asAffWord('There'))).toBe(false);
     });
-
 });
 
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
-    async function getDictionaries() {
-        return (await fs.readdir(DICTIONARY_LOCATIONS))
-        .filter(dic => !!dic.match(/\.aff$/))
-        .map(base => path.join(DICTIONARY_LOCATIONS, base));
+    function getDictionaries() {
+        return fs
+            .readdirSync(DICTIONARY_LOCATIONS)
+            .filter((dic) => !!dic.match(/\.aff$/))
+            .map((base) => path.join(DICTIONARY_LOCATIONS, base));
     }
-    const pDictionaries = getDictionaries();
-    it('Make sure we found some sample dictionaries', async () => {
-        const dictionaries = await pDictionaries;
-        expect(dictionaries.length).to.be.greaterThan(4);
+    const dictionaries = getDictionaries();
+    it('Make sure we found some sample dictionaries', () => {
+        expect(dictionaries.length).toBeGreaterThan(4);
     });
 
-    it('Loads all dictionaries', async () => {
-        const dictionaries = await pDictionaries;
-
-        dictionaries.forEach(dicAff => {
-            // const dicDic = dicAff.replace(/\.aff$/, '.dic');
-            // const dicContent = fs.readFile(dicDic)
-            it(`Ensure we can load ${path.basename(dicAff)}`, async () => {
-                const aff = await AffReader.parseAffFile(dicAff);
-                expect(aff.PFX).to.be.instanceof(Map);
-                expect(aff.SFX).to.be.instanceof(Map);
-            });
+    dictionaries.forEach((dicAff) => {
+        // const dicDic = dicAff.replace(/\.aff$/, '.dic');
+        // const dicContent = fs.readFile(dicDic)
+        it(`Ensure we can load ${path.basename(dicAff)}`, async () => {
+            const aff = await AffReader.parseAffFile(dicAff);
+            expect(aff.PFX).toBeInstanceOf(Map);
+            expect(aff.SFX).toBeInstanceOf(Map);
         });
     });
 });
@@ -209,19 +223,19 @@ describe('Validate loading Hungarian', () => {
     it('tests applying rules for hu Depth 0', async () => {
         const aff = await affP;
         aff.maxSuffixDepth = 0;
-        const r =  aff.applyRulesToDicEntry('kemping/17');
-        const w = r.map(affWord => affWord.word);
-        expect(w).to.contain('kemping');
-        expect(w.length).to.equal(1);
+        const r = aff.applyRulesToDicEntry('kemping/17');
+        const w = r.map((affWord) => affWord.word);
+        expect(w).toEqual(expect.arrayContaining(['kemping']));
+        expect(w.length).toBe(1);
     });
 
     it('tests applying rules for hu Depth 1', async () => {
         const aff = await affP;
         aff.maxSuffixDepth = 1;
-        const r =  aff.applyRulesToDicEntry('kemping/17');
-        const w = r.map(affWord => affWord.word);
-        expect(w).to.contain('kemping');
-        expect(w.length).to.be.greaterThan(1);
+        const r = aff.applyRulesToDicEntry('kemping/17');
+        const w = r.map((affWord) => affWord.word);
+        expect(w).toEqual(expect.arrayContaining(['kemping']));
+        expect(w.length).toBeGreaterThan(1);
     });
 });
 
@@ -234,7 +248,7 @@ function logApplyRulesResult(affWord: AffWord) {
 }
 
 function getSimpleAff() {
-    return  `
+    return `
     SET UTF-8
     TRY esianrtolcdugmphbyfvkwzESIANRTOLCDUGMPHBYFVKWZ'
     ICONV 1
@@ -307,7 +321,6 @@ ICONV É é
 
     `;
 }
-
 
 // cspell:ignore moderne avoir huis pannenkoek ababillar CDSG ings
 // cspell:enableCompoundWords

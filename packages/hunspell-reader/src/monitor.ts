@@ -1,4 +1,3 @@
-
 const counters = new Map<string, number>();
 
 let isLoggingOn = true;
@@ -11,9 +10,7 @@ export function incCounter(name: string, count = 1) {
 /* istanbul ignore next */
 export function log(message: string) {
     if (isLoggingOn) {
-        const logMessage = [...counters]
-            .map(([name, value]) => name + ': ' + value)
-            .join('; ') + ' ' + message;
+        const logMessage = [...counters].map(([name, value]) => name + ': ' + value).join('; ') + ' ' + message;
         console.log(logMessage);
     }
 }

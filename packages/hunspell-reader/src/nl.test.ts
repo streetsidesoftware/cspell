@@ -1,12 +1,12 @@
-import {expect} from 'chai';
-import {IterableHunspellReader} from './IterableHunspellReader';
+import { IterableHunspellReader } from './IterableHunspellReader';
 import * as AffReader from './affReader';
 import * as path from 'path';
 import * as Aff from './aff';
 
-describe('HunspellReader NL', function() {
+describe('HunspellReader NL', function () {
     // We are reading big files, so we need to give it some time.
-    this.timeout(10000);
+    jest.setTimeout(10000);
+
     const affFile = path.join(__dirname, ...'/../dictionaries/nl.aff'.split('/'));
     // const dicFile = path.join(__dirname, ...'/../dictionaries/nl.dic'.split('/'));
     const pAff = AffReader.parseAffFileToAff(affFile);
@@ -17,11 +17,7 @@ describe('HunspellReader NL', function() {
         const aff = await pAff;
         const reader = new IterableHunspellReader({ aff, dic: ['baddoek/Zb'] });
         const words = [...reader];
-        expect(words).to.be.deep.equal([
-            'baddoek',
-            'baddoeken',
-            'baddoeken-',
-        ]);
+        expect(words).toEqual(['baddoek', 'baddoeken', 'baddoeken-']);
     });
 
     // cspell:ignore ABCM
@@ -29,11 +25,7 @@ describe('HunspellReader NL', function() {
     it('tests transforming some entries', async () => {
         const aff = await pAff;
         const reader = new IterableHunspellReader({ aff, dic: ['baddoek/Zb'] });
-        const words = [...reader.seqAffWords()].map(w => Aff.debug.signature(w));
-        expect(words).to.be.deep.equal([
-            'baddoek|',
-            'baddoeken|BCM',
-            'baddoeken-|BCM',
-        ]);
+        const words = [...reader.seqAffWords()].map((w) => Aff.debug.signature(w));
+        expect(words).toEqual(['baddoek|', 'baddoeken|BCM', 'baddoeken-|BCM']);
     });
 });
