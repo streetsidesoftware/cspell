@@ -16,8 +16,16 @@ const { relative } = posix;
  * @param root - absolute path to the directory that will be considered the root when testing the glob pattern.
  * @param path - optional node path methods - used for testing
  */
-export function fileOrGlobToGlob(fileOrGlob: string, root: string, path: PathInterface = Path): GlobPatternWithRoot {
+export function fileOrGlobToGlob(
+    fileOrGlob: string | GlobPattern,
+    root: string,
+    path: PathInterface = Path
+): GlobPatternWithRoot {
     const pathToGlob = path.sep === '\\' ? (p: string) => p.replace(/\\/g, '/') : (p: string) => p;
+
+    if (typeof fileOrGlob !== 'string') {
+        return { root, ...fileOrGlob };
+    }
 
     if (fileOrGlob.startsWith(root)) {
         const rel = path.relative(root, fileOrGlob);
@@ -35,6 +43,7 @@ export function fileOrGlobToGlob(fileOrGlob: string, root: string, path: PathInt
 type MutationsToSupportGitIgnore = [RegExp, string];
 
 const mutationsNestedOnly: MutationsToSupportGitIgnore[] = [
+    [/^[/]([^/]*)$/, '{$1,$1/**}'], // Only a leading slash will match root files and directories.
     [/^[^/#][^/]*$/, '**/{$&,$&/**}'], // no slashes will match files names or folders
     [/^[^/#][^/]*\/$/, '**/$&**/*'], // ending slash, should match any nested directory
 ];
@@ -112,6 +121,10 @@ function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNo
         return glob;
     }
 
+    const isNeg = glob.glob.startsWith('!');
+    const g = isNeg ? glob.glob.slice(1) : glob.glob;
+    const prefix = isNeg ? '!' : '';
+
     const globIsUnderRoot = glob.root.startsWith(root);
     const rootIsUnderGlob = root.startsWith(glob.root);
 
@@ -124,7 +137,7 @@ function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNo
 
         return {
             ...glob,
-            glob: posix.join(rel, glob.glob),
+            glob: prefix + posix.join(rel, g),
             root,
         };
     }
@@ -133,24 +146,22 @@ function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNo
     // The more difficult case, the glob is higher than the root
     // A best effort is made, but does not do advanced matching.
 
-    // no slashes matches everything "*.json"
-
-    if (glob.glob.startsWith('**')) return { ...glob, root };
+    if (g.startsWith('**')) return { ...glob, root };
 
     const rel = makeRelative(glob.root, root) + '/';
-    if (glob.glob.startsWith(rel)) {
-        return { ...glob, glob: glob.glob.slice(rel.length), root };
+    if (g.startsWith(rel)) {
+        return { ...glob, glob: prefix + g.slice(rel.length), root };
     }
 
     const relParts = rel.split('/');
-    const globParts = glob.glob.split('/');
+    const globParts = g.split('/');
 
     for (let i = 0; i < relParts.length && i < globParts.length; ++i) {
         const relSeg = relParts[i];
         const globSeg = globParts[i];
         // the trailing / allows for us to test against an empty segment.
         if (!relSeg || globSeg === '**') {
-            return { ...glob, glob: globParts.slice(i).join('/'), root };
+            return { ...glob, glob: prefix + globParts.slice(i).join('/'), root };
         }
         if (relSeg !== globSeg && globSeg !== '*') {
             break;

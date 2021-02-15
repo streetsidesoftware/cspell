@@ -296,7 +296,7 @@ function runLint(cfg: CSpellApplicationConfiguration) {
             process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
         }
 
-        const configInfo: ConfigInfo = await readConfig(cfg.configFile);
+        const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.concat(configInfo.config.files || []);
         const fileGlobs: string[] = normalizeGlobsToRoot(allGlobs, cfg.root);
@@ -368,12 +368,12 @@ Options:
     }
 }
 
-async function readConfig(configFile: string | undefined): Promise<ConfigInfo> {
+async function readConfig(configFile: string | undefined, root: string | undefined): Promise<ConfigInfo> {
     if (configFile) {
         const config = (await cspell.loadConfig(configFile)) || {};
         return { source: configFile, config };
     }
-    const config = await cspell.searchForConfig();
+    const config = await cspell.searchForConfig(root);
     return { source: config?.__importRef?.filename || 'not found', config: config || {} };
 }
 
@@ -383,7 +383,7 @@ function runResult(init: Partial<RunResult> = {}): RunResult {
 }
 
 export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
-    const configFile = await readConfig(options.config);
+    const configFile = await readConfig(options.config, undefined);
     const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configFile.config);
     const results = await traceWords(words, config);
     return results;
@@ -392,7 +392,7 @@ export async function trace(words: string[], options: TraceOptions): Promise<Tra
 export type CheckTextResult = CheckTextInfo;
 
 export async function checkText(filename: string, options: BaseOptions): Promise<CheckTextResult> {
-    const pSettings = readConfig(options.config);
+    const pSettings = readConfig(options.config, path.dirname(filename));
     const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,

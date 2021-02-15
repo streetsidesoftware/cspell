@@ -163,43 +163,44 @@ describe('Validate Options', () => {
         expected: Partial<GlobMatch> | boolean;
     }
     test.each`
-        pattern                   | file                                     | options                | expected
-        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: true }}
-        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{ dot: false }}      | ${{ matched: false }}
-        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
-        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${{ matched: true, glob: '**/{*.yaml,*.yaml/**}' }}
-        ${'*.yaml'}               | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${true}
-        ${'**/*.yaml'}            | ${'.github/workflows/test.yaml'}         | ${{ mode: 'exclude' }} | ${{ matched: true }}
-        ${'**/*.yaml'}            | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
-        ${'.github/**/*.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${true}
-        ${'.github/**/*.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{ dot: false }}      | ${true}
-        ${'.github/**/*.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${true}
-        ${'.github/**/*.yaml'}    | ${'.github/test.yaml'}                   | ${{}}                  | ${true}
-        ${'.github/**/*.yaml'}    | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${false}
-        ${'**/.github/**/*.yaml'} | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
-        ${'.github'}              | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
-        ${'**/.github/**'}        | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
-        ${'package/**'}           | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
-        ${'package/**'}           | ${'package/.github/workflows/test.yaml'} | ${{ dot: false }}      | ${false}
-        ${'package/**'}           | ${'package/.github/workflows/test.yaml'} | ${{ mode: 'include' }} | ${false}
-        ${'workflows'}            | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
-        ${'workflows'}            | ${'package/.github/workflows/test.yaml'} | ${{ dot: false }}      | ${false}
-        ${'package/'}             | ${'package/src/test.yaml'}               | ${{}}                  | ${true}
-        ${'package/'}             | ${'package/src/test.yaml'}               | ${{ dot: false }}      | ${true}
-        ${'package/'}             | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${true}
-        ${'package/'}             | ${'repo/package/src/test.yaml'}          | ${{}}                  | ${true}
-        ${'package/'}             | ${'repo/package/src/test.yaml'}          | ${{ mode: 'include' }} | ${false}
-        ${'/package/'}            | ${'package/src/test.yaml'}               | ${{}}                  | ${true}
-        ${'/package/'}            | ${'package/src/test.yaml'}               | ${{ dot: false }}      | ${true}
-        ${'/package/'}            | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${true}
-        ${'/package/'}            | ${'repo/package/src/test.yaml'}          | ${{}}                  | ${false}
-        ${'/package/'}            | ${'repo/package/src/test.yaml'}          | ${{ mode: 'include' }} | ${false}
-        ${'src'}                  | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${false}
-        ${'*.yaml|!test.yaml'}    | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, glob: '!**/{test.yaml,test.yaml/**}', isNeg: true }}
-        ${'*.yaml|!/test.yaml'}   | ${'test.yaml'}                           | ${{}}                  | ${{ matched: false, glob: '!test.yaml', isNeg: true }}
-        ${'*.{!yaml}'}            | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${false}
-        ${'test.*|!*.{yaml,yml}'} | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, isNeg: true }}
-    `('Test options: $pattern, $text, $options', ({ pattern, file, options, expected }: TestCase) => {
+        pattern                    | file                                     | options                | expected
+        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: true }}
+        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: false }}      | ${{ matched: false }}
+        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
+        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${{ matched: true, glob: '**/{*.yaml,*.yaml/**}' }}
+        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${true}
+        ${'**/*.yaml'}             | ${'.github/workflows/test.yaml'}         | ${{ mode: 'exclude' }} | ${{ matched: true }}
+        ${'**/*.yaml'}             | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
+        ${'.github/**/*.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${true}
+        ${'.github/**/*.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{ dot: false }}      | ${true}
+        ${'.github/**/*.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${true}
+        ${'.github/**/*.yaml'}     | ${'.github/test.yaml'}                   | ${{}}                  | ${true}
+        ${'.github/**/*.yaml'}     | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${false}
+        ${'**/.github/**/*.yaml'}  | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
+        ${'.github'}               | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
+        ${'**/.github/**'}         | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
+        ${'package/**'}            | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
+        ${'package/**'}            | ${'package/.github/workflows/test.yaml'} | ${{ dot: false }}      | ${false}
+        ${'package/**'}            | ${'package/.github/workflows/test.yaml'} | ${{ mode: 'include' }} | ${false}
+        ${'workflows'}             | ${'package/.github/workflows/test.yaml'} | ${{}}                  | ${true}
+        ${'workflows'}             | ${'package/.github/workflows/test.yaml'} | ${{ dot: false }}      | ${false}
+        ${'package/'}              | ${'package/src/test.yaml'}               | ${{}}                  | ${true}
+        ${'package/'}              | ${'package/src/test.yaml'}               | ${{ dot: false }}      | ${true}
+        ${'package/'}              | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${true}
+        ${'package/'}              | ${'repo/package/src/test.yaml'}          | ${{}}                  | ${true}
+        ${'package/'}              | ${'repo/package/src/test.yaml'}          | ${{ mode: 'include' }} | ${false}
+        ${'/package/'}             | ${'package/src/test.yaml'}               | ${{}}                  | ${true}
+        ${'/package/'}             | ${'package/src/test.yaml'}               | ${{ dot: false }}      | ${true}
+        ${'/package/'}             | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${true}
+        ${'/package/'}             | ${'repo/package/src/test.yaml'}          | ${{}}                  | ${false}
+        ${'/package/'}             | ${'repo/package/src/test.yaml'}          | ${{ mode: 'include' }} | ${false}
+        ${'src'}                   | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${false}
+        ${'*.yaml|!test.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, glob: '!**/{test.yaml,test.yaml/**}', isNeg: true }}
+        ${'*.yaml|!/test.yaml'}    | ${'test.yaml'}                           | ${{}}                  | ${{ matched: false, glob: '!{test.yaml,test.yaml/**}', isNeg: true }}
+        ${'*.yaml|!/node_modules'} | ${'node_modules/test.yaml'}              | ${{}}                  | ${{ matched: false, glob: '!{node_modules,node_modules/**}', isNeg: true }}
+        ${'*.{!yaml}'}             | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${false}
+        ${'test.*|!*.{yaml,yml}'}  | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, isNeg: true }}
+    `('Test options: $pattern, $file, $options', ({ pattern, file, options, expected }: TestCase) => {
         const root = '/Users/code/project/cspell/';
         const filename = path.join(root, file);
         const patterns = pattern.split('|');
