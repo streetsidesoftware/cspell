@@ -175,7 +175,7 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests loading a missing cSpell.json file', () => {
-        const filename = path.join(__dirname, '..', '..', 'cSpell.json');
+        const filename = path.join(__dirname, '..', '..', 'cspell.config.json');
         const settings = readSettings(filename);
         expect(settings.__importRef?.filename).toBe(path.resolve(filename));
         expect(settings.__importRef?.error).toBeUndefined();
