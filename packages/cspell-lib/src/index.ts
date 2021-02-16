@@ -22,6 +22,7 @@ export {
 } from './SpellingDictionary';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
+export { spellCheckFile, SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
 
 import * as Text from './util/text';
 import * as Link from './Settings/link';
