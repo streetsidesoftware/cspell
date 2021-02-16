@@ -377,7 +377,7 @@ async function readConfig(configFile: string | undefined, root: string | undefin
         return { source: configFile, config };
     }
     const config = await cspell.searchForConfig(root);
-    return { source: config?.__importRef?.filename || 'not found', config: config || {} };
+    return { source: config?.__importRef?.filename || 'None found', config: config || {} };
 }
 
 function runResult(init: Partial<RunResult> = {}): RunResult {

@@ -14,7 +14,7 @@ import { normalizePathForDictDefs } from './DictionarySettings';
 import * as util from '../util/util';
 import { resolveFile } from '../util/resolveFile';
 import { getRawGlobalSettings } from './GlobalSettings';
-import { cosmiconfig, cosmiconfigSync } from 'cosmiconfig';
+import { cosmiconfig, cosmiconfigSync, OptionsSync as CosmicOptionsSync, Options as CosmicOptions } from 'cosmiconfig';
 import { GlobMatcher } from 'cspell-glob';
 
 const currentSettingsFileVersion = '0.1';
@@ -25,7 +25,7 @@ export const defaultFileName = 'cspell.json';
 
 export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
 
-const cspellCosmiconfig = {
+const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
     /*
      * Logic of the locations:
      * - Support backward compatibility with the VS Code Spell Checker
@@ -111,8 +111,9 @@ function normalizeSettings(rawSettings: CSpellSettings, pathToSettingsFile: stri
         filename: pathToSettingsFile,
     };
 
-    const fileSettings = {
+    const fileSettings: CSpellSettings = {
         ...settings,
+        source,
         ...normalizedDictionaryDefs,
         ...normalizedSettingsGlobs,
         ...normalizedOverrides,
@@ -188,35 +189,51 @@ interface SearchForConfigResult {
     isEmpty?: boolean;
 }
 
+interface NormalizeSearchForConfigResult {
+    config: CSpellSettings;
+    filepath: string | undefined;
+    error: ImportError | undefined;
+}
+
 async function normalizeSearchForConfigResult(
-    filename: string,
+    searchPath: string,
     searchResult: Promise<SearchForConfigResult | null>
-): Promise<CSpellSettings> {
+): Promise<NormalizeSearchForConfigResult> {
     let result: SearchForConfigResult | undefined;
-    let error: Error | undefined;
+    let error: ImportError | undefined;
     try {
         result = (await searchResult) || undefined;
     } catch (cause) {
-        error = new ImportError(`Failed to resolve file: "${filename}"`, cause);
+        error = new ImportError(`Failed to find config file at: "${searchPath}"`, cause);
     }
 
-    filename = result?.filepath ?? filename;
-    const importRef: ImportFileRef = { filename, error };
-    const config = result?.config || {};
+    const filepath = result?.filepath;
+    const { config = {} } = result || {};
+    const filename = result?.filepath ?? searchPath;
+    const importRef: ImportFileRef = { filename: filename, error };
 
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-    const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
+    const name = result?.filepath ? id : `Config not found: ${id}`;
+    const finalizeSettings: CSpellSettings = { id, name, __importRef: importRef };
     const settings: CSpellSettings = { id, ...config };
     Object.assign(finalizeSettings, normalizeSettings(settings, filename));
-    return finalizeSettings;
+
+    return {
+        config: finalizeSettings,
+        filepath,
+        error,
+    };
 }
 
 export function searchForConfig(searchFrom?: string): Promise<CSpellSettings | undefined> {
-    return normalizeSearchForConfigResult(searchFrom || process.cwd(), cspellConfigExplorer.search(searchFrom));
+    return normalizeSearchForConfigResult(
+        searchFrom || process.cwd(),
+        cspellConfigExplorer.search(searchFrom)
+    ).then((r) => (r.filepath ? r.config : undefined));
 }
 
-export function loadConfig(file: string): Promise<CSpellSettings | undefined> {
-    return normalizeSearchForConfigResult(file, cspellConfigExplorer.load(file));
+export function loadConfig(file: string): Promise<CSpellSettings> {
+    return normalizeSearchForConfigResult(file, cspellConfigExplorer.load(file)).then((r) => r.config);
 }
 
 export function readRawSettings(filename: string, relativeTo?: string): CSpellSettings {
@@ -565,16 +582,18 @@ interface NormalizeDictionaryDefsParams {
 }
 
 function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathToSettingsFile: string) {
-    const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions || [], pathToSettingsFile);
-    const languageSettings = (settings.languageSettings || []).map((langSetting) => ({
-        ...langSetting,
-        dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions || [], pathToSettingsFile),
-    }));
+    const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions, pathToSettingsFile);
+    const languageSettings = settings.languageSettings?.map((langSetting) =>
+        util.clean({
+            ...langSetting,
+            dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions, pathToSettingsFile),
+        })
+    );
 
-    return {
+    return util.clean({
         dictionaryDefinitions,
         languageSettings,
-    };
+    });
 }
 
 interface NormalizeOverrides {
@@ -583,20 +602,18 @@ interface NormalizeOverrides {
 }
 
 interface NormalizeOverridesResult {
-    overrides: CSpellSettings['overrides'];
+    overrides?: CSpellSettings['overrides'];
 }
 
 function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: string): NormalizeOverridesResult {
     const { globRoot = path.dirname(pathToSettingsFile) } = settings;
-    const overrides = (settings.overrides || []).map((override) => {
+    const overrides = settings.overrides?.map((override) => {
         const filename = toGlobDef(override.filename, globRoot);
         const { dictionaryDefinitions, languageSettings } = normalizeDictionaryDefs(override, pathToSettingsFile);
-        return { ...override, filename, dictionaryDefinitions, languageSettings };
+        return util.clean({ ...override, filename, dictionaryDefinitions, languageSettings });
     });
 
-    return {
-        overrides,
-    };
+    return overrides ? { overrides } : {};
 }
 
 interface NormalizeSettingsGlobs {

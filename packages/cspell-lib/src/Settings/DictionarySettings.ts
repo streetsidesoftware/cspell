@@ -39,11 +39,20 @@ function getFullPathName(def: DictionaryDefinition) {
     return path.join(filePath, file);
 }
 
+export function normalizePathForDictDefs(defs: undefined, pathToSettingsFile: string): undefined;
 export function normalizePathForDictDefs(
     defs: DictionaryDefinition[],
     pathToSettingsFile: string
-): DictionaryDefinitionWithSource[] {
-    return defs.map((def) => normalizePathForDictDef(def, pathToSettingsFile));
+): DictionaryDefinitionWithSource[];
+export function normalizePathForDictDefs(
+    defs: DictionaryDefinition[] | undefined,
+    pathToSettingsFile: string
+): DictionaryDefinitionWithSource[] | undefined;
+export function normalizePathForDictDefs(
+    defs: DictionaryDefinition[] | undefined,
+    pathToSettingsFile: string
+): DictionaryDefinitionWithSource[] | undefined {
+    return defs?.map((def) => normalizePathForDictDef(def, pathToSettingsFile));
 }
 
 export function normalizePathForDictDef(
