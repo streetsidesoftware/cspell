@@ -319,7 +319,7 @@ describe('Validate search/load config files', () => {
     function importRefWithError(filename: string): ImportFileRefWithError {
         return {
             filename,
-            error: new Error(`Failed to resolve file: "${filename}"`),
+            error: new Error(`Failed to find config file at: "${filename}"`),
         };
     }
 
