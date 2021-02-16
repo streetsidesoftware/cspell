@@ -469,6 +469,8 @@ export function getCachedFileSize(): number {
 export function clearCachedSettingsFiles(): void {
     globalSettings = undefined;
     cachedFiles.clear();
+    cspellConfigExplorer.clearCaches();
+    cspellConfigExplorerSync.clearCaches();
 }
 
 const globMatcherCache = new Map<Glob | Glob[], GlobMatcher>();
