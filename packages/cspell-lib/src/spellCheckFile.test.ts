@@ -39,7 +39,7 @@ describe('Validate Spell Check Files', () => {
         ${'src/sample.c'}    | ${{}}                       | ${{ configFile: s('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
         ${'src/sample.c'}    | ${{ noConfigSearch: true }} | ${{ configFile: s('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
         ${'src/sample.c'}    | ${{ noConfigSearch: true }} | ${{ noConfigSearch: false }}                  | ${{ checked: true, localConfigFilepath: s('.cspell.json'), errors: undefined }}
-        ${'src/sample.c'}    | ${{}}                       | ${{}}                                         | ${{ document: oc({ uri: oc({ fsPath: s('src/sample.c') }) }), errors: undefined }}
+        ${'src/sample.c'}    | ${{}}                       | ${{}}                                         | ${{ document: expect.anything(), errors: undefined }}
         ${'src/sample.c'}    | ${{}}                       | ${{ configFile: s('../cSpell.json') }}        | ${{ checked: false, localConfigFilepath: s('../cSpell.json'), errors: [eFailed(s('../cSpell.json'))] }}
         ${'src/not_found.c'} | ${{}}                       | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
         ${__filename}        | ${{}}                       | ${{}}                                         | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
@@ -47,7 +47,7 @@ describe('Validate Spell Check Files', () => {
         'spellCheckFile $filename $settings $options',
         async ({ filename, settings, options, expected }: TestSpellCheckFile) => {
             const r = await spellCheckFile(s(filename), options, settings);
-            expect(r).toEqual(expect.objectContaining(expected));
+            expect(r).toEqual(oc(expected));
         }
     );
 });
