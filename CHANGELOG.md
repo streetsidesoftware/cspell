@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.2.4...v5.3.0-alpha.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* Working towards a standard way to spell check files. ([#900](https://github.com/streetsidesoftware/cspell/issues/900)) ([5d38b2a](https://github.com/streetsidesoftware/cspell/commit/5d38b2a6c918fc9c8cfb2040cc49c9675c4c4b8a))
+
+
+### Features
+
+* Be able to specify files to spell check within the config. ([#948](https://github.com/streetsidesoftware/cspell/issues/948)) ([23f7a48](https://github.com/streetsidesoftware/cspell/commit/23f7a488ef500fb1df5cd234c7d3c2ab4ec02961)), closes [#571](https://github.com/streetsidesoftware/cspell/issues/571)
+* cspell-glob matches only files under the root ([#913](https://github.com/streetsidesoftware/cspell/issues/913)) ([a2d700d](https://github.com/streetsidesoftware/cspell/commit/a2d700dfaf3f762aad5d13d56c3918afca7be458))
+* Part 1 - glob patterns are relative to the config file. ([#921](https://github.com/streetsidesoftware/cspell/issues/921)) ([a250448](https://github.com/streetsidesoftware/cspell/commit/a2504484ec38f15804cc0a203317266f83566b7c))
+* Support local configuration files ([#966](https://github.com/streetsidesoftware/cspell/issues/966)) ([0ccc5fe](https://github.com/streetsidesoftware/cspell/commit/0ccc5fe9eb70ca3a4c6e5a3fc0b653465e76983c))
+* Support negation matches in languageSettings for languageIds ([#967](https://github.com/streetsidesoftware/cspell/issues/967)) ([cea9114](https://github.com/streetsidesoftware/cspell/commit/cea9114249feb718e4497681c520e1de2c985dc2))
+
+
+
+
+
 ## [5.2.4](https://github.com/streetsidesoftware/cspell/compare/v5.2.3...v5.2.4) (2021-01-28)
 
 **Note:** Version bump only for package cspell-monorepo
