@@ -251,12 +251,16 @@ function extractContext(tdo: cspell.TextDocumentOffset, contextRange: number): c
     const isLetter = /^[a-z]$/i;
     const isSpace = /^\s$/;
 
-    for (let n = contextRange / 2; n > 0 && left > 0 && isLetter.test(lineText[left - 1]); n--, left--) {
-        /* do nothing */
+    for (let n = contextRange / 2; n > 0 && left > 0; n--, left--) {
+        if (!isLetter.test(lineText[left - 1])) {
+            break;
+        }
     }
 
-    for (let n = contextRange / 2; n > 0 && right < lineText.length && isLetter.test(lineText[right]); n--, right++) {
-        /* do nothing */
+    for (let n = contextRange / 2; n > 0 && right < lineText.length; n--, right++) {
+        if (!isLetter.test(lineText[right])) {
+            break;
+        }
     }
 
     // remove leading space
