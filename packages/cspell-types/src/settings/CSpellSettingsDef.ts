@@ -65,6 +65,12 @@ export interface FileSettings extends ExtendableSettings {
      * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
      */
     ignorePaths?: Glob[];
+
+    /**
+     * Prevents searching for local configuration when checking individual documents.
+     * @default false
+     */
+    noConfigSearch?: boolean;
 }
 
 export interface ExtendableSettings extends Settings {

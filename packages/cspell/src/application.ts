@@ -1,10 +1,9 @@
 import {
-    globP,
-    GlobOptions,
-    GlobSrcInfo,
-    calcExcludeGlobInfo,
     extractGlobExcludesFromConfig,
     extractPatterns,
+    GlobOptions,
+    globP,
+    GlobSrcInfo,
     normalizeGlobsToRoot,
 } from './util/glob';
 import * as cspell from 'cspell-lib';
@@ -16,69 +15,13 @@ import { traceWords, TraceResult, CheckTextInfo, getDictionary } from 'cspell-li
 import { CSpellSettings, CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import getStdin from 'get-stdin';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
-import { IOptions } from './util/IOptions';
 import { measurePromise } from './util/timer';
-import {
-    DebugEmitter,
-    Emitters,
-    MessageEmitter,
-    MessageTypes,
-    ProgressEmitter,
-    SpellingErrorEmitter,
-    Issue,
-} from './emitters';
-
-// cspell:word nocase
+import { Emitters, MessageTypes, Issue } from './emitters';
+import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
+import { BaseOptions, CSpellApplicationOptions, TraceOptions } from './options';
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
-const defaultContextRange = 20;
-export interface CSpellApplicationOptions extends BaseOptions {
-    /**
-     * Display verbose information
-     */
-    verbose?: boolean;
-    /**
-     * Show extensive output.
-     */
-    debug?: boolean;
-    /**
-     * a globs to exclude files from being checked.
-     */
-    exclude?: string[] | string;
-    /**
-     * Only report the words, no line numbers or file names.
-     */
-    wordsOnly?: boolean;
-    /**
-     * unique errors per file only.
-     */
-    unique?: boolean;
-    /**
-     * root directory, defaults to `cwd`
-     */
-    root?: string;
-    /**
-     * Show part of a line where an issue is found.
-     * if true, it will show the default number of characters on either side.
-     * if a number, it will shat number of characters on either side.
-     */
-    showContext?: boolean | number;
-    /**
-     * Show suggestions for spelling errors.
-     */
-    showSuggestions?: boolean;
-}
-
-export type TraceOptions = BaseOptions;
-
-export interface BaseOptions {
-    config?: string;
-    languageId?: string;
-    locale?: string;
-    local?: string; // deprecated
-}
-
 export type AppError = NodeJS.ErrnoException;
 
 export interface RunResult {
@@ -86,42 +29,6 @@ export interface RunResult {
     filesWithIssues: Set<string>;
     issues: number;
     errors: number;
-}
-
-const defaultMinimatchOptions: IOptions = { nocase: true };
-const defaultConfigGlobOptions: IOptions = defaultMinimatchOptions;
-
-const nullEmitter = () => {
-    /* empty */
-};
-
-export class CSpellApplicationConfiguration {
-    readonly info: MessageEmitter;
-    readonly progress: ProgressEmitter;
-    readonly debug: DebugEmitter;
-    readonly logIssue: SpellingErrorEmitter;
-    readonly uniqueFilter: (issue: Issue) => boolean;
-    readonly locale: string;
-
-    readonly configFile: string | undefined;
-    readonly configGlobOptions: IOptions = defaultConfigGlobOptions;
-    readonly excludes: GlobSrcInfo[];
-    readonly root: string;
-    readonly showContext: number;
-
-    constructor(readonly files: string[], readonly options: CSpellApplicationOptions, readonly emitters: Emitters) {
-        this.root = path.resolve(options.root || process.cwd());
-        this.info = emitters.info || nullEmitter;
-        this.debug = emitters.debug || ((msg: string) => this.info(msg, MessageTypes.Debug));
-        this.configFile = options.config;
-        this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
-        this.logIssue = emitters.issue || nullEmitter;
-        this.locale = options.locale || options.local || '';
-        this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
-        this.progress = emitters.progress || nullEmitter;
-        this.showContext =
-            options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0;
-    }
 }
 
 interface ConfigInfo {

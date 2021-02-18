@@ -16,6 +16,7 @@ import { resolveFile } from '../util/resolveFile';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { cosmiconfig, cosmiconfigSync, OptionsSync as CosmicOptionsSync, Options as CosmicOptions } from 'cosmiconfig';
 import { GlobMatcher } from 'cspell-glob';
+import { ImportError } from './ImportError';
 
 const currentSettingsFileVersion = '0.1';
 
@@ -541,12 +542,6 @@ function isImportFileRefWithError(ref: ImportFileRef): ref is ImportFileRefWithE
 export function extractImportErrors(settings: CSpellSettings): ImportFileRefWithError[] {
     const imports = mergeImportRefs(settings, {});
     return !imports ? [] : [...imports.values()].filter(isImportFileRefWithError);
-}
-
-class ImportError extends Error {
-    constructor(msg: string, readonly cause?: Error) {
-        super(msg);
-    }
 }
 
 function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): string {

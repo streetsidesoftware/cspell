@@ -2,7 +2,8 @@ import * as path from 'path';
 import * as commander from 'commander';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
-import { CSpellApplicationOptions, BaseOptions, checkText } from './application';
+import { checkText } from './application';
+import { CSpellApplicationOptions, BaseOptions, TraceOptions } from './options';
 import * as App from './application';
 import chalk = require('chalk');
 import {
@@ -27,7 +28,6 @@ interface Options extends CSpellApplicationOptions {
      */
     relative?: boolean;
 }
-type TraceOptions = App.TraceOptions;
 // interface InitOptions extends Options {}
 
 const templateIssue = `{green $uri}:{yellow $row:$col} - Unknown word ({red $text})`;
