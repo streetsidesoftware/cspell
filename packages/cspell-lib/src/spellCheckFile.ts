@@ -49,14 +49,14 @@ export interface SpellCheckFileResult {
 const defaultEncoding: BufferEncoding = 'utf8';
 
 export type UriString = string;
-export interface Document {
-    uri: UriString;
+
+export interface Document extends PartialDocument {
     text: string;
 }
-
 export interface PartialDocument {
     uri: UriString;
     text?: string;
+    languageId?: string;
 }
 
 /**
@@ -208,9 +208,13 @@ export function determineDocumentSettings(
     const uri = URI.parse(document.uri);
     const filename = uri.fsPath;
     const ext = path.extname(filename);
-    const fileOverrideSettings = calcOverrideSettings(settings, path.resolve(filename));
+    const fileOverrideSettings = calcOverrideSettings(settings, filename);
     const fileSettings = mergeSettings(getDefaultSettings(), getGlobalSettings(), fileOverrideSettings);
-    const languageIds = settings.languageId ? [settings.languageId] : getLanguagesForExt(ext);
+    const languageIds = document.languageId
+        ? document.languageId
+        : settings.languageId
+        ? settings.languageId
+        : getLanguagesForExt(ext);
     const config = combineTextAndLanguageSettings(fileSettings, document.text, languageIds);
     return {
         document,
