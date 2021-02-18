@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as App from './application';
 import { Emitters, ProgressFileComplete, Issue } from './emitters';
+import { CSpellApplicationOptions } from './options';
 
 const getStdinResult = {
     value: '',
@@ -154,7 +155,7 @@ describe('Application, Validate Samples', () => {
 interface SampleTest {
     file: string;
     issues: string[];
-    options?: App.CSpellApplicationOptions;
+    options?: CSpellApplicationOptions;
 }
 
 function sampleTests(): SampleTest[] {
