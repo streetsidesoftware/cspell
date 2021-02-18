@@ -129,13 +129,13 @@ describe('Validate LanguageSettings', () => {
         expect(langSet).toContain('literate haskell');
     });
 
-    test('tests local matching', () => {
-        const localSet = LS.normalizeLocal('en, en-GB, fr-fr, nl_NL');
-        expect(localSet.has('en')).toBe(true);
-        expect(LS.isLocalInSet('nl-nl', localSet)).toBe(true);
-        expect(LS.isLocalInSet('nl_nl', localSet)).toBe(true);
-        expect(LS.isLocalInSet('en', localSet)).toBe(true);
-        expect(LS.isLocalInSet('en-US', localSet)).toBe(false);
-        expect(LS.isLocalInSet('enGB', localSet)).toBe(true);
+    test('tests locale matching', () => {
+        const localeSet = LS.normalizeLocale('en, en-GB, fr-fr, nl_NL');
+        expect(localeSet.has('en')).toBe(true);
+        expect(LS.isLocaleInSet('nl-nl', localeSet)).toBe(true);
+        expect(LS.isLocaleInSet('nl_nl', localeSet)).toBe(true);
+        expect(LS.isLocaleInSet('en', localeSet)).toBe(true);
+        expect(LS.isLocaleInSet('en-US', localeSet)).toBe(false);
+        expect(LS.isLocaleInSet('enGB', localeSet)).toBe(true);
     });
 });

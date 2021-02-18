@@ -100,7 +100,11 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
  */
 function normalizeSettings(rawSettings: CSpellSettings, pathToSettingsFile: string): CSpellSettings {
     // Fix up dictionaryDefinitions
-    const settings = { ...rawSettings, globRoot: resolveGlobRoot(rawSettings, pathToSettingsFile) };
+    const settings = {
+        ...rawSettings,
+        globRoot: resolveGlobRoot(rawSettings, pathToSettingsFile),
+        languageSettings: normalizeLanguageSettings(rawSettings.languageSettings),
+    };
     const pathToSettings = path.dirname(pathToSettingsFile);
     const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, pathToSettingsFile);
     const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
@@ -264,7 +268,7 @@ function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | unde
 
 function tagLanguageSettings(tag: string, settings: LanguageSetting[] = []): LanguageSetting[] {
     return settings.map((s) => ({
-        id: tag + '.' + (s.id || s.local || s.languageId),
+        id: tag + '.' + (s.id || s.locale || s.languageId),
         ...s,
     }));
 }
@@ -607,10 +611,26 @@ function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: st
     const overrides = settings.overrides?.map((override) => {
         const filename = toGlobDef(override.filename, globRoot);
         const { dictionaryDefinitions, languageSettings } = normalizeDictionaryDefs(override, pathToSettingsFile);
-        return util.clean({ ...override, filename, dictionaryDefinitions, languageSettings });
+        return util.clean({
+            ...override,
+            filename,
+            dictionaryDefinitions,
+            languageSettings: normalizeLanguageSettings(languageSettings),
+        });
     });
 
     return overrides ? { overrides } : {};
+}
+
+function normalizeLanguageSettings(languageSettings: LanguageSetting[] | undefined): LanguageSetting[] | undefined {
+    if (!languageSettings) return undefined;
+
+    function fixLocale(s: LanguageSetting): LanguageSetting {
+        const { local: locale, ...rest } = s;
+        return { locale, ...rest };
+    }
+
+    return languageSettings.map(fixLocale);
 }
 
 interface NormalizeSettingsGlobs {

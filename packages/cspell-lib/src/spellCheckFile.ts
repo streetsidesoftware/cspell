@@ -57,6 +57,7 @@ export interface Document {
     uri: UriString;
     text?: string;
     languageId?: string;
+    locale?: string;
 }
 
 /**
@@ -144,7 +145,7 @@ async function spellCheckFullDocument(
     }
 
     const config = localConfig ? mergeSettings(settings, localConfig) : settings;
-    const docSettings = determineDocumentSettings(document, config);
+    const docSettings = determineFinalDocumentSettings(document, config);
 
     const shouldCheck = docSettings.settings.enabled ?? true;
 
@@ -196,28 +197,65 @@ function isDocumentWithText(doc: DocumentWithText | Document): doc is DocumentWi
     return doc.text !== undefined;
 }
 
-interface DetermineDocumentSettingsResult {
+export interface DetermineFinalDocumentSettingsResult {
     document: DocumentWithText;
-    settings: CSpellUserSettings;
+    settings: CSpellSettingsWithSourceTrace;
 }
 
-export function determineDocumentSettings(
+/**
+ * Combines all relevant setting values into a final configuration to be used for spell checking.
+ * It applies any overrides and appropriate language settings by taking into account the document type (languageId)
+ * the locale (natural language) and any in document settings.
+ *
+ * Note: this method will not search for configuration files. Configuration files should already be merged into `settings`.
+ * It is NOT necessary to include the cspell defaultSettings or globalSettings. They will be applied within this function.
+ * @param document - The document to be spell checked. Note: if the URI doesn't have a path, overrides cannot be applied.
+ *   `locale` - if defined will be used unless it is overridden by an in-document setting.
+ *   `languageId` - if defined will be used to select appropriate file type dictionaries.
+ * @param settings - The near final settings. Should already be the combination of all configuration files.
+ */
+export function determineFinalDocumentSettings(
     document: DocumentWithText,
     settings: CSpellUserSettings
-): DetermineDocumentSettingsResult {
+): DetermineFinalDocumentSettingsResult {
     const uri = URI.parse(document.uri);
     const filename = uri.fsPath;
     const ext = path.extname(filename);
-    const fileOverrideSettings = calcOverrideSettings(settings, filename);
-    const fileSettings = mergeSettings(getDefaultSettings(), getGlobalSettings(), fileOverrideSettings);
+    const settingsWithDefaults = mergeSettings(getDefaultSettings(), getGlobalSettings(), settings);
+    const fileSettings = calcOverrideSettings(settingsWithDefaults, filename);
     const languageIds = document.languageId
         ? document.languageId
-        : settings.languageId
-        ? settings.languageId
+        : fileSettings.languageId
+        ? fileSettings.languageId
         : getLanguagesForExt(ext);
+    if (document.locale) {
+        fileSettings.language = document.locale;
+    }
     const config = combineTextAndLanguageSettings(fileSettings, document.text, languageIds);
     return {
         document,
         settings: config,
+    };
+}
+
+export function fileToDocument(file: string): Document;
+export function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
+export function fileToDocument(
+    file: string,
+    text?: string,
+    languageId?: string,
+    locale?: string
+): Document | DocumentWithText;
+export function fileToDocument(
+    file: string,
+    text?: string,
+    languageId?: string,
+    locale?: string
+): Document | DocumentWithText {
+    return {
+        uri: URI.file(file).toString(),
+        text,
+        languageId,
+        locale,
     };
 }

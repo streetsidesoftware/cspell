@@ -353,7 +353,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 ### cspell.json sections
 
 - `version` - currently always 0.1
-- `language` - this specifies the language local to use in choosing the general dictionary.
+- `language` - this specifies the language locale to use in choosing the general dictionary.
   For example: `"language": "en-GB"` tells cspell to use British English instead of US English.
 - `words` - a list of words to be considered correct.
 - `flagWords` - a list of words to be always considered incorrect
@@ -466,13 +466,13 @@ off an existing dictionary.
 
 ## LanguageSettings
 
-The Language Settings allow configuration to be based upon the programming language and/or the local.
-There are two selector fields `local` and `languageId`.
+The Language Settings allow configuration to be based upon the programming language and/or the e.
+There are two selector fields `locale` and `languageId`.
 
 - `languageId` defines which programming languages to match against.
   A value of `"python,javascript"` will match against _python_ and _javascript_ files. To match against ALL programming languages,
   use `"*"`.
-- `local` defines which spoken languages to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
+- `locale` defines which spoken languages to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
   A value of `"*"` will match all spoken languages.
 - Most configuration values allowed in a `cspell.json` file can be define or redefine within the `languageSettings`.
 
@@ -482,16 +482,16 @@ There are two selector fields `local` and `languageId`.
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
             // * will match against any file type.
             "languageId": "c,cpp",
-            // Language local. i.e. en-US, de-AT, or ru. * will match all locals.
-            // Multiple locals can be specified like: "en, en-US" to match both English and English US.
-            "local": "*",
+            // Language locale. i.e. en-US, de-AT, or ru. * will match all locales.
+            // Multiple locales can be specified like: "en, en-US" to match both English and English US.
+            "locale": "*",
             // To exclude patterns, add them to "ignoreRegExpList"
             "ignoreRegExpList": [
                 "/#include.*/"
             ],
             // List of dictionaries to enable by name in `dictionaryDefinitions`
             "dictionaries": ["cpp"],
-            // Dictionary definitions can also be supplied here. They are only used iff "languageId" and "local" match.
+            // Dictionary definitions can also be supplied here. They are only used iff "languageId" and "locale" match.
             "dictionaryDefinitions": []
         }
     ]

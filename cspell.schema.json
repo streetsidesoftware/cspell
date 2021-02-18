@@ -171,6 +171,20 @@
           ],
           "description": "The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
         },
+        "locale": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LocaleId"
+            },
+            {
+              "items": {
+                "$ref": "#/definitions/LocaleId"
+              },
+              "type": "array"
+            }
+          ],
+          "description": "The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
+        },
         "name": {
           "description": "Optional name of configuration",
           "type": "string"

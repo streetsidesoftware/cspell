@@ -273,10 +273,24 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
 
 export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {}
 
-export interface LanguageSettingFilterFields {
+export interface LanguageSettingFilterFields
+    extends LanguageSettingFilterFieldsPreferred,
+        LanguageSettingFilterFieldsDeprecated {}
+
+export interface LanguageSettingFilterFieldsPreferred {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
     languageId: LanguageId | LanguageId[];
     /** The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. */
+    locale?: LocaleId | LocaleId[];
+}
+
+export interface LanguageSettingFilterFieldsDeprecated {
+    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
+    languageId: LanguageId | LanguageId[];
+    /**
+     * The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
+     * @deprecated use `locale`
+     */
     local?: LocaleId | LocaleId[];
 }
 
