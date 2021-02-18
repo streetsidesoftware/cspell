@@ -158,10 +158,6 @@ describe('Validate Uri assumptions', () => {
         return { path };
     }
 
-    function fsPath(fsPath: string): PartialUri {
-        return { fsPath: fixDriveLetter(fsPath) };
-    }
-
     function m(...parts: PartialUri[]): PartialUri {
         const u: PartialUri = {};
         for (const p of parts) {
@@ -181,7 +177,7 @@ describe('Validate Uri assumptions', () => {
 
     test.each`
         uri                                                      | expected                                                                                  | comment
-        ${u(__filename)}                                         | ${m(schema('file'), path(normalizePath(__filename)), fsPath(__filename))}                 | ${''}
+        ${u(__filename)}                                         | ${m(schema('file'), path(normalizePath(__filename)))}                                     | ${''}
         ${'stdin:///'}                                           | ${m(schema('stdin'), path('/'), authority(''))}                                           | ${''}
         ${'https://github.com/streetsidesoftware/cspell/issues'} | ${m(schema('https'), authority('github.com'), path('/streetsidesoftware/cspell/issues'))} | ${''}
         ${'C:\\home\\project\\file.js'}                          | ${m(schema('C'), path('\\home\\project\\file.js'))}                                       | ${'Windows path by "accident"'}
