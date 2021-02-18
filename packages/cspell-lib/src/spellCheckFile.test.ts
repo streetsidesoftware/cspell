@@ -159,7 +159,7 @@ describe('Validate Uri assumptions', () => {
     }
 
     function fsPath(fsPath: string): PartialUri {
-        return { fsPath };
+        return { fsPath: fixDriveLetter(fsPath) };
     }
 
     function m(...parts: PartialUri[]): PartialUri {
