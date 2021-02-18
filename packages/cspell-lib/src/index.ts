@@ -26,6 +26,7 @@ export {
     determineFinalDocumentSettings,
     DetermineFinalDocumentSettingsResult,
     Document,
+    fileToDocument,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,

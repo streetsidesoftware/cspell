@@ -237,3 +237,25 @@ export function determineFinalDocumentSettings(
         settings: config,
     };
 }
+
+export function fileToDocument(file: string): Document;
+export function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
+export function fileToDocument(
+    file: string,
+    text?: string,
+    languageId?: string,
+    locale?: string
+): Document | DocumentWithText;
+export function fileToDocument(
+    file: string,
+    text?: string,
+    languageId?: string,
+    locale?: string
+): Document | DocumentWithText {
+    return {
+        uri: URI.file(file).toString(),
+        text,
+        languageId,
+        locale,
+    };
+}

@@ -6,11 +6,11 @@ import { ImportError } from './Settings/ImportError';
 import {
     determineFinalDocumentSettings,
     Document,
-    DocumentWithText,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,
     SpellCheckFileResult,
+    fileToDocument,
 } from './spellCheckFile';
 
 const samples = Path.resolve(__dirname, '../samples');
@@ -69,14 +69,7 @@ describe('Validate Determine settings', () => {
         return URI.parse(Path.resolve(__dirname, filename)).toString();
     }
 
-    function doc(uri: string, text: string, languageId?: string, locale?: string): DocumentWithText {
-        return {
-            uri,
-            text,
-            languageId,
-            locale,
-        };
-    }
+    const doc = fileToDocument;
 
     test.each`
         document                                                                  | settings              | expected                                       | comment
