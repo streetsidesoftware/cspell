@@ -1,6 +1,5 @@
 import { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
-import { posix } from 'path';
 import { URI } from 'vscode-uri';
 import { ImportError } from './Settings/ImportError';
 import {
@@ -12,6 +11,8 @@ import {
 } from './spellCheckFile';
 
 const samples = Path.resolve(__dirname, '../samples');
+const isWindows = process.platform === 'win32';
+const hasDriveLetter = /^[A-Z]:\\/;
 
 describe('Validate Spell Checking Files', () => {
     interface TestSpellCheckFile {
@@ -121,7 +122,7 @@ describe('Validate Spell Checking Documents', () => {
         ${'stdin:///'}          | ${'some texxt'} | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: true, issues: i('texxt'), localConfigFilepath: undefined, errors: undefined }}
         ${'stdin:///'}          | ${''}           | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: false, issues: [], localConfigFilepath: undefined, errors: [err('Unsupported schema: "stdin", open "stdin:/"')] }}
     `(
-        'spellCheckFile $filename $settings $options',
+        'spellCheckFile $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
             const r = await spellCheckDocument(d(uri, text || undefined), options, settings);
             expect(r).toEqual(oc(expected));
@@ -142,7 +143,7 @@ describe('Validate Uri assumptions', () => {
     type PartialUri = Partial<UriComponents>;
 
     function u(filename: string): string {
-        return URI.file(filename).toString();
+        return URI.file(fixDriveLetter(filename)).toString();
     }
 
     function schema(scheme: string): PartialUri {
@@ -169,6 +170,10 @@ describe('Validate Uri assumptions', () => {
         return u;
     }
 
+    function normalizePath(p: string): string {
+        return fixDriveLetter(p).replace(/\\/g, '/');
+    }
+
     interface UriTestCase {
         uri: string;
         expected: PartialUri;
@@ -176,10 +181,9 @@ describe('Validate Uri assumptions', () => {
 
     test.each`
         uri                                                      | expected                                                                                  | comment
-        ${u(__filename)}                                         | ${m(schema('file'), path(posix.normalize(__filename)), fsPath(__filename))}               | ${''}
+        ${u(__filename)}                                         | ${m(schema('file'), path(normalizePath(__filename)), fsPath(__filename))}                 | ${''}
         ${'stdin:///'}                                           | ${m(schema('stdin'), path('/'), authority(''))}                                           | ${''}
         ${'https://github.com/streetsidesoftware/cspell/issues'} | ${m(schema('https'), authority('github.com'), path('/streetsidesoftware/cspell/issues'))} | ${''}
-        ${'https://github.com/streetsidesoftware/cspell/issues'} | ${m(fsPath(Path.normalize('/streetsidesoftware/cspell/issues')))}                         | ${''}
         ${'C:\\home\\project\\file.js'}                          | ${m(schema('C'), path('\\home\\project\\file.js'))}                                       | ${'Windows path by "accident"'}
     `('URI assumptions uri: "$uri" $comment -- $expected', ({ uri, expected }: UriTestCase) => {
         const u = URI.parse(uri);
@@ -187,6 +191,13 @@ describe('Validate Uri assumptions', () => {
     });
 });
 
+function fixDriveLetter(p: string): string {
+    if (!hasDriveLetter.test(p)) return p;
+    return p[0].toLowerCase() + p.slice(1);
+}
+
 function s(file: string) {
-    return Path.resolve(samples, file);
+    const p = Path.resolve(samples, file);
+    // Force lowercase drive letter if windows
+    return isWindows ? fixDriveLetter(p) : p;
 }
