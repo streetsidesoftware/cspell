@@ -4,7 +4,9 @@ import { posix } from 'path';
 import { URI } from 'vscode-uri';
 import { ImportError } from './Settings/ImportError';
 import {
+    determineFinalDocumentSettings,
     Document,
+    DocumentWithText,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,
@@ -60,6 +62,41 @@ describe('Validate Spell Checking Files', () => {
             expect(r).toEqual(oc(expected));
         }
     );
+});
+
+describe('Validate Determine settings', () => {
+    function u(filename: string): string {
+        return URI.parse(Path.resolve(__dirname, filename)).toString();
+    }
+
+    function doc(uri: string, text: string, languageId?: string, locale?: string): DocumentWithText {
+        return {
+            uri,
+            text,
+            languageId,
+            locale,
+        };
+    }
+
+    test.each`
+        document                                                                  | settings              | expected                                       | comment
+        ${doc(u('README.md'), '# README\n')}                                      | ${{}}                 | ${{ languageId: 'markdown', language: 'en' }}  | ${'from uri'}
+        ${doc(u('README.md'), '# README\n \x63spell:locale fr')}                  | ${{}}                 | ${{ languageId: 'markdown', language: 'fr' }}  | ${'In doc locale'}
+        ${doc('stdin:///', '# README\n', 'markdown')}                             | ${{}}                 | ${{ languageId: 'markdown', language: 'en' }}  | ${'passed with doc'}
+        ${doc('stdin:///README.txt', '# README\n')}                               | ${{}}                 | ${{ languageId: 'plaintext', language: 'en' }} | ${'from stdin uri'}
+        ${doc(u('README.md'), '# README\n', 'plaintext')}                         | ${{}}                 | ${{ languageId: 'plaintext', language: 'en' }} | ${'override with doc'}
+        ${doc(u('README.md'), '# README\n', undefined, 'fr')}                     | ${{}}                 | ${{ languageId: 'markdown', language: 'fr' }}  | ${'passed with doc'}
+        ${doc(u('README.md'), '# README\n \x63spell:locale fr', undefined, 'en')} | ${{}}                 | ${{ languageId: 'markdown', language: 'fr' }}  | ${'In doc locale wins'}
+        ${doc(u('README.md'), '# README\n')}                                      | ${{ language: 'fr' }} | ${{ languageId: 'markdown', language: 'fr' }}  | ${'Language from settings'}
+        ${doc(u('README.md'), '# README\n', undefined, 'en')}                     | ${{ language: 'fr' }} | ${{ languageId: 'markdown', language: 'en' }}  | ${'passed with doc'}
+    `('determineFinalDocumentSettings($document, $settings) $expected $comment', ({ document, settings, expected }) => {
+        const r = determineFinalDocumentSettings(document, settings);
+        expect(r).toEqual(
+            expect.objectContaining({
+                settings: expect.objectContaining(expected),
+            })
+        );
+    });
 });
 
 describe('Validate Spell Checking Documents', () => {

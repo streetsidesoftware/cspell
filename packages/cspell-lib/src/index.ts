@@ -23,6 +23,8 @@ export {
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
 export {
+    determineFinalDocumentSettings,
+    DetermineFinalDocumentSettingsResult,
     Document,
     spellCheckDocument,
     spellCheckFile,
