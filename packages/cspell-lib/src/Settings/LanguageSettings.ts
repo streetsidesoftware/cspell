@@ -32,14 +32,14 @@ function normalizeLanguageIdToString(langId: LanguageId | LanguageId[]): string 
     return [...normalizeLanguageId(langId)].join(',');
 }
 
-export function normalizeLocal(locale: LocaleId | LocaleId[]): Set<LocaleId> {
+export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {
     locale = stringToList(locale);
     return new Set<LocaleId>(locale.map((locale) => locale.toLowerCase().replace(/[^a-z]/g, '')));
 }
 
-export function isLocalInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
-    const locals = normalizeLocal(locale);
-    return [...locals.values()].filter((locale) => setOfLocals.has(locale)).length > 0;
+export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
+    const locales = normalizeLocale(locale);
+    return [...locales.values()].filter((locale) => setOfLocals.has(locale)).length > 0;
 }
 
 export function calcSettingsForLanguage(
@@ -48,21 +48,21 @@ export function calcSettingsForLanguage(
     locale: LocaleId | LocaleId[]
 ): BaseSetting {
     languageId = languageId.toLowerCase();
-    const allowedLocals = normalizeLocal(locale);
+    const allowedLocals = normalizeLocale(locale);
     return defaultLanguageSettings
         .concat(languageSettings)
         .filter((s) => doesLanguageSettingMatchLanguageId(s, languageId))
-        .filter((s) => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals))
+        .filter((s) => !s.locale || s.locale === '*' || isLocaleInSet(s.locale, allowedLocals))
         .map((langSetting) => {
-            const id = normalizeLanguageIdToString(langSetting.local || langSetting.languageId || 'language');
-            const { languageId: _languageId, local: _local, ...s } = { id, ...langSetting };
+            const id = normalizeLanguageIdToString(langSetting.locale || langSetting.languageId || 'language');
+            const { languageId: _languageId, locale: _local, ...s } = { id, ...langSetting };
             return s;
         })
         .reduce(
             (langSetting, setting) => ({
                 ...SpellSettings.mergeSettings(langSetting, setting),
                 languageId,
-                local: locale,
+                locale,
             }),
             {}
         );

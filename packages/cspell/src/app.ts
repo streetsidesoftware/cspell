@@ -142,7 +142,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         )
         .option('-v, --verbose', 'display more information about the files being checked and the configuration')
         .option(
-            '--locale <local>',
+            '--locale <locale>',
             'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
         )
         .option('--language-id <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
@@ -204,8 +204,8 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
         )
         .option(
-            '--local <local>',
-            'Set language locals. i.e. "en,fr" for English and French, or "en-GB" for British English.'
+            '--locale <locale>',
+            'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
         )
         .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
         .option('--no-color', 'Turn off color.')

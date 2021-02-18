@@ -30,7 +30,7 @@ export async function checkText(filename: string, options: BaseOptions): Promise
     const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,
-        local: options.local || undefined,
+        language: options.locale || options.local || undefined,
     });
     const info = calcFinalConfigInfo(foundSettings, settingsFromCommandLine, filename, text);
     return cspell.checkText(text, info.configInfo.config);
