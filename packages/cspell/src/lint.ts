@@ -1,5 +1,5 @@
 import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { calcFinalConfigInfo, ConfigInfo, FileInfo, findFiles, readConfig, readFileInfo } from './fileHelper';
+import { ConfigInfo, FileInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
 import { MessageTypes, Issue } from './emitters';
 import * as util from './util/util';
 import * as commentJson from 'comment-json';
@@ -32,11 +32,9 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
     return run();
 
     async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<FileResult> {
-        const settingsFromCommandLine = util.clean({
-            languageId: cfg.options.languageId || undefined,
-            language: cfg.locale || undefined,
-        });
-
+        const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
+        const { filename, text } = fileInfo;
+        cfg.debug(`Filename: ${fileInfo.filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
         const result: FileResult = {
             fileInfo,
             issues: [],
@@ -46,30 +44,25 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             elapsedTimeMs: 0,
         };
 
-        const { filename, text } = fileInfo;
-        const info = calcFinalConfigInfo(configInfo, settingsFromCommandLine, filename, text);
-        const config = info.configInfo.config;
-        const source = info.configInfo.source;
-        cfg.debug(
-            `Filename: ${filename}, Extension: ${path.extname(filename)}, LanguageIds: ${info.languageIds.toString()}`
-        );
-
-        if (!info.configInfo.config.enabled) return result;
-        result.configErrors += await reportConfigurationErrors(info.configInfo.config);
-
-        const debugCfg = { config: { ...config, source: null }, source };
-        cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
         const startTime = Date.now();
+        let spellResult: Partial<cspell.SpellCheckFileResult> = {};
         try {
-            const validateOptions = { generateSuggestions: cfg.options.showSuggestions, numSuggestions: 5 };
-            const wordOffsets = await cspell.validateText(text, info.configInfo.config, validateOptions);
-            result.processed = true;
-            result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, wordOffsets).map(mapIssue);
+            const r = await cspell.spellCheckDocument(doc, {}, configInfo.config);
+            spellResult = r;
+            result.processed = r.checked;
+            result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, r.issues).map(mapIssue);
         } catch (e) {
             cfg.emitters.error(`Failed to process "${filename}"`, e);
             result.errors += 1;
         }
         result.elapsedTimeMs = Date.now() - startTime;
+
+        const config = spellResult.settingsUsed ?? {};
+
+        result.configErrors += await reportConfigurationErrors(config);
+
+        const debugCfg = { config: { ...config, source: null }, source: spellResult.localConfigFilepath };
+        cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
         const elapsed = result.elapsedTimeMs / 1000.0;
         const dictionaries = config.dictionaries || [];
         cfg.info(
