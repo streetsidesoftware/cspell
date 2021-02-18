@@ -5,9 +5,9 @@ export { TextOffset, TextDocumentOffset } from './util/text';
 export {
     checkText,
     CheckTextInfo,
-    TextInfoItem,
-    IncludeExcludeOptions,
     IncludeExcludeFlag,
+    IncludeExcludeOptions,
+    TextInfoItem,
     validateText,
 } from './validator';
 export { defaultFileName as defaultSettingsFilename } from './Settings';
@@ -15,14 +15,20 @@ export {
     CompoundWordsMethod,
     createSpellingDictionary,
     getDictionary,
+    refreshDictionaryCache,
     SpellingDictionary,
     SuggestionCollector,
     SuggestionResult,
-    refreshDictionaryCache,
 } from './SpellingDictionary';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';
-export { spellCheckFile, SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile';
+export {
+    Document,
+    spellCheckDocument,
+    spellCheckFile,
+    SpellCheckFileOptions,
+    SpellCheckFileResult,
+} from './spellCheckFile';
 
 import * as Text from './util/text';
 import * as Link from './Settings/link';
