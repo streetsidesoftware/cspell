@@ -51,7 +51,7 @@ export function calcSettingsForLanguage(
     const allowedLocals = normalizeLocal(local);
     return defaultLanguageSettings
         .concat(languageSettings)
-        .filter((s) => !s.languageId || s.languageId === '*' || normalizeLanguageId(s.languageId).has(languageId))
+        .filter((s) => doesLanguageSettingMatchLanguageId(s, languageId))
         .filter((s) => !s.local || s.local === '*' || isLocalInSet(s.local, allowedLocals))
         .map((langSetting) => {
             const id = normalizeLanguageIdToString(langSetting.local || langSetting.languageId || 'language');
@@ -66,6 +66,17 @@ export function calcSettingsForLanguage(
             }),
             {}
         );
+}
+
+function doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: LanguageId): boolean {
+    const languageSettingsLanguageIds = s.languageId;
+    if (!languageSettingsLanguageIds || languageSettingsLanguageIds === '*') return true;
+    const ids = normalizeLanguageId(languageSettingsLanguageIds);
+    if (ids.has(languageId)) return true;
+    if (ids.has('!' + languageId)) return false;
+
+    const numExcludes = [...ids].filter((id) => id.startsWith('!')).length;
+    return numExcludes === ids.size;
 }
 
 export function calcUserSettingsForLanguage(settings: CSpellUserSettings, languageId: string): CSpellUserSettings {

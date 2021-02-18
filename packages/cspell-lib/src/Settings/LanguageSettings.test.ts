@@ -14,6 +14,14 @@ const extraSettings: CSpellUserSettings = {
             patterns: [{ name: 'special', pattern: 'special' }],
             ignoreRegExpList: ['special'],
         },
+        {
+            languageId: '!python,!javascript',
+            ignoreRegExpList: ['no-python-and-javascript'],
+        },
+        {
+            languageId: 'python,javascript',
+            ignoreRegExpList: ['python-and-javascript'],
+        },
     ],
 };
 
@@ -84,6 +92,26 @@ describe('Validate LanguageSettings', () => {
         expect(sPython.enabled).toBe(true);
         expect(sPython.allowCompoundWords).toBe(true);
     });
+
+    test.each`
+        languageId      | ignoreContains                                    | ignoreNotContains
+        ${'python'}     | ${['binary', 'special', 'python-and-javascript']} | ${['no-python-and-javascript']}
+        ${'javascript'} | ${['binary', 'python-and-javascript']}            | ${['no-python-and-javascript']}
+        ${'plaintext'}  | ${['binary', 'no-python-and-javascript']}         | ${['python-and-javascript']}
+    `(
+        'that ! works for $languageId, contains $ignoreContains, $ignoreNotContains',
+        ({ languageId, ignoreContains, ignoreNotContains }) => {
+            const settings = {
+                enabled: true,
+                allowCompoundWords: false,
+                languageSettings: [],
+                ...mergeSettings({ languageSettings: defaultLanguageSettings }, extraSettings),
+            };
+            const s = calcUserSettingsForLanguage(settings, languageId);
+            expect(s.ignoreRegExpList).toEqual(expect.arrayContaining(ignoreContains));
+            expect(s.ignoreRegExpList).not.toEqual(expect.arrayContaining(ignoreNotContains));
+        }
+    );
 
     test('merged settings with global', () => {
         const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
