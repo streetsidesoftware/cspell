@@ -1,9 +1,10 @@
 import { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
+import { posix } from 'path';
 import { URI } from 'vscode-uri';
 import { ImportError } from './Settings/ImportError';
 import {
-    PartialDocument,
+    Document,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,
@@ -91,7 +92,7 @@ describe('Validate Spell Checking Documents', () => {
         return URI.file(s(file)).toString();
     }
 
-    function d(uri: string, text?: string): PartialDocument {
+    function d(uri: string, text?: string): Document {
         return text === undefined ? { uri } : { uri, text };
     }
 
@@ -167,7 +168,7 @@ describe('Validate Uri assumptions', () => {
     }
 
     function normalizePath(p: string): string {
-        return fixDriveLetter(p).replace(/\\/g, '/');
+        return posix.normalize('/' + fixDriveLetter(p).replace(/\\/g, '/'));
     }
 
     interface UriTestCase {

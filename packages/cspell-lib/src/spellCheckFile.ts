@@ -37,7 +37,7 @@ export interface SpellCheckFileOptions {
 }
 
 export interface SpellCheckFileResult {
-    document: PartialDocument | Document;
+    document: Document | DocumentWithText;
     settingsUsed: CSpellSettingsWithSourceTrace;
     localConfigFilepath: string | undefined;
     options: SpellCheckFileOptions;
@@ -50,10 +50,10 @@ const defaultEncoding: BufferEncoding = 'utf8';
 
 export type UriString = string;
 
-export interface Document extends PartialDocument {
+export interface DocumentWithText extends Document {
     text: string;
 }
-export interface PartialDocument {
+export interface Document {
     uri: UriString;
     text?: string;
     languageId?: string;
@@ -70,7 +70,7 @@ export function spellCheckFile(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
-    const doc: PartialDocument = {
+    const doc: Document = {
         uri: URI.file(file).toString(),
     };
     return spellCheckDocument(doc, options, settings);
@@ -83,7 +83,7 @@ export function spellCheckFile(
  * @param settings - default settings to use.
  */
 export async function spellCheckDocument(
-    document: PartialDocument | Document,
+    document: Document | DocumentWithText,
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
@@ -103,7 +103,7 @@ export async function spellCheckDocument(
 }
 
 async function spellCheckFullDocument(
-    document: Document,
+    document: DocumentWithText,
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
@@ -164,7 +164,7 @@ async function spellCheckFullDocument(
 }
 
 function searchForDocumentConfig(
-    document: Document,
+    document: DocumentWithText,
     defaultConfig: CSpellSettingsWithSourceTrace
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
@@ -173,7 +173,7 @@ function searchForDocumentConfig(
     return searchForConfig(u.fsPath).then((s) => s || defaultConfig);
 }
 
-async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<Document> {
+async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<DocumentWithText> {
     const text = await readFile(filename, encoding);
     const uri = URI.file(filename).toString();
 
@@ -183,8 +183,8 @@ async function readDocument(filename: string, encoding: BufferEncoding = default
     };
 }
 
-function resolveDocument(document: Document | PartialDocument, encoding?: BufferEncoding): Promise<Document> {
-    if (isFullDocument(document)) return Promise.resolve(document);
+function resolveDocument(document: DocumentWithText | Document, encoding?: BufferEncoding): Promise<DocumentWithText> {
+    if (isDocumentWithText(document)) return Promise.resolve(document);
     const uri = URI.parse(document.uri);
     if (uri.scheme !== 'file') {
         throw new Error(`Unsupported schema: "${uri.scheme}", open "${uri.toString()}"`);
@@ -192,17 +192,17 @@ function resolveDocument(document: Document | PartialDocument, encoding?: Buffer
     return readDocument(uri.fsPath, encoding);
 }
 
-function isFullDocument(doc: Document | PartialDocument): doc is Document {
+function isDocumentWithText(doc: DocumentWithText | Document): doc is DocumentWithText {
     return doc.text !== undefined;
 }
 
 interface DetermineDocumentSettingsResult {
-    document: Document;
+    document: DocumentWithText;
     settings: CSpellUserSettings;
 }
 
 export function determineDocumentSettings(
-    document: Document,
+    document: DocumentWithText,
     settings: CSpellUserSettings
 ): DetermineDocumentSettingsResult {
     const uri = URI.parse(document.uri);
