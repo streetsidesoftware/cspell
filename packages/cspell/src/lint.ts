@@ -51,7 +51,8 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             MessageTypes.Info
         );
         try {
-            const r = await cspell.spellCheckDocument(doc, {}, configInfo.config);
+            const validateOptions = { generateSuggestions: cfg.options.showSuggestions, numSuggestions: 5 };
+            const r = await cspell.spellCheckDocument(doc, validateOptions, configInfo.config);
             spellResult = r;
             result.processed = r.checked;
             result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, r.issues).map(mapIssue);
