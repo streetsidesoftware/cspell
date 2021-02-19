@@ -134,6 +134,10 @@ describe('Validate createInit', () => {
 });
 
 describe('Application, Validate Samples', () => {
+    function iMap(issue: string | Partial<Issue>): Partial<Issue> {
+        return expect.objectContaining(typeof issue === 'string' ? { text: issue } : issue);
+    }
+
     sampleTests().map((sample) =>
         test(`Test file: "${sample.file}"`, async () => {
             const logger = new Logger();
@@ -146,7 +150,7 @@ describe('Application, Validate Samples', () => {
 
             const result = await App.lint([path.resolve(file)], options, logger);
             expect(result.files).toBe(1);
-            expect(logger.issues.map((issue) => issue.text)).toEqual(issues);
+            expect(logger.issues).toEqual(issues.map(iMap));
             expect(result.issues).toBe(issues.length);
         })
     );
@@ -154,7 +158,7 @@ describe('Application, Validate Samples', () => {
 
 interface SampleTest {
     file: string;
-    issues: string[];
+    issues: (string | Partial<Issue>)[];
     options?: CSpellApplicationOptions;
 }
 
@@ -171,7 +175,17 @@ function sampleTests(): SampleTest[] {
         },
         { file: 'samples/src/drives.ps1', issues: ['Woude', 'Woude'] },
         { file: 'samples/src/sample.c', issues: [] },
-        { file: 'samples/src/sample.go', issues: ['garbbage'] },
+        {
+            file: 'samples/src/sample.go',
+            options: { showSuggestions: true, showContext: true },
+            issues: [
+                {
+                    text: 'garbbage',
+                    suggestions: expect.arrayContaining(['garbage', 'garage']),
+                    context: expect.objectContaining({ text: 'Deliberate misspelling: garbbage. */' }),
+                },
+            ],
+        },
         { file: 'samples/src/sample.py', issues: ['garbbage'] },
         {
             file: 'samples/src/sample.tex',
