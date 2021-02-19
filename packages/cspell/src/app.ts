@@ -65,7 +65,7 @@ function nullEmitter() {
 function relativeFilename(filename: string, cwd = process.cwd()): string {
     const rel = path.relative(cwd, filename);
     if (rel.startsWith('..')) return filename;
-    return '.' + path.sep + rel;
+    return rel;
 }
 
 function reportProgress(p: ProgressItem) {
