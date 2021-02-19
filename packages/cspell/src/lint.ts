@@ -46,6 +46,10 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
 
         const startTime = Date.now();
         let spellResult: Partial<cspell.SpellCheckFileResult> = {};
+        cfg.info(
+            `Checking: ${filename}, File type: ${doc.languageId ?? 'auto'}, Language: ${doc.locale ?? 'default'}`,
+            MessageTypes.Info
+        );
         try {
             const r = await cspell.spellCheckDocument(doc, {}, configInfo.config);
             spellResult = r;
@@ -66,11 +70,10 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         const elapsed = result.elapsedTimeMs / 1000.0;
         const dictionaries = config.dictionaries || [];
         cfg.info(
-            `Checking: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`,
+            `Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`,
             MessageTypes.Info
         );
         cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
-        result.issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
         return result;
     }
 
@@ -116,7 +119,10 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             }
             const p = processFile(file, configInfo);
             const { elapsedTimeMs } = await measurePromise(p);
+            const result = await p;
             emitProgress(elapsedTimeMs);
+            // Show the spelling errors after emitting the progress.
+            result.issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
             const r = await p;
             status.files += 1;
             if (r.issues.length || r.errors) {

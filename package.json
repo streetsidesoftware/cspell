@@ -30,8 +30,9 @@
     "pub-next": "npm install && npm test && lerna publish from-git --dist-tag next",
     "symlink": "node build_tools/bin/symlink.js packages test-packages",
     "test-watch": "lerna run --parallel test-watch",
-    "test": "lerna run test && ajv -s ./cspell.schema.json -d cspell.json",
+    "test": "lerna run test && npm run test-schema",
     "test-integrations": "cd ./integration-tests && npm run integration-tests",
+    "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./ajv.config.js",
     "update-packages": "lerna exec \"npm update -S && rimraf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci",
     "update-snapshots": "lerna run update-snapshots --scope cspell-integration-tests"
   },
@@ -53,7 +54,7 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
-    "ajv-cli": "^4.0.1",
+    "ajv-cli": "^4.1.0",
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-import": "^2.22.1",
