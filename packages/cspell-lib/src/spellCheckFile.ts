@@ -10,11 +10,11 @@ import {
     mergeSettings,
     searchForConfig,
 } from './Settings';
-import { validateText, ValidationIssue } from './validator';
+import { validateText, ValidateTextOptions, ValidationIssue } from './validator';
 import * as path from 'path';
 import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 
-export interface SpellCheckFileOptions {
+export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
      * Optional path to a configuration file.
      * If given, it will be used instead of searching for a configuration file.
@@ -148,8 +148,10 @@ async function spellCheckFullDocument(
     const docSettings = determineFinalDocumentSettings(document, config);
 
     const shouldCheck = docSettings.settings.enabled ?? true;
+    const { generateSuggestions, numSuggestions } = options;
+    const validateOptions = { generateSuggestions, numSuggestions };
 
-    const issues = shouldCheck ? await validateText(document.text, docSettings.settings) : [];
+    const issues = shouldCheck ? await validateText(document.text, docSettings.settings, validateOptions) : [];
 
     const result: SpellCheckFileResult = {
         document,
