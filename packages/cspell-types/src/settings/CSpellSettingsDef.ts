@@ -257,7 +257,11 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
 export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     /** Path to the file, if undefined the path to the extension dictionaries is assumed */
     path?: FsPath;
-    /** File name @deprecated use path */
+    /**
+     * File name
+     * @deprecated
+     * @deprecatedMessage Use path instead.
+     */
     file: FsPath;
     /**
      * Type of file:
@@ -288,8 +292,9 @@ export interface LanguageSettingFilterFieldsDeprecated {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
     languageId: LanguageId | LanguageId[];
     /**
-     * The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
-     * @deprecated use `locale`
+     * Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
+     * @deprecated
+     * @deprecatedMessage Use `locale` instead
      */
     local?: LocaleId | LocaleId[];
 }
@@ -336,6 +341,7 @@ export type DictionaryId = string;
 export type LocaleId = string;
 
 /**
+ * @deprecated
  * @deprecatedMessage Use LocaleId instead
  */
 export type LocalId = LocaleId;
