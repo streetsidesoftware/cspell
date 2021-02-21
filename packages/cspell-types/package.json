@@ -17,7 +17,8 @@
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/settings/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecatedMessage -o  ./cspell.schema.json && cp ./cspell.schema.json ../..",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
-    "test": "jest"
+    "test-schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
+    "test": "jest && npm run test-schema"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
   },
   "files": [
     "dist/**",
+    "ajv.config.js",
+    "cspell.schema.json",
     "!**/*.test.*",
     "!**/*.spec.*",
     "!**/*.map"
@@ -36,6 +39,7 @@
   "author": "Jason Dent",
   "license": "MIT",
   "devDependencies": {
+    "ajv-cli": "^4.1.0",
     "jest": "^26.6.3",
     "rimraf": "^3.0.2",
     "ts-json-schema-generator": "^0.84.0",

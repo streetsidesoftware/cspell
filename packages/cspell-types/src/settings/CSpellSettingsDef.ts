@@ -93,7 +93,25 @@ export interface Settings extends BaseSetting {
     ignoreWords?: string[];
 
     /** languageIds for the files to spell check. */
-    enabledLanguageIds?: LanguageId[];
+    enabledLanguageIds?: LanguageIdSingle[];
+
+    /**
+     * @title File Types to Check
+     * @scope resource
+     * @uniqueItems true
+     * @markdownDescription
+     * Enable / Disable checking file types (languageIds).
+     * These are in additional to the file types specified by `cSpell.enabledLanguageIds`.
+     * To disable a language, prefix with `!` as in `!json`,
+     *
+     * Example:
+     * ```
+     * jsonc       // enable checking for jsonc
+     * !json       // disable checking for json
+     * kotlin      // enable checking for kotlin
+     * ```
+     */
+    enableFiletypes?: LanguageIdSingle[];
 
     /**
      * The maximum number of problems to report in a file.
@@ -283,14 +301,14 @@ export interface LanguageSettingFilterFields
 
 export interface LanguageSettingFilterFieldsPreferred {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
-    languageId: LanguageId | LanguageId[];
+    languageId: LanguageId | LanguageIdSingle[];
     /** The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. */
     locale?: LocaleId | LocaleId[];
 }
 
 export interface LanguageSettingFilterFieldsDeprecated {
     /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
-    languageId: LanguageId | LanguageId[];
+    languageId: LanguageId | LanguageIdSingle[];
     /**
      * Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
      * @deprecated
@@ -366,8 +384,25 @@ export interface GlobDef {
     root?: string;
 }
 
-/** This can be '*', 'typescript', 'cpp', 'json', etc. */
-export type LanguageId = string;
+/**
+ * This can be '*', 'typescript', 'cpp', 'json', etc.
+ * @pattern ^!?[\w_\-\s]+$
+ */
+export type LanguageIdSingle = string;
+
+/**
+ * This can be 'typescript,cpp,json,literal haskell', etc.
+ * @pattern ^([\w_\-\s]+)(,[\w_\-\s]+)*$
+ */
+export type LanguageIdMultiple = string;
+
+/**
+ * This can be 'typescript,cpp,json,literal haskell', etc.
+ * @pattern ^(![\w_\-\s]+)(,![\w_\-\s]+)*$
+ */
+export type LanguageIdMultipleNeg = string;
+
+export type LanguageId = LanguageIdSingle | LanguageIdMultiple | LanguageIdMultipleNeg;
 
 /** A File System Path */
 export type FsPath = string;
@@ -391,7 +426,10 @@ export interface RegExpPatternDefinition {
 export type CSpellUserSettingsWithComments = CSpellUserSettings;
 
 export interface Source {
+    /** name of source */
     name: string;
+    /** filename if this came from a file. */
     filename?: string;
-    sources?: CSpellSettings[];
+    /** The two settings that were merged to */
+    sources?: [CSpellSettings] | [CSpellSettings, CSpellSettings];
 }
