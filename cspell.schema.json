@@ -85,7 +85,31 @@
       "description": "These are glob expressions"
     },
     "LanguageId": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/LanguageIdSingle"
+        },
+        {
+          "$ref": "#/definitions/LanguageIdMultiple"
+        },
+        {
+          "$ref": "#/definitions/LanguageIdMultipleNeg"
+        }
+      ]
+    },
+    "LanguageIdMultiple": {
+      "description": "This can be 'typescript,cpp,json,literal haskell', etc.",
+      "pattern": "^([\\w_\\-\\s]+)(,[\\w_\\-\\s]+)*$",
+      "type": "string"
+    },
+    "LanguageIdMultipleNeg": {
+      "description": "This can be 'typescript,cpp,json,literal haskell', etc.",
+      "pattern": "^(![\\w_\\-\\s]+)(,![\\w_\\-\\s]+)*$",
+      "type": "string"
+    },
+    "LanguageIdSingle": {
       "description": "This can be '*', 'typescript', 'cpp', 'json', etc.",
+      "pattern": "^!?[\\w_\\-\\s]+$",
       "type": "string"
     },
     "LanguageSetting": {
@@ -150,7 +174,7 @@
             },
             {
               "items": {
-                "$ref": "#/definitions/LanguageId"
+                "$ref": "#/definitions/LanguageIdSingle"
               },
               "type": "array"
             }
@@ -245,6 +269,16 @@
           },
           "type": "array"
         },
+        "enableFiletypes": {
+          "items": {
+            "$ref": "#/definitions/LanguageIdSingle"
+          },
+          "markdownDescription": "Enable / Disable checking file types (languageIds).\nThese are in additional to the file types specified by `cSpell.enabledLanguageIds`.\nTo disable a language, prefix with `!` as in `!json`,\n\nExample:\n```\njsonc       // enable checking for jsonc\n!json       // disable checking for json\nkotlin      // enable checking for kotlin\n```",
+          "scope": "resource",
+          "title": "File Types to Check",
+          "type": "array",
+          "uniqueItems": true
+        },
         "enabled": {
           "default": true,
           "description": "Is the spell checker enabled",
@@ -253,7 +287,7 @@
         "enabledLanguageIds": {
           "description": "languageIds for the files to spell check.",
           "items": {
-            "$ref": "#/definitions/LanguageId"
+            "$ref": "#/definitions/LanguageIdSingle"
           },
           "type": "array"
         },
@@ -491,6 +525,16 @@
       },
       "type": "array"
     },
+    "enableFiletypes": {
+      "items": {
+        "$ref": "#/definitions/LanguageIdSingle"
+      },
+      "markdownDescription": "Enable / Disable checking file types (languageIds).\nThese are in additional to the file types specified by `cSpell.enabledLanguageIds`.\nTo disable a language, prefix with `!` as in `!json`,\n\nExample:\n```\njsonc       // enable checking for jsonc\n!json       // disable checking for json\nkotlin      // enable checking for kotlin\n```",
+      "scope": "resource",
+      "title": "File Types to Check",
+      "type": "array",
+      "uniqueItems": true
+    },
     "enabled": {
       "default": true,
       "description": "Is the spell checker enabled",
@@ -499,7 +543,7 @@
     "enabledLanguageIds": {
       "description": "languageIds for the files to spell check.",
       "items": {
-        "$ref": "#/definitions/LanguageId"
+        "$ref": "#/definitions/LanguageIdSingle"
       },
       "type": "array"
     },

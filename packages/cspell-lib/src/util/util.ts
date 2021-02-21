@@ -18,6 +18,10 @@ export function unique<T>(src: T[]): T[] {
     return [...new Set(src)];
 }
 
+/**
+ * Delete all `undefined` fields from an object.
+ * @param src - object to be cleaned
+ */
 export function clean<T>(src: T): T {
     const r = src;
     type keyOfT = keyof T;

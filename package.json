@@ -32,7 +32,7 @@
     "test-watch": "lerna run --parallel test-watch",
     "test": "lerna run test && npm run test-schema",
     "test-integrations": "cd ./integration-tests && npm run integration-tests",
-    "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./ajv.config.js",
+    "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./packages/cspell-types/ajv.config.js",
     "update-packages": "lerna exec \"npm update -S && rimraf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci",
     "update-snapshots": "lerna run update-snapshots --scope cspell-integration-tests"
   },
