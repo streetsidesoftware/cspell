@@ -238,6 +238,7 @@ export type DictionaryFileTypes = 'S' | 'W' | 'C' | 'T';
 
 export type DictionaryDefinition =
     | DictionaryDefinitionPreferred
+    | DictionaryDefinitionCustom
     | DictionaryDefinitionAlternate
     | DictionaryDefinitionLegacy;
 
@@ -254,18 +255,32 @@ export interface DictionaryDefinitionBase {
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
     /** Path to the file */
-    path: FsPath;
+    path: DictionaryPath;
 
-    /** @hidden */
+    /**
+     * Only for legacy dictionary definitions
+     * @deprecated
+     * @deprecatedMessage Use `path` instead.
+     * @hidden
+     */
     file?: undefined;
 }
 
+/**
+ * Only for legacy dictionary definitions
+ * @deprecated
+ * @deprecatedMessage Use `DictionaryDefinitionPreferred`
+ */
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
     /** @hidden */
     path?: undefined;
 
-    /** Path to the file */
-    file: FsPath;
+    /**
+     * Path to the file, only for legacy dictionary definitions
+     * @deprecated
+     * @deprecatedMessage Use `path` instead.
+     */
+    file: DictionaryPath;
 }
 
 /**
@@ -291,6 +306,34 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
      * @default "S"
      */
     type?: DictionaryFileTypes;
+}
+
+/**
+ * Specifies the scope of a dictionary.
+ */
+export type CustomDictionaryScope = 'user' | 'workspace' | 'folder';
+
+/**
+ * For Defining Custom dictionaries. They are generally scoped to a
+ * `user`, `workspace`, or `folder`.
+ * When `addWords` is true, indicates that the spell checker can add words
+ * to the file.
+ * Note: only plain text files with one word per line are supported at this moment.
+ */
+export interface DictionaryDefinitionCustom extends DictionaryDefinitionPreferred {
+    /** Path to custom dictionary text file. */
+    path: CustomDictionaryPath;
+
+    /**
+     * Defines the scope for when words will be added to the dictionary.
+     * Scope values: `user`, `workspace`, `folder`
+     */
+    scope?: CustomDictionaryScope | CustomDictionaryScope[];
+
+    /**
+     * When `true`, let's the spell checker know that words can be added to this dictionary.
+     */
+    addWords: boolean;
 }
 
 export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {}
@@ -406,6 +449,18 @@ export type LanguageId = LanguageIdSingle | LanguageIdMultiple | LanguageIdMulti
 
 /** A File System Path */
 export type FsPath = string;
+
+/**
+ * A File System Path to a dictionary file.
+ * @pattern ^.*\.(?:txt|trie)(?:\.gz)?$
+ */
+export type DictionaryPath = string;
+
+/**
+ * A File System Path to a dictionary file.
+ * @pattern ^.*\.txt$
+ */
+export type CustomDictionaryPath = string;
 
 export interface RegExpPatternDefinition {
     /**
