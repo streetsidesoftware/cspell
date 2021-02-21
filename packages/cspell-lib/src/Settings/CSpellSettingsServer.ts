@@ -41,6 +41,9 @@ const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
         'cspell.json',
         '.cSpell.json',
         'cSpell.json',
+        // Original locations jsonc
+        '.cspell.jsonc',
+        'cspell.jsonc',
         // Alternate locations
         '.vscode/cspell.json',
         '.vscode/cSpell.json',
@@ -49,6 +52,7 @@ const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
         'cspell.config.js', // Supports dynamic config
         'cspell.config.cjs', // Supports dynamic config
         'cspell.config.json',
+        'cspell.config.jsonc',
         'cspell.config.yaml',
         'cspell.config.yml',
         'cspell.yaml',
@@ -56,6 +60,7 @@ const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
     ],
     loaders: {
         '.json': (_filename: string, content: string) => json.parse(content),
+        '.jsonc': (_filename: string, content: string) => json.parse(content),
     },
 };
 
@@ -252,7 +257,23 @@ export function readSettingsFiles(filenames: string[]): CSpellSettings {
 }
 
 /**
- * Merges two lists of strings and removes duplicates.  Order is NOT preserved.
+ * Merges two lists and removes duplicates.  Order is NOT preserved.
+ */
+function mergeListUnique(left: undefined, right: undefined): undefined;
+function mergeListUnique<T>(left: T[], right: T[]): T[];
+function mergeListUnique<T>(left: undefined, right: T[]): T[];
+function mergeListUnique<T>(left: T[], right: undefined): T[];
+function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined;
+function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
+    if (left === undefined) return right;
+    if (right === undefined) return left;
+    const uniqueItems = new Set([...left, ...right]);
+    return [...uniqueItems.keys()];
+}
+
+/**
+ * Merges two lists.
+ * Order is preserved.
  */
 function mergeList(left: undefined, right: undefined): undefined;
 function mergeList<T>(left: T[], right: T[]): T[];
@@ -262,8 +283,7 @@ function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | unde
 function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
     if (left === undefined) return right;
     if (right === undefined) return left;
-    const uniqueItems = new Set([...left, ...right]);
-    return [...uniqueItems.keys()];
+    return left.concat(right);
 }
 
 function tagLanguageSettings(tag: string, settings: LanguageSetting[] = []): LanguageSetting[] {
@@ -301,10 +321,10 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
     if (isEmpty(left)) {
         return right;
     }
-    if (hasLeftAncestor(right, left)) {
+    if (isLeftAncestorOfRight(left, right)) {
         return right;
     }
-    if (hasRightAncestor(left, right)) {
+    if (doesLeftHaveRightAncestor(left, right)) {
         return left;
     }
     const leftId = left.id || left.languageId || '';
@@ -322,19 +342,20 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         name: [left.name || '', right.name || ''].join('|'),
         words: mergeList(left.words, right.words),
         userWords: mergeList(left.userWords, right.userWords),
-        flagWords: mergeList(left.flagWords, right.flagWords),
-        ignoreWords: mergeList(left.ignoreWords, right.ignoreWords),
+        flagWords: mergeListUnique(left.flagWords, right.flagWords),
+        ignoreWords: mergeListUnique(left.ignoreWords, right.ignoreWords),
         enabledLanguageIds: replaceIfNotEmpty(left.enabledLanguageIds, right.enabledLanguageIds),
-        ignoreRegExpList: mergeList(left.ignoreRegExpList, right.ignoreRegExpList),
-        patterns: mergeList(left.patterns, right.patterns),
-        dictionaryDefinitions: mergeList(left.dictionaryDefinitions, right.dictionaryDefinitions),
-        dictionaries: mergeList(left.dictionaries, right.dictionaries),
+        enableFiletypes: mergeList(left.enableFiletypes, right.enableFiletypes),
+        ignoreRegExpList: mergeListUnique(left.ignoreRegExpList, right.ignoreRegExpList),
+        patterns: mergeListUnique(left.patterns, right.patterns),
+        dictionaryDefinitions: mergeListUnique(left.dictionaryDefinitions, right.dictionaryDefinitions),
+        dictionaries: mergeListUnique(left.dictionaries, right.dictionaries),
         languageSettings: mergeList(
             tagLanguageSettings(leftId, left.languageSettings),
             tagLanguageSettings(rightId, right.languageSettings)
         ),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
-        files: mergeList(left.files, right.files),
+        files: mergeListUnique(left.files, right.files),
         ignorePaths: versionBasedMergeList(left.ignorePaths, right.ignorePaths, right.version),
         overrides: versionBasedMergeList(left.overrides, right.overrides, right.version),
         source: mergeSources(left, right),
@@ -354,34 +375,42 @@ function versionBasedMergeList<T>(
     if (version === '0.1') {
         return takeRightOtherwiseLeft(left, right);
     }
-    return mergeList(left, right);
+    return mergeListUnique(left, right);
 }
 
-function hasLeftAncestor(s: CSpellSettings, left: CSpellSettings): boolean {
-    return hasAncestor(s, left, 0);
+/**
+ * Check to see if left is a left ancestor of right.
+ * If that is the case, merging is not necessary:
+ * @param left - setting on the left side of a merge
+ * @param right - setting on the right side of a merge
+ */
+function isLeftAncestorOfRight(left: CSpellSettings, right: CSpellSettings): boolean {
+    return hasAncestor(right, left, 0);
 }
 
-function hasRightAncestor(s: CSpellSettings, right: CSpellSettings): boolean {
-    return hasAncestor(s, right, 1);
+/**
+ * Check to see if left has right as an ancestor to the right.
+ * If that is the case, merging is not necessary:
+ * @param left - setting on the left side of a merge
+ * @param right - setting on the right side of a merge
+ */
+function doesLeftHaveRightAncestor(left: CSpellSettings, right: CSpellSettings): boolean {
+    return hasAncestor(left, right, 1);
 }
 
 function hasAncestor(s: CSpellSettings, ancestor: CSpellSettings, side: number): boolean {
-    if (s.source) {
-        return (
-            (s.source &&
-                s.source.sources &&
-                s.source.sources[side] &&
-                (s.source.sources[side] === ancestor || hasAncestor(s.source.sources[side], ancestor, side))) ||
-            false
-        );
-    }
-    return false;
+    const sources = s.source?.sources;
+    if (!sources) return false;
+    // calc the first or last index of the source array.
+    const i = side ? sources.length - 1 : 0;
+    const src = sources[i];
+    return src === ancestor || (src && hasAncestor(src, ancestor, side)) || false;
 }
 
 export function mergeInDocSettings(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
     const merged = {
         ...mergeSettings(left, right),
-        includeRegExpList: mergeList(left.includeRegExpList, right.includeRegExpList),
+        includeRegExpList: mergeListUnique(left.includeRegExpList, right.includeRegExpList),
     };
     return merged;
 }
