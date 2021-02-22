@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0-alpha.2](https://github.com/streetsidesoftware/cspell/compare/v5.3.0-alpha.1...v5.3.0-alpha.2) (2021-02-22)
+
+
+### Bug Fixes
+
+* Add schema support for `enableFiletypes`. ([#979](https://github.com/streetsidesoftware/cspell/issues/979)) ([d18706e](https://github.com/streetsidesoftware/cspell/commit/d18706e3ffd7a6446396d339b85a753b4ae451e0))
+
+
+
+
+
 # [5.3.0-alpha.1](https://github.com/streetsidesoftware/cspell/compare/v5.3.0-alpha.0...v5.3.0-alpha.1) (2021-02-19)
 
 
