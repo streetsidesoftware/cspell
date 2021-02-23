@@ -1,5 +1,5 @@
 import { GlobMatcher, GlobMatchOptions } from './GlobMatcher';
-import { GlobMatch, PathInterface } from './GlobMatcherTypes';
+import { GlobMatch, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes';
 
 import * as path from 'path';
 import mm = require('micromatch');
@@ -129,25 +129,25 @@ describe('Tests .gitignore file contents', () => {
     }
 
     test.each`
-        filename                                                | expected                                                                | comment
-        ${root + 'src/code.ts'}                                 | ${false}                                                                | ${'Ensure that .ts files are allowed'}
-        ${root + 'dist/code.ts'}                                | ${true}                                                                 | ${'Ensure that `dest` .ts files are not allowed'}
-        ${root + 'src/code.js'}                                 | ${true}                                                                 | ${'Ensure that no .js files are allowed'}
-        ${root + 'src/code.test.ts'}                            | ${true}                                                                 | ${'Ensure that test.ts files are not allowed'}
-        ${root + 'src/code.spec.ts'}                            | ${true}                                                                 | ${'Ensure that spec.ts files are not allowed'}
-        ${'/Users/guest/code/' + 'src/code.test.ts'}            | ${false}                                                                | ${'Ensure that test files in a different root are allowed'}
-        ${'/Users/guest/code/' + 'src/code.js'}                 | ${false}                                                                | ${'Ensure *.js files are allowed under a different root.'}
-        ${root + 'node_modules/cspell/code.ts'}                 | ${true}                                                                 | ${'Ensure that node modules are not allowed in the current root.'}
-        ${root + 'nested/node_modules/cspell/code.ts'}          | ${false}                                                                | ${'Ensure that nested node modules are allowed in the current root.'}
-        ${'/Users/guest/code/' + 'node_modules/cspell/code.ts'} | ${false}                                                                | ${'Ensure that node modules in a different root are allowed'}
-        ${root + 'settings.js'}                                 | ${false}                                                                | ${'Ensure that settings.js is kept'}
-        ${root + 'dist/settings.js'}                            | ${false}                                                                | ${'Ensure that settings.js is kept'}
-        ${root + 'node_modules/settings.js'}                    | ${false}                                                                | ${'Ensure that settings.js is kept'}
-        ${root + 'src.txt'}                                     | ${true}                                                                 | ${'Ensure that double negative means block'}
-        ${root + 'src/code.ts'}                                 | ${{ matched: false }}                                                   | ${'Ensure that .ts files are allowed'}
-        ${root + 'dist/code.ts'}                                | ${{ matched: true, glob: '**/{dist,dist/**}', index: 6, isNeg: false }} | ${'Ensure that `dest` .ts files are not allowed'}
-        ${root + 'src/code.js'}                                 | ${{ matched: true, glob: '**/{*.js,*.js/**}', index: 7, isNeg: false }} | ${'Ensure that no .js files are allowed'}
-        ${root + 'dist/settings.js'}                            | ${{ matched: false, glob: '!**/settings.js', index: 8, isNeg: true }}   | ${'Ensure that settings.js is kept'}
+        filename                                                | expected                                                                      | comment
+        ${root + 'src/code.ts'}                                 | ${false}                                                                      | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${true}                                                                       | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${true}                                                                       | ${'Ensure that no .js files are allowed'}
+        ${root + 'src/code.test.ts'}                            | ${true}                                                                       | ${'Ensure that test.ts files are not allowed'}
+        ${root + 'src/code.spec.ts'}                            | ${true}                                                                       | ${'Ensure that spec.ts files are not allowed'}
+        ${'/Users/guest/code/' + 'src/code.test.ts'}            | ${false}                                                                      | ${'Ensure that test files in a different root are allowed'}
+        ${'/Users/guest/code/' + 'src/code.js'}                 | ${false}                                                                      | ${'Ensure *.js files are allowed under a different root.'}
+        ${root + 'node_modules/cspell/code.ts'}                 | ${true}                                                                       | ${'Ensure that node modules are not allowed in the current root.'}
+        ${root + 'nested/node_modules/cspell/code.ts'}          | ${false}                                                                      | ${'Ensure that nested node modules are allowed in the current root.'}
+        ${'/Users/guest/code/' + 'node_modules/cspell/code.ts'} | ${false}                                                                      | ${'Ensure that node modules in a different root are allowed'}
+        ${root + 'settings.js'}                                 | ${false}                                                                      | ${'Ensure that settings.js is kept'}
+        ${root + 'dist/settings.js'}                            | ${false}                                                                      | ${'Ensure that settings.js is kept'}
+        ${root + 'node_modules/settings.js'}                    | ${false}                                                                      | ${'Ensure that settings.js is kept'}
+        ${root + 'src.txt'}                                     | ${true}                                                                       | ${'Ensure that double negative means block'}
+        ${root + 'src/code.ts'}                                 | ${{ matched: false }}                                                         | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${{ matched: true, pattern: p('**/{dist,dist/**}'), isNeg: false }}           | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${{ matched: true, pattern: p('**/{*.js,*.js/**}'), index: 7, isNeg: false }} | ${'Ensure that no .js files are allowed'}
+        ${root + 'dist/settings.js'}                            | ${{ matched: false, pattern: p('!**/settings.js'), index: 8, isNeg: true }}   | ${'Ensure that settings.js is kept'}
     `('match && matchEx "$comment" File: "$filename" $expected', ({ filename, expected }: TestCase) => {
         expected = typeof expected === 'boolean' ? { matched: expected } : expected;
         expect(matcher.match(filename)).toBe(expected.matched);
@@ -167,7 +167,7 @@ describe('Validate Options', () => {
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: true }}
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: false }}      | ${{ matched: false }}
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
-        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${{ matched: true, glob: '**/{*.yaml,*.yaml/**}' }}
+        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${{ matched: true, pattern: p('**/{*.yaml,*.yaml/**}') }}
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${true}
         ${'**/*.yaml'}             | ${'.github/workflows/test.yaml'}         | ${{ mode: 'exclude' }} | ${{ matched: true }}
         ${'**/*.yaml'}             | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
@@ -195,9 +195,9 @@ describe('Validate Options', () => {
         ${'/package/'}             | ${'repo/package/src/test.yaml'}          | ${{}}                  | ${false}
         ${'/package/'}             | ${'repo/package/src/test.yaml'}          | ${{ mode: 'include' }} | ${false}
         ${'src'}                   | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${false}
-        ${'*.yaml|!test.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, glob: '!**/{test.yaml,test.yaml/**}', isNeg: true }}
-        ${'*.yaml|!/test.yaml'}    | ${'test.yaml'}                           | ${{}}                  | ${{ matched: false, glob: '!{test.yaml,test.yaml/**}', isNeg: true }}
-        ${'*.yaml|!/node_modules'} | ${'node_modules/test.yaml'}              | ${{}}                  | ${{ matched: false, glob: '!{node_modules,node_modules/**}', isNeg: true }}
+        ${'*.yaml|!test.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, pattern: p('!**/{test.yaml,test.yaml/**}'), isNeg: true }}
+        ${'*.yaml|!/test.yaml'}    | ${'test.yaml'}                           | ${{}}                  | ${{ matched: false, pattern: p('!{test.yaml,test.yaml/**}'), isNeg: true }}
+        ${'*.yaml|!/node_modules'} | ${'node_modules/test.yaml'}              | ${{}}                  | ${{ matched: false, pattern: p('!{node_modules,node_modules/**}'), isNeg: true }}
         ${'*.{!yaml}'}             | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${false}
         ${'test.*|!*.{yaml,yml}'}  | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, isNeg: true }}
     `('Test options: $pattern, $file, $options', ({ pattern, file, options, expected }: TestCase) => {
@@ -473,4 +473,14 @@ function isWin32(pathInstance: PathInterface): boolean {
         return false;
     }
     throw new Error('Unknown pathInstance');
+}
+
+/** alias for `expected.objectContaining` */
+function eo<T>(obj: T): T {
+    return expect.objectContaining(obj);
+}
+
+/** Helper for function for building expected GlobPatterns */
+function p(glob: string, root?: string): GlobPatternWithOptionalRoot {
+    return eo(root ? { glob, root } : { glob });
 }

@@ -176,3 +176,7 @@ function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNo
 function isNotUndefined<T>(a: T | undefined): a is T {
     return a !== undefined;
 }
+
+export function isGlobPatternNormalized(p: GlobPatternWithRoot | GlobPatternNormalized): p is GlobPatternNormalized {
+    return (<GlobPatternNormalized>p).rawGlob !== undefined;
+}
