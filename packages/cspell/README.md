@@ -7,6 +7,10 @@ A Spell Checker for Code!
 
 `cspell` is a command line tool and library for spell checking code.
 
+## Support Future Development
+
+[![](https://github.com/streetsidesoftware/cspell/raw/master/resources/100px-Green_Patreon_Donate_Shield_Badge.png)](https://www.patreon.com/streetsidesoftware)
+
 ## Features
 
 - Spell Checks Code -- Able to spell check code by parsing it into words before checking against the dictionaries.

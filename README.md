@@ -2,6 +2,10 @@
 
 The cspell mono-repo, a spell checker for code.
 
+## Support Future Development
+
+[![](https://github.com/streetsidesoftware/cspell/raw/master/resources/100px-Green_Patreon_Donate_Shield_Badge.png)](https://www.patreon.com/streetsidesoftware)
+
 ## Packages
 
 - [cspell](packages/cspell) -- cspell command-line application
