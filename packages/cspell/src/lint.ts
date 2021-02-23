@@ -9,6 +9,7 @@ import { CSpellSettings, Glob } from '@cspell/cspell-types';
 import * as cspell from 'cspell-lib';
 import { measurePromise } from './util/timer';
 import { extractGlobExcludesFromConfig, extractPatterns, GlobSrcInfo, normalizeGlobsToRoot } from './util/glob';
+import { isGlobPatternNormalized } from 'cspell-glob';
 
 export interface FileResult {
     fileInfo: FileInfo;
@@ -230,8 +231,11 @@ Options:
         for (const glob of globs) {
             const m = glob.matcher.matchEx(absFilename);
             if (m.matched) {
+                const pattern = m.pattern;
+                const src = pattern.source || glob.source;
+                const rawGlob = isGlobPatternNormalized(pattern) ? pattern.rawGlob : pattern.glob;
                 cfg.info(
-                    `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${m.glob} from ${glob.source}`,
+                    `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${rawGlob} from ${src}`,
                     MessageTypes.Info
                 );
                 return true;

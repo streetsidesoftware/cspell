@@ -15,6 +15,7 @@ export interface GlobMatchRule {
     matched: boolean;
     glob: string;
     root: string;
+    pattern: GlobPatternWithRoot;
     index: number;
     isNeg: boolean;
 }

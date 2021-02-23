@@ -135,8 +135,7 @@ export class GlobMatcher {
 type GlobMatchFn = (filename: string) => GlobMatch;
 
 interface GlobRule {
-    glob: string;
-    root: string;
+    pattern: GlobPatternWithRoot;
     index: number;
     isNeg: boolean;
     reg: RegExp;
@@ -159,19 +158,19 @@ interface GlobRule {
 function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions): GlobMatchFn {
     const path = options.nodePath;
     const rules: GlobRule[] = patterns
-        .map((p, index) => ({ ...p, index }))
-        .filter((r) => !!r.glob)
-        .filter((r) => !r.glob.startsWith('#'))
-        .map(({ glob, root, index }) => {
-            const matchNeg = glob.match(/^!/);
-            const pattern = glob.replace(/^!/, '');
+        .map((pattern, index) => ({ pattern, index }))
+        .filter((r) => !!r.pattern.glob)
+        .filter((r) => !r.pattern.glob.startsWith('#'))
+        .map(({ pattern, index }) => {
+            const matchNeg = pattern.glob.match(/^!/);
+            const glob = pattern.glob.replace(/^!/, '');
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
-            const reg = mm.makeRe(pattern, { dot: options.dot });
+            const reg = mm.makeRe(glob, { dot: options.dot });
             const fn = (filename: string) => {
                 const match = filename.match(reg);
                 return !!match;
             };
-            return { glob, root, index, isNeg, fn, reg };
+            return { pattern, index, isNeg, fn, reg };
         });
     const negRules = rules.filter((r) => r.isNeg);
     const posRules = rules.filter((r) => !r.isNeg);
@@ -180,16 +179,19 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
 
         function testRules(rules: GlobRule[], matched: boolean): GlobMatch | undefined {
             for (const rule of rules) {
-                if (!filename.startsWith(rule.root)) {
+                const pattern = rule.pattern;
+                const root = pattern.root;
+                if (!doesRootContainPath(root, filename)) {
                     continue;
                 }
-                const relName = path.relative(rule.root, filename);
-                const fname = relName.split(path.sep).join('/');
+                const relName = path.relative(root, filename);
+                const fname = path.sep === '\\' ? relName.replace(/\\/g, '/') : relName;
                 if (rule.fn(fname)) {
                     return {
                         matched,
-                        glob: rule.glob,
-                        root: rule.root,
+                        glob: pattern.glob,
+                        root,
+                        pattern,
                         index: rule.index,
                         isNeg: rule.isNeg,
                     };
@@ -200,4 +202,15 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
         return testRules(negRules, false) || testRules(posRules, true) || { matched: false };
     };
     return fn;
+}
+
+/**
+ * Decide if a childPath is contained within a root or at the same level.
+ * @param root - absolute path
+ * @param childPath - absolute path
+ */
+function doesRootContainPath(root: string, child: string): boolean {
+    if (child.startsWith(root)) return true;
+    const rel = Path.relative(root, child);
+    return rel !== child && !rel.startsWith('..');
 }
