@@ -37,7 +37,7 @@ jobs:
         run: node ./bin.js trace test
 
       - name: verify the spell checker runs
-        run: node ./bin.js "**/*.*"
+        run: node ./bin.js -c cspellrc.json
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
