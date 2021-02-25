@@ -18,7 +18,7 @@ import { cosmiconfig, cosmiconfigSync, OptionsSync as CosmicOptionsSync, Options
 import { GlobMatcher } from 'cspell-glob';
 import { ImportError } from './ImportError';
 
-const currentSettingsFileVersion = '0.1';
+const currentSettingsFileVersion = '0.2';
 
 export const sectionCSpell = 'cSpell';
 
@@ -104,9 +104,16 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
  * @param pathToSettingsFile - path to the source file of the configuration settings.
  */
 function normalizeSettings(rawSettings: CSpellSettings, pathToSettingsFile: string): CSpellSettings {
+    const id =
+        rawSettings.id ||
+        [path.basename(path.dirname(pathToSettingsFile)), path.basename(pathToSettingsFile)].join('/');
+    const name = rawSettings.name || id;
+
     // Fix up dictionaryDefinitions
     const settings = {
         ...rawSettings,
+        id,
+        name,
         globRoot: resolveGlobRoot(rawSettings, pathToSettingsFile),
         languageSettings: normalizeLanguageSettings(rawSettings.languageSettings),
     };
@@ -117,7 +124,7 @@ function normalizeSettings(rawSettings: CSpellSettings, pathToSettingsFile: stri
 
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
     const source: Source = settings.source || {
-        name: settings.name || settings.id || pathToSettingsFile,
+        name: settings.name,
         filename: pathToSettingsFile,
     };
 
@@ -167,9 +174,10 @@ function importSettings(fileRef: ImportFileRef, defaultValues: CSpellSettings = 
         return cached;
     }
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-    const finalizeSettings: CSpellSettings = { id, __importRef: importRef };
+    const name = id;
+    const finalizeSettings: CSpellSettings = { id, name, __importRef: importRef };
     cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
-    const settings: CSpellSettings = { ...defaultValues, id, ...readConfig(importRef) };
+    const settings: CSpellSettings = { ...defaultValues, id, name, ...readConfig(importRef) };
 
     Object.assign(finalizeSettings, normalizeSettings(settings, filename));
     const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
@@ -218,6 +226,17 @@ async function normalizeSearchForConfigResult(
     }
 
     const filepath = result?.filepath;
+    if (filepath) {
+        const cached = cachedFiles.get(filepath);
+        if (cached) {
+            return {
+                config: cached,
+                filepath,
+                error,
+            };
+        }
+    }
+
     const { config = {} } = result || {};
     const filename = result?.filepath ?? searchPath;
     const importRef: ImportFileRef = { filename: filename, error };
@@ -226,6 +245,7 @@ async function normalizeSearchForConfigResult(
     const name = result?.filepath ? id : `Config not found: ${id}`;
     const finalizeSettings: CSpellSettings = { id, name, __importRef: importRef };
     const settings: CSpellSettings = { id, ...config };
+    cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
     Object.assign(finalizeSettings, normalizeSettings(settings, filename));
 
     return {
@@ -243,6 +263,10 @@ export function searchForConfig(searchFrom?: string): Promise<CSpellSettings | u
 }
 
 export function loadConfig(file: string): Promise<CSpellSettings> {
+    const cached = cachedFiles.get(path.resolve(file));
+    if (cached) {
+        return Promise.resolve(cached);
+    }
     return normalizeSearchForConfigResult(file, cspellConfigExplorer.load(file)).then((r) => r.config);
 }
 
@@ -539,12 +563,22 @@ function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
  * @param settings the settings to search
  */
 export function getSources(settings: CSpellSettings): CSpellSettings[] {
-    if (!settings.source?.sources?.length) {
-        return [settings];
+    const visited = new Set<CSpellSettings>();
+    const sources: CSpellSettings[] = [];
+
+    function _walkSourcesTree(settings: CSpellSettings | undefined): void {
+        if (!settings || visited.has(settings)) return;
+        visited.add(settings);
+        if (!settings.source?.sources?.length) {
+            sources.push(settings);
+            return;
+        }
+        settings.source.sources.forEach(_walkSourcesTree);
     }
-    const left = settings.source.sources[0];
-    const right = settings.source.sources[1];
-    return right ? getSources(left).concat(getSources(right)) : getSources(left);
+
+    _walkSourcesTree(settings);
+
+    return sources;
 }
 
 type Imports = CSpellSettings['__imports'];
@@ -589,20 +623,32 @@ function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): 
     return globRoot;
 }
 
-function toGlobDef(g: undefined, root: string | undefined): undefined;
-function toGlobDef(g: Glob, root: string | undefined): GlobDef;
-function toGlobDef(g: Glob[], root: string | undefined): GlobDef[];
-function toGlobDef(g: Glob | Glob[], root: string | undefined): GlobDef | GlobDef[];
-function toGlobDef(g: Glob | Glob[] | undefined, root: string | undefined): GlobDef | GlobDef[] | undefined {
+function toGlobDef(g: undefined, root: string | undefined, source: string | undefined): undefined;
+function toGlobDef(g: Glob, root: string | undefined, source: string | undefined): GlobDef;
+function toGlobDef(g: Glob[], root: string | undefined, source: string | undefined): GlobDef[];
+function toGlobDef(g: Glob | Glob[], root: string | undefined, source: string | undefined): GlobDef | GlobDef[];
+function toGlobDef(
+    g: Glob | Glob[] | undefined,
+    root: string | undefined,
+    source: string | undefined
+): GlobDef | GlobDef[] | undefined {
     if (g === undefined) return undefined;
     if (Array.isArray(g)) {
-        return g.map((g) => toGlobDef(g, root));
+        return g.map((g) => toGlobDef(g, root, source));
     }
-    if (typeof g === 'string')
-        return {
-            glob: g,
+    if (typeof g === 'string') {
+        return toGlobDef(
+            {
+                glob: g,
+                root,
+            },
             root,
-        };
+            source
+        );
+    }
+    if (source) {
+        return { ...g, source };
+    }
     return g;
 }
 
@@ -638,7 +684,7 @@ interface NormalizeOverridesResult {
 function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: string): NormalizeOverridesResult {
     const { globRoot = path.dirname(pathToSettingsFile) } = settings;
     const overrides = settings.overrides?.map((override) => {
-        const filename = toGlobDef(override.filename, globRoot);
+        const filename = toGlobDef(override.filename, globRoot, pathToSettingsFile);
         const { dictionaryDefinitions, languageSettings } = normalizeDictionaryDefs(override, pathToSettingsFile);
         return util.clean({
             ...override,
@@ -678,7 +724,7 @@ function normalizeSettingsGlobs(
     const { globRoot = path.dirname(pathToSettingsFile) } = settings;
     if (settings.ignorePaths === undefined) return {};
 
-    const ignorePaths = toGlobDef(settings.ignorePaths, globRoot);
+    const ignorePaths = toGlobDef(settings.ignorePaths, globRoot, pathToSettingsFile);
     return {
         ignorePaths,
     };
