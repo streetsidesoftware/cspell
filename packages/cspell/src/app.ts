@@ -34,8 +34,8 @@ const templateIssue = `{green $uri}:{yellow $row:$col} - Unknown word ({red $tex
 const templateIssueWithSuggestions = `{green $uri}:{yellow $row:$col} - Unknown word ({red $text}) Suggestions: {yellow [$suggestions]}`;
 const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
 const templateIssueWithContextWithSuggestions = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
-const templateIssueLegacy = `${chalk.green('${uri}')}[\${row}, \${col}]: Unknown word: ${chalk.red('${text}')}`;
-const templateIssueWordsOnly = '${text}';
+const templateIssueLegacy = `${chalk.green('$uri')}[$row, $col]: Unknown word: ${chalk.red('$text')}`;
+const templateIssueWordsOnly = '$text';
 
 function genIssueEmitter(template: string) {
     const defaultWidth = 10;
