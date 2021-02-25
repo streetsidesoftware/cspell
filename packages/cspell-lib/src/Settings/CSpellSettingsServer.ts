@@ -612,14 +612,13 @@ export function extractImportErrors(settings: CSpellSettings): ImportFileRefWith
 }
 
 function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): string {
+    const settingsFileDir = path.dirname(pathToSettingsFile);
     const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
     const defaultGlobRoot = envGlobRoot ?? '${cwd}';
     const rawRoot =
         settings.globRoot ??
-        (settings.version === '0.1' || (envGlobRoot && !settings.version)
-            ? defaultGlobRoot
-            : path.dirname(pathToSettingsFile));
-    const globRoot = rawRoot.replace('${cwd}', process.cwd());
+        (settings.version === '0.1' || (envGlobRoot && !settings.version) ? defaultGlobRoot : settingsFileDir);
+    const globRoot = path.resolve(settingsFileDir, rawRoot.replace('${cwd}', process.cwd()));
     return globRoot;
 }
 
