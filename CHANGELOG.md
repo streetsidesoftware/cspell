@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.1](https://github.com/streetsidesoftware/cspell/compare/v5.3.0...v5.3.1) (2021-02-25)
+
+
+### Bug Fixes
+
+* Make sure relative globRoot is resolved correctly. ([#1004](https://github.com/streetsidesoftware/cspell/issues/1004)) ([29977c4](https://github.com/streetsidesoftware/cspell/commit/29977c466935948f092527e0300bb0a310394cdc))
+* make sure to export all needed cspell types. ([#1006](https://github.com/streetsidesoftware/cspell/issues/1006)) ([c625479](https://github.com/streetsidesoftware/cspell/commit/c625479be185f287e297a1dcddbcfa2aa24b0d0d))
+
+
+
+
+
 # [5.3.0](https://github.com/streetsidesoftware/cspell/compare/v5.3.0-alpha.4...v5.3.0) (2021-02-25)
 
 **Note:** Version bump only for package cspell-monorepo
