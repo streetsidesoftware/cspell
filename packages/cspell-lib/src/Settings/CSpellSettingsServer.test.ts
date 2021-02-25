@@ -21,7 +21,8 @@ import * as path from 'path';
 
 const { normalizeSettings } = __testing__;
 
-const samplesDir = path.resolve(path.join(__dirname, '../../samples'));
+const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
+const samplesDir = path.resolve(rootCspellLib, 'samples');
 const samplesSrc = path.join(samplesDir, 'src');
 
 jest.mock('../util/logger');
@@ -239,6 +240,44 @@ describe('Validate CSpellSettingsServer', () => {
         const sourceNames = sources.map((s) => s.name || '?');
         expect(sourceNames).toEqual(expect.arrayContaining([_defaultSettings.name]));
     });
+
+    test('loading circular imports (readSettings)', async () => {
+        const configFile = path.join(samplesDir, 'linked/cspell.circularA.json');
+        const config = readSettings(configFile);
+        expect(config?.ignorePaths).toEqual(
+            expect.arrayContaining([
+                {
+                    glob: 'node_modules',
+                    root: path.dirname(configFile),
+                    source: configFile,
+                },
+            ])
+        );
+        const errors = extractImportErrors(config);
+        expect(errors).toEqual([]);
+
+        const sources = getSources(config);
+        expect(sources.length).toBe(2);
+    });
+
+    test('loading circular imports (loadConfig)', async () => {
+        const configFile = path.join(samplesDir, 'linked/cspell.circularA.json');
+        const config = await loadConfig(configFile);
+        expect(config?.ignorePaths).toEqual(
+            expect.arrayContaining([
+                {
+                    glob: 'node_modules',
+                    root: path.dirname(configFile),
+                    source: configFile,
+                },
+            ])
+        );
+        const errors = extractImportErrors(config);
+        expect(errors).toEqual([]);
+
+        const sources = getSources(config);
+        expect(sources.length).toBe(2);
+    });
 });
 
 describe('Validate Overrides', () => {
@@ -283,10 +322,14 @@ describe('Validate Glob resolution', () => {
         expect(sampleSettings.globRoot).toBe(__dirname);
         expect(sampleSettingsV1.globRoot).toBe(process.cwd());
         expect(sampleSettings.ignorePaths).toEqual(
-            expect.arrayContaining([{ glob: 'node_modules', root: sampleSettings.globRoot }])
+            expect.arrayContaining([
+                { glob: 'node_modules', root: sampleSettings.globRoot, source: sampleSettingsFilename },
+            ])
         );
         expect(sampleSettingsV1.ignorePaths).toEqual(
-            expect.arrayContaining([{ glob: 'node_modules', root: sampleSettingsV1.globRoot }])
+            expect.arrayContaining([
+                { glob: 'node_modules', root: sampleSettingsV1.globRoot, source: sampleSettingsFilename },
+            ])
         );
     });
 
@@ -312,6 +355,33 @@ describe('Validate Glob resolution', () => {
 
         delete settingsV1.version;
         expect(settingsV1).toEqual(settingsV);
+    });
+
+    test('globs from config file (search)', async () => {
+        const config = await searchForConfig(__dirname);
+        expect(config?.ignorePaths).toEqual(
+            expect.arrayContaining([
+                {
+                    glob: 'node_modules/**',
+                    root: rootCspellLib,
+                    source: path.join(rootCspellLib, 'cspell.config.json'),
+                },
+            ])
+        );
+    });
+
+    test('globs from config file (readSettings)', async () => {
+        const configFile = path.join(rootCspellLib, 'cspell.config.json');
+        const config = readSettings(configFile);
+        expect(config?.ignorePaths).toEqual(
+            expect.arrayContaining([
+                {
+                    glob: 'node_modules/**',
+                    root: rootCspellLib,
+                    source: configFile,
+                },
+            ])
+        );
     });
 });
 
@@ -445,7 +515,7 @@ const rawSampleSettings: CSpellUserSettings = {
 };
 
 const rawSampleSettingsV1: CSpellUserSettings = { ...rawSampleSettings, version: '0.1' };
+const sampleSettingsFilename = __filename;
+const sampleSettings: CSpellUserSettings = normalizeSettings(rawSampleSettings, sampleSettingsFilename);
 
-const sampleSettings: CSpellUserSettings = normalizeSettings(rawSampleSettings, __filename);
-
-const sampleSettingsV1: CSpellUserSettings = normalizeSettings(rawSampleSettingsV1, __filename);
+const sampleSettingsV1: CSpellUserSettings = normalizeSettings(rawSampleSettingsV1, sampleSettingsFilename);

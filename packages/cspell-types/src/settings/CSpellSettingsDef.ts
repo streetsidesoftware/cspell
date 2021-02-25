@@ -425,6 +425,9 @@ export interface GlobDef {
 
     /** Optional root to use when matching the glob. Defaults to current working dir. */
     root?: string;
+
+    /** Optional source of the glob, used when merging settings to determine the origin. */
+    source?: string;
 }
 
 /**
