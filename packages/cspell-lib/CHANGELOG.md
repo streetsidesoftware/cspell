@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.3.0-alpha.4](https://github.com/streetsidesoftware/cspell/compare/v5.3.0-alpha.3...v5.3.0-alpha.4) (2021-02-25)
+
+
+### Bug Fixes
+
+* be able to report on glob source. ([#1001](https://github.com/streetsidesoftware/cspell/issues/1001)) ([1020d56](https://github.com/streetsidesoftware/cspell/commit/1020d56ba04e8418d162d4bde8e4948546a8f7d2))
+
+
+
+
+
 # [5.3.0-alpha.3](https://github.com/streetsidesoftware/cspell/compare/v5.3.0-alpha.2...v5.3.0-alpha.3) (2021-02-23)
 
 **Note:** Version bump only for package cspell-lib
