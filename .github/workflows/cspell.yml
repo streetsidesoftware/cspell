@@ -1,23 +1,13 @@
 name: cSpell TS/MD
 on:
   pull_request:
-    paths:
-      - "**/*.md"
-      - "**/*.ts"
-      - "cspell-dict.txt"
-      - "cspell.json"
   push:
     branches:
       - master
-    paths:
-      - "**/*.md"
-      - "**/*.ts"
-      - "cspell-dict.txt"
-      - "cspell.json"
 
 jobs:
   cspell:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npx cspell "**/*.*"
+      - run: npx cspell@latest "**/*"
