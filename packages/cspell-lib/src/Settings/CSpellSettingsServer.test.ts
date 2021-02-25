@@ -357,6 +357,24 @@ describe('Validate Glob resolution', () => {
         expect(settingsV1).toEqual(settingsV);
     });
 
+    test('globs with relative globRoot', async () => {
+        const configFilename = path.resolve(samplesDir, 'cspell.relative-glob-root.json');
+        const configDir = path.dirname(configFilename);
+        const config = await loadConfig(configFilename);
+
+        expect(config).toEqual(
+            oc({
+                ignorePaths: expect.arrayContaining([
+                    {
+                        glob: 'node_modules',
+                        root: path.resolve(configDir, '../../..'),
+                        source: configFilename,
+                    },
+                ]),
+            })
+        );
+    });
+
     test('globs from config file (search)', async () => {
         const config = await searchForConfig(__dirname);
         expect(config?.ignorePaths).toEqual(
@@ -489,6 +507,10 @@ describe('Validate search/load config files', () => {
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
     });
 });
+
+function oc<T>(v: Partial<T>): T {
+    return expect.objectContaining(v);
+}
 
 function relSamples(file: string) {
     return path.resolve(samplesDir, file);
