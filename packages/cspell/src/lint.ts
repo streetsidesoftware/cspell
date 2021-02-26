@@ -170,7 +170,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
     }
 
     async function run(): Promise<RunResult> {
-        if (cfg.root) {
+        if (cfg.options.root) {
             process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
         }
 

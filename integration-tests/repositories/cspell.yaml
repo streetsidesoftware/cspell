@@ -1,9 +1,18 @@
+"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json"
+version: 0.2
+id: integration-test-default
 words:
   - octokit
 
 ignorePaths:
   - "*.ktx"
 
-languageSettings:
-  - languageId: python
-    allowCompoundWords: false
+overrides:
+  - filename: "temp/TheAlgorithms/Python/**/*.py"
+    languageSettings:
+      - languageId: python
+        allowCompoundWords: true
+  - filename: "temp/AdaDoom3/AdaDoom3/**/*.py"
+    languageSettings:
+      - languageId: python
+        allowCompoundWords: false
