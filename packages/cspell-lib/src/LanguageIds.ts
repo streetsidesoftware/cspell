@@ -179,7 +179,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     // cspell:ignore woff
     {
         id: 'binary',
-        extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.tff', '.woff', '.woff2', '.eot', '.ico'],
+        extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.tff', '.woff', '.woff2', '.eot', '.ico', '.cur'],
     },
 ];
 

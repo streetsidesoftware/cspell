@@ -8,6 +8,6 @@ describe('Validate Default Settings', () => {
 
     test('tests the default setting file is loaded', () => {
         const defaultSetting = DefaultSettings.getDefaultSettings();
-        expect(defaultSetting.name).toBe('cspell default json');
+        expect(defaultSetting.name).toBe('cspell default settings');
     });
 });

@@ -75,6 +75,7 @@ export const _defaultSettings: CSpellSettingsWithSourceTrace = {
     name: 'Static Defaults',
     enabled: true,
     enabledLanguageIds: [
+        'ada',
         'csharp',
         'go',
         'javascript',
@@ -88,6 +89,7 @@ export const _defaultSettings: CSpellSettingsWithSourceTrace = {
         'text',
         'typescript',
         'typescriptreact',
+        'haskell',
         'html',
         'css',
         'less',
