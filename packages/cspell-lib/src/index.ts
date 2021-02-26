@@ -15,10 +15,12 @@ export {
     CompoundWordsMethod,
     createSpellingDictionary,
     getDictionary,
+    isSpellingDictionaryLoadError,
     refreshDictionaryCache,
     SpellingDictionary,
     SuggestionCollector,
     SuggestionResult,
+    SpellingDictionaryLoadError,
 } from './SpellingDictionary';
 export { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 export { combineTextAndLanguageSettings as constructSettingsForText } from './Settings/TextDocumentSettings';

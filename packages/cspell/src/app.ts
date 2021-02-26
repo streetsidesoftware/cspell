@@ -15,6 +15,7 @@ import {
 } from './link';
 import { tableToLines } from './util/table';
 import { Emitters, isProgressFileComplete, MessageType, ProgressItem, Issue } from './emitters';
+import { isSpellingDictionaryLoadError, SpellingDictionaryLoadError, ImportError } from 'cspell-lib';
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
@@ -52,7 +53,10 @@ function genIssueEmitter(template: string) {
     };
 }
 
-function errorEmitter(message: string, error: Error) {
+function errorEmitter(message: string, error: Error | SpellingDictionaryLoadError | ImportError) {
+    if (isSpellingDictionaryLoadError(error)) {
+        error = error.cause;
+    }
     console.error(chalk.red(message), error.toString());
 }
 
