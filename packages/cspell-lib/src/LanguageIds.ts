@@ -22,6 +22,8 @@ export type LanguageExtensionDefinitions = LanguageExtensionDefinition[];
 export type ExtensionToLanguageIdMap = Map<string, Set<string>>;
 
 export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
+    { id: 'ada', extensions: ['.adb', '.ads'] },
+    { id: 'apiblueprint', extensions: ['.apib', '.apiblueprint'] },
     { id: 'asciidoc', extensions: ['.adoc', '.asc', '.asciidoc'] },
     { id: 'bat', extensions: ['.bat', '.cmd'] },
     { id: 'clojure', extensions: ['.clj', '.cljs', '.cljx', '.clojure', '.edn'] },
@@ -56,6 +58,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
         extensions: ['.json', '.jsonc', '.bowerrc', '.jshintrc', '.jscsrc', '.eslintrc', '.babelrc', '.webmanifest'],
     },
     { id: 'less', extensions: ['.less'] },
+    { id: 'literate haskell', extensions: ['.lhs'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mk'] },
     { id: 'markdown', extensions: ['.md', '.mdown', '.markdown', '.markdn'] },
@@ -168,13 +171,16 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'yaml', extensions: ['.eyaml', '.eyml', '.yaml', '.yml'] },
     { id: 'latex', extensions: ['.tex'] },
     { id: 'map', extensions: ['.map'] },
+
+    //
+    // Special file types used to prevent spell checking.
+    //
     { id: 'image', extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif'] },
     // cspell:ignore woff
     {
         id: 'binary',
-        extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.tff', '.woff', '.woff2', '.eot', '.ico'],
+        extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.tff', '.woff', '.woff2', '.eot', '.ico', '.cur'],
     },
-    { id: 'apiblueprint', extensions: ['.apib', '.apiblueprint'] },
 ];
 
 export const languageIds: string[] = languageExtensionDefinitions.map(({ id }) => id);

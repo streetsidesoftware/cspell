@@ -122,8 +122,15 @@ describe('Validate Spell Checking Documents', () => {
         return URI.file(s(file)).toString();
     }
 
-    function d(uri: string, text?: string): Document {
-        return text === undefined ? { uri } : { uri, text };
+    function d(uri: string | Document, text?: string, languageId?: string): Document {
+        const doc: Document = typeof uri === 'string' ? { uri } : { ...uri };
+        if (text) {
+            doc.text = text;
+        }
+        if (languageId) {
+            doc.languageId = languageId;
+        }
+        return doc;
     }
 
     type ArrayType<T> = T extends (infer R)[] ? R : never;
@@ -136,22 +143,24 @@ describe('Validate Spell Checking Documents', () => {
 
     // cspell:ignore texxt
     test.each`
-        uri                     | text            | settings                       | options                                       | expected
-        ${f('src/not_found.c')} | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
-        ${f('src/sample.c')}    | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: true, issues: [], localConfigFilepath: s('.cspell.json'), errors: undefined }}
-        ${f('src/sample.c')}    | ${''}           | ${{}}                          | ${{ noConfigSearch: true }}                   | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
-        ${f('src/sample.c')}    | ${''}           | ${{ noConfigSearch: true }}    | ${{}}                                         | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
-        ${f('src/sample.c')}    | ${''}           | ${{}}                          | ${{ configFile: s('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
-        ${f('src/sample.c')}    | ${''}           | ${{ noConfigSearch: true }}    | ${{ configFile: s('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
-        ${f('src/sample.c')}    | ${''}           | ${{ noConfigSearch: true }}    | ${{ noConfigSearch: false }}                  | ${{ checked: true, localConfigFilepath: s('.cspell.json'), errors: undefined }}
-        ${f('src/sample.c')}    | ${''}           | ${{}}                          | ${{}}                                         | ${{ document: oc(d(f('src/sample.c'))), errors: undefined }}
-        ${f('src/sample.c')}    | ${''}           | ${{}}                          | ${{ configFile: s('../cSpell.json') }}        | ${{ checked: false, localConfigFilepath: s('../cSpell.json'), errors: [eFailed(s('../cSpell.json'))] }}
-        ${f('src/not_found.c')} | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
-        ${f(__filename)}        | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
-        ${'stdin:///'}          | ${'some text'}  | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: true, issues: [], localConfigFilepath: undefined, errors: undefined }}
-        ${'stdin:///'}          | ${'some text'}  | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ document: oc(d('stdin:///')) }}
-        ${'stdin:///'}          | ${'some texxt'} | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: true, issues: i('texxt'), localConfigFilepath: undefined, errors: undefined }}
-        ${'stdin:///'}          | ${''}           | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: false, issues: [], localConfigFilepath: undefined, errors: [err('Unsupported schema: "stdin", open "stdin:/"')] }}
+        uri                                               | text            | settings                       | options                                       | expected
+        ${f('src/not_found.c')}                           | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
+        ${f('src/sample.c')}                              | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: true, issues: [], localConfigFilepath: s('.cspell.json'), errors: undefined }}
+        ${f('src/sample.c')}                              | ${''}           | ${{}}                          | ${{ noConfigSearch: true }}                   | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${f('src/sample.c')}                              | ${''}           | ${{ noConfigSearch: true }}    | ${{}}                                         | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${f('src/sample.c')}                              | ${''}           | ${{}}                          | ${{ configFile: s('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
+        ${f('src/sample.c')}                              | ${''}           | ${{ noConfigSearch: true }}    | ${{ configFile: s('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
+        ${f('src/sample.c')}                              | ${''}           | ${{ noConfigSearch: true }}    | ${{ noConfigSearch: false }}                  | ${{ checked: true, localConfigFilepath: s('.cspell.json'), errors: undefined }}
+        ${f('src/sample.c')}                              | ${''}           | ${{}}                          | ${{}}                                         | ${{ document: oc(d(f('src/sample.c'))), errors: undefined }}
+        ${f('src/sample.c')}                              | ${''}           | ${{}}                          | ${{ configFile: s('../cSpell.json') }}        | ${{ checked: false, localConfigFilepath: s('../cSpell.json'), errors: [eFailed(s('../cSpell.json'))] }}
+        ${f('src/not_found.c')}                           | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
+        ${f(__filename)}                                  | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
+        ${'stdin:///'}                                    | ${'some text'}  | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: true, issues: [], localConfigFilepath: undefined, errors: undefined }}
+        ${'stdin:///'}                                    | ${'some text'}  | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ document: oc(d('stdin:///')) }}
+        ${'stdin:///'}                                    | ${'some texxt'} | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: true, issues: i('texxt'), localConfigFilepath: undefined, errors: undefined }}
+        ${'stdin:///'}                                    | ${''}           | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: false, issues: [], localConfigFilepath: undefined, errors: [err('Unsupported schema: "stdin", open "stdin:/"')] }}
+        ${f('src/big_image.jpeg')}                        | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: undefined }}
+        ${d(f('src/big_image.txt'), undefined, 'binary')} | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: undefined }}
     `(
         'spellCheckFile $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {

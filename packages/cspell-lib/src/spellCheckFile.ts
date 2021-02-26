@@ -88,6 +88,17 @@ export async function spellCheckDocument(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
+    if (isBinaryDoc(document)) {
+        return {
+            document,
+            options,
+            settingsUsed: settings,
+            localConfigFilepath: undefined,
+            issues: [],
+            checked: false,
+            errors: undefined,
+        };
+    }
     try {
         return spellCheckFullDocument(await resolveDocument(document), options, settings);
     } catch (e) {
@@ -238,6 +249,19 @@ export function determineFinalDocumentSettings(
         document,
         settings: config,
     };
+}
+
+function isBinaryDoc(document: Document): boolean {
+    return isBinaryFile(URI.parse(document.uri).fsPath, document.languageId);
+}
+
+function isBinaryFile(filename: string, languageId?: string | string[]): boolean {
+    const ext = path.extname(filename);
+    languageId = languageId || [];
+    languageId = typeof languageId === 'string' ? languageId.split(',') : languageId;
+    languageId = languageId.map((a) => a.trim());
+    const languageIds = new Set(languageId.length ? languageId : getLanguagesForExt(ext));
+    return languageIds.has('binary') || languageIds.has('image');
 }
 
 export function fileToDocument(file: string): Document;
