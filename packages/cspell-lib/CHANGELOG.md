@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.4](https://github.com/streetsidesoftware/cspell/compare/v5.3.3...v5.3.4) (2021-03-01)
+
+
+### Bug Fixes
+
+* Adjust the way glob roots are calculated ([d1a7fa7](https://github.com/streetsidesoftware/cspell/commit/d1a7fa78759257d692598bf712254201ed0dd126))
+
+
+
+
+
 ## [5.3.3](https://github.com/streetsidesoftware/cspell/compare/v5.3.2...v5.3.3) (2021-02-26)
 
 
