@@ -318,9 +318,9 @@ describe('Validate Glob resolution', () => {
 
     test('normalized settings', () => {
         expect(sampleSettings).not.toEqual(sampleSettingsV1);
-        expect(sampleSettings.globRoot).not.toEqual(sampleSettingsV1.globRoot);
+        expect(sampleSettings.globRoot).toEqual(sampleSettingsV1.globRoot);
         expect(sampleSettings.globRoot).toBe(__dirname);
-        expect(sampleSettingsV1.globRoot).toBe(process.cwd());
+        expect(sampleSettingsV1.globRoot).toContain(process.cwd());
         expect(sampleSettings.ignorePaths).toEqual(
             expect.arrayContaining([
                 { glob: 'node_modules', root: sampleSettings.globRoot, source: sampleSettingsFilename },
@@ -339,14 +339,14 @@ describe('Validate Glob resolution', () => {
         const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename);
 
         expect(settingsV).toEqual(sampleSettings);
-        expect(settingsV1).not.toEqual(sampleSettingsV1);
+        expect(settingsV1).toEqual(sampleSettingsV1);
 
         delete settingsV1.version;
         expect(settingsV1).toEqual(sampleSettings);
     });
 
-    test('Using ENV_CSPELL_GLOB_ROOT as __dirname/..', () => {
-        process.env[ENV_CSPELL_GLOB_ROOT] = path.resolve(__dirname, '..');
+    test('Using ENV_CSPELL_GLOB_ROOT as without shared hierarchy', () => {
+        process.env[ENV_CSPELL_GLOB_ROOT] = path.resolve(__dirname, '../../samples');
         const settingsV = normalizeSettings(rawSampleSettings, __filename);
         const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename);
 

@@ -357,11 +357,13 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
     const includeRegExpList = takeRightOtherwiseLeft(left.includeRegExpList, right.includeRegExpList);
 
     const optionals = includeRegExpList?.length ? { includeRegExpList } : {};
+    const version = max(left.version, right.version);
 
     const settings: CSpellSettings = {
         ...left,
         ...right,
         ...optionals,
+        version,
         id: [leftId, rightId].join('|'),
         name: [left.name || '', right.name || ''].join('|'),
         words: mergeList(left.words, right.words),
@@ -380,8 +382,8 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         ),
         enabled: right.enabled !== undefined ? right.enabled : left.enabled,
         files: mergeListUnique(left.files, right.files),
-        ignorePaths: versionBasedMergeList(left.ignorePaths, right.ignorePaths, right.version),
-        overrides: versionBasedMergeList(left.overrides, right.overrides, right.version),
+        ignorePaths: versionBasedMergeList(left.ignorePaths, right.ignorePaths, version),
+        overrides: versionBasedMergeList(left.overrides, right.overrides, version),
         source: mergeSources(left, right),
         globRoot: undefined,
         import: undefined,
@@ -558,6 +560,16 @@ function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
     };
 }
 
+function max<T>(a: undefined, b: undefined): undefined;
+function max<T>(a: T, b: undefined): T;
+function max<T>(a: undefined, b: T): T;
+function max<T>(a: T | undefined, b: T | undefined): T | undefined;
+function max<T>(a: T | undefined, b: T | undefined): T | undefined {
+    if (a === undefined) return b;
+    if (b === undefined) return a;
+    return a > b ? a : b;
+}
+
 /**
  * Return a list of Setting Sources used to create this Setting.
  * @param settings the settings to search
@@ -620,6 +632,9 @@ function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): 
         settings.globRoot ??
         (settings.version === '0.1' || (envGlobRoot && !settings.version) ? defaultGlobRoot : settingsFileDir);
     const globRoot = path.resolve(settingsFileDir, rawRoot.replace('${cwd}', cwd));
+    if (settings.globRoot) return globRoot;
+    if (settingsFileDir.startsWith(globRoot)) return settingsFileDir;
+    if (globRoot.startsWith(settingsFileDir)) return settingsFileDir;
     return globRoot;
 }
 

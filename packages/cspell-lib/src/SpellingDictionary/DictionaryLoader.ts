@@ -54,6 +54,11 @@ function calcKey(uri: string) {
     return [uri, loaderType].join('|');
 }
 
+/**
+ * Check to see if any of the cached dictionaries have changed. If one has changed, reload it.
+ * @param maxAge - Only check the dictionary if it has been at least `maxAge` ms since the last check.
+ * @param now - optional timestamp representing now. (Mostly used in testing)
+ */
 export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()): Promise<void> {
     await Promise.all([...dictionaryCache].map(([, entry]) => refreshEntry(entry, maxAge, now)));
 }
