@@ -432,7 +432,7 @@ export interface GlobDef {
 
 /**
  * This can be '*', 'typescript', 'cpp', 'json', etc.
- * @pattern ^!?[\w_\-\s]+$
+ * @pattern ^(!?[\w_\-\s]+)|(\*)$
  */
 export type LanguageIdSingle = string;
 
