@@ -181,7 +181,7 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             for (const rule of rules) {
                 const pattern = rule.pattern;
                 const root = pattern.root;
-                if (!doesRootContainPath(root, filename)) {
+                if (!doesRootContainPath(root, filename, path)) {
                     continue;
                 }
                 const relName = path.relative(root, filename);
@@ -209,8 +209,8 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
  * @param root - absolute path
  * @param childPath - absolute path
  */
-function doesRootContainPath(root: string, child: string): boolean {
+function doesRootContainPath(root: string, child: string, path: PathInterface): boolean {
     if (child.startsWith(root)) return true;
-    const rel = Path.relative(root, child);
-    return rel !== child && !rel.startsWith('..');
+    const rel = path.relative(root, child);
+    return rel !== child && !rel.startsWith('..') && !path.isAbsolute(rel);
 }
