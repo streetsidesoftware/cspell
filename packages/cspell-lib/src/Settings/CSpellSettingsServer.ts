@@ -49,14 +49,15 @@ const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
         '.vscode/cSpell.json',
         '.vscode/.cspell.json',
         // Standard Locations
-        'cspell.config.js', // Supports dynamic config
-        'cspell.config.cjs', // Supports dynamic config
         'cspell.config.json',
         'cspell.config.jsonc',
         'cspell.config.yaml',
         'cspell.config.yml',
         'cspell.yaml',
         'cspell.yml',
+        // Dynamic config is looked for last
+        'cspell.config.js',
+        'cspell.config.cjs',
     ],
     loaders: {
         '.json': (_filename: string, content: string) => json.parse(content),
