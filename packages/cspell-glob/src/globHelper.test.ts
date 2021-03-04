@@ -1,8 +1,13 @@
-import { fileOrGlobToGlob, normalizeGlobPatterns } from './globHelper';
+import { fileOrGlobToGlob, normalizeGlobPatterns, normalizeGlobToRoot, __testing__ } from './globHelper';
 import { win32, posix } from 'path';
 import * as path from 'path';
 import { GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes';
 import mm = require('micromatch');
+
+const { rebaseGlob } = __testing__;
+
+const pathWin32 = makePathInterface(win32, '.');
+const pathPosix = makePathInterface(posix, '.');
 
 describe('Validate fileOrGlobToGlob', () => {
     function g(glob: string, root: string) {
@@ -23,21 +28,23 @@ describe('Validate fileOrGlobToGlob', () => {
     }
 
     test.each`
-        file                                        | root   | path     | expected                                           | comment
-        ${'*.json'}                                 | ${'.'} | ${posix} | ${g('*.json', pp('.'))}                            | ${'posix'}
-        ${'*.json'}                                 | ${'.'} | ${win32} | ${g('*.json', pw('.'))}                            | ${'win32'}
-        ${pp('./*.json')}                           | ${'.'} | ${posix} | ${g('*.json', pp('.'))}                            | ${''}
-        ${pw('./*.json')}                           | ${'.'} | ${win32} | ${g('*.json', pw('.'))}                            | ${''}
-        ${pp('./package.json')}                     | ${'.'} | ${posix} | ${g('package.json', pp('.'))}                      | ${''}
-        ${pw('.\\package.json')}                    | ${'.'} | ${win32} | ${g('package.json', pw('.'))}                      | ${''}
-        ${pp('./package.json')}                     | ${'.'} | ${posix} | ${g('package.json', pp('.'))}                      | ${''}
-        ${'.\\package.json'}                        | ${'.'} | ${win32} | ${g('package.json', pw('.'))}                      | ${''}
-        ${'./a/package.json'}                       | ${'.'} | ${posix} | ${g('a/package.json', pp('.'))}                    | ${''}
-        ${pw('.\\a\\package.json')}                 | ${'.'} | ${win32} | ${g('a/package.json', pw('.'))}                    | ${''}
-        ${'/user/tester/projects'}                  | ${'.'} | ${posix} | ${g('/user/tester/projects', pp('.'))}             | ${'Directory not matching root.'}
-        ${'C:\\user\\tester\\projects'}             | ${'.'} | ${win32} | ${g('C:/user/tester/projects', pw('.'))}           | ${'Directory not matching root.'}
-        ${'/user/tester/projects/**/*.json'}        | ${'.'} | ${posix} | ${g('/user/tester/projects/**/*.json', pp('.'))}   | ${'A glob like path not matching the root.'}
-        ${'C:\\user\\tester\\projects\\**\\*.json'} | ${'.'} | ${win32} | ${g('C:/user/tester/projects/**/*.json', pw('.'))} | ${'A glob like path not matching the root.'}
+        file                                         | root   | path     | expected                                           | comment
+        ${'*.json'}                                  | ${'.'} | ${posix} | ${g('*.json', pp('.'))}                            | ${'posix'}
+        ${'*.json'}                                  | ${'.'} | ${win32} | ${g('*.json', pw('.'))}                            | ${'win32'}
+        ${pp('./*.json')}                            | ${'.'} | ${posix} | ${g('*.json', pp('.'))}                            | ${''}
+        ${pw('./*.json')}                            | ${'.'} | ${win32} | ${g('*.json', pw('.'))}                            | ${''}
+        ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('package.json', pp('.'))}                      | ${''}
+        ${pw('.\\package.json')}                     | ${'.'} | ${win32} | ${g('package.json', pw('.'))}                      | ${''}
+        ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('package.json', pp('.'))}                      | ${''}
+        ${'.\\package.json'}                         | ${'.'} | ${win32} | ${g('package.json', pw('.'))}                      | ${''}
+        ${'./a/package.json'}                        | ${'.'} | ${posix} | ${g('a/package.json', pp('.'))}                    | ${''}
+        ${pw('.\\a\\package.json')}                  | ${'.'} | ${win32} | ${g('a/package.json', pw('.'))}                    | ${''}
+        ${'/user/tester/projects'}                   | ${'.'} | ${posix} | ${g('/user/tester/projects', pp('.'))}             | ${'Directory not matching root.'}
+        ${'C:\\user\\tester\\projects'}              | ${'.'} | ${win32} | ${g('C:/user/tester/projects', pw('.'))}           | ${'Directory not matching root.'}
+        ${'E:\\user\\projects\\spell\\package.json'} | ${'.'} | ${win32} | ${g('spell/package.json', pw('.'))}                | ${'Directory matching root.'}
+        ${'e:\\user\\projects\\spell\\package.json'} | ${'.'} | ${win32} | ${g('spell/package.json', pw('.'))}                | ${'Directory matching root.'}
+        ${'/user/tester/projects/**/*.json'}         | ${'.'} | ${posix} | ${g('/user/tester/projects/**/*.json', pp('.'))}   | ${'A glob like path not matching the root.'}
+        ${'C:\\user\\tester\\projects\\**\\*.json'}  | ${'.'} | ${win32} | ${g('C:/user/tester/projects/**/*.json', pw('.'))} | ${'A glob like path not matching the root.'}
     `('fileOrGlobToGlob file: "$file" root: "$root" $comment', ({ file, root, path, expected }) => {
         root = p(root, path);
         const r = fileOrGlobToGlob(file, root, path);
@@ -46,16 +53,34 @@ describe('Validate fileOrGlobToGlob', () => {
 });
 
 describe('Validate Glob Normalization to root', () => {
+    function g(
+        pattern: GlobPattern,
+        root?: string,
+        source = 'cspell.json',
+        nodePath: PathInterface = path
+    ): GlobPatternWithOptionalRoot {
+        root = nodePath.resolve(root || '.');
+        source = nodePath.join(root, source);
+        pattern = typeof pattern === 'string' ? { glob: pattern } : pattern;
+        return { root, source, ...pattern };
+    }
+
+    function gp(pattern: GlobPattern, root?: string, nodePath: PathInterface = path) {
+        return {
+            glob: g(pattern, root, undefined, nodePath),
+            path: nodePath,
+        };
+    }
+
     function mg(
         patterns: GlobPattern | GlobPattern[],
         root?: string,
-        source = 'cspell.json'
+        source = 'cspell.json',
+        nodePath = path
     ): GlobPatternWithOptionalRoot[] {
-        root = path.resolve(root || '.');
         patterns = Array.isArray(patterns) ? patterns : typeof patterns === 'string' ? patterns.split('|') : [patterns];
-        source = path.join(root, source);
 
-        return patterns.map((p) => (typeof p === 'string' ? { glob: p } : p)).map((g) => ({ root, source, ...g }));
+        return patterns.map((p) => g(p, root, source, nodePath));
     }
 
     function j(
@@ -75,20 +100,86 @@ describe('Validate Glob Normalization to root', () => {
         return patterns.concat([...flatten()]);
     }
 
-    function e(...expected: Partial<GlobPatternNormalized>[]) {
-        return expected
-            .map((e) => {
-                const p: Partial<GlobPatternNormalized> = {};
-                if (e.root) {
-                    p.root = path.resolve(e.root);
-                }
-                if (e.rawRoot) {
-                    p.rawRoot = path.resolve(e.rawRoot);
-                }
-                return { ...e, ...p };
-            })
-            .map((e) => expect.objectContaining(e));
+    function eg(e: Partial<GlobPatternNormalized>, path: PathInterface) {
+        const p: Partial<GlobPatternNormalized> = {};
+        if (e.root) {
+            p.root = path.resolve(e.root);
+        }
+        if (e.rawRoot) {
+            p.rawRoot = path.resolve(e.rawRoot);
+        }
+        return expect.objectContaining({ ...e, ...p });
     }
+
+    function e(...expected: Partial<GlobPatternNormalized>[]) {
+        return expected.map((e) => eg(e, path));
+    }
+
+    test.each`
+        glob                                   | base         | file                            | expected
+        ${'**/*.json'}                         | ${''}        | ${'cfg.json'}                   | ${'**/*.json'}
+        ${'**/*.json'}                         | ${''}        | ${'project/cfg.json'}           | ${'**/*.json'}
+        ${'*.json'}                            | ${''}        | ${'cfg.json'}                   | ${'*.json'}
+        ${'*.json'}                            | ${''}        | ${'!cfg.js'}                    | ${'*.json'}
+        ${'package.json'}                      | ${'/'}       | ${'package.json'}               | ${'package.json'}
+        ${'*/package.json'}                    | ${'/'}       | ${'config/package.json'}        | ${'*/package.json'}
+        ${'**/*.json'}                         | ${'project'} | ${'cfg.json'}                   | ${'**/*.json'}
+        ${'*.json'}                            | ${'project'} | ${'cfg.json'}                   | ${undefined}
+        ${'project/*.json'}                    | ${'project'} | ${'cfg.json'}                   | ${'*.json'}
+        ${'*/*.json'}                          | ${'project'} | ${'cfg.json'}                   | ${'*.json'}
+        ${'*/src/**/*.js'}                     | ${'project'} | ${'src/cfg.js'}                 | ${'src/**/*.js'}
+        ${'**/project/src/**/*.js'}            | ${'project'} | ${'!src/cfg.js'}                | ${'**/project/src/**/*.js'}
+        ${'**/{node_modules,node_modules/**}'} | ${''}        | ${'x/node_modules/cs/pkg.json'} | ${'**/{node_modules,node_modules/**}'}
+    `('rebaseGlob "$glob" to "$base" with file "$file"', ({ glob, base, file, expected }) => {
+        const r = rebaseGlob(glob, base);
+        expect(r).toEqual(expected);
+        if (r) {
+            const shouldMatch = !file.startsWith('!');
+            const filename = file.replace(/!$/, '');
+            expect(mm.isMatch(filename, r)).toBe(shouldMatch);
+        }
+    });
+
+    interface TestNormalizeGlobToRoot {
+        globPath: { glob: GlobPatternNormalized; path: PathInterface };
+        file: string;
+        root: string;
+        expected: GlobPatternNormalized;
+    }
+
+    test.each`
+        globPath                                                  | file                      | root                             | expected                                                                  | comment
+        ${gp('*.json')}                                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.' }, path)}                                | ${'matching root'}
+        ${gp('*.json', '.', pathPosix)}                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.' }, pathPosix)}                           | ${'matching root'}
+        ${gp('*.json', '.', pathWin32)}                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.' }, pathWin32)}                           | ${'matching root'}
+        ${gp('*.json')}                                           | ${'cspell-glob/cfg.json'} | ${'..'}                          | ${eg({ glob: 'cspell-glob/*.json', root: '..' }, path)}                   | ${'root above'}
+        ${gp('*.json', '.', pathPosix)}                           | ${'cspell/cfg.json'}      | ${'..'}                          | ${eg({ glob: 'cspell/*.json', root: '..' }, pathPosix)}                   | ${'root above'}
+        ${gp('*.json', '.', pathWin32)}                           | ${'cspell/cfg.json'}      | ${'..'}                          | ${eg({ glob: 'cspell/*.json', root: '..' }, pathWin32)}                   | ${'root above'}
+        ${gp('*.json')}                                           | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: '.' }, path)}                                | ${'root below, cannot change'}
+        ${gp('*.json', '.', pathPosix)}                           | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: '.' }, pathPosix)}                           | ${'root below, cannot change'}
+        ${gp('**/*.json', '.', pathWin32)}                        | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '**/*.json', root: 'deeper' }, pathWin32)}                   | ${'root below, globstar'}
+        ${gp('deeper/*.json')}                                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, path)}                           | ${'root below, matching'}
+        ${gp('deeper/*.json', '.', pathPosix)}                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, pathPosix)}                      | ${'root below, matching'}
+        ${gp('deeper/*.json', '.', pathWin32)}                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, pathWin32)}                      | ${'root below, matching'}
+        ${gp('deeper/*.json', 'e:/user/Test/project', pathWin32)} | ${'cfg.json'}             | ${'E:/user/test/project/deeper'} | ${eg({ glob: '*.json', root: 'E:/user/test/project/deeper' }, pathWin32)} | ${'root below, matching'}
+        ${gp('**/deeper/*.json')}                                 | ${'deeper/cfg.json'}      | ${'deeper'}                      | ${eg({ glob: '**/deeper/*.json', root: 'deeper' }, path)}                 | ${'root below, not matching'}
+        ${gp('**/deeper/*.json')}                                 | ${'!cfg.json'}            | ${'deeper'}                      | ${eg({ glob: '**/deeper/*.json', root: 'deeper' }, path)}                 | ${'root below, not matching'}
+        ${gp('deeper/project/*/*.json')}                          | ${'cfg.json'}             | ${'deeper/project/a'}            | ${eg({ glob: '*.json', root: 'deeper/project/a' }, path)}                 | ${'root below, not matching'}
+    `(
+        'normalizeGlobToRoot orig {$globPath.glob.glob, $globPath.glob.root} $root $comment',
+        ({ globPath, file, root, expected }: TestNormalizeGlobToRoot) => {
+            const path: PathInterface = globPath.path;
+            const glob: GlobPatternNormalized = globPath.glob;
+            root = path.resolve(root);
+            const shouldMatch = !file.startsWith('!');
+            file = file.replace(/!$/, '');
+            file = path.relative(root, path.resolve(root, file)).replace(/\\/g, '/');
+
+            const result = normalizeGlobToRoot(glob, root, path);
+            expect(result).toEqual(expected);
+            expect(mm.isMatch(file, result.glob)).toBe(shouldMatch);
+        }
+    );
 
     interface TestCase {
         globs: GlobPatternWithOptionalRoot[];
@@ -98,21 +189,15 @@ describe('Validate Glob Normalization to root', () => {
     }
 
     test.each`
-        globs                                                   | root         | expectedGlobs                                                                                               | comment
-        ${mg('*.json')}                                         | ${'.'}       | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' })}                                                  | ${'Glob with same root'}
-        ${mg('!*.json')}                                        | ${'.'}       | ${e({ rawGlob: '!*.json', glob: '!**/{*.json,*.json/**}' })}                                                | ${'Negative glob'}
-        ${mg('!*.json', 'project/a')}                           | ${'.'}       | ${e({ rawGlob: '!*.json', glob: '!project/a/**/{*.json,*.json/**}' })}                                      | ${'Negative in Sub dir glob.'}
-        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}        | ${'.'}       | ${e({ rawGlob: '*.json', glob: 'project/a/**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })}         | ${'Sub dir glob.'}
-        ${j(mg('*.json', '../tests/a'), mg('*.ts', '.'))}       | ${'.'}       | ${e({ glob: '**/{*.ts,*.ts/**}' })}                                                                         | ${'Glob not in root is removed.'}
-        ${mg('*.json')}                                         | ${'project'} | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' })}                                                  | ${'Root deeper than glob'}
-        ${mg('!*.json')}                                        | ${'project'} | ${e({ rawGlob: '!*.json', glob: '!**/{*.json,*.json/**}' })}                                                | ${'Root deeper than glob'}
-        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}        | ${'project'} | ${e({ rawGlob: '*.json', glob: 'a/**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })}                 | ${'Root in the middle.'}
-        ${j(mg('/node_modules', 'project/a'), mg('*.ts', '.'))} | ${'project'} | ${e({ rawGlob: '/node_modules', glob: 'a/{node_modules,node_modules/**}' }, { glob: '**/{*.ts,*.ts/**}' })} | ${'Root in the middle. /node_modules'}
-        ${j(mg('!/node_modules', 'project/a'))}                 | ${'project'} | ${e({ rawGlob: '!/node_modules', glob: '!a/{node_modules,node_modules/**}' })}                              | ${'Root in the middle. /node_modules'}
-        ${j(mg('*.json', '../tests/a'), mg('*.ts', '.'))}       | ${'project'} | ${e({ glob: '**/{*.ts,*.ts/**}' })}                                                                         | ${'Glob not in root is removed.'}
-        ${j(mg('*.json', '../tests/a'))}                        | ${'project'} | ${e()}                                                                                                      | ${'Glob not in root is removed.'}
-        ${j(mg('*/*.json', 'project/a'))}                       | ${'project'} | ${e({ glob: 'a/*/*.json' })}                                                                                | ${'nested a/*/*.json'}
-        ${j(mg('*/*.json', '.'))}                               | ${'project'} | ${e({ glob: '*.json' })}                                                                                    | ${'nested */*.json'}
+        globs                                                   | root         | expectedGlobs                                                                                             | comment
+        ${mg('*.json')}                                         | ${'.'}       | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}', root: '.' })}                                     | ${'*.json'}
+        ${['*.json']}                                           | ${'.'}       | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}', root: '.' })}                                     | ${'*.json'}
+        ${mg('!*.json')}                                        | ${'.'}       | ${e({ rawGlob: '!*.json', glob: '!**/{*.json,*.json/**}' })}                                              | ${'!*.json'}
+        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}        | ${'.'}       | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })}                 | ${'*.json,*.ts'}
+        ${j(mg('/node_modules', 'project/a'), mg('*.ts', '.'))} | ${'project'} | ${e({ rawGlob: '/node_modules', glob: '{node_modules,node_modules/**}' }, { glob: '**/{*.ts,*.ts/**}' })} | ${'/node_modules'}
+        ${j(mg('!/node_modules', 'project/a'))}                 | ${'project'} | ${e({ rawGlob: '!/node_modules', glob: '!{node_modules,node_modules/**}' })}                              | ${'!/node_modules'}
+        ${j(mg('*/*.json', '.'))}                               | ${'project'} | ${e({ glob: '*/*.json', root: '.' })}                                                                     | ${'*/*.json'}
+        ${mg('node_modules')}                                   | ${'project'} | ${e({ rawGlob: 'node_modules', glob: '**/{node_modules,node_modules/**}' })}                              | ${'node_modules'}
     `('tests normalization nested "$comment" root: "$root"', ({ globs, root, expectedGlobs }: TestCase) => {
         root = path.resolve(root);
         const r = normalizeGlobPatterns(globs, { root, nested: true, nodePath: path });
@@ -120,21 +205,48 @@ describe('Validate Glob Normalization to root', () => {
     });
 
     test.each`
-        globs                                                         | root             | expectedGlobs                                                                | comment
-        ${mg('*.json')}                                               | ${'.'}           | ${e({ rawGlob: '*.json', glob: '*.json' })}                                  | ${'Glob with same root'}
-        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}              | ${'.'}           | ${e({ rawGlob: '*.json', glob: 'project/a/*.json' }, { glob: '*.ts' })}      | ${'Sub dir glob.'}
-        ${j(mg('*.json', '../tests/a'), mg('*.ts', '.'))}             | ${'.'}           | ${e({ glob: '*.ts' })}                                                       | ${'Glob not in root is removed.'}
-        ${mg('*.json')}                                               | ${'project'}     | ${e({ glob: '*.json', root: '.' })}                                          | ${'Root deeper than glob'}
-        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}              | ${'project'}     | ${e({ rawGlob: '*.json', glob: 'a/*.json' }, { glob: '*.ts', root: '.' })}   | ${'Root in the middle.'}
-        ${j(mg('/node_modules', 'project/a'), mg('*.ts', 'project'))} | ${'project'}     | ${e({ rawGlob: '/node_modules', glob: 'a/node_modules' }, { glob: '*.ts' })} | ${'Root in the middle. /node_modules'}
-        ${j(mg('*.json', '../tests/a'), mg('**/*.ts', '.'))}          | ${'project'}     | ${e({ glob: '**/*.ts' })}                                                    | ${'Glob not in root is removed.'}
-        ${j(mg('*.json', '../tests/a'))}                              | ${'project'}     | ${e()}                                                                       | ${'Glob not in root is removed.'}
-        ${j(mg('*/*.json', 'project/a'))}                             | ${'project'}     | ${e({ glob: 'a/*/*.json' })}                                                 | ${'nested a/*/*.json'}
-        ${j(mg('*/*.json', '.'))}                                     | ${'project'}     | ${e({ glob: '*.json' })}                                                     | ${'nested */*.json'}
-        ${j(mg('project/*/*.json', '.'))}                             | ${'project/sub'} | ${e({ glob: '*.json' })}                                                     | ${'nested project/*/*.json'}
-    `('tests normalization not nested "$comment" root: "$root"', ({ globs, root, expectedGlobs }: TestCase) => {
+        globs                                                   | root         | expectedGlobs                                                                                               | comment
+        ${mg('*.json')}                                         | ${'.'}       | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' })}                                                  | ${'Glob with same root'}
+        ${mg('!*.json')}                                        | ${'.'}       | ${e({ rawGlob: '!*.json', glob: '!**/{*.json,*.json/**}' })}                                                | ${'Negative glob'}
+        ${mg('!*.json', 'project/a')}                           | ${'.'}       | ${e({ rawGlob: '!*.json', glob: '!project/a/**/{*.json,*.json/**}', root: '.' })}                           | ${'Negative in Sub dir glob.'}
+        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}        | ${'.'}       | ${e({ rawGlob: '*.json', glob: 'project/a/**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })}         | ${'Sub dir glob.'}
+        ${j(mg('*.json', '../tests/a'), mg('*.ts', '.'))}       | ${'.'}       | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })}                   | ${''}
+        ${mg('*.json')}                                         | ${'project'} | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' })}                                                  | ${'Root deeper than glob'}
+        ${mg('!*.json')}                                        | ${'project'} | ${e({ rawGlob: '!*.json', glob: '!**/{*.json,*.json/**}' })}                                                | ${'Root deeper than glob'}
+        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}        | ${'project'} | ${e({ rawGlob: '*.json', glob: 'a/**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })}                 | ${'Root in the middle.'}
+        ${j(mg('/node_modules', 'project/a'), mg('*.ts', '.'))} | ${'project'} | ${e({ rawGlob: '/node_modules', glob: 'a/{node_modules,node_modules/**}' }, { glob: '**/{*.ts,*.ts/**}' })} | ${'/node_modules'}
+        ${j(mg('!/node_modules', 'project/a'))}                 | ${'project'} | ${e({ rawGlob: '!/node_modules', glob: '!a/{node_modules,node_modules/**}' })}                              | ${'Root in the middle. /node_modules'}
+        ${j(mg('*.json', '../tests/a'), mg('*.ts', '.'))}       | ${'project'} | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })}                   | ${''}
+        ${j(mg('*.json', '../tests/a'))}                        | ${'project'} | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}', root: '../tests/a' })}                              | ${''}
+        ${j(mg('*/*.json', 'project/a'))}                       | ${'project'} | ${e({ glob: 'a/*/*.json' })}                                                                                | ${'nested a/*/*.json'}
+        ${j(mg('*/*.json', '.'))}                               | ${'project'} | ${e({ glob: '*.json' })}                                                                                    | ${'nested */*.json'}
+    `('tests normalization to root nested  "$comment" root: "$root"', ({ globs, root, expectedGlobs }: TestCase) => {
         root = path.resolve(root);
-        const r = normalizeGlobPatterns(globs, { root, nested: false, nodePath: path });
+        const r = normalizeGlobPatterns(globs, { root, nested: true, nodePath: path }).map((p) =>
+            normalizeGlobToRoot(p, root, path)
+        );
+        expect(r).toEqual(expectedGlobs);
+    });
+
+    test.each`
+        globs                                             | root             | expectedGlobs                                                                                       | comment
+        ${mg('*.json')}                                   | ${'.'}           | ${e({ rawGlob: '*.json', glob: '**/{*.json,*.json/**}' })}                                          | ${'Glob with same root'}
+        ${j(mg('*.json', 'project/a'), mg('*.ts', '.'))}  | ${'.'}           | ${e({ rawGlob: '*.json', glob: 'project/a/**/{*.json,*.json/**}' }, { glob: '**/{*.ts,*.ts/**}' })} | ${'Sub dir glob.'}
+        ${j(mg('*.json', '../tests/a'), mg('*.ts', '.'))} | ${'.'}           | ${e({ glob: '**/{*.json,*.json/**}', root: '../tests/a' }, { glob: '**/{*.ts,*.ts/**}' })}          | ${'Glob not in root is not changed.'}
+        ${mg('*.json')}                                   | ${'project'}     | ${e({ glob: '**/{*.json,*.json/**}', root: 'project' })}                                            | ${'Root deeper than glob'}
+        ${j(mg('*.json', 'project/a'))}                   | ${'project'}     | ${e({ rawGlob: '*.json', glob: 'a/**/{*.json,*.json/**}' })}                                        | ${'Root in the middle.'}
+        ${j(mg('/node_modules', 'project/a'))}            | ${'project'}     | ${e({ rawGlob: '/node_modules', glob: 'a/{node_modules,node_modules/**}' })}                        | ${'Root in the middle. /node_modules'}
+        ${j(mg('*.json', '../tests/a'))}                  | ${'project'}     | ${e({ glob: '**/{*.json,*.json/**}', root: '../tests/a' })}                                         | ${'Glob not in root is not changed.'}
+        ${j(mg('**/*.ts', '.'))}                          | ${'project'}     | ${e({ glob: '**/*.ts', root: 'project' })}                                                          | ${'Glob not in root is not changed.'}
+        ${j(mg('*/*.json', '../tests/a'))}                | ${'project'}     | ${e({ glob: '*/*.json', root: '../tests/a' })}                                                      | ${'Glob not in root is not changed.'}
+        ${j(mg('*/*.json', 'project/a'))}                 | ${'project'}     | ${e({ glob: 'a/*/*.json', root: 'project' })}                                                       | ${'nested a/*/*.json'}
+        ${j(mg('*/*.json', '.'))}                         | ${'project'}     | ${e({ glob: '*.json', root: 'project' })}                                                           | ${'nested */*.json'}
+        ${j(mg('project/*/*.json', '.'))}                 | ${'project/sub'} | ${e({ glob: '*.json', root: 'project/sub' })}                                                       | ${'nested project/*/*.json'}
+    `('tests normalization to root not nested "$comment" root: "$root"', ({ globs, root, expectedGlobs }: TestCase) => {
+        root = path.resolve(root);
+        const r = normalizeGlobPatterns(globs, { root, nested: true, nodePath: path }).map((p) =>
+            normalizeGlobToRoot(p, root, path)
+        );
         expect(r).toEqual(expectedGlobs);
     });
 });
@@ -188,3 +300,20 @@ describe('Validate minimatch assumptions', () => {
         }
     );
 });
+
+function makePathInterface(nodePath: PathInterface, cwd: string): PathInterface {
+    const prefix = nodePath.sep === '/' ? '/' : 'E:/';
+    const root = nodePath.normalize(prefix + 'Users/user/project/cspell');
+    cwd = nodePath.resolve(root, cwd);
+
+    return {
+        sep: nodePath.sep,
+        normalize: (p) => nodePath.normalize(p),
+        join: (...paths) => nodePath.join(...paths),
+        isAbsolute: (p) => nodePath.isAbsolute(p),
+        relative: (from, to) => nodePath.relative(from, to),
+        resolve: (...paths: string[]) => {
+            return nodePath.resolve(cwd, ...paths);
+        },
+    };
+}

@@ -1,7 +1,7 @@
 import glob, { IGlob } from 'glob';
 import * as path from 'path';
 import { IOptions } from './IOptions';
-import { GlobMatcher, GlobPatternWithRoot, fileOrGlobToGlob, normalizeGlobPatterns } from 'cspell-glob';
+import { GlobMatcher, GlobPatternWithRoot, fileOrGlobToGlob } from 'cspell-glob';
 import { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 
 export interface GlobOptions extends IOptions {
@@ -97,7 +97,7 @@ interface ExtractPatternResult {
 export function extractPatterns(globs: GlobSrcInfo[]): ExtractPatternResult[] {
     const r = globs.reduce((info: ExtractPatternResult[], g: GlobSrcInfo) => {
         const source = g.source;
-        const patterns = g.matcher.patterns;
+        const patterns = g.matcher.patternsNormalizedToRoot;
         return info.concat(patterns.map((glob) => ({ glob, source })));
     }, []);
 
@@ -125,19 +125,25 @@ export function extractGlobExcludesFromConfig(root: string, source: string, conf
 }
 
 /**
- *
+ * Build GlobMatcher from command line or config file globs.
  * @param globs Glob patterns.
- * @param root
+ * @param root - directory to use as the root
  */
-export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
+export function buildGlobMatcher(globs: Glob[], root: string, isExclude: boolean): GlobMatcher {
     const withRoots = globs.map((g) => {
         const source = typeof g === 'string' ? 'command line' : undefined;
         return { source, ...fileOrGlobToGlob(g, root) };
     });
 
-    const normalized = normalizeGlobPatterns(withRoots, { root, nested: isExclude, nodePath: path });
-    const filteredGlobs = normalized.filter((g) => g.root === root).map((g) => g.glob);
-    return filteredGlobs;
+    return new GlobMatcher(withRoots, { root, mode: isExclude ? 'exclude' : 'include' });
+}
+
+export function extractGlobsFromMatcher(globMatcher: GlobMatcher): string[] {
+    return globMatcher.patternsNormalizedToRoot.map((g) => g.glob);
+}
+
+export function normalizeGlobsToRoot(globs: Glob[], root: string, isExclude: boolean): string[] {
+    return extractGlobsFromMatcher(buildGlobMatcher(globs, root, isExclude));
 }
 
 function* flatten<T>(src: Iterable<T | T[]>): IterableIterator<T> {

@@ -8,8 +8,8 @@ import { TextDocumentOffset } from 'cspell-lib';
 import { CSpellSettings, Glob } from '@cspell/cspell-types';
 import * as cspell from 'cspell-lib';
 import { measurePromise } from './util/timer';
-import { extractGlobExcludesFromConfig, extractPatterns, GlobSrcInfo, normalizeGlobsToRoot } from './util/glob';
-import { isGlobPatternNormalized } from 'cspell-glob';
+import { extractPatterns, buildGlobMatcher, normalizeGlobsToRoot, extractGlobsFromMatcher } from './util/glob';
+import { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 
 export interface FileResult {
     fileInfo: FileInfo;
@@ -194,12 +194,11 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const ignoreGlobs = normalizeGlobsToRoot(configInfo.config.ignorePaths || [], root, true).concat(excludeGlobs);
+        const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
+        const globMatcher = buildGlobMatcher(globsToExclude, root, true);
+        const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
         const globOptions = { root, cwd: root, ignore: ignoreGlobs };
-        const exclusionGlobs = extractGlobExcludesFromConfig(root, configInfo.source, configInfo.config).concat(
-            cfg.excludes
-        );
-        const files = filterFiles(await findFiles(fileGlobs, globOptions), exclusionGlobs);
+        const files = filterFiles(await findFiles(fileGlobs, globOptions), globMatcher);
 
         return processFiles(fileLoader(files), configInfo, files.length);
     }
@@ -225,29 +224,35 @@ Options:
         );
     }
 
-    function isExcluded(filename: string, globs: GlobSrcInfo[]) {
+    function isExcluded(filename: string, globMatcher: GlobMatcher) {
         const { root } = cfg;
         const absFilename = path.resolve(root, filename);
-        for (const glob of globs) {
-            const m = glob.matcher.matchEx(absFilename);
-            if (m.matched) {
-                const pattern = m.pattern;
-                const src = pattern.source || glob.source;
-                const rawGlob = isGlobPatternNormalized(pattern) ? pattern.rawGlob : pattern.glob;
-                cfg.info(
-                    `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${rawGlob} from ${src}`,
-                    MessageTypes.Info
-                );
-                return true;
-            }
+        const r = globMatcher.matchEx(absFilename);
+
+        if (r.matched) {
+            const { glob, source } = extractGlobSource(r.pattern);
+            cfg.info(
+                `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${glob} from ${source}`,
+                MessageTypes.Info
+            );
         }
-        return false;
+
+        return r.matched;
     }
 
-    function filterFiles(files: string[], excludeGlobs: GlobSrcInfo[]): string[] {
-        const excludeInfo = extractPatterns(excludeGlobs).map((g) => `Glob: ${g.glob.glob} from ${g.source}`);
+    function extractGlobSource(g: GlobPatternWithRoot | GlobPatternNormalized) {
+        const { glob, rawGlob, source } = <GlobPatternNormalized>g;
+        return {
+            glob: rawGlob || glob,
+            source,
+        };
+    }
+
+    function filterFiles(files: string[], globMatcher: GlobMatcher): string[] {
+        const patterns = globMatcher.patterns;
+        const excludeInfo = patterns.map(extractGlobSource).map(({ glob, source }) => `Glob: ${glob} from ${source}`);
         cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
-        const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, excludeGlobs));
+        const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, globMatcher));
         return result;
     }
 }
