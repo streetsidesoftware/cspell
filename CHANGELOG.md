@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.6](https://github.com/streetsidesoftware/cspell/compare/v5.3.5...v5.3.6) (2021-03-05)
+
+
+### Bug Fixes
+
+* issue cause by commit d1a7fa7 ([#1040](https://github.com/streetsidesoftware/cspell/issues/1040)) ([da9ca51](https://github.com/streetsidesoftware/cspell/commit/da9ca512265a6f068d26a6b240e1a4699fca2ba7)), closes [/github.com/streetsidesoftware/cspell/commit/d1a7fa78759257d692598bf712254201ed0dd126#commitcomment-47719278](https://github.com//github.com/streetsidesoftware/cspell/commit/d1a7fa78759257d692598bf712254201ed0dd126/issues/commitcomment-47719278)
+
+
+
+
+
 ## [5.3.5](https://github.com/streetsidesoftware/cspell/compare/v5.3.4...v5.3.5) (2021-03-05)
 
 
