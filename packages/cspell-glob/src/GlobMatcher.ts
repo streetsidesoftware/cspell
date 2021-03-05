@@ -1,6 +1,6 @@
 import mm = require('micromatch');
 import * as Path from 'path';
-import { normalizeGlobPatterns } from './globHelper';
+import { normalizeGlobPatterns, doesRootContainPath, normalizeGlobToRoot } from './globHelper';
 import { PathInterface, GlobMatch, GlobPattern, GlobPatternWithRoot } from './GlobMatcherTypes';
 
 // cspell:ignore fname
@@ -63,6 +63,7 @@ export class GlobMatcher {
     readonly matchEx: (filename: string) => GlobMatch;
     readonly path: PathInterface;
     readonly patterns: GlobPatternWithRoot[];
+    readonly patternsNormalizedToRoot: GlobPatternWithRoot[];
     readonly root: string;
     readonly dot: boolean;
     readonly options: NormalizedGlobMatchOptions;
@@ -109,9 +110,11 @@ export class GlobMatcher {
             : typeof patterns === 'string'
             ? patterns.split(/\r?\n/g)
             : [patterns];
-        const globPatterns = normalizeGlobPatterns(patterns, this.options)
+        const globPatterns = normalizeGlobPatterns(patterns, this.options);
+        this.patternsNormalizedToRoot = globPatterns
+            .map((g) => normalizeGlobToRoot(g, normalizedRoot, nodePath))
             // Only keep globs that do not match the root when using exclude mode.
-            .filter((g) => isExcludeMode || g.root === normalizedRoot);
+            .filter((g) => nodePath.relative(g.root, normalizedRoot) === '');
 
         this.patterns = globPatterns;
         this.root = normalizedRoot;
@@ -202,15 +205,4 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
         return testRules(negRules, false) || testRules(posRules, true) || { matched: false };
     };
     return fn;
-}
-
-/**
- * Decide if a childPath is contained within a root or at the same level.
- * @param root - absolute path
- * @param childPath - absolute path
- */
-function doesRootContainPath(root: string, child: string, path: PathInterface): boolean {
-    if (child.startsWith(root)) return true;
-    const rel = path.relative(root, child);
-    return rel !== child && !rel.startsWith('..') && !path.isAbsolute(rel);
 }

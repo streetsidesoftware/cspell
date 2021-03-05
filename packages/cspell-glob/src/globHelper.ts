@@ -8,8 +8,6 @@ import {
 import * as Path from 'path';
 
 const { posix } = Path;
-const { relative } = posix;
-
 const relRegExp = /^\.[\\/]/;
 
 /**
@@ -29,7 +27,7 @@ export function fileOrGlobToGlob(
         return { root, ...fileOrGlob };
     }
 
-    if (fileOrGlob.startsWith(root) || relRegExp.test(fileOrGlob)) {
+    if (doesRootContainPath(root, fileOrGlob, path) || relRegExp.test(fileOrGlob)) {
         const rel = path.relative(root, path.resolve(root, fileOrGlob));
         return {
             glob: pathToGlob(rel),
@@ -40,6 +38,17 @@ export function fileOrGlobToGlob(
         glob: pathToGlob(fileOrGlob),
         root,
     };
+}
+
+/**
+ * Decide if a childPath is contained within a root or at the same level.
+ * @param root - absolute path
+ * @param childPath - absolute path
+ */
+export function doesRootContainPath(root: string, child: string, path: PathInterface): boolean {
+    if (child.startsWith(root)) return true;
+    const rel = path.relative(root, child);
+    return !rel || (rel !== child && !rel.startsWith('..') && !path.isAbsolute(rel));
 }
 
 type MutationsToSupportGitIgnore = [RegExp, string];
@@ -86,10 +95,7 @@ export interface NormalizeOptions {
  * @param options - Normalization options.
  */
 export function normalizeGlobPatterns(patterns: GlobPattern[], options: NormalizeOptions): GlobPatternNormalized[] {
-    return patterns
-        .map((g) => normalizeGlobPatternWithRoot(g, options))
-        .map((g) => mapGlobToRoot(g, options.root))
-        .filter(isNotUndefined);
+    return patterns.map((g) => normalizeGlobPatternWithRoot(g, options));
 }
 
 function normalizeGlobPatternWithRoot(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized {
@@ -113,13 +119,39 @@ function normalizeGlobPatternWithRoot(g: GlobPattern, options: NormalizeOptions)
     return gn;
 }
 
-function makeRelative(from: string, to: string): string {
-    const rel = relative(from.replace(/\\/g, '/'), to.replace(/\\/g, '/'));
-    return rel;
-}
+/**
+ * Try to adjust the root of a glob to match a new root. If it is not possible, the original glob is returned.
+ * Note: this does NOT generate absolutely correct glob patterns. The results are intended to be used as a
+ * first pass only filter. Followed by testing against the original glob/root pair.
+ * @param glob - glob to map
+ * @param root - new root to use if possible
+ * @param path - Node Path modules to use (testing only)
+ */
+export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
+    glob: Glob,
+    root: string,
+    path: PathInterface
+): Glob {
+    function relToGlob(relativePath: string): string {
+        return path.sep === '\\' ? relativePath.replace(/\\/g, '/') : relativePath;
+    }
 
-function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNormalized | undefined {
     if (glob.root === root) {
+        return glob;
+    }
+
+    const relFromRootToGlob = path.relative(root, glob.root);
+
+    if (!relFromRootToGlob) {
+        return glob;
+    }
+
+    const relFromGlobToRoot = path.relative(glob.root, root);
+    const globIsUnderRoot = relFromRootToGlob[0] !== '.' && !path.isAbsolute(relFromRootToGlob);
+    const rootIsUnderGlob = relFromGlobToRoot[0] !== '.' && !path.isAbsolute(relFromGlobToRoot);
+
+    // Root and Glob are not in the same part of the directory tree.
+    if (!globIsUnderRoot && !rootIsUnderGlob) {
         return glob;
     }
 
@@ -127,19 +159,13 @@ function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNo
     const g = isNeg ? glob.glob.slice(1) : glob.glob;
     const prefix = isNeg ? '!' : '';
 
-    const globIsUnderRoot = glob.root.startsWith(root);
-    const rootIsUnderGlob = root.startsWith(glob.root);
-
-    // Root and Glob are not in the same part of the directory tree.
-    if (!globIsUnderRoot && !rootIsUnderGlob) return undefined;
-
     // prefix with root
     if (globIsUnderRoot) {
-        const rel = makeRelative(root, glob.root);
+        const relGlob = relToGlob(relFromRootToGlob);
 
         return {
             ...glob,
-            glob: prefix + posix.join(rel, g),
+            glob: prefix + posix.join(relGlob, g),
             root,
         };
     }
@@ -147,36 +173,47 @@ function mapGlobToRoot(glob: GlobPatternNormalized, root: string): GlobPatternNo
     // The root is under the glob root
     // The more difficult case, the glob is higher than the root
     // A best effort is made, but does not do advanced matching.
+    const relGlob = relToGlob(relFromGlobToRoot) + '/';
+    const rebasedGlob = rebaseGlob(g, relGlob);
 
-    if (g.startsWith('**')) return { ...glob, root };
-
-    const rel = makeRelative(glob.root, root) + '/';
-    if (g.startsWith(rel)) {
-        return { ...glob, glob: prefix + g.slice(rel.length), root };
-    }
-
-    const relParts = rel.split('/');
-    const globParts = g.split('/');
-
-    for (let i = 0; i < relParts.length && i < globParts.length; ++i) {
-        const relSeg = relParts[i];
-        const globSeg = globParts[i];
-        // the trailing / allows for us to test against an empty segment.
-        if (!relSeg || globSeg === '**') {
-            return { ...glob, glob: prefix + globParts.slice(i).join('/'), root };
-        }
-        if (relSeg !== globSeg && globSeg !== '*') {
-            break;
-        }
-    }
-
-    return glob;
-}
-
-function isNotUndefined<T>(a: T | undefined): a is T {
-    return a !== undefined;
+    return rebasedGlob ? { ...glob, glob: prefix + rebasedGlob, root } : glob;
 }
 
 export function isGlobPatternNormalized(p: GlobPatternWithRoot | GlobPatternNormalized): p is GlobPatternNormalized {
     return (<GlobPatternNormalized>p).rawGlob !== undefined;
 }
+
+/**
+ * Rebase a glob string to a new prefix
+ * @param glob - glob string
+ * @param rebaseTo - glob prefix
+ */
+function rebaseGlob(glob: string, rebaseTo: string): string | undefined {
+    if (!rebaseTo || rebaseTo === '/') return glob;
+    if (glob.startsWith('**')) return glob;
+    rebaseTo = rebaseTo.endsWith('/') ? rebaseTo : rebaseTo + '/';
+
+    if (glob.startsWith(rebaseTo)) {
+        return glob.slice(rebaseTo.length);
+    }
+
+    const relParts = rebaseTo.split('/');
+    const globParts = glob.split('/');
+
+    for (let i = 0; i < relParts.length && i < globParts.length; ++i) {
+        const relSeg = relParts[i];
+        const globSeg = globParts[i];
+        // the empty segment due to the end relGlob / allows for us to test against an empty segment.
+        if (!relSeg || globSeg === '**') {
+            return globParts.slice(i).join('/');
+        }
+        if (relSeg !== globSeg && globSeg !== '*') {
+            break;
+        }
+    }
+    return undefined;
+}
+
+export const __testing__ = {
+    rebaseGlob,
+};

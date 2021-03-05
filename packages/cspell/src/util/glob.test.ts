@@ -94,6 +94,7 @@ describe('Validate internal functions', () => {
 
     test.each`
         glob               | globRoot          | root              | expectedGlobs                           | file                                | expectedToMatch
+        ${'src/*.json'}    | ${'.'}            | ${'./project/p2'} | ${[]}                                   | ${''}                               | ${false}
         ${'*.json'}        | ${'.'}            | ${'.'}            | ${['**/{*.json,*.json/**}']}            | ${'./package.json'}                 | ${true}
         ${'*.json'}        | ${'.'}            | ${'.'}            | ${['**/{*.json,*.json/**}']}            | ${'./.git/package.json'}            | ${true}
         ${'*.json'}        | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/{*.json,*.json/**}']} | ${'./project/p1/package.json'}      | ${true}
