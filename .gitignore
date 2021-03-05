@@ -33,7 +33,12 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
-dist
+
+# Ignore compiled files.
+**/dist/**
+# Keep the .npmignore if it is present
+!**/dist/.npmignore
+
 out
 temp
 tmp
