@@ -318,7 +318,7 @@ describe('Validate Glob resolution', () => {
 
     test('normalized settings', () => {
         expect(sampleSettings).not.toEqual(sampleSettingsV1);
-        expect(sampleSettings.globRoot).toEqual(sampleSettingsV1.globRoot);
+        expect(sampleSettings.globRoot).not.toEqual(sampleSettingsV1.globRoot);
         expect(sampleSettings.globRoot).toBe(__dirname);
         expect(sampleSettingsV1.globRoot).toContain(process.cwd());
         expect(sampleSettings.ignorePaths).toEqual(
@@ -339,7 +339,7 @@ describe('Validate Glob resolution', () => {
         const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename);
 
         expect(settingsV).toEqual(sampleSettings);
-        expect(settingsV1).toEqual(sampleSettingsV1);
+        expect(settingsV1).not.toEqual(sampleSettingsV1);
 
         delete settingsV1.version;
         expect(settingsV1).toEqual(sampleSettings);
