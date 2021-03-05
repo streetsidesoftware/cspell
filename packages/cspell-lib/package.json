@@ -6,17 +6,15 @@
   "typings": "dist/index.d.ts",
   "files:comment": "Due to a lerna bug, patterns like `!**/*.map` are not getting recursively honored",
   "files": [
-    "dist/**",
-    "!dist/**/*.test.*",
-    "!dist/**/*.spec.*",
-    "!dist/**/*.map",
+    "dist",
+    "!**/__mocks__",
     "!**/*.test.*",
     "!**/*.spec.*",
     "!**/*.map"
   ],
   "scripts": {
     "clean": "rimraf dist temp coverage",
-    "build": "npm run compile && cp .npmignore dist",
+    "build": "npm run compile",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",

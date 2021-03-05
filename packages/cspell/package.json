@@ -27,16 +27,14 @@
   "files": [
     "bin.js",
     "dist",
-    "!dist/**/*.test.*",
-    "!dist/**/*.spec.*",
-    "!dist/**/*.map",
+    "!**/__mocks__",
     "!**/*.test.*",
     "!**/*.spec.*",
     "!**/*.map"
   ],
   "scripts": {
     "clean": "rimraf dist coverage",
-    "build": "npm run compile && cp .npmignore dist",
+    "build": "npm run compile",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",

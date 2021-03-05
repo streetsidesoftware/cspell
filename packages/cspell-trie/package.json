@@ -9,9 +9,11 @@
   "types": "dist/index.d.ts",
   "files": [
     "bin.js",
-    "dist/**",
-    "!**/*.map",
-    "!**/*.test.*"
+    "dist",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
   ],
   "scripts": {
     "clean": "rimraf dist temp coverage",

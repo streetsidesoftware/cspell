@@ -5,9 +5,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist/**",
-    "!**/*.map",
-    "!**/*.test.*"
+    "dist",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
   ],
   "scripts": {
     "clean": "rimraf dist coverage",

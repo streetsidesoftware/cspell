@@ -5,10 +5,11 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
-    "dist/**",
-    "!**/*.map",
+    "dist",
+    "!**/__mocks__",
     "!**/*.test.*",
-    "!**/temp/**"
+    "!**/*.spec.*",
+    "!**/*.map"
   ],
   "scripts": {
     "build": "tsc -p .",
