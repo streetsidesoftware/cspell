@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.5](https://github.com/streetsidesoftware/cspell/compare/v5.3.4...v5.3.5) (2021-03-05)
+
+
+### Bug Fixes
+
+* adjust order in which files are loaded. ([#1037](https://github.com/streetsidesoftware/cspell/issues/1037)) ([84c7aa1](https://github.com/streetsidesoftware/cspell/commit/84c7aa11323f0453dedb3659550ef7976fb6c4f6))
+
+
+
+
+
 ## [5.3.4](https://github.com/streetsidesoftware/cspell/compare/v5.3.3...v5.3.4) (2021-03-01)
 
 
