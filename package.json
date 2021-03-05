@@ -12,7 +12,7 @@
     "build": "lerna run build",
     "build-schema": "lerna run build-schema",
     "build-integration-tests": "cd ./integration-tests && npm i",
-    "check-spelling": "npx cspell@latest -c cspellrc.json",
+    "check-spelling": "npx cspell -c cspellrc.json",
     "clean-build": "lerna run clean-build",
     "clean": "lerna run clean && rimraf lcov.info",
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
