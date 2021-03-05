@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.7](https://github.com/streetsidesoftware/cspell/compare/v5.3.7-alpha.3...v5.3.7) (2021-03-05)
+
+
+### Bug Fixes
+
+* build issue due to spelling ([#1041](https://github.com/streetsidesoftware/cspell/issues/1041)) ([11cb0c0](https://github.com/streetsidesoftware/cspell/commit/11cb0c0edfa5fcfdf2d07b1031d4c604d4960841))
+
+
+
+
+
 ## [5.3.7-alpha.3](https://github.com/streetsidesoftware/cspell/compare/v5.3.7-alpha.2...v5.3.7-alpha.3) (2021-03-05)
 
 **Note:** Version bump only for package cspell-monorepo
