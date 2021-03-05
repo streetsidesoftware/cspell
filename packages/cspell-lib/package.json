@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "clean": "rimraf dist temp coverage",
-    "build": "npm run compile",
+    "build": "npm run compile && cp .npmignore dist",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
