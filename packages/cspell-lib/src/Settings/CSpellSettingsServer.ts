@@ -561,7 +561,7 @@ function mergeSources(left: CSpellSettings, right: CSpellSettings): Source {
     };
 }
 
-function max<T>(a: undefined, b: undefined): undefined;
+function max(a: undefined, b: undefined): undefined;
 function max<T>(a: T, b: undefined): T;
 function max<T>(a: undefined, b: T): T;
 function max<T>(a: T | undefined, b: T | undefined): T | undefined;
@@ -633,9 +633,6 @@ function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): 
         settings.globRoot ??
         (settings.version === '0.1' || (envGlobRoot && !settings.version) ? defaultGlobRoot : settingsFileDir);
     const globRoot = path.resolve(settingsFileDir, rawRoot.replace('${cwd}', cwd));
-    if (settings.globRoot) return globRoot;
-    if (settingsFileDir.startsWith(globRoot)) return settingsFileDir;
-    if (globRoot.startsWith(settingsFileDir)) return settingsFileDir;
     return globRoot;
 }
 
