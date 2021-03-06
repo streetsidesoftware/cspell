@@ -10,6 +10,7 @@ import {
 } from './textRegex';
 import { SortedQueue } from './SortedQueue';
 import { escapeRegEx } from './regexHelper';
+import { sequenceFromRegExpMatch } from 'gensequence';
 
 const ignoreBreak: readonly number[] = Object.freeze([] as number[]);
 
@@ -175,7 +176,7 @@ function genWordBreakCamel(line: LineSegment): SortedBreaks[] {
     const text = line.line.text.slice(0, line.relEnd);
 
     // lower,Upper: camelCase -> camel|Case
-    for (const m of text.matchAll(offsetRegEx(regExSplitWords, line.relStart))) {
+    for (const m of matchAll(text, offsetRegEx(regExSplitWords, line.relStart))) {
         if (m.index === undefined) break;
         const i = m.index + 1;
         breaksCamel1.push({
@@ -188,7 +189,7 @@ function genWordBreakCamel(line: LineSegment): SortedBreaks[] {
 
     // cspell:ignore ERRORC
     // Upper,Upper,lower: ERRORCodes -> ERROR|Codes, ERRORC|odes
-    for (const m of text.matchAll(offsetRegEx(regExSplitWords2, line.relStart))) {
+    for (const m of matchAll(text, offsetRegEx(regExSplitWords2, line.relStart))) {
         if (m.index === undefined) break;
         const i = m.index + m[1].length;
         const j = i + 1;
@@ -208,7 +209,7 @@ function calcBreaksForRegEx(
 ): SortedBreaks {
     const sb: SortedBreaks = [];
     const text = line.line.text.slice(0, line.relEnd);
-    for (const m of text.matchAll(offsetRegEx(reg, line.relStart))) {
+    for (const m of matchAll(text, offsetRegEx(reg, line.relStart))) {
         const b = calcBreak(m);
         if (b) {
             sb.push(b);
@@ -409,6 +410,28 @@ function mergeSortedBreaks(...maps: SortedBreaks[]): SortedBreaks {
     return ([] as SortedBreaks).concat(...maps).sort((a, b) => a.offset - b.offset);
 }
 
+/**
+ * Returns ALL matches to a RegExp.
+ * Note: this function is only here for compatibility with Node 10.
+ * @param str - the string to match
+ * @param reg - RegExp to match against
+ */
+const matchAll = ''.matchAll !== undefined ? (str: string, reg: RegExp) => str.matchAll(reg) : matchAllNode10;
+
+/**
+ * Returns ALL matches to a RegExp.
+ * Note: this function is only here for compatibility with Node 10.
+ * @param str - the string to match
+ * @param reg - RegExp to match against
+ */
+function* matchAllNode10(str: string, reg: RegExp): IterableIterator<RegExpMatchArray> {
+    for (const m of sequenceFromRegExpMatch(reg, str)) {
+        yield m;
+    }
+}
+
 export const __testing__ = {
     generateWordBreaks,
+    matchAll,
+    matchAllNode10,
 };

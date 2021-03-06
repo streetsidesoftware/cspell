@@ -3,6 +3,8 @@ import { SortedBreaks, split, __testing__ } from './wordSplitter';
 
 const generateWordBreaks = __testing__.generateWordBreaks;
 
+const { matchAll, matchAllNode10 } = __testing__;
+
 const words = sampleWordSet();
 const regHasLetters = /\p{L}/u;
 
@@ -199,6 +201,24 @@ describe('Validate wordSplitter', () => {
     });
 });
 
+describe('Validate matchALL', () => {
+    test.each`
+        text             | regExp
+        ${'hello there'} | ${/ /g}
+        ${'hello there'} | ${/[eo]/g}
+    `('verify that the matchALL results match for "$text" and $regExp', ({ text, regExp }) => {
+        const matchAllResults = [...matchAll(text, regExp)];
+        const matchAllNode10Results = [...matchAllNode10(text, regExp)];
+        const nativeResults = text.matchAll !== undefined ? [...text.matchAll(regExp)] : undefined;
+
+        expect(matchAllNode10Results).toEqual(matchAllResults);
+
+        if (nativeResults !== undefined) {
+            expect(matchAllResults).toEqual(nativeResults);
+        }
+    });
+});
+
 function has({ text }: TextOffset): boolean {
     return text.length < 3 || !regHasLetters.test(text) || words.has(text) || words.has(text.toLowerCase());
 }
@@ -277,7 +297,7 @@ function genAllPossibleResults(text: string, breaks: SortedBreaks): string[] {
 function findLine(doc: string, text: string): TextOffset {
     const index = doc.indexOf(text);
     let lastLine: RegExpMatchArray | undefined = undefined;
-    for (const line of doc.matchAll(/.*/g)) {
+    for (const line of matchAll(doc, /.*/g)) {
         if ((line.index || 0) < index) {
             lastLine = line;
         }

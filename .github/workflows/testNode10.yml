@@ -1,0 +1,37 @@
+# Node 10 testing has been pulled out into its own file because support will go away.
+name: Test Node 10
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          - 10.x
+
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: verify trace command
+        run: node ./bin.js trace test
+
+      - name: verify the spell checker runs
+        run: node ./bin.js -c cspellrc.json
