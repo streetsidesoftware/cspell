@@ -21,7 +21,7 @@ describe('Validate wordSplitter', () => {
         ${'MOVSX_r_rm16'}   | ${['MOVSX', 'r', 'rm']}
         ${'32bit-checksum'} | ${['bit', 'checksum']}
         ${'camelCase'}      | ${['camel', 'Case']}
-    `('Apply word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
+    `('Extract word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
         const line = {
             text,
             offset: 42,
@@ -46,7 +46,7 @@ describe('Validate wordSplitter', () => {
         ${'32bit-checksum'} | ${['bit|checksum']}
         ${'ERRORCode'}      | ${['ERROR|Code']}
         ${'camelCase'}      | ${['camel|Case', 'camelCase']}
-    `('Apply word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
+    `('Extract all possible word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
         const line = {
             text,
             offset: 42,

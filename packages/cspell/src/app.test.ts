@@ -138,12 +138,17 @@ describe('Validate cli', () => {
         const args = argv(...testArgs);
         const result = app.run(commander, args);
         if (!errorCheck) {
+            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).resolves.toBeUndefined();
         } else {
+            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).rejects.toThrowError(errorCheck);
         }
+        // eslint-disable-next-line jest/no-conditional-expect
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+        // eslint-disable-next-line jest/no-conditional-expect
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+        // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
     });
@@ -163,12 +168,17 @@ describe('Validate cli', () => {
         const args = argv(...testArgs);
         const result = app.run(commander, args);
         if (!errorCheck) {
+            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).resolves.toBeUndefined();
         } else {
+            // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).rejects.toThrowError(errorCheck);
         }
+        // eslint-disable-next-line jest/no-conditional-expect
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+        // eslint-disable-next-line jest/no-conditional-expect
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+        // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
     });
