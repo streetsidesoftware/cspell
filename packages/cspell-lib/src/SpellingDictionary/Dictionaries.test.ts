@@ -141,6 +141,7 @@ describe('Validate getDictionary', () => {
         async ({ configFile, expectedErrors }: TestLoadFromConfig) => {
             const settings = await loadConfig(configFile);
             if (!settings) {
+                // eslint-disable-next-line jest/no-conditional-expect
                 expect(settings).toBeDefined();
                 return;
             }

@@ -136,6 +136,7 @@ describe('Validate Glob Normalization to root', () => {
         if (r) {
             const shouldMatch = !file.startsWith('!');
             const filename = file.replace(/!$/, '');
+            // eslint-disable-next-line jest/no-conditional-expect
             expect(mm.isMatch(filename, r)).toBe(shouldMatch);
         }
     });
