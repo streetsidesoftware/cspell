@@ -15,7 +15,7 @@ const packageInfo = require('../package.json');
 const version = packageInfo['version'];
 
 let displayHelp = true;
-let logStream = process.stderr;
+let logStream: NodeJS.WritableStream = process.stderr;
 
 commander.version(version);
 
@@ -183,7 +183,7 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
     const callback = showProgress
         ? () => {
               current++;
-              !(current % reportProgressRate) && process.stderr.write(calcProgress(), 'UTF-8');
+              !(current % reportProgressRate) && process.stderr.write(calcProgress(), 'utf-8');
           }
         : () => {};
     const seqWords = transform ? reader.seqAffWords(callback) : reader.seqRootWords().map(asAffWord);
