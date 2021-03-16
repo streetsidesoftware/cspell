@@ -1,11 +1,7 @@
 {
     "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
-    "import": [
-        "@cspell/dict-de-de/cspell-ext.json"
-    ],
-    "ignoreWords": [
-        "MartinThoma"
-    ],
+    "import": ["@cspell/dict-de-de/cspell-ext.json"],
+    "ignoreWords": ["MartinThoma"],
     "languageSettings": [
         {
             "languageId": "latex",
@@ -31,25 +27,17 @@
                     "description": "Match against all LaTex Macros"
                 }
             ],
-            "ignoreRegExpList": [
-                "LaTexMacrosFunctionNames"
-            ]
+            "ignoreRegExpList": ["LaTexMacrosFunctionNames"]
         }
     ],
     "overrides": [
         {
             "filename": "temp/MartinThoma/LaTeX-examples/**/*.{md,tex}",
-            "dictionaries": [
-                "latex"
-            ],
-            "ignoreRegExpList": [
-                "LaTexMacrosFunctionNames"
-            ]
+            "dictionaries": ["latex"],
+            "ignoreRegExpList": ["LaTexMacrosFunctionNames"]
         },
         {
-            "filename": [
-                "temp/MartinThoma/LaTeX-examples/**/*"
-            ],
+            "filename": ["temp/MartinThoma/LaTeX-examples/**/*"],
             "language": "en,de,lorem-ipsum"
         }
     ]
