@@ -26,44 +26,48 @@ export const defaultFileName = 'cspell.json';
 
 export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
 
+/**
+ * Logic of the locations:
+ * - Support backward compatibility with the VS Code Spell Checker
+ *   the spell checker extension can only write to `.json` files because
+ *   it would be too difficult to automatically modify a `.js` or `.cjs` file.
+ * - To support `cspell.config.js` in a VS Code environment, have a `cspell.json` import
+ *   the `cspell.config.js`.
+ */
+const searchPlaces = [
+    // Original locations
+    '.cspell.json',
+    'cspell.json',
+    '.cSpell.json',
+    'cSpell.json',
+    // Original locations jsonc
+    '.cspell.jsonc',
+    'cspell.jsonc',
+    // Alternate locations
+    '.vscode/cspell.json',
+    '.vscode/cSpell.json',
+    '.vscode/.cspell.json',
+    // Standard Locations
+    'cspell.config.json',
+    'cspell.config.jsonc',
+    'cspell.config.yaml',
+    'cspell.config.yml',
+    'cspell.yaml',
+    'cspell.yml',
+    // Dynamic config is looked for last
+    'cspell.config.js',
+    'cspell.config.cjs',
+];
+
 const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
-    /*
-     * Logic of the locations:
-     * - Support backward compatibility with the VS Code Spell Checker
-     *   the spell checker extension can only write to `.json` files because
-     *   it would be too difficult to automatically modify a `.js` or `.cjs` file.
-     * - To support `cspell.config.js` in a VS Code environment, have a `cspell.json` import
-     *   the `cspell.config.js`.
-     */
-    searchPlaces: [
-        // Original locations
-        '.cspell.json',
-        'cspell.json',
-        '.cSpell.json',
-        'cSpell.json',
-        // Original locations jsonc
-        '.cspell.jsonc',
-        'cspell.jsonc',
-        // Alternate locations
-        '.vscode/cspell.json',
-        '.vscode/cSpell.json',
-        '.vscode/.cspell.json',
-        // Standard Locations
-        'cspell.config.json',
-        'cspell.config.jsonc',
-        'cspell.config.yaml',
-        'cspell.config.yml',
-        'cspell.yaml',
-        'cspell.yml',
-        // Dynamic config is looked for last
-        'cspell.config.js',
-        'cspell.config.cjs',
-    ],
+    searchPlaces,
     loaders: {
         '.json': (_filename: string, content: string) => json.parse(content),
         '.jsonc': (_filename: string, content: string) => json.parse(content),
     },
 };
+
+export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
 
 const cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
 const cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);
