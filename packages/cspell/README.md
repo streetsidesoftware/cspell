@@ -4,7 +4,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=master)](https://coveralls.io/github/streetsidesoftware/cspell?branch=master)
 [![codecov](https://codecov.io/gh/streetsidesoftware/cspell/branch/master/graph/badge.svg?token=Dr4fi2Sy08)](https://codecov.io/gh/streetsidesoftware/cspell)
 
-
 A Spell Checker for Code!
 
 `cspell` is a command line tool and library for spell checking code.
