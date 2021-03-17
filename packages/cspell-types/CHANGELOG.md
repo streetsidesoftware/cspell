@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.8](https://github.com/streetsidesoftware/cspell/compare/v5.3.7...v5.3.8) (2021-03-17)
+
+
+### Bug Fixes
+
+* update schema generator ([#1074](https://github.com/streetsidesoftware/cspell/issues/1074)) ([528b7d0](https://github.com/streetsidesoftware/cspell/commit/528b7d0b67e1f947832de24e7b66c3d7dfd5fb7f))
+
+
+
+
+
 ## [5.3.7](https://github.com/streetsidesoftware/cspell/compare/v5.3.7-alpha.3...v5.3.7) (2021-03-05)
 
 **Note:** Version bump only for package @cspell/cspell-types
