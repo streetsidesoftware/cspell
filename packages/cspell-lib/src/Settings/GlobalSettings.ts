@@ -24,11 +24,15 @@ export function getRawGlobalSettings(): GlobalSettingsWithSource {
 
     try {
         const cfgStore = new ConfigStore(packageName);
-        Object.assign(globalConf, cfgStore.all);
-        globalConf.source = {
-            name,
-            filename: cfgStore.path,
-        };
+        const cfg = cfgStore.all;
+        // Only populate globalConf is there are values.
+        if (cfg && Object.keys(cfg).length) {
+            Object.assign(globalConf, cfg);
+            globalConf.source = {
+                name,
+                filename: cfgStore.path,
+            };
+        }
     } catch (error) {
         logError(error);
     }
