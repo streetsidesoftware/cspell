@@ -33,6 +33,15 @@ describe('Validate GlobalSettings', () => {
         expect(s).toEqual({
             source: {
                 name: 'CSpell Configstore',
+                filename: undefined,
+            },
+        });
+        mockSetData('version', '0.2.0');
+        const s2 = getRawGlobalSettings();
+        expect(s2).toEqual({
+            version: '0.2.0',
+            source: {
+                name: 'CSpell Configstore',
                 filename: path,
             },
         });

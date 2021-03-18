@@ -33,7 +33,7 @@ describe('Validate Link.ts', () => {
         expect(r).toEqual({
             list: [],
             globalSettings: {
-                source: { filename: configFileLocation, name: 'CSpell Configstore' },
+                source: { filename: undefined, name: 'CSpell Configstore' },
             },
         });
         expect(mockSetData).not.toHaveBeenCalled();
