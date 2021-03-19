@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.9](https://github.com/streetsidesoftware/cspell/compare/v5.3.8...v5.3.9) (2021-03-19)
+
+
+### Bug Fixes
+
+* If the global config is not found, do not pretend it was. ([#1079](https://github.com/streetsidesoftware/cspell/issues/1079)) ([fb07679](https://github.com/streetsidesoftware/cspell/commit/fb07679c34e3f5669b54e91b53b4a3d5b5b50bab))
+
+
+
+
+
 ## [5.3.8](https://github.com/streetsidesoftware/cspell/compare/v5.3.7...v5.3.8) (2021-03-17)
 
 
