@@ -1,6 +1,7 @@
 import * as Path from 'path';
 import * as Config from './config';
 import * as fs from 'fs';
+import Chalk from 'chalk';
 import { ShouldCheckOptions, shouldCheckRepo } from './shouldCheckRepo';
 import { Logger } from './types';
 import simpleGit from 'simple-git';
@@ -10,6 +11,9 @@ import { Repository } from './configDef';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
 
+const maxCommitDepth = 1000;
+const minCommitDepth = 10; // To handle race condition with respect to commits.
+
 const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
 export async function addRepository(logger: Logger, url: string): Promise<Repository | undefined> {
@@ -18,6 +22,25 @@ export async function addRepository(logger: Logger, url: string): Promise<Reposi
     }
 
     const httpsUrl = url.replace('git@github.com:', 'https://github.com/');
+
+    try {
+        const repoInfo = fetchRepositoryInfoForRepo(httpsUrl);
+        const { path, url, commit } = await repoInfo;
+        return Config.addRepository(path, url, commit);
+    } catch (e) {
+        logger.error(e);
+        return undefined;
+    }
+}
+
+interface RepositoryInfo {
+    path: string;
+    url: string;
+    commit: string;
+}
+
+export async function fetchRepositoryInfoForRepo(url: string): Promise<RepositoryInfo> {
+    const httpsUrl = url.replace('git@github.com:', 'https://github.com/');
     const relPath = httpsUrl
         .replace(/\.git$/, '')
         .split('/')
@@ -25,32 +48,36 @@ export async function addRepository(logger: Logger, url: string): Promise<Reposi
     const [owner, repo] = relPath;
     const path = relPath.join('/');
 
-    try {
-        const octokit = new Octokit();
-        const r = await octokit.repos.get({ owner, repo });
-        const branch = r.data.default_branch;
+    const octokit = getOctokit();
+    const r = await octokit.repos.get({ owner, repo });
+    const branch = r.data.default_branch;
 
-        const b = await octokit.repos.getBranch({ owner, repo, branch });
+    const b = await octokit.repos.getBranch({ owner, repo, branch });
 
-        return Config.addRepository(path, httpsUrl, b.data.commit.sha || branch);
-    } catch (e) {
-        logger.error(e);
-        return undefined;
-    }
+    return {
+        path,
+        url: httpsUrl,
+        commit: b.data.commit.sha || branch,
+    };
 }
 
 export async function checkoutRepositoryAsync(
     logger: Logger,
     url: string,
     path: string,
-    commit: string | undefined
+    commit: string
 ): Promise<boolean> {
     const { log, error } = logger;
     path = Path.resolve(Path.join(repositoryDir, path));
-    commit = commit || 'master';
     if (!fs.existsSync(path)) {
-        const c = await cloneRepo(logger, url, path, commit === 'master' ? 1 : 1000);
-        if (!c) {
+        try {
+            const repoInfo = await fetchRepositoryInfoForRepo(url);
+            const c = await cloneRepo(logger, url, path, commit === repoInfo.commit ? minCommitDepth : maxCommitDepth);
+            if (!c) {
+                return false;
+            }
+        } catch (e) {
+            error(e);
             return false;
         }
     }
@@ -90,11 +117,32 @@ async function cloneRepo(
 
 export type ListRepositoryOptions = ShouldCheckOptions;
 
-export function listRepositories(options: ListRepositoryOptions): void {
+export async function listRepositories(options: ListRepositoryOptions): Promise<void> {
     const config = Config.readConfig();
-    config.repositories
+    const pValues = config.repositories
         .filter((rep) => shouldCheckRepo(rep, options))
-        .forEach((rep) => {
-            console.log(rep.path);
+        .map(async (rep) => {
+            const info = await fetchRepositoryInfoForRepo(rep.url);
+            return {
+                ...rep,
+                dirty: rep.commit !== info.commit,
+                head: info.commit,
+            };
         });
+
+    const values = await Promise.all(pValues);
+
+    values.forEach((rep) => {
+        if (rep.dirty) {
+            console.log(Chalk.red`${rep.path} *`);
+        } else {
+            console.log(rep.path);
+        }
+    });
+}
+
+function getOctokit(auth?: string | undefined): Octokit {
+    auth = auth || process.env['GITHUB_TOKEN'] || undefined;
+    const options = auth ? { auth } : undefined;
+    return new Octokit(options);
 }
