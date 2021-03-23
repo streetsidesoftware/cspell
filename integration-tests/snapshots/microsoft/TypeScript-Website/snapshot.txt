@@ -3,8 +3,9 @@ Repository: microsoft/TypeScript-Website
 Url: "https://github.com/microsoft/TypeScript-Website.git"
 Args: ["--config=../../../../config/repositories/microsoft/TypeScript-Website/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 701, Issues found: 352 in 113 files
+ CSpell: Files checked: 744, Issues found: 652 in 157 files
  exit code: 1
+./docs/Deprecating a page.md:3:109     - Unknown word (Dont)       -- deleting because [Cool URIs Dont Change](https://www
 ./packages/community-meta/README.md:38:81     - Unknown word (lanaguge)   -- generated), one per lanaguge.
 ./packages/community-meta/scripts/generateRichMeetupData.js:22:13     - Unknown word (Deets)      -- let meetupDeets = []
 ./packages/community-meta/scripts/generateRichMeetupData.js:50:82     - Unknown word (tzid)       -- upcomingEvent.start.tzid)
@@ -14,64 +15,94 @@ Lines:
 ./packages/documentation/copy/en/declaration-files/Publishing.md:27:14     - Unknown word (Vandelay)   -- "author": "Vandelay Industries",
 ./packages/documentation/copy/en/declaration-files/templates/global.d.ts.md:130:57    - Unknown word (Maru)       -- { weight: 5, name: "Maru" };'
 ./packages/documentation/copy/en/get-started/TS for Functional Programmers.md:12:56     - Unknown word (Scripters)  -- written by native JavaScripters. The
-./packages/documentation/copy/en/get-started/TS for the New Programmer.md:179:35    - Unknown word (desctiption) -- any` type -- a quick desctiption, what it is, and why
-./packages/documentation/copy/en/handbook-v1/Basic Types.md:49:29     - Unknown word (Bobbington) -- fullName: string = `Bob Bobbington`;
-./packages/documentation/copy/en/handbook-v1/Functions.md:248:73    - Unknown word (Yehuda)     -- though, first read Yehuda Katz's [Understanding
-./packages/documentation/copy/en/handbook-v1/Functions.md:249:1     - Unknown word (Yehuda's)   -- Yehuda's article explains the
-./packages/documentation/copy/en/handbook-v1/The Handbook.md:48:208    - Unknown word (bazel)      -- closure, lerna, rush, bazel, preact, vue, angular
-./packages/documentation/copy/en/handbook-v1/Unions and Intersections.md:373:39    - Unknown word (Loggable)   -- Person & Serializable & Loggable` is a type which is
-./packages/documentation/copy/en/handbook-v2/Basics.md:311:8     - Unknown word (Maddison)   -- greet("Maddison", Date());
-./packages/documentation/copy/en/handbook-v2/Classes.md:268:12    - Unknown word (langauges)  -- Like other langauges with object-oriented
-./packages/documentation/copy/en/handbook-v2/Classes.md:311:16    - Unknown word (Lowercse)   -- return s.toLowercse() === "ok";
-./packages/documentation/copy/en/handbook-v2/Everyday Types.md:189:36    - Unknown word (Alisson)    -- first: "Alice", last: "Alisson" });
-./packages/documentation/copy/en/handbook-v2/Everyday Types.md:370:360   - Unknown word (Bdyy)       -- JmQmDzI-SOiKgGV+CaYAL0gBBdyy1KCQ-Pn1AFFplgA5enw1PtSWS
-./packages/documentation/copy/en/handbook-v2/Everyday Types.md:372:651   - Unknown word (Dwem)       -- EsBQoAAbvB-gJ4HhPgB5aDwem-Ph1TCV3AEEirTp4ELtRbTPD
-./packages/documentation/copy/en/handbook-v2/Everyday Types.md:372:758   - Unknown word (Ogghxo)     -- lsG3vBggB8XGV3l8-nVISOgghxoLq9i7io-AHsayRWGaFrlFauq
-./packages/documentation/copy/en/handbook-v2/Type Manipulation/Indexed Access Types.md:39:19     - Unknown word (alve)       -- type I1 = Person["alve"];
-./packages/documentation/copy/en/handbook-v2/Type Manipulation/Keyof Type Operator.md:26:6      - Unknown word (Mapish)     -- type Mapish = { [k: string]: boolean
+./packages/documentation/copy/en/get-started/TS for the New Programmer.md:182:35    - Unknown word (desctiption) -- any` type -- a quick desctiption, what it is, and why
+./packages/documentation/copy/en/handbook-v1/Basic Types.md:58:29     - Unknown word (Bobbington) -- fullName: string = `Bob Bobbington`;
+./packages/documentation/copy/en/handbook-v1/Functions.md:250:73    - Unknown word (Yehuda)     -- though, first read Yehuda Katz's [Understanding
+./packages/documentation/copy/en/handbook-v1/Functions.md:251:1     - Unknown word (Yehuda's)   -- Yehuda's article explains the
+./packages/documentation/copy/en/handbook-v1/Unions and Intersections.md:379:39    - Unknown word (Loggable)   -- Person & Serializable & Loggable` is a type which is
+./packages/documentation/copy/en/handbook-v2/Basics.md:316:8     - Unknown word (Maddison)   -- greet("Maddison", Date());
+./packages/documentation/copy/en/handbook-v2/Classes.md:278:12    - Unknown word (langauges)  -- Like other langauges with object-oriented
+./packages/documentation/copy/en/handbook-v2/Classes.md:321:16    - Unknown word (Lowercse)   -- return s.toLowercse() === "ok";
+./packages/documentation/copy/en/handbook-v2/Everyday Types.md:198:36    - Unknown word (Alisson)    -- first: "Alice", last: "Alisson" });
+./packages/documentation/copy/en/handbook-v2/Everyday Types.md:456:684   - Unknown word (Dwem)       -- EsBQoAAbvB-gJ4HhPgB5aDwem-Ph1TCV3AEEirTp4ELtRbTPD
+./packages/documentation/copy/en/handbook-v2/Everyday Types.md:456:791   - Unknown word (Ogghxo)     -- lsG3vBggB8XGV3l8-nVISOgghxoLq9i7io-AHsayRWGaFrlFauq
+./packages/documentation/copy/en/handbook-v2/Everyday Types.md:458:360   - Unknown word (Bdyy)       -- JmQmDzI-SOiKgGV+CaYAL0gBBdyy1KCQ-Pn1AFFplgA5enw1PtSWS
+./packages/documentation/copy/en/handbook-v2/Modules.md:219:67    - Unknown word (esbuild)    -- transpiler like Babel, swc or esbuild to know what imports
+./packages/documentation/copy/en/handbook-v2/Narrowing.md:435:21    - Unknown word (sharkey)    -- if (pet.name === "sharkey") return false;
+./packages/documentation/copy/en/handbook-v2/The Handbook.md:48:208    - Unknown word (bazel)      -- closure, lerna, rush, bazel, preact, vue, angular
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Conditional Types.md:208:6     - Unknown word (Bools)      -- type Bools = GetReturnType<(a:
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Indexed Access Types.md:38:19     - Unknown word (alve)       -- type I1 = Person["alve"];
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Keyof Type Operator.md:25:6      - Unknown word (Mapish)     -- type Mapish = { [k: string]: boolean
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:156:6     - Unknown word (Shouty)     -- type ShoutyGreeting = Uppercase
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:192:6     - Unknown word (Uncapitalize) -- ### `Uncapitalize<StringType>`
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:56:15     - Unknown word (Saoirse)    -- firstName: "Saoirse",
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:57:14     - Unknown word (Ronan)      -- lastName: "Ronan",
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:99:12     - Unknown word (frst)       -- person.on("frstNameChanged", () =>
 ./packages/documentation/copy/en/javascript/JSDoc Reference.md:32:85     - Unknown word (truee)      -- /play?useJavaScript=truee=4#example/jsdoc-support
 ./packages/documentation/copy/en/javascript/JSDoc Reference.md:355:38    - Unknown word (Seriousalizable) -- serious(): string }} Seriousalizable - must have a serious
 ./packages/documentation/copy/en/javascript/JSDoc Reference.md:359:10    - Unknown word (seriousalize)    -- function seriousalize(key, object) {
-./packages/documentation/copy/en/project-config/tsconfig.json.md:100:4     - Unknown word (Deno)       -- - [Deno](https://www.npmjs.com
-./packages/documentation/copy/en/reference/Advanced Types.md:825:102   - Unknown word (otherwords) -- index to an object. In otherwords, `keyof any` is currently
+./packages/documentation/copy/en/project-config/tsconfig.json.md:101:4     - Unknown word (Deno)       -- - [Deno](https://www.npmjs.com
+./packages/documentation/copy/en/reference/Advanced Types.md:865:102   - Unknown word (otherwords) -- index to an object. In otherwords, `keyof any` is currently
 ./packages/documentation/copy/en/reference/Declaration Merging.md:67:11     - Unknown word (Cloner)     -- interface Cloner {
 ./packages/documentation/copy/en/reference/Iterators and Generators.md:90:23     - Unknown word (Scipt)      -- When targeting an ECMAScipt 2015-compliant engine
+./packages/documentation/copy/en/reference/JSX.md:34:10     - Unknown word (jsxdev)     -- | `react-jsxdev` | `<div />` | `_jsxDEV
 ./packages/documentation/copy/en/reference/Mixins.md:127:6     - Unknown word (Positionable) -- type Positionable = GConstructor<{ setPos
-./packages/documentation/copy/en/reference/Mixins.md:223:7     - Unknown word (Pausable)     -- const Pausable = (target: typeof Player
-./packages/documentation/copy/en/release-notes/Overview.md:1072:96   - Unknown word (Cernicova)  -- Kingwl) and [Titian Cernicova Dragomir](https://github
-./packages/documentation/copy/en/release-notes/Overview.md:1617:58   - Unknown word (seperate)   -- issues, you can create a seperate project that targets
-./packages/documentation/copy/en/release-notes/Overview.md:1660:80   - Unknown word (adminstrator) -- incorrectly allows non-adminstrator users to edit the configurati
-./packages/documentation/copy/en/release-notes/Overview.md:1983:7    - Unknown word (𝓱𝓮𝓵𝓵𝓸)   -- const 𝓱𝓮𝓵𝓵𝓸 = "world"; // previously
-./packages/documentation/copy/en/release-notes/Overview.md:2097:42   - Unknown word (Artem)        -- is largely a fork of [Artem Tyurin](https://github
-./packages/documentation/copy/en/release-notes/Overview.md:2097:48   - Unknown word (Tyurin)       -- largely a fork of [Artem Tyurin](https://github.com
-./packages/documentation/copy/en/release-notes/Overview.md:2179:19   - Unknown word (disciminated) -- Previously, a non-disciminated union wouldn't have
-./packages/documentation/copy/en/release-notes/Overview.md:2894:55   - Unknown word (argumnts)     -- ; // error: too few argumnts
-./packages/documentation/copy/en/release-notes/Overview.md:3144:1    - Unknown word (Additionaly)  -- Additionaly, this approach for property
-./packages/documentation/copy/en/release-notes/Overview.md:3170:132  - Unknown word (accomodating) -- features while also accomodating users on the older versions
-./packages/documentation/copy/en/release-notes/Overview.md:3171:68   - Unknown word (accomodate)   -- typesVersions` to help accomodate these scenarios.
-./packages/documentation/copy/en/release-notes/Overview.md:375:72    - Unknown word (comformant) -- this rule to be more comformant.
-./packages/documentation/copy/en/release-notes/Overview.md:378:117   - Unknown word (Zacher)     -- enforcing this from [Brad Zacher](https://github.com
-./packages/documentation/copy/en/release-notes/Overview.md:4657:86   - Unknown word (uncallabale)  -- correctly flagged as uncallabale. Calling it will result
-./packages/documentation/copy/en/release-notes/Overview.md:477:98    - Unknown word (pathurs)    -- ) from GitHub user [pathurs](https://github.com
-./packages/documentation/copy/en/release-notes/Overview.md:4912:52   - Unknown word (может)        -- : Тип ""string"" не может быть назначен для т
-./packages/documentation/copy/en/release-notes/Overview.md:4912:58   - Unknown word (быть)         -- ""string"" не может быть назначен для типа "number
-./packages/documentation/copy/en/release-notes/Overview.md:4912:63   - Unknown word (назначен)     -- string"" не может быть назначен для типа "number".
-./packages/documentation/copy/en/release-notes/Overview.md:4912:76   - Unknown word (типа)         -- т быть назначен для типа "number".
-./packages/documentation/copy/en/release-notes/Overview.md:5259:149  - Unknown word (assignmnets)  -- rest in destructuring assignmnets.
-./packages/documentation/copy/en/release-notes/Overview.md:579:33    - Unknown word (Bearimy)    -- new Person("Jeremy Bearimy");
-./packages/documentation/copy/en/release-notes/Overview.md:6646:63   - Unknown word (knops)        -- additional module resolution knops to _inform_ the compiler
-./packages/documentation/copy/en/release-notes/Overview.md:8300:37   - Unknown word (wilcards)     -- list does not support wilcards. It must simply be a
+./packages/documentation/copy/en/reference/Mixins.md:224:7     - Unknown word (Pausable)     -- const Pausable = (target: typeof Player
+./packages/documentation/copy/en/reference/Type Compatibility.md:48:42     - Unknown word (Weatherwax) -- Lassie", owner: "Rudd Weatherwax" };
+./packages/documentation/copy/en/reference/Utility Types.md:393:263   - Unknown word (uppercasestringtype) -- template-literal-types.html#uppercasestringtype) documentation.
+./packages/documentation/copy/en/reference/Utility Types.md:99:39     - Unknown word (Shorthair)  -- 16, breed: "British Shorthair" },
+./packages/documentation/copy/en/release-notes/Overview.md:1796:72   - Unknown word (comformant)   -- this rule to be more comformant.
+./packages/documentation/copy/en/release-notes/Overview.md:1799:117  - Unknown word (Zacher)       -- enforcing this from [Brad Zacher](https://github.com
+./packages/documentation/copy/en/release-notes/Overview.md:1898:98   - Unknown word (pathurs)      -- ) from GitHub user [pathurs](https://github.com
+./packages/documentation/copy/en/release-notes/Overview.md:2000:33   - Unknown word (Bearimy)      -- new Person("Jeremy Bearimy");
+./packages/documentation/copy/en/release-notes/Overview.md:202:22    - Unknown word (expanation) -- tsc --explainFiles > expanation.txt
+./packages/documentation/copy/en/release-notes/Overview.md:2493:96   - Unknown word (Cernicova)    -- Kingwl) and [Titian Cernicova Dragomir](https://github
+./packages/documentation/copy/en/release-notes/Overview.md:289:160   - Unknown word (unassignable) -- object properties as unassignable to otherwise compatible
+./packages/documentation/copy/en/release-notes/Overview.md:294:14    - Unknown word (Tenenbaums)   -- "The Royal Tenenbaums"?: number;
+./packages/documentation/copy/en/release-notes/Overview.md:3081:80   - Unknown word (adminstrator) -- incorrectly allows non-adminstrator users to edit the configurati
+./packages/documentation/copy/en/release-notes/Overview.md:3404:7    - Unknown word (𝓱𝓮𝓵𝓵𝓸)   -- const 𝓱𝓮𝓵𝓵𝓸 = "world"; // previously
+./packages/documentation/copy/en/release-notes/Overview.md:3518:42   - Unknown word (Artem)        -- is largely a fork of [Artem Tyurin](https://github
+./packages/documentation/copy/en/release-notes/Overview.md:3518:48   - Unknown word (Tyurin)       -- largely a fork of [Artem Tyurin](https://github.com
+./packages/documentation/copy/en/release-notes/Overview.md:3600:19   - Unknown word (disciminated) -- Previously, a non-disciminated union wouldn't have
+./packages/documentation/copy/en/release-notes/Overview.md:4315:55   - Unknown word (argumnts)     -- ; // error: too few argumnts
+./packages/documentation/copy/en/release-notes/Overview.md:4565:1    - Unknown word (Additionaly)  -- Additionaly, this approach for property
+./packages/documentation/copy/en/release-notes/Overview.md:4591:132  - Unknown word (accomodating) -- features while also accomodating users on the older versions
+./packages/documentation/copy/en/release-notes/Overview.md:4592:68   - Unknown word (accomodate)   -- typesVersions` to help accomodate these scenarios.
+./packages/documentation/copy/en/release-notes/Overview.md:511:23    - Unknown word (middel)       -- setVerticalAlignment("middel");
+./packages/documentation/copy/en/release-notes/Overview.md:597:7     - Unknown word (twslash)      -- ```ts twslash
+./packages/documentation/copy/en/release-notes/Overview.md:6078:86   - Unknown word (uncallabale)  -- correctly flagged as uncallabale. Calling it will result
+./packages/documentation/copy/en/release-notes/Overview.md:6333:52   - Unknown word (может)        -- : Тип ""string"" не может быть назначен для т
+./packages/documentation/copy/en/release-notes/Overview.md:6333:58   - Unknown word (быть)         -- ""string"" не может быть назначен для типа "number
+./packages/documentation/copy/en/release-notes/Overview.md:6333:63   - Unknown word (назначен)     -- string"" не может быть назначен для типа "number".
+./packages/documentation/copy/en/release-notes/Overview.md:6333:76   - Unknown word (типа)         -- т быть назначен для типа "number".
+./packages/documentation/copy/en/release-notes/Overview.md:6680:149  - Unknown word (assignmnets)  -- rest in destructuring assignmnets.
+./packages/documentation/copy/en/release-notes/Overview.md:78:49     - Unknown word (Hübotter)   -- external contributor [Jonas Hübotter](https://github.com
+./packages/documentation/copy/en/release-notes/Overview.md:798:32    - Unknown word (Collatz)      -- model numbers in the Collatz conjecture or Fibonacci
+./packages/documentation/copy/en/release-notes/Overview.md:8067:63   - Unknown word (knops)        -- additional module resolution knops to _inform_ the compiler
+./packages/documentation/copy/en/release-notes/Overview.md:865:56    - Unknown word (jsxs)         -- upcoming `jsx` and `jsxs` factory functions through
+./packages/documentation/copy/en/release-notes/Overview.md:9721:37   - Unknown word (wilcards)     -- list does not support wilcards. It must simply be a
 ./packages/documentation/copy/en/release-notes/TypeScript 1.8.md:469:21    - Unknown word (narowing)   -- When used in a type narowing position (e.g. `if`
 ./packages/documentation/copy/en/tutorials/ASP.NET Core.md:92:37     - Unknown word (diaglogue)  -- showing the new file diaglogue with TypeScript JSON
-./packages/documentation/scripts/generateDocsNavigationPerLanguage.js:219:9     - Unknown word (navigations) -- const navigations: Record<string, SidebarNavIte
+./packages/documentation/scripts/generateDocsNavigationPerLanguage.js:205:9     - Unknown word (navigations) -- const navigations: Record<string, SidebarNavIte
 ./packages/documentation/scripts/generateTypesForFilesInDocs.js:24:20     - Unknown word (ortatherox) -- // From:   '/Users/ortatherox/dev/typescript/new-website
 ./packages/gatsby-remark-shiki-twoslash/README.md:36:25     - Unknown word (nord)       -- theme: "nord",
 ./packages/gatsby-remark-shiki-twoslash/README.md:95:44     - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%
 ./packages/gatsby-remark-shiki-twoslash/src/ambient.d.ts:1:17      - Unknown word (unist)      -- declare module 'unist-util-visit'
+./packages/gatsby-remark-shiki-twoslash/src/index.ts:70:9      - Unknown word (shasum)     -- const shasum = createHash("sha1"
+./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:16:19     - Unknown word (SPTWR)      -- "spelltower/": "SPTWR",
+./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:16:4      - Unknown word (spelltower) -- "spelltower/": "SPTWR",
+./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:17:18     - Unknown word (TPSFT)      -- "typeshift/": "TPSFT",
+./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:17:4      - Unknown word (typeshift)  -- "typeshift/": "TPSFT",
 ./packages/gatsby-remark-shiki-twoslash/test/fixtures/simple-interface.md:1:21      - Unknown word (dissapear)  -- ## The { should not dissapear
-./packages/gatsby-remark-shiki-twoslash/test/renderer.test.ts:97:48     - Unknown word (doesnt)     -- results when a theme doesnt have unique tokens for
+./packages/gatsby-remark-shiki-twoslash/test/renderer.test.ts:100:48    - Unknown word (doesnt)     -- results when a theme doesnt have unique tokens for
+./packages/glossary/copy/en/index-signatures.md:18:3      - Unknown word (taniguchi)  -- taniguchi: 0.6782344919;
+./packages/glossary/copy/en/index-signatures.md:19:3      - Unknown word (raabe)      -- raabe: 0.9189385332;
+./packages/glossary/copy/en/shape.md:10:10     - Unknown word (Shibden)    -- name: "Shibden hall",
+./packages/glossary/copy/en/type-system.md:17:13     - Unknown word (Maplewood)  -- address: "Maplewood",
 ./packages/playground-examples/copy/en/3-8/Syntax and Messaging/Private Class Fields.ts:55:17     - Unknown word (Cherny)     -- oby["_name"] = "Cherny";
-./packages/playground-examples/copy/en/4-0/New TS Features/Named Tuples.ts:5:37      - Unknown word (Tuple's)    -- TypeScript 3.9, the type of a Tuple's gained the ability to
+./packages/playground-examples/copy/en/4-0/New TS Features/Named Tuples.ts:5:37      - Unknown word (Tuple's)    -- TypeScript 4.0, the type of a Tuple's gained the ability to
+./packages/playground-examples/copy/en/4-1/Template Literals/String Manipulation with Template Literals.ts:78:41     - Unknown word (splitted)   -- once to get all the .'s splitted
+./packages/playground-examples/copy/en/4-1/Template Literals/String Manipulation with Template Literals.ts:84:40     - Unknown word (Vanderkam)  -- route extractor by Dan Vanderkam
 ./packages/playground-examples/copy/en/JavaScript/External APIs/TypeScript with React.tsx:94:17     - Unknown word (Cersei)     -- let username = "Cersei"
 ./packages/playground-examples/copy/en/JavaScript/External APIs/TypeScript with WebGL.js:51:11     - Unknown word (lowp)       -- precision lowp float;
 ./packages/playground-examples/copy/en/JavaScript/JavaScript Essentials/Objects and Arrays.ts:7:10      - Unknown word (Kieron)     -- name: "Kieron",
@@ -83,77 +114,199 @@ Lines:
 ./packages/playground-examples/copy/en/TypeScript/Primitives/Unknown and Never.ts:106:15    - Unknown word (Bellis)     -- return "Bellis perennis";
 ./packages/playground-examples/copy/en/TypeScript/Type Primitives/Tuples.ts:42:19     - Unknown word (adankwo)    -- [0, "Adankwo", "adankwo.e@"],
 ./packages/playground-examples/copy/en/TypeScript/Type Primitives/Tuples.ts:42:8      - Unknown word (Adankwo)    -- [0, "Adankwo", "adankwo.e@"],
-./packages/playground/src/ds/createDesignSystem.ts:315:15    - Unknown word (childers)   -- const childers = document.createElement
-./packages/playground/src/exporter.ts:210:17    - Unknown word (𝗦𝗧𝗢𝗣)   -- <!-- 🚨 STOP 🚨 𝗦𝗧𝗢𝗣 🚨 𝑺𝑻𝑶𝑷 🚨
-./packages/playground/src/exporter.ts:210:29    - Unknown word (𝑺𝑻𝑶𝑷)   -- STOP 🚨 𝗦𝗧𝗢𝗣 🚨 𝑺𝑻𝑶𝑷 🚨
-./packages/playground/src/exporter.ts:255:42    - Unknown word (drpdown)    -- getElementById("exports-drpdown")!,
+./packages/playground/src/createUI.ts:87:25     - Unknown word (screenreader) -- // works with every screenreader and browser combination
+./packages/playground/src/ds/createDesignSystem.ts:329:15    - Unknown word (childers)   -- const childers = document.createElement
+./packages/sandbox/script/downloadReleases.js:15:23     - Unknown word (prereleases) -- // Look through the prereleases to see if the beta and
 ./packages/sandbox/src/tsWorker.ts:44:5      - Unknown word (postion)    -- postion: number,
 ./packages/sandbox/src/tsWorker.ts:50:5      - Unknown word (positon)    -- positon: number,
 ./packages/sandbox/src/vendor/lzstring.min.js:6:28      - Unknown word (Hocevar)    -- Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+./packages/shiki-twoslash/README.md:16:131    - Unknown word (nextjs)     -- using Remark (11ty, nextjs, )
+./packages/shiki-twoslash/README.md:40:54     - Unknown word (Shiki's)    -- is an intersection of Shiki's [`HighlighterOptions
+./packages/shiki-twoslash/src/parseCodeFenceInfo.ts:162:22    - Unknown word (Highlightable) -- export const shouldBeHighlightable = (meta: any) => {
+./packages/shiki-twoslash/test/parseCodeFenceInfo.test.ts:32:25     - Unknown word (highlightable) -- correctly says it's highlightable", () => {
 ./packages/ts-twoslasher/README.md:382:16    - Unknown word (unneccessary) -- #### `cuts_out_unneccessary_code.ts`
 ./packages/ts-twoslasher/scripts/makeGlobals.js:3:29      - Unknown word (tstwoslash) -- Creates a web version of tstwoslash which sets a global
-./packages/ts-twoslasher/src/index.ts:435:11    - Unknown word (lsped)      -- const lspedQueries = updates.queries
-./packages/tsconfig-reference/copy/en/options/disableSourceOfProjectReferenceRedirect.md:3:87      - Unknown word (boundries)  -- between composite project boundries"
+./packages/ts-twoslasher/src/index.ts:455:11    - Unknown word (lsped)      -- const lspedQueries = updates.queries
+./packages/tsconfig-reference/copy/en/options/downlevelIteration.md:3:53      - Unknown word (performant) -- but verbose and less performant JavaScript for iteration
 ./packages/tsconfig-reference/copy/en/options/preserveSymlinks.md:8:50      - Unknown word (Webpack’s)  -- opposite behavior to Webpack’s `resolve.symlinks` option
 ./packages/tsconfig-reference/copy/en/options/sourceMap.md:37:28     - Unknown word (UAAU)       -- mappings": ";;AAAa,QAAA,UAAU,GAAG,IAAI,CAAA"
 ./packages/tsconfig-reference/scripts/types.ts:30:11     - Unknown word (Compatability) -- elidedInCompatabilityPyramid?: boolean;
 ./packages/typescript-vfs/test/fsbacked.test.ts:26:53     - Unknown word (Compone)    -- from "react"\nReact.Compone`
-./packages/typescriptlang-org/gatsby-browser.js:15:37     - Unknown word (aisdk)      -- window[sdkInstance], aisdk = window[aiName] ||
+./packages/typescriptlang-org/gatsby-browser.js:13:54     - Unknown word (kyel)       -- clarity", "script", "3w5kyel345");
+./packages/typescriptlang-org/gatsby-browser.js:30:39     - Unknown word (aisdk)      -- window[sdkInstance], aisdk = window[aiName] ||
+./packages/typescriptlang-org/gatsby-ssr.js:33:88     - Unknown word (cascadia)   -- getItem("force-font") || "cascadia"
+./packages/typescriptlang-org/lib/bootup/pathsOnSiteTracker.ts:17:21     - Unknown word (bootstapping) -- // Generated during bootstapping via pathsOnSiteTracker
 ./packages/typescriptlang-org/lib/themes/themeGen.js:22:8      - Unknown word (Burgendy)   -- lightBurgendyAAA: "#A31515",
 ./packages/typescriptlang-org/lib/themes/themeGen.js:23:3      - Unknown word (burgendy)   -- burgendyAAA: "#811f3f",
-./packages/typescriptlang-org/lib/themes/themeGen.js:686:27    - Unknown word (alignof)    -- "keyword.operator.alignof",
-./packages/typescriptlang-org/lib/themes/themeGen.js:688:27    - Unknown word (alignas)    -- "keyword.operator.alignas",
+./packages/typescriptlang-org/lib/themes/themeGen.js:345:27    - Unknown word (alignof)    -- "keyword.operator.alignof",
+./packages/typescriptlang-org/lib/themes/themeGen.js:347:27    - Unknown word (alignas)    -- "keyword.operator.alignas",
 ./packages/typescriptlang-org/scripts/createLighthouseJSON.js:26:57     - Unknown word (vercel)     -- v2-" + prNumber + ".vercel.app/docs/handbook/advanced
+./packages/typescriptlang-org/scripts/pingTeamsWithAppInsightData.js:180:30    - Unknown word (dcount)     -- make-series Sessions = dcount(session_Id) default
 ./packages/typescriptlang-org/src/components/display/GreyButton.tsx:20:21     - Unknown word (clicky)     -- const classes = ["clicky-grey-button"]
 ./packages/typescriptlang-org/src/components/index/MigrationStories.tsx:136:12    - Unknown word (Rodoslav)   -- <p>Rodoslav Kirov and Bowen Ni covered
 ./packages/typescriptlang-org/src/components/index/MigrationStories.tsx:262:14    - Unknown word (Vercel)     -- <p>Vercel</p>
 ./packages/typescriptlang-org/src/components/index/MigrationStories.tsx:95:55     - Unknown word (Hawaiʻi)    -- gave a talk at JSConf Hawaiʻi on how Airbnb adopted
-./packages/typescriptlang-org/src/components/layout/fonts.scss:2:17      - Unknown word (Cascadia)   -- font-family: "Cascadia Mono-SemiLight";
-./packages/typescriptlang-org/src/components/layout/fonts.scss:466:17    - Unknown word (Nirmala)    -- font-family: "Nirmala UI", "Segoe UI", -apple
-./packages/typescriptlang-org/src/components/layout/fonts.scss:487:57    - Unknown word (Pgothic)    -- Meiryo UI", Meiryo, "MS Pgothic", Osaka,
-./packages/typescriptlang-org/src/components/layout/fonts.scss:502:17    - Unknown word (Malgun)     -- font-family: "Malgun Gothic", Gulim, "Segoe
-./packages/typescriptlang-org/src/components/layout/fonts.scss:509:50    - Unknown word (Champa)     -- UI Web", "Lao UI", DokChampa, "Segoe UI",
-./packages/typescriptlang-org/src/components/layout/fonts.scss:558:38    - Unknown word (Kmer)       -- Leelawadee UI Web", "Kmer UI", "Segoe UI", -apple
-./packages/typescriptlang-org/src/components/layout/fonts.scss:593:41    - Unknown word (Pmingliu)   -- Microsoft Jhenghei UI", Pmingliu, "Segoe UI", -apple
-./packages/typescriptlang-org/src/components/layout/fonts.scss:597:7     - Unknown word (selawik)    -- body--selawik {
-./packages/typescriptlang-org/src/components/layout/fonts.scss:598:17    - Unknown word (Selawik)    -- font-family: "Selawik Web", "Segoe UI", -apple
-./packages/typescriptlang-org/src/components/layout/fonts.scss:9:17      - Unknown word (Leelawadee) -- font-family: "Leelawadee UI Web";
+./packages/typescriptlang-org/src/components/layout/fonts.scss:522:17    - Unknown word (Nirmala)    -- font-family: "Nirmala UI", "Segoe UI", -apple
+./packages/typescriptlang-org/src/components/layout/fonts.scss:558:17    - Unknown word (Malgun)     -- font-family: "Malgun Gothic", Gulim, "Segoe
+./packages/typescriptlang-org/src/components/layout/fonts.scss:565:50    - Unknown word (Champa)     -- UI Web", "Lao UI", DokChampa, "Segoe UI",
+./packages/typescriptlang-org/src/components/layout/fonts.scss:5:17      - Unknown word (Cascadia)   -- font-family: "Cascadia Mono-SemiLight";
+./packages/typescriptlang-org/src/components/layout/fonts.scss:614:38    - Unknown word (Kmer)       -- Leelawadee UI Web", "Kmer UI", "Segoe UI", -apple
+./packages/typescriptlang-org/src/components/layout/fonts.scss:649:41    - Unknown word (Pmingliu)   -- Microsoft Jhenghei UI", Pmingliu, "Segoe UI", -apple
+./packages/typescriptlang-org/src/components/layout/fonts.scss:65:17     - Unknown word (Leelawadee) -- font-family: "Leelawadee UI Web";
+./packages/typescriptlang-org/src/components/layout/main.scss:104:11    - Unknown word (jetbrains)  -- html.font-jetbrains-mono {
 ./packages/typescriptlang-org/src/components/search/ResultRow.scss:185:36    - Unknown word (Konqueror)  -- user-select: none; /* Konqueror HTML */
 ./packages/typescriptlang-org/src/components/search/types.ts:38:10     - Unknown word (zeekay)     -- name: "zeekay"
 ./packages/typescriptlang-org/src/components/search/useSearchResult.ts:61:32     - Unknown word (OFCNCOG)    -- algolia-application-id": "OFCNCOG2CU",
 ./packages/typescriptlang-org/src/components/workbench/plugins/docs.ts:110:18    - Unknown word (disply)     -- { id: "lunch", disply: "Lunch" },
 ./packages/typescriptlang-org/src/copy/en/documentation.ts:24:16     - Unknown word (oclif)      -- doc_node_npm_oclif_blurb: "Create command
 ./packages/typescriptlang-org/src/copy/en/dt.ts:7:8       - Unknown word (matchs)     -- dt_s_matchs: "matches",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1532:45   - Unknown word (criar)      -- tutorial para entender como criar um pequeno site com
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1532:54   - Unknown word (pequeno)    -- entender como criar um pequeno site com TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1619:19   - Unknown word (Decoradores) -- title: "Decoradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1620:17   - Unknown word (decoradores) -- id: "2decoradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1622:21   - Unknown word (Visão)       -- oneline: "Visão geral dos Decoradores
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1655:19   - Unknown word (Resolução)   -- title: "Resolução de módulos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1655:32   - Unknown word (módulos)     -- title: "Resolução de módulos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1656:17   - Unknown word (resolução)   -- id: "2resolução-de-módulos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1677:21   - Unknown word (Usando)      -- oneline: "Usando o símbolo primitivo
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1677:38   - Unknown word (primitivo)   -- oneline: "Usando o símbolo primitivo do JavaScript no TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1738:17   - Unknown word (usando)      -- id: "3usando-babel-com-typescript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1740:43   - Unknown word (híbrido)     -- Como criar um projeto híbrido com Babel + TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2039:31   - Unknown word (utilizando)  -- title: "Projetos JS utilizando TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2043:19   - Unknown word (adicionar)   -- "Como adicionar verificação de tipo
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2043:29   - Unknown word (verificação) -- "Como adicionar verificação de tipo a arquivos JavaScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2043:51   - Unknown word (arquivos)    -- verificação de tipo a arquivos JavaScript usando TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2077:21   - Unknown word (Aprenda)     -- oneline: "Aprenda sobre como o TSConfig
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2117:19   - Unknown word (Compilação)  -- title: "Compilação Noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2117:30   - Unknown word (Noturna)     -- title: "Compilação Noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2118:17   - Unknown word (compilação)  -- id: "7compilação-noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2118:28   - Unknown word (noturna)     -- id: "7compilação-noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2120:26   - Unknown word (usar)        -- oneline: "Como usar uma compilação noturna
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2286:47   - Unknown word (cript)       -- on3 in learning 7ype5cript: The basics types."
-./packages/typescriptlang-org/src/templates/markdown-twoslash.scss:189:206   - Unknown word (Ccircle)    -- D%22%236c6c6c%22%3E%3Ccircle%20cx%3D%221%22%20cy
-./packages/typescriptlang-org/src/templates/pages/community.tsx:103:35    - Unknown word (deftyped)   -- <a aria-labelledby="deftyped-header" className="icon
-./packages/typescriptlang-org/src/templates/pages/index.scss:460:78    - Unknown word (abosolute)  -- maybe the position abosolute?
-./packages/typescriptlang-org/src/templates/pages/index.scss:49:32     - Unknown word (doens't)    -- Doesn't show because it doens't have a way to generate
-./packages/typescriptlang-org/src/templates/pages/index.tsx:145:59    - Unknown word (Anders)     -- 2019<br /><span>By Anders Hejlsberg</span></p
-./packages/typescriptlang-org/src/templates/pages/index.tsx:145:66    - Unknown word (Hejlsberg)  -- br /><span>By Anders Hejlsberg</span></p>
-./packages/typescriptlang-org/src/templates/pages/why-create-typescript.tsx:168:71    - Unknown word (behaviour)  -- file can affect the behaviour of any number of other
+./packages/typescriptlang-org/src/copy/en/playground.ts:48:15     - Unknown word (bugworkbench) -- play_export_bugworkbench: "Open in Bug Workbench
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1013:19   - Unknown word (Manipulasi)  -- title: "Manipulasi DOM",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1014:18   - Unknown word (manipulasi)  -- id: "3-manipulasi-dom",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1026:18   - Unknown word (menggunakan) -- id: "3-menggunakan-babel-dengan-typescript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1028:34   - Unknown word (proyek)      -- oneline: "Cara membuat proyek hybrid Babel + TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1339:19   - Unknown word (Memanfaatkan) -- title: "Memanfaatkan Typescript pada Proyek
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1339:43   - Unknown word (pada)         -- Memanfaatkan Typescript pada Proyek JS",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1339:48   - Unknown word (Proyek)       -- Memanfaatkan Typescript pada Proyek JS",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1340:18   - Unknown word (memanfaatkan) -- id: "6-memanfaatkan-typescript-pada-proyek
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1343:19   - Unknown word (menambahkan)  -- "Cara menambahkan pemeriksaan tipe data
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1343:31   - Unknown word (pemeriksaan)  -- "Cara menambahkan pemeriksaan tipe data pada berkas
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1343:43   - Unknown word (tipe)         -- menambahkan pemeriksaan tipe data pada berkas JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1343:58   - Unknown word (berkas)       -- pemeriksaan tipe data pada berkas JavaScript menggunakan
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1353:19   - Unknown word (Referensi)    -- title: "Referensi JSDoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1354:18   - Unknown word (referensi)    -- id: "6-referensi-jsdoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1356:36   - Unknown word (didukung)     -- oneline: "JSDoc apa yang didukung JavaScript dan TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1359:19   - Unknown word (Membuat)      -- title: "Membuat Berkas .d.ts dari berkas
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1359:27   - Unknown word (Berkas)       -- title: "Membuat Berkas .d.ts dari berkas .js
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1359:40   - Unknown word (dari)         -- Membuat Berkas .d.ts dari berkas .js",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1362:48   - Unknown word (hasil)        -- Bagaimana cara menambahkan hasil d.ts ke proyek JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1411:19   - Unknown word (Mengkonfigurasi) -- title: "Mengkonfigurasi Watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1412:18   - Unknown word (mengkonfigurasi) -- id: "7-mengkonfigurasi-watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3562:45   - Unknown word (criar)           -- tutorial para entender como criar um pequeno site com
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3562:54   - Unknown word (pequeno)         -- entender como criar um pequeno site com TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3692:19   - Unknown word (Tipos)           -- title: "Tipos Utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3692:25   - Unknown word (Utilitários)     -- title: "Tipos Utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3693:18   - Unknown word (tipos)           -- id: "2-tipos-utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3693:24   - Unknown word (utilitários)     -- id: "2-tipos-utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3695:35   - Unknown word (inclusos)        -- oneline: "Tipos que são inclusos globalmente em TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3695:44   - Unknown word (globalmente)     -- Tipos que são inclusos globalmente em TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3698:19   - Unknown word (Decoradores)     -- title: "Decoradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3699:18   - Unknown word (decoradores)     -- id: "2-decoradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3701:21   - Unknown word (Visão)           -- oneline: "Visão geral dos Decoradores
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3704:19   - Unknown word (Fusão)           -- title: "Fusão de Declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3704:28   - Unknown word (Declarações)     -- title: "Fusão de Declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3705:18   - Unknown word (fusão)           -- id: "2-fusão-de-declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3705:27   - Unknown word (declarações)     -- id: "2-fusão-de-declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3716:19   - Unknown word (Iteradores)      -- title: "Iteradores e Geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3716:32   - Unknown word (Geradores)       -- title: "Iteradores e Geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3717:18   - Unknown word (iteradores)      -- id: "2-iteradores-e-geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3717:31   - Unknown word (geradores)       -- id: "2-iteradores-e-geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3725:21   - Unknown word (Utilizando)      -- oneline: "Utilizando JSX com TypeScript"
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3731:21   - Unknown word (Usando)          -- oneline: "Usando o padrão Mixin com TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3731:30   - Unknown word (padrão)          -- oneline: "Usando o padrão Mixin com TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3737:26   - Unknown word (módulos)         -- oneline: "Como módulos funcionam no TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3740:19   - Unknown word (Resolução)       -- title: "Resolução de módulos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3741:18   - Unknown word (resolução)       -- id: "2-resolução-de-módulos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3752:32   - Unknown word (Módulos)         -- title: "Namespaces e Módulos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3756:19   - Unknown word (organizar)       -- "Como organizar o código em TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3756:31   - Unknown word (código)          -- "Como organizar o código em TypeScript atrav
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3756:52   - Unknown word (através)         -- código em TypeScript através de módulos ou namespaces
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3762:38   - Unknown word (primitivo)       -- oneline: "Usando o símbolo primitivo do JavaScript no TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3765:19   - Unknown word (Diretivas)       -- title: "Diretivas de barra tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3765:32   - Unknown word (barra)           -- title: "Diretivas de barra tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3765:38   - Unknown word (tripla)          -- "Diretivas de barra tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3766:18   - Unknown word (diretivas)       -- id: "2-diretivas-de-barra-tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3768:26   - Unknown word (usar)            -- oneline: "Como usar diretivas de barra tripla
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3771:19   - Unknown word (Compatibilidade) -- title: "Compatibilidade de Tipos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3772:18   - Unknown word (compatibilidade) -- id: "2-compatibilidade-de-tipos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3774:26   - Unknown word (checagem)        -- oneline: "Como checagem de tipos funciona em
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3777:19   - Unknown word (Inferência)      -- title: "Inferência de Tipo",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3778:18   - Unknown word (inferência)      -- id: "2-inferência-de-tipo",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3780:28   - Unknown word (analise)         -- oneline: "Como a analise do fluxo de código funciona
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3780:39   - Unknown word (fluxo)           -- "Como a analise do fluxo de código funciona em
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3783:34   - Unknown word (variáveis)       -- title: "Declarações de variáveis",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3786:37   - Unknown word (lida)            -- oneline: "Como TypeScript lida com declarações de vari
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3810:19   - Unknown word (Manipulação)     -- title: "Manipulação do DOM",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3811:18   - Unknown word (manipulação)     -- id: "3-manipulação-do-dom",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3812:41   - Unknown word (manipulacao)     -- "/pt/docs/handbook/manipulacao-dom.html",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3823:18   - Unknown word (usando)          -- id: "3-usando-babel-com-typescript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3825:43   - Unknown word (híbrido)         -- Como criar um projeto híbrido com Babel + TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4136:31   - Unknown word (utilizando)      -- title: "Projetos JS utilizando TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4140:19   - Unknown word (adicionar)       -- "Como adicionar verificação de tipo
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4140:29   - Unknown word (verificação)     -- "Como adicionar verificação de tipo a arquivos JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4140:51   - Unknown word (arquivos)        -- verificação de tipo a arquivos JavaScript usando TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4143:19   - Unknown word (Checando)        -- title: "Checando tipos de arquivos JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4144:18   - Unknown word (checando)        -- id: "6-checando-tipos-de-arquivos-javascript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4150:19   - Unknown word (Referência)      -- title: "Referência JSDoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4151:18   - Unknown word (referência)      -- id: "6-referência-jsdoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4153:44   - Unknown word (baseado)         -- Quais JSDoc Javascript baseado em Typescript suporta
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4153:66   - Unknown word (suporta)         -- baseado em Typescript suporta?",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4156:19   - Unknown word (Criação)         -- title: "Criação de arquivos .d.ts a
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4156:47   - Unknown word (partir)          -- de arquivos .d.ts a partir de arquivos .js",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4157:18   - Unknown word (criação)         -- id: "6-criação-de-arquivos-.d.ts-a
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4159:36   - Unknown word (geração)         -- oneline: "Como adicionar geração d.ts a projetos JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4174:21   - Unknown word (Aprenda)         -- oneline: "Aprenda sobre como o TSConfig
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4199:26   - Unknown word (dividir)         -- oneline: "Como dividir um projeto Typescript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4208:19   - Unknown word (Configurando)    -- title: "Configurando Watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4209:18   - Unknown word (configurando)    -- id: "7-configurando-watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4211:26   - Unknown word (configurar)      -- oneline: "Como configurar o modo de observação
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4211:47   - Unknown word (observação)      -- configurar o modo de observação do Typescript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4214:19   - Unknown word (Compilação)      -- title: "Compilação Noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4214:30   - Unknown word (Noturna)         -- title: "Compilação Noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4215:18   - Unknown word (compilação)      -- id: "7-compilação-noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4215:29   - Unknown word (noturna)         -- id: "7-compilação-noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:761:38    - Unknown word (dalam)      -- "TypeScript Tooling dalam 5 menit",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:761:46    - Unknown word (menit)      -- TypeScript Tooling dalam 5 menit",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:765:14    - Unknown word (Sebuah)     -- "Sebuah tutorial untuk memahami
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:765:30    - Unknown word (untuk)      -- "Sebuah tutorial untuk memahami cara membuat
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:765:36    - Unknown word (memahami)   -- Sebuah tutorial untuk memahami cara membuat situs web
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:765:50    - Unknown word (membuat)    -- untuk memahami cara membuat situs web kecil dengan
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:765:68    - Unknown word (kecil)      -- cara membuat situs web kecil dengan TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:765:74    - Unknown word (dengan)     -- membuat situs web kecil dengan TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:904:21    - Unknown word (Ringkasan)  -- oneline: "Ringkasan Dekorator TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:904:31    - Unknown word (Dekorator)  -- oneline: "Ringkasan Dekorator TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:922:21    - Unknown word (Bagaimana)  -- oneline: "Bagaimana Iterator dan Generator
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:922:54    - Unknown word (bekerja)    -- Iterator dan Generator bekerja di TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:928:21    - Unknown word (Menggunakan) -- oneline: "Menggunakan JSX dengan TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:965:33    - Unknown word (Simbol)      -- oneline: "Menggunakan Simbol JavaScript primitif
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:965:51    - Unknown word (primitif)    -- Menggunakan Simbol JavaScript primitif di TypeScript",
+./packages/typescriptlang-org/src/pages/dev/dev.scss:41:10     - Unknown word (fivehundred) -- .split-fivehundred {
+./packages/typescriptlang-org/src/templates/glossary.scss:4:17      - Unknown word (quicklinks) -- ul.filterable-quicklinks {
+./packages/typescriptlang-org/src/templates/markdown-twoslash.scss:221:206   - Unknown word (Ccircle)    -- D%22%236c6c6c%22%3E%3Ccircle%20cx%3D%221%22%20cy
+./packages/typescriptlang-org/src/templates/pages/community.tsx:101:35    - Unknown word (deftyped)   -- <a aria-labelledby="deftyped-header" className="icon
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:1077   - Unknown word (keygrip)    -- react-native, async, keygrip, koa, accepts, sinon
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:1230   - Unknown word (cookiejar)  -- geojson, invariant, cookiejar, react-color, qs, bytebuffer
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:1258   - Unknown word (bytebuffer) -- cookiejar, react-color, qs, bytebuffer, graphql-upload, eslint
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:1486   - Unknown word (bson)       -- prettier, rimraf, is-glob, bson, faker, puppeteer, yup
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:1692   - Unknown word (npmlog)     -- chart.js, object-hash, npmlog, mongoose, googlemaps
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:1710   - Unknown word (googlemaps) -- hash, npmlog, mongoose, googlemaps, pg, mime-types, d3
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:2180   - Unknown word (domhandler) -- d3-color, d3-format, domhandler, acorn, sax, tunnel
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:2273   - Unknown word (relateurl)  -- @hapi/joi, d3-axis, relateurl, chai-as-promised, d
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:2467   - Unknown word (voronoi)    -- -timer, d3-zoom, d3-voronoi, d3-drag, d3-force,
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:2545   - Unknown word (quadtree)   -- brush, d3-random, d3-quadtree, d3-chord, d3-polygon
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:2739   - Unknown word (argparse)   -- decode, isomorphic-fetch, argparse, got, joi, hammerjs
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:2769   - Unknown word (shallowequal) -- got, joi, hammerjs, shallowequal, recompose, jsdom, atob
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:2976   - Unknown word (sprintf)      -- scale-chromatic, vinyl, sprintf, node-int64, jest-specific
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3028   - Unknown word (tryer)        -- specific-snapshot, humps, tryer, istanbul-lib-source
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3103   - Unknown word (optipng)      -- externals, imagemin-optipng, filewriter, write,
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3112   - Unknown word (filewriter)   -- externals, imagemin-optipng, filewriter, write, parallel-transform
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3250   - Unknown word (osenv)        -- filesystem, json2csv, osenv, postcss-modules-extract
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3329   - Unknown word (gifsicle)     -- log-level, imagemin-gifsicle, eslint-plugin-prettier
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3370   - Unknown word (libphonenumber) -- plugin-prettier, google-libphonenumber, postcss-modules-local
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3477   - Unknown word (bser)           -- raf, react-responsive, bser, material-ui, css, koa
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3511   - Unknown word (watchpack)      -- material-ui, css, koa-send, watchpack, update-notifier, react
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:553    - Unknown word (caseless)   -- unist, source-list-map, caseless, tapable, webpack, estree
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:563    - Unknown word (tapable)    -- list-map, caseless, tapable, webpack, estree, jasmine
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:581    - Unknown word (estree)     -- caseless, tapable, webpack, estree, jasmine, webpack-env
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:766    - Unknown word (anymatch)   -- zen-observable, chai, anymatch, jquery, semver, debug
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:918    - Unknown word (jasminewd)  -- json5, node-fetch, jasminewd2, cheerio, is-function
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:967    - Unknown word (autosize)   -- function, react-textarea-autosize, cors, duplexify, @testing
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:983    - Unknown word (duplexify)  -- textarea-autosize, cors, duplexify, @testing-library/react
+./packages/typescriptlang-org/src/templates/pages/index.scss:481:78    - Unknown word (abosolute)  -- maybe the position abosolute?
+./packages/typescriptlang-org/src/templates/pages/index.scss:70:32     - Unknown word (doens't)    -- Doesn't show because it doens't have a way to generate
+./packages/typescriptlang-org/src/templates/pages/index.tsx:144:59    - Unknown word (Anders)     -- 2019<br /><span>By Anders Hejlsberg</span></p
+./packages/typescriptlang-org/src/templates/pages/index.tsx:144:66    - Unknown word (Hejlsberg)  -- br /><span>By Anders Hejlsberg</span></p>
+./packages/typescriptlang-org/src/templates/pages/why-create-typescript.tsx:165:71    - Unknown word (behaviour)  -- file can affect the behaviour of any number of other
 ./packages/typescriptlang-org/static/License.html:10:8      - Unknown word (panose)     -- panose-1:5 0 0 0 0 0 0 0 0
 ./packages/typescriptlang-org/static/License.html:807:16    - Unknown word (WINEXTERNAL) -- p.LIMPAT4WINEXTERNAL, li.LIMPAT4WINEXTERNAL
 ./packages/typescriptlang-org/static/js/docsearch.js:2:16164   - Unknown word (Zepto)      -- function(window){var Zepto=function(){var undefined
@@ -169,3 +322,4 @@ Lines:
 ./packages/typescriptlang-org/static/js/docsearch.js:2:75638   - Unknown word (algoliasearch)    -- webpack_require__(8)("algoliasearch");var clone=__webpack
 ./packages/typescriptlang-org/static/js/docsearch.js:2:76700   - Unknown word (algolianet)       -- pplicationID+"-"+hostNumber+".algolianet.com"});var mainSuffix
 ./packages/typescriptlang-org/static/js/vs.loader.js:25:743    - Unknown word (Annonymous) -- new Map,this._currentAnnonymousDefineCall=null,this
+./watcher.js:176:40    - Unknown word (afplay)     -- (path, volume) => `afplay \"${path}\" -v ${volume
