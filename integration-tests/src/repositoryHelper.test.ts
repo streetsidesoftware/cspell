@@ -10,7 +10,17 @@ const defaultTimeout = 60000;
 
 jest.mock('./config');
 
-const mockAddRepository = configAddRepository as jest.Mock<typeof configAddRepository>;
+const mockAddRepository = configAddRepository as jest.Mock<
+    ReturnType<typeof configAddRepository>,
+    Parameters<typeof configAddRepository>
+>;
+
+mockAddRepository.mockImplementation((path, url) => ({
+    path,
+    url,
+    commit: '',
+    args: [],
+}));
 
 describe('Validate repository helper', () => {
     interface TestCase {
@@ -45,7 +55,7 @@ describe('Validate repository helper', () => {
         'addRepository $msg $repo $path $commit',
         async ({ repo, path }: TestCase) => {
             const logger = new CaptureLogger();
-            expect(await addRepository(logger, repo)).toBe(true);
+            expect(await addRepository(logger, repo)).toEqual(expect.objectContaining({ path, url: repo }));
             expect(mockAddRepository).toHaveBeenCalledWith(path, repo, expect.any(String));
         },
         defaultTimeout
