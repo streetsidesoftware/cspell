@@ -3,7 +3,7 @@ import * as Path from 'path';
 import { readConfig, resolveArgs } from './config';
 import { Repository } from './configDef';
 import { execAsync } from './sh';
-import { checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
+import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper';
 import { checkAgainstSnapshot } from './snapshots';
 import { shouldCheckRepo } from './shouldCheckRepo';
 import Chalk from 'chalk';
@@ -28,12 +28,58 @@ interface Result {
     elapsedTime: number;
 }
 
-async function execCheck(rep: Repository, update: boolean): Promise<CheckResult> {
+interface CheckContext {
+    color: Chalk.Chalk;
+    logger: Logger;
+    rep: Repository;
+}
+
+async function execCheckAndUpdate(rep: Repository, update: boolean): Promise<CheckResult> {
     const name = rep.path;
-    const path = Path.join(repositoryDir, rep.path);
     const color = colors[checkCount % colors.length];
     const prefix = color(name + '\t ');
     const logger = new PrefixLogger(prefix);
+    const { log } = logger;
+    ++checkCount;
+
+    if (update) {
+        log('');
+        log(color`**********************************************`);
+        log(color`*  Updating Repo: `);
+        log(color`*    '${name}'`);
+        log(color`*    url:    ${rep.url}`);
+        log(color`*    commit: ${rep.commit}`);
+        log(color`**********************************************\n`);
+        const oldCommit = rep.commit;
+        try {
+            const updatedRep = mustBeDefined(await addRepository(logger, rep.url));
+            rep = resolveArgs(updatedRep);
+        } catch (e) {
+            log(color`******** fail ********`);
+            return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+        }
+        log(color`******** Updating Repo Complete ********`);
+        if (rep.commit !== oldCommit) {
+            log(color`******** Updated repo commit: ********`);
+            log(color`********   From: ${oldCommit} ********`);
+            log(color`********   To:   ${rep.commit} ********`);
+        } else {
+            log(color`******** No changes to commit ********`);
+        }
+    }
+    const context: CheckContext = {
+        color,
+        logger,
+        rep,
+    };
+
+    return execCheck(context, update);
+}
+
+async function execCheck(context: CheckContext, update: boolean): Promise<CheckResult> {
+    const { rep, logger, color } = context;
+    const name = rep.path;
+    const path = Path.join(repositoryDir, rep.path);
     const { log } = logger;
     ++checkCount;
 
@@ -226,7 +272,7 @@ Stop on fail:   ${tf(fail)}
 
     const results: CheckResult[] = [];
 
-    const buffered = asyncBuffer(matching, async (rep) => execCheck(rep, update), parallelLimit);
+    const buffered = asyncBuffer(matching, async (rep) => execCheckAndUpdate(rep, update), parallelLimit);
 
     for await (const r of buffered) {
         results.push(r);
@@ -249,4 +295,11 @@ Stop on fail:   ${tf(fail)}
     } else {
         console.log('\nSuccess!');
     }
+}
+
+function mustBeDefined<T>(t: T | undefined): T {
+    if (t === undefined) {
+        throw new Error('Must not be undefined.');
+    }
+    return t;
 }
