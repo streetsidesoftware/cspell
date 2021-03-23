@@ -55,7 +55,7 @@ describe('Validate repository helper', () => {
         msg         | repo                                                         | path
         ${'master'} | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'streetsidesoftware/regexp-worker'}
     `(
-        'addRepository $msg $repo $path $commit',
+        'addRepository $msg $repo $path',
         async ({ repo, path }: TestCase) => {
             const logger = new CaptureLogger();
             expect(await addRepository(logger, repo)).toEqual(expect.objectContaining({ path, url: repo }));
