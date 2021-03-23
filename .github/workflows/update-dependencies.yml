@@ -41,6 +41,8 @@ jobs:
           npm run update-packages
       - name: Update Integration Test Snapshots
         if: github.event.inputs.updateSnapshots == 'yes'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run update-snapshots
       - name: Has changes

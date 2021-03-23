@@ -47,7 +47,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-      - run: >
+      - name: Run Integration Tests ${{ matrix.repo }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
           cd integration-tests
           && npm ci
           && npm run integration-tests -- ${{ matrix.repo }}

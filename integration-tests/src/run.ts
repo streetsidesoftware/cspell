@@ -33,7 +33,7 @@ function run(program: commander.Command) {
             ) => {
                 const { update = false, fail = false, exclude = [] } = options;
                 const parallelLimit = processParallelArg(options.parallelLimit);
-                check(patterns || [], { update, fail, exclude, parallelLimit });
+                return check(patterns || [], { update, fail, exclude, parallelLimit });
             }
         );
 
@@ -48,7 +48,7 @@ function run(program: commander.Command) {
                 patterns,
                 exclude: options?.exclude || [],
             };
-            listRepositories(opts);
+            return listRepositories(opts);
         });
 
     program
@@ -59,11 +59,11 @@ function run(program: commander.Command) {
                 url: 'GitHub Url',
             }
         )
-        .action((url: string) => {
-            addRepository(console, url);
+        .action(async (url: string) => {
+            await addRepository(console, url);
         });
 
-    program.parse(process.argv);
+    program.parseAsync(process.argv);
 }
 
 run(createCommand('tester'));
