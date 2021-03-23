@@ -27,14 +27,23 @@ export function resolveArgs(rep: Repository): Repository {
 }
 
 export function writeConfig(config: Config): void {
-    fs.writeFileSync(configFile, JSON.stringify(config, undefined, 2));
+    fs.writeFileSync(configFile, JSON.stringify(config, undefined, 2) + '\n');
 }
 
-export function addRepository(path: string, url: string, commit: string): void {
+/**
+ * Add / Update a Repository config entry
+ * @param path - relative path on where to store the repo
+ * @param url - github url of the repo
+ * @param commit - commit id.
+ */
+export function addRepository(path: string, url: string, commit: string): Repository {
     const config = readConfig();
     const entries = new Map<string, Repository>(config.repositories.map((r) => [r.path, r]));
-    const args = entries.get(path)?.args || ['**/*.*', '*.*'];
+    const existingEntry: Partial<Repository> = entries.get(path) || {};
+    const args = existingEntry.args || ['**/*.*', '*.*'];
+
     const entry: Repository = {
+        ...existingEntry,
         path,
         url,
         args,
@@ -44,4 +53,5 @@ export function addRepository(path: string, url: string, commit: string): void {
     entries.set(path, entry);
     config.repositories = [...entries.values()];
     writeConfig(config);
+    return entry;
 }

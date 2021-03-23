@@ -6,14 +6,15 @@ import { Logger } from './types';
 import simpleGit from 'simple-git';
 import mkdirp from 'mkdirp';
 import { Octokit } from '@octokit/rest';
+import { Repository } from './configDef';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '..', 'temp', 'repositories'));
 
 const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
-export async function addRepository(logger: Logger, url: string): Promise<boolean> {
+export async function addRepository(logger: Logger, url: string): Promise<Repository | undefined> {
     if (!url || !githubUrlRegexp.test(url)) {
-        return false;
+        return undefined;
     }
 
     const httpsUrl = url.replace('git@github.com:', 'https://github.com/');
@@ -31,13 +32,11 @@ export async function addRepository(logger: Logger, url: string): Promise<boolea
 
         const b = await octokit.repos.getBranch({ owner, repo, branch });
 
-        Config.addRepository(path, httpsUrl, b.data.commit.sha || branch);
+        return Config.addRepository(path, httpsUrl, b.data.commit.sha || branch);
     } catch (e) {
         logger.error(e);
-        return false;
+        return undefined;
     }
-
-    return true;
 }
 
 export async function checkoutRepositoryAsync(
