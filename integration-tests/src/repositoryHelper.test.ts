@@ -15,13 +15,6 @@ const mockAddRepository = configAddRepository as jest.Mock<
     Parameters<typeof configAddRepository>
 >;
 
-mockAddRepository.mockImplementation((path, url) => ({
-    path,
-    url,
-    commit: '',
-    args: [],
-}));
-
 describe('Validate repository helper', () => {
     interface TestCase {
         msg: string;
@@ -30,6 +23,16 @@ describe('Validate repository helper', () => {
         commit: string | undefined;
         expected: boolean;
     }
+
+    beforeEach(() => {
+        jest.resetAllMocks();
+        mockAddRepository.mockImplementation((path, url) => ({
+            path,
+            url,
+            commit: '',
+            args: [],
+        }));
+    });
 
     test.each`
         msg           | repo                                                         | path                                         | commit                       | expected
@@ -52,7 +55,7 @@ describe('Validate repository helper', () => {
         msg         | repo                                                         | path
         ${'master'} | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'streetsidesoftware/regexp-worker'}
     `(
-        'addRepository $msg $repo $path $commit',
+        'addRepository $msg $repo $path',
         async ({ repo, path }: TestCase) => {
             const logger = new CaptureLogger();
             expect(await addRepository(logger, repo)).toEqual(expect.objectContaining({ path, url: repo }));
