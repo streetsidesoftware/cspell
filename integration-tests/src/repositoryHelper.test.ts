@@ -30,6 +30,7 @@ describe('Validate repository helper', () => {
             path,
             url,
             commit: '',
+            branch: undefined,
             args: [],
         }));
     });
@@ -53,14 +54,15 @@ describe('Validate repository helper', () => {
     );
 
     test.each`
-        msg         | repo                                                         | path
-        ${'master'} | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'streetsidesoftware/regexp-worker'}
+        msg             | repo                                                             | path
+        ${'master'}     | ${'https://github.com/streetsidesoftware/regexp-worker.git'}     | ${'streetsidesoftware/regexp-worker'}
+        ${'issue-1114'} | ${'https://github.com/streetsidesoftware/cspell-test-cases.git'} | ${'streetsidesoftware/cspell-test-cases'}
     `(
         'addRepository $msg $repo $path',
         async ({ repo, path }: TestCase) => {
             const logger = new CaptureLogger();
-            expect(await addRepository(logger, repo)).toEqual(expect.objectContaining({ path, url: repo }));
-            expect(mockAddRepository).toHaveBeenCalledWith(path, repo, expect.any(String));
+            expect(await addRepository(logger, repo, undefined)).toEqual(expect.objectContaining({ path, url: repo }));
+            expect(mockAddRepository).toHaveBeenCalledWith(path, repo, expect.any(String), undefined);
         },
         defaultTimeout
     );

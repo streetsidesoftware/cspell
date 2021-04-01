@@ -53,14 +53,15 @@ function run(program: commander.Command) {
 
     program
         .command('add <url>')
+        .option('-b, --branch <branch>', 'Optional branch to use.')
         .description(
             'Add a repository to be checked. Example: add "https://github.com/streetsidesoftware/cspell.git". Note: to adjust the arguments, the configuration is found in `config/config.json`',
             {
                 url: 'GitHub Url',
             }
         )
-        .action(async (url: string) => {
-            await addRepository(console, url);
+        .action(async (url: string, options: { branch?: string }) => {
+            await addRepository(console, url, options.branch);
         });
 
     program.parseAsync(process.argv);

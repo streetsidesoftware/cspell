@@ -18,7 +18,9 @@ import { cosmiconfig, cosmiconfigSync, OptionsSync as CosmicOptionsSync, Options
 import { GlobMatcher } from 'cspell-glob';
 import { ImportError } from './ImportError';
 
-const currentSettingsFileVersion = '0.2';
+const configSettingsFileVersion0_1 = '0.1';
+const configSettingsFileVersion0_2 = '0.2';
+const currentSettingsFileVersion = configSettingsFileVersion0_2;
 
 export const sectionCSpell = 'cSpell';
 
@@ -403,7 +405,7 @@ function versionBasedMergeList<T>(
     right: T[] | undefined,
     version: CSpellSettings['version']
 ): T[] | undefined {
-    if (version === '0.1') {
+    if (version === configSettingsFileVersion0_1) {
         return takeRightOtherwiseLeft(left, right);
     }
     return mergeListUnique(left, right);
@@ -629,13 +631,19 @@ export function extractImportErrors(settings: CSpellSettings): ImportFileRefWith
 }
 
 function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): string {
-    const settingsFileDir = path.dirname(pathToSettingsFile);
+    const settingsFileDirRaw = path.dirname(pathToSettingsFile);
+    const isVSCode = path.basename(settingsFileDirRaw) === '.vscode';
+    const settingsFileDir = isVSCode ? path.dirname(settingsFileDirRaw) : settingsFileDirRaw;
     const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
     const cwd = envGlobRoot || process.cwd();
     const defaultGlobRoot = envGlobRoot ?? '${cwd}';
     const rawRoot =
         settings.globRoot ??
-        (settings.version === '0.1' || (envGlobRoot && !settings.version) ? defaultGlobRoot : settingsFileDir);
+        (settings.version === configSettingsFileVersion0_1 ||
+        (envGlobRoot && !settings.version) ||
+        (isVSCode && !settings.version)
+            ? defaultGlobRoot
+            : settingsFileDir);
     const globRoot = path.resolve(settingsFileDir, rawRoot.replace('${cwd}', cwd));
     return globRoot;
 }
@@ -738,7 +746,7 @@ function normalizeSettingsGlobs(
     settings: NormalizeSettingsGlobs,
     pathToSettingsFile: string
 ): NormalizeSettingsGlobsResult {
-    const { globRoot = path.dirname(pathToSettingsFile) } = settings;
+    const { globRoot } = settings;
     if (settings.ignorePaths === undefined) return {};
 
     const ignorePaths = toGlobDef(settings.ignorePaths, globRoot, pathToSettingsFile);
