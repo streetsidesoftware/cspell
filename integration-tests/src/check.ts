@@ -52,7 +52,7 @@ async function execCheckAndUpdate(rep: Repository, update: boolean): Promise<Che
         log(color`**********************************************\n`);
         const oldCommit = rep.commit;
         try {
-            const updatedRep = mustBeDefined(await addRepository(logger, rep.url));
+            const updatedRep = mustBeDefined(await addRepository(logger, rep.url, rep.branch));
             rep = resolveArgs(updatedRep);
         } catch (e) {
             log(color`******** fail ********`);

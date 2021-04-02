@@ -11,12 +11,15 @@ import { Repository } from './configDef';
 
 export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
 
-const maxCommitDepth = 1000;
 const minCommitDepth = 10; // To handle race condition with respect to commits.
 
 const githubUrlRegexp = /^(git@github\.com:|https:\/\/github\.com\/).+$/i;
 
-export async function addRepository(logger: Logger, url: string): Promise<Repository | undefined> {
+export async function addRepository(
+    logger: Logger,
+    url: string,
+    branch: string | undefined
+): Promise<Repository | undefined> {
     if (!url || !githubUrlRegexp.test(url)) {
         return undefined;
     }
@@ -26,7 +29,7 @@ export async function addRepository(logger: Logger, url: string): Promise<Reposi
     try {
         const repoInfo = fetchRepositoryInfoForRepo(httpsUrl);
         const { path, url, commit } = await repoInfo;
-        return Config.addRepository(path, url, commit);
+        return Config.addRepository(path, url, branch || commit, branch);
     } catch (e) {
         logger.error(e);
         return undefined;
@@ -72,7 +75,7 @@ export async function checkoutRepositoryAsync(
     if (!fs.existsSync(path)) {
         try {
             const repoInfo = await fetchRepositoryInfoForRepo(url);
-            const c = await cloneRepo(logger, url, path, commit === repoInfo.commit ? minCommitDepth : maxCommitDepth);
+            const c = await cloneRepo(logger, url, path, commit === repoInfo.commit ? minCommitDepth : undefined);
             if (!c) {
                 return false;
             }
@@ -101,12 +104,15 @@ async function cloneRepo(
     path: string,
     depth: number | undefined
 ): Promise<boolean> {
-    depth = depth || 1;
-    log(`Cloning ${url}`);
+    log(`Cloning ${url} depth: ${depth || 'unlimited'}`);
     await mkdirp(Path.dirname(path));
+    const options = ['--no-checkout'];
+    if (depth) {
+        options.push(`--depth=${depth}`);
+    }
     try {
         const git = simpleGit();
-        const c = await git.clone(url, path, ['--single-branch', '--no-checkout', `--depth=${depth}`]);
+        const c = await git.clone(url, path, options);
         log(`Cloned: ${c}`);
     } catch (e) {
         error(e);

@@ -13,6 +13,7 @@ import {
 import { validateText, ValidateTextOptions, ValidationIssue } from './validator';
 import * as path from 'path';
 import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
+import { GlobMatcher } from 'cspell-glob';
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
@@ -155,10 +156,14 @@ async function spellCheckFullDocument(
         };
     }
 
+    const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
+
     const config = localConfig ? mergeSettings(settings, localConfig) : settings;
     const docSettings = determineFinalDocumentSettings(document, config);
 
-    const shouldCheck = docSettings.settings.enabled ?? true;
+    const uri = URI.parse(document.uri);
+
+    const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.settings.enabled ?? true);
     const { generateSuggestions, numSuggestions } = options;
     const validateOptions = { generateSuggestions, numSuggestions };
 

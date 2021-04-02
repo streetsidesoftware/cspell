@@ -75,6 +75,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             `Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`,
             MessageTypes.Info
         );
+        cfg.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
         cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
         return result;
     }

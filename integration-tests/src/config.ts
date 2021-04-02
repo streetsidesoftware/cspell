@@ -36,7 +36,7 @@ export function writeConfig(config: Config): void {
  * @param url - github url of the repo
  * @param commit - commit id.
  */
-export function addRepository(path: string, url: string, commit: string): Repository {
+export function addRepository(path: string, url: string, commit: string, branch: string | undefined): Repository {
     const config = readConfig();
     const entries = new Map<string, Repository>(config.repositories.map((r) => [r.path, r]));
     const existingEntry: Partial<Repository> = entries.get(path) || {};
@@ -48,6 +48,7 @@ export function addRepository(path: string, url: string, commit: string): Reposi
         url,
         args,
         commit,
+        branch,
     };
 
     entries.set(path, entry);
