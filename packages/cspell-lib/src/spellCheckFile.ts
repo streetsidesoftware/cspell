@@ -156,10 +156,10 @@ async function spellCheckFullDocument(
         };
     }
 
+    const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
+
     const config = localConfig ? mergeSettings(settings, localConfig) : settings;
     const docSettings = determineFinalDocumentSettings(document, config);
-
-    const matcher = new GlobMatcher(config.ignorePaths || [], { root: process.cwd(), dot: true });
 
     const uri = URI.parse(document.uri);
 
