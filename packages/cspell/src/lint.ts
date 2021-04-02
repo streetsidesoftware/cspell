@@ -177,7 +177,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
         const cliGlobs: Glob[] = cfg.files;
-        const allGlobs: Glob[] = cliGlobs.concat(configInfo.config.files || []);
+        const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
         const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
         const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
         const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!'));
