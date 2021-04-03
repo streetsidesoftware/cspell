@@ -107,14 +107,17 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         let n = 0;
         for (const fileP of files) {
             ++n;
+            const fileNum = n;
             const file = await fileP;
-            const emitProgress = (elapsedTimeMs?: number) =>
+            const emitProgress = (elapsedTimeMs?: number, processed?: boolean, numErrors?: number) =>
                 cfg.progress({
                     type: 'ProgressFileComplete',
-                    fileNum: n,
+                    fileNum,
                     fileCount,
                     filename: file.filename,
                     elapsedTimeMs,
+                    processed,
+                    numErrors,
                 });
             if (!file.text) {
                 emitProgress();
@@ -123,7 +126,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             const p = processFile(file, configInfo);
             const { elapsedTimeMs } = await measurePromise(p);
             const result = await p;
-            emitProgress(elapsedTimeMs);
+            emitProgress(elapsedTimeMs, result.processed, result.issues.length);
             // Show the spelling errors after emitting the progress.
             result.issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
             const r = await p;
@@ -179,14 +182,16 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
         const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
+        const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob);
+        const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
         const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
-        const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!'));
+        const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
         const fileGlobs: string[] = includeGlobs;
         if (!fileGlobs.length) {
             // Nothing to do.
             return runResult();
         }
-        header(fileGlobs);
+        header(fileGlobs, excludeGlobs);
 
         cfg.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
@@ -198,13 +203,13 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
-        const globOptions = { root, cwd: root, ignore: ignoreGlobs };
+        const globOptions = { root, cwd: root, ignore: ignoreGlobs.concat(normalizedExcludes) };
         const files = filterFiles(await findFiles(fileGlobs, globOptions), globMatcher);
 
         return processFiles(fileLoader(files), configInfo, files.length);
     }
 
-    function header(files: string[]) {
+    function header(files: string[], cliExcludes: string[]) {
         const formattedFiles = files.length > 100 ? files.slice(0, 100).concat(['...']) : files;
 
         cfg.info(
@@ -214,9 +219,7 @@ Date: ${new Date().toUTCString()}
 Options:
     verbose:   ${yesNo(!!cfg.options.verbose)}
     config:    ${cfg.configFile || 'default'}
-    exclude:   ${extractPatterns(cfg.excludes)
-        .map((a) => a.glob.glob)
-        .join('\n             ')}
+    exclude:   ${cliExcludes.join('\n               ')}
     files:     ${formattedFiles}
     wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
     unique:    ${yesNo(!!cfg.options.unique)}

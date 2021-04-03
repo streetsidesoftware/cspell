@@ -79,7 +79,9 @@ function reportProgress(p: ProgressItem) {
         const idx = fn + '/' + fc;
         const filename = chalk.gray(relativeFilename(p.filename));
         const time = p.elapsedTimeMs !== undefined ? chalk.white(p.elapsedTimeMs.toFixed(2) + 'ms') : '-';
-        console.error(`${idx} ${filename} ${time}`);
+        const skipped = p.processed === false ? ' skipped' : '';
+        const hasErrors = p.numErrors ? chalk.red` X` : '';
+        console.error(`${idx} ${filename} ${time}${skipped}${hasErrors}`);
     }
 }
 
@@ -350,7 +352,6 @@ function collect(value: string, previous: string[] | undefined): string[] {
     if (!previous) {
         return [value];
     }
-    console.log(previous);
     return previous.concat([value]);
 }
 

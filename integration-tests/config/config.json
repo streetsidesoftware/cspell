@@ -246,6 +246,18 @@
       ],
       "branch": "issue-1114",
       "commit": "issue-1114"
+    },
+    {
+      "path": "googleapis/google-cloud-cpp",
+      "url": "https://github.com/googleapis/google-cloud-cpp.git",
+      "args": [
+        "-c",
+        "ci/cspell.json",
+        "**/*",
+        "-e",
+        "{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"
+      ],
+      "commit": "67f0ddcdb83bc47198fcdd6a504f18ca471cab8c"
     }
   ]
 }

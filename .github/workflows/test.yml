@@ -6,14 +6,47 @@ on:
       - master
 
 jobs:
-  test:
+  test-old-node-versions:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version:
+          # List of supported node versions (latest is tested in `test-os`)
           - 12.x
           - 14.x
+
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+
+      - run: npm test
+
+      - name: verify trace command
+        run: node ./bin.js trace test
+
+      - name: verify the spell checker runs
+        run: node ./bin.js -c cspellrc.json
+
+      # Ensure the repository is clean after build & test
+      - run: git --no-pager diff --compact-summary --exit-code
+
+  test-os:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          # Test the latest node version here, move older versions to `test-old-node-versions`
           - 15.x
 
         os:
