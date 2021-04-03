@@ -19,6 +19,7 @@ jobs:
 
         repo:
           - php/php-src
+          - googleapis/google-cloud-cpp
           - aws-amplify/docs
           - Azure/azure-rest-api-specs
           - alexiosc/megistos
@@ -55,4 +56,4 @@ jobs:
           && npm ci
           && npm run integration-tests -- ${{ matrix.repo }}
 
-# cspell:ignore MartinThoma
+# cspell:ignore MartinThoma googleapis

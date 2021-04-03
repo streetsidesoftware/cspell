@@ -40,15 +40,19 @@ export interface SpellingErrorEmitter {
 }
 
 export type ProgressTypes = 'ProgressFileComplete';
-export interface ProgressItem {
+export type ProgressItem = ProgressFileComplete;
+
+interface ProgressBase {
     type: ProgressTypes;
 }
-export interface ProgressFileComplete extends ProgressItem {
+export interface ProgressFileComplete extends ProgressBase {
     type: 'ProgressFileComplete';
     fileNum: number;
     fileCount: number;
     filename: string;
     elapsedTimeMs: number | undefined;
+    processed: boolean | undefined;
+    numErrors: number | undefined;
 }
 export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
 
