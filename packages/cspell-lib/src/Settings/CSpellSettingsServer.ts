@@ -62,6 +62,7 @@ const searchPlaces = [
 ];
 
 const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
+    packageProp: 'cspell',
     searchPlaces,
     loaders: {
         '.json': (_filename: string, content: string) => json.parse(content),
