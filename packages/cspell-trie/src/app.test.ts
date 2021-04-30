@@ -44,8 +44,10 @@ describe('Validate App', () => {
         try {
             const result = app.run(commander, argv(...args));
             if (errorResult) {
+                // eslint-disable-next-line jest/no-conditional-expect
                 await expect(result).rejects.toThrow(errorResult);
             } else {
+                // eslint-disable-next-line jest/no-conditional-expect
                 await expect(result).resolves.not.toThrow();
             }
         } finally {
