@@ -37,6 +37,7 @@ export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
  *   the `cspell.config.js`.
  */
 const searchPlaces = [
+    'package.json',
     // Original locations
     '.cspell.json',
     'cspell.json',
