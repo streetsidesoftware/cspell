@@ -37,6 +37,7 @@ export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
  *   the `cspell.config.js`.
  */
 const searchPlaces = [
+    'package.json',
     // Original locations
     '.cspell.json',
     'cspell.json',
@@ -62,7 +63,6 @@ const searchPlaces = [
 ];
 
 const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
-    packageProp: 'cspell',
     searchPlaces,
     loaders: {
         '.json': (_filename: string, content: string) => json.parse(content),
