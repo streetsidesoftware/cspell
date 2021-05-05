@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.4.0](https://github.com/streetsidesoftware/cspell/compare/v5.3.12...v5.4.0) (2021-05-05)
+
+
+### Features
+
+* Support `package.json` as a configuration location. ([#1178](https://github.com/streetsidesoftware/cspell/issues/1178)) ([2ce2410](https://github.com/streetsidesoftware/cspell/commit/2ce241052a5addc2240326f42abcfc909e618707))
+
+
+### Reverts
+
+* Revert "Revert "fix: Correctly handle leading and trailing single quote"" (#1203) ([1738993](https://github.com/streetsidesoftware/cspell/commit/17389939659ccc2148aef3779844e4f58ba7b966)), closes [#1203](https://github.com/streetsidesoftware/cspell/issues/1203)
+
+
+
+
+
 ## [5.3.12](https://github.com/streetsidesoftware/cspell/compare/v5.3.11...v5.3.12) (2021-04-06)
 
 
