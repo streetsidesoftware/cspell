@@ -300,7 +300,7 @@ describe('Validate individual regexp', () => {
     test.each`
         testName                 | regexp                 | text                     | expectedResult
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${''}                    | ${[]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${" x = 'Don\\'t'"}      | ${['x', 1, "'Don\\'t'", 5]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${" x = 'Don\\'t'"}      | ${['x', 1, "Don\\'t", 6]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345'}               | ${[]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345a'}              | ${['12345a', 0]}
         ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345'}              | ${['b12345', 0]}

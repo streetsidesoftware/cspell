@@ -65,7 +65,7 @@ describe('Validate wordSplitter', () => {
         expect(r).toMatchSnapshot(); // Use snapshots to ensure all possible options are generated.
     });
 
-    interface PartialTextOffsetWithIsFound {
+    interface PartialTextOffsetWithValid {
         text: string;
         offset?: number;
         isFound?: boolean;
@@ -73,19 +73,18 @@ describe('Validate wordSplitter', () => {
 
     interface TestSplit {
         text: string;
-        expectedWords: PartialTextOffsetWithIsFound[];
+        expectedWords: PartialTextOffsetWithValid[];
     }
 
-    /** to PartialTextOffsetWithIsFound */
-    function tov(p: PartialTextOffsetWithIsFound | string, defaultIsFound = true): PartialTextOffsetWithIsFound {
+    function tov(p: PartialTextOffsetWithValid | string, isValid = true): PartialTextOffsetWithValid {
         if (typeof p === 'string') {
             p = { text: p };
         }
-        const { isFound = defaultIsFound } = p;
+        const { isFound = isValid } = p;
         return { ...p, isFound };
     }
 
-    function splitTov(t: string): PartialTextOffsetWithIsFound[] {
+    function splitTov(t: string): PartialTextOffsetWithValid[] {
         if (!t) return [];
         const parts = t.split('|');
         return parts.map((p) => tov(p, has({ text: p, offset: 0 })));
@@ -174,13 +173,11 @@ describe('Validate wordSplitter', () => {
         ${'nstatic'}    | ${'static'}   | ${1}
         ${'techo'}      | ${'echo'}     | ${1}
         ${`n'cpp`}      | ${'cpp'}      | ${1}
-        ${`n'log`}      | ${'log'}      | ${7}
+        ${`n'log`}      | ${'log'}      | ${4}
         ${'64-bit'}     | ${'bit'}      | ${1}
         ${'128-bit'}    | ${'bit'}      | ${1}
         ${'256-sha'}    | ${'256-sha'}  | ${6}
         ${`REFACTOR'd`} | ${'REFACTOR'} | ${2}
-        ${`dogs'`}      | ${`dogs'`}    | ${2}
-        ${`planets’`}   | ${`planets’`} | ${2}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
         const expectedWordSegments = splitTov(expectedWords);
         const doc = sampleText();
@@ -321,10 +318,6 @@ function sampleWordSet() {
     well educated
     words separated by singleQuote
     256-sha
-    dogs'
-    leashes
-    writers
-    planets’
     `
         .split(/\s+/g)
         .map((a) => a.trim())
@@ -350,11 +343,8 @@ function sampleText() {
 
     256-sha
 
-    - The dogs' leashes (multiple dogs).
-    - The writers' desks (multiple writers).
-    - The planets’ atmospheres (multiple planets).
-
     128-bit values
+
 
 `;
 }
