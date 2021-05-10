@@ -14,9 +14,7 @@ export interface TraceResult {
 }
 
 export async function traceWords(words: string[], settings: CSpellSettings): Promise<TraceResult[]> {
-    async function finalize(
-        config: CSpellSettings
-    ): Promise<{
+    async function finalize(config: CSpellSettings): Promise<{
         config: CSpellSettings;
         dicts: SpellingDictionaryCollection;
     }> {
