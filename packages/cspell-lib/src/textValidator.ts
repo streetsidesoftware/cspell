@@ -53,10 +53,8 @@ export function validateText(
     dict: SpellingDictionary,
     options: ValidationOptions
 ): Sequence<Text.TextOffset> {
-    const {
-        maxNumberOfProblems = defaultMaxNumberOfProblems,
-        maxDuplicateProblems = defaultMaxDuplicateProblems,
-    } = options;
+    const { maxNumberOfProblems = defaultMaxNumberOfProblems, maxDuplicateProblems = defaultMaxDuplicateProblems } =
+        options;
 
     const mapOfProblems = new Map<string, number>();
     const includeRanges = calcTextInclusionRanges(text, options);
@@ -114,13 +112,15 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         : ignoreWords.concat(ignoreWords.map((a) => a.toLowerCase()));
     const ignoreWordsSet: SetOfWords = new Set(mappedIgnoreWords);
     const setOfKnownSuccessfulWords = new Set<string>();
-    const rememberFilter = <T extends TextOffset>(fn: (v: T) => boolean) => (v: T) => {
-        const keep = fn(v);
-        if (!keep) {
-            setOfKnownSuccessfulWords.add(v.text);
-        }
-        return keep;
-    };
+    const rememberFilter =
+        <T extends TextOffset>(fn: (v: T) => boolean) =>
+        (v: T) => {
+            const keep = fn(v);
+            if (!keep) {
+                setOfKnownSuccessfulWords.add(v.text);
+            }
+            return keep;
+        };
     const filterAlreadyChecked = (wo: TextOffset) => {
         return !setOfKnownSuccessfulWords.has(wo.text);
     };

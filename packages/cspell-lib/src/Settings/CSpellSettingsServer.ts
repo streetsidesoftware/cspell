@@ -264,10 +264,9 @@ async function normalizeSearchForConfigResult(
 }
 
 export function searchForConfig(searchFrom?: string): Promise<CSpellSettings | undefined> {
-    return normalizeSearchForConfigResult(
-        searchFrom || process.cwd(),
-        cspellConfigExplorer.search(searchFrom)
-    ).then((r) => (r.filepath ? r.config : undefined));
+    return normalizeSearchForConfigResult(searchFrom || process.cwd(), cspellConfigExplorer.search(searchFrom)).then(
+        (r) => (r.filepath ? r.config : undefined)
+    );
 }
 
 export function loadConfig(file: string): Promise<CSpellSettings> {
