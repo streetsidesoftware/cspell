@@ -467,13 +467,25 @@ The spell checker includes a set of default dictionaries.
 ### Disabling a Dictionary
 
 It is possible to prevent a dictionary from being loaded. This is useful if you want to use your own dictionary or just
-off an existing dictionary.
+turn off an existing dictionary.
 
 #### Disable Default cpp Dictionary
 
 ```javascript
 "dictionaries": ["!cpp"],
+"overrides": [
+  {
+      "filename": "legacy/**/*.cpp",
+      "dictionaries": ["!!cpp"], // add it back for *.cpp files under the legacy folder
+  },
+]
 ```
+
+The number of `!`s is important.
+
+- `!cpp` remove `cpp` dictionary
+- `!!cpp` add it back
+- `!!!cpp` remove it again.
 
 ## LanguageSettings
 

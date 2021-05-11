@@ -9,19 +9,47 @@ export interface DictionaryDefinitionWithSource extends DictionaryDefinitionPref
 
 export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
 
+/**
+ * Combines the list of desired dictionaries with the list of dictionary
+ * definitions. Order does not matter, but the number of leading `!` does.
+ *
+ * Excluding dictionaries.
+ * - Adding `!` to a dictId will remove the dictionary.
+ * - Adding `!!` will add it back.
+ *
+ * @param dictIds - dictionaries desired
+ * @param defs - dictionary definitions
+ * @returns map from dictIds to definitions
+ */
 export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDefinition[]): DefMapArrayItem[] {
-    // Process the dictIds in order, if it starts with a '!', remove it from the set.
-    const dictIdSet = dictIds
+    const negPrefixRegEx = /^!+/;
+
+    // Collect the ids based upon the `!` depth.
+    const dictIdMap = dictIds
         .map((id) => id.trim())
         .filter((id) => !!id)
-        .reduce((dictSet, id) => {
-            if (id[0] === '!') {
-                dictSet.delete(id.slice(1));
-            } else {
-                dictSet.add(id);
+        .reduce((dictDepthMap, id) => {
+            const pfx = id.match(negPrefixRegEx);
+            const depth = pfx?.[0]?.length || 0;
+            const _dictSet = dictDepthMap.get(depth);
+            const dictSet = _dictSet || new Set<DictionaryId>();
+            if (!_dictSet) {
+                dictDepthMap.set(depth, dictSet);
             }
-            return dictSet;
-        }, new Set<DictionaryId>());
+            dictSet.add(id.slice(depth));
+            return dictDepthMap;
+        }, new Map<number, Set<DictionaryId>>());
+
+    const orderedSets = [...dictIdMap].sort((a, b) => a[0] - b[0]);
+    const dictIdSet = orderedSets.reduce((dictIdSet, [depth, ids]) => {
+        if (depth & 1) {
+            [...ids].forEach((id) => dictIdSet.delete(id));
+        } else {
+            [...ids].forEach((id) => dictIdSet.add(id));
+        }
+        return dictIdSet;
+    }, new Set<DictionaryId>());
+
     const activeDefs: DefMapArrayItem[] = defs
         .filter(({ name }) => dictIdSet.has(name))
         .map((def) => ({ ...def, path: getFullPathName(def) }))
