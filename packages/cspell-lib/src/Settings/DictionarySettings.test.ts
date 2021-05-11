@@ -41,6 +41,22 @@ describe('Validate DictionarySettings', () => {
         expect(dicts).toEqual(expected);
     });
 
+    test.each`
+        ids                          | expected
+        ${'!php, php, cpp, !!cpp'}   | ${'cpp'}
+        ${'!php, php, !!php, !!cpp'} | ${'cpp, php'}
+        ${'!!!!!!!!!!cpp, !cpp'}     | ${'cpp'}
+    `('validate dictionary exclusions $ids', ({ ids, expected }: { ids: string; expected: string }) => {
+        const dictIds = ids.split(',');
+        const expectedIds = expected.split(',').map((id) => id.trim());
+        const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
+        const dicts = mapDefs
+            .map((a) => a[1])
+            .map((def) => def.name!)
+            .sort();
+        expect(dicts).toEqual(expectedIds);
+    });
+
     test('tests that the files exist', () => {
         const defaultDicts = defaultSettings.dictionaryDefinitions!;
         const dictIds = defaultDicts.map((def) => def.name);
