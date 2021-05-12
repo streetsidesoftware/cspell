@@ -3,7 +3,7 @@ Repository: typescript-cheatsheets/react
 Url: "https://github.com/typescript-cheatsheets/react.git"
 Args: ["**/*.{ts,js,md}"]
 Lines:
- CSpell: Files checked: 51, Issues found: 559 in 41 files
+ CSpell: Files checked: 51, Issues found: 562 in 41 files
  exit code: 1
 ./CONTRIBUTING.md:20:39     - Unknown word (swyx's)     -- deployed to Netlify on swyx's personal account.
 ./CONTRIBUTING.md:22:12     - Unknown word (docsite)    -- To run the docsite locally:
@@ -50,6 +50,8 @@ Lines:
 ./README.md:2:22      - Unknown word (Cheatsheets) -- h1>React+TypeScript Cheatsheets</h1>
 ./README.md:39:120    - Unknown word (devs)        -- focused on helping React devs just start using TS
 ./README.md:40:47     - Unknown word (pastable)    -- best practices, copy+pastable examples.
+./README.md:531:30    - Unknown word (nullchecks)               -- first option will bypass nullchecks on `ref1.current`, and
+./README.md:557:6     - Unknown word (initialise)               -- // initialise with null, but tell
 ./README.md:71:17     - Unknown word (usestate)    -- - [useState](#usestate)
 ./README.md:72:19     - Unknown word (usereducer)  -- - [useReducer](#usereducer)
 ./README.md:73:18     - Unknown word (useeffect)   -- - [useEffect](#useeffect)
@@ -103,8 +105,8 @@ Lines:
 ./docs/advanced/patterns_by_version.md:469:19    - Unknown word (middel)              -- setAlignment("top-middel"); // error!
 ./docs/advanced/patterns_by_version.md:473:22    - Unknown word (dynaming)            -- Usecase 2 - Modeling dynaming string literal types
 ./docs/advanced/patterns_by_version.md:485:104   - Unknown word (Uncapitalize)        -- , `Capitalize` and `Uncapitalize`.
-./docs/advanced/patterns_by_version.md:522:23    - Unknown word (jsxdev)              -- "jsx": "react-jsxdev"
-./docs/advanced/patterns_by_version.md:537:15    - Unknown word (Roadmap)             -- ## TypeScript Roadmap and Spec
+./docs/advanced/patterns_by_version.md:527:23    - Unknown word (jsxdev)              -- "jsx": "react-jsxdev"
+./docs/advanced/patterns_by_version.md:542:15    - Unknown word (Roadmap)             -- ## TypeScript Roadmap and Spec
 ./docs/advanced/types-react-ap.md:105:3     - Unknown word (Ferdaber's)    -- [@Ferdaber's note](https://github
 ./docs/advanced/types-react-ap.md:19:34     - Unknown word (renderable)    -- - anything that is renderable _inside_ of JSX, this
 ./docs/advanced/types-react-ap.md:26:7      - Unknown word (consts)        -- - all consts: `Children`, `Fragment
@@ -127,11 +129,9 @@ Lines:
 ./docs/basic/getting-started/function-components.md:36:298    - Unknown word (jscodeshift) -- codebase, you can use [this jscodeshift codemod](https://github
 ./docs/basic/getting-started/function-components.md:36:310    - Unknown word (codemod)     -- use [this jscodeshift codemod](https://github.com
 ./docs/basic/getting-started/function-components.md:91:117    - Unknown word (destructured) -- the props object is destructured in the parameter list
-./docs/basic/getting-started/hooks.md:148:1279  - Unknown word (rajivpunjabi) -- this discussion with @rajivpunjabi](https://github.com
-./docs/basic/getting-started/hooks.md:150:30    - Unknown word (nullchecks)   -- first option will bypass nullchecks on `ref1.current`, and
-./docs/basic/getting-started/hooks.md:176:6     - Unknown word (initialise)   -- // initialise with null, but tell
-./docs/basic/getting-started/hooks.md:198:22    - Unknown word (Baumgartner)  -- example from [Stefan Baumgartner](https://fettblog.eu
-./docs/basic/getting-started/hooks.md:259:10    - Unknown word (tuplify)      -- function tuplify<T extends any[]>(..
+./docs/basic/getting-started/hooks.md:214:22    - Unknown word (rajivpunjabi) -- [Related issue by @rajivpunjabi](https://github.com
+./docs/basic/getting-started/hooks.md:215:24    - Unknown word (Baumgartner)  -- Example from Stefan Baumgartner](https://fettblog.eu
+./docs/basic/getting-started/hooks.md:276:10    - Unknown word (tuplify)      -- function tuplify<T extends any[]>(..
 ./docs/basic/getting-started/hooks.md:47:6      - Unknown word (ACTIONTYPE) -- type ACTIONTYPE =
 ./docs/basic/getting-started/portals.md:19:16     - Unknown word (Unmount)    -- componentWillUnmount() {
 ./docs/basic/getting-started/portals.md:81:28     - Unknown word (rgba)       -- background: "rgba(0,0,0,0.1)",
@@ -186,6 +186,7 @@ Lines:
 ./docs/basic/troubleshooting/types.md:499:44    - Unknown word (Overide)      -- boolean) => void; // Overide the default className
 ./docs/basic/troubleshooting/types.md:529:19    - Unknown word (yx's)         -- For instance, [sw-yx's Gist on React Router
 ./docs/basic/troubleshooting/types.md:53:34     - Unknown word (typeguards) -- the `in` operator for typeguards since TS 2.7+
+./docs/basic/troubleshooting/types.md:561:14    - Unknown word (typesafety)   -- Guaranteeing typesafety for this kind of API
 ./docs/basic/troubleshooting/types.md:60:88     - Unknown word (isnt)       -- versions or where `in` isnt enough
 ./docs/basic/useful-hooks.md:163:63    - Unknown word (unmount)      -- only run on mount and unmount
 ./docs/basic/useful-hooks.md:17:30     - Unknown word (localstorage) -- Persist useState in localstorage.</summary>
@@ -200,24 +201,25 @@ Lines:
 ./docs/hoc/react-hoc-docs.md:133:29    - Unknown word (typechecked) -- data will still be typechecked
 ./docs/hoc/react-hoc-docs.md:180:30    - Unknown word (Composability) -- Example: [Maximizing Composability](https://reactjs.org
 ./docs/hoc/react-hoc-docs.md:57:9      - Unknown word (Optionalize) -- // type Optionalize<T extends K, K> = Omit
-./docs/migration/from-flow.md:11:4      - Unknown word (Ecobee's)   -- - [Ecobee's brief experience](https
-./docs/migration/from-flow.md:12:20     - Unknown word (SLOC)       -- - [Migrating a 50K SLOC Flow + React Native
+./docs/migration/from-flow.md:10:15     - Unknown word (Codemod)    -- - Retail-UI's Codemod: https://github.com
+./docs/migration/from-flow.md:12:4      - Unknown word (Ecobee's)   -- - [Ecobee's brief experience](https
+./docs/migration/from-flow.md:13:20     - Unknown word (SLOC)       -- - [Migrating a 50K SLOC Flow + React Native
 ./docs/migration/from-flow.md:6:102     - Unknown word (braposo)    -- and other tips from @braposo](https://github.com
-./docs/migration/from-flow.md:7:45      - Unknown word (Flowtype)   -- Migration to TypeScript on a Flowtype codebase][entria] at
-./docs/migration/from-flow.md:7:75      - Unknown word (Entria)     -- codebase][entria] at Entria
-./docs/migration/from-flow.md:9:15      - Unknown word (Codemod)    -- - Retail-UI's Codemod: https://github.com
+./docs/migration/from-flow.md:7:7       - Unknown word (Airtable's) -- - Try Airtable's codemod: https://github
+./docs/migration/from-flow.md:8:45      - Unknown word (Flowtype)   -- Migration to TypeScript on a Flowtype codebase][entria] at
+./docs/migration/from-flow.md:8:75      - Unknown word (Entria)     -- codebase][entria] at Entria
 ./docs/migration/from-js.md:11:63     - Unknown word (Airbnb's)   -- ts-migrate) used in [Airbnb's conversion](https:/
 ./docs/migration/from-js.md:64:11     - Unknown word (TYPEME)     -- type TODO_TYPEME = any;
 ./docs/migration/from-js.md:8:69      - Unknown word (Codecademy) -- TypeStat) ([used by Codecademy](https://mobile.twitter
 ./docs/migration/from-js.md:93:4      - Unknown word (Hootsuite)  -- - [Hootsuite][hootsuite]
-./docs/migration/index.md:100:6     - Unknown word (Blogpost)   -- - [Blogpost: The Great CoffeeScript
-./docs/migration/index.md:110:4     - Unknown word (Atlassian's) -- - [Atlassian's migration (PR)](https
-./docs/migration/index.md:122:4     - Unknown word (Hasura)      -- - [Hasura Console](https://github
+./docs/migration/index.md:101:6     - Unknown word (Blogpost)   -- - [Blogpost: The Great CoffeeScript
+./docs/migration/index.md:111:4     - Unknown word (Atlassian's) -- - [Atlassian's migration (PR)](https
+./docs/migration/index.md:123:4     - Unknown word (Hasura)      -- - [Hasura Console](https://github
 ./docs/migration/index.md:21:34     - Unknown word (clayallsop) -- allowJS` (Experiences: [clayallsop][clayallsop], [pleo
 ./docs/migration/index.md:21:60     - Unknown word (pleo)       -- clayallsop][clayallsop], [pleo][pleo])
 ./docs/migration/index.md:31:57     - Unknown word (typedefs)   -- for libraries with no typedefs
 ./docs/migration/index.md:42:127    - Unknown word (awesome's)  -- about this - but read [awesome's point of view](https
-./docs/migration/index.md:92:4      - Unknown word (Lyft)       -- - [Lyft](https://eng.lyft.com
+./docs/migration/index.md:93:4      - Unknown word (Lyft)       -- - [Lyft](https://eng.lyft.com
 ./docs/migration/js-docs.md:16:15     - Unknown word (Tayar)      -- (_thanks [Gil Tayar](https://twitter.com
 ./docs/migration/js-docs.md:16:84     - Unknown word (Gleb)       -- 8919260221441) and [Gleb Bahmutov](https://twitter
 ./docs/migration/js-docs.md:16:89     - Unknown word (Bahmutov)   -- 60221441) and [Gleb Bahmutov](https://twitter.com

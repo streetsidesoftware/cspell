@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["-c","ci/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1704, Issues found: 2966 in 227 files
+ CSpell: Files checked: 1747, Issues found: 3037 in 234 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -17,8 +17,8 @@ Lines:
 ./CMakeLists.txt:111:32    - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
 ./CMakeLists.txt:134:18    - Unknown word (hositng)    -- # googleapis.dev hositng.
 ./CMakeLists.txt:135:38    - Unknown word (GOOGLEAPIS) -- CLOUD_CPP_GEN_DOCS_FOR_GOOGLEAPIS_DEV
-./CMakeLists.txt:140:40    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_MASTER_FOR_REFDOC_LINKS
-./CMakeLists.txt:141:44    - Unknown word (refdoc)     -- the version part for refdoc relative links" OFF
+./CMakeLists.txt:140:38    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_MAIN_FOR_REFDOC_LINKS
+./CMakeLists.txt:141:42    - Unknown word (refdoc)     -- the version part for refdoc relative links" OFF
 ./CMakeLists.txt:148:32    - Unknown word (BIGTABLE)   -- GOOGLE_CLOUD_CPP_ENABLE_BIGTABLE "Enable building the
 ./CMakeLists.txt:150:32    - Unknown word (BIGQUERY)   -- GOOGLE_CLOUD_CPP_ENABLE_BIGQUERY "Enable building the
 ./CMakeLists.txt:150:62    - Unknown word (Bigquery)   -- Enable building the Bigquery library."
@@ -31,7 +31,7 @@ Lines:
 ./CMakeLists.txt:221:19    - Unknown word (doxygen)    -- add_custom_target(doxygen-docs)
 ./CMakeLists.txt:42:45     - Unknown word (STREQUAL)   -- CLOUD_CPP_CXX_STANDARD}" STREQUAL ""))
 ./CODE_OF_CONDUCT.md:9:24      - Unknown word (socio)      -- experience, education, socio-economic status, nationality
-./README.md:7:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
+./README.md:8:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
 ./SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
 ./bazel/google_cloud_cpp_deps.bzl:127:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
 ./bazel/google_cloud_cpp_deps.bzl:19:22     - Unknown word (deps)       -- def google_cloud_cpp_deps():
@@ -52,6 +52,8 @@ Lines:
 ./ci/cloudbuild/README.md:80:54     - Unknown word (distros)     -- Linux x `N` different distros
 ./ci/cloudbuild/README.md:81:26     - Unknown word (MSVC)        -- Compilers: Clang, GCC, MSVC
 ./ci/cloudbuild/README.md:89:1      - Unknown word (ubsan)       -- ubsan, etc. The full matrix
+./ci/cloudbuild/notifiers/alerts/README.md:58:13     - Unknown word (eventarc)   -- gcloud beta eventarc triggers create send
+./ci/cloudbuild/notifiers/alerts/function/CMakeLists.txt:17:5      - Unknown word (CMAKE)      -- set(CMAKE_CXX_STANDARD 17)
 ./ci/cloudbuild/notifiers/bigquery/README.md:21:6      - Unknown word (bigquery)   -- The `bigquery.yaml` file is the config
 ./ci/cloudbuild/notifiers/logs/README.md:43:34     - Unknown word (publiclogs) -- cloud-cpp-community-publiclogs"
 ./ci/cloudbuild/notifiers/logs/README.md:49:1      - Unknown word (gsutil)     -- gsutil iam ch \
@@ -59,8 +61,6 @@ Lines:
 ./ci/cloudbuild/notifiers/logs/README.md:62:30     - Unknown word (buildpacks)  -- build --builder gcr.io/buildpacks/builder:latest \
 ./ci/cloudbuild/notifiers/logs/README.md:63:44     - Unknown word (cloudevent)  -- FUNCTION_SIGNATURE_TYPE=cloudevent" \
 ./ci/cloudbuild/notifiers/logs/README.md:65:17     - Unknown word (cloudbuild)  -- --path "ci/cloudbuild/notifiers/logs/function
-./ci/cloudbuild/notifiers/logs/README.md:98:13     - Unknown word (eventarc)    -- gcloud beta eventarc triggers create index
-./ci/cloudbuild/notifiers/logs/function/CMakeLists.txt:17:5      - Unknown word (CMAKE)      -- set(CMAKE_CXX_STANDARD 17)
 ./ci/cloudbuild/notifiers/logs/function/CMakeLists.txt:26:40     - Unknown word (stdc)       -- google-cloud-cpp::storage stdc++fs)
 ./ci/etc/README.md:13:40     - Unknown word (createinstance) -- GOOGLE_CLOUD_PROJECT}" createinstance \
 ./ci/etc/README.md:22:5      - Unknown word (createtable)    -- createtable quickstart families
@@ -165,18 +165,18 @@ Lines:
 ./doc/packaging.md:941:49    - Unknown word (libgrpc)        -- recommends install -y libgrpc++-dev libprotobuf-dev
 ./doc/packaging.md:941:63    - Unknown word (libprotobuf)    -- install -y libgrpc++-dev libprotobuf-dev \
 ./doc/packaging.md:942:5     - Unknown word (libprotoc)      -- libprotoc-dev libc-ares-dev protobuf
-./external/googleapis/CMakeLists.txt:151:15    - Unknown word (Werror)     -- include(EnableWerror)
-./external/googleapis/CMakeLists.txt:199:16    - Unknown word (Protos)     -- include(CompileProtos)
-./external/googleapis/CMakeLists.txt:243:49    - Unknown word (SOVERSION)  -- ${PROJECT_VERSION}" SOVERSION
+./external/googleapis/CMakeLists.txt:153:15    - Unknown word (Werror)     -- include(EnableWerror)
+./external/googleapis/CMakeLists.txt:201:16    - Unknown word (Protos)     -- include(CompileProtos)
+./external/googleapis/CMakeLists.txt:245:49    - Unknown word (SOVERSION)  -- ${PROJECT_VERSION}" SOVERSION
 ./external/googleapis/CMakeLists.txt:30:25     - Unknown word (PROTO)      -- EXTERNAL_GOOGLEAPIS_PROTO_FILES
-./external/googleapis/CMakeLists.txt:656:41    - Unknown word (BINDIR)     -- DESTINATION ${CMAKE_INSTALL_BINDIR}
-./external/googleapis/CMakeLists.txt:658:41    - Unknown word (LIBDIR)     -- DESTINATION ${CMAKE_INSTALL_LIBDIR}
-./external/googleapis/CMakeLists.txt:660:13    - Unknown word (NAMELINK)   -- NAMELINK_SKIP
-./external/googleapis/CMakeLists.txt:684:45    - Unknown word (Proto)      -- APIS C++ ${_short_name} Proto Library")
-./external/googleapis/CMakeLists.txt:706:11    - Unknown word (libcares)   -- " libcares")
-./external/googleapis/CMakeLists.txt:707:12    - Unknown word (CONCAT)     -- string(CONCAT GOOGLE_CLOUD_CPP_PC
-./external/googleapis/CMakeLists.txt:72:19     - Unknown word (dialogflow) -- "google/cloud/dialogflow/v2beta1/agent.proto
-./external/googleapis/CMakeLists.txt:787:38    - Unknown word (Findg)      -- PROJECT_SOURCE_DIR}/cmake/FindgRPC.cmake"
+./external/googleapis/CMakeLists.txt:664:41    - Unknown word (BINDIR)     -- DESTINATION ${CMAKE_INSTALL_BINDIR}
+./external/googleapis/CMakeLists.txt:666:41    - Unknown word (LIBDIR)     -- DESTINATION ${CMAKE_INSTALL_LIBDIR}
+./external/googleapis/CMakeLists.txt:668:13    - Unknown word (NAMELINK)   -- NAMELINK_SKIP
+./external/googleapis/CMakeLists.txt:692:45    - Unknown word (Proto)      -- APIS C++ ${_short_name} Proto Library")
+./external/googleapis/CMakeLists.txt:714:11    - Unknown word (libcares)   -- " libcares")
+./external/googleapis/CMakeLists.txt:715:12    - Unknown word (CONCAT)     -- string(CONCAT GOOGLE_CLOUD_CPP_PC
+./external/googleapis/CMakeLists.txt:74:19     - Unknown word (dialogflow) -- "google/cloud/dialogflow/v2beta1/agent.proto
+./external/googleapis/CMakeLists.txt:796:38    - Unknown word (Findg)      -- PROJECT_SOURCE_DIR}/cmake/FindgRPC.cmake"
 ./external/googleapis/config-version.cmake.in:15:22     - Unknown word (DOXYGEN)    -- set(PACKAGE_VERSION @DOXYGEN_PROJECT_NUMBER@)
 ./external/googleapis/config.pc.in:17:1      - Unknown word (libdir)     -- libdir=${prefix}/@CMAKE_INSTALL
 ./external/googleapis/config.pc.in:18:1      - Unknown word (includedir) -- includedir=${prefix}/@CMAKE_INSTALL
@@ -209,7 +209,7 @@ Lines:
 ./google/cloud/bigquery/CMakeLists.txt:83:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
 ./google/cloud/bigquery/quickstart/CMakeLists.txt:27:5      - Unknown word (VCPKG)      -- if (VCPKG_TARGET_TRIPLET MATCHES
 ./google/cloud/bigquery/quickstart/Makefile:18:25     - Unknown word (CXXLD)      -- The CXX, CXXFLAGS and CXXLD variables are hard-coded
-./google/cloud/bigquery/quickstart/Makefile:28:10     - Unknown word (DEPS)       -- BIGQUERY_DEPS := google_cloud_cpp
+./google/cloud/bigquery/quickstart/Makefile:29:10     - Unknown word (DEPS)       -- BIGQUERY_DEPS := google_cloud_cpp
 ./google/cloud/bigquery/quickstart/README.md:105:13    - Unknown word (gooogle)     -- cd $HOME/gooogle-cloud-cpp/google/cloud
 ./google/cloud/bigquery/quickstart/README.md:130:71    - Unknown word (bazelrc)     -- include it in your `.bazelrc`
 ./google/cloud/bigquery/quickstart/README.md:134:21    - Unknown word (DGRPC)       -- bazel build --copt=-DGRPC_BAZEL_BUILD ...
@@ -275,9 +275,9 @@ Lines:
 ./google/cloud/spanner/doc/spanner-main.dox:132:12    - Unknown word (Backoff)    -- ### Retry, Backoff, and Idempotency Policies
 ./google/cloud/spanner/doc/spanner-main.dox:132:25    - Unknown word (Idempotency) -- Retry, Backoff, and Idempotency Policies.
 ./google/cloud/spanner/samples/README.md:21:16     - Unknown word (bazelbuild) -- to workaround [bazelbuild/bazel#10621](https:
-./google/cloud/storage/CMakeLists.txt:157:21    - Unknown word (streambuf)  -- internal/object_streambuf.cc
-./google/cloud/storage/CMakeLists.txt:437:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
-./google/cloud/storage/CMakeLists.txt:613:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c"
+./google/cloud/storage/CMakeLists.txt:159:21    - Unknown word (streambuf)  -- internal/object_streambuf.cc
+./google/cloud/storage/CMakeLists.txt:483:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
+./google/cloud/storage/CMakeLists.txt:659:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c"
 ./google/cloud/storage/CMakeLists.txt:69:5      - Unknown word (hmac)       -- hmac_key_metadata.cc
 ./google/cloud/storage/README.md:82:29     - Unknown word (istreambuf) -- string contents{std::istreambuf_iterator<char>{reader
 ./google/cloud/storage/benchmarks/README.md:10:61     - Unknown word (TTFB)       -- time to first byte (TTFB) is high, so
@@ -301,26 +301,27 @@ Lines:
 ./google/cloud/storage/doc/storage-mocking.dox:15:57     - Unknown word (readobject) -- samples.cc mock successful readobject
 ./google/cloud/storage/doc/storage-mocking.dox:29:57     - Unknown word (writeobject) -- samples.cc mock successful writeobject
 ./google/cloud/storage/doc/storage-mocking.dox:7:91      - Unknown word (ueeful)     -- framework, this is specially ueeful
-./google/cloud/storage/emulator/README.md:24:76     - Unknown word (logfile)    -- threads 10 --access-logfile - --chdir ./google/cloud
-./google/cloud/storage/emulator/README.md:24:88     - Unknown word (chdir)      -- -access-logfile - --chdir ./google/cloud/storage
-./google/cloud/storage/emulator/README.md:32:50     - Unknown word (enviroment) -- please set the following enviroment variable
-./google/cloud/storage/emulator/README.md:42:13     - Unknown word (testbench)  -- The `x-goog-testbench-instructions` header
+./google/cloud/storage/emulator/README.md:32:76     - Unknown word (logfile)    -- threads 10 --access-logfile - --chdir ./google/cloud
+./google/cloud/storage/emulator/README.md:32:88     - Unknown word (chdir)      -- -access-logfile - --chdir ./google/cloud/storage
+./google/cloud/storage/emulator/README.md:40:50     - Unknown word (enviroment) -- please set the following enviroment variable
+./google/cloud/storage/emulator/README.md:50:13     - Unknown word (testbench)  -- The `x-goog-testbench-instructions` header
 ./google/cloud/storage/emulator/database.py:146:14    - Unknown word (onlys)      -- rest_onlys = []
 ./google/cloud/storage/emulator/database.py:36:9      - Unknown word (raii)       -- def raii(self, grpc_server):
-./google/cloud/storage/emulator/emulator.py:24:6      - Unknown word (werkzeug)   -- from werkzeug import serving
-./google/cloud/storage/emulator/emulator.py:63:5      - Unknown word (etype)      -- etype = flask.request.args
+./google/cloud/storage/emulator/emulator.py:25:6      - Unknown word (werkzeug)   -- from werkzeug import serving
+./google/cloud/storage/emulator/emulator.py:64:5      - Unknown word (etype)      -- etype = flask.request.args
 ./google/cloud/storage/emulator/gcs/project.py:104:24    - Unknown word (Hmac)                       -- "ETag for `HmacKeys: update` in %s"
 ./google/cloud/storage/emulator/gcs/project.py:123:18    - Unknown word (Resotoring)                 -- "Resotoring DELETE key in `HmacKeys
 ./google/cloud/storage/emulator/gcs/project.py:44:29     - Unknown word (abcdefghijklmnopqrstuvwxyz) -- [random.choice("abcdefghijklmnopqrstuvwxyz0123456789") for _ in
 ./google/cloud/storage/emulator/gcs/project.py:46:20     - Unknown word (gmtime)                     -- now = time.gmtime(time.time())
 ./google/cloud/storage/emulator/grpc_server.py:169:42    - Unknown word (Oneof)      -- message = request.WhichOneof("first_message")
+./google/cloud/storage/emulator/requirements.txt:4:10      - Unknown word (toolbelt)   -- requests-toolbelt==0.9.1
 ./google/cloud/storage/emulator/tests/test_gcs.py:388:64    - Unknown word (Bucket'ones) -- patch` are similar to Bucket'ones, we only
-./google/cloud/storage/emulator/tests/test_utils.py:276:18    - Unknown word (noacl)      -- response_noacl = utils.common.filter
+./google/cloud/storage/emulator/tests/test_utils.py:279:18    - Unknown word (noacl)      -- response_noacl = utils.common.filter
 ./google/cloud/storage/emulator/utils/acl.py:77:21     - Unknown word (invaild)    -- utils.error.invaild("Team %s for project
-./google/cloud/storage/emulator/utils/common.py:139:76    - Unknown word (Scalpl)     -- keys that works with `Scalpl` library.
-./google/cloud/storage/emulator/utils/common.py:178:13    - Unknown word (childrens)  -- childrens_fields = []
-./google/cloud/storage/emulator/utils/common.py:206:9     - Unknown word (simplfied)  -- simplfied_key = remove_index(key
-./google/cloud/storage/emulator/utils/common.py:300:6     - Unknown word (rtype)      -- :rtype: str
+./google/cloud/storage/emulator/utils/common.py:143:76    - Unknown word (Scalpl)     -- keys that works with `Scalpl` library.
+./google/cloud/storage/emulator/utils/common.py:182:13    - Unknown word (childrens)  -- childrens_fields = []
+./google/cloud/storage/emulator/utils/common.py:210:9     - Unknown word (simplfied)  -- simplfied_key = remove_index(key
+./google/cloud/storage/emulator/utils/common.py:280:6     - Unknown word (rtype)      -- :rtype: str
 ./google/cloud/storage/emulator/utils/error.py:32:42     - Unknown word (jsonify)    -- make_response(flask.jsonify(self.msg), self.code
 ./google/cloud/storage/tests/conformance_tests.proto:116:38    - Unknown word (prepending)    -- expectedDecodedPolicy before prepending the PolicyInput.fields
 ./google/cloud/storage/tests/conformance_tests.proto:82:24     - Unknown word (lexigraphical) -- E.1: Order them in lexigraphical order so it's the
