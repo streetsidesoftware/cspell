@@ -3,7 +3,7 @@ Repository: microsoft/TypeScript-Website
 Url: "https://github.com/microsoft/TypeScript-Website.git"
 Args: ["--config=../../../../config/repositories/microsoft/TypeScript-Website/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 787, Issues found: 730 in 178 files
+ CSpell: Files checked: 725, Issues found: 649 in 147 files
  exit code: 1
 ./docs/Deprecating a page.md:3:109     - Unknown word (Dont)       -- deleting because [Cool URIs Dont Change](https://www
 ./docs/New TypeScript Version.md:115:67    - Unknown word (schemastore) -- schemastore.git /tmp/schemastore
@@ -33,6 +33,7 @@ Lines:
 ./packages/documentation/copy/en/handbook-v2/Narrowing.md:475:21    - Unknown word (sharkey)    -- if (pet.name === "sharkey") return false;
 ./packages/documentation/copy/en/handbook-v2/The Handbook.md:48:208    - Unknown word (bazel)      -- closure, lerna, rush, bazel, preact, vue, angular
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Conditional Types.md:208:6     - Unknown word (Bools)      -- type Bools = GetReturnType<(a:
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Generics.md:353:22    - Unknown word (Mikle)      -- nametag: string = "Mikle";
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Indexed Access Types.md:38:19     - Unknown word (alve)       -- type I1 = Person["alve"];
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Keyof Type Operator.md:25:6      - Unknown word (Mapish)     -- type Mapish = { [k: string]: boolean
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:156:6     - Unknown word (Shouty)     -- type ShoutyGreeting = Uppercase
@@ -89,28 +90,11 @@ Lines:
 ./packages/documentation/copy/en/tutorials/ASP.NET Core.md:92:37     - Unknown word (diaglogue)  -- showing the new file diaglogue with TypeScript JSON
 ./packages/documentation/scripts/generateDocsNavigationPerLanguage.js:206:9     - Unknown word (navigations) -- const navigations: Record<string, SidebarNavIte
 ./packages/documentation/scripts/generateTypesForFilesInDocs.js:24:20     - Unknown word (ortatherox) -- // From:   '/Users/ortatherox/dev/typescript/new-website
-./packages/docusaurus-preset-shiki-twoslash/README.md:19:54     - Unknown word (nord)       -- twoslash", { theme: "nord" }]
-./packages/docusaurus-preset-shiki-twoslash/README.md:25:15     - Unknown word (npmjs)      -- 1. **Go read [npmjs.com/package/remark-shiki
-./packages/docusaurus-preset-shiki-twoslash/index.js:15:29     - Unknown word (divs)       -- now all they have is divs which will NOOP
-./packages/docusaurus-preset-shiki-twoslash/twoslash.css:211:17    - Unknown word (Cascadia)   -- font-family: "Cascadia Mono-SemiLight", "JetBrains
-./packages/docusaurus-preset-shiki-twoslash/twoslash.css:87:41     - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%
-./packages/eleventy-plugin-shiki-twoslash/README.md:1:5       - Unknown word (Eleventy)   -- ### Eleventy Shiki Twoslash
-./packages/eleventy-plugin-shiki-twoslash/index.js:3:28      - Unknown word (deasync)    -- sleep } = require("deasync")
-./packages/eleventy-plugin-shiki-twoslash/index.js:6:15      - Unknown word (eleventy)   -- * @param {*} eleventyConfig
-./packages/gatsby-remark-shiki-twoslash/src/ambient.d.ts:1:17      - Unknown word (unist)      -- declare module 'unist-util-visit'
-./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:16:19     - Unknown word (SPTWR)      -- "spelltower/": "SPTWR",
-./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:16:4      - Unknown word (spelltower) -- "spelltower/": "SPTWR",
-./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:17:18     - Unknown word (TPSFT)      -- "typeshift/": "TPSFT",
-./packages/gatsby-remark-shiki-twoslash/test/fixtures/importNodeTypes.md:17:4      - Unknown word (typeshift)  -- "typeshift/": "TPSFT",
-./packages/gatsby-remark-shiki-twoslash/test/fixtures/simple-interface.md:1:21      - Unknown word (dissapear)  -- ## The { should not dissapear
-./packages/gatsby-remark-shiki-twoslash/test/renderer.test.ts:102:48    - Unknown word (doesnt)     -- results when a theme doesnt have unique tokens for
 ./packages/glossary/copy/en/index-signatures.md:18:3      - Unknown word (taniguchi)  -- taniguchi: 0.6782344919;
 ./packages/glossary/copy/en/index-signatures.md:19:3      - Unknown word (raabe)      -- raabe: 0.9189385332;
 ./packages/glossary/copy/en/shape.md:10:10     - Unknown word (Shibden)    -- name: "Shibden hall",
 ./packages/glossary/copy/en/type-system.md:17:13     - Unknown word (Maplewood)  -- address: "Maplewood",
-./packages/hexo-shiki-twoslash/index.js:25:35     - Unknown word (infostring) -- code = function (code, infostring) {
-./packages/markdown-it-shiki-twoslash/README.md:37:337    - Unknown word (deasync'd)  -- probably don't want deasync'd code in critical systems
-./packages/markdown-it-shiki-twoslash/src/index.ts:11:3      - Unknown word (markdownit) -- markdownit,
+./packages/handbook-epub/assets/ebook-style.css:100:41    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%
 ./packages/playground-examples/copy/en/3-8/Syntax and Messaging/Private Class Fields.ts:55:17     - Unknown word (Cherny)     -- oby["_name"] = "Cherny";
 ./packages/playground-examples/copy/en/4-0/New TS Features/Named Tuples.ts:5:37      - Unknown word (Tuple's)    -- TypeScript 4.0, the type of a Tuple's gained the ability to
 ./packages/playground-examples/copy/en/4-1/Template Literals/String Manipulation with Template Literals.ts:84:40     - Unknown word (Vanderkam)  -- route extractor by Dan Vanderkam
@@ -132,10 +116,6 @@ Lines:
 ./packages/sandbox/src/tsWorker.ts:44:5      - Unknown word (postion)    -- postion: number,
 ./packages/sandbox/src/tsWorker.ts:50:5      - Unknown word (positon)    -- positon: number,
 ./packages/sandbox/src/vendor/lzstring.min.js:6:28      - Unknown word (Hocevar)    -- Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
-./packages/shiki-twoslash/README.md:16:131    - Unknown word (nextjs)     -- using Remark (11ty, nextjs, )
-./packages/shiki-twoslash/README.md:40:54     - Unknown word (Shiki's)    -- is an intersection of Shiki's [`HighlighterOptions
-./packages/shiki-twoslash/src/parseCodeFenceInfo.ts:162:22    - Unknown word (Highlightable) -- export const shouldBeHighlightable = (meta: any) => {
-./packages/shiki-twoslash/test/parseCodeFenceInfo.test.ts:32:25     - Unknown word (highlightable) -- correctly says it's highlightable", () => {
 ./packages/ts-twoslasher/README.md:382:16    - Unknown word (unneccessary) -- #### `cuts_out_unneccessary_code.ts`
 ./packages/ts-twoslasher/scripts/makeGlobals.js:3:29      - Unknown word (tstwoslash) -- Creates a web version of tstwoslash which sets a global
 ./packages/ts-twoslasher/src/index.ts:456:11    - Unknown word (lsped)      -- const lspedQueries = updates.queries
@@ -162,9 +142,11 @@ Lines:
 ./packages/typescriptlang-org/src/components/index/MigrationStories.tsx:262:14    - Unknown word (Vercel)     -- <p>Vercel</p>
 ./packages/typescriptlang-org/src/components/index/MigrationStories.tsx:95:55     - Unknown word (Hawaiʻi)    -- gave a talk at JSConf Hawaiʻi on how Airbnb adopted
 ./packages/typescriptlang-org/src/components/layout/CookieBanner.tsx:48:20     - Unknown word (preconnect) -- <link rel="preconnect" href="https://consentdeliver
+./packages/typescriptlang-org/src/components/layout/CookieBanner.tsx:51:42     - Unknown word (openx)      -- cookie-banner" className="openx"></div>
 ./packages/typescriptlang-org/src/components/layout/fonts.scss:522:17    - Unknown word (Nirmala)    -- font-family: "Nirmala UI", "Segoe UI", -apple
 ./packages/typescriptlang-org/src/components/layout/fonts.scss:558:17    - Unknown word (Malgun)     -- font-family: "Malgun Gothic", Gulim, "Segoe
 ./packages/typescriptlang-org/src/components/layout/fonts.scss:565:50    - Unknown word (Champa)     -- UI Web", "Lao UI", DokChampa, "Segoe UI",
+./packages/typescriptlang-org/src/components/layout/fonts.scss:5:17      - Unknown word (Cascadia)   -- font-family: "Cascadia Mono-SemiLight";
 ./packages/typescriptlang-org/src/components/layout/fonts.scss:614:38    - Unknown word (Kmer)       -- Leelawadee UI Web", "Kmer UI", "Segoe UI", -apple
 ./packages/typescriptlang-org/src/components/layout/fonts.scss:649:41    - Unknown word (Pmingliu)   -- Microsoft Jhenghei UI", Pmingliu, "Segoe UI", -apple
 ./packages/typescriptlang-org/src/components/layout/fonts.scss:65:17     - Unknown word (Leelawadee) -- font-family: "Leelawadee UI Web";
@@ -323,6 +305,7 @@ Lines:
 ./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3370   - Unknown word (libphonenumber) -- plugin-prettier, google-libphonenumber, postcss-modules-local
 ./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3477   - Unknown word (bser)           -- raf, react-responsive, bser, material-ui, css, koa
 ./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:3511   - Unknown word (watchpack)      -- material-ui, css, koa-send, watchpack, update-notifier, react
+./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:529    - Unknown word (unist)      -- tough-cookie, request, unist, source-list-map, caseless
 ./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:553    - Unknown word (caseless)   -- unist, source-list-map, caseless, tapable, webpack, estree
 ./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:563    - Unknown word (tapable)    -- list-map, caseless, tapable, webpack, estree, jasmine
 ./packages/typescriptlang-org/src/templates/pages/dt/index.tsx:28:581    - Unknown word (estree)     -- caseless, tapable, webpack, estree, jasmine, webpack-env
@@ -350,5 +333,4 @@ Lines:
 ./packages/typescriptlang-org/static/js/docsearch.js:2:75638   - Unknown word (algoliasearch)    -- webpack_require__(8)("algoliasearch");var clone=__webpack
 ./packages/typescriptlang-org/static/js/docsearch.js:2:76700   - Unknown word (algolianet)       -- pplicationID+"-"+hostNumber+".algolianet.com"});var mainSuffix
 ./packages/typescriptlang-org/static/js/vs.loader.js:25:743    - Unknown word (Annonymous) -- new Map,this._currentAnnonymousDefineCall=null,this
-./packages/vuepress-plugin-shiki-twoslash/index.js:4:10      - Unknown word (vuepress)   -- name: "vuepress-plugin-shiki-twoslash
 ./watcher.js:194:40    - Unknown word (afplay)     -- (path, volume) => `afplay \"${path}\" -v ${volume

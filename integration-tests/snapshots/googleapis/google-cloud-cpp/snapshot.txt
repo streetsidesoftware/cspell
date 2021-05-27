@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["-c","ci/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1760, Issues found: 3096 in 237 files
+ CSpell: Files checked: 1762, Issues found: 3102 in 237 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -202,9 +202,9 @@ Lines:
 ./generator/integration_tests/test.proto:742:39    - Unknown word (goldenkitchensink) -- api.default_host) = "goldenkitchensink.googleapis.com";
 ./generator/integration_tests/test.proto:809:33    - Unknown word (ommited)           -- nothing and should be ommited by command line arg
 ./generator/integration_tests/test.proto:838:52    - Unknown word (UNIQUEID)          -- iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
-./google/cloud/CMakeLists.txt:140:22    - Unknown word (msvc)       -- internal/disable_msvc_crt_secure_warnings
-./google/cloud/CMakeLists.txt:151:14    - Unknown word (getenv)     -- internal/getenv.cc
-./google/cloud/CMakeLists.txt:166:14    - Unknown word (strerror)   -- internal/strerror.cc
+./google/cloud/CMakeLists.txt:142:22    - Unknown word (msvc)       -- internal/disable_msvc_crt_secure_warnings
+./google/cloud/CMakeLists.txt:153:14    - Unknown word (getenv)     -- internal/getenv.cc
+./google/cloud/CMakeLists.txt:168:14    - Unknown word (strerror)   -- internal/strerror.cc
 ./google/cloud/bigquery/CMakeLists.txt:151:38    - Unknown word (lgoogle)     -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_bigquery"
 ./google/cloud/bigquery/CMakeLists.txt:26:30     - Unknown word (DEPS)       -- GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::cloud
 ./google/cloud/bigquery/CMakeLists.txt:84:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
@@ -251,7 +251,6 @@ Lines:
 ./google/cloud/bigtable/tools/generate_rpc_policy_parameters.py:19:56     - Unknown word (gapic)      -- defined in bigtableadmin_gapic.yaml
 ./google/cloud/examples/hello_world_grpc/Dockerfile:26:1      - Unknown word (WORKDIR)    -- WORKDIR /home/build
 ./google/cloud/examples/hello_world_grpc/Dockerfile:37:1      - Unknown word (ENTRYPOINT) -- ENTRYPOINT /r/hello_world_grpc
-./google/cloud/firestore/CMakeLists.txt:87:27     - Unknown word (submodules) -- needs to know where the submodules will be installed from
 ./google/cloud/firestore/firestore_client.pc:24:20     - Unknown word (lfirestore) -- Libs: -L${libdir} -lfirestore_client
 ./google/cloud/internal/README.md:1:30      - Unknown word (gogle)      -- Implementation Details for gogle/cloud/*.{h,cc}
 ./google/cloud/internal/build_info.cc.in:18:11     - Unknown word (cctype)     -- #include <cctype>
@@ -300,14 +299,16 @@ Lines:
 ./google/cloud/storage/doc/storage-mocking.dox:15:57     - Unknown word (readobject) -- samples.cc mock successful readobject
 ./google/cloud/storage/doc/storage-mocking.dox:29:57     - Unknown word (writeobject) -- samples.cc mock successful writeobject
 ./google/cloud/storage/doc/storage-mocking.dox:7:91      - Unknown word (ueeful)     -- framework, this is specially ueeful
-./google/cloud/storage/emulator/README.md:32:76     - Unknown word (logfile)    -- threads 10 --access-logfile - --chdir ./google/cloud
-./google/cloud/storage/emulator/README.md:32:88     - Unknown word (chdir)      -- -access-logfile - --chdir ./google/cloud/storage
+./google/cloud/storage/emulator/README.md:32:76     - Unknown word (logfile)    -- threads 10 --access-logfile - --chdir google/cloud
+./google/cloud/storage/emulator/README.md:32:88     - Unknown word (chdir)      -- -access-logfile - --chdir google/cloud/storage
 ./google/cloud/storage/emulator/README.md:40:50     - Unknown word (enviroment) -- please set the following enviroment variable
 ./google/cloud/storage/emulator/README.md:50:13     - Unknown word (testbench)  -- The `x-goog-testbench-instructions` header
-./google/cloud/storage/emulator/database.py:146:14    - Unknown word (onlys)      -- rest_onlys = []
-./google/cloud/storage/emulator/database.py:36:9      - Unknown word (raii)       -- def raii(self, grpc_server):
-./google/cloud/storage/emulator/emulator.py:25:6      - Unknown word (werkzeug)   -- from werkzeug import serving
-./google/cloud/storage/emulator/emulator.py:64:5      - Unknown word (etype)      -- etype = flask.request.args
+./google/cloud/storage/emulator/database.py:161:14    - Unknown word (onlys)      -- rest_onlys = []
+./google/cloud/storage/emulator/database.py:318:34    - Unknown word (deque)      -- key: collections.deque(value) for key, value
+./google/cloud/storage/emulator/database.py:51:9      - Unknown word (raii)       -- def raii(self, grpc_server):
+./google/cloud/storage/emulator/emulator.py:117:5     - Unknown word (etype)      -- etype = flask.request.args
+./google/cloud/storage/emulator/emulator.py:26:6      - Unknown word (werkzeug)   -- from werkzeug import serving
+./google/cloud/storage/emulator/emulator.py:433:41    - Unknown word (Rentention) -- storage.buckets.lockRententionPolicy")
 ./google/cloud/storage/emulator/gcs/project.py:104:24    - Unknown word (Hmac)                       -- "ETag for `HmacKeys: update` in %s"
 ./google/cloud/storage/emulator/gcs/project.py:123:18    - Unknown word (Resotoring)                 -- "Resotoring DELETE key in `HmacKeys
 ./google/cloud/storage/emulator/gcs/project.py:44:29     - Unknown word (abcdefghijklmnopqrstuvwxyz) -- [random.choice("abcdefghijklmnopqrstuvwxyz0123456789") for _ in
@@ -315,12 +316,13 @@ Lines:
 ./google/cloud/storage/emulator/grpc_server.py:169:42    - Unknown word (Oneof)      -- message = request.WhichOneof("first_message")
 ./google/cloud/storage/emulator/requirements.txt:4:10      - Unknown word (toolbelt)   -- requests-toolbelt==0.9.1
 ./google/cloud/storage/emulator/tests/test_gcs.py:391:64    - Unknown word (Bucket'ones) -- patch` are similar to Bucket'ones, we only
-./google/cloud/storage/emulator/tests/test_utils.py:278:18    - Unknown word (noacl)      -- response_noacl = utils.common.filter
+./google/cloud/storage/emulator/tests/test_utils.py:280:18    - Unknown word (noacl)      -- response_noacl = utils.common.filter
+./google/cloud/storage/emulator/tests/test_utils.py:622:52    - Unknown word (returdn)    -- random_operation": ["returdn-503", "return-503"]
 ./google/cloud/storage/emulator/utils/acl.py:77:21     - Unknown word (invaild)    -- utils.error.invaild("Team %s for project
-./google/cloud/storage/emulator/utils/common.py:143:76    - Unknown word (Scalpl)     -- keys that works with `Scalpl` library.
-./google/cloud/storage/emulator/utils/common.py:182:13    - Unknown word (childrens)  -- childrens_fields = []
-./google/cloud/storage/emulator/utils/common.py:210:9     - Unknown word (simplfied)  -- simplfied_key = remove_index(key
-./google/cloud/storage/emulator/utils/common.py:280:6     - Unknown word (rtype)      -- :rtype: str
+./google/cloud/storage/emulator/utils/common.py:151:76    - Unknown word (Scalpl)     -- keys that works with `Scalpl` library.
+./google/cloud/storage/emulator/utils/common.py:190:13    - Unknown word (childrens)  -- childrens_fields = []
+./google/cloud/storage/emulator/utils/common.py:218:9     - Unknown word (simplfied)  -- simplfied_key = remove_index(key
+./google/cloud/storage/emulator/utils/common.py:288:6     - Unknown word (rtype)      -- :rtype: str
 ./google/cloud/storage/emulator/utils/error.py:32:42     - Unknown word (jsonify)    -- make_response(flask.jsonify(self.msg), self.code
 ./google/cloud/storage/tests/conformance_tests.proto:116:38    - Unknown word (prepending)    -- expectedDecodedPolicy before prepending the PolicyInput.fields
 ./google/cloud/storage/tests/conformance_tests.proto:82:24     - Unknown word (lexigraphical) -- E.1: Order them in lexigraphical order so it's the
