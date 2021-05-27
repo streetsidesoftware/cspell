@@ -26,12 +26,12 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
 
 export interface FileSettings extends ExtendableSettings {
     /**
-     * Configuration format version of the setting file.
+     * Configuration format version of the settings file.
      * @default "0.2"
      */
     version?: '0.2' | '0.1';
 
-    /** Words to add to dictionary -- should only be in the user config file. */
+    /** Words to add to global dictionary -- should only be in the user config file. */
     userWords?: string[];
 
     /** Other settings files to be included */
@@ -370,7 +370,6 @@ export type PredefinedPatterns =
     | 'CStyleComment'
     | 'Email'
     | 'EscapeCharacters'
-    | 'HexDigits'
     | 'HexValues'
     | 'href'
     | 'PhpHereDoc'

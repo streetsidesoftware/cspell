@@ -2,7 +2,6 @@
 // cSpell:ignore anrvtbf
 export const regExMatchUrls = /(?:https?|ftp):\/\/[^\s"]+/gi;
 export const regExHRef = /\bhref\s*=\s*".*?"/gi;
-export const regExHexDigits = /^x?[0-1a-f]+$/i;
 export const regExMatchCommonHexFormats =
     /(?:#[0-9a-f]{3,8})|(?:0x[0-9a-f]+)|(?:\\u[0-9a-f]{4})|(?:\\x\{[0-9a-f]{4}\})/gi;
 export const regExSpellingGuardBlock =

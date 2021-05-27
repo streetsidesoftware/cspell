@@ -167,7 +167,6 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 .filter(
                     rememberFilter((wo) => !ignoreWordsSet.has(wo.text.toLowerCase()) && !ignoreWordsSet.has(wo.text))
                 )
-                .filter(rememberFilter((wo) => !RxPat.regExHexDigits.test(wo.text))) // Filter out any hex numbers
                 .filter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))) // Filter out any repeated characters like xxxxxxxxxx
                 // get back the original text.
                 .map((wo) => ({

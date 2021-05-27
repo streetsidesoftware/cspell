@@ -25,7 +25,6 @@ const regExpSpellCheckerDisable = [
 const predefinedPatterns = [
     // Exclude patterns
     { name: 'Urls', pattern: RegPat.regExMatchUrls },
-    { name: 'HexDigits', pattern: RegPat.regExHexDigits },
     { name: 'HexValues', pattern: RegPat.regExMatchCommonHexFormats },
     { name: 'SpellCheckerDisable', pattern: regExpSpellCheckerDisable },
     { name: 'PublicKey', pattern: RegPat.regExPublicKey },

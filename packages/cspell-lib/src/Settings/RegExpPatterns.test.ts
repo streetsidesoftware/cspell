@@ -218,10 +218,6 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
-    test('for hex values', () => {
-        expect(RegPat.regExHexDigits.test('FFEE')).toBe(true);
-    });
-
     test('tests finding matching positions', () => {
         const text = sampleCode2LF;
         const urls = TextRange.findMatchingRanges(matchUrl, text);
