@@ -256,6 +256,39 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
+    test.each`
+        str                         | expected      | comment
+        ${''}                       | ${undefined}  | ${''}
+        ${'hello'}                  | ${undefined}  | ${''}
+        ${'commit 60975ea j'}       | ${'60975ea'}  | ${''}
+        ${'commit c0ffee j'}        | ${undefined}  | ${'not long enough'}
+        ${'commit c00ffee j'}       | ${'c00ffee'}  | ${''}
+        ${'commit feeeeed j'}       | ${undefined}  | ${'does not contain any digits'}
+        ${'commit feeeeed1 j'}      | ${'feeeeed1'} | ${''}
+        ${'commit c00ffee 0baad j'} | ${'c00ffee'}  | ${'only the first one is matched'}
+    `('regExCommitHash "$str" expect "$expected"', ({ str, expected }) => {
+        const r = str.match(RegPat.regExCommitHash);
+        expect(r?.[0]).toEqual(expected);
+    });
+
+    test.each`
+        str                                      | expected        | comment
+        ${''}                                    | ${undefined}    | ${''}
+        ${'hello'}                               | ${undefined}    | ${''}
+        ${'commit 0x60975ea j'}                  | ${'0x60975ea'}  | ${''}
+        ${'only letters 0xfeed j'}               | ${'0xfeed'}     | ${''}
+        ${'commit 0xfeeeeed1 j'}                 | ${'0xfeeeeed1'} | ${''}
+        ${'small value 0xf'}                     | ${'0xf'}        | ${''}
+        ${'trailing _ messes stuff up 0xf_ '}    | ${undefined}    | ${''}
+        ${'leading _ messes stuff up _0xf '}     | ${undefined}    | ${''}
+        ${'leading digit does not match 10xf '}  | ${undefined}    | ${''}
+        ${'leading letter does not match a0xf '} | ${undefined}    | ${''}
+        ${'commit c00ffee 0x0baad j'}            | ${'0x0baad'}    | ${''}
+    `('regExHexValue "$str" expect "$expected"', ({ str, expected }) => {
+        const r = str.match(RegPat.regExHexValue);
+        expect(r?.[0]).toEqual(expected);
+    });
+
     test('tests finding matching positions CRLF', () => {
         const text = sampleCode2CRLF;
         const urls = TextRange.findMatchingRanges(matchUrl, text);

@@ -368,6 +368,8 @@ export type Pattern = string | InternalRegExp;
 export type PredefinedPatterns =
     | 'Base64'
     | 'CStyleComment'
+    | 'CStyleHexValue'
+    | 'CommitHash'
     | 'Email'
     | 'EscapeCharacters'
     | 'HexValues'

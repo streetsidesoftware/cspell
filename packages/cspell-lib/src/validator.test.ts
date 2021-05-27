@@ -61,9 +61,9 @@ describe('Validator', () => {
         const words = results.map((wo) => wo.text);
         expect(words).toEqual(expect.arrayContaining(['wrongg']));
         expect(words).toEqual(expect.arrayContaining(['mispelled']));
-        expect(words).toEqual(expect.arrayContaining(['xaccd']));
+        expect(words).toEqual(expect.not.arrayContaining(['xaccd']));
         expect(words).toEqual(expect.not.arrayContaining(['ctrip']));
-        expect(words).toEqual(expect.arrayContaining(['FFEE']));
+        expect(words).toEqual(expect.not.arrayContaining(['FFEE']));
         expect(words).toEqual(expect.not.arrayContaining(['nmove']));
     });
 

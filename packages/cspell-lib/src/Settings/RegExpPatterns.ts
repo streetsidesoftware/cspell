@@ -4,6 +4,8 @@ export const regExMatchUrls = /(?:https?|ftp):\/\/[^\s"]+/gi;
 export const regExHRef = /\bhref\s*=\s*".*?"/gi;
 export const regExMatchCommonHexFormats =
     /(?:#[0-9a-f]{3,8})|(?:0x[0-9a-f]+)|(?:\\u[0-9a-f]{4})|(?:\\x\{[0-9a-f]{4}\})/gi;
+export const regExCommitHash = /\b(?![a-f]+\b)(?:0x)?[0-9a-f]{7,}\b/gi; // Match Commit Hashes that contain at least one digit.
+export const regExHexValue = /\b0x[0-9a-f]+\b/gi;
 export const regExSpellingGuardBlock =
     /(\bc?spell(?:-?checker)?::?)\s*disable(?!-line|-next)\b[\s\S]*?((?:\1\s*enable\b)|$)/gi;
 export const regExSpellingGuardNext = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;

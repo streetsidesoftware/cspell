@@ -24,6 +24,8 @@ const regExpSpellCheckerDisable = [
 // cspell:ignore filetypes
 const predefinedPatterns = [
     // Exclude patterns
+    { name: 'CommitHash', pattern: RegPat.regExCommitHash },
+    { name: 'CStyleHexValue', pattern: RegPat.regExHexValue },
     { name: 'Urls', pattern: RegPat.regExMatchUrls },
     { name: 'HexValues', pattern: RegPat.regExMatchCommonHexFormats },
     { name: 'SpellCheckerDisable', pattern: regExpSpellCheckerDisable },
@@ -62,6 +64,8 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'PublicKey',
     'RsaCert',
     'Base64',
+    'CommitHash',
+    'CStyleHexValue',
     'SHA',
 ];
 
