@@ -369,6 +369,7 @@ export type PredefinedPatterns =
     | 'Base64'
     | 'CStyleComment'
     | 'CStyleHexValue'
+    | 'CSSHexValue'
     | 'CommitHash'
     | 'Email'
     | 'EscapeCharacters'
@@ -385,6 +386,7 @@ export type PredefinedPatterns =
     | 'SpellCheckerIgnoreInDocSetting'
     | 'string'
     | 'Urls'
+    | 'UUID'
     | 'Everything';
 
 /** This matches the name in a pattern definition */

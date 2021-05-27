@@ -25,7 +25,8 @@ const regExpSpellCheckerDisable = [
 const predefinedPatterns = [
     // Exclude patterns
     { name: 'CommitHash', pattern: RegPat.regExCommitHash },
-    { name: 'CStyleHexValue', pattern: RegPat.regExHexValue },
+    { name: 'CStyleHexValue', pattern: RegPat.regExCStyleHexValue },
+    { name: 'CSSHexValue', pattern: RegPat.regExCSSHexValue },
     { name: 'Urls', pattern: RegPat.regExMatchUrls },
     { name: 'HexValues', pattern: RegPat.regExMatchCommonHexFormats },
     { name: 'SpellCheckerDisable', pattern: regExpSpellCheckerDisable },
@@ -35,6 +36,7 @@ const predefinedPatterns = [
     { name: 'Base64', pattern: RegPat.regExBase64 },
     { name: 'Email', pattern: RegPat.regExEmail },
     { name: 'SHA', pattern: RegPat.regExSha },
+    { name: 'UUID', pattern: RegPat.regExUUID },
     { name: 'href', pattern: RegPat.regExHRef },
     { name: 'SpellCheckerDisableBlock', pattern: RegPat.regExSpellingGuardBlock },
     { name: 'SpellCheckerDisableLine', pattern: RegPat.regExSpellingGuardLine },
@@ -66,7 +68,9 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'Base64',
     'CommitHash',
     'CStyleHexValue',
+    'CSSHexValue',
     'SHA',
+    'UUID',
 ];
 
 // This bit of copying is done to have the complier ensure that the defaults exist.

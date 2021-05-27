@@ -272,20 +272,60 @@ describe('Validate InDocSettings', () => {
     });
 
     test.each`
-        str                                      | expected        | comment
-        ${''}                                    | ${undefined}    | ${''}
-        ${'hello'}                               | ${undefined}    | ${''}
-        ${'commit 0x60975ea j'}                  | ${'0x60975ea'}  | ${''}
-        ${'only letters 0xfeed j'}               | ${'0xfeed'}     | ${''}
-        ${'commit 0xfeeeeed1 j'}                 | ${'0xfeeeeed1'} | ${''}
-        ${'small value 0xf'}                     | ${'0xf'}        | ${''}
-        ${'trailing _ messes stuff up 0xf_ '}    | ${undefined}    | ${''}
-        ${'leading _ messes stuff up _0xf '}     | ${undefined}    | ${''}
-        ${'leading digit does not match 10xf '}  | ${undefined}    | ${''}
-        ${'leading letter does not match a0xf '} | ${undefined}    | ${''}
-        ${'commit c00ffee 0x0baad j'}            | ${'0x0baad'}    | ${''}
+        str                                      | expected
+        ${''}                                    | ${undefined}
+        ${'hello'}                               | ${undefined}
+        ${'commit 0x60975ea j'}                  | ${'0x60975ea'}
+        ${'only letters 0xfeed j'}               | ${'0xfeed'}
+        ${'commit 0xfeeeeed1 j'}                 | ${'0xfeeeeed1'}
+        ${'small value 0xf'}                     | ${'0xf'}
+        ${'trailing _ messes stuff up 0xf_ '}    | ${undefined}
+        ${'leading _ messes stuff up _0xf '}     | ${undefined}
+        ${'leading digit does not match 10xf '}  | ${undefined}
+        ${'leading letter does not match a0xf '} | ${undefined}
+        ${'commit c00ffee 0x0baad j'}            | ${'0x0baad'}
     `('regExHexValue "$str" expect "$expected"', ({ str, expected }) => {
-        const r = str.match(RegPat.regExHexValue);
+        const r = str.match(RegPat.regExCStyleHexValue);
+        expect(r?.[0]).toEqual(expected);
+    });
+
+    test.each`
+        str                                                          | expected
+        ${''}                                                        | ${undefined}
+        ${'hello'}                                                   | ${undefined}
+        ${' -- "3dcdf935-d346-48cc-bdeb-fd9369192fec": 1413'}        | ${'3dcdf935-d346-48cc-bdeb-fd9369192fec'}
+        ${'With placeholder X:XXXXXXXX-XXXX-1234-abcd-1234567890ab'} | ${'XXXXXXXX-XXXX-1234-abcd-1234567890ab'}
+    `('regExUUID "$str" expect "$expected"', ({ str, expected }) => {
+        const r = str.match(RegPat.regExUUID);
+        expect(r?.[0]).toEqual(expected);
+    });
+
+    test.each`
+        str                                                    | expected
+        ${''}                                                  | ${undefined}
+        ${'hello'}                                             | ${undefined}
+        ${'simple U+200d, U+203c'}                             | ${'U+200d'}
+        ${'range U+fa90-1fa95, U+1fa96-1fffd, U+200d, U+203c'} | ${'U+fa90-1fa95'}
+        ${'extended ranage U+1fa96-1fffd, U+200d, U+203c'}     | ${'U+1fa96-1fffd'}
+        ${'extended U+1fa9d,'}                                 | ${'U+1fa9d'}
+        ${'junk U+200h, '}                                     | ${undefined}
+    `('regExUnicodeRef "$str" expect "$expected"', ({ str, expected }) => {
+        const r = str.match(RegPat.regExUnicodeRef);
+        expect(r?.[0]).toEqual(expected);
+    });
+
+    test.each`
+        str                                | expected
+        ${''}                              | ${undefined}
+        ${'hello'}                         | ${undefined}
+        ${'background-color: #fffedb;'}    | ${'#fffedb'}
+        ${'background-color: #fffedbff;'}  | ${'#fffedbff'}
+        ${'background-color: #0fffedbff;'} | ${undefined}
+        ${'background: #a2afbc;'}          | ${'#a2afbc'}
+        ${'color: #aaa'}                   | ${'#aaa'}
+        ${'color: #ff'}                    | ${undefined}
+    `('regExCSSHexValue "$str" expect "$expected"', ({ str, expected }) => {
+        const r = str.match(RegPat.regExCSSHexValue);
         expect(r?.[0]).toEqual(expected);
     });
 

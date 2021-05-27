@@ -5,7 +5,10 @@ export const regExHRef = /\bhref\s*=\s*".*?"/gi;
 export const regExMatchCommonHexFormats =
     /(?:#[0-9a-f]{3,8})|(?:0x[0-9a-f]+)|(?:\\u[0-9a-f]{4})|(?:\\x\{[0-9a-f]{4}\})/gi;
 export const regExCommitHash = /\b(?![a-f]+\b)(?:0x)?[0-9a-f]{7,}\b/gi; // Match Commit Hashes that contain at least one digit.
-export const regExHexValue = /\b0x[0-9a-f]+\b/gi;
+export const regExCStyleHexValue = /\b0x[0-9a-f]+\b/gi;
+export const regExCSSHexValue = /#[0-9a-f]{3,8}\b/gi;
+export const regExUUID = /\b[0-9a-fx]{8}-[0-9a-fx]{4}-[0-9a-fx]{4}-[0-9a-fx]{4}-[0-9a-fx]{12}\b/gi; // x - represents placeholder values
+export const regExUnicodeRef = /\bU\+[0-9a-f]{4,5}(?:-[0-9a-f]{4,5})?/gi;
 export const regExSpellingGuardBlock =
     /(\bc?spell(?:-?checker)?::?)\s*disable(?!-line|-next)\b[\s\S]*?((?:\1\s*enable\b)|$)/gi;
 export const regExSpellingGuardNext = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;
