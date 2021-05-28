@@ -177,6 +177,8 @@ describe('Validator', () => {
     });
 });
 
+// cspell:ignore xaccd ffee
+
 const sampleCode = `
 
 // Verify urls do not get checked.
