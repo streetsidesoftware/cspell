@@ -1,9 +1,9 @@
-name: Update Dependencies Master
+name: Update Dependencies Main
 
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "**/package.json"
       - "**/package-lock.json"
@@ -20,8 +20,8 @@ jobs:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-master"
-      REF_BRANCH: master
+      NEW_BRANCH: "update-dependencies-main"
+      REF_BRANCH: main
     steps:
       - name: Start
         run: |

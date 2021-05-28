@@ -13,7 +13,7 @@ Cspell uses integration tests to verify that changes to the tools, libraries, an
 1. Historical - against a fixed commit of a repository, the integration is used to track improvements to cspell over time.
 1. Active - targets repositories that actively use cspell to address spelling issues, the integration is used to verify
    cspell works as expected against the repository.
-   Checking against `master` should be possible
+   Checking against `main` should be possible
 
 Currently, only Historical tests are supported. Active tests are possible, but would need changes to the testing tool.
 

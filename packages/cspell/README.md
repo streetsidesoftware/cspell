@@ -1,8 +1,8 @@
 # cspell
 
-[![](https://github.com/streetsidesoftware/cspell/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/streetsidesoftware/cspell/actions)
-[![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=master)](https://coveralls.io/github/streetsidesoftware/cspell?branch=master)
-[![codecov](https://codecov.io/gh/streetsidesoftware/cspell/branch/master/graph/badge.svg?token=Dr4fi2Sy08)](https://codecov.io/gh/streetsidesoftware/cspell)
+[![](https://github.com/streetsidesoftware/cspell/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/streetsidesoftware/cspell/actions)
+[![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=main)](https://coveralls.io/github/streetsidesoftware/cspell?branch=main)
+[![codecov](https://codecov.io/gh/streetsidesoftware/cspell/branch/main/graph/badge.svg?token=Dr4fi2Sy08)](https://codecov.io/gh/streetsidesoftware/cspell)
 
 A Spell Checker for Code!
 
@@ -10,7 +10,7 @@ A Spell Checker for Code!
 
 ## Support Future Development
 
-[![](https://github.com/streetsidesoftware/cspell/raw/master/resources/100px-Green_Patreon_Donate_Shield_Badge.png)](https://www.patreon.com/streetsidesoftware)
+[![](https://github.com/streetsidesoftware/cspell/raw/main/resources/100px-Green_Patreon_Donate_Shield_Badge.png)](https://www.patreon.com/streetsidesoftware)
 
 ## Features
 

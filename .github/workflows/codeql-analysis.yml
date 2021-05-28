@@ -3,11 +3,11 @@ name: "CodeQL"
 on:
   push:
     branches:
-      - master
+      - main
       - cspell4
   pull_request:
     branches:
-      - master
+      - main
       - cspell4
   schedule:
     - cron: "0 23 * * 0"
@@ -21,7 +21,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2.3.4
         with:
-          # Make sure it goes back far enough to find where the branch split from master
+          # Make sure it goes back far enough to find where the branch split from main
           fetch-depth: 20
 
       - name: Initialize CodeQL
