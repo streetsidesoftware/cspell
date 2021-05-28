@@ -372,7 +372,7 @@ function splitIntoWords(
             const i = can.i;
             const cost = (!t || t.isFound ? 0 : t.text.length) + (path?.c ?? 0);
             const exitingPath = knownPathsByIndex.get(i);
-            // Keep going of if this is a better candidate than th existing path
+            // Keep going only if this is a better candidate than the existing path
             if (exitingPath && exitingPath.c <= cost) {
                 return undefined;
             }
