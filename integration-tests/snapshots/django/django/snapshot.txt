@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2125, Issues found: 7850 in 905 files
+ CSpell: Files checked: 2125, Issues found: 7862 in 905 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -645,8 +645,8 @@ Lines:
 ./django/middleware/cache.py:21:31     - Unknown word (This'll)    -- FetchFromCacheMiddleware``. This'll most often happen when
 ./django/middleware/common.py:125:13    - Unknown word (referer)    -- referer = request.META.get(
 ./django/middleware/common.py:125:46    - Unknown word (REFERER)    -- request.META.get('HTTP_REFERER', '')
-./django/middleware/csrf.py:271:35    - Unknown word (dont)       -- if getattr(request, '_dont_enforce_csrf_checks
-./django/middleware/csrf.py:289:66    - Unknown word (MITM)       -- (man-in-the-middle, MITM) sends a
+./django/middleware/csrf.py:323:31    - Unknown word (dont)       -- if getattr(request, '_dont_enforce_csrf_checks
+./django/middleware/csrf.py:340:62    - Unknown word (MITM)       -- (man-in-the-middle, MITM) sends a
 ./django/middleware/http.py:2:8       - Unknown word (delim)      -- cc_delim_re, get_conditional
 ./django/template/__init__.py:34:19     - Unknown word (smartif)    -- - django.template.smartif
 ./django/template/base.py:248:9     - Unknown word (upto)       -- upto = 0
@@ -1063,7 +1063,7 @@ Lines:
 ./tests/auth_tests/test_basic.py:45:35     - Unknown word (jörg)       -- objects.create_user('jörg')
 ./tests/auth_tests/test_basic.py:46:35     - Unknown word (Григорий)   -- objects.create_user('Григорий')
 ./tests/auth_tests/test_basic.py:48:27     - Unknown word (iamthe)     -- omega_username = 'iamtheΩ' # U+03A9 GREEK CAPITAL
-./tests/auth_tests/test_context_processors.py:51:9      - Unknown word (pldict)     -- pldict = PermLookupDict(MockUser
+./tests/auth_tests/test_context_processors.py:58:9      - Unknown word (pldict)     -- pldict = PermLookupDict(MockUser
 ./tests/auth_tests/test_decorators.py:100:14    - Unknown word (permissioned) -- def test_permissioned_denied_redirect(self
 ./tests/auth_tests/test_forms.py:1011:41   - Unknown word (Pucb)         -- pbkdf2_sha256$100000$a6Pucb1qSFcD$WmCkn9Hqidj48NVe
 ./tests/auth_tests/test_forms.py:407:44    - Unknown word (Σαρα)       -- create_user(username='Σαρα', password='pwd')
@@ -1095,7 +1095,6 @@ Lines:
 ./tests/auth_tests/test_management.py:288:52    - Unknown word (eivatel)    -- verbose_name = _('u\u017eivatel')
 ./tests/auth_tests/test_management.py:453:44    - Unknown word (mygroup)    -- objects.create(name='mygroup')
 ./tests/auth_tests/test_management.py:534:14    - Unknown word (Orgs)       -- 'Orgs (Organization.id):
-./tests/auth_tests/test_models.py:161:26    - Unknown word (abcdefg)       -- allowed_chars = 'abcdefg'
 ./tests/auth_tests/test_models.py:199:43    - Unknown word (gibbberish)    -- User(password='some-gibbberish').has_usable_password
 ./tests/auth_tests/test_models.py:336:23    - Unknown word (nodots)        -- for perm in ('nodots', 'too.many.dots',
 ./tests/auth_tests/test_models.py:437:27    - Unknown word (isactive)      -- def test_builtin_user_isactive(self):
@@ -1246,10 +1245,10 @@ Lines:
 ./tests/forms_tests/field_tests/test_durationfield.py:50:19     - Unknown word (nombre)     -- msg = "Le nombre de jours doit être entre
 ./tests/forms_tests/field_tests/test_durationfield.py:50:29     - Unknown word (jours)      -- msg = "Le nombre de jours doit être entre {min
 ./tests/forms_tests/field_tests/test_durationfield.py:50:40     - Unknown word (être)       -- nombre de jours doit être entre {min_days} et
+./tests/forms_tests/field_tests/test_emailfield.py:21:52     - Unknown word (xdfabc)     -- idn.xyz\xe4\xf6\xfc\xdfabc.part.com',
 ./tests/forms_tests/field_tests/test_emailfield.py:22:47     - Unknown word (äöüßabc)    -- local@domain.with.idn.xyzäöüßabc.part.com')
 ./tests/forms_tests/field_tests/test_regexfield.py:61:27     - Unknown word (éèøç)       -- self.assertEqual('éèøçÎÎ你好', f.clean('éèøç
 ./tests/forms_tests/field_tests/test_slugfield.py:18:35     - Unknown word (ıçğüş)      -- assertEqual(f.clean('ıçğüş'), 'ıçğüş')
-./tests/forms_tests/tests/test_error_messages.py:132:54    - Unknown word (abcdefgh)   -- INVALID'], f.clean, 'abcdefgh')
 ./tests/forms_tests/tests/test_forms.py:1360:25   - Unknown word (reuired)    -- ({'class': 'reuired'}, {'class': 'required
 ./tests/forms_tests/tests/test_forms.py:1391:38   - Unknown word (unspec)     -- _init__(self, allow_unspec_gender=False, *args
 ./tests/forms_tests/tests/test_forms.py:1641:64   - Unknown word (Contraseña) -- PasswordInput, label='Contraseña (de nuevo)')
@@ -1379,6 +1378,7 @@ Lines:
 ./tests/gis_tests/geoapp/test_functions.py:176:14    - Unknown word (aswkt)      -- def test_aswkt(self):
 ./tests/gis_tests/geoapp/test_functions.py:28:14     - Unknown word (asgeojson)  -- def test_asgeojson(self):
 ./tests/gis_tests/geoapp/test_functions.py:453:15    - Unknown word (yfac)       -- xfac, yfac = 2, 3
+./tests/gis_tests/geoapp/test_functions.py:453:9     - Unknown word (xfac)       -- xfac, yfac = 2, 3
 ./tests/gis_tests/geoapp/test_functions.py:476:28    - Unknown word (Marino)     -- # Boundary for San Marino, courtesy of Bjorn Sandvik
 ./tests/gis_tests/geoapp/test_functions.py:476:48    - Unknown word (Bjorn)      -- Marino, courtesy of Bjorn Sandvik of thematicmapping
 ./tests/gis_tests/geoapp/test_functions.py:476:54    - Unknown word (Sandvik)    -- Marino, courtesy of Bjorn Sandvik of thematicmapping.org
@@ -1779,6 +1779,7 @@ Lines:
 ./tests/queries/tests.py:2667:9    - Unknown word (objectcs)         -- objectcs = []
 ./tests/queries/tests.py:2678:56   - Unknown word (zwei)             -- 2], objectbs[2]), ('zwei', objectas[1], objectbs
 ./tests/queries/tests.py:2701:16   - Unknown word (objectc)          -- Q2 = Q(objectc__objectb__name='deux
+./tests/queries/tests.py:2709:18   - Unknown word (BACB)             -- def test_BAB_BACB(self):
 ./tests/queries/tests.py:3322:14   - Unknown word (revo)             -- def test_revo2o_reuse(self):
 ./tests/queries/tests.py:3326:14   - Unknown word (revfk)            -- def test_revfk_noreuse(self):
 ./tests/queries/tests.py:3326:20   - Unknown word (noreuse)          -- def test_revfk_noreuse(self):
@@ -1807,6 +1808,7 @@ Lines:
 ./tests/requests/tests.py:536:49    - Unknown word (Cnter)      -- 'name=Hello%20G%C3%BCnter',
 ./tests/requests/tests.py:540:69    - Unknown word (nter)       -- 'Hello G\u0102\u0152nter']})
 ./tests/requests/tests.py:568:23    - Unknown word (recovermypassword) -- 'example.com: recovermypassword.com',
+./tests/requests/tests.py:575:25    - Unknown word (feee)              -- '[2001:19f0:feee::dead:beef:cafe]',
 ./tests/requests/tests.py:919:53    - Unknown word (Proto)             -- PROTO', 'X-Forwarded-Proto'),
 ./tests/responses/test_fileresponse.py:41:16     - Unknown word (mkfifo)     -- os.mkfifo(pipe_file)
 ./tests/responses/test_fileresponse.py:42:53     - Unknown word (RDONLY)     -- open(pipe_file, os.O_RDONLY | os.O_NONBLOCK)
@@ -1839,6 +1841,7 @@ Lines:
 ./tests/select_related/tests.py:36:36     - Unknown word (Plantae)       -- create_tree("Eukaryota Plantae Magnoliophyta Magnoliopsida
 ./tests/select_related/tests.py:36:44     - Unknown word (Magnoliophyta) -- tree("Eukaryota Plantae Magnoliophyta Magnoliopsida Fabales
 ./tests/select_related/tests.py:36:58     - Unknown word (Magnoliopsida) -- Plantae Magnoliophyta Magnoliopsida Fabales Fabaceae Pisum
+./tests/select_related/tests.py:36:80     - Unknown word (Fabaceae)      -- Magnoliopsida Fabales Fabaceae Pisum sativum")
 ./tests/select_related/tests.py:36:89     - Unknown word (Pisum)         -- agnoliopsida Fabales Fabaceae Pisum sativum")
 ./tests/select_related/tests.py:36:95     - Unknown word (sativum)       -- Fabales Fabaceae Pisum sativum")
 ./tests/select_related/tests.py:37:42     - Unknown word (Basidiomycota) -- tree("Eukaryota Fungi Basidiomycota Homobasidiomycatae Agaricales
@@ -1948,9 +1951,12 @@ Lines:
 ./tests/template_tests/syntax_tests/test_cache.py:109:65    - Unknown word (jurtles)      -- bitled out/Its earted jurtles/'
 ./tests/template_tests/syntax_tests/test_cache.py:110:79    - Unknown word (gobberwarts)  -- shall rend thee in the gobberwarts'
 ./tests/template_tests/syntax_tests/test_cache.py:111:30    - Unknown word (blurglecruncheon) -- 'with my blurglecruncheon/See if I don\'t.'
+./tests/template_tests/syntax_tests/test_cycle.py:146:35    - Unknown word (bcabcabcccaa) -- assertEqual(output, 'bcabcabcccaa')
+./tests/template_tests/syntax_tests/test_cycle.py:40:35     - Unknown word (abca)       -- assertEqual(output, 'abca')
 ./tests/template_tests/syntax_tests/test_if.py:113:21    - Unknown word (noteq)      -- @setup({'if-tag-noteq01': '{% if foo != bar
 ./tests/template_tests/syntax_tests/test_if_changed.py:26:41     - Unknown word (numx)       -- '{% for x in numx %}{% ifchanged %}{{
 ./tests/template_tests/syntax_tests/test_if_changed.py:48:41     - Unknown word (numy)       -- '{% for y in numy %}{% ifchanged %}{{
+./tests/template_tests/syntax_tests/test_if_changed.py:62:35     - Unknown word (accd)       -- assertEqual(output, 'accd')
 ./tests/template_tests/syntax_tests/test_include.py:240:14    - Unknown word (tmpl)       -- 'tmpl': engine.from_string
 ./tests/template_tests/syntax_tests/test_list_index.py:53:41     - Unknown word (dict's)     -- lookup wins out when dict's key is a string.
 ./tests/template_tests/syntax_tests/test_numpy.py:13:26     - Unknown word (Numpy)      -- skipIf(numpy is False, "Numpy must be installed to
@@ -2070,6 +2076,7 @@ Lines:
 ./tests/view_tests/tests/test_i18n.py:380:47    - Unknown word (cette)      -- = 'il faut traduire cette cha\\u00eene de caract
 ./tests/view_tests/tests/test_i18n.py:380:61    - Unknown word (eene)       -- traduire cette cha\\u00eene de caract\\u00e8res
 ./tests/view_tests/tests/test_i18n.py:404:49    - Unknown word (texto)      -- ssertContains(response, 'este texto de app3 debe ser traducido
+./tests/view_tests/tests/test_i18n.py:404:63    - Unknown word (debe)       -- 'este texto de app3 debe ser traducido')
 ./tests/view_tests/tests/test_i18n.py:444:38    - Unknown word (Entfernen)  -- assertEqual(elem.text, "Entfernen")
 ./tests/view_tests/tests/test_i18n.py:448:42    - Unknown word (Elemente)   -- assertEqual(elem.text, "455 Elemente")
 ./tests/view_tests/tests/test_i18n.py:449:59    - Unknown word (onnonplural) -- element_by_id("ngettext_onnonplural")

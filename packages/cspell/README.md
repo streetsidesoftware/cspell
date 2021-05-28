@@ -308,7 +308,6 @@ const companyName = 'Lorem ipsum dolor sit amet';
 ### Exclude patterns
 
 - `Urls`<sup>1</sup> -- Matches urls
-- `HexDigits` -- Matches hex digits: `/^x?[0-1a-f]+$/i`
 - `HexValues` -- Matches common hex format like #aaa, 0xfeef, \\u0134
 - `Base64`<sup>1</sup> -- matches base64 blocks of text longer than 40 characters.
 - `Email` -- matches most email addresses.

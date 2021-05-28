@@ -19,64 +19,55 @@ function getSettings(text: string, languageId: string) {
 }
 
 describe('Validator', () => {
-    test('validates the validator', () => {
+    test('validates the validator', async () => {
         const text = 'The quick brouwn fox jumpped over the lazzy dog.';
         const languageId = 'plaintext';
         const settings = getSettings(text, languageId);
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => {
-            const words = results.map(({ text }) => text);
-            expect(words).toEqual(['brouwn', 'jumpped', 'lazzy']);
-            return;
-        });
+        const results = await Validator.validateText(text, settings);
+        const words = results.map(({ text }) => text);
+        expect(words).toEqual(['brouwn', 'jumpped', 'lazzy']);
     });
 
-    test('validates ignore Case', () => {
+    test('validates ignore Case', async () => {
         const text = 'The Quick brown fox Jumped over the lazy dog.';
         const languageId = 'plaintext';
         const settings = getSettings(text, languageId);
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => {
-            const words = results.map(({ text }) => text);
-            expect(words).toEqual([]);
-            return;
-        });
+        const results = await Validator.validateText(text, settings);
+        const words = results.map(({ text }) => text);
+        expect(words).toEqual([]);
     });
 
-    test('validate limit', () => {
+    test('validate limit', async () => {
         const text = loremIpsum({ count: 5, units: 'paragraphs' });
         const languageId = 'plaintext';
         const settings = { ...getSettings(text, languageId), maxNumberOfProblems: 10 };
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => expect(results).toHaveLength(10));
+        const results = await Validator.validateText(text, settings);
+        expect(results).toHaveLength(10);
     });
 
-    test('validates reserved words', () => {
+    test('validates reserved words', async () => {
         const text = 'constructor const prototype type typeof null undefined';
         const languageId = 'javascript';
         const settings = { ...getSettings(text, languageId), maxNumberOfProblems: 10 };
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => expect(results).toHaveLength(0));
+        const results = await Validator.validateText(text, settings);
+        expect(results).toHaveLength(0);
     });
 
-    test('validates regex inclusions/exclusions', () => {
+    test('validates regex inclusions/exclusions', async () => {
         const text = sampleCode;
         const languageId = 'plaintext';
         const settings = { ...getSettings(text, languageId), maxNumberOfProblems: 10 };
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => {
-            const words = results.map((wo) => wo.text);
-            expect(words).toEqual(expect.arrayContaining(['wrongg']));
-            expect(words).toEqual(expect.arrayContaining(['mispelled']));
-            expect(words).toEqual(expect.not.arrayContaining(['xaccd']));
-            expect(words).toEqual(expect.not.arrayContaining(['ctrip']));
-            expect(words).toEqual(expect.not.arrayContaining(['FFEE']));
-            expect(words).toEqual(expect.not.arrayContaining(['nmove']));
-            return;
-        });
+        const results = await Validator.validateText(text, settings);
+        const words = results.map((wo) => wo.text);
+        expect(words).toEqual(expect.arrayContaining(['wrongg']));
+        expect(words).toEqual(expect.arrayContaining(['mispelled']));
+        expect(words).toEqual(expect.not.arrayContaining(['xaccd']));
+        expect(words).toEqual(expect.not.arrayContaining(['ctrip']));
+        expect(words).toEqual(expect.not.arrayContaining(['FFEE']));
+        expect(words).toEqual(expect.not.arrayContaining(['nmove']));
     });
 
-    test('validates ignoreRegExpList', () => {
+    test('validates ignoreRegExpList', async () => {
         const text = sampleCode;
         const languageId = 'plaintext';
         const settings = {
@@ -84,44 +75,35 @@ describe('Validator', () => {
             maxNumberOfProblems: 10,
             ignoreRegExpList: ['^const [wy]RON[g]+', 'mis.*led'],
         };
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => {
-            const words = results.map((wo) => wo.text);
-            expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
-            expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
-            expect(words).toEqual(expect.arrayContaining(['mischecked']));
-            return;
-        });
+        const results = await Validator.validateText(text, settings);
+        const words = results.map((wo) => wo.text);
+        expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
+        expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
+        expect(words).toEqual(expect.arrayContaining(['mischecked']));
     });
 
-    test('validates ignoreRegExpList 2', () => {
-        const results = Validator.validateText(sampleCode, {
+    test('validates ignoreRegExpList 2', async () => {
+        const results = await Validator.validateText(sampleCode, {
             ignoreRegExpList: ['/^const [wy]ron[g]+/gim', '/MIS...LED/g', '/mischecked'],
         });
-        return results.then((results) => {
-            const words = results.map((wo) => wo.text);
-            expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
-            expect(words).toEqual(expect.arrayContaining(['mispelled']));
-            expect(words).toEqual(expect.arrayContaining(['mischecked']));
-            return;
-        });
+        const words = results.map((wo) => wo.text);
+        expect(words).toEqual(expect.not.arrayContaining(['wrongg']));
+        expect(words).toEqual(expect.arrayContaining(['mispelled']));
+        expect(words).toEqual(expect.arrayContaining(['mischecked']));
     });
 
-    test('validates malformed ignoreRegExpList', () => {
-        const results = Validator.validateText(sampleCode, {
+    test('validates malformed ignoreRegExpList', async () => {
+        const results = await Validator.validateText(sampleCode, {
             ignoreRegExpList: ['/wrong[/gim', 'mis.*led'],
         });
-        return results.then((results) => {
-            const words = results.map((wo) => wo.text);
-            expect(words).toEqual(expect.arrayContaining(['wrongg']));
-            expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
-            expect(words).toEqual(expect.arrayContaining(['mischecked']));
-            return;
-        });
+        const words = results.map((wo) => wo.text);
+        expect(words).toEqual(expect.arrayContaining(['wrongg']));
+        expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
+        expect(words).toEqual(expect.arrayContaining(['mischecked']));
     });
 
     // cspell:ignore hellosd applesq bananasa respectss
-    test('Issue #7', () => {
+    test('Issue #7', async () => {
         const text = `Fails to detect obviously misspelt words, such as:
             hellosd
             applesq
@@ -131,27 +113,21 @@ describe('Validator', () => {
         const expected = ['hellosd', 'applesq', 'bananasa', 'respectss'];
         const languageId = 'plaintext';
         const settings = getSettings(text, languageId);
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => {
-            const words = results.map(({ text }) => text);
-            expect(words.sort()).toEqual(expected.sort());
-            return;
-        });
+        const results = await Validator.validateText(text, settings);
+        const words = results.map(({ text }) => text);
+        expect(words.sort()).toEqual(expected.sort());
     });
 
-    test('Validates contractions', () => {
+    test('Validates contractions', async () => {
         const text = `
             We have a bit of text to check. Don't look too hard.
             Which single quote to use? Is it shouldn't or shouldn’t?
         `;
         const languageId = 'plaintext';
         const settings = getSettings(text, languageId);
-        const results = Validator.validateText(text, settings);
-        return results.then((results) => {
-            const words = results.map(({ text }) => text);
-            expect(words.sort()).toEqual([]);
-            return;
-        });
+        const results = await Validator.validateText(text, settings);
+        const words = results.map(({ text }) => text);
+        expect(words.sort()).toEqual([]);
     });
     test('tests calcIncludeExcludeInfo', async () => {
         const words = sampleWords;
@@ -200,6 +176,8 @@ describe('Validator', () => {
         expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.INCLUDE);
     });
 });
+
+// cspell:ignore xaccd ffee
 
 const sampleCode = `
 

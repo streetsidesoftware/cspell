@@ -32,10 +32,13 @@ jobs:
       - run: npm test
 
       - name: verify trace command
-        run: node ./bin.js trace test
+        run: npm run test-bin-trace
 
       - name: verify the spell checker runs
-        run: node ./bin.js -c cspellrc.json
+        run: npm run test-bin-spell
+
+      - name: verify the check command
+        run: npm run test-bin-check
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
@@ -67,10 +70,13 @@ jobs:
       - run: npm test
 
       - name: verify trace command
-        run: node ./bin.js trace test
+        run: npm run test-bin-trace
 
       - name: verify the spell checker runs
-        run: node ./bin.js -c cspellrc.json
+        run: npm run test-bin-spell
+
+      - name: verify the check command
+        run: npm run test-bin-check
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code

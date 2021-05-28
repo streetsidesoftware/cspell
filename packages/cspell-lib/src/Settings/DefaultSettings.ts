@@ -24,8 +24,10 @@ const regExpSpellCheckerDisable = [
 // cspell:ignore filetypes
 const predefinedPatterns = [
     // Exclude patterns
+    { name: 'CommitHash', pattern: RegPat.regExCommitHash },
+    { name: 'CStyleHexValue', pattern: RegPat.regExCStyleHexValue },
+    { name: 'CSSHexValue', pattern: RegPat.regExCSSHexValue },
     { name: 'Urls', pattern: RegPat.regExMatchUrls },
-    { name: 'HexDigits', pattern: RegPat.regExHexDigits },
     { name: 'HexValues', pattern: RegPat.regExMatchCommonHexFormats },
     { name: 'SpellCheckerDisable', pattern: regExpSpellCheckerDisable },
     { name: 'PublicKey', pattern: RegPat.regExPublicKey },
@@ -34,6 +36,8 @@ const predefinedPatterns = [
     { name: 'Base64', pattern: RegPat.regExBase64 },
     { name: 'Email', pattern: RegPat.regExEmail },
     { name: 'SHA', pattern: RegPat.regExSha },
+    { name: 'UnicodeRef', pattern: RegPat.regExUnicodeRef },
+    { name: 'UUID', pattern: RegPat.regExUUID },
     { name: 'href', pattern: RegPat.regExHRef },
     { name: 'SpellCheckerDisableBlock', pattern: RegPat.regExSpellingGuardBlock },
     { name: 'SpellCheckerDisableLine', pattern: RegPat.regExSpellingGuardLine },
@@ -63,7 +67,12 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'PublicKey',
     'RsaCert',
     'Base64',
+    'CommitHash',
+    'CStyleHexValue',
+    'CSSHexValue',
     'SHA',
+    'UnicodeRef',
+    'UUID',
 ];
 
 // This bit of copying is done to have the complier ensure that the defaults exist.
