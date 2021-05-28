@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1835, Issues found: 23321 in 1106 files
+ CSpell: Files checked: 1835, Issues found: 23317 in 1106 files
  exit code: 1
 ./CODING_STANDARDS.md:107:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:128:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -169,7 +169,7 @@ Lines:
 ./Zend/zend_gdb.c:29:14     - Unknown word (NOACTION)   -- ZEND_GDBJIT_NOACTION,
 ./Zend/zend_globals.h:83:19     - Unknown word (yytnamerr)  -- /* Refer to zend_yytnamerr() in zend_language_parser
 ./Zend/zend_hash.c:1970:42   - Unknown word (ined)       -- element may point to UNDEF-ined slots */
-./Zend/zend_inheritance.c:1745:53   - Unknown word (fnname)     -- functions(zend_string *fnname, zend_function *fn,
+./Zend/zend_inheritance.c:1749:53   - Unknown word (fnname)     -- functions(zend_string *fnname, zend_function *fn,
 ./Zend/zend_inheritance.c:770:15    - Unknown word (precv)      -- zend_op *precv = NULL;
 ./Zend/zend_interfaces.c:416:36    - Unknown word (Unserialization) -- exception_ex(NULL, 0, "Unserialization of '%s' is not allowed
 ./Zend/zend_multiply.h:114:11    - Unknown word (mulld)      -- __asm__("mulld %0,%2,%3\n\t"					\
@@ -2066,9 +2066,9 @@ Lines:
 ./ext/oci8/oci8.c:574:64    - Unknown word (pconnections) -- extensions, we release pconnections when oci_close
 ./ext/oci8/oci8.c:981:5     - Unknown word (DRCP)         -- /* DRCP: connection_class is
 ./ext/oci8/oci8.stub.php:413:10    - Unknown word (ocipasswordchange)  -- function ocipasswordchange($connection, string
-./ext/oci8/oci8.stub.php:562:21    - Unknown word (savefile)           -- public function savefile(string $filename) {
-./ext/oci8/oci8.stub.php:640:21    - Unknown word (setbuffering)       -- public function setbuffering(bool $mode) {}
-./ext/oci8/oci8.stub.php:646:21    - Unknown word (getbuffering)       -- public function getbuffering() {}
+./ext/oci8/oci8.stub.php:562:21    - Unknown word (savefile)           -- public function savefile(string $filename): bool
+./ext/oci8/oci8.stub.php:640:21    - Unknown word (setbuffering)       -- public function setbuffering(bool $mode): bool {
+./ext/oci8/oci8.stub.php:646:21    - Unknown word (getbuffering)       -- public function getbuffering(): bool {}
 ./ext/oci8/oci8.stub.php:652:21    - Unknown word (writetofile)        -- public function writetofile(string $filename, ?int
 ./ext/oci8/oci8.stub.php:661:21    - Unknown word (writetemporary)     -- public function writetemporary(string $data, int $type
 ./ext/oci8/oci8.stub.php:702:21    - Unknown word (assignelem)         -- public function assignelem(int $index, string
@@ -4579,7 +4579,6 @@ Lines:
 ./ext/pdo_pgsql/pgsql_statement.c:244:31    - Unknown word (Qnfields)   -- column_count = (int) PQnfields(S->result);
 ./ext/pdo_pgsql/pgsql_statement.c:252:33    - Unknown word (Qntuples)   -- count = (zend_long)PQntuples(S->result);
 ./ext/pdo_pgsql/pgsql_statement.c:520:10    - Unknown word (loid)       -- int loid = lo_open(S->H->server
-./ext/pdo_pgsql/pgsql_statement.c:646:27    - Unknown word (Postgres)   -- Fetch metadata from Postgres system catalogue */
 ./ext/pdo_sqlite/php_pdo_sqlite_int.h:42:24     - Unknown word (afunc)      -- struct pdo_sqlite_fci afunc, astep, afini;
 ./ext/pdo_sqlite/php_pdo_sqlite_int.h:42:31     - Unknown word (astep)      -- pdo_sqlite_fci afunc, astep, afini;
 ./ext/pdo_sqlite/php_pdo_sqlite_int.h:42:38     - Unknown word (afini)      -- sqlite_fci afunc, astep, afini;
