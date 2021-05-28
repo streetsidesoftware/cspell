@@ -37,7 +37,7 @@ describe('Validate repository helper', () => {
 
     test.each`
         msg           | repo                                                         | path                                         | commit                       | expected
-        ${'master'}   | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'test/streetsidesoftware/regexp-worker-1'} | ${undefined}                 | ${true}
+        ${'main'}     | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'test/streetsidesoftware/regexp-worker-1'} | ${undefined}                 | ${true}
         ${'bad url'}  | ${'https://github.com/streetsidesoftware/missing.git'}       | ${'test/streetsidesoftware/regexp-worker-4'} | ${undefined}                 | ${false}
         ${'bad hash'} | ${'https://github.com/streetsidesoftware/regexp-worker.git'} | ${'test/streetsidesoftware/regexp-worker-5'} | ${'de9543cf171629badbadbad'} | ${false}
     `(
@@ -45,7 +45,7 @@ describe('Validate repository helper', () => {
         async ({ repo, path, commit, expected }: TestCase) => {
             const logger = new CaptureLogger();
             await rm(join(repositoryDir, path));
-            commit = commit || 'master';
+            commit = commit || 'main';
             expect(await checkoutRepositoryAsync(logger, repo, path, commit)).toBe(expected);
             // console.log(logger.logs);
             // console.log(logger.errors);
@@ -55,7 +55,7 @@ describe('Validate repository helper', () => {
 
     test.each`
         msg             | repo                                                             | path
-        ${'master'}     | ${'https://github.com/streetsidesoftware/regexp-worker.git'}     | ${'streetsidesoftware/regexp-worker'}
+        ${'main'}       | ${'https://github.com/streetsidesoftware/regexp-worker.git'}     | ${'streetsidesoftware/regexp-worker'}
         ${'issue-1114'} | ${'https://github.com/streetsidesoftware/cspell-test-cases.git'} | ${'streetsidesoftware/cspell-test-cases'}
     `(
         'addRepository $msg $repo $path',

@@ -11,7 +11,7 @@ on:
     inputs:
       ref:
         description: "branch, release, or tag to publish, like v5.0.1-alpha.14"
-        default: master
+        default: main
         required: true
       npm_tag:
         description: "Tag to add to NPM release 'latest' or 'next'"
@@ -64,8 +64,8 @@ jobs:
           git config --global user.name 'Jason Dent'
           git config --global user.email 'jason@streetsidesoftware.nl'
 
-#       - name: Publish Master
-#         if: ${{ github.ref == 'refs/heads/master' }}
+#       - name: Publish Main
+#         if: ${{ github.ref == 'refs/heads/main' }}
 #         run: npm run pub-lerna -- -y --dist-tag next
 #         env:
 #           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
