@@ -271,6 +271,17 @@ function genSymbolBreaks(line: LineSegment): SortedBreaks[] {
     ];
 }
 
+interface PathNode {
+    /** Next Path Node or undefined if at the end */
+    n: PathNode | undefined;
+    /** offset in text */
+    i: number;
+    /** cost to the end of the path */
+    c: number;
+    /** the extracted text */
+    text: TextOffsetWithValid | undefined;
+}
+
 interface Candidate {
     /** parent candidate in the chain */
     p: Candidate | undefined;
@@ -288,16 +299,15 @@ interface Candidate {
     text: TextOffsetWithValid | undefined;
 }
 
-interface CandidateWithText extends Candidate {
-    text: TextOffsetWithValid;
-}
-
 function splitIntoWords(
     lineSeg: LineSegment,
     breaks: SortedBreaks,
     has: (word: TextOffset) => boolean
 ): TextOffsetWithValid[] {
     const maxIndex = lineSeg.relEnd;
+    const maxAttempts = 1000;
+
+    const knownPathsByIndex = new Map<number, PathNode>();
 
     /**
      * Create a set of possible candidate to consider
@@ -344,14 +354,49 @@ function splitIntoWords(
         return a.ec - b.ec || b.i - a.i;
     }
 
-    const results: TextOffsetWithValid[] = [];
-    let bestPath: CandidateWithText | undefined = undefined;
+    function pathToWords(node: PathNode | undefined): TextOffsetWithValid[] {
+        const results: TextOffsetWithValid[] = [];
+
+        for (let p = node; p; p = p.n) {
+            if (p.text) {
+                results.push(p.text);
+            }
+        }
+
+        return results;
+    }
+
+    function addToKnownPaths(candidate: Candidate, path: PathNode | undefined) {
+        for (let can: Candidate | undefined = candidate; can !== undefined; can = can.p) {
+            const t = can.text;
+            const i = can.i;
+            const cost = (!t || t.isFound ? 0 : t.text.length) + (path?.c ?? 0);
+            const exitingPath = knownPathsByIndex.get(i);
+            // Keep going of if this is a better candidate than th existing path
+            if (exitingPath && exitingPath.c <= cost) {
+                return undefined;
+            }
+
+            const node: PathNode = {
+                n: path,
+                i,
+                c: cost,
+                text: t,
+            };
+            knownPathsByIndex.set(i, node);
+            path = node;
+        }
+        return path;
+    }
+
     let maxCost = lineSeg.relEnd - lineSeg.relStart;
     const candidates = new SortedQueue<Candidate>(compare);
     const text = lineSeg.line.text;
     candidates.concat(makeCandidates(undefined, lineSeg.relStart, 0, 0));
+    let attempts = 0;
+    let bestPath: PathNode | undefined;
 
-    while (candidates.length) {
+    while (maxCost && candidates.length && attempts++ < maxAttempts) {
         /** Best Candidate Index */
         const best = candidates.dequeue();
         if (!best || best.c >= maxCost) {
@@ -368,7 +413,12 @@ function splitIntoWords(
             best.c += cost;
             best.ec = best.c + mc;
             best.text = t;
-            if (best.c < maxCost) {
+            const possiblePath = knownPathsByIndex.get(j);
+            if (possiblePath) {
+                // We found a known apply to candidate
+                const f = addToKnownPaths(best, possiblePath);
+                bestPath = !bestPath || (f && f.c < bestPath.c) ? f : bestPath;
+            } else if (best.c < maxCost) {
                 const c = makeCandidates(t ? best : best.p, j, best.bi + 1, best.c);
                 candidates.concat(c);
             }
@@ -382,29 +432,18 @@ function splitIntoWords(
                 best.c += cost;
                 best.ec = best.c;
                 best.text = t;
-                if (!bestPath || bestPath.c > best.c) {
-                    const segText = t || best.p?.text || toTextOffset('', best.i);
-                    if (t) {
-                        bestPath = { ...best, text: segText };
-                    } else {
-                        bestPath = { ...best, ...best.p, text: segText };
-                    }
-                    maxCost = best.c;
-                    if (!maxCost) {
-                        break;
-                    }
-                }
+                const segText = t || best.p?.text || toTextOffset('', best.i);
+                const can = t ? { ...best, text: segText } : { ...best, ...best.p, text: segText };
+                const f = addToKnownPaths(can, undefined);
+                bestPath = !bestPath || (f && f.c < bestPath.c) ? f : bestPath;
             }
         }
-    }
-
-    for (let p: Candidate | undefined = bestPath; p; p = p.p) {
-        if (p.text) {
-            results.push(p.text);
+        if (bestPath && bestPath.c < maxCost) {
+            maxCost = bestPath.c;
         }
     }
 
-    return results.reverse();
+    return pathToWords(bestPath);
 }
 
 function mergeSortedBreaks(...maps: SortedBreaks[]): SortedBreaks {
