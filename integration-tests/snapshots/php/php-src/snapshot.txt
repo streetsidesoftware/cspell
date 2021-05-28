@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1835, Issues found: 23240 in 1105 files
+ CSpell: Files checked: 1835, Issues found: 23321 in 1106 files
  exit code: 1
 ./CODING_STANDARDS.md:107:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:128:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -164,7 +164,7 @@ Lines:
 ./Zend/zend_execute_API.c:1369:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
 ./Zend/zend_execute_API.c:943:24    - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
 ./Zend/zend_fibers.c:15:21     - Unknown word (Piotrowski) -- | Authors: Aaron Piotrowski <aaron@trowski.com>
-./Zend/zend_fibers.c:53:15     - Unknown word (fcontext)   -- typedef void *fcontext_t;
+./Zend/zend_fibers.c:69:15     - Unknown word (fcontext)   -- typedef void *fcontext_t;
 ./Zend/zend_gc.c:36:28     - Unknown word (underogin)  -- - Candidate cycle underogin
 ./Zend/zend_gdb.c:29:14     - Unknown word (NOACTION)   -- ZEND_GDBJIT_NOACTION,
 ./Zend/zend_globals.h:83:19     - Unknown word (yytnamerr)  -- /* Refer to zend_yytnamerr() in zend_language_parser
@@ -384,6 +384,7 @@ Lines:
 ./ext/bcmath/bcmath_arginfo.h:31:49     - Unknown word (bcsqrt)     -- TYPE_INFO_EX(arginfo_bcsqrt, 0, 1, IS_STRING, 0
 ./ext/bcmath/bcmath_arginfo.h:36:49     - Unknown word (bccomp)     -- TYPE_INFO_EX(arginfo_bccomp, 0, 2, IS_LONG, 0)
 ./ext/bcmath/bcmath_arginfo.h:42:49     - Unknown word (bcscale)    -- TYPE_INFO_EX(arginfo_bcscale, 0, 0, IS_LONG, 0)
+./ext/bcmath/bcmath_arginfo.h:4:49      - Unknown word (bcadd)      -- TYPE_INFO_EX(arginfo_bcadd, 0, 2, IS_STRING, 0
 ./ext/bcmath/libbcmath/README.md:21:7      - Unknown word (BCMATH)     -- * Why BCMATH?
 ./ext/bcmath/libbcmath/README.md:25:27     - Unknown word (LGPL)       -- BCMATH can be under the LGPL.
 ./ext/bcmath/libbcmath/README.md:6:1       - Unknown word (Bcmath)     -- Bcmath is a library of arbitrary
@@ -579,6 +580,7 @@ Lines:
 ./ext/curl/interface.c:3572:22   - Unknown word (OVFL)        -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
 ./ext/curl/interface.c:3614:18   - Unknown word (unpause)     -- /* {{{ pause and unpause a connection */
 ./ext/curl/interface.c:87:9      - Unknown word (CAAL)       -- #define CAAL(s, v) add_assoc_long
+./ext/curl/interface.c:88:9      - Unknown word (CAAD)       -- #define CAAD(s, v) add_assoc_double
 ./ext/curl/interface.c:89:9      - Unknown word (CAAS)       -- #define CAAS(s, v) add_assoc_string
 ./ext/curl/interface.c:92:9      - Unknown word (CAAZ)       -- #define CAAZ(s, v) add_assoc_zval
 ./ext/curl/multi.c:265:13    - Unknown word (zmsgs)      -- zval *zmsgs_in_queue = NULL;
@@ -709,6 +711,7 @@ Lines:
 ./ext/date/lib/timezonemap.h:438:32    - Unknown word (Baja)         -- 0, -21600, "Mexico/BajaSur"
 ./ext/date/lib/timezonemap.h:472:5     - Unknown word (chst)         -- { "chst", 0,  36000, "Pacific
 ./ext/date/lib/timezonemap.h:475:32    - Unknown word (Addis)        -- 0, 10800, "Africa/Addis_Ababa" }
+./ext/date/lib/timezonemap.h:475:38    - Unknown word (Ababa)        -- 0800, "Africa/Addis_Ababa" },
 ./ext/date/lib/timezonemap.h:488:5     - Unknown word (eddt)         -- { "eddt", 1, -10800, "America
 ./ext/date/lib/timezonemap.h:509:33    - Unknown word (Nipigon)      -- 1, -14400, "America/Nipigon" },
 ./ext/date/lib/timezonemap.h:54:5      - Unknown word (ahdt)        -- { "ahdt", 1, -32400, "America
@@ -720,6 +723,7 @@ Lines:
 ./ext/date/lib/timezonemap.h:63:33     - Unknown word (Yakutat)     -- 1, -28800, "America/Yakutat" },
 ./ext/date/lib/timezonemap.h:652:33    - Unknown word (Danmarkshavn) -- 0, 0, "America/Danmarkshavn" },
 ./ext/date/lib/timezonemap.h:674:5     - Unknown word (hkst)         -- { "hkst", 1,  32400, "Asia
+./ext/date/lib/timezonemap.h:679:30    - Unknown word (Dacca)        -- 0, 21200, "Asia/Dacca"
 ./ext/date/lib/timezonemap.h:693:5     - Unknown word (iddt)         -- { "iddt", 1,  14400, "Asia
 ./ext/date/lib/timezonemap.h:694:34    - Unknown word (Aviv)         -- , 14400, "Asia/Tel_Aviv" },
 ./ext/date/lib/timezonemap.h:6:35      - Unknown word (Yancowinna) -- 37800, "Australia/Yancowinna" },
@@ -884,6 +888,7 @@ Lines:
 ./ext/exif/exif.c:2643:35   - Unknown word (JFIFF)        -- 0xE0 /* JPEG: 'JFIFF' AND (additional 'JFXX
 ./ext/exif/exif.c:2643:59   - Unknown word (JFXX)         -- JFIFF' AND (additional 'JFXX') */
 ./ext/exif/exif.c:3042:43   - Unknown word (NOBREAK)      -- detect BOM: ZERO WIDTH NOBREAK SPACE (FEFF 16)
+./ext/exif/exif.c:3042:58   - Unknown word (FEFF)         -- WIDTH NOBREAK SPACE (FEFF 16)
 ./ext/exif/exif.c:3251:32   - Unknown word (cbuf)         -- value_ptr, tagname[64], cbuf[32], *outside=NULL;
 ./ext/exif/exif.c:3252:39   - Unknown word (fgot)         -- count, offset_val, fpos, fgot;
 ./ext/exif/exif.c:326:13    - Unknown word (TRESHHOLDING) -- #define TAG_TRESHHOLDING 0x01
@@ -922,6 +927,7 @@ Lines:
 ./ext/ffi/ffi.stub.php:47:28     - Unknown word (memcpy)     -- public static function memcpy(FFI\CData $to, $from
 ./ext/ffi/ffi.stub.php:55:28     - Unknown word (memcmp)     -- public static function memcmp($ptr1, $ptr2, int $size
 ./ext/ffi/ffi.stub.php:58:28     - Unknown word (memset)     -- public static function memset(FFI\CData $ptr, int
+./ext/ffi/ffi_arginfo.h:4:58      - Unknown word (cdef)       -- EX(arginfo_class_FFI_cdef, 0, 0, FFI, 0)
 ./ext/ffi/ffi_parser.c:129:14    - Unknown word (RESTICT)    -- #define YY___RESTICT 88
 ./ext/ffi/ffi_parser.c:159:4     - Unknown word (Alignas)    -- "_Alignas",
 ./ext/ffi/ffi_parser.c:231:5     - Unknown word (restict)    -- "__restict",
@@ -1002,6 +1008,7 @@ Lines:
 ./ext/fileinfo/libmagic/apprentice.c:534:31    - Unknown word (PHNUM)      -- phnum_max = FILE_ELF_PHNUM_MAX;
 ./ext/fileinfo/libmagic/apprentice.c:53:19     - Unknown word (strtoui)    -- #define strtoull _strtoui64
 ./ext/fileinfo/libmagic/apprentice.c:71:9      - Unknown word (EATAB)      -- #define EATAB {while (isascii(CAST
+./ext/fileinfo/libmagic/apprentice.c:79:35     - Unknown word (DECC)       -- osf__) && defined(__DECC)
 ./ext/fileinfo/libmagic/apprentice.c:908:13    - Unknown word (reln)       -- switch (m->reln) {
 ./ext/fileinfo/libmagic/apptype.c:111:21    - Unknown word (PHYSDRV)    -- if (type & FAPPTYP_PHYSDRV) {
 ./ext/fileinfo/libmagic/apptype.c:114:28    - Unknown word (VIRTDRV)    -- else if (type & FAPPTYP_VIRTDRV) {
@@ -1442,6 +1449,7 @@ Lines:
 ./ext/hash/murmur/PMurHash.c:218:6     - Unknown word (fmix)       -- /* fmix */
 ./ext/hash/murmur/PMurHash.c:2:38      - Unknown word (Appleby)    -- was written by Austin Appleby, and is placed in the
 ./ext/hash/murmur/PMurHash.c:77:10     - Unknown word (recognises) -- /* gcc recognises this code and generates
+./ext/hash/murmur/PMurHash128.c:293:61    - Unknown word (fedc)       -- ] w=[3210 7654 ba98 fedc] b=[3210 7654 ba98 fedc
 ./ext/hash/murmur/PMurHash128.c:303:61    - Unknown word (hgfe)       -- ] w=[5432 9876 dcba hgfe] b=[3210 7654 ba98 fedc
 ./ext/hash/murmur/PMurHash128.c:321:61    - Unknown word (jihg)       -- ] w=[7654 ba98 fedc jihg] b=[3210 7654 ba98 fedc
 ./ext/hash/murmur/PMurHash128.c:331:61    - Unknown word (lkji)       -- ] w=[9876 dcba hgfe lkji] b=[3210 7654 ba98 fedc
@@ -1522,6 +1530,7 @@ Lines:
 ./ext/hash/xxhash/xxhash.h:2950:44   - Unknown word (VMOV)            -- into an ugly mess of VMOV.32 instructions.
 ./ext/hash/xxhash/xxhash.h:3006:51   - Unknown word (FARSH's)         -- of UMAC, based off of FARSH's implementation.
 ./ext/hash/xxhash/xxhash.h:302:58    - Unknown word (incrememtal) -- xxHash value from an incrememtal input.
+./ext/hash/xxhash/xxhash.h:3037:34   - Unknown word (xacc)            -- ALIGN(64) __m512i* const xacc = (__m512i *) acc;
 ./ext/hash/xxhash/xxhash.h:3091:44   - Unknown word (srli)            -- shifted = _mm512_srli_epi64 (acc_vec,
 ./ext/hash/xxhash/xxhash.h:3101:50   - Unknown word (slli)            -- epi64(prod_lo, _mm512_slli_epi64(prod_hi, 32))
 ./ext/hash/xxhash/xxhash.h:3150:38   - Unknown word (xsecret)         -- __m256i* const xsecret = (const __m256i *)
@@ -1542,7 +1551,7 @@ Lines:
 ./ext/hash/xxhash/xxhash.h:3765:20   - Unknown word (MERGEACCS)       -- #define XXH_SECRET_MERGEACCS_START 11
 ./ext/hash/xxhash/xxhash.h:3887:4    - Unknown word (Malloc's)        -- * Malloc's a pointer that is always
 ./ext/hash/xxhash/xxhash.h:3938:11   - Unknown word (malloc'd)        -- * normal malloc'd pointers, XXH_alignedMalloc
-./ext/hash/xxhash/xxhash.h:4200:16   - Unknown word (segnb)           -- size_t segnb;
+./ext/hash/xxhash/xxhash.h:4200:16   - Unknown word (segnb)          -- size_t segnb;
 ./ext/hash/xxhash/xxhash.h:4254:17   - Unknown word (combinedl)      -- * len = 1: combinedl = { input[0], 0x01,
 ./ext/hash/xxhash/xxhash.h:4264:23   - Unknown word (bitflipl)       -- xxh_u64 const bitflipl = (XXH_readLE32(secret
 ./ext/hash/xxhash/xxhash.h:4265:23   - Unknown word (bitfliph)       -- xxh_u64 const bitfliph = (XXH_readLE32(secret
@@ -2194,6 +2203,7 @@ Lines:
 ./ext/opcache/jit/dynasm/dasm_arm64.h:475:42    - Unknown word (TBNZ)       -- 0x1000)) {  /* TBZ, TBNZ */
 ./ext/opcache/jit/dynasm/dasm_mips.h:24:46     - Unknown word (IMMS)       -- LABEL_PC, DASM_IMM, DASM_IMMS,
 ./ext/opcache/jit/dynasm/dasm_ppc.h:24:46     - Unknown word (IMMSH)      -- LABEL_PC, DASM_IMM, DASM_IMMSH,
+./ext/opcache/jit/dynasm/dasm_proto.h:24:14     - Unknown word (FDEF)       -- #ifndef DASM_FDEF
 ./ext/opcache/jit/dynasm/dasm_x86.h:323:16    - Unknown word (lpos)       -- int lofs, lpos = b[pos];
 ./ext/opcache/jit/dynasm/dasm_x86.h:367:9     - Unknown word (dasmb)      -- #define dasmb(x) *cp++ = (unsigned
 ./ext/opcache/jit/dynasm/dasm_x86.h:372:9     - Unknown word (dasmw)      -- #define dasmw(x) \
@@ -3837,6 +3847,7 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitConfigInternal.h:571:22    - Unknown word (msfastcall) -- define SLJIT_FUNC __msfastcall
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:1165:56   - Unknown word (LMUL)       -- BREAKPOINT && op <= SLJIT_LMUL_SW)
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:118:9     - Unknown word (ABUF)       -- #define ABUF_SIZE 2048
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1286:13   - Unknown word (ADDC)       -- case SLJIT_ADDC:
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:1287:13   - Unknown word (SUBC)       -- case SLJIT_SUBC:
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:139:10    - Unknown word (REWRITABLE) -- /* SLJIT_REWRITABLE_JUMP is 0x1000. */
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:1689:56   - Unknown word (fcmp)       -- TYPE check_sljit_emit_fcmp(struct sljit_compiler
@@ -3854,6 +3865,7 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:870:27    - Unknown word (freg)       -- static void sljit_verbose_freg(struct sljit_compiler
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:904:27    - Unknown word (fparam)     -- static void sljit_verbose_fparam(struct sljit_compiler
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:930:10    - Unknown word (endbr)      -- (char*)"endbr", (char*)"skip_frames
+./ext/pcre/pcre2lib/sljit/sljitLir.c:942:24    - Unknown word (addc)       -- char*)"add", (char*)"addc", (char*)"sub", (char
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:942:53    - Unknown word (subc)       -- char*)"sub", (char*)"subc",
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:944:24    - Unknown word (lshr)       -- char*)"shl", (char*)"lshr", (char*)"ashr",
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:944:39    - Unknown word (ashr)       -- char*)"lshr", (char*)"ashr",
@@ -3911,6 +3923,7 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_64.c:131:9     - Unknown word (UBFM)       -- #define UBFM 0xd3000000
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_64.c:443:17    - Unknown word (uimm)       -- sljit_uw mask, uimm;
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_64.c:617:16    - Unknown word (nimm)       -- sljit_sw imm, nimm;
+./ext/pcre/pcre2lib/sljit/sljitNativeARM_64.c:71:9      - Unknown word (ADDE)       -- #define ADDE 0x8b200000
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_64.c:72:9      - Unknown word (ADDI)       -- #define ADDI 0x91000000
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_64.c:74:9      - Unknown word (ANDI)       -- #define ANDI 0x92000000
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_64.c:75:9      - Unknown word (ASRV)       -- #define ASRV 0x9ac02800
@@ -4056,6 +4069,7 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:462:11    - Unknown word (oris)       -- /* oris -> ori */
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:663:12    - Unknown word (opertion)   -- /* Integer opertion and set flags -> requires
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:665:35    - Unknown word (OERC)       -- affects the RC() and OERC() macros. */
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:73:5      - Unknown word (dcbf)       -- "dcbf 0, %0\n"
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:75:5      - Unknown word (icbi)       -- "icbi 0, %0\n"
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:83:46     - Unknown word (qfuncsect)  -- fail to compile if -qfuncsect is used"
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:860:46    - Unknown word (stwx)       -- HI(31) | LO(151) /* stwx */, HI(31) | LO(149
@@ -4106,6 +4120,7 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_32.c:85:31     - Unknown word (BICC)       -- push_inst(compiler, BICC | DA(0x1) | (7 & DISP
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:136:9     - Unknown word (ANDN)       -- #define ANDN (OPC1(0x2) | OPC3(
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:138:9     - Unknown word (FABSS)      -- #define FABSS (OPC1(0x2) | OPC3(
+./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:139:9     - Unknown word (FADDD)      -- #define FADDD (OPC1(0x2) | OPC3(
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:141:9     - Unknown word (FCMPD)      -- #define FCMPD (OPC1(0x2) | OPC3(
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:142:9     - Unknown word (FCMPS)      -- #define FCMPS (OPC1(0x2) | OPC3(
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:143:9     - Unknown word (FDIVD)      -- #define FDIVD (OPC1(0x2) | OPC3(
@@ -4123,6 +4138,7 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:168:9     - Unknown word (SLLX)       -- #define SLLX (OPC1(0x2) | OPC3(
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:170:9     - Unknown word (SRAX)       -- #define SRAX (OPC1(0x2) | OPC3(
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:172:9     - Unknown word (SRLX)       -- #define SRLX (OPC1(0x2) | OPC3(
+./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_common.c:189:9     - Unknown word (FBFCC)      -- #define FBFCC (OPC1(0x0) | OPC2(
 ./ext/pcre/pcre2lib/sljit/sljitNativeTILEGX-encoder.c:10072:17  - Unknown word (opbuf)      -- unsigned char opbuf[TILEGX_BUNDLE_SIZE_IN
 ./ext/pcre/pcre2lib/sljit/sljitNativeTILEGX-encoder.c:10093:22  - Unknown word (fnops)      -- rather than fnops. Displaying them is
 ./ext/pcre/pcre2lib/sljit/sljitNativeTILEGX-encoder.c:163:16    - Unknown word (TPOFF)      -- R_TILEGX_TLS_TPOFF64 = 108,
@@ -4552,6 +4568,7 @@ Lines:
 ./ext/pdo_oci/oci_statement.c:878:30    - Unknown word (NCHAR)      -- charset_form == SQLCS_NCHAR) {
 ./ext/pdo_oci/oci_statement.c:902:54    - Unknown word (NCLOB)      -- value, "oci:decl_type", "NCLOB");
 ./ext/pdo_oci/php_pdo_oci_int.h:97:59     - Unknown word (calcuation) -- prefetch memory limit calcuation */
+./ext/pdo_odbc/odbc_stmt.c:722:21    - Unknown word (caca)       -- /* something went caca */
 ./ext/pdo_pgsql/pdo_pgsql.c:65:51     - Unknown word (INERROR)    -- LONG("PGSQL_TRANSACTION_INERROR", (zend_long)PGSQL_TRANSACTIO
 ./ext/pdo_pgsql/pgsql_driver.c:14:19     - Unknown word (Alshanestsky) -- | Ilia Alshanestsky <ilia@prohost.org>
 ./ext/pdo_pgsql/pgsql_driver.c:244:37    - Unknown word (crsr)         -- cursor_name, 0, "pdo_crsr_%08x", ++H->stmt_counter
@@ -4891,8 +4908,10 @@ Lines:
 ./ext/standard/array.c:2647:23   - Unknown word (zstep)      -- zval *zlow, *zhigh, *zstep = NULL, tmp;
 ./ext/standard/array.c:2647:8    - Unknown word (zlow)       -- zval *zlow, *zhigh, *zstep = NULL
 ./ext/standard/array.c:5376:28   - Unknown word (sawp)       -- void array_bucket_p_sawp(void *p, void *q) /
+./ext/standard/array.c:5523:32   - Unknown word (bada)       -- actual sort magic - bada-bim, bada-boom. */
 ./ext/standard/array.c:5744:13   - Unknown word (htbl)       -- HashTable *htbl;
 ./ext/standard/assert.c:35:9      - Unknown word (ASSERTG)    -- #define ASSERTG(v) ZEND_MODULE_GLOBALS
+./ext/standard/base64.c:100:46    - Unknown word (bbcc)       -- (x.val[1], 2),  /* [bbcc_cc00] */
 ./ext/standard/base64.c:329:21    - Unknown word (SSSE)       -- # undef ZEND_INTRIN_SSSE3_NATIVE
 ./ext/standard/base64.c:340:82    - Unknown word (ssse)       -- attribute__((target("ssse3")))
 ./ext/standard/base64.c:360:12    - Unknown word (tmmintrin)  -- # include <tmmintrin.h>
@@ -4907,7 +4926,11 @@ Lines:
 ./ext/standard/base64.c:684:15    - Unknown word (madd)       -- out = _mm256_madd_epi16(merge_ab_and_bc
 ./ext/standard/base64.c:70:11     - Unknown word (vqtbl)      -- result = vqtbl2q_u8(shift_LUT, result
 ./ext/standard/base64.c:824:15    - Unknown word (testz)      -- if (!_mm256_testz_si256(lo, hi)) {
+./ext/standard/base64.c:86:18     - Unknown word (bbbbcccc)   -- /* [ccdddddd | bbbbcccc | aaaaaabb]
+./ext/standard/base64.c:86:29     - Unknown word (aaaaaabb)   -- ccdddddd | bbbbcccc | aaaaaabb]
+./ext/standard/base64.c:86:7      - Unknown word (ccdddddd)   -- /* [ccdddddd | bbbbcccc | aaaaaabb
 ./ext/standard/base64.c:94:7      - Unknown word (vbslq)      -- vbslq_u8(vdupq_n_u8(0x30)
+./ext/standard/base64.c:95:46     - Unknown word (aabb)       -- (x.val[0], 4),  /* [aabb_0000] */
 ./ext/standard/base64.h:24:29     - Unknown word (Wojciech)   -- Copyright (c) 2015-2018, Wojciech Mula
 ./ext/standard/base64.h:24:38     - Unknown word (Mula)       -- 2015-2018, Wojciech Mula
 ./ext/standard/base64.h:31:36     - Unknown word (Klomp)      -- c) 2013-2017, Alfred Klomp
@@ -5023,6 +5046,7 @@ Lines:
 ./ext/standard/crypt_sha512.c:731:47    - Unknown word (Wcjx)       -- anotherlongsalts$POfYwTEok97VWcjxIiSOjiykti.o/pQs.wP"
 ./ext/standard/crypt_sha512.c:731:54    - Unknown word (Ojiykti)    -- rlongsalts$POfYwTEok97VWcjxIiSOjiykti.o/pQs.wP"
 ./ext/standard/crypt_sha512.c:735:36    - Unknown word (Npjj)       -- 77$short$WuQyW2YR.hBNpjjRhpYD/ifIw05xdfeEyQoMxIXbkvr
+./ext/standard/crypt_sha512.c:735:52    - Unknown word (xdfe)       -- YR.hBNpjjRhpYD/ifIw05xdfeEyQoMxIXbkvr0g"
 ./ext/standard/crypt_sha512.c:735:63    - Unknown word (Xbkvr)      -- hBNpjjRhpYD/ifIw05xdfeEyQoMxIXbkvr0g"
 ./ext/standard/crypt_sha512.c:738:39    - Unknown word (Cwjq)       -- $asaltof16chars..$BtCwjqMJGx5hrJhZywWvt0RLE8uZ
 ./ext/standard/crypt_sha512.c:739:5     - Unknown word (Cjmw)       -- "elCjmw2kSYu.Ec6ycULevoBK25fs

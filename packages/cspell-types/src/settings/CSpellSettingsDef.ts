@@ -385,6 +385,7 @@ export type PredefinedPatterns =
     | 'SpellCheckerDisableNext'
     | 'SpellCheckerIgnoreInDocSetting'
     | 'string'
+    | 'UnicodeRef'
     | 'Urls'
     | 'UUID'
     | 'Everything';

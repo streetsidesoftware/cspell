@@ -36,6 +36,7 @@ const predefinedPatterns = [
     { name: 'Base64', pattern: RegPat.regExBase64 },
     { name: 'Email', pattern: RegPat.regExEmail },
     { name: 'SHA', pattern: RegPat.regExSha },
+    { name: 'UnicodeRef', pattern: RegPat.regExUnicodeRef },
     { name: 'UUID', pattern: RegPat.regExUUID },
     { name: 'href', pattern: RegPat.regExHRef },
     { name: 'SpellCheckerDisableBlock', pattern: RegPat.regExSpellingGuardBlock },
@@ -70,6 +71,7 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'CStyleHexValue',
     'CSSHexValue',
     'SHA',
+    'UnicodeRef',
     'UUID',
 ];
 

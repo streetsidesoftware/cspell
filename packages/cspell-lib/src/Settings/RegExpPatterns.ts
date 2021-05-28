@@ -19,6 +19,11 @@ export const regExCert = /BEGIN\s+(CERTIFICATE|RSA\s+(?:PRIVATE|PUBLIC)\s+KEY)(?
 export const regExEscapeCharacters = /\\(?:[anrvtbf]|[xu][a-f0-9]+)/gi;
 export const regExBase64 = /(?<![a-z0-9/+])(?:[a-z0-9/+]{40,})(?:\s^\s*[a-z0-9/+]{40,})*(?:\s^\s*[a-z0-9/+]+=*)?/gim;
 
+// cspell:ignore aeiou
+// The following is an attempt at detecting random strings.
+// export const regExRandomString =
+//     /\b(?=\w*(?:[A-Z]{2}|[A-Z][a-z][A-Z]|\d\w\d))(?=(?:\w*[A-Z]){2})(?=(?:\w*[a-z]){2})(?=\w*[^aeiouAEIOU\W]{4})[\w]{10,}\b/g;
+
 // Include Expressions
 export const regExPhpHereDoc = /<<<['"]?(\w+)['"]?[\s\S]+?^\1;/gm;
 export const regExString = /(?:(['"]).*?(?<![^\\]\\(\\\\)*)\1)|(?:`[\s\S]*?(?<![^\\]\\(\\\\)*)`)/g;
