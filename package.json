@@ -32,7 +32,7 @@
     "test-watch": "lerna run --parallel test-watch",
     "test": "lerna run test && npm run test-schema",
     "test-bin": "npm run test-bin-spell && npm run test-bin-trace && npm run test-bin-check",
-    "test-bin-check": "node ./bin.js check *.md",
+    "test-bin-check": "node ./bin.js check README.md",
     "test-bin-spell": "node ./bin.js -c cspellrc.json",
     "test-bin-trace": "node ./bin.js trace test",
     "test-integrations": "cd ./integration-tests && npm run integration-tests",
