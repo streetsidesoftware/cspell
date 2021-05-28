@@ -12,6 +12,23 @@ describe('Validate wordSplitter', () => {
         expected: string[];
     }
 
+    test('expensive split', () => {
+        // cspell:disable
+        // The following is an example of a very expensive split
+        const randomText = 'token = "Usf3uVQOZ9m6uPfVonKR-EBXjPe7bjMbp3_Fq8MfsptgkkM1ojidN0BxYaT5HAEN1";';
+        // cspell:enable
+
+        const line = {
+            text: randomText,
+            offset: 0,
+        };
+        const result = split(line, 9, has);
+        const words = result.words.map((w) => w.text).join('|');
+        // cspell:ignore VQOZ Mfsptgkk ojid HAEN
+        expect(words).toBe('Usf|u|VQOZ|m|u|Pf|Von|KR|EB|Xj|Pe|bj|Mbp|Fq|Mfsptgkk|M|ojid|N|Bx|Ya|T|HAEN');
+        expect(result.words.filter((w) => !w.isFound).length).toBe(7);
+    });
+
     // cspell:ignore MOVSX
     test.each`
         text                | expected
