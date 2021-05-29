@@ -5,14 +5,30 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [5.5.0](https://github.com/streetsidesoftware/cspell/compare/v5.4.1...v5.5.0) (2021-05-29)
 
-
 ### Features
 
-* Remove incorrect Ignore Hex Digits Regexp ([#1277](https://github.com/streetsidesoftware/cspell/issues/1277)) ([2621eb0](https://github.com/streetsidesoftware/cspell/commit/2621eb02f487d9e466b4936bde8650c338b320b8)), closes [#1276](https://github.com/streetsidesoftware/cspell/issues/1276) [#1276](https://github.com/streetsidesoftware/cspell/issues/1276)
+- Remove incorrect Ignore Hex Digits Regexp ([#1277](https://github.com/streetsidesoftware/cspell/issues/1277)) ([2621eb0](https://github.com/streetsidesoftware/cspell/commit/2621eb02f487d9e466b4936bde8650c338b320b8)), closes [#1276](https://github.com/streetsidesoftware/cspell/issues/1276)
 
+  Minor **BREAKING** change.
 
+  `cspell` used to ignore all words that had just hex characters `[a-f]`. This lead to issues like [#1276](https://github.com/streetsidesoftware/cspell/issues/1276). `cspell` will no longer ignore words with only hex characters. To avoid load of false positives (cases where a hex number was intended)
+  some new patterns were added:
 
+  - `CStyleHexValue`: C Style `0x[a-f0-9]+`
+  - `CSSHexValue`: CSS Style `#[a-f0-9]+`
+  - `CommitHash`: GitHub Style commit hashes. - this ignores hex only words that are 7 characters or longer
+    might still lead to false negatives.
+  - `UnicodeRef`: ignores `U+0000` style codes and ranges `U+0000-ffff`
+  - `UUID`: ignores formatted UUIDs
 
+  **Related Changes**
+
+  - fix: Remove incorrect Ignore Hex Digits Regexp
+    Fix: #1276
+  - fix: Ignore commit hashes and C Style Hex numbers
+  - fix: Ignore CSS Hex Values and UUIDs
+  - fix: Add more common patterns to ignore
+    Try to detect common hex and Unicode patterns to ignore.
 
 ## [5.4.1](https://github.com/streetsidesoftware/cspell/compare/v5.4.0...v5.4.1) (2021-05-11)
 
