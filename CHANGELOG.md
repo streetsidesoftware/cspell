@@ -509,3 +509,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 5.0.1-alpha.14 (2020-11-17)
 
 **Note:** Version bump only for package cspell-monorepo
+
+<!---
+cspell: ignore abcdefa
+--->
