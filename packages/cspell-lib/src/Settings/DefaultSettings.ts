@@ -25,6 +25,7 @@ const regExpSpellCheckerDisable = [
 const predefinedPatterns = [
     // Exclude patterns
     { name: 'CommitHash', pattern: RegPat.regExCommitHash },
+    { name: 'CommitHashLink', pattern: RegPat.regExCommitHashLink },
     { name: 'CStyleHexValue', pattern: RegPat.regExCStyleHexValue },
     { name: 'CSSHexValue', pattern: RegPat.regExCSSHexValue },
     { name: 'Urls', pattern: RegPat.regExMatchUrls },
@@ -68,6 +69,7 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'RsaCert',
     'Base64',
     'CommitHash',
+    'CommitHashLink',
     'CStyleHexValue',
     'CSSHexValue',
     'SHA',
@@ -78,7 +80,7 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
 // This bit of copying is done to have the complier ensure that the defaults exist.
 const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
 
-export const _defaultSettings: CSpellSettingsWithSourceTrace = {
+export const _defaultSettings: Readonly<CSpellSettingsWithSourceTrace> = {
     id: 'static_defaults',
     language: 'en',
     name: 'Static Defaults',

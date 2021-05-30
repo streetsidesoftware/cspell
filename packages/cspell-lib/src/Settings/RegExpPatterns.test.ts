@@ -272,6 +272,22 @@ describe('Validate InDocSettings', () => {
     });
 
     test.each`
+        str                           | expected        | comment
+        ${''}                         | ${undefined}    | ${''}
+        ${'hello'}                    | ${undefined}    | ${''}
+        ${'commit [60975ea] j'}       | ${'[60975ea]'}  | ${''}
+        ${'commit [c0ffee] j'}        | ${undefined}    | ${'not long enough'}
+        ${'commit [abcdef] j'}        | ${undefined}    | ${'not long enough'}
+        ${'commit [abcdefg] j'}       | ${undefined}    | ${'contains non-hex digits'}
+        ${'commit [c00ffee] j'}       | ${'[c00ffee]'}  | ${''}
+        ${'commit [feeeeed] j'}       | ${'[feeeeed]'}  | ${'does not contain any digits'}
+        ${'commit [feeeeed1] j'}      | ${'[feeeeed1]'} | ${''}
+        ${'commit [c00ffee] 0baad j'} | ${'[c00ffee]'}  | ${'only the first one is matched'}
+    `('regExCommitHashLink "$str" expect "$expected"', ({ str, expected }) => {
+        const r = str.match(RegPat.regExCommitHashLink);
+        expect(r?.[0]).toEqual(expected);
+    });
+    test.each`
         str                                      | expected
         ${''}                                    | ${undefined}
         ${'hello'}                               | ${undefined}
