@@ -371,6 +371,7 @@ export type PredefinedPatterns =
     | 'CStyleHexValue'
     | 'CSSHexValue'
     | 'CommitHash'
+    | 'CommitHashLink'
     | 'Email'
     | 'EscapeCharacters'
     | 'HexValues'
