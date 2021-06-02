@@ -251,8 +251,7 @@
       "path": "googleapis/google-cloud-cpp",
       "url": "https://github.com/googleapis/google-cloud-cpp.git",
       "args": [
-        "-c",
-        "ci/cspell.json",
+        "--config=${repoConfig}/cspell.json",
         "**/*",
         "-e",
         "{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"
