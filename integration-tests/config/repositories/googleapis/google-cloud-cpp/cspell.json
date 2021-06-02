@@ -1,0 +1,44 @@
+{
+    // Version of the setting file.  Always 0.1
+    "version": "0.1",
+    // language - current active spelling language
+    "language": "en",
+    "dictionaryDefinitions": [
+        {
+            "name": "custom-words",
+            "path": "./custom-words.txt",
+            "description": "Project Words"
+        }
+    ],
+    "dictionaries": [
+        "custom-words"
+    ],
+    "languageSettings": [
+        {
+            "languageId": "cpp",
+            // Only spellcheck comments for now to avoid false positives.
+            "includeRegExpList": [],
+            "allowCompoundWords": false,
+            // Ignore Doxygen parameters (variable names) and clang-tidy directives.
+            "ignoreRegExpList": [
+                "/@param.*/g",
+                "/@tparam.*/g",
+                "/@snippet.*/g",
+                "NOLINT*",
+                "/`.*`/",
+                "/@code[\\s\\S]*@endcode/g"
+            ]
+        },
+        {
+            "languageId": "python",
+            "includeRegExpList": [],
+            "allowCompoundWords": false,
+            "ignoreRegExpList": []
+        }
+    ],
+    "ignoreWords": [
+        "tparam",
+        "NOLINT",
+        "endcode"
+    ]
+}
