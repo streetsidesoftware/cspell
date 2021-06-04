@@ -19,14 +19,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "dependencyTreeRoots": [
       {
-        "name": "test",
+        "name": "test-yarn2-med",
         "reference": "workspace:."
       }
     ],
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)|$))$)",
     "fallbackExclusionList": [
-      ["test", ["workspace:."]]
+      ["test-yarn2-med", ["workspace:."]]
     ],
     "fallbackPool": [
     ],
@@ -38,7 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@cspell/cspell-types", "npm:5.5.2"],
-            ["@cspell/dict-scientific-terms-us", "npm:1.0.21"]
+            ["@cspell/dict-medicalterms", "npm:1.0.27"]
           ],
           "linkType": "SOFT",
         }]
@@ -52,22 +52,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@cspell/dict-scientific-terms-us", [
-        ["npm:1.0.21", {
-          "packageLocation": "./.yarn/cache/@cspell-dict-scientific-terms-us-npm-1.0.21-010c03479b-748d70cbde.zip/node_modules/@cspell/dict-scientific-terms-us/",
+      ["@cspell/dict-medicalterms", [
+        ["npm:1.0.27", {
+          "packageLocation": "./.yarn/cache/@cspell-dict-medicalterms-npm-1.0.27-9d9cc7e20e-0bfeec3ce8.zip/node_modules/@cspell/dict-medicalterms/",
           "packageDependencies": [
-            ["@cspell/dict-scientific-terms-us", "npm:1.0.21"]
+            ["@cspell/dict-medicalterms", "npm:1.0.27"]
           ],
           "linkType": "HARD",
         }]
       ]],
-      ["test", [
+      ["test-yarn2-med", [
         ["workspace:.", {
           "packageLocation": "./",
           "packageDependencies": [
-            ["test", "workspace:."],
+            ["test-yarn2-med", "workspace:."],
             ["@cspell/cspell-types", "npm:5.5.2"],
-            ["@cspell/dict-scientific-terms-us", "npm:1.0.21"]
+            ["@cspell/dict-medicalterms", "npm:1.0.27"]
           ],
           "linkType": "SOFT",
         }]

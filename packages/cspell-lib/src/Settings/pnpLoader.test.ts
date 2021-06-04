@@ -5,8 +5,8 @@ import path from 'path';
 
 const uriTestPackages = URI.file(path.join(__dirname, '../../../../test-packages'));
 const uriDirectory = URI.file(__dirname);
-const uriYarn2TestMed = UriUtils.joinPath(uriTestPackages, 'test-yarn2-med');
-const uriYarn2TestSci = UriUtils.joinPath(uriTestPackages, 'test-yarn2-sci');
+const uriYarn2TestMed = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-med');
+const uriYarn2TestSci = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-sci');
 const uriBadPnp = UriUtils.joinPath(uriDirectory, '../../samples/bad-pnp');
 
 describe('Validate PnPLoader', () => {

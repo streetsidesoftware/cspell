@@ -19,14 +19,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "dependencyTreeRoots": [
       {
-        "name": "test",
+        "name": "test-yarn2-sci",
         "reference": "workspace:."
       }
     ],
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)|$))$)",
     "fallbackExclusionList": [
-      ["test", ["workspace:."]]
+      ["test-yarn2-sci", ["workspace:."]]
     ],
     "fallbackPool": [
     ],
@@ -38,7 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["@cspell/cspell-types", "npm:5.5.2"],
-            ["@cspell/dict-medicalterms", "npm:1.0.27"]
+            ["@cspell/dict-scientific-terms-us", "npm:1.0.21"]
           ],
           "linkType": "SOFT",
         }]
@@ -52,22 +52,22 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@cspell/dict-medicalterms", [
-        ["npm:1.0.27", {
-          "packageLocation": "./.yarn/cache/@cspell-dict-medicalterms-npm-1.0.27-9d9cc7e20e-0bfeec3ce8.zip/node_modules/@cspell/dict-medicalterms/",
+      ["@cspell/dict-scientific-terms-us", [
+        ["npm:1.0.21", {
+          "packageLocation": "./.yarn/cache/@cspell-dict-scientific-terms-us-npm-1.0.21-010c03479b-748d70cbde.zip/node_modules/@cspell/dict-scientific-terms-us/",
           "packageDependencies": [
-            ["@cspell/dict-medicalterms", "npm:1.0.27"]
+            ["@cspell/dict-scientific-terms-us", "npm:1.0.21"]
           ],
           "linkType": "HARD",
         }]
       ]],
-      ["test", [
+      ["test-yarn2-sci", [
         ["workspace:.", {
           "packageLocation": "./",
           "packageDependencies": [
-            ["test", "workspace:."],
+            ["test-yarn2-sci", "workspace:."],
             ["@cspell/cspell-types", "npm:5.5.2"],
-            ["@cspell/dict-medicalterms", "npm:1.0.27"]
+            ["@cspell/dict-scientific-terms-us", "npm:1.0.21"]
           ],
           "linkType": "SOFT",
         }]
