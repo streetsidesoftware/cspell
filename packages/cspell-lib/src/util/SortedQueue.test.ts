@@ -69,7 +69,7 @@ describe('Validate Mere Sort methods', () => {
         const q = new SortedQueue<number>(compare);
         for (let i = 0; i < 100; ++i) {
             const s = Math.random();
-            const n = Math.floor(1000 * s);
+            const n = Math.floor(100 * s);
             const expected: number[] = [];
             for (let j = 0; j < n; ++j) {
                 const r = Math.floor(Math.random() * 997);
@@ -78,6 +78,26 @@ describe('Validate Mere Sort methods', () => {
             }
             expected.sort(compare);
             expect([...q]).toEqual(expected);
+            expect(q.length).toBe(0);
+        }
+    });
+
+    test('Clone', () => {
+        const q = new SortedQueue<number>(compare);
+        for (let i = 0; i < 10; ++i) {
+            const s = Math.random();
+            const n = Math.floor(100 * s);
+            const expected: number[] = [];
+            for (let j = 0; j < n; ++j) {
+                const r = Math.floor(Math.random() * 997);
+                expected.push(r);
+                q.add(r);
+            }
+            expected.sort(compare);
+            const c = q.clone();
+            expect([...q]).toEqual(expected);
+            expect(c.length).toEqual(expected.length);
+            expect([...c]).toEqual(expected);
         }
     });
 });
