@@ -193,3 +193,7 @@ function findPackageForCSpellConfig(pathToConfig: string): NodePackage | undefin
         return undefined;
     }
 }
+
+export const __testing__ = {
+    findPackageForCSpellConfig,
+};

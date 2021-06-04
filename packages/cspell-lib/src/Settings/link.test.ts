@@ -1,4 +1,4 @@
-import { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports } from './link';
+import { addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports, __testing__ } from './link';
 import Configstore from 'configstore';
 // eslint-disable-next-line jest/no-mocks-import
 import {
@@ -8,6 +8,8 @@ import {
     mockSetData,
     getConfigstoreLocation,
 } from '../__mocks__/configstore';
+import * as Path from 'path';
+const findPackageForCSpellConfig = __testing__.findPackageForCSpellConfig;
 
 jest.mock('configstore');
 
@@ -198,5 +200,21 @@ describe('Validate Link.ts', () => {
         });
 
         expect(mockSetData).not.toHaveBeenCalled();
+    });
+
+    test('findPackageForCSpellConfig', () => {
+        const pathPythonDir = Path.dirname(pathPython);
+        const pathPythonPackage = Path.join(pathPythonDir, 'package.json');
+
+        const found = findPackageForCSpellConfig(pathPythonDir);
+        expect(found).toEqual({
+            name: '@cspell/dict-python',
+            filename: pathPythonPackage,
+        });
+    });
+
+    test('findPackageForCSpellConfig not found', () => {
+        const found = findPackageForCSpellConfig(pathPython);
+        expect(found).toBeUndefined();
     });
 });
