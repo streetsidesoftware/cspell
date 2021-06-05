@@ -8,6 +8,8 @@ const uriDirectory = URI.file(__dirname);
 const uriYarn2TestMed = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-med');
 const uriYarn2TestSci = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-sci');
 const uriBadPnp = UriUtils.joinPath(uriDirectory, '../../samples/bad-pnp');
+const uriYarn2TestMedPnp = UriUtils.joinPath(uriYarn2TestMed, '.pnp.js');
+const uriYarn2TestSciPnp = UriUtils.joinPath(uriYarn2TestSci, '.pnp.js');
 
 describe('Validate PnPLoader', () => {
     test('pnpLoader bad pnp', async () => {
@@ -25,13 +27,24 @@ describe('Validate PnPLoader', () => {
         expect(await loader.load(uriDirectory)).toBeUndefined();
 
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+    });
+
+    test('pnpLoader sync and async', async () => {
+        const loader = pnpLoader();
+        const yarnPnp = await loader.load(uriYarn2TestMed);
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
+        expect(loader.peekSync(uriYarn2TestMed)?.toString()).toBe(yarnPnp?.toString());
+        expect(loader.loadSync(uriYarn2TestMed)?.toString()).toBe(yarnPnp?.toString());
+
+        const sciPnp = loader.loadSync(uriYarn2TestSci);
+        await expect(loader.peek(uriYarn2TestSci)).resolves.toBe(sciPnp);
     });
 
     test('pnpLoader shared cache', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
 
         // Check Shared cache
         const loader2 = pnpLoader();
@@ -46,10 +59,10 @@ describe('Validate PnPLoader', () => {
         expect(await loader.load(uriDirectory)).toBeUndefined();
 
         const yarnPnpMed = await loader.load(uriYarn2TestMed);
-        expect(yarnPnpMed?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnpMed?.toString()).toBe(uriYarn2TestMedPnp.toString());
 
         const yarnPnpSci = await loader.load(uriYarn2TestSci);
-        expect(yarnPnpSci?.toString()).toBe(UriUtils.joinPath(uriYarn2TestSci, '.pnp.js').toString());
+        expect(yarnPnpSci?.toString()).toBe(uriYarn2TestSciPnp.toString());
 
         // Make sure we can load the medical dictionary.
         const dictLocationMed = resolveFrom(uriYarn2TestMed.fsPath, '@cspell/dict-medicalterms/cspell-ext.json');
@@ -65,7 +78,7 @@ describe('Validate PnPLoader', () => {
     test('pnpLoader clear cache', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
 
         await loader.clearCache();
         const yarnPnpPeek = await loader.peek(uriYarn2TestMed);
@@ -83,7 +96,7 @@ describe('Validate PnPLoader', () => {
         expect(await loader.load(uriDirectory)).toBeUndefined();
 
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
 
         // Make sure we can load the dictionary.
         const dictLocation = resolveFrom(uriYarn2TestMed.fsPath, '@cspell/dict-medicalterms/cspell-ext.json');
@@ -94,11 +107,11 @@ describe('Validate PnPLoader', () => {
     test('pnpLoader multiple clear cache', async () => {
         const loader = pnpLoader();
         const yarnPnp = await loader.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
 
         const loader2 = pnpLoader();
         const yarnPnp2 = await loader.load(uriYarn2TestSci);
-        expect(yarnPnp2?.toString()).toBe(UriUtils.joinPath(uriYarn2TestSci, '.pnp.js').toString());
+        expect(yarnPnp2?.toString()).toBe(uriYarn2TestSciPnp.toString());
 
         // trigger two cache clears
         const cc = clearPnPGlobalCache();
@@ -122,7 +135,7 @@ describe('Validate PnPLoader', () => {
 
         const yarnPnp = await loader.load(uriYarn2TestMed);
         const yarnPnp2 = await loader.load(UriUtils.joinPath(uriYarn2TestMed, '.yarn'));
-        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
         expect(yarnPnp2).toEqual(yarnPnp);
     });
 
@@ -132,7 +145,7 @@ describe('Validate PnPLoader', () => {
 
         const yarnPnp = await loaderA.load(uriYarn2TestMed);
         const nfPnp = await loaderB.load(uriYarn2TestMed);
-        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp?.toString()).toBe(uriYarn2TestMedPnp.toString());
         expect(nfPnp).toBeUndefined();
     });
 

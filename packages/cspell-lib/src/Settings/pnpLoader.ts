@@ -12,9 +12,10 @@ const supportedSchemas = new Set(['file']);
 
 export type LoaderResult = URI | undefined;
 
-const cachedPnpImports = new Map<string, Promise<LoaderResult>>();
 const cachedRequests = new Map<string, Promise<LoaderResult>>();
 let lock: Promise<undefined> | undefined = undefined;
+const cachedPnpImportsSync = new Map<string, LoaderResult>();
+const cachedRequestsSync = new Map<string, LoaderResult>();
 
 export class PnpLoader {
     private cacheKeySuffix: string;
@@ -35,13 +36,36 @@ export class PnpLoader {
 
         const r = findPnpAndLoad(uriDirectory, this.pnpFiles);
         cachedRequests.set(cacheKey, r);
-        return r;
+        const result = await r;
+        cachedRequestsSync.set(cacheKey, result);
+        return result;
     }
 
     public async peek(uriDirectory: URI): Promise<LoaderResult> {
         await lock;
         const cacheKey = this.calcKey(uriDirectory);
         return cachedRequests.get(cacheKey) ?? Promise.resolve(undefined);
+    }
+
+    /**
+     * Request that the nearest .pnp file gets loaded
+     * @param uriDirectory starting directory
+     * @returns promise - rejects on error - success if loaded or not found.
+     */
+    public loadSync(uriDirectory: URI): LoaderResult {
+        const cacheKey = this.calcKey(uriDirectory);
+        const cached = cachedRequestsSync.get(cacheKey);
+        if (cached) return cached;
+
+        const r = findPnpAndLoadSync(uriDirectory, this.pnpFiles);
+        cachedRequestsSync.set(cacheKey, r);
+        cachedRequests.set(cacheKey, Promise.resolve(r));
+        return r;
+    }
+
+    public peekSync(uriDirectory: URI): LoaderResult {
+        const cacheKey = this.calcKey(uriDirectory);
+        return cachedRequestsSync.get(cacheKey);
     }
 
     /**
@@ -78,12 +102,25 @@ export class UnsupportedPnpFile extends Error {
 async function findPnpAndLoad(uriDirectory: URI, pnpFiles: string[]): Promise<LoaderResult> {
     validateSchema(uriDirectory);
     const found = await findUp(pnpFiles, { cwd: uriDirectory.fsPath });
-    if (!found) return;
-    const c = cachedPnpImports.get(found);
-    if (c) return c;
+    return loadPnpIfNeeded(found);
+}
+
+/**
+ * @param uriDirectory - directory to start at.
+ */
+function findPnpAndLoadSync(uriDirectory: URI, pnpFiles: string[]): LoaderResult {
+    validateSchema(uriDirectory);
+    const found = findUp.sync(pnpFiles, { cwd: uriDirectory.fsPath });
+    return loadPnpIfNeeded(found);
+}
+
+function loadPnpIfNeeded(found: string | undefined): LoaderResult {
+    if (!found) return undefined;
+    const c = cachedPnpImportsSync.get(found);
+    if (c || cachedPnpImportsSync.has(found)) return c;
 
     const r = loadPnp(found);
-    cachedPnpImports.set(found, r);
+    cachedPnpImportsSync.set(found, r);
     return r;
 }
 
@@ -91,7 +128,7 @@ interface Pnp {
     setup?: () => void;
 }
 
-async function loadPnp(pnpFile: string): Promise<LoaderResult> {
+function loadPnp(pnpFile: string): LoaderResult {
     const pnp = importFresh<Pnp>(pnpFile);
     if (pnp.setup) {
         pnp.setup();
@@ -117,10 +154,11 @@ export function clearPnPGlobalCache(): Promise<undefined> {
 
 async function _cleanCache(): Promise<undefined> {
     await Promise.all([...cachedRequests.values()].map(rejectToUndefined));
-    const modules = await Promise.all([...cachedPnpImports.values()].map(rejectToUndefined));
+    const modules = [...cachedPnpImportsSync.values()];
     modules.forEach((r) => r && clearModule.single(r.fsPath));
     cachedRequests.clear();
-    cachedPnpImports.clear();
+    cachedRequestsSync.clear();
+    cachedPnpImportsSync.clear();
     return undefined;
 }
 
