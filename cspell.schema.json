@@ -452,6 +452,22 @@
           },
           "type": "array"
         },
+        "pnpFiles": {
+          "default": [
+            ".pnp.js",
+            ".pnp.cjs"
+          ],
+          "description": "The PnP files to search for. Note: `.mjs` files are not currently supported.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "usePnP": {
+          "default": false,
+          "description": "Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading packages stored in the repository.\n\nWhen true, the spell checker will search up the directory structure for the existence of a PnP file and load it.",
+          "type": "boolean"
+        },
         "words": {
           "description": "list of words to be always considered correct",
           "items": {
@@ -744,6 +760,17 @@
       },
       "type": "array"
     },
+    "pnpFiles": {
+      "default": [
+        ".pnp.js",
+        ".pnp.cjs"
+      ],
+      "description": "The PnP files to search for. Note: `.mjs` files are not currently supported.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
     "showStatus": {
       "description": "Show status",
       "type": "boolean"
@@ -751,6 +778,11 @@
     "spellCheckDelayMs": {
       "description": "Delay in ms after a document has changed before checking it for spelling errors.",
       "type": "number"
+    },
+    "usePnP": {
+      "default": false,
+      "description": "Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading packages stored in the repository.\n\nWhen true, the spell checker will search up the directory structure for the existence of a PnP file and load it.",
+      "type": "boolean"
     },
     "userWords": {
       "description": "Words to add to global dictionary -- should only be in the user config file.",

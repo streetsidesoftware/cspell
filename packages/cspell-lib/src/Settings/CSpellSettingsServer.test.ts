@@ -14,10 +14,14 @@ import {
     readRawSettings,
     __testing__,
     ENV_CSPELL_GLOB_ROOT,
+    loadPnP,
+    loadPnPSync,
+    readSettingsFiles,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
+import { URI } from 'vscode-uri';
 
 const { normalizeSettings } = __testing__;
 
@@ -197,6 +201,13 @@ describe('Validate CSpellSettingsServer', () => {
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
+    test('readSettingsFiles cSpell.json', () => {
+        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import.json');
+        const settings = readSettingsFiles([filename]);
+        expect(Object.keys(settings)).not.toHaveLength(0);
+        expect(settings.words).toEqual(expect.arrayContaining(['import']));
+    });
+
     test('tests loading a cSpell.json with multiple imports file', () => {
         const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-imports.json');
         const settings = readSettings(filename);
@@ -335,8 +346,8 @@ describe('Validate Glob resolution', () => {
 
     test('Using ENV_CSPELL_GLOB_ROOT as __dirname', () => {
         process.env[ENV_CSPELL_GLOB_ROOT] = __dirname;
-        const settingsV = normalizeSettings(rawSampleSettings, __filename);
-        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename);
+        const settingsV = normalizeSettings(rawSampleSettings, __filename, {});
+        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename, {});
 
         expect(settingsV).toEqual(sampleSettings);
         expect(settingsV1).not.toEqual(sampleSettingsV1);
@@ -347,8 +358,8 @@ describe('Validate Glob resolution', () => {
 
     test('Using ENV_CSPELL_GLOB_ROOT as without shared hierarchy', () => {
         process.env[ENV_CSPELL_GLOB_ROOT] = path.resolve(__dirname, '../../samples');
-        const settingsV = normalizeSettings(rawSampleSettings, __filename);
-        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename);
+        const settingsV = normalizeSettings(rawSampleSettings, __filename, {});
+        const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename, {});
 
         expect(settingsV).not.toEqual(sampleSettings);
         expect(settingsV1).not.toEqual(sampleSettingsV1);
@@ -507,6 +518,25 @@ describe('Validate search/load config files', () => {
         const searchResult = await readRawSettings(file);
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
     });
+
+    test('loadPnP', async () => {
+        await expect(loadPnP({}, URI.file(__dirname))).resolves.toBeUndefined();
+        // Look for a pnp file from the current location, but it won't be found.
+        await expect(loadPnP({ usePnP: true }, URI.file(__dirname))).resolves.toBeUndefined();
+    });
+
+    test('loadPnPSync', () => {
+        expect(loadPnPSync({}, URI.file(__dirname))).toBeUndefined();
+        // Look for a pnp file from the current location, but it won't be found.
+        expect(loadPnPSync({ usePnP: true }, URI.file(__dirname))).toBeUndefined();
+    });
+
+    test('config needing PnP', async () => {
+        const uriTestPackages = path.join(__dirname, '../../../../test-packages');
+        const uriYarn2TestMedCspell = path.join(uriTestPackages, 'yarn2/test-yarn2-med/cspell.json');
+        const result = await loadConfig(uriYarn2TestMedCspell, {});
+        expect(result.dictionaries).toEqual(['medical terms']);
+    });
 });
 
 function oc<T>(v: Partial<T>): T {
@@ -539,6 +569,6 @@ const rawSampleSettings: CSpellUserSettings = {
 
 const rawSampleSettingsV1: CSpellUserSettings = { ...rawSampleSettings, version: '0.1' };
 const sampleSettingsFilename = __filename;
-const sampleSettings: CSpellUserSettings = normalizeSettings(rawSampleSettings, sampleSettingsFilename);
+const sampleSettings: CSpellUserSettings = normalizeSettings(rawSampleSettings, sampleSettingsFilename, {});
 
-const sampleSettingsV1: CSpellUserSettings = normalizeSettings(rawSampleSettingsV1, sampleSettingsFilename);
+const sampleSettingsV1: CSpellUserSettings = normalizeSettings(rawSampleSettingsV1, sampleSettingsFilename, {});

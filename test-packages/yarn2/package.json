@@ -1,0 +1,17 @@
+{
+  "name": "test-yarn2",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Tests for dictionaries included by a Yarn 2 repository",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "npm run prepare-yarn2-med && npm run prepare-yarn2-sci",
+    "prepare-yarn2-med": "cd test-yarn2-med && yarn",
+    "prepare-yarn2-sci": "cd test-yarn2-sci && yarn",
+    "test": "npm run test-yarn2-med && npm run test-yarn2-sci",
+    "test-yarn2-med": "cd test-yarn2-med && yarn test",
+    "test-yarn2-sci": "cd test-yarn2-sci && yarn test"
+  },
+  "author": "",
+  "license": "MIT"
+}

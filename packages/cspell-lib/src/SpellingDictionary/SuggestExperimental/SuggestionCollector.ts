@@ -7,7 +7,7 @@ export class SuggestionCollector {
     constructor(readonly size: number, public minScore: number) {}
 
     get collection(): SuggestionResult[] {
-        return this.results.concat([]);
+        return this.results.concat();
     }
 
     get sortedCollection(): SuggestionResult[] {

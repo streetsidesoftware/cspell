@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v2.1.5
 
       - run: npm ci
-
+      - run: npm run build
       - run: npm run coverage
 
       - name: Upload coverage Coveralls
