@@ -288,7 +288,7 @@ async function normalizeSearchForConfigResult(
 }
 
 export function searchForConfig(
-    searchFrom: string,
+    searchFrom: string | undefined,
     pnpSettings: PnPSettings = defaultPnPSettings
 ): Promise<CSpellSettings | undefined> {
     return normalizeSearchForConfigResult(
