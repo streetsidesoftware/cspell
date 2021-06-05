@@ -21,7 +21,6 @@
     "bootstrap": "lerna bootstrap --no-ci",
     "lint": "eslint . --fix && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
-    "prepare": "npm run clean-build",
     "prepare-cspell-action": "cd test-packages/yarn2 && npm i",
     "pub-lerna": "lerna publish from-git",
     "pub-version": "lerna version --conventional-commits",

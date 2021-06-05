@@ -66,7 +66,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
-
+      - run: npm run build
       - run: npm test
 
       - name: verify trace command
