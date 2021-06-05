@@ -1,13 +1,12 @@
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import { readFile } from 'fs-extra';
-import { URI, Utils as UriUtils } from 'vscode-uri';
+import { URI } from 'vscode-uri';
 import { getLanguagesForExt } from './LanguageIds';
 import {
     calcOverrideSettings,
     getDefaultSettings,
     getGlobalSettings,
     loadConfig,
-    loadPnP,
     mergeSettings,
     searchForConfig,
 } from './Settings';
@@ -191,14 +190,11 @@ async function searchForDocumentConfig(
     const { uri } = document;
     const u = URI.parse(uri);
     if (u.scheme !== 'file') return Promise.resolve(defaultConfig);
-    await loadPnP(pnpSettings, UriUtils.dirname(u));
-    return searchForConfig(u.fsPath).then((s) => s || defaultConfig);
+    return searchForConfig(u.fsPath, pnpSettings).then((s) => s || defaultConfig);
 }
 
 async function loadConfigFile(filename: string, pnpSettings: PnPSettings) {
-    const uri = URI.file(filename);
-    await loadPnP(pnpSettings, UriUtils.dirname(uri));
-    return loadConfig(filename);
+    return loadConfig(filename, pnpSettings);
 }
 
 async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<DocumentWithText> {
