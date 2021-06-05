@@ -1,4 +1,4 @@
-import { pnpLoader, UnsupportedPnpFile, UnsupportedSchema } from './pnpLoader';
+import { clearPnPGlobalCache, pnpLoader, UnsupportedPnpFile, UnsupportedSchema } from './pnpLoader';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import resolveFrom from 'resolve-from';
 import path from 'path';
@@ -89,6 +89,51 @@ describe('Validate PnPLoader', () => {
         const dictLocation = resolveFrom(uriYarn2TestMed.fsPath, '@cspell/dict-medicalterms/cspell-ext.json');
         expect(dictLocation).toEqual(expect.stringContaining(uriYarn2TestMed.fsPath));
         expect(dictLocation).toEqual(expect.stringContaining('cspell-ext.json'));
+    });
+
+    test('pnpLoader multiple clear cache', async () => {
+        const loader = pnpLoader();
+        const yarnPnp = await loader.load(uriYarn2TestMed);
+        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+
+        const loader2 = pnpLoader();
+        const yarnPnp2 = await loader.load(uriYarn2TestSci);
+        expect(yarnPnp2?.toString()).toBe(UriUtils.joinPath(uriYarn2TestSci, '.pnp.js').toString());
+
+        // trigger two cache clears
+        const cc = clearPnPGlobalCache();
+        const cc1 = loader.clearCache();
+        const cc2 = loader2.clearCache();
+        // try and load before the cache clear is finished.
+        const p = loader.load(uriYarn2TestMed);
+        const r = Promise.race([cc1.then(() => 'clear'), p.then(() => 'load')]);
+
+        // Even though the loaders are different, they use the same lock.
+        expect(cc1).toBe(cc);
+        expect(cc2).toBe(cc1);
+
+        // We expect the clear to finish first before the load is allowed to happen.
+        await expect(r).resolves.toBe('clear');
+        await Promise.all([cc1, p]);
+    });
+
+    test('pnpLoader shared .pnp.js', async () => {
+        const loader = pnpLoader();
+
+        const yarnPnp = await loader.load(uriYarn2TestMed);
+        const yarnPnp2 = await loader.load(UriUtils.joinPath(uriYarn2TestMed, '.yarn'));
+        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(yarnPnp2).toEqual(yarnPnp);
+    });
+
+    test('pnpLoader different files', async () => {
+        const loaderA = pnpLoader();
+        const loaderB = pnpLoader(['.not_found.js']);
+
+        const yarnPnp = await loaderA.load(uriYarn2TestMed);
+        const nfPnp = await loaderB.load(uriYarn2TestMed);
+        expect(yarnPnp?.toString()).toBe(UriUtils.joinPath(uriYarn2TestMed, '.pnp.js').toString());
+        expect(nfPnp).toBeUndefined();
     });
 
     test('pnpLoader bad schema', async () => {
