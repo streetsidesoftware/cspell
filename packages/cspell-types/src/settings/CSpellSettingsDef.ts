@@ -78,7 +78,7 @@ export interface ExtendableSettings extends Settings {
     overrides?: OverrideSettings[];
 }
 
-export interface Settings extends BaseSetting {
+export interface Settings extends BaseSetting, PnPSettings {
     /**
      * Current active spelling language.
      *
@@ -142,6 +142,56 @@ export interface Settings extends BaseSetting {
 
     /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
     languageId?: LanguageId;
+}
+
+/**
+ * Plug N Play settings to support package systems like Yarn 2.
+ */
+export interface PnPSettings {
+    /**
+     * Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading
+     * packages stored in the repository.
+     *
+     * When true, the spell checker will search up the directory structure for the existence
+     * of a PnP file and load it.
+     *
+     * @default false
+     */
+    usePnP?: boolean;
+
+    /**
+     * The PnP files to search for. Note: `.mjs` files are not currently supported.
+     *
+     * @default [".pnp.js", ".pnp.cjs"]
+     */
+    pnpFiles?: string[];
+}
+
+/**
+ * To prevent the unwanted execution of untrusted code, WorkspaceTrustSettings
+ * are use to set the trust levels.
+ *
+ * Trust setting have an impact on both `cspell.config.js` files and on `.pnp.js` files.
+ * In an untrusted location, these files will NOT be used.
+ *
+ * This will also prevent any associated plugins from being loaded.
+ */
+export interface WorkspaceTrustSettings {
+    /**
+     * Glob patterns of locations that contain ALWAYS trusted files
+     */
+    trustedFiles?: Glob[];
+
+    /**
+     * Glob patterns of locations that contain NEVER trusted files
+     */
+    untrustedFiles?: Glob[];
+
+    /**
+     * Sets the default trust level
+     * @default "trusted"
+     */
+    trustLevel?: TrustLevel;
 }
 
 /**
@@ -431,7 +481,10 @@ export interface GlobDef {
     /** Optional root to use when matching the glob. Defaults to current working dir. */
     root?: string;
 
-    /** Optional source of the glob, used when merging settings to determine the origin. */
+    /**
+     * Optional source of the glob, used when merging settings to determine the origin.
+     * @hidden
+     */
     source?: string;
 }
 
@@ -457,6 +510,9 @@ export type LanguageId = LanguageIdSingle | LanguageIdMultiple | LanguageIdMulti
 
 /** A File System Path */
 export type FsPath = string;
+
+/** Trust Security Level */
+export type TrustLevel = 'trusted' | 'untrusted';
 
 /**
  * A File System Path to a dictionary file.
