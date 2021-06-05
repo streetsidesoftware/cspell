@@ -14,10 +14,12 @@ import {
     readRawSettings,
     __testing__,
     ENV_CSPELL_GLOB_ROOT,
+    loadPnP,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
+import { URI } from 'vscode-uri';
 
 const { normalizeSettings } = __testing__;
 
@@ -506,6 +508,12 @@ describe('Validate search/load config files', () => {
     `('ReadRawSettings from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         const searchResult = await readRawSettings(file);
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
+    });
+
+    test('loadPnP', async () => {
+        await expect(loadPnP({}, URI.file(__dirname))).resolves.toBeUndefined();
+        // Look for a pnp file from the current location, but it won't be found.
+        await expect(loadPnP({ usePnP: true }, URI.file(__dirname))).resolves.toBeUndefined();
     });
 });
 

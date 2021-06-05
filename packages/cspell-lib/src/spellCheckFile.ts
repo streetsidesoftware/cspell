@@ -1,12 +1,13 @@
-import { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import { readFile } from 'fs-extra';
-import { URI } from 'vscode-uri';
+import { URI, Utils as UriUtils } from 'vscode-uri';
 import { getLanguagesForExt } from './LanguageIds';
 import {
     calcOverrideSettings,
     getDefaultSettings,
     getGlobalSettings,
     loadConfig,
+    loadPnP,
     mergeSettings,
     searchForConfig,
 } from './Settings';
@@ -136,9 +137,9 @@ async function spellCheckFullDocument(
     const useSearchForConfig =
         (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
     const pLocalConfig = options.configFile
-        ? catchError(loadConfig(options.configFile))
+        ? catchError(loadConfigFile(options.configFile, settings))
         : useSearchForConfig
-        ? catchError(searchForDocumentConfig(document, settings))
+        ? catchError(searchForDocumentConfig(document, settings, settings))
         : undefined;
     const localConfig = await pLocalConfig;
 
@@ -182,14 +183,22 @@ async function spellCheckFullDocument(
     return result;
 }
 
-function searchForDocumentConfig(
+async function searchForDocumentConfig(
     document: DocumentWithText,
-    defaultConfig: CSpellSettingsWithSourceTrace
+    defaultConfig: CSpellSettingsWithSourceTrace,
+    pnpSettings: PnPSettings
 ): Promise<CSpellSettingsWithSourceTrace> {
     const { uri } = document;
     const u = URI.parse(uri);
     if (u.scheme !== 'file') return Promise.resolve(defaultConfig);
+    await loadPnP(pnpSettings, UriUtils.dirname(u));
     return searchForConfig(u.fsPath).then((s) => s || defaultConfig);
+}
+
+async function loadConfigFile(filename: string, pnpSettings: PnPSettings) {
+    const uri = URI.file(filename);
+    await loadPnP(pnpSettings, UriUtils.dirname(uri));
+    return loadConfig(filename);
 }
 
 async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<DocumentWithText> {

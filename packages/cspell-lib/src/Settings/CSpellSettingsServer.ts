@@ -8,6 +8,7 @@ import {
     CSpellSettingsWithSourceTrace,
     ImportFileRef,
     GlobDef,
+    PnPSettings,
 } from '@cspell/cspell-types';
 import * as path from 'path';
 import { normalizePathForDictDefs } from './DictionarySettings';
@@ -17,6 +18,8 @@ import { getRawGlobalSettings } from './GlobalSettings';
 import { cosmiconfig, cosmiconfigSync, OptionsSync as CosmicOptionsSync, Options as CosmicOptions } from 'cosmiconfig';
 import { GlobMatcher } from 'cspell-glob';
 import { ImportError } from './ImportError';
+import { LoaderResult, pnpLoader } from './pnpLoader';
+import { URI } from 'vscode-uri';
 
 const configSettingsFileVersion0_1 = '0.1';
 const configSettingsFileVersion0_2 = '0.2';
@@ -263,7 +266,7 @@ async function normalizeSearchForConfigResult(
     };
 }
 
-export function searchForConfig(searchFrom?: string): Promise<CSpellSettings | undefined> {
+export function searchForConfig(searchFrom: string): Promise<CSpellSettings | undefined> {
     return normalizeSearchForConfigResult(searchFrom || process.cwd(), cspellConfigExplorer.search(searchFrom)).then(
         (r) => (r.filepath ? r.config : undefined)
     );
@@ -275,6 +278,14 @@ export function loadConfig(file: string): Promise<CSpellSettings> {
         return Promise.resolve(cached);
     }
     return normalizeSearchForConfigResult(file, cspellConfigExplorer.load(file)).then((r) => r.config);
+}
+
+export function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult> {
+    if (!pnpSettings.usePnP) {
+        return Promise.resolve(undefined);
+    }
+    const loader = pnpLoader(pnpSettings.pnpFiles);
+    return loader.load(searchFrom);
 }
 
 export function readRawSettings(filename: string, relativeTo?: string): CSpellSettings {
