@@ -38,6 +38,7 @@ jobs:
           - TheAlgorithms/Python
           - AdaDoom3/AdaDoom3
           - MartinThoma/LaTeX-examples
+          - plasticrake/tplink-smarthome-api canada-ca/open-source-logiciel-libre
 
     steps:
       - uses: actions/checkout@v2.3.4
@@ -58,3 +59,5 @@ jobs:
           && npm run integration-tests -- ${{ matrix.repo }}
 
 # cspell:ignore MartinThoma googleapis
+# cspell:ignore plasticrake tplink smarthome
+# cspell:ignore logiciel
