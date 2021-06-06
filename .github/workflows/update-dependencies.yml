@@ -39,6 +39,9 @@ jobs:
       - name: Update packages
         run: |
           npm run update-packages
+      - name: Build
+        run: |
+          npm run build
       - name: Update Integration Test Snapshots
         if: github.event.inputs.updateSnapshots == 'yes'
         env:
