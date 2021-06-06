@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1762, Issues found: 9221 in 1117 files
+ CSpell: Files checked: 1765, Issues found: 9227 in 1117 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -31,7 +31,8 @@ Lines:
 ./CODE_OF_CONDUCT.md:9:24      - Unknown word (socio)      -- experience, education, socio-economic status, nationality
 ./README.md:8:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
 ./SECURITY.md:3:46      - Unknown word (vulnz)      -- issue, please use [g.co/vulnz](https://g.co/vulnz
-./bazel/google_cloud_cpp_deps.bzl:127:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
+./bazel/google_cloud_cpp_deps.bzl:106:9     - Unknown word (boringssl)  -- if "boringssl" not in native.existing
+./bazel/google_cloud_cpp_deps.bzl:141:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
 ./bazel/google_cloud_cpp_deps.bzl:19:22     - Unknown word (deps)       -- def google_cloud_cpp_deps():
 ./bazel/google_cloud_cpp_deps.bzl:29:30     - Unknown word (googletest) -- Load rules_cc, used by googletest
 ./bazel/google_cloud_cpp_deps.bzl:73:16     - Unknown word (googleapis) -- # Load the googleapis dependency.
@@ -222,7 +223,7 @@ Lines:
 ./google/cloud/CMakeLists.txt:142:22    - Unknown word (msvc)       -- internal/disable_msvc_crt_secure_warnings
 ./google/cloud/CMakeLists.txt:153:14    - Unknown word (getenv)     -- internal/getenv.cc
 ./google/cloud/CMakeLists.txt:168:14    - Unknown word (strerror)   -- internal/strerror.cc
-./google/cloud/bigquery/CMakeLists.txt:151:38    - Unknown word (lgoogle)     -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_bigquery"
+./google/cloud/bigquery/CMakeLists.txt:147:28    - Unknown word (lgoogle)     -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_bigquery"
 ./google/cloud/bigquery/CMakeLists.txt:26:30     - Unknown word (DEPS)       -- GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::cloud
 ./google/cloud/bigquery/CMakeLists.txt:84:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
 ./google/cloud/bigquery/internal/bigquery_read_option_defaults.cc:41:47     - Unknown word (bigquerystorage) -- EndpointOption>(env ? *env : "bigquerystorage.googleapis.com");
@@ -363,7 +364,7 @@ Lines:
 ./google/cloud/pubsub/doc/publisher-mock.dox:3:76      - Unknown word (googlemock) -- publisher application with googlemock
 ./google/cloud/pubsub/doc/pubsub-main.dox:43:2      - Unknown word (parblock)   -- @parblock
 ./google/cloud/pubsub/doc/pubsub-main.dox:49:2      - Unknown word (endparblock) -- @endparblock
-./google/cloud/pubsub/internal/subscription_session_test.cc:152:37    - Unknown word (acking)     -- Increment the counter before acking, as the ack() may trigger
+./google/cloud/pubsub/internal/subscription_session_test.cc:159:37    - Unknown word (acking)     -- Increment the counter before acking, as the ack() may trigger
 ./google/cloud/pubsub/message.cc:51:34     - Unknown word (Differencer) -- protobuf::util::MessageDifferencer diff;
 ./google/cloud/pubsub/samples/samples.cc:786:36    - Unknown word (pfile)      -- constexpr kDefinition = R"pfile(
 ./google/cloud/pubsub/schema_admin_connection.h:36:38     - Unknown word (cppref)     -- models an [input range][cppref-input-range] of
@@ -426,8 +427,8 @@ Lines:
 ./google/cloud/spanner/value_test.cc:1047:14   - Unknown word (alphahex)   -- auto const alphahex = [](std::ostream& os
 ./google/cloud/spanner/value_test.cc:1057:49   - Unknown word (manip)      -- ostream&(std::ostream&)> manip;
 ./google/cloud/storage/CMakeLists.txt:161:21    - Unknown word (streambuf)  -- internal/object_streambuf.cc
-./google/cloud/storage/CMakeLists.txt:487:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
-./google/cloud/storage/CMakeLists.txt:667:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c"
+./google/cloud/storage/CMakeLists.txt:486:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
+./google/cloud/storage/CMakeLists.txt:664:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c")
 ./google/cloud/storage/CMakeLists.txt:71:5      - Unknown word (hmac)       -- hmac_key_metadata.cc
 ./google/cloud/storage/README.md:82:29     - Unknown word (istreambuf) -- string contents{std::istreambuf_iterator<char>{reader
 ./google/cloud/storage/benchmarks/README.md:10:61     - Unknown word (TTFB)       -- time to first byte (TTFB) is high, so
