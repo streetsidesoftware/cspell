@@ -297,17 +297,20 @@ describe('Validate individual regexp', () => {
         text: string;
         expectedResult: (string | number)[];
     }
+    // cspell:ignore geschäft
     test.each`
-        testName                 | regexp                 | text                     | expectedResult
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${''}                    | ${[]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${" x = 'Don\\'t'"}      | ${['x', 1, "'Don\\'t'", 5]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345'}               | ${[]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345a'}              | ${['12345a', 0]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345'}              | ${['b12345', 0]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345a'}             | ${['b12345a', 0]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12_345a'}            | ${['b12_345a', 0]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'well-educated'}       | ${['well-educated', 0]}
-        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'DB\\Driver\\Manager'} | ${['DB', 0, 'Driver', 3, 'Manager', 10]}
+        testName                 | regexp                 | text                           | expectedResult
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${''}                          | ${[]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${" x = 'Don\\'t'"}            | ${['x', 1, "'Don\\'t'", 5]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345'}                     | ${[]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'12345a'}                    | ${['12345a', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'geschäft'}                  | ${['geschäft', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'geschäft'.normalize('NFD')} | ${['geschäft'.normalize('NFD'), 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345'}                    | ${['b12345', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12345a'}                   | ${['b12345a', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'b12_345a'}                  | ${['b12_345a', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'well-educated'}             | ${['well-educated', 0]}
+        ${'regExWordsAndDigits'} | ${regExWordsAndDigits} | ${'DB\\Driver\\Manager'}       | ${['DB', 0, 'Driver', 3, 'Manager', 10]}
     `('$testName `$text`', ({ regexp, text, expectedResult }: RegExpTestCase) => {
         const r = match(regexp, text);
         expect(r).toEqual(expectedResult);

@@ -47,6 +47,7 @@ describe('Validate Spell Checking Files', () => {
         ${'src/not_found.c'} | ${{}}                       | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
         ${'src/sample.c'}    | ${{}}                       | ${{}}                                         | ${{ checked: true, issues: [], localConfigFilepath: s('.cspell.json'), errors: undefined }}
         ${'src/sample.c'}    | ${{}}                       | ${{ noConfigSearch: true }}                   | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${'src/README.md'}   | ${{}}                       | ${{}}                                         | ${{ checked: true, issues: [], localConfigFilepath: s('.cspell.json'), errors: undefined }}
         ${__filename}        | ${{}}                       | ${{ noConfigSearch: true }}                   | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
         ${'src/sample.c'}    | ${{ noConfigSearch: true }} | ${{}}                                         | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
         ${__filename}        | ${{}}                       | ${{ configFile: s('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: s('../cspell.config.json'), errors: undefined }}
