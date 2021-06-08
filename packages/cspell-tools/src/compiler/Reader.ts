@@ -1,7 +1,14 @@
 import { Sequence, genSequence, operators } from 'gensequence';
 import * as HR from 'hunspell-reader';
 import * as fs from 'fs-extra';
-import { Trie, importTrie, COMPOUND, OPTIONAL_COMPOUND, NORMALIZED, FORBID } from 'cspell-trie-lib';
+import {
+    Trie,
+    importTrie,
+    COMPOUND_FIX,
+    OPTIONAL_COMPOUND_FIX,
+    FORBID_PREFIX,
+    CASE_INSENSITIVE_PREFIX,
+} from 'cspell-trie-lib';
 import * as zlib from 'zlib';
 import { AffWord } from 'hunspell-reader/dist/aff';
 
@@ -126,25 +133,25 @@ function* _comments(lines: Iterable<string>): Generator<AnnotatedWord> {
 
 function* _compoundEnd(lines: Iterable<string>): Generator<AnnotatedWord> {
     for (const line of lines) {
-        if (line[0] !== OPTIONAL_COMPOUND) {
+        if (line[0] !== OPTIONAL_COMPOUND_FIX) {
             yield line;
             continue;
         }
         const w = line.slice(1);
         yield w;
-        yield COMPOUND + w;
+        yield COMPOUND_FIX + w;
     }
 }
 
 function* _compoundBegin(lines: Iterable<string>): Generator<AnnotatedWord> {
     for (const line of lines) {
-        if (line[line.length - 1] !== OPTIONAL_COMPOUND) {
+        if (line[line.length - 1] !== OPTIONAL_COMPOUND_FIX) {
             yield line;
             continue;
         }
         const w = line.slice(0, -1);
         yield w;
-        yield w + COMPOUND;
+        yield w + COMPOUND_FIX;
     }
 }
 
@@ -153,13 +160,10 @@ function* _stripCaseAndAccents(words: Iterable<AnnotatedWord>): Generator<Annota
         // Words are normalized to the compact format: e + ` => è
         yield word.normalize();
         // covert to lower case and strip accents.
-        const n = word
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '');
+        const n = word.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
         // All words are added for case-insensitive searches.
         // It is a space / speed trade-off. In this case, speed is more important.
-        yield NORMALIZED + n;
+        yield CASE_INSENSITIVE_PREFIX + n;
     }
 }
 
@@ -184,8 +188,8 @@ function* dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord>
 function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
     for (const affWord of affWords) {
         const { word, flags } = affWord;
-        const compound = flags.isCompoundForbidden ? '' : COMPOUND;
-        const forbid = flags.isForbiddenWord ? FORBID : '';
+        const compound = flags.isCompoundForbidden ? '' : COMPOUND_FIX;
+        const forbid = flags.isForbiddenWord ? FORBID_PREFIX : '';
         if (!forbid) {
             if (flags.canBeCompoundBegin) yield word + compound;
             if (flags.canBeCompoundEnd) yield compound + word;
@@ -196,3 +200,7 @@ function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
         }
     }
 }
+
+export const __testing__ = {
+    _stripCaseAndAccents,
+};
