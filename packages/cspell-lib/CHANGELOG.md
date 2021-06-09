@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.1](https://github.com/streetsidesoftware/cspell/compare/v5.6.0...v5.6.1) (2021-06-09)
+
+
+### Bug Fixes
+
+* Fix issues with accent characters ([#1322](https://github.com/streetsidesoftware/cspell/issues/1322)) ([4d65dfb](https://github.com/streetsidesoftware/cspell/commit/4d65dfbc3c0091450de2d6023b41c623faf763f0)), closes [#1321](https://github.com/streetsidesoftware/cspell/issues/1321)
+* Use a dictionary for ignoreWords to be consistent with `words` ([#1326](https://github.com/streetsidesoftware/cspell/issues/1326)) ([ee3897d](https://github.com/streetsidesoftware/cspell/commit/ee3897d62dcc5f5af177141734015ad9a9dcddff))
+
+
+
+
+
 # [5.6.0](https://github.com/streetsidesoftware/cspell/compare/v5.5.2...v5.6.0) (2021-06-05)
 
 
