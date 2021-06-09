@@ -1,4 +1,4 @@
-import { createReader } from './Reader';
+import { createReader, __testing__ } from './Reader';
 import * as path from 'path';
 
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
@@ -89,5 +89,19 @@ describe('Validate the iterateWordsFromFile', () => {
             '!Codemsg|!Errorerror|!codecode|!err|+code|+code+|+error|+error+|+msg|Café|Code|Code+|Error|Error+|msg' +
                 '|~!codecode|~!codemsg|~!err|~!errorerror|~+code|~+code+|~+error|~+error+|~+msg|~cafe|~code|~code+|~error|~error+|~msg'
         );
+    });
+
+    function s(a: string, on: string | RegExp = '|'): string[] {
+        return a.split(on);
+    }
+
+    test.each`
+        words                         | expected
+        ${s('hello')}                 | ${s('hello|~hello')}
+        ${s('café')}                  | ${s('café|~cafe')}
+        ${s('café'.normalize('NFD'))} | ${s('café|~cafe')}
+    `('_stripCaseAndAccents $words', ({ words, expected }) => {
+        const r = [...__testing__._stripCaseAndAccents(words)];
+        expect(r).toEqual(expected);
     });
 });
