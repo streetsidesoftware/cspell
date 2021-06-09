@@ -42,6 +42,21 @@ describe('Validate SimpleDictionaryParser', () => {
             '~end',
         ]);
     });
+
+    function s(line: string, on: string | RegExp = '|'): string[] {
+        return line.split(on);
+    }
+
+    test.each`
+        lines            | expected
+        ${s('word')}     | ${s('word')}
+        ${s('two-word')} | ${s('two-word')}
+        ${s('Word')}     | ${s('Word|~word')}
+        ${s('*error*')}  | ${s('error|error+|+error|+error+')}
+    `('parseDictionaryLines simple $lines', ({ lines, expected }) => {
+        const r = [...parseDictionaryLines(lines)];
+        expect(r).toEqual(expected);
+    });
 });
 
 function dictionary() {

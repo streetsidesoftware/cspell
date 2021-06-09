@@ -1,4 +1,4 @@
-import { createFailedToLoadDictionary } from './createSpellingDictionary';
+import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 describe('Validate createSpellingDictionary', () => {
@@ -17,5 +17,11 @@ describe('Validate createSpellingDictionary', () => {
         expect(d.suggest('error')).toEqual([]);
         expect(d.mapWord('café')).toBe('café');
         expect(d.has('fun')).toBe(false);
+    });
+
+    test('createSpellingDictionary', () => {
+        const words = ['one', 'two', 'three', 'left-right'];
+        const d = createSpellingDictionary(words, 'test create', __filename);
+        words.forEach((w) => expect(d.has(w)).toBe(true));
     });
 });

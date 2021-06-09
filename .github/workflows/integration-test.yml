@@ -49,6 +49,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - run: npm ci
+      - name: Npm has failed
+        if: ${{ failure() }}
+        run: |
+          ls -alF /home/runner/.npm/_logs/*.log
+          cat /home/runner/.npm/_logs/*.log
       - run: npm run build
       - name: Run Integration Tests ${{ matrix.repo }}
         env:
