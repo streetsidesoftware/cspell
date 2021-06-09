@@ -1,4 +1,11 @@
-import { validateText, hasWordCheck, calcTextInclusionRanges, _testMethods, CheckOptions } from './textValidator';
+import {
+    validateText,
+    hasWordCheck,
+    calcTextInclusionRanges,
+    _testMethods,
+    HasWordOptions,
+    ValidationOptions,
+} from './textValidator';
 import { createCollection } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
@@ -11,10 +18,9 @@ describe('Validate textValidator functions', () => {
     test('tests hasWordCheck', async () => {
         // cspell:ignore redgreenblueyellow strawberrymangobanana redwhiteblue
         const dictCol = await getSpellingDictionaryCollection();
-        const opt: CheckOptions = {
-            allowCompoundWords: true,
+        const opt: HasWordOptions = {
+            useCompounds: true,
             ignoreCase: true,
-            caseSensitive: dictCol.isDictionaryCaseSensitive,
         };
         expect(hasWordCheck(dictCol, 'brown', opt)).toBe(true);
         expect(hasWordCheck(dictCol, 'white', opt)).toBe(true);
@@ -65,7 +71,11 @@ describe('Validate textValidator functions', () => {
     test('tests case in ignore words', async () => {
         const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
         const text = 'We have PUBLISHed published multiple FIXesToThePROBLEMs';
-        const options = { caseSensitive: true, ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'] };
+        const options: ValidationOptions = {
+            caseSensitive: true,
+            ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'],
+            ignoreCase: false,
+        };
         const result = validateText(text, dictEmpty, options).toArray();
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'published', 'multiple']);

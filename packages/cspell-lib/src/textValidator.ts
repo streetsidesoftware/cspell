@@ -5,6 +5,7 @@ import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDic
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 import { split } from './util/wordSplitter';
+import { createSpellingDictionary } from './SpellingDictionary';
 
 export interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
@@ -14,7 +15,9 @@ export interface ValidationOptions extends IncludeExcludeOptions {
     flagWords?: string[];
     ignoreWords?: string[];
     allowCompoundWords?: boolean;
+    /** ignore words are considered case sensitive */
     caseSensitive?: boolean;
+    /** ignore case when checking words against dictionary or ignore words list */
     ignoreCase?: boolean;
 }
 
@@ -40,8 +43,6 @@ export interface ValidationResult extends TextOffset {
     isFlagged?: boolean;
     isFound?: boolean;
 }
-
-type SetOfWords = Set<string>;
 
 export const defaultMaxNumberOfProblems = 200;
 export const defaultMaxDuplicateProblems = 5;
@@ -99,18 +100,20 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         ignoreCase = true,
         caseSensitive = false,
     } = options;
-    const checkOptions: CheckOptions = {
-        ...options,
-        allowCompoundWords,
+    const hasWordOptions: HasWordOptions = {
         ignoreCase,
-        caseSensitive,
+        useCompounds: allowCompoundWords || undefined, // let the dictionaries decide on useCompounds if allow is false
     };
 
+    const ignoreDict = createSpellingDictionary(ignoreWords, '__ignore words__', 'ignore words', {
+        caseSensitive,
+    });
+
+    function isIgnored(word: string) {
+        return ignoreDict.has(word, { ignoreCase });
+    }
+
     const setOfFlagWords = new Set(flagWords);
-    const mappedIgnoreWords = options.caseSensitive
-        ? ignoreWords
-        : ignoreWords.concat(ignoreWords.map((a) => a.toLowerCase()));
-    const ignoreWordsSet: SetOfWords = new Set(mappedIgnoreWords);
     const setOfKnownSuccessfulWords = new Set<string>();
     const rememberFilter =
         <T extends TextOffset>(fn: (v: T) => boolean) =>
@@ -135,7 +138,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         return word;
     }
 
-    function checkWord(word: ValidationResult, options: CheckOptions): ValidationResult {
+    function checkWord(word: ValidationResult, options: HasWordOptions): ValidationResult {
         const isFlagged = testForFlaggedWord(word);
         const isFound = isFlagged ? undefined : isWordValid(dict, word, word.line, options);
         return { ...word, isFlagged, isFound };
@@ -145,7 +148,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         function splitterIsValid(word: TextOffset): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
-                (!testForFlaggedWord(word) && isWordValid(dict, word, lineSegment, checkOptions))
+                (!testForFlaggedWord(word) && isWordValid(dict, word, lineSegment, hasWordOptions))
             );
         }
 
@@ -162,11 +165,9 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                     const vr: ValidationResult = wo;
                     return vr;
                 })
-                .map((wo) => (wo.isFlagged ? wo : checkWord(wo, checkOptions)))
+                .map((wo) => (wo.isFlagged ? wo : checkWord(wo, hasWordOptions)))
                 .filter(rememberFilter((wo) => wo.isFlagged || !wo.isFound))
-                .filter(
-                    rememberFilter((wo) => !ignoreWordsSet.has(wo.text.toLowerCase()) && !ignoreWordsSet.has(wo.text))
-                )
+                .filter(rememberFilter((wo) => !isIgnored(wo.text)))
                 .filter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))) // Filter out any repeated characters like xxxxxxxxxx
                 // get back the original text.
                 .map((wo) => ({
@@ -175,7 +176,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 }))
                 .toArray();
 
-            if (!codeWordResults.length || ignoreWordsSet.has(vr.text) || checkWord(vr, checkOptions).isFound) {
+            if (!codeWordResults.length || isIgnored(vr.text) || checkWord(vr, hasWordOptions).isFound) {
                 rememberFilter((_) => false)(vr);
                 return [];
             }
@@ -215,7 +216,7 @@ export function isWordValid(
     dict: SpellingDictionary,
     wo: Text.TextOffset,
     line: TextOffset,
-    options: CheckOptions
+    options: HasWordOptions
 ): boolean {
     const firstTry = hasWordCheck(dict, wo.text, options);
     return (
@@ -225,17 +226,22 @@ export function isWordValid(
     );
 }
 
-export function hasWordCheck(dict: SpellingDictionary, word: string, options: CheckOptions): boolean {
+export interface HasWordOptions {
+    ignoreCase: boolean;
+    useCompounds: boolean | undefined;
+}
+
+export function hasWordCheck(dict: SpellingDictionary, word: string, options: HasWordOptions): boolean {
     word = word.replace(/\\/g, '');
     // Do not pass allowCompounds down if it is false, that allows for the dictionary to override the value based upon its own settings.
     return dict.has(word, convertCheckOptionsToHasOptions(options));
 }
 
-function convertCheckOptionsToHasOptions(opt: CheckOptions): HasOptions {
-    const { ignoreCase, allowCompoundWords } = opt;
+function convertCheckOptionsToHasOptions(opt: HasWordOptions): HasOptions {
+    const { ignoreCase, useCompounds } = opt;
     return {
         ignoreCase,
-        useCompounds: allowCompoundWords || undefined,
+        useCompounds,
     };
 }
 
