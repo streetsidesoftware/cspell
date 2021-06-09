@@ -63,26 +63,33 @@ describe('Validate DictionaryLoader', () => {
         expect(dict.getErrors?.()).toHaveLength(1);
     });
 
+    function nfd(s: string): string {
+        return s.normalize('NFD');
+    }
+
+    function nfc(s: string): string {
+        return s.normalize('NFC');
+    }
     const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');
     test.each`
-        testCase            | file                          | options          | word            | maxAge       | hasWord  | hasErrors
-        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}      | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}      | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'S' }} | ${'pear'}       | ${undefined} | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'strawberry'} | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'tree'}       | ${1}         | ${false} | ${false}
-        ${'unknown loader'} | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}      | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'left-right'} | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'Geschäft'}   | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'Geschäft'}   | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'geschaft'}   | ${1}         | ${true}  | ${false}
-        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{}}            | ${'apple'}      | ${1}         | ${false} | ${true}
-        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'S' }} | ${'pear'}       | ${undefined} | ${false} | ${true}
-        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'C' }} | ${'strawberry'} | ${1}         | ${false} | ${true}
-        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{}}            | ${'tree'}       | ${1}         | ${false} | ${true}
-        ${'csharp type {}'} | ${csharp}                     | ${{}}            | ${'const'}      | ${1}         | ${true}  | ${false}
-        ${'csharp type S'}  | ${csharp}                     | ${{ type: 'S' }} | ${'const'}      | ${1}         | ${true}  | ${false}
-        ${'csharp type C'}  | ${csharp}                     | ${{ type: 'C' }} | ${'const'}      | ${1}         | ${true}  | ${false}
+        testCase            | file                          | options          | word               | maxAge       | hasWord  | hasErrors
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}         | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}         | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'S' }} | ${'pear'}          | ${undefined} | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'strawberry'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'tree'}          | ${1}         | ${false} | ${false}
+        ${'unknown loader'} | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}         | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'left-right'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${nfd('Geschäft')} | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${nfc('Geschäft')} | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'geschaft'}      | ${1}         | ${true}  | ${false}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{}}            | ${'apple'}         | ${1}         | ${false} | ${true}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'S' }} | ${'pear'}          | ${undefined} | ${false} | ${true}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'C' }} | ${'strawberry'}    | ${1}         | ${false} | ${true}
+        ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{}}            | ${'tree'}          | ${1}         | ${false} | ${true}
+        ${'csharp type {}'} | ${csharp}                     | ${{}}            | ${'const'}         | ${1}         | ${true}  | ${false}
+        ${'csharp type S'}  | ${csharp}                     | ${{ type: 'S' }} | ${'const'}         | ${1}         | ${true}  | ${false}
+        ${'csharp type C'}  | ${csharp}                     | ${{ type: 'C' }} | ${'const'}         | ${1}         | ${true}  | ${false}
     `(
         '$testCase $word',
         async ({
@@ -108,22 +115,22 @@ describe('Validate DictionaryLoader', () => {
     );
 
     test.each`
-        testCase                                 | word                           | hasWord  | ignoreCase
-        ${'has word'}                            | ${'apple'}                     | ${true}  | ${true}
-        ${'has word'}                            | ${'pear'}                      | ${true}  | ${true}
-        ${'has word'}                            | ${'strawberry'}                | ${true}  | ${true}
-        ${'has word'}                            | ${'tree'}                      | ${false} | ${true}
-        ${'has word'}                            | ${'left-right'}                | ${true}  | ${true}
-        ${'has word'}                            | ${'left'}                      | ${false} | ${true}
-        ${'has word'}                            | ${'right'}                     | ${false} | ${true}
-        ${'has word with apart accent over "a"'} | ${'Geschäft'.normalize('NFD')} | ${true}  | ${false}
-        ${'has word with accent ä'}              | ${'Geschäft'.normalize('NFC')} | ${true}  | ${false}
-        ${'has word with apart accent over "a"'} | ${'Geschäft'.normalize('NFD')} | ${true}  | ${true}
-        ${'has word with accent ä'}              | ${'Geschäft'.normalize('NFC')} | ${true}  | ${true}
-        ${'has word no case'}                    | ${'geschaft'}                  | ${true}  | ${true}
-        ${'has word not found because of case'}  | ${'geschaft'}                  | ${false} | ${false}
+        testCase                        | word               | hasWord  | ignoreCase
+        ${''}                           | ${'apple'}         | ${true}  | ${true}
+        ${''}                           | ${'pear'}          | ${true}  | ${true}
+        ${''}                           | ${'strawberry'}    | ${true}  | ${true}
+        ${''}                           | ${'tree'}          | ${false} | ${true}
+        ${''}                           | ${'left-right'}    | ${true}  | ${true}
+        ${''}                           | ${'left'}          | ${false} | ${true}
+        ${''}                           | ${'right'}         | ${false} | ${true}
+        ${'with apart accent over "a"'} | ${nfd('Geschäft')} | ${true}  | ${false}
+        ${'with accent ä'}              | ${nfc('Geschäft')} | ${true}  | ${false}
+        ${'with apart accent over "a"'} | ${nfd('Geschäft')} | ${true}  | ${true}
+        ${'with accent ä'}              | ${nfc('Geschäft')} | ${true}  | ${true}
+        ${'no case'}                    | ${'geschaft'}      | ${true}  | ${true}
+        ${'not found because of case'}  | ${'geschaft'}      | ${false} | ${false}
     `(
-        '$testCase $word',
+        'dict has word $testCase $word',
         async ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
             const file = sample('words.txt');
             const d = await loadDictionary(file, { name: 'words', path: file });
