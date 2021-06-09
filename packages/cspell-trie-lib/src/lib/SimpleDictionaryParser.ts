@@ -37,8 +37,12 @@ export function parseDictionaryLines(
     const regexComment = new RegExp(escapeRegEx(commentCharacter) + '.*', 'g');
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    function filterLines(line: any | string): line is string {
+    function isString(line: any | string): line is string {
         return typeof line === 'string';
+    }
+
+    function trim(line: string): string {
+        return line.trim();
     }
 
     function removeComments(line: string): string {
@@ -84,8 +88,9 @@ export function parseDictionaryLines(
     }
 
     const processLines = operators.pipe(
-        operators.filter(filterLines),
+        operators.filter(isString),
         operators.map(removeComments),
+        operators.map(trim),
         operators.filter(filterEmptyLines),
         operators.concatMap(mapOptionalPrefix),
         operators.concatMap(mapOptionalSuffix),

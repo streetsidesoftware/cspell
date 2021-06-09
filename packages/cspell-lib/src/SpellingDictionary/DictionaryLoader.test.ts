@@ -72,6 +72,10 @@ describe('Validate DictionaryLoader', () => {
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'strawberry'} | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'tree'}       | ${1}         | ${false} | ${false}
         ${'unknown loader'} | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}      | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'left-right'} | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'Geschäft'}   | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'Geschäft'}   | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'geschaft'}   | ${1}         | ${true}  | ${false}
         ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{}}            | ${'apple'}      | ${1}         | ${false} | ${true}
         ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'S' }} | ${'pear'}       | ${undefined} | ${false} | ${true}
         ${'missing file'}   | ${'./missing_dictionary.txt'} | ${{ type: 'C' }} | ${'strawberry'} | ${1}         | ${false} | ${true}
@@ -102,6 +106,32 @@ describe('Validate DictionaryLoader', () => {
             expect(!!d.getErrors?.().length).toBe(hasErrors);
         }
     );
+
+    test.each`
+        testCase                                 | word                           | hasWord  | ignoreCase
+        ${'has word'}                            | ${'apple'}                     | ${true}  | ${true}
+        ${'has word'}                            | ${'pear'}                      | ${true}  | ${true}
+        ${'has word'}                            | ${'strawberry'}                | ${true}  | ${true}
+        ${'has word'}                            | ${'tree'}                      | ${false} | ${true}
+        ${'has word'}                            | ${'left-right'}                | ${true}  | ${true}
+        ${'has word'}                            | ${'left'}                      | ${false} | ${true}
+        ${'has word'}                            | ${'right'}                     | ${false} | ${true}
+        ${'has word with apart accent over "a"'} | ${'Geschäft'.normalize('NFD')} | ${true}  | ${false}
+        ${'has word with accent ä'}              | ${'Geschäft'.normalize('NFC')} | ${true}  | ${false}
+        ${'has word with apart accent over "a"'} | ${'Geschäft'.normalize('NFD')} | ${true}  | ${true}
+        ${'has word with accent ä'}              | ${'Geschäft'.normalize('NFC')} | ${true}  | ${true}
+        ${'has word no case'}                    | ${'geschaft'}                  | ${true}  | ${true}
+        ${'has word not found because of case'}  | ${'geschaft'}                  | ${false} | ${false}
+    `(
+        '$testCase $word',
+        async ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
+            const file = sample('words.txt');
+            const d = await loadDictionary(file, { name: 'words', path: file });
+            expect(d.has(word, { ignoreCase })).toBe(hasWord);
+        }
+    );
+
+    // cspell:ignore Geschäft geschaft
 });
 
 function sample(file: string): string {
