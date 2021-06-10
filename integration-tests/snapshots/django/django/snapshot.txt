@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2127, Issues found: 7863 in 904 files
+ CSpell: Files checked: 2128, Issues found: 7885 in 906 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -30,7 +30,7 @@ Lines:
 ./django/conf/locale/__init__.py:207:24    - Unknown word (frysk)        -- 'name_local': 'frysk',
 ./django/conf/locale/__init__.py:213:24    - Unknown word (Gaeilge)      -- 'name_local': 'Gaeilge',
 ./django/conf/locale/__init__.py:219:24    - Unknown word (Gàidhlig)     -- 'name_local': 'Gàidhlig',
-./django/conf/locale/__init__.py:21:24     - Unknown word (العربي)     -- 'name_local': 'العربيّة',
+./django/conf/locale/__init__.py:21:24     - Unknown word (العربيّة)   -- 'name_local': 'العربيّة',
 ./django/conf/locale/__init__.py:231:24    - Unknown word (עברית)        -- 'name_local': 'עברית',
 ./django/conf/locale/__init__.py:243:24    - Unknown word (Hrvatski)     -- 'name_local': 'Hrvatski',
 ./django/conf/locale/__init__.py:249:24    - Unknown word (hornjoserbsce) -- 'name_local': 'hornjoserbsce',
@@ -48,10 +48,14 @@ Lines:
 ./django/conf/locale/__init__.py:351:24    - Unknown word (Lëtzebuergesch) -- 'name_local': 'Lëtzebuergesch',
 ./django/conf/locale/__init__.py:357:24    - Unknown word (Lietuviškai)    -- 'name_local': 'Lietuviškai',
 ./django/conf/locale/__init__.py:369:24    - Unknown word (Македонски)     -- 'name_local': 'Македонски',
+./django/conf/locale/__init__.py:375:24    - Unknown word (മലയാളം)         -- 'name_local': 'മലയാളം',
+./django/conf/locale/__init__.py:387:24    - Unknown word (मराठी)          -- 'name_local': 'मराठी',
+./django/conf/locale/__init__.py:393:24    - Unknown word (မြန်မာဘာသာ)     -- 'name_local': 'မြန်မာဘာသာ',
 ./django/conf/locale/__init__.py:398:28    - Unknown word (Bokmal)         -- 'name': 'Norwegian Bokmal',
 ./django/conf/locale/__init__.py:399:24    - Unknown word (norsk)          -- 'name_local': 'norsk (bokmål)',
 ./django/conf/locale/__init__.py:399:31    - Unknown word (bokmål)         -- name_local': 'norsk (bokmål)',
 ./django/conf/locale/__init__.py:39:24     - Unknown word (Azərbaycanca) -- 'name_local': 'Azərbaycanca',
+./django/conf/locale/__init__.py:405:24    - Unknown word (नेपाली)         -- 'name_local': 'नेपाली',
 ./django/conf/locale/__init__.py:411:24    - Unknown word (Nederlands)     -- 'name_local': 'Nederlands',
 ./django/conf/locale/__init__.py:429:24    - Unknown word (Ирон)           -- 'name_local': 'Ирон',
 ./django/conf/locale/__init__.py:447:24    - Unknown word (Português)      -- 'name_local': 'Português',
@@ -64,6 +68,8 @@ Lines:
 ./django/conf/locale/__init__.py:495:24    - Unknown word (srpski)         -- 'name_local': 'srpski (latinica)',
 ./django/conf/locale/__init__.py:495:32    - Unknown word (latinica)       -- name_local': 'srpski (latinica)',
 ./django/conf/locale/__init__.py:507:24    - Unknown word (Kiswahili)      -- 'name_local': 'Kiswahili',
+./django/conf/locale/__init__.py:513:24    - Unknown word (தமிழ்)          -- 'name_local': 'தமிழ்',
+./django/conf/locale/__init__.py:519:24    - Unknown word (తెలుగు)         -- 'name_local': 'తెలుగు',
 ./django/conf/locale/__init__.py:51:24     - Unknown word (български)    -- 'name_local': 'български',
 ./django/conf/locale/__init__.py:525:24    - Unknown word (тоҷикӣ)         -- 'name_local': 'тоҷикӣ',
 ./django/conf/locale/__init__.py:531:24    - Unknown word (ภาษาไทย)        -- 'name_local': 'ภาษาไทย',
@@ -75,6 +81,8 @@ Lines:
 ./django/conf/locale/__init__.py:567:24    - Unknown word (اردو)           -- 'name_local': 'اردو',
 ./django/conf/locale/__init__.py:573:24    - Unknown word (oʻzbek)         -- 'name_local': 'oʻzbek tili',
 ./django/conf/locale/__init__.py:573:31    - Unknown word (tili)           -- name_local': 'oʻzbek tili',
+./django/conf/locale/__init__.py:579:24    - Unknown word (Tiếng)         -- 'name_local': 'Tiếng Việt',
+./django/conf/locale/__init__.py:579:31    - Unknown word (Việt)          -- name_local': 'Tiếng Việt',
 ./django/conf/locale/__init__.py:63:24     - Unknown word (brezhoneg)    -- 'name_local': 'brezhoneg',
 ./django/conf/locale/__init__.py:69:24     - Unknown word (bosanski)     -- 'name_local': 'bosanski',
 ./django/conf/locale/__init__.py:81:24     - Unknown word (česky)        -- 'name_local': 'česky',
@@ -91,17 +99,18 @@ Lines:
 ./django/conf/locale/it/formats.py:12:26     - Unknown word (Lunedì)     -- FIRST_DAY_OF_WEEK = 1  # Lunedì
 ./django/conf/locale/it/formats.py:5:29      - Unknown word (Ottobre)    -- FORMAT = 'd F Y'  # 25 Ottobre 2006
 ./django/conf/locale/it/formats.py:7:36      - Unknown word (Mercoledì)  -- FORMAT = 'l d F Y H:i'  # Mercoledì 25 Ottobre 2006 14:
+./django/conf/locale/km/formats.py:5:23      - Unknown word (ឆ្នា)       -- DATE_FORMAT = 'j ខែ F ឆ្នាំ Y'
 ./django/conf/locale/ky/formats.py:12:26     - Unknown word (Дүйшөмбү)   -- FIRST_DAY_OF_WEEK = 1  # Дүйшөмбү, Monday
 ./django/conf/locale/nb/formats.py:21:50     - Unknown word (oktober)    -- , # '25. oktober 2006', '25 oktober
 ./django/conf/locale/nl/formats.py:12:61     - Unknown word (maandag)    -- # Monday (in Dutch 'maandag')
 ./django/conf/locale/nl/formats.py:5:47      - Unknown word (januari)    -- # '20 januari 2009'
 ./django/conf/locale/pt_BR/formats.py:19:52     - Unknown word (Outubro)    -- %B, %Y',   # '25 de Outubro de 2006', '25 de Outubro
-./django/conf/locale/th/formats.py:19:25     - Unknown word (ลาคม)       -- '%d %B %Y',  # 25 ตุลาคม 2006
+./django/conf/locale/th/formats.py:19:23     - Unknown word (ตุลาคม)     -- '%d %B %Y',  # 25 ตุลาคม 2006
 ./django/conf/locale/tr/formats.py:12:26     - Unknown word (Pazartesi)  -- FIRST_DAY_OF_WEEK = 1  # Pazartesi
 ./django/conf/locale/tr/formats.py:19:39     - Unknown word (Ekim)       -- '%d %b. %Y',  # '25 Ekim 2006', '25 Eki. 200
 ./django/conf/locale/uz/formats.py:18:29     - Unknown word (Oktabr)     -- %B, %Y-yil',  # '25-Oktabr, 2006-yil'
 ./django/contrib/admin/actions.py:24:5      - Unknown word (childs)     -- childs (foreignkeys), a "permission
-./django/contrib/admin/helpers.py:214:63    - Unknown word (auth's)     -- suffices for contrib.auth's
+./django/contrib/admin/helpers.py:221:63    - Unknown word (auth's)     -- suffices for contrib.auth's
 ./django/contrib/admin/options.py:1222:19   - Unknown word (saveasnew)  -- "_saveasnew" in request.POST and
 ./django/contrib/admin/options.py:132:23    - Unknown word (dbfield)    -- def formfield_for_dbfield(self, db_field, request
 ./django/contrib/admin/options.py:181:13    - Unknown word (klass)      -- for klass in db_field.__class
@@ -325,10 +334,10 @@ Lines:
 ./django/contrib/postgres/fields/hstore.py:103:17    - Unknown word (akeys)      -- function = 'akeys'
 ./django/contrib/postgres/fields/hstore.py:110:17    - Unknown word (avals)      -- function = 'avals'
 ./django/contrib/postgres/fields/ranges.py:148:17    - Unknown word (tstzrange)  -- return 'tstzrange'
-./django/contrib/postgres/operations.py:102:25    - Unknown word (trgm)       -- self.name = 'pg_trgm'
-./django/contrib/postgres/operations.py:170:51    - Unknown word (libc)       -- locale, *, provider='libc', deterministic=True
+./django/contrib/postgres/operations.py:103:25    - Unknown word (trgm)       -- self.name = 'pg_trgm'
+./django/contrib/postgres/operations.py:171:51    - Unknown word (libc)       -- locale, *, provider='libc', deterministic=True
 ./django/contrib/postgres/operations.py:2:16      - Unknown word (oids)       -- get_citext_oids, get_hstore_oids, register
-./django/contrib/postgres/operations.py:90:22     - Unknown word (pgcrypto)   -- self.name = 'pgcrypto'
+./django/contrib/postgres/operations.py:91:22     - Unknown word (pgcrypto)   -- self.name = 'pgcrypto'
 ./django/contrib/postgres/search.py:132:5     - Unknown word (BITOR)      -- BITOR = '||'
 ./django/contrib/postgres/search.py:163:19    - Unknown word (plainto)    -- 'plain': 'plainto_tsquery',
 ./django/contrib/postgres/search.py:164:20    - Unknown word (phraseto)   -- 'phrase': 'phraseto_tsquery',
@@ -668,7 +677,7 @@ Lines:
 ./django/template/defaulttags.py:1340:21   - Unknown word (myblock)      -- {% verbatim myblock %}
 ./django/template/defaulttags.py:680:38    - Unknown word (myvar)      -- firstof var1 var2 var3 as myvar %}
 ./django/template/library.py:41:40     - Unknown word (somefunc)   -- register.tag('somename', somefunc)
-./django/template/loader_tags.py:293:49    - Unknown word (BAZZ)       -- some_include" with bar="BAZZ!" baz="BING!" %}
+./django/template/loader_tags.py:299:49    - Unknown word (BAZZ)       -- some_include" with bar="BAZZ!" baz="BING!" %}
 ./django/test/client.py:397:45    - Unknown word (doseq)      -- STRING': urlencode(data, doseq=True),
 ./django/test/html.py:15:67     - Unknown word (ismap)      -- formnovalidate', 'hidden', 'ismap',
 ./django/test/html.py:16:48     - Unknown word (nomodule)   -- multiple', 'muted', 'nomodule', 'novalidate', 'open
@@ -680,14 +689,14 @@ Lines:
 ./django/test/runner.py:419:9     - Unknown word (imap)            -- imap_unordered to show results
 ./django/test/runner.py:56:25     - Unknown word (writeln)    -- self.stream.writeln(self.separator2)
 ./django/test/signals.py:202:54    - Unknown word (modwsgi)    -- auth.handlers import modwsgi
-./django/test/testcases.py:816:46    - Unknown word (ndiff)      -- + '\n'.join(difflib.ndiff(
+./django/test/testcases.py:808:46    - Unknown word (ndiff)      -- + '\n'.join(difflib.ndiff(
 ./django/test/utils.py:938:25    - Unknown word (lookup's)   -- lookup_name (or the lookup's lookup_name if not provided
 ./django/urls/base.py:17:16     - Unknown word (Lconfs)     -- # Overridden URLconfs for each thread are
 ./django/urls/base.py:18:2      - Unknown word (urlconfs)   -- _urlconfs = Local()
 ./django/urls/conf.py:1:27      - Unknown word (Lsconfs)    -- Functions for use in URLsconfs."""
 ./django/urls/resolvers.py:23:39     - Unknown word (SUBDELIMS)  -- http import RFC3986_SUBDELIMS, escape_leading_slashes
-./django/urls/resolvers.py:404:24    - Unknown word (strs)       -- self._callback_strs = set()
-./django/urls/resolvers.py:673:45    - Unknown word (pchar)      -- safe characters from `pchar` definition of RFC
+./django/urls/resolvers.py:421:24    - Unknown word (strs)       -- self._callback_strs = set()
+./django/urls/resolvers.py:690:45    - Unknown word (pchar)      -- safe characters from `pchar` definition of RFC
 ./django/utils/archive.py:107:28    - Unknown word (unarchived) -- permissions to the unarchived file.
 ./django/utils/archive.py:109:26    - Unknown word (IROTH)      -- if mode & stat.S_IROTH:
 ./django/utils/autoreload.py:100:29    - Unknown word (SIGTTOU)    -- if hasattr(signal, 'SIGTTOU'):
@@ -915,7 +924,7 @@ Lines:
 ./tests/absolute_url_overrides/tests.py:43:41     - Unknown word (testc)      -- absolute_url_overrides.testc': lambda o: '/test-c
 ./tests/admin_changelist/admin.py:116:38    - Unknown word (noparents)  -- request.user.username == 'noparents':
 ./tests/admin_changelist/admin.py:144:49    - Unknown word (swallowonetoone) -- , 'load', 'speed', 'swallowonetoone')
-./tests/admin_changelist/tests.py:260:63    - Unknown word (divs)       -- fields are rendered in divs correctly
+./tests/admin_changelist/tests.py:267:63    - Unknown word (divs)       -- fields are rendered in divs correctly
 ./tests/admin_changelist/tests.py:43:11     - Unknown word (tbody)      -- def build_tbody_html(pk, href, extra
 ./tests/admin_docs/models.py:2:43      - Unknown word (djang)      -- various aspects of the djang.contrib.admindocs app
 ./tests/admin_docs/test_middleware.py:10:14     - Unknown word (xview)      -- def test_xview_func(self):
@@ -927,7 +936,6 @@ Lines:
 ./tests/admin_inlines/admin.py:8:12      - Unknown word (Consigliere) -- Class, Consigliere, Course, CourseProxy
 ./tests/admin_inlines/models.py:227:10    - Unknown word (famiglia)   -- capo_famiglia = models.ForeignKey
 ./tests/admin_inlines/tests.py:1270:57   - Unknown word (rgba)                    -- expressed as either rgb() or rgba() depending on the
-./tests/admin_inlines/tests.py:1370:51   - Unknown word (fiter)                   -- horizontal/vertical fiter with stacked/tabular
 ./tests/admin_inlines/tests.py:191:65    - Unknown word (capofamiglia) -- admin:admin_inlines_capofamiglia_add'))
 ./tests/admin_inlines/tests.py:277:65    - Unknown word (parentmodelwithcustompk) -- admin:admin_inlines_parentmodelwithcustompk_change', args=('foo
 ./tests/admin_inlines/tests.py:385:28    - Unknown word (nonautopkbook)           -- '<input id="id_nonautopkbook_set-0-rand_pk" '
@@ -1244,6 +1252,10 @@ Lines:
 ./tests/forms_tests/field_tests/test_durationfield.py:50:40     - Unknown word (être)       -- nombre de jours doit être entre {min_days} et
 ./tests/forms_tests/field_tests/test_emailfield.py:21:52     - Unknown word (xdfabc)     -- idn.xyz\xe4\xf6\xfc\xdfabc.part.com',
 ./tests/forms_tests/field_tests/test_emailfield.py:22:47     - Unknown word (äöüßabc)    -- local@domain.with.idn.xyzäöüßabc.part.com')
+./tests/forms_tests/field_tests/test_filefield.py:39:58     - Unknown word (मेरी)       -- ploadedFile('我隻氣墊船裝滿晒鱔.txt', 'मेरी मँडराने वाली नाव सर
+./tests/forms_tests/field_tests/test_filefield.py:39:63     - Unknown word (मँडराने)    -- 氣墊船裝滿晒鱔.txt', 'मेरी मँडराने वाली नाव सर्पमीनों
+./tests/forms_tests/field_tests/test_filefield.py:39:71     - Unknown word (वाली)       -- txt', 'मेरी मँडराने वाली नाव सर्पमीनों से भर
+./tests/forms_tests/field_tests/test_filefield.py:39:80     - Unknown word (सर्पमीनो)   -- री मँडराने वाली नाव सर्पमीनों से भरी ह'.encode()
 ./tests/forms_tests/field_tests/test_regexfield.py:61:27     - Unknown word (éèøç)       -- self.assertEqual('éèøçÎÎ你好', f.clean('éèøç
 ./tests/forms_tests/field_tests/test_slugfield.py:18:35     - Unknown word (ıçğüş)      -- assertEqual(f.clean('ıçğüş'), 'ıçğüş')
 ./tests/forms_tests/tests/test_forms.py:1360:25   - Unknown word (reuired)    -- ({'class': 'reuired'}, {'class': 'required
@@ -1673,8 +1685,7 @@ Lines:
 ./tests/migrations/test_optimizer.py:115:91    - Unknown word (Foozes)     -- verbose_name_plural': 'Foozes'}),
 ./tests/migrations/test_optimizer.py:179:27    - Unknown word (owrt)       -- def test_create_alter_owrt_delete_model(self):
 ./tests/migrations/test_optimizer.py:858:48    - Unknown word (Phou)       -- RenameModel("Foo", "Phou"),
-./tests/migrations/test_state.py:1091:19   - Unknown word (Purposedly) -- # Purposedly re-ordered.
-./tests/migrations/test_writer.py:792:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
+./tests/migrations/test_writer.py:793:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
 ./tests/model_fields/models.py:137:5     - Unknown word (nbfield)    -- nbfield = models.BooleanField
 ./tests/model_fields/models.py:141:5     - Unknown word (bfield)     -- bfield = models.BooleanField
 ./tests/model_fields/models.py:383:5     - Unknown word (floatf)     -- floatf = models.FloatField
@@ -1740,7 +1751,7 @@ Lines:
 ./tests/postgres_tests/test_array.py:889:32    - Unknown word (defg)       -- field.clean('abc,c,defg')
 ./tests/postgres_tests/test_constraints.py:464:25    - Unknown word (SPGIST)     -- index_type='SPGIST',
 ./tests/postgres_tests/test_constraints.py:601:25    - Unknown word (TSTZRANGE)  -- function = 'TSTZRANGE'
-./tests/postgres_tests/test_operations.py:305:29    - Unknown word (phonebk)    -- locale='de-u-co-phonebk',
+./tests/postgres_tests/test_operations.py:308:29    - Unknown word (phonebk)    -- locale='de-u-co-phonebk',
 ./tests/postgres_tests/test_ranges.py:689:40    - Unknown word (Ints)       -- label for="id_ints_0">Ints:</label></th>
 ./tests/postgres_tests/test_signals.py:10:13     - Unknown word (pyscogp)    -- pass # pyscogp2 isn't installed.
 ./tests/prefetch_related/test_prefetch_related_objects.py:16:48     - Unknown word (Wuthering)  -- objects.create(title='Wuthering Heights')
@@ -1813,7 +1824,7 @@ Lines:
 ./tests/responses/tests.py:28:38     - Unknown word (qwer)       -- writelines(['asdf\n', 'qwer\n'])
 ./tests/responses/tests.py:76:34     - Unknown word (J'attendrai) -- HttpResponse(status="J'attendrai")
 ./tests/runtests.py:129:9     - Unknown word (subdirs)    -- subdirs_to_skip = SUBDIRS_TO
-./tests/runtests.py:276:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
+./tests/runtests.py:301:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
 ./tests/runtests.py:3:8       - Unknown word (atexit)     -- import atexit
 ./tests/runtests.py:80:1      - Unknown word (SUBDIRS)    -- SUBDIRS_TO_SKIP = {
 ./tests/schema/models.py:156:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
@@ -1915,23 +1926,23 @@ Lines:
 ./tests/template_tests/filter_tests/test_urlencode.py:17:49     - Unknown word (Fslash)     -- output, '/test/escape%2Fslash/')
 ./tests/template_tests/filter_tests/test_urlize.py:214:14    - Unknown word (tlds)       -- def test_tlds(self):
 ./tests/template_tests/syntax_tests/i18n/base.py:8:1       - Unknown word (pdir)       -- pdir = os.path.split(os.path
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:146:59    - Unknown word (myextra)    -- ocktranslate with extra_field=myextra_field count counter
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:226:42    - Unknown word (Seite)      -- assertEqual(output, 'Error: Seite nicht gefunden')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:226:48    - Unknown word (nicht)      -- output, 'Error: Seite nicht gefunden')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:226:54    - Unknown word (gefunden)   -- 'Error: Seite nicht gefunden')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:389:49    - Unknown word (Ergebnis)   -- ssertEqual(rendered, '1 Super-Ergebnis')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:395:49    - Unknown word (Ergebnisse) -- ssertEqual(rendered, '2 Super-Ergebnisse')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:401:43    - Unknown word (anderen)    -- assertEqual(rendered, '1 anderen Super-Ergebnis')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:415:44    - Unknown word (gibt)       -- assertEqual(rendered, 'Es gibt 5 Kommentare')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:415:51    - Unknown word (Kommentare) -- rendered, 'Es gibt 5 Kommentare')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:463:40    - Unknown word (personne)   -- s is translated as %(personne)s in fr.po).
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:483:23    - Unknown word (Transn)     -- class TranslationBlockTransnTagTests(TranslationBlockTrans
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:512:30    - Unknown word (btrans)     -- test_multiple_locale_btrans(self):
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:561:86    - Unknown word (stellt)     -- , 'num': 1})), '42% stellt 1 Objekt dar')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:561:95    - Unknown word (Objekt)     -- 1})), '42% stellt 1 Objekt dar')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:562:95    - Unknown word (Objekte)    -- 4})), '42% stellt 4 Objekte dar')
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:61:14     - Unknown word (legacyi)    -- @setup({'legacyi18n04': '{% load i18n
-./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:72:35     - Unknown word (xxxyyyxxx)  -- assertEqual(output, 'xxxyyyxxx')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:148:59    - Unknown word (myextra)    -- ocktranslate with extra_field=myextra_field count counter
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:228:42    - Unknown word (Seite)      -- assertEqual(output, 'Error: Seite nicht gefunden')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:228:48    - Unknown word (nicht)      -- output, 'Error: Seite nicht gefunden')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:228:54    - Unknown word (gefunden)   -- 'Error: Seite nicht gefunden')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:391:49    - Unknown word (Ergebnis)   -- ssertEqual(rendered, '1 Super-Ergebnis')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:397:49    - Unknown word (Ergebnisse) -- ssertEqual(rendered, '2 Super-Ergebnisse')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:403:43    - Unknown word (anderen)    -- assertEqual(rendered, '1 anderen Super-Ergebnis')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:417:44    - Unknown word (gibt)       -- assertEqual(rendered, 'Es gibt 5 Kommentare')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:417:51    - Unknown word (Kommentare) -- rendered, 'Es gibt 5 Kommentare')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:465:40    - Unknown word (personne)   -- s is translated as %(personne)s in fr.po).
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:485:23    - Unknown word (Transn)     -- class TranslationBlockTransnTagTests(TranslationBlockTrans
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:514:30    - Unknown word (btrans)     -- test_multiple_locale_btrans(self):
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:563:86    - Unknown word (stellt)     -- , 'num': 1})), '42% stellt 1 Objekt dar')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:563:95    - Unknown word (Objekt)     -- 1})), '42% stellt 1 Objekt dar')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:564:95    - Unknown word (Objekte)    -- 4})), '42% stellt 4 Objekte dar')
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:63:14     - Unknown word (legacyi)    -- @setup({'legacyi18n04': '{% load i18n
+./tests/template_tests/syntax_tests/i18n/test_blocktranslate.py:74:35     - Unknown word (xxxyyyxxx)  -- assertEqual(output, 'xxxyyyxxx')
 ./tests/template_tests/syntax_tests/i18n/test_filters.py:22:62     - Unknown word (maďarsky)   -- Hungarian Magyar False maďarsky')
 ./tests/template_tests/syntax_tests/i18n/test_filters.py:33:62     - Unknown word (nizozemsky) -- Dutch Nederlands False nizozemsky')
 ./tests/template_tests/syntax_tests/i18n/test_filters.py:46:34     - Unknown word (francouzsky) -- fr: French/français/francouzsky bidi=False; '
@@ -1940,7 +1951,7 @@ Lines:
 ./tests/template_tests/syntax_tests/i18n/test_translate.py:92:41     - Unknown word (NICHT)      -- assertEqual(output, 'SEITE NICHT GEFUNDEN')
 ./tests/template_tests/syntax_tests/i18n/test_translate.py:92:47     - Unknown word (GEFUNDEN)   -- output, 'SEITE NICHT GEFUNDEN')
 ./tests/template_tests/syntax_tests/i18n/test_underscore_syntax.py:61:30     - Unknown word (loadi)      -- test_multiple_locale_loadi18n(self):
-./tests/template_tests/syntax_tests/test_basic.py:92:39     - Unknown word (blech)      -- basic-syntax11': '{{ var.blech }}'})
+./tests/template_tests/syntax_tests/test_basic.py:93:39     - Unknown word (blech)      -- basic-syntax11': '{{ var.blech }}'})
 ./tests/template_tests/syntax_tests/test_cache.py:107:25    - Unknown word (freddled)   -- 'Oh freddled gruntbuggly/Thy micturations
 ./tests/template_tests/syntax_tests/test_cache.py:107:34    - Unknown word (gruntbuggly) -- 'Oh freddled gruntbuggly/Thy micturations are
 ./tests/template_tests/syntax_tests/test_cache.py:107:50    - Unknown word (micturations) -- freddled gruntbuggly/Thy micturations are to me/'
@@ -1955,7 +1966,7 @@ Lines:
 ./tests/template_tests/syntax_tests/test_if_changed.py:26:41     - Unknown word (numx)       -- '{% for x in numx %}{% ifchanged %}{{
 ./tests/template_tests/syntax_tests/test_if_changed.py:48:41     - Unknown word (numy)       -- '{% for y in numy %}{% ifchanged %}{{
 ./tests/template_tests/syntax_tests/test_if_changed.py:62:35     - Unknown word (accd)       -- assertEqual(output, 'accd')
-./tests/template_tests/syntax_tests/test_include.py:240:14    - Unknown word (tmpl)       -- 'tmpl': engine.from_string
+./tests/template_tests/syntax_tests/test_include.py:241:14    - Unknown word (tmpl)       -- 'tmpl': engine.from_string
 ./tests/template_tests/syntax_tests/test_list_index.py:53:41     - Unknown word (dict's)     -- lookup wins out when dict's key is a string.
 ./tests/template_tests/syntax_tests/test_numpy.py:13:26     - Unknown word (Numpy)      -- skipIf(numpy is False, "Numpy must be installed to
 ./tests/template_tests/syntax_tests/test_numpy.py:19:9      - Unknown word (Numpy's)    -- Numpy's array-index syntax allows
@@ -1989,9 +2000,9 @@ Lines:
 ./tests/timezones/tests.py:822:14    - Unknown word (notag)      -- 'notag': Template("{% load
 ./tests/timezones/tests.py:823:14    - Unknown word (noarg)      -- 'noarg': Template(
 ./tests/transactions/tests.py:536:14    - Unknown word (Durabiltity) -- class DisableDurabiltityCheckTests(TestCase)
-./tests/urlpatterns/tests.py:146:53    - Unknown word (stest)      -- int:num>/extra/<str:%stest>' cannot contain "
-./tests/urlpatterns/tests.py:168:23    - Unknown word (abcxyz)     -- ('str', {'abcxyz'}, no_converter),
-./tests/urlpatterns/tests.py:170:31    - Unknown word (ABCXYZ)     -- ('slug', {'abcxyz-ABCXYZ_01234567890'}, no_converter
+./tests/urlpatterns/tests.py:160:53    - Unknown word (stest)      -- int:num>/extra/<str:%stest>' cannot contain "
+./tests/urlpatterns/tests.py:182:23    - Unknown word (abcxyz)     -- ('str', {'abcxyz'}, no_converter),
+./tests/urlpatterns/tests.py:184:31    - Unknown word (ABCXYZ)     -- ('slug', {'abcxyz-ABCXYZ_01234567890'}, no_converter
 ./tests/urlpatterns_reverse/tests.py:1175:19   - Unknown word (uncallable) -- path('uncallable-object/', views.uncallable
 ./tests/urlpatterns_reverse/tests.py:205:69    - Unknown word (Cspam)      -- CDocuments%20and%20Settings%5Cspam/', [],
 ./tests/urlpatterns_reverse/tests.py:258:22    - Unknown word (Fexample)   -- ('security', '/%2Fexample.com/security/', ['/example
@@ -1999,9 +2010,9 @@ Lines:
 ./tests/user_commands/management/commands/dance.py:11:55     - Unknown word (Rock'n'Roll) -- "--style", default="Rock'n'Roll")
 ./tests/user_commands/management/commands/required_option.py:8:73      - Unknown word (needme)     -- required=True, dest='needme2')
 ./tests/user_commands/tests.py:104:17    - Unknown word (cmds)       -- cmds = find_commands(os.path
-./tests/utils_tests/test_archive.py:53:23     - Unknown word (IRWXU)      -- mask = stat.S_IRWXU | stat.S_IRWXG | stat
-./tests/utils_tests/test_archive.py:53:38     - Unknown word (IRWXG)      -- stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO
-./tests/utils_tests/test_archive.py:53:53     - Unknown word (IRWXO)      -- stat.S_IRWXG | stat.S_IRWXO
+./tests/utils_tests/test_archive.py:54:23     - Unknown word (IRWXU)      -- mask = stat.S_IRWXU | stat.S_IRWXG | stat
+./tests/utils_tests/test_archive.py:54:38     - Unknown word (IRWXG)      -- stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO
+./tests/utils_tests/test_archive.py:54:53     - Unknown word (IRWXO)      -- stat.S_IRWXG | stat.S_IRWXO
 ./tests/utils_tests/test_autoreload.py:117:75    - Unknown word (zipf)       -- zipfile.ZIP_DEFLATED) as zipf:
 ./tests/utils_tests/test_autoreload.py:199:32    - Unknown word (Werror)     -- [sys.executable, '-Werror', __file__, 'runserver
 ./tests/utils_tests/test_autoreload.py:86:30     - Unknown word (Ceci)       -- filename.write_text("Ceci n'est pas du Python
@@ -2050,6 +2061,8 @@ Lines:
 ./tests/validation/tests.py:140:9     - Unknown word (giptm)      -- giptm = GenericIPAddressTestModel
 ./tests/validation/tests.py:95:57     - Unknown word (Kocherhans) -- create(name='Joseph Kocherhans')
 ./tests/validators/tests.py:421:29    - Unknown word (nocache)             -- test_regex_equality_nocache(self):
+./tests/validators/tests.py:52:48     - Unknown word (उदाहरण)     -- domain.with.idn.tld.उदाहरण.परीक्षा', None),
+./tests/validators/tests.py:52:55     - Unknown word (परीक्षा)    -- with.idn.tld.उदाहरण.परीक्षा', None),
 ./tests/validators/tests.py:558:40    - Unknown word (mydomain)            -- domain_whitelist = ['mydomain']
 ./tests/validators/tests.py:78:36     - Unknown word (alid)       -- email, 'example@inv-.alid-.com', ValidationError
 ./tests/validators/tests.py:97:22     - Unknown word (nohyphensoranything) -- (validate_slug, 'nohyphensoranything', None),
