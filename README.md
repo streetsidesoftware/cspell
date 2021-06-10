@@ -26,6 +26,12 @@ The cspell mono-repo, a spell checker for code.
 - [cspell-trie-lib](packages/cspell-trie-lib) -- trie data structure used to store words.
 - [cspell-trie](packages/cspell-trie) -- trie data tool used to store words.
 
+## Related Packages
+
+- [cspell-cli](https://github.com/streetsidesoftware/cspell-cli) -- `cspell-cli` is useful for including `cspell` directly from GitHub.
+  Example install: `npm install -g git+https://github.com/streetsidesoftware/cspell-cli`. This will add the `cspell-cli` command,
+  which is an alias of the `cspell` command.
+
 ## cspell for enterprise
 
 Available as part of the Tidelift Subscription.
