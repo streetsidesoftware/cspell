@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.2](https://github.com/streetsidesoftware/cspell/compare/v5.6.1...v5.6.2) (2021-06-10)
+
+
+### Bug Fixes
+
+* *minor breaking* fix issues with accents and the word splitter ([#1330](https://github.com/streetsidesoftware/cspell/issues/1330)) ([845c314](https://github.com/streetsidesoftware/cspell/commit/845c3146efa8d4cce7bfdfbf76627ced298ac8b7))
+
+
+
+
+
 ## [5.6.1](https://github.com/streetsidesoftware/cspell/compare/v5.6.0...v5.6.1) (2021-06-09)
 
 
