@@ -28,8 +28,8 @@ The cspell mono-repo, a spell checker for code.
 
 ## Related Packages
 
-- [cspell-cli](https://github.com/streetsidesoftware/cspell-cli) -- `cspell-cli` is useful for including `cspell` directly from GitHub. 
-  Example install: `npm install -g git+https://github.com/streetsidesoftware/cspell-cli`. This will add the `cspell-cli` command, 
+- [cspell-cli](https://github.com/streetsidesoftware/cspell-cli) -- `cspell-cli` is useful for including `cspell` directly from GitHub.
+  Example install: `npm install -g git+https://github.com/streetsidesoftware/cspell-cli`. This will add the `cspell-cli` command,
   which is an alias of the `cspell` command.
 
 ## cspell for enterprise
