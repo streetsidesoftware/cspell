@@ -59,13 +59,14 @@ describe('Validate textRegex', () => {
         expect([...m]).toEqual(expected);
     });
 
+    // cspell:word érror
     test.each`
         text                          | expected
         ${'hello'}                    | ${[]}
         ${'ERROR'}                    | ${['ERROR']}
         ${'ERRORs'}                   | ${[]}
         ${nfc(`érror`).toUpperCase()} | ${[nfc('ÉRROR')]}
-        ${nfd(`érror`).toUpperCase()} | ${[nfd('ÉRROR')]}
+        ${nfd(`érror`).toUpperCase()} | ${[nfd('ÉRROR')]}
     `('regExAllUpper on "$text"', ({ text, expected }: { text: string; expected: string[] }) => {
         const m = text.match(regExAllUpper) ?? [];
         expect([...m]).toEqual(expected);

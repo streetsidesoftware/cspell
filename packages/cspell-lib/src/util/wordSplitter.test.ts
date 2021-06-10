@@ -109,7 +109,7 @@ describe('Validate wordSplitter', () => {
     }
 
     // cspell:ignore CVTPD CVTSI CVTTSD words'separated'by errorcode
-    // cspell:word Geschäft
+    // cspell:word Geschäft gescha
     test.each`
         text                                | expectedWords
         ${'hello'}                          | ${[tov({ text: 'hello', offset: 155 })]}
