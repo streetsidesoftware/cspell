@@ -94,7 +94,7 @@ export function cleanText(text: string): string {
 
 export function cleanTextOffset(text: TextOffset): TextOffset {
     return {
-        text: text.text.replace(regExIgnoreCharacters, (match: string) => ' '.repeat(match.length)),
+        text: cleanText(text.text),
         offset: text.offset,
     };
 }
