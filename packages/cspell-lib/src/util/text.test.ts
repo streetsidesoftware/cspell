@@ -196,6 +196,21 @@ describe('Util Text', () => {
         ).toEqual(['Γ', 'γ', 'gamma', 'γάμμα']);
     });
 
+    test.each`
+        text                | expected
+        ${'hello'}          | ${['hello']}
+        ${nfc('café')}      | ${[nfc('café')]}
+        ${nfd('café')}      | ${[nfd('café')]}
+        ${nfd('caféStyle')} | ${[nfd('café'), 'Style']}
+        ${nfc('caféÁ')}     | ${[nfc('café'), nfc('Á')]}
+        ${nfd('caféÁ')}     | ${[nfd('café'), nfd('Á')]}
+    `('extractWordsFromCode "$text"', ({ text, expected }) => {
+        const r = Text.extractWordsFromCode(text)
+            .map((wo) => wo.text)
+            .toArray();
+        expect(r).toEqual(expected);
+    });
+
     test('case of Chinese characters', () => {
         expect(Text.isUpperCase('携程旅行网')).toBe(false);
         expect(Text.isLowerCase('携程旅行网')).toBe(false);
@@ -348,6 +363,14 @@ describe('Validates offset conversions', () => {
         expect(results.map(({ doc: _doc, ...rest }) => rest)).toMatchSnapshot();
     });
 });
+
+function nfc(s: string): string {
+    return s.normalize('NFC');
+}
+
+function nfd(s: string): string {
+    return s.normalize('NFD');
+}
 
 function match(regexp: RegExp, text: string): (string | number)[] {
     const x = Text.matchStringToTextOffset(regexp, text)

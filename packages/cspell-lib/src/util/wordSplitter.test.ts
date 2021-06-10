@@ -109,6 +109,7 @@ describe('Validate wordSplitter', () => {
     }
 
     // cspell:ignore CVTPD CVTSI CVTTSD words'separated'by errorcode
+    // cspell:word Geschäft gescha
     test.each`
         text                                | expectedWords
         ${'hello'}                          | ${[tov({ text: 'hello', offset: 155 })]}
@@ -124,6 +125,7 @@ describe('Validate wordSplitter', () => {
         ${'_errorcode42_one_two'}           | ${splitTov('_errorcode42|one|two')}
         ${"words'separated'by_singleQuote"} | ${splitTov(`words'separated'by|singleQuote`)}
         ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}
+        ${'Geschäft'}                       | ${splitTov('Geschäft')}
     `('split $text', ({ text, expectedWords }: TestSplit) => {
         const prefix = 'this is some';
         const line = {
@@ -186,18 +188,22 @@ describe('Validate wordSplitter', () => {
 
     // cspell:ignore nstatic techo n'cpp n'log refactor'd
     test.each`
-        text            | expectedWords | calls
-        ${'static'}     | ${'static'}   | ${1}
-        ${'nstatic'}    | ${'static'}   | ${1}
-        ${'techo'}      | ${'echo'}     | ${1}
-        ${`n'cpp`}      | ${'cpp'}      | ${1}
-        ${`n'log`}      | ${'log'}      | ${7}
-        ${'64-bit'}     | ${'bit'}      | ${1}
-        ${'128-bit'}    | ${'bit'}      | ${1}
-        ${'256-sha'}    | ${'256-sha'}  | ${6}
-        ${`REFACTOR'd`} | ${'REFACTOR'} | ${2}
-        ${`dogs'`}      | ${`dogs'`}    | ${2}
-        ${`planets’`}   | ${`planets’`} | ${2}
+        text              | expectedWords      | calls
+        ${'static'}       | ${'static'}        | ${1}
+        ${'nstatic'}      | ${'static'}        | ${1}
+        ${'techo'}        | ${'echo'}          | ${1}
+        ${`n'cpp`}        | ${'cpp'}           | ${1}
+        ${`î'cpp`}        | ${'î|cpp'}         | ${2}
+        ${`îphoneStatic`} | ${'îphone|Static'} | ${2}
+        ${`êphoneStatic`} | ${'êphone|Static'} | ${2}
+        ${`geschäft`}     | ${'geschäft'}      | ${1}
+        ${`n'log`}        | ${'log'}           | ${7}
+        ${'64-bit'}       | ${'bit'}           | ${1}
+        ${'128-bit'}      | ${'bit'}           | ${1}
+        ${'256-sha'}      | ${'256-sha'}       | ${6}
+        ${`REFACTOR'd`}   | ${'REFACTOR'}      | ${2}
+        ${`dogs'`}        | ${`dogs'`}         | ${2}
+        ${`planets’`}     | ${`planets’`}      | ${2}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
         const expectedWordSegments = splitTov(expectedWords);
         const doc = sampleText();
@@ -220,7 +226,8 @@ describe('Validate wordSplitter', () => {
 });
 
 function has({ text }: TextOffset): boolean {
-    return text.length < 3 || !regHasLetters.test(text) || words.has(text) || words.has(text.toLowerCase());
+    const nfcText = text.normalize('NFC');
+    return text.length < 3 || !regHasLetters.test(text) || words.has(nfcText) || words.has(nfcText.toLowerCase());
 }
 
 function applyWordBreaks(text: TextOffset, breaks: number[]): TextOffset[] {
@@ -328,6 +335,9 @@ function sampleWordSet() {
     CVTPD2PS
     CVTTSD
     echo
+    îphone
+    êphone
+    Geschäft
     error codes
     hello
     MOVSX_r_rm16
@@ -373,5 +383,14 @@ function sampleText() {
 
     128-bit values
 
+    î'cpp
+    îphoneStatic
+
+    geschäft
+
+    êphoneStatic
+
 `;
 }
+
+// cspell:ignore êphone îphone geschäft
