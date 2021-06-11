@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.3](https://github.com/streetsidesoftware/cspell/compare/v5.6.2...v5.6.3) (2021-06-11)
+
+
+### Bug Fixes
+
+* support case sensitive document checking. ([527de4a](https://github.com/streetsidesoftware/cspell/commit/527de4a80dd281526783404127d23a0b7a51ec52))
+
+
+
+
+
 ## [5.6.2](https://github.com/streetsidesoftware/cspell/compare/v5.6.1...v5.6.2) (2021-06-10)
 
 **Note:** Version bump only for package cspell-trie-lib

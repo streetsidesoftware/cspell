@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.3](https://github.com/streetsidesoftware/cspell/compare/v5.6.2...v5.6.3) (2021-06-11)
+
+
+### Bug Fixes
+
+* fix issue with legacy dictionaries that do not have some accents ([5a9aa27](https://github.com/streetsidesoftware/cspell/commit/5a9aa27decba013299111a66a89da18c7123b321))
+* make sure cspell-tools does not collide with old version. ([00e360c](https://github.com/streetsidesoftware/cspell/commit/00e360c03fe81d398944dd13a36e1fffac57250e))
+* support case sensitive document checking. ([527de4a](https://github.com/streetsidesoftware/cspell/commit/527de4a80dd281526783404127d23a0b7a51ec52))
+
+
+
+
+
 ## [5.6.2](https://github.com/streetsidesoftware/cspell/compare/v5.6.1...v5.6.2) (2021-06-10)
 
 
