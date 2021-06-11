@@ -7,19 +7,19 @@ The Primary use of this tool is to build dictionaries used by cspell. This tool 
 ## Install
 
 ```sh
-npm install -g cspell-tools
+npm install -g @cspell/cspell-tools
 ```
 
 ## Usage
 
 ```sh
-cspell-tools --help
+cspell-tools-cli --help
 ```
 
 To create a word list.
 
 ```sh
-cspell-tools compile keywords.txt -o ./dictionaries/
+cspell-tools-cli compile keywords.txt -o ./dictionaries/
 ```
 
 This will filter the words from `keywords.txt` and write them to `./dictionaries/keywords.txt.gz`.
@@ -27,7 +27,7 @@ This will filter the words from `keywords.txt` and write them to `./dictionaries
 To create a trie file from a hunspell file.
 
 ```sh
-cspell-tools compile-trie english.dic
+cspell-tools-cli compile-trie english.dic
 ```
 
 This will read and expand the `english.dic` file based upon the rules in `english.aff` into a new file called `english.trie.gz`
