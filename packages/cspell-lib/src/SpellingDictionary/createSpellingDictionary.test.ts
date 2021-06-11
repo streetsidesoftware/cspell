@@ -24,4 +24,13 @@ describe('Validate createSpellingDictionary', () => {
         const d = createSpellingDictionary(words, 'test create', __filename);
         words.forEach((w) => expect(d.has(w)).toBe(true));
     });
+
+    test('createSpellingDictionary fa', () => {
+        // cspell:disable-next-line
+        const words = ['آئینهٔ', 'آبادهٔ', 'کلاه'];
+        expect(words).toEqual(words.map((w) => w.normalize('NFC')));
+        const d = createSpellingDictionary(words, 'test create', __filename);
+        expect(d.has(words[0])).toBe(true);
+        words.forEach((w) => expect(d.has(w)).toBe(true));
+    });
 });

@@ -11,6 +11,9 @@ import { createSpellingDictionary } from './SpellingDictionary/createSpellingDic
 import { FreqCounter } from './util/FreqCounter';
 import * as Text from './util/text';
 import { genSequence } from 'gensequence';
+import { settingsToValidateOptions } from './validator';
+
+const sToV = settingsToValidateOptions;
 
 // cspell:ignore whiteberry redmango lightbrown redberry
 
@@ -36,14 +39,14 @@ describe('Validate textValidator functions', () => {
 
     test('tests textValidator no word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
-        const result = validateText(sampleText, dictCol, {});
+        const result = validateText(sampleText, dictCol, sToV({}));
         const errors = result.map((wo) => wo.text).toArray();
         expect(errors).toEqual(['giraffe', 'lightbrown', 'whiteberry', 'redberry']);
     });
 
     test('tests textValidator with word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
-        const result = validateText(sampleText, dictCol, { allowCompoundWords: true });
+        const result = validateText(sampleText, dictCol, sToV({ allowCompoundWords: true }));
         const errors = result.map((wo) => wo.text).toArray();
         expect(errors).toEqual(['giraffe', 'whiteberry']);
     });
@@ -52,7 +55,7 @@ describe('Validate textValidator functions', () => {
     test('tests ignoring words that consist of a single repeated letter', async () => {
         const dictCol = await getSpellingDictionaryCollection();
         const text = ' tttt gggg xxxxxxx jjjjj xxxkxxxx xxxbxxxx \n' + sampleText;
-        const result = validateText(text, dictCol, { allowCompoundWords: true });
+        const result = validateText(text, dictCol, sToV({ allowCompoundWords: true }));
         const errors = result
             .map((wo) => wo.text)
             .toArray()
@@ -63,7 +66,7 @@ describe('Validate textValidator functions', () => {
     test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
         const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
-        const result = validateText(text, dictEmpty, {}).toArray();
+        const result = validateText(text, dictEmpty, sToV({})).toArray();
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'PUBLISHed', 'multiple', 'FIXes', 'PROBLEMs']);
     });
@@ -72,7 +75,7 @@ describe('Validate textValidator functions', () => {
         const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
         const text = 'We have PUBLISHed published multiple FIXesToThePROBLEMs';
         const options: ValidationOptions = {
-            caseSensitive: true,
+            ignoreWordsAreCaseSensitive: true,
             ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'],
             ignoreCase: false,
         };
@@ -95,7 +98,12 @@ describe('Validate textValidator functions', () => {
             VeryBadProblem with the 4wheel of the Range8 in Amsterdam, Berlin, and paris.
             #define _ERROR_CODE_42 = NETWORK_ERROR42
         `;
-        const options = { allowCompoundWords: false, ignoreCase: false, flagWords };
+        const options: ValidationOptions = {
+            allowCompoundWords: false,
+            ignoreCase: false,
+            flagWords,
+            ignoreWordsAreCaseSensitive: true,
+        };
         const result = validateText(text, dict, options).toArray();
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'published', 'VeryBadProblem', 'paris']);
@@ -104,7 +112,7 @@ describe('Validate textValidator functions', () => {
     test('tests trailing s, ed, ing, etc.', async () => {
         const dictWords = await getSpellingDictionaryCollection();
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
-        const result = validateText(text, dictWords, { allowCompoundWords: true });
+        const result = validateText(text, dictWords, sToV({ allowCompoundWords: true }));
         const errors = result
             .map((wo) => wo.text)
             .toArray()
@@ -117,7 +125,7 @@ describe('Validate textValidator functions', () => {
         // cspell:disable
         const text = `We should’ve done a better job, but we couldn\\'t have known.`;
         // cspell:enable
-        const result = validateText(text, dictWords, { allowCompoundWords: false });
+        const result = validateText(text, dictWords, sToV({ allowCompoundWords: false }));
         const errors = result
             .map((wo) => wo.text)
             .toArray()
@@ -128,15 +136,19 @@ describe('Validate textValidator functions', () => {
     test('tests maxDuplicateProblems', async () => {
         const dict = await createSpellingDictionary([], 'empty', 'test');
         const text = sampleText;
-        const result = validateText(text, dict, {
-            maxNumberOfProblems: 1000,
-            maxDuplicateProblems: 1,
-        });
+        const result = validateText(
+            text,
+            dict,
+            sToV({
+                maxNumberOfProblems: 1000,
+                maxDuplicateProblems: 1,
+            })
+        );
         const freq = FreqCounter.create(result.map((t) => t.text));
         expect(freq.total).toBe(freq.counters.size);
         const words = freq.counters.keys();
         const dict2 = await createSpellingDictionary(words, 'test', 'test');
-        const result2 = [...validateText(text, dict2, { maxNumberOfProblems: 1000, maxDuplicateProblems: 1 })];
+        const result2 = [...validateText(text, dict2, sToV({ maxNumberOfProblems: 1000, maxDuplicateProblems: 1 }))];
         expect(result2.length).toBe(0);
     });
 

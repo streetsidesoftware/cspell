@@ -202,7 +202,4 @@ export function trieNodeToRoot(node: TrieNode, options: PartialTrieOptions): Tri
 
 export const normalizeWord = (text: string): string => text.normalize();
 export const normalizeWordToLowercase = (text: string): string =>
-    text
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
+    text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');

@@ -140,7 +140,7 @@ describe('Verify building Dictionary', () => {
 describe('Validate wordSearchForms', () => {
     function testCase(word: string, isCaseSensitive: boolean, ignoreCase: boolean, expected: string[]) {
         test(`${word} ${isCaseSensitive} ${ignoreCase} ${expected}`, () => {
-            const words = __testMethods.wordSearchForms(word, isCaseSensitive, ignoreCase);
+            const words = __testMethods.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
             expect(words.sort()).toEqual(expected.sort());
         });
     }

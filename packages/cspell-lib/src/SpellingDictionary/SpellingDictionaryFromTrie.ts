@@ -17,6 +17,7 @@ import {
     PREFIX_NO_CASE,
     regexPrefix,
     impersonateCollector,
+    wordSearchFormsArray,
 } from './SpellingDictionaryMethods';
 import { SpellingDictionary, HasOptions, SuggestOptions, SpellingDictionaryOptions } from './SpellingDictionary';
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
@@ -66,7 +67,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         SpellingDictionaryFromTrie.cachedWordsLimit
     );
     private hasAnyForm(word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) {
-        const mWord = this.mapWord(word);
+        const mWord = this.mapWord(word.normalize('NFC'));
+        if (this.trie.hasWord(mWord, true)) {
+            return true;
+        }
         const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
         for (const w of forms) {
             if (this.trie.hasWord(w, !ignoreCase)) {
@@ -117,7 +121,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
         const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS, ignoreCase = true } = suggestOptions;
         const _compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        wordSearchForms(collector.word, this.isDictionaryCaseSensitive, ignoreCase).forEach((w) =>
+        wordSearchFormsArray(collector.word, this.isDictionaryCaseSensitive, ignoreCase).forEach((w) =>
             this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod)
         );
     }
