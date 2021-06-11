@@ -53,7 +53,11 @@ export function impersonateCollector(collector: SuggestionCollector, word: strin
     };
 }
 
-export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
+export function wordSearchFormsArray(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
+    return [...wordSearchForms(word, isDictionaryCaseSensitive, ignoreCase)];
+}
+
+export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): Set<string> {
     const forms = new Set<string>();
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
@@ -64,6 +68,8 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
         } else {
             forms.add(wordLc);
             forms.add(wordLcNa);
+            // Legacy remove any accents
+            forms.add(wordLc.replace(/\p{M}/gu, ''));
         }
     } else {
         if (isDictionaryCaseSensitive) {
@@ -75,10 +81,11 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
             }
         } else {
             forms.add(wordLc);
+            // Legacy remove any accents
+            forms.add(wordLc.replace(/\p{M}/gu, ''));
         }
     }
-
-    return [...forms];
+    return forms;
 }
 
 interface DictionaryWordForm {
@@ -119,6 +126,7 @@ export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOpti
 
 export const __testMethods = {
     wordSearchForms,
+    wordSearchFormsArray,
     wordDictionaryForms,
     wordDictionaryFormsCollector,
 };
