@@ -28,7 +28,7 @@ export async function validateText(
 ): Promise<ValidationIssue[]> {
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = await Dictionary.getDictionary(finalSettings);
-    const issues = [...TV.validateText(text, dict, finalSettings)];
+    const issues = [...TV.validateText(text, dict, settingsToValidateOptions(finalSettings))];
     if (!options.generateSuggestions) {
         return issues;
     }
@@ -38,6 +38,15 @@ export async function validateText(
     });
 
     return withSugs;
+}
+
+export function settingsToValidateOptions(settings: CSpellUserSettings): TV.ValidationOptions {
+    const opt: TV.ValidationOptions = {
+        ...settings,
+        ignoreWordsAreCaseSensitive: settings.caseSensitive ?? true,
+        ignoreCase: !(settings.caseSensitive ?? false),
+    };
+    return opt;
 }
 
 export interface CheckTextInfo {

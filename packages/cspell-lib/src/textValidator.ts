@@ -16,14 +16,14 @@ export interface ValidationOptions extends IncludeExcludeOptions {
     ignoreWords?: string[];
     allowCompoundWords?: boolean;
     /** ignore words are considered case sensitive */
-    caseSensitive?: boolean;
+    ignoreWordsAreCaseSensitive: boolean;
     /** ignore case when checking words against dictionary or ignore words list */
-    ignoreCase?: boolean;
+    ignoreCase: boolean;
 }
 
 export interface CheckOptions extends ValidationOptions {
     allowCompoundWords: boolean;
-    caseSensitive: boolean;
+    ignoreWordsAreCaseSensitive: boolean;
     ignoreCase: boolean;
 }
 
@@ -98,7 +98,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         ignoreWords = [],
         allowCompoundWords = false,
         ignoreCase = true,
-        caseSensitive = false,
+        ignoreWordsAreCaseSensitive: caseSensitive = false,
     } = options;
     const hasWordOptions: HasWordOptions = {
         ignoreCase,
