@@ -10,6 +10,7 @@ import * as cspell from 'cspell-lib';
 import { measurePromise } from './util/timer';
 import { extractPatterns, buildGlobMatcher, normalizeGlobsToRoot, extractGlobsFromMatcher } from './util/glob';
 import { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
+import { URI } from 'vscode-uri';
 
 export interface FileResult {
     fileInfo: FileInfo;
@@ -229,6 +230,9 @@ Options:
     }
 
     function isExcluded(filename: string, globMatcher: GlobMatcher) {
+        if (cspell.isBinaryFile(URI.file(filename))) {
+            return true;
+        }
         const { root } = cfg;
         const absFilename = path.resolve(root, filename);
         const r = globMatcher.matchEx(absFilename);

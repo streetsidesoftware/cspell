@@ -52,13 +52,14 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'jade', extensions: ['.jade', '.pug'] },
     { id: 'java', extensions: ['.java', '.jav'] },
     { id: 'javascriptreact', extensions: ['.jsx'] },
-    { id: 'javascript', extensions: ['.js', '.mjs', '.es6'] },
+    { id: 'javascript', extensions: ['.js', '.mjs', '.es6', '.cjs'] },
     {
         id: 'json',
         extensions: ['.json', '.jsonc', '.bowerrc', '.jshintrc', '.jscsrc', '.eslintrc', '.babelrc', '.webmanifest'],
     },
     { id: 'less', extensions: ['.less'] },
     { id: 'literate haskell', extensions: ['.lhs'] },
+    { id: 'lock', extensions: ['.lock'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mk'] },
     { id: 'markdown', extensions: ['.md', '.mdown', '.markdown', '.markdn'] },
@@ -171,6 +172,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'yaml', extensions: ['.eyaml', '.eyml', '.yaml', '.yml'] },
     { id: 'latex', extensions: ['.tex'] },
     { id: 'map', extensions: ['.map'] },
+    { id: 'pdf', extensions: ['.pdf'] },
 
     //
     // Special file types used to prevent spell checking.
@@ -183,9 +185,46 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     },
 ];
 
-export const languageIds: string[] = languageExtensionDefinitions.map(({ id }) => id);
+export type LanguageId = string;
 
-let mapExtensionToLanguageIds: ExtensionToLanguageIdMap;
+export const binaryLanguages = new Set(['binary', 'image']);
+
+export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf']);
+
+export const languageIds: LanguageId[] = languageExtensionDefinitions.map(({ id }) => id);
+
+const mapExtensionToLanguageIds: ExtensionToLanguageIdMap = buildLanguageExtensionMap(languageExtensionDefinitions);
+
+export function isBinaryExt(ext: string): boolean {
+    return isBinary(getLanguagesForExt(ext));
+}
+
+export function isBinary(languageId: LanguageId | LanguageId[] | Iterable<LanguageId>): boolean {
+    return doesSetContainAnyOf(binaryLanguages, languageId);
+}
+
+export function isGeneratedExt(ext: string): boolean {
+    return isGenerated(getLanguagesForExt(ext));
+}
+
+export function isGenerated(languageId: LanguageId | LanguageId[] | Iterable<LanguageId>): boolean {
+    return doesSetContainAnyOf(generatedFiles, languageId);
+}
+
+function doesSetContainAnyOf(
+    setOfIds: Set<LanguageId>,
+    languageId: LanguageId | LanguageId[] | Iterable<LanguageId>
+): boolean {
+    if (typeof languageId === 'string') {
+        return setOfIds.has(languageId);
+    }
+    for (const id of languageId) {
+        if (setOfIds.has(id)) {
+            return true;
+        }
+    }
+    return false;
+}
 
 export function buildLanguageExtensionMap(defs: LanguageExtensionDefinitions): ExtensionToLanguageIdMap {
     return defs.reduce((map, def) => {
@@ -197,9 +236,6 @@ export function buildLanguageExtensionMap(defs: LanguageExtensionDefinitions): E
 }
 
 export function getLanguagesForExt(ext: string): string[] {
-    if (!mapExtensionToLanguageIds) {
-        mapExtensionToLanguageIds = buildLanguageExtensionMap(languageExtensionDefinitions);
-    }
     return genSequence([ext, '.' + ext])
         .map((ext) => mapExtensionToLanguageIds.get(ext))
         .filter((a) => !!a)

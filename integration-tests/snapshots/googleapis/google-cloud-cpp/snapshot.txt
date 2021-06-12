@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1759, Issues found: 9118 in 1113 files
+ CSpell: Files checked: 1767, Issues found: 9146 in 1119 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -78,10 +78,12 @@ Lines:
 ./ci/kokoro/README.md:43:23     - Unknown word (toolchains) -- Test with different toolchains from the ones provided
 ./ci/kokoro/README.md:58:21     - Unknown word (backoff)    -- "try N times with a backoff" do not work during
 ./ci/kokoro/README.md:8:70      - Unknown word (prjects)    -- supporting Open Source prjects,
-./ci/kokoro/windows/build-32.bat:16:1      - Unknown word (choco)      -- choco install --no-progress
-./ci/kokoro/windows/build-32.bat:18:24     - Unknown word (chocolatey's) -- REM Change PATH to use chocolatey's version of Bazel
-./ci/kokoro/windows/build-32.bat:27:98     - Unknown word (vcvars)       -- Community\VC\Auxiliary\Build\vcvars32.bat"
-./ci/kokoro/windows/build-32.bat:33:5      - Unknown word (errorlevel)   -- if %errorlevel% neq 0 exit /b %errorlevel
+./ci/kokoro/windows/build-32.bat:15:24     - Unknown word (chocolatey's) -- REM Change PATH to use chocolatey's version of Bazel
+./ci/kokoro/windows/build-32.bat:19:98     - Unknown word (vcvars)       -- Community\VC\Auxiliary\Build\vcvars32.bat"
+./ci/kokoro/windows/build-32.bat:25:5      - Unknown word (errorlevel)   -- if %errorlevel% neq 0 exit /b %errorlevel
+./ci/kokoro/windows/build.bat:15:13     - Unknown word (Bazelisk)   -- REM Install Bazelisk using Chocolatey.
+./ci/kokoro/windows/build.bat:16:1      - Unknown word (choco)      -- choco install --no-progress
+./ci/kokoro/windows/build.bat:16:32     - Unknown word (bazelisk)   -- install --no-progress -y bazelisk
 ./ci/verify_current_targets/CMakeLists.txt:17:1      - Unknown word (cmake)      -- cmake_minimum_required(VERSION
 ./ci/verify_current_targets/CMakeLists.txt:34:28     - Unknown word (firestore)  -- firestore iam logging)
 ./ci/verify_current_targets/CMakeLists.txt:45:47     - Unknown word (ARGN)       -- "${name}" PRIVATE ${ARGN})
@@ -137,11 +139,11 @@ Lines:
 ./doc/packaging.md:106:5     - Unknown word (CXXFLAGS)    -- GCS_CXXFLAGS := $(shell pkg-config
 ./doc/packaging.md:106:55    - Unknown word (cflags)      -- config storage_client --cflags)
 ./doc/packaging.md:107:5     - Unknown word (CXXLDFLAGS)  -- GCS_CXXLDFLAGS := $(shell pkg-config
-./doc/packaging.md:1225:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-./doc/packaging.md:1376:21   - Unknown word (centos)         -- sudo yum install -y centos-release-scl yum-utils
-./doc/packaging.md:1377:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
-./doc/packaging.md:1377:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
-./doc/packaging.md:1379:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
+./doc/packaging.md:1226:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
+./doc/packaging.md:1377:21   - Unknown word (centos)         -- sudo yum install -y centos-release-scl yum-utils
+./doc/packaging.md:1378:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
+./doc/packaging.md:1378:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
+./doc/packaging.md:1380:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
 ./doc/packaging.md:156:5     - Unknown word (srcs)        -- srcs = [
 ./doc/packaging.md:187:42    - Unknown word (Microgenerator) -- protobuf-gh] | 3.14.0 | C++ Microgenerator support |
 ./doc/packaging.md:213:10    - Unknown word (makecache)      -- sudo dnf makecache && \
@@ -183,15 +185,15 @@ Lines:
 ./external/googleapis/config.pc.in:18:1      - Unknown word (includedir) -- includedir=${prefix}/@CMAKE_INSTALL
 ./external/googleapis/config.pc.in:18:37     - Unknown word (INCLUDEDIR) -- prefix}/@CMAKE_INSTALL_INCLUDEDIR@
 ./external/googleapis/config.pc.in:26:1      - Unknown word (Cflags)     -- Cflags: -I${includedir}
-./generator/CMakeLists.txt:113:18    - Unknown word (gmock)       -- # the GTest::gmock target, and the target
-./generator/CMakeLists.txt:148:14    - Unknown word (fname)       -- foreach (fname ${google_cloud_cpp_generator
-./generator/CMakeLists.txt:164:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
-./generator/CMakeLists.txt:174:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
-./generator/CMakeLists.txt:31:14     - Unknown word (codegen)    -- internal/codegen_utils.cc
-./generator/CMakeLists.txt:38:14     - Unknown word (idempotency) -- internal/idempotency_policy_generator.cc
-./generator/CMakeLists.txt:83:9      - Unknown word (protoc)      -- # Build protoc plugin executable
-./generator/CMakeLists.txt:90:29     - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
-./generator/CMakeLists.txt:90:40     - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
+./generator/CMakeLists.txt:115:18    - Unknown word (gmock)       -- # the GTest::gmock target, and the target
+./generator/CMakeLists.txt:150:14    - Unknown word (fname)       -- foreach (fname ${google_cloud_cpp_generator
+./generator/CMakeLists.txt:166:62    - Unknown word (bigobj)      -- .obj file. Add the /bigobj option to
+./generator/CMakeLists.txt:176:26    - Unknown word (everytime)   -- build all the tests everytime they create a new package
+./generator/CMakeLists.txt:33:14     - Unknown word (codegen)    -- internal/codegen_utils.cc
+./generator/CMakeLists.txt:40:14     - Unknown word (idempotency) -- internal/idempotency_policy_generator.cc
+./generator/CMakeLists.txt:85:9      - Unknown word (protoc)      -- # Build protoc plugin executable
+./generator/CMakeLists.txt:92:29     - Unknown word (SRCS)        -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
+./generator/CMakeLists.txt:92:40     - Unknown word (HDRS)        -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
 ./generator/generator.h:26:8      - Unknown word (microgenerator) -- * C++ microgenerator plugin entry point.
 ./generator/generator_config.proto:23:27     - Unknown word (rpcs)       -- repeated string omitted_rpcs = 4;
 ./generator/google_cloud_cpp_generator_testing.bzl:19:36     - Unknown word (hdrs)       -- cpp_generator_testing_hdrs = [
@@ -211,8 +213,8 @@ Lines:
 ./generator/internal/codegen_utils.cc:59:18     - Unknown word (Googleapis) -- Status ProcessArgGoogleapisCommitHash(
 ./generator/internal/codegen_utils_test.cc:54:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
 ./generator/internal/codegen_utils_test.cc:54:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
-./generator/internal/descriptor_utils.cc:374:8     - Unknown word (smatch)     -- std::smatch match;
-./generator/internal/descriptor_utils.cc:54:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
+./generator/internal/descriptor_utils.cc:375:8     - Unknown word (smatch)     -- std::smatch match;
+./generator/internal/descriptor_utils.cc:55:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
 ./generator/internal/descriptor_utils_test.cc:745:10    - Unknown word (endcond)    -- /// @endcond
 ./generator/internal/predicate_utils_test.cc:835:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 ./generator/internal/printer_test.cc:53:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};

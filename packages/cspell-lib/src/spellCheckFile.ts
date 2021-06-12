@@ -1,7 +1,7 @@
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import { readFile } from 'fs-extra';
-import { URI } from 'vscode-uri';
-import { getLanguagesForExt } from './LanguageIds';
+import { URI, Utils as UriUtils } from 'vscode-uri';
+import { getLanguagesForExt as _getLanguagesForExt, isGenerated } from './LanguageIds';
 import {
     calcOverrideSettings,
     getDefaultSettings,
@@ -14,6 +14,9 @@ import { validateText, ValidateTextOptions, ValidationIssue } from './validator'
 import * as path from 'path';
 import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 import { GlobMatcher } from 'cspell-glob';
+import { memorizer } from './util/Memorizer';
+
+const getLanguagesForExt = memorizer(_getLanguagesForExt);
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
@@ -261,17 +264,23 @@ export function determineFinalDocumentSettings(
     };
 }
 
-function isBinaryDoc(document: Document): boolean {
-    return isBinaryFile(URI.parse(document.uri).fsPath, document.languageId);
+export function isBinaryDoc(document: Document): boolean {
+    return isBinaryFile(URI.parse(document.uri), document.languageId);
 }
 
-function isBinaryFile(filename: string, languageId?: string | string[]): boolean {
-    const ext = path.extname(filename);
+export function isBinaryFile(filename: URI, languageId?: string | string[]): boolean {
+    const ext = UriUtils.extname(filename);
+    return isBinaryExt(ext, languageId);
+}
+
+const isBinaryExt = memorizer(_isBinaryExt);
+
+function _isBinaryExt(ext: string, languageId: string | string[] | undefined): boolean {
     languageId = languageId || [];
     languageId = typeof languageId === 'string' ? languageId.split(',') : languageId;
     languageId = languageId.map((a) => a.trim());
     const languageIds = new Set(languageId.length ? languageId : getLanguagesForExt(ext));
-    return languageIds.has('binary') || languageIds.has('image');
+    return isGenerated(languageIds);
 }
 
 export function fileToDocument(file: string): Document;

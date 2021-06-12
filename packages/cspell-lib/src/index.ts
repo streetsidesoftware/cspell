@@ -33,6 +33,7 @@ export {
     spellCheckFile,
     SpellCheckFileOptions,
     SpellCheckFileResult,
+    isBinaryFile,
 } from './spellCheckFile';
 
 import * as Text from './util/text';
