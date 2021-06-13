@@ -6,8 +6,7 @@ import {
     hasOptionToSearchOption,
     defaultNumSuggestions,
     SuggestArgs,
-    regexPrefix,
-    PREFIX_NO_CASE,
+    suggestArgsToSuggestOptions,
 } from './SpellingDictionaryMethods';
 import {
     SpellingDictionary,
@@ -16,6 +15,7 @@ import {
     SuggestOptions,
     SpellingDictionaryOptions,
 } from './SpellingDictionary';
+import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
 
@@ -47,19 +47,13 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         word: string,
         numSuggestions?: number,
         compoundMethod?: CompoundWordsMethod,
-        numChanges?: number
+        numChanges?: number,
+        ignoreCase?: boolean
     ): SuggestionResult[];
     public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(...args: SuggestArgs): SuggestionResult[] {
-        const [word, options, compoundMethod, numChanges] = args;
-        const suggestOptions: SuggestOptions =
-            typeof options === 'object'
-                ? options
-                : {
-                      numSuggestions: options,
-                      compoundMethod,
-                      numChanges,
-                  };
+        const [word] = args;
+        const suggestOptions = suggestArgsToSuggestOptions(args);
         return this._suggest(word, suggestOptions);
     }
 
@@ -72,12 +66,13 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
             ignoreCase = true,
         } = suggestOptions;
         _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        const prefixNoCase = CASE_INSENSITIVE_PREFIX;
         const filter = (word: string) => {
-            return !this.wordsToFlag.has(word.toLowerCase()) && (ignoreCase || word[0] !== PREFIX_NO_CASE);
+            return !this.wordsToFlag.has(word.toLowerCase()) && (ignoreCase || word[0] !== prefixNoCase);
         };
         const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
         this.genSuggestions(collector, suggestOptions);
-        return collector.suggestions.map((r) => ({ ...r, word: r.word.replace(regexPrefix, '') }));
+        return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }
 
     public get size(): number {

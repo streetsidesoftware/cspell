@@ -2,7 +2,7 @@ import { genSequence } from 'gensequence';
 import { SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
 import { ucFirst, removeAccents, isUpperCase } from '../util/text';
 import { FunctionArgs } from '../util/types';
-import { SpellingDictionary, HasOptions, SearchOptions } from './SpellingDictionary';
+import { SpellingDictionary, HasOptions, SearchOptions, SuggestOptions } from './SpellingDictionary';
 
 // cspell:word café
 
@@ -13,12 +13,10 @@ export {
     suggestionCollector,
     SuggestionResult,
     WORD_SEPARATOR,
+    CASE_INSENSITIVE_PREFIX,
 } from 'cspell-trie-lib';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
-
-export const PREFIX_NO_CASE = '>';
-export const regexPrefix = /^[>]/;
 
 export type SuggestArgs =
     | FunctionArgs<SpellingDictionary['suggest']>
@@ -27,7 +25,8 @@ export type SuggestArgs =
               word: string,
               numSuggestions?: number,
               compoundMethod?: CompoundWordsMethod,
-              numChanges?: number
+              numChanges?: number,
+              ignoreCase?: boolean
           ) => SuggestionResult[]
       >;
 
@@ -50,6 +49,7 @@ export function impersonateCollector(collector: SuggestionCollector, word: strin
             return collector.maxNumSuggestions;
         },
         includesTies: false,
+        ignoreCase: collector.ignoreCase,
     };
 }
 
@@ -61,15 +61,13 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
     const forms = new Set<string>();
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
-    const wordLcNa = removeAccents(wordLc);
     if (ignoreCase) {
         if (isDictionaryCaseSensitive) {
-            forms.add(wordLcNa);
+            forms.add(wordLc);
         } else {
             forms.add(wordLc);
-            forms.add(wordLcNa);
             // Legacy remove any accents
-            forms.add(wordLc.replace(/\p{M}/gu, ''));
+            forms.add(wordLc.normalize('NFD').replace(/\p{M}/gu, ''));
         }
     } else {
         if (isDictionaryCaseSensitive) {
@@ -82,9 +80,21 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
         } else {
             forms.add(wordLc);
             // Legacy remove any accents
-            forms.add(wordLc.replace(/\p{M}/gu, ''));
+            forms.add(wordLc.normalize('NFD').replace(/\p{M}/gu, ''));
         }
     }
+    return forms;
+}
+
+export function wordSuggestFormsArray(word: string): string[] {
+    return [...wordSuggestForms(word)];
+}
+
+export function wordSuggestForms(word: string): Set<string> {
+    word = word.normalize('NFC');
+    const forms = new Set<string>([word]);
+    const wordLc = word.toLowerCase();
+    forms.add(wordLc);
     return forms;
 }
 
@@ -92,7 +102,7 @@ interface DictionaryWordForm {
     w: string; // the word
     p: string; // prefix to add
 }
-function* wordDictionaryForms(word: string, isDictionaryCaseSensitive: boolean): IterableIterator<DictionaryWordForm> {
+function* wordDictionaryForms(word: string, prefixNoCase: string): IterableIterator<DictionaryWordForm> {
     word = word.normalize('NFC');
     const wordLc = word.toLowerCase();
     const wordNa = removeAccents(word);
@@ -101,18 +111,18 @@ function* wordDictionaryForms(word: string, isDictionaryCaseSensitive: boolean):
         return { w, p };
     }
 
-    const prefix = isDictionaryCaseSensitive ? PREFIX_NO_CASE : '';
+    const prefix = prefixNoCase;
     yield wf(word);
     yield wf(wordNa, prefix);
     yield wf(wordLc, prefix);
     yield wf(wordLcNa, prefix);
 }
 
-export function wordDictionaryFormsCollector(isDictionaryCaseSensitive: boolean): (word: string) => Iterable<string> {
+export function wordDictionaryFormsCollector(prefixNoCase: string): (word: string) => Iterable<string> {
     const knownWords = new Set<string>();
 
     return (word: string) => {
-        return genSequence(wordDictionaryForms(word, isDictionaryCaseSensitive))
+        return genSequence(wordDictionaryForms(word, prefixNoCase))
             .filter((w) => !knownWords.has(w.w))
             .map((w) => w.p + w.w)
             .filter((w) => !knownWords.has(w))
@@ -122,6 +132,20 @@ export function wordDictionaryFormsCollector(isDictionaryCaseSensitive: boolean)
 
 export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
     return !opt ? {} : typeof opt === 'object' ? opt : { useCompounds: opt };
+}
+
+export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
+    const [_word, options, compoundMethod, numChanges, ignoreCase] = args;
+    const suggestOptions: SuggestOptions =
+        typeof options === 'object'
+            ? options
+            : {
+                  numSuggestions: options,
+                  compoundMethod,
+                  numChanges,
+                  ignoreCase,
+              };
+    return suggestOptions;
 }
 
 export const __testMethods = {

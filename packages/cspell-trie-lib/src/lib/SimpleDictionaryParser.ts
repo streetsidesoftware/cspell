@@ -1,5 +1,5 @@
 import { operators } from 'gensequence';
-import { normalizeWordToLowercase, normalizeWord } from './util';
+import { normalizeWord, normalizeWordForCaseInsensitive } from './util';
 import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, FORBID_PREFIX, CASE_INSENSITIVE_PREFIX, LINE_COMMENT } from './constants';
 import { Trie } from './trie';
 import { buildTrieFast } from './TrieBuilder';
@@ -80,11 +80,15 @@ export function parseDictionaryLines(
     }
 
     function* mapNormalize(word: string) {
-        yield normalizeWord(word);
+        word = normalizeWord(word);
+        const forms = new Set<string>();
+        forms.add(word);
         if (!doNotNormalizePrefix.has(word[0])) {
-            const n = normalizeWordToLowercase(word);
-            if (n !== word) yield ignoreCase + n;
+            for (const n of normalizeWordForCaseInsensitive(word)) {
+                if (n !== word) forms.add(ignoreCase + n);
+            }
         }
+        yield* forms;
     }
 
     const processLines = operators.pipe(
@@ -113,7 +117,7 @@ export function parseLinesToDictionary(
     });
 }
 
-export function parseDictionary(text: string, options: ParseDictionaryOptions = _defaultOptions): Trie {
+export function parseDictionary(text: string, options?: ParseDictionaryOptions): Trie {
     return parseLinesToDictionary(text.split('\n'), options);
 }
 

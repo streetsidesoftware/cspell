@@ -14,10 +14,9 @@ import {
     wordSearchForms,
     SuggestArgs,
     defaultNumSuggestions,
-    PREFIX_NO_CASE,
-    regexPrefix,
     impersonateCollector,
-    wordSearchFormsArray,
+    suggestArgsToSuggestOptions,
+    wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
 import { SpellingDictionary, HasOptions, SuggestOptions, SpellingDictionaryOptions } from './SpellingDictionary';
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
@@ -90,19 +89,13 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         word: string,
         numSuggestions?: number,
         compoundMethod?: CompoundWordsMethod,
-        numChanges?: number
+        numChanges?: number,
+        ignoreCase?: boolean
     ): SuggestionResult[];
     public suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     public suggest(...args: SuggestArgs): SuggestionResult[] {
-        const [word, options, compoundMethod, numChanges] = args;
-        const suggestOptions: SuggestOptions =
-            typeof options === 'object'
-                ? options
-                : {
-                      numSuggestions: options,
-                      compoundMethod,
-                      numChanges,
-                  };
+        const [word] = args;
+        const suggestOptions = suggestArgsToSuggestOptions(args);
         return this._suggest(word, suggestOptions);
     }
     private _suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[] {
@@ -111,17 +104,17 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             numChanges,
             ignoreCase = true,
         } = suggestOptions;
-        function filter(word: string): boolean {
-            return ignoreCase || word[0] !== PREFIX_NO_CASE;
+        function filter(_word: string): boolean {
+            return true;
         }
-        const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
+        const collector = suggestionCollector(word, numSuggestions, filter, numChanges, undefined, ignoreCase);
         this.genSuggestions(collector, suggestOptions);
-        return collector.suggestions.map((r) => ({ ...r, word: r.word.replace(regexPrefix, '') }));
+        return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }
     public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
-        const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS, ignoreCase = true } = suggestOptions;
+        const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS } = suggestOptions;
         const _compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
-        wordSearchFormsArray(collector.word, this.isDictionaryCaseSensitive, ignoreCase).forEach((w) =>
+        wordSuggestFormsArray(collector.word).forEach((w) =>
             this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod)
         );
     }

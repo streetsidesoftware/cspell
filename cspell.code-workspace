@@ -32,6 +32,44 @@
             "path": "./packages/cspell"
         }
     ],
+    "launch": {
+        "configurations": [
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "Test: Jest current-file",
+                "program": "${fileWorkspaceFolder}/node_modules/.bin/jest",
+                "cwd": "${fileDirname}",
+                "args": [
+                    "--runInBand",
+                    "${fileBasename}"
+                ],
+                "console": "integratedTerminal",
+                "internalConsoleOptions": "neverOpen",
+                "disableOptimisticBPs": true,
+                "windows": {
+                    "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest",
+                }
+            },
+            {
+                "type": "node",
+                "request": "launch",
+                "name": "Test: Jest Entire Folder",
+                "program": "${fileWorkspaceFolder}/node_modules/.bin/jest",
+                "cwd": "${fileWorkspaceFolder}",
+                "args": [
+                    "--runInBand"
+                ],
+                "console": "integratedTerminal",
+                "internalConsoleOptions": "neverOpen",
+                "disableOptimisticBPs": true,
+                "windows": {
+                    "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest",
+                }
+            }
+        ],
+        "compounds": []
+    },
     "settings": {
         "typescript.tsdk": "cspell-monorepo/node_modules/typescript/lib",
         "cSpell.customWorkspaceDictionaries": [
