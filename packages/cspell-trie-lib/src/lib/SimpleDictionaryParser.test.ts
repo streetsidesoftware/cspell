@@ -14,6 +14,7 @@ describe('Validate SimpleDictionaryParser', () => {
             '+Middle+',
             '~+middle+',
             'Café',
+            '~café',
             '~cafe',
             '!forbid',
         ];
@@ -39,8 +40,46 @@ describe('Validate SimpleDictionaryParser', () => {
             '~begin',
             '~begin+',
             '~cafe',
+            '~café',
             '~end',
         ]);
+    });
+
+    function toL(a: string): string {
+        return a.toLowerCase();
+    }
+
+    // cspell:ignore Midle beginmidleend gescháft
+    test.each`
+        word               | ignoreCase | has      | expected
+        ${'end'}           | ${false}   | ${false} | ${['End']}
+        ${'begin'}         | ${false}   | ${false} | ${['Begin']}
+        ${'BeginEn'}       | ${false}   | ${false} | ${['BeginEnd', 'Begin']}
+        ${'BeginMidleEnd'} | ${false}   | ${false} | ${['BeginMiddleEnd', 'BeginEnd']}
+        ${'beginmidleend'} | ${true}    | ${false} | ${[toL('BeginMiddleEnd'), 'BeginMiddleEnd', toL('BeginEnd'), 'BeginEnd']}
+        ${'BeginmidleEnd'} | ${true}    | ${false} | ${['BeginMiddleEnd', toL('BeginMiddleEnd'), 'BeginEnd', toL('BeginEnd')]}
+        ${'cafe'}          | ${false}   | ${false} | ${['Café']}
+        ${'cafe'}          | ${true}    | ${true}  | ${['cafe', 'café', 'Café']}
+        ${'cafë'}          | ${true}    | ${false} | ${['cafe', 'café', 'Café']}
+        ${'café'}          | ${true}    | ${true}  | ${['café', 'cafe', 'Café']}
+        ${'end'}           | ${true}    | ${true}  | ${['end', 'End']}
+        ${'begin'}         | ${true}    | ${true}  | ${['begin', 'Begin']}
+        ${'ind'}           | ${true}    | ${false} | ${['end', 'End']}
+        ${'agin'}          | ${true}    | ${false} | ${['begin', 'Begin']}
+        ${'Middle'}        | ${false}   | ${false} | ${[]}
+        ${'BeginMiddle'}   | ${false}   | ${false} | ${['BeginMiddleEnd', 'BeginEnd']}
+        ${'geschäft'}      | ${false}   | ${false} | ${['Geschäft']}
+        ${'geschaft'}      | ${false}   | ${false} | ${['Geschäft']}
+        ${'gescháft'}      | ${false}   | ${false} | ${['Geschäft']}
+        ${'geschäft'}      | ${true}    | ${true}  | ${['geschäft', 'geschaft', 'Geschäft']}
+        ${'geschaft'}      | ${true}    | ${true}  | ${['geschaft', 'geschäft', 'Geschäft']}
+        ${'gescháft'}      | ${true}    | ${false} | ${['geschaft', 'geschäft', 'Geschäft']}
+        ${'resume'}        | ${false}   | ${false} | ${['resumé']}
+    `('suggest "$word" ignore case $ignoreCase', ({ word, ignoreCase, has, expected }) => {
+        const trie = parseDictionary(dictionary2());
+        const r = trie.suggest(word, 10, undefined, undefined, ignoreCase);
+        expect(r).toEqual(expected);
+        expect(trie.hasWord(word, !ignoreCase)).toBe(has);
     });
 
     function s(line: string, on: string | RegExp = '|'): string[] {
@@ -69,4 +108,15 @@ function dictionary() {
     Café        # é becomes e
     !forbid     # do not allow "forbid"
     `;
+}
+
+// cspell:ignore Geschäft
+function dictionary2() {
+    const moreWords = `
+    Geschäft
+
+    resumé
+
+    `;
+    return dictionary() + moreWords;
 }
