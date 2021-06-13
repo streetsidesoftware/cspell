@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2128, Issues found: 7885 in 906 files
+ CSpell: Files checked: 2128, Issues found: 7886 in 907 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -440,7 +440,7 @@ Lines:
 ./django/core/management/commands/shell.py:23:97     - Unknown word (pythonrc)   -- environment variable and ~/.pythonrc.py script.',
 ./django/core/management/commands/shell.py:48:32     - Unknown word (rlcompleter) -- try: # Try activating rlcompleter, because it's handy
 ./django/core/management/commands/shell.py:75:45     - Unknown word (cpython)     -- the behavior of the cpython shell where an error
-./django/core/management/commands/showmigrations.py:130:19    - Unknown word (deps)       -- def print_deps(node):
+./django/core/management/commands/showmigrations.py:137:19    - Unknown word (deps)       -- def print_deps(node):
 ./django/core/management/commands/squashmigrations.py:118:13    - Unknown word (smigration) -- for smigration in migrations_to_squash
 ./django/core/management/templates.py:258:28    - Unknown word (mkdtemp)    -- tempdir = tempfile.mkdtemp(prefix=prefix, suffix
 ./django/core/management/templates.py:339:38    - Unknown word (IMODE)      -- permissions = stat.S_IMODE(st.st_mode) | stat.S
@@ -489,7 +489,7 @@ Lines:
 ./django/db/backends/base/operations.py:459:18    - Unknown word (autopk)     -- def validate_autopk_value(self, value):
 ./django/db/backends/base/operations.py:522:15    - Unknown word (ipaddressfield) -- def adapt_ipaddressfield_value(self, value):
 ./django/db/backends/base/schema.py:158:16    - Unknown word (sqls)       -- column_sqls = []
-./django/db/backends/base/schema.py:807:9     - Unknown word (rels)       -- rels_to_update = []
+./django/db/backends/base/schema.py:814:9     - Unknown word (rels)       -- rels_to_update = []
 ./django/db/backends/mysql/base.py:196:14    - Unknown word (conv)        -- 'conv': django_conversions
 ./django/db/backends/mysql/base.py:4:10      - Unknown word (mysqlclient) -- Requires mysqlclient: https://pypi.org/project
 ./django/db/backends/mysql/base.py:55:29     - Unknown word (reraises)    -- exception instances and reraises them with the correct
@@ -1466,6 +1466,7 @@ Lines:
 ./tests/humanize_tests/tests.py:346:24    - Unknown word (lety)       -- 'před 2\xa0lety, 4\xa0měsíci',
 ./tests/humanize_tests/tests.py:352:22    - Unknown word (roky)       -- 'za 2\xa0roky, 4\xa0měsíce',
 ./tests/i18n/commands/__init__.py:12:49     - Unknown word (Foos)       -- s Foo", "%(number)s Foos", number) % {'number
+./tests/i18n/contenttypes/tests.py:25:57     - Unknown word (Société)    -- company_type), 'i18n | Société')
 ./tests/i18n/patterns/tests.py:134:65    - Unknown word (vertaald)   -- prefix-translated'), '/vertaald/')
 ./tests/i18n/patterns/tests.py:146:53    - Unknown word (gebruikers) -- reverse('users'), '/nl/gebruikers/')
 ./tests/i18n/patterns/tests.py:157:81    - Unknown word (profiel)    -- register/', 'nl'), '/nl/profiel/registreren/')
@@ -1823,16 +1824,16 @@ Lines:
 ./tests/responses/tests.py:140:19    - Unknown word (textiowrapper) -- def test_wrap_textiowrapper(self):
 ./tests/responses/tests.py:28:38     - Unknown word (qwer)       -- writelines(['asdf\n', 'qwer\n'])
 ./tests/responses/tests.py:76:34     - Unknown word (J'attendrai) -- HttpResponse(status="J'attendrai")
-./tests/runtests.py:129:9     - Unknown word (subdirs)    -- subdirs_to_skip = SUBDIRS_TO
-./tests/runtests.py:301:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
+./tests/runtests.py:130:9     - Unknown word (subdirs)    -- subdirs_to_skip = SUBDIRS_TO
+./tests/runtests.py:319:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
 ./tests/runtests.py:3:8       - Unknown word (atexit)     -- import atexit
-./tests/runtests.py:80:1      - Unknown word (SUBDIRS)    -- SUBDIRS_TO_SKIP = {
+./tests/runtests.py:81:1      - Unknown word (SUBDIRS)    -- SUBDIRS_TO_SKIP = {
 ./tests/schema/models.py:156:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
 ./tests/schema/tests.py:1596:35   - Unknown word (tagm)       -- assertEqual(columns['tagm2mtest_id'][0], connection
 ./tests/schema/tests.py:1596:40   - Unknown word (mtest)      -- assertEqual(columns['tagm2mtest_id'][0], connection
 ./tests/schema/tests.py:246:48    - Unknown word (repointing) -- out of FK order, then repointing, works"
 ./tests/schema/tests.py:3176:81   - Unknown word (upcase)     -- and, for Oracle, un-upcase
-./tests/schema/tests.py:3721:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
+./tests/schema/tests.py:3748:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
 ./tests/select_for_update/tests.py:142:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
 ./tests/select_for_update/tests.py:170:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',
 ./tests/select_for_update/tests.py:323:14    - Unknown word (unsuported) -- def test_unsuported_no_key_raises_error
