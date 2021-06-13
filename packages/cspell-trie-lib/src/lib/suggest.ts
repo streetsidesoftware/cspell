@@ -1,7 +1,7 @@
 import { TrieRoot } from './TrieNode';
 import { isWordTerminationNode } from './util';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
-import { visualLetterMap } from './orthography';
+import { visualLetterMaskMap } from './orthography';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -42,23 +42,27 @@ export interface SuggestionResult {
 export type SuggestionIterator = Generator<SuggestionResult, undefined, MaxCost | undefined>;
 
 export function suggest(
-    root: TrieRoot,
+    root: TrieRoot | TrieRoot[],
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions,
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
-    numChanges: number = maxNumChanges
+    numChanges: number = maxNumChanges,
+    ignoreCase?: boolean
 ): SuggestionResult[] {
-    const collector = suggestionCollector(word, maxNumSuggestions, undefined, numChanges);
+    const collector = suggestionCollector(word, maxNumSuggestions, undefined, numChanges, ignoreCase);
     collector.collect(genSuggestions(root, word, compoundMethod));
     return collector.suggestions;
 }
 
 export function* genSuggestions(
-    root: TrieRoot,
+    root: TrieRoot | TrieRoot[],
     word: string,
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
 ): SuggestionIterator {
-    yield* genCompoundableSuggestions(root, word, compoundMethod);
+    const roots = Array.isArray(root) ? root : [root];
+    for (const r of roots) {
+        yield* genCompoundableSuggestions(r, word, compoundMethod);
+    }
     return undefined;
 }
 
@@ -88,10 +92,10 @@ export function* genCompoundableSuggestions(
     const stack: Range[] = [];
     const x = ' ' + word;
     const mx = x.length - 1;
-    const specialCosts = new Map([
-        [WORD_SEPARATOR, insertSpaceCost],
-        [JOIN_SEPARATOR, insertSpaceCost],
-    ]);
+    const specialCosts: Record<string, number | undefined> = {
+        [WORD_SEPARATOR]: insertSpaceCost,
+        [JOIN_SEPARATOR]: insertSpaceCost,
+    };
 
     let costLimit: MaxCost = Math.min(bc * word.length * maxCostScale, bc * maxNumChanges);
     const a = 0;
@@ -104,13 +108,13 @@ export function* genCompoundableSuggestions(
     stack[0] = { a, b };
 
     const hint = word;
-    const i = hintedWalker(root, compoundMethod, hint);
+    const iWalk = hintedWalker(root, compoundMethod, hint);
     let goDeeper = true;
-    for (let r = i.next({ goDeeper }); !r.done; r = i.next({ goDeeper })) {
+    for (let r = iWalk.next({ goDeeper }); !r.done; r = iWalk.next({ goDeeper })) {
         const { text, node, depth } = r.value;
         let { a, b } = stack[depth];
         const w = text.slice(-1);
-        const wG = visualLetterMap.get(w) || -1;
+        const wG = visualLetterMaskMap[w] || 0;
         if (setOfSeparators.has(w)) {
             const mxRange = matrix[depth].slice(a, b + 1);
             const mxMin = Math.min(...mxRange);
@@ -148,7 +152,7 @@ export function* genCompoundableSuggestions(
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
         const c = bc - d;
-        const ci = c + (specialCosts.get(w) || 0);
+        const ci = c + (specialCosts[w] || 0);
 
         // Setup first column
         matrix[d] = matrix[d] || [];
@@ -160,11 +164,11 @@ export function* genCompoundableSuggestions(
         // calc the core letters
         for (i = a + 1; i <= b; ++i) {
             const curLetter = x[i];
-            const cG = visualLetterMap.get(curLetter) || -2;
+            const cG = visualLetterMaskMap[curLetter] || 0;
             const subCost =
                 w === curLetter
                     ? 0
-                    : wG === cG
+                    : wG & cG
                     ? mapSubCost
                     : curLetter === lastSugLetter
                     ? w === lastLetter
@@ -182,30 +186,33 @@ export function* genCompoundableSuggestions(
         }
 
         // fix the last column
-        b += 1;
-        if (b <= mx) {
+        const { b: bb } = stack[d - 1];
+        while (b < mx) {
+            b += 1;
             i = b;
             const curLetter = x[i];
-            const cG = visualLetterMap.get(curLetter) || -2;
+            const cG = visualLetterMaskMap[curLetter] || 0;
             const subCost =
                 w === curLetter
                     ? 0
-                    : wG === cG
+                    : wG & cG
                     ? mapSubCost
                     : curLetter === lastSugLetter
                     ? w === lastLetter
                         ? psc
                         : c
                     : c;
+            // if (i - 1) is out of range, use the last value.
+            // no need to be exact, the value will be past maxCost.
+            const j = Math.min(bb, i - 1);
             const e = Math.min(
-                matrix[d - 1][i - 1] + subCost, // substitute
+                matrix[d - 1][j] + subCost, // substitute
                 matrix[d][i - 1] + c // delete
             );
             min = Math.min(min, e);
             matrix[d][i] = e;
             lastLetter = curLetter;
-        } else {
-            b -= 1;
+            if (e > costLimit) break;
         }
 
         // Adjust the range between a and b
@@ -242,6 +249,7 @@ export interface SuggestionCollector {
     readonly word: string;
     readonly maxNumSuggestions: number;
     readonly includesTies: boolean;
+    readonly ignoreCase?: boolean;
 }
 
 export function suggestionCollector(
@@ -249,7 +257,8 @@ export function suggestionCollector(
     maxNumSuggestions: number,
     filter: (word: string, cost: number) => boolean = () => true,
     changeLimit: number = maxNumChanges,
-    includeTies = false
+    includeTies = false,
+    ignoreCase = true
 ): SuggestionCollector {
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = Math.min(baseCost * wordToMatch.length * maxAllowedCostScale, baseCost * changeLimit);
@@ -331,6 +340,7 @@ export function suggestionCollector(
             return maxNumSuggestions;
         },
         includesTies: includeTies,
+        ignoreCase,
     };
 }
 
