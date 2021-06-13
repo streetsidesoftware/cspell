@@ -33,4 +33,21 @@ describe('Validate createSpellingDictionary', () => {
         expect(d.has(words[0])).toBe(true);
         words.forEach((w) => expect(d.has(w)).toBe(true));
     });
+
+    // cspell:ignore Geschäft Aujourd'hui
+    test('createSpellingDictionary accents', () => {
+        const words = ['Geschäft'.normalize('NFD'), 'café', 'book', "Aujourd'hui"];
+        const d = createSpellingDictionary(words, 'test create', __filename);
+        expect(d.has(words[0])).toBe(true);
+        words.forEach((w) => expect(d.has(w)).toBe(true));
+        words.map((w) => w.toLowerCase()).forEach((w) => expect(d.has(w)).toBe(true));
+        expect(d.has(words[0].toLowerCase())).toBe(true);
+        expect(d.has(words[0].toLowerCase(), { ignoreCase: false })).toBe(false);
+        expect(d.suggest('geschaft', { ignoreCase: true }).map((r) => r.word)).toEqual([
+            'geschaft',
+            'geschäft',
+            'Geschäft',
+        ]);
+        expect(d.suggest('geschaft', { ignoreCase: false }).map((r) => r.word)).toEqual(['Geschäft']);
+    });
 });

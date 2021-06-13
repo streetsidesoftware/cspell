@@ -41,7 +41,8 @@ export interface SpellingDictionary {
         word: string,
         numSuggestions?: number,
         compoundMethod?: CompoundWordsMethod,
-        numChanges?: number
+        numChanges?: number,
+        ignoreCase?: boolean
     ): SuggestionResult[];
     suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
     genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;

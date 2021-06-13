@@ -44,6 +44,12 @@ describe('Validate Trie Class', () => {
         expect(suggestions).toEqual(expect.arrayContaining(['walk']));
     });
 
+    test('tests suggestions 2', () => {
+        const trie = Trie.create(sampleWords);
+        const suggestions = trie.suggest('wall', 10);
+        expect(suggestions).toEqual(['walk', 'walks', 'talk']);
+    });
+
     test('tests suggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyostalkliftswak

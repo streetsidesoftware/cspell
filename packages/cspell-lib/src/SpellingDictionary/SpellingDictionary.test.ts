@@ -2,7 +2,6 @@ import { __testMethods } from './SpellingDictionaryMethods';
 import { createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { Trie } from 'cspell-trie-lib';
-import { FunctionArgs } from '../util/types';
 
 // cSpell:ignore aple
 
@@ -92,8 +91,9 @@ describe('Verify building Dictionary', () => {
         const trie = Trie.create(words);
         const dict = new SpellingDictionaryFromTrie(trie, 'trie');
         // cspell:ignore cattles
-        const suggestions = dict.suggest('Cattles').map(({ word }) => word);
-        expect(suggestions[0]).toBe('cattle');
+        const results = dict.suggest('Cattles');
+        const suggestions = results.map(({ word }) => word);
+        expect(suggestions).toEqual(['cattle', 'battles', 'rattles', 'tattles', 'battle', 'rattle']);
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
 
@@ -111,107 +111,96 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
 
-    test('wordDictionaryFormsCollector', () => {
-        function testCase(word: string, isCaseSensitive: boolean, expected: string[]) {
-            const collector = __testMethods.wordDictionaryFormsCollector(isCaseSensitive);
+    type Test = [string, boolean, string[]];
+    // cspell:ignore café
+    const tests: Test[] = [
+        ['house', false, ['house']],
+        ['House', false, ['House', 'house']],
+        ['café', false, ['cafe', 'café']],
+        ['Café', false, ['Cafe', 'Café', 'cafe', 'café']],
+        ['House', true, ['House', '~house']],
+        ['HOUSE', true, ['HOUSE', '~house']],
+        ['Café', true, ['Café', '~Cafe', '~cafe', '~café']],
+        // Make sure all accent forms work.
+        ['café'.normalize(), false, ['cafe', 'café']],
+        ['café'.normalize('NFD'), false, ['cafe', 'café']],
+        ['café'.normalize('NFKC'), false, ['cafe', 'café']],
+        ['café'.normalize('NFKD'), false, ['cafe', 'café']],
+    ];
+    test.each(tests)(
+        'wordDictionaryFormsCollector %s %o %o',
+        (word: string, isCaseSensitive: boolean, expected: string[]) => {
+            const collector = __testMethods.wordDictionaryFormsCollector(isCaseSensitive ? '~' : '');
             expect([...collector(word)].sort()).toEqual(expected.sort());
             expect([...collector(word)]).toEqual([]);
         }
-        type Test = [string, boolean, string[]];
-        // cspell:ignore café
-        const tests: Test[] = [
-            ['house', false, ['house']],
-            ['House', false, ['House', 'house']],
-            ['café', false, ['cafe', 'café']],
-            ['Café', false, ['Cafe', 'Café', 'cafe', 'café']],
-            ['House', true, ['House', '>house']],
-            ['HOUSE', true, ['HOUSE', '>house']],
-            ['Café', true, ['Café', '>Cafe', '>cafe', '>café']],
-            // Make sure all accent forms work.
-            ['café'.normalize(), false, ['cafe', 'café']],
-            ['café'.normalize('NFD'), false, ['cafe', 'café']],
-            ['café'.normalize('NFKC'), false, ['cafe', 'café']],
-            ['café'.normalize('NFKD'), false, ['cafe', 'café']],
-        ];
-        tests.forEach((t) => testCase(...t));
-    });
+    );
 });
 
 describe('Validate wordSearchForms', () => {
-    function testCase(word: string, isCaseSensitive: boolean, ignoreCase: boolean, expected: string[]) {
-        test(`${word} ${isCaseSensitive} ${ignoreCase} ${expected}`, () => {
-            const words = __testMethods.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
-            expect(words.sort()).toEqual(expected.sort());
-        });
-    }
-    type TestCase = FunctionArgs<typeof testCase>;
-    // cspell:ignore café
-    const tests: TestCase[] = [
-        // word, dic is case sensitive, ignoreCase on lookup, expected
-        ['house', false, false, ['house']],
-        ['House', false, false, ['house']],
-        ['House', false, false, ['house']],
-        ['House', true, false, ['House', 'house']],
-        ['HOUSE', false, false, ['house']],
-        ['HOUSE', true, false, ['HOUSE', 'House', 'house']],
-        ['café', false, false, ['café']],
-        ['café', true, false, ['café']],
-        ['café', true, true, ['cafe']],
-        ['Café', false, false, ['café']],
-        ['Café', false, true, ['cafe', 'café']],
-        ['Café', true, false, ['Café', 'café']],
-        ['Café', true, true, ['cafe']],
-        ['CAFÉ', false, false, ['café']],
-        ['CAFÉ', false, true, ['cafe', 'café']],
-        ['CAFÉ', true, false, ['CAFÉ', 'Café', 'café']],
-        ['CAFÉ', true, true, ['cafe']],
-        // Make sure all accent forms work.
-        ['café'.normalize(), false, false, ['café']],
-        ['café'.normalize('NFD'), false, false, ['café']],
-        ['café'.normalize('NFKC'), false, false, ['café']],
-        ['café'.normalize('NFKD'), false, false, ['café']],
-    ];
-    tests.forEach((t) => testCase(...t));
+    test.each`
+        word                        | isCaseSensitive | ignoreCase | expected
+        ${'house'}                  | ${false}        | ${false}   | ${['house']}
+        ${'House'}                  | ${false}        | ${false}   | ${['house']}
+        ${'House'}                  | ${false}        | ${false}   | ${['house']}
+        ${'House'}                  | ${true}         | ${false}   | ${['House', 'house']}
+        ${'HOUSE'}                  | ${false}        | ${false}   | ${['house']}
+        ${'HOUSE'}                  | ${true}         | ${false}   | ${['HOUSE', 'House', 'house']}
+        ${'café'}                   | ${false}        | ${false}   | ${['café']}
+        ${'café'}                   | ${true}         | ${false}   | ${['café']}
+        ${'café'}                   | ${true}         | ${true}    | ${['café']}
+        ${'Café'}                   | ${false}        | ${false}   | ${['café']}
+        ${'Café'}                   | ${false}        | ${true}    | ${['café']}
+        ${'Café'}                   | ${true}         | ${false}   | ${['Café', 'café']}
+        ${'Café'}                   | ${true}         | ${true}    | ${['café']}
+        ${'CAFÉ'}                   | ${false}        | ${false}   | ${['café']}
+        ${'CAFÉ'}                   | ${false}        | ${true}    | ${['café']}
+        ${'CAFÉ'}                   | ${true}         | ${false}   | ${['CAFÉ', 'Café', 'café']}
+        ${'CAFÉ'}                   | ${true}         | ${true}    | ${['café']}
+        ${'café'.normalize()}       | ${false}        | ${false}   | ${['café']}
+        ${'café'.normalize('NFD')}  | ${false}        | ${false}   | ${['café']}
+        ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['café']}
+        ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['café']}
+    `('$word $isCaseSensitive $ignoreCase $expected', ({ word, isCaseSensitive, ignoreCase, expected }) => {
+        const words = __testMethods.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
+        expect(words.sort()).toEqual(expected.sort());
+    });
 });
 
 describe('Verify Case Sensitive Dictionaries', () => {
-    function testHas(word: string, ignoreCase: boolean | undefined, expected: boolean) {
-        test(`Has ${word} Case: ${ignoreCase} Exp: ${expected}`, async () => {
-            const dict = await sampleDict();
-            expect(dict.has(word, { ignoreCase })).toBe(expected);
-        });
-    }
-
-    const tests: FunctionArgs<typeof testHas>[] = [
-        ['Paris', undefined, true],
-        ['PARIS', undefined, true],
-        ['paris', undefined, true],
-        ['Paris', true, true],
-        ['PARIS', true, true],
-        ['paris', true, true],
-        ['Paris', false, true],
-        ['PARIS', false, true],
-        ['paris', false, false],
-        ['Köln', false, true],
-        ['köln', false, false],
-        ['KÖLN', false, true],
-    ];
-    tests.forEach((t) => testHas(...t));
-
-    test('Suggestions 1', async () => {
-        // cspell:ignore koln
-        const dict = await sampleDict();
-        const sugs = dict.suggest('kuln'); // cspell:disable-line
-        const sugWords = sugs.map((s) => s.word);
-        expect(sugWords).toEqual(['Köln']);
+    test.each`
+        word       | ignoreCase   | expected
+        ${'Paris'} | ${undefined} | ${true}
+        ${'PARIS'} | ${undefined} | ${true}
+        ${'paris'} | ${undefined} | ${true}
+        ${'Paris'} | ${true}      | ${true}
+        ${'PARIS'} | ${true}      | ${true}
+        ${'paris'} | ${true}      | ${true}
+        ${'Paris'} | ${false}     | ${true}
+        ${'PARIS'} | ${false}     | ${true}
+        ${'paris'} | ${false}     | ${false}
+        ${'Köln'}  | ${false}     | ${true}
+        ${'köln'}  | ${false}     | ${false}
+        ${'KÖLN'}  | ${false}     | ${true}
+    `(`Has $word Case: $ignoreCase Exp: $expected`, ({ word, ignoreCase, expected }) => {
+        const dict = sampleDict();
+        expect(dict.has(word, { ignoreCase })).toBe(expected);
     });
 
-    test('Suggestions 2', async () => {
+    // cspell:ignore kuln
+    test.each`
+        word      | ignoreCase | expected
+        ${'köln'} | ${false}   | ${['Köln']}
+        ${'köln'} | ${true}    | ${['köln', 'koln', 'Köln']}
+        ${'koln'} | ${true}    | ${['koln', 'köln', 'Köln']}
+        ${'kuln'} | ${false}   | ${['Köln']}
+        ${'kuln'} | ${true}    | ${['koln', 'köln', 'Köln']}
+    `('Suggestions for $word $ignoreCase $expected', ({ word, ignoreCase, expected }) => {
         // cspell:ignore koln
-        const dict = await sampleDict();
-        const sugs = dict.suggest('kuln', { ignoreCase: false }); // cspell:disable-line
+        const dict = sampleDict();
+        const sugs = dict.suggest(word, { ignoreCase });
         const sugWords = sugs.map((s) => s.word);
-        expect(sugWords).toEqual(['Köln']);
+        expect(sugWords).toEqual(expected);
     });
 });
 

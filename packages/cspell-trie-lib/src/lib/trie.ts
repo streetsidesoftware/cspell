@@ -153,9 +153,10 @@ export class Trie {
         text: string,
         maxNumSuggestions: number,
         compoundMethod?: CompoundWordsMethod,
-        numChanges?: number
+        numChanges?: number,
+        ignoreCase?: boolean
     ): string[] {
-        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges).map((a) => a.word);
+        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges, ignoreCase).map((a) => a.word);
     }
 
     /**
@@ -166,11 +167,17 @@ export class Trie {
         text: string,
         maxNumSuggestions: number,
         compoundMethod?: CompoundWordsMethod,
-        numChanges?: number
+        numChanges?: number,
+        ignoreCase?: boolean
     ): SuggestionResult[] {
-        return suggest(this.getSuggestRoot(true), text, maxNumSuggestions, compoundMethod, numChanges).filter(
-            (sug) => !this.isForbiddenWord(sug.word)
-        );
+        return suggest(
+            this.getSuggestRoot(!ignoreCase),
+            text,
+            maxNumSuggestions,
+            compoundMethod,
+            numChanges,
+            ignoreCase
+        ).filter((sug) => !this.isForbiddenWord(sug.word));
     }
 
     /**
@@ -180,7 +187,7 @@ export class Trie {
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
         const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
-        const suggestions = genSuggestions(this.getSuggestRoot(true), collector.word, compoundMethod);
+        const suggestions = genSuggestions(this.getSuggestRoot(!collector.ignoreCase), collector.word, compoundMethod);
         function* filteredSuggestions() {
             let maxCost = collector.maxCost;
             let ir: IteratorResult<SuggestionResult, undefined>;
@@ -214,14 +221,26 @@ export class Trie {
         return this;
     }
 
-    private getSuggestRoot(caseSensitive: boolean): TrieRoot {
-        const root = (!caseSensitive && this.root.c?.get(this._options.stripCaseAndAccentsPrefix)) || this.root;
-        if (!root.c) return { c: new Map<string, TrieNode>(), ...this._options };
+    private getSuggestRoot(caseSensitive: boolean): TrieRoot[] {
         const blockNodes = new Set([this._options.forbiddenWordPrefix, this._options.stripCaseAndAccentsPrefix]);
-        return {
-            c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))),
-            ...this._options,
-        };
+        const root = this.root;
+        if (!root.c) return [{ c: new Map<string, TrieNode>(), ...this._options }];
+
+        const roots: TrieRoot[] = [
+            {
+                c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))),
+                ...this._options,
+            },
+        ];
+
+        const csRoot = root.c.get(this._options.stripCaseAndAccentsPrefix);
+        if (!caseSensitive && csRoot?.c) {
+            roots.push({
+                c: new Map([...csRoot.c].filter(([k]) => !blockNodes.has(k))),
+                ...this._options,
+            });
+        }
+        return roots;
     }
 
     private calcIsLegacy(): boolean {
