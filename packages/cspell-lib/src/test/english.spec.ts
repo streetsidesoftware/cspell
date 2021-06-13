@@ -1,4 +1,5 @@
 import * as cspell from '../index';
+import { validateText } from '../validator';
 
 describe('Validate English', () => {
     jest.setTimeout(10000);
@@ -19,5 +20,21 @@ describe('Validate English', () => {
             expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
             return;
         });
+    });
+
+    test('validate some text', async () => {
+        const ext = '.txt';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = cspell.getDefaultSettings();
+        const text = `
+        Here are some words.
+        thing and cpp are words.
+        é'thing and î'cpp are ok.
+        `;
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        const finalSettings = cspell.finalizeSettings(fileSettings);
+
+        const r = await validateText(text, finalSettings);
+        expect(r).toEqual([]);
     });
 });

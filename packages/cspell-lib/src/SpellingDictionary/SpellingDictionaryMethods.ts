@@ -67,7 +67,7 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
         } else {
             forms.add(wordLc);
             // Legacy remove any accents
-            forms.add(wordLc.replace(/\p{M}/gu, ''));
+            forms.add(wordLc.normalize('NFD').replace(/\p{M}/gu, ''));
         }
     } else {
         if (isDictionaryCaseSensitive) {
@@ -80,7 +80,7 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
         } else {
             forms.add(wordLc);
             // Legacy remove any accents
-            forms.add(wordLc.replace(/\p{M}/gu, ''));
+            forms.add(wordLc.normalize('NFD').replace(/\p{M}/gu, ''));
         }
     }
     return forms;

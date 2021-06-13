@@ -34,4 +34,4 @@ Result when spell checking various forms of `Geschäft`:
 
 Note: If accents are present in a word, they must match the accents in the original word.
 
-<!--- cspell:words Geschäft --->
+<!--- cspell:words Geschäft gescháft --->

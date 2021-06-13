@@ -49,7 +49,7 @@ describe('Validate SimpleDictionaryParser', () => {
         return a.toLowerCase();
     }
 
-    // cspell:ignore Midle beginmidleend gescháft
+    // cspell:ignore Midle beginmidleend gescháft cafë resumé
     test.each`
         word               | ignoreCase | has      | expected
         ${'end'}           | ${false}   | ${false} | ${['End']}
