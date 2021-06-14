@@ -11,7 +11,9 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "clean": "rimraf repositories/temp dist temp",
+    "clean": "npm run clean-dist && npm run clean-repos",
+    "clean-dist": "rimraf repositories/temp temp",
+    "clean-repos": "rimraf repositories/temp temp",
     "clean-build": "npm run clean && npm run build",
     "integration-tests": "node tester.js check -f",
     "test-jest": "jest",
