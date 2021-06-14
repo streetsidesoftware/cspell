@@ -265,8 +265,6 @@ function genSymbolBreaks(line: LineSegment): SortedBreaks[] {
     return [
         calcBreaksForRegEx(line, regExPossibleWordBreaks, calcBreaks),
         calcBreaksForRegEx(line, /\d+/g, calcBreaks),
-        calcBreaksForRegEx(line, /['’](?!\p{L})/gu, calcBreaks), // break on trailing '
-        calcBreaksForRegEx(line, /(?<!\p{L})['’]/gu, calcBreaks), // break on leading '
         calcBreaksForRegEx(line, regExEscapeCharacters, calcBreaks),
     ];
 }
