@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2128, Issues found: 7886 in 907 files
+ CSpell: Files checked: 2128, Issues found: 7847 in 895 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -110,7 +110,6 @@ Lines:
 ./django/conf/locale/tr/formats.py:19:39     - Unknown word (Ekim)       -- '%d %b. %Y',  # '25 Ekim 2006', '25 Eki. 200
 ./django/conf/locale/uz/formats.py:18:29     - Unknown word (Oktabr)     -- %B, %Y-yil',  # '25-Oktabr, 2006-yil'
 ./django/contrib/admin/actions.py:24:5      - Unknown word (childs)     -- childs (foreignkeys), a "permission
-./django/contrib/admin/helpers.py:221:63    - Unknown word (auth's)     -- suffices for contrib.auth's
 ./django/contrib/admin/options.py:1222:19   - Unknown word (saveasnew)  -- "_saveasnew" in request.POST and
 ./django/contrib/admin/options.py:132:23    - Unknown word (dbfield)    -- def formfield_for_dbfield(self, db_field, request
 ./django/contrib/admin/options.py:181:13    - Unknown word (klass)      -- for klass in db_field.__class
@@ -126,7 +125,6 @@ Lines:
 ./django/contrib/admin/templatetags/base.py:14:17     - Unknown word (varargs)    -- params, varargs, varkw, defaults, kwonly
 ./django/contrib/admin/templatetags/base.py:14:26     - Unknown word (varkw)      -- params, varargs, varkw, defaults, kwonly, kwonly
 ./django/contrib/admin/templatetags/base.py:14:43     - Unknown word (kwonly)     -- varargs, varkw, defaults, kwonly, kwonly_defaults, _
-./django/contrib/admin/views/autocomplete.py:8:27      - Unknown word (Widget's)   -- "Handle AutocompleteWidget's AJAX requests for data
 ./django/contrib/admin/widgets.py:16:31     - Unknown word (Truncator)  -- django.utils.text import Truncator
 ./django/contrib/admin/widgets.py:370:42    - Unknown word (Cyrl)       -- ro', 'ru', 'sk', 'sr-Cyrl', 'sr', 'sv', 'th',
 ./django/contrib/admindocs/utils.py:13:12     - Unknown word (docutils)   -- import docutils.core
@@ -143,7 +141,6 @@ Lines:
 ./django/contrib/auth/base_user.py:34:45     - Unknown word (ABCDEFGHJKLMNPQRSTUVWXYZ) -- 'ABCDEFGHJKLMNPQRSTUVWXYZ'
 ./django/contrib/auth/hashers.py:14:68     - Unknown word (pbkdf)      -- get_random_string, pbkdf2,
 ./django/contrib/auth/hashers.py:318:20    - Unknown word (PKCS)       -- recommended by PKCS #5. This is compatible
-./django/contrib/auth/hashers.py:319:40    - Unknown word (openssl's)  -- mentations of PBKDF2, such as openssl's
 ./django/contrib/auth/hashers.py:331:60    - Unknown word (cffi)       -- requires the argon2-cffi library which
 ./django/contrib/auth/hashers.py:429:39    - Unknown word (bcrypt)     -- password hashing using the bcrypt algorithm (recommended
 ./django/contrib/auth/hashers.py:451:28    - Unknown word (hexlify)    -- # Use binascii.hexlify() because a hex encoded
@@ -265,7 +262,6 @@ Lines:
 ./django/contrib/gis/gdal/raster/const.py:72:34     - Unknown word (vsimem)     -- FILESYSTEM_BASE_PATH = '/vsimem/'
 ./django/contrib/gis/gdal/raster/source.py:133:13    - Unknown word (papsz)      -- papsz_options = []
 ./django/contrib/gis/gdal/raster/source.py:139:23    - Unknown word (papszlist)  -- # Convert papszlist to ctypes array.
-./django/contrib/gis/gdal/raster/source.py:309:34    - Unknown word (Raster's)   -- Shortcut to set this GDALRaster's srs from an srid.
 ./django/contrib/gis/gdal/raster/source.py:362:9     - Unknown word (xval)       -- xval = self.origin.x + self
 ./django/contrib/gis/gdal/raster/source.py:363:9     - Unknown word (yval)       -- yval = self.origin.y + self
 ./django/contrib/gis/gdal/raster/source.py:455:38    - Unknown word (reprojected) -- copy of this raster reprojected into the given spatial
@@ -305,7 +301,6 @@ Lines:
 ./django/contrib/gis/geos/mutable_list.py:1:38      - Unknown word (Taurog)     -- 008-2009 Aryeh Leib Taurog, all rights reserved
 ./django/contrib/gis/geos/mutable_list.py:272:12    - Unknown word (Vals)       -- newVals = dict(zip(indexList
 ./django/contrib/gis/geos/polygon.py:151:25    - Unknown word (nrings)     -- return capi.get_nrings(self.ptr)
-./django/contrib/gis/geos/prototypes/geom.py:18:36     - Unknown word (free'd)     -- reference so it may be free'd.
 ./django/contrib/gis/geos/prototypes/geom.py:9:3       - Unknown word (uchar)      -- c_uchar_p = POINTER(c_ubyte
 ./django/contrib/gis/geos/prototypes/threadsafe.py:37:14     - Unknown word (cfunc)      -- self.cfunc = getattr(lgeos, func
 ./django/contrib/gis/measure.py:227:16    - Unknown word (benoit)     -- 'chain_benoit': 20.116782,
@@ -593,7 +588,6 @@ Lines:
 ./django/db/models/base.py:549:22    - Unknown word (unpickle)      -- return model_unpickle, (class_id,), data
 ./django/db/models/base.py:93:9      - Unknown word (contributable) -- contributable_attrs = {}
 ./django/db/models/enums.py:13:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
-./django/db/models/enums.py:28:29     - Unknown word (enum's)     -- # assignment in enum's classdict.
 ./django/db/models/expressions.py:50:12     - Unknown word (bitor)      -- # and .bitor(), the '&' and '|' are
 ./django/db/models/fields/__init__.py:377:76    - Unknown word (EXXX)       -- details.get('id', 'fields.EXXX'),
 ./django/db/models/fields/__init__.py:389:79    - Unknown word (WXXX)       -- details.get('id', 'fields.WXXX'),
@@ -636,8 +630,6 @@ Lines:
 ./django/db/utils.py:117:31    - Unknown word (ispkg)      -- name for _, name, ispkg in pkgutil.iter_modules
 ./django/db/utils.py:121:21    - Unknown word (reprs)      -- backend_reprs = map(repr, sorted(builtin
 ./django/dispatch/__init__.py:3:21      - Unknown word (pydispatch) -- Originally based on pydispatch (BSD) https://pypi.org
-./django/forms/boundfield.py:136:33    - Unknown word (safe'd)     -- contents should be mark_safe'd to avoid HTML escaping
-./django/forms/boundfield.py:204:34    - Unknown word (widget's)   -- Wrapper around the field widget's `id_for_label` method
 ./django/forms/boundfield.py:243:21    - Unknown word (myform)     -- {% for radio in myform.beatles %}
 ./django/forms/fields.py:681:19    - Unknown word (misformatted) -- # misformatted URLs.
 ./django/forms/models.py:700:13    - Unknown word (uclass)     -- for uclass, unique_check in all
@@ -650,7 +642,6 @@ Lines:
 ./django/http/request.py:610:7     - Unknown word (ufffd)      -- (\ufffd).
 ./django/http/response.py:471:67    - Unknown word (nbytes)     -- filelike.getbuffer().nbytes
 ./django/http/response.py:477:19    - Unknown word (uncompressing) -- # uncompressing files.
-./django/middleware/cache.py:21:31     - Unknown word (This'll)    -- FetchFromCacheMiddleware``. This'll most often happen when
 ./django/middleware/common.py:125:13    - Unknown word (referer)    -- referer = request.META.get(
 ./django/middleware/common.py:125:46    - Unknown word (REFERER)    -- request.META.get('HTTP_REFERER', '')
 ./django/middleware/csrf.py:342:31    - Unknown word (dont)       -- if getattr(request, '_dont_enforce_csrf_checks
@@ -690,7 +681,6 @@ Lines:
 ./django/test/runner.py:56:25     - Unknown word (writeln)    -- self.stream.writeln(self.separator2)
 ./django/test/signals.py:202:54    - Unknown word (modwsgi)    -- auth.handlers import modwsgi
 ./django/test/testcases.py:808:46    - Unknown word (ndiff)      -- + '\n'.join(difflib.ndiff(
-./django/test/utils.py:938:25    - Unknown word (lookup's)   -- lookup_name (or the lookup's lookup_name if not provided
 ./django/urls/base.py:17:16     - Unknown word (Lconfs)     -- # Overridden URLconfs for each thread are
 ./django/urls/base.py:18:2      - Unknown word (urlconfs)   -- _urlconfs = Local()
 ./django/urls/conf.py:1:27      - Unknown word (Lsconfs)    -- Functions for use in URLsconfs."""
@@ -722,7 +712,6 @@ Lines:
 ./django/utils/dateformat.py:243:25    - Unknown word (isleap)     -- return calendar.isleap(self.data.year)
 ./django/utils/dateformat.py:320:41    - Unknown word (yday)       -- data.timetuple().tm_yday
 ./django/utils/datetime_safe.py:105:5     - Unknown word (syear)      -- syear = "%04d" % dt.year
-./django/utils/datetime_safe.py:58:33     - Unknown word (strftime's) -- library does not support strftime's "%s" or "%y" format
 ./django/utils/datetime_safe.py:5:57      - Unknown word (Dalke)      -- lang.python by Andrew Dalke
 ./django/utils/deprecation.py:122:27    - Unknown word (acall)      -- return self.__acall__(request)
 ./django/utils/encoding.py:115:29    - Unknown word (delims)     -- reserved = gen-delims / sub-delims
@@ -896,9 +885,7 @@ Lines:
 ./django/utils/xmlutils.py:6:14      - Unknown word (saxutils)   -- from xml.sax.saxutils import XMLGenerator
 ./django/views/csrf.py:129:23    - Unknown word (noreferrer) -- '<a rel=\"noreferrer\" …> for links to third
 ./django/views/csrf.py:20:37     - Unknown word (NOARCHIVE)  -- robots" content="NONE,NOARCHIVE">
-./django/views/debug.py:410:35    - Unknown word (br'coding)  -- match = re.search(br'coding[:=]\s*([-\w.]+)', line
 ./django/views/decorators/gzip.py:5:47      - Unknown word (gzips)      -- Decorator for views that gzips pages if the client
-./django/views/generic/dates.py:603:11    - Unknown word (which'll)   -- # which'll handle the 404
 ./django/views/i18n.py:229:29    - Unknown word (nplurals)   -- match = re.search(r'nplurals=\s*(\d+)', self._plural
 ./django/views/i18n.py:87:10     - Unknown word (pluralidx)  -- django.pluralidx = function(n) {
 ./docs/_ext/djangodocs.py:14:32     - Unknown word (Cmdoption)  -- sphinx.domains.std import Cmdoption
@@ -954,7 +941,6 @@ Lines:
 ./tests/admin_scripts/tests.py:50:65     - Unknown word (sdict)      -- None, is_dir=False, sdict=None, extra=None):
 ./tests/admin_utils/test_logentry.py:70:62     - Unknown word (Ajout)      -- get_change_message(), 'Ajout.')
 ./tests/admin_utils/tests.py:412:74    - Unknown word (Aother)     -- ), 'something_0Aor_0Aother')
-./tests/admin_views/admin.py:1091:17   - Unknown word (utils's)     -- # contrib.admin.utils's get_deleted_objects
 ./tests/admin_views/admin.py:25:41     - Unknown word (Xtra)       -- Category, Chapter, ChapterXtra1, Child, ChildOfReferer
 ./tests/admin_views/admin.py:34:71     - Unknown word (UUIDPK)     -- hDependentChildren, ParentWithUUIDPK,
 ./tests/admin_views/admin.py:43:41     - Unknown word (Undeletable) -- UnchangeableObject, UndeletableObject, UnorderedObject
@@ -1111,7 +1097,6 @@ Lines:
 ./tests/auth_tests/test_validators.py:239:28    - Unknown word (Bspace)     -- "zerowidth\u200Bspace", "nonbreaking\u00A
 ./tests/auth_tests/test_views.py:198:27    - Unknown word (signup)     -- return self._read_signup_email(mail.outbox[0
 ./tests/auth_tests/test_views.py:369:9     - Unknown word (uuidb)      -- uuidb64 = response.resolver
-./tests/auth_tests/urls_admin.py:11:12     - Unknown word (silo'd)     -- # Create a silo'd admin site for just
 ./tests/backends/base/test_creation.py:32:22     - Unknown word (hodor)      -- prod_name = 'hodor'
 ./tests/backends/oracle/test_introspection.py:15:13     - Unknown word (seqs)       -- seqs = connection.introspection
 ./tests/backends/oracle/test_operations.py:140:33    - Unknown word (VERYLONGMODELN) -- self.assertIn('BACKENDS_VERYLONGMODELN7BE2_SQ', statements
@@ -1204,8 +1189,6 @@ Lines:
 ./tests/file_storage/tests.py:661:34    - Unknown word (stringio)   -- storage.save('tests/stringio', output)
 ./tests/file_storage/tests.py:674:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
 ./tests/file_uploads/tests.py:162:22    - Unknown word (pwnd)       -- 'You got pwnd.\r\n',
-./tests/file_uploads/tests.py:751:61    - Unknown word (ascii'en)   -- pplication/x-stuff; title*=us-ascii'en-us'This%20is%20%2A%
-./tests/file_uploads/tests.py:751:70    - Unknown word (us'This)    -- title*=us-ascii'en-us'This%20is%20%2A%2A%2Afun
 ./tests/file_uploads/tests.py:751:93    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
 ./tests/files/tests.py:161:25    - Unknown word (l'été)      -- content = "vive l'été\n"
 ./tests/files/tests.py:196:14    - Unknown word (noname)     -- def test_noname_file_default_name(self
@@ -1541,7 +1524,6 @@ Lines:
 ./tests/inspectdb/tests.py:118:46    - Unknown word (charfielddbcollation) -- inspectdb', 'inspectdb_charfielddbcollation', stdout=out)
 ./tests/inspectdb/tests.py:137:46    - Unknown word (textfielddbcollation) -- inspectdb', 'inspectdb_textfielddbcollation', stdout=out)
 ./tests/inspectdb/tests.py:281:38    - Unknown word (Findex)               -- CREATE UNIQUE INDEX Findex ON %s '
-./tests/inspectdb/tests.py:299:31    - Unknown word (sqlite's)             -- "Only patched sqlite's DatabaseIntrospection
 ./tests/inspectdb/tests.py:308:26    - Unknown word (myfields)             -- 'text': 'myfields.TextField',
 ./tests/invalid_models_tests/test_models.py:1380:13   - Unknown word (foos)       -- foos = models.ManyToManyField
 ./tests/invalid_models_tests/test_models.py:311:35    - Unknown word (sindex)     -- "The index name '%sindex_name' cannot start with
@@ -1612,7 +1594,6 @@ Lines:
 ./tests/migrations/test_commands.py:461:70    - Unknown word (salamand)    -- SELECT * FROM migrations_salamand…\n",
 ./tests/migrations/test_executor.py:149:26    - Unknown word (unmigrations) -- perform spurious unmigrations and remigrations.
 ./tests/migrations/test_executor.py:261:18    - Unknown word (storer)       -- def fake_storer(phase, migration=None
-./tests/migrations/test_graph.py:271:28    - Unknown word (req'd)      -- msg = "app_a.0001 (req'd by app_b.0002) is missing
 ./tests/migrations/test_loader.py:116:85    - Unknown word (unmigdep)   -- migrations.test_migrations_unmigdep"})
 ./tests/migrations/test_loader.py:185:69    - Unknown word (blarg)      -- prefix("migrations", "blarg")
 ./tests/migrations/test_loader.py:486:39    - Unknown word (unsquashes) -- apply a few from app1: unsquashes migration in app1.
@@ -1704,7 +1685,6 @@ Lines:
 ./tests/model_forms/tests.py:1908:24   - Unknown word (onetoonefield) -- def test_modelform_onetoonefield(self):
 ./tests/model_formsets/test_uuid.py:31:14     - Unknown word (uuidpkchild) -- 'uuidpkchild_set-TOTAL_FORMS': 3
 ./tests/model_formsets/tests.py:1033:50   - Unknown word (Giordanos)        -- objects.create(pk=1, name='Giordanos', city='Chicago')
-./tests/model_formsets/tests.py:1537:61   - Unknown word (pk's)             -- queryset and list of pk's
 ./tests/model_formsets/tests.py:1632:33   - Unknown word (rawr)             -- 'form-1-subtitle': 'rawr',
 ./tests/model_formsets/tests.py:443:48    - Unknown word (Mayakovsky) -- the name to "Vladimir Mayakovsky" just to be a jerk.
 ./tests/model_formsets/tests.py:52:46     - Unknown word (unvalid)    -- untouched and two new unvalid forms
@@ -1800,7 +1780,6 @@ Lines:
 ./tests/queryset_pickle/tests.py:20:55     - Unknown word (Maybachs)   -- name="Ponies Who Own Maybachs")
 ./tests/queryset_pickle/tests.py:254:11    - Unknown word (mmodel)     -- m2mmodel = M2MModel.objects.create
 ./tests/queryset_pickle/tests.py:257:21    - Unknown word (mmodels)    -- first_m2mmodels=models.FilteredRelation
-./tests/raw_query/models.py:12:11     - Unknown word (this'll)    -- # this'll make the test suite
 ./tests/raw_query/tests.py:139:42    - Unknown word (mixedcaseidcolumn) -- SELECT * FROM raw_query_mixedcaseidcolumn"
 ./tests/raw_query/tests.py:30:44     - Unknown word (Shaston)    -- walking homeward from Shaston to the village of Marlott
 ./tests/raw_query/tests.py:326:93    - Unknown word (bookfkaspk)        -- default FROM raw_query_bookfkaspk')), [b])
@@ -1968,7 +1947,6 @@ Lines:
 ./tests/template_tests/syntax_tests/test_if_changed.py:48:41     - Unknown word (numy)       -- '{% for y in numy %}{% ifchanged %}{{
 ./tests/template_tests/syntax_tests/test_if_changed.py:62:35     - Unknown word (accd)       -- assertEqual(output, 'accd')
 ./tests/template_tests/syntax_tests/test_include.py:241:14    - Unknown word (tmpl)       -- 'tmpl': engine.from_string
-./tests/template_tests/syntax_tests/test_list_index.py:53:41     - Unknown word (dict's)     -- lookup wins out when dict's key is a string.
 ./tests/template_tests/syntax_tests/test_numpy.py:13:26     - Unknown word (Numpy)      -- skipIf(numpy is False, "Numpy must be installed to
 ./tests/template_tests/syntax_tests/test_numpy.py:19:9      - Unknown word (Numpy's)    -- Numpy's array-index syntax allows
 ./tests/template_tests/syntax_tests/test_regroup.py:89:50     - Unknown word (thisaintright) -- regroup data by bar thisaintright grouped %}'})
@@ -2008,7 +1986,6 @@ Lines:
 ./tests/urlpatterns_reverse/tests.py:205:69    - Unknown word (Cspam)      -- CDocuments%20and%20Settings%5Cspam/', [],
 ./tests/urlpatterns_reverse/tests.py:258:22    - Unknown word (Fexample)   -- ('security', '/%2Fexample.com/security/', ['/example
 ./tests/urlpatterns_reverse/tests.py:492:81    - Unknown word (blub)       -- reverse.nested_urls.blub'))
-./tests/user_commands/management/commands/dance.py:11:55     - Unknown word (Rock'n'Roll) -- "--style", default="Rock'n'Roll")
 ./tests/user_commands/management/commands/required_option.py:8:73      - Unknown word (needme)     -- required=True, dest='needme2')
 ./tests/user_commands/tests.py:104:17    - Unknown word (cmds)       -- cmds = find_commands(os.path
 ./tests/utils_tests/test_archive.py:54:23     - Unknown word (IRWXU)      -- mask = stat.S_IRWXU | stat.S_IRWXG | stat

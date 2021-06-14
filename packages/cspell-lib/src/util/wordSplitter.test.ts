@@ -123,7 +123,7 @@ describe('Validate wordSplitter', () => {
         ${'CVTTSD2SI_r_xm'}                 | ${splitTov('CVTTSD|SI|r|xm')}
         ${'error_code42_one_two'}           | ${splitTov('error|code42|one|two')}
         ${'_errorcode42_one_two'}           | ${splitTov('_errorcode42|one|two')}
-        ${"words'separated'by_singleQuote"} | ${splitTov(`words'separated'by|singleQuote`)}
+        ${"words'separated'by_singleQuote"} | ${splitTov(`words|separated|by|singleQuote`)}
         ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}
         ${'Geschäft'}                       | ${splitTov('Geschäft')}
     `('split $text', ({ text, expectedWords }: TestSplit) => {
@@ -158,7 +158,7 @@ describe('Validate wordSplitter', () => {
         ${'CVTSI2SD_x_rm'}                  | ${splitTov('CVTSI|SD|x|rm')}                  | ${10}
         ${'errCVTTSD2SI_r_xm'}              | ${splitTov('err|CVTTSD|SI|r|xm')}             | ${12}
         ${"words'separated'by_singleQuote"} | ${splitTov('words|separated|by|singleQuote')} | ${6}
-        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${4}
+        ${"Tom's_hardware"}                 | ${splitTov("Tom's|hardware")}                 | ${5}
     `('split edge cases `$text`', ({ text, expectedWords, calls }: TestSplitWithCalls) => {
         const line = {
             text,
@@ -197,11 +197,11 @@ describe('Validate wordSplitter', () => {
         ${`îphoneStatic`} | ${'îphone|Static'} | ${2}
         ${`êphoneStatic`} | ${'êphone|Static'} | ${2}
         ${`geschäft`}     | ${'geschäft'}      | ${1}
-        ${`n'log`}        | ${'log'}           | ${7}
+        ${`n'log`}        | ${'log'}           | ${9}
         ${'64-bit'}       | ${'bit'}           | ${1}
         ${'128-bit'}      | ${'bit'}           | ${1}
         ${'256-sha'}      | ${'256-sha'}       | ${6}
-        ${`REFACTOR'd`}   | ${'REFACTOR'}      | ${2}
+        ${`REFACTOR'd`}   | ${'REFACTOR'}      | ${3}
         ${`dogs'`}        | ${`dogs'`}         | ${2}
         ${`planets’`}     | ${`planets’`}      | ${2}
     `('split `$text` in doc', ({ text, expectedWords, calls }: TestSplit2) => {
