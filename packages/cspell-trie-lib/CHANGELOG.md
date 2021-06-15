@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.4](https://github.com/streetsidesoftware/cspell/compare/v5.6.3...v5.6.4) (2021-06-15)
+
+
+### Bug Fixes
+
+* Fix issue with missing suggestions ([#1339](https://github.com/streetsidesoftware/cspell/issues/1339)) ([cfecde8](https://github.com/streetsidesoftware/cspell/commit/cfecde85b80d70063aa647d0f6837c879a938ce1))
+
+
+
+
+
 ## [5.6.3](https://github.com/streetsidesoftware/cspell/compare/v5.6.2...v5.6.3) (2021-06-11)
 
 
