@@ -8,4 +8,5 @@ export interface Repository {
     branch: string | undefined;
     commit: string;
     args: string[];
+    postCheckoutSteps: string[] | undefined;
 }

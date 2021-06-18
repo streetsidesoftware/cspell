@@ -32,6 +32,7 @@ describe('Validate repository helper', () => {
             commit: '',
             branch: undefined,
             args: [],
+            postCheckoutSteps: undefined,
         }));
     });
 
