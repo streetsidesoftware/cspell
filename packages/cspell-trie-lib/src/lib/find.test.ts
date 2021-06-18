@@ -41,6 +41,7 @@ describe('Validate findWord', () => {
 
         // non-normalized words
         ['café', { matchCase: false, compoundMode: 'none' }, frFound('café')],
+        ['Café', { matchCase: false, compoundMode: 'none' }, frNotFound()],
         ['cafe', { matchCase: false, compoundMode: 'none' }, frFound('cafe', { caseMatched: false })],
         ['Code', { matchCase: false, compoundMode: 'none' }, frNotFound()],
 
