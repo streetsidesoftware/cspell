@@ -186,7 +186,7 @@ describe('Validate wordSplitter', () => {
         calls: number;
     }
 
-    // cspell:ignore nstatic techo n'cpp n'log refactor'd
+    // cspell:ignore nstatic techo n'cpp n'log refactor'd î
     test.each`
         text              | expectedWords      | calls
         ${'static'}       | ${'static'}        | ${1}

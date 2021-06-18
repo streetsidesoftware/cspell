@@ -32,6 +32,7 @@ describe('Validate textRegex', () => {
         expect(m).toEqual(expected);
     });
 
+    // cspell:word é
     test.each`
         text              | expected
         ${'hello'}        | ${[]}
