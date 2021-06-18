@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2128, Issues found: 7847 in 895 files
+ CSpell: Files checked: 2128, Issues found: 7911 in 901 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -38,6 +38,7 @@ Lines:
 ./django/conf/locale/__init__.py:27:24     - Unknown word (العربية)    -- 'name_local': 'العربية الجزائرية',
 ./django/conf/locale/__init__.py:27:32     - Unknown word (الجزائرية)  -- name_local': 'العربية الجزائرية',
 ./django/conf/locale/__init__.py:285:24    - Unknown word (Asụsụ)         -- 'name_local': 'Asụsụ Ìgbò',
+./django/conf/locale/__init__.py:285:30    - Unknown word (Ìgbò)          -- name_local': 'Asụsụ Ìgbò',
 ./django/conf/locale/__init__.py:291:24    - Unknown word (Íslenska)      -- 'name_local': 'Íslenska',
 ./django/conf/locale/__init__.py:297:24    - Unknown word (italiano)      -- 'name_local': 'italiano',
 ./django/conf/locale/__init__.py:309:24    - Unknown word (ქართული)       -- 'name_local': 'ქართული',
@@ -47,6 +48,7 @@ Lines:
 ./django/conf/locale/__init__.py:345:24    - Unknown word (Кыргызча)      -- 'name_local': 'Кыргызча',
 ./django/conf/locale/__init__.py:351:24    - Unknown word (Lëtzebuergesch) -- 'name_local': 'Lëtzebuergesch',
 ./django/conf/locale/__init__.py:357:24    - Unknown word (Lietuviškai)    -- 'name_local': 'Lietuviškai',
+./django/conf/locale/__init__.py:363:24    - Unknown word (latvieš)        -- 'name_local': 'latviešu',
 ./django/conf/locale/__init__.py:369:24    - Unknown word (Македонски)     -- 'name_local': 'Македонски',
 ./django/conf/locale/__init__.py:375:24    - Unknown word (മലയാളം)         -- 'name_local': 'മലയാളം',
 ./django/conf/locale/__init__.py:387:24    - Unknown word (मराठी)          -- 'name_local': 'मराठी',
@@ -85,6 +87,7 @@ Lines:
 ./django/conf/locale/__init__.py:579:31    - Unknown word (Việt)          -- name_local': 'Tiếng Việt',
 ./django/conf/locale/__init__.py:63:24     - Unknown word (brezhoneg)    -- 'name_local': 'brezhoneg',
 ./django/conf/locale/__init__.py:69:24     - Unknown word (bosanski)     -- 'name_local': 'bosanski',
+./django/conf/locale/__init__.py:75:24     - Unknown word (català)       -- 'name_local': 'català',
 ./django/conf/locale/__init__.py:81:24     - Unknown word (česky)        -- 'name_local': 'česky',
 ./django/conf/locale/__init__.py:87:24     - Unknown word (Cymraeg)      -- 'name_local': 'Cymraeg',
 ./django/conf/locale/__init__.py:93:24     - Unknown word (dansk)        -- 'name_local': 'dansk',
@@ -988,6 +991,9 @@ Lines:
 ./tests/admin_views/tests.py:4603:89   - Unknown word (awεšomeııı)                 -- mAin nÀMë and it\'s awεšomeıııİ')
 ./tests/admin_views/tests.py:4607:56   - Unknown word (awesomeiiii)                -- the-main-name-and-its-awesomeiiii-2012-02-18')
 ./tests/admin_views/tests.py:4616:28   - Unknown word (Çkeð)                       -- ' here is a sŤāÇkeð inline !  '
+./tests/admin_views/tests.py:4637:28   - Unknown word (anöther)                    -- ' now you haVe anöther sŤāÇkeð  inline with
+./tests/admin_views/tests.py:4652:31   - Unknown word (Ãbűla)                      -- 'And now, with a tÃbűlaŘ inline !!!'
+./tests/admin_views/tests.py:4695:29   - Unknown word (nàmë)                       -- slug3='the-main-nàmë-and-its-awεšomeıııi
 ./tests/admin_views/tests.py:4695:42   - Unknown word (awεšomeıııi)                -- the-main-nàmë-and-its-awεšomeıııi',
 ./tests/admin_views/tests.py:4707:75   - Unknown word (loooooooooooooooooo)        -- inline with a very ... loooooooooooooooooo',
 ./tests/admin_views/tests.py:4886:49   - Unknown word (relatedwithuuidpkmodel)     -- reverse('admin:admin_views_relatedwithuuidpkmodel_change', args=(related
@@ -1074,6 +1080,7 @@ Lines:
 ./tests/auth_tests/test_hashers.py:323:86    - Unknown word (Jefo)       -- sDOkTvzV93jPWTRVxFGh50Jefo0=')
 ./tests/auth_tests/test_hashers.py:333:14    - Unknown word (bcryptsha)  -- def test_bcryptsha256_salt_check(self)
 ./tests/auth_tests/test_hashers.py:347:13    - Unknown word (algo)       -- for algo in ('sha1', 'md5'):
+./tests/auth_tests/test_hashers.py:41:34     - Unknown word (lètmein)    -- encoded = make_password('lètmein')
 ./tests/auth_tests/test_hashers.py:45:42     - Unknown word (lètmeinz)   -- assertFalse(check_password('lètmeinz', encoded))
 ./tests/auth_tests/test_hashers.py:547:55    - Unknown word (QOXS)       -- 1,p=1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO
 ./tests/auth_tests/test_hashers.py:547:59    - Unknown word (Nhxi)       -- 1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO'
@@ -1146,12 +1153,14 @@ Lines:
 ./tests/db_functions/comparison/test_nullif.py:19:43     - Unknown word (nullif)     -- Author.objects.annotate(nullif=NullIf('alias', 'name
 ./tests/db_functions/datetime/test_extract_trunc.py:1152:13   - Unknown word (melb)       -- for melb in self.get_timezones
 ./tests/db_functions/tests.py:63:57     - Unknown word (SMITHJ)     -- John Smith', alias='SMITHJ')
+./tests/db_functions/text/test_chr.py:13:49     - Unknown word (Élena)      -- objects.create(name='Élena Jordan', alias='elena
 ./tests/db_functions/text/test_concat.py:22:53     - Unknown word (adnoh)      -- name='Rhonda', alias='adnohR')
 ./tests/db_functions/text/test_left.py:16:71     - Unknown word (Rhond)      -- 'name'), ['John ', 'Rhond'], lambda a: a.name
 ./tests/db_functions/text/test_pad.py:15:45     - Unknown word (Johnxyx)    -- , 7, Value('xy')), 'Johnxyx'),
 ./tests/db_functions/text/test_pad.py:17:44     - Unknown word (Johnxx)     -- name', 6, Value('x')), 'Johnxx'),
 ./tests/db_functions/text/test_reverse.py:26:33     - Unknown word (htim)       -- ('John Smith', 'htimS nhoJ'),
 ./tests/db_functions/text/test_reverse.py:27:35     - Unknown word (nadro)      -- ('Élena Jordan', 'nadroJ anelÉ'),
+./tests/db_functions/text/test_reverse.py:27:42     - Unknown word (anel)       -- lena Jordan', 'nadroJ anelÉ'),
 ./tests/db_functions/text/test_substr.py:28:51     - Unknown word (rhond)      -- name'), ['smithj', 'rhond'],
 ./tests/db_functions/window/test_validation.py:36:35     - Unknown word (ntile)      -- negative_num_buckets_ntile(self):
 ./tests/db_typecasts/tests.py:56:17     - Unknown word (inpt)       -- for inpt, expected in v:
@@ -1162,6 +1171,8 @@ Lines:
 ./tests/dbshell/test_mysql.py:50:14     - Unknown word (optiondbname) -- 'optiondbname',
 ./tests/dbshell/test_mysql.py:58:34     - Unknown word (settingdbname) -- 'NAME': 'settingdbname',
 ./tests/dbshell/test_mysql.py:92:28     - Unknown word (deprecatedoptiondbname) -- 'db': 'deprecatedoptiondbname',
+./tests/dbshell/test_postgresql.py:119:21    - Unknown word (rôle)       -- username = 'rôle'
+./tests/dbshell/test_postgresql.py:120:21    - Unknown word (sésame)     -- password = 'sésame'
 ./tests/dbshell/test_postgresql.py:33:14     - Unknown word (nopass)     -- def test_nopass(self):
 ./tests/decorators/tests.py:167:5     - Unknown word (myattr)     -- def myattr_dec(func):
 ./tests/decorators/tests.py:299:16    - Unknown word (argumented) -- # Test for argumented decorator
@@ -1195,7 +1206,9 @@ Lines:
 ./tests/files/tests.py:23:32     - Unknown word (webp)       -- WEBP = features.check('webp')
 ./tests/files/tests.py:23:9      - Unknown word (WEBP)       -- HAS_WEBP = features.check('webp
 ./tests/files/tests.py:334:44    - Unknown word (pngs)       -- dimensions fails on some pngs, while Image.size is
+./tests/files/tests.py:33:34     - Unknown word (Cómo)       -- UploadedFile(name='¿Cómo?', content_type='text
 ./tests/files/tests.py:350:9     - Unknown word (brokenimg)  -- brokenimg.png is not a valid image
+./tests/files/tests.py:37:25     - Unknown word (djángö)     -- f = File(None, 'djángö')
 ./tests/files/tests.py:396:33    - Unknown word (cifs)       -- test_file_move_copystat_cifs(self):
 ./tests/files/tests.py:424:38    - Unknown word (quux)       -- write(b"foo bar baz quux\n")
 ./tests/fixtures/models.py:4:63      - Unknown word (Fixure)     -- the database in bulk. Fixure data
@@ -1438,15 +1451,19 @@ Lines:
 ./tests/httpwrappers/tests.py:429:18    - Unknown word (привет)        -- r.write("привет")
 ./tests/httpwrappers/tests.py:565:25    - Unknown word (łóżko)         -- data = {'key': 'łóżko'}
 ./tests/httpwrappers/tests.py:756:27    - Unknown word (keebler)       -- parse_cookie('keebler="E=mc2; L=\\"Loves\
+./tests/httpwrappers/tests.py:788:46    - Unknown word (André)         -- parse_cookie('saint=André Bessette'), {'saint
 ./tests/httpwrappers/tests.py:788:52    - Unknown word (Bessette)      -- cookie('saint=André Bessette'), {'saint': 'André
 ./tests/humanize_tests/tests.py:140:40    - Unknown word (Millionen)  -- '1,0 Million', '1,2 Millionen', '1,3 Millionen',
 ./tests/humanize_tests/tests.py:141:18    - Unknown word (Milliarde)  -- '1,0 Milliarde', '2,0 Milliarden',
 ./tests/humanize_tests/tests.py:141:53    - Unknown word (Billionen)  -- 0 Milliarden', '6,0 Billionen',
+./tests/humanize_tests/tests.py:341:14    - Unknown word (před)       -- 'před 1\xa0dnem',
 ./tests/humanize_tests/tests.py:341:24    - Unknown word (dnem)       -- 'před 1\xa0dnem',
 ./tests/humanize_tests/tests.py:343:24    - Unknown word (měsícem)    -- 'před 1\xa0měsícem',
 ./tests/humanize_tests/tests.py:344:24    - Unknown word (měsíci)     -- 'před 2\xa0měsíci',
 ./tests/humanize_tests/tests.py:345:24    - Unknown word (rokem)      -- 'před 1\xa0rokem, 4\xa0měsíci',
 ./tests/humanize_tests/tests.py:346:24    - Unknown word (lety)       -- 'před 2\xa0lety, 4\xa0měsíci',
+./tests/humanize_tests/tests.py:349:22    - Unknown word (měsíc)      -- 'za 1\xa0měsíc',
+./tests/humanize_tests/tests.py:350:22    - Unknown word (měsíce)     -- 'za 2\xa0měsíce',
 ./tests/humanize_tests/tests.py:352:22    - Unknown word (roky)       -- 'za 2\xa0roky, 4\xa0měsíce',
 ./tests/i18n/commands/__init__.py:12:49     - Unknown word (Foos)       -- s Foo", "%(number)s Foos", number) % {'number
 ./tests/i18n/contenttypes/tests.py:25:57     - Unknown word (Société)    -- company_type), 'i18n | Société')
@@ -1462,6 +1479,7 @@ Lines:
 ./tests/i18n/test_compilation.py:51:33     - Unknown word (IREAD)      -- file_en.chmod(stat.S_IREAD)
 ./tests/i18n/test_extraction.py:143:28    - Unknown word (msgctxt)    -- self.assertIn('msgctxt "Special trans context
 ./tests/i18n/test_extraction.py:193:40    - Unknown word (áéíóúö)     -- non ASCII characters: áéíóúö',
+./tests/i18n/test_extraction.py:239:43    - Unknown word (vidéo)      -- join(self.test_dir, 'vidéo.txt'), 'a').close()
 ./tests/i18n/test_extraction.py:306:83    - Unknown word (thtml)      -- LOCALE], extensions=['thtml'], verbosity=0)
 ./tests/i18n/test_extraction.py:378:40    - Unknown word (tfile)      -- = {os.path.splitext(tfile.file)[1] for tfile in
 ./tests/i18n/test_extraction.py:396:25    - Unknown word (Ulrich)     -- "Written by Ulrich Drepper.\n", '', 0)
@@ -1475,7 +1493,9 @@ Lines:
 ./tests/i18n/test_percents.py:106:98    - Unknown word (disponible) -- interprété comme plus disponible')
 ./tests/i18n/test_percents.py:132:26    - Unknown word (signe)      -- expected = ('1 % signe pour cent, signes %
 ./tests/i18n/test_percents.py:132:43    - Unknown word (signes)     -- % signe pour cent, signes %% 2 pour cent, trois
+./tests/i18n/test_percents.py:70:21     - Unknown word (Littérale)  -- expected = 'Littérale avec un symbole de pour
 ./tests/i18n/test_percents.py:70:31     - Unknown word (avec)       -- expected = 'Littérale avec un symbole de pour cent
+./tests/i18n/test_percents.py:82:31     - Unknown word (littérale)  -- expected = 'Pour cent littérale % avec un symbole au
 ./tests/i18n/test_percents.py:97:58     - Unknown word (Elle)       -- render(Context({})), 'Elle est de 100%')
 ./tests/i18n/tests.py:1030:41   - Unknown word (Diciembre)  -- self.assertEqual('31 de Diciembre de 2009', date_format
 ./tests/i18n/tests.py:1228:46   - Unknown word (Dezember)   -- localized = '1.455/3,14/31. Dezember 2016'
@@ -1525,7 +1545,7 @@ Lines:
 ./tests/inspectdb/tests.py:137:46    - Unknown word (textfielddbcollation) -- inspectdb', 'inspectdb_textfielddbcollation', stdout=out)
 ./tests/inspectdb/tests.py:281:38    - Unknown word (Findex)               -- CREATE UNIQUE INDEX Findex ON %s '
 ./tests/inspectdb/tests.py:308:26    - Unknown word (myfields)             -- 'text': 'myfields.TextField',
-./tests/invalid_models_tests/test_models.py:1380:13   - Unknown word (foos)       -- foos = models.ManyToManyField
+./tests/invalid_models_tests/test_models.py:1379:13   - Unknown word (foos)       -- foos = models.ManyToManyField
 ./tests/invalid_models_tests/test_models.py:311:35    - Unknown word (sindex)     -- "The index name '%sindex_name' cannot start with
 ./tests/invalid_models_tests/test_models.py:664:48    - Unknown word (msimple)    -- name='rn2', through='m2msimple',
 ./tests/invalid_models_tests/test_models.py:669:28    - Unknown word (mcomplex)   -- through='m2mcomplex',
@@ -1560,10 +1580,13 @@ Lines:
 ./tests/mail/tests.py:1427:9    - Unknown word (ehlo)       -- def ehlo(self, name=''):
 ./tests/mail/tests.py:1429:14   - Unknown word (esmtp)      -- self.esmtp_features.update({
 ./tests/mail/tests.py:1626:9    - Unknown word (myemailbackend) -- myemailbackend = MyEmailBackend()
+./tests/mail/tests.py:319:26    - Unknown word (Sürname)    -- ['"Firstname Sürname" <to@example.com>',
 ./tests/mail/tests.py:323:40    - Unknown word (Crname)     -- 8?q?Firstname_S=C3=BCrname?= <to@example.com>,
 ./tests/mail/tests.py:336:14    - Unknown word (Gżegżółka)  -- 'Gżegżółka', 'Content', 'from@example
+./tests/mail/tests.py:461:25    - Unknown word (pièce)      -- msg.attach("une pièce jointe.pdf", b"%PDF
 ./tests/mail/tests.py:461:31    - Unknown word (jointe)     -- msg.attach("une pièce jointe.pdf", b"%PDF-1.4.%.
 ./tests/mail/tests.py:6:8       - Unknown word (smtpd)      -- import smtpd
+./tests/mail/tests.py:769:18    - Unknown word (éxample)    -- ('to@éxample.com', 'utf-8', 'to@xn
 ./tests/mail/tests.py:769:49    - Unknown word (xample)     -- com', 'utf-8', 'to@xn--xample-9ua.com'),
 ./tests/mail/tests.py:818:50    - Unknown word (exampl)     -- very long' * 4, 'to@exampl€.com'),
 ./tests/mail/tests.py:949:31    - Unknown word (Chère)      -- email = EmailMessage('Chère maman', 'Je t\'aime
@@ -1667,6 +1690,8 @@ Lines:
 ./tests/migrations/test_optimizer.py:115:91    - Unknown word (Foozes)     -- verbose_name_plural': 'Foozes'}),
 ./tests/migrations/test_optimizer.py:179:27    - Unknown word (owrt)       -- def test_create_alter_owrt_delete_model(self):
 ./tests/migrations/test_optimizer.py:858:48    - Unknown word (Phou)       -- RenameModel("Foo", "Phou"),
+./tests/migrations/test_writer.py:258:37    - Unknown word (föobár)     -- assertSerializedEqual("föobár")
+./tests/migrations/test_writer.py:266:41    - Unknown word (nbár)       -- assertSerializedEqual("föo\nbár")
 ./tests/migrations/test_writer.py:793:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
 ./tests/model_fields/models.py:137:5     - Unknown word (nbfield)    -- nbfield = models.BooleanField
 ./tests/model_fields/models.py:141:5     - Unknown word (bfield)     -- bfield = models.BooleanField
@@ -1699,10 +1724,10 @@ Lines:
 ./tests/model_formsets_regress/tests.py:508:7     - Unknown word (Redelete)   -- class RedeleteTests(TestCase):
 ./tests/model_indexes/models.py:8:67      - Unknown word (tbls)       -- db_tablespace='idx_tbls')
 ./tests/model_indexes/tests.py:175:36    - Unknown word (suff)       -- field_index.suffix = 'suff'
-./tests/model_inheritance/tests.py:101:14    - Unknown word (custompk)   -- def test_custompk_m2m(self):
-./tests/model_inheritance/tests.py:103:50    - Unknown word (foof)       -- objects.create(title="foof"))
-./tests/model_inheritance/tests.py:239:19    - Unknown word (Ristorante) -- name="Ristorante Miron",
-./tests/model_inheritance/tests.py:239:30    - Unknown word (Miron)      -- name="Ristorante Miron",
+./tests/model_inheritance/tests.py:102:14    - Unknown word (custompk)   -- def test_custompk_m2m(self):
+./tests/model_inheritance/tests.py:104:50    - Unknown word (foof)       -- objects.create(title="foof"))
+./tests/model_inheritance/tests.py:270:19    - Unknown word (Ristorante) -- name="Ristorante Miron",
+./tests/model_inheritance/tests.py:270:30    - Unknown word (Miron)      -- name="Ristorante Miron",
 ./tests/model_inheritance_regress/tests.py:246:11    - Unknown word (mchildren)  -- m2mchildren = list(M2MChild.objects
 ./tests/model_inheritance_regress/tests.py:276:9     - Unknown word (derivedm)   -- derivedm1 = DerivedM.objects
 ./tests/model_inheritance_regress/tests.py:27:63     - Unknown word (CORBA)      -- erialization, but any sort of CORBA style
@@ -1789,9 +1814,11 @@ Lines:
 ./tests/requests/tests.py:204:65    - Unknown word (nijkl)      -- 4\n5678\nabcd\nefgh\nijkl'), 24)
 ./tests/requests/tests.py:214:48    - Unknown word (efgh)       -- stream.readline(4), b'efgh')
 ./tests/requests/tests.py:218:47    - Unknown word (ijkl)       -- stream.readline(), b'ijkl')
+./tests/requests/tests.py:284:50    - Unknown word (España)     -- akePayload(urlencode({'key': 'España'}))
 ./tests/requests/tests.py:37:24     - Unknown word (Bsome)      -- expected = '/%3Bsome/%3Fawful/%3Dpath/foo
 ./tests/requests/tests.py:37:32     - Unknown word (Fawful)     -- expected = '/%3Bsome/%3Fawful/%3Dpath/foo:bar/?;some
 ./tests/requests/tests.py:37:41     - Unknown word (Dpath)      -- /%3Bsome/%3Fawful/%3Dpath/foo:bar/?;some=query
+./tests/requests/tests.py:521:43    - Unknown word (Günter)     -- FakePayload('name=Hello Günter')
 ./tests/requests/tests.py:530:59    - Unknown word (Œnter)      -- {'name': ['Hello GĂŒnter']})
 ./tests/requests/tests.py:536:49    - Unknown word (Cnter)      -- 'name=Hello%20G%C3%BCnter',
 ./tests/requests/tests.py:540:69    - Unknown word (nter)       -- 'Hello G\u0102\u0152nter']})
@@ -1971,6 +1998,7 @@ Lines:
 ./tests/test_runner_apps/sample/tests_sample.py:21:11     - Unknown word (Zimple)     -- class TestZimpleTestCase(SimpleTestCase
 ./tests/test_utils/test_simpletestcase.py:70:30     - Unknown word (teardwn)    -- pre-setup and post-teardwn are called.
 ./tests/test_utils/test_testcase.py:128:24    - Unknown word (deutsh)         -- def test_book_name_deutsh(self):
+./tests/test_utils/test_testcase.py:130:30    - Unknown word (Käfer)          -- self.car.name = 'VW sKäfer'
 ./tests/test_utils/test_testcase.py:135:37    - Unknown word (Coccinelle)     -- car.name = 'Volkswagen Coccinelle'
 ./tests/test_utils/test_testcase.py:68:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
 ./tests/test_utils/test_testcase.py:98:14     - Unknown word (undeepcopyable) -- def test_undeepcopyable(self):
@@ -1999,7 +2027,9 @@ Lines:
 ./tests/utils_tests/test_baseconv.py:43:47     - Unknown word (hejd)       -- base7.encode(1234), 'hejd')
 ./tests/utils_tests/test_baseconv.py:45:48     - Unknown word (ghejd)      -- base7.encode(-1234), 'ghejd')
 ./tests/utils_tests/test_encoding.py:109:51    - Unknown word (чубака)     -- filepath_to_uri('upload\\чубака.mp4'), 'upload/%D1%
+./tests/utils_tests/test_encoding.py:116:21    - Unknown word (rosé)       -- ('red%09rosé#red', 'red%09ros%C3
 ./tests/utils_tests/test_encoding.py:117:25    - Unknown word (Jürgen)     -- ('/blog/for/Jürgen Münster/', '/blog/for
+./tests/utils_tests/test_encoding.py:117:32    - Unknown word (Münster)    -- ('/blog/for/Jürgen Münster/', '/blog/for/J%C3%BCrgen
 ./tests/utils_tests/test_encoding.py:117:60    - Unknown word (Crgen)      -- ', '/blog/for/J%C3%BCrgen%20M%C3%BCnster/'),
 ./tests/utils_tests/test_encoding.py:159:68    - Unknown word (xfcrgen)    -- BCnster/', '/blog/for/J\xfcrgen%20M\xfcnster/'),
 ./tests/utils_tests/test_encoding.py:159:80    - Unknown word (xfcnster)   -- blog/for/J\xfcrgen%20M\xfcnster/'),

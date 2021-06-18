@@ -38,4 +38,25 @@ describe('Validate English', () => {
         const r = await validateText(text, finalSettings);
         expect(r).toEqual([]);
     });
+
+    // cspell:ignore latviešu
+    test('validate some json', async () => {
+        const ext = '.json';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = { ...cspell.getDefaultSettings() };
+        const text = `
+        {
+            'bidi': False,
+            'code': 'lv',
+            'name': 'Latvian',
+            'name_local': 'latviešu',
+        }
+        `.normalize('NFD');
+
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        const finalSettings = cspell.finalizeSettings(fileSettings);
+
+        const r = await validateText(text, finalSettings);
+        expect(r.map((t) => t.text)).toEqual(['latviešu'.normalize('NFD')]);
+    });
 });
