@@ -78,11 +78,17 @@ function reportProgress(p: ProgressItem) {
         const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
         const idx = fn + '/' + fc;
         const filename = chalk.gray(relativeFilename(p.filename));
-        const time = p.elapsedTimeMs !== undefined ? chalk.white(p.elapsedTimeMs.toFixed(2) + 'ms') : '-';
+        const time = reportTime(p.elapsedTimeMs);
         const skipped = p.processed === false ? ' skipped' : '';
         const hasErrors = p.numErrors ? chalk.red` X` : '';
         console.error(`${idx} ${filename} ${time}${skipped}${hasErrors}`);
     }
+}
+
+function reportTime(elapsedTimeMs: number | undefined): string {
+    if (elapsedTimeMs === undefined) return '-';
+    const color = elapsedTimeMs < 1000 ? chalk.white : elapsedTimeMs < 2000 ? chalk.yellow : chalk.redBright;
+    return color(elapsedTimeMs.toFixed(2) + 'ms');
 }
 
 function getEmitters(options: Options): Emitters {

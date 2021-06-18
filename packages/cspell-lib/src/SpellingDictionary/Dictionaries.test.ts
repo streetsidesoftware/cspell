@@ -40,6 +40,7 @@ describe('Validate getDictionary', () => {
         expect(dict.has('Rhône', { ignoreCase: false })).toBe(true);
         expect(dict.has('RHÔNE', { ignoreCase: false })).toBe(true);
         expect(dict.has('rhône', { ignoreCase: false })).toBe(false);
+        expect(dict.has('RHÔNE', { ignoreCase: true })).toBe(true);
         expect(dict.has('rhône', { ignoreCase: true })).toBe(true);
         expect(dict.has('rhone', { ignoreCase: false })).toBe(false);
         expect(dict.has('rhone', { ignoreCase: true })).toBe(true);
