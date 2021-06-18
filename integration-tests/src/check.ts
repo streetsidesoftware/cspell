@@ -93,6 +93,11 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
         return Promise.resolve({ success: false, rep, elapsedTime: 0 });
     }
     log(time());
+    if (!(await execPostCheckoutSteps(context))) {
+        logger.log('******** fail ********');
+        return Promise.resolve({ success: false, rep, elapsedTime: 0 });
+    }
+    log(time());
     const cspellResult = await execCommand(logger, path, cspellCommand, rep.args);
     log(resultReport(cspellResult));
     const r = checkResult(rep, cspellResult, update);
@@ -125,6 +130,22 @@ async function execCommand(logger: Logger, path: string, command: string, args: 
         code,
         elapsedTime: Date.now() - start,
     });
+}
+
+async function execPostCheckoutSteps(context: CheckContext) {
+    const { rep, logger } = context;
+    const path = Path.join(repositoryDir, rep.path);
+
+    const steps = rep.postCheckoutSteps || [];
+    for (const step of steps) {
+        logger.log(`Step: %j`, step);
+        const r = await execCommand(logger, path, step, []);
+        if (r.code !== 0) {
+            logger.error(r.stderr);
+            return false;
+        }
+    }
+    return true;
 }
 
 function resultReport(result: Result) {
