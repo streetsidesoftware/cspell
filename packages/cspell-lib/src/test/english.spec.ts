@@ -25,12 +25,13 @@ describe('Validate English', () => {
     test('validate some text', async () => {
         const ext = '.txt';
         const languageIds = cspell.getLanguagesForExt(ext);
-        const settings = cspell.getDefaultSettings();
+        const settings = { ...cspell.getDefaultSettings(), words: ['é', 'î'] };
         const text = `
         Here are some words.
         thing and cpp are words.
         é'thing and î'cpp are ok.
         `;
+
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
         const finalSettings = cspell.finalizeSettings(fileSettings);
 

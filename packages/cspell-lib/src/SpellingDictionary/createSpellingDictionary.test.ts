@@ -34,6 +34,20 @@ describe('Validate createSpellingDictionary', () => {
         words.forEach((w) => expect(d.has(w)).toBe(true));
     });
 
+    test('createSpellingDictionary fa legacy', () => {
+        // cspell:disable-next-line
+        const words = ['آئینهٔ', 'آبادهٔ', 'کلاه'];
+        expect(words).toEqual(words.map((w) => w.normalize('NFC')));
+        const d = createSpellingDictionary(
+            words.map((w) => w.replace(/\p{M}/gu, '')),
+            'test create',
+            __filename,
+            { caseSensitive: false }
+        );
+        expect(d.has(words[0])).toBe(true);
+        words.forEach((w) => expect(d.has(w)).toBe(true));
+    });
+
     // cspell:ignore Geschäft Aujourd'hui
     test('createSpellingDictionary accents', () => {
         const words = ['Geschäft'.normalize('NFD'), 'café', 'book', "Aujourd'hui"];

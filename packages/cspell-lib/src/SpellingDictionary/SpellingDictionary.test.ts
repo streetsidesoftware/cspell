@@ -146,21 +146,21 @@ describe('Validate wordSearchForms', () => {
         ${'House'}                  | ${true}         | ${false}   | ${['House', 'house']}
         ${'HOUSE'}                  | ${false}        | ${false}   | ${['house']}
         ${'HOUSE'}                  | ${true}         | ${false}   | ${['HOUSE', 'House', 'house']}
-        ${'café'}                   | ${false}        | ${false}   | ${['cafe', 'café']}
+        ${'café'}                   | ${false}        | ${false}   | ${['café']}
         ${'café'}                   | ${true}         | ${false}   | ${['café']}
         ${'café'}                   | ${true}         | ${true}    | ${['café']}
-        ${'Café'}                   | ${false}        | ${false}   | ${['cafe', 'café']}
-        ${'Café'}                   | ${false}        | ${true}    | ${['cafe', 'café']}
+        ${'Café'}                   | ${false}        | ${false}   | ${['café']}
+        ${'Café'}                   | ${false}        | ${true}    | ${['café']}
         ${'Café'}                   | ${true}         | ${false}   | ${['Café', 'café']}
         ${'Café'}                   | ${true}         | ${true}    | ${['café']}
-        ${'CAFÉ'}                   | ${false}        | ${false}   | ${['cafe', 'café']}
-        ${'CAFÉ'}                   | ${false}        | ${true}    | ${['cafe', 'café']}
+        ${'CAFÉ'}                   | ${false}        | ${false}   | ${['café']}
+        ${'CAFÉ'}                   | ${false}        | ${true}    | ${['café']}
         ${'CAFÉ'}                   | ${true}         | ${false}   | ${['CAFÉ', 'Café', 'café']}
         ${'CAFÉ'}                   | ${true}         | ${true}    | ${['café']}
-        ${'café'.normalize()}       | ${false}        | ${false}   | ${['cafe', 'café']}
-        ${'café'.normalize('NFD')}  | ${false}        | ${false}   | ${['cafe', 'café']}
-        ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['cafe', 'café']}
-        ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['cafe', 'café']}
+        ${'café'.normalize()}       | ${false}        | ${false}   | ${['café']}
+        ${'café'.normalize('NFD')}  | ${false}        | ${false}   | ${['café']}
+        ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['café']}
+        ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['café']}
     `('$word $isCaseSensitive $ignoreCase $expected', ({ word, isCaseSensitive, ignoreCase, expected }) => {
         const words = __testMethods.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
         expect(words.sort()).toEqual(expected.sort());

@@ -35,7 +35,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         size?: number
     ) {
         this.mapWord = createMapper(options.repMap || []);
-        this.isDictionaryCaseSensitive = options.caseSensitive || !trie.isLegacy;
+        this.isDictionaryCaseSensitive = options.caseSensitive ?? !trie.isLegacy;
         this._size = size || 0;
     }
     public get size(): number {

@@ -22,18 +22,9 @@ export function refreshDictionaryCache(maxAge?: number): Promise<void> {
 }
 
 export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
-    const {
-        words = [],
-        userWords = [],
-        dictionaries = [],
-        dictionaryDefinitions = [],
-        flagWords = [],
-        caseSensitive = false,
-    } = settings;
+    const { words = [], userWords = [], dictionaries = [], dictionaryDefinitions = [], flagWords = [] } = settings;
     const spellDictionaries = loadDictionaries(dictionaries, dictionaryDefinitions);
-    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings', {
-        caseSensitive,
-    });
+    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings');
     return createCollectionP(
         [...spellDictionaries, Promise.resolve(settingsDictionary)],
         'dictionary collection',
