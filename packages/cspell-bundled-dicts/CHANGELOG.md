@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.6](https://github.com/streetsidesoftware/cspell/compare/v5.6.5...v5.6.6) (2021-06-18)
+
+
+### Bug Fixes
+
+* publishing issue with cspell-bundled-dicts ([8a43bc5](https://github.com/streetsidesoftware/cspell/commit/8a43bc5fa494b27d3ed2e4ab4f1d516b80225961))
+
+
+
+
+
 ## [5.6.5](https://github.com/streetsidesoftware/cspell/compare/v5.6.4...v5.6.5) (2021-06-18)
 
 
