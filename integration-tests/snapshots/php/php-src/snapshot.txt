@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1824, Issues found: 19827 in 1090 files
+ CSpell: Files checked: 1824, Issues found: 19826 in 1090 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -2461,8 +2461,8 @@ Lines:
 ./ext/opcache/jit/zend_jit_gdb.c:310:11    - Unknown word (framep)     -- uint8_t *framep = p;
 ./ext/opcache/jit/zend_jit_gdb.c:404:9     - Unknown word (DLNE)       -- #define DLNE(op, s) (DB(DW_LNS_extended
 ./ext/opcache/jit/zend_jit_gdb.c:451:28    - Unknown word (initf)      -- typedef void (*zend_gdbjit_initf) (zend_gdbjit_ctx *ctx
-./ext/opcache/jit/zend_jit_helpers.c:1606:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
-./ext/opcache/jit/zend_jit_helpers.c:1683:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
+./ext/opcache/jit/zend_jit_helpers.c:1578:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
+./ext/opcache/jit/zend_jit_helpers.c:1655:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
 ./ext/opcache/jit/zend_jit_internal.h:348:32    - Unknown word (prcessed)   -- DONE, "already prcessed") \
 ./ext/opcache/jit/zend_jit_internal.h:399:24    - Unknown word (JITED)      -- define ZEND_JIT_TRACE_JITED (1<<4)
 ./ext/opcache/jit/zend_jit_internal.h:442:20    - Unknown word (ICALL)      -- ZEND_JIT_TRACE_DO_ICALL,
@@ -3612,14 +3612,14 @@ Lines:
 ./ext/phar/phar.c:1722:47   - Unknown word (bzipped)    -- unable to decompress bzipped phar archive \"%s\"
 ./ext/phar/phar.c:1905:74   - Unknown word (pharmy)     -- valid extension (phar://.pharmy/oops is invalid) */
 ./ext/phar/phar.c:2422:159  - Unknown word (uncompsize) -- = PHAR_ZIP_32(local.uncompsize) || entry->compressed
-./ext/phar/phar.c:2542:25   - Unknown word (mytime)     -- uint32_t manifest_len, mytime, loc, new_manifest_count
-./ext/phar/phar.c:2601:16   - Unknown word (suser)      -- zend_string *suser_stub;
-./ext/phar/phar.c:2714:38   - Unknown word (crcs)       -- necessary, calculate crcs, serialize meta-data
-./ext/phar/phar.c:3398:46   - Unknown word (phps)       -- html", PHAR_MIME_PHPS, "phps")
-./ext/phar/phar.c:3417:47   - Unknown word (htmls)      -- , PHAR_MIME_OTHER, "htmls")
-./ext/phar/phar.c:3602:60   - Unknown word (Davey)      -- original concept by Davey Shafik.");
-./ext/phar/phar.c:3602:66   - Unknown word (Shafik)     -- original concept by Davey Shafik.");
-./ext/phar/phar.c:3606:67   - Unknown word (Kientzle)   -- Copyright (c) 2003-2009 Tim Kientzle.");
+./ext/phar/phar.c:2540:25   - Unknown word (mytime)     -- uint32_t manifest_len, mytime, new_manifest_count
+./ext/phar/phar.c:2599:16   - Unknown word (suser)      -- zend_string *suser_stub;
+./ext/phar/phar.c:2712:38   - Unknown word (crcs)       -- necessary, calculate crcs, serialize meta-data
+./ext/phar/phar.c:3393:46   - Unknown word (phps)       -- html", PHAR_MIME_PHPS, "phps")
+./ext/phar/phar.c:3412:47   - Unknown word (htmls)      -- , PHAR_MIME_OTHER, "htmls")
+./ext/phar/phar.c:3597:60   - Unknown word (Davey)      -- original concept by Davey Shafik.");
+./ext/phar/phar.c:3597:66   - Unknown word (Shafik)     -- original concept by Davey Shafik.");
+./ext/phar/phar.c:3601:67   - Unknown word (Kientzle)   -- Copyright (c) 2003-2009 Tim Kientzle.");
 ./ext/phar/phar.c:814:72    - Unknown word (Phars)      -- have zero entries.  Phars must have at least
 ./ext/phar/phar.c:848:25    - Unknown word (GBMB)       -- memcmp(sig_buf+4, "GBMB", 4)) {
 ./ext/phar/phar/phar.php:43:28     - Unknown word (classname)  -- function command_autoload($classname)
@@ -3658,9 +3658,9 @@ Lines:
 ./ext/phar/util.c:1495:10   - Unknown word (pfile)      -- char *pfile;
 ./ext/phar/zip.c:123:39    - Unknown word (cdtime)     -- phar_zip_d2u_time(char *cdtime, char *cddate) /* {
 ./ext/phar/zip.c:125:35    - Unknown word (ddate)      -- PHAR_GET_16(cdtime), ddate = PHAR_GET_16(cddate
-./ext/phar/zip.c:1363:46   - Unknown word (szip)       -- unable to %s stub in%szip-based phar \"%s\", failed
-./ext/phar/zip.c:1405:1    - Unknown word (fperror)    -- fperror:
-./ext/phar/zip.c:1445:1    - Unknown word (nocentralerror) -- nocentralerror:
+./ext/phar/zip.c:1360:46   - Unknown word (szip)       -- unable to %s stub in%szip-based phar \"%s\", failed
+./ext/phar/zip.c:1402:1    - Unknown word (fperror)    -- fperror:
+./ext/phar/zip.c:1442:1    - Unknown word (nocentralerror) -- nocentralerror:
 ./ext/phar/zip.c:146:18    - Unknown word (cdate)      -- uint16_t ctime, cdate;
 ./ext/phar/zip.c:164:24    - Unknown word (eocd)       -- static char *phar_find_eocd(const char *s, size
 ./ext/phar/zip.c:179:56    - Unknown word (EOCD)       -- looks like the proper EOCD signature */
@@ -3784,13 +3784,13 @@ Lines:
 ./ext/sockets/sendrecvmsg.c:83:23     - Unknown word (registery)  -- static void ancillary_registery_free_elem(zval *el)
 ./ext/sockets/sendrecvmsg.c:98:19     - Unknown word (sizev)      -- #define PUT_ENTRY(sizev, var_size, calc, from
 ./ext/sockets/sockaddr_conv.h:1:13      - Unknown word (SOCKADR)    -- #ifndef PHP_SOCKADR_CONV_H
-./ext/sockets/sockets.c:1465:46   - Unknown word (Ozll)       -- parameters(ZEND_NUM_ARGS(), "Ozll", &php_sock_res, socket
-./ext/sockets/sockets.c:1506:46   - Unknown word (Osll)       -- parameters(ZEND_NUM_ARGS(), "Osll", &arg1, socket_ce,
-./ext/sockets/sockets.c:1548:46   - Unknown word (Ozllz)      -- parameters(ZEND_NUM_ARGS(), "Ozllz|z", &arg1, socket_ce
-./ext/sockets/sockets.c:1667:46   - Unknown word (Oslls)      -- parameters(ZEND_NUM_ARGS(), "Oslls|l!", &arg1, socket_ce
-./ext/sockets/sockets.c:1880:46   - Unknown word (Ollz)       -- parameters(ZEND_NUM_ARGS(), "Ollz", &arg1, socket_ce,
-./ext/sockets/sockets.c:2027:46   - Unknown word (lllz)       -- parameters(ZEND_NUM_ARGS(), "lllz", &domain, &type, &protocol
-./ext/sockets/sockets.c:2341:15   - Unknown word (zhints)     -- zval *hint, *zhints = NULL;
+./ext/sockets/sockets.c:1471:46   - Unknown word (Ozll)       -- parameters(ZEND_NUM_ARGS(), "Ozll", &php_sock_res, socket
+./ext/sockets/sockets.c:1512:46   - Unknown word (Osll)       -- parameters(ZEND_NUM_ARGS(), "Osll", &arg1, socket_ce,
+./ext/sockets/sockets.c:1554:46   - Unknown word (Ozllz)      -- parameters(ZEND_NUM_ARGS(), "Ozllz|z", &arg1, socket_ce
+./ext/sockets/sockets.c:1673:46   - Unknown word (Oslls)      -- parameters(ZEND_NUM_ARGS(), "Oslls|l!", &arg1, socket_ce
+./ext/sockets/sockets.c:1886:46   - Unknown word (Ollz)       -- parameters(ZEND_NUM_ARGS(), "Ollz", &arg1, socket_ce,
+./ext/sockets/sockets.c:2033:46   - Unknown word (lllz)       -- parameters(ZEND_NUM_ARGS(), "lllz", &domain, &type, &protocol
+./ext/sockets/sockets.c:2347:15   - Unknown word (zhints)     -- zval *hint, *zhints = NULL;
 ./ext/sockets/sockets.stub.php:106:17    - Unknown word (addrinfo)   -- function socket_addrinfo_lookup(string $host
 ./ext/sockets/sockets.stub.php:115:17    - Unknown word (wsaprotocol) -- function socket_wsaprotocol_info_export(Socket
 ./ext/sockets/sockets.stub.php:81:13     - Unknown word (SOCKETPAIR) -- #ifdef HAVE_SOCKETPAIR
