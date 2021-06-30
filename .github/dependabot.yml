@@ -7,6 +7,7 @@ version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
+    versioning-strategy: increase
     schedule:
       interval: "weekly"
     ignore:
@@ -27,6 +28,7 @@ updates:
 
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
+    versioning-strategy: increase
     target-branch: "cspell4"
     schedule:
       interval: "weekly"
