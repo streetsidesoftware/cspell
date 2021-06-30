@@ -134,7 +134,7 @@ function getEmitters(options: Options): Emitters {
 }
 
 export async function run(program?: commander.Command, argv?: string[]): Promise<void> {
-    const prog = program || commander;
+    const prog = program || commander.program;
     const args = argv || process.argv;
 
     prog.exitOverride();
