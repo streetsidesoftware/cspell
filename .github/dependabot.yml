@@ -9,6 +9,15 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    ignore:
+      # Must wait until cspell version 6 to go ES Modules
+      - dependency-name: "get-stdin" # Needs ES Modules
+        versions: [">=9"]
+      - dependency-name: "configstore" # Needs ES Modules
+        versions: [">=6"]
+      - dependency-name: "strip-ansi" # Needs ES Modules
+        versions: [">=7"]
+
 
   - package-ecosystem: "github-actions"
     # Workflow files stored in the
