@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: actions/setup-node@v2.1.5
+      - uses: actions/setup-node@v2.2.0
       - run: npm ci
       - run: npm run build
       - run: npm run lint-ci
