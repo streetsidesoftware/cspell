@@ -71,6 +71,14 @@ export interface FileSettings extends ExtendableSettings {
      * @default false
      */
     noConfigSearch?: boolean;
+
+    /**
+     * Indicate that the configuration file should not be modified.
+     * This is used to prevent tools like the VS Code Spell Checker from
+     * modifying the file to add words and other configuration.
+     * @default false
+     */
+    readonly?: boolean;
 }
 
 export interface ExtendableSettings extends Settings {
@@ -544,11 +552,49 @@ export interface RegExpPatternDefinition {
 
 export type CSpellUserSettingsWithComments = CSpellUserSettings;
 
-export interface Source {
+// Remove BaseSource from the Source list when the code is ready.
+export type Source = FileSource | MergeSource | InMemorySource | BaseSource;
+
+export interface FileSource extends BaseSource {
+    /** name of source */
+    name: string;
+    /** filename if this came from a file. */
+    filename: string;
+    /** The two settings that were merged to */
+    sources?: undefined;
+    /** The configuration read. */
+    fileSource: CSpellSettings;
+}
+
+export interface MergeSource extends BaseSource {
+    /** name of source */
+    name: string;
+    /** filename if this came from a file. */
+    filename?: undefined;
+    /** The two settings that were merged to */
+    sources: [CSpellSettings] | [CSpellSettings, CSpellSettings];
+    /** The configuration read. */
+    fileSource?: undefined;
+}
+
+export interface InMemorySource extends BaseSource {
+    /** name of source */
+    name: string;
+    /** filename if this came from a file. */
+    filename?: undefined;
+    /** The two settings that were merged to */
+    sources?: undefined;
+    /** The configuration read. */
+    fileSource?: undefined;
+}
+
+interface BaseSource {
     /** name of source */
     name: string;
     /** filename if this came from a file. */
     filename?: string;
     /** The two settings that were merged to */
     sources?: [CSpellSettings] | [CSpellSettings, CSpellSettings];
+    /** The configuration read. */
+    fileSource?: CSpellSettings;
 }
