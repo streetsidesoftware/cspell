@@ -15,7 +15,8 @@
     "./cspell-default.json": "./cspell-default.json"
   },
   "scripts": {
-    "build": "cspell-tools-cli compile compatibility-words.txt"
+    "build-dict": "cspell-tools-cli compile compatibility-words.txt",
+    "test": "../../bin.js \"*.txt\""
   },
   "repository": {
     "type": "git",
