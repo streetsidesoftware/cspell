@@ -3,7 +3,7 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 1594, Issues found: 1611 in 541 files
+ CSpell: Files checked: 1594, Issues found: 1624 in 541 files
  exit code: 1
 ./README.md:20:179    - Unknown word (Dataplane)  -- RPs' Resource types or Dataplane API versions that represent
 ./README.md:30:134    - Unknown word (dataplane)  -- per resource type or dataplane service version. This
@@ -89,6 +89,7 @@ Lines:
 ./specification/azurearcdata/resource-manager/readme.md:63:22     - Unknown word (afterscript) -- - node sdkauto_afterscript.js azurearcdata/resource
 ./specification/azuredata/resource-manager/readme.csharp.md:14:40     - Unknown word (azuredata)  -- csharp-sdks-folder)/azuredata/Microsoft.Azure.Management
 ./specification/azurestackhci/resource-manager/readme.csharp.md:14:40     - Unknown word (azurestackhci) -- csharp-sdks-folder)/azurestackhci/Microsoft.Azure.Management
+./specification/batch/data-plane/readme.md:382:54    - Unknown word (resourcemanager) -- folder)/sdk/batch/azure-resourcemanager-batch
 ./specification/billing/resource-manager/readme.az.md:88:27     - Unknown word (connot)     -- # the three get API connot auto group for not
 ./specification/botservice/resource-manager/readme.md:43:36     - Unknown word (systemdata) -- don not yet support systemdata
 ./specification/cdn/resource-manager/readme.md:41:35     - Unknown word (afdx)       -- Cdn/stable/2020-09-01/afdx.json
@@ -127,7 +128,7 @@ Lines:
 ./specification/cpim/resource-manager/readme.csharp.md:8:40      - Unknown word (azureadb)   -- csharp-sdks-folder)/azureadb2c/management/Microsoft
 ./specification/customerlockbox/resource-manager/readme.csharp.md:14:40     - Unknown word (customerlockbox) -- csharp-sdks-folder)/customerlockbox/management/Microsoft
 ./specification/customproviders/resource-manager/readme.terraform.md:18:19     - Unknown word (resourceproviders) -- - IdPortion: "resourceproviders"
-./specification/databoxedge/resource-manager/readme.python.md:90:84     - Unknown word (datab)      -- databoxedge/azure/mgmt/datab
+./specification/databoxedge/resource-manager/readme.python.md:106:84    - Unknown word (datab)      -- databoxedge/azure/mgmt/datab
 ./specification/databricks/resource-manager/readme.md:77:42     - Unknown word (vnetpeering) -- Databricks/stable/2018-04-01/vnetpeering.json
 ./specification/datadog/resource-manager/readme.java.md:23:10     - Unknown word (ppackage)   -- ### Tag: ppackage-2021-03 and java
 ./specification/dataprotection/resource-manager/readme.go.md:9:14      - Unknown word (dataprotection) -- namespace: dataprotection
@@ -184,10 +185,11 @@ Lines:
 ./specification/monitor/resource-manager/readme.az.md:6:7       - Unknown word (AMCS)       -- - AMCS: true
 ./specification/monitor/resource-manager/readme.csharp.md:52:65     - Unknown word (asumming)   -- api-specs, clone it (asumming at C:\Repos)
 ./specification/monitor/resource-manager/readme.go.md:14:26     - Unknown word (armmonitor) -- module-name: sdk/monitor/armmonitor
-./specification/mysql/resource-manager/readme.go.md:27:1      - Unknown word (rpname)     -- rpname: mysql
-./specification/mysql/resource-manager/readme.go.md:28:12     - Unknown word (mysqlflexibleservers) -- namespace: mysqlflexibleservers
-./specification/mysql/resource-manager/readme.md:133:68    - Unknown word (reponse)    -- included in get operation reponse body
-./specification/mysql/resource-manager/readme.python.md:64:35     - Unknown word (flexibleservers) -- azure.mgmt.rdbms.mysql_flexibleservers
+./specification/mysql/resource-manager/readme.go.md:15:18     - Unknown word (flexibleserver) -- - tag: package-flexibleserver-2021-05-01-preview
+./specification/mysql/resource-manager/readme.go.md:28:1      - Unknown word (rpname)         -- rpname: mysql
+./specification/mysql/resource-manager/readme.go.md:29:12     - Unknown word (mysqlflexibleservers) -- namespace: mysqlflexibleservers
+./specification/mysql/resource-manager/readme.md:142:68    - Unknown word (reponse)    -- included in get operation reponse body
+./specification/mysql/resource-manager/readme.python.md:52:35     - Unknown word (flexibleservers) -- azure.mgmt.rdbms.mysql_flexibleservers
 ./specification/network/resource-manager/readme.cli.md:104:14    - Unknown word (routefilters)      -- - split: routefilters
 ./specification/network/resource-manager/readme.cli.md:111:14    - Unknown word (routefilterrules)  -- - split: routefilterrules
 ./specification/network/resource-manager/readme.cli.md:117:14    - Unknown word (virtualwans)       -- - split: virtualwans
@@ -254,7 +256,6 @@ Lines:
 ./specification/peering/resource-manager/readme.cli.md:25:18     - Unknown word (peercontactinfo)         -- "/properties/peercontactinfo": "*/"
 ./specification/peering/resource-manager/readme.cli.md:9:12      - Unknown word (peerasns)   -- "^.*[/]peerasns[/].*$": "peering asn
 ./specification/policyinsights/resource-manager/readme.md:65:39     - Unknown word (pagable)    -- operations API is not pagable.
-./specification/postgresql/resource-manager/readme.go.md:15:18     - Unknown word (flexibleserver) -- - tag: package-flexibleserver-2021-06
 ./specification/postgresql/resource-manager/readme.go.md:31:12     - Unknown word (postgresqlflexibleservers) -- namespace: postgresqlflexibleservers
 ./specification/postgresqlhsc/resource-manager/readme.az.md:7:17      - Unknown word (postgresqlhsc) -- extensions: postgresqlhsc
 ./specification/postgresqlhsc/resource-manager/readme.csharp.md:12:36     - Unknown word (SQLHSC)     -- Microsoft.DBforPostgreSQLHSC
@@ -280,7 +281,6 @@ Lines:
 ./specification/resources/resource-manager/readme.terraform.md:49:15     - Unknown word (newgen)     -- - Gen: "newgen"
 ./specification/saas/resource-manager/readme.md:64:47     - Unknown word (exsisting)  -- tenant level and its an exsisting API
 ./specification/search/data-plane/Azure.Search/readme.md:278:14    - Unknown word (subpackage) -- custom-types-subpackage: implementation.models
-./specification/search/data-plane/Azure.Search/readme.md:347:36    - Unknown word (POJOs)      -- serialization of both POJOs and Maps
 ./specification/search/data-plane/Azure.Search/readme.md:352:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
 ./specification/security/resource-manager/readme.csharp.md:18:40     - Unknown word (securitycenter) -- csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management
 ./specification/securityinsights/resource-manager/readme.md:161:20    - Unknown word (cheggert)   -- approved-by: "@cheggert"
@@ -300,7 +300,7 @@ Lines:
 ./specification/storagepool/resource-manager/readme.az.md:8:27      - Unknown word (storagepool) -- namespace: azure.mgmt.storagepool
 ./specification/synapse/data-plane/readme.go.md:49:12     - Unknown word (accesscontrol) -- namespace: accesscontrol
 ./specification/synapse/data-plane/readme.go.md:79:12     - Unknown word (managedvirtualnetwork) -- namespace: managedvirtualnetwork
-./specification/synapse/data-plane/readme.md:227:97    - Unknown word (proeprties)     -- Rp can't change these proeprties.
+./specification/synapse/data-plane/readme.md:228:97    - Unknown word (proeprties)     -- Rp can't change these proeprties.
 ./specification/synapse/data-plane/readme.md:79:48     - Unknown word (gitintegration) -- preview/2019-06-01-preview/gitintegration.json
 ./specification/synapse/data-plane/readme.python.md:44:29     - Unknown word (managedprivateendpoints) -- name: azure-synapse-managedprivateendpoints
 ./specification/testbase/resource-manager/readme.csharp.md:14:40     - Unknown word (testbase)   -- csharp-sdks-folder)/testbase/management/Microsoft
