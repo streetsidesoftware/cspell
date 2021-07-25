@@ -24,8 +24,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./lcov.info
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2.0.2
-        with:
-          directory: "."
-          files: ./lcov.info
+      # Do not upload to Codecov it only supports 1 comparison branch
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v2.0.2
+      #   with:
+      #     directory: "."
+      #     files: ./lcov.info
