@@ -7,14 +7,41 @@ on:
       - cspell4
 
 jobs:
-  test:
+  test-node-lts:
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         node-version:
+          - 10.x
           - 12.x
           - 14.x
+
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2.3.0
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+      - run: npm test
+      - run: node ./bin.js trace test
+      - run: node ./bin.js "**/{*.ts,*.md}"
+
+      # Ensure the repository is clean after build & test
+      - run: git --no-pager diff --compact-summary --exit-code
+
+  test-node-latest:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
           - 16.x
 
         os:
