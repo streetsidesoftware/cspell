@@ -16,7 +16,6 @@ jobs:
         uses: actions/setup-node@v2.3.0
 
       - run: npm ci
-
       - run: npm run coverage
 
       - name: Upload coverage Coveralls
@@ -28,4 +27,5 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.0.2
         with:
-          directory: ./packages/*/coverage/
+          directory: "."
+          files: ./lcov.info
