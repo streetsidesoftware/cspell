@@ -70,7 +70,13 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         const filter = (word: string) => {
             return !this.wordsToFlag.has(word.toLowerCase()) && (ignoreCase || word[0] !== prefixNoCase);
         };
-        const collector = suggestionCollector(word, numSuggestions, filter, numChanges);
+        const collector = suggestionCollector(word, {
+            numSuggestions,
+            filter,
+            changeLimit: numChanges,
+            includeTies: true,
+            ignoreCase,
+        });
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }

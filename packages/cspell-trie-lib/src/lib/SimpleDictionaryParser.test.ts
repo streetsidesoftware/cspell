@@ -57,7 +57,7 @@ describe('Validate SimpleDictionaryParser', () => {
         ${'BeginEn'}       | ${false}   | ${false} | ${['BeginEnd', 'Begin']}
         ${'BeginMidleEnd'} | ${false}   | ${false} | ${['BeginMiddleEnd', 'BeginEnd']}
         ${'beginmidleend'} | ${true}    | ${false} | ${[toL('BeginMiddleEnd'), 'BeginMiddleEnd', toL('BeginEnd'), 'BeginEnd']}
-        ${'BeginmidleEnd'} | ${true}    | ${false} | ${['BeginMiddleEnd', toL('BeginMiddleEnd'), 'BeginEnd', toL('BeginEnd')]}
+        ${'BeginmidleEnd'} | ${true}    | ${false} | ${['BeginMiddleEnd', toL('BeginMiddleEnd'), toL('BeginEnd'), 'BeginEnd']}
         ${'cafe'}          | ${false}   | ${false} | ${['Café']}
         ${'cafe'}          | ${true}    | ${true}  | ${['cafe', 'café', 'Café']}
         ${'cafë'}          | ${true}    | ${false} | ${['cafe', 'café', 'Café']}

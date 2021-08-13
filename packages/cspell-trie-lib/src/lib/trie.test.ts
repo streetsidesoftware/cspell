@@ -2,6 +2,7 @@ import { Trie, defaultTrieOptions } from './trie';
 import { isWordTerminationNode, orderTrie, normalizeWordToLowercase } from './util';
 import { suggestionCollector, CompoundWordsMethod } from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
+import { SuggestionCollectorOptions } from './suggest';
 
 describe('Validate Trie Class', () => {
     test('Tests creating a Trie', () => {
@@ -59,7 +60,7 @@ describe('Validate Trie Class', () => {
 
     test('tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
-        const collector = suggestionCollector('wall', 10);
+        const collector = suggestionCollector('wall', opts(10));
         trie.genSuggestions(collector);
         expect(collector.suggestions.map((a) => a.word)).toEqual(expect.arrayContaining(['walk']));
     });
@@ -341,3 +342,19 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
+
+function opts(
+    maxNumSuggestions: number,
+    filter?: SuggestionCollectorOptions['filter'],
+    changeLimit?: number,
+    includeTies?: boolean,
+    ignoreCase?: boolean
+): SuggestionCollectorOptions {
+    return {
+        numSuggestions: maxNumSuggestions,
+        filter,
+        changeLimit,
+        includeTies,
+        ignoreCase,
+    };
+}

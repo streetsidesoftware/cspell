@@ -107,7 +107,13 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         function filter(_word: string): boolean {
             return true;
         }
-        const collector = suggestionCollector(word, numSuggestions, filter, numChanges, undefined, ignoreCase);
+        const collector = suggestionCollector(word, {
+            numSuggestions,
+            filter,
+            changeLimit: numChanges,
+            includeTies: true,
+            ignoreCase,
+        });
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }
