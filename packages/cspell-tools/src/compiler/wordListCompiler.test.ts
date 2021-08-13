@@ -75,7 +75,7 @@ describe('Validate the wordListCompiler', () => {
             const normalizer = __testing__.createNormalizer({
                 skipNormalization: false,
                 splitWords: undefined,
-                keepCase: false,
+                keepRawCase: false,
                 sort: false,
                 legacy: true,
             });
@@ -92,7 +92,7 @@ describe('Validate the wordListCompiler', () => {
     // cspell:ignore niño
 
     test.each`
-        text                                        | expectedResult                                | splitWords | keepCase
+        text                                        | expectedResult                                | splitWords | keepRawCase
         ${'hello'}                                  | ${['hello']}                                  | ${true}    | ${true}
         ${'English'}                                | ${['English']}                                | ${true}    | ${true}
         ${'English'}                                | ${['English', '~english']}                    | ${true}    | ${false}
@@ -121,11 +121,11 @@ describe('Validate the wordListCompiler', () => {
         ${'CURLcode'}                               | ${['CURLcode']}                               | ${true}    | ${true}
         ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr_BadSig']}                  | ${true}    | ${true}
         ${'apd_get_active_symbols'}                 | ${['apd_get_active_symbols']}                 | ${true}    | ${true}
-    `('test normalizer line splitting $text $splitWords $keepCase', (testCase: NormalizeTestCase) => {
+    `('test normalizer line splitting $text $splitWords $keepRawCase', (testCase: NormalizeTestCase) => {
         const {
             skipNormalization = false,
             splitWords = false,
-            keepCase = false,
+            keepRawCase = false,
             sort = false,
             text,
             expectedResult,
@@ -133,7 +133,7 @@ describe('Validate the wordListCompiler', () => {
         const normalizer = __testing__.createNormalizer({
             skipNormalization,
             splitWords,
-            keepCase,
+            keepRawCase,
             sort,
             legacy: false,
         });
@@ -148,7 +148,7 @@ describe('Validate the wordListCompiler', () => {
             skipNormalization: false,
             splitWords: undefined,
             sort: true,
-            keepCase: false,
+            keepRawCase: false,
             legacy: true,
         });
         const output = await fsp.readFile(destName, 'utf8');
@@ -162,7 +162,7 @@ describe('Validate the wordListCompiler', () => {
             skipNormalization: false,
             splitWords: false,
             sort: true,
-            keepCase: false,
+            keepRawCase: false,
             legacy: false,
         });
         const output = await fsp.readFile(destName, 'utf8');
@@ -197,7 +197,7 @@ describe('Validate the wordListCompiler', () => {
         await compileTrie(source, destName, {
             skipNormalization: false,
             splitWords: undefined,
-            keepCase: false,
+            keepRawCase: false,
             sort: false,
             legacy: true,
         });
@@ -217,7 +217,7 @@ describe('Validate the wordListCompiler', () => {
         await compileTrie(source, destName, {
             skipNormalization: false,
             splitWords: undefined,
-            keepCase: false,
+            keepRawCase: false,
             sort: false,
             legacy: true,
         });
@@ -241,7 +241,7 @@ describe('Validate the wordListCompiler', () => {
             skipNormalization: false,
             splitWords: undefined,
             sort: true,
-            keepCase: false,
+            keepRawCase: false,
             legacy: true,
         });
         const output = await fsp.readFile(destName, 'utf8');
@@ -257,7 +257,7 @@ describe('Validate the wordListCompiler', () => {
             skipNormalization: false,
             splitWords: undefined,
             sort: true,
-            keepCase: false,
+            keepRawCase: false,
             legacy: true,
         });
         const output = await fsp.readFile(destName, 'utf8');

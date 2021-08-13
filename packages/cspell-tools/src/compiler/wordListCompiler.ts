@@ -67,18 +67,18 @@ function splitCamelCase(word: string): Sequence<string> | string[] {
 export interface CompileOptions {
     skipNormalization: boolean | undefined;
     splitWords: boolean | undefined;
-    keepCase: boolean;
+    keepRawCase: boolean;
     sort: boolean;
     legacy: boolean | undefined;
 }
 
 function createNormalizer(options: CompileOptions): Normalizer {
-    const { skipNormalization = false, splitWords, keepCase, legacy } = options;
+    const { skipNormalization = false, splitWords, keepRawCase, legacy } = options;
     if (skipNormalization) {
         return (lines: Sequence<string>) => lines;
     }
     const lineProcessor = legacy ? legacyLineToWords : splitWords ? splitLine : noSplit;
-    const wordMapper = keepCase ? mapWordIdentity : mapWordToLower;
+    const wordMapper = keepRawCase ? mapWordIdentity : mapWordToDictionaryEntries;
 
     const initialState: CompilerState = {
         inlineSettings: {},
@@ -89,6 +89,7 @@ function createNormalizer(options: CompileOptions): Normalizer {
     const fnNormalizeLines = (lines: Iterable<string>) =>
         normalizeWordListSeq(lines, initialState)
             .filter((a) => !!a)
+            .pipe(createInlineBufferedSort())
             .filter(uniqueFilter(10000));
 
     return fnNormalizeLines;
@@ -122,7 +123,7 @@ function createTarget(destFilename: string): (seq: Sequence<string>) => Promise<
     };
 }
 
-function mapWordToLower(w: string): Iterable<string> {
+function mapWordToDictionaryEntries(w: string): Iterable<string> {
     return Trie.parseDictionaryLines([w]);
 }
 
@@ -153,17 +154,37 @@ function* normalizeWordListGen(lines: Iterable<string>, initialState: CompilerSt
     }
 }
 
+function createInlineBufferedSort(bufferSize = 1000): (lines: Iterable<string>) => Iterable<string> {
+    function* inlineBufferedSort(lines: Iterable<string>): Iterable<string> {
+        const buffer: string[] = [];
+
+        for (const line of lines) {
+            buffer.push(line);
+            if (buffer.length >= bufferSize) {
+                buffer.sort();
+                yield* buffer;
+                buffer.length = 0;
+            }
+        }
+
+        buffer.sort();
+        yield* buffer;
+    }
+
+    return inlineBufferedSort;
+}
+
 function adjustState(state: CompilerState, line: string): CompilerState {
     const inlineSettings = extractInlineSettings(line);
     if (!inlineSettings) return state;
     const r = { ...state };
     r.inlineSettings = { ...r.inlineSettings, ...inlineSettings };
     r.wordMapper =
-        inlineSettings.keepCase === undefined
+        inlineSettings.keepRawCase === undefined
             ? r.wordMapper
-            : inlineSettings.keepCase
+            : inlineSettings.keepRawCase
             ? mapWordIdentity
-            : mapWordToLower;
+            : mapWordToDictionaryEntries;
     r.lineProcessor = inlineSettings.split === undefined ? r.lineProcessor : inlineSettings.split ? splitLine : noSplit;
     return r;
 }

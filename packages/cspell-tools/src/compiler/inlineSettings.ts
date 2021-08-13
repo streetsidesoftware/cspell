@@ -1,6 +1,6 @@
 export interface InlineSettings {
     split?: boolean;
-    keepCase?: boolean;
+    keepRawCase?: boolean;
     caseSensitive?: boolean;
 }
 
@@ -23,10 +23,10 @@ export function extractInlineSettings(line: string): InlineSettings | undefined 
                 settings.split = false;
                 break;
             case 'keep-case':
-                settings.keepCase = true;
+                settings.keepRawCase = true;
                 break;
             case 'no-keep-case':
-                settings.keepCase = false;
+                settings.keepRawCase = false;
                 break;
             case 'case-sensitive':
                 settings.caseSensitive = true;
