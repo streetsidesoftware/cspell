@@ -1,6 +1,6 @@
 import { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
-import { logError } from '../util/logger';
 import ConfigStore from 'configstore';
+import { logError } from '../util/logger';
 
 const packageName = 'cspell';
 
@@ -34,7 +34,9 @@ export function getRawGlobalSettings(): GlobalSettingsWithSource {
             };
         }
     } catch (error) {
-        logError(error);
+        if (!['ENOENT', 'EACCES', 'ENOTDIR', 'EISDIR'].includes(error.code)) {
+            logError(error);
+        }
     }
 
     return globalConf;

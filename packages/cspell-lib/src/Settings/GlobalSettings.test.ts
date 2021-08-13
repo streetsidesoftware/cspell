@@ -1,5 +1,5 @@
-import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 import Configstore from 'configstore';
+import { mocked } from 'ts-jest/utils';
 // eslint-disable-next-line jest/no-mocks-import
 import {
     clearData as clearConfigstore,
@@ -8,17 +8,18 @@ import {
     mockAll,
     mockSetData,
 } from '../__mocks__/configstore';
+import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 
-const mockLog = jest.fn();
-console.log = mockLog;
-jest.mock('configstore');
-
-const mockConfigstore = Configstore as jest.Mock<Configstore>;
+const mockLog = jest.spyOn(console, 'log').mockImplementation();
+const mockError = jest.spyOn(console, 'error').mockImplementation();
+const mockConfigstore = mocked(Configstore, true);
 
 describe('Validate GlobalSettings', () => {
     beforeEach(() => {
         mockConfigstore.mockClear();
         mockLog.mockClear();
+        mockError.mockClear();
+        mockAll.mockClear();
         clearMocks();
         clearConfigstore();
     });
@@ -84,4 +85,25 @@ describe('Validate GlobalSettings', () => {
         const error2 = writeRawGlobalSettings(updated);
         expect(error2).toBeInstanceOf(Error);
     });
+
+    test('No Access to global settings files', () => {
+        mockAll.mockImplementation(() => {
+            throw new SystemLikeError('permission denied', 'EACCES');
+        });
+        const s = getRawGlobalSettings();
+        expect(mockError).toHaveBeenCalledTimes(0);
+        expect(mockLog).toHaveBeenCalledTimes(0);
+        expect(s).toEqual({
+            source: {
+                name: 'CSpell Configstore',
+                filename: undefined,
+            },
+        });
+    });
 });
+
+class SystemLikeError extends Error {
+    constructor(msg: string, readonly code: string) {
+        super(msg);
+    }
+}
