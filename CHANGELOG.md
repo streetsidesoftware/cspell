@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.6.7](https://github.com/streetsidesoftware/cspell/compare/v5.6.6...v5.6.7) (2021-08-13)
+
+
+### Bug Fixes
+
+* error output when configstore dir not accessible. ([#1512](https://github.com/streetsidesoftware/cspell/issues/1512)) ([68a63d1](https://github.com/streetsidesoftware/cspell/commit/68a63d16215b551a9fa32ac5ef1cd8e12cb26ec5)), closes [#1510](https://github.com/streetsidesoftware/cspell/issues/1510)
+* Fix issue with suggestions. ([#1507](https://github.com/streetsidesoftware/cspell/issues/1507)) ([6a44e26](https://github.com/streetsidesoftware/cspell/commit/6a44e26ba37af882f6330d054df9c05ec8f9b0d9))
+* ignore TrueTypeFont files ([#1445](https://github.com/streetsidesoftware/cspell/issues/1445)) ([336c77f](https://github.com/streetsidesoftware/cspell/commit/336c77fbc4eab882cc8d1720ffc5ef514a05d2e6))
+
+
+### Reverts
+
+* Revert "build(deps): bump codecov/codecov-action from 1.5.2 to 2.0.1 (#1438)" (#1446) ([cbffbb8](https://github.com/streetsidesoftware/cspell/commit/cbffbb827b4d47e4ba9ca8bbe5d5ac2c2af75f45)), closes [#1438](https://github.com/streetsidesoftware/cspell/issues/1438) [#1446](https://github.com/streetsidesoftware/cspell/issues/1446)
+
+
+
+
+
 ## [5.6.6](https://github.com/streetsidesoftware/cspell/compare/v5.6.5...v5.6.6) (2021-06-18)
 
 
