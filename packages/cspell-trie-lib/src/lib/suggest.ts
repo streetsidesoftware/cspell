@@ -10,7 +10,7 @@ const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
 const maxNumChanges = 5;
 const insertSpaceCost = -1;
-const mapSubCost = 10;
+const mapSubCost = 1;
 const maxCostScale = 0.5;
 // max allowed cost scale should be a bit over 50% to allow for suggestions to short words, but not too high to have too many suggestions.
 const maxAllowedCostScale = 1.03 * maxCostScale;
@@ -44,12 +44,17 @@ export type SuggestionIterator = Generator<SuggestionResult, undefined, MaxCost 
 export function suggest(
     root: TrieRoot | TrieRoot[],
     word: string,
-    maxNumSuggestions: number = defaultMaxNumberSuggestions,
+    numSuggestions: number = defaultMaxNumberSuggestions,
     compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
     numChanges: number = maxNumChanges,
     ignoreCase?: boolean
 ): SuggestionResult[] {
-    const collector = suggestionCollector(word, maxNumSuggestions, undefined, numChanges, ignoreCase);
+    const collector = suggestionCollector(word, {
+        numSuggestions: numSuggestions,
+        changeLimit: numChanges,
+        includeTies: true,
+        ignoreCase,
+    });
     collector.collect(genSuggestions(root, word, compoundMethod));
     return collector.suggestions;
 }
@@ -252,17 +257,39 @@ export interface SuggestionCollector {
     readonly ignoreCase?: boolean;
 }
 
-export function suggestionCollector(
-    wordToMatch: string,
-    maxNumSuggestions: number,
-    filter: (word: string, cost: number) => boolean = () => true,
-    changeLimit: number = maxNumChanges,
-    includeTies = false,
-    ignoreCase = true
-): SuggestionCollector {
+export interface SuggestionCollectorOptions {
+    /**
+     * number of best matching suggestions.
+     */
+    numSuggestions: number;
+
+    /**
+     * An optional filter function that can be used to limit remove unwanted suggestions.
+     * I.E. to remove forbidden terms.
+     */
+    filter?: (word: string, cost: number) => boolean;
+
+    /**
+     * The number of letters that can be changed when looking for a match
+     */
+    changeLimit: number | undefined;
+
+    /**
+     * Include suggestions with tied cost even if the number is greater than `numSuggestions`.
+     */
+    includeTies?: boolean;
+
+    /**
+     * specify if case / accents should be ignored when looking for suggestions.
+     */
+    ignoreCase: boolean | undefined;
+}
+
+export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector {
+    const { filter = () => true, changeLimit = maxNumChanges, includeTies = false, ignoreCase = true } = options;
+    const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = Math.min(baseCost * wordToMatch.length * maxAllowedCostScale, baseCost * changeLimit);
-    maxNumSuggestions = Math.max(maxNumSuggestions, 0) || 0;
 
     function dropMax() {
         if (sugs.size < 2) {
@@ -270,7 +297,7 @@ export function suggestionCollector(
             return;
         }
         const sorted = [...sugs.values()].sort(compSuggestionResults);
-        let i = maxNumSuggestions - 1;
+        let i = numSuggestions - 1;
         maxCost = sorted[i].cost;
         for (; i < sorted.length && sorted[i].cost <= maxCost; ++i) {
             /* empty */
@@ -296,7 +323,7 @@ export function suggestionCollector(
                 known.cost = Math.min(known.cost, cost);
             } else {
                 sugs.set(word, { word, cost });
-                if (cost < maxCost && sugs.size > maxNumSuggestions) {
+                if (cost < maxCost && sugs.size > numSuggestions) {
                     dropMax();
                 }
             }
@@ -315,8 +342,8 @@ export function suggestionCollector(
 
     function suggestions() {
         const sorted = [...sugs.values()].sort(compSuggestionResults);
-        if (!includeTies && sorted.length > maxNumSuggestions) {
-            sorted.length = maxNumSuggestions;
+        if (!includeTies && sorted.length > numSuggestions) {
+            sorted.length = numSuggestions;
         }
         return sorted;
     }
@@ -337,7 +364,7 @@ export function suggestionCollector(
             return wordToMatch;
         },
         get maxNumSuggestions() {
-            return maxNumSuggestions;
+            return numSuggestions;
         },
         includesTies: includeTies,
         ignoreCase,

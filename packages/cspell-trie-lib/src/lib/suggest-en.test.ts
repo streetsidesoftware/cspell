@@ -1,4 +1,10 @@
-import { genCompoundableSuggestions, suggestionCollector, suggest, SuggestionResult } from './suggest';
+import {
+    genCompoundableSuggestions,
+    suggestionCollector,
+    suggest,
+    SuggestionResult,
+    SuggestionCollectorOptions,
+} from './suggest';
 import { CompoundWordsMethod } from './walker';
 import { readTrie } from './dictionaries.test.helper';
 
@@ -37,7 +43,7 @@ describe('Validate English Suggestions', () => {
         'Tests suggestions "joyful"',
         async () => {
             const trie = await getTrie();
-            const collector = suggestionCollector('joyful', 8, undefined, 1);
+            const collector = suggestionCollector('joyful', opts(8, undefined, 1));
             collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.NONE));
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -52,7 +58,7 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore joyfull
-            const collector = suggestionCollector('joyfull', 8);
+            const collector = suggestionCollector('joyfull', opts(8));
             collector.collect(
                 genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
@@ -71,7 +77,7 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore onetwothreefour
-            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3.3);
+            const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3.3));
             collector.collect(
                 genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
@@ -89,7 +95,7 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore onetwothrefour
-            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
+            const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3));
             collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.JOIN_WORDS));
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -104,7 +110,7 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore onetwothrefour
-            const collector = suggestionCollector('onetwothreefour', 8, undefined, 3);
+            const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3));
             collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.JOIN_WORDS));
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -120,7 +126,7 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore testscomputesuggestions
-            const collector = suggestionCollector('testscomputesuggestions', 2, undefined, 3, true);
+            const collector = suggestionCollector('testscomputesuggestions', opts(2, undefined, 3, true));
             collector.collect(
                 genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
@@ -139,7 +145,7 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             // cspell:ignore testscompundsuggestions
-            const collector = suggestionCollector('testscompundsuggestions', 1, undefined, 3);
+            const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 3));
             collector.collect(
                 genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
             );
@@ -152,6 +158,22 @@ describe('Validate English Suggestions', () => {
         timeout
     );
 });
+
+function opts(
+    numSuggestions: number,
+    filter?: SuggestionCollectorOptions['filter'],
+    changeLimit?: number,
+    includeTies?: boolean,
+    ignoreCase?: boolean
+): SuggestionCollectorOptions {
+    return {
+        numSuggestions,
+        filter,
+        changeLimit,
+        includeTies,
+        ignoreCase,
+    };
+}
 
 function sr(...sugs: (string | ExpectedSuggestion)[]): ExpectedSuggestion[] {
     return sugs.map((s) => {

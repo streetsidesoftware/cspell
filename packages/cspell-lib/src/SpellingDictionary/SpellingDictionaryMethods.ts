@@ -48,7 +48,7 @@ export function impersonateCollector(collector: SuggestionCollector, word: strin
         get maxNumSuggestions() {
             return collector.maxNumSuggestions;
         },
-        includesTies: false,
+        includesTies: collector.includesTies,
         ignoreCase: collector.ignoreCase,
     };
 }
