@@ -179,6 +179,23 @@ describe('Validate the application', () => {
         log.mockRestore();
     });
 
+    test('app compile merge with defaults --keep-raw-case', async () => {
+        const commander = getCommander();
+        const targetDir = relPathTemp;
+        const target = 'merge.txt';
+        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
+        const cities = path.join(pathSamples, 'cities.txt');
+        const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
+        const log = jest.spyOn(console, 'log').mockImplementation();
+        const args = argv('compile', '--keep-raw-case', '-n', '-M', target, cities, exampleHunspell, '-o', targetDir);
+        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const words = await fs.readFile(path.join(targetDir, target), 'utf8');
+        expect(words).toMatchSnapshot();
+        expect(log).toHaveBeenCalled();
+
+        log.mockRestore();
+    });
+
     test('app no args', async () => {
         const commander = getCommander();
         const mock = jest.fn();

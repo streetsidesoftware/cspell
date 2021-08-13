@@ -80,7 +80,7 @@ describe('Validate the wordListCompiler', () => {
                 legacy: true,
             });
             const r = normalizer(genSequence(lines.split('\n'))).toArray();
-            expect(r).toEqual(expectedResult);
+            expect(r).toEqual(expectedResult.sort());
         }
     );
 
@@ -115,13 +115,13 @@ describe('Validate the wordListCompiler', () => {
         ${'Namespace DNSLookup'}                    | ${['Namespace', 'DNSLookup']}                 | ${true}    | ${true}
         ${'well-educated'}                          | ${['well-educated']}                          | ${true}    | ${true}
         ${'--abort-on-uncaught-exception'}          | ${['--abort-on-uncaught-exception']}          | ${true}    | ${true}
-        ${'corner café'}                            | ${['corner', 'café']}                         | ${true}    | ${true}
+        ${'corner café'}                            | ${['café', 'corner']}                         | ${true}    | ${true}
         ${'El Niño'}                                | ${['El', 'Niño']}                             | ${true}    | ${true}
         ${'El Nin\u0303o'}                          | ${['El', 'Niño']}                             | ${true}    | ${true}
         ${'CURLcode'}                               | ${['CURLcode']}                               | ${true}    | ${true}
         ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr_BadSig']}                  | ${true}    | ${true}
         ${'apd_get_active_symbols'}                 | ${['apd_get_active_symbols']}                 | ${true}    | ${true}
-    `('test normalizer line splitting $text $splitWords $keepRawCase', (testCase: NormalizeTestCase) => {
+    `('test normalizer line splitting "$text" $splitWords $keepRawCase', (testCase: NormalizeTestCase) => {
         const {
             skipNormalization = false,
             splitWords = false,
@@ -138,7 +138,7 @@ describe('Validate the wordListCompiler', () => {
             legacy: false,
         });
         const r = normalizer(genSequence(text.split('\n'))).toArray();
-        expect(r).toEqual(expectedResult);
+        expect(r).toEqual(expectedResult.sort());
     });
 
     test('reading and normalizing a file', async () => {
