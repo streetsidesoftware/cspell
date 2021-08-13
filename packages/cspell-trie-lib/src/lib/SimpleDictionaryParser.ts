@@ -22,6 +22,13 @@ const _defaultOptions: ParseDictionaryOptions = {
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
 
+/**
+ * Normalizes a dictionary words based upon prefix / suffixes.
+ * Case insensitive versions are also generated.
+ * @param lines - one word per line
+ * @param options - defines prefixes used when parsing lines.
+ * @returns words that have been normalized.
+ */
 export function parseDictionaryLines(
     lines: Iterable<string>,
     options: ParseDictionaryOptions = _defaultOptions

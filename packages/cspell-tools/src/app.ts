@@ -27,7 +27,7 @@ interface CompileCommonOptions {
     experimental: string[];
     split?: boolean;
     sort?: boolean;
-    keepCase?: boolean;
+    keepRawCase?: boolean;
     trie?: boolean;
     trie3?: boolean;
     trieBase?: string;
@@ -36,7 +36,7 @@ interface CompileCommonOptions {
 
 interface CompileOptions extends CompileCommonOptions {
     sort: boolean;
-    keepCase: boolean;
+    keepRawCase: boolean;
 }
 
 interface CompileTrieOptions extends CompileCommonOptions {
@@ -66,7 +66,7 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         .option('--split', 'Split each line', undefined)
         .option('--no-split', 'Treat each line as a dictionary entry, do not split')
         .option('--use-legacy-splitter', 'Do not use legacy line splitter logic.')
-        .option('--no-keep-case', 'Force words to lower case')
+        .option('--keep-raw-case', 'Do not normalize words before adding them to dictionary.')
         .option(
             '-x, --experimental <flag>',
             'Experimental flags, used for testing new concepts. Flags: compound',
@@ -141,7 +141,7 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
     );
     const experimental = new Set(options.experimental);
     const skipNormalization = experimental.has('compound');
-    const { keepCase: keepCase = true, split: splitWords = false, sort = true, useLegacySplitter: legacy } = options;
+    const { keepRawCase = false, split: splitWords = false, sort = true, useLegacySplitter: legacy } = options;
 
     const action = useTrie
         ? async (words: Sequence<string>, dst: string) => {
@@ -149,7 +149,7 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
                   ...options,
                   skipNormalization,
                   splitWords,
-                  keepCase,
+                  keepRawCase,
                   legacy,
                   base: parseNumber(options.trieBase),
                   sort: false,
@@ -160,7 +160,7 @@ async function processAction(src: string[], options: CompileCommonOptions): Prom
                   splitWords,
                   sort,
                   skipNormalization,
-                  keepCase,
+                  keepRawCase,
                   legacy,
               }).then(() => src);
           };
