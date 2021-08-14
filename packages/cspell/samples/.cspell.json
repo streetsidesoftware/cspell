@@ -14,6 +14,7 @@
     ],
     "maxNumberOfProblems": 10000,
     "ignorePaths": [
+        "forbidden-words.txt",
         "dictionaries/**",
         "node_modules/**",
         "vscode-extension/**",
@@ -26,7 +27,15 @@
     "flagWords": [
         "hte"
     ],
-    "dictionaryDefinitions": [],
+    "dictionaryDefinitions": [
+        {
+            "name": "forbidden-words",
+            "path": "./forbidden-words.txt"
+        }
+    ],
+    "dictionaries": [
+        "forbidden-words"
+    ],
     "languageSettings": [
         {
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex

@@ -1,16 +1,14 @@
-import * as Text from './util/text';
-import * as Dictionary from './SpellingDictionary';
+import { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Settings from './Settings';
+import * as Dictionary from './SpellingDictionary';
+import { CompoundWordsMethod } from './SpellingDictionary';
+import * as TV from './textValidator';
 
 export const diagSource = 'cSpell Checker';
 
-import { CSpellUserSettings } from '@cspell/cspell-types';
-import * as TV from './textValidator';
-import { CompoundWordsMethod } from './SpellingDictionary';
-
 export { IncludeExcludeOptions } from './textValidator';
 
-export interface ValidationIssue extends Text.TextOffset {
+export interface ValidationIssue extends TV.ValidationResult {
     suggestions?: string[];
 }
 

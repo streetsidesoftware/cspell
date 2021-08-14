@@ -7,6 +7,7 @@ import { genSequence } from 'gensequence';
 export interface TraceResult {
     word: string;
     found: boolean;
+    forbidden: boolean;
     dictName: string;
     dictSource: string;
     configSource: string;
@@ -50,6 +51,7 @@ export async function traceWords(words: string[], settings: CSpellSettings): Pro
             return dicts.dictionaries.map((dict) => ({
                 word,
                 found: dict.has(word),
+                forbidden: dict.isForbidden(word),
                 dictName: dict.name,
                 dictSource: dict.source,
                 configSource: config.name || '',

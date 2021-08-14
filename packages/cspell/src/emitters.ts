@@ -3,6 +3,7 @@ import { TextDocumentOffset, TextOffset } from 'cspell-lib';
 export interface Issue extends TextDocumentOffset {
     /** text surrounding the issue text */
     context: TextOffset;
+    isFlagged?: boolean;
     suggestions?: string[];
 }
 

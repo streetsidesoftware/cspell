@@ -85,6 +85,11 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         }
         return false;
     }
+
+    public isForbidden(word: string): boolean {
+        return this.trie.isForbiddenWord(word);
+    }
+
     public suggest(
         word: string,
         numSuggestions?: number,

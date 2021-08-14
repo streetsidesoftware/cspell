@@ -53,7 +53,7 @@ export function validateText(
     text: string,
     dict: SpellingDictionary,
     options: ValidationOptions
-): Sequence<Text.TextOffset> {
+): Sequence<ValidationResult> {
     const { maxNumberOfProblems = defaultMaxNumberOfProblems, maxDuplicateProblems = defaultMaxDuplicateProblems } =
         options;
 
@@ -109,7 +109,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         caseSensitive,
     });
 
-    function isIgnored(word: string) {
+    function isWordIgnored(word: string) {
         return ignoreDict.has(word, { ignoreCase });
     }
 
@@ -129,18 +129,21 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     };
 
     function testForFlaggedWord(wo: TextOffset): boolean {
-        return setOfFlagWords.has(wo.text) || setOfFlagWords.has(wo.text.toLowerCase());
+        const text = wo.text;
+        return setOfFlagWords.has(text) || setOfFlagWords.has(text.toLowerCase()) || dict.isForbidden(text);
     }
 
     function checkFlagWords(word: ValidationResult): ValidationResult {
-        const isFlagged = testForFlaggedWord(word);
+        const isIgnored = isWordIgnored(word.text);
+        const isFlagged = !isIgnored && testForFlaggedWord(word);
         word.isFlagged = isFlagged;
         return word;
     }
 
     function checkWord(word: ValidationResult, options: HasWordOptions): ValidationResult {
-        const isFlagged = testForFlaggedWord(word);
-        const isFound = isFlagged ? undefined : isWordValid(dict, word, word.line, options);
+        const isIgnored = isWordIgnored(word.text);
+        const { isFlagged = !isIgnored && testForFlaggedWord(word) } = word;
+        const isFound = isFlagged ? undefined : isIgnored || isWordValid(dict, word, word.line, options);
         return { ...word, isFlagged, isFound };
     }
 
@@ -167,7 +170,6 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 })
                 .map((wo) => (wo.isFlagged ? wo : checkWord(wo, hasWordOptions)))
                 .filter(rememberFilter((wo) => wo.isFlagged || !wo.isFound))
-                .filter(rememberFilter((wo) => !isIgnored(wo.text)))
                 .filter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))) // Filter out any repeated characters like xxxxxxxxxx
                 // get back the original text.
                 .map((wo) => ({
@@ -176,7 +178,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 }))
                 .toArray();
 
-            if (!codeWordResults.length || isIgnored(vr.text) || checkWord(vr, hasWordOptions).isFound) {
+            if (!codeWordResults.length || isWordIgnored(vr.text) || checkWord(vr, hasWordOptions).isFound) {
                 rememberFilter((_) => false)(vr);
                 return [];
             }

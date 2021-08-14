@@ -37,6 +37,7 @@ export interface SpellingDictionary {
     has(word: string, useCompounds: boolean): boolean;
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
+    isForbidden(word: string): boolean;
     suggest(
         word: string,
         numSuggestions?: number,

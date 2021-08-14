@@ -11,6 +11,7 @@ import { measurePromise } from './util/timer';
 import { extractPatterns, buildGlobMatcher, normalizeGlobsToRoot, extractGlobsFromMatcher } from './util/glob';
 import { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 import { URI } from 'vscode-uri';
+import { ValidationIssue } from '../../cspell-lib/dist/validator';
 
 export interface FileResult {
     fileInfo: FileInfo;
@@ -81,7 +82,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         return result;
     }
 
-    function mapIssue(tdo: TextDocumentOffset): Issue {
+    function mapIssue(tdo: TextDocumentOffset & ValidationIssue): Issue {
         const context = cfg.showContext
             ? extractContext(tdo, cfg.showContext)
             : { text: tdo.line.text.trimEnd(), offset: tdo.line.offset };
