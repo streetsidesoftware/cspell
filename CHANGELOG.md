@@ -6,12 +6,49 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 # [5.7.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.6.7...v5.7.0-alpha.0) (2021-08-14)
 
 
-### Features
+## Features
 
 * Support forbidden words in dictionaries ([#1516](https://github.com/streetsidesoftware/cspell/issues/1516)) ([8d7596b](https://github.com/streetsidesoftware/cspell/commit/8d7596b004100dd296e1058659e39eefc56c6f56))
 
+## Making Words Forbidden
 
+There are several ways to mark a word as forbidden:
 
+1. In a custom word list with words beginning with `!`.
+    ```
+    !forbiddenWord
+    ```
+2. In `words` section of `cspell` configuration:
+    ```
+    "words": [
+        "!forbiddenWord",
+        "configstore"
+    ],
+    ```
+3. In `flagWords` section of `cspell` configuration:
+    ```
+    "flagWords": ["forbiddenWord"]
+    ```
+
+### Overriding Forbidden words
+Sometimes it is necessary to allow a word even if it is forbidden.
+
+#### In a comment
+
+```js
+/**
+ * Do not mark `forbiddenWord` as incorrect.
+ * cspell:ignore forbiddenWord
+ */
+```
+
+#### In the `cspell` configuration
+
+```jsonc
+{
+    "ignoreWords": ["forbiddenWord"]
+}
+```
 
 
 ## [5.6.7](https://github.com/streetsidesoftware/cspell/compare/v5.6.6...v5.6.7) (2021-08-13)
