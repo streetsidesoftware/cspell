@@ -73,8 +73,12 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         } = suggestOptions;
         _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
         const prefixNoCase = CASE_INSENSITIVE_PREFIX;
-        const filter = (word: string) => {
-            return !this.wordsToFlag.has(word.toLowerCase()) && (ignoreCase || word[0] !== prefixNoCase);
+        const filter = (word: string, _cost: number) => {
+            return (
+                !this.wordsToFlag.has(word.toLowerCase()) &&
+                (ignoreCase || word[0] !== prefixNoCase) &&
+                !this.isForbidden(word)
+            );
         };
         const collector = suggestionCollector(word, {
             numSuggestions,
