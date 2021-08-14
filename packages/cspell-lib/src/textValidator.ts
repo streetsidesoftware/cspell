@@ -5,7 +5,7 @@ import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDic
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 import { split } from './util/wordSplitter';
-import { createSpellingDictionary } from './SpellingDictionary';
+import { createSpellingDictionary, SpellingDictionaryCollection } from './SpellingDictionary';
 
 export interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
@@ -98,7 +98,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         ignoreWords = [],
         allowCompoundWords = false,
         ignoreCase = true,
-        ignoreWordsAreCaseSensitive: caseSensitive = false,
+        ignoreWordsAreCaseSensitive: caseSensitive = true,
     } = options;
     const hasWordOptions: HasWordOptions = {
         ignoreCase,
@@ -108,6 +108,8 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     const ignoreDict = createSpellingDictionary(ignoreWords, '__ignore words__', 'ignore words', {
         caseSensitive,
     });
+
+    const dictCol = new SpellingDictionaryCollection([dict, ignoreDict], dict.name, []);
 
     function isWordIgnored(word: string) {
         return ignoreDict.has(word, { ignoreCase });
@@ -130,7 +132,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
 
     function testForFlaggedWord(wo: TextOffset): boolean {
         const text = wo.text;
-        return setOfFlagWords.has(text) || setOfFlagWords.has(text.toLowerCase()) || dict.isForbidden(text);
+        return setOfFlagWords.has(text) || setOfFlagWords.has(text.toLowerCase()) || dictCol.isForbidden(text);
     }
 
     function checkFlagWords(word: ValidationResult): ValidationResult {
@@ -143,7 +145,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     function checkWord(word: ValidationResult, options: HasWordOptions): ValidationResult {
         const isIgnored = isWordIgnored(word.text);
         const { isFlagged = !isIgnored && testForFlaggedWord(word) } = word;
-        const isFound = isFlagged ? undefined : isIgnored || isWordValid(dict, word, word.line, options);
+        const isFound = isFlagged ? undefined : isIgnored || isWordValid(dictCol, word, word.line, options);
         return { ...word, isFlagged, isFound };
     }
 
@@ -151,7 +153,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         function splitterIsValid(word: TextOffset): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
-                (!testForFlaggedWord(word) && isWordValid(dict, word, lineSegment, hasWordOptions))
+                (!testForFlaggedWord(word) && isWordValid(dictCol, word, lineSegment, hasWordOptions))
             );
         }
 
