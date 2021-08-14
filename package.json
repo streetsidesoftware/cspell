@@ -27,6 +27,7 @@
     "pub-version-pre": "lerna version --conventional-commits --conventional-prerelease",
     "pub-version-grad": "lerna version --conventional-commits --conventional-graduate",
     "pub": "npm install && npm test && lerna publish --conventional-commits",
+    "pub-grad": "npm install && npm test && lerna publish --conventional-commits --conventional-graduate",
     "pub-next": "npm install && npm test && lerna publish --conventional-commits --conventional-prerelease --dist-tag next",
     "symlink": "node build_tools/bin/symlink.js packages test-packages",
     "test-watch": "lerna run --parallel test-watch",
