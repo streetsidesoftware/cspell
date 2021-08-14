@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.7.1](https://github.com/streetsidesoftware/cspell/compare/v5.7.0...v5.7.1) (2021-08-14)
+
+
+### Bug Fixes
+
+* do not return forbidden words in suggestions ([#1519](https://github.com/streetsidesoftware/cspell/issues/1519)) ([a9936d6](https://github.com/streetsidesoftware/cspell/commit/a9936d6b473a6e198fd58a2e3f38c4de52321b45))
+* Make sure hyphenated words work in ignoreWords ([#1520](https://github.com/streetsidesoftware/cspell/issues/1520)) ([81a86c7](https://github.com/streetsidesoftware/cspell/commit/81a86c7e9e34c5196114d2ba127059734b6fb53f)), closes [#1497](https://github.com/streetsidesoftware/cspell/issues/1497)
+
+
+
+
+
 # [5.7.0](https://github.com/streetsidesoftware/cspell/compare/v5.7.0-alpha.0...v5.7.0) (2021-08-14)
 
 **Note:** Version bump only for package cspell-monorepo
