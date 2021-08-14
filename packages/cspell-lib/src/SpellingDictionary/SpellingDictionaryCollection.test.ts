@@ -22,7 +22,8 @@ describe('Verify using multiple dictionaries', () => {
     ];
     const wordsB = ['ape', 'lion', 'tiger', 'elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
-    const wordsD = ['red*', 'green*', 'blue*', 'pink*', 'black*', '*berry', '+-fruit'];
+    const wordsD = ['red*', 'green*', 'blue*', 'pink*', 'black*', '*berry', '+-fruit', '*bug', 'pinkie'];
+    const wordsF = ['!pink*', '+berry', '+bug', '!stinkbug'];
     test('checks for existence', async () => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test'),
@@ -111,6 +112,73 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugs).toHaveLength(1);
         expect(sugs).not.toContain('apple+mango');
         expect(sugs).toContain('apple mango');
+    });
+
+    test.each`
+        word            | expected
+        ${'redberry'}   | ${true}
+        ${'pink'}       | ${true}
+        ${'bug'}        | ${true}
+        ${'blackberry'} | ${true}
+        ${'pinkbug'}    | ${true}
+    `('checks has word: "$word"', ({ word, expected }) => {
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsD, 'wordsD', 'test'),
+            createSpellingDictionary(wordsF, 'wordsF', 'test'),
+        ];
+
+        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        expect(dictCollection.has(word)).toEqual(expected);
+    });
+
+    // cspell:ignore pinkbug redberry
+    // Note: `pinkbug` is not forbidden because compound forbidden words is not yet supported.
+    test.each`
+        word            | expected
+        ${'redberry'}   | ${false}
+        ${'pink'}       | ${true}
+        ${'bug'}        | ${false}
+        ${'blackberry'} | ${false}
+        ${'stinkbug'}   | ${true}
+        ${'pinkbug'}    | ${false}
+    `('checks forbid word: "$word"', ({ word, expected }) => {
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsD, 'wordsD', 'test'),
+            createSpellingDictionary(wordsF, 'wordsF', 'test'),
+        ];
+
+        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        expect(dictCollection.isForbidden(word)).toEqual(expected);
+    });
+
+    function sr(word: string, cost: number) {
+        return { word, cost };
+    }
+
+    test.each`
+        word            | expected
+        ${'redberry'}   | ${[sr('redberry', 0), sr('red berry', 105)]}
+        ${'pink'}       | ${[sr('pinkie', 189)]}
+        ${'bug'}        | ${[sr('bug', 5)]}
+        ${'blackberry'} | ${[sr('blackberry', 0), sr('black berry', 98)]}
+        ${'stinkbug'}   | ${[sr('stink bug', 103), sr('pinkbug', 198)]}
+    `('checks suggestions word: "$word"', ({ word, expected }) => {
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test'),
+            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsD, 'wordsD', 'test'),
+            createSpellingDictionary(wordsF, 'wordsF', 'test'),
+        ];
+
+        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        expect(dictCollection.suggest(word, 2)).toEqual(expected);
     });
 
     test('checks for suggestions with flagged words', async () => {
