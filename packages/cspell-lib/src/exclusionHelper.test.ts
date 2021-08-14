@@ -1,3 +1,4 @@
+import { Glob } from '@cspell/cspell-types';
 import { extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForUri } from './exclusionHelper';
 
 describe('Verify Exclusion Helper functions', () => {
@@ -10,7 +11,7 @@ describe('Verify Exclusion Helper functions', () => {
         expect(extractGlobsFromExcludeFilesGlobMap(excludeDef)).toEqual(['**/node_modules', '**/typings']);
     });
 
-    const excludeGlobs = ['**/node_modules', '**/typings', '.vscode'];
+    const excludeGlobs: Glob[] = ['**/node_modules', '**/typings', { glob: '.vscode' }];
     const fnExcludeGlobs = generateExclusionFunctionForUri(excludeGlobs, '/project/myProject');
 
     test.each`
