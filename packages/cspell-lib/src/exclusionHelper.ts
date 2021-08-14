@@ -17,10 +17,6 @@ export function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap
     return globs;
 }
 
-export function pathToUri(filePath: string): Uri {
-    return Uri.file(filePath);
-}
-
 const leadingGlobPattern = /^\*\*\/([^/*{}]+)$/;
 
 function adjustGlobPatternForBackwardsCompatibility(g: string): string {
