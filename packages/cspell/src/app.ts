@@ -31,11 +31,11 @@ interface Options extends CSpellApplicationOptions {
 }
 // interface InitOptions extends Options {}
 
-const templateIssue = `{green $uri}:{yellow $row:$col} - Unknown word ({red $text})`;
-const templateIssueWithSuggestions = `{green $uri}:{yellow $row:$col} - Unknown word ({red $text}) Suggestions: {yellow [$suggestions]}`;
-const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
-const templateIssueWithContextWithSuggestions = `{green $uri}:{yellow $row:$col} $padRowCol- Unknown word ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
-const templateIssueLegacy = `${chalk.green('$uri')}[$row, $col]: Unknown word: ${chalk.red('$text')}`;
+const templateIssue = `{green $uri}:{yellow $row:$col} - $message ({red $text})`;
+const templateIssueWithSuggestions = `{green $uri}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
+const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
+const templateIssueWithContextWithSuggestions = `{green $uri}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
+const templateIssueLegacy = `${chalk.green('$uri')}[$row, $col]: $message: ${chalk.red('$text')}`;
 const templateIssueWordsOnly = '$text';
 
 function genIssueEmitter(template: string) {
@@ -365,8 +365,14 @@ function emitTraceResult(r: App.TraceResult) {
     const terminalWidth = process.stdout.columns || 120;
     const widthName = 20;
     const errors = r.errors?.map((e) => e.message)?.join('\n\t') || '';
-    const w = chalk.green(r.word);
-    const f = r.found ? chalk.whiteBright('*') : errors ? chalk.red('X') : chalk.dim('-');
+    const w = r.forbidden ? chalk.red(r.word) : chalk.green(r.word);
+    const f = r.forbidden
+        ? chalk.red('!')
+        : r.found
+        ? chalk.whiteBright('*')
+        : errors
+        ? chalk.red('X')
+        : chalk.dim('-');
     const n = chalk.yellowBright(pad(r.dictName, widthName));
     const used = [r.word.length, 1, widthName].reduce((a, b) => a + b, 3);
     const widthSrc = terminalWidth - used;
@@ -406,7 +412,8 @@ function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: numbe
     const colText = col.toString();
     const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
     const suggestions = issue.suggestions?.join(', ') || '';
-    const t = template(templateStr);
+    const message = issue.isFlagged ? '{yellow Forbidden word}' : 'Unknown word';
+    const t = template(templateStr.replace(/\$message/g, message));
     return chalk(t)
         .replace(/\$\{col\}/g, colText)
         .replace(/\$\{row\}/g, rowText)

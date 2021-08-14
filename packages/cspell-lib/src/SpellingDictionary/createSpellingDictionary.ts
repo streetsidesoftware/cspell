@@ -24,6 +24,7 @@ export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError)
         source,
         type: 'error',
         has: () => false,
+        isForbidden: () => false,
         suggest: () => [],
         mapWord: (a) => a,
         genSuggestions: () => {

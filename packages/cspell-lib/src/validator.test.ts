@@ -9,15 +9,6 @@ import { IncludeExcludeFlag } from './validator';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 
-const defaultSettings: CSpellSettings = {
-    ...getDefaultSettings(),
-    enabledLanguageIds: ['plaintext', 'javascript'],
-};
-
-function getSettings(text: string, languageId: string) {
-    return tds.combineTextAndLanguageSettings(defaultSettings, text, languageId);
-}
-
 describe('Validator', () => {
     test('validates the validator', async () => {
         const text = 'The quick brouwn fox jumpped over the lazzy dog.';
@@ -175,6 +166,27 @@ describe('Validator', () => {
         expect(result.join('')).toBe(sampleText);
         expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.INCLUDE);
     });
+
+    // const isFoundTrue = { isFound: true };
+    const isFoundFalse = { isFound: false };
+    const isFlaggedTrue = { isFlagged: true };
+    const isFlaggedFalse = { isFlagged: false };
+
+    // cspell:ignore grappes
+    test.each`
+        text         | expected
+        ${'hello'}   | ${[]}
+        ${'flagged'} | ${[mValIssue('flagged', isFlaggedTrue)]}
+        ${'grappes'} | ${[mValIssue('grappes', isFoundFalse, isFlaggedFalse)]}
+        ${'colour'}  | ${[mValIssue('colour', isFlaggedTrue)]}
+        ${'ignored'} | ${[]}
+    `('validation "$text"', async ({ text, expected }) => {
+        const settings = sampleSettings();
+        const languageId = 'plaintext';
+        const docSettings = tds.combineTextAndLanguageSettings(settings, text, languageId);
+        const results = await Validator.validateText(text, docSettings);
+        expect(results).toEqual(expected);
+    });
 });
 
 // cspell:ignore xaccd ffee
@@ -226,3 +238,46 @@ const sampleWords = [
     'tiger',
     'worm',
 ];
+
+const flagWords = ['hte', 'flagged', 'ignored'];
+
+const rejectWords = ['!colour', '!behaviour', '!favour'];
+
+const ignoreWords = ['ignored'];
+
+const words = sampleWords.concat(rejectWords);
+
+const sampleCSpell: CSpellSettings = {
+    ...getDefaultSettings(),
+    version: '0.2',
+    flagWords,
+    words,
+    ignoreWords,
+};
+
+const defaultSettings: CSpellSettings = {
+    ...getDefaultSettings(),
+    enabledLanguageIds: ['plaintext', 'javascript'],
+};
+
+function mValIssue(text: string, ...parts: Partial<Validator.ValidationIssue>[]): Validator.ValidationIssue {
+    const issue: Partial<Validator.ValidationIssue> = {
+        text,
+    };
+    for (const p of parts) {
+        Object.assign(issue, p);
+    }
+    return oc<Validator.ValidationIssue>(issue);
+}
+
+function sampleSettings() {
+    return Object.freeze({ ...sampleCSpell });
+}
+
+function getSettings(text: string, languageId: string) {
+    return tds.combineTextAndLanguageSettings(defaultSettings, text, languageId);
+}
+
+function oc<T>(t: Partial<T>): T {
+    return expect.objectContaining(t);
+}

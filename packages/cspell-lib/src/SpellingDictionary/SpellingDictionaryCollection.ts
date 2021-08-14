@@ -18,6 +18,8 @@ import {
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
+import { memorizer } from '../util/Memorizer';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
 function identityString(w: string): string {
     return w;
@@ -40,7 +42,11 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
 
     public has(word: string, hasOptions?: HasOptions): boolean {
         const options = hasOptionToSearchOption(hasOptions);
-        return !this.wordsToFlag.has(word.toLowerCase()) && isWordInAnyDictionary(this.dictionaries, word, options);
+        return !this.wordsToFlag.has(word.toLowerCase()) && !!isWordInAnyDictionary(this.dictionaries, word, options);
+    }
+
+    public isForbidden(word: string): boolean {
+        return this.wordsToFlag.has(word.toLowerCase()) || !!this._isForbiddenInDict(word);
     }
 
     public suggest(
@@ -95,6 +101,11 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     public getErrors(): Error[] {
         return this.dictionaries.reduce((errors, dict) => errors.concat(dict.getErrors?.() || []), [] as Error[]);
     }
+
+    private _isForbiddenInDict = memorizer(
+        (word: string) => isWordForbiddenInAnyDictionary(this.dictionaries, word),
+        SpellingDictionaryFromTrie.cachedWordsLimit
+    );
 }
 
 export function createCollection(
@@ -105,8 +116,16 @@ export function createCollection(
     return new SpellingDictionaryCollection(dictionaries, name, wordsToFlag);
 }
 
-export function isWordInAnyDictionary(dicts: SpellingDictionary[], word: string, options: SearchOptions): boolean {
-    return !!genSequence(dicts).first((dict) => dict.has(word, options));
+function isWordInAnyDictionary(
+    dicts: SpellingDictionary[],
+    word: string,
+    options: SearchOptions
+): SpellingDictionary | undefined {
+    return genSequence(dicts).first((dict) => dict.has(word, options));
+}
+
+function isWordForbiddenInAnyDictionary(dicts: SpellingDictionary[], word: string): SpellingDictionary | undefined {
+    return genSequence(dicts).first((dict) => dict.isForbidden(word));
 }
 
 export function createCollectionP(
@@ -116,3 +135,8 @@ export function createCollectionP(
 ): Promise<SpellingDictionaryCollection> {
     return Promise.all(dicts).then((dicts) => new SpellingDictionaryCollection(dicts, name, wordsToFlag));
 }
+
+export const __testing__ = {
+    isWordInAnyDictionary,
+    isWordForbiddenInAnyDictionary,
+};

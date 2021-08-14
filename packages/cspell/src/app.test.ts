@@ -125,6 +125,7 @@ describe('Validate cli', () => {
         ${'check with spelling errors'}                | ${['check', pathSamples('Dutch.txt')]}                                     | ${app.CheckFailed} | ${false} | ${true}  | ${false}
         ${'LICENSE'}                                   | ${[pathRoot('LICENSE')]}                                                   | ${undefined}       | ${true}  | ${false} | ${false}
         ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                     | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'current_file --verbose'}                    | ${['--verbose', __filename]}                                               | ${undefined}       | ${true}  | ${false} | ${true}
         ${'bad config'}                                | ${['-c', __filename, __filename]}                                          | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'not found error by default'}                | ${['*.not']}                                                               | ${app.CheckFailed} | ${true}  | ${false} | ${false}

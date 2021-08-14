@@ -191,18 +191,24 @@ describe('Validate textValidator functions', () => {
         const words = results.sort((a, b) => a.offset - b.offset).map((r) => r.text);
         expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
     });
+
+    test.each`
+        text        | ignoreWords   | expected
+        ${'red'}    | ${[]}         | ${[]}
+        ${'color'}  | ${[]}         | ${[ov({ text: 'color', isFound: false })]}
+        ${'colour'} | ${[]}         | ${[ov({ text: 'colour', isFlagged: true })]}
+        ${'colour'} | ${['colour']} | ${[]}
+    `('Validate forbidden words', ({ text, ignoreWords, expected }) => {
+        const dict = getSpellingDictionaryCollectionSync();
+        const result = [
+            ...validateText(text, dict, { ignoreWords, ignoreCase: false, ignoreWordsAreCaseSensitive: false }),
+        ];
+        expect(result).toEqual(expected);
+    });
 });
 
 async function getSpellingDictionaryCollection() {
-    const dicts = await Promise.all([
-        createSpellingDictionary(colors, 'colors', 'test'),
-        createSpellingDictionary(fruit, 'fruit', 'test'),
-        createSpellingDictionary(animals, 'animals', 'test'),
-        createSpellingDictionary(insects, 'insects', 'test'),
-        createSpellingDictionary(words, 'words', 'test', { repMap: [['’', "'"]] }),
-    ]);
-
-    return createCollection(dicts, 'collection');
+    return getSpellingDictionaryCollectionSync();
 }
 
 const colors = [
@@ -262,6 +268,8 @@ const words = [
     "should've",
 ];
 
+const forbiddenWords = ['!colour', '!favour'];
+
 const specialWords = ['Range8', '4wheel', 'db2Admin', 'Amsterdam', 'Berlin', 'Paris'];
 
 const sampleText = `
@@ -270,3 +278,20 @@ const sampleText = `
     The little ant ate the big purple grape.
     The orange tiger ate the whiteberry and the redberry.
 `;
+
+function getSpellingDictionaryCollectionSync() {
+    const dicts = [
+        createSpellingDictionary(colors, 'colors', 'test'),
+        createSpellingDictionary(fruit, 'fruit', 'test'),
+        createSpellingDictionary(animals, 'animals', 'test'),
+        createSpellingDictionary(insects, 'insects', 'test'),
+        createSpellingDictionary(words, 'words', 'test', { repMap: [['’', "'"]] }),
+        createSpellingDictionary(forbiddenWords, 'forbidden-words', 'test'),
+    ];
+
+    return createCollection(dicts, 'collection');
+}
+
+function ov<T>(t: Partial<T>, ...rest: Partial<T>[]): T {
+    return expect.objectContaining(Object.assign({}, t, ...rest));
+}

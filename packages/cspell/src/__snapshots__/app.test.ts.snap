@@ -212,13 +212,13 @@ info	Config Files Found:
 info	    ./cspell.json
 info	
 info	Exclusion Globs: 
+info	    Glob: *.snap from ./cspell.json
 info	    Glob: node_modules from ./cspell.json
-info	    Glob: **/*.d.ts from ./cspell.json
+info	    Glob: package-lock.json from ./cspell.json
 info	    Glob: coverage/** from ./cspell.json
 info	    Glob: dist/** from ./cspell.json
 info	    Glob: package.json from ./cspell.json
-info	    Glob: **/package.json from ./cspell.json
-info	    Glob: **/.cspell.json from ./cspell.json
+info	    Glob: .cspell.json from ./cspell.json
 info	    Glob: .vscode/** from ./cspell.json
 info	    Glob: node_modules/** from command line
 info	
@@ -564,6 +564,16 @@ log	./samples/text.txt:3:23 - Unknown word (everyline)
 log	./samples/text.txt:5:24 - Unknown word (okkk)
 log	./samples/text.txt:5:32 - Unknown word (reead)
 error	CSpell: Files checked: 6, Issues found: 7 in 1 files"
+`;
+
+exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 1`] = `Array []`;
+
+exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 2`] = `
+"error	1/1 ./samples/src/sample-with-forbidden-words.md 0.00ms X
+log	./samples/src/sample-with-forbidden-words.md:3:3 - Forbidden word (behaviour)
+log	./samples/src/sample-with-forbidden-words.md:4:3 - Forbidden word (flavour)
+log	./samples/src/sample-with-forbidden-words.md:5:3 - Forbidden word (colour)
+error	CSpell: Files checked: 1, Issues found: 3 in 1 files"
 `;
 
 exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
