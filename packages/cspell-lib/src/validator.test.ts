@@ -174,12 +174,14 @@ describe('Validator', () => {
 
     // cspell:ignore grappes
     test.each`
-        text         | expected
-        ${'hello'}   | ${[]}
-        ${'flagged'} | ${[mValIssue('flagged', isFlaggedTrue)]}
-        ${'grappes'} | ${[mValIssue('grappes', isFoundFalse, isFlaggedFalse)]}
-        ${'colour'}  | ${[mValIssue('colour', isFlaggedTrue)]}
-        ${'ignored'} | ${[]}
+        text              | expected
+        ${'hello'}        | ${[]}
+        ${'flagged'}      | ${[mValIssue('flagged', isFlaggedTrue)]}
+        ${'grappes'}      | ${[mValIssue('grappes', isFoundFalse, isFlaggedFalse)]}
+        ${'colour'}       | ${[mValIssue('colour', isFlaggedTrue)]}
+        ${'ignored'}      | ${[]}
+        ${'crazzzy-code'} | ${[]}
+        ${'hyphen-wordz'} | ${[]}
     `('validation "$text"', async ({ text, expected }) => {
         const settings = sampleSettings();
         const languageId = 'plaintext';
@@ -243,9 +245,10 @@ const flagWords = ['hte', 'flagged', 'ignored'];
 
 const rejectWords = ['!colour', '!behaviour', '!favour'];
 
-const ignoreWords = ['ignored'];
+// cspell:ignore crazzzy wordz
+const ignoreWords = ['ignored', 'crazzzy-code'];
 
-const words = sampleWords.concat(rejectWords);
+const words = sampleWords.concat(rejectWords).concat(['hyphen-wordz']);
 
 const sampleCSpell: CSpellSettings = {
     ...getDefaultSettings(),

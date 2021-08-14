@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1821, Issues found: 19838 in 1087 files
+ CSpell: Files checked: 1821, Issues found: 19850 in 1087 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -82,9 +82,9 @@ Lines:
 ./Zend/Optimizer/scdf.c:23:69     - Unknown word (Zadeck)     -- propagation" by Wegman and Zadeck. We're using a
 ./Zend/Optimizer/zend_call_graph.h:51:84     - Unknown word (opnum)      -- with init/call/send opnum */
 ./Zend/Optimizer/zend_cfg.c:858:26    - Unknown word (Sreedhar)   -- Identify loops.  See Sreedhar et al, "Identifying
-./Zend/Optimizer/zend_dump.c:246:9     - Unknown word (afirst)        -- int afirst = 1;
-./Zend/Optimizer/zend_dump.c:349:22    - Unknown word (NOVAL)         -- fprintf(stderr, " NOVAL");
-./Zend/Optimizer/zend_dump.c:352:22    - Unknown word (NOESC)         -- fprintf(stderr, " NOESC");
+./Zend/Optimizer/zend_dump.c:259:9     - Unknown word (afirst)        -- int afirst = 1;
+./Zend/Optimizer/zend_dump.c:362:22    - Unknown word (NOVAL)         -- fprintf(stderr, " NOVAL");
+./Zend/Optimizer/zend_dump.c:365:22    - Unknown word (NOESC)         -- fprintf(stderr, " NOESC");
 ./Zend/Optimizer/zend_dump.c:3:28      - Unknown word (Visualisation) -- Zend Engine, Bytecode Visualisation
 ./Zend/Optimizer/zend_inference.c:29:22     - Unknown word (Rodrigues)  -- * V. Campos, R. Rodrigues, I. de Assis Costa and
 ./Zend/Optimizer/zend_inference.c:29:39     - Unknown word (Assis)      -- R. Rodrigues, I. de Assis Costa and F. Pereira
@@ -270,10 +270,13 @@ Lines:
 ./build/gen_stub.php:2035:38   - Unknown word (ifdef)               -- if (preg_match('/^#\s*ifdef\s+(.+)$/', ifdef, $matches
 ./build/gen_stub.php:2037:38   - Unknown word (ifndef)              -- if (preg_match('/^#\s*ifndef\s+(.+)$/', ifndef, $matches
 ./build/gen_stub.php:2058:35   - Unknown word (stmts)               -- getFileDocComment(array $stmts): ?DocComment {
-./build/gen_stub.php:2661:23   - Unknown word (xvzf)                -- passthru("tar xvzf $tarName -C PHP-Parser
-./build/gen_stub.php:2698:2    - Unknown word (optind)              -- $optind = null;
-./build/gen_stub.php:2702:78   - Unknown word (classsynopses)       -- "verify", "generate-classsynopses", "replace-classsynopses
-./build/gen_stub.php:2703:19   - Unknown word (methodsynopses)      -- "generate-methodsynopses", "replace-methodsynopses
+./build/gen_stub.php:2508:34   - Unknown word (Xmls)                -- if (replaceAndCompareXmls($doc, $classSynopsis
+./build/gen_stub.php:2519:24   - Unknown word (phpdoc)              -- "/<phpdoc:classref\s+xmlns:phpdoc
+./build/gen_stub.php:2519:31   - Unknown word (classref)            -- "/<phpdoc:classref\s+xmlns:phpdoc=\"([a
+./build/gen_stub.php:2773:23   - Unknown word (xvzf)                -- passthru("tar xvzf $tarName -C PHP-Parser
+./build/gen_stub.php:2810:2    - Unknown word (optind)              -- $optind = null;
+./build/gen_stub.php:2814:78   - Unknown word (classsynopses)       -- "verify", "generate-classsynopses", "replace-classsynopses
+./build/gen_stub.php:2815:19   - Unknown word (methodsynopses)      -- "generate-methodsynopses", "replace-methodsynopses
 ./build/gen_stub.php:798:33    - Unknown word (MALIAS)     -- "\tZEND_MALIAS(%s, %s, %s, %s, %s)
 ./build/gen_stub.php:833:33    - Unknown word (FALIAS)     -- "\tZEND_DEP_FALIAS(%s, %s, %s)\n",
 ./build/gen_stub.php:929:30    - Unknown word (constructorsynopsis) -- $synopsisType = "constructorsynopsis";
@@ -1105,29 +1108,29 @@ Lines:
 ./ext/ftp/php_ftp.c:760:45    - Unknown word (nbhronly)    -- from the FTP server nbhronly and writes it to a local
 ./ext/ftp/php_ftp.c:831:44    - Unknown word (nbronously)  -- retrieving/sending a file nbronously */
 ./ext/ftp/php_ftp.c:844:41    - Unknown word (nbronous)    -- NULL, E_WARNING, "No nbronous transfer to continue
-./ext/gd/gd.c:1081:46   - Unknown word (Ollll)      -- parameters(ZEND_NUM_ARGS(), "Ollll", &IM, gd_image_ce,
-./ext/gd/gd.c:1197:65   - Unknown word (HWND)       -- using a windows handle (HWND property in COM instance
-./ext/gd/gd.c:1206:2    - Unknown word (HBITMAP)    -- HBITMAP memBM;
-./ext/gd/gd.c:1208:12   - Unknown word (lwindow)    -- zend_long lwindow_handle;
-./ext/gd/gd.c:1551:6    - Unknown word (imtype)     -- int imtype;
-./ext/gd/gd.c:1640:47   - Unknown word (pllll)      -- parameters(ZEND_NUM_ARGS(), "pllll", &file, &file_len,
-./ext/gd/gd.c:2181:16   - Unknown word (srcim)      -- zval *dstim, *srcim;
-./ext/gd/gd.c:2181:8    - Unknown word (dstim)      -- zval *dstim, *srcim;
+./ext/gd/gd.c:1086:46   - Unknown word (Ollll)      -- parameters(ZEND_NUM_ARGS(), "Ollll", &IM, gd_image_ce,
+./ext/gd/gd.c:1202:65   - Unknown word (HWND)       -- using a windows handle (HWND property in COM instance
+./ext/gd/gd.c:1211:2    - Unknown word (HBITMAP)    -- HBITMAP memBM;
+./ext/gd/gd.c:1213:12   - Unknown word (lwindow)    -- zend_long lwindow_handle;
+./ext/gd/gd.c:1556:6    - Unknown word (imtype)     -- int imtype;
+./ext/gd/gd.c:1645:47   - Unknown word (pllll)      -- parameters(ZEND_NUM_ARGS(), "pllll", &file, &file_len,
+./ext/gd/gd.c:2186:16   - Unknown word (srcim)      -- zval *dstim, *srcim;
+./ext/gd/gd.c:2186:8    - Unknown word (dstim)      -- zval *dstim, *srcim;
 ./ext/gd/gd.c:222:37    - Unknown word (extgdimage) -- assign_libgdimageptr_as_extgdimage(zval *val, gdImagePtr
-./ext/gd/gd.c:2563:46   - Unknown word (Olllllll)   -- parameters(ZEND_NUM_ARGS(), "Olllllll", &IM, gd_image_ce,
-./ext/gd/gd.c:2706:12   - Unknown word (NPOINTS)    -- zend_long NPOINTS, COL;
-./ext/gd/gd.c:2711:6    - Unknown word (npoints)    -- int npoints, col, nelem, i;
-./ext/gd/gd.c:2849:12   - Unknown word (gdimagecharup) -- /* {{{ php_gdimagecharup
-./ext/gd/gd.c:2984:47   - Unknown word (Ollllll)       -- parameters(ZEND_NUM_ARGS(), "OOllllll", &DIM, gd_image_ce
-./ext/gd/gd.c:3213:47   - Unknown word (ddss)          -- parameters(ZEND_NUM_ARGS(), "ddss|a", &ptsize, &angle
-./ext/gd/gd.c:3217:47   - Unknown word (Oddlllss)      -- parameters(ZEND_NUM_ARGS(), "Oddlllss|a", &IM, gd_image_ce
-./ext/gd/gd.c:3543:46   - Unknown word (Oadd)          -- parameters(ZEND_NUM_ARGS(), "Oadd", &SIM, gd_image_ce
-./ext/gd/gd.c:3804:9    - Unknown word (nelems)        -- int i, nelems;
-./ext/gd/gd.c:491:37    - Unknown word (PAETH)      -- CONSTANT("PNG_FILTER_PAETH", 0x80, CONST_CS |
+./ext/gd/gd.c:2568:46   - Unknown word (Olllllll)   -- parameters(ZEND_NUM_ARGS(), "Olllllll", &IM, gd_image_ce,
+./ext/gd/gd.c:2711:12   - Unknown word (NPOINTS)    -- zend_long NPOINTS, COL;
+./ext/gd/gd.c:2716:6    - Unknown word (npoints)    -- int npoints, col, nelem, i;
+./ext/gd/gd.c:2854:12   - Unknown word (gdimagecharup) -- /* {{{ php_gdimagecharup
+./ext/gd/gd.c:2989:47   - Unknown word (Ollllll)       -- parameters(ZEND_NUM_ARGS(), "OOllllll", &DIM, gd_image_ce
+./ext/gd/gd.c:3218:47   - Unknown word (ddss)          -- parameters(ZEND_NUM_ARGS(), "ddss|a", &ptsize, &angle
+./ext/gd/gd.c:3222:47   - Unknown word (Oddlllss)      -- parameters(ZEND_NUM_ARGS(), "Oddlllss|a", &IM, gd_image_ce
+./ext/gd/gd.c:3548:46   - Unknown word (Oadd)          -- parameters(ZEND_NUM_ARGS(), "Oadd", &SIM, gd_image_ce
+./ext/gd/gd.c:3809:9    - Unknown word (nelems)        -- int i, nelems;
+./ext/gd/gd.c:496:37    - Unknown word (PAETH)      -- CONSTANT("PNG_FILTER_PAETH", 0x80, CONST_CS |
 ./ext/gd/gd.c:51:12     - Unknown word (Wingdi)     -- # include <Wingdi.h>
-./ext/gd/gd.c:862:12    - Unknown word (ncolors)    -- zend_long ncolors;
-./ext/gd/gd.c:969:46    - Unknown word (Olllll)     -- parameters(ZEND_NUM_ARGS(), "Olllll", &IM, gd_image_ce,
-./ext/gd/gd.c:988:46    - Unknown word (Ollllllll)  -- parameters(ZEND_NUM_ARGS(), "Ollllllll", &IM, gd_image_ce,
+./ext/gd/gd.c:867:12    - Unknown word (ncolors)    -- zend_long ncolors;
+./ext/gd/gd.c:974:46    - Unknown word (Olllll)     -- parameters(ZEND_NUM_ARGS(), "Olllll", &IM, gd_image_ce,
+./ext/gd/gd.c:993:46    - Unknown word (Ollllllll)  -- parameters(ZEND_NUM_ARGS(), "Ollllllll", &IM, gd_image_ce,
 ./ext/gd/gd.stub.php:109:10    - Unknown word (imagecreatefrombmp) -- function imagecreatefrombmp(string $filename): GdImage
 ./ext/gd/gd.stub.php:120:10    - Unknown word (imageavif)          -- function imageavif(GdImage $image, $file
 ./ext/gd/gd.stub.php:150:10    - Unknown word (imagebmp)           -- function imagebmp(GdImage $image, $file
@@ -2481,14 +2484,14 @@ Lines:
 ./ext/opcache/jit/zend_jit_perf_dump.c:42:53     - Unknown word (vtunes)     -- as it conflicts with vtunes types.
 ./ext/opcache/jit/zend_jit_perf_dump.c:59:45     - Unknown word (jitted)     -- perf.data -o perf.data.jitted
 ./ext/opcache/jit/zend_jit_perf_dump.c:72:37     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
-./ext/opcache/jit/zend_jit_trace.c:3148:28   - Unknown word (clenup)     -- void zend_jit_trace_clenup_stack(zend_jit_trace
-./ext/opcache/jit/zend_jit_trace.c:3838:7    - Unknown word (Deoptimization) -- /* Deoptimization */
+./ext/opcache/jit/zend_jit_trace.c:3218:28   - Unknown word (clenup)     -- void zend_jit_trace_clenup_stack(zend_jit_trace
 ./ext/opcache/jit/zend_jit_trace.c:390:82    - Unknown word (tssa)       -- zend_ssa *tssa,
-./ext/opcache/jit/zend_jit_trace.c:6301:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
-./ext/opcache/jit/zend_jit_trace.c:6460:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
-./ext/opcache/jit/zend_jit_trace.c:6741:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
-./ext/opcache/jit/zend_jit_trace.c:7406:5    - Unknown word (Deoptimizatoion) -- /* Deoptimizatoion of VM stack state *
-./ext/opcache/jit/zend_jit_trace.c:7658:29   - Unknown word (xlat)            -- shared_alloc_register_xlat_entry(op_array->opcodes
+./ext/opcache/jit/zend_jit_trace.c:3910:7    - Unknown word (Deoptimization) -- /* Deoptimization */
+./ext/opcache/jit/zend_jit_trace.c:6373:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
+./ext/opcache/jit/zend_jit_trace.c:6532:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
+./ext/opcache/jit/zend_jit_trace.c:6813:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
+./ext/opcache/jit/zend_jit_trace.c:7478:5    - Unknown word (Deoptimizatoion) -- /* Deoptimizatoion of VM stack state *
+./ext/opcache/jit/zend_jit_trace.c:7730:29   - Unknown word (xlat)            -- shared_alloc_register_xlat_entry(op_array->opcodes
 ./ext/opcache/jit/zend_jit_trace.c:890:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
 ./ext/opcache/jit/zend_jit_vm_helpers.c:1013:39   - Unknown word (unroling)   -- doesn't work try loop unroling. */
 ./ext/opcache/jit/zend_jit_vm_helpers.c:40:35     - Unknown word (Wvolatile)  -- diagnostic ignored "-Wvolatile-register-var"
