@@ -2,8 +2,8 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 
 const settings: CSpellSettings = {
     version: '0.2',
-    name: 'cspell default settings',
-    id: 'cspell-default',
+    name: 'cspell default settings .js',
+    id: 'cspell-default-js',
     readonly: true,
     language: 'en',
     description: 'Default cspell configuration.',
