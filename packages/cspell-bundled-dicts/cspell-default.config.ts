@@ -24,12 +24,12 @@ const settings: CSpellSettings = {
         {
             name: 'MARKDOWN-link-reference',
             description: 'Markdown reference link: `[This is a link][reference]`',
-            pattern: /(?<=\])\[[-\w.]+\]/g,
+            pattern: /(?<=\])\[[-\w.`'"*&;#@ ]+\]/g,
         },
         {
             name: 'MARKDOWN-link-footer',
             description: 'Markdown referenced link: `[reference]: https://www.google.com`',
-            pattern: /\[[-\w.]+\]:/g,
+            pattern: /\[[-\w.`'"*&;#@ ]+\]:/g,
         },
     ],
 
