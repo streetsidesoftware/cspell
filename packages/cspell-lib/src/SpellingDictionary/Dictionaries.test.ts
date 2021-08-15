@@ -11,9 +11,29 @@ const root = path.resolve(__dirname, '../..');
 const samples = path.join(root, 'samples');
 
 describe('Validate getDictionary', () => {
-    test('tests that userWords are included in the dictionary', async () => {
+    const ignoreCaseFalse = { ignoreCase: false };
+    const ignoreCaseTrue = { ignoreCase: true };
+
+    test.each`
+        word       | opts               | expected
+        ${'zero'}  | ${ignoreCaseFalse} | ${false}
+        ${'Café'}  | ${ignoreCaseFalse} | ${true}
+        ${'CAFÉ'}  | ${ignoreCaseFalse} | ${true}
+        ${'café'}  | ${ignoreCaseFalse} | ${true}
+        ${'cafe'}  | ${ignoreCaseTrue}  | ${true}
+        ${'CAFE'}  | ${ignoreCaseTrue}  | ${true}
+        ${'Rhône'} | ${ignoreCaseFalse} | ${true}
+        ${'RHÔNE'} | ${ignoreCaseFalse} | ${true}
+        ${'rhône'} | ${ignoreCaseFalse} | ${false}
+        ${'RHÔNE'} | ${ignoreCaseTrue}  | ${true}
+        ${'rhône'} | ${ignoreCaseTrue}  | ${true}
+        ${'rhone'} | ${ignoreCaseFalse} | ${false}
+        ${'rhone'} | ${ignoreCaseTrue}  | ${true}
+        ${'snarf'} | ${ignoreCaseTrue}  | ${false}
+    `('tests that userWords are included in the dictionary', async ({ word, opts, expected }) => {
         const settings = {
             ...getDefaultSettings(),
+            dictionaries: [],
             words: ['one', 'two', 'three', 'café', '!snarf'],
             userWords: ['four', 'five', 'six', 'Rhône'],
         };
@@ -31,25 +51,29 @@ describe('Validate getDictionary', () => {
             const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found });
         });
-        expect(dict.has('zero', { ignoreCase: false })).toBe(false);
-        expect(dict.has('Café', { ignoreCase: false })).toBe(true);
-        expect(dict.has('CAFÉ', { ignoreCase: false })).toBe(true);
-        expect(dict.has('café', { ignoreCase: false })).toBe(true);
-        expect(dict.has('cafe', { ignoreCase: true })).toBe(true);
-        expect(dict.has('CAFE', { ignoreCase: true })).toBe(true);
-        expect(dict.has('Rhône', { ignoreCase: false })).toBe(true);
-        expect(dict.has('RHÔNE', { ignoreCase: false })).toBe(true);
-        expect(dict.has('rhône', { ignoreCase: false })).toBe(false);
-        expect(dict.has('RHÔNE', { ignoreCase: true })).toBe(true);
-        expect(dict.has('rhône', { ignoreCase: true })).toBe(true);
-        expect(dict.has('rhone', { ignoreCase: false })).toBe(false);
-        expect(dict.has('rhone', { ignoreCase: true })).toBe(true);
-        expect(dict.has('snarf', { ignoreCase: true })).toBe(false);
+        expect(dict.has(word, opts)).toBe(expected);
     });
 
-    test('Case sensitive', async () => {
+    test.each`
+        word       | opts               | expected
+        ${'zero'}  | ${undefined}       | ${false}
+        ${'Rhône'} | ${ignoreCaseFalse} | ${true}
+        ${'RHÔNE'} | ${ignoreCaseFalse} | ${true}
+        ${'Café'}  | ${ignoreCaseFalse} | ${true}
+        ${'rhône'} | ${ignoreCaseFalse} | ${false}
+        ${'rhone'} | ${ignoreCaseFalse} | ${false}
+        ${'café'}  | ${ignoreCaseFalse} | ${true}
+        ${'rhône'} | ${ignoreCaseFalse} | ${false}
+        ${'rhone'} | ${ignoreCaseFalse} | ${false}
+        ${'cafe'}  | ${ignoreCaseFalse} | ${false}
+        ${'café'}  | ${ignoreCaseTrue}  | ${true}
+        ${'rhône'} | ${ignoreCaseTrue}  | ${true}
+        ${'rhone'} | ${ignoreCaseTrue}  | ${true}
+        ${'cafe'}  | ${ignoreCaseTrue}  | ${true}
+    `('Case sensitive "$word" $opts', async ({ word, opts, expected }) => {
         const settings = {
             ...getDefaultSettings(),
+            dictionaries: [],
             words: ['one', 'two', 'three', 'café'],
             userWords: ['four', 'five', 'six', 'Rhône'],
             caseSensitive: true,
@@ -64,21 +88,7 @@ describe('Validate getDictionary', () => {
             const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found: true });
         });
-        const opts = { ignoreCase: false };
-        expect(dict.has('zero')).toBe(false);
-        expect(dict.has('Rhône', opts)).toBe(true);
-        expect(dict.has('RHÔNE', opts)).toBe(true);
-        expect(dict.has('Café', opts)).toBe(true);
-        expect(dict.has('rhône', opts)).toBe(false);
-        expect(dict.has('rhone', opts)).toBe(false);
-        expect(dict.has('café', opts)).toBe(true);
-        expect(dict.has('rhône', opts)).toBe(false);
-        expect(dict.has('rhone', opts)).toBe(false);
-        expect(dict.has('cafe', opts)).toBe(false);
-        expect(dict.has('café', { ignoreCase: true })).toBe(true);
-        expect(dict.has('rhône', { ignoreCase: true })).toBe(true);
-        expect(dict.has('rhone', { ignoreCase: true })).toBe(true);
-        expect(dict.has('cafe', { ignoreCase: true })).toBe(true);
+        expect(dict.has(word, opts)).toBe(expected);
     });
 
     test('Refresh Dictionary Cache', async () => {
