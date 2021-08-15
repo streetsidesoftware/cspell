@@ -7,7 +7,7 @@ export interface Issue extends TextDocumentOffset {
     suggestions?: string[];
 }
 
-export type MessageType = 'Debug' | 'Info';
+export type MessageType = 'Debug' | 'Info' | 'Warning';
 
 export type MessageTypeLookup = {
     [key in MessageType]: key;
@@ -16,6 +16,7 @@ export type MessageTypeLookup = {
 export const MessageTypes: MessageTypeLookup = {
     Debug: 'Debug',
     Info: 'Info',
+    Warning: 'Warning',
 };
 
 export interface MessageEmitter {
@@ -26,12 +27,14 @@ export interface DebugEmitter {
     (message: string): void;
 }
 
+type ErrorLike = Error | { message: string; name: string; toString: () => string };
+
 export interface ErrorEmitterVoid {
-    (message: string, error: Error): void;
+    (message: string, error: ErrorLike): void;
 }
 
 export interface ErrorEmitterPromise {
-    (message: string, error: Error): Promise<void>;
+    (message: string, error: ErrorLike): Promise<void>;
 }
 
 type ErrorEmitter = ErrorEmitterVoid | ErrorEmitterPromise;

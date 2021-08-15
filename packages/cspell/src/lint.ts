@@ -1,17 +1,18 @@
-import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { ConfigInfo, FileInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
-import { MessageTypes, Issue } from './emitters';
-import * as util from './util/util';
+import type { CSpellSettings, Glob } from '@cspell/cspell-types';
 import * as commentJson from 'comment-json';
-import * as path from 'path';
-import { TextDocumentOffset } from 'cspell-lib';
-import { CSpellSettings, Glob } from '@cspell/cspell-types';
+import type { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
+import type { ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
-import { measurePromise } from './util/timer';
-import { extractPatterns, buildGlobMatcher, normalizeGlobsToRoot, extractGlobsFromMatcher } from './util/glob';
-import { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
+import { Logger, TextDocumentOffset } from 'cspell-lib';
+import * as path from 'path';
+import { format } from 'util';
 import { URI } from 'vscode-uri';
-import { ValidationIssue } from '../../cspell-lib/dist/validator';
+import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
+import { Issue, MessageTypes } from './emitters';
+import { ConfigInfo, FileInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
+import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from './util/glob';
+import { measurePromise } from './util/timer';
+import * as util from './util/util';
 
 export interface FileResult {
     fileInfo: FileInfo;
@@ -31,6 +32,29 @@ export interface RunResult {
 
 export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
     const configErrors = new Set<string>();
+
+    const log: Logger['log'] = (...params) => {
+        const msg = format(...params);
+        cfg.emitters.info(msg, 'Info');
+    };
+
+    const error: Logger['error'] = (...params) => {
+        const msg = format(...params);
+        const err = { message: '', name: 'error', toString: () => '' };
+        cfg.emitters.error(msg, err);
+    };
+    const warn: Logger['warn'] = (...params) => {
+        const msg = format(...params);
+        cfg.emitters.info(msg, 'Warning');
+    };
+
+    const logger: Logger = {
+        log,
+        warn,
+        error,
+    };
+
+    cspell.setLogger(logger);
 
     return run();
 

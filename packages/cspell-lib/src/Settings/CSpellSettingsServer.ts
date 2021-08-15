@@ -1,26 +1,31 @@
-import * as json from 'comment-json';
 import {
-    RegExpPatternDefinition,
+    CSpellSettingsWithSourceTrace,
+    CSpellUserSettings,
     Glob,
-    Source,
+    GlobDef,
+    ImportFileRef,
     LanguageSetting,
     Pattern,
-    CSpellSettingsWithSourceTrace,
-    ImportFileRef,
-    GlobDef,
     PnPSettings,
+    RegExpPatternDefinition,
+    Source,
 } from '@cspell/cspell-types';
-import * as path from 'path';
-import { normalizePathForDictDefs } from './DictionarySettings';
-import * as util from '../util/util';
-import { resolveFile } from '../util/resolveFile';
-import { getRawGlobalSettings } from './GlobalSettings';
-import { cosmiconfig, cosmiconfigSync, OptionsSync as CosmicOptionsSync, Options as CosmicOptions } from 'cosmiconfig';
+import * as json from 'comment-json';
+import { cosmiconfig, cosmiconfigSync, Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
 import { GlobMatcher } from 'cspell-glob';
+import * as path from 'path';
+import { URI } from 'vscode-uri';
+import { logError, logWarning } from '../util/logger';
+import { resolveFile } from '../util/resolveFile';
+import * as util from '../util/util';
+import { normalizePathForDictDefs } from './DictionarySettings';
+import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
 import { LoaderResult, pnpLoader } from './pnpLoader';
-import { URI } from 'vscode-uri';
 
+type CSpellSettingsVersion = Exclude<CSpellSettings['version'], undefined>;
+
+const supportedCSpellConfigVersions: CSpellSettingsVersion[] = ['0.2'];
 const configSettingsFileVersion0_1 = '0.1';
 const configSettingsFileVersion0_2 = '0.2';
 const currentSettingsFileVersion = configSettingsFileVersion0_2;
@@ -104,8 +109,10 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
         const r = cspellConfigExplorerSync.load(filename);
         if (!r?.config) throw 'not found';
         Object.assign(s, r.config);
+        validateRawConfig(s, fileRef);
     } catch (err) {
-        fileRef.error = new ImportError(`Failed to read config file: "${filename}"`, err);
+        fileRef.error =
+            err instanceof ImportError ? err : new ImportError(`Failed to read config file: "${filename}"`, err);
     }
     s.__importRef = fileRef;
     return s;
@@ -804,6 +811,40 @@ function normalizeSettingsGlobs(
     return {
         ignorePaths,
     };
+}
+
+function validationMessage(msg: string, fileRef: ImportFileRef) {
+    return msg + `\n  File: "${fileRef.filename}"`;
+}
+
+function validateRawConfigVersion(config: CSpellUserSettings, fileRef: ImportFileRef) {
+    const { version } = config;
+    if (version === undefined || supportedCSpellConfigVersions.includes(version)) return;
+
+    if (!/^\d+(\.\d+)*$/.test(version)) {
+        logError(validationMessage(`Unsupported config file version: "${version}"`, fileRef));
+        return;
+    }
+
+    const msg =
+        version > currentSettingsFileVersion
+            ? `Newer config file version found: "${version}". Supported version is "${currentSettingsFileVersion}"`
+            : `Legacy config file version found: "${version}". Upgrade to "${currentSettingsFileVersion}"`;
+
+    logWarning(validationMessage(msg, fileRef));
+}
+
+function validateRawConfigExports(config: CSpellUserSettings, fileRef: ImportFileRef) {
+    if ((<{ default: unknown }>config).default) {
+        throw new ImportError(
+            validationMessage('Module `export default` is not supported.\n  Use `module.exports =` instead.', fileRef)
+        );
+    }
+}
+
+function validateRawConfig(config: CSpellUserSettings, fileRef: ImportFileRef): void {
+    const validations = [validateRawConfigExports, validateRawConfigVersion];
+    validations.forEach((fn) => fn(config, fileRef));
 }
 
 export const __testing__ = {
