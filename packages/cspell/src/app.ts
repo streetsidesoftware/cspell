@@ -108,6 +108,7 @@ function getEmitters(options: Options): Emitters {
     const emitters: InfoEmitter = {
         Debug: !silent && debug ? (s) => console.info(chalk.cyan(s)) : nullEmitter,
         Info: !silent && verbose ? (s) => console.info(chalk.yellow(s)) : nullEmitter,
+        Warning: (s) => console.info(chalk.yellow(s)),
     };
 
     function infoEmitter(message: string, msgType: MessageType): void {
