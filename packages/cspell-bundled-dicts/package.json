@@ -8,15 +8,22 @@
   "main": "cspell-default.json",
   "files": [
     "cspell-default.json",
+    "cspell-default.config.js",
+    "cspell-compatibility.json",
     "compatibility-words.txt.gz"
   ],
   "exports": {
-    ".": "./cspell-default.json",
+    ".": "./cspell-default.config.js",
+    "./cspell-default.config.js": "./cspell-default.config.js",
     "./cspell-default.json": "./cspell-default.json"
   },
   "scripts": {
+    "build": "tsc -p .",
     "build-dict": "cspell-tools-cli compile compatibility-words.txt",
-    "test": "node ../../bin.js \"*.txt\""
+    "clean": "echo clean",
+    "clean-build": "npm run clean && npm run build",
+    "prepublishOnly": "npm run clean-build",
+    "test": "node ../../bin.js \"*.{txt,md,ts}\""
   },
   "repository": {
     "type": "git",
@@ -75,6 +82,7 @@
     "node": ">=12.0.0"
   },
   "devDependencies": {
-    "@cspell/cspell-tools": "^5.7.1"
+    "@cspell/cspell-tools": "^5.7.1",
+    "@cspell/cspell-types": "^5.7.0"
   }
 }
