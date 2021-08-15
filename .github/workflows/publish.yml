@@ -19,51 +19,55 @@ on:
         required: true
 
 jobs:
-  publish-manual:
+  stub:
     runs-on: ubuntu-latest
-    if: github.event.inputs
     steps:
-      - name: Echo context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Checkout code
-        uses: actions/checkout@v2.3.4
-        with:
-          ref: ${{ github.event.inputs.ref }}
-      - name: Install
-        run: npm install
-      - name: Test
-        run: npm test
-      - name: Setup Git
-        run: |
-          git config --local user.name 'Jason Dent'
-          git config --local user.email 'jason@streetsidesoftware.nl'
-      - name: Publish
-        run: npm run pub-lerna -- -y --dist-tag "$NPM_TAG"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TAG: ${{ github.event.inputs.npm_tag }}
+      - run: echo "Publish Stub"
 
-  publish-tag:
-    runs-on: ubuntu-latest
-    if: ${{ !github.event.inputs }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2.3.4
-      - name: Install
-        run: npm install
-      - name: Test
-        run: npm test
-      - name: Echo context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Setup Git
-        run: |
-          git config --global user.name 'Jason Dent'
-          git config --global user.email 'jason@streetsidesoftware.nl'
+  # publish-manual:
+  #   runs-on: ubuntu-latest
+  #   if: github.event.inputs
+  #   steps:
+  #     - name: Echo context
+  #       env:
+  #         GITHUB_CONTEXT: ${{ toJson(github) }}
+  #       run: echo "$GITHUB_CONTEXT"
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2.3.4
+  #       with:
+  #         ref: ${{ github.event.inputs.ref }}
+  #     - name: Install
+  #       run: npm install
+  #     - name: Test
+  #       run: npm test
+  #     - name: Setup Git
+  #       run: |
+  #         git config --local user.name 'Jason Dent'
+  #         git config --local user.email 'jason@streetsidesoftware.nl'
+  #     - name: Publish
+  #       run: npm run pub-lerna -- -y --dist-tag "$NPM_TAG"
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NPM_TAG: ${{ github.event.inputs.npm_tag }}
 
+  # publish-tag:
+  #   runs-on: ubuntu-latest
+  #   if: ${{ !github.event.inputs }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2.3.4
+  #     - name: Install
+  #       run: npm install
+  #     - name: Test
+  #       run: npm test
+  #     - name: Echo context
+  #       env:
+  #         GITHUB_CONTEXT: ${{ toJson(github) }}
+  #       run: echo "$GITHUB_CONTEXT"
+  #     - name: Setup Git
+  #       run: |
+  #         git config --global user.name 'Jason Dent'
+  #         git config --global user.email 'jason@streetsidesoftware.nl'
 #       - name: Publish Main
 #         if: ${{ github.ref == 'refs/heads/main' }}
 #         run: npm run pub-lerna -- -y --dist-tag next
