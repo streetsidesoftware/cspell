@@ -22,7 +22,7 @@
     "build-dict": "cspell-tools-cli compile compatibility-words.txt",
     "clean": "echo clean",
     "clean-build": "npm run clean && npm run build",
-    "prepublishOnly": "npm run clean-build",
+    "prepare": "npm run clean-build",
     "test": "node ../../bin.js \"*.{txt,md,ts}\""
   },
   "repository": {
