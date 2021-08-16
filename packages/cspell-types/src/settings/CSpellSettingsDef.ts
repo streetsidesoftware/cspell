@@ -498,19 +498,19 @@ export interface GlobDef {
 
 /**
  * This can be '*', 'typescript', 'cpp', 'json', etc.
- * @pattern ^(!?[\w_\-\s]+)|(\*)$
+ * @pattern ^(!?[-\w_\s]+)|(\*)$
  */
 export type LanguageIdSingle = string;
 
 /**
  * This can be 'typescript,cpp,json,literal haskell', etc.
- * @pattern ^([\w_\-\s]+)(,[\w_\-\s]+)*$
+ * @pattern ^([-\w_\s]+)(,[-\w_\s]+)*$
  */
 export type LanguageIdMultiple = string;
 
 /**
  * This can be 'typescript,cpp,json,literal haskell', etc.
- * @pattern ^(![\w_\-\s]+)(,![\w_\-\s]+)*$
+ * @pattern ^(![-\w_\s]+)(,![-\w_\s]+)*$
  */
 export type LanguageIdMultipleNeg = string;
 
