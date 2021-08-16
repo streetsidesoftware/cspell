@@ -1,4 +1,4 @@
-# cspell Configuration
+# CSpell Configuration Files
 
 ## Supported Configuration Files
 

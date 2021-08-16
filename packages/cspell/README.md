@@ -406,21 +406,29 @@ const companyName = 'Lorem ipsum dolor sit amet';
 
 _cspell_'s behavior can be controlled through a config file. By default it looks for any of the following files:
 
-- `cspell.json`
 - `.cspell.json`
+- `cspell.json`
+- `.cSpell.json`
 - `cSpell.json`
+- `cspell.config.js`
+- `cspell.config.cjs`
+- `cspell.config.json`
+- `cspell.config.yaml`
+- `cspell.config.yml`
+- `cspell.yaml`
+- `cspell.yml`
 
 Or you can specify a path to a config file with the `--config <path>` argument on the command line.
 
-### cSpell.json
+### `cspell.json`
 
-#### Example _cSpell.json_ file
+#### Example `cspell.json` file
 
 ```javascript
 // cSpell Settings
 {
-    // Version of the setting file.  Always 0.1
-    "version": "0.1",
+    // Version of the setting file.  Always 0.2
+    "version": "0.2",
     // language - current active spelling language
     "language": "en",
     // words - list of words to be always considered correct
