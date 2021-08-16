@@ -38,21 +38,94 @@ The maintainers of cspell and thousands of other packages are working with Tidel
 npm install -g cspell
 ```
 
-## Usage
+## Basic Usage
 
 Example: recursively spell check all JavaScript files in `src`
 
+**JavaScript files**
+
 ```sh
 cspell "src/**/*.js"
+# or
+cspell lint "src/**/*.js"
 ```
+
+**Check everything**
+
+```sh
+cspell "**"
+```
+
+## Command: `lint` -- Spell Checking
+
+The `lint` command is used for spell checking files.
 
 ### Help
 
 ```sh
-cspell --help
+cspell lint --help
 ```
 
-### Quick check
+### Options
+
+```text
+Usage: cspell lint [options] [files...]
+
+Check spelling
+
+Options:
+  -c, --config <cspell.json>  Configuration file to use.  By default cspell
+                              looks for cspell.json in the current directory.
+
+  -v, --verbose               display more information about the files being
+                              checked and the configuration
+
+  --locale <locale>           Set language locales. i.e. "en,fr" for English
+                              and French, or "en-GB" for British English.
+
+  --language-id <language>    Force programming language for unknown
+                              extensions. i.e. "php" or "scala"
+
+  --wordsOnly                 Only output the words not found in the
+                              dictionaries.
+
+  -u, --unique                Only output the first instance of a word not
+                              found in the dictionaries.
+
+  --debug                     Output information useful for debugging
+                              cspell.json files.
+
+  -e, --exclude <glob>        Exclude files matching the glob pattern. This
+                              option can be used multiple times to add multiple
+                              globs.
+
+  --no-issues                 Do not show the spelling errors.
+  --no-progress               Turn off progress messages
+  --no-summary                Turn off summary message in console
+  -s, --silent                Silent mode, suppress error messages
+  -r, --root <root folder>    Root directory, defaults to current directory.
+  --relative                  Issues are displayed relative to root.
+  --show-context              Show the surrounding text around an issue.
+  --show-suggestions          Show spelling suggestions.
+  --must-find-files           Error if no files are found (default: true)
+  --no-must-find-files        Do not error is no files are found
+  --no-color                  Turn off color.
+  --color                     Force color
+  -h, --help                  display help for command
+
+
+Examples:
+    cspell "*.js"                   Check all .js files in the current directory
+    cspell "**/*.js"                Check all .js files from the current directory
+    cspell "src/**/*.js"            Only check .js under src
+    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
+    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
+    cat LICENSE | cspell stdin      Check stdin
+```
+
+## Command: `check` - Quick Visual Check
+
+Do a quick visual check of a file. This is a great way to see which text is included in the check.
 
 ```sh
 cspell check <filename>
@@ -68,6 +141,14 @@ To get color in less, use `--color` and `less -r`
 ```sh
 cspell check <filename> --color | less -r
 ```
+
+## Command: `trace` - See which dictionaries contain a word
+
+Trace shows a the list of known dictionaries and a `*` next to the ones that contain the word.
+
+A `!` will appear next to the ones where the word is forbidden.
+
+![image](https://user-images.githubusercontent.com/3740137/129488961-b99dbd2f-7daa-4462-96cd-568e0d4c3c6e.png)
 
 ## CI/CD Continuous Integration support
 
