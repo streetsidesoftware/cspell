@@ -1,6 +1,6 @@
 'use strict';
 
-const keywords = ['deprecatedMessage', 'markdownDescription', 'scope'];
+const keywords = ['deprecationMessage', 'markdownDescription', 'scope'];
 
 function addKeywords(ajv) {
     for (const keyword of keywords) {
