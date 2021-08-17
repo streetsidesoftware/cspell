@@ -29,7 +29,7 @@ export interface FileSettings extends ExtendableSettings {
      * Configuration format version of the settings file.
      * @default "0.2"
      */
-    version?: '0.2' | '0.1';
+    version?: Version;
 
     /** Words to add to global dictionary -- should only be in the user config file. */
     userWords?: string[];
@@ -318,7 +318,7 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
     /**
      * Only for legacy dictionary definitions
      * @deprecated
-     * @deprecatedMessage Use `path` instead.
+     * @deprecationMessage Use `path` instead.
      * @hidden
      */
     file?: undefined;
@@ -327,7 +327,7 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
 /**
  * Only for legacy dictionary definitions
  * @deprecated
- * @deprecatedMessage Use `DictionaryDefinitionPreferred`
+ * @deprecationMessage Use `DictionaryDefinitionPreferred`
  */
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
     /** @hidden */
@@ -336,7 +336,7 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
     /**
      * Path to the file, only for legacy dictionary definitions
      * @deprecated
-     * @deprecatedMessage Use `path` instead.
+     * @deprecationMessage Use `path` instead.
      */
     file: DictionaryPath;
 }
@@ -351,7 +351,7 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     /**
      * File name
      * @deprecated
-     * @deprecatedMessage Use path instead.
+     * @deprecationMessage Use path instead.
      */
     file: FsPath;
     /**
@@ -413,7 +413,7 @@ export interface LanguageSettingFilterFieldsDeprecated {
     /**
      * Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
      * @deprecated
-     * @deprecatedMessage Use `locale` instead
+     * @deprecationMessage Use `locale` instead
      */
     local?: LocaleId | LocaleId[];
 }
@@ -465,8 +465,22 @@ export type DictionaryId = string;
 export type LocaleId = string;
 
 /**
+ * Configuration File Version
+ */
+export type VersionLatest = '0.2';
+
+/**
+ * Legacy Configuration File Versions
  * @deprecated
- * @deprecatedMessage Use LocaleId instead
+ * @deprecationMessage Use `0.2`
+ */
+export type VersionLegacy = '0.1';
+
+export type Version = VersionLatest | VersionLegacy;
+
+/**
+ * @deprecated
+ * @deprecationMessage Use LocaleId instead
  */
 export type LocalId = LocaleId;
 
@@ -498,19 +512,19 @@ export interface GlobDef {
 
 /**
  * This can be '*', 'typescript', 'cpp', 'json', etc.
- * @pattern ^(!?[\w_\-\s]+)|(\*)$
+ * @pattern ^(!?[-\w_\s]+)|(\*)$
  */
 export type LanguageIdSingle = string;
 
 /**
  * This can be 'typescript,cpp,json,literal haskell', etc.
- * @pattern ^([\w_\-\s]+)(,[\w_\-\s]+)*$
+ * @pattern ^([-\w_\s]+)(,[-\w_\s]+)*$
  */
 export type LanguageIdMultiple = string;
 
 /**
  * This can be 'typescript,cpp,json,literal haskell', etc.
- * @pattern ^(![\w_\-\s]+)(,![\w_\-\s]+)*$
+ * @pattern ^(![-\w_\s]+)(,![-\w_\s]+)*$
  */
 export type LanguageIdMultipleNeg = string;
 

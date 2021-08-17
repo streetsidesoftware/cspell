@@ -31,7 +31,7 @@
     },
     "DictionaryDefinitionAlternate": {
       "additionalProperties": false,
-      "deprecatedMessage": "Use `DictionaryDefinitionPreferred`",
+      "deprecationMessage": "Use `DictionaryDefinitionPreferred`",
       "description": "Only for legacy dictionary definitions",
       "properties": {
         "description": {
@@ -40,7 +40,7 @@
         },
         "file": {
           "$ref": "#/definitions/DictionaryPath",
-          "deprecatedMessage": "Use `path` instead.",
+          "deprecationMessage": "Use `path` instead.",
           "description": "Path to the file, only for legacy dictionary definitions"
         },
         "name": {
@@ -174,17 +174,17 @@
     },
     "LanguageIdMultiple": {
       "description": "This can be 'typescript,cpp,json,literal haskell', etc.",
-      "pattern": "^([\\w_\\-\\s]+)(,[\\w_\\-\\s]+)*$",
+      "pattern": "^([-\\w_\\s]+)(,[-\\w_\\s]+)*$",
       "type": "string"
     },
     "LanguageIdMultipleNeg": {
       "description": "This can be 'typescript,cpp,json,literal haskell', etc.",
-      "pattern": "^(![\\w_\\-\\s]+)(,![\\w_\\-\\s]+)*$",
+      "pattern": "^(![-\\w_\\s]+)(,![-\\w_\\s]+)*$",
       "type": "string"
     },
     "LanguageIdSingle": {
       "description": "This can be '*', 'typescript', 'cpp', 'json', etc.",
-      "pattern": "^(!?[\\w_\\-\\s]+)|(\\*)$",
+      "pattern": "^(!?[-\\w_\\s]+)|(\\*)$",
       "type": "string"
     },
     "LanguageSetting": {
@@ -268,7 +268,7 @@
               "type": "array"
             }
           ],
-          "deprecatedMessage": "Use `locale` instead",
+          "deprecationMessage": "Use `locale` instead",
           "description": "Deprecated - The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
         },
         "locale": {
@@ -587,6 +587,27 @@
     "SimpleGlob": {
       "description": "Simple Glob string, the root will be globRoot",
       "type": "string"
+    },
+    "Version": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/VersionLatest"
+        },
+        {
+          "$ref": "#/definitions/VersionLegacy"
+        }
+      ]
+    },
+    "VersionLatest": {
+      "const": "0.2",
+      "description": "Configuration File Version",
+      "type": "string"
+    },
+    "VersionLegacy": {
+      "const": "0.1",
+      "deprecationMessage": "Use `0.2`",
+      "description": "Legacy Configuration File Versions",
+      "type": "string"
     }
   },
   "properties": {
@@ -797,13 +818,9 @@
       "type": "array"
     },
     "version": {
+      "$ref": "#/definitions/Version",
       "default": "0.2",
-      "description": "Configuration format version of the settings file.",
-      "enum": [
-        "0.2",
-        "0.1"
-      ],
-      "type": "string"
+      "description": "Configuration format version of the settings file."
     },
     "words": {
       "description": "list of words to be always considered correct",
