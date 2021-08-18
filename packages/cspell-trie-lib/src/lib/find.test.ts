@@ -1,4 +1,11 @@
-import { findWord, PartialFindOptions, FindFullResult, __testing__ } from './find';
+import {
+    createFindOptions,
+    FindFullResult,
+    findLegacyCompound,
+    findWord,
+    PartialFindOptions,
+    __testing__,
+} from './find';
 import { parseDictionary } from './SimpleDictionaryParser';
 import { Trie } from './trie';
 
@@ -87,34 +94,54 @@ describe('Validate findWord', () => {
 });
 
 describe('Validate Legacy Compound lookup', () => {
-    test('compound words', () => {
-        // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
+    // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
+    // cspell:ignore walkin walkjay walkedge
+    test.each`
+        word             | compoundLen | expected
+        ${'talkinglift'} | ${true}     | ${true}
+        ${'joywalk'}     | ${true}     | ${true}
+        ${'jaywalk'}     | ${true}     | ${true}
+        ${'jwalk'}       | ${true}     | ${false}
+        ${'awalk'}       | ${true}     | ${false}
+        ${'jayjay'}      | ${true}     | ${true}
+        ${'jayjay'}      | ${4}        | ${false}
+        ${'jayi'}        | ${3}        | ${false}
+        ${'toto'}        | ${true}     | ${false}
+        ${'toto'}        | ${2}        | ${true}
+        ${'toto'}        | ${1}        | ${true}
+        ${'iif'}         | ${1}        | ${true}
+        ${'uplift'}      | ${true}     | ${false}
+        ${'endless'}     | ${true}     | ${true}
+        ${'joywalk'}     | ${999}      | ${false}
+        ${'walked'}      | ${true}     | ${true}
+        ${'walkin'}      | ${true}     | ${false}
+        ${'walkup'}      | ${true}     | ${false}
+        ${'walkjay'}     | ${true}     | ${true}
+        ${'walkjay'}     | ${4}        | ${false}
+        ${'walkedge'}    | ${4}        | ${true}
+    `('compound words no case "$word" compoundLen: $compoundLen', ({ word, compoundLen, expected }) => {
         const trie = Trie.create(sampleWords);
         function has(word: string, compoundLen: true | number): boolean {
             const len = compoundLen === true ? 3 : compoundLen;
             return !!findLegacyCompoundWord([trie.root], word, len).found;
         }
-        expect(has('talkinglift', true)).toBe(true);
-        expect(has('joywalk', true)).toBe(true);
-        expect(has('jaywalk', true)).toBe(true);
-        expect(has('jwalk', true)).toBe(false);
-        expect(has('awalk', true)).toBe(false);
-        expect(has('jayjay', true)).toBe(true);
-        expect(has('jayjay', 4)).toBe(false);
-        expect(has('jayi', 3)).toBe(false);
-        expect(has('toto', true)).toBe(false);
-        expect(has('toto', 2)).toBe(true);
-        expect(has('toto', 1)).toBe(true);
-        expect(has('iif', 1)).toBe(true);
-        expect(has('uplift', true)).toBe(false);
-        expect(has('endless', true)).toBe(true);
-        expect(has('joywalk', 999)).toBe(false);
-        expect(has('walked', true)).toBe(true);
-        expect(has('walkin', true)).toBe(false); // cspell:disable-line
-        expect(has('walkup', true)).toBe(false); // cspell:disable-line
-        expect(has('walkjay', true)).toBe(true); // cspell:disable-line
-        expect(has('walkjay', 4)).toBe(false); // cspell:disable-line
-        expect(has('walkedge', 4)).toBe(true); // cspell:disable-line
+        expect(has(word, compoundLen)).toBe(expected);
+    });
+
+    // cspell:ignore cafecode codecafe
+    test.each`
+        word            | compoundLen | expected
+        ${'codecafe'}   | ${true}     | ${true}
+        ${'codeerrors'} | ${true}     | ${true}
+        ${'cafecode'}   | ${true}     | ${true}
+    `('compound words "$word" compoundLen: $compoundLen', ({ word, compoundLen, expected }) => {
+        const trie = dictionary();
+        function has(word: string, minLegacyCompoundLength: true | number): boolean {
+            const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : 3;
+            const findOptions = createFindOptions({ legacyMinCompoundLength: len });
+            return !!findLegacyCompound(trie.root, word, findOptions).found;
+        }
+        expect(has(word, compoundLen)).toBe(expected);
     });
 });
 
