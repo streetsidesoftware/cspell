@@ -286,6 +286,7 @@ function findLegacyCompoundNode(
     ];
 
     const w = word;
+    const wLen = w.length;
     let compoundUsed = false;
     let caseMatched = true;
     let i = 0;
@@ -296,7 +297,7 @@ function findLegacyCompoundNode(
         const h = w[i++];
         const n = s.cr || s.n;
         const c = n?.c?.get(h);
-        if (c && i < word.length) {
+        if (c && i < wLen) {
             // Go deeper.
             stack[i] = {
                 n: c,
@@ -310,7 +311,12 @@ function findLegacyCompoundNode(
             // We did not find the word backup and take the first unused compound branch
             while (--i > 0) {
                 const s = stack[i];
-                if (s.usedRoots < numRoots && s.n?.f && s.subLength >= minCompoundLength) {
+                if (
+                    s.usedRoots < numRoots &&
+                    s.n?.f &&
+                    (s.subLength >= minCompoundLength || !s.subLength) &&
+                    wLen - i >= minCompoundLength
+                ) {
                     break;
                 }
             }
@@ -319,7 +325,7 @@ function findLegacyCompoundNode(
                 const s = stack[i];
                 s.cr = roots[s.usedRoots++];
                 s.subLength = 0;
-                s.isCompound = i > 0;
+                s.isCompound = compoundUsed;
                 s.caseMatched = s.caseMatched && s.usedRoots <= 1;
             } else {
                 break;
