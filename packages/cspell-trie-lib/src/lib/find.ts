@@ -2,7 +2,23 @@ import { TrieNode, FLAG_WORD } from './TrieNode';
 import { mergeDefaults } from './util';
 import { FORBID_PREFIX, COMPOUND_FIX, CASE_INSENSITIVE_PREFIX } from './constants';
 
-export type CompoundModes = 'none' | 'compound' | 'legacy';
+/**
+ * No compounding allowed.
+ */
+export type CompoundModeNone = 'none';
+
+/**
+ * Allow natural compounding in the dictionary
+ * using compound prefixes
+ */
+export type CompoundModesCompound = 'compound';
+
+/**
+ * Allow all possible compounds -- Very slow.
+ */
+export type CompoundModesLegacy = 'legacy';
+
+export type CompoundModes = CompoundModeNone | CompoundModesCompound | CompoundModesLegacy;
 
 const defaultLegacyMinCompoundLength = 3;
 export interface FindOptions {
@@ -27,7 +43,13 @@ export interface FindResult {
 }
 
 export interface FindFullResult extends FindResult {
-    forbidden: boolean;
+    /**
+     * Is the word explicitly forbidden.
+     * - `true` - word is in the forbidden list.
+     * - `false` - word is not in the forbidden list.
+     * - `undefined` - unknown - was not checked.
+     * */
+    forbidden: boolean | undefined;
 }
 
 export interface FindFullNodeResult extends FindNodeResult, FindFullResult {}
@@ -88,28 +110,23 @@ function _findWordNode(root: TrieNode, word: string, options: FindOptions): Find
 
     function __findCompound(): FindFullNodeResult {
         const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix);
-        let forbidden = false;
+        const result: FindFullNodeResult = { ...f };
         if (f.found !== false && f.compoundUsed) {
             // If case was ignored when searching for the word, then check the forbidden
             // in the ignore case forbidden list.
             const r = !f.caseMatched ? walk(root, options.caseInsensitivePrefix) : root;
-            forbidden = isForbiddenWord(r, word, options.forbidPrefix);
+            result.forbidden = isForbiddenWord(r, word, options.forbidPrefix);
         }
-        const result: FindFullNodeResult = { ...f, forbidden };
         return result;
     }
 
     function __findExact(): FindFullNodeResult {
         const n = walk(root, word);
         const isFound = isEndOfWordNode(n);
-        let forbidden = false;
-        if (!isFound) {
-            forbidden = isForbiddenWord(root, word, options.forbidPrefix);
-        }
         const result: FindFullNodeResult = {
-            found: (isFound || forbidden) && word,
+            found: isFound && word,
             compoundUsed: false,
-            forbidden,
+            forbidden: isForbiddenWord(root, word, options.forbidPrefix),
             node: n,
             caseMatched: true,
         };
@@ -131,10 +148,7 @@ export function findLegacyCompound(root: TrieNode, word: string, options: FindOp
     if (!options.matchCase) {
         roots.push(walk(root, options.caseInsensitivePrefix));
     }
-    const f = findLegacyCompoundNode(roots, word, options.legacyMinCompoundLength);
-    const forbidden = false;
-    const result: FindFullNodeResult = { ...f, forbidden };
-    return result;
+    return findLegacyCompoundNode(roots, word, options.legacyMinCompoundLength);
 }
 
 interface FindCompoundChain {
@@ -165,7 +179,7 @@ export function findCompoundNode(
         for (i = 0; i < prefix.length && r; ++i) {
             r = r.c?.get(prefix[i]);
         }
-        const caseMatched = s.caseMatched && prefix !== ignoreCasePrefix;
+        const caseMatched = s.caseMatched && prefix[0] !== ignoreCasePrefix;
         return {
             n: s.n,
             compoundPrefix: prefix === compoundPrefix ? possibleCompoundPrefix : '',
@@ -220,7 +234,7 @@ export function findCompoundNode(
     }
 
     const found = (i && i === word.length && word) || false;
-    const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: false, caseMatched };
+    const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: undefined, caseMatched };
     return result;
 }
 
@@ -238,9 +252,9 @@ function findCompoundWord(
     );
     // Was it a word?
     if (!node || !node.f) {
-        return { found: false, compoundUsed, node, forbidden: false, caseMatched };
+        return { found: false, compoundUsed, node, forbidden: undefined, caseMatched };
     }
-    return { found, compoundUsed, node, forbidden: false, caseMatched };
+    return { found, compoundUsed, node, forbidden: undefined, caseMatched };
 }
 
 export function findWordExact(root: TrieNode | undefined, word: string): boolean {
@@ -338,7 +352,7 @@ function findLegacyCompoundNode(
     }
 
     const found = (i && i === word.length && word) || false;
-    const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: false, caseMatched };
+    const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: undefined, caseMatched };
     return result;
 }
 
