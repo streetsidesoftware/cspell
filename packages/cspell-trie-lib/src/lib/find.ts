@@ -351,7 +351,24 @@ function findLegacyCompoundNode(
         }
     }
 
-    const found = (i && i === word.length && word) || false;
+    function extractWord(): string | false {
+        if (!word || i < word.length) return false;
+
+        const letters: string[] = [];
+
+        let subLen = 0;
+        for (let j = 0; j < i; ++j) {
+            const { subLength } = stack[j];
+            if (subLength < subLen) {
+                letters.push('+');
+            }
+            letters.push(word[j]);
+            subLen = subLength;
+        }
+        return letters.join('');
+    }
+
+    const found = extractWord();
     const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: undefined, caseMatched };
     return result;
 }

@@ -93,10 +93,10 @@ describe('Validate findWord', () => {
         ['cafe', { matchCase: true, compoundMode: 'legacy' }, frFound(false)],
         ['cafe', { matchCase: false, compoundMode: 'legacy' }, frFound('cafe', { caseMatched: false })],
         ['codeErrors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound(false)],
-        ['errmsg', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('errmsg')],
-        ['errmsgerr', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('errmsgerr')],
-        ['code+Errors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('code+Errors')],
-        ['codeerrors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('codeerrors')],
+        ['errmsg', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('err+msg')],
+        ['errmsgerr', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('err+msg+err')],
+        ['code+Errors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('code++Errors')],
+        ['codeerrors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('code+errors')],
     ];
 
     test.each(tests)('%s %j %j', (word, options, exResult) => {
