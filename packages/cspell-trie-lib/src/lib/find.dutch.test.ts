@@ -22,7 +22,7 @@ describe('Validate findWord', () => {
                 matchCase: true,
                 compoundMode: 'none',
             })
-        ).toEqual(frFound('aanvaardbaard', { forbidden: true }));
+        ).toEqual({ ...frFound(false), forbidden: true });
 
         expect(findWord(trie, 'code', { matchCase: true, compoundMode: 'none' })).toEqual({
             found: 'code',
@@ -40,10 +40,14 @@ describe('Validate findWord', () => {
     });
 
     const tests: [string, PartialFindOptions, FindFullResult][] = [
-        ['Code', { matchCase: true, compoundMode: 'none' }, frNotFound()],
-        ['code', { matchCase: true, compoundMode: 'none' }, frFound('code')],
-        ['cafe', { matchCase: true, compoundMode: 'none' }, frNotFound()],
-        ['cafe', { matchCase: false, compoundMode: 'none' }, frFound('cafe', { caseMatched: false })],
+        ['Code', { matchCase: true, compoundMode: 'none' }, frNotFound({ forbidden: false })],
+        ['code', { matchCase: true, compoundMode: 'none' }, frFound('code', { forbidden: false })],
+        ['cafe', { matchCase: true, compoundMode: 'none' }, frNotFound({ forbidden: false })],
+        [
+            'cafe',
+            { matchCase: false, compoundMode: 'none' },
+            frFound('cafe', { caseMatched: false, forbidden: undefined }),
+        ],
 
         // Compounding enabled, but matching whole words (compounding not used).
         ['Code', { matchCase: true, compoundMode: 'compound' }, frCompoundFound(false)],
@@ -84,7 +88,7 @@ describe('Validate findWord', () => {
                       compoundMode: 'compound',
                   }));
         expect(r2.found).toEqual(word);
-        expect(r2.forbidden).toBe(false);
+        expect(r2.forbidden).toBeFalsy();
     });
 
     test.each(sampleWords())('Find Word case insensitive: %s', async (word) => {
@@ -94,7 +98,7 @@ describe('Validate findWord', () => {
             compoundMode: 'compound',
         });
         expect(r.found).toEqual(normalizeWordToLowercase(word));
-        expect(r.forbidden).toBe(false);
+        expect(r.forbidden).toBeFalsy();
     });
 
     test.each(sampleMisspellings())(`Check misspelled words: %s`, async (word) => {
@@ -113,7 +117,7 @@ describe('Validate findWord', () => {
                       compoundMode: 'compound',
                   }));
         expect(r2.found).toEqual(false);
-        expect(r2.forbidden).toBe(false);
+        expect(r2.forbidden).toBeFalsy();
     });
 
     test.each(sampleMisspellings())(`Check misspelled words case insensitive: %s`, async (word) => {
@@ -123,7 +127,7 @@ describe('Validate findWord', () => {
             compoundMode: 'compound',
         });
         expect(r.found).toEqual(false);
-        expect(r.forbidden).toBe(false);
+        expect(r.forbidden).toBeFalsy();
     });
 });
 
@@ -192,14 +196,14 @@ function processText(text: string): string[] {
 }
 
 function testCompound(word: string, found = true): [string, PartialFindOptions, FindFullResult] {
-    return [word, { matchCase: true, compoundMode: 'compound' }, frCompoundFound(found && word)];
+    return [word, { matchCase: true, compoundMode: 'compound' }, frCompoundFound(found && word, { forbidden: false })];
 }
 
 type PartialFindFullResult = Partial<FindFullResult>;
 
 function fr({
     found = false,
-    forbidden = false,
+    forbidden = undefined,
     compoundUsed = false,
     caseMatched = true,
 }: PartialFindFullResult): FindFullResult {

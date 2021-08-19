@@ -14,37 +14,36 @@ const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 describe('Validate findWord', () => {
     const trie = dictionary().root;
 
-    test('find exact words preserve case', () => {
+    // cspell:ignore bluemsg
+    test.each`
+        word           | opts                                              | expected
+        ${'blueerror'} | ${{ matchCase: true, compoundMode: 'none' }}      | ${{ found: false, compoundUsed: false, forbidden: true, caseMatched: true }}
+        ${'blueerror'} | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: false, compoundUsed: true, forbidden: undefined, caseMatched: true }}
+        ${'blueCode'}  | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'blueCode', compoundUsed: true, forbidden: true, caseMatched: true }}
+        ${'bluecode'}  | ${{ matchCase: false, compoundMode: 'compound' }} | ${{ found: 'bluecode', compoundUsed: true, forbidden: true, caseMatched: false }}
+        ${'bluemsg'}   | ${{ matchCase: false, compoundMode: 'compound' }} | ${{ found: 'bluemsg', compoundUsed: true, forbidden: false, caseMatched: true }}
+        ${'code'}      | ${{ matchCase: true, compoundMode: 'none' }}      | ${{ found: 'code', compoundUsed: false, forbidden: false, caseMatched: true }}
+        ${'code'}      | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'code', compoundUsed: false, forbidden: undefined, caseMatched: true }}
+    `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
         // Code is not allowed as a full word.
-        expect(
-            findWord(trie, 'blueerror', {
-                matchCase: true,
-                compoundMode: 'none',
-            })
-        ).toEqual({ found: 'blueerror', compoundUsed: false, forbidden: true, caseMatched: true });
-
-        expect(findWord(trie, 'code', { matchCase: true, compoundMode: 'none' })).toEqual({
-            found: 'code',
-            compoundUsed: false,
-            forbidden: false,
-            caseMatched: true,
-        });
-
-        expect(
-            findWord(trie, 'code', {
-                matchCase: true,
-                compoundMode: 'compound',
-            })
-        ).toEqual(expect.objectContaining({ found: 'code', compoundUsed: false, forbidden: false, caseMatched: true }));
+        expect(findWord(trie, word, opts)).toEqual(expected);
     });
 
     const tests: [string, PartialFindOptions, FindFullResult][] = [
-        ['errorCodes', { matchCase: false, compoundMode: 'compound' }, frCompoundFound('errorCodes')],
-        ['errorcodes', { matchCase: false, compoundMode: 'compound' }, frCompoundFound('errorcodes')],
-        ['Code', { matchCase: true, compoundMode: 'none' }, frNotFound()],
-        ['code', { matchCase: true, compoundMode: 'none' }, frFound('code')],
-        ['cafe', { matchCase: true, compoundMode: 'none' }, frNotFound()],
-        ['café', { matchCase: true, compoundMode: 'none' }, frFound('café')],
+        [
+            'errorCodes',
+            { matchCase: false, compoundMode: 'compound' },
+            frCompoundFound('errorCodes', { forbidden: false }),
+        ],
+        [
+            'errorcodes',
+            { matchCase: false, compoundMode: 'compound' },
+            frCompoundFound('errorcodes', { forbidden: false, caseMatched: false }),
+        ],
+        ['Code', { matchCase: true, compoundMode: 'none' }, frNotFound({ forbidden: false })],
+        ['code', { matchCase: true, compoundMode: 'none' }, frFound('code', { forbidden: false })],
+        ['cafe', { matchCase: true, compoundMode: 'none' }, frNotFound({ forbidden: false })],
+        ['café', { matchCase: true, compoundMode: 'none' }, frFound('café', { forbidden: false })],
 
         // non-normalized words
         ['café', { matchCase: false, compoundMode: 'none' }, frFound('café')],
@@ -53,10 +52,10 @@ describe('Validate findWord', () => {
         ['Code', { matchCase: false, compoundMode: 'none' }, frNotFound()],
 
         // It will find the special characters. Might not be desired.
-        ['code+', { matchCase: true, compoundMode: 'none' }, frFound('code+')],
-        ['+Code+', { matchCase: true, compoundMode: 'none' }, frFound('+Code+')],
-        ['code+', { matchCase: true, compoundMode: 'none' }, frFound('code+')],
-        ['~+code+', { matchCase: true, compoundMode: 'none' }, frFound('~+code+')],
+        ['code+', { matchCase: true, compoundMode: 'none' }, frFound('code+', { forbidden: false })],
+        ['+Code+', { matchCase: true, compoundMode: 'none' }, frFound('+Code+', { forbidden: false })],
+        ['code+', { matchCase: true, compoundMode: 'none' }, frFound('code+', { forbidden: false })],
+        ['~+code+', { matchCase: true, compoundMode: 'none' }, frFound('~+code+', { forbidden: false })],
 
         // Compounding enabled, but matching whole words (compounding not used).
         ['Code', { matchCase: true, compoundMode: 'compound' }, frFound(false)],
@@ -64,15 +63,27 @@ describe('Validate findWord', () => {
         ['cafe', { matchCase: true, compoundMode: 'compound' }, frFound(false)],
         ['cafe', { matchCase: false, compoundMode: 'compound' }, frFound('cafe', { caseMatched: false })],
 
-        ['errorCodes', { matchCase: true, compoundMode: 'compound' }, frCompoundFound('errorCodes')],
-        ['errorCodes', { matchCase: false, compoundMode: 'compound' }, frCompoundFound('errorCodes')],
+        [
+            'errorCodes',
+            { matchCase: true, compoundMode: 'compound' },
+            frCompoundFound('errorCodes', { forbidden: false }),
+        ],
+        [
+            'errorCodes',
+            { matchCase: false, compoundMode: 'compound' },
+            frCompoundFound('errorCodes', { forbidden: false }),
+        ],
         ['errorsCodes', { matchCase: true, compoundMode: 'compound' }, frCompoundFound(false)],
         ['errorsCodes', { matchCase: true, compoundMode: 'compound' }, frCompoundFound(false)],
-        ['codeErrors', { matchCase: true, compoundMode: 'compound' }, frCompoundFound('codeErrors')],
+        [
+            'codeErrors',
+            { matchCase: true, compoundMode: 'compound' },
+            frCompoundFound('codeErrors', { forbidden: false }),
+        ],
         [
             'codeCodeCodeCodeError',
             { matchCase: true, compoundMode: 'compound' },
-            frCompoundFound('codeCodeCodeCodeError'),
+            frCompoundFound('codeCodeCodeCodeError', { forbidden: false }),
         ],
 
         // Legacy compounding
@@ -82,14 +93,14 @@ describe('Validate findWord', () => {
         ['cafe', { matchCase: true, compoundMode: 'legacy' }, frFound(false)],
         ['cafe', { matchCase: false, compoundMode: 'legacy' }, frFound('cafe', { caseMatched: false })],
         ['codeErrors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound(false)],
-        ['errmsg', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('errmsg')],
-        ['errmsgerr', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('errmsgerr')],
-        ['code+Errors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('code+Errors')],
-        ['codeerrors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('codeerrors')],
+        ['errmsg', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('err+msg')],
+        ['errmsgerr', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('err+msg+err')],
+        ['code+Errors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('code++Errors')],
+        ['codeerrors', { matchCase: true, compoundMode: 'legacy' }, frCompoundFound('code+errors')],
     ];
 
     test.each(tests)('%s %j %j', (word, options, exResult) => {
-        expect(findWord(trie, word, options)).toEqual(expect.objectContaining(exResult));
+        expect(findWord(trie, word, options)).toEqual(oc(exResult));
     });
 });
 
@@ -149,7 +160,7 @@ type PartialFindFullResult = Partial<FindFullResult>;
 
 function fr({
     found = false,
-    forbidden = false,
+    forbidden = undefined,
     compoundUsed = false,
     caseMatched = true,
 }: PartialFindFullResult): FindFullResult {
@@ -178,7 +189,7 @@ function frCompoundFound(found: string | false, r: PartialFindFullResult = {}): 
     return frFound(found, { ...r, compoundUsed });
 }
 
-// cspell:ignore blueerror
+// cspell:ignore blueerror bluecode
 function dictionary(): Trie {
     // camel case dictionary
     return parseDictionary(`
@@ -197,6 +208,8 @@ function dictionary(): Trie {
         *msg*
         blue*
         !blueerror
+        ~!bluecode
+        !blueCode
     `);
 }
 
@@ -282,3 +295,7 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
+
+function oc<T>(t: Partial<T>): T {
+    return expect.objectContaining(t);
+}
