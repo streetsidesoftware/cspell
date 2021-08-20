@@ -1,6 +1,13 @@
 import { operators } from 'gensequence';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './util';
-import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, FORBID_PREFIX, CASE_INSENSITIVE_PREFIX, LINE_COMMENT } from './constants';
+import {
+    COMPOUND_FIX,
+    OPTIONAL_COMPOUND_FIX,
+    FORBID_PREFIX,
+    CASE_INSENSITIVE_PREFIX,
+    LINE_COMMENT,
+    IDENTITY_PREFIX,
+} from './constants';
 import { Trie } from './trie';
 import { buildTrieFast } from './TrieBuilder';
 
@@ -9,7 +16,21 @@ export interface ParseDictionaryOptions {
     optionalCompoundCharacter: string;
     forbiddenPrefix: string;
     caseInsensitivePrefix: string;
+    /**
+     * Start of a single-line comment.
+     */
     commentCharacter: string;
+
+    /**
+     * if word starts with prefix, do not strip case or accents.
+     * Prefix is not stored.
+     */
+    keepExactPrefix: string;
+
+    /**
+     * Tell the parser to NOT automatically strip case and accents.
+     */
+    stripCaseAndAccents: boolean;
 }
 
 const _defaultOptions: ParseDictionaryOptions = {
@@ -18,6 +39,8 @@ const _defaultOptions: ParseDictionaryOptions = {
     compoundCharacter: COMPOUND_FIX,
     forbiddenPrefix: FORBID_PREFIX,
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
+    keepExactPrefix: IDENTITY_PREFIX,
+    stripCaseAndAccents: true,
 };
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
@@ -26,20 +49,23 @@ export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.free
  * Normalizes a dictionary words based upon prefix / suffixes.
  * Case insensitive versions are also generated.
  * @param lines - one word per line
- * @param options - defines prefixes used when parsing lines.
+ * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
 export function parseDictionaryLines(
     lines: Iterable<string>,
-    options: ParseDictionaryOptions = _defaultOptions
+    options?: Partial<ParseDictionaryOptions>
 ): Iterable<string> {
+    const _options = mergeOptions(_defaultOptions, options);
     const {
         commentCharacter,
         optionalCompoundCharacter: optionalCompound,
         compoundCharacter: compound,
         caseInsensitivePrefix: ignoreCase,
         forbiddenPrefix: forbidden,
-    } = options;
+        keepExactPrefix: keepCase,
+        stripCaseAndAccents,
+    } = _options;
 
     const regexComment = new RegExp(escapeRegEx(commentCharacter) + '.*', 'g');
 
@@ -80,19 +106,28 @@ export function parseDictionaryLines(
         }
     }
 
-    const doNotNormalizePrefix = new Set([forbidden, ignoreCase]);
+    const doNotNormalizePrefix = new Set([forbidden, ignoreCase, keepCase, '"']);
 
     function removeDoublePrefix(w: string): string {
         return w.startsWith(ignoreCase + ignoreCase) ? w.slice(1) : w;
     }
 
+    function stripKeepCasePrefixAndQuotes(word: string): string {
+        word = word.replace(/"(.*)"/, '$1');
+        return word[0] === keepCase ? word.slice(1) : word;
+    }
+
+    function _normalize(word: string): string {
+        return normalizeWord(stripKeepCasePrefixAndQuotes(word));
+    }
+
     function* mapNormalize(word: string) {
-        word = normalizeWord(word);
+        const nWord = _normalize(word);
         const forms = new Set<string>();
-        forms.add(word);
-        if (!doNotNormalizePrefix.has(word[0])) {
-            for (const n of normalizeWordForCaseInsensitive(word)) {
-                if (n !== word) forms.add(ignoreCase + n);
+        forms.add(nWord);
+        if (stripCaseAndAccents && !doNotNormalizePrefix.has(word[0])) {
+            for (const n of normalizeWordForCaseInsensitive(nWord)) {
+                if (n !== nWord) forms.add(ignoreCase + n);
             }
         }
         yield* forms;
@@ -112,22 +147,32 @@ export function parseDictionaryLines(
     return processLines(lines);
 }
 
-export function parseLinesToDictionary(
-    lines: Iterable<string>,
-    options: ParseDictionaryOptions = _defaultOptions
-): Trie {
-    const dictLines = parseDictionaryLines(lines, options);
+export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
+    const _options = mergeOptions(_defaultOptions, options);
+    const dictLines = parseDictionaryLines(lines, _options);
     return buildTrieFast([...new Set(dictLines)].sort(), {
-        compoundCharacter: options.compoundCharacter,
-        forbiddenWordPrefix: options.forbiddenPrefix,
-        stripCaseAndAccentsPrefix: options.caseInsensitivePrefix,
+        compoundCharacter: _options.compoundCharacter,
+        forbiddenWordPrefix: _options.forbiddenPrefix,
+        stripCaseAndAccentsPrefix: _options.caseInsensitivePrefix,
     });
 }
 
-export function parseDictionary(text: string, options?: ParseDictionaryOptions): Trie {
+export function parseDictionary(text: string, options?: Partial<ParseDictionaryOptions>): Trie {
     return parseLinesToDictionary(text.split('\n'), options);
 }
 
 function escapeRegEx(s: string) {
     return s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
+}
+
+function mergeOptions(
+    base: ParseDictionaryOptions,
+    ...partials: (Partial<ParseDictionaryOptions> | undefined)[]
+): ParseDictionaryOptions {
+    const opt: ParseDictionaryOptions = { ...base };
+    for (const p of partials) {
+        if (!p) continue;
+        Object.assign(opt, p);
+    }
+    return opt;
 }

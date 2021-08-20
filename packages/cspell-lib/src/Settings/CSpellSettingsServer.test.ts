@@ -20,16 +20,21 @@ import {
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 import { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
+import { logError, logWarning } from '../util/logger';
+import { mocked } from 'ts-jest/utils';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
 
-const { normalizeSettings } = __testing__;
+const { normalizeSettings, validateRawConfigVersion, validateRawConfigExports } = __testing__;
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
 const samplesDir = path.resolve(rootCspellLib, 'samples');
 const samplesSrc = path.join(samplesDir, 'src');
 
 jest.mock('../util/logger');
+
+const mockedLogError = mocked(logError);
+const mockedLogWarning = mocked(logWarning);
 
 describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings with conflicting "name"', () => {
@@ -415,6 +420,11 @@ describe('Validate Glob resolution', () => {
 });
 
 describe('Validate search/load config files', () => {
+    beforeEach(() => {
+        mockedLogError.mockClear();
+        mockedLogWarning.mockClear();
+    });
+
     function importRefWithError(filename: string): ImportFileRefWithError {
         return {
             filename,
@@ -536,6 +546,24 @@ describe('Validate search/load config files', () => {
         const uriYarn2TestMedCspell = path.join(uriTestPackages, 'yarn2/test-yarn2-med/cspell.json');
         const result = await loadConfig(uriYarn2TestMedCspell, {});
         expect(result.dictionaries).toEqual(['medical terms']);
+    });
+
+    test.each`
+        config                  | mocked              | expected
+        ${{ version: 'hello' }} | ${mockedLogError}   | ${'Unsupported config file version: "hello"\n  File: "filename"'}
+        ${{ version: '0.1' }}   | ${mockedLogWarning} | ${'Legacy config file version found: "0.1", upgrade to "0.2"\n  File: "filename"'}
+        ${{ version: '0.3' }}   | ${mockedLogWarning} | ${'Newer config file version found: "0.3". Supported version is "0.2"\n  File: "filename"'}
+    `('validateRawConfigVersion $config', ({ config, mocked, expected }) => {
+        validateRawConfigVersion(config, { filename: 'filename' });
+        expect(mocked).toHaveBeenCalledWith(expected);
+    });
+
+    test('validateRawConfigExports', () => {
+        const d = { default: {}, name: '' };
+        const c: CSpellUserSettings = d;
+        expect(() => validateRawConfigExports(c, { filename: 'filename' })).toThrowError(
+            'Module `export default` is not supported.\n  Use `module.exports =` instead.\n  File: "filename"'
+        );
     });
 });
 

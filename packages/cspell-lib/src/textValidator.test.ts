@@ -6,7 +6,7 @@ import {
     HasWordOptions,
     ValidationOptions,
 } from './textValidator';
-import { createCollection } from './SpellingDictionary';
+import { createCollection, getDictionary } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
 import * as Text from './util/text';
@@ -64,7 +64,7 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
-        const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
+        const dictEmpty = await createSpellingDictionary([], 'empty', 'test', {});
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictEmpty, sToV({})).toArray();
         const errors = result.map((wo) => wo.text);
@@ -72,14 +72,31 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests case in ignore words', async () => {
-        const dictEmpty = await createSpellingDictionary([], 'empty', 'test');
-        const text = 'We have PUBLISHed published multiple FIXesToThePROBLEMs';
+        const dict = await getDictionary({
+            words: ['=Sample', 'with', 'Issues'],
+            ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
+        });
+        const text =
+            'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
         const options: ValidationOptions = {
-            ignoreWordsAreCaseSensitive: true,
-            ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'],
             ignoreCase: false,
         };
-        const result = validateText(text, dictEmpty, options).toArray();
+        const result = validateText(text, dict, options).toArray();
+        const errors = result.map((wo) => wo.text);
+        expect(errors).toEqual(['have', 'published', 'multiple', 'fixestotheproblems', 'issues']);
+    });
+
+    test('tests case in ignore words ignore case', async () => {
+        const dict = await getDictionary({
+            words: ['=Sample', 'with', 'Issues'],
+            ignoreWords: ['"PUBLISHed"', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
+        });
+        const text =
+            'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
+        const options: ValidationOptions = {
+            ignoreCase: true,
+        };
+        const result = validateText(text, dict, options).toArray();
         const errors = result.map((wo) => wo.text);
         expect(errors).toEqual(['have', 'published', 'multiple']);
     });
@@ -102,7 +119,6 @@ describe('Validate textValidator functions', () => {
             allowCompoundWords: false,
             ignoreCase: false,
             flagWords,
-            ignoreWordsAreCaseSensitive: true,
         };
         const result = validateText(text, dict, options).toArray();
         const errors = result.map((wo) => wo.text);
@@ -134,7 +150,7 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests maxDuplicateProblems', async () => {
-        const dict = await createSpellingDictionary([], 'empty', 'test');
+        const dict = await createSpellingDictionary([], 'empty', 'test', {});
         const text = sampleText;
         const result = validateText(
             text,
@@ -147,7 +163,7 @@ describe('Validate textValidator functions', () => {
         const freq = FreqCounter.create(result.map((t) => t.text));
         expect(freq.total).toBe(freq.counters.size);
         const words = freq.counters.keys();
-        const dict2 = await createSpellingDictionary(words, 'test', 'test');
+        const dict2 = await createSpellingDictionary(words, 'test', 'test', {});
         const result2 = [...validateText(text, dict2, sToV({ maxNumberOfProblems: 1000, maxDuplicateProblems: 1 }))];
         expect(result2.length).toBe(0);
     });
@@ -199,16 +215,18 @@ describe('Validate textValidator functions', () => {
         ${'colour'} | ${[]}         | ${[ov({ text: 'colour', isFlagged: true })]}
         ${'colour'} | ${['colour']} | ${[]}
     `('Validate forbidden words', ({ text, ignoreWords, expected }) => {
-        const dict = getSpellingDictionaryCollectionSync();
-        const result = [
-            ...validateText(text, dict, { ignoreWords, ignoreCase: false, ignoreWordsAreCaseSensitive: false }),
-        ];
+        const dict = getSpellingDictionaryCollectionSync({ ignoreWords });
+        const result = [...validateText(text, dict, { ignoreCase: false })];
         expect(result).toEqual(expected);
     });
 });
 
-async function getSpellingDictionaryCollection() {
-    return getSpellingDictionaryCollectionSync();
+interface WithIgnoreWords {
+    ignoreWords?: string[];
+}
+
+async function getSpellingDictionaryCollection(options?: WithIgnoreWords) {
+    return getSpellingDictionaryCollectionSync(options);
 }
 
 const colors = [
@@ -279,14 +297,18 @@ const sampleText = `
     The orange tiger ate the whiteberry and the redberry.
 `;
 
-function getSpellingDictionaryCollectionSync() {
+function getSpellingDictionaryCollectionSync(options?: WithIgnoreWords) {
     const dicts = [
-        createSpellingDictionary(colors, 'colors', 'test'),
-        createSpellingDictionary(fruit, 'fruit', 'test'),
-        createSpellingDictionary(animals, 'animals', 'test'),
-        createSpellingDictionary(insects, 'insects', 'test'),
+        createSpellingDictionary(colors, 'colors', 'test', {}),
+        createSpellingDictionary(fruit, 'fruit', 'test', {}),
+        createSpellingDictionary(animals, 'animals', 'test', {}),
+        createSpellingDictionary(insects, 'insects', 'test', {}),
         createSpellingDictionary(words, 'words', 'test', { repMap: [['’', "'"]] }),
-        createSpellingDictionary(forbiddenWords, 'forbidden-words', 'test'),
+        createSpellingDictionary(forbiddenWords, 'forbidden-words', 'test', {}),
+        createSpellingDictionary(options?.ignoreWords || [], 'ignore-words', 'test', {
+            caseSensitive: true,
+            noSuggest: true,
+        }),
     ];
 
     return createCollection(dicts, 'collection');

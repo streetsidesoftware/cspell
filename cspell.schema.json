@@ -45,7 +45,11 @@
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
-          "description": "The reference name of the dictionary, used with program language settings"
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`"
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "type": "boolean"
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
@@ -76,7 +80,11 @@
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
-          "description": "The reference name of the dictionary, used with program language settings"
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`"
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "type": "boolean"
         },
         "path": {
           "$ref": "#/definitions/CustomDictionaryPath",
@@ -121,7 +129,11 @@
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
-          "description": "The reference name of the dictionary, used with program language settings"
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`"
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "type": "boolean"
         },
         "path": {
           "$ref": "#/definitions/DictionaryPath",
@@ -143,13 +155,35 @@
       "type": "object"
     },
     "DictionaryId": {
-      "description": "This matches the name in a dictionary definition",
+      "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`",
+      "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
+      "type": "string"
+    },
+    "DictionaryNegRef": {
+      "description": "This a negative reference to a named dictionary.\n\nIt is used to exclude or include a dictionary by name.\n\nThe reference starts with 1 or more `!`.\n- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`\n- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`    Overrides `!<dictionary_name>`.\n- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`    Overrides `!!<dictionary_name>`.",
+      "pattern": "^(?=!+[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
       "type": "string"
     },
     "DictionaryPath": {
       "description": "A File System Path to a dictionary file.",
       "pattern": "^.*\\.(?:txt|trie)(?:\\.gz)?$",
       "type": "string"
+    },
+    "DictionaryRef": {
+      "$ref": "#/definitions/DictionaryId",
+      "description": "This a reference to a named dictionary. It is expected to match the name of a dictionary.",
+      "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$"
+    },
+    "DictionaryReference": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/DictionaryRef"
+        },
+        {
+          "$ref": "#/definitions/DictionaryNegRef"
+        }
+      ],
+      "description": "Reference to a dictionary by name. One of:\n-  {@link  DictionaryRef } \n-  {@link  DictionaryNegRef }"
     },
     "FsPath": {
       "description": "A File System Path",
@@ -205,9 +239,9 @@
           "type": "string"
         },
         "dictionaries": {
-          "description": "Optional list of dictionaries to use.",
+          "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn of the dictionary with the name `typescript`.",
           "items": {
-            "$ref": "#/definitions/DictionaryId"
+            "$ref": "#/definitions/DictionaryReference"
           },
           "type": "array"
         },
@@ -289,6 +323,13 @@
           "description": "Optional name of configuration",
           "type": "string"
         },
+        "noSuggestDictionaries": {
+          "description": "Optional list of dictionaries that will not be used for suggestions. Words in these dictionaries are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in one of these dictionaries, it will be removed from the set of possible suggestions.",
+          "items": {
+            "$ref": "#/definitions/DictionaryReference"
+          },
+          "type": "array"
+        },
         "patterns": {
           "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
           "items": {
@@ -331,9 +372,9 @@
           "type": "string"
         },
         "dictionaries": {
-          "description": "Optional list of dictionaries to use.",
+          "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn of the dictionary with the name `typescript`.",
           "items": {
-            "$ref": "#/definitions/DictionaryId"
+            "$ref": "#/definitions/DictionaryReference"
           },
           "type": "array"
         },
@@ -439,6 +480,13 @@
         "name": {
           "description": "Optional name of configuration",
           "type": "string"
+        },
+        "noSuggestDictionaries": {
+          "description": "Optional list of dictionaries that will not be used for suggestions. Words in these dictionaries are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in one of these dictionaries, it will be removed from the set of possible suggestions.",
+          "items": {
+            "$ref": "#/definitions/DictionaryReference"
+          },
+          "type": "array"
         },
         "numSuggestions": {
           "default": 10,
@@ -629,9 +677,9 @@
       "type": "string"
     },
     "dictionaries": {
-      "description": "Optional list of dictionaries to use.",
+      "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn of the dictionary with the name `typescript`.",
       "items": {
-        "$ref": "#/definitions/DictionaryId"
+        "$ref": "#/definitions/DictionaryReference"
       },
       "type": "array"
     },
@@ -761,6 +809,13 @@
       "default": false,
       "description": "Prevents searching for local configuration when checking individual documents.",
       "type": "boolean"
+    },
+    "noSuggestDictionaries": {
+      "description": "Optional list of dictionaries that will not be used for suggestions. Words in these dictionaries are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in one of these dictionaries, it will be removed from the set of possible suggestions.",
+      "items": {
+        "$ref": "#/definitions/DictionaryReference"
+      },
+      "type": "array"
     },
     "numSuggestions": {
       "default": 10,

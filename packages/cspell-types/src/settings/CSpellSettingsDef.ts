@@ -272,8 +272,24 @@ export interface BaseSetting {
     /** Define additional available dictionaries */
     dictionaryDefinitions?: DictionaryDefinition[];
 
-    /** Optional list of dictionaries to use. */
-    dictionaries?: DictionaryId[];
+    /**
+     * Optional list of dictionaries to use.
+     * Each entry should match the name of the dictionary.
+     * To remove a dictionary from the list add `!` before the name.
+     * i.e. `!typescript` will turn of the dictionary with the name `typescript`.
+     */
+    dictionaries?: DictionaryReference[];
+
+    /**
+     * Optional list of dictionaries that will not be used for suggestions.
+     * Words in these dictionaries are considered correct, but will not be
+     * used when making spell correction suggestions.
+     *
+     * Note: if a word is suggested by another dictionary, but found in
+     * one of these dictionaries, it will be removed from the set of
+     * possible suggestions.
+     */
+    noSuggestDictionaries?: DictionaryReference[];
 
     /**
      * List of RegExp patterns or Pattern names to exclude from spell checking.
@@ -301,7 +317,16 @@ export type DictionaryDefinition =
     | DictionaryDefinitionLegacy;
 
 export interface DictionaryDefinitionBase {
-    /** The reference name of the dictionary, used with program language settings */
+    /**
+     * This is the name of a dictionary.
+     *
+     * Name Format:
+     * - Must contain at least 1 number or letter.
+     * - spaces are allowed.
+     * - Leading and trailing space will be removed.
+     * - Names ARE case-sensitive
+     * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`
+     */
     name: DictionaryId;
     /** Optional description */
     description?: string;
@@ -309,6 +334,16 @@ export interface DictionaryDefinitionBase {
     repMap?: ReplaceMap;
     /** Use Compounds */
     useCompounds?: boolean;
+    /**
+     * Indicate that suggestions should not come from this dictionary.
+     * Words in this dictionary are considered correct, but will not be
+     * used when making spell correction suggestions.
+     *
+     * Note: if a word is suggested by another dictionary, but found in
+     * this dictionary, it will be removed from the set of
+     * possible suggestions.
+     */
+    noSuggest?: boolean;
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
@@ -458,8 +493,51 @@ export type PatternRef = Pattern | PatternId | PredefinedPatterns;
 /** A list of pattern names or regular expressions */
 export type RegExpPatternList = PatternRef[];
 
-/** This matches the name in a dictionary definition */
+/**
+ * This is the name of a dictionary.
+ *
+ * Name Format:
+ * - Must contain at least 1 number or letter.
+ * - spaces are allowed.
+ * - Leading and trailing space will be removed.
+ * - Names ARE case-sensitive
+ * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`
+ *
+ * @pattern ^(?=[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
+ */
 export type DictionaryId = string;
+
+/**
+ * This a reference to a named dictionary.
+ * It is expected to match the name of a dictionary.
+ *
+ * @pattern ^(?=[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
+ */
+export type DictionaryRef = DictionaryId;
+
+/**
+ * This a negative reference to a named dictionary.
+ *
+ * It is used to exclude or include a dictionary by name.
+ *
+ * The reference starts with 1 or more `!`.
+ * - `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`
+ * - `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`
+ *    Overrides `!<dictionary_name>`.
+ * - `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`
+ *    Overrides `!!<dictionary_name>`.
+ *
+ * @pattern ^(?=!+[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
+ */
+export type DictionaryNegRef = string;
+
+/**
+ * Reference to a dictionary by name.
+ * One of:
+ * - {@link DictionaryRef}
+ * - {@link DictionaryNegRef}
+ */
+export type DictionaryReference = DictionaryRef | DictionaryNegRef;
 
 /** This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc. */
 export type LocaleId = string;

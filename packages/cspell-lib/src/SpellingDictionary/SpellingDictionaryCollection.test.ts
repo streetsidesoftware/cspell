@@ -1,7 +1,11 @@
 import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
 import { CompoundWordsMethod } from './SpellingDictionaryMethods';
-import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
+import {
+    createFailedToLoadDictionary,
+    createForbiddenWordsDictionary,
+    createSpellingDictionary,
+} from './createSpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 
@@ -26,13 +30,14 @@ describe('Verify using multiple dictionaries', () => {
     const wordsF = ['!pink*', '+berry', '+bug', '!stinkbug'];
     test('checks for existence', async () => {
         const dicts = await Promise.all([
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
-            createSpellingDictionary(wordsD, 'wordsD', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', {}),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', {}),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', {}),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', {}),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
         expect(dictCollection.has('mango')).toBe(true);
         expect(dictCollection.has('tree')).toBe(false);
         expect(dictCollection.has('avocado')).toBe(false);
@@ -44,19 +49,19 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     test('checks mapWord is identity', async () => {
-        const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test')]);
+        const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test', {})]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test', []);
+        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
         expect(dictCollection.mapWord('Hello')).toBe('Hello');
     });
 
     test('checks for suggestions', async () => {
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
         const dicts = await Promise.all([
             trie,
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', {}),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', {}),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', {}),
             createFailedToLoadDictionary(
                 new SpellingDictionaryLoadError(
                     './missing.txt',
@@ -65,9 +70,10 @@ describe('Verify using multiple dictionaries', () => {
                     'failed to load'
                 )
             ),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ]);
 
-        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.getErrors?.()).toHaveLength(1);
         const sugsForTango = dictCollection.suggest('tango', 10);
         expect(sugsForTango).toHaveLength(1);
@@ -78,17 +84,18 @@ describe('Verify using multiple dictionaries', () => {
 
     test('checks for compound suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
         trie.options.useCompounds = true;
         const dicts = await Promise.all([
             trie,
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ]);
 
         // cspell:ignore appletango applemango
-        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = createCollection(dicts, 'test');
         const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS);
         const sugs = sugResult.map((a) => a.word);
         expect(sugs).toHaveLength(10);
@@ -97,16 +104,17 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     test('checks for compound suggestions with numbChanges', async () => {
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA');
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
         const dicts = await Promise.all([
             trie,
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ]);
 
         // cspell:ignore appletango applemango
-        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = createCollection(dicts, 'test');
         const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS, 2);
         const sugs = sugResult.map((a) => a.word);
         expect(sugs).toHaveLength(1);
@@ -117,20 +125,21 @@ describe('Verify using multiple dictionaries', () => {
     test.each`
         word            | expected
         ${'redberry'}   | ${true}
-        ${'pink'}       | ${true}
+        ${'pink'}       | ${false}
         ${'bug'}        | ${true}
         ${'blackberry'} | ${true}
         ${'pinkbug'}    | ${true}
     `('checks has word: "$word"', ({ word, expected }) => {
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
-            createSpellingDictionary(wordsD, 'wordsD', 'test'),
-            createSpellingDictionary(wordsF, 'wordsF', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
+            createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ];
 
-        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.has(word)).toEqual(expected);
     });
 
@@ -146,14 +155,15 @@ describe('Verify using multiple dictionaries', () => {
         ${'pinkbug'}    | ${false}
     `('checks forbid word: "$word"', ({ word, expected }) => {
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
-            createSpellingDictionary(wordsD, 'wordsD', 'test'),
-            createSpellingDictionary(wordsF, 'wordsF', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
+            createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ];
 
-        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.isForbidden(word)).toEqual(expected);
     });
 
@@ -170,38 +180,40 @@ describe('Verify using multiple dictionaries', () => {
         ${'stinkbug'}   | ${[sr('stink bug', 103), sr('pinkbug', 198)]}
     `('checks suggestions word: "$word"', ({ word, expected }) => {
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
-            createSpellingDictionary(wordsD, 'wordsD', 'test'),
-            createSpellingDictionary(wordsF, 'wordsF', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
+            createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ];
 
-        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.suggest(word, 2)).toEqual(expected);
     });
 
     test('checks for suggestions with flagged words', async () => {
         const dicts = await Promise.all([
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ]);
 
-        const dictCollection = createCollection(dicts, 'test', ['Avocado']);
+        const dictCollection = createCollection(dicts, 'test');
         const sugs = dictCollection.suggest('avocado', 10);
         expect(sugs.map((r) => r.word)).not.toContain('avocado');
     });
 
     test('checks for suggestions from mixed sources', async () => {
         const dicts = await Promise.all([
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
         ]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test', []);
+        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
         expect(dictCollection.has('mango')).toBe(true);
         expect(dictCollection.has('lion')).toBe(true);
         expect(dictCollection.has('ant')).toBe(true);
@@ -221,12 +233,12 @@ describe('Verify using multiple dictionaries', () => {
 
     test('creates using createCollectionP', async () => {
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA', 'test'),
-            createSpellingDictionary(wordsB, 'wordsB', 'test'),
-            createSpellingDictionary(wordsC, 'wordsC', 'test'),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
         ];
 
-        const dictCollection = await createCollectionP(dicts, 'test', []);
+        const dictCollection = await createCollectionP(dicts, 'test');
         expect(dictCollection.has('mango')).toBe(true);
         expect(dictCollection.has('tree')).toBe(false);
         const sugs = dictCollection.suggest('mangos', 4);
@@ -257,14 +269,15 @@ describe('Validate looking up words', () => {
     const cities = ['Seattle', 'Berlin', 'Amsterdam', 'Rome', 'London', 'Mumbai', 'Tokyo'];
 
     const testDicts = [
-        createSpellingDictionary(wordsA, 'wordsA', 'test'),
-        createSpellingDictionary(wordsB, 'wordsB', 'test'),
-        createSpellingDictionary(wordsC, 'wordsC', 'test'),
-        createSpellingDictionary(wordsD, 'wordsD', 'test'),
-        createSpellingDictionary(cities, 'cities', 'test'),
+        createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+        createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+        createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+        createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
+        createSpellingDictionary(cities, 'cities', 'test', undefined),
+        createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
     ];
 
-    const testDictCollection = new SpellingDictionaryCollection(testDicts, 'test', ['Avocado']);
+    const testDictCollection = new SpellingDictionaryCollection(testDicts, 'test');
 
     interface HasWordTest {
         word: string;

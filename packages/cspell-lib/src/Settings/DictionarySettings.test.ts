@@ -14,7 +14,7 @@ describe('Validate DictionarySettings', () => {
             ['php', 'wordsEn', 'unknown', 'en_us'],
             defaultSettings.dictionaryDefinitions!
         );
-        const files = mapDefs.map((a) => a[1]).map((def) => def.name!);
+        const files = mapDefs.map((def) => def.name!);
         expect(mapDefs).toHaveLength(2);
         expect(files.filter((a) => a.includes('php'))).toHaveLength(1);
         expect(files.filter((a) => a.includes('wordsEn'))).toHaveLength(0);
@@ -34,10 +34,7 @@ describe('Validate DictionarySettings', () => {
         ];
         const expected = ['php', 'en_us'].sort();
         const mapDefs = DictSettings.filterDictDefsToLoad(ids, defaultSettings.dictionaryDefinitions!);
-        const dicts = mapDefs
-            .map((a) => a[1])
-            .map((def) => def.name!)
-            .sort();
+        const dicts = mapDefs.map((def) => def.name!).sort();
         expect(dicts).toEqual(expected);
     });
 
@@ -50,10 +47,7 @@ describe('Validate DictionarySettings', () => {
         const dictIds = ids.split(',');
         const expectedIds = expected.split(',').map((id) => id.trim());
         const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
-        const dicts = mapDefs
-            .map((a) => a[1])
-            .map((def) => def.name!)
-            .sort();
+        const dicts = mapDefs.map((def) => def.name!).sort();
         expect(dicts).toEqual(expectedIds);
     });
 
@@ -61,10 +55,7 @@ describe('Validate DictionarySettings', () => {
         const defaultDicts = defaultSettings.dictionaryDefinitions!;
         const dictIds = defaultDicts.map((def) => def.name);
         const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
-        const access = mapDefs
-            .map(([_, def]) => def)
-            .map((def) => def.path!)
-            .map((path) => fsp.access(path));
+        const access = mapDefs.map((def) => def.path!).map((path) => fsp.access(path));
         expect(mapDefs.length).toBeGreaterThan(0);
         return Promise.all(access);
     });

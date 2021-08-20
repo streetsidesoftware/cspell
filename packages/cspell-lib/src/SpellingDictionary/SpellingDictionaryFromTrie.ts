@@ -27,17 +27,21 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly mapWord: (word: string) => string;
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
+    readonly containsNoSuggestWords: boolean;
+
     constructor(
         readonly trie: Trie,
         readonly name: string,
-        readonly options: SpellingDictionaryOptions = {},
+        readonly options: SpellingDictionaryOptions,
         readonly source = 'from trie',
         size?: number
     ) {
         this.mapWord = createMapper(options.repMap || []);
         this.isDictionaryCaseSensitive = options.caseSensitive ?? !trie.isLegacy;
+        this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
     }
+
     public get size(): number {
         if (!this._size) {
             // walk the trie and get the approximate size.
@@ -60,11 +64,13 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const { ignoreCase = true } = searchOptions;
         return this._has(word, useCompounds, ignoreCase);
     }
+
     private _has = memorizer(
         (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
             this.hasAnyForm(word, useCompounds, ignoreCase),
         SpellingDictionaryFromTrie.cachedWordsLimit
     );
+
     private hasAnyForm(word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) {
         const mWord = this.mapWord(word.normalize('NFC'));
         if (this.trie.hasWord(mWord, true)) {
@@ -86,6 +92,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return false;
     }
 
+    public isNoSuggestWord(word: string, options?: HasOptions): boolean {
+        return this.containsNoSuggestWords ? this.has(word, options) : false;
+    }
+
     public isForbidden(word: string): boolean {
         return this.trie.isForbiddenWord(word);
     }
@@ -103,6 +113,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const suggestOptions = suggestArgsToSuggestOptions(args);
         return this._suggest(word, suggestOptions);
     }
+
     private _suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[] {
         const {
             numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
@@ -122,7 +133,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }
+
     public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
+        if (this.options.noSuggest) return;
         const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS } = suggestOptions;
         const _compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
         wordSuggestFormsArray(collector.word).forEach((w) =>
@@ -139,7 +152,7 @@ export async function createSpellingDictionaryTrie(
     data: Iterable<string>,
     name: string,
     source: string,
-    options?: SpellingDictionaryOptions
+    options: SpellingDictionaryOptions
 ): Promise<SpellingDictionary> {
     const trieNode = importTrie(data);
     const trie = new Trie(trieNode);

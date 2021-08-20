@@ -28,16 +28,19 @@ export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
     useCompounds?: boolean;
     caseSensitive?: boolean;
+    noSuggest?: boolean;
 }
 
 export interface SpellingDictionary {
     readonly name: string;
     readonly type: string;
     readonly source: string;
+    readonly containsNoSuggestWords: boolean;
     has(word: string, useCompounds: boolean): boolean;
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
     isForbidden(word: string): boolean;
+    isNoSuggestWord(word: string, options: HasOptions): boolean;
     suggest(
         word: string,
         numSuggestions?: number,
