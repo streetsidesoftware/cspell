@@ -326,8 +326,6 @@ export interface DictionaryDefinitionBase {
      * - Leading and trailing space will be removed.
      * - Names ARE case-sensitive
      * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`
-     *
-     * @pattern ^(?=[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
      */
     name: DictionaryId;
     /** Optional description */
