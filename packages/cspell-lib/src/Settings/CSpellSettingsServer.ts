@@ -73,10 +73,14 @@ const searchPlaces = [
 const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
     searchPlaces,
     loaders: {
-        '.json': (_filename: string, content: string) => json.parse(content),
-        '.jsonc': (_filename: string, content: string) => json.parse(content),
+        '.json': parseJson,
+        '.jsonc': parseJson,
     },
 };
+
+function parseJson(_filename: string, content: string) {
+    return json.parse(content);
+}
 
 export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
 
@@ -441,6 +445,7 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         patterns: mergeListUnique(left.patterns, right.patterns),
         dictionaryDefinitions: mergeListUnique(left.dictionaryDefinitions, right.dictionaryDefinitions),
         dictionaries: mergeListUnique(left.dictionaries, right.dictionaries),
+        noSuggestDictionaries: mergeListUnique(left.noSuggestDictionaries, right.noSuggestDictionaries),
         languageSettings: mergeList(
             tagLanguageSettings(leftId, left.languageSettings),
             tagLanguageSettings(rightId, right.languageSettings)
@@ -817,7 +822,7 @@ function validationMessage(msg: string, fileRef: ImportFileRef) {
     return msg + `\n  File: "${fileRef.filename}"`;
 }
 
-function validateRawConfigVersion(config: CSpellUserSettings, fileRef: ImportFileRef) {
+function validateRawConfigVersion(config: CSpellUserSettings, fileRef: ImportFileRef): void {
     const { version } = config;
     if (version === undefined || supportedCSpellConfigVersions.includes(version)) return;
 
@@ -829,12 +834,12 @@ function validateRawConfigVersion(config: CSpellUserSettings, fileRef: ImportFil
     const msg =
         version > currentSettingsFileVersion
             ? `Newer config file version found: "${version}". Supported version is "${currentSettingsFileVersion}"`
-            : `Legacy config file version found: "${version}". Upgrade to "${currentSettingsFileVersion}"`;
+            : `Legacy config file version found: "${version}", upgrade to "${currentSettingsFileVersion}"`;
 
     logWarning(validationMessage(msg, fileRef));
 }
 
-function validateRawConfigExports(config: CSpellUserSettings, fileRef: ImportFileRef) {
+function validateRawConfigExports(config: CSpellUserSettings, fileRef: ImportFileRef): void {
     if ((<{ default: unknown }>config).default) {
         throw new ImportError(
             validationMessage('Module `export default` is not supported.\n  Use `module.exports =` instead.', fileRef)
@@ -849,4 +854,6 @@ function validateRawConfig(config: CSpellUserSettings, fileRef: ImportFileRef): 
 
 export const __testing__ = {
     normalizeSettings,
+    validateRawConfigVersion,
+    validateRawConfigExports,
 };
