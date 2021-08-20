@@ -1,0 +1,33 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "version": "0.2",
+    "dictionaries": [
+        "typescript",
+        "custom-dictionary",
+        "ignore-words"
+    ],
+    "noSuggestDictionaries": [
+        "ignore-words-2"
+    ],
+    "import": [
+        "@cspell/dict-python/cspell-ext.json"
+    ],
+    "dictionaryDefinitions": [
+        {
+            "name": "custom-dictionary",
+            "path": "./.cspell/custom-dictionary.txt",
+            "addWords": true
+        },
+        {
+            "name": "ignore-words",
+            "path": "./.cspell/ignore-words.txt",
+            "addWords": true,
+            "noSuggest": true
+        },
+        {
+            "name": "ignore-words-2",
+            "path": "./.cspell/ignore-words-2.txt",
+            "addWords": true
+        }
+    ]
+}
