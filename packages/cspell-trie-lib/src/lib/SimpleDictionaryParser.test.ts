@@ -45,6 +45,36 @@ describe('Validate SimpleDictionaryParser', () => {
         ]);
     });
 
+    test('Auto generate cases', () => {
+        const words = ['!forbid', '*End', '+Middle+', 'Begin*', 'Café'];
+        const expected = [
+            '!forbid',
+            '+End',
+            '+Middle+',
+            'Begin',
+            'Begin+',
+            'Café',
+            'End',
+            '~+end',
+            '~+middle+',
+            '~begin',
+            '~begin+',
+            '~cafe',
+            '~café',
+            '~end',
+        ];
+        const trie = parseDictionary(words.join('\n'));
+        const result = [...trie.words()];
+        expect(result).toEqual(expected);
+    });
+
+    test('preserve cases', () => {
+        const words = ['!forbid', '+End', '+Middle+', 'Begin', 'Begin+', 'Café', 'End'];
+        const trie = parseDictionary(words.join('\n'), { stripCaseAndAccents: false });
+        const result = [...trie.words()];
+        expect(result).toEqual(words);
+    });
+
     function toL(a: string): string {
         return a.toLowerCase();
     }

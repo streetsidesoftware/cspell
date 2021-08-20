@@ -10,6 +10,7 @@ export interface ParseDictionaryOptions {
     forbiddenPrefix: string;
     caseInsensitivePrefix: string;
     commentCharacter: string;
+    stripCaseAndAccents: boolean;
 }
 
 const _defaultOptions: ParseDictionaryOptions = {
@@ -18,6 +19,7 @@ const _defaultOptions: ParseDictionaryOptions = {
     compoundCharacter: COMPOUND_FIX,
     forbiddenPrefix: FORBID_PREFIX,
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
+    stripCaseAndAccents: true,
 };
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
@@ -26,20 +28,22 @@ export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.free
  * Normalizes a dictionary words based upon prefix / suffixes.
  * Case insensitive versions are also generated.
  * @param lines - one word per line
- * @param options - defines prefixes used when parsing lines.
+ * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
 export function parseDictionaryLines(
     lines: Iterable<string>,
-    options: ParseDictionaryOptions = _defaultOptions
+    options?: Partial<ParseDictionaryOptions>
 ): Iterable<string> {
+    const _options = mergeOptions(_defaultOptions, options);
     const {
         commentCharacter,
         optionalCompoundCharacter: optionalCompound,
         compoundCharacter: compound,
         caseInsensitivePrefix: ignoreCase,
         forbiddenPrefix: forbidden,
-    } = options;
+        stripCaseAndAccents,
+    } = _options;
 
     const regexComment = new RegExp(escapeRegEx(commentCharacter) + '.*', 'g');
 
@@ -90,7 +94,7 @@ export function parseDictionaryLines(
         word = normalizeWord(word);
         const forms = new Set<string>();
         forms.add(word);
-        if (!doNotNormalizePrefix.has(word[0])) {
+        if (stripCaseAndAccents && !doNotNormalizePrefix.has(word[0])) {
             for (const n of normalizeWordForCaseInsensitive(word)) {
                 if (n !== word) forms.add(ignoreCase + n);
             }
@@ -112,22 +116,32 @@ export function parseDictionaryLines(
     return processLines(lines);
 }
 
-export function parseLinesToDictionary(
-    lines: Iterable<string>,
-    options: ParseDictionaryOptions = _defaultOptions
-): Trie {
-    const dictLines = parseDictionaryLines(lines, options);
+export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
+    const _options = mergeOptions(_defaultOptions, options);
+    const dictLines = parseDictionaryLines(lines, _options);
     return buildTrieFast([...new Set(dictLines)].sort(), {
-        compoundCharacter: options.compoundCharacter,
-        forbiddenWordPrefix: options.forbiddenPrefix,
-        stripCaseAndAccentsPrefix: options.caseInsensitivePrefix,
+        compoundCharacter: _options.compoundCharacter,
+        forbiddenWordPrefix: _options.forbiddenPrefix,
+        stripCaseAndAccentsPrefix: _options.caseInsensitivePrefix,
     });
 }
 
-export function parseDictionary(text: string, options?: ParseDictionaryOptions): Trie {
+export function parseDictionary(text: string, options?: Partial<ParseDictionaryOptions>): Trie {
     return parseLinesToDictionary(text.split('\n'), options);
 }
 
 function escapeRegEx(s: string) {
     return s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
+}
+
+function mergeOptions(
+    base: ParseDictionaryOptions,
+    ...partials: (Partial<ParseDictionaryOptions> | undefined)[]
+): ParseDictionaryOptions {
+    const opt: ParseDictionaryOptions = { ...base };
+    for (const p of partials) {
+        if (!p) continue;
+        Object.assign(opt, p);
+    }
+    return opt;
 }
