@@ -40,7 +40,7 @@ export interface SpellingDictionary {
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
     isForbidden(word: string): boolean;
-    isNoSuggestWord(word: string, options?: HasOptions): boolean;
+    isNoSuggestWord(word: string, options: HasOptions): boolean;
     suggest(
         word: string,
         numSuggestions?: number,

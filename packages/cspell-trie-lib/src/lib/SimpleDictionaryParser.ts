@@ -1,6 +1,13 @@
 import { operators } from 'gensequence';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './util';
-import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, FORBID_PREFIX, CASE_INSENSITIVE_PREFIX, LINE_COMMENT } from './constants';
+import {
+    COMPOUND_FIX,
+    OPTIONAL_COMPOUND_FIX,
+    FORBID_PREFIX,
+    CASE_INSENSITIVE_PREFIX,
+    LINE_COMMENT,
+    IDENTITY_PREFIX,
+} from './constants';
 import { Trie } from './trie';
 import { buildTrieFast } from './TrieBuilder';
 
@@ -9,7 +16,20 @@ export interface ParseDictionaryOptions {
     optionalCompoundCharacter: string;
     forbiddenPrefix: string;
     caseInsensitivePrefix: string;
+    /**
+     * Start of a single-line comment.
+     */
     commentCharacter: string;
+
+    /**
+     * if word starts with prefix, do not strip case or accents.
+     * Prefix is not stored.
+     */
+    keepExactPrefix: string;
+
+    /**
+     * Tell the parser to NOT automatically strip case and accents.
+     */
     stripCaseAndAccents: boolean;
 }
 
@@ -19,6 +39,7 @@ const _defaultOptions: ParseDictionaryOptions = {
     compoundCharacter: COMPOUND_FIX,
     forbiddenPrefix: FORBID_PREFIX,
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
+    keepExactPrefix: IDENTITY_PREFIX,
     stripCaseAndAccents: true,
 };
 
@@ -42,6 +63,7 @@ export function parseDictionaryLines(
         compoundCharacter: compound,
         caseInsensitivePrefix: ignoreCase,
         forbiddenPrefix: forbidden,
+        keepExactPrefix: keepCase,
         stripCaseAndAccents,
     } = _options;
 
@@ -84,19 +106,28 @@ export function parseDictionaryLines(
         }
     }
 
-    const doNotNormalizePrefix = new Set([forbidden, ignoreCase]);
+    const doNotNormalizePrefix = new Set([forbidden, ignoreCase, keepCase, '"']);
 
     function removeDoublePrefix(w: string): string {
         return w.startsWith(ignoreCase + ignoreCase) ? w.slice(1) : w;
     }
 
+    function stripKeepCasePrefixAndQuotes(word: string): string {
+        word = word.replace(/"(.*)"/, '$1');
+        return word[0] === keepCase ? word.slice(1) : word;
+    }
+
+    function _normalize(word: string): string {
+        return normalizeWord(stripKeepCasePrefixAndQuotes(word));
+    }
+
     function* mapNormalize(word: string) {
-        word = normalizeWord(word);
+        const nWord = _normalize(word);
         const forms = new Set<string>();
-        forms.add(word);
+        forms.add(nWord);
         if (stripCaseAndAccents && !doNotNormalizePrefix.has(word[0])) {
-            for (const n of normalizeWordForCaseInsensitive(word)) {
-                if (n !== word) forms.add(ignoreCase + n);
+            for (const n of normalizeWordForCaseInsensitive(nWord)) {
+                if (n !== nWord) forms.add(ignoreCase + n);
             }
         }
         yield* forms;

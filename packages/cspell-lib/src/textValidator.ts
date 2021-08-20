@@ -121,7 +121,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     }
 
     function isWordIgnored(word: string): boolean {
-        return dict.isNoSuggestWord(word);
+        return dict.isNoSuggestWord(word, options);
     }
 
     function checkFlagWords(word: ValidationResult): ValidationResult {

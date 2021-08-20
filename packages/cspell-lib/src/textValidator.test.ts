@@ -73,11 +73,28 @@ describe('Validate textValidator functions', () => {
 
     test('tests case in ignore words', async () => {
         const dict = await getDictionary({
-            ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'],
+            words: ['=Sample', 'with', 'Issues'],
+            ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
         });
-        const text = 'We have PUBLISHed published multiple FIXesToThePROBLEMs';
+        const text =
+            'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
         const options: ValidationOptions = {
             ignoreCase: false,
+        };
+        const result = validateText(text, dict, options).toArray();
+        const errors = result.map((wo) => wo.text);
+        expect(errors).toEqual(['have', 'published', 'multiple', 'fixestotheproblems', 'issues']);
+    });
+
+    test('tests case in ignore words ignore case', async () => {
+        const dict = await getDictionary({
+            words: ['=Sample', 'with', 'Issues'],
+            ignoreWords: ['"PUBLISHed"', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
+        });
+        const text =
+            'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
+        const options: ValidationOptions = {
+            ignoreCase: true,
         };
         const result = validateText(text, dict, options).toArray();
         const errors = result.map((wo) => wo.text);

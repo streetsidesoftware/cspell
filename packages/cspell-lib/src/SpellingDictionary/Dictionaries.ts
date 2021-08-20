@@ -42,7 +42,9 @@ export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDic
         return { ...def, noSuggest: enabled };
     });
     const spellDictionaries = loadDictionaries(colDicts.enabled(), modDefs);
-    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings', {});
+    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings', {
+        caseSensitive: true,
+    });
     const ignoreWordsDictionary = createSpellingDictionary(ignoreWords, 'ignore_words', 'From Settings', {
         caseSensitive: true,
         noSuggest: true,

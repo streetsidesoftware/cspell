@@ -12,7 +12,7 @@ export function createSpellingDictionary(
     options: SpellingDictionaryOptions | undefined
 ): SpellingDictionary {
     // console.log(`createSpellingDictionary ${name} ${source}`);
-    const words = parseDictionaryLines(wordList, { stripCaseAndAccents: !options?.noSuggest });
+    const words = parseDictionaryLines(wordList);
     const trie = buildTrieFast(words);
     return new SpellingDictionaryFromTrie(trie, name, options || {}, source);
 }

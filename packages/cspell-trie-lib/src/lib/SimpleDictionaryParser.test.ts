@@ -117,13 +117,34 @@ describe('Validate SimpleDictionaryParser', () => {
     }
 
     test.each`
-        lines            | expected
-        ${s('word')}     | ${s('word')}
-        ${s('two-word')} | ${s('two-word')}
-        ${s('Word')}     | ${s('Word|~word')}
-        ${s('*error*')}  | ${s('error|error+|+error|+error+')}
+        lines               | expected
+        ${s('word')}        | ${s('word')}
+        ${s('two-word')}    | ${s('two-word')}
+        ${s('Geschäft')}    | ${s('Geschäft|~geschäft|~geschaft')}
+        ${s('=Geschäft')}   | ${s('Geschäft')}
+        ${s('"Geschäft"')}  | ${s('Geschäft')}
+        ${s('="Geschäft"')} | ${s('Geschäft')}
+        ${s('Word')}        | ${s('Word|~word')}
+        ${s('*error*')}     | ${s('error|error+|+error|+error+')}
     `('parseDictionaryLines simple $lines', ({ lines, expected }) => {
         const r = [...parseDictionaryLines(lines)];
+        expect(r).toEqual(expected);
+    });
+
+    // cspell:ignore érror
+    test.each`
+        lines               | expected
+        ${s('word')}        | ${s('word')}
+        ${s('two-word')}    | ${s('two-word')}
+        ${s('Geschäft')}    | ${s('Geschäft')}
+        ${s('=Geschäft')}   | ${s('Geschäft')}
+        ${s('"Geschäft"')}  | ${s('Geschäft')}
+        ${s('="Geschäft"')} | ${s('Geschäft')}
+        ${s('Word')}        | ${s('Word')}
+        ${s('*error*')}     | ${s('error|error+|+error|+error+')}
+        ${s('*érror*')}     | ${s('érror|érror+|+érror|+érror+')}
+    `('parseDictionaryLines simple no strip $lines', ({ lines, expected }) => {
+        const r = [...parseDictionaryLines(lines, { stripCaseAndAccents: false })];
         expect(r).toEqual(expected);
     });
 });
