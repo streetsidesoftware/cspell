@@ -1,16 +1,19 @@
-import { DictionaryDefinition, DictionaryId, CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellUserSettings, DictionaryDefinition, DictionaryReference } from '@cspell/cspell-types';
+import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
+import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';
-import { createSpellingDictionary } from './createSpellingDictionary';
+import { SpellingDictionaryCollection } from './index';
 import { SpellingDictionary } from './SpellingDictionary';
 import { createCollectionP } from './SpellingDictionaryCollection';
-import { SpellingDictionaryCollection } from './index';
 
-export function loadDictionaries(dictIds: DictionaryId[], defs: DictionaryDefinition[]): Promise<SpellingDictionary>[] {
+export function loadDictionaries(
+    dictIds: DictionaryReference[],
+    defs: DictionaryDefinition[]
+): Promise<SpellingDictionary>[] {
     const defsToLoad = filterDictDefsToLoad(dictIds, defs);
 
     return defsToLoad
-        .map((e) => e[1])
         .map((def) => loadDictionary(def.path, def))
         .map((p) => p.catch(() => undefined))
         .filter((p) => !!p)
@@ -22,12 +25,31 @@ export function refreshDictionaryCache(maxAge?: number): Promise<void> {
 }
 
 export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
-    const { words = [], userWords = [], dictionaries = [], dictionaryDefinitions = [], flagWords = [] } = settings;
-    const spellDictionaries = loadDictionaries(dictionaries, dictionaryDefinitions);
-    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings');
+    const {
+        words = [],
+        userWords = [],
+        dictionaries = [],
+        dictionaryDefinitions = [],
+        noSuggestDictionaries = [],
+        flagWords = [],
+        ignoreWords = [],
+    } = settings;
+    const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
+    const colDicts = createDictionaryReferenceCollection(dictionaries.concat(colNoSug.enabled()));
+    const modDefs = dictionaryDefinitions.map((def) => {
+        const enabled = colNoSug.isEnabled(def.name);
+        if (enabled === undefined) return def;
+        return { ...def, noSuggest: enabled };
+    });
+    const spellDictionaries = loadDictionaries(colDicts.enabled(), modDefs);
+    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings', {});
+    const ignoreWordsDictionary = createSpellingDictionary(ignoreWords, 'ignore_words', 'From Settings', {
+        caseSensitive: true,
+        noSuggest: true,
+    });
+    const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, 'flag_words', 'From Settings', {});
     return createCollectionP(
-        [...spellDictionaries, Promise.resolve(settingsDictionary)],
-        'dictionary collection',
-        flagWords
+        [...spellDictionaries, settingsDictionary, ignoreWordsDictionary, flagWordsDictionary],
+        'dictionary collection'
     );
 }

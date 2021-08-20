@@ -9,7 +9,7 @@ describe('Verify building Dictionary', () => {
     test('build from word list', async () => {
         const words = ['apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'];
 
-        const dict = await createSpellingDictionary(words, 'words', 'test');
+        const dict = await createSpellingDictionary(words, 'words', 'test', {});
         expect(dict.name).toBe('words');
         expect(dict.has('apple')).toBe(true);
         const suggestions = dict.suggest('aple').map(({ word }) => word);
@@ -89,7 +89,7 @@ describe('Verify building Dictionary', () => {
             'tattles',
         ];
         const trie = Trie.create(words);
-        const dict = new SpellingDictionaryFromTrie(trie, 'trie');
+        const dict = new SpellingDictionaryFromTrie(trie, 'trie', {});
         // cspell:ignore cattles
         const results = dict.suggest('Cattles');
         const suggestions = results.map(({ word }) => word);
@@ -101,7 +101,7 @@ describe('Verify building Dictionary', () => {
         // eslint-disable-next-line no-sparse-arrays
         const words = ['apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'];
 
-        const dict = await createSpellingDictionary(words as string[], 'words', 'test');
+        const dict = await createSpellingDictionary(words as string[], 'words', 'test', {});
         expect(dict.name).toBe('words');
         // expect(dict).toBeInstanceOf(SpellingDictionaryFromTrie);
         expect(dict.has('apple')).toBe(true);

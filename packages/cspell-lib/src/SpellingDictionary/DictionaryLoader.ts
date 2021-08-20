@@ -39,7 +39,7 @@ export interface Loaders {
 const dictionaryCache = new Map<string, CacheEntry>();
 
 export function loadDictionary(uri: string, options: DictionaryDefinitionPreferred): Promise<SpellingDictionary> {
-    const key = calcKey(uri);
+    const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry) {
         return entry.dictionary;
@@ -49,9 +49,14 @@ export function loadDictionary(uri: string, options: DictionaryDefinitionPreferr
     return loadedEntry.dictionary;
 }
 
-function calcKey(uri: string) {
+const importantOptionKeys: (keyof DictionaryDefinitionPreferred)[] = ['noSuggest', 'useCompounds'];
+
+function calcKey(uri: string, options: DictionaryDefinitionPreferred) {
     const loaderType = determineType(uri);
-    return [uri, loaderType].join('|');
+    const optValues = importantOptionKeys.map((k) => options[k]?.toString() || '');
+    const parts = [uri, loaderType].concat(optValues);
+
+    return parts.join('|');
 }
 
 /**
@@ -70,7 +75,7 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const pStat = stat(entry.uri).catch((e) => e as Error);
         const [state, oldState] = await Promise.all([pStat, entry.state]);
         if (entry.ts === now && !isEqual(state, oldState)) {
-            dictionaryCache.set(calcKey(entry.uri), loadEntry(entry.uri, entry.options));
+            dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
         }
     }
 }

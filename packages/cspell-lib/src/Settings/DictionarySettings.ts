@@ -1,6 +1,7 @@
-import { DictionaryDefinition, DictionaryId, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import { DictionaryDefinition, DictionaryDefinitionPreferred, DictionaryReference } from '@cspell/cspell-types';
 import * as path from 'path';
 import { resolveFile } from '../util/resolveFile';
+import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
 
 export interface DictionaryDefinitionWithSource extends DictionaryDefinitionPreferred {
     /** The path to the config file that contains this dictionary definition */
@@ -21,42 +22,22 @@ export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
  * @param defs - dictionary definitions
  * @returns map from dictIds to definitions
  */
-export function filterDictDefsToLoad(dictIds: DictionaryId[], defs: DictionaryDefinition[]): DefMapArrayItem[] {
-    const negPrefixRegEx = /^!+/;
+export function filterDictDefsToLoad(
+    dictRefIds: DictionaryReference[],
+    defs: DictionaryDefinition[]
+): DictionaryDefinitionPreferred[] {
+    function isDefP(def: DictionaryDefinition): def is DictionaryDefinitionPreferred {
+        return !!def.path;
+    }
 
-    // Collect the ids based upon the `!` depth.
-    const dictIdMap = dictIds
-        .map((id) => id.trim())
-        .filter((id) => !!id)
-        .reduce((dictDepthMap, id) => {
-            const pfx = id.match(negPrefixRegEx);
-            const depth = pfx?.[0]?.length || 0;
-            const _dictSet = dictDepthMap.get(depth);
-            const dictSet = _dictSet || new Set<DictionaryId>();
-            if (!_dictSet) {
-                dictDepthMap.set(depth, dictSet);
-            }
-            dictSet.add(id.slice(depth));
-            return dictDepthMap;
-        }, new Map<number, Set<DictionaryId>>());
-
-    const orderedSets = [...dictIdMap].sort((a, b) => a[0] - b[0]);
-    const dictIdSet = orderedSets.reduce((dictIdSet, [depth, ids]) => {
-        if (depth & 1) {
-            [...ids].forEach((id) => dictIdSet.delete(id));
-        } else {
-            [...ids].forEach((id) => dictIdSet.add(id));
-        }
-        return dictIdSet;
-    }, new Set<DictionaryId>());
-
-    const activeDefs: DefMapArrayItem[] = defs
+    const col = createDictionaryReferenceCollection(dictRefIds);
+    const dictIdSet = new Set(col.enabled());
+    const allActiveDefs = defs
         .filter(({ name }) => dictIdSet.has(name))
         .map((def) => ({ ...def, path: getFullPathName(def) }))
         // Remove any empty paths.
-        .filter((def) => !!def.path)
-        .map((def) => [def.name, def] as DefMapArrayItem);
-    return [...new Map(activeDefs)];
+        .filter(isDefP);
+    return [...new Map(allActiveDefs.map((d) => [d.name, d])).values()];
 }
 
 function getFullPathName(def: DictionaryDefinition) {

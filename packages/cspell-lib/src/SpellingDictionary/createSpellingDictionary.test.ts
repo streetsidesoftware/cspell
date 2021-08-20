@@ -21,7 +21,7 @@ describe('Validate createSpellingDictionary', () => {
 
     test('createSpellingDictionary', () => {
         const words = ['one', 'two', 'three', 'left-right'];
-        const d = createSpellingDictionary(words, 'test create', __filename);
+        const d = createSpellingDictionary(words, 'test create', __filename, {});
         words.forEach((w) => expect(d.has(w)).toBe(true));
     });
 
@@ -29,7 +29,7 @@ describe('Validate createSpellingDictionary', () => {
         // cspell:disable-next-line
         const words = ['آئینهٔ', 'آبادهٔ', 'کلاه'];
         expect(words).toEqual(words.map((w) => w.normalize('NFC')));
-        const d = createSpellingDictionary(words, 'test create', __filename);
+        const d = createSpellingDictionary(words, 'test create', __filename, {});
         expect(d.has(words[0])).toBe(true);
         words.forEach((w) => expect(d.has(w)).toBe(true));
     });
@@ -51,7 +51,7 @@ describe('Validate createSpellingDictionary', () => {
     // cspell:ignore Geschäft Aujourd'hui
     test('createSpellingDictionary accents', () => {
         const words = ['Geschäft'.normalize('NFD'), 'café', 'book', "Aujourd'hui"];
-        const d = createSpellingDictionary(words, 'test create', __filename);
+        const d = createSpellingDictionary(words, 'test create', __filename, {});
         expect(d.has(words[0])).toBe(true);
         words.forEach((w) => expect(d.has(w)).toBe(true));
         words.map((w) => w.toLowerCase()).forEach((w) => expect(d.has(w)).toBe(true));

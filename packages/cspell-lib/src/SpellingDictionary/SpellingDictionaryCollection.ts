@@ -18,7 +18,7 @@ import {
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
-import { memorizer } from '../util/Memorizer';
+import { memorizer, memorizerKeyBy } from '../util/Memorizer';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
 function identityString(w: string): string {
@@ -28,25 +28,29 @@ function identityString(w: string): string {
 export class SpellingDictionaryCollection implements SpellingDictionary {
     readonly options: SpellingDictionaryOptions = {};
     readonly mapWord = identityString;
-    readonly wordsToFlag: Set<string>;
     readonly type = 'SpellingDictionaryCollection';
     readonly source: string;
     readonly isDictionaryCaseSensitive: boolean;
+    readonly containsNoSuggestWords: boolean;
 
-    constructor(readonly dictionaries: SpellingDictionary[], readonly name: string, wordsToFlag: string[]) {
+    constructor(readonly dictionaries: SpellingDictionary[], readonly name: string) {
         this.dictionaries = this.dictionaries.sort((a, b) => b.size - a.size);
-        this.wordsToFlag = new Set(wordsToFlag.map((w) => w.toLowerCase()));
         this.source = dictionaries.map((d) => d.name).join(', ');
         this.isDictionaryCaseSensitive = this.dictionaries.reduce((a, b) => a || b.isDictionaryCaseSensitive, false);
+        this.containsNoSuggestWords = this.dictionaries.reduce((a, b) => a || b.containsNoSuggestWords, false);
     }
 
     public has(word: string, hasOptions?: HasOptions): boolean {
         const options = hasOptionToSearchOption(hasOptions);
-        return !this.wordsToFlag.has(word.toLowerCase()) && !!isWordInAnyDictionary(this.dictionaries, word, options);
+        return !!isWordInAnyDictionary(this.dictionaries, word, options) && !this.isForbidden(word);
+    }
+
+    public isNoSuggestWord(word: string, options?: HasOptions): boolean {
+        return this._isNoSuggestWord(word, options);
     }
 
     public isForbidden(word: string): boolean {
-        return this.wordsToFlag.has(word.toLowerCase()) || !!this._isForbiddenInDict(word);
+        return !!this._isForbiddenInDict(word) && !this.isNoSuggestWord(word);
     }
 
     public suggest(
@@ -75,9 +79,9 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         const prefixNoCase = CASE_INSENSITIVE_PREFIX;
         const filter = (word: string, _cost: number) => {
             return (
-                !this.wordsToFlag.has(word.toLowerCase()) &&
                 (ignoreCase || word[0] !== prefixNoCase) &&
-                !this.isForbidden(word)
+                !this.isForbidden(word) &&
+                !this.isNoSuggestWord(word, suggestOptions)
             );
         };
         const collector = suggestionCollector(word, {
@@ -110,14 +114,22 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         (word: string) => isWordForbiddenInAnyDictionary(this.dictionaries, word),
         SpellingDictionaryFromTrie.cachedWordsLimit
     );
+
+    private _isNoSuggestWord = memorizerKeyBy(
+        (word: string, options?: HasOptions) => {
+            if (!this.containsNoSuggestWords) return false;
+            return !!isNoSuggestWordInAnyDictionary(this.dictionaries, word, options || false);
+        },
+        (word: string, options?: HasOptions) => {
+            const opts = hasOptionToSearchOption(options);
+            return [word, opts.useCompounds, opts.ignoreCase].join();
+        },
+        SpellingDictionaryFromTrie.cachedWordsLimit
+    );
 }
 
-export function createCollection(
-    dictionaries: SpellingDictionary[],
-    name: string,
-    wordsToFlag: string[] = []
-): SpellingDictionaryCollection {
-    return new SpellingDictionaryCollection(dictionaries, name, wordsToFlag);
+export function createCollection(dictionaries: SpellingDictionary[], name: string): SpellingDictionaryCollection {
+    return new SpellingDictionaryCollection(dictionaries, name);
 }
 
 function isWordInAnyDictionary(
@@ -128,16 +140,23 @@ function isWordInAnyDictionary(
     return genSequence(dicts).first((dict) => dict.has(word, options));
 }
 
+function isNoSuggestWordInAnyDictionary(
+    dicts: SpellingDictionary[],
+    word: string,
+    options: HasOptions
+): SpellingDictionary | undefined {
+    return genSequence(dicts).first((dict) => dict.isNoSuggestWord(word, options));
+}
+
 function isWordForbiddenInAnyDictionary(dicts: SpellingDictionary[], word: string): SpellingDictionary | undefined {
     return genSequence(dicts).first((dict) => dict.isForbidden(word));
 }
 
 export function createCollectionP(
     dicts: (Promise<SpellingDictionary> | SpellingDictionary)[],
-    name: string,
-    wordsToFlag: string[]
+    name: string
 ): Promise<SpellingDictionaryCollection> {
-    return Promise.all(dicts).then((dicts) => new SpellingDictionaryCollection(dicts, name, wordsToFlag));
+    return Promise.all(dicts).then((dicts) => new SpellingDictionaryCollection(dicts, name));
 }
 
 export const __testing__ = {

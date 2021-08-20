@@ -41,7 +41,6 @@ export async function validateText(
 export function settingsToValidateOptions(settings: CSpellUserSettings): TV.ValidationOptions {
     const opt: TV.ValidationOptions = {
         ...settings,
-        ignoreWordsAreCaseSensitive: settings.caseSensitive ?? true,
         ignoreCase: !(settings.caseSensitive ?? false),
     };
     return opt;

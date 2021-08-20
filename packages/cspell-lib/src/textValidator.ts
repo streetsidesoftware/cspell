@@ -5,7 +5,6 @@ import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDic
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 import { split } from './util/wordSplitter';
-import { createSpellingDictionary, SpellingDictionaryCollection } from './SpellingDictionary';
 
 export interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
@@ -13,17 +12,13 @@ export interface ValidationOptions extends IncludeExcludeOptions {
     minWordLength?: number;
     // words to always flag as an error
     flagWords?: string[];
-    ignoreWords?: string[];
     allowCompoundWords?: boolean;
-    /** ignore words are considered case sensitive */
-    ignoreWordsAreCaseSensitive: boolean;
     /** ignore case when checking words against dictionary or ignore words list */
     ignoreCase: boolean;
 }
 
 export interface CheckOptions extends ValidationOptions {
     allowCompoundWords: boolean;
-    ignoreWordsAreCaseSensitive: boolean;
     ignoreCase: boolean;
 }
 
@@ -95,25 +90,15 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     const {
         minWordLength = defaultMinWordLength,
         flagWords = [],
-        ignoreWords = [],
         allowCompoundWords = false,
         ignoreCase = true,
-        ignoreWordsAreCaseSensitive: caseSensitive = true,
     } = options;
     const hasWordOptions: HasWordOptions = {
         ignoreCase,
         useCompounds: allowCompoundWords || undefined, // let the dictionaries decide on useCompounds if allow is false
     };
 
-    const ignoreDict = createSpellingDictionary(ignoreWords, '__ignore words__', 'ignore words', {
-        caseSensitive,
-    });
-
-    const dictCol = new SpellingDictionaryCollection([dict, ignoreDict], dict.name, []);
-
-    function isWordIgnored(word: string) {
-        return ignoreDict.has(word, { ignoreCase });
-    }
+    const dictCol = dict;
 
     const setOfFlagWords = new Set(flagWords);
     const setOfKnownSuccessfulWords = new Set<string>();
@@ -133,6 +118,10 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
     function testForFlaggedWord(wo: TextOffset): boolean {
         const text = wo.text;
         return setOfFlagWords.has(text) || setOfFlagWords.has(text.toLowerCase()) || dictCol.isForbidden(text);
+    }
+
+    function isWordIgnored(word: string): boolean {
+        return dict.isNoSuggestWord(word);
     }
 
     function checkFlagWords(word: ValidationResult): ValidationResult {
