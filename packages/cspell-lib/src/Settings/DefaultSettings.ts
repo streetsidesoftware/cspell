@@ -129,7 +129,7 @@ const getSettings = (function () {
         if (!settings) {
             const jsonSettings = readSettings(defaultConfigFile);
             settings = mergeSettings(_defaultSettings, jsonSettings);
-            settings.name = jsonSettings.name || settings.name;
+            settings.name = jsonSettings.name;
         }
         return settings;
     };
