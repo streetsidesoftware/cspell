@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1850, Issues found: 9759 in 1164 files
+ CSpell: Files checked: 1895, Issues found: 9930 in 1200 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -14,7 +14,6 @@ Lines:
 ./CMakeLists.txt:105:8     - Unknown word (DGOOGLE)    -- cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
 ./CMakeLists.txt:111:6     - Unknown word (ccache)     -- # If ccache is installed use it
 ./CMakeLists.txt:113:32    - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
-./CMakeLists.txt:140:18    - Unknown word (hositng)    -- # googleapis.dev hositng.
 ./CMakeLists.txt:141:38    - Unknown word (GOOGLEAPIS) -- CLOUD_CPP_GEN_DOCS_FOR_GOOGLEAPIS_DEV
 ./CMakeLists.txt:146:38    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_MAIN_FOR_REFDOC_LINKS
 ./CMakeLists.txt:147:42    - Unknown word (refdoc)     -- the version part for refdoc relative links" OFF
@@ -23,10 +22,10 @@ Lines:
 ./CMakeLists.txt:156:62    - Unknown word (Bigquery)   -- Enable building the Bigquery library."
 ./CMakeLists.txt:162:32    - Unknown word (FIRESTORE)  -- GOOGLE_CLOUD_CPP_ENABLE_FIRESTORE
 ./CMakeLists.txt:163:29    - Unknown word (Firestore)  -- Enable building the Firestore library." ON)
-./CMakeLists.txt:187:12    - Unknown word (TOUPPER)    -- string(TOUPPER "${library}" _library
 ./CMakeLists.txt:20:13     - Unknown word (BUGREPORT)  -- set(PACKAGE_BUGREPORT "https://github.com
-./CMakeLists.txt:221:39    - Unknown word (protobufs)  -- target results in all protobufs being compiled.
-./CMakeLists.txt:224:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
+./CMakeLists.txt:210:20    - Unknown word (TOUPPER)    -- string(TOUPPER "GOOGLE_CLOUD_CPP_ENABLE
+./CMakeLists.txt:248:39    - Unknown word (protobufs)  -- target results in all protobufs being compiled.
+./CMakeLists.txt:251:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
 ./CMakeLists.txt:42:45     - Unknown word (STREQUAL)   -- CLOUD_CPP_CXX_STANDARD}" STREQUAL ""))
 ./CODE_OF_CONDUCT.md:9:24      - Unknown word (socio)      -- experience, education, socio-economic status, nationality
 ./README.md:8:4       - Unknown word (Codecov)    -- [![Codecov Coverage status][codecov
@@ -101,8 +100,8 @@ Lines:
 ./doc/adr/2021-05-18-credential-failures-participate-in-retry-loop.md:18:19     - Unknown word (retryable)  -- refreshes **are** retryable, even if the operation
 ./doc/contributor/README.md:62:68     - Unknown word (pkgs)       -- that distro: search on pkgs.org,
 ./doc/contributor/README.md:63:1      - Unknown word (repology)   -- repology.org, or Google; or just
-./doc/contributor/howto-guide-forks-and-pull-requests.md:88:14     - Unknown word (Googler)    -- If you are a Googler, when you submit your
-./doc/contributor/howto-guide-forks-and-pull-requests.md:97:9      - Unknown word (howto)      -- [guide](howto-guide-running-ci-builds
+./doc/contributor/howto-guide-forks-and-pull-requests.md:115:14    - Unknown word (Googler)    -- If you are a Googler, when you submit your
+./doc/contributor/howto-guide-forks-and-pull-requests.md:124:9     - Unknown word (howto)      -- [guide](howto-guide-running-ci-builds
 ./doc/contributor/howto-guide-setup-cmake-environment.md:58:12     - Unknown word (Bcmake)     -- cmake -H. -Bcmake-out/home -DCMAKE_TOOLCHAIN
 ./doc/contributor/howto-guide-setup-cmake-environment.md:58:29     - Unknown word (DCMAKE)     -- H. -Bcmake-out/home -DCMAKE_TOOLCHAIN_FILE=$HOME
 ./doc/contributor/howto-guide-setup-cmake-environment.md:58:71     - Unknown word (buildsystems) -- $HOME/vcpkg/scripts/buildsystems/vcpkg.cmake
@@ -129,12 +128,12 @@ Lines:
 ./doc/packaging.md:106:5     - Unknown word (CXXFLAGS)    -- GCS_CXXFLAGS := $(shell pkg-config
 ./doc/packaging.md:106:55    - Unknown word (cflags)      -- config storage_client --cflags)
 ./doc/packaging.md:107:5     - Unknown word (CXXLDFLAGS)  -- GCS_CXXLDFLAGS := $(shell pkg-config
-./doc/packaging.md:1320:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-./doc/packaging.md:1471:21   - Unknown word (centos)         -- sudo yum install -y centos-release-scl yum-utils
-./doc/packaging.md:1472:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
-./doc/packaging.md:1472:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
-./doc/packaging.md:1474:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
+./doc/packaging.md:1456:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
 ./doc/packaging.md:156:5     - Unknown word (srcs)        -- srcs = [
+./doc/packaging.md:1607:21   - Unknown word (centos)         -- sudo yum install -y centos-release-scl yum-utils
+./doc/packaging.md:1608:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
+./doc/packaging.md:1608:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
+./doc/packaging.md:1610:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
 ./doc/packaging.md:187:42    - Unknown word (Microgenerator) -- protobuf-gh] | 3.15.8 | C++ Microgenerator support |
 ./doc/packaging.md:213:10    - Unknown word (makecache)      -- sudo dnf makecache && \
 ./doc/packaging.md:214:39    - Unknown word (findutils)      -- y ccache cmake curl findutils gcc-c++ git make ninja
@@ -160,14 +159,14 @@ Lines:
 ./external/googleapis/CMakeLists.txt:205:16    - Unknown word (Protos)     -- include(CompileProtos)
 ./external/googleapis/CMakeLists.txt:249:49    - Unknown word (SOVERSION)  -- ${PROJECT_VERSION}" SOVERSION
 ./external/googleapis/CMakeLists.txt:30:25     - Unknown word (PROTO)      -- EXTERNAL_GOOGLEAPIS_PROTO_FILES
-./external/googleapis/CMakeLists.txt:672:41    - Unknown word (BINDIR)     -- DESTINATION ${CMAKE_INSTALL_BINDIR}
-./external/googleapis/CMakeLists.txt:674:41    - Unknown word (LIBDIR)     -- DESTINATION ${CMAKE_INSTALL_LIBDIR}
-./external/googleapis/CMakeLists.txt:676:13    - Unknown word (NAMELINK)   -- NAMELINK_SKIP
-./external/googleapis/CMakeLists.txt:700:45    - Unknown word (Proto)      -- APIS C++ ${_short_name} Proto Library")
-./external/googleapis/CMakeLists.txt:722:11    - Unknown word (libcares)   -- " libcares")
-./external/googleapis/CMakeLists.txt:723:12    - Unknown word (CONCAT)     -- string(CONCAT GOOGLE_CLOUD_CPP_PC
+./external/googleapis/CMakeLists.txt:673:41    - Unknown word (BINDIR)     -- DESTINATION ${CMAKE_INSTALL_BINDIR}
+./external/googleapis/CMakeLists.txt:675:41    - Unknown word (LIBDIR)     -- DESTINATION ${CMAKE_INSTALL_LIBDIR}
+./external/googleapis/CMakeLists.txt:677:13    - Unknown word (NAMELINK)   -- NAMELINK_SKIP
+./external/googleapis/CMakeLists.txt:701:45    - Unknown word (Proto)      -- APIS C++ ${_short_name} Proto Library")
+./external/googleapis/CMakeLists.txt:723:11    - Unknown word (libcares)   -- " libcares")
+./external/googleapis/CMakeLists.txt:724:12    - Unknown word (CONCAT)     -- string(CONCAT GOOGLE_CLOUD_CPP_PC
 ./external/googleapis/CMakeLists.txt:74:19     - Unknown word (dialogflow) -- "google/cloud/dialogflow/v2beta1/agent.proto
-./external/googleapis/CMakeLists.txt:804:38    - Unknown word (Findg)      -- PROJECT_SOURCE_DIR}/cmake/FindgRPC.cmake"
+./external/googleapis/CMakeLists.txt:805:38    - Unknown word (Findg)      -- PROJECT_SOURCE_DIR}/cmake/FindgRPC.cmake"
 ./external/googleapis/config.pc.in:17:1      - Unknown word (libdir)     -- libdir=${prefix}/@CMAKE_INSTALL
 ./external/googleapis/config.pc.in:18:1      - Unknown word (includedir) -- includedir=${prefix}/@CMAKE_INSTALL
 ./external/googleapis/config.pc.in:18:37     - Unknown word (INCLUDEDIR) -- prefix}/@CMAKE_INSTALL_INCLUDEDIR@
@@ -199,8 +198,8 @@ Lines:
 ./generator/integration_tests/test.proto:321:3     - Unknown word (oneof)      -- oneof source_info {
 ./generator/integration_tests/test.proto:838:52    - Unknown word (UNIQUEID)   -- iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
 ./generator/internal/codegen_utils.cc:59:18     - Unknown word (Googleapis) -- Status ProcessArgGoogleapisCommitHash(
-./generator/internal/codegen_utils_test.cc:54:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
-./generator/internal/codegen_utils_test.cc:54:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
+./generator/internal/codegen_utils_test.cc:56:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
+./generator/internal/codegen_utils_test.cc:56:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
 ./generator/internal/descriptor_utils.cc:368:8     - Unknown word (smatch)     -- std::smatch match;
 ./generator/internal/descriptor_utils.cc:55:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
 ./generator/internal/descriptor_utils.cc:76:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
@@ -212,9 +211,9 @@ Lines:
 ./google/cloud/CMakeLists.txt:144:22    - Unknown word (msvc)       -- internal/disable_msvc_crt_secure_warnings
 ./google/cloud/CMakeLists.txt:155:14    - Unknown word (getenv)     -- internal/getenv.cc
 ./google/cloud/CMakeLists.txt:170:14    - Unknown word (strerror)   -- internal/strerror.cc
-./google/cloud/bigquery/CMakeLists.txt:156:28    - Unknown word (lgoogle)     -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_bigquery"
+./google/cloud/bigquery/CMakeLists.txt:154:28    - Unknown word (lgoogle)     -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_bigquery"
 ./google/cloud/bigquery/CMakeLists.txt:27:30     - Unknown word (DEPS)       -- GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::cloud
-./google/cloud/bigquery/CMakeLists.txt:88:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
+./google/cloud/bigquery/CMakeLists.txt:86:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
 ./google/cloud/bigquery/README.md:38:11     - Unknown word (iostream)   -- #include <iostream>
 ./google/cloud/bigquery/README.md:39:11     - Unknown word (stdexcept)  -- #include <stdexcept>
 ./google/cloud/bigquery/README.md:51:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
@@ -259,15 +258,15 @@ Lines:
 ./google/cloud/bigtable/bigtable_client_unit_tests.bzl:69:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
 ./google/cloud/bigtable/bigtable_client_unit_tests.bzl:70:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
 ./google/cloud/bigtable/bigtable_client_unit_tests.bzl:71:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
-./google/cloud/bigtable/client_options_test.cc:134:34    - Unknown word (testendpoint)      -- "testendpoint.googleapis.com"),
-./google/cloud/bigtable/client_options_test.cc:249:48    - Unknown word (customendpoint)    -- object.set_data_endpoint("customendpoint.com");
-./google/cloud/bigtable/client_options_test.cc:305:28    - Unknown word (Grpclb)            -- ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {
-./google/cloud/bigtable/client_options_test.cc:311:39    - Unknown word (GRPCLB)            -- GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS
-./google/cloud/bigtable/client_options_test.cc:48:51     - Unknown word (nullopt)    -- INTEGER) return absl::nullopt;
-./google/cloud/bigtable/client_options_test.cc:70:14     - Unknown word (bigtableadmin) -- EXPECT_EQ("bigtableadmin.googleapis.com",
-./google/cloud/bigtable/client_options_test.cc:87:37     - Unknown word (testdata)      -- DataEndpointOption>("testdata.googleapis.com")
-./google/cloud/bigtable/client_options_test.cc:88:38     - Unknown word (testadmin)     -- AdminEndpointOption>("testadmin.googleapis.com")
-./google/cloud/bigtable/client_options_test.cc:89:46     - Unknown word (testinstanceadmin) -- InstanceAdminEndpointOption>("testinstanceadmin.googleapis.com")
+./google/cloud/bigtable/client_options_test.cc:111:34    - Unknown word (testendpoint)      -- "testendpoint.googleapis.com"),
+./google/cloud/bigtable/client_options_test.cc:226:48    - Unknown word (customendpoint)    -- object.set_data_endpoint("customendpoint.com");
+./google/cloud/bigtable/client_options_test.cc:282:28    - Unknown word (Grpclb)            -- ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {
+./google/cloud/bigtable/client_options_test.cc:289:38    - Unknown word (GRPCLB)            -- GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS
+./google/cloud/bigtable/client_options_test.cc:445:49    - Unknown word (nullopt)           -- TRACING_OPTIONS", absl::nullopt);
+./google/cloud/bigtable/client_options_test.cc:47:14     - Unknown word (bigtableadmin) -- EXPECT_EQ("bigtableadmin.googleapis.com",
+./google/cloud/bigtable/client_options_test.cc:64:37     - Unknown word (testdata)      -- DataEndpointOption>("testdata.googleapis.com")
+./google/cloud/bigtable/client_options_test.cc:65:38     - Unknown word (testadmin)     -- AdminEndpointOption>("testadmin.googleapis.com")
+./google/cloud/bigtable/client_options_test.cc:66:46     - Unknown word (testinstanceadmin) -- InstanceAdminEndpointOption>("testinstanceadmin.googleapis.com")
 ./google/cloud/bigtable/doc/bigtable-main.dox:8:11      - Unknown word (Gmail)      -- Maps, and Gmail.
 ./google/cloud/bigtable/doc/bigtable-main.dox:96:86     - Unknown word (Quickstarts) -- quickstarts 'Cloud Bigtable Quickstarts'
 ./google/cloud/bigtable/doc/bigtable-samples-data-client.dox:32:28     - Unknown word (increament) -- Use ReadModifyWrite to increament a value and append a
@@ -332,7 +331,7 @@ Lines:
 ./google/cloud/firestore/firestore_client.pc:24:20     - Unknown word (lfirestore) -- Libs: -L${libdir} -lfirestore_client
 ./google/cloud/future_generic_then_test.cc:440:62    - Unknown word (functort)   -- exceptions raised by the functort to the
 ./google/cloud/future_generic_then_test.cc:675:16    - Unknown word (sref)       -- std::string& sref = value;
-./google/cloud/grpc_options.h:72:18     - Unknown word (ingored)    -- * @note this is ingored if `GrpcBackgroundThreadsFact
+./google/cloud/grpc_options.h:99:18     - Unknown word (ingored)    -- * @note this is ingored if `GrpcBackgroundThreadsFact
 ./google/cloud/iam/integration_tests/iam_credentials_integration_test.cc:121:26    - Unknown word (somebytes)  -- std::string payload = "somebytes";
 ./google/cloud/iam/internal/iam_credentials_option_defaults.cc:41:47     - Unknown word (iamcredentials) -- EndpointOption>(env ? *env : "iamcredentials.googleapis.com");
 ./google/cloud/iam/samples/iam_samples.cc:530:37    - Unknown word (undeleted)  -- "Role successfully undeleted: " << response->DebugString
@@ -418,16 +417,16 @@ Lines:
 ./google/cloud/spanner/value.h:339:6     - Unknown word (Metafunction) -- // Metafunction that returns true if
 ./google/cloud/spanner/value_test.cc:1047:14   - Unknown word (alphahex)   -- auto const alphahex = [](std::ostream& os
 ./google/cloud/spanner/value_test.cc:1057:49   - Unknown word (manip)      -- ostream&(std::ostream&)> manip;
-./google/cloud/storage/CMakeLists.txt:168:26    - Unknown word (streambuf)  -- internal/object_read_streambuf.cc
-./google/cloud/storage/CMakeLists.txt:502:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
-./google/cloud/storage/CMakeLists.txt:683:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c")
-./google/cloud/storage/CMakeLists.txt:74:5      - Unknown word (hmac)       -- hmac_key_metadata.cc
+./google/cloud/storage/CMakeLists.txt:164:26    - Unknown word (streambuf)  -- internal/object_read_streambuf.cc
+./google/cloud/storage/CMakeLists.txt:498:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
+./google/cloud/storage/CMakeLists.txt:679:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c")
+./google/cloud/storage/CMakeLists.txt:70:5      - Unknown word (hmac)       -- hmac_key_metadata.cc
 ./google/cloud/storage/README.md:83:29     - Unknown word (istreambuf) -- string contents{std::istreambuf_iterator<char>{reader
 ./google/cloud/storage/benchmarks/README.md:108:53    - Unknown word (venv)       -- and assume that the `venv` module is
 ./google/cloud/storage/benchmarks/README.md:10:61     - Unknown word (TTFB)       -- time to first byte (TTFB) is high, so
 ./google/cloud/storage/benchmarks/README.md:116:14    - Unknown word (vebm)       -- We will use `vebm` (for Virtual Environment
 ./google/cloud/storage/benchmarks/README.md:35:17     - Unknown word (ttfb)       -- tee tp-vs-cpu.ttfb.txt
-./google/cloud/storage/benchmarks/aggregate_throughput_benchmark.cc:321:20    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
+./google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:308:20    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:250:8     - Unknown word (uploaders)  -- auto uploaders =
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:258:8     - Unknown word (downloaders) -- auto downloaders = gcs_bm::CreateDownloadExper
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:19:61     - Unknown word (Spyder)     -- load this script in Spyder
