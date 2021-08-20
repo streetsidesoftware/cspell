@@ -9,30 +9,31 @@ export interface CSpellCache {
     files: CachedFile[];
 }
 
-type Version = '0.1';
+export type Version = '0.1';
 
 /**
  * Hash used. Starts with hash id. i.e. `sha1-` or `sha512-`.
  */
-type Hash = string;
+export type Hash = string;
 
-type UriRelPath = string;
+export type UriRelPath = string;
 
-enum IssueCode {
+export enum IssueCode {
     UnknownWord = 1 << 0,
     ForbiddenWord = 1 << 1,
     KnownIssue = 1 << 2,
+    ALL = IssueCode.UnknownWord | IssueCode.ForbiddenWord | IssueCode.KnownIssue,
 }
 
-interface CachedFile {
+export interface CachedFile {
     hash: Hash;
     path: UriRelPath;
     issues: Issue[];
 }
 
-type Issue = IssueEntry | IssueLine;
+export type Issue = IssueEntry | IssueLine;
 
-interface IssueEntry {
+export interface IssueEntry {
     line: number;
     character: number;
     code: IssueCode;
@@ -40,7 +41,7 @@ interface IssueEntry {
     len: number;
 }
 
-type IssueLine = [
+export type IssueLine = [
     line: IssueEntry['line'],
     character: IssueEntry['character'],
     code: IssueEntry['code'],
