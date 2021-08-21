@@ -52,3 +52,7 @@ export function scanMap<T>(accFn: (acc: T, value: T) => T, init?: T): (value: T)
         return acc;
     };
 }
+
+export function isDefined<T>(v: T | undefined): v is T {
+    return v !== undefined;
+}

@@ -19,7 +19,13 @@ import {
     suggestArgsToSuggestOptions,
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
-import { SpellingDictionary, HasOptions, SuggestOptions, SpellingDictionaryOptions } from './SpellingDictionary';
+import {
+    SpellingDictionary,
+    HasOptions,
+    SuggestOptions,
+    SpellingDictionaryOptions,
+    FindResult,
+} from './SpellingDictionary';
 import { FindFullResult } from '../../../cspell-trie-lib/dist/lib/find';
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly cachedWordsLimit = 50000;
@@ -61,13 +67,30 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return this._size;
     }
     public has(word: string, hasOptions?: HasOptions): boolean {
-        const searchOptions = hasOptionToSearchOption(hasOptions);
-        const useCompounds = searchOptions.useCompounds ?? this.options.useCompounds;
-        const { ignoreCase = true } = searchOptions;
-        return !!this._has(word, useCompounds, ignoreCase);
+        const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
+        const r = this._find(word, useCompounds, ignoreCase);
+        return !!r && !r.forbidden && !!r.found;
     }
 
-    private _has = memorizer(
+    public find(word: string, hasOptions?: HasOptions): FindResult | undefined {
+        const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
+        const r = this._find(word, useCompounds, ignoreCase);
+        const { forbidden = this.isForbidden(word) } = r || {};
+        if (!r && !forbidden) return undefined;
+        const { found = forbidden ? word : false } = r || {};
+        const noSuggest = found !== false && this.containsNoSuggestWords;
+        return { found, forbidden, noSuggest };
+    }
+
+    private resolveOptions(hasOptions?: HasOptions): {
+        useCompounds: HasOptions['useCompounds'] | undefined;
+        ignoreCase: boolean;
+    } {
+        const { useCompounds = this.options.useCompounds, ignoreCase = true } = hasOptionToSearchOption(hasOptions);
+        return { useCompounds, ignoreCase };
+    }
+
+    private _find = memorizer(
         (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
             this.findAnyForm(word, useCompounds, ignoreCase),
         SpellingDictionaryFromTrie.cachedWordsLimit

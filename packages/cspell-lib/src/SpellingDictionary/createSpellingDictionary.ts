@@ -41,6 +41,7 @@ export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError)
         type: 'error',
         containsNoSuggestWords: false,
         has: () => false,
+        find: () => undefined,
         isNoSuggestWord: () => false,
         isForbidden: () => false,
         suggest: () => [],

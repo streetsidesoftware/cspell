@@ -131,7 +131,7 @@ export function wordDictionaryFormsCollector(prefixNoCase: string): (word: strin
 }
 
 export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
-    return !opt ? {} : typeof opt === 'object' ? opt : { useCompounds: opt };
+    return !opt ? {} : opt;
 }
 
 export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {

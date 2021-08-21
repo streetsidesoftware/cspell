@@ -33,7 +33,7 @@ export interface FindResult {
     noSuggest: boolean;
 }
 
-export type HasOptions = boolean | SearchOptions;
+export type HasOptions = SearchOptions;
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
@@ -47,10 +47,9 @@ export interface SpellingDictionary {
     readonly type: string;
     readonly source: string;
     readonly containsNoSuggestWords: boolean;
-    has(word: string, useCompounds: boolean): boolean;
-    has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
-    // find(word: string, options?: SearchOptions): FindResult;
+    /** A more detailed search for a word, might take longer than `has` */
+    find(word: string, options?: SearchOptions): FindResult | undefined;
     isForbidden(word: string): boolean;
     isNoSuggestWord(word: string, options: HasOptions): boolean;
     suggest(
