@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.8.0](https://github.com/streetsidesoftware/cspell/compare/v5.7.2...v5.8.0) (2021-08-21)
+
+
+### Bug Fixes
+
+* clean up find results ([#1550](https://github.com/streetsidesoftware/cspell/issues/1550)) ([80cb6a3](https://github.com/streetsidesoftware/cspell/commit/80cb6a32122b2395d06814a9dead6f95d2ab057b))
+* fix allowCompoundWords find in case aware dictionaries. ([#1549](https://github.com/streetsidesoftware/cspell/issues/1549)) ([769de0b](https://github.com/streetsidesoftware/cspell/commit/769de0ba3f256018612f7539523e0f1cbd28d726))
+
+
+### Features
+
+* Add support for `noSuggest` dictionaries. ([#1554](https://github.com/streetsidesoftware/cspell/issues/1554)) ([f0ccda5](https://github.com/streetsidesoftware/cspell/commit/f0ccda5abec9c236eb5387bcf6a6349f31cb81b7))
+* Improve `trace` words command results. ([#1558](https://github.com/streetsidesoftware/cspell/issues/1558)) ([ed8a5dc](https://github.com/streetsidesoftware/cspell/commit/ed8a5dc17ffa6de901887d3bd5b6bacf67217866))
+
+
+
+
+
 # [5.7.0](https://github.com/streetsidesoftware/cspell/compare/v5.7.0-alpha.0...v5.7.0) (2021-08-14)
 
 **Note:** Version bump only for package cspell-trie-lib
