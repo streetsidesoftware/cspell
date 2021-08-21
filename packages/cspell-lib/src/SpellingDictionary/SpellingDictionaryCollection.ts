@@ -1,27 +1,27 @@
-import {
-    CompoundWordsMethod,
-    SuggestionCollector,
-    suggestionCollector,
-    SuggestionResult,
-    hasOptionToSearchOption,
-    defaultNumSuggestions,
-    SuggestArgs,
-    suggestArgsToSuggestOptions,
-} from './SpellingDictionaryMethods';
-import {
-    SpellingDictionary,
-    HasOptions,
-    SearchOptions,
-    SuggestOptions,
-    SpellingDictionaryOptions,
-    FindResult,
-} from './SpellingDictionary';
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
 import { memorizer, memorizerKeyBy } from '../util/Memorizer';
-import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { isDefined } from '../util/util';
+import {
+    CompoundWordsMethod,
+    FindResult,
+    HasOptions,
+    SearchOptions,
+    SpellingDictionary,
+    SpellingDictionaryOptions,
+    SuggestionCollector,
+    SuggestionResult,
+    SuggestOptions,
+} from './SpellingDictionary';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+import {
+    defaultNumSuggestions,
+    hasOptionToSearchOption,
+    SuggestArgs,
+    suggestArgsToSuggestOptions,
+    suggestionCollector,
+} from './SpellingDictionaryMethods';
 
 function identityString(w: string): string {
     return w;

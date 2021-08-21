@@ -1,13 +1,13 @@
 import * as Trie from 'cspell-trie-lib';
-import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
-import { CompoundWordsMethod } from './SpellingDictionaryMethods';
 import {
     createFailedToLoadDictionary,
     createForbiddenWordsDictionary,
     createSpellingDictionary,
 } from './createSpellingDictionary';
-import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+import { CompoundWordsMethod } from './SpellingDictionary';
+import { createCollection, createCollectionP, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [

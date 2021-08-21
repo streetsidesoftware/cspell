@@ -13,11 +13,7 @@ export function loadDictionaries(
 ): Promise<SpellingDictionary>[] {
     const defsToLoad = filterDictDefsToLoad(dictIds, defs);
 
-    return defsToLoad
-        .map((def) => loadDictionary(def.path, def))
-        .map((p) => p.catch(() => undefined))
-        .filter((p) => !!p)
-        .map((a) => a as Promise<SpellingDictionary>);
+    return defsToLoad.map((def) => loadDictionary(def.path, def));
 }
 
 export function refreshDictionaryCache(maxAge?: number): Promise<void> {

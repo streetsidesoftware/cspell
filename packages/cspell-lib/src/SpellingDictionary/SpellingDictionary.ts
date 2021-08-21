@@ -1,14 +1,7 @@
 import { SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
 import { ReplaceMap } from '@cspell/cspell-types';
 
-export {
-    CompoundWordsMethod,
-    JOIN_SEPARATOR,
-    SuggestionCollector,
-    suggestionCollector,
-    SuggestionResult,
-    WORD_SEPARATOR,
-} from 'cspell-trie-lib';
+export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 
 export interface SearchOptions {
     useCompounds?: boolean | number;

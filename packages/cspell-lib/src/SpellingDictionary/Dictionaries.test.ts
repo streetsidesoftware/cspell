@@ -30,7 +30,7 @@ describe('Validate getDictionary', () => {
         ${'rhone'} | ${ignoreCaseFalse} | ${false}
         ${'rhone'} | ${ignoreCaseTrue}  | ${true}
         ${'snarf'} | ${ignoreCaseTrue}  | ${false}
-    `('tests that userWords are included in the dictionary', async ({ word, opts, expected }) => {
+    `('tests that userWords are included in the dictionary $word', async ({ word, opts, expected }) => {
         const settings = {
             ...getDefaultSettings(),
             dictionaries: [],
@@ -52,6 +52,37 @@ describe('Validate getDictionary', () => {
             expect(result).toEqual({ word, found });
         });
         expect(dict.has(word, opts)).toBe(expected);
+    });
+
+    test.each`
+        word        | expected
+        ${'zero'}   | ${{ found: 'zero', forbidden: false, noSuggest: false }}
+        ${'zeros'}  | ${{ found: 'zeros', forbidden: false, noSuggest: true }}
+        ${'google'} | ${{ found: 'google', forbidden: false, noSuggest: true }}
+        ${'Café'}   | ${{ found: 'café', forbidden: false, noSuggest: false }}
+        ${'CAFÉ'}   | ${{ found: 'café', forbidden: false, noSuggest: false }}
+        ${'café'}   | ${{ found: 'café', forbidden: false, noSuggest: false }}
+        ${'cafe'}   | ${{ found: 'cafe', forbidden: false, noSuggest: false }}
+        ${'CAFE'}   | ${{ found: 'cafe', forbidden: false, noSuggest: false }}
+        ${'Rhône'}  | ${{ found: 'Rhône', forbidden: false, noSuggest: false }}
+        ${'RHÔNE'}  | ${{ found: 'rhône', forbidden: false, noSuggest: false }}
+        ${'rhône'}  | ${{ found: 'rhône', forbidden: false, noSuggest: false }}
+        ${'rhone'}  | ${{ found: 'rhone', forbidden: false, noSuggest: false }}
+        ${'snarf'}  | ${{ found: 'snarf', forbidden: true, noSuggest: false }}
+        ${'hte'}    | ${{ found: 'hte', forbidden: true, noSuggest: false }}
+        ${'colour'} | ${{ found: 'colour', forbidden: true, noSuggest: false }}
+    `('find words $word', async ({ word, expected }) => {
+        const settings: CSpellUserSettings = {
+            ...getDefaultSettings(),
+            noSuggestDictionaries: ['companies'],
+            words: ['one', 'two', 'three', 'café', '!snarf'],
+            userWords: ['four', 'five', 'six', 'Rhône'],
+            ignoreWords: ['zeros'],
+            flagWords: ['hte', 'colour'],
+        };
+
+        const dict = await Dictionaries.getDictionary(settings);
+        expect(dict.find(word)).toEqual(expected);
     });
 
     test.each`
@@ -89,6 +120,17 @@ describe('Validate getDictionary', () => {
             expect(result).toEqual({ word, found: true });
         });
         expect(dict.has(word, opts)).toBe(expected);
+    });
+
+    test('Dictionary NOT Found', async () => {
+        const settings: CSpellUserSettings = {
+            dictionaryDefinitions: [{ name: 'my-words', path: './not-found.txt' }],
+            dictionaries: ['my-words'],
+        };
+
+        const dict = await Dictionaries.getDictionary(settings);
+        expect(dict.getErrors()).toEqual([expect.objectContaining(new Error('my-words: failed to load'))]);
+        expect(dict.dictionaries.map((d) => d.name)).toEqual(['my-words', 'user_words', 'ignore_words', 'flag_words']);
     });
 
     test('Refresh Dictionary Cache', async () => {

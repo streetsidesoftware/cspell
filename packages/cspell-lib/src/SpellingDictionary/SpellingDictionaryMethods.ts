@@ -1,20 +1,10 @@
+import { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
-import { SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
-import { ucFirst, removeAccents, isUpperCase } from '../util/text';
+import { isUpperCase, removeAccents, ucFirst } from '../util/text';
 import { FunctionArgs } from '../util/types';
-import { SpellingDictionary, HasOptions, SearchOptions, SuggestOptions } from './SpellingDictionary';
+import { HasOptions, SearchOptions, SpellingDictionary, SuggestOptions } from './SpellingDictionary';
 
-// cspell:word café
-
-export {
-    CompoundWordsMethod,
-    JOIN_SEPARATOR,
-    SuggestionCollector,
-    suggestionCollector,
-    SuggestionResult,
-    WORD_SEPARATOR,
-    CASE_INSENSITIVE_PREFIX,
-} from 'cspell-trie-lib';
+export { suggestionCollector } from 'cspell-trie-lib';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
