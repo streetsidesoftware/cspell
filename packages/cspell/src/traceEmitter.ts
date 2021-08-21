@@ -20,6 +20,9 @@ export function emitTraceResults(results: TraceResult[], options: EmitTraceOptio
         terminalWidth: process.stdout.columns || 120,
     };
 
+    const col = new Intl.Collator();
+    results.sort((a, b) => col.compare(a.dictName, b.dictName));
+
     emitHeader(cols);
     results.forEach((r) => emitTraceResult(r, cols, options));
 }
