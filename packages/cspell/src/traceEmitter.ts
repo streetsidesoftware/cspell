@@ -85,13 +85,13 @@ function calcFoundChar(r: TraceResult): string {
     let color = chalk.dim;
     color = r.found ? chalk.whiteBright : color;
     color = r.forbidden ? chalk.red : color;
-    color = r.noSuggest ? chalk.blueBright : color;
+    color = r.noSuggest ? chalk.yellowBright : color;
     color = errors ? chalk.red : color;
 
     let char = '-';
     char = r.found ? '*' : char;
     char = r.forbidden ? '!' : char;
-    char = r.noSuggest ? 'N' : char;
+    char = r.noSuggest ? 'I' : char;
     char = errors ? 'X' : char;
 
     return color(char);
