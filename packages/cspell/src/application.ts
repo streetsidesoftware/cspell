@@ -17,9 +17,11 @@ export function lint(files: string[], options: CSpellApplicationOptions, emitter
 }
 
 export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
+    const { local } = options;
+    const { languageId, locale = local } = options;
     const configFile = await readConfig(options.config, undefined);
     const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configFile.config);
-    const results = await traceWords(words, config);
+    const results = await traceWords(words, config, { languageId, locale });
     return results;
 }
 

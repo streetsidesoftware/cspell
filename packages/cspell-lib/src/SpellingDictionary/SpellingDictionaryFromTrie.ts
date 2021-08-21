@@ -5,6 +5,7 @@ import {
     SuggestionResult,
     CompoundWordsMethod,
     importTrie,
+    FindWordOptions,
 } from 'cspell-trie-lib';
 import { createMapper } from '../util/repMap';
 import { getDefaultSettings } from '../Settings';
@@ -18,7 +19,14 @@ import {
     suggestArgsToSuggestOptions,
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
-import { SpellingDictionary, HasOptions, SuggestOptions, SpellingDictionaryOptions } from './SpellingDictionary';
+import {
+    SpellingDictionary,
+    HasOptions,
+    SuggestOptions,
+    SpellingDictionaryOptions,
+    FindResult,
+} from './SpellingDictionary';
+import { FindFullResult } from '../../../cspell-trie-lib/dist/lib/find';
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly cachedWordsLimit = 50000;
     private _size = 0;
@@ -59,37 +67,63 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return this._size;
     }
     public has(word: string, hasOptions?: HasOptions): boolean {
-        const searchOptions = hasOptionToSearchOption(hasOptions);
-        const useCompounds = searchOptions.useCompounds ?? this.options.useCompounds;
-        const { ignoreCase = true } = searchOptions;
-        return this._has(word, useCompounds, ignoreCase);
+        const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
+        const r = this._find(word, useCompounds, ignoreCase);
+        return !!r && !r.forbidden && !!r.found;
     }
 
-    private _has = memorizer(
+    public find(word: string, hasOptions?: HasOptions): FindResult | undefined {
+        const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
+        const r = this._find(word, useCompounds, ignoreCase);
+        const { forbidden = this.isForbidden(word) } = r || {};
+        if (!r && !forbidden) return undefined;
+        const { found = forbidden ? word : false } = r || {};
+        const noSuggest = found !== false && this.containsNoSuggestWords;
+        return { found, forbidden, noSuggest };
+    }
+
+    private resolveOptions(hasOptions?: HasOptions): {
+        useCompounds: HasOptions['useCompounds'] | undefined;
+        ignoreCase: boolean;
+    } {
+        const { useCompounds = this.options.useCompounds, ignoreCase = true } = hasOptionToSearchOption(hasOptions);
+        return { useCompounds, ignoreCase };
+    }
+
+    private _find = memorizer(
         (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
-            this.hasAnyForm(word, useCompounds, ignoreCase),
+            this.findAnyForm(word, useCompounds, ignoreCase),
         SpellingDictionaryFromTrie.cachedWordsLimit
     );
 
-    private hasAnyForm(word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) {
+    private findAnyForm(
+        word: string,
+        useCompounds: number | boolean | undefined,
+        ignoreCase: boolean
+    ): FindAnyFormResult | undefined {
         const mWord = this.mapWord(word.normalize('NFC'));
-        if (this.trie.hasWord(mWord, true)) {
-            return true;
+        const opts: FindWordOptions = { caseSensitive: !ignoreCase };
+        const findResult = this.trie.findWord(mWord, opts);
+        if (findResult.found !== false) {
+            return findResult;
         }
         const forms = wordSearchForms(mWord, this.isDictionaryCaseSensitive, ignoreCase);
         for (const w of forms) {
-            if (this.trie.hasWord(w, !ignoreCase)) {
-                return true;
+            const findResult = this.trie.findWord(w, opts);
+            if (findResult.found !== false) {
+                return findResult;
             }
         }
         if (useCompounds) {
+            opts.useLegacyWordCompounds = useCompounds;
             for (const w of forms) {
-                if (this.trie.has(w, useCompounds)) {
-                    return true;
+                const findResult = this.trie.findWord(w, opts);
+                if (findResult.found !== false) {
+                    return findResult;
                 }
             }
         }
-        return false;
+        return undefined;
     }
 
     public isNoSuggestWord(word: string, options?: HasOptions): boolean {
@@ -147,6 +181,8 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return [];
     }
 }
+
+type FindAnyFormResult = FindFullResult;
 
 export async function createSpellingDictionaryTrie(
     data: Iterable<string>,

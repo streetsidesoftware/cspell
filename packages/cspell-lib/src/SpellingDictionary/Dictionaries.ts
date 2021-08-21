@@ -13,11 +13,7 @@ export function loadDictionaries(
 ): Promise<SpellingDictionary>[] {
     const defsToLoad = filterDictDefsToLoad(dictIds, defs);
 
-    return defsToLoad
-        .map((def) => loadDictionary(def.path, def))
-        .map((p) => p.catch(() => undefined))
-        .filter((p) => !!p)
-        .map((a) => a as Promise<SpellingDictionary>);
+    return defsToLoad.map((def) => loadDictionary(def.path, def));
 }
 
 export function refreshDictionaryCache(maxAge?: number): Promise<void> {
@@ -42,14 +38,29 @@ export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDic
         return { ...def, noSuggest: enabled };
     });
     const spellDictionaries = loadDictionaries(colDicts.enabled(), modDefs);
-    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings', {
-        caseSensitive: true,
-    });
-    const ignoreWordsDictionary = createSpellingDictionary(ignoreWords, 'ignore_words', 'From Settings', {
-        caseSensitive: true,
-        noSuggest: true,
-    });
-    const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, 'flag_words', 'From Settings', {});
+    const settingsDictionary = createSpellingDictionary(
+        words.concat(userWords),
+        '[words]',
+        'From Settings `words` and `userWords`',
+        {
+            caseSensitive: true,
+        }
+    );
+    const ignoreWordsDictionary = createSpellingDictionary(
+        ignoreWords,
+        '[ignoreWords]',
+        'From Settings `ignoreWords`',
+        {
+            caseSensitive: true,
+            noSuggest: true,
+        }
+    );
+    const flagWordsDictionary = createForbiddenWordsDictionary(
+        flagWords,
+        '[flagWords]',
+        'From Settings `flagWords`',
+        {}
+    );
     return createCollectionP(
         [...spellDictionaries, settingsDictionary, ignoreWordsDictionary, flagWordsDictionary],
         'dictionary collection'

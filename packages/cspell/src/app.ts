@@ -16,6 +16,7 @@ import {
 import { tableToLines } from './util/table';
 import { Emitters, isProgressFileComplete, MessageType, ProgressItem, Issue } from './emitters';
 import { isSpellingDictionaryLoadError, SpellingDictionaryLoadError, ImportError } from 'cspell-lib';
+import { emitTraceResults } from './traceEmitter';
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
@@ -211,7 +212,10 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
     type TraceCommandOptions = TraceOptions;
 
     prog.command('trace')
-        .description('Trace words')
+        .description(
+            `Trace words
+  Search for words in the configuration and dictionaries.`
+        )
         .option(
             '-c, --config <cspell.json>',
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
@@ -226,7 +230,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .arguments('<words...>')
         .action(async (words: string[], options: TraceCommandOptions) => {
             const results = await App.trace(words, options);
-            results.forEach(emitTraceResult);
+            emitTraceResults(results, { cwd: process.cwd() });
             const numFound = results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
             if (!numFound) {
                 console.error('No matches found');
@@ -360,44 +364,6 @@ function collect(value: string, previous: string[] | undefined): string[] {
         return [value];
     }
     return previous.concat([value]);
-}
-
-function emitTraceResult(r: App.TraceResult) {
-    const terminalWidth = process.stdout.columns || 120;
-    const widthName = 20;
-    const errors = r.errors?.map((e) => e.message)?.join('\n\t') || '';
-    const w = r.forbidden ? chalk.red(r.word) : chalk.green(r.word);
-    const f = r.forbidden
-        ? chalk.red('!')
-        : r.found
-        ? chalk.whiteBright('*')
-        : errors
-        ? chalk.red('X')
-        : chalk.dim('-');
-    const n = chalk.yellowBright(pad(r.dictName, widthName));
-    const used = [r.word.length, 1, widthName].reduce((a, b) => a + b, 3);
-    const widthSrc = terminalWidth - used;
-    const c = errors ? chalk.red : chalk.white;
-    const s = c(trimMid(r.dictSource, widthSrc));
-    const line = [w, f, n, s].join(' ');
-    console.log(line);
-    if (errors) {
-        console.error('\t' + chalk.red(errors));
-    }
-}
-
-function pad(s: string, w: number): string {
-    return (s + ' '.repeat(w)).substr(0, w);
-}
-
-function trimMid(s: string, w: number): string {
-    s = s.trim();
-    if (s.length <= w) {
-        return s;
-    }
-    const l = Math.floor((w - 3) / 2);
-    const r = Math.ceil((w - 3) / 2);
-    return s.substr(0, l) + '...' + s.substr(-r);
 }
 
 function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: number) {

@@ -21,6 +21,7 @@ import {
     PartialFindOptions,
     findWord,
     findWordNode,
+    FindFullResult,
 } from './find';
 
 export { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
@@ -100,11 +101,10 @@ export class Trie {
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        if (this.hasWord(word, true)) return true;
+        if (this.hasWord(word, false)) return true;
         if (minLegacyCompoundLength) {
-            const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : defaultLegacyMinCompoundLength;
-            const findOptions = createFindOptions({ legacyMinCompoundLength: len });
-            return !!findLegacyCompound(this.root, word, findOptions).found;
+            const f = this.findWord(word, { useLegacyWordCompounds: minLegacyCompoundLength });
+            return !!f.found;
         }
         return false;
     }
@@ -116,9 +116,24 @@ export class Trie {
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean {
-        const findOptions = this.createFindOptions({ matchCase: caseSensitive });
-        const f = findWord(this.root, word, findOptions);
+        const f = this.findWord(word, { caseSensitive });
         return !!f.found && !f.forbidden;
+    }
+
+    findWord(word: string, options?: FindWordOptions): FindFullResult {
+        if (options?.useLegacyWordCompounds) {
+            const len =
+                options.useLegacyWordCompounds !== true
+                    ? options.useLegacyWordCompounds
+                    : defaultLegacyMinCompoundLength;
+            const findOptions = this.createFindOptions({
+                legacyMinCompoundLength: len,
+                matchCase: options.caseSensitive,
+            });
+            return findLegacyCompound(this.root, word, findOptions);
+        }
+        const findOptions = this.createFindOptions({ matchCase: options?.caseSensitive });
+        return findWord(this.root, word, findOptions);
     }
 
     /**
@@ -272,4 +287,9 @@ export class Trie {
         });
         return findOptions;
     }
+}
+
+export interface FindWordOptions {
+    caseSensitive?: boolean;
+    useLegacyWordCompounds?: boolean | number;
 }

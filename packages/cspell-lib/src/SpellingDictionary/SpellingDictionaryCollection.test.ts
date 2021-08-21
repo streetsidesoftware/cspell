@@ -1,13 +1,13 @@
 import * as Trie from 'cspell-trie-lib';
-import { SpellingDictionaryCollection, createCollectionP, createCollection } from './SpellingDictionaryCollection';
-import { CompoundWordsMethod } from './SpellingDictionaryMethods';
 import {
     createFailedToLoadDictionary,
     createForbiddenWordsDictionary,
     createSpellingDictionary,
 } from './createSpellingDictionary';
-import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+import { CompoundWordsMethod } from './SpellingDictionary';
+import { createCollection, createCollectionP, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
+import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [
@@ -28,6 +28,15 @@ describe('Verify using multiple dictionaries', () => {
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
     const wordsD = ['red*', 'green*', 'blue*', 'pink*', 'black*', '*berry', '+-fruit', '*bug', 'pinkie'];
     const wordsF = ['!pink*', '+berry', '+bug', '!stinkbug'];
+
+    const wordsLegacy = ['error', 'code', 'system', 'ctrl'];
+
+    // cspell:ignore pinkberry
+    const wordsNoSug = ['colour', 'behaviour', 'favour', 'pinkberry'];
+
+    const dictNoSug = createSpellingDictionary(wordsNoSug, 'words-no-suggest', 'test', { noSuggest: true });
+    const dictLegacy = createSpellingDictionary(wordsLegacy, 'legacy-dict', 'test', { useCompounds: true });
+
     test('checks for existence', async () => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test', {}),
@@ -141,6 +150,61 @@ describe('Verify using multiple dictionaries', () => {
 
         const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.has(word)).toEqual(expected);
+    });
+
+    test.each`
+        word            | expected
+        ${'redberry'}   | ${{ found: 'redberry', forbidden: false, noSuggest: false }}
+        ${'pinkberry'}  | ${{ found: 'pinkberry', forbidden: false, noSuggest: true }}
+        ${'pink'}       | ${{ found: 'pink', forbidden: true, noSuggest: false }}
+        ${'bug'}        | ${{ found: 'bug', forbidden: false, noSuggest: false }}
+        ${'blackberry'} | ${{ found: 'blackberry', forbidden: false, noSuggest: false }}
+        ${'pinkbug'}    | ${{ found: 'pinkbug', forbidden: false, noSuggest: false }}
+        ${'colour'}     | ${{ found: 'colour', forbidden: false, noSuggest: true }}
+        ${'behaviour'}  | ${{ found: 'behaviour', forbidden: false, noSuggest: true }}
+    `('find: "$word"', ({ word, expected }) => {
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
+            createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            dictNoSug,
+        ];
+
+        const dictCollection = createCollection(dicts, 'test');
+        expect(dictCollection.find(word)).toEqual(expected);
+    });
+
+    // cspell:ignore error* *code ctrl* *code *berry*
+    test.each`
+        word            | expected
+        ${'redberry'}   | ${{ found: 'redberry', forbidden: false, noSuggest: false }}
+        ${'pinkberry'}  | ${{ found: 'pinkberry', forbidden: false, noSuggest: true }}
+        ${'berryberry'} | ${{ found: 'berry+berry', forbidden: false, noSuggest: false }}
+        ${'errorcode'}  | ${{ found: 'error+code', forbidden: false, noSuggest: false }}
+        ${'ctrlcode'}   | ${{ found: 'ctrl+code', forbidden: false, noSuggest: false }}
+        ${'pink'}       | ${{ found: 'pink', forbidden: true, noSuggest: false }}
+        ${'bug'}        | ${{ found: 'bug', forbidden: false, noSuggest: false }}
+        ${'blackberry'} | ${{ found: 'blackberry', forbidden: false, noSuggest: false }}
+        ${'pinkbug'}    | ${{ found: 'pinkbug', forbidden: false, noSuggest: false }}
+        ${'colour'}     | ${{ found: 'colour', forbidden: false, noSuggest: true }}
+        ${'behaviour'}  | ${{ found: 'behaviour', forbidden: false, noSuggest: true }}
+    `('find compound: "$word"', ({ word, expected }) => {
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
+            createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            dictNoSug,
+            dictLegacy,
+        ];
+
+        const dictCollection = createCollection(dicts, 'test');
+        expect(dictCollection.find(word, { useCompounds: true })).toEqual(expected);
     });
 
     // cspell:ignore pinkbug redberry

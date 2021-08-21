@@ -17,6 +17,8 @@ describe('Validate createSpellingDictionary', () => {
         expect(d.suggest('error')).toEqual([]);
         expect(d.mapWord('café')).toBe('café');
         expect(d.has('fun')).toBe(false);
+        expect(d.find('hello')).toBeUndefined();
+        expect(d.isNoSuggestWord('hello', {})).toBe(false);
     });
 
     test('createSpellingDictionary', () => {

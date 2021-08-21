@@ -1,14 +1,7 @@
 import { SuggestionCollector, SuggestionResult, CompoundWordsMethod } from 'cspell-trie-lib';
 import { ReplaceMap } from '@cspell/cspell-types';
 
-export {
-    CompoundWordsMethod,
-    JOIN_SEPARATOR,
-    SuggestionCollector,
-    suggestionCollector,
-    SuggestionResult,
-    WORD_SEPARATOR,
-} from 'cspell-trie-lib';
+export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 
 export interface SearchOptions {
     useCompounds?: boolean | number;
@@ -22,7 +15,18 @@ export interface SuggestOptions {
     ignoreCase?: boolean;
 }
 
-export type HasOptions = boolean | SearchOptions;
+export type FindOptions = SearchOptions;
+
+export interface FindResult {
+    /** the text found, otherwise `false` */
+    found: string | false;
+    /** `true` if it is considered a forbidden word. */
+    forbidden: boolean;
+    /** `true` if it is a no-suggest word. */
+    noSuggest: boolean;
+}
+
+export type HasOptions = SearchOptions;
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
@@ -36,9 +40,9 @@ export interface SpellingDictionary {
     readonly type: string;
     readonly source: string;
     readonly containsNoSuggestWords: boolean;
-    has(word: string, useCompounds: boolean): boolean;
-    has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
+    /** A more detailed search for a word, might take longer than `has` */
+    find(word: string, options?: SearchOptions): FindResult | undefined;
     isForbidden(word: string): boolean;
     isNoSuggestWord(word: string, options: HasOptions): boolean;
     suggest(

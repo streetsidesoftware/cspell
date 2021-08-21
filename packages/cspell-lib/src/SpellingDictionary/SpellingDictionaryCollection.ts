@@ -1,25 +1,27 @@
-import {
-    CompoundWordsMethod,
-    SuggestionCollector,
-    suggestionCollector,
-    SuggestionResult,
-    hasOptionToSearchOption,
-    defaultNumSuggestions,
-    SuggestArgs,
-    suggestArgsToSuggestOptions,
-} from './SpellingDictionaryMethods';
-import {
-    SpellingDictionary,
-    HasOptions,
-    SearchOptions,
-    SuggestOptions,
-    SpellingDictionaryOptions,
-} from './SpellingDictionary';
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
 import { memorizer, memorizerKeyBy } from '../util/Memorizer';
+import { isDefined } from '../util/util';
+import {
+    CompoundWordsMethod,
+    FindResult,
+    HasOptions,
+    SearchOptions,
+    SpellingDictionary,
+    SpellingDictionaryOptions,
+    SuggestionCollector,
+    SuggestionResult,
+    SuggestOptions,
+} from './SpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+import {
+    defaultNumSuggestions,
+    hasOptionToSearchOption,
+    SuggestArgs,
+    suggestArgsToSuggestOptions,
+    suggestionCollector,
+} from './SpellingDictionaryMethods';
 
 function identityString(w: string): string {
     return w;
@@ -43,6 +45,16 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     public has(word: string, hasOptions?: HasOptions): boolean {
         const options = hasOptionToSearchOption(hasOptions);
         return !!isWordInAnyDictionary(this.dictionaries, word, options) && !this.isForbidden(word);
+    }
+
+    public find(word: string, hasOptions?: HasOptions): FindResult | undefined {
+        const options = hasOptionToSearchOption(hasOptions);
+        const {
+            found = false,
+            forbidden = false,
+            noSuggest = false,
+        } = findInAnyDictionary(this.dictionaries, word, options) || {};
+        return { found, forbidden, noSuggest };
     }
 
     public isNoSuggestWord(word: string, options?: HasOptions): boolean {
@@ -118,7 +130,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     private _isNoSuggestWord = memorizerKeyBy(
         (word: string, options?: HasOptions) => {
             if (!this.containsNoSuggestWords) return false;
-            return !!isNoSuggestWordInAnyDictionary(this.dictionaries, word, options || false);
+            return !!isNoSuggestWordInAnyDictionary(this.dictionaries, word, options || {});
         },
         (word: string, options?: HasOptions) => {
             const opts = hasOptionToSearchOption(options);
@@ -138,6 +150,20 @@ function isWordInAnyDictionary(
     options: SearchOptions
 ): SpellingDictionary | undefined {
     return genSequence(dicts).first((dict) => dict.has(word, options));
+}
+
+function findInAnyDictionary(
+    dicts: SpellingDictionary[],
+    word: string,
+    options: SearchOptions
+): FindResult | undefined {
+    const found = dicts.map((dict) => dict.find(word, options)).filter(isDefined);
+    if (!found.length) return undefined;
+    return found.reduce((a, b) => ({
+        found: a.forbidden ? a.found : b.forbidden ? b.found : a.found || b.found,
+        forbidden: a.forbidden || b.forbidden,
+        noSuggest: a.noSuggest || b.noSuggest,
+    }));
 }
 
 function isNoSuggestWordInAnyDictionary(
