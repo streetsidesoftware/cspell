@@ -212,7 +212,10 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
     type TraceCommandOptions = TraceOptions;
 
     prog.command('trace')
-        .description('Trace words')
+        .description(
+            `Trace words
+  Search for words in the configuration and dictionaries.`
+        )
         .option(
             '-c, --config <cspell.json>',
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
