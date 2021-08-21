@@ -239,7 +239,7 @@
           "type": "string"
         },
         "dictionaries": {
-          "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn of the dictionary with the name `typescript`.",
+          "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn off the dictionary with the name `typescript`.",
           "items": {
             "$ref": "#/definitions/DictionaryReference"
           },
@@ -271,6 +271,13 @@
         "ignoreRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
           "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
+        },
+        "ignoreWords": {
+          "description": "List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "includeRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
@@ -372,7 +379,7 @@
           "type": "string"
         },
         "dictionaries": {
-          "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn of the dictionary with the name `typescript`.",
+          "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn off the dictionary with the name `typescript`.",
           "items": {
             "$ref": "#/definitions/DictionaryReference"
           },
@@ -437,7 +444,7 @@
           "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
         },
         "ignoreWords": {
-          "description": "list of words to be ignored",
+          "description": "List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`.",
           "items": {
             "type": "string"
           },
@@ -677,7 +684,7 @@
       "type": "string"
     },
     "dictionaries": {
-      "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn of the dictionary with the name `typescript`.",
+      "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary. To remove a dictionary from the list add `!` before the name. i.e. `!typescript` will turn off the dictionary with the name `typescript`.",
       "items": {
         "$ref": "#/definitions/DictionaryReference"
       },
@@ -746,7 +753,7 @@
       "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
     },
     "ignoreWords": {
-      "description": "list of words to be ignored",
+      "description": "List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`.",
       "items": {
         "type": "string"
       },

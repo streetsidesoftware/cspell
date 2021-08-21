@@ -97,9 +97,6 @@ export interface Settings extends BaseSetting, PnPSettings {
      */
     language?: LocaleId;
 
-    /** list of words to be ignored */
-    ignoreWords?: string[];
-
     /** languageIds for the files to spell check. */
     enabledLanguageIds?: LanguageIdSingle[];
 
@@ -257,6 +254,9 @@ export interface BaseSetting {
     /** list of words to always be considered incorrect. */
     flagWords?: string[];
 
+    /** List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`. */
+    ignoreWords?: string[];
+
     /**
      * True to enable compound word checking.
      * @default false
@@ -276,7 +276,7 @@ export interface BaseSetting {
      * Optional list of dictionaries to use.
      * Each entry should match the name of the dictionary.
      * To remove a dictionary from the list add `!` before the name.
-     * i.e. `!typescript` will turn of the dictionary with the name `typescript`.
+     * i.e. `!typescript` will turn off the dictionary with the name `typescript`.
      */
     dictionaries?: DictionaryReference[];
 
