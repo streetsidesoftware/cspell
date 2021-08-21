@@ -1,27 +1,74 @@
 import { traceWords, getDefaultSettings } from '.';
 import { CSpellSettings } from '@cspell/cspell-types';
+import { mergeSettings } from './Settings';
+import { TraceResult } from './trace';
 
 describe('Verify trace', () => {
     jest.setTimeout(10000);
+
     test('tests tracing a word', async () => {
         const words = ['apple'];
-        const config = getDefaultSettings();
-        const results = await traceWords(words, config);
-        expect(Object.keys(results)).not.toHaveLength(0);
-        const foundIn = results.filter((r) => r.found);
-        expect(foundIn).toEqual(
+        const config = getSettings({ ignoreWords: ['apple'], flagWords: ['apple'] });
+        const results = await traceWords(words, config, {});
+        expect(results.map(({ dictName, found }) => ({ dictName, found }))).toEqual(
             expect.arrayContaining([
-                expect.objectContaining({
-                    dictName: 'en_us',
-                    dictSource: expect.stringContaining('en_US.trie.gz'),
-                }),
+                { dictName: 'en-gb', found: true },
+                { dictName: 'en_us', found: true },
+                { dictName: 'cpp', found: true },
+                { dictName: 'typescript', found: false },
+                { dictName: 'companies', found: true },
+                { dictName: 'softwareTerms', found: false },
+                { dictName: '_cfg_ignore_words__', found: true },
+                { dictName: '_cfg_words__', found: false },
+                { dictName: '_cfg_flag_words__', found: true },
             ])
+        );
+    });
+
+    // cspell:ignore *error* *code*
+    test.each`
+        word           | languageId   | locale       | ignoreCase | allowCompoundWords | dictName                 | dictActive | found    | forbidden | noSuggest | foundWord
+        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}               | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en-gb'}               | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'en_us'}               | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'companies'}           | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'cpp'}                 | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'café'}      | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}               | ${true}    | ${true}  | ${false}  | ${false}  | ${'café'}
+        ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}               | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
+        ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${true}            | ${'en_us'}               | ${true}    | ${true}  | ${false}  | ${false}  | ${'error+code'}
+        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${undefined}       | ${'cpp'}                 | ${true}    | ${true}  | ${false}  | ${false}  | ${'error+code'}
+        ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}               | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
+        ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'_cfg_flag_words__'}   | ${true}    | ${true}  | ${true}   | ${false}  | ${'hte'}
+        ${'Colour'}    | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'_cfg_ignore_words__'} | ${true}    | ${true}  | ${false}  | ${true}   | ${'colour'}
+    `('trace word "$word" in $dictName', async (params) => {
+        const { word, languageId, ignoreCase, locale, allowCompoundWords } = params;
+        const { dictName, dictActive, found, forbidden, noSuggest, foundWord } = params;
+        const words = [word];
+        const config = getSettings({ allowCompoundWords, flagWords: ['hte'], ignoreWords: ['colour'] });
+        const results = await traceWords(words, config, { locale, languageId, ignoreCase });
+        const byName = results.reduce((a, b) => {
+            a[b.dictName] = b;
+            return a;
+        }, {} as Record<string, TraceResult>);
+
+        // console.log(JSON.stringify(byName));
+
+        expect(byName[dictName]).toEqual(
+            oc({
+                dictActive,
+                dictName,
+                forbidden,
+                found,
+                foundWord,
+                noSuggest,
+                word,
+            })
         );
     });
 
     test('tracing with missing dictionary.', async () => {
         const words = ['apple'];
-        const defaultConfig = getDefaultSettings();
+        const defaultConfig = getSettings();
         const dictionaryDefinitions = (defaultConfig.dictionaryDefinitions || []).concat([
             {
                 name: 'bad dict',
@@ -32,15 +79,12 @@ describe('Verify trace', () => {
             ...defaultConfig,
             dictionaryDefinitions,
         };
-        const results = await traceWords(words, config);
+        const results = await traceWords(words, config, {});
         expect(Object.keys(results)).not.toHaveLength(0);
         const foundIn = results.filter((r) => r.found);
         expect(foundIn).toEqual(
             expect.arrayContaining([
-                expect.objectContaining({
-                    dictName: 'en_us',
-                    dictSource: expect.stringContaining('en_US.trie.gz'),
-                }),
+                expect.objectContaining({ dictName: 'en_us', dictSource: expect.stringContaining('en_US.trie.gz') }),
             ])
         );
 
@@ -60,3 +104,11 @@ describe('Verify trace', () => {
         );
     });
 });
+
+function oc<T>(t: T): T {
+    return expect.objectContaining(t);
+}
+
+function getSettings(...settings: CSpellSettings[]): CSpellSettings {
+    return settings.reduce((a, b) => mergeSettings(a, b), getDefaultSettings());
+}

@@ -38,14 +38,14 @@ export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDic
         return { ...def, noSuggest: enabled };
     });
     const spellDictionaries = loadDictionaries(colDicts.enabled(), modDefs);
-    const settingsDictionary = createSpellingDictionary(words.concat(userWords), 'user_words', 'From Settings', {
+    const settingsDictionary = createSpellingDictionary(words.concat(userWords), '_cfg_words__', 'From Settings', {
         caseSensitive: true,
     });
-    const ignoreWordsDictionary = createSpellingDictionary(ignoreWords, 'ignore_words', 'From Settings', {
+    const ignoreWordsDictionary = createSpellingDictionary(ignoreWords, '_cfg_ignore_words__', 'From Settings', {
         caseSensitive: true,
         noSuggest: true,
     });
-    const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, 'flag_words', 'From Settings', {});
+    const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '_cfg_flag_words__', 'From Settings', {});
     return createCollectionP(
         [...spellDictionaries, settingsDictionary, ignoreWordsDictionary, flagWordsDictionary],
         'dictionary collection'
