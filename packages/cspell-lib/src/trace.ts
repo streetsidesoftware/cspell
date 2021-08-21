@@ -7,6 +7,7 @@ import { genSequence } from 'gensequence';
 export interface TraceResult {
     word: string;
     found: boolean;
+    // found: string;
     forbidden: boolean;
     dictName: string;
     dictSource: string;

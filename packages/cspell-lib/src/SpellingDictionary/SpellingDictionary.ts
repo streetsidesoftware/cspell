@@ -22,6 +22,17 @@ export interface SuggestOptions {
     ignoreCase?: boolean;
 }
 
+export type FindOptions = SearchOptions;
+
+export interface FindResult {
+    /** the text found, otherwise `false` */
+    found: string | false;
+    /** `true` if it is considered a forbidden word. */
+    forbidden: boolean;
+    /** `true` if it is a no-suggest word. */
+    noSuggest: boolean;
+}
+
 export type HasOptions = boolean | SearchOptions;
 
 export interface SpellingDictionaryOptions {
@@ -39,6 +50,7 @@ export interface SpellingDictionary {
     has(word: string, useCompounds: boolean): boolean;
     has(word: string, options: HasOptions): boolean;
     has(word: string, options?: HasOptions): boolean;
+    // find(word: string, options?: SearchOptions): FindResult;
     isForbidden(word: string): boolean;
     isNoSuggestWord(word: string, options: HasOptions): boolean;
     suggest(
