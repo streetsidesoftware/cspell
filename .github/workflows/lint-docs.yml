@@ -1,12 +1,12 @@
 name: Lint
 on:
   pull_request:
-    paths-ignore:
+    paths:
       - "docs/**"
   push:
     branches:
       - main
-    paths-ignore:
+    paths:
       - "docs/**"
 
 jobs:
@@ -16,5 +16,4 @@ jobs:
       - uses: actions/checkout@v2.3.4
       - uses: actions/setup-node@v2.4.0
       - run: npm ci
-      - run: npm run build
-      - run: npm run lint-ci
+      - run: npm run lint-docs-ci

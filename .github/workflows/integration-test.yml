@@ -6,8 +6,11 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - "docs/**"
+    paths:
+      - "**/package.lock"
+      - "**/*.ts"
+      - "integration-tests/**"
+      - "!docs/**"
 
 jobs:
   test:

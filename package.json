@@ -21,6 +21,8 @@
     "bootstrap": "lerna bootstrap --no-ci",
     "lint": "eslint . --fix && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
+    "lint-docs": "prettier -w \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
+    "lint-docs-ci": "prettier -c \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
     "prepare-cspell-action": "npm i",
     "pub-lerna": "lerna publish from-git",
     "pub-version": "lerna version --conventional-commits",
