@@ -18,11 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: CSpell - A Spell Checker for Code!
+title: CSpell
 email: &email "jason@streetsidesoftware.nl"
 name: &name "Jason Dent" # &name is a YAML anchor which can be *referenced later
 description: >- # this means to ignore newlines until "baseurl:"
-  User's guide to CSpell.
+  A Spell Checker for Code!
 url: https://streetsidesoftware.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl: "/cspell" # the subpath of your site, e.g. "/blog"
 repository: "streetsidesoftware/cspell"
@@ -32,9 +32,14 @@ github_username: streetsidesoftware
 
 # Build settings
 # theme: jekyll-theme-slate
-theme: minima
+# theme: minima
+theme: "just-the-docs"
 plugins:
-  - jekyll-feed
+  # - jekyll-feed
+
+# permalink: pretty
+permalink: /:categories/:title/
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
@@ -54,3 +59,25 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+#
+# just-the-docs
+# See: [Home | Just the Docs](https://pmarsceill.github.io/just-the-docs/)
+#
+
+# Aux links for the upper right navigation
+aux_links:
+  "CSpell on GitHub":
+    - "//github.com/streetsidesoftware/cspell"
+
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Footer "Edit this page on GitHub" link text
+gh_edit_link: true # show or hide edit this page link
+gh_edit_link_text: "Edit this page on GitHub."
+gh_edit_repository: "https://github.com/streetsidesoftware/cspell" # the github URL for your repo
+gh_edit_branch: "main" # the branch that your docs is served from
+gh_edit_source: docs # the source that your files originate from
+gh_edit_view_mode: "blob" # "tree" or "edit" if you want the user to jump into the editor immediately
