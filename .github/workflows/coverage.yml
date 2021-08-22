@@ -1,9 +1,13 @@
 name: Coverage
 on:
   pull_request:
+    paths-ignore:
+      - "docs/**"
   push:
     branches:
       - main
+    paths-ignore:
+      - "docs/**"
 
 jobs:
   coverage:
