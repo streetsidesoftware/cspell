@@ -5,6 +5,7 @@ title: Home
 nav_order: 1
 description: 'CSpell - A spell checker for code!'
 permalink: /
+layout: default
 ---
 
 ## Welcome to CSpell
