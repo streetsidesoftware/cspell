@@ -52,3 +52,7 @@ cspell trace --languageId=cpp "errorcode"
 ![image](https://user-images.githubusercontent.com/3740137/130419629-0d8b6781-f775-4b9f-beac-4d9b98505893.png)
 
 The `+` between _error`+`code_ indicates that it was found using compound words enabled by `allowCompoundWords` setting.
+
+<!---
+cspell:ignore errorcode
+--->
