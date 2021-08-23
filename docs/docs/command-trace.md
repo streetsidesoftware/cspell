@@ -21,7 +21,6 @@ The word is found in a dictionary if a `*` appears before the dictionary name. !
 
 The dictionary is _enabled_, (in use based upon the file type), in the dictionary name is followed by a `*`. ![image](https://user-images.githubusercontent.com/3740137/130418257-583ba581-2ff9-459a-a888-6016a93666ab.png)
 
-
 ## Options
 
 ```
@@ -45,6 +44,7 @@ Options:
 ### Using `languageId`
 
 **Search for `errorcode`**
+
 ```sh
 cspell trace --languageId=cpp "errorcode"
 ```
@@ -52,4 +52,3 @@ cspell trace --languageId=cpp "errorcode"
 ![image](https://user-images.githubusercontent.com/3740137/130419629-0d8b6781-f775-4b9f-beac-4d9b98505893.png)
 
 The `+` between _error`+`code_ indicates that it was found using compound words enabled by `allowCompoundWords` setting.
-
