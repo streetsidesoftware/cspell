@@ -19,7 +19,7 @@ A `!` will appear next to the ones where the word is forbidden.
 
 The word is found in a dictionary if a `*` appears before the dictionary name. ![image](https://user-images.githubusercontent.com/3740137/130417834-5f8ae058-6723-4801-b950-d8864809206d.png)
 
-The dictionary is _enabled_, (in use based upon the file type), in the dictionary name is followed by a `*`. ![image](https://user-images.githubusercontent.com/3740137/130418257-583ba581-2ff9-459a-a888-6016a93666ab.png)
+The dictionary is _enabled_, (in use based upon the file type), if the dictionary name is followed by a `*`. ![image](https://user-images.githubusercontent.com/3740137/130418257-583ba581-2ff9-459a-a888-6016a93666ab.png)
 
 ## Options
 
