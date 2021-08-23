@@ -1,9 +1,9 @@
 ---
 layout: default
 title: <Fill in Title>
-categories: configuration
-parent: Configuration
-nav_order: 11
+categories: docs
+parent: Docs
+nav_order: 4
 published: false
 ---
 

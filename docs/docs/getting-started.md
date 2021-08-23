@@ -1,8 +1,8 @@
 ---
 title: 'Getting Started with CSpell'
 categories: docs
-parent: Docs
-nav_order: 10
+# parent: Docs
+nav_order: 2
 ---
 
 # Spell Checking

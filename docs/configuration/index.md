@@ -1,11 +1,11 @@
 ---
 title: Configuration
-nav_order: 2
+nav_order: 4
 description: 'Customizing CSpell'
 has_children: true
 ---
 
-## Customization
+# Configuration
 
 _CSpell_'s behavior can be controlled through a config file.
 
@@ -98,4 +98,4 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 - `includeRegExpList` - _(Advanced)_ limits the text checked to be only that matching the expressions in the list.
 - `patterns` - this allows you to define named patterns to be used with
   `ignoreRegExpList` and `includeRegExpList`.
-- `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](#LanguageSettings)
+- `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](./language-settings.md#LanguageSettings)

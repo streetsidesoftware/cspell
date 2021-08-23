@@ -1,8 +1,8 @@
 ---
 title: 'Searching Dictionaries'
 categories: docs
-parent: Docs
-nav_order: 11
+# parent: Docs
+nav_order: 4
 ---
 
 # Searching Dictionaries
