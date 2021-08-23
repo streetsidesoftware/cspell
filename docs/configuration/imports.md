@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Importing Configuration
-nav_order: 2
+categories: configuration
+parent: Configuration
+nav_order: 11
 ---
 
 # Importing Configuration

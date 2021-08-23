@@ -33,12 +33,18 @@ github_username: streetsidesoftware
 # Build settings
 # theme: jekyll-theme-slate
 # theme: minima
-theme: "just-the-docs"
+remote_theme: pmarsceill/just-the-docs
+
 plugins:
   # - jekyll-feed
 
 # permalink: pretty
 permalink: /:categories/:title/
+
+exclude:
+  - README.md
+  - .cspell/**
+  - .cspell.*
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -64,8 +70,6 @@ permalink: /:categories/:title/
 # just-the-docs
 # See: [Home | Just the Docs](https://pmarsceill.github.io/just-the-docs/)
 #
-
-remote_theme: pmarsceill/just-the-docs
 
 # Aux links for the upper right navigation
 aux_links:
