@@ -20,9 +20,11 @@ describe('traceEmitter', () => {
             'Word       F Dictionary           Dictionary Location           ',
             'errorcode  ! forbid-words*        forbid-words.txt',
             'errorcode  I ignore-words*        ignore-words.txt',
-            'error+code * my-special-words*    which/should/not/fit/...e/my-special-words.txt',
+            expect.stringContaining('error+code * my-special-words*    '),
             'errorcode  * project-words        project-words.txt',
         ]);
+        const out = lines.join('\n');
+        expect(out).toEqual(expect.stringContaining('my-special-words.txt\n'));
     });
 });
 
