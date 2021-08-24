@@ -2,7 +2,7 @@ import glob, { IGlob } from 'glob';
 import * as path from 'path';
 import { IOptions } from './IOptions';
 import { GlobMatcher, GlobPatternWithRoot, fileOrGlobToGlob } from 'cspell-glob';
-import { CSpellUserSettings, Glob } from '@cspell/cspell-types';
+import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 
 export interface GlobOptions extends IOptions {
     cwd?: string;

@@ -1,10 +1,12 @@
 import { TraceResult } from './application';
 import chalk = require('chalk');
+import strip from 'strip-ansi';
 import * as Path from 'path';
 
 export interface EmitTraceOptions {
     /** current working directory */
     cwd: string;
+    lineWidth?: number;
 }
 
 const colWidthDictionaryName = 20;
@@ -17,7 +19,7 @@ export function emitTraceResults(results: TraceResult[], options: EmitTraceOptio
     const cols: ColWidths = {
         word: maxWordLength,
         dictName: colWidthDictionaryName,
-        terminalWidth: process.stdout.columns || 120,
+        terminalWidth: options.lineWidth ?? (process.stdout.columns || 120),
     };
 
     const col = new Intl.Collator();
@@ -40,7 +42,7 @@ function emitHeader(colWidths: ColWidths): void {
         pad('Dictionary', colWidths.dictName),
         pad('Dictionary Location', 30),
     ];
-    console.log(chalk.underline(line.join(' ')));
+    console.log(chalk.underline(line.join(' ').slice(0, colWidths.terminalWidth)));
 }
 
 function emitTraceResult(r: TraceResult, colWidths: ColWidths, options: EmitTraceOptions): void {
@@ -54,11 +56,12 @@ function emitTraceResult(r: TraceResult, colWidths: ColWidths, options: EmitTrac
     const dictName = pad(r.dictName.slice(0, widthName - 1) + a, widthName);
     const dictColor = r.dictActive ? chalk.yellowBright : chalk.rgb(200, 128, 50);
     const n = dictColor(dictName);
-    const used = [r.word.length, 1, widthName].reduce((a, b) => a + b, 3);
+    const info = [w, f, n].join(' ') + ' ';
+    const used = strip(info).length;
     const widthSrc = terminalWidth - used;
     const c = errors ? chalk.red : chalk.white;
     const s = c(formatDictionaryLocation(r.dictSource, widthSrc, options.cwd));
-    const line = [w, f, n, s].join(' ');
+    const line = info + s;
     console.log(line);
     if (errors) {
         console.error('\t' + chalk.red(errors));
