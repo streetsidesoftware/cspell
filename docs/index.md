@@ -67,7 +67,10 @@ See: [Getting Started](./docs/getting-started.md)
 
 ## Requirements
 
-CSpell needs Node 12 and above.
+|        | version | Node |
+| :----- | :------ | :--- |
+| cspell | 5.x     | 12.x |
+| cspell | 4.x     | 10.x |
 
 <!---
 cspell:ignore compoundwords
