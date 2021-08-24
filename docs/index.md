@@ -15,7 +15,7 @@ A Spell Checker for Code!
 
 ## Support Future Development
 
-[![](https://github.com/streetsidesoftware/cspell/raw/main/resources/100px-Green_Patreon_Donate_Shield_Badge.png)](https://www.patreon.com/streetsidesoftware)
+- Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
 
 ## Features
 
