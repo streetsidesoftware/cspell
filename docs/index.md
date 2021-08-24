@@ -71,4 +71,5 @@ CSpell needs Node 12 and above.
 
 <!---
 cspell:ignore compoundwords
+test
 --->
