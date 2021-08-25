@@ -30,7 +30,7 @@ jobs:
           path-to-lcov: ./lcov.info
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2.0.2
+        uses: codecov/codecov-action@v2.0.3
         with:
           directory: "."
           files: ./lcov.info
