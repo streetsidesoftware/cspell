@@ -170,8 +170,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
 
     public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
         if (this.options.noSuggest) return;
-        const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS } = suggestOptions;
-        const _compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        const _compoundMethod =
+            suggestOptions.compoundMethod ??
+            (this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : CompoundWordsMethod.NONE);
         wordSuggestFormsArray(collector.word).forEach((w) =>
             this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod)
         );

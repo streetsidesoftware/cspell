@@ -107,9 +107,54 @@ describe('Verify using multiple dictionaries', () => {
         const dictCollection = createCollection(dicts, 'test');
         const sugResult = dictCollection.suggest('appletango', 10, CompoundWordsMethod.SEPARATE_WORDS);
         const sugs = sugResult.map((a) => a.word);
-        expect(sugs).toHaveLength(10);
-        expect(sugs).toContain('apple+mango');
+        expect(sugs).not.toContain('apple+mango');
         expect(sugs).toContain('apple mango');
+    });
+
+    test('checks for compound NONE suggestions', async () => {
+        // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
+        trie.options.useCompounds = true;
+        const dicts = await Promise.all([
+            trie,
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+        ]);
+
+        // cspell:ignore appletango applemango
+        const dictCollection = createCollection(dicts, 'test');
+        const sugResult = dictCollection.suggest('applemango', 10, CompoundWordsMethod.NONE);
+        const sugs = sugResult.map((a) => a.word);
+        expect(sugs).not.toContain('apple+mango');
+        expect(sugs).not.toContain('apple mango');
+        expect(sugs).toContain('apple');
+        expect(sugs).toContain('mango');
+    });
+
+    test('checks for compound JOIN_WORDS suggestions', async () => {
+        // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
+        trie.options.useCompounds = true;
+        const dicts = await Promise.all([
+            trie,
+            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+        ]);
+
+        // cspell:ignore appletango applemango
+        const dictCollection = createCollection(dicts, 'test');
+        const sugResult = dictCollection.suggest('applemango', 10, CompoundWordsMethod.JOIN_WORDS);
+        const sugs = sugResult.map((a) => a.word);
+        expect(sugs).toContain('apple+mango');
+        expect(sugs).not.toContain('apple mango');
+        // possible word combinations
+        expect(sugs).toContain('apple');
+        expect(sugs).toContain('apple+apple');
+        expect(sugs).toContain('grape+mango');
     });
 
     test('checks for compound suggestions with numbChanges', async () => {
