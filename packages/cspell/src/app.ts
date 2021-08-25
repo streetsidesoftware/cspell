@@ -178,7 +178,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .option('--show-context', 'Show the surrounding text around an issue.')
         .option('--show-suggestions', 'Show spelling suggestions.')
         .option('--must-find-files', 'Error if no files are found', true)
-        .option('--no-must-find-files', 'Do not error is no files are found')
+        .option('--no-must-find-files', 'Do not error if no files are found')
         // The following options are planned features
         // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
         // .option('--force', 'Force the exit value to always be 0')

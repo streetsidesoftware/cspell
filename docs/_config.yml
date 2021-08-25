@@ -42,11 +42,6 @@ plugins:
 # permalink: pretty
 permalink: /:categories/:title/
 
-exclude:
-  - README.md
-  - .cspell/**
-  - .cspell.*
-
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
@@ -55,7 +50,11 @@ exclude:
 # Excluded items can be processed by explicitly listing the directories or
 # their entries' file path in the `include:` list.
 #
-# exclude:
+exclude:
+  - "**/.cspell.*"
+  - "**/.cspell/**"
+  - README.md
+  - types/README.md
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
@@ -71,6 +70,25 @@ exclude:
 # just-the-docs
 # See: [Home | Just the Docs](https://pmarsceill.github.io/just-the-docs/)
 #
+
+collections:
+  - docs
+  - drafts
+  - posts
+  - types
+  - configuration
+
+defaults:
+  - scope:
+      path: "types/*"
+    values:
+      nav_order: 5
+      has_children: true
+  - scope:
+      path: "types/cspell-types/*"
+    values:
+      parent: "@cspell"
+      nav_order: 10
 
 # Aux links for the upper right navigation
 aux_links:

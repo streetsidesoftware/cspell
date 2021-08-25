@@ -17,6 +17,7 @@
     "clean": "rimraf dist coverage",
     "build": "npm run compile && npm run build-schema",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/settings/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && cp ./cspell.schema.json ../..",
+    "build-docs": "typedoc --out ../../docs/types/cspell-types src/index.ts",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "test-schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
@@ -47,6 +48,8 @@
     "jest": "^27.0.6",
     "rimraf": "^3.0.2",
     "ts-json-schema-generator": "^0.95.0",
+    "typedoc": "^0.21.6",
+    "typedoc-plugin-markdown": "^3.10.4",
     "typescript": "^4.3.5"
   }
 }
