@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.8.2](https://github.com/streetsidesoftware/cspell/compare/v5.8.1...v5.8.2) (2021-08-25)
+
+
+### Bug Fixes
+
+* fix issue where some dictionaries (nl-nl) could cause slow suggestions ([#1583](https://github.com/streetsidesoftware/cspell/issues/1583)) ([8c8d0ee](https://github.com/streetsidesoftware/cspell/commit/8c8d0eeea3e2003792f67c234b5d562be7f3f5c7))
+
+
+
+
+
 ## [5.8.1](https://github.com/streetsidesoftware/cspell/compare/v5.8.0...v5.8.1) (2021-08-24)
 
 **Note:** Version bump only for package cspell-lib
