@@ -525,6 +525,8 @@ describe('Validate search/load config files', () => {
         ${s('js-config/cspell-no-export.js')} | ${cfg(s('js-config/cspell-no-export.js'))}
         ${s('js-config/cspell-bad.js')}       | ${cfg(readError(s('js-config/cspell-bad.js')))}
     `('ReadRawSettings from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
+        // js-config/cspell-no-export.js logs a message.
+        jest.spyOn(console, 'log').mockImplementation(() => undefined);
         const searchResult = await readRawSettings(file);
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
     });
