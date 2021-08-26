@@ -136,7 +136,8 @@ export async function listRepositories(options: ListRepositoryOptions): Promise<
             };
         });
 
-    const values = await Promise.all(pValues);
+    const compare = new Intl.Collator().compare;
+    const values = (await Promise.all(pValues)).sort((a, b) => compare(a.path, b.path));
 
     values.forEach((rep) => {
         if (rep.dirty) {
