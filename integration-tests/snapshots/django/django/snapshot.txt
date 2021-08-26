@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2130, Issues found: 7843 in 900 files
+ CSpell: Files checked: 2130, Issues found: 7772 in 892 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -165,7 +165,6 @@ Lines:
 ./django/contrib/contenttypes/fields.py:193:20    - Unknown word (fkeys)      -- for ct_id, fkeys in fk_dict.items():
 ./django/contrib/gis/db/backends/base/features.py:10:9      - Unknown word (spatialrefsys) -- has_spatialrefsys_table = True
 ./django/contrib/gis/db/backends/base/features.py:91:26     - Unknown word (aggr)          -- def supports_collect_aggr(self):
-./django/contrib/gis/db/backends/base/operations.py:15:5      - Unknown word (mariadb)    -- mariadb = False
 ./django/contrib/gis/db/backends/mysql/introspection.py:32:28     - Unknown word (ISAM)       -- # Supported with MyISAM/Aria, or InnoDB on MySQL
 ./django/contrib/gis/db/backends/mysql/introspection.py:32:42     - Unknown word (Inno)       -- with MyISAM/Aria, or InnoDB on MySQL 5.7.5+/MariaDB
 ./django/contrib/gis/db/backends/oracle/adapter.py:1:23      - Unknown word (CLOB)       -- from cx_Oracle import CLOB
@@ -465,7 +464,6 @@ Lines:
 ./django/core/signing.py:27:81     - Unknown word (FQVXI)      -- vhAml:1QaUaL:BA0thEZrp4FQVXIXuOvYJtLJSrQ'
 ./django/core/signing.py:7:2       - Unknown word (Imhlb)      -- 'ImhlbGxvIg:1QaUZC:YIye-ze
 ./django/core/signing.py:7:43      - Unknown word (sgmk)       -- YIye-ze3TTx7gtSv422nZA4sgmk'
-./django/core/validators.py:1:8       - Unknown word (ipaddress)  -- import ipaddress
 ./django/core/validators.py:66:19     - Unknown word (uffff)      -- ul = '\u00a1-\uffff' # Unicode letters
 ./django/db/backends/base/base.py:610:10    - Unknown word (nodb)       -- def _nodb_cursor(self):
 ./django/db/backends/base/base.py:6:25      - Unknown word (deque)      -- from collections import deque
@@ -480,13 +478,10 @@ Lines:
 ./django/db/backends/base/operations.py:102:55    - Unknown word (tzname)     -- lookup_type, field_name, tzname=None):
 ./django/db/backends/base/operations.py:259:23    - Unknown word (lastrowid)  -- return cursor.lastrowid
 ./django/db/backends/base/operations.py:459:18    - Unknown word (autopk)     -- def validate_autopk_value(self, value):
-./django/db/backends/base/operations.py:522:15    - Unknown word (ipaddressfield) -- def adapt_ipaddressfield_value(self, value):
 ./django/db/backends/base/schema.py:164:16    - Unknown word (sqls)       -- column_sqls = []
 ./django/db/backends/base/schema.py:824:9     - Unknown word (rels)       -- rels_to_update = []
-./django/db/backends/mysql/base.py:196:14    - Unknown word (conv)        -- 'conv': django_conversions
-./django/db/backends/mysql/base.py:4:10      - Unknown word (mysqlclient) -- Requires mysqlclient: https://pypi.org/project
-./django/db/backends/mysql/base.py:55:29     - Unknown word (reraises)    -- exception instances and reraises them with the correct
-./django/db/backends/mysql/creation.py:60:22     - Unknown word (mysqldump)  -- dump_cmd = ['mysqldump', *cmd_args[1:-1],
+./django/db/backends/mysql/base.py:196:14    - Unknown word (conv)       -- 'conv': django_conversions
+./django/db/backends/mysql/base.py:55:29     - Unknown word (reraises)   -- exception instances and reraises them with the correct
 ./django/db/backends/mysql/introspection.py:201:23    - Unknown word (ttype)      -- token.ttype == sqlparse.tokens.Name
 ./django/db/backends/mysql/operations.py:40:15     - Unknown word (DAYOFWEEK)  -- # DAYOFWEEK() returns an integer
 ./django/db/backends/mysql/schema.py:101:32    - Unknown word (unhashable) -- field.default may be unhashable, so a set isn't used
@@ -692,7 +687,6 @@ Lines:
 ./django/utils/autoreload.py:173:21    - Unknown word (Werkzeug)   -- # Inspired from Werkzeug:
 ./django/utils/autoreload.py:225:54    - Unknown word (Conda)      -- g. when running in a Conda env.
 ./django/utils/autoreload.py:374:9     - Unknown word (mtimes)     -- mtimes = {}
-./django/utils/autoreload.py:38:12     - Unknown word (termios)    -- import termios
 ./django/utils/autoreload.py:44:12     - Unknown word (pywatchman) -- import pywatchman
 ./django/utils/autoreload.py:453:14    - Unknown word (allof)      -- 'allof',
 ./django/utils/autoreload.py:454:15    - Unknown word (anyof)      -- ['anyof', ['type', 'f'], ['type
@@ -1692,7 +1686,6 @@ Lines:
 ./tests/model_fields/test_binaryfield.py:13:13     - Unknown word (bdata)      -- for bdata in data_set:
 ./tests/model_fields/test_booleanfield.py:85:9      - Unknown word (nbmt)       -- nbmt = NullBooleanModel.objects
 ./tests/model_fields/test_booleanfield.py:86:9      - Unknown word (nbmf)       -- nbmf = NullBooleanModel.objects
-./tests/model_fields/test_genericipaddressfield.py:10:14     - Unknown word (genericipaddressfield) -- def test_genericipaddressfield_formfield_protocol(self
 ./tests/model_fields/test_jsonfield.py:160:42    - Unknown word (nullablejsonmodel) -- model="model_fields.nullablejsonmodel">'
 ./tests/model_fields/test_uuid.py:227:33    - Unknown word (nullableuuidmodel) -- model": "model_fields.nullableuuidmodel", "pk": null}]'
 ./tests/model_fields/test_uuid.py:307:34    - Unknown word (uuidchild)         -- assertIsInstance(gc.uuidchild_ptr_id, uuid.UUID)
@@ -1916,6 +1909,7 @@ Lines:
 ./tests/template_tests/filter_tests/test_linebreaks.py:45:48     - Unknown word (nbuz)       -- filter('foo\n<a>bar</a>\nbuz'),
 ./tests/template_tests/filter_tests/test_slice.py:42:60     - Unknown word (aceg)       -- abcdefg', '0::2'), 'aceg')
 ./tests/template_tests/filter_tests/test_slugify.py:36:34     - Unknown word (phant)      -- slugify("Un \xe9l\xe9phant \xe0 l'or\xe9e du bois
+./tests/template_tests/filter_tests/test_slugify.py:36:58     - Unknown word (bois)       -- phant \xe0 l'or\xe9e du bois"),
 ./tests/template_tests/filter_tests/test_slugify.py:37:28     - Unknown word (loree)      -- 'un-elephant-a-loree-du-bois',
 ./tests/template_tests/filter_tests/test_truncatewords_html.py:39:45     - Unknown word (iacute)     -- uncatewords_html('<i>Buenos d&iacute;as! &#x00bf;C&oacute
 ./tests/template_tests/filter_tests/test_truncatewords_html.py:39:66     - Unknown word (oacute)     -- iacute;as! &#x00bf;C&oacute;mo est&aacute;?</i>
@@ -2045,6 +2039,7 @@ Lines:
 ./tests/utils_tests/test_text.py:179:60    - Unknown word (rghi)       -- normalize_newlines("abc\ndef\rghi\r\n"), "abc\ndef\nghi
 ./tests/utils_tests/test_text.py:179:82    - Unknown word (nghi)       -- rghi\r\n"), "abc\ndef\nghi\n")
 ./tests/utils_tests/test_text.py:203:22    - Unknown word (ıçüş)       -- ('spam & ıçüş', 'spam-ıçüş', True
+./tests/utils_tests/test_text.py:207:15    - Unknown word (İstanbul)   -- ('İstanbul', 'istanbul', True)
 ./tests/utils_tests/test_text.py:59:9      - Unknown word (truncator)  -- truncator = text.Truncator('The
 ./tests/utils_tests/test_text.py:65:33     - Unknown word (xfco)       -- = text.Truncator('o\xfco\xfco\xfco\xfc')
 ./tests/utils_tests/test_text.py:67:27     - Unknown word (oüoüoüoü)   -- self.assertEqual('oüoüoüoü', nfc.chars(8))

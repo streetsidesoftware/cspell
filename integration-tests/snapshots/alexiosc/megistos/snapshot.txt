@@ -3,12 +3,11 @@ Repository: alexiosc/megistos
 Url: "https://github.com/alexiosc/megistos.git"
 Args: ["--config=../../../../config/repositories/alexiosc/megistos/cspell.json","**/*.{md,c,h,html}"]
 Lines:
- CSpell: Files checked: 745, Issues found: 30125 in 720 files
+ CSpell: Files checked: 745, Issues found: 28219 in 718 files
  exit code: 1
 ./ATTIC/doc/examples/mod_dialog.c:18:13     - Unknown word (margv)      -- if (sameas (margv [6], "OK") || sameas
 ./ATTIC/doc/examples/mod_dialog.c:9:29      - Unknown word (FOOVT)      -- dialog_run ("foo", FOOVT, FOOLT, inp_buffer)
 ./ATTIC/doc/examples/mod_dialog.c:9:36      - Unknown word (FOOLT)      -- dialog_run ("foo", FOOVT, FOOLT, inp_buffer);
-./ATTIC/doc/examples/mod_main.c:8:3       - Unknown word (Alexios)    -- "Alexios Chouchoulas <alexios
 ./ATTIC/doc/html/annotated.html:11:71     - Unknown word (channeldef) -- structchanneldef.html">channeldef</a></td><td class="indexvalue
 ./ATTIC/doc/html/annotated.html:12:72     - Unknown word (classrec)   -- structclassrec__t.html">classrec_t</a></td><td class
 ./ATTIC/doc/html/annotated.html:13:69     - Unknown word (clsstats)   -- structclsstats.html">clsstats</a></td><td class="indexvalue
@@ -56,6 +55,7 @@ Lines:
 ./ATTIC/doc/html/audit_8h.html:177:197   - Unknown word (unexempted)  -- nbsp;&nbsp;&nbsp;"%s unexempted %s"</td></tr>
 ./ATTIC/doc/html/audit_8h.html:284:162   - Unknown word (setfile)     -- audit.html#ga1">audit_setfile</a> (char *filename
 ./ATTIC/doc/html/audit_8h.html:287:162   - Unknown word (resetfile)   -- audit.html#ga2">audit_resetfile</a> ()</td></tr>
+./ATTIC/doc/html/audit_8h.html:294:40    - Unknown word (Alexios)     -- Author:</b></dt><dd>Alexios</dd></dl>
 ./ATTIC/doc/html/audit_8h.html:333:19    - Unknown word (HACKTRY)     -- * Wisely changed HACKTRY to CRACKTRY. Cosmetic
 ./ATTIC/doc/html/audit_8h.html:347:20    - Unknown word (relogons)    -- * audit entry for relogons.
 ./ATTIC/doc/html/audit_8h.html:363:39    - Unknown word (logerror)    -- entries that appear when logerror() or fatal()
@@ -3536,6 +3536,8 @@ Lines:
 ./ATTIC/src/modules/telecon/plugins.c:182:22    - Unknown word (pluginq)    -- debug ("thisuseraux.pluginq=%d\n", thisuseraux.pluginq
 ./ATTIC/src/modules/telecon/plugins.c:188:1     - Unknown word (getid)      -- getid (char *plugin, char
 ./ATTIC/src/modules/telecon/plugins.c:196:27    - Unknown word (PLUGINQ)    -- sprintf (qname, mkfname (PLUGINQ, plugin, curchannel
+./ATTIC/src/modules/telecon/plugins.c:263:39    - Unknown word (teleplugin) -- "Unable to execlp() teleplugin %s (%s)", p->exec, tmp
+./ATTIC/src/modules/telecon/plugins.c:83:11     - Unknown word (TELEPLUGIN) -- #define __TELEPLUGIN__
 ./ATTIC/src/modules/telecon/plugins/bjack/bjack.c:157:14    - Unknown word (BBSPROMPS)  -- #endif /* BBSPROMPS */
 ./ATTIC/src/modules/telecon/plugins/bjack/bjack.c:163:6     - Unknown word (wdog)       -- init_wdog_module (void)
 ./ATTIC/src/modules/telecon/plugins/bjack/bjack.c:194:35    - Unknown word (PFIX)       -- player_list->flags & bjfPFIX) ? "" : "\007";
@@ -3646,9 +3648,11 @@ Lines:
 ./ATTIC/src/modules/telecon/talk.c:176:23    - Unknown word (fxmsg)      -- static char *fxuser, *fxmsg;
 ./ATTIC/src/modules/telecon/talk.c:180:4     - Unknown word (sayto)      -- fx_sayto (struct chanusr *u)
 ./ATTIC/src/modules/telecon/talk.c:82:1      - Unknown word (checkax)    -- checkax ()
+./ATTIC/src/modules/telecon/telecon.c:202:45    - Unknown word (TELETICK)   -- thisuseraux.entrytick) >= TELETICK) {
 ./ATTIC/src/modules/telecon/telecon.c:249:23    - Unknown word (UNLIST)     -- } else if (sameas ("UNLIST", cp)) {
 ./ATTIC/src/modules/telecon/telecon.c:256:23    - Unknown word (UNINVITE)   -- } else if (sameto ("UNINVITE ", cp) || sameas ("UNINVITE
 ./ATTIC/src/modules/telecon/telecon.c:264:23    - Unknown word (UNSQUELCH)  -- } else if (sameto ("UNSQUELCH ", cp) ||
+./ATTIC/src/modules/telecon/telecon.h:163:39    - Unknown word (TELE)       -- MAGIC 0x54454c45	/* "TELE" */
 ./ATTIC/src/modules/telecon/telecon.h:351:32    - Unknown word (ucac)       -- getclubax (useracc_t * ucac, char *club);
 ./ATTIC/src/modules/telecon/teleconplugins.h:105:10    - Unknown word (MKPLUGIN)   -- #ifdef __MKPLUGIN__
 ./ATTIC/src/system/README.md:13:118    - Unknown word (implemeted)     -- arbitraty things to be implemeted as file ‘transfer’ protocols
