@@ -14,7 +14,8 @@ function processParallelArg(value: string): number {
 function run(program: commander.Command) {
     program
         .command('check [patterns...]')
-        .option('-u, --update', 'Update snapshot', false)
+        .option('-u, --update', 'Update Repository and Snapshots', false)
+        .option('--update-snapshots', 'Update Snapshots', false)
         .option('-f, --fail', 'Fail on first error.', false)
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
         .option('-p, --parallelLimit <number>', 'Max number of parallel checks.', /^[1-9][0-9]?$/, `${defaultParallel}`)
@@ -26,14 +27,15 @@ function run(program: commander.Command) {
                 patterns: string[],
                 options: {
                     update?: boolean;
+                    updateSnapshots?: boolean;
                     fail?: boolean;
                     exclude?: string[];
                     parallelLimit: string;
                 }
             ) => {
-                const { update = false, fail = false, exclude = [] } = options;
+                const { update = false, fail = false, exclude = [], updateSnapshots = false } = options;
                 const parallelLimit = processParallelArg(options.parallelLimit);
-                return check(patterns || [], { update, fail, exclude, parallelLimit });
+                return check(patterns || [], { update, updateSnapshots, fail, exclude, parallelLimit });
             }
         );
 

@@ -34,7 +34,12 @@ interface CheckContext {
     rep: Repository;
 }
 
-async function execCheckAndUpdate(rep: Repository, update: boolean): Promise<CheckResult> {
+interface CheckAndUpdateOptions {
+    update: boolean;
+    updateSnapshots: boolean;
+}
+
+async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOptions): Promise<CheckResult> {
     const name = rep.path;
     const color = colors[checkCount % colors.length];
     const prefix = color(name + '\t ');
@@ -42,7 +47,7 @@ async function execCheckAndUpdate(rep: Repository, update: boolean): Promise<Che
     const { log } = logger;
     ++checkCount;
 
-    if (update) {
+    if (options.update) {
         log('');
         log(color`**********************************************`);
         log(color`*  Updating Repo: `);
@@ -73,7 +78,7 @@ async function execCheckAndUpdate(rep: Repository, update: boolean): Promise<Che
         rep,
     };
 
-    return execCheck(context, update);
+    return execCheck(context, options.update || options.updateSnapshots);
 }
 
 async function execCheck(context: CheckContext, update: boolean): Promise<CheckResult> {
@@ -100,6 +105,12 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     log(time());
     const cspellResult = await execCommand(logger, path, cspellCommand, rep.args);
     log(resultReport(cspellResult));
+    log(time());
+    log(color`\n************ Checking Results ************`);
+
+    if (update) {
+        log(color`************ Update Snapshot *************`);
+    }
     const r = checkResult(rep, cspellResult, update);
     log(time());
     if (r.diff) {
@@ -202,8 +213,10 @@ function report(reposChecked: Repository[], results: CheckResult[]) {
 export interface CheckOptions {
     /** Exclusion patterns */
     exclude: string[];
-    /** Update snapshot */
+    /** Update ALL */
     update: boolean;
+    /** Only update the snapshot */
+    updateSnapshots: boolean;
     /** Stop on first error */
     fail: boolean;
     /** Max number of parallel processes */
@@ -278,7 +291,7 @@ function tf(v: boolean | undefined): 'true' | 'false' {
 }
 
 export async function check(patterns: string[], options: CheckOptions): Promise<void> {
-    const { exclude, update, fail, parallelLimit } = options;
+    const { exclude, update, updateSnapshots, fail, parallelLimit } = options;
     const matching = config.repositories.filter((rep) => shouldCheckRepo(rep, { patterns, exclude })).map(resolveArgs);
 
     console.log(`
@@ -293,7 +306,11 @@ Stop on fail:   ${tf(fail)}
 
     const results: CheckResult[] = [];
 
-    const buffered = asyncBuffer(matching, async (rep) => execCheckAndUpdate(rep, update), parallelLimit);
+    const buffered = asyncBuffer(
+        matching,
+        async (rep) => execCheckAndUpdate(rep, { update, updateSnapshots }),
+        parallelLimit
+    );
 
     for await (const r of buffered) {
         results.push(r);
