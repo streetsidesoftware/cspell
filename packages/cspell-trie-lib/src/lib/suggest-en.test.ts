@@ -24,15 +24,15 @@ describe('Validate English Suggestions', () => {
         expected: ExpectedSuggestion[];
     }
 
+    // cspell:ignore emplode ballence catagory
     test.each`
-        word       | expected
-        ${'hello'} | ${sr({ word: 'hello', cost: 0 })}
-        ${'apple'} | ${sr({ word: 'apple', cost: 0 }, { word: 'apples', cost: 94 })}
-        ${'im'}    | ${sr("i'm")}
-        ${'id'}    | ${sr("i'd")}
-        ${'ba'}    | ${sr('bad', 'bag', 'ban', 'bar')}
-        ${'bd'}    | ${sr('bad', 'bed', 'bid')}
-        ${'ct'}    | ${sr('cat', 'cot')}
+        word          | expected
+        ${'hello'}    | ${sr({ word: 'hello', cost: 0 })}
+        ${'apple'}    | ${sr({ word: 'apple', cost: 0 }, { word: 'apples', cost: 94 })}
+        ${'emplode'}  | ${sr('implode')}
+        ${'dont'}     | ${sr("don't")}
+        ${'ballence'} | ${sr('balance')}
+        ${'catagory'} | ${sr('category')}
     `('suggestions for $word', async ({ word, expected }: WordSuggestionsTest) => {
         const trie = await getTrie();
         const x = suggest(trie.root, word);
