@@ -14,6 +14,10 @@ The cspell mono-repo, a spell checker for code.
 
 - Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
 
+## Documentation
+
+[Documentation - CSpell](https://streetsidesoftware.github.io/cspell/)
+
 ## Packages
 
 - [cspell](packages/cspell) -- cspell command-line application
