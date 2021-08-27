@@ -55,8 +55,7 @@ Use the `trace` command to see a list of dictionaries: See [Searching Dictionari
       // Replace various tick marks with a single '
       "repMap": [["'|`|’", "'"]]
   ```
-  // Use Compounds
-- **useCompounds** - allow compound words
+- **useCompounds** - _Deprecated_ - allow all possible combinations of words in the dictionary.
 
 ```javascript
 // Define each dictionary.  Relative paths are relative to the config file.
@@ -84,7 +83,7 @@ turn off an existing dictionary.
 ]
 ```
 
-The number of `!`s is important.
+The number of `!`'s is important.
 
 - `!cpp` remove `cpp` dictionary
 - `!!cpp` add it back

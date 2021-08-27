@@ -7,7 +7,7 @@ description: 'How CSpell checks a document.'
 nav_order: 4
 ---
 
-## How it works
+# How it works
 
 The concept is simple, split camelCase and snake_case words before checking them against a list of known words.
 
@@ -18,14 +18,14 @@ The concept is simple, split camelCase and snake_case words before checking them
 - `camel2snake` -> `camel snake` -- (the 2 is ignored)
 - `function parseJson(text: string)` -> `function parse json text string`
 
-### Special cases
+## Special cases
 
 - Escape characters like `\n`, `\t` are removed if the word does not match:
   - `\narrow` -> `narrow` - because `narrow` is a word
   - `\ncode` -> `code` - because `ncode` is not a word.
   - `\network` -> `network` - but it might be hiding a spelling error, if `\n` was an escape character.
 
-### Things to note
+## Things to note
 
 - This spellchecker is case insensitive. It will not catch errors like `english` which should be `English`.
 - The spellchecker uses dictionaries stored locally. It does not send anything outside your machine.
@@ -34,7 +34,9 @@ The concept is simple, split camelCase and snake_case words before checking them
 - Only words longer than 3 characters are checked. "jsj" is ok, while "jsja" is not.
 - All symbols and punctuation are ignored.
 
-### Dictionaries
+## Dictionaries
+
+See also: [Dictionaries](./dictionaries.md) and [Custom Dictionaries](./dictionaries-custom.md)
 
 The _dictionaries_ list allows you to specify dictionaries to use for the file.
 
