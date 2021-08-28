@@ -15,7 +15,7 @@ const config = {
         'plugin:prettier/recommended',
     ],
     ignorePatterns: [
-        '**/[Ss]amples/**',
+        '**/[Ss]amples/**', // cspell:disable-line
         '**/[Tt]emp/**',
         '**/*.d.ts',
         '**/*.map',
