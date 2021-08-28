@@ -14,6 +14,18 @@ const config = {
         'plugin:promise/recommended',
         'plugin:prettier/recommended',
     ],
+    ignorePatterns: [
+        '**/[Ss]amples/**',
+        '**/[Tt]emp/**',
+        '**/*.d.ts',
+        '**/*.map',
+        '**/coverage/**',
+        '**/dist/**',
+        '**/node_modules/**',
+        'docs/_site/**',
+        'integration-tests/repositories/**',
+        'test-packages/yarn2/**',
+    ],
     parserOptions: {
         ecmaVersion: 11,
         sourceType: 'module',
