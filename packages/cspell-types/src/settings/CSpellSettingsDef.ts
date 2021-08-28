@@ -510,8 +510,6 @@ export type DictionaryId = string;
 /**
  * This a reference to a named dictionary.
  * It is expected to match the name of a dictionary.
- *
- * @pattern ^(?=[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
  */
 export type DictionaryRef = DictionaryId;
 
