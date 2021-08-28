@@ -78,8 +78,12 @@
     },
     "settings": {
         "typescript.tsdk": "cspell-monorepo/node_modules/typescript/lib",
-        "cSpell.customWorkspaceDictionaries": [
-            "workspace"
-        ]
+        "cSpell.files": [
+            "**",
+            "**/.*"
+        ],
+        "cSpell.customDictionaries": {
+            "workspace": true
+        }
     }
 }
