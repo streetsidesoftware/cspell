@@ -21,7 +21,14 @@ The goal was to have a fast spell checker that could check spelling as you type.
 - Configurable - much of CSpell is configured through `cspell.json` files.
 - Custom Dictionaries - custom dictionaries can be easily added and used.
 
+## Supporting Development
+
+- Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
+- [Support through ![PayPal](./assets/images/paypal-logo-wide-16.png)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
+
 <!---
+cspell:ignore paypal
+
 This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
 You can find the source code for Minima at GitHub:

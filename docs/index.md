@@ -16,6 +16,7 @@ A Spell Checker for Code!
 ## Support Future Development
 
 - Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
+- [Support through ![PayPal](./assets/images/paypal-logo-wide-16.png)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
 
 ## Features
 
