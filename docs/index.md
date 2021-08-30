@@ -74,5 +74,5 @@ See: [Getting Started](./docs/getting-started.md)
 | cspell | 4.x     | 10.x |
 
 <!---
-cspell:ignore compoundwords
+cspell:ignore compoundwords paypal
 --->
