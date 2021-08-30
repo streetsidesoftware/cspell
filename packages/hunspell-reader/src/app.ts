@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // cSpell:ignore findup
-import * as commander from 'commander';
+import { program as commander } from 'commander';
 import { IterableHunspellReader } from './IterableHunspellReader';
 import * as fs from 'fs-extra';
 import { uniqueFilter, batch } from './util';
