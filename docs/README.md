@@ -6,4 +6,6 @@ This is where the documentation for CSpell is stored.
 
 ```sh
 bundle exec jekyll serve
+# or
+npm run serve
 ```
