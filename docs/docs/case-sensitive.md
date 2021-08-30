@@ -16,7 +16,7 @@ Because the spell checker was originally case insensitive, making it case aware 
 
 ## Always Enable Case Sensitive Checking
 
-Note this might create a lot of false issues in code files.
+**Note:** this might create a lot of false issues in code files.
 
 **Global Enable: `cspell.json`**
 
