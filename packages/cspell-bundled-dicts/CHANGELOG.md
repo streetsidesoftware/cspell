@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.9.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.8.2...v5.9.0-alpha.0) (2021-08-31)
+
+
+### Features
+
+* Upgrade to the newest, (case sensitive), English dictionary ([#1545](https://github.com/streetsidesoftware/cspell/issues/1545)) ([581fc4d](https://github.com/streetsidesoftware/cspell/commit/581fc4d8ce0c18df779670cb6a41899d3b9c4e48))
+
+
+
+
+
 ## [5.8.2](https://github.com/streetsidesoftware/cspell/compare/v5.8.1...v5.8.2) (2021-08-25)
 
 **Note:** Version bump only for package @cspell/cspell-bundled-dicts
