@@ -1,0 +1,57 @@
+{
+  "name": "@cspell/cspell-dynamic-loader",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "5.8.2",
+  "description": "Load cspell or cspell-lib on demand",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "clean": "rimraf dist coverage",
+    "build": "npm run compile",
+    "clean-build": "npm run clean && npm run build",
+    "compile": "tsc -p .",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "keywords": [
+    "cspell",
+    "cspell-loader",
+    "types"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "peerDependencies": {
+    "cspell": "^5.8.2",
+    "cspell-lib": "^5.8.2"
+  },
+  "dependencies": {
+    "import-fresh": "^3.3.0"
+  },
+  "devDependencies": {
+    "cspell": "^5.8.2",
+    "cspell-lib": "^5.8.2",
+    "jest": "^27.1.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.2"
+  }
+}
