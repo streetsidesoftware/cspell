@@ -43,11 +43,11 @@ exclude-labels:
 autolabeler:
   - label: "dependencies"
     title:
-      - "/Workflow Bot/i"
+      - "/ci: Workflow Bot/i"
   - label: "chore"
     title:
       - "/chore/i"
-      - "/ci[:]/i"
+      - "/^ci[:](?! Workflow Bot)/i"
   - label: "documentation"
     files:
       - "/docs/**/*.md"
