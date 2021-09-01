@@ -15,7 +15,6 @@ The cspell mono-repo, a spell checker for code.
 - Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
 - [Support through ![PayPal](https://raw.githubusercontent.com/streetsidesoftware/vscode-spell-checker/main/images/PayPal/paypal-logo-wide-18.png)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
 
-
 ## Documentation
 
 [Documentation - CSpell](https://streetsidesoftware.github.io/cspell/)
@@ -35,9 +34,9 @@ The cspell mono-repo, a spell checker for code.
 ## Related Packages
 
 - [cspell-cli](https://github.com/streetsidesoftware/cspell-cli) -- `cspell-cli` is useful for including `cspell` directly from GitHub.
-  
-  Example install: `npm install -g git+https://github.com/streetsidesoftware/cspell-cli`. 
-  
+
+  Example install: `npm install -g git+https://github.com/streetsidesoftware/cspell-cli`.
+
   This will add the `cspell-cli` command, which is an alias of the `cspell` command.
 
 ## CSpell for enterprise
