@@ -30,6 +30,7 @@ The cspell mono-repo, a spell checker for code.
 - [cspell-tools](packages/cspell-tools) -- tool used to compile dictionaries.
 - [cspell-trie-lib](packages/cspell-trie-lib) -- trie data structure used to store words.
 - [cspell-trie](packages/cspell-trie) -- trie data tool used to store words.
+- [hunspell-reader](packages/hunspell-reader) -- reads Hunspell files and outputs words.
 
 ## Related Packages
 
