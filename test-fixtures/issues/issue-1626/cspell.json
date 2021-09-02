@@ -1,0 +1,51 @@
+{
+    "version": "0.2",
+    "language": "en-US",
+    "import": [
+        "@cspell/dict-medicalterms/cspell-ext.json"
+    ],
+    "dictionaryDefinitions": [
+        {
+            "name": "custom",
+            "path": "./.dictionary.txt"
+        }
+    ],
+    "dictionaries": [
+        "bash",
+        "csharp",
+        "custom",
+        "dotnet",
+        "filetypes",
+        "fonts",
+        "medicalterms",
+        "powershell",
+        "python",
+        "softwareTerms"
+    ],
+    "languageSettings": [
+        {
+            "languageId": "*",
+            "allowCompoundWords": false
+        }
+    ],
+    "ignorePaths": [
+        ".jscpd.json",
+        ".vs",
+        ".vscode",
+        "package-lock.json",
+        "**/*.user",
+        "bin/**",
+        "obj/**",
+        "AppPackages/**",
+        "BundleArtifacts/**",
+        "super-linter.log",
+        "node_modules",
+        "package.json",
+        "Pipfile",
+        ".virtualenv"
+    ],
+    "flagWords": [
+        "bicep",
+        "tricep"
+    ]
+}
