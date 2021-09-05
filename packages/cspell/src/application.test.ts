@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as App from './application';
-import { Emitters, ProgressFileComplete, Issue } from './emitters';
+import { CSpellReporter, ProgressFileComplete, Issue, RunResult } from '@cspell/cspell-types';
 import { CSpellApplicationOptions } from './options';
 
 const getStdinResult = {
@@ -203,7 +203,7 @@ function sampleTests(): SampleTest[] {
     // cspell:enable
 }
 
-class Logger implements Emitters {
+class Logger implements CSpellReporter {
     log: string[] = [];
     issueCount = 0;
     errorCount = 0;
@@ -211,6 +211,7 @@ class Logger implements Emitters {
     infoCount = 0;
     progressCount = 0;
     issues: Issue[] = [];
+    runResult: RunResult | undefined;
 
     issue = (issue: Issue) => {
         this.issues.push(issue);
@@ -238,5 +239,9 @@ class Logger implements Emitters {
     progress = (p: ProgressFileComplete) => {
         this.progressCount += 1;
         this.log.push(`Progress: ${p.type} ${p.fileNum} ${p.fileCount} ${p.filename}`);
+    };
+
+    result = (r: RunResult) => {
+        this.runResult = r;
     };
 }

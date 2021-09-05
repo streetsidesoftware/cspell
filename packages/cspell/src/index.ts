@@ -1,4 +1,3 @@
 export * from './application';
-export * from './emitters';
+export * from '@cspell/cspell-types';
 export { BaseOptions, CSpellApplicationOptions, TraceOptions } from './options';
-export { RunResult } from './lint';

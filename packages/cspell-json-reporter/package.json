@@ -1,0 +1,53 @@
+{
+  "name": "@cspell/cspell-json-reporter",
+  "version": "5.9.0",
+  "description": "JSON reporter for CSpell",
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-json-reporter"
+  },
+  "homepage": "https://streetsidesoftware.github.io/cspell/tree/main/packages/cspell-json-reporter#readme",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "scripts": {
+    "clean": "rimraf dist temp coverage",
+    "build": "npm run compile",
+    "clean-build": "npm run clean && npm run build",
+    "compile": "tsc -p .",
+    "watch": "tsc --watch -p .",
+    "coverage": "jest --coverage",
+    "test-watch": "jest --watch",
+    "prepublishOnly": "npm run clean-build && npm test",
+    "test": "jest",
+    "update-snapshot": "jest --updateSnapshot"
+  },
+  "files:comment": "Due to a lerna bug, patterns like `!**/*.map` are not getting recursively honored",
+  "dependencies": {
+    "@cspell/cspell-types": "^5.9.0"
+  },
+  "devDependencies": {
+    "cspell": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
