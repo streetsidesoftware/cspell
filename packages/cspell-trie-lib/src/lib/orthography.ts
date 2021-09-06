@@ -58,7 +58,7 @@ export const visualLetterMaskMap: Record<string, number | undefined> = calcVisua
  */
 function calcVisualLetterMasks(groups: string[]): Record<string, number | undefined> {
     // map each letter in a group to the index of the group.
-    const map: Record<string, number> = {};
+    const map: Record<string, number> = Object.create(null);
     for (let i = 0; i < groups.length; ++i) {
         const m = 1 << i;
         const g = groups[i];

@@ -1,5 +1,5 @@
 import { compare } from './Comparable';
-import { __testing__, SortedQueue } from './SortedQueue';
+import { __testing__, MinHeapQueue } from './MinHeapQueue';
 
 const { addToHeap, takeFromHeap } = __testing__;
 
@@ -25,7 +25,7 @@ describe('Validate Mere Sort methods', () => {
         ${'abc def ghi jkl mno pqr stu vwx yz'}
         ${'aaaaaaaaaaaaaaaaaa'}
     `('Merge Queue $letters', ({ letters }: { letters: string }) => {
-        const q = new SortedQueue<string>(compare);
+        const q = new MinHeapQueue<string>(compare);
         const values = letters.split('');
         q.concat(values);
         expect(q.length).toBe(values.length);
@@ -35,7 +35,7 @@ describe('Validate Mere Sort methods', () => {
     });
 
     test('Queue', () => {
-        const q = new SortedQueue<string>(compare);
+        const q = new MinHeapQueue<string>(compare);
         expect(q.length).toBe(0);
         q.add('one');
         q.add('two');
@@ -60,13 +60,13 @@ describe('Validate Mere Sort methods', () => {
          ];
 
         const sorted = values.concat().sort(compare);
-        const q = new SortedQueue<number>(compare);
+        const q = new MinHeapQueue<number>(compare);
         q.concat(values);
         expect([...q]).toEqual(sorted);
     });
 
     test('Queue Random', () => {
-        const q = new SortedQueue<number>(compare);
+        const q = new MinHeapQueue<number>(compare);
         for (let i = 0; i < 100; ++i) {
             const s = Math.random();
             const n = Math.floor(100 * s);
@@ -83,7 +83,7 @@ describe('Validate Mere Sort methods', () => {
     });
 
     test('Clone', () => {
-        const q = new SortedQueue<number>(compare);
+        const q = new MinHeapQueue<number>(compare);
         for (let i = 0; i < 10; ++i) {
             const s = Math.random();
             const n = Math.floor(100 * s);
