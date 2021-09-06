@@ -1,16 +1,22 @@
 import { TrieRoot, TrieNode } from './TrieNode';
-import { CompoundWordsMethod } from './walker';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 import { SuggestionIterator } from './suggest';
 import { PairingHeap } from './PairingHeap';
-import { suggestionCollector, SuggestionResult } from '.';
+import { SuggestionCollector, suggestionCollector, SuggestionResult } from '.';
 import { visualLetterMaskMap } from './orthography';
+
+export interface GenSuggestionOptions {
+    compoundMethod: CompoundWordsMethod; // NONE is the best option.
+    ignoreCase: boolean;
+    maxNumChanges: number; // 3 is a good number, much higher than 5 is problematic.
+}
 
 export function* genCompoundableSuggestions(
     root: TrieRoot,
     word: string,
-    _compoundMethod: CompoundWordsMethod,
-    ignoreCase = true
+    options: GenSuggestionOptions
 ): SuggestionIterator {
+    const { compoundMethod, ignoreCase, maxNumChanges } = options;
     const len = word.length;
 
     const nodes = determineInitialNodes(root, ignoreCase);
@@ -30,15 +36,16 @@ export function* genCompoundableSuggestions(
         duplicateLetterCost: 25,
         visuallySimilar: 1,
         firstLetterBias: 25,
+        wordBreak: 99,
     } as const;
 
     const bc = opCosts.baseCost;
-    const maxNumChanges = 3;
     const maxCostScale = 1.03 / 2;
     const optimalCost = 0;
     const mapSugCost = opCosts.visuallySimilar;
+    const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
+    const compoundIndicator = root.compoundCharacter;
 
-    /** costLimit is the delta between ideal cost and actual cost. */
     let costLimit = bc * Math.min(len * maxCostScale, maxNumChanges);
 
     const candidates = new PairingHeap(compare);
@@ -57,7 +64,7 @@ export function* genCompoundableSuggestions(
         const byTrie: LocationByTriNode = foundByIndex || new Map<TrieNode, LocationNode>();
         if (!foundByIndex) locationCache.set(index, byTrie);
         const f = byTrie.get(node);
-        const n: LocationNode = f || { in: new Map(), bc: 0, p: path, sbc: -1, sfx: [] };
+        const n: LocationNode = f || { in: new Map(), er: [], bc: 0, p: path, sbc: -1, sfx: [] };
         if (!f) byTrie.set(node, n);
         return n;
     }
@@ -85,23 +92,27 @@ export function* genCompoundableSuggestions(
         return undefined;
     }
 
+    function addEdgeToBeResolved(path: Path, edge: Edge) {
+        path.r = path.r || new Set();
+        path.r.add(edge);
+    }
+
     function addEdge(path: Path, edge: Edge): Edge | undefined {
         const g = path.g + edge.c;
         const i = edge.i;
-        const h = 0; // (len - i) * bc;
-        const f = g + h;
-        if (f > costLimit) return undefined;
+        if (g > costLimit) return undefined;
 
         const { n } = edge;
         const w = path.w + edge.s;
-        const can: Path = { e: edge, n, i, w, g, f, r: new Set(), a: true };
+        const can: Path = { e: edge, n, i, w, g, r: undefined, a: true };
         const location = getLocationNode(can);
+        location.er.push(edge);
 
         // Is Location Resolved
         if (location.sbc >= 0 && location.sbc <= can.g) {
             // No need to go further, this node has been resolved.
             // Return the edge to be resolved
-            path.r.add(edge);
+            addEdgeToBeResolved(path, edge);
             edgesToResolve.push({ edge, suffixes: location.sfx });
             return undefined;
         }
@@ -117,9 +128,12 @@ export function* genCompoundableSuggestions(
             }
             found.a = false;
         }
+        addEdgeToBeResolved(path, edge);
         location.in.set(can.w, can);
         if (location.p.g > can.g) {
             pathToLocation.delete(location.p);
+            location.sbc = -1;
+            location.sfx.length = 0;
             location.p = can;
         }
         if (location.p === can) {
@@ -127,8 +141,35 @@ export function* genCompoundableSuggestions(
             pathToLocation.set(can, location);
             candidates.add(can);
         }
-        path.r.add(edge);
         return edge;
+    }
+
+    function opWordFound(best: Candidate): void {
+        if (!best.n.f) return;
+        const i = best.i;
+        const toDelete = len - i;
+        const e: Edge = { p: best, n: best.n, i, s: '', c: bc * toDelete, a: Action.Delete };
+        addEdgeToBeResolved(best, e);
+        edgesToResolve.push({ edge: e, suffixes: [{ s: '', c: 0 }] });
+        if (compoundMethod) {
+            const s = wordSeparator;
+            nodes.forEach((node) => {
+                const e: Edge = { p: best, n: node, i, s, c: opCosts.wordBreak, a: Action.WordBreak };
+                addEdge(best, e);
+            });
+        }
+    }
+
+    function opCompoundWord(best: Candidate): void {
+        if (!best.n.c?.get(compoundIndicator)) return;
+        const i = best.i;
+        const s = '';
+        nodes.forEach((node) => {
+            const n = node.c?.get(compoundIndicator);
+            if (!n) return;
+            const e: Edge = { p: best, n, i, s, c: opCosts.wordBreak, a: Action.CompoundWord };
+            addEdge(best, e);
+        });
     }
 
     function opInsert(best: Candidate): void {
@@ -143,7 +184,16 @@ export function* genCompoundableSuggestions(
     }
 
     function opDelete(best: Candidate, num = 1): Edge | undefined {
-        const e: Edge = { p: best, n: best.n, i: best.i + num, s: '', c: bc * num, a: Action.Delete };
+        const i = best.i;
+        const e: Edge = {
+            p: best,
+            n: best.n,
+            i: i + num,
+            s: '',
+            c: bc * num,
+            a: Action.Delete,
+            t: word.slice(i, i + num),
+        };
         return addEdge(best, e);
     }
 
@@ -167,7 +217,7 @@ export function* genCompoundableSuggestions(
             if (s == wc) continue;
             const sg = visualLetterMaskMap[s] || 0;
             const c = wg & sg ? mapSugCost : cost;
-            const e: Edge = { p: best, n, i, s, c, a: Action.Replace };
+            const e: Edge = { p: best, n, i, s, c, a: Action.Replace, t: wc };
             addEdge(best, e);
         }
     }
@@ -183,7 +233,7 @@ export function* genCompoundableSuggestions(
         const n = best.n.c?.get(wc2);
         const n2 = n?.c?.get(wc1);
         if (!n || !n2) return;
-        const e: Edge = { p: best, n: n2, i: i2 + 1, s: wc2 + wc1, c: opCosts.swapCost, a: Action.Swap };
+        const e: Edge = { p: best, n: n2, i: i2 + 1, s: wc2 + wc1, c: opCosts.swapCost, a: Action.Swap, t: wc1 + wc2 };
         addEdge(best, e);
     }
 
@@ -216,9 +266,15 @@ export function* genCompoundableSuggestions(
         }
     }
 
+    function resolveLocationEdges(location: LocationNode, suffixes: Suffix[]) {
+        for (const edge of location.er) {
+            edgesToResolve.push({ edge, suffixes });
+        }
+    }
+
     function resolveEdge({ edge, suffixes }: EdgeToResolve) {
         const { p, s: es, c: ec } = edge;
-        if (!p.r.has(edge)) return;
+        if (!p.r?.has(edge)) return;
         const edgeSuffixes = suffixes.map((sfx) => ({ s: es + sfx.s, c: ec + sfx.c }));
         for (const { s, c } of edgeSuffixes) {
             const cost = p.g + c;
@@ -233,11 +289,7 @@ export function* genCompoundableSuggestions(
             location.sfx = location.sfx.concat(edgeSuffixes);
             if (!p.r.size) {
                 location.sbc = p.g;
-                for (const inPath of location.in.values()) {
-                    const { e: edge } = inPath;
-                    if (!edge) continue;
-                    edgesToResolve.push({ edge, suffixes: edgeSuffixes });
-                }
+                resolveLocationEdges(location, edgeSuffixes);
             }
         } else if (!p.r.size) {
             if (p.e) {
@@ -253,7 +305,7 @@ export function* genCompoundableSuggestions(
 
     nodes.forEach((node, idx) => {
         const g = idx ? 1 : 0;
-        candidates.add({ e: undefined, n: node, i: 0, w: '', g, f: optimalCost + g, r: new Set(), a: true });
+        candidates.add({ e: undefined, n: node, i: 0, w: '', g, r: undefined, a: true });
     });
 
     let maxSize = 0;
@@ -261,16 +313,11 @@ export function* genCompoundableSuggestions(
     // const bc2 = 2 * bc;
     while ((best = candidates.dequeue())) {
         maxSize = Math.max(maxSize, candidates.length);
-        if (best.f > costLimit) break;
+        if (best.g > costLimit) break;
         if (!best.a) continue;
 
         const bi = best.i;
-        if (best.n.f) {
-            const toDelete = len - bi;
-            const e: Edge = { p: best, n: best.n, i: bi, s: '', c: bc * toDelete, a: Action.Delete };
-            best.r.add(e);
-            edgesToResolve.push({ edge: e, suffixes: [{ s: '', c: 0 }] });
-        }
+        opWordFound(best);
         const children = best.n.c;
         if (!children) continue;
 
@@ -282,11 +329,14 @@ export function* genCompoundableSuggestions(
             opDelete(best);
             opInsert(best);
             opSwap(best);
+            opCompoundWord(best);
             opDuplicate(best);
         }
         resolveEdges();
         yield* emitWords();
     }
+    resolveEdges();
+    yield* emitWords();
 
     // console.log(`
     // word: ${word}
@@ -303,6 +353,8 @@ enum Action {
     Delete,
     Insert,
     Swap,
+    CompoundWord,
+    WordBreak,
 }
 
 interface Edge {
@@ -318,6 +370,8 @@ interface Edge {
     c: number;
     /** Action */
     a: Action;
+    /** Optional Transform */
+    t?: string | undefined;
 }
 
 interface Path {
@@ -331,12 +385,10 @@ interface Path {
     w: string;
     /** cost so far */
     g: number;
-    /** expected total cost */
-    f: number;
     /** active */
     a: boolean;
     /** Edges to be resolved. */
-    r: Set<Edge>;
+    r: Set<Edge> | undefined;
 }
 
 interface Suffix {
@@ -349,6 +401,8 @@ interface Suffix {
 interface LocationNode {
     /** Incoming Paths */
     in: Map<string, Path>;
+    /** Edges to Resolve when Location is Resolved */
+    er: Edge[];
     /** Best Possible cost - only non-zero when location has been resolved. */
     bc: number;
     /** Pending Path to be resolved */
@@ -383,7 +437,7 @@ interface EdgeToResolve {
 }
 
 const defaultMaxNumberSuggestions = 10;
-const maxNumChanges = 5;
+const maxNumChanges = 3;
 
 export function suggest(
     root: TrieRoot | TrieRoot[],
@@ -399,20 +453,37 @@ export function suggest(
         includeTies: true,
         ignoreCase,
     });
-    collector.collect(genSuggestions(root, word, compoundMethod));
+    const opts: GenSuggestionOptions = {
+        compoundMethod,
+        ignoreCase: collector.ignoreCase,
+        maxNumChanges: collector.maxNumChanges,
+    };
+    collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;
 }
 
 export function* genSuggestions(
     root: TrieRoot | TrieRoot[],
     word: string,
-    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
+    options: GenSuggestionOptions
 ): SuggestionIterator {
     const roots = Array.isArray(root) ? root : [root];
     for (const r of roots) {
-        yield* genCompoundableSuggestions(r, word, compoundMethod);
+        yield* genCompoundableSuggestions(r, word, options);
     }
     return undefined;
+}
+
+export function sugGenOptsFromCollector(
+    collector: SuggestionCollector,
+    compoundMethod = CompoundWordsMethod.NONE
+): GenSuggestionOptions {
+    const opts: GenSuggestionOptions = {
+        compoundMethod,
+        ignoreCase: collector.ignoreCase,
+        maxNumChanges: collector.maxNumChanges,
+    };
+    return opts;
 }
 
 function determineNoFollow(root: TrieRoot): NoFollow {

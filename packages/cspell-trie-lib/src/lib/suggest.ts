@@ -250,11 +250,12 @@ export interface SuggestionCollector {
     collect: (src: SuggestionIterator) => void;
     add: (suggestion: SuggestionResult) => SuggestionCollector;
     readonly suggestions: SuggestionResult[];
+    readonly maxNumChanges: number;
     readonly maxCost: number;
     readonly word: string;
     readonly maxNumSuggestions: number;
     readonly includesTies: boolean;
-    readonly ignoreCase?: boolean;
+    readonly ignoreCase: boolean;
 }
 
 export interface SuggestionCollectorOptions {
@@ -365,6 +366,9 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         },
         get maxNumSuggestions() {
             return numSuggestions;
+        },
+        get maxNumChanges() {
+            return changeLimit;
         },
         includesTies: includeTies,
         ignoreCase,
