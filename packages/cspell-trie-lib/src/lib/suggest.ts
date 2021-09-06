@@ -102,7 +102,7 @@ export function* genCompoundableSuggestions(
         [JOIN_SEPARATOR]: insertSpaceCost,
     };
 
-    let costLimit: MaxCost = Math.min(bc * word.length * maxCostScale, bc * maxNumChanges);
+    let costLimit: MaxCost = bc * Math.min(word.length * maxCostScale, maxNumChanges);
     const a = 0;
     let b = 0;
     for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
@@ -289,7 +289,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
     const { filter = () => true, changeLimit = maxNumChanges, includeTies = false, ignoreCase = true } = options;
     const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = Math.min(baseCost * wordToMatch.length * maxAllowedCostScale, baseCost * changeLimit);
+    let maxCost: number = baseCost * Math.min(wordToMatch.length * maxAllowedCostScale, changeLimit);
 
     function dropMax() {
         if (sugs.size < 2) {
