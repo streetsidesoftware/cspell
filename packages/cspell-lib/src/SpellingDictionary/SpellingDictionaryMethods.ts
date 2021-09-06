@@ -23,24 +23,9 @@ export type SuggestArgs =
 export const defaultNumSuggestions = 10;
 
 export function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector {
-    return {
-        collect: collector.collect,
-        add: (suggestion: SuggestionResult) => collector.add(suggestion),
-        get suggestions() {
-            return collector.suggestions;
-        },
-        get maxCost() {
-            return collector.maxCost;
-        },
-        get word() {
-            return word;
-        },
-        get maxNumSuggestions() {
-            return collector.maxNumSuggestions;
-        },
-        includesTies: collector.includesTies,
-        ignoreCase: collector.ignoreCase,
-    };
+    const r = Object.create(collector);
+    Object.defineProperty(r, 'word', { value: word, writable: false });
+    return r;
 }
 
 export function wordSearchFormsArray(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
