@@ -1,15 +1,15 @@
+import { PairingHeap } from './PairingHeap';
+import { escapeRegEx } from './regexHelper';
 import { TextOffset } from './text';
 import {
-    regExWordsAndDigits,
+    regExDanglingQuote,
+    regExEscapeCharacters,
+    regExPossibleWordBreaks,
     regExSplitWords,
     regExSplitWords2,
-    regExPossibleWordBreaks,
-    regExEscapeCharacters,
-    regExDanglingQuote,
     regExTrailingEndings,
+    regExWordsAndDigits,
 } from './textRegex';
-import { SortedQueue } from './SortedQueue';
-import { escapeRegEx } from './regexHelper';
 
 const ignoreBreak: readonly number[] = Object.freeze([] as number[]);
 
@@ -388,7 +388,7 @@ function splitIntoWords(
     }
 
     let maxCost = lineSeg.relEnd - lineSeg.relStart;
-    const candidates = new SortedQueue<Candidate>(compare);
+    const candidates = new PairingHeap<Candidate>(compare);
     const text = lineSeg.line.text;
     candidates.concat(makeCandidates(undefined, lineSeg.relStart, 0, 0));
     let attempts = 0;

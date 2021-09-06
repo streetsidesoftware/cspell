@@ -46,11 +46,14 @@ function takeFromHeap<T>(t: T[], compare: (a: T, b: T) => number): T | undefined
     return result;
 }
 
-export class SortedQueue<T> implements IterableIterator<T> {
+/**
+ * MinHeapQueue - based upon a minHeap array.
+ */
+export class MinHeapQueue<T> implements IterableIterator<T> {
     private values: T[] = [];
     constructor(readonly compare: (a: T, b: T) => number) {}
 
-    add(t: T): SortedQueue<T> {
+    add(t: T): MinHeapQueue<T> {
         addToHeap(this.values, t, this.compare);
         return this;
     }
@@ -63,7 +66,7 @@ export class SortedQueue<T> implements IterableIterator<T> {
         return takeFromHeap(this.values, this.compare);
     }
 
-    concat(i: Iterable<T>): SortedQueue<T> {
+    concat(i: Iterable<T>): MinHeapQueue<T> {
         for (const v of i) {
             this.add(v);
         }
@@ -86,8 +89,8 @@ export class SortedQueue<T> implements IterableIterator<T> {
         return this;
     }
 
-    clone(): SortedQueue<T> {
-        const clone = new SortedQueue(this.compare);
+    clone(): MinHeapQueue<T> {
+        const clone = new MinHeapQueue(this.compare);
         clone.values = this.values.concat();
         return clone;
     }
