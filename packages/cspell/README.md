@@ -451,7 +451,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
 ### cspell.json sections
 
-- `version` - currently always 0.1
+- `version` - currently always 0.2 - controls how the settings in the configuration file behave.
 - `language` - this specifies the language locale to use in choosing the general dictionary.
   For example: `"language": "en-GB"` tells cspell to use British English instead of US English.
 - `words` - a list of words to be considered correct.
