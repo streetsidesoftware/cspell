@@ -1,9 +1,10 @@
-import * as Sug from './suggest';
-import { Trie } from './trie';
 import { parseDictionary } from './SimpleDictionaryParser';
+import * as Sug from './suggest';
+import { suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
+import { Trie } from './trie';
 import * as Walker from './walker';
 
-const defaultOptions: Sug.SuggestionCollectorOptions = {
+const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,
     ignoreCase: undefined,
     changeLimit: undefined,
@@ -81,7 +82,7 @@ describe('Validate Suggest', () => {
 
     test('Tests genSuggestions', () => {
         const trie = Trie.create(sampleWords);
-        const collector = Sug.suggestionCollector(
+        const collector = suggestionCollector(
             'joyfull',
             sugOpts({
                 numSuggestions: 3,
@@ -97,7 +98,7 @@ describe('Validate Suggest', () => {
 
     test('Tests genSuggestions wanting 0', () => {
         const trie = Trie.create(sampleWords);
-        const collector = Sug.suggestionCollector('joyfull', sugOptsMaxNum(0));
+        const collector = suggestionCollector('joyfull', sugOptsMaxNum(0));
         collector.collect(Sug.genSuggestions(trie.root, collector.word));
         const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).toHaveLength(0);
@@ -105,7 +106,7 @@ describe('Validate Suggest', () => {
 
     test('Tests genSuggestions wanting -10', () => {
         const trie = Trie.create(sampleWords);
-        const collector = Sug.suggestionCollector('joyfull', sugOptsMaxNum(-10));
+        const collector = suggestionCollector('joyfull', sugOptsMaxNum(-10));
         collector.collect(Sug.genSuggestions(trie.root, collector.word));
         const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).toHaveLength(0);
@@ -122,7 +123,7 @@ describe('Validate Suggest', () => {
     // cspell:ignore joyfullwalk
     test('Tests genSuggestions with compounds SEPARATE_WORDS', () => {
         const trie = Trie.create(sampleWords);
-        const collector = Sug.suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
+        const collector = suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.SEPARATE_WORDS)
         );
@@ -134,7 +135,7 @@ describe('Validate Suggest', () => {
     // cspell:ignore joyfullwalk joyfulwalk joyfulwalks joyfullywalk, joyfullywalks
     test('Tests genSuggestions with compounds JOIN_WORDS', () => {
         const trie = Trie.create(sampleWords);
-        const collector = Sug.suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
+        const collector = suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
         );
@@ -144,7 +145,7 @@ describe('Validate Suggest', () => {
     });
 
     test('Tests the collector with filter', () => {
-        const collector = Sug.suggestionCollector(
+        const collector = suggestionCollector(
             'joyfull',
             sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' })
         );
@@ -153,7 +154,7 @@ describe('Validate Suggest', () => {
     });
 
     test('Tests the collector with duplicate words of different costs', () => {
-        const collector = Sug.suggestionCollector(
+        const collector = suggestionCollector(
             'joyfull',
             sugOpts({ numSuggestions: 3, filter: (word) => word !== 'joyfully' })
         );
@@ -174,7 +175,7 @@ describe('Validate Suggest', () => {
     // cspell:ignore wålk
     test('that accents are closer', () => {
         const trie = Trie.create(sampleWords);
-        const collector = Sug.suggestionCollector('wålk', sugOptsMaxNum(3));
+        const collector = suggestionCollector('wålk', sugOptsMaxNum(3));
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
         );
@@ -185,7 +186,7 @@ describe('Validate Suggest', () => {
     // cspell:ignore wâlkéd
     test('that multiple accents are closer', () => {
         const trie = Trie.create(sampleWords);
-        const collector = Sug.suggestionCollector('wâlkéd', sugOptsMaxNum(3));
+        const collector = suggestionCollector('wâlkéd', sugOptsMaxNum(3));
         collector.collect(
             Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
         );
@@ -206,7 +207,7 @@ describe('Validate Suggest', () => {
         expect(trie.suggest('walkingstick', 1)).toEqual(['walkingstick']);
         expect(trie.suggest('walkingtree', 1)).toEqual([]);
         expect(trie.suggest('walking*', 1)).toEqual(['walking']);
-        const collector = Sug.suggestionCollector('walkingtree', sugOptsMaxNum(2));
+        const collector = suggestionCollector('walkingtree', sugOptsMaxNum(2));
         trie.genSuggestions(collector);
         expect(collector.suggestions).toEqual([
             { word: 'talkingtree', cost: 99 },
@@ -215,14 +216,14 @@ describe('Validate Suggest', () => {
     });
 });
 
-function sugOpts(opts: Partial<Sug.SuggestionCollectorOptions>): Sug.SuggestionCollectorOptions {
+function sugOpts(opts: Partial<SuggestionCollectorOptions>): SuggestionCollectorOptions {
     return {
         ...defaultOptions,
         ...opts,
     };
 }
 
-function sugOptsMaxNum(maxNumSuggestions: number): Sug.SuggestionCollectorOptions {
+function sugOptsMaxNum(maxNumSuggestions: number): SuggestionCollectorOptions {
     return sugOpts({ numSuggestions: maxNumSuggestions });
 }
 

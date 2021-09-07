@@ -1,12 +1,7 @@
-import {
-    genCompoundableSuggestions,
-    suggestionCollector,
-    suggest,
-    SuggestionResult,
-    SuggestionCollectorOptions,
-} from './suggest';
-import { CompoundWordsMethod } from './walker';
 import { readTrie } from './dictionaries.test.helper';
+import { genCompoundableSuggestions, suggest } from './suggest';
+import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
+import { CompoundWordsMethod } from './walker';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

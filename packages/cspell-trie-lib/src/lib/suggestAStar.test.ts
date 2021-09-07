@@ -1,7 +1,6 @@
-import { suggestionCollector } from '.';
 import { parseDictionary } from './SimpleDictionaryParser';
-import { SuggestionCollectorOptions } from './suggest';
 import * as Sug from './suggestAStar';
+import { suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
 import { Trie } from './trie';
 import { CompoundWordsMethod } from './walker';
 
