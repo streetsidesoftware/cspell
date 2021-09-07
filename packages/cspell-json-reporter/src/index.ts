@@ -11,14 +11,14 @@ const noopReporter = () => undefined;
 export function getReporter(settings: unknown): CSpellReporter {
     validateSettings(settings);
     const reportData: Omit<CSpellJSONReporterOutput, 'result'> = {
-        issue: [],
+        issues: [],
         info: [],
         debug: [],
         error: [],
         progress: [],
     };
     return {
-        issue: (issue) => reportData.issue.push(issue),
+        issue: (issue) => reportData.issues.push(issue),
         info: (message, msgType) => {
             if (msgType === MessageTypes.Debug && !settings.debug) {
                 return;

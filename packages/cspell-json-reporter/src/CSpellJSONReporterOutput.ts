@@ -4,7 +4,7 @@ export type CSpellJSONReporterOutput = {
     /**
      * Found spelling issues
      */
-    issue: Array<Issue>;
+    issues: Array<Issue>;
     /**
      * CSpell execution logs
      */

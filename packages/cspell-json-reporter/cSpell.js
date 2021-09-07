@@ -17,5 +17,5 @@ module.exports = {
         '.vscode/**',
     ],
     ignoreWords: [],
-    reporters: [[path.join(process.cwd(), './dist/index'), { outFile: './out.json', debug: false }]],
+    reporters: [[__dirname, './dist/index'), { outFile: './out.json', debug: false }]],
 };
