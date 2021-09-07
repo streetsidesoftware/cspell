@@ -1,4 +1,4 @@
-import { suggestionCollector, SuggestionCollectorOptions, SuggestionIterator } from './suggestCollector';
+import { suggestionCollector, SuggestionCollectorOptions, SuggestionGenerator } from './suggestCollector';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,
@@ -45,9 +45,9 @@ describe('Validate suggestCollector', () => {
             { word: 'joy full', cost: 285 },
             { word: 'joyful', cost: 85 },
         ];
-        const rValues: (number | undefined)[] = [];
+        const rValues: (number | undefined | symbol)[] = [];
 
-        function* emit(): SuggestionIterator {
+        function* emit(): SuggestionGenerator {
             for (const r of spellResults) {
                 rValues.push(yield r);
             }

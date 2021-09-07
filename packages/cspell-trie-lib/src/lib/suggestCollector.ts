@@ -1,3 +1,4 @@
+import { createTimer } from './timer';
 import { JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const defaultMaxNumberSuggestions = 10;
@@ -15,6 +16,9 @@ const regexSeparator = new RegExp(`[${regexQuote(JOIN_SEPARATOR + WORD_SEPARATOR
 const wordLengthCost = [0, 50, 25, 5, 0];
 const extraWordsCost = 5;
 
+/** time in ms */
+const defaultCollectorTimeout = 1000;
+
 export type Cost = number;
 export type MaxCost = Cost;
 
@@ -23,14 +27,31 @@ export interface SuggestionResult {
     cost: Cost;
 }
 
+export interface Progress {
+    type: 'progress';
+    /** Number of Completed Tasks so far */
+    completed: number;
+    /**
+     * Number of tasks remaining, this number is allowed to increase over time since
+     * completed tasks can generate new tasks.
+     */
+    remaining: number;
+}
+
+const symStopProcessing = Symbol('Collector Stop Processing');
+
+export type GenerateNextParam = MaxCost | symbol | undefined;
+export type GenerateSuggestionResult = SuggestionResult | Progress | undefined;
+
 /**
  * Ask for the next result.
  * maxCost - sets the max cost for following suggestions
  * This is used to limit which suggestions are emitted.
- * If the iterator.next() returns `undefined`, it is to request a value for maxCost.
+ * If the `iterator.next()` returns `undefined`, it is to request a value for maxCost.
+ *
+ * The SuggestionIterator is generally the
  */
-// next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult>;
-export type SuggestionIterator = Generator<SuggestionResult, void, MaxCost | undefined>;
+export type SuggestionGenerator = Generator<GenerateSuggestionResult, void, GenerateNextParam>;
 
 // comparison function for Suggestion Results.
 export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
@@ -38,7 +59,17 @@ export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult):
 }
 
 export interface SuggestionCollector {
-    collect: (src: SuggestionIterator) => void;
+    /**
+     * Collection suggestions from a SuggestionIterator
+     * @param src - the SuggestionIterator used to generate suggestions.
+     * @param timeout - the amount of time in milliseconds to allow for suggestions.
+     * before sending `symbolStopProcessing`
+     * Iterator implementation:
+     * @example
+     * r = yield(suggestion);
+     * if (r === collector.symbolStopProcessing) // ...stop generating suggestions.
+     */
+    collect: (src: SuggestionGenerator, timeout?: number) => void;
     add: (suggestion: SuggestionResult) => SuggestionCollector;
     readonly suggestions: SuggestionResult[];
     readonly maxNumChanges: number;
@@ -47,6 +78,10 @@ export interface SuggestionCollector {
     readonly maxNumSuggestions: number;
     readonly includesTies: boolean;
     readonly ignoreCase: boolean;
+    /**
+     * Possible value sent to the SuggestionIterator telling it to stop processing.
+     */
+    readonly symbolStopProcessing: symbol;
 }
 
 export interface SuggestionCollectorOptions {
@@ -115,7 +150,11 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         return { word: sug.word, cost: sug.cost + extraCost };
     }
 
-    function collector(suggestion: SuggestionResult): MaxCost {
+    function handleProgress(_progress: Progress) {
+        // Do nothing.
+    }
+
+    function collectSuggestion(suggestion: SuggestionResult): MaxCost {
         const { word, cost } = adjustCost(suggestion);
         if (cost <= maxCost && filter(suggestion.word, cost)) {
             const known = sugs.get(word);
@@ -131,12 +170,27 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         return maxCost;
     }
 
-    function collect(src: SuggestionIterator) {
-        let ir: IteratorResult<SuggestionResult>;
-        while (!(ir = src.next(maxCost)).done) {
-            if (ir.value !== undefined) {
-                collector(ir.value);
+    /**
+     * Collection suggestions from a SuggestionIterator
+     * @param src - the SuggestionIterator used to generate suggestions.
+     * @param timeout - the amount of time in milliseconds to allow for suggestions.
+     */
+    function collect(src: SuggestionGenerator, timeout = defaultCollectorTimeout) {
+        let stop: false | symbol = false;
+        const timer = createTimer();
+
+        let ir: IteratorResult<SuggestionResult | Progress | undefined>;
+        while (!(ir = src.next(stop || maxCost)).done) {
+            const { value } = ir;
+            if (timer.elapsed() > timeout) {
+                stop = symStopProcessing;
             }
+            if (!value) continue;
+            if (isSuggestionResult(value)) {
+                collectSuggestion(value);
+                continue;
+            }
+            handleProgress(value);
         }
     }
 
@@ -148,10 +202,10 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         return sorted;
     }
 
-    return {
+    const collector: SuggestionCollector = {
         collect,
         add: function (suggestion: SuggestionResult) {
-            collector(suggestion);
+            collectSuggestion(suggestion);
             return this;
         },
         get suggestions() {
@@ -171,7 +225,15 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         },
         includesTies: includeTies,
         ignoreCase,
+        symbolStopProcessing: symStopProcessing,
     };
+
+    return collector;
+}
+
+export function isSuggestionResult(s: GenerateSuggestionResult): s is SuggestionResult {
+    const r = s as Partial<SuggestionResult> | undefined;
+    return r?.cost !== undefined && r.word != undefined;
 }
 
 /**

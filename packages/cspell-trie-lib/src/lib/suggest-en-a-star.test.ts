@@ -1,6 +1,12 @@
 import { readTrie } from './dictionaries.test.helper';
-import { genCompoundableSuggestions, sugGenOptsFromCollector, suggest } from './suggestAStar';
-import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
+import { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
+import { genCompoundableSuggestions, suggest } from './suggestAStar';
+import {
+    suggestionCollector,
+    SuggestionCollectorOptions,
+    SuggestionResult,
+    SuggestionCollector,
+} from './suggestCollector';
 import { CompoundWordsMethod } from './walker';
 
 function getTrie() {
@@ -31,7 +37,7 @@ describe('Validate English Suggestions', () => {
         ${'cateogry'} | ${sr({ word: 'category', cost: 75 })}
     `('suggestions for $word', async ({ word, expected }: WordSuggestionsTest) => {
         const trie = await getTrie();
-        const x = suggest(trie.root, word);
+        const x = suggest(trie.root, word, {});
         expect(x).toEqual(expect.arrayContaining(expected.map((e) => expect.objectContaining(e))));
     });
 
@@ -41,7 +47,8 @@ describe('Validate English Suggestions', () => {
             const trie = await getTrie();
             const collector = suggestionCollector('joyful', opts(8, undefined, 1));
             collector.collect(
-                genCompoundableSuggestions(trie.root, collector.word, sugGenOptsFromCollector(collector))
+                genCompoundableSuggestions(trie.root, collector.word, sugGenOptsFromCollector(collector)),
+                timeout
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -62,7 +69,8 @@ describe('Validate English Suggestions', () => {
                     trie.root,
                     collector.word,
                     sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
-                )
+                ),
+                timeout
             );
             const results = collector.suggestions;
             expect(results).toEqual([
@@ -87,7 +95,8 @@ describe('Validate English Suggestions', () => {
                     trie.root,
                     collector.word,
                     sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
-                )
+                ),
+                timeout
             );
             const results = collector.suggestions;
             expect(results).toEqual([{ cost: 322, word: 'one two three four' }]);
@@ -106,7 +115,8 @@ describe('Validate English Suggestions', () => {
                     trie.root,
                     collector.word,
                     sugGenOptsFromCollector(collector, CompoundWordsMethod.JOIN_WORDS)
-                )
+                ),
+                timeout
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -126,7 +136,8 @@ describe('Validate English Suggestions', () => {
                     trie.root,
                     collector.word,
                     sugGenOptsFromCollector(collector, CompoundWordsMethod.JOIN_WORDS)
-                )
+                ),
+                timeout
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -147,7 +158,8 @@ describe('Validate English Suggestions', () => {
                     trie.root,
                     collector.word,
                     sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
-                )
+                ),
+                timeout
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -172,7 +184,8 @@ describe('Validate English Suggestions', () => {
                     trie.root,
                     collector.word,
                     sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
-                )
+                ),
+                timeout
             );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
@@ -181,6 +194,16 @@ describe('Validate English Suggestions', () => {
         timeout
     );
 });
+
+function sugGenOptsFromCollector(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod) {
+    const { ignoreCase, maxNumChanges } = collector;
+    const ops: GenSuggestionOptionsStrict = {
+        compoundMethod,
+        ignoreCase,
+        maxNumChanges,
+    };
+    return ops;
+}
 
 function opts(
     numSuggestions: number,

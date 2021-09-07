@@ -1,6 +1,7 @@
+import { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { parseDictionary } from './SimpleDictionaryParser';
 import * as Sug from './suggest';
-import { suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
+import { isSuggestionResult, suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
 import { Trie } from './trie';
 import * as Walker from './walker';
 
@@ -11,9 +12,12 @@ const defaultOptions: SuggestionCollectorOptions = {
 };
 
 describe('Validate Suggest', () => {
+    const SEPARATE_WORDS: GenSuggestionOptions = { compoundMethod: Walker.CompoundWordsMethod.SEPARATE_WORDS };
+    const JOIN_WORDS: GenSuggestionOptions = { compoundMethod: Walker.CompoundWordsMethod.JOIN_WORDS };
+
     test('Tests suggestions for valid word', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'talks');
+        const results = Sug.suggestLegacy(trie.root, 'talks');
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['talks']));
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
@@ -25,7 +29,7 @@ describe('Validate Suggest', () => {
     test('Tests suggestions for invalid word', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore tallk
-        const results = Sug.suggest(trie.root, 'tallk');
+        const results = Sug.suggestLegacy(trie.root, 'tallk');
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['talks']));
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
@@ -37,7 +41,7 @@ describe('Validate Suggest', () => {
     // cspell:ignore jernals
     test('Tests suggestions jernals', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'jernals');
+        const results = Sug.suggestLegacy(trie.root, 'jernals');
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['journals', 'journal']);
     });
@@ -45,14 +49,14 @@ describe('Validate Suggest', () => {
     // cspell:ignore juornals
     test('Tests suggestions for `juornals` (reduced cost for swap)', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'juornals');
+        const results = Sug.suggestLegacy(trie.root, 'juornals');
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['journals', 'journal', 'journalism', 'journalist', 'journey', 'jovial']);
     });
 
     test('Tests suggestions for joyfull', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'joyfull');
+        const results = Sug.suggestLegacy(trie.root, 'joyfull');
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
     });
@@ -60,14 +64,14 @@ describe('Validate Suggest', () => {
     // cspell:ignore walkingtalkingjoy
     test('Tests compound suggestions', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'walkingtalkingjoy', 1, Walker.CompoundWordsMethod.SEPARATE_WORDS);
+        const results = Sug.suggestLegacy(trie.root, 'walkingtalkingjoy', 1, Walker.CompoundWordsMethod.SEPARATE_WORDS);
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['walking talking joy']);
     });
 
     test('Tests suggestions', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, '');
+        const results = Sug.suggestLegacy(trie.root, '');
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual([]);
     });
@@ -75,7 +79,7 @@ describe('Validate Suggest', () => {
     // cspell:ignore joyfull
     test('Tests suggestions with low max num', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'joyfull', 3);
+        const results = Sug.suggestLegacy(trie.root, 'joyfull', 3);
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['joyfully', 'joyful', 'joyfuller']);
     });
@@ -114,7 +118,7 @@ describe('Validate Suggest', () => {
 
     test('Tests genSuggestions as array', () => {
         const trie = Trie.create(sampleWords);
-        const sugs = [...Sug.genSuggestions(trie.root, 'joyfull')];
+        const sugs = [...Sug.genSuggestions(trie.root, 'joyfull')].filter(isSuggestionResult);
         const sr = sugs.sort(Sug.compSuggestionResults);
         const suggestions = sr.map((s) => s && s.word);
         expect(suggestions).toEqual(['joyfully', 'joyful', 'joyfuller', 'joyfullest', 'joyous']);
@@ -124,9 +128,7 @@ describe('Validate Suggest', () => {
     test('Tests genSuggestions with compounds SEPARATE_WORDS', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
-        collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.SEPARATE_WORDS)
-        );
+        collector.collect(Sug.genCompoundableSuggestions(trie.root, collector.word, SEPARATE_WORDS));
         const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).toEqual(['joyful walk', 'joyful walks', 'joyfully walk']);
         expect(collector.maxCost).toBeLessThan(300);
@@ -136,9 +138,7 @@ describe('Validate Suggest', () => {
     test('Tests genSuggestions with compounds JOIN_WORDS', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('joyfullwalk', sugOptsMaxNum(3));
-        collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
-        );
+        collector.collect(Sug.genCompoundableSuggestions(trie.root, collector.word, JOIN_WORDS));
         const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).toEqual(['joyful+walk', 'joyful+walks', 'joyfully+walk']);
         expect(collector.maxCost).toBeLessThan(300);
@@ -176,9 +176,7 @@ describe('Validate Suggest', () => {
     test('that accents are closer', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('wålk', sugOptsMaxNum(3));
-        collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
-        );
+        collector.collect(Sug.genCompoundableSuggestions(trie.root, collector.word, JOIN_WORDS));
         const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).toEqual(['walk', 'walks', 'talk']);
     });
@@ -187,9 +185,7 @@ describe('Validate Suggest', () => {
     test('that multiple accents are closer', () => {
         const trie = Trie.create(sampleWords);
         const collector = suggestionCollector('wâlkéd', sugOptsMaxNum(3));
-        collector.collect(
-            Sug.genCompoundableSuggestions(trie.root, collector.word, Walker.CompoundWordsMethod.JOIN_WORDS)
-        );
+        collector.collect(Sug.genCompoundableSuggestions(trie.root, collector.word, JOIN_WORDS));
         const suggestions = collector.suggestions.map((s) => s.word);
         expect(suggestions).toEqual(['walked', 'walker', 'talked']);
     });
@@ -204,9 +200,9 @@ describe('Validate Suggest', () => {
             *tree
             !walkingtree
         `);
-        expect(trie.suggest('walkingstick', 1)).toEqual(['walkingstick']);
-        expect(trie.suggest('walkingtree', 1)).toEqual([]);
-        expect(trie.suggest('walking*', 1)).toEqual(['walking']);
+        expect(trie.suggest('walkingstick', numSugs(1))).toEqual(['walkingstick']);
+        expect(trie.suggest('walkingtree', numSugs(1))).toEqual([]);
+        expect(trie.suggest('walking*', numSugs(1))).toEqual(['walking']);
         const collector = suggestionCollector('walkingtree', sugOptsMaxNum(2));
         trie.genSuggestions(collector);
         expect(collector.suggestions).toEqual([
@@ -215,6 +211,10 @@ describe('Validate Suggest', () => {
         ]);
     });
 });
+
+function numSugs(numSuggestions: number): SuggestionOptions {
+    return { numSuggestions };
+}
 
 function sugOpts(opts: Partial<SuggestionCollectorOptions>): SuggestionCollectorOptions {
     return {

@@ -1,5 +1,6 @@
+import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { visualLetterMaskMap } from './orthography';
-import { MaxCost, suggestionCollector, SuggestionIterator, SuggestionResult } from './suggestCollector';
+import { MaxCost, suggestionCollector, SuggestionGenerator, SuggestionResult } from './suggestCollector';
 import { TrieRoot } from './TrieNode';
 import { isWordTerminationNode } from './util';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
@@ -18,7 +19,7 @@ const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 
 const collator = new Intl.Collator();
 
-export function suggest(
+export function suggestLegacy(
     root: TrieRoot | TrieRoot[],
     word: string,
     numSuggestions: number = defaultMaxNumberSuggestions,
@@ -26,24 +27,35 @@ export function suggest(
     numChanges: number = maxNumChanges,
     ignoreCase?: boolean
 ): SuggestionResult[] {
-    const collector = suggestionCollector(word, {
-        numSuggestions: numSuggestions,
-        changeLimit: numChanges,
-        includeTies: true,
+    const options: SuggestionOptions = {
+        numSuggestions,
+        compoundMethod,
+        maxNumChanges: numChanges,
         ignoreCase,
+    };
+    return suggest(root, word, options);
+}
+
+export function suggest(root: TrieRoot | TrieRoot[], word: string, options: SuggestionOptions): SuggestionResult[] {
+    const opts = createSuggestionOptions(options);
+    const collector = suggestionCollector(word, {
+        numSuggestions: opts.numSuggestions,
+        changeLimit: opts.maxNumChanges,
+        includeTies: opts.allowTies,
+        ignoreCase: opts.ignoreCase,
     });
-    collector.collect(genSuggestions(root, word, compoundMethod));
+    collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;
 }
 
 export function* genSuggestions(
     root: TrieRoot | TrieRoot[],
     word: string,
-    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
-): SuggestionIterator {
+    options: GenSuggestionOptions = {}
+): SuggestionGenerator {
     const roots = Array.isArray(root) ? root : [root];
     for (const r of roots) {
-        yield* genCompoundableSuggestions(r, word, compoundMethod);
+        yield* genCompoundableSuggestions(r, word, options);
     }
     return undefined;
 }
@@ -56,8 +68,9 @@ interface Range {
 export function* genCompoundableSuggestions(
     root: TrieRoot,
     word: string,
-    compoundMethod: CompoundWordsMethod
-): SuggestionIterator {
+    options: GenSuggestionOptions = {}
+): SuggestionGenerator {
+    const { compoundMethod = CompoundWordsMethod.NONE, maxNumChanges } = createSuggestionOptions(options);
     type History = SuggestionResult;
 
     interface HistoryTag {
@@ -79,7 +92,20 @@ export function* genCompoundableSuggestions(
         [JOIN_SEPARATOR]: insertSpaceCost,
     };
 
+    let stopNow = false;
     let costLimit: MaxCost = bc * Math.min(word.length * maxCostScale, maxNumChanges);
+
+    function updateCostLimit(maxCost: number | symbol | undefined) {
+        switch (typeof maxCost) {
+            case 'number':
+                costLimit = maxCost;
+                break;
+            case 'symbol':
+                stopNow = true;
+                break;
+        }
+    }
+
     const a = 0;
     let b = 0;
     for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
@@ -92,7 +118,7 @@ export function* genCompoundableSuggestions(
     const hint = word;
     const iWalk = hintedWalker(root, compoundMethod, hint);
     let goDeeper = true;
-    for (let r = iWalk.next({ goDeeper }); !r.done; r = iWalk.next({ goDeeper })) {
+    for (let r = iWalk.next({ goDeeper }); !stopNow && !r.done; r = iWalk.next({ goDeeper })) {
         const { text, node, depth } = r.value;
         let { a, b } = stack[depth];
         const w = text.slice(-1);
@@ -123,7 +149,7 @@ export function* genCompoundableSuggestions(
                     if (cost <= costLimit) {
                         const suffix = word.slice(w.length);
                         const emit = text + suffix;
-                        costLimit = (yield { word: emit, cost }) || costLimit;
+                        updateCostLimit(yield { word: emit, cost });
                     }
                 }
                 continue;
@@ -211,7 +237,7 @@ export function* genCompoundableSuggestions(
         if (node.f && isWordTerminationNode(node) && cost <= costLimit) {
             const r = { word: text, cost };
             history.push(r);
-            costLimit = (yield r) || costLimit;
+            updateCostLimit(yield r);
         }
         goDeeper = min <= costLimit;
     }

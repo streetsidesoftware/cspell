@@ -1,21 +1,15 @@
 import { TrieRoot, TrieNode } from './TrieNode';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
-import { SuggestionIterator } from './suggestCollector';
+import { SuggestionGenerator, suggestionCollector, SuggestionResult } from './suggestCollector';
 import { PairingHeap } from './PairingHeap';
-import { SuggestionCollector, suggestionCollector, SuggestionResult } from '.';
 import { visualLetterMaskMap } from './orthography';
-
-export interface GenSuggestionOptions {
-    compoundMethod: CompoundWordsMethod; // NONE is the best option.
-    ignoreCase: boolean;
-    maxNumChanges: number; // 3 is a good number, much higher than 5 is problematic.
-}
+import { createSuggestionOptions, GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
 
 export function* genCompoundableSuggestions(
     root: TrieRoot,
     word: string,
-    options: GenSuggestionOptions
-): SuggestionIterator {
+    options: GenSuggestionOptionsStrict
+): SuggestionGenerator {
     const { compoundMethod, ignoreCase, maxNumChanges } = options;
     const len = word.length;
 
@@ -41,12 +35,12 @@ export function* genCompoundableSuggestions(
 
     const bc = opCosts.baseCost;
     const maxCostScale = 1.03 / 2;
-    const optimalCost = 0;
     const mapSugCost = opCosts.visuallySimilar;
     const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
     const compoundIndicator = root.compoundCharacter;
 
     let costLimit = bc * Math.min(len * maxCostScale, maxNumChanges);
+    let stopNow = false;
 
     const candidates = new PairingHeap(compare);
     const locationCache: LocationCache = new Map();
@@ -56,6 +50,17 @@ export function* genCompoundableSuggestions(
     const edgesToResolve: EdgeToResolve[] = [];
 
     const emittedWords = new Map<string, number>();
+
+    function updateCostLimit(maxCost: number | symbol | undefined) {
+        switch (typeof maxCost) {
+            case 'number':
+                costLimit = Math.min(maxCost, costLimit);
+                break;
+            case 'symbol':
+                stopNow = true;
+                break;
+        }
+    }
 
     function getLocationNode(path: Path): LocationNode {
         const index = path.i;
@@ -69,7 +74,7 @@ export function* genCompoundableSuggestions(
         return n;
     }
 
-    function* emitWord(word: string, cost: number): SuggestionIterator {
+    function* emitWord(word: string, cost: number): SuggestionGenerator {
         if (cost <= costLimit) {
             // console.log(`e: ${word} ${cost}`);
             const f = emittedWords.get(word);
@@ -77,14 +82,13 @@ export function* genCompoundableSuggestions(
             emittedWords.set(word, cost);
             const lastChar = word[word.length - 1];
             if (!noFollow[lastChar]) {
-                const changeLimit = (yield { word: word, cost: cost - optimalCost }) ?? costLimit - optimalCost;
-                costLimit = Math.min(changeLimit + optimalCost, costLimit);
+                updateCostLimit(yield { word: word, cost: cost });
             }
         }
         return undefined;
     }
 
-    function* emitWords(): SuggestionIterator {
+    function* emitWords(): SuggestionGenerator {
         for (const w of wordsToEmit) {
             yield* emitWord(w.word, w.cost);
         }
@@ -311,7 +315,7 @@ export function* genCompoundableSuggestions(
     let maxSize = 0;
     let best: Candidate | undefined;
     // const bc2 = 2 * bc;
-    while ((best = candidates.dequeue())) {
+    while (!stopNow && (best = candidates.dequeue())) {
         maxSize = Math.max(maxSize, candidates.length);
         if (best.g > costLimit) break;
         if (!best.a) continue;
@@ -436,28 +440,14 @@ interface EdgeToResolve {
     suffixes: Suffix[];
 }
 
-const defaultMaxNumberSuggestions = 10;
-const maxNumChanges = 3;
-
-export function suggest(
-    root: TrieRoot | TrieRoot[],
-    word: string,
-    numSuggestions: number = defaultMaxNumberSuggestions,
-    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
-    numChanges: number = maxNumChanges,
-    ignoreCase?: boolean
-): SuggestionResult[] {
+export function suggest(root: TrieRoot | TrieRoot[], word: string, options: SuggestionOptions): SuggestionResult[] {
+    const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
-        numSuggestions: numSuggestions,
-        changeLimit: numChanges,
+        numSuggestions: opts.numSuggestions,
+        changeLimit: opts.maxNumChanges,
         includeTies: true,
-        ignoreCase,
+        ignoreCase: opts.ignoreCase,
     });
-    const opts: GenSuggestionOptions = {
-        compoundMethod,
-        ignoreCase: collector.ignoreCase,
-        maxNumChanges: collector.maxNumChanges,
-    };
     collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;
 }
@@ -465,25 +455,13 @@ export function suggest(
 export function* genSuggestions(
     root: TrieRoot | TrieRoot[],
     word: string,
-    options: GenSuggestionOptions
-): SuggestionIterator {
+    options: GenSuggestionOptionsStrict
+): SuggestionGenerator {
     const roots = Array.isArray(root) ? root : [root];
     for (const r of roots) {
         yield* genCompoundableSuggestions(r, word, options);
     }
     return undefined;
-}
-
-export function sugGenOptsFromCollector(
-    collector: SuggestionCollector,
-    compoundMethod = CompoundWordsMethod.NONE
-): GenSuggestionOptions {
-    const opts: GenSuggestionOptions = {
-        compoundMethod,
-        ignoreCase: collector.ignoreCase,
-        maxNumChanges: collector.maxNumChanges,
-    };
-    return opts;
 }
 
 function determineNoFollow(root: TrieRoot): NoFollow {
