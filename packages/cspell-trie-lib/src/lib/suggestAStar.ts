@@ -497,10 +497,7 @@ function determineNoFollow(root: TrieRoot): NoFollow {
 
 function determineInitialNodes(root: TrieRoot | TrieRoot[], ignoreCase: boolean): TrieNode[] {
     const roots = Array.isArray(root) ? root : [root];
-    const rootNodes: TrieNode[] = roots.map((r) => {
-        const noFollow = determineNoFollow(r);
-        return { c: new Map([...r.c].filter(([c]) => !noFollow[c])) };
-    });
+    const rootNodes: TrieNode[] = roots;
     const noCaseNodes = ignoreCase
         ? roots
               .filter((r) => r.stripCaseAndAccentsPrefix)
