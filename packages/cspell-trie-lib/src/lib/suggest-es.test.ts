@@ -22,7 +22,7 @@ describe('Validate Spanish Suggestions', () => {
     `('Tests suggestions "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
         jest.setTimeout(5000);
         const trie = await getTrie();
-        const suggestions = trie.suggest(word, 4, undefined, undefined, ignoreCase);
+        const suggestions = trie.suggest(word, { numSuggestions: 4, ignoreCase });
         expect(suggestions).toEqual(expectedWords);
     });
 
@@ -33,7 +33,7 @@ describe('Validate Spanish Suggestions', () => {
     `('Tests suggestions "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
         jest.setTimeout(5000);
         const trie = await getTrie();
-        const results = trie.suggestWithCost(word, 4, undefined, undefined, ignoreCase);
+        const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase });
         expect(results).toEqual(expectedWords);
     });
 
@@ -43,7 +43,7 @@ describe('Validate Spanish Suggestions', () => {
         ${'nino'} | ${false}   | ${[c('niño', 1), c('niños', 96), c('nido', 97), c('niña', 97), c('niñeo', 97), c('dino', 99)]}
     `('Tests suggestions "$word" ignoreCase: $ignoreCase', ({ word, ignoreCase, expectedWords }) => {
         const trie = trieSimple();
-        const results = trie.suggestWithCost(word, 10, undefined, undefined, ignoreCase);
+        const results = trie.suggestWithCost(word, { numSuggestions: 10, ignoreCase });
         expect(results).toEqual(expectedWords);
     });
 });

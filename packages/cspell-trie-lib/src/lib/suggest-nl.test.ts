@@ -13,7 +13,7 @@ describe('Validate Dutch Suggestions', () => {
         'Tests suggestions "buurtbewoners"',
         async () => {
             const trie = await pTrieNL;
-            const results = trie.suggestWithCost('buurtbewoners', 5);
+            const results = trie.suggestWithCost('buurtbewoners', { numSuggestions: 5 });
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
             expect(suggestions[0]).toBe('buurtbewoners');
@@ -26,7 +26,7 @@ describe('Validate Dutch Suggestions', () => {
         'Tests suggestions "burtbewoners"',
         async () => {
             const trie = await pTrieNL;
-            const results = trie.suggestWithCost('burtbewoners', 5);
+            const results = trie.suggestWithCost('burtbewoners', { numSuggestions: 5 });
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners', 'burgbewoners']));
         },
@@ -38,7 +38,7 @@ describe('Validate Dutch Suggestions', () => {
         'Tests suggestions "buurtbwoners"',
         async () => {
             const trie = await pTrieNL;
-            const results = trie.suggestWithCost('buurtbwoners', 1);
+            const results = trie.suggestWithCost('buurtbwoners', { numSuggestions: 1 });
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
         },
@@ -49,7 +49,7 @@ describe('Validate Dutch Suggestions', () => {
         'Tests suggestions "buurtbewoners" with cost',
         async () => {
             const trie = await pTrieNL;
-            const results = trie.suggestWithCost('buurtbewoners', 1);
+            const results = trie.suggestWithCost('buurtbewoners', { numSuggestions: 1 });
             expect(results).toEqual([{ word: 'buurtbewoners', cost: 0 }]);
         },
         timeout
@@ -60,7 +60,7 @@ describe('Validate Dutch Suggestions', () => {
         'Tests suggestions "mexico-stad"',
         async () => {
             const trie = await pTrieNL;
-            const results = trie.suggestWithCost('mexico-stad', 2);
+            const results = trie.suggestWithCost('mexico-stad', { numSuggestions: 2 });
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toEqual(expect.arrayContaining(['Mexico-Stad']));
             expect(suggestions).not.toEqual(expect.arrayContaining(['Mexico-stad']));

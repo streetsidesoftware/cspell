@@ -107,7 +107,7 @@ describe('Validate SimpleDictionaryParser', () => {
         ${'resume'}        | ${false}   | ${false} | ${['resumé']}
     `('suggest "$word" ignore case $ignoreCase', ({ word, ignoreCase, has, expected }) => {
         const trie = parseDictionary(dictionary2());
-        const r = trie.suggest(word, 10, undefined, undefined, ignoreCase);
+        const r = trie.suggest(word, { numSuggestions: 10, ignoreCase });
         expect(r).toEqual(expected);
         expect(trie.hasWord(word, !ignoreCase)).toBe(has);
     });
