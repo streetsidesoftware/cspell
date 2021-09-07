@@ -1,33 +1,37 @@
-import { Sequence, genSequence } from 'gensequence';
-import { TrieNode, TrieOptions, TrieRoot, PartialTrieOptions } from './TrieNode';
-import { genSuggestions, suggest, SuggestionCollector, SuggestionResult } from './suggest';
+import { genSequence, Sequence } from 'gensequence';
+import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants';
 import {
+    createFindOptions,
+    FindFullResult,
+    findLegacyCompound,
+    FindOptions,
+    findWord,
+    findWordNode,
+    isForbiddenWord,
+    PartialFindOptions,
+} from './find';
+import { genSuggestions, suggest } from './suggest';
+import { SuggestionCollector, SuggestionResult } from './suggestCollector';
+import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import {
+    countWords,
     createTriFromList,
     insert,
     isWordTerminationNode,
     iteratorTrieWords,
-    orderTrie,
-    countWords,
     mergeOptionalWithDefaults,
+    orderTrie,
 } from './util';
-import { walker, WalkerIterator, CompoundWordsMethod } from './walker';
+import { CompoundWordsMethod, walker, WalkerIterator } from './walker';
 
-import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
-import {
-    isForbiddenWord,
-    findLegacyCompound,
-    createFindOptions,
-    FindOptions,
-    PartialFindOptions,
-    findWord,
-    findWordNode,
-    FindFullResult,
-} from './find';
-
-export { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
-
-export { TrieOptions, PartialTrieOptions } from './TrieNode';
-export { defaultTrieOptions } from './constants';
+export {
+    CASE_INSENSITIVE_PREFIX,
+    COMPOUND_FIX,
+    defaultTrieOptions,
+    FORBID_PREFIX,
+    OPTIONAL_COMPOUND_FIX,
+} from './constants';
+export { PartialTrieOptions, TrieOptions } from './TrieNode';
 
 /** @deprecated */
 export const COMPOUND = COMPOUND_FIX;
@@ -205,7 +209,7 @@ export class Trie {
         const suggestions = genSuggestions(this.getSuggestRoot(!collector.ignoreCase), collector.word, compoundMethod);
         function* filteredSuggestions() {
             let maxCost = collector.maxCost;
-            let ir: IteratorResult<SuggestionResult, undefined>;
+            let ir: IteratorResult<SuggestionResult>;
             while (!(ir = suggestions.next(maxCost)).done) {
                 if (ir.value !== undefined && filter(ir.value)) {
                     maxCost = yield ir.value;

@@ -1,10 +1,9 @@
+import * as Sug from './suggest';
+import { SuggestionResult } from './suggestCollector';
+import { Trie } from './trie';
 import { TrieNode } from './TrieNode';
 import { isWordTerminationNode } from './util';
 import { walker } from './walker';
-import { SuggestionResult } from './suggest';
-
-import * as Sug from './suggest';
-import { Trie } from './trie';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions against Legacy Suggestion generator', () => {
