@@ -17,6 +17,9 @@ import { tableToLines } from './util/table';
 import { Emitters, isProgressFileComplete, MessageType, ProgressItem, Issue } from './emitters';
 import { isSpellingDictionaryLoadError, SpellingDictionaryLoadError, ImportError } from 'cspell-lib';
 import { emitTraceResults } from './traceEmitter';
+import { CheckFailed } from './util/errors';
+
+export { CheckFailed } from './util/errors';
 
 interface Options extends CSpellApplicationOptions {
     legacy?: boolean;
@@ -408,10 +411,4 @@ class TS extends Array<string> {
 
 function template(s: string): TemplateStringsArray {
     return new TS(s);
-}
-
-export class CheckFailed extends Error {
-    constructor(message: string, readonly exitCode: number = 1) {
-        super(message);
-    }
 }
