@@ -7,6 +7,7 @@ import {
     SuggestionResult,
     SuggestionCollector,
 } from './suggestCollector';
+import { createTimer } from './timer';
 import { CompoundWordsMethod } from './walker';
 
 function getTrie() {
@@ -190,6 +191,28 @@ describe('Validate English Suggestions', () => {
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toEqual(['tests compound suggestions']);
+        },
+        timeout
+    );
+
+    test(
+        'Expensive suggestion `testscompundsuggestions`',
+        async () => {
+            const suggestionTimeout = 100;
+            const trie = await getTrie();
+            // cspell:ignore testscompundsuggestions
+            const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 3, false));
+            const timer = createTimer();
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
+                ),
+                suggestionTimeout
+            );
+            const elapsed = timer.elapsed();
+            expect(elapsed).toBeLessThan(suggestionTimeout * 2);
         },
         timeout
     );

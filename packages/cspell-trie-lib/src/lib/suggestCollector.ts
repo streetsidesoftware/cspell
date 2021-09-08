@@ -181,10 +181,10 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
 
         let ir: IteratorResult<SuggestionResult | Progress | undefined>;
         while (!(ir = src.next(stop || maxCost)).done) {
-            const { value } = ir;
             if (timer.elapsed() > timeout) {
                 stop = symStopProcessing;
             }
+            const { value } = ir;
             if (!value) continue;
             if (isSuggestionResult(value)) {
                 collectSuggestion(value);

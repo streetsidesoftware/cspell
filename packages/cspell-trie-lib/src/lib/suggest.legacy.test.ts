@@ -10,7 +10,7 @@ describe('Validate Suggest', () => {
         const trie = Trie.create(sampleWords);
 
         function testWord(word: string) {
-            const results = Sug.suggestLegacy(trie.root, word);
+            const results = Sug.suggest(trie.root, word);
             // results for ${word}
             expect(results).toEqual(legacySuggest(trie.root, word));
         }
