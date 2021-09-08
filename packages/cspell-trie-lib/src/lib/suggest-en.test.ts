@@ -1,6 +1,7 @@
 import { readTrie } from './dictionaries.test.helper';
 import { genCompoundableSuggestions, suggest } from './suggest';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
+import { createTimer } from './timer';
 import { CompoundWordsMethod } from './walker';
 
 function getTrie() {
@@ -145,6 +146,21 @@ describe('Validate English Suggestions', () => {
             expect(suggestions).toHaveLength(collector.maxNumSuggestions);
             expect(suggestions).toEqual(expect.arrayContaining(['tests compound suggestions']));
             expect(suggestions[0]).toBe('tests compound suggestions');
+        },
+        timeout
+    );
+
+    test(
+        'Expensive suggestion `testscompundsuggestions`',
+        async () => {
+            const suggestionTimeout = 100;
+            const trie = await getTrie();
+            // cspell:ignore testscompundsuggestions
+            const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 3));
+            const timer = createTimer();
+            collector.collect(genCompoundableSuggestions(trie.root, collector.word, SEPARATE_WORDS), suggestionTimeout);
+            const elapsed = timer.elapsed();
+            expect(elapsed).toBeLessThan(suggestionTimeout * 2);
         },
         timeout
     );

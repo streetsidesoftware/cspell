@@ -220,6 +220,8 @@ export function* genCompoundableSuggestions(
             const r = { word: text, cost };
             history.push(r);
             updateCostLimit(yield r);
+        } else {
+            updateCostLimit(yield undefined);
         }
         goDeeper = min <= costLimit;
     }

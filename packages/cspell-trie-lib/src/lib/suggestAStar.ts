@@ -152,10 +152,10 @@ export function* genCompoundableSuggestions(
         if (!best.n.f) return;
         const i = best.i;
         const toDelete = len - i;
-        const e: Edge = { p: best, n: best.n, i, s: '', c: bc * toDelete, a: Action.Delete };
-        addEdgeToBeResolved(best, e);
-        edgesToResolve.push({ edge: e, suffixes: [{ s: '', c: 0 }] });
-        if (compoundMethod) {
+        const edge: Edge = { p: best, n: best.n, i, s: '', c: bc * toDelete, a: Action.Delete };
+        addEdgeToBeResolved(best, edge);
+        edgesToResolve.push({ edge, suffixes: [{ s: '', c: 0 }] });
+        if (compoundMethod && best.g + opCosts.wordBreak <= costLimit) {
             const s = wordSeparator;
             nodes.forEach((node) => {
                 const e: Edge = { p: best, n: node, i, s, c: opCosts.wordBreak, a: Action.WordBreak };
@@ -196,7 +196,7 @@ export function* genCompoundableSuggestions(
             s: '',
             c: bc * num,
             a: Action.Delete,
-            t: word.slice(i, i + num),
+            // t: word.slice(i, i + num),
         };
         return addEdge(best, e);
     }
@@ -221,7 +221,7 @@ export function* genCompoundableSuggestions(
             if (s == wc) continue;
             const sg = visualLetterMaskMap[s] || 0;
             const c = wg & sg ? mapSugCost : cost;
-            const e: Edge = { p: best, n, i, s, c, a: Action.Replace, t: wc };
+            const e: Edge = { p: best, n, i, s, c, a: Action.Replace /* , t: wc */ };
             addEdge(best, e);
         }
     }
@@ -237,7 +237,15 @@ export function* genCompoundableSuggestions(
         const n = best.n.c?.get(wc2);
         const n2 = n?.c?.get(wc1);
         if (!n || !n2) return;
-        const e: Edge = { p: best, n: n2, i: i2 + 1, s: wc2 + wc1, c: opCosts.swapCost, a: Action.Swap, t: wc1 + wc2 };
+        const e: Edge = {
+            p: best,
+            n: n2,
+            i: i2 + 1,
+            s: wc2 + wc1,
+            c: opCosts.swapCost,
+            a: Action.Swap,
+            // , t: wc1 + wc2,
+        };
         addEdge(best, e);
     }
 
@@ -303,22 +311,45 @@ export function* genCompoundableSuggestions(
         }
     }
 
+    function cancelEdges(path: Path) {
+        if (!path.r) return;
+
+        const suffixes: Suffix[] = [];
+
+        for (const edge of path.r) {
+            edgesToResolve.push({ edge, suffixes });
+        }
+    }
+
     /************
      * Below is the core of the A* algorithm
      */
+
+    updateCostLimit(yield undefined);
 
     nodes.forEach((node, idx) => {
         const g = idx ? 1 : 0;
         candidates.add({ e: undefined, n: node, i: 0, w: '', g, r: undefined, a: true });
     });
-
+    const iterationsBeforePolling = 1000;
+    let i = iterationsBeforePolling;
     let maxSize = 0;
     let best: Candidate | undefined;
     // const bc2 = 2 * bc;
     while (!stopNow && (best = candidates.dequeue())) {
+        if (--i < 0) {
+            i = iterationsBeforePolling;
+            updateCostLimit(yield undefined);
+        }
         maxSize = Math.max(maxSize, candidates.length);
-        if (best.g > costLimit) break;
-        if (!best.a) continue;
+        if (!best.a) {
+            // best's edges are already part of a location node.
+            continue;
+        }
+        if (best.g > costLimit) {
+            cancelEdges(best);
+            continue;
+        }
 
         const bi = best.i;
         opWordFound(best);
@@ -375,7 +406,7 @@ interface Edge {
     /** Action */
     a: Action;
     /** Optional Transform */
-    t?: string | undefined;
+    // t?: string | undefined;
 }
 
 interface Path {
