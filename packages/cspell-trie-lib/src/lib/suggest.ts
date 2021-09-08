@@ -5,38 +5,20 @@ import { TrieRoot } from './TrieNode';
 import { isWordTerminationNode } from './util';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
-const defaultMaxNumberSuggestions = 10;
-
 const baseCost = 100;
 const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
-const maxNumChanges = 5;
 const insertSpaceCost = -1;
 const mapSubCost = 1;
 const maxCostScale = 0.5;
 
 const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 
-const collator = new Intl.Collator();
-
-export function suggestLegacy(
+export function suggest(
     root: TrieRoot | TrieRoot[],
     word: string,
-    numSuggestions: number = defaultMaxNumberSuggestions,
-    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
-    numChanges: number = maxNumChanges,
-    ignoreCase?: boolean
+    options: SuggestionOptions = {}
 ): SuggestionResult[] {
-    const options: SuggestionOptions = {
-        numSuggestions,
-        compoundMethod,
-        maxNumChanges: numChanges,
-        ignoreCase,
-    };
-    return suggest(root, word, options);
-}
-
-export function suggest(root: TrieRoot | TrieRoot[], word: string, options: SuggestionOptions): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
@@ -242,9 +224,4 @@ export function* genCompoundableSuggestions(
         goDeeper = min <= costLimit;
     }
     return undefined;
-}
-
-// comparison function for Suggestion Results.
-export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
-    return a.cost - b.cost || a.word.length - b.word.length || collator.compare(a.word, b.word);
 }

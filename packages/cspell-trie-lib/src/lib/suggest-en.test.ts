@@ -1,5 +1,5 @@
 import { readTrie } from './dictionaries.test.helper';
-import { genCompoundableSuggestions, suggestLegacy } from './suggest';
+import { genCompoundableSuggestions, suggest } from './suggest';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
 import { CompoundWordsMethod } from './walker';
 
@@ -34,7 +34,7 @@ describe('Validate English Suggestions', () => {
         ${'catagory'} | ${sr('category')}
     `('suggestions for $word', async ({ word, expected }: WordSuggestionsTest) => {
         const trie = await getTrie();
-        const x = suggestLegacy(trie.root, word);
+        const x = suggest(trie.root, word);
         expect(x).toEqual(expect.arrayContaining(expected.map((e) => expect.objectContaining(e))));
     });
 
