@@ -31,10 +31,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-          cache-dependency-path:
-            - package-lock.json
-            - packages/*/package-lock.json
-            - integration-tests/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
 
       - run: npm ci
       - run: npm run build
@@ -74,10 +74,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-          cache-dependency-path:
-            - package-lock.json
-            - packages/*/package-lock.json
-            - integration-tests/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
 
       - run: npm ci
       - run: npm run build
