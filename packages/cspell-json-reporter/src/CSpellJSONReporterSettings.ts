@@ -8,10 +8,12 @@ export type CSpellJSONReporterSettings = {
     outFile: string;
     /**
      * Add more information about the files being checked and the configuration
+     * @default false
      */
     verbose?: boolean;
     /**
      * Add information useful for debugging cspell.json files
+     * @default false
      */
     debug?: boolean;
     /**
