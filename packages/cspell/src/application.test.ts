@@ -1,7 +1,8 @@
 import * as path from 'path';
 import * as App from './application';
-import { CSpellReporter, ProgressFileComplete, Issue, RunResult } from '@cspell/cspell-types';
+import { Issue } from '@cspell/cspell-types';
 import { CSpellApplicationOptions } from './options';
+import { InMemoryReporter } from './util/InMemoryReporter';
 
 const getStdinResult = {
     value: '',
@@ -21,12 +22,13 @@ describe('Validate the Application', () => {
     test('Tests running the application', () => {
         const files = ['text.txt'];
         const options = sampleOptions;
-        const logger = new Logger();
-        const lint = App.lint(files, options, logger);
+        const reporter = new InMemoryReporter();
+        const lint = App.lint(files, options, reporter);
         return lint.then((result) => {
-            expect(logger.errorCount).toBe(0);
-            expect(logger.infoCount).toBeGreaterThan(0);
-            expect(logger.debugCount).toBeGreaterThan(0);
+            expect(reporter.errorCount).toBe(0);
+            expect(reporter.infoCount).toBeGreaterThan(0);
+            expect(reporter.debugCount).toBeGreaterThan(0);
+            expect(reporter.runResult).toEqual(result);
             expect(result.files).toBe(1);
             return;
         });
@@ -35,12 +37,13 @@ describe('Validate the Application', () => {
     test('Tests running the application verbose', () => {
         const files = ['text.txt'];
         const options = { ...sampleOptions, verbose: true };
-        const logger = new Logger();
-        const lint = App.lint(files, options, logger);
+        const reporter = new InMemoryReporter();
+        const lint = App.lint(files, options, reporter);
         return lint.then((result) => {
-            expect(logger.errorCount).toBe(0);
-            expect(logger.infoCount).toBeGreaterThan(0);
-            expect(logger.debugCount).toBeGreaterThan(0);
+            expect(reporter.errorCount).toBe(0);
+            expect(reporter.infoCount).toBeGreaterThan(0);
+            expect(reporter.debugCount).toBeGreaterThan(0);
+            expect(reporter.runResult).toEqual(result);
             expect(result.files).toBe(1);
             return;
         });
@@ -49,12 +52,13 @@ describe('Validate the Application', () => {
     test('Tests running the application words only', () => {
         const files = ['text.txt'];
         const options = { ...sampleOptions, wordsOnly: true, unique: true };
-        const logger = new Logger();
-        const lint = App.lint(files, options, logger);
+        const reporter = new InMemoryReporter();
+        const lint = App.lint(files, options, reporter);
         return lint.then((result) => {
-            expect(logger.errorCount).toBe(0);
-            expect(logger.infoCount).toBeGreaterThan(0);
-            expect(logger.debugCount).toBeGreaterThan(0);
+            expect(reporter.errorCount).toBe(0);
+            expect(reporter.infoCount).toBeGreaterThan(0);
+            expect(reporter.debugCount).toBeGreaterThan(0);
+            expect(reporter.runResult).toEqual(result);
             expect(result.files).toBe(1);
             return;
         });
@@ -102,20 +106,21 @@ describe('Validate the Application', () => {
     test('running the application from stdin', async () => {
         const files = ['stdin'];
         const options = { ...sampleOptions, wordsOnly: true, unique: true };
-        const logger = new Logger();
+        const reporter = new InMemoryReporter();
         // cspell:ignore texxt
         getStdinResult.value = `
             This is some texxt to test out reding from stdin.
             cspell:ignore badspellingintext
             We can ignore values within the text: badspellingintext
         `;
-        const lint = App.lint(files, options, logger);
+        const lint = App.lint(files, options, reporter);
         const result = await lint;
         expect(result.files).toBe(1);
-        expect(logger.errorCount).toBe(0);
-        expect(logger.infoCount).toBeGreaterThan(0);
-        expect(logger.debugCount).toBeGreaterThan(0);
-        expect(logger.issues.map((i) => i.text)).toEqual(['texxt']);
+        expect(reporter.errorCount).toBe(0);
+        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.debugCount).toBeGreaterThan(0);
+        expect(reporter.issues.map((i) => i.text)).toEqual(['texxt']);
+        expect(reporter.runResult).toEqual(result);
     });
 });
 
@@ -140,7 +145,7 @@ describe('Application, Validate Samples', () => {
 
     sampleTests().map((sample) =>
         test(`Test file: "${sample.file}"`, async () => {
-            const logger = new Logger();
+            const reporter = new InMemoryReporter();
             const root = path.resolve(path.dirname(sample.file));
             const { file, issues, options: sampleOptions = {} } = sample;
             const options = {
@@ -148,10 +153,11 @@ describe('Application, Validate Samples', () => {
                 ...sampleOptions,
             };
 
-            const result = await App.lint([path.resolve(file)], options, logger);
+            const result = await App.lint([path.resolve(file)], options, reporter);
             expect(result.files).toBe(1);
-            expect(logger.issues).toEqual(issues.map(iMap));
+            expect(reporter.issues).toEqual(issues.map(iMap));
             expect(result.issues).toBe(issues.length);
+            expect(reporter.runResult).toEqual(result);
         })
     );
 });
@@ -203,45 +209,3 @@ function sampleTests(): SampleTest[] {
     // cspell:enable
 }
 
-class Logger implements CSpellReporter {
-    log: string[] = [];
-    issueCount = 0;
-    errorCount = 0;
-    debugCount = 0;
-    infoCount = 0;
-    progressCount = 0;
-    issues: Issue[] = [];
-    runResult: RunResult | undefined;
-
-    issue = (issue: Issue) => {
-        this.issues.push(issue);
-        this.issueCount += 1;
-        const { uri, row, col, text } = issue;
-        this.log.push(`Issue: ${uri}[${row}, ${col}]: Unknown word: ${text}`);
-    };
-
-    error = (message: string, error: Error) => {
-        this.errorCount += 1;
-        this.log.push(`Error: ${message} ${error.toString()}`);
-        return Promise.resolve();
-    };
-
-    info = (message: string) => {
-        this.infoCount += 1;
-        this.log.push(`Info: ${message}`);
-    };
-
-    debug = (message: string) => {
-        this.debugCount += 1;
-        this.log.push(`Debug: ${message}`);
-    };
-
-    progress = (p: ProgressFileComplete) => {
-        this.progressCount += 1;
-        this.log.push(`Progress: ${p.type} ${p.fileNum} ${p.fileCount} ${p.filename}`);
-    };
-
-    result = (r: RunResult) => {
-        this.runResult = r;
-    };
-}
