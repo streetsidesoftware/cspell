@@ -91,6 +91,10 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
             const { mustFindFiles } = options;
             const cliReporter = getReporter(options);
             return App.lint(files, options, cliReporter).then((result) => {
+                if (!files.length && !result.files) {
+                    spellCheckCommand.outputHelp();
+                    throw new CheckFailed('outputHelp', 1);
+                }
                 if (result.issues || result.errors || (mustFindFiles && !result.files)) {
                     throw new CheckFailed('check failed', 1);
                 }

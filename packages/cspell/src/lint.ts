@@ -1,4 +1,4 @@
-import type { CSpellSettings, Glob, TextDocumentOffset } from '@cspell/cspell-types';
+import type { CSpellReporter, CSpellSettings, Glob, TextDocumentOffset } from '@cspell/cspell-types';
 import * as commentJson from 'comment-json';
 import type { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 import type { ValidationIssue } from 'cspell-lib';
@@ -25,39 +25,13 @@ export interface FileResult {
 }
 
 export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
-    if (cfg.options.root) {
-        process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
-    }
-    const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
-
-    const reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
-
+    let { reporter } = cfg;
+    setReporter(reporter);
     const configErrors = new Set<string>();
 
-    const log: Logger['log'] = (...params) => {
-        const msg = format(...params);
-        reporter.info(msg, 'Info');
-    };
-
-    const error: Logger['error'] = (...params) => {
-        const msg = format(...params);
-        const err = { message: '', name: 'error', toString: () => '' };
-        reporter.error(msg, err);
-    };
-    const warn: Logger['warn'] = (...params) => {
-        const msg = format(...params);
-        reporter.info(msg, 'Warning');
-    };
-
-    const logger: Logger = {
-        log,
-        warn,
-        error,
-    };
-
-    cspell.setLogger(logger);
-
-    return run();
+    const lintResult = await run();
+    reporter.result(lintResult);
+    return lintResult;
 
     async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<FileResult> {
         const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
@@ -166,7 +140,6 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
             status.errors += r.configErrors;
         }
 
-        reporter.result(status);
         return status;
     }
 
@@ -202,6 +175,14 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
     }
 
     async function run(): Promise<RunResult> {
+        if (cfg.options.root) {
+            process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
+        }
+
+        const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
+        reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
+        setReporter(reporter);
+        
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
         const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
@@ -328,4 +309,28 @@ function runResult(init: Partial<RunResult> = {}): RunResult {
 
 function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
+}
+
+function setReporter(reporter: CSpellReporter): void {
+    const log: Logger['log'] = (...params) => {
+        const msg = format(...params);
+        reporter.info(msg, 'Info');
+    };
+
+    const error: Logger['error'] = (...params) => {
+        const msg = format(...params);
+        const err = { message: '', name: 'error', toString: () => '' };
+        reporter.error(msg, err);
+    };
+    const warn: Logger['warn'] = (...params) => {
+        const msg = format(...params);
+        reporter.info(msg, 'Warning');
+    };
+
+    const logger: Logger = {
+        log,
+        warn,
+        error,
+    };
+    cspell.setLogger(logger);
 }
