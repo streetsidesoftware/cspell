@@ -478,6 +478,7 @@ export function suggest(root: TrieRoot | TrieRoot[], word: string, options: Sugg
         changeLimit: opts.maxNumChanges,
         includeTies: true,
         ignoreCase: opts.ignoreCase,
+        timeout: opts.timeout,
     });
     collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;

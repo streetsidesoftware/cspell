@@ -25,6 +25,7 @@ export function suggest(
         changeLimit: opts.maxNumChanges,
         includeTies: opts.allowTies,
         ignoreCase: opts.ignoreCase,
+        timeout: opts.timeout,
     });
     collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;

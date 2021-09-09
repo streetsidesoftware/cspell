@@ -4,6 +4,7 @@ const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,
     ignoreCase: undefined,
     changeLimit: undefined,
+    timeout: undefined,
 };
 
 describe('Validate suggestCollector', () => {

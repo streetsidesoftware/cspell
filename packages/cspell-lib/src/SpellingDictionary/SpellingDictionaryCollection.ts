@@ -85,7 +85,9 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
             numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
             numChanges,
             compoundMethod,
-            ignoreCase = true,
+            ignoreCase,
+            includeTies,
+            timeout,
         } = suggestOptions;
         _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
         const prefixNoCase = CASE_INSENSITIVE_PREFIX;
@@ -100,8 +102,9 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
             numSuggestions,
             filter,
             changeLimit: numChanges,
-            includeTies: true,
+            includeTies,
             ignoreCase,
+            timeout,
         });
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));

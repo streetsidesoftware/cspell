@@ -179,6 +179,7 @@ function opts(
         changeLimit,
         includeTies,
         ignoreCase,
+        timeout,
     };
 }
 
