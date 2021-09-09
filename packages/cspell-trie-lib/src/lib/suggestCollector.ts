@@ -87,29 +87,40 @@ export interface SuggestionCollector {
 export interface SuggestionCollectorOptions {
     /**
      * number of best matching suggestions.
+     * @default 10
      */
     numSuggestions: number;
 
     /**
      * An optional filter function that can be used to limit remove unwanted suggestions.
      * I.E. to remove forbidden terms.
+     * @default () => true
      */
     filter?: (word: string, cost: number) => boolean;
 
     /**
      * The number of letters that can be changed when looking for a match
+     * @default 5
      */
     changeLimit: number | undefined;
 
     /**
      * Include suggestions with tied cost even if the number is greater than `numSuggestions`.
+     * @default true
      */
     includeTies?: boolean;
 
     /**
      * specify if case / accents should be ignored when looking for suggestions.
+     * @default true
      */
     ignoreCase: boolean | undefined;
+
+    /**
+     * the total amount of time to allow for suggestions.
+     * @default 1000
+     */
+    timeout?: number | undefined;
 }
 
 export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = {
@@ -118,13 +129,22 @@ export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = {
     changeLimit: maxNumChanges,
     includeTies: true,
     ignoreCase: true,
+    timeout: defaultCollectorTimeout,
 };
 
 export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector {
-    const { filter = () => true, changeLimit = maxNumChanges, includeTies = false, ignoreCase = true } = options;
+    const {
+        filter = () => true,
+        changeLimit = maxNumChanges,
+        includeTies = false,
+        ignoreCase = true,
+        timeout = defaultCollectorTimeout,
+    } = options;
     const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = baseCost * Math.min(wordToMatch.length * maxAllowedCostScale, changeLimit);
+
+    let timeRemaining = timeout;
 
     function dropMax() {
         if (sugs.size < 2) {
@@ -175,8 +195,12 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
      * @param src - the SuggestionIterator used to generate suggestions.
      * @param timeout - the amount of time in milliseconds to allow for suggestions.
      */
-    function collect(src: SuggestionGenerator, timeout = defaultCollectorTimeout) {
+    function collect(src: SuggestionGenerator, timeout?: number) {
         let stop: false | symbol = false;
+        timeout = timeout ?? timeRemaining;
+        timeout = Math.min(timeout, timeRemaining);
+        if (timeout < 0) return;
+
         const timer = createTimer();
 
         let ir: IteratorResult<SuggestionResult | Progress | undefined>;
@@ -192,6 +216,8 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
             }
             handleProgress(value);
         }
+
+        timeRemaining -= timer.elapsed();
     }
 
     function suggestions() {

@@ -10,6 +10,7 @@ const defaultOptions: SuggestionCollectorOptions = {
     ignoreCase: undefined,
     changeLimit: undefined,
     includeTies: true,
+    timeout: undefined,
 };
 
 const stopHere = true;

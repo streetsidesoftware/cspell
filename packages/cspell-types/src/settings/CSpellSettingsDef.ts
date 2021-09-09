@@ -86,7 +86,7 @@ export interface ExtendableSettings extends Settings {
     overrides?: OverrideSettings[];
 }
 
-export interface Settings extends BaseSetting, PnPSettings {
+export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettings {
     /**
      * Current active spelling language.
      *
@@ -118,6 +118,14 @@ export interface Settings extends BaseSetting, PnPSettings {
      */
     enableFiletypes?: LanguageIdSingle[];
 
+    /** Additional settings for individual languages. */
+    languageSettings?: LanguageSetting[];
+
+    /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
+    languageId?: LanguageId;
+}
+
+export interface ReportingConfiguration extends SuggestionsConfiguration {
     /**
      * The maximum number of problems to report in a file.
      * @default 100
@@ -135,18 +143,30 @@ export interface Settings extends BaseSetting, PnPSettings {
      * @default 4
      */
     minWordLength?: number;
+}
 
+export interface SuggestionsConfiguration {
     /**
      * Number of suggestions to make
      * @default 10
      */
     numSuggestions?: number;
 
-    /** Additional settings for individual languages. */
-    languageSettings?: LanguageSetting[];
+    /**
+     * The maximum amount of time in milliseconds to generate suggestions for a word.
+     * @default 500
+     */
+    suggestionsTimeout?: number;
 
-    /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
-    languageId?: LanguageId;
+    /**
+     * The maximum number of changes allowed on a word to be considered a suggestions.
+     *
+     * For example, appending an `s` onto `example` -> `examples` is considered 1 change.
+     *
+     * Range: between 1 and 5.
+     * @default 3
+     */
+    suggestionNumChanges?: number;
 }
 
 /**

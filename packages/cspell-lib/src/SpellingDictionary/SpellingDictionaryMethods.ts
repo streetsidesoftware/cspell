@@ -119,6 +119,8 @@ export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
                   compoundMethod,
                   numChanges,
                   ignoreCase,
+                  includeTies: undefined,
+                  timeout: undefined,
               };
     return suggestOptions;
 }

@@ -152,7 +152,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         const {
             numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
             numChanges,
-            ignoreCase = true,
+            includeTies,
+            ignoreCase,
+            timeout,
         } = suggestOptions;
         function filter(_word: string): boolean {
             return true;
@@ -161,8 +163,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             numSuggestions,
             filter,
             changeLimit: numChanges,
-            includeTies: true,
+            includeTies,
             ignoreCase,
+            timeout,
         });
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
