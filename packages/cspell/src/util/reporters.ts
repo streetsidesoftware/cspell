@@ -46,5 +46,7 @@ function loadReporter(reporterSettings: ReporterSettings): CSpellReporter | unde
  * Loads reporter modules configured in cspell config file
  */
 export function loadReporters({ reporters = [] }: Pick<FileSettings, 'reporters'>): ReadonlyArray<CSpellReporter> {
-    return reporters.map(loadReporter).filter(Boolean) as ReadonlyArray<CSpellReporter>;
+    return reporters
+        .map(loadReporter)
+        .filter((v: CSpellReporter | undefined): v is CSpellReporter => v !== undefined);
 }
