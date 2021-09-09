@@ -16,6 +16,9 @@ import {
 import { tableToLines } from './util/table';
 import { emitTraceResults } from './traceEmitter';
 import { getReporter } from './cli-reporter';
+import { CheckFailed } from './util/errors';
+
+export { CheckFailed } from './util/errors';
 
 export interface Options extends CSpellApplicationOptions {
     files: string[];
@@ -252,8 +255,3 @@ function collect(value: string, previous: string[] | undefined): string[] {
     return previous.concat([value]);
 }
 
-export class CheckFailed extends Error {
-    constructor(message: string, readonly exitCode: number = 1) {
-        super(message);
-    }
-}

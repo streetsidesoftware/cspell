@@ -1,10 +1,13 @@
-import { Trie, defaultTrieOptions } from './trie';
-import { isWordTerminationNode, orderTrie, normalizeWordToLowercase } from './util';
-import { suggestionCollector, CompoundWordsMethod } from './index';
+import { SuggestionOptions } from './genSuggestionsOptions';
+import { CompoundWordsMethod, suggestionCollector } from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
-import { SuggestionCollectorOptions } from './suggest';
+import { SuggestionCollectorOptions } from './suggestCollector';
+import { defaultTrieOptions, Trie } from './trie';
+import { isWordTerminationNode, normalizeWordToLowercase, orderTrie } from './util';
 
 describe('Validate Trie Class', () => {
+    const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };
+    const SEPARATE_WORDS: SuggestionOptions = { compoundMethod: CompoundWordsMethod.SEPARATE_WORDS };
     test('Tests creating a Trie', () => {
         const trie = Trie.create(sampleWords);
         expect(trie).toBeInstanceOf(Trie);
@@ -41,20 +44,20 @@ describe('Validate Trie Class', () => {
 
     test('tests suggestions', () => {
         const trie = Trie.create(sampleWords);
-        const suggestions = trie.suggest('wall', 10);
+        const suggestions = trie.suggest('wall', NumSuggestions);
         expect(suggestions).toEqual(expect.arrayContaining(['walk']));
     });
 
     test('tests suggestions 2', () => {
         const trie = Trie.create(sampleWords);
-        const suggestions = trie.suggest('wall', 10);
+        const suggestions = trie.suggest('wall', NumSuggestions);
         expect(suggestions).toEqual(['walk', 'walks', 'talk']);
     });
 
     test('tests suggestions with compounds', () => {
         const trie = Trie.create(sampleWords);
         // cspell:ignore joyostalkliftswak
-        const suggestions = trie.suggest('joyostalkliftswak', 10, CompoundWordsMethod.SEPARATE_WORDS);
+        const suggestions = trie.suggest('joyostalkliftswak', { ...NumSuggestions, ...SEPARATE_WORDS });
         expect(suggestions).toEqual(expect.arrayContaining(['joyous talk lifts walk']));
     });
 

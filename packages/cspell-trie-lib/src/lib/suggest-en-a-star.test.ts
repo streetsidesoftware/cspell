@@ -1,7 +1,14 @@
-import { suggestionCollector, SuggestionResult, SuggestionCollectorOptions } from './suggest';
-import { suggest, genCompoundableSuggestions } from './suggestAStar';
-import { CompoundWordsMethod } from './walker';
 import { readTrie } from './dictionaries.test.helper';
+import { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
+import { genCompoundableSuggestions, suggest } from './suggestAStar';
+import {
+    suggestionCollector,
+    SuggestionCollectorOptions,
+    SuggestionResult,
+    SuggestionCollector,
+} from './suggestCollector';
+import { createTimer } from './timer';
+import { CompoundWordsMethod } from './walker';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -31,7 +38,7 @@ describe('Validate English Suggestions', () => {
         ${'cateogry'} | ${sr({ word: 'category', cost: 75 })}
     `('suggestions for $word', async ({ word, expected }: WordSuggestionsTest) => {
         const trie = await getTrie();
-        const x = suggest(trie.root, word);
+        const x = suggest(trie.root, word, {});
         expect(x).toEqual(expect.arrayContaining(expected.map((e) => expect.objectContaining(e))));
     });
 
@@ -40,7 +47,10 @@ describe('Validate English Suggestions', () => {
         async () => {
             const trie = await getTrie();
             const collector = suggestionCollector('joyful', opts(8, undefined, 1));
-            collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.NONE));
+            collector.collect(
+                genCompoundableSuggestions(trie.root, collector.word, sugGenOptsFromCollector(collector)),
+                timeout
+            );
             const results = collector.suggestions;
             const suggestions = results.map((s) => s.word);
             expect(suggestions).toEqual(expect.arrayContaining(['joyful']));
@@ -49,118 +59,181 @@ describe('Validate English Suggestions', () => {
         timeout
     );
 
-    // test(
-    //     'Tests suggestions "joyfull"',
-    //     async () => {
-    //         const trie = await getTrie();
-    //         // cspell:ignore joyfull
-    //         const collector = suggestionCollector('joyfull', opts(8));
-    //         collector.collect(
-    //             genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
-    //         );
-    //         const results = collector.suggestions;
-    //         const suggestions = results.map((s) => s.word);
-    //         expect(suggestions).toEqual(expect.arrayContaining(['joyful']));
-    //         expect(suggestions[0]).toBe('joyfully');
-    //         expect(suggestions[1]).toBe('joyful');
-    //         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    //     },
-    //     timeout
-    // );
+    test(
+        'Tests suggestions "joyfull"',
+        async () => {
+            const trie = await getTrie();
+            // cspell:ignore joyfull
+            const collector = suggestionCollector('joyfull', opts(8, undefined, 2));
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
+                ),
+                timeout
+            );
+            const results = collector.suggestions;
+            expect(results).toEqual([
+                { cost: 25, word: 'joyful' },
+                { cost: 100, word: 'joyfully' },
+                { cost: 109, word: 'joy full' },
+                { cost: 154, word: 'joyful l' },
+                { cost: 155, word: 'joyful L' },
+            ]);
+        },
+        timeout
+    );
 
-    // test(
-    //     'Tests compound SEPARATE_WORDS suggestions',
-    //     async () => {
-    //         const trie = await getTrie();
-    //         // cspell:ignore onetwothreefour
-    //         const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3.3));
-    //         collector.collect(
-    //             genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
-    //         );
-    //         const results = collector.suggestions;
-    //         const suggestions = results.map((s) => s.word);
-    //         expect(suggestions).toEqual(expect.arrayContaining(['one two three four']));
-    //         expect(suggestions[0]).toBe('one two three four');
-    //         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    //     },
-    //     timeout
-    // );
+    test(
+        'Tests compound SEPARATE_WORDS suggestions',
+        async () => {
+            const trie = await getTrie();
+            // cspell:ignore onetwothreefour
+            const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3.3));
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
+                ),
+                timeout
+            );
+            const results = collector.suggestions;
+            expect(results).toEqual([{ cost: 322, word: 'one two three four' }]);
+        },
+        timeout
+    );
 
-    // test(
-    //     'Tests compound JOIN_WORDS suggestions',
-    //     async () => {
-    //         const trie = await getTrie();
-    //         // cspell:ignore onetwothrefour
-    //         const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3));
-    //         collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.JOIN_WORDS));
-    //         const results = collector.suggestions;
-    //         const suggestions = results.map((s) => s.word);
-    //         expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
-    //         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    //     },
-    //     timeout
-    // );
+    test(
+        'Tests compound JOIN_WORDS suggestions',
+        async () => {
+            const trie = await getTrie();
+            // cspell:ignore onetwothrefour
+            const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3));
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.JOIN_WORDS)
+                ),
+                timeout
+            );
+            const results = collector.suggestions;
+            const suggestions = results.map((s) => s.word);
+            expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
+        },
+        timeout
+    );
 
-    // test(
-    //     'Tests compound suggestions',
-    //     async () => {
-    //         const trie = await getTrie();
-    //         // cspell:ignore onetwothrefour
-    //         const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3));
-    //         collector.collect(genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.JOIN_WORDS));
-    //         const results = collector.suggestions;
-    //         const suggestions = results.map((s) => s.word);
-    //         expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
-    //         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    //     },
-    //     timeout
-    // );
+    test(
+        'Tests compound suggestions',
+        async () => {
+            const trie = await getTrie();
+            // cspell:ignore onetwothrefour
+            const collector = suggestionCollector('onetwothreefour', opts(8, undefined, 3));
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.JOIN_WORDS)
+                ),
+                timeout
+            );
+            const results = collector.suggestions;
+            const suggestions = results.map((s) => s.word);
+            expect(suggestions).toEqual(expect.arrayContaining(['one+two+three+four']));
+        },
+        timeout
+    );
 
-    // // Takes a long time.
-    // test(
-    //     'Tests long compound suggestions `testscomputesuggestions`',
-    //     async () => {
-    //         const trie = await getTrie();
-    //         // cspell:ignore testscomputesuggestions
-    //         const collector = suggestionCollector('testscomputesuggestions', opts(2, undefined, 3, true));
-    //         collector.collect(
-    //             genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
-    //         );
-    //         const results = collector.suggestions;
-    //         const suggestions = results.map((s) => s.word);
-    //         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    //         expect(suggestions).toEqual(['tests compute suggestions', 'test compute suggestions']);
-    //         expect(suggestions[0]).toBe('tests compute suggestions');
-    //     },
-    //     timeout
-    // );
+    // Takes a long time.
+    test(
+        'Tests long compound suggestions `testscomputesuggestions`',
+        async () => {
+            const trie = await getTrie();
+            // cspell:ignore testscomputesuggestions
+            const collector = suggestionCollector('testscomputesuggestions', opts(2, undefined, 4, false));
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
+                ),
+                timeout
+            );
+            const results = collector.suggestions;
+            const suggestions = results.map((s) => s.word);
+            expect(suggestions).toEqual([
+                'tests compute suggestions',
+                'tests compute suggestion',
+                // 'test compute suggestions',
+            ]);
+        },
+        timeout
+    );
 
-    // // Takes a long time.
-    // test(
-    //     'Tests long compound suggestions `testscompundsuggestions`',
-    //     async () => {
-    //         const trie = await getTrie();
-    //         // cspell:ignore testscompundsuggestions
-    //         const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 3));
-    //         collector.collect(
-    //             genCompoundableSuggestions(trie.root, collector.word, CompoundWordsMethod.SEPARATE_WORDS)
-    //         );
-    //         const results = collector.suggestions;
-    //         const suggestions = results.map((s) => s.word);
-    //         expect(suggestions).toHaveLength(collector.maxNumSuggestions);
-    //         expect(suggestions).toEqual(expect.arrayContaining(['tests compound suggestions']));
-    //         expect(suggestions[0]).toBe('tests compound suggestions');
-    //     },
-    //     timeout
-    // );
+    // Takes a long time.
+    test(
+        'Tests long compound suggestions `testscompundsuggestions`',
+        async () => {
+            const trie = await getTrie();
+            // cspell:ignore testscompundsuggestions
+            const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 4, false));
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
+                ),
+                timeout
+            );
+            const results = collector.suggestions;
+            const suggestions = results.map((s) => s.word);
+            expect(suggestions).toEqual(['tests compound suggestions']);
+        },
+        timeout
+    );
+
+    test(
+        'Expensive suggestion `testscompundsuggestions`',
+        async () => {
+            const suggestionTimeout = 100;
+            const trie = await getTrie();
+            // cspell:ignore testscompundsuggestions
+            const collector = suggestionCollector('testscompundsuggestions', opts(1, undefined, 3, false));
+            const timer = createTimer();
+            collector.collect(
+                genCompoundableSuggestions(
+                    trie.root,
+                    collector.word,
+                    sugGenOptsFromCollector(collector, CompoundWordsMethod.SEPARATE_WORDS)
+                ),
+                suggestionTimeout
+            );
+            const elapsed = timer.elapsed();
+            expect(elapsed).toBeLessThan(suggestionTimeout * 2);
+        },
+        timeout
+    );
 });
+
+function sugGenOptsFromCollector(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod) {
+    const { ignoreCase, maxNumChanges } = collector;
+    const ops: GenSuggestionOptionsStrict = {
+        compoundMethod,
+        ignoreCase,
+        maxNumChanges,
+    };
+    return ops;
+}
 
 function opts(
     numSuggestions: number,
     filter?: SuggestionCollectorOptions['filter'],
-    changeLimit?: number,
-    includeTies?: boolean,
-    ignoreCase?: boolean
+    changeLimit = 3,
+    includeTies = true,
+    ignoreCase = true
 ): SuggestionCollectorOptions {
     return {
         numSuggestions,

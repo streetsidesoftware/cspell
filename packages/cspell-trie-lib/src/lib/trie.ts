@@ -1,33 +1,43 @@
-import { Sequence, genSequence } from 'gensequence';
-import { TrieNode, TrieOptions, TrieRoot, PartialTrieOptions } from './TrieNode';
-import { genSuggestions, suggest, SuggestionCollector, SuggestionResult } from './suggest';
+import { genSequence, Sequence } from 'gensequence';
+import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX, OPTIONAL_COMPOUND_FIX } from './constants';
 import {
+    createFindOptions,
+    FindFullResult,
+    findLegacyCompound,
+    FindOptions,
+    findWord,
+    findWordNode,
+    isForbiddenWord,
+    PartialFindOptions,
+} from './find';
+import { SuggestionOptions } from './genSuggestionsOptions';
+import { genSuggestions, suggest } from './suggest';
+import {
+    GenerateSuggestionResult,
+    isSuggestionResult,
+    SuggestionCollector,
+    SuggestionResult,
+} from './suggestCollector';
+import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import {
+    countWords,
     createTriFromList,
     insert,
     isWordTerminationNode,
     iteratorTrieWords,
-    orderTrie,
-    countWords,
     mergeOptionalWithDefaults,
+    orderTrie,
 } from './util';
-import { walker, WalkerIterator, CompoundWordsMethod } from './walker';
+import { CompoundWordsMethod, walker, WalkerIterator } from './walker';
 
-import { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
-import {
-    isForbiddenWord,
-    findLegacyCompound,
-    createFindOptions,
-    FindOptions,
-    PartialFindOptions,
-    findWord,
-    findWordNode,
-    FindFullResult,
-} from './find';
-
-export { COMPOUND_FIX, OPTIONAL_COMPOUND_FIX, CASE_INSENSITIVE_PREFIX, FORBID_PREFIX } from './constants';
-
-export { TrieOptions, PartialTrieOptions } from './TrieNode';
-export { defaultTrieOptions } from './constants';
+export {
+    CASE_INSENSITIVE_PREFIX,
+    COMPOUND_FIX,
+    defaultTrieOptions,
+    FORBID_PREFIX,
+    OPTIONAL_COMPOUND_FIX,
+} from './constants';
+export { PartialTrieOptions, TrieOptions } from './TrieNode';
 
 /** @deprecated */
 export const COMPOUND = COMPOUND_FIX;
@@ -164,35 +174,19 @@ export class Trie {
      * @param numChanges - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
      *                      the lower the value, the faster results are returned. Values less than 4 are best.
      */
-    suggest(
-        text: string,
-        maxNumSuggestions: number,
-        compoundMethod?: CompoundWordsMethod,
-        numChanges?: number,
-        ignoreCase?: boolean
-    ): string[] {
-        return this.suggestWithCost(text, maxNumSuggestions, compoundMethod, numChanges, ignoreCase).map((a) => a.word);
+    suggest(text: string, options: SuggestionOptions): string[] {
+        return this.suggestWithCost(text, options).map((a) => a.word);
     }
 
     /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
-    suggestWithCost(
-        text: string,
-        maxNumSuggestions: number,
-        compoundMethod?: CompoundWordsMethod,
-        numChanges?: number,
-        ignoreCase?: boolean
-    ): SuggestionResult[] {
-        return suggest(
-            this.getSuggestRoot(!ignoreCase),
-            text,
-            maxNumSuggestions,
-            compoundMethod,
-            numChanges,
-            ignoreCase
-        ).filter((sug) => !this.isForbiddenWord(sug.word));
+    suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[] {
+        // const opts = createSuggestionOptions(options);
+        return suggest(this.getSuggestRoot(!options.ignoreCase), text, options).filter(
+            (sug) => !this.isForbiddenWord(sug.word)
+        );
     }
 
     /**
@@ -202,13 +196,16 @@ export class Trie {
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
         const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
-        const suggestions = genSuggestions(this.getSuggestRoot(!collector.ignoreCase), collector.word, compoundMethod);
+        const suggestions = genSuggestions(this.getSuggestRoot(!collector.ignoreCase), collector.word, {
+            compoundMethod,
+        });
         function* filteredSuggestions() {
             let maxCost = collector.maxCost;
-            let ir: IteratorResult<SuggestionResult, undefined>;
+            let ir: IteratorResult<GenerateSuggestionResult>;
             while (!(ir = suggestions.next(maxCost)).done) {
-                if (ir.value !== undefined && filter(ir.value)) {
-                    maxCost = yield ir.value;
+                const { value } = ir;
+                if (!isSuggestionResult(value) || filter(value)) {
+                    maxCost = yield value;
                 }
             }
             return undefined;

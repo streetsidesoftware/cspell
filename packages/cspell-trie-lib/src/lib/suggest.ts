@@ -1,72 +1,43 @@
+import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
+import { visualLetterMaskMap } from './orthography';
+import { MaxCost, suggestionCollector, SuggestionGenerator, SuggestionResult } from './suggestCollector';
 import { TrieRoot } from './TrieNode';
 import { isWordTerminationNode } from './util';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
-import { visualLetterMaskMap } from './orthography';
-
-const defaultMaxNumberSuggestions = 10;
 
 const baseCost = 100;
 const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
-const maxNumChanges = 5;
 const insertSpaceCost = -1;
 const mapSubCost = 1;
 const maxCostScale = 0.5;
-// max allowed cost scale should be a bit over 50% to allow for suggestions to short words, but not too high to have too many suggestions.
-const maxAllowedCostScale = 1.03 * maxCostScale;
 
 const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
-
-const collator = new Intl.Collator();
-
-const regexSeparator = new RegExp(`[${regexQuote(JOIN_SEPARATOR + WORD_SEPARATOR)}]`, 'g');
-
-const wordLengthCost = [0, 50, 25, 5, 0];
-const extraWordsCost = 5;
-
-export type Cost = number;
-export type MaxCost = Cost;
-
-export interface SuggestionResult {
-    word: string;
-    cost: Cost;
-}
-
-/**
- * Ask for the next result.
- * maxCost - sets the max cost for following suggestions
- * This is used to limit which suggestions are emitted.
- * If the iterator.next() returns `undefined`, it is to request a value for maxCost.
- */
-// next: (maxCost?: MaxCost) => IteratorResult<SuggestionResult>;
-export type SuggestionIterator = Generator<SuggestionResult, undefined, MaxCost | undefined>;
 
 export function suggest(
     root: TrieRoot | TrieRoot[],
     word: string,
-    numSuggestions: number = defaultMaxNumberSuggestions,
-    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
-    numChanges: number = maxNumChanges,
-    ignoreCase?: boolean
+    options: SuggestionOptions = {}
 ): SuggestionResult[] {
+    const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
-        numSuggestions: numSuggestions,
-        changeLimit: numChanges,
-        includeTies: true,
-        ignoreCase,
+        numSuggestions: opts.numSuggestions,
+        changeLimit: opts.maxNumChanges,
+        includeTies: opts.allowTies,
+        ignoreCase: opts.ignoreCase,
     });
-    collector.collect(genSuggestions(root, word, compoundMethod));
+    collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;
 }
 
 export function* genSuggestions(
     root: TrieRoot | TrieRoot[],
     word: string,
-    compoundMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
-): SuggestionIterator {
+    options: GenSuggestionOptions = {}
+): SuggestionGenerator {
     const roots = Array.isArray(root) ? root : [root];
     for (const r of roots) {
-        yield* genCompoundableSuggestions(r, word, compoundMethod);
+        yield* genCompoundableSuggestions(r, word, options);
     }
     return undefined;
 }
@@ -79,8 +50,9 @@ interface Range {
 export function* genCompoundableSuggestions(
     root: TrieRoot,
     word: string,
-    compoundMethod: CompoundWordsMethod
-): SuggestionIterator {
+    options: GenSuggestionOptions = {}
+): SuggestionGenerator {
+    const { compoundMethod = CompoundWordsMethod.NONE, maxNumChanges } = createSuggestionOptions(options);
     type History = SuggestionResult;
 
     interface HistoryTag {
@@ -102,7 +74,20 @@ export function* genCompoundableSuggestions(
         [JOIN_SEPARATOR]: insertSpaceCost,
     };
 
+    let stopNow = false;
     let costLimit: MaxCost = bc * Math.min(word.length * maxCostScale, maxNumChanges);
+
+    function updateCostLimit(maxCost: number | symbol | undefined) {
+        switch (typeof maxCost) {
+            case 'number':
+                costLimit = maxCost;
+                break;
+            case 'symbol':
+                stopNow = true;
+                break;
+        }
+    }
+
     const a = 0;
     let b = 0;
     for (let i = 0, c = 0; i <= mx && c <= costLimit; ++i) {
@@ -115,7 +100,7 @@ export function* genCompoundableSuggestions(
     const hint = word;
     const iWalk = hintedWalker(root, compoundMethod, hint);
     let goDeeper = true;
-    for (let r = iWalk.next({ goDeeper }); !r.done; r = iWalk.next({ goDeeper })) {
+    for (let r = iWalk.next({ goDeeper }); !stopNow && !r.done; r = iWalk.next({ goDeeper })) {
         const { text, node, depth } = r.value;
         let { a, b } = stack[depth];
         const w = text.slice(-1);
@@ -146,7 +131,7 @@ export function* genCompoundableSuggestions(
                     if (cost <= costLimit) {
                         const suffix = word.slice(w.length);
                         const emit = text + suffix;
-                        costLimit = (yield { word: emit, cost }) || costLimit;
+                        updateCostLimit(yield { word: emit, cost });
                     }
                 }
                 continue;
@@ -234,148 +219,11 @@ export function* genCompoundableSuggestions(
         if (node.f && isWordTerminationNode(node) && cost <= costLimit) {
             const r = { word: text, cost };
             history.push(r);
-            costLimit = (yield r) || costLimit;
+            updateCostLimit(yield r);
+        } else {
+            updateCostLimit(yield undefined);
         }
         goDeeper = min <= costLimit;
     }
     return undefined;
-}
-
-// comparison function for Suggestion Results.
-export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult): number {
-    return a.cost - b.cost || a.word.length - b.word.length || collator.compare(a.word, b.word);
-}
-
-export interface SuggestionCollector {
-    collect: (src: SuggestionIterator) => void;
-    add: (suggestion: SuggestionResult) => SuggestionCollector;
-    readonly suggestions: SuggestionResult[];
-    readonly maxCost: number;
-    readonly word: string;
-    readonly maxNumSuggestions: number;
-    readonly includesTies: boolean;
-    readonly ignoreCase?: boolean;
-}
-
-export interface SuggestionCollectorOptions {
-    /**
-     * number of best matching suggestions.
-     */
-    numSuggestions: number;
-
-    /**
-     * An optional filter function that can be used to limit remove unwanted suggestions.
-     * I.E. to remove forbidden terms.
-     */
-    filter?: (word: string, cost: number) => boolean;
-
-    /**
-     * The number of letters that can be changed when looking for a match
-     */
-    changeLimit: number | undefined;
-
-    /**
-     * Include suggestions with tied cost even if the number is greater than `numSuggestions`.
-     */
-    includeTies?: boolean;
-
-    /**
-     * specify if case / accents should be ignored when looking for suggestions.
-     */
-    ignoreCase: boolean | undefined;
-}
-
-export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector {
-    const { filter = () => true, changeLimit = maxNumChanges, includeTies = false, ignoreCase = true } = options;
-    const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
-    const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = baseCost * Math.min(wordToMatch.length * maxAllowedCostScale, changeLimit);
-
-    function dropMax() {
-        if (sugs.size < 2) {
-            sugs.clear();
-            return;
-        }
-        const sorted = [...sugs.values()].sort(compSuggestionResults);
-        let i = numSuggestions - 1;
-        maxCost = sorted[i].cost;
-        for (; i < sorted.length && sorted[i].cost <= maxCost; ++i) {
-            /* empty */
-        }
-        for (; i < sorted.length; ++i) {
-            sugs.delete(sorted[i].word);
-        }
-    }
-
-    function adjustCost(sug: SuggestionResult): SuggestionResult {
-        const words = sug.word.split(regexSeparator);
-        const extraCost =
-            words.map((w) => wordLengthCost[w.length] || 0).reduce((a, b) => a + b, 0) +
-            (words.length - 1) * extraWordsCost;
-        return { word: sug.word, cost: sug.cost + extraCost };
-    }
-
-    function collector(suggestion: SuggestionResult): MaxCost {
-        const { word, cost } = adjustCost(suggestion);
-        if (cost <= maxCost && filter(suggestion.word, cost)) {
-            const known = sugs.get(word);
-            if (known) {
-                known.cost = Math.min(known.cost, cost);
-            } else {
-                sugs.set(word, { word, cost });
-                if (cost < maxCost && sugs.size > numSuggestions) {
-                    dropMax();
-                }
-            }
-        }
-        return maxCost;
-    }
-
-    function collect(src: SuggestionIterator) {
-        let ir: IteratorResult<SuggestionResult, undefined>;
-        while (!(ir = src.next(maxCost)).done) {
-            if (ir.value !== undefined) {
-                collector(ir.value);
-            }
-        }
-    }
-
-    function suggestions() {
-        const sorted = [...sugs.values()].sort(compSuggestionResults);
-        if (!includeTies && sorted.length > numSuggestions) {
-            sorted.length = numSuggestions;
-        }
-        return sorted;
-    }
-
-    return {
-        collect,
-        add: function (suggestion: SuggestionResult) {
-            collector(suggestion);
-            return this;
-        },
-        get suggestions() {
-            return suggestions();
-        },
-        get maxCost() {
-            return maxCost;
-        },
-        get word() {
-            return wordToMatch;
-        },
-        get maxNumSuggestions() {
-            return numSuggestions;
-        },
-        includesTies: includeTies,
-        ignoreCase,
-    };
-}
-
-/**
- *
- * @param text verbatim text to be inserted into a regexp
- * @returns text that can be used in a regexp.
- */
-function regexQuote(text: string): string {
-    return text.replace(/[[\]\-+(){},|*.\\]/g, '\\$1');
 }
