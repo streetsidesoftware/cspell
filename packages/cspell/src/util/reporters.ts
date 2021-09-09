@@ -1,5 +1,6 @@
 import type { CSpellReporterModule, FileSettings, ReporterSettings } from 'cspell-lib';
 import { CSpellReporter } from '@cspell/cspell-types';
+import { ApplicationError } from './errors';
 
 function mergeEmitters<T extends keyof CSpellReporter>(
     reporters: ReadonlyArray<CSpellReporter>,
@@ -37,8 +38,7 @@ function loadReporter(reporterSettings: ReporterSettings): CSpellReporter | unde
         const { getReporter }: CSpellReporterModule = require(moduleName);
         return getReporter(settings);
     } catch (e) {
-        // TODO needs better error handling?
-        console.error('Failed to load reporter', moduleName, e);
+        throw new ApplicationError(`Failed to load reporter ${moduleName}: ${e.message}`);
     }
 }
 
