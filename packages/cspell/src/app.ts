@@ -258,4 +258,3 @@ function collect(value: string, previous: string[] | undefined): string[] {
     }
     return previous.concat([value]);
 }
-

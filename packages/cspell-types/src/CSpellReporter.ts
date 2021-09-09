@@ -19,15 +19,15 @@ export const MessageTypes: MessageTypeLookup = {
     Warning: 'Warning',
 };
 
-export type MessageEmitter = (message: string, msgType: MessageType) => void | Promise<void>;
+export type MessageEmitter = (message: string, msgType: MessageType) => void;
 
-export type DebugEmitter = (message: string) => void | Promise<void>;
+export type DebugEmitter = (message: string) => void;
 
 export type ErrorLike = Error | { message: string; name: string; toString: () => string };
 
-export type ErrorEmitter = (message: string, error: ErrorLike) => void | Promise<void>;
+export type ErrorEmitter = (message: string, error: ErrorLike) => void;
 
-export type SpellingErrorEmitter = (issue: Issue) => void | Promise<void>;
+export type SpellingErrorEmitter = (issue: Issue) => void;
 
 export type ProgressTypes = 'ProgressFileComplete';
 export type ProgressItem = ProgressFileComplete;
@@ -45,7 +45,7 @@ export interface ProgressFileComplete extends ProgressBase {
     numErrors: number | undefined;
 }
 
-export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void | Promise<void>;
+export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
 
 export interface RunResult {
     files: number;

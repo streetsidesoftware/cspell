@@ -30,7 +30,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
     const configErrors = new Set<string>();
 
     const lintResult = await run();
-    reporter.result(lintResult);
+    await reporter.result(lintResult);
     return lintResult;
 
     async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<FileResult> {
@@ -182,7 +182,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
         reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
         setReporter(reporter);
-        
+
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
         const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);

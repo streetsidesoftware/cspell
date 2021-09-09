@@ -2,13 +2,20 @@ import type { CSpellReporterModule, FileSettings, ReporterSettings } from 'cspel
 import { CSpellReporter } from '@cspell/cspell-types';
 import { ApplicationError } from './errors';
 
-function mergeEmitters<T extends keyof CSpellReporter>(
+function mergeEmitters<T extends keyof Omit<CSpellReporter, 'result'>>(
     reporters: ReadonlyArray<CSpellReporter>,
     emitterName: T
 ): CSpellReporter[T] {
     return async (...args: unknown[]) => {
         // eslint-disable-next-line prefer-spread
-        const results = reporters.map((reporter) => reporter[emitterName].apply(reporter, args));
+        reporters.forEach((reporter) => reporter[emitterName].apply(reporter, args));
+    };
+}
+
+function mergeResultEmitters(reporters: ReadonlyArray<CSpellReporter>): CSpellReporter['result'] {
+    return async (...args: unknown[]) => {
+        // eslint-disable-next-line prefer-spread
+        const results = reporters.map((reporter) => reporter.result.apply(reporter, args));
         await Promise.all(results);
     };
 }
@@ -23,7 +30,7 @@ export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): CSp
         debug: mergeEmitters(reporters, 'debug'),
         progress: mergeEmitters(reporters, 'progress'),
         error: mergeEmitters(reporters, 'error'),
-        result: mergeEmitters(reporters, 'result'),
+        result: mergeResultEmitters(reporters),
     };
 }
 
@@ -46,7 +53,5 @@ function loadReporter(reporterSettings: ReporterSettings): CSpellReporter | unde
  * Loads reporter modules configured in cspell config file
  */
 export function loadReporters({ reporters = [] }: Pick<FileSettings, 'reporters'>): ReadonlyArray<CSpellReporter> {
-    return reporters
-        .map(loadReporter)
-        .filter((v: CSpellReporter | undefined): v is CSpellReporter => v !== undefined);
+    return reporters.map(loadReporter).filter((v: CSpellReporter | undefined): v is CSpellReporter => v !== undefined);
 }
