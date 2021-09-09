@@ -5,10 +5,10 @@ function mergeEmitters<T extends keyof CSpellReporter>(
     reporters: ReadonlyArray<CSpellReporter>,
     emitterName: T
 ): CSpellReporter[T] {
-    return (...args: unknown[]) => {
+    return async (...args: unknown[]) => {
         // eslint-disable-next-line prefer-spread
         const results = reporters.map((reporter) => reporter[emitterName].apply(reporter, args));
-        return Promise.all(results);
+        await Promise.all(results);
     };
 }
 

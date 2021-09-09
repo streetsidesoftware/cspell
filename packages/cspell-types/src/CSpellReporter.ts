@@ -19,23 +19,15 @@ export const MessageTypes: MessageTypeLookup = {
     Warning: 'Warning',
 };
 
-export type MessageEmitterVoid = (message: string, msgType: MessageType) => void;
-export type MessageEmitterPromise = (message: string, msgType: MessageType) => Promise<void>;
-export type MessageEmitter = MessageEmitterVoid | MessageEmitterPromise;
+export type MessageEmitter = (message: string, msgType: MessageType) => void | Promise<void>;
 
-export type DebugEmitterVoid = (message: string) => void;
-export type DebugEmitterPromise = (message: string) => Promise<void>;
-export type DebugEmitter = DebugEmitterVoid | DebugEmitterPromise;
+export type DebugEmitter = (message: string) => void | Promise<void>;
 
-type ErrorLike = Error | { message: string; name: string; toString: () => string };
+export type ErrorLike = Error | { message: string; name: string; toString: () => string };
 
-export type ErrorEmitterVoid = (message: string, error: ErrorLike) => void;
-export type ErrorEmitterPromise = (message: string, error: ErrorLike) => void;
-export type ErrorEmitter = ErrorEmitterVoid | ErrorEmitterPromise;
+export type ErrorEmitter = (message: string, error: ErrorLike) => void | Promise<void>;
 
-export type SpellingErrorEmitterVoid = (issue: Issue) => void;
-export type SpellingErrorEmitterPromise = (issue: Issue) => Promise<void>;
-export type SpellingErrorEmitter = SpellingErrorEmitterVoid | SpellingErrorEmitterPromise;
+export type SpellingErrorEmitter = (issue: Issue) => void | Promise<void>;
 
 export type ProgressTypes = 'ProgressFileComplete';
 export type ProgressItem = ProgressFileComplete;
@@ -53,9 +45,7 @@ export interface ProgressFileComplete extends ProgressBase {
     numErrors: number | undefined;
 }
 
-export type ProgressEmitterVoid = (p: ProgressItem | ProgressFileComplete) => void;
-export type ProgressEmitterPromise = (p: ProgressItem | ProgressFileComplete) => Promise<void>;
-export type ProgressEmitter = ProgressEmitterVoid | ProgressEmitterPromise;
+export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void | Promise<void>;
 
 export interface RunResult {
     files: number;
@@ -63,9 +53,8 @@ export interface RunResult {
     issues: number;
     errors: number;
 }
-export type ResultEmitterVoid = (result: RunResult) => void;
-export type ResultEmitterPromise = (result: RunResult) => Promise<void>;
-export type ResultEmitter = ResultEmitterVoid | ResultEmitterPromise;
+
+export type ResultEmitter = (result: RunResult) => void | Promise<void>;
 
 export interface CSpellReporter {
     issue: SpellingErrorEmitter;

@@ -18,7 +18,7 @@ export function getReporter(settings: unknown): CSpellReporter {
         progress: [],
     };
     return {
-        issue: (issue) => reportData.issues.push(issue),
+        issue: (issue) => { reportData.issues.push(issue) },
         info: (message, msgType) => {
             if (msgType === MessageTypes.Debug && !settings.debug) {
                 return;
@@ -28,9 +28,9 @@ export function getReporter(settings: unknown): CSpellReporter {
             }
             reportData.info.push({ message, msgType });
         },
-        debug: settings.debug ? (message) => reportData.debug.push({ message }) : noopReporter,
-        error: (message, error) => reportData.error.push({ message, error }),
-        progress: settings.progress ? (item) => reportData.progress.push(item) : noopReporter,
+        debug: settings.debug ? (message) => { reportData.debug.push({ message }) } : noopReporter,
+        error: (message, error) => {reportData.error.push({ message, error }) },
+        progress: settings.progress ? (item) => { reportData.progress.push(item) } : noopReporter,
         result: (result) => {
             const outFilePath = path.join(process.cwd(), settings.outFile);
             const output = {

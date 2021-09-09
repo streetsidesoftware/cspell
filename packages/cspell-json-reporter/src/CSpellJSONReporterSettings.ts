@@ -16,6 +16,7 @@ export type CSpellJSONReporterSettings = {
     debug?: boolean;
     /**
      * Add progress messages
+     * @default false
      */
     progress?: boolean;
 };

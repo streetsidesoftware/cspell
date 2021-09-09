@@ -1,4 +1,4 @@
-import { ErrorEmitter, Issue, MessageType, ProgressFileComplete, ProgressItem, RunResult } from '@cspell/cspell-types';
+import { ErrorLike, Issue, MessageType, ProgressFileComplete, ProgressItem, RunResult } from '@cspell/cspell-types';
 
 export type CSpellJSONReporterOutput = {
     /**
@@ -16,7 +16,7 @@ export type CSpellJSONReporterOutput = {
     /**
      * CSpell error logs
      */
-    error: Array<{ message: string; error: Parameters<ErrorEmitter>[1] }>;
+    error: Array<{ message: string; error: ErrorLike }>;
     /**
      * CSpell file progress logs
      */
