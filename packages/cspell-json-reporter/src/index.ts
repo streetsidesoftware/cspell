@@ -5,10 +5,11 @@ import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
 import { validateSettings } from './utils/validateSettings';
 import { setToJSONReplacer } from './utils/setToJSONReplacer';
 import { CSpellJSONReporterOutput } from './CSpellJSONReporterOutput';
+import { CSpellJSONReporterSettings } from './CSpellJSONReporterSettings';
 
 const noopReporter = () => undefined;
 
-export function getReporter(settings: unknown): CSpellReporter {
+export function getReporter(settings: unknown | CSpellJSONReporterSettings): CSpellReporter {
     validateSettings(settings);
     const reportData: Omit<CSpellJSONReporterOutput, 'result'> = {
         issues: [],

@@ -14,6 +14,8 @@ describe('validateSettings', () => {
 
     test.each`
         settings
+        ${[]}
+        ${undefined}
         ${{}}
         ${{ outFile: 1 }}
         ${{ outFile: 'foobar', verbose: 123 }}
