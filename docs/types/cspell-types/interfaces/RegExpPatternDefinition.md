@@ -20,7 +20,7 @@ Description of the pattern.
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:642](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L642)
+[settings/CSpellSettingsDef.ts:660](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L660)
 
 ___
 
@@ -33,7 +33,7 @@ It is possible to redefine one of the predefined patterns to override its value.
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:634](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L634)
+[settings/CSpellSettingsDef.ts:652](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L652)
 
 ___
 
@@ -45,4 +45,4 @@ RegExp pattern or array of RegExp patterns
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:638](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L638)
+[settings/CSpellSettingsDef.ts:656](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L656)

@@ -25,7 +25,7 @@ The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all lan
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:440](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L440)
+[settings/CSpellSettingsDef.ts:460](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L460)
 
 ___
 
@@ -37,4 +37,4 @@ The locale filter, matches against the language. This can be a comma separated l
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:442](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L442)
+[settings/CSpellSettingsDef.ts:462](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L462)
