@@ -331,7 +331,7 @@ export function* genCompoundableSuggestions(
         const g = idx ? 1 : 0;
         candidates.add({ e: undefined, n: node, i: 0, w: '', g, r: undefined, a: true });
     });
-    const iterationsBeforePolling = 1000;
+    const iterationsBeforePolling = 100;
     let i = iterationsBeforePolling;
     let maxSize = 0;
     let best: Candidate | undefined;
