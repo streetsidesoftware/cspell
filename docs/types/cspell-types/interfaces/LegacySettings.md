@@ -32,7 +32,7 @@ Show status
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:212](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L212)
+[settings/CSpellSettingsDef.ts:232](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L232)
 
 ___
 
@@ -46,4 +46,4 @@ Delay in ms after a document has changed before checking it for spelling errors.
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:218](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L218)
+[settings/CSpellSettingsDef.ts:238](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L238)

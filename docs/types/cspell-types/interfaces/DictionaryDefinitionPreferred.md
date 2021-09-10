@@ -35,7 +35,7 @@ Optional description
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:332](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L332)
+[settings/CSpellSettingsDef.ts:352](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L352)
 
 ___
 
@@ -58,7 +58,7 @@ Name Format:
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:330](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L330)
+[settings/CSpellSettingsDef.ts:350](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L350)
 
 ___
 
@@ -80,7 +80,7 @@ possible suggestions.
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:346](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L346)
+[settings/CSpellSettingsDef.ts:366](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L366)
 
 ___
 
@@ -92,7 +92,7 @@ Path to the file
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:351](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L351)
+[settings/CSpellSettingsDef.ts:371](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L371)
 
 ___
 
@@ -108,7 +108,7 @@ Replacement pairs
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:334](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L334)
+[settings/CSpellSettingsDef.ts:354](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L354)
 
 ___
 
@@ -124,4 +124,4 @@ Use Compounds
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:336](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L336)
+[settings/CSpellSettingsDef.ts:356](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L356)

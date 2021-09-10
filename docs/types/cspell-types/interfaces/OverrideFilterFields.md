@@ -24,4 +24,4 @@ Glob pattern or patterns to match against
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:232](https://github.com/streetsidesoftware/cspell/blob/2d85fdee/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L232)
+[settings/CSpellSettingsDef.ts:252](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L252)
