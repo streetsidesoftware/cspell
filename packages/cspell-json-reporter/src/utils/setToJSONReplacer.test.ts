@@ -1,4 +1,4 @@
-import { setToJSONReplacer } from "./setToJSONReplacer";
+import { setToJSONReplacer } from './setToJSONReplacer';
 
 describe('setToJSONReplacer', () => {
     it('converts Set to Array', () => {
@@ -13,7 +13,7 @@ describe('setToJSONReplacer', () => {
             foo: 'bar',
             '123': '1',
             obj: { key: 'value' },
-            array: [1, 2, 3], 
+            array: [1, 2, 3],
         };
         expect(JSON.stringify(input, setToJSONReplacer)).toMatchSnapshot();
     });

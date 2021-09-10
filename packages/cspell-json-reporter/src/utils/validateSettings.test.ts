@@ -1,4 +1,4 @@
-import { validateSettings } from "./validateSettings";
+import { validateSettings } from './validateSettings';
 
 describe('validateSettings', () => {
     test.each`
@@ -14,7 +14,7 @@ describe('validateSettings', () => {
 
     test.each`
         settings
-        ${{ }}
+        ${{}}
         ${{ outFile: 1 }}
         ${{ outFile: 'foobar', verbose: 123 }}
         ${{ outFile: 'foobar', debug: [] }}
