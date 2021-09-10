@@ -9,7 +9,7 @@ describe('validateSettings', () => {
         ${{ outFile: 'foobar', progress: true }}
         ${{ outFile: 'foobar', verbose: undefined }}
     `('passes valid settings', ({ settings }) => {
-        expect(validateSettings(settings)).not.toThrow();
+        expect(() => validateSettings(settings)).not.toThrow();
     });
 
     test.each`
