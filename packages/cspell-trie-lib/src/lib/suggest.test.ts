@@ -196,25 +196,63 @@ describe('Validate Suggest', () => {
         expect(suggestions).toEqual(['walked', 'walker', 'talked']);
     });
 
-    // cspell:ignore walkingtree talkingtree
-    test('that forbidden words are not included (collector)', () => {
+    function sr(word: string, cost: number) {
+        return { word, cost };
+    }
+
+    // cspell:ignore walking* *tree talking* *stick running* *pod *trick
+    test.each`
+        word              | ignoreCase   | numSuggestions | changeLimit  | expected
+        ${'Runningpod'}   | ${false}     | ${4}           | ${1}         | ${[sr('RunningPod', 1)]}
+        ${'runningtree'}  | ${undefined} | ${2}           | ${undefined} | ${[sr('runningtree', 0), sr('Runningtree', 1)]}
+        ${'Runningpod'}   | ${undefined} | ${5}           | ${1}         | ${[sr('Runningpod', 0), sr('runningpod', 1), sr('RunningPod', 1), sr('runningPod', 2)]}
+        ${'runningpod'}   | ${undefined} | ${2}           | ${undefined} | ${[sr('runningpod', 0), sr('runningPod', 1)]}
+        ${'walkingstick'} | ${undefined} | ${2}           | ${undefined} | ${[sr('walkingstick', 0), sr('talkingstick', 99)]}
+        ${'walkingtree'}  | ${undefined} | ${2}           | ${undefined} | ${[sr('talkingtree', 99), sr('walkingstick', 359)]}
+        ${'running'}      | ${undefined} | ${2}           | ${undefined} | ${[sr('running', 0), sr('Running', 1)]}
+    `('test suggestion results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
         const trie = parseDictionary(`
             walk
+            Running*
             walking*
             *stick
             talking*
             *tree
+            +Pod
             !walkingtree
         `);
-        expect(trie.suggest('walkingstick', numSugs(1))).toEqual(['walkingstick']);
-        expect(trie.suggest('walkingtree', numSugs(1))).toEqual([]);
-        expect(trie.suggest('walking*', numSugs(1))).toEqual(['walking']);
-        const collector = suggestionCollector('walkingtree', sugOptsMaxNum(2));
+        const collector = suggestionCollector(word, sugOpts({ numSuggestions, changeLimit, ignoreCase }));
         trie.genSuggestions(collector);
-        expect(collector.suggestions).toEqual([
-            { word: 'talkingtree', cost: 99 },
-            { word: 'walkingstick', cost: 359 },
-        ]);
+        const r = collector.suggestions;
+        expect(r).toEqual(expected);
+    });
+
+    test.each`
+        word              | ignoreCase   | numSuggestions | changeLimit | expected
+        ${'runningtree'}  | ${undefined} | ${2}           | ${3}        | ${[sr('runningtree', 0), sr('Runningtree', 1)]}
+        ${'Runningpod'}   | ${undefined} | ${4}           | ${1}        | ${[sr('Runningpod', 0), sr('runningpod', 1), sr('RunningPod', 1), sr('runningPod', 2)]}
+        ${'Runningpod'}   | ${false}     | ${4}           | ${1}        | ${[sr('RunningPod', 1)]}
+        ${'runningpod'}   | ${undefined} | ${4}           | ${1}        | ${[sr('runningpod', 0), sr('runningPod', 1), sr('Runningpod', 1), sr('RunningPod', 2)]}
+        ${'runningpod'}   | ${false}     | ${4}           | ${1}        | ${[sr('RunningPod', 2)]}
+        ${'walkingstick'} | ${undefined} | ${2}           | ${3}        | ${[sr('walkingstick', 0), sr('talkingstick', 99)]}
+        ${'walkingtree'}  | ${undefined} | ${2}           | ${4}        | ${[sr('talkingtree', 99), sr('walkingstick', 359)]}
+        ${'talkingtrick'} | ${undefined} | ${2}           | ${4}        | ${[sr('talkingstick', 183), sr('talkingtree', 268)]}
+        ${'running'}      | ${undefined} | ${2}           | ${3}        | ${[sr('running', 0), sr('Running', 1)]}
+        ${'free'}         | ${undefined} | ${2}           | ${2}        | ${[sr('tree', 99)]}
+        ${'stock'}        | ${undefined} | ${2}           | ${2}        | ${[sr('stick', 97)]}
+    `('test suggestWithCost results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
+        const trie = parseDictionary(`
+            walk
+            Running*
+            walking*
+            *stick
+            talking*
+            *tree
+            +Pod
+            !walkingtree
+        `);
+        const r = trie.suggestWithCost(word, { numSuggestions, ignoreCase, changeLimit });
+        expect(r).toEqual(expected);
     });
 });
 
@@ -225,7 +263,7 @@ function numSugs(numSuggestions: number): SuggestionOptions {
 function sugOpts(opts: Partial<SuggestionCollectorOptions>): SuggestionCollectorOptions {
     return {
         ...defaultOptions,
-        ...opts,
+        ...clean(opts),
     };
 }
 
@@ -282,3 +320,13 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
+
+function clean<T>(t: Partial<T>): Partial<T> {
+    const r: Partial<T> = {};
+    for (const k of Object.keys(t) as (keyof T)[]) {
+        if (t[k] !== undefined) {
+            r[k] = t[k];
+        }
+    }
+    return r;
+}

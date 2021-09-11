@@ -16,12 +16,12 @@ const defaultOptions: SuggestionCollectorOptions = {
 const stopHere = true;
 
 describe('Validate Suggest', () => {
-    const maxNumChanges = 3;
+    const changeLimit = 3;
 
     // cspell:ignore joyfullwalk
     test('Tests suggestions for valid word talks', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'talks', { maxNumChanges });
+        const results = Sug.suggest(trie.root, 'talks', { changeLimit: changeLimit });
         expect(results).toEqual([
             { cost: 0, word: 'talks' },
             { cost: 100, word: 'talk' },
@@ -34,7 +34,7 @@ describe('Validate Suggest', () => {
 
     test('Tests suggestions for valid word', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'talks', { maxNumChanges });
+        const results = Sug.suggest(trie.root, 'talks', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(expect.arrayContaining(['talks']));
         expect(suggestions).toEqual(expect.arrayContaining(['talk']));
@@ -66,14 +66,14 @@ describe('Validate Suggest', () => {
     // cspell:ignore juornals
     test('Tests suggestions for `juornals` (reduced cost for swap)', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'juornals', { maxNumChanges });
+        const results = Sug.suggest(trie.root, 'juornals', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['journals', 'journal', 'journalism', 'journalist']);
     });
 
     test('Tests suggestions for joyfull', () => {
         const trie = Trie.create(sampleWords);
-        const results = Sug.suggest(trie.root, 'joyfull', { maxNumChanges });
+        const results = Sug.suggest(trie.root, 'joyfull', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
         expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
     });
@@ -107,7 +107,7 @@ describe('Validate Suggest', () => {
         expect(suggestions).toEqual(expect.not.arrayContaining(['joyfully']));
         // We get 4 because they are tied
         expect(suggestions).toEqual(['joyful', 'joyfuller', 'joyous', 'joyfullest']);
-        expect(collector.maxNumChanges).toBeLessThanOrEqual(300);
+        expect(collector.changeLimit).toBeLessThanOrEqual(300);
     });
 
     test('Tests genSuggestions wanting 0', () => {
@@ -199,7 +199,7 @@ describe('Validate Suggest', () => {
         const suggestions = collector.suggestions.map((s) => s.word);
         // expect(suggestions).toEqual(['joyful+walk', 'joyful+talk', 'joyful+walks', 'joyfully+walk']);
         expect(suggestions).toEqual(['joyful+walk', 'joyful+talk', 'joyful+walks']);
-        expect(collector.maxNumChanges).toBeLessThan(300);
+        expect(collector.changeLimit).toBeLessThan(300);
     });
 
     // cspell:ignore walkingtree talkingtree
@@ -232,11 +232,11 @@ function sugOptsMaxNum(maxNumSuggestions: number): SuggestionCollectorOptions {
 }
 
 function sugGenOptsFromCollector(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod) {
-    const { ignoreCase, maxNumChanges } = collector;
+    const { ignoreCase, changeLimit } = collector;
     const ops: GenSuggestionOptionsStrict = {
         compoundMethod,
         ignoreCase,
-        maxNumChanges,
+        changeLimit,
     };
     return ops;
 }

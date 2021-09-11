@@ -219,11 +219,11 @@ describe('Validate English Suggestions', () => {
 });
 
 function sugGenOptsFromCollector(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod) {
-    const { ignoreCase, maxNumChanges } = collector;
+    const { ignoreCase, changeLimit } = collector;
     const ops: GenSuggestionOptionsStrict = {
         compoundMethod,
         ignoreCase,
-        maxNumChanges,
+        changeLimit,
     };
     return ops;
 }

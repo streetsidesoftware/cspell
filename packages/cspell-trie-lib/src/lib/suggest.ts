@@ -22,10 +22,11 @@ export function suggest(
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
-        changeLimit: opts.maxNumChanges,
+        changeLimit: opts.changeLimit,
         includeTies: opts.allowTies,
         ignoreCase: opts.ignoreCase,
         timeout: opts.timeout,
+        filter: opts.filter,
     });
     collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;
@@ -53,7 +54,7 @@ export function* genCompoundableSuggestions(
     word: string,
     options: GenSuggestionOptions = {}
 ): SuggestionGenerator {
-    const { compoundMethod = CompoundWordsMethod.NONE, maxNumChanges } = createSuggestionOptions(options);
+    const { compoundMethod = CompoundWordsMethod.NONE, changeLimit, ignoreCase } = createSuggestionOptions(options);
     type History = SuggestionResult;
 
     interface HistoryTag {
@@ -76,7 +77,7 @@ export function* genCompoundableSuggestions(
     };
 
     let stopNow = false;
-    let costLimit: MaxCost = bc * Math.min(word.length * maxCostScale, maxNumChanges);
+    let costLimit: MaxCost = bc * Math.min(word.length * maxCostScale, changeLimit);
 
     function updateCostLimit(maxCost: number | symbol | undefined) {
         switch (typeof maxCost) {
@@ -99,7 +100,7 @@ export function* genCompoundableSuggestions(
     stack[0] = { a, b };
 
     const hint = word;
-    const iWalk = hintedWalker(root, compoundMethod, hint);
+    const iWalk = hintedWalker(root, ignoreCase, hint, compoundMethod);
     let goDeeper = true;
     for (let r = iWalk.next({ goDeeper }); !stopNow && !r.done; r = iWalk.next({ goDeeper })) {
         const { text, node, depth } = r.value;

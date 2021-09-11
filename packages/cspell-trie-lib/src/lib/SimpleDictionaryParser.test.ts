@@ -75,9 +75,34 @@ describe('Validate SimpleDictionaryParser', () => {
         expect(result).toEqual(words);
     });
 
-    function toL(a: string): string {
-        return a.toLowerCase();
-    }
+    // cspell:ignore begin* *middle* *end
+    const bme1 = [
+        'beginmiddleend',
+        'beginmiddleEnd',
+        'beginMiddleend',
+        'Beginmiddleend',
+        'beginMiddleEnd',
+        'BeginmiddleEnd',
+        'BeginMiddleend',
+        'BeginMiddleEnd',
+        'beginend',
+        'beginEnd',
+        'Beginend',
+    ];
+
+    const bme2 = [
+        'BeginmiddleEnd',
+        'beginmiddleEnd',
+        'Beginmiddleend',
+        'BeginMiddleEnd',
+        'beginmiddleend',
+        'beginMiddleEnd',
+        'BeginMiddleend',
+        'beginMiddleend',
+        'Beginend',
+        'beginend',
+        'BeginEnd',
+    ];
 
     // cspell:ignore Midle beginmidleend gescháft cafë resumé
     test.each`
@@ -86,8 +111,8 @@ describe('Validate SimpleDictionaryParser', () => {
         ${'begin'}         | ${false}   | ${false} | ${['Begin']}
         ${'BeginEn'}       | ${false}   | ${false} | ${['BeginEnd', 'Begin']}
         ${'BeginMidleEnd'} | ${false}   | ${false} | ${['BeginMiddleEnd', 'BeginEnd']}
-        ${'beginmidleend'} | ${true}    | ${false} | ${[toL('BeginMiddleEnd'), 'BeginMiddleEnd', toL('BeginEnd'), 'BeginEnd']}
-        ${'BeginmidleEnd'} | ${true}    | ${false} | ${['BeginMiddleEnd', toL('BeginMiddleEnd'), toL('BeginEnd'), 'BeginEnd']}
+        ${'beginmidleend'} | ${true}    | ${false} | ${bme1}
+        ${'BeginmidleEnd'} | ${true}    | ${false} | ${bme2}
         ${'cafe'}          | ${false}   | ${false} | ${['Café']}
         ${'cafe'}          | ${true}    | ${true}  | ${['cafe', 'café', 'Café']}
         ${'cafë'}          | ${true}    | ${false} | ${['cafe', 'café', 'Café']}

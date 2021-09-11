@@ -75,7 +75,7 @@ const defaultMaxNumberSuggestions = 10;
 const baseCost = 100;
 const swapCost = 75;
 const postSwapCost = swapCost - baseCost;
-const maxNumChanges = 5;
+const MAX_NUM_CHANGES = 5;
 
 function legacySuggest(
     root: TrieNode,
@@ -89,7 +89,7 @@ function legacySuggest(
     const x = ' ' + word;
     const mx = x.length - 1;
 
-    let costLimit = Math.min((bc * word.length) / 2, bc * maxNumChanges);
+    let costLimit = Math.min((bc * word.length) / 2, bc * MAX_NUM_CHANGES);
 
     function comp(a: SuggestionResult, b: SuggestionResult): number {
         return a.cost - b.cost || a.word.length - b.word.length || (a.word < b.word ? -1 : 1);
