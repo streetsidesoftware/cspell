@@ -4,7 +4,7 @@ import { mkdirp } from 'fs-extra';
 import * as path from 'path';
 import * as Trie from 'cspell-trie-lib';
 import { Sequence, genSequence } from 'gensequence';
-import { iterableToStream } from 'iterable-to-stream';
+import * as stream from 'stream';
 import * as zlib from 'zlib';
 
 const UTF8: BufferEncoding = 'utf8';
@@ -41,7 +41,7 @@ export function run(program: commander.Command, argv: string[]): Promise<command
             const trie = Trie.buildTrie(wordsRx);
 
             notify('Export Trie');
-            const serialStream = iterableToStream(Trie.serializeTrie(trie.root, base - 0 || 32));
+            const serialStream = stream.Readable.from(Trie.serializeTrie(trie.root, base - 0 || 32));
             const outputStream = await pOutputStream;
             return new Promise((resolve) => {
                 serialStream.pipe(outputStream).on('finish', () => resolve());
@@ -61,7 +61,7 @@ export function run(program: commander.Command, argv: string[]): Promise<command
             const words: Sequence<string> = Trie.iteratorTrieWords(root);
             const outputStream = await pOutputStream;
             return new Promise((resolve) => {
-                iterableToStream(words.map((a) => a + '\n'))
+                stream.Readable.from(words.map((a) => a + '\n'))
                     .pipe(outputStream)
                     .on('finish', () => resolve());
             });

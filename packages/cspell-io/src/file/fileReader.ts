@@ -1,7 +1,6 @@
 // cSpell:ignore curr
 // cSpell:words zlib iconv
 import * as fs from 'fs';
-import * as iconv from 'iconv-lite';
 import * as zlib from 'zlib';
 import * as readline from 'readline';
 
@@ -32,15 +31,15 @@ export function lineReaderAsync(filename: string, encoding: BufferEncoding = def
     return streamFileLineByLineAsync(filename, encoding);
 }
 
-function prepareFileStream(filename: string, encoding: string, fnError: (e: Error) => void) {
+function prepareFileStream(filename: string, encoding: BufferEncoding, fnError: (e: Error) => void) {
     const pipes: NodeJS.ReadWriteStream[] = [];
     if (filename.match(/\.gz$/i)) {
         pipes.push(zlib.createGunzip());
     }
-    pipes.push(iconv.decodeStream(encoding));
     const fileStream = fs.createReadStream(filename);
     fileStream.on('error', fnError);
     const stream = pipes.reduce<NodeJS.ReadableStream>((s, p) => s.pipe(p).on('error', fnError), fileStream);
+    stream.setEncoding(encoding);
     return stream;
 }
 
