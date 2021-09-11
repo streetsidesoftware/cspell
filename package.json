@@ -20,7 +20,7 @@
     "install": "lerna bootstrap --ci",
     "ibt": "npm install && npm run build && npm test",
     "bootstrap": "lerna bootstrap --no-ci",
-    "lint": "eslint . --fix && prettier -w \"**/*.{md,yaml,yml,json}\"",
+    "lint": "eslint . --fix --cache && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "lint-docs": "prettier -w \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
     "lint-docs-ci": "prettier -c \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
