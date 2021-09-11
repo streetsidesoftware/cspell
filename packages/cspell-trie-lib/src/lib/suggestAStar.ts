@@ -10,7 +10,7 @@ export function* genCompoundableSuggestions(
     word: string,
     options: GenSuggestionOptionsStrict
 ): SuggestionGenerator {
-    const { compoundMethod, ignoreCase, maxNumChanges } = options;
+    const { compoundMethod, ignoreCase, changeLimit } = options;
     const len = word.length;
 
     const nodes = determineInitialNodes(root, ignoreCase);
@@ -39,7 +39,7 @@ export function* genCompoundableSuggestions(
     const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
     const compoundIndicator = root.compoundCharacter;
 
-    let costLimit = bc * Math.min(len * maxCostScale, maxNumChanges);
+    let costLimit = bc * Math.min(len * maxCostScale, changeLimit);
     let stopNow = false;
 
     const candidates = new PairingHeap(compare);
@@ -475,7 +475,7 @@ export function suggest(root: TrieRoot | TrieRoot[], word: string, options: Sugg
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
-        changeLimit: opts.maxNumChanges,
+        changeLimit: opts.changeLimit,
         includeTies: true,
         ignoreCase: opts.ignoreCase,
         timeout: opts.timeout,

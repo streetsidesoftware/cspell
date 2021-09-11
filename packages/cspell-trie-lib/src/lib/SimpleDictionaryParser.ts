@@ -18,17 +18,19 @@ export interface ParseDictionaryOptions {
     caseInsensitivePrefix: string;
     /**
      * Start of a single-line comment.
+     * @default "#"
      */
     commentCharacter: string;
 
     /**
-     * if word starts with prefix, do not strip case or accents.
-     * Prefix is not stored.
+     * If word starts with prefix, do not strip case or accents.
+     * @default false;
      */
     keepExactPrefix: string;
 
     /**
-     * Tell the parser to NOT automatically strip case and accents.
+     * Tell the parser to automatically strip case and accents.
+     * @default true
      */
     stripCaseAndAccents: boolean;
 }

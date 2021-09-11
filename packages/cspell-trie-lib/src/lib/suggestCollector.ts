@@ -3,21 +3,21 @@ import { JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const defaultMaxNumberSuggestions = 10;
 
-const baseCost = 100;
-const maxNumChanges = 5;
-const maxCostScale = 0.5;
+const BASE_COST = 100;
+const MAX_NUM_CHANGES = 5;
+const MAX_COST_SCALE = 0.5;
 // max allowed cost scale should be a bit over 50% to allow for suggestions to short words, but not too high to have too many suggestions.
-const maxAllowedCostScale = 1.03 * maxCostScale;
+const MAX_ALLOWED_COST_SCALE = 1.03 * MAX_COST_SCALE;
 
 const collator = new Intl.Collator();
 
 const regexSeparator = new RegExp(`[${regexQuote(JOIN_SEPARATOR + WORD_SEPARATOR)}]`, 'g');
 
 const wordLengthCost = [0, 50, 25, 5, 0];
-const extraWordsCost = 5;
+const EXTRA_WORD_COST = 5;
 
 /** time in ms */
-const defaultCollectorTimeout = 1000;
+const DEFAULT_COLLECTOR_TIMEOUT = 1000;
 
 export type Cost = number;
 export type MaxCost = Cost;
@@ -58,6 +58,8 @@ export function compSuggestionResults(a: SuggestionResult, b: SuggestionResult):
     return a.cost - b.cost || a.word.length - b.word.length || collator.compare(a.word, b.word);
 }
 
+export type FilterWordFn = (word: string, cost: number) => boolean;
+
 export interface SuggestionCollector {
     /**
      * Collection suggestions from a SuggestionIterator
@@ -69,10 +71,10 @@ export interface SuggestionCollector {
      * r = yield(suggestion);
      * if (r === collector.symbolStopProcessing) // ...stop generating suggestions.
      */
-    collect: (src: SuggestionGenerator, timeout?: number) => void;
+    collect: (src: SuggestionGenerator, timeout?: number, filter?: FilterWordFn) => void;
     add: (suggestion: SuggestionResult) => SuggestionCollector;
     readonly suggestions: SuggestionResult[];
-    readonly maxNumChanges: number;
+    readonly changeLimit: number;
     readonly maxCost: number;
     readonly word: string;
     readonly maxNumSuggestions: number;
@@ -96,7 +98,7 @@ export interface SuggestionCollectorOptions {
      * I.E. to remove forbidden terms.
      * @default () => true
      */
-    filter?: (word: string, cost: number) => boolean;
+    filter?: FilterWordFn;
 
     /**
      * The number of letters that can be changed when looking for a match
@@ -126,23 +128,23 @@ export interface SuggestionCollectorOptions {
 export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = {
     numSuggestions: defaultMaxNumberSuggestions,
     filter: () => true,
-    changeLimit: maxNumChanges,
+    changeLimit: MAX_NUM_CHANGES,
     includeTies: true,
     ignoreCase: true,
-    timeout: defaultCollectorTimeout,
+    timeout: DEFAULT_COLLECTOR_TIMEOUT,
 };
 
 export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector {
     const {
         filter = () => true,
-        changeLimit = maxNumChanges,
+        changeLimit = MAX_NUM_CHANGES,
         includeTies = false,
         ignoreCase = true,
-        timeout = defaultCollectorTimeout,
+        timeout = DEFAULT_COLLECTOR_TIMEOUT,
     } = options;
     const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const sugs = new Map<string, SuggestionResult>();
-    let maxCost: number = baseCost * Math.min(wordToMatch.length * maxAllowedCostScale, changeLimit);
+    let maxCost: number = BASE_COST * Math.min(wordToMatch.length * MAX_ALLOWED_COST_SCALE, changeLimit);
 
     let timeRemaining = timeout;
 
@@ -166,7 +168,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         const words = sug.word.split(regexSeparator);
         const extraCost =
             words.map((w) => wordLengthCost[w.length] || 0).reduce((a, b) => a + b, 0) +
-            (words.length - 1) * extraWordsCost;
+            (words.length - 1) * EXTRA_WORD_COST;
         return { word: sug.word, cost: sug.cost + extraCost };
     }
 
@@ -195,7 +197,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
      * @param src - the SuggestionIterator used to generate suggestions.
      * @param timeout - the amount of time in milliseconds to allow for suggestions.
      */
-    function collect(src: SuggestionGenerator, timeout?: number) {
+    function collect(src: SuggestionGenerator, timeout?: number, filter?: FilterWordFn) {
         let stop: false | symbol = false;
         timeout = timeout ?? timeRemaining;
         timeout = Math.min(timeout, timeRemaining);
@@ -211,7 +213,9 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
             const { value } = ir;
             if (!value) continue;
             if (isSuggestionResult(value)) {
-                collectSuggestion(value);
+                if (!filter || filter(value.word, value.cost)) {
+                    collectSuggestion(value);
+                }
                 continue;
             }
             handleProgress(value);
@@ -246,7 +250,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         get maxNumSuggestions() {
             return numSuggestions;
         },
-        get maxNumChanges() {
+        get changeLimit() {
             return changeLimit;
         },
         includesTies: includeTies,

@@ -6,15 +6,17 @@ export interface GenSuggestionOptionsStrict {
      * @default CompoundWordsMethod.NONE
      */
     compoundMethod?: CompoundWordsMethod;
+
     /**
      * ignore case when searching.
      */
     ignoreCase: boolean;
+
     /**
      * Maximum number of "edits" allowed.
      * 3 is a good number. Above 5 can be very slow.
      */
-    maxNumChanges: number;
+    changeLimit: number;
 }
 
 export type GenSuggestionOptions = Partial<GenSuggestionOptionsStrict>;
@@ -24,15 +26,23 @@ export interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
      * Maximum number of suggestions to make.
      */
     numSuggestions: number;
+
     /**
      * Allow ties when making suggestions.
      * if `true` it is possible to have more than `numSuggestions`.
      */
     allowTies: boolean;
+
     /**
      * Time alloted in milliseconds to generate suggestions.
      */
     timeout: number;
+
+    /**
+     * Optional filter function.
+     * return true to keep the candidate.
+     */
+    filter?: (word: string, cost: number) => boolean;
 }
 
 export type SuggestionOptions = Partial<SuggestionOptionsStrict>;
@@ -40,7 +50,7 @@ export type SuggestionOptions = Partial<SuggestionOptionsStrict>;
 export const defaultGenSuggestionOptions: GenSuggestionOptionsStrict = {
     compoundMethod: CompoundWordsMethod.NONE,
     ignoreCase: true,
-    maxNumChanges: 5,
+    changeLimit: 5,
 };
 
 export const defaultSuggestionOptions: SuggestionOptionsStrict = {
@@ -50,6 +60,28 @@ export const defaultSuggestionOptions: SuggestionOptionsStrict = {
     timeout: 5000,
 };
 
+type KeyMapOfGenSuggestionOptionsStrict = {
+    [K in keyof GenSuggestionOptionsStrict]: K;
+};
+
+type KeyMapOfSuggestionOptionsStrict = {
+    [K in keyof SuggestionOptionsStrict]: K;
+};
+
+const keyMapOfGenSuggestionOptionsStrict: KeyMapOfGenSuggestionOptionsStrict = {
+    changeLimit: 'changeLimit',
+    compoundMethod: 'compoundMethod',
+    ignoreCase: 'ignoreCase',
+} as const;
+
+const keyMapOfSuggestionOptionsStrict: KeyMapOfSuggestionOptionsStrict = {
+    ...keyMapOfGenSuggestionOptionsStrict,
+    allowTies: 'allowTies',
+    filter: 'filter',
+    numSuggestions: 'numSuggestions',
+    timeout: 'timeout',
+};
+
 /**
  * Create suggestion options using composition.
  * @param opts - partial options.
@@ -57,7 +89,7 @@ export const defaultSuggestionOptions: SuggestionOptionsStrict = {
  */
 export function createSuggestionOptions(...opts: SuggestionOptions[]): SuggestionOptionsStrict {
     const options = { ...defaultSuggestionOptions };
-    const keys = Object.keys(defaultSuggestionOptions) as (keyof SuggestionOptions)[];
+    const keys = Object.keys(keyMapOfSuggestionOptionsStrict) as (keyof SuggestionOptions)[];
     for (const opt of opts) {
         for (const key of keys) {
             assign(options, opt, key);
