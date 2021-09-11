@@ -225,3 +225,7 @@ export const normalizeWordForCaseInsensitive = (text: string): string[] => {
     const t = text.toLowerCase();
     return [t, t.normalize('NFD').replace(/\p{M}/gu, '')];
 };
+
+export function isDefined<T>(t: T | undefined): t is T {
+    return t !== undefined;
+}
