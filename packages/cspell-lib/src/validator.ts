@@ -35,7 +35,7 @@ export async function validateText(
             .suggest(t.text, {
                 numSuggestions: options.numSuggestions,
                 compoundMethod: CompoundWordsMethod.NONE,
-                includeTies: true,
+                includeTies: false,
                 ignoreCase: !(settings.caseSensitive ?? false),
                 timeout: settings.suggestionsTimeout,
                 numChanges: settings.suggestionNumChanges,

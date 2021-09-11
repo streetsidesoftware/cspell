@@ -30,6 +30,7 @@ export interface SuggestOptions {
     /**
      * If multiple suggestions have the same edit / change "cost", then included them even if
      * it causes more than `numSuggestions` to be returned.
+     * @default false
      */
     includeTies?: boolean;
     /**
