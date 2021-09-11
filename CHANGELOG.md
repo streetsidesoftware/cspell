@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.1-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.9.0...v5.9.1-alpha.0) (2021-09-11)
+
+
+### Bug Fixes
+
+* Change the suggestions to not include ties by default. ([#1678](https://github.com/streetsidesoftware/cspell/issues/1678)) ([0efbd58](https://github.com/streetsidesoftware/cspell/commit/0efbd5847ca433799c81b8cc4a227da4925d4dbf))
+* drop need for iconv-lite and iterable-to-stream ([#1677](https://github.com/streetsidesoftware/cspell/issues/1677)) ([c7ffcc7](https://github.com/streetsidesoftware/cspell/commit/c7ffcc786ed360fc1a59f84915ea7d204d51d3a5))
+* Fix suggestions when working with case aware dictionaries. ([#1674](https://github.com/streetsidesoftware/cspell/issues/1674)) ([0ba056d](https://github.com/streetsidesoftware/cspell/commit/0ba056d55f778e0b732137d56a9b7c555e9ae966))
+* Fix version number reference ([#1640](https://github.com/streetsidesoftware/cspell/issues/1640)) ([1c18b36](https://github.com/streetsidesoftware/cspell/commit/1c18b366382d6044e633e41bda99f3d180e36d3c)), closes [#1638](https://github.com/streetsidesoftware/cspell/issues/1638)
+* Perf - Try improving suggestion performance. ([#1639](https://github.com/streetsidesoftware/cspell/issues/1639)) ([aad4352](https://github.com/streetsidesoftware/cspell/commit/aad43524f502507f87fb6687d30d9684f2253c32))
+* sample more often to make sure the suggest stops on time. ([#1669](https://github.com/streetsidesoftware/cspell/issues/1669)) ([2bb6c82](https://github.com/streetsidesoftware/cspell/commit/2bb6c82abed296313fe551fc9767ea12f0f0f359))
+* Support Suggestion timeouts ([#1668](https://github.com/streetsidesoftware/cspell/issues/1668)) ([1698aaf](https://github.com/streetsidesoftware/cspell/commit/1698aaf25a07a5f4fb1eb0de46b56a8cae49e2c0))
+* Upgrade British English dictionary to v2. ([#1633](https://github.com/streetsidesoftware/cspell/issues/1633)) ([907d3eb](https://github.com/streetsidesoftware/cspell/commit/907d3eb76bf9b065a56565141d07f03970d6dda4))
+
+
+
+
+
 # [5.9.0](https://github.com/streetsidesoftware/cspell/compare/v5.9.0-alpha.0...v5.9.0) (2021-08-31)
 
 **Note:** Version bump only for package cspell-monorepo
