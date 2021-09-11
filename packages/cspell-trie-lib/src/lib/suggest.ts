@@ -23,7 +23,7 @@ export function suggest(
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
         changeLimit: opts.changeLimit,
-        includeTies: opts.allowTies,
+        includeTies: opts.includeTies,
         ignoreCase: opts.ignoreCase,
         timeout: opts.timeout,
         filter: opts.filter,

@@ -31,7 +31,7 @@ export interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
      * Allow ties when making suggestions.
      * if `true` it is possible to have more than `numSuggestions`.
      */
-    allowTies: boolean;
+    includeTies: boolean;
 
     /**
      * Time alloted in milliseconds to generate suggestions.
@@ -56,7 +56,7 @@ export const defaultGenSuggestionOptions: GenSuggestionOptionsStrict = {
 export const defaultSuggestionOptions: SuggestionOptionsStrict = {
     ...defaultGenSuggestionOptions,
     numSuggestions: 8,
-    allowTies: true,
+    includeTies: true,
     timeout: 5000,
 };
 
@@ -76,7 +76,7 @@ const keyMapOfGenSuggestionOptionsStrict: KeyMapOfGenSuggestionOptionsStrict = {
 
 const keyMapOfSuggestionOptionsStrict: KeyMapOfSuggestionOptionsStrict = {
     ...keyMapOfGenSuggestionOptionsStrict,
-    allowTies: 'allowTies',
+    includeTies: 'includeTies',
     filter: 'filter',
     numSuggestions: 'numSuggestions',
     timeout: 'timeout',

@@ -476,7 +476,7 @@ export function suggest(root: TrieRoot | TrieRoot[], word: string, options: Sugg
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
         changeLimit: opts.changeLimit,
-        includeTies: true,
+        includeTies: opts.includeTies,
         ignoreCase: opts.ignoreCase,
         timeout: opts.timeout,
     });

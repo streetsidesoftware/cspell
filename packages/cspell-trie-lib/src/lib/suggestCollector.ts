@@ -129,7 +129,7 @@ export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = {
     numSuggestions: defaultMaxNumberSuggestions,
     filter: () => true,
     changeLimit: MAX_NUM_CHANGES,
-    includeTies: true,
+    includeTies: false,
     ignoreCase: true,
     timeout: DEFAULT_COLLECTOR_TIMEOUT,
 };
