@@ -1,5 +1,6 @@
 import { getReporter } from '.';
 import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
+import * as path from 'path';
 
 function runReporter(reporter: CSpellReporter): void {
     reporter.debug('foo');
@@ -40,9 +41,7 @@ function runReporter(reporter: CSpellReporter): void {
     });
 }
 
-jest.mock('fs/promises', () => ({
-    writeFile: jest.fn().mockResolvedValue(undefined),
-}));
+jest.mock('fs/promises');
 import * as fs from 'fs/promises';
 
 describe('getReporter', () => {
@@ -53,12 +52,21 @@ describe('getReporter', () => {
     it('saves json to file', () => {
         const reporter = getReporter({ outFile: 'out.json' });
         runReporter(reporter);
-        expect((fs.writeFile as jest.Mock).mock.calls).toMatchSnapshot();
+        expect(fs.writeFile).toBeCalledTimes(1);
+        
+        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
+        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
     });
 
     it('saves additional data', () => {
         const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
         runReporter(reporter);
-        expect((fs.writeFile as jest.Mock).mock.calls).toMatchSnapshot();
+        expect(fs.writeFile).toBeCalledTimes(1);
+        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
+        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 });

@@ -1,55 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`getReporter saves additional data 1`] = `
-Array [
-  Array [
-    "/Users/alex-gusev/cspell/packages/cspell-json-reporter/out.json",
-    "{
-    \\"issues\\": [
-        {
-            \\"text\\": \\"fulll\\",
-            \\"offset\\": 13,
-            \\"line\\": {
-                \\"text\\": \\"This text is fulll of errrorrrs.\\",
-                \\"offset\\": 0
-            },
-            \\"row\\": 1,
-            \\"col\\": 14,
-            \\"doc\\": \\"This text is fulll of errrorrrs.\\",
-            \\"uri\\": \\"text.txt\\",
-            \\"context\\": {
-                \\"text\\": \\"This text is fulll of errrorrrs.\\",
-                \\"offset\\": 0
-            }
-        }
-    ],
-    \\"info\\": [
-        {
-            \\"message\\": \\"some warnings\\",
-            \\"msgType\\": \\"Warning\\"
-        }
-    ],
-    \\"debug\\": [],
-    \\"error\\": [
-        {
-            \\"message\\": \\"something went wrong\\",
-            \\"error\\": {}
-        }
-    ],
-    \\"progress\\": [],
-    \\"result\\": {
-        \\"files\\": 1,
-        \\"filesWithIssues\\": [
-            \\"text.txt\\"
-        ],
-        \\"issues\\": 2,
-        \\"errors\\": 1
-    }
-}",
-  ],
-  Array [
-    "/Users/alex-gusev/cspell/packages/cspell-json-reporter/out.json",
-    "{
+"{
     \\"issues\\": [
         {
             \\"text\\": \\"fulll\\",
@@ -115,16 +67,11 @@ Array [
         \\"issues\\": 2,
         \\"errors\\": 1
     }
-}",
-  ],
-]
+}"
 `;
 
 exports[`getReporter saves json to file 1`] = `
-Array [
-  Array [
-    "/Users/alex-gusev/cspell/packages/cspell-json-reporter/out.json",
-    "{
+"{
     \\"issues\\": [
         {
             \\"text\\": \\"fulll\\",
@@ -165,9 +112,7 @@ Array [
         \\"issues\\": 2,
         \\"errors\\": 1
     }
-}",
-  ],
-]
+}"
 `;
 
 exports[`getReporter throws for invalid config 1`] = `"cspell-json-reporter settings.outFile must be a string"`;
