@@ -12,6 +12,7 @@ function runReporter(reporter: CSpellReporter): void {
     reporter.info('some warnings', MessageTypes.Warning);
     reporter.info('some debug logs', MessageTypes.Debug);
 
+    // cSpell:disable
     reporter.issue({
         text: 'fulll',
         offset: 13,
@@ -22,6 +23,7 @@ function runReporter(reporter: CSpellReporter): void {
         uri: 'text.txt',
         context: { text: 'This text is fulll of errrorrrs.', offset: 0 },
     });
+    // cSpell:enable
 
     reporter.progress({
         type: 'ProgressFileComplete',

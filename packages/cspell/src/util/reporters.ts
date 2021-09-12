@@ -1,6 +1,5 @@
-import type { CSpellReporterModule, FileSettings, ReporterSettings } from 'cspell-lib';
-import { CSpellReporter } from '@cspell/cspell-types';
-import { ApplicationError } from './errors';
+import { CSpellReporter, RunResult, CSpellReporterModule, FileSettings, ReporterSettings } from '@cspell/cspell-types';
+import { ApplicationError, toError } from './errors';
 
 function mergeEmitters<T extends keyof Omit<CSpellReporter, 'result'>>(
     reporters: ReadonlyArray<CSpellReporter>,
@@ -8,15 +7,13 @@ function mergeEmitters<T extends keyof Omit<CSpellReporter, 'result'>>(
 ): CSpellReporter[T] {
     return async (...args: unknown[]) => {
         // eslint-disable-next-line prefer-spread
-        reporters.forEach((reporter) => reporter[emitterName].apply(reporter, args));
+        reporters.forEach((reporter: any) => reporter[emitterName].apply(reporter, args));
     };
 }
 
 function mergeResultEmitters(reporters: ReadonlyArray<CSpellReporter>): CSpellReporter['result'] {
-    return async (...args: unknown[]) => {
-        // eslint-disable-next-line prefer-spread
-        const results = reporters.map((reporter) => reporter.result.apply(reporter, args));
-        await Promise.all(results);
+    return async (result: RunResult) => {
+        await Promise.all(reporters.map((reporter) => reporter.result(result)));
     };
 }
 
@@ -44,8 +41,8 @@ function loadReporter(reporterSettings: ReporterSettings): CSpellReporter | unde
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const { getReporter }: CSpellReporterModule = require(moduleName);
         return getReporter(settings);
-    } catch (e) {
-        throw new ApplicationError(`Failed to load reporter ${moduleName}: ${e.message}`);
+    } catch (e: unknown) {
+        throw new ApplicationError(`Failed to load reporter ${moduleName}: ${toError(e).message}`);
     }
 }
 
