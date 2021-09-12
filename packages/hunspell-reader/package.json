@@ -17,6 +17,7 @@
     "smoke-test": "../bin.js words ./dictionaries/nl -n 100",
     "test": "npm run test-unit",
     "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
     "lint": "prettier -w \"**/*.{md,yaml,yml,json,ts}\"",

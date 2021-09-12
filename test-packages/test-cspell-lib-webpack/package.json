@@ -6,8 +6,9 @@
   "scripts": {
     "clean": "rimraf dist .tsbuildinfo",
     "build": "npm run compile",
+    "build-dev": "webpack --mode=development",
     "clean-build": "npm run clean && npm run build",
-    "compile": "tsc -p . && webpack",
+    "compile": "webpack --mode=production",
     "test": "node dist/main.js"
   },
   "author": "",
