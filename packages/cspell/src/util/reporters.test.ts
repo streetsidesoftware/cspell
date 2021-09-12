@@ -3,20 +3,20 @@ import { InMemoryReporter } from "./InMemoryReporter";
 import { mergeReporters } from "./reporters";
 
 describe('mergeReporters', () => {
-    it('processes a single reporter', () => {
+    it('processes a single reporter', async () => {
         const reporter = new InMemoryReporter();
-        runReporter(mergeReporters(reporter));
+        await runReporter(mergeReporters(reporter));
 
         expect(reporter.dump()).toMatchSnapshot();
     });
 
-    it('processes a multiple reporters', () => {
+    it('processes a multiple reporters', async () => {
         const reporters = [
             new InMemoryReporter(),
             new InMemoryReporter(),
             new InMemoryReporter(),
         ];
-        runReporter(mergeReporters(...reporters));
+        await runReporter(mergeReporters(...reporters));
 
         reporters.forEach((reporter) => {
             expect(reporter.dump()).toMatchSnapshot();
@@ -24,7 +24,7 @@ describe('mergeReporters', () => {
     });
 });
 
-function runReporter(reporter: CSpellReporter): void {
+async function runReporter(reporter: CSpellReporter): Promise<void> {
     reporter.debug('foo');
     reporter.debug('bar');
 
@@ -57,7 +57,7 @@ function runReporter(reporter: CSpellReporter): void {
         numErrors: 2,
     });
 
-    reporter.result({
+    await reporter.result({
         files: 1,
         filesWithIssues: new Set(['text.txt']),
         issues: 2,
