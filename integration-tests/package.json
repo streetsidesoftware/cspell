@@ -12,7 +12,7 @@
   "scripts": {
     "build": "tsc -p .",
     "clean": "npm run clean-dist && npm run clean-repos",
-    "clean-dist": "rimraf dist",
+    "clean-dist": "rimraf dist .tsbuildinfo",
     "clean-repos": "rimraf repositories/temp temp",
     "clean-build": "npm run clean && npm run build",
     "integration-tests": "node tester.js check -f",

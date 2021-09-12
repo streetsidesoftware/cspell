@@ -35,7 +35,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "build": "npm run compile",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",

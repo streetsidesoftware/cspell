@@ -4,7 +4,7 @@
   "description": "Pure testing package for cspell-lib",
   "private": true,
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .tsbuildinfo",
     "build": "npm run compile",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p . && webpack",

@@ -14,7 +14,7 @@
     "./ajv.config.js": "./ajv.config.js"
   },
   "scripts": {
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "build": "npm run compile && npm run build-schema",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/settings/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && cp ./cspell.schema.json ../..",
     "build-docs": "typedoc --out ../../docs/types/cspell-types src/index.ts",
