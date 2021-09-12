@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
     "clean": "rimraf dist temp coverage .tsbuildinfo",
     "clean-build": "npm run clean && npm run build",

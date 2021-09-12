@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "clean": "npm run clean-dist && npm run clean-repos",
     "clean-dist": "rimraf dist .tsbuildinfo",
     "clean-repos": "rimraf repositories/temp temp",
