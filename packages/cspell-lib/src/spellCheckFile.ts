@@ -15,6 +15,7 @@ import * as path from 'path';
 import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 import { GlobMatcher } from 'cspell-glob';
 import { memorizer } from './util/Memorizer';
+import { isError } from './util/errors';
 
 const getLanguagesForExt = memorizer(_getLanguagesForExt);
 
@@ -106,6 +107,7 @@ export async function spellCheckDocument(
     try {
         return spellCheckFullDocument(await resolveDocument(document), options, settings);
     } catch (e) {
+        const errors = isError(e) ? [e] : [];
         return {
             document,
             options,
@@ -113,7 +115,7 @@ export async function spellCheckDocument(
             localConfigFilepath: undefined,
             issues: [],
             checked: false,
-            errors: [e],
+            errors,
         };
     }
 }

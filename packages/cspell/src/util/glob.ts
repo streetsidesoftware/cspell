@@ -53,7 +53,7 @@ function _globP(pattern: string, state: GlobPState): Promise<string[]> {
         return Promise.resolve([]);
     }
     return new Promise<string[]>((resolve, reject) => {
-        const cb = (err: Error, matches: string[]) => {
+        const cb = (err: Error | null | undefined, matches: string[]) => {
             if (err) {
                 reject(err);
             }

@@ -1,21 +1,10 @@
 {
+    "extends": "../../tsconfig.json",
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2015",
         "noImplicitAny": false,
-        "noImplicitThis": true,
-        "strictNullChecks": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "sourceMap": true,
-        "alwaysStrict": true,
-        "declaration": true,
-        "moduleResolution": "node",
-        "removeComments": false,
-        "preserveConstEnums": false,
-        "outDir": "dist",
-        "lib": ["dom", "dom.iterable", "es2015"],
-        "forceConsistentCasingInFileNames": true
+        "outDir": "dist"
     },
-    "exclude": ["node_modules", "dist"]
+    "include": [
+        "src"
+    ]
 }
