@@ -1,5 +1,4 @@
-import { AffWord, compareAff, asAffWord, Aff, filterAff } from './aff';
-import { affWordToColoredString } from './aff';
+import { AffWord, compareAff, asAffWord, Aff, filterAff, affWordToColoredString } from './aff';
 import { parseAffFileToAff } from './affReader';
 import * as AffReader from './affReader';
 import * as fs from 'fs-extra';
