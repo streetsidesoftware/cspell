@@ -26,7 +26,7 @@ export interface FileResult {
 
 export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
     let { reporter } = cfg;
-    setReporter(reporter);
+    cspell.setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
 
     const lintResult = await run();
@@ -181,7 +181,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
         reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
-        setReporter(reporter);
+        cspell.setLogger(getLoggerFromReporter(reporter));
 
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
@@ -311,7 +311,7 @@ function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
 }
 
-function setReporter(reporter: CSpellReporter): void {
+function getLoggerFromReporter(reporter: CSpellReporter): Logger {
     const log: Logger['log'] = (...params) => {
         const msg = format(...params);
         reporter.info(msg, 'Info');
@@ -327,12 +327,11 @@ function setReporter(reporter: CSpellReporter): void {
         reporter.info(msg, 'Warning');
     };
 
-    const logger: Logger = {
+    return {
         log,
         warn,
         error,
     };
-    cspell.setLogger(logger);
 }
 
 function toError(e: unknown): Error {
