@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.1](https://github.com/streetsidesoftware/cspell/compare/v5.9.1-alpha.1...v5.9.1) (2021-09-12)
+
+
+### Reverts
+
+* Revert "test: fix github-actions (#1665)" (#1666) ([baaeab6](https://github.com/streetsidesoftware/cspell/commit/baaeab6a50f4f6973231e4ae61aa8bc6b2f59b15)), closes [#1665](https://github.com/streetsidesoftware/cspell/issues/1665) [#1666](https://github.com/streetsidesoftware/cspell/issues/1666)
+
+
+
+
+
 ## [5.9.1-alpha.1](https://github.com/streetsidesoftware/cspell/compare/v5.9.1-alpha.0...v5.9.1-alpha.1) (2021-09-12)
 
 
