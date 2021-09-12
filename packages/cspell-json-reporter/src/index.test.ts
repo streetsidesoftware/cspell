@@ -1,5 +1,5 @@
-import { getReporter } from ".";
-import { CSpellReporter, MessageTypes } from "@cspell/cspell-types";
+import { getReporter } from '.';
+import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
 
 function runReporter(reporter: CSpellReporter): void {
     reporter.debug('foo');
@@ -19,7 +19,7 @@ function runReporter(reporter: CSpellReporter): void {
         col: 14,
         doc: 'This text is fulll of errrorrrs.',
         uri: 'text.txt',
-        context: { text: 'This text is fulll of errrorrrs.', offset: 0 }
+        context: { text: 'This text is fulll of errrorrrs.', offset: 0 },
     });
 
     reporter.progress({
@@ -40,7 +40,7 @@ function runReporter(reporter: CSpellReporter): void {
     });
 }
 
-jest.mock("fs/promises", () => ({
+jest.mock('fs/promises', () => ({
     writeFile: jest.fn().mockResolvedValue(undefined),
 }));
 import * as fs from 'fs/promises';
