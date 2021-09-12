@@ -53,7 +53,7 @@ describe('getReporter', () => {
         const reporter = getReporter({ outFile: 'out.json' });
         runReporter(reporter);
         expect(fs.writeFile).toBeCalledTimes(1);
-        
+
         expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
         expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
     });
