@@ -4,7 +4,7 @@
   "description": "Pure testing package for @cspell/cspell-tools.",
   "private": true,
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .tsbuildinfo",
     "build": "npm run compile && npm run build-dictionaries",
     "clean-build": "npm run clean && npm run build",
     "build-dictionaries": "cspell-tools-cli compile -o dist src/php.txt src/companies.txt src/node.txt",

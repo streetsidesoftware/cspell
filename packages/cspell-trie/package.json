@@ -16,7 +16,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "rimraf dist temp coverage",
+    "clean": "rimraf dist temp coverage .tsbuildinfo",
     "build": "tsc -p .",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",

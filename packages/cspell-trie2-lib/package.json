@@ -12,7 +12,7 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "build": "tsc -p .",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",

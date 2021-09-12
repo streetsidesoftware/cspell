@@ -24,7 +24,7 @@
   "scripts": {
     "build": "tsc -p .",
     "watch": "tsc -p . -w",
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",

@@ -20,7 +20,7 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
     "lint": "prettier -w \"**/*.{md,yaml,yml,json,ts}\"",
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "coverage": "jest --coverage",
     "watch": "tsc -w"
   },
