@@ -2,11 +2,11 @@ import { getReporter } from '.';
 import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
 import * as path from 'path';
 
-jest.mock("fs", () => ({
+jest.mock('fs', () => ({
     promises: {
-      writeFile: jest.fn().mockResolvedValue(undefined),
+        writeFile: jest.fn().mockResolvedValue(undefined),
     },
-  }));
+}));
 jest.mock('mkdirp', () => jest.fn().mockResolvedValue(undefined));
 
 import { promises as fs } from 'fs';
@@ -14,7 +14,7 @@ import { promises as fs } from 'fs';
 describe('getReporter', () => {
     beforeEach(() => {
         jest.resetAllMocks();
-     });
+    });
 
     it('throws for invalid config', () => {
         expect(() => getReporter({})).toThrowErrorMatchingSnapshot();

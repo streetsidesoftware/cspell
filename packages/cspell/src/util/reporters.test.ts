@@ -1,6 +1,6 @@
-import { CSpellReporter, MessageTypes } from "@cspell/cspell-types";
-import { InMemoryReporter } from "./InMemoryReporter";
-import { mergeReporters } from "./reporters";
+import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
+import { InMemoryReporter } from './InMemoryReporter';
+import { mergeReporters } from './reporters';
 
 describe('mergeReporters', () => {
     it('processes a single reporter', async () => {
@@ -11,11 +11,7 @@ describe('mergeReporters', () => {
     });
 
     it('processes a multiple reporters', async () => {
-        const reporters = [
-            new InMemoryReporter(),
-            new InMemoryReporter(),
-            new InMemoryReporter(),
-        ];
+        const reporters = [new InMemoryReporter(), new InMemoryReporter(), new InMemoryReporter()];
         await runReporter(mergeReporters(...reporters));
 
         reporters.forEach((reporter) => {
