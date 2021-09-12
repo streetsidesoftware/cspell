@@ -43,8 +43,13 @@ function runReporter(reporter: CSpellReporter): void {
     });
 }
 
-jest.mock('fs/promises');
-import * as fs from 'fs/promises';
+jest.mock('fs', () => ({
+    promises: {
+        writeFile: jest.fn().mockReturnValue(undefined),
+    },
+}));
+
+import { promises as fs } from 'fs';
 
 describe('getReporter', () => {
     it('throws for invalid config', () => {
