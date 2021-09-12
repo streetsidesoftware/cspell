@@ -14,7 +14,7 @@
     "build-integration-tests": "cd ./integration-tests && npm i",
     "check-spelling": "npx cspell -c cspellrc.json",
     "clean-build": "npm run clean && lerna run clean-build",
-    "clean": "rimraf **/.tsbuildinfo && lerna run clean && rimraf lcov.info",
+    "clean": "rimraf \"{*,*/*}/{.tsbuildinfo,temp,coverage}\" lcov.info && lerna run clean",
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
     "coverage-collect": "globcat packages/*/coverage/lcov.info > lcov.info",
     "install": "lerna bootstrap --ci",
@@ -60,6 +60,7 @@
   },
   "homepage": "https://streetsidesoftware.github.io/cspell/",
   "devDependencies": {
+    "@tsconfig/node12": "^1.0.9",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.11",
     "@typescript-eslint/eslint-plugin": "^4.7.0",

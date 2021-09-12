@@ -458,7 +458,7 @@ export function flagsToString(flags: AffWordFlags) {
     );
 }
 
-export function asAffWord(word: string, rules: string = '', flags: AffWordFlags = {}): AffWord {
+export function asAffWord(word: string, rules = '', flags: AffWordFlags = {}): AffWord {
     return {
         word,
         base: word,

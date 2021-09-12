@@ -1,6 +1,8 @@
 import { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import ConfigStore from 'configstore';
 import { logError } from '../util/logger';
+import { isErrnoException } from '../util/errors';
+import { format } from 'util';
 
 const packageName = 'cspell';
 
@@ -34,7 +36,11 @@ export function getRawGlobalSettings(): GlobalSettingsWithSource {
             };
         }
     } catch (error) {
-        if (!['ENOENT', 'EACCES', 'ENOTDIR', 'EISDIR'].includes(error.code)) {
+        if (
+            !isErrnoException(error) ||
+            !error.code ||
+            !['ENOENT', 'EACCES', 'ENOTDIR', 'EISDIR'].includes(error.code)
+        ) {
             logError(error);
         }
     }
@@ -53,7 +59,7 @@ export function writeRawGlobalSettings(settings: GlobalCSpellSettings): Error | 
         return undefined;
     } catch (error) {
         if (error instanceof Error) return error;
-        return new Error(error.toString());
+        return new Error(format(error));
     }
 }
 
