@@ -2,6 +2,41 @@ import { getReporter } from '.';
 import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
 import * as path from 'path';
 
+jest.mock('fs', () => ({
+    promises: {
+        writeFile: jest.fn().mockReturnValue(undefined),
+    },
+}));
+
+import { promises as fs } from 'fs';
+
+describe('getReporter', () => {
+    it('throws for invalid config', () => {
+        expect(() => getReporter({})).toThrowErrorMatchingSnapshot();
+    });
+
+    it('saves json to file', () => {
+        const reporter = getReporter({ outFile: 'out.json' });
+        runReporter(reporter);
+        expect(fs.writeFile).toBeCalledTimes(1);
+
+        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
+        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
+    });
+
+    it('saves additional data', () => {
+        const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
+        runReporter(reporter);
+        expect(fs.writeFile).toBeCalledTimes(1);
+        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
+        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+});
+
 function runReporter(reporter: CSpellReporter): void {
     reporter.debug('foo');
     reporter.debug('bar');
@@ -42,38 +77,3 @@ function runReporter(reporter: CSpellReporter): void {
         errors: 1,
     });
 }
-
-jest.mock('fs', () => ({
-    promises: {
-        writeFile: jest.fn().mockReturnValue(undefined),
-    },
-}));
-
-import { promises as fs } from 'fs';
-
-describe('getReporter', () => {
-    it('throws for invalid config', () => {
-        expect(() => getReporter({})).toThrowErrorMatchingSnapshot();
-    });
-
-    it('saves json to file', () => {
-        const reporter = getReporter({ outFile: 'out.json' });
-        runReporter(reporter);
-        expect(fs.writeFile).toBeCalledTimes(1);
-
-        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
-        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
-    });
-
-    it('saves additional data', () => {
-        const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
-        runReporter(reporter);
-        expect(fs.writeFile).toBeCalledTimes(1);
-        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
-        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
-    });
-
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-});

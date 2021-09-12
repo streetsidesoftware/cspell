@@ -43,4 +43,6 @@ export class InMemoryReporter implements CSpellReporter {
     result = (r: RunResult): void => {
         this.runResult = r;
     };
+
+    dump = () => ({ log: this.log, issues: this.issues, result: this.runResult });
 }
