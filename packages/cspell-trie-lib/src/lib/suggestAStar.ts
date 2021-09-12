@@ -10,7 +10,7 @@ export function* genCompoundableSuggestions(
     word: string,
     options: GenSuggestionOptionsStrict
 ): SuggestionGenerator {
-    const { compoundMethod, ignoreCase, maxNumChanges } = options;
+    const { compoundMethod, ignoreCase, changeLimit } = options;
     const len = word.length;
 
     const nodes = determineInitialNodes(root, ignoreCase);
@@ -39,7 +39,7 @@ export function* genCompoundableSuggestions(
     const wordSeparator = compoundMethod === CompoundWordsMethod.JOIN_WORDS ? JOIN_SEPARATOR : WORD_SEPARATOR;
     const compoundIndicator = root.compoundCharacter;
 
-    let costLimit = bc * Math.min(len * maxCostScale, maxNumChanges);
+    let costLimit = bc * Math.min(len * maxCostScale, changeLimit);
     let stopNow = false;
 
     const candidates = new PairingHeap(compare);
@@ -331,7 +331,7 @@ export function* genCompoundableSuggestions(
         const g = idx ? 1 : 0;
         candidates.add({ e: undefined, n: node, i: 0, w: '', g, r: undefined, a: true });
     });
-    const iterationsBeforePolling = 1000;
+    const iterationsBeforePolling = 100;
     let i = iterationsBeforePolling;
     let maxSize = 0;
     let best: Candidate | undefined;
@@ -475,9 +475,10 @@ export function suggest(root: TrieRoot | TrieRoot[], word: string, options: Sugg
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, {
         numSuggestions: opts.numSuggestions,
-        changeLimit: opts.maxNumChanges,
-        includeTies: true,
+        changeLimit: opts.changeLimit,
+        includeTies: opts.includeTies,
         ignoreCase: opts.ignoreCase,
+        timeout: opts.timeout,
     });
     collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;

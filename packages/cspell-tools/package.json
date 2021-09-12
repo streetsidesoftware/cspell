@@ -1,6 +1,6 @@
 {
   "name": "@cspell/cspell-tools",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Tools to assist with the development of cSpell",
   "typings": "dist/index.d.ts",
   "publishConfig": {
@@ -11,9 +11,10 @@
   },
   "scripts": {
     "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
     "clean-build": "npm run clean && npm run build",
-    "clean": "rimraf dist temp coverage",
+    "clean": "rimraf dist temp coverage .tsbuildinfo",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
     "test": "jest",
@@ -44,25 +45,25 @@
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
   "dependencies": {
-    "commander": "^8.1.0",
-    "cspell-io": "^5.9.0",
-    "cspell-trie-lib": "^5.9.0",
+    "commander": "^8.2.0",
+    "cspell-io": "^5.9.1",
+    "cspell-trie-lib": "^5.9.1",
     "fs-extra": "^10.0.0",
     "gensequence": "^3.1.1",
     "glob": "^7.1.7",
-    "hunspell-reader": "^5.9.0"
+    "hunspell-reader": "^5.9.1"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=12.13.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.12",
     "@types/glob": "^7.1.4",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.12",
+    "@types/node": "^16.9.1",
     "@types/rimraf": "^3.0.2",
     "@types/shelljs": "^0.8.9",
-    "jest": "^27.1.0",
+    "jest": "^27.1.1",
     "lorem-ipsum": "^2.0.3",
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.4"

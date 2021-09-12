@@ -17,7 +17,7 @@ export function iterableToStream<T extends Streamable>(
 }
 
 class ReadableObservableStream<T> extends stream.Readable {
-    private iter: Iterator<T>;
+    private iter: Iterator<T> | undefined;
     private done = false;
 
     constructor(private _source: IterableLike<T>, options: stream.ReadableOptions) {

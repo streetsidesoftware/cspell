@@ -30,6 +30,11 @@ jobs:
         uses: actions/setup-node@v2.4.0
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
 
       - run: npm ci
       - run: npm run build
@@ -54,7 +59,7 @@ jobs:
       matrix:
         node-version:
           # Test the latest node version here, move older versions to `test-old-node-versions`
-          - "16.8.0" # Bug [`Check failed: !holder_map.has_named_interceptor().` when running `jest` · Issue #40030 · nodejs/node](https://github.com/nodejs/node/issues/40030)
+          - 16.x
 
         os:
           - ubuntu-latest

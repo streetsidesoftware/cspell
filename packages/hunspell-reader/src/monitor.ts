@@ -1,6 +1,6 @@
 const counters = new Map<string, number>();
 
-let isLoggingOn = true;
+const isLoggingOn = true;
 
 export function incCounter(name: string, count = 1) {
     counters.set(name, (counters.get(name) || 0) + count);

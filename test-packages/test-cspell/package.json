@@ -1,11 +1,12 @@
 {
   "name": "test-cspell",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Pure testing package for cspell-io. It purpose is to verify cspell-io dependencies.",
   "private": true,
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .tsbuildinfo",
     "build": "npm run compile",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "test": "node dist"
@@ -13,8 +14,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "cspell": "^5.9.0",
-    "@cspell/cspell-types": "^5.9.0"
+    "@cspell/cspell-types": "^5.9.1",
+    "cspell": "^5.9.1"
   },
   "main": "index.js",
   "keywords": []

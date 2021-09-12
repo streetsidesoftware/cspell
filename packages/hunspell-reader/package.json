@@ -1,6 +1,6 @@
 {
   "name": "hunspell-reader",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "A library for reading Hunspell Dictionary Files",
   "bin": "bin.js",
   "main": "dist/index.js",
@@ -17,10 +17,11 @@
     "smoke-test": "../bin.js words ./dictionaries/nl -n 100",
     "test": "npm run test-unit",
     "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test",
     "lint": "prettier -w \"**/*.{md,yaml,yml,json,ts}\"",
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "coverage": "jest --coverage",
     "watch": "tsc -w"
   },
@@ -40,15 +41,15 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.12",
     "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.12",
-    "jest": "^27.1.0",
-    "prettier": "^2.3.2",
+    "@types/node": "^16.9.1",
+    "jest": "^27.1.1",
+    "prettier": "^2.4.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.3"
   },
   "dependencies": {
-    "commander": "^8.1.0",
+    "commander": "^8.2.0",
     "fs-extra": "^10.0.0",
     "gensequence": "^3.1.1",
     "iconv-lite": "^0.6.3"
@@ -63,9 +64,13 @@
       "node": true,
       "mocha": true
     },
+    "ignorePatterns": [
+      "dist/**",
+      "node_modules/**"
+    ],
     "rules": {}
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=12.13.0"
   }
 }

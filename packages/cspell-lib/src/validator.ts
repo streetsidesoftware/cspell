@@ -31,7 +31,16 @@ export async function validateText(
         return issues;
     }
     const withSugs = issues.map((t) => {
-        const suggestions = dict.suggest(t.text, options.numSuggestions, CompoundWordsMethod.NONE).map((r) => r.word);
+        const suggestions = dict
+            .suggest(t.text, {
+                numSuggestions: options.numSuggestions,
+                compoundMethod: CompoundWordsMethod.NONE,
+                includeTies: false,
+                ignoreCase: !(settings.caseSensitive ?? false),
+                timeout: settings.suggestionsTimeout,
+                numChanges: settings.suggestionNumChanges,
+            })
+            .map((r) => r.word);
         return { ...t, suggestions };
     });
 

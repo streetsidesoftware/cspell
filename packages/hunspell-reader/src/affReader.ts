@@ -18,7 +18,7 @@ export interface ConvEntry {
     from: string;
     to: string;
 }
-function convEntry(fieldValue: ConvEntry[], line: AffLine) {
+function convEntry(fieldValue: ConvEntry[] | undefined, line: AffLine) {
     if (fieldValue === undefined) {
         return [];
     }
@@ -28,7 +28,7 @@ function convEntry(fieldValue: ConvEntry[], line: AffLine) {
     return fieldValue;
 }
 
-function afEntry(fieldValue: string[], line: AffLine) {
+function afEntry(fieldValue: string[] | undefined, line: AffLine) {
     if (fieldValue === undefined) {
         return [''];
     }

@@ -1,6 +1,6 @@
 {
   "name": "cspell-glob",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Glob matcher for cspell",
   "keywords": [
     "cspell",
@@ -23,8 +23,9 @@
   ],
   "scripts": {
     "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
@@ -38,15 +39,15 @@
     "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-glob"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=12.13.0"
   },
   "dependencies": {
     "micromatch": "^4.0.4"
   },
   "devDependencies": {
     "@types/micromatch": "^4.0.2",
-    "@types/node": "^16.7.12",
-    "jest": "^27.1.0",
+    "@types/node": "^16.9.1",
+    "jest": "^27.1.1",
     "rimraf": "^3.0.2"
   }
 }

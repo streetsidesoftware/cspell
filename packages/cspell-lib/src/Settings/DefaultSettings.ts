@@ -113,6 +113,8 @@ export const _defaultSettings: Readonly<CSpellSettingsWithSourceTrace> = {
     ],
     maxNumberOfProblems: 100,
     numSuggestions: 10,
+    suggestionsTimeout: 500,
+    suggestionNumChanges: 3,
     words: [],
     userWords: [],
     ignorePaths: [],

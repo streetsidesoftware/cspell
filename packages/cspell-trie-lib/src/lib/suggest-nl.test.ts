@@ -22,35 +22,22 @@ describe('Validate Dutch Suggestions', () => {
     );
 
     // cspell:ignore burtbewoners burgbewoners
-    test(
-        'Tests suggestions "burtbewoners"',
-        async () => {
-            const trie = await pTrieNL;
-            const results = trie.suggestWithCost('burtbewoners', { numSuggestions: 5 });
-            const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners', 'burgbewoners']));
-        },
-        timeout
-    );
+    // cspell:ignore buurtbwoners buurtbewoner
 
-    // cspell:ignore buurtbwoners
-    test(
-        'Tests suggestions "buurtbwoners"',
-        async () => {
+    test.each`
+        word               | numSuggestions | expected
+        ${'Mexico-Stad'}   | ${2}           | ${[sr('Mexico-Stad', 0), sr('mexico-stad', 2)]}
+        ${'mexico-stad'}   | ${2}           | ${[sr('mexico-stad', 0), sr('Mexico-Stad', 2)]}
+        ${'buurtbewoners'} | ${3}           | ${[sr('buurtbewoners', 0), sr('buurtbewoners-', 86), sr('buurtbewoner', 88)]}
+        ${'burtbewoners'}  | ${2}           | ${ac(sr('burgbewoners', 96), sr('buurtbewoners', 97))}
+        ${'buurtbwoners'}  | ${1}           | ${[sr('buurtbewoners', 93)]}
+        ${'buurtbewoners'} | ${1}           | ${[sr('buurtbewoners', 0)]}
+    `(
+        'Tests suggestions $word',
+        async ({ word, numSuggestions, expected }) => {
             const trie = await pTrieNL;
-            const results = trie.suggestWithCost('buurtbwoners', { numSuggestions: 1 });
-            const suggestions = results.map((s) => s.word);
-            expect(suggestions).toEqual(expect.arrayContaining(['buurtbewoners']));
-        },
-        timeout
-    );
-
-    test(
-        'Tests suggestions "buurtbewoners" with cost',
-        async () => {
-            const trie = await pTrieNL;
-            const results = trie.suggestWithCost('buurtbewoners', { numSuggestions: 1 });
-            expect(results).toEqual([{ word: 'buurtbewoners', cost: 0 }]);
+            const results = trie.suggestWithCost(word, { numSuggestions });
+            expect(results).toEqual(expected);
         },
         timeout
     );
@@ -67,4 +54,12 @@ describe('Validate Dutch Suggestions', () => {
         },
         timeout
     );
+
+    function ac<T>(...args: T[]): T[] {
+        return expect.arrayContaining(args);
+    }
+
+    function sr(word: string, cost: number) {
+        return { word, cost };
+    }
 });

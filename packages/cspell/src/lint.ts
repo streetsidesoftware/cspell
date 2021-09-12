@@ -59,7 +59,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
             result.processed = r.checked;
             result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, r.issues).map(mapIssue);
         } catch (e) {
-            reporter.error(`Failed to process "${filename}"`, e);
+            reporter.error(`Failed to process "${filename}"`, toError(e));
             result.errors += 1;
         }
         result.elapsedTimeMs = Date.now() - startTime;
@@ -333,4 +333,19 @@ function setReporter(reporter: CSpellReporter): void {
         error,
     };
     cspell.setLogger(logger);
+}
+
+function toError(e: unknown): Error {
+    if (isError(e)) return e;
+    return {
+        name: 'error',
+        message: format(e),
+    };
+}
+
+function isError(e: unknown): e is Error {
+    if (!e || typeof e !== 'object') return false;
+    if (e instanceof Error) return true;
+    const ex = <Error>e;
+    return typeof ex.name === 'string' && typeof ex.message === 'string';
 }

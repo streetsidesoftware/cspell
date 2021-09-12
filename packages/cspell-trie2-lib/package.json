@@ -1,6 +1,6 @@
 {
   "name": "cspell-trie2-lib",
-  "version": "5.9.0",
+  "version": "5.9.1",
   "description": "Trie Data Structure to support cspell.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,8 +12,9 @@
     "!**/*.map"
   ],
   "scripts": {
-    "clean": "rimraf dist coverage",
+    "clean": "rimraf dist coverage .tsbuildinfo",
     "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "npm run clean && npm run build",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
@@ -35,10 +36,10 @@
   },
   "homepage": "https://github.com/streetsidesoftware/cspell#readme",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=12.13.0"
   },
   "devDependencies": {
-    "jest": "^27.1.0",
+    "jest": "^27.1.1",
     "rimraf": "^3.0.2"
   }
 }

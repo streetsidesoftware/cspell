@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 // cSpell:ignore findup
 import { program as commander } from 'commander';
 import { IterableHunspellReader } from './IterableHunspellReader';

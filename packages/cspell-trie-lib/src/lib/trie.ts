@@ -12,12 +12,7 @@ import {
 } from './find';
 import { SuggestionOptions } from './genSuggestionsOptions';
 import { genSuggestions, suggest } from './suggest';
-import {
-    GenerateSuggestionResult,
-    isSuggestionResult,
-    SuggestionCollector,
-    SuggestionResult,
-} from './suggestCollector';
+import { SuggestionCollector, SuggestionResult } from './suggestCollector';
 import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
 import {
     countWords,
@@ -183,10 +178,12 @@ export class Trie {
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
     suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[] {
-        // const opts = createSuggestionOptions(options);
-        return suggest(this.getSuggestRoot(!options.ignoreCase), text, options).filter(
-            (sug) => !this.isForbiddenWord(sug.word)
-        );
+        const optFilter = options.filter;
+        const filter = optFilter
+            ? (word: string, cost: number) => !this.isForbiddenWord(word) && optFilter(word, cost)
+            : (word: string) => !this.isForbiddenWord(word);
+        const opts = { ...options, filter };
+        return suggest(this.root, text, opts);
     }
 
     /**
@@ -195,22 +192,14 @@ export class Trie {
      * Returning a MaxCost < 0 will effectively cause the search for suggestions to stop.
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
-        const filter = (sug: SuggestionResult) => !this.isForbiddenWord(sug.word);
-        const suggestions = genSuggestions(this.getSuggestRoot(!collector.ignoreCase), collector.word, {
+        const filter = (word: string) => !this.isForbiddenWord(word);
+
+        const suggestions = genSuggestions(this.root, collector.word, {
             compoundMethod,
+            changeLimit: collector.changeLimit,
+            ignoreCase: collector.ignoreCase,
         });
-        function* filteredSuggestions() {
-            let maxCost = collector.maxCost;
-            let ir: IteratorResult<GenerateSuggestionResult>;
-            while (!(ir = suggestions.next(maxCost)).done) {
-                const { value } = ir;
-                if (!isSuggestionResult(value) || filter(value)) {
-                    maxCost = yield value;
-                }
-            }
-            return undefined;
-        }
-        collector.collect(filteredSuggestions());
+        collector.collect(suggestions, undefined, filter);
     }
 
     /**
@@ -231,28 +220,6 @@ export class Trie {
     insert(word: string): this {
         insert(word, this.root);
         return this;
-    }
-
-    private getSuggestRoot(caseSensitive: boolean): TrieRoot[] {
-        const blockNodes = new Set([this._options.forbiddenWordPrefix, this._options.stripCaseAndAccentsPrefix]);
-        const root = this.root;
-        if (!root.c) return [{ c: new Map<string, TrieNode>(), ...this._options }];
-
-        const roots: TrieRoot[] = [
-            {
-                c: new Map([...root.c].filter(([k]) => !blockNodes.has(k))),
-                ...this._options,
-            },
-        ];
-
-        const csRoot = root.c.get(this._options.stripCaseAndAccentsPrefix);
-        if (!caseSensitive && csRoot?.c) {
-            roots.push({
-                c: new Map([...csRoot.c].filter(([k]) => !blockNodes.has(k))),
-                ...this._options,
-            });
-        }
-        return roots;
     }
 
     private calcIsLegacy(): boolean {

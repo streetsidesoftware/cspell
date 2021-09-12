@@ -1,3 +1,4 @@
+import { isDefined } from './util';
 import { TrieNode, ChildMap, TrieRoot } from './TrieNode';
 
 export const JOIN_SEPARATOR = '+';
@@ -88,20 +89,35 @@ export type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefi
  */
 export function* hintedWalker(
     root: TrieRoot,
-    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE,
-    hint: string
+    ignoreCase: boolean,
+    hint: string,
+    compoundingMethod: CompoundWordsMethod | undefined
 ): HintedWalkerIterator {
-    const baseRoot = {
-        c: new Map([...root.c].filter((n) => n[0] !== root.compoundCharacter)),
-    };
-
-    const roots: { [index: number]: ChildMap | [string, TrieNode][] } = {
-        [CompoundWordsMethod.NONE]: [],
-        [CompoundWordsMethod.JOIN_WORDS]: [[JOIN_SEPARATOR, baseRoot]],
-        [CompoundWordsMethod.SEPARATE_WORDS]: [[WORD_SEPARATOR, baseRoot]],
-    };
+    const _compoundingMethod = compoundingMethod ?? CompoundWordsMethod.NONE;
 
     const compoundCharacter = root.compoundCharacter;
+    const noCaseCharacter = root.stripCaseAndAccentsPrefix;
+
+    const rawRoots = [root, ignoreCase ? root.c.get(noCaseCharacter) : undefined].filter(isDefined);
+
+    const specialRootsPrefix = existMap([compoundCharacter, noCaseCharacter, root.forbiddenWordPrefix]);
+    function filterRoot(root: TrieNode): TrieNode {
+        const children = root.c?.entries();
+        const c = children && [...children].filter(([v]) => !(v in specialRootsPrefix));
+        return {
+            c: c && new Map(c),
+        };
+    }
+
+    const roots = rawRoots.map(filterRoot);
+    const compoundRoots = rawRoots.map((r) => r.c?.get(compoundCharacter)).filter(isDefined);
+    const rootsForCompoundMethods = roots.concat(compoundRoots);
+
+    const compoundMethodRoots: { [index: number]: readonly (readonly [string, TrieNode])[] } = {
+        [CompoundWordsMethod.NONE]: [],
+        [CompoundWordsMethod.JOIN_WORDS]: [...rootsForCompoundMethods.map((r) => [JOIN_SEPARATOR, r] as const)],
+        [CompoundWordsMethod.SEPARATE_WORDS]: [...rootsForCompoundMethods.map((r) => [WORD_SEPARATOR, r] as const)],
+    };
 
     interface StackItemEntry {
         letter: string;
@@ -138,14 +154,13 @@ export function* hintedWalker(
                     hintOffset: hintOffset + 1,
                 }));
             if (c.has(compoundCharacter)) {
-                const compoundRoot = root.c.get(compoundCharacter);
-                if (compoundRoot) {
+                for (const compoundRoot of compoundRoots) {
                     yield* children(compoundRoot, hintOffset);
                 }
             }
         }
         if (n.f) {
-            yield* [...roots[compoundingMethod]].map(([letter, node]) => ({
+            yield* [...compoundMethodRoots[_compoundingMethod]].map(([letter, node]) => ({
                 letter,
                 node,
                 hintOffset,
@@ -153,23 +168,33 @@ export function* hintedWalker(
         }
     }
 
-    let depth = 0;
-    const stack: Stack = [];
-    let baseText = '';
-    stack[depth] = children(baseRoot, depth);
-    let ir: IteratorResult<StackItemEntry, StackItemEntry>;
-    while (depth >= 0) {
-        while (!(ir = stack[depth].next()).done) {
-            const { letter: char, node, hintOffset } = ir.value;
-            const text = baseText + char;
-            const hinting = (yield { text, node, depth }) as Hinting;
-            if (hinting && hinting.goDeeper) {
-                depth++;
-                baseText = text;
-                stack[depth] = children(node, hintOffset);
+    for (const root of roots) {
+        let depth = 0;
+        const stack: Stack = [];
+        let baseText = '';
+        stack[depth] = children(root, depth);
+        let ir: IteratorResult<StackItemEntry, StackItemEntry>;
+        while (depth >= 0) {
+            while (!(ir = stack[depth].next()).done) {
+                const { letter: char, node, hintOffset } = ir.value;
+                const text = baseText + char;
+                const hinting = (yield { text, node, depth }) as Hinting;
+                if (hinting && hinting.goDeeper) {
+                    depth++;
+                    baseText = text;
+                    stack[depth] = children(node, hintOffset);
+                }
             }
+            depth -= 1;
+            baseText = baseText.slice(0, -1);
         }
-        depth -= 1;
-        baseText = baseText.slice(0, -1);
     }
+}
+
+function existMap(values: string[]): Record<string, true> {
+    const m: Record<string, true> = Object.create(null);
+    for (const v of values) {
+        m[v] = true;
+    }
+    return m;
 }

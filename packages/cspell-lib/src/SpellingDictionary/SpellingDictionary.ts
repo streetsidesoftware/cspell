@@ -9,10 +9,34 @@ export interface SearchOptions {
 }
 
 export interface SuggestOptions {
+    /**
+     * Compounding Mode.
+     * `NONE` is the best option.
+     */
     compoundMethod?: CompoundWordsMethod;
+    /**
+     * The limit on the number of suggestions to generate. If `allowTies` is true, it is possible
+     * for more suggestions to be generated.
+     */
     numSuggestions?: number;
+    /**
+     * Max number of changes / edits to the word to get to a suggestion matching suggestion.
+     */
     numChanges?: number;
+    /**
+     * Allow for case-ingestive checking.
+     */
     ignoreCase?: boolean;
+    /**
+     * If multiple suggestions have the same edit / change "cost", then included them even if
+     * it causes more than `numSuggestions` to be returned.
+     * @default false
+     */
+    includeTies?: boolean;
+    /**
+     * Maximum amount of time to allow for generating suggestions.
+     */
+    timeout?: number;
 }
 
 export type FindOptions = SearchOptions;
