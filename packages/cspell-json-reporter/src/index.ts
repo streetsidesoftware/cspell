@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import mkdirp from 'mkdirp';
 
 import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
 import { validateSettings } from './utils/validateSettings';
@@ -44,12 +45,13 @@ export function getReporter(settings: unknown | CSpellJSONReporterSettings): CSp
                   reportData.progress.push(item);
               }
             : noopReporter,
-        result: (result) => {
+        result: async (result) => {
             const outFilePath = path.join(process.cwd(), settings.outFile);
             const output = {
                 ...reportData,
                 result,
             };
+            await mkdirp(path.dirname(outFilePath));
             return fs.writeFile(outFilePath, JSON.stringify(output, setToJSONReplacer, 4));
         },
     };
