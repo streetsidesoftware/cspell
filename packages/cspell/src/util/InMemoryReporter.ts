@@ -1,9 +1,15 @@
-import { CSpellReporter, Issue, ProgressFileComplete, RunResult } from '@cspell/cspell-types';
+import type { CSpellReporter, Issue, ProgressFileComplete, RunResult } from '@cspell/cspell-types';
+
+export interface InMemoryResult {
+    log: string[];
+    issues: Issue[];
+    runResult: RunResult | undefined;
+}
 
 /**
  * Simple reporter for test purposes
  */
-export class InMemoryReporter implements CSpellReporter {
+export class InMemoryReporter implements CSpellReporter, InMemoryResult {
     log: string[] = [];
     issueCount = 0;
     errorCount = 0;
@@ -44,5 +50,5 @@ export class InMemoryReporter implements CSpellReporter {
         this.runResult = r;
     };
 
-    dump = () => ({ log: this.log, issues: this.issues, result: this.runResult });
+    dump = (): InMemoryResult => ({ log: this.log, issues: this.issues, runResult: this.runResult });
 }

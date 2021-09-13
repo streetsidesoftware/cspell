@@ -1,6 +1,6 @@
+import type { CSpellReporter } from '@cspell/cspell-types';
 import { assert } from 'console';
-import { checkText, lint, trace, Issue, ProgressFileComplete, CSpellApplicationOptions, RunResult } from 'cspell';
-import { CSpellReporter } from '@cspell/cspell-types';
+import { checkText, CSpellApplicationOptions, Issue, lint, ProgressFileComplete, RunResult, trace } from 'cspell';
 import { run } from 'cspell/dist/app';
 
 async function test() {

@@ -1,10 +1,10 @@
-import * as TextRange from '../util/TextRange';
-import { regExMatchUrls, regExMatchCommonHexFormats } from './RegExpPatterns';
-import * as RegPat from './RegExpPatterns';
-import { calculateTextDocumentOffsets } from '../util/text';
+import type { TextOffset } from '@cspell/cspell-types';
 import fs from 'fs';
 import Path from 'path';
-import { TextOffset } from '@cspell/cspell-types';
+import { calculateTextDocumentOffsets } from '../util/text';
+import * as TextRange from '../util/TextRange';
+import * as RegPat from './RegExpPatterns';
+import { regExMatchCommonHexFormats, regExMatchUrls } from './RegExpPatterns';
 
 const matchUrl = regExMatchUrls.source;
 const matchHexValues = regExMatchCommonHexFormats.source;

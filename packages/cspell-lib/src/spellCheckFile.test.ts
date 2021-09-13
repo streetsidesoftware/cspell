@@ -1,4 +1,4 @@
-import { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
 import { posix } from 'path';
 import { URI } from 'vscode-uri';
@@ -6,11 +6,11 @@ import { ImportError } from './Settings/ImportError';
 import {
     determineFinalDocumentSettings,
     Document,
+    fileToDocument,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,
     SpellCheckFileResult,
-    fileToDocument,
 } from './spellCheckFile';
 
 const samples = Path.resolve(__dirname, '../samples');

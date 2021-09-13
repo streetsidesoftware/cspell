@@ -1,10 +1,8 @@
-import * as Validator from './validator';
+import type { CSpellSettings } from '@cspell/cspell-types';
 import { loremIpsum } from 'lorem-ipsum';
-import { CSpellSettings } from '@cspell/cspell-types';
-import * as tds from './Settings/TextDocumentSettings';
-
 import { getDefaultSettings } from './Settings/DefaultSettings';
-
+import * as tds from './Settings/TextDocumentSettings';
+import * as Validator from './validator';
 import { IncludeExcludeFlag } from './validator';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked

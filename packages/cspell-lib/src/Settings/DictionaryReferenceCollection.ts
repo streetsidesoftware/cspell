@@ -1,4 +1,4 @@
-import { DictionaryId, DictionaryReference } from '@cspell/cspell-types';
+import type { DictionaryId, DictionaryReference } from '@cspell/cspell-types';
 
 export interface DictionaryReferenceCollection {
     isEnabled(name: DictionaryId): boolean | undefined;

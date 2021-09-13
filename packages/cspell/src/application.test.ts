@@ -1,6 +1,6 @@
+import type { Issue } from '@cspell/cspell-types';
 import * as path from 'path';
 import * as App from './application';
-import { Issue } from '@cspell/cspell-types';
 import { CSpellApplicationOptions } from './options';
 import { InMemoryReporter } from './util/InMemoryReporter';
 

@@ -1,6 +1,6 @@
-import { splitCamelCaseWord } from './text';
+import type { TextOffset } from '@cspell/cspell-types';
 import * as Text from './text';
-import { TextOffset } from '@cspell/cspell-types';
+import { splitCamelCaseWord } from './text';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 

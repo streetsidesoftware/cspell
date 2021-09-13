@@ -1,29 +1,29 @@
+import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
+import * as path from 'path';
+import { mocked } from 'ts-jest/utils';
+import { URI } from 'vscode-uri';
+import { logError, logWarning } from '../util/logger';
 import {
-    mergeSettings,
-    readSettings,
-    getGlobalSettings,
-    clearCachedSettingsFiles,
-    getCachedFileSize,
-    checkFilenameMatchesGlob,
     calcOverrideSettings,
-    getSources,
-    extractImportErrors,
-    searchForConfig,
-    loadConfig,
-    ImportFileRefWithError,
-    readRawSettings,
-    __testing__,
+    checkFilenameMatchesGlob,
+    clearCachedSettingsFiles,
     ENV_CSPELL_GLOB_ROOT,
+    extractImportErrors,
+    getCachedFileSize,
+    getGlobalSettings,
+    getSources,
+    ImportFileRefWithError,
+    loadConfig,
     loadPnP,
     loadPnPSync,
+    mergeSettings,
+    readRawSettings,
+    readSettings,
     readSettingsFiles,
+    searchForConfig,
+    __testing__,
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
-import { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
-import { logError, logWarning } from '../util/logger';
-import { mocked } from 'ts-jest/utils';
-import * as path from 'path';
-import { URI } from 'vscode-uri';
 
 const { normalizeSettings, validateRawConfigVersion, validateRawConfigExports } = __testing__;
 

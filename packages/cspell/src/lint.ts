@@ -1,4 +1,5 @@
-import type { CSpellReporter, CSpellSettings, Glob, TextDocumentOffset } from '@cspell/cspell-types';
+import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset } from '@cspell/cspell-types';
+import { MessageTypes } from '@cspell/cspell-types';
 import * as commentJson from 'comment-json';
 import type { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 import type { ValidationIssue } from 'cspell-lib';
@@ -8,13 +9,12 @@ import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
 import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { Issue, MessageTypes, RunResult } from '@cspell/cspell-types';
 import { ConfigInfo, FileInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
+import { toError } from './util/errors';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from './util/glob';
+import { loadReporters, mergeReporters } from './util/reporters';
 import { measurePromise } from './util/timer';
 import * as util from './util/util';
-import { loadReporters, mergeReporters } from './util/reporters';
-import { toError } from './util/errors';
 
 export interface FileResult {
     fileInfo: FileInfo;

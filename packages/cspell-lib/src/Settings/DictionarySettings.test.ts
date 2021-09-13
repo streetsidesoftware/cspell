@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import * as DictSettings from './DictionarySettings';
+import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
 import * as fsp from 'fs-extra';
-import * as path from 'path';
 import * as os from 'os';
+import * as path from 'path';
 import { getDefaultSettings } from './DefaultSettings';
-import { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
+import * as DictSettings from './DictionarySettings';
 
 const defaultSettings = getDefaultSettings();
 

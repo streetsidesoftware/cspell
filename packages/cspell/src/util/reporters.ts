@@ -1,4 +1,10 @@
-import { CSpellReporter, RunResult, CSpellReporterModule, FileSettings, ReporterSettings } from '@cspell/cspell-types';
+import type {
+    CSpellReporter,
+    CSpellReporterModule,
+    FileSettings,
+    ReporterSettings,
+    RunResult,
+} from '@cspell/cspell-types';
 import { ApplicationError, toError } from './errors';
 
 function mergeEmitters<T extends keyof Omit<CSpellReporter, 'result'>>(

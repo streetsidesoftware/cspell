@@ -1,3 +1,3 @@
-export * from './application';
 export * from '@cspell/cspell-types';
-export { BaseOptions, CSpellApplicationOptions, TraceOptions } from './options';
+export * from './application';
+export type { BaseOptions, CSpellApplicationOptions, TraceOptions } from './options';

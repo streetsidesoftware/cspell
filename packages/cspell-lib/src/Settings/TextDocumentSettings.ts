@@ -1,7 +1,7 @@
-import { calcSettingsForLanguageId } from './LanguageSettings';
-import { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
 import * as CSpellSettingsServer from './CSpellSettingsServer';
 import { getInDocumentSettings } from './InDocSettings';
+import { calcSettingsForLanguageId } from './LanguageSettings';
 
 export function combineTextAndLanguageSettings(
     settings: CSpellUserSettings,

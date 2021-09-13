@@ -1,14 +1,14 @@
-import {
+import type {
     CSpellSettings,
-    RegExpPatternDefinition,
     CSpellSettingsWithSourceTrace,
     PredefinedPatterns,
+    RegExpPatternDefinition,
 } from '@cspell/cspell-types';
-import * as LanguageSettings from './LanguageSettings';
-import * as RegPat from './RegExpPatterns';
+import { resolveFile } from '../util/resolveFile';
 import { readSettings } from './CSpellSettingsServer';
 import { mergeSettings } from './index';
-import { resolveFile } from '../util/resolveFile';
+import * as LanguageSettings from './LanguageSettings';
+import * as RegPat from './RegExpPatterns';
 
 const defaultConfigFileModuleRef = '@cspell/cspell-bundled-dicts/cspell-default.json';
 

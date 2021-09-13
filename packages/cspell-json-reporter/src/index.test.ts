@@ -1,6 +1,8 @@
-import { getReporter } from '.';
-import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
+import type { CSpellReporter } from '@cspell/cspell-types';
+import { MessageTypes } from '@cspell/cspell-types';
+import { promises as fs } from 'fs';
 import * as path from 'path';
+import { getReporter } from '.';
 
 jest.mock('fs', () => ({
     promises: {
@@ -8,8 +10,6 @@ jest.mock('fs', () => ({
     },
 }));
 jest.mock('mkdirp', () => jest.fn().mockResolvedValue(undefined));
-
-import { promises as fs } from 'fs';
 
 describe('getReporter', () => {
     beforeEach(() => {

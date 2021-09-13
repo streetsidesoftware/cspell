@@ -1,5 +1,5 @@
-import { traceWords, getDefaultSettings } from '.';
-import { CSpellSettings } from '@cspell/cspell-types';
+import type { CSpellSettings } from '@cspell/cspell-types';
+import { getDefaultSettings, traceWords } from '.';
 import { mergeSettings } from './Settings';
 import { TraceResult } from './trace';
 

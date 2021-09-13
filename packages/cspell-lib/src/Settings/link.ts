@@ -1,6 +1,6 @@
-import * as Path from 'path';
+import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import * as fs from 'fs';
-import { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
+import * as Path from 'path';
 import { readRawSettings } from './CSpellSettingsServer';
 import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 

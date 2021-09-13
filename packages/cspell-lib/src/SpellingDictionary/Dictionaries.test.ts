@@ -1,8 +1,8 @@
-import * as Dictionaries from './Dictionaries';
-import { getDefaultSettings, loadConfig } from '../Settings';
-import * as path from 'path';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
-import { CSpellUserSettings } from '@cspell/cspell-types';
+import * as path from 'path';
+import { getDefaultSettings, loadConfig } from '../Settings';
+import * as Dictionaries from './Dictionaries';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 // cspell:ignore café rhône

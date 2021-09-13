@@ -1,4 +1,4 @@
-import { CSpellUserSettings } from '@cspell/cspell-types';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Settings from './Settings';
 import * as Dictionary from './SpellingDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';

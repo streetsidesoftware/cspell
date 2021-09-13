@@ -1,7 +1,7 @@
 import chalk = require('chalk');
+import type { CSpellReporter, Issue, MessageType, ProgressItem, RunResult } from '@cspell/cspell-types';
+import { ImportError, isSpellingDictionaryLoadError, SpellingDictionaryLoadError } from 'cspell-lib';
 import * as path from 'path';
-import { CSpellReporter, MessageType, ProgressItem, Issue, RunResult } from '@cspell/cspell-types';
-import { isSpellingDictionaryLoadError, SpellingDictionaryLoadError, ImportError } from 'cspell-lib';
 import { Options } from './app';
 
 const templateIssue = `{green $uri}:{yellow $row:$col} - $message ({red $text})`;

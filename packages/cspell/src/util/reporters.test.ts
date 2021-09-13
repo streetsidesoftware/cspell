@@ -1,4 +1,5 @@
-import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
+import type { CSpellReporter } from '@cspell/cspell-types';
+import { MessageTypes } from '@cspell/cspell-types';
 import { InMemoryReporter } from './InMemoryReporter';
 import { mergeReporters } from './reporters';
 

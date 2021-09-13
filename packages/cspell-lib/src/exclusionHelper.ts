@@ -1,5 +1,5 @@
 import { URI as Uri } from 'vscode-uri';
-import { Glob } from '@cspell/cspell-types';
+import type { Glob } from '@cspell/cspell-types';
 import { GlobMatcher } from 'cspell-glob';
 
 const defaultAllowedSchemes = new Set(['file', 'untitled']);
