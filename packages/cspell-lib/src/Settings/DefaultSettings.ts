@@ -123,6 +123,7 @@ export const _defaultSettings: Readonly<CSpellSettingsWithSourceTrace> = {
     ignoreRegExpList: defaultRegExpExcludeList,
     languageSettings: LanguageSettings.getDefaultLanguageSettings(),
     source: { name: 'defaultSettings' },
+    reporters: [],
 };
 
 const getSettings = (function () {

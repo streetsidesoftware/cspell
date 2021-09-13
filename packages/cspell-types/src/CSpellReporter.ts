@@ -1,4 +1,4 @@
-import { TextDocumentOffset, TextOffset } from 'cspell-lib';
+import { TextDocumentOffset, TextOffset } from './TextOffset';
 
 export interface Issue extends TextDocumentOffset {
     /** text surrounding the issue text */
@@ -19,29 +19,15 @@ export const MessageTypes: MessageTypeLookup = {
     Warning: 'Warning',
 };
 
-export interface MessageEmitter {
-    (message: string, msgType: MessageType): void;
-}
+export type MessageEmitter = (message: string, msgType: MessageType) => void;
 
-export interface DebugEmitter {
-    (message: string): void;
-}
+export type DebugEmitter = (message: string) => void;
 
-type ErrorLike = Error | { message: string; name: string; toString: () => string };
+export type ErrorLike = Error | { message: string; name: string; toString: () => string };
 
-export interface ErrorEmitterVoid {
-    (message: string, error: ErrorLike): void;
-}
+export type ErrorEmitter = (message: string, error: ErrorLike) => void;
 
-export interface ErrorEmitterPromise {
-    (message: string, error: ErrorLike): Promise<void>;
-}
-
-type ErrorEmitter = ErrorEmitterVoid | ErrorEmitterPromise;
-
-export interface SpellingErrorEmitter {
-    (issue: Issue): void;
-}
+export type SpellingErrorEmitter = (issue: Issue) => void;
 
 export type ProgressTypes = 'ProgressFileComplete';
 export type ProgressItem = ProgressFileComplete;
@@ -58,16 +44,27 @@ export interface ProgressFileComplete extends ProgressBase {
     processed: boolean | undefined;
     numErrors: number | undefined;
 }
+
 export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
 
-export interface Emitters {
+export interface RunResult {
+    files: number;
+    filesWithIssues: Set<string>;
+    issues: number;
+    errors: number;
+}
+
+export type ResultEmitter = (result: RunResult) => void | Promise<void>;
+
+export interface CSpellReporter {
     issue: SpellingErrorEmitter;
     info: MessageEmitter;
     debug: DebugEmitter;
     error: ErrorEmitter;
     progress: ProgressEmitter;
+    result: ResultEmitter;
 }
 
-export function isProgressFileComplete(p: ProgressItem): p is ProgressFileComplete {
-    return p.type === 'ProgressFileComplete';
+export interface CSpellReporterModule {
+    getReporter: (settings: unknown) => CSpellReporter;
 }

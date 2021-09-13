@@ -39,7 +39,6 @@ export {
 export * from './trace';
 export { getLogger, Logger, setLogger } from './util/logger';
 export { resolveFile } from './util/resolveFile';
-export { TextDocumentOffset, TextOffset } from './util/text';
 export {
     checkText,
     CheckTextInfo,

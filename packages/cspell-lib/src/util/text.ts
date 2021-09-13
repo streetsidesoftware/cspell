@@ -15,21 +15,9 @@ import {
     regExAccents,
 } from './textRegex';
 import { scanMap } from './util';
+import { TextOffset, TextDocumentOffset } from '@cspell/cspell-types';
 
 // CSpell:ignore ings ning gimuy tsmerge
-
-export interface TextOffset {
-    text: string;
-    offset: number;
-}
-
-export interface TextDocumentOffset extends TextOffset {
-    uri?: string;
-    doc: string;
-    row: number;
-    col: number;
-    line: TextOffset;
-}
 
 export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
     return splitCamelCaseWord(wo.text).map(

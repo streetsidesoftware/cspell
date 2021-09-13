@@ -79,6 +79,11 @@ export interface FileSettings extends ExtendableSettings {
      * @default false
      */
     readonly?: boolean;
+
+    /**
+     * Custom reporters configuration
+     */
+    reporters?: ReporterSettings[];
 }
 
 export interface ExtendableSettings extends Settings {
@@ -708,3 +713,8 @@ interface BaseSource {
     /** The configuration read. */
     fileSource?: CSpellSettings;
 }
+
+/**
+ * reporter name or reporter name + reporter config
+ */
+export type ReporterSettings = string | [string] | [string, unknown];

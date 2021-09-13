@@ -1,18 +1,20 @@
-import type { CSpellSettings, Glob } from '@cspell/cspell-types';
+import type { CSpellReporter, CSpellSettings, Glob, TextDocumentOffset } from '@cspell/cspell-types';
 import * as commentJson from 'comment-json';
 import type { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 import type { ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
-import { Logger, TextDocumentOffset } from 'cspell-lib';
+import { Logger } from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
 import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { Issue, MessageTypes } from './emitters';
+import { Issue, MessageTypes, RunResult } from '@cspell/cspell-types';
 import { ConfigInfo, FileInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from './util/glob';
 import { measurePromise } from './util/timer';
 import * as util from './util/util';
+import { loadReporters, mergeReporters } from './util/reporters';
+import { toError } from './util/errors';
 
 export interface FileResult {
     fileInfo: FileInfo;
@@ -23,45 +25,19 @@ export interface FileResult {
     elapsedTimeMs: number;
 }
 
-export interface RunResult {
-    files: number;
-    filesWithIssues: Set<string>;
-    issues: number;
-    errors: number;
-}
-
-export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
+export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
+    let { reporter } = cfg;
+    cspell.setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
 
-    const log: Logger['log'] = (...params) => {
-        const msg = format(...params);
-        cfg.emitters.info(msg, 'Info');
-    };
-
-    const error: Logger['error'] = (...params) => {
-        const msg = format(...params);
-        const err = { message: '', name: 'error', toString: () => '' };
-        cfg.emitters.error(msg, err);
-    };
-    const warn: Logger['warn'] = (...params) => {
-        const msg = format(...params);
-        cfg.emitters.info(msg, 'Warning');
-    };
-
-    const logger: Logger = {
-        log,
-        warn,
-        error,
-    };
-
-    cspell.setLogger(logger);
-
-    return run();
+    const lintResult = await run();
+    await reporter.result(lintResult);
+    return lintResult;
 
     async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<FileResult> {
         const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
         const { filename, text } = fileInfo;
-        cfg.debug(`Filename: ${fileInfo.filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
+        reporter.debug(`Filename: ${fileInfo.filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
         const result: FileResult = {
             fileInfo,
             issues: [],
@@ -73,7 +49,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
 
         const startTime = Date.now();
         let spellResult: Partial<cspell.SpellCheckFileResult> = {};
-        cfg.info(
+        reporter.info(
             `Checking: ${filename}, File type: ${doc.languageId ?? 'auto'}, Language: ${doc.locale ?? 'default'}`,
             MessageTypes.Info
         );
@@ -84,7 +60,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             result.processed = r.checked;
             result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, r.issues).map(mapIssue);
         } catch (e) {
-            cfg.emitters.error(`Failed to process "${filename}"`, toError(e));
+            reporter.error(`Failed to process "${filename}"`, toError(e));
             result.errors += 1;
         }
         result.elapsedTimeMs = Date.now() - startTime;
@@ -94,15 +70,15 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         result.configErrors += await reportConfigurationErrors(config);
 
         const debugCfg = { config: { ...config, source: null }, source: spellResult.localConfigFilepath };
-        cfg.debug(commentJson.stringify(debugCfg, undefined, 2));
+        reporter.debug(commentJson.stringify(debugCfg, undefined, 2));
         const elapsed = result.elapsedTimeMs / 1000.0;
         const dictionaries = config.dictionaries || [];
-        cfg.info(
+        reporter.info(
             `Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`,
             MessageTypes.Info
         );
-        cfg.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
-        cfg.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
+        reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
+        reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
         return result;
     }
 
@@ -136,7 +112,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             const fileNum = n;
             const file = await fileP;
             const emitProgress = (elapsedTimeMs?: number, processed?: boolean, numErrors?: number) =>
-                cfg.progress({
+                reporter.progress({
                     type: 'ProgressFileComplete',
                     fileNum,
                     fileCount,
@@ -154,7 +130,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             const result = await p;
             emitProgress(elapsedTimeMs, result.processed, result.issues.length);
             // Show the spelling errors after emitting the progress.
-            result.issues.filter(cfg.uniqueFilter).forEach((issue) => cfg.logIssue(issue));
+            result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));
             const r = await p;
             status.files += 1;
             if (r.issues.length || r.errors) {
@@ -176,7 +152,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
             if (configErrors.has(key)) return;
             configErrors.add(key);
             count += 1;
-            cfg.emitters.error('Configuration', ref.error);
+            reporter.error('Configuration', ref.error);
         });
 
         const dictCollection = await cspell.getDictionary(config);
@@ -188,7 +164,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
                 if (configErrors.has(key)) return;
                 configErrors.add(key);
                 count += 1;
-                cfg.emitters.error(msg, error);
+                reporter.error(msg, error);
             });
         });
 
@@ -205,6 +181,9 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         }
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
+        reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
+        cspell.setLogger(getLoggerFromReporter(reporter));
+
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
         const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
@@ -219,7 +198,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
         }
         header(fileGlobs, excludeGlobs);
 
-        cfg.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
+        reporter.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
         const configErrors = await countConfigErrors(configInfo);
         if (configErrors) return runResult({ errors: configErrors });
@@ -238,7 +217,7 @@ export function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult>
     function header(files: string[], cliExcludes: string[]) {
         const formattedFiles = files.length > 100 ? files.slice(0, 100).concat(['...']) : files;
 
-        cfg.info(
+        reporter.info(
             `
 cspell;
 Date: ${new Date().toUTCString()}
@@ -264,7 +243,7 @@ Options:
 
         if (r.matched) {
             const { glob, source } = extractGlobSource(r.pattern);
-            cfg.info(
+            reporter.info(
                 `Excluded File: ${path.relative(root, absFilename)}; Excluded by ${glob} from ${source}`,
                 MessageTypes.Info
             );
@@ -284,7 +263,7 @@ Options:
     function filterFiles(files: string[], globMatcher: GlobMatcher): string[] {
         const patterns = globMatcher.patterns;
         const excludeInfo = patterns.map(extractGlobSource).map(({ glob, source }) => `Glob: ${glob} from ${source}`);
-        cfg.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
+        reporter.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
         const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, globMatcher));
         return result;
     }
@@ -333,17 +312,25 @@ function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
 }
 
-function toError(e: unknown): Error {
-    if (isError(e)) return e;
-    return {
-        name: 'error',
-        message: format(e),
+function getLoggerFromReporter(reporter: CSpellReporter): Logger {
+    const log: Logger['log'] = (...params) => {
+        const msg = format(...params);
+        reporter.info(msg, 'Info');
     };
-}
 
-function isError(e: unknown): e is Error {
-    if (!e || typeof e !== 'object') return false;
-    if (e instanceof Error) return true;
-    const ex = <Error>e;
-    return typeof ex.name === 'string' && typeof ex.message === 'string';
+    const error: Logger['error'] = (...params) => {
+        const msg = format(...params);
+        const err = { message: '', name: 'error', toString: () => '' };
+        reporter.error(msg, err);
+    };
+    const warn: Logger['warn'] = (...params) => {
+        const msg = format(...params);
+        reporter.info(msg, 'Warning');
+    };
+
+    return {
+        log,
+        warn,
+        error,
+    };
 }

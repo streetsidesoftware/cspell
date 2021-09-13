@@ -1,5 +1,5 @@
 import * as Text from './util/text';
-import { TextOffset } from './util/text';
+import { TextOffset } from '@cspell/cspell-types';
 import * as TextRange from './util/TextRange';
 import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDictionary';
 import { Sequence } from 'gensequence';
@@ -28,7 +28,7 @@ export interface IncludeExcludeOptions {
 }
 
 export interface WordRangeAcc {
-    textOffset: Text.TextOffset;
+    textOffset: TextOffset;
     isIncluded: boolean;
     rangePos: number;
 }
@@ -207,7 +207,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
 
 export function isWordValid(
     dict: SpellingDictionary,
-    wo: Text.TextOffset,
+    wo: TextOffset,
     line: TextOffset,
     options: HasWordOptions
 ): boolean {

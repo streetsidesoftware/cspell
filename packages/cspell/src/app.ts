@@ -14,14 +14,14 @@ import {
     removePathsFromGlobalImports,
 } from './link';
 import { tableToLines } from './util/table';
-import { Emitters, isProgressFileComplete, MessageType, ProgressItem, Issue } from './emitters';
-import { isSpellingDictionaryLoadError, SpellingDictionaryLoadError, ImportError } from 'cspell-lib';
 import { emitTraceResults } from './traceEmitter';
+import { getReporter } from './cli-reporter';
 import { CheckFailed } from './util/errors';
 
 export { CheckFailed } from './util/errors';
 
-interface Options extends CSpellApplicationOptions {
+export interface Options extends CSpellApplicationOptions {
+    files: string[];
     legacy?: boolean;
     summary: boolean;
     issues: boolean;
@@ -34,109 +34,6 @@ interface Options extends CSpellApplicationOptions {
     relative?: boolean;
 }
 // interface InitOptions extends Options {}
-
-const templateIssue = `{green $uri}:{yellow $row:$col} - $message ({red $text})`;
-const templateIssueWithSuggestions = `{green $uri}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
-const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
-const templateIssueWithContextWithSuggestions = `{green $uri}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
-const templateIssueLegacy = `${chalk.green('$uri')}[$row, $col]: $message: ${chalk.red('$text')}`;
-const templateIssueWordsOnly = '$text';
-
-function genIssueEmitter(template: string) {
-    const defaultWidth = 10;
-    let maxWidth = defaultWidth;
-    let uri: string | undefined;
-
-    return function issueEmitter(issue: Issue) {
-        if (uri !== issue.uri) {
-            maxWidth = defaultWidth;
-            uri = issue.uri;
-        }
-        maxWidth = Math.max(maxWidth * 0.999, issue.text.length, 10);
-        console.log(formatIssue(template, issue, Math.ceil(maxWidth)));
-    };
-}
-
-function errorEmitter(message: string, error: Error | SpellingDictionaryLoadError | ImportError) {
-    if (isSpellingDictionaryLoadError(error)) {
-        error = error.cause;
-    }
-    console.error(chalk.red(message), error.toString());
-}
-
-type InfoEmitter = Record<MessageType, (msg: string) => void>;
-
-function nullEmitter() {
-    /* empty */
-}
-
-function relativeFilename(filename: string, cwd = process.cwd()): string {
-    const rel = path.relative(cwd, filename);
-    if (rel.startsWith('..')) return filename;
-    return '.' + path.sep + rel;
-}
-
-function reportProgress(p: ProgressItem) {
-    if (isProgressFileComplete(p)) {
-        const fc = '' + p.fileCount;
-        const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
-        const idx = fn + '/' + fc;
-        const filename = chalk.gray(relativeFilename(p.filename));
-        const time = reportTime(p.elapsedTimeMs);
-        const skipped = p.processed === false ? ' skipped' : '';
-        const hasErrors = p.numErrors ? chalk.red` X` : '';
-        console.error(`${idx} ${filename} ${time}${skipped}${hasErrors}`);
-    }
-}
-
-function reportTime(elapsedTimeMs: number | undefined): string {
-    if (elapsedTimeMs === undefined) return '-';
-    const color = elapsedTimeMs < 1000 ? chalk.white : elapsedTimeMs < 2000 ? chalk.yellow : chalk.redBright;
-    return color(elapsedTimeMs.toFixed(2) + 'ms');
-}
-
-function getEmitters(options: Options): Emitters {
-    const issueTemplate = options.wordsOnly
-        ? templateIssueWordsOnly
-        : options.legacy
-        ? templateIssueLegacy
-        : options.showContext
-        ? options.showSuggestions
-            ? templateIssueWithContextWithSuggestions
-            : templateIssueWithContext
-        : options.showSuggestions
-        ? templateIssueWithSuggestions
-        : templateIssue;
-    const { silent, issues, progress, verbose, debug } = options;
-
-    const emitters: InfoEmitter = {
-        Debug: !silent && debug ? (s) => console.info(chalk.cyan(s)) : nullEmitter,
-        Info: !silent && verbose ? (s) => console.info(chalk.yellow(s)) : nullEmitter,
-        Warning: (s) => console.info(chalk.yellow(s)),
-    };
-
-    function infoEmitter(message: string, msgType: MessageType): void {
-        emitters[msgType]?.(message);
-    }
-
-    const root = options.root || process.cwd();
-    function relativeIssue(fn: (i: Issue) => void): (i: Issue) => void {
-        if (!options.relative) return fn;
-        return (i: Issue) => {
-            const r = { ...i };
-            r.uri = r.uri ? relativeFilename(r.uri, root) : r.uri;
-            fn(r);
-        };
-    }
-
-    return {
-        issue: relativeIssue(silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate)),
-        error: silent ? nullEmitter : errorEmitter,
-        info: infoEmitter,
-        debug: emitters.Debug,
-        progress: !silent && progress ? reportProgress : nullEmitter,
-    };
-}
 
 export async function run(program?: commander.Command, argv?: string[]): Promise<void> {
     const prog = program || commander.program;
@@ -190,20 +87,13 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .addHelpText('after', usage)
         .arguments('[files...]')
         .action((files: string[], options: Options) => {
+            options.files = files;
             const { mustFindFiles } = options;
-            const emitters: Emitters = getEmitters(options);
-            return App.lint(files, options, emitters).then((result) => {
+            const cliReporter = getReporter(options);
+            return App.lint(files, options, cliReporter).then((result) => {
                 if (!files.length && !result.files) {
                     spellCheckCommand.outputHelp();
                     throw new CheckFailed('outputHelp', 1);
-                }
-                if (options.summary && !options.silent) {
-                    console.error(
-                        'CSpell: Files checked: %d, Issues found: %d in %d files',
-                        result.files,
-                        result.issues,
-                        result.filesWithIssues.size
-                    );
                 }
                 if (result.issues || result.errors || (mustFindFiles && !result.files)) {
                     throw new CheckFailed('check failed', 1);
@@ -367,48 +257,4 @@ function collect(value: string, previous: string[] | undefined): string[] {
         return [value];
     }
     return previous.concat([value]);
-}
-
-function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: number) {
-    function clean(t: string) {
-        return t.replace(/\s+/, ' ');
-    }
-    const { uri = '', row, col, text, context, offset } = issue;
-    const contextLeft = clean(context.text.slice(0, offset - context.offset));
-    const contextRight = clean(context.text.slice(offset + text.length - context.offset));
-    const contextFull = clean(context.text);
-    const padContext = ' '.repeat(Math.max(maxIssueTextWidth - text.length, 0));
-    const rowText = row.toString();
-    const colText = col.toString();
-    const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
-    const suggestions = issue.suggestions?.join(', ') || '';
-    const message = issue.isFlagged ? '{yellow Forbidden word}' : 'Unknown word';
-    const t = template(templateStr.replace(/\$message/g, message));
-    return chalk(t)
-        .replace(/\$\{col\}/g, colText)
-        .replace(/\$\{row\}/g, rowText)
-        .replace(/\$\{text\}/g, text)
-        .replace(/\$\{uri\}/g, uri)
-        .replace(/\$col/g, colText)
-        .replace(/\$contextFull/g, contextFull)
-        .replace(/\$contextLeft/g, contextLeft)
-        .replace(/\$contextRight/g, contextRight)
-        .replace(/\$padContext/g, padContext)
-        .replace(/\$padRowCol/g, padRowCol)
-        .replace(/\$row/g, rowText)
-        .replace(/\$suggestions/g, suggestions)
-        .replace(/\$text/g, text)
-        .replace(/\$uri/g, uri);
-}
-
-class TS extends Array<string> {
-    raw: string[];
-    constructor(s: string) {
-        super(s);
-        this.raw = [s];
-    }
-}
-
-function template(s: string): TemplateStringsArray {
-    return new TS(s);
 }

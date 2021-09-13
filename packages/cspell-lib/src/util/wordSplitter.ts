@@ -1,6 +1,6 @@
 import { PairingHeap } from './PairingHeap';
 import { escapeRegEx } from './regexHelper';
-import { TextOffset } from './text';
+import { TextOffset } from '@cspell/cspell-types';
 import {
     regExDanglingQuote,
     regExEscapeCharacters,

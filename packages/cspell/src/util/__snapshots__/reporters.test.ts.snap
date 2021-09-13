@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeReporters processes a multiple reporters 1`] = `
+Object {
+  "issues": Array [
+    Object {
+      "col": 14,
+      "context": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "doc": "This text is fulll of errrorrrs.",
+      "line": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "offset": 13,
+      "row": 1,
+      "text": "fulll",
+      "uri": "text.txt",
+    },
+  ],
+  "log": Array [
+    "Debug: foo",
+    "Debug: bar",
+    "Error: something went wrong Error: oh geez",
+    "Info: some logs",
+    "Info: some warnings",
+    "Info: some debug logs",
+    "Issue: text.txt[1, 14]: Unknown word: fulll",
+    "Progress: ProgressFileComplete 1 1 text.txt",
+  ],
+  "result": Object {
+    "errors": 1,
+    "files": 1,
+    "filesWithIssues": Set {
+      "text.txt",
+    },
+    "issues": 2,
+  },
+}
+`;
+
+exports[`mergeReporters processes a multiple reporters 2`] = `
+Object {
+  "issues": Array [
+    Object {
+      "col": 14,
+      "context": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "doc": "This text is fulll of errrorrrs.",
+      "line": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "offset": 13,
+      "row": 1,
+      "text": "fulll",
+      "uri": "text.txt",
+    },
+  ],
+  "log": Array [
+    "Debug: foo",
+    "Debug: bar",
+    "Error: something went wrong Error: oh geez",
+    "Info: some logs",
+    "Info: some warnings",
+    "Info: some debug logs",
+    "Issue: text.txt[1, 14]: Unknown word: fulll",
+    "Progress: ProgressFileComplete 1 1 text.txt",
+  ],
+  "result": Object {
+    "errors": 1,
+    "files": 1,
+    "filesWithIssues": Set {
+      "text.txt",
+    },
+    "issues": 2,
+  },
+}
+`;
+
+exports[`mergeReporters processes a multiple reporters 3`] = `
+Object {
+  "issues": Array [
+    Object {
+      "col": 14,
+      "context": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "doc": "This text is fulll of errrorrrs.",
+      "line": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "offset": 13,
+      "row": 1,
+      "text": "fulll",
+      "uri": "text.txt",
+    },
+  ],
+  "log": Array [
+    "Debug: foo",
+    "Debug: bar",
+    "Error: something went wrong Error: oh geez",
+    "Info: some logs",
+    "Info: some warnings",
+    "Info: some debug logs",
+    "Issue: text.txt[1, 14]: Unknown word: fulll",
+    "Progress: ProgressFileComplete 1 1 text.txt",
+  ],
+  "result": Object {
+    "errors": 1,
+    "files": 1,
+    "filesWithIssues": Set {
+      "text.txt",
+    },
+    "issues": 2,
+  },
+}
+`;
+
+exports[`mergeReporters processes a single reporter 1`] = `
+Object {
+  "issues": Array [
+    Object {
+      "col": 14,
+      "context": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "doc": "This text is fulll of errrorrrs.",
+      "line": Object {
+        "offset": 0,
+        "text": "This text is fulll of errrorrrs.",
+      },
+      "offset": 13,
+      "row": 1,
+      "text": "fulll",
+      "uri": "text.txt",
+    },
+  ],
+  "log": Array [
+    "Debug: foo",
+    "Debug: bar",
+    "Error: something went wrong Error: oh geez",
+    "Info: some logs",
+    "Info: some warnings",
+    "Info: some debug logs",
+    "Issue: text.txt[1, 14]: Unknown word: fulll",
+    "Progress: ProgressFileComplete 1 1 text.txt",
+  ],
+  "result": Object {
+    "errors": 1,
+    "files": 1,
+    "filesWithIssues": Set {
+      "text.txt",
+    },
+    "issues": 2,
+  },
+}
+`;

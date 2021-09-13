@@ -1,5 +1,6 @@
 import { splitCamelCaseWord } from './text';
 import * as Text from './text';
+import { TextOffset } from '@cspell/cspell-types';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 
@@ -338,7 +339,7 @@ describe('Validates offset conversions', () => {
         do {
             offset = haystack.indexOf(needle, offset + 1);
             if (offset > 0) {
-                yield { offset, text: needle } as Text.TextOffset;
+                yield { offset, text: needle } as TextOffset;
             } else {
                 break;
             }

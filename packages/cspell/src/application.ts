@@ -3,15 +3,15 @@ import * as path from 'path';
 import * as util from './util/util';
 import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
 export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
-import { Emitters } from './emitters';
+import { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
 import { BaseOptions, CSpellApplicationOptions, TraceOptions } from './options';
-import { runLint, RunResult } from './lint';
+import { runLint } from './lint';
 import { calcFinalConfigInfo, readConfig, readFile } from './fileHelper';
 
 export type AppError = NodeJS.ErrnoException;
 
-export function lint(files: string[], options: CSpellApplicationOptions, emitters: Emitters): Promise<RunResult> {
+export function lint(files: string[], options: CSpellApplicationOptions, emitters: CSpellReporter): Promise<RunResult> {
     const cfg = new CSpellApplicationConfiguration(files, options, emitters);
     return runLint(cfg);
 }

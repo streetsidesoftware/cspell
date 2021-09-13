@@ -648,6 +648,34 @@
       },
       "type": "array"
     },
+    "ReporterSettings": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array"
+        },
+        {
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      ],
+      "description": "reporter name or reporter name + reporter config"
+    },
     "SimpleGlob": {
       "description": "Simple Glob string, the root will be globRoot",
       "type": "string"
@@ -867,6 +895,13 @@
       "default": false,
       "description": "Indicate that the configuration file should not be modified. This is used to prevent tools like the VS Code Spell Checker from modifying the file to add words and other configuration.",
       "type": "boolean"
+    },
+    "reporters": {
+      "description": "Custom reporters configuration",
+      "items": {
+        "$ref": "#/definitions/ReporterSettings"
+      },
+      "type": "array"
     },
     "showStatus": {
       "description": "Show status",
