@@ -33,8 +33,9 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
       - name: Update Root
         run: |
-          rm -rf package-lock.json
+          npm i
           npm update -S
+          rm -rf node_modules package-lock.json
       - name: Install
         run: npm install
       - name: Update packages
