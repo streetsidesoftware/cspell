@@ -1,9 +1,9 @@
-import { GlobSrcInfo, calcExcludeGlobInfo } from './util/glob';
+import type { CSpellReporter, Issue } from '@cspell/cspell-types';
 import * as path from 'path';
-import * as util from './util/util';
-import { IOptions } from './util/IOptions';
-import { CSpellReporter, Issue } from '@cspell/cspell-types';
 import { CSpellApplicationOptions } from './options';
+import { calcExcludeGlobInfo, GlobSrcInfo } from './util/glob';
+import { IOptions } from './util/IOptions';
+import * as util from './util/util';
 
 const defaultContextRange = 20;
 

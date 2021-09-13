@@ -1,13 +1,14 @@
+import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import * as cspell from 'cspell-lib';
+import { CheckTextInfo, TraceResult, traceWords } from 'cspell-lib';
 import * as path from 'path';
-import * as util from './util/util';
-import { traceWords, TraceResult, CheckTextInfo } from 'cspell-lib';
-export { TraceResult, IncludeExcludeFlag } from 'cspell-lib';
-import { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { BaseOptions, CSpellApplicationOptions, TraceOptions } from './options';
-import { runLint } from './lint';
 import { calcFinalConfigInfo, readConfig, readFile } from './fileHelper';
+import { runLint } from './lint';
+import { BaseOptions, CSpellApplicationOptions, TraceOptions } from './options';
+import * as util from './util/util';
+export type { TraceResult } from 'cspell-lib';
+export { IncludeExcludeFlag } from 'cspell-lib';
 
 export type AppError = NodeJS.ErrnoException;
 

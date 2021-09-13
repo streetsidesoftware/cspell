@@ -1,21 +1,21 @@
+import type { TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
 import { Sequence, sequenceFromRegExpMatch } from 'gensequence';
 import { binarySearch } from './search';
 import {
+    regExAccents,
+    regExAllLower,
+    regExAllUpper,
+    regExFirstUpper,
+    regExIgnoreCharacters,
     regExLines,
-    regExUpperSOrIng,
+    regExMatchRegExParts,
     regExSplitWords,
     regExSplitWords2,
+    regExUpperSOrIng,
     regExWords,
     regExWordsAndDigits,
-    regExIgnoreCharacters,
-    regExFirstUpper,
-    regExAllUpper,
-    regExAllLower,
-    regExMatchRegExParts,
-    regExAccents,
 } from './textRegex';
 import { scanMap } from './util';
-import { TextOffset, TextDocumentOffset } from '@cspell/cspell-types';
 
 // CSpell:ignore ings ning gimuy tsmerge
 

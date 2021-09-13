@@ -1,4 +1,11 @@
-import { ErrorLike, Issue, MessageType, ProgressFileComplete, ProgressItem, RunResult } from '@cspell/cspell-types';
+import type {
+    ErrorLike,
+    Issue,
+    MessageType,
+    ProgressFileComplete,
+    ProgressItem,
+    RunResult,
+} from '@cspell/cspell-types';
 
 export type CSpellJSONReporterOutput = {
     /**

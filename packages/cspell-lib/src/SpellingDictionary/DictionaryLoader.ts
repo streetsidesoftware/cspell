@@ -1,11 +1,11 @@
-import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
-import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
-import { SpellingDictionary } from './SpellingDictionary';
+import type { DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import { stat } from 'fs-extra';
 import * as path from 'path';
 import { readLines } from '../util/fileReader';
-import { stat } from 'fs-extra';
+import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
+import { SpellingDictionary } from './SpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
-import { DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 
 const MAX_AGE = 10000;
 

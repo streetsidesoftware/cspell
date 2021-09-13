@@ -1,5 +1,7 @@
-import { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
+import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
+import { GlobMatcher } from 'cspell-glob';
 import { readFile } from 'fs-extra';
+import * as path from 'path';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { getLanguagesForExt as _getLanguagesForExt, isGenerated } from './LanguageIds';
 import {
@@ -10,12 +12,10 @@ import {
     mergeSettings,
     searchForConfig,
 } from './Settings';
-import { validateText, ValidateTextOptions, ValidationIssue } from './validator';
-import * as path from 'path';
 import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
-import { GlobMatcher } from 'cspell-glob';
-import { memorizer } from './util/Memorizer';
 import { isError } from './util/errors';
+import { memorizer } from './util/Memorizer';
+import { validateText, ValidateTextOptions, ValidationIssue } from './validator';
 
 const getLanguagesForExt = memorizer(_getLanguagesForExt);
 

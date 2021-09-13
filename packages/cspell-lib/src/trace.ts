@@ -1,4 +1,4 @@
-import { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
+import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
 import { genSequence } from 'gensequence';
 import { LanguageId } from './LanguageIds';
 import { finalizeSettings, mergeSettings } from './Settings';

@@ -1,9 +1,9 @@
-import * as Text from './util/text';
-import { TextOffset } from '@cspell/cspell-types';
-import * as TextRange from './util/TextRange';
-import { SpellingDictionary, HasOptions } from './SpellingDictionary/SpellingDictionary';
+import type { TextOffset } from '@cspell/cspell-types';
 import { Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
+import { HasOptions, SpellingDictionary } from './SpellingDictionary/SpellingDictionary';
+import * as Text from './util/text';
+import * as TextRange from './util/TextRange';
 import { split } from './util/wordSplitter';
 
 export interface ValidationOptions extends IncludeExcludeOptions {

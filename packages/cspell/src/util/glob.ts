@@ -1,8 +1,8 @@
+import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
+import { fileOrGlobToGlob, GlobMatcher, GlobPatternWithRoot } from 'cspell-glob';
 import glob, { IGlob } from 'glob';
 import * as path from 'path';
 import { IOptions } from './IOptions';
-import { GlobMatcher, GlobPatternWithRoot, fileOrGlobToGlob } from 'cspell-glob';
-import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 
 export interface GlobOptions extends IOptions {
     cwd?: string;

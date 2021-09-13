@@ -1,4 +1,4 @@
-import { CSpellUserSettings, DictionaryDefinition, DictionaryReference } from '@cspell/cspell-types';
+import type { CSpellUserSettings, DictionaryDefinition, DictionaryReference } from '@cspell/cspell-types';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';

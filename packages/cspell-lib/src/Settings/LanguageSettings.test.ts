@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { getGlobalSettings, mergeSettings } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
-import { CSpellUserSettings } from '@cspell/cspell-types';
-
 import * as LS from './LanguageSettings';
+import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
 
 const extraSettings: CSpellUserSettings = {
     ignoreRegExpList: ['binary'],
