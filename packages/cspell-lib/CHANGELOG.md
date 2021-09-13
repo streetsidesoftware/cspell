@@ -7,236 +7,132 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.10.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.9.1...v5.10.0-alpha.0) (2021-09-13)
-
 
 ### Features
 
-* Сustom reporters support ([#1643](https://github.com/streetsidesoftware/cspell/issues/1643)) ([3b9ac1b](https://github.com/streetsidesoftware/cspell/commit/3b9ac1b50972527288aa076970f657546a3ad551))
-
-
-
-
+- Custom reporters support ([#1643](https://github.com/streetsidesoftware/cspell/issues/1643)) ([3b9ac1b](https://github.com/streetsidesoftware/cspell/commit/3b9ac1b50972527288aa076970f657546a3ad551))
 
 ## [5.9.1](https://github.com/streetsidesoftware/cspell/compare/v5.9.1-alpha.1...v5.9.1) (2021-09-12)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 ## [5.9.1-alpha.1](https://github.com/streetsidesoftware/cspell/compare/v5.9.1-alpha.0...v5.9.1-alpha.1) (2021-09-12)
-
 
 ### Reverts
 
-* Revert "enable incremental typescript builds (#1671)" ([65664b2](https://github.com/streetsidesoftware/cspell/commit/65664b213e67a4108a2d38692f8fbd471b00afb7)), closes [#1671](https://github.com/streetsidesoftware/cspell/issues/1671)
-
-
-
-
+- Revert "enable incremental typescript builds (#1671)" ([65664b2](https://github.com/streetsidesoftware/cspell/commit/65664b213e67a4108a2d38692f8fbd471b00afb7)), closes [#1671](https://github.com/streetsidesoftware/cspell/issues/1671)
 
 ## [5.9.1-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.9.0...v5.9.1-alpha.0) (2021-09-11)
 
-
 ### Bug Fixes
 
-* Change the suggestions to not include ties by default. ([#1678](https://github.com/streetsidesoftware/cspell/issues/1678)) ([0efbd58](https://github.com/streetsidesoftware/cspell/commit/0efbd5847ca433799c81b8cc4a227da4925d4dbf))
-* drop need for iconv-lite and iterable-to-stream ([#1677](https://github.com/streetsidesoftware/cspell/issues/1677)) ([c7ffcc7](https://github.com/streetsidesoftware/cspell/commit/c7ffcc786ed360fc1a59f84915ea7d204d51d3a5))
-* Perf - Try improving suggestion performance. ([#1639](https://github.com/streetsidesoftware/cspell/issues/1639)) ([aad4352](https://github.com/streetsidesoftware/cspell/commit/aad43524f502507f87fb6687d30d9684f2253c32))
-* Support Suggestion timeouts ([#1668](https://github.com/streetsidesoftware/cspell/issues/1668)) ([1698aaf](https://github.com/streetsidesoftware/cspell/commit/1698aaf25a07a5f4fb1eb0de46b56a8cae49e2c0))
-
-
-
-
+- Change the suggestions to not include ties by default. ([#1678](https://github.com/streetsidesoftware/cspell/issues/1678)) ([0efbd58](https://github.com/streetsidesoftware/cspell/commit/0efbd5847ca433799c81b8cc4a227da4925d4dbf))
+- drop need for iconv-lite and iterable-to-stream ([#1677](https://github.com/streetsidesoftware/cspell/issues/1677)) ([c7ffcc7](https://github.com/streetsidesoftware/cspell/commit/c7ffcc786ed360fc1a59f84915ea7d204d51d3a5))
+- Perf - Try improving suggestion performance. ([#1639](https://github.com/streetsidesoftware/cspell/issues/1639)) ([aad4352](https://github.com/streetsidesoftware/cspell/commit/aad43524f502507f87fb6687d30d9684f2253c32))
+- Support Suggestion timeouts ([#1668](https://github.com/streetsidesoftware/cspell/issues/1668)) ([1698aaf](https://github.com/streetsidesoftware/cspell/commit/1698aaf25a07a5f4fb1eb0de46b56a8cae49e2c0))
 
 # [5.9.0](https://github.com/streetsidesoftware/cspell/compare/v5.9.0-alpha.0...v5.9.0) (2021-08-31)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.9.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.8.2...v5.9.0-alpha.0) (2021-08-31)
-
 
 ### Features
 
-* Upgrade to the newest, (case sensitive), English dictionary ([#1545](https://github.com/streetsidesoftware/cspell/issues/1545)) ([581fc4d](https://github.com/streetsidesoftware/cspell/commit/581fc4d8ce0c18df779670cb6a41899d3b9c4e48))
-
-
-
-
+- Upgrade to the newest, (case sensitive), English dictionary ([#1545](https://github.com/streetsidesoftware/cspell/issues/1545)) ([581fc4d](https://github.com/streetsidesoftware/cspell/commit/581fc4d8ce0c18df779670cb6a41899d3b9c4e48))
 
 ## [5.8.2](https://github.com/streetsidesoftware/cspell/compare/v5.8.1...v5.8.2) (2021-08-25)
 
-
 ### Bug Fixes
 
-* fix issue where some dictionaries (nl-nl) could cause slow suggestions ([#1583](https://github.com/streetsidesoftware/cspell/issues/1583)) ([8c8d0ee](https://github.com/streetsidesoftware/cspell/commit/8c8d0eeea3e2003792f67c234b5d562be7f3f5c7))
-
-
-
-
+- fix issue where some dictionaries (nl-nl) could cause slow suggestions ([#1583](https://github.com/streetsidesoftware/cspell/issues/1583)) ([8c8d0ee](https://github.com/streetsidesoftware/cspell/commit/8c8d0eeea3e2003792f67c234b5d562be7f3f5c7))
 
 ## [5.8.1](https://github.com/streetsidesoftware/cspell/compare/v5.8.0...v5.8.1) (2021-08-24)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.8.0](https://github.com/streetsidesoftware/cspell/compare/v5.7.2...v5.8.0) (2021-08-21)
-
 
 ### Features
 
-* Add support for `noSuggest` dictionaries. ([#1554](https://github.com/streetsidesoftware/cspell/issues/1554)) ([f0ccda5](https://github.com/streetsidesoftware/cspell/commit/f0ccda5abec9c236eb5387bcf6a6349f31cb81b7))
-* Improve `trace` words command results. ([#1558](https://github.com/streetsidesoftware/cspell/issues/1558)) ([ed8a5dc](https://github.com/streetsidesoftware/cspell/commit/ed8a5dc17ffa6de901887d3bd5b6bacf67217866))
-
-
-
-
+- Add support for `noSuggest` dictionaries. ([#1554](https://github.com/streetsidesoftware/cspell/issues/1554)) ([f0ccda5](https://github.com/streetsidesoftware/cspell/commit/f0ccda5abec9c236eb5387bcf6a6349f31cb81b7))
+- Improve `trace` words command results. ([#1558](https://github.com/streetsidesoftware/cspell/issues/1558)) ([ed8a5dc](https://github.com/streetsidesoftware/cspell/commit/ed8a5dc17ffa6de901887d3bd5b6bacf67217866))
 
 ## [5.7.2](https://github.com/streetsidesoftware/cspell/compare/v5.7.1...v5.7.2) (2021-08-16)
 
-
 ### Bug Fixes
 
-* Detect when module default is used with `cspell.config.js` files. ([#1529](https://github.com/streetsidesoftware/cspell/issues/1529)) ([e05aeff](https://github.com/streetsidesoftware/cspell/commit/e05aeffaa398366f4b6ce4c10728df8d2fa1860f))
-
-
-
-
+- Detect when module default is used with `cspell.config.js` files. ([#1529](https://github.com/streetsidesoftware/cspell/issues/1529)) ([e05aeff](https://github.com/streetsidesoftware/cspell/commit/e05aeffaa398366f4b6ce4c10728df8d2fa1860f))
 
 ## [5.7.1](https://github.com/streetsidesoftware/cspell/compare/v5.7.0...v5.7.1) (2021-08-14)
 
-
 ### Bug Fixes
 
-* do not return forbidden words in suggestions ([#1519](https://github.com/streetsidesoftware/cspell/issues/1519)) ([a9936d6](https://github.com/streetsidesoftware/cspell/commit/a9936d6b473a6e198fd58a2e3f38c4de52321b45))
-* Make sure hyphenated words work in ignoreWords ([#1520](https://github.com/streetsidesoftware/cspell/issues/1520)) ([81a86c7](https://github.com/streetsidesoftware/cspell/commit/81a86c7e9e34c5196114d2ba127059734b6fb53f)), closes [#1497](https://github.com/streetsidesoftware/cspell/issues/1497)
-
-
-
-
+- do not return forbidden words in suggestions ([#1519](https://github.com/streetsidesoftware/cspell/issues/1519)) ([a9936d6](https://github.com/streetsidesoftware/cspell/commit/a9936d6b473a6e198fd58a2e3f38c4de52321b45))
+- Make sure hyphenated words work in ignoreWords ([#1520](https://github.com/streetsidesoftware/cspell/issues/1520)) ([81a86c7](https://github.com/streetsidesoftware/cspell/commit/81a86c7e9e34c5196114d2ba127059734b6fb53f)), closes [#1497](https://github.com/streetsidesoftware/cspell/issues/1497)
 
 # [5.7.0](https://github.com/streetsidesoftware/cspell/compare/v5.7.0-alpha.0...v5.7.0) (2021-08-14)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.7.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.6.7...v5.7.0-alpha.0) (2021-08-14)
-
 
 ### Features
 
-* Support forbidden words in dictionaries ([#1516](https://github.com/streetsidesoftware/cspell/issues/1516)) ([8d7596b](https://github.com/streetsidesoftware/cspell/commit/8d7596b004100dd296e1058659e39eefc56c6f56))
-
-
-
-
+- Support forbidden words in dictionaries ([#1516](https://github.com/streetsidesoftware/cspell/issues/1516)) ([8d7596b](https://github.com/streetsidesoftware/cspell/commit/8d7596b004100dd296e1058659e39eefc56c6f56))
 
 ## [5.6.7](https://github.com/streetsidesoftware/cspell/compare/v5.6.6...v5.6.7) (2021-08-13)
 
-
 ### Bug Fixes
 
-* error output when configstore dir not accessible. ([#1512](https://github.com/streetsidesoftware/cspell/issues/1512)) ([68a63d1](https://github.com/streetsidesoftware/cspell/commit/68a63d16215b551a9fa32ac5ef1cd8e12cb26ec5)), closes [#1510](https://github.com/streetsidesoftware/cspell/issues/1510)
-* Fix issue with suggestions. ([#1507](https://github.com/streetsidesoftware/cspell/issues/1507)) ([6a44e26](https://github.com/streetsidesoftware/cspell/commit/6a44e26ba37af882f6330d054df9c05ec8f9b0d9))
-* ignore TrueTypeFont files ([#1445](https://github.com/streetsidesoftware/cspell/issues/1445)) ([336c77f](https://github.com/streetsidesoftware/cspell/commit/336c77fbc4eab882cc8d1720ffc5ef514a05d2e6))
-
-
-
-
+- error output when configstore dir not accessible. ([#1512](https://github.com/streetsidesoftware/cspell/issues/1512)) ([68a63d1](https://github.com/streetsidesoftware/cspell/commit/68a63d16215b551a9fa32ac5ef1cd8e12cb26ec5)), closes [#1510](https://github.com/streetsidesoftware/cspell/issues/1510)
+- Fix issue with suggestions. ([#1507](https://github.com/streetsidesoftware/cspell/issues/1507)) ([6a44e26](https://github.com/streetsidesoftware/cspell/commit/6a44e26ba37af882f6330d054df9c05ec8f9b0d9))
+- ignore TrueTypeFont files ([#1445](https://github.com/streetsidesoftware/cspell/issues/1445)) ([336c77f](https://github.com/streetsidesoftware/cspell/commit/336c77fbc4eab882cc8d1720ffc5ef514a05d2e6))
 
 ## [5.6.6](https://github.com/streetsidesoftware/cspell/compare/v5.6.5...v5.6.6) (2021-06-18)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 ## [5.6.5](https://github.com/streetsidesoftware/cspell/compare/v5.6.4...v5.6.5) (2021-06-18)
-
 
 ### Bug Fixes
 
-* fix regression related to trailing accents missing in legacy dicts ([#1345](https://github.com/streetsidesoftware/cspell/issues/1345)) ([b8d8810](https://github.com/streetsidesoftware/cspell/commit/b8d8810fafb585a4ffc77f3cb350888d9a6a52ed))
-
-
-
-
+- fix regression related to trailing accents missing in legacy dicts ([#1345](https://github.com/streetsidesoftware/cspell/issues/1345)) ([b8d8810](https://github.com/streetsidesoftware/cspell/commit/b8d8810fafb585a4ffc77f3cb350888d9a6a52ed))
 
 ## [5.6.4](https://github.com/streetsidesoftware/cspell/compare/v5.6.3...v5.6.4) (2021-06-15)
 
-
 ### Bug Fixes
 
-* [#1336](https://github.com/streetsidesoftware/cspell/issues/1336) ([#1342](https://github.com/streetsidesoftware/cspell/issues/1342)) ([7a0b278](https://github.com/streetsidesoftware/cspell/commit/7a0b278f5d96c163b901afeb3ef08f55af609dda))
-* early out on checking binary files. ([#1337](https://github.com/streetsidesoftware/cspell/issues/1337)) ([a948808](https://github.com/streetsidesoftware/cspell/commit/a9488080daf99ed992ac55e450d522a78e5708d7))
-* Fix issue with missing suggestions ([#1339](https://github.com/streetsidesoftware/cspell/issues/1339)) ([cfecde8](https://github.com/streetsidesoftware/cspell/commit/cfecde85b80d70063aa647d0f6837c879a938ce1))
-
-
-
-
+- [#1336](https://github.com/streetsidesoftware/cspell/issues/1336) ([#1342](https://github.com/streetsidesoftware/cspell/issues/1342)) ([7a0b278](https://github.com/streetsidesoftware/cspell/commit/7a0b278f5d96c163b901afeb3ef08f55af609dda))
+- early out on checking binary files. ([#1337](https://github.com/streetsidesoftware/cspell/issues/1337)) ([a948808](https://github.com/streetsidesoftware/cspell/commit/a9488080daf99ed992ac55e450d522a78e5708d7))
+- Fix issue with missing suggestions ([#1339](https://github.com/streetsidesoftware/cspell/issues/1339)) ([cfecde8](https://github.com/streetsidesoftware/cspell/commit/cfecde85b80d70063aa647d0f6837c879a938ce1))
 
 ## [5.6.3](https://github.com/streetsidesoftware/cspell/compare/v5.6.2...v5.6.3) (2021-06-11)
 
-
 ### Bug Fixes
 
-* fix issue with legacy dictionaries that do not have some accents ([5a9aa27](https://github.com/streetsidesoftware/cspell/commit/5a9aa27decba013299111a66a89da18c7123b321))
-* support case sensitive document checking. ([527de4a](https://github.com/streetsidesoftware/cspell/commit/527de4a80dd281526783404127d23a0b7a51ec52))
-
-
-
-
+- fix issue with legacy dictionaries that do not have some accents ([5a9aa27](https://github.com/streetsidesoftware/cspell/commit/5a9aa27decba013299111a66a89da18c7123b321))
+- support case sensitive document checking. ([527de4a](https://github.com/streetsidesoftware/cspell/commit/527de4a80dd281526783404127d23a0b7a51ec52))
 
 ## [5.6.2](https://github.com/streetsidesoftware/cspell/compare/v5.6.1...v5.6.2) (2021-06-10)
 
-
 ### Bug Fixes
 
-* *minor breaking* fix issues with accents and the word splitter ([#1330](https://github.com/streetsidesoftware/cspell/issues/1330)) ([845c314](https://github.com/streetsidesoftware/cspell/commit/845c3146efa8d4cce7bfdfbf76627ced298ac8b7))
-
-
-
-
+- _minor breaking_ fix issues with accents and the word splitter ([#1330](https://github.com/streetsidesoftware/cspell/issues/1330)) ([845c314](https://github.com/streetsidesoftware/cspell/commit/845c3146efa8d4cce7bfdfbf76627ced298ac8b7))
 
 ## [5.6.1](https://github.com/streetsidesoftware/cspell/compare/v5.6.0...v5.6.1) (2021-06-09)
 
-
 ### Bug Fixes
 
-* Fix issues with accent characters ([#1322](https://github.com/streetsidesoftware/cspell/issues/1322)) ([4d65dfb](https://github.com/streetsidesoftware/cspell/commit/4d65dfbc3c0091450de2d6023b41c623faf763f0)), closes [#1321](https://github.com/streetsidesoftware/cspell/issues/1321)
-* Use a dictionary for ignoreWords to be consistent with `words` ([#1326](https://github.com/streetsidesoftware/cspell/issues/1326)) ([ee3897d](https://github.com/streetsidesoftware/cspell/commit/ee3897d62dcc5f5af177141734015ad9a9dcddff))
-
-
-
-
+- Fix issues with accent characters ([#1322](https://github.com/streetsidesoftware/cspell/issues/1322)) ([4d65dfb](https://github.com/streetsidesoftware/cspell/commit/4d65dfbc3c0091450de2d6023b41c623faf763f0)), closes [#1321](https://github.com/streetsidesoftware/cspell/issues/1321)
+- Use a dictionary for ignoreWords to be consistent with `words` ([#1326](https://github.com/streetsidesoftware/cspell/issues/1326)) ([ee3897d](https://github.com/streetsidesoftware/cspell/commit/ee3897d62dcc5f5af177141734015ad9a9dcddff))
 
 # [5.6.0](https://github.com/streetsidesoftware/cspell/compare/v5.5.2...v5.6.0) (2021-06-05)
 
-
 ### Features
 
-* support `.pnp.js` when loading configurations. ([#1307](https://github.com/streetsidesoftware/cspell/issues/1307)) ([76da68c](https://github.com/streetsidesoftware/cspell/commit/76da68cf6a13586598689d01bce3a24bc255530a))
-
-
-
-
+- support `.pnp.js` when loading configurations. ([#1307](https://github.com/streetsidesoftware/cspell/issues/1307)) ([76da68c](https://github.com/streetsidesoftware/cspell/commit/76da68cf6a13586598689d01bce3a24bc255530a))
 
 ## [5.5.2](https://github.com/streetsidesoftware/cspell/compare/v5.5.1...v5.5.2) (2021-05-30)
 
