@@ -1,3 +1,5 @@
+import { hrtime } from 'process';
+
 export interface Timer {
     /** Start / restart the timer. */
     start(): void;
@@ -8,15 +10,15 @@ export interface Timer {
     elapsed(): number;
 }
 
-export function createTimer(hrTime = process.hrtime): Timer {
-    let start = hrTime();
+export function createTimer(hrTimeFn = hrtime): Timer {
+    let start: HRTime = hrTimeFn();
 
     return {
         start() {
-            start = hrTime();
+            start = hrTimeFn();
         },
         elapsed() {
-            return toMilliseconds(hrTime(start));
+            return toMilliseconds(hrTimeFn(start));
         },
     };
 }
