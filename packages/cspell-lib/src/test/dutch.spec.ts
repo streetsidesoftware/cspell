@@ -26,6 +26,6 @@ describe('Validate that Dutch text is correctly checked.', () => {
                 .map((a) => a.text)
                 .filter(util.uniqueFn())
                 .sort()
-        ).toEqual(['ANBI', 'RABO', 'RABONL', 'unported']);
+        ).toEqual(['RABO', 'RABONL', 'unported']);
     });
 });
