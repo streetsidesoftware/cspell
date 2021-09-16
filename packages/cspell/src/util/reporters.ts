@@ -7,14 +7,25 @@ import type {
 } from '@cspell/cspell-types';
 import { ApplicationError, toError } from './errors';
 
-function mergeEmitters<T extends keyof Omit<CSpellReporter, 'result'>>(
-    reporters: ReadonlyArray<CSpellReporter>,
-    emitterName: T
-): CSpellReporter[T] {
-    return async (...args: unknown[]) => {
-        // eslint-disable-next-line prefer-spread
-        reporters.forEach((reporter: any) => reporter[emitterName].apply(reporter, args));
+type StandardEmitters = Omit<CSpellReporter, 'result'>;
+
+function callAll<P0>(methods: ((p: P0) => void)[]): (p: P0) => void;
+function callAll<P0, P1>(methods: ((p0: P0, p1: P1) => void)[]): (p0: P0, p1: P1) => void;
+function callAll<P>(methods: ((...p: P[]) => void)[]): (...p: P[]) => void {
+    return (...p: P[]) => {
+        for (const method of methods) {
+            method(...p);
+        }
+        return;
     };
+}
+
+function extractEmitter<K extends keyof StandardEmitters>(
+    reporters: ReadonlyArray<StandardEmitters>,
+    emitterName: K
+): StandardEmitters[K][] {
+    // The `bind` is used in case the reporter is a class.
+    return reporters.map((r) => r[emitterName].bind(r) as StandardEmitters[K]);
 }
 
 function mergeResultEmitters(reporters: ReadonlyArray<CSpellReporter>): CSpellReporter['result'] {
@@ -28,11 +39,11 @@ function mergeResultEmitters(reporters: ReadonlyArray<CSpellReporter>): CSpellRe
  */
 export function mergeReporters(...reporters: ReadonlyArray<CSpellReporter>): CSpellReporter {
     return {
-        issue: mergeEmitters(reporters, 'issue'),
-        info: mergeEmitters(reporters, 'info'),
-        debug: mergeEmitters(reporters, 'debug'),
-        progress: mergeEmitters(reporters, 'progress'),
-        error: mergeEmitters(reporters, 'error'),
+        issue: callAll(extractEmitter(reporters, 'issue')),
+        info: callAll(extractEmitter(reporters, 'info')),
+        debug: callAll(extractEmitter(reporters, 'debug')),
+        progress: callAll(extractEmitter(reporters, 'progress')),
+        error: callAll(extractEmitter(reporters, 'error')),
         result: mergeResultEmitters(reporters),
     };
 }
