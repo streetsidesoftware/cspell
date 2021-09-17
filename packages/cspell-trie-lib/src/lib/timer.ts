@@ -1,6 +1,4 @@
-import { hrtime } from 'process';
-
-const _hrTime: HRTimeFn = hrtime || polyHrTime;
+const _hrTime: HRTimeFn = process?.hrtime || polyHrTime;
 
 export interface Timer {
     /** Start / restart the timer. */
