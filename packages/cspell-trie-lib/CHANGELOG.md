@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.10.1](https://github.com/streetsidesoftware/cspell/compare/v5.10.0...v5.10.1) (2021-09-17)
+
+
+### Bug Fixes
+
+* Use process directly instead of importing it. ([#1714](https://github.com/streetsidesoftware/cspell/issues/1714)) ([db18a52](https://github.com/streetsidesoftware/cspell/commit/db18a52fbd290077ccb1a5c002bf85be891a13fc)), closes [#1704](https://github.com/streetsidesoftware/cspell/issues/1704)
+
+
+
+
+
 # [5.10.0](https://github.com/streetsidesoftware/cspell/compare/v5.10.0-alpha.6...v5.10.0) (2021-09-17)
 
 **Note:** Version bump only for package cspell-trie-lib
