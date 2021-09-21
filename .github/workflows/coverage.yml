@@ -23,11 +23,11 @@ jobs:
       - run: npm run build
       - run: npm run coverage
 
-      # - name: Upload coverage Coveralls
-      #   uses: coverallsapp/github-action@1.1.3
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     path-to-lcov: ./lcov.info
+      - name: Upload coverage Coveralls
+        uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./lcov.info
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
