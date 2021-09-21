@@ -30,6 +30,7 @@ const { normalizeSettings, validateRawConfigVersion, validateRawConfigExports } 
 const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
 const samplesDir = path.resolve(rootCspellLib, 'samples');
 const samplesSrc = path.join(samplesDir, 'src');
+const testFixtures = path.join(rootCspellLib, '../../test-fixtures');
 
 jest.mock('../util/logger');
 
@@ -514,6 +515,8 @@ describe('Validate search/load config files', () => {
     `('Load from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         const searchResult = await loadConfig(file);
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
+        expect(mockedLogWarning).toHaveBeenCalledTimes(0);
+        expect(mockedLogError).toHaveBeenCalledTimes(0);
     });
 
     test.each`
@@ -525,10 +528,21 @@ describe('Validate search/load config files', () => {
         ${s('js-config/cspell-no-export.js')} | ${cfg(s('js-config/cspell-no-export.js'))}
         ${s('js-config/cspell-bad.js')}       | ${cfg(readError(s('js-config/cspell-bad.js')))}
     `('ReadRawSettings from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
-        // js-config/cspell-no-export.js logs a message.
-        jest.spyOn(console, 'log').mockImplementation(() => undefined);
         const searchResult = await readRawSettings(file);
         expect(searchResult).toEqual(expectedConfig ? expect.objectContaining(expectedConfig) : undefined);
+        expect(mockedLogWarning).toHaveBeenCalledTimes(0);
+        expect(mockedLogError).toHaveBeenCalledTimes(0);
+    });
+
+    test.each`
+        file                                                   | expectedConfig
+        ${path.join(testFixtures, 'issues/issue-1729/a.yaml')} | ${oc({ version: '0.2' })}
+        ${path.join(testFixtures, 'issues/issue-1729/b.yaml')} | ${oc({ version: '0.2' })}
+    `('ReadRawSettings from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
+        const searchResult = await readRawSettings(file);
+        expect(searchResult).toEqual(expectedConfig);
+        expect(mockedLogWarning).toHaveBeenCalledTimes(0);
+        expect(mockedLogError).toHaveBeenCalledTimes(0);
     });
 
     test('loadPnP', async () => {
@@ -551,10 +565,23 @@ describe('Validate search/load config files', () => {
     });
 
     test.each`
+        config
+        ${{ version: '0.2' }}
+        ${{}}
+        ${{ version: undefined }}
+    `('validateRawConfigVersion valid $config', ({ config }) => {
+        validateRawConfigVersion(config, { filename: 'filename' });
+        expect(mockedLogWarning).toHaveBeenCalledTimes(0);
+        expect(mockedLogError).toHaveBeenCalledTimes(0);
+    });
+
+    test.each`
         config                  | mocked              | expected
         ${{ version: 'hello' }} | ${mockedLogError}   | ${'Unsupported config file version: "hello"\n  File: "filename"'}
         ${{ version: '0.1' }}   | ${mockedLogWarning} | ${'Legacy config file version found: "0.1", upgrade to "0.2"\n  File: "filename"'}
         ${{ version: '0.3' }}   | ${mockedLogWarning} | ${'Newer config file version found: "0.3". Supported version is "0.2"\n  File: "filename"'}
+        ${{ version: 0.2 }}     | ${mockedLogError}   | ${'Unsupported config file version: "0.2", string expected\n  File: "filename"'}
+        ${{ version: 0.3 }}     | ${mockedLogError}   | ${'Unsupported config file version: "0.3", string expected\n  File: "filename"'}
     `('validateRawConfigVersion $config', ({ config, mocked, expected }) => {
         validateRawConfigVersion(config, { filename: 'filename' });
         expect(mocked).toHaveBeenCalledWith(expected);

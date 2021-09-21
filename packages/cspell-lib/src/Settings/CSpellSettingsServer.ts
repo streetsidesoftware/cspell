@@ -30,6 +30,8 @@ const configSettingsFileVersion0_1 = '0.1';
 const configSettingsFileVersion0_2 = '0.2';
 const currentSettingsFileVersion = configSettingsFileVersion0_2;
 
+const setOfSupportedConfigVersions = new Set<string>(supportedCSpellConfigVersions);
+
 export const sectionCSpell = 'cSpell';
 
 export const defaultFileName = 'cspell.json';
@@ -113,6 +115,7 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
         const r = cspellConfigExplorerSync.load(filename);
         if (!r?.config) throw 'not found';
         Object.assign(s, r.config);
+        normalizeRawConfig(s);
         validateRawConfig(s, fileRef);
     } catch (err) {
         fileRef.error =
@@ -822,9 +825,17 @@ function validationMessage(msg: string, fileRef: ImportFileRef) {
     return msg + `\n  File: "${fileRef.filename}"`;
 }
 
-function validateRawConfigVersion(config: CSpellUserSettings, fileRef: ImportFileRef): void {
+function validateRawConfigVersion(config: CSpellUserSettings | { version: unknown }, fileRef: ImportFileRef): void {
     const { version } = config;
-    if (version === undefined || supportedCSpellConfigVersions.includes(version)) return;
+
+    if (version === undefined) return;
+
+    if (typeof version !== 'string') {
+        logError(validationMessage(`Unsupported config file version: "${version}", string expected`, fileRef));
+        return;
+    }
+
+    if (setOfSupportedConfigVersions.has(version)) return;
 
     if (!/^\d+(\.\d+)*$/.test(version)) {
         logError(validationMessage(`Unsupported config file version: "${version}"`, fileRef));
@@ -844,6 +855,16 @@ function validateRawConfigExports(config: CSpellUserSettings, fileRef: ImportFil
         throw new ImportError(
             validationMessage('Module `export default` is not supported.\n  Use `module.exports =` instead.', fileRef)
         );
+    }
+}
+
+interface NormalizableFields {
+    version?: string | number;
+}
+
+function normalizeRawConfig(config: CSpellUserSettings | NormalizableFields) {
+    if (typeof config.version === 'number') {
+        config.version = config.version.toString();
     }
 }
 
