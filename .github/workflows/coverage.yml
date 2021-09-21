@@ -18,11 +18,11 @@ jobs:
       - run: npm ci
       - run: npm run coverage
 
-      # - name: Upload coverage Coveralls
-      #   uses: coverallsapp/github-action@1.1.3
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     path-to-lcov: ./lcov.info
+      - name: Upload coverage Coveralls
+        uses: coverallsapp/github-action@1.1.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./lcov.info
 
       # Do not upload to Codecov it only supports 1 comparison branch
       # - name: Upload coverage to Codecov
