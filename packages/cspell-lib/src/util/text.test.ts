@@ -6,13 +6,16 @@ import { splitCamelCaseWord } from './text';
 
 describe('Util Text', () => {
     test.each`
-        pattern     | expected
-        ${''}       | ${undefined}
-        ${'a'}      | ${/a/gimu}
-        ${'/'}      | ${/\//gimu}
-        ${'/.*/'}   | ${/.*/gu}
-        ${'/.*/gi'} | ${/.*/giu}
-        ${/abc/}    | ${/abc/}
+        pattern      | expected
+        ${''}        | ${undefined}
+        ${'a'}       | ${/a/gimu}
+        ${'/'}       | ${/\//gimu}
+        ${'/.*/'}    | ${/.*/g}
+        ${'/.*/m'}   | ${/.*/gm}
+        ${'/.*/gi'}  | ${/.*/gi}
+        ${'/.*/giu'} | ${/.*/giu}
+        ${/abc/}     | ${/abc/}
+        ${/abc/gu}   | ${/abc/gu}
     `('tests build regexp from string', ({ pattern, expected }) => {
         expect(Text.stringToRegExp(pattern)).toEqual(expected);
     });
