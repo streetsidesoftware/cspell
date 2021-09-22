@@ -175,7 +175,7 @@ function offsetMap(offset: number) {
     return <T extends OffsetMap>(xo: T) => ({ ...xo, offset: xo.offset + offset } as T);
 }
 
-export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', forceFlags = 'gu'): RegExp | undefined {
+export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', forceFlags = 'g'): RegExp | undefined {
     if (pattern instanceof RegExp) {
         return pattern;
     }
