@@ -5,9 +5,7 @@ import type {
     GlobDef,
     ImportFileRef,
     LanguageSetting,
-    Pattern,
     PnPSettings,
-    RegExpPatternDefinition,
     Source,
 } from '@cspell/cspell-types';
 import * as json from 'comment-json';
@@ -21,6 +19,7 @@ import * as util from '../util/util';
 import { normalizePathForDictDefs } from './DictionarySettings';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
+import { resolvePatterns } from './patterns';
 import { LoaderResult, pnpLoader } from './pnpLoader';
 
 type CSpellSettingsVersion = Exclude<CSpellSettings['version'], undefined>;
@@ -544,34 +543,14 @@ export function finalizeSettings(settings: CSpellSettings): CSpellSettings {
 
     const finalized: CSpellSettings = {
         ...settings,
-        ignoreRegExpList: applyPatterns(settings.ignoreRegExpList, settings.patterns),
-        includeRegExpList: applyPatterns(settings.includeRegExpList, settings.patterns),
+        ignoreRegExpList: resolvePatterns(settings.ignoreRegExpList, settings.patterns),
+        includeRegExpList: resolvePatterns(settings.includeRegExpList, settings.patterns),
     };
 
     finalized.name = 'Finalized ' + (finalized.name || '');
     finalized.source = { name: settings.name || 'src', sources: [settings] };
 
     return finalized;
-}
-
-function applyPatterns(
-    regExpList: (string | RegExp)[] = [],
-    patternDefinitions: RegExpPatternDefinition[] = []
-): (string | RegExp)[] {
-    const patternMap = new Map(patternDefinitions.map((def) => [def.name.toLowerCase(), def.pattern]));
-
-    function* flatten(patterns: (Pattern | Pattern[])[]): IterableIterator<Pattern> {
-        for (const pattern of patterns) {
-            if (Array.isArray(pattern)) {
-                yield* flatten(pattern);
-            } else {
-                yield pattern;
-            }
-        }
-    }
-    const patternList = regExpList.map((p) => patternMap.get(p.toString().toLowerCase()) || p);
-
-    return [...flatten(patternList)];
 }
 
 function resolveFilename(filename: string, relativeTo: string): ImportFileRef {
