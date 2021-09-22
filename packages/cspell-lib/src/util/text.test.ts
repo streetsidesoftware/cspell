@@ -5,16 +5,16 @@ import { splitCamelCaseWord } from './text';
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 
 describe('Util Text', () => {
-    test('tests build regexp from string', () => {
-        const regEx1 = Text.stringToRegExp('');
-        expect(regEx1).toBeUndefined();
-        const regEx2 = Text.stringToRegExp('a');
-        expect(regEx2?.toString()).toBe('/a/gim');
-        const regEx3 = Text.stringToRegExp('/');
-        expect(regEx3).not.toBeUndefined();
-        expect(regEx3?.toString()).toBe('/\\//gim');
-        const regEx4 = Text.stringToRegExp(/abc/);
-        expect(regEx4?.toString()).toBe('/abc/');
+    test.each`
+        pattern     | expected
+        ${''}       | ${undefined}
+        ${'a'}      | ${/a/gimu}
+        ${'/'}      | ${/\//gimu}
+        ${'/.*/'}   | ${/.*/gu}
+        ${'/.*/gi'} | ${/.*/giu}
+        ${/abc/}    | ${/abc/}
+    `('tests build regexp from string', ({ pattern, expected }) => {
+        expect(Text.stringToRegExp(pattern)).toEqual(expected);
     });
 
     test('splits words', () => {

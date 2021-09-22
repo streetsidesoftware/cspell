@@ -66,14 +66,8 @@ describe('Validate InDocSettings', () => {
     test('tests finding ignoreRegExp', () => {
         const matches = InDoc.getIgnoreRegExpFromDocument(sampleCode);
         expect(matches).toEqual(['/\\/\\/\\/.*/', 'w\\w+berry', '/', '\\w+s{4}\\w+', '/faullts[/]?/ */']);
-        const regExpList = matches.map((s) => Text.stringToRegExp(s)).map((a) => (a && a.toString()) || '');
-        expect(regExpList).toEqual([
-            /\/\/\/.*/g.toString(),
-            /w\w+berry/gim.toString(),
-            /\//gim.toString(),
-            /\w+s{4}\w+/gim.toString(),
-            /faullts[/]?\/ */g.toString(),
-        ]);
+        const regExpList = matches.map((s) => Text.stringToRegExp(s));
+        expect(regExpList).toEqual([/\/\/\/.*/gu, /w\w+berry/gimu, /\//gimu, /\w+s{4}\w+/gimu, /faullts[/]?\/ */gu]);
         const ranges = TextRange.findMatchingRangesForPatterns(matches, sampleCode);
         expect(ranges.length).toBe(39);
     });
