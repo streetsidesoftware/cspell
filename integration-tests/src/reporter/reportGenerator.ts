@@ -77,7 +77,11 @@ export function generateReport(data: ReportData): Report {
 function formatIssue(file: string, issue: Issue): string {
     const { row, col, isFlagged, text, context } = issue;
     const issueType = isFlagged ? 'F' : 'U';
-    const ctx = context.text.replace(/\s+/g, ' ').trim();
+    const ctx = context.text
+        .replace(/\s+/g, ' ')
+        // eslint-disable-next-line no-control-regex
+        .replace(/[\u0000-\u001F]+/g, '')
+        .trim();
     const line = `${file}:${row}:${col}\t${text}\t${issueType}\t${ctx}`;
     return line.trim();
 }
