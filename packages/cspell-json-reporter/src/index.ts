@@ -1,12 +1,11 @@
-import { promises as fs } from 'fs';
-import * as path from 'path';
-import mkdirp from 'mkdirp';
-
 import { CSpellReporter, MessageTypes } from '@cspell/cspell-types';
-import { validateSettings } from './utils/validateSettings';
-import { setToJSONReplacer } from './utils/setToJSONReplacer';
+import * as fs from 'fs/promises';
+import mkdirp from 'mkdirp';
+import * as path from 'path';
 import { CSpellJSONReporterOutput } from './CSpellJSONReporterOutput';
 import { CSpellJSONReporterSettings } from './CSpellJSONReporterSettings';
+import { setToJSONReplacer } from './utils/setToJSONReplacer';
+import { validateSettings } from './utils/validateSettings';
 
 const noopReporter = () => undefined;
 

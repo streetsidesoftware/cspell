@@ -5,8 +5,10 @@ import * as Link from './link';
 import chalk from 'chalk';
 import * as Util from 'util';
 import stripAnsi from 'strip-ansi';
+import { URI } from 'vscode-uri';
 
 const projectRoot = Path.join(__dirname, '..');
+const projectRootUri = URI.file(projectRoot);
 
 function argv(...args: string[]): string[] {
     return [...process.argv.slice(0, 2), ...args];
@@ -255,6 +257,7 @@ function makeLogger() {
     function normalizedHistory() {
         let t = history.join('\n');
         t = stripAnsi(t);
+        t = t.replace(RegExp(escapeRegExp(projectRootUri.toString()), 'gi'), '.');
         t = t.replace(RegExp(escapeRegExp(projectRoot), 'gi'), '.');
         t = t.replace(/\\/g, '/');
         t = t.replace(/(?<=^info\s+Date:).*$/gm, ' Sat, 03 Apr 2021 11:25:33 GMT');

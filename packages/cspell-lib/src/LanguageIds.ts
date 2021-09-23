@@ -177,17 +177,25 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     //
     // Special file types used to prevent spell checking.
     //
-    { id: 'image', extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif'] },
+    { id: 'image', extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif', '.ico'] },
     // cspell:ignore woff
     {
         id: 'binary',
-        extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.ttf', '.woff', '.woff2', '.eot', '.ico', '.cur'],
+        extensions: ['.gz', '.exe', '.dll', '.lib', '.obj', '.o', '.eot', '.cur', '.zip'],
+    },
+    {
+        id: 'fonts',
+        extensions: ['.ttf', '.woff', '.woff2'],
+    },
+    {
+        id: 'video',
+        extensions: ['.mov', '.mpg'],
     },
 ];
 
 export type LanguageId = string;
 
-export const binaryLanguages = new Set(['binary', 'image']);
+export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts']);
 
 export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf']);
 

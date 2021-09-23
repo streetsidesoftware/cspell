@@ -1,14 +1,10 @@
 import type { CSpellReporter } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
-import { promises as fs } from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 import { getReporter } from '.';
 
-jest.mock('fs', () => ({
-    promises: {
-        writeFile: jest.fn().mockResolvedValue(undefined),
-    },
-}));
+jest.mock('fs/promises');
 jest.mock('mkdirp', () => jest.fn().mockResolvedValue(undefined));
 
 describe('getReporter', () => {
