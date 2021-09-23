@@ -5,6 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch Program",
+            "program": "${workspaceFolder}/../bin.js",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/repositories/temp/TheAlgorithms/Python",
+            "console": "integratedTerminal",
+            "stopOnEntry": true,
+            "args": [
+                "-u",
+                "--no-progress",
+                "--relative",
+                "--show-context",
+                "**/*.{md,py}"
+            ],
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "integration-tests: Jest current-file",
