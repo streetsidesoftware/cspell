@@ -174,9 +174,9 @@ Lines:
 ./Zend/zend_multiply.h:273:19    - Unknown word (addze)      -- "addze %1,%1\n"
 ./Zend/zend_object_handlers.c:1130:12   - Unknown word (unseter)    -- /* have unseter - try with it! */
 ./Zend/zend_object_handlers.h:92:5      - Unknown word (Unserialization) -- * Unserialization will use __wakeup()
-./Zend/zend_operators.c:2934:41   - Unknown word (streq)      -- FASTCALL zendi_smart_streq(zend_string *s1, zend
-./Zend/zend_operators.h:523:7     - Unknown word (lresult)    -- long lresult;
-./Zend/zend_operators.h:531:12    - Unknown word (llresult)   -- long long llresult;
+./Zend/zend_operators.c:2920:41   - Unknown word (streq)      -- FASTCALL zendi_smart_streq(zend_string *s1, zend
+./Zend/zend_operators.h:521:7     - Unknown word (lresult)    -- long lresult;
+./Zend/zend_operators.h:529:12    - Unknown word (llresult)   -- long long llresult;
 ./Zend/zend_portability.h:242:51    - Unknown word (Ofast)      -- attribute__((optimize("Ofast")))
 ./Zend/zend_portability.h:484:29    - Unknown word (IFUNC)      -- HAVE_FUNC_ATTRIBUTE_IFUNC
 ./Zend/zend_portability.h:495:19    - Unknown word (TMMINTRIN)  -- # if defined(HAVE_TMMINTRIN_H)
@@ -1669,15 +1669,15 @@ Lines:
 ./ext/intl/formatter/formatter_format.c:125:13    - Unknown word (scurrency)  -- UChar* scurrency = NULL;
 ./ext/intl/formatter/formatter_parse.c:124:8     - Unknown word (zcurrency)  -- zval *zcurrency, *zposition = NULL;
 ./ext/intl/formatter/formatter_parse.c:42:8      - Unknown word (zposition)  -- zval *zposition = NULL;
-./ext/intl/grapheme/grapheme_string.c:107:12    - Unknown word (loffset)    -- zend_long loffset = 0;
-./ext/intl/grapheme/grapheme_string.c:109:9     - Unknown word (noffset)    -- size_t noffset = 0;
-./ext/intl/grapheme/grapheme_string.c:373:11    - Unknown word (asub)       -- int32_t asub_str_len;
-./ext/intl/grapheme/grapheme_string.c:408:2     - Unknown word (ubrk)       -- ubrk_setText(bi, ustr, ustr
-./ext/intl/grapheme/grapheme_string.c:425:8     - Unknown word (UBRK)       -- if ( UBRK_DONE == sub_str_start
-./ext/intl/grapheme/grapheme_string.c:46:35     - Unknown word (EXTR)       -- LONG_CONSTANT("GRAPHEME_EXTR_COUNT", GRAPHEME_EXTRACT
-./ext/intl/grapheme/grapheme_string.c:713:13    - Unknown word (UTEXT)      -- UText ut = UTEXT_INITIALIZER;
-./ext/intl/grapheme/grapheme_string.c:797:10    - Unknown word (nsize)      -- size_t nsize = MIN(size, str_len
-./ext/intl/grapheme/grapheme_string.c:805:2     - Unknown word (utext)      -- utext_openUTF8(&ut, pstr,
+./ext/intl/grapheme/grapheme_string.c:105:12    - Unknown word (loffset)    -- zend_long loffset = 0;
+./ext/intl/grapheme/grapheme_string.c:107:9     - Unknown word (noffset)    -- size_t noffset = 0;
+./ext/intl/grapheme/grapheme_string.c:371:11    - Unknown word (asub)       -- int32_t asub_str_len;
+./ext/intl/grapheme/grapheme_string.c:406:2     - Unknown word (ubrk)       -- ubrk_setText(bi, ustr, ustr
+./ext/intl/grapheme/grapheme_string.c:423:8     - Unknown word (UBRK)       -- if ( UBRK_DONE == sub_str_start
+./ext/intl/grapheme/grapheme_string.c:44:35     - Unknown word (EXTR)       -- LONG_CONSTANT("GRAPHEME_EXTR_COUNT", GRAPHEME_EXTRACT
+./ext/intl/grapheme/grapheme_string.c:711:13    - Unknown word (UTEXT)      -- UText ut = UTEXT_INITIALIZER;
+./ext/intl/grapheme/grapheme_string.c:795:10    - Unknown word (nsize)      -- size_t nsize = MIN(size, str_len
+./ext/intl/grapheme/grapheme_string.c:803:2     - Unknown word (utext)      -- utext_openUTF8(&ut, pstr,
 ./ext/intl/grapheme/grapheme_util.c:101:28    - Unknown word (uneedle)    -- *uhaystack = NULL, *uneedle = NULL;
 ./ext/intl/grapheme/grapheme_util.c:101:9     - Unknown word (uhaystack)  -- UChar *uhaystack = NULL, *uneedle = NULL
 ./ext/intl/grapheme/grapheme_util.c:350:43    - Unknown word (memcmps)    -- search can shortcut memcmps */
@@ -1815,20 +1815,20 @@ Lines:
 ./ext/intl/uchar/uother-enum.h:96:11     - Unknown word (SADHE)      -- UOTHER(JG_SADHE)
 ./ext/json/json.c:204:15    - Unknown word (yyparse)    -- if (php_json_yyparse(&parser)) {
 ./ext/json/json_encoder.c:14:19     - Unknown word (Zelenka)    -- | Jakub Zelenka <bukka@php.net>
-./ext/ldap/ldap.c:1216:13   - Unknown word (lderrno)    -- /* {{{ _get_lderrno */
-./ext/ldap/ldap.c:1220:6    - Unknown word (lderr)      -- int lderr;
-./ext/ldap/ldap.c:1248:19   - Unknown word (dnlen)      -- size_t ldap_bind_dnlen, ldap_bind_pwlen;
-./ext/ldap/ldap.c:1248:36   - Unknown word (pwlen)      -- bind_dnlen, ldap_bind_pwlen;
-./ext/ldap/ldap.c:1380:12   - Unknown word (bictx)      -- } php_ldap_bictx;
-./ext/ldap/ldap.c:138:2     - Unknown word (LDAPG)      -- LDAPG(num_links)--;
-./ext/ldap/ldap.c:1624:10   - Unknown word (nlinks)     -- int i, nlinks, nbases, nfilters,
-./ext/ldap/ldap.c:1624:18   - Unknown word (nbases)     -- int i, nlinks, nbases, nfilters, *rcs;
-./ext/ldap/ldap.c:1624:26   - Unknown word (nfilters)   -- int i, nlinks, nbases, nfilters, *rcs;
+./ext/ldap/ldap.c:1215:13   - Unknown word (lderrno)    -- /* {{{ _get_lderrno */
+./ext/ldap/ldap.c:1219:6    - Unknown word (lderr)      -- int lderr;
+./ext/ldap/ldap.c:1247:19   - Unknown word (dnlen)      -- size_t ldap_bind_dnlen, ldap_bind_pwlen;
+./ext/ldap/ldap.c:1247:36   - Unknown word (pwlen)      -- bind_dnlen, ldap_bind_pwlen;
+./ext/ldap/ldap.c:1379:12   - Unknown word (bictx)      -- } php_ldap_bictx;
+./ext/ldap/ldap.c:137:2     - Unknown word (LDAPG)      -- LDAPG(num_links)--;
+./ext/ldap/ldap.c:1623:10   - Unknown word (nlinks)     -- int i, nlinks, nbases, nfilters,
+./ext/ldap/ldap.c:1623:18   - Unknown word (nbases)     -- int i, nlinks, nbases, nfilters, *rcs;
+./ext/ldap/ldap.c:1623:26   - Unknown word (nfilters)   -- int i, nlinks, nbases, nfilters, *rcs;
 ./ext/ldap/ldap.c:20:15     - Unknown word (Côme)       -- | Côme Chilliet  <mcmic@php
 ./ext/ldap/ldap.c:20:20     - Unknown word (Chilliet)   -- | Côme Chilliet <mcmic@php.net>
-./ext/ldap/ldap.c:254:27    - Unknown word (pperr)      -- LDAPPasswordPolicyError pperr;
-./ext/ldap/ldap.c:271:7     - Unknown word (lestimated) -- int lestimated, rc;
-./ext/ldap/ldap.c:272:17    - Unknown word (lcookie)    -- struct berval lcookie = { 0L, NULL };
+./ext/ldap/ldap.c:253:27    - Unknown word (pperr)      -- LDAPPasswordPolicyError pperr;
+./ext/ldap/ldap.c:270:7     - Unknown word (lestimated) -- int lestimated, rc;
+./ext/ldap/ldap.c:271:17    - Unknown word (lcookie)    -- struct berval lcookie = { 0L, NULL };
 ./ext/ldap/ldap.c:3037:46   - Unknown word (Osss)       -- parameters(ZEND_NUM_ARGS(), "Osss|a!", &link, ldap_link
 ./ext/ldap/ldap.c:3431:34   - Unknown word (matcheddn)  -- *result, *errcode, *matcheddn, *errmsg, *referrals
 ./ext/ldap/ldap.c:3435:9    - Unknown word (lreferrals) -- char **lreferrals, **refp;
@@ -1846,8 +1846,8 @@ Lines:
 ./ext/ldap/ldap.c:4131:43   - Unknown word (sssz)       -- parameters(myargcount, "O|sssz/", &link, ldap_link
 ./ext/ldap/ldap.c:4222:17   - Unknown word (lauthzid)   -- struct berval *lauthzid;
 ./ext/ldap/ldap.c:4258:12   - Unknown word (lttl)       -- ber_int_t lttl;
-./ext/ldap/ldap.c:710:17    - Unknown word (sortp)      -- LDAPSortKey** sortp = sort_keys;
-./ext/ldap/ldap.c:752:6     - Unknown word (ncontrols)  -- int ncontrols;
+./ext/ldap/ldap.c:709:17    - Unknown word (sortp)      -- LDAPSortKey** sortp = sort_keys;
+./ext/ldap/ldap.c:751:6     - Unknown word (ncontrols)  -- int ncontrols;
 ./ext/ldap/ldap.stub.php:177:67    - Unknown word (SETREBINDPROC) -- & defined(HAVE_3ARG_SETREBINDPROC)
 ./ext/ldap/ldap.stub.php:199:19    - Unknown word (exop)          -- function ldap_exop(LDAP\Connection $ldap
 ./ext/ldap/ldap.stub.php:35:17     - Unknown word (ORALDAP)    -- #ifdef HAVE_ORALDAP
@@ -3739,20 +3739,20 @@ Lines:
 ./ext/soap/php_http.c:962:9     - Unknown word (eqpos)      -- char *eqpos = strstr(cookie, "=
 ./ext/soap/php_http.c:967:9     - Unknown word (zcookie)    -- zval zcookie;
 ./ext/soap/php_packet_soap.c:34:26     - Unknown word (opearation) -- Response for one-way opearation */
-./ext/soap/php_sdl.c:1258:45   - Unknown word (resriction) -- rictionIntPtr sdl_deserialize_resriction_int(char **in)
-./ext/soap/php_sdl.c:2437:39   - Unknown word (pheader)    -- BindingFunctionHeaderPtr tmp, pheader;
-./ext/soap/php_sdl.c:2438:12   - Unknown word (penc)       -- encodePtr penc;
-./ext/soap/php_sdl.c:2500:13   - Unknown word (pparams)    -- HashTable *pparams;
-./ext/soap/php_sdl.c:2544:13   - Unknown word (pfaults)    -- HashTable *pfaults;
-./ext/soap/php_sdl.c:2545:19   - Unknown word (pfault)     -- sdlFaultPtr tmp, pfault;
-./ext/soap/php_sdl.c:2620:29   - Unknown word (pextra)     -- sdlExtraAttributePtr tmp, pextra;
-./ext/soap/php_sdl.c:2649:21   - Unknown word (pmodel)     -- sdlContentModelPtr pmodel;
-./ext/soap/php_sdl.c:2650:26   - Unknown word (pcontent)   -- sdlContentModelPtr tmp, pcontent;
-./ext/soap/php_sdl.c:2766:31   - Unknown word (penum)      -- sdlRestrictionCharPtr tmp, penum;
-./ext/soap/php_sdl.c:2779:19   - Unknown word (pelem)      -- sdlTypePtr tmp, pelem;
-./ext/soap/php_sdl.c:2845:16   - Unknown word (pbind)      -- sdlBindingPtr pbind = NULL;
-./ext/soap/php_sdl.c:2928:9    - Unknown word (psdl)       -- sdlPtr psdl = NULL;
-./ext/soap/php_sdl.c:3085:18   - Unknown word (preq)       -- sdlFunctionPtr preq;
+./ext/soap/php_sdl.c:1260:45   - Unknown word (resriction) -- rictionIntPtr sdl_deserialize_resriction_int(char **in)
+./ext/soap/php_sdl.c:2439:39   - Unknown word (pheader)    -- BindingFunctionHeaderPtr tmp, pheader;
+./ext/soap/php_sdl.c:2440:12   - Unknown word (penc)       -- encodePtr penc;
+./ext/soap/php_sdl.c:2502:13   - Unknown word (pparams)    -- HashTable *pparams;
+./ext/soap/php_sdl.c:2546:13   - Unknown word (pfaults)    -- HashTable *pfaults;
+./ext/soap/php_sdl.c:2547:19   - Unknown word (pfault)     -- sdlFaultPtr tmp, pfault;
+./ext/soap/php_sdl.c:2622:29   - Unknown word (pextra)     -- sdlExtraAttributePtr tmp, pextra;
+./ext/soap/php_sdl.c:2651:21   - Unknown word (pmodel)     -- sdlContentModelPtr pmodel;
+./ext/soap/php_sdl.c:2652:26   - Unknown word (pcontent)   -- sdlContentModelPtr tmp, pcontent;
+./ext/soap/php_sdl.c:2768:31   - Unknown word (penum)      -- sdlRestrictionCharPtr tmp, penum;
+./ext/soap/php_sdl.c:2781:19   - Unknown word (pelem)      -- sdlTypePtr tmp, pelem;
+./ext/soap/php_sdl.c:2847:16   - Unknown word (pbind)      -- sdlBindingPtr pbind = NULL;
+./ext/soap/php_sdl.c:2930:9    - Unknown word (psdl)       -- sdlPtr psdl = NULL;
+./ext/soap/php_sdl.c:3087:18   - Unknown word (preq)       -- sdlFunctionPtr preq;
 ./ext/soap/php_sdl.h:169:69    - Unknown word (sequnce)    -- sdlContentModel for sequnce,all,choice*/
 ./ext/soap/php_soap.h:123:20    - Unknown word (UNLIMATERECEIVER) -- #define SOAP_ACTOR_UNLIMATERECEIVER 3
 ./ext/soap/php_xml.c:253:21    - Unknown word (recurisve)     -- xmlNodePtr get_node_recurisve_ex(xmlNodePtr node,
@@ -4159,12 +4159,12 @@ Lines:
 ./ext/standard/image.c:644:43    - Unknown word (Ssiz)       -- stream_getc(stream); /* Ssiz[i] */
 ./ext/standard/image.c:879:29    - Unknown word (ILBM)       -- strncmp((char *) a+4, "ILBM", 4) && strncmp((char
 ./ext/standard/image.c:883:25    - Unknown word (BMHD)       -- loop chunks to find BMHD chunk */
-./ext/standard/info.c:165:18    - Unknown word (gpcse)      -- /* {{{ php_print_gpcse_array */
-./ext/standard/info.c:261:18    - Unknown word (osvi)       -- OSVERSIONINFOEX osvi = EG(windows_version
-./ext/standard/info.c:644:41    - Unknown word (LOBYTE)     -- indowsMajorVersion =  (DWORD)(LOBYTE(LOWORD(dwVersion)))
-./ext/standard/info.c:645:41    - Unknown word (HIBYTE)     -- indowsMinorVersion =  (DWORD)(HIBYTE(LOWORD(dwVersion)))
-./ext/standard/info.c:736:50    - Unknown word (NOINDEX)    -- "ROBOTS\" content=\"NOINDEX,NOFOLLOW,NOARCHIVE\
-./ext/standard/info.c:736:67    - Unknown word (NOARCHIVE)  -- content=\"NOINDEX,NOFOLLOW,NOARCHIVE\" />");
+./ext/standard/info.c:164:18    - Unknown word (gpcse)      -- /* {{{ php_print_gpcse_array */
+./ext/standard/info.c:260:18    - Unknown word (osvi)       -- OSVERSIONINFOEX osvi = EG(windows_version
+./ext/standard/info.c:643:41    - Unknown word (LOBYTE)     -- indowsMajorVersion =  (DWORD)(LOBYTE(LOWORD(dwVersion)))
+./ext/standard/info.c:644:41    - Unknown word (HIBYTE)     -- indowsMinorVersion =  (DWORD)(HIBYTE(LOWORD(dwVersion)))
+./ext/standard/info.c:735:50    - Unknown word (NOINDEX)    -- "ROBOTS\" content=\"NOINDEX,NOFOLLOW,NOARCHIVE\
+./ext/standard/info.c:735:67    - Unknown word (NOARCHIVE)  -- content=\"NOINDEX,NOFOLLOW,NOARCHIVE\" />");
 ./ext/standard/iptc.c:168:13    - Unknown word (psheader)   -- static char psheader[] = "\xFF\xED\0\0Photoshop
 ./ext/standard/iptc.c:18:25     - Unknown word (compse)     -- Functions to parse & compse IPTC data.
 ./ext/standard/link.c:127:8     - Unknown word (topath)     -- char *topath, *frompath;
@@ -4403,7 +4403,7 @@ Lines:
 ./main/getopt.c:24:9      - Unknown word (OPTERRNF)   -- #define OPTERRNF (2)
 ./main/http_status_codes.h:13:21     - Unknown word (Faulds)     -- | Author: Andrea Faulds <ajf@ajf.me>
 ./main/main.c:1669:33   - Unknown word (apar)       -- sigchld_handler(int apar)
-./main/main.c:716:41    - Unknown word (EGPCS)      -- variables_order", "EGPCS", PHP_INI_SYSTEM|PHP
+./main/main.c:715:41    - Unknown word (EGPCS)      -- variables_order", "EGPCS", PHP_INI_SYSTEM|PHP
 ./main/network.c:1133:6    - Unknown word (myflag)        -- int myflag = 0;
 ./main/network.c:1183:21   - Unknown word (eset)          -- fd_set rset, wset, eset;
 ./main/network.c:300:33    - Unknown word (interruptible) -- to a socket using an interruptible connect with optional
@@ -4420,10 +4420,10 @@ Lines:
 ./main/php_variables.c:281:16    - Unknown word (ksep)       -- char *start, *ksep, *vsep, *val;
 ./main/reentrancy.c:219:23    - Unknown word (Softweyr)   -- Copyright (c) 1998 Softweyr LLC.  All rights reserved
 ./main/reentrancy.c:248:33    - Unknown word (SOFTWEYR)   -- SOFTWARE IS PROVIDED BY SOFTWEYR LLC, THE REGENTS AND
-./main/rfc1867.c:1187:10   - Unknown word (zfilename)  -- zval zfilename;
-./main/rfc1867.c:204:66    - Unknown word (libapreq)   -- multipart_buffer.c from libapreq-0.33 package. */
-./main/rfc1867.c:676:8     - Unknown word (lbuf)       -- char *lbuf = NULL, *abuf = NULL
-./main/rfc1867.c:683:20    - Unknown word (mbuff)      -- multipart_buffer *mbuff;
+./main/rfc1867.c:1186:10   - Unknown word (zfilename)  -- zval zfilename;
+./main/rfc1867.c:203:66    - Unknown word (libapreq)   -- multipart_buffer.c from libapreq-0.33 package. */
+./main/rfc1867.c:675:8     - Unknown word (lbuf)       -- char *lbuf = NULL, *abuf = NULL
+./main/rfc1867.c:682:20    - Unknown word (mbuff)      -- multipart_buffer *mbuff;
 ./main/snprintf.c:1071:20   - Unknown word (printv)     -- static size_t strx_printv(char *buf, size_t len
 ./main/snprintf.c:310:8     - Unknown word (addz)       -- int addz = decimal_point >= NDIG
 ./main/snprintf.c:397:4     - Unknown word (Emax)       -- * Emax = 1023
