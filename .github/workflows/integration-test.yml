@@ -86,9 +86,9 @@ jobs:
         uses: actions/cache@v2
         with:
           key: int-build-${{ hashFiles('**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}
-          path:
-            - packages/*/dist
-            - integration-tests/dist
+          path: |
+            packages/*/dist
+            integration-tests/dist
 
       - name: Show Update Args
         if: ${{ env.update_args }}
