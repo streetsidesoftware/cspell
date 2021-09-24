@@ -81,6 +81,15 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
+      - name: Cache Build
+        id: step-cache-build
+        uses: actions/cache@v2
+        with:
+          key: int-build-${{ hashFiles('**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}
+          path:
+            - packages/*/dist
+            - integration-tests/dist
+
       - name: Show Update Args
         if: ${{ env.update_args }}
         run: |
@@ -96,6 +105,9 @@ jobs:
         run: |
           ls -alF /home/runner/.npm/_logs/*.log
           cat /home/runner/.npm/_logs/*.log
+
+      - name: Was Build Cached?
+        run: echo ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Build
         run: npm run build
