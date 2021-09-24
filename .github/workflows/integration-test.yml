@@ -11,10 +11,19 @@ on:
       - "**/*.ts"
       - "integration-tests/**"
       - "!docs/**"
+  # Run on demand
+  workflow_dispatch:
+    inputs:
+      updateSnapshots:
+        description: "Update Integration Test snapshots (y/n)"
+        default: "y"
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+
+    env:
+      update_args: ${{ (startsWith(github.event.inputs.updateSnapshots, 'y') || startsWith(github.event.inputs.updateSnapshots, 'Y')) && 'update' || 'no-update' }}
 
     strategy:
       matrix:
@@ -54,6 +63,15 @@ jobs:
         uses: actions/setup-node@v2.4.0
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
+
+      - run: |
+          echo Update Snapshots - ${{ github.event.inputs.updateSnapshots }}
+          echo Update Args - ${{ env.update_args }}
 
       - run: npm ci
       - name: Npm has failed
