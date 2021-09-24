@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1886, Issues found: 9185 in 1162 files
+ CSpell: Files checked: 1881, Issues found: 9185 in 1162 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -377,8 +377,8 @@ Lines:
 ./google/cloud/log_test.cc:152:39    - Unknown word (anyvalue)   -- Environment env(kEnableClog, "anyvalue");
 ./google/cloud/pubsub/benchmarks/README.md:19:9      - Unknown word (acked)      -- is, not acked by Cloud Pub/Sub) goes
 ./google/cloud/pubsub/connection_options.cc:33:14     - Unknown word (ncores)     -- auto const ncores = std::thread::hardware
-./google/cloud/pubsub/integration_tests/subscription_admin_integration_test.cc:104:47    - Unknown word (appspot)    -- /" + project_id + ".appspot.com/push";
-./google/cloud/pubsub/internal/subscription_session_test.cc:159:37    - Unknown word (acking)     -- Increment the counter before acking, as the ack() may trigger
+./google/cloud/pubsub/integration_tests/subscription_admin_integration_test.cc:108:47    - Unknown word (appspot)    -- /" + project_id + ".appspot.com/push";
+./google/cloud/pubsub/internal/subscription_session_test.cc:155:37    - Unknown word (acking)     -- Increment the counter before acking, as the ack() may trigger
 ./google/cloud/pubsub/message.cc:51:34     - Unknown word (Differencer) -- protobuf::util::MessageDifferencer diff;
 ./google/cloud/pubsub/samples/samples.cc:786:36    - Unknown word (pfile)      -- constexpr kDefinition = R"pfile(
 ./google/cloud/pubsub/schema_admin_connection.h:38:38     - Unknown word (cppref)     -- models an [input range][cppref-input-range] of
@@ -518,17 +518,17 @@ Lines:
 ./google/cloud/storage/internal/grpc_configure_client_context_test.cc:46:47     - Unknown word (fieldmask)  -- Contains(Pair("x-goog-fieldmask",
 ./google/cloud/storage/internal/grpc_resumable_upload_session_url.cc:30:23     - Unknown word (Urlsafe)    -- return kUriScheme + UrlsafeBase64Encode(upload_session
 ./google/cloud/storage/internal/make_jwt_assertion_test.cc:42:64     - Unknown word (Formated)   -- testing::kWellFormatedKey);
-./google/cloud/storage/internal/object_requests_test.cc:451:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
+./google/cloud/storage/internal/object_requests_test.cc:452:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
 ./google/cloud/storage/internal/object_write_streambuf_test.cc:440:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
 ./google/cloud/storage/internal/openssl_util_test.cc:75:29     - Unknown word (QUJD)       -- EXPECT_THAT(Base64Decode("QUJD").value(), ElementsAre
 ./google/cloud/storage/internal/openssl_util_test.cc:77:29     - Unknown word (QUJDRA)     -- EXPECT_THAT(Base64Decode("QUJDRA==").value(),
 ./google/cloud/storage/internal/retry_resumable_upload_session_test.cc:406:47    - Unknown word (Transiens)  -- mableUploadSessionTest, HandleTransiensOnSeparateChunks) {
-./google/cloud/storage/internal/signed_url_requests_test.cc:110:62    - Unknown word (Bbar)       -- -object?marker=foo%2Bbar)""";
-./google/cloud/storage/internal/signed_url_requests_test.cc:224:58    - Unknown word (Fhtml)      -- response-content-type=text%2Fhtml)""";
-./google/cloud/storage/internal/signed_url_requests_test.cc:303:62    - Unknown word (Bhost)      -- SignedHeaders=content-type%3Bhost"
-./google/cloud/storage/internal/signed_url_requests_test.cc:374:195   - Unknown word (Bcontent)   -- SignedHeaders=cache-control%3Bcontent-type&generation=7&userProject
-./google/cloud/storage/internal/signed_url_requests_test.cc:41:25     - Unknown word (CNHKF)      -- MD5HashValue("rmYdCNHKFXam78uCt7xQLw=="), ContentType
-./google/cloud/storage/internal/signed_url_requests_test.cc:425:43    - Unknown word (Ffoo)       -- object/path/to/object_%3Ffoo%3D%26bar?acl
+./google/cloud/storage/internal/signed_url_requests_test.cc:111:62    - Unknown word (Bbar)       -- -object?marker=foo%2Bbar)""";
+./google/cloud/storage/internal/signed_url_requests_test.cc:225:58    - Unknown word (Fhtml)      -- response-content-type=text%2Fhtml)""";
+./google/cloud/storage/internal/signed_url_requests_test.cc:304:62    - Unknown word (Bhost)      -- SignedHeaders=content-type%3Bhost"
+./google/cloud/storage/internal/signed_url_requests_test.cc:375:195   - Unknown word (Bcontent)   -- SignedHeaders=cache-control%3Bcontent-type&generation=7&userProject
+./google/cloud/storage/internal/signed_url_requests_test.cc:426:43    - Unknown word (Ffoo)       -- object/path/to/object_%3Ffoo%3D%26bar?acl
+./google/cloud/storage/internal/signed_url_requests_test.cc:42:25     - Unknown word (CNHKF)      -- MD5HashValue("rmYdCNHKFXam78uCt7xQLw=="), ContentType
 ./google/cloud/storage/internal/tuple_filter_test.cc:68:25     - Unknown word (rvalues)    -- Test that forwarding rvalues works.
 ./google/cloud/storage/oauth2/authorized_user_credentials_test.cc:70:57     - Unknown word (THETOKEN)   -- HasSubstr("refresh_token=1/THETOKEN"));
 ./google/cloud/storage/oauth2/compute_engine_credentials_test.cc:68:24     - Unknown word (mysupersecrettoken) -- "access_token": "mysupersecrettoken",
@@ -558,8 +558,8 @@ Lines:
 ./google/cloud/storage/oauth2/service_account_credentials_test.cc:78:48     - Unknown word (Ajwt)       -- Aoauth%3Agrant-type%3Ajwt-bearer";
 ./google/cloud/storage/parallel_uploads_test.cc:1125:40   - Unknown word (blahblah)   -- ParseResumableSessionId("blahblah"),
 ./google/cloud/storage/parallel_uploads_test.cc:419:46    - Unknown word (Cration)    -- UploadTest, OneStreamFailsUponCration) {
-./google/cloud/storage/policy_document_test.cc:155:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
-./google/cloud/storage/policy_document_test.cc:196:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com
+./google/cloud/storage/policy_document_test.cc:158:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
+./google/cloud/storage/policy_document_test.cc:199:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com
 ./google/cloud/storage/storage_iam_policy_test.cc:28:33     - Unknown word (shoud)      -- "NativeExpression shoud be copy constructible
 ./google/cloud/storage/testing/mock_fake_clock.h:30:33     - Unknown word (timepoints) -- the clock to arbitrary timepoints.
 ./google/cloud/storage/testing/retry_tests.h:54:47     - Unknown word (oncall)     -- TypedExpectation<F>& oncall,
