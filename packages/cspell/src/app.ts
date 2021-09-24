@@ -86,7 +86,10 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .option('--legacy', 'Legacy output')
         .option('--local <local>', 'Deprecated -- Use: --locale')
         .option('--cache', 'Only check changed files', false)
-        .option('--cache-location <path>', `Path to the cache file or directory (default: "${DEFAULT_CACHE_LOCATION}"), also enables --cache`)
+        .option(
+            '--cache-location <path>',
+            `Path to the cache file or directory (default: "${DEFAULT_CACHE_LOCATION}"), also enables --cache`
+        )
         .addHelpText('after', usage)
         .arguments('[files...]')
         .action((files: string[], options: Options) => {
