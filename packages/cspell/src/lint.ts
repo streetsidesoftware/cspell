@@ -58,7 +58,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
             const r = await cspell.spellCheckDocument(doc, validateOptions, configInfo.config);
             spellResult = r;
             result.processed = r.checked;
-            result.issues = cspell.Text.calculateTextDocumentOffsets(filename, text, r.issues).map(mapIssue);
+            result.issues = cspell.Text.calculateTextDocumentOffsets(doc.uri, text, r.issues).map(mapIssue);
         } catch (e) {
             reporter.error(`Failed to process "${filename}"`, toError(e));
             result.errors += 1;

@@ -8,13 +8,16 @@ export const snapshotDir = Path.resolve(Path.join(__dirname, '..', 'snapshots'))
 const snapshotFileName = 'snapshot.txt';
 
 export function writeSnapshot(rep: Repository, output: string): void {
-    const dir = Path.join(snapshotDir, rep.path);
-    const filename = Path.join(dir, snapshotFileName);
+    const text = prepareOutput(rep, output);
+    writeSnapshotRaw(rep.path, snapshotFileName, text);
+}
+
+export function writeSnapshotRaw(repPath: string, fileBaseName: string, output: string): void {
+    const dir = Path.join(snapshotDir, repPath);
+    const filename = Path.join(dir, fileBaseName);
     Shell.mkdir('-p', dir);
 
-    const text = prepareOutput(rep, output);
-
-    fs.writeFileSync(filename, text);
+    fs.writeFileSync(filename, output);
 }
 
 export interface SnapshotCompareResult {

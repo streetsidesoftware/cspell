@@ -6,6 +6,7 @@ import type {
     ImportFileRef,
     LanguageSetting,
     PnPSettings,
+    ReporterSettings,
     Source,
 } from '@cspell/cspell-types';
 import * as json from 'comment-json';
@@ -112,7 +113,7 @@ function readConfig(fileRef: ImportFileRef): CSpellSettings {
     const s: CSpellSettings = {};
     try {
         const r = cspellConfigExplorerSync.load(filename);
-        if (!r?.config) throw 'not found';
+        if (!r?.config) throw new Error(`not found: "${filename}"`);
         Object.assign(s, r.config);
         normalizeRawConfig(s);
         validateRawConfig(s, fileRef);
@@ -160,6 +161,7 @@ function normalizeSettings(
     const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, pathToSettingsFile);
     const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
     const normalizedOverrides = normalizeOverrides(settings, pathToSettingsFile);
+    const normalizedReporters = normalizeReporters(settings, pathToSettingsFile);
 
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
     const source: Source = settings.source || {
@@ -173,6 +175,7 @@ function normalizeSettings(
         ...normalizedDictionaryDefs,
         ...normalizedSettingsGlobs,
         ...normalizedOverrides,
+        ...normalizedReporters,
     };
     if (!imports.length) {
         return fileSettings;
@@ -722,10 +725,7 @@ function toGlobDef(
     return g;
 }
 
-interface NormalizeDictionaryDefsParams {
-    dictionaryDefinitions?: CSpellSettings['dictionaryDefinitions'];
-    languageSettings?: CSpellSettings['languageSettings'];
-}
+type NormalizeDictionaryDefsParams = Pick<CSpellSettings, 'dictionaryDefinitions' | 'languageSettings'>;
 
 function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathToSettingsFile: string) {
     const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions, pathToSettingsFile);
@@ -742,14 +742,8 @@ function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathTo
     });
 }
 
-interface NormalizeOverrides {
-    globRoot?: CSpellSettings['globRoot'];
-    overrides?: CSpellSettings['overrides'];
-}
-
-interface NormalizeOverridesResult {
-    overrides?: CSpellSettings['overrides'];
-}
+type NormalizeOverrides = Pick<CSpellSettings, 'globRoot' | 'overrides'>;
+type NormalizeOverridesResult = Pick<CSpellSettings, 'overrides'>;
 
 function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: string): NormalizeOverridesResult {
     const { globRoot = path.dirname(pathToSettingsFile) } = settings;
@@ -765,6 +759,36 @@ function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: st
     });
 
     return overrides ? { overrides } : {};
+}
+
+type NormalizeReporters = Pick<CSpellSettings, 'reporters'>;
+
+function normalizeReporters(settings: NormalizeReporters, pathToSettingsFile: string): NormalizeReporters {
+    if (settings.reporters === undefined) return {};
+    const folder = path.dirname(pathToSettingsFile);
+
+    function resolve(s: string): string {
+        const r = resolveFile(s, folder);
+        if (!r.found) {
+            throw new Error(`Not found: "${s}"`);
+        }
+        return r.filename;
+    }
+
+    function resolveReporter(s: ReporterSettings): ReporterSettings {
+        if (typeof s === 'string') {
+            return resolve(s);
+        }
+        if (!Array.isArray(s) || typeof s[0] !== 'string') throw new Error('Invalid Reporter');
+        // Preserve the shape of Reporter Setting while resolving the reporter file.
+        const r: [string, unknown] | [string] = s;
+        r[0] = resolve(s[0]);
+        return r;
+    }
+
+    return {
+        reporters: settings.reporters.map(resolveReporter),
+    };
 }
 
 function normalizeLanguageSettings(languageSettings: LanguageSetting[] | undefined): LanguageSetting[] | undefined {

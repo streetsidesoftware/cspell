@@ -3,6 +3,7 @@ import type { CSpellReporter, Issue, MessageType, ProgressItem, RunResult } from
 import { ImportError, isSpellingDictionaryLoadError, SpellingDictionaryLoadError } from 'cspell-lib';
 import * as path from 'path';
 import { Options } from './app';
+import { URI } from 'vscode-uri';
 
 const templateIssue = `{green $uri}:{yellow $row:$col} - $message ({red $text})`;
 const templateIssueWithSuggestions = `{green $uri}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
@@ -42,6 +43,13 @@ function nullEmitter() {
 function relativeFilename(filename: string, cwd = process.cwd()): string {
     const rel = path.relative(cwd, filename);
     if (rel.startsWith('..')) return filename;
+    return '.' + path.sep + rel;
+}
+
+function relativeUriFilename(uri: string, fsPathRoot: string): string {
+    const fsPath = URI.parse(uri).fsPath;
+    const rel = path.relative(fsPathRoot, fsPath);
+    if (rel.startsWith('..')) return fsPath;
     return '.' + path.sep + rel;
 }
 
@@ -89,12 +97,13 @@ export function getReporter(options: Options): CSpellReporter {
         emitters[msgType]?.(message);
     }
 
-    const root = options.root || process.cwd();
+    const root = URI.file(options.root || process.cwd());
+    const fsPathRoot = root.fsPath;
     function relativeIssue(fn: (i: Issue) => void): (i: Issue) => void {
         if (!options.relative) return fn;
         return (i: Issue) => {
             const r = { ...i };
-            r.uri = r.uri ? relativeFilename(r.uri, root) : r.uri;
+            r.uri = r.uri ? relativeUriFilename(r.uri, fsPathRoot) : r.uri;
             fn(r);
         };
     }

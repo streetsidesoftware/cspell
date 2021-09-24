@@ -1,5 +1,6 @@
 {
-    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "version": "0.2",
     "globRoot": "${cwd}",
     "ignorePaths": [
         "**/timezonedb.h",
@@ -23,18 +24,12 @@
             "path": "./mime-types.txt"
         }
     ],
-    "dictionaries": [
-        "mnemonics",
-        "Mime Types"
-    ],
-    "ignoreWords": [
-        "itab",
-        "pcre",
-        "timezonedb"
-    ],
+    "dictionaries": ["mnemonics", "Mime Types"],
+    "ignoreWords": ["itab", "pcre", "timezonedb"],
     "languageSettings": [
         {
             "languageId": "c,cpp,h"
         }
-    ]
+    ],
+    "import": ["../../../../repositories/cspell-reporter.json"]
 }
