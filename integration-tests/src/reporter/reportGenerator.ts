@@ -55,7 +55,7 @@ export function generateReport(data: ReportData): Report {
 
     const issuesByFile = sortedByFile.map(([uri, issues]) => {
         const file = relative(uri);
-        return issues.map((issue) => formatIssue(file, issue));
+        return padLines(issues.map((issue) => formatIssue(file, issue)));
     });
 
     const base: SortedFileIssues = [];
@@ -85,3 +85,44 @@ function formatIssue(file: string, issue: Issue): string {
     const line = `${file}:${row}:${col}\t${text}\t${issueType}\t${ctx}`;
     return line.trim();
 }
+
+const tabWidth = 4;
+
+function padLines(issueLines: string[]): string[] {
+    const splitLines = issueLines.map((a) => a.split('\t'));
+    const widths = splitLines
+        .map((line) => [calcPathWidth(line[0]), ...line.slice(1).map((s) => s.length)])
+        .reduce(maxMax, [0, 0, 0, 0]);
+
+    const paddedWidths = widths.map((w) => Math.ceil(w / tabWidth) * tabWidth);
+
+    const lines = splitLines
+        .map((lineCols) => lineCols.map((t, i) => padText(t, paddedWidths[i])))
+        .map((parts) => parts.join('\t').trim());
+    return lines;
+}
+
+function padText(t: string, width: number) {
+    const p = ' '.repeat(width - t.length);
+    return t + p;
+}
+
+function maxMax(a: number[], b: number[]): number[] {
+    const r: number[] = [];
+    const len = Math.max(a.length, b.length);
+    for (let i = 0; i < len; ++i) {
+        r[i] = Math.max(a[i] || 0, b[i] || 0);
+    }
+    return r;
+}
+
+function calcPathWidth(path: string): number {
+    const parts = path.split(/:(?=\d)/g).map((s) => s.length);
+    parts[1] = Math.max(parts[1] || 0, 4);
+    parts[2] = Math.max(parts[2] || 0, 3);
+    return parts.reduce((a, b) => a + b, parts.length - 1);
+}
+
+export const __testing__ = {
+    padLines,
+};
