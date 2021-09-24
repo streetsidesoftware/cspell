@@ -27,7 +27,6 @@ jobs:
       branch_prefix: update-integration-ref
 
     strategy:
-      max-parallel: 5
       matrix:
         node-version:
           - 16.x
@@ -110,6 +109,7 @@ jobs:
         run: echo ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
         run: npm run build
 
       - name: Run Integration Tests ${{ matrix.repo }}
