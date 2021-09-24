@@ -23,7 +23,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      update_args: ${{ (startsWith(github.event.inputs.updateSnapshots, 'y') || startsWith(github.event.inputs.updateSnapshots, 'Y')) && 'update' || 'no-update' }}
+      update_args: ${{ (startsWith(github.event.inputs.updateSnapshots, 'y') || startsWith(github.event.inputs.updateSnapshots, 'Y')) && '--update' || '' }}
 
     strategy:
       matrix:
@@ -69,7 +69,9 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
-      - run: |
+      - name: "Use Update Args: ${{ env.update_args }}"
+        if: ${{ env.update_args }}
+        run: |
           echo Update Snapshots - ${{ github.event.inputs.updateSnapshots }}
           echo Update Args - ${{ env.update_args }}
 
@@ -86,7 +88,7 @@ jobs:
         run: >
           cd integration-tests
           && npm ci
-          && npm run integration-tests -- ${{ matrix.repo }}
+          && npm run integration-tests -- ${{ matrix.repo }} ${{ env.update_args }}
 
 # cspell:ignore MartinThoma googleapis
 # cspell:ignore plasticrake tplink smarthome
