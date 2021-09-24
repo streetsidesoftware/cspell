@@ -6,14 +6,17 @@ import { getReporter } from '.';
 
 const mockWriteFile = jest.spyOn(fs, 'writeFile');
 
-jest.mock('fs/promises');
+jest.mock('fs', () => ({
+    promises: {
+        writeFile: async () => undefined,
+    },
+}));
 jest.mock('mkdirp', () => jest.fn().mockResolvedValue(undefined));
 
 describe('getReporter', () => {
     beforeEach(() => {
         jest.resetAllMocks();
         mockWriteFile.mockReset();
-        mockWriteFile.mockResolvedValue(undefined);
     });
 
     it('throws for invalid config', () => {
