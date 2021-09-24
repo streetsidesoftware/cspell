@@ -3,19 +3,9 @@ export interface MeasurePromiseResult {
     success: boolean;
 }
 
-export async function measurePromise<T>(p: Promise<T>): Promise<MeasurePromiseResult> {
+export function getTimeMeasurer(): () => number {
     const start = process.hrtime();
-    let success = true;
-    try {
-        await p;
-    } catch (e) {
-        success = false;
-    }
-    const elapsedTimeMs = hrTimeToMs(process.hrtime(start));
-    return {
-        elapsedTimeMs,
-        success,
-    };
+    return () => hrTimeToMs(process.hrtime(start));
 }
 
 export function elapsedTimeMsFrom(relativeTo: [number, number]): number {

@@ -31,7 +31,7 @@ export async function readConfig(configFile: string | undefined, root: string | 
 
 export interface FileInfo {
     filename: string;
-    text: string;
+    text?: string;
 }
 
 export function fileInfoToDocument(
@@ -54,7 +54,7 @@ export function fileInfoToDocument(
     return fileToDocument(filename, text, languageId, locale);
 }
 
-export function readFileInfo(filename: string, encoding: string = UTF8): Promise<FileInfo> {
+export function readFileInfo(filename: string, encoding: string = UTF8): Promise<Required<FileInfo>> {
     const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
     return pText.then(
         (text) => ({ text, filename }),

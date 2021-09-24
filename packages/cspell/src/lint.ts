@@ -9,21 +9,15 @@ import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
 import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { ConfigInfo, FileInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
+import { ConfigInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
+import { FileResult } from './FileResult';
+import { createCache } from './util/cache';
+import { CSpellLintResultCache } from './util/cache/CSpellLintResultCache';
 import { toError } from './util/errors';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from './util/glob';
 import { loadReporters, mergeReporters } from './util/reporters';
-import { measurePromise } from './util/timer';
+import { getTimeMeasurer } from './util/timer';
 import * as util from './util/util';
-
-export interface FileResult {
-    fileInfo: FileInfo;
-    processed: boolean;
-    issues: Issue[];
-    errors: number;
-    configErrors: number;
-    elapsedTimeMs: number;
-}
 
 export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
     let { reporter } = cfg;
@@ -34,10 +28,21 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
     await reporter.result(lintResult);
     return lintResult;
 
-    async function processFile(fileInfo: FileInfo, configInfo: ConfigInfo): Promise<FileResult> {
+    async function processFile(
+        filename: string,
+        configInfo: ConfigInfo,
+        cache: CSpellLintResultCache
+    ): Promise<FileResult> {
+        const cachedResult = await cache.getCachedLintResults(filename);
+        if (cachedResult) {
+            reporter.debug(`Filename: ${filename}, using cache`);
+            return cachedResult;
+        }
+
+        const fileInfo = await readFileInfo(filename);
         const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
-        const { filename, text } = fileInfo;
-        reporter.debug(`Filename: ${fileInfo.filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
+        const { text } = fileInfo;
+        reporter.debug(`Filename: ${filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
         const result: FileResult = {
             fileInfo,
             issues: [],
@@ -47,7 +52,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
             elapsedTimeMs: 0,
         };
 
-        const startTime = Date.now();
+        const getElapsedTimeMs = getTimeMeasurer();
         let spellResult: Partial<cspell.SpellCheckFileResult> = {};
         reporter.info(
             `Checking: ${filename}, File type: ${doc.languageId ?? 'auto'}, Language: ${doc.locale ?? 'default'}`,
@@ -63,7 +68,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
             reporter.error(`Failed to process "${filename}"`, toError(e));
             result.errors += 1;
         }
-        result.elapsedTimeMs = Date.now() - startTime;
+        result.elapsedTimeMs = getElapsedTimeMs();
 
         const config = spellResult.settingsUsed ?? {};
 
@@ -89,58 +94,52 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         return { ...tdo, context };
     }
 
-    /**
-     * The file loader is written this way to cause files to be loaded in parallel while the previous one is being processed.
-     * @param fileNames names of files to load one at a time.
-     */
-    function* fileLoader(fileNames: string[]) {
-        for (const filename of fileNames) {
-            const file = readFileInfo(filename);
-            yield file;
-        }
-    }
-
-    async function processFiles(
-        files: Iterable<Promise<FileInfo>>,
-        configInfo: ConfigInfo,
-        fileCount: number
-    ): Promise<RunResult> {
+    async function processFiles(files: string[], configInfo: ConfigInfo, fileCount: number): Promise<RunResult> {
         const status: RunResult = runResult();
-        let n = 0;
-        for (const fileP of files) {
-            ++n;
-            const fileNum = n;
-            const file = await fileP;
-            const emitProgress = (elapsedTimeMs?: number, processed?: boolean, numErrors?: number) =>
-                reporter.progress({
-                    type: 'ProgressFileComplete',
-                    fileNum,
-                    fileCount,
-                    filename: file.filename,
-                    elapsedTimeMs,
-                    processed,
-                    numErrors,
-                });
-            if (!file.text) {
-                emitProgress();
+        const cache = createCache(cfg, configInfo);
+
+        const emitProgress = (filename: string, fileNum: number, result?: FileResult) =>
+            reporter.progress({
+                type: 'ProgressFileComplete',
+                fileNum,
+                fileCount,
+                filename,
+                elapsedTimeMs: result?.elapsedTimeMs,
+                processed: result?.processed,
+                numErrors: result?.issues.length,
+            });
+
+        /**
+         * loadAndProcessFiles is written this way to cause files to be loaded in parallel while the previous one is being processed.
+         */
+        async function* loadAndProcessFiles() {
+            for (let fileNum = 0; fileNum < files.length; fileNum++) {
+                const filename = files[fileNum];
+                const result = await processFile(filename, configInfo, cache);
+                yield { filename, fileNum, result };
+            }
+        }
+
+        for await (const fileP of loadAndProcessFiles()) {
+            const { filename, fileNum, result } = await fileP;
+            if (!result.fileInfo.text) {
+                emitProgress(filename, fileNum);
                 continue;
             }
-            const p = processFile(file, configInfo);
-            const { elapsedTimeMs } = await measurePromise(p);
-            const result = await p;
-            emitProgress(elapsedTimeMs, result.processed, result.issues.length);
+
+            emitProgress(filename, fileNum, result);
             // Show the spelling errors after emitting the progress.
             result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));
-            const r = await p;
             status.files += 1;
-            if (r.issues.length || r.errors) {
-                status.filesWithIssues.add(file.filename);
-                status.issues += r.issues.length;
-                status.errors += r.errors;
+            if (result.issues.length || result.errors) {
+                status.filesWithIssues.add(filename);
+                status.issues += result.issues.length;
+                status.errors += result.errors;
             }
-            status.errors += r.configErrors;
+            status.errors += result.configErrors;
         }
 
+        cache.reconcile();
         return status;
     }
 
@@ -211,7 +210,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         const globOptions = { root, cwd: root, ignore: ignoreGlobs.concat(normalizedExcludes) };
         const files = filterFiles(await findFiles(fileGlobs, globOptions), globMatcher);
 
-        return processFiles(fileLoader(files), configInfo, files.length);
+        return processFiles(files, configInfo, files.length);
     }
 
     function header(files: string[], cliExcludes: string[]) {

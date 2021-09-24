@@ -17,6 +17,7 @@ import { tableToLines } from './util/table';
 import { emitTraceResults } from './traceEmitter';
 import { getReporter } from './cli-reporter';
 import { CheckFailed } from './util/errors';
+import { DEFAULT_CACHE_LOCATION } from './util/cache';
 
 export { CheckFailed } from './util/errors';
 
@@ -84,12 +85,17 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         // .option('--force', 'Force the exit value to always be 0')
         .option('--legacy', 'Legacy output')
         .option('--local <local>', 'Deprecated -- Use: --locale')
+        .option('--cache', 'Only check changed files', false)
+        .option('--cache-location <path>', `Path to the cache file or directory (default: "${DEFAULT_CACHE_LOCATION}")`)
         .addHelpText('after', usage)
         .arguments('[files...]')
         .action((files: string[], options: Options) => {
             options.files = files;
             const { mustFindFiles } = options;
             const cliReporter = getReporter(options);
+            if (options.cacheLocation) {
+                options.cache = true;
+            }
             return App.lint(files, options, cliReporter).then((result) => {
                 if (!files.length && !result.files) {
                     spellCheckCommand.outputHelp();
