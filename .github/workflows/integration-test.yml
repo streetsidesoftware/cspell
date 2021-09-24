@@ -27,6 +27,7 @@ jobs:
       branch_prefix: update-integration-ref
 
     strategy:
+      max-parallel: 5
       matrix:
         node-version:
           - 16.x
