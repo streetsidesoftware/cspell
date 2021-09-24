@@ -69,7 +69,7 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
-      - name: "Use Update Args: ${{ env.update_args }}"
+      - name: "Use Update Args"
         if: ${{ env.update_args }}
         run: |
           echo Update Snapshots - ${{ github.event.inputs.updateSnapshots }}
