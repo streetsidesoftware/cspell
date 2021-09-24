@@ -113,10 +113,10 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
          * loadAndProcessFiles is written this way to cause files to be loaded in parallel while the previous one is being processed.
          */
         async function* loadAndProcessFiles() {
-            for (let fileNum = 0; fileNum < files.length; fileNum++) {
-                const filename = files[fileNum];
+            for (let i = 0; i < files.length; i++) {
+                const filename = files[i];
                 const result = await processFile(filename, configInfo, cache);
-                yield { filename, fileNum, result };
+                yield { filename, fileNum: i + 1, result };
             }
         }
 
