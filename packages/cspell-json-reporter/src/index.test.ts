@@ -1,8 +1,10 @@
 import type { CSpellReporter } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
-import * as fs from 'fs/promises';
+import { promises as fs } from 'fs';
 import * as path from 'path';
 import { getReporter } from '.';
+
+const mockWriteFile = jest.spyOn(fs, 'writeFile');
 
 jest.mock('fs/promises');
 jest.mock('mkdirp', () => jest.fn().mockResolvedValue(undefined));
@@ -10,6 +12,8 @@ jest.mock('mkdirp', () => jest.fn().mockResolvedValue(undefined));
 describe('getReporter', () => {
     beforeEach(() => {
         jest.resetAllMocks();
+        mockWriteFile.mockReset();
+        mockWriteFile.mockResolvedValue(undefined);
     });
 
     it('throws for invalid config', () => {
@@ -19,18 +23,18 @@ describe('getReporter', () => {
     it('saves json to file', async () => {
         const reporter = getReporter({ outFile: 'out.json' });
         await runReporter(reporter);
-        expect(fs.writeFile).toBeCalledTimes(1);
+        expect(mockWriteFile).toBeCalledTimes(1);
 
-        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
-        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
+        expect(mockWriteFile.mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
+        expect(mockWriteFile.mock.calls[0][1]).toMatchSnapshot();
     });
 
     it('saves additional data', async () => {
         const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
         await runReporter(reporter);
         expect(fs.writeFile).toBeCalledTimes(1);
-        expect((fs.writeFile as jest.Mock).mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
-        expect((fs.writeFile as jest.Mock).mock.calls[0][1]).toMatchSnapshot();
+        expect(mockWriteFile.mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
+        expect(mockWriteFile.mock.calls[0][1]).toMatchSnapshot();
     });
 });
 
