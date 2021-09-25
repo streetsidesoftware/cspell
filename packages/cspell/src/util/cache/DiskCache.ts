@@ -52,7 +52,7 @@ export class DiskCache implements CSpellLintResultCache {
         };
     }
 
-    public setCachedLintResults({ fileInfo, elapsedTimeMs, ...result }: FileResult): void {
+    public setCachedLintResults({ fileInfo, elapsedTimeMs: _, ...result }: FileResult): void {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(fileInfo.filename);
         if (fileDescriptor.notFound) {
             return;
