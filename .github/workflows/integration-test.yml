@@ -80,6 +80,14 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
+      - name: Cache Integration Run
+        id: step-cache-run
+        uses: actions/cache@v2
+        with:
+          key: int-repo-${{ hashFiles('integration-tests/tsconfig.json', 'integration-tests/config/**/*.json', 'integration-tests/snapshots/${{ matrix.repo }}/*', 'integration-tests/repository/*', '**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}-${{ matrix.repo }}
+          path: |
+            integration-tests/tsconfig.json
+
       - name: Cache Build
         id: step-cache-build
         uses: actions/cache@v2
@@ -105,14 +113,17 @@ jobs:
           ls -alF /home/runner/.npm/_logs/*.log
           cat /home/runner/.npm/_logs/*.log
 
-      - name: Was Build Cached?
-        run: echo ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+      - name: Cached Results
+        run: |
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+          echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
         run: npm run build
 
       - name: Run Integration Tests ${{ matrix.repo }}
+        if: ${{ env.update_args || !steps.step-cache-run.outputs.cache-hit }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
