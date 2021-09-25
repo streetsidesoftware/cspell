@@ -109,6 +109,14 @@ jobs:
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
           echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
+      - name: Cache Integration Test Repository Files
+        if: ${{ !env.update_args && !steps.step-cache-run.outputs.cache-hit }}
+        uses: actions/cache@v2
+        with:
+          key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          path: |
+            integration-tests/repositories/temp/${{ matrix.repo }}
+
       - name: Show Update Args
         if: ${{ env.update_args }}
         run: |
