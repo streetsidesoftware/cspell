@@ -9,7 +9,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna run build && lerna run prepare-cspell-action",
     "build-dev": "lerna run build-dev",
     "build-schema": "lerna run build-schema",
     "build-integration-tests": "cd ./integration-tests && npm i",
