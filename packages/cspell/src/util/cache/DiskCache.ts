@@ -23,8 +23,8 @@ export class DiskCache implements CSpellLintResultCache {
     private fileEntryCache: FileEntryCache;
     private configHash: string;
 
-    constructor(cacheFileLocation: string, configInfo: ConfigInfo) {
-        this.fileEntryCache = createFileEntryCache(cacheFileLocation);
+    constructor(cacheFileLocation: string, configInfo: ConfigInfo, useCheckSum: boolean) {
+        this.fileEntryCache = createFileEntryCache(cacheFileLocation, undefined, useCheckSum);
         this.configHash = hash(`${version}_${stringify(configInfo)}`);
     }
 

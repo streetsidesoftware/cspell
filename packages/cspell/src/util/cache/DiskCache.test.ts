@@ -36,17 +36,21 @@ describe('DiskCache', () => {
     };
 
     beforeEach(() => {
-        diskCache = new DiskCache('.foobar', {
-            source: 'some-source-string-in-config-info',
-            config: {},
-        });
+        diskCache = new DiskCache(
+            '.foobar',
+            {
+                source: 'some-source-string-in-config-info',
+                config: {},
+            },
+            false
+        );
         fileEntryCache = mockCreateFileEntryCache.mock.results[0].value;
     });
 
     describe('constructor', () => {
         it('creates file-entry-cache in specified location', () => {
             expect(mockCreateFileEntryCache).toBeCalledTimes(1);
-            expect(mockCreateFileEntryCache).toBeCalledWith('.foobar');
+            expect(mockCreateFileEntryCache).toBeCalledWith('.foobar', undefined, false);
         });
         it('hashes version and config', () => {
             expect(mockHash).toBeCalledTimes(1);

@@ -46,6 +46,11 @@ export interface CSpellApplicationOptions extends BaseOptions {
      * The file will be created in the directory where the eslint command is executed.
      */
     cacheLocation?: string;
+
+    /**
+     * Strategy to use for detecting changed files, default: metadata
+     */
+    cacheStrategy?: 'metadata' | 'content';
 }
 
 export type TraceOptions = BaseOptions;

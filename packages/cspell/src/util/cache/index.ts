@@ -26,6 +26,8 @@ export interface CSpellLintResultCache {
  * Creates CSpellLintResultCache (disk cache if caching is enabled in config or dummy otherwise)
  */
 export function createCache(cfg: CSpellApplicationConfiguration, configInfo: ConfigInfo): CSpellLintResultCache {
-    const { cache, cacheLocation = DEFAULT_CACHE_LOCATION } = cfg.options;
-    return cache ? new DiskCache(path.resolve(cfg.root, cacheLocation), configInfo) : new DummyCache();
+    const { cache, cacheLocation = DEFAULT_CACHE_LOCATION, cacheStrategy = 'metadata' } = cfg.options;
+    return cache
+        ? new DiskCache(path.resolve(cfg.root, cacheLocation), configInfo, cacheStrategy === 'content')
+        : new DummyCache();
 }

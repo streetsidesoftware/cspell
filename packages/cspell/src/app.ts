@@ -86,19 +86,19 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         .option('--legacy', 'Legacy output')
         .option('--local <local>', 'Deprecated -- Use: --locale')
         .option('--cache', 'Only check changed files', false)
-        .option(
-            '--cache-location <path>',
-            `Path to the cache file or directory (default: "${DEFAULT_CACHE_LOCATION}"), also enables --cache`
+        .addOption(
+            new commander.Option('--cache-strategy <strategy>', 'Strategy to use for detecting changed files').choices([
+                'metadata',
+                'content',
+            ])
         )
+        .option('--cache-location <path>', `Path to the cache file or directory`, DEFAULT_CACHE_LOCATION)
         .addHelpText('after', usage)
         .arguments('[files...]')
         .action((files: string[], options: Options) => {
             options.files = files;
             const { mustFindFiles } = options;
             const cliReporter = getReporter(options);
-            if (options.cacheLocation) {
-                options.cache = true;
-            }
             return App.lint(files, options, cliReporter).then((result) => {
                 if (!files.length && !result.files) {
                     spellCheckCommand.outputHelp();
