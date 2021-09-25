@@ -80,6 +80,14 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
+      - name: Cache Integration Run
+        id: step-cache-run
+        uses: actions/cache@v2
+        with:
+          key: int-repo-${{ hashFiles('integration-tests/tsconfig.json', 'integration-tests/config/**/*.json', 'integration-tests/snapshots/${{ matrix.repo }}/*', 'integration-tests/repository/*', '**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}-${{ matrix.repo }}
+          path: |
+            integration-tests/tsconfig.json
+
       - name: Cache Build
         id: step-cache-build
         uses: actions/cache@v2
@@ -88,14 +96,6 @@ jobs:
           path: |
             packages/*/dist
             integration-tests/dist
-
-      - name: Cache Integration Run
-        id: step-cache-run
-        uses: actions/cache@v2
-        with:
-          key: int-repo-${{ hashFiles('integration-tests/tsconfig.json', 'integration-tests/config/**/*.json', 'integration-tests/snapshots/${{ matrix.repo }}/*', 'integration-tests/repository/*', '**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}${{ matrix.repo }}
-          path: |
-            integration-tests/tsconfig.json
 
       - name: Show Update Args
         if: ${{ env.update_args }}
