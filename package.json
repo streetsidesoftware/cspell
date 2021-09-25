@@ -9,7 +9,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna run build && lerna run prepare-cspell-action",
     "build-dev": "lerna run build-dev",
     "build-schema": "lerna run build-schema",
     "build-integration-tests": "cd ./integration-tests && npm i",
@@ -25,7 +25,7 @@
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "lint-docs": "prettier -w \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
     "lint-docs-ci": "prettier -c \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
-    "prepare-cspell-action": "npm i",
+    "prepare-cspell-action": "npm i && lerna run prepare-cspell-action",
     "pub-lerna": "lerna publish from-git",
     "pub-version": "lerna version --conventional-commits",
     "pub-version-pre": "lerna version --conventional-commits --conventional-prerelease",
