@@ -9,10 +9,8 @@ import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
 import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { ConfigInfo, fileInfoToDocument, findFiles, readConfig, readFileInfo } from './fileHelper';
-import { FileResult } from './FileResult';
-import { createCache } from './util/cache';
-import { CSpellLintResultCache } from './util/cache/CSpellLintResultCache';
+import { ConfigInfo, fileInfoToDocument, FileResult, findFiles, readConfig, readFileInfo } from './fileHelper';
+import { createCache, CSpellLintResultCache } from './util/cache';
 import { toError } from './util/errors';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from './util/glob';
 import { loadReporters, mergeReporters } from './util/reporters';
@@ -84,6 +82,8 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         );
         reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
         reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
+
+        cache.setCachedLintResults(result);
         return result;
     }
 
