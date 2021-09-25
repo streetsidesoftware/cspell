@@ -43,7 +43,7 @@ export interface CSpellApplicationOptions extends BaseOptions {
     /**
      * Path to the cache location. Can be a file or a directory.
      * If none specified .cspellcache will be used.
-     * The file will be created in the directory where the eslint command is executed.
+     * The file will be created in the directory where the cspell command is executed.
      */
     cacheLocation?: string;
 
