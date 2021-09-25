@@ -72,15 +72,17 @@ describe('DiskCache', () => {
         });
 
         it('returns cached result', async () => {
-            fileEntryCache.getFileDescriptor.mockReturnValue({ meta: {
-                configHash: 'TEST_CONFIG_HASH',
-                size: 100,
-                result: RESULT_NO_ISSUES,
-            } });
+            fileEntryCache.getFileDescriptor.mockReturnValue({
+                meta: {
+                    configHash: 'TEST_CONFIG_HASH',
+                    size: 100,
+                    result: RESULT_NO_ISSUES,
+                },
+            });
 
             const cachedResult = await diskCache.getCachedLintResults('file');
 
-            expect(cachedResult).toMatchObject(RESULT_NO_ISSUES)
+            expect(cachedResult).toMatchObject(RESULT_NO_ISSUES);
             expect(cachedResult?.elapsedTimeMs).toEqual(0);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(0);
@@ -88,15 +90,17 @@ describe('DiskCache', () => {
         });
 
         it('returns cached result for empty files', async () => {
-            fileEntryCache.getFileDescriptor.mockReturnValue({ meta: {
-                configHash: 'TEST_CONFIG_HASH',
-                size: 0,
-                result: RESULT_NO_ISSUES,
-            } });
+            fileEntryCache.getFileDescriptor.mockReturnValue({
+                meta: {
+                    configHash: 'TEST_CONFIG_HASH',
+                    size: 0,
+                    result: RESULT_NO_ISSUES,
+                },
+            });
 
             const cachedResult = await diskCache.getCachedLintResults('file');
 
-            expect(cachedResult).toMatchObject(RESULT_NO_ISSUES)
+            expect(cachedResult).toMatchObject(RESULT_NO_ISSUES);
             expect(cachedResult?.elapsedTimeMs).toEqual(0);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(0);
@@ -105,24 +109,25 @@ describe('DiskCache', () => {
 
         it('returns cached result for files with errors', async () => {
             const result = { ...RESULT_NO_ISSUES, errors: 10 };
-            fileEntryCache.getFileDescriptor.mockReturnValue({ meta: {
-                configHash: 'TEST_CONFIG_HASH',
-                size: 100,
-                result,
-            } });
+            fileEntryCache.getFileDescriptor.mockReturnValue({
+                meta: {
+                    configHash: 'TEST_CONFIG_HASH',
+                    size: 100,
+                    result,
+                },
+            });
 
             const fileInfo = { filename: 'file', text: 'file content' };
             mockReadFileInfo.mockReturnValue(Promise.resolve(fileInfo));
 
             const cachedResult = await diskCache.getCachedLintResults('file');
 
-            expect(cachedResult).toMatchObject(result)
+            expect(cachedResult).toMatchObject(result);
             expect(cachedResult?.elapsedTimeMs).toEqual(0);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(1);
             expect(cachedResult?.fileInfo).toEqual(fileInfo);
         });
-
     });
 
     describe('setCachedLintResults', () => {
