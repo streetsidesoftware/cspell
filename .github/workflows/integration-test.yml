@@ -103,6 +103,11 @@ jobs:
             packages/*/dist
             integration-tests/dist
 
+      - name: Cached Results
+        run: |
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+          echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
+
       - name: Show Update Args
         if: ${{ env.update_args }}
         run: |
@@ -111,6 +116,7 @@ jobs:
           echo ${{ env.branch_prefix }}/${{ matrix.repo }}
 
       - name: Npm CI
+        if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit }}
         run: npm ci
 
       - name: Has Npm has failed?
@@ -118,11 +124,6 @@ jobs:
         run: |
           ls -alF /home/runner/.npm/_logs/*.log
           cat /home/runner/.npm/_logs/*.log
-
-      - name: Cached Results
-        run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
-          echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
