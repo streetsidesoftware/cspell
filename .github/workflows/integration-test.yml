@@ -10,6 +10,7 @@ on:
       - "**/package.lock"
       - "**/*.ts"
       - "integration-tests/**"
+      - ".github/workflows/integration-test.yml"
       - "!docs/**"
   # Run on demand
   workflow_dispatch:
@@ -90,7 +91,7 @@ jobs:
         id: step-cache-run
         uses: actions/cache@v2
         with:
-          key: int-repo-${{ steps.step-repo-info.outputs.repo-hash }}-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          key: int-repo-${{ steps.step-repo-info.outputs.repo-hash }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/tsconfig.json
 
@@ -116,7 +117,7 @@ jobs:
           echo ${{ env.branch_prefix }}/${{ matrix.repo }}
 
       - name: Npm CI
-        if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit || env.update_args }}
         run: npm ci
 
       - name: Has Npm has failed?
