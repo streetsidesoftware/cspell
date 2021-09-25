@@ -11,10 +11,20 @@ on:
       - "**/*.ts"
       - "integration-tests/**"
       - "!docs/**"
+  # Run on demand
+  workflow_dispatch:
+    inputs:
+      updateSnapshots:
+        description: "Update Integration Test snapshots (y/n)"
+        default: "y"
 
 jobs:
-  test:
+  integration-tests:
     runs-on: ${{ matrix.os }}
+
+    env:
+      update_args: ${{ (startsWith(github.event.inputs.updateSnapshots, 'y') || startsWith(github.event.inputs.updateSnapshots, 'Y')) && '--update' || '' }}
+      branch_prefix: update-integration-ref
 
     strategy:
       matrix:
@@ -25,51 +35,126 @@ jobs:
           - ubuntu-latest
 
         repo:
-          - php/php-src
-          - googleapis/google-cloud-cpp
+          - AdaDoom3/AdaDoom3
+          - alexiosc/megistos
           - aws-amplify/docs
           - Azure/azure-rest-api-specs
-          - alexiosc/megistos
-          - exonum/exonum
-          - bitjson/typescript-starter graphql/express-graphql graphql/graphql-relay-js graphql/graphql-spec
-          - graphql/graphql-js
-          - liriliri/licia
-          - microsoft/TypeScript-Website
-          - prettier/prettier
-          - pycontribs/jira SoftwareBrothers/admin-bro typescript-cheatsheets/react
-          - typescript-eslint/typescript-eslint webdeveric/webpack-assets-manifest
-          - w3c/aria-practices w3c/specberus
-          - webpack/webpack
-          - wireapp/wire-desktop wireapp/wire-webapp
+          - bitjson/typescript-starter
+          - canada-ca/open-source-logiciel-libre
           - django/django
-          - TheAlgorithms/Python
-          - AdaDoom3/AdaDoom3
+          - exonum/exonum
+          - googleapis/google-cloud-cpp
+          - graphql/express-graphql
+          - graphql/graphql-js
+          - graphql/graphql-relay-js
+          - graphql/graphql-spec
+          - liriliri/licia
           - MartinThoma/LaTeX-examples
-          - plasticrake/tplink-smarthome-api canada-ca/open-source-logiciel-libre
+          - microsoft/TypeScript-Website
+          - php/php-src
+          - plasticrake/tplink-smarthome-api
+          - prettier/prettier
+          - pycontribs/jira
+          - SoftwareBrothers/admin-bro
+          - TheAlgorithms/Python
+          - typescript-cheatsheets/react
+          - typescript-eslint/typescript-eslint
+          - w3c/aria-practices
+          - w3c/specberus
+          - webdeveric/webpack-assets-manifest
+          - webpack/webpack
+          - wireapp/wire-desktop
+          - wireapp/wire-webapp
 
     steps:
-      - uses: actions/checkout@v2.3.4
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2.4.0
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
 
-      - run: npm ci
-      - name: Npm has failed
+      - name: Cache Build
+        id: step-cache-build
+        uses: actions/cache@v2
+        with:
+          key: int-build-${{ hashFiles('**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}
+          path: |
+            packages/*/dist
+            integration-tests/dist
+
+      - name: Show Update Args
+        if: ${{ env.update_args }}
+        run: |
+          echo Update Snapshots - ${{ github.event.inputs.updateSnapshots }}
+          echo Update Args - ${{ env.update_args }}
+          echo ${{ env.branch_prefix }}/${{ matrix.repo }}
+
+      - name: Npm CI
+        run: npm ci
+
+      - name: Has Npm has failed?
         if: ${{ failure() }}
         run: |
           ls -alF /home/runner/.npm/_logs/*.log
           cat /home/runner/.npm/_logs/*.log
-      - run: npm run build
+
+      - name: Was Build Cached?
+        run: echo ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+      - name: Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        run: npm run build
+
       - name: Run Integration Tests ${{ matrix.repo }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
           && npm ci
-          && npm run integration-tests -- ${{ matrix.repo }}
+          && npm run integration-tests -- ${{ matrix.repo }} ${{ env.update_args }}
 
+      # Update if necessary
+
+      - name: Detect Changes
+        run: |
+          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+          git --no-pager diff --compact-summary
+
+      - name: Gen Body
+        run: |
+          echo 'git_body<<DIFF' >> $GITHUB_ENV
+          git --no-pager diff --compact-summary >> $GITHUB_ENV
+          echo 'DIFF' >> $GITHUB_ENV
+
+      - name: Echo git_status
+        run: echo ${{ env.git_status }}
+
+      - name: Generate Token
+        uses: tibdex/github-app-token@v1.4 # cspell:ignore tibdex
+        if: env.git_status == 'dirty'
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
+      - name: Create Pull Request
+        if: env.git_status == 'dirty'
+        uses: peter-evans/create-pull-request@v3.10.1
+        with:
+          commit-message: "ci: Workflow Bot -- Integration ${{ matrix.repo }} Update References"
+          branch: ${{ env.branch_prefix }}/${{ matrix.repo }}
+          base: main
+          title: "ci: Workflow Bot -- Integration ${{ matrix.repo }} Update References"
+          token: ${{ steps.generate-token.outputs.token }}
+          body: ${{ env.git_body }}
+          delete-branch: true
 # cspell:ignore MartinThoma googleapis
 # cspell:ignore plasticrake tplink smarthome
 # cspell:ignore logiciel
