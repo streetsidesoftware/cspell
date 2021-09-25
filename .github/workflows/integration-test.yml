@@ -16,7 +16,7 @@ on:
     inputs:
       updateSnapshots:
         description: "Update Integration Test snapshots (y/n)"
-        default: "y"
+        default: "n"
 
 jobs:
   integration-tests:
@@ -80,11 +80,16 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
+      - name: Repo Info
+        id: step-repo-info
+        run: |
+          echo "::set-output name=repo-info::$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)"
+
       - name: Cache Integration Run
         id: step-cache-run
         uses: actions/cache@v2
         with:
-          key: int-repo-${{ hashFiles('integration-tests/tsconfig.json', 'integration-tests/config/**/*.json', 'integration-tests/snapshots/${{ matrix.repo }}/*', 'integration-tests/repository/*', '**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}-${{ matrix.repo }}
+          key: int-repo-${{ hashFiles('integration-tests/tsconfig.json', 'integration-tests/config/repositories/${{matrix.repo}}/**', 'integration-tests/snapshots/${{ matrix.repo }}/*', 'integration-tests/repositories/*', '**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}-${{ matrix.repo }}-${{ steps.step-repo-info.outputs.repo-info }}
           path: |
             integration-tests/tsconfig.json
 
