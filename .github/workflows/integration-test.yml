@@ -110,7 +110,6 @@ jobs:
           echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Cache Integration Repo
-        id: step-cache-run
         if: ${{ !env.update_args }}
         uses: actions/cache@v2
         with:
