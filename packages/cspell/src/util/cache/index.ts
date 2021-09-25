@@ -11,11 +11,11 @@ export interface CSpellLintResultCache {
     /**
      * Retrieve cached lint results for a given file name, if present in the cache.
      */
-    getCachedLintResults(filename: string): Promise<FileResult | undefined>;
+    getCachedLintResults(filename: string, configInfo: ConfigInfo): Promise<FileResult | undefined>;
     /**
      * Set the cached lint results.
      */
-    setCachedLintResults(result: FileResult): void;
+    setCachedLintResults(result: FileResult, configInfo: ConfigInfo): void;
     /**
      * Persists the in-memory cache to disk.
      */
@@ -25,9 +25,7 @@ export interface CSpellLintResultCache {
 /**
  * Creates CSpellLintResultCache (disk cache if caching is enabled in config or dummy otherwise)
  */
-export function createCache(cfg: CSpellApplicationConfiguration, configInfo: ConfigInfo): CSpellLintResultCache {
+export function createCache(cfg: CSpellApplicationConfiguration): CSpellLintResultCache {
     const { cache, cacheLocation = DEFAULT_CACHE_LOCATION, cacheStrategy = 'metadata' } = cfg.options;
-    return cache
-        ? new DiskCache(path.resolve(cfg.root, cacheLocation), configInfo, cacheStrategy === 'content')
-        : new DummyCache();
+    return cache ? new DiskCache(path.resolve(cfg.root, cacheLocation), cacheStrategy === 'content') : new DummyCache();
 }

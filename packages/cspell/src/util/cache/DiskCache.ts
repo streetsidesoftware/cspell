@@ -16,19 +16,27 @@ type CSpellCacheMeta = FileDescriptor['meta'] & {
     configHash: string;
 };
 
+const configHashes: WeakMap<ConfigInfo, string> = new WeakMap();
+
+export function getConfigHash(configInfo: ConfigInfo): string {
+    if (!configHashes.has(configInfo)) {
+        configHashes.set(configInfo, hash(`${version}_${stringify(configInfo)}`));
+    }
+
+    return configHashes.get(configInfo)!;
+}
+
 /**
  * Caches cspell results on disk
  */
 export class DiskCache implements CSpellLintResultCache {
     private fileEntryCache: FileEntryCache;
-    private configHash: string;
 
-    constructor(cacheFileLocation: string, configInfo: ConfigInfo, useCheckSum: boolean) {
+    constructor(cacheFileLocation: string, useCheckSum: boolean) {
         this.fileEntryCache = createFileEntryCache(cacheFileLocation, undefined, useCheckSum);
-        this.configHash = hash(`${version}_${stringify(configInfo)}`);
     }
 
-    public async getCachedLintResults(filename: string): Promise<FileResult | undefined> {
+    public async getCachedLintResults(filename: string, configInfo: ConfigInfo): Promise<FileResult | undefined> {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
 
@@ -37,7 +45,7 @@ export class DiskCache implements CSpellLintResultCache {
         // 2. The file has not changed since the time it was previously linted
         // 3. The CSpell configuration has not changed since the time the file was previously linted
         // If any of these are not true, we will not reuse the lint results.
-        if (fileDescriptor.notFound || fileDescriptor.changed || meta.configHash !== this.configHash) {
+        if (fileDescriptor.notFound || fileDescriptor.changed || meta.configHash !== getConfigHash(configInfo)) {
             return undefined;
         }
 
@@ -52,7 +60,7 @@ export class DiskCache implements CSpellLintResultCache {
         };
     }
 
-    public setCachedLintResults({ fileInfo, elapsedTimeMs: _, ...result }: FileResult): void {
+    public setCachedLintResults({ fileInfo, elapsedTimeMs: _, ...result }: FileResult, configInfo: ConfigInfo): void {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(fileInfo.filename);
         if (fileDescriptor.notFound) {
             return;
@@ -60,7 +68,7 @@ export class DiskCache implements CSpellLintResultCache {
 
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         meta.result = result;
-        meta.configHash = this.configHash;
+        meta.configHash = getConfigHash(configInfo);
     }
 
     public reconcile(): void {

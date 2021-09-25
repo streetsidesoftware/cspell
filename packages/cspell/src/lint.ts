@@ -31,7 +31,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         configInfo: ConfigInfo,
         cache: CSpellLintResultCache
     ): Promise<FileResult> {
-        const cachedResult = await cache.getCachedLintResults(filename);
+        const cachedResult = await cache.getCachedLintResults(filename, configInfo);
         if (cachedResult) {
             reporter.debug(`Filename: ${filename}, using cache`);
             return cachedResult;
@@ -83,7 +83,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
         reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
 
-        cache.setCachedLintResults(result);
+        cache.setCachedLintResults(result, configInfo);
         return result;
     }
 
@@ -96,7 +96,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
 
     async function processFiles(files: string[], configInfo: ConfigInfo, fileCount: number): Promise<RunResult> {
         const status: RunResult = runResult();
-        const cache = createCache(cfg, configInfo);
+        const cache = createCache(cfg);
 
         const emitProgress = (filename: string, fileNum: number, result?: FileResult) =>
             reporter.progress({
@@ -204,7 +204,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
-       // cspell:word nodir
+        // cspell:word nodir
         const globOptions = { root, cwd: root, ignore: ignoreGlobs.concat(normalizedExcludes), nodir: true };
         const files = filterFiles(await findFiles(fileGlobs, globOptions), globMatcher);
 
