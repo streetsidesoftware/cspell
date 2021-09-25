@@ -59,7 +59,7 @@ function _globP(pattern: string, state: GlobPState): Promise<string[]> {
             }
             resolve(matches);
         };
-        const options = state.glob ? { ...state.glob, ...state.options } : state.options;
+        const options = { ...(state.glob || {}), ...state.options };
         state.glob = glob(pattern, options, cb);
     });
 }

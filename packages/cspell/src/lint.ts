@@ -204,7 +204,8 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
-        const globOptions = { root, cwd: root, ignore: ignoreGlobs.concat(normalizedExcludes) };
+       // cspell:word nodir
+        const globOptions = { root, cwd: root, ignore: ignoreGlobs.concat(normalizedExcludes), nodir: true };
         const files = filterFiles(await findFiles(fileGlobs, globOptions), globMatcher);
 
         return processFiles(files, configInfo, files.length);
