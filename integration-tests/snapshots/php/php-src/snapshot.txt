@@ -2444,8 +2444,8 @@ Lines:
 ./ext/opcache/jit/zend_jit.c:1322:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
 ./ext/opcache/jit/zend_jit.c:154:17    - Unknown word (idom)       -- b = blocks[b].idom;
 ./ext/opcache/jit/zend_jit.c:1673:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
-./ext/opcache/jit/zend_jit.c:4652:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
-./ext/opcache/jit/zend_jit.c:5128:7    - Unknown word (ZCSG)          -- if (ZCSG(preload_script)) {
+./ext/opcache/jit/zend_jit.c:4703:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
+./ext/opcache/jit/zend_jit.c:5179:7    - Unknown word (ZCSG)          -- if (ZCSG(preload_script)) {
 ./ext/opcache/jit/zend_jit.c:752:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
 ./ext/opcache/jit/zend_jit.h:41:73     - Unknown word (caled)      -- the most frequently caled on first request functions
 ./ext/opcache/jit/zend_jit.h:78:61     - Unknown word (debbuger)   -- x1f0 /* profile and debbuger flags can't be changed
@@ -2471,7 +2471,7 @@ Lines:
 ./ext/opcache/jit/zend_jit_internal.h:399:24    - Unknown word (JITED)      -- define ZEND_JIT_TRACE_JITED (1<<4)
 ./ext/opcache/jit/zend_jit_internal.h:443:20    - Unknown word (ICALL)      -- ZEND_JIT_TRACE_DO_ICALL,
 ./ext/opcache/jit/zend_jit_internal.h:480:24    - Unknown word (LOHI)       -- struct { ZEND_ENDIAN_LOHI(
-./ext/opcache/jit/zend_jit_internal.h:687:175   - Unknown word (megamorphc) -- t start, uint32_t is_megamorphc);
+./ext/opcache/jit/zend_jit_internal.h:694:175   - Unknown word (megamorphc) -- t start, uint32_t is_megamorphc);
 ./ext/opcache/jit/zend_jit_internal.h:74:55     - Unknown word (ctzll)      -- (zend_reg)__builtin_ctzll(set))
 ./ext/opcache/jit/zend_jit_internal.h:75:56     - Unknown word (clzll)      -- zend_reg)(__builtin_clzll(set)^63))
 ./ext/opcache/jit/zend_jit_oprofile.c:19:14     - Unknown word (OPROFILE)   -- #define HAVE_OPROFILE 1
@@ -2482,13 +2482,13 @@ Lines:
 ./ext/opcache/jit/zend_jit_perf_dump.c:72:37     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
 ./ext/opcache/jit/zend_jit_trace.c:3298:28   - Unknown word (clenup)     -- void zend_jit_trace_clenup_stack(zend_jit_trace
 ./ext/opcache/jit/zend_jit_trace.c:390:82    - Unknown word (tssa)       -- zend_ssa *tssa,
-./ext/opcache/jit/zend_jit_trace.c:3991:7    - Unknown word (Deoptimization) -- /* Deoptimization */
-./ext/opcache/jit/zend_jit_trace.c:4258:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
-./ext/opcache/jit/zend_jit_trace.c:6504:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
-./ext/opcache/jit/zend_jit_trace.c:6663:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
-./ext/opcache/jit/zend_jit_trace.c:6944:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
-./ext/opcache/jit/zend_jit_trace.c:7628:5    - Unknown word (Deoptimizatoion) -- /* Deoptimizatoion of VM stack state *
-./ext/opcache/jit/zend_jit_trace.c:7883:29   - Unknown word (xlat)            -- shared_alloc_register_xlat_entry(op_array->opcodes
+./ext/opcache/jit/zend_jit_trace.c:3992:7    - Unknown word (Deoptimization) -- /* Deoptimization */
+./ext/opcache/jit/zend_jit_trace.c:4259:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
+./ext/opcache/jit/zend_jit_trace.c:6560:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
+./ext/opcache/jit/zend_jit_trace.c:6719:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
+./ext/opcache/jit/zend_jit_trace.c:7000:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
+./ext/opcache/jit/zend_jit_trace.c:7684:5    - Unknown word (Deoptimizatoion) -- /* Deoptimizatoion of VM stack state *
+./ext/opcache/jit/zend_jit_trace.c:7939:29   - Unknown word (xlat)            -- shared_alloc_register_xlat_entry(op_array->opcodes
 ./ext/opcache/jit/zend_jit_trace.c:935:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
 ./ext/opcache/jit/zend_jit_vm_helpers.c:1116:39   - Unknown word (unroling)   -- doesn't work try loop unroling. */
 ./ext/opcache/jit/zend_jit_vm_helpers.c:40:35     - Unknown word (Wvolatile)  -- diagnostic ignored "-Wvolatile-register-var"
@@ -3854,29 +3854,29 @@ Lines:
 ./ext/sodium/sodium_pwhash.c:50:13     - Unknown word (smemlimit)  -- zend_long smemlimit = zval_get_long(opt
 ./ext/spl/php_spl.c:220:52    - Unknown word (clsses)     -- containing the names of all clsses and interfaces defined
 ./ext/spl/php_spl.c:670:8     - Unknown word (strg)       -- char *strg;
-./ext/spl/spl_array.c:1293:12   - Unknown word (opos)       -- zend_long opos, position;
-./ext/spl/spl_array.c:1630:18   - Unknown word (zflags)     -- zval *members, *zflags, *array;
-./ext/spl/spl_array.c:704:8     - Unknown word (Unsets)     -- /* {{{ Unsets the value at the specified
-./ext/spl/spl_directory.c:1381:16   - Unknown word (dpath)      -- zend_string *dpath = zend_string_init(ZSTR
-./ext/spl/spl_directory.c:1476:34   - Unknown word (LPERMS)     -- intern->file_name, FS_LPERMS, return_value);
-./ext/spl/spl_directory.c:1495:7    - Unknown word (zpath)      -- zval zpath, zflags;
-./ext/spl/spl_directory.c:2313:23   - Unknown word (enclo)      -- char *delim = NULL, *enclo = NULL, *esc = NULL
+./ext/spl/spl_array.c:1229:12   - Unknown word (opos)       -- zend_long opos, position;
+./ext/spl/spl_array.c:1566:18   - Unknown word (zflags)     -- zval *members, *zflags, *array;
+./ext/spl/spl_array.c:679:8     - Unknown word (Unsets)     -- /* {{{ Unsets the value at the specified
+./ext/spl/spl_directory.c:1375:16   - Unknown word (dpath)      -- zend_string *dpath = zend_string_init(ZSTR
+./ext/spl/spl_directory.c:1470:34   - Unknown word (LPERMS)     -- intern->file_name, FS_LPERMS, return_value);
+./ext/spl/spl_directory.c:1489:7    - Unknown word (zpath)      -- zval zpath, zflags;
+./ext/spl/spl_directory.c:2309:23   - Unknown word (enclo)      -- char *delim = NULL, *enclo = NULL, *esc = NULL
 ./ext/spl/spl_directory.c:46:4      - Unknown word (decalre)    -- /* decalre the class entry */
 ./ext/spl/spl_directory.c:609:15    - Unknown word (pnstr)      -- zend_string *pnstr;
 ./ext/spl/spl_directory.c:611:7     - Unknown word (stmp)       -- char stmp[2];
-./ext/spl/spl_dllist.c:1046:8    - Unknown word (Unserializes) -- /* {{{ Unserializes storage */
-./ext/spl/spl_dllist.c:1200:21   - Unknown word (neighbours)   -- /* connect to the neighbours */
+./ext/spl/spl_dllist.c:1043:8    - Unknown word (Unserializes) -- /* {{{ Unserializes storage */
+./ext/spl/spl_dllist.c:1197:21   - Unknown word (neighbours)   -- /* connect to the neighbours */
 ./ext/spl/spl_dllist.c:778:18    - Unknown word (neightbors) -- /* connect the neightbors */
 ./ext/spl/spl_fixedarray.c:583:17    - Unknown word (unserialised) -- /* Remove the unserialised properties, since we
 ./ext/spl/spl_fixedarray.c:722:25    - Unknown word (zindex)       -- zval *zindex;
-./ext/spl/spl_heap.c:136:7     - Unknown word (zresult)    -- zval zresult;
+./ext/spl/spl_heap.c:130:7     - Unknown word (zresult)    -- zval zresult;
 ./ext/spl/spl_heap.c:36:13     - Unknown word (PQUEUE)     -- #define SPL_PQUEUE_EXTR_MASK 0x000
-./ext/spl/spl_heap.c:658:39    - Unknown word (priodiry)   -- value with the priority $priodiry on the priorityqueue
-./ext/spl/spl_heap.c:690:49    - Unknown word (Despecialize) -- intern->heap->cmp) { /* Despecialize on type conflict. *
-./ext/spl/spl_heap.c:82:21     - Unknown word (pqueue)     -- typedef struct _spl_pqueue_elem {
-./ext/spl/spl_iterators.c:1270:9    - Unknown word (APPENDIT)   -- #define APPENDIT_CHECK_CTOR(intern) SPL
+./ext/spl/spl_heap.c:652:39    - Unknown word (priodiry)   -- value with the priority $priodiry on the priorityqueue
+./ext/spl/spl_heap.c:684:49    - Unknown word (Despecialize) -- intern->heap->cmp) { /* Despecialize on type conflict. *
+./ext/spl/spl_heap.c:76:21     - Unknown word (pqueue)     -- typedef struct _spl_pqueue_elem {
+./ext/spl/spl_iterators.c:1268:9    - Unknown word (APPENDIT)   -- #define APPENDIT_CHECK_CTOR(intern) SPL
 ./ext/spl/spl_iterators.c:179:77    - Unknown word (zthis)      -- object *object, zval *zthis)
-./ext/spl/spl_iterators.c:2187:8    - Unknown word (zpos)       -- zval zpos;
+./ext/spl/spl_iterators.c:2185:8    - Unknown word (zpos)       -- zval zpos;
 ./ext/spl/spl_iterators.c:71:2      - Unknown word (RTIT)       -- RTIT_BYPASS_CURRENT = 4,
 ./ext/spl/spl_iterators.stub.php:203:88    - Unknown word (TOSTRING)   -- CachingIterator::CALL_TOSTRING) {}
 ./ext/spl/spl_observer.c:130:31    - Unknown word (pelement)   -- SplObjectStorageElement *pelement, element;
