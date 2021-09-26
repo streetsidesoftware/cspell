@@ -212,7 +212,7 @@ describe('Validate English Suggestions', () => {
                 suggestionTimeout
             );
             const elapsed = timer.elapsed();
-            expect(elapsed).toBeLessThan(suggestionTimeout * 2);
+            expect(elapsed).toBeLessThan(suggestionTimeout * 4);
         },
         timeout
     );
