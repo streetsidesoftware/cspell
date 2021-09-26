@@ -50,7 +50,6 @@ function genIssue(word: string): ReporterIssue {
         offset,
         uri: 'file://uri/path/filename',
         context,
-        doc,
         line,
         col,
         row,
