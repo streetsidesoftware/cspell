@@ -19,11 +19,15 @@ type CSpellCacheMeta = FileDescriptor['meta'] & {
 const configHashes: WeakMap<ConfigInfo, string> = new WeakMap();
 
 export function getConfigHash(configInfo: ConfigInfo): string {
-    if (!configHashes.has(configInfo)) {
-        configHashes.set(configInfo, hash(`${version}_${stringify(configInfo)}`));
+    const cachedHash = configHashes.get(configInfo);
+    if (cachedHash !== undefined) {
+        return cachedHash;
     }
 
-    return configHashes.get(configInfo)!;
+    const hashValue = hash(`${version}_${stringify(configInfo)}`);
+    configHashes.set(configInfo, hashValue);
+
+    return hashValue;
 }
 
 /**
