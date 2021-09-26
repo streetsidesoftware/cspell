@@ -151,23 +151,26 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
     const suggestions = issue.suggestions?.join(', ') || '';
     const message = issue.isFlagged ? '{yellow Forbidden word}' : 'Unknown word';
     const t = template(templateStr.replace(/\$message/g, message));
-    return chalk(t)
-        .replace(/\$\{col\}/g, colText)
-        .replace(/\$\{filename\}/g, filename)
-        .replace(/\$\{row\}/g, rowText)
-        .replace(/\$\{text\}/g, text)
-        .replace(/\$\{uri\}/g, uri)
-        .replace(/\$col/g, colText)
-        .replace(/\$contextFull/g, contextFull)
-        .replace(/\$contextLeft/g, contextLeft)
-        .replace(/\$contextRight/g, contextRight)
-        .replace(/\$filename/g, filename)
-        .replace(/\$padContext/g, padContext)
-        .replace(/\$padRowCol/g, padRowCol)
-        .replace(/\$row/g, rowText)
-        .replace(/\$suggestions/g, suggestions)
-        .replace(/\$text/g, text)
-        .replace(/\$uri/g, uri);
+    return (
+        chalk(t)
+            .replace(/\$\{col\}/g, colText)
+            .replace(/\$\{filename\}/g, filename)
+            .replace(/\$\{row\}/g, rowText)
+            .replace(/\$\{text\}/g, text)
+            .replace(/\$\{uri\}/g, uri)
+            .replace(/\$col/g, colText)
+            .replace(/\$filename/g, filename)
+            .replace(/\$padContext/g, padContext)
+            .replace(/\$padRowCol/g, padRowCol)
+            .replace(/\$row/g, rowText)
+            .replace(/\$suggestions/g, suggestions)
+            .replace(/\$text/g, text)
+            .replace(/\$uri/g, uri)
+            // Note: context substitution needs to be last to prevent accidental substitution.
+            .replace(/\$contextFull/g, contextFull)
+            .replace(/\$contextLeft/g, contextLeft)
+            .replace(/\$contextRight/g, contextRight)
+    );
 }
 
 class TS extends Array<string> {
