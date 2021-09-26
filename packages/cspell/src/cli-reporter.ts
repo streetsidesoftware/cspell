@@ -12,6 +12,7 @@ const templateIssueWithContextWithSuggestions = `{green $filename}:{yellow $row:
 const templateIssueLegacy = `${chalk.green('$filename')}[$row, $col]: $message: ${chalk.red('$text')}`;
 const templateIssueWordsOnly = '$text';
 
+export // Exported for testing.
 interface ReporterIssue extends Issue {
     filename: string;
 }
@@ -136,7 +137,7 @@ export function getReporter(options: Options): CSpellReporter {
     };
 }
 
-function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidth: number) {
+function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidth: number): string {
     function clean(t: string) {
         return t.replace(/\s+/, ' ');
     }
@@ -150,27 +151,24 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
     const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
     const suggestions = issue.suggestions?.join(', ') || '';
     const message = issue.isFlagged ? '{yellow Forbidden word}' : 'Unknown word';
+
+    const substitutions = {
+        $col: colText,
+        $contextFull: contextFull,
+        $contextLeft: contextLeft,
+        $contextRight: contextRight,
+        $filename: filename,
+        $padContext: padContext,
+        $padRowCol: padRowCol,
+        $row: rowText,
+        $suggestions: suggestions,
+        $text: text,
+        $uri: uri,
+    };
+
     const t = template(templateStr.replace(/\$message/g, message));
-    return (
-        chalk(t)
-            .replace(/\$\{col\}/g, colText)
-            .replace(/\$\{filename\}/g, filename)
-            .replace(/\$\{row\}/g, rowText)
-            .replace(/\$\{text\}/g, text)
-            .replace(/\$\{uri\}/g, uri)
-            .replace(/\$col/g, colText)
-            .replace(/\$filename/g, filename)
-            .replace(/\$padContext/g, padContext)
-            .replace(/\$padRowCol/g, padRowCol)
-            .replace(/\$row/g, rowText)
-            .replace(/\$suggestions/g, suggestions)
-            .replace(/\$text/g, text)
-            .replace(/\$uri/g, uri)
-            // Note: context substitution needs to be last to prevent accidental substitution.
-            .replace(/\$contextFull/g, contextFull)
-            .replace(/\$contextLeft/g, contextLeft)
-            .replace(/\$contextRight/g, contextRight)
-    );
+
+    return substitute(chalk(t), substitutions);
 }
 
 class TS extends Array<string> {
@@ -184,3 +182,32 @@ class TS extends Array<string> {
 function template(s: string): TemplateStringsArray {
     return new TS(s);
 }
+
+function substitute(text: string, substitutions: Record<string, string>): string {
+    type SubRange = [number, number, string];
+    const subs: SubRange[] = [];
+
+    for (const [match, replaceWith] of Object.entries(substitutions)) {
+        const len = match.length;
+        for (let i = text.indexOf(match); i >= 0; i = text.indexOf(match, i + 1)) {
+            subs.push([i, i + len, replaceWith]);
+        }
+    }
+
+    subs.sort((a, b) => a[0] - b[0]);
+
+    let i = 0;
+    function sub(r: SubRange): string {
+        const [a, b, t] = r;
+        const prefix = text.slice(i, a);
+        i = b;
+        return prefix + t;
+    }
+
+    const parts = subs.map(sub);
+    return parts.join('') + text.slice(i);
+}
+
+export const __testing__ = {
+    formatIssue,
+};
