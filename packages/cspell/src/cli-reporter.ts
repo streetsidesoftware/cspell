@@ -5,19 +5,23 @@ import * as path from 'path';
 import { Options } from './app';
 import { URI } from 'vscode-uri';
 
-const templateIssue = `{green $uri}:{yellow $row:$col} - $message ({red $text})`;
-const templateIssueWithSuggestions = `{green $uri}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
-const templateIssueWithContext = `{green $uri}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
-const templateIssueWithContextWithSuggestions = `{green $uri}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
-const templateIssueLegacy = `${chalk.green('$uri')}[$row, $col]: $message: ${chalk.red('$text')}`;
+const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
+const templateIssueWithSuggestions = `{green $filename}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
+const templateIssueWithContext = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
+const templateIssueWithContextWithSuggestions = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
+const templateIssueLegacy = `${chalk.green('$filename')}[$row, $col]: $message: ${chalk.red('$text')}`;
 const templateIssueWordsOnly = '$text';
+
+interface ReporterIssue extends Issue {
+    filename: string;
+}
 
 function genIssueEmitter(template: string) {
     const defaultWidth = 10;
     let maxWidth = defaultWidth;
     let uri: string | undefined;
 
-    return function issueEmitter(issue: Issue) {
+    return function issueEmitter(issue: ReporterIssue) {
         if (uri !== issue.uri) {
             maxWidth = defaultWidth;
             uri = issue.uri;
@@ -99,11 +103,13 @@ export function getReporter(options: Options): CSpellReporter {
 
     const root = URI.file(options.root || process.cwd());
     const fsPathRoot = root.fsPath;
-    function relativeIssue(fn: (i: Issue) => void): (i: Issue) => void {
-        if (!options.relative) return fn;
+    function relativeIssue(fn: (i: ReporterIssue) => void): (i: Issue) => void {
+        const fnFilename = options.relative
+            ? (uri: string) => relativeUriFilename(uri, fsPathRoot)
+            : (uri: string) => URI.parse(uri).fsPath;
         return (i: Issue) => {
-            const r = { ...i };
-            r.uri = r.uri ? relativeUriFilename(r.uri, fsPathRoot) : r.uri;
+            const filename = i.uri ? fnFilename(i.uri) : '';
+            const r = { ...i, filename };
             fn(r);
         };
     }
@@ -130,11 +136,11 @@ export function getReporter(options: Options): CSpellReporter {
     };
 }
 
-function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: number) {
+function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidth: number) {
     function clean(t: string) {
         return t.replace(/\s+/, ' ');
     }
-    const { uri = '', row, col, text, context, offset } = issue;
+    const { uri = '', filename, row, col, text, context, offset } = issue;
     const contextLeft = clean(context.text.slice(0, offset - context.offset));
     const contextRight = clean(context.text.slice(offset + text.length - context.offset));
     const contextFull = clean(context.text);
@@ -147,6 +153,7 @@ function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: numbe
     const t = template(templateStr.replace(/\$message/g, message));
     return chalk(t)
         .replace(/\$\{col\}/g, colText)
+        .replace(/\$\{filename\}/g, filename)
         .replace(/\$\{row\}/g, rowText)
         .replace(/\$\{text\}/g, text)
         .replace(/\$\{uri\}/g, uri)
@@ -154,6 +161,7 @@ function formatIssue(templateStr: string, issue: Issue, maxIssueTextWidth: numbe
         .replace(/\$contextFull/g, contextFull)
         .replace(/\$contextLeft/g, contextLeft)
         .replace(/\$contextRight/g, contextRight)
+        .replace(/\$filename/g, filename)
         .replace(/\$padContext/g, padContext)
         .replace(/\$padRowCol/g, padRowCol)
         .replace(/\$row/g, rowText)
