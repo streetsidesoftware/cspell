@@ -87,7 +87,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         return result;
     }
 
-    function mapIssue(tdo: TextDocumentOffset & ValidationIssue): Issue {
+    function mapIssue({ doc: _, ...tdo }: TextDocumentOffset & ValidationIssue): Issue {
         const context = cfg.showContext
             ? extractContext(tdo, cfg.showContext)
             : { text: tdo.line.text.trimEnd(), offset: tdo.line.offset };
@@ -266,7 +266,10 @@ Options:
     }
 }
 
-function extractContext(tdo: cspell.TextDocumentOffset, contextRange: number): cspell.TextOffset {
+function extractContext(
+    tdo: Pick<cspell.TextDocumentOffset, 'line' | 'offset' | 'text'>,
+    contextRange: number
+): cspell.TextOffset {
     const { line, offset } = tdo;
     const textOffsetInLine = offset - line.offset;
     let left = Math.max(textOffsetInLine - contextRange, 0);

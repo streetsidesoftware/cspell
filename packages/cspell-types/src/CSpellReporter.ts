@@ -1,6 +1,6 @@
 import { TextDocumentOffset, TextOffset } from './TextOffset';
 
-export interface Issue extends TextDocumentOffset {
+export interface Issue extends Omit<TextDocumentOffset, 'doc'> {
     /** text surrounding the issue text */
     context: TextOffset;
     isFlagged?: boolean;

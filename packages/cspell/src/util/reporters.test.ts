@@ -38,7 +38,6 @@ async function runReporter(reporter: CSpellReporter): Promise<void> {
         line: { text: 'This text is fulll of errrorrrs.', offset: 0 },
         row: 1,
         col: 14,
-        doc: 'This text is fulll of errrorrrs.',
         uri: 'text.txt',
         context: { text: 'This text is fulll of errrorrrs.', offset: 0 },
     });
