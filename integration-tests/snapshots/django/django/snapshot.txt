@@ -16,7 +16,7 @@ Lines:
 ./django/conf/global_settings.py:146:27    - Unknown word (Udmurt)        -- udm', gettext_noop('Udmurt')),
 ./django/conf/global_settings.py:248:25    - Unknown word (Naver)         -- re.compile(r'^NaverBot.*'),
 ./django/conf/global_settings.py:251:25    - Unknown word (sohu)          -- re.compile(r'^sohu-search'),
-./django/conf/global_settings.py:262:25    - Unknown word (favicon)       -- re.compile(r'^/favicon.ico),
+./django/conf/global_settings.py:262:25    - Unknown word (favicon)       -- re.compile(r'^/favicon.ico$'),
 ./django/conf/global_settings.py:264:25    - Unknown word (phpmyadmin)    -- re.compile(r'^/phpmyadmin/'),
 ./django/conf/global_settings.py:328:10    - Unknown word (myproject)     -- # (i.e. "myproject.locale" for myproject
 ./django/conf/global_settings.py:463:24    - Unknown word (sessionid)     -- SESSION_COOKIE_NAME = 'sessionid'
@@ -274,7 +274,7 @@ Lines:
 ./django/contrib/gis/geoip2/base.py:160:28    - Unknown word (gethostbyname) -- query = socket.gethostbyname(query)
 ./django/contrib/gis/geoip2/base.py:195:9     - Unknown word (cdict)         -- cdict = self.city(query)
 ./django/contrib/gis/geoip2/base.py:26:16     - Unknown word (MMAP)       -- # Try MODE_MMAP_EXT, MODE_MMAP, MODE
-./django/contrib/gis/geometry.py:14:8      - Unknown word (ACEGIMLONPSRUTYZ) -- r'[ACEGIMLONPSRUTYZ\d,\.\-\+\(\) ]+),
+./django/contrib/gis/geometry.py:14:8      - Unknown word (ACEGIMLONPSRUTYZ) -- r'[ACEGIMLONPSRUTYZ\d,\.\-\+\(\) ]+)$',
 ./django/contrib/gis/geos/__init__.py:12:7      - Unknown word (libgeos)    -- from .libgeos import geos_version
 ./django/contrib/gis/geos/collections.py:59:25     - Unknown word (geomn)      -- return capi.get_geomn(self.ptr, index)
 ./django/contrib/gis/geos/coordseq.py:87:17     - Unknown word (setx)       -- capi.cs_setx(self.ptr, index, value
@@ -534,7 +534,7 @@ Lines:
 ./django/db/backends/postgresql/client.py:49:18     - Unknown word (PGSSLCERT)     -- env['PGSSLCERT'] = str(sslcert)
 ./django/db/backends/postgresql/client.py:51:18     - Unknown word (PGSSLKEY)      -- env['PGSSLKEY'] = str(sslkey)
 ./django/db/backends/postgresql/creation.py:47:38     - Unknown word (pgcode)     -- getattr(e.__cause__, 'pgcode', '') != errorcodes
-./django/db/backends/postgresql/features.py:43:17     - Unknown word (plpgsql)    -- $ LANGUAGE plpgsql;"""
+./django/db/backends/postgresql/features.py:43:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
 ./django/db/backends/postgresql/introspection.py:105:39    - Unknown word (refobjid)       -- JOIN pg_depend d ON d.refobjid = s.oid AND d.refclassid
 ./django/db/backends/postgresql/introspection.py:105:62    - Unknown word (refclassid)     -- refobjid = s.oid AND d.refclassid = 'pg_class'::regclass
 ./django/db/backends/postgresql/introspection.py:106:50    - Unknown word (objid)          -- attrdef ad ON ad.oid = d.objid AND d.classid = 'pg
@@ -1983,7 +1983,7 @@ Lines:
 ./tests/template_tests/test_loaders.py:172:37    - Unknown word (Straße)     -- self.source_checker(['/Straße']) as check_sources
 ./tests/template_tests/test_response.py:192:14    - Unknown word (repickling) -- def test_repickling(self):
 ./tests/template_tests/tests.py:37:48     - Unknown word (strack)     -- should keep original strack trace when reraising
-./tests/template_tests/urls.py:17:16     - Unknown word (Юникод)     -- re_path(r'^Юникод/(\w+)/, views.client
+./tests/template_tests/urls.py:17:16     - Unknown word (Юникод)     -- re_path(r'^Юникод/(\w+)/$', views.client
 ./tests/test_client/tests.py:155:11    - Unknown word (Vendored)   -- # Vendored tree JSON content types
 ./tests/test_client/tests.py:595:67    - Unknown word (nopassword) -- otheruser', password='nopassword')
 ./tests/test_client/tests.py:782:49    - Unknown word (descript)   -- ValueError rather than a non-descript AssertionError.
