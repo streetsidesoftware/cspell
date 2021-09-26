@@ -1,11 +1,9 @@
 import { DiskCache } from './DiskCache';
-import * as HashModule from './hash';
 import * as FileEntryCacheModule from 'file-entry-cache';
 import * as fileHelper from '../../fileHelper';
 
-const mockHash = jest.spyOn(HashModule, 'hash');
-jest.mock('./hash', () => ({
-    hash: jest.fn().mockReturnValue('TEST_CONFIG_HASH'),
+jest.mock('./getConfigHash', () => ({
+    getConfigHash: jest.fn().mockReturnValue('TEST_CONFIG_HASH'),
 }));
 
 const mockCreateFileEntryCache = jest.spyOn(FileEntryCacheModule, 'create');
@@ -15,8 +13,6 @@ jest.mock('file-entry-cache', () => ({
         reconcile: jest.fn(),
     }),
 }));
-
-jest.mock('../../../package.json', () => ({ version: '0.0.0' }));
 
 const mockReadFileInfo = jest.spyOn(fileHelper, 'readFileInfo');
 jest.mock('../../fileHelper', () => ({ readFileInfo: jest.fn() }));
@@ -49,11 +45,6 @@ describe('DiskCache', () => {
         it('creates file-entry-cache in specified location', () => {
             expect(mockCreateFileEntryCache).toBeCalledTimes(1);
             expect(mockCreateFileEntryCache).toBeCalledWith('.foobar', undefined, false);
-        });
-        it('hashes version and config', () => {
-            expect(mockHash).toBeCalledTimes(1);
-            expect(mockHash.mock.calls[0][0]).toContain('0.0.0');
-            expect(mockHash.mock.calls[0][0]).toContain('some-source-string-in-config-info');
         });
     });
 

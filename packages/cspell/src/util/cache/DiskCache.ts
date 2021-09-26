@@ -1,34 +1,15 @@
-import path from 'path';
-import stringify from 'fast-json-stable-stringify';
 import type { FileEntryCache, FileDescriptor } from 'file-entry-cache';
 import { create as createFileEntryCache } from 'file-entry-cache';
 import type { ConfigInfo, FileResult } from '../../fileHelper';
 import { readFileInfo } from '../../fileHelper';
-import { hash } from './hash';
 import { CSpellLintResultCache } from '.';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { version } = require(path.join(__dirname, '..', '..', '..', 'package.json'));
+import { getConfigHash } from './getConfigHash';
 
 type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs'>;
 type CSpellCacheMeta = FileDescriptor['meta'] & {
     result: CachedFileResult;
     configHash: string;
 };
-
-const configHashes: WeakMap<ConfigInfo, string> = new WeakMap();
-
-export function getConfigHash(configInfo: ConfigInfo): string {
-    const cachedHash = configHashes.get(configInfo);
-    if (cachedHash !== undefined) {
-        return cachedHash;
-    }
-
-    const hashValue = hash(`${version}_${stringify(configInfo)}`);
-    configHashes.set(configInfo, hashValue);
-
-    return hashValue;
-}
 
 /**
  * Caches cspell results on disk
