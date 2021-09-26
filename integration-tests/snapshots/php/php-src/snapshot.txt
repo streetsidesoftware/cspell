@@ -103,8 +103,8 @@ Lines:
 ./Zend/bench.php:174:10    - Unknown word (fibo)                  -- function fibo_r($n){
 ./Zend/bench.php:18:10     - Unknown word (simplecall)            -- function simplecall() {
 ./Zend/bench.php:218:10    - Unknown word (heapsort)              -- function heapsort_r($n, &$ra) {
-./Zend/bench.php:267:10    - Unknown word (mkmatrix)              -- function mkmatrix (267s, $cols) {
-./Zend/bench.php:278:10    - Unknown word (mmult)                 -- function mmult (278s, $cols, $m1,
+./Zend/bench.php:267:10    - Unknown word (mkmatrix)              -- function mkmatrix ($rows, $cols) {
+./Zend/bench.php:278:10    - Unknown word (mmult)                 -- function mmult ($rows, $cols, $m1,
 ./Zend/bench.php:28:10     - Unknown word (simpleucall)           -- function simpleucall() {
 ./Zend/bench.php:304:10    - Unknown word (nestedloop)            -- function nestedloop($n) {
 ./Zend/bench.php:337:10    - Unknown word (strcat)                -- function strcat($n) {
@@ -275,8 +275,8 @@ Lines:
 ./build/gen_stub.php:1921:108  - Unknown word (refsect)             -- assReference')/db:refentry/db:refsect1[@role='description
 ./build/gen_stub.php:1921:96   - Unknown word (refentry)            -- classReference')/db:refentry/db:refsect1[@role='descriptio
 ./build/gen_stub.php:2487:47   - Unknown word (conds)               -- reprocessorConditions(array &$conds, Stmt $stmt): ?string
-./build/gen_stub.php:2492:38   - Unknown word (ifdef)               -- if (preg_match('/^#\s*ifdef\s+(.+)$/', ifdef, $matches
-./build/gen_stub.php:2494:38   - Unknown word (ifndef)              -- if (preg_match('/^#\s*ifndef\s+(.+)$/', ifndef, $matches
+./build/gen_stub.php:2492:38   - Unknown word (ifdef)               -- if (preg_match('/^#\s*ifdef\s+(.+)$/', $text, $matches
+./build/gen_stub.php:2494:38   - Unknown word (ifndef)              -- if (preg_match('/^#\s*ifndef\s+(.+)$/', $text, $matches
 ./build/gen_stub.php:2515:35   - Unknown word (stmts)               -- getFileDocComment(array $stmts): ?DocComment {
 ./build/gen_stub.php:2978:34   - Unknown word (Xmls)                -- if (replaceAndCompareXmls($doc, $classSynopsis
 ./build/gen_stub.php:2989:24   - Unknown word (phpdoc)              -- "/<phpdoc:(classref|exceptionref
@@ -4313,7 +4313,7 @@ Lines:
 ./ext/xml/xml.c:815:20    - Unknown word (mytype)     -- zval *curtag, *mytype, *myval;
 ./ext/xmlreader/php_xmlreader.c:1100:18   - Unknown word (nodec)      -- xmlNode *node, *nodec;
 ./ext/xmlreader/php_xmlreader.c:710:38    - Unknown word (spcified)   -- reader at attribute spcified by name and namespaceURI
-./ext/xmlwriter/php_xmlwriter.stub.php:5:10      - Unknown word (xmlwriter)  -- function xmlwriter_open_uri(string ./ext/xmlwriter/php_xmlwriter.stub.php
+./ext/xmlwriter/php_xmlwriter.stub.php:5:10      - Unknown word (xmlwriter)  -- function xmlwriter_open_uri(string $uri
 ./ext/xsl/xsltprocessor.c:309:20    - Unknown word (sheetp)     -- xsltStylesheetPtr sheetp, oldsheetp;
 ./ext/xsl/xsltprocessor.c:309:28    - Unknown word (oldsheetp)  -- xsltStylesheetPtr sheetp, oldsheetp;
 ./ext/xsl/xsltprocessor.c:311:45    - Unknown word (docu)       -- prevExtDtdValue, clone_docu = 0;

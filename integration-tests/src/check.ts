@@ -93,6 +93,7 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     log(color`*  Checking: `);
     log(color`*    '${name}'`);
     log(color`**********************************************\n`);
+    log(time());
     if (!(await checkoutRepositoryAsync(logger, rep.url, rep.path, rep.commit))) {
         logger.log('******** fail ********');
         return Promise.resolve({ success: false, rep, elapsedTime: 0 });
