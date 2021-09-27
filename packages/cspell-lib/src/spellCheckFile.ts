@@ -270,9 +270,10 @@ export function isBinaryDoc(document: Document): boolean {
     return isBinaryFile(URI.parse(document.uri), document.languageId);
 }
 
-export function isBinaryFile(filename: URI, languageId?: string | string[]): boolean {
-    const ext = UriUtils.extname(filename);
-    return isBinaryExt(ext, languageId);
+export function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean {
+    const filename = UriUtils.basename(filenameUri);
+    const ext = UriUtils.extname(filenameUri);
+    return isBinaryExt(ext, languageId) || isBinaryExt(filename, languageId);
 }
 
 const isBinaryExt = memorizer(_isBinaryExt);

@@ -191,13 +191,18 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
         id: 'video',
         extensions: ['.mov', '.mpg'],
     },
+    {
+        id: 'cache_files',
+        // cspell:ignore eslintcache
+        extensions: ['.cspellcache', '.DS_Store', '.eslintcache'],
+    },
 ];
 
 export type LanguageId = string;
 
 export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts']);
 
-export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf']);
+export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files']);
 
 export const languageIds: LanguageId[] = languageExtensionDefinitions.map(({ id }) => id);
 
