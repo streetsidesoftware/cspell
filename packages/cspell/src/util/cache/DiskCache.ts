@@ -6,10 +6,13 @@ import { CSpellLintResultCache } from '.';
 import { getConfigHash } from './getConfigHash';
 
 type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs'>;
-type CSpellCacheMeta = FileDescriptor['meta'] & {
-    result: CachedFileResult;
-    configHash: string;
-};
+
+type CSpellCacheMeta =
+    | (FileDescriptor['meta'] & {
+          result: CachedFileResult;
+          configHash: string;
+      })
+    | undefined;
 
 /**
  * Caches cspell results on disk
@@ -30,7 +33,12 @@ export class DiskCache implements CSpellLintResultCache {
         // 2. The file has not changed since the time it was previously linted
         // 3. The CSpell configuration has not changed since the time the file was previously linted
         // If any of these are not true, we will not reuse the lint results.
-        if (fileDescriptor.notFound || fileDescriptor.changed || meta.configHash !== getConfigHash(configInfo)) {
+        if (
+            fileDescriptor.notFound ||
+            fileDescriptor.changed ||
+            !meta ||
+            meta.configHash !== getConfigHash(configInfo)
+        ) {
             return undefined;
         }
 
@@ -47,11 +55,11 @@ export class DiskCache implements CSpellLintResultCache {
 
     public setCachedLintResults({ fileInfo, elapsedTimeMs: _, ...result }: FileResult, configInfo: ConfigInfo): void {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(fileInfo.filename);
-        if (fileDescriptor.notFound) {
+        const meta = fileDescriptor.meta as CSpellCacheMeta;
+        if (fileDescriptor.notFound || !meta) {
             return;
         }
 
-        const meta = fileDescriptor.meta as CSpellCacheMeta;
         meta.result = result;
         meta.configHash = getConfigHash(configInfo);
     }
