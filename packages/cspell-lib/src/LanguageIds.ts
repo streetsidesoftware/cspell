@@ -6,8 +6,6 @@
  * ```
  */
 
-import { genSequence } from 'gensequence';
-
 // cspell:ignore cljs cljx cson iname pcregrep fsscript gradle shtml xhtml mdoc aspx jshtm gitconfig bowerrc
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
@@ -15,13 +13,17 @@ import { genSequence } from 'gensequence';
 
 export interface LanguageExtensionDefinition {
     id: string;
+    /** List of extensions starting with '.' */
     extensions: string[];
+    /** Filenames that do not have an extension or have a different type than their implied extension */
+    filenames?: string[];
 }
+export type LanguageDefinition = LanguageExtensionDefinition;
+export type LanguageDefinitions = LanguageDefinition[];
+export type ExtensionToLanguageIdMapSet = Map<string, Set<string>>;
+export type ExtensionToLanguageIdMap = Map<string, string[]>;
 
-export type LanguageExtensionDefinitions = LanguageExtensionDefinition[];
-export type ExtensionToLanguageIdMap = Map<string, Set<string>>;
-
-export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
+export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'ada', extensions: ['.adb', '.ads'] },
     { id: 'apiblueprint', extensions: ['.apib', '.apiblueprint'] },
     { id: 'asciidoc', extensions: ['.adoc', '.asc', '.asciidoc'] },
@@ -57,9 +59,10 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
         id: 'json',
         extensions: ['.json', '.jsonc', '.bowerrc', '.jshintrc', '.jscsrc', '.eslintrc', '.babelrc', '.webmanifest'],
     },
+    { id: 'jsonc', extensions: ['.jsonc'] },
+    { id: 'jsonc', extensions: [], filenames: ['.code-workspace'] },
     { id: 'less', extensions: ['.less'] },
     { id: 'literate haskell', extensions: ['.lhs'] },
-    { id: 'lock', extensions: ['.lock'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mk'] },
     { id: 'markdown', extensions: ['.md', '.mdown', '.markdown', '.markdn'] },
@@ -74,6 +77,7 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
     { id: 'r', extensions: ['.r', '.rhistory', '.rprofile', '.rt'] },
     { id: 'razor', extensions: ['.cshtml'] },
     { id: 'ruby', extensions: ['.rb', '.rbx', '.rjs', '.gemspec', '.rake', '.ru'] },
+    { id: 'ruby', extensions: [], filenames: ['Gemfile'] },
     { id: 'rust', extensions: ['.rs'] },
     { id: 'scala', extensions: ['.scala', '.sc'] },
     { id: 'scss', extensions: ['.scss'] },
@@ -191,20 +195,38 @@ export const languageExtensionDefinitions: LanguageExtensionDefinitions = [
         id: 'video',
         extensions: ['.mov', '.mpg'],
     },
+    {
+        id: 'lock',
+        extensions: ['.lock'],
+        filenames: ['package-lock.json'],
+    },
+    {
+        id: 'cache_files',
+        extensions: [],
+        // cspell:ignore eslintcache
+        filenames: ['.cspellcache', '.DS_Store', '.eslintcache'],
+    },
 ];
 
 export type LanguageId = string;
 
 export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts']);
 
-export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf']);
+export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files']);
 
 export const languageIds: LanguageId[] = languageExtensionDefinitions.map(({ id }) => id);
 
-const mapExtensionToLanguageIds: ExtensionToLanguageIdMap = buildLanguageExtensionMap(languageExtensionDefinitions);
+const mapExtensionToSetOfLanguageIds: ExtensionToLanguageIdMapSet =
+    buildLanguageExtensionMapSet(languageExtensionDefinitions);
+const mapExtensionToLanguageIds: ExtensionToLanguageIdMap =
+    buildExtensionToLanguageIdMap(mapExtensionToSetOfLanguageIds);
 
 export function isBinaryExt(ext: string): boolean {
     return isBinary(getLanguagesForExt(ext));
+}
+
+export function isBinaryFile(basename: string): boolean {
+    return isBinary(getLanguagesForFilename(basename));
 }
 
 export function isBinary(languageId: LanguageId | LanguageId[] | Iterable<LanguageId>): boolean {
@@ -213,6 +235,10 @@ export function isBinary(languageId: LanguageId | LanguageId[] | Iterable<Langua
 
 export function isGeneratedExt(ext: string): boolean {
     return isGenerated(getLanguagesForExt(ext));
+}
+
+export function isGeneratedFile(basename: string): boolean {
+    return isGenerated(getLanguagesForFilename(basename));
 }
 
 export function isGenerated(languageId: LanguageId | LanguageId[] | Iterable<LanguageId>): boolean {
@@ -234,19 +260,37 @@ function doesSetContainAnyOf(
     return false;
 }
 
-export function buildLanguageExtensionMap(defs: LanguageExtensionDefinitions): ExtensionToLanguageIdMap {
+export function buildLanguageExtensionMapSet(defs: LanguageDefinitions): ExtensionToLanguageIdMapSet {
     return defs.reduce((map, def) => {
-        def.extensions.forEach((ext) => {
-            map.set(ext, (map.get(ext) || new Set<string>()).add(def.id));
-        });
+        function getMapSet(value: string) {
+            const found = map.get(value);
+            if (found) return found;
+            const s = new Set<string>();
+            map.set(value, s);
+            return s;
+        }
+        function addId(value: string) {
+            getMapSet(value).add(def.id);
+        }
+
+        def.extensions.forEach(addId);
+        def.filenames?.forEach(addId);
         return map;
     }, new Map<string, Set<string>>());
 }
 
+function buildExtensionToLanguageIdMap(map: ExtensionToLanguageIdMapSet): ExtensionToLanguageIdMap {
+    return new Map([...map].map(([k, s]) => [k, [...s]]));
+}
+
 export function getLanguagesForExt(ext: string): string[] {
-    return genSequence([ext, '.' + ext])
-        .map((ext) => mapExtensionToLanguageIds.get(ext))
-        .filter((a) => !!a)
-        .concatMap<string>((a) => a!) // eslint-disable-line @typescript-eslint/no-non-null-assertion
-        .toArray();
+    return mapExtensionToLanguageIds.get(ext) || mapExtensionToLanguageIds.get('.' + ext) || [];
+}
+
+export function getLanguagesForFilename(basename: string): string[] {
+    const found = mapExtensionToLanguageIds.get(basename);
+    if (found) return found;
+    const pos = basename.lastIndexOf('.');
+    if (pos < 1) return [];
+    return getLanguagesForExt(basename.slice(pos));
 }

@@ -1,20 +1,36 @@
 import * as LangId from './LanguageIds';
-import { genSequence } from 'gensequence';
 
 describe('Validate LanguageIds', () => {
-    test('tests looking up a few extensions', () => {
-        expect(LangId.getLanguagesForExt('ts')).toEqual(expect.arrayContaining(['typescript']));
-        expect(LangId.getLanguagesForExt('.tex')).toEqual(expect.arrayContaining(['latex']));
-        expect(LangId.getLanguagesForExt('tex')).toEqual(expect.arrayContaining(['latex']));
-        expect(LangId.getLanguagesForExt('hs')).toEqual(expect.arrayContaining(['haskell']));
+    test.each`
+        ext         | expected
+        ${'ts'}     | ${['typescript']}
+        ${'.tex'}   | ${['latex']}
+        ${'.jpg'}   | ${['image']}
+        ${'.jsonc'} | ${['json', 'jsonc']}
+        ${'tex'}    | ${['latex']}
+        ${'hs'}     | ${['haskell']}
+    `('getLanguagesForExt $ext', ({ ext, expected }) => {
+        expect(LangId.getLanguagesForExt(ext)).toEqual(expected);
+    });
+
+    test.each`
+        filename                      | expected
+        ${'code.ts'}                  | ${['typescript']}
+        ${'doc.tex'}                  | ${['latex']}
+        ${'image.jpg'}                | ${['image']}
+        ${'workspace.code-workspace'} | ${['jsonc']}
+        ${'.cspellcache'}             | ${['cache_files']}
+        ${'Gemfile'}                  | ${['ruby']}
+        ${'path/Gemfile'}             | ${[]}
+    `('getLanguagesForExt $filename', ({ filename, expected }) => {
+        expect(LangId.getLanguagesForFilename(filename)).toEqual(expected);
     });
 
     test('that all extensions start with a .', () => {
-        const ids = LangId.buildLanguageExtensionMap(LangId.languageExtensionDefinitions);
-        const badExtensions = genSequence(ids.keys())
-            .filter((ext) => ext[0] !== '.')
-            .toArray();
-        expect(Object.keys(badExtensions)).toHaveLength(0);
+        for (const def of LangId.languageExtensionDefinitions) {
+            const extsWithoutPeriod = def.extensions.filter((ext) => ext[0] !== '.');
+            expect(extsWithoutPeriod).toEqual([]);
+        }
     });
 
     test.each`
@@ -57,5 +73,41 @@ describe('Validate LanguageIds', () => {
         ${'lock'}  | ${true}
     `('isGeneratedExt $ext => $expected', ({ ext, expected }) => {
         expect(LangId.isGeneratedExt(ext)).toBe(expected);
+    });
+
+    test.each`
+        filename          | expected
+        ${'README.md'}    | ${false}
+        ${'run.exe'}      | ${true}
+        ${'lib.obj'}      | ${true}
+        ${'lib.dll'}      | ${true}
+        ${'lib.o'}        | ${true}
+        ${'image.gif'}    | ${true}
+        ${'picture.jpeg'} | ${true}
+        ${'picture.jpg'}  | ${true}
+        ${'doc.txt'}      | ${false}
+        ${'lock'}         | ${false}
+        ${'Gemfile'}      | ${false}
+        ${'.cspellcache'} | ${true}
+    `('isGeneratedExt $filename => $expected', ({ filename, expected }) => {
+        expect(LangId.isGeneratedFile(filename)).toBe(expected);
+    });
+
+    test.each`
+        filename          | expected
+        ${'README.md'}    | ${false}
+        ${'run.exe'}      | ${true}
+        ${'lib.obj'}      | ${true}
+        ${'lib.dll'}      | ${true}
+        ${'lib.o'}        | ${true}
+        ${'image.gif'}    | ${true}
+        ${'picture.jpeg'} | ${true}
+        ${'picture.jpg'}  | ${true}
+        ${'doc.txt'}      | ${false}
+        ${'lock'}         | ${false}
+        ${'Gemfile'}      | ${false}
+        ${'.cspellcache'} | ${false}
+    `('isGeneratedExt $filename => $expected', ({ filename, expected }) => {
+        expect(LangId.isBinaryFile(filename)).toBe(expected);
     });
 });
