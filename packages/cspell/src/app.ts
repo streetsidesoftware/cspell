@@ -17,6 +17,7 @@ import { tableToLines } from './util/table';
 import { emitTraceResults } from './traceEmitter';
 import { getReporter } from './cli-reporter';
 import { CheckFailed } from './util/errors';
+import { DEFAULT_CACHE_LOCATION } from './util/cache';
 
 export { CheckFailed } from './util/errors';
 
@@ -84,6 +85,14 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
         // .option('--force', 'Force the exit value to always be 0')
         .option('--legacy', 'Legacy output')
         .option('--local <local>', 'Deprecated -- Use: --locale')
+        .option('--cache', 'Only check changed files', false)
+        .addOption(
+            new commander.Option('--cache-strategy <strategy>', 'Strategy to use for detecting changed files').choices([
+                'metadata',
+                'content',
+            ])
+        )
+        .option('--cache-location <path>', `Path to the cache file or directory`, DEFAULT_CACHE_LOCATION)
         .addHelpText('after', usage)
         .arguments('[files...]')
         .action((files: string[], options: Options) => {

@@ -3,7 +3,7 @@ import * as fsp from 'fs-extra';
 import getStdin from 'get-stdin';
 import { GlobOptions, globP } from './util/glob';
 import * as path from 'path';
-import { CSpellUserSettings, Document, fileToDocument } from 'cspell-lib';
+import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
@@ -31,7 +31,15 @@ export async function readConfig(configFile: string | undefined, root: string | 
 
 export interface FileInfo {
     filename: string;
-    text: string;
+    text?: string;
+}
+export interface FileResult {
+    fileInfo: FileInfo;
+    processed: boolean;
+    issues: Issue[];
+    errors: number;
+    configErrors: number;
+    elapsedTimeMs: number;
 }
 
 export function fileInfoToDocument(
@@ -54,7 +62,7 @@ export function fileInfoToDocument(
     return fileToDocument(filename, text, languageId, locale);
 }
 
-export function readFileInfo(filename: string, encoding: string = UTF8): Promise<FileInfo> {
+export function readFileInfo(filename: string, encoding: string = UTF8): Promise<Required<FileInfo>> {
     const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
     return pText.then(
         (text) => ({ text, filename }),

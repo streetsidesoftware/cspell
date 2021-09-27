@@ -269,38 +269,43 @@ Array [
   "Check spelling",
   "",
   "Options:",
-  "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",
-  "                              looks for cspell.json in the current directory.",
-  "  -v, --verbose               display more information about the files being",
-  "                              checked and the configuration",
-  "  --locale <locale>           Set language locales. i.e. \\"en,fr\\" for English",
-  "                              and French, or \\"en-GB\\" for British English.",
-  "  --language-id <language>    Force programming language for unknown",
-  "                              extensions. i.e. \\"php\\" or \\"scala\\"",
-  "  --languageId <language>     Force programming language for unknown",
-  "                              extensions. i.e. \\"php\\" or \\"scala\\"",
-  "  --wordsOnly                 Only output the words not found in the",
-  "                              dictionaries.",
-  "  -u, --unique                Only output the first instance of a word not",
-  "                              found in the dictionaries.",
-  "  --debug                     Output information useful for debugging",
-  "                              cspell.json files.",
-  "  -e, --exclude <glob>        Exclude files matching the glob pattern. This",
-  "                              option can be used multiple times to add multiple",
-  "                              globs.",
-  "  --no-issues                 Do not show the spelling errors.",
-  "  --no-progress               Turn off progress messages",
-  "  --no-summary                Turn off summary message in console",
-  "  -s, --silent                Silent mode, suppress error messages",
-  "  -r, --root <root folder>    Root directory, defaults to current directory.",
-  "  --relative                  Issues are displayed relative to root.",
-  "  --show-context              Show the surrounding text around an issue.",
-  "  --show-suggestions          Show spelling suggestions.",
-  "  --must-find-files           Error if no files are found (default: true)",
-  "  --no-must-find-files        Do not error if no files are found",
-  "  --legacy                    Legacy output",
-  "  --local <local>             Deprecated -- Use: --locale",
-  "  -h, --help                  display help for command",
+  "  -c, --config <cspell.json>   Configuration file to use.  By default cspell",
+  "                               looks for cspell.json in the current directory.",
+  "  -v, --verbose                display more information about the files being",
+  "                               checked and the configuration",
+  "  --locale <locale>            Set language locales. i.e. \\"en,fr\\" for English",
+  "                               and French, or \\"en-GB\\" for British English.",
+  "  --language-id <language>     Force programming language for unknown",
+  "                               extensions. i.e. \\"php\\" or \\"scala\\"",
+  "  --languageId <language>      Force programming language for unknown",
+  "                               extensions. i.e. \\"php\\" or \\"scala\\"",
+  "  --wordsOnly                  Only output the words not found in the",
+  "                               dictionaries.",
+  "  -u, --unique                 Only output the first instance of a word not",
+  "                               found in the dictionaries.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
+  "  -e, --exclude <glob>         Exclude files matching the glob pattern. This",
+  "                               option can be used multiple times to add",
+  "                               multiple globs.",
+  "  --no-issues                  Do not show the spelling errors.",
+  "  --no-progress                Turn off progress messages",
+  "  --no-summary                 Turn off summary message in console",
+  "  -s, --silent                 Silent mode, suppress error messages",
+  "  -r, --root <root folder>     Root directory, defaults to current directory.",
+  "  --relative                   Issues are displayed relative to root.",
+  "  --show-context               Show the surrounding text around an issue.",
+  "  --show-suggestions           Show spelling suggestions.",
+  "  --must-find-files            Error if no files are found (default: true)",
+  "  --no-must-find-files         Do not error if no files are found",
+  "  --legacy                     Legacy output",
+  "  --local <local>              Deprecated -- Use: --locale",
+  "  --cache                      Only check changed files (default: false)",
+  "  --cache-strategy <strategy>  Strategy to use for detecting changed files",
+  "                               (choices: \\"metadata\\", \\"content\\")",
+  "  --cache-location <path>      Path to the cache file or directory (default:",
+  "                               \\".cspellcache\\")",
+  "  -h, --help                   display help for command",
   "",
   "",
   "Examples:",
@@ -547,16 +552,12 @@ exports[`Validate cli app trace not-in-any-dictionary Expect Error: [Function Ch
 exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 2`] = `
-"error	 1/10 ./samples/comments_only -
-error	 2/10 ./samples/cspell-bad.json 0.00ms
-error	 3/10 ./samples/cspell-includes.json 0.00ms
-error	 4/10 ./samples/cspell-missing-dict.json 0.00ms
-error	 5/10 ./samples/latex -
-error	 6/10 ./samples/linked -
-error	 7/10 ./samples/sample.c 0.00ms
-error	 8/10 ./samples/sample.py 0.00ms
-error	 9/10 ./samples/src -
-error	10/10 ./samples/text.txt 0.00ms X
+"error	1/6 ./samples/cspell-bad.json 0.00ms
+error	2/6 ./samples/cspell-includes.json 0.00ms
+error	3/6 ./samples/cspell-missing-dict.json 0.00ms
+error	4/6 ./samples/sample.c 0.00ms
+error	5/6 ./samples/sample.py 0.00ms
+error	6/6 ./samples/text.txt 0.00ms X
 log	./samples/text.txt:1:14 - Unknown word (fulll)
 log	./samples/text.txt:1:23 - Unknown word (errrorrrs)
 log	./samples/text.txt:3:4 - Unknown word (hass)
