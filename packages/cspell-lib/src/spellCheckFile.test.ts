@@ -143,7 +143,7 @@ describe('Validate Spell Checking Documents', () => {
         return words.map((text) => ({ text })).map((i) => expect.objectContaining(i));
     }
 
-    // cspell:ignore texxt
+    // cspell:ignore texxt eslintcache
     test.each`
         uri                                               | text            | settings                       | options                                       | expected
         ${f('src/not_found.c')}                           | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
@@ -164,7 +164,10 @@ describe('Validate Spell Checking Documents', () => {
         ${'stdin:///'}                                    | ${'some texxt'} | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: true, issues: i('texxt'), localConfigFilepath: undefined, errors: undefined }}
         ${'stdin:///'}                                    | ${''}           | ${{ languageId: 'plaintext' }} | ${{}}                                         | ${{ checked: false, issues: [], localConfigFilepath: undefined, errors: [err('Unsupported schema: "stdin", open "stdin:/"')] }}
         ${f('src/big_image.jpeg')}                        | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: undefined }}
+        ${f('.cspellcache')}                              | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: undefined }}
+        ${f('.eslintcache')}                              | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: undefined }}
         ${d(f('src/big_image.txt'), undefined, 'binary')} | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: false, errors: undefined }}
+        ${f('./ruby/Gemfile')}                            | ${''}           | ${{}}                          | ${{}}                                         | ${{ checked: true, errors: undefined, settingsUsed: oc({ languageId: 'ruby' }) }}
     `(
         'spellCheckFile $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {

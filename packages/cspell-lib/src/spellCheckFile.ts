@@ -3,7 +3,7 @@ import { GlobMatcher } from 'cspell-glob';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { getLanguagesForExt as _getLanguagesForExt, isGenerated } from './LanguageIds';
+import { getLanguagesForExt as _getLanguagesForExt, isGenerated, isGeneratedFile } from './LanguageIds';
 import {
     calcOverrideSettings,
     getDefaultSettings,
@@ -248,14 +248,13 @@ export function determineFinalDocumentSettings(
 ): DetermineFinalDocumentSettingsResult {
     const uri = URI.parse(document.uri);
     const filename = uri.fsPath;
-    const ext = path.extname(filename);
     const settingsWithDefaults = mergeSettings(getDefaultSettings(), getGlobalSettings(), settings);
     const fileSettings = calcOverrideSettings(settingsWithDefaults, filename);
-    const languageIds = document.languageId
-        ? document.languageId
-        : fileSettings.languageId
+    const languageIds = fileSettings?.languageId?.length
         ? fileSettings.languageId
-        : getLanguagesForExt(ext);
+        : document.languageId
+        ? document.languageId
+        : getLanguageForFilename(filename);
     if (document.locale) {
         fileSettings.language = document.locale;
     }
@@ -271,19 +270,23 @@ export function isBinaryDoc(document: Document): boolean {
 }
 
 export function isBinaryFile(filenameUri: URI, languageId?: string | string[]): boolean {
+    if (languageId) {
+        const ids = normalizeLanguageIds(languageId);
+        if (ids.length) return isGenerated(ids);
+    }
     const filename = UriUtils.basename(filenameUri);
-    const ext = UriUtils.extname(filenameUri);
-    return isBinaryExt(ext, languageId) || isBinaryExt(filename, languageId);
+    return isGeneratedFile(filename);
 }
 
-const isBinaryExt = memorizer(_isBinaryExt);
+function getLanguageForFilename(filename: string): string[] {
+    const basename = path.basename(filename);
+    const ext = path.extname(basename);
+    const languagesExt = getLanguagesForExt(ext);
+    return languagesExt.length ? languagesExt : _getLanguagesForExt(basename);
+}
 
-function _isBinaryExt(ext: string, languageId: string | string[] | undefined): boolean {
-    languageId = languageId || [];
-    languageId = typeof languageId === 'string' ? languageId.split(',') : languageId;
-    languageId = languageId.map((a) => a.trim());
-    const languageIds = new Set(languageId.length ? languageId : getLanguagesForExt(ext));
-    return isGenerated(languageIds);
+function normalizeLanguageIds(languageId: string | string[]): string[] {
+    return (Array.isArray(languageId) ? languageId.join(',') : languageId).split(',').map((s) => s.trim());
 }
 
 export function fileToDocument(file: string): Document;
