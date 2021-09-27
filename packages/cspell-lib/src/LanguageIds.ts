@@ -63,7 +63,6 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'jsonc', extensions: [], filenames: ['.code-workspace'] },
     { id: 'less', extensions: ['.less'] },
     { id: 'literate haskell', extensions: ['.lhs'] },
-    { id: 'lock', extensions: ['.lock'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mk'] },
     { id: 'markdown', extensions: ['.md', '.mdown', '.markdown', '.markdn'] },
@@ -195,6 +194,11 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     {
         id: 'video',
         extensions: ['.mov', '.mpg'],
+    },
+    {
+        id: 'lock',
+        extensions: ['.lock'],
+        filenames: ['package-lock.json'],
     },
     {
         id: 'cache_files',
