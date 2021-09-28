@@ -14,6 +14,7 @@ import {
 } from './spellCheckFile';
 
 const samples = Path.resolve(__dirname, '../samples');
+const testFixtures = Path.resolve(__dirname, '../../../test-fixtures');
 const isWindows = process.platform === 'win32';
 const hasDriveLetter = /^[A-Z]:\\/;
 
@@ -175,6 +176,16 @@ describe('Validate Spell Checking Documents', () => {
             expect(r).toEqual(oc(expected));
         }
     );
+    test.each`
+        uri                                              | text  | settings | options | expected
+        ${tf('issues/issue-1775/hunspell/utf_info.hxx')} | ${''} | ${{}}    | ${{}}   | ${{ checked: true, errors: undefined }}
+    `(
+        'spellCheckFile fixtures $uri $settings $options',
+        async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
+            const r = await spellCheckDocument(d(uri, text || undefined), options, settings);
+            expect(r).toEqual(oc(expected));
+        }
+    );
 });
 
 describe('Validate Uri assumptions', () => {
@@ -243,4 +254,8 @@ function s(file: string) {
     const p = Path.resolve(samples, file);
     // Force lowercase drive letter if windows
     return isWindows ? fixDriveLetter(p) : p;
+}
+
+function tf(file: string) {
+    return Path.resolve(testFixtures, file);
 }

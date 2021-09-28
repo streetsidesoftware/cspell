@@ -14,54 +14,66 @@ export interface MatchRangeOptionalText extends MatchRange {
     text?: string;
 }
 
+function toMatchRangeWithText(m: RegExpMatchArray): MatchRangeWithText {
+    const index = m.index || 0;
+    const _text = m[0];
+    return {
+        startPos: index,
+        endPos: index + _text.length,
+        text: _text,
+    };
+}
+
 export function findMatchingRanges(pattern: string | RegExp, text: string): MatchRangeOptionalText[] {
     if (pattern === '.*') {
         return [{ startPos: 0, endPos: text.length }];
     }
-    const ranges: MatchRangeWithText[] = [];
 
     try {
         const regex = pattern instanceof RegExp ? new RegExp(pattern) : Text.stringToRegExp(pattern, 'gim', 'g');
         if (regex) {
-            for (const found of GS.sequenceFromRegExpMatch(regex, text)) {
-                ranges.push({
-                    startPos: found.index,
-                    endPos: found.index + found[0].length,
-                    text: found[0],
-                });
-                if (!regex.global) {
-                    break;
-                }
+            if (!regex.global) {
+                const m = text.match(regex);
+                if (!m) return [];
+                return [toMatchRangeWithText(m)];
             }
+            return [...text.matchAll(regex)].map(toMatchRangeWithText);
         }
     } catch (e) {
         // ignore any malformed regexp from the user.
         // console.log(e.message);
     }
 
-    return ranges;
+    return [];
 }
 
-function fnSortRanges(a: MatchRange, b: MatchRange) {
+function compareRanges(a: MatchRange, b: MatchRange) {
     return a.startPos - b.startPos || a.endPos - b.endPos;
 }
 
 export function unionRanges(ranges: MatchRange[]): MatchRange[] {
-    const sortedRanges = ranges.sort(fnSortRanges);
-    const result = sortedRanges.slice(1).reduce((acc: MatchRange[], next) => {
-        const last = acc[acc.length - 1];
-        if (next.startPos > last.endPos) {
-            acc.push(next);
-        } else if (next.endPos > last.endPos) {
-            acc[acc.length - 1] = {
-                startPos: last.startPos,
-                endPos: Math.max(last.endPos, next.endPos),
-            };
-        }
-        return acc;
-    }, sortedRanges.slice(0, 1));
+    return makeSortedMatchRangeArray([..._unionRanges(ranges)]);
+}
 
-    return result;
+function* _unionRanges(ranges: MatchRange[]): Generator<MatchRange> {
+    const sortedRanges = sortMatchRangeArray(ranges);
+
+    if (!sortedRanges.length) return;
+
+    let { startPos, endPos } = sortedRanges[0];
+
+    for (const r of ranges) {
+        if (r.startPos > endPos) {
+            yield { startPos, endPos };
+            startPos = r.startPos;
+            endPos = r.endPos;
+            continue;
+        }
+        endPos = Math.max(endPos, r.endPos);
+    }
+    if (startPos < endPos) {
+        yield { startPos, endPos };
+    }
 }
 
 export function findMatchingRangesForPatterns(patterns: (string | RegExp)[], text: string): MatchRange[] {
@@ -70,83 +82,43 @@ export function findMatchingRangesForPatterns(patterns: (string | RegExp)[], tex
 }
 
 /**
- * Exclude range b from a
- */
-function excludeRange(a: MatchRange, b: MatchRange) {
-    // non-intersection
-    if (b.endPos <= a.startPos || b.startPos >= a.endPos) {
-        return [a];
-    }
-
-    // fully excluded
-    if (b.startPos <= a.startPos && b.endPos >= a.endPos) {
-        return [];
-    }
-
-    const result: MatchRange[] = [];
-
-    if (a.startPos < b.startPos) {
-        result.push({ startPos: a.startPos, endPos: b.startPos });
-    }
-
-    if (a.endPos > b.endPos) {
-        result.push({ startPos: b.endPos, endPos: a.endPos });
-    }
-    return result;
-}
-
-/**
  * Create a new set of positions that have the excluded position ranges removed.
  */
 export function excludeRanges(includeRanges: MatchRange[], excludeRanges: MatchRange[]): MatchRange[] {
-    type TInclude = 'i';
-    type TExclude = 'e';
+    return [..._excludeRanges(sortMatchRangeArray(includeRanges), sortMatchRangeArray(excludeRanges))];
+}
 
-    interface MatchRangeWithType extends MatchRange {
-        type: TInclude | TExclude;
+function* _excludeRanges(
+    includeRanges: SortedMatchRangeArray,
+    excludeRanges: SortedMatchRangeArray
+): Generator<MatchRange, undefined, undefined> {
+    if (!includeRanges.length) return;
+    if (!excludeRanges.length) {
+        yield* includeRanges;
+        return;
     }
-    interface Result {
-        ranges: MatchRange[];
-        lastExclude?: MatchRange;
+
+    let exIndex = 0;
+    const limit = excludeRanges.length;
+
+    for (const incRange of includeRanges) {
+        const endPos = incRange.endPos;
+        let startPos = incRange.startPos;
+
+        for (; exIndex < limit; ++exIndex) {
+            const ex = excludeRanges[exIndex];
+            if (ex.startPos >= endPos) break;
+            if (ex.startPos > startPos) {
+                yield { startPos, endPos: ex.startPos };
+            }
+            startPos = ex.endPos;
+            if (startPos >= endPos) break;
+        }
+
+        if (startPos < endPos) {
+            yield { startPos, endPos };
+        }
     }
-    const tInclude: TInclude = 'i';
-    const tExclude: TExclude = 'e';
-
-    const sortedRanges: MatchRangeWithType[] = [
-        ...includeRanges.map((r) => ({ ...r, type: tInclude })),
-        ...excludeRanges.map((r) => ({ ...r, type: tExclude })),
-    ].sort(fnSortRanges);
-
-    const result = sortedRanges.reduce(
-        (acc: Result, range: MatchRangeWithType) => {
-            const { ranges, lastExclude } = acc;
-            const lastInclude = ranges.length ? ranges[ranges.length - 1] : undefined;
-            if (range.type === tExclude) {
-                if (!lastInclude || lastInclude.endPos <= range.startPos) {
-                    // if the exclude is beyond the current include, save it for later
-                    return { ranges, lastExclude: range };
-                }
-                // we need to split the current include.
-                return {
-                    ranges: [...ranges.slice(0, -1), ...excludeRange(ranges[ranges.length - 1], range)],
-                    lastExclude: range,
-                };
-            }
-
-            // The range is an include, we need to check it against the last exclude
-            if (!lastExclude) {
-                return { ranges: ranges.concat([range]) };
-            }
-            const nextExclude = lastExclude.endPos > range.endPos ? lastExclude : undefined;
-            return {
-                ranges: [...ranges, ...excludeRange(range, lastExclude)],
-                lastExclude: nextExclude,
-            };
-        },
-        { ranges: [] }
-    );
-
-    return result.ranges;
 }
 
 export function extractRangeText(text: string, ranges: MatchRange[]): MatchRangeWithText[] {
@@ -156,3 +128,30 @@ export function extractRangeText(text: string, ranges: MatchRange[]): MatchRange
         text: text.slice(startPos, endPos),
     }));
 }
+
+const SymSortedMatchRangeArray = Symbol('SortedMatchRangeArray');
+
+interface SortedMatchRangeArray extends Array<MatchRange> {
+    [SymSortedMatchRangeArray]: true;
+}
+
+function sortMatchRangeArray(values: MatchRange[]): SortedMatchRangeArray {
+    if (isSortedMatchRangeArray(values)) return values;
+
+    return makeSortedMatchRangeArray(values.sort(compareRanges));
+}
+
+function isSortedMatchRangeArray(a: MatchRange[] | SortedMatchRangeArray): a is SortedMatchRangeArray {
+    return (<SortedMatchRangeArray>a)[SymSortedMatchRangeArray] === true;
+}
+
+function makeSortedMatchRangeArray(sortedValues: MatchRange[]): SortedMatchRangeArray {
+    const sorted: SortedMatchRangeArray = sortedValues as SortedMatchRangeArray;
+    sorted[SymSortedMatchRangeArray] = true;
+    Object.freeze(sorted);
+    return sorted;
+}
+
+export const __testing__ = {
+    makeSortedMatchRangeArray,
+};
