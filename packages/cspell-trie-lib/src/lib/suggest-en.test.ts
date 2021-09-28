@@ -160,7 +160,7 @@ describe('Validate English Suggestions', () => {
             const timer = createTimer();
             collector.collect(genCompoundableSuggestions(trie.root, collector.word, SEPARATE_WORDS), suggestionTimeout);
             const elapsed = timer.elapsed();
-            expect(elapsed).toBeLessThan(suggestionTimeout * 2);
+            expect(elapsed).toBeLessThan(suggestionTimeout * 4);
         },
         timeout
     );
