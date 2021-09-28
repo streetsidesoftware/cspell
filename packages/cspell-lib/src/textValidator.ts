@@ -257,21 +257,31 @@ function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (wo
             rangePos -= 1;
         }
 
+        const cur = includeRanges[rangePos];
+        if (wordEndPos <= cur.endPos && wordStartPos >= cur.startPos) {
+            return [textOffset];
+        }
+
         while (wordStartPos < wordEndPos) {
             while (includeRanges[rangePos] && includeRanges[rangePos].endPos <= wordStartPos) {
                 rangePos += 1;
             }
-            if (!includeRanges[rangePos] || wordEndPos < includeRanges[rangePos].startPos) {
+            if (!includeRanges[rangePos]) {
                 break;
             }
             const { startPos, endPos } = includeRanges[rangePos];
+            if (wordEndPos < startPos) {
+                break;
+            }
             const a = Math.max(wordStartPos, startPos);
             const b = Math.min(wordEndPos, endPos);
-            parts.push({ offset: a, text: text.slice(a - offset, b - offset) });
+            if (a !== b) {
+                parts.push({ offset: a, text: text.slice(a - offset, b - offset) });
+            }
             wordStartPos = b;
         }
 
-        return parts.filter((wo) => !!wo.text);
+        return parts;
     };
 
     return mapper;
