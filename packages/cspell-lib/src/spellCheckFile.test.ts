@@ -177,8 +177,8 @@ describe('Validate Spell Checking Documents', () => {
         }
     );
     test.each`
-        uri                                              | text  | settings | options | expected
-        ${tf('issues/issue-1775/hunspell/utf_info.hxx')} | ${''} | ${{}}    | ${{}}   | ${{ checked: true, errors: undefined }}
+        uri                                                 | text  | settings | options | expected
+        ${f(tf('issues/issue-1775/hunspell/utf_info.hxx'))} | ${''} | ${{}}    | ${{}}   | ${{ checked: true, errors: undefined }}
     `(
         'spellCheckFile fixtures $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
