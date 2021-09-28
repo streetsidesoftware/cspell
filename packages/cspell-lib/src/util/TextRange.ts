@@ -108,6 +108,7 @@ function* _excludeRanges(
         for (; exIndex < limit; ++exIndex) {
             const ex = excludeRanges[exIndex];
             if (ex.startPos >= endPos) break;
+            if (ex.endPos <= startPos) continue;
             if (ex.startPos > startPos) {
                 yield { startPos, endPos: ex.startPos };
             }
