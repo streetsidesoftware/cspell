@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.11.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.10.1...v5.11.0-alpha.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* Allow config file version to be a number. ([#1730](https://github.com/streetsidesoftware/cspell/issues/1730)) ([9fa2eee](https://github.com/streetsidesoftware/cspell/commit/9fa2eeeb8fcd206b26a75a24fdfcf9014d79be52)), closes [#1729](https://github.com/streetsidesoftware/cspell/issues/1729)
+* Improve Patterns and RegExp handling ([#1743](https://github.com/streetsidesoftware/cspell/issues/1743)) ([100866e](https://github.com/streetsidesoftware/cspell/commit/100866e9afbd0c7f5200b44f11f74dc50edfae44)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
+* make sure `issue.uri` is actually a URI. ([#1746](https://github.com/streetsidesoftware/cspell/issues/1746)) ([4268057](https://github.com/streetsidesoftware/cspell/commit/4268057c772db4242dde033c69a4448c26739863))
+* Patterns - only add `u` if no flags are given ([#1745](https://github.com/streetsidesoftware/cspell/issues/1745)) ([a75c370](https://github.com/streetsidesoftware/cspell/commit/a75c370a2ffa5a166f856a915e4dcae625df271e)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
+* Reduce the cost of regexp exclusions ([#1800](https://github.com/streetsidesoftware/cspell/issues/1800)) ([4544c25](https://github.com/streetsidesoftware/cspell/commit/4544c2529faf76945d2d030ae15475573dcf41a6)), closes [#1775](https://github.com/streetsidesoftware/cspell/issues/1775)
+* Update Python dictionary ([#1778](https://github.com/streetsidesoftware/cspell/issues/1778)) ([6359145](https://github.com/streetsidesoftware/cspell/commit/6359145a7e5776bc4698ed447cb2d07aee20f1de))
+
+
+
+
+
 ## [5.10.1](https://github.com/streetsidesoftware/cspell/compare/v5.10.0...v5.10.1) (2021-09-17)
 
 **Note:** Version bump only for package cspell-lib

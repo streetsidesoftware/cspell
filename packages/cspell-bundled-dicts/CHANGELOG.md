@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.11.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.10.1...v5.11.0-alpha.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* Update Python dictionary ([#1778](https://github.com/streetsidesoftware/cspell/issues/1778)) ([6359145](https://github.com/streetsidesoftware/cspell/commit/6359145a7e5776bc4698ed447cb2d07aee20f1de))
+
+
+
+
+
 ## [5.10.1](https://github.com/streetsidesoftware/cspell/compare/v5.10.0...v5.10.1) (2021-09-17)
 
 **Note:** Version bump only for package @cspell/cspell-bundled-dicts

@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.11.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.10.1...v5.11.0-alpha.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* Allow config file version to be a number. ([#1730](https://github.com/streetsidesoftware/cspell/issues/1730)) ([9fa2eee](https://github.com/streetsidesoftware/cspell/commit/9fa2eeeb8fcd206b26a75a24fdfcf9014d79be52)), closes [#1729](https://github.com/streetsidesoftware/cspell/issues/1729)
+* Display filenames instead of URI's ([#1773](https://github.com/streetsidesoftware/cspell/issues/1773)) ([5a9542e](https://github.com/streetsidesoftware/cspell/commit/5a9542e1818ff68e89edc9a5c968741ad1b8751f))
+* Ensure cli-reporter displays the correct message. ([#1774](https://github.com/streetsidesoftware/cspell/issues/1774)) ([c0aaf45](https://github.com/streetsidesoftware/cspell/commit/c0aaf45ea1f147fda3514149a85d2c2bd70a749f))
+* Improve Patterns and RegExp handling ([#1743](https://github.com/streetsidesoftware/cspell/issues/1743)) ([100866e](https://github.com/streetsidesoftware/cspell/commit/100866e9afbd0c7f5200b44f11f74dc50edfae44)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
+* make sure `issue.uri` is actually a URI. ([#1746](https://github.com/streetsidesoftware/cspell/issues/1746)) ([4268057](https://github.com/streetsidesoftware/cspell/commit/4268057c772db4242dde033c69a4448c26739863))
+* Patterns - only add `u` if no flags are given ([#1745](https://github.com/streetsidesoftware/cspell/issues/1745)) ([a75c370](https://github.com/streetsidesoftware/cspell/commit/a75c370a2ffa5a166f856a915e4dcae625df271e)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
+* Reduce the cost of regexp exclusions ([#1800](https://github.com/streetsidesoftware/cspell/issues/1800)) ([4544c25](https://github.com/streetsidesoftware/cspell/commit/4544c2529faf76945d2d030ae15475573dcf41a6)), closes [#1775](https://github.com/streetsidesoftware/cspell/issues/1775)
+* Update Python dictionary ([#1778](https://github.com/streetsidesoftware/cspell/issues/1778)) ([6359145](https://github.com/streetsidesoftware/cspell/commit/6359145a7e5776bc4698ed447cb2d07aee20f1de))
+
+
+### Features
+
+* add --cache option to lint only changed files ([#1763](https://github.com/streetsidesoftware/cspell/issues/1763)) ([4bdfd09](https://github.com/streetsidesoftware/cspell/commit/4bdfd09677e7b744f79f4e35675760e7083d68e7))
+
+
+### Reverts
+
+* Revert "ci: Disable Coveralls - their API has been down for a couple of days. (#1731)" (#1732) ([102ef73](https://github.com/streetsidesoftware/cspell/commit/102ef730a8061dadc7d5d54463c6dd0b416a4ca9)), closes [#1731](https://github.com/streetsidesoftware/cspell/issues/1731) [#1732](https://github.com/streetsidesoftware/cspell/issues/1732)
+
+
+
+
+
 ## [5.10.1](https://github.com/streetsidesoftware/cspell/compare/v5.10.0...v5.10.1) (2021-09-17)
 
 
