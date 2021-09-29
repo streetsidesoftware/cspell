@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1881, Issues found: 9194 in 1162 files
+ CSpell: Files checked: 1883, Issues found: 9210 in 1164 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -130,12 +130,12 @@ Lines:
 ./doc/packaging.md:106:5     - Unknown word (CXXFLAGS)    -- GCS_CXXFLAGS := $(shell pkg-config
 ./doc/packaging.md:106:55    - Unknown word (cflags)      -- config storage_client --cflags)
 ./doc/packaging.md:107:5     - Unknown word (CXXLDFLAGS)  -- GCS_CXXLDFLAGS := $(shell pkg-config
-./doc/packaging.md:1456:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
+./doc/packaging.md:1446:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
 ./doc/packaging.md:156:5     - Unknown word (srcs)        -- srcs = [
-./doc/packaging.md:1607:21   - Unknown word (centos)         -- sudo yum install -y centos-release-scl yum-utils
-./doc/packaging.md:1608:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
-./doc/packaging.md:1608:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
-./doc/packaging.md:1610:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
+./doc/packaging.md:1597:21   - Unknown word (centos)         -- sudo yum install -y centos-release-scl yum-utils
+./doc/packaging.md:1598:46   - Unknown word (rhscl)          -- -enable rhel-server-rhscl-7-rpms
+./doc/packaging.md:1598:54   - Unknown word (rpms)           -- rhel-server-rhscl-7-rpms
+./doc/packaging.md:1600:55   - Unknown word (devtoolset)     -- ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \
 ./doc/packaging.md:187:42    - Unknown word (Microgenerator) -- protobuf-gh] | 3.15.8 | C++ Microgenerator support |
 ./doc/packaging.md:213:10    - Unknown word (makecache)      -- sudo dnf makecache && \
 ./doc/packaging.md:214:39    - Unknown word (findutils)      -- y ccache cmake curl findutils gcc-c++ git make ninja
@@ -384,12 +384,12 @@ Lines:
 ./google/cloud/pubsub/schema_admin_connection.h:38:38     - Unknown word (cppref)     -- models an [input range][cppref-input-range] of
 ./google/cloud/pubsub/subscription_builder_test.cc:152:9     - Unknown word (oidc)       -- oidc_token {
 ./google/cloud/pubsub/subscription_builder_test.cc:31:31     - Unknown word (Oidc)       -- SubscriptionBuilder, MakeOidcToken) {
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:123:61    - Unknown word (breq)       -- CreateBackupRequest breq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:147:69    - Unknown word (lreq)       -- ListBackupOperationsRequest lreq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:191:71    - Unknown word (dreq)       -- ListDatabaseOperationsRequest dreq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:224:61    - Unknown word (ureq)       -- UpdateBackupRequest ureq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:247:63    - Unknown word (creq)       -- CreateDatabaseRequest creq;
-./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:560:64    - Unknown word (rreq)       -- RestoreDatabaseRequest rreq;
+./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:115:63    - Unknown word (creq)       -- CreateDatabaseRequest creq;
+./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:167:63    - Unknown word (breq)       -- CreateBackupRequest breq;
+./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:428:64    - Unknown word (rreq)       -- RestoreDatabaseRequest rreq;
+./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:139:69    - Unknown word (lreq)       -- ListBackupOperationsRequest lreq;
+./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:183:71    - Unknown word (dreq)       -- ListDatabaseOperationsRequest dreq;
+./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:216:61    - Unknown word (ureq)       -- UpdateBackupRequest ureq;
 ./google/cloud/spanner/admin/integration_tests/database_admin_integration_test.cc:518:52    - Unknown word (ceci)       -- kKeyRing, "ceci-n-est-pas-une-cle")
 ./google/cloud/spanner/benchmarks/README.md:109:9     - Unknown word (ggplot)     -- require(ggplot2) # may require install
 ./google/cloud/spanner/benchmarks/README.md:115:11    - Unknown word (rbind)      -- df <- rbind(df, t);
@@ -400,9 +400,9 @@ Lines:
 ./google/cloud/spanner/benchmarks/single_row_throughput_plots.py:23:8      - Unknown word (plotnine)   -- import plotnine as p9
 ./google/cloud/spanner/client_test.cc:315:68    - Unknown word (epdp)       -- tePartitionedDmlParams const& epdp) {
 ./google/cloud/spanner/client_test.cc:570:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
-./google/cloud/spanner/database_admin_client_test.cc:35:11     - Unknown word (gcsa)       -- namespace gcsa = ::google::spanner
+./google/cloud/spanner/database_admin_client_test.cc:37:11     - Unknown word (gcsa)       -- namespace gcsa = ::google::spanner
 ./google/cloud/spanner/doc/spanner-main.dox:135:12    - Unknown word (Backoff)    -- ### Retry, Backoff, and Idempotency Policies
-./google/cloud/spanner/instance_admin_connection_test.cc:40:11     - Unknown word (giam)       -- namespace giam = ::google::iam::v1
+./google/cloud/spanner/instance_admin_connection_test.cc:42:11     - Unknown word (giam)       -- namespace giam = ::google::iam::v1
 ./google/cloud/spanner/integration_tests/rpc_failure_threshold_integration_test.cc:258:14    - Unknown word (Theshold)   -- << ", kTheshold=" << threshold;
 ./google/cloud/spanner/internal/connection_impl_test.cc:2253:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
 ./google/cloud/spanner/internal/connection_impl_test.cc:2255:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
@@ -437,10 +437,10 @@ Lines:
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:37:12     - Unknown word (Nanos)      -- df["CpuNanosPerByte"] = (df.CpuTimeUs
 ./google/cloud/storage/benchmarks/throughput_experiment.cc:249:8     - Unknown word (grpclb)     -- "grpclb": {
 ./google/cloud/storage/benchmarks/throughput_result.h:35:34     - Unknown word (downlad)    -- experiment performed a downlad, using Client::InsertObject
-./google/cloud/storage/bucket_metadata.cc:194:14    - Unknown word (subpatch)   -- if (labels_subpatch_dirty_) {
+./google/cloud/storage/bucket_metadata.cc:204:14    - Unknown word (subpatch)   -- if (labels_subpatch_dirty_) {
 ./google/cloud/storage/bucket_metadata_test.cc:125:30    - Unknown word (NEARLINE)   -- "storageClass": "NEARLINE"
 ./google/cloud/storage/bucket_metadata_test.cc:142:8     - Unknown word (metageneration) -- "metageneration": "4",
-./google/cloud/storage/bucket_metadata_test.cc:225:37    - Unknown word (Nearline)       -- LifecycleRule::SetStorageClassNearline();
+./google/cloud/storage/bucket_metadata_test.cc:237:37    - Unknown word (Nearline)       -- LifecycleRule::SetStorageClassNearline();
 ./google/cloud/storage/client.h:3519:8    - Unknown word (tmpobject)  -- auto tmpobject_name_gen = [&num_tmp
 ./google/cloud/storage/client_options.cc:121:38    - Unknown word (iamapi)     -- return *emulator + "/iamapi";
 ./google/cloud/storage/client_options.h:192:33    - Unknown word (prefx)      -- ClientOptions& add_user_agent_prefx(std::string const& v
