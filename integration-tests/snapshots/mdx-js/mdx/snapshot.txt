@@ -3,9 +3,9 @@ Repository: mdx-js/mdx
 Url: "https://github.com/mdx-js/mdx"
 Args: ["--config=../../../../config/repositories/mdx-js/mdx/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 196, Issues found: 887 in 98 files
+ CSpell: Files checked: 167, Issues found: 1097 in 99 files
  exit code: 1
-./docs/_asset/index.client.js:9:9       - Unknown word (nljson)     -- const nljson = document.querySelector
+./docs/_asset/index.client.js:10:9      - Unknown word (nljson)     -- const nljson = document.querySelector
 ./docs/_asset/index.css:205:2     - Unknown word (hljs)               -- .hljs {
 ./docs/_asset/index.css:243:32    - Unknown word (nums)               -- variant-numeric: lining-nums;
 ./docs/_asset/index.css:2:37      - Unknown word (blinkmacsystemfont) -- system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI', helvetica
@@ -24,8 +24,8 @@ Lines:
 ./docs/_component/editor.client.js:40:35     - Unknown word (esast)       -- recmaPlugins: [capture('esast')]
 ./docs/_component/editor.client.js:8:25      - Unknown word (rodemirror) -- import CodeMirror from 'rodemirror'
 ./docs/_component/editor.client.js:9:28      - Unknown word (codemirror) -- {basicSetup} from '@codemirror/basic-setup'
-./docs/_component/icon/github.server.js:13:15     - Unknown word (currentcolor) -- fill="currentcolor"
-./docs/_component/icon/open-collective.server.js:6:28      - Unknown word (opencollective) -- className="icon icon-opencollective"
+./docs/_component/icon/github.server.js:14:13     - Unknown word (currentcolor) -- fill="currentcolor"
+./docs/_component/icon/open-collective.server.js:7:26      - Unknown word (opencollective) -- className="icon icon-opencollective"
 ./docs/_component/table-of-components.server.mdx:24:92     - Unknown word (strikethrough) -- | `~~strikethrough~~`
 ./docs/_config.js:1:22      - Unknown word (VERCEL)     -- / To do: note that `VERCEL_*` env variables aren
 ./docs/_config.js:2:35      - Unknown word (vercel)     -- suspecting that’s because `vercel.json` is used rather
@@ -154,6 +154,40 @@ Lines:
 ./docs/mdx.server.mdx:39:6      - Unknown word (Blazingly)  -- 🔥 **Blazingly blazing fast**: MDX
 ./docs/mdx.server.mdx:45:9      - Unknown word (chrisbiscardi) -- > — [**@chrisbiscardi**][quote]
 ./docs/migrating/v1.server.mdx:48:28     - Unknown word (usecases)   -- shouldn’t affect most usecases, however if you’re nesting
+./docs/packages/esbuild.server.md:19:28     - Unknown word (mdxoptions) -- [`mdx(options?)`](#mdxoptions)
+./docs/packages/esbuild.server.md:1:12      - Unknown word (esbuild)    -- # `@mdx-js/esbuild`
+./docs/packages/esbuild.server.md:64:3      - Unknown word (outfile)    -- outfile: 'output.js',
+./docs/packages/esbuild.server.md:83:5      - Unknown word (esbuild’s)  -- See esbuild’s docs for more info.
+./docs/packages/loader.server.md:34:5      - Unknown word (runtimes)   -- JSX runtimes (such as Vue).
+./docs/packages/loader.server.md:67:37     - Unknown word (mkdn)       -- .(md|markdown|mdown|mkdn|mkd|mdwn|mkdown|ron
+./docs/packages/loader.server.md:67:46     - Unknown word (mdwn)       -- markdown|mdown|mkdn|mkd|mdwn|mkdown|ron|mdx)$/,
+./docs/packages/loader.server.md:67:51     - Unknown word (mkdown)     -- mdown|mkdn|mkd|mdwn|mkdown|ron|mdx)$/,
+./docs/packages/mdx.server.md:114:45    - Unknown word (jsxs)                   -- Fragment, jsx as _jsx, jsxs as _jsxs} from 'react
+./docs/packages/mdx.server.md:191:62    - Unknown word (tasklists)              -- Tables, strikethrough, tasklists, literal URLs.
+./docs/packages/mdx.server.md:20:38     - Unknown word (compilefile) -- compile(file, options?)`](#compilefile-options)
+./docs/packages/mdx.server.md:21:42     - Unknown word (compilesyncfile) -- ompileSync(file, options?)`](#compilesyncfile-options)
+./docs/packages/mdx.server.md:22:38     - Unknown word (evaluatefile)    -- evaluate(file, options)`](#evaluatefile-options)
+./docs/packages/mdx.server.md:23:42     - Unknown word (evaluatesyncfile) -- valuateSync(file, options)`](#evaluatesyncfile-options)
+./docs/packages/mdx.server.md:24:39     - Unknown word (createprocessoroptions) -- createProcessor(options)`](#createprocessoroptions)
+./docs/packages/mdx.server.md:279:22    - Unknown word (eval)                   -- to code that can be `eval`ed.
+./docs/packages/mdx.server.md:40:24     - Unknown word (vite)                   -- next) or build system (vite, snowpack) which comes
+./docs/packages/mdx.server.md:452:22    - Unknown word (QAAQ)                   -- mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B'
+./docs/packages/mdx.server.md:452:27    - Unknown word (YAAQ)                   -- mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B',
+./docs/packages/mdx.server.md:611:31    - Unknown word (compat)                 -- pragmaImportSource: 'preact/compat'
+./docs/packages/mdx.server.md:873:18    - Unknown word (optionsoutputformat)    -- [outputformat]: #optionsoutputformat
+./docs/packages/mdx.server.md:875:13    - Unknown word (optionsbaseurl)         -- [baseurl]: #optionsbaseurl
+./docs/packages/mdx.server.md:877:22    - Unknown word (optionsusedynamicimport) -- usedynamicimport]: #optionsusedynamicimport
+./docs/packages/node-loader.server.md:22:37     - Unknown word (createloaderoptions) -- createLoader(options?)`](#createloaderoptions)
+./docs/packages/preact.server.md:20:34     - Unknown word (mdxproviderprops) -- MDXProvider(props?)`](#mdxproviderprops)
+./docs/packages/preact.server.md:21:44     - Unknown word (usemdxcomponentscomponents) -- MDXComponents(components?)`](#usemdxcomponentscomponents)
+./docs/packages/preact.server.md:22:25     - Unknown word (mdxcontext)                 -- * [`MDXContext`](#mdxcontext)
+./docs/packages/preact.server.md:23:43     - Unknown word (withmdxcomponentscomponent) -- thMDXComponents(Component)`](#withmdxcomponentscomponent)
+./docs/packages/remark-mdx.server.md:115:27    - Unknown word (mdxjs)               -- micromark-extension-mdxjs-esm`](https://github
+./docs/packages/remark-mdx.server.md:118:22    - Unknown word (autolinks)           -- — Turn off HTML, autolinks, and indented code
+./docs/packages/remark-mdx.server.md:20:39     - Unknown word (unifieduseremarkmdx) -- ).use(remarkMdx)`](#unifieduseremarkmdx)
+./docs/packages/rollup.server.md:31:17     - Unknown word (Vite)       -- Rollup, such as Vite).
+./docs/packages/rollup.server.md:88:11     - Unknown word (picomatch)  -- List of [`picomatch`][pico] patterns to
+./docs/packages/vue.server.md:21:33     - Unknown word (usemdxcomponents) -- useMDXComponents()`](#usemdxcomponents)
 ./docs/projects.server.mdx:10:6      - Unknown word (docz)       -- * [docz][]: Documentation framework
 ./docs/projects.server.mdx:17:6      - Unknown word (MDNEXT)     -- * [MDNEXT][]: An ecosystem of
 ./docs/projects.server.mdx:24:10     - Unknown word (Stoiber’s)  -- * [Max Stoiber’s Blog][mxstbr]
@@ -161,49 +195,37 @@ Lines:
 ./docs/projects.server.mdx:5:6       - Unknown word (demoboard)  -- * [demoboard][]: The simplest editor
 ./docs/projects.server.mdx:60:2      - Unknown word (mdnext)     -- [mdnext]: https://github.com
 ./docs/support.server.mdx:44:52     - Unknown word (rubberduck) -- duck debugging method][rubberduck]
-./packages/loader/readme.md:110:23    - Unknown word (mdxjs)      -- See [Contributing on `mdxjs.com`][contributing]
+./packages/esbuild/lib/index.js:22:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
+./packages/esbuild/lib/index.js:70:62     - Unknown word (onloadremote) -- namespace: remoteNamespace}, onloadremote)
 ./packages/mdx/lib/core.js:25:14     - Unknown word (Rehype)     -- import remarkRehype from 'remark-rehype
 ./packages/mdx/lib/core.js:3:32      - Unknown word (Pluggable)  -- typedef {import('unified').PluggableList} PluggableList
 ./packages/mdx/lib/core.js:4:51      - Unknown word (Recma)      -- recma-document.js').RecmaDocumentOptions} RecmaDocument
 ./packages/mdx/lib/evaluate.js:23:10     - Unknown word (compiletime) -- const {compiletime, runtime} = resolveEvaluateOp
-./packages/mdx/lib/plugin/recma-document.js:27:79     - Unknown word (runtimes)   -- import automatic JSX runtimes from (used in automatic
 ./packages/mdx/lib/plugin/recma-document.js:34:21     - Unknown word (Estree)     -- import {positionFromEstree} from 'unist-util-position
-./packages/mdx/lib/plugin/recma-document.js:424:17    - Unknown word (declarators) -- const declarators = node.specifiers
-./packages/mdx/lib/plugin/recma-jsx-build.js:24:35     - Unknown word (jsxs)       -- generated, and get `jsx`, `jsxs`, and `Fragment` from
+./packages/mdx/lib/plugin/recma-document.js:422:17    - Unknown word (declarators) -- const declarators = node.specifiers
 ./packages/mdx/lib/plugin/recma-stringify.js:170:63    - Unknown word (curlies)    -- ionContainer`, which does the curlies)
 ./packages/mdx/lib/plugin/recma-stringify.js:21:27     - Unknown word (astring)    -- typedef {Omit<import('astring').State, 'write'> &
-./packages/mdx/lib/util/create-format-aware-processors.js:9:26      - Unknown word (extnames)   -- import {md, mdx} from './extnames.js'
-./packages/mdx/readme.md:47:38     - Unknown word (organisation) -- with this repository, organisation, or community you agree
-./packages/mdx/test/index.test.jsx:102:17    - Unknown word (fnref)      -- id="fnref1"
-./packages/mdx/test/index.test.jsx:103:23    - Unknown word (noteref)    -- role="doc-noteref"
-./packages/mdx/test/index.test.jsx:117:69    - Unknown word (backlink)   -- footnote-back" role="doc-backlink">
-./packages/mdx/test/index.test.jsx:143:36    - Unknown word (mathml)     -- span className="katex-mathml">
-./packages/mdx/test/index.test.jsx:146:20    - Unknown word (mrow)       -- <mrow>
-./packages/mdx/test/index.test.jsx:159:34    - Unknown word (mord)       -- <span className="mord mathnormal">x</span
-./packages/mdx/test/index.test.jsx:159:39    - Unknown word (mathnormal) -- span className="mord mathnormal">x</span>
-./packages/mdx/test/index.test.jsx:185:53    - Unknown word (vfile’s)    -- VFileCompatible` to set the vfile’s path', async () =>
-./packages/remark-mdx/test/fixtures/block-parsing.json:1148:21   - Unknown word (Weeeeee)    -- "value": "Weeeeee!",
-./packages/remark-mdx/test/fixtures/block-parsing.json:912:24    - Unknown word (quasis)     -- "quasis": [
-./packages/remark-mdx/test/fixtures/character-reference.json:102:16    - Unknown word (blockquote) -- "type": "blockquote",
-./packages/remark-mdx/test/fixtures/examples-from-react-accessibility.json:3161:29   - Unknown word (haspopup)   -- "name": "aria-haspopup",
-./packages/remark-mdx/test/fixtures/examples-from-react-accessibility.out:9:13      - Unknown word (onchange)   -- onChange={onchangeHandler}
-./packages/remark-mdx/test/fixtures/examples-from-react-jsx-in-depth.json:2461:21   - Unknown word (todos)      -- "value": "todos.map((message) => <Item
-./packages/remark-mdx/test/fixtures/interleaving.json:1155:58   - Unknown word (divs)       -- be an h1 inside two divs",
-./packages/remark-mdx/test/fixtures/interleaving.json:2810:41   - Unknown word (Subthing)   -- "value": "Subthing and this word is ",
-./packages/remark-mdx/test/fixtures/interleaving.json:2913:49   - Unknown word (subthing)   -- "value": "Another subthing with a ",
-./packages/remark-mdx/test/index.js:1561:13   - Unknown word (reparsed)   -- const reparsed = proc.parse(doc)
-./packages/remark-mdx/test/index.js:1582:15   - Unknown word (onvisit)    -- visit(tree, onvisit)
-./packages/remark-mdx/test/index.js:458:47    - Unknown word (tefg)       -- Alpha <b c     d="d"\t\tefg=\'e\'>charlie</b>.'
-./packages/remark-mdx/test/index.js:880:59    - Unknown word (apos)       -- can be used: &quot;, &apos;, &lt;, &gt;, &#x7B
-./packages/vue/test/test.js:37:89     - Unknown word (vfiles)     -- supports strings instead of vfiles for run.
+./packages/mdx/test/compile.js:1267:21   - Unknown word (rexporting) -- 'should support rexporting something as a default
+./packages/mdx/test/compile.js:1315:33   - Unknown word (uteme)      -- data-emotion="css 16uteme">.css-16uteme{color
+./packages/mdx/test/compile.js:1384:6    - Unknown word (Extensionless) -- // Extensionless imports only work in
+./packages/mdx/test/compile.js:35:21     - Unknown word (userland)   -- // So instead use a userland module.
+./packages/mdx/test/compile.js:491:20    - Unknown word (propert)    -- /Cannot read propert/,
+./packages/mdx/test/compile.js:869:31    - Unknown word (setext)     -- should support headings (setext) (`=` -> `<h1>`)'
+./packages/mdx/test/compile.js:995:246   - Unknown word (backlink)   -- footnote-back" role="doc-backlink">↩</a></li>\n</ol>\n
+./packages/mdx/test/compile.js:995:49    - Unknown word (fnref)      -- class="footnote-ref" id="fnref1" role="doc-noteref
+./packages/mdx/test/compile.js:995:67    - Unknown word (noteref)    -- id="fnref1" role="doc-noteref"><sup>1</sup></a></p
+./packages/register/lib/index.cjs:4:7       - Unknown word (deasync)    -- const deasync = require('deasync'
+./packages/remark-mdx/test/index.js:317:15    - Unknown word (onvisit)    -- visit(tree, onvisit)
+./packages/rollup/lib/index.js:2:30      - Unknown word (pluginutils) -- typedef {import('@rollup/pluginutils').FilterPattern} FilterPatter
+./packages/vue/test/test.js:36:89     - Unknown word (vfiles)     -- supports strings instead of vfiles for run.
 ./patches/react-server-dom-webpack+0.0.0-experimental-7ec4c5597.patch:13:10     - Unknown word (typeof)     -- $$typeof: MODULE_REFERENCE,
 ./patches/react-server-dom-webpack+0.0.0-experimental-7ec4c5597.patch:43:31     - Unknown word (deps)       -- // TODO: Hook into deps instead of the target
-./readme.md:104:5     - Unknown word (valign)     -- <tr valign="middle">
-./script/jsx-loader.js:3:30      - Unknown word (esbuild)    -- transformSync} from 'esbuild'
+./readme.md:100:5     - Unknown word (valign)     -- <tr valign="middle">
+./readme.md:158:38    - Unknown word (organisation) -- with this repository, organisation, or community you agree
 ./website/generate.server.js:10:24     - Unknown word (xast)       -- import {sitemap} from 'xast-util-sitemap'
 ./website/generate.server.js:9:9       - Unknown word (globby)     -- import {globby} from 'globby'
 ./website/mdx-config.js:14:14     - Unknown word (Gemoji)     -- import remarkGemoji from 'remark-gemoji
 ./website/mdx-config.js:14:34     - Unknown word (gemoji)     -- remarkGemoji from 'remark-gemoji'
 ./website/mdx-config.js:26:18     - Unknown word (hastscript) -- import {s} from 'hastscript'
-./website/prep.js:78:46     - Unknown word (noindex)    -- 'robots', content: 'noindex'})
+./website/prep.js:79:46     - Unknown word (noindex)    -- 'robots', content: 'noindex'})
 ./website/prerender.js:34:21     - Unknown word (camelcase)  -- /* eslint-disable camelcase */

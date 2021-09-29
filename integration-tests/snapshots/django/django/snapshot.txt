@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2132, Issues found: 7788 in 878 files
+ CSpell: Files checked: 2132, Issues found: 7789 in 878 files
  exit code: 1
 ./django/apps/config.py:125:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -280,13 +280,13 @@ Lines:
 ./django/contrib/gis/geos/coordseq.py:90:17     - Unknown word (sety)       -- capi.cs_sety(self.ptr, index, value
 ./django/contrib/gis/geos/coordseq.py:93:17     - Unknown word (setz)       -- capi.cs_setz(self.ptr, index, value
 ./django/contrib/gis/geos/geometry.py:12:30     - Unknown word (coordseq)   -- django.contrib.gis.geos.coordseq import GEOSCoordSeq
-./django/contrib/gis/geos/geometry.py:239:26    - Unknown word (isring)     -- return capi.geos_isring(self.ptr)
-./django/contrib/gis/geos/geometry.py:244:26    - Unknown word (issimple)   -- return capi.geos_issimple(self.ptr)
-./django/contrib/gis/geos/geometry.py:490:25    - Unknown word (gptr)       -- def _topology(self, gptr):
-./django/contrib/gis/geos/geometry.py:499:29    - Unknown word (quadsegs)   -- buffer(self, width, quadsegs=8):
-./django/contrib/gis/geos/geometry.py:557:41    - Unknown word (pointonsurface) -- _topology(capi.geos_pointonsurface(self.ptr))
-./django/contrib/gis/geos/geometry.py:565:59    - Unknown word (Peucker)        -- simplified using the Douglas-Peucker algorithm
-./django/contrib/gis/geos/geometry.py:675:26    - Unknown word (isclosed)       -- return capi.geos_isclosed(self.ptr)
+./django/contrib/gis/geos/geometry.py:248:26    - Unknown word (isring)     -- return capi.geos_isring(self.ptr)
+./django/contrib/gis/geos/geometry.py:253:26    - Unknown word (issimple)   -- return capi.geos_issimple(self.ptr)
+./django/contrib/gis/geos/geometry.py:499:25    - Unknown word (gptr)       -- def _topology(self, gptr):
+./django/contrib/gis/geos/geometry.py:508:29    - Unknown word (quadsegs)   -- buffer(self, width, quadsegs=8):
+./django/contrib/gis/geos/geometry.py:566:41    - Unknown word (pointonsurface) -- _topology(capi.geos_pointonsurface(self.ptr))
+./django/contrib/gis/geos/geometry.py:574:59    - Unknown word (Peucker)        -- simplified using the Douglas-Peucker algorithm
+./django/contrib/gis/geos/geometry.py:684:26    - Unknown word (isclosed)       -- return capi.geos_isclosed(self.ptr)
 ./django/contrib/gis/geos/libgeos.py:43:47     - Unknown word (dylib)      -- libgeos_c.[so|so.1|dylib].).
 ./django/contrib/gis/geos/libgeos.py:61:6      - Unknown word (lgeos)      -- _lgeos = CDLL(lib_path)
 ./django/contrib/gis/geos/libgeos.py:76:1      - Unknown word (NOTICEFUNC) -- NOTICEFUNC = CFUNCTYPE(None, c
@@ -593,8 +593,8 @@ Lines:
 ./django/db/models/base.py:93:9      - Unknown word (contributable) -- contributable_attrs = {}
 ./django/db/models/enums.py:12:17     - Unknown word (metacls)    -- def __new__(metacls, classname, bases, classdict
 ./django/db/models/expressions.py:50:12     - Unknown word (bitor)      -- # and .bitor(), the '&' and '|' are
-./django/db/models/fields/__init__.py:377:76    - Unknown word (EXXX)       -- details.get('id', 'fields.EXXX'),
-./django/db/models/fields/__init__.py:389:79    - Unknown word (WXXX)       -- details.get('id', 'fields.WXXX'),
+./django/db/models/fields/__init__.py:378:76    - Unknown word (EXXX)       -- details.get('id', 'fields.EXXX'),
+./django/db/models/fields/__init__.py:390:79    - Unknown word (WXXX)       -- details.get('id', 'fields.WXXX'),
 ./django/db/models/fields/related.py:759:25    - Unknown word (getmro)     -- bases = inspect.getmro(cls)
 ./django/db/models/functions/__init__.py:21:5      - Unknown word (Cume)       -- CumeDist, DenseRank, FirstValue
 ./django/db/models/functions/__init__.py:21:70     - Unknown word (Ntile)      -- LastValue, Lead, NthValue, Ntile,
@@ -935,9 +935,9 @@ Lines:
 ./tests/admin_ordering/tests.py:44:28     - Unknown word (Halen)      -- Band(name='Van Halen', bio='', rank=2),
 ./tests/admin_scripts/broken_app/models.py:1:23      - Unknown word (modelz)     -- from django.db import modelz # NOQA
 ./tests/admin_scripts/management/commands/noargs_command.py:9:25      - Unknown word (noargs)     -- print('EXECUTE: noargs_command options=%s'
-./tests/admin_scripts/tests.py:1087:26   - Unknown word (scriptz)    -- apps=['admin_scriptz.broken_app'],
-./tests/admin_scripts/tests.py:1733:40   - Unknown word (personnalisée) -- CommandError("Erreur personnalisée")
-./tests/admin_scripts/tests.py:2490:18   - Unknown word (rnserver)      -- args = ['rnserver', '--settings=test_project
+./tests/admin_scripts/tests.py:1088:26   - Unknown word (scriptz)    -- apps=['admin_scriptz.broken_app'],
+./tests/admin_scripts/tests.py:1734:40   - Unknown word (personnalisée) -- CommandError("Erreur personnalisée")
+./tests/admin_scripts/tests.py:2491:18   - Unknown word (rnserver)      -- args = ['rnserver', '--settings=test_project
 ./tests/admin_scripts/tests.py:50:65     - Unknown word (sdict)      -- None, is_dir=False, sdict=None, extra=None):
 ./tests/admin_utils/test_logentry.py:70:62     - Unknown word (Ajout)      -- get_change_message(), 'Ajout.')
 ./tests/admin_utils/tests.py:412:74    - Unknown word (Aother)     -- ), 'something_0Aor_0Aother')
@@ -1744,13 +1744,13 @@ Lines:
 ./tests/pagination/tests.py:247:43    - Unknown word (fghijk)     -- assertEqual(''.join(page2), 'fghijk')
 ./tests/pagination/tests.py:248:53    - Unknown word (kjihgf)     -- join(reversed(page2)), 'kjihgf')
 ./tests/postgres_tests/migrations/0001_setup_extensions.py:37:31     - Unknown word (ossp)       -- CreateExtension('uuid-ossp'),
-./tests/postgres_tests/migrations/0002_create_test_models.py:247:19    - Unknown word (bigints)    -- ('bigints', BigIntegerRangeField
-./tests/postgres_tests/test_aggregates.py:281:55    - Unknown word (boolor)     -- teTestModel.objects.aggregate(boolor=BoolOr('boolean_field
-./tests/postgres_tests/test_aggregates.py:677:19    - Unknown word (avgx)       -- def test_regr_avgx_general(self):
-./tests/postgres_tests/test_aggregates.py:678:50    - Unknown word (regravgx)   -- atTestModel.objects.aggregate(regravgx=RegrAvgX(y='int2', x
-./tests/postgres_tests/test_aggregates.py:681:19    - Unknown word (avgy)       -- def test_regr_avgy_general(self):
-./tests/postgres_tests/test_aggregates.py:682:50    - Unknown word (regravgy)   -- atTestModel.objects.aggregate(regravgy=RegrAvgY(y='int2', x
-./tests/postgres_tests/test_aggregates.py:699:50    - Unknown word (regrr)      -- atTestModel.objects.aggregate(regrr2=RegrR2(y='int2', x
+./tests/postgres_tests/migrations/0002_create_test_models.py:248:19    - Unknown word (bigints)    -- ('bigints', BigIntegerRangeField
+./tests/postgres_tests/test_aggregates.py:289:55    - Unknown word (boolor)     -- teTestModel.objects.aggregate(boolor=BoolOr('boolean_field
+./tests/postgres_tests/test_aggregates.py:691:19    - Unknown word (avgx)       -- def test_regr_avgx_general(self):
+./tests/postgres_tests/test_aggregates.py:692:50    - Unknown word (regravgx)   -- atTestModel.objects.aggregate(regravgx=RegrAvgX(y='int2', x
+./tests/postgres_tests/test_aggregates.py:695:19    - Unknown word (avgy)       -- def test_regr_avgy_general(self):
+./tests/postgres_tests/test_aggregates.py:696:50    - Unknown word (regravgy)   -- atTestModel.objects.aggregate(regravgy=RegrAvgY(y='int2', x
+./tests/postgres_tests/test_aggregates.py:713:50    - Unknown word (regrr)      -- atTestModel.objects.aggregate(regrr2=RegrR2(y='int2', x
 ./tests/postgres_tests/test_array.py:287:20    - Unknown word (mogrify)    -- # psycopg2 mogrify method that generates
 ./tests/postgres_tests/test_array.py:950:32    - Unknown word (defg)       -- field.clean('abc,c,defg')
 ./tests/postgres_tests/test_constraints.py:466:25    - Unknown word (SPGIST)     -- index_type='SPGIST',
@@ -1833,11 +1833,11 @@ Lines:
 ./tests/runtests.py:3:8       - Unknown word (atexit)     -- import atexit
 ./tests/runtests.py:72:1      - Unknown word (SUBDIRS)    -- SUBDIRS_TO_SKIP = {
 ./tests/schema/models.py:156:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
-./tests/schema/tests.py:1605:35   - Unknown word (tagm)       -- assertEqual(columns['tagm2mtest_id'][0], connection
-./tests/schema/tests.py:1605:40   - Unknown word (mtest)      -- assertEqual(columns['tagm2mtest_id'][0], connection
+./tests/schema/tests.py:1612:35   - Unknown word (tagm)       -- assertEqual(columns['tagm2mtest_id'][0], connection
+./tests/schema/tests.py:1612:40   - Unknown word (mtest)      -- assertEqual(columns['tagm2mtest_id'][0], connection
 ./tests/schema/tests.py:246:48    - Unknown word (repointing) -- out of FK order, then repointing, works"
-./tests/schema/tests.py:3184:81   - Unknown word (upcase)     -- and, for Oracle, un-upcase
-./tests/schema/tests.py:3756:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
+./tests/schema/tests.py:3191:81   - Unknown word (upcase)     -- and, for Oracle, un-upcase
+./tests/schema/tests.py:3763:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
 ./tests/select_for_update/tests.py:142:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
 ./tests/select_for_update/tests.py:170:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',
 ./tests/select_for_update/tests.py:323:14    - Unknown word (unsuported) -- def test_unsuported_no_key_raises_error
