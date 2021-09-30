@@ -35,6 +35,7 @@ export {
     SpellingDictionaryLoadError,
     SuggestionCollector,
     SuggestionResult,
+    SpellingDictionaryCollection,
 } from './SpellingDictionary';
 export * from './trace';
 export { getLogger, Logger, setLogger } from './util/logger';
