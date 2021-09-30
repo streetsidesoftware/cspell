@@ -98,4 +98,27 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 - `includeRegExpList` - _(Advanced)_ limits the text checked to be only that matching the expressions in the list.
 - `patterns` - this allows you to define named patterns to be used with
   `ignoreRegExpList` and `includeRegExpList`.
+
+  **Example**
+
+  ```javascript
+  "patterns": [
+      {
+          "name": "comment-single-line",
+          "pattern": "/#.*/g"
+      },
+      {
+          "name": "comment-multi-line",
+          "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
+      },
+      // You can also combine multiple named patterns into one single named pattern
+      {
+          "name": "comments",
+          "pattern": ["comment-single-line", "comment-multi-line"]
+      }
+  ],
+
+  "ignoreRegExpList": ["comments"]
+  ```
+
 - `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](./language-settings.md#LanguageSettings)
