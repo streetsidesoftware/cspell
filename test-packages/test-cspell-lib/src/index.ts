@@ -1,12 +1,34 @@
 import { assert } from 'console';
-import * as lib from 'cspell-lib';
+import { validateText, combineTextAndLanguageSettings, finalizeSettings, getDefaultSettings } from 'cspell-lib';
 
-console.log('start');
+// cspell:ignore wordz coztom clockz cuztom
+const customWords = ['wordz', 'cuztom', 'clockz'];
 
-/**
- * The main goal here is to make sure it compiles. The unit tests are validation that it compiled as expected.
- */
-const functions = [lib.asyncIterableToArray, lib.calcOverrideSettings];
-functions.forEach((fn) => assert(typeof fn === 'function', "typeof %o === 'function'", fn));
+async function spellcheckerFactory(customWords: string[] = []) {
+    const settings = {
+        ...getDefaultSettings(),
+        words: customWords,
+    };
 
-console.log('done');
+    const fileSettings = combineTextAndLanguageSettings(settings, '', ['plaintext']);
+    const finalSettings = finalizeSettings(fileSettings);
+
+    return (phrase: string) => {
+        return validateText(phrase, finalSettings, { generateSuggestions: true });
+    };
+}
+
+const checkSpelling = async (phrase: string) => {
+    const spellChecker = await spellcheckerFactory(customWords);
+    return spellChecker(phrase);
+};
+
+async function run() {
+    const r = await checkSpelling('These are my coztom wordz.');
+    assert(r.length === 1, 'Make sure we got 1 spelling issue back.');
+    assert(r[0].text === 'coztom');
+    assert(r[0].suggestions?.[0] === 'cuztom');
+    // console.log('%o', r);
+}
+
+run();
