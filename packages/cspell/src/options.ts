@@ -51,6 +51,16 @@ export interface CSpellApplicationOptions extends BaseOptions {
      * Strategy to use for detecting changed files, default: metadata
      */
     cacheStrategy?: 'metadata' | 'content';
+
+    /**
+     * Enable filtering out files matching globs found in `.gitignore` files.
+     */
+    gitignore?: boolean;
+
+    /**
+     * Stop searching for a `.gitignore`s when a root is reached.
+     */
+    gitignoreRoot?: string | string[];
 }
 
 export type TraceOptions = BaseOptions;

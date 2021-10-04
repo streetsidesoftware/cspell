@@ -84,6 +84,17 @@ export interface FileSettings extends ExtendableSettings {
      * Custom reporters configuration
      */
     reporters?: ReporterSettings[];
+
+    /**
+     * Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.
+     * @default false
+     */
+    useGitignore?: boolean;
+
+    /**
+     * Tells the spell checker to searching for `.gitignore` files when it reaches a matching root.
+     */
+    gitignoreRoot?: FsPath | FsPath[];
 }
 
 export interface ExtendableSettings extends Settings {
