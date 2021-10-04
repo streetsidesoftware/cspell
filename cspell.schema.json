@@ -770,6 +770,20 @@
       },
       "type": "array"
     },
+    "gitignoreRoot": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/FsPath"
+        },
+        {
+          "items": {
+            "$ref": "#/definitions/FsPath"
+          },
+          "type": "array"
+        }
+      ],
+      "description": "Tells the spell checker to searching for `.gitignore` files when it reaches a matching root."
+    },
     "globRoot": {
       "$ref": "#/definitions/FsPath",
       "description": "The root to use for glop patterns found in this configuration. Default: location of the configuration file.   For compatibility reasons, config files with version 0.1, the glob root will   default to be `${cwd}`.\n\nUse `globRoot` to define a different location. `globRoot` can be relative to the location of this configuration file. Defining globRoot, does not impact imported configurations.\n\nSpecial Values:\n- `${cwd}` - will be replaced with the current working directory.\n- `.` - will be the location of the containing configuration file."
@@ -920,6 +934,11 @@
       "default": 500,
       "description": "The maximum amount of time in milliseconds to generate suggestions for a word.",
       "type": "number"
+    },
+    "useGitignore": {
+      "default": false,
+      "description": "Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.",
+      "type": "boolean"
     },
     "usePnP": {
       "default": false,

@@ -16,6 +16,7 @@ import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGl
 import { loadReporters, mergeReporters } from './util/reporters';
 import { getTimeMeasurer } from './util/timer';
 import * as util from './util/util';
+import { GitIgnore } from 'cspell-gitignore';
 
 export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
     let { reporter } = cfg;
@@ -180,6 +181,10 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
         cspell.setLogger(getLoggerFromReporter(reporter));
 
+        const useGitignore = cfg.options.gitignore ?? configInfo.config.useGitignore ?? false;
+        const gitignoreRoots = cfg.options.gitignoreRoot ?? configInfo.config.gitignoreRoot;
+        const gitIgnore = useGitignore ? generateGitIgnore(gitignoreRoots) : undefined;
+
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
         const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
@@ -206,7 +211,9 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
         // cspell:word nodir
         const globOptions = { root, cwd: root, ignore: ignoreGlobs.concat(normalizedExcludes), nodir: true };
-        const files = filterFiles(await findFiles(fileGlobs, globOptions), globMatcher);
+        const foundFiles = await findFiles(fileGlobs, globOptions);
+        const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
+        const files = filterFiles(filtered, globMatcher);
 
         return processFiles(files, configInfo, files.length);
     }
@@ -333,4 +340,9 @@ function getLoggerFromReporter(reporter: CSpellReporter): Logger {
         warn,
         error,
     };
+}
+
+function generateGitIgnore(roots: string | string[] | undefined) {
+    const root = typeof roots === 'string' ? [roots] : roots;
+    return new GitIgnore(root?.map((p) => path.resolve(p)));
 }
