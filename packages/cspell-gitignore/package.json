@@ -1,0 +1,55 @@
+{
+  "name": "cspell-gitignore",
+  "private": true,
+  "version": "5.11.1",
+  "description": "Gitignore Glob matcher for cspell",
+  "keywords": [
+    "cspell",
+    "gitignore",
+    "glob"
+  ],
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/master/packages/cspell-gitignore#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "dist": "dist"
+  },
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
+    "watch": "tsc -p . -w",
+    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean-build": "npm run clean && npm run build",
+    "coverage": "jest --coverage",
+    "test-watch": "jest --watch",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-gitignore"
+  },
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "dependencies": {
+    "cspell-glob": "^5.11.1",
+    "find-up": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.2",
+    "jest": "^27.2.4",
+    "rimraf": "^3.0.2"
+  }
+}
