@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { GitIgnore } from './GitIgnoreServer';
+import { GitIgnore } from './GitIgnore';
 
 const pkg = path.resolve(__dirname, '..');
 const gitRoot = path.resolve(pkg, '../..');
