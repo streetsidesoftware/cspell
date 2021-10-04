@@ -19,9 +19,9 @@ export function toError(e: unknown): Error {
     };
 }
 
-function isError(e: unknown): e is Error {
-    if (!e || typeof e !== 'object') return false;
+export function isError(e: unknown): e is Error {
     if (e instanceof Error) return true;
+    if (!e || typeof e !== 'object') return false;
     const ex = <Error>e;
     return typeof ex.name === 'string' && typeof ex.message === 'string';
 }

@@ -1,7 +1,7 @@
-import type { CSpellReporter } from '@cspell/cspell-types';
+import type { CSpellReporter, ReporterSettings } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { InMemoryReporter } from './InMemoryReporter';
-import { mergeReporters } from './reporters';
+import { mergeReporters, loadReporters } from './reporters';
 
 describe('mergeReporters', () => {
     it('processes a single reporter', async () => {
@@ -18,6 +18,23 @@ describe('mergeReporters', () => {
         reporters.forEach((reporter) => {
             expect(reporter.dump()).toMatchSnapshot();
         });
+    });
+
+    test('loadReporters', () => {
+        const reporters: ReporterSettings[] = [['@cspell/cspell-json-reporter', { outFile: 'out.json' }]];
+        const loaded = loadReporters({ reporters });
+        expect(loaded).toEqual([expect.objectContaining({})]);
+    });
+
+    test.each`
+        reporter                               | expected
+        ${['@cspell/cspell-json-reporter']}    | ${'Failed to load reporter @cspell/cspell-json-reporter: cspell-json-reporter settings must be an object'}
+        ${['@cspell/cspell-unknown-reporter']} | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
+        ${'@cspell/cspell-unknown-reporter'}   | ${"Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find module '@cspell/cspell-unknown-reporter' from 'src/util/reporters.ts'"}
+    `('loadReporters fail $reporter', ({ reporter, expected }) => {
+        const reporters: ReporterSettings[] = [reporter];
+        const fn = () => loadReporters({ reporters });
+        expect(fn).toThrowError(expected);
     });
 });
 
