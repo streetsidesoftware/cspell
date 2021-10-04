@@ -2,8 +2,10 @@ import * as path from 'path';
 import { GitIgnore } from './GitIgnore';
 
 const pkg = path.resolve(__dirname, '..');
-const gitRoot = path.resolve(pkg, '../..');
+const packages = path.resolve(pkg, '..');
+const gitRoot = path.resolve(packages, '..');
 const samples = path.resolve(pkg, 'samples');
+const pkgCSpellLib = path.join(packages, 'cspell-lib');
 
 describe('GitIgnoreServer', () => {
     test('GitIgnoreServer', () => {
@@ -12,11 +14,15 @@ describe('GitIgnoreServer', () => {
     });
 
     test.each`
-        dir                      | expected
-        ${__dirname}             | ${[gitRoot, pkg]}
-        ${p(samples, 'ignored')} | ${[gitRoot, pkg, samples]}
-    `('findGitIgnoreHierarchy $dir', async ({ dir, expected }) => {
-        const gs = new GitIgnore();
+        dir                      | roots             | expected
+        ${__dirname}             | ${undefined}      | ${[gitRoot, pkg]}
+        ${__dirname}             | ${[packages]}     | ${[pkg]}
+        ${__dirname}             | ${[pkg, gitRoot]} | ${[pkg]}
+        ${p(samples, 'ignored')} | ${undefined}      | ${[gitRoot, pkg, samples]}
+        ${p(pkgCSpellLib)}       | ${[pkg]}          | ${[gitRoot]}
+        ${p(pkgCSpellLib)}       | ${[packages]}     | ${[]}
+    `('findGitIgnoreHierarchy $dir $roots', async ({ dir, roots, expected }) => {
+        const gs = new GitIgnore(roots);
         const r = await gs.findGitIgnoreHierarchy(dir);
         expect(r.gitIgnoreChain.map((gif) => gif.root)).toEqual(expected);
     });
@@ -28,14 +34,14 @@ describe('GitIgnoreServer', () => {
         ${p(samples, 'ignored/keepme.md')} | ${false}
         ${p(samples, 'ignored/file.txt')}  | ${true}
         ${p(pkg, 'node_modules/bin')}      | ${true}
-    `('isIgnored $dir', async ({ file, expected }) => {
+    `('isIgnored $file', async ({ file, expected }) => {
         const dir = path.dirname(file);
         const gs = new GitIgnore();
         const r = await gs.findGitIgnoreHierarchy(dir);
         expect(r.isIgnored(file)).toEqual(expected);
     });
 
-    test('isIgnored $dir', async () => {
+    test('isIgnored files', async () => {
         const files = [
             __filename,
             p(samples, 'ignored/keepme.md'),
