@@ -162,6 +162,7 @@ function normalizeSettings(
     const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
     const normalizedOverrides = normalizeOverrides(settings, pathToSettingsFile);
     const normalizedReporters = normalizeReporters(settings, pathToSettingsFile);
+    const normalizedGitignoreRoot = normalizeGitignoreRoot(settings, pathToSettingsFile);
 
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
     const source: Source = settings.source || {
@@ -176,6 +177,7 @@ function normalizeSettings(
         ...normalizedSettingsGlobs,
         ...normalizedOverrides,
         ...normalizedReporters,
+        ...normalizedGitignoreRoot,
     };
     if (!imports.length) {
         return fileSettings;
@@ -781,9 +783,8 @@ function normalizeReporters(settings: NormalizeReporters, pathToSettingsFile: st
         }
         if (!Array.isArray(s) || typeof s[0] !== 'string') throw new Error('Invalid Reporter');
         // Preserve the shape of Reporter Setting while resolving the reporter file.
-        const r: [string, unknown] | [string] = s;
-        r[0] = resolve(s[0]);
-        return r;
+        const [r, ...rest] = s;
+        return [resolve(r), ...rest];
     }
 
     return {
@@ -800,6 +801,20 @@ function normalizeLanguageSettings(languageSettings: LanguageSetting[] | undefin
     }
 
     return languageSettings.map(fixLocale);
+}
+
+type NormalizeGitignoreRoot = Pick<CSpellSettings, 'gitignoreRoot'>;
+
+function normalizeGitignoreRoot(settings: NormalizeGitignoreRoot, pathToSettingsFile: string): NormalizeGitignoreRoot {
+    const { gitignoreRoot } = settings;
+    if (!gitignoreRoot) return {};
+
+    const dir = path.dirname(pathToSettingsFile);
+    const roots = Array.isArray(gitignoreRoot) ? gitignoreRoot : [gitignoreRoot];
+
+    return {
+        gitignoreRoot: roots.map((p) => path.resolve(dir, p)),
+    };
 }
 
 interface NormalizeSettingsGlobs {

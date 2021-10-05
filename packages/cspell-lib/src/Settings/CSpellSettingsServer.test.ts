@@ -185,10 +185,15 @@ describe('Validate CSpellSettingsServer', () => {
         expect(setting4).toBe(setting3);
     });
 
-    test('tests loading a missing cSpell.json file', () => {
-        const filename = path.join(__dirname, '..', '..', 'cspell.config.json');
-        const settings = readSettings(filename);
-        expect(settings.__importRef?.filename).toBe(path.resolve(filename));
+    test.each`
+        filename                                              | relativeTo   | refFilename
+        ${r('../../cspell.config.json')}                      | ${undefined} | ${r('../../cspell.config.json')}
+        ${r('../../cspell.config.json')}                      | ${__dirname} | ${r('../../cspell.config.json')}
+        ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${__dirname} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
+        ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${undefined} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
+    `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, refFilename }) => {
+        const settings = readSettings(filename, relativeTo);
+        expect(settings.__importRef?.filename).toBe(refFilename);
         expect(settings.__importRef?.error).toBeUndefined();
         expect(settings.import).toBeUndefined();
     });
@@ -392,8 +397,12 @@ describe('Validate Glob resolution', () => {
         );
     });
 
-    test('globs from config file (search)', async () => {
-        const config = await searchForConfig(__dirname);
+    test.each`
+        from
+        ${__dirname}
+        ${undefined}
+    `('globs from config file (search) $from', async ({ from }) => {
+        const config = await searchForConfig(from);
         expect(config?.ignorePaths).toEqual(
             expect.arrayContaining([
                 {
@@ -417,6 +426,28 @@ describe('Validate Glob resolution', () => {
                 },
             ])
         );
+    });
+
+    test.each`
+        settings                                    | file                | expected
+        ${{}}                                       | ${r('cspell.json')} | ${oc({ name: 'Settings/cspell.json' })}
+        ${{ gitignoreRoot: '.' }}                   | ${r('cspell.json')} | ${oc({ name: 'Settings/cspell.json', gitignoreRoot: [__dirname] })}
+        ${{ gitignoreRoot: '..' }}                  | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('..')] })}
+        ${{ gitignoreRoot: ['.', '..'] }}           | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('.'), r('..')] })}
+        ${{ reporters: ['../../README.md'] }}       | ${r('cspell.json')} | ${oc({ reporters: [r('../../README.md')] })}
+        ${{ reporters: [['../../README.md']] }}     | ${r('cspell.json')} | ${oc({ reporters: [[r('../../README.md')]] })}
+        ${{ reporters: [['../../README.md', {}]] }} | ${r('cspell.json')} | ${oc({ reporters: [[r('../../README.md'), {}]] })}
+    `('normalizeSettings $settings', ({ settings, file, expected }) => {
+        expect(normalizeSettings(settings, file, {})).toEqual(expected);
+    });
+
+    test.each`
+        settings                            | file                | expected
+        ${{ reporters: ['./reporter.js'] }} | ${r('cspell.json')} | ${'Not found: "./reporter.js"'}
+        ${{ reporters: [{}] }}              | ${r('cspell.json')} | ${'Invalid Reporter'}
+        ${{ reporters: [[{}]] }}            | ${r('cspell.json')} | ${'Invalid Reporter'}
+    `('normalizeSettings with Error $settings', ({ settings, file, expected }) => {
+        expect(() => normalizeSettings(settings, file, {})).toThrowError(expected);
     });
 });
 
@@ -595,6 +626,14 @@ describe('Validate search/load config files', () => {
         );
     });
 });
+
+function p(...parts: string[]): string {
+    return path.join(...parts);
+}
+
+function r(...parts: string[]): string {
+    return path.resolve(__dirname, p(...parts));
+}
 
 function oc<T>(v: Partial<T>): T {
     return expect.objectContaining(v);

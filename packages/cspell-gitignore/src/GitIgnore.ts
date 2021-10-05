@@ -8,13 +8,15 @@ import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile';
 export class GitIgnore {
     private resolvedGitIgnoreHierarchies = new Map<string, GitIgnoreHierarchy>();
     private knownGitIgnoreHierarchies = new Map<string, Promise<GitIgnoreHierarchy>>();
+    readonly roots: string[];
 
     /**
      * @param roots - (search roots) an optional array of root paths to prevent searching for `.gitignore` files above the root.
      *   If a file is under multiple roots, the closest root will apply. If a file is not under any root, then
      *   the search for `.gitignore` will go all the way to the system root of the file.
      */
-    constructor(readonly roots: string[] = []) {
+    constructor(roots: string[] = []) {
+        this.roots = roots.map((a) => path.resolve(a));
         this.roots.sort((a, b) => a.length - b.length);
         Object.freeze(this.roots);
     }
