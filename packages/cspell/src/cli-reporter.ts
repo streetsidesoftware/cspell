@@ -66,13 +66,14 @@ function reportProgress(p: ProgressItem) {
     const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
     const idx = fn + '/' + fc;
     const filename = chalk.gray(relativeFilename(p.filename));
-    const time = reportTime(p.elapsedTimeMs);
+    const time = reportTime(p.elapsedTimeMs, !!p.cached);
     const skipped = p.processed === false ? ' skipped' : '';
     const hasErrors = p.numErrors ? chalk.red` X` : '';
     console.error(`${idx} ${filename} ${time}${skipped}${hasErrors}`);
 }
 
-function reportTime(elapsedTimeMs: number | undefined): string {
+function reportTime(elapsedTimeMs: number | undefined, cached: boolean): string {
+    if (cached) return chalk.green('cached');
     if (elapsedTimeMs === undefined) return '-';
     const color = elapsedTimeMs < 1000 ? chalk.white : elapsedTimeMs < 2000 ? chalk.yellow : chalk.redBright;
     return color(elapsedTimeMs.toFixed(2) + 'ms');
