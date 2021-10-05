@@ -16,11 +16,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
 
     prog.exitOverride();
 
-    prog.version(npmPackage.version)
-        .description('Spelling Checker for Code')
-        .name('cspell')
-        .option('--no-color', 'Turn off color.')
-        .option('--color', 'Force color');
+    prog.version(npmPackage.version).description('Spelling Checker for Code').name('cspell');
 
     commandLint(prog);
     commandTrace(prog);
