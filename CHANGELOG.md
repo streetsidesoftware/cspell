@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.12.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.11.1...v5.12.0-alpha.0) (2021-10-05)
+
+
+### Bug Fixes
+
+* fix home page reference. ([#1817](https://github.com/streetsidesoftware/cspell/issues/1817)) ([b074603](https://github.com/streetsidesoftware/cspell/commit/b07460342e8b8821e458285255d19272de0f6bf9))
+* support `--no-gitignore` option ([#1833](https://github.com/streetsidesoftware/cspell/issues/1833)) ([0b89fed](https://github.com/streetsidesoftware/cspell/commit/0b89fedc515c4ee237ea5404db791f6663332716))
+* Update gitignore README and normalize roots ([#1832](https://github.com/streetsidesoftware/cspell/issues/1832)) ([b9df331](https://github.com/streetsidesoftware/cspell/commit/b9df33148ce016b7003a784945ed5f83023b5903))
+
+
+### Features
+
+* Add support for `.gitignore` ([#1823](https://github.com/streetsidesoftware/cspell/issues/1823)) ([9b0dfe4](https://github.com/streetsidesoftware/cspell/commit/9b0dfe4e50f6b8210d16f9a63ae47949c706c462))
+
+
+
+
+
 ## [5.11.1](https://github.com/streetsidesoftware/cspell/compare/v5.11.0...v5.11.1) (2021-09-29)
 
 
