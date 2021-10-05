@@ -10,7 +10,7 @@ on:
       - "docs/**"
 
 jobs:
-  test-old-node-versions:
+  test-node-versions:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -19,6 +19,7 @@ jobs:
           # List of supported node versions (latest is tested in `test-os`)
           - 12.x
           - 14.x
+          - 16.x
 
         os:
           - ubuntu-latest
@@ -62,7 +63,6 @@ jobs:
           - 16.x
 
         os:
-          - ubuntu-latest
           - windows-latest
           - macos-latest
 
