@@ -90,6 +90,7 @@ export function commandLint(prog: Command): Command {
         )
         .option('--cache-location <path>', `Path to the cache file or directory`, DEFAULT_CACHE_LOCATION)
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
+        .option('--no-gitignore', 'Do NOT use .gitignore files.')
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')

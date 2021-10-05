@@ -115,6 +115,7 @@ describe('Validate cli', () => {
         msg                                            | testArgs                                                                   | errorCheck         | eError   | eLog     | eInfo
         ${'with errors and excludes'}                  | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'no-args'}                                   | ${[]}                                                                      | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'--help'}                                    | ${['--help']}                                                              | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'current_file'}                              | ${[__filename]}                                                            | ${undefined}       | ${true}  | ${false} | ${false}
         ${'with spelling errors Dutch.txt'}            | ${[pathSamples('Dutch.txt')]}                                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'with spelling errors Dutch.txt words only'} | ${[pathSamples('Dutch.txt'), '--wordsOnly']}                               | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
