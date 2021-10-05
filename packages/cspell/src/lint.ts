@@ -121,12 +121,13 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
 
         for await (const fileP of loadAndProcessFiles()) {
             const { filename, fileNum, result } = await fileP;
-            status.files += 1;
-            if (result.fileInfo.text === undefined) {
+            if (!result.fileInfo.text === undefined) {
+                status.files += result.cached ? 1 : 0;
                 emitProgress(filename, fileNum, result);
                 continue;
             }
 
+            status.files += 1;
             emitProgress(filename, fileNum, result);
             // Show the spelling errors after emitting the progress.
             result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));
