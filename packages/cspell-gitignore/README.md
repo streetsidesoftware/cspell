@@ -1,17 +1,36 @@
-# `cspell-glob`
+# `cspell-gitignore`
 
-A simple library for checking filenames against a set of glob rules. It attempts to emulate the `.gitignore` rules.
+A library to assist reading and filtering out files matching glob patterns found in `.gitignore` files.
 
-## Purpose
+## Install
 
-The purpose behind this library is a bit different than the other glob matchers.
-The goal here is to see if a file name matches a glob, not to find files that match globs.
-This library doesn't do any file i/o. It uses [micromatch](https://github.com/micromatch/micromatch#readme) under the hood for the actual matching.
+```sh
+npm install -S cspell-gitignore
+```
 
 ## Usage
 
-```
-const cspellGlob = require('cspell-glob');
+```ts
+import { GitIgnore } from 'cspell-gitignore';
 
-// TODO: DEMONSTRATE API
+// ...
+
+const gitIgnore = new GitIgnore();
+
+const allFiles = glob('**');
+
+const files = await gitIgnore.filterOutIgnored(allFiles);
+```
+
+## Logic
+
+- For each file, search for the `.gitignore` files in the directory hierarchy.
+- Ignore any files that match the globs found in the `.gitignore` files.
+
+The `.gitignore` globs are evaluated from highest to lowest, matching the `git` behavior.
+
+To prevent searching higher in the directory hierarchy, specify roots:
+
+```ts
+const gitIgnore = new GitIgnore([process.cwd()]);
 ```
