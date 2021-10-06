@@ -22,10 +22,11 @@ By default it looks for any of the following files:
 - `cspell.config.yml`
 - `cspell.yaml`
 - `cspell.yml`
+- [`package.json`](#packagejson)
 
 Or you can specify a path to a config file with the `--config <path>` argument on the command line.
 
-### `cspell.json`
+## `cspell.json`
 
 #### Example `cspell.json` file
 
@@ -122,3 +123,24 @@ Or you can specify a path to a config file with the `--config <path>` argument o
   ```
 
 - `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](./language-settings.md#LanguageSettings)
+
+## `package.json`
+
+It is possible to store CSpell configuration in the `package.json` file of a project. CSpell looks
+for the configuration in the `cspell` field of the `.json` file.
+
+```js
+{
+  "name": "cspell-docs",
+  "description": "Documentation for CSpell",
+  // ...
+  "cspell": {
+    "version": "0.2",
+    "useGitignore": true
+  }
+}
+```
+
+<!---
+cspell:ignore packagejson
+--->

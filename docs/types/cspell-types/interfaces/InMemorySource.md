@@ -31,7 +31,7 @@ BaseSource.fileSource
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:698](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L698)
+[CSpellSettingsDef.ts:724](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L724)
 
 ___
 
@@ -47,7 +47,7 @@ BaseSource.filename
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:694](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L694)
+[CSpellSettingsDef.ts:720](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L720)
 
 ___
 
@@ -63,7 +63,7 @@ BaseSource.name
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:692](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L692)
+[CSpellSettingsDef.ts:718](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L718)
 
 ___
 
@@ -79,4 +79,4 @@ BaseSource.sources
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:696](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L696)
+[CSpellSettingsDef.ts:722](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L722)
