@@ -70,13 +70,21 @@ describe('Validate DictionaryLoader', () => {
     function nfc(s: string): string {
         return s.normalize('NFC');
     }
+    // cspell:ignore aujourd’hui
     const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');
     test.each`
         testCase            | file                          | options          | word               | maxAge       | hasWord  | hasErrors
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}         | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'class:name'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'left-right'}    | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}         | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'S' }} | ${'pear'}          | ${undefined} | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'strawberry'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'left-right'}    | ${1}         | ${false} | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'left'}          | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'class:name'}    | ${1}         | ${false} | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'name'}          | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'aujourd’hui'}   | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'tree'}          | ${1}         | ${false} | ${false}
         ${'unknown loader'} | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}         | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'left-right'}    | ${1}         | ${true}  | ${false}

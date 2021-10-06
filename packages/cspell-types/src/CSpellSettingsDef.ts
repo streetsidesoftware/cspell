@@ -380,6 +380,16 @@ export interface DictionaryDefinitionBase {
      * possible suggestions.
      */
     noSuggest?: boolean;
+    /**
+     * Type of file:
+     * S - single word per line,
+     * W - each line can contain one or more words separated by space,
+     * C - each line is treated like code (Camel Case is allowed)
+     * Default is S
+     * C is the slowest to load due to the need to split each line based upon code splitting rules.
+     * @default "S"
+     */
+    type?: DictionaryFileTypes;
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {

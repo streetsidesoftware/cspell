@@ -1,4 +1,4 @@
-import type { DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import type { DictionaryDefinitionPreferred, DictionaryFileTypes } from '@cspell/cspell-types';
 import { stat } from 'fs-extra';
 import * as path from 'path';
 import { readLines } from '../util/fileReader';
@@ -6,12 +6,13 @@ import { createFailedToLoadDictionary, createSpellingDictionary } from './create
 import { SpellingDictionary } from './SpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
+import { genSequence } from 'gensequence';
 
 const MAX_AGE = 10000;
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
-    C: loadSimpleWordList,
+    C: legacyWordList,
     T: loadTrie,
     default: loadSimpleWordList,
 };
@@ -52,7 +53,7 @@ export function loadDictionary(uri: string, options: DictionaryDefinitionPreferr
 const importantOptionKeys: (keyof DictionaryDefinitionPreferred)[] = ['noSuggest', 'useCompounds'];
 
 function calcKey(uri: string, options: DictionaryDefinitionPreferred) {
-    const loaderType = determineType(uri);
+    const loaderType = determineType(uri, options);
     const optValues = importantOptionKeys.map((k) => options[k]?.toString() || '');
     const parts = [uri, loaderType].concat(optValues);
 
@@ -107,16 +108,29 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
     };
 }
 
-function determineType(uri: string): LoaderType {
-    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? 'S' : 'S';
+function determineType(uri: string, opts: Pick<LoadOptions, 'type'>): LoaderType {
+    const t: DictionaryFileTypes = (opts.type && opts.type in loaders && opts.type) || 'S';
+    const defLoaderType = t as LoaderType;
+    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? defLoaderType : defLoaderType;
     const regTrieTest = /\.trie\b/i;
     return regTrieTest.test(uri) ? 'T' : defType;
 }
 
 function load(uri: string, options: LoadOptions): Promise<SpellingDictionary> {
-    const type = determineType(uri);
+    const type = determineType(uri, options);
     const loader = loaders[type] || loaders.default;
     return loader(uri, options);
+}
+
+async function legacyWordList(filename: string, options: LoadOptions) {
+    const lines = await readLines(filename);
+    const words = genSequence(lines)
+        // Remove comments
+        .map((line) => line.replace(/#.*/g, ''))
+        // Split on everything else
+        .concatMap((line) => line.split(/[^\w\p{L}\p{M}'’]+/gu))
+        .filter((word) => !!word);
+    return createSpellingDictionary(words, determineName(filename, options), filename, options);
 }
 
 async function loadSimpleWordList(filename: string, options: LoadOptions) {
