@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.12.2](https://github.com/streetsidesoftware/cspell/compare/v5.12.1...v5.12.2) (2021-10-06)
+
+**Note:** Version bump only for package cspell-gitignore
+
+
+
+
+
 ## [5.12.1](https://github.com/streetsidesoftware/cspell/compare/v5.12.0...v5.12.1) (2021-10-06)
 
 **Note:** Version bump only for package cspell-gitignore
