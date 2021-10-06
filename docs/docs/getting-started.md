@@ -43,44 +43,58 @@ Usage: cspell lint [options] [files...]
 Check spelling
 
 Options:
-  -c, --config <cspell.json>  Configuration file to use.  By default cspell
-                              looks for cspell.json in the current directory.
+  -c, --config <cspell.json>   Configuration file to use.  By default cspell
+                               looks for cspell.json in the current directory.
 
-  -v, --verbose               display more information about the files being
-                              checked and the configuration
+  -v, --verbose                display more information about the files being
+                               checked and the configuration
 
-  --locale <locale>           Set language locales. i.e. "en,fr" for English
-                              and French, or "en-GB" for British English.
+  --locale <locale>            Set language locales. i.e. "en,fr" for English
+                               and French, or "en-GB" for British English.
 
-  --language-id <language>    Force programming language for unknown
-                              extensions. i.e. "php" or "scala"
+  --language-id <language>     Force programming language for unknown
+                               extensions. i.e. "php" or "scala"
 
-  --wordsOnly                 Only output the words not found in the
-                              dictionaries.
+  --wordsOnly                  Only output the words not found in the
+                               dictionaries.
 
-  -u, --unique                Only output the first instance of a word not
-                              found in the dictionaries.
+  -u, --unique                 Only output the first instance of a word not
+                               found in the dictionaries.
 
-  --debug                     Output information useful for debugging
-                              cspell.json files.
+  --debug                      Output information useful for debugging
+                               cspell.json files.
 
-  -e, --exclude <glob>        Exclude files matching the glob pattern. This
-                              option can be used multiple times to add multiple
-                              globs.
+  -e, --exclude <glob>         Exclude files matching the glob pattern. This
+                               option can be used multiple times to add
+                               multiple globs.
 
-  --no-issues                 Do not show the spelling errors.
-  --no-progress               Turn off progress messages
-  --no-summary                Turn off summary message in console
-  -s, --silent                Silent mode, suppress error messages
-  -r, --root <root folder>    Root directory, defaults to current directory.
-  --relative                  Issues are displayed relative to root.
-  --show-context              Show the surrounding text around an issue.
-  --show-suggestions          Show spelling suggestions.
-  --must-find-files           Error if no files are found (default: true)
-  --no-must-find-files        Do not error if no files are found
-  --no-color                  Turn off color.
-  --color                     Force color
-  -h, --help                  display help for command
+  --no-issues                  Do not show the spelling errors.
+  --no-progress                Turn off progress messages
+  --no-summary                 Turn off summary message in console
+  -s, --silent                 Silent mode, suppress error messages
+  -r, --root <root folder>     Root directory, defaults to current directory.
+  --relative                   Issues are displayed relative to root.
+  --show-context               Show the surrounding text around an issue.
+  --show-suggestions           Show spelling suggestions.
+  --no-must-find-files         Do not error if no files are found
+  --legacy                     Legacy output
+  --cache                      Only check changed files (default: false)
+  --cache-strategy <strategy>  Strategy to use for detecting changed files
+                               (choices: "metadata", "content")
+
+  --cache-location <path>      Path to the cache file or directory (default:
+                               ".cspellcache")
+
+  --gitignore                  Ignore files matching glob patterns found in
+                               .gitignore files.
+
+  --no-gitignore               Do NOT use .gitignore files.
+  --gitignore-root <path>      Prevent searching for .gitignore files past
+                               root.
+
+  --no-color                   Turn off color.
+  --color                      Force color
+  -h, --help                   display help for command
 
 
 Examples:

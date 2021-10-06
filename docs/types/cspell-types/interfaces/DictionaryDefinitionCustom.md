@@ -25,6 +25,7 @@ Note: only plain text files with one word per line are supported at this moment.
 - [path](DictionaryDefinitionCustom.md#path)
 - [repMap](DictionaryDefinitionCustom.md#repmap)
 - [scope](DictionaryDefinitionCustom.md#scope)
+- [type](DictionaryDefinitionCustom.md#type)
 - [useCompounds](DictionaryDefinitionCustom.md#usecompounds)
 
 ## Properties
@@ -37,7 +38,7 @@ When `true`, let's the spell checker know that words can be added to this dictio
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:449](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L449)
+[CSpellSettingsDef.ts:475](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L475)
 
 ___
 
@@ -53,7 +54,7 @@ Optional description
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:352](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L352)
+[CSpellSettingsDef.ts:368](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L368)
 
 ___
 
@@ -76,7 +77,7 @@ Name Format:
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:350](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L350)
+[CSpellSettingsDef.ts:366](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L366)
 
 ___
 
@@ -98,7 +99,7 @@ possible suggestions.
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:366](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L366)
+[CSpellSettingsDef.ts:382](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L382)
 
 ___
 
@@ -114,7 +115,7 @@ Path to custom dictionary text file.
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:438](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L438)
+[CSpellSettingsDef.ts:464](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L464)
 
 ___
 
@@ -130,7 +131,7 @@ Replacement pairs
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:354](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L354)
+[CSpellSettingsDef.ts:370](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L370)
 
 ___
 
@@ -143,7 +144,30 @@ Scope values: `user`, `workspace`, `folder`
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:444](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L444)
+[CSpellSettingsDef.ts:470](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L470)
+
+___
+
+### type
+
+• `Optional` **type**: [`DictionaryFileTypes`](../modules.md#dictionaryfiletypes)
+
+Type of file:
+S - single word per line,
+W - each line can contain one or more words separated by space,
+C - each line is treated like code (Camel Case is allowed)
+Default is S
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+**`default`** "S"
+
+#### Inherited from
+
+[DictionaryDefinitionPreferred](DictionaryDefinitionPreferred.md).[type](DictionaryDefinitionPreferred.md#type)
+
+#### Defined in
+
+[CSpellSettingsDef.ts:392](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L392)
 
 ___
 
@@ -159,4 +183,4 @@ Use Compounds
 
 #### Defined in
 
-[settings/CSpellSettingsDef.ts:356](https://github.com/streetsidesoftware/cspell/blob/2bb6c82a/packages/cspell-types/src/settings/CSpellSettingsDef.ts#L356)
+[CSpellSettingsDef.ts:372](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L372)
