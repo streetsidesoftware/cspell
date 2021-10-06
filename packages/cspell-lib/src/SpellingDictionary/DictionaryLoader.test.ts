@@ -84,7 +84,17 @@ describe('Validate DictionaryLoader', () => {
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'left'}          | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'class:name'}    | ${1}         | ${false} | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'name'}          | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'two words'}     | ${1}         | ${false} | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'words'}         | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'aujourd’hui'}   | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'W' }} | ${'strawberry'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'W' }} | ${'left-right'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'W' }} | ${'left'}          | ${1}         | ${false} | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'W' }} | ${'class:name'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'W' }} | ${'name'}          | ${1}         | ${false} | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'W' }} | ${'aujourd’hui'}   | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'two words'}     | ${1}         | ${false} | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'C' }} | ${'words'}         | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'tree'}          | ${1}         | ${false} | ${false}
         ${'unknown loader'} | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}         | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'left-right'}    | ${1}         | ${true}  | ${false}
@@ -99,7 +109,7 @@ describe('Validate DictionaryLoader', () => {
         ${'csharp type S'}  | ${csharp}                     | ${{ type: 'S' }} | ${'const'}         | ${1}         | ${true}  | ${false}
         ${'csharp type C'}  | ${csharp}                     | ${{ type: 'C' }} | ${'const'}         | ${1}         | ${true}  | ${false}
     `(
-        '$testCase $word',
+        'loadDictionary $testCase $word $options',
         async ({
             file,
             options,
