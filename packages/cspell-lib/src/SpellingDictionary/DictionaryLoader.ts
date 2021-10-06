@@ -13,6 +13,7 @@ const MAX_AGE = 10000;
 const loaders: Loaders = {
     S: loadSimpleWordList,
     C: legacyWordList,
+    W: wordsPerLineWordList,
     T: loadTrie,
     default: loadSimpleWordList,
 };
@@ -34,6 +35,7 @@ export interface Loaders {
     S: Loader;
     C: Loader;
     T: Loader;
+    W: Loader;
     default: Loader;
 }
 
@@ -110,7 +112,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
 
 function determineType(uri: string, opts: Pick<LoadOptions, 'type'>): LoaderType {
     const t: DictionaryFileTypes = (opts.type && opts.type in loaders && opts.type) || 'S';
-    const defLoaderType = t as LoaderType;
+    const defLoaderType: LoaderType = t;
     const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? defLoaderType : defLoaderType;
     const regTrieTest = /\.trie\b/i;
     return regTrieTest.test(uri) ? 'T' : defType;
@@ -129,6 +131,17 @@ async function legacyWordList(filename: string, options: LoadOptions) {
         .map((line) => line.replace(/#.*/g, ''))
         // Split on everything else
         .concatMap((line) => line.split(/[^\w\p{L}\p{M}'’]+/gu))
+        .filter((word) => !!word);
+    return createSpellingDictionary(words, determineName(filename, options), filename, options);
+}
+
+async function wordsPerLineWordList(filename: string, options: LoadOptions) {
+    const lines = await readLines(filename);
+    const words = genSequence(lines)
+        // Remove comments
+        .map((line) => line.replace(/#.*/g, ''))
+        // Split on everything else
+        .concatMap((line) => line.split(/\s+/gu))
         .filter((word) => !!word);
     return createSpellingDictionary(words, determineName(filename, options), filename, options);
 }
