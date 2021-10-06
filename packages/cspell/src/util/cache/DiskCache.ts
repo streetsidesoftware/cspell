@@ -44,12 +44,14 @@ export class DiskCache implements CSpellLintResultCache {
 
         // Skip reading empty files and files without lint error
         const hasErrors = meta.result.errors > 0 || meta.result.configErrors > 0 || meta.result.issues.length > 0;
-        const shouldReadFile = meta.size !== 0 && hasErrors;
+        const cached = !!meta.size;
+        const shouldReadFile = cached && hasErrors;
 
         return {
             ...meta.result,
-            elapsedTimeMs: 0,
+            elapsedTimeMs: undefined,
             fileInfo: shouldReadFile ? await readFileInfo(filename) : { filename },
+            cached,
         };
     }
 

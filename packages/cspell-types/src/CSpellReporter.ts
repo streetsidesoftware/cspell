@@ -43,6 +43,7 @@ export interface ProgressFileComplete extends ProgressBase {
     elapsedTimeMs: number | undefined;
     processed: boolean | undefined;
     numErrors: number | undefined;
+    cached?: boolean;
 }
 
 export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;

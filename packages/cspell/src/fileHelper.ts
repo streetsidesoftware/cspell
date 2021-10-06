@@ -39,7 +39,8 @@ export interface FileResult {
     issues: Issue[];
     errors: number;
     configErrors: number;
-    elapsedTimeMs: number;
+    elapsedTimeMs: number | undefined;
+    cached?: boolean;
 }
 
 export function fileInfoToDocument(

@@ -76,7 +76,8 @@ describe('DiskCache', () => {
             const cachedResult = await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO);
 
             expect(cachedResult).toMatchObject(RESULT_NO_ISSUES);
-            expect(cachedResult?.elapsedTimeMs).toEqual(0);
+            expect(cachedResult?.elapsedTimeMs).toBeUndefined();
+            expect(cachedResult?.cached).toBe(true);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(0);
             expect(cachedResult?.fileInfo.filename).toEqual('file');
@@ -94,7 +95,8 @@ describe('DiskCache', () => {
             const cachedResult = await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO);
 
             expect(cachedResult).toMatchObject(RESULT_NO_ISSUES);
-            expect(cachedResult?.elapsedTimeMs).toEqual(0);
+            expect(cachedResult?.elapsedTimeMs).toBeUndefined();
+            expect(cachedResult?.cached).toBe(false);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(0);
             expect(cachedResult?.fileInfo.filename).toEqual('file');
@@ -116,7 +118,8 @@ describe('DiskCache', () => {
             const cachedResult = await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO);
 
             expect(cachedResult).toMatchObject(result);
-            expect(cachedResult?.elapsedTimeMs).toEqual(0);
+            expect(cachedResult?.elapsedTimeMs).toBeUndefined();
+            expect(cachedResult?.cached).toBe(true);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(1);
             expect(cachedResult?.fileInfo).toEqual(fileInfo);
