@@ -55,6 +55,11 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs"
         },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed) Default is S C is the slowest to load due to the need to split each line based upon code splitting rules."
+        },
         "useCompounds": {
           "description": "Use Compounds",
           "type": "boolean"
@@ -108,6 +113,11 @@
           ],
           "description": "Defines the scope for when words will be added to the dictionary. Scope values: `user`, `workspace`, `folder`"
         },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed) Default is S C is the slowest to load due to the need to split each line based upon code splitting rules."
+        },
         "useCompounds": {
           "description": "Use Compounds",
           "type": "boolean"
@@ -143,6 +153,11 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs"
         },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed) Default is S C is the slowest to load due to the need to split each line based upon code splitting rules."
+        },
         "useCompounds": {
           "description": "Use Compounds",
           "type": "boolean"
@@ -153,6 +168,15 @@
         "path"
       ],
       "type": "object"
+    },
+    "DictionaryFileTypes": {
+      "enum": [
+        "S",
+        "W",
+        "C",
+        "T"
+      ],
+      "type": "string"
     },
     "DictionaryId": {
       "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`",
