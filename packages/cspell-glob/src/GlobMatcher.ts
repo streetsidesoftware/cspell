@@ -53,6 +53,13 @@ interface NormalizedGlobMatchOptions {
      * @default: require('path')
      */
     nodePath: PathInterface;
+
+    /**
+     * Disable brace matching, so that `{a,b}` and `{1..3}` would be treated as literal characters.
+     *
+     * @default false
+     */
+    nobrace?: boolean; // cspell:ignore nobrace
 }
 
 export class GlobMatcher {
@@ -90,20 +97,21 @@ export class GlobMatcher {
     ) {
         _nodePath = _nodePath ?? Path;
 
-        const options =
-            typeof rootOrOptions === 'string' ? { root: rootOrOptions, nodePath: _nodePath } : rootOrOptions ?? {};
+        const options = typeof rootOrOptions === 'string' ? { root: rootOrOptions } : rootOrOptions ?? {};
         const { mode = 'exclude' } = options;
         const isExcludeMode = mode !== 'include';
+        _nodePath = options.nodePath ?? _nodePath;
 
         const {
             root = _nodePath.resolve(),
             dot = isExcludeMode,
             nodePath = _nodePath,
             nested = isExcludeMode,
+            nobrace,
         } = options;
 
         const normalizedRoot = nodePath.resolve(nodePath.normalize(root));
-        this.options = { root: normalizedRoot, dot, nodePath, nested, mode };
+        this.options = { root: normalizedRoot, dot, nodePath, nested, mode, nobrace };
 
         patterns = Array.isArray(patterns)
             ? patterns
@@ -159,7 +167,8 @@ interface GlobRule {
  * @returns a function given a filename returns true if it matches.
  */
 function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlobMatchOptions): GlobMatchFn {
-    const path = options.nodePath;
+    const { nodePath: path, dot, nobrace } = options;
+    const makeReOptions = { dot, nobrace };
     const rules: GlobRule[] = patterns
         .map((pattern, index) => ({ pattern, index }))
         .filter((r) => !!r.pattern.glob)
@@ -168,7 +177,7 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             const matchNeg = pattern.glob.match(/^!/);
             const glob = pattern.glob.replace(/^!/, '');
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
-            const reg = mm.makeRe(glob, { dot: options.dot });
+            const reg = mm.makeRe(glob, makeReOptions);
             const fn = (filename: string) => {
                 const match = filename.match(reg);
                 return !!match;

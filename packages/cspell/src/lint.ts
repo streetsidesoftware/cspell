@@ -268,7 +268,10 @@ Options:
 
     function filterFiles(files: string[], globMatcher: GlobMatcher): string[] {
         const patterns = globMatcher.patterns;
-        const excludeInfo = patterns.map(extractGlobSource).map(({ glob, source }) => `Glob: ${glob} from ${source}`);
+        const excludeInfo = patterns
+            .map(extractGlobSource)
+            .map(({ glob, source }) => `Glob: ${glob} from ${source}`)
+            .filter(util.uniqueFn());
         reporter.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
         const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, globMatcher));
         return result;
