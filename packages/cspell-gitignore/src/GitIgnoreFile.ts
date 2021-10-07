@@ -20,7 +20,8 @@ export class GitIgnoreFile {
 
     static async loadGitignore(gitignore: string): Promise<GitIgnoreFile> {
         const content = await fs.readFile(gitignore, 'utf8');
-        const globMatcher = new GlobMatcher(content, path.dirname(gitignore));
+        const options = { root: path.dirname(gitignore) };
+        const globMatcher = new GlobMatcher(content, options);
         return new GitIgnoreFile(globMatcher, gitignore);
     }
 }

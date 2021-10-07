@@ -1,3 +1,4 @@
+import * as Path from 'path';
 import {
     GlobPattern,
     GlobPatternNormalized,
@@ -5,7 +6,6 @@ import {
     GlobPatternWithRoot,
     PathInterface,
 } from './GlobMatcherTypes';
-import * as Path from 'path';
 
 const { posix } = Path;
 const relRegExp = /^\.[\\/]/;
@@ -51,21 +51,6 @@ export function doesRootContainPath(root: string, child: string, path: PathInter
     return !rel || (rel !== child && !rel.startsWith('..') && !path.isAbsolute(rel));
 }
 
-type MutationsToSupportGitIgnore = [RegExp, string];
-
-const mutationsNestedOnly: MutationsToSupportGitIgnore[] = [
-    [/^[/]([^/]*)$/, '{$1,$1/**}'], // Only a leading slash will match root files and directories.
-    [/^[^/#][^/]*$/, '**/{$&,$&/**}'], // no slashes will match files names or folders
-    [/^[^/#][^/]*\/$/, '**/$&**/*'], // ending slash, should match any nested directory
-];
-
-const mutationsGeneral: MutationsToSupportGitIgnore[] = [
-    [/^\//, ''], // remove leading slash to match from the root
-    [/\/$/, '$&**/*'], // if it ends in a slash, make sure matches the folder
-];
-
-const mutationsNested = mutationsNestedOnly.concat(mutationsGeneral);
-
 export function isGlobPatternWithOptionalRoot(g: GlobPattern): g is GlobPatternWithOptionalRoot {
     return typeof g !== 'string' && typeof g.glob === 'string';
 }
@@ -74,13 +59,48 @@ export function isGlobPatternWithRoot(g: GlobPatternWithRoot | GlobPatternWithOp
     return !!g.root;
 }
 
-function normalizePattern(pattern: string, nested: boolean): string {
+export function isGlobPatternNormalized(g: GlobPattern | GlobPatternNormalized): g is GlobPatternNormalized {
+    if (!isGlobPatternWithOptionalRoot(g)) return false;
+    if (!isGlobPatternWithRoot(g)) return false;
+
+    const gr = <GlobPatternNormalized>g;
+    return 'rawGlob' in gr && 'rawRoot' in gr && typeof gr.rawGlob === 'string';
+}
+
+function normalizePattern(pattern: string, nested: boolean): string[] {
     pattern = pattern.replace(/^(!!)+/, '');
     const isNeg = pattern.startsWith('!');
+    const prefix = isNeg ? '!' : '';
     pattern = isNeg ? pattern.slice(1) : pattern;
-    const mutations = nested ? mutationsNested : mutationsGeneral;
-    pattern = mutations.reduce((p, [regex, replace]) => p.replace(regex, replace), pattern);
-    return isNeg ? '!' + pattern : pattern;
+    const patterns = nested ? normalizePatternNested(pattern) : normalizePatternGeneral(pattern);
+    return patterns.map((p) => prefix + p);
+}
+
+function normalizePatternNested(pattern: string): string[] {
+    // no slashes will match files names or folders
+    if (!pattern.includes('/')) {
+        if (pattern === '**') return ['**'];
+        return ['**/' + pattern, '**/' + pattern + '/**'];
+    }
+    const hasLeadingSlash = pattern.startsWith('/');
+    pattern = hasLeadingSlash ? pattern.slice(1) : pattern;
+
+    if (pattern.endsWith('/')) {
+        // legacy behavior, if it only has a trailing slash, allow matching against a nested directory.
+        return hasLeadingSlash || pattern.slice(0, -1).includes('/') ? [pattern + '**/*'] : ['**/' + pattern + '**/*'];
+    }
+
+    if (pattern.endsWith('**')) {
+        return [pattern];
+    }
+
+    return [pattern, pattern + '/**'];
+}
+
+function normalizePatternGeneral(pattern: string): [string] {
+    pattern = pattern.startsWith('/') ? pattern.slice(1) : pattern;
+    pattern = pattern.endsWith('/') ? pattern + '**/*' : pattern;
+    return [pattern];
 }
 
 export interface NormalizeOptions {
@@ -95,28 +115,37 @@ export interface NormalizeOptions {
  * @param options - Normalization options.
  */
 export function normalizeGlobPatterns(patterns: GlobPattern[], options: NormalizeOptions): GlobPatternNormalized[] {
-    return patterns.map((g) => normalizeGlobPatternWithRoot(g, options));
+    function* normalize() {
+        for (const glob of patterns) {
+            if (isGlobPatternNormalized(glob)) {
+                yield glob;
+                continue;
+            }
+            yield* normalizeGlobPatternWithRoot(glob, options);
+        }
+    }
+
+    return [...normalize()];
 }
 
-function normalizeGlobPatternWithRoot(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized {
+function normalizeGlobPatternWithRoot(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized[] {
     const { root, nodePath: path, nested } = options;
 
-    g = !isGlobPatternWithOptionalRoot(g)
-        ? {
-              glob: g.trim(),
-              root,
-          }
-        : g;
+    g = !isGlobPatternWithOptionalRoot(g) ? { glob: g } : g;
 
-    const gr = isGlobPatternWithRoot(g) ? { ...g } : { ...g, root };
+    const gr = { ...g, root: g.root ?? root };
+
+    const rawRoot = gr.root;
+    const rawGlob = g.glob;
+
+    gr.glob = gr.glob.trim(); // trimGlob(g.glob);
     if (gr.root.startsWith('${cwd}')) {
         gr.root = path.join(path.resolve(), gr.root.replace('${cwd}', ''));
     }
     gr.root = path.resolve(root, path.normalize(gr.root));
-    gr.glob = normalizePattern(gr.glob, nested);
 
-    const gn: GlobPatternNormalized = { ...gr, rawGlob: g.glob, rawRoot: g.root };
-    return gn;
+    const globs = normalizePattern(gr.glob, nested);
+    return globs.map((glob) => ({ ...gr, glob, rawGlob, rawRoot }));
 }
 
 /**
@@ -179,10 +208,6 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
     return rebasedGlob ? { ...glob, glob: prefix + rebasedGlob, root } : glob;
 }
 
-export function isGlobPatternNormalized(p: GlobPatternWithRoot | GlobPatternNormalized): p is GlobPatternNormalized {
-    return (<GlobPatternNormalized>p).rawGlob !== undefined;
-}
-
 /**
  * Rebase a glob string to a new prefix
  * @param glob - glob string
@@ -214,6 +239,58 @@ function rebaseGlob(glob: string, rebaseTo: string): string | undefined {
     return undefined;
 }
 
+/**
+ * Trims any trailing spaces, tabs, line-feeds, new-lines, and comments
+ * @param glob - glob string
+ * @returns trimmed glob
+ */
+function trimGlob(glob: string): string {
+    glob = glob.replace(/(?<!\\)#.*/g, '');
+    glob = trimGlobLeft(glob);
+    glob = trimGlobRight(glob);
+    return glob;
+}
+
+const spaces: Record<string, true> = {
+    ' ': true,
+    '\t': true,
+    '\n': true,
+    '\r': true,
+};
+
+/**
+ * Trim any trailing spaces, tabs, line-feeds, or new-lines
+ * Handles a trailing \<space>
+ * @param glob - glob string
+ * @returns glob string with space to the right removed.
+ */
+function trimGlobRight(glob: string): string {
+    const lenMin1 = glob.length - 1;
+    let i = lenMin1;
+    while (i >= 0 && glob[i] in spaces) {
+        --i;
+    }
+    if (glob[i] === '\\' && i < lenMin1) {
+        ++i;
+    }
+    ++i;
+    return i ? glob.slice(0, i) : '';
+}
+
+/**
+ * Trim any leading spaces, tabs, line-feeds, or new-lines
+ * @param glob - any string
+ * @returns string with leading spaces removed.
+ */
+function trimGlobLeft(glob: string): string {
+    let i = 0;
+    while (i < glob.length && glob[i] in spaces) {
+        ++i;
+    }
+    return glob.slice(i);
+}
+
 export const __testing__ = {
     rebaseGlob,
+    trimGlob,
 };

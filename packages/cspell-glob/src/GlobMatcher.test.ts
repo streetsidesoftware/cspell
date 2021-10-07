@@ -1,4 +1,5 @@
-import { GlobMatcher, GlobMatchOptions } from './GlobMatcher';
+import * as path from 'path';
+import { GlobMatcher, GlobMatchOptions, MatcherMode } from './GlobMatcher';
 import {
     GlobMatch,
     GlobPattern,
@@ -7,7 +8,6 @@ import {
     PathInterface,
 } from './GlobMatcherTypes';
 
-import * as path from 'path';
 import mm = require('micromatch');
 
 const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
@@ -22,6 +22,11 @@ const pathPosix: PathInterface = {
     ...path.posix,
     resolve: (...paths) => path.posix.resolve(defaultCwdPosix, ...paths),
 };
+
+const pathNames = new Map([
+    [pathWin32, 'Win32'],
+    [pathPosix, 'Posix'],
+]);
 
 describe('Validate assumptions', () => {
     test('path relative', () => {
@@ -46,41 +51,35 @@ describe('Validate assumptions', () => {
 });
 
 describe('Validate Micromatch assumptions', () => {
-    interface MMTest {
-        g: string; // glob
-        f: string; // filename
-        e: boolean; // expected to match
-    }
-    const testsMicroMatch: MMTest[] = [
-        { g: '*.json', f: 'settings.json', e: true },
-        { g: '*.json', f: '/settings.json', e: false },
-        { g: '*.json', f: 'src/settings.json', e: false },
-        { g: '*.json', f: '/src/settings.json', e: false },
-        { g: '**/*.json', f: 'settings.json', e: true },
-        { g: '**/*.json', f: '/settings.json', e: true },
-        { g: '**/*.json', f: 'src/settings.json', e: true },
-        { g: '**/*.json', f: '/src/settings.json', e: true },
-        { g: 'src/*.json', f: 'src/settings.json', e: true },
-        { g: '**/{*.json,*.json/**}', f: 'settings.json', e: true },
-        { g: '**/{*.json,*.json/**}', f: '/settings.json', e: true },
-        { g: '**/{*.json,*.json/**}', f: 'src/settings.json', e: true },
-        { g: '**/{*.json,*.json/**}', f: 'src/settings.json/config', e: true },
-        { g: '**/{*.json,*.json/**}', f: 'settings.json/config', e: true },
-        { g: 'src/*.{test,spec}.ts', f: 'src/code.test.ts', e: true },
-        { g: 'src/*.(test|spec).ts', f: 'src/code.test.ts', e: true },
-        { g: 'src/*.(test|spec).ts', f: 'src/code.spec.ts', e: true },
-        { g: 'src/*.(test|spec).ts', f: 'src/deep.code.test.ts', e: true },
-        { g: 'src/*.(test|spec).ts', f: 'src/test.ts', e: false },
-    ];
-
-    testsMicroMatch.forEach(({ g: glob, f: filename, e: expectedToMatch }) => {
-        test(`Test Micromatch glob: '${glob}', filename: '${filename}' expected: ${
-            expectedToMatch ? 'true' : 'false'
-        }`, () => {
+    test.each`
+        glob                       | filename                      | expectedToMatch
+        ${'*.json'}                | ${'settings.json'}            | ${true}
+        ${'*.json'}                | ${'/settings.json'}           | ${false}
+        ${'*.json'}                | ${'src/settings.json'}        | ${false}
+        ${'*.json'}                | ${'/src/settings.json'}       | ${false}
+        ${'**/*.json'}             | ${'settings.json'}            | ${true}
+        ${'**/*.json'}             | ${'/settings.json'}           | ${true}
+        ${'**/*.json'}             | ${'src/settings.json'}        | ${true}
+        ${'**/*.json'}             | ${'/src/settings.json'}       | ${true}
+        ${'**/temp'}               | ${'/src/temp/data.json'}      | ${false}
+        ${'src/*.json'}            | ${'src/settings.json'}        | ${true}
+        ${'**/{*.json,*.json/**}'} | ${'settings.json'}            | ${true}
+        ${'**/{*.json,*.json/**}'} | ${'/settings.json'}           | ${true}
+        ${'**/{*.json,*.json/**}'} | ${'src/settings.json'}        | ${true}
+        ${'**/{*.json,*.json/**}'} | ${'src/settings.json/config'} | ${true}
+        ${'**/{*.json,*.json/**}'} | ${'settings.json/config'}     | ${true}
+        ${'src/*.{test,spec}.ts'}  | ${'src/code.test.ts'}         | ${true}
+        ${'src/*.(test|spec).ts'}  | ${'src/code.test.ts'}         | ${true}
+        ${'src/*.(test|spec).ts'}  | ${'src/code.spec.ts'}         | ${true}
+        ${'src/*.(test|spec).ts'}  | ${'src/deep.code.test.ts'}    | ${true}
+        ${'src/*.(test|spec).ts'}  | ${'src/test.ts'}              | ${false}
+    `(
+        `Test Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`,
+        ({ glob, filename, expectedToMatch }) => {
             const reg1 = mm.makeRe(glob);
             expect(reg1.test(filename)).toEqual(expectedToMatch);
-        });
-    });
+        }
+    );
 });
 
 function resolveFilename(pathInstance: PathInterface, filename: string): string;
@@ -100,14 +99,20 @@ function resolveFilename(pathInstance: PathInterface, filename: string | undefin
 
 [pathPosix, pathWin32].forEach((pathInstance) => {
     describe(`Validate GlobMatcher ${pathInstance === pathWin32 ? 'Windows' : 'Posix'}`, () => {
-        tests().forEach(([patterns, root, filename, expected, description], index) => {
-            root = resolveFilename(pathInstance, root);
-            filename = resolveFilename(pathInstance, filename);
+        tests().forEach((curTest, index) => {
+            const [patterns, _root, _filename, expected, description] = curTest;
+            const root = resolveFilename(pathInstance, _root);
+            const filename = resolveFilename(pathInstance, _filename);
             test(`test ${index} ${description}, pattern: [${patterns}] filename: "${filename}", root: "${root}", expected: ${
                 expected ? 'T' : 'F'
             }`, () => {
                 const matcher = new GlobMatcher(patterns, root, pathInstance);
-                expect(matcher.match(filename)).toEqual(expected);
+                try {
+                    expect(matcher.match(filename)).toEqual(expected);
+                } catch (e) {
+                    console.error('Failed on %i %o', index, curTest);
+                    throw e;
+                }
             });
         });
     });
@@ -124,9 +129,12 @@ describe('Tests .gitignore file contents', () => {
         *.js
         !**/settings.js
         !!*.txt
+        # *.py,cover
     `;
     const root = '/Users/code/project/cspell/';
-    const matcher = new GlobMatcher(pattern, root);
+    // cspell:ignore nobrace
+    // const matcher = new GlobMatcher(pattern, root);
+    const matcher = new GlobMatcher(pattern, { root, nobrace: false });
 
     interface TestCase {
         filename: string;
@@ -135,25 +143,77 @@ describe('Tests .gitignore file contents', () => {
     }
 
     test.each`
-        filename                                                | expected                                                                      | comment
-        ${root + 'src/code.ts'}                                 | ${false}                                                                      | ${'Ensure that .ts files are allowed'}
-        ${root + 'dist/code.ts'}                                | ${true}                                                                       | ${'Ensure that `dest` .ts files are not allowed'}
-        ${root + 'src/code.js'}                                 | ${true}                                                                       | ${'Ensure that no .js files are allowed'}
-        ${root + 'src/code.test.ts'}                            | ${true}                                                                       | ${'Ensure that test.ts files are not allowed'}
-        ${root + 'src/code.spec.ts'}                            | ${true}                                                                       | ${'Ensure that spec.ts files are not allowed'}
-        ${'/Users/guest/code/' + 'src/code.test.ts'}            | ${false}                                                                      | ${'Ensure that test files in a different root are allowed'}
-        ${'/Users/guest/code/' + 'src/code.js'}                 | ${false}                                                                      | ${'Ensure *.js files are allowed under a different root.'}
-        ${root + 'node_modules/cspell/code.ts'}                 | ${true}                                                                       | ${'Ensure that node modules are not allowed in the current root.'}
-        ${root + 'nested/node_modules/cspell/code.ts'}          | ${false}                                                                      | ${'Ensure that nested node modules are allowed in the current root.'}
-        ${'/Users/guest/code/' + 'node_modules/cspell/code.ts'} | ${false}                                                                      | ${'Ensure that node modules in a different root are allowed'}
-        ${root + 'settings.js'}                                 | ${false}                                                                      | ${'Ensure that settings.js is kept'}
-        ${root + 'dist/settings.js'}                            | ${false}                                                                      | ${'Ensure that settings.js is kept'}
-        ${root + 'node_modules/settings.js'}                    | ${false}                                                                      | ${'Ensure that settings.js is kept'}
-        ${root + 'src.txt'}                                     | ${true}                                                                       | ${'Ensure that double negative means block'}
-        ${root + 'src/code.ts'}                                 | ${{ matched: false }}                                                         | ${'Ensure that .ts files are allowed'}
-        ${root + 'dist/code.ts'}                                | ${{ matched: true, pattern: p('**/{dist,dist/**}'), isNeg: false }}           | ${'Ensure that `dest` .ts files are not allowed'}
-        ${root + 'src/code.js'}                                 | ${{ matched: true, pattern: p('**/{*.js,*.js/**}'), index: 7, isNeg: false }} | ${'Ensure that no .js files are allowed'}
-        ${root + 'dist/settings.js'}                            | ${{ matched: false, pattern: p('!**/settings.js'), index: 8, isNeg: true }}   | ${'Ensure that settings.js is kept'}
+        filename                                                | expected                                                          | comment
+        ${root + 'src/code.py'}                                 | ${false}                                                          | ${'Ensure that .py files are allowed'}
+        ${root + 'src/code.ts'}                                 | ${false}                                                          | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${true}                                                           | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${true}                                                           | ${'Ensure that no .js files are allowed'}
+        ${root + 'src/code.test.ts'}                            | ${true}                                                           | ${'Ensure that test.ts files are not allowed'}
+        ${root + 'src/code.spec.ts'}                            | ${true}                                                           | ${'Ensure that spec.ts files are not allowed'}
+        ${'/Users/guest/code/' + 'src/code.test.ts'}            | ${false}                                                          | ${'Ensure that test files in a different root are allowed'}
+        ${'/Users/guest/code/' + 'src/code.js'}                 | ${false}                                                          | ${'Ensure *.js files are allowed under a different root.'}
+        ${root + 'node_modules/cspell/code.ts'}                 | ${true}                                                           | ${'Ensure that node modules are not allowed in the current root.'}
+        ${root + 'nested/node_modules/cspell/code.ts'}          | ${false}                                                          | ${'Ensure that nested node modules are allowed in the current root.'}
+        ${'/Users/guest/code/' + 'node_modules/cspell/code.ts'} | ${false}                                                          | ${'Ensure that node modules in a different root are allowed'}
+        ${root + 'settings.js'}                                 | ${false}                                                          | ${'Ensure that settings.js is kept'}
+        ${root + 'dist/settings.js'}                            | ${false}                                                          | ${'Ensure that settings.js is kept'}
+        ${root + 'node_modules/settings.js'}                    | ${false}                                                          | ${'Ensure that settings.js is kept'}
+        ${root + 'src.txt'}                                     | ${true}                                                           | ${'Ensure that double negative means block'}
+        ${root + 'src/code.ts'}                                 | ${{ matched: false }}                                             | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${{ matched: true, pattern: p('**/dist/**'), isNeg: false }}      | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${{ matched: true, pattern: p('**/*.js'), isNeg: false }}         | ${'Ensure that no .js files are allowed'}
+        ${root + 'dist/settings.js'}                            | ${{ matched: false, pattern: p('!**/settings.js'), isNeg: true }} | ${'Ensure that settings.js is kept'}
+    `('match && matchEx "$comment" File: "$filename" $expected', ({ filename, expected }: TestCase) => {
+        expected = typeof expected === 'boolean' ? { matched: expected } : expected;
+        expect(matcher.match(filename)).toBe(expected.matched);
+        expect(matcher.matchEx(filename)).toEqual(expect.objectContaining(expected));
+    });
+});
+
+describe('Tests .gitignore like file contents', () => {
+    const pattern = `
+        # This is a comment
+
+        # ignore spec and test files.
+        src/*.(test|spec).ts
+        node_modules/**
+        dist
+        *.js
+        !**/settings.js
+        !!*.txt
+        *.py,cover
+    `;
+    const root = '/Users/code/project/cspell/';
+    // cspell:ignore nobrace
+    const matcher = new GlobMatcher(pattern, { root, nobrace: undefined });
+
+    interface TestCase {
+        filename: string;
+        expected: boolean | Partial<GlobMatch>;
+        comment: string;
+    }
+
+    test.each`
+        filename                                                | expected                                                          | comment
+        ${root + 'src/code.py'}                                 | ${false}                                                          | ${'Broken match - .py files should be allowed'}
+        ${root + 'src/code.ts'}                                 | ${false}                                                          | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${true}                                                           | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${true}                                                           | ${'Ensure that no .js files are allowed'}
+        ${root + 'src/code.test.ts'}                            | ${true}                                                           | ${'Ensure that test.ts files are not allowed'}
+        ${root + 'src/code.spec.ts'}                            | ${true}                                                           | ${'Ensure that spec.ts files are not allowed'}
+        ${'/Users/guest/code/' + 'src/code.test.ts'}            | ${false}                                                          | ${'Ensure that test files in a different root are allowed'}
+        ${'/Users/guest/code/' + 'src/code.js'}                 | ${false}                                                          | ${'Ensure *.js files are allowed under a different root.'}
+        ${root + 'node_modules/cspell/code.ts'}                 | ${true}                                                           | ${'Ensure that node modules are not allowed in the current root.'}
+        ${root + 'nested/node_modules/cspell/code.ts'}          | ${false}                                                          | ${'Ensure that nested node modules are allowed in the current root.'}
+        ${'/Users/guest/code/' + 'node_modules/cspell/code.ts'} | ${false}                                                          | ${'Ensure that node modules in a different root are allowed'}
+        ${root + 'settings.js'}                                 | ${false}                                                          | ${'Ensure that settings.js is kept'}
+        ${root + 'dist/settings.js'}                            | ${false}                                                          | ${'Ensure that settings.js is kept'}
+        ${root + 'node_modules/settings.js'}                    | ${false}                                                          | ${'Ensure that settings.js is kept'}
+        ${root + 'src.txt'}                                     | ${true}                                                           | ${'Ensure that double negative means block'}
+        ${root + 'src/code.ts'}                                 | ${{ matched: false }}                                             | ${'Ensure that .ts files are allowed'}
+        ${root + 'dist/code.ts'}                                | ${{ matched: true, pattern: p('**/dist/**'), isNeg: false }}      | ${'Ensure that `dest` .ts files are not allowed'}
+        ${root + 'src/code.js'}                                 | ${{ matched: true, pattern: p('**/*.js'), isNeg: false }}         | ${'Ensure that no .js files are allowed'}
+        ${root + 'dist/settings.js'}                            | ${{ matched: false, pattern: p('!**/settings.js'), isNeg: true }} | ${'Ensure that settings.js is kept'}
     `('match && matchEx "$comment" File: "$filename" $expected', ({ filename, expected }: TestCase) => {
         expected = typeof expected === 'boolean' ? { matched: expected } : expected;
         expect(matcher.match(filename)).toBe(expected.matched);
@@ -173,7 +233,7 @@ describe('Validate Options', () => {
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: true }}
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: false }}      | ${{ matched: false }}
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
-        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${{ matched: true, pattern: p('**/{*.yaml,*.yaml/**}') }}
+        ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${{ matched: true, pattern: p('**/*.yaml') }}
         ${'*.yaml'}                | ${'.github/workflows/test.yaml'}         | ${{ dot: true }}       | ${true}
         ${'**/*.yaml'}             | ${'.github/workflows/test.yaml'}         | ${{ mode: 'exclude' }} | ${{ matched: true }}
         ${'**/*.yaml'}             | ${'.github/workflows/test.yaml'}         | ${{ mode: 'include' }} | ${{ matched: false }}
@@ -201,11 +261,13 @@ describe('Validate Options', () => {
         ${'/package/'}             | ${'repo/package/src/test.yaml'}          | ${{}}                  | ${false}
         ${'/package/'}             | ${'repo/package/src/test.yaml'}          | ${{ mode: 'include' }} | ${false}
         ${'src'}                   | ${'package/src/test.yaml'}               | ${{ mode: 'include' }} | ${false}
-        ${'*.yaml|!test.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, pattern: p('!**/{test.yaml,test.yaml/**}'), isNeg: true }}
-        ${'*.yaml|!/test.yaml'}    | ${'test.yaml'}                           | ${{}}                  | ${{ matched: false, pattern: p('!{test.yaml,test.yaml/**}'), isNeg: true }}
-        ${'*.yaml|!/node_modules'} | ${'node_modules/test.yaml'}              | ${{}}                  | ${{ matched: false, pattern: p('!{node_modules,node_modules/**}'), isNeg: true }}
+        ${'*.yaml|!test.yaml'}     | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, pattern: p('!**/test.yaml'), isNeg: true }}
+        ${'*.yaml|!/test.yaml'}    | ${'test.yaml'}                           | ${{}}                  | ${{ matched: false, pattern: p('!test.yaml'), isNeg: true }}
+        ${'*.yaml|!/node_modules'} | ${'node_modules/test.yaml'}              | ${{}}                  | ${{ matched: false, pattern: p('!node_modules/**'), isNeg: true }}
         ${'*.{!yaml}'}             | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${false}
         ${'test.*|!*.{yaml,yml}'}  | ${'.github/workflows/test.yaml'}         | ${{}}                  | ${{ matched: false, isNeg: true }}
+        ${'i18/nl_NL'}             | ${'i18/nl_NL/file.txt'}                  | ${{ mode: 'exclude' }} | ${{ matched: true }}
+        ${'i18/nl_NL'}             | ${'code/i18/nl_NL/file.txt'}             | ${{ mode: 'exclude' }} | ${{ matched: false }}
     `('Test options: $pattern, $file, $options', ({ pattern, file, options, expected }: TestCase) => {
         const root = '/Users/code/project/cspell/';
         const filename = path.join(root, file);
@@ -222,22 +284,107 @@ describe('Validate Options', () => {
 });
 
 describe('Validate GlobMatcher', () => {
-    function resolvePattern(p: GlobPattern, path: PathInterface): GlobPattern;
-    function resolvePattern(p: GlobPattern[], path: PathInterface): GlobPattern[];
-    function resolvePattern(p: GlobPattern | GlobPattern[], path: PathInterface): GlobPattern | GlobPattern[];
-    function resolvePattern(p: GlobPattern | GlobPattern[], path: PathInterface): GlobPattern | GlobPattern[] {
-        if (Array.isArray(p)) {
-            return p.map((g) => resolvePattern(g, path));
-        }
-        if (typeof p === 'string' || p.root === undefined) {
-            return p;
-        }
+    function g(glob: string, root?: string): GlobPatternWithOptionalRoot {
         return {
-            ...p,
-            root: path.resolve(p.root),
+            glob,
+            root,
         };
     }
+    interface TestCaseMatcher {
+        patterns: GlobPattern | GlobPattern[];
+        root: string | undefined;
+        filename: string;
+        mode: MatcherMode;
+        expected: boolean;
+        description: string;
+    }
 
+    function runTestOn(pathInstance: PathInterface) {
+        const os = pathNames.get(pathInstance);
+        test.each`
+            patterns                     | root         | filename                                    | mode         | expected | description
+            ${['*.json']}                | ${undefined} | ${'./settings.json'}                        | ${'exclude'} | ${true}  | ${'*.json'}
+            ${['*.json']}                | ${undefined} | ${'settings.json'}                          | ${'exclude'} | ${true}  | ${'*.json'}
+            ${['*.json']}                | ${undefined} | ${'${cwd}/settings.json'}                   | ${'exclude'} | ${true}  | ${'*.json'}
+            ${'*.json'}                  | ${undefined} | ${'${cwd}/settings.json'}                   | ${'exclude'} | ${true}  | ${'*.json'}
+            ${'#.gitignore\n *.json'}    | ${undefined} | ${'${cwd}/settings.json'}                   | ${'exclude'} | ${true}  | ${'*.json'}
+            ${['middle']}                | ${''}        | ${'${cwd}/packages/middle/settings.json'}   | ${'exclude'} | ${true}  | ${'match middle of path'}
+            ${['.vscode']}               | ${undefined} | ${'.vscode/settings.json'}                  | ${'exclude'} | ${true}  | ${'.vscode'}
+            ${['/*.json']}               | ${'/'}       | ${'/settings.json'}                         | ${'exclude'} | ${true}  | ${'Matches root level files, /*.json'}
+            ${['/*.json']}               | ${undefined} | ${'/src/settings.json'}                     | ${'exclude'} | ${false} | ${'Matches pattern but not cwd /*.json'}
+            ${['*.js']}                  | ${undefined} | ${'${cwd}/src/settings.js'}                 | ${'exclude'} | ${true}  | ${'// Matches nested files, *.js'}
+            ${'*.js'}                    | ${undefined} | ${'${cwd}/src/settings.js'}                 | ${'exclude'} | ${true}  | ${'// Matches nested files, *.js'}
+            ${g('*.js')}                 | ${'.'}       | ${'${cwd}/src/settings.js'}                 | ${'exclude'} | ${true}  | ${'// Matches nested files, *.js'}
+            ${g('*.js', 'src')}          | ${'.'}       | ${'${cwd}/src/settings.js'}                 | ${'exclude'} | ${true}  | ${'// Matches nested files, *.js'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${'exclude'} | ${true}  | ${'// Matches nested files, *.js'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/c/src/settings.js'}                    | ${'exclude'} | ${true}  | ${'// Matches even if NOT under root.'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'c/src/settings.js'}                      | ${'exclude'} | ${false} | ${'// Must match glob root'}
+            ${['.vscode/']}              | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${'exclude'} | ${true}  | ${'.vscode/'}
+            ${['.vscode/']}              | ${undefined} | ${'${cwd}/.vscode'}                         | ${'exclude'} | ${false} | ${'.vscode/'}
+            ${['/.vscode/']}             | ${undefined} | ${'${cwd}/.vscode'}                         | ${'exclude'} | ${false} | ${'should not match file'}
+            ${['/.vscode/']}             | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${'exclude'} | ${true}  | ${'should match root'}
+            ${['/.vscode/']}             | ${undefined} | ${'${cwd}/package/.vscode'}                 | ${'exclude'} | ${false} | ${'should only match root'}
+            ${['.vscode/**']}            | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${'exclude'} | ${true}  | ${'should match root .vscode/**'}
+            ${['.vscode/']}              | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'exclude'} | ${true}  | ${'should match nested .vscode/'}
+            ${['**/.vscode/']}           | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'exclude'} | ${true}  | ${'should match nested .vscode/'}
+            ${['**/.vscode/']}           | ${undefined} | ${'${cwd}/src/.vscode'}                     | ${'exclude'} | ${false} | ${'should match nested .vscode'}
+            ${['**/.vscode']}            | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'exclude'} | ${true}  | ${'should match nested **/.vscode'}
+            ${['**/.vscode/**']}         | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'exclude'} | ${true}  | ${'should match nested **/.vscode'}
+            ${['/User/user/Library/**']} | ${undefined} | ${'/src/User/user/Library/settings.json'}   | ${'exclude'} | ${false} | ${'No match'}
+            ${['/User/user/Library/**']} | ${undefined} | ${'${cwd}/User/user/Library/settings.json'} | ${'exclude'} | ${true}  | ${'Match cwd root'}
+            ${['/User/user/Library/**']} | ${'/'}       | ${'/User/user/Library/settings.json'}       | ${'exclude'} | ${true}  | ${'Match system root'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${'exclude'} | ${true}  | ${'// Matches nested files, *.js'}
+            ${['*.json']}                | ${undefined} | ${'./settings.json'}                        | ${'include'} | ${true}  | ${'*.json'}
+            ${['*.json']}                | ${undefined} | ${'settings.json'}                          | ${'include'} | ${true}  | ${'*.json'}
+            ${['*.json']}                | ${undefined} | ${'${cwd}/settings.json'}                   | ${'include'} | ${true}  | ${'*.json'}
+            ${'*.json'}                  | ${undefined} | ${'${cwd}/settings.json'}                   | ${'include'} | ${true}  | ${'*.json'}
+            ${'#.gitignore\n *.json'}    | ${undefined} | ${'${cwd}/settings.json'}                   | ${'include'} | ${true}  | ${'*.json'}
+            ${['middle']}                | ${''}        | ${'${cwd}/packages/middle/settings.json'}   | ${'include'} | ${false} | ${'match middle of path'}
+            ${['.vscode']}               | ${undefined} | ${'.vscode/settings.json'}                  | ${'include'} | ${false} | ${'.vscode'}
+            ${['/*.json']}               | ${'/'}       | ${'/settings.json'}                         | ${'include'} | ${true}  | ${'Matches root level files, /*.json'}
+            ${['/*.json']}               | ${undefined} | ${'/src/settings.json'}                     | ${'include'} | ${false} | ${'Matches pattern but not cwd /*.json'}
+            ${['*.js']}                  | ${undefined} | ${'${cwd}/src/settings.js'}                 | ${'include'} | ${false} | ${'// Does NOT nested files, *.js'}
+            ${'*.js'}                    | ${undefined} | ${'${cwd}/src/settings.js'}                 | ${'include'} | ${false} | ${'// Does NOT match nested files, *.js'}
+            ${g('*.js')}                 | ${'.'}       | ${'${cwd}/src/settings.js'}                 | ${'include'} | ${false} | ${'// Matches nested files, *.js'}
+            ${g('*.js', 'src')}          | ${'.'}       | ${'${cwd}/src/settings.js'}                 | ${'include'} | ${true}  | ${'// Matches nested files, *.js'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${'include'} | ${false} | ${'// Does NOT match nested files, *.js'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/c/src/settings.js'}                    | ${'include'} | ${false} | ${'// Does NOT match if NOT under root.'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'c/src/settings.js'}                      | ${'include'} | ${false} | ${'// Must match glob root'}
+            ${['.vscode/']}              | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${'include'} | ${true}  | ${'.vscode/'}
+            ${['.vscode/']}              | ${undefined} | ${'${cwd}/.vscode'}                         | ${'include'} | ${false} | ${'.vscode/'}
+            ${['/.vscode/']}             | ${undefined} | ${'${cwd}/.vscode'}                         | ${'include'} | ${false} | ${'should not match file'}
+            ${['/.vscode/']}             | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${'include'} | ${true}  | ${'should match root'}
+            ${['/.vscode/']}             | ${undefined} | ${'${cwd}/package/.vscode'}                 | ${'include'} | ${false} | ${'should only match root'}
+            ${['.vscode/**']}            | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${'include'} | ${true}  | ${'should match root .vscode/**'}
+            ${['.vscode/']}              | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'include'} | ${false} | ${'should not match nested .vscode/'}
+            ${['**/.vscode/']}           | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'include'} | ${true}  | ${'should match nested .vscode/'}
+            ${['**/.vscode/']}           | ${undefined} | ${'${cwd}/src/.vscode'}                     | ${'include'} | ${false} | ${'should match nested .vscode'}
+            ${['**/.vscode']}            | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'include'} | ${false} | ${'should not match nested **/.vscode'}
+            ${['**/.vscode/**']}         | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${'include'} | ${true}  | ${'should match nested **/.vscode'}
+            ${['/User/user/Library/**']} | ${undefined} | ${'/src/User/user/Library/settings.json'}   | ${'include'} | ${false} | ${'No match'}
+            ${['/User/user/Library/**']} | ${undefined} | ${'${cwd}/User/user/Library/settings.json'} | ${'include'} | ${true}  | ${'Match cwd root'}
+            ${['/User/user/Library/**']} | ${'/'}       | ${'/User/user/Library/settings.json'}       | ${'include'} | ${true}  | ${'Match system root'}
+            ${g('*.js', 'a/b')}          | ${'a'}       | ${'a/b/settings.js'}                        | ${'include'} | ${true}  | ${'Matches files, *.js'}
+            ${g('*.js', 'a/b')}          | ${'a'}       | ${'a/settings.js'}                          | ${'include'} | ${false} | ${'Does not match parent files, *.js'}
+            ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${'include'} | ${false} | ${'Does not match nested files, *.js'}
+        `(
+            `${os} $mode: $description, patterns: $patterns, filename: $filename, root: $root, $expected`,
+            ({ filename, root, patterns, mode, expected }: TestCaseMatcher) => {
+                root = resolveFilename(pathInstance, root);
+                filename = resolveFilename(pathInstance, filename);
+                patterns = resolvePattern(patterns, pathInstance);
+                // console.log(`root: ${root}, filename: ${filename}, pattern: ${JSON.stringify(patterns)}`);
+                const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
+                // eslint-disable-next-line jest/no-standalone-expect
+                expect(matcher.match(filename)).toEqual(expected);
+            }
+        );
+    }
+
+    [pathWin32, pathPosix].forEach(runTestOn);
+});
+
+describe('Validate GlobMatcher excludeMode patternsNormalizedToRoot', () => {
     function g(glob: string, root?: string): GlobPatternWithOptionalRoot {
         return {
             glob,
@@ -257,75 +404,6 @@ describe('Validate GlobMatcher', () => {
         return expect.objectContaining({ ...rest, ...gg });
     }
 
-    interface TestCaseMatcher {
-        patterns: GlobPattern | GlobPattern[];
-        root: string | undefined;
-        filename: string;
-        expected: boolean;
-        description: string;
-    }
-
-    const tests = test.each`
-        patterns                     | root         | filename                                    | expected | description
-        ${['*.json']}                | ${undefined} | ${'./settings.json'}                        | ${true}  | ${'*.json'}
-        ${['*.json']}                | ${undefined} | ${'settings.json'}                          | ${true}  | ${'*.json'}
-        ${['*.json']}                | ${undefined} | ${'${cwd}/settings.json'}                   | ${true}  | ${'*.json'}
-        ${'*.json'}                  | ${undefined} | ${'${cwd}/settings.json'}                   | ${true}  | ${'*.json'}
-        ${'#.gitignore\n *.json'}    | ${undefined} | ${'${cwd}/settings.json'}                   | ${true}  | ${'*.json'}
-        ${['middle']}                | ${''}        | ${'${cwd}/packages/middle/settings.json'}   | ${true}  | ${'match middle of path'}
-        ${['.vscode']}               | ${undefined} | ${'.vscode/settings.json'}                  | ${true}  | ${'.vscode'}
-        ${['/*.json']}               | ${'/'}       | ${'/settings.json'}                         | ${true}  | ${'Matches root level files, /*.json'}
-        ${['/*.json']}               | ${undefined} | ${'/src/settings.json'}                     | ${false} | ${'Matches pattern but not cwd /*.json'}
-        ${['*.js']}                  | ${undefined} | ${'${cwd}/src/settings.js'}                 | ${true}  | ${'// Matches nested files, *.js'}
-        ${'*.js'}                    | ${undefined} | ${'${cwd}/src/settings.js'}                 | ${true}  | ${'// Matches nested files, *.js'}
-        ${g('*.js')}                 | ${'.'}       | ${'${cwd}/src/settings.js'}                 | ${true}  | ${'// Matches nested files, *.js'}
-        ${g('*.js', 'src')}          | ${'.'}       | ${'${cwd}/src/settings.js'}                 | ${true}  | ${'// Matches nested files, *.js'}
-        ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${true}  | ${'// Matches nested files, *.js'}
-        ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/c/src/settings.js'}                    | ${true}  | ${'// Matches even if NOT under root.'}
-        ${g('*.js', 'a')}            | ${'a/b'}     | ${'c/src/settings.js'}                      | ${false} | ${'// Must match glob root'}
-        ${['.vscode/']}              | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${true}  | ${'.vscode/'}
-        ${['.vscode/']}              | ${undefined} | ${'${cwd}/.vscode'}                         | ${false} | ${'.vscode/'}
-        ${['/.vscode/']}             | ${undefined} | ${'${cwd}/.vscode'}                         | ${false} | ${'should not match file'}
-        ${['/.vscode/']}             | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${true}  | ${'should match root'}
-        ${['/.vscode/']}             | ${undefined} | ${'${cwd}/package/.vscode'}                 | ${false} | ${'should only match root'}
-        ${['.vscode/**']}            | ${undefined} | ${'${cwd}/.vscode/settings.json'}           | ${true}  | ${'should match root .vscode/**'}
-        ${['.vscode/']}              | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${true}  | ${'should match nested .vscode/'}
-        ${['**/.vscode/']}           | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${true}  | ${'should match nested .vscode/'}
-        ${['**/.vscode/']}           | ${undefined} | ${'${cwd}/src/.vscode'}                     | ${false} | ${'should match nested .vscode'}
-        ${['**/.vscode']}            | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${false} | ${'should not match nested **/.vscode'}
-        ${['**/.vscode/**']}         | ${undefined} | ${'${cwd}/src/.vscode/settings.json'}       | ${true}  | ${'should match nested **/.vscode'}
-        ${['/User/user/Library/**']} | ${undefined} | ${'/src/User/user/Library/settings.json'}   | ${false} | ${'No match'}
-        ${['/User/user/Library/**']} | ${undefined} | ${'${cwd}/User/user/Library/settings.json'} | ${true}  | ${'Match cwd root'}
-        ${['/User/user/Library/**']} | ${'/'}       | ${'/User/user/Library/settings.json'}       | ${true}  | ${'Match system root'}
-        ${g('*.js', 'a')}            | ${'a/b'}     | ${'a/b/src/settings.js'}                    | ${true}  | ${'// Matches nested files, *.js'}
-    `;
-    tests(
-        'win32 $description, patterns: $patterns, filename: $filename, root: $root, $expected',
-        ({ filename, root, patterns, expected }: TestCaseMatcher) => {
-            const pathInstance = pathWin32;
-            root = resolveFilename(pathInstance, root);
-            filename = resolveFilename(pathInstance, filename);
-            patterns = resolvePattern(patterns, pathInstance);
-            // console.log(`root: ${root}, filename: ${filename}, pattern: ${JSON.stringify(patterns)}`);
-            const matcher = new GlobMatcher(patterns, root, pathInstance);
-            // eslint-disable-next-line jest/no-standalone-expect
-            expect(matcher.match(filename)).toEqual(expected);
-        }
-    );
-
-    tests(
-        'posix $description, patterns: $patterns, filename: $filename, root: $root, $expected',
-        ({ filename, root, patterns, expected }: TestCaseMatcher) => {
-            const pathInstance = pathPosix;
-            root = resolveFilename(pathInstance, root);
-            filename = resolveFilename(pathInstance, filename);
-            patterns = resolvePattern(patterns, pathInstance);
-            const matcher = new GlobMatcher(patterns, root, pathInstance);
-            // eslint-disable-next-line jest/no-standalone-expect
-            expect(matcher.match(filename)).toEqual(expected);
-        }
-    );
-
     interface TestCaseNormalizedToRoot {
         patterns: GlobPattern | GlobPattern[];
         root: string | undefined;
@@ -335,18 +413,28 @@ describe('Validate GlobMatcher', () => {
         description: string;
     }
 
+    const expectedGlobs = {
+        '*.json': [{ glob: '**/*.json' }, { glob: '**/*.json/**' }],
+        '*.js': [{ glob: '**/*.js' }, { glob: '**/*.js/**' }],
+        'a/**/*.js': [{ glob: 'a/**/*.js' }, { glob: 'a/**/*.js/**' }],
+    };
+
+    function gc(globs: Partial<GlobPatternWithOptionalRoot>[], ...toApply: Partial<GlobPatternWithOptionalRoot>[]) {
+        return globs.map((glob) => toApply.reduce((a, b) => ({ ...a, ...b }), glob));
+    }
+
     test.each`
-        patterns            | root     | mode         | pathInstance | expected                                                              | description
-        ${'*.json'}         | ${''}    | ${'exclude'} | ${pathPosix} | ${[{ glob: '**/{*.json,*.json/**}' }]}                                | ${''}
-        ${'*.json'}         | ${''}    | ${'exclude'} | ${pathWin32} | ${[{ glob: '**/{*.json,*.json/**}' }]}                                | ${''}
-        ${'*.json\n *.js'}  | ${''}    | ${'exclude'} | ${pathWin32} | ${[{ glob: '**/{*.json,*.json/**}' }, { glob: '**/{*.js,*.js/**}' }]} | ${''}
-        ${g('*.js', 'a')}   | ${''}    | ${'exclude'} | ${pathWin32} | ${[{ glob: 'a/**/{*.js,*.js/**}', root: '' }]}                        | ${''}
-        ${g('*.js', 'a')}   | ${'a'}   | ${'exclude'} | ${pathWin32} | ${[{ glob: '**/{*.js,*.js/**}', root: 'a' }]}                         | ${''}
-        ${g('*.js', 'a')}   | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${[{ glob: '**/{*.js,*.js/**}', root: 'a/b' }]}                       | ${''}
-        ${g('*.js', 'a/c')} | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${[]}                                                                 | ${''}
-        ${g('*.js', 'a/c')} | ${'a/b'} | ${'include'} | ${pathWin32} | ${[]}                                                                 | ${''}
+        patterns            | root     | mode         | pathInstance | expected
+        ${'*.json'}         | ${''}    | ${'exclude'} | ${pathPosix} | ${expectedGlobs['*.json']}
+        ${'*.json'}         | ${''}    | ${'exclude'} | ${pathWin32} | ${expectedGlobs['*.json']}
+        ${'*.json\n *.js'}  | ${''}    | ${'exclude'} | ${pathWin32} | ${[...expectedGlobs['*.json'], ...expectedGlobs['*.js']]}
+        ${g('*.js', 'a')}   | ${''}    | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['a/**/*.js'], { root: '' })}
+        ${g('*.js', 'a')}   | ${'a'}   | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['*.js'], { root: 'a' })}
+        ${g('*.js', 'a')}   | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${gc(expectedGlobs['*.js'], { root: 'a/b' })}
+        ${g('*.js', 'a/c')} | ${'a/b'} | ${'exclude'} | ${pathWin32} | ${[]}
+        ${g('*.js', 'a/c')} | ${'a/b'} | ${'include'} | ${pathWin32} | ${[]}
     `(
-        'excludeMode patternsNormalizedToRoot $description $patterns $root',
+        'excludeMode patternsNormalizedToRoot $patterns $root',
         ({ patterns, root, pathInstance, expected, mode }: TestCaseNormalizedToRoot) => {
             root = resolveFilename(pathInstance, root);
             patterns = resolvePattern(patterns, pathInstance);
@@ -375,7 +463,7 @@ function tests(): TestCase[] {
         [['.vscode/'], undefined, '${cwd}/.vscode', false, '.vscode/'],
         [['.vscode/'], undefined, '${cwd}/src/.vscode/settings.json', true, 'should match nested .vscode/'],
         [['**/.vscode/'], undefined, '${cwd}/src/.vscode/settings.json', true, 'should match nested .vscode/'],
-        [['**/.vscode'], undefined, '${cwd}/src/.vscode/settings.json', false, 'should not match nested **/.vscode'],
+        [['**/.vscode'], undefined, '${cwd}/src/.vscode/settings.json', true, 'should match nested **/.vscode'],
         [['**/.vscode/**'], undefined, '${cwd}/src/.vscode/settings.json', true, 'should match nested **/.vscode'],
         [['/User/user/Library/**'], undefined, '/src/User/user/Library/settings.json', false, 'No match'],
         [['/User/user/Library/**'], '/', '/User/user/Library/settings.json', true, 'Match system root'],
@@ -389,7 +477,7 @@ function tests(): TestCase[] {
         [['.vscode/'], undefined, '.vscode', false, '.vscode/'],
         [['.vscode/'], undefined, 'src/.vscode/settings.json', true, 'should match nested .vscode/'],
         [['**/.vscode/'], undefined, 'src/.vscode/settings.json', true, 'should match nested .vscode/'],
-        [['**/.vscode'], undefined, 'src/.vscode/settings.json', false, 'should not match nested **/.vscode'],
+        [['**/.vscode'], undefined, 'src/.vscode/settings.json', true, 'should match nested **/.vscode'],
         [['**/.vscode/**'], undefined, 'src/.vscode/settings.json', true, 'should match nested **/.vscode'],
         [['/User/user/Library/**'], undefined, 'src/User/user/Library/settings.json', false, 'No match'],
         [['/User/user/Library/**'], undefined, 'User/user/Library/settings.json', true, 'Match system root'],
@@ -565,4 +653,20 @@ function eo<T>(obj: T): T {
 /** Helper for function for building expected GlobPatterns */
 function p(glob: string, root?: string): GlobPatternWithOptionalRoot {
     return eo(root ? { glob, root } : { glob });
+}
+
+function resolvePattern(p: GlobPattern, path: PathInterface): GlobPattern;
+function resolvePattern(p: GlobPattern[], path: PathInterface): GlobPattern[];
+function resolvePattern(p: GlobPattern | GlobPattern[], path: PathInterface): GlobPattern | GlobPattern[];
+function resolvePattern(p: GlobPattern | GlobPattern[], path: PathInterface): GlobPattern | GlobPattern[] {
+    if (Array.isArray(p)) {
+        return p.map((g) => resolvePattern(g, path));
+    }
+    if (typeof p === 'string' || p.root === undefined) {
+        return p;
+    }
+    return {
+        ...p,
+        root: path.resolve(p.root),
+    };
 }
