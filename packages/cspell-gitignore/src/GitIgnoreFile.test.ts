@@ -4,6 +4,10 @@ import { GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore, __testing__ } from '.
 
 const { mustBeHierarchical } = __testing__;
 
+const pathPackage = path.resolve(__dirname, '..');
+const pathRepo = path.resolve(pathPackage, '../..');
+const gitIgnoreFile = path.resolve(pathRepo, '.gitignore');
+
 describe('GitIgnoreFile', () => {
     test('GitIgnoreFile', () => {
         const gif = sampleGitIgnoreFile();
@@ -52,8 +56,24 @@ describe('GitIgnoreHierarchy', () => {
         ).toThrowError('Hierarchy violation - files are not nested');
     });
 
-    function p(file: string): string {
-        return path.join(__dirname, file);
+    test.each`
+        file                       | expected
+        ${__filename}              | ${{ matched: true, gitIgnoreFile: p('./.gitignore'), line: undefined, glob: '*.test.*', root: __dirname }}
+        ${p('GitIgnoreFiles.ts')}  | ${undefined}
+        ${require.resolve('jest')} | ${{ matched: true, gitIgnoreFile, glob: 'node_modules/', line: 58, root: pathRepo }}
+        ${p('package-lock.json')}  | ${undefined}
+    `('ignoreEx $file', async ({ file, expected }) => {
+        // cspell:ignore gifs
+        const gifs = [];
+        const gi = await loadGitIgnore(path.join(__dirname, '../../..'));
+        if (gi) gifs.push(gi);
+        gifs.push(sampleGitIgnoreFile());
+        const gih = new GitIgnoreHierarchy(gifs);
+        expect(gih.isIgnoredEx(file)).toEqual(expected);
+    });
+
+    function p(...files: string[]): string {
+        return path.resolve(__dirname, ...files);
     }
 });
 
@@ -74,3 +94,7 @@ function sampleGitIgnoreFile(): GitIgnoreFile {
     const file = path.join(m.root, '.gitignore');
     return new GitIgnoreFile(m, file);
 }
+
+// function oc<T>(v: Partial<T>): T {
+//     return expect.objectContaining(v);
+// }
