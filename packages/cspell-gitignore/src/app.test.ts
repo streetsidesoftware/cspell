@@ -11,7 +11,7 @@ describe('app', () => {
 
     test.each`
         params
-        ${[path.join(path.basename(__dirname), 'code.ts')]}
+        ${[path.basename(__dirname) + '/code.ts']}
         ${['../node_modules']}
         ${['-r', '.', 'dist']}
         ${['temp']}
