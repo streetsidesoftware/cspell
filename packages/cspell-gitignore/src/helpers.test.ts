@@ -14,9 +14,13 @@ describe('helpers', () => {
         expect(path.resolve(r, p)).toEqual(dir);
     });
 
-    test('findRepoRoot', async () => {
-        const f = await findRepoRoot(__dirname);
-        expect(f).toEqual(path.join(__dirname, '../../..'));
+    test.each`
+        dir          | expected
+        ${__dirname} | ${path.join(__dirname, '../../..')}
+        ${'/'}       | ${undefined}
+    `('findRepoRoot $dir', async ({ dir, expected }) => {
+        const f = await findRepoRoot(dir);
+        expect(f).toEqual(expected);
     });
 
     test.each`

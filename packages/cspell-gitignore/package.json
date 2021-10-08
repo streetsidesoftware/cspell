@@ -11,11 +11,15 @@
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/master/packages/cspell-gitignore#readme",
   "license": "MIT",
   "main": "dist/index.js",
+  "bin": {
+    "cspell-gitignore": "bin.js"
+  },
   "directories": {
     "dist": "dist"
   },
   "typings": "dist/index.d.ts",
   "files": [
+    "bin.js",
     "dist",
     "!**/__mocks__",
     "!**/*.test.*",

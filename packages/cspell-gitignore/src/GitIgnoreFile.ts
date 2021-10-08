@@ -1,14 +1,20 @@
-import { GlobMatcher } from 'cspell-glob';
+import { GlobMatcher, GlobMatchRule, GlobPatternNormalized } from 'cspell-glob';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+
+export interface IsIgnoredExResult {
+    glob: string | undefined;
+    root: string | undefined;
+    matched: boolean;
+    gitIgnoreFile: string;
+    line: number | undefined;
+}
 
 /**
  * Represents an instance of a .gitignore file.
  */
 export class GitIgnoreFile {
-    constructor(readonly matcher: GlobMatcher, readonly gitignore: string) {
-        this.gitignore = path.join(matcher.root, '.gitignore');
-    }
+    constructor(readonly matcher: GlobMatcher, readonly gitignore: string) {}
 
     get root(): string {
         return this.matcher.root;
@@ -18,10 +24,27 @@ export class GitIgnoreFile {
         return this.matcher.match(file);
     }
 
+    isIgnoredEx(file: string): IsIgnoredExResult {
+        const m = this.matcher.matchEx(file);
+        const { matched } = m;
+        const partial: Partial<GlobMatchRule> = m;
+        const pattern: Partial<GlobPatternNormalized> | undefined = partial.pattern;
+        const glob = pattern?.rawGlob ?? partial.glob;
+        const root = partial.root;
+        const line = pattern?.line;
+        return { glob, matched, gitIgnoreFile: this.gitignore, root, line };
+    }
+
     static async loadGitignore(gitignore: string): Promise<GitIgnoreFile> {
+        gitignore = path.resolve(gitignore);
         const content = await fs.readFile(gitignore, 'utf8');
         const options = { root: path.dirname(gitignore) };
-        const globMatcher = new GlobMatcher(content, options);
+        const globs = content.split('\n').map((glob, index) => ({
+            glob,
+            source: gitignore,
+            line: index + 1,
+        }));
+        const globMatcher = new GlobMatcher(globs, options);
         return new GitIgnoreFile(globMatcher, gitignore);
     }
 }
@@ -40,6 +63,20 @@ export class GitIgnoreHierarchy {
         }
 
         return false;
+    }
+
+    /**
+     * Check to see which `.gitignore` file ignored the given file.
+     * @param file - fsPath to check.
+     * @returns IsIgnoredExResult of the match or undefined if there was no match.
+     */
+    isIgnoredEx(file: string): IsIgnoredExResult | undefined {
+        for (const gif of this.gitIgnoreChain) {
+            const r = gif.isIgnoredEx(file);
+            if (r.matched) return r;
+        }
+
+        return undefined;
     }
 }
 

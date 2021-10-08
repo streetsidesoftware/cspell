@@ -16,7 +16,7 @@ import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGl
 import { loadReporters, mergeReporters } from './util/reporters';
 import { getTimeMeasurer } from './util/timer';
 import * as util from './util/util';
-import { GitIgnore } from 'cspell-gitignore';
+import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 
 export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
     let { reporter } = cfg;
@@ -185,7 +185,7 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
 
         const useGitignore = cfg.options.gitignore ?? configInfo.config.useGitignore ?? false;
         const gitignoreRoots = cfg.options.gitignoreRoot ?? configInfo.config.gitignoreRoot;
-        const gitIgnore = useGitignore ? generateGitIgnore(gitignoreRoots) : undefined;
+        const gitIgnore = useGitignore ? await generateGitIgnore(gitignoreRoots) : undefined;
 
         const cliGlobs: Glob[] = cfg.files;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
@@ -347,7 +347,12 @@ function getLoggerFromReporter(reporter: CSpellReporter): Logger {
     };
 }
 
-function generateGitIgnore(roots: string | string[] | undefined) {
-    const root = typeof roots === 'string' ? [roots] : roots;
+async function generateGitIgnore(roots: string | string[] | undefined) {
+    const root = (typeof roots === 'string' ? [roots].filter((r) => !!r) : roots) || [];
+    if (!root?.length) {
+        const cwd = process.cwd();
+        const repo = (await findRepoRoot(cwd)) || cwd;
+        root.push(repo);
+    }
     return new GitIgnore(root?.map((p) => path.resolve(p)));
 }

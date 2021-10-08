@@ -42,6 +42,10 @@ export interface GlobPatternWithOptionalRoot {
      * Optional value useful for tracing which file a glob pattern was defined in.
      */
     source?: string;
+    /**
+     * Optional line number in the source
+     */
+    line?: number;
 }
 
 export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {

@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { contains } from '.';
-import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile';
+import { GitIgnoreHierarchy, IsIgnoredExResult, loadGitIgnore } from './GitIgnoreFile';
 
 /**
  * Class to cache and process `.gitignore` file queries.
@@ -8,7 +8,8 @@ import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile';
 export class GitIgnore {
     private resolvedGitIgnoreHierarchies = new Map<string, GitIgnoreHierarchy>();
     private knownGitIgnoreHierarchies = new Map<string, Promise<GitIgnoreHierarchy>>();
-    readonly roots: string[];
+    private _roots: Set<string>;
+    private _sortedRoots: string[];
 
     /**
      * @param roots - (search roots) an optional array of root paths to prevent searching for `.gitignore` files above the root.
@@ -16,9 +17,8 @@ export class GitIgnore {
      *   the search for `.gitignore` will go all the way to the system root of the file.
      */
     constructor(roots: string[] = []) {
-        this.roots = roots.map((a) => path.resolve(a));
-        this.roots.sort((a, b) => a.length - b.length);
-        Object.freeze(this.roots);
+        this._sortedRoots = resolveAndSortRoots(roots);
+        this._roots = new Set(this._sortedRoots);
     }
 
     findResolvedGitIgnoreHierarchy(directory: string): GitIgnoreHierarchy | undefined {
@@ -33,6 +33,11 @@ export class GitIgnore {
     async isIgnored(file: string): Promise<boolean> {
         const gh = await this.findGitIgnoreHierarchy(path.dirname(file));
         return gh.isIgnored(file);
+    }
+
+    async isIgnoredEx(file: string): Promise<IsIgnoredExResult | undefined> {
+        const gh = await this.findGitIgnoreHierarchy(path.dirname(file));
+        return gh.isIgnoredEx(file);
     }
 
     async findGitIgnoreHierarchy(directory: string): Promise<GitIgnoreHierarchy> {
@@ -60,6 +65,28 @@ export class GitIgnore {
         return result;
     }
 
+    get roots(): string[] {
+        return this._sortedRoots;
+    }
+
+    addRoots(roots: string[]): void {
+        const rootsToAdd = roots.map((p) => path.resolve(p)).filter((r) => !this._roots.has(r));
+        if (!rootsToAdd.length) return;
+
+        rootsToAdd.forEach((r) => this._roots.add(r));
+        this._sortedRoots = resolveAndSortRoots([...this._roots]);
+        this.cleanCachedEntries();
+    }
+
+    peekGitIgnoreHierarchy(directory: string): Promise<GitIgnoreHierarchy> | undefined {
+        return this.knownGitIgnoreHierarchies.get(directory);
+    }
+
+    private cleanCachedEntries() {
+        this.knownGitIgnoreHierarchies.clear();
+        this.resolvedGitIgnoreHierarchies.clear();
+    }
+
     private async _findGitIgnoreHierarchy(directory: string): Promise<GitIgnoreHierarchy> {
         const root = this.determineRoot(directory);
         const parent = path.dirname(directory);
@@ -81,4 +108,20 @@ export class GitIgnore {
         }
         return path.parse(directory).root;
     }
+}
+
+function resolveAndSortRoots(roots: string[]): string[] {
+    const sortedRoots = roots.map((a) => path.resolve(a));
+    sortRoots(sortedRoots);
+    Object.freeze(sortedRoots);
+    return sortedRoots;
+}
+
+/**
+ * Sorts root paths based upon their length.
+ * @param roots - array to be sorted
+ */
+function sortRoots(roots: string[]): string[] {
+    roots.sort((a, b) => a.length - b.length);
+    return roots;
 }
