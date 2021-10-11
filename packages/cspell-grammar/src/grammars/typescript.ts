@@ -1,5 +1,4 @@
-import { Repository } from '..';
-import { Grammar } from '../grammarDefinition';
+import { Grammar, Repository } from '../grammarDefinition';
 
 const repository: Repository = {
     statements: {

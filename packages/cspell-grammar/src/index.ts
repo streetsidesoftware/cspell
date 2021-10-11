@@ -1,1 +1,1 @@
-export * from './grammarDefinition';
+export type { Grammar, Pattern } from './grammarDefinition';
