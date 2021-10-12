@@ -1,8 +1,7 @@
 export interface NGrammar extends NPatternBase {
     scopeName: NScopeSource;
     patterns: NPattern[];
-    find(line: LineOffset, context: ExecContext | undefined): FindResult | undefined;
-    toJSON: (key: string | number | undefined) => NGrammar | undefined;
+    find(line: LineOffset, rule: Rule | undefined): MatchRule | undefined;
 }
 
 /**
@@ -84,25 +83,26 @@ export type NRepository = Record<string, NPattern>;
 
 export type NCapture = Record<string | number, NPattern>;
 
-export interface ExecContext {
-    pattern: NPattern;
-    repository: NRepository;
-    stack: ExecContext | undefined;
-}
-
 export interface LineOffset {
     line: string;
     offset: number;
 }
 
-export interface FindResult {
+export interface Rule {
+    grammar: NGrammar;
+    match: MatchResult | undefined;
+    pattern: NPattern;
+    parent: Rule | undefined;
+    repository: NRepository;
+    depth: number;
+}
+
+export interface MatchRule extends Rule {
     match: MatchResult;
-    context: ExecContext;
-    line: LineOffset;
 }
 
 export interface NPatternBase {
-    find(line: LineOffset, context: ExecContext): FindResult | undefined;
+    find(line: LineOffset, rule: Rule): MatchRule | undefined;
     name?: NScope;
     patterns?: NPattern[];
     repository?: NRepository;

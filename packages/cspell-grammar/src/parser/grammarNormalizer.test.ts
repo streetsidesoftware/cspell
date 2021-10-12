@@ -1,6 +1,6 @@
 import { grammar as grammarTS } from '../grammars/typescript';
 import { LineOffset } from './grammarNormalized';
-import { execResultToScope, normalizeGrammar } from './grammarNormalizer';
+import { extractScope, normalizeGrammar } from './grammarNormalizer';
 
 describe('grammarNormalizer', () => {
     test('normalizeGrammar', () => {
@@ -20,7 +20,7 @@ describe('grammarNormalizer', () => {
         const grammar = normalizeGrammar(grammarTS);
         const lineOff: LineOffset = { line, offset };
         const r = grammar.find(lineOff, undefined);
-        const scope = r && execResultToScope(r);
+        const scope = r && extractScope(r);
         expect(scope).toEqual(expectedScope);
         expect(r?.match).toEqual(expectedMatch);
     });
