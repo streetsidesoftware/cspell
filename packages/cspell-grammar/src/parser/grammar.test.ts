@@ -1,5 +1,5 @@
 import { validate } from './grammar';
-import { grammar as grammarTs } from './grammars/typescript';
+import { grammar as grammarTs } from '../grammars/typescript';
 
 describe('grammar', () => {
     test('validate', () => {

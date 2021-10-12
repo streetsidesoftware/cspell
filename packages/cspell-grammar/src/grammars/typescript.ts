@@ -1,11 +1,11 @@
-import { Grammar, Repository } from '../grammarDefinition';
+import { Grammar, Repository } from '..';
 
 const repository: Repository = {
     statements: {
-        patterns: [{ include: '#string' }],
+        patterns: [{ include: '#string' }, { include: '#comment' }],
     },
     string: {
-        patterns: [{ include: '#string_q_single' }],
+        patterns: [{ include: '#string_q_single' }, { include: '#string_q_double' }, { include: '#string_template' }],
     },
     string_q_single: {
         name: 'string.quoted.single.ts',
@@ -26,6 +26,18 @@ const repository: Repository = {
     },
     string_wrap: {
         match: /(?:[^\\\n])$/,
+    },
+    comment: {
+        patterns: [{ include: '#comment_line' }, { include: '#comment_block' }],
+    },
+    comment_line: {
+        name: 'comment.line.ts',
+        match: /\/\/.*/,
+    },
+    comment_block: {
+        name: 'comment.block.ts',
+        begin: '/*',
+        end: '*/',
     },
 };
 

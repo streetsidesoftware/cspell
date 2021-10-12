@@ -1,6 +1,5 @@
-export interface Grammar extends PatternBase {
+export interface Grammar extends PatternPatterns {
     scopeName: ScopeSource;
-    patterns: Pattern[];
 }
 
 /**
@@ -15,7 +14,7 @@ export type ScopeSource = string;
 
 export type Pattern = _Pattern; // | PatternFn;
 
-type _Pattern = PatternMatch | PatternBeginEnd | PatternName | PatternInclude | PatternPatterns;
+type _Pattern = PatternMatch | PatternBeginEnd | PatternInclude | PatternPatterns | PatternName;
 
 // export type PatternFn = () => _Pattern;
 
@@ -27,6 +26,7 @@ export type Match = string | RegExp;
 export interface PatternMatch extends PatternBase {
     match: Match;
     captures?: Capture;
+    patterns?: undefined;
 }
 
 /**
