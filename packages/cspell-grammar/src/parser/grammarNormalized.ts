@@ -1,7 +1,9 @@
+import { MatchResult } from './matchResult';
+
 export interface NGrammar extends NPatternBase {
     scopeName: NScopeSource;
     patterns: NPattern[];
-    find(line: LineOffset, rule: Rule | undefined): MatchRule | undefined;
+    find(line: LineOffset, rule: Rule | undefined): MatchingRule | undefined;
 }
 
 /**
@@ -81,7 +83,7 @@ export type IncludeRef = NRepositoryReference | ExternalGrammarReference;
 
 export type NRepository = Record<string, NPattern>;
 
-export type NCapture = Record<string | number, NPattern>;
+export type NCapture = Record<string | number, NScope>;
 
 export interface LineOffset {
     line: string;
@@ -95,31 +97,17 @@ export interface Rule {
     parent: Rule | undefined;
     repository: NRepository;
     depth: number;
+    matchChildren?: (line: LineOffset) => MatchingRule | undefined;
+    end?: (line: LineOffset) => MatchResult | undefined;
 }
 
-export interface MatchRule extends Rule {
+export interface MatchingRule extends Rule {
     match: MatchResult;
 }
 
 export interface NPatternBase {
-    find(line: LineOffset, rule: Rule): MatchRule | undefined;
+    find(line: LineOffset, rule: Rule): MatchingRule | undefined;
     name?: NScope;
     patterns?: NPattern[];
     repository?: NRepository;
-}
-
-interface Groups extends Record<string | number, string | undefined> {
-    [0]: string;
-}
-
-export interface MatchResult {
-    /** offset of the match into the input strings */
-    index: number;
-    /** the input string matched against */
-    input: string;
-    /**
-     * Named and numbered matching groups.
-     * `match.0` is the full match.
-     */
-    match: Groups;
 }

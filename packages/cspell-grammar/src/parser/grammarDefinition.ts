@@ -27,13 +27,21 @@ export interface PatternMatch extends PatternBase {
     match: Match;
     captures?: Capture;
     patterns?: undefined;
+    begin?: undefined;
+    end?: undefined;
+    contentName?: undefined;
+    beginCaptures?: undefined;
+    endCapture?: undefined;
 }
 
 /**
  * A Pattern with a name but no match clauses.
+ * Used in Capture
  */
 export interface PatternName extends PatternBase {
     name: Scope;
+    patterns?: undefined;
+    repository?: undefined;
 }
 
 /**
@@ -49,6 +57,7 @@ export interface PatternPatterns extends PatternBase {
 export interface PatternBeginEnd extends PatternBase {
     begin: Match;
     end?: Match;
+    match?: undefined;
     contentName?: Scope;
     captures?: Capture;
     beginCaptures?: Capture;
@@ -81,7 +90,7 @@ export type IncludeRef = RepositoryReference | ExternalGrammarReference;
 
 export type Repository = Record<string, Pattern>;
 
-export type Capture = Scope | Record<string | number, Pattern>;
+export type Capture = Scope | Record<string | number, PatternName | Scope>;
 
 export interface PatternBase {
     name?: Scope;
