@@ -23,7 +23,7 @@ describe('matchResult', () => {
 });
 
 function cr(regexp: RegExp, text: string, lastIndex = 0) {
-    const rx = new RegExp(regexp, regexp.flags + 'g');
+    const rx = RegExp(regexp, regexp.flags + 'g');
     rx.lastIndex = lastIndex;
 
     const r = rx.exec(text);

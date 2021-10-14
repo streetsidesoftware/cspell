@@ -1,18 +1,26 @@
 import { strict as assert } from 'assert';
 import { format } from 'util';
-import { Grammar, Pattern, Repository } from './grammarDefinition';
+import { Grammar, Pattern, PatternList, Repository, PatternRef } from './grammarDefinition';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
 
 export function validate(grammar: Grammar): asserts grammar {
     assert(grammar.scopeName);
-    assert(grammar.scopeName.startsWith('source.'));
+    assert(/^[\w.]+$/.test(grammar.scopeName));
     validatePatterns(grammar.patterns);
     validatePatternRepository(grammar);
 }
 
-export function validatePatterns(patterns: Pattern[]): asserts patterns {
+export function validatePatterns(patterns: PatternList): asserts patterns {
     assert(Array.isArray(patterns));
-    patterns.forEach(validatePattern);
+    patterns.forEach(validatePatternOrReference);
+}
+
+function validatePatternOrReference(pattern: Pattern | PatternRef): asserts pattern {
+    if (typeof pattern === 'string') {
+        assert(/^\$self|\$base|#[\w-]+|[\w.]+$/.test(pattern));
+    } else {
+        validatePattern(pattern);
+    }
 }
 
 export function validatePattern(pattern: Pattern): asserts pattern {

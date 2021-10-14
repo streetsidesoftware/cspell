@@ -68,9 +68,9 @@ function s(scope: string[]): ParsedText {
     return oc<ParsedText>({ scope });
 }
 
-function match(text: string, offset = 0) {
+function match(text: string, offset = 0, lineNumber = 42, anchor = -1) {
     const g = normalizeGrammar(grammar);
-    return g.find({ line: text, offset }, undefined);
+    return g.find({ text, offset, anchor, lineNumber }, undefined);
 }
 
 function oc<T>(t: Partial<T>): T {

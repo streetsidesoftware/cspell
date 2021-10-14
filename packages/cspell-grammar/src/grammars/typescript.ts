@@ -10,22 +10,27 @@ const repository: Repository = {
     string_q_single: {
         name: 'string.quoted.single.ts',
         begin: "'",
-        end: "'",
-        patterns: [{ include: '#string_wrap' }],
+        end: /'|((?:[^\\\n])$)/,
+        patterns: [{ include: '#string_character_escape' }],
     },
     string_q_double: {
         name: 'string.quoted.double.ts',
         begin: '"',
-        end: '"',
-        patterns: [{ include: '#string_wrap' }],
+        end: /"|((?:[^\\\n])$)/,
+        patterns: [{ include: '#string_character_escape' }],
     },
     string_template: {
         name: 'string.template.ts',
         begin: '`',
         end: '`',
+        patterns: [{ include: '#string_character_escape' }],
     },
     string_wrap: {
         match: /(?:[^\\\n])$/,
+    },
+    string_character_escape: {
+        name: 'constant.character.escape.js',
+        match: /\\(x[0-9A-Fa-f]{2}|[0-3][0-7]{0,2}|[4-7][0-7]?|.|$)/,
     },
     comment: {
         patterns: [{ include: '#comment_line' }, { include: '#comment_block' }],
@@ -42,6 +47,7 @@ const repository: Repository = {
 };
 
 export const grammar: Grammar = {
+    name: 'TypeScript',
     scopeName: 'source.ts',
     patterns: [
         {

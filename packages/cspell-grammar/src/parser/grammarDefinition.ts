@@ -18,21 +18,9 @@ type _Pattern = PatternMatch | PatternBeginEnd | PatternInclude | PatternPattern
 
 // export type PatternFn = () => _Pattern;
 
-export type Match = string | RegExp;
+export type PatternList = (Pattern | PatternRef)[];
 
-/**
- * A pattern with a single match clause
- */
-export interface PatternMatch extends PatternBase {
-    match: Match;
-    captures?: Capture;
-    patterns?: undefined;
-    begin?: undefined;
-    end?: undefined;
-    contentName?: undefined;
-    beginCaptures?: undefined;
-    endCapture?: undefined;
-}
+export type Match = string | RegExp;
 
 /**
  * A Pattern with a name but no match clauses.
@@ -48,27 +36,69 @@ export interface PatternName extends PatternBase {
  * A Pattern that contains only patterns
  */
 export interface PatternPatterns extends PatternBase {
-    patterns: Pattern[];
+    patterns: PatternList;
+}
+
+interface PatternMatchBase extends PatternBase {
+    begin?: Match;
+    beginCaptures?: Capture;
+    captures?: Capture;
+    contentName?: Scope;
+    end?: Match;
+    endCaptures?: Capture;
+    match?: Match;
+    while?: Match;
+    whileCaptures?: Capture;
+}
+
+/**
+ * A pattern with a single match clause
+ */
+export interface PatternMatch extends PatternMatchBase {
+    match: Match;
+    captures?: Capture;
+    patterns?: undefined;
+    begin?: undefined;
+    end?: undefined;
+    contentName?: undefined;
+    beginCaptures?: undefined;
+    endCaptures?: undefined;
+    while?: undefined;
+    whileCaptures?: undefined;
 }
 
 /**
  * A Pattern with a Begin/End Match clause
  */
-export interface PatternBeginEnd extends PatternBase {
+export interface PatternBeginEnd extends PatternMatchBase {
     begin: Match;
     end?: Match;
     match?: undefined;
     contentName?: Scope;
     captures?: Capture;
     beginCaptures?: Capture;
-    endCapture?: Capture;
+    endCaptures?: Capture;
+    while?: undefined;
+    whileCaptures?: undefined;
+}
+
+export interface PatternBeginWhile extends PatternMatchBase {
+    begin: Match;
+    end?: Match;
+    match?: undefined;
+    contentName?: Scope;
+    captures?: Capture;
+    beginCaptures?: Capture;
+    endCaptures?: undefined;
+    while: Match;
+    whileCaptures?: Capture;
 }
 
 /**
  * Include patterns for including patterns from another pattern
  */
 export interface PatternInclude extends PatternBase {
-    include: IncludeRef;
+    include: PatternRef;
     name?: undefined;
     patterns?: undefined;
     repository?: undefined;
@@ -86,14 +116,19 @@ export type RepositoryReference = string;
  */
 export type ExternalGrammarReference = string;
 
-export type IncludeRef = RepositoryReference | ExternalGrammarReference;
+export type PatternRef = RepositoryReference | ExternalGrammarReference;
 
 export type Repository = Record<string, Pattern>;
 
 export type Capture = Scope | Record<string | number, PatternName | Scope>;
 
 export interface PatternBase {
+    /** Optional name scope */
     name?: Scope;
-    patterns?: Pattern[];
+    /** Optional comment */
+    comment?: string;
+    /** Used to disable a rule. */
+    disabled?: boolean;
+    patterns?: PatternList;
     repository?: Repository;
 }

@@ -3,12 +3,12 @@ import {
     Capture,
     PatternBeginEnd,
     PatternInclude,
+    PatternList,
     PatternMatch,
     PatternName,
     PatternPatterns,
 } from './grammarDefinition';
 import {
-    LineOffset,
     MatchingRule,
     NCapture,
     NGrammar,
@@ -18,11 +18,13 @@ import {
     NPatternMatch,
     NPatternName,
     NPatternPatterns,
+    NPatternRepositoryReference,
     NRepository,
     Rule,
 } from './grammarNormalized';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
 import { createMatchResult, createSimpleMatchResult, MatchResult } from './matchResult';
+import { LineOffsetAnchored } from './types';
 
 export function normalizeGrammar(grammar: Grammar): NGrammar {
     const { scopeName, name, ...rest } = grammar;
@@ -38,7 +40,7 @@ export function normalizeGrammar(grammar: Grammar): NGrammar {
         find,
     };
 
-    function find(line: LineOffset, rule: Rule | undefined): MatchingRule | undefined {
+    function find(line: LineOffsetAnchored, rule: Rule | undefined): MatchingRule | undefined {
         const grammarRule = grammarToRule(g, pp);
         grammarRule.parent = rule;
         return findInPatterns(pp.patterns, line, grammarRule);
@@ -46,6 +48,11 @@ export function normalizeGrammar(grammar: Grammar): NGrammar {
 
     return g;
 }
+
+const SpecialRepositoryReferences: Record<string, true | undefined> = {
+    $self: true,
+    $base: true,
+};
 
 export function nPattern(p: PatternMatch): NPatternMatch;
 export function nPattern(p: PatternInclude): NPatternInclude;
@@ -72,7 +79,7 @@ function normalizePatternMatch(p: PatternMatch): NPatternMatch {
 
     const regExec = makeExec(p.match);
 
-    function exec(line: LineOffset, rule: Rule): MatchingRule | undefined {
+    function exec(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
         const ctx = appendRule(rule, self);
         const match = regExec(line);
         if (!match) return undefined;
@@ -90,7 +97,7 @@ function normalizePatternBeginEnd(p: PatternBeginEnd): NPatternBeginEnd {
         ...p,
         captures: normalizeCapture(p.captures),
         beginCaptures: normalizeCapture(p.beginCaptures),
-        endCapture: normalizeCapture(p.endCapture),
+        endCaptures: normalizeCapture(p.endCaptures),
         repository,
         patterns,
         find: exec,
@@ -98,7 +105,7 @@ function normalizePatternBeginEnd(p: PatternBeginEnd): NPatternBeginEnd {
 
     const regExec = makeExec(p.begin);
 
-    function exec(line: LineOffset, context: Rule): MatchingRule | undefined {
+    function exec(line: LineOffsetAnchored, context: Rule): MatchingRule | undefined {
         const ctx = appendRule(context, self);
         const match = regExec(line);
         if (!match) return undefined;
@@ -118,9 +125,9 @@ function normalizePatternName(p: PatternName): NPatternName {
         patterns,
         find,
     };
-    function find(line: LineOffset, rule: Rule): MatchingRule | undefined {
+    function find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
         const ctx = appendRule(rule, self);
-        const input = line.line.slice(line.offset);
+        const input = line.text.slice(line.offset);
         const match = createSimpleMatchResult(input, input, line.offset);
 
         const r: MatchingRule = { ...ctx, match };
@@ -129,30 +136,49 @@ function normalizePatternName(p: PatternName): NPatternName {
     return self;
 }
 
-function normalizePatternInclude(p: PatternInclude): NPatternInclude {
+function normalizePatternInclude(p: PatternInclude): NPatternInclude | NPatternRepositoryReference {
+    const { include } = p;
+    return include.startsWith('#') || include in SpecialRepositoryReferences
+        ? normalizePatternIncludeRef(p)
+        : normalizePatternIncludeExt(p);
+}
+
+function normalizePatternIncludeRef(p: PatternInclude): NPatternRepositoryReference {
+    const { include, ...rest } = p;
+    const reference = include.startsWith('#') ? include.slice(1) : include;
+    const self: NPatternRepositoryReference = {
+        ...rest,
+        reference,
+        find: find,
+    };
+
+    function findRef(rule: Rule): NPattern {
+        const pat = rule.repository[reference];
+        if (pat === undefined) throw new Error(`Unknown Include Reference ${include}`);
+        return pat;
+    }
+
+    function find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
+        const pat = findRef(rule);
+        const ctx = appendRule(rule, self);
+        return pat.find(line, ctx);
+    }
+
+    return self;
+}
+
+function normalizePatternIncludeExt(p: PatternInclude): NPatternInclude | NPatternRepositoryReference {
     const self: NPatternInclude = {
         ...p,
         find: find,
     };
 
-    const include = p.include;
-
-    if (!include.startsWith('#')) {
+    if (!p.include.startsWith('#')) {
         throw new Error('External Imports not yet supported');
     }
 
-    const ref = p.include.slice(1);
-
-    function findRef(rule: Rule): NPattern {
-        const pat = rule.repository[ref];
-        if (pat === undefined) throw new Error(`Unknown Include Reference ${include}`);
-        return pat;
-    }
-
-    function find(line: LineOffset, rule: Rule): MatchingRule | undefined {
-        const pat = findRef(rule);
-        const ctx = appendRule(rule, self);
-        return pat.find(line, ctx);
+    function find(_line: LineOffsetAnchored, _rule: Rule): MatchingRule | undefined {
+        return undefined;
     }
 
     return self;
@@ -168,7 +194,7 @@ function normalizePatternsPatterns(p: PatternPatterns): NPatternPatterns {
         find,
     };
 
-    function find(line: LineOffset, rule: Rule): MatchingRule | undefined {
+    function find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
         const patRule = appendRule(rule, self);
         return findInPatterns(self.patterns, line, patRule);
     }
@@ -176,9 +202,10 @@ function normalizePatternsPatterns(p: PatternPatterns): NPatternPatterns {
     return self;
 }
 
-function findInPatterns(patterns: NPattern[], line: LineOffset, rule: Rule): MatchingRule | undefined {
+function findInPatterns(patterns: NPattern[], line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
     let r: MatchingRule | undefined = undefined;
     for (const pat of patterns) {
+        if (pat.disabled) continue;
         const er = pat.find(line, rule);
         if (er?.match !== undefined) {
             r = (r && r.match && r.match.index < er.match.index && r) || er;
@@ -187,16 +214,16 @@ function findInPatterns(patterns: NPattern[], line: LineOffset, rule: Rule): Mat
     return r;
 }
 
-function normalizePatternPatterns(p: { patterns: Pattern[] }): { patterns: NPattern[] };
+function normalizePatternPatterns(p: { patterns: PatternList }): { patterns: NPattern[] };
 function normalizePatternPatterns(p: { patterns: undefined }): { patterns: undefined };
-function normalizePatternPatterns(p: { patterns?: Pattern[] }): { patterns?: NPattern[] };
-function normalizePatternPatterns(p: { patterns?: Pattern[] }): { patterns?: NPattern[] } {
+function normalizePatternPatterns(p: { patterns?: PatternList }): { patterns?: NPattern[] };
+function normalizePatternPatterns(p: { patterns?: PatternList }): { patterns?: NPattern[] } {
     const patterns = p.patterns ? normalizePatterns(p.patterns) : undefined;
     return { patterns };
 }
 
-function normalizePatterns(patterns: Pattern[]): NPattern[] {
-    return patterns.map(nPattern);
+function normalizePatterns(patterns: PatternList): NPattern[] {
+    return patterns.map((p) => (typeof p === 'string' ? { include: p } : p)).map(nPattern);
 }
 
 function normalizePatternRepository(p: { repository?: Repository }): { repository?: NRepository } {
@@ -255,25 +282,25 @@ function normalizeCapture(cap: Capture | undefined): NCapture | undefined {
     return capture;
 }
 
-function makeExec(reg: string | RegExp): (line: LineOffset) => MatchResult | undefined {
+function makeExec(reg: string | RegExp): (line: LineOffsetAnchored) => MatchResult | undefined {
     if (typeof reg === 'string') return matchString(reg);
     return matchRegExp(reg);
 }
 
-function matchString(s: string): (line: LineOffset) => MatchResult | undefined {
+function matchString(s: string): (line: LineOffsetAnchored) => MatchResult | undefined {
     return (line) => {
-        const input = line.line;
+        const input = line.text;
         const index = input.indexOf(s, line.offset);
         if (index < 0) return undefined;
         return createSimpleMatchResult(s, input, index);
     };
 }
 
-function matchRegExp(r: RegExp): (line: LineOffset) => MatchResult | undefined {
+function matchRegExp(r: RegExp): (line: LineOffsetAnchored) => MatchResult | undefined {
     return (line) => {
         const rg = RegExp(r, 'g');
         rg.lastIndex = line.offset;
-        const m = rg.exec(line.line);
+        const m = rg.exec(line.text);
         return (m && createMatchResult(m)) ?? undefined;
     };
 }

@@ -1,9 +1,10 @@
 import { MatchResult } from './matchResult';
+import { LineOffsetAnchored } from './types';
 
 export interface NGrammar extends NPatternBase {
     scopeName: NScopeSource;
     patterns: NPattern[];
-    find(line: LineOffset, rule: Rule | undefined): MatchingRule | undefined;
+    find(line: LineOffsetAnchored, rule: Rule | undefined): MatchingRule | undefined;
 }
 
 /**
@@ -16,19 +17,17 @@ export type NScope = string;
  */
 export type NScopeSource = string;
 
-export type NPattern = NPatternMatch | NPatternBeginEnd | NPatternInclude | NPatternPatterns | NPatternName;
+export type NPattern =
+    | NPatternBeginEnd
+    | NPatternInclude
+    | NPatternMatch
+    | NPatternName
+    | NPatternPatterns
+    | NPatternRepositoryReference;
 
 // export type PatternFn = () => _Pattern;
 
 export type Match = string | RegExp;
-
-/**
- * A pattern with a single match clause
- */
-export interface NPatternMatch extends NPatternBase {
-    match: Match;
-    captures?: NCapture;
-}
 
 /**
  * A Pattern with a name but no match clauses.
@@ -46,6 +45,14 @@ export interface NPatternPatterns extends NPatternBase {
 }
 
 /**
+ * A pattern with a single match clause
+ */
+export interface NPatternMatch extends NPatternBase {
+    match: Match;
+    captures?: NCapture;
+}
+
+/**
  * A Pattern with a Begin/End Match clause
  */
 export interface NPatternBeginEnd extends NPatternBase {
@@ -54,14 +61,24 @@ export interface NPatternBeginEnd extends NPatternBase {
     contentName?: NScope;
     captures?: NCapture;
     beginCaptures?: NCapture;
-    endCapture?: NCapture;
+    endCaptures?: NCapture;
+}
+
+/**
+ * Include a pattern from the repository
+ */
+export interface NPatternRepositoryReference extends NPatternBase {
+    reference: NRepositoryReference;
+    name?: undefined;
+    patterns?: undefined;
+    repository?: undefined;
 }
 
 /**
  * Include patterns for including patterns from another pattern
  */
 export interface NPatternInclude extends NPatternBase {
-    include: IncludeRef;
+    include: IncludeExternalRef;
     name?: undefined;
     patterns?: undefined;
     repository?: undefined;
@@ -69,7 +86,7 @@ export interface NPatternInclude extends NPatternBase {
 
 /**
  * Reference to a Repository pattern
- * @pattern ^(#.*|$self|$base)$
+ * @pattern ^([\w-]+|$self|$base)$
  */
 export type NRepositoryReference = string;
 
@@ -79,16 +96,11 @@ export type NRepositoryReference = string;
  */
 export type ExternalGrammarReference = string;
 
-export type IncludeRef = NRepositoryReference | ExternalGrammarReference;
+export type IncludeExternalRef = ExternalGrammarReference;
 
 export type NRepository = Record<string, NPattern>;
 
 export type NCapture = Record<string | number, NScope>;
-
-export interface LineOffset {
-    line: string;
-    offset: number;
-}
 
 export interface Rule {
     grammar: NGrammar;
@@ -97,8 +109,8 @@ export interface Rule {
     parent: Rule | undefined;
     repository: NRepository;
     depth: number;
-    matchChildren?: (line: LineOffset) => MatchingRule | undefined;
-    end?: (line: LineOffset) => MatchResult | undefined;
+    matchChildren?: (line: LineOffsetAnchored) => MatchingRule | undefined;
+    end?: (line: LineOffsetAnchored) => MatchResult | undefined;
 }
 
 export interface MatchingRule extends Rule {
@@ -106,8 +118,10 @@ export interface MatchingRule extends Rule {
 }
 
 export interface NPatternBase {
-    find(line: LineOffset, rule: Rule): MatchingRule | undefined;
+    find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined;
     name?: NScope;
+    comment?: string;
+    disabled?: boolean;
     patterns?: NPattern[];
     repository?: NRepository;
 }

@@ -1,5 +1,5 @@
 import { grammar as grammarTS } from '../grammars/typescript';
-import { LineOffset } from './grammarNormalized';
+import { LineOffsetAnchored } from './types';
 import { extractScope, normalizeGrammar } from './grammarNormalizer';
 
 describe('grammarNormalizer', () => {
@@ -18,7 +18,7 @@ describe('grammarNormalizer', () => {
         ${`x = "a's" + 'b'; // comment\n`} | ${15}  | ${['comment.line.ts', 'source.ts']}         | ${oc({ index: 17, match: '// comment' })}
     `('normalizeGrammar.exec', ({ line, offset, expectedScope, expectedMatch }) => {
         const grammar = normalizeGrammar(grammarTS);
-        const lineOff: LineOffset = { line, offset };
+        const lineOff: LineOffsetAnchored = { text: line, offset, lineNumber: 5, anchor: -1 };
         const r = grammar.find(lineOff, undefined);
         const scope = r && extractScope(r);
         expect(scope).toEqual(expectedScope);
