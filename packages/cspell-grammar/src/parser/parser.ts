@@ -1,8 +1,11 @@
 import { Line } from './types';
 
-export interface ParseLineResult {
+export interface ParsedLine {
     parsedText: ParsedText[];
     line: Line;
+}
+
+export interface ParseLineResult extends ParsedLine {
     parse: (nextLine: Line) => ParseLineResult;
 }
 

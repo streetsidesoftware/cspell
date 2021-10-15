@@ -43,3 +43,13 @@ export interface MatchSegment {
     groupNum: number;
     groupName: string | string[] | undefined;
 }
+
+export type Scope = string;
+
+export type AppliedScopes = Scope[];
+
+export interface TokenRange {
+    scope: AppliedScopes;
+    start: number;
+    end: number;
+}

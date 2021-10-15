@@ -3,7 +3,7 @@ import { LineOffsetAnchored, MatchResult } from './types';
 export interface NGrammar extends NPatternBase {
     scopeName: NScopeSource;
     patterns: NPattern[];
-    bind(rule: Rule | undefined): Rule;
+    bind(rule?: Rule): Rule;
 }
 
 /**
