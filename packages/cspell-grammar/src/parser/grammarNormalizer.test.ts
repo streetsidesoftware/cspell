@@ -1,12 +1,12 @@
 import { grammar as grammarTS } from '../grammars/typescript';
-import { LineOffsetAnchored } from './types';
+import type { LineOffsetAnchored } from './types';
 import { extractScope, normalizeGrammar } from './grammarNormalizer';
 
 describe('grammarNormalizer', () => {
     test('normalizeGrammar', () => {
         const r = normalizeGrammar(grammarTS);
         expect(r).toBeDefined();
-        expect(typeof r.find).toBe('function');
+        expect(typeof r.bind).toBe('function');
     });
 
     test.each`
@@ -19,10 +19,11 @@ describe('grammarNormalizer', () => {
     `('normalizeGrammar.exec', ({ line, offset, expectedScope, expectedMatch }) => {
         const grammar = normalizeGrammar(grammarTS);
         const lineOff: LineOffsetAnchored = { text: line, offset, lineNumber: 5, anchor: -1 };
-        const r = grammar.find(lineOff, undefined);
-        const scope = r && extractScope(r);
+        const rule = grammar.bind(undefined);
+        const m = rule.findMatch(lineOff);
+        const scope = m && extractScope(m.rule);
         expect(scope).toEqual(expectedScope);
-        expect(r?.match).toEqual(expectedMatch);
+        expect(m?.match).toEqual(expectedMatch);
     });
 });
 

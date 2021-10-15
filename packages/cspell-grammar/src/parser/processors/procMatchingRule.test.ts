@@ -2,7 +2,7 @@ import assert from 'assert';
 import { Grammar } from '../grammarDefinition';
 import { normalizeGrammar } from '../grammarNormalizer';
 import { ParsedText } from '../parser';
-import { applyCaptures } from './procMatchingRule';
+import { applyCaptureToBeginOrMatch } from './procMatchingRule';
 
 const grammar: Grammar = {
     scopeName: 'source.tst',
@@ -60,7 +60,7 @@ describe('procMatchingRule', () => {
     `('applyCaptures $text $comment', ({ text, offset, expected }) => {
         const m = match(text, offset);
         assert(m);
-        expect(applyCaptures(m)).toEqual(expected);
+        expect(applyCaptureToBeginOrMatch(m)).toEqual(expected);
     });
 });
 
@@ -70,7 +70,8 @@ function s(scope: string[]): ParsedText {
 
 function match(text: string, offset = 0, lineNumber = 42, anchor = -1) {
     const g = normalizeGrammar(grammar);
-    return g.find({ text, offset, anchor, lineNumber }, undefined);
+    const rule = g.bind(undefined);
+    return rule.findMatch({ text, offset, anchor, lineNumber });
 }
 
 function oc<T>(t: Partial<T>): T {

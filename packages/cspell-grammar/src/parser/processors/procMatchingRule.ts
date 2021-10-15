@@ -1,23 +1,49 @@
-import { MatchingRule, NPatternBeginEnd } from '../grammarNormalized';
+import { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNormalized';
 import { extractScope } from '../grammarNormalizer';
-import { MatchSegment, segmentMatch } from '../matchResult';
+import { segmentMatch } from '../matchResult';
 import { ParsedText } from '../parser';
+import type { MatchResult, MatchSegment } from '../types';
 import { isDefined } from '../util';
+
+/**
+ * Apply the scopes to the line
+ * @param line - line of text
+ * @param matchRuleResult - the matching rule
+ */
+export function applyCaptureToBeginOrMatch(matchRuleResult: MatchRuleResult): ParsedText[] {
+    const { match, rule } = matchRuleResult;
+
+    const bePattern = <NPatternBeginEnd>rule.pattern;
+
+    const captures = bePattern.beginCaptures ?? bePattern.captures;
+
+    return applyCaptures(rule, match, captures);
+}
 
 /**
  * Apply the scopes to the line
  * @param line - line of text
  * @param rule - the matching rule
  */
-export function applyCaptures(rule: MatchingRule): ParsedText[] {
-    const { match, pattern } = rule;
+export function applyCaptureToEnd(rule: Rule, match: MatchResult): ParsedText[] {
+    const { pattern } = rule;
 
     const bePattern = <NPatternBeginEnd>pattern;
+
+    const captures = bePattern.beginCaptures ?? bePattern.captures;
+
+    return applyCaptures(rule, match, captures);
+}
+
+/**
+ * Apply the scopes to the line
+ * @param line - line of text
+ * @param rule - the matching rule
+ */
+export function applyCaptures(rule: Rule, match: MatchResult, captures: NCaptures | undefined): ParsedText[] {
     const scope = extractScope(rule);
     const text = match.match;
     const input = match.input;
-
-    const captures = bePattern.beginCaptures ?? bePattern.captures;
 
     if (!captures) {
         const tokenized: ParsedText = {

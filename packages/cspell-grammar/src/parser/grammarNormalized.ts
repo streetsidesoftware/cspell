@@ -1,10 +1,9 @@
-import { MatchResult } from './matchResult';
-import { LineOffsetAnchored } from './types';
+import { LineOffsetAnchored, MatchResult } from './types';
 
 export interface NGrammar extends NPatternBase {
     scopeName: NScopeSource;
     patterns: NPattern[];
-    find(line: LineOffsetAnchored, rule: Rule | undefined): MatchingRule | undefined;
+    bind(rule: Rule | undefined): Rule;
 }
 
 /**
@@ -49,7 +48,7 @@ export interface NPatternPatterns extends NPatternBase {
  */
 export interface NPatternMatch extends NPatternBase {
     match: Match;
-    captures?: NCapture;
+    captures?: NCaptures;
 }
 
 /**
@@ -59,9 +58,9 @@ export interface NPatternBeginEnd extends NPatternBase {
     begin: Match;
     end?: Match;
     contentName?: NScope;
-    captures?: NCapture;
-    beginCaptures?: NCapture;
-    endCaptures?: NCapture;
+    captures?: NCaptures;
+    beginCaptures?: NCaptures;
+    endCaptures?: NCaptures;
 }
 
 /**
@@ -100,25 +99,27 @@ export type IncludeExternalRef = ExternalGrammarReference;
 
 export type NRepository = Record<string, NPattern>;
 
-export type NCapture = Record<string | number, NScope>;
+export type NCaptures = Record<string | number, NScope>;
 
 export interface Rule {
     grammar: NGrammar;
-    match: MatchResult | undefined;
     pattern: NPattern;
     parent: Rule | undefined;
     repository: NRepository;
     depth: number;
-    matchChildren?: (line: LineOffsetAnchored) => MatchingRule | undefined;
+    findMatch: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
+    findNext?: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
     end?: (line: LineOffsetAnchored) => MatchResult | undefined;
 }
 
-export interface MatchingRule extends Rule {
+export interface MatchRuleResult {
+    rule: Rule;
     match: MatchResult;
+    line: LineOffsetAnchored;
 }
 
 export interface NPatternBase {
-    find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined;
+    bind(rule: Rule): Rule;
     name?: NScope;
     comment?: string;
     disabled?: boolean;

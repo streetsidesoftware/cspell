@@ -1,6 +1,9 @@
+import { Line } from './types';
+
 export interface ParseLineResult {
     parsedText: ParsedText[];
-    parse: (nextLine: string) => ParseLineResult;
+    line: Line;
+    parse: (nextLine: Line) => ParseLineResult;
 }
 
 export type TextScope = string;

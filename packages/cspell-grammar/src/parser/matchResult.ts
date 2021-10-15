@@ -1,30 +1,4 @@
-export type Groups = Record<string, string | undefined>;
-
-export interface MatchResult {
-    /** offset of the match into the input strings */
-    index: number;
-    /** the input string matched against */
-    input: string;
-    /**
-     * This is the full match
-     */
-    match: string;
-    /**
-     * Numbered group matches.
-     */
-    matches: (string | undefined)[];
-    /**
-     * Named matching groups.
-     */
-    groups: Groups;
-}
-
-export interface MatchSegment {
-    match: string;
-    index: number;
-    groupNum: number;
-    groupName: string | string[] | undefined;
-}
+import type { MatchResult, MatchSegment } from './types';
 
 /**
  * Try to assign group names and numbers to segments of the matching text.

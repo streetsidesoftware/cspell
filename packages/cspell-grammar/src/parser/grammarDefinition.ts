@@ -41,14 +41,14 @@ export interface PatternPatterns extends PatternBase {
 
 interface PatternMatchBase extends PatternBase {
     begin?: Match;
-    beginCaptures?: Capture;
-    captures?: Capture;
+    beginCaptures?: Captures;
+    captures?: Captures;
     contentName?: Scope;
     end?: Match;
-    endCaptures?: Capture;
+    endCaptures?: Captures;
     match?: Match;
     while?: Match;
-    whileCaptures?: Capture;
+    whileCaptures?: Captures;
 }
 
 /**
@@ -56,7 +56,7 @@ interface PatternMatchBase extends PatternBase {
  */
 export interface PatternMatch extends PatternMatchBase {
     match: Match;
-    captures?: Capture;
+    captures?: Captures;
     patterns?: undefined;
     begin?: undefined;
     end?: undefined;
@@ -75,9 +75,9 @@ export interface PatternBeginEnd extends PatternMatchBase {
     end?: Match;
     match?: undefined;
     contentName?: Scope;
-    captures?: Capture;
-    beginCaptures?: Capture;
-    endCaptures?: Capture;
+    captures?: Captures;
+    beginCaptures?: Captures;
+    endCaptures?: Captures;
     while?: undefined;
     whileCaptures?: undefined;
 }
@@ -87,11 +87,11 @@ export interface PatternBeginWhile extends PatternMatchBase {
     end?: Match;
     match?: undefined;
     contentName?: Scope;
-    captures?: Capture;
-    beginCaptures?: Capture;
+    captures?: Captures;
+    beginCaptures?: Captures;
     endCaptures?: undefined;
     while: Match;
-    whileCaptures?: Capture;
+    whileCaptures?: Captures;
 }
 
 /**
@@ -120,7 +120,7 @@ export type PatternRef = RepositoryReference | ExternalGrammarReference;
 
 export type Repository = Record<string, Pattern>;
 
-export type Capture = Scope | Record<string | number, PatternName | Scope>;
+export type Captures = Scope | Record<string | number, PatternName | Scope>;
 
 export interface PatternBase {
     /** Optional name scope */

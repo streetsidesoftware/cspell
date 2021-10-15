@@ -1,6 +1,6 @@
 import { Grammar, Pattern, Repository } from '..';
 import {
-    Capture,
+    Captures,
     PatternBeginEnd,
     PatternInclude,
     PatternList,
@@ -9,8 +9,8 @@ import {
     PatternPatterns,
 } from './grammarDefinition';
 import {
-    MatchingRule,
-    NCapture,
+    MatchRuleResult,
+    NCaptures,
     NGrammar,
     NPattern,
     NPatternBeginEnd,
@@ -23,8 +23,8 @@ import {
     Rule,
 } from './grammarNormalized';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
-import { createMatchResult, createSimpleMatchResult, MatchResult } from './matchResult';
-import { LineOffsetAnchored } from './types';
+import { createMatchResult, createSimpleMatchResult } from './matchResult';
+import type { LineOffsetAnchored, MatchResult } from './types';
 
 export function normalizeGrammar(grammar: Grammar): NGrammar {
     const { scopeName, name, ...rest } = grammar;
@@ -37,13 +37,19 @@ export function normalizeGrammar(grammar: Grammar): NGrammar {
         name,
         patterns: pp.patterns,
         repository,
-        find,
+        bind,
     };
 
-    function find(line: LineOffsetAnchored, rule: Rule | undefined): MatchingRule | undefined {
-        const grammarRule = grammarToRule(g, pp);
-        grammarRule.parent = rule;
-        return findInPatterns(pp.patterns, line, grammarRule);
+    function bind(rule: Rule | undefined): Rule {
+        const grammarRule: Rule = {
+            ...grammarToRule(g, pp, rule),
+            findMatch,
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            return findInPatterns(pp.patterns, line, grammarRule);
+        }
+        return grammarRule;
     }
 
     return g;
@@ -74,17 +80,24 @@ function normalizePatternMatch(p: PatternMatch): NPatternMatch {
         ...p,
         repository,
         captures: normalizeCapture(p.captures),
-        find: exec,
+        bind,
     };
 
     const regExec = makeExec(p.match);
 
-    function exec(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
-        const ctx = appendRule(rule, self);
-        const match = regExec(line);
-        if (!match) return undefined;
-        ctx.match = match;
-        return ctx as MatchingRule;
+    function bind(parentRule: Rule): Rule {
+        const rule: Rule = {
+            ...appendRule(parentRule, self),
+            findMatch,
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            const match = regExec(line);
+            if (!match) return undefined;
+            return { rule, match, line };
+        }
+
+        return rule;
     }
 
     return self;
@@ -100,17 +113,24 @@ function normalizePatternBeginEnd(p: PatternBeginEnd): NPatternBeginEnd {
         endCaptures: normalizeCapture(p.endCaptures),
         repository,
         patterns,
-        find: exec,
+        bind,
     };
 
     const regExec = makeExec(p.begin);
 
-    function exec(line: LineOffsetAnchored, context: Rule): MatchingRule | undefined {
-        const ctx = appendRule(context, self);
-        const match = regExec(line);
-        if (!match) return undefined;
-        ctx.match = match;
-        return ctx as MatchingRule;
+    function bind(parentRule: Rule): Rule {
+        const rule: Rule = {
+            ...appendRule(parentRule, self),
+            findMatch,
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            const match = regExec(line);
+            if (!match) return undefined;
+            return { rule, match, line };
+        }
+
+        return rule;
     }
 
     return self;
@@ -123,15 +143,21 @@ function normalizePatternName(p: PatternName): NPatternName {
         ...p,
         repository,
         patterns,
-        find,
+        bind,
     };
-    function find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
-        const ctx = appendRule(rule, self);
-        const input = line.text.slice(line.offset);
-        const match = createSimpleMatchResult(input, input, line.offset);
 
-        const r: MatchingRule = { ...ctx, match };
-        return r;
+    function bind(parentRule: Rule): Rule {
+        const rule: Rule = {
+            ...appendRule(parentRule, self),
+            findMatch,
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            const input = line.text.slice(line.offset);
+            const match = createSimpleMatchResult(input, input, line.offset);
+            return { rule, match, line };
+        }
+        return rule;
     }
     return self;
 }
@@ -149,19 +175,25 @@ function normalizePatternIncludeRef(p: PatternInclude): NPatternRepositoryRefere
     const self: NPatternRepositoryReference = {
         ...rest,
         reference,
-        find: find,
+        bind,
     };
 
-    function findRef(rule: Rule): NPattern {
+    function findRef(rule: Rule): Rule {
         const pat = rule.repository[reference];
         if (pat === undefined) throw new Error(`Unknown Include Reference ${include}`);
-        return pat;
+        return pat.bind(rule);
     }
 
-    function find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
-        const pat = findRef(rule);
-        const ctx = appendRule(rule, self);
-        return pat.find(line, ctx);
+    function bind(parentRule: Rule): Rule {
+        const rule: Rule = {
+            ...appendRule(parentRule, self),
+            findMatch,
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            return findRef(rule).findMatch(line);
+        }
+        return rule;
     }
 
     return self;
@@ -170,15 +202,23 @@ function normalizePatternIncludeRef(p: PatternInclude): NPatternRepositoryRefere
 function normalizePatternIncludeExt(p: PatternInclude): NPatternInclude | NPatternRepositoryReference {
     const self: NPatternInclude = {
         ...p,
-        find: find,
+        bind,
     };
 
     if (!p.include.startsWith('#')) {
         throw new Error('External Imports not yet supported');
     }
 
-    function find(_line: LineOffsetAnchored, _rule: Rule): MatchingRule | undefined {
-        return undefined;
+    function bind(parentRule: Rule): Rule {
+        const rule: Rule = {
+            ...appendRule(parentRule, self),
+            findMatch,
+        };
+
+        function findMatch(_line: LineOffsetAnchored): MatchRuleResult | undefined {
+            return undefined;
+        }
+        return rule;
     }
 
     return self;
@@ -191,22 +231,30 @@ function normalizePatternsPatterns(p: PatternPatterns): NPatternPatterns {
         ...p,
         repository,
         patterns,
-        find,
+        bind,
     };
 
-    function find(line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
-        const patRule = appendRule(rule, self);
-        return findInPatterns(self.patterns, line, patRule);
+    function bind(parentRule: Rule): Rule {
+        const rule: Rule = {
+            ...appendRule(parentRule, self),
+            findMatch,
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            return findInPatterns(self.patterns, line, rule);
+        }
+        return rule;
     }
 
     return self;
 }
 
-function findInPatterns(patterns: NPattern[], line: LineOffsetAnchored, rule: Rule): MatchingRule | undefined {
-    let r: MatchingRule | undefined = undefined;
+function findInPatterns(patterns: NPattern[], line: LineOffsetAnchored, rule: Rule): MatchRuleResult | undefined {
+    let r: MatchRuleResult | undefined = undefined;
     for (const pat of patterns) {
         if (pat.disabled) continue;
-        const er = pat.find(line, rule);
+        const pRule = pat.bind(rule);
+        const er = pRule.findMatch(line);
         if (er?.match !== undefined) {
             r = (r && r.match && r.match.index < er.match.index && r) || er;
         }
@@ -242,7 +290,9 @@ function normalizeRepository(rep: Repository): NRepository {
     return repository;
 }
 
-function appendRule(parent: Rule, pattern: NPattern): Rule {
+type AppendRuleResult = Pick<Rule, 'grammar' | 'pattern' | 'parent' | 'depth' | 'repository'>;
+
+function appendRule(parent: Rule, pattern: NPattern): AppendRuleResult {
     const { repository, depth } = parent;
     const rep = !pattern.repository ? repository : Object.assign(Object.create(null), repository, pattern.repository);
     return {
@@ -251,30 +301,29 @@ function appendRule(parent: Rule, pattern: NPattern): Rule {
         parent,
         repository: rep,
         depth: depth + 1,
-        match: undefined,
     };
 }
 
-function grammarToRule(grammar: NGrammar, pattern: NPatternPatterns): Rule {
+function grammarToRule(grammar: NGrammar, pattern: NPatternPatterns, parent: Rule | undefined): AppendRuleResult {
     const depth = 0;
     const repository = Object.create(null);
     grammar.repository && Object.assign(repository, pattern.repository);
     repository['$self'] = pattern;
+    repository['$base'] = repository['$base'] || pattern;
     return {
         grammar,
         pattern,
-        parent: undefined,
+        parent,
         repository,
         depth,
-        match: undefined,
     };
 }
 
-function normalizeCapture(cap: Capture | undefined): NCapture | undefined {
+function normalizeCapture(cap: Captures | undefined): NCaptures | undefined {
     if (cap === undefined) return undefined;
     if (typeof cap === 'string') return { [0]: cap };
 
-    const capture: NCapture = Object.create(null);
+    const capture: NCaptures = Object.create(null);
     for (const [key, pat] of Object.entries(cap)) {
         capture[key] = typeof pat === 'string' ? pat : normalizePatternName(pat).name;
     }
