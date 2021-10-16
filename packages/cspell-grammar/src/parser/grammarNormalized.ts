@@ -1,4 +1,4 @@
-import { LineOffsetAnchored, MatchResult } from './types';
+import type { LineOffsetAnchored, MatchResult } from './types';
 
 export interface NGrammar extends NPatternBase {
     scopeName: NScopeSource;

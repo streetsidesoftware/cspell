@@ -1,308 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`tokenizeLine tokenizeText line # comment.
- 1`] = `
+ - undefined 1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line # comment.
-",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "comment.line.s",
-          "source.s",
-        ],
-        "text": "# comment.",
-      },
-      Object {
-        "offset": 15,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "
-",
-      },
-    ],
-  },
+  0: "line # comment.\\n":
+    0: "line " -- source.s
+    5: "# comment." -- comment.line.s source.s
+    15: "\\n" -- source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line # comment. 1`] = `
+exports[`tokenizeLine tokenizeText line # comment. - undefined 1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line # comment.",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "comment.line.s",
-          "source.s",
-        ],
-        "text": "# comment.",
-      },
-    ],
-  },
+  0: "line # comment.":
+    0: "line " -- source.s
+    5: "# comment." -- comment.line.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line ( a (b)) 1`] = `
+exports[`tokenizeLine tokenizeText line ( a (b)) - undefined 1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line ( a (b))",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 6,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " a ",
-      },
-      Object {
-        "offset": 9,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 10,
-        "scope": Array [
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "b",
-      },
-      Object {
-        "offset": 11,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-      Object {
-        "offset": 12,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-    ],
-  },
+  0: "line ( a (b))":
+    0: "line " -- source.s
+    5: "(" -- paren.braces.s braces.s source.s
+    6: " a " -- braces.s source.s
+    9: "(" -- paren.braces.s braces.s braces.s source.s
+    10: "b" -- braces.s braces.s source.s
+    11: ")" -- paren.braces.s braces.s braces.s source.s
+    12: ")" -- paren.braces.s braces.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line ( a { b } c) 1`] = `
+exports[`tokenizeLine tokenizeText line ( a { b } c) - undefined 1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line ( a { b } c)",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 6,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " a ",
-      },
-      Object {
-        "offset": 9,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "{",
-      },
-      Object {
-        "offset": 10,
-        "scope": Array [
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": " b ",
-      },
-      Object {
-        "offset": 13,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "}",
-      },
-      Object {
-        "offset": 14,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " c",
-      },
-      Object {
-        "offset": 16,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-    ],
-  },
-]
-`;
-
-exports[`tokenizeLine tokenizeText line ( a { b } c) 2`] = `
-Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line ( a { b } c)",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 6,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " a ",
-      },
-      Object {
-        "offset": 9,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "{",
-      },
-      Object {
-        "offset": 10,
-        "scope": Array [
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": " b ",
-      },
-      Object {
-        "offset": 13,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "}",
-      },
-      Object {
-        "offset": 14,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " c",
-      },
-      Object {
-        "offset": 16,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-    ],
-  },
+  0: "line ( a { b } c)":
+    0: "line " -- source.s
+    5: "(" -- paren.braces.s braces.s source.s
+    6: " a " -- braces.s source.s
+    9: "{" -- curly.braces.s braces.s braces.s source.s
+    10: " b " -- braces.s braces.s source.s
+    13: "}" -- curly.braces.s braces.s braces.s source.s
+    14: " c" -- braces.s source.s
+    16: ")" -- paren.braces.s braces.s source.s,
 ]
 `;
