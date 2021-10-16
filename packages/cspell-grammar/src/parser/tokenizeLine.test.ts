@@ -8,33 +8,39 @@ import type { TokenizedLine } from './types';
 
 const grammar = normalizeGrammar(Simple.grammar);
 
-interface TokenizeTest {
-    name?: string;
-    comment?: string;
-    text: string;
-    result: TokenizedLine[];
-}
-
 describe('tokenizeLine', () => {
-    const tk: TokenizeTest[] = [
-        { text: 'line # comment.', result: [] },
-        { text: 'line # comment.\n', result: [] },
-        { text: 'line ( a (b))', result: [] },
-        { text: 'line ( a { b } c)', result: [] },
-    ];
+    interface TextAndName {
+        text: string;
+        name: string;
+    }
+
+    const sampleNestedParen = `
+(
+    {
+        {
+            deep
+        }
+    }
+)
+`;
+
+    function t(text: string, name?: string): TextAndName {
+        return { text, name: name ?? JSON.stringify(text) };
+    }
 
     test.each`
-        text          | expected        | name                        | comment
-        ${tk[0].text} | ${tk[0].result} | ${tk[0].name || tk[0].text} | ${tk[0].comment}
-        ${tk[1].text} | ${tk[1].result} | ${tk[1].name || tk[1].text} | ${tk[1].comment}
-        ${tk[2].text} | ${tk[2].result} | ${tk[2].name || tk[2].text} | ${tk[2].comment}
-        ${tk[3].text} | ${tk[3].result} | ${tk[3].name || tk[3].text} | ${tk[3].comment}
-    `('tokenizeText $name - $comment', ({ text }) => {
+        test                                         | comment
+        ${t('line # comment.')}                      | ${''}
+        ${t('line # comment.\n')}                    | ${''}
+        ${t('line ( a (b))')}                        | ${''}
+        ${t('line ( a { b } c)')}                    | ${''}
+        ${t(sampleNestedParen, 'sampleNestedParen')} | ${''}
+    `('tokenizeText $test.name - $comment', ({ test }: { test: TextAndName }) => {
         expect.addSnapshotSerializer({
             test: isTokenizedLine,
             serialize: serializeTokenizedLine,
         });
-        const r = tokenizeText(text, grammar);
+        const r = tokenizeText(test.text, grammar);
         assertParsedLinesAreValid(r);
         expect(r).toMatchSnapshot();
     });
@@ -77,10 +83,17 @@ function serializeTokenizedLine(
     _refs: unknown
 ) {
     const { line, tokens: parsedText } = val;
-    const pt = parsedText
-        .map((t) => `${indentation}  ${t.offset}: ${JSON.stringify(t.text)} -- ${t.scope.join(' ')}`)
+    const textAndScope = parsedText.map((t) => [
+        `${t.offset}: ${JSON.stringify(t.text.replace(/\r/g, '↤').replace(/\n/g, '↩'))}`,
+        `${t.scope.join(' ')}`,
+    ]);
+
+    const maxLen = textAndScope.reduce((a, ts) => Math.max(a, ts[0].length), 0);
+
+    const pt = textAndScope
+        .map((ts) => `${indentation}  ${ts[0]}${' '.repeat(maxLen - ts[0].length)}     -- ${ts[1]}`)
         .join('\n');
-    return `${line.lineNumber}: ${JSON.stringify(line.text)}:\n${pt}`;
+    return `${line.lineNumber}: ${JSON.stringify(line.text.replace(/\r/g, '↤').replace(/\n/g, '↩'))}:\n${pt}`;
 }
 
 function isTokenizedLine(v: unknown | TokenizedLine): v is TokenizedLine {

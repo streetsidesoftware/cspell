@@ -1,46 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tokenizeLine tokenizeText line # comment.
- - undefined 1`] = `
-Array [
-  0: "line # comment.\\n":
-    0: "line " -- source.s
-    5: "# comment." -- comment.line.s source.s
-    15: "\\n" -- source.s,
-]
-`;
-
-exports[`tokenizeLine tokenizeText line # comment. - undefined 1`] = `
+exports[`tokenizeLine tokenizeText "line # comment." -  1`] = `
 Array [
   0: "line # comment.":
-    0: "line " -- source.s
-    5: "# comment." -- comment.line.s source.s,
+    0: "line "          -- source.s
+    5: "# comment."     -- comment.line.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line ( a (b)) - undefined 1`] = `
+exports[`tokenizeLine tokenizeText "line # comment.\\n" -  1`] = `
+Array [
+  0: "line # comment.↩":
+    0: "line "          -- source.s
+    5: "# comment."     -- comment.line.s source.s
+    15: "↩"             -- source.s,
+]
+`;
+
+exports[`tokenizeLine tokenizeText "line ( a (b))" -  1`] = `
 Array [
   0: "line ( a (b))":
-    0: "line " -- source.s
-    5: "(" -- paren.braces.s braces.s source.s
-    6: " a " -- braces.s source.s
-    9: "(" -- paren.braces.s braces.s braces.s source.s
-    10: "b" -- braces.s braces.s source.s
-    11: ")" -- paren.braces.s braces.s braces.s source.s
-    12: ")" -- paren.braces.s braces.s source.s,
+    0: "line "     -- source.s
+    5: "("         -- paren.braces.s braces.s source.s
+    6: " a "       -- braces.s source.s
+    9: "("         -- paren.braces.s braces.s braces.s source.s
+    10: "b"        -- braces.s braces.s source.s
+    11: ")"        -- paren.braces.s braces.s braces.s source.s
+    12: ")"        -- paren.braces.s braces.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line ( a { b } c) - undefined 1`] = `
+exports[`tokenizeLine tokenizeText "line ( a { b } c)" -  1`] = `
 Array [
   0: "line ( a { b } c)":
-    0: "line " -- source.s
-    5: "(" -- paren.braces.s braces.s source.s
-    6: " a " -- braces.s source.s
-    9: "{" -- curly.braces.s braces.s braces.s source.s
-    10: " b " -- braces.s braces.s source.s
-    13: "}" -- curly.braces.s braces.s braces.s source.s
-    14: " c" -- braces.s source.s
-    16: ")" -- paren.braces.s braces.s source.s,
+    0: "line "     -- source.s
+    5: "("         -- paren.braces.s braces.s source.s
+    6: " a "       -- braces.s source.s
+    9: "{"         -- curly.braces.s braces.s braces.s source.s
+    10: " b "      -- braces.s braces.s source.s
+    13: "}"        -- curly.braces.s braces.s braces.s source.s
+    14: " c"       -- braces.s source.s
+    16: ")"        -- paren.braces.s braces.s source.s,
+]
+`;
+
+exports[`tokenizeLine tokenizeText sampleNestedParen -  1`] = `
+Array [
+  0: "↩":
+    0: "↩"     -- source.s,
+  1: "(↩":
+    0: "("     -- paren.braces.s braces.s source.s
+    1: "↩"     -- braces.s source.s,
+  2: "    {↩":
+    0: "    "     -- braces.s source.s
+    4: "{"        -- curly.braces.s braces.s braces.s source.s
+    5: "↩"        -- braces.s braces.s source.s,
+  3: "        {↩":
+    0: "        "     -- braces.s braces.s source.s
+    8: "{"            -- curly.braces.s braces.s braces.s braces.s source.s
+    9: "↩"            -- braces.s braces.s braces.s source.s,
+  4: "            deep↩":
+    0: "            deep↩"     -- braces.s braces.s braces.s source.s,
+  5: "        }↩":
+    0: "        "     -- braces.s braces.s braces.s source.s
+    8: "}"            -- curly.braces.s braces.s braces.s braces.s source.s
+    9: "↩"            -- braces.s braces.s source.s,
+  6: "    }↩":
+    0: "    "     -- braces.s braces.s source.s
+    4: "}"        -- curly.braces.s braces.s braces.s source.s
+    5: "↩"        -- braces.s source.s,
+  7: ")↩":
+    0: ")"     -- paren.braces.s braces.s source.s
+    1: "↩"     -- source.s,
 ]
 `;
