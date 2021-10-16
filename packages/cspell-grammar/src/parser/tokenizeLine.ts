@@ -2,7 +2,7 @@ import assert from 'assert';
 import { NGrammar, Rule } from './grammarNormalized';
 import { extractScope } from './grammarNormalizer';
 import { applyCaptureToBeginOrMatch, applyCaptureToEnd } from './processors/procMatchingRule';
-import type { Line, LineOffsetAnchored, MatchResult, TokenizedLine, TokenizedLineResult, TokenizedText } from './types';
+import type { Line, LineOffsetAnchored, TokenizedLine, TokenizedLineResult, TokenizedText } from './types';
 
 export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
     const text = line.text;
@@ -16,17 +16,17 @@ export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
 
     while (ctx.line.offset < lineLen) {
         // We are at an end
-        while (ctx.endMatch?.index === ctx.line.offset) {
-            const { endMatch } = ctx;
+        let endMatch = ctx.rule.end?.(ctx.line);
+        while (endMatch?.index === ctx.line.offset) {
             parsedText.push(...applyCaptureToEnd(ctx.rule, endMatch));
             ctx = findParentWithEnd(ctx);
             ctx.line.offset = endMatch.index + endMatch.match.length;
-            ctx.endMatch = ctx.rule.end?.(ctx.line);
+            endMatch = ctx.rule.end?.(ctx.line);
         }
 
         if (ctx.line.offset >= lineLen) break;
 
-        const { line, rule, endMatch } = ctx;
+        const { line, rule } = ctx;
         const offset = line.offset;
         const match = rule.findNext?.(line);
         const limit = endMatch?.index ?? lineLen;
@@ -83,7 +83,6 @@ function toParseLineResult(line: Line, rule: Rule, parsedText: TokenizedText[]):
 interface Context {
     line: LineOffsetAnchored;
     rule: Rule;
-    endMatch?: MatchResult;
     parent?: Context;
 }
 
@@ -102,14 +101,12 @@ function buildContext(line: LineOffsetAnchored, rule: Rule): Context {
     for (let i = rootNum - 1; i >= 0; --i) {
         const rule = rules[i];
         const line = ctx.line;
-        const endMatch = rule.end?.(line);
         ctx = {
             line,
             rule,
-            endMatch,
             parent: ctx,
         };
-        if (endMatch?.index === line.offset) break;
+        // Check while here.
     }
 
     return ctx;
