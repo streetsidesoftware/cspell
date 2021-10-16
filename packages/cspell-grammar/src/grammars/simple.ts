@@ -11,12 +11,14 @@ const repository: Repository = {
     },
     braces_paren: {
         captures: 'paren.braces.s',
+        contentName: 'content.braces.s',
         begin: '(',
         end: ')',
         patterns: ['$self'],
     },
     braces_curly: {
         captures: 'curly.braces.s',
+        contentName: 'content.braces.s',
         begin: '{',
         end: '}',
         patterns: ['$self'],

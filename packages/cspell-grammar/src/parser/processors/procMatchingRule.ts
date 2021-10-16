@@ -40,7 +40,7 @@ export function applyCaptureToEnd(rule: Rule, match: MatchResult): TokenizedText
  * @param rule - the matching rule
  */
 export function applyCaptures(rule: Rule, match: MatchResult, captures: NCaptures | undefined): TokenizedText[] {
-    const scope = extractScope(rule);
+    const scope = extractScope(rule, false);
     const text = match.match;
     const input = match.input;
 

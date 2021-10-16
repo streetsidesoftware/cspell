@@ -22,10 +22,10 @@ Array [
   0: "line ( a (b))":
     0: "line "     -- source.s
     5: "("         -- paren.braces.s braces.s source.s
-    6: " a "       -- braces.s source.s
-    9: "("         -- paren.braces.s braces.s braces.s source.s
-    10: "b"        -- braces.s braces.s source.s
-    11: ")"        -- paren.braces.s braces.s braces.s source.s
+    6: " a "       -- content.braces.s braces.s source.s
+    9: "("         -- paren.braces.s braces.s content.braces.s braces.s source.s
+    10: "b"        -- content.braces.s braces.s content.braces.s braces.s source.s
+    11: ")"        -- paren.braces.s braces.s content.braces.s braces.s source.s
     12: ")"        -- paren.braces.s braces.s source.s,
 ]
 `;
@@ -35,11 +35,11 @@ Array [
   0: "line ( a { b } c)":
     0: "line "     -- source.s
     5: "("         -- paren.braces.s braces.s source.s
-    6: " a "       -- braces.s source.s
-    9: "{"         -- curly.braces.s braces.s braces.s source.s
-    10: " b "      -- braces.s braces.s source.s
-    13: "}"        -- curly.braces.s braces.s braces.s source.s
-    14: " c"       -- braces.s source.s
+    6: " a "       -- content.braces.s braces.s source.s
+    9: "{"         -- curly.braces.s braces.s content.braces.s braces.s source.s
+    10: " b "      -- content.braces.s braces.s content.braces.s braces.s source.s
+    13: "}"        -- curly.braces.s braces.s content.braces.s braces.s source.s
+    14: " c"       -- content.braces.s braces.s source.s
     16: ")"        -- paren.braces.s braces.s source.s,
 ]
 `;
@@ -50,25 +50,25 @@ Array [
     0: "↩"     -- source.s,
   1: "(↩":
     0: "("     -- paren.braces.s braces.s source.s
-    1: "↩"     -- braces.s source.s,
+    1: "↩"     -- content.braces.s braces.s source.s,
   2: "    {↩":
-    0: "    "     -- braces.s source.s
-    4: "{"        -- curly.braces.s braces.s braces.s source.s
-    5: "↩"        -- braces.s braces.s source.s,
+    0: "    "     -- content.braces.s braces.s source.s
+    4: "{"        -- curly.braces.s braces.s content.braces.s braces.s source.s
+    5: "↩"        -- content.braces.s braces.s content.braces.s braces.s source.s,
   3: "        {↩":
-    0: "        "     -- braces.s braces.s source.s
-    8: "{"            -- curly.braces.s braces.s braces.s braces.s source.s
-    9: "↩"            -- braces.s braces.s braces.s source.s,
+    0: "        "     -- content.braces.s braces.s content.braces.s braces.s source.s
+    8: "{"            -- curly.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s
+    9: "↩"            -- content.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s,
   4: "            deep↩":
-    0: "            deep↩"     -- braces.s braces.s braces.s source.s,
+    0: "            deep↩"     -- content.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s,
   5: "        }↩":
-    0: "        "     -- braces.s braces.s braces.s source.s
-    8: "}"            -- curly.braces.s braces.s braces.s braces.s source.s
-    9: "↩"            -- braces.s braces.s source.s,
+    0: "        "     -- content.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s
+    8: "}"            -- curly.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s
+    9: "↩"            -- content.braces.s braces.s content.braces.s braces.s source.s,
   6: "    }↩":
-    0: "    "     -- braces.s braces.s source.s
-    4: "}"        -- curly.braces.s braces.s braces.s source.s
-    5: "↩"        -- braces.s source.s,
+    0: "    "     -- content.braces.s braces.s content.braces.s braces.s source.s
+    4: "}"        -- curly.braces.s braces.s content.braces.s braces.s source.s
+    5: "↩"        -- content.braces.s braces.s source.s,
   7: ")↩":
     0: ")"     -- paren.braces.s braces.s source.s
     1: "↩"     -- source.s,
