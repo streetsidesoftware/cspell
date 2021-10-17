@@ -24,6 +24,15 @@ describe('tokenizeLine', () => {
 )
 `;
 
+    const sampleWithStrings = `
+    const x = 'The auto\\'s left wheel.';
+    function y(param = "first") {
+        start = '('
+        end = ")"
+        msg = \`from \${start} to \${end} \`
+    }
+    `;
+
     function t(text: string, name?: string): TextAndName {
         return { text, name: name ?? JSON.stringify(text) };
     }
@@ -35,6 +44,7 @@ describe('tokenizeLine', () => {
         ${t('line ( a (b))')}                        | ${''}
         ${t('line ( a { b } c)')}                    | ${''}
         ${t(sampleNestedParen, 'sampleNestedParen')} | ${''}
+        ${t(sampleWithStrings, 'complex sample')}    | ${''}
     `('tokenizeText $test.name - $comment', ({ test }: { test: TextAndName }) => {
         expect.addSnapshotSerializer({
             test: isTokenizedLine,

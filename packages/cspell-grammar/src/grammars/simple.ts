@@ -3,7 +3,7 @@ import { Grammar, Repository } from '..';
 
 const repository: Repository = {
     statements: {
-        patterns: ['#braces', '#comment'],
+        patterns: ['#braces', '#comment', '#string'],
     },
     braces: {
         name: 'braces.s',
@@ -31,21 +31,33 @@ const repository: Repository = {
     },
     comment_line_hash: {
         name: 'comment.line.s',
-        match: /#.*\s?/,
+        match: /(#).*\s?/,
+        captures: {
+            '1': 'punctuation.s',
+        },
     },
     comment_line_double_slash: {
         name: 'comment.line.s',
-        match: /\/\/.*\s?/,
+        match: /(\/\/).*\s?/,
+        captures: {
+            '1': 'punctuation.s',
+        },
     },
     comment_doc_block: {
         name: 'comment.block.s',
         begin: '/**',
         end: '*/',
+        captures: {
+            '0': 'punctuation.s',
+        },
     },
     comment_block: {
         name: 'comment.block.s',
         begin: '/*',
         end: '*/',
+        captures: {
+            '0': 'punctuation.s',
+        },
     },
     string: {
         patterns: [{ include: '#string_q_single' }, { include: '#string_q_double' }, { include: '#string_template' }],
@@ -55,21 +67,27 @@ const repository: Repository = {
         begin: "'",
         end: /'|((?:[^\\\n])$)/,
         patterns: [{ include: '#string_character_escape' }],
+        captures: {
+            '0': 'punctuation.s',
+        },
     },
     string_q_double: {
         name: 'string.quoted.double.s',
         begin: '"',
         end: /"|((?:[^\\\n])$)/,
         patterns: [{ include: '#string_character_escape' }],
+        captures: {
+            '0': 'punctuation.s',
+        },
     },
     string_template: {
         name: 'string.template.s',
         begin: '`',
         end: '`',
         patterns: [{ include: '#string_character_escape' }, '#template_embedded'],
-    },
-    string_wrap: {
-        match: /(?:[^\\\n])$/,
+        captures: {
+            '0': 'punctuation.s',
+        },
     },
     string_character_escape: {
         name: 'constant.character.escape.s',
@@ -79,7 +97,10 @@ const repository: Repository = {
         name: 'embedded.template.s',
         begin: '${',
         end: '}',
-        patterns: ['#statement'],
+        patterns: ['#statements'],
+        captures: {
+            '0': 'punctuation.s',
+        },
     },
 };
 

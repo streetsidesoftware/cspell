@@ -3,16 +3,18 @@
 exports[`tokenizeLine tokenizeText "line # comment." -  1`] = `
 Array [
   0: "line # comment.":
-    0: "line "          -- source.s
-    5: "# comment."     -- comment.line.s source.s,
+    0: "line "         -- source.s
+    5: "#"             -- punctuation.s comment.line.s source.s
+    6: " comment."     -- comment.line.s source.s,
 ]
 `;
 
 exports[`tokenizeLine tokenizeText "line # comment.\\n" -  1`] = `
 Array [
   0: "line # comment.↩":
-    0: "line "           -- source.s
-    5: "# comment.↩"     -- comment.line.s source.s,
+    0: "line "          -- source.s
+    5: "#"              -- punctuation.s comment.line.s source.s
+    6: " comment.↩"     -- comment.line.s source.s,
 ]
 `;
 
@@ -40,6 +42,64 @@ Array [
     13: "}"        -- curly.braces.s braces.s content.braces.s braces.s source.s
     14: " c"       -- content.braces.s braces.s source.s
     16: ")"        -- paren.braces.s braces.s source.s,
+]
+`;
+
+exports[`tokenizeLine tokenizeText complex sample -  1`] = `
+Array [
+  0: "↩":
+    0: "↩"     -- source.s,
+  1: "    const x = 'The auto\\\\'s left wheel.';↩":
+    0: "    const x = "     -- source.s
+    14: "'"                 -- punctuation.s string.quoted.single.s source.s
+    15: "The auto"          -- string.quoted.single.s source.s
+    23: "\\\\'"               -- constant.character.escape.s string.quoted.single.s source.s
+    25: "s left wheel."     -- string.quoted.single.s source.s
+    38: "'"                 -- punctuation.s string.quoted.single.s source.s
+    39: ";↩"                -- source.s,
+  2: "    function y(param = \\"first\\") {↩":
+    0: "    function y"     -- source.s
+    14: "("                 -- paren.braces.s braces.s source.s
+    15: "param = "          -- content.braces.s braces.s source.s
+    23: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    24: "first"             -- string.quoted.double.s content.braces.s braces.s source.s
+    29: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    30: ")"                 -- paren.braces.s braces.s source.s
+    31: " "                 -- source.s
+    32: "{"                 -- curly.braces.s braces.s source.s
+    33: "↩"                 -- content.braces.s braces.s source.s,
+  3: "        start = '('↩":
+    0: "        start = "     -- content.braces.s braces.s source.s
+    16: "'"                   -- punctuation.s string.quoted.single.s content.braces.s braces.s source.s
+    17: "("                   -- string.quoted.single.s content.braces.s braces.s source.s
+    18: "'"                   -- punctuation.s string.quoted.single.s content.braces.s braces.s source.s
+    19: "↩"                   -- content.braces.s braces.s source.s,
+  4: "        end = \\")\\"↩":
+    0: "        end = "     -- content.braces.s braces.s source.s
+    14: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    15: ")"                 -- string.quoted.double.s content.braces.s braces.s source.s
+    16: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    17: "↩"                 -- content.braces.s braces.s source.s,
+  5: "        msg = \`from \${start} to \${end} \`↩":
+    0: "        msg = "     -- content.braces.s braces.s source.s
+    14: "\`"                 -- punctuation.s string.template.s content.braces.s braces.s source.s
+    15: "from "             -- string.template.s content.braces.s braces.s source.s
+    20: "\${"                -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    22: "start"             -- embedded.template.s string.template.s content.braces.s braces.s source.s
+    27: "}"                 -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    28: " to "              -- string.template.s content.braces.s braces.s source.s
+    32: "\${"                -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    34: "end"               -- embedded.template.s string.template.s content.braces.s braces.s source.s
+    37: "}"                 -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    38: " "                 -- string.template.s content.braces.s braces.s source.s
+    39: "\`"                 -- punctuation.s string.template.s content.braces.s braces.s source.s
+    40: "↩"                 -- content.braces.s braces.s source.s,
+  6: "    }↩":
+    0: "    "     -- content.braces.s braces.s source.s
+    4: "}"        -- curly.braces.s braces.s source.s
+    5: "↩"        -- source.s,
+  7: "    ":
+    0: "    "     -- source.s,
 ]
 `;
 
