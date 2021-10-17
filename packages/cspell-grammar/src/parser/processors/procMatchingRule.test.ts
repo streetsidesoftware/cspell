@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { Grammar } from '../grammarDefinition';
 import { normalizeGrammar } from '../grammarNormalizer';
-import { ParsedText } from '../parser';
+import type { TokenizedText } from '../types';
 import { applyCaptureToBeginOrMatch } from './procMatchingRule';
 
 const grammar: Grammar = {
@@ -64,8 +64,8 @@ describe('procMatchingRule', () => {
     });
 });
 
-function s(scope: string[]): ParsedText {
-    return oc<ParsedText>({ scope });
+function s(scope: string[]): TokenizedText {
+    return oc<TokenizedText>({ scope });
 }
 
 function match(text: string, offset = 0, lineNumber = 42, anchor = -1) {

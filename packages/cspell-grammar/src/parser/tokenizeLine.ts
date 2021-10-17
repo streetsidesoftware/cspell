@@ -1,14 +1,13 @@
 import assert from 'assert';
 import { NGrammar, Rule } from './grammarNormalized';
 import { extractScope } from './grammarNormalizer';
-import { ParsedLine, ParsedText, ParseLineResult } from './parser';
 import { applyCaptureToBeginOrMatch, applyCaptureToEnd } from './processors/procMatchingRule';
-import type { Line, LineOffsetAnchored, MatchResult } from './types';
+import type { Line, LineOffsetAnchored, TokenizedLine, TokenizedLineResult, TokenizedText } from './types';
 
-export function tokenizeLine(line: Line, rule: Rule): ParseLineResult {
+export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
     const text = line.text;
     const lineLen = line.text.length;
-    const parsedText: ParsedText[] = [];
+    const parsedText: TokenizedText[] = [];
 
     let ctx = buildContext({ ...line, offset: 0, anchor: -1 }, rule);
 
@@ -17,17 +16,17 @@ export function tokenizeLine(line: Line, rule: Rule): ParseLineResult {
 
     while (ctx.line.offset < lineLen) {
         // We are at an end
-        while (ctx.endMatch?.index === ctx.line.offset) {
-            const { endMatch } = ctx;
+        let endMatch = ctx.rule.end?.(ctx.line);
+        while (endMatch?.index === ctx.line.offset) {
             parsedText.push(...applyCaptureToEnd(ctx.rule, endMatch));
             ctx = findParentWithEnd(ctx);
             ctx.line.offset = endMatch.index + endMatch.match.length;
-            ctx.endMatch = ctx.rule.end?.(ctx.line);
+            endMatch = ctx.rule.end?.(ctx.line);
         }
 
         if (ctx.line.offset >= lineLen) break;
 
-        const { line, rule, endMatch } = ctx;
+        const { line, rule } = ctx;
         const offset = line.offset;
         const match = rule.findNext?.(line);
         const limit = endMatch?.index ?? lineLen;
@@ -54,10 +53,10 @@ export function tokenizeLine(line: Line, rule: Rule): ParseLineResult {
     return toParseLineResult(line, ctx.rule, parsedText);
 }
 
-export function tokenizeText(text: string, grammar: NGrammar): ParsedLine[] {
+export function tokenizeText(text: string, grammar: NGrammar): TokenizedLine[] {
     const lines = text.split(/(?<=\n)/);
     const rule = grammar.bind();
-    const r: ParsedLine[] = [];
+    const r: TokenizedLine[] = [];
     let tr = tokenizeLine({ text: lines[0], lineNumber: 0 }, rule);
     r.push(toParsedLine(tr));
     for (let i = 1; i < lines.length; ++i) {
@@ -68,14 +67,14 @@ export function tokenizeText(text: string, grammar: NGrammar): ParsedLine[] {
     return r;
 }
 
-function toParsedLine(pr: ParseLineResult): ParsedLine {
-    const { parsedText, line } = pr;
-    return { parsedText, line };
+function toParsedLine(pr: TokenizedLineResult): TokenizedLine {
+    const { tokens: parsedText, line } = pr;
+    return { tokens: parsedText, line };
 }
 
-function toParseLineResult(line: Line, rule: Rule, parsedText: ParsedText[]): ParseLineResult {
+function toParseLineResult(line: Line, rule: Rule, parsedText: TokenizedText[]): TokenizedLineResult {
     return {
-        parsedText,
+        tokens: parsedText,
         line,
         parse: (line: Line) => tokenizeLine(line, rule),
     };
@@ -84,7 +83,6 @@ function toParseLineResult(line: Line, rule: Rule, parsedText: ParsedText[]): Pa
 interface Context {
     line: LineOffsetAnchored;
     rule: Rule;
-    endMatch?: MatchResult;
     parent?: Context;
 }
 
@@ -103,14 +101,12 @@ function buildContext(line: LineOffsetAnchored, rule: Rule): Context {
     for (let i = rootNum - 1; i >= 0; --i) {
         const rule = rules[i];
         const line = ctx.line;
-        const endMatch = rule.end?.(line);
         ctx = {
             line,
             rule,
-            endMatch,
             parent: ctx,
         };
-        if (endMatch?.index === line.offset) break;
+        // Check while here.
     }
 
     return ctx;

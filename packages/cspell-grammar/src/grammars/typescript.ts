@@ -29,7 +29,7 @@ const repository: Repository = {
         match: /(?:[^\\\n])$/,
     },
     string_character_escape: {
-        name: 'constant.character.escape.js',
+        name: 'constant.character.escape.ts',
         match: /\\(x[0-9A-Fa-f]{2}|[0-3][0-7]{0,2}|[4-7][0-7]?|.|$)/,
     },
     comment: {

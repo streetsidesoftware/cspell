@@ -380,14 +380,19 @@ function matchRegExp(r: RegExp): (line: LineOffsetAnchored) => MatchResult | und
     };
 }
 
-export function extractScope(er: Rule): string[] {
+export function extractScope(er: Rule, isContent = true): string[] {
     const scope: string[] = [];
 
     for (let rule: Rule | undefined = er; rule; rule = rule.parent) {
-        const name = rule.pattern.name;
+        const pattern = rule.pattern;
+        const { name, contentName } = pattern;
+        if (contentName && isContent) {
+            scope.push(contentName);
+        }
         if (name !== undefined) {
             scope.push(name);
         }
+        isContent = true;
     }
 
     return scope;

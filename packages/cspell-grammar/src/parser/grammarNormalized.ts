@@ -1,4 +1,4 @@
-import { LineOffsetAnchored, MatchResult } from './types';
+import type { LineOffsetAnchored, MatchResult } from './types';
 
 export interface NGrammar extends NPatternBase {
     scopeName: NScopeSource;
@@ -49,6 +49,7 @@ export interface NPatternPatterns extends NPatternBase {
 export interface NPatternMatch extends NPatternBase {
     match: Match;
     captures?: NCaptures;
+    contentName?: undefined;
 }
 
 /**
@@ -121,6 +122,7 @@ export interface MatchRuleResult {
 export interface NPatternBase {
     bind(rule: Rule): Rule;
     name?: NScope;
+    contentName?: NScope;
     comment?: string;
     disabled?: boolean;
     patterns?: NPattern[];

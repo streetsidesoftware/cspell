@@ -53,3 +53,29 @@ export interface TokenRange {
     start: number;
     end: number;
 }
+
+export interface TokenizedLine {
+    tokens: TokenizedText[];
+    line: Line;
+}
+
+export interface TokenizedLineResult extends TokenizedLine {
+    parse: (nextLine: Line) => TokenizedLineResult;
+}
+
+export type TextScope = string;
+
+export interface TokenizedText {
+    /**
+     * Scopes that were applied
+     */
+    scope: TextScope[];
+    /**
+     * The parsed text
+     */
+    text: string;
+    /**
+     * Offset from the beginning of the line
+     */
+    offset: number;
+}

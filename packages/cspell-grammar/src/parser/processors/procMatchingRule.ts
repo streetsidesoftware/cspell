@@ -1,8 +1,7 @@
 import { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNormalized';
 import { extractScope } from '../grammarNormalizer';
 import { segmentMatch } from '../matchResult';
-import { ParsedText } from '../parser';
-import type { MatchResult, MatchSegment } from '../types';
+import type { MatchResult, MatchSegment, TokenizedText } from '../types';
 import { isDefined } from '../util';
 
 /**
@@ -10,7 +9,7 @@ import { isDefined } from '../util';
  * @param line - line of text
  * @param matchRuleResult - the matching rule
  */
-export function applyCaptureToBeginOrMatch(matchRuleResult: MatchRuleResult): ParsedText[] {
+export function applyCaptureToBeginOrMatch(matchRuleResult: MatchRuleResult): TokenizedText[] {
     const { match, rule } = matchRuleResult;
 
     const bePattern = <NPatternBeginEnd>rule.pattern;
@@ -25,7 +24,7 @@ export function applyCaptureToBeginOrMatch(matchRuleResult: MatchRuleResult): Pa
  * @param line - line of text
  * @param rule - the matching rule
  */
-export function applyCaptureToEnd(rule: Rule, match: MatchResult): ParsedText[] {
+export function applyCaptureToEnd(rule: Rule, match: MatchResult): TokenizedText[] {
     const { pattern } = rule;
 
     const bePattern = <NPatternBeginEnd>pattern;
@@ -40,13 +39,13 @@ export function applyCaptureToEnd(rule: Rule, match: MatchResult): ParsedText[] 
  * @param line - line of text
  * @param rule - the matching rule
  */
-export function applyCaptures(rule: Rule, match: MatchResult, captures: NCaptures | undefined): ParsedText[] {
-    const scope = extractScope(rule);
+export function applyCaptures(rule: Rule, match: MatchResult, captures: NCaptures | undefined): TokenizedText[] {
+    const scope = extractScope(rule, false);
     const text = match.match;
     const input = match.input;
 
     if (!captures) {
-        const tokenized: ParsedText = {
+        const tokenized: TokenizedText = {
             scope,
             text,
             offset: match.index,
@@ -60,7 +59,7 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
 
     // Handle the simple case.
     if (captureScopes.size === 1 && cap0) {
-        const tokenized: ParsedText = {
+        const tokenized: TokenizedText = {
             scope: [cap0].concat(scope),
             text,
             offset: match.index,
@@ -160,9 +159,9 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
 
     const merged = processSegments(segments);
 
-    function* emit(m: Merge | undefined): Generator<ParsedText> {
+    function* emit(m: Merge | undefined): Generator<TokenizedText> {
         while (m) {
-            const t: ParsedText = {
+            const t: TokenizedText = {
                 text: input.slice(m.a, m.b),
                 offset: m.a,
                 scope: segChainToScope(m.s),
@@ -172,6 +171,6 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
         }
     }
 
-    const parsedText: ParsedText[] = [...emit(merged)];
+    const parsedText: TokenizedText[] = [...emit(merged)];
     return parsedText;
 }

@@ -1,308 +1,135 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tokenizeLine tokenizeText line # comment.
- 1`] = `
+exports[`tokenizeLine tokenizeText "line # comment." -  1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line # comment.
-",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "comment.line.s",
-          "source.s",
-        ],
-        "text": "# comment.",
-      },
-      Object {
-        "offset": 15,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "
-",
-      },
-    ],
-  },
+  0: "line # comment.":
+    0: "line "         -- source.s
+    5: "#"             -- punctuation.s comment.line.s source.s
+    6: " comment."     -- comment.line.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line # comment. 1`] = `
+exports[`tokenizeLine tokenizeText "line # comment.\\n" -  1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line # comment.",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "comment.line.s",
-          "source.s",
-        ],
-        "text": "# comment.",
-      },
-    ],
-  },
+  0: "line # comment.↩":
+    0: "line "          -- source.s
+    5: "#"              -- punctuation.s comment.line.s source.s
+    6: " comment.↩"     -- comment.line.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line ( a (b)) 1`] = `
+exports[`tokenizeLine tokenizeText "line ( a (b))" -  1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line ( a (b))",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 6,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " a ",
-      },
-      Object {
-        "offset": 9,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 10,
-        "scope": Array [
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "b",
-      },
-      Object {
-        "offset": 11,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-      Object {
-        "offset": 12,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-    ],
-  },
+  0: "line ( a (b))":
+    0: "line "     -- source.s
+    5: "("         -- paren.braces.s braces.s source.s
+    6: " a "       -- content.braces.s braces.s source.s
+    9: "("         -- paren.braces.s braces.s content.braces.s braces.s source.s
+    10: "b"        -- content.braces.s braces.s content.braces.s braces.s source.s
+    11: ")"        -- paren.braces.s braces.s content.braces.s braces.s source.s
+    12: ")"        -- paren.braces.s braces.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line ( a { b } c) 1`] = `
+exports[`tokenizeLine tokenizeText "line ( a { b } c)" -  1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line ( a { b } c)",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 6,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " a ",
-      },
-      Object {
-        "offset": 9,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "{",
-      },
-      Object {
-        "offset": 10,
-        "scope": Array [
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": " b ",
-      },
-      Object {
-        "offset": 13,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "}",
-      },
-      Object {
-        "offset": 14,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " c",
-      },
-      Object {
-        "offset": 16,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-    ],
-  },
+  0: "line ( a { b } c)":
+    0: "line "     -- source.s
+    5: "("         -- paren.braces.s braces.s source.s
+    6: " a "       -- content.braces.s braces.s source.s
+    9: "{"         -- curly.braces.s braces.s content.braces.s braces.s source.s
+    10: " b "      -- content.braces.s braces.s content.braces.s braces.s source.s
+    13: "}"        -- curly.braces.s braces.s content.braces.s braces.s source.s
+    14: " c"       -- content.braces.s braces.s source.s
+    16: ")"        -- paren.braces.s braces.s source.s,
 ]
 `;
 
-exports[`tokenizeLine tokenizeText line ( a { b } c) 2`] = `
+exports[`tokenizeLine tokenizeText complex sample -  1`] = `
 Array [
-  Object {
-    "line": Object {
-      "lineNumber": 0,
-      "text": "line ( a { b } c)",
-    },
-    "parsedText": Array [
-      Object {
-        "offset": 0,
-        "scope": Array [
-          "source.s",
-        ],
-        "text": "line ",
-      },
-      Object {
-        "offset": 5,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "(",
-      },
-      Object {
-        "offset": 6,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " a ",
-      },
-      Object {
-        "offset": 9,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "{",
-      },
-      Object {
-        "offset": 10,
-        "scope": Array [
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": " b ",
-      },
-      Object {
-        "offset": 13,
-        "scope": Array [
-          "curly.braces.s",
-          "braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": "}",
-      },
-      Object {
-        "offset": 14,
-        "scope": Array [
-          "braces.s",
-          "source.s",
-        ],
-        "text": " c",
-      },
-      Object {
-        "offset": 16,
-        "scope": Array [
-          "paren.braces.s",
-          "braces.s",
-          "source.s",
-        ],
-        "text": ")",
-      },
-    ],
-  },
+  0: "↩":
+    0: "↩"     -- source.s,
+  1: "    const x = 'The auto\\\\'s left wheel.';↩":
+    0: "    const x = "     -- source.s
+    14: "'"                 -- punctuation.s string.quoted.single.s source.s
+    15: "The auto"          -- string.quoted.single.s source.s
+    23: "\\\\'"               -- constant.character.escape.s string.quoted.single.s source.s
+    25: "s left wheel."     -- string.quoted.single.s source.s
+    38: "'"                 -- punctuation.s string.quoted.single.s source.s
+    39: ";↩"                -- source.s,
+  2: "    function y(param = \\"first\\") {↩":
+    0: "    function y"     -- source.s
+    14: "("                 -- paren.braces.s braces.s source.s
+    15: "param = "          -- content.braces.s braces.s source.s
+    23: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    24: "first"             -- string.quoted.double.s content.braces.s braces.s source.s
+    29: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    30: ")"                 -- paren.braces.s braces.s source.s
+    31: " "                 -- source.s
+    32: "{"                 -- curly.braces.s braces.s source.s
+    33: "↩"                 -- content.braces.s braces.s source.s,
+  3: "        start = '('↩":
+    0: "        start = "     -- content.braces.s braces.s source.s
+    16: "'"                   -- punctuation.s string.quoted.single.s content.braces.s braces.s source.s
+    17: "("                   -- string.quoted.single.s content.braces.s braces.s source.s
+    18: "'"                   -- punctuation.s string.quoted.single.s content.braces.s braces.s source.s
+    19: "↩"                   -- content.braces.s braces.s source.s,
+  4: "        end = \\")\\"↩":
+    0: "        end = "     -- content.braces.s braces.s source.s
+    14: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    15: ")"                 -- string.quoted.double.s content.braces.s braces.s source.s
+    16: "\\""                -- punctuation.s string.quoted.double.s content.braces.s braces.s source.s
+    17: "↩"                 -- content.braces.s braces.s source.s,
+  5: "        msg = \`from \${start} to \${end} \`↩":
+    0: "        msg = "     -- content.braces.s braces.s source.s
+    14: "\`"                 -- punctuation.s string.template.s content.braces.s braces.s source.s
+    15: "from "             -- string.template.s content.braces.s braces.s source.s
+    20: "\${"                -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    22: "start"             -- embedded.template.s string.template.s content.braces.s braces.s source.s
+    27: "}"                 -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    28: " to "              -- string.template.s content.braces.s braces.s source.s
+    32: "\${"                -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    34: "end"               -- embedded.template.s string.template.s content.braces.s braces.s source.s
+    37: "}"                 -- punctuation.s embedded.template.s string.template.s content.braces.s braces.s source.s
+    38: " "                 -- string.template.s content.braces.s braces.s source.s
+    39: "\`"                 -- punctuation.s string.template.s content.braces.s braces.s source.s
+    40: "↩"                 -- content.braces.s braces.s source.s,
+  6: "    }↩":
+    0: "    "     -- content.braces.s braces.s source.s
+    4: "}"        -- curly.braces.s braces.s source.s
+    5: "↩"        -- source.s,
+  7: "    ":
+    0: "    "     -- source.s,
+]
+`;
+
+exports[`tokenizeLine tokenizeText sampleNestedParen -  1`] = `
+Array [
+  0: "↩":
+    0: "↩"     -- source.s,
+  1: "(↩":
+    0: "("     -- paren.braces.s braces.s source.s
+    1: "↩"     -- content.braces.s braces.s source.s,
+  2: "    {↩":
+    0: "    "     -- content.braces.s braces.s source.s
+    4: "{"        -- curly.braces.s braces.s content.braces.s braces.s source.s
+    5: "↩"        -- content.braces.s braces.s content.braces.s braces.s source.s,
+  3: "        {↩":
+    0: "        "     -- content.braces.s braces.s content.braces.s braces.s source.s
+    8: "{"            -- curly.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s
+    9: "↩"            -- content.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s,
+  4: "            deep↩":
+    0: "            deep↩"     -- content.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s,
+  5: "        }↩":
+    0: "        "     -- content.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s
+    8: "}"            -- curly.braces.s braces.s content.braces.s braces.s content.braces.s braces.s source.s
+    9: "↩"            -- content.braces.s braces.s content.braces.s braces.s source.s,
+  6: "    }↩":
+    0: "    "     -- content.braces.s braces.s content.braces.s braces.s source.s
+    4: "}"        -- curly.braces.s braces.s content.braces.s braces.s source.s
+    5: "↩"        -- content.braces.s braces.s source.s,
+  7: ")↩":
+    0: ")"     -- paren.braces.s braces.s source.s
+    1: "↩"     -- source.s,
 ]
 `;
