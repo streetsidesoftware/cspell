@@ -19,3 +19,5 @@
   | `"b"`     | braces.s paren.braces.s braces.s source.s                |
   | `")"`     |                                                          |
   | `")"`     |                                                          |
+
+<!--- cspell:ignore paren   -->
