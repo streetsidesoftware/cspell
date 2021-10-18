@@ -16,7 +16,7 @@ Here are some of the places globs are used:
 | ---------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `files[]`              | **strict** | The glob patterns used to search for files to spell check.                                                                                                      |
 | `ignorePaths[]`        | **loose**  | Glob patterns used to exclude files and directories from being checked. `!` are only partially supported due to an issue with the Glob library[<sup>1</sup>][1] |
-| `overrides[].filename` | **loose**  | Used to apply configuration settings to file whose path matches the glob                                                                                        |
+| `overrides[].filename` | **loose**  | Used to apply configuration settings to files whose path matches the glob                                                                                       |
 
 [1]: https://github.com/isaacs/node-glob/issues/409 'Glob - Does not match for negative ignore · Issue #409'
 
