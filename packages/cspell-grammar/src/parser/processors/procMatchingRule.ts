@@ -43,6 +43,8 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
     const scope = extractScope(rule, false);
     const text = match.match;
     const input = match.input;
+    // Do not emit empty captures.
+    if (!text && !captures) return [];
 
     if (!captures) {
         const tokenized: TokenizedText = {

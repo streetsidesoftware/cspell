@@ -45,6 +45,322 @@ Array [
 ]
 `;
 
+exports[`tokenizeLine tokenizeText TypeScript "n = 42; // comment." -  1`] = `
+Array [
+  0: "n = 42; // comment.":
+    0: "n = 42; "       -- source.ts
+    8: "//"             -- punctuation.definition.comment.ts comment.line.ts code.ts source.ts
+    10: " comment."     -- comment.line.ts code.ts source.ts
+    19: ""              -- punctuation.definition.comment.ts comment.line.ts code.ts source.ts,
+]
+`;
+
+exports[`tokenizeLine tokenizeText TypeScript "n = 42; // comment.\\n\\n" -  1`] = `
+Array [
+  0: "n = 42; // comment.↩":
+    0: "n = 42; "       -- source.ts
+    8: "//"             -- punctuation.definition.comment.ts comment.line.ts code.ts source.ts
+    10: " comment."     -- comment.line.ts code.ts source.ts
+    19: ""              -- punctuation.definition.comment.ts comment.line.ts code.ts source.ts
+    19: "↩"             -- source.ts,
+  1: "↩":
+    0: "↩"     -- source.ts,
+]
+`;
+
+exports[`tokenizeLine tokenizeText TypeScript "n = 42; // comment.\\nq = n + 1;\\n" -  1`] = `
+Array [
+  0: "n = 42; // comment.↩":
+    0: "n = 42; "       -- source.ts
+    8: "//"             -- punctuation.definition.comment.ts comment.line.ts code.ts source.ts
+    10: " comment."     -- comment.line.ts code.ts source.ts
+    19: ""              -- punctuation.definition.comment.ts comment.line.ts code.ts source.ts
+    19: "↩"             -- source.ts,
+  1: "q = n + 1;↩":
+    0: "q = n + 1;↩"     -- source.ts,
+]
+`;
+
+exports[`tokenizeLine tokenizeText TypeScript sampleCode -  1`] = `
+Array [
+  0: "import { tokenizedLinesToMarkdown } from './visualizeAsMD';↩":
+    0: "import "                        -- source.ts
+    7: "{"                              -- punctuation.meta.brace.ts code.ts source.ts
+    8: " tokenizedLinesToMarkdown "     -- meta.brace.ts code.ts source.ts
+    34: "}"                             -- punctuation.meta.brace.ts code.ts source.ts
+    35: " from "                        -- source.ts
+    41: "'"                             -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    42: "./visualizeAsMD"               -- string.quoted.single.ts code.ts source.ts
+    57: "'"                             -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    58: ";↩"                            -- source.ts,
+  1: "import { TypeScript } from '../grammars';↩":
+    0: "import "          -- source.ts
+    7: "{"                -- punctuation.meta.brace.ts code.ts source.ts
+    8: " TypeScript "     -- meta.brace.ts code.ts source.ts
+    20: "}"               -- punctuation.meta.brace.ts code.ts source.ts
+    21: " from "          -- source.ts
+    27: "'"               -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    28: "../grammars"     -- string.quoted.single.ts code.ts source.ts
+    39: "'"               -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    40: ";↩"              -- source.ts,
+  2: "import { normalizeGrammar } from '../parser/grammarNormalizer';↩":
+    0: "import "                          -- source.ts
+    7: "{"                                -- punctuation.meta.brace.ts code.ts source.ts
+    8: " normalizeGrammar "               -- meta.brace.ts code.ts source.ts
+    26: "}"                               -- punctuation.meta.brace.ts code.ts source.ts
+    27: " from "                          -- source.ts
+    33: "'"                               -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    34: "../parser/grammarNormalizer"     -- string.quoted.single.ts code.ts source.ts
+    61: "'"                               -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    62: ";↩"                              -- source.ts,
+  3: "import { tokenizeText } from '../dist';↩":
+    0: "import "            -- source.ts
+    7: "{"                  -- punctuation.meta.brace.ts code.ts source.ts
+    8: " tokenizeText "     -- meta.brace.ts code.ts source.ts
+    22: "}"                 -- punctuation.meta.brace.ts code.ts source.ts
+    23: " from "            -- source.ts
+    29: "'"                 -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    30: "../dist"           -- string.quoted.single.ts code.ts source.ts
+    37: "'"                 -- punctuation.string.ts string.quoted.single.ts code.ts source.ts
+    38: ";↩"                -- source.ts,
+  4: "↩":
+    0: "↩"     -- source.ts,
+  5: "const sampleText = \`↩":
+    0: "const sampleText = "     -- source.ts
+    19: "\`"                      -- punctuation.string.ts string.template.ts code.ts source.ts
+    20: "↩"                      -- string.template.ts code.ts source.ts,
+  6: "    \${↩":
+    0: "    "     -- string.template.ts code.ts source.ts
+    4: "\${"       -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    6: "↩"        -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  7: "        '.'.repeat(22) + // Comment↩":
+    0: "        "      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    8: "'"             -- punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    9: "."             -- string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    10: "'"            -- punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    11: ".repeat"      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    18: "("            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    19: "22"           -- meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    21: ")"            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    22: " + "          -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    25: "//"           -- punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    27: " Comment"     -- comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    35: ""             -- punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    35: "↩"            -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  8: "        { name: 'First' }.name↩":
+    0: "        "     -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    8: "{"            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    9: " name: "      -- meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    16: "'"           -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    17: "First"       -- string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    22: "'"           -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    23: " "           -- meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    24: "}"           -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    25: ".name↩"      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  9: "    }↩":
+    0: "    "     -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    4: "}"        -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    5: "↩"        -- string.template.ts code.ts source.ts,
+  10: "\`;↩":
+    0: "\`"      -- punctuation.string.ts string.template.ts code.ts source.ts
+    1: ";↩"     -- source.ts,
+  11: "↩":
+    0: "↩"     -- source.ts,
+  12: "describe('visualizeAsMD', () => {↩":
+    0: "describe"           -- source.ts
+    8: "("                  -- punctuation.meta.brace.ts code.ts source.ts
+    9: "'"                  -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts
+    10: "visualizeAsMD"     -- string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts
+    23: "'"                 -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts
+    24: ", "                -- meta.brace.ts code.ts source.ts
+    26: "("                 -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    27: ")"                 -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    28: " => "              -- meta.brace.ts code.ts source.ts
+    32: "{"                 -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    33: "↩"                 -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  13: "    const gTypeScript = normalizeGrammar(TypeScript.grammar);↩":
+    0: "    const gTypeScript = normalizeGrammar"     -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    40: "("                                           -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    41: "TypeScript.grammar"                          -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    59: ")"                                           -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    60: ";↩"                                          -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  14: "↩":
+    0: "↩"     -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  15: "    test.each\`↩":
+    0: "    test.each"     -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    13: "\`"                -- punctuation.string.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    14: "↩"                -- string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  16: "        lines↩":
+    0: "        lines↩"     -- string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  17: "        \${tokenize('')}↩":
+    0: "        "      -- string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    8: "\${"            -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    10: "tokenize"     -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    18: "("            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    19: "'"            -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    20: "'"            -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    21: ")"            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    22: "}"            -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    23: "↩"            -- string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  18: "        \${tokenize('\\\\tconst greeting = \\"hello\\";\\\\n')}↩":
+    0: "        "                         -- string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    8: "\${"                               -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    10: "tokenize"                        -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    18: "("                               -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    19: "'"                               -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    20: "\\\\t"                             -- constant.character.escape.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    22: "const greeting = \\"hello\\";"     -- string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    47: "\\\\n"                             -- constant.character.escape.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    49: "'"                               -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    50: ")"                               -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    51: "}"                               -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    52: "↩"                               -- string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  19: "    \`('tokenizedLinesToMarkdown', ({ lines }) => {↩":
+    0: "    "                         -- string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    4: "\`"                            -- punctuation.string.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    5: "("                            -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    6: "'"                            -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    7: "tokenizedLinesToMarkdown"     -- string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    31: "'"                           -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    32: ", "                          -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    34: "("                           -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    35: "{"                           -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    36: " lines "                     -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    43: "}"                           -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    44: ")"                           -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    45: " => "                        -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    49: "{"                           -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    50: "↩"                           -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  20: "        expect(tokenizedLinesToMarkdown(lines)).toMatchSnapshot();↩":
+    0: "        expect"                -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    14: "("                            -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    15: "tokenizedLinesToMarkdown"     -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    39: "("                            -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    40: "lines"                        -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    45: ")"                            -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    46: ")"                            -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    47: ".toMatchSnapshot"             -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    63: "("                            -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    64: ")"                            -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    65: ";↩"                           -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  21: "    });↩":
+    0: "    "     -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    4: "}"        -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    5: ")"        -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    6: ";↩"       -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  22: "↩":
+    0: "↩"     -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  23: "    function tokenize(text: string) {↩":
+    0: "    function tokenize"     -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    21: "("                        -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    22: "text: string"             -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    34: ")"                        -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    35: " "                        -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    36: "{"                        -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    37: "↩"                        -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  24: "        return tokenizeText(text, gTypeScript);↩":
+    0: "        return tokenizeText"     -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    27: "("                              -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    28: "text, gTypeScript"              -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    45: ")"                              -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    46: ";↩"                             -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  25: "    }↩":
+    0: "    "     -- meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    4: "}"        -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    5: "↩"        -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  26: "});↩":
+    0: "}"      -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    1: ")"      -- punctuation.meta.brace.ts code.ts source.ts
+    2: ";↩"     -- source.ts,
+]
+`;
+
+exports[`tokenizeLine tokenizeText TypeScript sampleTemplate -  1`] = `
+Array [
+  0: "msg = \`↩":
+    0: "msg = "     -- source.ts
+    6: "\`"          -- punctuation.string.ts string.template.ts code.ts source.ts
+    7: "↩"          -- string.template.ts code.ts source.ts,
+  1: "\${↩":
+    0: "\${"     -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    2: "↩"      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  2: "a + b // Join prefix and suffix↩":
+    0: "a + b "                      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    6: "//"                          -- punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    8: " Join prefix and suffix"     -- comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    31: ""                           -- punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    31: "↩"                          -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  3: "}↩":
+    0: "}"     -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    1: "↩"     -- string.template.ts code.ts source.ts,
+  4: "\`;":
+    0: "\`"     -- punctuation.string.ts string.template.ts code.ts source.ts
+    1: ";"     -- source.ts,
+]
+`;
+
+exports[`tokenizeLine tokenizeText TypeScript sampleTemplate2 -  1`] = `
+Array [
+  0: "↩":
+    0: "↩"     -- source.ts,
+  1: "const sampleText = \`↩":
+    0: "const sampleText = "     -- source.ts
+    19: "\`"                      -- punctuation.string.ts string.template.ts code.ts source.ts
+    20: "↩"                      -- string.template.ts code.ts source.ts,
+  2: "    \${↩":
+    0: "    "     -- string.template.ts code.ts source.ts
+    4: "\${"       -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    6: "↩"        -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  3: "        '.'.repeat(22) + // Comment↩":
+    0: "        "      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    8: "'"             -- punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    9: "."             -- string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    10: "'"            -- punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    11: ".repeat"      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    18: "("            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    19: "22"           -- meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    21: ")"            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    22: " + "          -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    25: "//"           -- punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    27: " Comment"     -- comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    35: ""             -- punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    35: "↩"            -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  4: "        { name: 'First' }.name↩":
+    0: "        "     -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    8: "{"            -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    9: " name: "      -- meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    16: "'"           -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    17: "First"       -- string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    22: "'"           -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    23: " "           -- meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    24: "}"           -- punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    25: ".name↩"      -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts,
+  5: "    }↩":
+    0: "    "     -- meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    4: "}"        -- punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts
+    5: "↩"        -- string.template.ts code.ts source.ts,
+  6: "\`;↩":
+    0: "\`"      -- punctuation.string.ts string.template.ts code.ts source.ts
+    1: ";↩"     -- source.ts,
+  7: "↩":
+    0: "↩"     -- source.ts,
+  8: "describe('visualizeAsMD', () => {↩":
+    0: "describe"           -- source.ts
+    8: "("                  -- punctuation.meta.brace.ts code.ts source.ts
+    9: "'"                  -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts
+    10: "visualizeAsMD"     -- string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts
+    23: "'"                 -- punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts
+    24: ", "                -- meta.brace.ts code.ts source.ts
+    26: "("                 -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    27: ")"                 -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    28: " => "              -- meta.brace.ts code.ts source.ts
+    32: "{"                 -- punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts
+    33: "↩"                 -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+  9: "↩":
+    0: "↩"     -- meta.brace.ts code.ts meta.brace.ts code.ts source.ts,
+]
+`;
+
 exports[`tokenizeLine tokenizeText complex sample -  1`] = `
 Array [
   0: "↩":
