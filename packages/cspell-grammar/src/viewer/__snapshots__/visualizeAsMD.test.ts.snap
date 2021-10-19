@@ -1,0 +1,851 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`visualizeAsMD tokenizedLinesToMarkdown 1`] = `
+"<details>
+<summary><code>1</code>: <code></code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+
+
+</details>
+
+
+"
+`;
+
+exports[`visualizeAsMD tokenizedLinesToMarkdown 2`] = `
+"<details>
+<summary><code>1</code>: <code>	const greeting = &quot;hello&quot;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>	const greeting = </code> | source.ts |
+| <code>&quot;</code> | punctuation.string.ts string.quoted.double.ts code.ts source.ts |
+| <code>hello</code> | string.quoted.double.ts code.ts source.ts |
+| <code>&quot;</code> | punctuation.string.ts string.quoted.double.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+"
+`;
+
+exports[`visualizeAsMD tokenizedLinesToMarkdown 3`] = `
+"<details>
+<summary><code>1</code>: <code>import { tokenizedLinesToMarkdown } from &#39;./visualizeAsMD&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> tokenizedLinesToMarkdown </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>./visualizeAsMD</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>2</code>: <code>import { TypeScript } from &#39;../grammars&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> TypeScript </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>../grammars</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>3</code>: <code>import { normalizeGrammar } from &#39;../parser/grammarNormalizer&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> normalizeGrammar </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>../parser/grammarNormalizer</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>4</code>: <code>import { tokenizeText } from &#39;../dist&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> tokenizeText </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>../dist</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>5</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>6</code>: <code>const sampleText = &#96;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>const sampleText = </code> | source.ts |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>7</code>: <code>    \${↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | string.template.ts code.ts source.ts |
+| <code>\${</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>8</code>: <code>        &#39;.&#39;.repeat&#40;22&#41; &#43; // Comment↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>.</code> | string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>.repeat</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>22</code> | meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> &#43; </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>//</code> | punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> Comment</code> | comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code></code> | punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>9</code>: <code>        { name: &#39;First&#39; }.name↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> name: </code> | meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>First</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> </code> | meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>.name↩</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>10</code>: <code>    }↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>}</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>11</code>: <code>&#96;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>12</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>13</code>: <code>describe&#40;&#39;visualizeAsMD&#39;, &#40;&#41; =&gt; {↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>describe</code> | source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>visualizeAsMD</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>, </code> | meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> =&gt; </code> | meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>14</code>: <code>    const gTypeScript = normalizeGrammar&#40;TypeScript.grammar&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    const gTypeScript = normalizeGrammar</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>TypeScript.grammar</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>15</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>16</code>: <code>    test.each&#96;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    test.each</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>17</code>: <code>        lines↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        lines↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>18</code>: <code>        \${tokenize&#40;&#39;&#39;&#41;}↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>\${</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenize</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>19</code>: <code>        \${tokenize&#40;&#39;&#92;tconst greeting = &quot;hello&quot;;&#92;n&#39;&#41;}↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>\${</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenize</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#92;t</code> | constant.character.escape.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>const greeting = &quot;hello&quot;;</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#92;n</code> | constant.character.escape.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>20</code>: <code>    &#96;&#40;&#39;tokenizedLinesToMarkdown&#39;, &#40;{ lines }&#41; =&gt; {↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenizedLinesToMarkdown</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>, </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> lines </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> =&gt; </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>21</code>: <code>        expect&#40;tokenizedLinesToMarkdown&#40;lines&#41;&#41;.toMatchSnapshot&#40;&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        expect</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenizedLinesToMarkdown</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>lines</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>.toMatchSnapshot</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>22</code>: <code>    }&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>23</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>24</code>: <code>    function tokenize&#40;text: string&#41; {↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    function tokenize</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>text: string</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> </code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>25</code>: <code>        return tokenizeText&#40;text, gTypeScript&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        return tokenizeText</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>text, gTypeScript</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>26</code>: <code>    }↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>27</code>: <code>}&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+"
+`;
+
+exports[`visualizeAsMD tokenizedLinesToMarkdown file samples/sampleJest.ts 1`] = `
+"<details>
+<summary><code>1</code>: <code>import { tokenizedLinesToMarkdown } from &#39;./visualizeAsMD&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> tokenizedLinesToMarkdown </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>./visualizeAsMD</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>2</code>: <code>import { TypeScript } from &#39;../grammars&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> TypeScript </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>../grammars</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>3</code>: <code>import { normalizeGrammar } from &#39;../parser/grammarNormalizer&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> normalizeGrammar </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>../parser/grammarNormalizer</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>4</code>: <code>import { tokenizeText } from &#39;../dist&#39;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>import </code> | source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> tokenizeText </code> | meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code> from </code> | source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>../dist</code> | string.quoted.single.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>5</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>6</code>: <code>const sampleText = &#96;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>const sampleText = </code> | source.ts |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>7</code>: <code>    \${↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | string.template.ts code.ts source.ts |
+| <code>\${</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>8</code>: <code>        &#39;.&#39;.repeat&#40;22&#41; &#43; // Comment↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>.</code> | string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>.repeat</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>22</code> | meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> &#43; </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>//</code> | punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> Comment</code> | comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code></code> | punctuation.definition.comment.ts comment.line.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>9</code>: <code>        { name: &#39;First&#39; }.name↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> name: </code> | meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>First</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code> </code> | meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>.name↩</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>10</code>: <code>    }↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>}</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>11</code>: <code>&#96;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>12</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | source.ts |
+
+</details>
+
+
+<details>
+<summary><code>13</code>: <code>describe&#40;&#39;visualizeAsMD&#39;, &#40;&#41; =&gt; {↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>describe</code> | source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>visualizeAsMD</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>, </code> | meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> =&gt; </code> | meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>14</code>: <code>    const gTypeScript = normalizeGrammar&#40;TypeScript.grammar&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    const gTypeScript = normalizeGrammar</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>TypeScript.grammar</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>15</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>16</code>: <code>    test.each&#96;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    test.each</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>17</code>: <code>        lines↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        lines↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>18</code>: <code>        \${tokenize&#40;&#39;&#39;&#41;}↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>\${</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenize</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>19</code>: <code>        \${tokenize&#40;&#39;&#92;tconst greeting = &quot;hello&quot;;&#92;n&#39;&#41;}↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        </code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>\${</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenize</code> | meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#92;t</code> | constant.character.escape.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>const greeting = &quot;hello&quot;;</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#92;n</code> | constant.character.escape.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.embedded.line.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.definition.template.expression.ts meta.template.expression.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>20</code>: <code>    &#96;&#40;&#39;tokenizedLinesToMarkdown&#39;, &#40;{ lines }&#41; =&gt; {↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#96;</code> | punctuation.string.ts string.template.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenizedLinesToMarkdown</code> | string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#39;</code> | punctuation.string.ts string.quoted.single.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>, </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> lines </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> =&gt; </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>21</code>: <code>        expect&#40;tokenizedLinesToMarkdown&#40;lines&#41;&#41;.toMatchSnapshot&#40;&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        expect</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>tokenizedLinesToMarkdown</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>lines</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>.toMatchSnapshot</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>22</code>: <code>    }&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>23</code>: <code>↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>24</code>: <code>    function tokenize&#40;text: string&#41; {↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    function tokenize</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>text: string</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code> </code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>{</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>25</code>: <code>        return tokenizeText&#40;text, gTypeScript&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>        return tokenizeText</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#40;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>text, gTypeScript</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>26</code>: <code>    }↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>    </code> | meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>↩</code> | meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+
+</details>
+
+
+<details>
+<summary><code>27</code>: <code>}&#41;;↩</code></summary>
+
+| text      | scope                                                    |
+| --------- | -------------------------------------------------------- |
+| <code>}</code> | punctuation.meta.brace.ts code.ts meta.brace.ts code.ts source.ts |
+| <code>&#41;</code> | punctuation.meta.brace.ts code.ts source.ts |
+| <code>;↩</code> | source.ts |
+
+</details>
+
+
+"
+`;

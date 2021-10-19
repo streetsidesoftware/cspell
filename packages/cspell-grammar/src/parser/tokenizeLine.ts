@@ -14,7 +14,7 @@ export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
     // Note: the begin rule has already been matched and applied.
     // Does it need to end or go deeper?
 
-    while (ctx.line.offset < lineLen) {
+    while (ctx.line.offset <= lineLen) {
         // We are at an end
         let endMatch = ctx.rule.end?.(ctx.line);
         while (endMatch?.index === ctx.line.offset) {

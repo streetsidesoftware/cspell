@@ -1,5 +1,8 @@
 import assert from 'assert';
 import * as Simple from '../grammars/simple';
+import { TypeScript } from '../grammars';
+import { readFileSync } from 'fs';
+import * as path from 'path';
 import { normalizeGrammar } from './grammarNormalizer';
 import { tokenizeText } from './tokenizeLine';
 import type { TokenizedLine } from './types';
@@ -7,6 +10,9 @@ import type { TokenizedLine } from './types';
 // const oc = expect.objectContaining;
 
 const grammar = normalizeGrammar(Simple.grammar);
+const grammarTypeScript = normalizeGrammar(TypeScript.grammar);
+
+const sampleCode = readFileSync(path.join(__dirname, '../../samples/sampleJest.ts'), 'utf8');
 
 describe('tokenizeLine', () => {
     interface TextAndName {
@@ -51,6 +57,44 @@ describe('tokenizeLine', () => {
             serialize: serializeTokenizedLine,
         });
         const r = tokenizeText(test.text, grammar);
+        assertParsedLinesAreValid(r);
+        expect(r).toMatchSnapshot();
+    });
+
+    const sampleTemplate = '\
+msg = `\n\
+${\n\
+a + b // Join prefix and suffix\n\
+}\n\
+`;\
+';
+
+    const sampleTemplate2 = `
+const sampleText = \`
+    \${
+        '.'.repeat(22) + // Comment
+        { name: 'First' }.name
+    }
+\`;
+
+describe('visualizeAsMD', () => {
+
+`;
+
+    test.each`
+        test                                      | comment
+        ${t('n = 42; // comment.')}               | ${''}
+        ${t('n = 42; // comment.\n\n')}           | ${''}
+        ${t('n = 42; // comment.\nq = n + 1;\n')} | ${''}
+        ${t(sampleTemplate, 'sampleTemplate')}    | ${''}
+        ${t(sampleTemplate2, 'sampleTemplate2')}  | ${''}
+        ${t(sampleCode, 'sampleCode')}            | ${''}
+    `('tokenizeText TypeScript $test.name - $comment', ({ test }: { test: TextAndName }) => {
+        expect.addSnapshotSerializer({
+            test: isTokenizedLine,
+            serialize: serializeTokenizedLine,
+        });
+        const r = tokenizeText(test.text, grammarTypeScript);
         assertParsedLinesAreValid(r);
         expect(r).toMatchSnapshot();
     });

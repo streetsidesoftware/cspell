@@ -127,7 +127,7 @@ function normalizePatternBeginEnd(p: PatternBeginEnd): NPatternBeginEnd {
     };
 
     const testBegin = makeTestMatchFn(p.begin);
-    const testEnd = p.end ? makeTestMatchFn(p.end) : () => undefined;
+    const testEnd = p.end !== undefined ? makeTestMatchFn(p.end) : () => undefined;
 
     function bind(parentRule: Rule): Rule {
         const rule: Rule = {
@@ -373,7 +373,7 @@ function matchString(s: string): (line: LineOffsetAnchored) => MatchResult | und
 
 function matchRegExp(r: RegExp): (line: LineOffsetAnchored) => MatchResult | undefined {
     return (line) => {
-        const rg = RegExp(r, 'g');
+        const rg = RegExp(r, 'gm');
         rg.lastIndex = line.offset;
         const m = rg.exec(line.text);
         return (m && createMatchResult(m)) ?? undefined;
