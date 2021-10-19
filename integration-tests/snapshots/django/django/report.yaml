@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: ["**/*.{md,py}"]
 Summary:
   files: 2703
-  filesWithIssues: 877
-  issues: 7794
+  filesWithIssues: 878
+  issues: 7791
   errors: 0
 Errors: []
 
@@ -643,7 +643,6 @@ issues:
   - "django/forms/fields.py:692:19   	misformatted	U   	# misformatted URLs."
   - "django/forms/models.py:700:13   	uclass  	U   	for uclass, unique_check in all"
   - "django/forms/widgets.py:507:52  	picklable   	U   	that CheckboxInput is picklable (#17976)"
-  - "django/http/multipartparser.py:318:58   	untrusted   	U   	still be considered as untrusted user input."
   - "django/http/multipartparser.py:341:51   	unget       	U   	allows one to get and \"unget\" bytes from a stream"
   - "django/http/multipartparser.py:435:64   	ungetting   	U   	one chunk. If we keep ungetting the"
   - "django/http/multipartparser.py:680:5    	pdict       	U   	pdict = {}"
@@ -653,8 +652,9 @@ issues:
   - "django/http/response.py:475:19  	uncompressing   	U   	# uncompressing files."
   - "django/middleware/common.py:125:13  	referer 	U   	referer = request.META.get("
   - "django/middleware/common.py:125:46  	REFERER 	U   	request.META.get('HTTP_REFERER', '')"
-  - "django/middleware/csrf.py:401:31    	dont	U   	if getattr(request, '_dont_enforce_csrf_checks"
-  - "django/middleware/csrf.py:418:62    	MITM	U   	(man-in-the-middle, MITM) sends a"
+  - "django/middleware/csrf.py:182:57    	netlocs 	U   	schemes to list of allowed netlocs, where all"
+  - "django/middleware/csrf.py:401:31    	dont    	U   	if getattr(request, '_dont_enforce_csrf_checks"
+  - "django/middleware/csrf.py:418:62    	MITM    	U   	(man-in-the-middle, MITM) sends a"
   - "django/middleware/http.py:2:8       	delim   	U   	cc_delim_re, get_conditional"
   - "django/template/__init__.py:34:19   	smartif 	U   	- django.template.smartif"
   - "django/template/base.py:245:9   	upto            	U   	upto = 0"
@@ -1197,7 +1197,6 @@ issues:
   - "tests/expressions_window/tests.py:37:19     	Jenson  	U   	('Jenson', 45000, 'Accounting"
   - "tests/expressions_window/tests.py:357:14    	cume    	U   	def test_cume_dist(self):"
   - "tests/expressions_window/tests.py:757:56    	Nowak   	U   	department': 'IT', 'name': 'Nowak', 'salary': 32000})"
-  - "tests/expressions/tests.py:51:13    	gmbh        	U   	cls.gmbh = Company.objects.create"
   - "tests/expressions/tests.py:281:36   	Funcs       	U   	should be able to use Funcs when inserting new data"
   - "tests/expressions/tests.py:404:9    	mustermanns 	U   	mustermanns_by_seniority = Employee"
   - "tests/expressions/tests.py:1347:13  	sday        	U   	cls.sday = sday = datetime.date"
@@ -1263,6 +1262,7 @@ issues:
   - "tests/forms_tests/field_tests/test_slugfield.py:18:35   	ıçğüş   	U   	assertEqual(f.clean('ıçğüş'), 'ıçğüş')"
   - "tests/forms_tests/tests/test_forms.py:437:15    	Signup      	U   	class SignupForm(Form):"
   - "tests/forms_tests/tests/test_forms.py:665:15    	Beatle      	U   	class BeatleForm(Form):"
+  - "tests/forms_tests/tests/test_forms.py:731:24    	noniterable 	U   	def test_form_with_noniterable_boundfield(self):"
   - "tests/forms_tests/tests/test_forms.py:1369:25   	reuired     	U   	({'class': 'reuired'}, {'class': 'required"
   - "tests/forms_tests/tests/test_forms.py:1400:38   	unspec      	U   	_init__(self, allow_unspec_gender=False, *args"
   - "tests/forms_tests/tests/test_forms.py:1650:64   	Contraseña  	U   	PasswordInput, label='Contraseña (de nuevo)')"

@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2703, Issues found: 7794 in 877 files
+ CSpell: Files checked: 2703, Issues found: 7791 in 878 files
  exit code: 1
 ./django/apps/config.py:125:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -638,7 +638,6 @@ Lines:
 ./django/forms/fields.py:692:19    - Unknown word (misformatted) -- # misformatted URLs.
 ./django/forms/models.py:700:13    - Unknown word (uclass)     -- for uclass, unique_check in all
 ./django/forms/widgets.py:507:52    - Unknown word (picklable)  -- that CheckboxInput is picklable (#17976)
-./django/http/multipartparser.py:318:58    - Unknown word (untrusted)  -- still be considered as untrusted user input.
 ./django/http/multipartparser.py:341:51    - Unknown word (unget)      -- allows one to get and "unget" bytes from a stream
 ./django/http/multipartparser.py:435:64    - Unknown word (ungetting)  -- one chunk. If we keep ungetting the
 ./django/http/multipartparser.py:680:5     - Unknown word (pdict)      -- pdict = {}
@@ -648,6 +647,7 @@ Lines:
 ./django/http/response.py:475:19    - Unknown word (uncompressing) -- # uncompressing files.
 ./django/middleware/common.py:125:13    - Unknown word (referer)    -- referer = request.META.get(
 ./django/middleware/common.py:125:46    - Unknown word (REFERER)    -- request.META.get('HTTP_REFERER', '')
+./django/middleware/csrf.py:182:57    - Unknown word (netlocs)    -- schemes to list of allowed netlocs, where all
 ./django/middleware/csrf.py:401:31    - Unknown word (dont)       -- if getattr(request, '_dont_enforce_csrf_checks
 ./django/middleware/csrf.py:418:62    - Unknown word (MITM)       -- (man-in-the-middle, MITM) sends a
 ./django/middleware/http.py:2:8       - Unknown word (delim)      -- cc_delim_re, get_conditional
@@ -1193,7 +1193,6 @@ Lines:
 ./tests/expressions/tests.py:1348:13   - Unknown word (stime)       -- cls.stime = stime = datetime.datetime
 ./tests/expressions/tests.py:281:36    - Unknown word (Funcs)      -- should be able to use Funcs when inserting new data
 ./tests/expressions/tests.py:404:9     - Unknown word (mustermanns) -- mustermanns_by_seniority = Employee
-./tests/expressions/tests.py:51:13     - Unknown word (gmbh)       -- cls.gmbh = Company.objects.create
 ./tests/expressions_window/tests.py:357:14    - Unknown word (cume)       -- def test_cume_dist(self):
 ./tests/expressions_window/tests.py:37:19     - Unknown word (Jenson)     -- ('Jenson', 45000, 'Accounting
 ./tests/expressions_window/tests.py:757:56    - Unknown word (Nowak)      -- department': 'IT', 'name': 'Nowak', 'salary': 32000})
@@ -1256,22 +1255,23 @@ Lines:
 ./tests/forms_tests/field_tests/test_filefield.py:39:80     - Unknown word (सर्पमीनो)   -- री मँडराने वाली नाव सर्पमीनों से भरी ह'.encode()
 ./tests/forms_tests/field_tests/test_regexfield.py:61:27     - Unknown word (éèøç)       -- self.assertEqual('éèøçÎÎ你好', f.clean('éèøç
 ./tests/forms_tests/field_tests/test_slugfield.py:18:35     - Unknown word (ıçğüş)      -- assertEqual(f.clean('ıçğüş'), 'ıçğüş')
-./tests/forms_tests/tests/test_forms.py:1369:25   - Unknown word (reuired)    -- ({'class': 'reuired'}, {'class': 'required
-./tests/forms_tests/tests/test_forms.py:1400:38   - Unknown word (unspec)     -- _init__(self, allow_unspec_gender=False, *args
-./tests/forms_tests/tests/test_forms.py:1650:64   - Unknown word (Contraseña) -- PasswordInput, label='Contraseña (de nuevo)')
-./tests/forms_tests/tests/test_forms.py:1650:79   - Unknown word (nuevo)      -- label='Contraseña (de nuevo)')
-./tests/forms_tests/tests/test_forms.py:1824:52   - Unknown word (stephane)   -- initial={'username': 'stephane'}, auto_id=False)
-./tests/forms_tests/tests/test_forms.py:1868:52   - Unknown word (babik)      -- initial={'username': 'babik'}, auto_id=False)
-./tests/forms_tests/tests/test_forms.py:2025:44   - Unknown word (Greatel)    -- CharField(initial='Greatel')
-./tests/forms_tests/tests/test_forms.py:2028:62   - Unknown word (Scrmbl)     -- Hans', 'last_name': 'Scrmbl', 'birthday': '1974
-./tests/forms_tests/tests/test_forms.py:2203:67   - Unknown word (Wählen)     -- PasswordInput, help_text='Wählen Sie mit Bedacht.')
-./tests/forms_tests/tests/test_forms.py:2203:82   - Unknown word (Bedacht)    -- text='Wählen Sie mit Bedacht.')
-./tests/forms_tests/tests/test_forms.py:2788:50   - Unknown word (lname)      -- {'name': ['fname', 'lname']})
-./tests/forms_tests/tests/test_forms.py:3597:26   - Unknown word (myradio)    -- '<div class="myradio">{{ radio }}</div>'
-./tests/forms_tests/tests/test_forms.py:3614:26   - Unknown word (mycheckbox) -- '<div class="mycheckbox">{{ checkbox }}</div
-./tests/forms_tests/tests/test_forms.py:3767:48   - Unknown word (doesn)      -- picking a username that doesn&#x27;t already exist
+./tests/forms_tests/tests/test_forms.py:1369:25   - Unknown word (reuired)     -- ({'class': 'reuired'}, {'class': 'required
+./tests/forms_tests/tests/test_forms.py:1400:38   - Unknown word (unspec)      -- _init__(self, allow_unspec_gender=False, *args
+./tests/forms_tests/tests/test_forms.py:1650:64   - Unknown word (Contraseña)  -- PasswordInput, label='Contraseña (de nuevo)')
+./tests/forms_tests/tests/test_forms.py:1650:79   - Unknown word (nuevo)       -- label='Contraseña (de nuevo)')
+./tests/forms_tests/tests/test_forms.py:1824:52   - Unknown word (stephane)    -- initial={'username': 'stephane'}, auto_id=False)
+./tests/forms_tests/tests/test_forms.py:1868:52   - Unknown word (babik)       -- initial={'username': 'babik'}, auto_id=False)
+./tests/forms_tests/tests/test_forms.py:2025:44   - Unknown word (Greatel)     -- CharField(initial='Greatel')
+./tests/forms_tests/tests/test_forms.py:2028:62   - Unknown word (Scrmbl)      -- Hans', 'last_name': 'Scrmbl', 'birthday': '1974
+./tests/forms_tests/tests/test_forms.py:2203:67   - Unknown word (Wählen)      -- PasswordInput, help_text='Wählen Sie mit Bedacht.')
+./tests/forms_tests/tests/test_forms.py:2203:82   - Unknown word (Bedacht)     -- text='Wählen Sie mit Bedacht.')
+./tests/forms_tests/tests/test_forms.py:2788:50   - Unknown word (lname)       -- {'name': ['fname', 'lname']})
+./tests/forms_tests/tests/test_forms.py:3597:26   - Unknown word (myradio)     -- '<div class="myradio">{{ radio }}</div>'
+./tests/forms_tests/tests/test_forms.py:3614:26   - Unknown word (mycheckbox)  -- '<div class="mycheckbox">{{ checkbox }}</div
+./tests/forms_tests/tests/test_forms.py:3767:48   - Unknown word (doesn)       -- picking a username that doesn&#x27;t already exist
 ./tests/forms_tests/tests/test_forms.py:437:15    - Unknown word (Signup)     -- class SignupForm(Form):
 ./tests/forms_tests/tests/test_forms.py:665:15    - Unknown word (Beatle)     -- class BeatleForm(Form):
+./tests/forms_tests/tests/test_forms.py:731:24    - Unknown word (noniterable) -- def test_form_with_noniterable_boundfield(self):
 ./tests/forms_tests/tests/test_formsets.py:1122:40   - Unknown word (mgmt)         -- someone fiddles with the mgmt form data...
 ./tests/forms_tests/tests/test_formsets.py:1503:20   - Unknown word (Fset)         -- class EmptyFsetWontValidate(BaseFormSet
 ./tests/forms_tests/tests/test_formsets.py:218:71    - Unknown word (Decemberists) -- Calexico', '100'), ('The Decemberists', '')], initial_forms

@@ -54,9 +54,11 @@ describe('Validate getDictionary', () => {
         expect(dict.has(word, opts)).toBe(expected);
     });
 
+    // cspell:ignore zeromq
     test.each`
         word        | expected
-        ${'zero'}   | ${{ found: 'zero', forbidden: false, noSuggest: false }}
+        ${'zero'}   | ${{ found: false, forbidden: false, noSuggest: false }}
+        ${'zeromq'} | ${{ found: 'zeromq', forbidden: false, noSuggest: false }}
         ${'zeros'}  | ${{ found: 'zeros', forbidden: false, noSuggest: true }}
         ${'google'} | ${{ found: 'google', forbidden: false, noSuggest: true }}
         ${'Café'}   | ${{ found: 'café', forbidden: false, noSuggest: false }}
@@ -80,7 +82,6 @@ describe('Validate getDictionary', () => {
             ignoreWords: ['zeros'],
             flagWords: ['hte', 'colour'],
         };
-
         const dict = await Dictionaries.getDictionary(settings);
         expect(dict.find(word)).toEqual(expected);
     });
