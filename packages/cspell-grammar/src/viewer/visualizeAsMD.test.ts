@@ -25,8 +25,9 @@ describe('visualizeAsMD', () => {
 
     test.each`
         filename
-        ${path.join(pathSamples, 'sampleJest.ts')}
+        ${'samples/sampleJest.ts'}
     `('tokenizedLinesToMarkdown file $filename', async ({ filename }) => {
+        filename = path.resolve(pathPackage, filename);
         const text = await fs.readFile(filename, 'utf8');
         const lines = tokenize(text);
         const md = tokenizedLinesToMarkdown(lines);
