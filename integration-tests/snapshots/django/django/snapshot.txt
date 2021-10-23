@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2703, Issues found: 7790 in 878 files
+ CSpell: Files checked: 2717, Issues found: 7803 in 878 files
  exit code: 1
 ./django/apps/config.py:125:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -339,9 +339,9 @@ Lines:
 ./django/contrib/postgres/signals.py:48:53     - Unknown word (PSQL)       -- someone may be using PSQL without extensions
 ./django/contrib/sessions/backends/file.py:121:26    - Unknown word (WRONLY)     -- flags = os.O_WRONLY | getattr(os, 'O_BINARY
 ./django/contrib/sessions/backends/file.py:123:43    - Unknown word (CREAT)      -- |= os.O_EXCL | os.O_CREAT
-./django/contrib/sitemaps/views.py:17:45     - Unknown word (noindex)    -- headers['X-Robots-Tag'] = 'noindex, noodp, noarchive'
-./django/contrib/sitemaps/views.py:17:54     - Unknown word (noodp)      -- Robots-Tag'] = 'noindex, noodp, noarchive'
-./django/contrib/sitemaps/views.py:17:61     - Unknown word (noarchive)  -- = 'noindex, noodp, noarchive'
+./django/contrib/sitemaps/views.py:32:45     - Unknown word (noindex)    -- headers['X-Robots-Tag'] = 'noindex, noodp, noarchive'
+./django/contrib/sitemaps/views.py:32:54     - Unknown word (noodp)      -- Robots-Tag'] = 'noindex, noodp, noarchive'
+./django/contrib/sitemaps/views.py:32:61     - Unknown word (noarchive)  -- = 'noindex, noodp, noarchive'
 ./django/contrib/sites/management.py:23:47     - Unknown word (syncdb)     -- test suite after flush/syncdb), it isn't guaranteed
 ./django/contrib/sites/management.py:30:60     - Unknown word (incrementation) -- instead of relying on auto-incrementation,
 ./django/contrib/staticfiles/handlers.py:4:6       - Unknown word (asgiref)    -- from asgiref.sync import sync_to
@@ -488,8 +488,8 @@ Lines:
 ./django/db/backends/base/creation.py:97:36     - Unknown word (DJANGOS)    -- environ.get('RUNNING_DJANGOS_TEST_SUITE') == 'true
 ./django/db/backends/base/features.py:189:33    - Unknown word (pyformat)   -- the backend support 'pyformat' style ("... %(name
 ./django/db/backends/base/features.py:192:14    - Unknown word (paramstyle) -- supports_paramstyle_pyformat = True
-./django/db/backends/base/operations.py:259:23    - Unknown word (lastrowid)  -- return cursor.lastrowid
-./django/db/backends/base/operations.py:459:18    - Unknown word (autopk)     -- def validate_autopk_value(self, value):
+./django/db/backends/base/operations.py:265:23    - Unknown word (lastrowid)  -- return cursor.lastrowid
+./django/db/backends/base/operations.py:465:18    - Unknown word (autopk)     -- def validate_autopk_value(self, value):
 ./django/db/backends/base/schema.py:164:16    - Unknown word (sqls)       -- column_sqls = []
 ./django/db/backends/base/schema.py:824:9     - Unknown word (rels)       -- rels_to_update = []
 ./django/db/backends/mysql/base.py:196:14    - Unknown word (conv)       -- 'conv': django_conversions
@@ -643,8 +643,8 @@ Lines:
 ./django/http/multipartparser.py:680:5     - Unknown word (pdict)      -- pdict = {}
 ./django/http/request.py:378:5     - Unknown word (UNPREFIXED) -- UNPREFIXED_HEADERS = {'CONTENT
 ./django/http/request.py:610:7     - Unknown word (ufffd)      -- (\ufffd).
-./django/http/response.py:469:67    - Unknown word (nbytes)     -- filelike.getbuffer().nbytes
-./django/http/response.py:475:19    - Unknown word (uncompressing) -- # uncompressing files.
+./django/http/response.py:471:71    - Unknown word (nbytes)     -- filelike.getbuffer().nbytes - filelike.tell()
+./django/http/response.py:483:19    - Unknown word (uncompressing) -- # uncompressing files.
 ./django/middleware/common.py:125:13    - Unknown word (referer)    -- referer = request.META.get(
 ./django/middleware/common.py:125:46    - Unknown word (REFERER)    -- request.META.get('HTTP_REFERER', '')
 ./django/middleware/csrf.py:401:31    - Unknown word (dont)       -- if getattr(request, '_dont_enforce_csrf_checks
@@ -726,6 +726,8 @@ Lines:
 ./django/utils/functional.py:304:66    - Unknown word (unpickler)  -- _ method and custom unpickler. We
 ./django/utils/functional.py:305:40    - Unknown word (unpickler's) -- wrapped object as the unpickler's argument, so that pickle
 ./django/utils/html.py:13:39     - Unknown word (GENDELIMS)  -- http import RFC3986_GENDELIMS, RFC3986_SUBDELIMS
+./django/utils/html.py:221:7     - Unknown word (Urlizer)    -- class Urlizer:
+./django/utils/html.py:365:1     - Unknown word (urlizer)    -- urlizer = Urlizer()
 ./django/utils/jslex.py:107:62    - Unknown word (instanceof) -- function if import in instanceof
 ./django/utils/jslex.py:116:14    - Unknown word (hnum)       -- Tok("hnum", r"0[xX][0-9a-fA-F
 ./django/utils/jslex.py:117:14    - Unknown word (onum)       -- Tok("onum", r"0[0-7]+"),
@@ -922,7 +924,7 @@ Lines:
 ./tests/admin_inlines/models.py:227:10    - Unknown word (famiglia)   -- capo_famiglia = models.ForeignKey
 ./tests/admin_inlines/tests.py:1143:56   - Unknown word (childss)                 -- response, '<h2>Non-verbose childss</h2>')
 ./tests/admin_inlines/tests.py:1149:71   - Unknown word (onlys)                   -- Model with verbose name onlys</h2>')
-./tests/admin_inlines/tests.py:1571:57   - Unknown word (rgba)                    -- expressed as either rgb() or rgba() depending on the
+./tests/admin_inlines/tests.py:1572:57   - Unknown word (rgba)                    -- expressed as either rgb() or rgba() depending on the
 ./tests/admin_inlines/tests.py:212:65    - Unknown word (capofamiglia) -- admin:admin_inlines_capofamiglia_add'))
 ./tests/admin_inlines/tests.py:344:15    - Unknown word (thead)        -- '<thead><tr><th class="original
 ./tests/admin_inlines/tests.py:405:65    - Unknown word (parentmodelwithcustompk) -- admin:admin_inlines_parentmodelwithcustompk_change', args=('foo
@@ -959,36 +961,36 @@ Lines:
 ./tests/admin_views/test_nav_sidebar.py:100:14    - Unknown word (Héllos)     -- 'Héllos</a></th>'
 ./tests/admin_views/test_nav_sidebar.py:26:16     - Unknown word (wihout)     -- path('test_wihout_sidebar/admin/', site
 ./tests/admin_views/test_nav_sidebar.py:92:54     - Unknown word (héllo)      -- sidebar:admin_views_héllo_changelist')
-./tests/admin_views/tests.py:1011:47   - Unknown word (Paulo)              -- TIME_ZONE='America/Sao_Paulo', USE_TZ=True)
-./tests/admin_views/tests.py:1363:53   - Unknown word (Mauchly)            -- objects.create(name='John Mauchly', gender=1, alive=True
-./tests/admin_views/tests.py:1548:13   - Unknown word (nostaffuser)        -- cls.nostaffuser = User.objects.create
-./tests/admin_views/tests.py:1548:62   - Unknown word (nostaff)            -- create_user(username='nostaff', password='secret'
+./tests/admin_views/tests.py:1009:47   - Unknown word (Paulo)              -- TIME_ZONE='America/Sao_Paulo', USE_TZ=True)
+./tests/admin_views/tests.py:1361:53   - Unknown word (Mauchly)            -- objects.create(name='John Mauchly', gender=1, alive=True
+./tests/admin_views/tests.py:1546:13   - Unknown word (nostaffuser)        -- cls.nostaffuser = User.objects.create
+./tests/admin_views/tests.py:1546:62   - Unknown word (nostaff)            -- create_user(username='nostaff', password='secret'
 ./tests/admin_views/tests.py:163:37    - Unknown word (Norske)     -- article_set-0-title": "Norske bostaver æøå skaper
 ./tests/admin_views/tests.py:163:44    - Unknown word (bostaver)   -- set-0-title": "Norske bostaver æøå skaper problemer
 ./tests/admin_views/tests.py:163:64    - Unknown word (problemer)  -- bostaver æøå skaper problemer",
-./tests/admin_views/tests.py:1803:27   - Unknown word (ikke)               -- 'title': 'Døm ikke',
-./tests/admin_views/tests.py:1846:30   - Unknown word (rsaquo)             -- change_list_link = '&rsaquo; <a href="%s">Articles
-./tests/admin_views/tests.py:1910:23   - Unknown word (Ikke)               -- 'title': 'Ikke fordømt',
-./tests/admin_views/tests.py:1910:28   - Unknown word (fordømt)            -- 'title': 'Ikke fordømt',
-./tests/admin_views/tests.py:1987:78   - Unknown word (mult)               -- create(id=3, name='odd id mult 3')
-./tests/admin_views/tests.py:2818:66   - Unknown word (hott)               -- content_object=plot, name='hott')
-./tests/admin_views/tests.py:2881:41   - Unknown word (ABCDEFGHIJKLMNOPQRSTUVWXYZ) -- abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 "
-./tests/admin_views/tests.py:3011:30   - Unknown word (Fhistory)                   -- self.assertIn('/123_2Fhistory/', response.headers
-./tests/admin_views/tests.py:3035:44   - Unknown word (myfield)                    -- assertRedirects(response, '%s?myfield=%s' % (reverse('admin
-./tests/admin_views/tests.py:3044:44   - Unknown word (Lærdommer)                  -- objects.create(name='Lærdommer')
-./tests/admin_views/tests.py:3047:107  - Unknown word (Erro)                       -- frustrerende med UnicodeDecodeErro</p>',
-./tests/admin_views/tests.py:3047:71   - Unknown word (Svært)                      -- problemer', content='<p>Svært frustrerende med UnicodeDecod
-./tests/admin_views/tests.py:3047:77   - Unknown word (frustrerende)               -- , content='<p>Svært frustrerende med UnicodeDecodeErro
-./tests/admin_views/tests.py:3051:20   - Unknown word (Kjærlighet)                 -- title='Kjærlighet', content='<p>La kj
-./tests/admin_views/tests.py:3051:48   - Unknown word (kjærligheten)               -- rlighet', content='<p>La kjærligheten til de lidende seire
-./tests/admin_views/tests.py:3051:68   - Unknown word (lidende)                    -- kjærligheten til de lidende seire.</p>', book=cls
-./tests/admin_views/tests.py:3051:76   - Unknown word (seire)                      -- rligheten til de lidende seire.</p>', book=cls.b1)
-./tests/admin_views/tests.py:3068:27   - Unknown word (lærdommer)                  -- "name": "Test lærdommer",
-./tests/admin_views/tests.py:3127:58   - Unknown word (Rossum)                     -- create(name='Guido van Rossum', gender=1, alive=True
-./tests/admin_views/tests.py:3357:68   - Unknown word (Clegg)                      -- id=1, name="Frederick Clegg")
-./tests/admin_views/tests.py:3559:44   - Unknown word (Hara)                       -- create(name='John O"Hara', gender=1)
-./tests/admin_views/tests.py:3605:89   - Unknown word (uido)                       -- person_changelist') + '?q=uido')
-./tests/admin_views/tests.py:4606:89   - Unknown word (awεšomeııı)                 -- mAin nÀMë and it\'s awεšomeıııİ')
+./tests/admin_views/tests.py:1801:27   - Unknown word (ikke)               -- 'title': 'Døm ikke',
+./tests/admin_views/tests.py:1844:30   - Unknown word (rsaquo)             -- change_list_link = '&rsaquo; <a href="%s">Articles
+./tests/admin_views/tests.py:1908:23   - Unknown word (Ikke)               -- 'title': 'Ikke fordømt',
+./tests/admin_views/tests.py:1908:28   - Unknown word (fordømt)            -- 'title': 'Ikke fordømt',
+./tests/admin_views/tests.py:1985:78   - Unknown word (mult)               -- create(id=3, name='odd id mult 3')
+./tests/admin_views/tests.py:2816:66   - Unknown word (hott)               -- content_object=plot, name='hott')
+./tests/admin_views/tests.py:2879:41   - Unknown word (ABCDEFGHIJKLMNOPQRSTUVWXYZ) -- abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 "
+./tests/admin_views/tests.py:3009:30   - Unknown word (Fhistory)                   -- self.assertIn('/123_2Fhistory/', response.headers
+./tests/admin_views/tests.py:3033:44   - Unknown word (myfield)                    -- assertRedirects(response, '%s?myfield=%s' % (reverse('admin
+./tests/admin_views/tests.py:3042:44   - Unknown word (Lærdommer)                  -- objects.create(name='Lærdommer')
+./tests/admin_views/tests.py:3045:107  - Unknown word (Erro)                       -- frustrerende med UnicodeDecodeErro</p>',
+./tests/admin_views/tests.py:3045:71   - Unknown word (Svært)                      -- problemer', content='<p>Svært frustrerende med UnicodeDecod
+./tests/admin_views/tests.py:3045:77   - Unknown word (frustrerende)               -- , content='<p>Svært frustrerende med UnicodeDecodeErro
+./tests/admin_views/tests.py:3049:20   - Unknown word (Kjærlighet)                 -- title='Kjærlighet', content='<p>La kj
+./tests/admin_views/tests.py:3049:48   - Unknown word (kjærligheten)               -- rlighet', content='<p>La kjærligheten til de lidende seire
+./tests/admin_views/tests.py:3049:68   - Unknown word (lidende)                    -- kjærligheten til de lidende seire.</p>', book=cls
+./tests/admin_views/tests.py:3049:76   - Unknown word (seire)                      -- rligheten til de lidende seire.</p>', book=cls.b1)
+./tests/admin_views/tests.py:3066:27   - Unknown word (lærdommer)                  -- "name": "Test lærdommer",
+./tests/admin_views/tests.py:3125:58   - Unknown word (Rossum)                     -- create(name='Guido van Rossum', gender=1, alive=True
+./tests/admin_views/tests.py:3355:68   - Unknown word (Clegg)                      -- id=1, name="Frederick Clegg")
+./tests/admin_views/tests.py:3557:44   - Unknown word (Hara)                       -- create(name='John O"Hara', gender=1)
+./tests/admin_views/tests.py:3603:89   - Unknown word (uido)                       -- person_changelist') + '?q=uido')
+./tests/admin_views/tests.py:4606:90   - Unknown word (awεšomeııı)                 -- mAin nÀMë and it\'s awεšomeıııİ')
 ./tests/admin_views/tests.py:4610:56   - Unknown word (awesomeiiii)                -- the-main-name-and-its-awesomeiiii-2012-02-18')
 ./tests/admin_views/tests.py:4619:28   - Unknown word (Çkeð)                       -- ' here is a sŤāÇkeð inline !  '
 ./tests/admin_views/tests.py:4640:28   - Unknown word (anöther)                    -- ' now you haVe anöther sŤāÇkeð  inline with
@@ -996,29 +998,29 @@ Lines:
 ./tests/admin_views/tests.py:4700:29   - Unknown word (nàmë)                       -- slug3='the-main-nàmë-and-its-awεšomeıııi
 ./tests/admin_views/tests.py:4700:42   - Unknown word (awεšomeıııi)                -- the-main-nàmë-and-its-awεšomeıııi',
 ./tests/admin_views/tests.py:4712:75   - Unknown word (loooooooooooooooooo)        -- inline with a very ... loooooooooooooooooo',
-./tests/admin_views/tests.py:4891:49   - Unknown word (relatedwithuuidpkmodel)     -- reverse('admin:admin_views_relatedwithuuidpkmodel_change', args=(related
-./tests/admin_views/tests.py:4974:15   - Unknown word (Roboto)                     -- ['Roboto', 'Lucida Grande',
-./tests/admin_views/tests.py:4974:25   - Unknown word (Lucida)                     -- ['Roboto', 'Lucida Grande', 'Verdana',
-./tests/admin_views/tests.py:4974:42   - Unknown word (Verdana)                    -- , 'Lucida Grande', 'Verdana', 'Arial', 'sans-serif
-./tests/admin_views/tests.py:5237:23   - Unknown word (onetoone)                   -- def test_readonly_onetoone_backwards_ref(self)
-./tests/admin_views/tests.py:5298:9    - Unknown word (threepwood)                 -- threepwood = Character.objects
-./tests/admin_views/tests.py:5353:36   - Unknown word (Kilbraken)                  -- objects.create(name="Kilbraken", age=50, title="Judge
-./tests/admin_views/tests.py:610:44    - Unknown word (Karnataka)  -- objects.create(name='Karnataka')
-./tests/admin_views/tests.py:624:63    - Unknown word (vodcast)    -- reverse('admin:admin_views_vodcast_changelist'), {})
-./tests/admin_views/tests.py:6418:79   - Unknown word (Rossi)                      -- name='Mario', surname='Rossi')
-./tests/admin_views/tests.py:6419:81   - Unknown word (Bianchi)                    -- 'Antonio', surname='Bianchi')
-./tests/admin_views/tests.py:6464:9    - Unknown word (pwdc)                       -- pwdc = ParentWithDependentChildren
-./tests/admin_views/tests.py:647:53    - Unknown word (chapterxtra) -- reverse('admin:admin_views_chapterxtra1_changelist')
-./tests/admin_views/tests.py:6594:64   - Unknown word (explicitlyprovidedpk)       -- reverse('admin:admin_views_explicitlyprovidedpk_add'), post_data)
-./tests/admin_views/tests.py:6603:64   - Unknown word (implicitlygeneratedpk)      -- reverse('admin:admin_views_implicitlygeneratedpk_add'), post_data)
-./tests/admin_views/tests.py:6616:7    - Unknown word (Anonynous)                  -- * Anonynous/non-staff users are
-./tests/admin_views/tests.py:6660:14   - Unknown word (unkown)                     -- def test_unkown_url_without_trailing
-./tests/admin_views/tests.py:790:47    - Unknown word (Choisir)     -- assertNotContains(response, 'Choisir une heure')
-./tests/admin_views/tests.py:790:59    - Unknown word (heure)       -- response, 'Choisir une heure')
-./tests/admin_views/tests.py:870:63    - Unknown word (referencedbyparent) -- reverse('admin:admin_views_referencedbyparent_changelist'), {TO_FIELD
-./tests/admin_views/tests.py:875:63    - Unknown word (referencedbyinline) -- reverse('admin:admin_views_referencedbyinline_changelist'), {TO_FIELD
-./tests/admin_views/tests.py:880:42    - Unknown word (referencedbygenrel) -- reverse('admin:admin_views_referencedbygenrel_changelist')
-./tests/admin_views/tests.py:943:63    - Unknown word (undeletableobject)  -- reverse('admin:admin_views_undeletableobject_change', args=(instance
+./tests/admin_views/tests.py:4900:49   - Unknown word (relatedwithuuidpkmodel)     -- reverse('admin:admin_views_relatedwithuuidpkmodel_change', args=(related
+./tests/admin_views/tests.py:4988:15   - Unknown word (Roboto)                     -- ['Roboto', 'Lucida Grande',
+./tests/admin_views/tests.py:4988:25   - Unknown word (Lucida)                     -- ['Roboto', 'Lucida Grande', 'Verdana',
+./tests/admin_views/tests.py:4988:42   - Unknown word (Verdana)                    -- , 'Lucida Grande', 'Verdana', 'Arial', 'sans-serif
+./tests/admin_views/tests.py:5254:23   - Unknown word (onetoone)                   -- def test_readonly_onetoone_backwards_ref(self)
+./tests/admin_views/tests.py:5315:9    - Unknown word (threepwood)                 -- threepwood = Character.objects
+./tests/admin_views/tests.py:5370:36   - Unknown word (Kilbraken)                  -- objects.create(name="Kilbraken", age=50, title="Judge
+./tests/admin_views/tests.py:608:44    - Unknown word (Karnataka)  -- objects.create(name='Karnataka')
+./tests/admin_views/tests.py:622:63    - Unknown word (vodcast)    -- reverse('admin:admin_views_vodcast_changelist'), {})
+./tests/admin_views/tests.py:6435:79   - Unknown word (Rossi)                      -- name='Mario', surname='Rossi')
+./tests/admin_views/tests.py:6436:81   - Unknown word (Bianchi)                    -- 'Antonio', surname='Bianchi')
+./tests/admin_views/tests.py:645:53    - Unknown word (chapterxtra) -- reverse('admin:admin_views_chapterxtra1_changelist')
+./tests/admin_views/tests.py:6481:9    - Unknown word (pwdc)                       -- pwdc = ParentWithDependentChildren
+./tests/admin_views/tests.py:6611:64   - Unknown word (explicitlyprovidedpk)       -- reverse('admin:admin_views_explicitlyprovidedpk_add'), post_data)
+./tests/admin_views/tests.py:6620:64   - Unknown word (implicitlygeneratedpk)      -- reverse('admin:admin_views_implicitlygeneratedpk_add'), post_data)
+./tests/admin_views/tests.py:6633:7    - Unknown word (Anonynous)                  -- * Anonynous/non-staff users are
+./tests/admin_views/tests.py:6677:14   - Unknown word (unkown)                     -- def test_unkown_url_without_trailing
+./tests/admin_views/tests.py:788:47    - Unknown word (Choisir)     -- assertNotContains(response, 'Choisir une heure')
+./tests/admin_views/tests.py:788:59    - Unknown word (heure)       -- response, 'Choisir une heure')
+./tests/admin_views/tests.py:868:63    - Unknown word (referencedbyparent) -- reverse('admin:admin_views_referencedbyparent_changelist'), {TO_FIELD
+./tests/admin_views/tests.py:873:63    - Unknown word (referencedbyinline) -- reverse('admin:admin_views_referencedbyinline_changelist'), {TO_FIELD
+./tests/admin_views/tests.py:878:42    - Unknown word (referencedbygenrel) -- reverse('admin:admin_views_referencedbygenrel_changelist')
+./tests/admin_views/tests.py:941:63    - Unknown word (undeletableobject)  -- reverse('admin:admin_views_undeletableobject_change', args=(instance
 ./tests/admin_widgets/models.py:39:40     - Unknown word (escapeme)   -- choices_to={'name': '"&><escapeme'},
 ./tests/admin_widgets/tests.py:253:27    - Unknown word (Iñtërnâtiônàlizætiøn) -- for test_str in ('Iñtërnâtiônàlizætiøn', "1234'", -1234):
 ./tests/admin_widgets/tests.py:549:54    - Unknown word (nbsp)                 -- title="Lookup"></a>&nbsp;<strong>'
@@ -1026,8 +1028,8 @@ Lines:
 ./tests/admin_widgets/tests.py:584:66    - Unknown word (hcombpk)              -- honeycomb_widget" value="%(hcombpk)s">'
 ./tests/admin_widgets/tests.py:585:30    - Unknown word (hcomb)                -- '&nbsp;<strong>%(hcomb)s</strong>'
 ./tests/admin_widgets/tests.py:630:60    - Unknown word (Cescapeme)            -- band/?name=%22%26%3E%3Cescapeme&amp;_to_field=artist
-./tests/admin_widgets/tests.py:863:55    - Unknown word (calendarin)           -- find_element_by_id('calendarin0')
-./tests/admin_widgets/tests.py:972:21    - Unknown word (neighbouring)         -- # If we are neighbouring a DST, we add an hour
+./tests/admin_widgets/tests.py:865:56    - Unknown word (calendarin)           -- find_element(By.ID, 'calendarin0')
+./tests/admin_widgets/tests.py:978:21    - Unknown word (neighbouring)         -- # If we are neighbouring a DST, we add an hour
 ./tests/aggregation/test_filter_argument.py:106:9     - Unknown word (aggs)       -- aggs = Author.objects.annotate
 ./tests/aggregation/tests.py:442:35    - Unknown word (xprice)     -- Book.objects.annotate(xprice=F('price')).filter(rating
 ./tests/aggregation_regress/tests.py:1376:9    - Unknown word (wmpk)       -- wmpk = WithManualPK.objects
@@ -1404,7 +1406,7 @@ Lines:
 ./tests/gis_tests/geos_tests/test_geos.py:1420:37   - Unknown word (SRUD)       -- GEOSGeometry.from_ewkt('SRUD=1;POINT(1 1)')
 ./tests/gis_tests/geos_tests/test_geos.py:612:25    - Unknown word (tset)       -- tset = (5, 23)
 ./tests/gis_tests/geos_tests/test_geos.py:961:14    - Unknown word (threed)     -- def test_threed(self):
-./tests/gis_tests/geos_tests/test_io.py:9:7       - Unknown word (GEOSIO)     -- class GEOSIOTest(SimpleTestCase)
+./tests/gis_tests/geos_tests/test_io.py:10:7      - Unknown word (GEOSIO)     -- class GEOSIOTest(SimpleTestCase)
 ./tests/gis_tests/geos_tests/test_mutable_list.py:101:13    - Unknown word (slen)       -- for slen in range(self.limit
 ./tests/gis_tests/geos_tests/test_mutable_list.py:13:6      - Unknown word (mytype)     -- _mytype = tuple
 ./tests/gis_tests/geos_tests/test_mutable_list.py:221:13    - Unknown word (getfcn)     -- def getfcn(x, i):
@@ -1573,25 +1575,22 @@ Lines:
 ./tests/m2m_through_regress/tests.py:108:55    - Unknown word (Briscoe)    -- objects.create(name="Ryan Briscoe")
 ./tests/m2m_through_regress/tests.py:114:64    - Unknown word (Gumble)     -- create(name="Barney Gumble")
 ./tests/m2m_through_regress/tests.py:116:52    - Unknown word (Trabant)    -- objects.create(make="Trabant")
-./tests/mail/tests.py:1375:47   - Unknown word (rcpttos)    -- self, peer, mailfrom, rcpttos, data):
-./tests/mail/tests.py:1378:9    - Unknown word (maddr)      -- maddr = parseaddr(m.get('from
-./tests/mail/tests.py:1427:9    - Unknown word (ehlo)       -- def ehlo(self, name=''):
-./tests/mail/tests.py:1429:14   - Unknown word (esmtp)      -- self.esmtp_features.update({
-./tests/mail/tests.py:1626:9    - Unknown word (myemailbackend) -- myemailbackend = MyEmailBackend()
-./tests/mail/tests.py:319:26    - Unknown word (Sürname)    -- ['"Firstname Sürname" <to@example.com>',
-./tests/mail/tests.py:323:40    - Unknown word (Crname)     -- 8?q?Firstname_S=C3=BCrname?= <to@example.com>,
-./tests/mail/tests.py:336:14    - Unknown word (Gżegżółka)  -- 'Gżegżółka', 'Content', 'from@example
-./tests/mail/tests.py:461:25    - Unknown word (pièce)      -- msg.attach("une pièce jointe.pdf", b"%PDF
-./tests/mail/tests.py:461:31    - Unknown word (jointe)     -- msg.attach("une pièce jointe.pdf", b"%PDF-1.4.%.
-./tests/mail/tests.py:6:8       - Unknown word (smtpd)      -- import smtpd
-./tests/mail/tests.py:769:18    - Unknown word (éxample)    -- ('to@éxample.com', 'utf-8', 'to@xn
-./tests/mail/tests.py:769:49    - Unknown word (xample)     -- com', 'utf-8', 'to@xn--xample-9ua.com'),
-./tests/mail/tests.py:818:50    - Unknown word (exampl)     -- very long' * 4, 'to@exampl€.com'),
-./tests/mail/tests.py:949:31    - Unknown word (Chère)      -- email = EmailMessage('Chère maman', 'Je t\'aime
-./tests/mail/tests.py:949:37    - Unknown word (maman)      -- EmailMessage('Chère maman', 'Je t\'aime très fort
-./tests/mail/tests.py:949:49    - Unknown word (t\'aime)    -- ailMessage('Chère maman', 'Je t\'aime très fort', 'from@example
-./tests/mail/tests.py:964:44    - Unknown word (южных)      -- EmailMessage('Subject', 'В южных морях ' * 60, 'from
-./tests/mail/tests.py:964:50    - Unknown word (морях)      -- 'Subject', 'В южных морях ' * 60, 'from@example
+./tests/mail/tests.py:1562:9    - Unknown word (myemailbackend) -- myemailbackend = MyEmailBackend()
+./tests/mail/tests.py:29:10     - Unknown word (aiosmtpd)   -- from aiosmtpd.controller import Controller
+./tests/mail/tests.py:30:9      - Unknown word (AIOSMTPD)   -- HAS_AIOSMTPD = True
+./tests/mail/tests.py:322:26    - Unknown word (Sürname)    -- ['"Firstname Sürname" <to@example.com>',
+./tests/mail/tests.py:326:40    - Unknown word (Crname)     -- 8?q?Firstname_S=C3=BCrname?= <to@example.com>,
+./tests/mail/tests.py:339:14    - Unknown word (Gżegżółka)  -- 'Gżegżółka', 'Content', 'from@example
+./tests/mail/tests.py:464:25    - Unknown word (pièce)      -- msg.attach("une pièce jointe.pdf", b"%PDF
+./tests/mail/tests.py:464:31    - Unknown word (jointe)     -- msg.attach("une pièce jointe.pdf", b"%PDF-1.4.%.
+./tests/mail/tests.py:772:18    - Unknown word (éxample)    -- ('to@éxample.com', 'utf-8', 'to@xn
+./tests/mail/tests.py:772:49    - Unknown word (xample)     -- com', 'utf-8', 'to@xn--xample-9ua.com'),
+./tests/mail/tests.py:821:50    - Unknown word (exampl)     -- very long' * 4, 'to@exampl€.com'),
+./tests/mail/tests.py:952:31    - Unknown word (Chère)      -- email = EmailMessage('Chère maman', 'Je t\'aime
+./tests/mail/tests.py:952:37    - Unknown word (maman)      -- EmailMessage('Chère maman', 'Je t\'aime très fort
+./tests/mail/tests.py:952:49    - Unknown word (t\'aime)    -- ailMessage('Chère maman', 'Je t\'aime très fort', 'from@example
+./tests/mail/tests.py:967:44    - Unknown word (южных)      -- EmailMessage('Subject', 'В южных морях ' * 60, 'from
+./tests/mail/tests.py:967:50    - Unknown word (морях)      -- 'Subject', 'В южных морях ' * 60, 'from@example
 ./tests/many_to_one/tests.py:337:68    - Unknown word (Royko)      -- name='Mike', last_name='Royko', email='royko@suntimes
 ./tests/many_to_one/tests.py:338:68    - Unknown word (Kass)       -- name='John', last_name='Kass', email='jkass@tribune
 ./tests/many_to_one/tests.py:680:44    - Unknown word (Ladidu)     -- objects.create(name='Ladidu')
@@ -1607,8 +1606,8 @@ Lines:
 ./tests/migrations/models.py:14:66     - Unknown word (Ðjáñgó)     -- length=20, default='“Ðjáñgó”')
 ./tests/migrations/models.py:19:33     - Unknown word (µóðéø)      -- verbose_name = 'úñí©óðé µóðéø'
 ./tests/migrations/models.py:20:40     - Unknown word (µóðéøß)     -- name_plural = 'úñí©óðé µóðéøß'
-./tests/migrations/test_autodetector.py:1939:19   - Unknown word (Uninstantiated) -- #22951 -- Uninstantiated classes with deconstruct
-./tests/migrations/test_autodetector.py:2504:9    - Unknown word (apackage)       -- apackage = ModelState("b", "APackage
+./tests/migrations/test_autodetector.py:1945:19   - Unknown word (Uninstantiated) -- #22951 -- Uninstantiated classes with deconstruct
+./tests/migrations/test_autodetector.py:2510:9    - Unknown word (apackage)       -- apackage = ModelState("b", "APackage
 ./tests/migrations/test_autodetector.py:281:26    - Unknown word (Authi)      -- "verbose_name": "Authi",
 ./tests/migrations/test_commands.py:311:20    - Unknown word (mmigrations) -- '\x1b[1mmigrations\n\x1b[0m'
 ./tests/migrations/test_commands.py:338:22    - Unknown word (unmigrating) -- # Cleanup by unmigrating everything
@@ -1648,33 +1647,35 @@ Lines:
 ./tests/migrations/test_operations.py:2028:54   - Unknown word (rminsf)            -- up_test_model('test_rminsf')
 ./tests/migrations/test_operations.py:2041:27   - Unknown word (addfuncin)         -- app_label = 'test_addfuncin'
 ./tests/migrations/test_operations.py:2075:27   - Unknown word (rmfuncin)          -- app_label = 'test_rmfuncin'
-./tests/migrations/test_operations.py:2114:54   - Unknown word (alflin)            -- up_test_model("test_alflin", index=True)
-./tests/migrations/test_operations.py:2134:54   - Unknown word (alinto)            -- up_test_model("test_alinto")
-./tests/migrations/test_operations.py:2168:27   - Unknown word (alintoremove)      -- app_label = 'test_alintoremove_wunto'
-./tests/migrations/test_operations.py:2168:40   - Unknown word (wunto)             -- 'test_alintoremove_wunto'
+./tests/migrations/test_operations.py:2111:27   - Unknown word (alfuncin)          -- app_label = 'test_alfuncin'
+./tests/migrations/test_operations.py:2133:54   - Unknown word (alflin)            -- up_test_model("test_alflin", index=True)
+./tests/migrations/test_operations.py:2153:54   - Unknown word (alinto)            -- up_test_model("test_alinto")
+./tests/migrations/test_operations.py:2187:27   - Unknown word (alintoremove)      -- app_label = 'test_alintoremove_wunto'
+./tests/migrations/test_operations.py:2187:40   - Unknown word (wunto)             -- 'test_alintoremove_wunto'
 ./tests/migrations/test_operations.py:223:54    - Unknown word (crmoih)     -- up_test_model("test_crmoih")
-./tests/migrations/test_operations.py:2261:41   - Unknown word (Artur)             -- objects.create(name='Artur')
-./tests/migrations/test_operations.py:2294:27   - Unknown word (addorconstraint)   -- app_label = 'test_addorconstraint'
+./tests/migrations/test_operations.py:2280:41   - Unknown word (Artur)             -- objects.create(name='Artur')
+./tests/migrations/test_operations.py:2313:27   - Unknown word (addorconstraint)   -- app_label = 'test_addorconstraint'
 ./tests/migrations/test_operations.py:256:54    - Unknown word (crprmo)     -- up_test_model("test_crprmo")
-./tests/migrations/test_operations.py:2668:27   - Unknown word (adfuncuc)          -- app_label = 'test_adfuncuc'
-./tests/migrations/test_operations.py:2714:27   - Unknown word (rmfuncuc)          -- app_label = 'test_rmfuncuc'
-./tests/migrations/test_operations.py:2764:54   - Unknown word (almoop)            -- up_test_model("test_almoop")
-./tests/migrations/test_operations.py:2802:54   - Unknown word (alorwrtto)         -- up_test_model("test_alorwrtto", related_model=True
-./tests/migrations/test_operations.py:2852:54   - Unknown word (almoma)            -- up_test_model("test_almoma")
-./tests/migrations/test_operations.py:2889:54   - Unknown word (almomae)           -- up_test_model("test_almomae", manager_model=True
+./tests/migrations/test_operations.py:2687:27   - Unknown word (alfuncuc)          -- app_label = 'test_alfuncuc'
+./tests/migrations/test_operations.py:2707:27   - Unknown word (adfuncuc)          -- app_label = 'test_adfuncuc'
+./tests/migrations/test_operations.py:2753:27   - Unknown word (rmfuncuc)          -- app_label = 'test_rmfuncuc'
+./tests/migrations/test_operations.py:2803:54   - Unknown word (almoop)            -- up_test_model("test_almoop")
+./tests/migrations/test_operations.py:2841:54   - Unknown word (alorwrtto)         -- up_test_model("test_alorwrtto", related_model=True
+./tests/migrations/test_operations.py:2891:54   - Unknown word (almoma)            -- up_test_model("test_almoma")
 ./tests/migrations/test_operations.py:290:54    - Unknown word (crummo)     -- up_test_model("test_crummo")
-./tests/migrations/test_operations.py:2914:54   - Unknown word (alfk)              -- up_test_model("test_alfk")
-./tests/migrations/test_operations.py:2946:63   - Unknown word (afknfk)            -- make_test_state("test_afknfk", operation, related
-./tests/migrations/test_operations.py:3158:42   - Unknown word (ahahaha)           -- migrations.RunPython("print 'ahahaha'")
-./tests/migrations/test_operations.py:3348:47   - Unknown word (Triomphe)          -- create(title="Arc de Triomphe", author=author2)
-./tests/migrations/test_operations.py:3562:39   - Unknown word (iloveponies)       -- options={"db_table": "iloveponies"},
-./tests/migrations/test_operations.py:3570:39   - Unknown word (ilovemoreponies)   -- options={"db_table": "ilovemoreponies"},
-./tests/migrations/test_operations.py:3604:43   - Unknown word (iloveponiesonies)  -- assertNotIn((app_label, "iloveponiesonies"), new_state.models
-./tests/migrations/test_operations.py:3656:40   - Unknown word (crigsw)            -- state_forwards("test_crigsw", new_state)
-./tests/migrations/test_operations.py:3675:63   - Unknown word (dligsw)            -- make_test_state("test_dligsw", operation)
-./tests/migrations/test_operations.py:3697:63   - Unknown word (adfligsw)          -- make_test_state("test_adfligsw", operation)
-./tests/migrations/test_operations.py:3714:63   - Unknown word (adinigsw)          -- make_test_state('test_adinigsw', operation)
-./tests/migrations/test_operations.py:3721:63   - Unknown word (rminigsw)          -- make_test_state("test_rminigsw", operation)
+./tests/migrations/test_operations.py:2928:54   - Unknown word (almomae)           -- up_test_model("test_almomae", manager_model=True
+./tests/migrations/test_operations.py:2953:54   - Unknown word (alfk)              -- up_test_model("test_alfk")
+./tests/migrations/test_operations.py:2985:63   - Unknown word (afknfk)            -- make_test_state("test_afknfk", operation, related
+./tests/migrations/test_operations.py:3197:42   - Unknown word (ahahaha)           -- migrations.RunPython("print 'ahahaha'")
+./tests/migrations/test_operations.py:3387:47   - Unknown word (Triomphe)          -- create(title="Arc de Triomphe", author=author2)
+./tests/migrations/test_operations.py:3601:39   - Unknown word (iloveponies)       -- options={"db_table": "iloveponies"},
+./tests/migrations/test_operations.py:3609:39   - Unknown word (ilovemoreponies)   -- options={"db_table": "ilovemoreponies"},
+./tests/migrations/test_operations.py:3643:43   - Unknown word (iloveponiesonies)  -- assertNotIn((app_label, "iloveponiesonies"), new_state.models
+./tests/migrations/test_operations.py:3695:40   - Unknown word (crigsw)            -- state_forwards("test_crigsw", new_state)
+./tests/migrations/test_operations.py:3714:63   - Unknown word (dligsw)            -- make_test_state("test_dligsw", operation)
+./tests/migrations/test_operations.py:3736:63   - Unknown word (adfligsw)          -- make_test_state("test_adfligsw", operation)
+./tests/migrations/test_operations.py:3753:63   - Unknown word (adinigsw)          -- make_test_state('test_adinigsw', operation)
+./tests/migrations/test_operations.py:3760:63   - Unknown word (rminigsw)          -- make_test_state("test_rminigsw", operation)
 ./tests/migrations/test_operations.py:499:54    - Unknown word (cmoma)      -- up_test_model("test_cmoma")
 ./tests/migrations/test_operations.py:530:54    - Unknown word (dlmo)       -- up_test_model("test_dlmo")
 ./tests/migrations/test_operations.py:557:54    - Unknown word (dlprmo)     -- up_test_model("test_dlprmo", proxy_model=True)
@@ -1766,8 +1767,8 @@ Lines:
 ./tests/prefetch_related/test_uuid.py:33:34     - Unknown word (Bobo)       -- objects.create(name='Bobo').fleas_hosted.add(
 ./tests/prefetch_related/test_uuid.py:61:63     - Unknown word (Arcata)     -- 'Redwood', address='Arcata')
 ./tests/prefetch_related/test_uuid.py:9:34      - Unknown word (Fifi)       -- objects.create(name='Fifi').people.add(
-./tests/prefetch_related/tests.py:1366:22   - Unknown word (einfach)    -- (1, 'einfach', 'simple'),
-./tests/prefetch_related/tests.py:1367:22   - Unknown word (schwierig)  -- (2, 'schwierig', 'difficult'),
+./tests/prefetch_related/tests.py:1384:22   - Unknown word (einfach)    -- (1, 'einfach', 'simple'),
+./tests/prefetch_related/tests.py:1385:22   - Unknown word (schwierig)  -- (2, 'schwierig', 'difficult'),
 ./tests/prefetch_related/tests.py:903:13    - Unknown word (depts)      -- depts = "".join("%s department
 ./tests/proxy_models/tests.py:162:14    - Unknown word (myperson)   -- def test_myperson_manager(self):
 ./tests/proxy_models/tests.py:318:9     - Unknown word (pcontributor) -- pcontributor = ProxyTrackerUser.objects
@@ -1826,8 +1827,12 @@ Lines:
 ./tests/requests/tests.py:568:23    - Unknown word (recovermypassword) -- 'example.com: recovermypassword.com',
 ./tests/requests/tests.py:575:25    - Unknown word (feee)              -- '[2001:19f0:feee::dead:beef:cafe]',
 ./tests/requests/tests.py:919:53    - Unknown word (Proto)             -- PROTO', 'X-Forwarded-Proto'),
-./tests/responses/test_fileresponse.py:41:16     - Unknown word (mkfifo)     -- os.mkfifo(pipe_file)
-./tests/responses/test_fileresponse.py:42:53     - Unknown word (RDONLY)     -- open(pipe_file, os.O_RDONLY | os.O_NONBLOCK)
+./tests/responses/test_fileresponse.py:102:26    - Unknown word (nosuchfile) -- (__file__ + 'nosuchfile', ['application/octet
+./tests/responses/test_fileresponse.py:104:33    - Unknown word (pynosuchfile) -- ('test_fileresponse.pynosuchfile', ['application/octet
+./tests/responses/test_fileresponse.py:13:7      - Unknown word (Unseekable) -- class UnseekableBytesIO(io.BytesIO):
+./tests/responses/test_fileresponse.py:185:16    - Unknown word (mkfifo)       -- os.mkfifo(pipe_file)
+./tests/responses/test_fileresponse.py:186:53    - Unknown word (RDONLY)       -- open(pipe_file, os.O_RDONLY | os.O_NONBLOCK)
+./tests/responses/test_fileresponse.py:92:84     - Unknown word (webm)       -- content_type='video/webm')
 ./tests/responses/tests.py:140:19    - Unknown word (textiowrapper) -- def test_wrap_textiowrapper(self):
 ./tests/responses/tests.py:28:38     - Unknown word (qwer)       -- writelines(['asdf\n', 'qwer\n'])
 ./tests/responses/tests.py:76:34     - Unknown word (J'attendrai) -- HttpResponse(status="J'attendrai")
@@ -1898,7 +1903,8 @@ Lines:
 ./tests/signing/tests.py:68:28     - Unknown word (rcuh)       -- 'jkw osanteuh ,rcuh nthu aou oauh ,ud du
 ./tests/signing/tests.py:68:33     - Unknown word (nthu)       -- 'jkw osanteuh ,rcuh nthu aou oauh ,ud du',
 ./tests/signing/tests.py:68:42     - Unknown word (oauh)       -- osanteuh ,rcuh nthu aou oauh ,ud du',
-./tests/sitemaps_tests/test_http.py:323:37    - Unknown word (xdefault)   -- alternate_i18n_sitemap_xdefault(self):
+./tests/sitemaps_tests/test_http.py:181:33    - Unknown word (ommitted)   -- sitemapindex.lastmod is ommitted when Sitemap.lastmod
+./tests/sitemaps_tests/test_http.py:346:37    - Unknown word (xdefault)   -- alternate_i18n_sitemap_xdefault(self):
 ./tests/sitemaps_tests/test_http.py:60:16     - Unknown word (customised) -- <!-- This is a customised template -->
 ./tests/staticfiles_tests/cases.py:86:42     - Unknown word (ignoreme)   -- ignore_patterns=['*.ignoreme'], **kwargs)
 ./tests/staticfiles_tests/test_finders.py:97:37     - Unknown word (currsize)   -- assertEqual(cache_info.currsize, 1)
@@ -2099,6 +2105,6 @@ Lines:
 ./tests/view_tests/tests/test_i18n.py:404:63    - Unknown word (debe)       -- 'este texto de app3 debe ser traducido')
 ./tests/view_tests/tests/test_i18n.py:444:38    - Unknown word (Entfernen)  -- assertEqual(elem.text, "Entfernen")
 ./tests/view_tests/tests/test_i18n.py:448:42    - Unknown word (Elemente)   -- assertEqual(elem.text, "455 Elemente")
-./tests/view_tests/tests/test_i18n.py:449:59    - Unknown word (onnonplural) -- element_by_id("ngettext_onnonplural")
+./tests/view_tests/tests/test_i18n.py:449:60    - Unknown word (onnonplural) -- element(By.ID, "ngettext_onnonplural")
 ./tests/view_tests/tests/test_i18n.py:469:61    - Unknown word (chaîne)      -- faut traduire cette chaîne de caractères de app
 ./tests/wsgi/tests.py:110:47    - Unknown word (noexist)    -- WSGI_APPLICATION="wsgi.noexist.app")

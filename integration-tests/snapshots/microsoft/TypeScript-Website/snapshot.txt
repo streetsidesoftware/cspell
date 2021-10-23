@@ -3,11 +3,18 @@ Repository: microsoft/TypeScript-Website
 Url: "https://github.com/microsoft/TypeScript-Website.git"
 Args: ["--config=../../../../config/repositories/microsoft/TypeScript-Website/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 711, Issues found: 797 in 156 files
+ CSpell: Files checked: 718, Issues found: 826 in 162 files
  exit code: 1
 ./docs/Deprecating a page.md:3:109     - Unknown word (Dont)       -- deleting because [Cool URIs Dont Change](https://www
 ./docs/New TypeScript Version.md:121:67    - Unknown word (schemastore) -- schemastore.git /tmp/schemastore
 ./docs/New TypeScript Version.md:135:3     - Unknown word (Shippit)     -- # Shippit
+./packages/ata/README.md:3:114     - Unknown word (jsdelivr)   -- on API's provided by [jsdelivr](https://www.jsdelivr
+./packages/ata/README.md:56:5      - Unknown word (Nicities)   -- ### Nicities
+./packages/ata/jest.config.cjs:5:8       - Unknown word (esbuild)    -- "esbuild-jest",
+./packages/ata/src/apis.ts:17:17     - Unknown word (Filetree)   -- export const getFiletreeForModuleWithVersion
+./packages/ata/src/index.ts:159:19    - Unknown word (strat)      -- * npm versioning strat too if someone opts
+./packages/ata/src/index.ts:203:46    - Unknown word (filetree)   -- work in getting the filetree based on how people
+./packages/ata/tests/ata.spec.ts:11:27     - Unknown word (asda)       -- const code = "import {asda} from '123'"
 ./packages/community-meta/README.md:38:81     - Unknown word (lanaguge)   -- generated), one per lanaguge.
 ./packages/community-meta/scripts/generateRichMeetupData.js:22:13     - Unknown word (Deets)      -- let meetupDeets = []
 ./packages/community-meta/scripts/generateRichMeetupData.js:50:82     - Unknown word (tzid)       -- upcomingEvent.start.tzid)
@@ -30,24 +37,33 @@ Lines:
 ./packages/documentation/copy/en/handbook-v2/Everyday Types.md:458:684   - Unknown word (Dwem)       -- EsBQoAAbvB-gJ4HhPgB5aDwem-Ph1TCV3AEEirTp4ELtRbTPD
 ./packages/documentation/copy/en/handbook-v2/Everyday Types.md:458:791   - Unknown word (Ogghxo)     -- lsG3vBggB8XGV3l8-nVISOgghxoLq9i7io-AHsayRWGaFrlFauq
 ./packages/documentation/copy/en/handbook-v2/Everyday Types.md:460:360   - Unknown word (Bdyy)       -- JmQmDzI-SOiKgGV+CaYAL0gBBdyy1KCQ-Pn1AFFplgA5enw1PtSWS
-./packages/documentation/copy/en/handbook-v2/Modules.md:240:69    - Unknown word (esbuild)    -- transpiler like Babel, swc or esbuild to know what imports
 ./packages/documentation/copy/en/handbook-v2/Narrowing.md:475:21    - Unknown word (sharkey)    -- if (pet.name === "sharkey") return false;
 ./packages/documentation/copy/en/handbook-v2/The Handbook.md:48:208    - Unknown word (bazel)      -- closure, lerna, rush, bazel, preact, vue, angular
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Conditional Types.md:204:6     - Unknown word (Bools)      -- type Bools = GetReturnType<(a:
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Generics.md:353:22    - Unknown word (Mikle)      -- nametag: string = "Mikle";
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Indexed Access Types.md:38:19     - Unknown word (alve)       -- type I1 = Person["alve"];
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Keyof Type Operator.md:26:6      - Unknown word (Mapish)     -- type Mapish = { [k: string]: boolean
-./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:156:6     - Unknown word (Shouty)     -- type ShoutyGreeting = Uppercase
-./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:192:6     - Unknown word (Uncapitalize) -- ### `Uncapitalize<StringType>`
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:100:12    - Unknown word (frst)       -- person.on("frstNameChanged", () =>
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:157:6     - Unknown word (Shouty)     -- type ShoutyGreeting = Uppercase
+./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:193:6     - Unknown word (Uncapitalize) -- ### `Uncapitalize<StringType>`
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:56:15     - Unknown word (Saoirse)    -- firstName: "Saoirse",
 ./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:57:14     - Unknown word (Ronan)      -- lastName: "Ronan",
-./packages/documentation/copy/en/handbook-v2/Type Manipulation/Template Literal Types.md:99:12     - Unknown word (frst)       -- person.on("frstNameChanged", () =>
 ./packages/documentation/copy/en/javascript/JSDoc Reference.md:379:38    - Unknown word (Seriousalizable) -- serious(): string }} Seriousalizable - must have a serious
 ./packages/documentation/copy/en/javascript/JSDoc Reference.md:383:10    - Unknown word (seriousalize)    -- function seriousalize(key, object) {
 ./packages/documentation/copy/en/javascript/JSDoc Reference.md:51:85     - Unknown word (truee)      -- /play?useJavaScript=truee=4#example/jsdoc-support
 ./packages/documentation/copy/en/javascript/JSDoc Reference.md:699:10    - Unknown word (jsdocs)          -- * As do jsdocs on variable assignments
-./packages/documentation/copy/en/project-config/Compiler Options.md:680:87    - Unknown word (jsxdev)     -- react-jsx, or react-jsxdev</p>
-./packages/documentation/copy/en/project-config/Compiler Options.md:790:240   - Unknown word (nodenext)   -- node12</code>, or <code>nodenext</code></p>
+./packages/documentation/copy/en/project-config/Compiler Options.md:215:108   - Unknown word (fixedchunksize)   -- amicpriority</code>, or <code>fixedchunksize</code></p>
+./packages/documentation/copy/en/project-config/Compiler Options.md:215:16    - Unknown word (fixedinterval) -- <td><p><code>fixedinterval</code>, <code>priorityinterva
+./packages/documentation/copy/en/project-config/Compiler Options.md:215:44    - Unknown word (priorityinterval) -- fixedinterval</code>, <code>priorityinterval</code>, <code>dynamicpriority
+./packages/documentation/copy/en/project-config/Compiler Options.md:215:75    - Unknown word (dynamicpriority)  -- riorityinterval</code>, <code>dynamicpriority</code>, or <code>fixedchunksi
+./packages/documentation/copy/en/project-config/Compiler Options.md:242:117   - Unknown word (fixedchunksizepolling)  -- oritypolling</code>, or <code>fixedchunksizepolling</code></p>
+./packages/documentation/copy/en/project-config/Compiler Options.md:242:16    - Unknown word (usefsevents)      -- <td><p><code>usefsevents</code>, <code>fixedpollingint
+./packages/documentation/copy/en/project-config/Compiler Options.md:242:42    - Unknown word (fixedpollinginterval) -- usefsevents</code>, <code>fixedpollinginterval</code>, <code>dynamicpriority
+./packages/documentation/copy/en/project-config/Compiler Options.md:242:77    - Unknown word (dynamicprioritypolling) -- pollinginterval</code>, <code>dynamicprioritypolling</code>, or <code>fixedchunksi
+./packages/documentation/copy/en/project-config/Compiler Options.md:251:191   - Unknown word (usefseventsonparentdirectory) -- usefsevents</code>, or <code>usefseventsonparentdirectory</code></p>
+./packages/documentation/copy/en/project-config/Compiler Options.md:251:51    - Unknown word (prioritypollinginterval) -- pollinginterval</code>, <code>prioritypollinginterval</code>, <code>dynamicpriority
+./packages/documentation/copy/en/project-config/Compiler Options.md:672:119   - Unknown word (jsxdev)                       -- code>, or <code>react-jsxdev</code></p>
+./packages/documentation/copy/en/project-config/Compiler Options.md:782:240   - Unknown word (nodenext)                     -- node12</code>, or <code>nodenext</code></p>
 ./packages/documentation/copy/en/project-config/tsconfig.json.md:101:4     - Unknown word (Deno)       -- - [Deno](https://www.npmjs.com
 ./packages/documentation/copy/en/reference/Advanced Types.md:867:102   - Unknown word (otherwords) -- index to an object. In otherwords, `keyof any` is currently
 ./packages/documentation/copy/en/reference/Declaration Merging.md:67:11     - Unknown word (Cloner)     -- interface Cloner {
@@ -132,8 +148,8 @@ Lines:
 ./packages/playground-worker/types.d.ts:79:9      - Unknown word (postion)    -- postion: number,
 ./packages/playground/src/createUI.ts:87:25     - Unknown word (screenreader) -- // works with every screenreader and browser combination
 ./packages/playground/src/ds/createDesignSystem.ts:334:15    - Unknown word (childers)   -- const childers = document.createElement
+./packages/playground/src/navigation.ts:17:45     - Unknown word (Docset)     -- Gist ${gistID} as a Docset`, 2000)
 ./packages/sandbox/script/downloadReleases.js:15:23     - Unknown word (prereleases) -- // Look through the prereleases to see if the beta and
-./packages/sandbox/src/index.ts:27:32     - Unknown word (plaayground) -- default file for the plaayground */
 ./packages/sandbox/src/theme.ts:12:53     - Unknown word (fffffe)     -- 0000", background: "fffffe" },
 ./packages/sandbox/src/tsWorker.ts:50:5      - Unknown word (positon)    -- positon: number,
 ./packages/sandbox/src/vendor/lzstring.min.js:6:28      - Unknown word (Hocevar)    -- Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
@@ -267,128 +283,128 @@ Lines:
 ./packages/typescriptlang-org/src/dom.d.ts:9815:6    - Unknown word (dataavailable)              -- "dataavailable": BlobEvent;
 ./packages/typescriptlang-org/src/dom.d.ts:9826:5    - Unknown word (ondataavailable)            -- ondataavailable: ((this: MediaRecorder
 ./packages/typescriptlang-org/src/dom.d.ts:9838:11   - Unknown word (timeslice)                  -- start(timeslice?: number): void;
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1028:19   - Unknown word (Manipulasi)  -- title: "Manipulasi DOM",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1029:18   - Unknown word (manipulasi)  -- id: "3-manipulasi-dom",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1041:18   - Unknown word (menggunakan) -- id: "3-menggunakan-babel-dengan-typescript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1043:34   - Unknown word (proyek)      -- oneline: "Cara membuat proyek hybrid Babel + TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1367:19   - Unknown word (Memanfaatkan) -- title: "Memanfaatkan Typescript pada Proyek
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1367:43   - Unknown word (pada)         -- Memanfaatkan Typescript pada Proyek JS",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1367:48   - Unknown word (Proyek)       -- Memanfaatkan Typescript pada Proyek JS",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1368:18   - Unknown word (memanfaatkan) -- id: "6-memanfaatkan-typescript-pada-proyek
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1371:19   - Unknown word (menambahkan)  -- "Cara menambahkan pemeriksaan tipe data
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1371:31   - Unknown word (pemeriksaan)  -- "Cara menambahkan pemeriksaan tipe data pada berkas
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1371:43   - Unknown word (tipe)         -- menambahkan pemeriksaan tipe data pada berkas JavaScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1371:58   - Unknown word (berkas)       -- pemeriksaan tipe data pada berkas JavaScript menggunakan
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1381:19   - Unknown word (Referensi)    -- title: "Referensi JSDoc",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1382:18   - Unknown word (referensi)    -- id: "6-referensi-jsdoc",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1384:36   - Unknown word (didukung)     -- oneline: "JSDoc apa yang didukung JavaScript dan TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1387:19   - Unknown word (Membuat)      -- title: "Membuat Berkas .d.ts dari berkas
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1387:27   - Unknown word (Berkas)       -- title: "Membuat Berkas .d.ts dari berkas .js
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1387:40   - Unknown word (dari)         -- Membuat Berkas .d.ts dari berkas .js",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1390:48   - Unknown word (hasil)        -- Bagaimana cara menambahkan hasil d.ts ke proyek JavaScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1439:19   - Unknown word (Mengkonfigurasi) -- title: "Mengkonfigurasi Watch",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1440:18   - Unknown word (mengkonfigurasi) -- id: "7-mengkonfigurasi-watch",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2931:19   - Unknown word (Przewodnik)      -- title: "Przewodnik po TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2932:18   - Unknown word (przewodnik)      -- id: "1-przewodnik-po-typescript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2934:21   - Unknown word (Twoje)           -- oneline: "Twoje pierwsze kroki w nauce
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2934:27   - Unknown word (pierwsze)        -- oneline: "Twoje pierwsze kroki w nauce TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2934:36   - Unknown word (kroki)           -- oneline: "Twoje pierwsze kroki w nauce TypeScript"
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2934:44   - Unknown word (nauce)           -- Twoje pierwsze kroki w nauce TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3585:19   - Unknown word (Nocna)           -- title: "Nocna kompilacja",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3585:25   - Unknown word (kompilacja)      -- title: "Nocna kompilacja",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3586:18   - Unknown word (nocna)           -- id: "7-nocna-kompilacja",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3588:25   - Unknown word (korzystać)       -- oneline: "Jak korzystać z nocnej kompilacji
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3588:37   - Unknown word (nocnej)          -- oneline: "Jak korzystać z nocnej kompilacji języka TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3588:44   - Unknown word (kompilacji)      -- Jak korzystać z nocnej kompilacji języka TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3588:55   - Unknown word (języka)          -- z nocnej kompilacji języka TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3632:45   - Unknown word (criar)           -- tutorial para entender como criar um pequeno site com
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3632:54   - Unknown word (pequeno)         -- entender como criar um pequeno site com TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3763:19   - Unknown word (Tipos)           -- title: "Tipos Utilitários",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3763:25   - Unknown word (Utilitários)     -- title: "Tipos Utilitários",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3764:18   - Unknown word (tipos)           -- id: "2-tipos-utilitários",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3764:24   - Unknown word (utilitários)     -- id: "2-tipos-utilitários",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3766:35   - Unknown word (inclusos)        -- oneline: "Tipos que são inclusos globalmente em TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3766:44   - Unknown word (globalmente)     -- Tipos que são inclusos globalmente em TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3769:19   - Unknown word (Decoradores)     -- title: "Decoradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3770:18   - Unknown word (decoradores)     -- id: "2-decoradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3772:21   - Unknown word (Visão)           -- oneline: "Visão geral dos Decoradores
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3775:19   - Unknown word (Fusão)           -- title: "Fusão de Declarações",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3775:28   - Unknown word (Declarações)     -- title: "Fusão de Declarações",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3776:18   - Unknown word (fusão)           -- id: "2-fusão-de-declarações",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3776:27   - Unknown word (declarações)     -- id: "2-fusão-de-declarações",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3787:19   - Unknown word (Iteradores)      -- title: "Iteradores e Geradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3787:32   - Unknown word (Geradores)       -- title: "Iteradores e Geradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3788:18   - Unknown word (iteradores)      -- id: "2-iteradores-e-geradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3788:31   - Unknown word (geradores)       -- id: "2-iteradores-e-geradores",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3796:21   - Unknown word (Utilizando)      -- oneline: "Utilizando JSX com TypeScript"
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3802:21   - Unknown word (Usando)          -- oneline: "Usando o padrão Mixin com TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3802:30   - Unknown word (padrão)          -- oneline: "Usando o padrão Mixin com TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3808:26   - Unknown word (módulos)         -- oneline: "Como módulos funcionam no TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3811:19   - Unknown word (Resolução)       -- title: "Resolução de módulos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3812:18   - Unknown word (resolução)       -- id: "2-resolução-de-módulos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3823:32   - Unknown word (Módulos)         -- title: "Namespaces e Módulos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3827:19   - Unknown word (organizar)       -- "Como organizar o código em TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3827:31   - Unknown word (código)          -- "Como organizar o código em TypeScript atrav
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3827:52   - Unknown word (através)         -- código em TypeScript através de módulos ou namespaces
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3833:38   - Unknown word (primitivo)       -- oneline: "Usando o símbolo primitivo do JavaScript no TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3836:19   - Unknown word (Diretivas)       -- title: "Diretivas de barra tripla",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3836:32   - Unknown word (barra)           -- title: "Diretivas de barra tripla",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3836:38   - Unknown word (tripla)          -- "Diretivas de barra tripla",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3837:18   - Unknown word (diretivas)       -- id: "2-diretivas-de-barra-tripla",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3839:26   - Unknown word (usar)            -- oneline: "Como usar diretivas de barra tripla
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3842:19   - Unknown word (Compatibilidade) -- title: "Compatibilidade de Tipos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3843:18   - Unknown word (compatibilidade) -- id: "2-compatibilidade-de-tipos",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3845:26   - Unknown word (checagem)        -- oneline: "Como checagem de tipos funciona em
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3848:19   - Unknown word (Inferência)      -- title: "Inferência de Tipo",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3849:18   - Unknown word (inferência)      -- id: "2-inferência-de-tipo",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3851:28   - Unknown word (analise)         -- oneline: "Como a analise do fluxo de código funciona
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3851:39   - Unknown word (fluxo)           -- "Como a analise do fluxo de código funciona em
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3854:34   - Unknown word (variáveis)       -- title: "Declarações de variáveis",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3857:37   - Unknown word (lida)            -- oneline: "Como TypeScript lida com declarações de vari
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3881:19   - Unknown word (Manipulação)     -- title: "Manipulação do DOM",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3882:18   - Unknown word (manipulação)     -- id: "3-manipulação-do-dom",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3883:41   - Unknown word (manipulacao)     -- "/pt/docs/handbook/manipulacao-dom.html",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3894:18   - Unknown word (usando)          -- id: "3-usando-babel-com-typescript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3896:43   - Unknown word (híbrido)         -- Como criar um projeto híbrido com Babel + TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4220:31   - Unknown word (utilizando)      -- title: "Projetos JS utilizando TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4224:19   - Unknown word (adicionar)       -- "Como adicionar verificação de tipo
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4224:29   - Unknown word (verificação)     -- "Como adicionar verificação de tipo a arquivos JavaScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4224:51   - Unknown word (arquivos)        -- verificação de tipo a arquivos JavaScript usando TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4227:19   - Unknown word (Checando)        -- title: "Checando tipos de arquivos JavaScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4228:18   - Unknown word (checando)        -- id: "6-checando-tipos-de-arquivos-javascript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4234:19   - Unknown word (Referência)      -- title: "Referência JSDoc",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4235:18   - Unknown word (referência)      -- id: "6-referência-jsdoc",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4237:44   - Unknown word (baseado)         -- Quais JSDoc Javascript baseado em Typescript suporta
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4237:66   - Unknown word (suporta)         -- baseado em Typescript suporta?",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4240:19   - Unknown word (Criação)         -- title: "Criação de arquivos .d.ts a
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4240:47   - Unknown word (partir)          -- de arquivos .d.ts a partir de arquivos .js",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4241:18   - Unknown word (criação)         -- id: "6-criação-de-arquivos-.d.ts-a
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4243:36   - Unknown word (geração)         -- oneline: "Como adicionar geração d.ts a projetos JavaScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4258:21   - Unknown word (Aprenda)         -- oneline: "Aprenda sobre como o TSConfig
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4283:26   - Unknown word (dividir)         -- oneline: "Como dividir um projeto Typescript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4292:19   - Unknown word (Configurando)    -- title: "Configurando Watch",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4293:18   - Unknown word (configurando)    -- id: "7-configurando-watch",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4295:26   - Unknown word (configurar)      -- oneline: "Como configurar o modo de observação
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4295:47   - Unknown word (observação)      -- configurar o modo de observação do Typescript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4298:19   - Unknown word (Compilação)      -- title: "Compilação Noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4298:30   - Unknown word (Noturna)         -- title: "Compilação Noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4299:18   - Unknown word (compilação)      -- id: "7-compilação-noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4299:29   - Unknown word (noturna)         -- id: "7-compilação-noturna",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:775:38    - Unknown word (dalam)      -- "TypeScript Tooling dalam 5 menit",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:775:46    - Unknown word (menit)      -- TypeScript Tooling dalam 5 menit",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:779:14    - Unknown word (Sebuah)     -- "Sebuah tutorial untuk memahami
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:779:30    - Unknown word (untuk)      -- "Sebuah tutorial untuk memahami cara membuat
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:779:36    - Unknown word (memahami)   -- Sebuah tutorial untuk memahami cara membuat situs web
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:779:50    - Unknown word (membuat)    -- untuk memahami cara membuat situs web kecil dengan
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:779:68    - Unknown word (kecil)      -- cara membuat situs web kecil dengan TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:779:74    - Unknown word (dengan)     -- membuat situs web kecil dengan TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:919:21    - Unknown word (Ringkasan)  -- oneline: "Ringkasan Dekorator TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:919:31    - Unknown word (Dekorator)  -- oneline: "Ringkasan Dekorator TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:937:21    - Unknown word (Bagaimana)  -- oneline: "Bagaimana Iterator dan Generator
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:937:54    - Unknown word (bekerja)    -- Iterator dan Generator bekerja di TypeScript",
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:943:21    - Unknown word (Menggunakan) -- oneline: "Menggunakan JSX dengan TypeScript
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:980:33    - Unknown word (Simbol)      -- oneline: "Menggunakan Simbol JavaScript primitif
-./packages/typescriptlang-org/src/lib/documentationNavigation.ts:980:51    - Unknown word (primitif)    -- Menggunakan Simbol JavaScript primitif di TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1034:19   - Unknown word (Manipulasi)  -- title: "Manipulasi DOM",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1035:18   - Unknown word (manipulasi)  -- id: "3-manipulasi-dom",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1047:18   - Unknown word (menggunakan) -- id: "3-menggunakan-babel-dengan-typescript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1049:34   - Unknown word (proyek)      -- oneline: "Cara membuat proyek hybrid Babel + TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1379:19   - Unknown word (Memanfaatkan) -- title: "Memanfaatkan Typescript pada Proyek
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1379:43   - Unknown word (pada)         -- Memanfaatkan Typescript pada Proyek JS",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1379:48   - Unknown word (Proyek)       -- Memanfaatkan Typescript pada Proyek JS",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1380:18   - Unknown word (memanfaatkan) -- id: "6-memanfaatkan-typescript-pada-proyek
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1383:19   - Unknown word (menambahkan)  -- "Cara menambahkan pemeriksaan tipe data
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1383:31   - Unknown word (pemeriksaan)  -- "Cara menambahkan pemeriksaan tipe data pada berkas
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1383:43   - Unknown word (tipe)         -- menambahkan pemeriksaan tipe data pada berkas JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1383:58   - Unknown word (berkas)       -- pemeriksaan tipe data pada berkas JavaScript menggunakan
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1393:19   - Unknown word (Referensi)    -- title: "Referensi JSDoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1394:18   - Unknown word (referensi)    -- id: "6-referensi-jsdoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1396:36   - Unknown word (didukung)     -- oneline: "JSDoc apa yang didukung JavaScript dan TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1399:19   - Unknown word (Membuat)      -- title: "Membuat Berkas .d.ts dari berkas
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1399:27   - Unknown word (Berkas)       -- title: "Membuat Berkas .d.ts dari berkas .js
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1399:40   - Unknown word (dari)         -- Membuat Berkas .d.ts dari berkas .js",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1402:48   - Unknown word (hasil)        -- Bagaimana cara menambahkan hasil d.ts ke proyek JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1451:19   - Unknown word (Mengkonfigurasi) -- title: "Mengkonfigurasi Watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:1452:18   - Unknown word (mengkonfigurasi) -- id: "7-mengkonfigurasi-watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2955:19   - Unknown word (Przewodnik)      -- title: "Przewodnik po TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2956:18   - Unknown word (przewodnik)      -- id: "1-przewodnik-po-typescript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2958:21   - Unknown word (Twoje)           -- oneline: "Twoje pierwsze kroki w nauce
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2958:27   - Unknown word (pierwsze)        -- oneline: "Twoje pierwsze kroki w nauce TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2958:36   - Unknown word (kroki)           -- oneline: "Twoje pierwsze kroki w nauce TypeScript"
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:2958:44   - Unknown word (nauce)           -- Twoje pierwsze kroki w nauce TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3615:19   - Unknown word (Nocna)           -- title: "Nocna kompilacja",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3615:25   - Unknown word (kompilacja)      -- title: "Nocna kompilacja",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3616:18   - Unknown word (nocna)           -- id: "7-nocna-kompilacja",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3618:25   - Unknown word (korzystać)       -- oneline: "Jak korzystać z nocnej kompilacji
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3618:37   - Unknown word (nocnej)          -- oneline: "Jak korzystać z nocnej kompilacji języka TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3618:44   - Unknown word (kompilacji)      -- Jak korzystać z nocnej kompilacji języka TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3618:55   - Unknown word (języka)          -- z nocnej kompilacji języka TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3662:45   - Unknown word (criar)           -- tutorial para entender como criar um pequeno site com
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3662:54   - Unknown word (pequeno)         -- entender como criar um pequeno site com TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3793:19   - Unknown word (Tipos)           -- title: "Tipos Utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3793:25   - Unknown word (Utilitários)     -- title: "Tipos Utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3794:18   - Unknown word (tipos)           -- id: "2-tipos-utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3794:24   - Unknown word (utilitários)     -- id: "2-tipos-utilitários",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3796:35   - Unknown word (inclusos)        -- oneline: "Tipos que são inclusos globalmente em TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3796:44   - Unknown word (globalmente)     -- Tipos que são inclusos globalmente em TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3799:19   - Unknown word (Decoradores)     -- title: "Decoradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3800:18   - Unknown word (decoradores)     -- id: "2-decoradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3802:21   - Unknown word (Visão)           -- oneline: "Visão geral dos Decoradores
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3805:19   - Unknown word (Fusão)           -- title: "Fusão de Declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3805:28   - Unknown word (Declarações)     -- title: "Fusão de Declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3806:18   - Unknown word (fusão)           -- id: "2-fusão-de-declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3806:27   - Unknown word (declarações)     -- id: "2-fusão-de-declarações",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3817:19   - Unknown word (Iteradores)      -- title: "Iteradores e Geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3817:32   - Unknown word (Geradores)       -- title: "Iteradores e Geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3818:18   - Unknown word (iteradores)      -- id: "2-iteradores-e-geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3818:31   - Unknown word (geradores)       -- id: "2-iteradores-e-geradores",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3826:21   - Unknown word (Utilizando)      -- oneline: "Utilizando JSX com TypeScript"
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3832:21   - Unknown word (Usando)          -- oneline: "Usando o padrão Mixin com TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3832:30   - Unknown word (padrão)          -- oneline: "Usando o padrão Mixin com TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3838:26   - Unknown word (módulos)         -- oneline: "Como módulos funcionam no TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3841:19   - Unknown word (Resolução)       -- title: "Resolução de módulos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3842:18   - Unknown word (resolução)       -- id: "2-resolução-de-módulos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3853:32   - Unknown word (Módulos)         -- title: "Namespaces e Módulos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3857:19   - Unknown word (organizar)       -- "Como organizar o código em TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3857:31   - Unknown word (código)          -- "Como organizar o código em TypeScript atrav
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3857:52   - Unknown word (através)         -- código em TypeScript através de módulos ou namespaces
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3863:38   - Unknown word (primitivo)       -- oneline: "Usando o símbolo primitivo do JavaScript no TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3866:19   - Unknown word (Diretivas)       -- title: "Diretivas de barra tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3866:32   - Unknown word (barra)           -- title: "Diretivas de barra tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3866:38   - Unknown word (tripla)          -- "Diretivas de barra tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3867:18   - Unknown word (diretivas)       -- id: "2-diretivas-de-barra-tripla",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3869:26   - Unknown word (usar)            -- oneline: "Como usar diretivas de barra tripla
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3872:19   - Unknown word (Compatibilidade) -- title: "Compatibilidade de Tipos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3873:18   - Unknown word (compatibilidade) -- id: "2-compatibilidade-de-tipos",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3875:26   - Unknown word (checagem)        -- oneline: "Como checagem de tipos funciona em
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3878:19   - Unknown word (Inferência)      -- title: "Inferência de Tipo",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3879:18   - Unknown word (inferência)      -- id: "2-inferência-de-tipo",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3881:28   - Unknown word (analise)         -- oneline: "Como a analise do fluxo de código funciona
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3881:39   - Unknown word (fluxo)           -- "Como a analise do fluxo de código funciona em
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3884:34   - Unknown word (variáveis)       -- title: "Declarações de variáveis",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3887:37   - Unknown word (lida)            -- oneline: "Como TypeScript lida com declarações de vari
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3911:19   - Unknown word (Manipulação)     -- title: "Manipulação do DOM",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3912:18   - Unknown word (manipulação)     -- id: "3-manipulação-do-dom",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3913:41   - Unknown word (manipulacao)     -- "/pt/docs/handbook/manipulacao-dom.html",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3924:18   - Unknown word (usando)          -- id: "3-usando-babel-com-typescript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:3926:43   - Unknown word (híbrido)         -- Como criar um projeto híbrido com Babel + TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4256:31   - Unknown word (utilizando)      -- title: "Projetos JS utilizando TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4260:19   - Unknown word (adicionar)       -- "Como adicionar verificação de tipo
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4260:29   - Unknown word (verificação)     -- "Como adicionar verificação de tipo a arquivos JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4260:51   - Unknown word (arquivos)        -- verificação de tipo a arquivos JavaScript usando TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4263:19   - Unknown word (Checando)        -- title: "Checando tipos de arquivos JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4264:18   - Unknown word (checando)        -- id: "6-checando-tipos-de-arquivos-javascript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4270:19   - Unknown word (Referência)      -- title: "Referência JSDoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4271:18   - Unknown word (referência)      -- id: "6-referência-jsdoc",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4273:44   - Unknown word (baseado)         -- Quais JSDoc Javascript baseado em Typescript suporta
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4273:66   - Unknown word (suporta)         -- baseado em Typescript suporta?",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4276:19   - Unknown word (Criação)         -- title: "Criação de arquivos .d.ts a
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4276:47   - Unknown word (partir)          -- de arquivos .d.ts a partir de arquivos .js",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4277:18   - Unknown word (criação)         -- id: "6-criação-de-arquivos-.d.ts-a
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4279:36   - Unknown word (geração)         -- oneline: "Como adicionar geração d.ts a projetos JavaScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4294:21   - Unknown word (Aprenda)         -- oneline: "Aprenda sobre como o TSConfig
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4319:26   - Unknown word (dividir)         -- oneline: "Como dividir um projeto Typescript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4328:19   - Unknown word (Configurando)    -- title: "Configurando Watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4329:18   - Unknown word (configurando)    -- id: "7-configurando-watch",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4331:26   - Unknown word (configurar)      -- oneline: "Como configurar o modo de observação
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4331:47   - Unknown word (observação)      -- configurar o modo de observação do Typescript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4334:19   - Unknown word (Compilação)      -- title: "Compilação Noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4334:30   - Unknown word (Noturna)         -- title: "Compilação Noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4335:18   - Unknown word (compilação)      -- id: "7-compilação-noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:4335:29   - Unknown word (noturna)         -- id: "7-compilação-noturna",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:781:38    - Unknown word (dalam)      -- "TypeScript Tooling dalam 5 menit",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:781:46    - Unknown word (menit)      -- TypeScript Tooling dalam 5 menit",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:785:14    - Unknown word (Sebuah)     -- "Sebuah tutorial untuk memahami
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:785:30    - Unknown word (untuk)      -- "Sebuah tutorial untuk memahami cara membuat
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:785:36    - Unknown word (memahami)   -- Sebuah tutorial untuk memahami cara membuat situs web
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:785:50    - Unknown word (membuat)    -- untuk memahami cara membuat situs web kecil dengan
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:785:68    - Unknown word (kecil)      -- cara membuat situs web kecil dengan TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:785:74    - Unknown word (dengan)     -- membuat situs web kecil dengan TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:925:21    - Unknown word (Ringkasan)  -- oneline: "Ringkasan Dekorator TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:925:31    - Unknown word (Dekorator)  -- oneline: "Ringkasan Dekorator TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:943:21    - Unknown word (Bagaimana)  -- oneline: "Bagaimana Iterator dan Generator
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:943:54    - Unknown word (bekerja)    -- Iterator dan Generator bekerja di TypeScript",
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:949:21    - Unknown word (Menggunakan) -- oneline: "Menggunakan JSX dengan TypeScript
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:986:33    - Unknown word (Simbol)      -- oneline: "Menggunakan Simbol JavaScript primitif
+./packages/typescriptlang-org/src/lib/documentationNavigation.ts:986:51    - Unknown word (primitif)    -- Menggunakan Simbol JavaScript primitif di TypeScript",
 ./packages/typescriptlang-org/src/pages/dev/dev.scss:41:10     - Unknown word (fivehundred) -- .split-fivehundred {
 ./packages/typescriptlang-org/src/templates/glossary.scss:4:17      - Unknown word (quicklinks) -- ul.filterable-quicklinks {
 ./packages/typescriptlang-org/src/templates/pages/community.tsx:101:35    - Unknown word (deftyped)   -- <a aria-labelledby="deftyped-header" className="icon
