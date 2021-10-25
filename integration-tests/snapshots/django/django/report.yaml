@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: ["**/*.{md,py}"]
 Summary:
   files: 2717
-  filesWithIssues: 878
-  issues: 7803
+  filesWithIssues: 876
+  issues: 7782
   errors: 0
 Errors: []
 
@@ -22,7 +22,6 @@ issues:
   - "django/conf/global_settings.py:146:27   	Udmurt          	U   	udm', gettext_noop('Udmurt')),"
   - "django/conf/global_settings.py:248:25   	Naver           	U   	re.compile(r'^NaverBot.*'),"
   - "django/conf/global_settings.py:251:25   	sohu            	U   	re.compile(r'^sohu-search'),"
-  - "django/conf/global_settings.py:262:25   	favicon         	U   	re.compile(r'^/favicon.ico$'),"
   - "django/conf/global_settings.py:264:25   	phpmyadmin      	U   	re.compile(r'^/phpmyadmin/'),"
   - "django/conf/global_settings.py:328:10   	myproject       	U   	# (i.e. \"myproject.locale\" for myproject"
   - "django/conf/global_settings.py:463:24   	sessionid       	U   	SESSION_COOKIE_NAME = 'sessionid'"
@@ -585,7 +584,6 @@ issues:
   - "django/db/migrations/autodetector.py:795:44     	deduping	U   	make the operation, deduping any dependencies"
   - "django/db/migrations/executor.py:32:62      	unmigrate   	U   	label, None), that means unmigrate everything"
   - "django/db/migrations/executor.py:166:15     	unapplying  	U   	Since unapplying a migration requires"
-  - "django/db/migrations/graph.py:260:11    	Algo	U   	# Algo from GvR:"
   - "django/db/migrations/migration.py:124:26    	behaviour   	U   	# Normal behaviour"
   - "django/db/migrations/operations/base.py:32:5    	elidable	U   	elidable = False"
   - "django/db/migrations/operations/models.py:100:25    	smodel  	U   	return \"Create %smodel %s\" % (\"proxy \" if self"
@@ -1057,7 +1055,6 @@ issues:
   - "tests/apps/tests.py:329:73  	lazyb   	U   	model_name in ['lazya', 'lazyb', 'lazyb', 'lazyc',"
   - "tests/apps/tests.py:329:91  	lazyc   	U   	'lazyb', 'lazyb', 'lazyc', 'lazya']]"
   - "tests/auth_tests/models/proxy.py:13:23      	proxys  	U   	('display_proxys', 'May display proxys"
-  - "tests/auth_tests/models/with_many_to_many.py:10:42      	orgs	U   	superuser(self, username, orgs, password):"
   - "tests/auth_tests/test_auth_backends.py:663:36   	mypassword  	U   	sensitive_password = 'mypassword'"
   - "tests/auth_tests/test_auth_backends.py:737:51   	doesntexist 	U   	USER_MODEL='thismodel.doesntexist')"
   - "tests/auth_tests/test_basic.py:15:71    	testpw  	U   	test@example.com', 'testpw')"
@@ -1086,7 +1083,6 @@ issues:
   - "tests/auth_tests/test_hashers.py:317:77     	algorith    	U   	Unknown password hashing algorith'):"
   - "tests/auth_tests/test_hashers.py:355:68     	Ranz        	U   	390000$seasalt2$aDapRanzW8aHTz97v2TcfHzWD+I="
   - "tests/auth_tests/test_hashers.py:365:14     	bcryptsha   	U   	def test_bcryptsha256_salt_check(self)"
-  - "tests/auth_tests/test_hashers.py:379:13     	algo        	U   	for algo in ('sha1', 'md5'):"
   - "tests/auth_tests/test_hashers.py:610:55     	QOXS        	U   	1,p=1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO"
   - "tests/auth_tests/test_hashers.py:610:59     	Nhxi        	U   	1$c29tZXNhbHQ$gwQOXSNhxiOxPOA0+PY10P9QFO'"
   - "tests/auth_tests/test_hashers.py:629:17     	abcdefghijk 	U   	salt = 'abcdefghijk'"
@@ -1097,8 +1093,6 @@ issues:
   - "tests/auth_tests/test_management.py:282:14  	Uživatel	U   	\"Uživatel (leave blank to use"
   - "tests/auth_tests/test_management.py:288:52  	eivatel 	U   	verbose_name = _('u\\u017eivatel')"
   - "tests/auth_tests/test_management.py:453:44  	mygroup 	U   	objects.create(name='mygroup')"
-  - "tests/auth_tests/test_management.py:620:14  	Orgs    	U   	'Orgs (Organization.id):"
-  - "tests/auth_tests/test_management.py:1129:31 	ORGS    	U   	'DJANGO_SUPERUSER_ORGS': f'{org_id_1},{org"
   - "tests/auth_tests/test_models.py:60:24   	examplemodela   	U   	model='examplemodela',"
   - "tests/auth_tests/test_models.py:64:24   	examplemodelb   	U   	model='examplemodelb',"
   - "tests/auth_tests/test_models.py:199:43  	gibbberish      	U   	User(password='some-gibbberish').has_usable_password"

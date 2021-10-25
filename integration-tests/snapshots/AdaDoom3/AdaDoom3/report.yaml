@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 105
   filesWithIssues: 98
-  issues: 3264
+  issues: 3243
   errors: 0
 Errors: []
 
@@ -624,7 +624,6 @@ issues:
   - "Engine/neo-world-commands.adb:54:31     	QPATH       	U   	char expanded[MAX_QPATH];"
   - "Engine/neo-world-commands.adb:55:18     	mapname     	U   	-- char mapname[MAX_QPATH];"
   - "Engine/neo-world-commands.adb:62:14     	sprintf     	U   	-- Com_sprintf (expanded, sizeof(expanded"
-  - "Engine/neo-world-commands.adb:64:16     	Printf      	U   	-- Com_Printf (\"Can't find map %s"
   - "Engine/neo-world-commands.adb:71:10     	Cvar        	U   	-- Cvar_Get (\"g_gametype\","
   - "Engine/neo-world-commands.adb:71:23     	gametype    	U   	-- Cvar_Get (\"g_gametype\", \"0\", CVAR_SERVERINFO"
   - "Engine/neo-world-commands.adb:71:39     	CVAR        	U   	(\"g_gametype\", \"0\", CVAR_SERVERINFO | CVAR_USERINFO"
@@ -677,7 +676,6 @@ issues:
   - "Engine/neo-world-geometry.adb:252:52    	halfcircle      	U   	color, r, true); //halfcircle -- flipped"
   - "Engine/neo-world-geometry.adb:294:6     	CONVEXHULLCREATE	U   	-- CONVEXHULLCREATE Create;"
   - "Engine/neo-world-geometry.adb:304:7     	DELETESINGLE    	U   	-- DELETESINGLE(CH);"
-  - "Engine/neo-world-geometry.adb:314:8     	printf          	U   	-- // printf(\"NbPolys: %d\\n\", NbPolys"
   - "Engine/neo-world-geometry.adb:322:22    	Tris            	U   	- const udword NbTris = NbVertsInPoly - 2"
   - "Engine/neo-world-geometry.adb:400:17    	glmat           	U   	-- float glmat[16]; //4x4 column major"
   - "Engine/neo-world-geometry.adb:421:13    	Mult            	U   	-- glMultMatrixf(&(glmat[0]))"
