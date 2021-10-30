@@ -5,7 +5,7 @@ import { mergeInDocSettings } from './CSpellSettingsServer';
 
 // cspell:ignore gimuy
 const regExMatchRegEx = /\/.*\/[gimuy]*/;
-const regExInFileSettings = [/(?:spell-?checker|cSpell)::?\s*(.*)/gi, /(LocalWords:?\s+.*)/g];
+const regExInFileSettings = [/(?:spell-?checker|c?spell)::?(.*)/gi, /(LocalWords:?.*)/g];
 
 export type CSpellUserSettingsKeys = keyof CSpellUserSettings;
 
@@ -22,7 +22,8 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
 }
 
 function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
-    const [, possibleSetting = ''] = matchArray;
+    const [, match = ''] = matchArray;
+    const possibleSetting = match.trim();
     const settingParsers: [RegExp, (m: string) => CSpellUserSettings][] = [
         [/^(?:enable|disable)(?:allow)?CompoundWords/i, parseCompoundWords],
         [/^words?\s/i, parseWords],
@@ -32,7 +33,7 @@ function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
         [/^locale?\s/i, parseLocal],
         [/^language\s/i, parseLocal],
         [/^dictionaries\s/i, parseDictionaries],
-        [/^LocalWords:/, parseWords],
+        [/^LocalWords:/, (w) => parseWords(w.replace(/LocalWords:?/gi, ' '))],
     ];
 
     return settingParsers
