@@ -5,7 +5,7 @@ import { mergeInDocSettings } from './CSpellSettingsServer';
 
 // cspell:ignore gimuy
 const regExMatchRegEx = /\/.*\/[gimuy]*/;
-const regExInFileSettings = [/(?:spell-?checker|cSpell)::?\s*(.*)/gi, /(LocalWords:?\s+.*)/g];
+const regExInFileSettings = [/(?:spell-?checker|c?spell)::?(.*)/gi, /(LocalWords:?.*)/g];
 
 export type CSpellUserSettingsKeys = keyof CSpellUserSettings;
 
@@ -22,17 +22,18 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
 }
 
 function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
-    const [, possibleSetting = ''] = matchArray;
+    const [, match = ''] = matchArray;
+    const possibleSetting = match.trim();
     const settingParsers: [RegExp, (m: string) => CSpellUserSettings][] = [
         [/^(?:enable|disable)(?:allow)?CompoundWords/i, parseCompoundWords],
         [/^words?\s/i, parseWords],
         [/^ignore(?:words?)?\s/i, parseIgnoreWords],
         [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
         [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp],
-        [/^locale?\s/i, parseLocal],
-        [/^language\s/i, parseLocal],
+        [/^locale?\s/i, parseLocale],
+        [/^language\s/i, parseLocale],
         [/^dictionaries\s/i, parseDictionaries],
-        [/^LocalWords:/, parseWords],
+        [/^LocalWords:/, (w) => parseWords(w.replace(/LocalWords:?/gi, ' '))],
     ];
 
     return settingParsers
@@ -51,9 +52,9 @@ function parseWords(match: string): CSpellUserSettings {
     return { id: 'in-doc-words', words };
 }
 
-function parseLocal(match: string): CSpellUserSettings {
-    const parts = match.trim().split(/\s+/);
-    const language = parts.slice(1).join(' ');
+function parseLocale(match: string): CSpellUserSettings {
+    const parts = match.trim().split(/[\s,]+/);
+    const language = parts.slice(1).join(',');
     return language ? { id: 'in-doc-local', language } : {};
 }
 
