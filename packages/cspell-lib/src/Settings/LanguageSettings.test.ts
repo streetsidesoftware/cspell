@@ -114,8 +114,19 @@ describe('Validate LanguageSettings', () => {
         expect(langSet).toContain('literate haskell');
     });
 
-    test('tests locale matching', () => {
-        const localeSet = LS.normalizeLocale('en, en-GB, fr-fr, nl_NL');
+    // cspell:ignore engb frfr nlnl
+    test.each`
+        locales                          | expected
+        ${''}                            | ${[]}
+        ${'en, en-GB, fr-fr, nl_NL'}     | ${['en', 'engb', 'frfr', 'nlnl']}
+        ${['en, en-GB', 'fr-fr, nl_NL']} | ${['en', 'engb', 'frfr', 'nlnl']}
+    `('normalizeLocale $locales', ({ locales, expected }) => {
+        const localeSet = LS.normalizeLocale(locales);
+        expect([...localeSet]).toEqual(expected);
+    });
+
+    test('normalizeLocale $locales', () => {
+        const localeSet = LS.normalizeLocale('en, en-GB, fr-fr,nl_NL');
         expect(localeSet.has('en')).toBe(true);
         expect(LS.isLocaleInSet('nl-nl', localeSet)).toBe(true);
         expect(LS.isLocaleInSet('nl_nl', localeSet)).toBe(true);

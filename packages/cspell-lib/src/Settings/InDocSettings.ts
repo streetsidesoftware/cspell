@@ -30,8 +30,8 @@ function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
         [/^ignore(?:words?)?\s/i, parseIgnoreWords],
         [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
         [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp],
-        [/^locale?\s/i, parseLocal],
-        [/^language\s/i, parseLocal],
+        [/^locale?\s/i, parseLocale],
+        [/^language\s/i, parseLocale],
         [/^dictionaries\s/i, parseDictionaries],
         [/^LocalWords:/, (w) => parseWords(w.replace(/LocalWords:?/gi, ' '))],
     ];
@@ -52,9 +52,9 @@ function parseWords(match: string): CSpellUserSettings {
     return { id: 'in-doc-words', words };
 }
 
-function parseLocal(match: string): CSpellUserSettings {
-    const parts = match.trim().split(/\s+/);
-    const language = parts.slice(1).join(' ');
+function parseLocale(match: string): CSpellUserSettings {
+    const parts = match.trim().split(/[\s,]+/);
+    const language = parts.slice(1).join(',');
     return language ? { id: 'in-doc-local', language } : {};
 }
 

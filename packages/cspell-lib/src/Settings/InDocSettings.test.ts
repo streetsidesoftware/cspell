@@ -136,7 +136,7 @@ describe('Validate InDocSettings', () => {
 
     test('fetching the local for the text', () => {
         const settings = InDoc.getInDocumentSettings(sampleCode);
-        expect(settings.language).toBe('en, nl');
+        expect(settings.language).toBe('en,nl');
     });
 
     test('setting dictionaries for file', () => {
