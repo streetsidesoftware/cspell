@@ -45,6 +45,7 @@ const sampleText = `
 # happydays arehere againxx
 `;
 
+// cspell:ignore popoutlist
 const sampleTextWithIncompleteInDocSetting = `
 // spell:dictionaries php
 // spell:words const
