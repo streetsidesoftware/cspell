@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 105
   filesWithIssues: 98
-  issues: 3130
+  issues: 3089
   errors: 0
 Errors: []
 
@@ -43,7 +43,6 @@ issues:
   - "Engine/main.adb:214:24  	framebuffer 	U   	-- Restart the framebuffer if our resolution changed"
   - "Engine/main.adb:219:19  	Framebuffer 	U   	Restart_Framebuffer;"
   - "Engine/neo-api-openal.ads:26:7      	Lsizei                          	U   	-- ALsizei Int_Size_C"
-  - "Engine/neo-api-openal.ads:30:7      	Lubyte                          	U   	-- ALubyte Int_8_Unsigned_C"
   - "Engine/neo-api-openal.ads:45:8      	Cdevice                         	U   	-- ALCdevice* Ptr"
   - "Engine/neo-api-openal.ads:106:6     	ROLLOFF                         	U   	AL_ROLLOFF_FACTOR : constant"
   - "Engine/neo-api-openal.ads:172:15    	ADPCM                           	U   	AL_LOKI_IMA_ADPCM_format : constant"
@@ -223,7 +222,6 @@ issues:
   - "Engine/neo-api-physx.ads:40:31      	physxan                 	U   	External_Name => \"_ZN5physxanENS_11PxActorFlag4EnumES"
   - "Engine/neo-api-physx.ads:45:31      	physxco                 	U   	External_Name => \"_ZN5physxcoENS_11PxActorFlag4EnumE"
   - "Engine/neo-api-physx.ads:50:31      	physxor                 	U   	External_Name => \"_ZN5physxorENS_11PxActorFlag4EnumES"
-  - "Engine/neo-api-physx.ads:57:17      	DWORD                   	U   	eACTOR_FORCE_DWORD : constant unsigned"
   - "Engine/neo-api-physx.ads:128:100    	pxmath                  	U   	physx\\include\\foundation\\pxmath.h:58"
   - "Engine/neo-api-physx.ads:174:45     	Efff                    	U   	\"_ZN5physx8PxEqualsEfff\";"
   - "Engine/neo-api-physx.ads:181:24     	stdint                  	U   	function PxAbs (a : stdint_h.int32_t) return stdint"
@@ -453,7 +451,6 @@ issues:
   - "Engine/neo-api-windows.ads:615:67   	LPDWORD             	U   	Ptr_Int_Unsigned_C; -- LPDWORD"
   - "Engine/neo-api-windows.ads:618:30   	lpcb                	U   	lpcbData : Ptr_Int_Unsigned"
   - "Engine/neo-api-windows.ads:626:80   	LPSECURITY          	U   	SECURITY_ATTRIBUTES; -- LPSECURITY_ATTRIBUTES"
-  - "Engine/neo-api-windows.ads:635:72   	PVOID               	U   	Ptr; -- PVOID"
   - "Engine/neo-api-windows.ads:651:67   	PUINT               	U   	Ptr) -- PUINT"
   - "Engine/neo-api-windows.ads:657:53   	LPCSTR              	U   	lpProcName : Str_8_C) -- LPCSTR"
   - "Engine/neo-api-windows.ads:658:53   	FARPROC             	U   	return Ptr -- FARPROC"
@@ -524,7 +521,6 @@ issues:
   - "Engine/neo-core-compression.adb:118:7   	dondx       	U   	dondx : Thin.IC.size_t;"
   - "Engine/neo-core-console.adb:16:33   	perserve    	U   	Optimize string stuff, perserve config comments, and"
   - "Engine/neo-core-console.adb:102:73  	cvar        	U   	NULL_STR_UNBOUND; -- A cvar that goes out of scope"
-  - "Engine/neo-core-console.adb:161:41  	Deallocation	U   	Free is new Unchecked_Deallocation (Control_State, Ptr"
   - "Engine/neo-core-console.adb:215:10  	Commandline 	U   	-- Commandline interaction"
   - "Engine/neo-core-console.adb:217:9   	Vals        	U   	Vals : Str_Unbound := NULL"
   - "Engine/neo-core-console.adb:368:6   	Initalized  	U   	-- Initalized data"
@@ -631,7 +627,6 @@ issues:
   - "Engine/neo-world-commands.adb:100:49    	levelname   	U   	was started with \"map <levelname>\", then"
   - "Engine/neo-world-commands.adb:149:18    	netchan     	U   	-- if( cl->netchan.remoteAddress.type"
   - "Engine/neo-world-commands.adb:157:27    	Couldn      	U   	Com_Printf( \"Couldn't resolve address\\n"
-  - "Engine/neo-world-commands.adb:187:10    	strcpy      	U   	-- strcpy (text, \"console: \")"
   - "Engine/neo-world-commands.adb:230:24    	Contraint   	U   	exception when Contraint_Error =>"
   - "Engine/neo-world-commands.adb:286:8     	helpmenu    	U   	--!helpmenu -- This brings up a"
   - "Engine/neo-world-commands.adb:287:3     	maprate     	U   	--maprate -- This brings up specific"
@@ -721,12 +716,8 @@ issues:
   - "Engine/neo-world-graphics.adb:177:15    	shouldn         	U   	-- We shouldn't reach here since a"
   - "Engine/neo-world-graphics.adb:206:67    	renderpass      	U   	instead of having the renderpass do the transition to"
   - "Engine/neo-world-graphics.adb:371:74    	avaliable       	U   	the staging buffer is avaliable"
-  - "Engine/neo-world-graphics.adb:805:13    	Unbuffer        	U   	procedure Unbuffer_Mesh (Path : Str) is"
   - "Engine/neo-world-graphics.adb:837:24    	sepcial         	U   	-- Fetch our sepcial \"handle\" used to Id"
   - "Engine/neo-world-graphics.adb:1032:33   	rebuffer        	U   	Line (\"Attempted to rebuffer material \" & Path);"
-  - "Engine/neo-world-graphics.adb:1053:29   	unbuffer        	U   	Make sure we can't unbuffer a material until all"
-  - "Engine/neo-world-graphics.adb:1053:90   	unbuffered      	U   	surfaces using it get unbuffered first"
-  - "Engine/neo-world-graphics.adb:1054:64   	Unbuffering     	U   	References > 0 then Warn (\"Unbuffering referenced material"
   - "Engine/neo-world-graphics.adb:1130:8    	Syncronization  	U   	-- Syncronization"
   - "Engine/neo-world-graphics.adb:1320:28   	reate           	U   	- Reset the indexes reate the inital view"
   - "Engine/neo-world-graphics.adb:1320:38   	inital          	U   	the indexes reate the inital view"
@@ -784,7 +775,6 @@ issues:
   - "Engine/neo-world-network.adb:503:10     	swlen               	U   	swlen = LittleLong( len )"
   - "Engine/neo-world-network.adb:504:35     	demofile            	U   	Write (&swlen, 4, clc.demofile);"
   - "Engine/neo-world-network.adb:520:9      	Recieve             	U   	-- Recieve"
-  - "Engine/neo-world-network.adb:534:13     	stdlib              	U   	#include&lt;stdlib.h&gt; //exit(0);"
   - "Engine/neo-world-network.adb:535:13     	arpa                	U   	#include&lt;arpa/inet.h&gt;"
   - "Engine/neo-world-network.adb:535:18     	inet                	U   	#include&lt;arpa/inet.h&gt;"
   - "Engine/neo-world-network.adb:538:9      	BUFLEN              	U   	#define BUFLEN 512 //Max length of"
@@ -852,8 +842,6 @@ issues:
   - "Engine/neo.adb:49:32    	Traceback   	U   	for Item of Symbolic_Traceback (Traces) loop"
   - "Engine/neo.ads:41:18    	Superbounded	U   	with Ada.Strings.Superbounded; use Ada.Strings"
   - "Engine/neo.ads:391:8    	mutex       	U   	-- A mutex or task-safe flag, however"
-  - "Engine/Runtime/a-comutr.adb:419:34  	deallocation	U   	invariants in case the deallocation fails. (This works because"
-  - "Engine/Runtime/a-comutr.adb:426:67  	deallocates 	U   	number of nodes that it deallocates,"
   - "Engine/Runtime/a-comutr.adb:466:29  	multiway    	U   	Implement Vet for multiway tree???"
   - "Engine/Runtime/a-comutr.adb:765:19  	represention	U   	-- Restore represention invariants before attempting"
   - "Engine/Runtime/a-comutr.adb:964:7   	Unbusy      	U   	Unbusy (Object.Container.TC"

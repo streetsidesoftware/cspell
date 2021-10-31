@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]
 Summary:
   files: 1825
   filesWithIssues: 1082
-  issues: 19638
+  issues: 19618
   errors: 0
 Errors: []
 
@@ -725,7 +725,6 @@ issues:
   - "ext/fileinfo/libmagic/apprentice.c:534:10   	phnum       	U   	ms->elf_phnum_max = FILE_ELF_PHNUM"
   - "ext/fileinfo/libmagic/apprentice.c:534:31   	PHNUM       	U   	phnum_max = FILE_ELF_PHNUM_MAX;"
   - "ext/fileinfo/libmagic/apprentice.c:908:13   	reln        	U   	switch (m->reln) {"
-  - "ext/fileinfo/libmagic/apprentice.c:1104:28  	mset        	U   	struct magic_entry_set *mset)"
   - "ext/fileinfo/libmagic/apprentice.c:1223:1   	cmpstrp     	U   	cmpstrp(const void *p1, const"
   - "ext/fileinfo/libmagic/apprentice.c:1225:24  	RCAST       	U   	return strcmp(*RCAST(char *const *, p1),"
   - "ext/fileinfo/libmagic/apprentice.c:1353:7   	mflen       	U   	int mflen;"
@@ -835,7 +834,6 @@ issues:
   - "ext/fileinfo/libmagic/readcdf.c:281:36  	CDFV	U   	printf(ms, \"application/CDFV2\") == -1)"
   - "ext/fileinfo/libmagic/readcdf.c:381:55  	expn	U   	storage, const char **expn)"
   - "ext/fileinfo/libmagic/readcdf.c:448:5   	mfbu	U   	\"mfbu_header\", NULL, NULL"
-  - "ext/fileinfo/libmagic/softmagic.c:53:13     	mget        	U   	private int mget(struct magic_set *,"
   - "ext/fileinfo/libmagic/softmagic.c:57:13     	msetoffset  	U   	private int msetoffset(struct magic_set *,"
   - "ext/fileinfo/libmagic/softmagic.c:61:13     	moffset     	U   	private int moffset(struct magic_set *,"
   - "ext/fileinfo/libmagic/softmagic.c:63:14     	mdebug      	U   	private void mdebug(uint32_t, const char"
@@ -1199,7 +1197,6 @@ issues:
   - "ext/hash/murmur/PMurHash128.c:592:43    	nmlkjihg	U   	------] w=[fedcba98 nmlkjihg] b=[76543210 fedcba"
   - "ext/hash/murmur/PMurHash128.c:600:43    	ponmlkji	U   	------] w=[hgfedcba ponmlkji] b=[76543210 fedcba"
   - "ext/hash/php_hash_murmur.h:49:28    	qqqql   	U   	define PHP_MURMUR3F_SPEC \"qqqql\""
-  - "ext/hash/php_hash_xxhash.h:17:18    	XXHASH      	U   	#ifndef PHP_HASH_XXHASH_H"
   - "ext/hash/php_hash_xxhash.h:36:25    	qqqqqqqqqllq	U   	define PHP_XXH64_SPEC \"qqqqqqqqqllq\""
   - "ext/hash/php_hash_xxhash.h:52:33    	wolud       	U   	for ctx, so then it wolud be automatically called"
   - "ext/hash/sha3/generic32lc/align.h:2:31      	Keyak   	U   	Implementation by the Keccak, Keyak and Ketje Teams, namely"
@@ -1221,7 +1218,6 @@ issues:
   - "ext/hash/xxhash/xxhash.h:49:44      	Mulvey          	U   	s 9 Bret Mulvey"
   - "ext/hash/xxhash/xxhash.h:51:44      	Hsieh           	U   	s 1 Paul Hsieh"
   - "ext/hash/xxhash/xxhash.h:52:46      	Alakuijala      	U   	s 10 Pike & Alakuijala"
-  - "ext/hash/xxhash/xxhash.h:83:37      	xxhash          	U   	build macros to inline xxhash into the target unit"
   - "ext/hash/xxhash/xxhash.h:141:15     	IPREF           	U   	# define XXH_IPREF(Id) XXH_INLINE_ #"
   - "ext/hash/xxhash/xxhash.h:302:58     	incrememtal     	U   	xxHash value from an incrememtal input."
   - "ext/hash/xxhash/xxhash.h:838:74     	adresses        	U   	aligned and unaligned adresses."
@@ -3203,7 +3199,6 @@ issues:
   - "ext/pdo_dblib/dblib_driver.c:594:2      	DBSETOPT        	U   	DBSETOPT(H->link, DBTEXTLIMIT"
   - "ext/pdo_dblib/dblib_driver.c:601:20     	DBQUOTEDIDENT   	U   	DBSETOPT(H->link, DBQUOTEDIDENT, \"1\");"
   - "ext/pdo_dblib/dblib_stmt.c:49:20    	nvarchar        	U   	case 31: return \"nvarchar\";"
-  - "ext/pdo_dblib/dblib_stmt.c:72:42    	ubigint         	U   	numeric\"; /* or uint, ubigint, usmallint Sybase AS"
   - "ext/pdo_dblib/dblib_stmt.c:74:20    	ntext           	U   	case 99: return \"ntext\";"
   - "ext/pdo_dblib/dblib_stmt.c:235:17   	dbcolname       	U   	fname = (char*)dbcolname(H->link, colno+1);"
   - "ext/pdo_dblib/dblib_stmt.c:253:16   	dbcollen        	U   	col->maxlen = dbcollen(H->link, colno+1);"
@@ -4069,6 +4064,7 @@ issues:
   - "ext/xmlreader/php_xmlreader.c:712:38    	spcified	U   	reader at attribute spcified by name and namespaceURI"
   - "ext/xmlreader/php_xmlreader.c:1104:18   	nodec   	U   	xmlNode *node, *nodec;"
   - "ext/xmlwriter/php_xmlwriter.stub.php:5:10       	xmlwriter   	U   	function xmlwriter_open_uri(string $uri"
+  - "ext/xmlwriter/php_xmlwriter.stub.php:94:19      	Behaviour   	U   	* @no-verify Behaviour differs from the aliased"
   - "ext/xsl/xsltprocessor.c:54:51   	parht       	U   	make_params(HashTable *parht, int xpath_params)"
   - "ext/xsl/xsltprocessor.c:96:26   	tctxt       	U   	xsltTransformContextPtr tctxt;"
   - "ext/xsl/xsltprocessor.c:309:20  	sheetp      	U   	xsltStylesheetPtr sheetp, oldsheetp;"
@@ -4524,7 +4520,6 @@ issues:
   - "win32/build/mkdist.php:483:32   	hashbang    	U   	stub[0]); // remove hashbang"
   - "win32/build/registersyslog.php:5:47     	Eventlog	U   	CurrentControlSet\\\\Services\\\\Eventlog\\\\Application\\\\PHP-\""
   - "win32/build/registersyslog.php:11:1     	REGEDIT 	U   	REGEDIT4"
-  - "win32/build/registersyslog.php:14:18    	dword   	U   	\"TypesSupported\"=dword:00000007"
   - "win32/codepage.c:125:15     	aidx	U   	const char *aidx = (const char *)ZEND"
   - "win32/codepage.c:278:23     	zenc	U   	const zend_encoding *zenc;"
   - "win32/codepage.c:627:18     	tmpw	U   	size_t ret_len, tmpw_len;"
@@ -4704,7 +4699,6 @@ issues:
   - "Zend/zend_cpuinfo.h:78:19   	MTRR    	U   	ZEND_CPU_FEATURE_MTRR = (1<<12 | ZEND_CPU"
   - "Zend/zend_enum.c:15:15      	Ilija   	U   	| Authors: Ilija Tovilo <ilutov@php.net"
   - "Zend/zend_execute_API.c:976:24  	fcic                	U   	zend_fcall_info_cache fcic;"
-  - "Zend/zend_execute_API.c:1380:27 	PVOID               	U   	CALLBACK tq_timer_cb(PVOID arg, BOOLEAN timed_out"
   - "Zend/zend_execute_API.c:1424:47 	WAITORTIMERCALLBACK 	U   	rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*"
   - "Zend/zend_execute.c:60:18   	IBMC    	U   	# elif defined(__IBMC__) && ZEND_GCC_VERSION"
   - "Zend/zend_execute.c:651:36  	fsep    	U   	fname, const char **fsep, const char **fclass"

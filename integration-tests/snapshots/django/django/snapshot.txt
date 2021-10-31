@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2717, Issues found: 7466 in 862 files
+ CSpell: Files checked: 2717, Issues found: 7415 in 861 files
  exit code: 1
 ./django/apps/config.py:125:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -202,7 +202,6 @@ Lines:
 ./django/contrib/gis/db/backends/spatialite/operations.py:171:34    - Unknown word (RTTOPO)     -- Return the version of RTTOPO library used by SpatiaLite
 ./django/contrib/gis/db/models/aggregates.py:37:38     - Unknown word (SDOAGGRTYPE) -- template = '%(function)s(SDOAGGRTYPE(%(expressions)s))'
 ./django/contrib/gis/gdal/__init__.py:36:30     - Unknown word (libgdal)    -- django.contrib.gis.gdal.libgdal import (
-./django/contrib/gis/gdal/datasource.py:32:65     - Unknown word (ints)       -- OFTIntegers return ints,
 ./django/contrib/gis/gdal/datasource.py:43:54     - Unknown word (capi)       -- prototypes import ds as capi
 ./django/contrib/gis/gdal/driver.py:51:17     - Unknown word (iface)      -- for iface in (vcapi, rcapi):
 ./django/contrib/gis/gdal/driver.py:5:54      - Unknown word (vcapi)      -- prototypes import ds as vcapi, raster as rcapi
@@ -218,7 +217,6 @@ Lines:
 ./django/contrib/gis/gdal/geometries.py:26:18     - Unknown word (ellps)      -- +proj=longlat +ellps=WGS84 +datum=WGS84
 ./django/contrib/gis/gdal/geometries.py:29:24     - Unknown word (clrk)       -- proj=longlat +ellps=clrk66 +datum=NAD27 +no_defs
 ./django/contrib/gis/gdal/geometries.py:391:13    - Unknown word (klone)      -- klone = self.clone()
-./django/contrib/gis/gdal/geometries.py:43:49     - Unknown word (ubyte)      -- char_p, c_double, c_ubyte, c_void_p, string_at
 ./django/contrib/gis/gdal/geometries.py:515:21    - Unknown word (getx)       -- return capi.getx(self.ptr, 0)
 ./django/contrib/gis/gdal/geometries.py:520:21    - Unknown word (gety)       -- return capi.gety(self.ptr, 0)
 ./django/contrib/gis/gdal/geometries.py:526:25    - Unknown word (getz)       -- return capi.getz(self.ptr, 0)
@@ -249,7 +247,6 @@ Lines:
 ./django/contrib/gis/gdal/raster/const.py:38:13     - Unknown word (Neighbour)  -- 'NearestNeighbour': 0,
 ./django/contrib/gis/gdal/raster/const.py:42:6      - Unknown word (Lanczos)    -- 'Lanczos': 4,
 ./django/contrib/gis/gdal/raster/const.py:51:31     - Unknown word (Paletted)   -- GCI_PaletteIndex', # Paletted
-./django/contrib/gis/gdal/raster/const.py:59:41     - Unknown word (CMYK)       -- CyanBand', # Cyan band of CMYK image
 ./django/contrib/gis/gdal/raster/const.py:62:43     - Unknown word (CMLY)       -- BlackBand', # Black band of CMLY image
 ./django/contrib/gis/gdal/raster/const.py:72:34     - Unknown word (vsimem)     -- FILESYSTEM_BASE_PATH = '/vsimem/'
 ./django/contrib/gis/gdal/raster/source.py:133:13    - Unknown word (papsz)      -- papsz_options = []
@@ -363,22 +360,16 @@ Lines:
 ./django/core/cache/backends/memcached.py:137:49    - Unknown word (pylibmc)    -- cache binding using pylibmc"
 ./django/core/cache/backends/memcached.py:162:51    - Unknown word (pymemcache) -- cache binding using pymemcache."""
 ./django/core/cache/backends/memcached.py:164:27    - Unknown word (serde)      -- import pymemcache.serde
-./django/core/cache/backends/redis.py:117:22    - Unknown word (mget)       -- ret = client.mget(keys)
-./django/core/cache/backends/redis.py:135:18    - Unknown word (mset)       -- pipeline.mset({k: self._serializer
 ./django/core/checks/model_checks.py:24:24     - Unknown word (ismethod)   -- if not inspect.ismethod(model.check):
 ./django/core/checks/registry.py:42:33     - Unknown word (mytag)      -- @registry.register('mytag', 'anothertag')
 ./django/core/checks/registry.py:4:19      - Unknown word (itercompat) -- from django.utils.itercompat import is_iterable
 ./django/core/checks/security/base.py:139:6     - Unknown word (xframe)     -- def _xframe_middleware():
-./django/core/files/locks.py:26:14     - Unknown word (fileno)     -- return f.fileno() if hasattr(f, 'fileno
 ./django/core/files/locks.py:30:12     - Unknown word (msvcrt)     -- import msvcrt
-./django/core/files/locks.py:35:39     - Unknown word (DWORD)      -- wintypes import BOOL, DWORD, HANDLE
 ./django/core/files/locks.py:41:28     - Unknown word (pyserial)   -- -- Adapted from the pyserial project ---
-./django/core/files/locks.py:47:5      - Unknown word (PVOID)      -- PVOID = c_void_p
 ./django/core/files/locks.py:69:5      - Unknown word (LPOVERLAPPED) -- LPOVERLAPPED = POINTER(OVERLAPPED
 ./django/core/files/locks.py:6:1       - Unknown word (Anatoly)    -- Anatoly Techtonik for Roundup
 ./django/core/files/locks.py:6:9       - Unknown word (Techtonik)  -- Anatoly Techtonik for Roundup [2] (license
 ./django/core/files/locks.py:80:28     - Unknown word (osfhandle)    -- hfile = msvcrt.get_osfhandle(_fd(f))
-./django/core/files/locks.py:80:9      - Unknown word (hfile)        -- hfile = msvcrt.get_osfhandle
 ./django/core/files/locks.py:92:16     - Unknown word (fcntl)        -- import fcntl
 ./django/core/files/move.py:73:37     - Unknown word (CIFS)       -- Certain filesystems (e.g. CIFS) fail to copy the file
 ./django/core/files/move.py:76:29     - Unknown word (EPERM)      -- if e.errno != errno.EPERM:
@@ -566,6 +557,7 @@ Lines:
 ./django/db/migrations/autodetector.py:795:44    - Unknown word (deduping)   -- make the operation, deduping any dependencies
 ./django/db/migrations/executor.py:166:15    - Unknown word (unapplying) -- Since unapplying a migration requires
 ./django/db/migrations/executor.py:32:62     - Unknown word (unmigrate)  -- label, None), that means unmigrate everything
+./django/db/migrations/migration.py:124:26    - Unknown word (behaviour)  -- # Normal behaviour
 ./django/db/migrations/operations/base.py:32:5      - Unknown word (elidable)   -- elidable = False
 ./django/db/migrations/operations/models.py:100:25    - Unknown word (smodel)     -- return "Create %smodel %s" % ("proxy " if self
 ./django/db/migrations/operations/special.py:47:13     - Unknown word (dbop)       -- for dbop in self.database_operations
@@ -659,7 +651,6 @@ Lines:
 ./django/test/runner.py:324:36    - Unknown word (unpythonic)  -- implementation matches the unpythonic coding style of unittest
 ./django/test/runner.py:33:12     - Unknown word (ipdb)       -- import ipdb as pdb
 ./django/test/runner.py:38:12     - Unknown word (tblib)      -- import tblib.pickling_support
-./django/test/runner.py:444:9     - Unknown word (imap)        -- imap_unordered to show results
 ./django/test/signals.py:202:54    - Unknown word (modwsgi)    -- auth.handlers import modwsgi
 ./django/test/testcases.py:806:46    - Unknown word (ndiff)      -- + '\n'.join(difflib.ndiff(
 ./django/urls/base.py:17:16     - Unknown word (Lconfs)     -- # Overridden URLconfs for each thread are
@@ -677,8 +668,6 @@ Lines:
 ./django/utils/autoreload.py:226:36    - Unknown word (xoptions)   -- for key, value in sys._xoptions.items()
 ./django/utils/autoreload.py:379:9     - Unknown word (mtimes)     -- mtimes = {}
 ./django/utils/autoreload.py:44:12     - Unknown word (pywatchman) -- import pywatchman
-./django/utils/autoreload.py:458:14    - Unknown word (allof)      -- 'allof',
-./django/utils/autoreload.py:459:15    - Unknown word (anyof)      -- ['anyof', ['type', 'f'], ['type
 ./django/utils/autoreload.py:466:14    - Unknown word (dedup)      -- 'dedup_results': True,
 ./django/utils/autoreload.py:97:25     - Unknown word (tcgetattr)  -- attr_list = termios.tcgetattr(sys.stdin)
 ./django/utils/baseconv.py:12:8      - Unknown word (Baseconv)   -- # This Baseconv distribution contains
@@ -1645,7 +1634,6 @@ Lines:
 ./tests/migrations/test_operations.py:557:54    - Unknown word (dlprmo)     -- up_test_model("test_dlprmo", proxy_model=True)
 ./tests/migrations/test_operations.py:578:54    - Unknown word (dlmtimo)    -- up_test_model('test_dlmtimo', mti_model=True)
 ./tests/migrations/test_operations.py:604:54    - Unknown word (rnmo)       -- up_test_model("test_rnmo", related_model=True
-./tests/migrations/test_operations.py:624:28    - Unknown word (repoints)   -- # RenameModel also repoints all incoming FKs and
 ./tests/migrations/test_operations.py:678:54    - Unknown word (rmwsrf)     -- up_test_model("test_rmwsrf", related_model=True
 ./tests/migrations/test_operations.py:721:54    - Unknown word (rmwsc)      -- up_test_model("test_rmwsc", related_model=True
 ./tests/migrations/test_operations.py:906:63    - Unknown word (adfl)       -- make_test_state("test_adfl", operation)
@@ -1724,7 +1712,6 @@ Lines:
 ./tests/postgres_tests/test_hstore.py:81:59     - Unknown word (birman)     -- 'TigrOu', 'breed': 'birman'}),
 ./tests/postgres_tests/test_hstore.py:82:40     - Unknown word (minou)      -- HStoreModel(field={'cat': 'minou', 'breed': 'ragdoll
 ./tests/postgres_tests/test_operations.py:308:29    - Unknown word (phonebk)    -- locale='de-u-co-phonebk',
-./tests/postgres_tests/test_ranges.py:689:40    - Unknown word (Ints)       -- label for="id_ints_0">Ints:</label></th>
 ./tests/postgres_tests/test_signals.py:10:13     - Unknown word (pyscogp)    -- pass # pyscogp2 isn't installed.
 ./tests/postgres_tests/test_trigram.py:36:20     - Unknown word (Gumby)      -- field='Gumby rides on the path of
 ./tests/prefetch_related/test_prefetch_related_objects.py:16:48     - Unknown word (Wuthering)  -- objects.create(title='Wuthering Heights')

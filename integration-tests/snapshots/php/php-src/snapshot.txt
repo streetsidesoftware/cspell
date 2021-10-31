@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1825, Issues found: 19638 in 1082 files
+ CSpell: Files checked: 1825, Issues found: 19618 in 1082 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -154,7 +154,6 @@ Lines:
 ./Zend/zend_execute.c:60:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
 ./Zend/zend_execute.c:651:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
 ./Zend/zend_execute.c:651:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
-./Zend/zend_execute_API.c:1380:27   - Unknown word (PVOID)      -- CALLBACK tq_timer_cb(PVOID arg, BOOLEAN timed_out
 ./Zend/zend_execute_API.c:1424:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
 ./Zend/zend_execute_API.c:976:24    - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
 ./Zend/zend_fibers.c:125:33    - Unknown word (fcontext)   -- by boost.context in fcontext.hpp:
@@ -869,7 +868,6 @@ Lines:
 ./ext/ffi/ffi_parser.c:38:9      - Unknown word (YYPOS)      -- #define YYPOS cpos
 ./ext/ffi/ffi_parser.c:39:9      - Unknown word (YYEND)      -- #define YYEND cend
 ./ext/ffi/ffi_parser.c:45:13     - Unknown word (RPAREN)     -- #define YY__RPAREN 4
-./ext/fileinfo/libmagic/apprentice.c:1104:28   - Unknown word (mset)       -- struct magic_entry_set *mset)
 ./ext/fileinfo/libmagic/apprentice.c:121:11    - Unknown word (nmagic)     -- uint32_t nmagic[MAGIC_SETS];
 ./ext/fileinfo/libmagic/apprentice.c:1223:1    - Unknown word (cmpstrp)    -- cmpstrp(const void *p1, const
 ./ext/fileinfo/libmagic/apprentice.c:1225:24   - Unknown word (RCAST)      -- return strcmp(*RCAST(char *const *, p1),
@@ -1040,7 +1038,6 @@ Lines:
 ./ext/fileinfo/libmagic/softmagic.c:495:32    - Unknown word (SPTR)       -- pcre2_match(re, (PCRE2_SPTR)fmt, strlen(fmt), 0
 ./ext/fileinfo/libmagic/softmagic.c:495:82    - Unknown word (mctx)       -- match_data, php_pcre_mctx()) > 0;
 ./ext/fileinfo/libmagic/softmagic.c:503:41    - Unknown word (aiws)       -- STRNDUP) || defined(__aiws__) || defined(_AIX)
-./ext/fileinfo/libmagic/softmagic.c:53:13     - Unknown word (mget)       -- private int mget(struct magic_set *,
 ./ext/fileinfo/libmagic/softmagic.c:57:13     - Unknown word (msetoffset) -- private int msetoffset(struct magic_set *,
 ./ext/fileinfo/libmagic/softmagic.c:596:39    - Unknown word (utype)      -- value, format, stype, utype) \
 ./ext/fileinfo/libmagic/softmagic.c:61:13     - Unknown word (moffset)    -- private int moffset(struct magic_set *,
@@ -1395,7 +1392,6 @@ Lines:
 ./ext/hash/murmur/PMurHash128.c:592:43    - Unknown word (nmlkjihg)   -- ------] w=[fedcba98 nmlkjihg] b=[76543210 fedcba
 ./ext/hash/murmur/PMurHash128.c:600:43    - Unknown word (ponmlkji)   -- ------] w=[hgfedcba ponmlkji] b=[76543210 fedcba
 ./ext/hash/php_hash_murmur.h:49:28     - Unknown word (qqqql)      -- define PHP_MURMUR3F_SPEC "qqqql"
-./ext/hash/php_hash_xxhash.h:17:18     - Unknown word (XXHASH)     -- #ifndef PHP_HASH_XXHASH_H
 ./ext/hash/php_hash_xxhash.h:36:25     - Unknown word (qqqqqqqqqllq) -- define PHP_XXH64_SPEC "qqqqqqqqqllq"
 ./ext/hash/php_hash_xxhash.h:52:33     - Unknown word (wolud)        -- for ctx, so then it wolud be automatically called
 ./ext/hash/sha3/generic32lc/KeccakP-1600-SnP.h:32:60     - Unknown word (nrounds)    -- state, unsigned int nrounds);
@@ -1495,7 +1491,6 @@ Lines:
 ./ext/hash/xxhash/xxhash.h:51:44     - Unknown word (Hsieh)      -- s 1       Paul Hsieh
 ./ext/hash/xxhash/xxhash.h:52:46     - Unknown word (Alakuijala) -- s 10       Pike & Alakuijala
 ./ext/hash/xxhash/xxhash.h:838:74    - Unknown word (adresses)    -- aligned and unaligned adresses.
-./ext/hash/xxhash/xxhash.h:83:37     - Unknown word (xxhash)     -- build macros to inline xxhash into the target unit
 ./ext/iconv/iconv.c:1195:14   - Unknown word (csname)     -- const char *csname = NULL;
 ./ext/iconv/iconv.c:120:178   - Unknown word (lfchars)    -- line_len, const char *lfchars, php_iconv_enc_scheme
 ./ext/iconv/iconv.c:1360:12   - Unknown word (qmarks)     -- int qmarks = 2;
@@ -3423,7 +3418,6 @@ Lines:
 ./ext/pdo_dblib/dblib_stmt.c:487:50    - Unknown word (dbcolsource)   -- value, "column_source", dbcolsource(H->link, colno+1));
 ./ext/pdo_dblib/dblib_stmt.c:490:53    - Unknown word (dbcolutype)    -- native_usertype_id", dbcolutype(H->link, colno+1));
 ./ext/pdo_dblib/dblib_stmt.c:49:20     - Unknown word (nvarchar)   -- case 31: return "nvarchar";
-./ext/pdo_dblib/dblib_stmt.c:72:42     - Unknown word (ubigint)    -- numeric"; /* or uint, ubigint, usmallint Sybase AS
 ./ext/pdo_dblib/dblib_stmt.c:74:20     - Unknown word (ntext)      -- case 99: return "ntext";
 ./ext/pdo_dblib/pdo_dblib.c:113:8     - Unknown word (SYBESEOF)      -- case SYBESEOF:
 ./ext/pdo_dblib/pdo_dblib.c:114:8     - Unknown word (SYBEFCON)      -- case SYBEFCON: state = "01002"; break
@@ -4265,6 +4259,7 @@ Lines:
 ./ext/xmlreader/php_xmlreader.c:1104:18   - Unknown word (nodec)      -- xmlNode *node, *nodec;
 ./ext/xmlreader/php_xmlreader.c:712:38    - Unknown word (spcified)   -- reader at attribute spcified by name and namespaceURI
 ./ext/xmlwriter/php_xmlwriter.stub.php:5:10      - Unknown word (xmlwriter)  -- function xmlwriter_open_uri(string $uri
+./ext/xmlwriter/php_xmlwriter.stub.php:94:19     - Unknown word (Behaviour)  -- * @no-verify Behaviour differs from the aliased
 ./ext/xsl/xsltprocessor.c:309:20    - Unknown word (sheetp)     -- xsltStylesheetPtr sheetp, oldsheetp;
 ./ext/xsl/xsltprocessor.c:309:28    - Unknown word (oldsheetp)  -- xsltStylesheetPtr sheetp, oldsheetp;
 ./ext/xsl/xsltprocessor.c:311:45    - Unknown word (docu)       -- prevExtDtdValue, clone_docu = 0;
@@ -4706,7 +4701,6 @@ Lines:
 ./win32/build/mkdist.php:7:2       - Unknown word (phpdll)     -- $phpdll = $argv[4];
 ./win32/build/mkdist.php:86:10     - Unknown word (depbase)    -- $depbase = basename($dep);
 ./win32/build/registersyslog.php:11:1      - Unknown word (REGEDIT)    -- REGEDIT4
-./win32/build/registersyslog.php:14:18     - Unknown word (dword)      -- "TypesSupported"=dword:00000007
 ./win32/build/registersyslog.php:5:47      - Unknown word (Eventlog)   -- CurrentControlSet\\Services\\Eventlog\\Application\\PHP-"
 ./win32/codepage.c:125:15    - Unknown word (aidx)       -- const char *aidx = (const char *)ZEND
 ./win32/codepage.c:278:23    - Unknown word (zenc)       -- const zend_encoding *zenc;

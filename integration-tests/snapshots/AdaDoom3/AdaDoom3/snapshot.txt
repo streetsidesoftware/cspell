@@ -3,7 +3,7 @@ Repository: AdaDoom3/AdaDoom3
 Url: "https://github.com/AdaDoom3/AdaDoom3.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 105, Issues found: 3130 in 98 files
+ CSpell: Files checked: 105, Issues found: 3089 in 98 files
  exit code: 1
 ./Engine/Assembly/PPC/neo-engine-cpu.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:101:111   - Unknown word (OSXSAVE)    -- ECX_Register, 27); -- OSXSAVE
@@ -34,9 +34,7 @@ Lines:
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:64:27     - Unknown word (cpuid)      -- Template => "cpuid",
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:99:30     - Unknown word (SIMD)       -- Result.Has_Streaming_SIMD_Extensions_4_Supplement
 ./Engine/Runtime/a-comutr.adb:1735:7    - Unknown word (Prepent)      -- -- Prepent_Child --
-./Engine/Runtime/a-comutr.adb:419:34    - Unknown word (deallocation) -- invariants in case the deallocation fails. (This works because
-./Engine/Runtime/a-comutr.adb:426:67    - Unknown word (deallocates)  -- number of nodes that it deallocates,
-./Engine/Runtime/a-comutr.adb:466:29    - Unknown word (multiway)     -- Implement Vet for multiway tree???
+./Engine/Runtime/a-comutr.adb:466:29    - Unknown word (multiway)   -- Implement Vet for multiway tree???
 ./Engine/Runtime/a-comutr.adb:765:19    - Unknown word (represention) -- -- Restore represention invariants before attempting
 ./Engine/Runtime/a-comutr.adb:964:7     - Unknown word (Unbusy)       -- Unbusy (Object.Container.TC
 ./Engine/Systems/Win32/neo-engine-system-console.adb:224:120   - Unknown word (mwindows)   -- This fails without -mwindows
@@ -193,7 +191,6 @@ Lines:
 ./Engine/neo-api-openal.ads:205:10    - Unknown word (ALAW)         -- AL_EXT_ALAW : constant Int_Unsigned
 ./Engine/neo-api-openal.ads:216:10    - Unknown word (MCFORMATS)    -- AL_EXT_MCFORMATS : constant Int_Unsigned
 ./Engine/neo-api-openal.ads:26:7      - Unknown word (Lsizei)     -- -- ALsizei Int_Size_C
-./Engine/neo-api-openal.ads:30:7      - Unknown word (Lubyte)     -- -- ALubyte Int_8_Unsigned_C
 ./Engine/neo-api-openal.ads:328:17    - Unknown word (GAINHF)       -- AL_CONE_OUTER_GAINHF
 ./Engine/neo-api-openal.ads:342:19    - Unknown word (HFRATIO)      -- AL_REVERB_DECAY_HFRATIO 00
 ./Engine/neo-api-openal.ads:349:19    - Unknown word (HFLIMIT)      -- AL_REVERB_DECAY_HFLIMIT 00
@@ -264,7 +261,6 @@ Lines:
 ./Engine/neo-api-physx.ads:565:89    - Unknown word (pxconvexmeshgeometry) -- PxShape; geometry : access pxconvexmeshgeometry_h.Class_PxConvexMeshGeometry
 ./Engine/neo-api-physx.ads:567:91    - Unknown word (pxtrianglemeshgeometry) -- PxShape; geometry : access pxtrianglemeshgeometry_h.Class_PxTriangleMeshGeometr
 ./Engine/neo-api-physx.ads:569:90    - Unknown word (pxheightfieldgeometry)  -- PxShape; geometry : access pxheightfieldgeometry_h.Class_PxHeightFieldGeometry
-./Engine/neo-api-physx.ads:57:17     - Unknown word (DWORD)         -- eACTOR_FORCE_DWORD : constant unsigned
 ./Engine/neo-api-physx.ads:679:10    - Unknown word (autowake)               -- autowake : Extensions.bool) is
 ./Engine/neo-api-physx.ads:736:5     - Unknown word (CONVEXMESH)             -- eCONVEXMESH : constant int := 4
 ./Engine/neo-api-physx.ads:737:5     - Unknown word (TRIANGLEMESH)           -- eTRIANGLEMESH : constant int := 5
@@ -475,7 +471,6 @@ Lines:
 ./Engine/neo-api-windows.ads:615:67    - Unknown word (LPDWORD)            -- Ptr_Int_Unsigned_C; -- LPDWORD
 ./Engine/neo-api-windows.ads:618:30    - Unknown word (lpcb)               -- lpcbData : Ptr_Int_Unsigned
 ./Engine/neo-api-windows.ads:626:80    - Unknown word (LPSECURITY)         -- SECURITY_ATTRIBUTES; -- LPSECURITY_ATTRIBUTES
-./Engine/neo-api-windows.ads:635:72    - Unknown word (PVOID)              -- Ptr; -- PVOID
 ./Engine/neo-api-windows.ads:651:67    - Unknown word (PUINT)              -- Ptr) -- PUINT
 ./Engine/neo-api-windows.ads:657:53    - Unknown word (LPCSTR)             -- lpProcName : Str_8_C) -- LPCSTR
 ./Engine/neo-api-windows.ads:658:53    - Unknown word (FARPROC)            -- return Ptr            -- FARPROC
@@ -536,11 +531,10 @@ Lines:
 ./Engine/neo-core-compression.adb:74:7      - Unknown word (inbuffer)     -- inbuffer : aliased Thin.ZSTD
 ./Engine/neo-core-compression.adb:78:7      - Unknown word (outbuffer)    -- outbuffer : aliased Thin.ZSTD
 ./Engine/neo-core-console.adb:102:73    - Unknown word (cvar)       -- NULL_STR_UNBOUND; -- A cvar that goes out of scope
-./Engine/neo-core-console.adb:161:41    - Unknown word (Deallocation) -- Free is new Unchecked_Deallocation (Control_State, Ptr
 ./Engine/neo-core-console.adb:16:33     - Unknown word (perserve)   -- Optimize string stuff, perserve config comments, and
-./Engine/neo-core-console.adb:215:10    - Unknown word (Commandline)  -- -- Commandline interaction
-./Engine/neo-core-console.adb:217:9     - Unknown word (Vals)         -- Vals : Str_Unbound := NULL
-./Engine/neo-core-console.adb:368:6     - Unknown word (Initalized)   -- -- Initalized data
+./Engine/neo-core-console.adb:215:10    - Unknown word (Commandline) -- -- Commandline interaction
+./Engine/neo-core-console.adb:217:9     - Unknown word (Vals)        -- Vals : Str_Unbound := NULL
+./Engine/neo-core-console.adb:368:6     - Unknown word (Initalized)  -- -- Initalized data
 ./Engine/neo-core-console.ads:25:43     - Unknown word (cvars)      -- query of commands and cvars
 ./Engine/neo-core-console.ads:64:77     - Unknown word (accessable) -- procedure with arguments accessable to a user through the
 ./Engine/neo-core-console.ads:91:91     - Unknown word (changable)  -- engine. It represents a changable setting that can be
@@ -626,7 +620,6 @@ Lines:
 ./Engine/neo-world-commands.adb:100:49    - Unknown word (levelname)  -- was started with "map <levelname>", then
 ./Engine/neo-world-commands.adb:149:18    - Unknown word (netchan)    -- -- if( cl->netchan.remoteAddress.type
 ./Engine/neo-world-commands.adb:157:27    - Unknown word (Couldn)     -- Com_Printf( "Couldn't resolve address\n
-./Engine/neo-world-commands.adb:187:10    - Unknown word (strcpy)     -- -- strcpy (text, "console: ")
 ./Engine/neo-world-commands.adb:230:24    - Unknown word (Contraint)  -- exception when Contraint_Error =>
 ./Engine/neo-world-commands.adb:286:8     - Unknown word (helpmenu)   -- --!helpmenu -- This brings up a
 ./Engine/neo-world-commands.adb:287:3     - Unknown word (maprate)    -- --maprate -- This brings up specific
@@ -731,9 +724,6 @@ Lines:
 ./Engine/neo-world-graphics-renderer.adb:969:28    - Unknown word (tranform)    -- -- tranform the light/view origin
 ./Engine/neo-world-graphics-renderer.adb:990:71    - Unknown word (LIGHTFALLOFF) -- Light_Projection); -- LIGHTFALLOFF_S
 ./Engine/neo-world-graphics.adb:1032:33   - Unknown word (rebuffer)   -- Line ("Attempted to rebuffer material " & Path);
-./Engine/neo-world-graphics.adb:1053:29   - Unknown word (unbuffer)   -- Make sure we can't unbuffer a material until all
-./Engine/neo-world-graphics.adb:1053:90   - Unknown word (unbuffered) -- surfaces using it get unbuffered first
-./Engine/neo-world-graphics.adb:1054:64   - Unknown word (Unbuffering) -- References > 0 then Warn ("Unbuffering referenced material
 ./Engine/neo-world-graphics.adb:1130:8    - Unknown word (Syncronization) -- -- Syncronization
 ./Engine/neo-world-graphics.adb:1320:28   - Unknown word (reate)          -- - Reset the indexes reate the inital view
 ./Engine/neo-world-graphics.adb:1320:38   - Unknown word (inital)         -- the indexes reate the inital view
@@ -749,7 +739,6 @@ Lines:
 ./Engine/neo-world-graphics.adb:206:67    - Unknown word (renderpass) -- instead of having the renderpass do the transition to
 ./Engine/neo-world-graphics.adb:371:74    - Unknown word (avaliable)  -- the staging buffer is avaliable
 ./Engine/neo-world-graphics.adb:49:6      - Unknown word (Samper)     -- -- Samper --
-./Engine/neo-world-graphics.adb:805:13    - Unknown word (Unbuffer)   -- procedure Unbuffer_Mesh (Path : Str) is
 ./Engine/neo-world-graphics.adb:837:24    - Unknown word (sepcial)    -- -- Fetch our sepcial "handle" used to Id
 ./Engine/neo-world-graphics.ads:61:117    - Unknown word (Coordiante) -- SFLOAT, -- Texture_Coordiante
 ./Engine/neo-world-impulses.ads:27:39     - Unknown word (entermenu)  -- Game is new Impulse ("entermenu", Callback_Enter_Game
@@ -794,7 +783,6 @@ Lines:
 ./Engine/neo-world-network.adb:503:10    - Unknown word (swlen)                -- swlen = LittleLong( len )
 ./Engine/neo-world-network.adb:504:35    - Unknown word (demofile)             -- Write (&swlen, 4, clc.demofile);
 ./Engine/neo-world-network.adb:520:9     - Unknown word (Recieve)              -- -- Recieve
-./Engine/neo-world-network.adb:534:13    - Unknown word (stdlib)               -- #include&lt;stdlib.h&gt; //exit(0);
 ./Engine/neo-world-network.adb:535:13    - Unknown word (arpa)                 -- #include&lt;arpa/inet.h&gt;
 ./Engine/neo-world-network.adb:535:18    - Unknown word (inet)                 -- #include&lt;arpa/inet.h&gt;
 ./Engine/neo-world-network.adb:538:9     - Unknown word (BUFLEN)               -- #define BUFLEN 512	//Max length of

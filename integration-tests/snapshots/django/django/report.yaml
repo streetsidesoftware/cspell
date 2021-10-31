@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: ["**/*.{md,py}"]
 Summary:
   files: 2717
-  filesWithIssues: 862
-  issues: 7466
+  filesWithIssues: 861
+  issues: 7415
   errors: 0
 Errors: []
 
@@ -207,7 +207,6 @@ issues:
   - "django/contrib/gis/db/backends/spatialite/operations.py:171:34  	RTTOPO  	U   	Return the version of RTTOPO library used by SpatiaLite"
   - "django/contrib/gis/db/models/aggregates.py:37:38    	SDOAGGRTYPE 	U   	template = '%(function)s(SDOAGGRTYPE(%(expressions)s))'"
   - "django/contrib/gis/gdal/__init__.py:36:30   	libgdal 	U   	django.contrib.gis.gdal.libgdal import ("
-  - "django/contrib/gis/gdal/datasource.py:32:65     	ints	U   	OFTIntegers return ints,"
   - "django/contrib/gis/gdal/datasource.py:43:54     	capi	U   	prototypes import ds as capi"
   - "django/contrib/gis/gdal/driver.py:5:54      	vcapi   	U   	prototypes import ds as vcapi, raster as rcapi"
   - "django/contrib/gis/gdal/driver.py:5:71      	rcapi   	U   	as vcapi, raster as rcapi"
@@ -223,7 +222,6 @@ issues:
   - "django/contrib/gis/gdal/geometries.py:18:7      	mpnt    	U   	>>> mpnt = OGRGeometry(OGRGeomType"
   - "django/contrib/gis/gdal/geometries.py:26:18     	ellps   	U   	+proj=longlat +ellps=WGS84 +datum=WGS84"
   - "django/contrib/gis/gdal/geometries.py:29:24     	clrk    	U   	proj=longlat +ellps=clrk66 +datum=NAD27 +no_defs"
-  - "django/contrib/gis/gdal/geometries.py:43:49     	ubyte   	U   	char_p, c_double, c_ubyte, c_void_p, string_at"
   - "django/contrib/gis/gdal/geometries.py:391:13    	klone   	U   	klone = self.clone()"
   - "django/contrib/gis/gdal/geometries.py:515:21    	getx    	U   	return capi.getx(self.ptr, 0)"
   - "django/contrib/gis/gdal/geometries.py:520:21    	gety    	U   	return capi.gety(self.ptr, 0)"
@@ -254,7 +252,6 @@ issues:
   - "django/contrib/gis/gdal/raster/const.py:38:13   	Neighbour   	U   	'NearestNeighbour': 0,"
   - "django/contrib/gis/gdal/raster/const.py:42:6    	Lanczos     	U   	'Lanczos': 4,"
   - "django/contrib/gis/gdal/raster/const.py:51:31   	Paletted    	U   	GCI_PaletteIndex', # Paletted"
-  - "django/contrib/gis/gdal/raster/const.py:59:41   	CMYK        	U   	CyanBand', # Cyan band of CMYK image"
   - "django/contrib/gis/gdal/raster/const.py:62:43   	CMLY        	U   	BlackBand', # Black band of CMLY image"
   - "django/contrib/gis/gdal/raster/const.py:72:34   	vsimem      	U   	FILESYSTEM_BASE_PATH = '/vsimem/'"
   - "django/contrib/gis/gdal/raster/source.py:6:5        	addressof   	U   	addressof, byref, c_buffer, c"
@@ -368,21 +365,15 @@ issues:
   - "django/core/cache/backends/memcached.py:137:49  	pylibmc     	U   	cache binding using pylibmc\""
   - "django/core/cache/backends/memcached.py:162:51  	pymemcache  	U   	cache binding using pymemcache.\"\"\""
   - "django/core/cache/backends/memcached.py:164:27  	serde       	U   	import pymemcache.serde"
-  - "django/core/cache/backends/redis.py:117:22  	mget	U   	ret = client.mget(keys)"
-  - "django/core/cache/backends/redis.py:135:18  	mset	U   	pipeline.mset({k: self._serializer"
   - "django/core/checks/model_checks.py:24:24    	ismethod	U   	if not inspect.ismethod(model.check):"
   - "django/core/checks/registry.py:4:19     	itercompat  	U   	from django.utils.itercompat import is_iterable"
   - "django/core/checks/registry.py:42:33    	mytag       	U   	@registry.register('mytag', 'anothertag')"
   - "django/core/checks/security/base.py:139:6   	xframe  	U   	def _xframe_middleware():"
   - "django/core/files/locks.py:6:1      	Anatoly     	U   	Anatoly Techtonik for Roundup"
   - "django/core/files/locks.py:6:9      	Techtonik   	U   	Anatoly Techtonik for Roundup [2] (license"
-  - "django/core/files/locks.py:26:14    	fileno      	U   	return f.fileno() if hasattr(f, 'fileno"
   - "django/core/files/locks.py:30:12    	msvcrt      	U   	import msvcrt"
-  - "django/core/files/locks.py:35:39    	DWORD       	U   	wintypes import BOOL, DWORD, HANDLE"
   - "django/core/files/locks.py:41:28    	pyserial    	U   	-- Adapted from the pyserial project ---"
-  - "django/core/files/locks.py:47:5     	PVOID       	U   	PVOID = c_void_p"
   - "django/core/files/locks.py:69:5     	LPOVERLAPPED	U   	LPOVERLAPPED = POINTER(OVERLAPPED"
-  - "django/core/files/locks.py:80:9     	hfile       	U   	hfile = msvcrt.get_osfhandle"
   - "django/core/files/locks.py:80:28    	osfhandle   	U   	hfile = msvcrt.get_osfhandle(_fd(f))"
   - "django/core/files/locks.py:92:16    	fcntl       	U   	import fcntl"
   - "django/core/files/move.py:8:8       	errno   	U   	import errno"
@@ -571,6 +562,7 @@ issues:
   - "django/db/migrations/autodetector.py:795:44     	deduping	U   	make the operation, deduping any dependencies"
   - "django/db/migrations/executor.py:32:62      	unmigrate   	U   	label, None), that means unmigrate everything"
   - "django/db/migrations/executor.py:166:15     	unapplying  	U   	Since unapplying a migration requires"
+  - "django/db/migrations/migration.py:124:26    	behaviour   	U   	# Normal behaviour"
   - "django/db/migrations/operations/base.py:32:5    	elidable	U   	elidable = False"
   - "django/db/migrations/operations/models.py:100:25    	smodel  	U   	return \"Create %smodel %s\" % (\"proxy \" if self"
   - "django/db/migrations/operations/special.py:47:13    	dbop	U   	for dbop in self.database_operations"
@@ -664,7 +656,6 @@ issues:
   - "django/test/runner.py:38:12     	tblib       	U   	import tblib.pickling_support"
   - "django/test/runner.py:178:16    	unpicklable 	U   	def _print_unpicklable_subtest(self, test,"
   - "django/test/runner.py:324:36    	unpythonic  	U   	implementation matches the unpythonic coding style of unittest"
-  - "django/test/runner.py:444:9     	imap        	U   	imap_unordered to show results"
   - "django/test/signals.py:202:54   	modwsgi 	U   	auth.handlers import modwsgi"
   - "django/test/testcases.py:806:46     	ndiff   	U   	+ '\\n'.join(difflib.ndiff("
   - "django/urls/base.py:17:16   	Lconfs  	U   	# Overridden URLconfs for each thread are"
@@ -683,8 +674,6 @@ issues:
   - "django/utils/autoreload.py:173:21   	Werkzeug    	U   	# Inspired from Werkzeug:"
   - "django/utils/autoreload.py:226:36   	xoptions    	U   	for key, value in sys._xoptions.items()"
   - "django/utils/autoreload.py:379:9    	mtimes      	U   	mtimes = {}"
-  - "django/utils/autoreload.py:458:14   	allof       	U   	'allof',"
-  - "django/utils/autoreload.py:459:15   	anyof       	U   	['anyof', ['type', 'f'], ['type"
   - "django/utils/autoreload.py:466:14   	dedup       	U   	'dedup_results': True,"
   - "django/utils/baseconv.py:2:22       	Guilherme   	U   	Copyright (c) 2010 Guilherme Gondim. All rights reserved"
   - "django/utils/baseconv.py:2:32       	Gondim      	U   	Copyright (c) 2010 Guilherme Gondim. All rights reserved"
@@ -1598,7 +1587,6 @@ issues:
   - "tests/migrations/test_operations.py:557:54  	dlprmo              	U   	up_test_model(\"test_dlprmo\", proxy_model=True)"
   - "tests/migrations/test_operations.py:578:54  	dlmtimo             	U   	up_test_model('test_dlmtimo', mti_model=True)"
   - "tests/migrations/test_operations.py:604:54  	rnmo                	U   	up_test_model(\"test_rnmo\", related_model=True"
-  - "tests/migrations/test_operations.py:624:28  	repoints            	U   	# RenameModel also repoints all incoming FKs and"
   - "tests/migrations/test_operations.py:678:54  	rmwsrf              	U   	up_test_model(\"test_rmwsrf\", related_model=True"
   - "tests/migrations/test_operations.py:721:54  	rmwsc               	U   	up_test_model(\"test_rmwsc\", related_model=True"
   - "tests/migrations/test_operations.py:906:63  	adfl                	U   	make_test_state(\"test_adfl\", operation)"
@@ -1729,7 +1717,6 @@ issues:
   - "tests/postgres_tests/test_hstore.py:81:59   	birman  	U   	'TigrOu', 'breed': 'birman'}),"
   - "tests/postgres_tests/test_hstore.py:82:40   	minou   	U   	HStoreModel(field={'cat': 'minou', 'breed': 'ragdoll"
   - "tests/postgres_tests/test_operations.py:308:29  	phonebk 	U   	locale='de-u-co-phonebk',"
-  - "tests/postgres_tests/test_ranges.py:689:40  	Ints	U   	label for=\"id_ints_0\">Ints:</label></th>"
   - "tests/postgres_tests/test_signals.py:10:13      	pyscogp 	U   	pass # pyscogp2 isn't installed."
   - "tests/postgres_tests/test_trigram.py:36:20      	Gumby   	U   	field='Gumby rides on the path of"
   - "tests/prefetch_related/test_prefetch_related_objects.py:16:48   	Wuthering   	U   	objects.create(title='Wuthering Heights')"
