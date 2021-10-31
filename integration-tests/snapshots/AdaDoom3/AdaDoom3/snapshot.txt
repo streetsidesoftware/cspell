@@ -3,7 +3,7 @@ Repository: AdaDoom3/AdaDoom3
 Url: "https://github.com/AdaDoom3/AdaDoom3.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 105, Issues found: 3243 in 98 files
+ CSpell: Files checked: 105, Issues found: 3089 in 98 files
  exit code: 1
 ./Engine/Assembly/PPC/neo-engine-cpu.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:101:111   - Unknown word (OSXSAVE)    -- ECX_Register, 27); -- OSXSAVE
@@ -33,11 +33,8 @@ Lines:
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:475:28    - Unknown word (fxsave)         -- " fxsave (%%eax)           "
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:64:27     - Unknown word (cpuid)      -- Template => "cpuid",
 ./Engine/Assembly/x86-64/neo-engine-cpu.adb:99:30     - Unknown word (SIMD)       -- Result.Has_Streaming_SIMD_Extensions_4_Supplement
-./Engine/Runtime/a-comutr.adb:103:14    - Unknown word (Deallocate) -- procedure Deallocate_Node is
 ./Engine/Runtime/a-comutr.adb:1735:7    - Unknown word (Prepent)      -- -- Prepent_Child --
-./Engine/Runtime/a-comutr.adb:419:34    - Unknown word (deallocation) -- invariants in case the deallocation fails. (This works because
-./Engine/Runtime/a-comutr.adb:426:67    - Unknown word (deallocates)  -- number of nodes that it deallocates,
-./Engine/Runtime/a-comutr.adb:466:29    - Unknown word (multiway)     -- Implement Vet for multiway tree???
+./Engine/Runtime/a-comutr.adb:466:29    - Unknown word (multiway)   -- Implement Vet for multiway tree???
 ./Engine/Runtime/a-comutr.adb:765:19    - Unknown word (represention) -- -- Restore represention invariants before attempting
 ./Engine/Runtime/a-comutr.adb:964:7     - Unknown word (Unbusy)       -- Unbusy (Object.Container.TC
 ./Engine/Systems/Win32/neo-engine-system-console.adb:224:120   - Unknown word (mwindows)   -- This fails without -mwindows
@@ -194,10 +191,7 @@ Lines:
 ./Engine/neo-api-openal.ads:205:10    - Unknown word (ALAW)         -- AL_EXT_ALAW : constant Int_Unsigned
 ./Engine/neo-api-openal.ads:216:10    - Unknown word (MCFORMATS)    -- AL_EXT_MCFORMATS : constant Int_Unsigned
 ./Engine/neo-api-openal.ads:26:7      - Unknown word (Lsizei)     -- -- ALsizei Int_Size_C
-./Engine/neo-api-openal.ads:280:2     - Unknown word (ifndef)       -- #ifndef ALC_SOFT_loopback
-./Engine/neo-api-openal.ads:30:7      - Unknown word (Lubyte)     -- -- ALubyte Int_8_Unsigned_C
 ./Engine/neo-api-openal.ads:328:17    - Unknown word (GAINHF)       -- AL_CONE_OUTER_GAINHF
-./Engine/neo-api-openal.ads:32:7      - Unknown word (Lushort)    -- -- ALushort Int_16_Unsigned_C
 ./Engine/neo-api-openal.ads:342:19    - Unknown word (HFRATIO)      -- AL_REVERB_DECAY_HFRATIO 00
 ./Engine/neo-api-openal.ads:349:19    - Unknown word (HFLIMIT)      -- AL_REVERB_DECAY_HFLIMIT 00
 ./Engine/neo-api-openal.ads:352:6     - Unknown word (EAXREVERB)    -- AL_EAXREVERB_DENSITY
@@ -258,7 +252,6 @@ Lines:
 ./Engine/neo-api-physx.ads:455:64    - Unknown word (Effff)         -- "_ZN5physx7PxPlaneC1Effff");
 ./Engine/neo-api-physx.ads:45:31     - Unknown word (physxco)       -- External_Name => "_ZN5physxcoENS_11PxActorFlag4EnumE
 ./Engine/neo-api-physx.ads:472:43    - Unknown word (Planeeq)       -- Name => "_ZNK5physx7PxPlaneeqERKS0_";
-./Engine/neo-api-physx.ads:504:54    - Unknown word (struct)        -- record; -- incomplete struct
 ./Engine/neo-api-physx.ads:506:11    - Unknown word (Raycast)       -- type PxRaycastHit is null record;
 ./Engine/neo-api-physx.ads:50:31     - Unknown word (physxor)       -- External_Name => "_ZN5physxorENS_11PxActorFlag4EnumES
 ./Engine/neo-api-physx.ads:557:82    - Unknown word (pxboxgeometry) -- PxShape; geometry : access pxboxgeometry_h.Class_PxBoxGeometry
@@ -268,7 +261,6 @@ Lines:
 ./Engine/neo-api-physx.ads:565:89    - Unknown word (pxconvexmeshgeometry) -- PxShape; geometry : access pxconvexmeshgeometry_h.Class_PxConvexMeshGeometry
 ./Engine/neo-api-physx.ads:567:91    - Unknown word (pxtrianglemeshgeometry) -- PxShape; geometry : access pxtrianglemeshgeometry_h.Class_PxTriangleMeshGeometr
 ./Engine/neo-api-physx.ads:569:90    - Unknown word (pxheightfieldgeometry)  -- PxShape; geometry : access pxheightfieldgeometry_h.Class_PxHeightFieldGeometry
-./Engine/neo-api-physx.ads:57:17     - Unknown word (DWORD)         -- eACTOR_FORCE_DWORD : constant unsigned
 ./Engine/neo-api-physx.ads:679:10    - Unknown word (autowake)               -- autowake : Extensions.bool) is
 ./Engine/neo-api-physx.ads:736:5     - Unknown word (CONVEXMESH)             -- eCONVEXMESH : constant int := 4
 ./Engine/neo-api-physx.ads:737:5     - Unknown word (TRIANGLEMESH)           -- eTRIANGLEMESH : constant int := 5
@@ -344,12 +336,10 @@ Lines:
 ./Engine/neo-api-vulkan.ads:735:16    - Unknown word (SNORM)          -- VK_FORMAT_R8_SNORM
 ./Engine/neo-api-vulkan.ads:736:16    - Unknown word (USCALED)        -- VK_FORMAT_R8_USCALED
 ./Engine/neo-api-vulkan.ads:737:16    - Unknown word (SSCALED)        -- VK_FORMAT_R8_SSCALED
-./Engine/neo-api-vulkan.ads:739:16    - Unknown word (SINT)           -- VK_FORMAT_R8_SINT
 ./Engine/neo-api-vulkan.ads:75:16     - Unknown word (Rasterization) -- -- VkPipelineRasterizationStateCreateFlags Int
 ./Engine/neo-api-vulkan.ads:77:16     - Unknown word (Multisample)   -- -- VkPipelineMultisampleStateCreateFlags Int
 ./Engine/neo-api-vulkan.ads:801:17    - Unknown word (SFLOAT)         -- VK_FORMAT_R16_SFLOAT
 ./Engine/neo-api-vulkan.ads:847:23    - Unknown word (UFLOAT)         -- VK_FORMAT_B10G11R11_UFLOAT_PACK32
-./Engine/neo-api-vulkan.ads:858:17    - Unknown word (RGBA)           -- VK_FORMAT_BC1_RGBA_UNORM_BLOCK
 ./Engine/neo-api-vulkan.ads:882:13    - Unknown word (ASTC)           -- VK_FORMAT_ASTC_4x4_UNORM_BLOCK
 ./Engine/neo-api-vulkan.ads:944:13    - Unknown word (PVRTC)          -- VK_FORMAT_PVRTC1_2BPP_UNORM_BLOCK_IMG
 ./Engine/neo-api-windows.ads:1000:70   - Unknown word (HRAWINPUT)          -- -- HRAWINPUT
@@ -372,7 +362,6 @@ Lines:
 ./Engine/neo-api-windows.ads:1154:30   - Unknown word (lpmsg)               -- function DispatchMessageW (lpmsg : Ptr_MSG) -- const
 ./Engine/neo-api-windows.ads:118:3     - Unknown word (HCBT)                -- HCBT_ACTIVATE : constant
 ./Engine/neo-api-windows.ads:1191:57   - Unknown word (LPCTSTRHMODULE)      -- -- LPCTSTRHMODULE
-./Engine/neo-api-windows.ads:122:9     - Unknown word (GRAYTEXT)            -- COLOR_GRAYTEXT : constant Int_Ptr
 ./Engine/neo-api-windows.ads:129:6     - Unknown word (SCREENSAVE)          -- SC_SCREENSAVE : constant Int_Ptr
 ./Engine/neo-api-windows.ads:130:6     - Unknown word (KEYMENU)             -- SC_KEYMENU : constant Int_Ptr
 ./Engine/neo-api-windows.ads:133:7     - Unknown word (TYPEKEYBOARD)        -- RIM_TYPEKEYBOARD : constant Int_Unsigned
@@ -463,11 +452,9 @@ Lines:
 ./Engine/neo-api-windows.ads:432:7     - Unknown word (lpsz)               -- lpszMenuName : Ptr_Char
 ./Engine/neo-api-windows.ads:451:7     - Unknown word (Gamepad)            -- Gamepad : XINPUT_GAMEPAD
 ./Engine/neo-api-windows.ads:461:7     - Unknown word (RAWINPUTDEVICE)     -- type RAWINPUTDEVICE is record
-./Engine/neo-api-windows.ads:462:55    - Unknown word (USHORT)             -- Unsigned_C := 0;        -- USHORT
 ./Engine/neo-api-windows.ads:469:8     - Unknown word (RAWINPUTDEVICELIST) -- type RAWINPUTDEVICELIST is record
 ./Engine/neo-api-windows.ads:475:8     - Unknown word (RAWINPUTHEADER)     -- type RAWINPUTHEADER is record
 ./Engine/neo-api-windows.ads:483:8     - Unknown word (RAWKEYBOARD)        -- type RAWKEYBOARD is record
-./Engine/neo-api-windows.ads:490:66    - Unknown word (ULONG)              -- 0; -- ULONG
 ./Engine/neo-api-windows.ads:494:8     - Unknown word (RAWMOUSE)           -- type RAWMOUSE is record
 ./Engine/neo-api-windows.ads:511:8     - Unknown word (SCROLLINFO)         -- type SCROLLINFO is record
 ./Engine/neo-api-windows.ads:522:8     - Unknown word (MINMAXINFO)         -- type MINMAXINFO is record
@@ -484,7 +471,6 @@ Lines:
 ./Engine/neo-api-windows.ads:615:67    - Unknown word (LPDWORD)            -- Ptr_Int_Unsigned_C; -- LPDWORD
 ./Engine/neo-api-windows.ads:618:30    - Unknown word (lpcb)               -- lpcbData : Ptr_Int_Unsigned
 ./Engine/neo-api-windows.ads:626:80    - Unknown word (LPSECURITY)         -- SECURITY_ATTRIBUTES; -- LPSECURITY_ATTRIBUTES
-./Engine/neo-api-windows.ads:635:72    - Unknown word (PVOID)              -- Ptr; -- PVOID
 ./Engine/neo-api-windows.ads:651:67    - Unknown word (PUINT)              -- Ptr) -- PUINT
 ./Engine/neo-api-windows.ads:657:53    - Unknown word (LPCSTR)             -- lpProcName : Str_8_C) -- LPCSTR
 ./Engine/neo-api-windows.ads:658:53    - Unknown word (FARPROC)            -- return Ptr            -- FARPROC
@@ -545,11 +531,10 @@ Lines:
 ./Engine/neo-core-compression.adb:74:7      - Unknown word (inbuffer)     -- inbuffer : aliased Thin.ZSTD
 ./Engine/neo-core-compression.adb:78:7      - Unknown word (outbuffer)    -- outbuffer : aliased Thin.ZSTD
 ./Engine/neo-core-console.adb:102:73    - Unknown word (cvar)       -- NULL_STR_UNBOUND; -- A cvar that goes out of scope
-./Engine/neo-core-console.adb:161:41    - Unknown word (Deallocation) -- Free is new Unchecked_Deallocation (Control_State, Ptr
 ./Engine/neo-core-console.adb:16:33     - Unknown word (perserve)   -- Optimize string stuff, perserve config comments, and
-./Engine/neo-core-console.adb:215:10    - Unknown word (Commandline)  -- -- Commandline interaction
-./Engine/neo-core-console.adb:217:9     - Unknown word (Vals)         -- Vals : Str_Unbound := NULL
-./Engine/neo-core-console.adb:368:6     - Unknown word (Initalized)   -- -- Initalized data
+./Engine/neo-core-console.adb:215:10    - Unknown word (Commandline) -- -- Commandline interaction
+./Engine/neo-core-console.adb:217:9     - Unknown word (Vals)        -- Vals : Str_Unbound := NULL
+./Engine/neo-core-console.adb:368:6     - Unknown word (Initalized)  -- -- Initalized data
 ./Engine/neo-core-console.ads:25:43     - Unknown word (cvars)      -- query of commands and cvars
 ./Engine/neo-core-console.ads:64:77     - Unknown word (accessable) -- procedure with arguments accessable to a user through the
 ./Engine/neo-core-console.ads:91:91     - Unknown word (changable)  -- engine. It represents a changable setting that can be
@@ -576,7 +561,6 @@ Lines:
 ./Engine/neo-data-game.adb:406:21    - Unknown word (prelight)   -- -- ShadowObject $_prelight_light_5520
 ./Engine/neo-data-game.adb:512:36    - Unknown word (idmap)      -- Format.Load (Path & ".idmap", File);
 ./Engine/neo-data-game.adb:52:46     - Unknown word (Atten)      -- Atten, Clip,
-./Engine/neo-data-game.adb:59:19     - Unknown word (Struct)     -- package OpenGEX_Struct_Types is new Description
 ./Engine/neo-data-game.adb:66:6      - Unknown word (Exclusivly) -- -- Exclusivly top-level
 ./Engine/neo-data-game.adb:676:12    - Unknown word (Forcefield) -- when Forcefield_Entity => Item := new
 ./Engine/neo-data-game.ads:119:90    - Unknown word (acending)    -- Count); -- Must be in acending order
@@ -636,9 +620,6 @@ Lines:
 ./Engine/neo-world-commands.adb:100:49    - Unknown word (levelname)  -- was started with "map <levelname>", then
 ./Engine/neo-world-commands.adb:149:18    - Unknown word (netchan)    -- -- if( cl->netchan.remoteAddress.type
 ./Engine/neo-world-commands.adb:157:27    - Unknown word (Couldn)     -- Com_Printf( "Couldn't resolve address\n
-./Engine/neo-world-commands.adb:187:10    - Unknown word (strcpy)     -- -- strcpy (text, "console: ")
-./Engine/neo-world-commands.adb:191:14    - Unknown word (strlen)     -- -- p[strlen(p)-1] = 0;
-./Engine/neo-world-commands.adb:193:10    - Unknown word (strcat)     -- -- strcat(text, p);
 ./Engine/neo-world-commands.adb:230:24    - Unknown word (Contraint)  -- exception when Contraint_Error =>
 ./Engine/neo-world-commands.adb:286:8     - Unknown word (helpmenu)   -- --!helpmenu -- This brings up a
 ./Engine/neo-world-commands.adb:287:3     - Unknown word (maprate)    -- --maprate -- This brings up specific
@@ -743,10 +724,6 @@ Lines:
 ./Engine/neo-world-graphics-renderer.adb:969:28    - Unknown word (tranform)    -- -- tranform the light/view origin
 ./Engine/neo-world-graphics-renderer.adb:990:71    - Unknown word (LIGHTFALLOFF) -- Light_Projection); -- LIGHTFALLOFF_S
 ./Engine/neo-world-graphics.adb:1032:33   - Unknown word (rebuffer)   -- Line ("Attempted to rebuffer material " & Path);
-./Engine/neo-world-graphics.adb:1053:29   - Unknown word (unbuffer)   -- Make sure we can't unbuffer a material until all
-./Engine/neo-world-graphics.adb:1053:90   - Unknown word (unbuffered) -- surfaces using it get unbuffered first
-./Engine/neo-world-graphics.adb:1054:64   - Unknown word (Unbuffering) -- References > 0 then Warn ("Unbuffering referenced material
-./Engine/neo-world-graphics.adb:1056:47   - Unknown word (deallocate)  -- image's usage count or deallocate the image
 ./Engine/neo-world-graphics.adb:1130:8    - Unknown word (Syncronization) -- -- Syncronization
 ./Engine/neo-world-graphics.adb:1320:28   - Unknown word (reate)          -- - Reset the indexes reate the inital view
 ./Engine/neo-world-graphics.adb:1320:38   - Unknown word (inital)         -- the indexes reate the inital view
@@ -762,7 +739,6 @@ Lines:
 ./Engine/neo-world-graphics.adb:206:67    - Unknown word (renderpass) -- instead of having the renderpass do the transition to
 ./Engine/neo-world-graphics.adb:371:74    - Unknown word (avaliable)  -- the staging buffer is avaliable
 ./Engine/neo-world-graphics.adb:49:6      - Unknown word (Samper)     -- -- Samper --
-./Engine/neo-world-graphics.adb:805:13    - Unknown word (Unbuffer)   -- procedure Unbuffer_Mesh (Path : Str) is
 ./Engine/neo-world-graphics.adb:837:24    - Unknown word (sepcial)    -- -- Fetch our sepcial "handle" used to Id
 ./Engine/neo-world-graphics.ads:61:117    - Unknown word (Coordiante) -- SFLOAT, -- Texture_Coordiante
 ./Engine/neo-world-impulses.ads:27:39     - Unknown word (entermenu)  -- Game is new Impulse ("entermenu", Callback_Enter_Game
@@ -781,7 +757,6 @@ Lines:
 ./Engine/neo-world-network.adb:231:61    - Unknown word (nettype)        -- cl_pinglist[i].info, "nettype", va("%d", type) );
 ./Engine/neo-world-network.adb:255:18    - Unknown word (numlocalservers) -- cls.numlocalservers = i+1;
 ./Engine/neo-world-network.adb:267:34    - Unknown word (punkbuster)      -- cls.localServers[i].punkbuster = 0;
-./Engine/neo-world-network.adb:271:18    - Unknown word (strncat)         -- strncat(info, "\n", sizeof(info
 ./Engine/neo-world-network.adb:282:34    - Unknown word (SERVERSTATUSREQUESTS) -- for (i = 0; i < MAX_SERVERSTATUSREQUESTS; i++) {
 ./Engine/neo-world-network.adb:333:18    - Unknown word (sscanf)               -- sscanf(s, "%d %d", &score,
 ./Engine/neo-world-network.adb:334:22    - Unknown word (strchr)               -- s = strchr(s, ' ');
@@ -808,8 +783,6 @@ Lines:
 ./Engine/neo-world-network.adb:503:10    - Unknown word (swlen)                -- swlen = LittleLong( len )
 ./Engine/neo-world-network.adb:504:35    - Unknown word (demofile)             -- Write (&swlen, 4, clc.demofile);
 ./Engine/neo-world-network.adb:520:9     - Unknown word (Recieve)              -- -- Recieve
-./Engine/neo-world-network.adb:533:28    - Unknown word (memset)               -- include&lt;string.h&gt; //memset
-./Engine/neo-world-network.adb:534:13    - Unknown word (stdlib)               -- #include&lt;stdlib.h&gt; //exit(0);
 ./Engine/neo-world-network.adb:535:13    - Unknown word (arpa)                 -- #include&lt;arpa/inet.h&gt;
 ./Engine/neo-world-network.adb:535:18    - Unknown word (inet)                 -- #include&lt;arpa/inet.h&gt;
 ./Engine/neo-world-network.adb:538:9     - Unknown word (BUFLEN)               -- #define BUFLEN 512	//Max length of
@@ -851,7 +824,6 @@ Lines:
 ./Engine/neo-world-physics.adb:446:64    - Unknown word (Dyna)             -- mParams.mUseRaycastCCD_DynaDyna);
 ./Engine/neo-world-physics.adb:49:14     - Unknown word (midphase)   -- Params.midphaseDesc.setToDefault(mParams
 ./Engine/neo-world-physics.adb:54:45     - Unknown word (preprocess) -- meshPreprocessParams |= mesh_preprocess_params;
-./Engine/neo-world-physics.adb:73:12     - Unknown word (ifdef)      -- -- #ifdef MODIFY_CONTACTS
 ./Engine/neo-world-physics.adb:92:52     - Unknown word (ACTIVETRANSFORMS) -- PxSceneFlag::eENABLE_ACTIVETRANSFORMS, mParams.mEnableActiveTransf
 ./Engine/neo-world-physics.ads:120:22    - Unknown word (Timestep)   -- mTimestep (1.0f/60.0f)
 ./Engine/neo-world-physics.ads:1785:25   - Unknown word (Allocs)       -- udword mTotalNbAllocs;
@@ -903,7 +875,6 @@ Lines:
 ./Tools/compile-idmap.py:327:4     - Unknown word (Dewm)         -- ## DewmAAS "1.07"
 ./Tools/compile-idmap.py:333:6     - Unknown word (bboxes)       -- ## bboxes
 ./Tools/compile-idmap.py:340:15    - Unknown word (Reachabilities) -- ## allowSwimReachabilities = 0
-./Tools/compile-idmap.py:525:15    - Unknown word (structs)        -- ## Output structs
 ./Tools/compile-idmap.py:534:29    - Unknown word (sanatize)       -- Get the material and sanatize it
 ./Tools/compile-idmap.py:705:19    - Unknown word (worldspawn)     -- ## "classname" "worldspawn"
 ./Tools/compile-idmap.py:705:7     - Unknown word (classname)      -- ## "classname" "worldspawn"
@@ -923,7 +894,6 @@ Lines:
 ./Tools/compile-materials.py:5:6       - Unknown word (diffusemap)   -- ## diffusemap textures/base_door
 ./Tools/compile-materials.py:6:6       - Unknown word (specularmap)  -- ## specularmap textures/base_door
 ./Tools/spm_export.py:167:46    - Unknown word (fcurves)    -- animation_data.action.fcurves
-./Tools/spm_export.py:229:19    - Unknown word (keyframes)  -- print('No keyframes found for armature:
 ./Tools/spm_export.py:27:27     - Unknown word (paritioned) -- Tooltip: 'Export to space paritioned mesh file format (.spm
 ./Tools/spm_export.py:31:3      - Unknown word (bpydoc)     -- __bpydoc__ = """\
 ./Tools/spm_export.py:411:39    - Unknown word (vcolor)     -- writeVertex(self, uv_1, uv_2, vcolor, write_joints, need
@@ -944,7 +914,6 @@ Lines:
 ./Tools/spm_export.py:896:5     - Unknown word (localsp)    -- localsp = bpy.props.BoolProperty
 ./Tools/spm_export.py:897:5     - Unknown word (applymodifiers) -- applymodifiers = bpy.props.BoolProperty
 ./Tools/spm_export.py:914:32    - Unknown word (fileselect)     -- context.window_manager.fileselect_add(self)
-./Tools/spm_import.py:247:13    - Unknown word (fname)      -- tex_fname_1 = None
 ./Tools/stk_kart.py:109:32    - Unknown word (striaght)     -- print("Missing striaght frame for saving straight
 ./Tools/stk_kart.py:12:17     - Unknown word (Joerg)      -- __author__ = ["Joerg Henrichs (hiker), Marianne
 ./Tools/stk_kart.py:12:23     - Unknown word (Henrichs)   -- author__ = ["Joerg Henrichs (hiker), Marianne Gagnon
@@ -975,7 +944,6 @@ Lines:
 ./Tools/stk_material_export.py:160:12    - Unknown word (Soundeffect) -- hasSoundeffect = (convertTextToYN(getIdPrope
 ./Tools/stk_material_export.py:185:41    - Unknown word (soundeffects) -- items pertain to the soundeffects (starting with sfx_
 ./Tools/stk_material_export.py:189:50    - Unknown word (rolloff)      -- strippedName in ['filename', 'rolloff', 'min_speed', 'max
-./Tools/stk_material_export.py:210:21    - Unknown word (cond)         -- cond = mat_dic[prop]['parent
 ./Tools/stk_material_export.py:227:43    - Unknown word (proeprties)   -- # In blender, proeprties use '_', but STK still
 ./Tools/stk_material_export.py:79:5      - Unknown word (limage)     -- limage = bpy.data.images
 ./Tools/stk_material_export.py:81:5      - Unknown word (materfound) -- materfound = False
@@ -990,7 +958,6 @@ Lines:
 ./Tools/stk_panel.py:186:12    - Unknown word (hashlib)       -- import hashlib
 ./Tools/stk_panel.py:193:28    - Unknown word (fullid)        -- generateOpName(prefix, fullid, id):
 ./Tools/stk_panel.py:228:48    - Unknown word (apear)         -- user-visible string to apear in the dropdown for
-./Tools/stk_panel.py:274:22    - Unknown word (objs)          -- seen_objs = {}
 ./Tools/stk_panel.py:326:24    - Unknown word (dictionnary)   -- #! @param values A dictionnary of type { 'value' :
 ./Tools/stk_panel.py:333:58    - Unknown word (stkmenu)       -- generateOpName("screen.stkmenu_set_", fullid, id)
 ./Tools/stk_panel.py:533:52    - Unknown word (tglbool)       -- generateOpName("screen.stk_tglbool_", fullid, id)

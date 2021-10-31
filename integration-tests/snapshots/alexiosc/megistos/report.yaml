@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,html}"]
 Summary:
   files: 745
   filesWithIssues: 718
-  issues: 28219
+  issues: 28130
   errors: 0
 Errors: []
 
@@ -50,7 +50,6 @@ issues:
   - "ATTIC/doc/html/audit_8h.html:65:164     	DUPUSER     	U   	audit.html#ga18\">AUS_DUPUSER</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/audit_8h.html:69:164     	RELOGON     	U   	audit.html#ga20\">AUS_RELOGON</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/audit_8h.html:69:207     	RELOGGING   	U   	&nbsp;\"USER LOGOUT, RELOGGING ON\"</td></tr>"
-  - "ATTIC/doc/html/audit_8h.html:73:164     	SIGNUP      	U   	audit.html#ga22\">AUS_SIGNUP</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/audit_8h.html:75:164     	DISCON      	U   	audit.html#ga23\">AUS_DISCON</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/audit_8h.html:79:164     	CREDHUP     	U   	audit.html#ga25\">AUS_CREDHUP</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/audit_8h.html:81:164     	TIMEHUP     	U   	audit.html#ga26\">AUS_TIMEHUP</a>&nbsp;&nbsp;&nbsp"
@@ -219,7 +218,6 @@ issues:
   - "ATTIC/doc/html/config_8h.html:170:156   	REMSYSBIN       	U   	config_8h.html#a69\">REMSYSBIN</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/config_8h.html:170:198   	remsys          	U   	nbsp;&nbsp;MODULEDIR\"/remsys\"</td></tr>"
   - "ATTIC/doc/html/config_8h.html:172:156   	SIGNUPBIN       	U   	config_8h.html#a70\">SIGNUPBIN</a>&nbsp;&nbsp;&nbsp"
-  - "ATTIC/doc/html/config_8h.html:172:195   	signup          	U   	&nbsp;&nbsp;BINDIR\"/signup\"</td></tr>"
   - "ATTIC/doc/html/config_8h.html:174:156   	STATSBIN        	U   	config_8h.html#a71\">STATSBIN</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/config_8h.html:176:156   	STTYBIN         	U   	config_8h.html#a72\">STTYBIN</a>&nbsp;&nbsp;&nbsp"
   - "ATTIC/doc/html/config_8h.html:178:195   	updown          	U   	&nbsp;&nbsp;BINDIR\"/updown\"</td></tr>"
@@ -701,7 +699,6 @@ issues:
   - "ATTIC/doc/html/group__channels.html:363:37  	respawn 	U   	channel, causing it to respawn from scratch. Any user"
   - "ATTIC/doc/html/group__dialog.html:12:111    	serialised          	U   	few advantages over serialised question-answer data"
   - "ATTIC/doc/html/group__dialog.html:16:57     	minimise            	U   	to be entered. Try to minimise the information. Screen"
-  - "ATTIC/doc/html/group__dialog.html:79:51     	submenu             	U   	is presented with a submenu of the choices specified"
   - "ATTIC/doc/html/group__dialog.html:85:125    	Yessi               	U   	visible choices to `Yessi', `Nope,', and leaving"
   - "ATTIC/doc/html/group__dialog.html:94:263    	Turbovision         	U   	a bit like Borland's Turbovision (which I was programming"
   - "ATTIC/doc/html/group__dialog.html:100:254   	selcting            	U   	code> is equivalent to selcting the cancel button. The"
@@ -776,7 +773,6 @@ issues:
   - "ATTIC/doc/html/group__useracc.html:114:197  	newclass        	U   	char *userid, char *newclass, int permanent)</td"
   - "ATTIC/doc/html/group__useracc.html:627:60   	ackowledgement  	U   	sends back delivery ackowledgement to the original user"
   - "ATTIC/doc/html/group__useracc.html:1068:53  	canonicalised   	U   	to be online, it is canonicalised and the function returns"
-  - "ATTIC/doc/html/group__USY__flags.html:66:209    	Signup      	U   	nbsp;&nbsp;26 /**&lt; Signup logs (subset of audit"
   - "ATTIC/doc/html/group__USY__flags.html:165:248   	victimised  	U   	deletion mark from the victimised user.</li></ul>"
   - "ATTIC/doc/html/index.html:5:32      	treefrm 	U   	src=\"tree.html\" name=\"treefrm\">"
   - "ATTIC/doc/html/index.html:6:32      	basefrm 	U   	src=\"main.html\" name=\"basefrm\">"
@@ -2773,7 +2769,6 @@ issues:
   - "ATTIC/src/modules/adventure/infoint/fileio.c:375:17     	Argh	U   	error_fatal (\"Argh, fcopy() failed. Dying"
   - "ATTIC/src/modules/adventure/infoint/input.c:169:10  	cbuf	U   	char *cbuf, *buffer;"
   - "ATTIC/src/modules/adventure/infoint/input.c:325:17  	tbuf	U   	char *cbuf, *tbuf, *tp;"
-  - "ATTIC/src/modules/adventure/infoint/interpre.c:447:6    	println 	U   	println_return ();"
   - "ATTIC/src/modules/adventure/infoint/math.c:165:4    	Aritmetic   	U   	* Aritmetic shift +/- n bits"
   - "ATTIC/src/modules/adventure/infoint/memory.c:73:22      	flink   	U   	struct cache_entry *flink;"
   - "ATTIC/src/modules/adventure/infoint/memory.c:85:36      	cachep  	U   	entry_t *current_code_cachep = NULL;"
@@ -3791,6 +3786,7 @@ issues:
   - "ATTIC/src/system/README.md:8:22     	impelemntation  	U   	**bbslogin** is an impelemntation of the Unix `login`"
   - "ATTIC/src/system/README.md:13:95    	arbitraty       	U   	of this allows pretty arbitraty things to be implemeted"
   - "ATTIC/src/system/README.md:13:118   	implemeted      	U   	arbitraty things to be implemeted as file ‘transfer’ protocols"
+  - "ATTIC/src/system/README.md:14:5     	signup          	U   	* **signup** The new user sign"
   - "ATTIC/src/system/signup/signup.c:4:25       	Loukas              	U   	AUTHORS: Alexios, Loukas"
   - "ATTIC/src/system/signup/signup.c:82:26      	passowrd            	U   	Added code to reflect passowrd policy changes, as seen"
   - "ATTIC/src/system/signup/signup.c:129:35     	askxlt              	U   	asklang = 1, askansi = 1, askxlt = 1, xlation = 1;"

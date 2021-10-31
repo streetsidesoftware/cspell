@@ -110,6 +110,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'typescript', extensions: ['.ts'] },
     { id: 'typescriptreact', extensions: ['.tsx'] },
     { id: 'vb', extensions: ['.vb', '.brs', '.vbs', '.bas'] },
+    { id: 'vue', extensions: ['.vue'] },
     {
         id: 'xml',
         extensions: [

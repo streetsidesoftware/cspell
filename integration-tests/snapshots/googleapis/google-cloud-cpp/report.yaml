@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
   files: 1886
-  filesWithIssues: 1158
-  issues: 8850
+  filesWithIssues: 1153
+  issues: 8809
   errors: 0
 Errors: []
 
@@ -579,7 +579,6 @@ issues:
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:321:25    	nonconformant           	U   	std::set<std::string> nonconformant_url_tests{\"ListObjects"
   - "google/cloud/storage/tests/unified_credentials_integration_test.cc:187:14   	genrsa  	U   	// openssl genrsa -des3 -out cert.key"
   - "google/cloud/storage/tools/make_jwt_assertion_for_test_data.py:64:8     	strs        	U   	kv_strs = []"
-  - "google/cloud/storage/tools/make_jwt_assertion_for_test_data.py:74:43    	ints        	U   	only map to strings and ints, so we can take this"
   - "google/cloud/storage/tools/make_jwt_assertion_for_test_data.py:120:21   	nondefaults 	U   	payload_str_for_nondefaults = payload_str(ALT_SCOPE"
   - "google/cloud/storage/well_known_headers_test.cc:68:31   	ABCDEFGHIJ  	U   	string key(\"0123456789-ABCDEFGHIJ-0123456789\");"
   - "google/cloud/storage/well_known_headers.h:273:18    	minchar 	U   	constexpr auto minchar = (std::numeric_limits"
