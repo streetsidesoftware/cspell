@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.12.4](https://github.com/streetsidesoftware/cspell/compare/v5.12.3...v5.12.4) (2021-10-31)
+
+
+### Bug Fixes
+
+* adjust the AWS integration test to match repo changes. ([#1912](https://github.com/streetsidesoftware/cspell/issues/1912)) ([5918f32](https://github.com/streetsidesoftware/cspell/commit/5918f324999cceef6f935a0a7b994a3a9f216147))
+* Change `--wordsOnly` option to `--words-only` ([#1928](https://github.com/streetsidesoftware/cspell/issues/1928)) ([aac621f](https://github.com/streetsidesoftware/cspell/commit/aac621f46b6f1f60185e33cd06d9aab06438bf8f))
+* In Document settings. ([#1925](https://github.com/streetsidesoftware/cspell/issues/1925)) ([01c12ce](https://github.com/streetsidesoftware/cspell/commit/01c12ce4113516527abfa0ef9b7fa7a883c18520)), closes [#1628](https://github.com/streetsidesoftware/cspell/issues/1628) [#1629](https://github.com/streetsidesoftware/cspell/issues/1629)
+* Remove unnecessary dependency ([#1929](https://github.com/streetsidesoftware/cspell/issues/1929)) ([8bc7b1c](https://github.com/streetsidesoftware/cspell/commit/8bc7b1cc801afe50cbe765af183d187fe2bb6dd9))
+* Update software terms ([#1909](https://github.com/streetsidesoftware/cspell/issues/1909)) ([b9c8263](https://github.com/streetsidesoftware/cspell/commit/b9c8263f90afd1a4d961ac7227b0699c64b54333))
+* Update software terms and integration snapshots. ([#1916](https://github.com/streetsidesoftware/cspell/issues/1916)) ([0248330](https://github.com/streetsidesoftware/cspell/commit/0248330d0bf25e563bebba64333942bc04ca0275))
+
+
+
+
+
 ## [5.12.3](https://github.com/streetsidesoftware/cspell/compare/v5.12.2...v5.12.3) (2021-10-08)
 
 

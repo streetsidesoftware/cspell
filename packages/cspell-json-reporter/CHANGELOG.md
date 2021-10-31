@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.12.4](https://github.com/streetsidesoftware/cspell/compare/v5.12.3...v5.12.4) (2021-10-31)
+
+
+### Bug Fixes
+
+* Remove unnecessary dependency ([#1929](https://github.com/streetsidesoftware/cspell/issues/1929)) ([8bc7b1c](https://github.com/streetsidesoftware/cspell/commit/8bc7b1cc801afe50cbe765af183d187fe2bb6dd9))
+
+
+
+
+
 ## [5.12.3](https://github.com/streetsidesoftware/cspell/compare/v5.12.2...v5.12.3) (2021-10-08)
 
 **Note:** Version bump only for package @cspell/cspell-json-reporter

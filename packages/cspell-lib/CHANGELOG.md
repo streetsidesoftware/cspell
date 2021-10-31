@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.12.4](https://github.com/streetsidesoftware/cspell/compare/v5.12.3...v5.12.4) (2021-10-31)
+
+
+### Bug Fixes
+
+* In Document settings. ([#1925](https://github.com/streetsidesoftware/cspell/issues/1925)) ([01c12ce](https://github.com/streetsidesoftware/cspell/commit/01c12ce4113516527abfa0ef9b7fa7a883c18520)), closes [#1628](https://github.com/streetsidesoftware/cspell/issues/1628) [#1629](https://github.com/streetsidesoftware/cspell/issues/1629)
+
+
+
+
+
 ## [5.12.3](https://github.com/streetsidesoftware/cspell/compare/v5.12.2...v5.12.3) (2021-10-08)
 
 **Note:** Version bump only for package cspell-lib
