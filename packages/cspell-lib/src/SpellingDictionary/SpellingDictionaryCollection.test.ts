@@ -31,7 +31,7 @@ describe('Verify using multiple dictionaries', () => {
 
     const wordsLegacy = ['error', 'code', 'system', 'ctrl'];
 
-    // cspell:ignore pinkberry
+    // cspell:ignore pinkberry behaviour
     const wordsNoSug = ['colour', 'behaviour', 'favour', 'pinkberry'];
 
     const dictNoSug = createSpellingDictionary(wordsNoSug, 'words-no-suggest', 'test', { noSuggest: true });

@@ -240,7 +240,7 @@ const sampleWords = [
 ];
 
 const flagWords = ['hte', 'flagged', 'ignored'];
-
+// cspell:ignore behaviour
 const rejectWords = ['!colour', '!behaviour', '!favour'];
 
 // cspell:ignore crazzzy wordz
