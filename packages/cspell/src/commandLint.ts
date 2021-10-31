@@ -58,7 +58,10 @@ export function commandLint(prog: Command): Command {
                 'Force programming language for unknown extensions. i.e. "php" or "scala"'
             ).hideHelp()
         )
-        .option('--wordsOnly', 'Only output the words not found in the dictionaries.')
+        .option('--words-only', 'Only output the words not found in the dictionaries.')
+        .addOption(
+            new CommanderOption('--wordsOnly', 'Only output the words not found in the dictionaries.').hideHelp()
+        )
         .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option(
