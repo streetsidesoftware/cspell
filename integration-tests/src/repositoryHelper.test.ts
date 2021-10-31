@@ -47,7 +47,7 @@ describe('Validate repository helper', () => {
             const logger = new CaptureLogger();
             await rm(join(repositoryDir, path));
             commit = commit || 'main';
-            expect(await checkoutRepositoryAsync(logger, repo, path, commit)).toBe(expected);
+            expect(await checkoutRepositoryAsync(logger, repo, path, commit, undefined)).toBe(expected);
             // console.log(logger.logs);
             // console.log(logger.errors);
         },

@@ -40,6 +40,7 @@ interface RepositoryInfo {
     path: string;
     url: string;
     commit: string;
+    defaultBranch: string;
 }
 
 export async function fetchRepositoryInfoForRepo(url: string): Promise<RepositoryInfo> {
@@ -61,6 +62,7 @@ export async function fetchRepositoryInfoForRepo(url: string): Promise<Repositor
         path,
         url: httpsUrl,
         commit: b.data.commit.sha || branch,
+        defaultBranch: branch,
     };
 }
 
@@ -68,14 +70,21 @@ export async function checkoutRepositoryAsync(
     logger: Logger,
     url: string,
     path: string,
-    commit: string
+    commit: string,
+    branch: string | undefined
 ): Promise<boolean> {
     const { log, error } = logger;
     path = Path.resolve(Path.join(repositoryDir, path));
     if (!fs.existsSync(path)) {
         try {
             const repoInfo = await fetchRepositoryInfoForRepo(url);
-            const c = await cloneRepo(logger, url, path, commit === repoInfo.commit ? minCommitDepth : undefined);
+            const c = await cloneRepo(
+                logger,
+                url,
+                path,
+                commit === repoInfo.commit ? minCommitDepth : undefined,
+                !branch || branch === repoInfo.defaultBranch
+            );
             if (!c) {
                 return false;
             }
@@ -102,7 +111,8 @@ async function cloneRepo(
     { log, error }: Logger,
     url: string,
     path: string,
-    depth: number | undefined
+    depth: number | undefined,
+    useSingleBranch: boolean
 ): Promise<boolean> {
     log(`Cloning ${url} depth: ${depth || 'unlimited'}`);
     await mkdirp(Path.dirname(path));
@@ -110,10 +120,13 @@ async function cloneRepo(
     if (depth) {
         options.push(`--depth=${depth}`);
     }
+    if (useSingleBranch) {
+        options.push('--single-branch');
+    }
     try {
         const git = simpleGit();
         const c = await git.clone(url, path, options);
-        log(`Cloned: ${c}`);
+        log(`Cloned: ${c} with options: ${options.join(' ')}`);
     } catch (e) {
         error(e);
         return false;
