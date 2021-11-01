@@ -8,7 +8,7 @@ export async function readTrieFileFromConfig(configLocation: string): Promise<Tr
     const json = await fs.readFile(configLocation, 'utf-8');
     const config = JSON.parse(json.replace(/\/\/.*/g, ''));
     const dictDef = (config && config.dictionaryDefinitions && config.dictionaryDefinitions[0]) || {};
-    const dictPath = dictDef.file || '';
+    const dictPath = path.join(dictDef.path || '', dictDef.file || '');
     const pathToDict = path.join(path.dirname(configLocation), dictPath);
     return readTrieFile(pathToDict);
 }
