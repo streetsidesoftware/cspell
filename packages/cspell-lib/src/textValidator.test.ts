@@ -209,14 +209,18 @@ describe('Validate textValidator functions', () => {
     });
 
     test.each`
-        text        | ignoreWords   | expected
-        ${'red'}    | ${[]}         | ${[]}
-        ${'color'}  | ${[]}         | ${[ov({ text: 'color', isFound: false })]}
-        ${'colour'} | ${[]}         | ${[ov({ text: 'colour', isFlagged: true })]}
-        ${'colour'} | ${['colour']} | ${[]}
-    `('Validate forbidden words', ({ text, ignoreWords, expected }) => {
+        text                           | ignoreWords   | flagWords       | expected
+        ${'red'}                       | ${[]}         | ${undefined}    | ${[]}
+        ${'color'}                     | ${[]}         | ${undefined}    | ${[ov({ text: 'color', isFound: false })]}
+        ${'colour'}                    | ${[]}         | ${undefined}    | ${[ov({ text: 'colour', isFlagged: true })]}
+        ${'colour'}                    | ${['colour']} | ${undefined}    | ${[]}
+        ${'The ant ate the antelope.'} | ${[]}         | ${['fbd']}      | ${[]}
+        ${'The ant ate the antelope.'} | ${[]}         | ${['ate']}      | ${[ov({ text: 'ate', isFlagged: true })]}
+        ${'theANT_ateThe_antelope.'}   | ${[]}         | ${['ate']}      | ${[ov({ text: 'ate', isFlagged: true })]}
+        ${'The ant ate the antelope.'} | ${[]}         | ${['antelope']} | ${[ov({ text: 'antelope', isFlagged: true })]}
+    `('Validate forbidden words', ({ text, ignoreWords, expected, flagWords }) => {
         const dict = getSpellingDictionaryCollectionSync({ ignoreWords });
-        const result = [...validateText(text, dict, { ignoreCase: false })];
+        const result = [...validateText(text, dict, { ignoreCase: false, flagWords })];
         expect(result).toEqual(expected);
     });
 });
