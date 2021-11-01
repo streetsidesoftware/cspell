@@ -50,7 +50,7 @@ describe('Validate findWord', () => {
         ],
 
         // Compounding enabled, but matching whole words (compounding not used).
-        ['Code', { matchCase: true, compoundMode: 'compound' }, frCompoundFound(false)],
+        ['Code', { matchCase: true, compoundMode: 'compound' }, frFound(false)],
         ['code', { matchCase: true, compoundMode: 'compound' }, frFound('code')],
         ['cafe', { matchCase: true, compoundMode: 'compound' }, frFound(false)],
         ['cafe', { matchCase: false, compoundMode: 'compound' }, frFound('cafe', { caseMatched: false })],
