@@ -22,13 +22,13 @@ describe('Validate Dutch Suggestions', () => {
     );
 
     // cspell:ignore burtbewoners burgbewoners
-    // cspell:ignore buurtbwoners buurtbewoner
+    // cspell:ignore buurtbwoners buurtbewoner buurbewoners
 
     test.each`
         word               | numSuggestions | expected
         ${'Mexico-Stad'}   | ${2}           | ${[sr('Mexico-Stad', 0), sr('mexico-stad', 2)]}
         ${'mexico-stad'}   | ${2}           | ${[sr('mexico-stad', 0), sr('Mexico-Stad', 2)]}
-        ${'buurtbewoners'} | ${3}           | ${[sr('buurtbewoners', 0), sr('buurtbewoners-', 86), sr('buurtbewoner', 88)]}
+        ${'buurtbewoners'} | ${3}           | ${[sr('buurtbewoners', 0), sr('buurtbewoner', 88), sr('buurbewoners', 96)]}
         ${'burtbewoners'}  | ${2}           | ${ac(sr('burgbewoners', 96), sr('buurtbewoners', 97))}
         ${'buurtbwoners'}  | ${1}           | ${[sr('buurtbewoners', 93)]}
         ${'buurtbewoners'} | ${1}           | ${[sr('buurtbewoners', 0)]}

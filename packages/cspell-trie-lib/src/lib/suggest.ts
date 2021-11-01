@@ -11,6 +11,7 @@ const postSwapCost = swapCost - baseCost;
 const insertSpaceCost = -1;
 const mapSubCost = 1;
 const maxCostScale = 0.5;
+const discourageInsertCost = baseCost;
 
 const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 
@@ -71,10 +72,14 @@ export function* genCompoundableSuggestions(
     const stack: Range[] = [];
     const x = ' ' + word;
     const mx = x.length - 1;
-    const specialCosts: Record<string, number | undefined> = {
+    const specialInsCosts: Record<string, number | undefined> = Object.assign(Object.create(null), {
         [WORD_SEPARATOR]: insertSpaceCost,
         [JOIN_SEPARATOR]: insertSpaceCost,
-    };
+    });
+
+    const specialSubCosts: Record<string, number | undefined> = Object.assign(Object.create(null), {
+        '-': discourageInsertCost,
+    });
 
     let stopNow = false;
     let costLimit: MaxCost = bc * Math.min(word.length * maxCostScale, changeLimit);
@@ -143,8 +148,8 @@ export function* genCompoundableSuggestions(
         }
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
-        const c = bc - d;
-        const ci = c + (specialCosts[w] || 0);
+        const c = bc - d + (specialSubCosts[w] || 0);
+        const ci = c + (specialInsCosts[w] || 0);
 
         // Setup first column
         matrix[d] = matrix[d] || [];

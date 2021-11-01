@@ -128,6 +128,12 @@ export class IterableHunspellReader implements Iterable<string> {
         return this.dicWordsSeq().map((w) => w.word);
     }
 
+    /**
+     *
+     * @param affFile - path to aff file.
+     * @param dicFile - path to dic file.
+     * @returns IterableHunspellReader
+     */
     static async createFromFiles(affFile: string, dicFile: string) {
         const aff = await parseAffFileToAff(affFile, defaultEncoding);
         const buffer = await fs.readFile(dicFile);

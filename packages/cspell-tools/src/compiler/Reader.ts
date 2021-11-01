@@ -89,7 +89,7 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
     return {
         size: reader.dic.length,
         annotatedWords() {
-            return reader.seqAffWords().pipe(_mapAffWords).pipe(normalizeAndDedupe);
+            return reader.seqAffWords().pipe(_mapAffWords, normalizeAndDedupe);
         },
         rawWords,
     };
@@ -186,8 +186,11 @@ function* dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord>
 }
 
 function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
+    const hasSpecial = /[~+!]/;
     for (const affWord of affWords) {
         const { word, flags } = affWord;
+        // For now do not include words with special characters.
+        if (hasSpecial.test(word)) continue;
         const compound = flags.isCompoundForbidden ? '' : COMPOUND_FIX;
         const forbid = flags.isForbiddenWord ? FORBID_PREFIX : '';
         if (!forbid) {
