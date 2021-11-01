@@ -23,6 +23,7 @@ export interface TraceOptions {
     languageId?: LanguageId | LanguageId[];
     locale?: LocaleId;
     ignoreCase?: boolean;
+    allowCompoundWords?: boolean;
 }
 
 export async function traceWords(
@@ -30,14 +31,17 @@ export async function traceWords(
     settings: CSpellSettings,
     options: TraceOptions | undefined
 ): Promise<TraceResult[]> {
-    const { languageId, locale: language, ignoreCase = true } = options || {};
+    const { languageId, locale: language, ignoreCase = true, allowCompoundWords } = options || {};
 
     async function finalize(config: CSpellSettings): Promise<{
         activeDictionaries: DictionaryId[];
         config: CSpellSettings;
         dicts: SpellingDictionaryCollection;
     }> {
-        const withLocale = mergeSettings(config, { language });
+        const withLocale = mergeSettings(config, {
+            language,
+            allowCompoundWords: allowCompoundWords ?? config.allowCompoundWords,
+        });
         const withLanguageId = calcSettingsForLanguageId(
             withLocale,
             languageId ?? withLocale.languageId ?? 'plaintext'
