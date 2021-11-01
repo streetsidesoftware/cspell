@@ -239,6 +239,7 @@ const sampleWords = [
     'worm',
 ];
 
+// cspell:ignore hte
 const flagWords = ['hte', 'flagged', 'ignored'];
 // cspell:ignore behaviour
 const rejectWords = ['!colour', '!behaviour', '!favour'];

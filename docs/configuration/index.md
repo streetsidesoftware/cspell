@@ -30,6 +30,8 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
 #### Example `cspell.json` file
 
+<!--- cspell:ignore hte -->
+
 ```javascript
 // cSpell Settings
 {

@@ -25,7 +25,7 @@ describe('Verify trace', () => {
         );
     });
 
-    // cspell:ignore *error* *code*
+    // cspell:ignore *error* *code* hte
     test.each`
         word           | languageId   | locale       | ignoreCase | allowCompoundWords | dictName           | dictActive | found    | forbidden | noSuggest | foundWord
         ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}

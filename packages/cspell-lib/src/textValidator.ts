@@ -153,12 +153,9 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
 
             const codeWordResults = Text.extractWordsFromCodeTextOffset(vr)
                 .filter(filterAlreadyChecked)
-                .filter(rememberFilter((wo) => wo.text.length >= minWordLength))
                 .map((t) => ({ ...t, line: vr.line }))
-                .map((wo) => {
-                    const vr: ValidationResult = wo;
-                    return vr;
-                })
+                .map(checkFlagWords)
+                .filter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged))
                 .map((wo) => (wo.isFlagged ? wo : checkWord(wo, hasWordOptions)))
                 .filter(rememberFilter((wo) => wo.isFlagged || !wo.isFound))
                 .filter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))) // Filter out any repeated characters like xxxxxxxxxx
@@ -180,9 +177,9 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         function checkPossibleWords(possibleWord: TextOffset) {
             const mismatches: ValidationResult[] = Text.extractWordsFromTextOffset(possibleWord)
                 .filter(filterAlreadyChecked)
-                .filter(rememberFilter((wo) => wo.text.length >= minWordLength))
                 .map((wo) => ({ ...wo, line: lineSegment }))
                 .map(checkFlagWords)
+                .filter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged))
                 .concatMap(checkFullWord)
                 .toArray();
             if (mismatches.length) {
