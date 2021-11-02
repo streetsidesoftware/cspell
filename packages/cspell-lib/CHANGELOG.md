@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.12.5](https://github.com/streetsidesoftware/cspell/compare/v5.12.4...v5.12.5) (2021-11-02)
+
+
+### Bug Fixes
+
+* Add trace options ([#1939](https://github.com/streetsidesoftware/cspell/issues/1939)) ([191fc52](https://github.com/streetsidesoftware/cspell/commit/191fc52361d3f68d10be169b86d76359c848bf90))
+* Make sure flaggedWords are always checked. ([#1935](https://github.com/streetsidesoftware/cspell/issues/1935)) ([dfbfddd](https://github.com/streetsidesoftware/cspell/commit/dfbfddd04337854425320a2a25836dacdb7ecc99)), closes [#1895](https://github.com/streetsidesoftware/cspell/issues/1895)
+
+
+
+
+
 ## [5.12.4](https://github.com/streetsidesoftware/cspell/compare/v5.12.3...v5.12.4) (2021-10-31)
 
 

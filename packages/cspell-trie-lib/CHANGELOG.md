@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.12.5](https://github.com/streetsidesoftware/cspell/compare/v5.12.4...v5.12.5) (2021-11-02)
+
+
+### Bug Fixes
+
+* Fix reading dictionary test to use `path` ([#1938](https://github.com/streetsidesoftware/cspell/issues/1938)) ([fa4ea3f](https://github.com/streetsidesoftware/cspell/commit/fa4ea3f0a379c5175fe3e930e1915f4521295583))
+* prevent suggesting word break characters ([#1933](https://github.com/streetsidesoftware/cspell/issues/1933)) ([42ffb98](https://github.com/streetsidesoftware/cspell/commit/42ffb984b593e7d1651db7999474749e00028e48))
+
+
+
+
+
 ## [5.12.4](https://github.com/streetsidesoftware/cspell/compare/v5.12.3...v5.12.4) (2021-10-31)
 
 **Note:** Version bump only for package cspell-trie-lib
