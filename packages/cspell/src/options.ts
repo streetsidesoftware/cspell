@@ -63,7 +63,10 @@ export interface CSpellApplicationOptions extends BaseOptions {
     gitignoreRoot?: string | string[];
 }
 
-export type TraceOptions = BaseOptions;
+export interface TraceOptions extends BaseOptions {
+    allowCompoundWords?: boolean;
+    ignoreCase?: boolean;
+}
 
 export interface BaseOptions {
     config?: string;

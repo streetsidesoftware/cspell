@@ -1,4 +1,4 @@
-import { Command } from 'commander';
+import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { TraceOptions } from './options';
 import { emitTraceResults } from './traceEmitter';
@@ -23,7 +23,14 @@ export function commandTrace(prog: Command): Command {
             '--locale <locale>',
             'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
         )
-        .option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
+        .option('--language-id <language>', 'Use programming language. i.e. "php" or "scala"')
+        .addOption(
+            new CommanderOption('--languageId <language>', 'Use programming language. i.e. "php" or "scala"').hideHelp()
+        )
+        .option('--allow-compound-words', 'Turn on allowCompoundWords')
+        .addOption(new CommanderOption('--allowCompoundWords', 'Turn on allowCompoundWords').hideHelp())
+        .option('--no-allow-compound-words', 'Turn off allowCompoundWords')
+        .option('--no-ignore-case', 'Do not ignore case and accents when searching for words')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
         .arguments('<words...>')
