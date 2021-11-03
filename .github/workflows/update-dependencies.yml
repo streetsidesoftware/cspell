@@ -28,7 +28,7 @@ jobs:
         run: |
           echo "${{ toJson(github.event.inputs) }}"
       - name: Checkout code
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.4.0
         with:
           ref: ${{ env.REF_BRANCH }}
       - name: Update Root
