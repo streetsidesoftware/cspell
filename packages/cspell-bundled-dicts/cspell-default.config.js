@@ -130,7 +130,9 @@ const settings = {
         '@cspell/dict-rust/cspell-ext.json',
         '@cspell/dict-scala/cspell-ext.json',
         '@cspell/dict-software-terms/cspell-ext.json',
+        '@cspell/dict-swift/cspell-ext.json',
         '@cspell/dict-typescript/cspell-ext.json',
+        '@cspell/dict-vue/cspell-ext.json',
     ],
 };
 module.exports = settings;
