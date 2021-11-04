@@ -300,7 +300,12 @@ export interface BaseSetting {
     allowCompoundWords?: boolean;
 
     /**
-     * Words must match case rules.
+     * Determines if words must match case and accent rules.
+     *
+     * - `false` - Case is ignored and accents can be missing on the entire word.
+     *   Incorrect accents or partially missing accents will be marked as incorrect.
+     * - `true` - Case and accents are enforced.
+     *
      * @default false
      */
     caseSensitive?: boolean;
