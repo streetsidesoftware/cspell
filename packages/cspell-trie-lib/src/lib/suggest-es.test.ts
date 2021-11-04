@@ -8,6 +8,7 @@ function getTrie() {
 describe('Validate Spanish Suggestions', () => {
     // cspell:locale en,es
     // cspell:ignore Carmjen
+    // cspell:disableCaseSensitive
     test.each`
         word           | ignoreCase | expectedWords
         ${'carmjen'}   | ${false}   | ${['carmen', 'carmene', 'carmena', 'carmená', 'carmené', 'carmeno', 'carmenó', 'carmenen']}

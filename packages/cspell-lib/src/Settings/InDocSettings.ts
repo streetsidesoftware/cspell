@@ -26,6 +26,7 @@ function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
     const possibleSetting = match.trim();
     const settingParsers: [RegExp, (m: string) => CSpellUserSettings][] = [
         [/^(?:enable|disable)(?:allow)?CompoundWords/i, parseCompoundWords],
+        [/^(?:enable|disable)CaseSensitive/i, parseCaseSensitive],
         [/^words?\s/i, parseWords],
         [/^ignore(?:words?)?\s/i, parseIgnoreWords],
         [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
@@ -45,6 +46,11 @@ function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
 function parseCompoundWords(match: string): CSpellUserSettings {
     const allowCompoundWords = /enable/i.test(match);
     return { id: 'in-doc-allowCompoundWords', allowCompoundWords };
+}
+
+function parseCaseSensitive(match: string): CSpellUserSettings {
+    const caseSensitive = /enable/i.test(match);
+    return { id: 'in-doc-caseSensitive', caseSensitive };
 }
 
 function parseWords(match: string): CSpellUserSettings {
