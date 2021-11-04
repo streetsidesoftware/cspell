@@ -30,7 +30,7 @@ Sets the default trust level
 
 #### Defined in
 
-[CSpellSettingsDef.ts:235](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L235)
+[CSpellSettingsDef.ts:235](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L235)
 
 ___
 
@@ -42,7 +42,7 @@ Glob patterns of locations that contain ALWAYS trusted files
 
 #### Defined in
 
-[CSpellSettingsDef.ts:224](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L224)
+[CSpellSettingsDef.ts:224](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L224)
 
 ___
 
@@ -54,4 +54,4 @@ Glob patterns of locations that contain NEVER trusted files
 
 #### Defined in
 
-[CSpellSettingsDef.ts:229](https://github.com/streetsidesoftware/cspell/blob/34586d56/packages/cspell-types/src/CSpellSettingsDef.ts#L229)
+[CSpellSettingsDef.ts:229](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L229)
