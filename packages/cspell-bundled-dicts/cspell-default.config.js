@@ -33,11 +33,6 @@ const settings = {
     ],
     languageSettings: [
         {
-            languageId: 'csharp',
-            allowCompoundWords: true,
-            dictionaries: ['csharp', 'dotnet', 'npm'],
-        },
-        {
             languageId: 'javascript,javascriptreact',
             dictionaries: ['typescript', 'node', 'npm'],
         },
