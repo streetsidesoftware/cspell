@@ -108,6 +108,8 @@ describe('Validate InDocSettings', () => {
         test                                      | text                                    | expected
         ${'Empty Doc'}                            | ${''}                                   | ${{ id: 'in-doc-settings' }}
         ${'sampleTextWithIncompleteInDocSetting'} | ${sampleTextWithIncompleteInDocSetting} | ${oc({ words: ['const'], ignoreWords: ['popoutlist', 'again'], dictionaries: ['php'] })}
+        ${'enableCaseSensitive'}                  | ${'// cspell:enableCaseSensitive'}      | ${oc({ caseSensitive: true })}
+        ${'disableCaseSensitive'}                 | ${'// cspell:disableCaseSensitive'}     | ${oc({ caseSensitive: false })}
     `('extract setting: $test', ({ text, expected }) => {
         expect(InDoc.getInDocumentSettings(text)).toEqual(expected);
     });
