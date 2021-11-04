@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.12.6](https://github.com/streetsidesoftware/cspell/compare/v5.12.5...v5.12.6) (2021-11-04)
+
+
+### Bug Fixes
+
+* Include configuration for VUE and Swift by default. ([#1946](https://github.com/streetsidesoftware/cspell/issues/1946)) ([b57e86d](https://github.com/streetsidesoftware/cspell/commit/b57e86dfa620eab5f488b7dad9106865e1a4bcf2))
+
+
+
+
+
 ## [5.12.5](https://github.com/streetsidesoftware/cspell/compare/v5.12.4...v5.12.5) (2021-11-02)
 
 
