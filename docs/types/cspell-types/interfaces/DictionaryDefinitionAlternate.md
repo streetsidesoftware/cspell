@@ -4,7 +4,7 @@
 
 Only for legacy dictionary definitions
 
-**`deprecated`**
+**`deprecated`** true
 
 **`deprecationmessage`** Use `DictionaryDefinitionPreferred`
 
@@ -40,7 +40,7 @@ Optional description
 
 #### Defined in
 
-[CSpellSettingsDef.ts:373](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L373)
+[CSpellSettingsDef.ts:373](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L373)
 
 ___
 
@@ -50,13 +50,13 @@ ___
 
 Path to the file, only for legacy dictionary definitions
 
-**`deprecated`**
+**`deprecated`** true
 
 **`deprecationmessage`** Use `path` instead.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:427](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L427)
+[CSpellSettingsDef.ts:427](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L427)
 
 ___
 
@@ -79,7 +79,7 @@ Name Format:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:371](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L371)
+[CSpellSettingsDef.ts:371](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L371)
 
 ___
 
@@ -101,7 +101,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:387](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L387)
+[CSpellSettingsDef.ts:387](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L387)
 
 ___
 
@@ -117,7 +117,7 @@ Replacement pairs
 
 #### Defined in
 
-[CSpellSettingsDef.ts:375](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L375)
+[CSpellSettingsDef.ts:375](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L375)
 
 ___
 
@@ -140,7 +140,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[CSpellSettingsDef.ts:397](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L397)
+[CSpellSettingsDef.ts:397](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L397)
 
 ___
 
@@ -156,4 +156,4 @@ Use Compounds
 
 #### Defined in
 
-[CSpellSettingsDef.ts:377](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L377)
+[CSpellSettingsDef.ts:377](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L377)
