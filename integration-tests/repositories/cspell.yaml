@@ -1,25 +1,31 @@
-"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json"
-version: 0.2
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
 id: integration-test-default
 words:
   - octokit
-
 ignorePaths:
   - "*.ktx"
   - "*.idmap" # DOOM, cspell:ignore idmap
   - "*.ogex" # DOOM, cspell:ignore ogex
   - "**/prettier/"
-
 import:
-  - "./cspell-reporter.json"
-  - "./cspell-latex.json"
-
+  - ./cspell-reporter.json
+  - ./cspell-latex.json
 overrides:
-  - filename: "temp/TheAlgorithms/Python/**/*.py"
+  - filename: temp/TheAlgorithms/Python/**/*.py
     languageSettings:
       - languageId: python
         allowCompoundWords: true
-  - filename: "temp/AdaDoom3/AdaDoom3/**/*.py"
+  - filename: temp/AdaDoom3/AdaDoom3/**/*.py
     languageSettings:
       - languageId: python
         allowCompoundWords: false
+  - filename: temp/pagekit/pagekit/**
+    dictionaries:
+      - lorem-ipsum
+dictionaries:
+  - custom-dictionary
+dictionaryDefinitions:
+  - name: custom-dictionary
+    path: ./.cspell/custom-dictionary.txt
+    addWords: true
