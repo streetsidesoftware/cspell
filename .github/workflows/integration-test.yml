@@ -173,7 +173,7 @@ jobs:
 
       - name: Create Pull Request
         if: env.git_status == 'dirty'
-        uses: peter-evans/create-pull-request@v3.10.1
+        uses: peter-evans/create-pull-request@v3.11.0
         with:
           commit-message: "ci: Workflow Bot -- Integration ${{ matrix.repo }} Update References"
           branch: ${{ env.branch_prefix }}/${{ matrix.repo }}
