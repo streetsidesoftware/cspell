@@ -350,7 +350,7 @@ export function readRawSettings(filename: string, relativeTo?: string): CSpellSe
  *
  * @param filenames - settings files to read
  * @returns combined configuration
- * @deprecated
+ * @deprecated true
  */
 export function readSettingsFiles(filenames: string[]): CSpellSettings {
     return filenames.map((filename) => readSettings(filename)).reduce((a, b) => mergeSettings(a, b), defaultSettings);

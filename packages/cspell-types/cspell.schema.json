@@ -31,6 +31,7 @@
     },
     "DictionaryDefinitionAlternate": {
       "additionalProperties": false,
+      "deprecated": true,
       "deprecationMessage": "Use `DictionaryDefinitionPreferred`",
       "description": "Only for legacy dictionary definitions",
       "properties": {
@@ -40,6 +41,7 @@
         },
         "file": {
           "$ref": "#/definitions/DictionaryPath",
+          "deprecated": true,
           "deprecationMessage": "Use `path` instead.",
           "description": "Path to the file, only for legacy dictionary definitions"
         },
@@ -332,6 +334,7 @@
               "type": "array"
             }
           ],
+          "deprecated": true,
           "deprecationMessage": "Use `locale` instead",
           "description": "Deprecated - The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
         },
@@ -690,8 +693,7 @@
             {
               "type": "string"
             },
-            {
-            }
+            {}
           ],
           "maxItems": 2,
           "minItems": 2,
@@ -721,6 +723,7 @@
     },
     "VersionLegacy": {
       "const": "0.1",
+      "deprecated": true,
       "deprecationMessage": "Use `0.2`",
       "description": "Legacy Configuration File Versions",
       "type": "string"
@@ -942,10 +945,12 @@
       "type": "array"
     },
     "showStatus": {
+      "deprecated": true,
       "description": "Show status",
       "type": "boolean"
     },
     "spellCheckDelayMs": {
+      "deprecated": true,
       "description": "Delay in ms after a document has changed before checking it for spelling errors.",
       "type": "number"
     },

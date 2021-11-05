@@ -211,7 +211,7 @@ export const normalizeWord = (text: string): string => text.normalize();
  * converts text to lower case and removes any accents.
  * @param text - text to convert
  * @returns lowercase word without accents
- * @deprecated
+ * @deprecated true
  */
 export const normalizeWordToLowercase = (text: string): string =>
     text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '');
