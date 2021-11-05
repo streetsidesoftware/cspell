@@ -238,18 +238,18 @@ export interface WorkspaceTrustSettings {
 /**
  * VS Code Spell Checker Settings
  * To be Removed
- * @deprecated
+ * @deprecated true
  */
 export interface LegacySettings {
     /**
      * Show status
-     * @deprecated
+     * @deprecated true
      */
     showStatus?: boolean;
 
     /**
      * Delay in ms after a document has changed before checking it for spelling errors.
-     * @deprecated
+     * @deprecated true
      */
     spellCheckDelayMs?: number;
     /************************/
@@ -403,7 +403,7 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
 
     /**
      * Only for legacy dictionary definitions
-     * @deprecated
+     * @deprecated true
      * @deprecationMessage Use `path` instead.
      * @hidden
      */
@@ -412,7 +412,7 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
 
 /**
  * Only for legacy dictionary definitions
- * @deprecated
+ * @deprecated true
  * @deprecationMessage Use `DictionaryDefinitionPreferred`
  */
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
@@ -421,14 +421,14 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
 
     /**
      * Path to the file, only for legacy dictionary definitions
-     * @deprecated
+     * @deprecated true
      * @deprecationMessage Use `path` instead.
      */
     file: DictionaryPath;
 }
 
 /**
- * @deprecated
+ * @deprecated true
  * @hidden
  */
 export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
@@ -436,7 +436,7 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
     path?: FsPath;
     /**
      * File name
-     * @deprecated
+     * @deprecated true
      * @deprecationMessage Use path instead.
      */
     file: FsPath;
@@ -498,7 +498,7 @@ export interface LanguageSettingFilterFieldsDeprecated {
     languageId: LanguageId | LanguageIdSingle[];
     /**
      * Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
-     * @deprecated
+     * @deprecated true
      * @deprecationMessage Use `locale` instead
      */
     local?: LocaleId | LocaleId[];
@@ -598,7 +598,7 @@ export type VersionLatest = '0.2';
 
 /**
  * Legacy Configuration File Versions
- * @deprecated
+ * @deprecated true
  * @deprecationMessage Use `0.2`
  */
 export type VersionLegacy = '0.1';
@@ -606,7 +606,7 @@ export type VersionLegacy = '0.1';
 export type Version = VersionLatest | VersionLegacy;
 
 /**
- * @deprecated
+ * @deprecated true
  * @deprecationMessage Use LocaleId instead
  */
 export type LocalId = LocaleId;
