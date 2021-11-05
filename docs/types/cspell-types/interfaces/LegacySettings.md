@@ -5,7 +5,7 @@
 VS Code Spell Checker Settings
 To be Removed
 
-**`deprecated`**
+**`deprecated`** true
 
 ## Hierarchy
 
@@ -28,11 +28,11 @@ To be Removed
 
 Show status
 
-**`deprecated`**
+**`deprecated`** true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:248](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L248)
+[CSpellSettingsDef.ts:248](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L248)
 
 ___
 
@@ -42,8 +42,8 @@ ___
 
 Delay in ms after a document has changed before checking it for spelling errors.
 
-**`deprecated`**
+**`deprecated`** true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:254](https://github.com/streetsidesoftware/cspell/blob/27fe1d6b/packages/cspell-types/src/CSpellSettingsDef.ts#L254)
+[CSpellSettingsDef.ts:254](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L254)
