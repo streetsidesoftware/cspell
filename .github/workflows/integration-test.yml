@@ -18,6 +18,7 @@ on:
       updateSnapshots:
         description: "Update Integration Test snapshots (y/n)"
         default: "n"
+        required: false
 
 jobs:
   integration-tests:
@@ -52,6 +53,7 @@ jobs:
           - liriliri/licia
           - MartinThoma/LaTeX-examples
           - microsoft/TypeScript-Website
+          - pagekit/pagekit
           - php/php-src
           - plasticrake/tplink-smarthome-api
           - prettier/prettier
