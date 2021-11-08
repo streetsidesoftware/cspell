@@ -12,6 +12,7 @@ on:
       updateSnapshots:
         description: "Update Integration Test snapshots (yes/no)"
         default: "yes"
+        required: false
   schedule:
     - cron: "0 12 * * 0"
 
@@ -32,8 +33,9 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
       - name: Update Root
         run: |
-          rm -rf package-lock.json
+          npm install
           npm update -S
+          rm -rf node_modules package-lock.json
       - name: Install
         run: npm install
       - name: Update packages
