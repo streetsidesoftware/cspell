@@ -86,7 +86,7 @@ Options:
   --language-id <language>     Force programming language for unknown
                                extensions. i.e. "php" or "scala"
 
-  --wordsOnly                  Only output the words not found in the
+  --words-only                 Only output the words not found in the
                                dictionaries.
 
   -u, --unique                 Only output the first instance of a word not
@@ -115,6 +115,9 @@ Options:
 
   --cache-location <path>      Path to the cache file or directory (default:
                                ".cspellcache")
+
+  --dot                        Include files and directories starting with `.`
+                               (period) when matching globs.
 
   --gitignore                  Ignore files matching glob patterns found in
                                .gitignore files.
