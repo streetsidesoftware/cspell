@@ -61,6 +61,14 @@ export interface FileSettings extends ExtendableSettings {
     files?: Glob[];
 
     /**
+     * Enable scanning files and directories beginning with `.` (period).
+     * By default, CSpell does not scan `hidden` files.
+     *
+     * @default false
+     */
+    enableGlobDot?: boolean;
+
+    /**
      * Glob patterns of files to be ignored
      * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
      */
