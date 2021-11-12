@@ -1,14 +1,10 @@
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import { fileOrGlobToGlob, GlobMatcher, GlobPatternWithRoot } from 'cspell-glob';
-import glob, { IGlob } from 'glob';
+import glob from 'glob';
+import type { IGlob, IOptions as IGlobOptions } from 'glob';
 import * as path from 'path';
-import { IOptions } from './IOptions';
 
-export interface GlobOptions extends IOptions {
-    cwd?: string;
-    root?: string;
-    ignore?: string | string[];
-}
+export type GlobOptions = IGlobOptions;
 
 const defaultExcludeGlobs = ['node_modules/**'];
 

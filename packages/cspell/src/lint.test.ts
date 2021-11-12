@@ -1,5 +1,5 @@
 import { runLint } from './lint';
-import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
+import { LinterConfiguration } from './LinterConfiguration';
 import * as path from 'path';
 import { InMemoryReporter } from './util/InMemoryReporter';
 
@@ -10,9 +10,9 @@ describe('Linter Validation Tests', () => {
     test('globs on the command line override globs in the config.', async () => {
         const options = { root: latexSamples };
         const reporter = new InMemoryReporter();
-        const rWithoutFiles = await runLint(new CSpellApplicationConfiguration([], options, reporter));
+        const rWithoutFiles = await runLint(new LinterConfiguration([], options, reporter));
         expect(rWithoutFiles.files).toBe(4);
-        const rWithFiles = await runLint(new CSpellApplicationConfiguration(['**/ebook.tex'], options, reporter));
+        const rWithFiles = await runLint(new LinterConfiguration(['**/ebook.tex'], options, reporter));
         expect(rWithFiles.files).toBe(1);
     });
 });

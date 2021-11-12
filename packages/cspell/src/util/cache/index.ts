@@ -1,5 +1,5 @@
 import path from 'path';
-import type { CSpellApplicationConfiguration } from '../../CSpellApplicationConfiguration';
+import type { LinterConfiguration } from '../../LinterConfiguration';
 import type { ConfigInfo, FileResult } from '../../fileHelper';
 import { DummyCache } from './DummyCache';
 import { DiskCache } from './DiskCache';
@@ -25,7 +25,7 @@ export interface CSpellLintResultCache {
 /**
  * Creates CSpellLintResultCache (disk cache if caching is enabled in config or dummy otherwise)
  */
-export function createCache(cfg: CSpellApplicationConfiguration): CSpellLintResultCache {
+export function createCache(cfg: LinterConfiguration): CSpellLintResultCache {
     const { cache, cacheLocation = DEFAULT_CACHE_LOCATION, cacheStrategy = 'metadata' } = cfg.options;
     return cache ? new DiskCache(path.resolve(cfg.root, cacheLocation), cacheStrategy === 'content') : new DummyCache();
 }

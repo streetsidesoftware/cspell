@@ -1,7 +1,7 @@
 import type { Issue } from '@cspell/cspell-types';
 import * as path from 'path';
 import * as App from './application';
-import { CSpellApplicationOptions } from './options';
+import { LinterOptions } from './options';
 import { InMemoryReporter } from './util/InMemoryReporter';
 
 const getStdinResult = {
@@ -165,7 +165,7 @@ describe('Application, Validate Samples', () => {
 interface SampleTest {
     file: string;
     issues: (string | Partial<Issue>)[];
-    options?: CSpellApplicationOptions;
+    options?: LinterOptions;
 }
 
 function sampleTests(): SampleTest[] {
