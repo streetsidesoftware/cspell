@@ -1,13 +1,14 @@
-import { runLint } from './lint';
-import { LinterConfiguration } from '../LinterConfiguration';
 import * as path from 'path';
+import { LinterConfiguration } from '../LinterConfiguration';
 import { InMemoryReporter } from '../util/InMemoryReporter';
+import { runLint } from './lint';
 
 const samples = path.resolve(__dirname, '../../samples');
 const latexSamples = path.resolve(samples, 'latex');
 const hiddenSamples = path.resolve(samples, 'hidden-test');
 
 const oc = expect.objectContaining;
+const j = path.join;
 
 describe('Linter Validation Tests', () => {
     test('globs on the command line override globs in the config.', async () => {
@@ -19,18 +20,31 @@ describe('Linter Validation Tests', () => {
         expect(rWithFiles.files).toBe(1);
     });
 
+    // cspell:ignore Tufte
     test.each`
-        files               | options                                | expected
-        ${[]}               | ${{ root: latexSamples }}              | ${oc({ files: 4 })}
-        ${['**/ebook.tex']} | ${{ root: latexSamples }}              | ${oc({ files: 1 })}
-        ${['**/hidden.md']} | ${{ root: hiddenSamples }}             | ${oc({ files: 0 })}
-        ${['**/hidden.md']} | ${{ root: hiddenSamples, dot: true }}  | ${oc({ files: 1 })}
-        ${['**/*.md']}      | ${{ root: hiddenSamples, dot: false }} | ${oc({ files: 0 })}
-        ${['**/*.md']}      | ${{ root: hiddenSamples }}             | ${oc({ files: 0 })}
-        ${['**/*.md']}      | ${{ root: hiddenSamples, dot: true }}  | ${oc({ files: 2 })}
-    `('runLint $files $options', async ({ files, options, expected }) => {
+        files               | options                                                                       | expectedRunResult              | expectedReport
+        ${[]}               | ${{ root: latexSamples }}                                                     | ${oc({ errors: 0, files: 4 })} | ${oc({ errorCount: 0, issues: [oc({ text: 'Tufte' })] })}
+        ${['**/ebook.tex']} | ${{ root: latexSamples }}                                                     | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/ebook.tex']} | ${{ root: latexSamples, gitignore: true }}                                    | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/hidden.md']} | ${{ root: hiddenSamples }}                                                    | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/hidden.md']} | ${{ root: hiddenSamples, dot: true }}                                         | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/*.md']}      | ${{ root: hiddenSamples, dot: false }}                                        | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/*.md']}      | ${{ root: hiddenSamples }}                                                    | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/*.md']}      | ${{ root: hiddenSamples, dot: true }}                                         | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**']}           | ${{ root: samples, config: j(samples, 'cspell-not-found.json') }}             | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
+        ${['**']}           | ${{ root: samples, config: j(samples, 'linked/cspell-import-missing.json') }} | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
+        ${['**/ebook.tex']} | ${{ root: samples, config: j(samples, 'cspell-missing-dict.json') }}          | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${['**/ebook.tex']} | ${{ root: samples, config: j(samples, 'linked/cspell-import.json') }}         | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
+    `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
-        const rWithoutFiles = await runLint(new LinterConfiguration(files, options, reporter));
-        expect(rWithoutFiles).toEqual(expected);
+        const runResult = await runLint(new LinterConfiguration(files, options, reporter));
+        expect(runResult).toEqual(expectedRunResult);
+        expect(runResult).toEqual(reporter.runResult);
+        expect(report(reporter)).toEqual(expectedReport);
     });
 });
+
+function report(reporter: InMemoryReporter) {
+    const { issues, errorCount, errors } = reporter;
+    return { issues, errorCount, errors };
+}
