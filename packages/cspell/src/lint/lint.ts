@@ -9,15 +9,15 @@ import { Logger } from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
-import { ConfigInfo, fileInfoToDocument, FileResult, findFiles, readConfig, readFileInfo } from './fileHelper';
-import { LinterConfiguration } from './LinterConfiguration';
-import { createCache, CSpellLintResultCache } from './util/cache';
-import { toError } from './util/errors';
-import type { GlobOptions } from './util/glob';
-import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from './util/glob';
-import { loadReporters, mergeReporters } from './util/reporters';
-import { getTimeMeasurer } from './util/timer';
-import * as util from './util/util';
+import { ConfigInfo, fileInfoToDocument, FileResult, findFiles, readConfig, readFileInfo } from '../fileHelper';
+import { LinterConfiguration } from '../LinterConfiguration';
+import { createCache, CSpellLintResultCache } from '../util/cache';
+import { toError } from '../util/errors';
+import type { GlobOptions } from '../util/glob';
+import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from '../util/glob';
+import { loadReporters, mergeReporters } from '../util/reporters';
+import { getTimeMeasurer } from '../util/timer';
+import * as util from '../util/util';
 
 export async function runLint(cfg: LinterConfiguration): Promise<RunResult> {
     let { reporter } = cfg;
@@ -219,9 +219,9 @@ export async function runLint(cfg: LinterConfiguration): Promise<RunResult> {
             ignore: ignoreGlobs.concat(normalizedExcludes),
             nodir: true,
         };
-        if (cfg.enableGlobDot !== undefined) {
-            console.log('glob options');
-            globOptions.dot = cfg.enableGlobDot;
+        const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
+        if (enableGlobDot !== undefined) {
+            globOptions.dot = enableGlobDot;
         }
 
         const foundFiles = await findFiles(fileGlobs, globOptions);

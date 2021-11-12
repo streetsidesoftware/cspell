@@ -1,0 +1,1 @@
+export { runLint } from './lint';
