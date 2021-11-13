@@ -1,4 +1,4 @@
-export interface CSpellApplicationOptions extends BaseOptions {
+export interface LinterOptions extends BaseOptions {
     /**
      * Display verbose information
      */
@@ -23,6 +23,12 @@ export interface CSpellApplicationOptions extends BaseOptions {
      * root directory, defaults to `cwd`
      */
     root?: string;
+    /**
+     * Determine if files / directories starting with `.` should be part
+     * of the glob search.
+     * @default false
+     */
+    dot?: boolean;
     /**
      * Show part of a line where an issue is found.
      * if true, it will show the default number of characters on either side.

@@ -1,11 +1,11 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { getReporter } from './cli-reporter';
-import { CSpellApplicationOptions } from './options';
+import { LinterOptions } from './options';
 import { DEFAULT_CACHE_LOCATION } from './util/cache';
 import { CheckFailed } from './util/errors';
 
-export interface Options extends CSpellApplicationOptions {
+export interface LinterCliOptions extends LinterOptions {
     files: string[];
     legacy?: boolean;
     summary: boolean;
@@ -92,6 +92,7 @@ export function commandLint(prog: Command): Command {
             ])
         )
         .option('--cache-location <path>', `Path to the cache file or directory`, DEFAULT_CACHE_LOCATION)
+        .option('--dot', 'Include files and directories starting with `.` (period) when matching globs.')
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
         .option('--no-gitignore', 'Do NOT use .gitignore files.')
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
@@ -99,7 +100,7 @@ export function commandLint(prog: Command): Command {
         .option('--color', 'Force color')
         .addHelpText('after', usage)
         .arguments('[files...]')
-        .action((files: string[], options: Options) => {
+        .action((files: string[], options: LinterCliOptions) => {
             options.files = files;
             const { mustFindFiles } = options;
             const cliReporter = getReporter(options);

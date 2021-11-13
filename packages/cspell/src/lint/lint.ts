@@ -1,6 +1,7 @@
 import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import * as commentJson from 'comment-json';
+import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import type { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 import type { ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
@@ -8,17 +9,17 @@ import { Logger } from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
-import { CSpellApplicationConfiguration } from './CSpellApplicationConfiguration';
-import { ConfigInfo, fileInfoToDocument, FileResult, findFiles, readConfig, readFileInfo } from './fileHelper';
-import { createCache, CSpellLintResultCache } from './util/cache';
-import { toError } from './util/errors';
-import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from './util/glob';
-import { loadReporters, mergeReporters } from './util/reporters';
-import { getTimeMeasurer } from './util/timer';
-import * as util from './util/util';
-import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
+import { ConfigInfo, fileInfoToDocument, FileResult, findFiles, readConfig, readFileInfo } from '../fileHelper';
+import { LinterConfiguration } from '../LinterConfiguration';
+import { createCache, CSpellLintResultCache } from '../util/cache';
+import { toError } from '../util/errors';
+import type { GlobOptions } from '../util/glob';
+import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from '../util/glob';
+import { loadReporters, mergeReporters } from '../util/reporters';
+import { getTimeMeasurer } from '../util/timer';
+import * as util from '../util/util';
 
-export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunResult> {
+export async function runLint(cfg: LinterConfiguration): Promise<RunResult> {
     let { reporter } = cfg;
     cspell.setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
@@ -212,7 +213,17 @@ export async function runLint(cfg: CSpellApplicationConfiguration): Promise<RunR
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
         // cspell:word nodir
-        const globOptions = { root, cwd: root, ignore: ignoreGlobs.concat(normalizedExcludes), nodir: true };
+        const globOptions: GlobOptions = {
+            root,
+            cwd: root,
+            ignore: ignoreGlobs.concat(normalizedExcludes),
+            nodir: true,
+        };
+        const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
+        if (enableGlobDot !== undefined) {
+            globOptions.dot = enableGlobDot;
+        }
+
         const foundFiles = await findFiles(fileGlobs, globOptions);
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
         const files = filterFiles(filtered, globMatcher);

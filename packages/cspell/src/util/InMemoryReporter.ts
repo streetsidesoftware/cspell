@@ -11,6 +11,7 @@ export interface InMemoryResult {
  */
 export class InMemoryReporter implements CSpellReporter, InMemoryResult {
     log: string[] = [];
+    errors: Error[] = [];
     issueCount = 0;
     errorCount = 0;
     debugCount = 0;
@@ -28,6 +29,7 @@ export class InMemoryReporter implements CSpellReporter, InMemoryResult {
 
     error = (message: string, error: Error): void => {
         this.errorCount += 1;
+        this.errors.push(error);
         this.log.push(`Error: ${message} ${error.toString()}`);
     };
 
