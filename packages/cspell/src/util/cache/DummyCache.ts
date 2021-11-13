@@ -1,4 +1,4 @@
-import type { CSpellLintResultCache } from '.';
+import type { CSpellLintResultCache } from './CSpellLintResultCache';
 
 /**
  * Dummy cache implementation that should be usd if caching option is disabled.

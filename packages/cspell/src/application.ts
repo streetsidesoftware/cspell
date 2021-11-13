@@ -2,18 +2,17 @@ import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import * as cspell from 'cspell-lib';
 import { CheckTextInfo, TraceResult, traceWords } from 'cspell-lib';
 import * as path from 'path';
-import { LinterConfiguration } from './LinterConfiguration';
 import { calcFinalConfigInfo, readConfig, readFile } from './fileHelper';
-import { runLint } from './lint';
+import { LintRequest, runLint } from './lint';
 import { BaseOptions, LinterOptions, TraceOptions } from './options';
 import * as util from './util/util';
-export type { TraceResult } from 'cspell-lib';
 export { IncludeExcludeFlag } from 'cspell-lib';
+export type { TraceResult } from 'cspell-lib';
 
 export type AppError = NodeJS.ErrnoException;
 
 export function lint(files: string[], options: LinterOptions, emitters: CSpellReporter): Promise<RunResult> {
-    const cfg = new LinterConfiguration(files, options, emitters);
+    const cfg = new LintRequest(files, options, emitters);
     return runLint(cfg);
 }
 

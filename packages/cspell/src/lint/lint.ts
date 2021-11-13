@@ -10,16 +10,17 @@ import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
 import { ConfigInfo, fileInfoToDocument, FileResult, findFiles, readConfig, readFileInfo } from '../fileHelper';
-import { LinterConfiguration } from '../LinterConfiguration';
-import { createCache, CSpellLintResultCache } from '../util/cache';
+import type { CSpellLintResultCache } from '../util/cache';
+import { createCache } from '../util/cache';
 import { toError } from '../util/errors';
 import type { GlobOptions } from '../util/glob';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from '../util/glob';
 import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
+import { LintRequest } from './LintRequest';
 
-export async function runLint(cfg: LinterConfiguration): Promise<RunResult> {
+export async function runLint(cfg: LintRequest): Promise<RunResult> {
     let { reporter } = cfg;
     cspell.setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
@@ -98,7 +99,7 @@ export async function runLint(cfg: LinterConfiguration): Promise<RunResult> {
 
     async function processFiles(files: string[], configInfo: ConfigInfo, fileCount: number): Promise<RunResult> {
         const status: RunResult = runResult();
-        const cache = createCache(cfg);
+        const cache = createCache({ ...cfg.options, root: cfg.root });
 
         const emitProgress = (filename: string, fileNum: number, result: FileResult) =>
             reporter.progress({

@@ -1,12 +1,12 @@
 import type { CSpellReporter, Issue } from '@cspell/cspell-types';
 import * as path from 'path';
-import { LinterOptions } from './options';
-import { calcExcludeGlobInfo, GlobSrcInfo } from './util/glob';
-import * as util from './util/util';
+import { LinterOptions } from '../options';
+import { calcExcludeGlobInfo, GlobSrcInfo } from '../util/glob';
+import * as util from '../util/util';
 
 const defaultContextRange = 20;
 
-export class LinterConfiguration {
+export class LintRequest {
     readonly uniqueFilter: (issue: Issue) => boolean;
     readonly locale: string;
 
