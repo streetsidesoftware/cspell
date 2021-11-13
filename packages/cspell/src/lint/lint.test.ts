@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { LinterConfiguration } from '../LinterConfiguration';
+import { LintRequest } from './LintRequest';
 import { InMemoryReporter } from '../util/InMemoryReporter';
 import { runLint } from './lint';
 
@@ -14,9 +14,9 @@ describe('Linter Validation Tests', () => {
     test('globs on the command line override globs in the config.', async () => {
         const options = { root: latexSamples };
         const reporter = new InMemoryReporter();
-        const rWithoutFiles = await runLint(new LinterConfiguration([], options, reporter));
+        const rWithoutFiles = await runLint(new LintRequest([], options, reporter));
         expect(rWithoutFiles.files).toBe(4);
-        const rWithFiles = await runLint(new LinterConfiguration(['**/ebook.tex'], options, reporter));
+        const rWithFiles = await runLint(new LintRequest(['**/ebook.tex'], options, reporter));
         expect(rWithFiles.files).toBe(1);
     });
 
@@ -37,7 +37,7 @@ describe('Linter Validation Tests', () => {
         ${['**/ebook.tex']} | ${{ root: samples, config: j(samples, 'linked/cspell-import.json') }}         | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
-        const runResult = await runLint(new LinterConfiguration(files, options, reporter));
+        const runResult = await runLint(new LintRequest(files, options, reporter));
         expect(runResult).toEqual(expectedRunResult);
         expect(runResult).toEqual(reporter.runResult);
         expect(report(reporter)).toEqual(expectedReport);
