@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1825, Issues found: 19627 in 1084 files
+ CSpell: Files checked: 1825, Issues found: 19610 in 1084 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -705,25 +705,25 @@ Lines:
 ./ext/date/php_date.c:4628:18   - Unknown word (ddummy)       -- double ddummy;
 ./ext/date/php_date.c:4785:59   - Unknown word (unserializing) -- long); must check when unserializing */
 ./ext/date/php_date.stub.php:170:41    - Unknown word (SUNFUNCS)   -- int $returnFormat = SUNFUNCS_RET_STRING,
-./ext/dba/dba.c:1006:8    - Unknown word (zkey)        -- zval *zkey;
-./ext/dba/dba.c:1115:20   - Unknown word (vakue)       -- If inifile: Add vakue as key (next instance
+./ext/dba/dba.c:1054:15   - Unknown word (nkey)        -- zend_string *nkey = info->hnd->nextkey
+./ext/dba/dba.c:1095:20   - Unknown word (vakue)       -- If inifile: Add vakue as key (next instance
 ./ext/dba/dba.c:170:79    - Unknown word (ENFMT)      -- filemode = 0644 + S_ENFMT */
 ./ext/dba/dba.c:220:11    - Unknown word (NBBM)       -- #elif DBA_NBBM
-./ext/dba/dba.c:560:18    - Unknown word (rwnc)       -- /* Check mode: [rwnc][dl-]?t?
+./ext/dba/dba.c:556:18    - Unknown word (rwnc)       -- /* Check mode: [rwnc][dl-]?t?
 ./ext/dba/dba.c:59:23     - Unknown word (hptr)       -- dba_handler *default_hptr;
-./ext/dba/dba.c:798:5     - Unknown word (centralised) -- /* centralised open stream for builtin
-./ext/dba/dba_cdb.c:235:9     - Unknown word (CSEEK)      -- #define CSEEK(n) do { \
+./ext/dba/dba.c:790:5     - Unknown word (centralised) -- /* centralised open stream for builtin
+./ext/dba/dba.c:994:8     - Unknown word (zkey)        -- zval *zkey;
+./ext/dba/dba_cdb.c:233:9     - Unknown word (CSEEK)      -- #define CSEEK(n) do { \
 ./ext/dba/dba_db1.c:13:14     - Unknown word (Shen)       -- | Author: Shen Cheng-Da <cdsheen@gmail
 ./ext/dba/dba_db1.c:43:6      - Unknown word (gmode)      -- int gmode;
 ./ext/dba/dba_db1.c:88:6      - Unknown word (gval)       -- DBT gval;
-./ext/dba/dba_db3.c:202:8     - Unknown word (nkey)       -- char *nkey = NULL;
 ./ext/dba/dba_db3.c:36:16     - Unknown word (dbenv)      -- const DB_ENV *dbenv,
 ./ext/dba/dba_gdbm.c:43:35     - Unknown word (WRCREAT)    -- = DBA_CREAT  ? GDBM_WRCREAT :
 ./ext/dba/dba_gdbm.c:44:34     - Unknown word (NEWDB)      -- == DBA_TRUNC ? GDBM_NEWDB : -1;
 ./ext/dba/dba_lmdb.c:13:13     - Unknown word (Anatol)     -- | Author: Anatol Belski <ab@php.net>
 ./ext/dba/dba_lmdb.c:23:9      - Unknown word (LMDB)       -- #if DBA_LMDB
 ./ext/dba/dba_lmdb.c:30:12     - Unknown word (lmdb)       -- struct php_lmdb_info {
-./ext/dba/dba_qdbm.c:123:9     - Unknown word (dpout)      -- return dpout(dba->dbf, key, keylen
+./ext/dba/dba_qdbm.c:123:9     - Unknown word (dpout)      -- return dpout(dba->dbf, ZSTR_VAL(key
 ./ext/dba/dba_qdbm.c:13:20     - Unknown word (Gibula)     -- | Author: Marcin Gibula <mg@iceni.pl>
 ./ext/dba/dba_qdbm.c:164:2     - Unknown word (dpoptimize) -- dpoptimize(dba->dbf, 0);
 ./ext/dba/dba_qdbm.c:172:2     - Unknown word (dpsync)     -- dpsync(dba->dbf);
@@ -734,12 +734,12 @@ Lines:
 ./ext/dba/dba_qdbm.c:49:57     - Unknown word (OTRUNC)     -- OWRITER | DP_OCREAT | DP_OTRUNC, 0);
 ./ext/dba/dba_qdbm.c:62:20     - Unknown word (dperrmsg)   -- *error = (char *) dperrmsg(dpecode);
 ./ext/dba/dba_qdbm.c:62:29     - Unknown word (dpecode)    -- = (char *) dperrmsg(dpecode);
-./ext/dba/dba_qdbm.c:80:10     - Unknown word (dpget)      -- value = dpget(dba->dbf, key, keylen
-./ext/dba/dba_qdbm.c:94:6      - Unknown word (dpput)      -- if (dpput(dba->dbf, key, keylen
-./ext/dba/dba_qdbm.c:94:63     - Unknown word (DKEEP)      -- vallen, mode == 1 ? DP_DKEEP : DP_DOVER)) {
+./ext/dba/dba_qdbm.c:81:10     - Unknown word (dpget)      -- value = dpget(dba->dbf, ZSTR_VAL(key
+./ext/dba/dba_qdbm.c:94:6      - Unknown word (dpput)      -- if (dpput(dba->dbf, ZSTR_VAL(key
+./ext/dba/dba_qdbm.c:94:97     - Unknown word (DKEEP)      -- val), mode == 1 ? DP_DKEEP : DP_DOVER)) {
 ./ext/dba/dba_qdbm.c:98:20     - Unknown word (EKEEP)      -- if (dpecode != DP_EKEEP) {
-./ext/dba/dba_tcadb.c:109:7     - Unknown word (tcadbvsiz)  -- if (tcadbvsiz(dba->tcadb, key, keylen
-./ext/dba/dba_tcadb.c:204:17    - Unknown word (tcversion)  -- return estrdup(tcversion);
+./ext/dba/dba_tcadb.c:107:7     - Unknown word (tcadbvsiz)  -- if (tcadbvsiz(dba->tcadb, ZSTR_VAL
+./ext/dba/dba_tcadb.c:198:17    - Unknown word (tcversion)  -- return estrdup(tcversion);
 ./ext/dba/libcdb/cdb.c:137:29    - Unknown word (hslots)     -- _unpack(buf + 4,&c->hslots);
 ./ext/dba/libcdb/cdb.c:140:26    - Unknown word (hpos)       -- uint32_unpack(buf, &c->hpos);
 ./ext/dba/libcdb/cdb.c:141:6     - Unknown word (khash)      -- c->khash = u;
@@ -1647,15 +1647,15 @@ Lines:
 ./ext/intl/intl_error.h:41:16     - Unknown word (synchonize) -- // Wrappers to synchonize object's and global
 ./ext/intl/locale/locale.stub.php:77:49     - Unknown word (subtags)    -- composeLocale(array $subtags): string|false {}
 ./ext/intl/locale/locale_class.h:29:15     - Unknown word (uloc)       -- char* uloc1;
-./ext/intl/locale/locale_methods.c:141:3     - Unknown word (strtokr)    -- * strtokr equivalent search for
-./ext/intl/locale/locale_methods.c:1523:14   - Unknown word (ures)       -- available = ures_openAvailableLocales
-./ext/intl/locale/locale_methods.c:161:19    - Unknown word (inavlid)    -- /* Just in case inavlid locale e.g. '-x-xyz
-./ext/intl/locale/locale_methods.c:272:54    - Unknown word (retutn)     -- value , do nothing , retutn NULL */
-./ext/intl/locale/locale_methods.c:62:7      - Unknown word (lojban)     -- "art-lojban", "i-klingon",		"i
-./ext/intl/locale/locale_methods.c:65:5      - Unknown word (mingo)      -- "i-mingo", "i-pwn", 		"i-tao
-./ext/intl/locale/locale_methods.c:673:21    - Unknown word (uenum)      -- while( ( kw_key = uenum_next( e, &kw_key_len
-./ext/intl/locale/locale_methods.c:69:6      - Unknown word (guoyu)      -- "zh-guoyu", "zh-hakka", 		"zh
-./ext/intl/locale/locale_methods.c:70:34     - Unknown word (xiang)      -- , "zh-wuu", 		"zh-xiang",
+./ext/intl/locale/locale_methods.c:109:6     - Unknown word (guoyu)      -- "zh-guoyu",
+./ext/intl/locale/locale_methods.c:114:6     - Unknown word (xiang)      -- "zh-xiang",
+./ext/intl/locale/locale_methods.c:1617:14   - Unknown word (ures)       -- available = ures_openAvailableLocales
+./ext/intl/locale/locale_methods.c:235:3     - Unknown word (strtokr)    -- * strtokr equivalent search for
+./ext/intl/locale/locale_methods.c:255:19    - Unknown word (inavlid)    -- /* Just in case inavlid locale e.g. '-x-xyz
+./ext/intl/locale/locale_methods.c:366:54    - Unknown word (retutn)     -- value , do nothing , retutn NULL */
+./ext/intl/locale/locale_methods.c:65:7      - Unknown word (lojban)     -- "art-lojban",
+./ext/intl/locale/locale_methods.c:75:5      - Unknown word (mingo)      -- "i-mingo",
+./ext/intl/locale/locale_methods.c:767:21    - Unknown word (uenum)      -- while( ( kw_key = uenum_next( e, &kw_key_len
 ./ext/intl/msgformat/msgformat.stub.php:11:15     - Unknown word (msgfmt)     -- * @alias msgfmt_create
 ./ext/intl/msgformat/msgformat_attr.c:79:2      - Unknown word (umsg)       -- umsg_applyPattern(MSG_FORMAT
 ./ext/intl/msgformat/msgformat_class.h:53:49     - Unknown word (umsgf)      -- mfo) (mfo)->mf_data.umsgf
@@ -1972,20 +1972,20 @@ Lines:
 ./ext/mysqlnd/mysqlnd_statistics.c:115:27    - Unknown word (dupl)       -- MYSQLND_STR_W_LEN("mem_dupl_count") },
 ./ext/mysqlnd/mysqlnd_vio.c:486:6     - Unknown word (libmyusql)  -- in libmyusql, if cert and !key then
 ./ext/mysqlnd/mysqlnd_wireprotocol.c:42:9      - Unknown word (EODATA)     -- #define EODATA_MARKER 0xFE
-./ext/oci8/oci8.c:1116:45   - Unknown word (pingp)        -- (*(connection->next_pingp) > 0) && (timestamp
-./ext/oci8/oci8.c:1577:19   - Unknown word (SESSRLS)      -- rlsMode |= OCI_SESSRLS_DROPSESS;
-./ext/oci8/oci8.c:1998:7    - Unknown word (iserror)      -- bool iserror = 0;
-./ext/oci8/oci8.c:2026:95   - Unknown word (poolh)        -- dvoid **) &session_pool->poolh, OCI_HTYPE_SPOOL, (size
-./ext/oci8/oci8.c:222:13    - Unknown word (cpoolh)     -- OCICPool *cpoolh;
-./ext/oci8/oci8.c:222:3     - Unknown word (OCIC)       -- OCICPool *cpoolh;
-./ext/oci8/oci8.c:223:7     - Unknown word (cpoolmode)  -- ub4 cpoolmode = 0x80000000;	/* Pass
-./ext/oci8/oci8.c:224:75    - Unknown word (CPOOL)      -- &cpoolh, OCI_HTYPE_CPOOL, (size_t) 0, (dvoid
-./ext/oci8/oci8.c:346:31    - Unknown word (BDOUBLE)    -- LONG_CONSTANT("SQLT_BDOUBLE",SQLT_BDOUBLE, CONST
-./ext/oci8/oci8.c:347:31    - Unknown word (BFLOAT)     -- LONG_CONSTANT("SQLT_BFLOAT",SQLT_BFLOAT, CONST
-./ext/oci8/oci8.c:397:33    - Unknown word (REAUTH)     -- LONG_CONSTANT("OCI_FO_REAUTH", OCI_FO_REAUTH, CONST
-./ext/oci8/oci8.c:404:33    - Unknown word (TXNAL)      -- LONG_CONSTANT("OCI_FO_TXNAL", OCI_FO_TXNAL, CONST
-./ext/oci8/oci8.c:586:64    - Unknown word (pconnections) -- extensions, we release pconnections when oci_close
-./ext/oci8/oci8.c:993:5     - Unknown word (DRCP)         -- /* DRCP: connection_class is
+./ext/oci8/oci8.c:1117:45   - Unknown word (pingp)        -- (*(connection->next_pingp) > 0) && (timestamp
+./ext/oci8/oci8.c:1578:19   - Unknown word (SESSRLS)      -- rlsMode |= OCI_SESSRLS_DROPSESS;
+./ext/oci8/oci8.c:1999:7    - Unknown word (iserror)      -- bool iserror = 0;
+./ext/oci8/oci8.c:2027:95   - Unknown word (poolh)        -- dvoid **) &session_pool->poolh, OCI_HTYPE_SPOOL, (size
+./ext/oci8/oci8.c:223:13    - Unknown word (cpoolh)     -- OCICPool *cpoolh;
+./ext/oci8/oci8.c:223:3     - Unknown word (OCIC)       -- OCICPool *cpoolh;
+./ext/oci8/oci8.c:224:7     - Unknown word (cpoolmode)  -- ub4 cpoolmode = 0x80000000;	/* Pass
+./ext/oci8/oci8.c:225:75    - Unknown word (CPOOL)      -- &cpoolh, OCI_HTYPE_CPOOL, (size_t) 0, (dvoid
+./ext/oci8/oci8.c:347:31    - Unknown word (BDOUBLE)    -- LONG_CONSTANT("SQLT_BDOUBLE",SQLT_BDOUBLE, CONST
+./ext/oci8/oci8.c:348:31    - Unknown word (BFLOAT)     -- LONG_CONSTANT("SQLT_BFLOAT",SQLT_BFLOAT, CONST
+./ext/oci8/oci8.c:398:33    - Unknown word (REAUTH)     -- LONG_CONSTANT("OCI_FO_REAUTH", OCI_FO_REAUTH, CONST
+./ext/oci8/oci8.c:405:33    - Unknown word (TXNAL)      -- LONG_CONSTANT("OCI_FO_TXNAL", OCI_FO_TXNAL, CONST
+./ext/oci8/oci8.c:587:64    - Unknown word (pconnections) -- extensions, we release pconnections when oci_close
+./ext/oci8/oci8.c:994:5     - Unknown word (DRCP)         -- /* DRCP: connection_class is
 ./ext/oci8/oci8.stub.php:242:97    - Unknown word (FETCHSTATEMENT)     -- 1, int $flags = OCI_FETCHSTATEMENT_BY_COLUMN | OCI_ASSOC
 ./ext/oci8/oci8.stub.php:418:10    - Unknown word (ocipasswordchange)  -- function ocipasswordchange($connection, string
 ./ext/oci8/oci8.stub.php:85:10     - Unknown word (ocisetbufferinglob) -- function ocisetbufferinglob(OCILob $lob, bool $mode
@@ -2018,13 +2018,13 @@ Lines:
 ./ext/oci8/oci8_lob.c:163:99    - Unknown word (bufpp)      -- piece, dvoid **changed_bufpp, oraub8 *changed_lenp
 ./ext/oci8/oci8_lob.c:310:124   - Unknown word (MAXBYTESZ)  -- char, OCI_NLS_CHARSET_MAXBYTESZ));
 ./ext/oci8/oci8_lob.c:86:29     - Unknown word (SQLCS)      -- descriptor->charset_form = SQLCS_IMPLICIT; /* default
-./ext/oci8/oci8_statement.c:1088:11   - Unknown word (convetrsion) -- /* This convetrsion is done on purpose
 ./ext/oci8/oci8_statement.c:108:20    - Unknown word (stmtid)     -- statement->parent_stmtid = 0;
-./ext/oci8/oci8_statement.c:1110:27   - Unknown word (bindp)       -- oci_bind *old_bind, *bindp;
-./ext/oci8/oci8_statement.c:1357:13   - Unknown word (ictxp)       -- dvoid *ictxp, /* context pointer
-./ext/oci8/oci8_statement.c:1362:11   - Unknown word (alenp)       -- ub4 *alenp, /* size after value
-./ext/oci8/oci8_statement.c:1421:13   - Unknown word (octxp)       -- dvoid *octxp, /* context pointer
-./ext/oci8/oci8_statement.c:1429:12   - Unknown word (rcodepp)     -- ub2 **rcodepp) /* return code
+./ext/oci8/oci8_statement.c:1094:11   - Unknown word (convetrsion) -- /* This convetrsion is done on purpose
+./ext/oci8/oci8_statement.c:1116:27   - Unknown word (bindp)       -- oci_bind *old_bind, *bindp;
+./ext/oci8/oci8_statement.c:1363:13   - Unknown word (ictxp)       -- dvoid *ictxp, /* context pointer
+./ext/oci8/oci8_statement.c:1368:11   - Unknown word (alenp)       -- ub4 *alenp, /* size after value
+./ext/oci8/oci8_statement.c:1427:13   - Unknown word (octxp)       -- dvoid *octxp, /* context pointer
+./ext/oci8/oci8_statement.c:1435:12   - Unknown word (rcodepp)     -- ub2 **rcodepp) /* return code
 ./ext/oci8/oci8_statement.c:250:8     - Unknown word (handlepp)   -- void *handlepp;
 ./ext/oci8/oci8_statement.c:251:13    - Unknown word (iterp)      -- ub4 typep, iterp, idxp;
 ./ext/oci8/oci8_statement.c:251:20    - Unknown word (idxp)       -- ub4 typep, iterp, idxp;
@@ -2037,8 +2037,8 @@ Lines:
 ./ext/oci8/oci8_statement.c:764:43    - Unknown word (IBDOUBLE)   -- IBFLOAT) && defined(SQLT_IBDOUBLE)
 ./ext/oci8/oci8_statement.c:789:60    - Unknown word (valuep)     -- IN The size of each valuep buffer in bytes */
 ./ext/oci8/oci8_statement.c:87:80     - Unknown word (STRLS)      -- statement->err, NULL, 0, OCI_STRLS_CACHE_DELETE));
-./ext/oci8/oci8_statement.c:931:13    - Unknown word (BFILEE)     -- case SQLT_BFILEE:
-./ext/oci8/oci8_statement.c:932:13    - Unknown word (CFILEE)     -- case SQLT_CFILEE:
+./ext/oci8/oci8_statement.c:937:13    - Unknown word (BFILEE)     -- case SQLT_BFILEE:
+./ext/oci8/oci8_statement.c:938:13    - Unknown word (CFILEE)     -- case SQLT_CFILEE:
 ./ext/oci8/php_oci8_int.h:151:30    - Unknown word (hels)       -- unsigned is_open:1;					/* hels to determine if the
 ./ext/oci8/php_oci8_int.h:181:57    - Unknown word (NCLOBs)     -- charset form, required for NCLOBs */
 ./ext/odbc/odbc.stub.php:187:19    - Unknown word (DBMAKER)        -- #if !defined(HAVE_DBMAKER) && !defined(HAVE_SOLID
@@ -2411,7 +2411,7 @@ Lines:
 ./ext/opcache/jit/zend_jit_arm64.h:94:44     - Unknown word (deoptimization) -- for delayed FETCH_THIS deoptimization */
 ./ext/opcache/jit/zend_jit_arm64.h:96:30     - Unknown word (deoptimizer)    -- pseudo constants used by deoptimizer */
 ./ext/opcache/jit/zend_jit_disasm.c:607:39    - Unknown word (metod)      -- zend_jit_push_static_metod_call_frame);
-./ext/opcache/jit/zend_jit_disasm.c:714:27    - Unknown word (UCALL)      -- opline.opcode = ZEND_DO_UCALL;
+./ext/opcache/jit/zend_jit_disasm.c:715:27    - Unknown word (UCALL)      -- opline.opcode = ZEND_DO_UCALL;
 ./ext/opcache/jit/zend_jit_gdb.c:108:14    - Unknown word (shstrtab)   -- GDBJIT_SECT_shstrtab,
 ./ext/opcache/jit/zend_jit_gdb.c:187:11    - Unknown word (startp)     -- uint8_t *startp; /* Pointer
 ./ext/opcache/jit/zend_jit_gdb.c:188:12    - Unknown word (mcaddr)     -- uintptr_t mcaddr; /* Machine code
@@ -2437,15 +2437,15 @@ Lines:
 ./ext/opcache/jit/zend_jit_perf_dump.c:42:53     - Unknown word (vtunes)     -- as it conflicts with vtunes types.
 ./ext/opcache/jit/zend_jit_perf_dump.c:59:45     - Unknown word (jitted)     -- perf.data -o perf.data.jitted
 ./ext/opcache/jit/zend_jit_perf_dump.c:72:37     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
-./ext/opcache/jit/zend_jit_trace.c:3366:28   - Unknown word (clenup)     -- void zend_jit_trace_clenup_stack(zend_jit_trace
+./ext/opcache/jit/zend_jit_trace.c:3370:28   - Unknown word (clenup)     -- void zend_jit_trace_clenup_stack(zend_jit_trace
 ./ext/opcache/jit/zend_jit_trace.c:390:82    - Unknown word (tssa)       -- zend_ssa *tssa,
-./ext/opcache/jit/zend_jit_trace.c:4070:7    - Unknown word (Deoptimization) -- /* Deoptimization */
-./ext/opcache/jit/zend_jit_trace.c:4337:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
-./ext/opcache/jit/zend_jit_trace.c:6709:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
-./ext/opcache/jit/zend_jit_trace.c:6868:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
-./ext/opcache/jit/zend_jit_trace.c:7149:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
-./ext/opcache/jit/zend_jit_trace.c:7833:5    - Unknown word (Deoptimizatoion) -- /* Deoptimizatoion of VM stack state *
-./ext/opcache/jit/zend_jit_trace.c:8093:29   - Unknown word (xlat)            -- shared_alloc_register_xlat_entry(op_array->opcodes
+./ext/opcache/jit/zend_jit_trace.c:4074:7    - Unknown word (Deoptimization) -- /* Deoptimization */
+./ext/opcache/jit/zend_jit_trace.c:4343:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
+./ext/opcache/jit/zend_jit_trace.c:6716:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
+./ext/opcache/jit/zend_jit_trace.c:6875:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
+./ext/opcache/jit/zend_jit_trace.c:7156:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
+./ext/opcache/jit/zend_jit_trace.c:7840:5    - Unknown word (Deoptimizatoion) -- /* Deoptimizatoion of VM stack state *
+./ext/opcache/jit/zend_jit_trace.c:8100:29   - Unknown word (xlat)            -- shared_alloc_register_xlat_entry(op_array->opcodes
 ./ext/opcache/jit/zend_jit_trace.c:935:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
 ./ext/opcache/jit/zend_jit_vm_helpers.c:1095:39   - Unknown word (unroling)   -- doesn't work try loop unroling. */
 ./ext/opcache/jit/zend_jit_vm_helpers.c:40:35     - Unknown word (Wvolatile)  -- diagnostic ignored "-Wvolatile-register-var"
