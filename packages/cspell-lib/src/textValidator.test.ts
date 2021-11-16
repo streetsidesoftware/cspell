@@ -209,15 +209,20 @@ describe('Validate textValidator functions', () => {
     });
 
     test.each`
-        text                           | ignoreWords   | flagWords       | expected
-        ${'red'}                       | ${[]}         | ${undefined}    | ${[]}
-        ${'color'}                     | ${[]}         | ${undefined}    | ${[ov({ text: 'color', isFound: false })]}
-        ${'colour'}                    | ${[]}         | ${undefined}    | ${[ov({ text: 'colour', isFlagged: true })]}
-        ${'colour'}                    | ${['colour']} | ${undefined}    | ${[]}
-        ${'The ant ate the antelope.'} | ${[]}         | ${['fbd']}      | ${[]}
-        ${'The ant ate the antelope.'} | ${[]}         | ${['ate']}      | ${[ov({ text: 'ate', isFlagged: true })]}
-        ${'theANT_ateThe_antelope.'}   | ${[]}         | ${['ate']}      | ${[ov({ text: 'ate', isFlagged: true })]}
-        ${'The ant ate the antelope.'} | ${[]}         | ${['antelope']} | ${[ov({ text: 'antelope', isFlagged: true })]}
+        text                            | ignoreWords   | flagWords        | expected
+        ${'red'}                        | ${[]}         | ${undefined}     | ${[]}
+        ${'color'}                      | ${[]}         | ${undefined}     | ${[ov({ text: 'color', isFound: false })]}
+        ${'colour'}                     | ${[]}         | ${undefined}     | ${[ov({ text: 'colour', isFlagged: true })]}
+        ${'colour'}                     | ${['colour']} | ${undefined}     | ${[]}
+        ${'The ant ate the antelope.'}  | ${[]}         | ${['fbd']}       | ${[]}
+        ${'The ant ate the antelope.'}  | ${[]}         | ${['ate']}       | ${[ov({ text: 'ate', isFlagged: true })]}
+        ${'theANT_ateThe_antelope.'}    | ${[]}         | ${['ate']}       | ${[ov({ text: 'ate', isFlagged: true })]}
+        ${'The ant ate the antelope.'}  | ${[]}         | ${['antelope']}  | ${[ov({ text: 'antelope', isFlagged: true })]}
+        ${'This should be ok'}          | ${[]}         | ${[]}            | ${[]}
+        ${"This should've been ok"}     | ${[]}         | ${[]}            | ${[]}
+        ${"This should've not been ok"} | ${[]}         | ${["should've"]} | ${[ov({ text: "should've", isFlagged: true })]}
+        ${"They'll be allowed"}         | ${[]}         | ${[]}            | ${[]}
+        ${"They'll not be allowed"}     | ${[]}         | ${["they'll"]}   | ${[ov({ text: "They'll", isFlagged: true })]}
     `('Validate forbidden words', ({ text, ignoreWords, expected, flagWords }) => {
         const dict = getSpellingDictionaryCollectionSync({ ignoreWords });
         const result = [...validateText(text, dict, { ignoreCase: false, flagWords })];
@@ -265,29 +270,38 @@ const fruit = [
 const animals = ['ape', 'lion', 'tiger', 'Elephant', 'monkey', 'gazelle', 'antelope', 'aardvark', 'hyena'];
 const insects = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
 const words = [
-    'the',
+    'allowed',
     'and',
-    'is',
-    'has',
     'ate',
-    'light',
-    'dark',
-    'little',
-    'big',
-    'we',
-    'have',
-    'published',
-    'multiple',
-    'fixes',
-    'to',
-    'the',
-    'problems',
+    'be',
+    'been',
     'better',
+    'big',
+    'dark',
     'done',
+    'fixes',
+    'has',
+    'have',
+    'is',
     'known',
-    "shouldn't",
+    'light',
+    'little',
+    'multiple',
+    'not',
+    'problems',
+    'published',
+    'should',
+    'the',
+    'they',
+    'this',
+    'to',
+    'we',
+    "'ll",
     "couldn't",
     "should've",
+    "shouldn't",
+    "they'll",
+    "they've",
 ];
 
 const forbiddenWords = ['!colour', '!favour'];
