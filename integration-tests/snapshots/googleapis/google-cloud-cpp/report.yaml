@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
-  files: 1945
-  filesWithIssues: 1210
-  issues: 9599
+  files: 1967
+  filesWithIssues: 1231
+  issues: 9786
   errors: 0
 Errors: []
 
@@ -50,6 +50,7 @@ issues:
   - "ci/cloudbuild/README.md:80:54   	distros     	U   	Linux x `N` different distros"
   - "ci/cloudbuild/README.md:81:26   	MSVC        	U   	Compilers: Clang, GCC, MSVC"
   - "ci/cloudbuild/README.md:89:1    	ubsan       	U   	ubsan, etc. The full matrix"
+  - "ci/etc/expected_install_directories:39:9    	cmake   	U   	./lib64/cmake"
   - "ci/etc/README.md:13:40      	createinstance  	U   	GOOGLE_CLOUD_PROJECT}\" createinstance \\"
   - "ci/etc/README.md:22:5       	createtable     	U   	createtable quickstart families"
   - "ci/generate-markdown/README.md:12:4     	HOWTO   	U   	## HOWTO: Generate the markdown"
@@ -61,7 +62,6 @@ issues:
   - "ci/kokoro/windows/build-32.bat:19:9     	ERRORLEVEL  	U   	@if NOT ERRORLEVEL 0 exit /b 1"
   - "ci/kokoro/windows/build-32.bat:25:98    	vcvars      	U   	Community\\VC\\Auxiliary\\Build\\vcvars32.bat\""
   - "ci/kokoro/windows/build-32.bat:30:5     	errorlevel  	U   	if %errorlevel% neq 0 exit /b %errorlevel"
-  - "ci/verify_current_targets/CMakeLists.txt:17:1       	cmake       	U   	cmake_minimum_required(VERSION"
   - "ci/verify_current_targets/CMakeLists.txt:45:47      	ARGN        	U   	\"${name}\" PRIVATE ${ARGN})"
   - "ci/verify_current_targets/CMakeLists.txt:47:1       	endfunction 	U   	endfunction ()"
   - "ci/verify_current_targets/CMakeLists.txt:51:1       	endforeach  	U   	endforeach ()"
@@ -214,10 +214,10 @@ issues:
   - "generator/internal/predicate_utils_test.cc:835:44   	falsefragment   	U   	std::string(\"fragment0_falsefragment1_true\"));"
   - "generator/internal/printer_test.cc:37:33    	Inigo   	U   	VarsDictionary vars{{\"name\", \"Inigo Montoya\"}};"
   - "generator/internal/service_code_generator.cc:268:20     	nspace  	U   	for (auto const& nspace : namespaces_) {"
-  - "generator/scaffold/CMakeLists.txt.in:25:30      	DEPS    	U   	GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::@NAME"
-  - "generator/scaffold/CMakeLists.txt.in:138:28     	lgoogle 	U   	GOOGLE_CLOUD_PC_LIBS \"-lgoogle_cloud_cpp_@NAME@\")"
-  - "generator/standalone_main.cc:53:49      	textproto   	U   	\"Unable to parse textproto file.\");"
-  - "google/cloud/bigquery/CMakeLists.txt:86:42      	servicename 	U   	SOURCE_DIR}/mocks/mock_servicename_v2_connection.h"
+  - "generator/scaffold/CMakeLists.txt.in:24:30      	DEPS    	U   	GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::@NAME"
+  - "generator/scaffold/CMakeLists.txt.in:137:28     	lgoogle 	U   	GOOGLE_CLOUD_PC_LIBS \"-lgoogle_cloud_cpp_@NAME@\")"
+  - "generator/standalone_main.cc:54:49      	textproto   	U   	\"Unable to parse textproto file.\");"
+  - "google/cloud/bigquery/CMakeLists.txt:85:42      	servicename 	U   	SOURCE_DIR}/mocks/mock_servicename_v2_connection.h"
   - "google/cloud/bigquery/doc/bigquery-main.dox:3:2     	mainpage    	U   	@mainpage Cloud BigQuery C++ Client"
   - "google/cloud/bigquery/doc/bigquery-main.dox:11:4    	Quickstart  	U   	## Quickstart"
   - "google/cloud/bigquery/doc/bigquery-main.dox:43:2    	parblock    	U   	@parblock"
@@ -270,9 +270,9 @@ issues:
   - "google/cloud/bigtable/client_options_test.cc:243:60     	customendpoint      	U   	.set_data_endpoint(\"customendpoint.com\");"
   - "google/cloud/bigtable/client_options_test.cc:309:28     	Grpclb              	U   	ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {"
   - "google/cloud/bigtable/client_options_test.cc:317:44     	GRPCLB              	U   	hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS"
-  - "google/cloud/bigtable/CMakeLists.txt:143:14     	readrowsparser      	U   	internal/readrowsparser.cc"
-  - "google/cloud/bigtable/CMakeLists.txt:145:14     	rowreaderiterator   	U   	internal/rowreaderiterator.cc"
-  - "google/cloud/bigtable/CMakeLists.txt:355:18     	DBIGTABLE           	U   	PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC"
+  - "google/cloud/bigtable/CMakeLists.txt:141:14     	readrowsparser      	U   	internal/readrowsparser.cc"
+  - "google/cloud/bigtable/CMakeLists.txt:143:14     	rowreaderiterator   	U   	internal/rowreaderiterator.cc"
+  - "google/cloud/bigtable/CMakeLists.txt:353:18     	DBIGTABLE           	U   	PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC"
   - "google/cloud/bigtable/doc/bigtable-main.dox:96:86   	Quickstarts 	U   	quickstarts 'Cloud Bigtable Quickstarts'"
   - "google/cloud/bigtable/doc/bigtable-samples-data-client.dox:4:50     	opertions   	U   	reading and writing opertions on bigtable data client"
   - "google/cloud/bigtable/doc/bigtable-samples-data-client.dox:32:28    	increament  	U   	Use ReadModifyWrite to increament a value and append a"
@@ -324,9 +324,9 @@ issues:
   - "google/cloud/bigtable/tools/generate_rpc_policy_parameters.py:107:13    	intf    	U   	for intf in t[\"interfaces\"]:"
   - "google/cloud/bigtable/tools/generate_rpc_policy_parameters.py:114:27    	sublist 	U   	flat_list = [item for sublist in all_defines for item"
   - "google/cloud/bigtable/version.h:66:51   	gitrev  	U   	in MAJOR.MINOR.PATCH+gitrev format."
-  - "google/cloud/CMakeLists.txt:100:22  	msvc    	U   	internal/disable_msvc_crt_secure_warnings"
-  - "google/cloud/CMakeLists.txt:111:14  	getenv  	U   	internal/getenv.cc"
-  - "google/cloud/CMakeLists.txt:127:14  	strerror	U   	internal/strerror.cc"
+  - "google/cloud/CMakeLists.txt:84:22   	msvc    	U   	internal/disable_msvc_crt_secure_warnings"
+  - "google/cloud/CMakeLists.txt:95:14   	getenv  	U   	internal/getenv.cc"
+  - "google/cloud/CMakeLists.txt:111:14  	strerror	U   	internal/strerror.cc"
   - "google/cloud/examples/hello_world_grpc/Dockerfile:26:1      	WORKDIR 	U   	WORKDIR /home/build"
   - "google/cloud/examples/README.md:36:52   	gserviceaccount 	U   	GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com\""
   - "google/cloud/future_generic_then_test.cc:440:62     	functort	U   	exceptions raised by the functort to the"
@@ -383,6 +383,7 @@ issues:
   - "google/cloud/pubsub/schema_admin_connection.h:38:38     	cppref  	U   	models an [input range][cppref-input-range] of"
   - "google/cloud/pubsub/subscription_builder_test.cc:31:31      	Oidc	U   	SubscriptionBuilder, MakeOidcToken) {"
   - "google/cloud/pubsub/subscription_builder_test.cc:152:9      	oidc	U   	oidc_token {"
+  - "google/cloud/pubsublite/admin_client.h:19:39    	PUBSUBLITE  	U   	CLOUD_CPP_GOOGLE_CLOUD_PUBSUBLITE_ADMIN_CLIENT_H"
   - "google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:115:63    	creq	U   	CreateDatabaseRequest creq;"
   - "google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:167:63    	breq	U   	CreateBackupRequest breq;"
   - "google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:428:64    	rreq	U   	RestoreDatabaseRequest rreq;"
@@ -447,10 +448,10 @@ issues:
   - "google/cloud/storage/client_write_object_test.cc:132:61     	ooops   	U   	StatusCode::kDataLoss, \"ooops\")));"
   - "google/cloud/storage/client_write_object_test.cc:135:22     	uplaoded	U   	// should be uplaoded."
   - "google/cloud/storage/client.h:3518:8    	tmpobject   	U   	auto tmpobject_name_gen = [&num_tmp"
-  - "google/cloud/storage/CMakeLists.txt:69:5    	hmac        	U   	hmac_key_metadata.cc"
-  - "google/cloud/storage/CMakeLists.txt:163:26  	streambuf   	U   	internal/object_read_streambuf.cc"
-  - "google/cloud/storage/CMakeLists.txt:480:40  	sigpipe     	U   	curl_wrappers_disable_sigpipe_handler_test.cc"
-  - "google/cloud/storage/CMakeLists.txt:660:72  	lcrc        	U   	cloud_cpp_storage\" \" -lcrc32c\")"
+  - "google/cloud/storage/CMakeLists.txt:61:5    	hmac        	U   	hmac_key_metadata.cc"
+  - "google/cloud/storage/CMakeLists.txt:155:26  	streambuf   	U   	internal/object_read_streambuf.cc"
+  - "google/cloud/storage/CMakeLists.txt:472:40  	sigpipe     	U   	curl_wrappers_disable_sigpipe_handler_test.cc"
+  - "google/cloud/storage/CMakeLists.txt:652:72  	lcrc        	U   	cloud_cpp_storage\" \" -lcrc32c\")"
   - "google/cloud/storage/doc/parallel-uploads-design.md:83:58   	prepended   	U   	prefix, which will be prepended to all"
   - "google/cloud/storage/doc/parallel-uploads-design.md:178:30  	Streambuf   	U   	`ParallelObjectWriteStreambuf` for every shard"
   - "google/cloud/storage/doc/parallel-uploads-design.md:180:23  	Streambufs  	U   	`ParallelObjectWriteStreambufs`"
