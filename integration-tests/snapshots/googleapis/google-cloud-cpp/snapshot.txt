@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 1945, Issues found: 9599 in 1210 files
+ CSpell: Files checked: 1967, Issues found: 9786 in 1231 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -62,6 +62,7 @@ Lines:
 ./ci/cloudbuild/notifiers/logs/function/generate_svg_badge.h:15:29     - Unknown word (CLOUDBUILD) -- GOOGLE_CLOUD_CPP_CI_CLOUDBUILD_NOTIFIERS_LOGS_FUNCTION
 ./ci/etc/README.md:13:40     - Unknown word (createinstance) -- GOOGLE_CLOUD_PROJECT}" createinstance \
 ./ci/etc/README.md:22:5      - Unknown word (createtable)    -- createtable quickstart families
+./ci/etc/expected_install_directories:39:9      - Unknown word (cmake)      -- ./lib64/cmake
 ./ci/generate-markdown/README.md:12:4      - Unknown word (HOWTO)      -- ## HOWTO: Generate the markdown
 ./ci/kokoro/README.md:13:46     - Unknown word (Googlers)   -- Kokoro is available to Googlers only (sorry) at go/kokoro
 ./ci/kokoro/README.md:14:21     - Unknown word (codelabs)   -- there are extensive codelabs and detailed descriptions
@@ -71,7 +72,6 @@ Lines:
 ./ci/kokoro/windows/build-32.bat:19:9      - Unknown word (ERRORLEVEL) -- @if NOT ERRORLEVEL 0 exit /b 1
 ./ci/kokoro/windows/build-32.bat:25:98     - Unknown word (vcvars)     -- Community\VC\Auxiliary\Build\vcvars32.bat"
 ./ci/kokoro/windows/build-32.bat:30:5      - Unknown word (errorlevel) -- if %errorlevel% neq 0 exit /b %errorlevel
-./ci/verify_current_targets/CMakeLists.txt:17:1      - Unknown word (cmake)      -- cmake_minimum_required(VERSION
 ./ci/verify_current_targets/CMakeLists.txt:45:47     - Unknown word (ARGN)       -- "${name}" PRIVATE ${ARGN})
 ./ci/verify_current_targets/CMakeLists.txt:47:1      - Unknown word (endfunction) -- endfunction ()
 ./ci/verify_current_targets/CMakeLists.txt:51:1      - Unknown word (endforeach)  -- endforeach ()
@@ -211,13 +211,13 @@ Lines:
 ./generator/internal/predicate_utils_test.cc:835:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 ./generator/internal/printer_test.cc:37:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 ./generator/internal/service_code_generator.cc:268:20    - Unknown word (nspace)     -- for (auto const& nspace : namespaces_) {
-./generator/scaffold/CMakeLists.txt.in:138:28    - Unknown word (lgoogle)    -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_@NAME@")
-./generator/scaffold/CMakeLists.txt.in:25:30     - Unknown word (DEPS)       -- GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::@NAME
-./generator/standalone_main.cc:53:49     - Unknown word (textproto)  -- "Unable to parse textproto file.");
-./google/cloud/CMakeLists.txt:100:22    - Unknown word (msvc)       -- internal/disable_msvc_crt_secure_warnings
-./google/cloud/CMakeLists.txt:111:14    - Unknown word (getenv)     -- internal/getenv.cc
-./google/cloud/CMakeLists.txt:127:14    - Unknown word (strerror)   -- internal/strerror.cc
-./google/cloud/bigquery/CMakeLists.txt:86:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
+./generator/scaffold/CMakeLists.txt.in:137:28    - Unknown word (lgoogle)    -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_@NAME@")
+./generator/scaffold/CMakeLists.txt.in:24:30     - Unknown word (DEPS)       -- GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::@NAME
+./generator/standalone_main.cc:54:49     - Unknown word (textproto)  -- "Unable to parse textproto file.");
+./google/cloud/CMakeLists.txt:111:14    - Unknown word (strerror)   -- internal/strerror.cc
+./google/cloud/CMakeLists.txt:84:22     - Unknown word (msvc)       -- internal/disable_msvc_crt_secure_warnings
+./google/cloud/CMakeLists.txt:95:14     - Unknown word (getenv)     -- internal/getenv.cc
+./google/cloud/bigquery/CMakeLists.txt:85:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
 ./google/cloud/bigquery/README.md:38:11     - Unknown word (iostream)   -- #include <iostream>
 ./google/cloud/bigquery/README.md:39:11     - Unknown word (stdexcept)  -- #include <stdexcept>
 ./google/cloud/bigquery/README.md:51:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
@@ -241,9 +241,9 @@ Lines:
 ./google/cloud/bigquery/quickstart/README.md:44:25     - Unknown word (setenv)      -- csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL
 ./google/cloud/bigquery/quickstart/README.md:44:7      - Unknown word (tsch)        -- | csh/tsch | `setenv
 ./google/cloud/bigquery/samples/bigquery_read_samples.cc:190:47    - Unknown word (bugprone)   -- argv[]) {  // NOLINT(bugprone-exception-escape)
-./google/cloud/bigtable/CMakeLists.txt:143:14    - Unknown word (readrowsparser) -- internal/readrowsparser.cc
-./google/cloud/bigtable/CMakeLists.txt:145:14    - Unknown word (rowreaderiterator) -- internal/rowreaderiterator.cc
-./google/cloud/bigtable/CMakeLists.txt:355:18    - Unknown word (DBIGTABLE)         -- PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC
+./google/cloud/bigtable/CMakeLists.txt:141:14    - Unknown word (readrowsparser) -- internal/readrowsparser.cc
+./google/cloud/bigtable/CMakeLists.txt:143:14    - Unknown word (rowreaderiterator) -- internal/rowreaderiterator.cc
+./google/cloud/bigtable/CMakeLists.txt:353:18    - Unknown word (DBIGTABLE)         -- PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC
 ./google/cloud/bigtable/README.md:45:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
 ./google/cloud/bigtable/admin/integration_tests/table_admin_integration_test.cc:223:19    - Unknown word (newfam)     -- mods[0].set_id("newfam");
 ./google/cloud/bigtable/admin/internal/bigtable_instance_admin_option_defaults.cc:44:40     - Unknown word (bigtableadmin) -- env->empty() ? *env : "bigtableadmin.googleapis.com");
@@ -380,6 +380,7 @@ Lines:
 ./google/cloud/pubsub/schema_admin_connection.h:38:38     - Unknown word (cppref)     -- models an [input range][cppref-input-range] of
 ./google/cloud/pubsub/subscription_builder_test.cc:152:9     - Unknown word (oidc)       -- oidc_token {
 ./google/cloud/pubsub/subscription_builder_test.cc:31:31     - Unknown word (Oidc)       -- SubscriptionBuilder, MakeOidcToken) {
+./google/cloud/pubsublite/admin_client.h:19:39     - Unknown word (PUBSUBLITE) -- CLOUD_CPP_GOOGLE_CLOUD_PUBSUBLITE_ADMIN_CLIENT_H
 ./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:115:63    - Unknown word (creq)       -- CreateDatabaseRequest creq;
 ./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:167:63    - Unknown word (breq)       -- CreateBackupRequest breq;
 ./google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:428:64    - Unknown word (rreq)       -- RestoreDatabaseRequest rreq;
@@ -417,10 +418,10 @@ Lines:
 ./google/cloud/spanner/value.h:343:6     - Unknown word (Metafunction) -- // Metafunction that returns true if
 ./google/cloud/spanner/value_test.cc:1092:14   - Unknown word (alphahex)   -- auto const alphahex = [](std::ostream& os
 ./google/cloud/spanner/value_test.cc:1102:49   - Unknown word (manip)      -- ostream&(std::ostream&)> manip;
-./google/cloud/storage/CMakeLists.txt:163:26    - Unknown word (streambuf)  -- internal/object_read_streambuf.cc
-./google/cloud/storage/CMakeLists.txt:480:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
-./google/cloud/storage/CMakeLists.txt:660:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c")
-./google/cloud/storage/CMakeLists.txt:69:5      - Unknown word (hmac)       -- hmac_key_metadata.cc
+./google/cloud/storage/CMakeLists.txt:155:26    - Unknown word (streambuf)  -- internal/object_read_streambuf.cc
+./google/cloud/storage/CMakeLists.txt:472:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
+./google/cloud/storage/CMakeLists.txt:61:5      - Unknown word (hmac)       -- hmac_key_metadata.cc
+./google/cloud/storage/CMakeLists.txt:652:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c")
 ./google/cloud/storage/README.md:77:29     - Unknown word (istreambuf) -- string contents{std::istreambuf_iterator<char>{reader
 ./google/cloud/storage/benchmarks/README.md:108:53    - Unknown word (venv)       -- and assume that the `venv` module is
 ./google/cloud/storage/benchmarks/README.md:10:61     - Unknown word (TTFB)       -- time to first byte (TTFB) is high, so
