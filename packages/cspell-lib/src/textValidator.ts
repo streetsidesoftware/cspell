@@ -124,10 +124,14 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         return dict.isNoSuggestWord(word, options);
     }
 
-    function checkFlagWords(word: ValidationResult): ValidationResult {
+    function isWordFlagged(word: TextOffset): boolean {
         const isIgnored = isWordIgnored(word.text);
         const isFlagged = !isIgnored && testForFlaggedWord(word);
-        word.isFlagged = isFlagged;
+        return isFlagged;
+    }
+
+    function checkFlagWords(word: ValidationResult): ValidationResult {
+        word.isFlagged = isWordFlagged(word);
         return word;
     }
 
@@ -175,6 +179,15 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         }
 
         function checkPossibleWords(possibleWord: TextOffset) {
+            if (isWordFlagged(possibleWord)) {
+                const vr: ValidationResult = {
+                    ...possibleWord,
+                    line: lineSegment,
+                    isFlagged: true,
+                };
+                return [vr];
+            }
+
             const mismatches: ValidationResult[] = Text.extractWordsFromTextOffset(possibleWord)
                 .filter(filterAlreadyChecked)
                 .map((wo) => ({ ...wo, line: lineSegment }))
