@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.13.0](https://github.com/streetsidesoftware/cspell/compare/v5.12.6...v5.13.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* Add `enableCaseSensitive`/`disableCaseSensitive` ([#1951](https://github.com/streetsidesoftware/cspell/issues/1951)) ([93387b7](https://github.com/streetsidesoftware/cspell/commit/93387b7df3e83ac9d7b05df8e35167a0c0c35065))
+* integration - turn off case sensitivity for German ([#1952](https://github.com/streetsidesoftware/cspell/issues/1952)) ([2465964](https://github.com/streetsidesoftware/cspell/commit/2465964ec0241984dfbab9705c58c1bea2263d10))
+
+
+### Features
+
+* Support `--dot` command line option. ([#1985](https://github.com/streetsidesoftware/cspell/issues/1985)) ([fa1aa11](https://github.com/streetsidesoftware/cspell/commit/fa1aa116f0cc7468cbcf38320deba3bd0b62cc9c))
+
+
+
+
+
 ## [5.12.6](https://github.com/streetsidesoftware/cspell/compare/v5.12.5...v5.12.6) (2021-11-04)
 
 

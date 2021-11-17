@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.13.0](https://github.com/streetsidesoftware/cspell/compare/v5.12.6...v5.13.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* integration - turn off case sensitivity for German ([#1952](https://github.com/streetsidesoftware/cspell/issues/1952)) ([2465964](https://github.com/streetsidesoftware/cspell/commit/2465964ec0241984dfbab9705c58c1bea2263d10))
+
+
+
+
+
 ## [5.12.6](https://github.com/streetsidesoftware/cspell/compare/v5.12.5...v5.12.6) (2021-11-04)
 
 **Note:** Version bump only for package cspell-integration-tests
