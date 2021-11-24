@@ -5,7 +5,11 @@ import { PathInterface, GlobMatch, GlobPattern, GlobPatternWithRoot } from './Gl
 
 // cspell:ignore fname
 
-export type GlobMatchOptions = Partial<NormalizedGlobMatchOptions>;
+type Optional<T> = {
+    [P in keyof T]?: T[P] | undefined;
+};
+
+export type GlobMatchOptions = Optional<NormalizedGlobMatchOptions>;
 
 export type MatcherMode = 'exclude' | 'include';
 
@@ -59,7 +63,7 @@ interface NormalizedGlobMatchOptions {
      *
      * @default false
      */
-    nobrace?: boolean; // cspell:ignore nobrace
+    nobrace?: boolean | undefined; // cspell:ignore nobrace
 }
 
 export class GlobMatcher {

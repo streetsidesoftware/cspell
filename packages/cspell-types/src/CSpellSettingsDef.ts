@@ -741,11 +741,11 @@ interface BaseSource {
     /** name of source */
     name: string;
     /** filename if this came from a file. */
-    filename?: string;
+    filename?: string | undefined;
     /** The two settings that were merged to */
-    sources?: [CSpellSettings] | [CSpellSettings, CSpellSettings];
+    sources?: [CSpellSettings] | [CSpellSettings, CSpellSettings] | undefined;
     /** The configuration read. */
-    fileSource?: CSpellSettings;
+    fileSource?: CSpellSettings | undefined;
 }
 
 /**

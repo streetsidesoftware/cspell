@@ -24,7 +24,8 @@ export function fileOrGlobToGlob(
     const pathToGlob = path.sep === '\\' ? (p: string) => p.replace(/\\/g, '/') : (p: string) => p;
 
     if (typeof fileOrGlob !== 'string') {
-        return { root, ...fileOrGlob };
+        const useRoot = fileOrGlob.root ?? root;
+        return { ...fileOrGlob, root: useRoot };
     }
 
     if (doesRootContainPath(root, fileOrGlob, path) || relRegExp.test(fileOrGlob)) {
