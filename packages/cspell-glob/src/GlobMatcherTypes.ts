@@ -37,15 +37,15 @@ export interface GlobPatternWithOptionalRoot {
      * The root from which the glob pattern is relative.
      * @default: options.root
      */
-    root?: string;
+    root?: string | undefined;
     /**
      * Optional value useful for tracing which file a glob pattern was defined in.
      */
-    source?: string;
+    source?: string | undefined;
     /**
      * Optional line number in the source
      */
-    line?: number;
+    line?: number | undefined;
 }
 
 export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {
