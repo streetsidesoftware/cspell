@@ -10,5 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.4.0
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          cache: npm
       - run: npm run prepare-cspell-action
       - uses: streetsidesoftware/cspell-action@v1.3.5
