@@ -3,7 +3,7 @@ Repository: pycontribs/jira
 Url: "https://github.com/pycontribs/jira.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 76, Issues found: 438 in 34 files
+ CSpell: Files checked: 75, Issues found: 439 in 34 files
  exit code: 1
 ./AUTHORS.rst:3:21      - Unknown word (Contribs)   -- Development Team (PyContribs)
 ./AUTHORS.rst:5:7       - Unknown word (Speakmon)   -- - Ben Speakmon <ben.speakmon@gmail
@@ -52,7 +52,7 @@ Lines:
 ./constraints.txt:33:9      - Unknown word (gssapi)      -- # gssapi
 ./constraints.txt:35:9      - Unknown word (traitlets)   -- # traitlets
 ./constraints.txt:36:1      - Unknown word (defusedxml)  -- defusedxml==0.7.1
-./constraints.txt:38:1      - Unknown word (docutils)    -- docutils==0.17.1
+./constraints.txt:38:1      - Unknown word (docutils)    -- docutils==0.18
 ./constraints.txt:43:1      - Unknown word (execnet)     -- execnet==1.9.0
 ./constraints.txt:46:16     - Unknown word (xdist)       -- # pytest-xdist
 ./constraints.txt:47:1      - Unknown word (filemagic)   -- filemagic==1.6
@@ -79,17 +79,18 @@ Lines:
 ./docs/conf.py:223:66    - Unknown word (howto)         -- author, documentclass [howto/manual]).
 ./docs/conf.py:47:22     - Unknown word (bysource)   -- "member-order": "bysource",
 ./docs/conf.py:84:14     - Unknown word (toctree)    -- # The master toctree document.
-./docs/examples.rst:163:31    - Unknown word (newassignee)    -- assign_issue(issue, 'newassignee')
-./docs/examples.rst:172:69    - Unknown word (issuetype)      -- Look into this one', issuetype={'name': 'Bug'})
 ./docs/examples.rst:17:33     - Unknown word (greenhopper)    -- literalinclude:: ../examples/greenhopper.py
-./docs/examples.rst:209:59    - Unknown word (createmeta)     -- issues; see the ``jira.createmeta`` method for getting
+./docs/examples.rst:196:31    - Unknown word (newassignee)    -- assign_issue(issue, 'newassignee')
+./docs/examples.rst:205:69    - Unknown word (issuetype)      -- Look into this one', issuetype={'name': 'Bug'})
 ./docs/examples.rst:20:1      - Unknown word (Quickstart)     -- Quickstart
-./docs/examples.rst:244:27    - Unknown word (worklogs)       -- Example for accessing the worklogs::
-./docs/examples.rst:246:18    - Unknown word (worklog)        -- issue.fields.worklog.worklogs
-./docs/examples.rst:246:77    - Unknown word (Worklog)        -- # list of Worklog objects
-./docs/examples.rst:259:18    - Unknown word (timetracking)   -- issue.fields.timetracking.remainingEstimate
+./docs/examples.rst:242:59    - Unknown word (createmeta)     -- issues; see the ``jira.createmeta`` method for getting
+./docs/examples.rst:277:27    - Unknown word (worklogs)       -- Example for accessing the worklogs::
+./docs/examples.rst:279:18    - Unknown word (worklog)        -- issue.fields.worklog.worklogs
+./docs/examples.rst:279:77    - Unknown word (Worklog)        -- # list of Worklog objects
+./docs/examples.rst:292:18    - Unknown word (timetracking)   -- issue.fields.timetracking.remainingEstimate
 ./docs/examples.rst:33:54     - Unknown word (Atlassian)      -- instance started from the Atlassian Plugin SDK.
 ./docs/examples.rst:45:64     - Unknown word (netrc)          -- redentials from inside the ~/.netrc file, so put them there
+./docs/examples.rst:89:4      - Unknown word (seealso)        -- .. seealso::
 ./docs/examples.rst:9:4       - Unknown word (literalinclude) -- .. literalinclude:: ../examples/basic
 ./docs/index.rst:26:27     - Unknown word (Fjira)      -- feed://https%3A%2F%2Fjira.readthedocs.io%2Fen
 ./docs/index.rst:26:54     - Unknown word (Flatest)    -- readthedocs.io%2Fen%2Flatest%2Fjira.xml>`_ format
@@ -114,43 +115,43 @@ Lines:
 ./docs/jirashell.rst:60:62     - Unknown word (workratio)                     -- issue.fields.workratio
 ./examples/basic_use.py:19:29     - Unknown word (Atlassians) -- all comments made by Atlassians on this issue.
 ./examples/maintenance.py:80:8      - Unknown word (ssbarnea)   -- # TODO(ssbarnea): "Default Issue Security
-./jira/client.py:1110:45   - Unknown word (favourite)  -- Optional[str]): either "favourite" or "my", the type of
-./jira/client.py:1160:57   - Unknown word (favourites) -- Resources which are the favourites of the currently authenticate
-./jira/client.py:1775:10   - Unknown word (rtype)      -- :rtype: List[Comment]
-./jira/client.py:2021:14   - Unknown word (transitionid) -- def find_transitionid_by_name(
-./jira/client.py:2030:31   - Unknown word (iname)        -- trans_name (str): iname of transition we are
-./jira/client.py:2484:32   - Unknown word (mypermissions) -- return self._get_json("mypermissions", params=params)
-./jira/client.py:2823:9    - Unknown word (untranslate)   -- untranslate = {}  # use to add friendly
-./jira/client.py:3461:25   - Unknown word (timegm)        -- return calendar.timegm(t.timetuple())
-./jira/client.py:3709:66   - Unknown word (jspa)          -- admin/user/EditUser.jspa"
-./jira/client.py:3737:9    - Unknown word (reindex)       -- def reindex(self, force: bool =
-./jira/client.py:3738:52   - Unknown word (reindexing)    -- indexing. Returns True if reindexing is in progress or not
-./jira/client.py:3842:9    - Unknown word (perc)          -- perc_search = re.search(r
-./jira/client.py:3856:35   - Unknown word (webdav)        -- self.server_url + "/webdav/backupmanager/" + remote
-./jira/client.py:4067:9    - Unknown word (ptype)         -- ptype: str = "software",
-./jira/client.py:4341:33   - Unknown word (Dalko)         -- Experimental support for iDalko Grid, expect API to
-./jira/client.py:4343:13   - Unknown word (igrid)         -- def get_igrid(self, issueid: str,
-./jira/client.py:4343:25   - Unknown word (issueid)       -- def get_igrid(self, issueid: str, customfield: str
-./jira/client.py:4343:57   - Unknown word (schemeid)      -- str, customfield: str, schemeid: str):
-./jira/client.py:4344:40   - Unknown word (idalko)        -- server_url + "/rest/idalko-igrid/1.0/datagrid/data
-./jira/client.py:4529:29   - Unknown word (incompleted)   -- """Return the total incompleted points this sprint.
-./jira/client.py:4813:59   - Unknown word (lexo)          -- greenhopper.jira:gh-lexo-rank"
-./jira/client.py:519:28    - Unknown word (verif)      -- self._add_ssl_cert_verif_strategy_to_session
+./jira/client.py:1131:45   - Unknown word (favourite)  -- Optional[str]): either "favourite" or "my", the type of
+./jira/client.py:1181:57   - Unknown word (favourites) -- Resources which are the favourites of the currently authenticate
+./jira/client.py:1795:10   - Unknown word (rtype)      -- :rtype: List[Comment]
+./jira/client.py:2041:14   - Unknown word (transitionid) -- def find_transitionid_by_name(
+./jira/client.py:2050:31   - Unknown word (iname)        -- trans_name (str): iname of transition we are
+./jira/client.py:2504:32   - Unknown word (mypermissions) -- return self._get_json("mypermissions", params=params)
+./jira/client.py:2843:9    - Unknown word (untranslate)   -- untranslate = {}  # use to add friendly
+./jira/client.py:3481:25   - Unknown word (timegm)        -- return calendar.timegm(t.timetuple())
+./jira/client.py:3726:66   - Unknown word (jspa)          -- admin/user/EditUser.jspa"
+./jira/client.py:3753:9    - Unknown word (reindex)       -- def reindex(self, force: bool =
+./jira/client.py:3754:52   - Unknown word (reindexing)    -- indexing. Returns True if reindexing is in progress or not
+./jira/client.py:3853:9    - Unknown word (perc)          -- perc_search = re.search(r
+./jira/client.py:3867:35   - Unknown word (webdav)        -- self.server_url + "/webdav/backupmanager/" + remote
+./jira/client.py:4078:9    - Unknown word (ptype)         -- ptype: str = "software",
+./jira/client.py:4352:33   - Unknown word (Dalko)         -- Experimental support for iDalko Grid, expect API to
+./jira/client.py:4354:13   - Unknown word (igrid)         -- def get_igrid(self, issueid: str,
+./jira/client.py:4354:25   - Unknown word (issueid)       -- def get_igrid(self, issueid: str, customfield: str
+./jira/client.py:4354:57   - Unknown word (schemeid)      -- str, customfield: str, schemeid: str):
+./jira/client.py:4355:40   - Unknown word (idalko)        -- server_url + "/rest/idalko-igrid/1.0/datagrid/data
+./jira/client.py:4540:29   - Unknown word (incompleted)   -- """Return the total incompleted points this sprint.
+./jira/client.py:4824:59   - Unknown word (lexo)          -- greenhopper.jira:gh-lexo-rank"
+./jira/client.py:541:28    - Unknown word (verif)      -- self._add_ssl_cert_verif_strategy_to_session
 ./jira/exceptions.py:35:33     - Unknown word (PYJIRA)     -- self.log_to_tempfile = "PYJIRA_LOG_TO_TEMPFILE" in
 ./jira/jirashell.py:35:28     - Unknown word (servlet)    -- server + "/plugins/servlet/oauth/request-token
 ./jira/resources.py:1347:5    - Unknown word (seqs)        -- seqs = tuple, list, set,
 ./jira/resources.py:992:14    - Unknown word (categorised) -- "categorisedActors": {
-./setup.cfg:120:10    - Unknown word (pylint)     -- format = pylint
-./setup.cfg:132:2     - Unknown word (isort)      -- [isort]
-./setup.cfg:146:1     - Unknown word (norecursedirs) -- norecursedirs = . jira _build tmp
-./setup.cfg:146:60    - Unknown word (distutils)     -- third lib *.egg bin distutils build docs demo
-./setup.cfg:148:1     - Unknown word (addopts)       -- addopts = -p no:xdist --durations
-./setup.cfg:148:70    - Unknown word (junitxml)      -- rxX -v --color=yes --junitxml=build/results.xml -
-./setup.cfg:150:1     - Unknown word (testpaths)     -- testpaths = tests
-./setup.cfg:153:1     - Unknown word (rsyncdirs)     -- rsyncdirs = . jira demo docs
-./setup.cfg:154:1     - Unknown word (rsyncignore)   -- rsyncignore = .git
-./setup.cfg:160:1     - Unknown word (filterwarnings) -- filterwarnings =
-./setup.cfg:166:2     - Unknown word (mypy)           -- [mypy]
+./setup.cfg:121:10    - Unknown word (pylint)     -- format = pylint
+./setup.cfg:133:2     - Unknown word (isort)      -- [isort]
+./setup.cfg:147:1     - Unknown word (norecursedirs) -- norecursedirs = . jira _build tmp
+./setup.cfg:147:60    - Unknown word (distutils)     -- third lib *.egg bin distutils build docs demo
+./setup.cfg:149:1     - Unknown word (addopts)       -- addopts = -p no:xdist --durations
+./setup.cfg:149:70    - Unknown word (junitxml)      -- rxX -v --color=yes --junitxml=build/results.xml -
+./setup.cfg:151:1     - Unknown word (testpaths)     -- testpaths = tests
+./setup.cfg:154:1     - Unknown word (rsyncdirs)     -- rsyncdirs = . jira demo docs
+./setup.cfg:155:1     - Unknown word (rsyncignore)   -- rsyncignore = .git
+./setup.cfg:161:1     - Unknown word (filterwarnings) -- filterwarnings =
+./setup.cfg:167:2     - Unknown word (mypy)           -- [mypy]
 ./setup.cfg:40:17     - Unknown word (atlassian)  -- keywords = api, atlassian, jira, rest, web
 ./tests/conftest.py:84:5      - Unknown word (rndstr)     -- def rndstr():
 ./tests/conftest.py:88:5      - Unknown word (rndpassword) -- def rndpassword():
