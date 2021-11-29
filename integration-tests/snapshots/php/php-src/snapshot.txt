@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1825, Issues found: 19610 in 1084 files
+ CSpell: Files checked: 1825, Issues found: 19645 in 1084 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -67,9 +67,9 @@ Lines:
 ./Zend/Optimizer/block_pass.c:62:24     - Unknown word (Tsource)    -- define VAR_SOURCE(op) Tsource[VAR_NUM(op.var)]
 ./Zend/Optimizer/compact_vars.c:32:24     - Unknown word (tmps)       -- uint32_t num_cvs, num_tmps;
 ./Zend/Optimizer/dce.c:37:38     - Unknown word (Cytron)     -- algorithm described by Cytron et al., however it requires
-./Zend/Optimizer/dfa_pass.c:1618:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
-./Zend/Optimizer/dfa_pass.c:387:19    - Unknown word (needly)     -- zend_op *send_needly;
-./Zend/Optimizer/dfa_pass.c:693:30    - Unknown word (jmps)       -- int zend_dfa_optimize_jmps(zend_op_array *op_array
+./Zend/Optimizer/dfa_pass.c:1616:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
+./Zend/Optimizer/dfa_pass.c:385:19    - Unknown word (needly)     -- zend_op *send_needly;
+./Zend/Optimizer/dfa_pass.c:691:30    - Unknown word (jmps)       -- int zend_dfa_optimize_jmps(zend_op_array *op_array
 ./Zend/Optimizer/escape_analysis.c:28:7      - Unknown word (Kotzmann)   -- * T. Kotzmann and H. Mossenbock. Escape
 ./Zend/Optimizer/escape_analysis.c:398:19    - Unknown word (Equi)       -- /* 1. Build EES (Equi-Escape Sets) */
 ./Zend/Optimizer/escape_analysis.c:76:31     - Unknown word (equi)       -- zend_result zend_build_equi_escape_sets(int *parent
@@ -115,7 +115,7 @@ Lines:
 ./Zend/micro_bench.php:19:10     - Unknown word (simpleicall) -- function simpleicall($n) {
 ./Zend/micro_bench.php:205:10    - Unknown word (issetor)     -- function issetor($n) {
 ./Zend/zend.c:866:2     - Unknown word (fpsetmask)  -- fpsetmask(0);
-./Zend/zend_API.c:3442:15   - Unknown word (lmname)     -- zend_string *lmname;
+./Zend/zend_API.c:3459:15   - Unknown word (lmname)     -- zend_string *lmname;
 ./Zend/zend_API.c:607:6     - Unknown word (SSTH)       -- /* SSTH Exception: IS_LONG may
 ./Zend/zend_alloc.c:1461:7    - Unknown word (unmup)      -- /* unmup tail */
 ./Zend/zend_alloc.c:164:20    - Unknown word (FRUN)       -- #define ZEND_MM_IS_FRUN 0x
@@ -131,8 +131,8 @@ Lines:
 ./Zend/zend_bitset.h:81:51     - Unknown word (clzl)       -- has_builtin(__builtin_clzl)) \
 ./Zend/zend_bitset.h:82:65     - Unknown word (CLZL)       -- defined(PHP_HAVE_BUILTIN_CLZL)
 ./Zend/zend_bitset.h:84:89     - Unknown word (CLZLL)      -- defined(PHP_HAVE_BUILTIN_CLZLL)
-./Zend/zend_builtin_functions.c:1645:14   - Unknown word (frameno)    -- int lineno, frameno = 0;
-./Zend/zend_builtin_functions.c:859:8     - Unknown word (klass)      -- zval *klass;
+./Zend/zend_builtin_functions.c:1648:14   - Unknown word (frameno)    -- int lineno, frameno = 0;
+./Zend/zend_builtin_functions.c:862:8     - Unknown word (klass)      -- zval *klass;
 ./Zend/zend_closures.c:197:55    - Unknown word (zclosure)   -- return_value, zval *zclosure, zval *newthis, zend
 ./Zend/zend_closures.c:764:23    - Unknown word (unscoped)   -- * If the closure is unscoped or static, it has no
 ./Zend/zend_compile.c:186:14    - Unknown word (uqname)     -- const char *uqname = ZSTR_VAL(name);
@@ -154,14 +154,14 @@ Lines:
 ./Zend/zend_execute.c:60:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
 ./Zend/zend_execute.c:651:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
 ./Zend/zend_execute.c:651:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
-./Zend/zend_execute_API.c:1424:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
+./Zend/zend_execute_API.c:1426:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
 ./Zend/zend_execute_API.c:976:24    - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
 ./Zend/zend_fibers.c:125:33    - Unknown word (fcontext)   -- by boost.context in fcontext.hpp:
 ./Zend/zend_gdb.c:29:14     - Unknown word (NOACTION)   -- ZEND_GDBJIT_NOACTION,
 ./Zend/zend_globals.h:83:19     - Unknown word (yytnamerr)  -- /* Refer to zend_yytnamerr() in zend_language_parser
-./Zend/zend_hash.c:2198:42   - Unknown word (ined)       -- element may point to UNDEF-ined slots */
+./Zend/zend_hash.c:2196:42   - Unknown word (ined)       -- element may point to UNDEF-ined slots */
 ./Zend/zend_inheritance.c:1860:53   - Unknown word (fnname)     -- functions(zend_string *fnname, zend_function *fn,
-./Zend/zend_inheritance.c:2846:16   - Unknown word (explicilty) -- * we need to explicilty add the interface here
+./Zend/zend_inheritance.c:2843:16   - Unknown word (explicilty) -- * we need to explicilty add the interface here
 ./Zend/zend_inheritance.c:887:15    - Unknown word (precv)      -- zend_op *precv = NULL;
 ./Zend/zend_multiply.h:114:11    - Unknown word (mulld)      -- __asm__("mulld %0,%2,%3\n\t"					\
 ./Zend/zend_multiply.h:115:4     - Unknown word (mulhd)      -- "mulhd %1,%2,%3\n"					\
@@ -171,12 +171,12 @@ Lines:
 ./Zend/zend_multiply.h:249:27    - Unknown word (tumulh)     -- asm__ ("mul %0,%2,%3\n\tumulh %1,%2,%3\n\tadds %0
 ./Zend/zend_multiply.h:271:19    - Unknown word (mulhdu)     -- "mulhdu %1,%2,%3\n\t"
 ./Zend/zend_multiply.h:273:19    - Unknown word (addze)      -- "addze %1,%1\n"
-./Zend/zend_object_handlers.c:1130:12   - Unknown word (unseter)    -- /* have unseter - try with it! */
+./Zend/zend_object_handlers.c:1152:12   - Unknown word (unseter)    -- /* have unseter - try with it! */
 ./Zend/zend_object_handlers.h:92:5      - Unknown word (Unserialization) -- * Unserialization will use __wakeup()
 ./Zend/zend_operators.c:3071:41   - Unknown word (streq)      -- FASTCALL zendi_smart_streq(zend_string *s1, zend
 ./Zend/zend_operators.c:63:16     - Unknown word (blconv)     -- const __m128i blconv_start_minus_1 = _mm
-./Zend/zend_operators.h:528:7     - Unknown word (lresult)    -- long lresult;
-./Zend/zend_operators.h:536:12    - Unknown word (llresult)   -- long long llresult;
+./Zend/zend_operators.h:533:7     - Unknown word (lresult)    -- long lresult;
+./Zend/zend_operators.h:541:12    - Unknown word (llresult)   -- long long llresult;
 ./Zend/zend_portability.h:242:51    - Unknown word (Ofast)      -- attribute__((optimize("Ofast")))
 ./Zend/zend_portability.h:484:29    - Unknown word (IFUNC)      -- HAVE_FUNC_ATTRIBUTE_IFUNC
 ./Zend/zend_portability.h:495:19    - Unknown word (TMMINTRIN)  -- # if defined(HAVE_TMMINTRIN_H)
@@ -184,7 +184,7 @@ Lines:
 ./Zend/zend_portability.h:503:19    - Unknown word (WMMINTRIN)  -- # if defined(HAVE_WMMINTRIN_H)
 ./Zend/zend_range_check.h:42:29     - Unknown word (zlong)      -- define ZEND_LONG_INT_OVFL(zlong) UNEXPECTED((zlong)
 ./Zend/zend_range_check.h:43:24     - Unknown word (UDFL)       -- define ZEND_LONG_INT_UDFL(zlong) UNEXPECTED((zlong
-./Zend/zend_signal.c:85:31     - Unknown word (qtmp)       -- signal_queue_t *queue, *qtmp;
+./Zend/zend_signal.c:87:31     - Unknown word (qtmp)       -- signal_queue_t *queue, *qtmp;
 ./Zend/zend_stream.h:81:23     - Unknown word (fseeki)     -- define zend_fseek _fseeki64
 ./Zend/zend_stream.h:82:23     - Unknown word (ftelli)     -- define zend_ftell _ftelli64
 ./Zend/zend_string.c:372:27    - Unknown word (FNNAME)     -- define I_REPLACE_SONAME_FNNAME_ZU(soname, fnname)
@@ -230,7 +230,7 @@ Lines:
 ./Zend/zend_vm_def.h:47:13     - Unknown word (NOCONSTCONST) -- ZEND_VM_HOT_NOCONSTCONST_HANDLER(1, ZEND_ADD
 ./Zend/zend_vm_def.h:47:53     - Unknown word (TMPVARCV)     -- HANDLER(1, ZEND_ADD, CONST|TMPVARCV, CONST|TMPVARCV)
 ./Zend/zend_vm_def.h:944:13    - Unknown word (NOCONST)      -- ZEND_VM_HOT_NOCONST_HANDLER(13, ZEND_BW
-./Zend/zend_vm_def.h:9467:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
+./Zend/zend_vm_def.h:9468:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
 ./Zend/zend_vm_gen.php:1070:84   - Unknown word (FASTCALL)   -- OPCODE_HANDLER_RET ZEND_FASTCALL {$spec_name}_INLINE
 ./Zend/zend_vm_gen.php:1139:23   - Unknown word (fastcall)   -- $zend_fastcall = "";
 ./Zend/zend_vm_gen.php:1395:52   - Unknown word (devnull)    -- extra as $extra => $devnull) {
@@ -297,15 +297,15 @@ Lines:
 ./docs/release-process.md:157:8     - Unknown word (frontpage)  -- "frontpage" *and* "releases" for
 ./docs/release-process.md:182:6     - Unknown word (Hannes)     -- (Hannes, Dan, Derick) run the
 ./docs/release-process.md:186:13    - Unknown word (ezmlm)      -- sudo -u ezmlm ezmlm-sub ~ezmlm/primary
-./docs/release-process.md:219:29    - Unknown word (phar)       -- pear files are updated (phar). On some systems the
-./docs/release-process.md:220:24    - Unknown word (POSIX)      -- default to produce POSIX compliant archives with
-./docs/release-process.md:283:5     - Unknown word (QARELEASE)  -- QARELEASE (prepare for next RC
-./docs/release-process.md:304:50    - Unknown word (peclbugfix) -- bug #\([0-9]\+\)/<?php peclbugfix(\1); ?>/`
-./docs/release-process.md:306:40    - Unknown word (bugl)       -- ([0-9]\+\)/FR <?php bugl(\1); ?>/`
-./docs/release-process.md:331:40    - Unknown word (mailinglist) -- hit the php-announce@ mailinglist.
-./docs/release-process.md:381:34    - Unknown word (confutils)   -- also in `win32/build/confutils.js`.
-./docs/release-process.md:443:12    - Unknown word (keyserver)   -- `gpg --keyserver pgp.mit.edu --send-keys
-./docs/release-process.md:443:47    - Unknown word (KEYID)       -- mit.edu --send-keys $KEYID`
+./docs/release-process.md:218:29    - Unknown word (phar)       -- pear files are updated (phar). On some systems the
+./docs/release-process.md:219:24    - Unknown word (POSIX)      -- default to produce POSIX compliant archives with
+./docs/release-process.md:282:5     - Unknown word (QARELEASE)  -- QARELEASE (prepare for next RC
+./docs/release-process.md:303:50    - Unknown word (peclbugfix) -- bug #\([0-9]\+\)/<?php peclbugfix(\1); ?>/`
+./docs/release-process.md:305:40    - Unknown word (bugl)       -- ([0-9]\+\)/FR <?php bugl(\1); ?>/`
+./docs/release-process.md:330:40    - Unknown word (mailinglist) -- hit the php-announce@ mailinglist.
+./docs/release-process.md:380:34    - Unknown word (confutils)   -- also in `win32/build/confutils.js`.
+./docs/release-process.md:442:12    - Unknown word (keyserver)   -- `gpg --keyserver pgp.mit.edu --send-keys
+./docs/release-process.md:442:47    - Unknown word (KEYID)       -- mit.edu --send-keys $KEYID`
 ./docs/release-process.md:98:16     - Unknown word (YOURKEYID)  -- git tag -u YOURKEYID php-7.4.2RC2
 ./docs/self-contained-extensions.md:30:1      - Unknown word (mkdir)      -- mkdir /tmp/newext
 ./docs/self-contained-extensions.md:30:12     - Unknown word (newext)     -- mkdir /tmp/newext
@@ -1287,7 +1287,6 @@ Lines:
 ./ext/gd/libgd/gdft.c:1112:38   - Unknown word (hori)          -- xMax += slot->metrics.horiAdvance;
 ./ext/gd/libgd/gdft.c:1136:17   - Unknown word (unrotated)     -- /* increment (unrotated) pen position */
 ./ext/gd/libgd/gdft.c:137:6     - Unknown word (fgcolor)    -- int fgcolor; /* key *//* -ve means
-./ext/gd/libgd/gdft.c:15:9      - Unknown word (MSWIN)      -- #ifndef MSWIN32
 ./ext/gd/libgd/gdft.c:31:14     - Unknown word (antialised) -- /* number of antialised colors for indexed bitmaps
 ./ext/gd/libgd/gdft.c:386:28    - Unknown word (GDFONTPATH) -- fontsearchpath = getenv ("GDFONTPATH");
 ./ext/gd/libgd/gdft.c:393:26    - Unknown word (becasuse)   -- Must use gd_strtok_r becasuse strtok() isn't thread
@@ -1558,7 +1557,7 @@ Lines:
 ./ext/imap/php_imap.c:983:12    - Unknown word (Promoto)        -- // TODO Promoto to error?
 ./ext/imap/php_imap.stub.php:152:22    - Unknown word (MUTF)       -- #ifdef HAVE_IMAP_MUTF7
 ./ext/imap/php_imap.stub.php:153:27    - Unknown word (mutf)       -- function imap_utf8_to_mutf7(string $string): string
-./ext/imap/php_imap.stub.php:74:68     - Unknown word (nums)       -- imap, string $message_nums, string $mailbox, int
+./ext/imap/php_imap.stub.php:60:65     - Unknown word (nums)       -- imap, string $message_nums, int $flags = 0): bool
 ./ext/imap/php_imap_arginfo.h:55:67     - Unknown word (adrlist)    -- arginfo_imap_rfc822_parse_adrlist, 0, 2, IS_ARRAY, 0)
 ./ext/imap/tests/README.md:14:18     - Unknown word (libc)       -- `apt-get install libc-client-dev libkrb5-dev
 ./ext/imap/tests/README.md:14:34     - Unknown word (libkrb)     -- install libc-client-dev libkrb5-dev dovecot-core dovecot
@@ -1573,7 +1572,7 @@ Lines:
 ./ext/intl/breakiterator/breakiterator_class.h:61:33     - Unknown word (unconstructed) -- throw_error(NULL, "Found unconstructed BreakIterator"); \
 ./ext/intl/breakiterator/breakiterator_iterators.h:36:3      - Unknown word (CFUNC)      -- U_CFUNC zend_object_iterator
 ./ext/intl/calendar/calendar.stub.php:12:15     - Unknown word (intlcal)    -- * @alias intlcal_create_instance
-./ext/intl/calendar/calendar.stub.php:297:15    - Unknown word (intlgregcal) -- * @alias intlgregcal_set_gregorian_change
+./ext/intl/calendar/calendar.stub.php:298:15    - Unknown word (intlgregcal) -- * @alias intlgregcal_set_gregorian_change
 ./ext/intl/calendar/calendar_class.h:36:12     - Unknown word (ucal)       -- Calendar* ucal;
 ./ext/intl/collator/collator.c:40:113    - Unknown word (UCOL)       -- ZEND_STRS( #x ) - 1, UCOL_##x );
 ./ext/intl/collator/collator.c:73:25     - Unknown word (ULOC)       -- COLLATOR_EXPOSE_CONST( ULOC_ACTUAL_LOCALE );
@@ -1645,7 +1644,7 @@ Lines:
 ./ext/intl/intl_cppshims.h:28:58     - Unknown word (pwin)       -- also defined in unicode/pwin32.h */
 ./ext/intl/intl_data.h:33:31     - Unknown word (oclass)     -- INTL_METHOD_INIT_VARS(oclass, obj)		\
 ./ext/intl/intl_error.h:41:16     - Unknown word (synchonize) -- // Wrappers to synchonize object's and global
-./ext/intl/locale/locale.stub.php:77:49     - Unknown word (subtags)    -- composeLocale(array $subtags): string|false {}
+./ext/intl/locale/locale.stub.php:78:49     - Unknown word (subtags)    -- composeLocale(array $subtags): string|false {}
 ./ext/intl/locale/locale_class.h:29:15     - Unknown word (uloc)       -- char* uloc1;
 ./ext/intl/locale/locale_methods.c:109:6     - Unknown word (guoyu)      -- "zh-guoyu",
 ./ext/intl/locale/locale_methods.c:114:6     - Unknown word (xiang)      -- "zh-xiang",
@@ -1670,9 +1669,9 @@ Lines:
 ./ext/intl/normalizer/normalizer_normalize.c:92:11     - Unknown word (uret)       -- UChar* uret_buf = NULL;
 ./ext/intl/php_intl.c:289:9     - Unknown word (UCONFIG)    -- #ifndef UCONFIG_NO_FORMATTING
 ./ext/intl/php_intl.c:291:14    - Unknown word (tzdata)     -- const char *tzdata_ver = NULL;
-./ext/intl/php_intl.stub.php:323:4     - Unknown word (msgformat)  -- /* msgformat */
-./ext/intl/php_intl.stub.php:355:4     - Unknown word (resourceboundle) -- /* resourceboundle */
-./ext/intl/php_intl.stub.php:357:10    - Unknown word (resourcebundle)  -- function resourcebundle_create(?string $locale
+./ext/intl/php_intl.stub.php:335:4     - Unknown word (msgformat)  -- /* msgformat */
+./ext/intl/php_intl.stub.php:375:4     - Unknown word (resourceboundle) -- /* resourceboundle */
+./ext/intl/php_intl.stub.php:377:10    - Unknown word (resourcebundle)  -- function resourcebundle_create(?string $locale
 ./ext/intl/php_intl_arginfo.h:653:49    - Unknown word (intltz)     -- TYPE_MASK_EX(arginfo_intltz_count_equivalent_ids
 ./ext/intl/resourcebundle/resourcebundle.c:28:25     - Unknown word (ufield)     -- const UChar*           ufield;
 ./ext/intl/resourcebundle/resourcebundle.c:29:25     - Unknown word (bfield)     -- const uint8_t*         bfield;
@@ -2078,18 +2077,18 @@ Lines:
 ./ext/odbc/php_odbc_includes.h:256:37    - Unknown word (phstmt)       -- ODBC_SQLALLOCSTMT(hdbc, phstmt) SQLAllocHandle(SQL
 ./ext/odbc/php_odbc_includes.h:270:9     - Unknown word (ODBCG)        -- #define ODBCG(v) ZEND_MODULE_GLOBALS
 ./ext/odbc/php_odbc_includes.h:46:22     - Unknown word (UWORD)      -- define SQLUSMALLINT UWORD
-./ext/opcache/ZendAccelerator.c:2348:65   - Unknown word (posible)    -- / This shouldn't be posible ???
-./ext/opcache/ZendAccelerator.c:2456:16   - Unknown word (UNLEN)      -- wchar_t uname[UNLEN + 1];
-./ext/opcache/ZendAccelerator.c:2457:8    - Unknown word (unsize)     -- DWORD unsize = UNLEN;
-./ext/opcache/ZendAccelerator.c:2721:12   - Unknown word (reseted)    -- ZCG(pcre_reseted) = 0;
-./ext/opcache/ZendAccelerator.c:2803:4    - Unknown word (fpmi)       -- "fpmi-fcgi",
-./ext/opcache/ZendAccelerator.c:2806:4    - Unknown word (uwsgi)      -- "uwsgi",
-./ext/opcache/ZendAccelerator.c:2807:4    - Unknown word (fuzzer)     -- "fuzzer",
-./ext/opcache/ZendAccelerator.c:3041:47   - Unknown word (VMMAP)      -- KERN_PROC, KERN_PROC_VMMAP, getpid()};
-./ext/opcache/ZendAccelerator.c:3051:19   - Unknown word (vmentry)    -- struct kinfo_vmentry *entry = (struct kinfo
-./ext/opcache/ZendAccelerator.c:3057:23   - Unknown word (KVME)       -- if ((permflags & KVME_PROT_READ) && !(permflags
-./ext/opcache/ZendAccelerator.c:3319:33   - Unknown word (callbaks)   -- Override inheritance cache callbaks */
-./ext/opcache/ZendAccelerator.c:3513:25   - Unknown word (hanlde)     -- FIXME: better way to hanlde eval()'d code? see COMPILED
+./ext/opcache/ZendAccelerator.c:2352:65   - Unknown word (posible)    -- / This shouldn't be posible ???
+./ext/opcache/ZendAccelerator.c:2461:16   - Unknown word (UNLEN)      -- wchar_t uname[UNLEN + 1];
+./ext/opcache/ZendAccelerator.c:2462:8    - Unknown word (unsize)     -- DWORD unsize = UNLEN;
+./ext/opcache/ZendAccelerator.c:2726:12   - Unknown word (reseted)    -- ZCG(pcre_reseted) = 0;
+./ext/opcache/ZendAccelerator.c:2808:4    - Unknown word (fpmi)       -- "fpmi-fcgi",
+./ext/opcache/ZendAccelerator.c:2811:4    - Unknown word (uwsgi)      -- "uwsgi",
+./ext/opcache/ZendAccelerator.c:2812:4    - Unknown word (fuzzer)     -- "fuzzer",
+./ext/opcache/ZendAccelerator.c:3046:47   - Unknown word (VMMAP)      -- KERN_PROC, KERN_PROC_VMMAP, getpid()};
+./ext/opcache/ZendAccelerator.c:3056:19   - Unknown word (vmentry)    -- struct kinfo_vmentry *entry = (struct kinfo
+./ext/opcache/ZendAccelerator.c:3062:23   - Unknown word (KVME)       -- if ((permflags & KVME_PROT_READ) && !(permflags
+./ext/opcache/ZendAccelerator.c:3324:33   - Unknown word (callbaks)   -- Override inheritance cache callbaks */
+./ext/opcache/ZendAccelerator.c:3518:25   - Unknown word (hanlde)     -- FIXME: better way to hanlde eval()'d code? see COMPILED
 ./ext/opcache/ZendAccelerator.c:923:28    - Unknown word (fdata)      -- FILE_ATTRIBUTE_DATA fdata;
 ./ext/opcache/jit/README.md:1:1       - Unknown word (Opcache)    -- Opcache JIT
 ./ext/opcache/jit/README.md:27:15     - Unknown word (dasc)       -- `zend_jit_x86.dasc` gets automatically
@@ -2400,9 +2399,9 @@ Lines:
 ./ext/opcache/jit/zend_elf.h:49:12     - Unknown word (shstridx)    -- uint16_t shstridx;
 ./ext/opcache/jit/zend_jit.c:1322:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
 ./ext/opcache/jit/zend_jit.c:154:17    - Unknown word (idom)       -- b = blocks[b].idom;
-./ext/opcache/jit/zend_jit.c:1673:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
-./ext/opcache/jit/zend_jit.c:4658:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
-./ext/opcache/jit/zend_jit.c:5134:7    - Unknown word (ZCSG)          -- if (ZCSG(preload_script)) {
+./ext/opcache/jit/zend_jit.c:1674:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
+./ext/opcache/jit/zend_jit.c:4660:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
+./ext/opcache/jit/zend_jit.c:5136:7    - Unknown word (ZCSG)          -- if (ZCSG(preload_script)) {
 ./ext/opcache/jit/zend_jit.c:752:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
 ./ext/opcache/jit/zend_jit.h:41:73     - Unknown word (caled)      -- the most frequently caled on first request functions
 ./ext/opcache/jit/zend_jit.h:78:61     - Unknown word (debbuger)   -- x1f0 /* profile and debbuger flags can't be changed
@@ -2422,8 +2421,8 @@ Lines:
 ./ext/opcache/jit/zend_jit_gdb.c:310:11    - Unknown word (framep)     -- uint8_t *framep = p;
 ./ext/opcache/jit/zend_jit_gdb.c:404:9     - Unknown word (DLNE)       -- #define DLNE(op, s) (DB(DW_LNS_extended
 ./ext/opcache/jit/zend_jit_gdb.c:451:28    - Unknown word (initf)      -- typedef void (*zend_gdbjit_initf) (zend_gdbjit_ctx *ctx
-./ext/opcache/jit/zend_jit_helpers.c:1500:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
-./ext/opcache/jit/zend_jit_helpers.c:1581:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
+./ext/opcache/jit/zend_jit_helpers.c:1503:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
+./ext/opcache/jit/zend_jit_helpers.c:1584:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
 ./ext/opcache/jit/zend_jit_internal.h:348:32    - Unknown word (prcessed)   -- DONE, "already prcessed") \
 ./ext/opcache/jit/zend_jit_internal.h:399:24    - Unknown word (JITED)      -- define ZEND_JIT_TRACE_JITED (1<<4)
 ./ext/opcache/jit/zend_jit_internal.h:443:20    - Unknown word (ICALL)      -- ZEND_JIT_TRACE_DO_ICALL,
@@ -2561,7 +2560,7 @@ Lines:
 ./ext/pcntl/pcntl.stub.php:83:13     - Unknown word (RFORK)        -- #ifdef HAVE_RFORK
 ./ext/pcntl/pcntl.stub.php:84:16     - Unknown word (rfork)        -- function pcntl_rfork(int $flags, int $signal
 ./ext/pcntl/php_signal.c:26:23     - Unknown word (oact)       -- struct sigaction act,oact;
-./ext/pcre/pcre2lib/pcre2.h:299:27    - Unknown word (BARJX)      -- define PCRE2_ERROR_QUERY_BARJX_NEST_TOO_DEEP
+./ext/pcre/pcre2lib/pcre2.h:300:27    - Unknown word (BARJX)      -- define PCRE2_ERROR_QUERY_BARJX_NEST_TOO_DEEP
 ./ext/pcre/pcre2lib/pcre2_auto_possess.c:100:39    - Unknown word (possessify)       -- return FALSE (never auto-possessify)
 ./ext/pcre/pcre2lib/pcre2_auto_possess.c:1104:38   - Unknown word (unpossessified)   -- remainder of the pattern unpossessified.
 ./ext/pcre/pcre2lib/pcre2_auto_possess.c:1121:48   - Unknown word (ASAN)             -- Was 10,000 but clang+ASAN uses a lot of stack
@@ -2631,111 +2630,111 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_auto_possess.c:973:29    - Unknown word (ctypes)           -- if (chr < 256 && (cb->ctypes[chr] & ctype_digit)
 ./ext/pcre/pcre2lib/pcre2_chartables.c:12:14     - Unknown word (ftables)    -- /* The pcre2_ftables program (which is distributed
 ./ext/pcre/pcre2lib/pcre2_chartables.c:5:53      - Unknown word (dftables)   -- written by the pcre2_dftables auxiliary
-./ext/pcre/pcre2lib/pcre2_compile.c:10237:11  - Unknown word (unaddressable)      -- memory as unaddressable, so that any out-of
-./ext/pcre/pcre2lib/pcre2_compile.c:10253:9   - Unknown word (RSCAN)              -- #define RSCAN_CACHE_SIZE 8
-./ext/pcre/pcre2lib/pcre2_compile.c:10258:14  - Unknown word (rgroup)             -- PCRE2_SPTR rgroup;
-./ext/pcre/pcre2lib/pcre2_compile.c:1139:30   - Unknown word (Rnumber)     -- fprintf(stderr, "META (?(Rnumber) length=%d offset="
-./ext/pcre/pcre2lib/pcre2_compile.c:1387:3    - Unknown word (minp)        -- minp if not NULL
-./ext/pcre/pcre2lib/pcre2_compile.c:1388:3    - Unknown word (maxp)        -- maxp if not NULL
-./ext/pcre/pcre2lib/pcre2_compile.c:1471:14   - Unknown word (chptr)       -- is placed in chptr. A backreference to
-./ext/pcre/pcre2lib/pcre2_compile.c:1478:31   - Unknown word (isclass)     -- are recognised. The isclass argument is not relevant
-./ext/pcre/pcre2lib/pcre2_compile.c:1542:35   - Unknown word (HASBKPORX)   -- external_flags |= PCRE2_HASBKPORX; /* Note \P, \p, or
-./ext/pcre/pcre2lib/pcre2_compile.c:1598:12   - Unknown word (bsux)        -- BOOL alt_bsux =
-./ext/pcre/pcre2lib/pcre2_compile.c:1751:16   - Unknown word (undelimited) -- /* Read an undelimited number */
-./ext/pcre/pcre2lib/pcre2_compile.c:2074:3    - Unknown word (pdataptr)    -- pdataptr an unsigned int
-./ext/pcre/pcre2lib/pcre2_compile.c:2179:5    - Unknown word (ower)        -- [:l\ower:] where Perl recognizes
+./ext/pcre/pcre2lib/pcre2_compile.c:10251:11  - Unknown word (unaddressable)      -- memory as unaddressable, so that any out-of
+./ext/pcre/pcre2lib/pcre2_compile.c:10267:9   - Unknown word (RSCAN)              -- #define RSCAN_CACHE_SIZE 8
+./ext/pcre/pcre2lib/pcre2_compile.c:10272:14  - Unknown word (rgroup)             -- PCRE2_SPTR rgroup;
+./ext/pcre/pcre2lib/pcre2_compile.c:1142:30   - Unknown word (Rnumber)     -- fprintf(stderr, "META (?(Rnumber) length=%d offset="
+./ext/pcre/pcre2lib/pcre2_compile.c:1390:3    - Unknown word (minp)        -- minp if not NULL
+./ext/pcre/pcre2lib/pcre2_compile.c:1391:3    - Unknown word (maxp)        -- maxp if not NULL
+./ext/pcre/pcre2lib/pcre2_compile.c:1474:14   - Unknown word (chptr)       -- is placed in chptr. A backreference to
+./ext/pcre/pcre2lib/pcre2_compile.c:1481:31   - Unknown word (isclass)     -- are recognised. The isclass argument is not relevant
+./ext/pcre/pcre2lib/pcre2_compile.c:1545:35   - Unknown word (HASBKPORX)   -- external_flags |= PCRE2_HASBKPORX; /* Note \P, \p, or
+./ext/pcre/pcre2lib/pcre2_compile.c:1601:12   - Unknown word (bsux)        -- BOOL alt_bsux =
+./ext/pcre/pcre2lib/pcre2_compile.c:1754:16   - Unknown word (undelimited) -- /* Read an undelimited number */
+./ext/pcre/pcre2lib/pcre2_compile.c:2077:3    - Unknown word (pdataptr)    -- pdataptr an unsigned int
+./ext/pcre/pcre2lib/pcre2_compile.c:2182:5    - Unknown word (ower)        -- [:l\ower:] where Perl recognizes
 ./ext/pcre/pcre2lib/pcre2_compile.c:232:19    - Unknown word (RNUMBER)    -- #define META_COND_RNUMBER 0x80140000u  /*
 ./ext/pcre/pcre2lib/pcre2_compile.c:232:50    - Unknown word (Rdigits)    -- 0x80140000u /* (?(Rdigits)... */
 ./ext/pcre/pcre2lib/pcre2_compile.c:238:14    - Unknown word (NOCAPTURE)  -- #define META_NOCAPTURE 0x801a0000u
-./ext/pcre/pcre2lib/pcre2_compile.c:2407:3    - Unknown word (pcalloutptr) -- pcalloutptr points to a pointer
-./ext/pcre/pcre2lib/pcre2_compile.c:2502:3    - Unknown word (okquantifier) -- okquantifier = TRUE; \
-./ext/pcre/pcre2lib/pcre2_compile.c:2531:6    - Unknown word (inescq)       -- BOOL inescq = FALSE;
-./ext/pcre/pcre2lib/pcre2_compile.c:2532:6    - Unknown word (inverbname)   -- BOOL inverbname = FALSE;
-./ext/pcre/pcre2lib/pcre2_compile.c:2535:6    - Unknown word (isdupname)    -- BOOL isdupname;
+./ext/pcre/pcre2lib/pcre2_compile.c:2410:3    - Unknown word (pcalloutptr) -- pcalloutptr points to a pointer
+./ext/pcre/pcre2lib/pcre2_compile.c:2505:3    - Unknown word (okquantifier) -- okquantifier = TRUE; \
+./ext/pcre/pcre2lib/pcre2_compile.c:2534:6    - Unknown word (inescq)       -- BOOL inescq = FALSE;
+./ext/pcre/pcre2lib/pcre2_compile.c:2535:6    - Unknown word (inverbname)   -- BOOL inverbname = FALSE;
+./ext/pcre/pcre2lib/pcre2_compile.c:2538:6    - Unknown word (isdupname)    -- BOOL isdupname;
 ./ext/pcre/pcre2lib/pcre2_compile.c:258:49    - Unknown word (napla)      -- 0x80270000u /* (*napla: */
 ./ext/pcre/pcre2lib/pcre2_compile.c:259:49    - Unknown word (naplb)      -- 0x80280000u /* (*naplb: */
-./ext/pcre/pcre2lib/pcre2_compile.c:2793:58   - Unknown word (nllen)        -- IS_NEWLINE sets cb->nllen. */
-./ext/pcre/pcre2lib/pcre2_compile.c:2851:61   - Unknown word (lcletter)     -- ctypes[ptr[1]] & ctype_lcletter) != 0;
+./ext/pcre/pcre2lib/pcre2_compile.c:2796:58   - Unknown word (nllen)        -- IS_NEWLINE sets cb->nllen. */
+./ext/pcre/pcre2lib/pcre2_compile.c:2854:61   - Unknown word (lcletter)     -- ctypes[ptr[1]] & ctype_lcletter) != 0;
 ./ext/pcre/pcre2lib/pcre2_compile.c:296:23    - Unknown word (aphabetic)  -- sr: in the table of aphabetic assertions. It is never
-./ext/pcre/pcre2lib/pcre2_compile.c:3711:16   - Unknown word (CHMAX)        -- else if (CHMAX_255(c) && (cb->ctypes
+./ext/pcre/pcre2lib/pcre2_compile.c:3714:16   - Unknown word (CHMAX)        -- else if (CHMAX_255(c) && (cb->ctypes
 ./ext/pcre/pcre2lib/pcre2_compile.c:375:8     - Unknown word (PSKIP)      -- enum { PSKIP_ALT, PSKIP_CLASS, PSKIP
 ./ext/pcre/pcre2lib/pcre2_compile.c:379:2     - Unknown word (Wconversion) -- -Wconversion. This version gets a
 ./ext/pcre/pcre2lib/pcre2_compile.c:388:27    - Unknown word (firstcu)     -- Private flags added to firstcu and reqcu. */
 ./ext/pcre/pcre2lib/pcre2_compile.c:388:39    - Unknown word (reqcu)       -- added to firstcu and reqcu. */
-./ext/pcre/pcre2lib/pcre2_compile.c:3949:27   - Unknown word (imnsx)        -- /* Scan for options imnsxJU to be set or unset
-./ext/pcre/pcre2lib/pcre2_compile.c:3953:14   - Unknown word (hyphenok)     -- BOOL hyphenok = TRUE;
-./ext/pcre/pcre2lib/pcre2_compile.c:3961:27   - Unknown word (unsets)       -- /* ^ at the start unsets imnsx and disables the
-./ext/pcre/pcre2lib/pcre2_compile.c:3989:41   - Unknown word (JCHANGED)     -- external_flags |= PCRE2_JCHANGED;
-./ext/pcre/pcre2lib/pcre2_compile.c:4580:27   - Unknown word (isdup)        -- isdupname = ng->isdup = TRUE;     /* Mark
+./ext/pcre/pcre2lib/pcre2_compile.c:3952:27   - Unknown word (imnsx)        -- /* Scan for options imnsxJU to be set or unset
+./ext/pcre/pcre2lib/pcre2_compile.c:3956:14   - Unknown word (hyphenok)     -- BOOL hyphenok = TRUE;
+./ext/pcre/pcre2lib/pcre2_compile.c:3964:27   - Unknown word (unsets)       -- /* ^ at the start unsets imnsx and disables the
+./ext/pcre/pcre2lib/pcre2_compile.c:3992:41   - Unknown word (JCHANGED)     -- external_flags |= PCRE2_JCHANGED;
+./ext/pcre/pcre2lib/pcre2_compile.c:4583:27   - Unknown word (isdup)        -- isdupname = ng->isdup = TRUE;     /* Mark
 ./ext/pcre/pcre2lib/pcre2_compile.c:46:9      - Unknown word (NLBLOCK)    -- #define NLBLOCK cb             /* Block
-./ext/pcre/pcre2lib/pcre2_compile.c:4780:13   - Unknown word (DNCREF)       -- case OP_DNCREF:
-./ext/pcre/pcre2lib/pcre2_compile.c:4781:13   - Unknown word (RREF)         -- case OP_RREF:
-./ext/pcre/pcre2lib/pcre2_compile.c:4797:13   - Unknown word (SCOND)        -- case OP_SCOND:
-./ext/pcre/pcre2lib/pcre2_compile.c:4834:3    - Unknown word (ocptr)        -- ocptr where to put start
-./ext/pcre/pcre2lib/pcre2_compile.c:4835:3    - Unknown word (odptr)        -- odptr where to put end
+./ext/pcre/pcre2lib/pcre2_compile.c:4783:13   - Unknown word (DNCREF)       -- case OP_DNCREF:
+./ext/pcre/pcre2lib/pcre2_compile.c:4784:13   - Unknown word (RREF)         -- case OP_RREF:
+./ext/pcre/pcre2lib/pcre2_compile.c:4800:13   - Unknown word (SCOND)        -- case OP_SCOND:
+./ext/pcre/pcre2lib/pcre2_compile.c:4837:3    - Unknown word (ocptr)        -- ocptr where to put start
+./ext/pcre/pcre2lib/pcre2_compile.c:4838:3    - Unknown word (odptr)        -- odptr where to put end
 ./ext/pcre/pcre2lib/pcre2_compile.c:48:9      - Unknown word (PSEND)      -- #define PSEND end_pattern    /*
-./ext/pcre/pcre2lib/pcre2_compile.c:5284:3    - Unknown word (firstcuptr)   -- firstcuptr place to put
-./ext/pcre/pcre2lib/pcre2_compile.c:5285:3    - Unknown word (firstcuflagsptr) -- firstcuflagsptr place to put the first
-./ext/pcre/pcre2lib/pcre2_compile.c:5286:3    - Unknown word (reqcuptr)        -- reqcuptr place to put
-./ext/pcre/pcre2lib/pcre2_compile.c:5287:3    - Unknown word (reqcuflagsptr)   -- reqcuflagsptr place to put the
-./ext/pcre/pcre2lib/pcre2_compile.c:5288:3    - Unknown word (bcptr)           -- bcptr points to
-./ext/pcre/pcre2lib/pcre2_compile.c:5305:5    - Unknown word (okreturn)        -- int okreturn = -1;
-./ext/pcre/pcre2lib/pcre2_compile.c:5312:10   - Unknown word (zeroreqcu)       -- uint32_t zeroreqcu, zerofirstcu;
-./ext/pcre/pcre2lib/pcre2_compile.c:5312:21   - Unknown word (zerofirstcu)     -- uint32_t zeroreqcu, zerofirstcu;
-./ext/pcre/pcre2lib/pcre2_compile.c:5316:23   - Unknown word (reqcuflags)      -- int32_t firstcuflags, reqcuflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:5316:9    - Unknown word (firstcuflags)    -- int32_t firstcuflags, reqcuflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:5317:25   - Unknown word (zerofirstcuflags) -- 2_t zeroreqcuflags, zerofirstcuflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:5317:9    - Unknown word (zeroreqcuflags)  -- int32_t zeroreqcuflags, zerofirstcuflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:5327:6    - Unknown word (groupsetfirstcu)  -- BOOL groupsetfirstcu = FALSE;
-./ext/pcre/pcre2lib/pcre2_compile.c:5331:12   - Unknown word (caseful)          -- BOOL reset_caseful = FALSE;
-./ext/pcre/pcre2lib/pcre2_compile.c:5396:12   - Unknown word (mclength)         -- uint32_t mclength;
-./ext/pcre/pcre2lib/pcre2_compile.c:5398:12   - Unknown word (subreqcu)         -- uint32_t subreqcu, subfirstcu;
-./ext/pcre/pcre2lib/pcre2_compile.c:5398:22   - Unknown word (subfirstcu)       -- uint32_t subreqcu, subfirstcu;
-./ext/pcre/pcre2lib/pcre2_compile.c:5400:24   - Unknown word (verbculen)        -- uint32_t verbarglen, verbculen;
-./ext/pcre/pcre2lib/pcre2_compile.c:5401:11   - Unknown word (subreqcuflags)    -- int32_t subreqcuflags, subfirstcuflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:5401:26   - Unknown word (subfirstcuflags)  -- int32_t subreqcuflags, subfirstcuflags; /* Must be signed
-./ext/pcre/pcre2lib/pcre2_compile.c:5403:15   - Unknown word (mcbuffer)         -- PCRE2_UCHAR mcbuffer[8];
-./ext/pcre/pcre2lib/pcre2_compile.c:5499:20   - Unknown word (CIRCM)            -- *code++ = OP_CIRCM;
-./ext/pcre/pcre2lib/pcre2_compile.c:5694:17   - Unknown word (pbits)            -- uint8_t pbits[32];
-./ext/pcre/pcre2lib/pcre2_compile.c:5922:71   - Unknown word (HASCRORLF)        -- external_flags |= PCRE2_HASCRORLF;
-./ext/pcre/pcre2lib/pcre2_compile.c:6924:22   - Unknown word (FIRSTCU)          -- if (utf && NOT_FIRSTCU(code[-1]))
-./ext/pcre/pcre2lib/pcre2_compile.c:7066:68   - Unknown word (SBRA)             -- varieties such as BRAPOS and SBRA.
-./ext/pcre/pcre2lib/pcre2_compile.c:7084:22   - Unknown word (brazeroptr)       -- PCRE2_UCHAR *brazeroptr = NULL;
-./ext/pcre/pcre2lib/pcre2_compile.c:7323:24   - Unknown word (ketcode)          -- PCRE2_UCHAR *ketcode = code - 1 - LINK_SIZE
-./ext/pcre/pcre2lib/pcre2_compile.c:7367:66   - Unknown word (SBRAPOS)          -- COND)? OP_BRAPOS : OP_SBRAPOS;
+./ext/pcre/pcre2lib/pcre2_compile.c:5287:3    - Unknown word (firstcuptr)   -- firstcuptr place to put
+./ext/pcre/pcre2lib/pcre2_compile.c:5288:3    - Unknown word (firstcuflagsptr) -- firstcuflagsptr place to put the first
+./ext/pcre/pcre2lib/pcre2_compile.c:5289:3    - Unknown word (reqcuptr)        -- reqcuptr place to put
+./ext/pcre/pcre2lib/pcre2_compile.c:5290:3    - Unknown word (reqcuflagsptr)   -- reqcuflagsptr place to put the
+./ext/pcre/pcre2lib/pcre2_compile.c:5291:3    - Unknown word (bcptr)           -- bcptr points to
+./ext/pcre/pcre2lib/pcre2_compile.c:5308:5    - Unknown word (okreturn)        -- int okreturn = -1;
+./ext/pcre/pcre2lib/pcre2_compile.c:5315:10   - Unknown word (zeroreqcu)       -- uint32_t zeroreqcu, zerofirstcu;
+./ext/pcre/pcre2lib/pcre2_compile.c:5315:21   - Unknown word (zerofirstcu)     -- uint32_t zeroreqcu, zerofirstcu;
+./ext/pcre/pcre2lib/pcre2_compile.c:5319:23   - Unknown word (reqcuflags)      -- int32_t firstcuflags, reqcuflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:5319:9    - Unknown word (firstcuflags)    -- int32_t firstcuflags, reqcuflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:5320:25   - Unknown word (zerofirstcuflags) -- 2_t zeroreqcuflags, zerofirstcuflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:5320:9    - Unknown word (zeroreqcuflags)  -- int32_t zeroreqcuflags, zerofirstcuflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:5330:6    - Unknown word (groupsetfirstcu)  -- BOOL groupsetfirstcu = FALSE;
+./ext/pcre/pcre2lib/pcre2_compile.c:5334:12   - Unknown word (caseful)          -- BOOL reset_caseful = FALSE;
+./ext/pcre/pcre2lib/pcre2_compile.c:5399:12   - Unknown word (mclength)         -- uint32_t mclength;
+./ext/pcre/pcre2lib/pcre2_compile.c:5401:12   - Unknown word (subreqcu)         -- uint32_t subreqcu, subfirstcu;
+./ext/pcre/pcre2lib/pcre2_compile.c:5401:22   - Unknown word (subfirstcu)       -- uint32_t subreqcu, subfirstcu;
+./ext/pcre/pcre2lib/pcre2_compile.c:5403:24   - Unknown word (verbculen)        -- uint32_t verbarglen, verbculen;
+./ext/pcre/pcre2lib/pcre2_compile.c:5404:11   - Unknown word (subreqcuflags)    -- int32_t subreqcuflags, subfirstcuflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:5404:26   - Unknown word (subfirstcuflags)  -- int32_t subreqcuflags, subfirstcuflags; /* Must be signed
+./ext/pcre/pcre2lib/pcre2_compile.c:5406:15   - Unknown word (mcbuffer)         -- PCRE2_UCHAR mcbuffer[8];
+./ext/pcre/pcre2lib/pcre2_compile.c:5502:20   - Unknown word (CIRCM)            -- *code++ = OP_CIRCM;
+./ext/pcre/pcre2lib/pcre2_compile.c:5697:17   - Unknown word (pbits)            -- uint8_t pbits[32];
+./ext/pcre/pcre2lib/pcre2_compile.c:5925:71   - Unknown word (HASCRORLF)        -- external_flags |= PCRE2_HASCRORLF;
+./ext/pcre/pcre2lib/pcre2_compile.c:6927:22   - Unknown word (FIRSTCU)          -- if (utf && NOT_FIRSTCU(code[-1]))
+./ext/pcre/pcre2lib/pcre2_compile.c:7069:68   - Unknown word (SBRA)             -- varieties such as BRAPOS and SBRA.
+./ext/pcre/pcre2lib/pcre2_compile.c:7087:22   - Unknown word (brazeroptr)       -- PCRE2_UCHAR *brazeroptr = NULL;
+./ext/pcre/pcre2lib/pcre2_compile.c:7326:24   - Unknown word (ketcode)          -- PCRE2_UCHAR *ketcode = code - 1 - LINK_SIZE
+./ext/pcre/pcre2lib/pcre2_compile.c:7370:66   - Unknown word (SBRAPOS)          -- COND)? OP_BRAPOS : OP_SBRAPOS;
 ./ext/pcre/pcre2lib/pcre2_compile.c:74:34     - Unknown word (xdigitab)   -- XDIGIT(c) xdigitab[c]
 ./ext/pcre/pcre2lib/pcre2_compile.c:752:6     - Unknown word (PXGRAPH)     -- PT_PXGRAPH, 0,    /* graph */
 ./ext/pcre/pcre2lib/pcre2_compile.c:754:6     - Unknown word (PXPUNCT)     -- PT_PXPUNCT, 0,    /* punct */
-./ext/pcre/pcre2lib/pcre2_compile.c:7568:10   - Unknown word (Possessifying)    -- /* Possessifying an EXACT quantifier
-./ext/pcre/pcre2lib/pcre2_compile.c:7649:5    - Unknown word (reqcus)           -- reqcus if it isn't already
+./ext/pcre/pcre2lib/pcre2_compile.c:7571:10   - Unknown word (Possessifying)    -- /* Possessifying an EXACT quantifier
+./ext/pcre/pcre2lib/pcre2_compile.c:7652:5    - Unknown word (reqcus)           -- reqcus if it isn't already
 ./ext/pcre/pcre2lib/pcre2_compile.c:772:38    - Unknown word (BSUX)        -- EMPTY_CLASS|PCRE2_ALT_BSUX|PCRE2_ALT_CIRCUMFLEX
-./ext/pcre/pcre2lib/pcre2_compile.c:7808:56   - Unknown word (HASBKC)           -- external_flags |= PCRE2_HASBKC; /* Record */
-./ext/pcre/pcre2lib/pcre2_compile.c:7866:8    - Unknown word (Caseful)          -- /* Caseful matches, or caseless
-./ext/pcre/pcre2lib/pcre2_compile.c:788:66    - Unknown word (eint)        -- added, the tables called eint1 and
-./ext/pcre/pcre2lib/pcre2_compile.c:8005:10   - Unknown word (branchfirstcu)    -- uint32_t branchfirstcu, branchreqcu;
-./ext/pcre/pcre2lib/pcre2_compile.c:8005:25   - Unknown word (branchreqcu)      -- uint32_t branchfirstcu, branchreqcu;
-./ext/pcre/pcre2lib/pcre2_compile.c:8006:29   - Unknown word (branchreqcuflags)   -- branchfirstcuflags, branchreqcuflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:8006:9    - Unknown word (branchfirstcuflags) -- int32_t branchfirstcuflags, branchreqcuflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:813:12    - Unknown word (LIMH)        -- PSO_LIMH, /* Read integer
-./ext/pcre/pcre2lib/pcre2_compile.c:814:12    - Unknown word (LIMM)        -- PSO_LIMM, /* Read integer
-./ext/pcre/pcre2lib/pcre2_compile.c:815:12    - Unknown word (LIMD)        -- PSO_LIMD };  /* Read integer
-./ext/pcre/pcre2lib/pcre2_compile.c:8282:3    - Unknown word (inassert)           -- inassert TRUE if in an
-./ext/pcre/pcre2lib/pcre2_compile.c:8292:15   - Unknown word (scode)              -- PCRE2_SPTR scode = first_significant
-./ext/pcre/pcre2lib/pcre2_compile.c:831:73    - Unknown word (ATST)        -- , PSO_FLG, PCRE2_NE_ATST_SET },
-./ext/pcre/pcre2lib/pcre2_compile.c:834:70    - Unknown word (NOJIT)       -- 7, PSO_FLG, PCRE2_NOJIT },
-./ext/pcre/pcre2lib/pcre2_compile.c:8671:6    - Unknown word (firstassertedcu)    -- find_firstassertedcu(PCRE2_SPTR code, int
-./ext/pcre/pcre2lib/pcre2_compile.c:8679:8    - Unknown word (dflags)             -- int dflags;
-./ext/pcre/pcre2lib/pcre2_compile.c:8770:3    - Unknown word (groupno)            -- groupno the group number
-./ext/pcre/pcre2lib/pcre2_compile.c:8956:3    - Unknown word (lcptr)              -- lcptr pointer to the
-./ext/pcre/pcre2lib/pcre2_compile.c:8992:30   - Unknown word (ISNOTFIXED)         -- branchlength < 0) goto ISNOTFIXED;
-./ext/pcre/pcre2lib/pcre2_compile.c:900:31    - Unknown word (CRPOS)       -- 0, /* CRPOS{STAR,PLUS,QUERY,RANGE
-./ext/pcre/pcre2lib/pcre2_compile.c:903:36    - Unknown word (REFI)        -- /* REF, REFI */
-./ext/pcre/pcre2lib/pcre2_compile.c:904:31    - Unknown word (DNREF)       -- /* DNREF, DNREFI */
-./ext/pcre/pcre2lib/pcre2_compile.c:9650:3    - Unknown word (ccontext)           -- ccontext points to a compile
-./ext/pcre/pcre2lib/pcre2_compile.c:9691:5    - Unknown word (regexrc)            -- int regexrc;
-./ext/pcre/pcre2lib/pcre2_compile.c:9705:14   - Unknown word (cworkspace)         -- PCRE2_UCHAR *cworkspace = (PCRE2_UCHAR *)c1
-./ext/pcre/pcre2lib/pcre2_compile.c:9963:13   - Unknown word (NLTYPE)             -- cb.nltype = NLTYPE_FIXED;
-./ext/pcre/pcre2lib/pcre2_compile.c:9963:4    - Unknown word (nltype)             -- cb.nltype = NLTYPE_FIXED;
+./ext/pcre/pcre2lib/pcre2_compile.c:7821:56   - Unknown word (HASBKC)           -- external_flags |= PCRE2_HASBKC; /* Record */
+./ext/pcre/pcre2lib/pcre2_compile.c:7879:8    - Unknown word (Caseful)          -- /* Caseful matches, or caseless
+./ext/pcre/pcre2lib/pcre2_compile.c:789:66    - Unknown word (eint)        -- added, the tables called eint1 and
+./ext/pcre/pcre2lib/pcre2_compile.c:8018:10   - Unknown word (branchfirstcu)    -- uint32_t branchfirstcu, branchreqcu;
+./ext/pcre/pcre2lib/pcre2_compile.c:8018:25   - Unknown word (branchreqcu)      -- uint32_t branchfirstcu, branchreqcu;
+./ext/pcre/pcre2lib/pcre2_compile.c:8019:29   - Unknown word (branchreqcuflags)   -- branchfirstcuflags, branchreqcuflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:8019:9    - Unknown word (branchfirstcuflags) -- int32_t branchfirstcuflags, branchreqcuflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:816:12    - Unknown word (LIMH)        -- PSO_LIMH, /* Read integer
+./ext/pcre/pcre2lib/pcre2_compile.c:817:12    - Unknown word (LIMM)        -- PSO_LIMM, /* Read integer
+./ext/pcre/pcre2lib/pcre2_compile.c:818:12    - Unknown word (LIMD)        -- PSO_LIMD };  /* Read integer
+./ext/pcre/pcre2lib/pcre2_compile.c:8295:3    - Unknown word (inassert)           -- inassert TRUE if in an
+./ext/pcre/pcre2lib/pcre2_compile.c:8305:15   - Unknown word (scode)              -- PCRE2_SPTR scode = first_significant
+./ext/pcre/pcre2lib/pcre2_compile.c:834:73    - Unknown word (ATST)        -- , PSO_FLG, PCRE2_NE_ATST_SET },
+./ext/pcre/pcre2lib/pcre2_compile.c:837:70    - Unknown word (NOJIT)       -- 7, PSO_FLG, PCRE2_NOJIT },
+./ext/pcre/pcre2lib/pcre2_compile.c:8684:6    - Unknown word (firstassertedcu)    -- find_firstassertedcu(PCRE2_SPTR code, int
+./ext/pcre/pcre2lib/pcre2_compile.c:8692:8    - Unknown word (dflags)             -- int dflags;
+./ext/pcre/pcre2lib/pcre2_compile.c:8783:3    - Unknown word (groupno)            -- groupno the group number
+./ext/pcre/pcre2lib/pcre2_compile.c:8969:3    - Unknown word (lcptr)              -- lcptr pointer to the
+./ext/pcre/pcre2lib/pcre2_compile.c:9005:30   - Unknown word (ISNOTFIXED)         -- branchlength < 0) goto ISNOTFIXED;
+./ext/pcre/pcre2lib/pcre2_compile.c:903:31    - Unknown word (CRPOS)       -- 0, /* CRPOS{STAR,PLUS,QUERY,RANGE
+./ext/pcre/pcre2lib/pcre2_compile.c:906:36    - Unknown word (REFI)        -- /* REF, REFI */
+./ext/pcre/pcre2lib/pcre2_compile.c:907:31    - Unknown word (DNREF)       -- /* DNREF, DNREFI */
+./ext/pcre/pcre2lib/pcre2_compile.c:9663:3    - Unknown word (ccontext)           -- ccontext points to a compile
+./ext/pcre/pcre2lib/pcre2_compile.c:9704:5    - Unknown word (regexrc)            -- int regexrc;
+./ext/pcre/pcre2lib/pcre2_compile.c:9718:14   - Unknown word (cworkspace)         -- PCRE2_UCHAR *cworkspace = (PCRE2_UCHAR *)c1
+./ext/pcre/pcre2lib/pcre2_compile.c:9976:13   - Unknown word (NLTYPE)             -- cb.nltype = NLTYPE_FIXED;
+./ext/pcre/pcre2lib/pcre2_compile.c:9976:4    - Unknown word (nltype)             -- cb.nltype = NLTYPE_FIXED;
 ./ext/pcre/pcre2lib/pcre2_context.c:118:24    - Unknown word (gcontext)   -- pcre2_general_context *gcontext;
 ./ext/pcre/pcre2lib/pcre2_context.c:457:11    - Unknown word (mymalloc)   -- void *(*mymalloc)(size_t, void *), void
 ./ext/pcre/pcre2lib/pcre2_convert.c:112:3     - Unknown word (plength)    -- plength length in code
@@ -2753,7 +2752,7 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:3315:26   - Unknown word (UINVALID)   -- return PCRE2_ERROR_DFA_UINVALID_UTF;
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:3581:13   - Unknown word (matchedby)  -- match_data->matchedby = PCRE2_MATCHEDBY_DFA
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:3581:31   - Unknown word (MATCHEDBY)  -- data->matchedby = PCRE2_MATCHEDBY_DFA_INTERPRETER;
-./ext/pcre/pcre2lib/pcre2_dfa_match.c:3903:27   - Unknown word (oveccount)  -- uint32_t)match_data->oveccount * 2,  /* actual size
+./ext/pcre/pcre2lib/pcre2_dfa_match.c:3922:27   - Unknown word (oveccount)  -- uint32_t)match_data->oveccount * 2,  /* actual size
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:404:3     - Unknown word (rwsptr)     -- rwsptr pointer to block
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:405:3     - Unknown word (ovecsize)   -- ovecsize space needed for an
 ./ext/pcre/pcre2lib/pcre2_dfa_match.c:405:34    - Unknown word (ovector)    -- space needed for an ovector
@@ -2805,7 +2804,7 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:1205:6    - Unknown word (VCEQ)       -- /* VCEQ */
 ./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:1341:6    - Unknown word (VFEE)       -- /* VFEE */
 ./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:1352:6    - Unknown word (VFENE)      -- /* VFENE */
-./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:1361:4    - Unknown word (VLGVB)      -- /* VLGVB */
+./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:1359:4    - Unknown word (VLGVB)      -- /* VLGVB */
 ./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:300:11    - Unknown word (LSHR)       -- OP2(SLJIT_LSHR, TMP1, 0, TMP1, 0, TMP
 ./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:326:1     - Unknown word (CMPTO)      -- CMPTO(SLJIT_ZERO, TMP1, 0
 ./ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:343:3     - Unknown word (CMOV)       -- CMOV(SLJIT_GREATER, STR_PTR
@@ -2848,7 +2847,7 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_match.c:5676:23   - Unknown word (kets)       -- for the repeating kets if the group matched
 ./ext/pcre/pcre2lib/pcre2_match.c:6704:74   - Unknown word (regexs)     -- attempts; for anchored regexs
 ./ext/pcre/pcre2lib/pcre2_match.c:690:22    - Unknown word (nocapture)  -- fprintf(stderr, "nocapture op=%d", GF_DATAMASK
-./ext/pcre/pcre2lib/pcre2_match.c:7143:36   - Unknown word (aways)      -- matching start_match will aways be greater than the
+./ext/pcre/pcre2lib/pcre2_match.c:7162:36   - Unknown word (aways)      -- matching start_match will aways be greater than the
 ./ext/pcre/pcre2lib/pcre2_match.c:869:68    - Unknown word (ovectors)   -- the external and frame ovectors. */
 ./ext/pcre/pcre2lib/pcre2_pattern_info.c:82:21     - Unknown word (HASBACKSLASHC) -- case PCRE2_INFO_HASBACKSLASHC:
 ./ext/pcre/pcre2lib/pcre2_printint.c:311:10    - Unknown word (nesize)     -- uint32_t nesize = re->name_entry_size
@@ -2884,71 +2883,74 @@ Lines:
 ./ext/pcre/pcre2lib/pcre2_tables.c:257:16    - Unknown word (Buginese)   -- #define STRING_Buginese0 STR_B STR_u STR_g STR
 ./ext/pcre/pcre2lib/pcre2_tables.c:265:16    - Unknown word (Chakma)     -- #define STRING_Chakma0 STR_C STR_h STR_a STR
 ./ext/pcre/pcre2lib/pcre2_tables.c:268:16    - Unknown word (Chorasmian) -- #define STRING_Chorasmian0 STR_C STR_h STR_o STR
-./ext/pcre/pcre2lib/pcre2_tables.c:279:22    - Unknown word (Akuru)      -- define STRING_Dives_Akuru0 STR_D STR_i STR_v STR
-./ext/pcre/pcre2lib/pcre2_tables.c:280:16    - Unknown word (Dogra)      -- #define STRING_Dogra0 STR_D STR_o STR_g STR
-./ext/pcre/pcre2lib/pcre2_tables.c:281:16    - Unknown word (Duployan)   -- #define STRING_Duployan0 STR_D STR_u STR_p STR
-./ext/pcre/pcre2lib/pcre2_tables.c:284:16    - Unknown word (Elymaic)    -- #define STRING_Elymaic0 STR_E STR_l STR_y STR
-./ext/pcre/pcre2lib/pcre2_tables.c:292:16    - Unknown word (Gunjala)    -- #define STRING_Gunjala_Gondi0 STR_G STR_u STR
-./ext/pcre/pcre2lib/pcre2_tables.c:296:23    - Unknown word (Rohingya)   -- define STRING_Hanifi_Rohingya0 STR_H STR_a STR_n STR
-./ext/pcre/pcre2lib/pcre2_tables.c:306:16    - Unknown word (Kaithi)     -- #define STRING_Kaithi0 STR_K STR_a STR_i STR
-./ext/pcre/pcre2lib/pcre2_tables.c:309:16    - Unknown word (Kayah)      -- #define STRING_Kayah_Li0 STR_K STR_a STR
-./ext/pcre/pcre2lib/pcre2_tables.c:310:16    - Unknown word (Kharoshthi) -- #define STRING_Kharoshthi0 STR_K STR_h STR_a STR
-./ext/pcre/pcre2lib/pcre2_tables.c:311:16    - Unknown word (Khitan)     -- #define STRING_Khitan_Small_Script0 STR_K
-./ext/pcre/pcre2lib/pcre2_tables.c:313:16    - Unknown word (Khojki)     -- #define STRING_Khojki0 STR_K STR_h STR_o STR
-./ext/pcre/pcre2lib/pcre2_tables.c:314:16    - Unknown word (Khudawadi)  -- #define STRING_Khudawadi0 STR_K STR_h STR_u STR
-./ext/pcre/pcre2lib/pcre2_tables.c:323:16    - Unknown word (Lisu)       -- #define STRING_Lisu0 STR_L STR_i STR_s STR
-./ext/pcre/pcre2lib/pcre2_tables.c:332:16    - Unknown word (Mahajani)   -- #define STRING_Mahajani0 STR_M STR_a STR_h STR
-./ext/pcre/pcre2lib/pcre2_tables.c:333:16    - Unknown word (Makasar)    -- #define STRING_Makasar0 STR_M STR_a STR_k STR
-./ext/pcre/pcre2lib/pcre2_tables.c:335:16    - Unknown word (Mandaic)    -- #define STRING_Mandaic0 STR_M STR_a STR_n STR
-./ext/pcre/pcre2lib/pcre2_tables.c:336:16    - Unknown word (Manichaean) -- #define STRING_Manichaean0 STR_M STR_a STR_n STR
-./ext/pcre/pcre2lib/pcre2_tables.c:341:16    - Unknown word (Medefaidrin) -- #define STRING_Medefaidrin0 STR_M STR_e STR_d STR
-./ext/pcre/pcre2lib/pcre2_tables.c:342:16    - Unknown word (Meetei)      -- #define STRING_Meetei_Mayek0 STR_M STR_e STR
-./ext/pcre/pcre2lib/pcre2_tables.c:342:23    - Unknown word (Mayek)       -- define STRING_Meetei_Mayek0 STR_M STR_e STR_e STR
-./ext/pcre/pcre2lib/pcre2_tables.c:343:16    - Unknown word (Mende)       -- #define STRING_Mende_Kikakui0 STR_M STR_e
-./ext/pcre/pcre2lib/pcre2_tables.c:343:22    - Unknown word (Kikakui)     -- define STRING_Mende_Kikakui0 STR_M STR_e STR_n STR
-./ext/pcre/pcre2lib/pcre2_tables.c:344:16    - Unknown word (Meroitic)    -- #define STRING_Meroitic_Cursive0 STR_M STR_e
-./ext/pcre/pcre2lib/pcre2_tables.c:346:16    - Unknown word (Miao)        -- #define STRING_Miao0 STR_M STR_i STR_a STR
-./ext/pcre/pcre2lib/pcre2_tables.c:351:16    - Unknown word (Multani)     -- #define STRING_Multani0 STR_M STR_u STR_l STR
-./ext/pcre/pcre2lib/pcre2_tables.c:355:16    - Unknown word (Nandinagari) -- #define STRING_Nandinagari0 STR_N STR_a STR_n STR
-./ext/pcre/pcre2lib/pcre2_tables.c:358:16    - Unknown word (Newa)        -- #define STRING_Newa0 STR_N STR_e STR_w STR
-./ext/pcre/pcre2lib/pcre2_tables.c:362:16    - Unknown word (Nushu)       -- #define STRING_Nushu0 STR_N STR_u STR_s STR
-./ext/pcre/pcre2lib/pcre2_tables.c:363:16    - Unknown word (Nyiakeng)    -- #define STRING_Nyiakeng_Puachue_Hmong0 STR_N
-./ext/pcre/pcre2lib/pcre2_tables.c:363:25    - Unknown word (Puachue)     -- define STRING_Nyiakeng_Puachue_Hmong0 STR_N STR_y STR
-./ext/pcre/pcre2lib/pcre2_tables.c:365:19    - Unknown word (Chiki)       -- #define STRING_Ol_Chiki0 STR_O STR_l STR_UNDERSCORE
-./ext/pcre/pcre2lib/pcre2_tables.c:378:16    - Unknown word (Pahawh)      -- #define STRING_Pahawh_Hmong0 STR_P STR_a STR
-./ext/pcre/pcre2lib/pcre2_tables.c:385:16    - Unknown word (Phags)       -- #define STRING_Phags_Pa0 STR_P STR_h STR
-./ext/pcre/pcre2lib/pcre2_tables.c:395:16    - Unknown word (Saurashtra)  -- #define STRING_Saurashtra0 STR_S STR_a STR_u STR
-./ext/pcre/pcre2lib/pcre2_tables.c:397:16    - Unknown word (Sharada)     -- #define STRING_Sharada0 STR_S STR_h STR_a STR
-./ext/pcre/pcre2lib/pcre2_tables.c:399:16    - Unknown word (Siddham)     -- #define STRING_Siddham0 STR_S STR_i STR_d STR
-./ext/pcre/pcre2lib/pcre2_tables.c:407:16    - Unknown word (Soyombo)     -- #define STRING_Soyombo0 STR_S STR_o STR_y STR
-./ext/pcre/pcre2lib/pcre2_tables.c:409:16    - Unknown word (Syloti)      -- #define STRING_Syloti_Nagri0 STR_S STR_y STR
-./ext/pcre/pcre2lib/pcre2_tables.c:409:23    - Unknown word (Nagri)       -- define STRING_Syloti_Nagri0 STR_S STR_y STR_l STR
-./ext/pcre/pcre2lib/pcre2_tables.c:414:20    - Unknown word (Tham)        -- #define STRING_Tai_Tham0 STR_T STR_a STR_i STR
-./ext/pcre/pcre2lib/pcre2_tables.c:415:20    - Unknown word (Viet)        -- #define STRING_Tai_Viet0 STR_T STR_a STR_i STR
-./ext/pcre/pcre2lib/pcre2_tables.c:416:16    - Unknown word (Takri)       -- #define STRING_Takri0 STR_T STR_a STR_k STR
-./ext/pcre/pcre2lib/pcre2_tables.c:423:16    - Unknown word (Tifinagh)    -- #define STRING_Tifinagh0 STR_T STR_i STR_f STR
-./ext/pcre/pcre2lib/pcre2_tables.c:424:16    - Unknown word (Tirhuta)     -- #define STRING_Tirhuta0 STR_T STR_i STR_r STR
-./ext/pcre/pcre2lib/pcre2_tables.c:428:16    - Unknown word (Wancho)      -- #define STRING_Wancho0 STR_W STR_a STR_n STR
-./ext/pcre/pcre2lib/pcre2_tables.c:429:23    - Unknown word (Citi)        -- define STRING_Warang_Citi0 STR_W STR_a STR_r STR
-./ext/pcre/pcre2lib/pcre2_tables.c:435:16    - Unknown word (Yezidi)      -- #define STRING_Yezidi0 STR_Y STR_e STR_z STR
-./ext/pcre/pcre2lib/pcre2_tables.c:438:16    - Unknown word (Zanabazar)   -- #define STRING_Zanabazar_Square0 STR_Z STR_a
+./ext/pcre/pcre2lib/pcre2_tables.c:276:16    - Unknown word (Cypro)      -- #define STRING_Cypro_Minoan0 STR_C STR_y
+./ext/pcre/pcre2lib/pcre2_tables.c:280:22    - Unknown word (Akuru)      -- define STRING_Dives_Akuru0 STR_D STR_i STR_v STR
+./ext/pcre/pcre2lib/pcre2_tables.c:281:16    - Unknown word (Dogra)      -- #define STRING_Dogra0 STR_D STR_o STR_g STR
+./ext/pcre/pcre2lib/pcre2_tables.c:282:16    - Unknown word (Duployan)   -- #define STRING_Duployan0 STR_D STR_u STR_p STR
+./ext/pcre/pcre2lib/pcre2_tables.c:285:16    - Unknown word (Elymaic)    -- #define STRING_Elymaic0 STR_E STR_l STR_y STR
+./ext/pcre/pcre2lib/pcre2_tables.c:293:16    - Unknown word (Gunjala)    -- #define STRING_Gunjala_Gondi0 STR_G STR_u STR
+./ext/pcre/pcre2lib/pcre2_tables.c:297:23    - Unknown word (Rohingya)   -- define STRING_Hanifi_Rohingya0 STR_H STR_a STR_n STR
+./ext/pcre/pcre2lib/pcre2_tables.c:307:16    - Unknown word (Kaithi)     -- #define STRING_Kaithi0 STR_K STR_a STR_i STR
+./ext/pcre/pcre2lib/pcre2_tables.c:310:16    - Unknown word (Kayah)      -- #define STRING_Kayah_Li0 STR_K STR_a STR
+./ext/pcre/pcre2lib/pcre2_tables.c:311:16    - Unknown word (Kharoshthi) -- #define STRING_Kharoshthi0 STR_K STR_h STR_a STR
+./ext/pcre/pcre2lib/pcre2_tables.c:312:16    - Unknown word (Khitan)     -- #define STRING_Khitan_Small_Script0 STR_K
+./ext/pcre/pcre2lib/pcre2_tables.c:314:16    - Unknown word (Khojki)     -- #define STRING_Khojki0 STR_K STR_h STR_o STR
+./ext/pcre/pcre2lib/pcre2_tables.c:315:16    - Unknown word (Khudawadi)  -- #define STRING_Khudawadi0 STR_K STR_h STR_u STR
+./ext/pcre/pcre2lib/pcre2_tables.c:324:16    - Unknown word (Lisu)       -- #define STRING_Lisu0 STR_L STR_i STR_s STR
+./ext/pcre/pcre2lib/pcre2_tables.c:333:16    - Unknown word (Mahajani)   -- #define STRING_Mahajani0 STR_M STR_a STR_h STR
+./ext/pcre/pcre2lib/pcre2_tables.c:334:16    - Unknown word (Makasar)    -- #define STRING_Makasar0 STR_M STR_a STR_k STR
+./ext/pcre/pcre2lib/pcre2_tables.c:336:16    - Unknown word (Mandaic)    -- #define STRING_Mandaic0 STR_M STR_a STR_n STR
+./ext/pcre/pcre2lib/pcre2_tables.c:337:16    - Unknown word (Manichaean) -- #define STRING_Manichaean0 STR_M STR_a STR_n STR
+./ext/pcre/pcre2lib/pcre2_tables.c:342:16    - Unknown word (Medefaidrin) -- #define STRING_Medefaidrin0 STR_M STR_e STR_d STR
+./ext/pcre/pcre2lib/pcre2_tables.c:343:16    - Unknown word (Meetei)      -- #define STRING_Meetei_Mayek0 STR_M STR_e STR
+./ext/pcre/pcre2lib/pcre2_tables.c:343:23    - Unknown word (Mayek)       -- define STRING_Meetei_Mayek0 STR_M STR_e STR_e STR
+./ext/pcre/pcre2lib/pcre2_tables.c:344:16    - Unknown word (Mende)       -- #define STRING_Mende_Kikakui0 STR_M STR_e
+./ext/pcre/pcre2lib/pcre2_tables.c:344:22    - Unknown word (Kikakui)     -- define STRING_Mende_Kikakui0 STR_M STR_e STR_n STR
+./ext/pcre/pcre2lib/pcre2_tables.c:345:16    - Unknown word (Meroitic)    -- #define STRING_Meroitic_Cursive0 STR_M STR_e
+./ext/pcre/pcre2lib/pcre2_tables.c:347:16    - Unknown word (Miao)        -- #define STRING_Miao0 STR_M STR_i STR_a STR
+./ext/pcre/pcre2lib/pcre2_tables.c:352:16    - Unknown word (Multani)     -- #define STRING_Multani0 STR_M STR_u STR_l STR
+./ext/pcre/pcre2lib/pcre2_tables.c:356:16    - Unknown word (Nandinagari) -- #define STRING_Nandinagari0 STR_N STR_a STR_n STR
+./ext/pcre/pcre2lib/pcre2_tables.c:359:16    - Unknown word (Newa)        -- #define STRING_Newa0 STR_N STR_e STR_w STR
+./ext/pcre/pcre2lib/pcre2_tables.c:363:16    - Unknown word (Nushu)       -- #define STRING_Nushu0 STR_N STR_u STR_s STR
+./ext/pcre/pcre2lib/pcre2_tables.c:364:16    - Unknown word (Nyiakeng)    -- #define STRING_Nyiakeng_Puachue_Hmong0 STR_N
+./ext/pcre/pcre2lib/pcre2_tables.c:364:25    - Unknown word (Puachue)     -- define STRING_Nyiakeng_Puachue_Hmong0 STR_N STR_y STR
+./ext/pcre/pcre2lib/pcre2_tables.c:366:19    - Unknown word (Chiki)       -- #define STRING_Ol_Chiki0 STR_O STR_l STR_UNDERSCORE
+./ext/pcre/pcre2lib/pcre2_tables.c:375:20    - Unknown word (Uyghur)      -- #define STRING_Old_Uyghur0 STR_O STR_l STR_d STR
+./ext/pcre/pcre2lib/pcre2_tables.c:380:16    - Unknown word (Pahawh)      -- #define STRING_Pahawh_Hmong0 STR_P STR_a STR
+./ext/pcre/pcre2lib/pcre2_tables.c:387:16    - Unknown word (Phags)       -- #define STRING_Phags_Pa0 STR_P STR_h STR
+./ext/pcre/pcre2lib/pcre2_tables.c:397:16    - Unknown word (Saurashtra)  -- #define STRING_Saurashtra0 STR_S STR_a STR_u STR
+./ext/pcre/pcre2lib/pcre2_tables.c:399:16    - Unknown word (Sharada)     -- #define STRING_Sharada0 STR_S STR_h STR_a STR
+./ext/pcre/pcre2lib/pcre2_tables.c:401:16    - Unknown word (Siddham)     -- #define STRING_Siddham0 STR_S STR_i STR_d STR
+./ext/pcre/pcre2lib/pcre2_tables.c:409:16    - Unknown word (Soyombo)     -- #define STRING_Soyombo0 STR_S STR_o STR_y STR
+./ext/pcre/pcre2lib/pcre2_tables.c:411:16    - Unknown word (Syloti)      -- #define STRING_Syloti_Nagri0 STR_S STR_y STR
+./ext/pcre/pcre2lib/pcre2_tables.c:411:23    - Unknown word (Nagri)       -- define STRING_Syloti_Nagri0 STR_S STR_y STR_l STR
+./ext/pcre/pcre2lib/pcre2_tables.c:416:20    - Unknown word (Tham)        -- #define STRING_Tai_Tham0 STR_T STR_a STR_i STR
+./ext/pcre/pcre2lib/pcre2_tables.c:417:20    - Unknown word (Viet)        -- #define STRING_Tai_Viet0 STR_T STR_a STR_i STR
+./ext/pcre/pcre2lib/pcre2_tables.c:418:16    - Unknown word (Takri)       -- #define STRING_Takri0 STR_T STR_a STR_k STR
+./ext/pcre/pcre2lib/pcre2_tables.c:426:16    - Unknown word (Tifinagh)    -- #define STRING_Tifinagh0 STR_T STR_i STR_f STR
+./ext/pcre/pcre2lib/pcre2_tables.c:427:16    - Unknown word (Tirhuta)     -- #define STRING_Tirhuta0 STR_T STR_i STR_r STR
+./ext/pcre/pcre2lib/pcre2_tables.c:432:16    - Unknown word (Vithkuqi)    -- #define STRING_Vithkuqi0 STR_V STR_i STR_t STR
+./ext/pcre/pcre2lib/pcre2_tables.c:433:16    - Unknown word (Wancho)      -- #define STRING_Wancho0 STR_W STR_a STR_n STR
+./ext/pcre/pcre2lib/pcre2_tables.c:434:23    - Unknown word (Citi)        -- define STRING_Warang_Citi0 STR_W STR_a STR_r STR
+./ext/pcre/pcre2lib/pcre2_tables.c:440:16    - Unknown word (Yezidi)      -- #define STRING_Yezidi0 STR_Y STR_e STR_z STR
+./ext/pcre/pcre2lib/pcre2_tables.c:443:16    - Unknown word (Zanabazar)   -- #define STRING_Zanabazar_Square0 STR_Z STR_a
 ./ext/pcre/pcre2lib/sljit/sljitConfigInternal.h:172:53    - Unknown word (ARMT)       -- ARM >= 7 && defined(_M_ARMT)) || defined(__thumb
 ./ext/pcre/pcre2lib/sljit/sljitConfigInternal.h:52:29     - Unknown word (unsgined)   -- sljit_p : unsgined pointer value (usually
 ./ext/pcre/pcre2lib/sljit/sljitConfigInternal.h:581:22    - Unknown word (msfastcall) -- define SLJIT_FUNC __msfastcall
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1127:134  - Unknown word (srcw)       -- sljit_s32 src, sljit_sw srcw)
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1153:124  - Unknown word (dstw)       -- sljit_s32 dst, sljit_sw dstw)
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1172:56   - Unknown word (LMUL)       -- BREAKPOINT && op <= SLJIT_LMUL_SW)
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1174:19   - Unknown word (ENDBR)      -- || (op >= SLJIT_ENDBR && op <= SLJIT_SKIP
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1134:134  - Unknown word (srcw)       -- sljit_s32 src, sljit_sw srcw)
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1160:124  - Unknown word (dstw)       -- sljit_s32 dst, sljit_sw dstw)
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1179:56   - Unknown word (LMUL)       -- BREAKPOINT && op <= SLJIT_LMUL_SW)
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:117:9     - Unknown word (ABUF)       -- #define ABUF_SIZE 2048
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1267:72   - Unknown word (ASHR)       -- OPCODE(op) <= SLJIT_ASHR);
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1293:13   - Unknown word (ADDC)       -- case SLJIT_ADDC:
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1294:13   - Unknown word (SUBC)       -- case SLJIT_SUBC:
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1181:19   - Unknown word (ENDBR)      -- || (op >= SLJIT_ENDBR && op <= SLJIT_SKIP
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1274:72   - Unknown word (ASHR)       -- OPCODE(op) <= SLJIT_ASHR);
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1300:13   - Unknown word (ADDC)       -- case SLJIT_ADDC:
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1301:13   - Unknown word (SUBC)       -- case SLJIT_SUBC:
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:138:10    - Unknown word (REWRITABLE) -- /* SLJIT_REWRITABLE_JUMP is 0x1000. */
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1698:56   - Unknown word (fcmp)       -- TYPE check_sljit_emit_fcmp(struct sljit_compiler
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1723:56   - Unknown word (ijump)      -- TYPE check_sljit_emit_ijump(struct sljit_compiler
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1842:56   - Unknown word (cmov)       -- TYPE check_sljit_emit_cmov(struct sljit_compiler
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1880:26   - Unknown word (memw)       -- sljit_s32 mem, sljit_sw memw)
-./ext/pcre/pcre2lib/sljit/sljitLir.c:1913:56   - Unknown word (fmem)       -- TYPE check_sljit_emit_fmem(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1703:56   - Unknown word (fcmp)       -- TYPE check_sljit_emit_fcmp(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1728:56   - Unknown word (ijump)      -- TYPE check_sljit_emit_ijump(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1846:56   - Unknown word (cmov)       -- TYPE check_sljit_emit_cmov(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1883:26   - Unknown word (memw)       -- sljit_s32 mem, sljit_sw memw)
+./ext/pcre/pcre2lib/sljit/sljitLir.c:1916:56   - Unknown word (fmem)       -- TYPE check_sljit_emit_fmem(struct sljit_compiler
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:222:10    - Unknown word (FCSR)       -- # define FCSR_FCC 33
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:248:45    - Unknown word (saveds)     -- REGISTERS_SIZE(scratches, saveds, extra) \
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:326:22    - Unknown word (occures)    -- * Assertion failure occures if an invalid argument
@@ -2956,21 +2958,21 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:413:12    - Unknown word (fscratches) -- compiler->fscratches = -1;
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:414:12    - Unknown word (fsaveds)    -- compiler->fsaveds = -1;
 ./ext/pcre/pcre2lib/sljit/sljitLir.c:422:12    - Unknown word (cpool)      -- compiler->cpool = (sljit_uw*)SLJIT_MALLOC
-./ext/pcre/pcre2lib/sljit/sljitLir.c:750:27    - Unknown word (FREG)       -- define FUNCTION_CHECK_IS_FREG(fr) \
-./ext/pcre/pcre2lib/sljit/sljitLir.c:877:27    - Unknown word (freg)       -- static void sljit_verbose_freg(struct sljit_compiler
-./ext/pcre/pcre2lib/sljit/sljitLir.c:911:27    - Unknown word (fparam)     -- static void sljit_verbose_fparam(struct sljit_compiler
-./ext/pcre/pcre2lib/sljit/sljitLir.c:937:10    - Unknown word (endbr)      -- (char*)"endbr", (char*)"skip_frames
-./ext/pcre/pcre2lib/sljit/sljitLir.c:949:24    - Unknown word (addc)       -- char*)"add", (char*)"addc", (char*)"sub", (char
-./ext/pcre/pcre2lib/sljit/sljitLir.c:949:53    - Unknown word (subc)       -- char*)"sub", (char*)"subc",
-./ext/pcre/pcre2lib/sljit/sljitLir.c:951:24    - Unknown word (lshr)       -- char*)"shl", (char*)"lshr", (char*)"ashr",
-./ext/pcre/pcre2lib/sljit/sljitLir.c:951:39    - Unknown word (ashr)       -- char*)"lshr", (char*)"ashr",
-./ext/pcre/pcre2lib/sljit/sljitLir.h:1100:65   - Unknown word (CMPD)       -- right operand for SLJIT_CMPD.
-./ext/pcre/pcre2lib/sljit/sljitLir.h:1260:13   - Unknown word (FCMP)       -- an SLJIT_FCMP operation (setting appropriat
-./ext/pcre/pcre2lib/sljit/sljitLir.h:1441:12   - Unknown word (Kbyte)      -- 4 Kbyte or more).
-./ext/pcre/pcre2lib/sljit/sljitLir.h:452:17    - Unknown word (argw)       -- sljit_sw cache_argw;
-./ext/pcre/pcre2lib/sljit/sljitLir.h:615:25    - Unknown word (LJIT)       -- SLJIT_ARG_TYPE_SW / LJIT_ARG_TYPE_UW) arguments
-./ext/pcre/pcre2lib/sljit/sljitLir.h:726:25    - Unknown word (adrressing) -- modes. Other adrressing modes are emulated by
-./ext/pcre/pcre2lib/sljit/sljitLir.h:745:48    - Unknown word (immediates) -- load on 64 bit requires immediates divisible by 4.
+./ext/pcre/pcre2lib/sljit/sljitLir.c:758:27    - Unknown word (FREG)       -- define FUNCTION_CHECK_IS_FREG(fr) \
+./ext/pcre/pcre2lib/sljit/sljitLir.c:885:27    - Unknown word (freg)       -- static void sljit_verbose_freg(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitLir.c:919:27    - Unknown word (fparam)     -- static void sljit_verbose_fparam(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitLir.c:945:10    - Unknown word (endbr)      -- (char*)"endbr", (char*)"skip_frames
+./ext/pcre/pcre2lib/sljit/sljitLir.c:957:24    - Unknown word (addc)       -- char*)"add", (char*)"addc", (char*)"sub", (char
+./ext/pcre/pcre2lib/sljit/sljitLir.c:957:53    - Unknown word (subc)       -- char*)"sub", (char*)"subc",
+./ext/pcre/pcre2lib/sljit/sljitLir.c:959:24    - Unknown word (lshr)       -- char*)"shl", (char*)"lshr", (char*)"ashr",
+./ext/pcre/pcre2lib/sljit/sljitLir.c:959:39    - Unknown word (ashr)       -- char*)"lshr", (char*)"ashr",
+./ext/pcre/pcre2lib/sljit/sljitLir.h:1104:65   - Unknown word (CMPD)       -- right operand for SLJIT_CMPD.
+./ext/pcre/pcre2lib/sljit/sljitLir.h:1244:13   - Unknown word (FCMP)       -- an SLJIT_FCMP operation (setting appropriat
+./ext/pcre/pcre2lib/sljit/sljitLir.h:1425:12   - Unknown word (Kbyte)      -- 4 Kbyte or more).
+./ext/pcre/pcre2lib/sljit/sljitLir.h:456:17    - Unknown word (argw)       -- sljit_sw cache_argw;
+./ext/pcre/pcre2lib/sljit/sljitLir.h:619:25    - Unknown word (LJIT)       -- SLJIT_ARG_TYPE_SW / LJIT_ARG_TYPE_UW) arguments
+./ext/pcre/pcre2lib/sljit/sljitLir.h:730:25    - Unknown word (adrressing) -- modes. Other adrressing modes are emulated by
+./ext/pcre/pcre2lib/sljit/sljitLir.h:749:48    - Unknown word (immediates) -- load on 64 bit requires immediates divisible by 4.
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1028:5    - Unknown word (stmdb)      -- stmdb sp!, {..., lr} */
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1088:5    - Unknown word (ldmia)      -- ldmia sp!, {..., pc} */
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:112:9     - Unknown word (VADD)       -- #define VADD_F32 0xee300a00
@@ -2982,14 +2984,14 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:123:9     - Unknown word (VNEG)       -- #define VNEG_F32 0xeeb10a40
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:125:9     - Unknown word (VSUB)       -- #define VSUB_F32 0xee300a40
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:129:9     - Unknown word (MOVW)       -- #define MOVW 0xe3000000
-./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1307:34   - Unknown word (continous)  -- Search a zero byte (8 continous zero bit). */
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:130:9     - Unknown word (MOVT)       -- #define MOVT 0xe3400000
+./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1312:34   - Unknown word (continous)  -- Search a zero byte (8 continous zero bit). */
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:131:9     - Unknown word (SXTB)       -- #define SXTB 0xe6af0070
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:132:9     - Unknown word (SXTH)       -- #define SXTH 0xe6bf0070
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:133:9     - Unknown word (UXTB)       -- #define UXTB 0xe6ef0070
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:134:9     - Unknown word (UXTH)       -- #define UXTH 0xe6ff0070
-./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1677:29   - Unknown word (uidivmod)   -- unsigned int __aeabi_uidivmod(unsigned int numerator
-./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1678:20   - Unknown word (idivmod)    -- extern int __aeabi_idivmod(int numerator, int denominato
+./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1682:29   - Unknown word (uidivmod)   -- unsigned int __aeabi_uidivmod(unsigned int numerator
+./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:1683:20   - Unknown word (idivmod)    -- extern int __aeabi_idivmod(int numerator, int denominato
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:30:28     - Unknown word (hardfp)     -- define ARM_ABI_INFO " ABI:hardfp"
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:323:17    - Unknown word (ocasions)   -- /* In some rare ocasions we may need future patches
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_32.c:76:5      - Unknown word (Instrucion) -- /* Instrucion forms
@@ -3049,8 +3051,8 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:160:9     - Unknown word (SBCI)       -- #define SBCI 0xf1600000
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:167:9     - Unknown word (SUBSI)      -- #define SUBSI3 0x1e00
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:170:9     - Unknown word (SUBWI)      -- #define SUBWI 0xf2a00000
-./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:2189:11   - Unknown word (movsi)      -- /* The movsi (immediate) instruction
-./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:939:27    - Unknown word (strsh)      -- u s */ 0xf8200000 /* strsh.w */,
+./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:2198:11   - Unknown word (movsi)      -- /* The movsi (immediate) instruction
+./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:944:27    - Unknown word (strsh)      -- u s */ 0xf8200000 /* strsh.w */,
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:94:9      - Unknown word (ADCI)       -- #define ADCI 0xf1400000
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:95:9      - Unknown word (ADCS)       -- #define ADCS 0x4140
 ./ext/pcre/pcre2lib/sljit/sljitNativeARM_T2_32.c:99:9      - Unknown word (ADDSI)      -- #define ADDSI3 0x1c00
@@ -3104,17 +3106,17 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativeMIPS_common.c:912:17    - Unknown word (absoulute)   -- /* reg_ar is an absoulute register! */
 ./ext/pcre/pcre2lib/sljit/sljitNativeMIPS_common.c:920:21    - Unknown word (absoulte)    -- /* Works for both absoulte and relative addresses
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:120:31    - Unknown word (ADDIC)      -- push_inst(compiler, ADDIC | D(dst) | A(src1)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:134:33    - Unknown word (CMPLI)      -- push_inst(compiler, CMPLI | CRD(0) | A(src1)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:142:31    - Unknown word (SUBF)       -- push_inst(compiler, SUBF | D(dst) | A(src2)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:167:31    - Unknown word (SUBFC)      -- push_inst(compiler, SUBFC | RC(ALT_SET_FLAGS)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:171:30    - Unknown word (SUBFE)      -- push_inst(compiler, SUBFE | D(dst) | A(src2)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:176:31    - Unknown word (MULLI)      -- push_inst(compiler, MULLI | D(dst) | A(src1)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:178:30    - Unknown word (MULLW)      -- push_inst(compiler, MULLW | OE(flags) | RC(flags
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:187:31    - Unknown word (ANDIS)      -- push_inst(compiler, ANDIS | S(src1) | A(dst)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:198:31    - Unknown word (ORIS)       -- push_inst(compiler, ORIS | S(src1) | A(dst)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:214:31    - Unknown word (XORIS)      -- push_inst(compiler, XORIS | S(src1) | A(dst)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:243:31    - Unknown word (SRAWI)      -- push_inst(compiler, SRAWI | RC(flags) | S(src
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:245:30    - Unknown word (SRAW)       -- push_inst(compiler, SRAW | RC(flags) | S(src
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:135:33    - Unknown word (CMPLI)      -- push_inst(compiler, CMPLI | CRD(0) | A(src1)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:143:31    - Unknown word (SUBF)       -- push_inst(compiler, SUBF | D(dst) | A(src2)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:173:31    - Unknown word (SUBFC)      -- push_inst(compiler, SUBFC | RC(ALT_SET_FLAGS)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:177:30    - Unknown word (SUBFE)      -- push_inst(compiler, SUBFE | D(dst) | A(src2)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:182:31    - Unknown word (MULLI)      -- push_inst(compiler, MULLI | D(dst) | A(src1)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:184:30    - Unknown word (MULLW)      -- push_inst(compiler, MULLW | OE(flags) | RC(flags
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:193:31    - Unknown word (ANDIS)      -- push_inst(compiler, ANDIS | S(src1) | A(dst)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:204:31    - Unknown word (ORIS)       -- push_inst(compiler, ORIS | S(src1) | A(dst)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:220:31    - Unknown word (XORIS)      -- push_inst(compiler, XORIS | S(src1) | A(dst)
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:249:31    - Unknown word (SRAWI)      -- push_inst(compiler, SRAWI | RC(flags) | S(src
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:251:30    - Unknown word (SRAW)       -- push_inst(compiler, SRAW | RC(flags) | S(src
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:37:30     - Unknown word (ADDIS)      -- push_inst(compiler, ADDIS | D(reg) | A(0) | IMM
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:42:3      - Unknown word (RLWINM)     -- (RLWINM | S(src) | A(dst) |
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_32.c:62:32     - Unknown word (EXTSB)      -- push_inst(compiler, EXTSB | S(src2) | A(dst))
@@ -3125,11 +3127,11 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:123:31    - Unknown word (EXTSW)      -- push_inst(compiler, EXTSW | S(src2) | A(TMP_REG
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:219:30    - Unknown word (CNTLZD)     -- push_inst(compiler, CNTLZD | S(src2) | A(dst))
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:31:22     - Unknown word (cntlzd)     -- __asm__ volatile ( "cntlzd %0, %1" : "=r"(dst)
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:327:30    - Unknown word (MULLD)      -- push_inst(compiler, MULLD | OE(flags) | RC(flags
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:339:30    - Unknown word (MULLD)      -- push_inst(compiler, MULLD | OE(flags) | RC(flags
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:38:14     - Unknown word (RLDICR)     -- #define PUSH_RLDICR(reg, shift) \
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:39:22     - Unknown word (RLDI)       -- push_inst(compiler, RLDI(reg, reg, 63 - shift
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:404:31    - Unknown word (SRADI)      -- push_inst(compiler, SRADI | RC(flags) | S(src
-./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:406:60    - Unknown word (SRAD)       -- ALT_FORM2) ? SRAW : SRAD) | RC(flags) | S(src
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:416:31    - Unknown word (SRADI)      -- push_inst(compiler, SRADI | RC(flags) | S(src
+./ext/pcre/pcre2lib/sljit/sljitNativePPC_64.c:418:60    - Unknown word (SRAD)       -- ALT_FORM2) ? SRAW : SRAD) | RC(flags) | S(src
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:145:9     - Unknown word (ADDME)      -- #define ADDME (HI(31) | LO(234))
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:151:9     - Unknown word (BCCTR)      -- #define BCCTR (HI(19) | LO(528)
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:159:9     - Unknown word (CROR)       -- #define CROR (HI(19) | LO(449))
@@ -3209,104 +3211,130 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:978:25    - Unknown word (lfsu)       -- s i l */ HI(49) /* lfsu */,
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:979:35    - Unknown word (stfsux)     -- HI(31) | LO(695) /* stfsux */,
 ./ext/pcre/pcre2lib/sljit/sljitNativePPC_common.c:980:35    - Unknown word (lfsux)      -- HI(31) | LO(567) /* lfsux */,
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:1232:68   - Unknown word (asser)      -- than 32bit words and asser()
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:1363:34   - Unknown word (FLOGR)      -- have_eimm() ? 1 : 0; /* FLOGR instruction */
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:1541:4    - Unknown word (LEVAL)      -- /* LEVAL will be defined later
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2724:65   - Unknown word (LGRL)       -- instruction stream (LGRL)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:274:39    - Unknown word (hwcap)      -- INLINE unsigned long get_hwcap()
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:278:24    - Unknown word (HWCAP)      -- hwcap = getauxval(AT_HWCAP);
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:284:30    - Unknown word (stfle)      -- SLJIT_INLINE int have_stfle()
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:289:35    - Unknown word (STFLE)      -- hwcap() & HWCAP_S390_STFLE);
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:337:20    - Unknown word (eimm)       -- HAVE_FACILITY(have_eimm, EXTENDED_IMMEDIATE
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:338:20    - Unknown word (ldisp)      -- HAVE_FACILITY(have_ldisp, FAST_LONG_DISPLACEMENT
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:340:20    - Unknown word (lscond)     -- HAVE_FACILITY(have_lscond1, LOAD_STORE_ON_CONDITION
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:385:16    - Unknown word (basr)       -- SLJIT_S390X_RR(basr, 0x0d00)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:430:17    - Unknown word (algr)       -- SLJIT_S390X_RRE(algr, 0xb90a0000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:433:17    - Unknown word (alcr)       -- SLJIT_S390X_RRE(alcr, 0xb9980000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:434:17    - Unknown word (alcgr)      -- SLJIT_S390X_RRE(alcgr, 0xb9880000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:443:17    - Unknown word (clgr)       -- SLJIT_S390X_RRE(clgr, 0xb9210000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:447:17    - Unknown word (dlgr)       -- SLJIT_S390X_RRE(dlgr, 0xb9870000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:450:17    - Unknown word (dsgr)       -- SLJIT_S390X_RRE(dsgr, 0xb90d0000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:457:17    - Unknown word (lgfr)       -- SLJIT_S390X_RRE(lgfr, 0xb9140000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:461:17    - Unknown word (lgbr)       -- SLJIT_S390X_RRE(lgbr, 0xb9060000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:464:17    - Unknown word (lcgr)       -- SLJIT_S390X_RRE(lcgr, 0xb9030000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:468:17    - Unknown word (lghr)       -- SLJIT_S390X_RRE(lghr, 0xb9070000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:471:17    - Unknown word (llgfr)      -- SLJIT_S390X_RRE(llgfr, 0xb9160000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:474:17    - Unknown word (llcr)       -- SLJIT_S390X_RRE(llcr, 0xb9940000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:475:17    - Unknown word (llgcr)      -- SLJIT_S390X_RRE(llgcr, 0xb9840000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:478:17    - Unknown word (llhr)       -- SLJIT_S390X_RRE(llhr, 0xb9950000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:479:17    - Unknown word (llghr)      -- SLJIT_S390X_RRE(llghr, 0xb9850000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:482:17    - Unknown word (mlgr)       -- SLJIT_S390X_RRE(mlgr, 0xb9860000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:487:17    - Unknown word (msgfr)      -- SLJIT_S390X_RRE(msgfr, 0xb91c0000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:496:17    - Unknown word (slgr)       -- SLJIT_S390X_RRE(slgr, 0xb90b0000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:499:17    - Unknown word (slbr)       -- SLJIT_S390X_RRE(slbr, 0xb9990000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:500:17    - Unknown word (slbgr)      -- SLJIT_S390X_RRE(slbgr, 0xb9890000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:513:17    - Unknown word (aghi)       -- SLJIT_S390X_RIA(aghi, 0xa70b0000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:517:17    - Unknown word (cghi)       -- SLJIT_S390X_RIA(cghi, 0xa70f0000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:521:17    - Unknown word (lghi)       -- SLJIT_S390X_RIA(lghi, 0xa7090000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:524:17    - Unknown word (llihh)      -- SLJIT_S390X_RIA(llihh, 0xa50c0000, sljit_u
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:525:17    - Unknown word (llihl)      -- SLJIT_S390X_RIA(llihl, 0xa50d0000, sljit_u
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:526:17    - Unknown word (llilh)      -- SLJIT_S390X_RIA(llilh, 0xa50e0000, sljit_u
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:527:17    - Unknown word (llill)      -- SLJIT_S390X_RIA(llill, 0xa50f0000, sljit_u
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:1462:68   - Unknown word (asser)      -- than 32bit words and asser()
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:1593:34   - Unknown word (FLOGR)      -- have_eimm() ? 1 : 0; /* FLOGR instruction */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:1771:4    - Unknown word (LEVAL)      -- /* LEVAL will be defined later
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2105:17   - Unknown word (agrk)       -- 0xb9e80000, /* agrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2113:17   - Unknown word (algr)       -- 0xb90a0000, /* algr */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2114:17   - Unknown word (alrk)       -- 0xb9fa0000, /* alrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2115:17   - Unknown word (algrk)      -- 0xb9ea0000, /* algrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2134:78   - Unknown word (agsi)       -- : 0xeb000000007a /* agsi */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2136:51   - Unknown word (alsi)       -- ? 0xeb000000006e /* alsi */ : 0xeb000000007e
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2136:79   - Unknown word (algsi)      -- : 0xeb000000007e /* algsi */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2142:51   - Unknown word (ahik)       -- ? 0xec00000000d8 /* ahik */ : 0xec00000000d9
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2142:79   - Unknown word (aghik)      -- : 0xec00000000d9 /* aghik */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2144:51   - Unknown word (alhsik)     -- ? 0xec00000000da /* alhsik */ : 0xec00000000db
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2144:81   - Unknown word (alghsik)    -- : 0xec00000000db /* alghsik */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2151:51   - Unknown word (alfi)       -- ? 0xc20b00000000 /* alfi */ : 0xc20a00000000
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2151:79   - Unknown word (algfi)      -- : 0xc20a00000000 /* algfi */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2156:49   - Unknown word (slgfi)      -- compiler, 0xc20400000000 /* slgfi */, dst, src1, src1w
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2184:17   - Unknown word (sgrk)       -- 0xb9e90000, /* sgrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2192:17   - Unknown word (slgr)       -- 0xb90b0000, /* slgr */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2193:17   - Unknown word (slrk)       -- 0xb9fb0000, /* slrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2194:17   - Unknown word (slgrk)      -- 0xb9eb0000, /* slgrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2219:79   - Unknown word (cgfi)       -- : 0xc20c00000000 /* cgfi */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2225:52   - Unknown word (clfi)       -- ? 0xc20f00000000 /* clfi */ : 0xc20e00000000
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2225:80   - Unknown word (clgfi)      -- : 0xc20e00000000 /* clgfi */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2248:65   - Unknown word (clgr)       -- clr */ : 0xb9210000 /* clgr */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2321:17   - Unknown word (msrkc)      -- 0xb9fd0000, /* msrkc */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2322:17   - Unknown word (msgrkc)     -- 0xb9ed0000, /* msgrkc */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2335:21   - Unknown word (msgc)       -- 0xe30000000083, /* msgc */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2367:50   - Unknown word (msfi)       -- ? 0xc20100000000 /* msfi */ : 0xc20000000000
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2367:78   - Unknown word (msgfi)      -- : 0xc20000000000 /* msgfi */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2396:48   - Unknown word (nilf)       -- compiler, 0xc00b00000000 /* nilf */ | (dst_r << 36)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2400:50   - Unknown word (oihf)       -- compiler, 0xc00c00000000 /* oihf */ | (dst_r << 36)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2401:49   - Unknown word (oilf)       -- compiler, 0xc00d00000000 /* oilf */ | (dst_r << 36)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2412:46   - Unknown word (oihh)       -- compiler, 0xa5080000 /* oihh */ | (dst_r << 20)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2414:46   - Unknown word (oihl)       -- compiler, 0xa5090000 /* oihl */ | (dst_r << 20)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2418:45   - Unknown word (oill)       -- compiler, 0xa50b0000 /* oill */ | (dst_r << 20)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2423:49   - Unknown word (xihf)       -- compiler, 0xc00600000000 /* xihf */ | (dst_r << 36)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2433:17   - Unknown word (ngrk)       -- 0xb9e40000, /* ngrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2443:17   - Unknown word (ogrk)       -- 0xb9e60000, /* ogrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2453:17   - Unknown word (xgrk)       -- 0xb9e70000, /* xgrk */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2552:50   - Unknown word (sllk)       -- ? 0xeb00000000df /* sllk */ : 0xeb000000000d
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2554:50   - Unknown word (srlk)       -- ? 0xeb00000000de /* srlk */ : 0xeb000000000c
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2554:78   - Unknown word (srlg)       -- : 0xeb000000000c /* srlg */;
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2556:50   - Unknown word (srak)       -- ? 0xeb00000000dc /* srak */ : 0xeb000000000a
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2568:17   - Unknown word (alcr)       -- 0xb9980000, /* alcr */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2569:17   - Unknown word (alcgr)      -- 0xb9880000, /* alcgr */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2574:21   - Unknown word (alcg)       -- 0xe30000000088, /* alcg */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2578:17   - Unknown word (slbr)       -- 0xb9990000, /* slbr */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2579:17   - Unknown word (slbgr)      -- 0xb9890000, /* slbgr */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2584:21   - Unknown word (slbg)       -- 0xe30000000089, /* slbg */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:2945:65   - Unknown word (LGRL)       -- instruction stream (LGRL)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:315:39    - Unknown word (hwcap)      -- INLINE unsigned long get_hwcap()
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:319:24    - Unknown word (HWCAP)      -- hwcap = getauxval(AT_HWCAP);
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:325:30    - Unknown word (stfle)      -- SLJIT_INLINE int have_stfle()
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:330:35    - Unknown word (STFLE)      -- hwcap() & HWCAP_S390_STFLE);
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:378:20    - Unknown word (eimm)       -- HAVE_FACILITY(have_eimm, EXTENDED_IMMEDIATE
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:379:20    - Unknown word (ldisp)      -- HAVE_FACILITY(have_ldisp, FAST_LONG_DISPLACEMENT
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:381:20    - Unknown word (lscond)     -- HAVE_FACILITY(have_lscond1, LOAD_STORE_ON_CONDITION
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:421:16    - Unknown word (basr)       -- SLJIT_S390X_RR(basr, 0x0d00)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:455:17    - Unknown word (dlgr)       -- SLJIT_S390X_RRE(dlgr, 0xb9870000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:458:17    - Unknown word (dsgr)       -- SLJIT_S390X_RRE(dsgr, 0xb90d0000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:465:17    - Unknown word (lgfr)       -- SLJIT_S390X_RRE(lgfr, 0xb9140000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:469:17    - Unknown word (lgbr)       -- SLJIT_S390X_RRE(lgbr, 0xb9060000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:472:17    - Unknown word (lcgr)       -- SLJIT_S390X_RRE(lcgr, 0xb9030000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:476:17    - Unknown word (lghr)       -- SLJIT_S390X_RRE(lghr, 0xb9070000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:479:17    - Unknown word (llgfr)      -- SLJIT_S390X_RRE(llgfr, 0xb9160000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:482:17    - Unknown word (llcr)       -- SLJIT_S390X_RRE(llcr, 0xb9940000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:483:17    - Unknown word (llgcr)      -- SLJIT_S390X_RRE(llgcr, 0xb9840000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:486:17    - Unknown word (llhr)       -- SLJIT_S390X_RRE(llhr, 0xb9950000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:487:17    - Unknown word (llghr)      -- SLJIT_S390X_RRE(llghr, 0xb9850000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:490:17    - Unknown word (mlgr)       -- SLJIT_S390X_RRE(mlgr, 0xb9860000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:493:17    - Unknown word (msgfr)      -- SLJIT_S390X_RRE(msgfr, 0xb91c0000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:511:17    - Unknown word (aghi)       -- SLJIT_S390X_RIA(aghi, 0xa70b0000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:515:17    - Unknown word (lghi)       -- SLJIT_S390X_RIA(lghi, 0xa7090000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:518:17    - Unknown word (llihh)      -- SLJIT_S390X_RIA(llihh, 0xa50c0000, sljit_u
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:519:17    - Unknown word (llihl)      -- SLJIT_S390X_RIA(llihl, 0xa50d0000, sljit_u
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:520:17    - Unknown word (llilh)      -- SLJIT_S390X_RIA(llilh, 0xa50e0000, sljit_u
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:521:17    - Unknown word (llill)      -- SLJIT_S390X_RIA(llill, 0xa50f0000, sljit_u
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:525:17    - Unknown word (mghi)       -- SLJIT_S390X_RIA(mghi, 0xa70d0000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:528:17    - Unknown word (oilh)       -- SLJIT_S390X_RIA(oilh, 0xa50a0000, sljit
 ./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:52:28     - Unknown word (mundaym)    -- their use is limited as mundaym explained:
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:531:17    - Unknown word (mghi)       -- SLJIT_S390X_RIA(mghi, 0xa70d0000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:534:17    - Unknown word (oilh)       -- SLJIT_S390X_RIA(oilh, 0xa50a0000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:537:17    - Unknown word (tmlh)       -- SLJIT_S390X_RIA(tmlh, 0xa7000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:542:21    - Unknown word (RILA)       -- #define SLJIT_S390X_RILA(name, pattern, imm_type
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:551:18    - Unknown word (agfi)       -- SLJIT_S390X_RILA(agfi, 0xc20800000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:557:18    - Unknown word (alfi)       -- SLJIT_S390X_RILA(alfi, 0xc20b00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:558:18    - Unknown word (algfi)      -- SLJIT_S390X_RILA(algfi, 0xc20a00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:561:18    - Unknown word (nihf)       -- SLJIT_S390X_RILA(nihf, 0xc00a00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:562:18    - Unknown word (nilf)       -- SLJIT_S390X_RILA(nilf, 0xc00b00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:566:18    - Unknown word (cgfi)       -- SLJIT_S390X_RILA(cgfi, 0xc20c00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:572:18    - Unknown word (clfi)       -- SLJIT_S390X_RILA(clfi, 0xc20f00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:573:18    - Unknown word (clgfi)      -- SLJIT_S390X_RILA(clgfi, 0xc20e00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:576:18    - Unknown word (xilf)       -- SLJIT_S390X_RILA(xilf, 0xc00700000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:579:18    - Unknown word (iihf)       -- SLJIT_S390X_RILA(iihf, 0xc00800000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:580:18    - Unknown word (iilf)       -- SLJIT_S390X_RILA(iilf, 0xc00900000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:583:18    - Unknown word (lgfi)       -- SLJIT_S390X_RILA(lgfi, 0xc00100000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:586:18    - Unknown word (llihf)      -- SLJIT_S390X_RILA(llihf, 0xc00e00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:587:18    - Unknown word (llilf)      -- SLJIT_S390X_RILA(llilf, 0xc00f00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:590:18    - Unknown word (oilf)       -- SLJIT_S390X_RILA(oilf, 0xc00d00000000, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:654:21    - Unknown word (RXYA)       -- #define SLJIT_S390X_RXYA(name, pattern, cond
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:533:21    - Unknown word (RILA)       -- #define SLJIT_S390X_RILA(name, pattern, imm_type
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:541:18    - Unknown word (agfi)       -- SLJIT_S390X_RILA(agfi, 0xc20800000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:547:18    - Unknown word (nihf)       -- SLJIT_S390X_RILA(nihf, 0xc00a00000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:550:18    - Unknown word (xilf)       -- SLJIT_S390X_RILA(xilf, 0xc00700000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:553:18    - Unknown word (iihf)       -- SLJIT_S390X_RILA(iihf, 0xc00800000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:554:18    - Unknown word (iilf)       -- SLJIT_S390X_RILA(iilf, 0xc00900000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:557:18    - Unknown word (lgfi)       -- SLJIT_S390X_RILA(lgfi, 0xc00100000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:560:18    - Unknown word (llihf)      -- SLJIT_S390X_RILA(llihf, 0xc00e00000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:561:18    - Unknown word (llilf)      -- SLJIT_S390X_RILA(llilf, 0xc00f00000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:564:18    - Unknown word (slfi)       -- SLJIT_S390X_RILA(slfi, 0xc20500000000, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:607:21    - Unknown word (RXYA)       -- #define SLJIT_S390X_RXYA(name, pattern, cond
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:635:18    - Unknown word (llgf)       -- SLJIT_S390X_RXYA(llgf, 0xe30000000016, 1
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:639:18    - Unknown word (llgc)       -- SLJIT_S390X_RXYA(llgc, 0xe30000000090, 1
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:643:18    - Unknown word (llgh)       -- SLJIT_S390X_RXYA(llgh, 0xe30000000091, 1
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:654:18    - Unknown word (stcy)       -- SLJIT_S390X_RXYA(stcy, 0xe30000000072, have
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:657:18    - Unknown word (sthy)       -- SLJIT_S390X_RXYA(sthy, 0xe30000000070, have
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:662:21    - Unknown word (RSYA)       -- #define SLJIT_S390X_RSYA(name, pattern, cond
 ./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:66:32     - Unknown word (carenas)    -- retired ASAP (TODO: carenas)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:678:18    - Unknown word (alcg)       -- SLJIT_S390X_RXYA(alcg, 0xe30000000088, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:702:18    - Unknown word (llgf)       -- SLJIT_S390X_RXYA(llgf, 0xe30000000016, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:706:18    - Unknown word (llgc)       -- SLJIT_S390X_RXYA(llgc, 0xe30000000090, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:710:18    - Unknown word (llgh)       -- SLJIT_S390X_RXYA(llgh, 0xe30000000091, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:725:18    - Unknown word (stcy)       -- SLJIT_S390X_RXYA(stcy, 0xe30000000072, have
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:728:18    - Unknown word (sthy)       -- SLJIT_S390X_RXYA(sthy, 0xe30000000070, have
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:740:18    - Unknown word (slbg)       -- SLJIT_S390X_RXYA(slbg, 0xe30000000089, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:766:21    - Unknown word (RSYA)       -- #define SLJIT_S390X_RSYA(name, pattern, cond
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:784:18    - Unknown word (sllg)       -- SLJIT_S390X_RSYA(sllg, 0xeb000000000d, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:787:18    - Unknown word (srag)       -- SLJIT_S390X_RSYA(srag, 0xeb000000000a, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:790:18    - Unknown word (srlg)       -- SLJIT_S390X_RSYA(srlg, 0xeb000000000c, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:793:18    - Unknown word (stmg)       -- SLJIT_S390X_RSYA(stmg, 0xeb0000000024, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:798:21    - Unknown word (RIEF)       -- #define SLJIT_S390X_RIEF(name, pattern) \
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:814:21    - Unknown word (rnsbg)      -- /* SLJIT_S390X_RIEF(rnsbg, 0xec0000000054) *
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:817:21    - Unknown word (rxsbg)      -- /* SLJIT_S390X_RIEF(rxsbg, 0xec0000000057) *
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:820:18    - Unknown word (rosbg)      -- SLJIT_S390X_RIEF(rosbg, 0xec0000000056)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:823:21    - Unknown word (risbg)      -- /* SLJIT_S390X_RIEF(risbg, 0xec0000000055) *
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:824:21    - Unknown word (risbgn)     -- /* SLJIT_S390X_RIEF(risbgn, 0xec0000000059) */
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:827:18    - Unknown word (risbhg)     -- SLJIT_S390X_RIEF(risbhg, 0xec000000005d)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:830:21    - Unknown word (risblg)     -- /* SLJIT_S390X_RIEF(risblg, 0xec0000000051) */
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:835:21    - Unknown word (RRFA)       -- #define SLJIT_S390X_RRFA(name, pattern, cond
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:849:18    - Unknown word (msrkc)      -- SLJIT_S390X_RRFA(msrkc, 0xb9fd0000, have_misc
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:850:18    - Unknown word (msgrkc)     -- SLJIT_S390X_RRFA(msgrkc, 0xb9ed0000, have_misc
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:855:21    - Unknown word (RRFC)       -- #define SLJIT_S390X_RRFC(name, pattern) \
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:869:18    - Unknown word (locr)       -- SLJIT_S390X_RRFC(locr, 0xb9f20000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:870:18    - Unknown word (locgr)      -- SLJIT_S390X_RRFC(locgr, 0xb9e20000)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:875:21    - Unknown word (RIEG)       -- #define SLJIT_S390X_RIEG(name, pattern) \
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:889:18    - Unknown word (lochi)      -- SLJIT_S390X_RIEG(lochi, 0xec0000000042)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:890:18    - Unknown word (locghi)     -- SLJIT_S390X_RIEG(locghi, 0xec0000000046)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:894:21    - Unknown word (RILB)       -- #define SLJIT_S390X_RILB(name, pattern, cond
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:907:18    - Unknown word (brasl)      -- SLJIT_S390X_RILB(brasl, 0xc00500000000, 1)
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:910:18    - Unknown word (larl)       -- SLJIT_S390X_RILB(larl, 0xc00000000000, 1
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:913:18    - Unknown word (lgrl)       -- SLJIT_S390X_RILB(lgrl, 0xc40800000000, have
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:922:25    - Unknown word (brcl)       -- SLJIT_S390X_INSTRUCTION(brcl, sljit_uw mask, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:929:25    - Unknown word (flogr)      -- SLJIT_S390X_INSTRUCTION(flogr, sljit_gpr dst, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:944:25    - Unknown word (risbhgz)    -- SLJIT_S390X_INSTRUCTION(risbhgz, sljit_gpr dst, sljit
-./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_32.c:208:33    - Unknown word (STDF)       -- push_inst(compiler, STDF | FD(float_arg_index
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:680:18    - Unknown word (sllg)       -- SLJIT_S390X_RSYA(sllg, 0xeb000000000d, 1
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:683:18    - Unknown word (srag)       -- SLJIT_S390X_RSYA(srag, 0xeb000000000a, 1
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:686:18    - Unknown word (stmg)       -- SLJIT_S390X_RSYA(stmg, 0xeb0000000024, 1
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:691:21    - Unknown word (RIEF)       -- #define SLJIT_S390X_RIEF(name, pattern) \
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:707:21    - Unknown word (rnsbg)      -- /* SLJIT_S390X_RIEF(rnsbg, 0xec0000000054) *
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:710:21    - Unknown word (rxsbg)      -- /* SLJIT_S390X_RIEF(rxsbg, 0xec0000000057) *
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:713:18    - Unknown word (rosbg)      -- SLJIT_S390X_RIEF(rosbg, 0xec0000000056)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:716:21    - Unknown word (risbg)      -- /* SLJIT_S390X_RIEF(risbg, 0xec0000000055) *
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:717:21    - Unknown word (risbgn)     -- /* SLJIT_S390X_RIEF(risbgn, 0xec0000000059) */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:720:18    - Unknown word (risbhg)     -- SLJIT_S390X_RIEF(risbhg, 0xec000000005d)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:723:21    - Unknown word (risblg)     -- /* SLJIT_S390X_RIEF(risblg, 0xec0000000051) */
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:728:21    - Unknown word (RRFC)       -- #define SLJIT_S390X_RRFC(name, pattern) \
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:742:18    - Unknown word (locr)       -- SLJIT_S390X_RRFC(locr, 0xb9f20000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:743:18    - Unknown word (locgr)      -- SLJIT_S390X_RRFC(locgr, 0xb9e20000)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:748:21    - Unknown word (RIEG)       -- #define SLJIT_S390X_RIEG(name, pattern) \
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:762:18    - Unknown word (lochi)      -- SLJIT_S390X_RIEG(lochi, 0xec0000000042)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:763:18    - Unknown word (locghi)     -- SLJIT_S390X_RIEG(locghi, 0xec0000000046)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:767:21    - Unknown word (RILB)       -- #define SLJIT_S390X_RILB(name, pattern, cond
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:780:18    - Unknown word (brasl)      -- SLJIT_S390X_RILB(brasl, 0xc00500000000, 1)
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:783:18    - Unknown word (larl)       -- SLJIT_S390X_RILB(larl, 0xc00000000000, 1
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:786:18    - Unknown word (lgrl)       -- SLJIT_S390X_RILB(lgrl, 0xc40800000000, have
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:802:25    - Unknown word (brcl)       -- SLJIT_S390X_INSTRUCTION(brcl, sljit_uw mask, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:809:25    - Unknown word (flogr)      -- SLJIT_S390X_INSTRUCTION(flogr, sljit_gpr dst, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeS390X.c:830:25    - Unknown word (risbhgz)    -- SLJIT_S390X_INSTRUCTION(risbhgz, sljit_gpr dst, sljit
+./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_32.c:211:33    - Unknown word (STDF)       -- push_inst(compiler, STDF | FD(float_arg_index
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_32.c:32:30     - Unknown word (SETHI)      -- push_inst(compiler, SETHI | D(dst) | ((imm >>
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_32.c:79:30     - Unknown word (XNOR)       -- push_inst(compiler, XNOR | (flags & SET_FLAGS
 ./ext/pcre/pcre2lib/sljit/sljitNativeSPARC_32.c:85:31     - Unknown word (BICC)       -- push_inst(compiler, BICC | DA(0x1) | (7 & DISP
@@ -3338,19 +3366,19 @@ Lines:
 ./ext/pcre/pcre2lib/sljit/sljitNativeX86_32.c:899:20    - Unknown word (aligment)   -- sljit_s32 has_f64_aligment;
 ./ext/pcre/pcre2lib/sljit/sljitNativeX86_64.c:58:32     - Unknown word (lmap)       -- + = MOV_r_i32 | reg_lmap[TMP_REG2];
 ./ext/pcre/pcre2lib/sljit/sljitNativeX86_64.c:655:17    - Unknown word (trandfer)   -- sljit_s32 data_trandfer = 0;
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:1575:35   - Unknown word (immw)       -- BINARY_IMM(op_imm, op_mr, immw, arg, argw) \
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:1573:35   - Unknown word (immw)       -- BINARY_IMM(op_imm, op_mr, immw, arg, argw) \
 ./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:184:9     - Unknown word (CMOVE)      -- #define CMOVE_r_rm (/* GROUP_0F *
 ./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:238:9     - Unknown word (PUSHF)      -- #define PUSHF 0x9c
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:2794:5    - Unknown word (setcc)      -- /* setcc = jcc + 0x10. */
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:2876:7    - Unknown word (cmovcc)     -- /* cmovcc = setcc - 0x50. */
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:2792:5    - Unknown word (setcc)      -- /* setcc = jcc + 0x10. */
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:2874:7    - Unknown word (cmovcc)     -- /* cmovcc = setcc - 0x50. */
 ./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:395:18    - Unknown word (jnbe)       -- return 0x87 /* jnbe */;
 ./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:408:18    - Unknown word (jnle)       -- return 0x8f /* jnle */;
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:738:74    - Unknown word (SHSTK)      -- _CET) && defined (__SHSTK__)
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:740:36    - Unknown word (rdssp)      -- INLINE sljit_s32 emit_rdssp(struct sljit_compiler
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:764:36    - Unknown word (incssp)     -- INLINE sljit_s32 emit_incssp(struct sljit_compiler
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:808:15    - Unknown word (RDSSP)      -- /* Generate "RDSSP TMP_REG1". */
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:835:38    - Unknown word (ajdustment) -- to skip shadow stack ajdustment when shadow
-./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:851:15    - Unknown word (INCSSP)     -- /* Generate "INCSSP TMP_REG1". */
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:736:74    - Unknown word (SHSTK)      -- _CET) && defined (__SHSTK__)
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:738:36    - Unknown word (rdssp)      -- INLINE sljit_s32 emit_rdssp(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:762:36    - Unknown word (incssp)     -- INLINE sljit_s32 emit_incssp(struct sljit_compiler
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:806:15    - Unknown word (RDSSP)      -- /* Generate "RDSSP TMP_REG1". */
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:833:38    - Unknown word (ajdustment) -- to skip shadow stack ajdustment when shadow
+./ext/pcre/pcre2lib/sljit/sljitNativeX86_common.c:849:15    - Unknown word (INCSSP)     -- /* Generate "INCSSP TMP_REG1". */
 ./ext/pcre/pcre2lib/sljit/sljitProtExecAllocator.c:116:13    - Unknown word (MEMFD)      -- #ifdef HAVE_MEMFD_CREATE
 ./ext/pcre/pcre2lib/sljit/sljitProtExecAllocator.c:118:7     - Unknown word (memfd)      -- fd = memfd_create("sljit", MFD
 ./ext/pcre/pcre2lib/sljit/sljitProtExecAllocator.c:222:49    - Unknown word (sinde)      -- extension available sinde 8.0, make sure to
@@ -3359,9 +3387,9 @@ Lines:
 ./ext/pcre/php_pcre.c:63:33     - Unknown word (gctx)       -- pcre2_general_context *gctx = NULL;
 ./ext/pdo/pdo.c:274:25    - Unknown word (ldrivers)   -- char *drivers = NULL, *ldrivers = estrdup("");
 ./ext/pdo/pdo.c:45:15     - Unknown word (ppdo)       -- static int le_ppdo;
-./ext/pdo/pdo_dbh.c:1184:16   - Unknown word (pdriver)    -- pdo_driver_t *pdriver;
+./ext/pdo/pdo_dbh.c:1188:16   - Unknown word (pdriver)    -- pdo_driver_t *pdriver;
 ./ext/pdo/pdo_dbh.c:298:14    - Unknown word (pdbh)       -- pdo_dbh_t *pdbh = NULL;
-./ext/pdo/pdo_dbh.c:430:83    - Unknown word (dbstmt)     -- object, zend_class_entry *dbstmt_ce, zval *ctor_args
+./ext/pdo/pdo_dbh.c:434:83    - Unknown word (dbstmt)     -- object, zend_class_entry *dbstmt_ce, zval *ctor_args
 ./ext/pdo/pdo_sqlstate.c:296:14    - Unknown word (Plpgsql)    -- { "P0000",	"Plpgsql error" },
 ./ext/pdo/pdo_stmt.c:257:31    - Unknown word (pparam)     -- pdo_bound_param_data *pparam = NULL;
 ./ext/pdo/pdo_stmt.c:421:21    - Unknown word (unsignend)  -- /* num_index is unsignend */
@@ -3471,15 +3499,15 @@ Lines:
 ./ext/pdo_dblib/tests/README.md:10:5      - Unknown word (DBLIB)      -- PDO_DBLIB_TEST_DSN="dblib:host
 ./ext/pdo_dblib/tests/README.md:6:59      - Unknown word (Passw)      -- PASSWORD=<YourStrong@Passw0rd>" -p 1433:1433 -
 ./ext/pdo_dblib/tests/README.md:7:39      - Unknown word (sqlcmd)     -- opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U SA
-./ext/pdo_firebird/firebird_driver.c:176:16    - Unknown word (uidx)       -- unsigned char uidx = (unsigned char) idx
-./ext/pdo_firebird/firebird_driver.c:32:72     - Unknown word (XSQLDA)     -- const zend_string*, XSQLDA*, isc_stmt_handle*,
-./ext/pdo_firebird/firebird_driver.c:516:14    - Unknown word (sqlda)      -- XSQLDA num_sqlda;
-./ext/pdo_firebird/firebird_driver.c:520:30    - Unknown word (SQLDA)      -- sqlda.version = PDO_FB_SQLDA_VERSION;
-./ext/pdo_firebird/firebird_driver.c:521:13    - Unknown word (sqln)       -- num_sqlda.sqln = 1;
-./ext/pdo_firebird/firebird_driver.c:532:70    - Unknown word (sqld)       -- XSQLDA_LENGTH(num_sqlda.sqld));
-./ext/pdo_firebird/firebird_driver.c:665:6     - Unknown word (qcount)     -- int qcount = 0;
-./ext/pdo_firebird/firebird_driver.c:705:39    - Unknown word (ptpb)       -- isc_tpb_version3 }, *ptpb = tpb+1;
-./ext/pdo_firebird/firebird_driver.c:953:33    - Unknown word (fbclient)   -- l = GetModuleHandle("fbclient");
+./ext/pdo_firebird/firebird_driver.c:178:16    - Unknown word (uidx)       -- unsigned char uidx = (unsigned char) idx
+./ext/pdo_firebird/firebird_driver.c:34:72     - Unknown word (XSQLDA)     -- const zend_string*, XSQLDA*, isc_stmt_handle*,
+./ext/pdo_firebird/firebird_driver.c:518:14    - Unknown word (sqlda)      -- XSQLDA num_sqlda;
+./ext/pdo_firebird/firebird_driver.c:522:30    - Unknown word (SQLDA)      -- sqlda.version = PDO_FB_SQLDA_VERSION;
+./ext/pdo_firebird/firebird_driver.c:523:13    - Unknown word (sqln)       -- num_sqlda.sqln = 1;
+./ext/pdo_firebird/firebird_driver.c:534:70    - Unknown word (sqld)       -- XSQLDA_LENGTH(num_sqlda.sqld));
+./ext/pdo_firebird/firebird_driver.c:667:6     - Unknown word (qcount)     -- int qcount = 0;
+./ext/pdo_firebird/firebird_driver.c:707:39    - Unknown word (ptpb)       -- isc_tpb_version3 }, *ptpb = tpb+1;
+./ext/pdo_firebird/firebird_driver.c:955:33    - Unknown word (fbclient)   -- l = GetModuleHandle("fbclient");
 ./ext/pdo_firebird/firebird_statement.c:264:18    - Unknown word (blobh)      -- isc_blob_handle blobh = PDO_FIREBIRD_HANDLE
 ./ext/pdo_firebird/firebird_statement.c:39:3      - Unknown word (XSQLVAR)    -- XSQLVAR const *var = &sqlda
 ./ext/pdo_mysql/mysql_driver.c:172:15    - Unknown word (nsql)       -- zend_string *nsql = NULL;
@@ -3632,8 +3660,8 @@ Lines:
 ./ext/readline/README.md:1:1       - Unknown word (readline)   -- readline
 ./ext/readline/readline_cli.c:80:6      - Unknown word (CLIR)       -- if (CLIR_G(prompt_str)) {
 ./ext/reflection/php_reflection.c:429:18    - Unknown word (mptr)       -- zend_function *mptr;
-./ext/reflection/php_reflection.c:5371:6    - Unknown word (dynam)      -- int dynam_prop = 0;
-./ext/reflection/php_reflection.c:6003:9    - Unknown word (zclass)     -- zval zclass;
+./ext/reflection/php_reflection.c:5368:6    - Unknown word (dynam)      -- int dynam_prop = 0;
+./ext/reflection/php_reflection.c:6000:9    - Unknown word (zclass)     -- zval zclass;
 ./ext/reflection/php_reflection.stub.php:15:29     - Unknown word (Stringable) -- interface Reflector extends Stringable
 ./ext/session/mod_mm.c:84:10     - Unknown word (ohash)      -- ps_sd **ohash, **ehash;
 ./ext/session/mod_mm.c:84:19     - Unknown word (ehash)      -- ps_sd **ohash, **ehash;
@@ -3704,15 +3732,15 @@ Lines:
 ./ext/soap/php_xml.c:38:47     - Unknown word (insignoficant) -- comments and other insignoficant nodes */
 ./ext/soap/php_xml.h:44:37     - Unknown word (FOREACHATTRNODEEX) -- FOREACHATTRNODE(n,c,i) FOREACHATTRNODEEX(n,c,NULL,i)
 ./ext/soap/php_xml.h:58:33     - Unknown word (FOREACHNODEEX)     -- FOREACHNODE(n,c,i) FOREACHNODEEX(n,c,NULL,i)
-./ext/soap/soap.c:1402:40   - Unknown word (happned)    -- session or something weird happned */
-./ext/soap/soap.c:1833:44   - Unknown word (detials)    -- buffer and send as fault detials */
-./ext/soap/soap.c:2034:50   - Unknown word (gzdeflate)  -- EG(function_table), "gzdeflate", sizeof("gzdeflate
-./ext/soap/soap.c:2691:20   - Unknown word (thet)       -- /* {{{ Sets cookie thet will sent with SOAP
-./ext/soap/soap.c:3771:17   - Unknown word (zuse)       -- zval *zstyle, *zuse;
-./ext/soap/soap.c:3771:8    - Unknown word (zstyle)     -- zval *zstyle, *zuse;
-./ext/soap/soap.stub.php:103:14    - Unknown word (typemap)     -- private $typemap = null;
-./ext/soap/soap.stub.php:105:14    - Unknown word (httpsocket)  -- private $httpsocket = null;
-./ext/soap/soap.stub.php:107:14    - Unknown word (httpurl)     -- private $httpurl = null;
+./ext/soap/soap.c:1425:40   - Unknown word (happned)    -- session or something weird happned */
+./ext/soap/soap.c:1856:44   - Unknown word (detials)    -- buffer and send as fault detials */
+./ext/soap/soap.c:2057:50   - Unknown word (gzdeflate)  -- EG(function_table), "gzdeflate", sizeof("gzdeflate
+./ext/soap/soap.c:2714:20   - Unknown word (thet)       -- /* {{{ Sets cookie thet will sent with SOAP
+./ext/soap/soap.c:3794:17   - Unknown word (zuse)       -- zval *zstyle, *zuse;
+./ext/soap/soap.c:3794:8    - Unknown word (zstyle)     -- zval *zstyle, *zuse;
+./ext/soap/soap.stub.php:100:14    - Unknown word (typemap)     -- private $typemap = null;
+./ext/soap/soap.stub.php:102:14    - Unknown word (httpsocket)  -- private $httpsocket = null;
+./ext/soap/soap.stub.php:104:14    - Unknown word (httpurl)     -- private $httpurl = null;
 ./ext/soap/soap.stub.php:30:20     - Unknown word (faultstring) -- public string $faultstring;
 ./ext/soap/soap.stub.php:31:21     - Unknown word (faultcode)   -- public ?string $faultcode = null;
 ./ext/soap/soap.stub.php:32:21     - Unknown word (faultcodens) -- public ?string $faultcodens = null;
@@ -3826,14 +3854,14 @@ Lines:
 ./ext/spl/spl_observer.c:130:31    - Unknown word (pelement)   -- SplObjectStorageElement *pelement, element;
 ./ext/spl/spl_observer.c:681:17    - Unknown word (pmembers)   -- zval *pcount, *pmembers;
 ./ext/spl/spl_observer.c:929:7     - Unknown word (zinfo)      -- zval zinfo;
-./ext/standard/array.c:1382:15   - Unknown word (thash)      -- HashTable *thash;
-./ext/standard/array.c:2692:57   - Unknown word (lstep)      -- ulong) start - end) / lstep; \
-./ext/standard/array.c:2706:15   - Unknown word (zhigh)      -- zval *zlow, *zhigh, *zstep = NULL, tmp
-./ext/standard/array.c:2706:23   - Unknown word (zstep)      -- zval *zlow, *zhigh, *zstep = NULL, tmp;
-./ext/standard/array.c:2706:8    - Unknown word (zlow)       -- zval *zlow, *zhigh, *zstep = NULL
-./ext/standard/array.c:5617:28   - Unknown word (sawp)       -- void array_bucket_p_sawp(void *p, void *q) /
-./ext/standard/array.c:5774:32   - Unknown word (bada)       -- actual sort magic - bada-bim, bada-boom. */
-./ext/standard/array.c:6007:13   - Unknown word (htbl)       -- HashTable *htbl;
+./ext/standard/array.c:1384:15   - Unknown word (thash)      -- HashTable *thash;
+./ext/standard/array.c:2694:57   - Unknown word (lstep)      -- ulong) start - end) / lstep; \
+./ext/standard/array.c:2708:15   - Unknown word (zhigh)      -- zval *zlow, *zhigh, *zstep = NULL, tmp
+./ext/standard/array.c:2708:23   - Unknown word (zstep)      -- zval *zlow, *zhigh, *zstep = NULL, tmp;
+./ext/standard/array.c:2708:8    - Unknown word (zlow)       -- zval *zlow, *zhigh, *zstep = NULL
+./ext/standard/array.c:5619:28   - Unknown word (sawp)       -- void array_bucket_p_sawp(void *p, void *q) /
+./ext/standard/array.c:5776:32   - Unknown word (bada)       -- actual sort magic - bada-bim, bada-boom. */
+./ext/standard/array.c:6009:13   - Unknown word (htbl)       -- HashTable *htbl;
 ./ext/standard/assert.c:35:9      - Unknown word (ASSERTG)    -- #define ASSERTG(v) ZEND_MODULE_GLOBALS
 ./ext/standard/base64.c:100:46    - Unknown word (bbcc)       -- (x.val[1], 2),  /* [bbcc_cc00] */
 ./ext/standard/base64.c:329:21    - Unknown word (SSSE)       -- # undef ZEND_INTRIN_SSSE3_NATIVE
@@ -4309,8 +4337,8 @@ Lines:
 ./ext/zlib/zlib_arginfo.h:23:49     - Unknown word (readgzfile) -- TYPE_MASK_EX(arginfo_readgzfile, 0, 1, MAY_BE_LONG|MAY
 ./ext/zlib/zlib_arginfo.h:59:17     - Unknown word (gzdecode)   -- #define arginfo_gzdecode arginfo_zlib_decode
 ./ext/zlib/zlib_arginfo.h:83:49     - Unknown word (gzpassthru) -- TYPE_INFO_EX(arginfo_gzpassthru, 0, 1, IS_LONG, 0)
-./ext/zlib/zlib_fopen_wrapper.c:137:11    - Unknown word (zlevel)     -- zval *zlevel = context ? php_stream
-./ext/zlib/zlib_fopen_wrapper.c:31:20     - Unknown word (gziop)      -- static ssize_t php_gziop_read(php_stream *stream
+./ext/zlib/zlib_fopen_wrapper.c:139:11    - Unknown word (zlevel)     -- zval *zlevel = context ? php_stream
+./ext/zlib/zlib_fopen_wrapper.c:33:20     - Unknown word (gziop)      -- static ssize_t php_gziop_read(php_stream *stream
 ./main/SAPI.c:566:43    - Unknown word (ncode)      -- update_response_code(int ncode)
 ./main/alloca.c:218:17    - Unknown word (AFUNC)      -- #ifdef DEBUG_I00AFUNC
 ./main/alloca.c:228:10    - Unknown word (shgrow)     -- long shgrow:32; /* Number of times
@@ -4370,22 +4398,22 @@ Lines:
 ./main/rfc1867.c:203:66    - Unknown word (libapreq)   -- multipart_buffer.c from libapreq-0.33 package. */
 ./main/rfc1867.c:675:8     - Unknown word (lbuf)       -- char *lbuf = NULL, *abuf = NULL
 ./main/rfc1867.c:682:20    - Unknown word (mbuff)      -- multipart_buffer *mbuff;
-./main/snprintf.c:1071:20   - Unknown word (printv)     -- static size_t strx_printv(char *buf, size_t len
-./main/snprintf.c:310:8     - Unknown word (addz)       -- int addz = decimal_point >= NDIG
-./main/snprintf.c:397:4     - Unknown word (Emax)       -- * Emax = 1023
-./main/snprintf.c:409:8     - Unknown word (nextb)      -- char *nextb; /* pointer to next
-./main/spprintf.c:112:18    - Unknown word (xbuf)       -- #define INS_CHAR(xbuf, ch, is_char) do {
+./main/snprintf.c:1073:20   - Unknown word (printv)     -- static size_t strx_printv(char *buf, size_t len
+./main/snprintf.c:312:8     - Unknown word (addz)       -- int addz = decimal_point >= NDIG
+./main/snprintf.c:399:4     - Unknown word (Emax)       -- * Emax = 1023
+./main/snprintf.c:411:8     - Unknown word (nextb)      -- char *nextb; /* pointer to next
+./main/spprintf.c:114:18    - Unknown word (xbuf)       -- #define INS_CHAR(xbuf, ch, is_char) do {
 ./main/streams/glob_wrapper.c:102:20    - Unknown word (gpath)      -- const char *pos, *gpath = path;
 ./main/streams/glob_wrapper.c:48:12     - Unknown word (pglob)      -- glob_s_t *pglob = (glob_s_t *)stream
 ./main/streams/plain_wrapper.c:1572:70   - Unknown word (SWOOLE)     -- writable to support SWOOLE */
 ./main/streams/plain_wrapper.c:159:27    - Unknown word (anfd)       -- define PHP_STDIOP_GET_FD(anfd, data)	anfd = (data
 ./main/streams/plain_wrapper.c:810:22    - Unknown word (loffs)      -- DWORD prot, acc, loffs = 0, hoffs = 0, delta
 ./main/streams/plain_wrapper.c:810:33    - Unknown word (hoffs)      -- prot, acc, loffs = 0, hoffs = 0, delta = 0;
-./main/streams/streams.c:1505:61   - Unknown word (upsize)       -- In order to avoid an upsize followed
-./main/streams/streams.c:167:8     - Unknown word (brlen)      -- int brlen;
-./main/streams/streams.c:429:25    - Unknown word (fopencookied) -- * If the stream was fopencookied, we must NOT touch anything
-./main/streams/streams.c:478:45    - Unknown word (fdopened)     -- that might have been fdopened */
-./main/streams/streams.c:922:11    - Unknown word (cpysz)        -- size_t cpysz = 0;
+./main/streams/streams.c:1507:61   - Unknown word (upsize)       -- In order to avoid an upsize followed
+./main/streams/streams.c:169:8     - Unknown word (brlen)      -- int brlen;
+./main/streams/streams.c:431:25    - Unknown word (fopencookied) -- * If the stream was fopencookied, we must NOT touch anything
+./main/streams/streams.c:480:45    - Unknown word (fdopened)     -- that might have been fdopened */
+./main/streams/streams.c:924:11    - Unknown word (cpysz)        -- size_t cpysz = 0;
 ./main/streams/transports.c:158:12    - Unknown word (zbacklog)   -- zval *zbacklog = NULL;
 ./main/streams/userspace.c:316:7     - Unknown word (zretval)    -- zval zretval, zfuncname;
 ./main/streams/userspace.c:558:20    - Unknown word (userstreamop) -- static ssize_t php_userstreamop_write(php_stream *stream
