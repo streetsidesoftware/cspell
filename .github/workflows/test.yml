@@ -73,6 +73,7 @@ jobs:
         uses: actions/setup-node@v2.5.0
         with:
           node-version: ${{ matrix.node-version }}
+          cache: npm
 
       - run: npm ci
       - run: npm run build
