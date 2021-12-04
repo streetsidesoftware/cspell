@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2725, Issues found: 7164 in 854 files
+ CSpell: Files checked: 2725, Issues found: 7176 in 854 files
  exit code: 1
 ./django/apps/config.py:125:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -257,8 +257,8 @@ Lines:
 ./django/contrib/gis/gdal/srs.py:14:7      - Unknown word (PRIMEM)     -- PRIMEM["Greenwich",0,
 ./django/contrib/gis/gdal/srs.py:8:3       - Unknown word (GEOGCS)     -- GEOGCS["WGS 84",
 ./django/contrib/gis/geoip2/__init__.py:11:23     - Unknown word (mmdb)       -- Grab GeoLite2-Country.mmdb.gz and GeoLite2-City
-./django/contrib/gis/geoip2/base.py:160:28    - Unknown word (gethostbyname) -- query = socket.gethostbyname(query)
-./django/contrib/gis/geoip2/base.py:195:9     - Unknown word (cdict)         -- cdict = self.city(query)
+./django/contrib/gis/geoip2/base.py:157:28    - Unknown word (gethostbyname) -- query = socket.gethostbyname(query)
+./django/contrib/gis/geoip2/base.py:190:9     - Unknown word (cdict)         -- cdict = self.city(query)
 ./django/contrib/gis/geometry.py:14:8      - Unknown word (ACEGIMLONPSRUTYZ) -- r'[ACEGIMLONPSRUTYZ\d,\.\-\+\(\) ]+)$',
 ./django/contrib/gis/geos/__init__.py:12:7      - Unknown word (libgeos)    -- from .libgeos import geos_version
 ./django/contrib/gis/geos/collections.py:59:25     - Unknown word (geomn)      -- return capi.get_geomn(self.ptr, index)
@@ -441,7 +441,7 @@ Lines:
 ./django/core/signing.py:7:43      - Unknown word (sgmk)       -- YIye-ze3TTx7gtSv422nZA4sgmk'
 ./django/core/validators.py:64:19     - Unknown word (uffff)      -- ul = '\u00a1-\uffff' # Unicode letters
 ./django/db/backends/base/base.py:30:26     - Unknown word (tzname)     -- timezone_constructor(tzname):
-./django/db/backends/base/base.py:630:10    - Unknown word (nodb)       -- def _nodb_cursor(self):
+./django/db/backends/base/base.py:652:10    - Unknown word (nodb)       -- def _nodb_cursor(self):
 ./django/db/backends/base/base.py:6:25      - Unknown word (deque)      -- from collections import deque
 ./django/db/backends/base/client.py:8:15      - Unknown word (psql)       -- # (e.g., "psql"). Subclasses must override
 ./django/db/backends/base/creation.py:179:43    - Unknown word (dbname)     -- execute('CREATE DATABASE %(dbname)s %(suffix)s' % parameters
@@ -565,7 +565,7 @@ Lines:
 ./django/db/models/functions/text.py:24:24     - Unknown word (RAWTOHEX)   -- "LOWER(RAWTOHEX(STANDARD_HASH(UTL_I
 ./django/db/models/functions/window.py:11:17     - Unknown word (CUME)       -- function = 'CUME_DIST'
 ./django/db/models/functions/window.py:83:17     - Unknown word (NTILE)      -- function = 'NTILE'
-./django/db/models/lookups.py:404:34    - Unknown word (Unhashable) -- except TypeError:  # Unhashable items in self.rhs
+./django/db/models/lookups.py:413:34    - Unknown word (Unhashable) -- except TypeError:  # Unhashable items in self.rhs
 ./django/db/models/query.py:1969:14   - Unknown word (Populator)  -- class RelatedPopulator:
 ./django/db/models/query.py:198:37    - Unknown word (inplace)    -- self._filter_or_exclude_inplace(negate, args, kwargs
 ./django/db/models/query.py:59:17     - Unknown word (populators) -- related_populators = get_related_populators
@@ -581,9 +581,9 @@ Lines:
 ./django/db/models/sql/compiler.py:683:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
 ./django/db/models/sql/datastructures.py:153:35    - Unknown word (somecond)   -- SELECT * FROM "foo" WHERE somecond
 ./django/db/models/sql/datastructures.py:55:24     - Unknown word (nullabled)  -- # Is this join nullabled?
-./django/db/models/sql/query.py:1244:28   - Unknown word (unreffing)     -- is responsible for unreffing the joins used.
-./django/db/models/sql/query.py:1824:29   - Unknown word (Pythonic)      -- as it makes it more Pythonic to read and write. When
-./django/db/models/sql/query.py:2350:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+./django/db/models/sql/query.py:1252:28   - Unknown word (unreffing)     -- is responsible for unreffing the joins used.
+./django/db/models/sql/query.py:1832:29   - Unknown word (Pythonic)      -- as it makes it more Pythonic to read and write. When
+./django/db/models/sql/query.py:2358:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
 ./django/db/models/sql/query.py:256:58    - Unknown word (unsubstituted) -- params() to see the unsubstituted string).
 ./django/db/models/sql/query.py:614:58    - Unknown word (Unref)         -- unused in the rhs query. Unref it so that it
 ./django/db/models/sql/query.py:616:19    - Unknown word (unref)         -- # unref the alias so that join
@@ -1442,16 +1442,22 @@ Lines:
 ./tests/i18n/tests.py:1032:41   - Unknown word (Diciembre)  -- self.assertEqual('31 de Diciembre de 2009', date_format
 ./tests/i18n/tests.py:1231:46   - Unknown word (Dezember)   -- localized = '1.455/3,14/31. Dezember 2016'
 ./tests/i18n/tests.py:1357:45   - Unknown word (Bild)       -- ssertEqual(gettext("Image"), "Bild")
+./tests/i18n/tests.py:1602:17   - Unknown word (mingo)      -- ('i-mingo', 'Mingo'),
+./tests/i18n/tests.py:1602:26   - Unknown word (Mingo)      -- ('i-mingo', 'Mingo'),
+./tests/i18n/tests.py:1603:18   - Unknown word (tunumiit)   -- ('kl-tunumiit', 'Tunumiisiut'),
+./tests/i18n/tests.py:1603:30   - Unknown word (Tunumiisiut) -- ('kl-tunumiit', 'Tunumiisiut'),
+./tests/i18n/tests.py:1604:19   - Unknown word (hani)        -- ('nan-hani-tw', 'Hanji'),
+./tests/i18n/tests.py:1604:30   - Unknown word (Hanji)       -- ('nan-hani-tw', 'Hanji'),
 ./tests/i18n/tests.py:165:37    - Unknown word (hinzuf)     -- self.assertEqual('Ringo hinzuf\xfcgen', s % d)
 ./tests/i18n/tests.py:165:44    - Unknown word (xfcgen)     -- assertEqual('Ringo hinzuf\xfcgen', s % d)
 ./tests/i18n/tests.py:167:35    - Unknown word (Dodaj)      -- self.assertEqual('Dodaj Ringo', s % d)
-./tests/i18n/tests.py:1794:37   - Unknown word (unprefixed) -- URLCONF='i18n.urls_default_unprefixed',
-./tests/i18n/tests.py:1797:7    - Unknown word (Unprefixed) -- class UnprefixedDefaultLanguageTests
-./tests/i18n/tests.py:1919:57   - Unknown word (unparseable) -- default language is unparseable."""
+./tests/i18n/tests.py:1813:37   - Unknown word (unprefixed)  -- URLCONF='i18n.urls_default_unprefixed',
+./tests/i18n/tests.py:1816:7    - Unknown word (Unprefixed)  -- class UnprefixedDefaultLanguageTests
 ./tests/i18n/tests.py:191:57    - Unknown word (gutes)      -- with_format % 1, '1 gutes Resultat')
 ./tests/i18n/tests.py:191:63    - Unknown word (Resultat)   -- format % 1, '1 gutes Resultat')
 ./tests/i18n/tests.py:192:57    - Unknown word (guten)      -- with_format % 4, '4 guten Resultate')
-./tests/i18n/tests.py:1942:44   - Unknown word (reay)        -- assertEqual(gettext("year"), "reay")
+./tests/i18n/tests.py:1938:57   - Unknown word (unparseable) -- default language is unparseable."""
+./tests/i18n/tests.py:1961:44   - Unknown word (reay)        -- assertEqual(gettext("year"), "reay")
 ./tests/i18n/tests.py:214:84    - Unknown word (Willkommen) -- 4, 'name': 'Jim'}, 'Willkommen Jim, 4 guten Resultate
 ./tests/i18n/tests.py:270:40    - Unknown word (unexisting) -- assertEqual(pgettext("unexisting", "May"), "May")
 ./tests/i18n/tests.py:272:56    - Unknown word (Kann)       -- pgettext("verb", "May"), "Kann")
@@ -1744,10 +1750,10 @@ Lines:
 ./tests/queries/tests.py:3492:36   - Unknown word (fexpression)      -- disjunction_promotion_fexpression(self):
 ./tests/queries/tests.py:3825:9    - Unknown word (tblname)          -- tblname = connection.ops.quote
 ./tests/queries/tests.py:3844:13   - Unknown word (custompktag)      -- cp1.custompktag_set.add(cpt1)
-./tests/queryset_pickle/tests.py:106:9     - Unknown word (dynclass)   -- dynclass = type("DynamicEventSubclass
-./tests/queryset_pickle/tests.py:20:55     - Unknown word (Maybachs)   -- name="Ponies Who Own Maybachs")
-./tests/queryset_pickle/tests.py:254:11    - Unknown word (mmodel)     -- m2mmodel = M2MModel.objects.create
-./tests/queryset_pickle/tests.py:257:21    - Unknown word (mmodels)    -- first_m2mmodels=models.FilteredRelation
+./tests/queryset_pickle/tests.py:110:9     - Unknown word (dynclass)   -- dynclass = type("DynamicEventSubclass
+./tests/queryset_pickle/tests.py:24:55     - Unknown word (Maybachs)   -- name="Ponies Who Own Maybachs")
+./tests/queryset_pickle/tests.py:258:11    - Unknown word (mmodel)     -- m2mmodel = M2MModel.objects.create
+./tests/queryset_pickle/tests.py:261:21    - Unknown word (mmodels)    -- first_m2mmodels=models.FilteredRelation
 ./tests/raw_query/tests.py:139:42    - Unknown word (mixedcaseidcolumn) -- SELECT * FROM raw_query_mixedcaseidcolumn"
 ./tests/raw_query/tests.py:30:44     - Unknown word (Shaston)    -- walking homeward from Shaston to the village of Marlott
 ./tests/raw_query/tests.py:324:93    - Unknown word (bookfkaspk)        -- default FROM raw_query_bookfkaspk')), [b])
@@ -1941,9 +1947,9 @@ Lines:
 ./tests/test_runner/tests.py:266:17    - Unknown word (sigs)       -- ordered_sigs = [sig for sig, value
 ./tests/test_runner_apps/sample/tests_sample.py:21:11     - Unknown word (Zimple)     -- class TestZimpleTestCase(SimpleTestCase
 ./tests/test_utils/test_simpletestcase.py:70:30     - Unknown word (teardwn)    -- pre-setup and post-teardwn are called.
-./tests/test_utils/test_testcase.py:116:24    - Unknown word (deutsh)     -- def test_book_name_deutsh(self):
-./tests/test_utils/test_testcase.py:118:30    - Unknown word (Käfer)      -- self.car.name = 'VW sKäfer'
-./tests/test_utils/test_testcase.py:123:37    - Unknown word (Coccinelle) -- car.name = 'Volkswagen Coccinelle'
+./tests/test_utils/test_testcase.py:136:24    - Unknown word (deutsh)     -- def test_book_name_deutsh(self):
+./tests/test_utils/test_testcase.py:138:30    - Unknown word (Käfer)      -- self.car.name = 'VW sKäfer'
+./tests/test_utils/test_testcase.py:143:37    - Unknown word (Coccinelle) -- car.name = 'Volkswagen Coccinelle'
 ./tests/test_utils/test_testcase.py:72:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
 ./tests/test_utils/tests.py:1846:38   - Unknown word (defualt)    -- class__.databases = {'defualt'}
 ./tests/test_utils/tests.py:702:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
