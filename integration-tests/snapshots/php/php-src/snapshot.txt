@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1825, Issues found: 19645 in 1084 files
+ CSpell: Files checked: 1825, Issues found: 19662 in 1085 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -226,32 +226,32 @@ Lines:
 ./Zend/zend_virtual_cwd.c:496:19    - Unknown word (dataw)      -- WIN32_FIND_DATAW dataw;
 ./Zend/zend_virtual_cwd.c:60:25     - Unknown word (PROJFS)     -- ifndef IO_REPARSE_TAG_PROJFS
 ./Zend/zend_virtual_cwd.c:633:12    - Unknown word (isabsolute) -- uint8_t isabsolute = 0;
-./Zend/zend_vm_def.h:1738:38   - Unknown word (svariable)    -- WARNING, "Undefined %svariable $%s",
+./Zend/zend_vm_def.h:1746:38   - Unknown word (svariable)    -- WARNING, "Undefined %svariable $%s",
 ./Zend/zend_vm_def.h:47:13     - Unknown word (NOCONSTCONST) -- ZEND_VM_HOT_NOCONSTCONST_HANDLER(1, ZEND_ADD
 ./Zend/zend_vm_def.h:47:53     - Unknown word (TMPVARCV)     -- HANDLER(1, ZEND_ADD, CONST|TMPVARCV, CONST|TMPVARCV)
 ./Zend/zend_vm_def.h:944:13    - Unknown word (NOCONST)      -- ZEND_VM_HOT_NOCONST_HANDLER(13, ZEND_BW
-./Zend/zend_vm_def.h:9468:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
-./Zend/zend_vm_gen.php:1070:84   - Unknown word (FASTCALL)   -- OPCODE_HANDLER_RET ZEND_FASTCALL {$spec_name}_INLINE
-./Zend/zend_vm_gen.php:1139:23   - Unknown word (fastcall)   -- $zend_fastcall = "";
-./Zend/zend_vm_gen.php:1395:52   - Unknown word (devnull)    -- extra as $extra => $devnull) {
-./Zend/zend_vm_gen.php:1507:6    - Unknown word (lastdef)    -- $lastdef = array_pop($specs)
-./Zend/zend_vm_gen.php:1532:30   - Unknown word (noreturn)   -- out($f,"\tzend_error_noreturn(E_ERROR, \"Invalid opcode
-./Zend/zend_vm_gen.php:1751:28   - Unknown word (topline)    -- out($f,"\t\t\t\topline = vm_stack_data.orig
+./Zend/zend_vm_def.h:9496:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
+./Zend/zend_vm_gen.php:1082:84   - Unknown word (FASTCALL)   -- OPCODE_HANDLER_RET ZEND_FASTCALL {$spec_name}_INLINE
+./Zend/zend_vm_gen.php:1151:23   - Unknown word (fastcall)   -- $zend_fastcall = "";
+./Zend/zend_vm_gen.php:1407:52   - Unknown word (devnull)    -- extra as $extra => $devnull) {
+./Zend/zend_vm_gen.php:1519:6    - Unknown word (lastdef)    -- $lastdef = array_pop($specs)
+./Zend/zend_vm_gen.php:1544:30   - Unknown word (noreturn)   -- out($f,"\tzend_error_noreturn(E_ERROR, \"Invalid opcode
+./Zend/zend_vm_gen.php:1763:28   - Unknown word (topline)    -- out($f,"\t\t\t\topline = vm_stack_data.orig
 ./Zend/zend_vm_gen.php:17:15     - Unknown word (Dmitry)     -- | Authors: Dmitry Stogov <dmitry@php.net
 ./Zend/zend_vm_gen.php:17:22     - Unknown word (Stogov)     -- | Authors: Dmitry Stogov <dmitry@php.net>
-./Zend/zend_vm_gen.php:2317:33   - Unknown word (GNUC)       -- str .= "#if (defined(__GNUC__) && defined(HAVE_GCC
+./Zend/zend_vm_gen.php:2329:33   - Unknown word (GNUC)       -- str .= "#if (defined(__GNUC__) && defined(HAVE_GCC
 ./Zend/zend_vm_gen.php:36:20     - Unknown word (Gutmans)    -- | Authors: Andi Gutmans <andi@php.net>
 ./Zend/zend_vm_gen.php:37:15     - Unknown word (Zeev)       -- | Zeev Suraski <zeev@php.net
 ./Zend/zend_vm_gen.php:37:20     - Unknown word (Suraski)    -- | Zeev Suraski <zeev@php.net>
 ./Zend/zend_vm_gen.php:433:34    - Unknown word (nogc)       -- => "zval_ptr_dtor_nogc(EX_VAR(opline->op1.var
-./Zend/zend_vm_gen.php:534:2     - Unknown word (opnames)    -- $opnames = array(); // opcode
+./Zend/zend_vm_gen.php:545:2     - Unknown word (opnames)    -- $opnames = array(); // opcode
 ./Zend/zend_vm_gen.php:60:17     - Unknown word (TMPVAR)     -- "ZEND_VM_OP_TMPVAR" => 1<<2,
-./Zend/zend_vm_gen.php:739:43    - Unknown word (JMPZ)       -- ZEND_VM_SMART_BRANCH_JMPZ(\\1, \\2)"
-./Zend/zend_vm_gen.php:741:47    - Unknown word (JMPNZ)      -- ZEND_VM_SMART_BRANCH_JMPNZ(\\1, \\2)" : "ZEND_VM
-./Zend/zend_vm_gen.php:755:45    - Unknown word (ISEMPTY)    -- extended_value\s*&\s*ZEND_ISEMPTY/" => isset($extra_spec
-./Zend/zend_vm_gen.php:765:30    - Unknown word (OPLINE)     -- /ZEND_OBSERVER_SAVE_OPLINE\(\)/" => isset($extra
-./Zend/zend_vm_gen.php:766:25    - Unknown word (FCALL)      -- "/ZEND_OBSERVER_FCALL_BEGIN\(\s*(.*)\s*\)
-./Zend/zend_vm_gen.php:956:31    - Unknown word (CONSTCONST) -- else if ($hot === 'COLD_CONSTCONST_') {
+./Zend/zend_vm_gen.php:751:43    - Unknown word (JMPZ)       -- ZEND_VM_SMART_BRANCH_JMPZ(\\1, \\2)"
+./Zend/zend_vm_gen.php:753:47    - Unknown word (JMPNZ)      -- ZEND_VM_SMART_BRANCH_JMPNZ(\\1, \\2)" : "ZEND_VM
+./Zend/zend_vm_gen.php:767:45    - Unknown word (ISEMPTY)    -- extended_value\s*&\s*ZEND_ISEMPTY/" => isset($extra_spec
+./Zend/zend_vm_gen.php:777:30    - Unknown word (OPLINE)     -- /ZEND_OBSERVER_SAVE_OPLINE\(\)/" => isset($extra
+./Zend/zend_vm_gen.php:778:25    - Unknown word (FCALL)      -- "/ZEND_OBSERVER_FCALL_BEGIN\(\s*(.*)\s*\)
+./Zend/zend_vm_gen.php:968:31    - Unknown word (CONSTCONST) -- else if ($hot === 'COLD_CONSTCONST_') {
 ./build/gen_stub.php:1100:33   - Unknown word (MALIAS)     -- "\tZEND_MALIAS(%s, %s, %s, %s, %s)
 ./build/gen_stub.php:1135:33   - Unknown word (FALIAS)     -- "\tZEND_DEP_FALIAS(%s, %s, %s)\n",
 ./build/gen_stub.php:1252:30   - Unknown word (constructorsynopsis) -- $synopsisType = "constructorsynopsis";
@@ -2421,8 +2421,8 @@ Lines:
 ./ext/opcache/jit/zend_jit_gdb.c:310:11    - Unknown word (framep)     -- uint8_t *framep = p;
 ./ext/opcache/jit/zend_jit_gdb.c:404:9     - Unknown word (DLNE)       -- #define DLNE(op, s) (DB(DW_LNS_extended
 ./ext/opcache/jit/zend_jit_gdb.c:451:28    - Unknown word (initf)      -- typedef void (*zend_gdbjit_initf) (zend_gdbjit_ctx *ctx
-./ext/opcache/jit/zend_jit_helpers.c:1503:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
-./ext/opcache/jit/zend_jit_helpers.c:1584:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
+./ext/opcache/jit/zend_jit_helpers.c:1704:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
+./ext/opcache/jit/zend_jit_helpers.c:1785:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
 ./ext/opcache/jit/zend_jit_internal.h:348:32    - Unknown word (prcessed)   -- DONE, "already prcessed") \
 ./ext/opcache/jit/zend_jit_internal.h:399:24    - Unknown word (JITED)      -- define ZEND_JIT_TRACE_JITED (1<<4)
 ./ext/opcache/jit/zend_jit_internal.h:443:20    - Unknown word (ICALL)      -- ZEND_JIT_TRACE_DO_ICALL,
@@ -2532,26 +2532,27 @@ Lines:
 ./ext/openssl/xp_ssl.c:619:2     - Unknown word (PCCERT)     -- PCCERT_CONTEXT cert_ctx = NULL
 ./ext/openssl/xp_ssl.c:674:16    - Unknown word (rgpsz)      -- enhkey_usage.rgpszUsageIdentifier = usages
 ./ext/openssl/xp_ssl.c:710:3     - Unknown word (LPWSTR)     -- LPWSTR server_name = NULL;
-./ext/pcntl/pcntl.c:1511:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
-./ext/pcntl/pcntl.c:1516:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
-./ext/pcntl/pcntl.c:152:8     - Unknown word (SIGPWR)     -- #ifdef SIGPWR
-./ext/pcntl/pcntl.c:1532:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
-./ext/pcntl/pcntl.c:159:8     - Unknown word (SIGRTMIN)   -- #ifdef SIGRTMIN
-./ext/pcntl/pcntl.c:187:11    - Unknown word (NOINFO)     -- #ifdef SI_NOINFO
-./ext/pcntl/pcntl.c:200:11    - Unknown word (TKILL)      -- #ifdef SI_TKILL
-./ext/pcntl/pcntl.c:323:32    - Unknown word (NEWNS)      -- LONG_CONSTANT("CLONE_NEWNS", CLONE_NEWNS, CONST
-./ext/pcntl/pcntl.c:339:14    - Unknown word (NEWCGROUP)  -- #ifdef CLONE_NEWCGROUP
-./ext/pcntl/pcntl.c:345:8     - Unknown word (RFPROC)     -- #ifdef RFPROC
-./ext/pcntl/pcntl.c:348:8     - Unknown word (RFNOWAIT)   -- #ifdef RFNOWAIT
-./ext/pcntl/pcntl.c:351:8     - Unknown word (RFCFDG)     -- #ifdef RFCFDG
-./ext/pcntl/pcntl.c:354:8     - Unknown word (RFFDG)      -- #ifdef RFFDG
-./ext/pcntl/pcntl.c:357:8     - Unknown word (RFLINUXTHPN) -- #ifdef RFLINUXTHPN
-./ext/pcntl/pcntl.c:360:8     - Unknown word (RFTSIGZMB)   -- #ifdef RFTSIGZMB
-./ext/pcntl/pcntl.c:363:8     - Unknown word (RFTHREAD)    -- #ifdef RFTHREAD
-./ext/pcntl/pcntl.c:459:33    - Unknown word (incorrecrt)  -- least FreeBSD reports an incorrecrt NSIG that does not include
-./ext/pcntl/pcntl.c:817:16    - Unknown word (argi)        -- int argc = 0, argi = 0;
-./ext/pcntl/pcntl.c:818:16    - Unknown word (envi)        -- int envc = 0, envi = 0;
-./ext/pcntl/pcntl.c:945:37    - Unknown word (psig)        -- pcntl_pending_signal *psig;
+./ext/pcntl/pcntl.c:1520:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
+./ext/pcntl/pcntl.c:1525:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
+./ext/pcntl/pcntl.c:1541:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
+./ext/pcntl/pcntl.c:156:8     - Unknown word (SIGPWR)     -- #ifdef SIGPWR
+./ext/pcntl/pcntl.c:163:8     - Unknown word (SIGRTMIN)   -- #ifdef SIGRTMIN
+./ext/pcntl/pcntl.c:191:11    - Unknown word (NOINFO)     -- #ifdef SI_NOINFO
+./ext/pcntl/pcntl.c:204:11    - Unknown word (TKILL)      -- #ifdef SI_TKILL
+./ext/pcntl/pcntl.c:327:32    - Unknown word (NEWNS)      -- LONG_CONSTANT("CLONE_NEWNS", CLONE_NEWNS, CONST
+./ext/pcntl/pcntl.c:343:14    - Unknown word (NEWCGROUP)  -- #ifdef CLONE_NEWCGROUP
+./ext/pcntl/pcntl.c:349:8     - Unknown word (RFPROC)     -- #ifdef RFPROC
+./ext/pcntl/pcntl.c:352:8     - Unknown word (RFNOWAIT)   -- #ifdef RFNOWAIT
+./ext/pcntl/pcntl.c:355:8     - Unknown word (RFCFDG)     -- #ifdef RFCFDG
+./ext/pcntl/pcntl.c:358:8     - Unknown word (RFFDG)      -- #ifdef RFFDG
+./ext/pcntl/pcntl.c:361:8     - Unknown word (RFLINUXTHPN) -- #ifdef RFLINUXTHPN
+./ext/pcntl/pcntl.c:364:8     - Unknown word (RFTSIGZMB)   -- #ifdef RFTSIGZMB
+./ext/pcntl/pcntl.c:367:8     - Unknown word (RFTHREAD)    -- #ifdef RFTHREAD
+./ext/pcntl/pcntl.c:373:31    - Unknown word (NOSIGCHLD)   -- LONG_CONSTANT("FORK_NOSIGCHLD", FORK_NOSIGCHLD, CONST
+./ext/pcntl/pcntl.c:468:33    - Unknown word (incorrecrt)  -- least FreeBSD reports an incorrecrt NSIG that does not include
+./ext/pcntl/pcntl.c:826:16    - Unknown word (argi)        -- int argc = 0, argi = 0;
+./ext/pcntl/pcntl.c:827:16    - Unknown word (envi)        -- int envc = 0, envi = 0;
+./ext/pcntl/pcntl.c:954:37    - Unknown word (psig)        -- pcntl_pending_signal *psig;
 ./ext/pcntl/pcntl.stub.php:20:60     - Unknown word (syscalls)   -- handler, bool $restart_syscalls = true): bool {}
 ./ext/pcntl/pcntl.stub.php:32:20     - Unknown word (SIGINFO)    -- #ifdef HAVE_STRUCT_SIGINFO_T
 ./ext/pcntl/pcntl.stub.php:46:13     - Unknown word (WCONTINUED) -- #ifdef HAVE_WCONTINUED
@@ -2559,6 +2560,8 @@ Lines:
 ./ext/pcntl/pcntl.stub.php:68:65     - Unknown word (PRIO)         -- = null, int $mode = PRIO_PROCESS): int|false
 ./ext/pcntl/pcntl.stub.php:83:13     - Unknown word (RFORK)        -- #ifdef HAVE_RFORK
 ./ext/pcntl/pcntl.stub.php:84:16     - Unknown word (rfork)        -- function pcntl_rfork(int $flags, int $signal
+./ext/pcntl/pcntl_arginfo.h:129:18    - Unknown word (FORKX)      -- #if defined(HAVE_FORKX)
+./ext/pcntl/pcntl_arginfo.h:130:55    - Unknown word (forkx)      -- INFO_EX(arginfo_pcntl_forkx, 0, 0, IS_LONG, 0)
 ./ext/pcntl/php_signal.c:26:23     - Unknown word (oact)       -- struct sigaction act,oact;
 ./ext/pcre/pcre2lib/pcre2.h:300:27    - Unknown word (BARJX)      -- define PCRE2_ERROR_QUERY_BARJX_NEST_TOO_DEEP
 ./ext/pcre/pcre2lib/pcre2_auto_possess.c:100:39    - Unknown word (possessify)       -- return FALSE (never auto-possessify)
@@ -3851,9 +3854,9 @@ Lines:
 ./ext/spl/spl_iterators.c:2185:8    - Unknown word (zpos)       -- zval zpos;
 ./ext/spl/spl_iterators.c:71:2      - Unknown word (RTIT)       -- RTIT_BYPASS_CURRENT = 4,
 ./ext/spl/spl_iterators.stub.php:203:88    - Unknown word (TOSTRING)   -- CachingIterator::CALL_TOSTRING) {}
-./ext/spl/spl_observer.c:130:31    - Unknown word (pelement)   -- SplObjectStorageElement *pelement, element;
-./ext/spl/spl_observer.c:681:17    - Unknown word (pmembers)   -- zval *pcount, *pmembers;
-./ext/spl/spl_observer.c:929:7     - Unknown word (zinfo)      -- zval zinfo;
+./ext/spl/spl_observer.c:1072:7    - Unknown word (zinfo)      -- zval zinfo;
+./ext/spl/spl_observer.c:137:31    - Unknown word (pelement)   -- SplObjectStorageElement *pelement = emalloc(sizeof(spl
+./ext/spl/spl_observer.c:823:17    - Unknown word (pmembers)   -- zval *pcount, *pmembers;
 ./ext/standard/array.c:1384:15   - Unknown word (thash)      -- HashTable *thash;
 ./ext/standard/array.c:2694:57   - Unknown word (lstep)      -- ulong) start - end) / lstep; \
 ./ext/standard/array.c:2708:15   - Unknown word (zhigh)      -- zval *zlow, *zhigh, *zstep = NULL, tmp
