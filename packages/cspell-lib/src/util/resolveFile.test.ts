@@ -38,7 +38,11 @@ describe('Validate resolveFile', () => {
         ${`resolveFile${ext}`}                        | ${__dirname} | ${require.resolve('./resolveFile')}                    | ${true}
         ${'lerna'}                                    | ${__dirname} | ${require.resolve('lerna')}                            | ${true}
         ${userNotFound}                               | ${__dirname} | ${path.resolve(path.join(os.homedir(), notFound))}     | ${false}
-    `('resolveFile "$filename" rel "$relativeTo"', validateResolveFile);
+    `('resolveFile "$filename" rel "$relativeTo"', ({ filename, relativeTo, expected, found }: ResolveFileTest) => {
+        const r = resolveFile(filename, relativeTo);
+        expect(r.filename).toBe(expected);
+        expect(r.found).toBe(found);
+    });
 
     test.each(
         config.import
@@ -49,15 +53,9 @@ describe('Validate resolveFile', () => {
                 found: true,
             }))
             .map(({ filename, relativeTo, expected, found }) => [filename, relativeTo, expected, found])
-    )('resolveFile "%s" rel "%s"', validateResolveArgs);
-
-    function validateResolveFile({ filename, relativeTo, expected, found }: ResolveFileTest) {
-        validateResolveArgs(filename, relativeTo, expected, found);
-    }
-
-    function validateResolveArgs(filename: string, relativeTo: string, expected: string, found: boolean) {
+    )('resolveFile "%s" rel "%s"', (filename: string, relativeTo: string, expected: string, found: boolean) => {
         const r = resolveFile(filename, relativeTo);
         expect(r.filename).toBe(expected);
         expect(r.found).toBe(found);
-    }
+    });
 });
