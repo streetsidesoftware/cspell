@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
   files: 2032
-  filesWithIssues: 1291
-  issues: 10117
+  filesWithIssues: 1295
+  issues: 10172
   errors: 0
 Errors: []
 
@@ -220,15 +220,15 @@ issues:
   - "generator/internal/predicate_utils_test.cc:835:44   	falsefragment   	U   	std::string(\"fragment0_falsefragment1_true\"));"
   - "generator/internal/printer_test.cc:37:33    	Inigo   	U   	VarsDictionary vars{{\"name\", \"Inigo Montoya\"}};"
   - "generator/internal/scaffold_generator_test.cc:131:27    	Cmake   	U   	F(ScaffoldGenerator, CmakeConfigIn) {"
-  - "generator/internal/scaffold_generator.cc:481:28     	lgoogle     	U   	GOOGLE_CLOUD_PC_LIBS \"-lgoogle_cloud_cpp_$library$"
-  - "generator/internal/scaffold_generator.cc:520:2      	mainpage    	U   	@mainpage $title$ C++ Client Library"
-  - "generator/internal/scaffold_generator.cc:606:74     	Quickstarts 	U   	root$/docs/quickstarts 'Quickstarts'"
-  - "generator/internal/scaffold_generator.cc:669:7      	tsch        	U   	| csh/tsch | `setenv"
-  - "generator/internal/scaffold_generator.cc:731:14     	gooogle     	U   	cd $$HOME/gooogle-cloud-cpp/google/cloud"
-  - "generator/internal/scaffold_generator.cc:759:21     	DGRPC       	U   	bazel build --copt=-DGRPC_BAZEL_BUILD ..."
-  - "generator/internal/scaffold_generator.cc:781:39     	Downloadfile	U   	System.Net.WebClient).Downloadfile( ^"
-  - "generator/internal/scaffold_generator.cc:903:25     	CXXLD       	U   	The CXX, CXXFLAGS and CXXLD variables are hard-coded"
-  - "generator/internal/scaffold_generator.cc:916:8      	CXXLDFLAGS  	U   	CLIENT_CXXLDFLAGS := $$(shell pkg-config"
+  - "generator/internal/scaffold_generator.cc:535:28     	lgoogle     	U   	GOOGLE_CLOUD_PC_LIBS \"-lgoogle_cloud_cpp_$library$"
+  - "generator/internal/scaffold_generator.cc:574:2      	mainpage    	U   	@mainpage $title$ C++ Client Library"
+  - "generator/internal/scaffold_generator.cc:660:74     	Quickstarts 	U   	root$/docs/quickstarts 'Quickstarts'"
+  - "generator/internal/scaffold_generator.cc:723:7      	tsch        	U   	| csh/tsch | `setenv"
+  - "generator/internal/scaffold_generator.cc:785:14     	gooogle     	U   	cd $$HOME/gooogle-cloud-cpp/google/cloud"
+  - "generator/internal/scaffold_generator.cc:813:21     	DGRPC       	U   	bazel build --copt=-DGRPC_BAZEL_BUILD ..."
+  - "generator/internal/scaffold_generator.cc:835:39     	Downloadfile	U   	System.Net.WebClient).Downloadfile( ^"
+  - "generator/internal/scaffold_generator.cc:957:25     	CXXLD       	U   	The CXX, CXXFLAGS and CXXLD variables are hard-coded"
+  - "generator/internal/scaffold_generator.cc:970:8      	CXXLDFLAGS  	U   	CLIENT_CXXLDFLAGS := $$(shell pkg-config"
   - "generator/internal/service_code_generator.cc:268:20     	nspace  	U   	for (auto const& nspace : namespaces_) {"
   - "google/cloud/bigquery/CMakeLists.txt:27:30      	DEPS        	U   	GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::cloud"
   - "google/cloud/bigquery/CMakeLists.txt:87:42      	servicename 	U   	SOURCE_DIR}/mocks/mock_servicename_v2_connection.h"
@@ -242,11 +242,11 @@ issues:
   - "google/cloud/bigquery/quickstart/README.md:27:21    	quickstarts 	U   	The [Cloud BigQuery quickstarts][bigquery-quickstart"
   - "google/cloud/bigquery/quickstart/README.md:44:25    	setenv      	U   	csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL"
   - "google/cloud/bigquery/quickstart/README.md:130:71   	bazelrc     	U   	include it in your `.bazelrc`"
-  - "google/cloud/bigquery/README.md:38:11   	iostream    	U   	#include <iostream>"
-  - "google/cloud/bigquery/README.md:39:11   	stdexcept   	U   	#include <stdexcept>"
-  - "google/cloud/bigquery/README.md:51:10   	cerr        	U   	std::cerr << \"Usage: \" << argv"
-  - "google/cloud/bigquery/README.md:65:3    	constexpr   	U   	constexpr int kMaxReadStreams"
-  - "google/cloud/bigquery/README.md:89:8    	cout        	U   	std::cout << num_rows << \" rows"
+  - "google/cloud/bigquery/README.md:37:11   	iostream    	U   	#include <iostream>"
+  - "google/cloud/bigquery/README.md:38:11   	stdexcept   	U   	#include <stdexcept>"
+  - "google/cloud/bigquery/README.md:50:10   	cerr        	U   	std::cerr << \"Usage: \" << argv"
+  - "google/cloud/bigquery/README.md:64:3    	constexpr   	U   	constexpr int kMaxReadStreams"
+  - "google/cloud/bigquery/README.md:88:8    	cout        	U   	std::cout << num_rows << \" rows"
   - "google/cloud/bigquery/samples/bigquery_read_samples.cc:190:47   	bugprone	U   	argv[]) { // NOLINT(bugprone-exception-escape)"
   - "google/cloud/bigtable/admin_client.cc:26:11     	btadmin 	U   	namespace btadmin = ::google::bigtable"
   - "google/cloud/bigtable/admin_client.h:37:22      	Bigtable's  	U   	* Connects to Cloud Bigtable's table administration"
@@ -302,7 +302,7 @@ issues:
   - "google/cloud/bigtable/metadata_update_policy_test.cc:76:55      	gccl	U   	header(), HasSubstr(\"gccl/\"));"
   - "google/cloud/bigtable/mutation_batcher_test.cc:146:42   	crbegin 	U   	exchange_it = interactions.crbegin();"
   - "google/cloud/bigtable/mutation_batcher_test.cc:147:38   	crend   	U   	exchange_it != interactions.crend(); ++exchange_it) {"
-  - "google/cloud/bigtable/README.md:45:35   	substr  	U   	<< \"Usage: \" << cmd.substr(last_slash + 1)"
+  - "google/cloud/bigtable/README.md:44:35   	substr  	U   	<< \"Usage: \" << cmd.substr(last_slash + 1)"
   - "google/cloud/bigtable/row_range_test.cc:149:31  	fooa    	U   	TRUE(range.Contains(\"fooa\"));"
   - "google/cloud/bigtable/row_range_test.cc:219:20  	AFFFF   	U   	std::string const kAFFFF00 = std::string(\"a\\xFF"
   - "google/cloud/bigtable/row_reader_test.cc:49:24      	Pointee         	U   	using ::testing::SetArgPointee;"
@@ -557,7 +557,7 @@ issues:
   - "google/cloud/storage/policy_document_test.cc:158:8      	asdfasdfasdf	U   	\"asdfasdfasdf\", \"asdfasdfasdf\"};"
   - "google/cloud/storage/policy_document_test.cc:199:14     	rsaposttest 	U   	\"rsaposttest, access_id=foo@foo.com"
   - "google/cloud/storage/quickstart/README.md:127:31    	Tbits   	U   	large workloads (several Tbits/s of upload and/or download"
-  - "google/cloud/storage/README.md:77:29    	istreambuf  	U   	string contents{std::istreambuf_iterator<char>{reader"
+  - "google/cloud/storage/README.md:76:29    	istreambuf  	U   	string contents{std::istreambuf_iterator<char>{reader"
   - "google/cloud/storage/testing/mock_fake_clock.h:30:33    	timepoints  	U   	the clock to arbitrary timepoints."
   - "google/cloud/storage/testing/retry_tests.h:54:47    	oncall  	U   	TypedExpectation<F>& oncall,"
   - "google/cloud/storage/tests/conformance_tests.proto:82:24    	lexigraphical   	U   	E.1: Order them in lexigraphical order so it's the"

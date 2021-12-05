@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 2032, Issues found: 10117 in 1291 files
+ CSpell: Files checked: 2032, Issues found: 10172 in 1295 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -216,15 +216,15 @@ Lines:
 ./generator/internal/descriptor_utils_test.cc:754:10    - Unknown word (endcond)    -- /// @endcond
 ./generator/internal/predicate_utils_test.cc:835:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 ./generator/internal/printer_test.cc:37:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
-./generator/internal/scaffold_generator.cc:481:28    - Unknown word (lgoogle)    -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_$library$
-./generator/internal/scaffold_generator.cc:520:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
-./generator/internal/scaffold_generator.cc:606:74    - Unknown word (Quickstarts) -- root$/docs/quickstarts 'Quickstarts'
-./generator/internal/scaffold_generator.cc:669:7     - Unknown word (tsch)        -- | csh/tsch | `setenv
-./generator/internal/scaffold_generator.cc:731:14    - Unknown word (gooogle)     -- cd $$HOME/gooogle-cloud-cpp/google/cloud
-./generator/internal/scaffold_generator.cc:759:21    - Unknown word (DGRPC)       -- bazel build --copt=-DGRPC_BAZEL_BUILD ...
-./generator/internal/scaffold_generator.cc:781:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
-./generator/internal/scaffold_generator.cc:903:25    - Unknown word (CXXLD)        -- The CXX, CXXFLAGS and CXXLD variables are hard-coded
-./generator/internal/scaffold_generator.cc:916:8     - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+./generator/internal/scaffold_generator.cc:535:28    - Unknown word (lgoogle)    -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_$library$
+./generator/internal/scaffold_generator.cc:574:2     - Unknown word (mainpage)   -- @mainpage $title$ C++ Client Library
+./generator/internal/scaffold_generator.cc:660:74    - Unknown word (Quickstarts) -- root$/docs/quickstarts 'Quickstarts'
+./generator/internal/scaffold_generator.cc:723:7     - Unknown word (tsch)        -- | csh/tsch | `setenv
+./generator/internal/scaffold_generator.cc:785:14    - Unknown word (gooogle)     -- cd $$HOME/gooogle-cloud-cpp/google/cloud
+./generator/internal/scaffold_generator.cc:813:21    - Unknown word (DGRPC)       -- bazel build --copt=-DGRPC_BAZEL_BUILD ...
+./generator/internal/scaffold_generator.cc:835:39    - Unknown word (Downloadfile) -- System.Net.WebClient).Downloadfile( ^
+./generator/internal/scaffold_generator.cc:957:25    - Unknown word (CXXLD)        -- The CXX, CXXFLAGS and CXXLD variables are hard-coded
+./generator/internal/scaffold_generator.cc:970:8     - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 ./generator/internal/scaffold_generator_test.cc:131:27    - Unknown word (Cmake)      -- F(ScaffoldGenerator, CmakeConfigIn) {
 ./generator/internal/service_code_generator.cc:268:20    - Unknown word (nspace)     -- for (auto const& nspace : namespaces_) {
 ./google/cloud/CMakeLists.txt:113:14    - Unknown word (strerror)   -- internal/strerror.cc
@@ -232,11 +232,11 @@ Lines:
 ./google/cloud/CMakeLists.txt:95:14     - Unknown word (getenv)     -- internal/getenv.cc
 ./google/cloud/bigquery/CMakeLists.txt:27:30     - Unknown word (DEPS)       -- GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::cloud
 ./google/cloud/bigquery/CMakeLists.txt:87:42     - Unknown word (servicename) -- SOURCE_DIR}/mocks/mock_servicename_v2_connection.h
-./google/cloud/bigquery/README.md:38:11     - Unknown word (iostream)   -- #include <iostream>
-./google/cloud/bigquery/README.md:39:11     - Unknown word (stdexcept)  -- #include <stdexcept>
-./google/cloud/bigquery/README.md:51:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
-./google/cloud/bigquery/README.md:65:3      - Unknown word (constexpr)  -- constexpr int kMaxReadStreams
-./google/cloud/bigquery/README.md:89:8      - Unknown word (cout)       -- std::cout << num_rows << " rows
+./google/cloud/bigquery/README.md:37:11     - Unknown word (iostream)   -- #include <iostream>
+./google/cloud/bigquery/README.md:38:11     - Unknown word (stdexcept)  -- #include <stdexcept>
+./google/cloud/bigquery/README.md:50:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
+./google/cloud/bigquery/README.md:64:3      - Unknown word (constexpr)  -- constexpr int kMaxReadStreams
+./google/cloud/bigquery/README.md:88:8      - Unknown word (cout)       -- std::cout << num_rows << " rows
 ./google/cloud/bigquery/doc/bigquery-main.dox:11:4      - Unknown word (Quickstart) -- ## Quickstart
 ./google/cloud/bigquery/doc/bigquery-main.dox:43:2      - Unknown word (parblock)   -- @parblock
 ./google/cloud/bigquery/doc/bigquery-main.dox:49:2      - Unknown word (endparblock) -- @endparblock
@@ -251,7 +251,7 @@ Lines:
 ./google/cloud/bigtable/CMakeLists.txt:102:14    - Unknown word (readrowsparser) -- internal/readrowsparser.cc
 ./google/cloud/bigtable/CMakeLists.txt:104:14    - Unknown word (rowreaderiterator) -- internal/rowreaderiterator.cc
 ./google/cloud/bigtable/CMakeLists.txt:314:18    - Unknown word (DBIGTABLE)         -- PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC
-./google/cloud/bigtable/README.md:45:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
+./google/cloud/bigtable/README.md:44:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
 ./google/cloud/bigtable/admin_client.cc:26:11     - Unknown word (btadmin)    -- namespace btadmin = ::google::bigtable
 ./google/cloud/bigtable/admin_client.h:37:22     - Unknown word (Bigtable's) -- * Connects to Cloud Bigtable's table administration
 ./google/cloud/bigtable/app_profile_config_test.cc:101:51    - Unknown word (xyzzy)      -- ofileUpdateConfig().set_etag("xyzzy").as_proto();
@@ -424,7 +424,7 @@ Lines:
 ./google/cloud/storage/CMakeLists.txt:473:40    - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc
 ./google/cloud/storage/CMakeLists.txt:62:5      - Unknown word (hmac)       -- hmac_key_metadata.cc
 ./google/cloud/storage/CMakeLists.txt:653:72    - Unknown word (lcrc)       -- cloud_cpp_storage" " -lcrc32c")
-./google/cloud/storage/README.md:77:29     - Unknown word (istreambuf) -- string contents{std::istreambuf_iterator<char>{reader
+./google/cloud/storage/README.md:76:29     - Unknown word (istreambuf) -- string contents{std::istreambuf_iterator<char>{reader
 ./google/cloud/storage/benchmarks/README.md:108:53    - Unknown word (venv)       -- and assume that the `venv` module is
 ./google/cloud/storage/benchmarks/README.md:10:61     - Unknown word (TTFB)       -- time to first byte (TTFB) is high, so
 ./google/cloud/storage/benchmarks/README.md:116:14    - Unknown word (vebm)       -- We will use `vebm` (for Virtual Environment
