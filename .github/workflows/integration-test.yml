@@ -83,6 +83,9 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
+      - run: npm i -g npm@8
+      - run: npm -v
+
       - name: Repo Info
         id: step-repo-info
         run: |
