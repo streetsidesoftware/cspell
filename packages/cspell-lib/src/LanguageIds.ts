@@ -10,6 +10,7 @@
 // cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
 // cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml adoc
+// cspell:ignore purescript purs dhall
 
 export interface LanguageExtensionDefinition {
     id: string;
@@ -37,6 +38,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     },
     { id: 'csharp', extensions: ['.cs'] },
     { id: 'css', extensions: ['.css'] },
+    { id: 'dhall', extensions: ['.dhall'] },
     { id: 'diff', extensions: ['.diff', '.patch', '.rej'] },
     { id: 'dockerfile', extensions: ['.dockerfile'] },
     { id: 'elixir', extensions: ['.ex', '.exs'] },
@@ -73,6 +75,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'php', extensions: ['.php', '.php4', '.php5', '.phtml', '.ctp'] },
     { id: 'plaintext', extensions: ['.txt'] },
     { id: 'powershell', extensions: ['.ps1', '.psm1', '.psd1', '.pssc', '.psrc'] },
+    { id: 'purescript', extensions: ['.purs'] },
     { id: 'python', extensions: ['.py', '.rpy', '.pyw', '.cpy', '.gyp', '.gypi'] },
     { id: 'r', extensions: ['.r', '.rhistory', '.rprofile', '.rt'] },
     { id: 'razor', extensions: ['.cshtml'] },
