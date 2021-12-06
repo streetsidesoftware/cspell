@@ -36,6 +36,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           cache: npm
+      - name: Setup NPM
+        run: npm i -g npm@8
       - name: Update Root
         run: |
           npm i
