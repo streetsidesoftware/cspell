@@ -20,6 +20,7 @@ jobs:
           - 12.x
           - 14.x
           - 16.x
+          - 17.x
 
         os:
           - ubuntu-latest
@@ -36,7 +37,8 @@ jobs:
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
-
+      - run: npm i -g npm@8
+      - run: npm -v
       - run: npm ci
       - run: npm run build
       - run: npm test
@@ -74,6 +76,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
+
+      - run: npm i -g npm@8
+      - run: npm -v
 
       - run: npm ci
       - run: npm run build
