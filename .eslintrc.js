@@ -11,7 +11,7 @@ const config = {
         'plugin:node/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
-        'plugin:promise/recommended',
+        // 'plugin:promise/recommended',
         'plugin:prettier/recommended',
     ],
     ignorePatterns: [
