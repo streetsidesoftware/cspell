@@ -5,198 +5,109 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [5.13.2](https://github.com/streetsidesoftware/cspell/compare/v5.13.1...v5.13.2) (2021-12-07)
 
-
 ### Bug Fixes
 
-* jest/expect-expect warning ([#2062](https://github.com/streetsidesoftware/cspell/issues/2062)) ([7366b54](https://github.com/streetsidesoftware/cspell/commit/7366b54b83ecfe3f8bdb60fddd14c5b04bbf7fad))
-* make cspell aware of PureScript and Dhall ([#2067](https://github.com/streetsidesoftware/cspell/issues/2067)) ([53c8457](https://github.com/streetsidesoftware/cspell/commit/53c8457627963afd52b90ee021f17d2c4b9b7d05))
-* Update TypeScript extensions ([#2051](https://github.com/streetsidesoftware/cspell/issues/2051)) ([6a97177](https://github.com/streetsidesoftware/cspell/commit/6a9717702005e2790686d7884d78a3447544846b))
-
-
-
-
+- jest/expect-expect warning ([#2062](https://github.com/streetsidesoftware/cspell/issues/2062)) ([7366b54](https://github.com/streetsidesoftware/cspell/commit/7366b54b83ecfe3f8bdb60fddd14c5b04bbf7fad))
+- make cspell aware of PureScript and Dhall ([#2067](https://github.com/streetsidesoftware/cspell/issues/2067)) ([53c8457](https://github.com/streetsidesoftware/cspell/commit/53c8457627963afd52b90ee021f17d2c4b9b7d05))
+- Update TypeScript extensions ([#2051](https://github.com/streetsidesoftware/cspell/issues/2051)) ([6a97177](https://github.com/streetsidesoftware/cspell/commit/6a9717702005e2790686d7884d78a3447544846b))
 
 ## [5.13.1](https://github.com/streetsidesoftware/cspell/compare/v5.13.0...v5.13.1) (2021-11-24)
 
-
 ### Bug Fixes
 
-* fix [#2011](https://github.com/streetsidesoftware/cspell/issues/2011) ([#2013](https://github.com/streetsidesoftware/cspell/issues/2013)) ([15abecb](https://github.com/streetsidesoftware/cspell/commit/15abecba58bf940f6fe49852363649dde6f86beb))
-
-
-
-
+- fix [#2011](https://github.com/streetsidesoftware/cspell/issues/2011) ([#2013](https://github.com/streetsidesoftware/cspell/issues/2013)) ([15abecb](https://github.com/streetsidesoftware/cspell/commit/15abecba58bf940f6fe49852363649dde6f86beb))
 
 # [5.13.0](https://github.com/streetsidesoftware/cspell/compare/v5.12.6...v5.13.0) (2021-11-17)
 
-
 ### Bug Fixes
 
-* Add `enableCaseSensitive`/`disableCaseSensitive` ([#1951](https://github.com/streetsidesoftware/cspell/issues/1951)) ([93387b7](https://github.com/streetsidesoftware/cspell/commit/93387b7df3e83ac9d7b05df8e35167a0c0c35065))
-
-
-
-
+- Add `enableCaseSensitive`/`disableCaseSensitive` ([#1951](https://github.com/streetsidesoftware/cspell/issues/1951)) ([93387b7](https://github.com/streetsidesoftware/cspell/commit/93387b7df3e83ac9d7b05df8e35167a0c0c35065))
 
 ## [5.12.6](https://github.com/streetsidesoftware/cspell/compare/v5.12.5...v5.12.6) (2021-11-04)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 ## [5.12.5](https://github.com/streetsidesoftware/cspell/compare/v5.12.4...v5.12.5) (2021-11-02)
-
 
 ### Bug Fixes
 
-* Add trace options ([#1939](https://github.com/streetsidesoftware/cspell/issues/1939)) ([191fc52](https://github.com/streetsidesoftware/cspell/commit/191fc52361d3f68d10be169b86d76359c848bf90))
-* Make sure flaggedWords are always checked. ([#1935](https://github.com/streetsidesoftware/cspell/issues/1935)) ([dfbfddd](https://github.com/streetsidesoftware/cspell/commit/dfbfddd04337854425320a2a25836dacdb7ecc99)), closes [#1895](https://github.com/streetsidesoftware/cspell/issues/1895)
-
-
-
-
+- Add trace options ([#1939](https://github.com/streetsidesoftware/cspell/issues/1939)) ([191fc52](https://github.com/streetsidesoftware/cspell/commit/191fc52361d3f68d10be169b86d76359c848bf90))
+- Make sure flaggedWords are always checked. ([#1935](https://github.com/streetsidesoftware/cspell/issues/1935)) ([dfbfddd](https://github.com/streetsidesoftware/cspell/commit/dfbfddd04337854425320a2a25836dacdb7ecc99)), closes [#1895](https://github.com/streetsidesoftware/cspell/issues/1895)
 
 ## [5.12.4](https://github.com/streetsidesoftware/cspell/compare/v5.12.3...v5.12.4) (2021-10-31)
 
-
 ### Bug Fixes
 
-* In Document settings. ([#1925](https://github.com/streetsidesoftware/cspell/issues/1925)) ([01c12ce](https://github.com/streetsidesoftware/cspell/commit/01c12ce4113516527abfa0ef9b7fa7a883c18520)), closes [#1628](https://github.com/streetsidesoftware/cspell/issues/1628) [#1629](https://github.com/streetsidesoftware/cspell/issues/1629)
-
-
-
-
+- In Document settings. ([#1925](https://github.com/streetsidesoftware/cspell/issues/1925)) ([01c12ce](https://github.com/streetsidesoftware/cspell/commit/01c12ce4113516527abfa0ef9b7fa7a883c18520)), closes [#1628](https://github.com/streetsidesoftware/cspell/issues/1628) [#1629](https://github.com/streetsidesoftware/cspell/issues/1629)
 
 ## [5.12.3](https://github.com/streetsidesoftware/cspell/compare/v5.12.2...v5.12.3) (2021-10-08)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 ## [5.12.2](https://github.com/streetsidesoftware/cspell/compare/v5.12.1...v5.12.2) (2021-10-06)
 
 **Note:** Version bump only for package cspell-lib
-
-
-
-
 
 ## [5.12.1](https://github.com/streetsidesoftware/cspell/compare/v5.12.0...v5.12.1) (2021-10-06)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.12.0](https://github.com/streetsidesoftware/cspell/compare/v5.12.0-alpha.0...v5.12.0) (2021-10-05)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.12.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.11.1...v5.12.0-alpha.0) (2021-10-05)
-
 
 ### Bug Fixes
 
-* Update gitignore README and normalize roots ([#1832](https://github.com/streetsidesoftware/cspell/issues/1832)) ([b9df331](https://github.com/streetsidesoftware/cspell/commit/b9df33148ce016b7003a784945ed5f83023b5903))
-
-
-
-
+- Update gitignore README and normalize roots ([#1832](https://github.com/streetsidesoftware/cspell/issues/1832)) ([b9df331](https://github.com/streetsidesoftware/cspell/commit/b9df33148ce016b7003a784945ed5f83023b5903))
 
 ## [5.11.1](https://github.com/streetsidesoftware/cspell/compare/v5.11.0...v5.11.1) (2021-09-29)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.11.0](https://github.com/streetsidesoftware/cspell/compare/v5.11.0-alpha.0...v5.11.0) (2021-09-28)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.11.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.10.1...v5.11.0-alpha.0) (2021-09-28)
-
 
 ### Bug Fixes
 
-* Allow config file version to be a number. ([#1730](https://github.com/streetsidesoftware/cspell/issues/1730)) ([9fa2eee](https://github.com/streetsidesoftware/cspell/commit/9fa2eeeb8fcd206b26a75a24fdfcf9014d79be52)), closes [#1729](https://github.com/streetsidesoftware/cspell/issues/1729)
-* Improve Patterns and RegExp handling ([#1743](https://github.com/streetsidesoftware/cspell/issues/1743)) ([100866e](https://github.com/streetsidesoftware/cspell/commit/100866e9afbd0c7f5200b44f11f74dc50edfae44)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
-* make sure `issue.uri` is actually a URI. ([#1746](https://github.com/streetsidesoftware/cspell/issues/1746)) ([4268057](https://github.com/streetsidesoftware/cspell/commit/4268057c772db4242dde033c69a4448c26739863))
-* Patterns - only add `u` if no flags are given ([#1745](https://github.com/streetsidesoftware/cspell/issues/1745)) ([a75c370](https://github.com/streetsidesoftware/cspell/commit/a75c370a2ffa5a166f856a915e4dcae625df271e)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
-* Reduce the cost of regexp exclusions ([#1800](https://github.com/streetsidesoftware/cspell/issues/1800)) ([4544c25](https://github.com/streetsidesoftware/cspell/commit/4544c2529faf76945d2d030ae15475573dcf41a6)), closes [#1775](https://github.com/streetsidesoftware/cspell/issues/1775)
-* Update Python dictionary ([#1778](https://github.com/streetsidesoftware/cspell/issues/1778)) ([6359145](https://github.com/streetsidesoftware/cspell/commit/6359145a7e5776bc4698ed447cb2d07aee20f1de))
-
-
-
-
+- Allow config file version to be a number. ([#1730](https://github.com/streetsidesoftware/cspell/issues/1730)) ([9fa2eee](https://github.com/streetsidesoftware/cspell/commit/9fa2eeeb8fcd206b26a75a24fdfcf9014d79be52)), closes [#1729](https://github.com/streetsidesoftware/cspell/issues/1729)
+- Improve Patterns and RegExp handling ([#1743](https://github.com/streetsidesoftware/cspell/issues/1743)) ([100866e](https://github.com/streetsidesoftware/cspell/commit/100866e9afbd0c7f5200b44f11f74dc50edfae44)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
+- make sure `issue.uri` is actually a URI. ([#1746](https://github.com/streetsidesoftware/cspell/issues/1746)) ([4268057](https://github.com/streetsidesoftware/cspell/commit/4268057c772db4242dde033c69a4448c26739863))
+- Patterns - only add `u` if no flags are given ([#1745](https://github.com/streetsidesoftware/cspell/issues/1745)) ([a75c370](https://github.com/streetsidesoftware/cspell/commit/a75c370a2ffa5a166f856a915e4dcae625df271e)), closes [#1699](https://github.com/streetsidesoftware/cspell/issues/1699)
+- Reduce the cost of regexp exclusions ([#1800](https://github.com/streetsidesoftware/cspell/issues/1800)) ([4544c25](https://github.com/streetsidesoftware/cspell/commit/4544c2529faf76945d2d030ae15475573dcf41a6)), closes [#1775](https://github.com/streetsidesoftware/cspell/issues/1775)
+- Update Python dictionary ([#1778](https://github.com/streetsidesoftware/cspell/issues/1778)) ([6359145](https://github.com/streetsidesoftware/cspell/commit/6359145a7e5776bc4698ed447cb2d07aee20f1de))
 
 ## [5.10.1](https://github.com/streetsidesoftware/cspell/compare/v5.10.0...v5.10.1) (2021-09-17)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.10.0](https://github.com/streetsidesoftware/cspell/compare/v5.10.0-alpha.6...v5.10.0) (2021-09-17)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.10.0-alpha.6](https://github.com/streetsidesoftware/cspell/compare/v5.10.0-alpha.5...v5.10.0-alpha.6) (2021-09-17)
-
 
 ### Bug Fixes
 
-* Make dict-en-gb version 2 optional because of license. ([#1710](https://github.com/streetsidesoftware/cspell/issues/1710)) ([046a704](https://github.com/streetsidesoftware/cspell/commit/046a704e7c5f4a45c065d33d815faa2e464e08c9))
-
-
-
-
+- Make dict-en-gb version 2 optional because of license. ([#1710](https://github.com/streetsidesoftware/cspell/issues/1710)) ([046a704](https://github.com/streetsidesoftware/cspell/commit/046a704e7c5f4a45c065d33d815faa2e464e08c9))
 
 # [5.10.0-alpha.5](https://github.com/streetsidesoftware/cspell/compare/v5.10.0-alpha.4...v5.10.0-alpha.5) (2021-09-16)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.10.0-alpha.4](https://github.com/streetsidesoftware/cspell/compare/v5.10.0-alpha.3...v5.10.0-alpha.4) (2021-09-16)
 
 **Note:** Version bump only for package cspell-lib
 
-
-
-
-
 # [5.10.0-alpha.3](https://github.com/streetsidesoftware/cspell/compare/v5.10.0-alpha.2...v5.10.0-alpha.3) (2021-09-16)
-
 
 ### Bug Fixes
 
-* Fix strange spelling of Custom ([4a93456](https://github.com/streetsidesoftware/cspell/commit/4a934568584036fa77461adf575946d1e1366d89))
-
-
-
-
+- Fix strange spelling of Custom ([4a93456](https://github.com/streetsidesoftware/cspell/commit/4a934568584036fa77461adf575946d1e1366d89))
 
 # [5.10.0-alpha.2](https://github.com/streetsidesoftware/cspell/compare/v5.10.0-alpha.0...v5.10.0-alpha.2) (2021-09-13)
 
@@ -607,5 +518,5 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - Original versions.
 
 <!---
-cspell: ignore abcdefa
+cspell: ignore abcdefa Dhall
 --->
