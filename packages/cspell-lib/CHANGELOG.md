@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.13.2](https://github.com/streetsidesoftware/cspell/compare/v5.13.1...v5.13.2) (2021-12-07)
+
+
+### Bug Fixes
+
+* jest/expect-expect warning ([#2062](https://github.com/streetsidesoftware/cspell/issues/2062)) ([7366b54](https://github.com/streetsidesoftware/cspell/commit/7366b54b83ecfe3f8bdb60fddd14c5b04bbf7fad))
+* make cspell aware of PureScript and Dhall ([#2067](https://github.com/streetsidesoftware/cspell/issues/2067)) ([53c8457](https://github.com/streetsidesoftware/cspell/commit/53c8457627963afd52b90ee021f17d2c4b9b7d05))
+* Update TypeScript extensions ([#2051](https://github.com/streetsidesoftware/cspell/issues/2051)) ([6a97177](https://github.com/streetsidesoftware/cspell/commit/6a9717702005e2790686d7884d78a3447544846b))
+
+
+
+
+
 ## [5.13.1](https://github.com/streetsidesoftware/cspell/compare/v5.13.0...v5.13.1) (2021-11-24)
 
 
