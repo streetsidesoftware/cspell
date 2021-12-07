@@ -15,6 +15,7 @@ const repository: Repository = {
             '3': 'punctuation.definition.markdown',
             '4': 'fenced_code.block.language',
         },
+        // eslint-disable-next-line no-useless-backreference
         end: /(^|\G)(\2|\s{0,3})(\3)\s*$/,
         endCaptures: {
             '3': 'punctuation.definition.markdown',
