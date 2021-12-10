@@ -30,9 +30,15 @@ interface PathNode {
     n: TrieNode;
 }
 
+// cspell:words sigs
+const MAX_NUM_SOLO_SIGS = 100000;
+const MAX_TRANSFORMS = 1000000;
+const CACHE_PADDING = 1000;
+
 export class TrieBuilder {
     private count = 0;
     private readonly signatures = new Map<string, TrieNode>();
+    private readonly soloSignatures = new Set<string>();
     private readonly cached = new Map<TrieNode, number>();
     private readonly transforms = new Map<TrieNode, Map<string, TrieNode>>();
     private _eow: TrieNode = Object.freeze({ f: 1 });
@@ -100,9 +106,11 @@ export class TrieBuilder {
         const sig = this.signature(n);
         const ref = this.signatures.get(sig);
         if (ref !== undefined) {
+            this.soloSignatures.delete(sig);
             return this.tryCacheFrozen(ref);
         }
-
+        this.soloSignatures.add(sig);
+        trimSignatures(this.signatures, this.soloSignatures, MAX_NUM_SOLO_SIGS);
         this.signatures.set(sig, this.freeze(n));
         return n;
     }
@@ -111,6 +119,7 @@ export class TrieBuilder {
         if (!Object.isFrozen(result) || !Object.isFrozen(src)) return;
         const t = this.transforms.get(src) ?? new Map<string, TrieNode>();
         t.set(s, result);
+        trimMap(this.transforms, MAX_TRANSFORMS);
         this.transforms.set(src, t);
     }
 
@@ -209,6 +218,10 @@ export class TrieBuilder {
         this._root = createTrieRoot(this.trieOptions);
         this.cached.clear();
         this.signatures.clear();
+        this.signatures.set(this.signature(this._eow), this._eow);
+        this.soloSignatures.clear();
+        this.count = 0;
+        this.cached.set(this._eow, this.count++);
     }
 
     build(consolidateSuffixes = false): Trie {
@@ -224,3 +237,36 @@ function copyIfFrozen(n: TrieNode): TrieNode {
     const c = n.c ? new Map(n.c) : undefined;
     return { f: n.f, c };
 }
+
+function trimSignatures(
+    signatures: Map<string, TrieNode>,
+    soloSignatures: Set<string>,
+    size: number,
+    padding = CACHE_PADDING
+): void {
+    if (soloSignatures.size >= size + padding) {
+        for (const soloSig of soloSignatures) {
+            signatures.delete(soloSig);
+            soloSignatures.delete(soloSig);
+            if (soloSignatures.size <= size) {
+                break;
+            }
+        }
+    }
+}
+
+function trimMap(map: Map<unknown, unknown>, size: number, padding = CACHE_PADDING) {
+    if (map.size >= size + padding) {
+        for (const key of map.keys()) {
+            map.delete(key);
+            if (map.size <= size) {
+                break;
+            }
+        }
+    }
+}
+
+export const __testing__ = {
+    trimSignatures,
+    trimMap,
+};
