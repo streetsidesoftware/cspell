@@ -194,8 +194,8 @@ function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
         const compound = flags.isCompoundForbidden ? '' : COMPOUND_FIX;
         const forbid = flags.isForbiddenWord ? FORBID_PREFIX : '';
         if (!forbid) {
-            if (flags.canBeCompoundBegin) yield word + compound;
-            if (flags.canBeCompoundEnd) yield compound + word;
+            if (flags.canBeCompoundBegin || flags.isCompoundPermitted) yield word + compound;
+            if (flags.canBeCompoundEnd || flags.isCompoundPermitted) yield compound + word;
             if (flags.canBeCompoundMiddle || flags.isCompoundPermitted) yield compound + word + compound;
             if (!flags.isOnlyAllowedInCompound) yield word;
         } else {
