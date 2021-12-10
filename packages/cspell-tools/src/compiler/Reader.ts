@@ -196,7 +196,7 @@ function* _mapAffWords(affWords: Iterable<AffWord>): Generator<AnnotatedWord> {
         if (!forbid) {
             if (flags.canBeCompoundBegin) yield word + compound;
             if (flags.canBeCompoundEnd) yield compound + word;
-            if (flags.canBeCompoundMiddle) yield compound + word + compound;
+            if (flags.canBeCompoundMiddle || flags.isCompoundPermitted) yield compound + word + compound;
             if (!flags.isOnlyAllowedInCompound) yield word;
         } else {
             yield forbid + word;
