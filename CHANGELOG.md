@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.13.3](https://github.com/streetsidesoftware/cspell/compare/v5.13.2...v5.13.3) (2021-12-11)
+
+
+### Bug Fixes
+
+* cspell-tools - limit memory usage when build dictionaries ([#2087](https://github.com/streetsidesoftware/cspell/issues/2087)) ([591860e](https://github.com/streetsidesoftware/cspell/commit/591860ec93737f943a0f76d615cdce4b25344457))
+* Hunspell make sure COMPOUNDFLAG is supported ([#2088](https://github.com/streetsidesoftware/cspell/issues/2088)) ([3bd772e](https://github.com/streetsidesoftware/cspell/commit/3bd772e827edfd0aa1bdabc5d7f21e2ec29f84b7))
+
+
+
+
+
 ## [5.13.2](https://github.com/streetsidesoftware/cspell/compare/v5.13.1...v5.13.2) (2021-12-07)
 
 

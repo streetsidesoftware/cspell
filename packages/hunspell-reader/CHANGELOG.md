@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.13.3](https://github.com/Jason-Rev/hunspell-reader/compare/v5.13.2...v5.13.3) (2021-12-11)
+
+
+### Bug Fixes
+
+* Hunspell make sure COMPOUNDFLAG is supported ([#2088](https://github.com/Jason-Rev/hunspell-reader/issues/2088)) ([3bd772e](https://github.com/Jason-Rev/hunspell-reader/commit/3bd772e827edfd0aa1bdabc5d7f21e2ec29f84b7))
+
+
+
+
+
 ## [5.13.2](https://github.com/Jason-Rev/hunspell-reader/compare/v5.13.1...v5.13.2) (2021-12-07)
 
 **Note:** Version bump only for package hunspell-reader
