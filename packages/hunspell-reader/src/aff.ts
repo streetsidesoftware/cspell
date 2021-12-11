@@ -54,10 +54,11 @@ export interface AffTransformFlags {
     FORBIDDENWORD?: string;
     NOSUGGEST?: string;
     COMPOUNDBEGIN?: string;
-    COMPOUNDMIDDLE?: string;
     COMPOUNDEND?: string;
-    COMPOUNDPERMITFLAG?: string;
+    COMPOUNDFLAG?: string;
     COMPOUNDFORBIDFLAG?: string;
+    COMPOUNDMIDDLE?: string;
+    COMPOUNDPERMITFLAG?: string;
     ONLYINCOMPOUND?: string;
 }
 
@@ -409,6 +410,7 @@ const affFlag: Mapping<AffTransformFlags, AffWordFlags> = {
     COMPOUNDBEGIN: { canBeCompoundBegin: true },
     COMPOUNDMIDDLE: { canBeCompoundMiddle: true },
     COMPOUNDEND: { canBeCompoundEnd: true },
+    COMPOUNDFLAG: { isCompoundPermitted: true },
     COMPOUNDPERMITFLAG: { isCompoundPermitted: true },
     COMPOUNDFORBIDFLAG: { isCompoundForbidden: true },
     ONLYINCOMPOUND: { isOnlyAllowedInCompound: true },

@@ -2,6 +2,7 @@ import { TrieNode, TrieRoot } from './TrieNode';
 import { Trie, PartialTrieOptions, TrieOptions } from './trie';
 import { consolidate } from './consolidate';
 import { createTriFromList, mergeOptionalWithDefaults, trieNodeToRoot, createTrieRoot } from './util';
+import { SecondChanceCache } from './secondChanceCache';
 
 /**
  * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie
@@ -31,16 +32,15 @@ interface PathNode {
 }
 
 // cspell:words sigs
-const MAX_NUM_SOLO_SIGS = 100000;
+const MAX_NUM_SIGS = 100000;
 const MAX_TRANSFORMS = 1000000;
-const CACHE_PADDING = 1000;
+const MAX_CACHE_SIZE = 1000000;
 
 export class TrieBuilder {
     private count = 0;
-    private readonly signatures = new Map<string, TrieNode>();
-    private readonly soloSignatures = new Set<string>();
-    private readonly cached = new Map<TrieNode, number>();
-    private readonly transforms = new Map<TrieNode, Map<string, TrieNode>>();
+    private readonly signatures = new SecondChanceCache<string, TrieNode>(MAX_NUM_SIGS);
+    private readonly cached = new SecondChanceCache<TrieNode, number>(MAX_CACHE_SIZE);
+    private readonly transforms = new SecondChanceCache<TrieNode, Map<string, TrieNode>>(MAX_TRANSFORMS);
     private _eow: TrieNode = Object.freeze({ f: 1 });
     /** position 0 of lastPath is always the root */
     private lastPath: PathNode[] = [{ s: '', n: { f: undefined, c: undefined } }];
@@ -81,7 +81,9 @@ export class TrieBuilder {
     }
 
     private tryCacheFrozen(n: TrieNode) {
-        if (this.cached.has(n)) return n;
+        if (this.cached.has(n)) {
+            return n;
+        }
         this.cached.set(n, this.count++);
         return n;
     }
@@ -106,11 +108,8 @@ export class TrieBuilder {
         const sig = this.signature(n);
         const ref = this.signatures.get(sig);
         if (ref !== undefined) {
-            this.soloSignatures.delete(sig);
             return this.tryCacheFrozen(ref);
         }
-        this.soloSignatures.add(sig);
-        trimSignatures(this.signatures, this.soloSignatures, MAX_NUM_SOLO_SIGS);
         this.signatures.set(sig, this.freeze(n));
         return n;
     }
@@ -119,7 +118,6 @@ export class TrieBuilder {
         if (!Object.isFrozen(result) || !Object.isFrozen(src)) return;
         const t = this.transforms.get(src) ?? new Map<string, TrieNode>();
         t.set(s, result);
-        trimMap(this.transforms, MAX_TRANSFORMS);
         this.transforms.set(src, t);
     }
 
@@ -219,7 +217,6 @@ export class TrieBuilder {
         this.cached.clear();
         this.signatures.clear();
         this.signatures.set(this.signature(this._eow), this._eow);
-        this.soloSignatures.clear();
         this.count = 0;
         this.cached.set(this._eow, this.count++);
     }
@@ -237,36 +234,3 @@ function copyIfFrozen(n: TrieNode): TrieNode {
     const c = n.c ? new Map(n.c) : undefined;
     return { f: n.f, c };
 }
-
-function trimSignatures(
-    signatures: Map<string, TrieNode>,
-    soloSignatures: Set<string>,
-    size: number,
-    padding = CACHE_PADDING
-): void {
-    if (soloSignatures.size >= size + padding) {
-        for (const soloSig of soloSignatures) {
-            signatures.delete(soloSig);
-            soloSignatures.delete(soloSig);
-            if (soloSignatures.size <= size) {
-                break;
-            }
-        }
-    }
-}
-
-function trimMap(map: Map<unknown, unknown>, size: number, padding = CACHE_PADDING) {
-    if (map.size >= size + padding) {
-        for (const key of map.keys()) {
-            map.delete(key);
-            if (map.size <= size) {
-                break;
-            }
-        }
-    }
-}
-
-export const __testing__ = {
-    trimSignatures,
-    trimMap,
-};
