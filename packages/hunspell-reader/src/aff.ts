@@ -252,6 +252,7 @@ export class Aff {
      * @internal
      */
     applyRulesToWord(affWord: AffWord, remainingDepth: number): AffWord[] {
+        const compoundMin = this.affInfo.COMPOUNDMIN ?? 3;
         const { word, base, suffix, prefix, dic } = affWord;
         const allRules = this.getMatchingRules(affWord.rules);
         const { rulesApplied, flags } = allRules
@@ -268,6 +269,7 @@ export class Aff {
         const wordWithFlags = { word, flags, rulesApplied, rules: '', base, suffix, prefix, dic };
         return [wordWithFlags, ...this.applyAffixesToWord(affixRules, { ...wordWithFlags, rules }, remainingDepth)]
             .filter(({ flags }) => !flags.isNeedAffix)
+            .map((affWord) => adjustCompounding(affWord, compoundMin))
             .map((affWord) => logAffWord(affWord, 'applyRulesToWord'));
     }
 
@@ -498,4 +500,14 @@ function removeNeedAffix(flags: AffWordFlags): AffWordFlags {
     const newFlags: AffWordFlags = { ...flags };
     delete newFlags.isNeedAffix;
     return newFlags;
+}
+
+function adjustCompounding(affWord: AffWord, minLength: number): AffWord {
+    if (!affWord.flags.isCompoundPermitted || affWord.word.length >= minLength) {
+        return affWord;
+    }
+
+    const { isCompoundPermitted, ...flags } = affWord.flags;
+    affWord.flags = flags;
+    return affWord;
 }
