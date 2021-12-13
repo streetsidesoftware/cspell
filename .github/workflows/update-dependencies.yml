@@ -41,7 +41,7 @@ jobs:
       - name: Update Root
         run: |
           npm i
-          npm update -S
+          npx npm-check-updates -t minor -u
           rm -rf node_modules package-lock.json
       - name: Install
         run: npm install
