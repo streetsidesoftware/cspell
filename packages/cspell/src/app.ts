@@ -1,9 +1,11 @@
 import * as commander from 'commander';
 import * as path from 'path';
+import * as semver from 'semver';
 import { commandCheck } from './commandCheck';
 import { commandLink } from './commandLink';
 import { commandLint } from './commandLint';
 import { commandTrace } from './commandTrace';
+import { ApplicationError } from './util/errors';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
@@ -17,6 +19,12 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
     prog.exitOverride();
 
     prog.version(npmPackage.version).description('Spelling Checker for Code').name('cspell');
+
+    if (!semver.satisfies(process.versions.node, npmPackage.engines.node)) {
+        throw new ApplicationError(
+            `Unsupported NodeJS version (${process.versions.node}); ${npmPackage.engines.node} is required`
+        );
+    }
 
     commandLint(prog);
     commandTrace(prog);
