@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.13.4](https://github.com/streetsidesoftware/cspell/compare/v5.13.3...v5.13.4) (2021-12-18)
+
+
+### Bug Fixes
+
+* hunspell - honor minimum compound word length ([#2091](https://github.com/streetsidesoftware/cspell/issues/2091)) ([c67f7b8](https://github.com/streetsidesoftware/cspell/commit/c67f7b8bdac872eee544a7f1787ba09e79d59de2))
+
+
+### Features
+
+* report error and fail for unsupported NodeJS versions ([#1984](https://github.com/streetsidesoftware/cspell/issues/1984)) ([#2111](https://github.com/streetsidesoftware/cspell/issues/2111)) ([52bb33e](https://github.com/streetsidesoftware/cspell/commit/52bb33ea7114a179e931203423a328e5508fd037))
+
+
+
+
+
 ## [5.13.3](https://github.com/streetsidesoftware/cspell/compare/v5.13.2...v5.13.3) (2021-12-11)
 
 
