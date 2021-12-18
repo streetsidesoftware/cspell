@@ -237,11 +237,7 @@ function asPendingPromise<T>(promise: Promise<T>): PendingPromise<T> {
         state: 'pending',
     };
 
-    // x-eslint-disable-next-line promise/catch-or-return
-    promise.then(
-        (v) => ((pp.state = 'resolved'), v),
-        (r) => ((pp.state = 'rejected'), r)
-    );
+    promise.then((v) => ((pp.state = 'resolved'), v)).catch((r) => ((pp.state = 'rejected'), r));
 
     return pp;
 }
