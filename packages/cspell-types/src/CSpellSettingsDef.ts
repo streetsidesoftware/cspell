@@ -34,11 +34,11 @@ export interface FileSettings extends ExtendableSettings {
     /** Words to add to global dictionary -- should only be in the user config file. */
     userWords?: string[];
 
-    /** Other settings files to be included */
+    /** Other settings files to be included. */
     import?: FsPath | FsPath[];
 
     /**
-     * The root to use for glop patterns found in this configuration.
+     * The root to use for glob patterns found in this configuration.
      * Default: location of the configuration file.
      *   For compatibility reasons, config files with version 0.1, the glob root will
      *   default to be `${cwd}`.
@@ -69,7 +69,7 @@ export interface FileSettings extends ExtendableSettings {
     enableGlobDot?: boolean;
 
     /**
-     * Glob patterns of files to be ignored
+     * Glob patterns of files to be ignored.
      * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
      */
     ignorePaths?: Glob[];
@@ -89,7 +89,7 @@ export interface FileSettings extends ExtendableSettings {
     readonly?: boolean;
 
     /**
-     * Custom reporters configuration
+     * Custom reporters configuration.
      */
     reporters?: ReporterSettings[];
 
@@ -114,9 +114,9 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     /**
      * Current active spelling language.
      *
-     * Example: "en-GB" for British English
+     * Example: "en-GB" for British English.
      *
-     * Example: "en,nl" to enable both English and Dutch
+     * Example: "en,nl" to enable both English and Dutch.
      * @default "en"
      */
     language?: LocaleId;
@@ -171,7 +171,7 @@ export interface ReportingConfiguration extends SuggestionsConfiguration {
 
 export interface SuggestionsConfiguration {
     /**
-     * Number of suggestions to make
+     * Number of suggestions to make.
      * @default 10
      */
     numSuggestions?: number;
@@ -227,30 +227,30 @@ export interface PnPSettings {
  */
 export interface WorkspaceTrustSettings {
     /**
-     * Glob patterns of locations that contain ALWAYS trusted files
+     * Glob patterns of locations that contain ALWAYS trusted files.
      */
     trustedFiles?: Glob[];
 
     /**
-     * Glob patterns of locations that contain NEVER trusted files
+     * Glob patterns of locations that contain NEVER trusted files.
      */
     untrustedFiles?: Glob[];
 
     /**
-     * Sets the default trust level
+     * Sets the default trust level.
      * @default "trusted"
      */
     trustLevel?: TrustLevel;
 }
 
 /**
- * VS Code Spell Checker Settings
- * To be Removed
+ * VS Code Spell Checker Settings.
+ * To be Removed.
  * @deprecated true
  */
 export interface LegacySettings {
     /**
-     * Show status
+     * Show status.
      * @deprecated true
      */
     showStatus?: boolean;
@@ -264,38 +264,38 @@ export interface LegacySettings {
 }
 
 export interface OverrideSettings extends Settings, OverrideFilterFields {
-    /** Sets the programming language id */
+    /** Sets the programming language id. */
     languageId?: LanguageId;
 
-    /** Sets the locale */
+    /** Sets the locale. */
     language?: LocaleId;
 }
 
 export interface OverrideFilterFields {
-    /** Glob pattern or patterns to match against */
+    /** Glob pattern or patterns to match against. */
     filename: Glob | Glob[];
 }
 
 export interface BaseSetting {
-    /** Optional identifier */
+    /** Optional identifier. */
     id?: string;
 
-    /** Optional name of configuration */
+    /** Optional name of configuration. */
     name?: string;
 
-    /** Optional description of configuration */
+    /** Optional description of configuration. */
     description?: string;
 
     /**
-     * Is the spell checker enabled
+     * Is the spell checker enabled.
      * @default true
      */
     enabled?: boolean;
 
-    /** list of words to be always considered correct */
+    /** List of words to be always considered correct. */
     words?: string[];
 
-    /** list of words to always be considered incorrect. */
+    /** List of words to always be considered incorrect. */
     flagWords?: string[];
 
     /** List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`. */
@@ -318,7 +318,7 @@ export interface BaseSetting {
      */
     caseSensitive?: boolean;
 
-    /** Define additional available dictionaries */
+    /** Define additional available dictionaries. */
     dictionaryDefinitions?: DictionaryDefinition[];
 
     /**
@@ -343,7 +343,7 @@ export interface BaseSetting {
     /**
      * List of RegExp patterns or Pattern names to exclude from spell checking.
      *
-     * Example: ["href"] - to exclude html href
+     * Example: ["href"] - to exclude html href.
      */
     ignoreRegExpList?: RegExpPatternList;
 
@@ -353,7 +353,7 @@ export interface BaseSetting {
      */
     includeRegExpList?: RegExpPatternList;
 
-    /** Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList */
+    /** Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList. */
     patterns?: RegExpPatternDefinition[];
 }
 
@@ -371,17 +371,17 @@ export interface DictionaryDefinitionBase {
      *
      * Name Format:
      * - Must contain at least 1 number or letter.
-     * - spaces are allowed.
+     * - Spaces are allowed.
      * - Leading and trailing space will be removed.
-     * - Names ARE case-sensitive
-     * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`
+     * - Names ARE case-sensitive.
+     * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
      */
     name: DictionaryId;
-    /** Optional description */
+    /** Optional description. */
     description?: string;
-    /** Replacement pairs */
+    /** Replacement pairs. */
     repMap?: ReplaceMap;
-    /** Use Compounds */
+    /** Use Compounds. */
     useCompounds?: boolean;
     /**
      * Indicate that suggestions should not come from this dictionary.
@@ -397,8 +397,8 @@ export interface DictionaryDefinitionBase {
      * Type of file:
      * S - single word per line,
      * W - each line can contain one or more words separated by space,
-     * C - each line is treated like code (Camel Case is allowed)
-     * Default is S
+     * C - each line is treated like code (Camel Case is allowed).
+     * Default is S.
      * C is the slowest to load due to the need to split each line based upon code splitting rules.
      * @default "S"
      */
@@ -406,11 +406,11 @@ export interface DictionaryDefinitionBase {
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
-    /** Path to the file */
+    /** Path to the file. */
     path: DictionaryPath;
 
     /**
-     * Only for legacy dictionary definitions
+     * Only for legacy dictionary definitions.
      * @deprecated true
      * @deprecationMessage Use `path` instead.
      * @hidden
@@ -419,16 +419,16 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
 }
 
 /**
- * Only for legacy dictionary definitions
+ * Only for legacy dictionary definitions.
  * @deprecated true
- * @deprecationMessage Use `DictionaryDefinitionPreferred`
+ * @deprecationMessage Use `DictionaryDefinitionPreferred` instead.
  */
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
     /** @hidden */
     path?: undefined;
 
     /**
-     * Path to the file, only for legacy dictionary definitions
+     * Path to the file, only for legacy dictionary definitions.
      * @deprecated true
      * @deprecationMessage Use `path` instead.
      */
@@ -440,20 +440,20 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
  * @hidden
  */
 export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
-    /** Path to the file, if undefined the path to the extension dictionaries is assumed */
+    /** Path to the file, if undefined the path to the extension dictionaries is assumed. */
     path?: FsPath;
     /**
-     * File name
+     * File name.
      * @deprecated true
-     * @deprecationMessage Use path instead.
+     * @deprecationMessage Use `path` instead.
      */
     file: FsPath;
     /**
      * Type of file:
      * S - single word per line,
      * W - each line can contain one or more words separated by space,
-     * C - each line is treated like code (Camel Case is allowed)
-     * Default is S
+     * C - each line is treated like code (Camel Case is allowed).
+     * Default is S.
      * C is the slowest to load due to the need to split each line based upon code splitting rules.
      * @default "S"
      */
@@ -478,7 +478,7 @@ export interface DictionaryDefinitionCustom extends DictionaryDefinitionPreferre
 
     /**
      * Defines the scope for when words will be added to the dictionary.
-     * Scope values: `user`, `workspace`, `folder`
+     * Scope values: `user`, `workspace`, `folder`.
      */
     scope?: CustomDictionaryScope | CustomDictionaryScope[];
 
@@ -495,19 +495,19 @@ export interface LanguageSettingFilterFields
         LanguageSettingFilterFieldsDeprecated {}
 
 export interface LanguageSettingFilterFieldsPreferred {
-    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
+    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages. */
     languageId: LanguageId | LanguageIdSingle[];
     /** The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. */
     locale?: LocaleId | LocaleId[];
 }
 
 export interface LanguageSettingFilterFieldsDeprecated {
-    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages */
+    /** The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages. */
     languageId: LanguageId | LanguageIdSingle[];
     /**
      * Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
      * @deprecated true
-     * @deprecationMessage Use `locale` instead
+     * @deprecationMessage Use `locale` instead.
      */
     local?: LocaleId | LocaleId[];
 }
@@ -543,13 +543,13 @@ export type PredefinedPatterns =
     | 'UUID'
     | 'Everything';
 
-/** This matches the name in a pattern definition */
+/** This matches the name in a pattern definition. */
 export type PatternId = string;
 
 /** A PatternRef is a Pattern or PatternId. */
 export type PatternRef = Pattern | PatternId | PredefinedPatterns;
 
-/** A list of pattern names or regular expressions */
+/** A list of pattern names or regular expressions. */
 export type RegExpPatternList = PatternRef[];
 
 /**
@@ -557,10 +557,10 @@ export type RegExpPatternList = PatternRef[];
  *
  * Name Format:
  * - Must contain at least 1 number or letter.
- * - spaces are allowed.
+ * - Spaces are allowed.
  * - Leading and trailing space will be removed.
- * - Names ARE case-sensitive
- * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`
+ * - Names ARE case-sensitive.
+ * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
  *
  * @pattern ^(?=[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
  */
@@ -578,10 +578,10 @@ export type DictionaryRef = DictionaryId;
  * It is used to exclude or include a dictionary by name.
  *
  * The reference starts with 1 or more `!`.
- * - `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`
- * - `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`
+ * - `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`.
+ * - `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`.
  *    Overrides `!<dictionary_name>`.
- * - `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`
+ * - `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`.
  *    Overrides `!!<dictionary_name>`.
  *
  * @pattern ^(?=!+[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
@@ -600,14 +600,14 @@ export type DictionaryReference = DictionaryRef | DictionaryNegRef;
 export type LocaleId = string;
 
 /**
- * Configuration File Version
+ * Configuration File Version.
  */
 export type VersionLatest = '0.2';
 
 /**
- * Legacy Configuration File Versions
+ * Legacy Configuration File Versions.
  * @deprecated true
- * @deprecationMessage Use `0.2`
+ * @deprecationMessage Use `0.2` instead.
  */
 export type VersionLegacy = '0.1';
 
@@ -615,14 +615,14 @@ export type Version = VersionLatest | VersionLegacy;
 
 /**
  * @deprecated true
- * @deprecationMessage Use LocaleId instead
+ * @deprecationMessage Use `LocaleId` instead.
  */
 export type LocalId = LocaleId;
 
-/** These are glob expressions */
+/** These are glob expressions. */
 export type Glob = SimpleGlob | GlobDef;
 
-/** Simple Glob string, the root will be globRoot */
+/** Simple Glob string, the root will be globRoot. */
 export type SimpleGlob = string;
 
 /**
@@ -632,7 +632,7 @@ export type SimpleGlob = string;
  * @hidden
  */
 export interface GlobDef {
-    /** Glob pattern to match */
+    /** Glob pattern to match. */
     glob: string;
 
     /** Optional root to use when matching the glob. Defaults to current working dir. */
@@ -665,10 +665,10 @@ export type LanguageIdMultipleNeg = string;
 
 export type LanguageId = LanguageIdSingle | LanguageIdMultiple | LanguageIdMultipleNeg;
 
-/** A File System Path */
+/** A File System Path. */
 export type FsPath = string;
 
-/** Trust Security Level */
+/** Trust Security Level. */
 export type TrustLevel = 'trusted' | 'untrusted';
 
 /**
@@ -690,7 +690,7 @@ export interface RegExpPatternDefinition {
      */
     name: PatternId;
     /**
-     * RegExp pattern or array of RegExp patterns
+     * RegExp pattern or array of RegExp patterns.
      */
     pattern: Pattern | Pattern[];
     /**
@@ -705,50 +705,50 @@ export type CSpellUserSettingsWithComments = CSpellUserSettings;
 export type Source = FileSource | MergeSource | InMemorySource | BaseSource;
 
 export interface FileSource extends BaseSource {
-    /** name of source */
+    /** Name of source. */
     name: string;
-    /** filename if this came from a file. */
+    /** Filename if this came from a file. */
     filename: string;
-    /** The two settings that were merged to */
+    /** The two settings that were merged to. */
     sources?: undefined;
     /** The configuration read. */
     fileSource: CSpellSettings;
 }
 
 export interface MergeSource extends BaseSource {
-    /** name of source */
+    /** Name of source. */
     name: string;
-    /** filename if this came from a file. */
+    /** Filename if this came from a file. */
     filename?: undefined;
-    /** The two settings that were merged to */
+    /** The two settings that were merged to. */
     sources: [CSpellSettings] | [CSpellSettings, CSpellSettings];
     /** The configuration read. */
     fileSource?: undefined;
 }
 
 export interface InMemorySource extends BaseSource {
-    /** name of source */
+    /** Name of source. */
     name: string;
-    /** filename if this came from a file. */
+    /** Filename if this came from a file. */
     filename?: undefined;
-    /** The two settings that were merged to */
+    /** The two settings that were merged to. */
     sources?: undefined;
     /** The configuration read. */
     fileSource?: undefined;
 }
 
 interface BaseSource {
-    /** name of source */
+    /** Name of source. */
     name: string;
-    /** filename if this came from a file. */
+    /** Filename if this came from a file. */
     filename?: string | undefined;
-    /** The two settings that were merged to */
+    /** The two settings that were merged to. */
     sources?: [CSpellSettings] | [CSpellSettings, CSpellSettings] | undefined;
     /** The configuration read. */
     fileSource?: CSpellSettings | undefined;
 }
 
 /**
- * reporter name or reporter name + reporter config
+ * Reporter name or reporter name + reporter config.
  */
 export type ReporterSettings = string | [string] | [string, unknown];

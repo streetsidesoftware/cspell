@@ -32,22 +32,22 @@
     "DictionaryDefinitionAlternate": {
       "additionalProperties": false,
       "deprecated": true,
-      "deprecationMessage": "Use `DictionaryDefinitionPreferred`",
-      "description": "Only for legacy dictionary definitions",
+      "deprecationMessage": "Use `DictionaryDefinitionPreferred` instead.",
+      "description": "Only for legacy dictionary definitions.",
       "properties": {
         "description": {
-          "description": "Optional description",
+          "description": "Optional description.",
           "type": "string"
         },
         "file": {
           "$ref": "#/definitions/DictionaryPath",
           "deprecated": true,
           "deprecationMessage": "Use `path` instead.",
-          "description": "Path to the file, only for legacy dictionary definitions"
+          "description": "Path to the file, only for legacy dictionary definitions."
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
-          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`"
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
         },
         "noSuggest": {
           "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
@@ -55,15 +55,15 @@
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
-          "description": "Replacement pairs"
+          "description": "Replacement pairs."
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed) Default is S C is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed). Default is S. C is the slowest to load due to the need to split each line based upon code splitting rules."
         },
         "useCompounds": {
-          "description": "Use Compounds",
+          "description": "Use Compounds.",
           "type": "boolean"
         }
       },
@@ -82,12 +82,12 @@
           "type": "boolean"
         },
         "description": {
-          "description": "Optional description",
+          "description": "Optional description.",
           "type": "string"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
-          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`"
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
         },
         "noSuggest": {
           "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
@@ -99,7 +99,7 @@
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
-          "description": "Replacement pairs"
+          "description": "Replacement pairs."
         },
         "scope": {
           "anyOf": [
@@ -113,15 +113,15 @@
               "type": "array"
             }
           ],
-          "description": "Defines the scope for when words will be added to the dictionary. Scope values: `user`, `workspace`, `folder`"
+          "description": "Defines the scope for when words will be added to the dictionary. Scope values: `user`, `workspace`, `folder`."
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed) Default is S C is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed). Default is S. C is the slowest to load due to the need to split each line based upon code splitting rules."
         },
         "useCompounds": {
-          "description": "Use Compounds",
+          "description": "Use Compounds.",
           "type": "boolean"
         }
       },
@@ -136,12 +136,12 @@
       "additionalProperties": false,
       "properties": {
         "description": {
-          "description": "Optional description",
+          "description": "Optional description.",
           "type": "string"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
-          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`"
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
         },
         "noSuggest": {
           "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
@@ -149,19 +149,19 @@
         },
         "path": {
           "$ref": "#/definitions/DictionaryPath",
-          "description": "Path to the file"
+          "description": "Path to the file."
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
-          "description": "Replacement pairs"
+          "description": "Replacement pairs."
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
-          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed) Default is S C is the slowest to load due to the need to split each line based upon code splitting rules."
+          "description": "Type of file: S - single word per line, W - each line can contain one or more words separated by space, C - each line is treated like code (Camel Case is allowed). Default is S. C is the slowest to load due to the need to split each line based upon code splitting rules."
         },
         "useCompounds": {
-          "description": "Use Compounds",
+          "description": "Use Compounds.",
           "type": "boolean"
         }
       },
@@ -181,12 +181,12 @@
       "type": "string"
     },
     "DictionaryId": {
-      "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`",
+      "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
       "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
       "type": "string"
     },
     "DictionaryNegRef": {
-      "description": "This a negative reference to a named dictionary.\n\nIt is used to exclude or include a dictionary by name.\n\nThe reference starts with 1 or more `!`.\n- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`\n- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`    Overrides `!<dictionary_name>`.\n- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`    Overrides `!!<dictionary_name>`.",
+      "description": "This a negative reference to a named dictionary.\n\nIt is used to exclude or include a dictionary by name.\n\nThe reference starts with 1 or more `!`.\n- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`.\n- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`.    Overrides `!<dictionary_name>`.\n- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`.    Overrides `!!<dictionary_name>`.",
       "pattern": "^(?=!+[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
       "type": "string"
     },
@@ -211,12 +211,12 @@
       "description": "Reference to a dictionary by name. One of:\n-  {@link  DictionaryRef } \n-  {@link  DictionaryNegRef }"
     },
     "FsPath": {
-      "description": "A File System Path",
+      "description": "A File System Path.",
       "type": "string"
     },
     "Glob": {
       "$ref": "#/definitions/SimpleGlob",
-      "description": "These are glob expressions"
+      "description": "These are glob expressions."
     },
     "LanguageId": {
       "anyOf": [
@@ -260,7 +260,7 @@
           "type": "boolean"
         },
         "description": {
-          "description": "Optional description of configuration",
+          "description": "Optional description of configuration.",
           "type": "string"
         },
         "dictionaries": {
@@ -271,7 +271,7 @@
           "type": "array"
         },
         "dictionaryDefinitions": {
-          "description": "Define additional available dictionaries",
+          "description": "Define additional available dictionaries.",
           "items": {
             "$ref": "#/definitions/DictionaryDefinition"
           },
@@ -279,23 +279,23 @@
         },
         "enabled": {
           "default": true,
-          "description": "Is the spell checker enabled",
+          "description": "Is the spell checker enabled.",
           "type": "boolean"
         },
         "flagWords": {
-          "description": "list of words to always be considered incorrect.",
+          "description": "List of words to always be considered incorrect.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "id": {
-          "description": "Optional identifier",
+          "description": "Optional identifier.",
           "type": "string"
         },
         "ignoreRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
-          "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
+          "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href."
         },
         "ignoreWords": {
           "description": "List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`.",
@@ -320,7 +320,7 @@
               "type": "array"
             }
           ],
-          "description": "The language id.  Ex: \"typescript\", \"html\", or \"php\".  \"*\" -- will match all languages"
+          "description": "The language id.  Ex: \"typescript\", \"html\", or \"php\".  \"*\" -- will match all languages."
         },
         "local": {
           "anyOf": [
@@ -335,7 +335,7 @@
             }
           ],
           "deprecated": true,
-          "deprecationMessage": "Use `locale` instead",
+          "deprecationMessage": "Use `locale` instead.",
           "description": "Deprecated - The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
         },
         "locale": {
@@ -353,7 +353,7 @@
           "description": "The locale filter, matches against the language. This can be a comma separated list. \"*\" will match all locales."
         },
         "name": {
-          "description": "Optional name of configuration",
+          "description": "Optional name of configuration.",
           "type": "string"
         },
         "noSuggestDictionaries": {
@@ -364,14 +364,14 @@
           "type": "array"
         },
         "patterns": {
-          "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
+          "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList.",
           "items": {
             "$ref": "#/definitions/RegExpPatternDefinition"
           },
           "type": "array"
         },
         "words": {
-          "description": "list of words to be always considered correct",
+          "description": "List of words to be always considered correct.",
           "items": {
             "type": "string"
           },
@@ -401,7 +401,7 @@
           "type": "boolean"
         },
         "description": {
-          "description": "Optional description of configuration",
+          "description": "Optional description of configuration.",
           "type": "string"
         },
         "dictionaries": {
@@ -412,7 +412,7 @@
           "type": "array"
         },
         "dictionaryDefinitions": {
-          "description": "Define additional available dictionaries",
+          "description": "Define additional available dictionaries.",
           "items": {
             "$ref": "#/definitions/DictionaryDefinition"
           },
@@ -430,7 +430,7 @@
         },
         "enabled": {
           "default": true,
-          "description": "Is the spell checker enabled",
+          "description": "Is the spell checker enabled.",
           "type": "boolean"
         },
         "enabledLanguageIds": {
@@ -452,22 +452,22 @@
               "type": "array"
             }
           ],
-          "description": "Glob pattern or patterns to match against"
+          "description": "Glob pattern or patterns to match against."
         },
         "flagWords": {
-          "description": "list of words to always be considered incorrect.",
+          "description": "List of words to always be considered incorrect.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "id": {
-          "description": "Optional identifier",
+          "description": "Optional identifier.",
           "type": "string"
         },
         "ignoreRegExpList": {
           "$ref": "#/definitions/RegExpPatternList",
-          "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
+          "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href."
         },
         "ignoreWords": {
           "description": "List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`.",
@@ -482,11 +482,11 @@
         },
         "language": {
           "$ref": "#/definitions/LocaleId",
-          "description": "Sets the locale"
+          "description": "Sets the locale."
         },
         "languageId": {
           "$ref": "#/definitions/LanguageId",
-          "description": "Sets the programming language id"
+          "description": "Sets the programming language id."
         },
         "languageSettings": {
           "description": "Additional settings for individual languages.",
@@ -511,7 +511,7 @@
           "type": "number"
         },
         "name": {
-          "description": "Optional name of configuration",
+          "description": "Optional name of configuration.",
           "type": "string"
         },
         "noSuggestDictionaries": {
@@ -523,11 +523,11 @@
         },
         "numSuggestions": {
           "default": 10,
-          "description": "Number of suggestions to make",
+          "description": "Number of suggestions to make.",
           "type": "number"
         },
         "patterns": {
-          "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
+          "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList.",
           "items": {
             "$ref": "#/definitions/RegExpPatternDefinition"
           },
@@ -560,7 +560,7 @@
           "type": "boolean"
         },
         "words": {
-          "description": "list of words to be always considered correct",
+          "description": "List of words to be always considered correct.",
           "items": {
             "type": "string"
           },
@@ -576,7 +576,7 @@
       "type": "string"
     },
     "PatternId": {
-      "description": "This matches the name in a pattern definition",
+      "description": "This matches the name in a pattern definition.",
       "type": "string"
     },
     "PatternRef": {
@@ -645,7 +645,7 @@
               "type": "array"
             }
           ],
-          "description": "RegExp pattern or array of RegExp patterns"
+          "description": "RegExp pattern or array of RegExp patterns."
         }
       },
       "required": [
@@ -655,7 +655,7 @@
       "type": "object"
     },
     "RegExpPatternList": {
-      "description": "A list of pattern names or regular expressions",
+      "description": "A list of pattern names or regular expressions.",
       "items": {
         "$ref": "#/definitions/PatternRef"
       },
@@ -700,10 +700,10 @@
           "type": "array"
         }
       ],
-      "description": "reporter name or reporter name + reporter config"
+      "description": "Reporter name or reporter name + reporter config."
     },
     "SimpleGlob": {
-      "description": "Simple Glob string, the root will be globRoot",
+      "description": "Simple Glob string, the root will be globRoot.",
       "type": "string"
     },
     "Version": {
@@ -718,14 +718,14 @@
     },
     "VersionLatest": {
       "const": "0.2",
-      "description": "Configuration File Version",
+      "description": "Configuration File Version.",
       "type": "string"
     },
     "VersionLegacy": {
       "const": "0.1",
       "deprecated": true,
-      "deprecationMessage": "Use `0.2`",
-      "description": "Legacy Configuration File Versions",
+      "deprecationMessage": "Use `0.2` instead.",
+      "description": "Legacy Configuration File Versions.",
       "type": "string"
     }
   },
@@ -744,7 +744,7 @@
       "type": "boolean"
     },
     "description": {
-      "description": "Optional description of configuration",
+      "description": "Optional description of configuration.",
       "type": "string"
     },
     "dictionaries": {
@@ -755,7 +755,7 @@
       "type": "array"
     },
     "dictionaryDefinitions": {
-      "description": "Define additional available dictionaries",
+      "description": "Define additional available dictionaries.",
       "items": {
         "$ref": "#/definitions/DictionaryDefinition"
       },
@@ -778,7 +778,7 @@
     },
     "enabled": {
       "default": true,
-      "description": "Is the spell checker enabled",
+      "description": "Is the spell checker enabled.",
       "type": "boolean"
     },
     "enabledLanguageIds": {
@@ -796,7 +796,7 @@
       "type": "array"
     },
     "flagWords": {
-      "description": "list of words to always be considered incorrect.",
+      "description": "List of words to always be considered incorrect.",
       "items": {
         "type": "string"
       },
@@ -818,14 +818,14 @@
     },
     "globRoot": {
       "$ref": "#/definitions/FsPath",
-      "description": "The root to use for glop patterns found in this configuration. Default: location of the configuration file.   For compatibility reasons, config files with version 0.1, the glob root will   default to be `${cwd}`.\n\nUse `globRoot` to define a different location. `globRoot` can be relative to the location of this configuration file. Defining globRoot, does not impact imported configurations.\n\nSpecial Values:\n- `${cwd}` - will be replaced with the current working directory.\n- `.` - will be the location of the containing configuration file."
+      "description": "The root to use for glob patterns found in this configuration. Default: location of the configuration file.   For compatibility reasons, config files with version 0.1, the glob root will   default to be `${cwd}`.\n\nUse `globRoot` to define a different location. `globRoot` can be relative to the location of this configuration file. Defining globRoot, does not impact imported configurations.\n\nSpecial Values:\n- `${cwd}` - will be replaced with the current working directory.\n- `.` - will be the location of the containing configuration file."
     },
     "id": {
-      "description": "Optional identifier",
+      "description": "Optional identifier.",
       "type": "string"
     },
     "ignorePaths": {
-      "description": "Glob patterns of files to be ignored Glob patterns are relative to the `globRoot` of the configuration file that defines them.",
+      "description": "Glob patterns of files to be ignored. Glob patterns are relative to the `globRoot` of the configuration file that defines them.",
       "items": {
         "$ref": "#/definitions/Glob"
       },
@@ -833,7 +833,7 @@
     },
     "ignoreRegExpList": {
       "$ref": "#/definitions/RegExpPatternList",
-      "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href"
+      "description": "List of RegExp patterns or Pattern names to exclude from spell checking.\n\nExample: [\"href\"] - to exclude html href."
     },
     "ignoreWords": {
       "description": "List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`.",
@@ -854,7 +854,7 @@
           "type": "array"
         }
       ],
-      "description": "Other settings files to be included"
+      "description": "Other settings files to be included."
     },
     "includeRegExpList": {
       "$ref": "#/definitions/RegExpPatternList",
@@ -863,7 +863,7 @@
     "language": {
       "$ref": "#/definitions/LocaleId",
       "default": "en",
-      "description": "Current active spelling language.\n\nExample: \"en-GB\" for British English\n\nExample: \"en,nl\" to enable both English and Dutch"
+      "description": "Current active spelling language.\n\nExample: \"en-GB\" for British English.\n\nExample: \"en,nl\" to enable both English and Dutch."
     },
     "languageId": {
       "$ref": "#/definitions/LanguageId",
@@ -892,7 +892,7 @@
       "type": "number"
     },
     "name": {
-      "description": "Optional name of configuration",
+      "description": "Optional name of configuration.",
       "type": "string"
     },
     "noConfigSearch": {
@@ -909,7 +909,7 @@
     },
     "numSuggestions": {
       "default": 10,
-      "description": "Number of suggestions to make",
+      "description": "Number of suggestions to make.",
       "type": "number"
     },
     "overrides": {
@@ -920,7 +920,7 @@
       "type": "array"
     },
     "patterns": {
-      "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList",
+      "description": "Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList.",
       "items": {
         "$ref": "#/definitions/RegExpPatternDefinition"
       },
@@ -943,7 +943,7 @@
       "type": "boolean"
     },
     "reporters": {
-      "description": "Custom reporters configuration",
+      "description": "Custom reporters configuration.",
       "items": {
         "$ref": "#/definitions/ReporterSettings"
       },
@@ -951,7 +951,7 @@
     },
     "showStatus": {
       "deprecated": true,
-      "description": "Show status",
+      "description": "Show status.",
       "type": "boolean"
     },
     "spellCheckDelayMs": {
@@ -992,7 +992,7 @@
       "description": "Configuration format version of the settings file."
     },
     "words": {
-      "description": "list of words to be always considered correct",
+      "description": "List of words to be always considered correct.",
       "items": {
         "type": "string"
       },
