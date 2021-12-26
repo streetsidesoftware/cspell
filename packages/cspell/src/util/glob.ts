@@ -122,7 +122,7 @@ export function extractGlobExcludesFromConfig(root: string, source: string, conf
 
 /**
  * Build GlobMatcher from command line or config file globs.
- * @param globs Glob patterns.
+ * @param globs Glob patterns or file paths
  * @param root - directory to use as the root
  */
 export function buildGlobMatcher(globs: Glob[], root: string, isExclude: boolean): GlobMatcher {

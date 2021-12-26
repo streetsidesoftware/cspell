@@ -2,8 +2,8 @@ import chalk = require('chalk');
 import type { CSpellReporter, Issue, MessageType, ProgressItem, RunResult } from '@cspell/cspell-types';
 import { ImportError, isSpellingDictionaryLoadError, SpellingDictionaryLoadError } from 'cspell-lib';
 import * as path from 'path';
-import { Options } from './app';
 import { URI } from 'vscode-uri';
+import { LinterCliOptions } from './options';
 
 const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
 const templateIssueWithSuggestions = `{green $filename}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
@@ -79,7 +79,26 @@ function reportTime(elapsedTimeMs: number | undefined, cached: boolean): string 
     return color(elapsedTimeMs.toFixed(2) + 'ms');
 }
 
-export function getReporter(options: Options): CSpellReporter {
+export interface ReporterOptions
+    extends Pick<
+        LinterCliOptions,
+        | 'debug'
+        | 'issues'
+        | 'legacy'
+        | 'progress'
+        | 'relative'
+        | 'root'
+        | 'showContext'
+        | 'showSuggestions'
+        | 'silent'
+        | 'summary'
+        | 'verbose'
+        | 'wordsOnly'
+    > {
+    fileGlobs: string[];
+}
+
+export function getReporter(options: ReporterOptions): CSpellReporter {
     const issueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
         : options.legacy
@@ -91,7 +110,7 @@ export function getReporter(options: Options): CSpellReporter {
         : options.showSuggestions
         ? templateIssueWithSuggestions
         : templateIssue;
-    const { files, silent, summary, issues, progress, verbose, debug } = options;
+    const { fileGlobs, silent, summary, issues, progress, verbose, debug } = options;
 
     const emitters: InfoEmitter = {
         Debug: !silent && debug ? (s) => console.info(chalk.cyan(s)) : nullEmitter,
@@ -117,7 +136,7 @@ export function getReporter(options: Options): CSpellReporter {
     }
 
     const resultEmitter = (result: RunResult) => {
-        if (!files.length && !result.files) {
+        if (!fileGlobs.length && !result.files) {
             return;
         }
         console.error(

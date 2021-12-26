@@ -22,6 +22,7 @@ import { LintRequest } from './LintRequest';
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     let { reporter } = cfg;
+    const { fileLists } = cfg;
     cspell.setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
 
@@ -189,7 +190,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const gitignoreRoots = cfg.options.gitignoreRoot ?? configInfo.config.gitignoreRoot;
         const gitIgnore = useGitignore ? await generateGitIgnore(gitignoreRoots) : undefined;
 
-        const cliGlobs: Glob[] = cfg.files;
+        const cliGlobs: Glob[] = cfg.fileGlobs;
         const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
         const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
         const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob);
@@ -197,7 +198,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
         const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
         const fileGlobs: string[] = includeGlobs;
-        if (!fileGlobs.length) {
+        if (!fileGlobs.length && !fileLists.length) {
             // Nothing to do.
             return runResult();
         }

@@ -11,8 +11,8 @@ export type { TraceResult } from 'cspell-lib';
 
 export type AppError = NodeJS.ErrnoException;
 
-export function lint(files: string[], options: LinterOptions, emitters: CSpellReporter): Promise<RunResult> {
-    const cfg = new LintRequest(files, options, emitters);
+export function lint(fileGlobs: string[], options: LinterOptions, emitters: CSpellReporter): Promise<RunResult> {
+    const cfg = new LintRequest(fileGlobs, options, emitters);
     return runLint(cfg);
 }
 

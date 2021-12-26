@@ -51,6 +51,12 @@ export interface LinterOptions extends BaseOptions, CacheOptions {
      * Stop searching for a `.gitignore`s when a root is reached.
      */
     gitignoreRoot?: string | string[];
+    /**
+     * List of files that contains the paths to files to be spell checked.
+     * The files in the lists will be filtered against the glob patterns.
+     * - an entry of `stdin` means to read the file list from **`stdin`**
+     */
+    fileLists?: string[] | undefined;
 }
 
 export interface TraceOptions extends BaseOptions {
@@ -63,4 +69,21 @@ export interface BaseOptions {
     languageId?: string;
     locale?: string;
     local?: string; // deprecated
+}
+
+export interface LinterCliOptions extends Omit<LinterOptions, 'fileLists'> {
+    legacy?: boolean;
+    summary: boolean;
+    issues: boolean;
+    silent: boolean;
+    mustFindFiles: boolean;
+    progress?: boolean;
+    /**
+     * issues are shown with a relative path to the root or `cwd`
+     */
+    relative?: boolean;
+    /**
+     * List of file paths to files that contains a list of files to be spell checked.
+     */
+    fileList?: string[];
 }
