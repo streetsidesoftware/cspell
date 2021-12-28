@@ -117,3 +117,40 @@ export function calcFinalConfigInfo(
         languageIds,
     };
 }
+
+/**
+ * Read
+ * @param listFiles - array of file paths to read that will contain a list of files. Paths contained in each
+ *   file will be resolved relative to the containing file.
+ * @returns - a list of files to be processed.
+ */
+export async function readFileListFiles(listFiles: string[]): Promise<string[]> {
+    return flatten(await Promise.all(listFiles.map(readFileListFile)));
+}
+
+/**
+ * Read a `listFile` and return the containing file paths resolved relative to the `listFile`.
+ * @param listFiles - array of file paths to read that will contain a list of files. Paths contained in each
+ *   file will be resolved relative to the containing file.
+ * @returns - a list of files to be processed.
+ */
+export async function readFileListFile(listFile: string): Promise<string[]> {
+    const relTo = path.resolve(path.dirname(listFile));
+    const content = await readFile(listFile);
+    const lines = content
+        .split('\n')
+        .map((a) => a.trim())
+        .filter((a) => !!a)
+        .map((file) => path.resolve(relTo, file));
+    return lines;
+}
+
+function flatten(fileLists: string[][]): string[] {
+    function* f() {
+        for (const list of fileLists) {
+            yield* list;
+        }
+    }
+
+    return [...f()];
+}

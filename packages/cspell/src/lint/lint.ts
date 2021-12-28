@@ -2,14 +2,22 @@ import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocume
 import { MessageTypes } from '@cspell/cspell-types';
 import * as commentJson from 'comment-json';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
-import type { GlobMatcher, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
+import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
 import type { ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { Logger } from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
-import { ConfigInfo, fileInfoToDocument, FileResult, findFiles, readConfig, readFileInfo } from '../fileHelper';
+import {
+    ConfigInfo,
+    fileInfoToDocument,
+    FileResult,
+    findFiles,
+    readConfig,
+    readFileInfo,
+    readFileListFiles,
+} from '../fileHelper';
 import type { CSpellLintResultCache } from '../util/cache';
 import { createCache } from '../util/cache';
 import { toError } from '../util/errors';
@@ -198,7 +206,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
         const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
         const fileGlobs: string[] = includeGlobs;
-        if (!fileGlobs.length && !fileLists.length) {
+        const hasFileLists = !!fileLists.length;
+        if (!fileGlobs.length && !hasFileLists) {
             // Nothing to do.
             return runResult();
         }
@@ -226,7 +235,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             globOptions.dot = enableGlobDot;
         }
 
-        const foundFiles = await findFiles(fileGlobs, globOptions);
+        const foundFiles = await (hasFileLists
+            ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
+            : findFiles(fileGlobs, globOptions));
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
         const files = filterFiles(filtered, globMatcher);
 
@@ -252,13 +263,13 @@ Options:
         );
     }
 
-    function isExcluded(filename: string, globMatcher: GlobMatcher) {
+    function isExcluded(filename: string, globMatcherExclude: GlobMatcher) {
         if (cspell.isBinaryFile(URI.file(filename))) {
             return true;
         }
         const { root } = cfg;
         const absFilename = path.resolve(root, filename);
-        const r = globMatcher.matchEx(absFilename);
+        const r = globMatcherExclude.matchEx(absFilename);
 
         if (r.matched) {
             const { glob, source } = extractGlobSource(r.pattern);
@@ -279,14 +290,14 @@ Options:
         };
     }
 
-    function filterFiles(files: string[], globMatcher: GlobMatcher): string[] {
-        const patterns = globMatcher.patterns;
+    function filterFiles(files: string[], globMatcherExclude: GlobMatcher): string[] {
+        const patterns = globMatcherExclude.patterns;
         const excludeInfo = patterns
             .map(extractGlobSource)
             .map(({ glob, source }) => `Glob: ${glob} from ${source}`)
             .filter(util.uniqueFn());
         reporter.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
-        const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, globMatcher));
+        const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, globMatcherExclude));
         return result;
     }
 }
@@ -368,4 +379,22 @@ async function generateGitIgnore(roots: string | string[] | undefined) {
         root.push(repo);
     }
     return new GitIgnore(root?.map((p) => path.resolve(p)));
+}
+
+async function useFileLists(
+    fileListFiles: string[],
+    includeGlobPatterns: Glob[],
+    root: string,
+    dot: boolean | undefined
+): Promise<string[]> {
+    includeGlobPatterns = includeGlobPatterns.length ? includeGlobPatterns : ['**'];
+    const options: GlobMatchOptions = { root, mode: 'include' };
+    if (dot !== undefined) {
+        options.dot = dot;
+    }
+    const globMatcher = new GlobMatcher(includeGlobPatterns, options);
+
+    const files = await readFileListFiles(fileListFiles);
+
+    return files.filter((file) => globMatcher.match(file));
 }
