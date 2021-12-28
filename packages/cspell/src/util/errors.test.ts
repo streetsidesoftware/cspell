@@ -1,4 +1,4 @@
-import { CheckFailed, ApplicationError, toError, isError } from './errors';
+import { CheckFailed, ApplicationError, toError, isError, toApplicationError } from './errors';
 
 describe('errors', () => {
     test.each`
@@ -35,5 +35,16 @@ describe('errors', () => {
         ${{}}                                | ${{ name: 'error', message: '{}' }}
     `('toError $error', ({ error, expected }) => {
         expect(toError(error)).toEqual(expected);
+    });
+
+    test.each`
+        error                                | expected
+        ${new CheckFailed('CheckFailed')}    | ${new Error('CheckFailed')}
+        ${new ApplicationError('App Error')} | ${new Error('App Error')}
+        ${{ message: 'msg', name: 'error' }} | ${new Error('msg')}
+        ${'hello'}                           | ${new Error('hello')}
+        ${{}}                                | ${new Error('{}')}
+    `('toError $error', ({ error, expected }) => {
+        expect(toApplicationError(error)).toEqual(expected);
     });
 });

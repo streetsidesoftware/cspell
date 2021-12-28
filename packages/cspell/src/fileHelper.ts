@@ -4,6 +4,7 @@ import getStdin from 'get-stdin';
 import { GlobOptions, globP } from './util/glob';
 import * as path from 'path';
 import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
+import { toApplicationError } from './util/errors';
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
@@ -70,10 +71,7 @@ export function readFileInfo(filename: string, encoding: string = UTF8): Promise
         (error) => {
             return error.code === 'EISDIR'
                 ? Promise.resolve({ text: '', filename })
-                : Promise.reject({
-                      ...error,
-                      message: `Error reading file: "${filename}"`,
-                  });
+                : Promise.reject(toApplicationError(error, `Error reading file: "${filename}"`));
         }
     );
 }

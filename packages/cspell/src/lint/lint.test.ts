@@ -40,6 +40,7 @@ describe('Linter Validation Tests', () => {
         ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck] }}        | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, issues: [] })}
         ${['**/*.md']}      | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck] }}        | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
         ${['**/*.ts']}      | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck] }}        | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: ['missing-file.txt'] }}  | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));

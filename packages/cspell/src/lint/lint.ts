@@ -20,7 +20,7 @@ import {
 } from '../fileHelper';
 import type { CSpellLintResultCache } from '../util/cache';
 import { createCache } from '../util/cache';
-import { toError } from '../util/errors';
+import { toApplicationError, toError } from '../util/errors';
 import type { GlobOptions } from '../util/glob';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from '../util/glob';
 import { loadReporters, mergeReporters } from '../util/reporters';
@@ -235,13 +235,19 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             globOptions.dot = enableGlobDot;
         }
 
-        const foundFiles = await (hasFileLists
-            ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
-            : findFiles(fileGlobs, globOptions));
-        const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
-        const files = filterFiles(filtered, globMatcher);
+        try {
+            const foundFiles = await (hasFileLists
+                ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
+                : findFiles(fileGlobs, globOptions));
+            const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
+            const files = filterFiles(filtered, globMatcher);
 
-        return processFiles(files, configInfo, files.length);
+            return await processFiles(files, configInfo, files.length);
+        } catch (e) {
+            const err = toApplicationError(e);
+            reporter.error('Linter', err);
+            return runResult({ errors: 1 });
+        }
     }
 
     function header(files: string[], cliExcludes: string[]) {

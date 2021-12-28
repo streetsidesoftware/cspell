@@ -6,7 +6,7 @@ export class CheckFailed extends Error {
 }
 
 export class ApplicationError extends Error {
-    constructor(message: string, readonly exitCode: number = 1) {
+    constructor(message: string, readonly exitCode: number = 1, readonly cause?: Error) {
         super(message);
     }
 }
@@ -23,5 +23,11 @@ export function isError(e: unknown): e is Error {
     if (e instanceof Error) return true;
     if (!e || typeof e !== 'object') return false;
     const ex = <Error>e;
-    return typeof ex.name === 'string' && typeof ex.message === 'string';
+    return typeof ex.message === 'string';
+}
+
+export function toApplicationError(e: unknown, message?: string): ApplicationError {
+    if (e instanceof ApplicationError) return e;
+    const err = toError(e);
+    return new ApplicationError(message ?? err.message, undefined, err);
 }
