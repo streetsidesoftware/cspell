@@ -13,8 +13,12 @@ describe('fileHelper', () => {
             const files = ['a', 'b', 'c'];
             process.stdin.isTTY = false;
             const pResult = readFileListFile('stdin');
-            process.stdin.push(files.join('\n'));
-            process.stdin.emit('end');
+            process.nextTick(() => {
+                process.stdin.push(files.join('\n'));
+                process.nextTick(() => {
+                    process.stdin.emit('end');
+                });
+            });
             const r = await pResult;
             expect(r).toEqual(files.map((f) => path.resolve(f)));
         } finally {
