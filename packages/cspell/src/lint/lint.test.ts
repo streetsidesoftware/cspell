@@ -44,6 +44,7 @@ describe('Linter Validation Tests', () => {
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));
+        expect(report(reporter)).toEqual(expectedReport);
         expect(runResult).toEqual(expectedRunResult);
         expect(runResult).toEqual(reporter.runResult);
         expect(report(reporter)).toEqual(expectedReport);
