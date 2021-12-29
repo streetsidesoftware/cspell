@@ -1,2 +1,15 @@
 tasks:
-  - init: npm install && npm run build
+  - init: npm install
+    command: npm run build
+vscode:
+  extensions:
+    - streetsidesoftware.code-spell-checker
+github:
+  prebuilds:
+    master: true
+    branches: false
+    pullRequests: false
+    pullRequestsFromForks: false
+    addCheck: false
+    addComment: false
+    addBadge: false
