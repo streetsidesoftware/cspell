@@ -31,7 +31,7 @@ BaseSource.fileSource
 
 #### Defined in
 
-[CSpellSettingsDef.ts:729](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L729)
+[CSpellSettingsDef.ts:737](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L737)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • `Optional` **filename**: `undefined`
 
-filename if this came from a file.
+Filename if this came from a file.
 
 #### Overrides
 
@@ -47,7 +47,7 @@ BaseSource.filename
 
 #### Defined in
 
-[CSpellSettingsDef.ts:725](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L725)
+[CSpellSettingsDef.ts:733](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L733)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • **name**: `string`
 
-name of source
+Name of source.
 
 #### Overrides
 
@@ -63,7 +63,7 @@ BaseSource.name
 
 #### Defined in
 
-[CSpellSettingsDef.ts:723](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L723)
+[CSpellSettingsDef.ts:731](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L731)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • `Optional` **sources**: `undefined`
 
-The two settings that were merged to
+The two settings that were merged to.
 
 #### Overrides
 
@@ -79,4 +79,4 @@ BaseSource.sources
 
 #### Defined in
 
-[CSpellSettingsDef.ts:727](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L727)
+[CSpellSettingsDef.ts:735](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L735)

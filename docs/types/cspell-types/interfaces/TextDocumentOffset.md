@@ -28,7 +28,7 @@
 
 #### Defined in
 
-[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/TextOffset.ts#L10)
+[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/TextOffset.ts#L10)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:8](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/TextOffset.ts#L8)
+[TextOffset.ts:8](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/TextOffset.ts#L8)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:11](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/TextOffset.ts#L11)
+[TextOffset.ts:11](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/TextOffset.ts#L11)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:3](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/TextOffset.ts#L3)
+[TextOffset.ts:3](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/TextOffset.ts#L3)
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:9](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/TextOffset.ts#L9)
+[TextOffset.ts:9](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/TextOffset.ts#L9)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:2](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/TextOffset.ts#L2)
+[TextOffset.ts:2](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/TextOffset.ts#L2)
 
 ___
 
@@ -96,4 +96,4 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:7](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/TextOffset.ts#L7)
+[TextOffset.ts:7](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/TextOffset.ts#L7)

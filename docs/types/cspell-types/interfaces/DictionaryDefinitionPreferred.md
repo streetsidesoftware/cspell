@@ -28,7 +28,7 @@
 
 • `Optional` **description**: `string`
 
-Optional description
+Optional description.
 
 #### Inherited from
 
@@ -36,7 +36,7 @@ Optional description
 
 #### Defined in
 
-[CSpellSettingsDef.ts:373](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L373)
+[CSpellSettingsDef.ts:381](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L381)
 
 ___
 
@@ -48,10 +48,10 @@ This is the name of a dictionary.
 
 Name Format:
 - Must contain at least 1 number or letter.
-- spaces are allowed.
+- Spaces are allowed.
 - Leading and trailing space will be removed.
-- Names ARE case-sensitive
-- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
 
 #### Inherited from
 
@@ -59,7 +59,7 @@ Name Format:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:371](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L371)
+[CSpellSettingsDef.ts:379](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L379)
 
 ___
 
@@ -81,7 +81,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:387](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L387)
+[CSpellSettingsDef.ts:395](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L395)
 
 ___
 
@@ -89,11 +89,11 @@ ___
 
 • **path**: `string`
 
-Path to the file
+Path to the file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:402](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L402)
+[CSpellSettingsDef.ts:410](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L410)
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 • `Optional` **repMap**: [`ReplaceMap`](../modules.md#replacemap)
 
-Replacement pairs
+Replacement pairs.
 
 #### Inherited from
 
@@ -109,7 +109,7 @@ Replacement pairs
 
 #### Defined in
 
-[CSpellSettingsDef.ts:375](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L375)
+[CSpellSettingsDef.ts:383](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L383)
 
 ___
 
@@ -120,8 +120,8 @@ ___
 Type of file:
 S - single word per line,
 W - each line can contain one or more words separated by space,
-C - each line is treated like code (Camel Case is allowed)
-Default is S
+C - each line is treated like code (Camel Case is allowed).
+Default is S.
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
 **`default`** "S"
@@ -132,7 +132,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[CSpellSettingsDef.ts:397](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L397)
+[CSpellSettingsDef.ts:405](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L405)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 • `Optional` **useCompounds**: `boolean`
 
-Use Compounds
+Use Compounds.
 
 #### Inherited from
 
@@ -148,4 +148,4 @@ Use Compounds
 
 #### Defined in
 
-[CSpellSettingsDef.ts:377](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L377)
+[CSpellSettingsDef.ts:385](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L385)

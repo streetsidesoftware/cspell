@@ -24,13 +24,13 @@ This will also prevent any associated plugins from being loaded.
 
 • `Optional` **trustLevel**: [`TrustLevel`](../modules.md#trustlevel)
 
-Sets the default trust level
+Sets the default trust level.
 
 **`default`** "trusted"
 
 #### Defined in
 
-[CSpellSettingsDef.ts:235](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L235)
+[CSpellSettingsDef.ts:243](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L243)
 
 ___
 
@@ -38,11 +38,11 @@ ___
 
 • `Optional` **trustedFiles**: [`Glob`](../modules.md#glob)[]
 
-Glob patterns of locations that contain ALWAYS trusted files
+Glob patterns of locations that contain ALWAYS trusted files.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:224](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L224)
+[CSpellSettingsDef.ts:232](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L232)
 
 ___
 
@@ -50,8 +50,8 @@ ___
 
 • `Optional` **untrustedFiles**: [`Glob`](../modules.md#glob)[]
 
-Glob patterns of locations that contain NEVER trusted files
+Glob patterns of locations that contain NEVER trusted files.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:229](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L229)
+[CSpellSettingsDef.ts:237](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L237)

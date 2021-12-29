@@ -26,4 +26,4 @@
 
 #### Defined in
 
-[CSpellReporter.ts:70](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L70)
+[CSpellReporter.ts:70](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L70)
