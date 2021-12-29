@@ -56,6 +56,12 @@ cspell lint "src/**/*.js"
 cspell "**"
 ```
 
+**Git: Check Only Changed Files**
+
+```sh
+ git diff --name-only | npx cspell --file-list stdin
+```
+
 ## Command: `lint` -- Spell Checking
 
 The `lint` command is used for spell checking files.
