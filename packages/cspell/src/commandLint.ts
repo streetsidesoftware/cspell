@@ -33,7 +33,7 @@ export function commandLint(prog: Command): Command {
             '-c, --config <cspell.json>',
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
         )
-        .option('-v, --verbose', 'display more information about the files being checked and the configuration')
+        .option('-v, --verbose', 'Display more information about the files being checked and the configuration.')
         .option(
             '--locale <locale>',
             'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.'
@@ -64,33 +64,33 @@ export function commandLint(prog: Command): Command {
         )
         .option('--no-issues', 'Do not show the spelling errors.')
         .option('--no-progress', 'Turn off progress messages')
-        .option('--no-summary', 'Turn off summary message in console')
-        .option('-s, --silent', 'Silent mode, suppress error messages')
+        .option('--no-summary', 'Turn off summary message in console.')
+        .option('-s, --silent', 'Silent mode, suppress error messages.')
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
         .option('--relative', 'Issues are displayed relative to root.')
         .option('--show-context', 'Show the surrounding text around an issue.')
         .option('--show-suggestions', 'Show spelling suggestions.')
-        .addOption(new CommanderOption('--must-find-files', 'Error if no files are found').default(true).hideHelp())
-        .option('--no-must-find-files', 'Do not error if no files are found')
+        .addOption(new CommanderOption('--must-find-files', 'Error if no files are found.').default(true).hideHelp())
+        .option('--no-must-find-files', 'Do not error if no files are found.')
         // The following options are planned features
         // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
         // .option('--force', 'Force the exit value to always be 0')
         .addOption(new CommanderOption('--legacy', 'Legacy output').hideHelp())
         .addOption(new CommanderOption('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
-        .option('--cache', 'Only check changed files', false)
+        .option('--cache', 'Only check changed files.', false)
         .addOption(
-            new CommanderOption('--cache-strategy <strategy>', 'Strategy to use for detecting changed files').choices([
+            new CommanderOption('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
                 'metadata',
                 'content',
             ])
         )
-        .option('--cache-location <path>', `Path to the cache file or directory`, DEFAULT_CACHE_LOCATION)
+        .option('--cache-location <path>', `Path to the cache file or directory.`, DEFAULT_CACHE_LOCATION)
         .option('--dot', 'Include files and directories starting with `.` (period) when matching globs.')
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
         .option('--no-gitignore', 'Do NOT use .gitignore files.')
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
         .option('--no-color', 'Turn off color.')
-        .option('--color', 'Force color')
+        .option('--color', 'Force color.')
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .addHelpText('after', usage)
         .arguments('[globs...]')
