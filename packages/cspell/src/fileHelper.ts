@@ -4,6 +4,7 @@ import getStdin from 'get-stdin';
 import { GlobOptions, globP } from './util/glob';
 import * as path from 'path';
 import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
+import { toApplicationError } from './util/errors';
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
@@ -70,10 +71,7 @@ export function readFileInfo(filename: string, encoding: string = UTF8): Promise
         (error) => {
             return error.code === 'EISDIR'
                 ? Promise.resolve({ text: '', filename })
-                : Promise.reject({
-                      ...error,
-                      message: `Error reading file: "${filename}"`,
-                  });
+                : Promise.reject(toApplicationError(error, `Error reading file: "${filename}"`));
         }
     );
 }
@@ -116,4 +114,41 @@ export function calcFinalConfigInfo(
         text,
         languageIds,
     };
+}
+
+/**
+ * Read
+ * @param listFiles - array of file paths to read that will contain a list of files. Paths contained in each
+ *   file will be resolved relative to the containing file.
+ * @returns - a list of files to be processed.
+ */
+export async function readFileListFiles(listFiles: string[]): Promise<string[]> {
+    return flatten(await Promise.all(listFiles.map(readFileListFile)));
+}
+
+/**
+ * Read a `listFile` and return the containing file paths resolved relative to the `listFile`.
+ * @param listFiles - array of file paths to read that will contain a list of files. Paths contained in each
+ *   file will be resolved relative to the containing file.
+ * @returns - a list of files to be processed.
+ */
+export async function readFileListFile(listFile: string): Promise<string[]> {
+    const relTo = path.resolve(path.dirname(listFile));
+    const content = await readFile(listFile);
+    const lines = content
+        .split('\n')
+        .map((a) => a.trim())
+        .filter((a) => !!a)
+        .map((file) => path.resolve(relTo, file));
+    return lines;
+}
+
+function flatten(fileLists: string[][]): string[] {
+    function* f() {
+        for (const list of fileLists) {
+            yield* list;
+        }
+    }
+
+    return [...f()];
 }

@@ -1,23 +1,10 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { getReporter } from './cli-reporter';
-import { LinterOptions } from './options';
+import { LinterCliOptions, LinterOptions } from './options';
 import { DEFAULT_CACHE_LOCATION } from './util/cache';
 import { CheckFailed } from './util/errors';
 
-export interface LinterCliOptions extends LinterOptions {
-    files: string[];
-    legacy?: boolean;
-    summary: boolean;
-    issues: boolean;
-    silent: boolean;
-    mustFindFiles: boolean;
-    progress?: boolean;
-    /**
-     * issues are shown with a relative path to the root or `cwd`
-     */
-    relative?: boolean;
-}
 // interface InitOptions extends Options {}
 
 const usage = `
@@ -63,10 +50,16 @@ export function commandLint(prog: Command): Command {
             new CommanderOption('--wordsOnly', 'Only output the words not found in the dictionaries.').hideHelp()
         )
         .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
-        .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option(
             '-e, --exclude <glob>',
             'Exclude files matching the glob pattern. This option can be used multiple times to add multiple globs. ',
+            collect
+        )
+        .option(
+            '--file-list <path or stdin>',
+            'Specify a list of files to be spell checked.' +
+                ' The list is filtered against the glob file patterns.' +
+                ' Note: the format is 1 file path per line.',
             collect
         )
         .option('--no-issues', 'Do not show the spelling errors.')
@@ -82,7 +75,7 @@ export function commandLint(prog: Command): Command {
         // The following options are planned features
         // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
         // .option('--force', 'Force the exit value to always be 0')
-        .option('--legacy', 'Legacy output')
+        .addOption(new CommanderOption('--legacy', 'Legacy output').hideHelp())
         .addOption(new CommanderOption('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
         .option('--cache', 'Only check changed files', false)
         .addOption(
@@ -98,14 +91,15 @@ export function commandLint(prog: Command): Command {
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
+        .option('--debug', 'Output information useful for debugging cspell.json files.')
         .addHelpText('after', usage)
-        .arguments('[files...]')
-        .action((files: string[], options: LinterCliOptions) => {
-            options.files = files;
-            const { mustFindFiles } = options;
-            const cliReporter = getReporter(options);
-            return App.lint(files, options, cliReporter).then((result) => {
-                if (!files.length && !result.files) {
+        .arguments('[globs...]')
+        .action((fileGlobs: string[], options: LinterCliOptions) => {
+            const { mustFindFiles, fileList } = options;
+            const cliReporter = getReporter({ ...options, fileGlobs });
+            const lintOptions: LinterOptions = { ...options, fileLists: fileList };
+            return App.lint(fileGlobs, lintOptions, cliReporter).then((result) => {
+                if (!fileGlobs.length && !result.files && !result.errors) {
                     spellCheckCommand.outputHelp();
                     throw new CheckFailed('outputHelp', 1);
                 }

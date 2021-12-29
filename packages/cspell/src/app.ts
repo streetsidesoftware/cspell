@@ -9,7 +9,7 @@ import { ApplicationError } from './util/errors';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
-export { LinterCliOptions as Options } from './commandLint';
+export { LinterCliOptions as Options } from './options';
 export { CheckFailed } from './util/errors';
 
 export async function run(program?: commander.Command, argv?: string[]): Promise<void> {
