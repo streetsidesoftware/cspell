@@ -27,7 +27,7 @@ export function isError(e: unknown): e is Error {
 }
 
 export function toApplicationError(e: unknown, message?: string): ApplicationError {
-    if (e instanceof ApplicationError) return e;
+    if (e instanceof ApplicationError && !message) return e;
     const err = toError(e);
     return new ApplicationError(message ?? err.message, undefined, err);
 }

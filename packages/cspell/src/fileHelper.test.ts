@@ -31,6 +31,6 @@ describe('fileHelper', () => {
 
     test('readFileListFiles Error', () => {
         const r = readFileListFiles(['not-found.txt']);
-        return expect(r).rejects.toEqual(oc({ message: 'Error reading file: "not-found.txt"' }));
+        return expect(r).rejects.toEqual(oc({ message: 'Error reading file list from: "not-found.txt"' }));
     });
 });
