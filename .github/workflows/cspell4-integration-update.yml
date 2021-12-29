@@ -1,20 +1,9 @@
-name: CSpell 4 - Update Dependencies
+name: CSpell 4 - Integration Update Snapshots
 
 on:
-  push:
-    branches:
-      - cspell4
-    paths:
-      - "**/package.json"
-      - "**/package-lock.json"
   workflow_dispatch:
-    inputs:
-      updateSnapshots:
-        description: "Update Integration Test snapshots (yes/no)"
-        default: "yes"
-        required: false
   schedule:
-    - cron: "0 12 * * 0"
+    - cron: "0 9 * * 0"
 
 jobs:
   update-dependencies:
@@ -35,18 +24,9 @@ jobs:
         uses: actions/setup-node@v2.5.1
         with:
           cache: npm
-      - name: Update Root
-        run: |
-          npm i
-          npx npm-check-updates -t minor -u
-          rm -rf node_modules package-lock.json
       - name: Install
         run: npm install
-      - name: Update packages
-        run: |
-          npm run update-packages
       - name: Update Integration Test Snapshots
-        if: github.event.inputs.updateSnapshots == 'yes'
         run: |
           npm run update-snapshots
       - name: Has changes
@@ -70,10 +50,10 @@ jobs:
         if: env.git_status == 'dirty'
         uses: peter-evans/create-pull-request@v3.12.0
         with:
-          commit-message: "ci: Workflow Bot -- Update ALL Dependencies"
+          commit-message: "ci: Workflow Bot -- Update Integration Snapshots"
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
-          title: "ci: Workflow Bot -- CSpell 4 - Update ALL Dependencies (${{ env.REF_BRANCH }})"
+          title: "ci: Workflow Bot -- CSpell4 - Integration Update Snapshots (${{ env.REF_BRANCH }})"
           token: ${{ steps.generate-token.outputs.token }}
           body: ${{ env.git_body }}
           delete-branch: true
