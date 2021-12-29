@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.14.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.13.4...v5.14.0-alpha.0) (2021-12-29)
+
+
+### Bug Fixes
+
+* Upgrade HTML dictionary ([#2131](https://github.com/streetsidesoftware/cspell/issues/2131)) ([874ac37](https://github.com/streetsidesoftware/cspell/commit/874ac37ba84d8637d203de4faf77f4496d313b6a))
+
+
+
+
+
 ## [5.13.4](https://github.com/streetsidesoftware/cspell/compare/v5.13.3...v5.13.4) (2021-12-18)
 
 **Note:** Version bump only for package @cspell/cspell-bundled-dicts
