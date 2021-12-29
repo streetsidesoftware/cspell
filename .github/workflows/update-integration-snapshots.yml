@@ -57,10 +57,10 @@ jobs:
         if: env.git_status == 'dirty'
         uses: peter-evans/create-pull-request@v3.12.0
         with:
-          commit-message: "ci: Workflow Bot -- Update ALL Dependencies"
+          commit-message: "ci: Workflow Bot -- Update Integration Snapshots"
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
-          title: "ci: Workflow Bot -- Update ALL Dependencies (${{ env.REF_BRANCH }})"
+          title: "ci: Workflow Bot -- Update Integration Snapshots (${{ env.REF_BRANCH }})"
           token: ${{ steps.generate-token.outputs.token }}
           body: ${{ env.git_body }}
           delete-branch: true
