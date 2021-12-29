@@ -200,8 +200,7 @@ npm install -SD cspell
 ```
 #!/bin/sh
 
-files=$(git diff --cached --name-only)
-exec npx cspell -- --no-summary $files
+exec git diff --cached --name-only | npx cspell -- --no-summary --no-progress --no-must-find-files --file-list stdin
 ```
 
 ## Requirements

@@ -133,14 +133,18 @@ export async function readFileListFiles(listFiles: string[]): Promise<string[]> 
  * @returns - a list of files to be processed.
  */
 export async function readFileListFile(listFile: string): Promise<string[]> {
-    const relTo = path.resolve(path.dirname(listFile));
-    const content = await readFile(listFile);
-    const lines = content
-        .split('\n')
-        .map((a) => a.trim())
-        .filter((a) => !!a)
-        .map((file) => path.resolve(relTo, file));
-    return lines;
+    try {
+        const relTo = path.resolve(path.dirname(listFile));
+        const content = await readFile(listFile);
+        const lines = content
+            .split('\n')
+            .map((a) => a.trim())
+            .filter((a) => !!a)
+            .map((file) => path.resolve(relTo, file));
+        return lines;
+    } catch (err) {
+        throw toApplicationError(err, `Error reading file list from: "${listFile}"`);
+    }
 }
 
 function flatten(fileLists: string[][]): string[] {
