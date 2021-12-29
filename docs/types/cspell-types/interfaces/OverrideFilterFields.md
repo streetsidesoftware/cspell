@@ -20,8 +20,8 @@
 
 • **filename**: [`Glob`](../modules.md#glob) \| [`Glob`](../modules.md#glob)[]
 
-Glob pattern or patterns to match against
+Glob pattern or patterns to match against.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:268](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L268)
+[CSpellSettingsDef.ts:276](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L276)

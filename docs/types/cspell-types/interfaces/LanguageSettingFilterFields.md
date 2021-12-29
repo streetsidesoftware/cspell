@@ -26,7 +26,7 @@
 
 • **languageId**: `string` \| `string`[]
 
-The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages
+The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.
 
 #### Inherited from
 
@@ -34,7 +34,7 @@ The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all lan
 
 #### Defined in
 
-[CSpellSettingsDef.ts:491](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L491)
+[CSpellSettingsDef.ts:499](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L499)
 
 ___
 
@@ -46,7 +46,7 @@ Deprecated - The locale filter, matches against the language. This can be a comm
 
 **`deprecated`** true
 
-**`deprecationmessage`** Use `locale` instead
+**`deprecationmessage`** Use `locale` instead.
 
 #### Inherited from
 
@@ -54,7 +54,7 @@ Deprecated - The locale filter, matches against the language. This can be a comm
 
 #### Defined in
 
-[CSpellSettingsDef.ts:504](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L504)
+[CSpellSettingsDef.ts:512](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L512)
 
 ___
 
@@ -70,4 +70,4 @@ The locale filter, matches against the language. This can be a comma separated l
 
 #### Defined in
 
-[CSpellSettingsDef.ts:493](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L493)
+[CSpellSettingsDef.ts:501](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L501)

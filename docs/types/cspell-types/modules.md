@@ -102,7 +102,7 @@ These settings come from user and workspace settings.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:7](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L7)
+[CSpellSettingsDef.ts:7](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L7)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:9](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L9)
+[CSpellSettingsDef.ts:9](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L9)
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:694](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L694)
+[CSpellSettingsDef.ts:702](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L702)
 
 ___
 
@@ -136,7 +136,7 @@ A File System Path to a dictionary file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:676](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L676)
+[CSpellSettingsDef.ts:684](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L684)
 
 ___
 
@@ -148,7 +148,7 @@ Specifies the scope of a dictionary.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:458](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L458)
+[CSpellSettingsDef.ts:466](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L466)
 
 ___
 
@@ -172,7 +172,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:24](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L24)
+[CSpellReporter.ts:24](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L24)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:354](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L354)
+[CSpellSettingsDef.ts:362](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L362)
 
 ___
 
@@ -192,7 +192,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:352](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L352)
+[CSpellSettingsDef.ts:360](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L360)
 
 ___
 
@@ -204,16 +204,16 @@ This is the name of a dictionary.
 
 Name Format:
 - Must contain at least 1 number or letter.
-- spaces are allowed.
+- Spaces are allowed.
 - Leading and trailing space will be removed.
-- Names ARE case-sensitive
-- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
 
 **`pattern`** ^(?=[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
 
 #### Defined in
 
-[CSpellSettingsDef.ts:559](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L559)
+[CSpellSettingsDef.ts:567](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L567)
 
 ___
 
@@ -226,17 +226,17 @@ This a negative reference to a named dictionary.
 It is used to exclude or include a dictionary by name.
 
 The reference starts with 1 or more `!`.
-- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`
-- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`
+- `!<dictionary_name>` - Used to exclude the dictionary matching `<dictionary_name>`.
+- `!!<dictionary_name>` - Used to re-include a dictionary matching `<dictionary_name>`.
    Overrides `!<dictionary_name>`.
-- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`
+- `!!!<dictionary_name>` - Used to exclude a dictionary matching `<dictionary_name>`.
    Overrides `!!<dictionary_name>`.
 
 **`pattern`** ^(?=!+[^!*,;{}[\]~\n]+$)(?=(.*\w)).+$
 
 #### Defined in
 
-[CSpellSettingsDef.ts:581](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L581)
+[CSpellSettingsDef.ts:589](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L589)
 
 ___
 
@@ -250,7 +250,7 @@ A File System Path to a dictionary file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:670](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L670)
+[CSpellSettingsDef.ts:678](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L678)
 
 ___
 
@@ -263,7 +263,7 @@ It is expected to match the name of a dictionary.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:565](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L565)
+[CSpellSettingsDef.ts:573](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L573)
 
 ___
 
@@ -278,7 +278,7 @@ One of:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:589](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L589)
+[CSpellSettingsDef.ts:597](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L597)
 
 ___
 
@@ -303,7 +303,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:28](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L28)
+[CSpellReporter.ts:28](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L28)
 
 ___
 
@@ -313,7 +313,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:26](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L26)
+[CSpellReporter.ts:26](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L26)
 
 ___
 
@@ -321,11 +321,11 @@ ___
 
 Ƭ **FsPath**: `string`
 
-A File System Path
+A File System Path.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:661](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L661)
+[CSpellSettingsDef.ts:669](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L669)
 
 ___
 
@@ -333,11 +333,11 @@ ___
 
 Ƭ **Glob**: [`SimpleGlob`](modules.md#simpleglob) \| `GlobDef`
 
-These are glob expressions
+These are glob expressions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:615](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L615)
+[CSpellSettingsDef.ts:623](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L623)
 
 ___
 
@@ -347,7 +347,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:658](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L658)
+[CSpellSettingsDef.ts:666](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L666)
 
 ___
 
@@ -361,7 +361,7 @@ This can be 'typescript,cpp,json,literal haskell', etc.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:650](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L650)
+[CSpellSettingsDef.ts:658](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L658)
 
 ___
 
@@ -375,7 +375,7 @@ This can be 'typescript,cpp,json,literal haskell', etc.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:656](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L656)
+[CSpellSettingsDef.ts:664](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L664)
 
 ___
 
@@ -389,7 +389,7 @@ This can be '*', 'typescript', 'cpp', 'json', etc.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:644](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L644)
+[CSpellSettingsDef.ts:652](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L652)
 
 ___
 
@@ -399,11 +399,11 @@ ___
 
 **`deprecated`** true
 
-**`deprecationmessage`** Use LocaleId instead
+**`deprecationmessage`** Use `LocaleId` instead.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:612](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L612)
+[CSpellSettingsDef.ts:620](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L620)
 
 ___
 
@@ -415,7 +415,7 @@ This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:592](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L592)
+[CSpellSettingsDef.ts:600](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L600)
 
 ___
 
@@ -440,7 +440,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:22](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L22)
+[CSpellReporter.ts:22](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L22)
 
 ___
 
@@ -450,7 +450,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:10](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L10)
+[CSpellReporter.ts:10](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L10)
 
 ___
 
@@ -460,7 +460,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:12](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L12)
+[CSpellReporter.ts:12](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L12)
 
 ___
 
@@ -470,7 +470,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:510](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L510)
+[CSpellSettingsDef.ts:518](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L518)
 
 ___
 
@@ -478,11 +478,11 @@ ___
 
 Ƭ **PatternId**: `string`
 
-This matches the name in a pattern definition
+This matches the name in a pattern definition.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:539](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L539)
+[CSpellSettingsDef.ts:547](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L547)
 
 ___
 
@@ -494,7 +494,7 @@ A PatternRef is a Pattern or PatternId.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:542](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L542)
+[CSpellSettingsDef.ts:550](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L550)
 
 ___
 
@@ -504,7 +504,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:512](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L512)
+[CSpellSettingsDef.ts:520](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L520)
 
 ___
 
@@ -528,7 +528,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:49](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L49)
+[CSpellReporter.ts:49](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L49)
 
 ___
 
@@ -538,7 +538,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:33](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L33)
+[CSpellReporter.ts:33](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L33)
 
 ___
 
@@ -548,7 +548,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:32](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L32)
+[CSpellReporter.ts:32](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L32)
 
 ___
 
@@ -556,11 +556,11 @@ ___
 
 Ƭ **RegExpPatternList**: [`PatternRef`](modules.md#patternref)[]
 
-A list of pattern names or regular expressions
+A list of pattern names or regular expressions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:545](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L545)
+[CSpellSettingsDef.ts:553](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L553)
 
 ___
 
@@ -570,7 +570,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:1](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L1)
+[CSpellSettingsDef.ts:1](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L1)
 
 ___
 
@@ -580,7 +580,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:2](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L2)
+[CSpellSettingsDef.ts:2](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L2)
 
 ___
 
@@ -588,11 +588,11 @@ ___
 
 Ƭ **ReporterSettings**: `string` \| [`string`] \| [`string`, `unknown`]
 
-reporter name or reporter name + reporter config
+Reporter name or reporter name + reporter config.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:746](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L746)
+[CSpellSettingsDef.ts:754](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L754)
 
 ___
 
@@ -616,7 +616,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:58](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L58)
+[CSpellReporter.ts:58](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L58)
 
 ___
 
@@ -624,11 +624,11 @@ ___
 
 Ƭ **SimpleGlob**: `string`
 
-Simple Glob string, the root will be globRoot
+Simple Glob string, the root will be globRoot.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:618](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L618)
+[CSpellSettingsDef.ts:626](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L626)
 
 ___
 
@@ -638,7 +638,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:697](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L697)
+[CSpellSettingsDef.ts:705](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L705)
 
 ___
 
@@ -662,7 +662,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:30](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L30)
+[CSpellReporter.ts:30](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L30)
 
 ___
 
@@ -670,11 +670,11 @@ ___
 
 Ƭ **TrustLevel**: ``"trusted"`` \| ``"untrusted"``
 
-Trust Security Level
+Trust Security Level.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:664](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L664)
+[CSpellSettingsDef.ts:672](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L672)
 
 ___
 
@@ -684,7 +684,7 @@ ___
 
 #### Defined in
 
-[CSpellSettingsDef.ts:606](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L606)
+[CSpellSettingsDef.ts:614](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L614)
 
 ___
 
@@ -692,11 +692,11 @@ ___
 
 Ƭ **VersionLatest**: ``"0.2"``
 
-Configuration File Version
+Configuration File Version.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:597](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L597)
+[CSpellSettingsDef.ts:605](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L605)
 
 ___
 
@@ -704,15 +704,15 @@ ___
 
 Ƭ **VersionLegacy**: ``"0.1"``
 
-Legacy Configuration File Versions
+Legacy Configuration File Versions.
 
 **`deprecated`** true
 
-**`deprecationmessage`** Use `0.2`
+**`deprecationmessage`** Use `0.2` instead.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:604](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellSettingsDef.ts#L604)
+[CSpellSettingsDef.ts:612](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellSettingsDef.ts#L612)
 
 ## Variables
 
@@ -722,4 +722,4 @@ Legacy Configuration File Versions
 
 #### Defined in
 
-[CSpellReporter.ts:16](https://github.com/streetsidesoftware/cspell/blob/b8502b6d/packages/cspell-types/src/CSpellReporter.ts#L16)
+[CSpellReporter.ts:16](https://github.com/streetsidesoftware/cspell/blob/8c8dfb70/packages/cspell-types/src/CSpellReporter.ts#L16)
