@@ -13,12 +13,9 @@ describe('fileHelper', () => {
             const files = ['a', 'b', 'c'];
             process.stdin.isTTY = false;
             const pResult = readFileListFile('stdin');
-            process.nextTick(() => {
-                process.stdin.push(files.join('\n'));
-                process.nextTick(() => {
-                    process.stdin.emit('end');
-                });
-            });
+            process.stdin.push(files.join('\n'));
+            // need to delay the `end` event or it might become a race condition.
+            setTimeout(() => process.stdin.emit('end'), 1);
             const r = await pResult;
             expect(r).toEqual(files.map((f) => path.resolve(f)));
         } finally {
