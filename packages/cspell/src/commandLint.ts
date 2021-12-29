@@ -99,7 +99,7 @@ export function commandLint(prog: Command): Command {
             const cliReporter = getReporter({ ...options, fileGlobs });
             const lintOptions: LinterOptions = { ...options, fileLists: fileList };
             return App.lint(fileGlobs, lintOptions, cliReporter).then((result) => {
-                if (!fileGlobs.length && !result.files && !result.errors) {
+                if (!fileGlobs.length && !result.files && !result.errors && !fileList) {
                     spellCheckCommand.outputHelp();
                     throw new CheckFailed('outputHelp', 1);
                 }
