@@ -3,14 +3,14 @@ name: CSpell 4 - Integration Update Snapshots
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 * * 0"
+    - cron: "0 9 * * 1"
 
 jobs:
   update-dependencies:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-cspell4"
+      NEW_BRANCH: "cspell4-integration-update"
       REF_BRANCH: cspell4
     steps:
       - name: Start
