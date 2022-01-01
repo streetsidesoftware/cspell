@@ -1,32 +1,40 @@
 import type { FileDescriptor, FileEntryCache } from 'file-entry-cache';
-import { create as createFileEntryCache } from 'file-entry-cache';
-import type { ConfigInfo, FileResult } from '../../fileHelper';
+import * as fileEntryCache from 'file-entry-cache';
+import { resolve as resolvePath } from 'path';
+import type { FileResult } from '../../fileHelper';
 import { readFileInfo } from '../../fileHelper';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
-import { getConfigHash } from './getConfigHash';
 
 type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs'>;
 
-type CSpellCacheMeta =
-    | (FileDescriptor['meta'] & {
-          result: CachedFileResult;
-          configHash: string;
-      })
-    | undefined;
+interface CachedData {
+    result: CachedFileResult;
+    dependsUponFiles: string[];
+}
+
+interface CSpellCachedMetaData {
+    data?: CachedData;
+}
+
+type CSpellCacheMeta = (FileDescriptor['meta'] & CSpellCachedMetaData) | undefined;
 
 /**
  * Caches cspell results on disk
  */
 export class DiskCache implements CSpellLintResultCache {
     private fileEntryCache: FileEntryCache;
+    private changedDependencies: Set<string> = new Set();
+    private knownDependencies: Set<string> = new Set();
 
     constructor(cacheFileLocation: string, useCheckSum: boolean) {
-        this.fileEntryCache = createFileEntryCache(cacheFileLocation, undefined, useCheckSum);
+        this.fileEntryCache = fileEntryCache.createFromFile(resolvePath(cacheFileLocation), useCheckSum);
     }
 
-    public async getCachedLintResults(filename: string, configInfo: ConfigInfo): Promise<FileResult | undefined> {
+    public async getCachedLintResults(filename: string): Promise<FileResult | undefined> {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
+        const data = meta?.data;
+        const result = data?.result;
 
         // Cached lint results are valid if and only if:
         // 1. The file is present in the filesystem
@@ -37,36 +45,65 @@ export class DiskCache implements CSpellLintResultCache {
             fileDescriptor.notFound ||
             fileDescriptor.changed ||
             !meta ||
-            meta.configHash !== getConfigHash(configInfo)
+            !result ||
+            !this.checkDependencies(data.dependsUponFiles)
         ) {
             return undefined;
         }
 
         // Skip reading empty files and files without lint error
-        const hasErrors = meta.result.errors > 0 || meta.result.configErrors > 0 || meta.result.issues.length > 0;
-        const cached = !!meta.size;
+        const hasErrors = !!result && (result.errors > 0 || result.configErrors > 0 || result.issues.length > 0);
+        const cached = true;
         const shouldReadFile = cached && hasErrors;
 
         return {
-            ...meta.result,
+            ...result,
             elapsedTimeMs: undefined,
             fileInfo: shouldReadFile ? await readFileInfo(filename) : { filename },
             cached,
         };
     }
 
-    public setCachedLintResults({ fileInfo, elapsedTimeMs: _, ...result }: FileResult, configInfo: ConfigInfo): void {
+    public setCachedLintResults(
+        { fileInfo, elapsedTimeMs: _, ...result }: FileResult,
+        dependsUponFiles: string[]
+    ): void {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(fileInfo.filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         if (fileDescriptor.notFound || !meta) {
             return;
         }
 
-        meta.result = result;
-        meta.configHash = getConfigHash(configInfo);
+        const data: CachedData = {
+            result,
+            dependsUponFiles,
+        };
+
+        meta.data = data;
+        this.cacheDependencies(dependsUponFiles);
     }
 
     public reconcile(): void {
         this.fileEntryCache.reconcile();
+    }
+
+    private cacheDependencies(files: string[]) {
+        this.fileEntryCache.analyzeFiles(files);
+    }
+
+    private checkDependencies(files: string[]): boolean {
+        for (const file of files) {
+            if (this.changedDependencies.has(file)) {
+                return false;
+            }
+        }
+        const unknown = files.filter((f) => !this.knownDependencies.has(f));
+        if (!unknown.length) {
+            return true;
+        }
+        const { changedFiles, notFoundFiles } = this.fileEntryCache.analyzeFiles(files);
+        changedFiles.map((f) => this.changedDependencies.add(f));
+        unknown.forEach((f) => this.knownDependencies.add(f));
+        return changedFiles.length === 0 && notFoundFiles.length === 0;
     }
 }

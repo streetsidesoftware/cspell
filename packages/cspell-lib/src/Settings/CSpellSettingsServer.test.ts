@@ -2,6 +2,7 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef }
 import * as path from 'path';
 import { mocked } from 'ts-jest/utils';
 import { URI } from 'vscode-uri';
+import { extractDependencies } from '.';
 import { logError, logWarning } from '../util/logger';
 import {
     calcOverrideSettings,
@@ -624,6 +625,17 @@ describe('Validate search/load config files', () => {
         expect(() => validateRawConfigExports(c, { filename: 'filename' })).toThrowError(
             'Module `export default` is not supported.\n  Use `module.exports =` instead.\n  File: "filename"'
         );
+    });
+});
+
+describe('Validate Dependencies', () => {
+    test.each`
+        filename                         | relativeTo   | expected
+        ${r('../../cspell.config.json')} | ${undefined} | ${{ configFiles: expect.arrayContaining([r(rootCspellLib, '../../cspell.json'), r('../../cspell.config.json')]) }}
+    `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, expected }) => {
+        const settings = readSettings(filename, relativeTo);
+        const dependencies = extractDependencies(settings);
+        expect(dependencies).toEqual(expected);
     });
 });
 
