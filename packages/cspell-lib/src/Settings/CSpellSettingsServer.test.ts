@@ -2,13 +2,13 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef }
 import * as path from 'path';
 import { mocked } from 'ts-jest/utils';
 import { URI } from 'vscode-uri';
-import { extractDependencies } from '.';
 import { logError, logWarning } from '../util/logger';
 import {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
     clearCachedSettingsFiles,
     ENV_CSPELL_GLOB_ROOT,
+    extractDependencies,
     extractImportErrors,
     getCachedFileSize,
     getGlobalSettings,

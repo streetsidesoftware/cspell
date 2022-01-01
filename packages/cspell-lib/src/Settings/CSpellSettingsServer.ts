@@ -17,7 +17,7 @@ import { URI } from 'vscode-uri';
 import { logError, logWarning } from '../util/logger';
 import { resolveFile } from '../util/resolveFile';
 import * as util from '../util/util';
-import { normalizePathForDictDefs } from './DictionarySettings';
+import { normalizePathForDictDefs, calcDictionaryDefsToLoad } from './DictionarySettings';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
 import { resolvePatterns } from './patterns';
@@ -682,13 +682,16 @@ export function extractImportErrors(settings: CSpellSettings): ImportFileRefWith
 
 export interface ConfigurationDependencies {
     configFiles: string[];
+    dictionaryFiles: string[];
 }
 
 export function extractDependencies(settings: CSpellSettings): ConfigurationDependencies {
     const configFiles = [...(mergeImportRefs(settings) || [])].map(([filename]) => filename);
+    const dictionaryFiles = calcDictionaryDefsToLoad(settings).map((dict) => dict.path);
 
     return {
         configFiles,
+        dictionaryFiles,
     };
 }
 

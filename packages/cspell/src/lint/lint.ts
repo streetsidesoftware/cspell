@@ -160,10 +160,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
 
     function calcDependencies(config: CSpellSettings): ConfigDependencies {
-        const { configFiles } = cspell.extractDependencies(config);
-        const dictFiles = cspell.calcDictionaryDefsToLoad(config).map((dict) => dict.path);
+        const { configFiles, dictionaryFiles } = cspell.extractDependencies(config);
 
-        return { files: configFiles.concat(dictFiles) };
+        return { files: configFiles.concat(dictionaryFiles) };
     }
 
     async function reportConfigurationErrors(config: CSpellSettings): Promise<number> {
