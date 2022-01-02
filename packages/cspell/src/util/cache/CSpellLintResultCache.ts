@@ -1,14 +1,13 @@
-import { ConfigInfo, FileResult } from '../../fileHelper';
-
+import { FileResult } from '../../fileHelper';
 export interface CSpellLintResultCache {
     /**
      * Retrieve cached lint results for a given file name, if present in the cache.
      */
-    getCachedLintResults(filename: string, configInfo: ConfigInfo): Promise<FileResult | undefined>;
+    getCachedLintResults(filename: string): Promise<FileResult | undefined>;
     /**
      * Set the cached lint results.
      */
-    setCachedLintResults(result: FileResult, configInfo: ConfigInfo): void;
+    setCachedLintResults(result: FileResult, dependsUponFiles: string[]): void;
     /**
      * Persists the in-memory cache to disk.
      */

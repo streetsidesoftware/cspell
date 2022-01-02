@@ -1,4 +1,9 @@
-import type { DictionaryDefinition, DictionaryDefinitionPreferred, DictionaryReference } from '@cspell/cspell-types';
+import type {
+    DictionaryDefinition,
+    DictionaryDefinitionPreferred,
+    DictionaryReference,
+    CSpellSettingsWithSourceTrace,
+} from '@cspell/cspell-types';
 import * as path from 'path';
 import { resolveFile } from '../util/resolveFile';
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
@@ -97,4 +102,16 @@ export function isDictionaryDefinitionWithSource(
 
 function determineName(filename: string, options: DictionaryDefinition): string {
     return options.name || path.basename(filename);
+}
+
+export function calcDictionaryDefsToLoad(settings: CSpellSettingsWithSourceTrace): DictionaryDefinitionPreferred[] {
+    const { dictionaries = [], dictionaryDefinitions = [], noSuggestDictionaries = [] } = settings;
+    const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
+    const colDicts = createDictionaryReferenceCollection(dictionaries.concat(colNoSug.enabled()));
+    const modDefs = dictionaryDefinitions.map((def) => {
+        const enabled = colNoSug.isEnabled(def.name);
+        if (enabled === undefined) return def;
+        return { ...def, noSuggest: enabled };
+    });
+    return filterDictDefsToLoad(colDicts.enabled(), modDefs);
 }

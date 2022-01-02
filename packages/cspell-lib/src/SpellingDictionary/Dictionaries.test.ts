@@ -2,6 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { getDefaultSettings, loadConfig } from '../Settings';
+import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 
@@ -151,13 +152,14 @@ describe('Validate getDictionary', () => {
             },
         ]);
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
-        const dicts = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+        const defsToLoad = filterDictDefsToLoad(toLoad, defs);
+        const dicts = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
 
         expect(dicts[3].has('one')).toBe(true);
         expect(dicts[3].has('four')).toBe(false);
 
         await Dictionaries.refreshDictionaryCache(0);
-        const dicts2 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+        const dicts2 = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
 
         // Since noting changed, expect them to be the same.
         expect(dicts.length).toEqual(toLoad.length);
@@ -167,14 +169,14 @@ describe('Validate getDictionary', () => {
         // Update one of the dictionaries to see if it loads.
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
 
-        const dicts3 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+        const dicts3 = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
         // Should be using cache and will not contain the new words.
         expect(dicts3[3].has('one')).toBe(true);
         expect(dicts3[3].has('four')).toBe(false);
 
         await Dictionaries.refreshDictionaryCache(0);
 
-        const dicts4 = await Promise.all(Dictionaries.loadDictionaries(toLoad, defs));
+        const dicts4 = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);

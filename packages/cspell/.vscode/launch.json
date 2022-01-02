@@ -10,8 +10,9 @@
             "name": "cspell: Run",
             "program": "${workspaceRoot}/bin.js",
             "args": [
-                "-c=../../cspell.json",
-                "**/*"
+                "--cache",
+                "--no-progress",
+                "**"
             ],
             "cwd": "${workspaceRoot}",
             "outFiles": [

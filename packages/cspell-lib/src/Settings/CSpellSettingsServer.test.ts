@@ -8,6 +8,7 @@ import {
     checkFilenameMatchesGlob,
     clearCachedSettingsFiles,
     ENV_CSPELL_GLOB_ROOT,
+    extractDependencies,
     extractImportErrors,
     getCachedFileSize,
     getGlobalSettings,
@@ -28,6 +29,7 @@ import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 const { normalizeSettings, validateRawConfigVersion, validateRawConfigExports } = __testing__;
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
+const root = path.resolve(rootCspellLib, '../..');
 const samplesDir = path.resolve(rootCspellLib, 'samples');
 const samplesSrc = path.join(samplesDir, 'src');
 const testFixtures = path.join(rootCspellLib, '../../test-fixtures');
@@ -624,6 +626,17 @@ describe('Validate search/load config files', () => {
         expect(() => validateRawConfigExports(c, { filename: 'filename' })).toThrowError(
             'Module `export default` is not supported.\n  Use `module.exports =` instead.\n  File: "filename"'
         );
+    });
+});
+
+describe('Validate Dependencies', () => {
+    test.each`
+        filename                         | relativeTo   | expected
+        ${r('../../cspell.config.json')} | ${undefined} | ${{ configFiles: [r(root, 'cspell.json'), r('../../cspell.config.json')], dictionaryFiles: [r(root, 'cspell-dict.txt')] }}
+    `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, expected }) => {
+        const settings = readSettings(filename, relativeTo);
+        const dependencies = extractDependencies(settings);
+        expect(dependencies).toEqual(expected);
     });
 });
 

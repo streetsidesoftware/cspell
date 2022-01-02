@@ -17,7 +17,7 @@ import { URI } from 'vscode-uri';
 import { logError, logWarning } from '../util/logger';
 import { resolveFile } from '../util/resolveFile';
 import * as util from '../util/util';
-import { normalizePathForDictDefs } from './DictionarySettings';
+import { normalizePathForDictDefs, calcDictionaryDefsToLoad } from './DictionarySettings';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
 import { resolvePatterns } from './patterns';
@@ -652,7 +652,7 @@ export function getSources(settings: CSpellSettings): CSpellSettings[] {
 
 type Imports = CSpellSettings['__imports'];
 
-function mergeImportRefs(left: CSpellSettings, right: CSpellSettings): Imports {
+function mergeImportRefs(left: CSpellSettings, right: CSpellSettings = {}): Imports {
     const imports = new Map(left.__imports || []);
     if (left.__importRef) {
         imports.set(left.__importRef.filename, left.__importRef);
@@ -676,8 +676,23 @@ function isImportFileRefWithError(ref: ImportFileRef): ref is ImportFileRefWithE
 }
 
 export function extractImportErrors(settings: CSpellSettings): ImportFileRefWithError[] {
-    const imports = mergeImportRefs(settings, {});
+    const imports = mergeImportRefs(settings);
     return !imports ? [] : [...imports.values()].filter(isImportFileRefWithError);
+}
+
+export interface ConfigurationDependencies {
+    configFiles: string[];
+    dictionaryFiles: string[];
+}
+
+export function extractDependencies(settings: CSpellSettings): ConfigurationDependencies {
+    const configFiles = [...(mergeImportRefs(settings) || [])].map(([filename]) => filename);
+    const dictionaryFiles = calcDictionaryDefsToLoad(settings).map((dict) => dict.path);
+
+    return {
+        configFiles,
+        dictionaryFiles,
+    };
 }
 
 function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): string {

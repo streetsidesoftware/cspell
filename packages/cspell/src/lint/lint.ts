@@ -3,9 +3,8 @@ import { MessageTypes } from '@cspell/cspell-types';
 import * as commentJson from 'comment-json';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
-import type { ValidationIssue } from 'cspell-lib';
+import type { Logger, ValidationIssue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
-import { Logger } from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
@@ -43,7 +42,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         configInfo: ConfigInfo,
         cache: CSpellLintResultCache
     ): Promise<FileResult> {
-        const cachedResult = await cache.getCachedLintResults(filename, configInfo);
+        const cachedResult = await cache.getCachedLintResults(filename);
         if (cachedResult) {
             reporter.debug(`Filename: ${filename}, using cache`);
             return cachedResult;
@@ -95,7 +94,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
         reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
 
-        cache.setCachedLintResults(result, configInfo);
+        const dep = calcDependencies(config);
+
+        cache.setCachedLintResults(result, dep.files);
         return result;
     }
 
@@ -152,6 +153,16 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         cache.reconcile();
         return status;
+    }
+
+    interface ConfigDependencies {
+        files: string[];
+    }
+
+    function calcDependencies(config: CSpellSettings): ConfigDependencies {
+        const { configFiles, dictionaryFiles } = cspell.extractDependencies(config);
+
+        return { files: configFiles.concat(dictionaryFiles) };
     }
 
     async function reportConfigurationErrors(config: CSpellSettings): Promise<number> {

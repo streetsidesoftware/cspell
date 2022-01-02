@@ -1,18 +1,12 @@
-import type { CSpellUserSettings, DictionaryDefinition, DictionaryReference } from '@cspell/cspell-types';
-import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection';
-import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
+import type { CSpellUserSettings, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';
 import { SpellingDictionaryCollection } from './index';
 import { SpellingDictionary } from './SpellingDictionary';
 import { createCollectionP } from './SpellingDictionaryCollection';
 
-export function loadDictionaries(
-    dictIds: DictionaryReference[],
-    defs: DictionaryDefinition[]
-): Promise<SpellingDictionary>[] {
-    const defsToLoad = filterDictDefsToLoad(dictIds, defs);
-
+export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionPreferred[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map((def) => loadDictionary(def.path, def));
 }
 
@@ -21,23 +15,8 @@ export function refreshDictionaryCache(maxAge?: number): Promise<void> {
 }
 
 export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
-    const {
-        words = [],
-        userWords = [],
-        dictionaries = [],
-        dictionaryDefinitions = [],
-        noSuggestDictionaries = [],
-        flagWords = [],
-        ignoreWords = [],
-    } = settings;
-    const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
-    const colDicts = createDictionaryReferenceCollection(dictionaries.concat(colNoSug.enabled()));
-    const modDefs = dictionaryDefinitions.map((def) => {
-        const enabled = colNoSug.isEnabled(def.name);
-        if (enabled === undefined) return def;
-        return { ...def, noSuggest: enabled };
-    });
-    const spellDictionaries = loadDictionaries(colDicts.enabled(), modDefs);
+    const { words = [], userWords = [], flagWords = [], ignoreWords = [] } = settings;
+    const spellDictionaries = loadDictionaryDefs(calcDictionaryDefsToLoad(settings));
     const settingsDictionary = createSpellingDictionary(
         words.concat(userWords),
         '[words]',

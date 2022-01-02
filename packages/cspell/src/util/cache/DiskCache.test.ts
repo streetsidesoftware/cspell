@@ -1,16 +1,22 @@
 import { DiskCache } from './DiskCache';
 import * as FileEntryCacheModule from 'file-entry-cache';
 import * as fileHelper from '../../fileHelper';
+import * as path from 'path';
 
 jest.mock('./getConfigHash', () => ({
     getConfigHash: jest.fn().mockReturnValue('TEST_CONFIG_HASH'),
 }));
 
-const mockCreateFileEntryCache = jest.spyOn(FileEntryCacheModule, 'create');
+const mockCreateFileEntryCache = jest.spyOn(FileEntryCacheModule, 'createFromFile');
 jest.mock('file-entry-cache', () => ({
-    create: jest.fn().mockReturnValue({
+    createFromFile: jest.fn().mockReturnValue({
         getFileDescriptor: jest.fn(),
         reconcile: jest.fn(),
+        analyzeFiles: jest.fn().mockReturnValue({
+            changedFiles: [],
+            notFoundFiles: [],
+            notChangedFiles: [],
+        }),
     }),
 }));
 
@@ -24,16 +30,12 @@ const RESULT_NO_ISSUES = {
     configErrors: 0,
 };
 
-const TEST_CONFIG__INFO = {
-    source: 'some-source-string-in-config-info',
-    config: {},
-};
-
 describe('DiskCache', () => {
     let diskCache: DiskCache;
     let fileEntryCache: {
         getFileDescriptor: jest.Mock;
         reconcile: jest.Mock;
+        analyzeFiles: jest.Mock;
     };
 
     beforeEach(() => {
@@ -44,36 +46,33 @@ describe('DiskCache', () => {
     describe('constructor', () => {
         it('creates file-entry-cache in specified location', () => {
             expect(mockCreateFileEntryCache).toBeCalledTimes(1);
-            expect(mockCreateFileEntryCache).toBeCalledWith('.foobar', undefined, false);
+            expect(mockCreateFileEntryCache).toBeCalledWith(path.resolve('.foobar'), false);
         });
     });
 
     describe('getCachedLintResults', () => {
         it('returns undefined for not found files', async () => {
             fileEntryCache.getFileDescriptor.mockReturnValue({ notFound: true });
-            expect(await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO)).toEqual(undefined);
+            expect(await diskCache.getCachedLintResults('file')).toEqual(undefined);
         });
 
         it('returns undefined for changed files', async () => {
             fileEntryCache.getFileDescriptor.mockReturnValue({ changed: true });
-            expect(await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO)).toEqual(undefined);
-        });
-
-        it('returns undefined for files with different config', async () => {
-            fileEntryCache.getFileDescriptor.mockReturnValue({ meta: { configHash: 'OTHER_TEST_CONFIG_HASH' } });
-            expect(await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO)).toEqual(undefined);
+            expect(await diskCache.getCachedLintResults('file')).toEqual(undefined);
         });
 
         it('returns cached result', async () => {
             fileEntryCache.getFileDescriptor.mockReturnValue({
                 meta: {
-                    configHash: 'TEST_CONFIG_HASH',
                     size: 100,
-                    result: RESULT_NO_ISSUES,
+                    data: {
+                        result: RESULT_NO_ISSUES,
+                        dependsUponFiles: [],
+                    },
                 },
             });
 
-            const cachedResult = await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO);
+            const cachedResult = await diskCache.getCachedLintResults('file');
 
             expect(cachedResult).toMatchObject(RESULT_NO_ISSUES);
             expect(cachedResult?.elapsedTimeMs).toBeUndefined();
@@ -86,17 +85,19 @@ describe('DiskCache', () => {
         it('returns cached result for empty files', async () => {
             fileEntryCache.getFileDescriptor.mockReturnValue({
                 meta: {
-                    configHash: 'TEST_CONFIG_HASH',
                     size: 0,
-                    result: RESULT_NO_ISSUES,
+                    data: {
+                        result: RESULT_NO_ISSUES,
+                        dependsUponFiles: [],
+                    },
                 },
             });
 
-            const cachedResult = await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO);
+            const cachedResult = await diskCache.getCachedLintResults('file');
 
             expect(cachedResult).toMatchObject(RESULT_NO_ISSUES);
             expect(cachedResult?.elapsedTimeMs).toBeUndefined();
-            expect(cachedResult?.cached).toBe(false);
+            expect(cachedResult?.cached).toBe(true);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(0);
             expect(cachedResult?.fileInfo.filename).toEqual('file');
@@ -106,16 +107,18 @@ describe('DiskCache', () => {
             const result = { ...RESULT_NO_ISSUES, errors: 10 };
             fileEntryCache.getFileDescriptor.mockReturnValue({
                 meta: {
-                    configHash: 'TEST_CONFIG_HASH',
                     size: 100,
-                    result,
+                    data: {
+                        result,
+                        dependsUponFiles: [],
+                    },
                 },
             });
 
             const fileInfo = { filename: 'file', text: 'file content' };
             mockReadFileInfo.mockReturnValue(Promise.resolve(fileInfo));
 
-            const cachedResult = await diskCache.getCachedLintResults('file', TEST_CONFIG__INFO);
+            const cachedResult = await diskCache.getCachedLintResults('file');
 
             expect(cachedResult).toMatchObject(result);
             expect(cachedResult?.elapsedTimeMs).toBeUndefined();
@@ -123,6 +126,27 @@ describe('DiskCache', () => {
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(1);
             expect(cachedResult?.fileInfo).toEqual(fileInfo);
+        });
+
+        it('with failed dependencies', async () => {
+            fileEntryCache.getFileDescriptor.mockReturnValue({
+                meta: {
+                    size: 100,
+                    data: {
+                        result: RESULT_NO_ISSUES,
+                        dependsUponFiles: ['fileA', 'fileB'],
+                    },
+                },
+            });
+
+            fileEntryCache.analyzeFiles.mockReturnValue({
+                changedFiles: ['fileA', 'fileB'],
+                notFoundFiles: [],
+                notChangedFiles: [],
+            });
+
+            expect(await diskCache.getCachedLintResults('file')).toBeUndefined();
+            expect(await diskCache.getCachedLintResults('file')).toBeUndefined();
         });
     });
 
@@ -139,14 +163,14 @@ describe('DiskCache', () => {
                     configErrors: 0,
                     elapsedTimeMs: 100,
                 },
-                TEST_CONFIG__INFO
+                []
             );
 
             expect(descriptor.meta.result).toBeUndefined();
         });
 
         it('writes result and config hash to cache', () => {
-            const descriptor = { meta: { result: undefined, configHash: undefined } };
+            const descriptor = { meta: { data: { result: undefined } } };
             fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
 
             const result = {
@@ -155,14 +179,10 @@ describe('DiskCache', () => {
                 errors: 0,
                 configErrors: 0,
             };
-            diskCache.setCachedLintResults(
-                { ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 },
-                TEST_CONFIG__INFO
-            );
+            diskCache.setCachedLintResults({ ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 }, []);
 
             expect(fileEntryCache.getFileDescriptor).toBeCalledWith('some-file');
-            expect(descriptor.meta.result).toEqual(result);
-            expect(descriptor.meta.configHash).toEqual('TEST_CONFIG_HASH');
+            expect(descriptor.meta.data.result).toEqual(result);
         });
     });
 
