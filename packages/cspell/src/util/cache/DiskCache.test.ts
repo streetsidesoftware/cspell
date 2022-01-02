@@ -15,6 +15,7 @@ jest.mock('file-entry-cache', () => ({
         analyzeFiles: jest.fn().mockReturnValue({
             changedFiles: [],
             notFoundFiles: [],
+            notChangedFiles: [],
         }),
     }),
 }));
@@ -34,6 +35,7 @@ describe('DiskCache', () => {
     let fileEntryCache: {
         getFileDescriptor: jest.Mock;
         reconcile: jest.Mock;
+        analyzeFiles: jest.Mock;
     };
 
     beforeEach(() => {
@@ -124,6 +126,27 @@ describe('DiskCache', () => {
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(1);
             expect(cachedResult?.fileInfo).toEqual(fileInfo);
+        });
+
+        it('with failed dependencies', async () => {
+            fileEntryCache.getFileDescriptor.mockReturnValue({
+                meta: {
+                    size: 100,
+                    data: {
+                        result: RESULT_NO_ISSUES,
+                        dependsUponFiles: ['fileA', 'fileB'],
+                    },
+                },
+            });
+
+            fileEntryCache.analyzeFiles.mockReturnValue({
+                changedFiles: ['fileA', 'fileB'],
+                notFoundFiles: [],
+                notChangedFiles: [],
+            });
+
+            expect(await diskCache.getCachedLintResults('file')).toBeUndefined();
+            expect(await diskCache.getCachedLintResults('file')).toBeUndefined();
         });
     });
 
