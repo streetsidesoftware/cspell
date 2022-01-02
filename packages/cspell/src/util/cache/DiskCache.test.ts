@@ -12,6 +12,10 @@ jest.mock('file-entry-cache', () => ({
     createFromFile: jest.fn().mockReturnValue({
         getFileDescriptor: jest.fn(),
         reconcile: jest.fn(),
+        analyzeFiles: jest.fn().mockReturnValue({
+            changedFiles: [],
+            notFoundFiles: [],
+        }),
     }),
 }));
 
@@ -58,9 +62,11 @@ describe('DiskCache', () => {
         it('returns cached result', async () => {
             fileEntryCache.getFileDescriptor.mockReturnValue({
                 meta: {
-                    configHash: 'TEST_CONFIG_HASH',
                     size: 100,
-                    result: RESULT_NO_ISSUES,
+                    data: {
+                        result: RESULT_NO_ISSUES,
+                        dependsUponFiles: [],
+                    },
                 },
             });
 
@@ -77,9 +83,11 @@ describe('DiskCache', () => {
         it('returns cached result for empty files', async () => {
             fileEntryCache.getFileDescriptor.mockReturnValue({
                 meta: {
-                    configHash: 'TEST_CONFIG_HASH',
                     size: 0,
-                    result: RESULT_NO_ISSUES,
+                    data: {
+                        result: RESULT_NO_ISSUES,
+                        dependsUponFiles: [],
+                    },
                 },
             });
 
@@ -87,7 +95,7 @@ describe('DiskCache', () => {
 
             expect(cachedResult).toMatchObject(RESULT_NO_ISSUES);
             expect(cachedResult?.elapsedTimeMs).toBeUndefined();
-            expect(cachedResult?.cached).toBe(false);
+            expect(cachedResult?.cached).toBe(true);
 
             expect(mockReadFileInfo).toHaveBeenCalledTimes(0);
             expect(cachedResult?.fileInfo.filename).toEqual('file');
@@ -97,9 +105,11 @@ describe('DiskCache', () => {
             const result = { ...RESULT_NO_ISSUES, errors: 10 };
             fileEntryCache.getFileDescriptor.mockReturnValue({
                 meta: {
-                    configHash: 'TEST_CONFIG_HASH',
                     size: 100,
-                    result,
+                    data: {
+                        result,
+                        dependsUponFiles: [],
+                    },
                 },
             });
 
@@ -137,7 +147,7 @@ describe('DiskCache', () => {
         });
 
         it('writes result and config hash to cache', () => {
-            const descriptor = { meta: { result: undefined, configHash: undefined } };
+            const descriptor = { meta: { data: { result: undefined } } };
             fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
 
             const result = {
@@ -149,8 +159,7 @@ describe('DiskCache', () => {
             diskCache.setCachedLintResults({ ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 }, []);
 
             expect(fileEntryCache.getFileDescriptor).toBeCalledWith('some-file');
-            expect(descriptor.meta.result).toEqual(result);
-            expect(descriptor.meta.configHash).toEqual('TEST_CONFIG_HASH');
+            expect(descriptor.meta.data.result).toEqual(result);
         });
     });
 
