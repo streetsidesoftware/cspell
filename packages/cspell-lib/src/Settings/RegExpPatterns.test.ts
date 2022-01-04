@@ -418,23 +418,23 @@ describe('Validate InDocSettings', () => {
     });
 
     test('sha regex', () => {
-        RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('')).toBe(false);
-        RegPat.regExSha.lastIndex = 0;
+        RegPat.regExHashStrings.lastIndex = 0;
+        expect(RegPat.regExHashStrings.test('')).toBe(false);
+        RegPat.regExHashStrings.lastIndex = 0;
         expect(
-            RegPat.regExSha.test(
+            RegPat.regExHashStrings.test(
                 'sha512-mm6iZYQ1xbVBNsWq2VSMFuneRuO0k0wUqIT4ZfrtbD1Eb90DXmqBOPA/URyUHq6wsftxr8aXDJHTTHyyBBY95w=='
             )
         ).toBe(true);
-        RegPat.regExSha.lastIndex = 0;
+        RegPat.regExHashStrings.lastIndex = 0;
         expect(
-            RegPat.regExSha.test(
+            RegPat.regExHashStrings.test(
                 'sha512-vjiRZkhKEyZndtFOz/FtIp0CqPbgOOki8o9IcPOLTqlzcnvFLToYdERshLaI6TCz7pDWoKlmvgftqB4xlltn9g=='
             )
         ).toBe(true);
-        RegPat.regExSha.lastIndex = 0;
-        expect(RegPat.regExSha.test('sha1-RBT/dKUIecII7l/cgm4ywwNUnto=')).toBe(true);
-        RegPat.regExSha.lastIndex = 0;
+        RegPat.regExHashStrings.lastIndex = 0;
+        expect(RegPat.regExHashStrings.test('sha1-RBT/dKUIecII7l/cgm4ywwNUnto=')).toBe(true);
+        RegPat.regExHashStrings.lastIndex = 0;
     });
 
     test('regExCert', () => {

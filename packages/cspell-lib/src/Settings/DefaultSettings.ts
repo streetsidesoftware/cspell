@@ -38,7 +38,7 @@ const predefinedPatterns = [
     { name: 'Base64SingleLine', pattern: RegPat.regExBase64SingleLine },
     { name: 'Base64MultiLine', pattern: RegPat.regExBase64MultiLine },
     { name: 'Email', pattern: RegPat.regExEmail },
-    { name: 'SHA', pattern: RegPat.regExSha },
+    { name: 'SHA', pattern: RegPat.regExHashStrings },
     { name: 'UnicodeRef', pattern: RegPat.regExUnicodeRef },
     { name: 'UUID', pattern: RegPat.regExUUID },
     { name: 'href', pattern: RegPat.regExHRef },

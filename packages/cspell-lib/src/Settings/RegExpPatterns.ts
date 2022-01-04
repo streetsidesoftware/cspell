@@ -20,7 +20,6 @@ export const regExCert = /BEGIN\s+(CERTIFICATE|RSA\s+(?:PRIVATE|PUBLIC)\s+KEY)(?
 export const regExEscapeCharacters = /\\(?:[anrvtbf]|[xu][a-f0-9]+)/gi;
 export const regExBase64 =
     /(?<![A-Za-z0-9/+])(?:[A-Za-z0-9/+]{40,})(?:\s^\s*[A-Za-z0-9/+]{40,})*(?:\s^\s*[A-Za-z0-9/+]+=*)?(?![A-Za-z0-9/+=])/gm;
-export const regHashes = /\b(?:sha\d+|md5|base64|crypt)[-,:$=][A-Za-z0-9/+%]+={0,3}(?![A-Za-z0-9/+=%])/g;
 
 /**
  * Detect a string of characters that look like a Base64 string.
@@ -53,4 +52,7 @@ export const regExEmail = /<?\b[\w.\-+]{1,128}@\w{1,63}(\.\w{1,63}){1,4}\b>?/gi;
 
 export const regExRepeatedChar = /^(\w)\1{3,}$/i;
 
-export const regExSha = /\b(?:sha\d+|md5|base64|crypt)[-,:$=][a-z0-9/+%]+={0,3}(?![a-z0-9/+=%])/gi;
+/**
+ * Detect common hash strings like sha256
+ */
+export const regExHashStrings = /\b(?:sha\d+|md5|base64|crypt|token)[-,:$=][a-z0-9/+%]+={0,3}(?![a-z0-9/+=%])/gi;
