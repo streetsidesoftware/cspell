@@ -165,6 +165,7 @@ function textToArray(text: string) {
 }
 
 function getSimpleAff() {
+    // cspell:ignore esianrtolcdugmphbyfvkwzESIANRTOLCDUGMPHBYFVKWZ
     const sampleAff = `
 SET UTF-8
 TRY esianrtolcdugmphbyfvkwzESIANRTOLCDUGMPHBYFVKWZ'

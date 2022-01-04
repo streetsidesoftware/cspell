@@ -247,6 +247,7 @@ function logApplyRulesResult(affWord: AffWord) {
 }
 
 function getSimpleAff() {
+    // cspell:ignore esianrtolcdugmphbyfvkwzESIANRTOLCDUGMPHBYFVKWZ
     return `
     SET UTF-8
     TRY esianrtolcdugmphbyfvkwzESIANRTOLCDUGMPHBYFVKWZ'
