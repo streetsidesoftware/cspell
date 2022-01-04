@@ -63,4 +63,4 @@ export const regExRepeatedChar = /^(\w)\1{3,}$/i;
  * - `assertion` - use with jwt
  */
 export const regExHashStrings =
-    /\b(?:sha\d+|md5|base64|crypt|bcrypt|scrypt|token|assertion)[-,:$=][-\w/+%.]{25,}={0,3}(?![-\w/+=%.])/gi;
+    /\b(?:sha\d+|md5|base64|crypt|bcrypt|scrypt|security-token|assertion)[-,:$=][-\w/+%.]{25,}={0,3}(?![-\w/+=%.])/gi;
