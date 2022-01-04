@@ -535,6 +535,7 @@ export type PredefinedPatterns =
     | 'RsaCert'
     | 'SshRsa'
     | 'SHA'
+    | 'HashStrings'
     | 'SpellCheckerDisable'
     | 'SpellCheckerDisableBlock'
     | 'SpellCheckerDisableLine'

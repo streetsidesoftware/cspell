@@ -53,6 +53,8 @@ export const regExEmail = /<?\b[\w.\-+]{1,128}@\w{1,63}(\.\w{1,63}){1,4}\b>?/gi;
 
 export const regExRepeatedChar = /^(\w)\1{3,}$/i;
 
+export const regExSha = /\bsha\d+-[a-z0-9+/]{25,}={0,3}/gi;
+
 /**
  * Detect common hash strings like:
  * - `sha1`, `sha256`, `sha512`
