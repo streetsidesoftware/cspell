@@ -533,6 +533,7 @@ export type PredefinedPatterns =
     | 'PhpHereDoc'
     | 'PublicKey'
     | 'RsaCert'
+    | 'SshRsa'
     | 'SHA'
     | 'SpellCheckerDisable'
     | 'SpellCheckerDisableBlock'
