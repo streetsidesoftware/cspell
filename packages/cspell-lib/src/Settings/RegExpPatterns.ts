@@ -18,7 +18,23 @@ export const regExIgnoreSpellingDirectives = /\bc?spell(?:-?checker)?::?\s*ignor
 export const regExPublicKey = /BEGIN\s+((?:RSA\s+)?PUBLIC)\s+KEY(?:[\w=+\-/]*\r?\n)+?-*END\s+\1/g;
 export const regExCert = /BEGIN\s+(CERTIFICATE|RSA\s+(?:PRIVATE|PUBLIC)\s+KEY)(?:[\w=+\-/]*\r?\n)+?-*END\s+\1/g;
 export const regExEscapeCharacters = /\\(?:[anrvtbf]|[xu][a-f0-9]+)/gi;
-export const regExBase64 = /(?<![a-z0-9/+])(?:[a-z0-9/+]{40,})(?:\s^\s*[a-z0-9/+]{40,})*(?:\s^\s*[a-z0-9/+]+=*)?/gim;
+export const regExBase64 =
+    /(?<![A-Za-z0-9/+])(?:[A-Za-z0-9/+]{40,})(?:\s^\s*[A-Za-z0-9/+]{40,})*(?:\s^\s*[A-Za-z0-9/+]+=*)?(?![A-Za-z0-9/+=])/gm;
+export const regHashes = /\b(?:sha\d+|md5|base64|crypt)[-,:$=][A-Za-z0-9/+%]+={0,3}(?![A-Za-z0-9/+=%])/g;
+
+/**
+ * Detect a string of characters that look like a Base64 string.
+ *
+ * It must be:
+ * - at least 40 characters
+ * - contain at least 1 of [0-9+=]
+ * - end at the end of the line or with [,"'\]
+ */
+export const regExBase64SingleLine =
+    /(?<![A-Za-z0-9/+])(?![/])(?![A-Za-z/]+(?![A-Za-z0-9/+=]))(?=[A-Za-z0-9/+=]*?(?:[A-Z]{2}|[0-9]{2}))[A-Za-z0-9/+]{40,}={0,3}(?![A-Za-z0-9/+=])(?=$|[,"'\\])/gm;
+
+export const regExBase64MultiLine =
+    /(?<![A-Za-z0-9/+])(?:[A-Za-z0-9/+]{40,})(?:\s^\s*[A-Za-z0-9/+]{40,})+(?:\s^\s*[A-Za-z0-9/+]+=*)?(?![A-Za-z0-9/+=])/gm;
 
 // cspell:ignore aeiou
 // The following is an attempt at detecting random strings.
@@ -37,5 +53,4 @@ export const regExEmail = /<?\b[\w.\-+]{1,128}@\w{1,63}(\.\w{1,63}){1,4}\b>?/gi;
 
 export const regExRepeatedChar = /^(\w)\1{3,}$/i;
 
-// cSpell:ignore bsha
-export const regExSha = /\bsha\d+-[a-z0-9+/=]+/gi;
+export const regExSha = /\b(?:sha\d+|md5|base64|crypt)[-,:$=][a-z0-9/+%]+={0,3}(?![a-z0-9/+=%])/gi;

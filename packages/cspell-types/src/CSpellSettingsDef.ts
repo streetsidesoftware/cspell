@@ -519,6 +519,8 @@ export type Pattern = string | InternalRegExp;
 
 export type PredefinedPatterns =
     | 'Base64'
+    | 'Base64MultiLine'
+    | 'Base64SingleLine'
     | 'CStyleComment'
     | 'CStyleHexValue'
     | 'CSSHexValue'
