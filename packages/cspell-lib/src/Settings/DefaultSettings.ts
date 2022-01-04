@@ -69,7 +69,6 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
     'SpellCheckerIgnoreInDocSetting',
     'Urls',
     'Email',
-    'PublicKey',
     'RsaCert',
     'SshRsa',
     'Base64MultiLine',
