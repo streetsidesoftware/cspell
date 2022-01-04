@@ -38,7 +38,7 @@
     "test": "lerna run test && npm run test-schema",
     "test-bin": "npm run test-bin-spell && npm run test-bin-spell-cache-content && npm run test-bin-spell-cache-metadata && npm run test-bin-trace && npm run test-bin-check",
     "test-bin-check": "node ./bin.js check README.md",
-    "test-bin-spell": "node ./bin.js -c cspellrc.json",
+    "test-bin-spell": "node ./bin.js -c cspellrc.json --no-progress",
     "test-bin-spell-cache-content": "node ./bin.js -c cspellrc.json --cache --cache-strategy content",
     "test-bin-spell-cache-metadata": "node ./bin.js -c cspellrc.json --cache --cache-strategy metadata",
     "test-bin-trace": "node ./bin.js trace test",

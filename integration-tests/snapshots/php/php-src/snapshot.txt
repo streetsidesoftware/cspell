@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1828, Issues found: 19747 in 1089 files
+ CSpell: Files checked: 1828, Issues found: 19768 in 1089 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -1324,6 +1324,8 @@ Lines:
 ./ext/gd/libgd/gdtestft.c:19:9      - Unknown word (MINY)       -- #define MINY(x) MIN4(x[1],x[3],x
 ./ext/gd/libgd/gdtestft.c:39:30     - Unknown word (Qyjpqg)     -- s = "Hello. ����ɂ��� Qyjpqg,"; /* String to draw
 ./ext/gd/libgd/gdtestft.c:53:57     - Unknown word (Mincho)     -- locale/ja/X11/fonts/TT/HG-MinchoL.ttf"; /* UNICODE *
+./ext/gd/libgd/gdtestft.c:54:47     - Unknown word (Dyna)       -- local/lib/fonts/truetype/DynaFont/dfpop1.ttf"; */
+./ext/gd/libgd/gdtestft.c:54:56     - Unknown word (dfpop)      -- fonts/truetype/DynaFont/dfpop1.ttf"; *//* SJIS */
 ./ext/gd/libgd/gdtopng.c:16:32     - Unknown word (gdtopng)    -- fprintf (stderr, "Usage: gdtopng filename.gd filename
 ./ext/gd/libgd/pngtogd.c:17:32     - Unknown word (pngtogd)    -- fprintf (stderr, "Usage: pngtogd filename.png filename
 ./ext/gd/libgd/testac.c:31:32     - Unknown word (testac)     -- fprintf (stderr, "Usage: testac filename.png\n");
@@ -3985,30 +3987,41 @@ Lines:
 ./ext/standard/crypt_freesec.c:765:5     - Unknown word (ZDDIZ)      -- {"zZDDIZ0NOlPzw", "password"
 ./ext/standard/crypt_sha256.c:359:14    - Unknown word (srounds)    -- zend_ulong srounds = ZEND_STRTOUL(num,
 ./ext/standard/crypt_sha256.c:580:4     - Unknown word (libcs)      -- libcs. */
-./ext/standard/crypt_sha256.c:622:27    - Unknown word (NESSIE)     -- Test vectors from the NESSIE project.  */
-./ext/standard/crypt_sha256.c:657:53    - Unknown word (BBGW)       -- RlTTf8KbXBH3hsxY/GNooZaBBGWEc5" },
-./ext/standard/crypt_sha256.c:659:53    - Unknown word (Leuj)       -- stringsaltst$3xv.VbSHBb41AL9AvLeujZkZRBAwqFMz2."
-./ext/standard/crypt_sha256.c:660:3     - Unknown word (opqey)      -- "opqey6IcA" },
-./ext/standard/crypt_sha256.c:662:18    - Unknown word (toolongsaltstrin) -- "$5$rounds=5000$toolongsaltstrin$Un/5jzAHMgOGZ5.mWJpuVolil
-./ext/standard/crypt_sha256.c:662:55    - Unknown word (Volil)            -- Un/5jzAHMgOGZ5.mWJpuVolil07guHPvOW8"
-./ext/standard/crypt_sha256.c:663:5     - Unknown word (Rcvxa)            -- "mGRcvxa5" },
-./ext/standard/crypt_sha256.c:667:62    - Unknown word (Unzyxf)           -- h8HjEDGomFU8bDkXm3XIUnzyxf12"
-./ext/standard/crypt_sha256.c:672:22    - Unknown word (asaltof)          -- { "$5$rounds=123456$asaltof16chars..", "a short
-./ext/standard/crypt_sha256.c:673:46    - Unknown word (UUEW)             -- asaltof16chars..$gP3VQ/6X7UUEW3HkBn2w1/Ptq2jxPyzV/
-./ext/standard/crypt_sha256.c:676:31    - Unknown word (yfvwc)            -- rounds=1000$roundstoolow$yfvwcWrQ8l/K0DAWyuPMDNHpIVlTQebY
-./ext/standard/crypt_sha256.c:676:49    - Unknown word (PMDN)             -- oundstoolow$yfvwcWrQ8l/K0DAWyuPMDNHpIVlTQebY9l/gL97"
+./ext/standard/crypt_sha256.c:619:5     - Unknown word (abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq) -- { "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq",
+./ext/standard/crypt_sha256.c:622:27    - Unknown word (NESSIE)                                                   -- Test vectors from the NESSIE project.  */
+./ext/standard/crypt_sha256.c:657:53    - Unknown word (BBGW)                                                     -- RlTTf8KbXBH3hsxY/GNooZaBBGWEc5" },
+./ext/standard/crypt_sha256.c:659:53    - Unknown word (Leuj)                                                     -- stringsaltst$3xv.VbSHBb41AL9AvLeujZkZRBAwqFMz2."
+./ext/standard/crypt_sha256.c:660:3     - Unknown word (opqey)                                                    -- "opqey6IcA" },
+./ext/standard/crypt_sha256.c:662:18    - Unknown word (toolongsaltstrin)                                         -- "$5$rounds=5000$toolongsaltstrin$Un/5jzAHMgOGZ5.mWJpuVolil
+./ext/standard/crypt_sha256.c:662:55    - Unknown word (Volil)                                                    -- Un/5jzAHMgOGZ5.mWJpuVolil07guHPvOW8"
+./ext/standard/crypt_sha256.c:663:5     - Unknown word (Rcvxa)                                                    -- "mGRcvxa5" },
+./ext/standard/crypt_sha256.c:667:62    - Unknown word (Unzyxf)                                                   -- h8HjEDGomFU8bDkXm3XIUnzyxf12"
+./ext/standard/crypt_sha256.c:671:54    - Unknown word (ZNJRs)                                                    -- ZpDAxGJeaDIuqCoEFysAe1mZNJRs3pw0KQRd/" },
+./ext/standard/crypt_sha256.c:672:22    - Unknown word (asaltof)                                                  -- { "$5$rounds=123456$asaltof16chars..", "a short
+./ext/standard/crypt_sha256.c:673:46    - Unknown word (UUEW)                                                     -- asaltof16chars..$gP3VQ/6X7UUEW3HkBn2w1/Ptq2jxPyzV/
+./ext/standard/crypt_sha256.c:676:31    - Unknown word (yfvwc)                                                    -- rounds=1000$roundstoolow$yfvwcWrQ8l/K0DAWyuPMDNHpIVlTQebY
+./ext/standard/crypt_sha256.c:676:49    - Unknown word (PMDN)                                                     -- oundstoolow$yfvwcWrQ8l/K0DAWyuPMDNHpIVlTQebY9l/gL97"
 ./ext/standard/crypt_sha256.c:99:9      - Unknown word (nwords)     -- size_t nwords = len / sizeof (uint
 ./ext/standard/crypt_sha512.c:723:42    - Unknown word (BYHV)       -- saltstringsaltst$OW1/O6BYHV6BcXZu8QVeXbDWra3Oeqh
 ./ext/standard/crypt_sha512.c:723:63    - Unknown word (Oeqh)       -- BYHV6BcXZu8QVeXbDWra3Oeqh0sb"
+./ext/standard/crypt_sha512.c:724:15    - Unknown word (Urjm)       -- "HbbMCVNSnCM/UrjmM0Dp8vOuZeHBy/YTBmSK
+./ext/standard/crypt_sha512.c:724:6     - Unknown word (MCVN)       -- "HbbMCVNSnCM/UrjmM0Dp8vOuZeHBy
 ./ext/standard/crypt_sha512.c:726:38    - Unknown word (jolhg)      -- toolongsaltstrin$lQ8jolhgVRVhY4b5pZKaysCLi0QBxGoNeKQ
+./ext/standard/crypt_sha512.c:727:46    - Unknown word (audk)       -- yxdYcz/e1JSbq3y6JMxxl8audkUEm0" },
+./ext/standard/crypt_sha512.c:727:8     - Unknown word (Mhwll)      -- "zQ3glMhwllF7oGDZxUhx1yxdYcz/e1JSbq
 ./ext/standard/crypt_sha512.c:731:47    - Unknown word (Wcjx)       -- anotherlongsalts$POfYwTEok97VWcjxIiSOjiykti.o/pQs.wP"
 ./ext/standard/crypt_sha512.c:731:54    - Unknown word (Ojiykti)    -- rlongsalts$POfYwTEok97VWcjxIiSOjiykti.o/pQs.wP"
+./ext/standard/crypt_sha512.c:732:29    - Unknown word (Swbt)       -- Fm7I6IoYN3CmLs66x9t0oSwbtEW7o7UmJEiDwGqd8p4ur
 ./ext/standard/crypt_sha512.c:735:36    - Unknown word (Npjj)       -- 77$short$WuQyW2YR.hBNpjjRhpYD/ifIw05xdfeEyQoMxIXbkvr
 ./ext/standard/crypt_sha512.c:735:52    - Unknown word (xdfe)       -- YR.hBNpjjRhpYD/ifIw05xdfeEyQoMxIXbkvr0g"
 ./ext/standard/crypt_sha512.c:735:63    - Unknown word (Xbkvr)      -- hBNpjjRhpYD/ifIw05xdfeEyQoMxIXbkvr0g"
+./ext/standard/crypt_sha512.c:736:11    - Unknown word (RULJ)       -- "ge1a1x3yRULJ5CCaUeOxFmtlcGZelFl5CxtgfiAc
+./ext/standard/crypt_sha512.c:736:35    - Unknown word (Cxtgfi)     -- yRULJ5CCaUeOxFmtlcGZelFl5CxtgfiAc0" },
 ./ext/standard/crypt_sha512.c:738:39    - Unknown word (Cwjq)       -- $asaltof16chars..$BtCwjqMJGx5hrJhZywWvt0RLE8uZ
 ./ext/standard/crypt_sha512.c:739:5     - Unknown word (Cjmw)       -- "elCjmw2kSYu.Ec6ycULevoBK25fs
+./ext/standard/crypt_sha512.c:739:50    - Unknown word (Jeonj)      -- fs2xXgMNrCzIMVcgEJAstJeonj1" },
 ./ext/standard/crypt_sha512.c:741:33    - Unknown word (Msbe)       -- 1000$roundstoolow$kUMsbe306n21p9R.FRkW3IGn.S
+./ext/standard/crypt_sha512.c:742:35    - Unknown word (dqbp)       -- sPuWGsUSklZt58jaTfF4ZEQpyUNGc0dqbpBYYBaHHrsX." },
 ./ext/standard/dir.c:52:9      - Unknown word (DIRG)       -- #define DIRG(v) ZEND_TSRMG(dir_globals
 ./ext/standard/dir.c:535:8     - Unknown word (dirn)       -- char *dirn;
 ./ext/standard/dns.c:142:10    - Unknown word (Reimplement) -- /* TODO: Reimplement the gethostby* functions
@@ -4029,11 +4042,13 @@ Lines:
 ./ext/standard/filestat.c:129:2     - Unknown word (FSALLOCATE) -- FSALLOCATE fsinfo;
 ./ext/standard/filestat.c:132:46    - Unknown word (FSIL)       -- drive ? drive - 64 : 0, FSIL_ALLOC, &fsinfo, sizeof
 ./ext/standard/filestat.c:882:15    - Unknown word (IXROOT)     -- xmask = S_IXROOT;
-./ext/standard/filters.c:198:14    - Unknown word (lbchars)    -- const char *lbchars;
-./ext/standard/filters.c:200:9     - Unknown word (erem)       -- size_t erem_len;
-./ext/standard/filters.c:201:20    - Unknown word (ccnt)       -- unsigned int line_ccnt;
-./ext/standard/filters.c:494:9     - Unknown word (bmask)      -- #define bmask(a) (0xffff >> (16 -
-./ext/standard/filters.c:505:28    - Unknown word (nbitsof)    -- static const unsigned int nbitsof_pack = 8;
+./ext/standard/filters.c:198:14    - Unknown word (lbchars)                    -- const char *lbchars;
+./ext/standard/filters.c:200:9     - Unknown word (erem)                       -- size_t erem_len;
+./ext/standard/filters.c:201:20    - Unknown word (ccnt)                       -- unsigned int line_ccnt;
+./ext/standard/filters.c:30:33     - Unknown word (nopqrstuvwxyzabcdefghijklm) -- const char rot13_to[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM
+./ext/standard/filters.c:30:59     - Unknown word (NOPQRSTUVWXYZABCDEFGHIJKLM) -- nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+./ext/standard/filters.c:494:9     - Unknown word (bmask)                      -- #define bmask(a) (0xffff >> (16 -
+./ext/standard/filters.c:505:28    - Unknown word (nbitsof)                    -- static const unsigned int nbitsof_pack = 8;
 ./ext/standard/flock_compat.c:102:17    - Unknown word (Yunie)       -- * Lift a leg, Yunie. Luv ya forever!!!
 ./ext/standard/flock_compat.c:31:15     - Unknown word (flck)       -- struct flock flck;
 ./ext/standard/flock_compat.c:96:12     - Unknown word (Terwilliker) -- * Unix J. Terwilliker Jehosophat Aloysius
@@ -4701,6 +4716,10 @@ Lines:
 ./win32/build/deplister.c:25:3      - Unknown word (PCSTR)      -- PCSTR image_name, PCSTR dll
 ./win32/build/mkdist.php:146:14    - Unknown word (itemdb)     -- $itemdb = preg_replace("/\.
 ./win32/build/mkdist.php:176:6     - Unknown word (destfilename) -- $destfilename = $dest_dir . "/" .
+./win32/build/mkdist.php:194:134   - Unknown word (gname)        -- version/a32uname/a32gname/a8devmajor/a8devminor
+./win32/build/mkdist.php:194:142   - Unknown word (devmajor)     -- a32uname/a32gname/a8devmajor/a8devminor", $hdr_data
+./win32/build/mkdist.php:194:153   - Unknown word (devminor)     -- 2gname/a8devmajor/a8devminor", $hdr_data);
+./win32/build/mkdist.php:194:86    - Unknown word (typeflag)     -- 2mtime/a8checksum/a1typeflag/a100link/a6magic/a2version
 ./win32/build/mkdist.php:232:2     - Unknown word (phplib)       -- $phplib = str_replace(".dll
 ./win32/build/mkdist.php:236:6     - Unknown word (phppdb)       -- $phppdb = str_replace(".dll
 ./win32/build/mkdist.php:255:13    - Unknown word (REDIST)       -- "README.REDIST.BINS" => "readme-redist

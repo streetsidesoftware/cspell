@@ -519,6 +519,8 @@ export type Pattern = string | InternalRegExp;
 
 export type PredefinedPatterns =
     | 'Base64'
+    | 'Base64MultiLine'
+    | 'Base64SingleLine'
     | 'CStyleComment'
     | 'CStyleHexValue'
     | 'CSSHexValue'
@@ -531,7 +533,9 @@ export type PredefinedPatterns =
     | 'PhpHereDoc'
     | 'PublicKey'
     | 'RsaCert'
+    | 'SshRsa'
     | 'SHA'
+    | 'HashStrings'
     | 'SpellCheckerDisable'
     | 'SpellCheckerDisableBlock'
     | 'SpellCheckerDisableLine'
