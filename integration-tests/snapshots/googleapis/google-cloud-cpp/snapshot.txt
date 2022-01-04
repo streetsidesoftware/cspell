@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 2169, Issues found: 11594 in 1404 files
+ CSpell: Files checked: 2169, Issues found: 11756 in 1427 files
  exit code: 1
 ./ARCHITECTURE.md:186:1     - Unknown word (discoverability) -- discoverability of available option
 ./ARCHITECTURE.md:22:61     - Unknown word (retriable)  -- RPCs that fail with a retriable error,
@@ -180,7 +180,7 @@ Lines:
 ./external/googleapis/config.pc.in:18:1      - Unknown word (includedir) -- includedir=${prefix}/@CMAKE_INSTALL
 ./external/googleapis/config.pc.in:18:37     - Unknown word (INCLUDEDIR) -- prefix}/@CMAKE_INSTALL_INCLUDEDIR@
 ./external/googleapis/config.pc.in:26:1      - Unknown word (Cflags)     -- Cflags: -I${includedir}
-./external/googleapis/protolists/bigquery.list:2:63      - Unknown word (datatransfer) -- bigquery/datatransfer/v1:datatransfer.proto
+./external/googleapis/protolists/bigquery.list:2:47      - Unknown word (datatransfer) -- google/cloud/bigquery/datatransfer/v1:datatransfer.proto
 ./external/googleapis/protolists/iam.list:4:51      - Unknown word (iamcredentials) -- google/iam/credentials/v1:iamcredentials.proto
 ./external/googleapis/protolists/tasks.list:1:47      - Unknown word (cloudtasks) -- google/cloud/tasks/v2:cloudtasks.proto
 ./generator/BUILD.bazel:19:69     - Unknown word (hdrs)       -- cloud_cpp_generator_hdrs", "google_cloud_cpp
@@ -200,7 +200,9 @@ Lines:
 ./generator/generator_config.proto:37:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
 ./generator/generator_config.proto:44:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
 ./generator/integration_tests/BUILD.bazel:71:54     - Unknown word (filegroup)  -- tests/golden:golden_filegroup",
+./generator/integration_tests/backup.proto:28:40     - Unknown word (genproto)   -- "google.golang.org/genproto/googleapis/test/admin
 ./generator/integration_tests/backup.proto:30:19     - Unknown word (classname)  -- option java_outer_classname = "BackupProto";
+./generator/integration_tests/golden/golden_kitchen_sink_client.h:199:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
 ./generator/integration_tests/golden/golden_kitchen_sink_connection_idempotency_policy.cc:28:34     - Unknown word (Idempotency) -- google::cloud::internal::Idempotency;
 ./generator/integration_tests/golden/golden_kitchen_sink_connection_idempotency_policy.h:19:92     - Unknown word (IDEMPOTENCY) -- KITCHEN_SINK_CONNECTION_IDEMPOTENCY_POLICY_H
 ./generator/integration_tests/golden/golden_thing_admin_client.h:134:40    - Unknown word (backticks)  -- must be enclosed in backticks (`` ` ``).
@@ -210,6 +212,7 @@ Lines:
 ./generator/integration_tests/golden/tests/golden_thing_admin_idempotency_policy_test.cc:26:11     - Unknown word (gtab)       -- namespace gtab = ::google::test::admin
 ./generator/integration_tests/test.proto:1061:38   - Unknown word (appengine)  -- googleapis.com/google.appengine.logging.v1.RequestLog
 ./generator/integration_tests/test.proto:1069:21   - Unknown word (Struct)     -- google.protobuf.Struct json_payload = 6;
+./generator/integration_tests/test.proto:1119:19   - Unknown word (projectid)  -- // `projects/my-projectid/traces/06796866738c
 ./generator/integration_tests/test.proto:321:3     - Unknown word (oneof)      -- oneof source_info {
 ./generator/integration_tests/test.proto:838:52    - Unknown word (UNIQUEID)   -- iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
 ./generator/internal/codegen_utils_test.cc:58:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
@@ -218,6 +221,7 @@ Lines:
 ./generator/internal/descriptor_utils.cc:52:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
 ./generator/internal/descriptor_utils.cc:73:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
 ./generator/internal/descriptor_utils_test.cc:754:10    - Unknown word (endcond)    -- /// @endcond
+./generator/internal/predicate_utils_test.cc:560:46    - Unknown word (Repated)    -- PaginationExactlyOneRepatedStringResponse) {
 ./generator/internal/predicate_utils_test.cc:835:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 ./generator/internal/printer_test.cc:37:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 ./generator/internal/scaffold_generator.cc:535:28    - Unknown word (lgoogle)    -- GOOGLE_CLOUD_PC_LIBS "-lgoogle_cloud_cpp_$library$
@@ -269,6 +273,7 @@ Lines:
 ./google/cloud/bigtable/async_row_reader.h:175:32    - Unknown word (cntr)       -- explicit CountFrame(int& cntr) : cntr(++cntr){};
 ./google/cloud/bigtable/async_row_reader.h:52:12     - Unknown word (NEXTLINE)   -- // NOLINTNEXTLINE(readability-identifier
 ./google/cloud/bigtable/async_row_reader_test.cc:143:22    - Unknown word (corresponse) -- * Future at idx i corresponse to i-th expected row
+./google/cloud/bigtable/async_row_reader_test.cc:491:41    - Unknown word (Doesnt)      -- leAsyncReadRowsTest, ParserEofDoesntFailsOnUnfinishedRowIfRowLimit
 ./google/cloud/bigtable/async_row_reader_test.cc:550:66    - Unknown word (noooo)       -- PERMISSION_DENIED, "noooo");
 ./google/cloud/bigtable/benchmarks/BUILD.bazel:38:5      - Unknown word (linkopts)   -- linkopts = select({
 ./google/cloud/bigtable/benchmarks/BUILD.bazel:40:36     - Unknown word (lpthread)   -- conditions:default": ["-lpthread"],
@@ -279,6 +284,8 @@ Lines:
 ./google/cloud/bigtable/benchmarks/mutation_batcher_throughput_benchmark.cc:140:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
 ./google/cloud/bigtable/benchmarks/mutation_batcher_throughput_benchmark.cc:206:47    - Unknown word (Chrono)     -- FormatDuration(absl::FromChrono(options->max_time))
 ./google/cloud/bigtable/benchmarks/mutation_batcher_throughput_options.cc:77:40     - Unknown word (stoll)      -- mutation_count = std::stoll(val);
+./google/cloud/bigtable/benchmarks/random_mutation.cc:31:33     - Unknown word (Zabcdefghijlkmnopqrstuvwxyz) -- ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_");
+./google/cloud/bigtable/benchmarks/random_mutation.cc:31:8      - Unknown word (ABCDEFGHIJLKMNOPQRSTUVWXY) -- "ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz
 ./google/cloud/bigtable/bigtable_client_testing.bzl:26:19     - Unknown word (backoff)    -- "testing/mock_backoff_policy.h",
 ./google/cloud/bigtable/bigtable_client_unit_tests.bzl:69:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
 ./google/cloud/bigtable/bigtable_client_unit_tests.bzl:70:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
@@ -378,6 +385,7 @@ Lines:
 ./google/cloud/internal/random.cc:31:70     - Unknown word (RDSEED)     -- the RDRAND [1], or the RDSEED [1]
 ./google/cloud/internal/retry_loop_helpers.h:29:6      - Unknown word (copydoc)    -- /// @copydoc GetResultStatus(Status
 ./google/cloud/internal/streaming_read_rpc.cc:68:55     - Unknown word (tname)      -- char const* tname) {
+./google/cloud/kms_key_name_test.cc:47:13     - Unknown word (plojects)   -- "plojects/p1/locations/l1/keyRings
 ./google/cloud/log.cc:68:15     - Unknown word (econv)      -- std::size_t econv = -1;
 ./google/cloud/log.h:140:4     - Unknown word (godbolt)    -- * godbolt.org with modern GCC
 ./google/cloud/log_test.cc:152:39    - Unknown word (anyvalue)   -- Environment env(kEnableClog, "anyvalue");
@@ -546,19 +554,6 @@ Lines:
 ./google/cloud/storage/oauth2/service_account_credentials.cc:145:51    - Unknown word (oneline)    -- decltype(openssl_free)> oneline(
 ./google/cloud/storage/oauth2/service_account_credentials.h:63:62     - Unknown word (keyfiles)   -- applications use JSON keyfiles instead.
 ./google/cloud/storage/oauth2/service_account_credentials_test.cc:542:13    - Unknown word (SCCV)       -- "hRW9bSCCV8w1Ex+"
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:596:15    - Unknown word (Iica)       -- "GbkECPTYJIica3DWAgIIAA==";
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:596:24    - Unknown word (IIAA)       -- "GbkECPTYJIica3DWAgIIAA==";
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:596:9     - Unknown word (ECPTYJ)     -- "GbkECPTYJIica3DWAgIIAA==";
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:68:397    - Unknown word (Ueyu)       -- ifQ.OtL40PSxdAB9rxRkXj-UeyuMhQCoT10WJY4ccOrPXriwm
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:68:418    - Unknown word (Xriwm)      -- UeyuMhQCoT10WJY4ccOrPXriwm-DRl5AMgbBkQvVmWeYuPMTiFKWz
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:68:517    - Unknown word (Uhlvhtj)    -- l00G-BdRxVEhN8U4C20eUhlvhtjXemOwlCFrKjF22rJB-ChiKy
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:68:587    - Unknown word (Cmpxh)      -- dWmsSZPfVD9q-2S2vJdr9vz7NoP-fCmpxhQ3POVocYb-2OEM5c4Uo_e
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:68:635    - Unknown word (MMMR)       -- lQTX3bRtVc19wz_wrTu9wMMMRYt52K8WPoWPURt7qpjHX
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:68:692    - Unknown word (Nfgrls)     -- cJUQoDsgIoZ6vDlQMs7_nqNfgrlsGWHpPoSoGgvJMg1vJbzVLw
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:73:493    - Unknown word (Esiu)       -- gEdPW7etJ1xklIDwPEk0WgEsiu9pP89caPig0nK-bih7f1vbpRBTx
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:73:727    - Unknown word (SPMYGs)     -- abJA6Hs8H1HqSwwyEWTXH6v_SPMYGsN1hIMTAWbO7J11bdHdjxo
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:73:736    - Unknown word (IMTA)       -- HqSwwyEWTXH6v_SPMYGsN1hIMTAWbO7J11bdHdjxo0hO5CA
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:73:749    - Unknown word (Hdjxo)      -- SPMYGsN1hIMTAWbO7J11bdHdjxo0hO5CA)""";
 ./google/cloud/storage/oauth2/service_account_credentials_test.cc:78:11     - Unknown word (Aietf)      -- "urn%3Aietf%3Aparams%3Aoauth%3Agrant
 ./google/cloud/storage/oauth2/service_account_credentials_test.cc:78:18     - Unknown word (Aparams)    -- "urn%3Aietf%3Aparams%3Aoauth%3Agrant-type
 ./google/cloud/storage/oauth2/service_account_credentials_test.cc:78:27     - Unknown word (Aoauth)     -- urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer
