@@ -116,8 +116,8 @@ Options:
   --show-suggestions           Show spelling suggestions.
   --no-must-find-files         Do not error if no files are found.
 
-  --cache                      Only check changed files. (default: false)
-
+  --cache                      Use cache to only check changed files.
+  --no-cache                   Do not use cache.
   --cache-strategy <strategy>  Strategy to use for detecting changed files.
                                (choices: "metadata", "content")
 

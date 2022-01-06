@@ -77,7 +77,8 @@ export function commandLint(prog: Command): Command {
         // .option('--force', 'Force the exit value to always be 0')
         .addOption(new CommanderOption('--legacy', 'Legacy output').hideHelp())
         .addOption(new CommanderOption('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
-        .option('--cache', 'Only check changed files.', false)
+        .option('--cache', 'Use cache to only check changed files.')
+        .option('--no-cache', 'Do not use cache.')
         .addOption(
             new CommanderOption('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
                 'metadata',

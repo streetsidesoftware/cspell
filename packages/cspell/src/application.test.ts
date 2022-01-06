@@ -193,13 +193,15 @@ describe('Linter File Caching', () => {
         return { files, cachedFiles };
     }
 
-    const NoCache: LinterOptions = {};
+    const NoCache: LinterOptions = { cache: false };
+    const Config: LinterOptions = {};
     const WithCache: LinterOptions = { cache: true, cacheStrategy: 'metadata' };
     const CacheContent: LinterOptions = { cache: true, cacheStrategy: 'content' };
 
     test.each`
         runs                                                                                                                         | root            | comment
-        ${[run([], {}, { files: 0 })]}                                                                                               | ${packageRoot}  | ${'No files'}
+        ${[run([], Config, fc(0, 0)), run([], Config, fc(0, 0))]}                                                                    | ${packageRoot}  | ${'No files'}
+        ${[run(['*.md'], Config, fc(1, 0)), run(['*.md'], Config, fc(1, 1))]}                                                        | ${fr('cached')} | ${'Config based caching'}
         ${[run(['*.md'], NoCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1))]}                | ${fr('cached')} | ${'Single .md file not cached then cached, result is not cached.'}
         ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1)), run(['*.md'], WithCache, fc(1, 1))]}              | ${fr('cached')} | ${'Single .md file cached three runs'}
         ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}    | ${fr('cached')} | ${'cached changing glob three runs'}
