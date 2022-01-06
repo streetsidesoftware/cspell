@@ -1,7 +1,7 @@
-import { DiskCache } from './DiskCache';
 import * as FileEntryCacheModule from 'file-entry-cache';
-import * as fileHelper from '../../fileHelper';
 import * as path from 'path';
+import * as fileHelper from '../../fileHelper';
+import { CachedFileResult, DiskCache, CSpellCacheMeta } from './DiskCache';
 
 jest.mock('./getConfigHash', () => ({
     getConfigHash: jest.fn().mockReturnValue('TEST_CONFIG_HASH'),
@@ -23,7 +23,7 @@ jest.mock('file-entry-cache', () => ({
 const mockReadFileInfo = jest.spyOn(fileHelper, 'readFileInfo');
 jest.mock('../../fileHelper', () => ({ readFileInfo: jest.fn() }));
 
-const RESULT_NO_ISSUES = {
+const RESULT_NO_ISSUES: CachedFileResult = {
     processed: true,
     issues: [],
     errors: 0,
@@ -62,15 +62,7 @@ describe('DiskCache', () => {
         });
 
         it('returns cached result', async () => {
-            fileEntryCache.getFileDescriptor.mockReturnValue({
-                meta: {
-                    size: 100,
-                    data: {
-                        result: RESULT_NO_ISSUES,
-                        dependsUponFiles: [],
-                    },
-                },
-            });
+            fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES));
 
             const cachedResult = await diskCache.getCachedLintResults('file');
 
@@ -83,15 +75,7 @@ describe('DiskCache', () => {
         });
 
         it('returns cached result for empty files', async () => {
-            fileEntryCache.getFileDescriptor.mockReturnValue({
-                meta: {
-                    size: 0,
-                    data: {
-                        result: RESULT_NO_ISSUES,
-                        dependsUponFiles: [],
-                    },
-                },
-            });
+            fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES));
 
             const cachedResult = await diskCache.getCachedLintResults('file');
 
@@ -105,15 +89,7 @@ describe('DiskCache', () => {
 
         it('returns cached result for files with errors', async () => {
             const result = { ...RESULT_NO_ISSUES, errors: 10 };
-            fileEntryCache.getFileDescriptor.mockReturnValue({
-                meta: {
-                    size: 100,
-                    data: {
-                        result,
-                        dependsUponFiles: [],
-                    },
-                },
-            });
+            fileEntryCache.getFileDescriptor.mockReturnValue(entry(result));
 
             const fileInfo = { filename: 'file', text: 'file content' };
             mockReadFileInfo.mockReturnValue(Promise.resolve(fileInfo));
@@ -129,15 +105,7 @@ describe('DiskCache', () => {
         });
 
         it('with failed dependencies', async () => {
-            fileEntryCache.getFileDescriptor.mockReturnValue({
-                meta: {
-                    size: 100,
-                    data: {
-                        result: RESULT_NO_ISSUES,
-                        dependsUponFiles: ['fileA', 'fileB'],
-                    },
-                },
-            });
+            fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES, ['fileA', 'fileB']));
 
             fileEntryCache.analyzeFiles.mockReturnValue({
                 changedFiles: ['fileA', 'fileB'],
@@ -170,7 +138,7 @@ describe('DiskCache', () => {
         });
 
         it('writes result and config hash to cache', () => {
-            const descriptor = { meta: { data: { result: undefined } } };
+            const descriptor = { meta: { data: { r: undefined } } };
             fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
 
             const result = {
@@ -182,7 +150,7 @@ describe('DiskCache', () => {
             diskCache.setCachedLintResults({ ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 }, []);
 
             expect(fileEntryCache.getFileDescriptor).toBeCalledWith('some-file');
-            expect(descriptor.meta.data.result).toEqual(result);
+            expect(descriptor.meta.data.r).toEqual(result);
         });
     });
 
@@ -197,3 +165,15 @@ describe('DiskCache', () => {
         jest.clearAllMocks();
     });
 });
+
+function entry(result: CachedFileResult, dependencies: string[] = [], size = 100): { meta: CSpellCacheMeta } {
+    return {
+        meta: {
+            size,
+            data: {
+                r: result,
+                d: dependencies,
+            },
+        },
+    };
+}

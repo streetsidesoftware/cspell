@@ -1,4 +1,3 @@
-export { createCache, DEFAULT_CACHE_LOCATION } from './createCache';
-export type { CreateCacheOptions } from './createCache';
+export { createCache, calcCacheSettings, DEFAULT_CACHE_LOCATION, type CreateCacheSettings } from './createCache';
 export type { CSpellLintResultCache } from './CSpellLintResultCache';
 export type { CacheOptions } from './CacheOptions';

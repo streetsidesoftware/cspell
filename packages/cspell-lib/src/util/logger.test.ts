@@ -1,4 +1,3 @@
-import { mocked } from 'ts-jest/utils';
 import { getLogger, log, logError, Logger, logWarning, setLogger } from './logger';
 
 const logger: Logger = {
@@ -7,7 +6,7 @@ const logger: Logger = {
     error: jest.fn(),
 };
 
-const mockLogger = mocked(logger);
+const mockLogger = jest.mocked(logger);
 
 describe('logger', () => {
     beforeEach(() => {

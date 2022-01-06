@@ -1,6 +1,5 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
-import { mocked } from 'ts-jest/utils';
 import { URI } from 'vscode-uri';
 import { logError, logWarning } from '../util/logger';
 import {
@@ -26,7 +25,7 @@ import {
 } from './CSpellSettingsServer';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 
-const { normalizeSettings, validateRawConfigVersion, validateRawConfigExports } = __testing__;
+const { normalizeCacheSettings, normalizeSettings, validateRawConfigExports, validateRawConfigVersion } = __testing__;
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
 const root = path.resolve(rootCspellLib, '../..');
@@ -36,8 +35,8 @@ const testFixtures = path.join(rootCspellLib, '../../test-fixtures');
 
 jest.mock('../util/logger');
 
-const mockedLogError = mocked(logError);
-const mockedLogWarning = mocked(logWarning);
+const mockedLogError = jest.mocked(logError);
+const mockedLogWarning = jest.mocked(logWarning);
 
 describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings with conflicting "name"', () => {
@@ -626,6 +625,20 @@ describe('Validate search/load config files', () => {
         expect(() => validateRawConfigExports(c, { filename: 'filename' })).toThrowError(
             'Module `export default` is not supported.\n  Use `module.exports =` instead.\n  File: "filename"'
         );
+    });
+});
+
+describe('Validate Normalize Settings', () => {
+    test.each`
+        config                                           | expected
+        ${{}}                                            | ${{}}
+        ${{ cache: {} }}                                 | ${{ cache: {} }}
+        ${{ cache: { useCache: false } }}                | ${{ cache: { useCache: false } }}
+        ${{ cache: { useCache: undefined } }}            | ${{ cache: { useCache: undefined } }}
+        ${{ cache: { cacheLocation: '.cache' } }}        | ${{ cache: { cacheLocation: r(root, '.cache') } }}
+        ${{ cache: { cacheLocation: '${cwd}/.cache' } }} | ${{ cache: { cacheLocation: r(process.cwd(), '.cache') } }}
+    `('normalizeCacheSettings', ({ config, expected }) => {
+        expect(normalizeCacheSettings(config, root)).toEqual(expected);
     });
 });
 

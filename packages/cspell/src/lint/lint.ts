@@ -18,7 +18,7 @@ import {
     readFileListFiles,
 } from '../fileHelper';
 import type { CSpellLintResultCache } from '../util/cache';
-import { createCache } from '../util/cache';
+import { calcCacheSettings, createCache, CreateCacheSettings } from '../util/cache';
 import { toApplicationError, toError } from '../util/errors';
 import type { GlobOptions } from '../util/glob';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from '../util/glob';
@@ -107,9 +107,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         return { ...tdo, context };
     }
 
-    async function processFiles(files: string[], configInfo: ConfigInfo, fileCount: number): Promise<RunResult> {
+    async function processFiles(
+        files: string[],
+        configInfo: ConfigInfo,
+        cacheSettings: CreateCacheSettings
+    ): Promise<RunResult> {
+        const fileCount = files.length;
         const status: RunResult = runResult();
-        const cache = createCache({ ...cfg.options, root: cfg.root });
+        const cache = createCache(cacheSettings);
 
         const emitProgress = (filename: string, fileNum: number, result: FileResult) =>
             reporter.progress({
@@ -133,13 +138,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         for await (const fileP of loadAndProcessFiles()) {
             const { filename, fileNum, result } = await fileP;
-            if (!result.fileInfo.text === undefined) {
-                status.files += result.cached ? 1 : 0;
-                emitProgress(filename, fileNum, result);
-                continue;
-            }
-
             status.files += 1;
+            status.cachedFiles += result.cached ? 1 : 0;
             emitProgress(filename, fileNum, result);
             // Show the spelling errors after emitting the progress.
             result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));
@@ -247,13 +247,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
 
         try {
+            const cacheSettings = await calcCacheSettings(configInfo.config, cfg.options, root);
             const foundFiles = await (hasFileLists
                 ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
                 : findFiles(fileGlobs, globOptions));
             const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
             const files = filterFiles(filtered, globMatcher);
 
-            return await processFiles(files, configInfo, files.length);
+            return await processFiles(files, configInfo, cacheSettings);
         } catch (e) {
             const err = toApplicationError(e);
             reporter.error('Linter', err);
@@ -357,8 +358,8 @@ function extractContext(
 }
 
 function runResult(init: Partial<RunResult> = {}): RunResult {
-    const { files = 0, filesWithIssues = new Set<string>(), issues = 0, errors = 0 } = init;
-    return { files, filesWithIssues, issues, errors };
+    const { files = 0, filesWithIssues = new Set<string>(), issues = 0, errors = 0, cachedFiles = 0 } = init;
+    return { files, filesWithIssues, issues, errors, cachedFiles };
 }
 
 function yesNo(value: boolean) {

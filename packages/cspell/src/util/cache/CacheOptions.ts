@@ -1,3 +1,5 @@
+import type { CacheStrategy } from '@cspell/cspell-types';
+
 export interface CacheOptions {
     /**
      * Store the info about processed files in order to only operate on the changed ones.
@@ -15,5 +17,5 @@ export interface CacheOptions {
     /**
      * Strategy to use for detecting changed files, default: metadata
      */
-    cacheStrategy?: 'metadata' | 'content';
+    cacheStrategy?: CacheStrategy;
 }

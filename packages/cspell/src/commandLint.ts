@@ -84,7 +84,10 @@ export function commandLint(prog: Command): Command {
                 'content',
             ])
         )
-        .option('--cache-location <path>', `Path to the cache file or directory.`, DEFAULT_CACHE_LOCATION)
+        .option(
+            '--cache-location <path>',
+            `Path to the cache file or directory. (default: "${DEFAULT_CACHE_LOCATION}")`
+        )
         .option('--dot', 'Include files and directories starting with `.` (period) when matching globs.')
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
         .option('--no-gitignore', 'Do NOT use .gitignore files.')

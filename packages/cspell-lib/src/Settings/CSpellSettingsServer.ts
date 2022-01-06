@@ -163,6 +163,7 @@ function normalizeSettings(
     const normalizedOverrides = normalizeOverrides(settings, pathToSettingsFile);
     const normalizedReporters = normalizeReporters(settings, pathToSettingsFile);
     const normalizedGitignoreRoot = normalizeGitignoreRoot(settings, pathToSettingsFile);
+    const normalizedCacheSettings = normalizeCacheSettings(settings, pathToSettingsDir);
 
     const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
     const source: Source = settings.source || {
@@ -178,6 +179,7 @@ function normalizeSettings(
         ...normalizedOverrides,
         ...normalizedReporters,
         ...normalizedGitignoreRoot,
+        ...normalizedCacheSettings,
     };
     if (!imports.length) {
         return fileSettings;
@@ -713,6 +715,12 @@ function resolveGlobRoot(settings: CSpellSettings, pathToSettingsFile: string): 
     return globRoot;
 }
 
+function resolveFilePath(filename: string, pathToSettingsFile: string): string {
+    const cwd = process.cwd();
+
+    return path.resolve(pathToSettingsFile, filename.replace('${cwd}', cwd));
+}
+
 function toGlobDef(g: undefined, root: string | undefined, source: string | undefined): undefined;
 function toGlobDef(g: Glob, root: string | undefined, source: string | undefined): GlobDef;
 function toGlobDef(g: Glob[], root: string | undefined, source: string | undefined): GlobDef[];
@@ -854,6 +862,17 @@ function normalizeSettingsGlobs(
     };
 }
 
+function normalizeCacheSettings(
+    settings: Pick<CSpellSettings, 'cache'>,
+    pathToSettingsDir: string
+): Pick<CSpellSettings, 'cache'> {
+    const { cache } = settings;
+    if (cache === undefined) return {};
+    const { cacheLocation } = cache;
+    if (cacheLocation === undefined) return { cache };
+    return { cache: { ...cache, cacheLocation: resolveFilePath(cacheLocation, pathToSettingsDir) } };
+}
+
 function validationMessage(msg: string, fileRef: ImportFileRef) {
     return msg + `\n  File: "${fileRef.filename}"`;
 }
@@ -907,7 +926,8 @@ function validateRawConfig(config: CSpellUserSettings, fileRef: ImportFileRef): 
 }
 
 export const __testing__ = {
+    normalizeCacheSettings,
     normalizeSettings,
-    validateRawConfigVersion,
     validateRawConfigExports,
+    validateRawConfigVersion,
 };

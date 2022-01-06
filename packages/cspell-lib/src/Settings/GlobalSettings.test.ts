@@ -1,5 +1,4 @@
 import Configstore from 'configstore';
-import { mocked } from 'ts-jest/utils';
 import { getLogger } from '../util/logger';
 // eslint-disable-next-line jest/no-mocks-import
 import {
@@ -14,7 +13,7 @@ import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } fro
 const logger = getLogger();
 const mockLog = jest.spyOn(logger, 'log').mockImplementation();
 const mockError = jest.spyOn(logger, 'error').mockImplementation();
-const mockConfigstore = mocked(Configstore, true);
+const mockConfigstore = jest.mocked(Configstore, true);
 
 describe('Validate GlobalSettings', () => {
     beforeEach(() => {

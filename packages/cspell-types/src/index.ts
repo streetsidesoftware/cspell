@@ -1,3 +1,4 @@
-export * from './CSpellSettingsDef';
+export { ConfigFields, type CSpellUserSettingsFields } from './configFields';
 export * from './CSpellReporter';
-export * from './TextOffset';
+export * from './CSpellSettingsDef';
+export type { TextDocumentOffset, TextOffset } from './TextOffset';

@@ -19,7 +19,7 @@ export function toError(e: unknown): Error {
     };
 }
 
-export function isError(e: unknown): e is Error {
+export function isError(e: unknown): e is NodeError {
     if (e instanceof Error) return true;
     if (!e || typeof e !== 'object') return false;
     const ex = <Error>e;
@@ -30,4 +30,8 @@ export function toApplicationError(e: unknown, message?: string): ApplicationErr
     if (e instanceof ApplicationError && !message) return e;
     const err = toError(e);
     return new ApplicationError(message ?? err.message, undefined, err);
+}
+
+interface NodeError extends Error {
+    code?: string;
 }

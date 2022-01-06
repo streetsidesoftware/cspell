@@ -5,18 +5,24 @@ import type { FileResult } from '../../fileHelper';
 import { readFileInfo } from '../../fileHelper';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
 
-type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs'>;
+export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs'>;
 
+/**
+ * This is the data cached.
+ * Property names are short to help keep the cache file size small.
+ */
 interface CachedData {
-    result: CachedFileResult;
-    dependsUponFiles: string[];
+    /** results */
+    r: CachedFileResult;
+    /** dependencies */
+    d: string[];
 }
 
 interface CSpellCachedMetaData {
     data?: CachedData;
 }
 
-type CSpellCacheMeta = (FileDescriptor['meta'] & CSpellCachedMetaData) | undefined;
+export type CSpellCacheMeta = (FileDescriptor['meta'] & CSpellCachedMetaData) | undefined;
 
 /**
  * Caches cspell results on disk
@@ -34,20 +40,14 @@ export class DiskCache implements CSpellLintResultCache {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         const data = meta?.data;
-        const result = data?.result;
+        const result = data?.r;
 
         // Cached lint results are valid if and only if:
         // 1. The file is present in the filesystem
         // 2. The file has not changed since the time it was previously linted
         // 3. The CSpell configuration has not changed since the time the file was previously linted
         // If any of these are not true, we will not reuse the lint results.
-        if (
-            fileDescriptor.notFound ||
-            fileDescriptor.changed ||
-            !meta ||
-            !result ||
-            !this.checkDependencies(data.dependsUponFiles)
-        ) {
+        if (fileDescriptor.notFound || fileDescriptor.changed || !meta || !result || !this.checkDependencies(data.d)) {
             return undefined;
         }
 
@@ -75,8 +75,8 @@ export class DiskCache implements CSpellLintResultCache {
         }
 
         const data: CachedData = {
-            result,
-            dependsUponFiles,
+            r: result,
+            d: dependsUponFiles,
         };
 
         meta.data = data;
