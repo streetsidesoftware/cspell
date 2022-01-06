@@ -6,6 +6,7 @@ import {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
     clearCachedSettingsFiles,
+    currentSettingsFileVersion,
     ENV_CSPELL_GLOB_ROOT,
     extractDependencies,
     extractImportErrors,
@@ -32,6 +33,7 @@ const root = path.resolve(rootCspellLib, '../..');
 const samplesDir = path.resolve(rootCspellLib, 'samples');
 const samplesSrc = path.join(samplesDir, 'src');
 const testFixtures = path.join(rootCspellLib, '../../test-fixtures');
+const oc = expect.objectContaining;
 
 jest.mock('../util/logger');
 
@@ -365,7 +367,8 @@ describe('Validate Glob resolution', () => {
         expect(settingsV1).not.toEqual(sampleSettingsV1);
 
         delete settingsV1.version;
-        expect(settingsV1).toEqual(sampleSettings);
+        const { version: _, ...sample } = sampleSettings;
+        expect(settingsV1).toEqual(sample);
     });
 
     test('Using ENV_CSPELL_GLOB_ROOT as without shared hierarchy', () => {
@@ -373,10 +376,14 @@ describe('Validate Glob resolution', () => {
         const settingsV = normalizeSettings(rawSampleSettings, __filename, {});
         const settingsV1 = normalizeSettings(rawSampleSettingsV1, __filename, {});
 
+        expect(settingsV.version).toEqual(currentSettingsFileVersion);
+
+        expect(settingsV1).toEqual(oc({ version: '0.1' }));
         expect(settingsV).not.toEqual(sampleSettings);
         expect(settingsV1).not.toEqual(sampleSettingsV1);
 
         delete settingsV1.version;
+        delete settingsV.version;
         expect(settingsV1).toEqual(settingsV);
     });
 
@@ -659,10 +666,6 @@ function p(...parts: string[]): string {
 
 function r(...parts: string[]): string {
     return path.resolve(__dirname, p(...parts));
-}
-
-function oc<T>(v: Partial<T>): T {
-    return expect.objectContaining(v);
 }
 
 function relSamples(file: string) {

@@ -28,7 +28,7 @@ type CSpellSettingsVersion = Exclude<CSpellSettings['version'], undefined>;
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = ['0.2'];
 const configSettingsFileVersion0_1 = '0.1';
 const configSettingsFileVersion0_2 = '0.2';
-const currentSettingsFileVersion = configSettingsFileVersion0_2;
+export const currentSettingsFileVersion = configSettingsFileVersion0_2;
 
 const setOfSupportedConfigVersions = new Set<string>(supportedCSpellConfigVersions);
 
@@ -151,6 +151,7 @@ function normalizeSettings(
 
     // Fix up dictionaryDefinitions
     const settings = {
+        version: defaultSettings.version,
         ...rawSettings,
         id,
         name,
