@@ -65,10 +65,22 @@ export interface TraceOptions extends BaseOptions {
 }
 
 export interface BaseOptions {
+    /**
+     * Path to configuration file.
+     */
     config?: string;
+    /**
+     * Programming Language ID.
+     */
     languageId?: string;
+    /**
+     * Locale to use.
+     */
     locale?: string;
-    local?: string; // deprecated
+    /**
+     * @deprecated
+     */
+    local?: string;
 }
 
 export interface LinterCliOptions extends Omit<LinterOptions, 'fileLists'> {
