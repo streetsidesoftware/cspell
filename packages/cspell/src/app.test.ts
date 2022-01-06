@@ -263,7 +263,6 @@ function makeLogger() {
         t = t.replace(/\\/g, '/');
         t = t.replace(/(?<=^info\s+Date:).*$/gm, ' Sat, 03 Apr 2021 11:25:33 GMT');
         t = t.replace(/\b[\d.]+ms\b/g, '0.00ms');
-        t = t.replace(/cspell.json/gi, 'cspell.json'); // Normalize cSpell.json to cspell.json
         t = t.replace(/\b[\d.]+S\b/g, '0.00S');
         return t;
     }
