@@ -78,5 +78,6 @@ async function runReporter(reporter: CSpellReporter): Promise<void> {
         filesWithIssues: new Set(['text.txt']),
         issues: 2,
         errors: 1,
+        cachedFiles: 0,
     });
 }

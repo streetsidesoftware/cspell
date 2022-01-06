@@ -37,10 +37,10 @@ describe('Linter Validation Tests', () => {
         ${['**']}           | ${{ root: samples, config: j(samples, 'linked/cspell-import-missing.json') }}     | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
         ${['**/ebook.tex']} | ${{ root: samples, config: j(samples, 'cspell-missing-dict.json') }}              | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**/ebook.tex']} | ${{ root: samples, config: j(samples, 'linked/cspell-import.json') }}             | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
-        ${[]}               | ${{ root, config: j(root, 'cSpell.json'), fileLists: [filesToCheck], dot: true }} | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, issues: [] })}
-        ${['**/*.md']}      | ${{ root, config: j(root, 'cSpell.json'), fileLists: [filesToCheck] }}            | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
-        ${['**/*.ts']}      | ${{ root, config: j(root, 'cSpell.json'), fileLists: [filesToCheck] }}            | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
-        ${[]}               | ${{ root, config: j(root, 'cSpell.json'), fileLists: ['missing-file.txt'] }}      | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
+        ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck], dot: true }} | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/*.md']}      | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck] }}            | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${['**/*.ts']}      | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheck] }}            | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, issues: [] })}
+        ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: ['missing-file.txt'] }}      | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));

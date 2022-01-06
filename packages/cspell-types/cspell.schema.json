@@ -2,6 +2,34 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
   "definitions": {
+    "CacheSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "cacheLocation": {
+          "$ref": "#/definitions/FSPathResolvable",
+          "description": "Path to the cache location. Can be a file or a directory. If none specified `.cspellcache` will be used. Relative paths are relative to the config file in which"
+        },
+        "cacheStrategy": {
+          "$ref": "#/definitions/CacheStrategy",
+          "default": "metadata",
+          "description": "Strategy to use for detecting changed files, default: metadata"
+        },
+        "useCache": {
+          "default": false,
+          "description": "Store the results of processed files in order to only operate on the changed ones.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "CacheStrategy": {
+      "description": "The Strategy to use to detect if a file has changed.\n- `metadata` - uses the file system timestamp and size to detect changes (fastest).\n- `content` - uses a hash of the file content to check file changes (slower - more accurate).",
+      "enum": [
+        "metadata",
+        "content"
+      ],
+      "type": "string"
+    },
     "CustomDictionaryPath": {
       "description": "A File System Path to a dictionary file.",
       "pattern": "^.*\\.txt$",
@@ -210,8 +238,12 @@
       ],
       "description": "Reference to a dictionary by name. One of:\n-  {@link  DictionaryRef } \n-  {@link  DictionaryNegRef }"
     },
+    "FSPathResolvable": {
+      "$ref": "#/definitions/FsPath",
+      "description": "A File System Path.\n\nSpecial Properties:\n- `${cwd}` prefix - will be replaced with the current working directory.\n- Relative paths are relative to the configuration file."
+    },
     "FsPath": {
-      "description": "A File System Path.",
+      "description": "A File System Path. Relative paths are relative to the configuration file.",
       "type": "string"
     },
     "Glob": {
@@ -742,6 +774,10 @@
       "description": "True to enable compound word checking.",
       "type": "boolean"
     },
+    "cache": {
+      "$ref": "#/definitions/CacheSettings",
+      "description": "Define cache settings."
+    },
     "caseSensitive": {
       "default": false,
       "description": "Determines if words must match case and accent rules.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
@@ -821,7 +857,7 @@
       "description": "Tells the spell checker to searching for `.gitignore` files when it reaches a matching root."
     },
     "globRoot": {
-      "$ref": "#/definitions/FsPath",
+      "$ref": "#/definitions/FSPathResolvable",
       "description": "The root to use for glob patterns found in this configuration. Default: location of the configuration file.   For compatibility reasons, config files with version 0.1, the glob root will   default to be `${cwd}`.\n\nUse `globRoot` to define a different location. `globRoot` can be relative to the location of this configuration file. Defining globRoot, does not impact imported configurations.\n\nSpecial Values:\n- `${cwd}` - will be replaced with the current working directory.\n- `.` - will be the location of the containing configuration file."
     },
     "id": {

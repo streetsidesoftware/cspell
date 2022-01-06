@@ -1,6 +1,10 @@
 {
-    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "$schema": "./cspell.schema.json",
     "version": "0.2",
+    "cache": {
+        "cacheLocation": "./.cspell/.cspellcache",
+        "cacheStrategy": "content"
+    },
     "dictionaryDefinitions": [
         {
             "name": "workspace",
@@ -15,8 +19,8 @@
     ],
     "ignorePaths": [
         ".eslintignore",
-        ".gitattributes",
         ".git",
+        ".gitattributes",
         ".gitignore",
         ".pnp.{js,cjs}",
         ".prettierignore",
@@ -32,6 +36,7 @@
         "**/jest.config.js",
         "**/node_modules/**",
         "**/tsconfig.json",
+        "/.cspell",
         "cspell.json",
         "integration-tests/config/config.json",
         "integration-tests/config/repositories/**",
@@ -50,7 +55,5 @@
     "ignoreWords": [
         "commitcomment"
     ],
-    "words": [
-        "medicalterms"
-    ]
+    "words": []
 }

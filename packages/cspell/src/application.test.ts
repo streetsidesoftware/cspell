@@ -1,16 +1,23 @@
-import type { Issue } from '@cspell/cspell-types';
+import type { Issue, RunResult } from '@cspell/cspell-types';
 import * as path from 'path';
+import { resolve as r } from 'path';
 import * as App from './application';
 import { LinterOptions } from './options';
 import { InMemoryReporter } from './util/InMemoryReporter';
+import * as fs from 'fs-extra';
 
 const getStdinResult = {
     value: '',
 };
 
-const samplesRoot = path.resolve(__dirname, '../samples');
+const packageRoot = r(__dirname, '..');
+const samplesRoot = r(packageRoot, 'samples');
+const fixturesRoot = r(packageRoot, 'fixtures');
+const featuresRoot = r(fixturesRoot, 'features');
 
 const sampleOptions = { root: samplesRoot };
+
+const oc = expect.objectContaining;
 
 jest.mock('get-stdin', () => {
     return jest.fn(() => Promise.resolve(getStdinResult.value));
@@ -160,6 +167,58 @@ describe('Application, Validate Samples', () => {
             expect(reporter.runResult).toEqual(result);
         })
     );
+});
+
+describe('Linter File Caching', () => {
+    function fr(path: string) {
+        return r(featuresRoot, path);
+    }
+
+    interface Run {
+        fileGlobs: string[];
+        options: LinterOptions;
+        expected: Partial<RunResult>;
+    }
+
+    interface TestCase {
+        runs: Run[];
+        root: string;
+    }
+
+    function run(fileGlobs: string[], options: LinterOptions, expected: Partial<RunResult>): Run {
+        return { fileGlobs, options, expected };
+    }
+
+    function fc(files: number, cachedFiles: number): Partial<RunResult> {
+        return { files, cachedFiles };
+    }
+
+    const NoCache: LinterOptions = { cache: false };
+    const Config: LinterOptions = {};
+    const WithCache: LinterOptions = { cache: true, cacheStrategy: 'metadata' };
+    const CacheContent: LinterOptions = { cache: true, cacheStrategy: 'content' };
+
+    test.each`
+        runs                                                                                                                         | root            | comment
+        ${[run([], Config, fc(0, 0)), run([], Config, fc(0, 0))]}                                                                    | ${packageRoot}  | ${'No files'}
+        ${[run(['*.md'], Config, fc(1, 0)), run(['*.md'], Config, fc(1, 1))]}                                                        | ${fr('cached')} | ${'Config based caching'}
+        ${[run(['*.md'], NoCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1))]}                | ${fr('cached')} | ${'Single .md file not cached then cached, result is not cached.'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1)), run(['*.md'], WithCache, fc(1, 1))]}              | ${fr('cached')} | ${'Single .md file cached three runs'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}    | ${fr('cached')} | ${'cached changing glob three runs'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], CacheContent, fc(2, 0))]} | ${fr('cached')} | ${'with cache rebuild'}
+    `('lint caching with $root $comment', async ({ runs, root }: TestCase) => {
+        const reporter = new InMemoryReporter();
+        await fs.remove(r(root, '.cspellcache')).catch(() => undefined);
+
+        for (const run of runs) {
+            const { fileGlobs, options, expected } = run;
+            const useOptions = { ...options };
+            useOptions.root = root;
+            const result = await App.lint(fileGlobs, useOptions, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result).toEqual(oc(expected));
+        }
+    });
 });
 
 interface SampleTest {

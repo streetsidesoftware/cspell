@@ -77,14 +77,18 @@ export function commandLint(prog: Command): Command {
         // .option('--force', 'Force the exit value to always be 0')
         .addOption(new CommanderOption('--legacy', 'Legacy output').hideHelp())
         .addOption(new CommanderOption('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
-        .option('--cache', 'Only check changed files.', false)
+        .option('--cache', 'Use cache to only check changed files.')
+        .option('--no-cache', 'Do not use cache.')
         .addOption(
             new CommanderOption('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
                 'metadata',
                 'content',
             ])
         )
-        .option('--cache-location <path>', `Path to the cache file or directory.`, DEFAULT_CACHE_LOCATION)
+        .option(
+            '--cache-location <path>',
+            `Path to the cache file or directory. (default: "${DEFAULT_CACHE_LOCATION}")`
+        )
         .option('--dot', 'Include files and directories starting with `.` (period) when matching globs.')
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
         .option('--no-gitignore', 'Do NOT use .gitignore files.')

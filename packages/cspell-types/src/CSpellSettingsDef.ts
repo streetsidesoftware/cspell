@@ -24,7 +24,7 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
     __imports?: Map<string, ImportFileRef>;
 }
 
-export interface FileSettings extends ExtendableSettings {
+export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
      * Configuration format version of the settings file.
      * @default "0.2"
@@ -52,7 +52,7 @@ export interface FileSettings extends ExtendableSettings {
      * - `.` - will be the location of the containing configuration file.
      *
      */
-    globRoot?: FsPath;
+    globRoot?: FSPathResolvable;
 
     /**
      * Glob patterns of files to be checked.
@@ -214,6 +214,45 @@ export interface PnPSettings {
      * @default [".pnp.js", ".pnp.cjs"]
      */
     pnpFiles?: string[];
+}
+
+/**
+ * The Strategy to use to detect if a file has changed.
+ * - `metadata` - uses the file system timestamp and size to detect changes (fastest).
+ * - `content` - uses a hash of the file content to check file changes (slower - more accurate).
+ */
+export type CacheStrategy = 'metadata' | 'content';
+
+export interface CacheSettings {
+    /**
+     * Store the results of processed files in order to only operate on the changed ones.
+     * @default false
+     */
+    useCache?: boolean;
+
+    // cspell:word cspellcache
+    /**
+     * Path to the cache location. Can be a file or a directory.
+     * If none specified `.cspellcache` will be used.
+     * Relative paths are relative to the config file in which
+     */
+    cacheLocation?: FSPathResolvable;
+
+    /**
+     * Strategy to use for detecting changed files, default: metadata
+     * @default 'metadata'
+     */
+    cacheStrategy?: CacheStrategy;
+}
+
+/**
+ * These are settings only used by the command line application.
+ */
+export interface CommandLineSettings {
+    /**
+     * Define cache settings.
+     */
+    cache?: CacheSettings;
 }
 
 /**
@@ -669,8 +708,19 @@ export type LanguageIdMultipleNeg = string;
 
 export type LanguageId = LanguageIdSingle | LanguageIdMultiple | LanguageIdMultipleNeg;
 
-/** A File System Path. */
+/**
+ * A File System Path. Relative paths are relative to the configuration file.
+ */
 export type FsPath = string;
+
+/**
+ * A File System Path.
+ *
+ * Special Properties:
+ * - `${cwd}` prefix - will be replaced with the current working directory.
+ * - Relative paths are relative to the configuration file.
+ */
+export type FSPathResolvable = FsPath;
 
 /** Trust Security Level. */
 export type TrustLevel = 'trusted' | 'untrusted';
