@@ -40,7 +40,7 @@ export function addRepository(path: string, url: string, commit: string, branch:
     const config = readConfig();
     const entries = new Map<string, Repository>(config.repositories.map((r) => [r.path, r]));
     const existingEntry: Partial<Repository> = entries.get(path) || {};
-    const args = existingEntry.args || ['**/*.*'];
+    const args = existingEntry.args || ['**'];
     const postCheckoutSteps = existingEntry.postCheckoutSteps;
 
     const entry: Repository = {
