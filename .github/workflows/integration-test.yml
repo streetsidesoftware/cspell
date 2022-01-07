@@ -36,11 +36,17 @@ jobs:
         os:
           - ubuntu-latest
 
+        # List of repositories to check.
+        # Use `repo-list.sh` in `integration-tests` to generate.
         repo:
           - AdaDoom3/AdaDoom3
-          - alexiosc/megistos
-          - aws-amplify/docs
           - Azure/azure-rest-api-specs
+          - MartinThoma/LaTeX-examples
+          - SoftwareBrothers/admin-bro
+          - TheAlgorithms/Python
+          - alexiosc/megistos
+          - apollographql/apollo-server
+          - aws-amplify/docs
           - bitjson/typescript-starter
           - canada-ca/open-source-logiciel-libre
           - django/django
@@ -51,16 +57,15 @@ jobs:
           - graphql/graphql-relay-js
           - graphql/graphql-spec
           - liriliri/licia
-          - MartinThoma/LaTeX-examples
+          - mdx-js/mdx
           - microsoft/TypeScript-Website
           - pagekit/pagekit
           - php/php-src
           - plasticrake/tplink-smarthome-api
           - prettier/prettier
           - pycontribs/jira
-          - SoftwareBrothers/admin-bro
+          - shoelace-style/shoelace
           - twbs/bootstrap
-          - TheAlgorithms/Python
           - typescript-cheatsheets/react
           - typescript-eslint/typescript-eslint
           - w3c/aria-practices
@@ -191,3 +196,4 @@ jobs:
 # cspell:ignore MartinThoma googleapis
 # cspell:ignore plasticrake tplink smarthome
 # cspell:ignore logiciel twbs
+# cspell:ignore apollographql
