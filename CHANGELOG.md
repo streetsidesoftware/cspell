@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.15.0](https://github.com/streetsidesoftware/cspell/compare/v5.14.0...v5.15.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* Invalidate cache when config has changed ([#2160](https://github.com/streetsidesoftware/cspell/issues/2160)) ([705c638](https://github.com/streetsidesoftware/cspell/commit/705c638bb305ab448e04d231d03a4310561eb6d1))
+* make config file version `0.2` by default. ([#2186](https://github.com/streetsidesoftware/cspell/issues/2186)) ([ed8af60](https://github.com/streetsidesoftware/cspell/commit/ed8af604a6a71de5707fbb324e2c248d2f08ccf0))
+* Update dictionaries ([#2173](https://github.com/streetsidesoftware/cspell/issues/2173)) ([d82aeb6](https://github.com/streetsidesoftware/cspell/commit/d82aeb62d3b486621222970bc606ae885694000f))
+
+
+### Features
+
+* Add support for cache options in config files. ([#2184](https://github.com/streetsidesoftware/cspell/issues/2184)) ([7256919](https://github.com/streetsidesoftware/cspell/commit/7256919ea4c4d8a924e21906f602fb160e2f96c9))
+* Remove 40 character limit on spell checking words ([#2175](https://github.com/streetsidesoftware/cspell/issues/2175)) ([5769a0e](https://github.com/streetsidesoftware/cspell/commit/5769a0e9dbab5f68633e57345271c741cd611dad))
+
+
+
+
+
 # [5.14.0](https://github.com/streetsidesoftware/cspell/compare/v5.14.0-alpha.0...v5.14.0) (2021-12-29)
 
 **Note:** Version bump only for package cspell-monorepo

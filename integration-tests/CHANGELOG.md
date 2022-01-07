@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.15.0](https://github.com/streetsidesoftware/cspell/compare/v5.14.0...v5.15.0) (2022-01-07)
+
+
+### Bug Fixes
+
+* Update dictionaries ([#2173](https://github.com/streetsidesoftware/cspell/issues/2173)) ([d82aeb6](https://github.com/streetsidesoftware/cspell/commit/d82aeb62d3b486621222970bc606ae885694000f))
+
+
+### Features
+
+* Remove 40 character limit on spell checking words ([#2175](https://github.com/streetsidesoftware/cspell/issues/2175)) ([5769a0e](https://github.com/streetsidesoftware/cspell/commit/5769a0e9dbab5f68633e57345271c741cd611dad))
+
+
+
+
+
 # [5.14.0](https://github.com/streetsidesoftware/cspell/compare/v5.14.0-alpha.0...v5.14.0) (2021-12-29)
 
 **Note:** Version bump only for package cspell-integration-tests
