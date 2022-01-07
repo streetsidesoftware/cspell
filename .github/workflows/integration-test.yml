@@ -14,19 +14,10 @@ on:
       - "!docs/**"
   # Run on demand
   workflow_dispatch:
-    inputs:
-      updateSnapshots:
-        description: "Update Integration Test snapshots (y/n)"
-        default: "n"
-        required: false
 
 jobs:
   integration-tests:
     runs-on: ${{ matrix.os }}
-
-    env:
-      update_args: ${{ (startsWith(github.event.inputs.updateSnapshots, 'y') || startsWith(github.event.inputs.updateSnapshots, 'Y')) && '--update' || '' }}
-      branch_prefix: update-integration-ref
 
     strategy:
       matrix:
@@ -121,22 +112,15 @@ jobs:
           echo Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Cache Integration Test Repository Files
-        if: ${{ !env.update_args && !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         uses: actions/cache@v2
         with:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
 
-      - name: Show Update Args
-        if: ${{ env.update_args }}
-        run: |
-          echo Update Snapshots - ${{ github.event.inputs.updateSnapshots }}
-          echo Update Args - ${{ env.update_args }}
-          echo ${{ env.branch_prefix }}/${{ matrix.repo }}
-
       - name: Npm CI
-        if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit || env.update_args }}
+        if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit }}
         run: npm ci
 
       - name: Has Npm has failed?
@@ -150,29 +134,13 @@ jobs:
         run: npm run build
 
       - name: Run Integration Tests ${{ matrix.repo }}
-        if: ${{ env.update_args || !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
           && npm ci
-          && npm run integration-tests -- ${{ matrix.repo }} ${{ env.update_args }}
-
-      # Update if necessary
-
-      - name: Detect Changes
-        run: |
-          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
-          git --no-pager diff --compact-summary
-
-      - name: Gen Body
-        run: |
-          echo 'git_body<<DIFF' >> $GITHUB_ENV
-          git --no-pager diff --compact-summary >> $GITHUB_ENV
-          echo 'DIFF' >> $GITHUB_ENV
-
-      - name: Echo git_status
-        run: echo ${{ env.git_status }}
+          && npm run integration-tests -- ${{ matrix.repo }}
 
 # cspell:ignore MartinThoma googleapis
 # cspell:ignore plasticrake tplink smarthome
