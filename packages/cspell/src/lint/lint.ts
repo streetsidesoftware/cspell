@@ -139,7 +139,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         for await (const fileP of loadAndProcessFiles()) {
             const { filename, fileNum, result } = await fileP;
             status.files += 1;
-            status.cachedFiles += result.cached ? 1 : 0;
+            status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
             emitProgress(filename, fileNum, result);
             // Show the spelling errors after emitting the progress.
             result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));

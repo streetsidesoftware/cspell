@@ -58,7 +58,7 @@ export interface RunResult {
     /** Number of processing errors. */
     errors: number;
     /** Number files that used results from the cache. */
-    cachedFiles: number;
+    cachedFiles?: number;
 }
 
 export type ResultEmitter = (result: RunResult) => void | Promise<void>;
