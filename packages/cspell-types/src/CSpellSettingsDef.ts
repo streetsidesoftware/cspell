@@ -234,7 +234,10 @@ export interface CacheSettings {
     /**
      * Path to the cache location. Can be a file or a directory.
      * If none specified `.cspellcache` will be used.
-     * Relative paths are relative to the config file in which
+     * Relative paths are relative to the config file in which it
+     * is defined.
+     *
+     * A prefix of `${cwd}` is replaced with the current working directory.
      */
     cacheLocation?: FSPathResolvable;
 
