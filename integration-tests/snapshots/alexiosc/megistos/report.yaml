@@ -3,9 +3,9 @@ Repository: alexiosc/megistos
 Url: https://github.com/alexiosc/megistos.git
 Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,html}"]
 Summary:
-  files: 745
-  filesWithIssues: 718
-  issues: 28120
+  files: 746
+  filesWithIssues: 719
+  issues: 28136
   errors: 0
 Errors: []
 
@@ -3874,6 +3874,11 @@ issues:
   - "README.md:96:41     	kludgery        	U   	reinvent-the-wheel kludgery."
   - "README.md:180:94    	Curret          	U   	you prefer). Note ‘`Curret`’ typo! 😉"
   - "README.md:204:26    	autotranslated  	U   	Acrobase Login Screen, autotranslated US ASCII](doc/screenshots"
+  - "src/bbsconfig.h:105:33  	getpt   	U   	to 1 if you have the `getpt' function. */"
+  - "src/bbsconfig.h:106:13  	GETPT   	U   	#undef HAVE_GETPT"
+  - "src/bbsconfig.h:136:51  	lcurses 	U   	the `curses' library (-lcurses). */"
+  - "src/bbsconfig.h:139:52  	lncurses	U   	`ncurses' library (-lncurses). */"
+  - "src/bbsconfig.h:142:52  	ltyphoon	U   	`typhoon' library (-ltyphoon). */"
   - "src/libmegistos/bbsmod.c:88:55      	Beautifications 	U   	fatal() and fatalsys(). Beautifications."
   - "src/libmegistos/bbsmod.c:89:25      	syschat         	U   	Minor corrections to syschat() and loaduser()."
   - "src/libmegistos/bbsmod.c:479:6      	setxlationtable 	U   	/* setxlationtable(getpxlation(thisuseracc"
@@ -3895,9 +3900,9 @@ issues:
   - "src/libmegistos/globalcmd.c:182:6   	dlhandle    	U   	lt_dlhandle handle;"
   - "src/libmegistos/globalcmd.c:223:12  	gcserver    	U   	int (*gcserver) (void);"
   - "src/libmegistos/input.c:93:4    	Acceptinjoth	U   	* Acceptinjoth() now uses an IPC message"
-  - "src/libmegistos/input.c:253:28  	Injoth      	U   	INJ_MESSAGE_ACK: /* Injoth message with acknowledgement"
-  - "src/libmegistos/input.c:307:29  	tmout       	U   	cp = 0, count = 0, tmout;"
-  - "src/libmegistos/input.c:309:21  	tvtimeout   	U   	struct timeval tv, tvtimeout;"
+  - "src/libmegistos/input.c:259:28  	Injoth      	U   	INJ_MESSAGE_ACK: /* Injoth message with acknowledgement"
+  - "src/libmegistos/input.c:309:29  	tmout       	U   	cp = 0, count = 0, tmout;"
+  - "src/libmegistos/input.c:311:21  	tvtimeout   	U   	struct timeval tv, tvtimeout;"
   - "src/libmegistos/input.h:732:19  	hilevel 	U   	/** @defgroup inp_hilevel High-Level user-interacting"
   - "src/libmegistos/mksysvar.c:3:16     	mksysvar	U   	** FILE: mksysvar.c"
   - "src/libmegistos/msgidx.c:179:30     	mdir    	U   	char *_hdir = NULL, *_mdir = NULL;"
@@ -3973,10 +3978,8 @@ issues:
   - "src/system/emud/emud.c:181:9    	idlzapt     	U   	int idlzapt = 0;"
   - "src/system/emud/emud.c:185:9    	relogfn     	U   	char relogfn[256];"
   - "src/system/emud/emud.c:230:1    	errorf      	U   	errorf (char *fmt, ...)"
-  - "src/system/emud/emud.c:245:13   	GETPT       	U   	#undef HAVE_GETPT"
   - "src/system/emud/emud.c:435:6    	ptyxx       	U   	find_ptyxx (char *ptyname)"
   - "src/system/emud/emud.c:441:21   	srpq        	U   	static char *s1 = \"srpq\", *s2 = \"fedcba9876"
-  - "src/system/emud/emud.c:465:15   	getpt       	U   	int fd = getpt ();"
   - "src/system/emud/emud.c:477:6    	ttyxx       	U   	find_ttyxx (char *ttyname, int"
   - "src/system/emud/emud.c:477:32   	ptyfd       	U   	(char *ttyname, int ptyfd)"
   - "src/system/emud/emud.c:504:10   	ttyfd       	U   	int ttyfd;"
