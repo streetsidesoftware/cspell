@@ -3,7 +3,7 @@ Repository: alexiosc/megistos
 Url: "https://github.com/alexiosc/megistos.git"
 Args: ["--config=../../../../config/repositories/alexiosc/megistos/cspell.json","**/*.{md,c,h,html}"]
 Lines:
- CSpell: Files checked: 745, Issues found: 28120 in 718 files
+ CSpell: Files checked: 746, Issues found: 28136 in 719 files
  exit code: 1
 ./ATTIC/doc/examples/mod_dialog.c:18:13     - Unknown word (margv)      -- if (sameas (margv [6], "OK") || sameas
 ./ATTIC/doc/examples/mod_dialog.c:9:29      - Unknown word (FOOVT)      -- dialog_run ("foo", FOOVT, FOOLT, inp_buffer)
@@ -3880,6 +3880,11 @@ Lines:
 ./TODO.md:73:4      - Unknown word (mkmtree)         -- * `mkmtree`, `menuman`: fix EXIT
 ./TODO.md:77:3      - Unknown word (Debianise)       -- * Debianise library
 ./TODO.md:92:26     - Unknown word (libclubhdr)      -- built). DONE, but used libclubhdr instead.
+./src/bbsconfig.h:105:33    - Unknown word (getpt)      -- to 1 if you have the `getpt' function. */
+./src/bbsconfig.h:106:13    - Unknown word (GETPT)      -- #undef HAVE_GETPT
+./src/bbsconfig.h:136:51    - Unknown word (lcurses)    -- the `curses' library (-lcurses). */
+./src/bbsconfig.h:139:52    - Unknown word (lncurses)   -- `ncurses' library (-lncurses). */
+./src/bbsconfig.h:142:52    - Unknown word (ltyphoon)   -- `typhoon' library (-ltyphoon). */
 ./src/libmegistos/bbsmod.c:479:6     - Unknown word (setxlationtable) -- /* setxlationtable(getpxlation(thisuseracc
 ./src/libmegistos/bbsmod.c:88:55     - Unknown word (Beautifications) -- fatal() and fatalsys(). Beautifications.
 ./src/libmegistos/bbsmod.c:89:25     - Unknown word (syschat)         -- Minor corrections to syschat() and loaduser().
@@ -3900,9 +3905,9 @@ Lines:
 ./src/libmegistos/globalcmd.c:223:12    - Unknown word (gcserver)   -- int (*gcserver) (void);
 ./src/libmegistos/globalcmd.c:46:28     - Unknown word (hadnling)   -- Changed Dynamic Library hadnling to use libtool's libltdl
 ./src/libmegistos/globalcmd.c:98:35     - Unknown word (regd)       -- the registry daemon (regd). As a result, the first
-./src/libmegistos/input.c:253:28    - Unknown word (Injoth)       -- INJ_MESSAGE_ACK: /* Injoth message with acknowledgement
-./src/libmegistos/input.c:307:29    - Unknown word (tmout)        -- cp = 0, count = 0, tmout;
-./src/libmegistos/input.c:309:21    - Unknown word (tvtimeout)    -- struct timeval tv, tvtimeout;
+./src/libmegistos/input.c:259:28    - Unknown word (Injoth)       -- INJ_MESSAGE_ACK: /* Injoth message with acknowledgement
+./src/libmegistos/input.c:309:29    - Unknown word (tmout)        -- cp = 0, count = 0, tmout;
+./src/libmegistos/input.c:311:21    - Unknown word (tvtimeout)    -- struct timeval tv, tvtimeout;
 ./src/libmegistos/input.c:93:4      - Unknown word (Acceptinjoth) -- * Acceptinjoth() now uses an IPC message
 ./src/libmegistos/input.h:732:19    - Unknown word (hilevel)    -- /** @defgroup inp_hilevel High-Level user-interacting
 ./src/libmegistos/mksysvar.c:3:16      - Unknown word (mksysvar)   -- ** FILE:     mksysvar.c
@@ -3983,10 +3988,8 @@ Lines:
 ./src/system/emud/emud.c:185:9     - Unknown word (relogfn)    -- char relogfn[256];
 ./src/system/emud/emud.c:230:1     - Unknown word (errorf)     -- errorf (char *fmt, ...)
 ./src/system/emud/emud.c:23:16     - Unknown word (EMUINP)     -- ** EMUINP contains the pseudo
-./src/system/emud/emud.c:245:13    - Unknown word (GETPT)      -- #undef HAVE_GETPT
 ./src/system/emud/emud.c:435:6     - Unknown word (ptyxx)      -- find_ptyxx (char *ptyname)
 ./src/system/emud/emud.c:441:21    - Unknown word (srpq)       -- static char *s1 = "srpq", *s2 = "fedcba9876
-./src/system/emud/emud.c:465:15    - Unknown word (getpt)      -- int fd = getpt ();
 ./src/system/emud/emud.c:477:32    - Unknown word (ptyfd)      -- (char *ttyname, int ptyfd)
 ./src/system/emud/emud.c:477:6     - Unknown word (ttyxx)      -- find_ttyxx (char *ttyname, int
 ./src/system/emud/emud.c:504:10    - Unknown word (ttyfd)      -- int ttyfd;

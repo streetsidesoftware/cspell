@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2730, Issues found: 7120 in 857 files
+ CSpell: Files checked: 2732, Issues found: 7131 in 859 files
  exit code: 1
 ./django/apps/config.py:125:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:132:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -147,8 +147,8 @@ Lines:
 ./django/contrib/auth/management/commands/createsuperuser.py:40:16     - Unknown word (noinput)    -- '--noinput', '--no-input', action
 ./django/contrib/auth/management/commands/createsuperuser.py:98:41     - Unknown word (isatty)     -- hasattr(self.stdin, 'isatty') and not self.stdin
 ./django/contrib/auth/models.py:11:19     - Unknown word (itercompat) -- from django.utils.itercompat import is_iterable
-./django/contrib/auth/password_validation.py:165:18    - Unknown word (gzipped)    -- which may be gzipped. The list Django ships
-./django/contrib/auth/password_validation.py:166:31    - Unknown word (deduplicated) -- passwords (lowercased and deduplicated), created by Royce Williams
+./django/contrib/auth/password_validation.py:201:18    - Unknown word (gzipped)    -- which may be gzipped. The list Django ships
+./django/contrib/auth/password_validation.py:202:31    - Unknown word (deduplicated) -- passwords (lowercased and deduplicated), created by Royce Williams
 ./django/contrib/auth/urls.py:18:18     - Unknown word (uidb)       -- path('reset/<uidb64>/<token>/', views
 ./django/contrib/auth/validators.py:4:38      - Unknown word (deconstructible) -- utils.deconstruct import deconstructible
 ./django/contrib/auth/views.py:285:28    - Unknown word (Referer)    -- # HTTP Referer header.
@@ -253,7 +253,7 @@ Lines:
 ./django/contrib/gis/geoip2/__init__.py:11:23     - Unknown word (mmdb)       -- Grab GeoLite2-Country.mmdb.gz and GeoLite2-City
 ./django/contrib/gis/geoip2/base.py:157:28    - Unknown word (gethostbyname) -- query = socket.gethostbyname(query)
 ./django/contrib/gis/geoip2/base.py:190:9     - Unknown word (cdict)         -- cdict = self.city(query)
-./django/contrib/gis/geometry.py:14:8      - Unknown word (ACEGIMLONPSRUTYZ) -- r'[ACEGIMLONPSRUTYZ\d,\.\-\+\(\) ]+)$',
+./django/contrib/gis/geometry.py:14:8      - Unknown word (ACEGIMLONPSRUTYZ) -- r'[ACEGIMLONPSRUTYZ0-9,\.\-\+\(\) ]+)$'
 ./django/contrib/gis/geos/__init__.py:12:7      - Unknown word (libgeos)    -- from .libgeos import geos_version
 ./django/contrib/gis/geos/collections.py:57:25     - Unknown word (geomn)      -- return capi.get_geomn(self.ptr, index)
 ./django/contrib/gis/geos/coordseq.py:87:17     - Unknown word (setx)       -- capi.cs_setx(self.ptr, index, value
@@ -534,7 +534,7 @@ Lines:
 ./django/db/migrations/executor.py:32:62     - Unknown word (unmigrate)  -- label, None), that means unmigrate everything
 ./django/db/migrations/migration.py:124:26    - Unknown word (behaviour)  -- # Normal behaviour
 ./django/db/migrations/operations/base.py:32:5      - Unknown word (elidable)   -- elidable = False
-./django/db/migrations/operations/models.py:100:25    - Unknown word (smodel)     -- return "Create %smodel %s" % ("proxy " if self
+./django/db/migrations/operations/models.py:103:25    - Unknown word (smodel)     -- return "Create %smodel %s" % ("proxy " if self
 ./django/db/migrations/operations/special.py:47:13     - Unknown word (dbop)       -- for dbop in self.database_operations
 ./django/db/migrations/serializer.py:224:24    - Unknown word (fspath)     -- return repr(os.fspath(self.value)), {}
 ./django/db/migrations/serializer.py:66:37     - Unknown word (astimezone) -- self.value = self.value.astimezone(utc)
@@ -604,15 +604,15 @@ Lines:
 ./django/template/base.py:245:9     - Unknown word (upto)       -- upto = 0
 ./django/template/base.py:606:19    - Unknown word (strdq)      -- (?:%(i18n_open)s%(strdq)s%(i18n_close)s|
 ./django/template/base.py:607:16    - Unknown word (strsq)      -- %(i18n_open)s%(strsq)s%(i18n_close)s|
-./django/template/base.py:738:9     - Unknown word (plen)       -- plen = len(provided) + 1
-./django/template/base.py:743:9     - Unknown word (alen)       -- alen = len(args)
-./django/template/base.py:744:9     - Unknown word (dlen)       -- dlen = len(defaults or [
-./django/template/base.py:880:48    - Unknown word (unsubscriptable) -- TypeError): # unsubscriptable object
-./django/template/defaultfilters.py:129:55    - Unknown word (unlocalized) -- force the result to be unlocalized. When the
-./django/template/defaultfilters.py:180:5     - Unknown word (tupl)        -- tupl = d.as_tuple()
-./django/template/defaultfilters.py:366:37    - Unknown word (nofollow)    -- safe(_urlize(value, nofollow=True, autoescape=autoescape
-./django/template/defaultfilters.py:8:20      - Unknown word (pformat)    -- from pprint import pformat
-./django/template/defaultfilters.py:909:22    - Unknown word (cand)        -- * If value is 0, cand{{ value|pluralize:"y
+./django/template/base.py:739:9     - Unknown word (plen)       -- plen = len(provided) + 1
+./django/template/base.py:744:9     - Unknown word (alen)       -- alen = len(args)
+./django/template/base.py:745:9     - Unknown word (dlen)       -- dlen = len(defaults or [
+./django/template/base.py:881:48    - Unknown word (unsubscriptable) -- TypeError): # unsubscriptable object
+./django/template/defaultfilters.py:125:55    - Unknown word (unlocalized) -- force the result to be unlocalized. When the
+./django/template/defaultfilters.py:176:5     - Unknown word (tupl)        -- tupl = d.as_tuple()
+./django/template/defaultfilters.py:362:37    - Unknown word (nofollow)    -- safe(_urlize(value, nofollow=True, autoescape=autoescape
+./django/template/defaultfilters.py:917:22    - Unknown word (cand)        -- * If value is 0, cand{{ value|pluralize:"y
+./django/template/defaultfilters.py:9:20      - Unknown word (pformat)    -- from pprint import pformat
 ./django/template/defaulttags.py:1052:48   - Unknown word (amet)       -- Lorem ipsum dolor sit amet, consectetuer...").
 ./django/template/defaulttags.py:1052:54   - Unknown word (consectetuer) -- ipsum dolor sit amet, consectetuer...").
 ./django/template/defaulttags.py:1118:21   - Unknown word (Remler)       -- * Emily Remler
@@ -628,7 +628,7 @@ Lines:
 ./django/test/runner.py:33:12     - Unknown word (ipdb)       -- import ipdb as pdb
 ./django/test/runner.py:38:12     - Unknown word (tblib)      -- import tblib.pickling_support
 ./django/test/signals.py:204:54    - Unknown word (modwsgi)    -- auth.handlers import modwsgi
-./django/test/testcases.py:820:46    - Unknown word (ndiff)      -- + '\n'.join(difflib.ndiff(
+./django/test/testcases.py:831:46    - Unknown word (ndiff)      -- + '\n'.join(difflib.ndiff(
 ./django/urls/base.py:17:16     - Unknown word (Lconfs)     -- # Overridden URLconfs for each thread are
 ./django/urls/base.py:18:2      - Unknown word (urlconfs)   -- _urlconfs = Local()
 ./django/urls/conf.py:1:27      - Unknown word (Lsconfs)    -- Functions for use in URLsconfs."""
@@ -1037,9 +1037,9 @@ Lines:
 ./tests/auth_tests/test_models.py:60:24     - Unknown word (examplemodela) -- model='examplemodela',
 ./tests/auth_tests/test_models.py:64:24     - Unknown word (examplemodelb) -- model='examplemodelb',
 ./tests/auth_tests/test_tokens.py:102:23    - Unknown word (abcdefghijkl) -- new_secret = 'abcdefghijkl'
-./tests/auth_tests/test_validators.py:236:44    - Unknown word (ᴮᴵᴳᴮᴵᴿᴰ)    -- usernames = ['joe', 'René', 'ᴮᴵᴳᴮᴵᴿᴰ', 'أحمد']
-./tests/auth_tests/test_validators.py:236:55    - Unknown word (أحمد)       -- 'René', 'ᴮᴵᴳᴮᴵᴿᴰ', 'أحمد']
-./tests/auth_tests/test_validators.py:239:28    - Unknown word (Bspace)     -- "zerowidth\u200Bspace", "nonbreaking\u00A
+./tests/auth_tests/test_validators.py:233:44    - Unknown word (ᴮᴵᴳᴮᴵᴿᴰ)    -- usernames = ['joe', 'René', 'ᴮᴵᴳᴮᴵᴿᴰ', 'أحمد']
+./tests/auth_tests/test_validators.py:233:55    - Unknown word (أحمد)       -- 'René', 'ᴮᴵᴳᴮᴵᴿᴰ', 'أحمد']
+./tests/auth_tests/test_validators.py:236:28    - Unknown word (Bspace)     -- "zerowidth\u200Bspace", "nonbreaking\u00A
 ./tests/auth_tests/test_views.py:370:9     - Unknown word (uuidb)      -- uuidb64 = response.resolver
 ./tests/backends/base/test_creation.py:32:22     - Unknown word (hodor)      -- prod_name = 'hodor'
 ./tests/backends/oracle/test_introspection.py:15:13     - Unknown word (seqs)       -- seqs = connection.introspection
@@ -1136,10 +1136,10 @@ Lines:
 ./tests/expressions_window/tests.py:37:19     - Unknown word (Jenson)     -- ('Jenson', 45000, 'Accounting
 ./tests/expressions_window/tests.py:758:56    - Unknown word (Nowak)      -- department': 'IT', 'name': 'Nowak', 'salary': 32000})
 ./tests/file_storage/test_generate_filename.py:10:7      - Unknown word (AWSS)       -- class AWSS3Storage(Storage):
-./tests/file_storage/test_generate_filename.py:165:24    - Unknown word (awss)       -- def test_filefield_awss3_storage(self):
-./tests/file_storage/tests.py:581:73    - Unknown word (Trac)       -- than underscores, like Trac.
-./tests/file_storage/tests.py:661:34    - Unknown word (stringio)   -- storage.save('tests/stringio', output)
-./tests/file_storage/tests.py:674:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
+./tests/file_storage/test_generate_filename.py:172:24    - Unknown word (awss)       -- def test_filefield_awss3_storage(self):
+./tests/file_storage/tests.py:587:73    - Unknown word (Trac)       -- than underscores, like Trac.
+./tests/file_storage/tests.py:667:34    - Unknown word (stringio)   -- storage.save('tests/stringio', output)
+./tests/file_storage/tests.py:680:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
 ./tests/file_uploads/tests.py:162:22    - Unknown word (pwnd)       -- 'You got pwnd.\r\n',
 ./tests/file_uploads/tests.py:750:93    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
 ./tests/files/tests.py:161:25    - Unknown word (l'été)      -- content = "vive l'été\n"
@@ -1202,9 +1202,9 @@ Lines:
 ./tests/forms_tests/tests/test_forms.py:2102:62   - Unknown word (Scrmbl)      -- Hans', 'last_name': 'Scrmbl', 'birthday': '1974
 ./tests/forms_tests/tests/test_forms.py:2277:67   - Unknown word (Wählen)      -- PasswordInput, help_text='Wählen Sie mit Bedacht.')
 ./tests/forms_tests/tests/test_forms.py:2277:82   - Unknown word (Bedacht)     -- text='Wählen Sie mit Bedacht.')
-./tests/forms_tests/tests/test_forms.py:3715:26   - Unknown word (myradio)     -- '<div class="myradio">{{ radio }}</div>'
-./tests/forms_tests/tests/test_forms.py:3732:26   - Unknown word (mycheckbox)  -- '<div class="mycheckbox">{{ checkbox }}</div
-./tests/forms_tests/tests/test_forms.py:3922:48   - Unknown word (doesn)       -- picking a username that doesn&#x27;t already exist
+./tests/forms_tests/tests/test_forms.py:3750:26   - Unknown word (myradio)     -- '<div class="myradio">{{ radio }}</div>'
+./tests/forms_tests/tests/test_forms.py:3767:26   - Unknown word (mycheckbox)  -- '<div class="mycheckbox">{{ checkbox }}</div
+./tests/forms_tests/tests/test_forms.py:3957:48   - Unknown word (doesn)       -- picking a username that doesn&#x27;t already exist
 ./tests/forms_tests/tests/test_forms.py:666:15    - Unknown word (Beatle)     -- class BeatleForm(Form):
 ./tests/forms_tests/tests/test_forms.py:732:24    - Unknown word (noniterable) -- def test_form_with_noniterable_boundfield(self):
 ./tests/forms_tests/tests/test_formsets.py:1144:40   - Unknown word (mgmt)         -- someone fiddles with the mgmt form data...
@@ -1334,13 +1334,13 @@ Lines:
 ./tests/gis_tests/geoapp/tests.py:612:9     - Unknown word (forney)              -- forney_houston = GEOSGeometry
 ./tests/gis_tests/geogapp/tests.py:138:13    - Unknown word (hzip)       -- hzip = Zipcode.objects.get
 ./tests/gis_tests/geogapp/tests.py:74:19     - Unknown word (Bexar)      -- names = ['Bexar', 'Galveston', 'Harris
-./tests/gis_tests/geos_tests/test_geos.py:1212:9    - Unknown word (tgeoms)     -- tgeoms = get_geoms(self.geometries
-./tests/gis_tests/geos_tests/test_geos.py:1231:9    - Unknown word (pnts)       -- pnts = [Point(5, 5), Point
-./tests/gis_tests/geos_tests/test_geos.py:126:9     - Unknown word (srids)      -- srids = (-1, 32140)
-./tests/gis_tests/geos_tests/test_geos.py:1385:25   - Unknown word (CAPI)       -- (b'3.0.0rc4-CAPI-1.3.3', (3, 0, 0)),
-./tests/gis_tests/geos_tests/test_geos.py:1420:37   - Unknown word (SRUD)       -- GEOSGeometry.from_ewkt('SRUD=1;POINT(1 1)')
-./tests/gis_tests/geos_tests/test_geos.py:612:25    - Unknown word (tset)       -- tset = (5, 23)
-./tests/gis_tests/geos_tests/test_geos.py:961:14    - Unknown word (threed)     -- def test_threed(self):
+./tests/gis_tests/geos_tests/test_geos.py:1219:9    - Unknown word (tgeoms)     -- tgeoms = get_geoms(self.geometries
+./tests/gis_tests/geos_tests/test_geos.py:1238:9    - Unknown word (pnts)       -- pnts = [Point(5, 5), Point
+./tests/gis_tests/geos_tests/test_geos.py:133:9     - Unknown word (srids)      -- srids = (-1, 32140)
+./tests/gis_tests/geos_tests/test_geos.py:1392:25   - Unknown word (CAPI)       -- (b'3.0.0rc4-CAPI-1.3.3', (3, 0, 0)),
+./tests/gis_tests/geos_tests/test_geos.py:1427:37   - Unknown word (SRUD)       -- GEOSGeometry.from_ewkt('SRUD=1;POINT(1 1)')
+./tests/gis_tests/geos_tests/test_geos.py:619:25    - Unknown word (tset)       -- tset = (5, 23)
+./tests/gis_tests/geos_tests/test_geos.py:968:14    - Unknown word (threed)     -- def test_threed(self):
 ./tests/gis_tests/geos_tests/test_io.py:10:7      - Unknown word (GEOSIO)     -- class GEOSIOTest(SimpleTestCase)
 ./tests/gis_tests/geos_tests/test_mutable_list.py:101:13    - Unknown word (slen)       -- for slen in range(self.limit
 ./tests/gis_tests/geos_tests/test_mutable_list.py:13:6      - Unknown word (mytype)     -- _mytype = tuple
@@ -1389,18 +1389,18 @@ Lines:
 ./tests/httpwrappers/tests.py:763:27    - Unknown word (keebler)       -- parse_cookie('keebler="E=mc2; L=\\"Loves\
 ./tests/httpwrappers/tests.py:795:46    - Unknown word (André)         -- parse_cookie('saint=André Bessette'), {'saint
 ./tests/httpwrappers/tests.py:795:52    - Unknown word (Bessette)      -- cookie('saint=André Bessette'), {'saint': 'André
-./tests/humanize_tests/tests.py:140:40    - Unknown word (Millionen)  -- '1,0 Million', '1,2 Millionen', '1,3 Millionen',
-./tests/humanize_tests/tests.py:141:18    - Unknown word (Milliarde)  -- '1,0 Milliarde', '2,0 Milliarden',
-./tests/humanize_tests/tests.py:141:53    - Unknown word (Billionen)  -- 0 Milliarden', '6,0 Billionen',
-./tests/humanize_tests/tests.py:341:14    - Unknown word (před)       -- 'před 1\xa0dnem',
-./tests/humanize_tests/tests.py:341:24    - Unknown word (dnem)       -- 'před 1\xa0dnem',
-./tests/humanize_tests/tests.py:343:24    - Unknown word (měsícem)    -- 'před 1\xa0měsícem',
-./tests/humanize_tests/tests.py:344:24    - Unknown word (měsíci)     -- 'před 2\xa0měsíci',
-./tests/humanize_tests/tests.py:345:24    - Unknown word (rokem)      -- 'před 1\xa0rokem, 4\xa0měsíci',
-./tests/humanize_tests/tests.py:346:24    - Unknown word (lety)       -- 'před 2\xa0lety, 4\xa0měsíci',
-./tests/humanize_tests/tests.py:349:22    - Unknown word (měsíc)      -- 'za 1\xa0měsíc',
-./tests/humanize_tests/tests.py:350:22    - Unknown word (měsíce)     -- 'za 2\xa0měsíce',
-./tests/humanize_tests/tests.py:352:22    - Unknown word (roky)       -- 'za 2\xa0roky, 4\xa0měsíce',
+./tests/humanize_tests/tests.py:144:40    - Unknown word (Millionen)  -- '1,0 Million', '1,2 Millionen', '1,3 Millionen',
+./tests/humanize_tests/tests.py:145:18    - Unknown word (Milliarde)  -- '1,0 Milliarde', '2,0 Milliarden',
+./tests/humanize_tests/tests.py:145:53    - Unknown word (Billionen)  -- 0 Milliarden', '6,0 Billionen',
+./tests/humanize_tests/tests.py:345:14    - Unknown word (před)       -- 'před 1\xa0dnem',
+./tests/humanize_tests/tests.py:345:24    - Unknown word (dnem)       -- 'před 1\xa0dnem',
+./tests/humanize_tests/tests.py:347:24    - Unknown word (měsícem)    -- 'před 1\xa0měsícem',
+./tests/humanize_tests/tests.py:348:24    - Unknown word (měsíci)     -- 'před 2\xa0měsíci',
+./tests/humanize_tests/tests.py:349:24    - Unknown word (rokem)      -- 'před 1\xa0rokem, 4\xa0měsíci',
+./tests/humanize_tests/tests.py:350:24    - Unknown word (lety)       -- 'před 2\xa0lety, 4\xa0měsíci',
+./tests/humanize_tests/tests.py:353:22    - Unknown word (měsíc)      -- 'za 1\xa0měsíc',
+./tests/humanize_tests/tests.py:354:22    - Unknown word (měsíce)     -- 'za 2\xa0měsíce',
+./tests/humanize_tests/tests.py:356:22    - Unknown word (roky)       -- 'za 2\xa0roky, 4\xa0měsíce',
 ./tests/i18n/commands/__init__.py:12:49     - Unknown word (Foos)       -- s Foo", "%(number)s Foos", number) % {'number
 ./tests/i18n/contenttypes/tests.py:25:57     - Unknown word (Société)    -- company_type), 'i18n | Société')
 ./tests/i18n/patterns/tests.py:134:65    - Unknown word (vertaald)   -- prefix-translated'), '/vertaald/')
@@ -1438,19 +1438,19 @@ Lines:
 ./tests/i18n/tests.py:103:74    - Unknown word (singulier)  -- plural", 1) % 1, "1 singulier")
 ./tests/i18n/tests.py:1237:46   - Unknown word (Dezember)   -- localized = '1.455/3,14/31. Dezember 2016'
 ./tests/i18n/tests.py:1363:45   - Unknown word (Bild)       -- ssertEqual(gettext("Image"), "Bild")
-./tests/i18n/tests.py:1608:17   - Unknown word (mingo)      -- ('i-mingo', 'Mingo'),
-./tests/i18n/tests.py:1608:26   - Unknown word (Mingo)      -- ('i-mingo', 'Mingo'),
-./tests/i18n/tests.py:1609:18   - Unknown word (tunumiit)   -- ('kl-tunumiit', 'Tunumiisiut'),
-./tests/i18n/tests.py:1609:30   - Unknown word (Tunumiisiut) -- ('kl-tunumiit', 'Tunumiisiut'),
-./tests/i18n/tests.py:1610:19   - Unknown word (hani)        -- ('nan-hani-tw', 'Hanji'),
-./tests/i18n/tests.py:1610:30   - Unknown word (Hanji)       -- ('nan-hani-tw', 'Hanji'),
+./tests/i18n/tests.py:1609:17   - Unknown word (mingo)      -- ('i-mingo', 'Mingo'),
+./tests/i18n/tests.py:1609:26   - Unknown word (Mingo)      -- ('i-mingo', 'Mingo'),
+./tests/i18n/tests.py:1610:18   - Unknown word (tunumiit)   -- ('kl-tunumiit', 'Tunumiisiut'),
+./tests/i18n/tests.py:1610:30   - Unknown word (Tunumiisiut) -- ('kl-tunumiit', 'Tunumiisiut'),
+./tests/i18n/tests.py:1611:19   - Unknown word (hani)        -- ('nan-hani-tw', 'Hanji'),
+./tests/i18n/tests.py:1611:30   - Unknown word (Hanji)       -- ('nan-hani-tw', 'Hanji'),
 ./tests/i18n/tests.py:171:37    - Unknown word (hinzuf)     -- self.assertEqual('Ringo hinzuf\xfcgen', s % d)
 ./tests/i18n/tests.py:171:44    - Unknown word (xfcgen)     -- assertEqual('Ringo hinzuf\xfcgen', s % d)
 ./tests/i18n/tests.py:173:35    - Unknown word (Dodaj)      -- self.assertEqual('Dodaj Ringo', s % d)
-./tests/i18n/tests.py:1819:37   - Unknown word (unprefixed)  -- URLCONF='i18n.urls_default_unprefixed',
-./tests/i18n/tests.py:1822:7    - Unknown word (Unprefixed)  -- class UnprefixedDefaultLanguageTests
-./tests/i18n/tests.py:1944:57   - Unknown word (unparseable) -- default language is unparseable."""
-./tests/i18n/tests.py:1967:44   - Unknown word (reay)        -- assertEqual(gettext("year"), "reay")
+./tests/i18n/tests.py:1820:37   - Unknown word (unprefixed)  -- URLCONF='i18n.urls_default_unprefixed',
+./tests/i18n/tests.py:1823:7    - Unknown word (Unprefixed)  -- class UnprefixedDefaultLanguageTests
+./tests/i18n/tests.py:1945:57   - Unknown word (unparseable) -- default language is unparseable."""
+./tests/i18n/tests.py:1968:44   - Unknown word (reay)        -- assertEqual(gettext("year"), "reay")
 ./tests/i18n/tests.py:197:57    - Unknown word (gutes)      -- with_format % 1, '1 gutes Resultat')
 ./tests/i18n/tests.py:197:63    - Unknown word (Resultat)   -- format % 1, '1 gutes Resultat')
 ./tests/i18n/tests.py:198:57    - Unknown word (guten)      -- with_format % 4, '4 guten Resultate')
@@ -1548,8 +1548,8 @@ Lines:
 ./tests/migrations/models.py:14:66     - Unknown word (Ðjáñgó)     -- length=20, default='“Ðjáñgó”')
 ./tests/migrations/models.py:19:33     - Unknown word (µóðéø)      -- verbose_name = 'úñí©óðé µóðéø'
 ./tests/migrations/models.py:20:40     - Unknown word (µóðéøß)     -- name_plural = 'úñí©óðé µóðéøß'
-./tests/migrations/test_autodetector.py:2105:19   - Unknown word (Uninstantiated) -- #22951 -- Uninstantiated classes with deconstruct
-./tests/migrations/test_autodetector.py:2670:9    - Unknown word (apackage)       -- apackage = ModelState("b", "APackage
+./tests/migrations/test_autodetector.py:2081:19   - Unknown word (Uninstantiated) -- #22951 -- Uninstantiated classes with deconstruct
+./tests/migrations/test_autodetector.py:2646:9    - Unknown word (apackage)       -- apackage = ModelState("b", "APackage
 ./tests/migrations/test_autodetector.py:281:26    - Unknown word (Authi)      -- "verbose_name": "Authi",
 ./tests/migrations/test_commands.py:311:20    - Unknown word (mmigrations) -- '\x1b[1mmigrations\n\x1b[0m'
 ./tests/migrations/test_commands.py:338:22    - Unknown word (unmigrating) -- # Cleanup by unmigrating everything
@@ -1634,7 +1634,7 @@ Lines:
 ./tests/migrations/test_optimizer.py:858:48    - Unknown word (Phou)       -- RenameModel("Foo", "Phou"),
 ./tests/migrations/test_writer.py:268:37    - Unknown word (föobár)     -- assertSerializedEqual("föobár")
 ./tests/migrations/test_writer.py:276:41    - Unknown word (nbár)       -- assertSerializedEqual("föo\nbár")
-./tests/migrations/test_writer.py:826:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
+./tests/migrations/test_writer.py:853:14    - Unknown word (enumfield)  -- # an enumfield that takes the enum
 ./tests/model_fields/models.py:137:5     - Unknown word (nbfield)    -- nbfield = models.BooleanField
 ./tests/model_fields/models.py:141:5     - Unknown word (bfield)     -- bfield = models.BooleanField
 ./tests/model_fields/models.py:383:5     - Unknown word (floatf)     -- floatf = models.FloatField
@@ -1780,11 +1780,11 @@ Lines:
 ./tests/runtests.py:310:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
 ./tests/runtests.py:72:1      - Unknown word (SUBDIRS)    -- SUBDIRS_TO_SKIP = {
 ./tests/schema/models.py:156:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
-./tests/schema/tests.py:1631:35   - Unknown word (tagm)       -- assertEqual(columns['tagm2mtest_id'][0], connection
-./tests/schema/tests.py:1631:40   - Unknown word (mtest)      -- assertEqual(columns['tagm2mtest_id'][0], connection
+./tests/schema/tests.py:1643:35   - Unknown word (tagm)       -- assertEqual(columns['tagm2mtest_id'][0], connection
+./tests/schema/tests.py:1643:40   - Unknown word (mtest)      -- assertEqual(columns['tagm2mtest_id'][0], connection
 ./tests/schema/tests.py:244:48    - Unknown word (repointing) -- out of FK order, then repointing, works"
-./tests/schema/tests.py:3236:81   - Unknown word (upcase)     -- and, for Oracle, un-upcase
-./tests/schema/tests.py:3808:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
+./tests/schema/tests.py:3248:81   - Unknown word (upcase)     -- and, for Oracle, un-upcase
+./tests/schema/tests.py:3820:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
 ./tests/select_for_update/tests.py:142:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
 ./tests/select_for_update/tests.py:170:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',
 ./tests/select_for_update/tests.py:32:48     - Unknown word (Liberchies) -- objects.create(name='Liberchies', country=self.country
@@ -1860,7 +1860,7 @@ Lines:
 ./tests/template_tests/filter_tests/test_cut.py:46:77     - Unknown word (mngled)     -- a'), ' string to be mngled')
 ./tests/template_tests/filter_tests/test_cut.py:49:66     - Unknown word (stri)       -- mangled', 'ng'), 'a stri to be maled')
 ./tests/template_tests/filter_tests/test_cut.py:49:77     - Unknown word (maled)      -- ng'), 'a stri to be maled')
-./tests/template_tests/filter_tests/test_dictsort.py:11:24     - Unknown word (Jonny)      -- {'name': 'Jonny B Goode', 'age': 18
+./tests/template_tests/filter_tests/test_dictsort.py:60:24     - Unknown word (Jonny)      -- {'name': 'Jonny B Goode', 'age': 18
 ./tests/template_tests/filter_tests/test_escapejs.py:13:55     - Unknown word (Ajavascript) -- testing\\u000D\\u000Ajavascript '
 ./tests/template_tests/filter_tests/test_escapejs.py:45:20     - Unknown word (Cscript)     -- '\\u003Cscript\\u003Eand this\\u00
 ./tests/template_tests/filter_tests/test_escapejs.py:45:33     - Unknown word (Eand)        -- '\\u003Cscript\\u003Eand this\\u003C/script\
@@ -1947,8 +1947,9 @@ Lines:
 ./tests/test_utils/test_testcase.py:138:30    - Unknown word (Käfer)      -- self.car.name = 'VW sKäfer'
 ./tests/test_utils/test_testcase.py:143:37    - Unknown word (Coccinelle) -- car.name = 'Volkswagen Coccinelle'
 ./tests/test_utils/test_testcase.py:72:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
-./tests/test_utils/tests.py:1856:38   - Unknown word (defualt)    -- class__.databases = {'defualt'}
-./tests/test_utils/tests.py:702:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
+./tests/test_utils/tests.py:1863:11   - Unknown word (visualisation) -- A visualisation of the callback tree
+./tests/test_utils/tests.py:1975:38   - Unknown word (defualt)       -- class__.databases = {'defualt'}
+./tests/test_utils/tests.py:741:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
 ./tests/timezones/tests.py:855:14    - Unknown word (notag)      -- 'notag': Template("{% load
 ./tests/timezones/tests.py:856:14    - Unknown word (noarg)      -- 'noarg': Template(
 ./tests/urlpatterns/tests.py:169:53    - Unknown word (stest)      -- int:num>/extra/<str:%stest>' cannot contain "
@@ -2024,12 +2025,12 @@ Lines:
 ./tests/view_tests/tests/test_csrf.py:33:61     - Unknown word (mislukt)     -- response, 'CSRF-verificatie mislukt. Verzoek afgebroken
 ./tests/view_tests/tests/test_csrf.py:33:70     - Unknown word (Verzoek)     -- verificatie mislukt. Verzoek afgebroken.', status
 ./tests/view_tests/tests/test_csrf.py:33:78     - Unknown word (afgebroken)  -- verificatie mislukt. Verzoek afgebroken.', status_code=403)
-./tests/view_tests/tests/test_debug.py:1023:9    - Unknown word (templ)      -- templ_path = Path(Path(__file
-./tests/view_tests/tests/test_debug.py:1154:60   - Unknown word (breakie)    -- Admin', 'admin@fattie-breakie.com')]):
+./tests/view_tests/tests/test_debug.py:1031:9    - Unknown word (templ)      -- templ_path = Path(Path(__file
+./tests/view_tests/tests/test_debug.py:1162:60   - Unknown word (breakie)    -- Admin', 'admin@fattie-breakie.com')]):
 ./tests/view_tests/tests/test_debug.py:76:68     - Unknown word (haha)       -- loadedFile('file_data.txt', b'haha'),
-./tests/view_tests/tests/test_debug.py:784:13    - Unknown word (oomvalue)   -- oomvalue = OomOutput()  # NOQA
-./tests/view_tests/tests/test_debug.py:815:39    - Unknown word (mnὀp)       -- safe('abcdefghijkl<p>mnὀp</p>qrstuwxyz').encode
-./tests/view_tests/tests/test_debug.py:815:47    - Unknown word (qrstuwxyz)  -- abcdefghijkl<p>mnὀp</p>qrstuwxyz').encode('ascii')
+./tests/view_tests/tests/test_debug.py:792:13    - Unknown word (oomvalue)   -- oomvalue = OomOutput()  # NOQA
+./tests/view_tests/tests/test_debug.py:823:39    - Unknown word (mnὀp)       -- safe('abcdefghijkl<p>mnὀp</p>qrstuwxyz').encode
+./tests/view_tests/tests/test_debug.py:823:47    - Unknown word (qrstuwxyz)  -- abcdefghijkl<p>mnὀp</p>qrstuwxyz').encode('ascii')
 ./tests/view_tests/tests/test_i18n.py:150:38    - Unknown word (mylanguage) -- LANGUAGE_COOKIE_NAME': 'mylanguage',
 ./tests/view_tests/tests/test_i18n.py:236:14    - Unknown word (jsoni)      -- def test_jsoni18n(self):
 ./tests/view_tests/tests/test_i18n.py:264:47    - Unknown word (esto)       -- assertNotContains(response, 'esto tiene que ser traducido

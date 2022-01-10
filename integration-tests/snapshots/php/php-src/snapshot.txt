@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1828, Issues found: 19768 in 1089 files
+ CSpell: Files checked: 1828, Issues found: 19771 in 1089 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -51,6 +51,7 @@ Lines:
 ./CONTRIBUTING.md:388:43    - Unknown word (PTHREDS)    -- compilation with NO_PTHREDS
 ./CONTRIBUTING.md:391:28    - Unknown word (ifdef)      -- 2-02-01) moved the #ifdef NO_PTHREDS around but
 ./CONTRIBUTING.md:399:23    - Unknown word (pgsql)      -- Fixed bug #14016 (pgsql notice handler double
+./README.md:122:36    - Unknown word (recognise)  -- : php_uname doesn't recognise latest Windows versions
 ./README.md:43:57     - Unknown word (libsqlite)  -- additionally need libxml2 and libsqlite3.
 ./README.md:52:55     - Unknown word (ccache)     -- autoconf make libtool ccache libxml2-devel sqlite
 ./README.md:52:70     - Unknown word (devel)      -- libtool ccache libxml2-devel sqlite-devel
@@ -257,18 +258,18 @@ Lines:
 ./build/gen_stub.php:1260:30   - Unknown word (constructorsynopsis) -- $synopsisType = "constructorsynopsis";
 ./build/gen_stub.php:1262:30   - Unknown word (destructorsynopsis)  -- $synopsisType = "destructorsynopsis";
 ./build/gen_stub.php:1264:30   - Unknown word (methodsynopsis)      -- $synopsisType = "methodsynopsis";
-./build/gen_stub.php:1527:10   - Unknown word (fieldsynopsis)       -- $fieldsynopsisElement = $doc->createElement
-./build/gen_stub.php:1553:40   - Unknown word (linkend)             -- varnameElement->setAttribute("linkend", "$className.props
-./build/gen_stub.php:1822:47   - Unknown word (classsynopsis)       -- doc->createElement("classsynopsis");
-./build/gen_stub.php:1832:51   - Unknown word (classsynopsisinfo)   -- doc->createElement("classsynopsisinfo");
-./build/gen_stub.php:1911:62   - Unknown word (xpointer)            -- docbook.org/ns/docbook) xpointer(id('$parentReference
-./build/gen_stub.php:1911:97   - Unknown word (partintro)           -- parentReference')/db:partintro/db:section/db:classsynopsis
-./build/gen_stub.php:1929:108  - Unknown word (refsect)             -- assReference')/db:refentry/db:refsect1[@role='description
-./build/gen_stub.php:2499:47   - Unknown word (conds)               -- reprocessorConditions(array &$conds, Stmt $stmt): ?string
-./build/gen_stub.php:3001:41   - Unknown word (exceptionref)        -- "/<phpdoc:(classref|exceptionref)\s+xmlns:phpdoc=\"(
-./build/gen_stub.php:3294:2    - Unknown word (optind)              -- $optind = null;
-./build/gen_stub.php:3298:78   - Unknown word (classsynopses)       -- "verify", "generate-classsynopses", "replace-classsynopses
-./build/gen_stub.php:3299:19   - Unknown word (methodsynopses)      -- "generate-methodsynopses", "replace-methodsynopses
+./build/gen_stub.php:1531:10   - Unknown word (fieldsynopsis)       -- $fieldsynopsisElement = $doc->createElement
+./build/gen_stub.php:1558:44   - Unknown word (linkend)             -- varnameElement->setAttribute("linkend", $this->link);
+./build/gen_stub.php:1830:47   - Unknown word (classsynopsis)       -- doc->createElement("classsynopsis");
+./build/gen_stub.php:1840:51   - Unknown word (classsynopsisinfo)   -- doc->createElement("classsynopsisinfo");
+./build/gen_stub.php:1919:62   - Unknown word (xpointer)            -- docbook.org/ns/docbook) xpointer(id('$parentReference
+./build/gen_stub.php:1919:97   - Unknown word (partintro)           -- parentReference')/db:partintro/db:section/db:classsynopsis
+./build/gen_stub.php:1937:108  - Unknown word (refsect)             -- assReference')/db:refentry/db:refsect1[@role='description
+./build/gen_stub.php:2507:47   - Unknown word (conds)               -- reprocessorConditions(array &$conds, Stmt $stmt): ?string
+./build/gen_stub.php:3009:41   - Unknown word (exceptionref)        -- "/<phpdoc:(classref|exceptionref)\s+xmlns:phpdoc=\"(
+./build/gen_stub.php:3304:2    - Unknown word (optind)              -- $optind = null;
+./build/gen_stub.php:3308:78   - Unknown word (classsynopses)       -- "verify", "generate-classsynopses", "replace-classsynopses
+./build/gen_stub.php:3309:19   - Unknown word (methodsynopses)      -- "generate-methodsynopses", "replace-methodsynopses
 ./docs/input-filter.md:105:17    - Unknown word (ALLOC)      -- ALLOC_ZVAL(array_ptr);
 ./docs/input-filter.md:105:23    - Unknown word (ZVAL)       -- ALLOC_ZVAL(array_ptr);
 ./docs/input-filter.md:107:22    - Unknown word (PZVAL)      -- INIT_PZVAL(array_ptr);
@@ -3778,13 +3779,13 @@ Lines:
 ./ext/sockets/sendrecvmsg.c:83:23     - Unknown word (registery)  -- static void ancillary_registery_free_elem(zval *el)
 ./ext/sockets/sendrecvmsg.c:98:19     - Unknown word (sizev)      -- #define PUT_ENTRY(sizev, var_size, calc, from
 ./ext/sockets/sockaddr_conv.h:1:13      - Unknown word (SOCKADR)    -- #ifndef PHP_SOCKADR_CONV_H
-./ext/sockets/sockets.c:1472:46   - Unknown word (Ozll)       -- parameters(ZEND_NUM_ARGS(), "Ozll", &php_sock_res, socket
-./ext/sockets/sockets.c:1513:46   - Unknown word (Osll)       -- parameters(ZEND_NUM_ARGS(), "Osll", &arg1, socket_ce,
-./ext/sockets/sockets.c:1555:46   - Unknown word (Ozllz)      -- parameters(ZEND_NUM_ARGS(), "Ozllz|z", &arg1, socket_ce
-./ext/sockets/sockets.c:1674:46   - Unknown word (Oslls)      -- parameters(ZEND_NUM_ARGS(), "Oslls|l!", &arg1, socket_ce
-./ext/sockets/sockets.c:1887:46   - Unknown word (Ollz)       -- parameters(ZEND_NUM_ARGS(), "Ollz", &arg1, socket_ce,
-./ext/sockets/sockets.c:2034:46   - Unknown word (lllz)       -- parameters(ZEND_NUM_ARGS(), "lllz", &domain, &type, &protocol
-./ext/sockets/sockets.c:2348:15   - Unknown word (zhints)     -- zval *hint, *zhints = NULL;
+./ext/sockets/sockets.c:1474:46   - Unknown word (Ozll)       -- parameters(ZEND_NUM_ARGS(), "Ozll", &php_sock_res, socket
+./ext/sockets/sockets.c:1515:46   - Unknown word (Osll)       -- parameters(ZEND_NUM_ARGS(), "Osll", &arg1, socket_ce,
+./ext/sockets/sockets.c:1557:46   - Unknown word (Ozllz)      -- parameters(ZEND_NUM_ARGS(), "Ozllz|z", &arg1, socket_ce
+./ext/sockets/sockets.c:1676:46   - Unknown word (Oslls)      -- parameters(ZEND_NUM_ARGS(), "Oslls|l!", &arg1, socket_ce
+./ext/sockets/sockets.c:1889:46   - Unknown word (Ollz)       -- parameters(ZEND_NUM_ARGS(), "Ollz", &arg1, socket_ce,
+./ext/sockets/sockets.c:2036:46   - Unknown word (lllz)       -- parameters(ZEND_NUM_ARGS(), "lllz", &domain, &type, &protocol
+./ext/sockets/sockets.c:2350:15   - Unknown word (zhints)     -- zval *hint, *zhints = NULL;
 ./ext/sockets/sockets.stub.php:123:17    - Unknown word (addrinfo)   -- function socket_addrinfo_lookup(string $host
 ./ext/sockets/sockets.stub.php:136:17    - Unknown word (wsaprotocol) -- function socket_wsaprotocol_info_export(Socket
 ./ext/sockets/sockets.stub.php:94:13     - Unknown word (SOCKETPAIR) -- #ifdef HAVE_SOCKETPAIR
@@ -4605,7 +4606,7 @@ Lines:
 ./sapi/fpm/fpm/fpm_php.h:25:4      - Unknown word (xmms)       -- "xmms.path", \
 ./sapi/fpm/fpm/fpm_php.h:27:4      - Unknown word (blenc)      -- "blenc.key_file", \
 ./sapi/fpm/fpm/fpm_process_ctl.c:80:49     - Unknown word (reexec)     -- some signals before reexec");
-./sapi/fpm/fpm/fpm_sockets.c:502:25    - Unknown word (unacked)    -- cur_lq = info.__tcpi_unacked;
+./sapi/fpm/fpm/fpm_sockets.c:503:25    - Unknown word (unacked)    -- cur_lq = info.__tcpi_unacked;
 ./sapi/fpm/fpm/fpm_stdio.c:110:32    - Unknown word (fscf)       -- FPM_STDIO_CMD_FLUSH "\0fscf"
 ./sapi/fpm/fpm/fpm_systemd.c:37:13     - Unknown word (notifyf)    -- if (0 > sd_notifyf(0, "READY=1\n%s"
 ./sapi/fpm/fpm/fpm_systemd.c:98:56     - Unknown word (gsec)       -- watchdog configured to %.3gsec", (float)interval /
