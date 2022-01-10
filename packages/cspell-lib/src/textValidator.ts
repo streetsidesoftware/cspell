@@ -66,7 +66,7 @@ export function validateText(
             const n = (mapOfProblems.get(word) || 0) + 1;
             mapOfProblems.set(word, n);
             // Filter out if there is too many
-            return n < maxDuplicateProblems;
+            return n <= maxDuplicateProblems;
         })
         .take(maxNumberOfProblems);
 }

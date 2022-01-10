@@ -11,9 +11,7 @@ import { createSpellingDictionary } from './SpellingDictionary/createSpellingDic
 import { FreqCounter } from './util/FreqCounter';
 import * as Text from './util/text';
 import { genSequence } from 'gensequence';
-import { settingsToValidateOptions } from './validator';
-
-const sToV = settingsToValidateOptions;
+import { settingsToValidateOptions as sToV } from './validator';
 
 // cspell:ignore whiteberry redmango lightbrown redberry
 
@@ -193,6 +191,20 @@ describe('Validate textValidator functions', () => {
         const results = Text.matchStringToTextOffset(/\w+/g, text).concatMap(mapper).toArray();
         const words = results.map((r) => r.text);
         expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
+    });
+
+    test('make sure maxDuplicateProblems is honored', () => {
+        const dictWords = getSpellingDictionaryCollectionSync();
+        // cspell:ignore unword
+        const text = 'unword '.repeat(20);
+
+        const resultDef = [...validateText(text, dictWords, sToV({}))];
+        expect(resultDef).toHaveLength(5);
+
+        const result10 = [
+            ...validateText(text, dictWords, sToV({ allowCompoundWords: false, maxDuplicateProblems: 10 })),
+        ];
+        expect(result10).toHaveLength(10);
     });
 
     test('tests words crossing exclude boundaries out of order', async () => {
