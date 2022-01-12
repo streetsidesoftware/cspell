@@ -67,23 +67,30 @@ costs:
 
 # The Algorithm
 
-The current algorithm uses a Levenshtein like algorithm to calculate the edit cost. This is different from Hunspell which tries to morph the misspelled word in many possible ways to see if it exists in the dictionary. This can be very expensive, therefor it is not used.
+The current algorithm uses a Levenshtein like algorithm to calculate the edit cost. This is different from
+Hunspell which tries to morph the misspelled word in many possible ways to see if it exists in the dictionary. This can be very expensive, therefor it is not used.
 
 ## A two step process
 
-The current suggestion mechanism currently comes up with a list of suggestions in a single pass.
+The current suggestion mechanism comes up with a list of suggestions in a single pass.
 
-The proposal here is to change the algorithm slightly to come up with a course grain list very quickly and then to refine it with a more expensive weighted algorithm.
+The proposal here is to change the algorithm slightly to come up with a course grain list very quickly and
+then to refine it with a more expensive weighted algorithm where the weights can be customized.
 
-Note: the course grain algorithm needs to be very fast because it needs to cull through millions of nodes in the trie. It should NOT visit all possible words in a trie because of word compounding allowed by some languages effective means that the number of words are infinite.
+Note: the course grain algorithm needs to be very fast because it needs to cull through millions of nodes in
+the trie. It should NOT visit all possible words in a trie because of word compounding allowed by some languages effective means that the number of words are infinite.
 
-The current algorithm walks the trie in a depth first manner deciding to not go deeper when the `edit_count` exceeds the `max_edit_count`. Deeper in this case could also mean linking to a compound root. As it walks, the `max_edit_count` is adjusted based upon the candidates found. Quickly finding a group of candidates can help reduce the search time, which is why a depth first search is preferred.
+The current algorithm walks the trie in a depth first manner deciding to not go deeper when the `edit_count`
+exceeds the `max_edit_count`. Deeper in this case could also mean linking to a compound root. As it walks,
+the `max_edit_count` is adjusted based upon the candidates found. Quickly finding a group of candidates can
+help reduce the search time, which is why a depth first search is preferred.
 
 # Notes
 
 ## Unicode and Accents
 
-The current dictionary compiler normalizes all unicode strings using `.normalize('NFC')`[^1]. It might be necessary to allow storage of decomposed characters for
+The current dictionary compiler normalizes all unicode strings using `.normalize('NFC')`[^1]. It might be
+necessary to allow storage of decomposed characters for
 
 Even though it is composed by default, the dictionaries still contains accent marks.
 
