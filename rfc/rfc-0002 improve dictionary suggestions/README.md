@@ -4,27 +4,62 @@ The `cspell-trie-lib` packages currently handles making suggestions on dictionar
 
 It walks the trie using a modified weighted Levenshtein algorithm. The weights are currently weighted towards English and do not lend themselves well to other languages. See [RFC | Ways to improve dictionary suggestions. · Issue #2249 · streetsidesoftware/cspell](https://github.com/streetsidesoftware/cspell/issues/2249)
 
-This proposal is to allow weights to be defined in with the `DictionaryDefinition`.
+This proposal is to allow weights to be defined in the `DictionaryDefinition`.
 
 ## Defining Weights / Costs
 
 There are 4 types of edit operations:
 
-- insert - inserts a character
-- delete - deletes a character
-- replace - replaces a character
+- insert - inserts a character into the word
+- delete - deletes a character from the word
+- replace - replaces a character in the word
 - swap - swaps two adjacent characters - swap is singled out because it is a common spelling mistake, otherwise it would be considered 2 edits.
 
 In the current implementation: `1 edit = 100 cost`. This was done to allow for partial edits without the need for decimal numbers.
 
-| Field       | Description                                                                         |
-| ----------- | ----------------------------------------------------------------------------------- |
-| map         | For conciseness, a `map` can contain multiple sets separated by <code>&#124;</code> |
-| insert      | The cost to insert a character from the map into a word                             |
-| delete      | The cost to delete a character from the map from a word                             |
-| replace     | The cost to replace a character in a set with another from the same set             |
-| swap        | The cost to swap any two characters in the same set                                 |
-| description | A comment about why a cost is defined                                               |
+#### Proposed Structure
+
+```ts
+interface SuggestionCosts {
+  /**
+   * A map is a set of characters to be considered together
+   * Each individual character is an entry in the set.
+   * To have multiple character entry use `()` around the characters.
+   * Because multiple sets of characters can have the same intention
+   * It is possible to use a single map to define multiple sets by separating
+   * each set with a `|`.
+   */
+  map: string;
+  /**
+   * The cost to insert a character from the map into a word.
+   * @default 100
+   */
+  insert?: number;
+  /**
+   * The cost to delete a character from the map from a word.
+   * @default 100
+   */
+  delete?: number;
+  /**
+   * The cost to replace a character in a set with another from the same set.
+   *
+   * Example:
+   *
+   * Give: `map: 'you|tkb', swap: 50`
+   * - To swap `a` with `y` is 100
+   * - To swap `y` with `u` is 50
+   * - to swap `y` with `t` is 100
+   * - to swap `t` with `k` is 50
+   *
+   * @default 100
+   */
+  swap?: number;
+  /**
+   * A comment about why a cost is defined.
+   */
+  description?: string;
+}
+```
 
 #### Example of costs:
 
@@ -49,7 +84,7 @@ costs:
     insert: 10
     delete: 10
   - description: Arabic Vowels
-    map: '\u064f\u0648\u064e\u0627\u0650\u64a\u' # Damma, Wāw, Fatha, Alif, Kasra, Ya', Sukūn
+    map: '\u064f\u0648\u064e\u0627\u0650\u64a\u0652' # Damma, Wāw, Fatha, Alif, Kasra, Ya', Sukūn
     insert: 20
     delete: 20
     replace: 20
