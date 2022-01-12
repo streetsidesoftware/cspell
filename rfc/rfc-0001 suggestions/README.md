@@ -1,8 +1,8 @@
 # Suggestion Lists
 
-Suggestion lists are useful in addressing common mistakes and noted by [Wikipedia:Lists of common misspellings - Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings)
+Suggestion lists are useful in addressing common mistakes as noted by [Wikipedia:Lists of common misspellings - Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings)
 
-The idea is to also make it easier for companies to define a list of forbidden terms with a list of suggested replacements.
+The idea is to make it easier for companies / projects to define a list of forbidden terms with a list of suggested replacements.
 
 Below is a proposal on two ways to define suggestions.
 The intention is to implement both. Since `flagWords` is easier to do, it might get done first.
