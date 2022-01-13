@@ -1,5 +1,12 @@
 # Suggestion Lists
 
+Suggestion lists are useful in addressing common mistakes as noted by [Wikipedia:Lists of common misspellings - Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings)
+
+The idea is to make it easier for companies / projects to define a list of forbidden terms with a list of suggested replacements.
+
+Below is a proposal on two ways to define suggestions.
+The intention is to implement both. Since `flagWords` is easier to do, it might get done first.
+
 ## Flag Words
 
 The idea is to enhance the definition of `flagWords` to allow for suggestions.
@@ -78,14 +85,23 @@ amature->armature, amateur
 boaut->boat, bout, about
 ```
 
+<!--- cspell:enable -->
+
 Validation:
 
 ```regexp
-/^(\p{L}+)\s*->\s*(\p{L}+)(?:,\s*(\p{L}+))*$/gmu
+/^((?:\p{L}\p{M}*)+)\s*->\s*((?:\p{L}\p{M}*)+)(?:,\s*((?:\p{L}\p{M}*)+))*$/gmu
 ```
 
 ![image](https://user-images.githubusercontent.com/3740137/149126237-455c6674-ed1f-4dd8-8136-083531d2c63b.png)
 
-<!--- cspell:enable -->
+### Dictionary Definition
+
+```yaml
+dictionaryDefinitions:
+  - name: en-us-suggestions
+    path: ./en-us-suggestions.txt.gz
+    type: suggestions
+```
 
 <!--- cspell:ignore acadmic accension -->

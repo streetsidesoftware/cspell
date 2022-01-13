@@ -1,6 +1,17 @@
-import type { DictionaryDefinitionPreferred, BaseSetting } from '@cspell/cspell-types';
+import type { DictionaryDefinitionPreferred, BaseSetting, DictionaryId, DictionaryPath } from '@cspell/cspell-types';
 
-export interface DictionaryDefinitionSuggestions extends Omit<DictionaryDefinitionPreferred, 'type'> {
+interface ChangesToBase {
+    type: 'suggestions' | 'words';
+}
+
+export interface DictionaryDefinitionSuggestions extends Omit<DictionaryDefinitionPreferred, 'type'>, ChangesToBase {
+    /** The name of the dictionary */
+    name: DictionaryId;
+
+    /** Path to the file. */
+    path: DictionaryPath;
+
+    /** The type of dictionary */
     type: 'suggestions';
 }
 
