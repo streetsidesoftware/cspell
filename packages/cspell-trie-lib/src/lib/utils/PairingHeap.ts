@@ -7,6 +7,16 @@ export interface PairHeapNode<T> {
     c: PairHeapNode<T> | undefined;
 }
 
+/**
+ * Compare Functions
+ * Compares two values a and b.
+ * Meaning of return value:
+ * `v <= 0`: `a` is ahead of `b`
+ * `v > 0`: `b` is ahead of `a`
+ * @param a - item a
+ * @param b - item b
+ * @returns a number
+ */
 export type CompareFn<T> = (a: T, b: T) => number;
 
 export class PairingHeap<T> implements IterableIterator<T> {
