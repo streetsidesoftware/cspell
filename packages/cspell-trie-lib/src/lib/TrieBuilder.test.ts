@@ -1,4 +1,4 @@
-import { countNodes, isCircular } from './util';
+import { countNodes, isCircular } from './trie-util';
 import { TrieBuilder, buildTrie } from './TrieBuilder';
 
 describe('Validate TrieBuilder', () => {

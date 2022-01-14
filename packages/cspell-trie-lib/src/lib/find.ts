@@ -1,5 +1,5 @@
 import { TrieNode, FLAG_WORD } from './TrieNode';
-import { mergeDefaults } from './util';
+import { mergeDefaults } from './trie-util';
 import { FORBID_PREFIX, COMPOUND_FIX, CASE_INSENSITIVE_PREFIX } from './constants';
 
 /**

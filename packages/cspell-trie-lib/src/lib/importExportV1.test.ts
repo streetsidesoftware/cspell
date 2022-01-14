@@ -3,7 +3,7 @@ import { serializeTrie, importTrie } from './importExportV1';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
 import { consolidate } from './consolidate';
-import { iteratorTrieWords } from './util';
+import { iteratorTrieWords } from './trie-util';
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {

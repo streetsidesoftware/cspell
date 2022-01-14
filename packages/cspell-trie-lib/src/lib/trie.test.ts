@@ -3,7 +3,7 @@ import { CompoundWordsMethod, suggestionCollector } from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
 import { SuggestionCollectorOptions } from './suggestCollector';
 import { defaultTrieOptions, Trie } from './trie';
-import { isWordTerminationNode, normalizeWordToLowercase, orderTrie } from './util';
+import { isWordTerminationNode, normalizeWordToLowercase, orderTrie } from './trie-util';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };

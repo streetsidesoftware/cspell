@@ -1,7 +1,7 @@
 import { TrieNode, FLAG_WORD, TrieRoot } from './TrieNode';
 import { Sequence, genSequence } from 'gensequence';
 import { bufferLines } from './bufferLines';
-import { trieNodeToRoot } from './util';
+import { trieNodeToRoot } from './trie-util';
 
 const EOW = '$';
 const BACK = '<';

@@ -2,7 +2,7 @@ import * as Sug from './suggest';
 import { SuggestionResult } from './suggestCollector';
 import { Trie } from './trie';
 import { TrieNode } from './TrieNode';
-import { isWordTerminationNode } from './util';
+import { isWordTerminationNode } from './trie-util';
 import { walker } from './walker';
 
 describe('Validate Suggest', () => {

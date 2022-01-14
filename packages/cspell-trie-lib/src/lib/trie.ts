@@ -22,7 +22,7 @@ import {
     iteratorTrieWords,
     mergeOptionalWithDefaults,
     orderTrie,
-} from './util';
+} from './trie-util';
 import { CompoundWordsMethod, walker, WalkerIterator } from './walker';
 
 export {

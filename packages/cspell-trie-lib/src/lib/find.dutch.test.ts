@@ -5,7 +5,7 @@ import * as zlib from 'zlib';
 import { importTrie } from './importExport';
 import { TrieNode } from './TrieNode';
 import * as path from 'path';
-import { normalizeWordToLowercase } from './util';
+import { normalizeWordToLowercase } from './trie-util';
 
 const dutchDictionary = path.join(__dirname, ...'../../../Samples/dicts/nl_compound_trie3.trie.gz'.split('/'));
 

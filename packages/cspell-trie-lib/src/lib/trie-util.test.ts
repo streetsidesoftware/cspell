@@ -7,7 +7,7 @@ import {
     countWords,
     iteratorTrieWords,
     mergeDefaults,
-} from './util';
+} from './trie-util';
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {

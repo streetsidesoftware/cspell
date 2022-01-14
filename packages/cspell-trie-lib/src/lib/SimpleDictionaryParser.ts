@@ -1,5 +1,5 @@
 import { operators } from 'gensequence';
-import { normalizeWord, normalizeWordForCaseInsensitive } from './util';
+import { normalizeWord, normalizeWordForCaseInsensitive } from './trie-util';
 import {
     COMPOUND_FIX,
     OPTIONAL_COMPOUND_FIX,

@@ -2,7 +2,7 @@ import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from
 import { visualLetterMaskMap } from './orthography';
 import { MaxCost, suggestionCollector, SuggestionGenerator, SuggestionResult } from './suggestCollector';
 import { TrieRoot } from './TrieNode';
-import { isWordTerminationNode } from './util';
+import { isWordTerminationNode } from './trie-util';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const baseCost = 100;

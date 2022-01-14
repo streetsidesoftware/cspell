@@ -4,7 +4,7 @@ import { genSequence } from 'gensequence';
 import { TrieNode } from './TrieNode';
 import { readFile } from 'fs-extra';
 import * as path from 'path';
-import { iteratorTrieWords, countNodes, createTrieRoot } from './util';
+import { iteratorTrieWords, countNodes, createTrieRoot } from './trie-util';
 import { buildTrie } from './TrieBuilder';
 
 const samples = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
