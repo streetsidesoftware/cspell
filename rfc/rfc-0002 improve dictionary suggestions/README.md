@@ -31,15 +31,10 @@ interface SuggestionCosts {
    */
   map: string;
   /**
-   * The cost to insert a character from the map into a word.
+   * The cost to insert/delete a character from the map into a word.
    * @default 100
    */
-  insert?: number;
-  /**
-   * The cost to delete a character from the map from a word.
-   * @default 100
-   */
-  delete?: number;
+  insDel?: number;
   /**
    * The cost to replace a character in a set with another from the same set.
    *
@@ -67,13 +62,11 @@ interface SuggestionCosts {
 costs:
   - description: Accented Vowel Letters
     map: 'aáâäãå|eéêë|iíîï|oóôöõ|uúûü|yÿ'
-    insert: 50
-    delete: 50
+    insDel: 50
     replace: 10
   - description: Vowels
     map: 'aáâäãåeéêëiíîïoóôöõuúûüyÿ'
-    insert: 50
-    delete: 50
+    insDel: 50
     replace: 25 # Replacing one vowel with another is cheap
     swap: 25 # Swapping vowels are cheap
   - description: Multi Character example
@@ -81,12 +74,10 @@ costs:
     replace: 10
   - description: Appending / Removing Accent Marks
     map: '\u0641' # Shadda
-    insert: 10
-    delete: 10
+    insDel: 10
   - description: Arabic Vowels
     map: '\u064f\u0648\u064e\u0627\u0650\u64a\u0652' # Damma, Wāw, Fatha, Alif, Kasra, Ya', Sukūn
-    insert: 20
-    delete: 20
+    insDel: 20
     replace: 20
   - description: Keyboard Adjacency
     map: 'qwas|aszx|wesd|sdxc|erdf|dfcv|rtfg|fgvb|tygh|ghbn|yuhj|hjnm|uijk|jkm|iokl|opl'
