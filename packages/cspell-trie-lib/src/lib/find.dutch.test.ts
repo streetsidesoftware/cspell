@@ -1,13 +1,12 @@
-import { findWord, PartialFindOptions, FindFullResult } from './find';
-
 import * as fs from 'fs-extra';
 import * as zlib from 'zlib';
-import { importTrie } from './importExport';
-import { TrieNode } from './TrieNode';
-import * as path from 'path';
+import { resolveGlobalDict } from '../test/samples';
+import { FindFullResult, findWord, PartialFindOptions } from './find';
+import { importTrie } from './io/importExport';
 import { normalizeWordToLowercase } from './trie-util';
+import { TrieNode } from './TrieNode';
 
-const dutchDictionary = path.join(__dirname, ...'../../../Samples/dicts/nl_compound_trie3.trie.gz'.split('/'));
+const dutchDictionary = resolveGlobalDict('nl_compound_trie3.trie.gz');
 
 describe('Validate findWord', () => {
     const pTrie = readTrie(dutchDictionary);

@@ -1,24 +1,24 @@
-import * as Trie from '.';
-import { serializeTrie, importTrie } from './importExportV1';
 import { readFile } from 'fs-extra';
-import * as path from 'path';
-import { consolidate } from './consolidate';
-import { iteratorTrieWords } from './trie-util';
+import * as Trie from '..';
+import { resolveSample } from '../../test/samples';
+import { importTrie, serializeTrie } from './importExportV2';
 
 describe('Import/Export', () => {
-    test('tests serialize / deserialize', async () => {
-        const trie = consolidate(Trie.createTriFromList(sampleWords));
-        const data = [...serializeTrie(trie, 10)];
-        const sample = (await readFile(path.join(__dirname, '..', '..', 'Samples', 'sampleV1.trie'), 'utf8')).replace(
-            /\r/g,
-            ''
-        );
-        const rawData = data.join('');
-        expect(rawData.length).toBeLessThanOrEqual(sample.length);
-        const sampleRoot = importTrie(sample.split('\n'));
-        const root = importTrie(data);
+    test('tests serialize / deserialize from trie', async () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
+        const sample = (await readFile(resolveSample('sampleV2.trie'), 'utf8')).replace(/\r?\n/g, '\n');
+        expect(data).toBe(sample);
+        const root = importTrie(data.split('\n'));
         const words = [...Trie.iteratorTrieWords(root)];
-        expect([...iteratorTrieWords(sampleRoot)]).toEqual(words);
+        expect(words).toEqual([...sampleWords].sort());
+    });
+
+    test('serialize / deserialize with object', async () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const data = [...serializeTrie(trie, 10)].join('');
+        const root = importTrie(data.split('\n'));
+        const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
     });
 });

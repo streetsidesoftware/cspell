@@ -1,9 +1,9 @@
-import { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
-import { parseDictionary } from './SimpleDictionaryParser';
+import { GenSuggestionOptionsStrict, SuggestionOptions } from '../genSuggestionsOptions';
+import { parseDictionary } from '../SimpleDictionaryParser';
 import * as Sug from './suggestAStar';
 import { SuggestionCollector, suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
-import { Trie } from './trie';
-import { CompoundWordsMethod } from './walker';
+import { Trie } from '../trie';
+import { CompoundWordsMethod } from '../walker';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,

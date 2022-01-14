@@ -1,5 +1,5 @@
-import { Trie } from './trie';
-import { importTrie } from './importExport';
+import { Trie } from '../lib/trie';
+import { importTrie } from '../lib/io/importExport';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as zlib from 'zlib';

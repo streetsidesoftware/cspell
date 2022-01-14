@@ -6,8 +6,9 @@ import { readFile } from 'fs-extra';
 import * as path from 'path';
 import { iteratorTrieWords, countNodes, createTrieRoot } from './trie-util';
 import { buildTrie } from './TrieBuilder';
+import { resolveGlobalSample } from '../test/samples';
 
-const samples = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
+const samples = resolveGlobalSample('dicts');
 const sampleEnglish = path.join(samples, 'en_US.txt');
 const pSampleEnglishWords = readFile(sampleEnglish, 'utf8').then((a) => a.split('\n').filter((a) => !!a));
 

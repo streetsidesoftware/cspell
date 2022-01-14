@@ -1,12 +1,12 @@
-import * as Trie from '.';
-import { serializeTrie, importTrie } from './importExportV3';
 import { readFile, writeFile } from 'fs-extra';
-import * as path from 'path';
-import { consolidate } from './consolidate';
 import { genSequence } from 'gensequence';
-import { TrieNode } from './TrieNode';
+import * as Trie from '..';
+import { resolveSample } from '../../test/samples';
+import { consolidate } from '../consolidate';
+import { TrieNode } from '../TrieNode';
+import { importTrie, serializeTrie } from './importExportV3';
 
-const sampleFile = path.join(__dirname, '..', '..', 'Samples', 'sampleV3.trie');
+const sampleFile = resolveSample('sampleV3.trie');
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize small sample', async () => {
