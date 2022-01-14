@@ -110,7 +110,9 @@ export function* genCompoundableSuggestions(
     for (let r = iWalk.next({ goDeeper }); !stopNow && !r.done; r = iWalk.next({ goDeeper })) {
         const { text, node, depth } = r.value;
         let { a, b } = stack[depth];
+        /** Current character from word */
         const w = text.slice(-1);
+        /** Current character visual letter group */
         const wG = visualLetterMaskMap[w] || 0;
         if (setOfSeparators.has(w)) {
             const mxRange = matrix[depth].slice(a, b + 1);
@@ -146,9 +148,12 @@ export function* genCompoundableSuggestions(
                 historyTags.set(tag, { w: text, i: history.length, m: mxMin });
             }
         }
+        /** current depth */
         const d = depth + 1;
         const lastSugLetter = d > 1 ? text[d - 2] : '';
+        /** standard cost */
         const c = bc - d + (specialSubCosts[w] || 0);
+        /** insert cost */
         const ci = c + (specialInsCosts[w] || 0);
 
         // Setup first column
@@ -161,6 +166,7 @@ export function* genCompoundableSuggestions(
         // calc the core letters
         for (i = a + 1; i <= b; ++i) {
             const curLetter = x[i];
+            /** current group */
             const cG = visualLetterMaskMap[curLetter] || 0;
             const subCost =
                 w === curLetter
