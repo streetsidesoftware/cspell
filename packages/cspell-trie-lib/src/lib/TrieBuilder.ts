@@ -1,8 +1,8 @@
 import { TrieNode, TrieRoot } from './TrieNode';
 import { Trie, PartialTrieOptions, TrieOptions } from './trie';
 import { consolidate } from './consolidate';
-import { createTriFromList, mergeOptionalWithDefaults, trieNodeToRoot, createTrieRoot } from './util';
-import { SecondChanceCache } from './secondChanceCache';
+import { createTriFromList, mergeOptionalWithDefaults, trieNodeToRoot, createTrieRoot } from './trie-util';
+import { SecondChanceCache } from './utils/secondChanceCache';
 
 /**
  * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie

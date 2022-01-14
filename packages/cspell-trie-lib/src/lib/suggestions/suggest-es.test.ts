@@ -1,5 +1,5 @@
-import { readTrie } from './dictionaries.test.helper';
-import { parseLinesToDictionary } from './SimpleDictionaryParser';
+import { readTrie } from '../../test/dictionaries.test.helper';
+import { parseLinesToDictionary } from '../SimpleDictionaryParser';
 
 function getTrie() {
     return readTrie('@cspell/dict-es-es/cspell-ext.json');

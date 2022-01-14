@@ -1,4 +1,4 @@
-import { readSampleTrie } from './dictionaries.test.helper';
+import { readSampleTrie } from '../../test/dictionaries.test.helper';
 
 function getTrie() {
     return readSampleTrie('nl_compound_trie3.trie.gz');

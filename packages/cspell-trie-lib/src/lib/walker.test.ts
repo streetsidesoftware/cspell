@@ -1,5 +1,5 @@
 import { walker, YieldResult, hintedWalker } from './walker';
-import { orderTrie, createTriFromList } from './util';
+import { orderTrie, createTriFromList } from './trie-util';
 import { parseLinesToDictionary } from './SimpleDictionaryParser';
 
 describe('Validate Util Functions', () => {

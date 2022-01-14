@@ -1,5 +1,5 @@
 import { TrieNode, FLAG_WORD, TrieRoot } from './TrieNode';
-import { trieNodeToRoot } from './util';
+import { trieNodeToRoot } from './trie-util';
 
 /**
  * Consolidate to DAWG

@@ -1,6 +1,7 @@
-import { Trie } from './trie';
+import { Trie } from '../lib/trie';
 import { readTrieFileFromConfig, readTrieFile } from './reader.test.helper';
 import * as path from 'path';
+import { resolveGlobalSample } from './samples';
 
 const tries = new Map<string, Promise<Trie>>();
 
@@ -13,7 +14,7 @@ export function readTrie(name: string): Promise<Trie> {
 }
 
 const sampleTries = new Map<string, Promise<Trie>>();
-const samplesLocation = path.join(__dirname, ...'../../../Samples/dicts'.split('/'));
+const samplesLocation = resolveGlobalSample('dicts');
 
 export function readSampleTrie(name: string): Promise<Trie> {
     return memorize(name, sampleTries, (name) => readTrieFile(path.resolve(samplesLocation, name)));

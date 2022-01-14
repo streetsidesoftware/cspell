@@ -1,4 +1,4 @@
-import { isDefined } from './util';
+import { isDefined } from './trie-util';
 import { TrieNode, ChildMap, TrieRoot } from './TrieNode';
 
 export const JOIN_SEPARATOR = '+';

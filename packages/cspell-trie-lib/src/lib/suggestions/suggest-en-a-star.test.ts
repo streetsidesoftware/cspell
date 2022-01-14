@@ -1,5 +1,5 @@
-import { readTrie } from './dictionaries.test.helper';
-import { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
+import { readTrie } from '../../test/dictionaries.test.helper';
+import { GenSuggestionOptionsStrict } from '../genSuggestionsOptions';
 import { genCompoundableSuggestions, suggest } from './suggestAStar';
 import {
     suggestionCollector,
@@ -7,8 +7,8 @@ import {
     SuggestionResult,
     SuggestionCollector,
 } from './suggestCollector';
-import { createTimer } from './timer';
-import { CompoundWordsMethod } from './walker';
+import { createTimer } from '../utils/timer';
+import { CompoundWordsMethod } from '../walker';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

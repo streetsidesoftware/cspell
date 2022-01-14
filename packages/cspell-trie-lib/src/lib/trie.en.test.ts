@@ -1,4 +1,4 @@
-import { readTrie } from './dictionaries.test.helper';
+import { readTrie } from '../test/dictionaries.test.helper';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');

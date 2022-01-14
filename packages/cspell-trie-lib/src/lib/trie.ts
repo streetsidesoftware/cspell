@@ -11,8 +11,8 @@ import {
     PartialFindOptions,
 } from './find';
 import { SuggestionOptions } from './genSuggestionsOptions';
-import { genSuggestions, suggest } from './suggest';
-import { SuggestionCollector, SuggestionResult } from './suggestCollector';
+import { genSuggestions, suggest } from './suggestions/suggest';
+import { SuggestionCollector, SuggestionResult } from './suggestions/suggestCollector';
 import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
 import {
     countWords,
@@ -22,7 +22,7 @@ import {
     iteratorTrieWords,
     mergeOptionalWithDefaults,
     orderTrie,
-} from './util';
+} from './trie-util';
 import { CompoundWordsMethod, walker, WalkerIterator } from './walker';
 
 export {
