@@ -30,7 +30,7 @@ export interface FindOptions {
     legacyMinCompoundLength: number;
 }
 
-export type PartialFindOptions = Partial<FindOptions> | undefined;
+export type PartialFindOptions = PartialWithUndefined<FindOptions> | undefined;
 
 export interface FindNodeResult {
     node: TrieNode | undefined;

@@ -3,7 +3,7 @@ import { CompoundWordsMethod, suggestionCollector } from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
 import { SuggestionCollectorOptions } from './suggestions/suggestCollector';
 import { defaultTrieOptions, Trie } from './trie';
-import { isWordTerminationNode, normalizeWordToLowercase, orderTrie } from './trie-util';
+import { clean, isWordTerminationNode, normalizeWordToLowercase, orderTrie } from './trie-util';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };
@@ -353,12 +353,11 @@ function opts(
     includeTies?: boolean,
     ignoreCase?: boolean
 ): SuggestionCollectorOptions {
-    return {
+    return clean({
         numSuggestions: maxNumSuggestions,
         filter,
         changeLimit,
         includeTies,
         ignoreCase,
-        timeout: undefined,
-    };
+    });
 }

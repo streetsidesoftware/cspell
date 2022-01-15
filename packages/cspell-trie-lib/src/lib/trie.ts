@@ -11,10 +11,11 @@ import {
     PartialFindOptions,
 } from './find';
 import { SuggestionOptions } from './genSuggestionsOptions';
-import { genSuggestions, suggest } from './suggestions/suggest';
-import { SuggestionCollector, SuggestionResult } from './suggestions/suggestCollector';
+import { genSuggestions, suggest } from './suggest';
+import { SuggestionCollector, SuggestionResult } from './suggestCollector';
 import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
 import {
+    clean,
     countWords,
     createTriFromList,
     insert,
@@ -193,12 +194,13 @@ export class Trie {
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
         const filter = (word: string) => !this.isForbiddenWord(word);
+        const { changeLimit, ignoreCase } = collector;
 
-        const suggestions = genSuggestions(this.root, collector.word, {
-            compoundMethod,
-            changeLimit: collector.changeLimit,
-            ignoreCase: collector.ignoreCase,
-        });
+        const suggestions = genSuggestions(
+            this.root,
+            collector.word,
+            clean({ compoundMethod, changeLimit, ignoreCase })
+        );
         collector.collect(suggestions, undefined, filter);
     }
 
@@ -242,7 +244,7 @@ export class Trie {
             caseInsensitivePrefix = this._options.stripCaseAndAccentsPrefix,
             compoundFix = this._options.compoundCharacter,
             forbidPrefix = this._options.forbiddenWordPrefix,
-        } = options;
+        } = clean(options);
         const findOptions = createFindOptions({
             ...options,
             caseInsensitivePrefix,

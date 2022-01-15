@@ -178,7 +178,7 @@ export function isCircular(root: TrieNode): boolean {
  * @param value
  * @param defaultValue
  */
-export function mergeDefaults<T>(value: Partial<T> | undefined, defaultValue: T): T {
+export function mergeDefaults<T>(value: PartialWithUndefined<T> | undefined, defaultValue: T): T {
     const result = { ...defaultValue };
     const allowedKeys = new Set(Object.keys(defaultValue));
     if (value) {
@@ -228,4 +228,14 @@ export const normalizeWordForCaseInsensitive = (text: string): string[] => {
 
 export function isDefined<T>(t: T | undefined): t is T {
     return t !== undefined;
+}
+
+export function clean<T>(t: T): Mandatory<T> {
+    const copy = { ...t };
+    for (const key of Object.keys(copy) as (keyof T)[]) {
+        if (copy[key] === undefined) {
+            delete copy[key];
+        }
+    }
+    return copy as Mandatory<T>;
 }

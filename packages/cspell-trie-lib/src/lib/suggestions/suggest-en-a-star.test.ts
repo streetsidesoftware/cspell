@@ -9,6 +9,7 @@ import {
 } from './suggestCollector';
 import { createTimer } from '../utils/timer';
 import { CompoundWordsMethod } from '../walker';
+import { clean } from '../trie-util';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -220,11 +221,11 @@ describe('Validate English Suggestions', () => {
 
 function sugGenOptsFromCollector(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod) {
     const { ignoreCase, changeLimit } = collector;
-    const ops: GenSuggestionOptionsStrict = {
+    const ops: GenSuggestionOptionsStrict = clean({
         compoundMethod,
         ignoreCase,
         changeLimit,
-    };
+    });
     return ops;
 }
 
@@ -235,14 +236,14 @@ function opts(
     includeTies = true,
     ignoreCase = true
 ): SuggestionCollectorOptions {
-    return {
+    return clean({
         numSuggestions,
         filter,
         changeLimit,
         includeTies,
         ignoreCase,
         timeout,
-    };
+    });
 }
 
 function sr(...sugs: (string | ExpectedSuggestion)[]): ExpectedSuggestion[] {
