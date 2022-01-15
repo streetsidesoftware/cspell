@@ -1,4 +1,7 @@
 export { consolidate } from './consolidate';
+export { createWeightedMap, editDistance, editDistanceWeighted } from './distance';
+export type { WeightedMap, WeightedMapDef } from './distance';
+export type { FindFullResult } from './find';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport';
 export { parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';
 export { MaxCost, suggestionCollector, SuggestionCollector, SuggestionResult } from './suggestCollector';
@@ -24,20 +27,20 @@ export {
     has,
     insert,
     isCircular,
+    isDefined,
     isWordTerminationNode,
     iterateTrie,
     iteratorTrieWords,
     mergeDefaults,
     mergeOptionalWithDefaults,
     normalizeWord,
-    normalizeWordToLowercase,
     normalizeWordForCaseInsensitive,
-    isDefined,
+    normalizeWordToLowercase,
     orderTrie,
     trieNodeToRoot,
     walk,
 } from './trie-util';
 export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder';
 export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode';
-export { hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR, CompoundWordsMethod } from './walker';
+export { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, walker, WORD_SEPARATOR } from './walker';
 export type { HintedWalkerIterator, Hinting, WalkerIterator, YieldResult } from './walker';

@@ -36,6 +36,7 @@ export {
     SuggestionCollector,
     SuggestionResult,
     SpellingDictionaryCollection,
+    SuggestOptions,
 } from './SpellingDictionary';
 export * from './trace';
 export { getLogger, Logger, setLogger } from './util/logger';

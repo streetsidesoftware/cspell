@@ -6,10 +6,9 @@ import { WeightedMapTrie, WeightedRepMapTrie } from './weightedMaps';
  *
  * Using basic weights, this algorithm has the same results as the Damerau-Levenshtein algorithm.
  */
-export function distanceAStarWeighted(a: string, b: string, map: WeightedMapTrie): number {
+export function distanceAStarWeighted(a: string, b: string, map: WeightedMapTrie, cost = 100): number {
     const aN = a.length;
     const bN = b.length;
-    const cost = 100;
 
     const candidates = new PairingHeap(compare);
 
