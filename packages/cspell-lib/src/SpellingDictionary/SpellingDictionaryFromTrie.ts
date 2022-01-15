@@ -1,32 +1,24 @@
-import {
-    Trie,
-    SuggestionCollector,
-    suggestionCollector,
-    SuggestionResult,
-    CompoundWordsMethod,
-    importTrie,
-    FindWordOptions,
-} from 'cspell-trie-lib';
-import { createMapper } from '../util/repMap';
+import type { FindFullResult, FindWordOptions, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
 import { getDefaultSettings } from '../Settings';
 import { memorizer } from '../util/Memorizer';
+import { createMapper } from '../util/repMap';
 import {
-    hasOptionToSearchOption,
-    wordSearchForms,
-    SuggestArgs,
+    FindResult,
+    HasOptions,
+    SpellingDictionary,
+    SpellingDictionaryOptions,
+    SuggestOptions,
+} from './SpellingDictionary';
+import {
     defaultNumSuggestions,
+    hasOptionToSearchOption,
     impersonateCollector,
+    SuggestArgs,
     suggestArgsToSuggestOptions,
+    wordSearchForms,
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
-import {
-    SpellingDictionary,
-    HasOptions,
-    SuggestOptions,
-    SpellingDictionaryOptions,
-    FindResult,
-} from './SpellingDictionary';
-import { FindFullResult } from '../../../cspell-trie-lib/dist/lib/find';
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly cachedWordsLimit = 50000;
     private _size = 0;

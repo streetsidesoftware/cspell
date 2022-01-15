@@ -20,7 +20,36 @@ interface WeightedRepTrieNode {
     swap?: number | undefined;
 }
 
-export interface WeightedMapDef {
+// cspell:ignore aeiouy
+/**
+ * A WeightedMapDef enables setting weights for edits between related characters and substrings.
+ *
+ * Multiple groups can be defined using a `|`.
+ * A multi-character substring is defined using `()`.
+ *
+ * For example, in some languages, some letters sound alike.
+ *
+ * ```ts
+ * {
+ *   map: 'sc(sh)(sch)(ss)|t(tt)', // two groups.
+ *   replace: 50, // Make it 1/2 the cost of a normal edit to replace a `t` with `tt`.
+ * }
+ * ```
+ *
+ * The following could be used to make inserting, removing, or replacing vowels cheaper.
+ * ```ts
+ * {
+ *   map: 'aeiouy', //.
+ *   insDel: 50, // Make it is cheaper to insert or delete a vowel.
+ *   replace: 45, // It is even cheaper to replace one with another.
+ * }
+ * ```
+ *
+ * Note: the default edit distance is 100.
+ */
+export type WeightedMapDef = WeightedMapDefReplace | WeightMapDefInsDel | WeightMapDefSwap;
+
+interface WeightedMapDefBase {
     /**
      * The set of substrings to map, these are generally single character strings.
      *
@@ -47,6 +76,22 @@ export interface WeightedMapDef {
      * This represents the cost to change `ei` to `ie` or the reverse.
      */
     swap?: number;
+    /**
+     * A description to describe the purpose of the map.
+     */
+    description?: string;
+}
+
+interface WeightedMapDefReplace extends WeightedMapDefBase {
+    replace: number;
+}
+
+interface WeightMapDefInsDel extends WeightedMapDefBase {
+    insDel: number;
+}
+
+interface WeightMapDefSwap extends WeightedMapDefBase {
+    swap: number;
 }
 
 export function buildWeightedMapTrie(defs: WeightedMapDef[]): WeightedMapTrie {
@@ -133,7 +178,7 @@ function lowest(a: number | undefined, b: number | undefined): number | undefine
  * Splits a WeightedMapDef.map
  * @param map
  */
-function splitMap(def: WeightedMapDef): string[][] {
+function splitMap(def: WeightedMapDefBase): string[][] {
     const { map } = def;
 
     const sets = map.split('|');
