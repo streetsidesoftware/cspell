@@ -2,8 +2,8 @@ export const FLAG_WORD = 1;
 
 export class ChildMap extends Map<string, TrieNode> {}
 export interface TrieNode {
-    f?: number; // flags
-    c?: ChildMap;
+    f?: number | undefined; // flags
+    c?: ChildMap | undefined;
 }
 
 export interface TrieOptions {
@@ -12,7 +12,7 @@ export interface TrieOptions {
     forbiddenWordPrefix: string;
 }
 
-export type PartialTrieOptions = Partial<TrieOptions> | undefined;
+export type PartialTrieOptions = PartialWithUndefined<TrieOptions> | undefined;
 
 export interface TrieRoot extends TrieOptions {
     c: ChildMap;

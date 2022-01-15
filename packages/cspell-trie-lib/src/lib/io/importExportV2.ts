@@ -12,7 +12,7 @@ interface TrieRefNode extends TrieNode {
 
 interface LeafResult {
     n: TrieRefNode;
-    p?: TrieRefNode;
+    p?: TrieRefNode | undefined;
 }
 
 interface Line {

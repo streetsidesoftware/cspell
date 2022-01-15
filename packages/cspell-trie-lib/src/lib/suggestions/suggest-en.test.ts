@@ -3,6 +3,7 @@ import { genCompoundableSuggestions, suggest } from './suggest';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
 import { createTimer } from '../utils/timer';
 import { CompoundWordsMethod } from '../walker';
+import { clean } from '../trie-util';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -173,14 +174,14 @@ function opts(
     includeTies?: boolean,
     ignoreCase?: boolean
 ): SuggestionCollectorOptions {
-    return {
+    return clean({
         numSuggestions,
         filter,
         changeLimit,
         includeTies,
         ignoreCase,
         timeout,
-    };
+    });
 }
 
 function sr(...sugs: (string | ExpectedSuggestion)[]): ExpectedSuggestion[] {

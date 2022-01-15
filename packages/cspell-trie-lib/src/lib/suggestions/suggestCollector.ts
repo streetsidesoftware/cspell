@@ -125,14 +125,14 @@ export interface SuggestionCollectorOptions {
     timeout?: number | undefined;
 }
 
-export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = {
+export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = Object.freeze({
     numSuggestions: defaultMaxNumberSuggestions,
     filter: () => true,
     changeLimit: MAX_NUM_CHANGES,
     includeTies: false,
     ignoreCase: true,
     timeout: DEFAULT_COLLECTOR_TIMEOUT,
-};
+});
 
 export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector {
     const {

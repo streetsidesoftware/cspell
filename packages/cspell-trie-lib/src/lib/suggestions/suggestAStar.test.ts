@@ -4,6 +4,7 @@ import * as Sug from './suggestAStar';
 import { SuggestionCollector, suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
 import { Trie } from '../trie';
 import { CompoundWordsMethod } from '../walker';
+import { clean } from '../trie-util';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,
@@ -233,11 +234,11 @@ function sugOptsMaxNum(maxNumSuggestions: number): SuggestionCollectorOptions {
 
 function sugGenOptsFromCollector(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod) {
     const { ignoreCase, changeLimit } = collector;
-    const ops: GenSuggestionOptionsStrict = {
+    const ops: GenSuggestionOptionsStrict = clean({
         compoundMethod,
         ignoreCase,
         changeLimit,
-    };
+    });
     return ops;
 }
 

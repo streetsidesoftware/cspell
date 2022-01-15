@@ -1,8 +1,14 @@
 import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from '../genSuggestionsOptions';
 import { visualLetterMaskMap } from './orthography';
-import { MaxCost, suggestionCollector, SuggestionGenerator, SuggestionResult } from './suggestCollector';
+import {
+    MaxCost,
+    suggestionCollector,
+    SuggestionCollectorOptions,
+    SuggestionGenerator,
+    SuggestionResult,
+} from './suggestCollector';
 import { TrieRoot } from '../TrieNode';
-import { isWordTerminationNode } from '../trie-util';
+import { clean, isWordTerminationNode } from '../trie-util';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
 
 const baseCost = 100;
@@ -21,14 +27,8 @@ export function suggest(
     options: SuggestionOptions = {}
 ): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
-    const collector = suggestionCollector(word, {
-        numSuggestions: opts.numSuggestions,
-        changeLimit: opts.changeLimit,
-        includeTies: opts.includeTies,
-        ignoreCase: opts.ignoreCase,
-        timeout: opts.timeout,
-        filter: opts.filter,
-    });
+    const collectorOpts: SuggestionCollectorOptions = clean(opts);
+    const collector = suggestionCollector(word, collectorOpts);
     collector.collect(genSuggestions(root, word, opts));
     return collector.suggestions;
 }

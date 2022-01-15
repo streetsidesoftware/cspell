@@ -69,9 +69,7 @@ export function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<T
 
         function addToStack(c: Map<string, TrieNode> | undefined, p: TrieRefNode) {
             if (!c) return;
-            const children = [...c.entries()]
-                .map(([k, n]) => ({ k, n, p, r: undefined }))
-                .sort((a, b) => (a.k < b.k ? 1 : -1));
+            const children = [...c.entries()].map(([k, n]) => ({ k, n, p })).sort((a, b) => (a.k < b.k ? 1 : -1));
             stack.push(...children);
         }
 
