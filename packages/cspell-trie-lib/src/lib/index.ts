@@ -1,6 +1,6 @@
 export { consolidate } from './consolidate';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance';
-export type { WeightedMap, WeightedMapDef } from './distance';
+export type { SuggestionCostMapDef, WeightedMap } from './distance';
 export type { FindFullResult } from './find';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport';
 export { parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';

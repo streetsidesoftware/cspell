@@ -1,3 +1,5 @@
+import { SuggestionCostMapDef } from './suggestionCostsDef';
+
 export type WeightedMapTrie = Record<string, WeightedMapTrieNode>;
 
 interface WeightedMapTrieNode {
@@ -20,81 +22,7 @@ interface WeightedRepTrieNode {
     swap?: number | undefined;
 }
 
-// cspell:ignore aeiouy
-/**
- * A WeightedMapDef enables setting weights for edits between related characters and substrings.
- *
- * Multiple groups can be defined using a `|`.
- * A multi-character substring is defined using `()`.
- *
- * For example, in some languages, some letters sound alike.
- *
- * ```ts
- * {
- *   map: 'sc(sh)(sch)(ss)|t(tt)', // two groups.
- *   replace: 50, // Make it 1/2 the cost of a normal edit to replace a `t` with `tt`.
- * }
- * ```
- *
- * The following could be used to make inserting, removing, or replacing vowels cheaper.
- * ```ts
- * {
- *   map: 'aeiouy', //.
- *   insDel: 50, // Make it is cheaper to insert or delete a vowel.
- *   replace: 45, // It is even cheaper to replace one with another.
- * }
- * ```
- *
- * Note: the default edit distance is 100.
- */
-export type WeightedMapDef = WeightedMapDefReplace | WeightMapDefInsDel | WeightMapDefSwap;
-
-interface WeightedMapDefBase {
-    /**
-     * The set of substrings to map, these are generally single character strings.
-     *
-     * Multiple sets can be defined by using a `|` to separate them.
-     *
-     * Example: `"eéê|aåá"` contains two different sets.
-     *
-     * To add a multi-character substring use `()`.
-     *
-     * Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
-     */
-    map: string;
-    /** The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. */
-    insDel?: number;
-    /**
-     * The cost to replace of of the substrings in the map with another substring in the map.
-     * Example: Map['a', 'i']
-     * This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
-     */
-    replace?: number;
-    /**
-     * The cost to swap two adjacent substrings found in the map.
-     * Example: Map['e', 'i']
-     * This represents the cost to change `ei` to `ie` or the reverse.
-     */
-    swap?: number;
-    /**
-     * A description to describe the purpose of the map.
-     */
-    description?: string;
-}
-
-interface WeightedMapDefReplace extends WeightedMapDefBase {
-    replace: number;
-}
-
-interface WeightMapDefInsDel extends WeightedMapDefBase {
-    insDel: number;
-}
-
-interface WeightMapDefSwap extends WeightedMapDefBase {
-    swap: number;
-}
-
-export function buildWeightedMapTrie(defs: WeightedMapDef[]): WeightedMapTrie {
+export function buildWeightedMapTrie(defs: SuggestionCostMapDef[]): WeightedMapTrie {
     const trie: WeightedMapTrie = createMapTrie();
     defs.forEach((def) => addWeightedDefMapToTrie(def, trie));
     return trie;
@@ -106,7 +34,10 @@ export function buildWeightedMapTrie(defs: WeightedMapDef[]): WeightedMapTrie {
  * @param trie - the trie to add it to. NOTE: this trie is modified!
  * @returns the modified trie
  */
-export function addWeightedDefMapToTrie(def: WeightedMapDef, trie: WeightedMapTrie = createMapTrie()): WeightedMapTrie {
+export function addWeightedDefMapToTrie(
+    def: SuggestionCostMapDef,
+    trie: WeightedMapTrie = createMapTrie()
+): WeightedMapTrie {
     const mapSets = splitMap(def);
 
     function addRepToNode(mapSet: string[], n: WeightedMapTrieNode) {
@@ -159,11 +90,11 @@ function createRepTrieNode(r?: WeightedRepMapTrie): WeightedRepTrieNode {
     return assignIfDefined(n, 'r', r);
 }
 
-function addWeightsToNode(n: WeightedMapTrieNode, def: WeightedMapDef) {
+function addWeightsToNode(n: WeightedMapTrieNode, def: SuggestionCostMapDef) {
     assignIfDefined(n, 'insDel', lowest(n.insDel, def.insDel));
 }
 
-function addWeightsToRepNode(n: WeightedRepTrieNode, def: WeightedMapDef) {
+function addWeightsToRepNode(n: WeightedRepTrieNode, def: SuggestionCostMapDef) {
     assignIfDefined(n, 'rep', lowest(n.rep, def.replace));
     assignIfDefined(n, 'swap', lowest(n.swap, def.swap));
 }
@@ -178,7 +109,7 @@ function lowest(a: number | undefined, b: number | undefined): number | undefine
  * Splits a WeightedMapDef.map
  * @param map
  */
-function splitMap(def: WeightedMapDefBase): string[][] {
+function splitMap(def: Pick<SuggestionCostMapDef, 'map'>): string[][] {
     const { map } = def;
 
     const sets = map.split('|');

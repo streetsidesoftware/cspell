@@ -1,4 +1,5 @@
-import { __testing__, addWeightedDefMapToTrie, WeightedMapDef } from './weightedMaps';
+import type { SuggestionCostMapDef } from './suggestionCostsDef';
+import { addWeightedDefMapToTrie, __testing__ } from './weightedMaps';
 
 const { splitMapSubstrings, splitMap } = __testing__;
 
@@ -35,7 +36,7 @@ describe('Validate weightedMaps', () => {
         ${'ab'}  | ${undefined} | ${2}         | ${undefined} | ${{ a: { r: { a: { rep: 2 }, b: { rep: 2 } } }, b: { r: { a: { rep: 2 }, b: { rep: 2 } } } }}
         ${'a|b'} | ${undefined} | ${2}         | ${undefined} | ${{ a: { r: { a: { rep: 2 } } }, b: { r: { b: { rep: 2 } } } }}
     `('splitMap "$map"', ({ map, insDel, replace, swap, expected }) => {
-        const def: WeightedMapDef = {
+        const def: SuggestionCostMapDef = {
             map,
             insDel,
             replace,
