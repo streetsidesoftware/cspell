@@ -1,3 +1,5 @@
+import type { SuggestionCostsDefs } from './suggestionCostsDef';
+
 export type ReplaceEntry = [string, string];
 export type ReplaceMap = ReplaceEntry[];
 
@@ -445,6 +447,11 @@ export interface DictionaryDefinitionBase {
      * @default "S"
      */
     type?: DictionaryFileTypes;
+    /**
+     * Used in making suggestions. The lower the value, the more likely the suggestion
+     * will be near the top of the suggestion list.
+     */
+    suggestionEditCosts?: SuggestionCostsDefs;
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {

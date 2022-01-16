@@ -1,9 +1,10 @@
 import { distanceAStarWeighted } from './distanceAStarWeighted';
 import { levenshteinDistance } from './levenshtein';
-import type { WeightedMapDef, WeightedMapTrie } from './weightedMaps';
+import type { SuggestionCostMapDef } from './suggestionCostsDef';
+import type { WeightedMapTrie } from './weightedMaps';
 import { addWeightedDefMapToTrie, buildWeightedMapTrie } from './weightedMaps';
 
-export type { WeightedMapDef } from './weightedMaps';
+export type { SuggestionCostMapDef } from './suggestionCostsDef';
 
 const defaultCost = 100;
 
@@ -46,7 +47,7 @@ export type WeightedMap = WeightedMapTrie;
  * @param defs - list of definitions
  * @returns A Weighted Map to be used with distance calculations.
  */
-export function createWeightedMap(defs: WeightedMapDef[]): WeightedMap {
+export function createWeightedMap(defs: SuggestionCostMapDef[]): WeightedMap {
     return buildWeightedMapTrie(defs);
 }
 
@@ -55,6 +56,6 @@ export function createWeightedMap(defs: WeightedMapDef[]): WeightedMap {
  * @param weightedMap - map to update
  * @param def - the definition to use
  */
-export function updatedWeightedMap(weightedMap: WeightedMap, def: WeightedMapDef): void {
+export function updatedWeightedMap(weightedMap: WeightedMap, def: SuggestionCostMapDef): void {
     addWeightedDefMapToTrie(def, weightedMap);
 }
