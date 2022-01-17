@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1828, Issues found: 21956 in 1089 files
+ CSpell: Files checked: 1828, Issues found: 21957 in 1089 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -55,11 +55,11 @@ Lines:
 ./README.md:43:57     - Unknown word (libsqlite)  -- additionally need libxml2 and libsqlite3.
 ./README.md:52:55     - Unknown word (ccache)     -- autoconf make libtool ccache libxml2-devel sqlite
 ./README.md:52:70     - Unknown word (devel)      -- libtool ccache libxml2-devel sqlite-devel
-./TSRM/TSRM.c:581:38    - Unknown word (mythreadid) -- created thread: %d\n",mythreadid());
+./TSRM/TSRM.c:588:38    - Unknown word (mythreadid) -- created thread: %d\n",mythreadid());
 ./TSRM/TSRM.c:62:16     - Unknown word (tsmm)       -- static MUTEX_T tsmm_mutex; /* thread-safe
-./TSRM/TSRM.c:735:28    - Unknown word (gottpoff)   -- movq _tsrm_ls_cache@gottpoff(%%rip),%0"
-./TSRM/TSRM.c:749:7     - Unknown word (adrp)       -- asm("adrp %0, #__tsrm_ls_cache
-./TSRM/TSRM.c:754:21    - Unknown word (tprel)      -- "add %0, %0, #:tprel_hi12:_tsrm_ls_cache
+./TSRM/TSRM.c:742:28    - Unknown word (gottpoff)   -- movq _tsrm_ls_cache@gottpoff(%%rip),%0"
+./TSRM/TSRM.c:756:7     - Unknown word (adrp)       -- asm("adrp %0, #__tsrm_ls_cache
+./TSRM/TSRM.c:761:21    - Unknown word (tprel)      -- "add %0, %0, #:tprel_hi12:_tsrm_ls_cache
 ./TSRM/TSRM.c:81:7      - Unknown word (unshuffled) -- int unshuffled_offset = TSRM_UNSHUFFLE
 ./TSRM/tsrm_win32.c:458:39    - Unknown word (envw)       -- NULL, *cwdw = NULL, *envw = NULL;
 ./TSRM/tsrm_win32.c:462:7     - Unknown word (asuser)     -- BOOL asuser = TRUE;
@@ -67,21 +67,21 @@ Lines:
 ./Zend/Optimizer/block_pass.c:62:24     - Unknown word (Tsource)    -- define VAR_SOURCE(op) Tsource[VAR_NUM(op.var)]
 ./Zend/Optimizer/compact_vars.c:32:24     - Unknown word (tmps)       -- uint32_t num_cvs, num_tmps;
 ./Zend/Optimizer/dce.c:37:38     - Unknown word (Cytron)     -- algorithm described by Cytron et al., however it requires
-./Zend/Optimizer/dfa_pass.c:1649:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
+./Zend/Optimizer/dfa_pass.c:1601:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
 ./Zend/Optimizer/dfa_pass.c:392:19    - Unknown word (needly)     -- zend_op *send_needly;
-./Zend/Optimizer/dfa_pass.c:698:30    - Unknown word (jmps)       -- int zend_dfa_optimize_jmps(zend_op_array *op_array
+./Zend/Optimizer/dfa_pass.c:693:30    - Unknown word (jmps)       -- int zend_dfa_optimize_jmps(zend_op_array *op_array
 ./Zend/Optimizer/escape_analysis.c:28:7      - Unknown word (Kotzmann)   -- * T. Kotzmann and H. Mossenbock. Escape
 ./Zend/Optimizer/escape_analysis.c:396:19    - Unknown word (Equi)       -- /* 1. Build EES (Equi-Escape Sets) */
 ./Zend/Optimizer/escape_analysis.c:76:31     - Unknown word (equi)       -- zend_result zend_build_equi_escape_sets(int *parent
 ./Zend/Optimizer/sccp.c:30:80     - Unknown word (SCDF)       -- (SCCP) based on the SCDF framework. The
-./Zend/Optimizer/sccp.c:316:70    - Unknown word (binop)      -- *result, zend_uchar binop, zval *op1, zval *op
+./Zend/Optimizer/sccp.c:317:70    - Unknown word (binop)      -- *result, zend_uchar binop, zval *op1, zval *op
 ./Zend/Optimizer/sccp.c:72:30     - Unknown word (Sarkar)     -- Array SSA Form" by Vivek Sarkar, Kathleen Knobe and
 ./Zend/Optimizer/sccp.c:72:47     - Unknown word (Knobe)      -- Vivek Sarkar, Kathleen Knobe and Stephen Fink in
 ./Zend/Optimizer/sccp.c:79:2      - Unknown word (scdf)       -- scdf_ctx scdf;
 ./Zend/Optimizer/scdf.c:23:58     - Unknown word (Wegman)     -- constant propagation" by Wegman and Zadeck. We're using
 ./Zend/Optimizer/scdf.c:23:69     - Unknown word (Zadeck)     -- propagation" by Wegman and Zadeck. We're using a
 ./Zend/Optimizer/zend_call_graph.h:51:84     - Unknown word (opnum)      -- with init/call/send opnum */
-./Zend/Optimizer/zend_cfg.c:850:26    - Unknown word (Sreedhar)   -- Identify loops.  See Sreedhar et al, "Identifying
+./Zend/Optimizer/zend_cfg.c:838:26    - Unknown word (Sreedhar)   -- Identify loops.  See Sreedhar et al, "Identifying
 ./Zend/Optimizer/zend_dump.c:259:10    - Unknown word (afirst)        -- bool afirst = 1;
 ./Zend/Optimizer/zend_dump.c:362:22    - Unknown word (NOVAL)         -- fprintf(stderr, " NOVAL");
 ./Zend/Optimizer/zend_dump.c:365:22    - Unknown word (NOESC)         -- fprintf(stderr, " NOESC");
@@ -125,9 +125,9 @@ Lines:
 ./Zend/zend_alloc.c:225:7     - Unknown word (lrun)       -- * lrun_pages:
 ./Zend/zend_alloc.c:23:39     - Unknown word (jemalloc)   -- ideas are taken from jemalloc and tcmalloc implementations
 ./Zend/zend_alloc.c:512:89    - Unknown word (CTZLL)      -- defined(PHP_HAVE_BUILTIN_CTZLL)
-./Zend/zend_ast.c:1090:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
-./Zend/zend_ast.c:1249:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
-./Zend/zend_ast.c:1706:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
+./Zend/zend_ast.c:1103:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
+./Zend/zend_ast.c:1262:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
+./Zend/zend_ast.c:1719:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
 ./Zend/zend_attributes.c:16:22     - Unknown word (Schröder)   -- | Martin Schröder <m.schroeder2007@gmail
 ./Zend/zend_bitset.h:81:51     - Unknown word (clzl)       -- has_builtin(__builtin_clzl)) \
 ./Zend/zend_bitset.h:82:65     - Unknown word (CLZL)       -- defined(PHP_HAVE_BUILTIN_CLZL)
@@ -231,7 +231,7 @@ Lines:
 ./Zend/zend_vm_def.h:47:13     - Unknown word (NOCONSTCONST) -- ZEND_VM_HOT_NOCONSTCONST_HANDLER(1, ZEND_ADD
 ./Zend/zend_vm_def.h:47:53     - Unknown word (TMPVARCV)     -- HANDLER(1, ZEND_ADD, CONST|TMPVARCV, CONST|TMPVARCV)
 ./Zend/zend_vm_def.h:944:13    - Unknown word (NOCONST)      -- ZEND_VM_HOT_NOCONST_HANDLER(13, ZEND_BW
-./Zend/zend_vm_def.h:9524:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
+./Zend/zend_vm_def.h:9489:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
 ./Zend/zend_vm_gen.php:1082:84   - Unknown word (FASTCALL)   -- OPCODE_HANDLER_RET ZEND_FASTCALL {$spec_name}_INLINE
 ./Zend/zend_vm_gen.php:1151:23   - Unknown word (fastcall)   -- $zend_fastcall = "";
 ./Zend/zend_vm_gen.php:1407:52   - Unknown word (devnull)    -- extra as $extra => $devnull) {
@@ -860,7 +860,7 @@ Lines:
 ./ext/ext_skel.php:246:29    - Unknown word (EXTNAMECAPS) -- source = str_replace('%EXTNAMECAPS%', strtoupper($options
 ./ext/ext_skel.php:97:46     - Unknown word (onlyunix)   -- dir <path>] [--std] [--onlyunix]
 ./ext/ext_skel.php:98:23     - Unknown word (onlywindows) -- [--onlywindows] [--help]
-./ext/ffi/ffi.c:4056:75   - Unknown word (undimensioned) -- leftmost array can be undimensioned");
+./ext/ffi/ffi.c:4061:75   - Unknown word (undimensioned) -- leftmost array can be undimensioned");
 ./ext/ffi/ffi_arginfo.h:4:58      - Unknown word (cdef)       -- EX(arginfo_class_FFI_cdef, 0, 0, FFI, 0)
 ./ext/ffi/ffi_parser.c:129:14    - Unknown word (RESTICT)    -- #define YY___RESTICT 88
 ./ext/ffi/ffi_parser.c:231:5     - Unknown word (restict)    -- "__restict",
@@ -2404,11 +2404,11 @@ Lines:
 ./ext/opcache/jit/zend_elf.h:41:12     - Unknown word (phofs)       -- uintptr_t phofs;
 ./ext/opcache/jit/zend_elf.h:44:12     - Unknown word (ehsize)      -- uint16_t ehsize;
 ./ext/opcache/jit/zend_elf.h:49:12     - Unknown word (shstridx)    -- uint16_t shstridx;
-./ext/opcache/jit/zend_jit.c:1323:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
+./ext/opcache/jit/zend_jit.c:1321:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
 ./ext/opcache/jit/zend_jit.c:154:17    - Unknown word (idom)       -- b = blocks[b].idom;
-./ext/opcache/jit/zend_jit.c:1675:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
-./ext/opcache/jit/zend_jit.c:4670:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
-./ext/opcache/jit/zend_jit.c:753:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
+./ext/opcache/jit/zend_jit.c:1673:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
+./ext/opcache/jit/zend_jit.c:4651:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
+./ext/opcache/jit/zend_jit.c:751:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
 ./ext/opcache/jit/zend_jit.h:41:73     - Unknown word (caled)      -- the most frequently caled on first request functions
 ./ext/opcache/jit/zend_jit_arm64.h:131:14    - Unknown word (FPTMP)          -- #define ZREG_FPTMP ZREG_V16
 ./ext/opcache/jit/zend_jit_arm64.h:24:2      - Unknown word (ZREG)       -- ZREG_NONE = -1,
@@ -2426,8 +2426,8 @@ Lines:
 ./ext/opcache/jit/zend_jit_gdb.c:310:11    - Unknown word (framep)     -- uint8_t *framep = p;
 ./ext/opcache/jit/zend_jit_gdb.c:404:9     - Unknown word (DLNE)       -- #define DLNE(op, s) (DB(DW_LNS_extended
 ./ext/opcache/jit/zend_jit_gdb.c:451:28    - Unknown word (initf)      -- typedef void (*zend_gdbjit_initf) (zend_gdbjit_ctx *ctx
-./ext/opcache/jit/zend_jit_helpers.c:1956:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
-./ext/opcache/jit/zend_jit_helpers.c:2037:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
+./ext/opcache/jit/zend_jit_helpers.c:1962:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
+./ext/opcache/jit/zend_jit_helpers.c:2043:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
 ./ext/opcache/jit/zend_jit_internal.h:348:32    - Unknown word (prcessed)   -- DONE, "already prcessed") \
 ./ext/opcache/jit/zend_jit_internal.h:399:24    - Unknown word (JITED)      -- define ZEND_JIT_TRACE_JITED (1<<4)
 ./ext/opcache/jit/zend_jit_internal.h:443:20    - Unknown word (ICALL)      -- ZEND_JIT_TRACE_DO_ICALL,
@@ -2441,16 +2441,16 @@ Lines:
 ./ext/opcache/jit/zend_jit_perf_dump.c:42:53     - Unknown word (vtunes)     -- as it conflicts with vtunes types.
 ./ext/opcache/jit/zend_jit_perf_dump.c:59:45     - Unknown word (jitted)     -- perf.data -o perf.data.jitted
 ./ext/opcache/jit/zend_jit_perf_dump.c:72:37     - Unknown word (UNFO)       -- PERF_JITDUMP_UNWINDING_UNFO 4
-./ext/opcache/jit/zend_jit_trace.c:3383:28   - Unknown word (clenup)     -- void zend_jit_trace_clenup_stack(zend_jit_trace
-./ext/opcache/jit/zend_jit_trace.c:403:82    - Unknown word (tssa)       -- zend_ssa *tssa,
-./ext/opcache/jit/zend_jit_trace.c:4087:7    - Unknown word (Deoptimization) -- /* Deoptimization */
-./ext/opcache/jit/zend_jit_trace.c:4356:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
+./ext/opcache/jit/zend_jit_trace.c:3388:28   - Unknown word (clenup)     -- void zend_jit_trace_clenup_stack(zend_jit_trace
+./ext/opcache/jit/zend_jit_trace.c:402:82    - Unknown word (tssa)       -- zend_ssa *tssa,
+./ext/opcache/jit/zend_jit_trace.c:4106:7    - Unknown word (Deoptimization) -- /* Deoptimization */
+./ext/opcache/jit/zend_jit_trace.c:4375:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
 ./ext/opcache/jit/zend_jit_trace.c:64:3      - Unknown word (ZCSG)       -- ZCSG(jit_traces) = zend_jit
-./ext/opcache/jit/zend_jit_trace.c:6733:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
-./ext/opcache/jit/zend_jit_trace.c:6892:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
-./ext/opcache/jit/zend_jit_trace.c:7173:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
-./ext/opcache/jit/zend_jit_trace.c:8117:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
-./ext/opcache/jit/zend_jit_trace.c:948:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
+./ext/opcache/jit/zend_jit_trace.c:6745:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
+./ext/opcache/jit/zend_jit_trace.c:6904:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
+./ext/opcache/jit/zend_jit_trace.c:7185:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
+./ext/opcache/jit/zend_jit_trace.c:8129:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
+./ext/opcache/jit/zend_jit_trace.c:947:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
 ./ext/opcache/jit/zend_jit_vm_helpers.c:1095:39   - Unknown word (unroling)   -- doesn't work try loop unroling. */
 ./ext/opcache/jit/zend_jit_vm_helpers.c:40:35     - Unknown word (Wvolatile)  -- diagnostic ignored "-Wvolatile-register-var"
 ./ext/opcache/jit/zend_jit_vtune.c:21:14     - Unknown word (VTUNE)      -- #define HAVE_VTUNE 1
@@ -2460,8 +2460,8 @@ Lines:
 ./ext/opcache/zend_accelerator_hash.c:27:20     - Unknown word (Octa)       -- /* Generated on an Octa-ALPHA 300MHz CPU &
 ./ext/opcache/zend_accelerator_hash.h:30:8      - Unknown word (sizen)      -- fixed sizen selected during construction
 ./ext/opcache/zend_accelerator_module.c:468:47    - Unknown word (ZSMMG)      -- buf), ZEND_ULONG_FMT, ZSMMG(memory_exhausted)?ZCSG
-./ext/opcache/zend_file_cache.c:1023:17   - Unknown word (jited)      -- /* FIXME: dump jited codes out to file cache
-./ext/opcache/zend_file_cache.c:1079:9    - Unknown word (unpoison)   -- __msan_unpoison(&info, sizeof(info)
+./ext/opcache/zend_file_cache.c:1020:17   - Unknown word (jited)      -- /* FIXME: dump jited codes out to file cache
+./ext/opcache/zend_file_cache.c:1076:9    - Unknown word (unpoison)   -- __msan_unpoison(&info, sizeof(info)
 ./ext/opcache/zend_file_cache.c:59:22     - Unknown word (msan)       -- include <sanitizer/msan_interface.h>
 ./ext/opcache/zend_shared_alloc.c:369:66    - Unknown word (rotr)       -- ) - 3)); /* key  = _rotr(key, 3);*/
 ./ext/openssl/openssl.c:1023:10   - Unknown word (mdtype)     -- EVP_MD *mdtype;
@@ -2539,7 +2539,7 @@ Lines:
 ./ext/openssl/xp_ssl.c:710:3     - Unknown word (LPWSTR)     -- LPWSTR server_name = NULL;
 ./ext/pcntl/pcntl.c:1546:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
 ./ext/pcntl/pcntl.c:1551:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
-./ext/pcntl/pcntl.c:1567:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
+./ext/pcntl/pcntl.c:1568:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
 ./ext/pcntl/pcntl.c:156:8     - Unknown word (SIGPWR)     -- #ifdef SIGPWR
 ./ext/pcntl/pcntl.c:163:8     - Unknown word (SIGRTMIN)   -- #ifdef SIGRTMIN
 ./ext/pcntl/pcntl.c:191:11    - Unknown word (NOINFO)     -- #ifdef SI_NOINFO
@@ -4205,11 +4205,11 @@ Lines:
 ./ext/standard/net.c:146:10    - Unknown word (netmnask)   -- 'netmnask' => '255.0.0.0',
 ./ext/standard/net.c:283:9     - Unknown word (newif)      -- zval newif;
 ./ext/standard/net.c:43:15     - Unknown word (ipdef)      -- # include <ws2ipdef.h>
-./ext/standard/pack.c:699:22    - Unknown word (nints)      -- * Example: "c2chars/nints" will return an object
-./ext/standard/pack.c:918:47    - Unknown word (padt)       -- char pads = ' '; char padt = '\t'; char padc =
-./ext/standard/pack.c:918:65    - Unknown word (padc)       -- char padt = '\t'; char padc = '\r'; char padl =
-./ext/standard/pack.c:918:83    - Unknown word (padl)       -- char padc = '\r'; char padl = '\n';
-./ext/standard/pack.c:976:17    - Unknown word (ipos)       -- zend_long ipos, opos;
+./ext/standard/pack.c:700:22    - Unknown word (nints)      -- * Example: "c2chars/nints" will return an object
+./ext/standard/pack.c:919:47    - Unknown word (padt)       -- char pads = ' '; char padt = '\t'; char padc =
+./ext/standard/pack.c:919:65    - Unknown word (padc)       -- char padt = '\t'; char padc = '\r'; char padl =
+./ext/standard/pack.c:919:83    - Unknown word (padl)       -- char padc = '\r'; char padl = '\n';
+./ext/standard/pack.c:977:17    - Unknown word (ipos)       -- zend_long ipos, opos;
 ./ext/standard/password.c:184:8     - Unknown word (zcost)      -- zval *zcost;
 ./ext/standard/php_crypt_r.c:28:54     - Unknown word (kstailey)   -- 1997/07/23 20:58:27 kstailey Exp
 ./ext/standard/php_password.h:30:55     - Unknown word (libsoidum)  -- memlimit in KB, while libsoidum uses bytes.
