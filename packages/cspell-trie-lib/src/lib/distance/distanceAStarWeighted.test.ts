@@ -1,6 +1,6 @@
 import { distanceAStarWeighted } from './distanceAStarWeighted';
 import { levenshteinDistance } from './levenshtein';
-import { buildWeightedMapTrie } from './weightedMaps';
+import { addDefToWeightMap, createWeightMap } from './weightedMaps';
 
 describe('distanceAStar', () => {
     test.each`
@@ -13,8 +13,8 @@ describe('distanceAStar', () => {
         ${'grapple'} | ${'maples'}
     `('distanceAStar vs Levenshtein "$wordA" "$wordB"', ({ wordA, wordB }) => {
         const expected = levenshteinDistance(wordA, wordB) * 100;
-        expect(distanceAStarWeighted(wordA, wordB, {})).toBe(expected);
-        expect(distanceAStarWeighted(wordB, wordA, {})).toBe(expected);
+        expect(distanceAStarWeighted(wordA, wordB, createWeightMap())).toBe(expected);
+        expect(distanceAStarWeighted(wordB, wordA, createWeightMap())).toBe(expected);
     });
 
     // cspell:ignore aeiou
@@ -35,8 +35,9 @@ describe('distanceAStar', () => {
         ${'airplane'} | ${'aeroplane'}                           | ${{ map: 'aeiou', replace: 25 }}             | ${125}
         ${'plain'}    | ${'plane'}                               | ${{ map: '(ane)(ain)', replace: 100 }}       | ${100}
     `('distanceAStar vs Levenshtein "$wordA" "$wordB" $map', ({ wordA, wordB, map, expected }) => {
-        const trie = map ? buildWeightedMapTrie([map]) : buildWeightedMapTrie([]);
-        expect(distanceAStarWeighted(wordA, wordB, trie)).toBe(expected);
-        expect(distanceAStarWeighted(wordB, wordA, trie)).toBe(expected);
+        const weightMap = createWeightMap();
+        if (map) addDefToWeightMap(weightMap, map);
+        expect(distanceAStarWeighted(wordA, wordB, weightMap)).toBe(expected);
+        expect(distanceAStarWeighted(wordB, wordA, weightMap)).toBe(expected);
     });
 });

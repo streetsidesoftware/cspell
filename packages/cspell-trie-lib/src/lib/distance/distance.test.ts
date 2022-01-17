@@ -31,6 +31,11 @@ describe('distance', () => {
             map: 'aáâäãå|eéêë|iíîï|oóôöõ|uúûü|yÿ', // cspell:disable-line
             replace: 10, // Make it cheap to add / remove an accent.
         },
+        {
+            description: 'Sounds alike',
+            map: 'fv(ph)|(sh)(ch)|(sch)(sk)|ck|sc|(sio)(tio)(cio)',
+            replace: 60,
+        },
     ]);
 
     updatedWeightedMap(weights, {
