@@ -23,7 +23,7 @@
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "test-schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
-    "test": "jest && npm run test-schema && npm run test-build-docs",
+    "test": "jest && npm run test-schema",
     "prepare": "npm run build"
   },
   "repository": {
