@@ -19,10 +19,11 @@
     "build-dev": "tsc -p tsconfig.dev.json",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && cp ./cspell.schema.json ../..",
     "build-docs": "typedoc --out ../../docs/types/cspell-types src/index.ts",
+    "test-build-docs": "typedoc --out ./temp/docs src/index.ts",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "test-schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
-    "test": "jest && npm run test-schema",
+    "test": "jest && npm run test-schema && npm run test-build-docs",
     "prepare": "npm run build"
   },
   "repository": {
@@ -52,7 +53,7 @@
     "jest": "^27.4.7",
     "rimraf": "^3.0.2",
     "ts-json-schema-generator": "^0.97.0",
-    "typedoc": "^0.22.11",
+    "typedoc": "0.22.10",
     "typedoc-plugin-markdown": "^3.11.11",
     "typescript": "^4.5.4"
   }
