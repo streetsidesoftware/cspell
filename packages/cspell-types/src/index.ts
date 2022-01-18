@@ -5,3 +5,4 @@ export * from './CSpellReporter';
 export * from './CSpellSettingsDef';
 export type { SuggestionCostMapDef as WeightedMapDef } from './suggestionCostsDef';
 export type { TextDocumentOffset, TextOffset } from './TextOffset';
+export type { Features, FeatureConfig } from './features';
