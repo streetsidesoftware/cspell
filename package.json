@@ -42,6 +42,7 @@
     "test-bin-spell-cache-content": "node ./bin.js -c cspellrc.json --cache --cache-strategy content",
     "test-bin-spell-cache-metadata": "node ./bin.js -c cspellrc.json --cache --cache-strategy metadata",
     "test-bin-trace": "node ./bin.js trace test",
+    "test-build-docs": "lerna run test-build-docs",
     "test-integrations": "cd ./integration-tests && npm run integration-tests",
     "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./packages/cspell-types/ajv.config.js",
     "update-packages": "lerna exec \"npx npm-check-updates -t minor -u && rimraf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci",

@@ -1,0 +1,39 @@
+name: Test - Build Docs
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-build-docs:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          # List of supported node versions (latest is tested in `test-os`)
+          - 16.x
+
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
+      - run: npm i -g npm@8
+      - run: npm -v
+      - run: npm ci
+      - run: npm run test-build-docs
+
+      # Ensure the repository is clean after build & test
+      - run: git --no-pager diff --compact-summary --exit-code
