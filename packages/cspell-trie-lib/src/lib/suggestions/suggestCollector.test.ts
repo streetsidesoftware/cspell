@@ -1,3 +1,4 @@
+import { editDistance, WeightMap, createWeightedMap } from '..';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionGenerator } from './suggestCollector';
 
 const defaultOptions: SuggestionCollectorOptions = {
@@ -64,6 +65,44 @@ describe('Validate suggestCollector', () => {
         // 285 -> 295 because the weight was adjusted because of the space.
         expect(rValues).toEqual([412, 412, 412, 412, 412, 300, 295]);
     });
+
+    function s(word: string, cost: number) {
+        return { word, cost };
+    }
+
+    test.each`
+        word       | expected
+        ${'word'}  | ${[s('word', 0), s('work', 100), s('words', 100)]}
+        ${'words'} | ${[s('words', 0), s('word', 100), s('works', 100)]}
+        ${'joy'}   | ${[s('joy', 5)]}
+        ${'joyo'}  | ${[s('joy', 105), s('yo-yo', 200), s('joyous', 200)]}
+        ${'woudt'} | ${[s('word', 200), s("won't", 200), s('words', 200), s('would', 200)]}
+        ${'cafe'}  | ${[s('cafe', 0), s('café', 100), s('cafés', 200)]}
+    `('collect suggestions for "$word"', ({ word, expected }) => {
+        const collector = suggestionCollector(word, sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true }));
+        const sugs = sampleSuggestions().map((sugWord) => ({ word: sugWord, cost: editDistance(word, sugWord) }));
+        sugs.forEach((sug) => collector.add(sug));
+        expect(collector.suggestions).toEqual(expected);
+    });
+
+    test.each`
+        word       | expected
+        ${'word'}  | ${[s('word', 0), s('work', 100), s('words', 100)]}
+        ${'words'} | ${[s('words', 0), s('word', 100), s('works', 100)]}
+        ${'joy'}   | ${[s('joy', 0)]}
+        ${'joyo'}  | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 200)]}
+        ${'woudt'} | ${[s('word', 200), s("won't", 200), s('words', 200), s('would', 200)]}
+        ${'aple'}  | ${[s('apple', 55), s('apples', 155)]}
+        ${'cafe'}  | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
+    `('collect weighted suggestions for "$word"', ({ word, expected }) => {
+        const collector = suggestionCollector(
+            word,
+            sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true, weightMap: sampleWeightMap() })
+        );
+        const sugs = sampleSuggestions().map((sugWord) => ({ word: sugWord, cost: editDistance(word, sugWord) }));
+        sugs.forEach((sug) => collector.add(sug));
+        expect(collector.suggestions).toEqual(expected);
+    });
 });
 
 function sugOpts(opts: Partial<SuggestionCollectorOptions>): SuggestionCollectorOptions {
@@ -71,4 +110,34 @@ function sugOpts(opts: Partial<SuggestionCollectorOptions>): SuggestionCollector
         ...defaultOptions,
         ...opts,
     };
+}
+
+function sampleSuggestions(): string[] {
+    return ['']
+        .concat(['joy', 'joyful', 'joyfully', 'joyous', 'enjoy', 'enjoyment', 'joyfulness', 'joyless', 'enjoys'])
+        .concat(['one', 'two', 'concat', 'string', 'function', 'return', 'partial', 'values', 'value', 'collector'])
+        .concat(['color', 'word', 'words', 'would', "wouldn't", "won't", 'water', 'walk', 'walking', 'cost'])
+        .concat(['calculate', 'suggest', 'suggestion', 'supplement', 'apple', 'apples', 'walked', 'walker'])
+        .concat(['yo-yo', 'the', 'saw', 'raw', 'paw', 'this', 'these', 'those', 'work', 'works', 'working'])
+        .concat(['workable', 'worked', 'cafe', 'café', 'resume', 'résumé', 'cafés'])
+        .concat([]);
+}
+
+function sampleWeightMap(): WeightMap {
+    return createWeightedMap([
+        {
+            map: 'aeiouy', // cspell:disable-line
+            insDel: 75,
+            replace: 50,
+        },
+        {
+            map: "p(pp)|l(ll)|t(tt)|o(ou)(oh)|n(ing)('n)",
+            replace: 55,
+        },
+        {
+            // cspell:disable-next-line
+            map: 'aàâäAÀÂÄ|eéèêëEÉÈÊË|iîïyIÎÏY|oôöOÔÖ|uùûüUÙÛÜ|cçCÇ|bB|dD|fF|gG|hH|jJ|kK|lL|mM|nN|pP|qQ|rR|sS|tT|vV|wW|xX|zZ',
+            replace: 1,
+        },
+    ]);
 }

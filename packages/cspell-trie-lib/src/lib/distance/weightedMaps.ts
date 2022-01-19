@@ -301,6 +301,23 @@ export function prettyPrintWeightMap(map: WeightMap): string {
     return [prettyPrintInsDel(map.insDel), prettyPrintReplace(map.replace), prettyPrintSwap(map.swap)].join('\n');
 }
 
+export function lookupReplaceCost(map: WeightMap, a: string, b: string): undefined | number {
+    const trie = map.replace;
+
+    let tt: TrieTrieCost | undefined = trie;
+    for (let ai = 0; ai < a.length && tt; ++ai) {
+        tt = tt.n?.[a[ai]];
+    }
+    if (!tt) return undefined;
+
+    let t: TrieCost | undefined = tt.t;
+    for (let bi = 0; bi < b.length && t; ++bi) {
+        t = t.n?.[b[bi]];
+    }
+
+    return t?.c;
+}
+
 export const __testing__ = {
     splitMap,
     splitMapSubstrings,

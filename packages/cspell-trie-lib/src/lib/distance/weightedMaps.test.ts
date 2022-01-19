@@ -1,5 +1,5 @@
 import type { SuggestionCostMapDef } from './suggestionCostsDef';
-import { addDefToWeightMap, CostPosition, prettyPrintWeightMap } from './weightedMaps';
+import { addDefToWeightMap, CostPosition, lookupReplaceCost, prettyPrintWeightMap } from './weightedMaps';
 import { createWeightMap, __testing__ } from './weightedMaps';
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes } = __testing__;
@@ -167,6 +167,18 @@ describe('Validate weightedMaps', () => {
             expect(results).toHaveLength(expected.length);
         }
     );
+
+    test.each`
+        defs                                                 | wordA   | wordB   | expected
+        ${[defRep('ae', 9), defRep('ei', 7)]}                | ${'a'}  | ${'e'}  | ${9}
+        ${[defRep('ae', 9), defRep('ei', 7)]}                | ${'a'}  | ${'i'}  | ${undefined}
+        ${[defRep('o(oo)(oh)', 9), defRep('o(oo)(ooo)', 7)]} | ${'oo'} | ${'o'}  | ${7}
+        ${[defRep('o(oo)(oh)', 9), defRep('o(oo)(ooo)', 7)]} | ${'oo'} | ${'oh'} | ${9}
+    `('calcSwapCosts with $defs.0 $defs.1 "$wordA", "$wordB"', ({ defs, wordA, wordB, expected }) => {
+        const map = createWeightMap(...defs);
+        const results = lookupReplaceCost(map, wordA, wordB);
+        expect(results).toEqual(expected);
+    });
 });
 
 function defIns(map: string, insDel: number, opt: Partial<SuggestionCostMapDef> = {}): SuggestionCostMapDef {

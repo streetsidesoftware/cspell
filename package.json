@@ -10,6 +10,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --no-ci",
+    "bt": "npm run build && npm run test",
     "build-dev": "lerna run build-dev",
     "build-integration-tests": "cd ./integration-tests && npm i",
     "build-schema": "lerna run build-schema",
