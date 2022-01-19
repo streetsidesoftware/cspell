@@ -1,5 +1,5 @@
 import * as features from './features';
-import type { Features, FeatureConfig } from './features';
+import type { Features, Feature } from './features';
 
 describe('features', () => {
     test('exports', () => {
@@ -15,11 +15,11 @@ describe('features', () => {
         expect(Object.keys(f)).toEqual([]);
 
         const exp: Features = {
-            'weighted-suggestions': { enable: true },
+            'weighted-suggestions': true,
         };
 
         type AllFeatures = {
-            [k in keyof Features]: FeatureConfig;
+            [k in keyof Features]: Feature;
         };
 
         /**

@@ -110,7 +110,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
      * Configure CSpell features.
      *
-     * Added with `v5.16.0`.
+     * - Added with `v5.16.0`.
      */
     features?: Features;
 }

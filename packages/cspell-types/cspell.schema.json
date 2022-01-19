@@ -344,28 +344,16 @@
       "$ref": "#/definitions/FsPath",
       "description": "A File System Path.\n\nSpecial Properties:\n- `${cwd}` prefix - will be replaced with the current working directory.\n- Relative paths are relative to the configuration file."
     },
-    "FeatureConfig": {
-      "additionalProperties": false,
-      "description": "Basic Feature Configuration",
-      "properties": {
-        "enable": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "enable"
-      ],
-      "type": "object"
+    "FeatureEnableOnly": {
+      "type": "boolean"
     },
     "Features": {
       "additionalProperties": false,
       "description": "Features are behaviors or settings that can be explicitly configured.",
       "properties": {
-        "deprecated": {
-          "$ref": "#/definitions/FeatureConfig"
-        },
         "weighted-suggestions": {
-          "$ref": "#/definitions/FeatureConfig"
+          "$ref": "#/definitions/FeatureEnableOnly",
+          "description": "Enable/disable using weighted suggestions."
         }
       },
       "type": "object"
@@ -978,7 +966,7 @@
     },
     "features": {
       "$ref": "#/definitions/Features",
-      "description": "Configure CSpell features.\n\nAdded with `v5.16.0`."
+      "description": "Configure CSpell features.\n\n- Added with `v5.16.0`."
     },
     "files": {
       "description": "Glob patterns of files to be checked. Glob patterns are relative to the `globRoot` of the configuration file that defines them.",
