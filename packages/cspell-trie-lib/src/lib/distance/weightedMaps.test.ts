@@ -1,5 +1,5 @@
 import type { SuggestionCostMapDef } from './suggestionCostsDef';
-import type { CostPosition } from './weightedMaps';
+import { addDefToWeightMap, CostPosition, lookupReplaceCost, prettyPrintWeightMap } from './weightedMaps';
 import { createWeightMap, __testing__ } from './weightedMaps';
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes } = __testing__;
@@ -27,41 +27,6 @@ describe('Validate weightedMaps', () => {
         expect(splitMap({ map })).toEqual(expected);
     });
 
-    const iBeforeE = {
-        n: {
-            e: {
-                n: {
-                    i: {
-                        t: {
-                            n: {
-                                i: {
-                                    n: {
-                                        e: { c: 3 },
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-            },
-            i: {
-                n: {
-                    e: {
-                        t: {
-                            n: {
-                                e: {
-                                    n: {
-                                        i: { c: 3 },
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-            },
-        },
-    };
-
     test.each`
         defs                                  | expected
         ${[]}                                 | ${{ insDel: {}, replace: {}, swap: {} }}
@@ -69,9 +34,26 @@ describe('Validate weightedMaps', () => {
         ${[defIns('ab', 3), defIns('bc', 2)]} | ${{ insDel: { n: { a: { c: 3 }, b: { c: 2 }, c: { c: 2 } } }, replace: {}, swap: {} }}
         ${[defRep('ab', 3)]}                  | ${{ insDel: {}, replace: { n: { a: { t: { n: { b: { c: 3 } } } }, b: { t: { n: { a: { c: 3 } } } } } }, swap: {} }}
         ${[defSwap('ab', 3)]}                 | ${{ insDel: {}, replace: {}, swap: { n: { a: { t: { n: { b: { c: 3 } } } }, b: { t: { n: { a: { c: 3 } } } } } } }}
-        ${[defRep('(ei)(ie)', 3)]}            | ${{ insDel: {}, replace: iBeforeE, swap: {} }}
     `('buildWeightMap $defs', ({ defs, expected }) => {
         expect(createWeightMap(...defs)).toEqual(expected);
+    });
+
+    test.each`
+        def1                                               | def2                                       | def3
+        ${undefined}                                       | ${undefined}                               | ${undefined}
+        ${defIns('ab', 3)}                                 | ${undefined}                               | ${undefined}
+        ${defIns('ab', 3)}                                 | ${defIns('bc', 2)}                         | ${undefined}
+        ${defRep('ab', 3)}                                 | ${undefined}                               | ${undefined}
+        ${defSwap('ab', 3)}                                | ${undefined}                               | ${undefined}
+        ${defRep('(ei)(ie)', 3)}                           | ${undefined}                               | ${undefined}
+        ${defRep('(ei)(ie)e', 3, { insDel: 11, swap: 4 })} | ${{ map: 'aeiou', replace: 4, insDel: 7 }} | ${defRep('eio', 1, { swap: 3 })}
+    `('buildWeightMap pp $def1, $def2, $def2', ({ def1, def2, def3 }) => {
+        const defs = [def1, def2, def3].filter((a) => !!a);
+        const pp = prettyPrintWeightMap(createWeightMap(...defs));
+        expect(pp).toMatchSnapshot();
+
+        const map2 = defs.reverse().reduce((map, def) => addDefToWeightMap(map, def), createWeightMap());
+        expect(prettyPrintWeightMap(map2)).toBe(pp);
     });
 
     test.each`
@@ -185,16 +167,28 @@ describe('Validate weightedMaps', () => {
             expect(results).toHaveLength(expected.length);
         }
     );
+
+    test.each`
+        defs                                                 | wordA   | wordB   | expected
+        ${[defRep('ae', 9), defRep('ei', 7)]}                | ${'a'}  | ${'e'}  | ${9}
+        ${[defRep('ae', 9), defRep('ei', 7)]}                | ${'a'}  | ${'i'}  | ${undefined}
+        ${[defRep('o(oo)(oh)', 9), defRep('o(oo)(ooo)', 7)]} | ${'oo'} | ${'o'}  | ${7}
+        ${[defRep('o(oo)(oh)', 9), defRep('o(oo)(ooo)', 7)]} | ${'oo'} | ${'oh'} | ${9}
+    `('calcSwapCosts with $defs.0 $defs.1 "$wordA", "$wordB"', ({ defs, wordA, wordB, expected }) => {
+        const map = createWeightMap(...defs);
+        const results = lookupReplaceCost(map, wordA, wordB);
+        expect(results).toEqual(expected);
+    });
 });
 
-function defIns(map: string, insDel: number): SuggestionCostMapDef {
-    return { map, insDel };
+function defIns(map: string, insDel: number, opt: Partial<SuggestionCostMapDef> = {}): SuggestionCostMapDef {
+    return { ...opt, map, insDel };
 }
 
-function defRep(map: string, replace: number): SuggestionCostMapDef {
-    return { map, replace };
+function defRep(map: string, replace: number, opt: Partial<SuggestionCostMapDef> = {}): SuggestionCostMapDef {
+    return { ...opt, map, replace };
 }
 
-function defSwap(map: string, swap: number): SuggestionCostMapDef {
-    return { map, swap };
+function defSwap(map: string, swap: number, opt: Partial<SuggestionCostMapDef> = {}): SuggestionCostMapDef {
+    return { ...opt, map, swap };
 }

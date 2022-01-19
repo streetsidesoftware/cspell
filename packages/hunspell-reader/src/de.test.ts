@@ -3,7 +3,7 @@ import * as AffReader from './affReader';
 import * as Aff from './aff';
 
 describe('HunspellReader DE', function () {
-    it('tests transforming some entries', () => {
+    it('tests transforming `Arbeit/A-`', () => {
         const affInfo = AffReader.parseAff(deAff());
         const aff = new Aff.Aff(affInfo);
         const reader = new IterableHunspellReader({ aff, dic: ['Arbeit/A-'] });

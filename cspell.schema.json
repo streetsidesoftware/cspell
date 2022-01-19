@@ -177,7 +177,7 @@
         },
         "suggestionEditCosts": {
           "$ref": "#/definitions/SuggestionCostsDefs",
-          "description": "Used in making suggestions. The lower the value, the more likely the suggestion will be near the top of the suggestion list."
+          "description": "Used in making suggestions. The lower the value, the more likely the suggestion will be near the top of the suggestion list.\n\nAdded with `v5.16.0`."
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -239,7 +239,7 @@
         },
         "suggestionEditCosts": {
           "$ref": "#/definitions/SuggestionCostsDefs",
-          "description": "Used in making suggestions. The lower the value, the more likely the suggestion will be near the top of the suggestion list."
+          "description": "Used in making suggestions. The lower the value, the more likely the suggestion will be near the top of the suggestion list.\n\nAdded with `v5.16.0`."
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -283,7 +283,7 @@
         },
         "suggestionEditCosts": {
           "$ref": "#/definitions/SuggestionCostsDefs",
-          "description": "Used in making suggestions. The lower the value, the more likely the suggestion will be near the top of the suggestion list."
+          "description": "Used in making suggestions. The lower the value, the more likely the suggestion will be near the top of the suggestion list.\n\nAdded with `v5.16.0`."
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -343,6 +343,20 @@
     "FSPathResolvable": {
       "$ref": "#/definitions/FsPath",
       "description": "A File System Path.\n\nSpecial Properties:\n- `${cwd}` prefix - will be replaced with the current working directory.\n- Relative paths are relative to the configuration file."
+    },
+    "FeatureEnableOnly": {
+      "type": "boolean"
+    },
+    "Features": {
+      "additionalProperties": false,
+      "description": "Features are behaviors or settings that can be explicitly configured.",
+      "properties": {
+        "weighted-suggestions": {
+          "$ref": "#/definitions/FeatureEnableOnly",
+          "description": "Enable/disable using weighted suggestions."
+        }
+      },
+      "type": "object"
     },
     "FsPath": {
       "description": "A File System Path. Relative paths are relative to the configuration file.",
@@ -949,6 +963,10 @@
         "$ref": "#/definitions/LanguageIdSingle"
       },
       "type": "array"
+    },
+    "features": {
+      "$ref": "#/definitions/Features",
+      "description": "Configure CSpell features.\n\n- Added with `v5.16.0`."
     },
     "files": {
       "description": "Glob patterns of files to be checked. Glob patterns are relative to the `globRoot` of the configuration file that defines them.",

@@ -17,6 +17,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     enabledLanguageIds: 'enabledLanguageIds',
     enableFiletypes: 'enableFiletypes',
     enableGlobDot: 'enableGlobDot',
+    features: 'features',
     files: 'files',
     flagWords: 'flagWords',
     gitignoreRoot: 'gitignoreRoot',

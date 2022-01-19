@@ -10,7 +10,7 @@ import {
     CASE_INSENSITIVE_PREFIX,
 } from 'cspell-trie-lib';
 import * as zlib from 'zlib';
-import { AffWord } from 'hunspell-reader/dist/aff';
+import { AffWord } from 'hunspell-reader';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 

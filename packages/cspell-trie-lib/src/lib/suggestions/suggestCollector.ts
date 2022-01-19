@@ -1,3 +1,4 @@
+import { editDistanceWeighted, WeightMap } from '..';
 import { createTimer } from '../utils/timer';
 import { JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
 
@@ -123,6 +124,11 @@ export interface SuggestionCollectorOptions {
      * @default 1000
      */
     timeout?: number | undefined;
+
+    /**
+     * Used to improve the sorted results.
+     */
+    weightMap?: WeightMap | undefined;
 }
 
 export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = Object.freeze({
@@ -141,6 +147,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         includeTies = false,
         ignoreCase = true,
         timeout = DEFAULT_COLLECTOR_TIMEOUT,
+        weightMap,
     } = options;
     const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const sugs = new Map<string, SuggestionResult>();
@@ -225,7 +232,12 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
     }
 
     function suggestions() {
-        const sorted = [...sugs.values()].sort(compSuggestionResults);
+        const rawValues = [...sugs.values()];
+        const values = weightMap
+            ? rawValues.map(({ word }) => ({ word, cost: editDistanceWeighted(wordToMatch, word, weightMap) }))
+            : rawValues;
+
+        const sorted = values.sort(compSuggestionResults);
         if (!includeTies && sorted.length > numSuggestions) {
             sorted.length = numSuggestions;
         }

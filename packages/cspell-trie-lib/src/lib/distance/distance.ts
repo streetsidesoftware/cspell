@@ -5,6 +5,7 @@ import type { WeightMap } from './weightedMaps';
 import { addDefToWeightMap, createWeightMap } from './weightedMaps';
 
 export type { SuggestionCostMapDef } from './suggestionCostsDef';
+export type { WeightMap } from './weightedMaps';
 
 const defaultCost = 100;
 
@@ -28,26 +29,16 @@ export function editDistance(wordA: string, wordB: string, editCost = defaultCos
  * @param editCost - the cost of each edit (defaults to 100)
  * @returns the edit distance
  */
-export function editDistanceWeighted(
-    wordA: string,
-    wordB: string,
-    weights: WeightedMap,
-    editCost = defaultCost
-): number {
+export function editDistanceWeighted(wordA: string, wordB: string, weights: WeightMap, editCost = defaultCost): number {
     return distanceAStarWeighted(wordA, wordB, weights, editCost);
 }
-
-/**
- * A Weighted map used by weighted distance calculations.
- */
-export type WeightedMap = WeightMap;
 
 /**
  * Collect Map definitions into a single weighted map.
  * @param defs - list of definitions
  * @returns A Weighted Map to be used with distance calculations.
  */
-export function createWeightedMap(defs: SuggestionCostMapDef[]): WeightedMap {
+export function createWeightedMap(defs: SuggestionCostMapDef[]): WeightMap {
     return createWeightMap(...defs);
 }
 
@@ -56,6 +47,6 @@ export function createWeightedMap(defs: SuggestionCostMapDef[]): WeightedMap {
  * @param weightedMap - map to update
  * @param def - the definition to use
  */
-export function updatedWeightedMap(weightedMap: WeightedMap, def: SuggestionCostMapDef): void {
+export function updatedWeightedMap(weightedMap: WeightMap, def: SuggestionCostMapDef): void {
     addDefToWeightMap(weightedMap, def);
 }

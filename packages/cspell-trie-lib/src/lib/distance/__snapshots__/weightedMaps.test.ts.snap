@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validate weightedMaps buildWeightMap pp {"insDel": 3, "map": "ab"}, {"insDel": 2, "map": "bc"}, {"insDel": 2, "map": "bc"} 1`] = `
+"InsDel:
+  (a) = 3
+  (b) = 2
+  (c) = 2
+
+Replace:
+
+Swap:
+"
+`;
+
+exports[`Validate weightedMaps buildWeightMap pp {"insDel": 3, "map": "ab"}, undefined, undefined 1`] = `
+"InsDel:
+  (a) = 3
+  (b) = 3
+
+Replace:
+
+Swap:
+"
+`;
+
+exports[`Validate weightedMaps buildWeightMap pp {"insDel": 11, "map": "(ei)(ie)e", "replace": 3, "swap": 4}, {"insDel": 7, "map": "aeiou", "replace": 4}, {"insDel": 7, "map": "aeiou", "replace": 4} 1`] = `
+"InsDel:
+  (a) = 7
+  (e) = 7
+  (ei) = 11
+  (i) = 7
+  (ie) = 11
+  (o) = 7
+  (u) = 7
+
+Replace:
+  (a) -> (e) = 4
+  (a) -> (i) = 4
+  (a) -> (o) = 4
+  (a) -> (u) = 4
+  (e) -> (a) = 4
+  (e) -> (ei) = 3
+  (e) -> (i) = 1
+  (e) -> (ie) = 3
+  (e) -> (o) = 1
+  (e) -> (u) = 4
+  (ei) -> (e) = 3
+  (ei) -> (ie) = 3
+  (i) -> (a) = 4
+  (i) -> (e) = 1
+  (i) -> (o) = 1
+  (i) -> (u) = 4
+  (ie) -> (e) = 3
+  (ie) -> (ei) = 3
+  (o) -> (a) = 4
+  (o) -> (e) = 1
+  (o) -> (i) = 1
+  (o) -> (u) = 4
+  (u) -> (a) = 4
+  (u) -> (e) = 4
+  (u) -> (i) = 4
+  (u) -> (o) = 4
+
+Swap:
+  (e) <-> (ei) = 4
+  (e) <-> (i) = 3
+  (e) <-> (ie) = 4
+  (e) <-> (o) = 3
+  (ei) <-> (e) = 4
+  (ei) <-> (ie) = 4
+  (i) <-> (e) = 3
+  (i) <-> (o) = 3
+  (ie) <-> (e) = 4
+  (ie) <-> (ei) = 4
+  (o) <-> (e) = 3
+  (o) <-> (i) = 3
+"
+`;
+
+exports[`Validate weightedMaps buildWeightMap pp {"map": "(ei)(ie)", "replace": 3}, undefined, undefined 1`] = `
+"InsDel:
+
+Replace:
+  (ei) -> (ie) = 3
+  (ie) -> (ei) = 3
+
+Swap:
+"
+`;
+
+exports[`Validate weightedMaps buildWeightMap pp {"map": "ab", "replace": 3}, undefined, undefined 1`] = `
+"InsDel:
+
+Replace:
+  (a) -> (b) = 3
+  (b) -> (a) = 3
+
+Swap:
+"
+`;
+
+exports[`Validate weightedMaps buildWeightMap pp {"map": "ab", "swap": 3}, undefined, undefined 1`] = `
+"InsDel:
+
+Replace:
+
+Swap:
+  (a) <-> (b) = 3
+  (b) <-> (a) = 3
+"
+`;
+
+exports[`Validate weightedMaps buildWeightMap pp undefined, undefined, undefined 1`] = `
+"InsDel:
+
+Replace:
+
+Swap:
+"
+`;

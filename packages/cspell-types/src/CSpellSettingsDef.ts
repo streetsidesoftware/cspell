@@ -1,3 +1,4 @@
+import { Features } from './features';
 import type { SuggestionCostsDefs } from './suggestionCostsDef';
 
 export type ReplaceEntry = [string, string];
@@ -105,6 +106,13 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      * Tells the spell checker to searching for `.gitignore` files when it reaches a matching root.
      */
     gitignoreRoot?: FsPath | FsPath[];
+
+    /**
+     * Configure CSpell features.
+     *
+     * - Added with `v5.16.0`.
+     */
+    features?: Features;
 }
 
 export interface ExtendableSettings extends Settings {
@@ -450,6 +458,8 @@ export interface DictionaryDefinitionBase {
     /**
      * Used in making suggestions. The lower the value, the more likely the suggestion
      * will be near the top of the suggestion list.
+     *
+     * Added with `v5.16.0`.
      */
     suggestionEditCosts?: SuggestionCostsDefs;
 }
