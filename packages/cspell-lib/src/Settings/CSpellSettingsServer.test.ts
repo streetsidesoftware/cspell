@@ -189,6 +189,18 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test.each`
+        left                                              | right                                              | expected
+        ${{}}                                             | ${{}}                                              | ${{}}
+        ${{ dictionaries: ['a'] }}                        | ${{ dictionaries: ['b'] }}                         | ${oc({ dictionaries: ['a', 'b'] })}
+        ${{ features: {} }}                               | ${{}}                                              | ${oc({ features: {} })}
+        ${{ features: { 'weighted-suggestions': true } }} | ${{}}                                              | ${oc({ features: { 'weighted-suggestions': true } })}
+        ${{ features: { 'weighted-suggestions': true } }} | ${{ features: { 'weighted-suggestions': false } }} | ${oc({ features: { 'weighted-suggestions': false } })}
+        ${{ features: { 'weighted-suggestions': true } }} | ${{ features: { 'new-feature': true } }}           | ${oc({ features: { 'weighted-suggestions': true, 'new-feature': true } })}
+    `('mergeSettings $left with $right', ({ left, right, expected }) => {
+        expect(mergeSettings(left, right)).toEqual(expected);
+    });
+
+    test.each`
         filename                                              | relativeTo   | refFilename
         ${r('../../cspell.config.json')}                      | ${undefined} | ${r('../../cspell.config.json')}
         ${r('../../cspell.config.json')}                      | ${__dirname} | ${r('../../cspell.config.json')}

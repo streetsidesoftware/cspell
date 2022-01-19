@@ -389,6 +389,16 @@ function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | unde
     return left.concat(right);
 }
 
+function mergeObjects(left: undefined, right: undefined): undefined;
+function mergeObjects<T>(left: T, right: undefined): T;
+function mergeObjects<T>(left: T, right: T): T;
+function mergeObjects<T>(left: undefined, right: T): T;
+function mergeObjects<T>(left?: T, right?: T): T | undefined {
+    if (left === undefined) return right;
+    if (right === undefined) return left;
+    return { ...left, ...right };
+}
+
 function tagLanguageSettings(tag: string, settings: LanguageSetting[] = []): LanguageSetting[] {
     return settings.map((s) => ({
         id: tag + '.' + (s.id || s.locale || s.languageId),
@@ -464,6 +474,7 @@ function merge(left: CSpellSettings, right: CSpellSettings): CSpellSettings {
         files: mergeListUnique(left.files, right.files),
         ignorePaths: versionBasedMergeList(left.ignorePaths, right.ignorePaths, version),
         overrides: versionBasedMergeList(left.overrides, right.overrides, version),
+        features: mergeObjects(left.features, right.features),
         source: mergeSources(left, right),
         globRoot: undefined,
         import: undefined,
@@ -927,6 +938,7 @@ function validateRawConfig(config: CSpellUserSettings, fileRef: ImportFileRef): 
 }
 
 export const __testing__ = {
+    mergeObjects,
     normalizeCacheSettings,
     normalizeSettings,
     validateRawConfigExports,

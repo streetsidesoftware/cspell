@@ -1,3 +1,4 @@
+import { WeightMap } from '.';
 import { CompoundWordsMethod } from './walker';
 
 export interface GenSuggestionOptionsStrict {
@@ -43,6 +44,11 @@ export interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
      * return true to keep the candidate.
      */
     filter?: (word: string, cost: number) => boolean;
+
+    /**
+     * Apply weights to improve the suggestions.
+     */
+    weightMap?: WeightMap;
 }
 
 export type SuggestionOptions = Partial<SuggestionOptionsStrict>;
@@ -60,12 +66,16 @@ export const defaultSuggestionOptions: SuggestionOptionsStrict = {
     timeout: 5000,
 };
 
+type KeyOfGenSuggestionOptionsStrict = keyof GenSuggestionOptionsStrict;
+
 type KeyMapOfGenSuggestionOptionsStrict = {
-    [K in keyof GenSuggestionOptionsStrict]: K;
+    [K in KeyOfGenSuggestionOptionsStrict]: K;
 };
 
+type KeyOfSuggestionOptionsStrict = keyof SuggestionOptionsStrict;
+
 type KeyMapOfSuggestionOptionsStrict = {
-    [K in keyof SuggestionOptionsStrict]: K;
+    [K in KeyOfSuggestionOptionsStrict]: K;
 };
 
 const keyMapOfGenSuggestionOptionsStrict: KeyMapOfGenSuggestionOptionsStrict = {
@@ -76,10 +86,11 @@ const keyMapOfGenSuggestionOptionsStrict: KeyMapOfGenSuggestionOptionsStrict = {
 
 const keyMapOfSuggestionOptionsStrict: KeyMapOfSuggestionOptionsStrict = {
     ...keyMapOfGenSuggestionOptionsStrict,
-    includeTies: 'includeTies',
     filter: 'filter',
+    includeTies: 'includeTies',
     numSuggestions: 'numSuggestions',
     timeout: 'timeout',
+    weightMap: 'weightMap',
 };
 
 /**

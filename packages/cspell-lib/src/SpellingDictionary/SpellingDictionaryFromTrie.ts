@@ -1,5 +1,11 @@
-import type { FindFullResult, FindWordOptions, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
-import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
+import type {
+    FindFullResult,
+    FindWordOptions,
+    SuggestionCollector,
+    SuggestionResult,
+    WeightMap,
+} from 'cspell-trie-lib';
+import { CompoundWordsMethod, importTrie, suggestionCollector, Trie, createWeightedMap } from 'cspell-trie-lib';
 import { getDefaultSettings } from '../Settings';
 import { memorizer } from '../util/Memorizer';
 import { createMapper } from '../util/repMap';
@@ -29,6 +35,8 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
 
+    private weightMap: WeightMap | undefined;
+
     constructor(
         readonly trie: Trie,
         readonly name: string,
@@ -40,6 +48,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         this.isDictionaryCaseSensitive = options.caseSensitive ?? !trie.isLegacy;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
+        this.weightMap = options.suggestionDefs ? createWeightedMap(options.suggestionDefs) : undefined;
     }
 
     public get size(): number {
@@ -158,6 +167,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             includeTies,
             ignoreCase,
             timeout,
+            weightMap: this.weightMap,
         });
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
