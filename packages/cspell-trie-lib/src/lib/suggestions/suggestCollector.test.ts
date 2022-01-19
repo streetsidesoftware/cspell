@@ -70,6 +70,7 @@ describe('Validate suggestCollector', () => {
         return { word, cost };
     }
 
+    // cspell:ignore joyo woudt
     test.each`
         word       | expected
         ${'word'}  | ${[s('word', 0), s('work', 100), s('words', 100)]}
@@ -85,6 +86,7 @@ describe('Validate suggestCollector', () => {
         expect(collector.suggestions).toEqual(expected);
     });
 
+    // cspell:ignore aple
     test.each`
         word       | expected
         ${'word'}  | ${[s('word', 0), s('work', 100), s('words', 100)]}

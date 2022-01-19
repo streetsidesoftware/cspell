@@ -44,6 +44,8 @@ describe('distanceAStar', () => {
         expect(distanceAStarWeighted(wordB, wordA, weightMap)).toBe(expected);
     });
 
+    // cspell:ignore defunishun
+
     test.each`
         wordA                | wordB                    | weightMap                      | expected
         ${''}                | ${''}                    | ${undefined}                   | ${0}
@@ -115,7 +117,7 @@ function calcWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {
             swap: 55,
         },
         {
-            map: 'u(oo)|o(oh)(ooh)|e(ee)(ea)|f(ph)(gh)|(shun)(tion)(sion)(cion)',
+            map: 'u(oo)|o(oh)(ooh)|e(ee)(ea)|f(ph)(gh)|(shun)(tion)(sion)(cion)', // cspell:disable-line
             replace: 40,
         },
         {
