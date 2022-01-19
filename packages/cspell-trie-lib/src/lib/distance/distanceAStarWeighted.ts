@@ -6,7 +6,10 @@ import { WeightMap } from './weightedMaps';
  *
  * Using basic weights, this algorithm has the same results as the Damerau-Levenshtein algorithm.
  */
-export function distanceAStarWeighted(a: string, b: string, map: WeightMap, cost = 100): number {
+export function distanceAStarWeighted(wordA: string, wordB: string, map: WeightMap, cost = 100): number {
+    // Add ^ and $ for begin/end detection.
+    const a = '^' + wordA + '$';
+    const b = '^' + wordB + '$';
     const aN = a.length;
     const bN = b.length;
 

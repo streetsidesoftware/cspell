@@ -50,22 +50,32 @@ export interface WeightMap {
 
 export function createWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {
     const map = _createWeightMap();
-    defs.forEach((def) => addDefToWeightMap(map, def));
+    _addDefToWeightMap(map, ...defs);
     return map;
 }
 
-export function addDefToWeightMap(map: WeightMap, def: SuggestionCostMapDef) {
-    const mapSets = splitMap(def);
+export function addDefToWeightMap(
+    map: WeightMap,
+    def: SuggestionCostMapDef,
+    ...defs: SuggestionCostMapDef[]
+): WeightMap;
+export function addDefToWeightMap(map: WeightMap, ...defs: SuggestionCostMapDef[]): WeightMap {
+    return _addDefToWeightMap(map, ...defs);
+}
 
-    function addSet(set: string[]) {
+function _addDefToWeightMap(map: WeightMap, ...defs: SuggestionCostMapDef[]): WeightMap {
+    function addSet(set: string[], def: SuggestionCostMapDef) {
         addSetToTrieCost(map.insDel, set, def.insDel);
         addSetToTrieTrieCost(map.replace, set, def.replace);
         addSetToTrieTrieCost(map.swap, set, def.swap);
     }
 
-    mapSets.forEach(addSet);
+    for (const def of defs) {
+        const mapSets = splitMap(def);
+        mapSets.forEach((s) => addSet(s, def));
+    }
+    return map;
 }
-
 function _createWeightMap(): WeightMap {
     return new _WeightedMap();
 }
@@ -144,7 +154,7 @@ function addSetToTrieTrieCost(trie: TrieTrieCost, set: string[], cost: number | 
     }
 }
 
-function* walkTrieNodes<T extends { n?: Record<string, T> }>(trie: T, str: string, i: number) {
+function* searchTrieNodes<T extends { n?: Record<string, T> }>(trie: T, str: string, i: number) {
     const len = str.length;
 
     for (let n = trie.n; i < len && n; ) {
@@ -156,13 +166,46 @@ function* walkTrieNodes<T extends { n?: Record<string, T> }>(trie: T, str: strin
     }
 }
 
+function* walkTrieNodes<T extends { n?: Record<string, T> }>(
+    t: T | undefined,
+    s: string
+): Generator<{ s: string; t: T }> {
+    if (!t) return;
+
+    yield { s, t };
+
+    if (!t.n) return;
+
+    for (const [k, v] of Object.entries(t.n)) {
+        yield* walkTrieNodes(v, s + k);
+    }
+}
+
+function* walkTrieCost(trie: TrieCost): Generator<{ s: string; c: number }> {
+    for (const { s, t } of walkTrieNodes(trie, '')) {
+        if (t.c) {
+            yield { s, c: t.c };
+        }
+    }
+}
+
+function* walkTrieTrieCost(trie: TrieTrieCost): Generator<{ a: string; b: string; c: number }> {
+    for (const { s: a, t } of walkTrieNodes(trie, '')) {
+        if (t.t) {
+            for (const { s: b, c } of walkTrieCost(t.t)) {
+                yield { a, b, c };
+            }
+        }
+    }
+}
+
 interface MatchTrieCost {
     i: number;
     c: number;
 }
 
 function* findTrieCostPrefixes(trie: TrieCost, str: string, i: number): Iterable<MatchTrieCost> {
-    for (const n of walkTrieNodes(trie, str, i)) {
+    for (const n of searchTrieNodes(trie, str, i)) {
         const c = n.t.c;
         if (c !== undefined) {
             yield { i: n.i, c };
@@ -176,7 +219,7 @@ interface MatchTrieTrieCost {
 }
 
 function* findTrieTrieCostPrefixes(trie: TrieTrieCost, str: string, i: number): Iterable<MatchTrieTrieCost> {
-    for (const n of walkTrieNodes(trie, str, i)) {
+    for (const n of searchTrieNodes(trie, str, i)) {
         const t = n.t.t;
         if (t !== undefined) {
             yield { i: n.i, t };
@@ -225,6 +268,37 @@ class _WeightedMap implements WeightMap {
             }
         }
     }
+}
+
+function prettyPrintInsDel(trie: TrieCost, pfx = '', indent = '  '): string {
+    function* walk() {
+        for (const { s, c } of walkTrieCost(trie)) {
+            yield indent + `(${s}) = ${c}`;
+        }
+    }
+    return ['InsDel:', ...[...walk()].sort()].map((line) => pfx + line + '\n').join('');
+}
+
+export function prettyPrintReplace(trie: TrieTrieCost, pfx = '', indent = '  '): string {
+    function* walk() {
+        for (const { a, b, c } of walkTrieTrieCost(trie)) {
+            yield indent + `(${a}) -> (${b}) = ${c}`;
+        }
+    }
+    return ['Replace:', ...[...walk()].sort()].map((line) => pfx + line + '\n').join('');
+}
+
+export function prettyPrintSwap(trie: TrieTrieCost, pfx = '', indent = '  '): string {
+    function* walk() {
+        for (const { a, b, c } of walkTrieTrieCost(trie)) {
+            yield indent + `(${a}) <-> (${b}) = ${c}`;
+        }
+    }
+    return ['Swap:', ...[...walk()].sort()].map((line) => pfx + line + '\n').join('');
+}
+
+export function prettyPrintWeightMap(map: WeightMap): string {
+    return [prettyPrintInsDel(map.insDel), prettyPrintReplace(map.replace), prettyPrintSwap(map.swap)].join('\n');
 }
 
 export const __testing__ = {
