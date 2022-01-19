@@ -1,9 +1,10 @@
-import { parseAffFileToAff } from './affReader';
-import { Aff, AffWord } from './aff';
-import { genSequence, Sequence } from 'gensequence';
-import { WordInfo } from './types';
 import * as fs from 'fs-extra';
+import { genSequence, Sequence } from 'gensequence';
 import { decode } from 'iconv-lite';
+import { Aff } from './aff';
+import type { AffWord } from './affDef';
+import { parseAffFileToAff } from './affReader';
+import { WordInfo } from './types';
 import { filterOrderedList } from './util';
 
 const defaultEncoding = 'UTF-8';
@@ -76,7 +77,7 @@ export class IterableHunspellReader implements Iterable<string> {
      * @param tapPreApplyRules -- optional function to be called before rules are applied to a word.
      *                            It is mostly used for monitoring progress in combination with `size`.
      */
-    seqAffWords(tapPreApplyRules?: (dicEntry: string, index: number) => any, maxDepth?: number) {
+    seqAffWords(tapPreApplyRules?: (dicEntry: string, index: number) => void, maxDepth?: number) {
         return this.seqTransformDictionaryEntries(tapPreApplyRules, maxDepth).concatMap((a) => a);
     }
 
@@ -87,7 +88,7 @@ export class IterableHunspellReader implements Iterable<string> {
      *                            It is mostly used for monitoring progress in combination with `size`.
      */
     seqTransformDictionaryEntries(
-        tapPreApplyRules?: (dicEntry: string, index: number) => any,
+        tapPreApplyRules?: (dicEntry: string, index: number) => void,
         maxDepth?: number
     ): Sequence<AffWord[]> {
         const seq = genSequence(this.src.dic);

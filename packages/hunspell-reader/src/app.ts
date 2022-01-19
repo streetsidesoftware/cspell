@@ -4,11 +4,13 @@ import { IterableHunspellReader } from './IterableHunspellReader';
 import * as fs from 'fs-extra';
 import { uniqueFilter, batch } from './util';
 import { genSequence, Sequence } from 'gensequence';
-import { AffWord, asAffWord } from './aff';
+import { asAffWord } from './aff';
+import type { AffWord } from './affDef';
 import { iterableToStream } from './iterableToStream';
 
 const uniqueHistorySize = 500000;
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageInfo = require('../package.json');
 const version = packageInfo['version'];
 
@@ -102,7 +104,7 @@ function writeSeqToFile(seq: Sequence<string>, outFile: string | undefined): Pro
     });
 }
 
-function action(hunspellDicFilename: string, options: any): Promise<void> {
+function action(hunspellDicFilename: string, options: Options): Promise<void> {
     return actionPrime(hunspellDicFilename, options).catch((reason: { code: string }) => {
         if (reason.code === 'EPIPE') {
             console.log(reason);
@@ -183,9 +185,11 @@ async function actionPrime(hunspellDicFilename: string, options: Options) {
               current++;
               !(current % reportProgressRate) && process.stderr.write(calcProgress(), 'utf-8');
           }
-        : () => {};
+        : () => {
+              /* void */
+          };
     const seqWords = transform ? reader.seqAffWords(callback) : reader.seqRootWords().map(asAffWord);
-    const filterUnique = unique ? uniqueFilter(uniqueHistorySize) : (_) => true;
+    const filterUnique = unique ? uniqueFilter<string>(uniqueHistorySize) : (_: string) => true;
 
     const applyTransformers = (aff: AffWord) => transformers.reduce((aff, fn) => fn(aff), aff);
     const applyFilters = (aff: AffWord) => filters.reduce((cur, fn) => cur && fn(aff), true);

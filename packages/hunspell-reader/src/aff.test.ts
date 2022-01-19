@@ -1,8 +1,10 @@
-import { AffWord, compareAff, asAffWord, Aff, filterAff, affWordToColoredString } from './aff';
-import { parseAffFileToAff } from './affReader';
-import * as AffReader from './affReader';
+import assert from 'assert';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+import { Aff, affWordToColoredString, asAffWord, compareAff, filterAff, flagsToString } from './aff';
+import type { AffWord } from './affDef';
+import * as AffReader from './affReader';
+import { parseAffFileToAff } from './affReader';
 
 const isLoggerOn = false;
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
@@ -23,16 +25,18 @@ describe('Basic Aff Validation', () => {
     });
     it('Checks the PFX values', async () => {
         const aff = await pAff;
+        assert(aff.PFX);
         expect(aff.PFX).toBeInstanceOf(Map);
-        expect(aff.PFX!.has('X')).toBe(true);
-        const fx = aff.PFX!.get('X');
+        expect(aff.PFX.has('X')).toBe(true);
+        const fx = aff.PFX.get('X');
         expect(fx).toBeDefined();
     });
     it('Checks the SFX values', async () => {
         const aff = await pAff;
+        assert(aff.SFX);
         expect(aff.SFX).toBeInstanceOf(Map);
-        expect(aff.SFX!.has('J')).toBe(true);
-        const fxJ = aff.SFX!.get('J');
+        expect(aff.SFX.has('J')).toBe(true);
+        const fxJ = aff.SFX.get('J');
         expect(fxJ).toBeDefined();
     });
 
@@ -49,7 +53,7 @@ describe('Basic Aff Validation', () => {
 });
 
 describe('Test Aff', () => {
-    it('tests applying rules for fr', async () => {
+    it('tests applying rules for fr `badger/10`', async () => {
         const aff = await parseAffFileToAff(frAff);
         const r = aff.applyRulesToDicEntry('badger/10');
         const w = r.map((affWord) => affWord.word);
@@ -58,7 +62,7 @@ describe('Test Aff', () => {
         logApplyRulesResults(r);
     });
 
-    it('tests applying rules for fr', async () => {
+    it('tests applying rules for fr `avoir/180`', async () => {
         const aff = await parseAffFileToAff(frAff);
         const r = aff.applyRulesToDicEntry('avoir/180');
         const w = r.map((affWord) => affWord.word);
@@ -135,19 +139,15 @@ describe('Test Aff', () => {
     it('tests applying rules for nl', async () => {
         const aff = await parseAffFileToAff(nlAff);
         const lines = ['dc/ClCwKc', 'aak/Zf', 'huis/CACcYbCQZhC0', 'pannenkoek/ZbCACcC0'];
-        lines.forEach((line) => {
-            const r = aff.applyRulesToDicEntry(line);
-            logApplyRulesResults(r);
-        });
+        const appliedRules = lines.map((line) => aff.applyRulesToDicEntry(line).map(formatAffWordForSnapshot));
+        expect(appliedRules).toMatchSnapshot();
     });
 
     it('tests applying rules for es', async () => {
         const aff = await parseAffFileToAff(esAff);
         const lines = ['ababillar/RED'];
-        lines.forEach((line) => {
-            const r = aff.applyRulesToDicEntry(line);
-            logApplyRulesResults(r);
-        });
+        const appliedRules = lines.map((line) => aff.applyRulesToDicEntry(line).map(formatAffWordForSnapshot));
+        expect(appliedRules).toMatchSnapshot();
     });
 
     it('tests applying rules for en', async () => {
@@ -237,6 +237,12 @@ describe('Validate loading Hungarian', () => {
         expect(w.length).toBeGreaterThan(1);
     });
 });
+
+function formatAffWordForSnapshot(affWord: AffWord): string {
+    const { dic, base, rulesApplied, word, suffix, prefix, flags } = affWord;
+    const f = flagsToString(flags);
+    return `${dic} -> ${base} (${rulesApplied.trim()}) [${prefix}|${suffix}] --> '${word}${f ? '/' + f : ''}'`;
+}
 
 function logApplyRulesResults(affWords: AffWord[]) {
     affWords.forEach(logApplyRulesResult);

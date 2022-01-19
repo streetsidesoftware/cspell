@@ -1,21 +1,19 @@
+import assert from 'assert';
 import * as aff from './affReader';
 import { testing } from './affReader';
-import * as util from 'util';
+import * as path from 'path';
 
-const showLog = false;
+const dictionaryPath = path.resolve(__dirname, '../dictionaries');
+
+function dictPath(name: string) {
+    return path.resolve(dictionaryPath, name);
+}
 
 describe('parse an aff file', () => {
-    const filename = __dirname + '/../dictionaries/nl.aff';
+    const filename = dictPath('nl.aff');
 
-    it('reads an aff file', () => {
-        return aff.parseAffFile(filename).then(
-            (result) => {
-                if (showLog) console.log(util.inspect(result, { showHidden: true, depth: 5, colors: true }));
-            },
-            (error) => {
-                expect(Object.keys(error)).toHaveLength(0);
-            }
-        );
+    it('reads an aff file', async () => {
+        await expect(aff.parseAffFile(filename)).resolves.toBeDefined();
     });
 
     it('tests parseAffixRule', () => {
@@ -25,24 +23,26 @@ describe('parse an aff file', () => {
             value: 'í 0 Ăśztetett/1115 [^aĂĄeĂŠiĂ­oĂłĂśĹuĂşĂźĹą] 20983',
         });
         expect(rule1).toBeDefined();
-        expect(rule1!.type).toBe('SFX');
-        expect(rule1!.stripping).toBe('0');
-        expect(rule1!.affix).toBe('Ăśztetett/1115');
-        expect(rule1!.flag).toBe('í');
-        expect(rule1!.replace.source).toBe('$');
-        expect(rule1!.condition.source).toBe('[^aĂĄeĂŠiĂ­oĂłĂśĹuĂşĂźĹą]$');
+        assert(rule1);
+        expect(rule1.type).toBe('SFX');
+        expect(rule1.stripping).toBe('0');
+        expect(rule1.affix).toBe('Ăśztetett/1115');
+        expect(rule1.flag).toBe('í');
+        expect(rule1.replace.source).toBe('$');
+        expect(rule1.condition.source).toBe('[^aĂĄeĂŠiĂ­oĂłĂśĹuĂşĂźĹą]$');
 
         expect(testing.parseAffixRule({ option: 'SFX', value: '' })).toBeUndefined();
         expect(testing.parseAffixRule({ option: 'SFX', value: 'í' })).toBeUndefined();
         expect(testing.parseAffixRule({ option: 'SFX', value: 'í 0' })).toBeUndefined();
 
         const rule2 = testing.parseAffixRule({ option: 'SFX', value: 'í 0 Ăśztetett/1115' });
-        expect(rule2!.type).toBe('SFX');
-        expect(rule2!.stripping).toBe('0');
-        expect(rule2!.affix).toBe('Ăśztetett/1115');
-        expect(rule2!.flag).toBe('í');
-        expect(rule2!.replace.source).toBe('$');
-        expect(rule2!.condition.source).toBe('.$');
+        assert(rule2);
+        expect(rule2.type).toBe('SFX');
+        expect(rule2.stripping).toBe('0');
+        expect(rule2.affix).toBe('Ăśztetett/1115');
+        expect(rule2.flag).toBe('í');
+        expect(rule2.replace.source).toBe('$');
+        expect(rule2.condition.source).toBe('.$');
     });
 
     it('tests tablePfxOrSfx with bad rule', () => {
@@ -53,5 +53,16 @@ describe('parse an aff file', () => {
         expect(y).toBe(x);
         const z = testing.tablePfxOrSfx(y, testing.parseLine('SFX í Ăś Ĺz/1109 Ăś 20974'));
         expect(z.size).toBe(1);
+    });
+});
+
+describe('Validate parsing aff files', () => {
+    test.each`
+        affFile
+        ${'en_US.aff'}
+    `('Read aff $affFile', async ({ affFile }) => {
+        const affFileName = dictPath(affFile);
+        const affInfo = await aff.parseAffFile(affFileName);
+        expect(affInfo).toMatchSnapshot();
     });
 });

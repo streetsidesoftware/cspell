@@ -22,7 +22,7 @@ describe('HunspellReader NL', function () {
 
     // cspell:ignore ABCM
 
-    it('tests transforming some entries', async () => {
+    it('tests transforming some entries with debug signatures', async () => {
         const aff = await pAff;
         const reader = new IterableHunspellReader({ aff, dic: ['baddoek/Zb'] });
         const words = [...reader.seqAffWords()].map((w) => Aff.debug.signature(w));

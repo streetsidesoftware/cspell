@@ -7,8 +7,6 @@ import * as path from 'path';
 
 const DICTIONARY_LOCATIONS = path.join(__dirname, '..', 'dictionaries');
 
-basicReadTests();
-
 describe('Basic Validation of the Reader', () => {
     const pSimpleAff = getSimpleAff();
 
@@ -31,7 +29,7 @@ describe('Basic Validation of the Reader', () => {
         expect(tapped).toEqual(['happy/UY', 'ring/AUJ']);
     });
 
-    it('Validate Simple Words List', async () => {
+    it('Validate Expanding `place/AJ`', async () => {
         const aff = await pSimpleAff;
         const src = { aff, dic: ['place/AJ'] };
         const reader = new IterableHunspellReader(src);
@@ -111,26 +109,25 @@ describe('HunspellReader En', function () {
     });
 });
 
-function basicReadTests() {
-    const readerTests = ['da_DK', 'nl', 'Portuguese (Brazilian)', 'en_US'];
+describe('HunspellReader read dictionaries', function () {
+    // We are reading big files, so we need to give it some time.
+    jest.setTimeout(10000);
 
-    readerTests.forEach((hunDic: string) => {
-        describe(`HunspellReader ${hunDic}`, function () {
-            // We are reading big files, so we need to give it some time.
-            jest.setTimeout(10000);
-            const aff = __dirname + `/../dictionaries/${hunDic}.aff`;
-            const dic = __dirname + `/../dictionaries/${hunDic}.dic`;
-
-            const pReader = IterableHunspellReader.createFromFiles(aff, dic);
-
-            it('reads words with info', async () => {
-                const reader = await pReader;
-                const values = reader.seqWords().skip(200).take(200).toArray();
-                expect(values.length).toBe(200);
-            });
-        });
+    test.each`
+        hunDic
+        ${'da_DK'}
+        ${'nl'}
+        ${'Portuguese (Brazilian)'}
+        ${'en_US'}
+    `('reads words with info from "$hunDic"', async ({ hunDic }) => {
+        const aff = __dirname + `/../dictionaries/${hunDic}.aff`;
+        const dic = __dirname + `/../dictionaries/${hunDic}.dic`;
+        const reader = await IterableHunspellReader.createFromFiles(aff, dic);
+        const values = reader.seqWords().skip(200).take(200).toArray();
+        expect(values.length).toBe(200);
+        expect(values).toMatchSnapshot();
     });
-}
+});
 
 describe('Validated loading all dictionaries in the `dictionaries` directory.', () => {
     const dictionaries = fs

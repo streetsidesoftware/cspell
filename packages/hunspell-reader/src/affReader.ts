@@ -1,6 +1,9 @@
-import { AffInfo, Aff, Fx, SubstitutionSet } from './aff';
+import assert from 'assert';
 import { readFile } from 'fs-extra';
 import { decode } from 'iconv-lite';
+import { Aff } from './aff';
+import type { AffInfo, Fx, Rep, SubstitutionSet } from './affDef';
+import { cleanObject, isDefined } from './util';
 
 const fixRegex = {
     SFX: { m: /$/, r: '$' },
@@ -14,40 +17,78 @@ const affixLine = /^\s*([^\s]+)\s+(.*)?$/;
 
 const UTF8 = 'UTF-8';
 
+interface Collector<T> {
+    addLine(line: AffLine): void;
+    getValue(): T | undefined;
+}
+
 export interface ConvEntry {
     from: string;
     to: string;
 }
-function convEntry(fieldValue: ConvEntry[] | undefined, line: AffLine) {
-    if (fieldValue === undefined) {
-        return [];
-    }
 
-    const args = (line.value || '').split(spaceRegex);
-    fieldValue.push({ from: args[0], to: args[1] });
-    return fieldValue;
+function convEntry(): Collector<ConvEntry[]> {
+    let fieldValue: ConvEntry[] | undefined;
+
+    return {
+        addLine: (line: AffLine) => {
+            if (fieldValue === undefined) {
+                fieldValue = [];
+                return;
+            }
+            const args = (line.value || '').split(spaceRegex);
+            fieldValue.push({ from: args[0], to: args[1] });
+        },
+        getValue: () => fieldValue,
+    };
 }
 
-function afEntry(fieldValue: string[] | undefined, line: AffLine) {
-    if (fieldValue === undefined) {
-        return [''];
-    }
-    if (line.value) {
-        fieldValue.push(line.value);
-    }
-    return fieldValue;
+function afEntry() {
+    let fieldValue: string[] | undefined;
+
+    return {
+        addLine: (line: AffLine) => {
+            if (fieldValue === undefined) {
+                // Add empty entry because rules start at 1
+                fieldValue = [''];
+                return;
+            }
+            if (line.value) {
+                fieldValue.push(line.value);
+            }
+        },
+        getValue: () => fieldValue,
+    };
 }
 
-function simpleTable(fieldValue, line: AffLine) {
-    const args = (line.value || '').split(spaceRegex);
-    if (fieldValue === undefined) {
-        const [count, ...extraValues] = args;
-        const extra = extraValues.length ? extraValues : undefined;
-        return { count, extra, values: [] };
+function simpleTable<T>(map: (values: string[][]) => T) {
+    let data:
+        | {
+              count: string;
+              extra: string[] | undefined;
+              values: string[][];
+          }
+        | undefined;
+
+    function getValue() {
+        if (data?.values) return map(data.values);
+        return undefined;
     }
 
-    fieldValue.values.push(args);
-    return fieldValue;
+    function addLine(line: AffLine): void {
+        const args = (line.value || '').split(spaceRegex);
+        if (data === undefined) {
+            const [count, ...extraValues] = args;
+            const extra = extraValues.length ? extraValues : undefined;
+            const values: string[][] = [];
+            data = { count, extra, values };
+            return;
+        }
+
+        data.values.push(args);
+    }
+
+    return { addLine, getValue };
 }
 
 function tablePfxOrSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
@@ -79,7 +120,8 @@ function tablePfxOrSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
         return fieldValue;
     }
 
-    const fixRuleSet = fieldValue.get(subField)!;
+    const fixRuleSet = fieldValue.get(subField);
+    assert(fixRuleSet);
     const substitutionSets = fixRuleSet.substitutionSets;
     const ruleAsString = rule.condition.source;
     if (!substitutionSets.has(ruleAsString)) {
@@ -88,7 +130,8 @@ function tablePfxOrSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
             substitutions: [],
         });
     }
-    const substitutionSet = substitutionSets.get(ruleAsString)!;
+    const substitutionSet = substitutionSets.get(ruleAsString);
+    assert(substitutionSet);
     const [attachText, attachRules] = rule.affix.split('/', 2);
     substitutionSet.substitutions.push({
         remove: rule.stripping,
@@ -174,41 +217,64 @@ function affixMatchToRegExpString(match: string): string {
     return match.replace(/([\\\-?*])/g, '\\$1');
 }
 
-function asPfx(fieldValue: Afx | undefined, line: AffLine): Afx {
-    return tablePfxOrSfx(fieldValue, line);
+function collectFx(): Collector<Afx> {
+    let value: Afx | undefined;
+    function addLine(line: AffLine) {
+        value = tablePfxOrSfx(value, line);
+    }
+    return {
+        addLine,
+        getValue: () => value,
+    };
 }
 
-function asSfx(fieldValue: Afx | undefined, line: AffLine): Afx {
-    return tablePfxOrSfx(fieldValue, line);
+const asPfx = collectFx;
+const asSfx = collectFx;
+
+const asString = () => collectPrimitive<string>((v) => v, '');
+const asBoolean = () => collectPrimitive<boolean>((v) => !!parseInt(v), '1');
+const asNumber = () => collectPrimitive<number>(parseInt, '0');
+
+function collectPrimitive<T>(map: (line: string) => T, defaultValue = ''): Collector<T> {
+    let primitive: T | undefined;
+
+    function getValue() {
+        return primitive;
+    }
+
+    function addLine(line: AffLine) {
+        const { value = defaultValue } = line;
+        primitive = map(value);
+    }
+
+    return { addLine, getValue };
 }
 
-function asString(_fieldValue, line: AffLine) {
-    return line.value || '';
+function toRep(values: string[][]): Rep[] {
+    return values.map((v) => ({ match: v[0], replaceWith: v[1] }));
 }
 
-function asBoolean(_fieldValue, line: AffLine) {
-    const { value = '1' } = line;
-    const iValue = parseInt(value);
-    return !!iValue;
+function toSingleStrings(values: string[][]): string[] {
+    return values.map((v) => v[0]).filter(isDefined);
 }
 
-function asNumber(_fieldValue, line: AffLine) {
-    const { value = '0' } = line;
-    return parseInt(value);
+function toAffMap(values: string[][]): Exclude<AffInfo['MAP'], undefined> {
+    return toSingleStrings(values);
 }
 
-type FieldFunction<T> = (value: T | undefined, line: AffLine) => T;
-type FieldFunctions =
-    | FieldFunction<string>
-    | FieldFunction<boolean>
-    | FieldFunction<number>
-    | FieldFunction<Afx>
-    | FieldFunction<string[]>
-    | FieldFunction<ConvEntry[]>;
-
-interface AffFieldFunctionTable {
-    [key: string]: FieldFunctions;
+function toCompoundRule(values: string[][]): Exclude<AffInfo['COMPOUNDRULE'], undefined> {
+    return toSingleStrings(values);
 }
+
+function toCheckCompoundPattern(values: string[][]): Exclude<AffInfo['CHECKCOMPOUNDPATTERN'], undefined> {
+    return values;
+}
+
+type FieldCollector<T> = Collector<T>;
+
+type AffFieldCollectorTable = {
+    [key in keyof AffInfo]-?: FieldCollector<Exclude<AffInfo[key], undefined>>;
+};
 
 /*
 cspell:ignore COMPOUNDBEGIN COMPOUNDEND COMPOUNDMIDDLE COMPOUNDMIN COMPOUNDPERMITFLAG COMPOUNDRULE COMPOUNDFORBIDFLAG COMPOUNDFLAG
@@ -217,44 +283,92 @@ cspell:ignore MAXDIFF NEEDAFFIX WORDCHARS
 */
 
 // prettier-ignore
-const affTableField: AffFieldFunctionTable = {
-    AF                  : afEntry,
-    BREAK               : asNumber,
-    CHECKCOMPOUNDCASE   : asBoolean,
-    CHECKCOMPOUNDDUP    : asBoolean,
-    CHECKCOMPOUNDPATTERN: simpleTable,
-    CHECKCOMPOUNDREP    : asBoolean,
-    COMPOUNDBEGIN       : asString,
-    COMPOUNDEND         : asString,
-    COMPOUNDMIDDLE      : asString,
-    COMPOUNDMIN         : asNumber,
-    COMPOUNDFLAG        : asString,
-    COMPOUNDPERMITFLAG  : asString,
-    COMPOUNDFORBIDFLAG  : asString,
-    COMPOUNDRULE        : simpleTable,
-    FLAG                : asString, // 'long' | 'num'
-    FORBIDDENWORD       : asString,
-    FORCEUCASE          : asString,
-    ICONV               : convEntry,
-    KEEPCASE            : asString,
-    KEY                 : asString,
-    MAP                 : simpleTable,
-    MAXCPDSUGS          : asNumber,
-    MAXDIFF             : asNumber,
-    NEEDAFFIX           : asString,
-    NOSPLITSUGS         : asBoolean,
-    NOSUGGEST           : asString,
-    OCONV               : convEntry,
-    ONLYINCOMPOUND      : asString,
-    ONLYMAXDIFF         : asBoolean,
-    PFX                 : asPfx,
-    REP                 : simpleTable,
-    SET                 : asString,
-    SFX                 : asSfx,
-    TRY                 : asString,
-    WARN                : asString,
-    WORDCHARS           : asString,
-};
+const createAffFieldTable: () => AffFieldCollectorTable = () => ({
+    AF                  : afEntry(),
+    BREAK               : simpleTable(toSingleStrings),
+    CHECKCOMPOUNDCASE   : asBoolean(),
+    CHECKCOMPOUNDDUP    : asBoolean(),
+    CHECKCOMPOUNDPATTERN: simpleTable(toCheckCompoundPattern),
+    CHECKCOMPOUNDREP    : asBoolean(),
+    COMPOUNDBEGIN       : asString(),
+    COMPOUNDEND         : asString(),
+    COMPOUNDMIDDLE      : asString(),
+    COMPOUNDMIN         : asNumber(),
+    COMPOUNDFLAG        : asString(),
+    COMPOUNDPERMITFLAG  : asString(),
+    COMPOUNDFORBIDFLAG  : asString(),
+    COMPOUNDRULE        : simpleTable(toCompoundRule),
+    FLAG                : asString(), // 'long' | 'num'
+    FORBIDDENWORD       : asString(),
+    FORCEUCASE          : asString(),
+    ICONV               : convEntry(),
+    KEEPCASE            : asString(),
+    KEY                 : asString(),
+    MAP                 : simpleTable(toAffMap),
+    MAXCPDSUGS          : asNumber(),
+    MAXDIFF             : asNumber(),
+    NEEDAFFIX           : asString(),
+    NOSPLITSUGS         : asBoolean(),
+    NOSUGGEST           : asString(),
+    OCONV               : convEntry(),
+    ONLYINCOMPOUND      : asString(),
+    ONLYMAXDIFF         : asBoolean(),
+    PFX                 : asPfx(),
+    REP                 : simpleTable(toRep),
+    SET                 : asString(),
+    SFX                 : asSfx(),
+    TRY                 : asString(),
+    WARN                : asString(),
+    WORDCHARS           : asString(),
+});
+
+function collectionToAffInfo(affFieldCollectionTable: AffFieldCollectorTable, encoding: string): AffInfo {
+    type AffInfoKeys = keyof AffInfo;
+    type ParseResult = {
+        [key in AffInfoKeys]: AffInfo[key];
+    };
+
+    // prettier-ignore
+    const result: ParseResult = {
+        AF                  : affFieldCollectionTable.AF.getValue(),
+        BREAK               : affFieldCollectionTable.BREAK.getValue(),
+        CHECKCOMPOUNDCASE   : affFieldCollectionTable.CHECKCOMPOUNDCASE.getValue(),
+        CHECKCOMPOUNDDUP    : affFieldCollectionTable.CHECKCOMPOUNDDUP.getValue(),
+        CHECKCOMPOUNDPATTERN: affFieldCollectionTable.CHECKCOMPOUNDPATTERN.getValue(),
+        CHECKCOMPOUNDREP    : affFieldCollectionTable.CHECKCOMPOUNDREP.getValue(),
+        COMPOUNDBEGIN       : affFieldCollectionTable.COMPOUNDBEGIN.getValue(),
+        COMPOUNDEND         : affFieldCollectionTable.COMPOUNDEND.getValue(),
+        COMPOUNDMIDDLE      : affFieldCollectionTable.COMPOUNDMIDDLE.getValue(),
+        COMPOUNDMIN         : affFieldCollectionTable.COMPOUNDMIN.getValue(),
+        COMPOUNDFLAG        : affFieldCollectionTable.COMPOUNDFLAG.getValue(),
+        COMPOUNDPERMITFLAG  : affFieldCollectionTable.COMPOUNDPERMITFLAG.getValue(),
+        COMPOUNDFORBIDFLAG  : affFieldCollectionTable.COMPOUNDFORBIDFLAG.getValue(),
+        COMPOUNDRULE        : affFieldCollectionTable.COMPOUNDRULE.getValue(),
+        FLAG                : affFieldCollectionTable.FLAG.getValue(),
+        FORBIDDENWORD       : affFieldCollectionTable.FORBIDDENWORD.getValue(),
+        FORCEUCASE          : affFieldCollectionTable.FORCEUCASE.getValue(),
+        ICONV               : affFieldCollectionTable.ICONV.getValue(),
+        KEEPCASE            : affFieldCollectionTable.KEEPCASE.getValue(),
+        KEY                 : affFieldCollectionTable.KEY.getValue(),
+        MAP                 : affFieldCollectionTable.MAP.getValue(),
+        MAXCPDSUGS          : affFieldCollectionTable.MAXCPDSUGS.getValue(),
+        MAXDIFF             : affFieldCollectionTable.MAXDIFF.getValue(),
+        NEEDAFFIX           : affFieldCollectionTable.NEEDAFFIX.getValue(),
+        NOSPLITSUGS         : affFieldCollectionTable.NOSPLITSUGS.getValue(),
+        NOSUGGEST           : affFieldCollectionTable.NOSUGGEST.getValue(),
+        OCONV               : affFieldCollectionTable.OCONV.getValue(),
+        ONLYINCOMPOUND      : affFieldCollectionTable.ONLYINCOMPOUND.getValue(),
+        ONLYMAXDIFF         : affFieldCollectionTable.ONLYMAXDIFF.getValue(),
+        PFX                 : affFieldCollectionTable.PFX.getValue(),
+        REP                 : affFieldCollectionTable.REP.getValue(),
+        SET                 : affFieldCollectionTable.SET.getValue() || encoding,
+        SFX                 : affFieldCollectionTable.SFX.getValue(),
+        TRY                 : affFieldCollectionTable.TRY.getValue(),
+        WARN                : affFieldCollectionTable.WARN.getValue(),
+        WORDCHARS           : affFieldCollectionTable.WORDCHARS.getValue(),
+    };
+    return cleanObject(result);
+}
 
 export async function parseAffFile(filename: string, encoding: string = UTF8) {
     const buffer = await readFile(filename);
@@ -268,24 +382,18 @@ export async function parseAffFile(filename: string, encoding: string = UTF8) {
 
 export function parseAff(affFileContent: string, encoding: string = UTF8): AffInfo {
     const lines = affFileContent.split(/\r?\n/g);
-    return lines
-        .map((line) => line.trimLeft())
+    const affFieldCollectionTable = createAffFieldTable();
+    affFieldCollectionTable.SET.addLine({ option: 'SET', value: encoding });
+    lines
+        .map((line) => line.trimStart())
         .map((line) => line.replace(commentRegex, ''))
         .filter((line) => line.trim() !== '')
         .map(parseLine)
-        .reduce(
-            (aff: AffInfo, line: AffLine) => {
-                const field = line.option;
-                const fn = affTableField[field];
-                if (fn) {
-                    aff[field] = fn(aff[field], line);
-                } else {
-                    aff[field] = line.value;
-                }
-                return aff;
-            },
-            { SET: encoding } as AffInfo
-        );
+        .forEach((line: AffLine) => {
+            const field = line.option as keyof AffInfo;
+            affFieldCollectionTable[field]?.addLine(line);
+        });
+    return collectionToAffInfo(affFieldCollectionTable, encoding);
 }
 
 export function parseAffFileToAff(filename: string, encoding?: string) {
