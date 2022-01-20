@@ -19,42 +19,60 @@ In the current implementation: `1 edit = 100 cost`. This was done to allow for p
 
 #### Proposed Structure
 
-```ts
+````ts
 interface SuggestionCosts {
   /**
-   * A map is a set of characters to be considered together
-   * Each individual character is an entry in the set.
-   * To have multiple character entry use `()` around the characters.
-   * Because multiple sets of characters can have the same intention
-   * It is possible to use a single map to define multiple sets by separating
-   * each set with a `|`.
+   * The set of substrings to map, these are generally single character strings.
+   *
+   * Multiple sets can be defined by using a `|` to separate them.
+   *
+   * Example: `"eéê|aåá"` contains two different sets.
+   *
+   * To add a multi-character substring use `()`.
+   *
+   * Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
+   *
+   * To match the beginning of a word, use `^`: `(^I)`.
+   * To match the end of a word, use `$`: `(e$)(ing$)`.
    */
   map: string;
-  /**
-   * The cost to insert/delete a character from the map into a word.
-   * @default 100
-   */
+  /** The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. */
   insDel?: number;
   /**
-   * The cost to replace a character in a set with another from the same set.
-   *
-   * Example:
-   *
-   * Give: `map: 'you|tkb', swap: 50`
-   * - To swap `a` with `y` is 100
-   * - To swap `y` with `u` is 50
-   * - to swap `y` with `t` is 100
-   * - to swap `t` with `k` is 50
-   *
-   * @default 100
+   * The cost to replace of of the substrings in the map with another substring in the map.
+   * Example: Map['a', 'i']
+   * This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
+   */
+  replace?: number;
+  /**
+   * The cost to swap two adjacent substrings found in the map.
+   * Example: Map['e', 'i']
+   * This represents the cost to change `ei` to `ie` or the reverse.
    */
   swap?: number;
   /**
-   * A comment about why a cost is defined.
+   * A description to describe the purpose of the map.
    */
   description?: string;
+  /**
+   * Add a penalty to the final cost.
+   * This is used to discourage certain suggestions.
+   *
+   * Example:
+   * ```yaml
+   * # Match adding/removing `-` to the end of a word.
+   * map: "$(-$)"
+   * replace: 50
+   * penalty: 100
+   * ```
+   *
+   * This makes adding a `-` to the end of a word more expensive.
+   *
+   * Think of it as taking the toll way for speed but getting the bill later.
+   */
+  penalty?: number;
 }
-```
+````
 
 #### Example of costs:
 

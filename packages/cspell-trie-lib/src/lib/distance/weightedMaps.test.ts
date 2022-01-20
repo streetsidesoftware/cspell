@@ -10,7 +10,7 @@ import {
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes } = __testing__;
 
-// const u = undefined;
+// const u = undefined;  cspell:
 
 describe('Validate weightedMaps', () => {
     test.each`
@@ -63,10 +63,10 @@ describe('Validate weightedMaps', () => {
     });
 
     test.each`
-        defs                                                        | word      | offset | expected
-        ${[]}                                                       | ${''}     | ${1}   | ${[]}
-        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${1}   | ${[{ i: 2, c: 7 }, { i: 3, c: 11 }] /* cspell:disable-line */}
-        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${2}   | ${[{ i: 3, c: 7 }] /* cspell:disable-line */}
+        defs                                                                    | word      | offset | expected
+        ${[]}                                                                   | ${''}     | ${1}   | ${[]}
+        ${[defIns('aeiou', 7, penalty(5)), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${1}   | ${[{ i: 2, c: 7, p: 5 }, { i: 3, c: 11, p: 0 }] /* cspell:disable-line */}
+        ${[defIns('aeiou', 7, penalty(5)), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${2}   | ${[{ i: 3, c: 7, p: 5 }] /* cspell:disable-line */}
     `('findTrieCostPrefixes with insDel $defs.0 $defs.1 $word $offset', ({ defs, word, offset, expected }) => {
         const map = createWeightMap(...defs);
         expect([...findTrieCostPrefixes(map.insDel, word, offset)]).toEqual(expected);
@@ -74,12 +74,13 @@ describe('Validate weightedMaps', () => {
 
     // cspell:ignore aeiou
     test.each`
-        defs                                                        | wordA     | ai   | wordB     | bi   | expected
-        ${[]}                                                       | ${''}     | ${1} | ${''}     | ${0} | ${[]}
-        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${1} | ${''}     | ${0} | ${[{ ai: 2, bi: 0, c: 1007 }, { ai: 3, bi: 0, c: 1011 }]}
-        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${1} | ${'ride'} | ${1} | ${[{ ai: 2, bi: 1, c: 1007 /* del e */ }, { ai: 3, bi: 1, c: 1011 /* del ea */ }, { ai: 1, bi: 2, c: 1007 /* ins i */ }]}
-        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'red'}  | ${1} | ${'read'} | ${1} | ${[{ ai: 2, bi: 1, c: 1007 /* del e */ }, { ai: 1, bi: 2, c: 1007 /* ins */ }, { ai: 1, bi: 3, c: 1011 /* ins ea */ }]}
-        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'red'}  | ${2} | ${'read'} | ${2} | ${[{ ai: 2, bi: 3, c: 1007 /* ins a */ }]}
+        defs                                                        | wordA     | ai   | wordB      | bi   | expected
+        ${[]}                                                       | ${''}     | ${1} | ${''}      | ${0} | ${[]}
+        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${1} | ${''}      | ${0} | ${[{ ai: 2, bi: 0, c: 1007, p: 1000 }, { ai: 3, bi: 0, c: 1011, p: 1000 }]}
+        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'read'} | ${1} | ${'ride'}  | ${1} | ${[{ ai: 2, bi: 1, c: 1007 /* del e */, p: 1000 }, { ai: 3, bi: 1, c: 1011 /* del ea */, p: 1000 }, { ai: 1, bi: 2, c: 1007 /* ins i */, p: 1000 }]}
+        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'red'}  | ${1} | ${'read'}  | ${1} | ${[{ ai: 2, bi: 1, c: 1007 /* del e */, p: 1000 }, { ai: 1, bi: 2, c: 1007 /* ins */, p: 1000 }, { ai: 1, bi: 3, c: 1011 /* ins ea */, p: 1000 }]}
+        ${[defIns('aeiou', 7), defIns('(ae)(ea)(ou)(ei)(ie)', 11)]} | ${'red'}  | ${2} | ${'read'}  | ${2} | ${[{ ai: 2, bi: 3, c: 1007 /* ins a */, p: 1000 }]}
+        ${[defIns('1234567890', 7, penalty(20))]}                   | ${'cost'} | ${4} | ${'cost8'} | ${4} | ${[{ ai: 4, bi: 5, c: 1007 /* insert 8 */, p: 1020 }]}
     `(
         'calcInsDelCosts with $defs.0 $defs.1 "$wordA"@$ai, "$wordB"@$bi',
         ({
@@ -98,7 +99,7 @@ describe('Validate weightedMaps', () => {
             expected: CostPosition[];
         }) => {
             const map = createWeightMap(...defs);
-            const results = [...map.calcInsDelCosts({ a: wordA, b: wordB, ai, bi, c: 1000 })];
+            const results = [...map.calcInsDelCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
             expected.forEach((p) => {
                 (p.a = p.a ?? wordA), (p.b = p.b ?? wordB);
             });
@@ -110,12 +111,12 @@ describe('Validate weightedMaps', () => {
     test.each`
         defs                                                | wordA        | ai   | wordB        | bi   | expected
         ${[]}                                               | ${''}        | ${0} | ${''}        | ${0} | ${[]}
-        ${[defRep('aeiou', 5), defRep('ae(ae)(ea)', 7)]}    | ${'read'}    | ${1} | ${'red'}     | ${1} | ${[{ ai: 3, bi: 2, c: 1007 /* ea -> a */ }]}
-        ${[defRep('aeiou', 5), defRep('ae(ae)(ea)', 7)]}    | ${'read'}    | ${1} | ${'road'}    | ${1} | ${[{ ai: 2, bi: 2, c: 1005 /* e -> o */ }]}
-        ${[defRep('aeiou', 5), defRep('o(oo)|e(ee)', 7)]}   | ${'met'}     | ${1} | ${'meet'}    | ${1} | ${[{ ai: 2, bi: 3, c: 1007 /* e -> ee */ }]}
-        ${[defRep('aeiou', 5), defRep('o(oo)|e(ee)', 7)]}   | ${'meet'}    | ${1} | ${'met'}     | ${1} | ${[{ ai: 3, bi: 2, c: 1007 /* ee -> e */ }]}
-        ${[defRep('aeiou', 5), defRep('(ei)(ie)', 7)]}      | ${'believe'} | ${3} | ${'receive'} | ${3} | ${[{ ai: 4, bi: 4, c: 1005 /* i => e */ }, { ai: 5, bi: 5, c: 1007 /* ie => ei */ }]}
-        ${[defRep('(sk)(sch)', 5), defRep('(sch)(sk)', 7)]} | ${'school'}  | ${0} | ${'skull'}   | ${0} | ${[{ ai: 3, bi: 2, c: 1005 /* sch => sk */ }]}
+        ${[defRep('aeiou', 5), defRep('ae(ae)(ea)', 7)]}    | ${'read'}    | ${1} | ${'red'}     | ${1} | ${[{ ai: 3, bi: 2, c: 1007 /* ea -> a */, p: 1000 }]}
+        ${[defRep('aeiou', 5), defRep('ae(ae)(ea)', 7)]}    | ${'read'}    | ${1} | ${'road'}    | ${1} | ${[{ ai: 2, bi: 2, c: 1005 /* e -> o */, p: 1000 }]}
+        ${[defRep('aeiou', 5), defRep('o(oo)|e(ee)', 7)]}   | ${'met'}     | ${1} | ${'meet'}    | ${1} | ${[{ ai: 2, bi: 3, c: 1007 /* e -> ee */, p: 1000 }]}
+        ${[defRep('aeiou', 5), defRep('o(oo)|e(ee)', 7)]}   | ${'meet'}    | ${1} | ${'met'}     | ${1} | ${[{ ai: 3, bi: 2, c: 1007 /* ee -> e */, p: 1000 }]}
+        ${[defRep('aeiou', 5), defRep('(ei)(ie)', 7)]}      | ${'believe'} | ${3} | ${'receive'} | ${3} | ${[{ ai: 4, bi: 4, c: 1005 /* i => e */, p: 1000 }, { ai: 5, bi: 5, c: 1007 /* ie => ei */, p: 1000 }]}
+        ${[defRep('(sk)(sch)', 5), defRep('(sch)(sk)', 7)]} | ${'school'}  | ${0} | ${'skull'}   | ${0} | ${[{ ai: 3, bi: 2, c: 1005 /* sch => sk */, p: 1000 }]}
     `(
         'calcReplaceCosts with $defs.0 $defs.1 "$wordA"@$ai, "$wordB"@$bi',
         ({
@@ -134,7 +135,7 @@ describe('Validate weightedMaps', () => {
             expected: CostPosition[];
         }) => {
             const map = createWeightMap(...defs);
-            const results = [...map.calcReplaceCosts({ a: wordA, b: wordB, ai, bi, c: 1000 })];
+            const results = [...map.calcReplaceCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
             expected.forEach((p) => {
                 (p.a = p.a ?? wordA), (p.b = p.b ?? wordB);
             });
@@ -146,7 +147,8 @@ describe('Validate weightedMaps', () => {
     test.each`
         defs                                    | wordA        | ai   | wordB        | bi   | expected
         ${[defSwap('ae', 9), defSwap('ei', 7)]} | ${'believe'} | ${1} | ${'receive'} | ${1} | ${[]}
-        ${[defSwap('ae', 9), defSwap('ei', 7)]} | ${'believe'} | ${3} | ${'receive'} | ${3} | ${[{ ai: 5, bi: 5, c: 1007 /* swap ei -> ie */ }]}
+        ${[defSwap('ae', 9), defSwap('ei', 7)]} | ${'believe'} | ${3} | ${'receive'} | ${3} | ${[{ ai: 5, bi: 5, c: 1007 /* swap ei -> ie */, p: 1000 }]}
+        ${[defSwap('ei', 7, penalty(20))]}      | ${'believe'} | ${3} | ${'receive'} | ${3} | ${[{ ai: 5, bi: 5, c: 1007 /* swap ei -> ie */, p: 1020 }]}
     `(
         'calcSwapCosts with $defs.0 $defs.1 "$wordA"@$ai, "$wordB"@$bi',
         ({
@@ -165,7 +167,7 @@ describe('Validate weightedMaps', () => {
             expected: CostPosition[];
         }) => {
             const map = createWeightMap(...defs);
-            const results = [...map.calcSwapCosts({ a: wordA, b: wordB, ai, bi, c: 1000 })];
+            const results = [...map.calcSwapCosts({ a: wordA, b: wordB, ai, bi, c: 1000, p: 1000 })];
             expected.forEach((p) => {
                 (p.a = p.a ?? wordA), (p.b = p.b ?? wordB);
             });
@@ -187,14 +189,26 @@ describe('Validate weightedMaps', () => {
     });
 });
 
-function defIns(map: string, insDel: number, opt: Partial<SuggestionCostMapDef> = {}): SuggestionCostMapDef {
-    return { ...opt, map, insDel };
+// function mo(...opts: Partial<SuggestionCostMapDef>[]): Partial<SuggestionCostMapDef> {
+//     return mergeOps(opts);
+// }
+
+function penalty(penalty: number): Partial<SuggestionCostMapDef> {
+    return { penalty };
 }
 
-function defRep(map: string, replace: number, opt: Partial<SuggestionCostMapDef> = {}): SuggestionCostMapDef {
-    return { ...opt, map, replace };
+function defIns(map: string, insDel: number, ...opts: Partial<SuggestionCostMapDef>[]): SuggestionCostMapDef {
+    return { ...mergeOps(opts), map, insDel };
 }
 
-function defSwap(map: string, swap: number, opt: Partial<SuggestionCostMapDef> = {}): SuggestionCostMapDef {
-    return { ...opt, map, swap };
+function defRep(map: string, replace: number, ...opts: Partial<SuggestionCostMapDef>[]): SuggestionCostMapDef {
+    return { ...mergeOps(opts), map, replace };
+}
+
+function defSwap(map: string, swap: number, ...opts: Partial<SuggestionCostMapDef>[]): SuggestionCostMapDef {
+    return { ...mergeOps(opts), map, swap };
+}
+
+function mergeOps(opts: Partial<SuggestionCostMapDef>[]): Partial<SuggestionCostMapDef> {
+    return opts.reduce((acc, opt) => ({ ...acc, ...opt }), {} as Partial<SuggestionCostMapDef>);
 }

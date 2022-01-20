@@ -51,14 +51,18 @@ describe('distanceAStar', () => {
         ${''}                | ${''}                    | ${undefined}                   | ${0}
         ${'walk'}            | ${'walking'}             | ${undefined}                   | ${300}
         ${'walk'}            | ${''}                    | ${calcWeightMap(mapLetters())} | ${200}
-        ${'1234'}            | ${''}                    | ${calcWeightMap(mapLetters())} | ${400}
+        ${'1234'}            | ${''}                    | ${calcWeightMap(mapLetters())} | ${804}
         ${'walk'}            | ${'walking'}             | ${calcWeightMap()}             | ${50}
         ${'wake up'}         | ${'woken up'}            | ${calcWeightMap()}             | ${145}
         ${'definition'}      | ${'defunishun'}          | ${calcWeightMap()}             | ${45 + 40}
         ${'reputation'}      | ${'repetition'}          | ${calcWeightMap()}             | ${45 + 45}
+        ${'gr8'}             | ${'great'}               | ${calcWeightMap()}             | ${250}
+        ${'read'}            | ${'read7'}               | ${calcWeightMap()}             | ${201}
         ${'airplane'}        | ${'aeroplane'}           | ${calcWeightMap()}             | ${60}
         ${'talked'}          | ${'walking'}             | ${calcWeightMap()}             | ${150}
         ${'kings'}           | ${'king'}                | ${calcWeightMap()}             | ${50}
+        ${'re-wind'}         | ${'rewind'}              | ${calcWeightMap()}             | ${202}
+        ${'re-'}             | ${'re'}                  | ${calcWeightMap()}             | ${201}
         ${"I'm talk'n to u"} | ${'I am talking to you'} | ${calcWeightMap()}             | ${302}
         ${"wear'd u go?"}    | ${'where did you go?'}   | ${calcWeightMap()}             | ${304}
     `(
@@ -127,6 +131,24 @@ function calcWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {
         {
             map: '(air)(aer)(err)|(oar)(or)(hor)|(or)(our)',
             replace: 40,
+        },
+        {
+            description: 'Penalty for inserting numbers',
+            map: '0123456789',
+            insDel: 1, // Cheap to insert,
+            penalty: 200, // Costly later
+        },
+        {
+            description: 'Discourage leading and trailing `-`',
+            map: '(^-)(^)|($)(-$)',
+            replace: 1, // Cheap to insert,
+            penalty: 200, // Costly later
+        },
+        {
+            description: 'Discourage inserting special characters `-`',
+            map: '-._',
+            insDel: 2, // Cheap to insert,
+            penalty: 200, // Costly later
         }
     );
 }
