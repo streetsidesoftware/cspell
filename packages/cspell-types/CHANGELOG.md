@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.15.3](https://github.com/streetsidesoftware/cspell/compare/v5.15.2...v5.15.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* Lock in `typedoc` till it is fixed. ([#2277](https://github.com/streetsidesoftware/cspell/issues/2277)) ([417fe32](https://github.com/streetsidesoftware/cspell/commit/417fe320234baf3ee6939f35830a47b62c15f6d3))
+
+
+
+
+
 ## [5.15.2](https://github.com/streetsidesoftware/cspell/compare/v5.15.1...v5.15.2) (2022-01-11)
 
 
