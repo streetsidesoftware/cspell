@@ -94,7 +94,7 @@ costs:
 # The Algorithm
 
 The current algorithm uses a Levenshtein like algorithm to calculate the edit cost. This is different from
-Hunspell which tries to morph the misspelled word in many possible ways to see if it exists in the dictionary. This can be very expensive, therefor it is not used.
+Hunspell which tries to morph the misspelled word in many possible ways to see if it exists in the dictionary. This can be very expensive, therefore it is not used.
 
 ## A two step process
 
