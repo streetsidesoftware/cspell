@@ -57,6 +57,11 @@ export interface LinterOptions extends BaseOptions, CacheOptions {
      * - an entry of `stdin` means to read the file list from **`stdin`**
      */
     fileLists?: string[] | undefined;
+
+    /**
+     * Files must be found and processed otherwise it is considered an error.
+     */
+    mustFindFiles?: boolean;
 }
 
 export interface TraceOptions extends BaseOptions {

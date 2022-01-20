@@ -11,11 +11,27 @@ export class ApplicationError extends Error {
     }
 }
 
-export function toError(e: unknown): Error {
+export class IOError extends ApplicationError {
+    constructor(message: string, readonly cause: NodeError) {
+        super(message, undefined, cause);
+    }
+
+    get code(): string | undefined {
+        return this.cause.code;
+    }
+
+    isNotFound() {
+        return this.cause.code === 'ENOENT';
+    }
+}
+
+export function toError(e: unknown): NodeError {
     if (isError(e)) return e;
+    const message = format(e);
     return {
         name: 'error',
-        message: format(e),
+        message,
+        toString: () => message,
     };
 }
 
@@ -32,6 +48,7 @@ export function toApplicationError(e: unknown, message?: string): ApplicationErr
     return new ApplicationError(message ?? err.message, undefined, err);
 }
 
-interface NodeError extends Error {
+export interface NodeError extends Error {
     code?: string;
+    toString?: () => string;
 }

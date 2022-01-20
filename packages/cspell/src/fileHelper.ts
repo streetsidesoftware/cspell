@@ -4,7 +4,7 @@ import getStdin from 'get-stdin';
 import { GlobOptions, globP } from './util/glob';
 import * as path from 'path';
 import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
-import { toApplicationError } from './util/errors';
+import { IOError, toApplicationError, toError } from './util/errors';
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
@@ -33,6 +33,7 @@ export async function readConfig(configFile: string | undefined, root: string | 
 export interface FileInfo {
     filename: string;
     text?: string;
+    errorCode?: string;
 }
 export interface FileResult {
     fileInfo: FileInfo;
@@ -64,14 +65,25 @@ export function fileInfoToDocument(
     return fileToDocument(filename, text, languageId, locale);
 }
 
-export function readFileInfo(filename: string, encoding: string = UTF8): Promise<Required<FileInfo>> {
+interface ReadFileInfoResult extends FileInfo {
+    text: string;
+}
+
+export function readFileInfo(
+    filename: string,
+    encoding: string = UTF8,
+    handleNotFound = false
+): Promise<ReadFileInfoResult> {
     const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
     return pText.then(
         (text) => ({ text, filename }),
-        (error) => {
-            return error.code === 'EISDIR'
-                ? Promise.resolve({ text: '', filename })
-                : Promise.reject(toApplicationError(error, `Error reading file: "${filename}"`));
+        (e) => {
+            const error = toError(e);
+            return handleNotFound && error.code === 'EISDIR'
+                ? Promise.resolve({ text: '', filename, errorCode: error.code })
+                : handleNotFound && error.code === 'ENOENT'
+                ? Promise.resolve({ text: '', filename, errorCode: error.code })
+                : Promise.reject(new IOError(`Error reading file: "${filename}"`, error));
         }
     );
 }

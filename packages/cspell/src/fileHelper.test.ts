@@ -1,11 +1,13 @@
-import { readFileListFile, readFileListFiles } from './fileHelper';
+import { readFileInfo, readFileListFile, readFileListFiles } from './fileHelper';
 import * as path from 'path';
+import { IOError } from './util/errors';
 
 const fixtures = path.join(__dirname, '../fixtures/fileHelper');
 const fileListFile = path.join(fixtures, 'file-list.txt');
 const fileListFile2 = path.join(fixtures, 'nested/file-list-2.txt');
 
 const oc = expect.objectContaining;
+const r = path.resolve;
 
 describe('fileHelper', () => {
     test('readFileListFile', async () => {
@@ -32,5 +34,25 @@ describe('fileHelper', () => {
     test('readFileListFiles Error', () => {
         const r = readFileListFiles(['not-found.txt']);
         return expect(r).rejects.toEqual(oc({ message: 'Error reading file list from: "not-found.txt"' }));
+    });
+
+    test.each`
+        filename       | handleNotFound | expected
+        ${__dirname}   | ${true}        | ${{ filename: __dirname, text: '', errorCode: 'EISDIR' }}
+        ${'not_found'} | ${true}        | ${{ filename: r(__dirname, 'not_found'), text: '', errorCode: 'ENOENT' }}
+        ${__filename}  | ${true}        | ${oc({ filename: __filename, text: expect.stringMatching(/.+\n/) })}
+        ${__filename}  | ${false}       | ${oc({ filename: __filename, text: expect.stringMatching(/.+\n/) })}
+    `('readFile handle $filename $handleNotFound', async ({ filename, handleNotFound, expected }) => {
+        filename = r(__dirname, filename);
+        await expect(readFileInfo(filename, undefined, handleNotFound)).resolves.toEqual(expected);
+    });
+
+    test.each`
+        filename       | expected
+        ${__dirname}   | ${IOError}
+        ${'not_found'} | ${IOError}
+    `('readFile errors $filename', async ({ filename, expected }) => {
+        filename = r(__dirname, filename);
+        await expect(readFileInfo(filename, undefined, false)).rejects.toThrow(expected);
     });
 });
