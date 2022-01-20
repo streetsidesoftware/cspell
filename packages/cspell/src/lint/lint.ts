@@ -48,18 +48,31 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             return cachedResult;
         }
 
-        const fileInfo = await readFileInfo(filename);
-        const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
-        const { text } = fileInfo;
-        reporter.debug(`Filename: ${filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
         const result: FileResult = {
-            fileInfo,
+            fileInfo: {
+                filename,
+            },
             issues: [],
             processed: false,
             errors: 0,
             configErrors: 0,
             elapsedTimeMs: 0,
         };
+
+        const fileInfo = await readFileInfo(filename, undefined, true);
+        if (fileInfo.errorCode) {
+            if (fileInfo.errorCode !== 'EISDIR' && cfg.options.mustFindFiles) {
+                const err = toError(`File not found: "${filename}"`);
+                reporter.error('Linter:', err);
+                result.errors += 1;
+            }
+            return result;
+        }
+
+        const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
+        const { text } = fileInfo;
+        reporter.debug(`Filename: ${filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
+        result.fileInfo = fileInfo;
 
         const getElapsedTimeMs = getTimeMeasurer();
         let spellResult: Partial<cspell.SpellCheckFileResult> = {};
@@ -124,7 +137,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 filename,
                 elapsedTimeMs: result?.elapsedTimeMs,
                 processed: result?.processed,
-                numErrors: result?.issues.length,
+                numErrors: result?.issues.length || result?.errors,
                 cached: result?.cached,
             });
 
