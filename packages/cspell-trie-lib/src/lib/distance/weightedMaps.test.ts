@@ -1,6 +1,12 @@
 import type { SuggestionCostMapDef } from './suggestionCostsDef';
-import { addDefToWeightMap, CostPosition, lookupReplaceCost, prettyPrintWeightMap } from './weightedMaps';
-import { createWeightMap, __testing__ } from './weightedMaps';
+import {
+    addDefToWeightMap,
+    CostPosition,
+    createWeightMap,
+    lookupReplaceCost,
+    prettyPrintWeightMap,
+    __testing__,
+} from './weightedMaps';
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes } = __testing__;
 
