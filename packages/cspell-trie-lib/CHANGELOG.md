@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.16.0](https://github.com/streetsidesoftware/cspell/compare/v5.15.3...v5.16.0) (2022-01-20)
+
+
+### Bug Fixes
+
+* Add ability to discourage certain types of suggestions. ([#2291](https://github.com/streetsidesoftware/cspell/issues/2291)) ([a6e1bf6](https://github.com/streetsidesoftware/cspell/commit/a6e1bf6b903ff4ff6f5f9dfaaf50f1f9505bb5a0))
+
+
+
+
+
 ## [5.15.3](https://github.com/streetsidesoftware/cspell/compare/v5.15.2...v5.15.3) (2022-01-20)
 
 
