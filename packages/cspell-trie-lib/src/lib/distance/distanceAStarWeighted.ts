@@ -15,40 +15,44 @@ export function distanceAStarWeighted(wordA: string, wordB: string, map: WeightM
 
     const candidates = new PairingHeap(compare);
 
-    candidates.add({ ai: 0, bi: 0, c: 0 });
+    candidates.add({ ai: 0, bi: 0, c: 0, p: 0 });
 
+    /** Substitute / Replace */
     function opSub(n: Node) {
-        const { ai, bi, c } = n;
+        const { ai, bi, c, p } = n;
         if (ai < aN && bi < bN) {
             const cc = a[ai] === b[bi] ? c : c + cost;
-            candidates.add({ ai: ai + 1, bi: bi + 1, c: cc });
+            candidates.add({ ai: ai + 1, bi: bi + 1, c: cc, p });
         }
     }
 
+    /** Insert */
     function opIns(n: Node) {
-        const { ai, bi, c } = n;
+        const { ai, bi, c, p } = n;
         if (bi < bN) {
-            candidates.add({ ai: ai, bi: bi + 1, c: c + cost });
+            candidates.add({ ai: ai, bi: bi + 1, c: c + cost, p });
         }
     }
 
+    /** Delete */
     function opDel(n: Node) {
-        const { ai, bi, c } = n;
+        const { ai, bi, c, p } = n;
         if (ai < aN) {
-            candidates.add({ ai: ai + 1, bi: bi, c: c + cost });
+            candidates.add({ ai: ai + 1, bi: bi, c: c + cost, p });
         }
     }
 
+    /** Swap adjacent letters */
     function opSwap(n: Node) {
-        const { ai, bi, c } = n;
+        const { ai, bi, c, p } = n;
         if (a[ai] === b[bi + 1] && a[ai + 1] === b[bi]) {
-            candidates.add({ ai: ai + 2, bi: bi + 2, c: c + cost });
+            candidates.add({ ai: ai + 2, bi: bi + 2, c: c + cost, p });
         }
     }
 
     function opMap(n: Node) {
-        const { ai, bi, c } = n;
-        const pos = { a, b, ai, bi, c };
+        const { ai, bi, c, p } = n;
+        const pos = { a, b, ai, bi, c, p };
         const costCalculations = [map.calcInsDelCosts(pos), map.calcSwapCosts(pos), map.calcReplaceCosts(pos)];
         costCalculations.forEach((iter) => {
             for (const nn of iter) {
@@ -70,7 +74,7 @@ export function distanceAStarWeighted(wordA: string, wordB: string, map: WeightM
     }
 
     // istanbul ignore else
-    return best ? best.c : -1;
+    return best ? best.c + best.p : -1;
 }
 
 interface Pos {
@@ -83,6 +87,8 @@ interface Pos {
 interface Node extends Pos {
     /** the current cost */
     c: number;
+    /** the current penalty */
+    p: number;
 }
 
 function compare(a: Node, b: Node): number {
