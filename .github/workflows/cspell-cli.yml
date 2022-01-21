@@ -1,9 +1,11 @@
-name: cSpell TS/MD
+name: cSpell-cli
 on:
   pull_request:
   push:
     branches:
       - main
+  # Run on demand
+  workflow_dispatch:
 
 jobs:
   cspell:
