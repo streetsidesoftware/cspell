@@ -14,7 +14,7 @@ A Spell Checker for Code!
 - [Support through ![PayPal](https://raw.githubusercontent.com/streetsidesoftware/vscode-spell-checker/main/images/PayPal/paypal-logo-wide-18.png)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
 - [Open Collective](https://opencollective.com/cspell)
 - [Street Side Software](https://streetsidesoftware.com/support)
- 
+
 ## Features
 
 - Spell Checks Code -- Able to spell check code by parsing it into words before checking against the dictionaries.
