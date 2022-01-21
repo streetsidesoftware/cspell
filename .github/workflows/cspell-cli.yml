@@ -20,16 +20,16 @@ jobs:
       - run: npm i -g npm@8
       - run: npm -v
 
-      - run: npm i
+      # - run: npm i
 
-      - name: prepare-cspell-action Cache
-        id: prepare-cspell-action-cache
-        uses: actions/cache@v2
-        with:
-          key: prepare-cspell-action-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/yarn2/**/package.json') }}
-          path: |
-            **/yarn2/**/pnp.*
-            **/yarn2/**/.yarn
+      # - name: prepare-cspell-action Cache
+      #   id: prepare-cspell-action-cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     key: prepare-cspell-action-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/yarn2/**/package.json') }}
+      #     path: |
+      #       **/yarn2/**/pnp.*
+      #       **/yarn2/**/.yarn
 
       - name: prepare-cspell-action
         # if: steps.prepare-cspell-action-cache.outputs.cache-hit != 'true'
