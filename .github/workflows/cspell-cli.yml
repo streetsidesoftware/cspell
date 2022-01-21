@@ -20,6 +20,13 @@ jobs:
       - run: npm i -g npm@8
       - run: npm -v
 
+      - name: cache node_modules
+        uses: actions/cache@v2
+        with:
+          key: install-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          path: |
+            **/node_modules
+
       - run: npm i
 
       - name: prepare-cspell-action Cache
