@@ -23,7 +23,7 @@ jobs:
       - name: cache node_modules
         uses: actions/cache@v2
         with:
-          key: install-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
           path: |
             **/node_modules
 
