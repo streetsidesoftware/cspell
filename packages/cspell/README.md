@@ -11,6 +11,9 @@ A Spell Checker for Code!
 ## Support Future Development
 
 - Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
+- [Support through ![PayPal](https://raw.githubusercontent.com/streetsidesoftware/vscode-spell-checker/main/images/PayPal/paypal-logo-wide-18.png)](https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY)
+- [Open Collective](https://opencollective.com/cspell)
+- [Street Side Software](https://streetsidesoftware.com/support)
 
 ## Features
 
@@ -206,7 +209,7 @@ npm install -SD cspell
 ```
 #!/bin/sh
 
-exec git diff --cached --name-only | npx cspell -- --no-summary --no-progress --no-must-find-files --file-list stdin
+exec git diff --cached --name-only | npx cspell --no-summary --no-progress --no-must-find-files --file-list stdin
 ```
 
 ## Requirements
