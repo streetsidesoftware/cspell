@@ -23,7 +23,7 @@ jobs:
       - name: Restore CSpell cache
         uses: actions/cache@v2
         with:
-          key: ${{ runner.os }}
+          key: cspell-${{ runner.os }}
           path: |
             .cspellcache
 
