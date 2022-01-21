@@ -20,20 +20,13 @@ jobs:
       - run: npm i -g npm@8
       - run: npm -v
 
-      - name: cache node_modules
-        uses: actions/cache@v2
-        with:
-          key: node_modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          path: |
-            **/node_modules
-
       - run: npm i
 
       - name: prepare-cspell-action Cache
         id: prepare-cspell-action-cache
         uses: actions/cache@v2
         with:
-          key: prepare-cspell-action-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/yarn2/**/package.json') }}
+          key: prepare-cspell-action-v1-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/yarn2/**/package.json') }}
           path: |
             **/yarn2/**/pnp.*
             **/yarn2/**/.yarn
@@ -45,7 +38,7 @@ jobs:
       - name: Restore CSpell cache
         uses: actions/cache@v2
         with:
-          key: cspell-${{ runner.os }}
+          key: cspell-cache-v1-${{ runner.os }}
           path: |
             .cspellcache
 
