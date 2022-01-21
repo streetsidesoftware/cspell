@@ -39,7 +39,7 @@ jobs:
             **/yarn2/**/.yarn
 
       - name: prepare-cspell-action
-        if: steps.prepare-cspell-action-cache.outputs.cache-hit != 'true'
+        # if: steps.prepare-cspell-action-cache.outputs.cache-hit != 'true'
         run: npm run prepare-cspell-action
 
       - name: Restore CSpell cache
