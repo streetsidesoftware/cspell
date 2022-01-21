@@ -11,9 +11,9 @@ jobs:
   cspell:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v2
       - name: Use Node.js
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v2
         with:
           cache: npm
 
@@ -32,4 +32,4 @@ jobs:
             .cspellcache
 
       - name: cspell@latest
-        run: npx cspell@latest --cache --cache-strategy content --cache-location .cspellcache --exclude "yarn2" "**"
+        run: npx cspell@latest --cache --cache-strategy=content --cache-location=.cspellcache --exclude="yarn2" --no-progress "**"
