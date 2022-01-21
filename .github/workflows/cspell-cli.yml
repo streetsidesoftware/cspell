@@ -22,7 +22,7 @@ jobs:
 
       - # It is necessary to run `npm i` in order install some dictionaries.
         name: prepare-cspell-action
-        run: npm run i
+        run: npm i
 
       - name: Restore CSpell cache
         uses: actions/cache@v2
