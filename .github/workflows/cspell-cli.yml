@@ -20,5 +20,16 @@ jobs:
       - run: npm i -g npm@8
       - run: npm -v
 
-      - run: npm run prepare-cspell-action
-      - run: npx cspell@latest "**/*"
+      - # It is necessary to run `npm i` in order install some dictionaries.
+        name: prepare-cspell-action
+        run: npm i
+
+      - name: Restore CSpell cache
+        uses: actions/cache@v2
+        with:
+          key: cspell-cache-v1-${{ runner.os }}
+          path: |
+            .cspellcache
+
+      - name: cspell@latest
+        run: npx cspell@latest --cache --cache-strategy content --cache-location .cspellcache --exclude "yarn2" "**"
