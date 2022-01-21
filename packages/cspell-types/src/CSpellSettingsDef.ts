@@ -1,5 +1,5 @@
-import { Features } from './features';
-import type { SuggestionCostsDefs } from './suggestionCostsDef';
+import type { DictionaryInformation } from './DictionaryInformation';
+import type { Features } from './features';
 
 export type ReplaceEntry = [string, string];
 export type ReplaceMap = ReplaceEntry[];
@@ -414,6 +414,7 @@ export type DictionaryFileTypes = 'S' | 'W' | 'C' | 'T';
 export type DictionaryDefinition =
     | DictionaryDefinitionPreferred
     | DictionaryDefinitionCustom
+    | DictionaryDefinitionAugmented
     | DictionaryDefinitionAlternate
     | DictionaryDefinitionLegacy;
 
@@ -455,13 +456,6 @@ export interface DictionaryDefinitionBase {
      * @default "S"
      */
     type?: DictionaryFileTypes;
-    /**
-     * Used in making suggestions. The lower the value, the more likely the suggestion
-     * will be near the top of the suggestion list.
-     *
-     * Added with `v5.16.0`.
-     */
-    suggestionEditCosts?: SuggestionCostsDefs;
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
@@ -475,6 +469,13 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
      * @hidden
      */
     file?: undefined;
+}
+
+/**
+ * Used to provide extra data related to the dictionary
+ */
+export interface DictionaryDefinitionAugmented extends DictionaryDefinitionPreferred {
+    dictionaryInformation?: DictionaryInformation;
 }
 
 /**
@@ -492,6 +493,9 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
      * @deprecationMessage Use `path` instead.
      */
     file: DictionaryPath;
+
+    /** @hidden */
+    suggestionEditCosts?: undefined;
 }
 
 /**
@@ -517,6 +521,11 @@ export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
      * @default "S"
      */
     type?: DictionaryFileTypes;
+
+    /**
+     * @hidden
+     */
+    suggestionEditCosts?: undefined;
 }
 
 /**
