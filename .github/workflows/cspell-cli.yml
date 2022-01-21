@@ -43,4 +43,4 @@ jobs:
             .cspellcache
 
       - name: cspell@latest
-        run: npx cspell@latest --cache --cache-strategy content "**"
+        run: npx cspell@latest --cache --cache-strategy content --cache-location .cspellcache  "**"
