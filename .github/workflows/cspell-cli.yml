@@ -20,5 +20,12 @@ jobs:
       - run: npm i -g npm@8
       - run: npm -v
 
+      - name: Restore CSpell cache
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}
+          path: |
+            .cspellcache
+
       - run: npm run prepare-cspell-action
-      - run: npx cspell@latest "**/*"
+      - run: npx cspell@latest --cache --cache-strategy content "**"
