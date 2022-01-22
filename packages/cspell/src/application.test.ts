@@ -2,9 +2,11 @@ import type { Issue, RunResult } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { resolve as r } from 'path';
+import { TraceOptions } from '.';
 import * as App from './application';
 import { LinterOptions } from './options';
 import { InMemoryReporter } from './util/InMemoryReporter';
+import { asyncIterableToArray } from './util/util';
 
 const getStdinResult = {
     value: '',
@@ -72,7 +74,7 @@ describe('Validate the Application', () => {
     });
 
     test('Tests running the trace command', async () => {
-        const result = await App.trace(['apple'], {});
+        const result = await trace(['apple'], {});
         expect(result.length).toBeGreaterThan(2);
 
         const foundIn = result.filter((r) => r.found);
@@ -86,7 +88,7 @@ describe('Validate the Application', () => {
     });
 
     test('Tests running the trace command with missing dictionary', async () => {
-        const result = await App.trace(['apple'], { config: 'samples/cspell-missing-dict.json' });
+        const result = await trace(['apple'], { config: 'samples/cspell-missing-dict.json' });
         expect(result.length).toBeGreaterThan(2);
         expect(result).toContainEqual(
             expect.objectContaining({
@@ -130,6 +132,11 @@ describe('Validate the Application', () => {
         expect(reporter.runResult).toEqual(result);
     });
 });
+
+async function trace(words: string[], options: TraceOptions) {
+    const results = await asyncIterableToArray(App.trace(words, options));
+    return results.reduce((a, r) => a.concat(r), []);
+}
 
 describe('Validate createInit', () => {
     test('createInit', async () => {

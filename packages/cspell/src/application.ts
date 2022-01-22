@@ -1,6 +1,6 @@
 import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import * as cspell from 'cspell-lib';
-import { CheckTextInfo, TraceResult, traceWords, suggestionsForWords, SuggestionError } from 'cspell-lib';
+import { CheckTextInfo, TraceResult, traceWordsAsync, suggestionsForWords, SuggestionError } from 'cspell-lib';
 import * as path from 'path';
 import { calcFinalConfigInfo, readConfig, readFile } from './fileHelper';
 import { LintRequest, runLint } from './lint';
@@ -18,13 +18,13 @@ export function lint(fileGlobs: string[], options: LinterOptions, emitters: CSpe
     return runLint(cfg);
 }
 
-export async function trace(words: string[], options: TraceOptions): Promise<TraceResult[]> {
+export async function* trace(words: string[], options: TraceOptions): AsyncIterableIterator<TraceResult[]> {
     options = fixLegacy(options);
+    const iWords = options.stdin ? util.mergeAsyncIterables(words, readStdin()) : words;
     const { languageId, locale, allowCompoundWords, ignoreCase } = options;
     const configFile = await readConfig(options.config, undefined);
     const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configFile.config);
-    const results = await traceWords(words, config, { languageId, locale, ignoreCase, allowCompoundWords });
-    return results;
+    yield* traceWordsAsync(iWords, config, { languageId, locale, ignoreCase, allowCompoundWords });
 }
 
 export type CheckTextResult = CheckTextInfo;

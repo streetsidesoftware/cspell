@@ -12,7 +12,7 @@ Array [
   "",
   "Commands:",
   "  lint [options] [globs...]             Check spelling",
-  "  trace [options] <words...>            Trace words -- Search for words in the",
+  "  trace [options] [words...]            Trace words -- Search for words in the",
   "                                        configuration and dictionaries.",
   "  check [options] <files...>            Spell check file(s) and display the",
   "                                        result. The full file is displayed in",
@@ -722,7 +722,7 @@ exports[`Validate cli app trace hello Expect Error: undefined 2`] = `Array []`;
 
 exports[`Validate cli app trace help Expect Error: outputHelp 1`] = `
 Array [
-  "Usage: cspell trace [options] <words...>",
+  "Usage: cspell trace [options] [words...]",
   "",
   "Trace words -- Search for words in the configuration and dictionaries.",
   "",
@@ -736,6 +736,7 @@ Array [
   "  --no-allow-compound-words   Turn off allowCompoundWords",
   "  --no-ignore-case            Do not ignore case and accents when searching for",
   "                              words",
+  "  --stdin                     Read words from stdin.",
   "  --no-color                  Turn off color.",
   "  --color                     Force color",
   "  -h, --help                  display help for command",

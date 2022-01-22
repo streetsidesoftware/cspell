@@ -65,6 +65,7 @@ export interface LinterOptions extends BaseOptions, CacheOptions {
 }
 
 export interface TraceOptions extends BaseOptions {
+    stdin?: boolean;
     allowCompoundWords?: boolean;
     ignoreCase?: boolean;
 }
