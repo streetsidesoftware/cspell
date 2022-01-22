@@ -7,18 +7,20 @@ Array [
   "Spelling Checker for Code",
   "",
   "Options:",
-  "  -V, --version               output the version number",
-  "  -h, --help                  display help for command",
+  "  -V, --version                         output the version number",
+  "  -h, --help                            display help for command",
   "",
   "Commands:",
-  "  lint [options] [globs...]   Check spelling",
-  "  trace [options] <words...>  Trace words",
-  "    Search for words in the configuration and dictionaries.",
-  "  check [options] <files...>  Spell check file(s) and display the result. The",
-  "                              full file is displayed in color.",
-  "  link                        Link dictionaries any other settings to the",
-  "                              cspell global config.",
-  "  help [command]              display help for command",
+  "  lint [options] [globs...]             Check spelling",
+  "  trace [options] <words...>            Trace words -- Search for words in the",
+  "                                        configuration and dictionaries.",
+  "  check [options] <files...>            Spell check file(s) and display the",
+  "                                        result. The full file is displayed in",
+  "                                        color.",
+  "  link                                  Link dictionaries and other settings to",
+  "                                        the cspell global config.",
+  "  suggestions|sug [options] [words...]  Spelling Suggestions for words.",
+  "  help [command]                        display help for command",
   "",
 ]
 `;
@@ -555,14 +557,174 @@ log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
+exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 2`] = `
+"mexico
+ - Mexico   -    1 en_us
+ - medico   -   97 en_us
+ - Mexico's -  186 en_us
+ - Mexican  -  188 en_us
+ - medicos  -  190 en_us
+ - medick   -  191 en_us
+ - medics   -  191 en_us
+ - metics   -  191 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 2`] = `
+"dutch
+ - dutch -    0 en-gb, en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 2`] = `
+"dutch
+ - dutch -    0 en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 4`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 5`] = `
+"dutch
+ - dutch -    0 en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 6`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 2`] = `
+"dutch
+ - dutch -    0 en-gb, en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 2`] = `
+"mexico
+ <no suggestions>"
+`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 2`] = `
+"mexico
+ - Mexico   -    1 en_us
+ - medico   -   97 en_us
+ - Mexico's -  186 en_us
+ - Mexican  -  188 en_us
+ - medicos  -  190 en_us
+ - medick   -  191 en_us
+ - medics   -  191 en_us
+ - metics   -  191 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 2`] = `
+"mexico
+ - Mexico
+ - medico
+ - Mexico's
+ - Mexican
+ - medicos
+ - medick
+ - medics
+ - metics"
+`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 2`] = `
+"mexico
+ - mexico
+ - medico
+ - mexico's
+ - mexican
+ - medicos
+ - medich
+ - medici
+ - medics
+ - melick"
+`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 2`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 3`] = `"Unknown dictionary: \\"en-us\\""`;
+
+exports[`Validate cli app suggest ["sug"] 1`] = `
+Array [
+  "Usage: cspell suggestions|sug [options] [words...]",
+  "",
+  "Spelling Suggestions for words.",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>            Configuration file to use.  By default",
+  "                                        cspell looks for cspell.json in the",
+  "                                        current directory.",
+  "  --locale <locale>                     Set language locales. i.e. \\"en,fr\\" for",
+  "                                        English and French, or \\"en-GB\\" for",
+  "                                        British English.",
+  "  --language-id <language>              Use programming language. i.e. \\"php\\" or",
+  "                                        \\"scala\\".",
+  "  -s, --no-strict                       Ignore case and accents when searching",
+  "                                        for words.",
+  "  --ignore-case                         Alias of --no-strict.",
+  "  --num-changes <number>                Number of changes allowed to a word",
+  "                                        (default: 4)",
+  "  --num-suggestions <number>            Number of suggestions (default: 8)",
+  "  --no-include-ties                     Force the number of suggested to be",
+  "                                        limited, by not including suggestions",
+  "                                        that have the same edit cost.",
+  "  --stdin                               Use stdin for input.",
+  "  -v, --verbose                         Show detailed output. (default: 0)",
+  "  -d, --dictionary <dictionary name>    Use dictionary.",
+  "  --dictionaries <dictionary names...>  Use dictionaries",
+  "  --no-color                            Turn off color.",
+  "  --color                               Force color",
+  "  -h, --help                            display help for command",
+  "",
+]
+`;
+
+exports[`Validate cli app suggest ["sug"] 2`] = `""`;
+
+exports[`Validate cli app suggest ["sug"] 3`] = `""`;
+
 exports[`Validate cli app trace hello Expect Error: undefined 1`] = `Array []`;
+
+exports[`Validate cli app trace hello Expect Error: undefined 2`] = `Array []`;
 
 exports[`Validate cli app trace help Expect Error: outputHelp 1`] = `
 Array [
   "Usage: cspell trace [options] <words...>",
   "",
-  "Trace words",
-  "  Search for words in the configuration and dictionaries.",
+  "Trace words -- Search for words in the configuration and dictionaries.",
   "",
   "Options:",
   "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",

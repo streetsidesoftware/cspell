@@ -39,7 +39,7 @@ export async function traceWords(
         dicts: SpellingDictionaryCollection;
     }> {
         const withLocale = mergeSettings(config, {
-            language,
+            language: language || config.language,
             allowCompoundWords: allowCompoundWords ?? config.allowCompoundWords,
         });
         const withLanguageId = calcSettingsForLanguageId(

@@ -21,7 +21,7 @@ export class LintRequest {
         this.root = path.resolve(options.root || process.cwd());
         this.configFile = options.config;
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
-        this.locale = options.locale || options.local || '';
+        this.locale = options.locale || '';
         this.enableGlobDot = options.dot;
         this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
         this.showContext =

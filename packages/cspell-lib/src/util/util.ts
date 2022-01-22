@@ -56,3 +56,22 @@ export function scanMap<T>(accFn: (acc: T, value: T) => T, init?: T): (value: T)
 export function isDefined<T>(v: T | undefined): v is T {
     return v !== undefined;
 }
+
+export function* flattenIterable<T>(values: Iterable<Iterable<T>> | T[][]): Iterable<T> {
+    for (const v of values) {
+        yield* v;
+    }
+}
+
+export function flatten<T>(values: Iterable<Iterable<T>> | T[][]): T[] {
+    return [...flattenIterable(values)];
+}
+
+export async function asyncIterableToArray<T>(iter: Iterable<T> | AsyncIterable<T>): Promise<Awaited<T>[]> {
+    const acc: Awaited<T>[] = [];
+
+    for await (const t of iter) {
+        acc.push(t);
+    }
+    return acc;
+}

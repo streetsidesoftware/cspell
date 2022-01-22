@@ -5,6 +5,7 @@ import { commandCheck } from './commandCheck';
 import { commandLink } from './commandLink';
 import { commandLint } from './commandLint';
 import { commandTrace } from './commandTrace';
+import { commandSuggestion } from './commandSuggestion';
 import { ApplicationError } from './util/errors';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
@@ -30,6 +31,7 @@ export async function run(program?: commander.Command, argv?: string[]): Promise
     commandTrace(prog);
     commandCheck(prog);
     commandLink(prog);
+    commandSuggestion(prog);
 
     /*
         program

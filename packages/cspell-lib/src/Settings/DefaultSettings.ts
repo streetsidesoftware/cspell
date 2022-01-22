@@ -86,7 +86,7 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
 // This bit of copying is done to have the complier ensure that the defaults exist.
 const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
 
-export const _defaultSettings: Readonly<CSpellSettingsWithSourceTrace> = {
+export const _defaultSettings: Readonly<CSpellSettingsWithSourceTrace> = Object.freeze({
     id: 'static_defaults',
     language: 'en',
     name: 'Static Defaults',
@@ -130,7 +130,7 @@ export const _defaultSettings: Readonly<CSpellSettingsWithSourceTrace> = {
     languageSettings: LanguageSettings.getDefaultLanguageSettings(),
     source: { name: 'defaultSettings' },
     reporters: [],
-};
+});
 
 const getSettings = (function () {
     let settings: CSpellSettings | undefined = undefined;

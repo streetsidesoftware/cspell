@@ -1,11 +1,16 @@
-import * as app from './app';
+import chalk from 'chalk';
 import * as Commander from 'commander';
 import * as Path from 'path';
-import * as Link from './link';
-import chalk from 'chalk';
-import * as Util from 'util';
+import * as readline from 'readline';
 import stripAnsi from 'strip-ansi';
+import * as Util from 'util';
 import { URI } from 'vscode-uri';
+import * as app from './app';
+import * as Link from './link';
+import { mergeAsyncIterables } from './util/util';
+
+jest.mock('readline');
+const mockCreateInterface = jest.mocked(readline.createInterface);
 
 const projectRoot = Path.join(__dirname, '..');
 const projectRootUri = URI.file(projectRoot);
@@ -94,6 +99,9 @@ describe('Validate cli', () => {
     const capture = new RecordStdout();
 
     beforeEach(() => {
+        log.mockClear();
+        error.mockClear();
+        mockCreateInterface.mockClear();
         logger.clear();
         capture.startCapture();
         chalk.level = 3;
@@ -160,6 +168,7 @@ describe('Validate cli', () => {
     test.each`
         msg                                         | testArgs                                                        | errorCheck         | eError   | eLog     | eInfo
         ${'trace hello'}                            | ${['trace', 'hello']}                                           | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace hello'}                            | ${['trace', '--locale=en-gb', 'hello']}                         | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace help'}                             | ${['trace', '-h']}                                              | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'trace not-in-any-dictionary'}            | ${['trace', 'not-in-any-dictionary']}                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'trace missing dictionary'}               | ${['trace', 'hello', '-c', 'samples/cspell-missing-dict.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
@@ -212,6 +221,44 @@ describe('Validate cli', () => {
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
+    });
+
+    test.each`
+        testArgs                                                                                       | stdin         | errorCheck
+        ${['sug']}                                                                                     | ${undefined}  | ${'outputHelp'}
+        ${['sug', 'mexico', '-d=en-us']}                                                               | ${undefined}  | ${undefined}
+        ${['sug', 'mexico', '-d=en_us']}                                                               | ${undefined}  | ${undefined}
+        ${['sug', 'mexico', '-d=en-gb']}                                                               | ${undefined}  | ${undefined}
+        ${['sug', 'mexico', '-d=en_us', '-v']}                                                         | ${undefined}  | ${undefined}
+        ${['sug', '--stdin', '-d=en_us', '-v']}                                                        | ${['mexico']} | ${undefined}
+        ${['sug', 'mexico', '-d=en_us', '-v', '--num-suggestions=0']}                                  | ${undefined}  | ${undefined}
+        ${['sug', 'dutch', '-d=en_us', '-d=en-gb', '-v', '--num-suggestions=2']}                       | ${undefined}  | ${undefined}
+        ${['sug', 'dutch', '--dictionaries=en_us', '--dictionary=en-gb', '-v', '--num-suggestions=2']} | ${undefined}  | ${undefined}
+        ${['sug', 'dutch', '--dictionaries=en_us', '-v', '--num-suggestions=2']}                       | ${undefined}  | ${undefined}
+        ${['sug', 'dutch', '--dictionaries=en_us', '-v', '--num-suggestions=2']}                       | ${undefined}  | ${undefined}
+    `('app suggest $testArgs', async ({ testArgs, errorCheck, stdin }) => {
+        chalk.level = 0;
+        const values = stdin || [];
+        mockCreateInterface.mockReturnValue({
+            [Symbol.asyncIterator]: () => mergeAsyncIterables(values),
+        } as ReturnType<typeof readline.createInterface>);
+        listGlobalImports.mockImplementation(_listGlobalImports());
+        addPathsToGlobalImports.mockImplementation(_addPathsToGlobalImports());
+        removePathsFromGlobalImports.mockImplementation(_removePathsFromGlobalImports());
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        const result = app.run(commander, args);
+        if (!errorCheck) {
+            // eslint-disable-next-line jest/no-conditional-expect
+            await expect(result).resolves.toBeUndefined();
+        } else {
+            // eslint-disable-next-line jest/no-conditional-expect
+            await expect(result).rejects.toThrowError(errorCheck);
+        }
+        expect(capture.text).toMatchSnapshot();
+        expect(log.mock.calls.join('\n')).toMatchSnapshot();
+        expect(error.mock.calls.join('\n')).toMatchSnapshot();
+        expect(mockCreateInterface).toHaveBeenCalledTimes(stdin ? 1 : 0);
     });
 });
 

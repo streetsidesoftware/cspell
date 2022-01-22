@@ -156,7 +156,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
     let timeRemaining = timeout;
 
     function dropMax() {
-        if (sugs.size < 2) {
+        if (sugs.size < 2 || !numSuggestions) {
             sugs.clear();
             return;
         }

@@ -4,7 +4,6 @@ import * as Link from './Settings/link';
 import { refreshDictionaryCache } from './SpellingDictionary';
 import * as Text from './util/text';
 
-export * from '@cspell/cspell-types';
 export * from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { getLanguagesForExt } from './LanguageIds';
@@ -32,13 +31,16 @@ export {
     isSpellingDictionaryLoadError,
     refreshDictionaryCache,
     SpellingDictionary,
+    SpellingDictionaryCollection,
     SpellingDictionaryLoadError,
     SuggestionCollector,
     SuggestionResult,
-    SpellingDictionaryCollection,
     SuggestOptions,
 } from './SpellingDictionary';
-export * from './trace';
+export { traceWords } from './trace';
+export type { TraceOptions, TraceResult } from './trace';
+export { suggestionsForWord, suggestionsForWords, SuggestionError } from './suggestions';
+export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
 export { getLogger, Logger, setLogger } from './util/logger';
 export { resolveFile } from './util/resolveFile';
 export {

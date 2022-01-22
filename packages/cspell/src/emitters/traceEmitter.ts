@@ -1,7 +1,8 @@
-import { TraceResult } from './application';
-import chalk = require('chalk');
-import strip from 'strip-ansi';
 import * as Path from 'path';
+import strip from 'strip-ansi';
+import { TraceResult } from '../application';
+import { pad } from '../util/util';
+import chalk = require('chalk');
 
 export interface EmitTraceOptions {
     /** current working directory */
@@ -68,10 +69,6 @@ function emitTraceResult(r: TraceResult, colWidths: ColWidths, options: EmitTrac
     }
 }
 
-function pad(s: string, w: number): string {
-    return (s + ' '.repeat(w)).substr(0, w);
-}
-
 function trimMid(s: string, w: number): string {
     s = s.trim();
     if (s.length <= w) {
@@ -79,7 +76,7 @@ function trimMid(s: string, w: number): string {
     }
     const l = Math.floor((w - 3) / 2);
     const r = Math.ceil((w - 3) / 2);
-    return s.substr(0, l) + '...' + s.substr(-r);
+    return s.slice(0, l) + '...' + s.slice(-r);
 }
 
 function calcFoundChar(r: TraceResult): string {

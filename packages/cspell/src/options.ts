@@ -69,6 +69,47 @@ export interface TraceOptions extends BaseOptions {
     ignoreCase?: boolean;
 }
 
+export interface SuggestionOptions extends BaseOptions {
+    /**
+     * Strict case and accent checking
+     * @default true
+     */
+    strict?: boolean;
+
+    /**
+     * List of dictionaries to use. If specified, only that list of dictionaries will be used.
+     */
+    dictionaries?: string[];
+
+    /**
+     * The number of suggestions to make.
+     * @default 8
+     */
+    numSuggestions?: number;
+
+    /**
+     * Max number of changes / edits to the word to get to a suggestion matching suggestion.
+     * @default 4
+     */
+    numChanges?: number;
+
+    /**
+     * If multiple suggestions have the same edit / change "cost", then included them even if
+     * it causes more than `numSuggestions` to be returned.
+     * @default true
+     */
+    includeTies?: boolean;
+
+    /**
+     * Use stdin for the input
+     */
+    useStdin?: boolean;
+}
+
+export interface LegacyOptions {
+    local?: string;
+}
+
 export interface BaseOptions {
     /**
      * Path to configuration file.
@@ -82,10 +123,6 @@ export interface BaseOptions {
      * Locale to use.
      */
     locale?: string;
-    /**
-     * @deprecated
-     */
-    local?: string;
 }
 
 export interface LinterCliOptions extends Omit<LinterOptions, 'fileLists'> {
@@ -103,4 +140,12 @@ export interface LinterCliOptions extends Omit<LinterOptions, 'fileLists'> {
      * List of file paths to files that contains a list of files to be spell checked.
      */
     fileList?: string[];
+}
+
+export function fixLegacy<T extends BaseOptions>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {
+    const { local, ...rest } = opts;
+    if (local && !rest.locale) {
+        rest.locale = local;
+    }
+    return rest;
 }
