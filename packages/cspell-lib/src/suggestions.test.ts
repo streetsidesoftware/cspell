@@ -1,5 +1,5 @@
-import { suggestionsForWord, suggestionsForWords } from './suggestions';
 import type { SuggestionOptions } from './suggestions';
+import { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
 import { asyncIterableToArray } from './util/util';
 
 const oc = expect.objectContaining;
@@ -27,6 +27,16 @@ describe('suggestions', () => {
             expect(resultsAsync).toHaveLength(1);
             expect(resultsAsync[0].word).toEqual(word);
             expect(resultsAsync[0].suggestions).toEqual(expected);
+        }
+    );
+
+    test.each`
+        word       | options                               | settings
+        ${'apple'} | ${opt({ dictionaries: ['unknown'] })} | ${undefined}
+    `(
+        'suggestionsForWord ERRORS word: "$word", opts: $options, settings: $settings',
+        async ({ word, options, settings }) => {
+            await expect(suggestionsForWord(word, options, settings)).rejects.toThrow(SuggestionError);
         }
     );
 
