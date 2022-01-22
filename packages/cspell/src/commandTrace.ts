@@ -28,21 +28,24 @@ export function commandTrace(prog: Command): Command {
         .addOption(new CommanderOption('--allowCompoundWords', 'Turn on allowCompoundWords').hideHelp())
         .option('--no-allow-compound-words', 'Turn off allowCompoundWords')
         .option('--no-ignore-case', 'Do not ignore case and accents when searching for words')
+        .option('--stdin', 'Read words from stdin.')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
-        .arguments('<words...>')
+        .arguments('[words...]')
         .action(async (words: string[], options: TraceCommandOptions) => {
-            const results = await App.trace(words, options);
-            emitTraceResults(results, { cwd: process.cwd() });
-            const numFound = results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
+            let numFound = 0;
+            for await (const results of App.trace(words, options)) {
+                emitTraceResults(results, { cwd: process.cwd() });
+                numFound += results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
+                const numErrors = results.map((r) => r.errors?.length || 0).reduce((n, r) => n + r, 0);
+                if (numErrors) {
+                    console.error('Dictionary Errors.');
+                    throw new CheckFailed('dictionary errors', 1);
+                }
+            }
             if (!numFound) {
                 console.error('No matches found');
                 throw new CheckFailed('no matches', 1);
-            }
-            const numErrors = results.map((r) => r.errors?.length || 0).reduce((n, r) => n + r, 0);
-            if (numErrors) {
-                console.error('Dictionary Errors.');
-                throw new CheckFailed('dictionary errors', 1);
             }
         });
 }

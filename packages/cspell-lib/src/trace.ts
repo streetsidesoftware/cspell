@@ -18,7 +18,6 @@ export interface TraceResult {
     configSource: string;
     errors: Error[] | undefined;
 }
-
 export interface TraceOptions {
     languageId?: LanguageId | LanguageId[];
     locale?: LocaleId;
@@ -31,6 +30,20 @@ export async function traceWords(
     settings: CSpellSettings,
     options: TraceOptions | undefined
 ): Promise<TraceResult[]> {
+    const results = await util.asyncIterableToArray(traceWordsAsync(words, settings, options));
+
+    const s = genSequence(results)
+        .concatMap((p) => p)
+        .toArray();
+
+    return s;
+}
+
+export async function* traceWordsAsync(
+    words: Iterable<string> | AsyncIterable<string>,
+    settings: CSpellSettings,
+    options: TraceOptions | undefined
+): AsyncIterableIterator<TraceResult[]> {
     const { languageId, locale: language, ignoreCase = true, allowCompoundWords } = options || {};
 
     async function finalize(config: CSpellSettings): Promise<{
@@ -65,38 +78,29 @@ export async function traceWords(
     const setOfActiveDicts = new Set(activeDictionaries);
     const opts: HasOptions = { ignoreCase, useCompounds: config.allowCompoundWords };
 
-    const r = await Promise.all(
-        genSequence(words)
-            // Combine the words with the configs
-            .map((word) => ({ word, config, dicts }))
-            .toArray()
-    );
-
     function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
         if (!errors?.length) return undefined;
         return errors;
     }
 
-    // Search each dictionary for the word
-    const s = genSequence(r)
-        .concatMap((p) => {
-            const { word, config, dicts } = p;
-            return dicts.dictionaries
-                .map((dict) => ({ dict, findResult: dict.find(word, opts) }))
-                .map(({ dict, findResult }) => ({
-                    word,
-                    found: !!findResult?.found,
-                    foundWord: findResult?.found || undefined,
-                    forbidden: findResult?.forbidden || false,
-                    noSuggest: findResult?.noSuggest || false,
-                    dictName: dict.name,
-                    dictSource: dict.source,
-                    dictActive: setOfActiveDicts.has(dict.name),
-                    configSource: config.name || '',
-                    errors: normalizeErrors(dict.getErrors?.()),
-                }));
-        })
-        .toArray();
+    function processWord(word: string) {
+        return dicts.dictionaries
+            .map((dict) => ({ dict, findResult: dict.find(word, opts) }))
+            .map(({ dict, findResult }) => ({
+                word,
+                found: !!findResult?.found,
+                foundWord: findResult?.found || undefined,
+                forbidden: findResult?.forbidden || false,
+                noSuggest: findResult?.noSuggest || false,
+                dictName: dict.name,
+                dictSource: dict.source,
+                dictActive: setOfActiveDicts.has(dict.name),
+                configSource: config.name || '',
+                errors: normalizeErrors(dict.getErrors?.()),
+            }));
+    }
 
-    return s;
+    for await (const word of words) {
+        yield processWord(word);
+    }
 }

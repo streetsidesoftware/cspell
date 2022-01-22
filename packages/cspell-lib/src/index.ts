@@ -37,7 +37,7 @@ export {
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
-export { traceWords } from './trace';
+export { traceWords, traceWordsAsync } from './trace';
 export type { TraceOptions, TraceResult } from './trace';
 export { suggestionsForWord, suggestionsForWords, SuggestionError } from './suggestions';
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
