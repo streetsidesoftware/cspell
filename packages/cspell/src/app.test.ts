@@ -94,6 +94,8 @@ describe('Validate cli', () => {
     const capture = new RecordStdout();
 
     beforeEach(() => {
+        log.mockClear();
+        error.mockClear();
         logger.clear();
         capture.startCapture();
         chalk.level = 3;
@@ -212,6 +214,33 @@ describe('Validate cli', () => {
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
+    });
+
+    test.each`
+        testArgs                               | errorCheck
+        ${['sug']}                             | ${'outputHelp'}
+        ${['sug', 'mexico', '-d=en-us']}       | ${undefined}
+        ${['sug', 'mexico', '-d=en_us']}       | ${undefined}
+        ${['sug', 'mexico', '-d=en-gb']}       | ${undefined}
+        ${['sug', 'mexico', '-d=en_us', '-v']} | ${undefined}
+    `('app suggest $testArgs', async ({ testArgs, errorCheck }: TestCase) => {
+        chalk.level = 0;
+        listGlobalImports.mockImplementation(_listGlobalImports());
+        addPathsToGlobalImports.mockImplementation(_addPathsToGlobalImports());
+        removePathsFromGlobalImports.mockImplementation(_removePathsFromGlobalImports());
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        const result = app.run(commander, args);
+        if (!errorCheck) {
+            // eslint-disable-next-line jest/no-conditional-expect
+            await expect(result).resolves.toBeUndefined();
+        } else {
+            // eslint-disable-next-line jest/no-conditional-expect
+            await expect(result).rejects.toThrowError(errorCheck);
+        }
+        expect(capture.text).toMatchSnapshot();
+        expect(log.mock.calls.join('\n')).toMatchSnapshot();
+        expect(error.mock.calls.join('\n')).toMatchSnapshot();
     });
 });
 

@@ -1,7 +1,7 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { TraceOptions } from './options';
-import { emitTraceResults } from './traceEmitter';
+import { emitTraceResults } from './emitters/traceEmitter';
 import { CheckFailed } from './util/errors';
 
 // interface InitOptions extends Options {}
@@ -11,10 +11,7 @@ type TraceCommandOptions = TraceOptions;
 export function commandTrace(prog: Command): Command {
     return prog
         .command('trace')
-        .description(
-            `Trace words
-  Search for words in the configuration and dictionaries.`
-        )
+        .description(`Trace words -- Search for words in the configuration and dictionaries.`)
         .option(
             '-c, --config <cspell.json>',
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
