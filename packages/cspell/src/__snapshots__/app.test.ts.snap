@@ -557,6 +557,71 @@ log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
+exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 2`] = `
+"mexico
+ - Mexico   -    1 en_us
+ - medico   -   97 en_us
+ - Mexico's -  186 en_us
+ - Mexican  -  188 en_us
+ - medicos  -  190 en_us
+ - medick   -  191 en_us
+ - medics   -  191 en_us
+ - metics   -  191 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 2`] = `
+"dutch
+ - dutch -    0 en-gb, en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 2`] = `
+"dutch
+ - dutch -    0 en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 4`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 5`] = `
+"dutch
+ - dutch -    0 en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 6`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 2`] = `
+"dutch
+ - dutch -    0 en-gb, en_us
+ - Dutch -    1 en_us"
+`;
+
+exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 1`] = `Array []`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 2`] = `
+"mexico
+ <no suggestions>"
+`;
+
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 3`] = `""`;
+
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 1`] = `Array []`;
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 2`] = `
@@ -652,6 +717,8 @@ exports[`Validate cli app suggest ["sug"] 2`] = `""`;
 exports[`Validate cli app suggest ["sug"] 3`] = `""`;
 
 exports[`Validate cli app trace hello Expect Error: undefined 1`] = `Array []`;
+
+exports[`Validate cli app trace hello Expect Error: undefined 2`] = `Array []`;
 
 exports[`Validate cli app trace help Expect Error: outputHelp 1`] = `
 Array [
