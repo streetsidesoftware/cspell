@@ -26,15 +26,15 @@ Strict mode is used to explicitly select files to be checked. It gives more nuan
 
 Examples:
 
-| Glob                           | Meaning                                                                                                  |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| `*.md`                         | Only check the Markdown files in the current directory. It will not scan subdirectories.                 |
-| `*.{md,js}` or `{*.md,*.js}`   | Only check the Markdown or JavaScript files in the current directory. It will not scan subdirectories.   |
-| `**/*.md`                      | Scan all directories (except _hidden_ ones starting with `.`) looking for markdown files.                |
-| `**/{*,.*}/**/*.md`            | Scan all directories including a _hidden_ one looking for markdown files. Does not match `*.md` in root. |
-| `src/**`                       | Scan the `src` directory looking for all _non-hidden_ files.                                             |
-| `**/{*,.*,.*/**/{*,.*,.*/**}}` | Scan for all files with up to two _hidden_ directories deep.                                             |
-| `**/.*`                        | Scan for only _hidden_ files.                                                                            |
+| Glob                         | Meaning                                                                                                  |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `*.md`                       | Only check the Markdown files in the current directory. It will not scan subdirectories.                 |
+| `*.{md,js}` or `{*.md,*.js}` | Only check the Markdown or JavaScript files in the current directory. It will not scan subdirectories.   |
+| `**/*.md`                    | Scan all directories (except _hidden_ ones starting with `.`) looking for markdown files.                |
+| `**/{*,.*}/**/*.md`          | Scan all directories including a _hidden_ one looking for markdown files. Does not match `*.md` in root. |
+| `src/**`                     | Scan the `src` directory looking for all _non-hidden_ files.                                             |
+| `**`                         | Use the `--dot` option to include hidden directories or files.                                           |
+| `**/.*`                      | Scan for only _hidden_ files.                                                                            |
 
 ## Mode - Loose
 
