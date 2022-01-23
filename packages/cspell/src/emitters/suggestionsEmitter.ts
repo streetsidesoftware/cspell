@@ -1,17 +1,20 @@
-import { SuggestionsForWordResult, SuggestedWord } from 'cspell-lib';
+import type { SuggestionsForWordResult, SuggestedWord } from 'cspell-lib';
 import chalk = require('chalk');
 import { padLeft } from '../util/util';
 
 export interface EmitSuggestionOptions {
     verbose?: number;
     lineWidth?: number;
+    output?: {
+        log: (text: string) => void;
+    };
 }
 
 export function emitSuggestionResult(result: SuggestionsForWordResult, options: EmitSuggestionOptions): void {
     const { word, suggestions } = result;
-    const { verbose } = options;
+    const { verbose, output = console } = options;
 
-    console.log(word ? chalk.green(word) : chalk.yellow('<empty>') + ':');
+    output.log(word ? chalk.green(word) : chalk.yellow('<empty>') + ':');
 
     if (!suggestions.length) {
         console.log(chalk.yellow(' <no suggestions>'));
@@ -27,11 +30,11 @@ export function emitSuggestionResult(result: SuggestionsForWordResult, options: 
             const ignore = sug.noSuggest ? chalk.yellow('N') : ' ';
             const strCost = padLeft(cost.toString(10), 4);
             const dicts = dictionaries.map((n) => chalk.gray(n)).join(', ');
-            console.log(` - ${formatWord(word, sug)}${padding} ${forbid}${ignore} - ${chalk.yellow(strCost)} ${dicts}`);
+            output.log(` - ${formatWord(word, sug)}${padding} ${forbid}${ignore} - ${chalk.yellow(strCost)} ${dicts}`);
         }
     } else {
         for (const r of suggestions) {
-            console.log(` - ${formatWordSingle(r)}`);
+            output.log(` - ${formatWordSingle(r)}`);
         }
     }
 }
