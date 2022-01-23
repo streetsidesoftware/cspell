@@ -2,11 +2,17 @@ name: Integration Tests
 on:
   pull_request:
     paths-ignore:
-      - "docs/**"
+      - "**/package.json"
+      - "**/package.lock"
+      - "**/*.ts"
+      - "integration-tests/**"
+      - ".github/workflows/integration-test.yml"
+      - "!docs/**"
   push:
     branches:
       - main
     paths:
+      - "**/package.json"
       - "**/package.lock"
       - "**/*.ts"
       - "integration-tests/**"
