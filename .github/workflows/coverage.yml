@@ -1,13 +1,23 @@
 name: Coverage
 on:
   pull_request:
-    paths-ignore:
-      - "docs/**"
+    paths:
+      - "**/package.json"
+      - "**/package.lock"
+      - "**/*.ts"
+      - "**/*.js"
+      - ".github/workflows/coverage.yml"
+      - "!docs/**"
   push:
     branches:
       - main
-    paths-ignore:
-      - "docs/**"
+    paths:
+      - "**/package.json"
+      - "**/package.lock"
+      - "**/*.ts"
+      - "**/*.js"
+      - ".github/workflows/coverage.yml"
+      - "!docs/**"
 
 jobs:
   coverage:
