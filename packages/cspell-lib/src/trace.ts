@@ -3,7 +3,7 @@ import { genSequence } from 'gensequence';
 import { LanguageId } from './LanguageIds';
 import { finalizeSettings, mergeSettings } from './Settings';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
-import { getDictionary, HasOptions, SpellingDictionaryCollection } from './SpellingDictionary';
+import { getDictionary, HasOptions, refreshDictionaryCache, SpellingDictionaryCollection } from './SpellingDictionary';
 import * as util from './util/util';
 
 export interface TraceResult {
@@ -73,8 +73,9 @@ export async function* traceWordsAsync(
             dicts,
         };
     }
-    const { config, dicts, activeDictionaries } = await finalize(settings);
 
+    await refreshDictionaryCache();
+    const { config, dicts, activeDictionaries } = await finalize(settings);
     const setOfActiveDicts = new Set(activeDictionaries);
     const opts: HasOptions = { ignoreCase, useCompounds: config.allowCompoundWords };
 
