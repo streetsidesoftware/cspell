@@ -1,6 +1,11 @@
 name: Test
 on:
   pull_request:
+    paths:
+      - "**/*.js"
+      - "**/*.ts"
+      - "**/package.lock"
+      - "**/package.json"
     paths-ignore:
       - "docs/**"
   push:
