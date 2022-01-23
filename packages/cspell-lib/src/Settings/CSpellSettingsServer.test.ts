@@ -664,7 +664,7 @@ describe('Validate Normalize Settings', () => {
 describe('Validate Dependencies', () => {
     test.each`
         filename                         | relativeTo   | expected
-        ${r('../../cspell.config.json')} | ${undefined} | ${{ configFiles: [r(root, 'cspell.json'), r('../../cspell.config.json')], dictionaryFiles: [r(root, 'cspell-dict.txt')] }}
+        ${r('../../cspell.config.json')} | ${undefined} | ${{ configFiles: [r(root, 'cspell.json'), r('../../cspell.config.json')], dictionaryFiles: [r(root, 'cspell-dict.txt'), r(root, 'cspell-ignore-words.txt')] }}
     `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, expected }) => {
         const settings = readSettings(filename, relativeTo);
         const dependencies = extractDependencies(settings);

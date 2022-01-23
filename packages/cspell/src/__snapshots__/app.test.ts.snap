@@ -561,14 +561,14 @@ exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 1`] = `Ar
 
 exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 2`] = `
 "mexico
- - Mexico   -    1 en_us
- - medico   -   97 en_us
- - Mexico's -  186 en_us
- - Mexican  -  188 en_us
- - medicos  -  190 en_us
- - medick   -  191 en_us
- - medics   -  191 en_us
- - metics   -  191 en_us"
+ - Mexico      -    1 en_us
+ - medico      -   97 en_us
+ - Mexico's    -  186 en_us
+ - Mexican     -  188 en_us
+ - medicos     -  190 en_us
+ - medick      -  191 en_us
+ - medics      -  191 en_us
+ - metics      -  191 en_us"
 `;
 
 exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 3`] = `""`;
@@ -577,8 +577,8 @@ exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--di
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 2`] = `
 "dutch
- - dutch -    0 en-gb, en_us
- - Dutch -    1 en_us"
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
 `;
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
@@ -587,8 +587,8 @@ exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v",
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 2`] = `
 "dutch
- - dutch -    0 en_us
- - Dutch -    1 en_us"
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
 `;
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 3`] = `""`;
@@ -597,8 +597,8 @@ exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v",
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 5`] = `
 "dutch
- - dutch -    0 en_us
- - Dutch -    1 en_us"
+ - dutch    -    0 en_us
+ - Dutch    -    1 en_us"
 `;
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 6`] = `""`;
@@ -607,8 +607,8 @@ exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v",
 
 exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 2`] = `
 "dutch
- - dutch -    0 en-gb, en_us
- - Dutch -    1 en_us"
+ - dutch    -    0 en-gb, en_us
+ - Dutch    -    1 en_us"
 `;
 
 exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
@@ -626,14 +626,14 @@ exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 1`] = `Arr
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 2`] = `
 "mexico
- - Mexico   -    1 en_us
- - medico   -   97 en_us
- - Mexico's -  186 en_us
- - Mexican  -  188 en_us
- - medicos  -  190 en_us
- - medick   -  191 en_us
- - medics   -  191 en_us
- - metics   -  191 en_us"
+ - Mexico      -    1 en_us
+ - medico      -   97 en_us
+ - Mexico's    -  186 en_us
+ - Mexican     -  188 en_us
+ - medicos     -  190 en_us
+ - medick      -  191 en_us
+ - medics      -  191 en_us
+ - metics      -  191 en_us"
 `;
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 3`] = `""`;
@@ -703,8 +703,10 @@ Array [
   "                                        that have the same edit cost.",
   "  --stdin                               Use stdin for input.",
   "  -v, --verbose                         Show detailed output. (default: 0)",
-  "  -d, --dictionary <dictionary name>    Use dictionary.",
-  "  --dictionaries <dictionary names...>  Use dictionaries",
+  "  -d, --dictionary <dictionary name>    Use the dictionary specified. Only",
+  "                                        dictionaries specified will be used.",
+  "  --dictionaries <dictionary names...>  Use the dictionaries specified. Only",
+  "                                        dictionaries specified will be used.",
   "  --no-color                            Turn off color.",
   "  --color                               Force color",
   "  -h, --help                            display help for command",

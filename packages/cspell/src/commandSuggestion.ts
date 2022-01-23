@@ -60,8 +60,15 @@ export function commandSuggestion(prog: Command): Command {
         )
         .option('--stdin', 'Use stdin for input.')
         .option('-v, --verbose', 'Show detailed output.', count, 0)
-        .option('-d, --dictionary <dictionary name>', 'Use dictionary.', collect)
-        .option('--dictionaries <dictionary names...>', 'Use dictionaries')
+        .option(
+            '-d, --dictionary <dictionary name>',
+            'Use the dictionary specified. Only dictionaries specified will be used.',
+            collect
+        )
+        .option(
+            '--dictionaries <dictionary names...>',
+            'Use the dictionaries specified. Only dictionaries specified will be used.'
+        )
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
         .arguments('[words...]')

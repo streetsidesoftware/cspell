@@ -2,12 +2,16 @@ import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
 import { LanguageId } from './LanguageIds';
 import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
-import type { SuggestionResult, SuggestOptions } from './SpellingDictionary';
-import { getDictionary, SpellingDictionaryCollection } from './SpellingDictionary';
+import type { FindOptions, SuggestionResult, SuggestOptions } from './SpellingDictionary';
+import { getDictionary, SpellingDictionaryCollection, refreshDictionaryCache } from './SpellingDictionary';
 import * as util from './util/util';
 
-export interface SuggestedWord extends SuggestionResult {
+interface SuggestedWordBase extends SuggestionResult {
     dictionaries: string[];
+}
+export interface SuggestedWord extends SuggestedWordBase {
+    noSuggest: boolean;
+    forbidden: boolean;
 }
 
 export interface SuggestionsForWordResult {
@@ -92,8 +96,9 @@ export async function suggestionsForWord(
     } = options || {};
     const ignoreCase = !strict;
 
-    async function finalize(config: CSpellSettings): Promise<{
+    async function determineDictionaries(config: CSpellSettings): Promise<{
         dictionaryCollection: SpellingDictionaryCollection;
+        allDictionaryCollection: SpellingDictionaryCollection;
     }> {
         const withLocale = mergeSettings(config, {
             language: language || config.language,
@@ -104,28 +109,37 @@ export async function suggestionsForWord(
             languageId ?? withLocale.languageId ?? 'plaintext'
         );
         const settings = finalizeSettings(withLanguageId);
-
         settings.dictionaries = dictionaries?.length ? dictionaries : settings.dictionaries;
-
         validateDictionaries(settings, dictionaries);
-
         const dictionaryCollection = await getDictionary(settings);
+        settings.dictionaries = settings.dictionaryDefinitions?.map((def) => def.name) || [];
+        const allDictionaryCollection = await getDictionary(settings);
         return {
             dictionaryCollection,
+            allDictionaryCollection,
         };
     }
 
+    await refreshDictionaryCache();
+
     const config = includeDefaultConfig ? mergeSettings(getDefaultSettings(), getGlobalSettings(), settings) : settings;
-
-    const { dictionaryCollection } = await finalize(config);
-
+    const { dictionaryCollection, allDictionaryCollection } = await determineDictionaries(config);
     const opts: SuggestOptions = { ignoreCase, numChanges, numSuggestions, includeTies };
-
-    const allResults = dictionaryCollection.dictionaries.map((dict) =>
+    const suggestionsByDictionary = dictionaryCollection.dictionaries.map((dict) =>
         dict.suggest(word, opts).map((r) => ({ ...r, dictName: dict.name }))
     );
-
-    const allSugs = combine(util.flatten(allResults).sort((a, b) => a.cost - b.cost || (a.word <= b.word ? -1 : 1)));
+    const combined = combine(
+        util.flatten(suggestionsByDictionary).sort((a, b) => a.cost - b.cost || (a.word <= b.word ? -1 : 1))
+    );
+    const findOpts: FindOptions = {};
+    const allSugs = combined.map((sug) => {
+        const found = allDictionaryCollection.find(sug.word, findOpts);
+        return {
+            ...sug,
+            forbidden: found?.forbidden || false,
+            noSuggest: found?.noSuggest || false,
+        };
+    });
 
     return {
         word,
@@ -133,8 +147,8 @@ export async function suggestionsForWord(
     };
 }
 
-function combine(suggestions: { word: string; cost: number; dictName: string }[]): SuggestedWord[] {
-    const words: Map<string, SuggestedWord> = new Map();
+function combine(suggestions: { word: string; cost: number; dictName: string }[]): SuggestedWordBase[] {
+    const words: Map<string, SuggestedWordBase> = new Map();
 
     for (const sug of suggestions) {
         const { word, cost, dictName } = sug;
