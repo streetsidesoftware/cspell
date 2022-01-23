@@ -27,9 +27,12 @@ jobs:
       - name: Restore CSpell cache
         uses: actions/cache@v2
         with:
-          key: cspell-cache-v1-${{ runner.os }}
+          key: cspell-cache-v2-${{ runner.os }}-${{ hashFiles('**/*.ts', '**/*.md') }}
           path: |
             .cspellcache
+          restore-keys: |
+            cspell-cache-v2-${{ runner.os }}-
 
       - name: cspell@latest
-        run: npx cspell@latest --cache --cache-strategy=content --cache-location=.cspellcache --exclude="yarn2" --no-progress "**"
+        # run: npx cspell@latest --cache --cache-strategy=content --cache-location=.cspellcache --exclude="yarn2" --no-progress "**"
+        run: npx cspell@latest --cache --cache-strategy=content --cache-location=.cspellcache --exclude="yarn2" "**"
