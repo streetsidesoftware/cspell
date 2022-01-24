@@ -1,46 +1,29 @@
-[@cspell/cspell-types](../README.md) / [Exports](../modules.md) / DictionaryDefinitionCustom
+[@cspell/cspell-types](../README.md) / [Exports](../modules.md) / DictionaryDefinitionAugmented
 
-# Interface: DictionaryDefinitionCustom
+# Interface: DictionaryDefinitionAugmented
 
-For Defining Custom dictionaries. They are generally scoped to a
-`user`, `workspace`, or `folder`.
-When `addWords` is true, indicates that the spell checker can add words
-to the file.
-Note: only plain text files with one word per line are supported at this moment.
+Used to provide extra data related to the dictionary
 
 ## Hierarchy
 
 - [`DictionaryDefinitionPreferred`](DictionaryDefinitionPreferred.md)
 
-  ↳ **`DictionaryDefinitionCustom`**
+  ↳ **`DictionaryDefinitionAugmented`**
 
 ## Table of contents
 
 ### Properties
 
-- [addWords](DictionaryDefinitionCustom.md#addwords)
-- [description](DictionaryDefinitionCustom.md#description)
-- [name](DictionaryDefinitionCustom.md#name)
-- [noSuggest](DictionaryDefinitionCustom.md#nosuggest)
-- [path](DictionaryDefinitionCustom.md#path)
-- [repMap](DictionaryDefinitionCustom.md#repmap)
-- [scope](DictionaryDefinitionCustom.md#scope)
-- [type](DictionaryDefinitionCustom.md#type)
-- [useCompounds](DictionaryDefinitionCustom.md#usecompounds)
+- [description](DictionaryDefinitionAugmented.md#description)
+- [dictionaryInformation](DictionaryDefinitionAugmented.md#dictionaryinformation)
+- [name](DictionaryDefinitionAugmented.md#name)
+- [noSuggest](DictionaryDefinitionAugmented.md#nosuggest)
+- [path](DictionaryDefinitionAugmented.md#path)
+- [repMap](DictionaryDefinitionAugmented.md#repmap)
+- [type](DictionaryDefinitionAugmented.md#type)
+- [useCompounds](DictionaryDefinitionAugmented.md#usecompounds)
 
 ## Properties
-
-### addWords
-
-• **addWords**: `boolean`
-
-When `true`, let's the spell checker know that words can be added to this dictionary.
-
-#### Defined in
-
-[CSpellSettingsDef.ts:556](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L556)
-
-___
 
 ### description
 
@@ -55,6 +38,16 @@ Optional description.
 #### Defined in
 
 [CSpellSettingsDef.ts:434](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L434)
+
+___
+
+### dictionaryInformation
+
+• `Optional` **dictionaryInformation**: `DictionaryInformation`
+
+#### Defined in
+
+[CSpellSettingsDef.ts:478](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L478)
 
 ___
 
@@ -107,15 +100,15 @@ ___
 
 • **path**: `string`
 
-Path to custom dictionary text file.
+Path to the file.
 
-#### Overrides
+#### Inherited from
 
 [DictionaryDefinitionPreferred](DictionaryDefinitionPreferred.md).[path](DictionaryDefinitionPreferred.md#path)
 
 #### Defined in
 
-[CSpellSettingsDef.ts:545](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L545)
+[CSpellSettingsDef.ts:463](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L463)
 
 ___
 
@@ -132,19 +125,6 @@ Replacement pairs.
 #### Defined in
 
 [CSpellSettingsDef.ts:436](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L436)
-
-___
-
-### scope
-
-• `Optional` **scope**: [`CustomDictionaryScope`](../modules.md#customdictionaryscope) \| [`CustomDictionaryScope`](../modules.md#customdictionaryscope)[]
-
-Defines the scope for when words will be added to the dictionary.
-Scope values: `user`, `workspace`, `folder`.
-
-#### Defined in
-
-[CSpellSettingsDef.ts:551](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L551)
 
 ___
 

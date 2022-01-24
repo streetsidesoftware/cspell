@@ -29,7 +29,7 @@ The PnP files to search for. Note: `.mjs` files are not currently supported.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:216](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L216)
+[CSpellSettingsDef.ts:226](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L226)
 
 ___
 
@@ -47,4 +47,4 @@ of a PnP file and load it.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:209](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L209)
+[CSpellSettingsDef.ts:219](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L219)
