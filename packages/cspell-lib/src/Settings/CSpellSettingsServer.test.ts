@@ -372,7 +372,7 @@ describe('Validate Glob resolution', () => {
         expect(sampleSettings).not.toEqual(sampleSettingsV1);
         expect(sampleSettings.globRoot).not.toEqual(sampleSettingsV1.globRoot);
         expect(sampleSettings.globRoot).toBe(__dirname);
-        expect(sampleSettingsV1.globRoot).toContain(process.cwd());
+        expect(sampleSettingsV1.globRoot).toEqual('${cwd}');
         expect(sampleSettings.ignorePaths).toEqual(
             expect.arrayContaining([
                 { glob: 'node_modules', root: sampleSettings.globRoot, source: sampleSettingsFilename },

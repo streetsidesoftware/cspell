@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import * as Path from 'path';
 import {
     GlobPattern,
@@ -68,6 +69,11 @@ export function isGlobPatternNormalized(g: GlobPattern | GlobPatternNormalized):
     return 'rawGlob' in gr && 'rawRoot' in gr && typeof gr.rawGlob === 'string';
 }
 
+/**
+ * @param pattern glob pattern
+ * @param nested when true add `**​/<glob>/​**`
+ * @returns the set of matching globs.
+ */
 function normalizePattern(pattern: string, nested: boolean): string[] {
     pattern = pattern.replace(/^(!!)+/, '');
     const isNeg = pattern.startsWith('!');
@@ -105,9 +111,26 @@ function normalizePatternGeneral(pattern: string): [string] {
 }
 
 export interface NormalizeOptions {
+    /**
+     * Indicates that the glob should be modified to match nested patterns.
+     *
+     * Example: `node_modules` becomes `**​/node_modules/​**`, `**​/node_modules`, and `node_modules/​**`
+     */
     nested: boolean;
+    /**
+     * This is the root to use for the glob if the glob does not already contain one.
+     */
     root: string;
-    nodePath: PathInterface;
+
+    /**
+     * This is the replacement for `${cwd}` in either the root or in the glob.
+     */
+    cwd?: string;
+
+    /**
+     * Optional path interface for working with paths.
+     */
+    nodePath?: PathInterface;
 }
 
 /**
@@ -122,15 +145,15 @@ export function normalizeGlobPatterns(patterns: GlobPattern[], options: Normaliz
                 yield glob;
                 continue;
             }
-            yield* normalizeGlobPatternWithRoot(glob, options);
+            yield* normalizeGlobPattern(glob, options);
         }
     }
 
     return [...normalize()];
 }
 
-function normalizeGlobPatternWithRoot(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized[] {
-    const { root, nodePath: path, nested } = options;
+export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions): GlobPatternNormalized[] {
+    const { root, nodePath: path = Path, nested, cwd = Path.resolve() } = options;
 
     g = !isGlobPatternWithOptionalRoot(g) ? { glob: g } : g;
 
@@ -140,8 +163,12 @@ function normalizeGlobPatternWithRoot(g: GlobPattern, options: NormalizeOptions)
     const rawGlob = g.glob;
 
     gr.glob = gr.glob.trim(); // trimGlob(g.glob);
+    if (gr.glob.startsWith('${cwd}')) {
+        gr.glob = gr.glob.replace('${cwd}', '');
+        gr.root = '${cwd}';
+    }
     if (gr.root.startsWith('${cwd}')) {
-        gr.root = path.join(path.resolve(), gr.root.replace('${cwd}', ''));
+        gr.root = path.resolve(gr.root.replace('${cwd}', cwd));
     }
     gr.root = path.resolve(root, path.normalize(gr.root));
 
