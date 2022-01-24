@@ -38,6 +38,12 @@ interface NormalizedGlobMatchOptions {
     root: string;
 
     /**
+     * The directory to use as the current working directory.
+     * @default: process.cwd();
+     */
+    cwd: string;
+
+    /**
      * Allows matching against directories with a leading `.`.
      *
      * @default: mode == 'exclude'
@@ -111,11 +117,12 @@ export class GlobMatcher {
             dot = isExcludeMode,
             nodePath = _nodePath,
             nested = isExcludeMode,
+            cwd = process.cwd(),
             nobrace,
-        } = options;
+        } = clean(options);
 
         const normalizedRoot = nodePath.resolve(nodePath.normalize(root));
-        this.options = { root: normalizedRoot, dot, nodePath, nested, mode, nobrace };
+        this.options = { root: normalizedRoot, dot, nodePath, nested, mode, nobrace, cwd };
 
         patterns = Array.isArray(patterns)
             ? patterns
@@ -218,4 +225,15 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
         return testRules(negRules, false) || testRules(posRules, true) || { matched: false };
     };
     return fn;
+}
+
+function clean<T>(obj: T): T {
+    if (typeof obj !== 'object') return obj;
+    const r = <Record<string, unknown>>obj;
+    for (const key of Object.keys(r)) {
+        if (r[key] === undefined) {
+            delete r[key];
+        }
+    }
+    return obj;
 }

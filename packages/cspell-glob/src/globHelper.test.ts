@@ -49,6 +49,8 @@ describe('Validate fileOrGlobToGlob', () => {
         file                                         | root   | path     | expected                                           | comment
         ${'*.json'}                                  | ${'.'} | ${posix} | ${g('*.json', pp('.'))}                            | ${'posix'}
         ${'*.json'}                                  | ${'.'} | ${win32} | ${g('*.json', pw('.'))}                            | ${'win32'}
+        ${{ glob: '*.json' }}                        | ${'.'} | ${posix} | ${g('*.json', pp('.'))}                            | ${'posix'}
+        ${{ glob: '*.json', root: pp('./data') }}    | ${'.'} | ${posix} | ${g('*.json', pp('./data'))}                       | ${'posix'}
         ${pp('./*.json')}                            | ${'.'} | ${posix} | ${g('*.json', pp('.'))}                            | ${''}
         ${pw('./*.json')}                            | ${'.'} | ${win32} | ${g('*.json', pw('.'))}                            | ${''}
         ${pp('./package.json')}                      | ${'.'} | ${posix} | ${g('package.json', pp('.'))}                      | ${''}
@@ -303,6 +305,10 @@ describe('Validate Glob Normalization to root', () => {
             normalizeGlobToRoot(p, root, path)
         );
         expect(r).toEqual(expectedGlobs);
+        const again = normalizeGlobPatterns(r, { root, nested: false, nodePath: path }).map((p) =>
+            normalizeGlobToRoot(p, root, path)
+        );
+        expect(again).toEqual(r);
     });
 
     function nOpts(opts: Partial<NormalizeOptions> = {}): Required<NormalizeOptions> {
