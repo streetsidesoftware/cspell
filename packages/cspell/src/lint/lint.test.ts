@@ -6,6 +6,7 @@ import { runLint } from './lint';
 const root = path.resolve(__dirname, '../..');
 const samples = path.resolve(root, 'samples');
 const latexSamples = path.resolve(samples, 'latex');
+const failFastSamples = path.resolve(samples, 'fail-fast');
 const hiddenSamples = path.resolve(samples, 'hidden-test');
 const filesToCheck = path.resolve(root, 'fixtures/features/file-list/files-to-check.txt');
 const filesToCheckWithMissing = path.resolve(root, 'fixtures/features/file-list/files-to-check-missing.txt');
@@ -27,6 +28,8 @@ describe('Linter Validation Tests', () => {
     test.each`
         files               | options                                                                                                | expectedRunResult              | expectedReport
         ${[]}               | ${{ root: latexSamples }}                                                                              | ${oc({ errors: 0, files: 4 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'Tufte' })] })}
+        ${['*.txt']}        | ${{ root: failFastSamples }}                                                                           | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, errors: [], issues: oc({ length: 2 }) })}
+        ${['*.txt']}        | ${{ root: failFastSamples, config: j(samples, 'fail-fast', 'fail-fast-cspell.json') }}                 | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: oc({ length: 1 }) })}
         ${['**/ebook.tex']} | ${{ root: latexSamples }}                                                                              | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**/ebook.tex']} | ${{ root: latexSamples, gitignore: true }}                                                             | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**/hidden.md']} | ${{ root: hiddenSamples }}                                                                             | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
