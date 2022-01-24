@@ -8,6 +8,8 @@
 
   ↳ **`DictionaryDefinitionPreferred`**
 
+  ↳↳ [`DictionaryDefinitionAugmented`](DictionaryDefinitionAugmented.md)
+
   ↳↳ [`DictionaryDefinitionCustom`](DictionaryDefinitionCustom.md)
 
 ## Table of contents
@@ -36,7 +38,7 @@ Optional description.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:420](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L420)
+[CSpellSettingsDef.ts:434](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L434)
 
 ___
 
@@ -59,7 +61,7 @@ Name Format:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:418](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L418)
+[CSpellSettingsDef.ts:432](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L432)
 
 ___
 
@@ -81,7 +83,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:434](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L434)
+[CSpellSettingsDef.ts:448](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L448)
 
 ___
 
@@ -93,7 +95,7 @@ Path to the file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:449](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L449)
+[CSpellSettingsDef.ts:463](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L463)
 
 ___
 
@@ -109,7 +111,7 @@ Replacement pairs.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:422](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L422)
+[CSpellSettingsDef.ts:436](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L436)
 
 ___
 
@@ -132,7 +134,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[CSpellSettingsDef.ts:444](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L444)
+[CSpellSettingsDef.ts:458](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L458)
 
 ___
 
@@ -148,4 +150,4 @@ Use Compounds.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:424](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L424)
+[CSpellSettingsDef.ts:438](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L438)

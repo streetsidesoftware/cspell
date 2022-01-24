@@ -18,11 +18,14 @@
 
 Path to the cache location. Can be a file or a directory.
 If none specified `.cspellcache` will be used.
-Relative paths are relative to the config file in which
+Relative paths are relative to the config file in which it
+is defined.
+
+A prefix of `${cwd}` is replaced with the current working directory.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:239](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L239)
+[CSpellSettingsDef.ts:252](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L252)
 
 ___
 
@@ -36,7 +39,7 @@ Strategy to use for detecting changed files, default: metadata
 
 #### Defined in
 
-[CSpellSettingsDef.ts:245](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L245)
+[CSpellSettingsDef.ts:258](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L258)
 
 ___
 
@@ -50,4 +53,4 @@ Store the results of processed files in order to only operate on the changed one
 
 #### Defined in
 
-[CSpellSettingsDef.ts:231](https://github.com/streetsidesoftware/cspell/blob/04d61378/packages/cspell-types/src/CSpellSettingsDef.ts#L231)
+[CSpellSettingsDef.ts:241](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L241)
