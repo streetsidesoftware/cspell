@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1828, Issues found: 21957 in 1089 files
+ CSpell: Files checked: 1828, Issues found: 21965 in 1089 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -61,7 +61,6 @@ Lines:
 ./TSRM/TSRM.c:756:7     - Unknown word (adrp)       -- asm("adrp %0, #__tsrm_ls_cache
 ./TSRM/TSRM.c:761:21    - Unknown word (tprel)      -- "add %0, %0, #:tprel_hi12:_tsrm_ls_cache
 ./TSRM/TSRM.c:81:7      - Unknown word (unshuffled) -- int unshuffled_offset = TSRM_UNSHUFFLE
-./TSRM/tsrm_win32.c:458:39    - Unknown word (envw)       -- NULL, *cwdw = NULL, *envw = NULL;
 ./TSRM/tsrm_win32.c:462:7     - Unknown word (asuser)     -- BOOL asuser = TRUE;
 ./TSRM/tsrm_win32.c:776:61    - Unknown word (LPFILETIME) -- UnixTimeToFileTime(time_t t, LPFILETIME pft) /* {{{ */
 ./Zend/Optimizer/block_pass.c:62:24     - Unknown word (Tsource)    -- define VAR_SOURCE(op) Tsource[VAR_NUM(op.var)]
@@ -1906,8 +1905,8 @@ Lines:
 ./ext/mbstring/mbstring.c:2279:25   - Unknown word (swidth)     -- zend_long from, width, swidth = 0;
 ./ext/mbstring/mbstring.c:2426:22   - Unknown word (chash)      -- HashTable *output, *chash;
 ./ext/mbstring/mbstring.c:2430:9    - Unknown word (ckey)       -- size_t ckey_len, cval_len;
-./ext/mbstring/mbstring.c:3757:13   - Unknown word (ASCIIZ)     -- #undef MAIL_ASCIIZ_CHECK_MBSTRING
-./ext/mbstring/mbstring.c:4293:10   - Unknown word (bcnt)       -- size_t bcnt = nbytes;
+./ext/mbstring/mbstring.c:3761:13   - Unknown word (ASCIIZ)     -- #undef MAIL_ASCIIZ_CHECK_MBSTRING
+./ext/mbstring/mbstring.c:4297:10   - Unknown word (bcnt)       -- size_t bcnt = nbytes;
 ./ext/mbstring/mbstring.c:514:51    - Unknown word (cctx)       -- err_offset, php_pcre_cctx()))) {
 ./ext/mbstring/mbstring.stub.php:139:13    - Unknown word (MBREGEX)    -- #ifdef HAVE_MBREGEX
 ./ext/mbstring/php_mbregex.c:192:29    - Unknown word (UJIS)       -- JP\0EUCJP\0X-EUC-JP\0UJIS\0EUCJP\0EUCJP-WIN\0
@@ -1958,11 +1957,11 @@ Lines:
 ./ext/mysqlnd/mysqlnd_charset.c:476:50    - Unknown word (compilastion) -- macro, could be made compilastion dependable.
 ./ext/mysqlnd/mysqlnd_charset.c:516:10    - Unknown word (keybcs)       -- { 37, "keybcs2", "keybcs2_general
 ./ext/mysqlnd/mysqlnd_charset.c:517:10    - Unknown word (macce)        -- { 38, "macce", "macce_general_ci
-./ext/mysqlnd/mysqlnd_connection.c:1578:10   - Unknown word (attrz)      -- zval attrz;
-./ext/mysqlnd/mysqlnd_connection.c:2188:32   - Unknown word (bckwd)      -- fwd = conn_array, **bckwd = conn_array;
-./ext/mysqlnd/mysqlnd_connection.c:2229:11   - Unknown word (rfds)       -- fd_set rfds, wfds, efds;
-./ext/mysqlnd/mysqlnd_connection.c:2229:17   - Unknown word (wfds)       -- fd_set rfds, wfds, efds;
-./ext/mysqlnd/mysqlnd_connection.c:2229:23   - Unknown word (efds)       -- fd_set rfds, wfds, efds;
+./ext/mysqlnd/mysqlnd_connection.c:1570:10   - Unknown word (attrz)      -- zval attrz;
+./ext/mysqlnd/mysqlnd_connection.c:2180:32   - Unknown word (bckwd)      -- fwd = conn_array, **bckwd = conn_array;
+./ext/mysqlnd/mysqlnd_connection.c:2221:11   - Unknown word (rfds)       -- fd_set rfds, wfds, efds;
+./ext/mysqlnd/mysqlnd_connection.c:2221:17   - Unknown word (wfds)       -- fd_set rfds, wfds, efds;
+./ext/mysqlnd/mysqlnd_connection.c:2221:23   - Unknown word (efds)       -- fd_set rfds, wfds, efds;
 ./ext/mysqlnd/mysqlnd_connection.c:80:27     - Unknown word (pdtor)      -- mysqlnd_error_list_pdtor */
 ./ext/mysqlnd/mysqlnd_connection.c:832:119   - Unknown word (achtung)    -- const char * const achtung_wild, const char * const
 ./ext/mysqlnd/mysqlnd_debug.c:296:15    - Unknown word (underporm)  -- uint64_t own_underporm_calls;
@@ -4422,13 +4421,15 @@ Lines:
 ./main/output.c:775:22    - Unknown word (unallowed)  -- * Checks whether an unallowed operation is attempted
 ./main/php_ini.c:430:8     - Unknown word (phprc)      -- char phprc_path[MAXPATHLEN];
 ./main/php_ini.c:433:26    - Unknown word (PHPRC)      -- env_location = getenv("PHPRC");
-./main/php_ini.c:786:13    - Unknown word (inis)       -- /* User inis are parsed during SAPI
+./main/php_ini.c:787:13    - Unknown word (inis)       -- /* User inis are parsed during SAPI
 ./main/php_open_temporary_file.c:92:18     - Unknown word (pfxw)       -- wchar_t *cwdw, *pfxw, pathw[MAXPATHLEN];
 ./main/php_scandir.c:70:18     - Unknown word (newdp)      -- struct dirent *newdp = NULL;
 ./main/php_streams.h:452:25    - Unknown word (FDSYNC)     -- define PHP_STREAM_SYNC_FDSYNC 2
 ./main/php_syslog.c:13:21     - Unknown word (Prindeville) -- | Author: Philip Prindeville <philipp@redfish-solutions
 ./main/php_syslog.c:61:15     - Unknown word (xdigits)     -- const char xdigits[] = "0123456789abcdef
 ./main/php_variables.c:281:16    - Unknown word (ksep)       -- char *start, *ksep, *vsep, *val;
+./main/php_variables.c:574:11    - Unknown word (environmentw) -- wchar_t *environmentw = GetEnvironmentStringsW
+./main/php_variables.c:575:16    - Unknown word (envw)         -- for (wchar_t *envw = environmentw; envw
 ./main/reentrancy.c:219:23    - Unknown word (Softweyr)   -- Copyright (c) 1998 Softweyr LLC.  All rights reserved
 ./main/reentrancy.c:248:33    - Unknown word (SOFTWEYR)   -- SOFTWARE IS PROVIDED BY SOFTWEYR LLC, THE REGENTS AND
 ./main/rfc1867.c:1186:10   - Unknown word (zfilename)  -- zval zfilename;
