@@ -1,12 +1,11 @@
-import type { CSpellUserSettings, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Settings/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';
-import { SpellingDictionaryCollection } from './index';
 import { SpellingDictionary } from './SpellingDictionary';
-import { createCollectionP } from './SpellingDictionaryCollection';
+import { createCollectionP, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 
-export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionPreferred[]): Promise<SpellingDictionary>[] {
+export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map((def) => loadDictionary(def.path, def));
 }
 
@@ -14,7 +13,7 @@ export function refreshDictionaryCache(maxAge?: number): Promise<void> {
     return refreshCacheEntries(maxAge);
 }
 
-export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
+export function getDictionaryInternal(settings: CSpellSettingsInternal): Promise<SpellingDictionaryCollection> {
     const { words = [], userWords = [], flagWords = [], ignoreWords = [] } = settings;
     const spellDictionaries = loadDictionaryDefs(calcDictionaryDefsToLoad(settings));
     const settingsDictionary = createSpellingDictionary(

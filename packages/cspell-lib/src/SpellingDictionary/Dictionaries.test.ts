@@ -2,6 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { getDefaultSettings, loadConfig } from '../Settings';
+import { createCSpellSettingsInternal as csi } from '../Settings/CSpellSettingsInternalDef';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
@@ -32,21 +33,21 @@ describe('Validate getDictionary', () => {
         ${'rhone'} | ${ignoreCaseTrue}  | ${true}
         ${'snarf'} | ${ignoreCaseTrue}  | ${false}
     `('tests that userWords are included in the dictionary $word', async ({ word, opts, expected }) => {
-        const settings = {
+        const settings = csi({
             ...getDefaultSettings(),
             dictionaries: [],
             words: ['one', 'two', 'three', 'café', '!snarf'],
             userWords: ['four', 'five', 'six', 'Rhône'],
-        };
+        });
 
-        const dict = await Dictionaries.getDictionary(settings);
-        settings.words.forEach((w) => {
+        const dict = await Dictionaries.getDictionaryInternal(settings);
+        settings.words?.forEach((w) => {
             const word = w.replace(/^[!+*]*(.*?)[*+]*$/, '$1');
             const found = w[0] !== '!';
             const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found });
         });
-        settings.userWords.forEach((w) => {
+        settings.userWords?.forEach((w) => {
             const word = w.replace(/^[!+*]*(.*?)[*+]*$/, '$1');
             const found = w[0] !== '!';
             const result = { word, found: dict.has(word) };
@@ -75,15 +76,15 @@ describe('Validate getDictionary', () => {
         ${'hte'}    | ${{ found: 'hte', forbidden: true, noSuggest: false }}
         ${'colour'} | ${{ found: 'colour', forbidden: true, noSuggest: false }}
     `('find words $word', async ({ word, expected }) => {
-        const settings: CSpellUserSettings = {
+        const settings = csi({
             ...getDefaultSettings(),
             noSuggestDictionaries: ['companies'],
             words: ['one', 'two', 'three', 'café', '!snarf'],
             userWords: ['four', 'five', 'six', 'Rhône'],
             ignoreWords: ['zeros'],
             flagWords: ['hte', 'colour'],
-        };
-        const dict = await Dictionaries.getDictionary(settings);
+        });
+        const dict = await Dictionaries.getDictionaryInternal(settings);
         expect(dict.find(word)).toEqual(expected);
     });
 
@@ -112,7 +113,7 @@ describe('Validate getDictionary', () => {
             caseSensitive: true,
         };
 
-        const dict = await Dictionaries.getDictionary(settings);
+        const dict = await Dictionaries.getDictionaryInternal(settings);
         settings.words.forEach((word) => {
             const result = { word, found: dict.has(word) };
             expect(result).toEqual({ word, found: true });
@@ -125,12 +126,12 @@ describe('Validate getDictionary', () => {
     });
 
     test('Dictionary NOT Found', async () => {
-        const settings: CSpellUserSettings = {
+        const settings = csi({
             dictionaryDefinitions: [{ name: 'my-words', path: './not-found.txt' }],
             dictionaries: ['my-words'],
-        };
+        });
 
-        const dict = await Dictionaries.getDictionary(settings);
+        const dict = await Dictionaries.getDictionaryInternal(settings);
         expect(dict.getErrors()).toEqual([expect.objectContaining(new Error('my-words: failed to load'))]);
         expect(dict.dictionaries.map((d) => d.name)).toEqual(['my-words', '[words]', '[ignoreWords]', '[flagWords]']);
     });
@@ -203,7 +204,7 @@ describe('Validate getDictionary', () => {
             }
             // Enable ALL dictionaries
             settings.dictionaries = getAllDictionaryNames(settings);
-            const d = await Dictionaries.getDictionary(settings);
+            const d = await Dictionaries.getDictionaryInternal(settings);
             const errors = d.getErrors();
             expect(errors).toHaveLength(expectedErrors.length);
             errors.forEach((e) => expect(isSpellingDictionaryLoadError(e)).toBe(true));

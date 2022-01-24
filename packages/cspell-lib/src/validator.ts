@@ -1,7 +1,6 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Settings from './Settings';
-import * as Dictionary from './SpellingDictionary';
-import { CompoundWordsMethod } from './SpellingDictionary';
+import { CompoundWordsMethod, getDictionaryInternal } from './SpellingDictionary';
 import * as TV from './textValidator';
 
 export const diagSource = 'cSpell Checker';
@@ -25,7 +24,7 @@ export async function validateText(
     options: ValidateTextOptions = {}
 ): Promise<ValidationIssue[]> {
     const finalSettings = Settings.finalizeSettings(settings);
-    const dict = await Dictionary.getDictionary(finalSettings);
+    const dict = await getDictionaryInternal(finalSettings);
     const issues = [...TV.validateText(text, dict, settingsToValidateOptions(finalSettings))];
     if (!options.generateSuggestions) {
         return issues;

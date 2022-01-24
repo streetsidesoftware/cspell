@@ -6,7 +6,8 @@ import {
     HasWordOptions,
     ValidationOptions,
 } from './textValidator';
-import { createCollection, getDictionary } from './SpellingDictionary';
+import { createCSpellSettingsInternal as csi } from './Settings/CSpellSettingsInternalDef';
+import { createCollection, getDictionaryInternal } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
 import * as Text from './util/text';
@@ -70,10 +71,12 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests case in ignore words', async () => {
-        const dict = await getDictionary({
-            words: ['=Sample', 'with', 'Issues'],
-            ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
-        });
+        const dict = await getDictionaryInternal(
+            csi({
+                words: ['=Sample', 'with', 'Issues'],
+                ignoreWords: ['PUBLISHed', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
+            })
+        );
         const text =
             'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
         const options: ValidationOptions = {
@@ -85,10 +88,12 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests case in ignore words ignore case', async () => {
-        const dict = await getDictionary({
-            words: ['=Sample', 'with', 'Issues'],
-            ignoreWords: ['"PUBLISHed"', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
-        });
+        const dict = await getDictionaryInternal(
+            csi({
+                words: ['=Sample', 'with', 'Issues'],
+                ignoreWords: ['"PUBLISHed"', 'FIXesToThePROBLEMs'], // cspell:ignore fixestotheproblems
+            })
+        );
         const text =
             'We have PUBLISHed published multiple FIXesToThePROBLEMs with Sample fixestotheproblems and issues.';
         const options: ValidationOptions = {

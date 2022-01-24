@@ -1,7 +1,8 @@
 import * as ExclusionHelper from './exclusionHelper';
-import { clearCachedSettingsFiles } from './Settings';
+import { clearCachedSettingsFiles, CSpellUserSettings } from './Settings';
+import { toInternalSettings } from './Settings/CSpellSettingsServer';
 import * as Link from './Settings/link';
-import { refreshDictionaryCache } from './SpellingDictionary';
+import { refreshDictionaryCache, getDictionaryInternal, SpellingDictionaryCollection } from './SpellingDictionary';
 import * as Text from './util/text';
 
 export * from 'cspell-io';
@@ -27,7 +28,6 @@ export {
 export {
     CompoundWordsMethod,
     createSpellingDictionary,
-    getDictionary,
     isSpellingDictionaryLoadError,
     refreshDictionaryCache,
     SpellingDictionary,
@@ -57,4 +57,8 @@ export { ExclusionHelper };
 
 export async function clearCachedFiles(): Promise<void> {
     await Promise.all([clearCachedSettingsFiles(), refreshDictionaryCache(0)]);
+}
+
+export function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection> {
+    return getDictionaryInternal(toInternalSettings(settings));
 }

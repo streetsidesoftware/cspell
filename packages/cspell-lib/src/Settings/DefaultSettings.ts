@@ -1,10 +1,6 @@
-import type {
-    CSpellSettings,
-    CSpellSettingsWithSourceTrace,
-    PredefinedPatterns,
-    RegExpPatternDefinition,
-} from '@cspell/cspell-types';
+import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { resolveFile } from '../util/resolveFile';
+import { CSpellSettingsInternal, createCSpellSettingsInternal } from './CSpellSettingsInternalDef';
 import { readSettings } from './CSpellSettingsServer';
 import { mergeSettings } from './index';
 import * as LanguageSettings from './LanguageSettings';
@@ -86,54 +82,56 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
 // This bit of copying is done to have the complier ensure that the defaults exist.
 const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
 
-export const _defaultSettings: Readonly<CSpellSettingsWithSourceTrace> = Object.freeze({
-    id: 'static_defaults',
-    language: 'en',
-    name: 'Static Defaults',
-    enabled: true,
-    enabledLanguageIds: [
-        'ada',
-        'csharp',
-        'go',
-        'javascript',
-        'javascriptreact',
-        'json',
-        'markdown',
-        'mdx',
-        'php',
-        'plaintext',
-        'python',
-        'text',
-        'typescript',
-        'typescriptreact',
-        'haskell',
-        'html',
-        'css',
-        'less',
-        'scss',
-        'latex',
-        'ruby',
-        'rust',
-        'shellscript',
-        'toml',
-    ],
-    maxNumberOfProblems: 100,
-    numSuggestions: 10,
-    suggestionsTimeout: 500,
-    suggestionNumChanges: 3,
-    words: [],
-    userWords: [],
-    ignorePaths: [],
-    allowCompoundWords: false,
-    patterns: defaultRegExpPatterns,
-    ignoreRegExpList: defaultRegExpExcludeList,
-    languageSettings: LanguageSettings.getDefaultLanguageSettings(),
-    source: { name: 'defaultSettings' },
-    reporters: [],
-});
+export const _defaultSettings: Readonly<CSpellSettingsInternal> = Object.freeze(
+    createCSpellSettingsInternal({
+        id: 'static_defaults',
+        language: 'en',
+        name: 'Static Defaults',
+        enabled: true,
+        enabledLanguageIds: [
+            'ada',
+            'csharp',
+            'go',
+            'javascript',
+            'javascriptreact',
+            'json',
+            'markdown',
+            'mdx',
+            'php',
+            'plaintext',
+            'python',
+            'text',
+            'typescript',
+            'typescriptreact',
+            'haskell',
+            'html',
+            'css',
+            'less',
+            'scss',
+            'latex',
+            'ruby',
+            'rust',
+            'shellscript',
+            'toml',
+        ],
+        maxNumberOfProblems: 100,
+        numSuggestions: 10,
+        suggestionsTimeout: 500,
+        suggestionNumChanges: 3,
+        words: [],
+        userWords: [],
+        ignorePaths: [],
+        allowCompoundWords: false,
+        patterns: defaultRegExpPatterns,
+        ignoreRegExpList: defaultRegExpExcludeList,
+        languageSettings: LanguageSettings.getDefaultLanguageSettings(),
+        source: { name: 'defaultSettings' },
+        reporters: [],
+    })
+);
 
 const getSettings = (function () {
-    let settings: CSpellSettings | undefined = undefined;
+    let settings: CSpellSettingsInternal | undefined = undefined;
     return function () {
         if (!settings) {
             const jsonSettings = readSettings(defaultConfigFile);
@@ -148,6 +146,6 @@ function resolveConfigModule(configModuleName: string) {
     return resolveFile(configModuleName, __dirname).filename;
 }
 
-export function getDefaultSettings(): CSpellSettings {
+export function getDefaultSettings(): CSpellSettingsInternal {
     return getSettings();
 }
