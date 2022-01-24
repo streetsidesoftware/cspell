@@ -1,0 +1,57 @@
+name: Build Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/cspell-types/**/*.ts"
+  workflow_dispatch:
+
+jobs:
+  update-dependencies:
+    if: github.repository_owner == 'streetsidesoftware'
+    runs-on: ubuntu-latest
+    env:
+      NEW_BRANCH: "update-docs"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.4.0
+      - name: Use Node.js
+        uses: actions/setup-node@v2.5.1
+        with:
+          cache: npm
+      - name: Setup NPM
+        run: npm i -g npm@8
+      - name: Install
+        run: npm install
+      - name: Build Docs
+        run: |
+          npm run build-docs
+      - name: Has changes
+        run: |
+          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+          git --no-pager diff --compact-summary
+      - name: Gen Body
+        run: |
+          echo 'git_body<<DIFF' >> $GITHUB_ENV
+          git --no-pager diff --compact-summary >> $GITHUB_ENV
+          echo 'DIFF' >> $GITHUB_ENV
+      - name: Echo git_status
+        run: echo ${{ env.git_status }}
+      - uses: tibdex/github-app-token@v1.5 # cspell:ignore tibdex
+        if: env.git_status == 'dirty'
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Create Pull Request
+        if: env.git_status == 'dirty'
+        uses: peter-evans/create-pull-request@v3.12.0
+        with:
+          commit-message: "ci: Workflow Bot -- Build Docs"
+          branch: ${{ env.NEW_BRANCH }}
+          title: "ci: Workflow Bot -- Build Docs (${{ env.REF_BRANCH }})"
+          token: ${{ steps.generate-token.outputs.token }}
+          body: ${{ env.git_body }}
+          delete-branch: true
