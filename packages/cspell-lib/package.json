@@ -16,7 +16,7 @@
     "clean": "rimraf dist temp coverage .tsbuildinfo",
     "build": "npm run compile && npm run build-api",
     "build-dev": "tsc -p tsconfig.dev.json",
-    "build-api": "rollup -c rollup.config.mjs",
+    "build-api": "rollup -c api/rollup.config.mjs",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",

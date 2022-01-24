@@ -61,19 +61,18 @@ interface DictionaryDefinitionInternal extends DictionaryDefinitionPreferred, Pa
 
 declare type LoaderResult = URI | undefined;
 
+declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
+declare type CSpellSettingsI = CSpellSettingsInternal;
 declare const currentSettingsFileVersion = "0.2";
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 declare const defaultConfigFilenames: readonly string[];
-declare type CSpellSettingsX = CSpellSettingsWithSourceTrace;
-declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
-declare type CSpellSettingsI = CSpellSettingsInternal;
 declare function readSettings(filename: string): CSpellSettingsI;
 declare function readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
 declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI;
 declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
-declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsX | undefined>;
+declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsI | undefined>;
 /**
  * Load a CSpell configuration files.
  * @param file - path or package reference to load.
@@ -83,20 +82,19 @@ declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: P
 declare function loadConfig(file: string, pnpSettings?: PnPSettings): Promise<CSpellSettingsI>;
 declare function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult>;
 declare function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderResult;
-declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsX;
+declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST;
 /**
  *
  * @param filenames - settings files to read
  * @returns combined configuration
  * @deprecated true
  */
-declare function readSettingsFiles(filenames: string[]): CSpellSettingsX;
-declare function mergeSettings(left: CSpellSettingsI, ...settings: CSpellSettingsI[]): CSpellSettingsI;
-declare function mergeSettings(left: CSpellSettingsWST, ...settings: CSpellSettingsWST[]): CSpellSettingsWST;
-declare function mergeInDocSettings(left: CSpellSettingsX, right: CSpellSettingsX): CSpellSettingsX;
-declare function calcOverrideSettings(settings: CSpellSettingsX, filename: string): CSpellSettingsX;
+declare function readSettingsFiles(filenames: string[]): CSpellSettingsI;
+declare function mergeSettings(left: CSpellSettingsWST | CSpellSettingsI, ...settings: (CSpellSettingsWST | CSpellSettingsI)[]): CSpellSettingsI;
+declare function mergeInDocSettings(left: CSpellSettingsWST, right: CSpellSettingsWST): CSpellSettingsWST;
+declare function calcOverrideSettings(settings: CSpellSettingsWST, filename: string): CSpellSettingsI;
 declare function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI;
-declare function getGlobalSettings(): CSpellSettingsX;
+declare function getGlobalSettings(): CSpellSettingsI;
 declare function getCachedFileSize(): number;
 declare function clearCachedSettingsFiles(): void;
 declare function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean;
@@ -104,11 +102,11 @@ declare function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]
  * Return a list of Setting Sources used to create this Setting.
  * @param settings the settings to search
  */
-declare function getSources(settings: CSpellSettingsX): CSpellSettingsX[];
+declare function getSources(settings: CSpellSettingsWST): CSpellSettingsWST[];
 interface ImportFileRefWithError extends ImportFileRef {
     error: Error;
 }
-declare function extractImportErrors(settings: CSpellSettingsX): ImportFileRefWithError[];
+declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[];
 interface ConfigurationDependencies {
     configFiles: string[];
     dictionaryFiles: string[];

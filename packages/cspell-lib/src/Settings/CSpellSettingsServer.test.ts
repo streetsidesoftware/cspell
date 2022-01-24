@@ -706,6 +706,5 @@ const rawSampleSettings: CSpellUserSettings = {
 
 const rawSampleSettingsV1: CSpellUserSettings = { ...rawSampleSettings, version: '0.1' };
 const sampleSettingsFilename = __filename;
-const sampleSettings: CSpellUserSettings = normalizeSettings(rawSampleSettings, sampleSettingsFilename, {});
-
-const sampleSettingsV1: CSpellUserSettings = normalizeSettings(rawSampleSettingsV1, sampleSettingsFilename, {});
+const sampleSettings = normalizeSettings(rawSampleSettings, sampleSettingsFilename, {});
+const sampleSettingsV1 = normalizeSettings(rawSampleSettingsV1, sampleSettingsFilename, {});
