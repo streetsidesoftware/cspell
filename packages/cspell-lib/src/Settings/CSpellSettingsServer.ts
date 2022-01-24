@@ -441,13 +441,13 @@ function isEmpty(obj: Object) {
 function merge(left: CSpellSettingsWST | CSpellSettingsI, right: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI {
     const _left = toInternalSettings(left);
     const _right = toInternalSettings(right);
-    if (_left === _right) {
+    if (left === right) {
         return _left;
     }
-    if (isEmpty(_right)) {
+    if (isEmpty(right)) {
         return _left;
     }
-    if (isEmpty(_left)) {
+    if (isEmpty(left)) {
         return _right;
     }
     if (isLeftAncestorOfRight(_left, _right)) {
@@ -600,15 +600,14 @@ export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWS
     if (settings === undefined) return undefined;
     if (isCSpellSettingsInternal(settings)) return settings;
 
+    const { dictionaryDefinitions: defs, ...rest } = settings;
+
     const dictionaryDefinitions = normalizePathForDictDefs(
-        settings.dictionaryDefinitions,
+        defs,
         filenameToDirectory(settings.source?.filename) || resolveCwd()
     );
-
-    return csi({
-        ...settings,
-        dictionaryDefinitions,
-    });
+    const setting = dictionaryDefinitions ? { ...rest, dictionaryDefinitions } : rest;
+    return csi(setting);
 }
 
 function filenameToDirectory(filename: string | undefined): string | undefined {

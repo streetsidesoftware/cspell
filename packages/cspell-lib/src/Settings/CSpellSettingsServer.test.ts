@@ -2,6 +2,7 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef }
 import * as path from 'path';
 import { URI } from 'vscode-uri';
 import { logError, logWarning } from '../util/logger';
+import { createCSpellSettingsInternal as csi } from './CSpellSettingsInternalDef';
 import {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
@@ -42,58 +43,68 @@ const mockedLogWarning = jest.mocked(logWarning);
 
 describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings with conflicting "name"', () => {
-        const left = { name: 'Left' };
-        const right = { name: 'Right' };
-        expect(mergeSettings(left, right)).toEqual({
-            name: 'Left|Right',
-            id: '|',
-            enabledLanguageIds: [],
-            languageSettings: [],
-            source: { name: 'Left|Right', sources: [left, right] },
-        });
+        const left = csi({ name: 'Left' });
+        const right = csi({ name: 'Right' });
+        expect(mergeSettings(left, right)).toEqual(
+            csi({
+                name: 'Left|Right',
+                id: '|',
+                enabledLanguageIds: [],
+                languageSettings: [],
+                source: { name: 'Left|Right', sources: [left, right] },
+            })
+        );
     });
 
     test('tests mergeSettings with conflicting "id"', () => {
         const left = { id: 'left' };
         const enabled = { id: 'enabledId', name: 'enabledName', enabled: true };
-        expect(mergeSettings(left, enabled)).toEqual({
-            enabled: true,
-            name: '|enabledName',
-            id: 'left|enabledId',
-            enabledLanguageIds: [],
-            languageSettings: [],
-            source: { name: 'left|enabledName', sources: [left, enabled] },
-        });
+        expect(mergeSettings(left, enabled)).toEqual(
+            csi({
+                enabled: true,
+                name: '|enabledName',
+                id: 'left|enabledId',
+                enabledLanguageIds: [],
+                languageSettings: [],
+                source: { name: 'left|enabledName', sources: [csi(left), csi(enabled)] },
+            })
+        );
     });
 
     test('tests mergeSettings with conflicting "enabled"', () => {
-        const right = { id: 'right', enabled: false };
-        const left = { id: 'left', enabled: true };
+        const right = csi({ id: 'right', enabled: false });
+        const left = csi({ id: 'left', enabled: true });
         expect(mergeSettings({}, right)).toEqual(right);
         expect(mergeSettings(left, {})).toEqual(left);
-        expect(mergeSettings(left, right)).toEqual({
-            enabled: right.enabled,
-            name: '|',
-            id: [left.id, right.id].join('|'),
-            enabledLanguageIds: [],
-            languageSettings: [],
-            source: { name: 'left|right', sources: [left, right] },
-        });
+        expect(mergeSettings(left, right)).toEqual(
+            csi({
+                enabled: right.enabled,
+                name: '|',
+                id: [left.id, right.id].join('|'),
+                enabledLanguageIds: [],
+                languageSettings: [],
+                source: { name: 'left|right', sources: [left, right] },
+            })
+        );
     });
 
     test('tests mergeSettings with inline object', () => {
-        expect(mergeSettings({ enabled: true }, { enabled: false })).toEqual({
-            enabled: false,
-            name: '|',
-            id: '|',
-            enabledLanguageIds: [],
-            languageSettings: [],
-            source: { name: 'left|right', sources: [{ enabled: true }, { enabled: false }] },
-        });
+        const a = { enabled: true };
+        const b = { enabled: false };
+        expect(mergeSettings(a, b)).toEqual(
+            csi({
+                enabled: false,
+                name: '|',
+                id: '|',
+                enabledLanguageIds: [],
+                languageSettings: [],
+                source: { name: 'left|right', sources: [csi(a), csi(b)] },
+            })
+        );
     });
 
     test('tests mergeSettings with ignorePaths, files, and overrides', () => {
-        const left: CSpellUserSettings = {
+        const left = csi({
             id: 'left',
             files: ['left/**/*.*'],
             ignorePaths: ['node_modules'],
@@ -103,30 +114,32 @@ describe('Validate CSpellSettingsServer', () => {
                     dictionaries: ['ts-extra'],
                 },
             ],
-        };
-        const right: CSpellUserSettings = {
+        });
+        const right = csi({
             id: 'right',
             enabled: true,
             files: ['right/**/*.*'],
             overrides: [{ filename: '*.jsxx', languageId: 'javascript' }], // cspell:ignore jsxx
-        };
+        });
         expect(mergeSettings({}, right)).toEqual(right);
         expect(mergeSettings(left, {})).toEqual(left);
-        expect(mergeSettings(left, right)).toEqual({
-            enabled: right.enabled,
-            name: '|',
-            id: [left.id, right.id].join('|'),
-            enabledLanguageIds: [],
-            languageSettings: [],
-            files: left.files?.concat(right.files || []),
-            ignorePaths: left.ignorePaths?.concat(right.ignorePaths || []),
-            overrides: left.overrides?.concat(right.overrides || []),
-            source: { name: 'left|right', sources: [left, right] },
-        });
+        expect(mergeSettings(left, right)).toEqual(
+            csi({
+                enabled: right.enabled,
+                name: '|',
+                id: [left.id, right.id].join('|'),
+                enabledLanguageIds: [],
+                languageSettings: [],
+                files: left.files?.concat(right.files || []),
+                ignorePaths: left.ignorePaths?.concat(right.ignorePaths || []),
+                overrides: left.overrides?.concat(right.overrides || []),
+                source: { name: 'left|right', sources: [left, right] },
+            })
+        );
     });
 
     test('tests mergeSettings with ignorePaths, files, and overrides compatibility', () => {
-        const left: CSpellUserSettings = {
+        const left = csi({
             id: 'left',
             files: ['left/**/*.*'],
             ignorePaths: ['node_modules'],
@@ -136,29 +149,31 @@ describe('Validate CSpellSettingsServer', () => {
                     dictionaries: ['ts-extra'],
                 },
             ],
-        };
-        const right: CSpellUserSettings = {
+        });
+        const right = csi({
             id: 'right',
             version: '0.1',
             enabled: true,
             files: ['right/**/*.*'],
             ignorePaths: ['node_modules'],
             overrides: [{ filename: '*.jsxx', languageId: 'javascript' }], // cspell:ignore jsxx
-        };
+        });
         expect(mergeSettings({}, right)).toEqual(right);
         expect(mergeSettings(left, {})).toEqual(left);
-        expect(mergeSettings(left, right)).toEqual({
-            enabled: right.enabled,
-            name: '|',
-            id: [left.id, right.id].join('|'),
-            version: right.version,
-            enabledLanguageIds: [],
-            languageSettings: [],
-            files: left.files?.concat(right.files || []),
-            ignorePaths: right.ignorePaths,
-            overrides: right.overrides,
-            source: { name: 'left|right', sources: [left, right] },
-        });
+        expect(mergeSettings(left, right)).toEqual(
+            csi({
+                enabled: right.enabled,
+                name: '|',
+                id: [left.id, right.id].join('|'),
+                version: right.version,
+                enabledLanguageIds: [],
+                languageSettings: [],
+                files: left.files?.concat(right.files || []),
+                ignorePaths: right.ignorePaths,
+                overrides: right.overrides,
+                source: { name: 'left|right', sources: [left, right] },
+            })
+        );
     });
 
     test('tests mergeSettings when left/right are the same', () => {
@@ -190,11 +205,11 @@ describe('Validate CSpellSettingsServer', () => {
 
     test.each`
         left                                              | right                                              | expected
-        ${{}}                                             | ${{}}                                              | ${{}}
-        ${{ dictionaries: ['a'] }}                        | ${{ dictionaries: ['b'] }}                         | ${oc({ dictionaries: ['a', 'b'] })}
-        ${{ features: {} }}                               | ${{}}                                              | ${oc({ features: {} })}
-        ${{ features: { 'weighted-suggestions': true } }} | ${{}}                                              | ${oc({ features: { 'weighted-suggestions': true } })}
-        ${{ features: { 'weighted-suggestions': true } }} | ${{ features: { 'weighted-suggestions': false } }} | ${oc({ features: { 'weighted-suggestions': false } })}
+        ${{}}                                             | ${{}}                                              | ${csi({})}
+        ${{ dictionaries: ['a'] }}                        | ${{ dictionaries: ['b'] }}                         | ${oc(csi({ dictionaries: ['a', 'b'] }))}
+        ${{ features: {} }}                               | ${{}}                                              | ${oc(csi({ features: {} }))}
+        ${{ features: { 'weighted-suggestions': true } }} | ${{}}                                              | ${oc(csi({ features: { 'weighted-suggestions': true } }))}
+        ${{ features: { 'weighted-suggestions': true } }} | ${{ features: { 'weighted-suggestions': false } }} | ${oc(csi({ features: { 'weighted-suggestions': false } }))}
         ${{ features: { 'weighted-suggestions': true } }} | ${{ features: { 'new-feature': true } }}           | ${oc({ features: { 'weighted-suggestions': true, 'new-feature': true } })}
     `('mergeSettings $left with $right', ({ left, right, expected }) => {
         expect(mergeSettings(left, right)).toEqual(expected);
