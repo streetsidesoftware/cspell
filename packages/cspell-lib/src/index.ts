@@ -1,7 +1,7 @@
 import * as ExclusionHelper from './exclusionHelper';
 import { clearCachedSettingsFiles, CSpellUserSettings } from './Settings';
 import { toInternalSettings } from './Settings/CSpellSettingsServer';
-import * as Link from './Settings/link';
+import * as Link from './Settings/index.link';
 import { refreshDictionaryCache, getDictionaryInternal, SpellingDictionaryCollection } from './SpellingDictionary';
 import * as Text from './util/text';
 

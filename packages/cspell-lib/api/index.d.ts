@@ -165,30 +165,27 @@ interface ResolveSettingsResult {
     error?: string;
     settings: CSpellSettingsWithSourceTrace;
 }
-declare function findPackageForCSpellConfig(pathToConfig: string): NodePackage | undefined;
-declare const __testing__$1: {
-    findPackageForCSpellConfig: typeof findPackageForCSpellConfig;
-};
 
-type link_d_ListGlobalImportsResult = ListGlobalImportsResult;
-type link_d_ListGlobalImportsResults = ListGlobalImportsResults;
-declare const link_d_listGlobalImports: typeof listGlobalImports;
-type link_d_AddPathsToGlobalImportsResults = AddPathsToGlobalImportsResults;
-declare const link_d_addPathsToGlobalImports: typeof addPathsToGlobalImports;
-type link_d_RemovePathsFromGlobalImportsResult = RemovePathsFromGlobalImportsResult;
-declare const link_d_removePathsFromGlobalImports: typeof removePathsFromGlobalImports;
-type link_d_ResolveSettingsResult = ResolveSettingsResult;
-declare namespace link_d {
+//# sourceMappingURL=index.link.d.ts.map
+
+declare const index_link_d_addPathsToGlobalImports: typeof addPathsToGlobalImports;
+declare const index_link_d_listGlobalImports: typeof listGlobalImports;
+declare const index_link_d_removePathsFromGlobalImports: typeof removePathsFromGlobalImports;
+type index_link_d_AddPathsToGlobalImportsResults = AddPathsToGlobalImportsResults;
+type index_link_d_ListGlobalImportsResult = ListGlobalImportsResult;
+type index_link_d_ListGlobalImportsResults = ListGlobalImportsResults;
+type index_link_d_RemovePathsFromGlobalImportsResult = RemovePathsFromGlobalImportsResult;
+type index_link_d_ResolveSettingsResult = ResolveSettingsResult;
+declare namespace index_link_d {
   export {
-    link_d_ListGlobalImportsResult as ListGlobalImportsResult,
-    link_d_ListGlobalImportsResults as ListGlobalImportsResults,
-    link_d_listGlobalImports as listGlobalImports,
-    link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults,
-    link_d_addPathsToGlobalImports as addPathsToGlobalImports,
-    link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult,
-    link_d_removePathsFromGlobalImports as removePathsFromGlobalImports,
-    link_d_ResolveSettingsResult as ResolveSettingsResult,
-    __testing__$1 as __testing__,
+    index_link_d_addPathsToGlobalImports as addPathsToGlobalImports,
+    index_link_d_listGlobalImports as listGlobalImports,
+    index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports,
+    index_link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults,
+    index_link_d_ListGlobalImportsResult as ListGlobalImportsResult,
+    index_link_d_ListGlobalImportsResults as ListGlobalImportsResults,
+    index_link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult,
+    index_link_d_ResolveSettingsResult as ResolveSettingsResult,
   };
 }
 
@@ -646,4 +643,4 @@ declare function resolveFile(filename: string, relativeTo: string): ResolveFileR
 declare function clearCachedFiles(): Promise<void>;
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { CheckTextInfo, ConfigurationDependencies, DetermineFinalDocumentSettingsResult, Document, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, finalizeSettings, getCachedFileSize, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, validateText };
+export { CheckTextInfo, ConfigurationDependencies, DetermineFinalDocumentSettingsResult, Document, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, finalizeSettings, getCachedFileSize, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, validateText };
