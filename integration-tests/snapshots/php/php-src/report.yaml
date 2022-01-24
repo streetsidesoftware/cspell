@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]
 Summary:
   files: 1828
   filesWithIssues: 1089
-  issues: 21957
+  issues: 21965
   errors: 0
 Errors: []
 
@@ -1710,8 +1710,8 @@ issues:
   - "ext/mbstring/mbstring.c:2279:25 	swidth  	U   	zend_long from, width, swidth = 0;"
   - "ext/mbstring/mbstring.c:2426:22 	chash   	U   	HashTable *output, *chash;"
   - "ext/mbstring/mbstring.c:2430:9  	ckey    	U   	size_t ckey_len, cval_len;"
-  - "ext/mbstring/mbstring.c:3757:13 	ASCIIZ  	U   	#undef MAIL_ASCIIZ_CHECK_MBSTRING"
-  - "ext/mbstring/mbstring.c:4293:10 	bcnt    	U   	size_t bcnt = nbytes;"
+  - "ext/mbstring/mbstring.c:3761:13 	ASCIIZ  	U   	#undef MAIL_ASCIIZ_CHECK_MBSTRING"
+  - "ext/mbstring/mbstring.c:4297:10 	bcnt    	U   	size_t bcnt = nbytes;"
   - "ext/mbstring/mbstring.stub.php:139:13   	MBREGEX 	U   	#ifdef HAVE_MBREGEX"
   - "ext/mbstring/php_mbregex.c:63:9     	MBREX       	U   	#define MBREX(g) (MBSTRG(mb_regex"
   - "ext/mbstring/php_mbregex.c:192:29   	UJIS        	U   	JP\\0EUCJP\\0X-EUC-JP\\0UJIS\\0EUCJP\\0EUCJP-WIN\\0"
@@ -1763,11 +1763,11 @@ issues:
   - "ext/mysqlnd/mysqlnd_charset.c:517:10    	macce       	U   	{ 38, \"macce\", \"macce_general_ci"
   - "ext/mysqlnd/mysqlnd_connection.c:80:27      	pdtor   	U   	mysqlnd_error_list_pdtor */"
   - "ext/mysqlnd/mysqlnd_connection.c:832:119    	achtung 	U   	const char * const achtung_wild, const char * const"
-  - "ext/mysqlnd/mysqlnd_connection.c:1578:10    	attrz   	U   	zval attrz;"
-  - "ext/mysqlnd/mysqlnd_connection.c:2188:32    	bckwd   	U   	fwd = conn_array, **bckwd = conn_array;"
-  - "ext/mysqlnd/mysqlnd_connection.c:2229:11    	rfds    	U   	fd_set rfds, wfds, efds;"
-  - "ext/mysqlnd/mysqlnd_connection.c:2229:17    	wfds    	U   	fd_set rfds, wfds, efds;"
-  - "ext/mysqlnd/mysqlnd_connection.c:2229:23    	efds    	U   	fd_set rfds, wfds, efds;"
+  - "ext/mysqlnd/mysqlnd_connection.c:1570:10    	attrz   	U   	zval attrz;"
+  - "ext/mysqlnd/mysqlnd_connection.c:2180:32    	bckwd   	U   	fwd = conn_array, **bckwd = conn_array;"
+  - "ext/mysqlnd/mysqlnd_connection.c:2221:11    	rfds    	U   	fd_set rfds, wfds, efds;"
+  - "ext/mysqlnd/mysqlnd_connection.c:2221:17    	wfds    	U   	fd_set rfds, wfds, efds;"
+  - "ext/mysqlnd/mysqlnd_connection.c:2221:23    	efds    	U   	fd_set rfds, wfds, efds;"
   - "ext/mysqlnd/mysqlnd_debug.c:296:15  	underporm   	U   	uint64_t own_underporm_calls;"
   - "ext/mysqlnd/mysqlnd_ext_plugin.c:383:34     	xetters 	U   	mysqlnd_plugin_methods_xetters mysqlnd_plugin_methods"
   - "ext/mysqlnd/mysqlnd_ext_plugin.h:28:32      	aread   	U   	get_result_buffered_aread)(const MYSQLND_RES_BUFFERED"
@@ -4224,13 +4224,15 @@ issues:
   - "main/output.c:775:22    	unallowed   	U   	* Checks whether an unallowed operation is attempted"
   - "main/php_ini.c:430:8    	phprc   	U   	char phprc_path[MAXPATHLEN];"
   - "main/php_ini.c:433:26   	PHPRC   	U   	env_location = getenv(\"PHPRC\");"
-  - "main/php_ini.c:786:13   	inis    	U   	/* User inis are parsed during SAPI"
+  - "main/php_ini.c:787:13   	inis    	U   	/* User inis are parsed during SAPI"
   - "main/php_open_temporary_file.c:92:18    	pfxw	U   	wchar_t *cwdw, *pfxw, pathw[MAXPATHLEN];"
   - "main/php_scandir.c:70:18    	newdp   	U   	struct dirent *newdp = NULL;"
   - "main/php_streams.h:452:25   	FDSYNC  	U   	define PHP_STREAM_SYNC_FDSYNC 2"
   - "main/php_syslog.c:13:21     	Prindeville 	U   	| Author: Philip Prindeville <philipp@redfish-solutions"
   - "main/php_syslog.c:61:15     	xdigits     	U   	const char xdigits[] = \"0123456789abcdef"
-  - "main/php_variables.c:281:16     	ksep	U   	char *start, *ksep, *vsep, *val;"
+  - "main/php_variables.c:281:16     	ksep        	U   	char *start, *ksep, *vsep, *val;"
+  - "main/php_variables.c:574:11     	environmentw	U   	wchar_t *environmentw = GetEnvironmentStringsW"
+  - "main/php_variables.c:575:16     	envw        	U   	for (wchar_t *envw = environmentw; envw"
   - "main/reentrancy.c:219:23    	Softweyr	U   	Copyright (c) 1998 Softweyr LLC. All rights reserved"
   - "main/reentrancy.c:248:33    	SOFTWEYR	U   	SOFTWARE IS PROVIDED BY SOFTWEYR LLC, THE REGENTS AND"
   - "main/rfc1867.c:203:66   	libapreq    	U   	multipart_buffer.c from libapreq-0.33 package. */"
@@ -4520,7 +4522,6 @@ issues:
   - "scripts/dev/check_parameters.php:21:9       	PHPDIR  	U   	define('PHPDIR', realpath(dirname("
   - "scripts/dev/check_parameters.php:128:57     	uninit  	U   	exp, $optional, $allow_uninit = false)"
   - "scripts/dev/tidy.php:71:20      	reindent	U   	// $code = reindentToTabs($code);"
-  - "TSRM/tsrm_win32.c:458:39    	envw        	U   	NULL, *cwdw = NULL, *envw = NULL;"
   - "TSRM/tsrm_win32.c:462:7     	asuser      	U   	BOOL asuser = TRUE;"
   - "TSRM/tsrm_win32.c:776:61    	LPFILETIME  	U   	UnixTimeToFileTime(time_t t, LPFILETIME pft) /* {{{ */"
   - "TSRM/TSRM.c:62:16   	tsmm        	U   	static MUTEX_T tsmm_mutex; /* thread-safe"
