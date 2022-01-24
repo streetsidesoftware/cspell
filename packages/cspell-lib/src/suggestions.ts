@@ -3,7 +3,7 @@ import { LanguageId } from './LanguageIds';
 import { finalizeSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
 import type { FindOptions, SuggestionResult, SuggestOptions } from './SpellingDictionary';
-import { getDictionary, SpellingDictionaryCollection, refreshDictionaryCache } from './SpellingDictionary';
+import { getDictionaryInternal, SpellingDictionaryCollection, refreshDictionaryCache } from './SpellingDictionary';
 import * as util from './util/util';
 
 interface SuggestedWordBase extends SuggestionResult {
@@ -111,9 +111,9 @@ export async function suggestionsForWord(
         const settings = finalizeSettings(withLanguageId);
         settings.dictionaries = dictionaries?.length ? dictionaries : settings.dictionaries;
         validateDictionaries(settings, dictionaries);
-        const dictionaryCollection = await getDictionary(settings);
+        const dictionaryCollection = await getDictionaryInternal(settings);
         settings.dictionaries = settings.dictionaryDefinitions?.map((def) => def.name) || [];
-        const allDictionaryCollection = await getDictionary(settings);
+        const allDictionaryCollection = await getDictionaryInternal(settings);
         return {
             dictionaryCollection,
             allDictionaryCollection,

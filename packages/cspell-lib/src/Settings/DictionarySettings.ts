@@ -1,19 +1,14 @@
-import type {
-    DictionaryDefinition,
-    DictionaryDefinitionPreferred,
-    DictionaryReference,
-    CSpellSettingsWithSourceTrace,
-} from '@cspell/cspell-types';
+import type { DictionaryDefinition, DictionaryDefinitionPreferred, DictionaryReference } from '@cspell/cspell-types';
 import * as path from 'path';
 import { resolveFile } from '../util/resolveFile';
+import {
+    CSpellSettingsInternal,
+    DictionaryDefinitionInternal,
+    DictionaryDefinitionWithSource,
+} from './CSpellSettingsInternalDef';
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
 
-export interface DictionaryDefinitionWithSource extends DictionaryDefinitionPreferred {
-    /** The path to the config file that contains this dictionary definition */
-    __source: string;
-}
-
-export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
+export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
 
 /**
  * Combines the list of desired dictionaries with the list of dictionary
@@ -30,7 +25,7 @@ export type DefMapArrayItem = [string, DictionaryDefinitionPreferred];
 export function filterDictDefsToLoad(
     dictRefIds: DictionaryReference[],
     defs: DictionaryDefinition[]
-): DictionaryDefinitionPreferred[] {
+): DictionaryDefinitionInternal[] {
     function isDefP(def: DictionaryDefinition): def is DictionaryDefinitionPreferred {
         return !!def.path;
     }
@@ -104,7 +99,7 @@ function determineName(filename: string, options: DictionaryDefinition): string 
     return options.name || path.basename(filename);
 }
 
-export function calcDictionaryDefsToLoad(settings: CSpellSettingsWithSourceTrace): DictionaryDefinitionPreferred[] {
+export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): DictionaryDefinitionPreferred[] {
     const { dictionaries = [], dictionaryDefinitions = [], noSuggestDictionaries = [] } = settings;
     const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
     const colDicts = createDictionaryReferenceCollection(dictionaries.concat(colNoSug.enabled()));
