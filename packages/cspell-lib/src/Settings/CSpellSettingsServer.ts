@@ -492,6 +492,7 @@ function merge(left: CSpellSettingsWST | CSpellSettingsI, right: CSpellSettingsW
         overrides: versionBasedMergeList(_left.overrides, _right.overrides, version),
         features: mergeObjects(_left.features, _right.features),
         source: mergeSources(_left, _right),
+        description: undefined,
         globRoot: undefined,
         import: undefined,
         __imports: mergeImportRefs(_left, _right),
@@ -574,6 +575,11 @@ export function calcOverrideSettings(settings: CSpellSettingsWST, filename: stri
     return result;
 }
 
+/**
+ *
+ * @param settings - settings to finalize
+ * @returns settings where all globs and file paths have been resolved.
+ */
 export function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI {
     return _finalizeSettings(toInternalSettings(settings));
 }
@@ -646,21 +652,15 @@ export function clearCachedSettingsFiles(): void {
     cspellConfigExplorerSync.clearCaches();
 }
 
-const globMatcherCache = new Map<Glob | Glob[], GlobMatcher>();
-const globMatcherCacheMaxSize = 1000;
-
+/**
+ * @param filename - filename
+ * @param globs - globs
+ * @returns true if it matches
+ * @deprecated true
+ * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
+ */
 export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean {
-    const matcher = globMatcherCache.get(globs);
-    if (matcher) {
-        return matcher.match(filename);
-    }
-
-    if (globMatcherCache.size >= globMatcherCacheMaxSize) {
-        globMatcherCache.clear();
-    }
-
     const m = new GlobMatcher(globs);
-    globMatcherCache.set(globs, m);
     return m.match(filename);
 }
 
@@ -763,7 +763,6 @@ function resolveGlobRoot(settings: CSpellSettingsWST, pathToSettingsFile: string
     const isVSCode = path.basename(settingsFileDirRaw) === '.vscode';
     const settingsFileDir = isVSCode ? path.dirname(settingsFileDirRaw) : settingsFileDirRaw;
     const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
-    const cwd = resolveCwd();
     const defaultGlobRoot = envGlobRoot ?? '${cwd}';
     const rawRoot =
         settings.globRoot ??
@@ -772,7 +771,8 @@ function resolveGlobRoot(settings: CSpellSettingsWST, pathToSettingsFile: string
         (isVSCode && !settings.version)
             ? defaultGlobRoot
             : settingsFileDir);
-    const globRoot = path.resolve(settingsFileDir, rawRoot.replace('${cwd}', cwd));
+
+    const globRoot = rawRoot.startsWith('${cwd}') ? rawRoot : path.resolve(settingsFileDir, rawRoot);
     return globRoot;
 }
 

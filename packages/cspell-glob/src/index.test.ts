@@ -6,4 +6,8 @@ describe('Validate index loads', () => {
         expect(index.GlobMatcher).toBeDefined();
         expect(typeof index.fileOrGlobToGlob).toBe('function');
     });
+
+    test('API', () => {
+        expect(index).toMatchSnapshot();
+    });
 });

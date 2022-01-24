@@ -1,8 +1,15 @@
-import { fileOrGlobToGlob, normalizeGlobPatterns, normalizeGlobToRoot, __testing__ } from './globHelper';
+import {
+    fileOrGlobToGlob,
+    normalizeGlobPatterns,
+    normalizeGlobToRoot,
+    __testing__,
+    normalizeGlobPattern,
+} from './globHelper';
 import { win32, posix } from 'path';
 import * as path from 'path';
 import { GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes';
 import mm = require('micromatch');
+import { NormalizeOptions } from '.';
 
 const { rebaseGlob, trimGlob } = __testing__;
 
@@ -210,7 +217,7 @@ describe('Validate Glob Normalization to root', () => {
             const glob: GlobPatternNormalized = globPath.glob;
             root = path.resolve(root);
             const shouldMatch = !file.startsWith('!');
-            file = file.replace(/!$/, '');
+            file = file.replace(/^!/, '');
             file = path.relative(root, path.resolve(root, file)).replace(/\\/g, '/');
 
             const result = normalizeGlobToRoot(glob, root, path);
@@ -239,6 +246,7 @@ describe('Validate Glob Normalization to root', () => {
         ${mg('/node_modules')}                                  | ${'project'} | ${e(mGlob(gg('node_modules', 'node_modules/**'), { rawGlob: '/node_modules' }))}                | ${'/node_modules'}
         ${mg('node_modules/')}                                  | ${'project'} | ${e(mGlob(gg('**/node_modules/**/*'), { rawGlob: 'node_modules/' }))}                           | ${'node_modules/'}
         ${mg('/node_modules/')}                                 | ${'project'} | ${e(mGlob(gg('node_modules/**/*'), { rawGlob: '/node_modules/' }))}                             | ${'/node_modules/'}
+        ${mg({ glob: '/node_modules/' })}                       | ${'project'} | ${e(mGlob(gg('node_modules/**/*'), { rawGlob: '/node_modules/' }))}                             | ${'/node_modules/'}
         ${mg('i18/en_US')}                                      | ${'project'} | ${e(mGlob(gg('i18/en_US', 'i18/en_US/**'), { rawGlob: 'i18/en_US' }))}                          | ${'i18/en_US'}
     `('tests normalization nested "$comment" root: "$root"', ({ globs, root, expectedGlobs }: TestCase) => {
         root = path.resolve(root);
@@ -295,6 +303,31 @@ describe('Validate Glob Normalization to root', () => {
             normalizeGlobToRoot(p, root, path)
         );
         expect(r).toEqual(expectedGlobs);
+    });
+
+    function nOpts(opts: Partial<NormalizeOptions> = {}): Required<NormalizeOptions> {
+        const { nodePath = pathPosix } = opts;
+        const { root = nodePath.resolve(), cwd = nodePath.resolve(), nested = false } = opts;
+        return { root, cwd, nested, nodePath };
+    }
+
+    function gN(glob: string, root: string, rawGlob: string, rawRoot: string): GlobPatternNormalized {
+        return { glob, root, rawGlob, rawRoot };
+    }
+
+    test.each`
+        glob                                         | options                         | expected
+        ${'*.ts'}                                    | ${nOpts()}                      | ${[gN('*.ts', nOpts().root, '*.ts', nOpts().root)]}
+        ${'${cwd}/*.ts'}                             | ${nOpts()}                      | ${[gN('*.ts', nOpts().root, '${cwd}/*.ts', nOpts().root)]}
+        ${'${cwd}/*.ts'}                             | ${nOpts({ nested: true })}      | ${[gN('*.ts', nOpts().root, '${cwd}/*.ts', nOpts().root), gN('*.ts/**', nOpts().root, '${cwd}/*.ts', nOpts().root)]}
+        ${{ glob: '*.ts', root: '' }}                | ${nOpts()}                      | ${[gN('*.ts', nOpts().root, '*.ts', '')]}
+        ${{ glob: '*.ts', root: '${cwd}/a' }}        | ${nOpts()}                      | ${[gN('*.ts', nOpts().nodePath.resolve('a'), '*.ts', '${cwd}/a')]}
+        ${{ glob: '*.ts', root: '${cwd}/a' }}        | ${nOpts({ root: 'myRoot' })}    | ${[gN('*.ts', nOpts().nodePath.resolve('a'), '*.ts', '${cwd}/a')]}
+        ${{ glob: '*.ts', root: '${cwd}/a' }}        | ${nOpts({ cwd: 'myCwd' })}      | ${[gN('*.ts', nOpts().nodePath.resolve('myCwd/a'), '*.ts', '${cwd}/a')]}
+        ${{ glob: '${cwd}/*.ts', root: 'a' }}        | ${nOpts({ cwd: 'myCwd' })}      | ${[gN('*.ts', nOpts().nodePath.resolve('myCwd'), '${cwd}/*.ts', 'a')]}
+        ${{ glob: 'a/*.ts', root: '${cwd}/myRoot' }} | ${nOpts({ root: 'otherRoot' })} | ${[gN('a/*.ts', nOpts().nodePath.resolve('myRoot'), 'a/*.ts', '${cwd}/myRoot')]}
+    `('normalizeGlobPattern glob: "$glob", options: $options', ({ glob, options, expected }) => {
+        expect(normalizeGlobPattern(glob, options)).toEqual(expected);
     });
 });
 

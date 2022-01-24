@@ -93,10 +93,22 @@ declare function readSettingsFiles(filenames: string[]): CSpellSettingsI;
 declare function mergeSettings(left: CSpellSettingsWST | CSpellSettingsI, ...settings: (CSpellSettingsWST | CSpellSettingsI)[]): CSpellSettingsI;
 declare function mergeInDocSettings(left: CSpellSettingsWST, right: CSpellSettingsWST): CSpellSettingsWST;
 declare function calcOverrideSettings(settings: CSpellSettingsWST, filename: string): CSpellSettingsI;
+/**
+ *
+ * @param settings - settings to finalize
+ * @returns settings where all globs and file paths have been resolved.
+ */
 declare function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI;
 declare function getGlobalSettings(): CSpellSettingsI;
 declare function getCachedFileSize(): number;
 declare function clearCachedSettingsFiles(): void;
+/**
+ * @param filename - filename
+ * @param globs - globs
+ * @returns true if it matches
+ * @deprecated true
+ * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
+ */
 declare function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean;
 /**
  * Return a list of Setting Sources used to create this Setting.
