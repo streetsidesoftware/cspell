@@ -1,4 +1,4 @@
-import { RegExpPatternDefinition } from '.';
+import { RegExpPatternDefinition } from '@cspell/cspell-types';
 import { isDefined } from '../util/util';
 import { resolvePatterns } from './patterns';
 

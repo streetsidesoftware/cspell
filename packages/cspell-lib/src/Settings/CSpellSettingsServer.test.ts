@@ -2,7 +2,7 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef }
 import * as path from 'path';
 import { URI } from 'vscode-uri';
 import { logError, logWarning } from '../util/logger';
-import { createCSpellSettingsInternal as csi } from './CSpellSettingsInternalDef';
+import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import {
     calcOverrideSettings,
     checkFilenameMatchesGlob,

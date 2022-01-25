@@ -2,7 +2,7 @@ import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-type
 import { genSequence } from 'gensequence';
 import { LanguageId } from './LanguageIds';
 import { finalizeSettings, mergeSettings } from './Settings';
-import { CSpellSettingsInternal } from './Settings/CSpellSettingsInternalDef';
+import { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
 import {
     getDictionaryInternal,

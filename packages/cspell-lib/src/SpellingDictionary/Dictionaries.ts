@@ -1,4 +1,4 @@
-import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Settings/CSpellSettingsInternalDef';
+import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';

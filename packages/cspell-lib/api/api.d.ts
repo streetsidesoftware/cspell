@@ -1,11 +1,11 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, PnPSettings, ImportFileRef, ReplaceMap, SuggestionCostsDefs, TextOffset, TextDocumentOffset, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, SuggestionCostsDefs, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
-import { URI } from 'vscode-uri';
-import { CompoundWordsMethod, SuggestionResult, SuggestionCollector } from 'cspell-trie-lib';
+import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import { Sequence } from 'gensequence';
 export * from 'cspell-io';
+import { URI } from 'vscode-uri';
 
 declare type ExclusionFunction = (fileUri: string) => boolean;
 declare type FileExclusionFunction = (file: string) => boolean;
@@ -44,92 +44,6 @@ declare namespace exclusionHelper_d {
     exclusionHelper_d_generateExclusionFunctionForUri as generateExclusionFunctionForUri,
     exclusionHelper_d_generateExclusionFunctionForFiles as generateExclusionFunctionForFiles,
   };
-}
-
-declare const SymbolCSpellSettingsInternal: unique symbol;
-interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
-    [SymbolCSpellSettingsInternal]: true;
-    dictionaryDefinitions?: DictionaryDefinitionInternal[];
-}
-declare type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
-interface DictionaryDefinitionInternal extends DictionaryDefinitionPreferred, Partial<DictionaryDefinitionCustomUniqueFields>, DictionaryDefinitionAugmented {
-}
-
-/**
- * Handles loading of `.pnp.js` and `.pnp.js` files.
- */
-
-declare type LoaderResult = URI | undefined;
-
-declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
-declare type CSpellSettingsI = CSpellSettingsInternal;
-declare const currentSettingsFileVersion = "0.2";
-declare const sectionCSpell = "cSpell";
-declare const defaultFileName = "cspell.json";
-declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-declare const defaultConfigFilenames: readonly string[];
-declare function readSettings(filename: string): CSpellSettingsI;
-declare function readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
-declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI;
-declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
-declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsI | undefined>;
-/**
- * Load a CSpell configuration files.
- * @param file - path or package reference to load.
- * @param pnpSettings - PnP settings
- * @returns normalized CSpellSettings
- */
-declare function loadConfig(file: string, pnpSettings?: PnPSettings): Promise<CSpellSettingsI>;
-declare function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult>;
-declare function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderResult;
-declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST;
-/**
- *
- * @param filenames - settings files to read
- * @returns combined configuration
- * @deprecated true
- */
-declare function readSettingsFiles(filenames: string[]): CSpellSettingsI;
-declare function mergeSettings(left: CSpellSettingsWST | CSpellSettingsI, ...settings: (CSpellSettingsWST | CSpellSettingsI)[]): CSpellSettingsI;
-declare function mergeInDocSettings(left: CSpellSettingsWST, right: CSpellSettingsWST): CSpellSettingsWST;
-declare function calcOverrideSettings(settings: CSpellSettingsWST, filename: string): CSpellSettingsI;
-/**
- *
- * @param settings - settings to finalize
- * @returns settings where all globs and file paths have been resolved.
- */
-declare function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI;
-declare function getGlobalSettings(): CSpellSettingsI;
-declare function getCachedFileSize(): number;
-declare function clearCachedSettingsFiles(): void;
-/**
- * @param filename - filename
- * @param globs - globs
- * @returns true if it matches
- * @deprecated true
- * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
- */
-declare function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean;
-/**
- * Return a list of Setting Sources used to create this Setting.
- * @param settings the settings to search
- */
-declare function getSources(settings: CSpellSettingsWST): CSpellSettingsWST[];
-interface ImportFileRefWithError extends ImportFileRef {
-    error: Error;
-}
-declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[];
-interface ConfigurationDependencies {
-    configFiles: string[];
-    dictionaryFiles: string[];
-}
-declare function extractDependencies(settings: CSpellSettingsWST | CSpellSettingsI): ConfigurationDependencies;
-
-declare function getDefaultSettings(): CSpellSettingsInternal;
-
-declare class ImportError extends Error {
-    readonly cause?: Error;
-    constructor(msg: string, cause?: Error | unknown);
 }
 
 interface ListGlobalImportsResult {
@@ -294,6 +208,21 @@ declare class SpellingDictionaryCollection implements SpellingDictionary {
     private _isNoSuggestWord;
 }
 
+declare const SymbolCSpellSettingsInternal: unique symbol;
+interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
+    [SymbolCSpellSettingsInternal]: true;
+    dictionaryDefinitions?: DictionaryDefinitionInternal[];
+}
+declare type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
+interface DictionaryDefinitionInternal extends DictionaryDefinitionPreferred, Partial<DictionaryDefinitionCustomUniqueFields>, DictionaryDefinitionAugmented {
+    /**
+     * Optional weight map used to improve suggestions.
+     */
+    weightMap?: WeightMap;
+    /** The path to the config file that contains this dictionary definition */
+    __source?: string;
+}
+
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
 
 interface IterableLike<T> {
@@ -423,6 +352,83 @@ declare namespace text_d {
 
 declare type LanguageId = string;
 declare function getLanguagesForExt(ext: string): string[];
+
+/**
+ * Handles loading of `.pnp.js` and `.pnp.js` files.
+ */
+
+declare type LoaderResult = URI | undefined;
+
+declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
+declare type CSpellSettingsI = CSpellSettingsInternal;
+declare const currentSettingsFileVersion = "0.2";
+declare const sectionCSpell = "cSpell";
+declare const defaultFileName = "cspell.json";
+declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
+declare const defaultConfigFilenames: readonly string[];
+declare function readSettings(filename: string): CSpellSettingsI;
+declare function readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
+declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI;
+declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
+declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsI | undefined>;
+/**
+ * Load a CSpell configuration files.
+ * @param file - path or package reference to load.
+ * @param pnpSettings - PnP settings
+ * @returns normalized CSpellSettings
+ */
+declare function loadConfig(file: string, pnpSettings?: PnPSettings): Promise<CSpellSettingsI>;
+declare function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult>;
+declare function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderResult;
+declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST;
+/**
+ *
+ * @param filenames - settings files to read
+ * @returns combined configuration
+ * @deprecated true
+ */
+declare function readSettingsFiles(filenames: string[]): CSpellSettingsI;
+declare function mergeSettings(left: CSpellSettingsWST | CSpellSettingsI, ...settings: (CSpellSettingsWST | CSpellSettingsI)[]): CSpellSettingsI;
+declare function mergeInDocSettings(left: CSpellSettingsWST, right: CSpellSettingsWST): CSpellSettingsWST;
+declare function calcOverrideSettings(settings: CSpellSettingsWST, filename: string): CSpellSettingsI;
+/**
+ *
+ * @param settings - settings to finalize
+ * @returns settings where all globs and file paths have been resolved.
+ */
+declare function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI;
+declare function getGlobalSettings(): CSpellSettingsI;
+declare function getCachedFileSize(): number;
+declare function clearCachedSettingsFiles(): void;
+/**
+ * @param filename - filename
+ * @param globs - globs
+ * @returns true if it matches
+ * @deprecated true
+ * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
+ */
+declare function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]): boolean;
+/**
+ * Return a list of Setting Sources used to create this Setting.
+ * @param settings the settings to search
+ */
+declare function getSources(settings: CSpellSettingsWST): CSpellSettingsWST[];
+interface ImportFileRefWithError extends ImportFileRef {
+    error: Error;
+}
+declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[];
+interface ConfigurationDependencies {
+    configFiles: string[];
+    dictionaryFiles: string[];
+}
+declare function extractDependencies(settings: CSpellSettingsWST | CSpellSettingsI): ConfigurationDependencies;
+
+declare function getDefaultSettings(): CSpellSettingsInternal;
+
+declare class ImportError extends Error {
+    readonly cause?: Error;
+    constructor(msg: string, cause?: Error | unknown);
+}
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellUserSettings;
 

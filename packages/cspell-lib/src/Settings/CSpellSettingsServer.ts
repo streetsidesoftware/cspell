@@ -21,8 +21,8 @@ import {
     createCSpellSettingsInternal as csi,
     CSpellSettingsInternal,
     isCSpellSettingsInternal,
-} from './CSpellSettingsInternalDef';
-import { calcDictionaryDefsToLoad, normalizePathForDictDefs } from './DictionarySettings';
+} from '../Models/CSpellSettingsInternalDef';
+import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
 import { resolvePatterns } from './patterns';
@@ -608,7 +608,7 @@ export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWS
 
     const { dictionaryDefinitions: defs, ...rest } = settings;
 
-    const dictionaryDefinitions = normalizePathForDictDefs(
+    const dictionaryDefinitions = mapDictDefsToInternal(
         defs,
         filenameToDirectory(settings.source?.filename) || resolveCwd()
     );
@@ -814,11 +814,11 @@ function toGlobDef(
 type NormalizeDictionaryDefsParams = Pick<CSpellUserSettings, 'dictionaryDefinitions' | 'languageSettings'>;
 
 function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathToSettingsFile: string) {
-    const dictionaryDefinitions = normalizePathForDictDefs(settings.dictionaryDefinitions, pathToSettingsFile);
+    const dictionaryDefinitions = mapDictDefsToInternal(settings.dictionaryDefinitions, pathToSettingsFile);
     const languageSettings = settings.languageSettings?.map((langSetting) =>
         util.clean({
             ...langSetting,
-            dictionaryDefinitions: normalizePathForDictDefs(langSetting.dictionaryDefinitions, pathToSettingsFile),
+            dictionaryDefinitions: mapDictDefsToInternal(langSetting.dictionaryDefinitions, pathToSettingsFile),
         })
     );
 

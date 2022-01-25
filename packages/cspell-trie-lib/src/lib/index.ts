@@ -1,6 +1,7 @@
 export { consolidate } from './consolidate';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance';
-export type { SuggestionCostMapDef, WeightMap } from './distance';
+export type { WeightMap } from './distance';
+export type { SuggestionCostMapDef } from './models/suggestionCostsDef';
 export type { FindFullResult } from './find';
 export { ExportOptions, importTrie, serializeTrie } from './io/importExport';
 export { parseDictionary, parseDictionaryLines } from './SimpleDictionaryParser';

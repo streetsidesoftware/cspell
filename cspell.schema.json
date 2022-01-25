@@ -430,10 +430,19 @@
     "HunspellInformation": {
       "additionalProperties": false,
       "properties": {
+        "aff": {
+          "description": "Selected Hunspell AFF content. The content must be UTF-8\n\nSections:\n- TRY\n- MAP\n- REP\n- KEY\n- ICONV\n- OCONV\n\nExample: ```hunspell # Comment TRY aeistlunkodmrvpgjhäõbüoöfcwzxðqþ` MAP aàâäAÀÂÄ MAP eéèêëEÉÈÊË MAP iîïyIÎÏY MAP oôöOÔÖ MAP (IJ)(Ĳ) ```",
+          "type": "string"
+        },
         "costs": {
           "additionalProperties": false,
           "description": "The costs to apply when using the hunspell settings",
           "properties": {
+            "firstLetterPenalty": {
+              "default": 4,
+              "description": "The extra cost incurred for changing the first letter of a word. This value should be less than `100 - tryCharCost`.",
+              "type": "number"
+            },
             "ioConvertCost": {
               "default": 30,
               "description": "The cost to convert between convert pairs.\n\nThe value should be slightly higher than the mapCost.",
@@ -461,71 +470,11 @@
             }
           },
           "type": "object"
-        },
-        "inConvert": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          ]
-        },
-        "keyboard": {
-          "description": "This represents the layout of a common keyboard. Used for adjacency mistakes.\n\nHunspell: ```hunspell KEY qwertyuiop|asdfghjkl|zxcvbnm ``` Use: ```yaml keyboard: qwertyuiop|asdfghjkl|zxcvbnm ``` <!--- cspell:ignore asdfghjkl qwertyuiop zxcvbnm -->",
-          "type": "string"
-        },
-        "mapSets": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          ],
-          "description": "This defines characters that are good substitutes for each other.\n- A `()` is need for multi character sequences like letters with multiple accents.\n- Separate unrelated characters with `|` or `\\n`\n\nExample:\n- Hunspell:   ```hunspell   MAP aàâäAÀÂÄ   MAP eéèêëEÉÈÊË   MAP iîïyIÎÏY   MAP oôöOÔÖ   MAP (IJ)(Ĳ)   ```\n- Use:   `yaml`   ```yaml   mapSets: |     aàâäAÀÂÄ|eéèêëEÉÈÊË`     eéèêëEÉÈÊË|iîïyIÎÏY     oôöOÔÖ|(IJ)(Ĳ)   ``` <!--- cspell:ignore aàâä eéèêë iîïy -->"
-        },
-        "outConvert": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          ],
-          "description": "Output Conversions"
-        },
-        "replace": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          ],
-          "description": "Common Substitutions. Special characters:\n- `^` - matches the beginning of a word.\n- `$` - matches the end of a word.\n\nHunspell: ```hunspell REP c ss REP e ĳ REP é ee REP g ch REP ï ii REP t d\t# gebiest=>gebiesd REP u ĳ ```\n\nUse: ```yaml replace: |   c ss   e ĳ   é ee   g ch   ï ii   t d   u ĳ ```\n\n<!--- cspell:ignore gebiesd gebiest -->"
-        },
-        "tryChars": {
-          "description": "This is generally the alphabet used in the dictionary. It stands for the characters to try using for substitutions when looking for a suggestions.\n\nExample:\n- Hunspell:   ```hunspell   TRY aeistlunkodmrvpgjhäõbüoöfcwzxðqþ`   ```\n- Use: yaml   ```yaml   tryChars: \"aeistlunkodmrvpgjhäõbüoöfcwzxðqþ\"   ``` <!--- cspell:ignore aeistlunkodmrvpgjhäõbüoöfcwzxðqþ  --",
-          "type": "string"
         }
       },
+      "required": [
+        "aff"
+      ],
       "type": "object"
     },
     "LanguageId": {

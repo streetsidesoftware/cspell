@@ -1,6 +1,7 @@
-import { SuggestionCostMapDef, WeightMap } from '.';
-import { distanceAStarWeighted } from './distanceAStarWeighted';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
+import { distanceAStarWeighted, distanceAStarWeightedEx, ExResult } from './distanceAStarWeighted';
 import { levenshteinDistance } from './levenshtein';
+import type { WeightMap } from './weightedMaps';
 import { addDefToWeightMap, createWeightMap } from './weightedMaps';
 
 describe('distanceAStar', () => {
@@ -16,6 +17,19 @@ describe('distanceAStar', () => {
         const expected = levenshteinDistance(wordA, wordB) * 100;
         expect(distanceAStarWeighted(wordA, wordB, createWeightMap())).toBe(expected);
         expect(distanceAStarWeighted(wordB, wordA, createWeightMap())).toBe(expected);
+    });
+
+    test.each`
+        wordA        | wordB
+        ${''}        | ${''}
+        ${'apple'}   | ${'apple'}
+        ${'apple'}   | ${''}
+        ${'apple'}   | ${'apples'}
+        ${'apple'}   | ${'maple'}
+        ${'grapple'} | ${'maples'}
+    `('distanceAStarWeightedEx vs Levenshtein "$wordA" "$wordB"', ({ wordA, wordB }) => {
+        expect(exResultToString(distanceAStarWeightedEx(wordA, wordB, createWeightMap()))).toMatchSnapshot();
+        expect(exResultToString(distanceAStarWeightedEx(wordB, wordA, createWeightMap()))).toMatchSnapshot();
     });
 
     // cspell:ignore aeiou
@@ -64,7 +78,7 @@ describe('distanceAStar', () => {
         ${'re-wind'}         | ${'rewind'}              | ${calcWeightMap()}             | ${202}
         ${'re-'}             | ${'re'}                  | ${calcWeightMap()}             | ${201}
         ${"I'm talk'n to u"} | ${'I am talking to you'} | ${calcWeightMap()}             | ${302}
-        ${"wear'd u go?"}    | ${'where did you go?'}   | ${calcWeightMap()}             | ${304}
+        ${"wear'd u go?"}    | ${'where did you go?'}   | ${calcWeightMap()}             | ${204}
     `(
         'distanceAStar adv "$wordA" "$wordB" $map',
         ({
@@ -83,7 +97,87 @@ describe('distanceAStar', () => {
             expect(distanceAStarWeighted(wordB, wordA, weightMap)).toBe(expected);
         }
     );
+
+    test.each`
+        wordA                | wordB                    | weightMap                      | expected
+        ${''}                | ${''}                    | ${undefined}                   | ${0}
+        ${'walk'}            | ${'walking'}             | ${undefined}                   | ${300}
+        ${'walk'}            | ${''}                    | ${calcWeightMap(mapLetters())} | ${200}
+        ${'1234'}            | ${''}                    | ${calcWeightMap(mapLetters())} | ${804}
+        ${'walk'}            | ${'walking'}             | ${calcWeightMap()}             | ${50}
+        ${'wake up'}         | ${'woken up'}            | ${calcWeightMap()}             | ${145}
+        ${'definition'}      | ${'defunishun'}          | ${calcWeightMap()}             | ${45 + 40}
+        ${'reputation'}      | ${'repetition'}          | ${calcWeightMap()}             | ${45 + 45}
+        ${'gr8'}             | ${'great'}               | ${calcWeightMap()}             | ${250}
+        ${'read'}            | ${'read7'}               | ${calcWeightMap()}             | ${201}
+        ${'airplane'}        | ${'aeroplane'}           | ${calcWeightMap()}             | ${60}
+        ${'talked'}          | ${'walking'}             | ${calcWeightMap()}             | ${150}
+        ${'kings'}           | ${'king'}                | ${calcWeightMap()}             | ${50}
+        ${'re-wind'}         | ${'rewind'}              | ${calcWeightMap()}             | ${202}
+        ${'re-'}             | ${'re'}                  | ${calcWeightMap()}             | ${201}
+        ${"I'm talk'n to u"} | ${'I am talking to you'} | ${calcWeightMap()}             | ${302}
+        ${"wear'd u go?"}    | ${'where did you go?'}   | ${calcWeightMap()}             | ${204}
+    `(
+        'distanceAStar adv "$wordA" "$wordB" $map',
+        ({
+            wordA,
+            wordB,
+            weightMap,
+            expected,
+        }: {
+            wordA: string;
+            wordB: string;
+            weightMap?: WeightMap;
+            expected: number;
+        }) => {
+            weightMap = weightMap || createWeightMap();
+            const r1 = distanceAStarWeightedEx(wordA, wordB, weightMap);
+            const r2 = distanceAStarWeightedEx(wordB, wordA, weightMap);
+            expect(exResultToString(r1)).toMatchSnapshot();
+            expect(exResultToString(r2)).toMatchSnapshot();
+            expect(r1?.cost).toBe(expected);
+            expect(r2?.cost).toBe(expected);
+        }
+    );
 });
+
+function pL(s: string, w: number) {
+    return (' '.repeat(w) + s).slice(-w);
+}
+
+function pR(s: string, w: number) {
+    return (s + ' '.repeat(w)).slice(0, w);
+}
+
+function exResultToString(ex: ExResult | undefined): string {
+    if (!ex) return '<undefined>';
+
+    const { cost, segments } = ex;
+    const asString = segments.map(({ a, b, c, p }) => ({
+        a: `<${a}>`,
+        b: `<${b}>`,
+        c: c.toString(10),
+        p: p.toString(10),
+    }));
+    asString.push({
+        a: '',
+        b: '',
+        c: ' = ' + segments.reduce((sum, { c }) => sum + c, 0).toString(10),
+        p: ' = ' + segments.reduce((sum, { p }) => sum + p, 0).toString(10),
+    });
+    const parts = asString.map(({ a, b, c, p }) => ({
+        a,
+        b,
+        c,
+        p,
+        w: Math.max(a.length, b.length, c.length, p.length),
+    }));
+    const a = 'a: |' + parts.map(({ a, w }) => pR(a, w)).join('|') + '|';
+    const b = 'b: |' + parts.map(({ b, w }) => pR(b, w)).join('|') + '|';
+    const c = 'c: |' + parts.map(({ c, w }) => pL(c, w)).join('|') + '|';
+    const p = 'p: |' + parts.map(({ p, w }) => pL(p, w)).join('|') + '|';
+    return `<${ex.a.slice(1, -1)}> -> <${ex.b.slice(1, -1)}> (${cost})\n${[a, b, c, p].join('\n')}\n`;
+}
 
 function mapLetters(cost = 50): SuggestionCostMapDef {
     const letters = 'a'

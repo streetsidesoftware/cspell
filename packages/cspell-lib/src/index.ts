@@ -1,5 +1,6 @@
 import * as ExclusionHelper from './exclusionHelper';
-import { clearCachedSettingsFiles, CSpellUserSettings } from './Settings';
+import { clearCachedSettingsFiles } from './Settings';
+import { CSpellUserSettings } from '@cspell/cspell-types';
 import { toInternalSettings } from './Settings/CSpellSettingsServer';
 import * as Link from './Settings/index.link';
 import { refreshDictionaryCache, getDictionaryInternal, SpellingDictionaryCollection } from './SpellingDictionary';
@@ -9,6 +10,7 @@ export * from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { getLanguagesForExt } from './LanguageIds';
 export * from './Settings';
+export * from '@cspell/cspell-types';
 export { defaultFileName as defaultSettingsFilename } from './Settings';
 export {
     combineTextAndLanguageSettings,

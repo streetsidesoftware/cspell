@@ -78,7 +78,7 @@ describe('Validate DictionarySettings', () => {
             path: path.join('~', basePath),
         };
 
-        const nDef = DictSettings.normalizePathForDictDef(def, pathToConfig);
+        const nDef = DictSettings.mapDictDefToInternal(def, pathToConfig);
         expect(nDef).toEqual({
             name: 'words',
             path: absolutePath,
@@ -91,7 +91,7 @@ describe('Validate DictionarySettings', () => {
             file: path.basename(basePath),
         };
 
-        const nLegacyDef = DictSettings.normalizePathForDictDef(legacyDef, pathToConfig);
+        const nLegacyDef = DictSettings.mapDictDefToInternal(legacyDef, pathToConfig);
 
         expect(nLegacyDef).toEqual(nDef);
     });
@@ -103,14 +103,14 @@ describe('Validate DictionarySettings', () => {
             path: './words.txt',
         };
 
-        const normalizedDef = DictSettings.normalizePathForDictDef(def, configFile);
+        const normalizedDef = DictSettings.mapDictDefToInternal(def, configFile);
         expect(DictSettings.isDictionaryDefinitionWithSource(normalizedDef)).toBe(true);
         expect(normalizedDef).toEqual(expect.objectContaining({ __source: configFile }));
 
-        const normalizedDef2 = DictSettings.normalizePathForDictDef(normalizedDef, configFile);
+        const normalizedDef2 = DictSettings.mapDictDefToInternal(normalizedDef, configFile);
         expect(normalizedDef2).toBe(normalizedDef);
 
-        expect(() => DictSettings.normalizePathForDictDef(normalizedDef, './different.config.json')).toThrowError(
+        expect(() => DictSettings.mapDictDefToInternal(normalizedDef, './different.config.json')).toThrowError(
             'Trying to normalize a dictionary definition with a different source.'
         );
     });
