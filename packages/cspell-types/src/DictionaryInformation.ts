@@ -19,7 +19,7 @@ export interface DictionaryInformation {
     hunspellInformation?: HunspellInformation;
 }
 
-export interface HunspellInformation {
+export interface HunspellInformationParsed {
     /**
      * This is generally the alphabet used in the dictionary.
      * It stands for the characters to try using for substitutions
@@ -124,12 +124,77 @@ export interface HunspellInformation {
     costs?: HunspellCosts;
 }
 
+export interface HunspellInformation {
+    /**
+     * Selected Hunspell AFF content.
+     * The content must be UTF-8
+     *
+     * Sections:
+     * - TRY
+     * - MAP
+     * - REP
+     * - KEY
+     * - ICONV
+     * - OCONV
+     *
+     * Example:
+     * ```hunspell
+     * # Comment
+     * TRY aeistlunkodmrvpgjhäõbüoöfcwzxðqþ`
+     * MAP aàâäAÀÂÄ
+     * MAP eéèêëEÉÈÊË
+     * MAP iîïyIÎÏY
+     * MAP oôöOÔÖ
+     * MAP (IJ)(Ĳ)
+     * ```
+     */
+    aff: HunspellAffContent;
+
+    /** The costs to apply when using the hunspell settings */
+    costs?: HunspellCosts;
+}
+
+// cspell:ignore OCONV
+/**
+ * Selected Hunspell AFF content.
+ * The content must be UTF-8
+ *
+ * Sections:
+ * - TRY
+ * - NO-TRY
+ * - MAP
+ * - REP
+ * - KEY
+ * - ICONV
+ * - OCONV
+ *
+ * Example:
+ * ```hunspell
+ * # Comment
+ * TRY aeistlunkodmrvpgjhäõbüoöfcwzxðqþ`
+ * NO-TRY -0123456789 # Discourage adding numbers and dashes.
+ * MAP aàâäAÀÂÄ
+ * MAP eéèêëEÉÈÊË
+ * MAP iîïyIÎÏY
+ * MAP oôöOÔÖ
+ * MAP (IJ)(Ĳ)
+ * ```
+ */
+type HunspellAffContent = string;
+
 interface HunspellCosts {
     /**
      * The cost of inserting / deleting / or swapping any `tryChars`
      * @default 95
      */
     tryCharCost?: number;
+
+    /**
+     * The extra cost incurred for changing the first letter of a word.
+     * This value should be less than `100 - tryCharCost`.
+     * @default 4
+     */
+    firstLetterPenalty?: number;
 
     /**
      * The cost of replacing or swapping any adjacent keyboard characters.

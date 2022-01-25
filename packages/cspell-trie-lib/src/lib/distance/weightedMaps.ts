@@ -1,4 +1,4 @@
-import { SuggestionCostMapDef } from './suggestionCostsDef';
+import { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 
 export type WeightedRepMapTrie = Record<string, WeightedRepTrieNode>;
 
@@ -108,6 +108,32 @@ function highest(a: number | undefined, b: number | undefined): number | undefin
     return a >= b ? a : b;
 }
 
+export function* splitMapSubstringsIterable(map: string): Iterable<string> {
+    let seq = '';
+    let mode = 0;
+    for (const char of map) {
+        if (mode && char === ')') {
+            yield seq;
+            mode = 0;
+            continue;
+        }
+        if (mode) {
+            seq += char;
+            continue;
+        }
+        if (char === '(') {
+            mode = 1;
+            seq = '';
+            continue;
+        }
+        yield char;
+    }
+}
+
+export function splitMapSubstrings(map: string): string[] {
+    return [...splitMapSubstringsIterable(map)];
+}
+
 /**
  * Splits a WeightedMapDef.map
  * @param map
@@ -117,26 +143,6 @@ function splitMap(def: Pick<SuggestionCostMapDef, 'map'>): string[][] {
 
     const sets = map.split('|');
     return sets.map(splitMapSubstrings).filter((s) => s.length > 0);
-}
-
-function splitMapSubstrings(map: string): string[] {
-    const values = [];
-    const len = map.length;
-
-    for (let i = 0; i < len; ++i) {
-        const c = map[i];
-        if (c !== '(') {
-            values.push(c);
-            continue;
-        }
-        const s = i + 1;
-        while (map[++i] !== ')' && i < len) {
-            // empty
-        }
-        values.push(map.slice(s, i));
-    }
-
-    return values.map((s) => s.trim()).filter((s) => !!s);
 }
 
 function addToTrieCost(trie: TrieCost, str: string, cost: number, penalties: number | undefined): void {

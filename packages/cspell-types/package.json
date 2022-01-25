@@ -18,7 +18,7 @@
     "build": "npm run compile && npm run build-schema",
     "build-dev": "tsc -p tsconfig.dev.json",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && cp ./cspell.schema.json ../..",
-    "build-docs": "typedoc --out ../../docs/types/cspell-types src/index.ts",
+    "build-docs": "rimraf ../../docs/types/cspell-types && typedoc --out ../../docs/types/cspell-types src/index.ts",
     "test-build-docs": "typedoc --out ./temp/docs src/index.ts",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",

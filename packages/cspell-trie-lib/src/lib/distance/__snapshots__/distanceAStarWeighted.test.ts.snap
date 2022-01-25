@@ -1,0 +1,415 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`distanceAStar distanceAStar adv "" "" $map 1`] = `
+"<> -> <> (0)
+a: |<^>|<$>|    |
+b: |<^>|<$>|    |
+c: |  0|  0| = 0|
+p: |  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "" "" $map 2`] = `
+"<> -> <> (0)
+a: |<^>|<$>|    |
+b: |<^>|<$>|    |
+c: |  0|  0| = 0|
+p: |  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "1234" "" $map 1`] = `
+"<1234> -> <> (804)
+a: |<^>|<1>|<2>|<3>|<4>|<$>|      |
+b: |<^>|<> |<> |<> |<> |<$>|      |
+c: |  0|  1|  1|  1|  1|  0|   = 4|
+p: |  0|200|200|200|200|  0| = 800|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "1234" "" $map 2`] = `
+"<> -> <1234> (804)
+a: |<^>|<> |<> |<> |<> |<$>|      |
+b: |<^>|<1>|<2>|<3>|<4>|<$>|      |
+c: |  0|  1|  1|  1|  1|  0|   = 4|
+p: |  0|200|200|200|200|  0| = 800|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "I'm talk'n to u" "I am talking to you" $map 1`] = `
+"<I'm talk'n to u> -> <I am talking to you> (302)
+a: |<^>|<I'm> |< >|<t>|<a>|<l>|<k>|<'>|<n>|<> |< >|<t>|<o>|< >|<u>  |<$>|      |
+b: |<^>|<I am>|< >|<t>|<a>|<l>|<k>|<i>|<n>|<g>|< >|<t>|<o>|< >|<you>|<$>|      |
+c: |  0|    51|  0|  0|  0|  0|  0|100|  0|100|  0|  0|  0|  0|   51|  0| = 302|
+p: |  0|     0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|    0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "I'm talk'n to u" "I am talking to you" $map 2`] = `
+"<I am talking to you> -> <I'm talk'n to u> (302)
+a: |<^>|<I am>|< >|<t>|<a>|<l>|<k>|<i>|<n>|<g>|< >|<t>|<o>|< >|<you>|<$>|      |
+b: |<^>|<I'm> |< >|<t>|<a>|<l>|<k>|<'>|<n>|<> |< >|<t>|<o>|< >|<u>  |<$>|      |
+c: |  0|    51|  0|  0|  0|  0|  0|100|  0|100|  0|  0|  0|  0|   51|  0| = 302|
+p: |  0|     0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|    0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "airplane" "aeroplane" $map 1`] = `
+"<airplane> -> <aeroplane> (60)
+a: |<^>|<air> |<p>|<l>|<a>|<n>|<e>|<$>|     |
+b: |<^>|<aero>|<p>|<l>|<a>|<n>|<e>|<$>|     |
+c: |  0|    60|  0|  0|  0|  0|  0|  0| = 60|
+p: |  0|     0|  0|  0|  0|  0|  0|  0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "airplane" "aeroplane" $map 2`] = `
+"<aeroplane> -> <airplane> (60)
+a: |<^>|<aero>|<p>|<l>|<a>|<n>|<e>|<$>|     |
+b: |<^>|<air> |<p>|<l>|<a>|<n>|<e>|<$>|     |
+c: |  0|    60|  0|  0|  0|  0|  0|  0| = 60|
+p: |  0|     0|  0|  0|  0|  0|  0|  0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "definition" "defunishun" $map 1`] = `
+"<definition> -> <defunishun> (85)
+a: |<^>|<d>|<e>|<f>|<i>|<n>|<i>|<tion>|<$>|     |
+b: |<^>|<d>|<e>|<f>|<u>|<n>|<i>|<shun>|<$>|     |
+c: |  0|  0|  0|  0| 45|  0|  0|    40|  0| = 85|
+p: |  0|  0|  0|  0|  0|  0|  0|     0|  0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "definition" "defunishun" $map 2`] = `
+"<defunishun> -> <definition> (85)
+a: |<^>|<d>|<e>|<f>|<u>|<n>|<i>|<shun>|<$>|     |
+b: |<^>|<d>|<e>|<f>|<i>|<n>|<i>|<tion>|<$>|     |
+c: |  0|  0|  0|  0| 45|  0|  0|    40|  0| = 85|
+p: |  0|  0|  0|  0|  0|  0|  0|     0|  0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "gr8" "great" $map 1`] = `
+"<gr8> -> <great> (250)
+a: |<^>|<g>|<r>|<> |<> |<8>|<$>|      |
+b: |<^>|<g>|<r>|<e>|<a>|<t>|<$>|      |
+c: |  0|  0|  0| 75| 75|100|  0| = 250|
+p: |  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "gr8" "great" $map 2`] = `
+"<great> -> <gr8> (250)
+a: |<^>|<g>|<r>|<e>|<a>|<t>|<$>|      |
+b: |<^>|<g>|<r>|<> |<> |<8>|<$>|      |
+c: |  0|  0|  0| 75| 75|100|  0| = 250|
+p: |  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "kings" "king" $map 1`] = `
+"<kings> -> <king> (50)
+a: |<^>|<k>|<i>|<n>|<g>|<s$>|     |
+b: |<^>|<k>|<i>|<n>|<g>|<$> |     |
+c: |  0|  0|  0|  0|  0|  50| = 50|
+p: |  0|  0|  0|  0|  0|   0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "kings" "king" $map 2`] = `
+"<king> -> <kings> (50)
+a: |<^>|<k>|<i>|<n>|<g>|<$> |     |
+b: |<^>|<k>|<i>|<n>|<g>|<s$>|     |
+c: |  0|  0|  0|  0|  0|  50| = 50|
+p: |  0|  0|  0|  0|  0|   0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "re-" "re" $map 1`] = `
+"<re-> -> <re> (201)
+a: |<^>|<r>|<e>|<-$>|      |
+b: |<^>|<r>|<e>|<$> |      |
+c: |  0|  0|  0|   1|   = 1|
+p: |  0|  0|  0| 200| = 200|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "re-" "re" $map 2`] = `
+"<re> -> <re-> (201)
+a: |<^>|<r>|<e>|<$> |      |
+b: |<^>|<r>|<e>|<-$>|      |
+c: |  0|  0|  0|   1|   = 1|
+p: |  0|  0|  0| 200| = 200|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "re-wind" "rewind" $map 1`] = `
+"<re-wind> -> <rewind> (202)
+a: |<^>|<r>|<e>|<->|<w>|<i>|<n>|<d>|<$>|      |
+b: |<^>|<r>|<e>|<> |<w>|<i>|<n>|<d>|<$>|      |
+c: |  0|  0|  0|  2|  0|  0|  0|  0|  0|   = 2|
+p: |  0|  0|  0|200|  0|  0|  0|  0|  0| = 200|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "re-wind" "rewind" $map 2`] = `
+"<rewind> -> <re-wind> (202)
+a: |<^>|<r>|<e>|<> |<w>|<i>|<n>|<d>|<$>|      |
+b: |<^>|<r>|<e>|<->|<w>|<i>|<n>|<d>|<$>|      |
+c: |  0|  0|  0|  2|  0|  0|  0|  0|  0|   = 2|
+p: |  0|  0|  0|200|  0|  0|  0|  0|  0| = 200|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "read" "read7" $map 1`] = `
+"<read> -> <read7> (201)
+a: |<^>|<r>|<e>|<a>|<d>|<> |<$>|      |
+b: |<^>|<r>|<e>|<a>|<d>|<7>|<$>|      |
+c: |  0|  0|  0|  0|  0|  1|  0|   = 1|
+p: |  0|  0|  0|  0|  0|200|  0| = 200|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "read" "read7" $map 2`] = `
+"<read7> -> <read> (201)
+a: |<^>|<r>|<e>|<a>|<d>|<7>|<$>|      |
+b: |<^>|<r>|<e>|<a>|<d>|<> |<$>|      |
+c: |  0|  0|  0|  0|  0|  1|  0|   = 1|
+p: |  0|  0|  0|  0|  0|200|  0| = 200|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "reputation" "repetition" $map 1`] = `
+"<reputation> -> <repetition> (90)
+a: |<^>|<r>|<e>|<p>|<u>|<t>|<a>|<t>|<i>|<o>|<n>|<$>|     |
+b: |<^>|<r>|<e>|<p>|<e>|<t>|<i>|<t>|<i>|<o>|<n>|<$>|     |
+c: |  0|  0|  0|  0| 45|  0| 45|  0|  0|  0|  0|  0| = 90|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "reputation" "repetition" $map 2`] = `
+"<repetition> -> <reputation> (90)
+a: |<^>|<r>|<e>|<p>|<e>|<t>|<i>|<t>|<i>|<o>|<n>|<$>|     |
+b: |<^>|<r>|<e>|<p>|<u>|<t>|<a>|<t>|<i>|<o>|<n>|<$>|     |
+c: |  0|  0|  0|  0| 45|  0| 45|  0|  0|  0|  0|  0| = 90|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "talked" "walking" $map 1`] = `
+"<talked> -> <walking> (150)
+a: |<^>|<t>|<a>|<l>|<k>|<ed$> |      |
+b: |<^>|<w>|<a>|<l>|<k>|<ing$>|      |
+c: |  0|100|  0|  0|  0|    50| = 150|
+p: |  0|  0|  0|  0|  0|     0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "talked" "walking" $map 2`] = `
+"<walking> -> <talked> (150)
+a: |<^>|<w>|<a>|<l>|<k>|<ing$>|      |
+b: |<^>|<t>|<a>|<l>|<k>|<ed$> |      |
+c: |  0|100|  0|  0|  0|    50| = 150|
+p: |  0|  0|  0|  0|  0|     0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "wake up" "woken up" $map 1`] = `
+"<wake up> -> <woken up> (145)
+a: |<^>|<w>|<a>|<k>|<e>|<> |< >|<u>|<p>|<$>|      |
+b: |<^>|<w>|<o>|<k>|<e>|<n>|< >|<u>|<p>|<$>|      |
+c: |  0|  0| 45|  0|  0|100|  0|  0|  0|  0| = 145|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "wake up" "woken up" $map 2`] = `
+"<woken up> -> <wake up> (145)
+a: |<^>|<w>|<o>|<k>|<e>|<n>|< >|<u>|<p>|<$>|      |
+b: |<^>|<w>|<a>|<k>|<e>|<> |< >|<u>|<p>|<$>|      |
+c: |  0|  0| 45|  0|  0|100|  0|  0|  0|  0| = 145|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "walk" "" $map 1`] = `
+"<walk> -> <> (200)
+a: |<^>|<w>|<a>|<l>|<k>|<$>|      |
+b: |<^>|<> |<> |<> |<> |<$>|      |
+c: |  0| 50| 50| 50| 50|  0| = 200|
+p: |  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "walk" "" $map 2`] = `
+"<> -> <walk> (200)
+a: |<^>|<> |<> |<> |<> |<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<$>|      |
+c: |  0| 50| 50| 50| 50|  0| = 200|
+p: |  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "walk" "walking" $map 1`] = `
+"<walk> -> <walking> (300)
+a: |<^>|<w>|<a>|<l>|<k>|<> |<> |<> |<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<i>|<n>|<g>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|100|100|  0| = 300|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "walk" "walking" $map 2`] = `
+"<walking> -> <walk> (300)
+a: |<^>|<w>|<a>|<l>|<k>|<i>|<n>|<g>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<> |<> |<> |<$>|      |
+c: |  0|  0|  0|  0|  0|100|100|100|  0| = 300|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "walk" "walking" $map 3`] = `
+"<walk> -> <walking> (50)
+a: |<^>|<w>|<a>|<l>|<k>|<$>   |     |
+b: |<^>|<w>|<a>|<l>|<k>|<ing$>|     |
+c: |  0|  0|  0|  0|  0|    50| = 50|
+p: |  0|  0|  0|  0|  0|     0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "walk" "walking" $map 4`] = `
+"<walking> -> <walk> (50)
+a: |<^>|<w>|<a>|<l>|<k>|<ing$>|     |
+b: |<^>|<w>|<a>|<l>|<k>|<$>   |     |
+c: |  0|  0|  0|  0|  0|    50| = 50|
+p: |  0|  0|  0|  0|  0|     0|  = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "wear'd u go?" "where did you go?" $map 1`] = `
+"<wear'd u go?> -> <where did you go?> (204)
+a: |<^>|<w> |<ear>|<'d>  |< >|<u>  |< >|<g>|<o>|<?>|<$>|      |
+b: |<^>|<wh>|<ere>|< did>|< >|<you>|< >|<g>|<o>|<?>|<$>|      |
+c: |  0|  51|   51|    51|  0|   51|  0|  0|  0|  0|  0| = 204|
+p: |  0|   0|    0|     0|  0|    0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar adv "wear'd u go?" "where did you go?" $map 2`] = `
+"<where did you go?> -> <wear'd u go?> (204)
+a: |<^>|<wh>|<ere>|< did>|< >|<you>|< >|<g>|<o>|<?>|<$>|      |
+b: |<^>|<w> |<ear>|<'d>  |< >|<u>  |< >|<g>|<o>|<?>|<$>|      |
+c: |  0|  51|   51|    51|  0|   51|  0|  0|  0|  0|  0| = 204|
+p: |  0|   0|    0|     0|  0|    0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "" "" 1`] = `
+"<> -> <> (0)
+a: |<^>|<$>|    |
+b: |<^>|<$>|    |
+c: |  0|  0| = 0|
+p: |  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "" "" 2`] = `
+"<> -> <> (0)
+a: |<^>|<$>|    |
+b: |<^>|<$>|    |
+c: |  0|  0| = 0|
+p: |  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "" 1`] = `
+"<apple> -> <> (500)
+a: |<^>|<a>|<p>|<p>|<l>|<e>|<$>|      |
+b: |<^>|<> |<> |<> |<> |<> |<$>|      |
+c: |  0|100|100|100|100|100|  0| = 500|
+p: |  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "" 2`] = `
+"<> -> <apple> (500)
+a: |<^>|<> |<> |<> |<> |<> |<$>|      |
+b: |<^>|<a>|<p>|<p>|<l>|<e>|<$>|      |
+c: |  0|100|100|100|100|100|  0| = 500|
+p: |  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "apple" 1`] = `
+"<apple> -> <apple> (0)
+a: |<^>|<a>|<p>|<p>|<l>|<e>|<$>|    |
+b: |<^>|<a>|<p>|<p>|<l>|<e>|<$>|    |
+c: |  0|  0|  0|  0|  0|  0|  0| = 0|
+p: |  0|  0|  0|  0|  0|  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "apple" 2`] = `
+"<apple> -> <apple> (0)
+a: |<^>|<a>|<p>|<p>|<l>|<e>|<$>|    |
+b: |<^>|<a>|<p>|<p>|<l>|<e>|<$>|    |
+c: |  0|  0|  0|  0|  0|  0|  0| = 0|
+p: |  0|  0|  0|  0|  0|  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "apples" 1`] = `
+"<apple> -> <apples> (100)
+a: |<^>|<a>|<p>|<p>|<l>|<e>|<> |<$>|      |
+b: |<^>|<a>|<p>|<p>|<l>|<e>|<s>|<$>|      |
+c: |  0|  0|  0|  0|  0|  0|100|  0| = 100|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "apples" 2`] = `
+"<apples> -> <apple> (100)
+a: |<^>|<a>|<p>|<p>|<l>|<e>|<s>|<$>|      |
+b: |<^>|<a>|<p>|<p>|<l>|<e>|<> |<$>|      |
+c: |  0|  0|  0|  0|  0|  0|100|  0| = 100|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "maple" 1`] = `
+"<apple> -> <maple> (200)
+a: |<^>|<> |<a>|<p>|<p>|<l>|<e>|<$>|      |
+b: |<^>|<m>|<a>|<p>|<> |<l>|<e>|<$>|      |
+c: |  0|100|  0|  0|100|  0|  0|  0| = 200|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "apple" "maple" 2`] = `
+"<maple> -> <apple> (200)
+a: |<^>|<m>|<a>|<p>|<> |<l>|<e>|<$>|      |
+b: |<^>|<> |<a>|<p>|<p>|<l>|<e>|<$>|      |
+c: |  0|100|  0|  0|100|  0|  0|  0| = 200|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "grapple" "maples" 1`] = `
+"<grapple> -> <maples> (400)
+a: |<^>|<g>|<r>|<a>|<p>|<p>|<l>|<e>|<> |<$>|      |
+b: |<^>|<> |<m>|<a>|<> |<p>|<l>|<e>|<s>|<$>|      |
+c: |  0|100|100|  0|100|  0|  0|  0|100|  0| = 400|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStarWeightedEx vs Levenshtein "grapple" "maples" 2`] = `
+"<maples> -> <grapple> (400)
+a: |<^>|<m>|<> |<a>|<p>|<> |<l>|<e>|<s>|<$>|      |
+b: |<^>|<g>|<r>|<a>|<p>|<p>|<l>|<e>|<> |<$>|      |
+c: |  0|100|100|  0|  0|100|  0|  0|100|  0| = 400|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;

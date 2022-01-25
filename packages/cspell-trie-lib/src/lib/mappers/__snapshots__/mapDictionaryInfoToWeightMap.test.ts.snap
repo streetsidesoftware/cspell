@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <
+            TRY abc
+            > 1`] = `
+Array [
+  Object {
+    "insDel": 95,
+    "map": "abc",
+    "replace": 95,
+    "swap": 95,
+  },
+  Object {
+    "map": "(^a)(^b)(^c)",
+    "penalty": 4,
+    "replace": 91,
+  },
+]
+`;
+
+exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <
+# comment.
+# cspell:ignore eéèëê iíìïî
+TRY abc
+
+MAP 3
+MAP eéèëê
+MAP aáà
+MAP iíìïî
+
+OCONV 2
+OCONV ĳ ij
+OCONV Ĳ IJ
+
+ICONV 9
+ICONV áá aa
+ICONV éé ee
+ICONV íé ie
+ICONV óó oo
+ICONV úú uu
+ICONV óé oe
+ICONV ’ '
+ICONV ij ĳ
+ICONV IJ Ĳ
+
+REP ^ß ss
+
+NO-TRY -1234567890
+
+# cspell:ignore asdfghjkl qwertyuiop zxcvbnm
+KEY qwertyuiop|asdfghjkl|zxcvbnm
+> 1`] = `
+Array [
+  Object {
+    "insDel": 95,
+    "map": "abc",
+    "replace": 95,
+    "swap": 95,
+  },
+  Object {
+    "map": "(^a)(^b)(^c)",
+    "penalty": 4,
+    "replace": 91,
+  },
+  Object {
+    "map": "eéèëê",
+    "replace": 25,
+    "swap": 25,
+  },
+  Object {
+    "map": "aáà",
+    "replace": 25,
+    "swap": 25,
+  },
+  Object {
+    "map": "iíìïî",
+    "replace": 25,
+    "swap": 25,
+  },
+  Object {
+    "map": "(ĳ)(ij)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(Ĳ)(IJ)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(áá)(aa)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(éé)(ee)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(íé)(ie)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(óó)(oo)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(úú)(uu)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(óé)(oe)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(’)(')",
+    "replace": 30,
+  },
+  Object {
+    "map": "(ij)(ĳ)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(IJ)(Ĳ)",
+    "replace": 30,
+  },
+  Object {
+    "map": "(^ß)(^ss)",
+    "replace": 75,
+  },
+  Object {
+    "insDel": 5,
+    "map": "-1234567890",
+    "penalty": 195,
+  },
+  Object {
+    "map": "qw|we|er|rt|ty|yu|ui|io|op|as|sd|df|fg|gh|hj|jk|kl|zx|xc|cv|vb|bn|nm",
+    "replace": 94,
+    "swap": 94,
+  },
+]
+`;
+
+exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <> 1`] = `Array []`;

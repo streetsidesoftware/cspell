@@ -1,4 +1,4 @@
-import type { SuggestionCostMapDef } from './suggestionCostsDef';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import {
     addDefToWeightMap,
     CostPosition,
@@ -23,12 +23,13 @@ describe('Validate weightedMaps', () => {
     });
 
     test.each`
-        map                | expected
-        ${''}              | ${[]}
-        ${'||'}            | ${[]}
-        ${'abc'}           | ${['abc'.split('')]}
-        ${'abc|'}          | ${['abc'.split('')]}
-        ${'f(ph)(gh)v|eé'} | ${[['f', 'ph', 'gh', 'v'], ['e', 'é']]}
+        map                 | expected
+        ${''}               | ${[]}
+        ${'||'}             | ${[]}
+        ${'abc'}            | ${['abc'.split('')]}
+        ${'abc|'}           | ${['abc'.split('')]}
+        ${'f(ph)(gh)v|eé'}  | ${[['f', 'ph', 'gh', 'v'], ['e', 'é']]}
+        ${'f(ph)(😁)🤣|eé'} | ${[['f', 'ph', '😁', '🤣'], ['e', 'é']]}
     `('splitMap "$map"', ({ map, expected }) => {
         expect(splitMap({ map })).toEqual(expected);
     });
