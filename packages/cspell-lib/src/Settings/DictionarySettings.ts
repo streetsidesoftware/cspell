@@ -48,23 +48,23 @@ function getFullPathName(def: DictionaryDefinition) {
     return path.join(filePath, file);
 }
 
-export function normalizePathForDictDefs(defs: undefined, pathToSettingsFile: string): undefined;
-export function normalizePathForDictDefs(
+export function mapDictDefsToInternal(defs: undefined, pathToSettingsFile: string): undefined;
+export function mapDictDefsToInternal(
     defs: DictionaryDefinition[],
     pathToSettingsFile: string
 ): DictionaryDefinitionInternalWithSource[];
-export function normalizePathForDictDefs(
+export function mapDictDefsToInternal(
     defs: DictionaryDefinition[] | undefined,
     pathToSettingsFile: string
 ): DictionaryDefinitionInternalWithSource[] | undefined;
-export function normalizePathForDictDefs(
+export function mapDictDefsToInternal(
     defs: DictionaryDefinition[] | undefined,
     pathToSettingsFile: string
 ): DictionaryDefinitionInternalWithSource[] | undefined {
-    return defs?.map((def) => normalizePathForDictDef(def, pathToSettingsFile));
+    return defs?.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
 }
 
-export function normalizePathForDictDef(
+export function mapDictDefToInternal(
     def: DictionaryDefinition,
     pathToSettingsFile: string
 ): DictionaryDefinitionInternalWithSource {
