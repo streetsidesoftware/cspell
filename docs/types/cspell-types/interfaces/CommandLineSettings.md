@@ -26,4 +26,4 @@ Define cache settings.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:268](https://github.com/streetsidesoftware/cspell/blob/fe8778a/packages/cspell-types/src/CSpellSettingsDef.ts#L268)
+[CSpellSettingsDef.ts:268](https://github.com/streetsidesoftware/cspell/blob/b9fa206/packages/cspell-types/src/CSpellSettingsDef.ts#L268)
