@@ -6,7 +6,7 @@ import {
     HasWordOptions,
     ValidationOptions,
 } from './textValidator';
-import { createCSpellSettingsInternal as csi } from './Settings/CSpellSettingsInternalDef';
+import { createCSpellSettingsInternal as csi } from './Models/CSpellSettingsInternalDef';
 import { createCollection, getDictionaryInternal } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';

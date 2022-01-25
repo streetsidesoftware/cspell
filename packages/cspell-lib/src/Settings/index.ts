@@ -1,4 +1,3 @@
-export * from '@cspell/cspell-types';
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,

@@ -2,7 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { getDefaultSettings, loadConfig } from '../Settings';
-import { createCSpellSettingsInternal as csi } from '../Settings/CSpellSettingsInternalDef';
+import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
@@ -126,8 +126,9 @@ describe('Validate getDictionary', () => {
     });
 
     test('Dictionary NOT Found', async () => {
+        const weightMap = undefined;
         const settings = csi({
-            dictionaryDefinitions: [{ name: 'my-words', path: './not-found.txt' }],
+            dictionaryDefinitions: [{ name: 'my-words', path: './not-found.txt', weightMap }],
             dictionaries: ['my-words'],
         });
 
@@ -140,16 +141,18 @@ describe('Validate getDictionary', () => {
         const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
-
+        const weightMap = undefined;
         const settings = getDefaultSettings();
         const defs = (settings.dictionaryDefinitions || []).concat([
             {
                 name: 'temp',
                 path: tempDictPath,
+                weightMap,
             },
             {
                 name: 'not_found',
                 path: tempDictPath,
+                weightMap,
             },
         ]);
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];

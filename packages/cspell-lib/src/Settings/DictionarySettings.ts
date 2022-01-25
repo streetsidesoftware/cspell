@@ -4,8 +4,8 @@ import { resolveFile } from '../util/resolveFile';
 import {
     CSpellSettingsInternal,
     DictionaryDefinitionInternal,
-    DictionaryDefinitionWithSource,
-} from './CSpellSettingsInternalDef';
+    DictionaryDefinitionInternalWithSource,
+} from '../Models/CSpellSettingsInternalDef';
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
@@ -24,7 +24,7 @@ export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
  */
 export function filterDictDefsToLoad(
     dictRefIds: DictionaryReference[],
-    defs: DictionaryDefinition[]
+    defs: DictionaryDefinitionInternal[]
 ): DictionaryDefinitionInternal[] {
     function isDefP(def: DictionaryDefinition): def is DictionaryDefinitionPreferred {
         return !!def.path;
@@ -52,22 +52,22 @@ export function normalizePathForDictDefs(defs: undefined, pathToSettingsFile: st
 export function normalizePathForDictDefs(
     defs: DictionaryDefinition[],
     pathToSettingsFile: string
-): DictionaryDefinitionWithSource[];
+): DictionaryDefinitionInternalWithSource[];
 export function normalizePathForDictDefs(
     defs: DictionaryDefinition[] | undefined,
     pathToSettingsFile: string
-): DictionaryDefinitionWithSource[] | undefined;
+): DictionaryDefinitionInternalWithSource[] | undefined;
 export function normalizePathForDictDefs(
     defs: DictionaryDefinition[] | undefined,
     pathToSettingsFile: string
-): DictionaryDefinitionWithSource[] | undefined {
+): DictionaryDefinitionInternalWithSource[] | undefined {
     return defs?.map((def) => normalizePathForDictDef(def, pathToSettingsFile));
 }
 
 export function normalizePathForDictDef(
     def: DictionaryDefinition,
     pathToSettingsFile: string
-): DictionaryDefinitionWithSource {
+): DictionaryDefinitionInternalWithSource {
     const defaultPath = path.dirname(pathToSettingsFile);
     const { path: relPath = '', file = '', ...rest } = def;
     const filePath = path.join(relPath, file);
@@ -85,21 +85,22 @@ export function normalizePathForDictDef(
         ...rest,
         name,
         path: r.filename,
+        weightMap: undefined,
         __source: pathToSettingsFile,
     };
 }
 
 export function isDictionaryDefinitionWithSource(
-    d: DictionaryDefinition | DictionaryDefinitionWithSource
-): d is DictionaryDefinitionWithSource {
-    return (d as DictionaryDefinitionWithSource).__source !== undefined;
+    d: DictionaryDefinition | DictionaryDefinitionInternalWithSource
+): d is DictionaryDefinitionInternalWithSource {
+    return (d as DictionaryDefinitionInternalWithSource).__source !== undefined;
 }
 
 function determineName(filename: string, options: DictionaryDefinition): string {
     return options.name || path.basename(filename);
 }
 
-export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): DictionaryDefinitionPreferred[] {
+export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): DictionaryDefinitionInternal[] {
     const { dictionaries = [], dictionaryDefinitions = [], noSuggestDictionaries = [] } = settings;
     const colNoSug = createDictionaryReferenceCollection(noSuggestDictionaries);
     const colDicts = createDictionaryReferenceCollection(dictionaries.concat(colNoSug.enabled()));

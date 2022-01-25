@@ -4,6 +4,7 @@ import {
     DictionaryDefinitionCustom,
     DictionaryDefinitionPreferred,
 } from '@cspell/cspell-types';
+import { WeightMap } from 'cspell-trie-lib';
 
 export const SymbolCSpellSettingsInternal = Symbol('CSpellSettingsInternal');
 
@@ -17,10 +18,16 @@ type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, k
 export interface DictionaryDefinitionInternal
     extends DictionaryDefinitionPreferred,
         Partial<DictionaryDefinitionCustomUniqueFields>,
-        DictionaryDefinitionAugmented {}
-
-export interface DictionaryDefinitionWithSource extends DictionaryDefinitionInternal {
+        DictionaryDefinitionAugmented {
+    /**
+     * Optional weight map used to improve suggestions.
+     */
+    weightMap?: WeightMap;
     /** The path to the config file that contains this dictionary definition */
+    __source?: string;
+}
+
+export interface DictionaryDefinitionInternalWithSource extends DictionaryDefinitionInternal {
     __source: string;
 }
 

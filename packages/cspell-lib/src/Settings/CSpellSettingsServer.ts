@@ -21,7 +21,7 @@ import {
     createCSpellSettingsInternal as csi,
     CSpellSettingsInternal,
     isCSpellSettingsInternal,
-} from './CSpellSettingsInternalDef';
+} from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad, normalizePathForDictDefs } from './DictionarySettings';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
