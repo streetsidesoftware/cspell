@@ -1,7 +1,8 @@
-import { Sequence, genSequence } from 'gensequence';
-import { TrieNode, FLAG_WORD, ChildMap, TrieRoot, PartialTrieOptions, TrieOptions } from './TrieNode';
-import { YieldResult, walker } from './walker';
+import { genSequence, Sequence } from 'gensequence';
 import { defaultTrieOptions } from './constants';
+import { ChildMap, FLAG_WORD, PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import type { Mandatory, PartialWithUndefined } from './types';
+import { walker, YieldResult } from './walker';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
     if (text.length) {

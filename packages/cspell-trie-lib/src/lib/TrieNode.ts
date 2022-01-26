@@ -1,3 +1,5 @@
+import type { PartialWithUndefined } from './types';
+
 export const FLAG_WORD = 1;
 
 export class ChildMap extends Map<string, TrieNode> {}
