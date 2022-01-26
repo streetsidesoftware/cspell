@@ -1,13 +1,21 @@
 import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
-import * as cspell from 'cspell-lib';
-import { CheckTextInfo, TraceResult, traceWordsAsync, suggestionsForWords, SuggestionError } from 'cspell-lib';
+import type { CheckTextInfo, SuggestionsForWordResult, TraceResult } from 'cspell-lib';
+import {
+    checkText as cspellLibCheckText,
+    getDefaultSettings,
+    getGlobalSettings,
+    mergeSettings,
+    SuggestionError,
+    suggestionsForWords,
+    traceWordsAsync,
+} from 'cspell-lib';
 import * as path from 'path';
-import { calcFinalConfigInfo, readConfig, readFile } from './util/fileHelper';
 import { LintRequest, runLint } from './lint';
 import { BaseOptions, fixLegacy, LegacyOptions, LinterOptions, SuggestionOptions, TraceOptions } from './options';
+import * as async from './util/async';
+import { calcFinalConfigInfo, readConfig, readFile } from './util/fileHelper';
 import { readStdin } from './util/stdin';
 import * as util from './util/util';
-import * as async from './util/async';
 export { IncludeExcludeFlag } from 'cspell-lib';
 export type { TraceResult } from 'cspell-lib';
 
@@ -24,7 +32,7 @@ export async function* trace(words: string[], options: TraceOptions): AsyncItera
     const iWords = options.stdin ? async.mergeAsyncIterables(words, readStdin()) : words;
     const { languageId, locale, allowCompoundWords, ignoreCase } = options;
     const configFile = await readConfig(options.config, undefined);
-    const config = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.getGlobalSettings(), configFile.config);
+    const config = mergeSettings(getDefaultSettings(), getGlobalSettings(), configFile.config);
     yield* traceWordsAsync(iWords, config, { languageId, locale, ignoreCase, allowCompoundWords });
 }
 
@@ -39,13 +47,13 @@ export async function checkText(filename: string, options: BaseOptions & LegacyO
         language: options.locale || options.local || undefined,
     });
     const info = calcFinalConfigInfo(foundSettings, settingsFromCommandLine, filename, text);
-    return cspell.checkText(text, info.configInfo.config);
+    return cspellLibCheckText(text, info.configInfo.config);
 }
 
 export async function* suggestions(
     words: string[],
     options: SuggestionOptions
-): AsyncIterable<cspell.SuggestionsForWordResult> {
+): AsyncIterable<SuggestionsForWordResult> {
     options = fixLegacy(options);
     const configFile = await readConfig(options.config, undefined);
     const iWords = options.useStdin ? async.mergeAsyncIterables(words, readStdin()) : words;

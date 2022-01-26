@@ -1,10 +1,20 @@
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import { fileOrGlobToGlob, GlobMatcher, GlobPatternWithRoot } from 'cspell-glob';
 import glob from 'glob';
-import type { IGlob, IOptions as IGlobOptions } from 'glob';
 import * as path from 'path';
 
-export type GlobOptions = IGlobOptions;
+/**
+ * This is a subset of IOptions from 'glob'.
+ */
+export interface GlobOptions {
+    cwd?: string | undefined;
+    root?: string | undefined;
+    dot?: boolean | undefined;
+    nodir?: boolean | undefined; // cspell:ignore nodir
+    ignore?: string | ReadonlyArray<string> | undefined;
+}
+
+type IGlob = ReturnType<typeof glob>;
 
 const defaultExcludeGlobs = ['node_modules/**'];
 
