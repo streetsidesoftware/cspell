@@ -119,6 +119,9 @@ describe('Validate cli', () => {
         chalk.level = colorLevel;
     });
 
+    const failFastConfig = pathSamples('fail-fast/fail-fast-cspell.json');
+    const failFastRoot = pathSamples('fail-fast');
+
     test.each`
         msg                                            | testArgs                                                                   | errorCheck         | eError   | eLog     | eInfo
         ${'with errors and excludes'}                  | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
@@ -144,6 +147,10 @@ describe('Validate cli', () => {
         ${'must find force no error'}                  | ${['*.not', '--no-must-find-files']}                                       | ${undefined}       | ${true}  | ${false} | ${false}
         ${'cspell-bad.json'}                           | ${['-c', pathSamples('cspell-bad.json'), __filename]}                      | ${undefined}       | ${true}  | ${false} | ${false}
         ${'cspell-import-missing.json'}                | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]}    | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'--fail-fast no option'}                     | ${['-r', failFastRoot, '*.txt']}                                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'--fail-fast with option'}                   | ${['-r', failFastRoot, '--fail-fast', '*.txt']}                            | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'--fail-fast with config'}                   | ${['-r', failFastRoot, '-c', failFastConfig, '*.txt']}                     | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'--no-fail-fast with config'}                | ${['-r', failFastRoot, '--no-fail-fast', '-c', failFastConfig, '*.txt']}   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         const commander = getCommander();
         const args = argv(...testArgs);

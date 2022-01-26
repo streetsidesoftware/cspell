@@ -62,6 +62,11 @@ export interface LinterOptions extends BaseOptions, CacheOptions {
      * Files must be found and processed otherwise it is considered an error.
      */
     mustFindFiles?: boolean;
+
+    /**
+     * Stop processing and exit if an issue or error is found.
+     */
+    failFast?: boolean;
 }
 
 export interface TraceOptions extends BaseOptions {

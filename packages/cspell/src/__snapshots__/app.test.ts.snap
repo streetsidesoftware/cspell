@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 1`] = `Array []`;
+
+exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 2`] = `
+"error	1/2 ./samples/fail-fast/first-fail.txt 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	2/2 ./samples/fail-fast/second-fail.txt 0.00ms X
+log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
+`;
+
+exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 1`] = `Array []`;
+
+exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
+"error	1/2 ./samples/fail-fast/first-fail.txt 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
+`;
+
+exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 1`] = `Array []`;
+
+exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 2`] = `
+"error	1/2 ./samples/fail-fast/first-fail.txt 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
+`;
+
 exports[`Validate cli app --help Expect Error: outputHelp 1`] = `
 Array [
   "Usage: cspell [options] [command]",
@@ -26,6 +52,16 @@ Array [
 `;
 
 exports[`Validate cli app --help Expect Error: outputHelp 2`] = `""`;
+
+exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 1`] = `Array []`;
+
+exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
+"error	1/2 ./samples/fail-fast/first-fail.txt 0.00ms X
+log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
+error	2/2 ./samples/fail-fast/second-fail.txt 0.00ms X
+log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
+`;
 
 exports[`Validate cli app LICENSE Expect Error: undefined 1`] = `Array []`;
 
@@ -318,6 +354,7 @@ Array [
   "  --no-progress                Turn off progress messages",
   "  --no-summary                 Turn off summary message in console.",
   "  -s, --silent                 Silent mode, suppress error messages.",
+  "  --fail-fast                  Exit after first file with an issue or error.",
   "  -r, --root <root folder>     Root directory, defaults to current directory.",
   "  --relative                   Issues are displayed relative to root.",
   "  --show-context               Show the surrounding text around an issue.",
