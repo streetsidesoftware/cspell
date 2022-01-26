@@ -17,6 +17,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     enabledLanguageIds: 'enabledLanguageIds',
     enableFiletypes: 'enableFiletypes',
     enableGlobDot: 'enableGlobDot',
+    failFast: 'failFast',
     features: 'features',
     files: 'files',
     flagWords: 'flagWords',

@@ -160,6 +160,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 status.filesWithIssues.add(filename);
                 status.issues += result.issues.length;
                 status.errors += result.errors;
+                if (configInfo.config.failFast === true) {
+                    return status;
+                }
             }
             status.errors += result.configErrors;
         }
