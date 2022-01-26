@@ -113,6 +113,7 @@ Options:
   --no-progress                Turn off progress messages
   --no-summary                 Turn off summary message in console.
   -s, --silent                 Silent mode, suppress error messages.
+  --fail-fast                  Exit after first file with an issue or error.
   -r, --root <root folder>     Root directory, defaults to current directory.
   --relative                   Issues are displayed relative to root.
   --show-context               Show the surrounding text around an issue.
