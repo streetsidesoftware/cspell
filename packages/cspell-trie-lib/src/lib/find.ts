@@ -1,6 +1,7 @@
-import { TrieNode, FLAG_WORD } from './TrieNode';
+import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX } from './constants';
 import { mergeDefaults } from './trie-util';
-import { FORBID_PREFIX, COMPOUND_FIX, CASE_INSENSITIVE_PREFIX } from './constants';
+import { FLAG_WORD, TrieNode } from './TrieNode';
+import type { PartialWithUndefined } from './types';
 
 /**
  * No compounding allowed.
