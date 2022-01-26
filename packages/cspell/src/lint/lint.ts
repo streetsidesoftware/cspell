@@ -16,7 +16,7 @@ import {
     readConfig,
     readFileInfo,
     readFileListFiles,
-} from '../fileHelper';
+} from '../util/fileHelper';
 import type { CSpellLintResultCache } from '../util/cache';
 import { calcCacheSettings, createCache, CreateCacheSettings } from '../util/cache';
 import { toApplicationError, toError } from '../util/errors';
@@ -25,11 +25,11 @@ import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGl
 import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
+import { pipeAsync, isAsyncIterable, filter, pipeSync } from '../util/async';
 import { LintRequest } from './LintRequest';
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     let { reporter } = cfg;
-    const { fileLists } = cfg;
     cspell.setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
 
@@ -121,11 +121,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
 
     async function processFiles(
-        files: string[],
+        files: string[] | AsyncIterable<string>,
         configInfo: ConfigInfo,
         cacheSettings: CreateCacheSettings
     ): Promise<RunResult> {
-        const fileCount = files.length;
+        const fileCount = files instanceof Array ? files.length : undefined;
         const status: RunResult = runResult();
         const cache = createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
@@ -134,7 +134,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reporter.progress({
                 type: 'ProgressFileComplete',
                 fileNum,
-                fileCount,
+                fileCount: fileCount ?? fileNum,
                 filename,
                 elapsedTimeMs: result?.elapsedTimeMs,
                 processed: result?.processed,
@@ -143,10 +143,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             });
 
         async function* loadAndProcessFiles() {
-            for (let i = 0; i < files.length; i++) {
-                const filename = files[i];
+            let i = 0;
+            for await (const filename of files) {
+                ++i;
                 const result = await processFile(filename, configInfo, cache);
-                yield { filename, fileNum: i + 1, result };
+                yield { filename, fileNum: i, result };
             }
         }
 
@@ -222,19 +223,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
         cspell.setLogger(getLoggerFromReporter(reporter));
 
-        const useGitignore = cfg.options.gitignore ?? configInfo.config.useGitignore ?? false;
-        const gitignoreRoots = cfg.options.gitignoreRoot ?? configInfo.config.gitignoreRoot;
-        const gitIgnore = useGitignore ? await generateGitIgnore(gitignoreRoots) : undefined;
-
-        const cliGlobs: Glob[] = cfg.fileGlobs;
-        const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
-        const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
-        const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob);
-        const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
-        const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
-        const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
-        const fileGlobs: string[] = includeGlobs;
-        const hasFileLists = !!fileLists.length;
+        const globInfo = await determineGlobs(configInfo, cfg);
+        const { fileGlobs, excludeGlobs } = globInfo;
+        const hasFileLists = !!cfg.fileLists.length;
         if (!fileGlobs.length && !hasFileLists) {
             // Nothing to do.
             return runResult();
@@ -248,28 +239,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
-        const globMatcher = buildGlobMatcher(globsToExclude, root, true);
-        const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
-        // cspell:word nodir
-        const globOptions: GlobOptions = {
-            root,
-            cwd: root,
-            ignore: ignoreGlobs.concat(normalizedExcludes),
-            nodir: true,
-        };
-        const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
-        if (enableGlobDot !== undefined) {
-            globOptions.dot = enableGlobDot;
-        }
 
         try {
             const cacheSettings = await calcCacheSettings(configInfo.config, cfg.options, root);
-            const foundFiles = await (hasFileLists
-                ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
-                : findFiles(fileGlobs, globOptions));
-            const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
-            const files = filterFiles(filtered, globMatcher);
+            const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
 
             return await processFiles(files, configInfo, cacheSettings);
         } catch (e) {
@@ -297,6 +270,76 @@ Options:
             MessageTypes.Info
         );
     }
+}
+
+interface AppGlobInfo {
+    /** globs from cli or config.files */
+    allGlobs: Glob[];
+    /** GitIgnore config to use. */
+    gitIgnore: GitIgnore | undefined;
+    /** file globs used to search for matching files. */
+    fileGlobs: string[];
+    /** globs to exclude files found. */
+    excludeGlobs: string[];
+    /** normalized cli exclude globs */
+    normalizedExcludes: string[];
+}
+
+async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise<AppGlobInfo> {
+    const useGitignore = cfg.options.gitignore ?? configInfo.config.useGitignore ?? false;
+    const gitignoreRoots = cfg.options.gitignoreRoot ?? configInfo.config.gitignoreRoot;
+    const gitIgnore = useGitignore ? await generateGitIgnore(gitignoreRoots) : undefined;
+
+    const cliGlobs: Glob[] = cfg.fileGlobs;
+    const allGlobs: Glob[] = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
+    const combinedGlobs = normalizeGlobsToRoot(allGlobs, cfg.root, false);
+    const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob);
+    const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
+    const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
+    const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
+    const fileGlobs: string[] = includeGlobs;
+
+    return { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes };
+}
+
+async function determineFilesToCheck(
+    configInfo: ConfigInfo,
+    cfg: LintRequest,
+    reporter: CSpellReporter,
+    globInfo: AppGlobInfo
+): Promise<string[] | AsyncIterable<string>> {
+    async function _determineFilesToCheck(): Promise<string[] | AsyncIterable<string>> {
+        const { fileLists } = cfg;
+        const hasFileLists = !!fileLists.length;
+        const { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes } = globInfo;
+
+        // Get Exclusions from the config files.
+        const { root } = cfg;
+        const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
+        const globMatcher = buildGlobMatcher(globsToExclude, root, true);
+        const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
+        // cspell:word nodir
+        const globOptions: GlobOptions = {
+            root,
+            cwd: root,
+            ignore: ignoreGlobs.concat(normalizedExcludes),
+            nodir: true,
+        };
+        const enableGlobDot = cfg.enableGlobDot ?? configInfo.config.enableGlobDot;
+        if (enableGlobDot !== undefined) {
+            globOptions.dot = enableGlobDot;
+        }
+
+        const filterFiles = filter(filterFilesFn(globMatcher));
+        const foundFiles = await (hasFileLists
+            ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
+            : findFiles(fileGlobs, globOptions));
+        const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
+        const files = isAsyncIterable(filtered)
+            ? pipeAsync(filtered, filterFiles)
+            : [...pipeSync(filtered, filterFiles)];
+        return files;
+    }
 
     function isExcluded(filename: string, globMatcherExclude: GlobMatcher) {
         if (cspell.isBinaryFile(URI.file(filename))) {
@@ -317,24 +360,17 @@ Options:
         return r.matched;
     }
 
-    function extractGlobSource(g: GlobPatternWithRoot | GlobPatternNormalized) {
-        const { glob, rawGlob, source } = <GlobPatternNormalized>g;
-        return {
-            glob: rawGlob || glob,
-            source,
-        };
-    }
-
-    function filterFiles(files: string[], globMatcherExclude: GlobMatcher): string[] {
+    function filterFilesFn(globMatcherExclude: GlobMatcher): (file: string) => boolean {
         const patterns = globMatcherExclude.patterns;
         const excludeInfo = patterns
             .map(extractGlobSource)
             .map(({ glob, source }) => `Glob: ${glob} from ${source}`)
             .filter(util.uniqueFn());
         reporter.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, MessageTypes.Info);
-        const result = files.filter(util.uniqueFn()).filter((filename) => !isExcluded(filename, globMatcherExclude));
-        return result;
+        return (filename: string): boolean => !isExcluded(filename, globMatcherExclude);
     }
+
+    return _determineFilesToCheck();
 }
 
 function extractContext(
@@ -372,6 +408,14 @@ function extractContext(
         offset: left + line.offset,
     };
     return context;
+}
+
+function extractGlobSource(g: GlobPatternWithRoot | GlobPatternNormalized) {
+    const { glob, rawGlob, source } = <GlobPatternNormalized>g;
+    return {
+        glob: rawGlob || glob,
+        source,
+    };
 }
 
 function runResult(init: Partial<RunResult> = {}): RunResult {
@@ -421,7 +465,7 @@ async function useFileLists(
     includeGlobPatterns: Glob[],
     root: string,
     dot: boolean | undefined
-): Promise<string[]> {
+): Promise<string[] | AsyncIterable<string>> {
     includeGlobPatterns = includeGlobPatterns.length ? includeGlobPatterns : ['**'];
     const options: GlobMatchOptions = { root, mode: 'include' };
     if (dot !== undefined) {
@@ -430,6 +474,6 @@ async function useFileLists(
     const globMatcher = new GlobMatcher(includeGlobPatterns, options);
 
     const files = await readFileListFiles(fileListFiles);
-
-    return files.filter((file) => globMatcher.match(file));
+    const filterFiles = (file: string) => globMatcher.match(file);
+    return files instanceof Array ? files.filter(filterFiles) : pipeAsync(files, filter(filterFiles));
 }

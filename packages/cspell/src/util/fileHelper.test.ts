@@ -1,8 +1,9 @@
 import { readFileInfo, readFileListFile, readFileListFiles } from './fileHelper';
 import * as path from 'path';
-import { IOError } from './util/errors';
+import { IOError } from './errors';
 
-const fixtures = path.join(__dirname, '../fixtures/fileHelper');
+const packageRoot = path.join(__dirname, '../..');
+const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
 const fileListFile = path.join(fixtures, 'file-list.txt');
 const fileListFile2 = path.join(fixtures, 'nested/file-list-2.txt');
 

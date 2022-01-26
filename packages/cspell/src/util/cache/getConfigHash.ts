@@ -1,6 +1,6 @@
 import stringify from 'fast-json-stable-stringify';
 import path from 'path';
-import { ConfigInfo } from '../../fileHelper';
+import { ConfigInfo } from '../../util/fileHelper';
 import { hash } from './hash';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

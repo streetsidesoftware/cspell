@@ -1,6 +1,6 @@
 import * as FileEntryCacheModule from 'file-entry-cache';
 import * as path from 'path';
-import * as fileHelper from '../../fileHelper';
+import * as fileHelper from '../../util/fileHelper';
 import { CachedFileResult, DiskCache, CSpellCacheMeta } from './DiskCache';
 
 jest.mock('./getConfigHash', () => ({
@@ -21,7 +21,7 @@ jest.mock('file-entry-cache', () => ({
 }));
 
 const mockReadFileInfo = jest.spyOn(fileHelper, 'readFileInfo');
-jest.mock('../../fileHelper', () => ({ readFileInfo: jest.fn() }));
+jest.mock('../../util/fileHelper', () => ({ readFileInfo: jest.fn() }));
 
 const RESULT_NO_ISSUES: CachedFileResult = {
     processed: true,

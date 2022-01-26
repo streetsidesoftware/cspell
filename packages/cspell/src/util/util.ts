@@ -32,25 +32,6 @@ export function clean<T>(src: T): T {
     return r;
 }
 
-export async function* mergeAsyncIterables<T>(
-    iter: Iterable<T> | AsyncIterable<T>,
-    ...rest: (Iterable<T> | AsyncIterable<T>)[]
-): AsyncIterableIterator<T> {
-    yield* iter;
-    for await (const i of rest) {
-        yield* i;
-    }
-}
-
-export async function asyncIterableToArray<T>(iter: Iterable<T> | AsyncIterable<T>): Promise<Awaited<T>[]> {
-    const r: Awaited<T>[] = [];
-
-    for await (const t of iter) {
-        r.push(t);
-    }
-    return r;
-}
-
 export function pad(s: string, w: number): string {
     if (s.length >= w) return s;
     return (s + ' '.repeat(w)).slice(0, w);
