@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.17.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.16.0...v5.17.0-alpha.0) (2022-01-26)
+
+
+### Bug Fixes
+
+* Explicitly import `types` ([#2343](https://github.com/streetsidesoftware/cspell/issues/2343)) ([7131001](https://github.com/streetsidesoftware/cspell/commit/71310012c63b7f77e8276e96f0885e8f7eec7e39)), closes [#2341](https://github.com/streetsidesoftware/cspell/issues/2341)
+
+
+### Features
+
+* Add cli command to show suggestions. ([#2299](https://github.com/streetsidesoftware/cspell/issues/2299)) ([1db4777](https://github.com/streetsidesoftware/cspell/commit/1db47775e7903a9b5838bdc5b49229258f5e683b))
+
+
+
+
+
 # [5.16.0](https://github.com/streetsidesoftware/cspell/compare/v5.15.3...v5.16.0) (2022-01-20)
 
 

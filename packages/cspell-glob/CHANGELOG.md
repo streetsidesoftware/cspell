@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.17.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.16.0...v5.17.0-alpha.0) (2022-01-26)
+
+
+### Bug Fixes
+
+* (cspell-glob) Make sure `cwd` can be set. ([#2316](https://github.com/streetsidesoftware/cspell/issues/2316)) ([80087ac](https://github.com/streetsidesoftware/cspell/commit/80087ac1028d5c34d20274f6d4d2889e485664be))
+* Make sure `${cwd}/` works in globs. ([#2315](https://github.com/streetsidesoftware/cspell/issues/2315)) ([2dbe93e](https://github.com/streetsidesoftware/cspell/commit/2dbe93e32119425b0190e388b4a6017f6b71702f))
+
+
+
+
+
 # [5.16.0](https://github.com/streetsidesoftware/cspell/compare/v5.15.3...v5.16.0) (2022-01-20)
 
 **Note:** Version bump only for package cspell-glob
