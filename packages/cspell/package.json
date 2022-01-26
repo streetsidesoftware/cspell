@@ -36,7 +36,8 @@
   ],
   "scripts": {
     "clean": "rimraf dist coverage .tsbuildinfo",
-    "build": "npm run compile",
+    "build": "npm run compile && npm run build-api",
+    "build-api": "rollup -c rollup.config.mjs",
     "build-dev": "tsc -p tsconfig.dev.json",
     "clean-build": "npm run clean && npm run build",
     "compile": "tsc -p .",
@@ -101,6 +102,8 @@
     "jest": "^27.4.7",
     "micromatch": "^4.0.4",
     "minimatch": "^3.0.4",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "rollup": "^2.66.1",
+    "rollup-plugin-dts": "^4.1.0"
   }
 }
