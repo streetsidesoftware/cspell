@@ -51,7 +51,7 @@ jobs:
         with:
           commit-message: "ci: Workflow Bot -- Build Docs"
           branch: ${{ env.NEW_BRANCH }}
-          title: "ci: Workflow Bot -- Build Docs (${{ env.REF_BRANCH }})"
+          title: "ci: Workflow Bot -- Build Docs"
           token: ${{ steps.generate-token.outputs.token }}
           body: ${{ env.git_body }}
           delete-branch: true
