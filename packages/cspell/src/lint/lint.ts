@@ -128,6 +128,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const fileCount = files.length;
         const status: RunResult = runResult();
         const cache = createCache(cacheSettings);
+        const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
         const emitProgress = (filename: string, fileNum: number, result: FileResult) =>
             reporter.progress({
@@ -160,7 +161,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 status.filesWithIssues.add(filename);
                 status.issues += result.issues.length;
                 status.errors += result.errors;
-                if (configInfo.config.failFast === true) {
+                if (failFast) {
                     return status;
                 }
             }

@@ -267,7 +267,7 @@ export interface CommandLineSettings {
      */
     cache?: CacheSettings;
     /**
-     * Exit with non-zero code as soon as an issue/error encountered (useful for CI or git hooks)
+     * Exit with non-zero code as soon as an issue/error is encountered (useful for CI or git hooks)
      * @default false
      */
     failFast?: boolean;

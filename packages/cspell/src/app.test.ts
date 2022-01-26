@@ -119,31 +119,37 @@ describe('Validate cli', () => {
         chalk.level = colorLevel;
     });
 
+    const failFastConfig = pathSamples('fail-fast/fail-fast-cspell.json');
+
     test.each`
-        msg                                            | testArgs                                                                   | errorCheck         | eError   | eLog     | eInfo
-        ${'with errors and excludes'}                  | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'no-args'}                                   | ${[]}                                                                      | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'--help'}                                    | ${['--help']}                                                              | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'current_file'}                              | ${[__filename]}                                                            | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'with spelling errors Dutch.txt'}            | ${[pathSamples('Dutch.txt')]}                                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with spelling errors Dutch.txt words only'} | ${[pathSamples('Dutch.txt'), '--wordsOnly']}                               | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with spelling errors Dutch.txt --legacy'}   | ${[pathSamples('Dutch.txt'), '--legacy']}                                  | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with spelling errors --silent Dutch.txt'}   | ${['--silent', pathSamples('Dutch.txt')]}                                  | ${app.CheckFailed} | ${false} | ${false} | ${false}
-        ${'current_file languageId'}                   | ${[__filename, '--languageId=typescript']}                                 | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'check help'}                                | ${['check', '--help']}                                                     | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'check LICENSE'}                             | ${['check', pathRoot('LICENSE')]}                                          | ${undefined}       | ${false} | ${true}  | ${false}
-        ${'check missing'}                             | ${['check', pathRoot('missing-file.txt')]}                                 | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'check with spelling errors'}                | ${['check', pathSamples('Dutch.txt')]}                                     | ${app.CheckFailed} | ${false} | ${true}  | ${false}
-        ${'LICENSE'}                                   | ${[pathRoot('LICENSE')]}                                                   | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                     | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'current_file --verbose'}                    | ${['--verbose', __filename]}                                               | ${undefined}       | ${true}  | ${false} | ${true}
-        ${'bad config'}                                | ${['-c', __filename, __filename]}                                          | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-        ${'not found error by default'}                | ${['*.not']}                                                               | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-        ${'must find with error'}                      | ${['*.not', '--must-find-files']}                                          | ${app.CheckFailed} | ${true}  | ${false} | ${false}
-        ${'must find force no error'}                  | ${['*.not', '--no-must-find-files']}                                       | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'cspell-bad.json'}                           | ${['-c', pathSamples('cspell-bad.json'), __filename]}                      | ${undefined}       | ${true}  | ${false} | ${false}
-        ${'cspell-import-missing.json'}                | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]}    | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        msg                                            | testArgs                                                                                 | errorCheck         | eError   | eLog     | eInfo
+        ${'with errors and excludes'}                  | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']}               | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'no-args'}                                   | ${[]}                                                                                    | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'--help'}                                    | ${['--help']}                                                                            | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'current_file'}                              | ${[__filename]}                                                                          | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'with spelling errors Dutch.txt'}            | ${[pathSamples('Dutch.txt')]}                                                            | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with spelling errors Dutch.txt words only'} | ${[pathSamples('Dutch.txt'), '--wordsOnly']}                                             | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with spelling errors Dutch.txt --legacy'}   | ${[pathSamples('Dutch.txt'), '--legacy']}                                                | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with spelling errors --silent Dutch.txt'}   | ${['--silent', pathSamples('Dutch.txt')]}                                                | ${app.CheckFailed} | ${false} | ${false} | ${false}
+        ${'current_file languageId'}                   | ${[__filename, '--languageId=typescript']}                                               | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'check help'}                                | ${['check', '--help']}                                                                   | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'check LICENSE'}                             | ${['check', pathRoot('LICENSE')]}                                                        | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'check missing'}                             | ${['check', pathRoot('missing-file.txt')]}                                               | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'check with spelling errors'}                | ${['check', pathSamples('Dutch.txt')]}                                                   | ${app.CheckFailed} | ${false} | ${true}  | ${false}
+        ${'LICENSE'}                                   | ${[pathRoot('LICENSE')]}                                                                 | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                                            | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'current_file --verbose'}                    | ${['--verbose', __filename]}                                                             | ${undefined}       | ${true}  | ${false} | ${true}
+        ${'bad config'}                                | ${['-c', __filename, __filename]}                                                        | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'not found error by default'}                | ${['*.not']}                                                                             | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'must find with error'}                      | ${['*.not', '--must-find-files']}                                                        | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'must find force no error'}                  | ${['*.not', '--no-must-find-files']}                                                     | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'cspell-bad.json'}                           | ${['-c', pathSamples('cspell-bad.json'), __filename]}                                    | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'cspell-import-missing.json'}                | ${['-c', pathSamples('linked/cspell-import-missing.json'), __filename]}                  | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'--fail-fast no option'}                     | ${['--root', pathSamples('fail-fast'), '*.txt']}                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'--fail-fast with option'}                   | ${['--root', pathSamples('fail-fast'), '--fail-fast', '*.txt']}                          | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'--fail-fast with config'}                   | ${['--root', pathSamples('fail-fast'), '-c', failFastConfig, '*.txt']}                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'--no-fail-fast with config'}                | ${['--root', pathSamples('fail-fast'), '--no-fail-fast', '-c', failFastConfig, '*.txt']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         const commander = getCommander();
         const args = argv(...testArgs);
