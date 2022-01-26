@@ -1,8 +1,8 @@
 import type { FileDescriptor, FileEntryCache } from 'file-entry-cache';
 import * as fileEntryCache from 'file-entry-cache';
 import { resolve as resolvePath } from 'path';
-import type { FileResult } from '../../fileHelper';
-import { readFileInfo } from '../../fileHelper';
+import type { FileResult } from '../../util/fileHelper';
+import { readFileInfo } from '../../util/fileHelper';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
 
 export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs'>;

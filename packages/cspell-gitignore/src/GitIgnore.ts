@@ -51,18 +51,23 @@ export class GitIgnore {
         this.resolvedGitIgnoreHierarchies.set(directory, found);
         return find;
     }
+    filterOutIgnored(files: string[]): Promise<string[]>;
+    filterOutIgnored(files: Iterable<string>): Promise<string[]>;
+    filterOutIgnored(files: AsyncIterable<string>): AsyncIterable<string>;
+    filterOutIgnored(files: Iterable<string> | AsyncIterable<string>): Promise<string[]> | AsyncIterable<string>;
+    filterOutIgnored(files: Iterable<string> & AsyncIterable<string>): AsyncIterable<string>;
+    filterOutIgnored(files: Iterable<string> | AsyncIterable<string>): Promise<string[]> | AsyncIterable<string> {
+        const iter = this.filterOutIgnoredAsync(files);
+        return isAsyncIterable(files) ? iter : asyncIterableToArray(iter);
+    }
 
-    async filterOutIgnored(files: string[]): Promise<string[]> {
-        const result: string[] = [];
-
-        for (const file of files) {
+    async *filterOutIgnoredAsync(files: Iterable<string> | AsyncIterable<string>): AsyncIterable<string> {
+        for await (const file of files) {
             const isIgnored = this.isIgnoredQuick(file) ?? (await this.isIgnored(file));
             if (!isIgnored) {
-                result.push(file);
+                yield file;
             }
         }
-
-        return result;
     }
 
     get roots(): string[] {
@@ -124,4 +129,18 @@ function resolveAndSortRoots(roots: string[]): string[] {
 function sortRoots(roots: string[]): string[] {
     roots.sort((a, b) => a.length - b.length);
     return roots;
+}
+
+function isAsyncIterable<T>(i: Iterable<T> | AsyncIterable<T>): i is AsyncIterable<T> {
+    const as = <AsyncIterable<T>>i;
+    return typeof as[Symbol.asyncIterator] === 'function';
+}
+
+async function asyncIterableToArray<T>(iter: Iterable<T> | AsyncIterable<T>): Promise<Awaited<T>[]> {
+    const r: Awaited<T>[] = [];
+
+    for await (const t of iter) {
+        r.push(t);
+    }
+    return r;
 }

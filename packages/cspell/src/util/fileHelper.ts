@@ -1,10 +1,12 @@
 import * as cspell from 'cspell-lib';
 import * as fsp from 'fs-extra';
 import getStdin from 'get-stdin';
-import { GlobOptions, globP } from './util/glob';
+import { GlobOptions, globP } from './glob';
 import * as path from 'path';
 import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
-import { IOError, toApplicationError, toError } from './util/errors';
+import { IOError, toApplicationError, toError } from './errors';
+import { mergeAsyncIterables } from './async';
+import { readStdin } from './stdin';
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
@@ -134,8 +136,16 @@ export function calcFinalConfigInfo(
  *   file will be resolved relative to the containing file.
  * @returns - a list of files to be processed.
  */
-export async function readFileListFiles(listFiles: string[]): Promise<string[]> {
-    return flatten(await Promise.all(listFiles.map(readFileListFile)));
+export async function readFileListFiles(listFiles: string[]): Promise<string[] | AsyncIterable<string>> {
+    let useStdin = false;
+    const files = listFiles.filter((file) => {
+        const isStdin = file === 'stdin';
+        useStdin = useStdin || isStdin;
+        return !isStdin;
+    });
+    const found = flatten(await Promise.all(files.map(readFileListFile)));
+    // Move `stdin` to the end.
+    return useStdin ? mergeAsyncIterables(found, readStdin()) : found;
 }
 
 /**

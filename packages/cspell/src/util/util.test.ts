@@ -53,10 +53,4 @@ describe('Validate util', () => {
     `('pad', ({ text, n, expected }) => {
         expect(util.pad(text, n)).toBe(expected);
     });
-
-    test('async', async () => {
-        const a = 'hello'.split('');
-        const b = 'there'.split('');
-        expect(await util.asyncIterableToArray(util.mergeAsyncIterables(a, b))).toEqual([...a, ...b]);
-    });
 });

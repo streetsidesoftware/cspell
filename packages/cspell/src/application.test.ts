@@ -6,7 +6,7 @@ import { TraceOptions } from '.';
 import * as App from './application';
 import { LinterOptions } from './options';
 import { InMemoryReporter } from './util/InMemoryReporter';
-import { asyncIterableToArray } from './util/util';
+import { asyncIterableToArray } from './util/async';
 
 const getStdinResult = {
     value: '',

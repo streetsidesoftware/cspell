@@ -1,4 +1,4 @@
-import { FileResult } from '../../fileHelper';
+import { FileResult } from '../../util/fileHelper';
 export interface CSpellLintResultCache {
     /**
      * Retrieve cached lint results for a given file name, if present in the cache.
