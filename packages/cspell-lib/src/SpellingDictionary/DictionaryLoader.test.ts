@@ -1,5 +1,6 @@
-import { testing, loadDictionary, refreshCacheEntries, LoadOptions } from './DictionaryLoader';
 import * as path from 'path';
+import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
+import { loadDictionary, LoadOptions, refreshCacheEntries, testing } from './DictionaryLoader';
 jest.mock('../util/logger');
 
 const root = path.join(__dirname, '..', '..');
@@ -23,10 +24,10 @@ describe('Validate DictionaryLoader', () => {
         ${'./notfound.trie'}    | ${unknownFormatError}
         ${'./notfound.trie.gz'} | ${unknownFormatError}
     `('load not found $filename', async ({ filename, expectedError }: TestLoadEntryNotFound) => {
-        const def: LoadOptions = {
+        const def: LoadOptions = dDef({
             path: filename,
             name: filename,
-        };
+        });
         const dictionary = testing.load(filename, def);
         await expect(dictionary).rejects.toEqual(expect.objectContaining(expectedError));
     });
@@ -38,10 +39,10 @@ describe('Validate DictionaryLoader', () => {
         ${'./notfound.trie'}    | ${unknownFormatError}
         ${'./notfound.trie.gz'} | ${unknownFormatError}
     `('loadEntry not found $filename', async ({ filename, expectedError }: TestLoadEntryNotFound) => {
-        const def: LoadOptions = {
+        const def: LoadOptions = dDef({
             path: filename,
             name: filename,
-        };
+        });
         const entry = testing.loadEntry(filename, def);
 
         await expect(entry.state).resolves.toEqual(expect.objectContaining(expectedError));
@@ -55,10 +56,10 @@ describe('Validate DictionaryLoader', () => {
         ${'./notfound.trie'}
         ${'./notfound.trie.gz'}
     `('loadDictionary not found $filename', async ({ filename }: { filename: string }) => {
-        const def: LoadOptions = {
+        const def: LoadOptions = dDef({
             path: filename,
             name: filename,
-        };
+        });
         const dict = await loadDictionary(filename, def);
         expect(dict.getErrors?.()).toHaveLength(1);
     });
@@ -151,7 +152,7 @@ describe('Validate DictionaryLoader', () => {
         'dict has word $testCase $word',
         async ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
             const file = sample('words.txt');
-            const d = await loadDictionary(file, { name: 'words', path: file });
+            const d = await loadDictionary(file, dDef({ name: 'words', path: file }));
             expect(d.has(word, { ignoreCase })).toBe(hasWord);
         }
     );
@@ -161,4 +162,17 @@ describe('Validate DictionaryLoader', () => {
 
 function sample(file: string): string {
     return path.join(samples, file);
+}
+
+interface DDef extends Partial<DictionaryDefinitionInternal> {
+    name: string;
+    path: string;
+}
+
+function dDef(opts: DDef): DictionaryDefinitionInternal {
+    return {
+        weightMap: undefined,
+        __source: '',
+        ...opts,
+    };
 }

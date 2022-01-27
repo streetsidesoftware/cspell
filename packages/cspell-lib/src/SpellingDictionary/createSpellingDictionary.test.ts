@@ -1,3 +1,4 @@
+import { SpellingDictionaryOptions } from '.';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 
@@ -6,7 +7,7 @@ describe('Validate createSpellingDictionary', () => {
         const error = new Error('error');
         const loaderError = new SpellingDictionaryLoadError(
             './missing.txt',
-            { name: 'failed dict', path: './missing.txt' },
+            { name: 'failed dict', path: './missing.txt', weightMap: undefined, __source: undefined },
             error,
             'Failed to load'
         );
@@ -23,7 +24,7 @@ describe('Validate createSpellingDictionary', () => {
 
     test('createSpellingDictionary', () => {
         const words = ['one', 'two', 'three', 'left-right'];
-        const d = createSpellingDictionary(words, 'test create', __filename, {});
+        const d = createSpellingDictionary(words, 'test create', __filename, opts());
         words.forEach((w) => expect(d.has(w)).toBe(true));
     });
 
@@ -31,7 +32,7 @@ describe('Validate createSpellingDictionary', () => {
         // cspell:disable-next-line
         const words = ['آئینهٔ', 'آبادهٔ', 'کلاه'];
         expect(words).toEqual(words.map((w) => w.normalize('NFC')));
-        const d = createSpellingDictionary(words, 'test create', __filename, {});
+        const d = createSpellingDictionary(words, 'test create', __filename, opts());
         expect(d.has(words[0])).toBe(true);
         words.forEach((w) => expect(d.has(w)).toBe(true));
     });
@@ -44,7 +45,7 @@ describe('Validate createSpellingDictionary', () => {
             words.map((w) => w.replace(/\p{M}/gu, '')),
             'test create',
             __filename,
-            { caseSensitive: false }
+            opts({ caseSensitive: false })
         );
         expect(d.has(words[0])).toBe(true);
         words.forEach((w) => expect(d.has(w)).toBe(true));
@@ -53,7 +54,7 @@ describe('Validate createSpellingDictionary', () => {
     // cspell:ignore Geschäft Aujourd'hui
     test('createSpellingDictionary accents', () => {
         const words = ['Geschäft'.normalize('NFD'), 'café', 'book', "Aujourd'hui"];
-        const d = createSpellingDictionary(words, 'test create', __filename, {});
+        const d = createSpellingDictionary(words, 'test create', __filename, opts());
         expect(d.has(words[0])).toBe(true);
         words.forEach((w) => expect(d.has(w)).toBe(true));
         words.map((w) => w.toLowerCase()).forEach((w) => expect(d.has(w)).toBe(true));
@@ -67,3 +68,10 @@ describe('Validate createSpellingDictionary', () => {
         expect(d.suggest('geschaft', { ignoreCase: false }).map((r) => r.word)).toEqual(['Geschäft']);
     });
 });
+
+function opts(opts: Partial<SpellingDictionaryOptions> = {}): SpellingDictionaryOptions {
+    return {
+        weightMap: undefined,
+        ...opts,
+    };
+}

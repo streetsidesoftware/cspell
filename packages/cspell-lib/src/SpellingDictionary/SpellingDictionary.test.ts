@@ -2,6 +2,7 @@ import { __testMethods } from './SpellingDictionaryMethods';
 import { createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { Trie } from 'cspell-trie-lib';
+import { SpellingDictionaryOptions } from '.';
 
 // cSpell:ignore aple
 
@@ -9,7 +10,7 @@ describe('Verify building Dictionary', () => {
     test('build from word list', async () => {
         const words = ['apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'];
 
-        const dict = await createSpellingDictionary(words, 'words', 'test', {});
+        const dict = await createSpellingDictionary(words, 'words', 'test', opts());
         expect(dict.name).toBe('words');
         expect(dict.has('apple')).toBe(true);
         const suggestions = dict.suggest('aple').map(({ word }) => word);
@@ -33,7 +34,7 @@ describe('Verify building Dictionary', () => {
             'bear',
         ];
 
-        const dict = await createSpellingDictionary(words, 'words', 'test', { useCompounds: true });
+        const dict = await createSpellingDictionary(words, 'words', 'test', opts({ useCompounds: true }));
         expect(dict.has('apple')).toBe(true);
         expect(dict.has('Apple')).toBe(true);
         expect(dict.has('APPLE')).toBe(true);
@@ -48,9 +49,14 @@ describe('Verify building Dictionary', () => {
     test('case-sensitive word list', async () => {
         const words = ['apple', 'Seattle', 'Amsterdam', 'surf', 'words', 'English', 'McGreyer'];
 
-        const dict = await createSpellingDictionary(words, 'words', 'test', {
-            caseSensitive: true,
-        });
+        const dict = await createSpellingDictionary(
+            words,
+            'words',
+            'test',
+            opts({
+                caseSensitive: true,
+            })
+        );
         const ignoreCase = { ignoreCase: true };
         const useCase = { ignoreCase: false };
         expect(dict.has('apple', useCase)).toBe(true);
@@ -89,7 +95,7 @@ describe('Verify building Dictionary', () => {
             'tattles',
         ];
         const trie = Trie.create(words);
-        const dict = new SpellingDictionaryFromTrie(trie, 'trie', {});
+        const dict = new SpellingDictionaryFromTrie(trie, 'trie', opts());
         // cspell:ignore cattles
         const results = dict.suggest('Cattles');
         const suggestions = results.map(({ word }) => word);
@@ -101,7 +107,7 @@ describe('Verify building Dictionary', () => {
         // eslint-disable-next-line no-sparse-arrays
         const words = ['apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'];
 
-        const dict = await createSpellingDictionary(words as string[], 'words', 'test', {});
+        const dict = await createSpellingDictionary(words as string[], 'words', 'test', opts());
         expect(dict.name).toBe('words');
         // expect(dict).toBeInstanceOf(SpellingDictionaryFromTrie);
         expect(dict.has('apple')).toBe(true);
@@ -206,7 +212,7 @@ describe('Verify Case Sensitive Dictionaries', () => {
 
 function sampleDict() {
     const words = sampleWords();
-    return createSpellingDictionary(words, 'words', 'test', { caseSensitive: true });
+    return createSpellingDictionary(words, 'words', 'test', opts({ caseSensitive: true }));
 }
 
 // cspell:words métro Rhône Köln Düsseldorf
@@ -218,4 +224,11 @@ function sampleWords() {
         apple apples ape apes around astound profound compound
         table tables tabled
     `.split(/\s+/g);
+}
+
+function opts(opts: Partial<SpellingDictionaryOptions> = {}): SpellingDictionaryOptions {
+    return {
+        weightMap: undefined,
+        ...opts,
+    };
 }

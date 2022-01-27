@@ -1,4 +1,13 @@
-import type { DictionaryDefinition, DictionaryDefinitionPreferred, DictionaryReference } from '@cspell/cspell-types';
+import type {
+    CustomDictionaryScope,
+    DictionaryDefinition,
+    DictionaryDefinitionPreferred,
+    DictionaryDefinitionAugmented,
+    DictionaryDefinitionCustom,
+    DictionaryFileTypes,
+    DictionaryReference,
+    ReplaceMap,
+} from '@cspell/cspell-types';
 import * as path from 'path';
 import { resolveFile } from '../util/resolveFile';
 import {
@@ -7,6 +16,9 @@ import {
     DictionaryDefinitionInternalWithSource,
 } from '../Models/CSpellSettingsInternalDef';
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
+import { mapDictionaryInformationToWeightMap, WeightMap } from 'cspell-trie-lib';
+import { DictionaryInformation } from '@cspell/cspell-types/dist/DictionaryInformation';
+import { RequireOptional, UnionFields } from '../util/types';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
 
@@ -68,11 +80,6 @@ export function mapDictDefToInternal(
     def: DictionaryDefinition,
     pathToSettingsFile: string
 ): DictionaryDefinitionInternalWithSource {
-    const defaultPath = path.dirname(pathToSettingsFile);
-    const { path: relPath = '', file = '', ...rest } = def;
-    const filePath = path.join(relPath, file);
-    const name = determineName(filePath, def);
-
     if (isDictionaryDefinitionWithSource(def)) {
         if (def.__source !== pathToSettingsFile) {
             throw new Error('Trying to normalize a dictionary definition with a different source.');
@@ -80,14 +87,7 @@ export function mapDictDefToInternal(
         return def;
     }
 
-    const r = resolveFile(filePath, defaultPath);
-    return {
-        ...rest,
-        name,
-        path: r.filename,
-        weightMap: undefined,
-        __source: pathToSettingsFile,
-    };
+    return new _DictionaryDefinitionInternalWithSource(def, pathToSettingsFile);
 }
 
 export function isDictionaryDefinitionWithSource(
@@ -110,4 +110,77 @@ export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): Dict
         return { ...def, noSuggest: enabled };
     });
     return filterDictDefsToLoad(colDicts.enabled(), modDefs);
+}
+
+type DictDef = Partial<
+    UnionFields<UnionFields<DictionaryDefinition, DictionaryDefinitionAugmented>, DictionaryDefinitionCustom>
+>;
+
+class _DictionaryDefinitionInternalWithSource implements RequireOptional<DictionaryDefinitionInternalWithSource> {
+    private _weightMap: WeightMap | undefined;
+    readonly name: string;
+    readonly path: string;
+    readonly addWords: boolean | undefined;
+    readonly description: string | undefined;
+    readonly dictionaryInformation: DictionaryInformation | undefined;
+    readonly type: DictionaryFileTypes | undefined;
+    readonly file: undefined;
+    readonly repMap: ReplaceMap | undefined;
+    readonly useCompounds: boolean | undefined;
+    readonly noSuggest: boolean | undefined;
+    readonly scope: CustomDictionaryScope | CustomDictionaryScope[] | undefined;
+    constructor(def: DictionaryDefinition, readonly __source: string) {
+        // this bit of assignment is to have the compiler help use if any new fields are added.
+        const defAll: DictDef = def;
+        const {
+            path: relPath = '',
+            file = '',
+            addWords,
+            description,
+            dictionaryInformation,
+            type,
+            repMap,
+            noSuggest,
+            scope,
+            useCompounds,
+        } = defAll;
+        const defaultPath = path.dirname(__source);
+        const filePath = path.join(relPath, file);
+        const name = determineName(filePath, def);
+
+        const r = resolveFile(filePath, defaultPath);
+
+        const ddi: Omit<RequireOptional<DictionaryDefinitionInternalWithSource>, '__source' | 'weightMap'> = {
+            name,
+            file: undefined,
+            path: r.filename,
+            addWords,
+            description,
+            dictionaryInformation,
+            type,
+            repMap,
+            noSuggest,
+            scope,
+            useCompounds,
+        };
+
+        this.name = ddi.name;
+        this.file = ddi.file;
+        this.path = ddi.path;
+        this.addWords = ddi.addWords;
+        this.description = ddi.description;
+        this.dictionaryInformation = ddi.dictionaryInformation;
+        this.type = ddi.type;
+        this.repMap = ddi.repMap;
+        this.noSuggest = ddi.noSuggest;
+        this.scope = ddi.scope;
+        this.useCompounds = ddi.useCompounds;
+        this._weightMap = this.dictionaryInformation
+            ? mapDictionaryInformationToWeightMap(this.dictionaryInformation)
+            : undefined;
+    }
+
+    get weightMap() {
+        return this._weightMap;
+    }
 }

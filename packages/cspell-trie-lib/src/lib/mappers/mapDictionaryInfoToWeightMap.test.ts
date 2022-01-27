@@ -149,6 +149,7 @@ describe('mapAffToWeightMap', () => {
         expect(affKeyCaps(line, calcCosts(costs))).toEqual(expected);
     });
 
+    // cspell:ignore qwér
     test.each`
         line                          | costs                      | expected
         ${''}                         | ${{}}                      | ${undefined}

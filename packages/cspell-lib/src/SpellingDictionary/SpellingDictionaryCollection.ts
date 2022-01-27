@@ -28,7 +28,7 @@ function identityString(w: string): string {
 }
 
 export class SpellingDictionaryCollection implements SpellingDictionary {
-    readonly options: SpellingDictionaryOptions = {};
+    readonly options: SpellingDictionaryOptions = { weightMap: undefined };
     readonly mapWord = identityString;
     readonly type = 'SpellingDictionaryCollection';
     readonly source: string;
