@@ -16,19 +16,19 @@ export interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTra
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 
 export interface DictionaryDefinitionInternal
-    extends DictionaryDefinitionPreferred,
-        Partial<DictionaryDefinitionCustomUniqueFields>,
-        DictionaryDefinitionAugmented {
+    extends Readonly<DictionaryDefinitionPreferred>,
+        Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>,
+        Readonly<DictionaryDefinitionAugmented> {
     /**
      * Optional weight map used to improve suggestions.
      */
-    weightMap?: WeightMap;
+    readonly weightMap?: WeightMap | undefined;
     /** The path to the config file that contains this dictionary definition */
-    __source?: string;
+    readonly __source?: string | undefined;
 }
 
 export interface DictionaryDefinitionInternalWithSource extends DictionaryDefinitionInternal {
-    __source: string;
+    readonly __source: string;
 }
 
 export function createCSpellSettingsInternal(parts: Partial<CSpellSettingsInternal> = {}): CSpellSettingsInternal {

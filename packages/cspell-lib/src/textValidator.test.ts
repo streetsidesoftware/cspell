@@ -7,7 +7,7 @@ import {
     ValidationOptions,
 } from './textValidator';
 import { createCSpellSettingsInternal as csi } from './Models/CSpellSettingsInternalDef';
-import { createCollection, getDictionaryInternal } from './SpellingDictionary';
+import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from './util/FreqCounter';
 import * as Text from './util/text';
@@ -63,7 +63,7 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
-        const dictEmpty = await createSpellingDictionary([], 'empty', 'test', {});
+        const dictEmpty = await createSpellingDictionary([], 'empty', 'test', opts());
         const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
         const result = validateText(text, dictEmpty, sToV({})).toArray();
         const errors = result.map((wo) => wo.text);
@@ -110,9 +110,14 @@ describe('Validate textValidator functions', () => {
             specialWords
         );
         const flagWords = ['VeryBadProblem'];
-        const dict = createSpellingDictionary(wordList, 'empty', 'test', {
-            caseSensitive: true,
-        });
+        const dict = createSpellingDictionary(
+            wordList,
+            'empty',
+            'test',
+            opts({
+                caseSensitive: true,
+            })
+        );
         const text = `
             We have PUBLISHed published Multiple FIXesToThePROBLEMs.
             VeryBadProblem with the 4wheel of the Range8 in Amsterdam, Berlin, and paris.
@@ -153,7 +158,7 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests maxDuplicateProblems', async () => {
-        const dict = await createSpellingDictionary([], 'empty', 'test', {});
+        const dict = await createSpellingDictionary([], 'empty', 'test', opts());
         const text = sampleText;
         const result = validateText(
             text,
@@ -166,7 +171,7 @@ describe('Validate textValidator functions', () => {
         const freq = FreqCounter.create(result.map((t) => t.text));
         expect(freq.total).toBe(freq.counters.size);
         const words = freq.counters.keys();
-        const dict2 = await createSpellingDictionary(words, 'test', 'test', {});
+        const dict2 = await createSpellingDictionary(words, 'test', 'test', opts());
         const result2 = [...validateText(text, dict2, sToV({ maxNumberOfProblems: 1000, maxDuplicateProblems: 1 }))];
         expect(result2.length).toBe(0);
     });
@@ -334,19 +339,31 @@ const sampleText = `
 
 function getSpellingDictionaryCollectionSync(options?: WithIgnoreWords) {
     const dicts = [
-        createSpellingDictionary(colors, 'colors', 'test', {}),
-        createSpellingDictionary(fruit, 'fruit', 'test', {}),
-        createSpellingDictionary(animals, 'animals', 'test', {}),
-        createSpellingDictionary(insects, 'insects', 'test', {}),
-        createSpellingDictionary(words, 'words', 'test', { repMap: [['’', "'"]] }),
-        createSpellingDictionary(forbiddenWords, 'forbidden-words', 'test', {}),
-        createSpellingDictionary(options?.ignoreWords || [], 'ignore-words', 'test', {
-            caseSensitive: true,
-            noSuggest: true,
-        }),
+        createSpellingDictionary(colors, 'colors', 'test', opts()),
+        createSpellingDictionary(fruit, 'fruit', 'test', opts()),
+        createSpellingDictionary(animals, 'animals', 'test', opts()),
+        createSpellingDictionary(insects, 'insects', 'test', opts()),
+        createSpellingDictionary(words, 'words', 'test', opts({ repMap: [['’', "'"]] })),
+        createSpellingDictionary(forbiddenWords, 'forbidden-words', 'test', opts()),
+        createSpellingDictionary(
+            options?.ignoreWords || [],
+            'ignore-words',
+            'test',
+            opts({
+                caseSensitive: true,
+                noSuggest: true,
+            })
+        ),
     ];
 
     return createCollection(dicts, 'collection');
+}
+
+function opts(opts: Partial<SpellingDictionaryOptions> = {}): SpellingDictionaryOptions {
+    return {
+        weightMap: undefined,
+        ...opts,
+    };
 }
 
 function ov<T>(t: Partial<T>, ...rest: Partial<T>[]): T {

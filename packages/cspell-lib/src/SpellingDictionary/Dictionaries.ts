@@ -22,6 +22,7 @@ export function getDictionaryInternal(settings: CSpellSettingsInternal): Promise
         'From Settings `words` and `userWords`',
         {
             caseSensitive: true,
+            weightMap: undefined,
         }
     );
     const ignoreWordsDictionary = createSpellingDictionary(
@@ -31,14 +32,12 @@ export function getDictionaryInternal(settings: CSpellSettingsInternal): Promise
         {
             caseSensitive: true,
             noSuggest: true,
+            weightMap: undefined,
         }
     );
-    const flagWordsDictionary = createForbiddenWordsDictionary(
-        flagWords,
-        '[flagWords]',
-        'From Settings `flagWords`',
-        {}
-    );
+    const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '[flagWords]', 'From Settings `flagWords`', {
+        weightMap: undefined,
+    });
     return createCollectionP(
         [...spellDictionaries, settingsDictionary, ignoreWordsDictionary, flagWordsDictionary],
         'dictionary collection'

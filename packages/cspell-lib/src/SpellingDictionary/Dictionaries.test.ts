@@ -128,7 +128,7 @@ describe('Validate getDictionary', () => {
     test('Dictionary NOT Found', async () => {
         const weightMap = undefined;
         const settings = csi({
-            dictionaryDefinitions: [{ name: 'my-words', path: './not-found.txt', weightMap }],
+            dictionaryDefinitions: [{ name: 'my-words', path: './not-found.txt', weightMap, __source: undefined }],
             dictionaries: ['my-words'],
         });
 
@@ -148,11 +148,13 @@ describe('Validate getDictionary', () => {
                 name: 'temp',
                 path: tempDictPath,
                 weightMap,
+                __source: undefined,
             },
             {
                 name: 'not_found',
                 path: tempDictPath,
                 weightMap,
+                __source: undefined,
             },
         ]);
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];

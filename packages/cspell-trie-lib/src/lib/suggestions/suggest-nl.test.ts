@@ -1,7 +1,7 @@
 import assert from 'assert';
-import { WeightMap } from '..';
-import { affToWeightMap, readAff, readSampleTrie } from '../../test/dictionaries.test.helper';
-import { addDefToWeightMap } from '../distance/weightedMaps';
+import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
+import { readRawDictionaryFile, readSampleTrie } from '../../test/dictionaries.test.helper';
+import { DictionaryInformation } from '../models/DictionaryInformation';
 
 function getTrie() {
     return readSampleTrie('nl_compound_trie3.trie.gz');
@@ -10,12 +10,11 @@ function getTrie() {
 const timeout = 5000;
 const pTrieNL = getTrie();
 
-const pAff = readAff('hunspell/Dutch.aff');
+const pAffContent = readRawDictionaryFile('hunspell/Dutch.aff');
 
-let aff: Awaited<typeof pAff> | undefined = undefined;
-let _weightMap: WeightMap | undefined;
+let affContent: string | undefined;
 
-const pReady = Promise.all([pTrieNL, pAff.then((affInfo) => (aff = affInfo))]).then(() => {
+const pReady = Promise.all([pTrieNL, pAffContent.then((aff) => (affContent = aff))]).then(() => {
     return undefined;
 });
 
@@ -78,34 +77,35 @@ describe('Validate Dutch Suggestions', () => {
     // cspell:ignore buurt
     test.each`
         word             | expected
-        ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buur', 99), sr('buut', 99)]}
+        ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buur', 95), sr('buut', 95)]}
+        ${'eén'}         | ${ac([sr('een', 1)])}
         ${'buurmaan'}    | ${ac([sr('buurman', 45)])}
         ${'positeve'}    | ${ac([sr('positieve', 45), sr('positieven', 90)])}
         ${'positieven'}  | ${ac([sr('positieven', 0), sr('positieve', 45)])}
         ${'positive'}    | ${ac([sr('positieve', 45)])}
         ${'verklaaring'} | ${ac([sr('verklaring', 45)])}
         ${'Mexico-Stad'} | ${ac([sr('Mexico-Stad', 0)])}
-        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-star', 100)])}
+        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-star', 95)])}
         ${'word'}        | ${ac([sr('word', 0), sr('wordt', 30)])}
         ${'kostelos'}    | ${ac([sr('kosteloos', 45) /*, sr('kostenloos', 90) */])}
         ${'kosteloos'}   | ${ac([sr('kosteloos', 0), sr('kostenloos', 45)])}
     `('Weighted Results "$word"', async ({ word, expected }) => {
         await pReady;
         const trie = await pTrieNL;
-        const results = trie.suggestWithCost(word, { numSuggestions: 8, weightMap: weightMap(), ignoreCase: false });
+        const results = trie.suggestWithCost(word, {
+            numSuggestions: 8,
+            weightMap: weightMapFromAff(),
+            ignoreCase: false,
+        });
         const suggestions = results;
         suggestions.length = Math.min(suggestions.length, 4);
         expect(suggestions).toEqual(expected);
     });
 });
 
-function weightMap(): WeightMap {
-    if (_weightMap) return _weightMap;
-    assert(aff);
-    _weightMap = affToWeightMap(aff);
-
-    return addDefToWeightMap(
-        _weightMap,
+const defaultDictInfo: DictionaryInformation = {
+    locale: 'nl-NL',
+    suggestionEditCosts: [
         {
             map: 'aeiou',
             replace: 50,
@@ -131,10 +131,25 @@ function weightMap(): WeightMap {
             map: '1234567890-.',
             insDel: 1,
             penalty: 200,
-        }
-    );
-}
+        },
+    ],
+};
 
+let __weightMapFromAff: WeightMap | undefined;
+
+function weightMapFromAff(): WeightMap {
+    if (__weightMapFromAff) return __weightMapFromAff;
+    assert(affContent);
+
+    const di: DictionaryInformation = {
+        ...defaultDictInfo,
+        hunspellInformation: {
+            aff: affContent,
+        },
+    };
+
+    return (__weightMapFromAff = mapDictionaryInformationToWeightMap(di));
+}
 // cspell:ignore conv OCONV
 // cspell:ignore aeiou positeve buurmaan buurman buurmaag buurmaat buurmaand beurt buur buut positie positieve
 // cspell:ignore positieven positiever positivo verklaaring verklaring wordt kosteloos kostelos kostenloos

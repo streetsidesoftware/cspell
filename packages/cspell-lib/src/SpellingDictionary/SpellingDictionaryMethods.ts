@@ -1,7 +1,6 @@
 import { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { isUpperCase, removeAccents, ucFirst } from '../util/text';
-import { FunctionArgs } from '../util/types';
 import { HasOptions, SearchOptions, SpellingDictionary, SuggestOptions } from './SpellingDictionary';
 
 export { suggestionCollector } from 'cspell-trie-lib';
@@ -9,8 +8,8 @@ export { suggestionCollector } from 'cspell-trie-lib';
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
 export type SuggestArgs =
-    | FunctionArgs<SpellingDictionary['suggest']>
-    | FunctionArgs<
+    | Parameters<SpellingDictionary['suggest']>
+    | Parameters<
           (
               word: string,
               numSuggestions?: number,

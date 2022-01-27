@@ -1,21 +1,40 @@
 import { createWeightMap, WeightMap } from '../distance/weightedMaps';
 import type { DictionaryInformation, HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
+import { parseLocale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { isDefined } from '../utils/util';
+import { clean, flatten, isDefined, unique } from '../utils/util';
 
-type Costs = Required<HunspellCosts>;
+interface Costs extends Required<HunspellCosts> {
+    locale?: string | string[] | undefined;
+}
 
-export function dictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap {
+export function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap {
     const defsEC = dictInfo.suggestionEditCosts || [];
     const defsHI = dictInfo.hunspellInformation
-        ? hunspellInformationToSuggestionCostDef(dictInfo.hunspellInformation)
+        ? hunspellInformationToSuggestionCostDef(dictInfo.hunspellInformation, dictInfo.locale)
         : [];
     return createWeightMap(...defsEC, ...defsHI);
 }
 
-export function hunspellInformationToSuggestionCostDef(hunInfo: HunspellInformation): SuggestionCostMapDef[] {
+export function hunspellInformationToSuggestionCostDef(
+    hunInfo: HunspellInformation,
+    locale: string | undefined
+): SuggestionCostMapDef[] {
     const defs: SuggestionCostMapDef[] = [];
-    const costs = calcCosts(hunInfo.costs);
+    const costs = calcCosts(hunInfo.costs, locale);
+
+    const operations = [
+        affKey,
+        affKeyAccents,
+        affKeyCaps,
+        affMap,
+        affMapAccents,
+        affMapCaps,
+        affNoTry,
+        affRepConv,
+        affTry,
+        affTryFirstCharacterReplace,
+    ];
 
     function parseAff(aff: string, costs: Costs) {
         // cspell:ignore OCONV
@@ -29,7 +48,7 @@ export function hunspellInformationToSuggestionCostDef(hunInfo: HunspellInformat
             .filter((a) => regSupportedAff.test(a))
             .filter((a) => !rejectAff.test(a));
         lines.forEach((line) => {
-            [affMap, affNoTry, affRepConv, affTry, affTryFirstCharacterReplace, affKey]
+            operations
                 .map((fn) => fn(line, costs))
                 .filter(isDefined)
                 .forEach((def) => defs.push(def));
@@ -41,16 +60,33 @@ export function hunspellInformationToSuggestionCostDef(hunInfo: HunspellInformat
     return defs;
 }
 
-function calcCosts(costs: HunspellCosts = {}): Costs {
+function calcCosts(costs: HunspellCosts = {}, locale?: string | undefined): Costs {
+    const _locale = parseLocale(locale || '')
+        .filter((loc) => loc.isValid())
+        .map((loc) => loc.locale);
+    const useLocale = _locale.length ? _locale : undefined;
+
     const {
+        accentCosts = 1,
+        capsCosts = 1,
         firstLetterPenalty = 4,
         ioConvertCost = 30,
         keyboardCost = 94,
         mapCost = 25,
         replaceCosts = 75,
         tryCharCost = 95,
-    } = costs;
-    const c: Costs = { tryCharCost, keyboardCost, mapCost, ioConvertCost, replaceCosts, firstLetterPenalty };
+    } = clean(costs);
+    const c: Costs = {
+        accentCosts,
+        capsCosts,
+        firstLetterPenalty,
+        ioConvertCost,
+        keyboardCost,
+        locale: useLocale,
+        mapCost,
+        replaceCosts,
+        tryCharCost,
+    };
     return c;
 }
 
@@ -154,15 +190,81 @@ function affKey(line: string, costs: Costs): SuggestionCostMapDef | undefined {
     const pairs = [...split(kbd)]
         .map(reducer((p, v) => ({ a: p.b, b: v }), { a: '|', b: '|' }))
         .filter((ab) => ab.a !== '|' && ab.b !== '|')
-        .map((ab) => ab.a + ab.b);
+        .map(({ a, b }) => joinLetters([a, b]));
 
-    const map = pairs.join('|');
+    const pairsUpper = pairs.map((p) => p.toLocaleUpperCase(costs.locale));
+
+    const map = unique(pairs.concat(pairsUpper)).join('|');
     const cost = costs.keyboardCost;
 
     return {
         map,
         replace: cost,
         swap: cost,
+    };
+}
+
+function affKeyCaps(line: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const m = line.match(regExpKey);
+    if (!m) return undefined;
+    return parseCaps(m[1], costs);
+}
+
+function affMapCaps(line: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const m = line.match(regExpMap);
+    if (!m) return undefined;
+    return parseCaps(m[1], costs);
+}
+
+function affKeyAccents(line: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const m = line.match(regExpKey);
+    if (!m) return undefined;
+    return parseAccents(m[1], costs);
+}
+
+function affMapAccents(line: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const m = line.match(regExpMap);
+    if (!m) return undefined;
+    return parseAccents(m[1], costs);
+}
+
+function parseCaps(value: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const locale = costs.locale;
+    const letters = [...split(value)].filter((a) => a !== '|');
+    const withCases = letters
+        .map((s) => caseForms(s, locale))
+        .filter((forms) => forms.length > 1)
+        .map(joinLetters);
+
+    const map = unique(withCases).join('|');
+    const cost = costs.capsCosts;
+
+    if (!map) return undefined;
+
+    return {
+        map,
+        replace: cost,
+    };
+}
+
+function parseAccents(value: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const locale = costs.locale;
+    const letters = [...split(value)].filter((a) => a !== '|');
+    const withCases = letters.map((s) =>
+        caseForms(s, locale)
+            .map((form) => [form, stripAccents(form)])
+            .filter(([a, b]) => a !== b)
+            .map(joinLetters)
+    );
+
+    const map = unique(flatten(withCases)).join('|');
+    const cost = costs.accentCosts;
+
+    if (!map) return undefined;
+
+    return {
+        map,
+        replace: cost,
     };
 }
 
@@ -188,25 +290,49 @@ function* split(map: string): Iterable<string> {
     }
 }
 
+/**
+ * Bring letters / strings together.
+ * - `['a', 'b'] => 'ab'`
+ * - `['a', 'bc'] => 'a(bc)'`
+ * @param letters - letters to join
+ */
+function joinLetters(letters: string[]): string {
+    return letters.map((a) => (a.length > 1 ? `(${a})` : a)).join('');
+}
+
 function reducer<T, U = T>(fn: (acc: U, val: T, i: number) => U, initialVal: U) {
     let acc = initialVal;
     return (val: T, i: number) => (acc = fn(acc, val, i));
 }
 
-// function pipe<T>(v: T, ...fns: ((v: T) => T)[]): T {
-//     for (const fn of fns) {
-//         v = fn(v);
-//     }
-//     return v;
-// }
+function caseForms(s: string, locale: string | string[] | undefined): string[] {
+    const forms = new Set([s]);
+
+    function tryCases(s: string) {
+        forms.add(s.toLocaleLowerCase(locale));
+        forms.add(s.toLocaleUpperCase(locale));
+    }
+
+    tryCases(s);
+    [...forms].forEach(tryCases);
+    return [...forms].filter((a) => !!a);
+}
+
+function stripAccents(s: string): string {
+    return s.normalize('NFD').replace(/\p{M}/gu, '');
+}
 
 export const __testing__ = {
     affKey,
+    affKeyAccents,
+    affKeyCaps,
     affMap,
+    affMapAccents,
+    affMapCaps,
     affNoTry,
     affRepConv,
     affTry,
     affTryFirstCharacterReplace,
-    split,
     calcCosts,
+    split,
 };

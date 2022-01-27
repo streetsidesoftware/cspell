@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, SuggestionCostsDefs, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -161,7 +161,7 @@ interface SpellingDictionaryOptions {
     useCompounds?: boolean;
     caseSensitive?: boolean;
     noSuggest?: boolean;
-    suggestionDefs?: SuggestionCostsDefs | undefined;
+    weightMap?: WeightMap | undefined;
 }
 interface SpellingDictionary {
     readonly name: string;
@@ -214,13 +214,13 @@ interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'di
     dictionaryDefinitions?: DictionaryDefinitionInternal[];
 }
 declare type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
-interface DictionaryDefinitionInternal extends DictionaryDefinitionPreferred, Partial<DictionaryDefinitionCustomUniqueFields>, DictionaryDefinitionAugmented {
+interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
     /**
      * Optional weight map used to improve suggestions.
      */
-    weightMap?: WeightMap;
+    readonly weightMap?: WeightMap | undefined;
     /** The path to the config file that contains this dictionary definition */
-    __source?: string;
+    readonly __source?: string | undefined;
 }
 
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
@@ -229,7 +229,7 @@ interface IterableLike<T> {
     [Symbol.iterator]: () => Iterator<T> | IterableIterator<T>;
 }
 
-declare type LoadOptions = DictionaryDefinitionPreferred;
+declare type LoadOptions = DictionaryDefinitionInternal;
 
 declare class SpellingDictionaryLoadError extends Error {
     readonly uri: string;

@@ -8,6 +8,12 @@ import { SuggestionCostsDefs } from '.';
  */
 export interface DictionaryInformation {
     /**
+     * The locale of the dictionary.
+     * Example: `nl,nl-be`
+     */
+    locale?: string;
+
+    /**
      * Used in making suggestions. The lower the value, the more likely the suggestion
      * will be near the top of the suggestion list.
      */
@@ -230,4 +236,18 @@ interface HunspellCosts {
      * @default 75
      */
     replaceCosts?: number;
+
+    /**
+     * The cost to change capitalization.
+     * This should be very cheap, it helps with fixing capitalization issues.
+     * @default 1
+     */
+    capsCosts?: number;
+
+    /**
+     * The cost to add / remove an accent
+     * This should be very cheap, it helps with fixing accent issues.
+     * @default 1
+     */
+    accentCosts?: number;
 }

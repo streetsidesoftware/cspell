@@ -1,5 +1,5 @@
-import type { ReplaceMap, SuggestionCostsDefs } from '@cspell/cspell-types';
-import { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+import type { ReplaceMap } from '@cspell/cspell-types';
+import { CompoundWordsMethod, SuggestionCollector, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 
@@ -57,7 +57,7 @@ export interface SpellingDictionaryOptions {
     useCompounds?: boolean;
     caseSensitive?: boolean;
     noSuggest?: boolean;
-    suggestionDefs?: SuggestionCostsDefs | undefined;
+    weightMap?: WeightMap | undefined;
 }
 
 export interface SpellingDictionary {

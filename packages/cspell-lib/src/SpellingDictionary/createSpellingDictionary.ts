@@ -5,6 +5,10 @@ import { SpellingDictionary, SpellingDictionaryOptions } from './SpellingDiction
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { operators } from 'gensequence';
 
+const defaultOptions: SpellingDictionaryOptions = Object.freeze({
+    weightMap: undefined,
+});
+
 export function createSpellingDictionary(
     wordList: string[] | IterableLike<string>,
     name: string,
@@ -14,7 +18,7 @@ export function createSpellingDictionary(
     // console.log(`createSpellingDictionary ${name} ${source}`);
     const words = parseDictionaryLines(wordList);
     const trie = buildTrieFast(words);
-    return new SpellingDictionaryFromTrie(trie, name, options || {}, source);
+    return new SpellingDictionaryFromTrie(trie, name, options || defaultOptions, source);
 }
 
 export function createForbiddenWordsDictionary(
@@ -29,7 +33,7 @@ export function createForbiddenWordsDictionary(
     });
     const forbidWords = operators.map((w: string) => '!' + w)(words);
     const trie = buildTrieFast(forbidWords);
-    return new SpellingDictionaryFromTrie(trie, name, options || {}, source);
+    return new SpellingDictionaryFromTrie(trie, name, options || defaultOptions, source);
 }
 
 export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError): SpellingDictionary {

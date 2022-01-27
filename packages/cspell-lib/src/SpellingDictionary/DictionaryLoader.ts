@@ -1,12 +1,13 @@
-import type { DictionaryDefinitionPreferred, DictionaryFileTypes } from '@cspell/cspell-types';
+import type { DictionaryFileTypes } from '@cspell/cspell-types';
 import { stat } from 'fs-extra';
+import { genSequence } from 'gensequence';
 import * as path from 'path';
+import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { readLines } from '../util/fileReader';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
-import { genSequence } from 'gensequence';
 
 const MAX_AGE = 10000;
 
@@ -18,7 +19,7 @@ const loaders: Loaders = {
     default: loadSimpleWordList,
 };
 
-export type LoadOptions = DictionaryDefinitionPreferred;
+export type LoadOptions = DictionaryDefinitionInternal;
 
 interface CacheEntry {
     uri: string;
@@ -41,7 +42,7 @@ export interface Loaders {
 
 const dictionaryCache = new Map<string, CacheEntry>();
 
-export function loadDictionary(uri: string, options: DictionaryDefinitionPreferred): Promise<SpellingDictionary> {
+export function loadDictionary(uri: string, options: DictionaryDefinitionInternal): Promise<SpellingDictionary> {
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry) {
@@ -52,9 +53,9 @@ export function loadDictionary(uri: string, options: DictionaryDefinitionPreferr
     return loadedEntry.dictionary;
 }
 
-const importantOptionKeys: (keyof DictionaryDefinitionPreferred)[] = ['noSuggest', 'useCompounds'];
+const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['noSuggest', 'useCompounds'];
 
-function calcKey(uri: string, options: DictionaryDefinitionPreferred) {
+function calcKey(uri: string, options: DictionaryDefinitionInternal) {
     const loaderType = determineType(uri, options);
     const optValues = importantOptionKeys.map((k) => options[k]?.toString() || '');
     const parts = [uri, loaderType].concat(optValues);

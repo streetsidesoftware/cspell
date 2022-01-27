@@ -1,4 +1,5 @@
 import * as Trie from 'cspell-trie-lib';
+import { SpellingDictionaryOptions } from '.';
 import {
     createFailedToLoadDictionary,
     createForbiddenWordsDictionary,
@@ -34,15 +35,15 @@ describe('Verify using multiple dictionaries', () => {
     // cspell:ignore pinkberry behaviour
     const wordsNoSug = ['colour', 'behaviour', 'favour', 'pinkberry'];
 
-    const dictNoSug = createSpellingDictionary(wordsNoSug, 'words-no-suggest', 'test', { noSuggest: true });
-    const dictLegacy = createSpellingDictionary(wordsLegacy, 'legacy-dict', 'test', { useCompounds: true });
+    const dictNoSug = createSpellingDictionary(wordsNoSug, 'words-no-suggest', 'test', opts({ noSuggest: true }));
+    const dictLegacy = createSpellingDictionary(wordsLegacy, 'legacy-dict', 'test', opts({ useCompounds: true }));
 
     test('checks for existence', async () => {
         const dicts = await Promise.all([
-            createSpellingDictionary(wordsA, 'wordsA', 'test', {}),
-            createSpellingDictionary(wordsB, 'wordsB', 'test', {}),
-            createSpellingDictionary(wordsC, 'wordsC', 'test', {}),
-            createSpellingDictionary(wordsD, 'wordsD', 'test', {}),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', opts()),
             createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ]);
 
@@ -58,23 +59,23 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     test('checks mapWord is identity', async () => {
-        const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test', {})]);
+        const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test', opts())]);
 
         const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
         expect(dictCollection.mapWord('Hello')).toBe('Hello');
     });
 
     test('checks for suggestions', async () => {
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', opts());
         const dicts = await Promise.all([
             trie,
-            createSpellingDictionary(wordsB, 'wordsB', 'test', {}),
-            createSpellingDictionary(wordsA, 'wordsA', 'test', {}),
-            createSpellingDictionary(wordsC, 'wordsC', 'test', {}),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
             createFailedToLoadDictionary(
                 new SpellingDictionaryLoadError(
                     './missing.txt',
-                    { name: 'error', path: './missing.txt' },
+                    { name: 'error', path: './missing.txt', weightMap: undefined, __source: '' },
                     new Error('error'),
                     'failed to load'
                 )
@@ -93,7 +94,7 @@ describe('Verify using multiple dictionaries', () => {
 
     test('checks for compound suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', opts());
         trie.options.useCompounds = true;
         const dicts = await Promise.all([
             trie,
@@ -113,7 +114,7 @@ describe('Verify using multiple dictionaries', () => {
 
     test('checks for compound NONE suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', opts());
         trie.options.useCompounds = true;
         const dicts = await Promise.all([
             trie,
@@ -135,7 +136,7 @@ describe('Verify using multiple dictionaries', () => {
 
     test('checks for compound JOIN_WORDS suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', opts());
         trie.options.useCompounds = true;
         const dicts = await Promise.all([
             trie,
@@ -158,7 +159,7 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     test('checks for compound suggestions with numbChanges', async () => {
-        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', {});
+        const trie = new SpellingDictionaryFromTrie(Trie.Trie.create(wordsA), 'wordsA', opts());
         const dicts = await Promise.all([
             trie,
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
@@ -403,3 +404,10 @@ describe('Validate looking up words', () => {
         expect(testDictCollection.has(word)).toBe(found);
     });
 });
+
+function opts(opts: Partial<SpellingDictionaryOptions> = {}): SpellingDictionaryOptions {
+    return {
+        weightMap: undefined,
+        ...opts,
+    };
+}
