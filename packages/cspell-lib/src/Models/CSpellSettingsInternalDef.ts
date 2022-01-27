@@ -22,9 +22,9 @@ export interface DictionaryDefinitionInternal
     /**
      * Optional weight map used to improve suggestions.
      */
-    readonly weightMap: WeightMap | undefined;
+    readonly weightMap?: WeightMap | undefined;
     /** The path to the config file that contains this dictionary definition */
-    readonly __source: string | undefined;
+    readonly __source?: string | undefined;
 }
 
 export interface DictionaryDefinitionInternalWithSource extends DictionaryDefinitionInternal {
