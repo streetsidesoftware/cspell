@@ -2,7 +2,7 @@ import { createWeightMap, WeightMap } from '../distance/weightedMaps';
 import type { DictionaryInformation, HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
 import { parseLocale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { clean, isDefined, unique } from '../utils/util';
+import { clean, flatten, isDefined, unique } from '../utils/util';
 
 interface Costs extends Required<HunspellCosts> {
     locale?: string | string[] | undefined;
@@ -23,21 +23,23 @@ export function hunspellInformationToSuggestionCostDef(
     const defs: SuggestionCostMapDef[] = [];
     const costs = calcCosts(hunInfo.costs, locale);
 
+    const operations = [
+        affKey,
+        affKeyAccents,
+        affKeyCaps,
+        affMap,
+        affMapAccents,
+        affMapCaps,
+        affNoTry,
+        affRepConv,
+        affTry,
+        affTryFirstCharacterReplace,
+    ];
+
     function parseAff(aff: string, costs: Costs) {
         // cspell:ignore OCONV
         const regSupportedAff = /^(?:MAP|KEY|TRY|NO-TRY|ICONV|OCONV|REP)\s/;
         const rejectAff = /^(?:MAP|KEY|TRY|ICONV|OCONV|REP)\s+\d+$/;
-
-        const operations = [
-            affKey,
-            affKeyCaps,
-            affMap,
-            affMapCaps,
-            affNoTry,
-            affRepConv,
-            affTry,
-            affTryFirstCharacterReplace,
-        ];
 
         const lines = aff
             .split('\n')
@@ -214,6 +216,18 @@ function affMapCaps(line: string, costs: Costs): SuggestionCostMapDef | undefine
     return parseCaps(m[1], costs);
 }
 
+function affKeyAccents(line: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const m = line.match(regExpKey);
+    if (!m) return undefined;
+    return parseAccents(m[1], costs);
+}
+
+function affMapAccents(line: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const m = line.match(regExpMap);
+    if (!m) return undefined;
+    return parseAccents(m[1], costs);
+}
+
 function parseCaps(value: string, costs: Costs): SuggestionCostMapDef | undefined {
     const locale = costs.locale;
     const letters = [...split(value)].filter((a) => a !== '|');
@@ -224,6 +238,27 @@ function parseCaps(value: string, costs: Costs): SuggestionCostMapDef | undefine
 
     const map = unique(withCases).join('|');
     const cost = costs.capsCosts;
+
+    if (!map) return undefined;
+
+    return {
+        map,
+        replace: cost,
+    };
+}
+
+function parseAccents(value: string, costs: Costs): SuggestionCostMapDef | undefined {
+    const locale = costs.locale;
+    const letters = [...split(value)].filter((a) => a !== '|');
+    const withCases = letters.map((s) =>
+        caseForms(s, locale)
+            .map((form) => [form, stripAccents(form)])
+            .filter(([a, b]) => a !== b)
+            .map(joinLetters)
+    );
+
+    const map = unique(flatten(withCases)).join('|');
+    const cost = costs.accentCosts;
 
     if (!map) return undefined;
 
@@ -283,10 +318,16 @@ function caseForms(s: string, locale: string | string[] | undefined): string[] {
     return [...forms].filter((a) => !!a);
 }
 
+function stripAccents(s: string): string {
+    return s.normalize('NFD').replace(/\p{M}/gu, '');
+}
+
 export const __testing__ = {
     affKey,
+    affKeyAccents,
     affKeyCaps,
     affMap,
+    affMapAccents,
     affMapCaps,
     affNoTry,
     affRepConv,

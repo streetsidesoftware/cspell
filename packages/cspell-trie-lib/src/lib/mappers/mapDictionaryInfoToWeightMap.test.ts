@@ -7,8 +7,19 @@ import {
 } from './mapDictionaryInfoToWeightMap';
 
 // cspell:ignore conv OCONV
-const { affMap, affRepConv, affNoTry, affTry, affKey, affTryFirstCharacterReplace, calcCosts, affMapCaps, affKeyCaps } =
-    __testing__;
+const {
+    affMap,
+    affRepConv,
+    affNoTry,
+    affTry,
+    affKey,
+    affTryFirstCharacterReplace,
+    calcCosts,
+    affMapCaps,
+    affKeyCaps,
+    affKeyAccents,
+    affMapAccents,
+} = __testing__;
 
 const sampleAff = `
 # comment.
@@ -51,6 +62,7 @@ describe('mapAffToWeightMap', () => {
         ${'MAP aàâäAÀÂÄ'}     | ${{}}             | ${{ map: 'aàâäAÀÂÄ', replace: 25, swap: 25 }}
         ${'MAP 😁😀😊😂🤣😬'} | ${{}}             | ${{ map: '😁😀😊😂🤣😬', replace: 25, swap: 25 }}
         ${'MAP aàâäAÀÂÄ'}     | ${{ mapCost: 1 }} | ${{ map: 'aàâäAÀÂÄ', replace: 1, swap: 1 }}
+        ${'MAP ß(ss)'}        | ${{}}             | ${{ map: 'ß(ss)', replace: 25, swap: 25 }}
     `('affMap "$line" $costs', ({ line, costs, expected }) => {
         expect(affMap(line, calcCosts(costs))).toEqual(expected);
     });
@@ -61,8 +73,20 @@ describe('mapAffToWeightMap', () => {
         ${'MAP aàâäAÀÂÄ'}     | ${{}}                  | ${{ map: 'aA|àÀ|âÂ|äÄ|Aa|Àà|Ââ|Ää', replace: 1 }}
         ${'MAP 😁😀😊😂🤣😬'} | ${{}}                  | ${undefined}
         ${'MAP aàâäAÀÂÄ'}     | ${c({ capsCosts: 2 })} | ${{ map: 'aA|àÀ|âÂ|äÄ|Aa|Àà|Ââ|Ää', replace: 2 }}
+        ${'MAP ß(ss)'}        | ${{}}                  | ${{ map: 'ß(SS)(ss)|(ss)(SS)', replace: 1 }}
     `('affMapCaps "$line" $costs', ({ line, costs, expected }) => {
         expect(affMapCaps(line, calcCosts(costs))).toEqual(expected);
+    });
+
+    test.each`
+        line                  | costs                    | expected
+        ${''}                 | ${{}}                    | ${undefined}
+        ${'MAP aàâäAÀÂÄ'}     | ${{}}                    | ${{ map: 'àa|ÀA|âa|ÂA|äa|ÄA', replace: 1 }}
+        ${'MAP 😁😀😊😂🤣😬'} | ${{}}                    | ${undefined}
+        ${'MAP aàâäAÀÂÄ'}     | ${c({ accentCosts: 2 })} | ${{ map: 'àa|ÀA|âa|ÂA|äa|ÄA', replace: 2 }}
+        ${'MAP ß(ss)'}        | ${{}}                    | ${undefined}
+    `('affMapCaps "$line" $costs', ({ line, costs, expected }) => {
+        expect(affMapAccents(line, calcCosts(costs))).toEqual(expected);
     });
 
     test.each`
@@ -113,7 +137,6 @@ describe('mapAffToWeightMap', () => {
         expect(affKey(line, calcCosts(costs))).toEqual(expected);
     });
 
-    // cspell:ignore qwer zxcv
     test.each`
         line                          | costs                      | expected
         ${''}                         | ${{}}                      | ${undefined}
@@ -124,6 +147,18 @@ describe('mapAffToWeightMap', () => {
         ${'KEY a😁b'}                 | ${c()}                     | ${{ map: 'aA|bB', replace: 1 }}
     `('affKeyCaps "$line" $costs', ({ line, costs, expected }) => {
         expect(affKeyCaps(line, calcCosts(costs))).toEqual(expected);
+    });
+
+    test.each`
+        line                          | costs                      | expected
+        ${''}                         | ${{}}                      | ${undefined}
+        ${'MAP aàâäAÀÂÄ'}             | ${{}}                      | ${undefined}
+        ${'KEY qwér|a|asdf|zxcv'}     | ${c({ keyboardCost: 74 })} | ${{ map: 'ée|ÉE', replace: 1 }}
+        ${'KEY qwér|a|asdf|zxcv'}     | ${c({ accentCosts: 33 })}  | ${{ map: 'ée|ÉE', replace: 33 }}
+        ${'KEY qwer春😁|a|asdf|zxcv'} | ${c()}                     | ${undefined}
+        ${'KEY a😁b'}                 | ${c()}                     | ${undefined}
+    `('affKeyAccents "$line" $costs', ({ line, costs, expected }) => {
+        expect(affKeyAccents(line, calcCosts(costs))).toEqual(expected);
     });
 
     test.each`

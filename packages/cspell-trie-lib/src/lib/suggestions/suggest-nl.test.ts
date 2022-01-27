@@ -78,7 +78,7 @@ describe('Validate Dutch Suggestions', () => {
     test.each`
         word             | expected
         ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buur', 95), sr('buut', 95)]}
-        ${'eén'}         | ${ac([sr('een', 25)])}
+        ${'eén'}         | ${ac([sr('een', 1)])}
         ${'buurmaan'}    | ${ac([sr('buurman', 45)])}
         ${'positeve'}    | ${ac([sr('positieve', 45), sr('positieven', 90)])}
         ${'positieven'}  | ${ac([sr('positieven', 0), sr('positieve', 45)])}

@@ -15,3 +15,9 @@ export function clean<T>(t: Partial<T>): Partial<T> {
 export function unique<T>(a: Iterable<T>): T[] {
     return [...new Set(a)];
 }
+
+export function* flatten<T>(i: Iterable<Iterable<T>>): Iterable<T> {
+    for (const v of i) {
+        yield* v;
+    }
+}
