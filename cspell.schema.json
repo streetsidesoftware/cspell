@@ -369,6 +369,10 @@
           "$ref": "#/definitions/HunspellInformation",
           "description": "Used by dictionary authors"
         },
+        "locale": {
+          "description": "The locale of the dictionary. Example: `nl,nl-be`",
+          "type": "string"
+        },
         "suggestionEditCosts": {
           "$ref": "#/definitions/SuggestionCostsDefs",
           "description": "Used in making suggestions. The lower the value, the more likely the suggestion will be near the top of the suggestion list."
@@ -438,6 +442,16 @@
           "additionalProperties": false,
           "description": "The costs to apply when using the hunspell settings",
           "properties": {
+            "accentCosts": {
+              "default": 1,
+              "description": "The cost to add / remove an accent This should be very cheap, it helps with fixing accent issues.",
+              "type": "number"
+            },
+            "capsCosts": {
+              "default": 1,
+              "description": "The cost to change capitalization. This should be very cheap, it helps with fixing capitalization issues.",
+              "type": "number"
+            },
             "firstLetterPenalty": {
               "default": 4,
               "description": "The extra cost incurred for changing the first letter of a word. This value should be less than `100 - tryCharCost`.",

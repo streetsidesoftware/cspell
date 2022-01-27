@@ -1,14 +1,15 @@
 import { GenSuggestionOptions, SuggestionOptions } from '../genSuggestionsOptions';
 import { parseDictionary } from '../SimpleDictionaryParser';
-import { suggest, genSuggestions, genCompoundableSuggestions } from './suggest';
+import { Trie } from '../trie';
+import { clean } from '../utils/util';
+import * as Walker from '../walker';
+import { genCompoundableSuggestions, genSuggestions, suggest } from './suggest';
 import {
     compSuggestionResults,
     isSuggestionResult,
     suggestionCollector,
     SuggestionCollectorOptions,
 } from './suggestCollector';
-import { Trie } from '../trie';
-import * as Walker from '../walker';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,
@@ -320,13 +321,3 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
-
-function clean<T>(t: Partial<T>): Partial<T> {
-    const r: Partial<T> = {};
-    for (const k of Object.keys(t) as (keyof T)[]) {
-        if (t[k] !== undefined) {
-            r[k] = t[k];
-        }
-    }
-    return r;
-}

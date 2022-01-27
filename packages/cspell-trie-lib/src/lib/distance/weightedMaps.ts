@@ -40,11 +40,11 @@ interface TrieTrieCost {
 }
 
 export interface CostPosition {
-    // Starting from word
+    // Word to start with
     a: string;
     // offset within `a`
     ai: number;
-    // Goal word
+    // Word to end with
     b: string;
     // offset within `b`
     bi: number;
@@ -66,7 +66,7 @@ export interface WeightMap {
 
 export function createWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {
     const map = _createWeightMap();
-    _addDefToWeightMap(map, ...defs);
+    addDefsToWeightMap(map, defs);
     return map;
 }
 
@@ -76,10 +76,10 @@ export function addDefToWeightMap(
     ...defs: SuggestionCostMapDef[]
 ): WeightMap;
 export function addDefToWeightMap(map: WeightMap, ...defs: SuggestionCostMapDef[]): WeightMap {
-    return _addDefToWeightMap(map, ...defs);
+    return addDefsToWeightMap(map, defs);
 }
 
-function _addDefToWeightMap(map: WeightMap, ...defs: SuggestionCostMapDef[]): WeightMap {
+export function addDefsToWeightMap(map: WeightMap, defs: SuggestionCostMapDef[]): WeightMap {
     function addSet(set: string[], def: SuggestionCostMapDef) {
         addSetToTrieCost(map.insDel, set, def.insDel, def.penalty);
         addSetToTrieTrieCost(map.replace, set, def.replace, def.penalty);
