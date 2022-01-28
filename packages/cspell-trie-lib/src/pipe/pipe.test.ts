@@ -1,6 +1,6 @@
 import { toArray, toAsyncIterable } from './helpers';
 import { asyncAwait, filter, map } from './operators';
-import { pipeAsync, pipeSync } from './pipe';
+import { pipeAsync, pipeSync } from '.';
 
 describe('Validate async', () => {
     test('mergeAsyncIterables', async () => {

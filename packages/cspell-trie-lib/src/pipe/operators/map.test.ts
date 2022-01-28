@@ -16,7 +16,7 @@ describe('Validate map', () => {
         const s = pipeSync(values, mapToLen, map(mapFn2));
         const a = pipeAsync(values, mapToLen, map(mapFn2));
 
-        const sync = [...s];
+        const sync = toArray(s);
         const async = await toArray(a);
 
         expect(sync).toEqual(expected);

@@ -15,7 +15,7 @@ describe('Validate filter', () => {
         const s = pipeSync(values, filterToLen);
         const a = pipeAsync(toAsyncIterable(values), filterToLen);
 
-        const sync = [...s];
+        const sync = toArray(s);
         const async = await toArray(a);
 
         expect(sync).toEqual(expected);

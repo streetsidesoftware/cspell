@@ -13,7 +13,7 @@ describe('Validate flatten', () => {
         const s = pipeSync(values, flatten());
         const a = pipeAsync(values, flatten());
 
-        const sync = [...s];
+        const sync = toArray(s);
         const async = await toArray(a);
 
         expect(sync).toEqual(expected);

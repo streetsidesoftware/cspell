@@ -14,7 +14,7 @@ describe('Validate unique', () => {
         const s = pipeSync(values, unique(keyFn));
         const a = pipeAsync(values, unique(keyFn));
 
-        const sync = [...s];
+        const sync = toArray(s);
         const async = await toArray(a);
 
         expect(sync).toEqual(expected);
