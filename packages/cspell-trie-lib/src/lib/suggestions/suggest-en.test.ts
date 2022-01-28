@@ -1,9 +1,13 @@
-import { readTrie } from '../../test/dictionaries.test.helper';
+import { readRawDictionaryFile, readTrie } from '../../test/dictionaries.test.helper';
 import { genCompoundableSuggestions, suggest } from './suggest';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
 import { createTimer } from '../utils/timer';
 import { CompoundWordsMethod } from '../walker';
 import { clean } from '../trie-util';
+import { DictionaryInformation } from '../models/DictionaryInformation';
+import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
+import assert from 'assert';
+import { SuggestionOptions } from '../genSuggestionsOptions';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
@@ -14,6 +18,16 @@ const timeout = 10000;
 interface ExpectedSuggestion extends Partial<SuggestionResult> {
     word: string;
 }
+
+const ac = expect.arrayContaining;
+
+const pAffContent = readRawDictionaryFile('hunspell/en_US.aff');
+
+let affContent: string | undefined;
+
+const pReady = Promise.all([pAffContent.then((aff) => (affContent = aff))]).then(() => {
+    return undefined;
+});
 
 describe('Validate English Suggestions', () => {
     interface WordSuggestionsTest {
@@ -165,6 +179,23 @@ describe('Validate English Suggestions', () => {
         },
         timeout
     );
+
+    test.each`
+        word        | expected
+        ${''}       | ${[]}
+        ${'mexico'} | ${[s('Mexico', 1), s('medico', 100), s('Mexican', 151), s("Mexico's", 211)]}
+        ${'boat'}   | ${ac([s('boat', 0), s('boar', 100), s('boast', 100)])}
+    `('Suggestions with weightMap', async ({ word, expected }) => {
+        await pReady;
+        const trie = await getTrie();
+        const opts: SuggestionOptions = {
+            numSuggestions: 4,
+            ignoreCase: false,
+            weightMap: weightMapFromAff(),
+        };
+        const r = trie.suggestWithCost(word, opts);
+        expect(r).toEqual(expected);
+    });
 });
 
 function opts(
@@ -184,9 +215,68 @@ function opts(
     });
 }
 
+function s(word: string, cost?: number): ExpectedSuggestion {
+    const sug: ExpectedSuggestion = { word };
+    if (cost !== undefined) {
+        sug.cost = cost;
+    }
+    return sug;
+}
+
 function sr(...sugs: (string | ExpectedSuggestion)[]): ExpectedSuggestion[] {
     return sugs.map((s) => {
         if (typeof s === 'string') return { word: s };
         return s;
     });
+}
+
+const defaultDictInfo: DictionaryInformation = {
+    locale: 'en-US',
+    suggestionEditCosts: [
+        {
+            map: 'aeiou', // cspell:ignore aeiou
+            replace: 50,
+            insDel: 50,
+            swap: 50,
+        },
+        {
+            map: 'o(oo)|a(aa)|e(ee)|u(uu)|(eu)(uu)|(ou)(ui)|(ie)(ei)|i(ie)|e(en)|e(ie)',
+            replace: 45,
+        },
+        {
+            description: "Do not rank `'s` high on the list.",
+            map: "($)('$)('s$)|(s$)(s'$)(s's$)",
+            replace: 10,
+            penalty: 200,
+        },
+        {
+            map: '(eur)(uur)',
+            replace: 40,
+        },
+        {
+            map: '(d$)(t$)(dt$)',
+            replace: 30,
+        },
+        {
+            map: '1234567890-.',
+            insDel: 1,
+            penalty: 200,
+        },
+    ],
+};
+
+let __weightMapFromAff: WeightMap | undefined;
+
+function weightMapFromAff(): WeightMap {
+    if (__weightMapFromAff) return __weightMapFromAff;
+    assert(affContent);
+
+    const di: DictionaryInformation = {
+        ...defaultDictInfo,
+        hunspellInformation: {
+            aff: affContent,
+        },
+    };
+
+    return (__weightMapFromAff = mapDictionaryInformationToWeightMap(di));
 }

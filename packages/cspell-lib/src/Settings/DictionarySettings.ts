@@ -17,7 +17,7 @@ import {
 } from '../Models/CSpellSettingsInternalDef';
 import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
 import { mapDictionaryInformationToWeightMap, WeightMap } from 'cspell-trie-lib';
-import { DictionaryInformation } from '@cspell/cspell-types/dist/DictionaryInformation';
+import { DictionaryInformation } from '@cspell/cspell-types';
 import { RequireOptional, UnionFields } from '../util/types';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionInternal];

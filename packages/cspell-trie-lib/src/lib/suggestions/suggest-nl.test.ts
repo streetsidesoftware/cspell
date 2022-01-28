@@ -77,7 +77,7 @@ describe('Validate Dutch Suggestions', () => {
     // cspell:ignore buurt
     test.each`
         word             | expected
-        ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buur', 95), sr('buut', 95)]}
+        ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buur', 100), sr('buut', 100)]}
         ${'eén'}         | ${ac([sr('een', 1)])}
         ${'buurmaan'}    | ${ac([sr('buurman', 45)])}
         ${'positeve'}    | ${ac([sr('positieve', 45), sr('positieven', 90)])}
@@ -85,7 +85,7 @@ describe('Validate Dutch Suggestions', () => {
         ${'positive'}    | ${ac([sr('positieve', 45)])}
         ${'verklaaring'} | ${ac([sr('verklaring', 45)])}
         ${'Mexico-Stad'} | ${ac([sr('Mexico-Stad', 0)])}
-        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-star', 95)])}
+        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-star', 100)])}
         ${'word'}        | ${ac([sr('word', 0), sr('wordt', 30)])}
         ${'kostelos'}    | ${ac([sr('kosteloos', 45) /*, sr('kostenloos', 90) */])}
         ${'kosteloos'}   | ${ac([sr('kosteloos', 0), sr('kostenloos', 45)])}

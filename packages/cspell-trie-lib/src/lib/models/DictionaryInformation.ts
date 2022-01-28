@@ -1,5 +1,7 @@
 import type { DictionaryDefinitionAugmented } from '@cspell/cspell-types';
 
+export type { CharacterSet, CharacterSetCosts, EditCosts } from '@cspell/cspell-types';
+
 export type DictionaryInformation = Exclude<DictionaryDefinitionAugmented['dictionaryInformation'], undefined>;
 export type SuggestionEditCosts = Exclude<DictionaryInformation['suggestionEditCosts'], undefined>;
 export type HunspellInformation = Exclude<DictionaryInformation['hunspellInformation'], undefined>;

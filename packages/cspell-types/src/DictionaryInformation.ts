@@ -1,4 +1,4 @@
-import { SuggestionCostsDefs } from '.';
+import { SuggestionCostsDefs } from './suggestionCostsDef';
 
 /**
  * Use by dictionary authors to help improve the quality of suggestions
@@ -12,6 +12,23 @@ export interface DictionaryInformation {
      * Example: `nl,nl-be`
      */
     locale?: string;
+
+    /**
+     * The alphabet to use.
+     * @default "a-zA-Z"
+     */
+    alphabet?: CharacterSet | CharacterSetCosts[];
+
+    /**
+     * The accent characters
+     * @default "\u0300-\u0341"
+     */
+    accents?: CharacterSet | CharacterSetCosts[];
+
+    /**
+     * Define edit costs.
+     */
+    costs?: EditCosts;
 
     /**
      * Used in making suggestions. The lower the value, the more likely the suggestion
@@ -188,25 +205,18 @@ export interface HunspellInformation {
  */
 type HunspellAffContent = string;
 
-interface HunspellCosts {
+interface HunspellCosts extends EditCosts {
     /**
      * The cost of inserting / deleting / or swapping any `tryChars`
-     * @default 95
+     * Defaults to `baseCosts`
      */
     tryCharCost?: number;
-
-    /**
-     * The extra cost incurred for changing the first letter of a word.
-     * This value should be less than `100 - tryCharCost`.
-     * @default 4
-     */
-    firstLetterPenalty?: number;
 
     /**
      * The cost of replacing or swapping any adjacent keyboard characters.
      *
      * This should be slightly cheaper than `tryCharCost`.
-     * @default 94
+     * @default 99
      */
     keyboardCost?: number;
 
@@ -236,6 +246,30 @@ interface HunspellCosts {
      * @default 75
      */
     replaceCosts?: number;
+}
+
+/**
+ *
+ */
+export interface EditCosts {
+    /**
+     * This is the base cost for making an edit.
+     * @default 100
+     */
+    baseCost?: number;
+
+    /**
+     * This is the cost for characters not in the alphabet.
+     * @default 110
+     */
+    nonAlphabetCosts?: number;
+
+    /**
+     * The extra cost incurred for changing the first letter of a word.
+     * This value should be less than `100 - baseCost`.
+     * @default 4
+     */
+    firstLetterPenalty?: number;
 
     /**
      * The cost to change capitalization.
@@ -250,4 +284,31 @@ interface HunspellCosts {
      * @default 1
      */
     accentCosts?: number;
+}
+
+/**
+ * This is a set of characters that can include `-` or `|`
+ * - `-` - indicates a range of characters: `a-c` => `abc`
+ * - `|` - is a group separator, indicating that the characters on either side
+ *    are not related.
+ */
+export type CharacterSet = string;
+
+export interface CharacterSetCosts {
+    /**
+     * This is a set of characters that can include `-` or `|`
+     * - `-` - indicates a range of characters: `a-c` => `abc`
+     * - `|` - is a group separator, indicating that the characters on either side
+     *    are not related.
+     */
+    characters: CharacterSet;
+
+    /** the cost to insert / delete / replace / swap the characters in a group */
+    cost: number;
+
+    /**
+     * The penalty cost to apply if the accent is used.
+     * This is used to discourage
+     */
+    penalty?: number;
 }

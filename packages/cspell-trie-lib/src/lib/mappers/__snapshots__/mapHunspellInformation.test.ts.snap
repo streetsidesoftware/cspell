@@ -1,24 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <
+exports[`mapHunspellInformation hunspellInformationToSuggestionCostDef <
             TRY abc
             > 1`] = `
 Array [
   Object {
-    "insDel": 95,
+    "insDel": 100,
     "map": "abc",
-    "replace": 95,
-    "swap": 95,
+    "replace": 100,
+    "swap": 100,
+  },
+  Object {
+    "map": "aA|bB|cC",
+    "replace": 1,
   },
   Object {
     "map": "(^a)(^b)(^c)",
     "penalty": 4,
-    "replace": 91,
+    "replace": 96,
   },
 ]
 `;
 
-exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <
+exports[`mapHunspellInformation hunspellInformationToSuggestionCostDef <
 # comment.
 # cspell:ignore eéèëê iíìïî
 TRY abc
@@ -52,15 +56,19 @@ KEY qwertyuiop|asdfghjkl|zxcvbnm
 > 1`] = `
 Array [
   Object {
-    "insDel": 95,
+    "insDel": 100,
     "map": "abc",
-    "replace": 95,
-    "swap": 95,
+    "replace": 100,
+    "swap": 100,
+  },
+  Object {
+    "map": "aA|bB|cC",
+    "replace": 1,
   },
   Object {
     "map": "(^a)(^b)(^c)",
     "penalty": 4,
-    "replace": 91,
+    "replace": 96,
   },
   Object {
     "map": "eéèëê",
@@ -150,14 +158,14 @@ Array [
     "replace": 75,
   },
   Object {
-    "insDel": 5,
+    "insDel": 10,
     "map": "-1234567890",
-    "penalty": 195,
+    "penalty": 210,
   },
   Object {
     "map": "qw|we|er|rt|ty|yu|ui|io|op|as|sd|df|fg|gh|hj|jk|kl|zx|xc|cv|vb|bn|nm|QW|WE|ER|RT|TY|YU|UI|IO|OP|AS|SD|DF|FG|GH|HJ|JK|KL|ZX|XC|CV|VB|BN|NM",
-    "replace": 94,
-    "swap": 94,
+    "replace": 99,
+    "swap": 99,
   },
   Object {
     "map": "qQ|wW|eE|rR|tT|yY|uU|iI|oO|pP|aA|sS|dD|fF|gG|hH|jJ|kK|lL|zZ|xX|cC|vV|bB|nN|mM",
@@ -166,4 +174,4 @@ Array [
 ]
 `;
 
-exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <> 1`] = `Array []`;
+exports[`mapHunspellInformation hunspellInformationToSuggestionCostDef <> 1`] = `Array []`;
