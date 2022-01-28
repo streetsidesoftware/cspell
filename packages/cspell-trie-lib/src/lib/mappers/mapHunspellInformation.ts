@@ -1,6 +1,5 @@
-import { createWeightMap, WeightMap } from '../distance/weightedMaps';
-import type { DictionaryInformation, HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
-import { parseLocale } from '../models/locale';
+import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
+import { Locale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { flatten, isDefined, unique } from '../utils/util';
 import { mapHunspellCosts } from './mapCosts';
@@ -9,20 +8,12 @@ interface Costs extends Required<HunspellCosts> {
     locale?: string | string[] | undefined;
 }
 
-export function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap {
-    const defsEC = dictInfo.suggestionEditCosts || [];
-    const defsHI = dictInfo.hunspellInformation
-        ? hunspellInformationToSuggestionCostDef(dictInfo.hunspellInformation, dictInfo.locale)
-        : [];
-    return createWeightMap(...defsEC, ...defsHI);
-}
-
 export function hunspellInformationToSuggestionCostDef(
     hunInfo: HunspellInformation,
-    locale: string | undefined
+    locales: Locale[] | undefined
 ): SuggestionCostMapDef[] {
     const defs: SuggestionCostMapDef[] = [];
-    const costs = calcCosts(hunInfo.costs, locale);
+    const costs = calcCosts(hunInfo.costs, locales);
 
     const operations = [
         affKey,
@@ -62,11 +53,8 @@ export function hunspellInformationToSuggestionCostDef(
     return defs;
 }
 
-function calcCosts(costs: HunspellCosts = {}, locale?: string | undefined): Costs {
-    const _locale = parseLocale(locale || '')
-        .filter((loc) => loc.isValid())
-        .map((loc) => loc.locale);
-    const useLocale = _locale.length ? _locale : undefined;
+function calcCosts(costs: HunspellCosts = {}, locale?: Locale[] | undefined): Costs {
+    const useLocale = locale?.length ? locale.map((loc) => loc.locale) : undefined;
 
     const hunCosts = mapHunspellCosts(costs);
 

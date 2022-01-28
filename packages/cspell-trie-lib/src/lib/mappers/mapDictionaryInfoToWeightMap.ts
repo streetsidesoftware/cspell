@@ -1,13 +1,10 @@
 import { createWeightMap, WeightMap } from '../distance/weightedMaps';
 import type { DictionaryInformation } from '../models/DictionaryInformation';
-import { hunspellInformationToSuggestionCostDef } from './mapHunspellInformation';
+import { mapDictionaryInformation } from './mapDictionaryInfo';
 
 export function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap {
-    const defsEC = dictInfo.suggestionEditCosts || [];
-    const defsHI = dictInfo.hunspellInformation
-        ? hunspellInformationToSuggestionCostDef(dictInfo.hunspellInformation, dictInfo.locale)
-        : [];
-    return createWeightMap(...defsEC, ...defsHI);
+    const defs = mapDictionaryInformation(dictInfo);
+    return createWeightMap(...defs);
 }
 
 export const __testing__ = {};
