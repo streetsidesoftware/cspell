@@ -2,6 +2,7 @@ import * as path from 'path';
 import { LintRequest } from './LintRequest';
 import { InMemoryReporter } from '../util/InMemoryReporter';
 import { runLint } from './lint';
+import { CheckFailed } from '../app';
 
 const root = path.resolve(__dirname, '../..');
 const samples = path.resolve(root, 'samples');
@@ -49,6 +50,7 @@ describe('Linter Validation Tests', () => {
         ${[]}               | ${{ root, config: j(root, 'cspell.json'), fileLists: ['missing-file.txt'] }}                           | ${oc({ errors: 1, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(Error)], issues: [] })}
         ${['**']}           | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing] }}                      | ${oc({ errors: 0, files: 3 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**']}           | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing], mustFindFiles: true }} | ${oc({ errors: 1, files: 3 })} | ${oc({ errorCount: 1, errors: [expect.anything()], issues: [] })}
+        ${["'**'"]}         | ${{ root, config: j(root, 'cspell.json'), mustFindFiles: true }}                                       | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(CheckFailed)], issues: [] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));
