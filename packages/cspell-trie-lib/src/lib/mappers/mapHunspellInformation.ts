@@ -1,5 +1,5 @@
 import { pipeSync as pipe } from '../../pipe';
-import { filter, flatten, map, unique } from '../../pipe/operators';
+import { opFilter, opFlatten, opMap, opUnique } from '../../pipe/operators';
 import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
 import { Locale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
@@ -237,17 +237,17 @@ function parseAccents(value: string, costs: Costs): SuggestionCostMapDef | undef
 
     const characters = pipe(
         split(value),
-        filter((a) => a !== '|'),
-        map((s) =>
+        opFilter((a) => a !== '|'),
+        opMap((s) =>
             pipe(
                 caseForms(s, locale),
-                map((form) => [form, stripAccents(form)]),
-                filter(([a, b]) => a !== b),
-                map(joinLetters)
+                opMap((form) => [form, stripAccents(form)]),
+                opFilter(([a, b]) => a !== b),
+                opMap(joinLetters)
             )
         ),
-        flatten(),
-        unique()
+        opFlatten(),
+        opUnique()
     );
 
     const charMap = [...characters].join('|');
