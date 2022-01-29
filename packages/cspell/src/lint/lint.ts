@@ -8,6 +8,10 @@ import * as cspell from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
+import { filter, isAsyncIterable, pipeAsync, pipeSync } from '../util/async';
+import type { CSpellLintResultCache } from '../util/cache';
+import { calcCacheSettings, createCache, CreateCacheSettings } from '../util/cache';
+import { CheckFailed, toApplicationError, toError } from '../util/errors';
 import {
     ConfigInfo,
     fileInfoToDocument,
@@ -17,16 +21,13 @@ import {
     readFileInfo,
     readFileListFiles,
 } from '../util/fileHelper';
-import type { CSpellLintResultCache } from '../util/cache';
-import { calcCacheSettings, createCache, CreateCacheSettings } from '../util/cache';
-import { toApplicationError, toError } from '../util/errors';
 import type { GlobOptions } from '../util/glob';
 import { buildGlobMatcher, extractGlobsFromMatcher, extractPatterns, normalizeGlobsToRoot } from '../util/glob';
 import { loadReporters, mergeReporters } from '../util/reporters';
 import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
-import { pipeAsync, isAsyncIterable, filter, pipeSync } from '../util/async';
 import { LintRequest } from './LintRequest';
+import chalk = require('chalk');
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     let { reporter } = cfg;
@@ -232,6 +233,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
         header(fileGlobs, excludeGlobs);
 
+        checkGlobs(cfg.fileGlobs, reporter);
+
         reporter.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
 
         const configErrors = await countConfigErrors(configInfo);
@@ -283,6 +286,20 @@ interface AppGlobInfo {
     excludeGlobs: string[];
     /** normalized cli exclude globs */
     normalizedExcludes: string[];
+}
+
+function checkGlobs(globs: string[], reporter: CSpellReporter) {
+    globs
+        .filter((g) => g.startsWith("'") || g.endsWith("'"))
+        .map((glob) => chalk.yellow(glob))
+        .forEach((glob) =>
+            reporter.error(
+                'Linter',
+                new CheckFailed(
+                    `Glob starting or ending with ' (single quote) is not likely to match any files: ${glob}.`
+                )
+            )
+        );
 }
 
 async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise<AppGlobInfo> {
