@@ -28,8 +28,8 @@ describe('Validate weightedMaps', () => {
         ${'||'}             | ${[]}
         ${'abc'}            | ${['abc'.split('')]}
         ${'abc|'}           | ${['abc'.split('')]}
-        ${'f(ph)(gh)v|eé'}  | ${[['f', 'ph', 'gh', 'v'], ['e', 'é']]}
-        ${'f(ph)(😁)🤣|eé'} | ${[['f', 'ph', '😁', '🤣'], ['e', 'é']]}
+        ${'f(ph)(gh)v|eé'}  | ${[['f', 'ph', 'gh', 'v'], ['e', 'é', 'é'.normalize('NFD')]]}
+        ${'f(ph)(😁)🤣|eé'} | ${[['f', 'ph', '😁', '🤣'], ['e', 'é', 'é'.normalize('NFD')]]}
     `('splitMap "$map"', ({ map, expected }) => {
         expect(splitMap({ map })).toEqual(expected);
     });

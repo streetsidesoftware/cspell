@@ -1,3 +1,4 @@
+import { map } from 'gensequence/dist/operators';
 import { pipeSync as pipe } from '../../pipe';
 import { opFilter, opFlatten, opMap, opUnique } from '../../pipe/operators';
 import type { CharacterSetCosts } from '../models/DictionaryInformation';
@@ -100,12 +101,18 @@ export function calcFirstCharacterReplace(cs: CharacterSetCosts, editCost: EditC
 
 export function parseAccents(cs: CharacterSetCosts, _editCost: EditCostsRequired): SuggestionCostMapDef | undefined {
     const { cost, penalty } = cs;
-    const accents = stripNonAccents(cs.characters);
+
+    const accents = joinLetters([
+        ...pipe(
+            expandCharacterSet(cs.characters),
+            map((char) => stripNonAccents(char))
+        ),
+    ]);
+
     if (!accents) return undefined;
 
-    const characters = expandCharacterSet(accents);
     return clean({
-        map: joinLetters([...characters]),
+        map: accents,
         replace: cost,
         insDel: cost,
         penalty,

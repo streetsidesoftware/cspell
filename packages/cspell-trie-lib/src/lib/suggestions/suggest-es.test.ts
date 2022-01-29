@@ -1,4 +1,7 @@
+import { DictionaryInformation } from '@cspell/cspell-types';
+import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
 import { readTrie } from '../../test/dictionaries.test.helper';
+import { distanceAStarWeightedEx, ExResult } from '../distance/distanceAStarWeighted';
 import { parseLinesToDictionary } from '../SimpleDictionaryParser';
 
 function getTrie() {
@@ -48,6 +51,37 @@ describe('Validate Spanish Suggestions', () => {
         const results = trie.suggestWithCost(word, { numSuggestions: 10, ignoreCase });
         expect(results).toEqual(expectedWords);
     });
+
+    // cspell:ignore nïño
+    test.each`
+        word      | ignoreCase | expectedWords
+        ${'niño'} | ${false}   | ${[c('niño', 0), c('niños', 50), c('niña', 75), c('niñeo', 75)]}
+        ${'nïño'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76)]}
+        ${'nino'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76), c('nido', 100), c('nito', 100), c('ninfo', 100)]}
+    `('Tests suggestions weighted "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
+        jest.setTimeout(5000);
+        const trie = await getTrie();
+        const wm = weightMap();
+        const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase, weightMap: wm });
+        expect(results).toEqual(expectedWords);
+    });
+    test.each`
+        wordA     | wordB
+        ${'niño'} | ${'niños'}
+        ${'nïño'} | ${'niños'}
+        ${'nino'} | ${'niña'}
+    `('weighted distance "$wordA" $wordB', async ({ wordA, wordB }) => {
+        const nWordA = wordA.normalize('NFD');
+        const nWordB = wordB.normalize('NFD');
+
+        const wm = weightMap();
+
+        const dex = distanceAStarWeightedEx(wordA, wordB, wm);
+        expect(exResultToString(dex)).toMatchSnapshot();
+
+        const dexN = distanceAStarWeightedEx(nWordA, nWordB, wm);
+        expect(exResultToString(dexN)).toMatchSnapshot();
+    });
 });
 
 function c(word: string, cost: number) {
@@ -58,4 +92,62 @@ const sampleWords = ['niño', 'niños', 'niña', 'niñeo', 'dino', 'nido'];
 
 function trieSimple() {
     return parseLinesToDictionary(sampleWords);
+}
+
+const defaultDictInfo: DictionaryInformation = {
+    locale: 'es-ES',
+    // cspell:disable-next-line
+    alphabet: 'aeroinsctldumpbgfvhzóíjáqéñxyúükwAEROINSCTLDUMPBGFVHZÓÍJÁQÉÑXYÚÜKW',
+    suggestionEditCosts: [
+        {
+            map: '(o$)(os$)(a$)(eo$)',
+            replace: 75,
+        },
+        {
+            map: '(o$)(os$)|(a$)(as$)',
+            replace: 50,
+        },
+    ],
+};
+
+function weightMap(di: DictionaryInformation = defaultDictInfo): WeightMap {
+    return mapDictionaryInformationToWeightMap(di);
+}
+
+function exResultToString(ex: ExResult | undefined): string {
+    if (!ex) return '<undefined>';
+
+    const { cost, segments } = ex;
+    const asString = segments.map(({ a, b, c, p }) => ({
+        a: `<${a}>`,
+        b: `<${b}>`,
+        c: c.toString(10),
+        p: p.toString(10),
+    }));
+    asString.push({
+        a: '',
+        b: '',
+        c: ' = ' + segments.reduce((sum, { c }) => sum + c, 0).toString(10),
+        p: ' = ' + segments.reduce((sum, { p }) => sum + p, 0).toString(10),
+    });
+    const parts = asString.map(({ a, b, c, p }) => ({
+        a,
+        b,
+        c,
+        p,
+        w: Math.max(a.length, b.length, c.length, p.length),
+    }));
+    const a = 'a: |' + parts.map(({ a, w }) => pR(a, w)).join('|') + '|';
+    const b = 'b: |' + parts.map(({ b, w }) => pR(b, w)).join('|') + '|';
+    const c = 'c: |' + parts.map(({ c, w }) => pL(c, w)).join('|') + '|';
+    const p = 'p: |' + parts.map(({ p, w }) => pL(p, w)).join('|') + '|';
+    return `<${ex.a.slice(1, -1)}> -> <${ex.b.slice(1, -1)}> (${cost})\n${[a, b, c, p].join('\n')}\n`;
+}
+
+function pL(s: string, w: number) {
+    return (' '.repeat(w) + s).slice(-w);
+}
+
+function pR(s: string, w: number) {
+    return (s + ' '.repeat(w)).slice(0, w);
 }

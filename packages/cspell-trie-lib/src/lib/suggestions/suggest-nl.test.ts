@@ -127,11 +127,6 @@ const defaultDictInfo: DictionaryInformation = {
             map: '(d$)(t$)(dt$)',
             replace: 30,
         },
-        {
-            map: '1234567890-.',
-            insDel: 1,
-            penalty: 200,
-        },
     ],
 };
 

@@ -232,9 +232,14 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
     }
 
     function suggestions() {
+        const NF = 'NFD';
+        const nWordToMatch = wordToMatch.normalize(NF);
         const rawValues = [...sugs.values()];
         const values = weightMap
-            ? rawValues.map(({ word }) => ({ word, cost: editDistanceWeighted(wordToMatch, word, weightMap) }))
+            ? rawValues.map(({ word }) => ({
+                  word,
+                  cost: editDistanceWeighted(nWordToMatch, word.normalize(NF), weightMap),
+              }))
             : rawValues;
 
         const sorted = values.sort(compSuggestionResults);
