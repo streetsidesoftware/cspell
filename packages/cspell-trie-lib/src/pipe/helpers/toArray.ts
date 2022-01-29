@@ -2,6 +2,7 @@ import { isAsyncIterable } from '.';
 
 export function toArray<T>(i: AsyncIterable<T>): Promise<Awaited<T>[]>;
 export function toArray<T>(i: Iterable<T>): T[];
+export function toArray<T>(i: Iterable<T> | AsyncIterable<T>): T[] | Promise<Awaited<T>[]>;
 export function toArray<T>(i: Iterable<T> | AsyncIterable<T>): T[] | Promise<Awaited<T>[]> {
     return isAsyncIterable(i) ? toArrayAsync(i) : toArraySync(i);
 }

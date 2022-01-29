@@ -1,4 +1,4 @@
-import { map } from '.';
+import { opMap } from '.';
 import { toArray } from '../helpers';
 import { pipeAsync, pipeSync } from '../pipe';
 
@@ -11,10 +11,10 @@ describe('Validate map', () => {
 
         const expected = values.map(mapFn).map(mapFn2);
 
-        const mapToLen = map(mapFn);
+        const mapToLen = opMap(mapFn);
 
-        const s = pipeSync(values, mapToLen, map(mapFn2));
-        const a = pipeAsync(values, mapToLen, map(mapFn2));
+        const s = pipeSync(values, mapToLen, opMap(mapFn2));
+        const a = pipeAsync(values, mapToLen, opMap(mapFn2));
 
         const sync = toArray(s);
         const async = await toArray(a);

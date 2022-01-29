@@ -1,6 +1,6 @@
 import { toPipeFn } from '../helpers/util';
 
-export function asyncFlatten<T>(): (iter: AsyncIterable<AsyncIterable<T> | Iterable<T>>) => AsyncIterable<T> {
+export function opFlattenAsync<T>(): (iter: AsyncIterable<AsyncIterable<T> | Iterable<T>>) => AsyncIterable<T> {
     async function* fn(iter: Iterable<Iterable<T>> | AsyncIterable<AsyncIterable<T> | Iterable<T>>) {
         for await (const v of iter) {
             yield* v;
@@ -10,7 +10,7 @@ export function asyncFlatten<T>(): (iter: AsyncIterable<AsyncIterable<T> | Itera
     return fn;
 }
 
-export function syncFlatten<T>(): (iter: Iterable<Iterable<T>>) => Iterable<T> {
+export function opFlattenSync<T>(): (iter: Iterable<Iterable<T>>) => Iterable<T> {
     function* fn(iter: Iterable<Iterable<T>>) {
         for (const v of iter) {
             yield* v;
@@ -20,4 +20,4 @@ export function syncFlatten<T>(): (iter: Iterable<Iterable<T>>) => Iterable<T> {
     return fn;
 }
 
-export const flatten = <T>() => toPipeFn(syncFlatten<T>(), asyncFlatten<T>());
+export const opFlatten = <T>() => toPipeFn(opFlattenSync<T>(), opFlattenAsync<T>());

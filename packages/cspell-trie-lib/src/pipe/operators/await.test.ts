@@ -1,4 +1,4 @@
-import { asyncAwait, map } from '.';
+import { opAwaitAsync, opMap } from '.';
 import { toArray } from '../helpers';
 import { pipeAsync } from '../pipe';
 
@@ -10,8 +10,8 @@ describe('Validate await', () => {
         const mapFn2 = (v: number) => v * 2;
 
         const expected = values.map(mapFn).map(mapFn2);
-        const mapToLen = map(mapFn);
-        const a = pipeAsync(values, map(toPromise), asyncAwait(), mapToLen, map(mapFn2));
+        const mapToLen = opMap(mapFn);
+        const a = pipeAsync(values, opMap(toPromise), opAwaitAsync(), mapToLen, opMap(mapFn2));
         const async = await toArray(a);
 
         expect(async).toEqual(expected);

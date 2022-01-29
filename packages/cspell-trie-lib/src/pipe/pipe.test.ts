@@ -1,5 +1,5 @@
 import { toArray, toAsyncIterable } from './helpers';
-import { asyncAwait, filter, map } from './operators';
+import { opAwaitAsync, opFilter, opMap } from './operators';
 import { pipeAsync, pipeSync } from '.';
 
 describe('Validate async', () => {
@@ -24,10 +24,10 @@ describe('Validate async', () => {
 
         const expected = values.map(mapFn).map(mapFn2);
 
-        const mapToLen = map(mapFn);
+        const mapToLen = opMap(mapFn);
 
-        const s = pipeSync(values, mapToLen, map(mapFn2));
-        const a = pipeAsync(values, mapToLen, map(mapFn2));
+        const s = pipeSync(values, mapToLen, opMap(mapFn2));
+        const a = pipeAsync(values, mapToLen, opMap(mapFn2));
 
         const sync = [...s];
         const async = await toArray(a);
@@ -43,8 +43,8 @@ describe('Validate async', () => {
         const mapFn2 = (v: number) => v * 2;
 
         const expected = values.map(mapFn).map(mapFn2);
-        const mapToLen = map(mapFn);
-        const a = pipeAsync(values, map(toPromise), asyncAwait(), mapToLen, map(mapFn2));
+        const mapToLen = opMap(mapFn);
+        const a = pipeAsync(values, opMap(toPromise), opAwaitAsync(), mapToLen, opMap(mapFn2));
         const async = await toArray(a);
 
         expect(async).toEqual(expected);
@@ -57,7 +57,7 @@ describe('Validate async', () => {
 
         const expected = values.filter(filterFn);
 
-        const filterToLen = filter(filterFn);
+        const filterToLen = opFilter(filterFn);
 
         const s = pipeSync(values, filterToLen);
         const a = pipeAsync(toAsyncIterable(values), filterToLen);

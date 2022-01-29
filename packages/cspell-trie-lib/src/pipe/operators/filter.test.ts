@@ -1,4 +1,4 @@
-import { filter } from '.';
+import { opFilter } from '.';
 import { toArray, toAsyncIterable } from '../helpers';
 import { pipeAsync, pipeSync } from '../pipe';
 
@@ -10,7 +10,7 @@ describe('Validate filter', () => {
 
         const expected = values.filter(filterFn);
 
-        const filterToLen = filter(filterFn);
+        const filterToLen = opFilter(filterFn);
 
         const s = pipeSync(values, filterToLen);
         const a = pipeAsync(toAsyncIterable(values), filterToLen);

@@ -1,6 +1,6 @@
 import { toPipeFn } from '../helpers/util';
 
-export function asyncUnique<T, U>(k?: (v: T) => U): (iter: AsyncIterable<T>) => AsyncIterable<T> {
+export function opUniqueAsync<T, U>(k?: (v: T) => U): (iter: AsyncIterable<T>) => AsyncIterable<T> {
     function fnK(k: (v: T) => U) {
         async function* fn(iter: Iterable<T> | AsyncIterable<T>) {
             const s = new Set<U>();
@@ -26,7 +26,7 @@ export function asyncUnique<T, U>(k?: (v: T) => U): (iter: AsyncIterable<T>) => 
     return k ? fnK(k) : fn;
 }
 
-export function syncUnique<T, U>(k?: (v: T) => U): (iter: Iterable<T>) => Iterable<T> {
+export function opUniqueSync<T, U>(k?: (v: T) => U): (iter: Iterable<T>) => Iterable<T> {
     function fnK(key: (v: T) => U) {
         function* fn(iter: Iterable<T>) {
             const s = new Set<U>();
@@ -52,4 +52,5 @@ export function syncUnique<T, U>(k?: (v: T) => U): (iter: Iterable<T>) => Iterab
     return k ? fnK(k) : fn;
 }
 
-export const unique = <T, U = T>(getKey?: (v: T) => U) => toPipeFn(syncUnique<T, U>(getKey), asyncUnique<T, U>(getKey));
+export const opUnique = <T, U = T>(getKey?: (v: T) => U) =>
+    toPipeFn(opUniqueSync<T, U>(getKey), opUniqueAsync<T, U>(getKey));

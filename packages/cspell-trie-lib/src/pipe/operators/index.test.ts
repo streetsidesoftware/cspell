@@ -3,18 +3,22 @@ import * as operators from '.';
 describe('Operators', () => {
     test('operators', () => {
         expect(Object.keys(operators).sort()).toMatchSnapshot();
-        expect(operators.asyncAwait).toBeInstanceOf(Function);
-        expect(operators.asyncFilter).toBeInstanceOf(Function);
-        expect(operators.asyncFlatten).toBeInstanceOf(Function);
-        expect(operators.asyncMap).toBeInstanceOf(Function);
-        expect(operators.asyncUnique).toBeInstanceOf(Function);
-        expect(operators.syncFilter).toBeInstanceOf(Function);
-        expect(operators.syncFlatten).toBeInstanceOf(Function);
-        expect(operators.syncMap).toBeInstanceOf(Function);
-        expect(operators.syncUnique).toBeInstanceOf(Function);
-        expect(operators.filter).toBeInstanceOf(Function);
-        expect(operators.flatten).toBeInstanceOf(Function);
-        expect(operators.map).toBeInstanceOf(Function);
-        expect(operators.unique).toBeInstanceOf(Function);
+
+        expect(operators.opAwaitAsync).toBeInstanceOf(Function);
+        expect(operators.opFilter).toBeInstanceOf(Function);
+        expect(operators.opFilterAsync).toBeInstanceOf(Function);
+        expect(operators.opFilterSync).toBeInstanceOf(Function);
+        expect(operators.opFlatten).toBeInstanceOf(Function);
+        expect(operators.opFlattenAsync).toBeInstanceOf(Function);
+        expect(operators.opFlattenSync).toBeInstanceOf(Function);
+        expect(operators.opJoinStrings).toBeInstanceOf(Function);
+        expect(operators.opJoinStringsAsync).toBeInstanceOf(Function);
+        expect(operators.opJoinStringsSync).toBeInstanceOf(Function);
+        expect(operators.opMap).toBeInstanceOf(Function);
+        expect(operators.opMapAsync).toBeInstanceOf(Function);
+        expect(operators.opMapSync).toBeInstanceOf(Function);
+        expect(operators.opUnique).toBeInstanceOf(Function);
+        expect(operators.opUniqueAsync).toBeInstanceOf(Function);
+        expect(operators.opUniqueSync).toBeInstanceOf(Function);
     });
 });

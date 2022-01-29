@@ -4,6 +4,6 @@ async function* _asyncAwait<T>(iter: AsyncIterable<T>): AsyncIterable<Awaited<T>
     }
 }
 
-export function asyncAwait<T>(): (iter: AsyncIterable<T>) => AsyncIterable<Awaited<T>> {
+export function opAwaitAsync<T>(): (iter: AsyncIterable<T>) => AsyncIterable<Awaited<T>> {
     return _asyncAwait;
 }

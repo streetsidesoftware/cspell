@@ -1,5 +1,6 @@
-export { asyncAwait } from './await';
-export { asyncFilter, filter, syncFilter } from './filter';
-export { asyncFlatten, flatten, syncFlatten } from './flatten';
-export { asyncMap, map, syncMap } from './map';
-export { asyncUnique, unique, syncUnique } from './unique';
+export { opAwaitAsync } from './await';
+export { opFilter, opFilterAsync, opFilterSync } from './filter';
+export { opFlatten, opFlattenAsync, opFlattenSync } from './flatten';
+export { opJoinStrings, opJoinStringsAsync, opJoinStringsSync } from './joinStrings';
+export { opMap, opMapAsync, opMapSync } from './map';
+export { opUnique, opUniqueAsync, opUniqueSync } from './unique';
