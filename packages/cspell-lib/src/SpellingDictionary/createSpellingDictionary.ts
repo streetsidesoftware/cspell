@@ -4,6 +4,7 @@ import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { operators } from 'gensequence';
+import { createWFromDictionaryInformation } from './SpellingDictionaryMethods';
 
 const defaultOptions: SpellingDictionaryOptions = Object.freeze({
     weightMap: undefined,
@@ -18,7 +19,11 @@ export function createSpellingDictionary(
     // console.log(`createSpellingDictionary ${name} ${source}`);
     const words = parseDictionaryLines(wordList);
     const trie = buildTrieFast(words);
-    return new SpellingDictionaryFromTrie(trie, name, options || defaultOptions, source);
+    const opts = { ...(options || defaultOptions) };
+    if (opts.weightMap === undefined && opts.dictionaryInformation) {
+        opts.weightMap = createWFromDictionaryInformation(opts.dictionaryInformation);
+    }
+    return new SpellingDictionaryFromTrie(trie, name, opts, source);
 }
 
 export function createForbiddenWordsDictionary(

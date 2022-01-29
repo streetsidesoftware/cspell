@@ -1,4 +1,11 @@
-import { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+import { DictionaryInformation } from '@cspell/cspell-types';
+import {
+    CompoundWordsMethod,
+    mapDictionaryInformationToWeightMap,
+    SuggestionCollector,
+    SuggestionResult,
+    WeightMap,
+} from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { isUpperCase, removeAccents, ucFirst } from '../util/text';
 import { HasOptions, SearchOptions, SpellingDictionary, SuggestOptions } from './SpellingDictionary';
@@ -122,6 +129,10 @@ export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
                   timeout: undefined,
               };
     return suggestOptions;
+}
+
+export function createWFromDictionaryInformation(di: DictionaryInformation): WeightMap {
+    return mapDictionaryInformationToWeightMap(di);
 }
 
 export const __testMethods = {

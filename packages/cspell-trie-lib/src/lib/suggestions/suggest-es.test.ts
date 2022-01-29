@@ -1,4 +1,8 @@
+import { DictionaryInformation } from '@cspell/cspell-types';
+import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
 import { readTrie } from '../../test/dictionaries.test.helper';
+import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted';
+import { formatExResult } from '../distance/formatResultEx';
 import { parseLinesToDictionary } from '../SimpleDictionaryParser';
 
 function getTrie() {
@@ -48,6 +52,37 @@ describe('Validate Spanish Suggestions', () => {
         const results = trie.suggestWithCost(word, { numSuggestions: 10, ignoreCase });
         expect(results).toEqual(expectedWords);
     });
+
+    // cspell:ignore nïño
+    test.each`
+        word      | ignoreCase | expectedWords
+        ${'niño'} | ${false}   | ${[c('niño', 0), c('niños', 50), c('niña', 75), c('niñeo', 75)]}
+        ${'nïño'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76)]}
+        ${'nino'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76), c('nido', 100), c('nito', 100), c('ninfo', 100)]}
+    `('Tests suggestions weighted "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
+        jest.setTimeout(5000);
+        const trie = await getTrie();
+        const wm = weightMap();
+        const results = trie.suggestWithCost(word, { numSuggestions: 4, ignoreCase, weightMap: wm });
+        expect(results).toEqual(expectedWords);
+    });
+    test.each`
+        wordA     | wordB
+        ${'niño'} | ${'niños'}
+        ${'nïño'} | ${'niños'}
+        ${'nino'} | ${'niña'}
+    `('weighted distance "$wordA" $wordB', async ({ wordA, wordB }) => {
+        const nWordA = wordA.normalize('NFD');
+        const nWordB = wordB.normalize('NFD');
+
+        const wm = weightMap();
+
+        const dex = distanceAStarWeightedEx(wordA, wordB, wm);
+        expect(formatExResult(dex)).toMatchSnapshot();
+
+        const dexN = distanceAStarWeightedEx(nWordA, nWordB, wm);
+        expect(formatExResult(dexN)).toMatchSnapshot();
+    });
 });
 
 function c(word: string, cost: number) {
@@ -58,4 +93,24 @@ const sampleWords = ['niño', 'niños', 'niña', 'niñeo', 'dino', 'nido'];
 
 function trieSimple() {
     return parseLinesToDictionary(sampleWords);
+}
+
+const defaultDictInfo: DictionaryInformation = {
+    locale: 'es-ES',
+    // cspell:disable-next-line
+    alphabet: 'aeroinsctldumpbgfvhzóíjáqéñxyúükwAEROINSCTLDUMPBGFVHZÓÍJÁQÉÑXYÚÜKW',
+    suggestionEditCosts: [
+        {
+            map: '(o$)(os$)(a$)(eo$)',
+            replace: 75,
+        },
+        {
+            map: '(o$)(os$)|(a$)(as$)',
+            replace: 50,
+        },
+    ],
+};
+
+function weightMap(di: DictionaryInformation = defaultDictInfo): WeightMap {
+    return mapDictionaryInformationToWeightMap(di);
 }

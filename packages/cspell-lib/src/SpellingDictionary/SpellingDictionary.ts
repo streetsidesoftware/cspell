@@ -1,4 +1,4 @@
-import type { ReplaceMap } from '@cspell/cspell-types';
+import type { ReplaceMap, DictionaryInformation } from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionCollector, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -58,6 +58,7 @@ export interface SpellingDictionaryOptions {
     caseSensitive?: boolean;
     noSuggest?: boolean;
     weightMap?: WeightMap | undefined;
+    dictionaryInformation?: DictionaryInformation;
 }
 
 export interface SpellingDictionary {

@@ -108,12 +108,19 @@ function highest(a: number | undefined, b: number | undefined): number | undefin
     return a >= b ? a : b;
 }
 
+function normalize(s: string): Set<string> {
+    const f = new Set([s]);
+    f.add(s.normalize('NFC'));
+    f.add(s.normalize('NFD'));
+    return f;
+}
+
 export function* splitMapSubstringsIterable(map: string): Iterable<string> {
     let seq = '';
     let mode = 0;
     for (const char of map) {
         if (mode && char === ')') {
-            yield seq;
+            yield* normalize(seq);
             mode = 0;
             continue;
         }
@@ -126,7 +133,7 @@ export function* splitMapSubstringsIterable(map: string): Iterable<string> {
             seq = '';
             continue;
         }
-        yield char;
+        yield* normalize(char);
     }
 }
 

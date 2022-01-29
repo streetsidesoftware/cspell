@@ -1,15 +1,32 @@
+import { UndefinedToOptional } from '../types';
+
 export function isDefined<T>(a: T | undefined): a is T {
     return a !== undefined;
 }
 
-export function clean<T>(t: Partial<T>): Partial<T> {
-    const r: Partial<T> = {};
-    for (const k of Object.keys(t) as (keyof T)[]) {
-        if (t[k] !== undefined) {
-            r[k] = t[k];
+/**
+ * Remove any fields with an `undefined` value.
+ * @param t - object to clean
+ * @returns t
+ */
+export function cleanCopy<T, U = UndefinedToOptional<T>>(t: T): U {
+    const r: U = { ...(<U>(<unknown>t)) };
+    return clean(r);
+}
+
+/**
+ * Remove any fields with an `undefined` value.
+ * **MODIFIES THE OBJECT**
+ * @param t - object to clean
+ * @returns t
+ */
+export function clean<T, U = UndefinedToOptional<T>>(t: T): U {
+    for (const prop in t) {
+        if (t[prop] === undefined) {
+            delete t[prop];
         }
     }
-    return r;
+    return <U>(<unknown>t);
 }
 
 export function unique<T>(a: Iterable<T>): T[] {

@@ -1,24 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <
+exports[`mapHunspellInformation hunspellInformationToSuggestionCostDef <
             TRY abc
             > 1`] = `
 Array [
   Object {
-    "insDel": 95,
-    "map": "abc",
-    "replace": 95,
-    "swap": 95,
+    "insDel": 100,
+    "map": "ABCabc",
+    "replace": 100,
+    "swap": 100,
+  },
+  Object {
+    "map": "Aa|Bb|Cc",
+    "replace": 1,
   },
   Object {
     "map": "(^a)(^b)(^c)",
     "penalty": 4,
-    "replace": 91,
+    "replace": 96,
   },
 ]
 `;
 
-exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <
+exports[`mapHunspellInformation hunspellInformationToSuggestionCostDef <
 # comment.
 # cspell:ignore eéèëê iíìïî
 TRY abc
@@ -52,15 +56,19 @@ KEY qwertyuiop|asdfghjkl|zxcvbnm
 > 1`] = `
 Array [
   Object {
-    "insDel": 95,
-    "map": "abc",
-    "replace": 95,
-    "swap": 95,
+    "insDel": 100,
+    "map": "ABCabc",
+    "replace": 100,
+    "swap": 100,
+  },
+  Object {
+    "map": "Aa|Bb|Cc",
+    "replace": 1,
   },
   Object {
     "map": "(^a)(^b)(^c)",
     "penalty": 4,
-    "replace": 91,
+    "replace": 96,
   },
   Object {
     "map": "eéèëê",
@@ -68,8 +76,12 @@ Array [
     "swap": 25,
   },
   Object {
-    "map": "ée|ÉE|èe|ÈE|ëe|ËE|êe|ÊE",
+    "map": "e(é)é|E(É)É|e(è)è|E(È)È|e(ë)ë|E(Ë)Ë|e(ê)ê|E(Ê)Ê",
     "replace": 1,
+  },
+  Object {
+    "map": "(é)é|(É)É|(è)è|(È)È|(ë)ë|(Ë)Ë|(ê)ê|(Ê)Ê",
+    "replace": 0,
   },
   Object {
     "map": "eE|éÉ|èÈ|ëË|êÊ",
@@ -81,8 +93,12 @@ Array [
     "swap": 25,
   },
   Object {
-    "map": "áa|ÁA|àa|ÀA",
+    "map": "a(á)á|A(Á)Á|a(à)à|A(À)À",
     "replace": 1,
+  },
+  Object {
+    "map": "(á)á|(Á)Á|(à)à|(À)À",
+    "replace": 0,
   },
   Object {
     "map": "aA|áÁ|àÀ",
@@ -94,19 +110,23 @@ Array [
     "swap": 25,
   },
   Object {
-    "map": "íi|ÍI|ìi|ÌI|ïi|ÏI|îi|ÎI",
+    "map": "i(í)í|I(Í)Í|i(ì)ì|I(Ì)Ì|i(ï)ï|I(Ï)Ï|i(î)î|I(Î)Î",
     "replace": 1,
+  },
+  Object {
+    "map": "(í)í|(Í)Í|(ì)ì|(Ì)Ì|(ï)ï|(Ï)Ï|(î)î|(Î)Î",
+    "replace": 0,
   },
   Object {
     "map": "iI|íÍ|ìÌ|ïÏ|îÎ",
     "replace": 1,
   },
   Object {
-    "map": "(ĳ)(ij)",
+    "map": "ĳ(ij)",
     "replace": 30,
   },
   Object {
-    "map": "(Ĳ)(IJ)",
+    "map": "Ĳ(IJ)",
     "replace": 30,
   },
   Object {
@@ -134,15 +154,15 @@ Array [
     "replace": 30,
   },
   Object {
-    "map": "(’)(')",
+    "map": "’'",
     "replace": 30,
   },
   Object {
-    "map": "(ij)(ĳ)",
+    "map": "(ij)ĳ",
     "replace": 30,
   },
   Object {
-    "map": "(IJ)(Ĳ)",
+    "map": "(IJ)Ĳ",
     "replace": 30,
   },
   Object {
@@ -150,14 +170,14 @@ Array [
     "replace": 75,
   },
   Object {
-    "insDel": 5,
+    "insDel": 10,
     "map": "-1234567890",
-    "penalty": 195,
+    "penalty": 210,
   },
   Object {
     "map": "qw|we|er|rt|ty|yu|ui|io|op|as|sd|df|fg|gh|hj|jk|kl|zx|xc|cv|vb|bn|nm|QW|WE|ER|RT|TY|YU|UI|IO|OP|AS|SD|DF|FG|GH|HJ|JK|KL|ZX|XC|CV|VB|BN|NM",
-    "replace": 94,
-    "swap": 94,
+    "replace": 99,
+    "swap": 99,
   },
   Object {
     "map": "qQ|wW|eE|rR|tT|yY|uU|iI|oO|pP|aA|sS|dD|fF|gG|hH|jJ|kK|lL|zZ|xX|cC|vV|bB|nN|mM",
@@ -166,4 +186,4 @@ Array [
 ]
 `;
 
-exports[`mapAffToWeightMap hunspellInformationToSuggestionCostDef <> 1`] = `Array []`;
+exports[`mapHunspellInformation hunspellInformationToSuggestionCostDef <> 1`] = `Array []`;

@@ -1,5 +1,6 @@
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { distanceAStarWeighted, distanceAStarWeightedEx, ExResult } from './distanceAStarWeighted';
+import { distanceAStarWeighted, distanceAStarWeightedEx } from './distanceAStarWeighted';
+import { formatExResult } from './formatResultEx';
 import { levenshteinDistance } from './levenshtein';
 import type { WeightMap } from './weightedMaps';
 import { addDefToWeightMap, createWeightMap } from './weightedMaps';
@@ -28,8 +29,8 @@ describe('distanceAStar', () => {
         ${'apple'}   | ${'maple'}
         ${'grapple'} | ${'maples'}
     `('distanceAStarWeightedEx vs Levenshtein "$wordA" "$wordB"', ({ wordA, wordB }) => {
-        expect(exResultToString(distanceAStarWeightedEx(wordA, wordB, createWeightMap()))).toMatchSnapshot();
-        expect(exResultToString(distanceAStarWeightedEx(wordB, wordA, createWeightMap()))).toMatchSnapshot();
+        expect(formatExResult(distanceAStarWeightedEx(wordA, wordB, createWeightMap()))).toMatchSnapshot();
+        expect(formatExResult(distanceAStarWeightedEx(wordB, wordA, createWeightMap()))).toMatchSnapshot();
     });
 
     // cspell:ignore aeiou
@@ -133,51 +134,13 @@ describe('distanceAStar', () => {
             weightMap = weightMap || createWeightMap();
             const r1 = distanceAStarWeightedEx(wordA, wordB, weightMap);
             const r2 = distanceAStarWeightedEx(wordB, wordA, weightMap);
-            expect(exResultToString(r1)).toMatchSnapshot();
-            expect(exResultToString(r2)).toMatchSnapshot();
+            expect(formatExResult(r1)).toMatchSnapshot();
+            expect(formatExResult(r2)).toMatchSnapshot();
             expect(r1?.cost).toBe(expected);
             expect(r2?.cost).toBe(expected);
         }
     );
 });
-
-function pL(s: string, w: number) {
-    return (' '.repeat(w) + s).slice(-w);
-}
-
-function pR(s: string, w: number) {
-    return (s + ' '.repeat(w)).slice(0, w);
-}
-
-function exResultToString(ex: ExResult | undefined): string {
-    if (!ex) return '<undefined>';
-
-    const { cost, segments } = ex;
-    const asString = segments.map(({ a, b, c, p }) => ({
-        a: `<${a}>`,
-        b: `<${b}>`,
-        c: c.toString(10),
-        p: p.toString(10),
-    }));
-    asString.push({
-        a: '',
-        b: '',
-        c: ' = ' + segments.reduce((sum, { c }) => sum + c, 0).toString(10),
-        p: ' = ' + segments.reduce((sum, { p }) => sum + p, 0).toString(10),
-    });
-    const parts = asString.map(({ a, b, c, p }) => ({
-        a,
-        b,
-        c,
-        p,
-        w: Math.max(a.length, b.length, c.length, p.length),
-    }));
-    const a = 'a: |' + parts.map(({ a, w }) => pR(a, w)).join('|') + '|';
-    const b = 'b: |' + parts.map(({ b, w }) => pR(b, w)).join('|') + '|';
-    const c = 'c: |' + parts.map(({ c, w }) => pL(c, w)).join('|') + '|';
-    const p = 'p: |' + parts.map(({ p, w }) => pL(p, w)).join('|') + '|';
-    return `<${ex.a.slice(1, -1)}> -> <${ex.b.slice(1, -1)}> (${cost})\n${[a, b, c, p].join('\n')}\n`;
-}
 
 function mapLetters(cost = 50): SuggestionCostMapDef {
     const letters = 'a'

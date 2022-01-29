@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Validate Spanish Suggestions weighted distance "nino" niña 1`] = `
+"<nino> -> <niña> (76)
+a: |<^>|<n>|<i>|<n>|<o$>|     |
+b: |<^>|<n>|<i>|<ñ>|<a$>|     |
+c: |  0|  0|  0|  1|  75| = 76|
+p: |  0|  0|  0|  0|   0|  = 0|
+"
+`;
+
+exports[`Validate Spanish Suggestions weighted distance "nino" niña 2`] = `
+"<nino> -> <niña> (76)
+a: |<^>|<n>|<i>|<n>|<o$>|     |
+b: |<^>|<n>|<i>|<ñ>|<a$>|     |
+c: |  0|  0|  0|  1|  75| = 76|
+p: |  0|  0|  0|  0|   0|  = 0|
+"
+`;
+
+exports[`Validate Spanish Suggestions weighted distance "niño" niños 1`] = `
+"<niño> -> <niños> (50)
+a: |<^>|<n>|<i>|<ñ>|<o$> |     |
+b: |<^>|<n>|<i>|<ñ>|<os$>|     |
+c: |  0|  0|  0|  0|   50| = 50|
+p: |  0|  0|  0|  0|    0|  = 0|
+"
+`;
+
+exports[`Validate Spanish Suggestions weighted distance "niño" niños 2`] = `
+"<niño> -> <niños> (50)
+a: |<^>|<n>|<i>|<n>|<̃>|<o$> |     |
+b: |<^>|<n>|<i>|<n>|<̃>|<os$>|     |
+c: |  0|  0|  0|  0| 0|   50| = 50|
+p: |  0|  0|  0|  0| 0|    0|  = 0|
+"
+`;
+
+exports[`Validate Spanish Suggestions weighted distance "nïño" niños 1`] = `
+"<nïño> -> <niños> (150)
+a: |<^>|<n>|<ï>|<ñ>|<o$> |      |
+b: |<^>|<n>|<i>|<ñ>|<os$>|      |
+c: |  0|  0|100|  0|   50| = 150|
+p: |  0|  0|  0|  0|    0|   = 0|
+"
+`;
+
+exports[`Validate Spanish Suggestions weighted distance "nïño" niños 2`] = `
+"<nïño> -> <niños> (51)
+a: |<^>|<n>|<i>|<̈>|<n>|<̃>|<o$> |     |
+b: |<^>|<n>|<i>|<>|<n>|<̃>|<os$>|     |
+c: |  0|  0|  0| 1|  0| 0|   50| = 51|
+p: |  0|  0|  0| 0|  0| 0|    0|  = 0|
+"
+`;

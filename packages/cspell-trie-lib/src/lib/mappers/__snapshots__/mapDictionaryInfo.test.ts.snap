@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapDictionaryInfo mapDictionaryInformation 1`] = `
+Array [
+  Object {
+    "insDel": 100,
+    "map": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    "replace": 100,
+    "swap": 100,
+  },
+  Object {
+    "map": "Aa|Bb|Cc|Dd|Ee|Ff|Gg|Hh|Ii|Jj|Kk|Ll|Mm|Nn|Oo|Pp|Qq|Rr|Ss|Tt|Uu|Vv|Ww|Xx|Yy|Zz|Aa|Bb|Cc|Dd|Ee|Ff|Gg|Hh|Ii|Jj|Kk|Ll|Mm|Nn|Oo|Pp|Qq|Rr|Ss|Tt|Uu|Vv|Ww|Xx|Yy|Zz",
+    "replace": 1,
+  },
+  Object {
+    "map": "(^A)(^B)(^C)(^D)(^E)(^F)(^G)(^H)(^I)(^J)(^K)(^L)(^M)(^N)(^O)(^P)(^Q)(^R)(^S)(^T)(^U)(^V)(^W)(^X)(^Y)(^Z)(^a)(^b)(^c)(^d)(^e)(^f)(^g)(^h)(^i)(^j)(^k)(^l)(^m)(^n)(^o)(^p)(^q)(^r)(^s)(^t)(^u)(^v)(^w)(^x)(^y)(^z)",
+    "penalty": 4,
+    "replace": 96,
+  },
+  Object {
+    "insDel": 1,
+    "map": "̴̵̶̷̸̡̢̧̨̛̖̗̘̙̜̝̞̟̠̣̤̥̦̩̪̫̬̭̮̯̰̱̲̳̹̺̻̼̀́̂̃̄̅̆̇̈̉̊̋̌̍̎̏̐̑̒̓̔̽̾̿̀́̕̚",
+    "replace": 1,
+  },
+]
+`;
+
+exports[`mapDictionaryInfo mapDictionaryInformation 2`] = `
+Array [
+  Object {
+    "insDel": 100,
+    "map": "ABCDEabcde",
+    "replace": 100,
+    "swap": 100,
+  },
+  Object {
+    "map": "Aa|Bb|Cc|Dd|Ee",
+    "replace": 1,
+  },
+  Object {
+    "map": "(^a)(^b)(^c)(^d)(^e)",
+    "penalty": 4,
+    "replace": 96,
+  },
+]
+`;
+
+exports[`mapDictionaryInfo mapDictionaryInformation 3`] = `
+Array [
+  Object {
+    "insDel": 100,
+    "map": "ABCDEabcde",
+    "replace": 100,
+    "swap": 100,
+  },
+  Object {
+    "map": "Aa|Bb|Cc|Dd|Ee|Aa|Bb|Cc|Dd|Ee",
+    "replace": 1,
+  },
+  Object {
+    "map": "(^A)(^B)(^C)(^D)(^E)(^a)(^b)(^c)(^d)(^e)",
+    "penalty": 4,
+    "replace": 96,
+  },
+  Object {
+    "insDel": 1,
+    "map": "́",
+    "replace": 1,
+  },
+]
+`;
