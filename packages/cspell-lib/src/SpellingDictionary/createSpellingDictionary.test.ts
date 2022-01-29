@@ -1,4 +1,5 @@
 import { SpellingDictionaryOptions } from '.';
+import { DictionaryInformation } from '..';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 
@@ -67,6 +68,20 @@ describe('Validate createSpellingDictionary', () => {
         ]);
         expect(d.suggest('geschaft', { ignoreCase: false }).map((r) => r.word)).toEqual(['Geschäft']);
     });
+
+    // cspell:ignore fone failor
+    test.each`
+        word          | ignoreCase | expected
+        ${'Geschäft'} | ${false}   | ${[c('Geschäft', 0)]}
+        ${'Geschaft'} | ${false}   | ${[c('Geschäft', 1)]}
+        ${'fone'}     | ${false}   | ${[c('phone', 70), c('gone', 100)]}
+        ${'failor'}   | ${false}   | ${[c('failure', 70), c('sailor', 100), c('failed', 175), c('fail', 200)]}
+    `('createSpellingDictionary with dictionaryInformation "$word" "$ignoreCase"', ({ word, ignoreCase, expected }) => {
+        const words = sampleWords();
+        const options = { ...opts(), dictionaryInformation: sampleDictionaryInformation({}) };
+        const d = createSpellingDictionary(words, 'test create', __filename, options);
+        expect(d.suggest(word, { ignoreCase, numSuggestions: 4 })).toEqual(expected);
+    });
 });
 
 function opts(opts: Partial<SpellingDictionaryOptions> = {}): SpellingDictionaryOptions {
@@ -74,4 +89,45 @@ function opts(opts: Partial<SpellingDictionaryOptions> = {}): SpellingDictionary
         weightMap: undefined,
         ...opts,
     };
+}
+
+function c(word: string, cost: number) {
+    return { word, cost };
+}
+
+function sampleDictionaryInformation(di: DictionaryInformation = {}): DictionaryInformation {
+    const d: DictionaryInformation = {
+        suggestionEditCosts: [
+            {
+                map: 'f(ph)(gh)|(ail)(ale)|(ur)(er)(ure)(or)',
+                replace: 70,
+            },
+            {
+                map: 'aeiou', // cspell:ignore aeiou
+                replace: 75,
+                swap: 75,
+            },
+            {
+                description: 'common vowel sounds.',
+                map: 'o(oh)(oo)|(oo)(ou)|(oa)(ou)',
+                replace: 65,
+            },
+        ],
+        ...di,
+    };
+    return d;
+}
+
+function sampleWords() {
+    return [
+        ...['Geschäft'.normalize('NFD'), 'café', 'book', "Aujourd'hui", 'cafe'],
+        ...['go', 'going', 'goes', 'gone'],
+        ...['phone', 'fall', 'phones', 'phoning', 'call', 'caller', 'called'],
+        ...['fail', 'fall', 'failed', 'failing', 'failure'],
+        ...['enough', 'though', 'through'],
+        ...['soup', 'soap', 'sooth', 'boot', 'boat'],
+        ...['sail', 'sailor', 'sailing', 'sails', 'sailed'],
+        ...['sale', 'sold', 'sales', 'selling'],
+        ...['tale', 'tail'],
+    ];
 }
