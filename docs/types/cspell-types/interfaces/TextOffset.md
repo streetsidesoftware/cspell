@@ -23,7 +23,7 @@
 
 #### Defined in
 
-[TextOffset.ts:3](https://github.com/streetsidesoftware/cspell/blob/1d86b22/packages/cspell-types/src/TextOffset.ts#L3)
+[TextOffset.ts:3](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/TextOffset.ts#L3)
 
 ___
 
@@ -33,4 +33,4 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:2](https://github.com/streetsidesoftware/cspell/blob/1d86b22/packages/cspell-types/src/TextOffset.ts#L2)
+[TextOffset.ts:2](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/TextOffset.ts#L2)
