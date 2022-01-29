@@ -238,7 +238,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         const values = weightMap
             ? rawValues.map(({ word }) => ({
                   word,
-                  cost: editDistanceWeighted(nWordToMatch, word.normalize(NF), weightMap),
+                  cost: editDistanceWeighted(nWordToMatch, word.normalize(NF), weightMap, 110),
               }))
             : rawValues;
 

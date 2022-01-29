@@ -1,7 +1,8 @@
 import { DictionaryInformation } from '@cspell/cspell-types';
 import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
 import { readTrie } from '../../test/dictionaries.test.helper';
-import { distanceAStarWeightedEx, ExResult } from '../distance/distanceAStarWeighted';
+import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted';
+import { formatExResult } from '../distance/formatResultEx';
 import { parseLinesToDictionary } from '../SimpleDictionaryParser';
 
 function getTrie() {
@@ -77,10 +78,10 @@ describe('Validate Spanish Suggestions', () => {
         const wm = weightMap();
 
         const dex = distanceAStarWeightedEx(wordA, wordB, wm);
-        expect(exResultToString(dex)).toMatchSnapshot();
+        expect(formatExResult(dex)).toMatchSnapshot();
 
         const dexN = distanceAStarWeightedEx(nWordA, nWordB, wm);
-        expect(exResultToString(dexN)).toMatchSnapshot();
+        expect(formatExResult(dexN)).toMatchSnapshot();
     });
 });
 
@@ -112,42 +113,4 @@ const defaultDictInfo: DictionaryInformation = {
 
 function weightMap(di: DictionaryInformation = defaultDictInfo): WeightMap {
     return mapDictionaryInformationToWeightMap(di);
-}
-
-function exResultToString(ex: ExResult | undefined): string {
-    if (!ex) return '<undefined>';
-
-    const { cost, segments } = ex;
-    const asString = segments.map(({ a, b, c, p }) => ({
-        a: `<${a}>`,
-        b: `<${b}>`,
-        c: c.toString(10),
-        p: p.toString(10),
-    }));
-    asString.push({
-        a: '',
-        b: '',
-        c: ' = ' + segments.reduce((sum, { c }) => sum + c, 0).toString(10),
-        p: ' = ' + segments.reduce((sum, { p }) => sum + p, 0).toString(10),
-    });
-    const parts = asString.map(({ a, b, c, p }) => ({
-        a,
-        b,
-        c,
-        p,
-        w: Math.max(a.length, b.length, c.length, p.length),
-    }));
-    const a = 'a: |' + parts.map(({ a, w }) => pR(a, w)).join('|') + '|';
-    const b = 'b: |' + parts.map(({ b, w }) => pR(b, w)).join('|') + '|';
-    const c = 'c: |' + parts.map(({ c, w }) => pL(c, w)).join('|') + '|';
-    const p = 'p: |' + parts.map(({ p, w }) => pL(p, w)).join('|') + '|';
-    return `<${ex.a.slice(1, -1)}> -> <${ex.b.slice(1, -1)}> (${cost})\n${[a, b, c, p].join('\n')}\n`;
-}
-
-function pL(s: string, w: number) {
-    return (' '.repeat(w) + s).slice(-w);
-}
-
-function pR(s: string, w: number) {
-    return (s + ' '.repeat(w)).slice(0, w);
 }

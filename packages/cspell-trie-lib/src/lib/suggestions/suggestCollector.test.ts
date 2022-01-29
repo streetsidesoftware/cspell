@@ -1,4 +1,5 @@
 import { createWeightedMap, editDistance, mapDictionaryInformationToWeightMap, WeightMap } from '..';
+import { formattedDistance } from '../distance/formatResultEx';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionGenerator } from './suggestCollector';
 
 const defaultOptions: SuggestionCollectorOptions = {
@@ -89,21 +90,29 @@ describe('Validate suggestCollector', () => {
     // cspell:ignore aple
     test.each`
         word       | expected
-        ${'word'}  | ${[s('word', 0), s('work', 100), s('words', 100)]}
-        ${'words'} | ${[s('words', 0), s('word', 100), s('works', 100)]}
+        ${'word'}  | ${[s('word', 0), s('work', 110), s('words', 110)]}
+        ${'words'} | ${[s('words', 0), s('word', 110), s('works', 110)]}
         ${'joy'}   | ${[s('joy', 0)]}
-        ${'joyo'}  | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 200)]}
-        ${'woudt'} | ${[s('word', 200), s("won't", 200), s('words', 200), s('would', 200)]}
-        ${'aple'}  | ${[s('apple', 55), s('apples', 155)]}
-        ${'cafe'}  | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
+        ${'joyo'}  | ${[s('joy', 75), s('joyous', 165), s('yo-yo', 220)]}
+        ${'woudt'} | ${[s('word', 220), s("won't", 220), s('words', 220), s('would', 220)]}
+        ${'aple'}  | ${[s('apple', 55), s('apples', 165)]}
+        ${'cafe'}  | ${[s('cafe', 0), s('café', 1), s('cafés', 111)]}
     `('collect weighted suggestions for "$word"', ({ word, expected }) => {
+        const weightMap = sampleWeightMapNoDefaultWeights();
         const collector = suggestionCollector(
             word,
-            sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true, weightMap: sampleWeightMap() })
+            sugOpts({ numSuggestions: 3, changeLimit: 5, includeTies: true, weightMap })
         );
         const sugs = sampleSuggestions().map((sugWord) => ({ word: sugWord, cost: editDistance(word, sugWord) }));
         sugs.forEach((sug) => collector.add(sug));
-        expect(collector.suggestions).toEqual(expected);
+
+        const suggestions = collector.suggestions;
+        suggestions
+            .map((a) => a.word)
+            .map((wordB) => formattedDistance(word.normalize('NFD'), wordB.normalize('NFD'), weightMap, 110))
+            .forEach((r) => console.log(r));
+
+        expect(suggestions).toEqual(expected);
     });
 
     // cspell:ignore aple
@@ -113,7 +122,7 @@ describe('Validate suggestCollector', () => {
         ${'words'} | ${[s('words', 0), s('word', 100), s('works', 100)]}
         ${'joy'}   | ${[s('joy', 0)]}
         ${'joyo'}  | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 301)]}
-        ${'woudt'} | ${[s('word', 200), s("won't", 200), s('words', 200), s('would', 200)]}
+        ${'woudt'} | ${[s('word', 200), s('words', 200), s('would', 200), s("won't", 210)]}
         ${'aple'}  | ${[s('apple', 55), s('apples', 155)]}
         ${'cafe'}  | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
     `('collect weighted suggestions for "$word"', ({ word, expected }) => {
@@ -172,6 +181,6 @@ function sampleWeightMapDi(): WeightMap {
     return mapDictionaryInformationToWeightMap(dictInfo());
 }
 
-function sampleWeightMap(): WeightMap {
+function sampleWeightMapNoDefaultWeights(): WeightMap {
     return createWeightedMap(dictInfo().suggestionEditCosts);
 }

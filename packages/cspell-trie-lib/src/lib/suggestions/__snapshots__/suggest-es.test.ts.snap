@@ -11,10 +11,10 @@ p: |  0|  0|  0|  0|   0|  = 0|
 
 exports[`Validate Spanish Suggestions weighted distance "nino" niña 2`] = `
 "<nino> -> <niña> (76)
-a: |<^>|<n>|<i>|<n> |<o$>|     |
+a: |<^>|<n>|<i>|<n>|<o$>|     |
 b: |<^>|<n>|<i>|<ñ>|<a$>|     |
-c: |  0|  0|  0|   1|  75| = 76|
-p: |  0|  0|  0|   0|   0|  = 0|
+c: |  0|  0|  0|  1|  75| = 76|
+p: |  0|  0|  0|  0|   0|  = 0|
 "
 `;
 
@@ -31,8 +31,8 @@ exports[`Validate Spanish Suggestions weighted distance "niño" niños 2`] = `
 "<niño> -> <niños> (50)
 a: |<^>|<n>|<i>|<n>|<̃>|<o$> |     |
 b: |<^>|<n>|<i>|<n>|<̃>|<os$>|     |
-c: |  0|  0|  0|  0|  0|   50| = 50|
-p: |  0|  0|  0|  0|  0|    0|  = 0|
+c: |  0|  0|  0|  0| 0|   50| = 50|
+p: |  0|  0|  0|  0| 0|    0|  = 0|
 "
 `;
 
@@ -48,8 +48,8 @@ p: |  0|  0|  0|  0|    0|   = 0|
 exports[`Validate Spanish Suggestions weighted distance "nïño" niños 2`] = `
 "<nïño> -> <niños> (51)
 a: |<^>|<n>|<i>|<̈>|<n>|<̃>|<o$> |     |
-b: |<^>|<n>|<i>|<> |<n>|<̃>|<os$>|     |
-c: |  0|  0|  0|  1|  0|  0|   50| = 51|
-p: |  0|  0|  0|  0|  0|  0|    0|  = 0|
+b: |<^>|<n>|<i>|<>|<n>|<̃>|<os$>|     |
+c: |  0|  0|  0| 1|  0| 0|   50| = 51|
+p: |  0|  0|  0| 0|  0| 0|    0|  = 0|
 "
 `;
