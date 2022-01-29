@@ -160,18 +160,18 @@ describe('mapHunspellInformation', () => {
     test.each`
         line              | costs                    | expected
         ${''}             | ${{}}                    | ${undefined}
-        ${'REP o oo'}     | ${{}}                    | ${{ map: '(o)(oo)', replace: 75 }}
+        ${'REP o oo'}     | ${{}}                    | ${{ map: 'o(oo)', replace: 75 }}
         ${'REP ^a A'}     | ${{ mapCost: 1 }}        | ${{ map: '(^a)(^A)', replace: 75 }}
-        ${'REP $ en$'}    | ${{ replaceCosts: 55 }}  | ${{ map: '($)(en$)', replace: 55 }}
+        ${'REP $ en$'}    | ${{ replaceCosts: 55 }}  | ${{ map: '$(en$)', replace: 55 }}
         ${'REP ^af$ aff'} | ${{}}                    | ${{ map: '(^af$)(^aff$)', replace: 75 }}
-        ${'REP ß ss'}     | ${{}}                    | ${{ map: '(ß)(ss)', replace: 75 }}
-        ${'REP ß 0'}      | ${{}}                    | ${{ map: '(ß)()', replace: 75 }}
+        ${'REP ß ss'}     | ${{}}                    | ${{ map: 'ß(ss)', replace: 75 }}
+        ${'REP ß 0'}      | ${{}}                    | ${{ map: 'ß()', replace: 75 }}
         ${'REP 25'}       | ${{}}                    | ${undefined}
         ${'ICONV 25'}     | ${{}}                    | ${undefined}
         ${'OCONV 25'}     | ${{}}                    | ${undefined}
         ${'ICONV áá aa'}  | ${{}}                    | ${{ map: '(áá)(aa)', replace: 30 }}
-        ${'OCONV ss ß'}   | ${{ replaceCosts: 55 }}  | ${{ map: '(ss)(ß)', replace: 30 }}
-        ${'OCONV ss ß'}   | ${{ ioConvertCost: 25 }} | ${{ map: '(ss)(ß)', replace: 25 }}
+        ${'OCONV ss ß'}   | ${{ replaceCosts: 55 }}  | ${{ map: '(ss)ß', replace: 30 }}
+        ${'OCONV ss ß'}   | ${{ ioConvertCost: 25 }} | ${{ map: '(ss)ß', replace: 25 }}
     `('affRepConv "$line" $costs', ({ line, costs, expected }) => {
         expect(affRepConv(line, calcCosts(costs))).toEqual(expected);
     });

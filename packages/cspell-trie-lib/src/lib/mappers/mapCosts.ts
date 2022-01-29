@@ -1,5 +1,5 @@
 import { HunspellCosts, EditCosts } from '../models/DictionaryInformation';
-import { clean } from '../utils/util';
+import { cleanCopy } from '../utils/util';
 
 export type EditCostsRequired = Required<EditCosts>;
 export type HunspellCostsRequired = Required<HunspellCosts>;
@@ -22,9 +22,9 @@ const defaultHunspellCosts: HunspellCostsRequired = {
 };
 
 export function mapHunspellCosts(costs: HunspellCosts = {}): HunspellCostsRequired {
-    return { ...defaultHunspellCosts, ...clean({ ...costs }) };
+    return { ...defaultHunspellCosts, ...cleanCopy(costs) };
 }
 
 export function mapEditCosts(costs: EditCosts = {}): EditCostsRequired {
-    return { ...defaultEditCosts, ...clean({ ...costs }) };
+    return { ...defaultEditCosts, ...cleanCopy(costs) };
 }

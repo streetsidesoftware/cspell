@@ -6,7 +6,8 @@ describe('mapDictionaryInfoToWeightMap', () => {
     test.each`
         dictInfo                                                                  | pos                            | expected
         ${di({})}                                                                 | ${{}}                          | ${[]}
-        ${di({})}                                                                 | ${{ a: 'apple', b: 'banana' }} | ${[]}
+        ${di({ alphabet: 'ac-z' })}                                               | ${{ a: 'apple', b: 'banana' }} | ${[]}
+        ${di({ alphabet: 'a-zA-B' })}                                             | ${{ a: 'apple', b: 'banana' }} | ${[cp({ a: 'apple', b: 'banana', ai: 1, bi: 1, c: 100 })]}
         ${di({ hunspellInformation: { aff: 'TRY abc\n' } })}                      | ${{ a: 'apple', b: 'banana' }} | ${[cp({ a: 'apple', b: 'banana', ai: 1, bi: 1, c: 100 })]}
         ${di({ suggestionEditCosts: [{ map: 'abc', replace: 50, penalty: 2 }] })} | ${{ a: 'apple', b: 'banana' }} | ${[cp({ a: 'apple', b: 'banana', ai: 1, bi: 1, c: 50, p: 2 })]}
     `('dictionaryInformationToWeightMap $dictInfo $pos', ({ dictInfo, pos, expected }) => {

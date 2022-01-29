@@ -1,7 +1,10 @@
+import { pipeSync as pipe } from '../../pipe';
+import { filter, flatten, map, unique } from '../../pipe/operators';
 import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
 import { Locale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { flatten, isDefined, unique } from '../utils/util';
+import { caseForms } from '../utils/text';
+import { isDefined, unique as uniqueU } from '../utils/util';
 import { mapHunspellCosts } from './mapCosts';
 
 interface Costs extends Required<HunspellCosts> {
@@ -103,12 +106,13 @@ function affTryFirstCharacterReplace(line: string, costs: Costs): SuggestionCost
     if (!m) return undefined;
 
     const map = [...split(m[1])].map((char) => `(^${char})`).join('');
-    const cost = costs.tryCharCost;
     const penalty = costs.firstLetterPenalty;
+    // Make it a bit cheaper so it will match
+    const cost = costs.tryCharCost - penalty;
 
     return {
         map,
-        replace: cost - penalty,
+        replace: cost,
         penalty,
     };
 }
@@ -149,7 +153,7 @@ function affRepConv(line: string, costs: Costs): SuggestionCostMapDef | undefine
     }
 
     return {
-        map: `(${from})(${into})`,
+        map: joinLetters([from, into]),
         replace: cost,
     };
 }
@@ -169,7 +173,7 @@ function affKey(line: string, costs: Costs): SuggestionCostMapDef | undefined {
 
     const pairsUpper = pairs.map((p) => p.toLocaleUpperCase(costs.locale));
 
-    const map = unique(pairs.concat(pairsUpper)).join('|');
+    const map = uniqueU(pairs.concat(pairsUpper)).join('|');
     const cost = costs.keyboardCost;
 
     return {
@@ -217,7 +221,7 @@ function parseCaps(value: string, costs: Costs): SuggestionCostMapDef | undefine
         .filter((forms) => forms.length > 1)
         .map(joinLetters);
 
-    const map = unique(withCases).join('|');
+    const map = uniqueU(withCases).join('|');
     const cost = costs.capsCosts;
 
     if (!map) return undefined;
@@ -230,21 +234,29 @@ function parseCaps(value: string, costs: Costs): SuggestionCostMapDef | undefine
 
 function parseAccents(value: string, costs: Costs): SuggestionCostMapDef | undefined {
     const locale = costs.locale;
-    const letters = [...split(value)].filter((a) => a !== '|');
-    const withCases = letters.map((s) =>
-        caseForms(s, locale)
-            .map((form) => [form, stripAccents(form)])
-            .filter(([a, b]) => a !== b)
-            .map(joinLetters)
+
+    const characters = pipe(
+        split(value),
+        filter((a) => a !== '|'),
+        map((s) =>
+            pipe(
+                caseForms(s, locale),
+                map((form) => [form, stripAccents(form)]),
+                filter(([a, b]) => a !== b),
+                map(joinLetters)
+            )
+        ),
+        flatten(),
+        unique()
     );
 
-    const map = unique(flatten(withCases)).join('|');
+    const charMap = [...characters].join('|');
     const cost = costs.accentCosts;
 
-    if (!map) return undefined;
+    if (!charMap) return undefined;
 
     return {
-        map,
+        map: charMap,
         replace: cost,
     };
 }
@@ -277,26 +289,13 @@ function* split(map: string): Iterable<string> {
  * - `['a', 'bc'] => 'a(bc)'`
  * @param letters - letters to join
  */
-function joinLetters(letters: string[]): string {
-    return letters.map((a) => (a.length > 1 ? `(${a})` : a)).join('');
+export function joinLetters(letters: string[]): string {
+    return letters.map((a) => (a.length > 1 || !a.length ? `(${a})` : a)).join('');
 }
 
 function reducer<T, U = T>(fn: (acc: U, val: T, i: number) => U, initialVal: U) {
     let acc = initialVal;
     return (val: T, i: number) => (acc = fn(acc, val, i));
-}
-
-function caseForms(s: string, locale: string | string[] | undefined): string[] {
-    const forms = new Set([s]);
-
-    function tryCases(s: string) {
-        forms.add(s.toLocaleLowerCase(locale));
-        forms.add(s.toLocaleUpperCase(locale));
-    }
-
-    tryCases(s);
-    [...forms].forEach(tryCases);
-    return [...forms].filter((a) => !!a);
 }
 
 function stripAccents(s: string): string {

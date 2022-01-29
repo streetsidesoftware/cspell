@@ -60,3 +60,32 @@ export function expandRange(a: string, b: string): string[] {
 
     return values;
 }
+
+/**
+ * Tries to find the different cases for a letter.
+ * It can generate multiple forms:
+ * - `ß` => `['ß', 'SS', 'ss']`
+ * - `a` => `['a', 'A']`
+ * - `A` => `['A', 'z']`
+ * - `Å` => `['A', 'z']`
+ * @param letter - the letter to generate upper and lower cases.
+ * @param locale - the locale to use for changing case.
+ * @returns the set of found cases.
+ */
+export function caseForms(letter: string, locale: string | string[] | undefined): string[] {
+    const forms = new Set([letter]);
+
+    function tryCases(s: string) {
+        forms.add(s.toLocaleLowerCase(locale));
+        forms.add(s.toLocaleUpperCase(locale));
+    }
+
+    tryCases(letter);
+    [...forms].forEach(tryCases);
+    return [...forms].filter((a) => !!a);
+}
+
+export function accentForms(letter: string): Iterable<string> {
+    const forms = new Set([letter, letter.normalize('NFC'), letter.normalize('NFD')]);
+    return forms;
+}

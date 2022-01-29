@@ -1,7 +1,7 @@
 import { GenSuggestionOptions, SuggestionOptions } from '../genSuggestionsOptions';
 import { parseDictionary } from '../SimpleDictionaryParser';
 import { Trie } from '../trie';
-import { clean } from '../utils/util';
+import { cleanCopy } from '../utils/util';
 import * as Walker from '../walker';
 import { genCompoundableSuggestions, genSuggestions, suggest } from './suggest';
 import {
@@ -264,7 +264,7 @@ function numSugs(numSuggestions: number): SuggestionOptions {
 function sugOpts(opts: Partial<SuggestionCollectorOptions>): SuggestionCollectorOptions {
     return {
         ...defaultOptions,
-        ...clean(opts),
+        ...cleanCopy(opts),
     };
 }
 
