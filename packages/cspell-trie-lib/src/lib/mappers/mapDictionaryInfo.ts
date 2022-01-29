@@ -3,6 +3,7 @@ import { opFlatten, opMap } from '../../pipe/operators';
 import type { CharacterSetCosts, DictionaryInformation } from '../models/DictionaryInformation';
 import { parseLocale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
+import { isDefined } from '../utils/util';
 import { EditCostsRequired, mapEditCosts } from './mapCosts';
 import { hunspellInformationToSuggestionCostDef } from './mapHunspellInformation';
 import { calcFirstCharacterReplaceDefs, parseAccents, parseAlphabet } from './mapToSuggestionCostDef';
@@ -72,5 +73,5 @@ function processAccents(
     editCost: EditCostsRequired
 ): SuggestionCostMapDef[] {
     const cs = toCharSets(accents, '\u0300-\u0341', editCost.accentCosts);
-    return cs.map((cs) => parseAccents(cs, editCost));
+    return cs.map((cs) => parseAccents(cs, editCost)).filter(isDefined);
 }

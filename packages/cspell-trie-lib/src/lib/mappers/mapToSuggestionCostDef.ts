@@ -1,8 +1,8 @@
-import { pipeSync } from '../../pipe';
-import { opFlatten, opMap, opUnique } from '../../pipe/operators';
+import { pipeSync as pipe } from '../../pipe';
+import { opFilter, opFlatten, opMap, opUnique } from '../../pipe/operators';
 import type { CharacterSetCosts } from '../models/DictionaryInformation';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
-import { accentForms, caseForms, expandCharacterSet } from '../utils/text';
+import { accentForms, caseForms, expandCharacterSet, stripAccents, stripNonAccents } from '../utils/text';
 import { clean } from '../utils/util';
 import { EditCostsRequired } from './mapCosts';
 import { joinLetters } from './mapHunspellInformation';
@@ -15,14 +15,14 @@ export function parseAlphabet(
     const { cost, penalty } = cs;
     const characters = expandCharacterSet(cs.characters);
     const charForms = [
-        ...pipeSync(
+        ...pipe(
             characters,
             opMap((c) => caseForms(c, locale).sort())
         ),
     ];
     const alphabet = joinLetters(
         [
-            ...pipeSync(
+            ...pipe(
                 charForms,
                 opFlatten(),
                 opMap((letter) => accentForms(letter)),
@@ -40,7 +40,11 @@ export function parseAlphabet(
         penalty,
     });
 
-    return [sugAlpha, parseAlphabetCaps(cs.characters, locale, editCost)];
+    return [
+        sugAlpha,
+        parseAlphabetCaps(cs.characters, locale, editCost),
+        ...calcCostsForAccentedLetters(alphabet, locale, editCost),
+    ];
 }
 
 export function parseAlphabetCaps(
@@ -50,7 +54,7 @@ export function parseAlphabetCaps(
 ): SuggestionCostMapDef {
     const characters = expandCharacterSet(alphabet);
     const charForms = [
-        ...pipeSync(
+        ...pipe(
             characters,
             opMap((c) => caseForms(c, locale).sort())
         ),
@@ -74,7 +78,7 @@ export function calcFirstCharacterReplaceDefs(
 
 export function calcFirstCharacterReplace(cs: CharacterSetCosts, editCost: EditCostsRequired): SuggestionCostMapDef {
     const mapOfFirstLetters = [
-        ...pipeSync(
+        ...pipe(
             expandCharacterSet(cs.characters),
             opUnique(),
             opMap((letter) => `(^${letter})`)
@@ -94,12 +98,81 @@ export function calcFirstCharacterReplace(cs: CharacterSetCosts, editCost: EditC
     };
 }
 
-export function parseAccents(cs: CharacterSetCosts, _editCost: EditCostsRequired): SuggestionCostMapDef {
+export function parseAccents(cs: CharacterSetCosts, _editCost: EditCostsRequired): SuggestionCostMapDef | undefined {
     const { cost, penalty } = cs;
-    const characters = expandCharacterSet(cs.characters);
+    const accents = stripNonAccents(cs.characters);
+    if (!accents) return undefined;
+
+    const characters = expandCharacterSet(accents);
     return clean({
         map: joinLetters([...characters]),
         replace: cost,
+        insDel: cost,
         penalty,
     });
+}
+
+export function calcCostsForAccentedLetters(
+    simpleMap: string,
+    locale: string[] | undefined,
+    costs: EditCostsRequired
+): SuggestionCostMapDef[] {
+    const charactersWithAccents = [
+        ...pipe(
+            splitMap(simpleMap),
+            opMap((char) => caseForms(char, locale)),
+            opFlatten(),
+            opMap((char) => [...accentForms(char)]),
+            opFilter((forms) => forms.length > 1)
+        ),
+    ];
+
+    const characters = pipe(
+        charactersWithAccents,
+        opMap((forms) => new Set([...forms, ...forms.map((char) => stripAccents(char))])),
+        opMap((forms) => [...forms].sort()),
+        opFilter((forms) => forms.length > 1),
+        opMap(joinLetters),
+        opUnique()
+    );
+
+    const replaceAccentMap = [...characters].join('|');
+    const cost = costs.accentCosts;
+    const costToReplaceAccent = !replaceAccentMap ? [] : [{ map: replaceAccentMap, replace: cost }];
+
+    const normalizeMap = charactersWithAccents
+        .map((a) => a.sort())
+        .map(joinLetters)
+        .join('|');
+    const costToNormalizeAccent = !normalizeMap ? [] : [{ map: normalizeMap, replace: 0 }];
+
+    return [...costToReplaceAccent, ...costToNormalizeAccent];
+}
+
+/**
+ * Splits a simple map string into its parts.
+ * - `abc` => `a`, `b`, `c`
+ * - `a(bc)` => `a`, `bc`
+ * @param map - string of characters
+ */
+export function* splitMap(map: string): Iterable<string> {
+    let seq = '';
+    let mode = 0;
+    for (const char of map) {
+        if (mode && char === ')') {
+            yield seq;
+            mode = 0;
+            continue;
+        }
+        if (mode) {
+            seq += char;
+            continue;
+        }
+        if (char === '(') {
+            mode = 1;
+            seq = '';
+            continue;
+        }
+        yield char;
+    }
 }

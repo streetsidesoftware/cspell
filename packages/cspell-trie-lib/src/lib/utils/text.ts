@@ -85,7 +85,30 @@ export function caseForms(letter: string, locale: string | string[] | undefined)
     return [...forms].filter((a) => !!a);
 }
 
+/**
+ * Generate the different normalized forms of the letters.
+ * @param letter - letter to normalize.
+ * @returns combined set of possible forms.
+ */
 export function accentForms(letter: string): Iterable<string> {
     const forms = new Set([letter, letter.normalize('NFC'), letter.normalize('NFD')]);
     return forms;
+}
+
+/**
+ * Remove all accents.
+ * @param characters - unicode characters
+ * @returns characters with accents removed (if it was possible)
+ */
+export function stripAccents(characters: string): string {
+    return characters.normalize('NFD').replace(/\p{M}/gu, '');
+}
+
+/**
+ * Remove all non accent characters from a string.
+ * @param characters - characters with accents.
+ * @returns - only the accents.
+ */
+export function stripNonAccents(characters: string): string {
+    return characters.normalize('NFD').replace(/[^\p{M}]/gu, '');
 }

@@ -76,10 +76,10 @@ describe('mapHunspellInformation', () => {
     test.each`
         line                  | costs                    | expected
         ${''}                 | ${{}}                    | ${undefined}
-        ${'MAP aàâäAÀÂÄ'}     | ${{}}                    | ${{ map: 'àa|ÀA|âa|ÂA|äa|ÄA', replace: 1 }}
-        ${'MAP 😁😀😊😂🤣😬'} | ${{}}                    | ${undefined}
-        ${'MAP aàâäAÀÂÄ'}     | ${c({ accentCosts: 2 })} | ${{ map: 'àa|ÀA|âa|ÂA|äa|ÄA', replace: 2 }}
-        ${'MAP ß(ss)'}        | ${{}}                    | ${undefined}
+        ${'MAP 😁😀😊😂🤣😬'} | ${{}}                    | ${[]}
+        ${'MAP aàâäAÀÂÄ'}     | ${{}}                    | ${[{ map: 'a(à)à|A(À)À|a(â)â|A(Â)Â|a(ä)ä|A(Ä)Ä', replace: 1 }, { map: '(à)à|(À)À|(â)â|(Â)Â|(ä)ä|(Ä)Ä|(À)À|(à)à|(Â)Â|(â)â|(Ä)Ä|(ä)ä', replace: 0 }]}
+        ${'MAP aàâäAÀÂÄ'}     | ${c({ accentCosts: 2 })} | ${[{ map: 'a(à)à|A(À)À|a(â)â|A(Â)Â|a(ä)ä|A(Ä)Ä', replace: 2 }, { map: '(à)à|(À)À|(â)â|(Â)Â|(ä)ä|(Ä)Ä|(À)À|(à)à|(Â)Â|(â)â|(Ä)Ä|(ä)ä', replace: 0 }]}
+        ${'MAP ß(ss)'}        | ${{}}                    | ${[]}
     `('affMapCaps "$line" $costs', ({ line, costs, expected }) => {
         expect(affMapAccents(line, calcCosts(costs))).toEqual(expected);
     });
@@ -149,10 +149,10 @@ describe('mapHunspellInformation', () => {
         line                    | costs                      | expected
         ${''}                   | ${{}}                      | ${undefined}
         ${'MAP aàâäAÀÂÄ'}       | ${{}}                      | ${undefined}
-        ${'TRY abcdéefghi'}     | ${c({ keyboardCost: 74 })} | ${{ map: 'ée|ÉE', replace: 1 }}
-        ${'TRY abcdéefghi'}     | ${c({ accentCosts: 33 })}  | ${{ map: 'ée|ÉE', replace: 33 }}
-        ${'TRY 春😁|aasdfzxcv'} | ${c()}                     | ${undefined}
-        ${'TRY a😁b'}           | ${c()}                     | ${undefined}
+        ${'TRY abcdéefghi'}     | ${c({ keyboardCost: 74 })} | ${[{ map: 'e(é)é|E(É)É', replace: 1 }, { map: '(é)é|(É)É', replace: 0 }]}
+        ${'TRY abcdéefghi'}     | ${c({ accentCosts: 33 })}  | ${[{ map: 'e(é)é|E(É)É', replace: 33 }, { map: '(é)é|(É)É', replace: 0 }]}
+        ${'TRY 春😁|aasdfzxcv'} | ${c()}                     | ${[]}
+        ${'TRY a😁b'}           | ${c()}                     | ${[]}
     `('affTryAccents "$line" $costs', ({ line, costs, expected }) => {
         expect(affTryAccents(line, calcCosts(costs))).toEqual(expected);
     });
