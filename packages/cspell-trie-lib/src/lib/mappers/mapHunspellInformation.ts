@@ -6,16 +6,16 @@ import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { caseForms } from '../utils/text';
 import { isDefined, unique as uniqueU } from '../utils/util';
 import { mapHunspellCosts } from './mapCosts';
+import { calcFirstCharacterReplace, parseAlphabet } from './mapToSuggestionCostDef';
 
 interface Costs extends Required<HunspellCosts> {
-    locale?: string | string[] | undefined;
+    locale?: string[] | undefined;
 }
 
 export function hunspellInformationToSuggestionCostDef(
     hunInfo: HunspellInformation,
     locales: Locale[] | undefined
 ): SuggestionCostMapDef[] {
-    const defs: SuggestionCostMapDef[] = [];
     const costs = calcCosts(hunInfo.costs, locales);
 
     const operations = [
@@ -28,7 +28,6 @@ export function hunspellInformationToSuggestionCostDef(
         affRepConv,
         affTry,
         affTryAccents,
-        affTryCaps,
         affTryFirstCharacterReplace,
     ];
 
@@ -43,17 +42,25 @@ export function hunspellInformationToSuggestionCostDef(
             .map((a) => a.trim())
             .filter((a) => regSupportedAff.test(a))
             .filter((a) => !rejectAff.test(a));
-        lines.forEach((line) => {
-            operations
-                .map((fn) => fn(line, costs))
-                .filter(isDefined)
-                .forEach((def) => defs.push(def));
-        });
+
+        const defs = pipe(
+            lines,
+            opMap((line) =>
+                pipe(
+                    operations,
+                    opMap((fn) => fn(line, costs)),
+                    opMap(asArrayOf),
+                    opFlatten()
+                )
+            ),
+            opFlatten(),
+            opFilter(isDefined)
+        );
+
+        return [...defs];
     }
 
-    parseAff(hunInfo.aff, costs);
-
-    return defs;
+    return parseAff(hunInfo.aff, costs);
 }
 
 function calcCosts(costs: HunspellCosts = {}, locale?: Locale[] | undefined): Costs {
@@ -86,35 +93,39 @@ function affMap(line: string, costs: Costs): SuggestionCostMapDef | undefined {
 
 const regExpTry = /^(?:TRY)\s+(\S+)$/;
 
-function affTry(line: string, costs: Costs): SuggestionCostMapDef | undefined {
+function affTry(line: string, costs: Costs): SuggestionCostMapDef[] | undefined {
     const m = line.match(regExpTry);
     if (!m) return undefined;
 
-    const map = m[1];
     const cost = costs.tryCharCost;
+    const tryChars = m[1];
+    const characters = tryChars;
 
-    return {
-        map,
-        insDel: cost,
-        replace: cost,
-        swap: cost,
-    };
+    return parseAlphabet(
+        {
+            characters,
+            cost,
+        },
+        costs.locale,
+        costs
+    );
 }
 
 function affTryFirstCharacterReplace(line: string, costs: Costs): SuggestionCostMapDef | undefined {
     const m = line.match(regExpTry);
     if (!m) return undefined;
 
-    const map = [...split(m[1])].map((char) => `(^${char})`).join('');
-    const penalty = costs.firstLetterPenalty;
+    const characters = m[1];
     // Make it a bit cheaper so it will match
-    const cost = costs.tryCharCost - penalty;
+    const cost = costs.tryCharCost;
 
-    return {
-        map,
-        replace: cost,
-        penalty,
-    };
+    return calcFirstCharacterReplace(
+        {
+            characters,
+            cost,
+        },
+        costs
+    );
 }
 
 const regExpNoTry = /^NO-TRY\s+(\S+)$/;
@@ -191,12 +202,6 @@ function affKeyCaps(line: string, costs: Costs): SuggestionCostMapDef | undefine
 
 function affMapCaps(line: string, costs: Costs): SuggestionCostMapDef | undefined {
     const m = line.match(regExpMap);
-    if (!m) return undefined;
-    return parseCaps(m[1], costs);
-}
-
-function affTryCaps(line: string, costs: Costs): SuggestionCostMapDef | undefined {
-    const m = line.match(regExpTry);
     if (!m) return undefined;
     return parseCaps(m[1], costs);
 }
@@ -300,6 +305,10 @@ function reducer<T, U = T>(fn: (acc: U, val: T, i: number) => U, initialVal: U) 
 
 function stripAccents(s: string): string {
     return s.normalize('NFD').replace(/\p{M}/gu, '');
+}
+
+function asArrayOf<T>(v: T | T[]): T[] {
+    return Array.isArray(v) ? v : [v];
 }
 
 export const __testing__ = {

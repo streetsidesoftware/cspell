@@ -89,9 +89,9 @@ describe('mapHunspellInformation', () => {
         ${''}                | ${{}}                            | ${undefined}
         ${'MAP aàâäAÀÂÄ'}    | ${{}}                            | ${undefined}
         ${'NO-TRY aàâäAÀÂÄ'} | ${{}}                            | ${undefined}
-        ${'TRY abc'}         | ${c({ mapCost: 1 })}             | ${{ map: 'abc', replace: 100, insDel: 100, swap: 100 }}
-        ${'TRY abc'}         | ${c({ tryCharCost: 90 })}        | ${{ map: 'abc', replace: 90, insDel: 90, swap: 90 }}
-        ${'TRY abc'}         | ${c({ firstLetterPenalty: 10 })} | ${{ map: 'abc', replace: 100, insDel: 100, swap: 100 }}
+        ${'TRY abc'}         | ${c({ mapCost: 1 })}             | ${[{ map: 'ABCabc', replace: 100, insDel: 100, swap: 100 }, { map: 'Aa|Bb|Cc', replace: 1 }]}
+        ${'TRY abc'}         | ${c({ tryCharCost: 90 })}        | ${[{ map: 'ABCabc', replace: 90, insDel: 90, swap: 90 }, { map: 'Aa|Bb|Cc', replace: 1 }]}
+        ${'TRY abc'}         | ${c({ firstLetterPenalty: 10 })} | ${[{ map: 'ABCabc', replace: 100, insDel: 100, swap: 100 }, { map: 'Aa|Bb|Cc', replace: 1 }]}
     `('affTry "$line" $costs', ({ line, costs, expected }) => {
         expect(affTry(line, calcCosts(costs))).toEqual(expected);
     });

@@ -5,7 +5,7 @@ import { parseLocale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { EditCostsRequired, mapEditCosts } from './mapCosts';
 import { hunspellInformationToSuggestionCostDef } from './mapHunspellInformation';
-import { calcFirstLetterDef, parseAccents, parseAlphabet } from './mapToSuggestionCostDef';
+import { calcFirstCharacterReplaceDefs, parseAccents, parseAlphabet } from './mapToSuggestionCostDef';
 
 export function mapDictionaryInformation(dictInfo: DictionaryInformation): SuggestionCostMapDef[] {
     const _locale = dictInfo.locale;
@@ -38,7 +38,7 @@ function processAlphabet(
             opMap((cs) => parseAlphabet(cs, locale, editCost)),
             opFlatten()
         ),
-        calcFirstLetterDef(csAlphabet, editCost),
+        ...calcFirstCharacterReplaceDefs(csAlphabet, editCost),
     ];
 }
 

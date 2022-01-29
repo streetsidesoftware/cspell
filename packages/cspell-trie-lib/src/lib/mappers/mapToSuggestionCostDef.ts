@@ -1,5 +1,5 @@
 import { pipeSync } from '../../pipe';
-import { opFlatten, opMap, opUnique, opJoinStrings } from '../../pipe/operators';
+import { opFlatten, opMap, opUnique } from '../../pipe/operators';
 import type { CharacterSetCosts } from '../models/DictionaryInformation';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { accentForms, caseForms, expandCharacterSet } from '../utils/text';
@@ -17,18 +17,20 @@ export function parseAlphabet(
     const charForms = [
         ...pipeSync(
             characters,
-            opMap((c) => caseForms(c, locale))
+            opMap((c) => caseForms(c, locale).sort())
         ),
     ];
-    const alphabet = joinLetters([
-        ...pipeSync(
-            charForms,
-            opFlatten(),
-            opMap((letter) => accentForms(letter)),
-            opFlatten(),
-            opUnique()
-        ),
-    ]);
+    const alphabet = joinLetters(
+        [
+            ...pipeSync(
+                charForms,
+                opFlatten(),
+                opMap((letter) => accentForms(letter)),
+                opFlatten(),
+                opUnique()
+            ),
+        ].sort()
+    );
 
     const sugAlpha: SuggestionCostMapDef = clean({
         map: alphabet,
@@ -38,34 +40,52 @@ export function parseAlphabet(
         penalty,
     });
 
+    return [sugAlpha, parseAlphabetCaps(cs.characters, locale, editCost)];
+}
+
+export function parseAlphabetCaps(
+    alphabet: string,
+    locale: string[] | undefined,
+    editCost: EditCostsRequired
+): SuggestionCostMapDef {
+    const characters = expandCharacterSet(alphabet);
+    const charForms = [
+        ...pipeSync(
+            characters,
+            opMap((c) => caseForms(c, locale).sort())
+        ),
+    ];
+
     const caps = charForms.map((a) => joinLetters(a)).join('|');
     const sugCaps: SuggestionCostMapDef = {
         map: caps,
         replace: editCost.capsCosts,
     };
 
-    return [sugAlpha, sugCaps];
+    return sugCaps;
 }
 
-export function calcFirstLetterDef(alphabet: CharacterSetCosts[], editCost: EditCostsRequired): SuggestionCostMapDef {
+export function calcFirstCharacterReplaceDefs(
+    alphabets: CharacterSetCosts[],
+    editCost: EditCostsRequired
+): SuggestionCostMapDef[] {
+    return alphabets.map((cs) => calcFirstCharacterReplace(cs, editCost));
+}
+
+export function calcFirstCharacterReplace(cs: CharacterSetCosts, editCost: EditCostsRequired): SuggestionCostMapDef {
     const mapOfFirstLetters = [
         ...pipeSync(
-            alphabet,
-            opMap((cs) => cs.characters),
-            opMap((c) =>
-                pipeSync(
-                    expandCharacterSet(c),
-                    opUnique(),
-                    opMap((letter) => `(^${letter})`)
-                )
-            ),
-            opJoinStrings('')
+            expandCharacterSet(cs.characters),
+            opUnique(),
+            opMap((letter) => `(^${letter})`)
         ),
-    ].join('|');
+    ]
+        .sort()
+        .join('');
 
     const penalty = editCost.firstLetterPenalty;
     // Make it a bit cheaper so it will match
-    const cost = editCost.baseCost - penalty;
+    const cost = cs.cost - penalty;
 
     return {
         map: mapOfFirstLetters,
