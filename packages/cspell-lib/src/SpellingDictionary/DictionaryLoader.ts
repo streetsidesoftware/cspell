@@ -53,7 +53,7 @@ export function loadDictionary(uri: string, options: DictionaryDefinitionInterna
     return loadedEntry.dictionary;
 }
 
-const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['noSuggest', 'useCompounds'];
+const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['name', 'noSuggest', 'useCompounds'];
 
 function calcKey(uri: string, options: DictionaryDefinitionInternal) {
     const loaderType = determineType(uri, options);

@@ -1,5 +1,6 @@
 import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
+import { isDefined } from '../util/util';
 import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';
 import { SpellingDictionary } from './SpellingDictionary';
@@ -19,19 +20,16 @@ export function getDictionaryInternal(settings: CSpellSettingsInternal): Promise
     const { words = emptyWords, userWords = emptyWords, flagWords = emptyWords, ignoreWords = emptyWords } = settings;
     const spellDictionaries = loadDictionaryDefs(calcDictionaryDefsToLoad(settings));
 
-    const settingsDictionary = createSpellingDictionary(words.concat(userWords), '[words]', 'From Settings `words`', {
+    const settingsWordsDictionary = createSpellingDictionary(words, '[words]', 'From Settings `words`', {
         caseSensitive: true,
         weightMap: undefined,
     });
-    const settingsUserWordsDictionary = createSpellingDictionary(
-        userWords,
-        '[userWords]',
-        'From Settings `userWords`',
-        {
-            caseSensitive: true,
-            weightMap: undefined,
-        }
-    );
+    const settingsUserWordsDictionary = userWords.length
+        ? createSpellingDictionary(userWords, '[userWords]', 'From Settings `userWords`', {
+              caseSensitive: true,
+              weightMap: undefined,
+          })
+        : undefined;
     const ignoreWordsDictionary = createSpellingDictionary(
         ignoreWords,
         '[ignoreWords]',
@@ -45,14 +43,12 @@ export function getDictionaryInternal(settings: CSpellSettingsInternal): Promise
     const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '[flagWords]', 'From Settings `flagWords`', {
         weightMap: undefined,
     });
-    return createCollectionP(
-        [
-            ...spellDictionaries,
-            settingsDictionary,
-            settingsUserWordsDictionary,
-            ignoreWordsDictionary,
-            flagWordsDictionary,
-        ],
-        'dictionary collection'
-    );
+    const dictionaries = [
+        ...spellDictionaries,
+        settingsWordsDictionary,
+        settingsUserWordsDictionary,
+        ignoreWordsDictionary,
+        flagWordsDictionary,
+    ].filter(isDefined);
+    return createCollectionP(dictionaries, 'dictionary collection');
 }
