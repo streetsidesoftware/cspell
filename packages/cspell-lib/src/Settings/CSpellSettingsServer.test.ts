@@ -6,28 +6,32 @@ import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInt
 import {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
-    clearCachedSettingsFiles,
     currentSettingsFileVersion,
     ENV_CSPELL_GLOB_ROOT,
     extractDependencies,
+    getSources,
+    ImportFileRefWithError,
+    mergeSettings,
+    __testing__,
+} from './CSpellSettingsServer';
+import {
+    clearCachedSettingsFiles,
     extractImportErrors,
     getCachedFileSize,
     getGlobalSettings,
-    getSources,
-    ImportFileRefWithError,
     loadConfig,
     loadPnP,
     loadPnPSync,
-    mergeSettings,
     readRawSettings,
     readSettings,
     readSettingsFiles,
     searchForConfig,
-    __testing__,
-} from './CSpellSettingsServer';
+    __testing__ as __configLoader_testing__,
+} from './configLoader';
 import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
 
-const { normalizeCacheSettings, normalizeSettings, validateRawConfigExports, validateRawConfigVersion } = __testing__;
+const { normalizeCacheSettings, normalizeSettings, validateRawConfigExports, validateRawConfigVersion } =
+    __configLoader_testing__;
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
 const root = path.resolve(rootCspellLib, '../..');

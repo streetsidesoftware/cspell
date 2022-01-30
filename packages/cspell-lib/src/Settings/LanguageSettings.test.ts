@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import { getGlobalSettings, mergeSettings } from './CSpellSettingsServer';
+import { getGlobalSettings } from './configLoader';
+import { mergeSettings } from './CSpellSettingsServer';
 import { getDefaultSettings } from './DefaultSettings';
 import * as LS from './LanguageSettings';
 import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
