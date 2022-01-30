@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.18.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v5.17.0...v5.18.0-alpha.0) (2022-01-30)
+
+
+### Bug Fixes
+
+* Speed up dictionaries from ([#2363](https://github.com/streetsidesoftware/cspell/issues/2363)) ([76c41ad](https://github.com/streetsidesoftware/cspell/commit/76c41ad0de3db4d695427f3e84016113532c2b3b))
+* Speed up spell checking with large config files. ([#2362](https://github.com/streetsidesoftware/cspell/issues/2362)) ([41c061c](https://github.com/streetsidesoftware/cspell/commit/41c061c7b703a1483e84beb80d0e098a52676a47))
+
+
+### Features
+
+* Enable support to dictionary alphabet and accents. ([#2355](https://github.com/streetsidesoftware/cspell/issues/2355)) ([b33453b](https://github.com/streetsidesoftware/cspell/commit/b33453b2c49b1753a2fcd593d8415c92d37a02f9))
+
+
+
+
+
 # [5.17.0](https://github.com/streetsidesoftware/cspell/compare/v5.17.0-alpha.0...v5.17.0) (2022-01-26)
 
 **Note:** Version bump only for package cspell-lib
