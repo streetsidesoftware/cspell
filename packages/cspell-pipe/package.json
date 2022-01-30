@@ -21,11 +21,49 @@
     "dist": "dist"
   },
   "exports": {
-    ".": "./cspell-ext.json",
-    "./cspell": "./cspell-ext.json",
-    "./cspell-ext.json": "./cspell-ext.json"
+    ".": {
+      "require": "./dist/index.js"
+    },
+    "./*": {
+      "require": "./dist/*.js"
+    },
+    "./index": "./dist/index.js",
+    "./index.js": "./dist/index.js",
+    "./index.d.ts": "./dist/index.d.ts",
+    "./operators": {
+      "require": "./dist/operators/index.js"
+    },
+    "./operators/index.js": {
+      "require": "./dist/operators/index.js"
+    },
+    "./operators/index.d.ts": {
+      "require": "./dist/operators/index.js"
+    }
   },
   "typings": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "index.d.ts": [
+        "dist/index.d.ts"
+      ],
+      "dist/index.d.ts": [
+        "dist/index.d.ts"
+      ],
+      "operators": [
+        "dist/operators/index.d.ts"
+      ],
+      "operators/*.js": [
+        "dist/operators/*.d.ts"
+      ],
+      "operators/index.d.ts": [
+        "dist/operators/index.d.ts"
+      ],
+      "*": [
+        "dist/*",
+        "dist/*/index.d.ts"
+      ]
+    }
+  },
   "files": [
     "dist",
     "!**/__mocks__",

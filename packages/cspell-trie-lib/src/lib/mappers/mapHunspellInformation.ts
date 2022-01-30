@@ -1,5 +1,4 @@
-import { pipeSync as pipe } from '../../pipe';
-import { opFilter, opFlatten, opMap } from '../../pipe/operators';
+import { opFilter, opFlatten, opMap, pipeSync as pipe } from '@cspell/cspell-pipe';
 import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
 import { Locale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
@@ -7,8 +6,8 @@ import { caseForms } from '../utils/text';
 import { isDefined, unique as uniqueU } from '../utils/util';
 import { mapHunspellCosts } from './mapCosts';
 import {
-    calcFirstCharacterReplace,
     calcCostsForAccentedLetters,
+    calcFirstCharacterReplace,
     parseAlphabet,
     splitMap,
 } from './mapToSuggestionCostDef';

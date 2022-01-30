@@ -1,5 +1,4 @@
-import { pipeSync } from '../../pipe';
-import { opFlatten, opMap } from '../../pipe/operators';
+import { opFlatten, opMap, pipeSync } from '@cspell/cspell-pipe';
 import type { CharacterSetCosts, DictionaryInformation } from '../models/DictionaryInformation';
 import { parseLocale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
