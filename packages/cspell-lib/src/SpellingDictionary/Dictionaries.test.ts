@@ -134,13 +134,7 @@ describe('Validate getDictionary', () => {
 
         const dict = await Dictionaries.getDictionaryInternal(settings);
         expect(dict.getErrors()).toEqual([expect.objectContaining(new Error('my-words: failed to load'))]);
-        expect(dict.dictionaries.map((d) => d.name)).toEqual([
-            'my-words',
-            '[words]',
-            '[userWords]',
-            '[ignoreWords]',
-            '[flagWords]',
-        ]);
+        expect(dict.dictionaries.map((d) => d.name)).toEqual(['my-words', '[words]', '[ignoreWords]', '[flagWords]']);
     });
 
     test('Refresh Dictionary Cache', async () => {
@@ -165,10 +159,12 @@ describe('Validate getDictionary', () => {
         ]);
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
         const defsToLoad = filterDictDefsToLoad(toLoad, defs);
+        expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
         const dicts = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
 
         expect(dicts[3].has('one')).toBe(true);
         expect(dicts[3].has('four')).toBe(false);
+        expect(dicts.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
 
         await Dictionaries.refreshDictionaryCache(0);
         const dicts2 = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
@@ -185,10 +181,12 @@ describe('Validate getDictionary', () => {
         // Should be using cache and will not contain the new words.
         expect(dicts3[3].has('one')).toBe(true);
         expect(dicts3[3].has('four')).toBe(false);
+        expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
 
         await Dictionaries.refreshDictionaryCache(0);
 
         const dicts4 = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
+        expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
