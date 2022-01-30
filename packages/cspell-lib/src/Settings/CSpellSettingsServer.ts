@@ -27,6 +27,7 @@ import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
 import { resolvePatterns } from './patterns';
 import { LoaderResult, pnpLoader } from './pnpLoader';
+import { SimpleWeakCache } from '../util/simpleCache';
 
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI = CSpellSettingsInternal;
@@ -397,7 +398,39 @@ function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | unde
 function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
     if (left === undefined) return right;
     if (right === undefined) return left;
+    if (!left.length) return right;
+    if (!right.length) return left;
     return left.concat(right);
+}
+
+const cachedMergeWords = new SimpleWeakCache<string[], SimpleWeakCache<string[], string[]>>(256);
+const emptyWords: string[] = [];
+Object.freeze(emptyWords);
+
+/**
+ * Merges two lists of words.
+ * Order is preserved.
+ */
+function mergeWordsCached(left: undefined, right: undefined): undefined;
+function mergeWordsCached(left: string[], right: string[]): string[];
+function mergeWordsCached(left: undefined, right: string[]): string[];
+function mergeWordsCached(left: string[], right: undefined): string[];
+function mergeWordsCached(left: string[] | undefined, right: string[] | undefined): string[] | undefined;
+function mergeWordsCached(left: string[] | undefined, right: string[] | undefined): string[] | undefined {
+    if (left === undefined) return !right || right.length ? right : emptyWords;
+    if (right === undefined) return !left || left.length ? left : emptyWords;
+    if (!left.length) return !right || right.length ? right : emptyWords;
+    if (!right.length) return !left || left.length ? left : emptyWords;
+
+    const cachedLeft = cachedMergeWords.get(left) || new SimpleWeakCache<string[], string[]>(256);
+    const found = cachedLeft.get(right);
+    if (found) return found;
+
+    const result = left.concat(right);
+    cachedLeft.set(right, result);
+    cachedMergeWords.set(left, cachedLeft);
+
+    return result;
 }
 
 function mergeObjects(left: undefined, right: undefined): undefined;
@@ -471,10 +504,10 @@ function merge(left: CSpellSettingsWST | CSpellSettingsI, right: CSpellSettingsW
         version,
         id: [leftId, rightId].join('|'),
         name: [_left.name || '', _right.name || ''].join('|'),
-        words: mergeList(_left.words, _right.words),
-        userWords: mergeList(_left.userWords, _right.userWords),
-        flagWords: mergeListUnique(_left.flagWords, _right.flagWords),
-        ignoreWords: mergeListUnique(_left.ignoreWords, _right.ignoreWords),
+        words: mergeWordsCached(_left.words, _right.words),
+        userWords: mergeWordsCached(_left.userWords, _right.userWords),
+        flagWords: mergeWordsCached(_left.flagWords, _right.flagWords),
+        ignoreWords: mergeWordsCached(_left.ignoreWords, _right.ignoreWords),
         enabledLanguageIds: replaceIfNotEmpty(_left.enabledLanguageIds, _right.enabledLanguageIds),
         enableFiletypes: mergeList(_left.enableFiletypes, _right.enableFiletypes),
         ignoreRegExpList: mergeListUnique(_left.ignoreRegExpList, _right.ignoreRegExpList),

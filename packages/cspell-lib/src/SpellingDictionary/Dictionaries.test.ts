@@ -134,7 +134,13 @@ describe('Validate getDictionary', () => {
 
         const dict = await Dictionaries.getDictionaryInternal(settings);
         expect(dict.getErrors()).toEqual([expect.objectContaining(new Error('my-words: failed to load'))]);
-        expect(dict.dictionaries.map((d) => d.name)).toEqual(['my-words', '[words]', '[ignoreWords]', '[flagWords]']);
+        expect(dict.dictionaries.map((d) => d.name)).toEqual([
+            'my-words',
+            '[words]',
+            '[userWords]',
+            '[ignoreWords]',
+            '[flagWords]',
+        ]);
     });
 
     test('Refresh Dictionary Cache', async () => {
