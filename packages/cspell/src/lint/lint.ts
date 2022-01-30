@@ -8,7 +8,7 @@ import * as cspell from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
-import { filter, isAsyncIterable, pipeAsync, pipeSync } from '../util/async';
+import { opFilter, isAsyncIterable, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellLintResultCache } from '../util/cache';
 import { calcCacheSettings, createCache, CreateCacheSettings } from '../util/cache';
 import { CheckFailed, toApplicationError, toError } from '../util/errors';
@@ -347,7 +347,7 @@ async function determineFilesToCheck(
             globOptions.dot = enableGlobDot;
         }
 
-        const filterFiles = filter(filterFilesFn(globMatcher));
+        const filterFiles = opFilter(filterFilesFn(globMatcher));
         const foundFiles = await (hasFileLists
             ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
             : findFiles(fileGlobs, globOptions));
@@ -492,5 +492,5 @@ async function useFileLists(
 
     const files = await readFileListFiles(fileListFiles);
     const filterFiles = (file: string) => globMatcher.match(file);
-    return files instanceof Array ? files.filter(filterFiles) : pipeAsync(files, filter(filterFiles));
+    return files instanceof Array ? files.filter(filterFiles) : pipeAsync(files, opFilter(filterFiles));
 }

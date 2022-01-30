@@ -12,7 +12,7 @@ import {
 import * as path from 'path';
 import { LintRequest, runLint } from './lint';
 import { BaseOptions, fixLegacy, LegacyOptions, LinterOptions, SuggestionOptions, TraceOptions } from './options';
-import * as async from './util/async';
+import * as async from '@cspell/cspell-pipe';
 import { calcFinalConfigInfo, readConfig, readFile } from './util/fileHelper';
 import { readStdin } from './util/stdin';
 import * as util from './util/util';
@@ -29,7 +29,7 @@ export function lint(fileGlobs: string[], options: LinterOptions, emitters: CSpe
 
 export async function* trace(words: string[], options: TraceOptions): AsyncIterableIterator<TraceResult[]> {
     options = fixLegacy(options);
-    const iWords = options.stdin ? async.mergeAsyncIterables(words, readStdin()) : words;
+    const iWords = options.stdin ? async.toAsyncIterable(words, readStdin()) : words;
     const { languageId, locale, allowCompoundWords, ignoreCase } = options;
     const configFile = await readConfig(options.config, undefined);
     const config = mergeSettings(getDefaultSettings(), getGlobalSettings(), configFile.config);
@@ -56,7 +56,7 @@ export async function* suggestions(
 ): AsyncIterable<SuggestionsForWordResult> {
     options = fixLegacy(options);
     const configFile = await readConfig(options.config, undefined);
-    const iWords = options.useStdin ? async.mergeAsyncIterables(words, readStdin()) : words;
+    const iWords = options.useStdin ? async.toAsyncIterable(words, readStdin()) : words;
     try {
         const results = suggestionsForWords(iWords, options, configFile.config);
         yield* results;

@@ -1,6 +1,5 @@
+import { opFilter, opFlatten, opMap, opUnique, pipeSync as pipe } from '@cspell/cspell-pipe';
 import { map } from 'gensequence/dist/operators';
-import { pipeSync as pipe } from '../../pipe';
-import { opFilter, opFlatten, opMap, opUnique } from '../../pipe/operators';
 import type { CharacterSetCosts } from '../models/DictionaryInformation';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { accentForms, caseForms, expandCharacterSet, stripAccents, stripNonAccents } from '../utils/text';
