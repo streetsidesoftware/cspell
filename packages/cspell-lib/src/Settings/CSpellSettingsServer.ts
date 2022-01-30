@@ -13,7 +13,6 @@ import {
     CSpellSettingsInternal,
     isCSpellSettingsInternal,
 } from '../Models/CSpellSettingsInternalDef';
-import { SimpleWeakCache } from '../util/simpleCache';
 import * as util from '../util/util';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';
 import { resolvePatterns } from './patterns';
@@ -58,7 +57,6 @@ function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[] | unde
     return left.concat(right);
 }
 
-const cachedMergeWords = new SimpleWeakCache<string[], SimpleWeakCache<string[], string[]>>(256);
 const emptyWords: string[] = [];
 Object.freeze(emptyWords);
 
@@ -77,15 +75,7 @@ function mergeWordsCached(left: string[] | undefined, right: string[] | undefine
     if (!left.length) return !right || right.length ? right : emptyWords;
     if (!right.length) return !left || left.length ? left : emptyWords;
 
-    const cachedLeft = cachedMergeWords.get(left) || new SimpleWeakCache<string[], string[]>(256);
-    const found = cachedLeft.get(right);
-    if (found) return found;
-
-    const result = left.concat(right);
-    cachedLeft.set(right, result);
-    cachedMergeWords.set(left, cachedLeft);
-
-    return result;
+    return left.concat(right);
 }
 
 function mergeObjects(left: undefined, right: undefined): undefined;

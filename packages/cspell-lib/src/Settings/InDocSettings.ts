@@ -9,6 +9,9 @@ const regExInFileSettings = [/(?:spell-?checker|c?spell)::?(.*)/gi, /(LocalWords
 
 export type CSpellUserSettingsKeys = keyof CSpellUserSettings;
 
+const EmptyWords: string[] = [];
+Object.freeze(EmptyWords);
+
 export function getInDocumentSettings(text: string): CSpellUserSettings {
     const settings = getPossibleInDocSettings(text)
         .concatMap((a) => parseSettingMatch(a))
@@ -18,6 +21,7 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
             },
             { id: 'in-doc-settings' } as CSpellUserSettings
         );
+    // console.log('InDocSettings: %o', settings);
     return settings;
 }
 
@@ -100,12 +104,12 @@ function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
 }
 
 function getWordsFromDocument(text: string): string[] {
-    const { words = [] } = getInDocumentSettings(text);
+    const { words = EmptyWords } = getInDocumentSettings(text);
     return words;
 }
 
 export function getIgnoreWordsFromDocument(text: string): string[] {
-    const { ignoreWords = [] } = getInDocumentSettings(text);
+    const { ignoreWords = EmptyWords } = getInDocumentSettings(text);
     return ignoreWords;
 }
 

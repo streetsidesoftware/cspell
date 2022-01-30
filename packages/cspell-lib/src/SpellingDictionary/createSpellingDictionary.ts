@@ -2,7 +2,7 @@ import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
 import { operators } from 'gensequence';
 import { IterableLike } from '../util/IterableLike';
-import { AutoWeakCache, SimpleWeakCache } from '../util/simpleCache';
+import { AutoWeakCache, SimpleCache } from '../util/simpleCache';
 import { SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
@@ -19,9 +19,8 @@ const cachedDictionaries = new AutoWeakCache<CreateSpellingDictionaryParams, Spe
     64
 );
 
-type WordList = string[] | IterableLike<string>;
-
-const cachedParamsByWordList = new SimpleWeakCache<WordList, CreateSpellingDictionaryParams[]>(64);
+const maxSetSize = 3;
+const cachedParamsByWordList = new SimpleCache<string, Set<CreateSpellingDictionaryParams>>(64);
 
 export function createSpellingDictionary(
     wordList: readonly string[] | IterableLike<string>,
@@ -31,7 +30,11 @@ export function createSpellingDictionary(
 ): SpellingDictionary {
     const params: CreateSpellingDictionaryParams = [wordList, name, source, options];
 
-    const cached = cachedParamsByWordList.get(wordList) || [];
+    if (!Array.isArray(wordList)) {
+        return _createSpellingDictionary(params);
+    }
+
+    const cached = cachedParamsByWordList.get(name) || new Set<CreateSpellingDictionaryParams>();
 
     for (const cachedParams of cached) {
         if (deepEqual(params, cachedParams)) {
@@ -39,14 +42,10 @@ export function createSpellingDictionary(
         }
     }
 
-    // const msg = `Cache miss ${name} ${source} ${Array.isArray(wordList) ? 'Array' : 'Iterable'}`;
-    // const e = new Error(msg);
-    // console.log(e);
+    if (cached.size > maxSetSize) cached.clear();
+    cached.add(params);
+    cachedParamsByWordList.set(name, cached);
 
-    cached.push(params);
-    cachedParamsByWordList.set(wordList, cached);
-
-    // console.log(`createSpellingDictionary ${name} ${source}`);
     return cachedDictionaries.get(params);
 }
 
