@@ -241,7 +241,7 @@ declare class SpellingDictionaryLoadError extends Error {
 }
 declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
 
-declare function createSpellingDictionary(wordList: string[] | IterableLike<string>, name: string, source: string, options: SpellingDictionaryOptions | undefined): SpellingDictionary;
+declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options: SpellingDictionaryOptions | undefined): SpellingDictionary;
 
 declare function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset>;
 /**
@@ -360,35 +360,45 @@ declare function getLanguagesForExt(ext: string): string[];
 
 declare type LoaderResult = URI | undefined;
 
-declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
-declare type CSpellSettingsI = CSpellSettingsInternal;
-declare const currentSettingsFileVersion = "0.2";
+declare type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
+declare type CSpellSettingsI$1 = CSpellSettingsInternal;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
-declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 declare const defaultConfigFilenames: readonly string[];
-declare function readSettings(filename: string): CSpellSettingsI;
-declare function readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
-declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI;
-declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
-declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsI | undefined>;
+declare function readSettings(filename: string): CSpellSettingsI$1;
+declare function readSettings(filename: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
+declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI$1;
+declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
+declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsI$1 | undefined>;
 /**
  * Load a CSpell configuration files.
  * @param file - path or package reference to load.
  * @param pnpSettings - PnP settings
  * @returns normalized CSpellSettings
  */
-declare function loadConfig(file: string, pnpSettings?: PnPSettings): Promise<CSpellSettingsI>;
+declare function loadConfig(file: string, pnpSettings?: PnPSettings): Promise<CSpellSettingsI$1>;
 declare function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult>;
 declare function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderResult;
-declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST;
+declare function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST$1;
 /**
  *
  * @param filenames - settings files to read
  * @returns combined configuration
  * @deprecated true
  */
-declare function readSettingsFiles(filenames: string[]): CSpellSettingsI;
+declare function readSettingsFiles(filenames: string[]): CSpellSettingsI$1;
+declare function getGlobalSettings(): CSpellSettingsI$1;
+declare function getCachedFileSize(): number;
+declare function clearCachedSettingsFiles(): void;
+interface ImportFileRefWithError$1 extends ImportFileRef {
+    error: Error;
+}
+declare function extractImportErrors(settings: CSpellSettingsWST$1): ImportFileRefWithError$1[];
+
+declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
+declare type CSpellSettingsI = CSpellSettingsInternal;
+declare const currentSettingsFileVersion = "0.2";
+declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
 declare function mergeSettings(left: CSpellSettingsWST | CSpellSettingsI, ...settings: (CSpellSettingsWST | CSpellSettingsI)[]): CSpellSettingsI;
 declare function mergeInDocSettings(left: CSpellSettingsWST, right: CSpellSettingsWST): CSpellSettingsWST;
 declare function calcOverrideSettings(settings: CSpellSettingsWST, filename: string): CSpellSettingsI;
@@ -398,9 +408,6 @@ declare function calcOverrideSettings(settings: CSpellSettingsWST, filename: str
  * @returns settings where all globs and file paths have been resolved.
  */
 declare function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI;
-declare function getGlobalSettings(): CSpellSettingsI;
-declare function getCachedFileSize(): number;
-declare function clearCachedSettingsFiles(): void;
 /**
  * @param filename - filename
  * @param globs - globs
@@ -417,7 +424,6 @@ declare function getSources(settings: CSpellSettingsWST): CSpellSettingsWST[];
 interface ImportFileRefWithError extends ImportFileRef {
     error: Error;
 }
-declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[];
 interface ConfigurationDependencies {
     configFiles: string[];
     dictionaryFiles: string[];
