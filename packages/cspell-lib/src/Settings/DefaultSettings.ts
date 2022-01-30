@@ -1,7 +1,7 @@
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
+import { createCSpellSettingsInternal, CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { resolveFile } from '../util/resolveFile';
-import { CSpellSettingsInternal, createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import { readSettings } from './CSpellSettingsServer';
+import { readSettings } from './configLoader';
 import { mergeSettings } from './index';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';

@@ -13,13 +13,20 @@ export function refreshDictionaryCache(maxAge?: number): Promise<void> {
     return refreshCacheEntries(maxAge);
 }
 
+const emptyWords: readonly string[] = Object.freeze([]);
+
 export function getDictionaryInternal(settings: CSpellSettingsInternal): Promise<SpellingDictionaryCollection> {
-    const { words = [], userWords = [], flagWords = [], ignoreWords = [] } = settings;
+    const { words = emptyWords, userWords = emptyWords, flagWords = emptyWords, ignoreWords = emptyWords } = settings;
     const spellDictionaries = loadDictionaryDefs(calcDictionaryDefsToLoad(settings));
-    const settingsDictionary = createSpellingDictionary(
-        words.concat(userWords),
-        '[words]',
-        'From Settings `words` and `userWords`',
+
+    const settingsDictionary = createSpellingDictionary(words.concat(userWords), '[words]', 'From Settings `words`', {
+        caseSensitive: true,
+        weightMap: undefined,
+    });
+    const settingsUserWordsDictionary = createSpellingDictionary(
+        userWords,
+        '[userWords]',
+        'From Settings `userWords`',
         {
             caseSensitive: true,
             weightMap: undefined,
@@ -39,7 +46,13 @@ export function getDictionaryInternal(settings: CSpellSettingsInternal): Promise
         weightMap: undefined,
     });
     return createCollectionP(
-        [...spellDictionaries, settingsDictionary, ignoreWordsDictionary, flagWordsDictionary],
+        [
+            ...spellDictionaries,
+            settingsDictionary,
+            settingsUserWordsDictionary,
+            ignoreWordsDictionary,
+            flagWordsDictionary,
+        ],
         'dictionary collection'
     );
 }
