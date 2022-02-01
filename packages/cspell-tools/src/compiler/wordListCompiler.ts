@@ -7,8 +7,8 @@ import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { extractInlineSettings, InlineSettings } from './inlineSettings';
 
-const regNonWordOrSpace = /[^\p{L}' ]+/giu;
-const regNonWordOrDigit = /[^\p{L}'\w-]+/giu;
+const regNonWordOrSpace = /[^\p{L}\p{M}' ]+/giu;
+const regNonWordOrDigit = /[^\p{L}\p{M}'\w-]+/giu;
 const regExpSpaceOrDash = /[- ]+/g;
 const regExpRepeatChars = /(.)\1{4,}/i;
 

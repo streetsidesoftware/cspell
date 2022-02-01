@@ -115,7 +115,10 @@ describe('Validate the wordListCompiler', () => {
         ${'Namespace DNSLookup'}                    | ${['Namespace', 'DNSLookup']}                 | ${true}    | ${true}
         ${'well-educated'}                          | ${['well-educated']}                          | ${true}    | ${true}
         ${'--abort-on-uncaught-exception'}          | ${['--abort-on-uncaught-exception']}          | ${true}    | ${true}
+        ${'corner cafe\u0301\u0304'}                | ${['corner café\u0304']}                      | ${false}   | ${true}
         ${'corner café'}                            | ${['café', 'corner']}                         | ${true}    | ${true}
+        ${'corner café'.normalize('NFD')}           | ${['café', 'corner']}                         | ${true}    | ${true}
+        ${'corner café\u0304'.normalize('NFD')}     | ${['café\u0304', 'corner']}                   | ${true}    | ${true}
         ${'El Niño'}                                | ${['El', 'Niño']}                             | ${true}    | ${true}
         ${'El Nin\u0303o'}                          | ${['El', 'Niño']}                             | ${true}    | ${true}
         ${'CURLcode'}                               | ${['CURLcode']}                               | ${true}    | ${true}
