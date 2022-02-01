@@ -34,8 +34,8 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "watch": "tsc -p . -w",
+    "build": "rollup --config rollup.config.ts --configPlugin typescript",
+    "watch": "npm run build -- --watch",
     "clean": "rimraf dist coverage .tsbuildinfo",
     "clean-build": "npm run clean && npm run build",
     "coverage": "echo coverage",
@@ -59,13 +59,10 @@
     "@types/eslint": "^8.4.1",
     "@types/estree": "^0.0.50",
     "@types/node": "^17.0.13",
-    "@types/rollup-plugin-auto-external": "^2.0.2",
     "eslint": "^8.8.0",
     "jest": "^27.4.7",
     "rimraf": "^3.0.2",
     "rollup": "^2.66.1",
-    "rollup-plugin-auto-external": "^2.0.0",
-    "rollup-plugin-dts": "^4.1.0",
-    "ts-node": "^10.4.0"
+    "rollup-plugin-dts": "^4.1.0"
   }
 }

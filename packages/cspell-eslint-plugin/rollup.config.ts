@@ -5,7 +5,6 @@
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
 import rollupPluginCommonJS from '@rollup/plugin-commonjs';
-import rollupPluginAutoExternal from 'rollup-plugin-auto-external';
 import rollupPluginDts from 'rollup-plugin-dts';
 import type { RollupOptions } from 'rollup';
 
@@ -35,7 +34,6 @@ const commonTest: RollupOptions = { ...common, input: 'src/index.test.ts' };
  */
 function getPlugins(tsconfig = 'tsconfig.build.json') {
     return [
-        rollupPluginAutoExternal(),
         rollupPluginNodeResolve(),
         rollupPluginTypescript({
             tsconfig,
@@ -44,7 +42,10 @@ function getPlugins(tsconfig = 'tsconfig.build.json') {
 }
 
 function getPluginsTest(tsconfig = 'tsconfig.build.json') {
-    return [rollupPluginCommonJS({}), ...getPlugins(tsconfig)];
+    return [
+        /* rollupPluginCommonJS({}), */
+        ...getPlugins(tsconfig),
+    ];
 }
 
 const copyright = `/*!
@@ -106,7 +107,7 @@ const esm: RollupOptions = {
 /**
  * The esm build.
  */
-const _esmTest: RollupOptions = {
+const esmTest: RollupOptions = {
     ...commonTest,
 
     output: {
@@ -133,6 +134,7 @@ const dts: RollupOptions = {
     plugins: [rollupPluginDts()],
 };
 
-const configs: RollupOptions[] = [cjs, /* cjsTest, */ esm, dts];
+// const configs: RollupOptions[] = [cjs, esm, dts, esmTest, cjsTest];
+const configs: RollupOptions[] = [cjs, esm, dts];
 
 export default [...configs];
