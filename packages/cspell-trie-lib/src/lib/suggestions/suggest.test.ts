@@ -1,4 +1,4 @@
-import { GenSuggestionOptions, SuggestionOptions } from '../genSuggestionsOptions';
+import { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { parseDictionary } from '../SimpleDictionaryParser';
 import { Trie } from '../trie';
 import { cleanCopy } from '../utils/util';

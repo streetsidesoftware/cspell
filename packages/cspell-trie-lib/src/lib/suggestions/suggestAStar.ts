@@ -3,7 +3,7 @@ import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
 import { SuggestionGenerator, suggestionCollector, SuggestionResult } from './suggestCollector';
 import { PairingHeap } from '../utils/PairingHeap';
 import { visualLetterMaskMap } from './orthography';
-import { createSuggestionOptions, GenSuggestionOptionsStrict, SuggestionOptions } from '../genSuggestionsOptions';
+import { createSuggestionOptions, GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
 
 export function* genCompoundableSuggestions(
     root: TrieRoot,

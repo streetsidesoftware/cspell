@@ -1,4 +1,4 @@
-import { SuggestionOptions } from './genSuggestionsOptions';
+import { SuggestionOptions } from './suggestions/genSuggestionsOptions';
 import { CompoundWordsMethod, suggestionCollector } from './index';
 import { parseDictionary } from './SimpleDictionaryParser';
 import { SuggestionCollectorOptions } from './suggestions/suggestCollector';

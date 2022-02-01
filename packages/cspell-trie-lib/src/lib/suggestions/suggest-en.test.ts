@@ -7,7 +7,7 @@ import { clean } from '../trie-util';
 import { DictionaryInformation } from '../models/DictionaryInformation';
 import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
 import assert from 'assert';
-import { SuggestionOptions } from '../genSuggestionsOptions';
+import { SuggestionOptions } from './genSuggestionsOptions';
 
 function getTrie() {
     return readTrie('@cspell/dict-en_us/cspell-ext.json');
