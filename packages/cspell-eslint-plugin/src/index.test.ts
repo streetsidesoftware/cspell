@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 let _sampleTs: string | undefined;
+const root = path.resolve(__dirname, '..');
 
 const ruleTester = new RuleTester({
     env: {
@@ -66,12 +67,11 @@ command(commander);
 }
 
 function resolveFromMonoRepo(file: string): string {
-    const root = path.join(__dirname, '../../..');
     return path.resolve(root, file);
 }
 
 function sampleTs(): RuleTester.ValidTestCase {
-    const filename = path.resolve(__dirname, '../samples/sample.ts');
+    const filename = path.resolve(root, './samples/sample.ts');
     _sampleTs = _sampleTs || fs.readFileSync(filename, 'utf-8');
     const code = _sampleTs;
     return {

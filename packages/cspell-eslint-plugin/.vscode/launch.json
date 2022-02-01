@@ -5,6 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug Rollup",
+            "program": "${workspaceFolder}/node_modules/.bin/rollup",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "args": [
+                "--config",
+                "rollup.config.ts",
+                "--configPlugin",
+                "typescript"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "name": "Launch Test",
             "program": "${workspaceFolder}/dist/index.test.js",
             "request": "launch",
