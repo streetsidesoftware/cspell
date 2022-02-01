@@ -40,7 +40,7 @@
     "clean-build": "npm run clean && npm run build",
     "coverage": "echo coverage",
     "test-watch": "npm run test -- --watch",
-    "test": "npx mocha \"dist/**/*.test.js\""
+    "test": "npx mocha --timeout 10000 \"dist/**/*.test.js\""
   },
   "repository": {
     "type": "git",
