@@ -6,7 +6,7 @@ import { AutoWeakCache, SimpleCache } from '../util/simpleCache';
 import { SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
-import { createWFromDictionaryInformation } from './SpellingDictionaryMethods';
+import { createWeightMapFromDictionaryInformation } from './SpellingDictionaryMethods';
 
 const defaultOptions: SpellingDictionaryOptions = Object.freeze({
     weightMap: undefined,
@@ -56,7 +56,7 @@ function _createSpellingDictionary(params: CreateSpellingDictionaryParams): Spel
     const trie = buildTrieFast(words);
     const opts = { ...(options || defaultOptions) };
     if (opts.weightMap === undefined && opts.dictionaryInformation) {
-        opts.weightMap = createWFromDictionaryInformation(opts.dictionaryInformation);
+        opts.weightMap = createWeightMapFromDictionaryInformation(opts.dictionaryInformation);
     }
     return new SpellingDictionaryFromTrie(trie, name, opts, source);
 }

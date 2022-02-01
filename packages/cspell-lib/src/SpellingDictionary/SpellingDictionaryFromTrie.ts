@@ -17,6 +17,7 @@ import {
     SuggestOptions,
 } from './SpellingDictionary';
 import {
+    createWeightMapFromDictionaryInformation,
     defaultNumSuggestions,
     hasOptionToSearchOption,
     impersonateCollector,
@@ -48,7 +49,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         this.isDictionaryCaseSensitive = options.caseSensitive ?? !trie.isLegacy;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
-        this.weightMap = options.weightMap;
+        this.weightMap = options.weightMap || createWeightMapFromDictionaryInformation(options.dictionaryInformation);
     }
 
     public get size(): number {

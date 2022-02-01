@@ -130,9 +130,11 @@ export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
               };
     return suggestOptions;
 }
-
-export function createWFromDictionaryInformation(di: DictionaryInformation): WeightMap {
-    return mapDictionaryInformationToWeightMap(di);
+export function createWeightMapFromDictionaryInformation(di: undefined): undefined;
+export function createWeightMapFromDictionaryInformation(di: DictionaryInformation): WeightMap;
+export function createWeightMapFromDictionaryInformation(di: DictionaryInformation | undefined): WeightMap | undefined;
+export function createWeightMapFromDictionaryInformation(di: DictionaryInformation | undefined): WeightMap | undefined {
+    return di ? mapDictionaryInformationToWeightMap(di) : undefined;
 }
 
 export const __testMethods = {

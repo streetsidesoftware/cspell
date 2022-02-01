@@ -149,6 +149,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         timeout = DEFAULT_COLLECTOR_TIMEOUT,
         weightMap,
     } = options;
+
     const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = BASE_COST * Math.min(wordToMatch.length * MAX_ALLOWED_COST_SCALE, changeLimit);
