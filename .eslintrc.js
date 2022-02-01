@@ -28,7 +28,7 @@ const config = {
         'test-packages/yarn2/**',
     ],
     parserOptions: {
-        ecmaVersion: 11,
+        ecmaVersion: 2020,
         sourceType: 'module',
     },
     overrides: [
