@@ -255,6 +255,36 @@ describe('Validate Suggest', () => {
         const r = trie.suggestWithCost(word, { numSuggestions, ignoreCase, changeLimit });
         expect(r).toEqual(expected);
     });
+
+    test.each`
+        word              | ignoreCase   | numSuggestions | changeLimit | expected
+        ${'runningtree'}  | ${undefined} | ${2}           | ${3}        | ${[sr('running•tree', 0), sr('Running•tree', 1)]}
+        ${'Runningpod'}   | ${undefined} | ${4}           | ${1}        | ${[sr('Running•pod', 0), sr('running•pod', 1), sr('Running•Pod', 1), sr('running•Pod', 2)]}
+        ${'Runningpod'}   | ${false}     | ${4}           | ${1}        | ${[sr('Running•Pod', 1)]}
+        ${'runningpod'}   | ${undefined} | ${4}           | ${1}        | ${[sr('running•pod', 0), sr('running•Pod', 1), sr('Running•pod', 1), sr('Running•Pod', 2)]}
+        ${'runningpod'}   | ${false}     | ${4}           | ${1}        | ${[sr('Running•Pod', 2)]}
+        ${'walkingpod'}   | ${undefined} | ${2}           | ${3}        | ${[sr('walking•pod', 0), sr('walking•Pod', 1)]}
+        ${'walkingstick'} | ${undefined} | ${2}           | ${3}        | ${[sr('walking•stick', 0), sr('talking•stick', 99)]}
+        ${'walkingtree'}  | ${undefined} | ${2}           | ${4}        | ${[sr('talking•tree', 99), sr('walking•stick', 359)]}
+        ${'talkingtrick'} | ${undefined} | ${2}           | ${4}        | ${[sr('talking•stick', 183), sr('talking•tree', 268)]}
+        ${'running'}      | ${undefined} | ${2}           | ${3}        | ${[sr('running', 0), sr('Running', 1)]}
+        ${'free'}         | ${undefined} | ${2}           | ${2}        | ${[sr('tree', 99)]}
+        ${'stock'}        | ${undefined} | ${2}           | ${2}        | ${[sr('stick', 97)]}
+    `('suggestWithCost and separator $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
+        const trie = parseDictionary(`
+            walk
+            Running*
+            walking*
+            *stick
+            talking*
+            *tree
+            +Pod
+            !walkingtree
+            !walking+
+        `);
+        const r = trie.suggestWithCost(word, { numSuggestions, ignoreCase, changeLimit, compoundSeparator: '•' });
+        expect(r).toEqual(expected);
+    });
 });
 
 function numSugs(numSuggestions: number): SuggestionOptions {
