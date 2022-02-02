@@ -1,3 +1,4 @@
 export * from './walker';
-export * from './hintedWalker';
+export { hintedWalker } from './hintedWalker';
+export type { HintedWalkerIterator, Hinting } from './hintedWalker';
 export * from './walkerTypes';
