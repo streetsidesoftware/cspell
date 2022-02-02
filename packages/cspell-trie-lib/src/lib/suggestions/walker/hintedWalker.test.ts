@@ -2,7 +2,7 @@ import type { YieldResult } from './walkerTypes';
 import { hintedWalker } from './hintedWalker';
 import { orderTrie, createTriFromList } from '../../trie-util';
 import { parseLinesToDictionary } from '../../SimpleDictionaryParser';
-import { HintedWalkerIterator } from '.';
+import { CompoundWordsMethod, HintedWalkerIterator } from '.';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {
@@ -43,13 +43,22 @@ describe('Validate Util Functions', () => {
         expect(result).toEqual(expected);
     });
 
-    test('Hinted Walker compounds ignoreCase', () => {
-        const dict = ['A*', '+a*', '*b*', '+c'];
-        const trie = parseLinesToDictionary(dict, { stripCaseAndAccents: true });
-        const i = hintedWalker(trie.root, true, 'a', undefined);
-        const result = walkerToArray(i, 2);
-        expect(result).toEqual(['A', 'Aa', 'Ab', 'Ac', 'b', 'ba', 'bb', 'bc', 'a', 'aa', 'ab', 'ac']);
-    });
+    test.each`
+        dict                          | ignoreCase | sep    | depth | compoundMethod                        | expected
+        ${['A*', '+a*', '*b*', '+c']} | ${true}    | ${''}  | ${2}  | ${undefined}                          | ${['A', 'Aa', 'Ab', 'Ac', 'b', 'ba', 'bb', 'bc', 'a', 'aa', 'ab', 'ac']}
+        ${['A*', '+a*', '*b*', '+c']} | ${false}   | ${''}  | ${2}  | ${undefined}                          | ${['A', 'Aa', 'Ab', 'Ac', 'b', 'ba', 'bb', 'bc']}
+        ${['A*', '+b+', '+C']}        | ${false}   | ${'•'} | ${3}  | ${CompoundWordsMethod.NONE}           | ${['A', 'A•C', 'A•b•C']}
+        ${['A*', '+b+', '+C']}        | ${false}   | ${'•'} | ${3}  | ${CompoundWordsMethod.JOIN_WORDS}     | ${['A', 'A•C', 'A•b•C', 'A+A', 'A+C']}
+        ${['A*', '+b+', '+C']}        | ${false}   | ${'•'} | ${3}  | ${CompoundWordsMethod.SEPARATE_WORDS} | ${['A', 'A•C', 'A•b•C', 'A A', 'A C']}
+    `(
+        'Hinted Walker dict: $dict ignoreCase: $ignoreCase depth: $depth sep: "$sep" method: $compoundMethod',
+        ({ dict, ignoreCase, sep, depth, compoundMethod, expected }) => {
+            const trie = parseLinesToDictionary(dict, { stripCaseAndAccents: ignoreCase });
+            const i = hintedWalker(trie.root, ignoreCase, 'a', compoundMethod, sep);
+            const result = walkerToArray(i, depth);
+            expect(result).toEqual(expected);
+        }
+    );
 });
 
 function walkerToArray(w: HintedWalkerIterator, depth: number): string[] {
