@@ -1,25 +1,32 @@
 import { walker } from './walker';
 import type { YieldResult } from './walkerTypes';
 import { orderTrie, createTriFromList } from '../../trie-util';
+import { WalkerIterator } from '.';
 
 describe('Validate Util Functions', () => {
     test('Tests Walker', () => {
         const root = createTriFromList(sampleWords);
         orderTrie(root);
         const i = walker(root);
-        let goDeeper = true;
-        let ir: IteratorResult<YieldResult>;
-        const result: string[] = [];
-        while (!(ir = i.next(goDeeper)).done) {
-            const { text, node } = ir.value;
-            if (node.f) {
-                result.push(text);
-            }
-            goDeeper = text.length < 4;
-        }
+        const result = walkerToArray(i, 4);
         expect(result).toEqual(sampleWords.filter((a) => a.length <= 4).sort());
     });
 });
+
+function walkerToArray(w: WalkerIterator, depth: number): string[] {
+    const maxDepth = depth - 1;
+    let goDeeper = true;
+    let ir: IteratorResult<YieldResult>;
+    const result: string[] = [];
+    while (!(ir = w.next(goDeeper)).done) {
+        const { text, node, depth } = ir.value;
+        if (node.f) {
+            result.push(text);
+        }
+        goDeeper = depth < maxDepth;
+    }
+    return result;
+}
 
 const sampleWords = [
     'walk',
