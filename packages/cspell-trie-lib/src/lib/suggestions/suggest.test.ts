@@ -2,7 +2,7 @@ import { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions
 import { parseDictionary } from '../SimpleDictionaryParser';
 import { Trie } from '../trie';
 import { cleanCopy } from '../utils/util';
-import * as Walker from '../walker';
+import * as Walker from './walker';
 import { genCompoundableSuggestions, genSuggestions, suggest } from './suggest';
 import {
     compSuggestionResults,

@@ -1,5 +1,5 @@
-import { isDefined } from '../trie-util';
-import { TrieNode, TrieRoot } from '../TrieNode';
+import { isDefined } from '../../trie-util';
+import { TrieNode, TrieRoot } from '../../TrieNode';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR, YieldResult } from './walkerTypes';
 
 /**

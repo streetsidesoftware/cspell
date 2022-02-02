@@ -1,7 +1,7 @@
 import type { YieldResult } from './walkerTypes';
 import { hintedWalker } from './hintedWalker';
-import { orderTrie, createTriFromList } from '../trie-util';
-import { parseLinesToDictionary } from '../SimpleDictionaryParser';
+import { orderTrie, createTriFromList } from '../../trie-util';
+import { parseLinesToDictionary } from '../../SimpleDictionaryParser';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {

@@ -3,7 +3,7 @@ import { parseDictionary } from '../SimpleDictionaryParser';
 import * as Sug from './suggestAStar';
 import { SuggestionCollector, suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';
 import { Trie } from '../trie';
-import { CompoundWordsMethod } from '../walker';
+import { CompoundWordsMethod } from './walker';
 import { clean } from '../trie-util';
 
 const defaultOptions: SuggestionCollectorOptions = {

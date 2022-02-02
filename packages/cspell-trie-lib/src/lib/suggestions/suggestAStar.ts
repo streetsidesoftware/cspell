@@ -1,5 +1,5 @@
 import { TrieRoot, TrieNode } from '../TrieNode';
-import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 import { SuggestionGenerator, suggestionCollector, SuggestionResult } from './suggestCollector';
 import { PairingHeap } from '../utils/PairingHeap';
 import { visualLetterMaskMap } from './orthography';

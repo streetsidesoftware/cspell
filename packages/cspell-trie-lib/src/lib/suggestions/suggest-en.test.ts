@@ -2,7 +2,7 @@ import { readRawDictionaryFile, readTrie } from '../../test/dictionaries.test.he
 import { genCompoundableSuggestions, suggest } from './suggest';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionResult } from './suggestCollector';
 import { createTimer } from '../utils/timer';
-import { CompoundWordsMethod } from '../walker';
+import { CompoundWordsMethod } from './walker';
 import { clean } from '../trie-util';
 import { DictionaryInformation } from '../models/DictionaryInformation';
 import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
