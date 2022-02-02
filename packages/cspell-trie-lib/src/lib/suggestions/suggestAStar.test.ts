@@ -1,4 +1,4 @@
-import { GenSuggestionOptionsStrict, SuggestionOptions } from '../genSuggestionsOptions';
+import { GenSuggestionOptionsStrict, SuggestionOptions } from './genSuggestionsOptions';
 import { parseDictionary } from '../SimpleDictionaryParser';
 import * as Sug from './suggestAStar';
 import { SuggestionCollector, suggestionCollector, SuggestionCollectorOptions } from './suggestCollector';

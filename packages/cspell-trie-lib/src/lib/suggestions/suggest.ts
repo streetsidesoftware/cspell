@@ -1,4 +1,4 @@
-import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from '../genSuggestionsOptions';
+import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { visualLetterMaskMap } from './orthography';
 import {
     MaxCost,

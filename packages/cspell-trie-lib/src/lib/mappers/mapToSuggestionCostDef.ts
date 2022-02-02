@@ -77,15 +77,16 @@ export function calcFirstCharacterReplaceDefs(
 }
 
 export function calcFirstCharacterReplace(cs: CharacterSetCosts, editCost: EditCostsRequired): SuggestionCostMapDef {
-    const mapOfFirstLetters = [
-        ...pipe(
-            expandCharacterSet(cs.characters),
-            opUnique(),
-            opMap((letter) => `(^${letter})`)
-        ),
-    ]
-        .sort()
-        .join('');
+    const mapOfFirstLetters =
+        [
+            ...pipe(
+                expandCharacterSet(cs.characters),
+                opUnique(),
+                opMap((letter) => `(^${letter})`)
+            ),
+        ]
+            .sort()
+            .join('') + '(^)';
 
     const penalty = editCost.firstLetterPenalty;
     // Make it a bit cheaper so it will match
@@ -94,7 +95,7 @@ export function calcFirstCharacterReplace(cs: CharacterSetCosts, editCost: EditC
     return {
         map: mapOfFirstLetters,
         replace: cost,
-        penalty,
+        penalty: penalty * 2,
     };
 }
 

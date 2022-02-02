@@ -1,5 +1,5 @@
 import { readTrie } from '../../test/dictionaries.test.helper';
-import { GenSuggestionOptionsStrict } from '../genSuggestionsOptions';
+import { GenSuggestionOptionsStrict } from './genSuggestionsOptions';
 import { genCompoundableSuggestions, suggest } from './suggestAStar';
 import {
     suggestionCollector,

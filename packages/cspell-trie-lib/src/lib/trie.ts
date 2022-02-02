@@ -10,7 +10,7 @@ import {
     isForbiddenWord,
     PartialFindOptions,
 } from './find';
-import { SuggestionOptions } from './genSuggestionsOptions';
+import { SuggestionOptions } from './suggestions/genSuggestionsOptions';
 import { genSuggestions, suggest } from './suggest';
 import { SuggestionCollector, SuggestionResult } from './suggestCollector';
 import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
