@@ -2,6 +2,7 @@ import type { YieldResult } from './walkerTypes';
 import { hintedWalker } from './hintedWalker';
 import { orderTrie, createTriFromList } from '../../trie-util';
 import { parseLinesToDictionary } from '../../SimpleDictionaryParser';
+import { HintedWalkerIterator } from '.';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {
@@ -10,16 +11,7 @@ describe('Validate Util Functions', () => {
         // cspell:ignore joty
         // prefer letters j, o, t, y before the others.
         const i = hintedWalker(root, false, 'joty', undefined);
-        let goDeeper = true;
-        let ir: IteratorResult<YieldResult>;
-        const result: string[] = [];
-        while (!(ir = i.next({ goDeeper })).done) {
-            const { text, node } = ir.value;
-            if (node.f) {
-                result.push(text);
-            }
-            goDeeper = text.length < 4;
-        }
+        const result = walkerToArray(i, 4);
         expect(result).toEqual(s('joy jowl talk lift walk'));
     });
 
@@ -33,16 +25,7 @@ describe('Validate Util Functions', () => {
         // cspell:ignore joty
         // prefer letters j, o, t, y before the others.
         const i = hintedWalker(root, false, word, undefined);
-        let goDeeper = true;
-        let ir: IteratorResult<YieldResult>;
-        const result: string[] = [];
-        while (!(ir = i.next({ goDeeper })).done) {
-            const { text, node } = ir.value;
-            if (node.f) {
-                result.push(text);
-            }
-            goDeeper = text.length < 4;
-        }
+        const result = walkerToArray(i, 4);
         expect(result).toEqual(expected);
     });
 
@@ -55,17 +38,8 @@ describe('Validate Util Functions', () => {
         ${['A+', '+b+', '+C']}        | ${'•'} | ${5}  | ${['A•C', 'A•b•C', 'A•b•b•C', 'A•b•b•b•C']}
     `('Hinted Walker compounds $dict', ({ dict, sep, depth, expected }) => {
         const trie = parseLinesToDictionary(dict, { stripCaseAndAccents: true });
-        const i = hintedWalker(trie.root, false, 'a', undefined, sep);
-        let goDeeper = true;
-        let ir: IteratorResult<YieldResult>;
-        const result: string[] = [];
-        while (!(ir = i.next({ goDeeper })).done) {
-            const { text, node } = ir.value;
-            if (node.f) {
-                result.push(text);
-            }
-            goDeeper = text.split(sep).join('').length < depth;
-        }
+        const iter = hintedWalker(trie.root, false, 'a', undefined, sep);
+        const result = walkerToArray(iter, depth);
         expect(result).toEqual(expected);
     });
 
@@ -73,19 +47,25 @@ describe('Validate Util Functions', () => {
         const dict = ['A*', '+a*', '*b*', '+c'];
         const trie = parseLinesToDictionary(dict, { stripCaseAndAccents: true });
         const i = hintedWalker(trie.root, true, 'a', undefined);
-        let goDeeper = true;
-        let ir: IteratorResult<YieldResult>;
-        const result: string[] = [];
-        while (!(ir = i.next({ goDeeper })).done) {
-            const { text, node } = ir.value;
-            if (node.f) {
-                result.push(text);
-            }
-            goDeeper = text.length < 2;
-        }
+        const result = walkerToArray(i, 2);
         expect(result).toEqual(['A', 'Aa', 'Ab', 'Ac', 'b', 'ba', 'bb', 'bc', 'a', 'aa', 'ab', 'ac']);
     });
 });
+
+function walkerToArray(w: HintedWalkerIterator, depth: number): string[] {
+    const maxDepth = depth - 1;
+    let goDeeper = true;
+    let ir: IteratorResult<YieldResult>;
+    const result: string[] = [];
+    while (!(ir = w.next({ goDeeper })).done) {
+        const { text, node, depth } = ir.value;
+        if (node.f) {
+            result.push(text);
+        }
+        goDeeper = depth < maxDepth;
+    }
+    return result;
+}
 
 function s(text: string, splitOn = ' '): string[] {
     return text.split(splitOn);
