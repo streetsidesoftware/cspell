@@ -112,9 +112,9 @@ describe('mapHunspellInformation', () => {
         line              | costs                            | expected
         ${''}             | ${{}}                            | ${undefined}
         ${'MAP aàâäAÀÂÄ'} | ${{}}                            | ${undefined}
-        ${'TRY abc'}      | ${c({ mapCost: 1 })}             | ${{ map: '(^a)(^b)(^c)', replace: 96, penalty: 4 }}
-        ${'TRY abc'}      | ${c({ tryCharCost: 90 })}        | ${{ map: '(^a)(^b)(^c)', replace: 86, penalty: 4 }}
-        ${'TRY abc'}      | ${c({ firstLetterPenalty: 10 })} | ${{ map: '(^a)(^b)(^c)', replace: 90, penalty: 10 }}
+        ${'TRY abc'}      | ${c({ mapCost: 1 })}             | ${{ map: '(^a)(^b)(^c)(^)', replace: 96, penalty: 8 }}
+        ${'TRY abc'}      | ${c({ tryCharCost: 90 })}        | ${{ map: '(^a)(^b)(^c)(^)', replace: 86, penalty: 8 }}
+        ${'TRY abc'}      | ${c({ firstLetterPenalty: 10 })} | ${{ map: '(^a)(^b)(^c)(^)', replace: 90, penalty: 20 }}
     `('affTryFirstCharacterReplace "$line" $costs', ({ line, costs, expected }) => {
         expect(affTryFirstCharacterReplace(line, calcCosts(costs))).toEqual(expected);
     });

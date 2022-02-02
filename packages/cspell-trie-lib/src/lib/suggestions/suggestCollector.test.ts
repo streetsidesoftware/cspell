@@ -121,7 +121,7 @@ describe('Validate suggestCollector', () => {
         ${'word'}  | ${[s('word', 0), s('work', 100), s('words', 100)]}
         ${'words'} | ${[s('words', 0), s('word', 100), s('works', 100)]}
         ${'joy'}   | ${[s('joy', 0)]}
-        ${'joyo'}  | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 301)]}
+        ${'joyo'}  | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 305)]}
         ${'woudt'} | ${[s('word', 200), s('words', 200), s('would', 200), s("won't", 210)]}
         ${'aple'}  | ${[s('apple', 55), s('apples', 155)]}
         ${'cafe'}  | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
