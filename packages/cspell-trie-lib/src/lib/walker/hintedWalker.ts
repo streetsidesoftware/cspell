@@ -1,78 +1,6 @@
-import { isDefined } from './trie-util';
-import { TrieNode, ChildMap, TrieRoot } from './TrieNode';
-
-export const JOIN_SEPARATOR = '+';
-export const WORD_SEPARATOR = ' ';
-
-export interface YieldResult {
-    text: string;
-    node: TrieNode;
-    depth: number;
-}
-
-export enum CompoundWordsMethod {
-    /**
-     * Do not compound words.
-     */
-    NONE = 0,
-    /**
-     * Create word compounds separated by spaces.
-     */
-    SEPARATE_WORDS,
-    /**
-     * Create word compounds without separation.
-     */
-    JOIN_WORDS,
-}
-
-export type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
-
-/**
- * Walks the Trie and yields a value at each node.
- * next(goDeeper: boolean):
- */
-export function* walker(
-    root: TrieNode,
-    compoundingMethod: CompoundWordsMethod = CompoundWordsMethod.NONE
-): WalkerIterator {
-    const roots: { [index: number]: ChildMap | [string, TrieNode][] } = {
-        [CompoundWordsMethod.NONE]: [],
-        [CompoundWordsMethod.JOIN_WORDS]: [[JOIN_SEPARATOR, root]],
-        [CompoundWordsMethod.SEPARATE_WORDS]: [[WORD_SEPARATOR, root]],
-    };
-
-    function* children(n: TrieNode): IterableIterator<[string, TrieNode]> {
-        if (n.c) {
-            yield* n.c;
-        }
-        if (n.f) {
-            yield* roots[compoundingMethod];
-        }
-    }
-
-    let depth = 0;
-    const stack: { t: string; c: Iterator<[string, TrieNode]> }[] = [];
-    stack[depth] = { t: '', c: children(root) };
-    let ir: IteratorResult<[string, TrieNode]>;
-    while (depth >= 0) {
-        let baseText = stack[depth].t;
-        while (!(ir = stack[depth].c.next()).done) {
-            const [char, node] = ir.value;
-            const text = baseText + char;
-            const goDeeper = yield { text, node, depth };
-            if (goDeeper || goDeeper === undefined) {
-                depth++;
-                baseText = text;
-                stack[depth] = { t: text, c: children(node) };
-            }
-        }
-        depth -= 1;
-    }
-}
-
-export interface Hinting {
-    goDeeper: boolean;
-}
+import { isDefined } from '../trie-util';
+import { TrieNode, TrieRoot } from '../TrieNode';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR, YieldResult } from './walkerTypes';
 
 /**
  * Ask for the next result.
@@ -87,6 +15,7 @@ export type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefi
  * Walks the Trie and yields a value at each node.
  * next(goDeeper: boolean):
  */
+
 export function* hintedWalker(
     root: TrieRoot,
     ignoreCase: boolean,
@@ -191,7 +120,11 @@ export function* hintedWalker(
     }
 }
 
-function existMap(values: string[]): Record<string, true> {
+export interface Hinting {
+    goDeeper: boolean;
+}
+
+export function existMap(values: string[]): Record<string, true> {
     const m: Record<string, true> = Object.create(null);
     for (const v of values) {
         m[v] = true;
