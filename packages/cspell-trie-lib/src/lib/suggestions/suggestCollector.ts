@@ -1,6 +1,6 @@
 import { editDistanceWeighted, WeightMap } from '..';
 import { createTimer } from '../utils/timer';
-import { JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
+import { JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const defaultMaxNumberSuggestions = 10;
 

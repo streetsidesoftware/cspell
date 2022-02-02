@@ -1,5 +1,5 @@
-import { isDefined } from '../trie-util';
-import { TrieNode, TrieRoot } from '../TrieNode';
+import { isDefined } from '../../trie-util';
+import { TrieNode, TrieRoot } from '../../TrieNode';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR, YieldResult } from './walkerTypes';
 
 /**
@@ -11,16 +11,26 @@ import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR, YieldResult } from
 // [Symbol.iterator]: () => HintedWalkerIterator;
 export type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefined>;
 
+export function hintedWalker(
+    root: TrieRoot,
+    ignoreCase: boolean,
+    hint: string,
+    compoundingMethod: CompoundWordsMethod | undefined,
+    emitWordSeparator?: string
+): HintedWalkerIterator {
+    return hintedWalkerNext(root, ignoreCase, hint, compoundingMethod, emitWordSeparator);
+}
+
 /**
  * Walks the Trie and yields a value at each node.
  * next(goDeeper: boolean):
  */
-
-export function* hintedWalker(
+function* hintedWalkerNext(
     root: TrieRoot,
     ignoreCase: boolean,
     hint: string,
-    compoundingMethod: CompoundWordsMethod | undefined
+    compoundingMethod: CompoundWordsMethod | undefined,
+    emitWordSeparator = ''
 ): HintedWalkerIterator {
     const _compoundingMethod = compoundingMethod ?? CompoundWordsMethod.NONE;
 
@@ -40,6 +50,7 @@ export function* hintedWalker(
 
     const roots = rawRoots.map(filterRoot);
     const compoundRoots = rawRoots.map((r) => r.c?.get(compoundCharacter)).filter(isDefined);
+    const setOfCompoundRoots = new Set(compoundRoots);
     const rootsForCompoundMethods = roots.concat(compoundRoots);
 
     const compoundMethodRoots: { [index: number]: readonly (readonly [string, TrieNode])[] } = {
@@ -82,15 +93,18 @@ export function* hintedWalker(
                     node,
                     hintOffset: hintOffset + 1,
                 }));
-            if (c.has(compoundCharacter)) {
+            if (c.has(compoundCharacter) && !setOfCompoundRoots.has(n)) {
                 for (const compoundRoot of compoundRoots) {
-                    yield* children(compoundRoot, hintOffset);
+                    for (const child of children(compoundRoot, hintOffset)) {
+                        const { letter, node, hintOffset } = child;
+                        yield { letter: emitWordSeparator + letter, node, hintOffset };
+                    }
                 }
             }
         }
         if (n.f) {
             yield* [...compoundMethodRoots[_compoundingMethod]].map(([letter, node]) => ({
-                letter,
+                letter: emitWordSeparator + letter,
                 node,
                 hintOffset,
             }));
@@ -100,22 +114,21 @@ export function* hintedWalker(
     for (const root of roots) {
         let depth = 0;
         const stack: Stack = [];
-        let baseText = '';
+        const stackText: string[] = [''];
         stack[depth] = children(root, depth);
         let ir: IteratorResult<StackItemEntry, StackItemEntry>;
         while (depth >= 0) {
             while (!(ir = stack[depth].next()).done) {
                 const { letter: char, node, hintOffset } = ir.value;
-                const text = baseText + char;
+                const text = stackText[depth] + char;
                 const hinting = (yield { text, node, depth }) as Hinting;
                 if (hinting && hinting.goDeeper) {
                     depth++;
-                    baseText = text;
+                    stackText[depth] = text;
                     stack[depth] = children(node, hintOffset);
                 }
             }
             depth -= 1;
-            baseText = baseText.slice(0, -1);
         }
     }
 }
@@ -124,10 +137,14 @@ export interface Hinting {
     goDeeper: boolean;
 }
 
-export function existMap(values: string[]): Record<string, true> {
+function existMap(values: string[]): Record<string, true> {
     const m: Record<string, true> = Object.create(null);
     for (const v of values) {
         m[v] = true;
     }
     return m;
 }
+
+export const __testing__ = {
+    hintedWalkerNext,
+};

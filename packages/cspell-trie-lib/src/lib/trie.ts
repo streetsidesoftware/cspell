@@ -179,10 +179,12 @@ export class Trie {
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
     suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[] {
+        const sep = options.compoundSeparator;
+        const adjWord = sep ? (a: string) => a.split(sep).join('') : (a: string) => a;
         const optFilter = options.filter;
         const filter = optFilter
             ? (word: string, cost: number) => !this.isForbiddenWord(word) && optFilter(word, cost)
-            : (word: string) => !this.isForbiddenWord(word);
+            : (word: string) => !this.isForbiddenWord(adjWord(word));
         const opts = { ...options, filter };
         return suggest(this.root, text, opts);
     }

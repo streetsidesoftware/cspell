@@ -9,7 +9,7 @@ import {
 } from './suggestCollector';
 import { TrieRoot } from '../TrieNode';
 import { clean, isWordTerminationNode } from '../trie-util';
-import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker';
+import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const baseCost = 100;
 const swapCost = 75;
@@ -105,7 +105,7 @@ export function* genCompoundableSuggestions(
     stack[0] = { a, b };
 
     const hint = word;
-    const iWalk = hintedWalker(root, ignoreCase, hint, compoundMethod);
+    const iWalk = hintedWalker(root, ignoreCase, hint, compoundMethod, options.compoundSeparator);
     let goDeeper = true;
     for (let r = iWalk.next({ goDeeper }); !stopNow && !r.done; r = iWalk.next({ goDeeper })) {
         const { text, node, depth } = r.value;

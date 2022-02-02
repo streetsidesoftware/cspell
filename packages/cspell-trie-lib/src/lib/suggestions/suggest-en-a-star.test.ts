@@ -8,7 +8,7 @@ import {
     SuggestionCollector,
 } from './suggestCollector';
 import { createTimer } from '../utils/timer';
-import { CompoundWordsMethod } from '../walker';
+import { CompoundWordsMethod } from './walker';
 import { clean } from '../trie-util';
 
 function getTrie() {

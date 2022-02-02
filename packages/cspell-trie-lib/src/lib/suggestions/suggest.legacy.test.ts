@@ -3,7 +3,7 @@ import { SuggestionResult } from './suggestCollector';
 import { Trie } from '../trie';
 import { TrieNode } from '../TrieNode';
 import { isWordTerminationNode } from '../trie-util';
-import { walker } from '../walker';
+import { walker } from './walker';
 
 describe('Validate Suggest', () => {
     test('Tests suggestions against Legacy Suggestion generator', () => {

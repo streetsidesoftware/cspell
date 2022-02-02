@@ -1,5 +1,5 @@
 import { WeightMap } from '..';
-import { CompoundWordsMethod } from '../walker';
+import { CompoundWordsMethod } from './walker';
 
 export interface GenSuggestionOptionsStrict {
     /**
@@ -20,10 +20,10 @@ export interface GenSuggestionOptionsStrict {
     changeLimit: number;
 
     /**
-     * Include the `+` compound character when returning results.
-     * @default false
+     * Inserts a compound character between compounded word segments.
+     * @default ""
      */
-    includeCompoundChar?: boolean;
+    compoundSeparator?: string;
 }
 
 export type GenSuggestionOptions = Partial<GenSuggestionOptionsStrict>;
@@ -63,7 +63,6 @@ export const defaultGenSuggestionOptions: GenSuggestionOptionsStrict = {
     compoundMethod: CompoundWordsMethod.NONE,
     ignoreCase: true,
     changeLimit: 5,
-    includeCompoundChar: false,
 };
 
 export const defaultSuggestionOptions: SuggestionOptionsStrict = {
@@ -89,7 +88,7 @@ const keyMapOfGenSuggestionOptionsStrict: KeyMapOfGenSuggestionOptionsStrict = {
     changeLimit: 'changeLimit',
     compoundMethod: 'compoundMethod',
     ignoreCase: 'ignoreCase',
-    includeCompoundChar: 'includeCompoundChar',
+    compoundSeparator: 'compoundSeparator',
 } as const;
 
 const keyMapOfSuggestionOptionsStrict: KeyMapOfSuggestionOptionsStrict = {
