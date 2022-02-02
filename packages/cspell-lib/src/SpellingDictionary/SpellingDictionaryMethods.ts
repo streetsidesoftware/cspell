@@ -1,16 +1,10 @@
 import { DictionaryInformation } from '@cspell/cspell-types';
-import {
-    CompoundWordsMethod,
-    mapDictionaryInformationToWeightMap,
-    SuggestionCollector,
-    SuggestionResult,
-    WeightMap,
-} from 'cspell-trie-lib';
+import { CompoundWordsMethod, mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { isUpperCase, removeAccents, ucFirst } from '../util/text';
 import { HasOptions, SearchOptions, SpellingDictionary, SuggestOptions } from './SpellingDictionary';
 
-export { suggestionCollector } from 'cspell-trie-lib';
+export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
 
 export type FilterSuggestionsPredicate = (word: SuggestionResult) => boolean;
 
@@ -27,12 +21,6 @@ export type SuggestArgs =
       >;
 
 export const defaultNumSuggestions = 10;
-
-export function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector {
-    const r = Object.create(collector);
-    Object.defineProperty(r, 'word', { value: word, writable: false });
-    return r;
-}
 
 export function wordSearchFormsArray(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
     return [...wordSearchForms(word, isDictionaryCaseSensitive, ignoreCase)];

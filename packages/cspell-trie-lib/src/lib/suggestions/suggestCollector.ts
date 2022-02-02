@@ -1,5 +1,9 @@
 import { editDistanceWeighted, WeightMap } from '..';
+import { addDefToWeightMap } from '../distance/weightedMaps';
+import { RequireOptional } from '../types';
 import { createTimer } from '../utils/timer';
+import { clean, regexQuote, replaceAllFactory } from '../utils/util';
+import { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions';
 import { JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const defaultMaxNumberSuggestions = 10;
@@ -17,6 +21,8 @@ const regexSeparator = new RegExp(`[${regexQuote(JOIN_SEPARATOR + WORD_SEPARATOR
 const wordLengthCost = [0, 50, 25, 5, 0];
 const EXTRA_WORD_COST = 5;
 
+export const DEFAULT_WORD_SEPARATOR = '•';
+
 /** time in ms */
 const DEFAULT_COLLECTOR_TIMEOUT = 1000;
 
@@ -24,8 +30,14 @@ export type Cost = number;
 export type MaxCost = Cost;
 
 export interface SuggestionResult {
+    /** The suggested word */
     word: string;
+
+    /** The edit cost 100 = 1 edit */
     cost: Cost;
+
+    /** The suggested word with compound marks, generally a `•` */
+    compoundWord?: string;
 }
 
 export interface Progress {
@@ -81,13 +93,14 @@ export interface SuggestionCollector {
     readonly maxNumSuggestions: number;
     readonly includesTies: boolean;
     readonly ignoreCase: boolean;
+    readonly genSuggestionOptions: GenSuggestionOptions;
     /**
      * Possible value sent to the SuggestionIterator telling it to stop processing.
      */
     readonly symbolStopProcessing: symbol;
 }
 
-export interface SuggestionCollectorOptions {
+export interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrict, 'ignoreCase' | 'changeLimit'> {
     /**
      * number of best matching suggestions.
      * @default 10
@@ -131,13 +144,16 @@ export interface SuggestionCollectorOptions {
     weightMap?: WeightMap | undefined;
 }
 
-export const defaultSuggestionCollectorOptions: SuggestionCollectorOptions = Object.freeze({
+export const defaultSuggestionCollectorOptions: RequireOptional<SuggestionCollectorOptions> = Object.freeze({
     numSuggestions: defaultMaxNumberSuggestions,
     filter: () => true,
     changeLimit: MAX_NUM_CHANGES,
     includeTies: false,
     ignoreCase: true,
     timeout: DEFAULT_COLLECTOR_TIMEOUT,
+    weightMap: undefined,
+    compoundSeparator: '',
+    compoundMethod: undefined,
 });
 
 export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector {
@@ -148,11 +164,28 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         ignoreCase = true,
         timeout = DEFAULT_COLLECTOR_TIMEOUT,
         weightMap,
+        compoundSeparator = defaultSuggestionCollectorOptions.compoundSeparator,
     } = options;
 
     const numSuggestions = Math.max(options.numSuggestions, 0) || 0;
     const sugs = new Map<string, SuggestionResult>();
     let maxCost: number = BASE_COST * Math.min(wordToMatch.length * MAX_ALLOWED_COST_SCALE, changeLimit);
+    const useSeparator =
+        compoundSeparator || (weightMap ? DEFAULT_WORD_SEPARATOR : defaultSuggestionCollectorOptions.compoundSeparator);
+
+    const fnCleanWord =
+        !useSeparator || useSeparator === compoundSeparator ? (w: string) => w : replaceAllFactory(useSeparator, '');
+
+    if (useSeparator && weightMap) {
+        addDefToWeightMap(weightMap, { map: useSeparator, insDel: 50 });
+    }
+
+    const genSuggestionOptions: GenSuggestionOptions = clean({
+        changeLimit,
+        ignoreCase,
+        compoundMethod: options.compoundMethod,
+        compoundSeparator: useSeparator,
+    });
 
     let timeRemaining = timeout;
 
@@ -232,6 +265,19 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         timeRemaining -= timer.elapsed();
     }
 
+    function cleanResult(sr: SuggestionResult): SuggestionResult {
+        const { word, cost } = sr;
+        const cWord = fnCleanWord(word);
+        if (cWord !== word) {
+            return {
+                word: cWord,
+                cost,
+                compoundWord: word,
+            };
+        }
+        return sr;
+    }
+
     function suggestions() {
         const NF = 'NFD';
         const nWordToMatch = wordToMatch.normalize(NF);
@@ -243,7 +289,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
               }))
             : rawValues;
 
-        const sorted = values.sort(compSuggestionResults);
+        const sorted = values.sort(compSuggestionResults).map(cleanResult);
         if (!includeTies && sorted.length > numSuggestions) {
             sorted.length = numSuggestions;
         }
@@ -274,21 +320,26 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         includesTies: includeTies,
         ignoreCase,
         symbolStopProcessing: symStopProcessing,
+        genSuggestionOptions,
     };
 
     return collector;
 }
 
+/**
+ * Impersonating a Collector, allows searching for multiple variants on the same word.
+ * The collection is still in the original collector.
+ * @param collector - collector to impersonate
+ * @param word - word to present instead of `collector.word`.
+ * @returns a SuggestionCollector
+ */
+export function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector {
+    const r = Object.create(collector);
+    Object.defineProperty(r, 'word', { value: word, writable: false });
+    return r;
+}
+
 export function isSuggestionResult(s: GenerateSuggestionResult): s is SuggestionResult {
     const r = s as Partial<SuggestionResult> | undefined;
     return r?.cost !== undefined && r.word != undefined;
-}
-
-/**
- *
- * @param text verbatim text to be inserted into a regexp
- * @returns text that can be used in a regexp.
- */
-function regexQuote(text: string): string {
-    return text.replace(/[[\]\-+(){},|*.\\]/g, '\\$1');
 }

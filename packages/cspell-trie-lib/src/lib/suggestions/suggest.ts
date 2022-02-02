@@ -29,7 +29,7 @@ export function suggest(
     const opts = createSuggestionOptions(options);
     const collectorOpts: SuggestionCollectorOptions = clean(opts);
     const collector = suggestionCollector(word, collectorOpts);
-    collector.collect(genSuggestions(root, word, opts));
+    collector.collect(genSuggestions(root, word, { ...opts, ...collector.genSuggestionOptions }));
     return collector.suggestions;
 }
 

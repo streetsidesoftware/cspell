@@ -1,7 +1,8 @@
 import assert from 'assert';
-import { mapDictionaryInformationToWeightMap, WeightMap } from '..';
+import { mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from '..';
 import { readRawDictionaryFile, readSampleTrie } from '../../test/dictionaries.test.helper';
 import { DictionaryInformation } from '../models/DictionaryInformation';
+import { clean } from '../utils/util';
 
 function getTrie() {
     return readSampleTrie('nl_compound_trie3.trie.gz');
@@ -70,25 +71,25 @@ describe('Validate Dutch Suggestions', () => {
         timeout
     );
 
-    function sr(word: string, cost: number) {
-        return { word, cost };
+    function sr(word: string, cost: number, compoundWord?: string): SuggestionResult {
+        return clean({ word, cost, compoundWord: compoundWord?.replace(/[|+]/g, '•') });
     }
 
-    // cspell:ignore buurt
+    // cspell:ignore buurt kasteloos kosten maan
     test.each`
         word             | expected
         ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buur', 100), sr('buut', 100)]}
         ${'eén'}         | ${ac([sr('een', 1)])}
-        ${'buurmaan'}    | ${ac([sr('buurman', 45)])}
+        ${'buurmaan'}    | ${ac([/* sr('buurman', 45), */ sr('buurmaan', 50, 'buur|maan')])}
         ${'positeve'}    | ${ac([sr('positieve', 45), sr('positieven', 90)])}
         ${'positieven'}  | ${ac([sr('positieven', 0), sr('positieve', 45)])}
         ${'positive'}    | ${ac([sr('positieve', 45)])}
         ${'verklaaring'} | ${ac([sr('verklaring', 45)])}
         ${'Mexico-Stad'} | ${ac([sr('Mexico-Stad', 0)])}
-        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-star', 100)])}
+        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-stad', 51, 'Mexico-•stad')])}
         ${'word'}        | ${ac([sr('word', 0), sr('wordt', 30)])}
         ${'kostelos'}    | ${ac([sr('kosteloos', 45) /*, sr('kostenloos', 90) */])}
-        ${'kosteloos'}   | ${ac([sr('kosteloos', 0), sr('kostenloos', 45)])}
+        ${'kosteloos'}   | ${ac([sr('kosteloos', 0), sr('kasteloos', 50), sr('kostenloos', 95, 'kosten•loos')])}
     `('Weighted Results "$word"', async ({ word, expected }) => {
         await pReady;
         const trie = await pTrieNL;

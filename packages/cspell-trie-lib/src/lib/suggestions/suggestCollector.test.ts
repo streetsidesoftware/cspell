@@ -1,5 +1,13 @@
-import { createWeightedMap, editDistance, mapDictionaryInformationToWeightMap, WeightMap } from '..';
+import {
+    createWeightedMap,
+    editDistance,
+    impersonateCollector,
+    mapDictionaryInformationToWeightMap,
+    SuggestionResult,
+    WeightMap,
+} from '..';
 import { formattedDistance } from '../distance/formatResultEx';
+import { clean } from '../utils/util';
 import { suggestionCollector, SuggestionCollectorOptions, SuggestionGenerator } from './suggestCollector';
 
 const defaultOptions: SuggestionCollectorOptions = {
@@ -67,8 +75,8 @@ describe('Validate suggestCollector', () => {
         expect(rValues).toEqual([412, 412, 412, 412, 412, 300, 295]);
     });
 
-    function s(word: string, cost: number) {
-        return { word, cost };
+    function s(word: string, cost: number, compoundWord?: string): SuggestionResult {
+        return clean({ word, cost, compoundWord });
     }
 
     // cspell:ignore joyo woudt
@@ -107,24 +115,26 @@ describe('Validate suggestCollector', () => {
         sugs.forEach((sug) => collector.add(sug));
 
         const suggestions = collector.suggestions;
-        suggestions
-            .map((a) => a.word)
-            .map((wordB) => formattedDistance(word.normalize('NFD'), wordB.normalize('NFD'), weightMap, 110))
-            .forEach((r) => console.log(r));
+        expect(
+            suggestions
+                .map((a) => a.word)
+                .map((wordB) => formattedDistance(word.normalize('NFD'), wordB.normalize('NFD'), weightMap, 110))
+        ).toMatchSnapshot();
 
         expect(suggestions).toEqual(expected);
     });
 
-    // cspell:ignore aple
     test.each`
-        word       | expected
-        ${'word'}  | ${[s('word', 0), s('work', 100), s('words', 100)]}
-        ${'words'} | ${[s('words', 0), s('word', 100), s('works', 100)]}
-        ${'joy'}   | ${[s('joy', 0)]}
-        ${'joyo'}  | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 305)]}
-        ${'woudt'} | ${[s('word', 200), s('words', 200), s('would', 200), s("won't", 210)]}
-        ${'aple'}  | ${[s('apple', 55), s('apples', 155)]}
-        ${'cafe'}  | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
+        word         | expected
+        ${'word'}    | ${[s('word', 0), s('work', 100), s('words', 100)]}
+        ${'words'}   | ${[s('words', 0), s('word', 100), s('works', 100)]}
+        ${'joy'}     | ${[s('joy', 0)]}
+        ${'joyo'}    | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 305)]}
+        ${'woudt'}   | ${[s('word', 200), s('words', 200), s('would', 200), s("won't", 210)]}
+        ${'aple'}    | ${[s('apple', 55), s('apples', 155)]}
+        ${'cafe'}    | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
+        ${'tim'}     | ${[s('time', 75)]}
+        ${'runtime'} | ${[s('runtime', 50, 'run•time'), s('time', 200 + 75 + 4)]}
     `('collect weighted suggestions for "$word"', ({ word, expected }) => {
         const collector = suggestionCollector(
             word,
@@ -133,6 +143,21 @@ describe('Validate suggestCollector', () => {
         const sugs = sampleSuggestions().map((sugWord) => ({ word: sugWord, cost: editDistance(word, sugWord) }));
         sugs.forEach((sug) => collector.add(sug));
         expect(collector.suggestions).toEqual(expected);
+    });
+
+    test('impersonateCollector', () => {
+        const collector = suggestionCollector('hello', { numSuggestions: 1, changeLimit: 3, ignoreCase: true });
+        const ic = impersonateCollector(collector, 'Hello');
+        expect(ic.collect).toBe(collector.collect);
+        expect(ic.word).toBe('Hello');
+        const suggestion = { word: 'hello', cost: 1 };
+        ic.add(suggestion);
+        expect(ic.suggestions).toEqual([suggestion]);
+        expect(ic.maxCost).toBeGreaterThan(200);
+        expect(ic.maxNumSuggestions).toBe(1);
+        expect(ic.word).toBe('Hello');
+        expect(collector.word).toBe('hello');
+        expect(collector.suggestions).toEqual([suggestion]);
     });
 });
 
@@ -151,6 +176,7 @@ function sampleSuggestions(): string[] {
         .concat(['calculate', 'suggest', 'suggestion', 'supplement', 'apple', 'apples', 'walked', 'walker'])
         .concat(['yo-yo', 'the', 'saw', 'raw', 'paw', 'this', 'these', 'those', 'work', 'works', 'working'])
         .concat(['workable', 'worked', 'cafe', 'café', 'resume', 'résumé', 'cafés'])
+        .concat(['run•time', 'coffee•shop', 'run', 'time', 'coffee', 'shop', 'street•wise'])
         .concat([]);
 }
 
