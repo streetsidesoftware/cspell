@@ -4,6 +4,7 @@
 export {
     compSuggestionResults,
     defaultSuggestionCollectorOptions,
+    impersonateCollector,
     isSuggestionResult,
     suggestionCollector,
 } from './suggestions/suggestCollector';

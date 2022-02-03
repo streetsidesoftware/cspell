@@ -69,12 +69,21 @@ export type OnlyOptionalOrUndefined<T> = {
     [P in keyof T as P extends OptionalOrUndefinedKeys<T> ? P : never]: T[P];
 };
 
+/**
+ * Make fields that can be `undefined` optional
+ */
 export type MakeOptional<T> = OnlyRequired<T> & Partial<OnlyOptionalOrUndefined<T>>;
 
+/**
+ * Like Required, but keeps the Optional.
+ */
 export type RemoveUndefined<T> = {
     [P in keyof T]: Exclude<T[P], undefined>;
 };
 
+/**
+ * Make all `undefined` optional and removes the `undefined`
+ */
 export type UndefinedToOptional<T> = RemoveUndefined<MakeOptional<T>>;
 
 // export type UndefinedToOptional<T> =

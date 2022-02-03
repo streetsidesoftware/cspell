@@ -147,12 +147,16 @@ export async function suggestionsForWord(
     };
 }
 
-function combine(suggestions: { word: string; cost: number; dictName: string }[]): SuggestedWordBase[] {
+interface SuggestionResultWithDictionaryName extends SuggestionResult {
+    dictName: string;
+}
+
+function combine(suggestions: SuggestionResultWithDictionaryName[]): SuggestedWordBase[] {
     const words: Map<string, SuggestedWordBase> = new Map();
 
     for (const sug of suggestions) {
-        const { word, cost, dictName } = sug;
-        const f = words.get(word) || { word, cost, dictionaries: [] };
+        const { word, cost, dictName, ...rest } = sug;
+        const f = words.get(word) || { word, cost, ...rest, dictionaries: [] };
         f.cost = Math.min(f.cost, cost);
         f.dictionaries.push(dictName);
         f.dictionaries.sort();

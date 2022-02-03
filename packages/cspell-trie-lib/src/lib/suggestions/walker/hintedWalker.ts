@@ -104,7 +104,7 @@ function* hintedWalkerNext(
         }
         if (n.f) {
             yield* [...compoundMethodRoots[_compoundingMethod]].map(([letter, node]) => ({
-                letter: emitWordSeparator + letter,
+                letter: letter,
                 node,
                 hintOffset,
             }));

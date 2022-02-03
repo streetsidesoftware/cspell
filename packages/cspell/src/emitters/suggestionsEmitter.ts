@@ -14,7 +14,7 @@ export function emitSuggestionResult(result: SuggestionsForWordResult, options: 
     const { word, suggestions } = result;
     const { verbose, output = console } = options;
 
-    output.log(word ? chalk.green(word) : chalk.yellow('<empty>') + ':');
+    output.log(word ? chalk.yellow(word) : chalk.yellow('<empty>') + ':');
 
     if (!suggestions.length) {
         console.log(chalk.yellow(' <no suggestions>'));
@@ -24,13 +24,14 @@ export function emitSuggestionResult(result: SuggestionsForWordResult, options: 
     if (verbose) {
         const maxWidth = suggestions.map((r) => r.word.length).reduce((max, len) => Math.max(max, len), 0);
         for (const sug of suggestions) {
-            const { word, cost, dictionaries } = sug;
-            const padding = ' '.repeat(maxWidth - word.length);
+            const { word, cost, dictionaries, compoundWord } = sug;
+            const w = compoundWord || word;
+            const padding = ' '.repeat(maxWidth - w.length);
             const forbid = sug.forbidden ? chalk.red('X') : ' ';
             const ignore = sug.noSuggest ? chalk.yellow('N') : ' ';
             const strCost = padLeft(cost.toString(10), 4);
             const dicts = dictionaries.map((n) => chalk.gray(n)).join(', ');
-            output.log(` - ${formatWord(word, sug)}${padding} ${forbid}${ignore} - ${chalk.yellow(strCost)} ${dicts}`);
+            output.log(` - ${formatWord(w, sug)}${padding} ${forbid}${ignore} - ${chalk.yellow(strCost)} ${dicts}`);
         }
     } else {
         for (const r of suggestions) {

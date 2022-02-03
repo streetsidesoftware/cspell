@@ -10,10 +10,9 @@ import {
     isForbiddenWord,
     PartialFindOptions,
 } from './find';
-import { SuggestionOptions } from './suggestions/genSuggestionsOptions';
 import { genSuggestions, suggest } from './suggest';
 import { SuggestionCollector, SuggestionResult } from './suggestCollector';
-import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import { SuggestionOptions } from './suggestions/genSuggestionsOptions';
 import {
     clean,
     countWords,
@@ -24,6 +23,8 @@ import {
     mergeOptionalWithDefaults,
     orderTrie,
 } from './trie-util';
+import { PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
+import { replaceAllFactory } from './utils/util';
 import { CompoundWordsMethod, walker, WalkerIterator } from './walker';
 
 export {
@@ -180,10 +181,13 @@ export class Trie {
      */
     suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[] {
         const sep = options.compoundSeparator;
-        const adjWord = sep ? (a: string) => a.split(sep).join('') : (a: string) => a;
+        const adjWord = sep ? replaceAllFactory(sep, '') : (a: string) => a;
         const optFilter = options.filter;
         const filter = optFilter
-            ? (word: string, cost: number) => !this.isForbiddenWord(word) && optFilter(word, cost)
+            ? (word: string, cost: number) => {
+                  const w = adjWord(word);
+                  return !this.isForbiddenWord(w) && optFilter(w, cost);
+              }
             : (word: string) => !this.isForbiddenWord(adjWord(word));
         const opts = { ...options, filter };
         return suggest(this.root, text, opts);
@@ -196,13 +200,8 @@ export class Trie {
      */
     genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void {
         const filter = (word: string) => !this.isForbiddenWord(word);
-        const { changeLimit, ignoreCase } = collector;
-
-        const suggestions = genSuggestions(
-            this.root,
-            collector.word,
-            clean({ compoundMethod, changeLimit, ignoreCase })
-        );
+        const options = clean({ compoundMethod, ...collector.genSuggestionOptions });
+        const suggestions = genSuggestions(this.root, collector.word, options);
         collector.collect(suggestions, undefined, filter);
     }
 
