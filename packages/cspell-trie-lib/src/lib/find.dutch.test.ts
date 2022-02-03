@@ -178,9 +178,9 @@ function processText(text: string): string[] {
     ];
 }
 
-function testCompound(word: string, found = true): [string, PartialFindOptions, FindFullResult] {
-    return [word, { matchCase: true, compoundMode: 'compound' }, frCompoundFound(found && word, { forbidden: false })];
-}
+// function testCompound(word: string, found = true): [string, PartialFindOptions, FindFullResult] {
+//     return [word, { matchCase: true, compoundMode: 'compound' }, frCompoundFound(found && word, { forbidden: false })];
+// }
 
 type PartialFindFullResult = Partial<FindFullResult>;
 
