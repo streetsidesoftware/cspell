@@ -1,6 +1,9 @@
 import { SuggestionCostMapDef } from '../models/suggestionCostsDef';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/suggestCollector';
 
 export type WeightedRepMapTrie = Record<string, WeightedRepTrieNode>;
+
+const matchPossibleWordSeparators = /[+∙•・●]/g;
 
 interface WeightedRepTrieNode {
     /** The nested Trie nodes */
@@ -86,7 +89,8 @@ export function addDefsToWeightMap(map: WeightMap, defs: SuggestionCostMapDef[])
         addSetToTrieTrieCost(map.swap, set, def.swap, def.penalty);
     }
 
-    for (const def of defs) {
+    for (const _def of defs) {
+        const def = normalizeDef(_def);
         const mapSets = splitMap(def);
         mapSets.forEach((s) => addSet(s, def));
     }
@@ -369,9 +373,19 @@ export function lookupReplaceCost(map: WeightMap, a: string, b: string): undefin
     return t?.c;
 }
 
+function normalizeDef(def: SuggestionCostMapDef): SuggestionCostMapDef {
+    const { map, ...rest } = def;
+    return { ...rest, map: normalizeMap(map) };
+}
+
+function normalizeMap(map: string): string {
+    return map.replace(matchPossibleWordSeparators, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
+}
+
 export const __testing__ = {
-    splitMap,
-    splitMapSubstrings,
     findTrieCostPrefixes,
     findTrieTrieCostPrefixes,
+    normalizeDef,
+    splitMap,
+    splitMapSubstrings,
 };

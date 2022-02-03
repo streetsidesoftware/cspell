@@ -1,4 +1,5 @@
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/suggestCollector';
 import {
     addDefToWeightMap,
     CostPosition,
@@ -8,7 +9,7 @@ import {
     __testing__,
 } from './weightedMaps';
 
-const { splitMapSubstrings, splitMap, findTrieCostPrefixes } = __testing__;
+const { splitMapSubstrings, splitMap, findTrieCostPrefixes, normalizeDef } = __testing__;
 
 // const u = undefined;  cspell:
 
@@ -188,7 +189,19 @@ describe('Validate weightedMaps', () => {
         const results = lookupReplaceCost(map, wordA, wordB);
         expect(results).toEqual(expected);
     });
+
+    test.each`
+        def                                         | expected
+        ${defIns('(+A)(+B)', 50, { penalty: 150 })} | ${defIns(sep('(|A)(|B)'), 50, { penalty: 150 })}
+        ${defIns('abc', 95)}                        | ${defIns('abc', 95)}
+    `('normalizeDef for compound separators $def', ({ def, expected }) => {
+        expect(normalizeDef(def)).toEqual(expected);
+    });
 });
+
+function sep(s: string): string {
+    return s.replace(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
+}
 
 // function mo(...opts: Partial<SuggestionCostMapDef>[]): Partial<SuggestionCostMapDef> {
 //     return mergeOps(opts);

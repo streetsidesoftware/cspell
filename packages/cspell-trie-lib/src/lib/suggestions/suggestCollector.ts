@@ -4,7 +4,7 @@ import { RequireOptional } from '../types';
 import { createTimer } from '../utils/timer';
 import { clean, regexQuote, replaceAllFactory } from '../utils/util';
 import { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions';
-import { JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
+import { WORD_SEPARATOR } from './walker';
 
 const defaultMaxNumberSuggestions = 10;
 
@@ -16,7 +16,9 @@ const MAX_ALLOWED_COST_SCALE = 1.03 * MAX_COST_SCALE;
 
 const collator = new Intl.Collator();
 
-const regexSeparator = new RegExp(`[${regexQuote(JOIN_SEPARATOR + WORD_SEPARATOR)}]`, 'g');
+// This is a bit broken, it was supposed to also include JOIN_SEPARATOR (`+`)
+// Add it back later.
+const regexSeparator = new RegExp(`[${regexQuote(WORD_SEPARATOR)}]`, 'g');
 
 const wordLengthCost = [0, 50, 25, 5, 0];
 const EXTRA_WORD_COST = 5;

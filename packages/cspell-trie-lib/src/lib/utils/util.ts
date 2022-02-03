@@ -50,7 +50,7 @@ export function replaceAll(text: string, match: string, withText: string): strin
  * @returns text that can be used in a regexp.
  */
 export function regexQuote(text: string): string {
-    return text.replace(/[[\]\-+(){},|*.\\]/g, '\\$1');
+    return text.replace(/([[\]\-+(){},|*.\\])/g, '\\$1');
 }
 
 /**
