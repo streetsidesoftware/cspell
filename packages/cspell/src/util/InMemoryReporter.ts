@@ -1,4 +1,4 @@
-import type { CSpellReporter, Issue, ProgressFileComplete, RunResult } from '@cspell/cspell-types';
+import type { CSpellReporter, Issue, ProgressItem, RunResult } from '@cspell/cspell-types';
 
 export interface InMemoryResult {
     log: string[];
@@ -43,7 +43,7 @@ export class InMemoryReporter implements CSpellReporter, InMemoryResult {
         this.log.push(`Debug: ${message}`);
     };
 
-    progress = (p: ProgressFileComplete): void => {
+    progress = (p: ProgressItem): void => {
         this.progressCount += 1;
         this.log.push(`Progress: ${p.type} ${p.fileNum} ${p.fileCount} ${p.filename}`);
     };

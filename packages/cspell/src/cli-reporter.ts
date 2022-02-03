@@ -1,5 +1,13 @@
 import chalk = require('chalk');
-import type { CSpellReporter, Issue, MessageType, ProgressItem, RunResult } from '@cspell/cspell-types';
+import type {
+    CSpellReporter,
+    Issue,
+    MessageType,
+    ProgressFileBegin,
+    ProgressFileComplete,
+    ProgressItem,
+    RunResult,
+} from '@cspell/cspell-types';
 import { ImportError, isSpellingDictionaryLoadError, SpellingDictionaryLoadError } from 'cspell-lib';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
@@ -59,9 +67,23 @@ function relativeUriFilename(uri: string, fsPathRoot: string): string {
 }
 
 function reportProgress(p: ProgressItem) {
-    if (p.type !== 'ProgressFileComplete') {
-        return;
+    if (p.type === 'ProgressFileComplete') {
+        return reportProgressFileComplete(p);
     }
+    if (p.type === 'ProgressFileBegin') {
+        return reportProgressFileBegin(p);
+    }
+}
+
+function reportProgressFileBegin(p: ProgressFileBegin) {
+    const fc = '' + p.fileCount;
+    const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
+    const idx = fn + '/' + fc;
+    const filename = chalk.gray(relativeFilename(p.filename));
+    process.stderr.write(`\r${idx} ${filename} ...`);
+}
+
+function reportProgressFileComplete(p: ProgressFileComplete) {
     const fc = '' + p.fileCount;
     const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
     const idx = fn + '/' + fc;
@@ -69,7 +91,7 @@ function reportProgress(p: ProgressItem) {
     const time = reportTime(p.elapsedTimeMs, !!p.cached);
     const skipped = p.processed === false ? ' skipped' : '';
     const hasErrors = p.numErrors ? chalk.red` X` : '';
-    console.error(`${idx} ${filename} ${time}${skipped}${hasErrors}`);
+    console.error(`\r${idx} ${filename} ${time}${skipped}${hasErrors}`);
 }
 
 function reportTime(elapsedTimeMs: number | undefined, cached: boolean): string {
@@ -139,6 +161,17 @@ export function getReporter(options: ReporterOptions): CSpellReporter {
         if (!fileGlobs.length && !result.files) {
             return;
         }
+        if (result.cachedFiles) {
+            console.error(
+                'CSpell: Files checked: %d (%d from cache), Issues found: %d in %d files',
+                result.files,
+                result.cachedFiles,
+                result.issues,
+                result.filesWithIssues.size
+            );
+            return;
+        }
+
         console.error(
             'CSpell: Files checked: %d, Issues found: %d in %d files',
             result.files,

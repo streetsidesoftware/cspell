@@ -1,6 +1,6 @@
 import type { CSpellReporter } from '@cspell/cspell-types';
 import { assert } from 'console';
-import { checkText, CSpellApplicationOptions, Issue, lint, ProgressFileComplete, RunResult, trace } from 'cspell';
+import { checkText, CSpellApplicationOptions, Issue, lint, ProgressItem, RunResult, trace } from 'cspell';
 import { run } from 'cspell/dist/app';
 
 async function test() {
@@ -59,7 +59,7 @@ class ConsoleLogger implements CSpellReporter {
         // console.debug(`Debug: ${message}`);
     };
 
-    progress = (p: ProgressFileComplete) => {
+    progress = (p: ProgressItem) => {
         this.progressCount += 1;
         console.error(`Progress: ${p.type} ${p.fileNum} ${p.fileCount} ${p.filename}`);
     };

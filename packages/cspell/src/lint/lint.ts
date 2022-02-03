@@ -131,11 +131,19 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const cache = createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
-        const emitProgress = (filename: string, fileNum: number, result: FileResult) =>
+        const emitProgressBegin = (filename: string, fileNum: number, fileCount: number) =>
+            reporter.progress({
+                type: 'ProgressFileBegin',
+                fileNum,
+                fileCount,
+                filename,
+            });
+
+        const emitProgressComplete = (filename: string, fileNum: number, fileCount: number, result: FileResult) =>
             reporter.progress({
                 type: 'ProgressFileComplete',
                 fileNum,
-                fileCount: fileCount ?? fileNum,
+                fileCount,
                 filename,
                 elapsedTimeMs: result?.elapsedTimeMs,
                 processed: result?.processed,
@@ -147,6 +155,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             let i = 0;
             for await (const filename of files) {
                 ++i;
+                emitProgressBegin(filename, i, fileCount ?? i);
                 const result = await processFile(filename, configInfo, cache);
                 yield { filename, fileNum: i, result };
             }
@@ -156,7 +165,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const { filename, fileNum, result } = await fileP;
             status.files += 1;
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
-            emitProgress(filename, fileNum, result);
+            emitProgressComplete(filename, fileNum, fileCount ?? fileNum, result);
             // Show the spelling errors after emitting the progress.
             result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));
             if (result.issues.length || result.errors) {

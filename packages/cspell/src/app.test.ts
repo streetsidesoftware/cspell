@@ -43,26 +43,27 @@ interface TestCase {
     eInfo: boolean;
 }
 
-class RecordStdout {
+class RecordStdStream {
     private static columnWidth = 80;
     private write = process.stdout.write.bind(process.stdout);
-    private stdoutWrite: StdoutWrite | undefined;
+    private streamWrite: StdoutWrite | undefined;
     private columns: number = process.stdout.columns;
     readonly text: string[] = [];
 
     startCapture() {
         this.stopCapture();
-        this.stdoutWrite = process.stdout.write;
-        process.stdout.write = this.capture.bind(this);
-        process.stdout.columns = RecordStdout.columnWidth;
+        this.streamWrite = process[this.stream].write;
+        this.columns = process[this.stream].columns;
+        process[this.stream].write = this.capture.bind(this);
+        process[this.stream].columns = RecordStdStream.columnWidth;
     }
 
     stopCapture() {
-        if (this.stdoutWrite) {
-            process.stdout.write = this.stdoutWrite;
-            process.stdout.columns = this.columns;
+        if (this.streamWrite) {
+            process[this.stream].write = this.streamWrite;
+            process[this.stream].columns = this.columns;
         }
-        this.stdoutWrite = undefined;
+        this.streamWrite = undefined;
     }
 
     private capture(buffer: Uint8Array | string, cb?: Callback): boolean;
@@ -82,6 +83,8 @@ class RecordStdout {
     clear() {
         this.text.length = 0;
     }
+
+    constructor(readonly stream: 'stdout' | 'stderr' = 'stdout') {}
 }
 
 const colorLevel = chalk.level;
@@ -96,14 +99,16 @@ describe('Validate cli', () => {
     const removePathsFromGlobalImports = jest
         .spyOn(Link, 'removePathsFromGlobalImports')
         .mockName('removePathsFromGlobalImports');
-    const capture = new RecordStdout();
+    const captureStdout = new RecordStdStream();
+    const captureStderr = new RecordStdStream('stderr');
 
     beforeEach(() => {
         log.mockClear();
         error.mockClear();
         mockCreateInterface.mockClear();
         logger.clear();
-        capture.startCapture();
+        captureStdout.startCapture();
+        captureStderr.startCapture();
         chalk.level = 3;
     });
 
@@ -114,8 +119,10 @@ describe('Validate cli', () => {
         listGlobalImports.mockClear();
         addPathsToGlobalImports.mockClear();
         removePathsFromGlobalImports.mockClear();
-        capture.stopCapture();
-        capture.clear();
+        captureStdout.stopCapture();
+        captureStdout.clear();
+        captureStderr.stopCapture();
+        captureStderr.clear();
         chalk.level = colorLevel;
     });
 
@@ -152,6 +159,7 @@ describe('Validate cli', () => {
         ${'--fail-fast with config'}                   | ${['-r', failFastRoot, '-c', failFastConfig, '*.txt']}                     | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'--no-fail-fast with config'}                | ${['-r', failFastRoot, '--no-fail-fast', '-c', failFastConfig, '*.txt']}   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 1;
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
@@ -168,8 +176,9 @@ describe('Validate cli', () => {
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(capture.text).toMatchSnapshot();
+        expect(captureStdout.text).toMatchSnapshot();
         expect(logger.normalizedHistory()).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
     });
 
     test.each`
@@ -199,7 +208,7 @@ describe('Validate cli', () => {
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(capture.text).toMatchSnapshot();
+        expect(captureStdout.text).toMatchSnapshot();
         expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
     });
 
@@ -214,7 +223,7 @@ describe('Validate cli', () => {
         const commander = getCommander();
         const args = argv(...testArgs);
         await app.run(commander, args);
-        expect(capture.text).toMatchSnapshot();
+        expect(captureStdout.text).toMatchSnapshot();
         expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
     });
 
@@ -245,7 +254,7 @@ describe('Validate cli', () => {
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(capture.text).toMatchSnapshot();
+        expect(normalizeOutput(captureStdout.text)).toMatchSnapshot();
     });
 
     test.each`
@@ -280,7 +289,7 @@ describe('Validate cli', () => {
             // eslint-disable-next-line jest/no-conditional-expect
             await expect(result).rejects.toThrowError(errorCheck);
         }
-        expect(capture.text).toMatchSnapshot();
+        expect(captureStdout.text).toMatchSnapshot();
         expect(log.mock.calls.join('\n')).toMatchSnapshot();
         expect(error.mock.calls.join('\n')).toMatchSnapshot();
         expect(mockCreateInterface).toHaveBeenCalledTimes(stdin ? 1 : 0);
@@ -320,8 +329,11 @@ type StdoutWrite = typeof process.stdout.write;
 type Callback = (err?: Error) => void;
 
 function normalizeLogCalls(calls: string[][]): string {
-    const logOutput = calls.map((call) => Util.format(...call)).join('\n');
-    return logOutput.replace(/\\/g, '/');
+    return normalizeOutput(calls.map((call) => Util.format(...call)));
+}
+
+function normalizeOutput(lines: string[]): string {
+    return lines.join('\n').replace(/\\/g, '/');
 }
 
 function makeLogger() {
@@ -335,6 +347,7 @@ function makeLogger() {
     function normalizedHistory() {
         let t = history.join('\n');
         t = stripAnsi(t);
+        t = t.replace(/\r/gm, '');
         t = t.replace(RegExp(escapeRegExp(projectRootUri.toString()), 'gi'), '.');
         t = t.replace(RegExp(escapeRegExp(projectRoot), 'gi'), '.');
         t = t.replace(/\\/g, '/');
