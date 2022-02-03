@@ -35,7 +35,7 @@
     "x-pub-version-grad": "lerna version --conventional-commits --conventional-graduate",
     "x-pub-version-pre": "lerna version --conventional-commits --conventional-prerelease",
     "x-pub-version": "lerna version --conventional-commits",
-    "pub": "npm run ibt && lerna publish --conventional-commits",
+    "pub": "npm run pre-pub && lerna publish --conventional-commits",
     "pub-grad": "npm run pre-pub && lerna publish --conventional-commits --conventional-graduate",
     "pub-next": "npm run pre-pub && lerna publish --conventional-commits --conventional-prerelease --dist-tag next",
     "symlink": "node build_tools/bin/symlink.js packages test-packages",
