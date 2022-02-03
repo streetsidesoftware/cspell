@@ -51,7 +51,8 @@
     "test-integrations": "cd ./integration-tests && npm run integration-tests",
     "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./packages/cspell-types/ajv.config.js",
     "update-packages": "lerna exec \"npx npm-check-updates -t minor -u && rimraf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci",
-    "update-snapshots": "lerna run update-snapshots --scope cspell-integration-tests"
+    "update-integrations-and-snapshots": "lerna run update-snapshots --scope cspell-integration-tests",
+    "update-snapshots": "lerna run update-snapshots-only --scope cspell-integration-tests"
   },
   "repository": {
     "type": "git",
