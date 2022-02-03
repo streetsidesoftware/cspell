@@ -25,7 +25,7 @@ This should be very cheap, it helps with fixing accent issues.
 
 #### Defined in
 
-[DictionaryInformation.ts:286](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L286)
+[DictionaryInformation.ts:286](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L286)
 
 ___
 
@@ -39,7 +39,7 @@ This is the base cost for making an edit.
 
 #### Defined in
 
-[DictionaryInformation.ts:259](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L259)
+[DictionaryInformation.ts:259](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L259)
 
 ___
 
@@ -54,7 +54,7 @@ This should be very cheap, it helps with fixing capitalization issues.
 
 #### Defined in
 
-[DictionaryInformation.ts:279](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L279)
+[DictionaryInformation.ts:279](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L279)
 
 ___
 
@@ -69,7 +69,7 @@ This value should be less than `100 - baseCost`.
 
 #### Defined in
 
-[DictionaryInformation.ts:272](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L272)
+[DictionaryInformation.ts:272](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L272)
 
 ___
 
@@ -83,4 +83,4 @@ This is the cost for characters not in the alphabet.
 
 #### Defined in
 
-[DictionaryInformation.ts:265](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L265)
+[DictionaryInformation.ts:265](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L265)

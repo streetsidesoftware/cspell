@@ -30,7 +30,7 @@ The accent characters
 
 #### Defined in
 
-[DictionaryInformation.ts:26](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L26)
+[DictionaryInformation.ts:26](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L26)
 
 ___
 
@@ -44,7 +44,7 @@ The alphabet to use.
 
 #### Defined in
 
-[DictionaryInformation.ts:20](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L20)
+[DictionaryInformation.ts:20](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L20)
 
 ___
 
@@ -56,7 +56,7 @@ Define edit costs.
 
 #### Defined in
 
-[DictionaryInformation.ts:31](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L31)
+[DictionaryInformation.ts:31](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L31)
 
 ___
 
@@ -68,7 +68,7 @@ Used by dictionary authors
 
 #### Defined in
 
-[DictionaryInformation.ts:42](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L42)
+[DictionaryInformation.ts:42](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L42)
 
 ___
 
@@ -81,7 +81,7 @@ Example: `nl,nl-be`
 
 #### Defined in
 
-[DictionaryInformation.ts:14](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L14)
+[DictionaryInformation.ts:14](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L14)
 
 ___
 
@@ -94,4 +94,4 @@ will be near the top of the suggestion list.
 
 #### Defined in
 
-[DictionaryInformation.ts:37](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/DictionaryInformation.ts#L37)
+[DictionaryInformation.ts:37](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/DictionaryInformation.ts#L37)
