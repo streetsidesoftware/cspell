@@ -175,12 +175,14 @@ describe('Validate cli', () => {
     test.each`
         msg                                         | testArgs                                                        | errorCheck         | eError   | eLog     | eInfo
         ${'trace hello'}                            | ${['trace', 'hello']}                                           | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace café'}                             | ${['trace', 'café'.normalize('NFD')]}                           | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace hello'}                            | ${['trace', '--locale=en-gb', 'hello']}                         | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace help'}                             | ${['trace', '-h']}                                              | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'trace not-in-any-dictionary'}            | ${['trace', 'not-in-any-dictionary']}                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'trace missing dictionary'}               | ${['trace', 'hello', '-c', 'samples/cspell-missing-dict.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with spelling errors --debug Dutch.txt'} | ${['--debug', pathSamples('Dutch.txt')]}                        | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
+        ${'with spelling errors --debug Dutch.txt'} | ${['--relative', '--debug', pathSamples('Dutch.txt')]}          | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 0;
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
@@ -198,6 +200,22 @@ describe('Validate cli', () => {
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
+        expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
+    });
+
+    test.each`
+        msg              | testArgs
+        ${'trace hello'} | ${['trace', 'hello']}
+        ${'trace café'}  | ${['trace', 'café'.normalize('NFD')]}
+        ${'trace hello'} | ${['trace', '--locale=en-gb', 'hello']}
+        ${'suggest'}     | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
+    `('app success $msg run with $testArgs', async ({ testArgs }: TestCase) => {
+        chalk.level = 0;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        await app.run(commander, args);
+        expect(capture.text).toMatchSnapshot();
+        expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
     });
 
     test.each`
@@ -300,6 +318,11 @@ function _removePathsFromGlobalImports(): typeof Link['removePathsFromGlobalImpo
 
 type StdoutWrite = typeof process.stdout.write;
 type Callback = (err?: Error) => void;
+
+function normalizeLogCalls(calls: string[][]): string {
+    const logOutput = calls.map((call) => Util.format(...call)).join('\n');
+    return logOutput.replace(/\\/g, '/');
+}
 
 function makeLogger() {
     const history: string[] = [];

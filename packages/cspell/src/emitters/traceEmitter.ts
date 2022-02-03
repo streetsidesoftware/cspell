@@ -1,7 +1,7 @@
 import * as Path from 'path';
 import strip from 'strip-ansi';
 import { TraceResult } from '../application';
-import { pad } from '../util/util';
+import { pad, width } from '../util/util';
 import chalk = require('chalk');
 
 export interface EmitTraceOptions {
@@ -15,7 +15,7 @@ const colWidthDictionaryName = 20;
 export function emitTraceResults(results: TraceResult[], options: EmitTraceOptions): void {
     const maxWordLength = results
         .map((r) => r.foundWord || r.word)
-        .reduce((a, b) => Math.max(a, b.length), 'Word'.length);
+        .reduce((a, b) => Math.max(a, width(b)), 'Word'.length);
 
     const cols: ColWidths = {
         word: maxWordLength,
@@ -58,7 +58,7 @@ function emitTraceResult(r: TraceResult, colWidths: ColWidths, options: EmitTrac
     const dictColor = r.dictActive ? chalk.yellowBright : chalk.rgb(200, 128, 50);
     const n = dictColor(dictName);
     const info = [w, f, n].join(' ') + ' ';
-    const used = strip(info).length;
+    const used = width(strip(info));
     const widthSrc = terminalWidth - used;
     const c = errors ? chalk.red : chalk.white;
     const s = c(formatDictionaryLocation(r.dictSource, widthSrc, options.cwd));
