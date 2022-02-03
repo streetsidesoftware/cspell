@@ -139,6 +139,17 @@ export function getReporter(options: ReporterOptions): CSpellReporter {
         if (!fileGlobs.length && !result.files) {
             return;
         }
+        if (result.cachedFiles) {
+            console.error(
+                'CSpell: Files checked: %d (%d from cache), Issues found: %d in %d files',
+                result.files,
+                result.cachedFiles,
+                result.issues,
+                result.filesWithIssues.size
+            );
+            return;
+        }
+
         console.error(
             'CSpell: Files checked: %d, Issues found: %d in %d files',
             result.files,
