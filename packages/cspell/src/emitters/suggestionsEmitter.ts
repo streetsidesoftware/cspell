@@ -1,6 +1,6 @@
 import type { SuggestionsForWordResult, SuggestedWord } from 'cspell-lib';
 import chalk = require('chalk');
-import { padLeft } from '../util/util';
+import { padLeft, padWidth, width } from '../util/util';
 
 export interface EmitSuggestionOptions {
     verbose?: number;
@@ -22,11 +22,13 @@ export function emitSuggestionResult(result: SuggestionsForWordResult, options: 
     }
 
     if (verbose) {
-        const maxWidth = suggestions.map((r) => r.word.length).reduce((max, len) => Math.max(max, len), 0);
+        const maxWidth = suggestions
+            .map((r) => width(r.compoundWord || r.word))
+            .reduce((max, len) => Math.max(max, len), 0);
         for (const sug of suggestions) {
             const { word, cost, dictionaries, compoundWord } = sug;
             const w = compoundWord || word;
-            const padding = ' '.repeat(maxWidth - w.length);
+            const padding = ' '.repeat(padWidth(w, maxWidth));
             const forbid = sug.forbidden ? chalk.red('X') : ' ';
             const ignore = sug.noSuggest ? chalk.yellow('N') : ' ';
             const strCost = padLeft(cost.toString(10), 4);

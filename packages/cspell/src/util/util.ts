@@ -32,12 +32,24 @@ export function clean<T>(src: T): T {
     return r;
 }
 
+export function padWidth(s: string, target: number): number {
+    const sWidth = width(s);
+    return Math.max(target - sWidth, 0);
+}
+
 export function pad(s: string, w: number): string {
-    if (s.length >= w) return s;
-    return (s + ' '.repeat(w)).slice(0, w);
+    const p = padWidth(s, w);
+    if (!p) return s;
+    return s + ' '.repeat(p);
 }
 
 export function padLeft(s: string, w: number): string {
-    if (s.length >= w) return s;
-    return (' '.repeat(w) + s).slice(-w);
+    const p = padWidth(s, w);
+    if (!p) return s;
+    return ' '.repeat(p) + s;
+}
+
+export function width(s: string): number {
+    // eslint-disable-next-line no-control-regex
+    return s.replace(/[\u0300-\u036f\x00-\x1f]/g, '').length;
 }

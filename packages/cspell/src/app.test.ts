@@ -175,12 +175,14 @@ describe('Validate cli', () => {
     test.each`
         msg                                         | testArgs                                                        | errorCheck         | eError   | eLog     | eInfo
         ${'trace hello'}                            | ${['trace', 'hello']}                                           | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace café'}                             | ${['trace', 'café'.normalize('NFD')]}                           | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace hello'}                            | ${['trace', '--locale=en-gb', 'hello']}                         | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace help'}                             | ${['trace', '-h']}                                              | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'trace not-in-any-dictionary'}            | ${['trace', 'not-in-any-dictionary']}                           | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'trace missing dictionary'}               | ${['trace', 'hello', '-c', 'samples/cspell-missing-dict.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with spelling errors --debug Dutch.txt'} | ${['--debug', pathSamples('Dutch.txt')]}                        | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
+        ${'with spelling errors --debug Dutch.txt'} | ${['--relative', '--debug', pathSamples('Dutch.txt')]}          | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 0;
         const commander = getCommander();
         const args = argv(...testArgs);
         const result = app.run(commander, args);
@@ -198,6 +200,8 @@ describe('Validate cli', () => {
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
+        const logOutput = log.mock.calls.map((call) => Util.format(...call)).join('\n');
+        expect(logOutput).toMatchSnapshot();
     });
 
     test.each`

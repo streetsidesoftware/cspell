@@ -204,9 +204,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         for (; i < sorted.length && sorted[i].cost <= maxCost; ++i) {
             /* empty */
         }
-        const deleted = [];
         for (; i < sorted.length; ++i) {
-            deleted.push(sorted[i]);
             sugs.delete(sorted[i].word);
         }
     }
