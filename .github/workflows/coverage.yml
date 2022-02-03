@@ -34,6 +34,16 @@ jobs:
       - run: npm i -g npm@8
       - run: npm -v
 
+      - name: Restore CSpell cache
+        uses: actions/cache@v2
+        with:
+          key: cspell-cache-v2-${{ runner.os }}-${{ hashFiles('**/*.ts', '**/*.md') }}
+          path: |
+            .cspellcache
+            .cspell/.cspellcache
+          restore-keys: |
+            cspell-cache-v2-${{ runner.os }}-
+
       - run: npm ci
       - run: npm run build
       - run: npm run coverage
