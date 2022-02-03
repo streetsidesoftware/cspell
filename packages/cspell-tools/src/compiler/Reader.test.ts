@@ -47,7 +47,7 @@ describe('Validate the iterateWordsFromFile', () => {
 
     test('annotatedWords: hunspell Dutch', async () => {
         const reader = await pReaderDutch;
-        expect(reader.size).toBe(142518);
+        expect(reader.size).toBe(180689);
         const regBoek = /^.?boek\b/; // cspell:ignore fiets koopman doek boek
         const results = [
             ...reader
@@ -55,7 +55,7 @@ describe('Validate the iterateWordsFromFile', () => {
                 .filter((word) => regBoek.test(word))
                 .take(8),
         ];
-        expect(results.join(' ')).toBe('+boek +boek+ +boek- +boek-+ boek boek+ boek- boek-+');
+        expect(results.join(' ')).toBe('+boek boek boek+ ~boek ~boek+ boek ~boek');
     });
 
     test('annotatedWords: trie', async () => {
