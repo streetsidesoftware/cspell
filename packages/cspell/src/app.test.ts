@@ -178,7 +178,7 @@ describe('Validate cli', () => {
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(captureStdout.text).toMatchSnapshot();
         expect(logger.normalizedHistory()).toMatchSnapshot();
-        expect(captureStderr.text).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
     });
 
     test.each`
@@ -254,7 +254,7 @@ describe('Validate cli', () => {
         eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
-        expect(captureStdout.text).toMatchSnapshot();
+        expect(normalizeOutput(captureStdout.text)).toMatchSnapshot();
     });
 
     test.each`
@@ -329,8 +329,11 @@ type StdoutWrite = typeof process.stdout.write;
 type Callback = (err?: Error) => void;
 
 function normalizeLogCalls(calls: string[][]): string {
-    const logOutput = calls.map((call) => Util.format(...call)).join('\n');
-    return logOutput.replace(/\\/g, '/');
+    return normalizeOutput(calls.map((call) => Util.format(...call)));
+}
+
+function normalizeOutput(lines: string[]): string {
+    return lines.join('\n').replace(/\\/g, '/');
 }
 
 function makeLogger() {
