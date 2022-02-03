@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- `ProgressBase`
+- [`ProgressFileBase`](ProgressFileBase.md)
 
   ↳ **`ProgressFileComplete`**
 
@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[CSpellReporter.ts:46](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L46)
+[CSpellReporter.ts:51](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L51)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:43](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L43)
+[CSpellReporter.ts:48](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L48)
 
 ___
 
@@ -47,9 +47,13 @@ ___
 
 • **fileCount**: `number`
 
+#### Inherited from
+
+[ProgressFileBase](ProgressFileBase.md).[fileCount](ProgressFileBase.md#filecount)
+
 #### Defined in
 
-[CSpellReporter.ts:41](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L41)
+[CSpellReporter.ts:42](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L42)
 
 ___
 
@@ -57,9 +61,13 @@ ___
 
 • **fileNum**: `number`
 
+#### Inherited from
+
+[ProgressFileBase](ProgressFileBase.md).[fileNum](ProgressFileBase.md#filenum)
+
 #### Defined in
 
-[CSpellReporter.ts:40](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L40)
+[CSpellReporter.ts:41](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L41)
 
 ___
 
@@ -67,9 +75,13 @@ ___
 
 • **filename**: `string`
 
+#### Inherited from
+
+[ProgressFileBase](ProgressFileBase.md).[filename](ProgressFileBase.md#filename)
+
 #### Defined in
 
-[CSpellReporter.ts:42](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L42)
+[CSpellReporter.ts:43](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L43)
 
 ___
 
@@ -79,7 +91,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:45](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L45)
+[CSpellReporter.ts:50](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L50)
 
 ___
 
@@ -89,7 +101,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:44](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L44)
+[CSpellReporter.ts:49](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L49)
 
 ___
 
@@ -99,8 +111,8 @@ ___
 
 #### Overrides
 
-ProgressBase.type
+[ProgressFileBase](ProgressFileBase.md).[type](ProgressFileBase.md#type)
 
 #### Defined in
 
-[CSpellReporter.ts:39](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/CSpellReporter.ts#L39)
+[CSpellReporter.ts:47](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/CSpellReporter.ts#L47)

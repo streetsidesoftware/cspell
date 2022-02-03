@@ -34,4 +34,4 @@ Partial.weighted-suggestions
 
 #### Defined in
 
-[features.ts:10](https://github.com/streetsidesoftware/cspell/blob/b33453b/packages/cspell-types/src/features.ts#L10)
+[features.ts:10](https://github.com/streetsidesoftware/cspell/blob/d52d68a/packages/cspell-types/src/features.ts#L10)
