@@ -8,7 +8,12 @@ import {
 } from '..';
 import { formattedDistance } from '../distance/formatResultEx';
 import { clean } from '../utils/util';
-import { suggestionCollector, SuggestionCollectorOptions, SuggestionGenerator } from './suggestCollector';
+import {
+    DEFAULT_COMPOUNDED_WORD_SEPARATOR,
+    suggestionCollector,
+    SuggestionCollectorOptions,
+    SuggestionGenerator,
+} from './suggestCollector';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,
@@ -76,7 +81,7 @@ describe('Validate suggestCollector', () => {
     });
 
     function s(word: string, cost: number, compoundWord?: string): SuggestionResult {
-        return clean({ word, cost, compoundWord });
+        return clean({ word, cost, compoundWord: compoundWord?.replace(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR) });
     }
 
     // cspell:ignore joyo woudt
@@ -130,11 +135,11 @@ describe('Validate suggestCollector', () => {
         ${'words'}   | ${[s('words', 0), s('word', 100), s('works', 100)]}
         ${'joy'}     | ${[s('joy', 0)]}
         ${'joyo'}    | ${[s('joy', 75), s('joyous', 155), s('yo-yo', 305)]}
-        ${'woudt'}   | ${[s('word', 200), s('words', 200), s('would', 200), s("won't", 210)]}
+        ${'woudt'}   | ${[s('word', 200), s('words', 200), s('would', 200)]}
         ${'aple'}    | ${[s('apple', 55), s('apples', 155)]}
         ${'cafe'}    | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
         ${'tim'}     | ${[s('time', 75)]}
-        ${'runtime'} | ${[s('runtime', 50, 'run•time'), s('time', 200 + 75 + 4)]}
+        ${'runtime'} | ${[s('runtime', 50, 'run|time'), s('time', 200 + 75 + 4)]}
     `('collect weighted suggestions for "$word"', ({ word, expected }) => {
         const collector = suggestionCollector(
             word,
@@ -176,8 +181,9 @@ function sampleSuggestions(): string[] {
         .concat(['calculate', 'suggest', 'suggestion', 'supplement', 'apple', 'apples', 'walked', 'walker'])
         .concat(['yo-yo', 'the', 'saw', 'raw', 'paw', 'this', 'these', 'those', 'work', 'works', 'working'])
         .concat(['workable', 'worked', 'cafe', 'café', 'resume', 'résumé', 'cafés'])
-        .concat(['run•time', 'coffee•shop', 'run', 'time', 'coffee', 'shop', 'street•wise'])
-        .concat([]);
+        .concat(['run|time', 'coffee|shop', 'run', 'time', 'coffee', 'shop', 'street|wise'])
+        .concat([])
+        .map((a) => a.replace(/[|]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR));
 }
 
 function dictInfo() {

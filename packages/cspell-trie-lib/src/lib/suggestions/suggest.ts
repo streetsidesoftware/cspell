@@ -1,3 +1,5 @@
+import { clean, isWordTerminationNode } from '../trie-util';
+import { TrieRoot } from '../TrieNode';
 import { createSuggestionOptions, GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions';
 import { visualLetterMaskMap } from './orthography';
 import {
@@ -6,9 +8,8 @@ import {
     SuggestionCollectorOptions,
     SuggestionGenerator,
     SuggestionResult,
+    SuggestionResultBase,
 } from './suggestCollector';
-import { TrieRoot } from '../TrieNode';
-import { clean, isWordTerminationNode } from '../trie-util';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from './walker';
 
 const baseCost = 100;
@@ -56,7 +57,7 @@ export function* genCompoundableSuggestions(
     options: GenSuggestionOptions = {}
 ): SuggestionGenerator {
     const { compoundMethod = CompoundWordsMethod.NONE, changeLimit, ignoreCase } = createSuggestionOptions(options);
-    type History = SuggestionResult;
+    type History = SuggestionResultBase;
 
     interface HistoryTag {
         i: number;

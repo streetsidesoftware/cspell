@@ -30,6 +30,6 @@ function opts(a: Partial<EmitSuggestionOptions>, b: Partial<EmitSuggestionOption
 }
 
 function sw(word: string, cost: number, s: Partial<SuggestedWord> = {}): SuggestedWord {
-    const { dictionaries = ['dict-a'], noSuggest = false, forbidden = false } = s;
-    return { word, cost, dictionaries, noSuggest, forbidden };
+    const { dictionaries = ['dict-a'], noSuggest = false, forbidden = false, compoundWord = undefined } = s;
+    return { word, cost, dictionaries, noSuggest, forbidden, compoundWord };
 }

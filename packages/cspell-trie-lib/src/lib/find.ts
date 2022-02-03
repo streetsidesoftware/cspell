@@ -1,7 +1,9 @@
 import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX } from './constants';
 import { mergeDefaults } from './trie-util';
-import { FLAG_WORD, TrieNode } from './TrieNode';
+import { FLAG_WORD, TrieNode, TrieRoot } from './TrieNode';
 import type { PartialWithUndefined } from './types';
+
+type Root = PartialWithUndefined<TrieRoot>;
 
 /**
  * No compounding allowed.
@@ -73,7 +75,7 @@ const knownCompoundModes = new Map<CompoundModes, CompoundModes>(arrayCompoundMo
  * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
  * @param options
  */
-export function findWord(root: TrieNode, word: string, options?: PartialFindOptions): FindFullResult {
+export function findWord(root: Root, word: string, options?: PartialFindOptions): FindFullResult {
     return _findWord(root, word, createFindOptions(options));
 }
 
@@ -83,7 +85,7 @@ export function findWord(root: TrieNode, word: string, options?: PartialFindOpti
  * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
  * @param options
  */
-export function findWordNode(root: TrieNode, word: string, options?: PartialFindOptions): FindFullNodeResult {
+export function findWordNode(root: Root, word: string, options?: PartialFindOptions): FindFullNodeResult {
     return _findWordNode(root, word, createFindOptions(options));
 }
 
@@ -93,9 +95,9 @@ export function findWordNode(root: TrieNode, word: string, options?: PartialFind
  * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
  * @param options
  */
-function _findWord(root: TrieNode, word: string, options: FindOptions): FindFullResult {
-    const { found, forbidden, compoundUsed, caseMatched } = _findWordNode(root, word, options);
-    return { found, forbidden, compoundUsed, caseMatched };
+function _findWord(root: Root, word: string, options: FindOptions): FindFullResult {
+    const { node: _, ...result } = _findWordNode(root, word, options);
+    return result;
 }
 
 /**
@@ -104,10 +106,10 @@ function _findWord(root: TrieNode, word: string, options: FindOptions): FindFull
  * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
  * @param options
  */
-function _findWordNode(root: TrieNode, word: string, options: FindOptions): FindFullNodeResult {
+function _findWordNode(root: Root, word: string, options: FindOptions): FindFullNodeResult {
     const compoundMode = knownCompoundModes.get(options.compoundMode) || _defaultFindOptions.compoundMode;
-    const compoundPrefix = options.compoundMode === 'compound' ? options.compoundFix : '';
-    const ignoreCasePrefix = options.matchCase ? '' : options.caseInsensitivePrefix;
+    const compoundPrefix = options.compoundMode === 'compound' ? root.compoundCharacter ?? options.compoundFix : '';
+    const ignoreCasePrefix = options.matchCase ? '' : root.stripCaseAndAccentsPrefix ?? options.caseInsensitivePrefix;
 
     function __findCompound(): FindFullNodeResult {
         const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix);
@@ -144,7 +146,7 @@ function _findWordNode(root: TrieNode, word: string, options: FindOptions): Find
     }
 }
 
-export function findLegacyCompound(root: TrieNode, word: string, options: FindOptions): FindFullNodeResult {
+export function findLegacyCompound(root: Root, word: string, options: FindOptions): FindFullNodeResult {
     const roots: (TrieNode | undefined)[] = [root];
     if (!options.matchCase) {
         roots.push(walk(root, options.caseInsensitivePrefix));
@@ -153,20 +155,21 @@ export function findLegacyCompound(root: TrieNode, word: string, options: FindOp
 }
 
 interface FindCompoundChain {
-    n: TrieNode | undefined;
+    n: Root | undefined;
     cr: TrieNode | undefined;
     compoundPrefix: string;
     caseMatched: boolean;
 }
 
 export function findCompoundNode(
-    root: TrieNode | undefined,
+    root: Root | undefined,
     word: string,
     compoundCharacter: string,
     ignoreCasePrefix: string
 ): FindFullNodeResult {
     // Approach - do a depth first search for the matching word.
     const stack: FindCompoundChain[] = [
+        // { n: root, compoundPrefix: '', cr: undefined, caseMatched: true },
         { n: root, compoundPrefix: ignoreCasePrefix, cr: undefined, caseMatched: true },
     ];
     const compoundPrefix = compoundCharacter || ignoreCasePrefix;
@@ -175,7 +178,7 @@ export function findCompoundNode(
 
     function determineRoot(s: FindCompoundChain): FindCompoundChain {
         const prefix = s.compoundPrefix;
-        let r = root;
+        let r: TrieNode | undefined = root;
         let i;
         for (i = 0; i < prefix.length && r; ++i) {
             r = r.c?.get(prefix[i]);
@@ -240,7 +243,7 @@ export function findCompoundNode(
 }
 
 function findCompoundWord(
-    root: TrieNode | undefined,
+    root: Root | undefined,
     word: string,
     compoundCharacter: string,
     ignoreCasePrefix: string
@@ -258,7 +261,7 @@ function findCompoundWord(
     return { found, compoundUsed, node, forbidden: undefined, caseMatched };
 }
 
-export function findWordExact(root: TrieNode | undefined, word: string): boolean {
+export function findWordExact(root: Root | TrieNode | undefined, word: string): boolean {
     return isEndOfWordNode(walk(root, word));
 }
 
@@ -266,7 +269,7 @@ export function isEndOfWordNode(n: TrieNode | undefined): boolean {
     return n?.f === FLAG_WORD;
 }
 
-function walk(root: TrieNode | undefined, word: string): TrieNode | undefined {
+function walk(root: Root | TrieNode | undefined, word: string): TrieNode | undefined {
     const w = word;
     let n: TrieNode | undefined = root;
     let i = 0;
@@ -379,7 +382,7 @@ function findLegacyCompoundWord(roots: (TrieNode | undefined)[], word: string, m
     return { found, compoundUsed, caseMatched };
 }
 
-export function isForbiddenWord(root: TrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
+export function isForbiddenWord(root: Root | TrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
     return findWordExact(root?.c?.get(forbiddenPrefix), word);
 }
 

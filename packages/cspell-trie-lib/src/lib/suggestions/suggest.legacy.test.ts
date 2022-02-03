@@ -1,8 +1,8 @@
-import * as Sug from './suggest';
-import { SuggestionResult } from './suggestCollector';
 import { Trie } from '../trie';
-import { TrieNode } from '../TrieNode';
 import { isWordTerminationNode } from '../trie-util';
+import { TrieNode } from '../TrieNode';
+import * as Sug from './suggest';
+import { SuggestionResultBase } from './suggestCollector';
 import { walker } from './walker';
 
 describe('Validate Suggest', () => {
@@ -81,21 +81,21 @@ function legacySuggest(
     root: TrieNode,
     word: string,
     maxNumSuggestions: number = defaultMaxNumberSuggestions
-): SuggestionResult[] {
+): SuggestionResultBase[] {
     const bc = baseCost;
     const psc = postSwapCost;
-    const sugs: SuggestionResult[] = [];
+    const sugs: SuggestionResultBase[] = [];
     const matrix: number[][] = [[]];
     const x = ' ' + word;
     const mx = x.length - 1;
 
     let costLimit = Math.min((bc * word.length) / 2, bc * MAX_NUM_CHANGES);
 
-    function comp(a: SuggestionResult, b: SuggestionResult): number {
+    function comp(a: SuggestionResultBase, b: SuggestionResultBase): number {
         return a.cost - b.cost || a.word.length - b.word.length || (a.word < b.word ? -1 : 1);
     }
 
-    function emitSug(sug: SuggestionResult) {
+    function emitSug(sug: SuggestionResultBase) {
         sugs.push(sug);
         if (sugs.length > maxNumSuggestions) {
             sugs.sort(comp);

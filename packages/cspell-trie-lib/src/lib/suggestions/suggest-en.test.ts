@@ -183,7 +183,7 @@ describe('Validate English Suggestions', () => {
     test.each`
         word        | expected
         ${''}       | ${[]}
-        ${'mexico'} | ${[s('Mexico', 1), s('medico', 100), s('Mexican', 151), s("Mexico's", 211)]}
+        ${'mexico'} | ${[s('Mexico', 1), s('medico', 100), s('Mexican', 151), s("Mexico's", 191)]}
         ${'boat'}   | ${ac([s('boat', 0), s('boar', 100), s('boast', 100)])}
     `('Suggestions with weightMap', async ({ word, expected }) => {
         await pReady;
@@ -247,7 +247,7 @@ const defaultDictInfo: DictionaryInformation = {
             description: "Do not rank `'s` high on the list.",
             map: "($)('$)('s$)|(s$)(s'$)(s's$)",
             replace: 10,
-            penalty: 200,
+            penalty: 180,
         },
         {
             map: '(eur)(uur)',

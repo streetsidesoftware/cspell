@@ -181,11 +181,10 @@ export function isCircular(root: TrieNode): boolean {
  */
 export function mergeDefaults<T>(value: PartialWithUndefined<T> | undefined, defaultValue: T): T {
     const result = { ...defaultValue };
-    const allowedKeys = new Set(Object.keys(defaultValue));
     if (value) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         for (const [k, v] of Object.entries(value) as [keyof T, any][]) {
-            if (allowedKeys.has(k as string)) {
+            if (k in result) {
                 result[k] = v ?? result[k];
             }
         }

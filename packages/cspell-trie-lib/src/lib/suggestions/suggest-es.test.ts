@@ -58,7 +58,7 @@ describe('Validate Spanish Suggestions', () => {
         word      | ignoreCase | expectedWords
         ${'niño'} | ${false}   | ${[c('niño', 0), c('niños', 50), c('niña', 75), c('niñeo', 75)]}
         ${'nïño'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76)]}
-        ${'nino'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76), c('nido', 100), c('nito', 100), c('ninfo', 100)]}
+        ${'nino'} | ${false}   | ${[c('niño', 1), c('niños', 51), c('niña', 76), c('niñeo', 76)]}
     `('Tests suggestions weighted "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
         jest.setTimeout(5000);
         const trie = await getTrie();

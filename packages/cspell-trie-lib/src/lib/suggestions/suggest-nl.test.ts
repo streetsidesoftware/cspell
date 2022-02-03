@@ -3,9 +3,10 @@ import { mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from
 import { readRawDictionaryFile, readSampleTrie } from '../../test/dictionaries.test.helper';
 import { DictionaryInformation } from '../models/DictionaryInformation';
 import { clean } from '../utils/util';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './suggestCollector';
 
 function getTrie() {
-    return readSampleTrie('nl_compound_trie3.trie.gz');
+    return readSampleTrie('nl_nl.trie.gz');
 }
 
 const timeout = 5000;
@@ -37,13 +38,14 @@ describe('Validate Dutch Suggestions', () => {
 
     // cspell:ignore burtbewoners burgbewoners
     // cspell:ignore buurtbwoners buurtbewoner buurbewoners
+    // cspell:ignore bultbewoners buutbewoners
 
     test.each`
         word               | numSuggestions | expected
         ${'Mexico-Stad'}   | ${2}           | ${[sr('Mexico-Stad', 0), sr('mexico-stad', 2)]}
         ${'mexico-stad'}   | ${2}           | ${[sr('mexico-stad', 0), sr('Mexico-Stad', 2)]}
         ${'buurtbewoners'} | ${3}           | ${[sr('buurtbewoners', 0), sr('buurtbewoner', 88), sr('buurbewoners', 96)]}
-        ${'burtbewoners'}  | ${2}           | ${ac([sr('burgbewoners', 96), sr('buurtbewoners', 97)])}
+        ${'burtbewoners'}  | ${2}           | ${[sr('bultbewoners', 97), sr('buutbewoners', 97), sr('buurtbewoners', 97)]}
         ${'buurtbwoners'}  | ${1}           | ${[sr('buurtbewoners', 93)]}
         ${'buurtbewoners'} | ${1}           | ${[sr('buurtbewoners', 0)]}
         ${'positive'}      | ${4}           | ${ac([sr('positivo', 92), sr('positieve', 93), sr('positie', 94)])}
@@ -72,24 +74,26 @@ describe('Validate Dutch Suggestions', () => {
     );
 
     function sr(word: string, cost: number, compoundWord?: string): SuggestionResult {
-        return clean({ word, cost, compoundWord: compoundWord?.replace(/[|+]/g, '•') });
+        return clean({ word, cost, compoundWord: compoundWord?.replace(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR) });
     }
 
     // cspell:ignore buurt kasteloos kosten maan
+    // cspell:ignore baan buurbaan Buurma buurmans
     test.each`
         word             | expected
-        ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buur', 100), sr('buut', 100)]}
+        ${'buurt'}       | ${[sr('buurt', 0), sr('beurt', 40), sr('buut', 70), sr('brut', 75)]}
         ${'eén'}         | ${ac([sr('een', 1)])}
-        ${'buurmaan'}    | ${ac([/* sr('buurman', 45), */ sr('buurmaan', 50, 'buur|maan')])}
+        ${'buurman'}     | ${[sr('buurman', 0), sr('Buurma', 76), sr('buurmaan', 95, 'buur|maan'), sr('buurmans', 100)]}
+        ${'buurmaan'}    | ${ac([sr('buurman', 45), sr('buurmaan', 50, 'buur|maan'), sr('buurbaan', 75, 'buur|baan')])}
         ${'positeve'}    | ${ac([sr('positieve', 45), sr('positieven', 90)])}
         ${'positieven'}  | ${ac([sr('positieven', 0), sr('positieve', 45)])}
         ${'positive'}    | ${ac([sr('positieve', 45)])}
         ${'verklaaring'} | ${ac([sr('verklaring', 45)])}
         ${'Mexico-Stad'} | ${ac([sr('Mexico-Stad', 0)])}
-        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-stad', 51, 'Mexico-•stad')])}
+        ${'mexico-stad'} | ${ac([sr('Mexico-Stad', 2), sr('Mexico-stad', 51, 'Mexico-|stad')])}
         ${'word'}        | ${ac([sr('word', 0), sr('wordt', 30)])}
         ${'kostelos'}    | ${ac([sr('kosteloos', 45) /*, sr('kostenloos', 90) */])}
-        ${'kosteloos'}   | ${ac([sr('kosteloos', 0), sr('kasteloos', 50), sr('kostenloos', 95, 'kosten•loos')])}
+        ${'kosteloos'}   | ${ac([sr('kosteloos', 0), sr('kasteloos', 50), sr('kostenloos', 95, 'kosten|loos')])}
     `('Weighted Results "$word"', async ({ word, expected }) => {
         await pReady;
         const trie = await pTrieNL;
