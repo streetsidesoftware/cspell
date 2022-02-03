@@ -123,6 +123,7 @@ const settings: CSpellSettings = {
         '@cspell/dict-powershell/cspell-ext.json',
         '@cspell/dict-public-licenses/cspell-ext.json',
         '@cspell/dict-python/cspell-ext.json',
+        '@cspell/dict-r/cspell-ext.json',
         '@cspell/dict-ruby/cspell-ext.json',
         '@cspell/dict-rust/cspell-ext.json',
         '@cspell/dict-scala/cspell-ext.json',
