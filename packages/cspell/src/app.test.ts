@@ -200,8 +200,7 @@ describe('Validate cli', () => {
         // eslint-disable-next-line jest/no-conditional-expect
         eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
         expect(capture.text).toMatchSnapshot();
-        const logOutput = log.mock.calls.map((call) => Util.format(...call)).join('\n');
-        expect(logOutput).toMatchSnapshot();
+        expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
     });
 
     test.each`
@@ -216,8 +215,7 @@ describe('Validate cli', () => {
         const args = argv(...testArgs);
         await app.run(commander, args);
         expect(capture.text).toMatchSnapshot();
-        const logOutput = log.mock.calls.map((call) => Util.format(...call)).join('\n');
-        expect(logOutput).toMatchSnapshot();
+        expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
     });
 
     test.each`
@@ -320,6 +318,11 @@ function _removePathsFromGlobalImports(): typeof Link['removePathsFromGlobalImpo
 
 type StdoutWrite = typeof process.stdout.write;
 type Callback = (err?: Error) => void;
+
+function normalizeLogCalls(calls: string[][]): string {
+    const logOutput = calls.map((call) => Util.format(...call)).join('\n');
+    return logOutput.replace(/\\/g, '/');
+}
 
 function makeLogger() {
     const history: string[] = [];
