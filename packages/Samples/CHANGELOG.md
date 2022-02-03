@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.18.1](https://github.com/streetsidesoftware/cspell/compare/v5.18.0...v5.18.1) (2022-02-03)
+
+
+### Bug Fixes
+
+* Improve suggestions when using weights. ([#2387](https://github.com/streetsidesoftware/cspell/issues/2387)) ([c9d070d](https://github.com/streetsidesoftware/cspell/commit/c9d070d86a7f021f22428b2da56a98f185c3a128))
+
+
+
+
+
 # [5.18.0](https://github.com/streetsidesoftware/cspell/compare/v5.18.0-alpha.0...v5.18.0) (2022-01-31)
 
 **Note:** Version bump only for package cspell-tools-samples
