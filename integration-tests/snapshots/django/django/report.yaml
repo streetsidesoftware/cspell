@@ -5,7 +5,7 @@ Args: ["**/*.{md,py}"]
 Summary:
   files: 2734
   filesWithIssues: 859
-  issues: 7730
+  issues: 7728
   errors: 0
 Errors: []
 
@@ -606,13 +606,12 @@ issues:
   - "django/middleware/csrf.py:424:31    	dont	U   	if getattr(request, '_dont_enforce_csrf_checks"
   - "django/middleware/csrf.py:441:62    	MITM	U   	(man-in-the-middle, MITM) sends a"
   - "django/template/__init__.py:34:19   	smartif 	U   	- django.template.smartif"
-  - "django/template/base.py:245:9   	upto            	U   	upto = 0"
-  - "django/template/base.py:606:19  	strdq           	U   	(?:%(i18n_open)s%(strdq)s%(i18n_close)s|"
-  - "django/template/base.py:607:16  	strsq           	U   	%(i18n_open)s%(strsq)s%(i18n_close)s|"
-  - "django/template/base.py:739:9   	plen            	U   	plen = len(provided) + 1"
-  - "django/template/base.py:744:9   	alen            	U   	alen = len(args)"
-  - "django/template/base.py:745:9   	dlen            	U   	dlen = len(defaults or ["
-  - "django/template/base.py:881:48  	unsubscriptable 	U   	TypeError): # unsubscriptable object"
+  - "django/template/base.py:245:9   	upto    	U   	upto = 0"
+  - "django/template/base.py:606:19  	strdq   	U   	(?:%(i18n_open)s%(strdq)s%(i18n_close)s|"
+  - "django/template/base.py:607:16  	strsq   	U   	%(i18n_open)s%(strsq)s%(i18n_close)s|"
+  - "django/template/base.py:739:9   	plen    	U   	plen = len(provided) + 1"
+  - "django/template/base.py:744:9   	alen    	U   	alen = len(args)"
+  - "django/template/base.py:745:9   	dlen    	U   	dlen = len(defaults or ["
   - "django/template/defaultfilters.py:9:20      	pformat     	U   	from pprint import pformat"
   - "django/template/defaultfilters.py:125:55    	unlocalized 	U   	force the result to be unlocalized. When the"
   - "django/template/defaultfilters.py:176:5     	tupl        	U   	tupl = d.as_tuple()"
@@ -1945,7 +1944,6 @@ issues:
   - "tests/test_client_regress/tests.py:1258:22  	собака          	U   	text = 'dog: собака'"
   - "tests/test_client_regress/urls.py:34:40     	undecodable 	U   	binary/', views.return_undecodable_binary),"
   - "tests/test_client_regress/views.py:50:38    	unescapes   	U   	the test framework unescapes the %20 before passing"
-  - "tests/test_client/tests.py:156:11   	Vendored    	U   	# Vendored tree JSON content types"
   - "tests/test_client/tests.py:604:67   	nopassword  	U   	otheruser', password='nopassword')"
   - "tests/test_client/tests.py:791:49   	descript    	U   	ValueError rather than a non-descript AssertionError."
   - "tests/test_runner_apps/sample/tests_sample.py:21:11     	Zimple  	U   	class TestZimpleTestCase(SimpleTestCase"
