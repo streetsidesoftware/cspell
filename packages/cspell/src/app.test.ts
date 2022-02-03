@@ -205,6 +205,22 @@ describe('Validate cli', () => {
     });
 
     test.each`
+        msg              | testArgs
+        ${'trace hello'} | ${['trace', 'hello']}
+        ${'trace café'}  | ${['trace', 'café'.normalize('NFD')]}
+        ${'trace hello'} | ${['trace', '--locale=en-gb', 'hello']}
+        ${'suggest'}     | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
+    `('app success $msg run with $testArgs', async ({ testArgs }: TestCase) => {
+        chalk.level = 0;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        await app.run(commander, args);
+        expect(capture.text).toMatchSnapshot();
+        const logOutput = log.mock.calls.map((call) => Util.format(...call)).join('\n');
+        expect(logOutput).toMatchSnapshot();
+    });
+
+    test.each`
         msg              | testArgs                                                 | errorCheck   | eError   | eLog    | eInfo
         ${'link'}        | ${['link']}                                              | ${undefined} | ${false} | ${true} | ${false}
         ${'link ls'}     | ${['link', 'ls']}                                        | ${undefined} | ${false} | ${true} | ${false}

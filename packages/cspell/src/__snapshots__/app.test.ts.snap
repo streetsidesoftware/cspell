@@ -594,6 +594,154 @@ log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
+exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 1`] = `Array []`;
+
+exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 2`] = `
+"café
+ - café"
+`;
+
+exports[`Validate cli app success trace café run with ["trace", "café"] 1`] = `Array []`;
+
+exports[`Validate cli app success trace café run with ["trace", "café"] 2`] = `
+"Word F Dictionary           Dictionary Location           
+café - [flagWords]*         From Settings \`flagWords\`
+café - [ignoreWords]*       From Settings \`ignoreWords\`
+café - [words]*             From Settings \`words\`
+café - ada                  ../cspell-bundled-dicts/...spell/dict-ada/ada.txt.gz
+café - aws*                 ../cspell-bundled-dicts/...spell/dict-aws/aws.txt.gz
+café - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
+café - bash                 ../cspell-bundled-dicts/...ct-bash/bash-words.txt.gz
+café - companies*           ../cspell-bundled-dicts/...ompanies/companies.txt.gz
+café - cpp                  ../cspell-bundled-dicts/...spell/dict-cpp/cpp.txt.gz
+café - cryptocurrencies*    ../cspell-bundled-dicts/...s/cryptocurrencies.txt.gz
+café - csharp               ../cspell-bundled-dicts/...dict-csharp/csharp.txt.gz
+café - css                  ../cspell-bundled-dicts/...spell/dict-css/css.txt.gz
+café - django               ../cspell-bundled-dicts/...dict-django/django.txt.gz
+café - dotnet               ../cspell-bundled-dicts/...dict-dotnet/dotnet.txt.gz
+café - elixir               ../cspell-bundled-dicts/...dict-elixir/elixir.txt.gz
+café * en_us*               ../cspell-bundled-dicts/.../dict-en_us/en_US.trie.gz
+café * en-gb                ../cspell-bundled-dicts/.../dict-en-gb/en_GB.trie.gz
+café - filetypes*           ../cspell-bundled-dicts/...iletypes/filetypes.txt.gz
+café - fonts                ../cspell-bundled-dicts/...l/dict-fonts/fonts.txt.gz
+café - fullstack            ../cspell-bundled-dicts/...ullstack/fullstack.txt.gz
+café - golang               ../cspell-bundled-dicts/...ell/dict-golang/go.txt.gz
+café - haskell              ../cspell-bundled-dicts/...ct-haskell/haskell.txt.gz
+café - html                 ../cspell-bundled-dicts/...ell/dict-html/html.txt.gz
+café - html-symbol-entitie  ../cspell-bundled-dicts/...-entities/entities.txt.gz
+café - java                 ../cspell-bundled-dicts/...ell/dict-java/java.txt.gz
+café - latex                ../cspell-bundled-dicts/...l/dict-latex/latex.txt.gz
+café - lorem-ipsum          ../cspell-bundled-dicts/...m-ipsum/dictionary.txt.gz
+café - lua                  ../cspell-bundled-dicts/...spell/dict-lua/lua.txt.gz
+café - node                 ../cspell-bundled-dicts/...ell/dict-node/node.txt.gz
+café - npm                  ../cspell-bundled-dicts/...spell/dict-npm/npm.txt.gz
+café - php                  ../cspell-bundled-dicts/...spell/dict-php/php.txt.gz
+café - powershell           ../cspell-bundled-dicts/...ershell/powershell.txt.gz
+café - public-licenses*     ../cspell-bundled-dicts/...es/public-licenses.txt.gz
+café - python               ../cspell-bundled-dicts/...dict-python/python.txt.gz
+café - ruby                 ../cspell-bundled-dicts/...ell/dict-ruby/ruby.txt.gz
+café - rust                 ../cspell-bundled-dicts/...ell/dict-rust/rust.txt.gz
+café - scala                ../cspell-bundled-dicts/...l/dict-scala/scala.txt.gz
+café - softwareTerms*       ../cspell-bundled-dicts/...erms/softwareTerms.txt.gz
+café - swift                ../cspell-bundled-dicts/...l/dict-swift/swift.txt.gz
+café - typescript           ../cspell-bundled-dicts/...escript/typescript.txt.gz
+café - workspace*           ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli app success trace hello run with ["trace", "--locale=en-gb", "hello"] 1`] = `Array []`;
+
+exports[`Validate cli app success trace hello run with ["trace", "--locale=en-gb", "hello"] 2`] = `
+"Word  F Dictionary           Dictionary Location           
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [words]*             From Settings \`words\`
+hello - ada                  ../cspell-bundled-dicts/...pell/dict-ada/ada.txt.gz
+hello - aws*                 ../cspell-bundled-dicts/...pell/dict-aws/aws.txt.gz
+hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
+hello - bash                 ../cspell-bundled-dicts/...t-bash/bash-words.txt.gz
+hello - companies*           ../cspell-bundled-dicts/...mpanies/companies.txt.gz
+hello * cpp                  ../cspell-bundled-dicts/...pell/dict-cpp/cpp.txt.gz
+hello - cryptocurrencies*    ../cspell-bundled-dicts/.../cryptocurrencies.txt.gz
+hello - csharp               ../cspell-bundled-dicts/...ict-csharp/csharp.txt.gz
+hello - css                  ../cspell-bundled-dicts/...pell/dict-css/css.txt.gz
+hello - django               ../cspell-bundled-dicts/...ict-django/django.txt.gz
+hello - dotnet               ../cspell-bundled-dicts/...ict-dotnet/dotnet.txt.gz
+hello - elixir               ../cspell-bundled-dicts/...ict-elixir/elixir.txt.gz
+hello * en_us                ../cspell-bundled-dicts/...dict-en_us/en_US.trie.gz
+hello * en-gb*               ../cspell-bundled-dicts/...dict-en-gb/en_GB.trie.gz
+hello - filetypes*           ../cspell-bundled-dicts/...letypes/filetypes.txt.gz
+hello - fonts                ../cspell-bundled-dicts/.../dict-fonts/fonts.txt.gz
+hello - fullstack            ../cspell-bundled-dicts/...llstack/fullstack.txt.gz
+hello * golang               ../cspell-bundled-dicts/...ll/dict-golang/go.txt.gz
+hello - haskell              ../cspell-bundled-dicts/...t-haskell/haskell.txt.gz
+hello - html                 ../cspell-bundled-dicts/...ll/dict-html/html.txt.gz
+hello - html-symbol-entitie  ../cspell-bundled-dicts/...entities/entities.txt.gz
+hello - java                 ../cspell-bundled-dicts/...ll/dict-java/java.txt.gz
+hello - latex                ../cspell-bundled-dicts/.../dict-latex/latex.txt.gz
+hello - lorem-ipsum          ../cspell-bundled-dicts/...-ipsum/dictionary.txt.gz
+hello - lua                  ../cspell-bundled-dicts/...pell/dict-lua/lua.txt.gz
+hello * node                 ../cspell-bundled-dicts/...ll/dict-node/node.txt.gz
+hello - npm                  ../cspell-bundled-dicts/...pell/dict-npm/npm.txt.gz
+hello - php                  ../cspell-bundled-dicts/...pell/dict-php/php.txt.gz
+hello - powershell           ../cspell-bundled-dicts/...rshell/powershell.txt.gz
+hello - public-licenses*     ../cspell-bundled-dicts/...s/public-licenses.txt.gz
+hello - python               ../cspell-bundled-dicts/...ict-python/python.txt.gz
+hello - ruby                 ../cspell-bundled-dicts/...ll/dict-ruby/ruby.txt.gz
+hello - rust                 ../cspell-bundled-dicts/...ll/dict-rust/rust.txt.gz
+hello - scala                ../cspell-bundled-dicts/.../dict-scala/scala.txt.gz
+hello - softwareTerms*       ../cspell-bundled-dicts/...rms/softwareTerms.txt.gz
+hello - swift                ../cspell-bundled-dicts/.../dict-swift/swift.txt.gz
+hello - typescript           ../cspell-bundled-dicts/...script/typescript.txt.gz
+hello - workspace*           ../../cspell-dict.txt"
+`;
+
+exports[`Validate cli app success trace hello run with ["trace", "hello"] 1`] = `Array []`;
+
+exports[`Validate cli app success trace hello run with ["trace", "hello"] 2`] = `
+"Word  F Dictionary           Dictionary Location           
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [words]*             From Settings \`words\`
+hello - ada                  ../cspell-bundled-dicts/...pell/dict-ada/ada.txt.gz
+hello - aws*                 ../cspell-bundled-dicts/...pell/dict-aws/aws.txt.gz
+hello - backwards-compatibi* ../cspell-bundled-dicts/compatibility-words.txt.gz
+hello - bash                 ../cspell-bundled-dicts/...t-bash/bash-words.txt.gz
+hello - companies*           ../cspell-bundled-dicts/...mpanies/companies.txt.gz
+hello * cpp                  ../cspell-bundled-dicts/...pell/dict-cpp/cpp.txt.gz
+hello - cryptocurrencies*    ../cspell-bundled-dicts/.../cryptocurrencies.txt.gz
+hello - csharp               ../cspell-bundled-dicts/...ict-csharp/csharp.txt.gz
+hello - css                  ../cspell-bundled-dicts/...pell/dict-css/css.txt.gz
+hello - django               ../cspell-bundled-dicts/...ict-django/django.txt.gz
+hello - dotnet               ../cspell-bundled-dicts/...ict-dotnet/dotnet.txt.gz
+hello - elixir               ../cspell-bundled-dicts/...ict-elixir/elixir.txt.gz
+hello * en_us*               ../cspell-bundled-dicts/...dict-en_us/en_US.trie.gz
+hello * en-gb                ../cspell-bundled-dicts/...dict-en-gb/en_GB.trie.gz
+hello - filetypes*           ../cspell-bundled-dicts/...letypes/filetypes.txt.gz
+hello - fonts                ../cspell-bundled-dicts/.../dict-fonts/fonts.txt.gz
+hello - fullstack            ../cspell-bundled-dicts/...llstack/fullstack.txt.gz
+hello * golang               ../cspell-bundled-dicts/...ll/dict-golang/go.txt.gz
+hello - haskell              ../cspell-bundled-dicts/...t-haskell/haskell.txt.gz
+hello - html                 ../cspell-bundled-dicts/...ll/dict-html/html.txt.gz
+hello - html-symbol-entitie  ../cspell-bundled-dicts/...entities/entities.txt.gz
+hello - java                 ../cspell-bundled-dicts/...ll/dict-java/java.txt.gz
+hello - latex                ../cspell-bundled-dicts/.../dict-latex/latex.txt.gz
+hello - lorem-ipsum          ../cspell-bundled-dicts/...-ipsum/dictionary.txt.gz
+hello - lua                  ../cspell-bundled-dicts/...pell/dict-lua/lua.txt.gz
+hello * node                 ../cspell-bundled-dicts/...ll/dict-node/node.txt.gz
+hello - npm                  ../cspell-bundled-dicts/...pell/dict-npm/npm.txt.gz
+hello - php                  ../cspell-bundled-dicts/...pell/dict-php/php.txt.gz
+hello - powershell           ../cspell-bundled-dicts/...rshell/powershell.txt.gz
+hello - public-licenses*     ../cspell-bundled-dicts/...s/public-licenses.txt.gz
+hello - python               ../cspell-bundled-dicts/...ict-python/python.txt.gz
+hello - ruby                 ../cspell-bundled-dicts/...ll/dict-ruby/ruby.txt.gz
+hello - rust                 ../cspell-bundled-dicts/...ll/dict-rust/rust.txt.gz
+hello - scala                ../cspell-bundled-dicts/.../dict-scala/scala.txt.gz
+hello - softwareTerms*       ../cspell-bundled-dicts/...rms/softwareTerms.txt.gz
+hello - swift                ../cspell-bundled-dicts/.../dict-swift/swift.txt.gz
+hello - typescript           ../cspell-bundled-dicts/...script/typescript.txt.gz
+hello - workspace*           ../../cspell-dict.txt"
+`;
+
 exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 1`] = `Array []`;
 
 exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 2`] = `
