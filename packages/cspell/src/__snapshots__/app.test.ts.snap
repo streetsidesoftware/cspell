@@ -10,6 +10,14 @@ log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
 `;
 
+exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/2 [90m./samples/fail-fast/first-fail.txt[39m ...
+2/2 [90m./samples/fail-fast/second-fail.txt[39m ...",
+]
+`;
+
 exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
@@ -18,12 +26,26 @@ log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
 error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
 `;
 
+exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/2 [90m./samples/fail-fast/first-fail.txt[39m ...",
+]
+`;
+
 exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 2`] = `
 "error	1/2 ./samples/fail-fast/first-fail.txt 0.00ms X
 log	./samples/fail-fast/first-fail.txt:1:1 - Unknown word (iamtypo)
 error	CSpell: Files checked: 1, Issues found: 1 in 1 files"
+`;
+
+exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/2 [90m./samples/fail-fast/first-fail.txt[39m ...",
+]
 `;
 
 exports[`Validate cli app --help Expect Error: outputHelp 1`] = `
@@ -53,6 +75,8 @@ Array [
 
 exports[`Validate cli app --help Expect Error: outputHelp 2`] = `""`;
 
+exports[`Validate cli app --help Expect Error: outputHelp 3`] = `Array []`;
+
 exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
@@ -63,11 +87,26 @@ log	./samples/fail-fast/second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files"
 `;
 
+exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/2 [90m./samples/fail-fast/first-fail.txt[39m ...
+2/2 [90m./samples/fail-fast/second-fail.txt[39m ...",
+]
+`;
+
 exports[`Validate cli app LICENSE Expect Error: undefined 1`] = `Array []`;
 
 exports[`Validate cli app LICENSE Expect Error: undefined 2`] = `
 "error	1/1 ./LICENSE 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli app LICENSE Expect Error: undefined 3`] = `
+Array [
+  "
+1/1 [90m./LICENSE[39m ...",
+]
 `;
 
 exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 1`] = `Array []`;
@@ -76,6 +115,8 @@ exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 2`] = 
 "error	Configuration Error: Failed to find config file at: \\"./src/app.test.ts\\"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
+
+exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 3`] = `Array []`;
 
 exports[`Validate cli app check LICENSE Expect Error: undefined 1`] = `
 Array [
@@ -111,6 +152,8 @@ log
 log	"
 `;
 
+exports[`Validate cli app check LICENSE Expect Error: undefined 3`] = `Array []`;
+
 exports[`Validate cli app check help Expect Error: outputHelp 1`] = `
 Array [
   "Usage: cspell check [options] <files...>",
@@ -129,6 +172,8 @@ Array [
 
 exports[`Validate cli app check help Expect Error: outputHelp 2`] = `""`;
 
+exports[`Validate cli app check help Expect Error: outputHelp 3`] = `Array []`;
+
 exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 2`] = `
@@ -136,6 +181,8 @@ exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 2`]
 log	
 error	File not found \\"./missing-file.txt\\""
 `;
+
+exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 3`] = `Array []`;
 
 exports[`Validate cli app check with spelling errors Expect Error: [Function CheckFailed] 1`] = `
 Array [
@@ -243,11 +290,20 @@ log
 log	"
 `;
 
+exports[`Validate cli app check with spelling errors Expect Error: [Function CheckFailed] 3`] = `Array []`;
+
 exports[`Validate cli app cspell-bad.json Expect Error: undefined 1`] = `Array []`;
 
 exports[`Validate cli app cspell-bad.json Expect Error: undefined 2`] = `
 "error	1/1 ./src/app.test.ts 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli app cspell-bad.json Expect Error: undefined 3`] = `
+Array [
+  "
+1/1 [90m./src/app.test.ts[39m ...",
+]
 `;
 
 exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 1`] = `Array []`;
@@ -256,6 +312,8 @@ exports[`Validate cli app cspell-import-missing.json Expect Error: [Function Che
 "error	Configuration Error: Failed to read config file: \\"./samples/intentionally-missing-file.json\\"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
+
+exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 3`] = `Array []`;
 
 exports[`Validate cli app current_file --verbose Expect Error: undefined 1`] = `Array []`;
 
@@ -293,6 +351,13 @@ error	1/1 ./src/app.test.ts 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
+exports[`Validate cli app current_file --verbose Expect Error: undefined 3`] = `
+Array [
+  "
+1/1 [90m./src/app.test.ts[39m ...",
+]
+`;
+
 exports[`Validate cli app current_file Expect Error: undefined 1`] = `Array []`;
 
 exports[`Validate cli app current_file Expect Error: undefined 2`] = `
@@ -300,11 +365,25 @@ exports[`Validate cli app current_file Expect Error: undefined 2`] = `
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
+exports[`Validate cli app current_file Expect Error: undefined 3`] = `
+Array [
+  "
+1/1 [90m./src/app.test.ts[39m ...",
+]
+`;
+
 exports[`Validate cli app current_file languageId Expect Error: undefined 1`] = `Array []`;
 
 exports[`Validate cli app current_file languageId Expect Error: undefined 2`] = `
 "error	1/1 ./src/app.test.ts 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
+`;
+
+exports[`Validate cli app current_file languageId Expect Error: undefined 3`] = `
+Array [
+  "
+1/1 [90m./src/app.test.ts[39m ...",
+]
 `;
 
 exports[`Validate cli app link 1`] = `Array []`;
@@ -321,9 +400,13 @@ exports[`Validate cli app must find force no error Expect Error: undefined 1`] =
 
 exports[`Validate cli app must find force no error Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
 
+exports[`Validate cli app must find force no error Expect Error: undefined 3`] = `Array []`;
+
 exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+
+exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 3`] = `Array []`;
 
 exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
 Array [
@@ -394,9 +477,13 @@ Array [
 
 exports[`Validate cli app no-args Expect Error: outputHelp 2`] = `""`;
 
+exports[`Validate cli app no-args Expect Error: outputHelp 3`] = `Array []`;
+
 exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
+
+exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 3`] = `Array []`;
 
 exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
@@ -592,6 +679,13 @@ log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
 log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
 log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/1 [90m./samples/Dutch.txt[39m ...",
+]
 `;
 
 exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 1`] = `Array []`;
@@ -1193,6 +1287,18 @@ log	./samples/text.txt:5:32 - Unknown word (reead)
 error	CSpell: Files checked: 6, Issues found: 7 in 1 files"
 `;
 
+exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/6 [90m./samples/cspell-bad.json[39m ...
+2/6 [90m./samples/cspell-includes.json[39m ...
+3/6 [90m./samples/cspell-missing-dict.json[39m ...
+4/6 [90m./samples/sample.c[39m ...
+5/6 [90m./samples/sample.py[39m ...
+6/6 [90m./samples/text.txt[39m ...",
+]
+`;
+
 exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 2`] = `
@@ -1201,6 +1307,13 @@ log	./samples/src/sample-with-forbidden-words.md:3:3 - Forbidden word (behaviour
 log	./samples/src/sample-with-forbidden-words.md:4:3 - Forbidden word (flavour)
 log	./samples/src/sample-with-forbidden-words.md:5:3 - Forbidden word (colour)
 error	CSpell: Files checked: 1, Issues found: 3 in 1 files"
+`;
+
+exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/1 [90m./samples/src/sample-with-forbidden-words.md[39m ...",
+]
 `;
 
 exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
@@ -1401,6 +1514,8 @@ exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: 
 
 exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 2`] = `""`;
 
+exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 3`] = `Array []`;
+
 exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 2`] = `
@@ -1595,6 +1710,13 @@ log	./samples/Dutch.txt[77, 71]: Unknown word: beogende
 log	./samples/Dutch.txt[78, 4]: Unknown word: instelling
 log	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/1 [90m./samples/Dutch.txt[39m ...",
+]
 `;
 
 exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
@@ -1793,6 +1915,13 @@ log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
 `;
 
+exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/1 [90m./samples/Dutch.txt[39m ...",
+]
+`;
+
 exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 1`] = `Array []`;
 
 exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 2`] = `
@@ -1987,4 +2116,11 @@ log	beogende
 log	instelling
 log	ANBI
 error	CSpell: Files checked: 1, Issues found: 189 in 1 files"
+`;
+
+exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 3`] = `
+Array [
+  "
+1/1 [90m./samples/Dutch.txt[39m ...",
+]
 `;

@@ -29,21 +29,33 @@ export type ErrorEmitter = (message: string, error: ErrorLike) => void;
 
 export type SpellingErrorEmitter = (issue: Issue) => void;
 
-export type ProgressTypes = 'ProgressFileComplete';
-export type ProgressItem = ProgressFileComplete;
+export type ProgressTypes = 'ProgressFileBegin' | 'ProgressFileComplete';
+export type ProgressItem = ProgressFileBegin | ProgressFileComplete;
 
-interface ProgressBase {
+export interface ProgressBase {
     type: ProgressTypes;
 }
-export interface ProgressFileComplete extends ProgressBase {
-    type: 'ProgressFileComplete';
+
+export interface ProgressFileBase extends ProgressBase {
+    type: ProgressTypes;
     fileNum: number;
     fileCount: number;
     filename: string;
+}
+
+export interface ProgressFileComplete extends ProgressFileBase {
+    type: 'ProgressFileComplete';
     elapsedTimeMs: number | undefined;
     processed: boolean | undefined;
     numErrors: number | undefined;
     cached?: boolean;
+}
+
+/**
+ * Notification sent just before processing a file.
+ */
+export interface ProgressFileBegin extends ProgressFileBase {
+    type: 'ProgressFileBegin';
 }
 
 export type ProgressEmitter = (p: ProgressItem | ProgressFileComplete) => void;
