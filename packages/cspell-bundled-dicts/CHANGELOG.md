@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.18.3](https://github.com/streetsidesoftware/cspell/compare/v5.18.2...v5.18.3) (2022-02-04)
+
+
+### Bug Fixes
+
+* Add support for R ([#2394](https://github.com/streetsidesoftware/cspell/issues/2394)) ([6888d48](https://github.com/streetsidesoftware/cspell/commit/6888d482748051a795418116e09ae27ce41c474c))
+
+
+
+
+
 ## [5.18.2](https://github.com/streetsidesoftware/cspell/compare/v5.18.1...v5.18.2) (2022-02-03)
 
 
