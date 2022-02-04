@@ -13,7 +13,7 @@ interface Config {
 const defaultConfigFile = require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json');
 const defaultConfigLocation = path.dirname(defaultConfigFile);
 
-const config: Config = parse(fs.readFileSync(defaultConfigFile, 'utf-8'));
+const config = readConfig(defaultConfigFile);
 
 const ext = path.extname(__filename);
 const notFound = '1fgh0dld6y56cr1wls.r9bp0ckc00ds0gna.json';
@@ -59,3 +59,9 @@ describe('Validate resolveFile', () => {
         expect(r.found).toBe(found);
     });
 });
+
+function readConfig(filename: string): Config {
+    const parsed = parse(fs.readFileSync(filename, 'utf-8'));
+    if (!parsed || typeof parsed !== 'object') throw new Error(`Unable to parse "${filename}"`);
+    return parsed as unknown as Config;
+}
