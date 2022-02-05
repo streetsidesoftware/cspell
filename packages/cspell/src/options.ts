@@ -110,6 +110,11 @@ export interface SuggestionOptions extends BaseOptions {
      * Use stdin for the input
      */
     useStdin?: boolean;
+
+    /**
+     * Use REPL interface for making suggestions.
+     */
+    repl?: boolean;
 }
 
 export interface LegacyOptions {
