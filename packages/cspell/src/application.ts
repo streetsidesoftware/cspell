@@ -1,3 +1,4 @@
+import * as async from '@cspell/cspell-pipe';
 import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import type { CheckTextInfo, SuggestionsForWordResult, TraceResult } from 'cspell-lib';
 import {
@@ -12,7 +13,7 @@ import {
 import * as path from 'path';
 import { LintRequest, runLint } from './lint';
 import { BaseOptions, fixLegacy, LegacyOptions, LinterOptions, SuggestionOptions, TraceOptions } from './options';
-import * as async from '@cspell/cspell-pipe';
+import { simpleRepl } from './repl';
 import { calcFinalConfigInfo, readConfig, readFile } from './util/fileHelper';
 import { readStdin } from './util/stdin';
 import * as util from './util/util';
@@ -56,7 +57,11 @@ export async function* suggestions(
 ): AsyncIterable<SuggestionsForWordResult> {
     options = fixLegacy(options);
     const configFile = await readConfig(options.config, undefined);
-    const iWords = options.useStdin ? async.toAsyncIterable(words, readStdin()) : words;
+    const iWords = options.repl
+        ? async.toAsyncIterable(words, simpleRepl())
+        : options.useStdin
+        ? async.toAsyncIterable(words, readStdin())
+        : words;
     try {
         const results = suggestionsForWords(iWords, options, configFile.config);
         yield* results;
