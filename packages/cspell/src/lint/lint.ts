@@ -43,10 +43,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         configInfo: ConfigInfo,
         cache: CSpellLintResultCache
     ): Promise<FileResult> {
+        const getElapsedTimeMs = getTimeMeasurer();
         const cachedResult = await cache.getCachedLintResults(filename);
         if (cachedResult) {
             reporter.debug(`Filename: ${filename}, using cache`);
-            return cachedResult;
+            return { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
         }
 
         const result: FileResult = {
@@ -75,7 +76,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         reporter.debug(`Filename: ${filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
         result.fileInfo = fileInfo;
 
-        const getElapsedTimeMs = getTimeMeasurer();
         let spellResult: Partial<cspell.SpellCheckFileResult> = {};
         reporter.info(
             `Checking: ${filename}, File type: ${doc.languageId ?? 'auto'}, Language: ${doc.locale ?? 'default'}`,
