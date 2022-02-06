@@ -39,7 +39,9 @@ function readJsonFile(fileRef: ImportFileRef): CSpellSettings {
     const { filename } = fileRef;
     let s: CSpellSettings = {};
     try {
-        s = json.parse(fs.readFileSync(filename).toString());
+        const p = json.parse(fs.readFileSync(filename).toString());
+        if (!p || typeof p !== 'object' || Array.isArray(p)) throw 'bad config';
+        s = p;
     } catch (err) {
         fileRef.error = new Error(`Failed to read config file: "${filename}"`);
     }
