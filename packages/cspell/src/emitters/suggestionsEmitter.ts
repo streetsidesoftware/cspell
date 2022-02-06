@@ -10,11 +10,17 @@ export interface EmitSuggestionOptions {
     };
 }
 
-export function emitSuggestionResult(result: SuggestionsForWordResult, options: EmitSuggestionOptions): void {
+export interface TimedSuggestionsForWordResult extends SuggestionsForWordResult {
+    elapsedTimeMs?: number;
+}
+
+export function emitSuggestionResult(result: TimedSuggestionsForWordResult, options: EmitSuggestionOptions): void {
     const { word, suggestions } = result;
     const { verbose, output = console } = options;
 
-    output.log(word ? chalk.yellow(word) : chalk.yellow('<empty>') + ':');
+    const elapsed = verbose && verbose > 1 && result.elapsedTimeMs ? ` ${result.elapsedTimeMs.toFixed(2)} ms` : '';
+
+    output.log((word ? chalk.yellow(word) : chalk.yellow('<empty>')) + ':' + elapsed);
 
     if (!suggestions.length) {
         console.log(chalk.yellow(' <no suggestions>'));
