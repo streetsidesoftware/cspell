@@ -10,7 +10,7 @@ interface Config {
 
 const config: Config = parse(
     fs.readFileSync(path.join(__dirname, '..', '..', 'config', 'cspell-default.json'), 'utf-8')
-);
+) as unknown as Config;
 
 const ext = path.extname(__filename);
 const notFound = '1fgh0dld6y56cr1wls.r9bp0ckc00ds0gna.json';
