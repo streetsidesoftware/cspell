@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walked"} {"verbose": 1} 1`] = `
-"walk
+"walk:
  - walk      -    0 dict-a
  - walked    -    2 dict-a"
 `;
 
 exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walked"} {} 1`] = `
-"walk
+"walk:
  - walk
  - walked"
 `;
 
 exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": false, "noSuggest": true, "word": "walked"} {"verbose": 1} 1`] = `
-"walk
+"walk:
  - walk      -    0 dict-a
  - walked  N -    2 dict-a"
 `;
 
 exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": true, "noSuggest": false, "word": "walked"} {"verbose": 1} 1`] = `
-"walk
+"walk:
  - walk      -    0 dict-a
  - walked X  -    2 dict-a"
 `;
 
 exports[`suggestionsEmitter emitSuggestionResult walk {"compoundWord": undefined, "cost": 0, "dictionaries": [Array], "forbidden": false, "noSuggest": false, "word": "walk"} {"compoundWord": undefined, "cost": 2, "dictionaries": [Array], "forbidden": true, "noSuggest": true, "word": "walked"} {"verbose": 1} 1`] = `
-"walk
+"walk:
  - walk      -    0 dict-a
  - walked XN -    2 dict-a"
 `;

@@ -1,3 +1,4 @@
+import assert from 'assert';
 import { PairingHeap } from '../utils/PairingHeap';
 import { WeightMap } from './weightedMaps';
 
@@ -23,14 +24,8 @@ export interface ExResult {
     }[];
 }
 
-export function distanceAStarWeightedEx(
-    wordA: string,
-    wordB: string,
-    map: WeightMap,
-    cost = 100
-): ExResult | undefined {
+export function distanceAStarWeightedEx(wordA: string, wordB: string, map: WeightMap, cost = 100): ExResult {
     const best = _distanceAStarWeightedEx(wordA, wordB, map, cost);
-    if (!best) return undefined;
 
     const aa = '^' + wordA + '$';
     const bb = '^' + wordB + '$';
@@ -56,14 +51,14 @@ export function distanceAStarWeightedEx(
     return result;
 }
 
-function _distanceAStarWeightedEx(wordA: string, wordB: string, map: WeightMap, cost = 100): Node | undefined {
+function _distanceAStarWeightedEx(wordA: string, wordB: string, map: WeightMap, cost = 100): Node {
     // Add ^ and $ for begin/end detection.
     const a = '^' + wordA + '$';
     const b = '^' + wordB + '$';
     const aN = a.length;
     const bN = b.length;
 
-    const candidates = new PairingHeap(compare);
+    const candidates = new CandidatePool(aN, bN);
 
     candidates.add({ ai: 0, bi: 0, c: 0, p: 0, f: undefined });
 
@@ -113,7 +108,7 @@ function _distanceAStarWeightedEx(wordA: string, wordB: string, map: WeightMap, 
 
     let best: Node | undefined;
     // const bc2 = 2 * bc;
-    while ((best = candidates.dequeue())) {
+    while ((best = candidates.next())) {
         if (best.ai === aN && best.bi === bN) break;
 
         opSwap(best);
@@ -123,7 +118,44 @@ function _distanceAStarWeightedEx(wordA: string, wordB: string, map: WeightMap, 
         opSub(best);
     }
 
+    assert(best);
     return best;
+}
+
+class CandidatePool {
+    readonly pool = new PairingHeap(compare);
+    readonly grid: Node[] = [];
+
+    constructor(readonly aN: number, readonly bN: number) {}
+
+    next(): Node | undefined {
+        let n: Node | undefined;
+        while ((n = this.pool.dequeue())) {
+            if (!n.d) return n;
+        }
+        return undefined;
+    }
+
+    add(n: NewCandidate): void {
+        const i = idx(n.ai, n.bi, this.bN);
+        const g = this.grid[i];
+        if (!g) {
+            this.grid[i] = n;
+            this.pool.add(n);
+            return;
+        }
+        // Do not add if the existing node is better.
+        if (g.c <= n.c) return;
+
+        // New node is better.
+        g.d = true;
+        this.grid[i] = n;
+        this.pool.add(n);
+    }
+}
+
+function idx(r: number, c: number, cols: number): number {
+    return r * cols + c;
 }
 
 interface Pos {
@@ -140,9 +172,15 @@ interface Node extends Pos {
     p: number;
     /** from node */
     f: Node | undefined;
+    /** deleted */
+    d?: true | undefined;
+}
+
+interface NewCandidate extends Node {
+    d?: undefined;
 }
 
 function compare(a: Node, b: Node): number {
-    // Choose lowest cost or farthest Manhattan distance.
+    // lowest cost then progress
     return a.c - b.c || b.ai + b.bi - a.ai - a.bi;
 }
