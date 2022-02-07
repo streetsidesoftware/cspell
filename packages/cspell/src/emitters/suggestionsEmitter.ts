@@ -14,26 +14,39 @@ export interface TimedSuggestionsForWordResult extends SuggestionsForWordResult 
     elapsedTimeMs?: number;
 }
 
+const regExpRTL = /([\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC י]+)/g;
+
+function reverseRtlText(s: string): string {
+    return s.replace(regExpRTL, (s) => s.split('').reverse().join(''));
+}
+
 export function emitSuggestionResult(result: TimedSuggestionsForWordResult, options: EmitSuggestionOptions): void {
     const { word, suggestions } = result;
     const { verbose, output = console } = options;
 
     const elapsed = verbose && verbose > 1 && result.elapsedTimeMs ? ` ${result.elapsedTimeMs.toFixed(2)} ms` : '';
 
-    output.log((word ? chalk.yellow(word) : chalk.yellow('<empty>')) + ':' + elapsed);
+    const rWord = reverseRtlText(word);
+    const wordEx = rWord !== word ? ` (${chalk.yellow(rWord)})` : '';
+
+    output.log((word ? chalk.yellow(word) + wordEx : chalk.yellow('<empty>')) + ':' + elapsed);
 
     if (!suggestions.length) {
         console.log(chalk.yellow(' <no suggestions>'));
         return;
     }
 
+    function handleRtl(word: string): string {
+        const r = reverseRtlText(word);
+        return r === word ? word : `${word} (${r})`;
+    }
+
     if (verbose) {
-        const maxWidth = suggestions
-            .map((r) => width(r.compoundWord || r.word))
-            .reduce((max, len) => Math.max(max, len), 0);
-        for (const sug of suggestions) {
-            const { word, cost, dictionaries, compoundWord } = sug;
-            const w = compoundWord || word;
+        const mappedSugs = suggestions.map((s) => ({ ...s, w: handleRtl(s.compoundWord || s.word) }));
+        const sugWidths = mappedSugs.map((s) => width(s.w));
+        const maxWidth = sugWidths.reduce((max, len) => Math.max(max, len), 0);
+        for (const sug of mappedSugs) {
+            const { cost, dictionaries, w } = sug;
             const padding = ' '.repeat(padWidth(w, maxWidth));
             const forbid = sug.forbidden ? chalk.red('X') : ' ';
             const ignore = sug.noSuggest ? chalk.yellow('N') : ' ';
@@ -42,7 +55,8 @@ export function emitSuggestionResult(result: TimedSuggestionsForWordResult, opti
             output.log(` - ${formatWord(w, sug)}${padding} ${forbid}${ignore} - ${chalk.yellow(strCost)} ${dicts}`);
         }
     } else {
-        for (const r of suggestions) {
+        const mappedSugs = suggestions.map((s) => ({ ...s, word: handleRtl(s.word) }));
+        for (const r of mappedSugs) {
             output.log(` - ${formatWordSingle(r)}`);
         }
     }
