@@ -3,9 +3,9 @@ Repository: TheAlgorithms/Python
 Url: https://github.com/TheAlgorithms/Python.git
 Args: ["**/*.{md,py}"]
 Summary:
-  files: 1019
-  filesWithIssues: 419
-  issues: 3012
+  files: 1020
+  filesWithIssues: 420
+  issues: 3026
   errors: 0
 Errors: []
 
@@ -638,8 +638,9 @@ issues:
   - "linear_algebra/src/conjugate_gradient.py:132:27     	conjuage    	U   	# Calculate new A conjuage search direction."
   - "linear_algebra/src/lib.py:265:9     	cofactor	U   	cofactor(x: int, y: int): returns"
   - "linear_algebra/src/polynom_for_points.py:77:13      	zahlen  	U   	zahlen = 0"
-  - "linear_algebra/src/power_iteration.py:12:22     	eignevalue  	U   	Find the largest eignevalue and corresponding eigenvector"
-  - "linear_algebra/src/power_iteration.py:49:5      	lamda       	U   	lamda_previous = 0"
+  - "linear_algebra/src/power_iteration.py:45:15     	iscomplexobj	U   	assert np.iscomplexobj(input_matrix) == np"
+  - "linear_algebra/src/power_iteration.py:55:5      	lamda       	U   	lamda_previous = 0"
+  - "linear_algebra/src/power_iteration.py:91:22     	triu        	U   	imag_matrix = np.triu(1j * complex_input_matrix"
   - "linear_algebra/src/schur_complement.py:6:5      	schur       	U   	def schur_complement("
   - "linear_algebra/src/schur_complement.py:20:45    	Vandenberghe	U   	Optimization – Boyd and Vandenberghe, A.5.5"
   - "linear_algebra/src/test_linear_algebra.py:147:9     	cofactors   	U   	cofactors = [[-3, 14, -10], ["
@@ -744,7 +745,6 @@ issues:
   - "maths/primelib.py:540:74    	Divisiors   	U   	Error in function getDivisiors(...)\""
   - "maths/proth_number.py:10:5      	proth   	U   	def proth(number: int) -> int"
   - "maths/qr_decomposition.py:21:18     	BLAS	U   	version from BLAS should be used."
-  - "maths/qr_decomposition.py:37:24     	triu	U   	>>> np.allclose(np.triu(R), R)"
   - "maths/radix2_fft.py:5:8     	mpmath  	U   	import mpmath # for roots of unity"
   - "maths/radix2_fft.py:91:14   	ncol    	U   	next_ncol = self.C_max_length"
   - "maths/runge_kutta.py:4:5        	runge   	U   	def runge_kutta(f, y0, x0, h,"
@@ -1026,6 +1026,10 @@ issues:
   - "web_programming/download_images_from_google_query.py:58:43      	gstatic 	U   	\\/\\/encrypted-tbn0\\.gstatic\\.com\\/images\\?.*?)\\"
   - "web_programming/emails_from_url.py:4:24     	Umer    	U   	author__ = \"Muhammad Umer Farooq\""
   - "web_programming/emails_from_url.py:4:29     	Farooq  	U   	author__ = \"Muhammad Umer Farooq\""
+  - "web_programming/fetch_anime_and_play.py:27:26   	animes  	U   	[list]: [List of animes]"
+  - "web_programming/fetch_anime_and_play.py:76:48   	kimetsu 	U   	episode_list(\"/anime/kimetsu-no-yaiba\"))"
+  - "web_programming/fetch_anime_and_play.py:76:59   	yaiba   	U   	list(\"/anime/kimetsu-no-yaiba\"))"
+  - "web_programming/fetch_anime_and_play.py:147:34  	iframe  	U   	episode_url = soup.find(\"iframe\", {\"id\": \"playerframe"
   - "web_programming/fetch_github_info.py:4:12       	lawric  	U   	Updated by lawric1 on 24/11/20"
   - "web_programming/fetch_well_rx_price.py:36:40    	eliquis 	U   	pharmacy_and_price_list(\"eliquis\", None)"
   - "web_programming/get_imdb_top_250_movies_csv.py:9:9      	imdb	U   	def get_imdb_top_250_movies(url:"
