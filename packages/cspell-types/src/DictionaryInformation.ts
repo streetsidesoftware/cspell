@@ -21,7 +21,7 @@ export interface DictionaryInformation {
 
     /**
      * The accent characters
-     * @default "\u0300-\u0341"
+     * @default "\\u0300-\\u0341"
      */
     accents?: CharacterSet | CharacterSetCosts[];
 
