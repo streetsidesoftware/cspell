@@ -139,7 +139,7 @@ describe('Validate suggestCollector', () => {
         ${'aple'}    | ${[s('apple', 55), s('apples', 155)]}
         ${'cafe'}    | ${[s('cafe', 0), s('café', 1), s('cafés', 101)]}
         ${'tim'}     | ${[s('time', 75)]}
-        ${'runtime'} | ${[s('runtime', 50, 'run|time'), s('time', 200 + 75 + 4)]}
+        ${'runtime'} | ${[s('runtime', 100, 'run|time'), s('time', 200 + 75 + 4)]}
     `('collect weighted suggestions for "$word"', ({ word, expected }) => {
         const collector = suggestionCollector(
             word,

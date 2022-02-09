@@ -294,8 +294,9 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         const sorted = values.sort(compSuggestionResults).map(cleanCompoundResult);
         let i = Math.min(sorted.length, numSuggestions) - 1;
         const limit = includeTies ? sorted.length : Math.min(sorted.length, numSuggestions);
-        const maxCost = sorted[i].cost;
-        for (++i; i < limit && sorted[i].cost === maxCost; ++i) {
+        const iCost = sorted[i].cost;
+        const maxCost = Math.min(iCost, weightMap ? changeLimit * BASE_COST - 1 : iCost);
+        for (i = 1; i < limit && sorted[i].cost <= maxCost; ++i) {
             // loop
         }
         sorted.length = i;
