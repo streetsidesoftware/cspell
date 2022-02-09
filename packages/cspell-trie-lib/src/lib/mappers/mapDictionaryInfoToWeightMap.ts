@@ -19,12 +19,12 @@ const defaultAdjustments: PenaltyAdjustment[] = [
     },
     {
         id: 'short-compounds-1',
-        regexp: /∙.{1,2}(?=∙|$)/gu,
+        regexp: /^[^∙]{0,2}(?=∙)|∙[^∙]{0,2}(?=∙|$)/gm,
         penalty: 100,
     },
     {
         id: 'short-compounds-3',
-        regexp: /∙.{3}(?=∙|$)/gu,
+        regexp: /^[^∙]{3}(?=∙)|∙[^∙]{3}(?=∙|$)/gm,
         penalty: 50,
     },
 ];
