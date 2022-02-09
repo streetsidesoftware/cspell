@@ -61,10 +61,21 @@ export interface WeightMap {
     readonly insDel: TrieCost;
     readonly replace: TrieTrieCost;
     readonly swap: TrieTrieCost;
+    readonly adjustments: Map<string, PenaltyAdjustment>;
 
     calcInsDelCosts(pos: CostPosition): Iterable<CostPosition>;
     calcSwapCosts(pos: CostPosition): Iterable<CostPosition>;
     calcReplaceCosts(pos: CostPosition): Iterable<CostPosition>;
+    calcAdjustment(word: string): number;
+}
+
+export interface PenaltyAdjustment {
+    /** Penalty Identifier */
+    id: string;
+    /** RegExp Pattern to match */
+    regexp: RegExp;
+    /** Penalty to apply */
+    penalty: number;
 }
 
 export function createWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {
@@ -80,6 +91,15 @@ export function addDefToWeightMap(
 ): WeightMap;
 export function addDefToWeightMap(map: WeightMap, ...defs: SuggestionCostMapDef[]): WeightMap {
     return addDefsToWeightMap(map, defs);
+}
+
+export function addAdjustment(map: WeightMap, ...adjustments: PenaltyAdjustment[]): WeightMap;
+export function addAdjustment(map: WeightMap, adjustment: PenaltyAdjustment): WeightMap;
+export function addAdjustment(map: WeightMap, ...adjustments: PenaltyAdjustment[]): WeightMap {
+    for (const adj of adjustments) {
+        map.adjustments.set(adj.id, adj);
+    }
+    return map;
 }
 
 export function addDefsToWeightMap(map: WeightMap, defs: SuggestionCostMapDef[]): WeightMap {
@@ -283,6 +303,7 @@ class _WeightedMap implements WeightMap {
     insDel: TrieCost = {};
     replace: TrieTrieCost = {};
     swap: TrieTrieCost = {};
+    adjustments = new Map<string, PenaltyAdjustment>();
 
     *calcInsDelCosts(pos: CostPosition): Iterable<CostPosition> {
         const { a, ai, b, bi, c, p } = pos;
@@ -319,6 +340,21 @@ class _WeightedMap implements WeightMap {
                 }
             }
         }
+    }
+
+    calcAdjustment(word: string): number {
+        let penalty = 0;
+        for (const adj of this.adjustments.values()) {
+            if (adj.regexp.global) {
+                for (const _m of word.matchAll(adj.regexp)) {
+                    penalty += adj.penalty;
+                }
+            } else if (adj.regexp.test(word)) {
+                penalty += adj.penalty;
+            }
+        }
+
+        return penalty;
     }
 }
 

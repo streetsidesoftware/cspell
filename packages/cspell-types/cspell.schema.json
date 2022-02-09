@@ -403,8 +403,14 @@
               "type": "array"
             }
           ],
-          "default": "\\u0300-\\u0341",
-          "description": "The accent characters"
+          "description": "The accent characters.\n\nDefault: `\"\\u0300-\\u0341\"`"
+        },
+        "adjustments": {
+          "description": "A collection of patterns to test against the suggested words. If the word matches the pattern, then the penalty is applied.",
+          "items": {
+            "$ref": "#/definitions/PatternAdjustment"
+          },
+          "type": "array"
         },
         "alphabet": {
           "anyOf": [
@@ -948,6 +954,29 @@
     "Pattern": {
       "type": "string"
     },
+    "PatternAdjustment": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Id of the Adjustment, i.e. `short-compound`",
+          "type": "string"
+        },
+        "penalty": {
+          "description": "The amount of penalty to apply.",
+          "type": "number"
+        },
+        "regexp": {
+          "description": "RegExp pattern to match",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "regexp",
+        "penalty"
+      ],
+      "type": "object"
+    },
     "PatternId": {
       "description": "This matches the name in a pattern definition.",
       "type": "string"
@@ -1128,6 +1157,8 @@
   },
   "properties": {
     "$schema": {
+      "default": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+      "description": "Url to JSON Schema",
       "type": "string"
     },
     "allowCompoundWords": {

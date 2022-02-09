@@ -1,5 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walk-around" "walk∙Around" $map 1`] = `
+"<walk-around> -> <walk∙Around> (101[+1000])
+a: |<^>|<w>|<a>|<l>|<k>|<->|<a>|<r>|<o>|<u>|<n>|<d>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<∙>|<A>|<r>|<o>|<u>|<n>|<d>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  1|  0|  0|  0|  0|  0|  0| = 101|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walk-around" "walk∙Around" $map 2`] = `
+"<walk∙Around> -> <walk-around> (101)
+a: |<^>|<w>|<a>|<l>|<k>|<∙>|<A>|<r>|<o>|<u>|<n>|<d>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<->|<a>|<r>|<o>|<u>|<n>|<d>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  1|  0|  0|  0|  0|  0|  0| = 101|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walked" $map 1`] = `
+"<walked> -> <walked> (0)
+a: |<^>|<w>|<a>|<l>|<k>|<e>|<d>|<$>|    |
+b: |<^>|<w>|<a>|<l>|<k>|<e>|<d>|<$>|    |
+c: |  0|  0|  0|  0|  0|  0|  0|  0| = 0|
+p: |  0|  0|  0|  0|  0|  0|  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walked" $map 2`] = `
+"<walked> -> <walked> (0)
+a: |<^>|<w>|<a>|<l>|<k>|<e>|<d>|<$>|    |
+b: |<^>|<w>|<a>|<l>|<k>|<e>|<d>|<$>|    |
+c: |  0|  0|  0|  0|  0|  0|  0|  0| = 0|
+p: |  0|  0|  0|  0|  0|  0|  0|  0| = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walk∙ED" $map 1`] = `
+"<walked> -> <walk∙ED> (102[+1100])
+a: |<^>|<w>|<a>|<l>|<k>|<> |<e>|<d>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<∙>|<E>|<D>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  1|  1|  0| = 102|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walk∙ED" $map 2`] = `
+"<walk∙ED> -> <walked> (102)
+a: |<^>|<w>|<a>|<l>|<k>|<∙>|<E>|<D>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<> |<e>|<d>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  1|  1|  0| = 102|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walk∙ed" $map 1`] = `
+"<walked> -> <walk∙ed> (100)
+a: |<^>|<w>|<a>|<l>|<k>|<> |<e>|<d>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<∙>|<e>|<d>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  0|  0|  0| = 100|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walk∙ed" $map 2`] = `
+"<walk∙ed> -> <walked> (100)
+a: |<^>|<w>|<a>|<l>|<k>|<∙>|<e>|<d>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<> |<e>|<d>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  0|  0|  0| = 100|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walk∙ed" $map 3`] = `
+"<walked> -> <walk∙ed> (100[+100])
+a: |<^>|<w>|<a>|<l>|<k>|<> |<e>|<d>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<∙>|<e>|<d>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  0|  0|  0| = 100|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
+exports[`distanceAStar distanceAStar Asymmetrical penalties adv "walked" "walk∙ed" $map 4`] = `
+"<walk∙ed> -> <walked> (100)
+a: |<^>|<w>|<a>|<l>|<k>|<∙>|<e>|<d>|<$>|      |
+b: |<^>|<w>|<a>|<l>|<k>|<> |<e>|<d>|<$>|      |
+c: |  0|  0|  0|  0|  0|100|  0|  0|  0| = 100|
+p: |  0|  0|  0|  0|  0|  0|  0|  0|  0|   = 0|
+"
+`;
+
 exports[`distanceAStar distanceAStar adv "" "" $map 1`] = `
 "<> -> <> (0)
 a: |<^>|<$>|    |

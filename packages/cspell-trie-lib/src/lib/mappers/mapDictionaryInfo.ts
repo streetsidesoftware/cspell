@@ -5,7 +5,9 @@ import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { isDefined } from '../utils/util';
 import { EditCostsRequired, mapEditCosts } from './mapCosts';
 import { hunspellInformationToSuggestionCostDef } from './mapHunspellInformation';
+import { PenaltyAdjustment } from '../distance/weightedMaps';
 import { calcFirstCharacterReplaceDefs, parseAccents, parseAlphabet } from './mapToSuggestionCostDef';
+import { ArrayItem } from '../types';
 
 export function mapDictionaryInformation(dictInfo: DictionaryInformation): SuggestionCostMapDef[] {
     const _locale = dictInfo.locale;
@@ -73,4 +75,22 @@ function processAccents(
 ): SuggestionCostMapDef[] {
     const cs = toCharSets(accents, '\u0300-\u0341', editCost.accentCosts);
     return cs.map((cs) => parseAccents(cs, editCost)).filter(isDefined);
+}
+
+export function mapDictionaryInformationToAdjustment(dictInfo: DictionaryInformation): PenaltyAdjustment[] {
+    if (!dictInfo.adjustments) return [];
+
+    return dictInfo.adjustments.map(mapAdjustment);
+}
+
+type Adjustments = Exclude<DictionaryInformation['adjustments'], undefined>;
+type Adjustment = ArrayItem<Adjustments>;
+
+function mapAdjustment(adj: Adjustment): PenaltyAdjustment {
+    const { id, regexp, penalty } = adj;
+    return {
+        id: id,
+        regexp: new RegExp(regexp),
+        penalty,
+    };
 }
