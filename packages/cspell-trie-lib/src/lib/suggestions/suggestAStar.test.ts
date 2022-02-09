@@ -76,7 +76,7 @@ describe('Validate Suggest', () => {
         const trie = Trie.create(sampleWords);
         const results = Sug.suggest(trie.root, 'joyfull', { changeLimit: changeLimit });
         const suggestions = results.map((s) => s.word);
-        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller']);
+        expect(suggestions).toEqual(['joyful', 'joyfully', 'joyfuller', 'joyous', 'joyfullest']);
     });
 
     test('Tests suggestions', () => {
