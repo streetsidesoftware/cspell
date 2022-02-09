@@ -23,7 +23,7 @@ This is a set of characters that can include `-` or `|`
 
 #### Defined in
 
-[DictionaryInformation.ts:304](https://github.com/streetsidesoftware/cspell/blob/91b035f/packages/cspell-types/src/DictionaryInformation.ts#L304)
+[DictionaryInformation.ts:208](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/DictionaryInformation.ts#L208)
 
 ___
 
@@ -35,7 +35,7 @@ the cost to insert / delete / replace / swap the characters in a group
 
 #### Defined in
 
-[DictionaryInformation.ts:307](https://github.com/streetsidesoftware/cspell/blob/91b035f/packages/cspell-types/src/DictionaryInformation.ts#L307)
+[DictionaryInformation.ts:211](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/DictionaryInformation.ts#L211)
 
 ___
 
@@ -48,4 +48,4 @@ This is used to discourage
 
 #### Defined in
 
-[DictionaryInformation.ts:313](https://github.com/streetsidesoftware/cspell/blob/91b035f/packages/cspell-types/src/DictionaryInformation.ts#L313)
+[DictionaryInformation.ts:217](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/DictionaryInformation.ts#L217)
