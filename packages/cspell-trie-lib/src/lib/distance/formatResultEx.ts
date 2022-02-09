@@ -25,7 +25,7 @@ function vizWidth(s: string) {
 export function formatExResult(ex: ExResult | undefined): string {
     if (!ex) return '<undefined>';
 
-    const { cost, segments } = ex;
+    const { cost, segments, penalty } = ex;
     const asString = segments.map(({ a, b, c, p }) => ({
         a: `<${a}>`,
         b: `<${b}>`,
@@ -49,7 +49,10 @@ export function formatExResult(ex: ExResult | undefined): string {
     const b = 'b: |' + parts.map(({ b, w }) => pR(b, w)).join('|') + '|';
     const c = 'c: |' + parts.map(({ c, w }) => pL(c, w)).join('|') + '|';
     const p = 'p: |' + parts.map(({ p, w }) => pL(p, w)).join('|') + '|';
-    return `<${ex.a.slice(1, -1)}> -> <${ex.b.slice(1, -1)}> (${cost})\n${[a, b, c, p].join('\n')}\n`;
+    const penaltyMsg = penalty ? `[+${penalty}]` : '';
+    return `<${ex.a.slice(1, -1)}> -> <${ex.b.slice(1, -1)}> (${cost - penalty}${penaltyMsg})\n${[a, b, c, p].join(
+        '\n'
+    )}\n`;
 }
 
 export function formattedDistance(wordA: string, wordB: string, weightMap: WeightMap, cost?: number) {

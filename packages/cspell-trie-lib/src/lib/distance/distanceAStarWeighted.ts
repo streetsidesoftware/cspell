@@ -9,13 +9,15 @@ import { WeightMap } from './weightedMaps';
  */
 export function distanceAStarWeighted(wordA: string, wordB: string, map: WeightMap, cost = 100): number {
     const best = _distanceAStarWeightedEx(wordA, wordB, map, cost);
-    return best ? best.c + best.p : -1;
+    const penalty = map.calcAdjustment(wordB);
+    return best.c + best.p + penalty;
 }
 
 export interface ExResult {
     a: string;
     b: string;
     cost: number;
+    penalty: number;
     segments: {
         a: string;
         b: string;
@@ -30,10 +32,13 @@ export function distanceAStarWeightedEx(wordA: string, wordB: string, map: Weigh
     const aa = '^' + wordA + '$';
     const bb = '^' + wordB + '$';
 
+    const penalty = map.calcAdjustment(wordB);
+
     const result: ExResult = {
         a: aa,
         b: bb,
-        cost: best.c + best.p,
+        cost: best.c + best.p + penalty,
+        penalty,
         segments: [],
     };
     const segments = result.segments;

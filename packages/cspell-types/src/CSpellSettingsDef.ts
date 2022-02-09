@@ -12,6 +12,10 @@ export type CSpellPackageSettings = CSpellUserSettings;
 export type CSpellUserSettings = CSpellSettings;
 
 export interface CSpellSettings extends FileSettings, LegacySettings {
+    /**
+     * Url to JSON Schema
+     * @default "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json"
+     */
     $schema?: string;
 }
 

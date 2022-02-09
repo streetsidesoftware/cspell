@@ -20,8 +20,9 @@ export interface DictionaryInformation {
     alphabet?: CharacterSet | CharacterSetCosts[];
 
     /**
-     * The accent characters
-     * @default "\\u0300-\\u0341"
+     * The accent characters.
+     *
+     * Default: `"\u0300-\u0341"`
      */
     accents?: CharacterSet | CharacterSetCosts[];
 
@@ -40,112 +41,15 @@ export interface DictionaryInformation {
      * Used by dictionary authors
      */
     hunspellInformation?: HunspellInformation;
+
+    /**
+     * A collection of patterns to test against the suggested words.
+     * If the word matches the pattern, then the penalty is applied.
+     */
+    adjustments?: PatternAdjustment[];
 }
 
-export interface HunspellInformationParsed {
-    /**
-     * This is generally the alphabet used in the dictionary.
-     * It stands for the characters to try using for substitutions
-     * when looking for a suggestions.
-     *
-     * Example:
-     * - Hunspell:
-     *   ```hunspell
-     *   TRY aeistlunkodmrvpgjhäõbüoöfcwzxðqþ`
-     *   ```
-     * - Use: yaml
-     *   ```yaml
-     *   tryChars: "aeistlunkodmrvpgjhäõbüoöfcwzxðqþ"
-     *   ```
-     * <!--- cspell:ignore aeistlunkodmrvpgjhäõbüoöfcwzxðqþ  --
-     */
-    tryChars?: string;
-
-    /**
-     * This defines characters that are good substitutes for each other.
-     * - A `()` is need for multi character sequences like letters with multiple accents.
-     * - Separate unrelated characters with `|` or `\n`
-     *
-     * Example:
-     * - Hunspell:
-     *   ```hunspell
-     *   MAP aàâäAÀÂÄ
-     *   MAP eéèêëEÉÈÊË
-     *   MAP iîïyIÎÏY
-     *   MAP oôöOÔÖ
-     *   MAP (IJ)(Ĳ)
-     *   ```
-     * - Use:
-     *   `yaml`
-     *   ```yaml
-     *   mapSets: |
-     *     aàâäAÀÂÄ|eéèêëEÉÈÊË`
-     *     eéèêëEÉÈÊË|iîïyIÎÏY
-     *     oôöOÔÖ|(IJ)(Ĳ)
-     *   ```
-     * <!--- cspell:ignore aàâä eéèêë iîïy -->
-     */
-    mapSets?: string | string[];
-
-    /**
-     * This represents the layout of a common keyboard.
-     * Used for adjacency mistakes.
-     *
-     * Hunspell:
-     * ```hunspell
-     * KEY qwertyuiop|asdfghjkl|zxcvbnm
-     * ```
-     * Use:
-     * ```yaml
-     * keyboard: qwertyuiop|asdfghjkl|zxcvbnm
-     * ```
-     * <!--- cspell:ignore asdfghjkl qwertyuiop zxcvbnm -->
-     */
-    keyboard?: string;
-
-    /**
-     * Output Conversions
-     *
-     */
-    outConvert?: string | string[];
-    inConvert?: string | string[];
-
-    /**
-     * Common Substitutions.
-     * Special characters:
-     * - `^` - matches the beginning of a word.
-     * - `$` - matches the end of a word.
-     *
-     * Hunspell:
-     * ```hunspell
-     * REP c ss
-     * REP e ĳ
-     * REP é ee
-     * REP g ch
-     * REP ï ii
-     * REP t d	# gebiest=>gebiesd
-     * REP u ĳ
-     * ```
-     *
-     * Use:
-     * ```yaml
-     * replace: |
-     *   c ss
-     *   e ĳ
-     *   é ee
-     *   g ch
-     *   ï ii
-     *   t d
-     *   u ĳ
-     * ```
-     *
-     * <!--- cspell:ignore gebiesd gebiest -->
-     */
-    replace?: string | string[];
-
-    /** The costs to apply when using the hunspell settings */
-    costs?: HunspellCosts;
-}
+// cspell:ignore aeistlunkodmrvpgjhäõbüoöfcwzxðqþ aàâä eéèêë iîïy
 
 export interface HunspellInformation {
     /**
@@ -311,4 +215,13 @@ export interface CharacterSetCosts {
      * This is used to discourage
      */
     penalty?: number;
+}
+
+export interface PatternAdjustment {
+    /** Id of the Adjustment, i.e. `short-compound` */
+    id: string;
+    /** RegExp pattern to match */
+    regexp: string | RegExp;
+    /** The amount of penalty to apply. */
+    penalty: number;
 }

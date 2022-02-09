@@ -1,15 +1,19 @@
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/suggestCollector';
 import {
+    addAdjustment,
     addDefToWeightMap,
     CostPosition,
     createWeightMap,
     lookupReplaceCost,
+    PenaltyAdjustment,
     prettyPrintWeightMap,
     __testing__,
 } from './weightedMaps';
 
 const { splitMapSubstrings, splitMap, findTrieCostPrefixes, normalizeDef } = __testing__;
+
+const oc = expect.objectContaining;
 
 // const u = undefined;  cspell:
 
@@ -37,11 +41,11 @@ describe('Validate weightedMaps', () => {
 
     test.each`
         defs                                  | expected
-        ${[]}                                 | ${{ insDel: {}, replace: {}, swap: {} }}
-        ${[defIns('ab', 3)]}                  | ${{ insDel: { n: { a: { c: 3 }, b: { c: 3 } } }, replace: {}, swap: {} }}
-        ${[defIns('ab', 3), defIns('bc', 2)]} | ${{ insDel: { n: { a: { c: 3 }, b: { c: 2 }, c: { c: 2 } } }, replace: {}, swap: {} }}
-        ${[defRep('ab', 3)]}                  | ${{ insDel: {}, replace: { n: { a: { t: { n: { b: { c: 3 } } } }, b: { t: { n: { a: { c: 3 } } } } } }, swap: {} }}
-        ${[defSwap('ab', 3)]}                 | ${{ insDel: {}, replace: {}, swap: { n: { a: { t: { n: { b: { c: 3 } } } }, b: { t: { n: { a: { c: 3 } } } } } } }}
+        ${[]}                                 | ${oc({ insDel: {}, replace: {}, swap: {} })}
+        ${[defIns('ab', 3)]}                  | ${oc({ insDel: { n: { a: { c: 3 }, b: { c: 3 } } }, replace: {}, swap: {} })}
+        ${[defIns('ab', 3), defIns('bc', 2)]} | ${oc({ insDel: { n: { a: { c: 3 }, b: { c: 2 }, c: { c: 2 } } }, replace: {}, swap: {} })}
+        ${[defRep('ab', 3)]}                  | ${oc({ insDel: {}, replace: { n: { a: { t: { n: { b: { c: 3 } } } }, b: { t: { n: { a: { c: 3 } } } } } }, swap: {} })}
+        ${[defSwap('ab', 3)]}                 | ${oc({ insDel: {}, replace: {}, swap: { n: { a: { t: { n: { b: { c: 3 } } } }, b: { t: { n: { a: { c: 3 } } } } } } })}
     `('buildWeightMap $defs', ({ defs, expected }) => {
         expect(createWeightMap(...defs)).toEqual(expected);
     });
@@ -197,6 +201,19 @@ describe('Validate weightedMaps', () => {
     `('normalizeDef for compound separators $def', ({ def, expected }) => {
         expect(normalizeDef(def)).toEqual(expected);
     });
+
+    test.each`
+        adjustments                                                   | word              | expected
+        ${[]}                                                         | ${'hello'}        | ${0}
+        ${[adj('case-change', /\p{Ll}∙\p{Lu}|\p{Lu}∙\p{Ll}/gu, 500)]} | ${'hello∙There'}  | ${500}
+        ${[adj('case-change', /\p{Ll}∙\p{Lu}|\p{Lu}∙\p{Ll}/gu, 500)]} | ${'WORK∙ed'}      | ${500}
+        ${[adj('case-change', /\p{Ll}∙\p{Lu}|\p{Lu}∙\p{Ll}/gu, 500)]} | ${'WORK∙ed∙Fine'} | ${1000}
+        ${[adj('case-change', /\p{Ll}∙\p{Lu}|\p{Lu}∙\p{Ll}/u, 500)]}  | ${'WORK∙ed∙Fine'} | ${500}
+    `('calcAdjustment $adjustments $word', ({ adjustments, word, expected }) => {
+        const w = createWeightMap();
+        addAdjustment(w, ...adjustments);
+        expect(w.calcAdjustment(word)).toEqual(expected);
+    });
 });
 
 function sep(s: string): string {
@@ -225,4 +242,8 @@ function defSwap(map: string, swap: number, ...opts: Partial<SuggestionCostMapDe
 
 function mergeOps(opts: Partial<SuggestionCostMapDef>[]): Partial<SuggestionCostMapDef> {
     return opts.reduce((acc, opt) => ({ ...acc, ...opt }), {} as Partial<SuggestionCostMapDef>);
+}
+
+function adj(id: string, regexp: RegExp, penalty: number): PenaltyAdjustment {
+    return { id, regexp, penalty };
 }

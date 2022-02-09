@@ -1,3 +1,4 @@
+import { mapDictionaryInformationToWeightMap } from '..';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';
 import { distanceAStarWeighted, distanceAStarWeightedEx } from './distanceAStarWeighted';
 import { formatExResult } from './formatResultEx';
@@ -140,6 +141,37 @@ describe('distanceAStar', () => {
             expect(r2?.cost).toBe(expected);
         }
     );
+
+    test.each`
+        wordA            | wordB            | weightMap             | expectedAB | expectedBA
+        ${'walked'}      | ${'walked'}      | ${calcDefWeightMap()} | ${0}       | ${0}
+        ${'walked'}      | ${'walk∙ed'}     | ${calcWeightMap()}    | ${100}     | ${100}
+        ${'walked'}      | ${'walk∙ed'}     | ${calcDefWeightMap()} | ${200}     | ${100}
+        ${'walked'}      | ${'walk∙ED'}     | ${calcDefWeightMap()} | ${1202}    | ${102}
+        ${'walk-around'} | ${'walk∙Around'} | ${calcDefWeightMap()} | ${1101}    | ${101}
+    `(
+        'distanceAStar Asymmetrical penalties adv "$wordA" "$wordB" $map',
+        ({
+            wordA,
+            wordB,
+            weightMap,
+            expectedAB,
+            expectedBA,
+        }: {
+            wordA: string;
+            wordB: string;
+            weightMap: WeightMap;
+            expectedAB: number;
+            expectedBA: number;
+        }) => {
+            const r1 = distanceAStarWeightedEx(wordA, wordB, weightMap);
+            const r2 = distanceAStarWeightedEx(wordB, wordA, weightMap);
+            expect(formatExResult(r1)).toMatchSnapshot();
+            expect(formatExResult(r2)).toMatchSnapshot();
+            expect(r1?.cost).toBe(expectedAB);
+            expect(r2?.cost).toBe(expectedBA);
+        }
+    );
 });
 
 function mapLetters(cost = 50): SuggestionCostMapDef {
@@ -155,6 +187,10 @@ function mapLetters(cost = 50): SuggestionCostMapDef {
         replace: cost,
         swap: cost,
     };
+}
+
+function calcDefWeightMap(): WeightMap {
+    return mapDictionaryInformationToWeightMap({});
 }
 
 function calcWeightMap(...defs: SuggestionCostMapDef[]): WeightMap {

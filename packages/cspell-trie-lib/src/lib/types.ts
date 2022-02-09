@@ -86,6 +86,8 @@ export type RemoveUndefined<T> = {
  */
 export type UndefinedToOptional<T> = RemoveUndefined<MakeOptional<T>>;
 
+export type ArrayItem<T extends Array<unknown>> = T extends Array<infer R> ? R : never;
+
 // export type UndefinedToOptional<T> =
 
 /*
