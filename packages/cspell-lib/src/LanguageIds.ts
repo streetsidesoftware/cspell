@@ -79,7 +79,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'powershell', extensions: ['.ps1', '.psm1', '.psd1', '.pssc', '.psrc'] },
     { id: 'purescript', extensions: ['.purs'] },
     { id: 'python', extensions: ['.py', '.rpy', '.pyw', '.cpy', '.gyp', '.gypi'] },
-    { id: 'r', extensions: ['.r', '.rhistory', '.rprofile', '.rt'] },
+    { id: 'r', extensions: ['.r', '.R', '.rhistory', '.rprofile', '.rt'] },
     { id: 'razor', extensions: ['.cshtml'] },
     { id: 'ruby', extensions: ['.rb', '.rbx', '.rjs', '.gemspec', '.rake', '.ru'] },
     { id: 'ruby', extensions: [], filenames: ['Gemfile'] },

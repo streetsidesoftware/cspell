@@ -16,6 +16,8 @@ describe('Validate LanguageIds', () => {
     test.each`
         filename                      | expected
         ${'code.ts'}                  | ${['typescript']}
+        ${'base.r'}                   | ${['r']}
+        ${'base.R'}                   | ${['r']}
         ${'doc.tex'}                  | ${['latex']}
         ${'image.jpg'}                | ${['image']}
         ${'workspace.code-workspace'} | ${['jsonc']}
