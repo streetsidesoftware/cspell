@@ -14,7 +14,7 @@ Because the spell checker was originally case insensitive, making it case aware 
 
 **Note:** Not all dictionaries are currently case aware, so in those cases, lower case words are allowed.
 
-## Always Enable Case Sensitive Checking
+## Enable Case Sensitive Checking by Default
 
 **Note:** this might create a lot of false issues in code files.
 
