@@ -26,6 +26,8 @@ Example with `café`:
 | `cafë` | ❌  | Using a different accent with `e` is not ok        |
 | `cäfe` | ❌  | Added accent to `a` is not ok                      |
 
+<!--- cspell:ignore cafë cäfe  -->
+
 ## Default Setting
 
 Because the spell checker was originally case insensitive, making it case aware takes care so as to not break things. CSpell `5.x` introduced the `caseSensitive` setting to allow checking case.
