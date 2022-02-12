@@ -1,8 +1,14 @@
 # Code Scopes
 
-| Scope       | Meaning                        |
-| ----------- | ------------------------------ |
-| `source.ts` | Matches extension of the file. |
+| Scope                       | Meaning                        |
+| --------------------------- | ------------------------------ |
+| `source.ts`                 | Matches extension of the file. |
+| `string.quoted.single.ts`   | Single quote string            |
+| `string.quoted.double.ts`   | Double quote string            |
+| `string.template.js`        | Template string                |
+| `entity.name.function.ts`   | Function name                  |
+| `entity.name.type.class.ts` |                                |
+| `meta.class.ts`             |                                |
 
 References:
 

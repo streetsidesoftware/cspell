@@ -76,14 +76,26 @@ scope: ${context.getScope().type}
         }
         if (node.type === 'MemberExpression') {
             const extra = node.property === child ? 'property' : node.object === child ? 'object' : '';
-            return [node.type, extra].join('.');
+            return node.type + '.' + extra;
+        }
+        if (node.type === 'ArrowFunctionExpression') {
+            const extra = node.body === child ? 'body' : 'param';
+            return node.type + '.' + extra;
+        }
+        if (node.type === 'FunctionDeclaration') {
+            const extra = node.id === child ? 'id' : node.body === child ? 'body' : 'params';
+            return node.type + '.' + extra;
+        }
+        if (node.type === 'ClassDeclaration' || node.type === 'ClassExpression') {
+            const extra = node.id === child ? 'id' : node.body === child ? 'body' : 'superClass';
+            return node.type + '.' + extra;
         }
         return node.type;
     }
 
     function inheritance(node: Node) {
         const a = [...context.getAncestors(), node];
-        return a.map(mapNode).join('.');
+        return a.map(mapNode).join(' ');
     }
 }
 
