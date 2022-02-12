@@ -5,6 +5,18 @@ import * as path from 'path';
 
 let _sampleTs: string | undefined;
 const root = path.resolve(__dirname, '..');
+const samplesDir = path.join(root, 'samples');
+
+const parsers: Record<string, string | undefined> = {
+    '.ts': resolveFromMonoRepo('node_modules/@typescript-eslint/parser'),
+};
+interface CachedSample {
+    code: string;
+    filename: string;
+    parser?: string;
+}
+
+const sampleFiles = new Map<string, CachedSample>();
 
 const ruleTester = new RuleTester({
     env: {
@@ -35,48 +47,33 @@ ruleTester.run('cspell', rule.rules.cspell, {
         // 'async function* values(iter) { yield* iter; }',
         // 'var foo = true',
         // 'const x = `It is now time to add everything up: \\` ${y} + ${x}`',
-        sampleCodeJS(),
-        sampleTs(),
+        readSample('sample.js'),
+        readSample('sample.ts'),
+        readSample('sampleESM.mjs'),
     ],
     invalid: [],
 });
-
-function sampleCodeJS() {
-    return `
-"use strict"
-
-import * as fs from 'fs';
-const commander = require('commander');
-
-export const help = \`
-This is some help.
-\`;
-
-/**
- * run code
- */
-export function command(cmd) {
-  const prompt = "Enter your name:";
-
-  return prompt;
-}
-
-
-command(commander);
-`;
-}
 
 function resolveFromMonoRepo(file: string): string {
     return path.resolve(root, file);
 }
 
-function sampleTs(): RuleTester.ValidTestCase {
-    const filename = path.resolve(root, './samples/sample.ts');
-    _sampleTs = _sampleTs || fs.readFileSync(filename, 'utf-8');
-    const code = _sampleTs;
-    return {
+function readSample(_filename: string): CachedSample {
+    const s = sampleFiles.get(_filename);
+    if (s) return s;
+
+    const filename = path.resolve(samplesDir, _filename);
+    const code = fs.readFileSync(filename, 'utf-8');
+
+    const sample: CachedSample = {
         code,
         filename,
-        parser: resolveFromMonoRepo('node_modules/@typescript-eslint/parser'),
     };
+
+    const parser = parsers[path.extname(filename)];
+    if (parser) {
+        sample.parser = parser;
+    }
+
+    return sample;
 }
