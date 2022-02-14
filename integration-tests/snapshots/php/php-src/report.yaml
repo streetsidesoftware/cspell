@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]
 Summary:
   files: 1828
   filesWithIssues: 1089
-  issues: 21965
+  issues: 21966
   errors: 0
 Errors: []
 
@@ -1008,11 +1008,11 @@ issues:
   - "ext/gd/libgd/gd_png.c:178:45    	IDAT    	U   	to keep pre- and post-IDAT chunk info separated"
   - "ext/gd/libgd/gd_png.c:199:10    	IHDR    	U   	png_get_IHDR(png_ptr, info_ptr,"
   - "ext/gd/libgd/gd_png.c:251:12    	PLTE    	U   	png_get_PLTE(png_ptr, info_ptr,"
-  - "ext/gd/libgd/gd_png.c:370:13    	Slaven  	U   	/* 2.0.12: Slaven Rezic: palette images"
-  - "ext/gd/libgd/gd_png.c:370:20    	Rezic   	U   	/* 2.0.12: Slaven Rezic: palette images are"
-  - "ext/gd/libgd/gd_png.c:480:52    	Lutz    	U   	part on code from Dale Lutz (Safe Software Inc."
-  - "ext/gd/libgd/gd_png.c:704:35    	Phong   	U   	performance optimizations by Phong Tran */"
-  - "ext/gd/libgd/gd_png.c:709:9     	ptpixels	U   	int **ptpixels = im->tpixels;"
+  - "ext/gd/libgd/gd_png.c:375:13    	Slaven  	U   	/* 2.0.12: Slaven Rezic: palette images"
+  - "ext/gd/libgd/gd_png.c:375:20    	Rezic   	U   	/* 2.0.12: Slaven Rezic: palette images are"
+  - "ext/gd/libgd/gd_png.c:485:52    	Lutz    	U   	part on code from Dale Lutz (Safe Software Inc."
+  - "ext/gd/libgd/gd_png.c:709:35    	Phong   	U   	performance optimizations by Phong Tran */"
+  - "ext/gd/libgd/gd_png.c:714:9     	ptpixels	U   	int **ptpixels = im->tpixels;"
   - "ext/gd/libgd/gd_tga.c:127:11    	flipv   	U   	if (tga->flipv && tga->fliph) {"
   - "ext/gd/libgd/gd_tga.c:127:25    	fliph   	U   	(tga->flipv && tga->fliph) {"
   - "ext/gd/libgd/gd_tga.c:162:7     	xstart  	U   	tga->xstart = header[8] + (header"
@@ -1299,9 +1299,9 @@ issues:
   - "ext/iconv/iconv.c:747:14    	haystk  	U   	const char *haystk, size_t haystk_nbytes"
   - "ext/iconv/iconv.c:1195:14   	csname  	U   	const char *csname = NULL;"
   - "ext/iconv/iconv.c:1360:12   	qmarks  	U   	int qmarks = 2;"
-  - "ext/iconv/iconv.c:2359:9    	ocnt    	U   	size_t ocnt, prev_ocnt, icnt, tcnt"
-  - "ext/iconv/iconv.c:2359:26   	icnt    	U   	size_t ocnt, prev_ocnt, icnt, tcnt;"
-  - "ext/iconv/iconv.c:2359:32   	tcnt    	U   	ocnt, prev_ocnt, icnt, tcnt;"
+  - "ext/iconv/iconv.c:2355:9    	ocnt    	U   	size_t ocnt, prev_ocnt, icnt, tcnt"
+  - "ext/iconv/iconv.c:2355:26   	icnt    	U   	size_t ocnt, prev_ocnt, icnt, tcnt;"
+  - "ext/iconv/iconv.c:2355:32   	tcnt    	U   	ocnt, prev_ocnt, icnt, tcnt;"
   - "ext/imap/php_imap_arginfo.h:55:67   	adrlist 	U   	arginfo_imap_rfc822_parse_adrlist, 0, 2, IS_ARRAY, 0)"
   - "ext/imap/php_imap.c:22:20   	Taskinen        	U   	| Jani Taskinen <jani.taskinen"
   - "ext/imap/php_imap.c:76:43   	myzvalue        	U   	header_object(zval *myzvalue, ENVELOPE *en);"
@@ -2244,7 +2244,7 @@ issues:
   - "ext/opcache/jit/zend_jit.c:751:37   	Wtautological   	U   	diagnostic ignored \"-Wtautological-compare\""
   - "ext/opcache/jit/zend_jit.c:1321:17  	sccs            	U   	zend_ssa_find_sccs(op_array, ssa);"
   - "ext/opcache/jit/zend_jit.c:1673:65  	Wimmer          	U   	SSA Form\", Christian Wimmer and"
-  - "ext/opcache/jit/zend_jit.c:4655:51  	lbhybrid        	U   	handler = dasm_labels[zend_lbhybrid_runtime_jit];"
+  - "ext/opcache/jit/zend_jit.c:4658:51  	lbhybrid        	U   	handler = dasm_labels[zend_lbhybrid_runtime_jit];"
   - "ext/opcache/jit/zend_jit.h:41:73    	caled   	U   	the most frequently caled on first request functions"
   - "ext/opcache/shared_alloc_mmap.c:52:48   	vmmap   	U   	segments via tools such as vmmap */"
   - "ext/opcache/shared_alloc_win32.c:210:33     	Radomization	U   	Address Space Layout Radomization (ASLR). We can still"
@@ -3649,8 +3649,9 @@ issues:
   - "ext/spl/spl_dllist.c:778:18     	neightbors  	U   	/* connect the neightbors */"
   - "ext/spl/spl_dllist.c:1043:8     	Unserializes	U   	/* {{{ Unserializes storage */"
   - "ext/spl/spl_dllist.c:1197:21    	neighbours  	U   	/* connect to the neighbours */"
-  - "ext/spl/spl_fixedarray.c:546:17     	unserialised	U   	/* Remove the unserialised properties, since we"
-  - "ext/spl/spl_fixedarray.c:685:25     	zindex      	U   	zval *zindex;"
+  - "ext/spl/spl_fixedarray.c:227:22     	expet       	U   	/* Engine doesn't expet packed array */"
+  - "ext/spl/spl_fixedarray.c:554:17     	unserialised	U   	/* Remove the unserialised properties, since we"
+  - "ext/spl/spl_fixedarray.c:693:25     	zindex      	U   	zval *zindex;"
   - "ext/spl/spl_heap.c:36:13    	PQUEUE      	U   	#define SPL_PQUEUE_EXTR_MASK 0x000"
   - "ext/spl/spl_heap.c:76:21    	pqueue      	U   	typedef struct _spl_pqueue_elem {"
   - "ext/spl/spl_heap.c:130:7    	zresult     	U   	zval zresult;"
@@ -4708,7 +4709,7 @@ issues:
   - "Zend/Optimizer/scdf.c:23:58     	Wegman  	U   	constant propagation\" by Wegman and Zadeck. We're using"
   - "Zend/Optimizer/scdf.c:23:69     	Zadeck  	U   	propagation\" by Wegman and Zadeck. We're using a"
   - "Zend/Optimizer/zend_call_graph.h:51:84      	opnum   	U   	with init/call/send opnum */"
-  - "Zend/Optimizer/zend_cfg.c:838:26    	Sreedhar	U   	Identify loops. See Sreedhar et al, \"Identifying"
+  - "Zend/Optimizer/zend_cfg.c:839:25    	Sreedhar	U   	Identify loops. See Sreedhar et al, \"Identifying"
   - "Zend/Optimizer/zend_dump.c:3:28     	Visualisation   	U   	Zend Engine, Bytecode Visualisation"
   - "Zend/Optimizer/zend_dump.c:259:10   	afirst          	U   	bool afirst = 1;"
   - "Zend/Optimizer/zend_dump.c:362:22   	NOVAL           	U   	fprintf(stderr, \" NOVAL\");"
