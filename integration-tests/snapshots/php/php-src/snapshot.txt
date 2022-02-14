@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1828, Issues found: 21965 in 1089 files
+ CSpell: Files checked: 1828, Issues found: 21966 in 1089 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -80,7 +80,7 @@ Lines:
 ./Zend/Optimizer/scdf.c:23:58     - Unknown word (Wegman)     -- constant propagation" by Wegman and Zadeck. We're using
 ./Zend/Optimizer/scdf.c:23:69     - Unknown word (Zadeck)     -- propagation" by Wegman and Zadeck. We're using a
 ./Zend/Optimizer/zend_call_graph.h:51:84     - Unknown word (opnum)      -- with init/call/send opnum */
-./Zend/Optimizer/zend_cfg.c:838:26    - Unknown word (Sreedhar)   -- Identify loops.  See Sreedhar et al, "Identifying
+./Zend/Optimizer/zend_cfg.c:839:25    - Unknown word (Sreedhar)   -- Identify loops. See Sreedhar et al, "Identifying
 ./Zend/Optimizer/zend_dump.c:259:10    - Unknown word (afirst)        -- bool afirst = 1;
 ./Zend/Optimizer/zend_dump.c:362:22    - Unknown word (NOVAL)         -- fprintf(stderr, " NOVAL");
 ./Zend/Optimizer/zend_dump.c:365:22    - Unknown word (NOESC)         -- fprintf(stderr, " NOESC");
@@ -1233,13 +1233,13 @@ Lines:
 ./ext/gd/libgd/gd_png.c:199:10    - Unknown word (IHDR)       -- png_get_IHDR(png_ptr, info_ptr,
 ./ext/gd/libgd/gd_png.c:19:50     - Unknown word (Roelofs)    -- Copyright 1999 Greg Roelofs and Thomas Boutell
 ./ext/gd/libgd/gd_png.c:251:12    - Unknown word (PLTE)       -- png_get_PLTE(png_ptr, info_ptr,
-./ext/gd/libgd/gd_png.c:370:13    - Unknown word (Slaven)     -- /* 2.0.12: Slaven Rezic: palette images
-./ext/gd/libgd/gd_png.c:370:20    - Unknown word (Rezic)      -- /* 2.0.12: Slaven Rezic: palette images are
-./ext/gd/libgd/gd_png.c:480:52    - Unknown word (Lutz)       -- part on code from Dale Lutz (Safe Software Inc.
+./ext/gd/libgd/gd_png.c:375:13    - Unknown word (Slaven)     -- /* 2.0.12: Slaven Rezic: palette images
+./ext/gd/libgd/gd_png.c:375:20    - Unknown word (Rezic)      -- /* 2.0.12: Slaven Rezic: palette images are
+./ext/gd/libgd/gd_png.c:485:52    - Unknown word (Lutz)       -- part on code from Dale Lutz (Safe Software Inc.
 ./ext/gd/libgd/gd_png.c:51:36     - Unknown word (structp)    -- gdPngErrorHandler (png_structp png_ptr, png_const_charp
 ./ext/gd/libgd/gd_png.c:51:63     - Unknown word (charp)      -- structp png_ptr, png_const_charp msg)
-./ext/gd/libgd/gd_png.c:704:35    - Unknown word (Phong)      -- performance optimizations by Phong Tran */
-./ext/gd/libgd/gd_png.c:709:9     - Unknown word (ptpixels)   -- int **ptpixels = im->tpixels;
+./ext/gd/libgd/gd_png.c:709:35    - Unknown word (Phong)      -- performance optimizations by Phong Tran */
+./ext/gd/libgd/gd_png.c:714:9     - Unknown word (ptpixels)   -- int **ptpixels = im->tpixels;
 ./ext/gd/libgd/gd_png.c:81:53     - Unknown word (bytep)      -- structp png_ptr, png_bytep data, png_size_t length
 ./ext/gd/libgd/gd_tga.c:127:11    - Unknown word (flipv)      -- if (tga->flipv && tga->fliph) {
 ./ext/gd/libgd/gd_tga.c:127:25    - Unknown word (fliph)      -- (tga->flipv && tga->fliph) {
@@ -1495,9 +1495,9 @@ Lines:
 ./ext/iconv/iconv.c:1195:14   - Unknown word (csname)     -- const char *csname = NULL;
 ./ext/iconv/iconv.c:120:178   - Unknown word (lfchars)    -- line_len, const char *lfchars, php_iconv_enc_scheme
 ./ext/iconv/iconv.c:1360:12   - Unknown word (qmarks)     -- int qmarks = 2;
-./ext/iconv/iconv.c:2359:26   - Unknown word (icnt)       -- size_t ocnt, prev_ocnt, icnt, tcnt;
-./ext/iconv/iconv.c:2359:32   - Unknown word (tcnt)       -- ocnt, prev_ocnt, icnt, tcnt;
-./ext/iconv/iconv.c:2359:9    - Unknown word (ocnt)       -- size_t ocnt, prev_ocnt, icnt, tcnt
+./ext/iconv/iconv.c:2355:26   - Unknown word (icnt)       -- size_t ocnt, prev_ocnt, icnt, tcnt;
+./ext/iconv/iconv.c:2355:32   - Unknown word (tcnt)       -- ocnt, prev_ocnt, icnt, tcnt;
+./ext/iconv/iconv.c:2355:9    - Unknown word (ocnt)       -- size_t ocnt, prev_ocnt, icnt, tcnt
 ./ext/iconv/iconv.c:747:14    - Unknown word (haystk)     -- const char *haystk, size_t haystk_nbytes
 ./ext/imap/php_imap.c:1134:46   - Unknown word (OSSS)           -- parameters(ZEND_NUM_ARGS(), "OSSS", &imap_conn_obj, php
 ./ext/imap/php_imap.c:1500:23   - Unknown word (mboxob)         -- zval *imap_conn_obj, mboxob;
@@ -2406,7 +2406,7 @@ Lines:
 ./ext/opcache/jit/zend_jit.c:1321:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
 ./ext/opcache/jit/zend_jit.c:154:17    - Unknown word (idom)       -- b = blocks[b].idom;
 ./ext/opcache/jit/zend_jit.c:1673:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
-./ext/opcache/jit/zend_jit.c:4655:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
+./ext/opcache/jit/zend_jit.c:4658:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
 ./ext/opcache/jit/zend_jit.c:751:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
 ./ext/opcache/jit/zend_jit.h:41:73     - Unknown word (caled)      -- the most frequently caled on first request functions
 ./ext/opcache/jit/zend_jit_arm64.h:131:14    - Unknown word (FPTMP)          -- #define ZREG_FPTMP ZREG_V16
@@ -3846,8 +3846,9 @@ Lines:
 ./ext/spl/spl_dllist.c:1043:8    - Unknown word (Unserializes) -- /* {{{ Unserializes storage */
 ./ext/spl/spl_dllist.c:1197:21   - Unknown word (neighbours)   -- /* connect to the neighbours */
 ./ext/spl/spl_dllist.c:778:18    - Unknown word (neightbors) -- /* connect the neightbors */
-./ext/spl/spl_fixedarray.c:546:17    - Unknown word (unserialised) -- /* Remove the unserialised properties, since we
-./ext/spl/spl_fixedarray.c:685:25    - Unknown word (zindex)       -- zval *zindex;
+./ext/spl/spl_fixedarray.c:227:22    - Unknown word (expet)      -- /* Engine doesn't expet packed array */
+./ext/spl/spl_fixedarray.c:554:17    - Unknown word (unserialised) -- /* Remove the unserialised properties, since we
+./ext/spl/spl_fixedarray.c:693:25    - Unknown word (zindex)       -- zval *zindex;
 ./ext/spl/spl_heap.c:130:7     - Unknown word (zresult)    -- zval zresult;
 ./ext/spl/spl_heap.c:36:13     - Unknown word (PQUEUE)     -- #define SPL_PQUEUE_EXTR_MASK 0x000
 ./ext/spl/spl_heap.c:652:39    - Unknown word (priodiry)   -- value with the priority $priodiry on the priorityqueue
