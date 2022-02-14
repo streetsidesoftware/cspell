@@ -99,6 +99,7 @@ const settings = {
         '@cspell/dict-cryptocurrencies/cspell-ext.json',
         '@cspell/dict-csharp/cspell-ext.json',
         '@cspell/dict-css/cspell-ext.json',
+        '@cspell/dict-dart/cspell-ext.json',
         '@cspell/dict-django/cspell-ext.json',
         '@cspell/dict-dotnet/cspell-ext.json',
         '@cspell/dict-elixir/cspell-ext.json',
