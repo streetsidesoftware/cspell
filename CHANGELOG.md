@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.18.5](https://github.com/streetsidesoftware/cspell/compare/v5.18.4...v5.18.5) (2022-02-15)
+
+
+### Bug Fixes
+
+* Add dart language support ([#2444](https://github.com/streetsidesoftware/cspell/issues/2444)) ([bbcf793](https://github.com/streetsidesoftware/cspell/commit/bbcf7938eb5c6cfab3893bd967e43f368472ac27))
+* Add to Case Sensitive docs ([#2432](https://github.com/streetsidesoftware/cspell/issues/2432)) ([5891600](https://github.com/streetsidesoftware/cspell/commit/589160003446b1eddbad83b4e562b76cbbb73c29))
+* Improve suggestions ([#2426](https://github.com/streetsidesoftware/cspell/issues/2426)) ([51d5a71](https://github.com/streetsidesoftware/cspell/commit/51d5a71894674f5a6986bda3d951ee987908e944))
+* Make it easier to work with RTL languages. ([#2410](https://github.com/streetsidesoftware/cspell/issues/2410)) ([91b035f](https://github.com/streetsidesoftware/cspell/commit/91b035f719baf3c21d3a8b9d92419234ec37b500))
+* Make sure ext `.R` is detected as an R file. ([#2425](https://github.com/streetsidesoftware/cspell/issues/2425)) ([e9ae045](https://github.com/streetsidesoftware/cspell/commit/e9ae0450a2f7651ecdf8a0ef71a20e58ed61280d)), closes [#2424](https://github.com/streetsidesoftware/cspell/issues/2424)
+* Make sure suggestions are within limits ([#2428](https://github.com/streetsidesoftware/cspell/issues/2428)) ([d9f7943](https://github.com/streetsidesoftware/cspell/commit/d9f79430805e796add1c27315eb99fa3251d66e5))
+* Upgrade bundled dictionaries ([#2431](https://github.com/streetsidesoftware/cspell/issues/2431)) ([de1d68f](https://github.com/streetsidesoftware/cspell/commit/de1d68f0a35eebeac565e0dde9700afba1e0ad5a))
+
+
+
+
+
 ## [5.18.4](https://github.com/streetsidesoftware/cspell/compare/v5.18.3...v5.18.4) (2022-02-07)
 
 

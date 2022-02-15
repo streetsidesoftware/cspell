@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.18.5](https://github.com/streetsidesoftware/cspell/compare/v5.18.4...v5.18.5) (2022-02-15)
+
+
+### Bug Fixes
+
+* Make sure ext `.R` is detected as an R file. ([#2425](https://github.com/streetsidesoftware/cspell/issues/2425)) ([e9ae045](https://github.com/streetsidesoftware/cspell/commit/e9ae0450a2f7651ecdf8a0ef71a20e58ed61280d)), closes [#2424](https://github.com/streetsidesoftware/cspell/issues/2424)
+
+
+
+
+
 ## [5.18.4](https://github.com/streetsidesoftware/cspell/compare/v5.18.3...v5.18.4) (2022-02-07)
 
 

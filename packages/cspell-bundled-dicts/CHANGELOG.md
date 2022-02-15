@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.18.5](https://github.com/streetsidesoftware/cspell/compare/v5.18.4...v5.18.5) (2022-02-15)
+
+
+### Bug Fixes
+
+* Add dart language support ([#2444](https://github.com/streetsidesoftware/cspell/issues/2444)) ([bbcf793](https://github.com/streetsidesoftware/cspell/commit/bbcf7938eb5c6cfab3893bd967e43f368472ac27))
+* Upgrade bundled dictionaries ([#2431](https://github.com/streetsidesoftware/cspell/issues/2431)) ([de1d68f](https://github.com/streetsidesoftware/cspell/commit/de1d68f0a35eebeac565e0dde9700afba1e0ad5a))
+
+
+
+
+
 ## [5.18.4](https://github.com/streetsidesoftware/cspell/compare/v5.18.3...v5.18.4) (2022-02-07)
 
 **Note:** Version bump only for package @cspell/cspell-bundled-dicts

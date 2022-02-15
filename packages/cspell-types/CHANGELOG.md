@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.18.5](https://github.com/streetsidesoftware/cspell/compare/v5.18.4...v5.18.5) (2022-02-15)
+
+
+### Bug Fixes
+
+* Improve suggestions ([#2426](https://github.com/streetsidesoftware/cspell/issues/2426)) ([51d5a71](https://github.com/streetsidesoftware/cspell/commit/51d5a71894674f5a6986bda3d951ee987908e944))
+* Make it easier to work with RTL languages. ([#2410](https://github.com/streetsidesoftware/cspell/issues/2410)) ([91b035f](https://github.com/streetsidesoftware/cspell/commit/91b035f719baf3c21d3a8b9d92419234ec37b500))
+
+
+
+
+
 ## [5.18.4](https://github.com/streetsidesoftware/cspell/compare/v5.18.3...v5.18.4) (2022-02-07)
 
 **Note:** Version bump only for package @cspell/cspell-types
