@@ -82,7 +82,7 @@ export function loadDictionary(uri: string, options: DictionaryDefinitionInterna
 export function loadDictionarySync(uri: string, options: DictionaryDefinitionInternal): SpellingDictionary {
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
-    if (entry?.dictionary) {
+    if (entry?.dictionary && entry.stat) {
         return entry.dictionary;
     }
     const loadedEntry = loadEntrySync(uri, options);
