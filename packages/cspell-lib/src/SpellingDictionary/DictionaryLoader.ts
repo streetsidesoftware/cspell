@@ -1,5 +1,5 @@
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
-import { stat } from 'fs-extra';
+import { promises as fs, statSync } from 'fs';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
@@ -11,6 +11,8 @@ import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
 import { format } from 'util';
 
 const MAX_AGE = 10000;
+
+const stat = fs.stat;
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
@@ -34,7 +36,8 @@ interface CacheEntry {
     uri: string;
     options: LoadOptions;
     ts: number;
-    state: Promise<Stats | Error>;
+    pStat: Promise<Stats | Error>;
+    stat: Stats | Error | undefined;
     pDictionary: Promise<SpellingDictionary>;
     dictionary: SpellingDictionary | undefined;
 }
@@ -111,8 +114,8 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
         const pStat = stat(entry.uri).catch((e) => e as Error);
-        const [state, oldState] = await Promise.all([pStat, entry.state]);
-        if (entry.ts === now && !isEqual(state, oldState)) {
+        const [newStat] = await Promise.all([pStat, entry.pStat]);
+        if (entry.ts === now && !isEqual(newStat, entry.stat)) {
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
         }
     }
@@ -120,7 +123,8 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
 
 type StatsOrError = Stats | Error;
 
-function isEqual(a: StatsOrError, b: StatsOrError): boolean {
+function isEqual(a: StatsOrError, b: StatsOrError | undefined): boolean {
+    if (!b) return false;
     if (isError(a)) {
         return isError(b) && a.message === b.message && a.name === b.name;
     }
@@ -140,21 +144,26 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         uri,
         options,
         ts: now,
-        state: stat(uri).catch((e) => e),
-        pDictionary: dictionary.then((d) => ((entry.dictionary = d), d)),
+        pStat: stat(uri)
+            .then((s) => (entry.stat = s))
+            .catch((e) => (entry.stat = e)),
+        stat: undefined,
+        pDictionary: dictionary.then((d) => (entry.dictionary = d)),
         dictionary: undefined,
     };
     return entry;
 }
 
 function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): CacheEntrySync {
+    const stat = statOrError(uri);
     try {
         const dictionary = loadSync(uri, options);
         return {
             uri,
             options,
             ts: now,
-            state: stat(uri).catch((e) => e),
+            pStat: Promise.resolve(stat),
+            stat,
             pDictionary: Promise.resolve(dictionary),
             dictionary,
         };
@@ -167,10 +176,19 @@ function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): Cac
             uri,
             options,
             ts: now,
-            state: stat(uri).catch((e) => e),
+            pStat: Promise.resolve(stat),
+            stat,
             pDictionary: Promise.resolve(dictionary),
             dictionary,
         };
+    }
+}
+
+function statOrError(uri: string): Stats | Error {
+    try {
+        return statSync(uri);
+    } catch (e) {
+        return toError(e);
     }
 }
 
@@ -264,6 +282,11 @@ export const testing = {
     loadEntry,
     load,
 };
+
+function toError(e: unknown): Error {
+    if (e instanceof Error) return e;
+    return new Error(format(e));
+}
 
 /**
  * Copied from the Node definition to avoid a dependency upon a specific version of Node
