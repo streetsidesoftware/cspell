@@ -127,7 +127,7 @@ function isEqual(a: StatsOrError, b: StatsOrError | undefined): boolean {
     if (isError(a)) {
         return isError(b) && a.message === b.message && a.name === b.name;
     }
-    return !isError(b) && (a.mtimeNs === b.mtimeNs || a.size === b.size);
+    return !isError(b) && (a.mtimeMs === b.mtimeMs || a.size === b.size);
 }
 
 function isError(e: StatsOrError): e is Error {
@@ -302,7 +302,6 @@ interface StatsBase<T> {
     blocks: T;
     atimeMs: T;
     mtimeMs: T;
-    mtimeNs: bigint;
     ctimeMs: T;
     birthtimeMs: T;
     atime: Date;
@@ -312,15 +311,15 @@ interface StatsBase<T> {
 }
 
 function getStat(uri: string): Promise<Stats | Error> {
-    return fs.stat(uri, { bigint: true }).catch((e) => toError(e));
+    return fs.stat(uri).catch((e) => toError(e));
 }
 
 function getStatSync(uri: string): Stats | Error {
     try {
-        return statSync(uri, { bigint: true });
+        return statSync(uri);
     } catch (e) {
         return toError(e);
     }
 }
 
-export type Stats = StatsBase<bigint>;
+export type Stats = StatsBase<number>;
