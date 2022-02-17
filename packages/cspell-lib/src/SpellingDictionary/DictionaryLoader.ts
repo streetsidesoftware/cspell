@@ -2,17 +2,16 @@ import type { DictionaryFileTypes } from '@cspell/cspell-types';
 import { promises as fs, statSync } from 'fs';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
+import { format } from 'util';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
+import { isErrnoException } from '../util/errors';
 import { readLines, readLinesSync } from '../util/fileReader';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { createSpellingDictionaryTrie } from './SpellingDictionaryFromTrie';
-import { format } from 'util';
 
 const MAX_AGE = 10000;
-
-const stat = fs.stat;
 
 const loaders: Loaders = {
     S: loadSimpleWordList,
@@ -113,7 +112,7 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
     if (now - entry.ts >= maxAge) {
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
-        const pStat = stat(entry.uri).catch((e) => e as Error);
+        const pStat = getStat(entry.uri);
         const [newStat] = await Promise.all([pStat, entry.pStat]);
         if (entry.ts === now && !isEqual(newStat, entry.stat)) {
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
@@ -128,12 +127,12 @@ function isEqual(a: StatsOrError, b: StatsOrError | undefined): boolean {
     if (isError(a)) {
         return isError(b) && a.message === b.message && a.name === b.name;
     }
-    return !isError(b) && (a.mtimeMs === b.mtimeMs || a.size === b.size);
+    return !isError(b) && (a.mtimeNs === b.mtimeNs || a.size === b.size);
 }
 
 function isError(e: StatsOrError): e is Error {
     const err = e as Partial<Error>;
-    return !!(err.name && err.message);
+    return !!err.message;
 }
 
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
@@ -144,9 +143,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         uri,
         options,
         ts: now,
-        pStat: stat(uri)
-            .then((s) => (entry.stat = s))
-            .catch((e) => (entry.stat = e)),
+        pStat: getStat(uri).then((s) => (entry.stat = s)),
         stat: undefined,
         pDictionary: dictionary.then((d) => (entry.dictionary = d)),
         dictionary: undefined,
@@ -155,7 +152,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
 }
 
 function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): CacheEntrySync {
-    const stat = statOrError(uri);
+    const stat = getStatSync(uri);
     try {
         const dictionary = loadSync(uri, options);
         return {
@@ -181,14 +178,6 @@ function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): Cac
             pDictionary: Promise.resolve(dictionary),
             dictionary,
         };
-    }
-}
-
-function statOrError(uri: string): Stats | Error {
-    try {
-        return statSync(uri);
-    } catch (e) {
-        return toError(e);
     }
 }
 
@@ -284,6 +273,7 @@ export const testing = {
 };
 
 function toError(e: unknown): Error {
+    if (isErrnoException(e)) return e;
     if (e instanceof Error) return e;
     return new Error(format(e));
 }
@@ -312,6 +302,7 @@ interface StatsBase<T> {
     blocks: T;
     atimeMs: T;
     mtimeMs: T;
+    mtimeNs: bigint;
     ctimeMs: T;
     birthtimeMs: T;
     atime: Date;
@@ -320,4 +311,16 @@ interface StatsBase<T> {
     birthtime: Date;
 }
 
-export type Stats = StatsBase<number>;
+function getStat(uri: string): Promise<Stats | Error> {
+    return fs.stat(uri, { bigint: true }).catch((e) => toError(e));
+}
+
+function getStatSync(uri: string): Stats | Error {
+    try {
+        return statSync(uri, { bigint: true });
+    } catch (e) {
+        return toError(e);
+    }
+}
+
+export type Stats = StatsBase<bigint>;
