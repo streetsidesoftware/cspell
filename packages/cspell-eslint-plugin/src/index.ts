@@ -1,5 +1,6 @@
 // cspell:ignore TSESTree
 import type { TSESTree } from '@typescript-eslint/types';
+import assert from 'assert';
 import type { Rule } from 'eslint';
 // eslint-disable-next-line node/no-missing-import
 import type { Comment, Identifier, Literal, Node, TemplateElement } from 'estree';
@@ -90,6 +91,9 @@ scope: ${context.getScope().type}
             const extra = node.id === child ? 'id' : node.body === child ? 'body' : 'superClass';
             return node.type + '.' + extra;
         }
+        if (node.type === 'Literal') {
+            return tagLiteral(node);
+        }
         return node.type;
     }
 
@@ -97,6 +101,20 @@ scope: ${context.getScope().type}
         const a = [...context.getAncestors(), node];
         return a.map(mapNode).join(' ');
     }
+}
+
+function tagLiteral(node: Node | TSESTree.Node): string {
+    assert(node.type === 'Literal');
+    const kind = typeof node.value;
+    const extra =
+        kind === 'string'
+            ? node.raw?.[0] === '"'
+                ? 'string.double'
+                : 'string.single'
+            : node.value === null
+            ? 'null'
+            : kind;
+    return node.type + '.' + extra;
 }
 
 export const rules: PluginRules = {
