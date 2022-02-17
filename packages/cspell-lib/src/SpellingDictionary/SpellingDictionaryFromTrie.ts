@@ -191,12 +191,12 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
 
 type FindAnyFormResult = FindFullResult;
 
-export async function createSpellingDictionaryTrie(
+export function createSpellingDictionaryTrie(
     data: Iterable<string>,
     name: string,
     source: string,
     options: SpellingDictionaryOptions
-): Promise<SpellingDictionary> {
+): SpellingDictionary {
     const trieNode = importTrie(data);
     const trie = new Trie(trieNode);
     return new SpellingDictionaryFromTrie(trie, name, options, source);

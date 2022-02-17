@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
-import { loadDictionary, LoadOptions, refreshCacheEntries, testing } from './DictionaryLoader';
+import { loadDictionary, LoadOptions, refreshCacheEntries, testing, loadDictionarySync } from './DictionaryLoader';
 jest.mock('../util/logger');
 
 const root = path.join(__dirname, '..', '..');
@@ -46,7 +46,7 @@ describe('Validate DictionaryLoader', () => {
         const entry = testing.loadEntry(filename, def);
 
         await expect(entry.state).resolves.toEqual(expect.objectContaining(expectedError));
-        await expect(entry.dictionary).resolves.not.toBe(undefined);
+        await expect(entry.pDictionary).resolves.not.toBe(undefined);
     });
 
     test.each`
@@ -153,6 +153,30 @@ describe('Validate DictionaryLoader', () => {
         async ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
             const file = sample('words.txt');
             const d = await loadDictionary(file, dDef({ name: 'words', path: file }));
+            expect(d.has(word, { ignoreCase })).toBe(hasWord);
+        }
+    );
+
+    test.each`
+        testCase                        | word               | hasWord  | ignoreCase
+        ${''}                           | ${'apple'}         | ${true}  | ${true}
+        ${''}                           | ${'pear'}          | ${true}  | ${true}
+        ${''}                           | ${'strawberry'}    | ${true}  | ${true}
+        ${''}                           | ${'tree'}          | ${false} | ${true}
+        ${''}                           | ${'left-right'}    | ${true}  | ${true}
+        ${''}                           | ${'left'}          | ${false} | ${true}
+        ${''}                           | ${'right'}         | ${false} | ${true}
+        ${'with apart accent over "a"'} | ${nfd('Geschäft')} | ${true}  | ${false}
+        ${'with accent ä'}              | ${nfc('Geschäft')} | ${true}  | ${false}
+        ${'with apart accent over "a"'} | ${nfd('Geschäft')} | ${true}  | ${true}
+        ${'with accent ä'}              | ${nfc('Geschäft')} | ${true}  | ${true}
+        ${'no case'}                    | ${'geschaft'}      | ${true}  | ${true}
+        ${'not found because of case'}  | ${'geschaft'}      | ${false} | ${false}
+    `(
+        'sync dict has word $testCase $word',
+        ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
+            const file = sample('words.txt.gz');
+            const d = loadDictionarySync(file, dDef({ name: 'words', path: file }));
             expect(d.has(word, { ignoreCase })).toBe(hasWord);
         }
     );
