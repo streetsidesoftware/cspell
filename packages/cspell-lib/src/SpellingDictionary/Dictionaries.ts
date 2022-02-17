@@ -2,12 +2,16 @@ import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { isDefined } from '../util/util';
 import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
-import { loadDictionary, refreshCacheEntries } from './DictionaryLoader';
+import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';
 import { SpellingDictionary } from './SpellingDictionary';
 import { createCollectionP, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 
 export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map((def) => loadDictionary(def.path, def));
+}
+
+export function loadDictionaryDefsSync(defsToLoad: DictionaryDefinitionInternal[]): SpellingDictionary[] {
+    return defsToLoad.map((def) => loadDictionarySync(def.path, def));
 }
 
 export function refreshDictionaryCache(maxAge?: number): Promise<void> {
