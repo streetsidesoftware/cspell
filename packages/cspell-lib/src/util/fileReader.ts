@@ -1,4 +1,4 @@
-import { readFile } from 'cspell-io';
+import { readFile, readFileSync } from 'cspell-io';
 import { toIterableIterator } from './iterableIteratorLib';
 
 export async function readLines(
@@ -11,4 +11,9 @@ export async function readLines(
     } catch (e) {
         return Promise.reject(e);
     }
+}
+
+export function readLinesSync(filename: string, encoding: BufferEncoding = 'utf8'): string[] {
+    const content = readFileSync(filename, encoding);
+    return content.split(/\r?\n/g);
 }

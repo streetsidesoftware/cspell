@@ -1,4 +1,6 @@
 import * as fileReader from './fileReader';
+import { promises as fs } from 'fs';
+import * as path from 'path';
 
 describe('Validate file reader', () => {
     test('Catches errors for non-existent files', () => {
@@ -12,5 +14,25 @@ describe('Validate file reader', () => {
                 return true; // convert the error into a success.
             }
         );
+    });
+
+    test.each`
+        file
+        ${__filename}
+    `('reading files "$file"', async ({ file }) => {
+        const filename = path.resolve(__dirname, file);
+        const expected = (await fs.readFile(filename, 'utf-8')).split(/\r?\n/g);
+        const content = [...(await fileReader.readLines(filename))];
+        expect(content).toEqual(expected);
+    });
+
+    test.each`
+        file
+        ${__filename}
+    `('reading files sync "$file"', async ({ file }) => {
+        const filename = path.resolve(__dirname, file);
+        const expected = (await fs.readFile(filename, 'utf-8')).split(/\r?\n/g);
+        const content = fileReader.readLinesSync(filename);
+        expect(content).toEqual(expected);
     });
 });
