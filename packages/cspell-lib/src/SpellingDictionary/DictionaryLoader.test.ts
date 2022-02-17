@@ -158,34 +158,44 @@ describe('Validate DictionaryLoader', () => {
     );
 
     test.each`
-        testCase                        | word               | hasWord  | ignoreCase
-        ${''}                           | ${'apple'}         | ${true}  | ${true}
-        ${''}                           | ${'pear'}          | ${true}  | ${true}
-        ${''}                           | ${'strawberry'}    | ${true}  | ${true}
-        ${''}                           | ${'tree'}          | ${false} | ${true}
-        ${''}                           | ${'left-right'}    | ${true}  | ${true}
-        ${''}                           | ${'left'}          | ${false} | ${true}
-        ${''}                           | ${'right'}         | ${false} | ${true}
-        ${'with apart accent over "a"'} | ${nfd('Geschäft')} | ${true}  | ${false}
-        ${'with accent ä'}              | ${nfc('Geschäft')} | ${true}  | ${false}
-        ${'with apart accent over "a"'} | ${nfd('Geschäft')} | ${true}  | ${true}
-        ${'with accent ä'}              | ${nfc('Geschäft')} | ${true}  | ${true}
-        ${'no case'}                    | ${'geschaft'}      | ${true}  | ${true}
-        ${'not found because of case'}  | ${'geschaft'}      | ${false} | ${false}
-    `(
-        'sync dict has word $testCase $word',
-        ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
-            const file = sample('words.txt.gz');
-            const d = loadDictionarySync(file, dDef({ name: 'words', path: file }));
-            expect(d.has(word, { ignoreCase })).toBe(hasWord);
-        }
-    );
+        def                                                             | word          | hasWord
+        ${dDef({ name: 'words', path: sample('words.txt.gz') })}        | ${'apple'}    | ${true}
+        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'apple'}    | ${false}
+        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt') })}            | ${'York'}     | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'New York'} | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'York'}     | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'York'}     | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
+    `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
+        const d = loadDictionarySync(def.path, def);
+        expect(d.has(word)).toBe(hasWord);
+    });
+
+    test.each`
+        def                                                                     | expected
+        ${dDef({ name: 'words', path: dict('cities.trie.gz'), type: 'S' })}     | ${[]}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'T' })}         | ${[expect.any(Error)]}
+        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'C' })} | ${[expect.any(Error)]}
+        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'S' })} | ${[expect.any(Error)]}
+        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'W' })} | ${[expect.any(Error)]}
+    `('sync load dict with error $def', ({ def, expected }) => {
+        const d = loadDictionarySync(def.path, def);
+        expect(d.getErrors?.()).toEqual(expected);
+    });
 
     // cspell:ignore Geschäft geschaft
 });
 
 function sample(file: string): string {
     return path.join(samples, file);
+}
+
+function dict(file: string): string {
+    const dictDir = path.join(root, '../Samples/dicts');
+    return path.resolve(dictDir, file);
 }
 
 interface DDef extends Partial<DictionaryDefinitionInternal> {

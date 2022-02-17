@@ -177,7 +177,7 @@ function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): Cac
 function determineType(uri: string, opts: Pick<LoadOptions, 'type'>): LoaderType {
     const t: DictionaryFileTypes = (opts.type && opts.type in loaders && opts.type) || 'S';
     const defLoaderType: LoaderType = t;
-    const defType = uri.endsWith('.trie.gz') ? 'T' : uri.endsWith('.txt.gz') ? defLoaderType : defLoaderType;
+    const defType = uri.endsWith('.trie.gz') ? 'T' : defLoaderType;
     const regTrieTest = /\.trie\b/i;
     return regTrieTest.test(uri) ? 'T' : defType;
 }
