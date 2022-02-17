@@ -21,9 +21,11 @@ export function readFile(filename: string, encoding: BufferEncoding = defaultEnc
     });
 }
 
+const isZipped = /\.gz$/i;
+
 function prepareFileStream(filename: string, encoding: BufferEncoding, fnError: (e: Error) => void) {
     const pipes: NodeJS.ReadWriteStream[] = [];
-    if (filename.match(/\.gz$/i)) {
+    if (isZipped.test(filename)) {
         pipes.push(zlib.createGunzip());
     }
     const fileStream = fs.createReadStream(filename);
@@ -31,4 +33,10 @@ function prepareFileStream(filename: string, encoding: BufferEncoding, fnError: 
     const stream = pipes.reduce<NodeJS.ReadableStream>((s, p) => s.pipe(p).on('error', fnError), fileStream);
     stream.setEncoding(encoding);
     return stream;
+}
+
+export function readFileSync(filename: string, encoding: BufferEncoding = defaultEncoding): string {
+    const rawData = fs.readFileSync(filename);
+    const data = isZipped.test(filename) ? zlib.gunzipSync(rawData) : rawData;
+    return data.toString(encoding);
 }

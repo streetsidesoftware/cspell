@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
-import { loadDictionary, LoadOptions, refreshCacheEntries, testing } from './DictionaryLoader';
+import { loadDictionary, LoadOptions, refreshCacheEntries, testing, loadDictionarySync } from './DictionaryLoader';
 jest.mock('../util/logger');
 
 const root = path.join(__dirname, '..', '..');
@@ -45,8 +45,8 @@ describe('Validate DictionaryLoader', () => {
         });
         const entry = testing.loadEntry(filename, def);
 
-        await expect(entry.state).resolves.toEqual(expect.objectContaining(expectedError));
-        await expect(entry.dictionary).resolves.not.toBe(undefined);
+        await expect(entry.pStat).resolves.toEqual(expect.objectContaining(expectedError));
+        await expect(entry.pDictionary).resolves.not.toBe(undefined);
     });
 
     test.each`
@@ -157,11 +157,45 @@ describe('Validate DictionaryLoader', () => {
         }
     );
 
+    test.each`
+        def                                                             | word          | hasWord
+        ${dDef({ name: 'words', path: sample('words.txt.gz') })}        | ${'apple'}    | ${true}
+        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'apple'}    | ${false}
+        ${dDef({ name: 'words', path: dict('cities.trie.gz') })}        | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt') })}            | ${'York'}     | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'New York'} | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'C' })} | ${'York'}     | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'New York'} | ${true}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'S' })} | ${'York'}     | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
+    `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
+        const d = loadDictionarySync(def.path, def);
+        expect(d.has(word)).toBe(hasWord);
+    });
+
+    test.each`
+        def                                                                     | expected
+        ${dDef({ name: 'words', path: dict('cities.trie.gz'), type: 'S' })}     | ${[]}
+        ${dDef({ name: 'words', path: dict('cities.txt'), type: 'T' })}         | ${[expect.any(Error)]}
+        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'C' })} | ${[expect.any(Error)]}
+        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'S' })} | ${[expect.any(Error)]}
+        ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'W' })} | ${[expect.any(Error)]}
+    `('sync load dict with error $def', ({ def, expected }) => {
+        const d = loadDictionarySync(def.path, def);
+        expect(d.getErrors?.()).toEqual(expected);
+    });
+
     // cspell:ignore Geschäft geschaft
 });
 
 function sample(file: string): string {
     return path.join(samples, file);
+}
+
+function dict(file: string): string {
+    const dictDir = path.join(root, '../Samples/dicts');
+    return path.resolve(dictDir, file);
 }
 
 interface DDef extends Partial<DictionaryDefinitionInternal> {

@@ -192,6 +192,61 @@ describe('Validate getDictionary', () => {
         expect(dicts4[3].has('four')).toBe(true);
     });
 
+    test('Refresh Dictionary Cache Sync', async () => {
+        const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words42.txt');
+        await fs.mkdirp(path.dirname(tempDictPath));
+        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
+        const weightMap = undefined;
+        const settings = getDefaultSettings();
+        const defs = (settings.dictionaryDefinitions || []).concat([
+            {
+                name: 'temp',
+                path: tempDictPath,
+                weightMap,
+                __source: undefined,
+            },
+            {
+                name: 'not_found',
+                path: tempDictPath,
+                weightMap,
+                __source: undefined,
+            },
+        ]);
+        const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
+        const defsToLoad = filterDictDefsToLoad(toLoad, defs);
+        expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        const dicts = Dictionaries.loadDictionaryDefsSync(defsToLoad);
+
+        expect(dicts[3].has('one')).toBe(true);
+        expect(dicts[3].has('four')).toBe(false);
+        expect(dicts.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+
+        await Dictionaries.refreshDictionaryCache(0);
+        const dicts2 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
+
+        // Since noting changed, expect them to be the same.
+        expect(dicts.length).toEqual(toLoad.length);
+        expect(dicts2.length).toEqual(dicts.length);
+        dicts.forEach((d, i) => expect(dicts2[i]).toEqual(d));
+
+        // Update one of the dictionaries to see if it loads.
+        await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
+
+        const dicts3 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
+        // Should be using cache and will not contain the new words.
+        expect(dicts3[3].has('one')).toBe(true);
+        expect(dicts3[3].has('four')).toBe(false);
+        expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+
+        await Dictionaries.refreshDictionaryCache(0);
+
+        const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
+        expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        // Should be using the latest copy of the words.
+        expect(dicts4[3].has('one')).toBe(true);
+        expect(dicts4[3].has('four')).toBe(true);
+    });
+
     interface TestLoadFromConfig {
         configFile: string;
         expectedErrors: Error[];

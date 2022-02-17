@@ -47,9 +47,10 @@ ruleTester.run('cspell', rule.rules.cspell, {
         // 'async function* values(iter) { yield* iter; }',
         // 'var foo = true',
         // 'const x = `It is now time to add everything up: \\` ${y} + ${x}`',
-        readSample('sample.js'),
+        // readSample('sample.js'),
         readSample('sample.ts'),
         readSample('sampleESM.mjs'),
+        // readSample('sample.json'),
     ],
     invalid: [],
 });
