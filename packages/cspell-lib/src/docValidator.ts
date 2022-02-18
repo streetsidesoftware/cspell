@@ -1,4 +1,5 @@
-import { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
+import type { CSpellUserSettings } from '@cspell/cspell-types';
+import { ValidationIssue } from '.';
 
 export class DocumentValidator {
     private _document: TextDocument;
@@ -7,14 +8,22 @@ export class DocumentValidator {
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
      */
-    constructor(doc: TextDocument, readonly config: CSpellSettingsInternal) {
+    constructor(doc: TextDocument, readonly settings: CSpellUserSettings) {
         this._document = doc;
+    }
+
+    checkText(_range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[] {
+        return [];
     }
 
     get document() {
         return this._document;
     }
 }
+
+export type Offset = number;
+
+export type SimpleRange = [Offset, Offset];
 
 export type DocumentUri = string;
 
