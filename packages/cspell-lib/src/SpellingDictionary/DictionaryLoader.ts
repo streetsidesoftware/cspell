@@ -44,10 +44,18 @@ interface CacheEntry {
     dictionary: SpellingDictionary | undefined;
     pending: Promise<readonly [SpellingDictionary, Stats | Error]>;
     loadingState: LoadingState;
+    sig: number;
 }
 
 interface CacheEntrySync extends CacheEntry {
     dictionary: SpellingDictionary;
+}
+
+const debugLog: string[] = [];
+const debugMode = false;
+
+function __log(msg: string): void {
+    debugMode && debugLog.push(msg);
 }
 
 export type LoaderType = keyof Loaders;
@@ -87,14 +95,30 @@ export function loadDictionarySync(uri: string, options: DictionaryDefinitionInt
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
+        // if (entry.options.name === 'temp') {
+        //     __log(
+        //         `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
+        //             process.cwd(),
+        //             entry.uri
+        //         )}`
+        //     );
+        // }
         return entry.dictionary;
     }
+    // if (options.name === 'temp') {
+    //     __log(
+    //         `Cache Miss ${options.name}; ts: ${entry?.sig.toFixed(2) || Date.now()}; file: ${path.relative(
+    //             process.cwd(),
+    //             uri
+    //         )}`
+    //     );
+    // }
     const loadedEntry = loadEntrySync(uri, options);
     dictionaryCache.set(key, loadedEntry);
     return loadedEntry.dictionary;
 }
 
-const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['name', 'noSuggest', 'useCompounds'];
+const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['name', 'noSuggest', 'useCompounds', 'type'];
 
 function calcKey(uri: string, options: DictionaryDefinitionInternal) {
     const loaderType = determineType(uri, options);
@@ -110,16 +134,32 @@ function calcKey(uri: string, options: DictionaryDefinitionInternal) {
  * @param now - optional timestamp representing now. (Mostly used in testing)
  */
 export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()): Promise<void> {
-    await Promise.all([...dictionaryCache].map(([, entry]) => refreshEntry(entry, maxAge, now)));
+    await Promise.all([...dictionaryCache.values()].map((entry) => refreshEntry(entry, maxAge, now)));
 }
 
 async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Promise<void> {
     if (now - entry.ts >= maxAge) {
+        const sig = now + Math.random();
         // Write to the ts, so the next one will not do it.
+        entry.sig = sig;
         entry.ts = now;
         const pStat = getStat(entry.uri);
         const [newStat] = await Promise.all([pStat, entry.pending]);
-        if (entry.ts === now && !isEqual(newStat, entry.stat)) {
+        const hasChanged = !isEqual(newStat, entry.stat);
+        const sigMatches = entry.sig === sig;
+        // if (entry.options.name === 'temp') {
+        //     const processedAt = Date.now();
+        //     __log(
+        //         `Refresh ${entry.options.name}; sig: ${sig.toFixed(
+        //             2
+        //         )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
+        //             process.cwd(),
+        //             entry.uri
+        //         )}`
+        //     );
+        // }
+        if (sigMatches && hasChanged) {
+            entry.loadingState = LoadingState.Loading;
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
         }
     }
@@ -146,6 +186,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
     );
     const pStat = getStat(uri);
     const pending = Promise.all([pDictionary, pStat]);
+    const sig = now + Math.random();
     const entry: CacheEntry = {
         uri,
         options,
@@ -154,6 +195,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
         dictionary: undefined,
         pending,
         loadingState: LoadingState.Loading,
+        sig,
     };
     // eslint-disable-next-line promise/catch-or-return
     pending.then(([dictionary, stat]) => {
@@ -167,6 +209,7 @@ function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEn
 
 function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): CacheEntrySync {
     const stat = getStatSync(uri);
+    const sig = now + Math.random();
     try {
         const dictionary = loadSync(uri, options);
         const pending = Promise.resolve([dictionary, stat] as const);
@@ -178,6 +221,7 @@ function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): Cac
             dictionary,
             pending,
             loadingState: LoadingState.Loaded,
+            sig,
         };
     } catch (e) {
         const error = e instanceof Error ? e : new Error(format(e));
@@ -193,6 +237,7 @@ function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): Cac
             dictionary,
             pending,
             loadingState: LoadingState.Loaded,
+            sig,
         };
     }
 }
@@ -339,3 +384,7 @@ function getStatSync(uri: string): Stats | Error {
 }
 
 export type Stats = StatsBase<number>;
+
+export const __testing__ = {
+    debugLog,
+};

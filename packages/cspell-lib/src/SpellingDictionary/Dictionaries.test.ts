@@ -1,16 +1,26 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { getDefaultSettings, loadConfig } from '../Settings';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
+import { getDefaultSettings, loadConfig } from '../Settings';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
+import { __testing__ } from './DictionaryLoader';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 // cspell:ignore café rhône
 
 const root = path.resolve(__dirname, '../..');
 const samples = path.join(root, 'samples');
+
+const debug = false;
+const dictionaryLoadDebugLog = __testing__.debugLog;
+
+function log(msg: string): void {
+    if (debug) {
+        console.log(msg);
+    }
+}
 
 describe('Validate getDictionary', () => {
     const ignoreCaseFalse = { ignoreCase: false };
@@ -137,8 +147,41 @@ describe('Validate getDictionary', () => {
         expect(dict.dictionaries.map((d) => d.name)).toEqual(['my-words', '[words]', '[ignoreWords]', '[flagWords]']);
     });
 
+    interface TestLoadFromConfig {
+        configFile: string;
+        expectedErrors: Error[];
+    }
+
+    test.each`
+        configFile                              | expectedErrors
+        ${sample('yaml-config/cspell.yaml')}    | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
+        ${sample('.cspell.json')}               | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
+        ${sample('js-config/cspell.config.js')} | ${[]}
+    `(
+        'Load related dictionaries for config $configFile',
+        async ({ configFile, expectedErrors }: TestLoadFromConfig) => {
+            const settings = await loadConfig(configFile);
+            if (!settings) {
+                // eslint-disable-next-line jest/no-conditional-expect
+                expect(settings).toBeDefined();
+                return;
+            }
+            // Enable ALL dictionaries
+            settings.dictionaries = getAllDictionaryNames(settings);
+            const d = await Dictionaries.getDictionaryInternal(settings);
+            const errors = d.getErrors();
+            expect(errors).toHaveLength(expectedErrors.length);
+            errors.forEach((e) => expect(isSpellingDictionaryLoadError(e)).toBe(true));
+            expect(errors).toEqual(expect.arrayContaining(expectedErrors.map((e) => expect.objectContaining(e))));
+        }
+    );
+});
+
+describe('Validate Refresh', () => {
     test('Refresh Dictionary Cache', async () => {
-        const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words.txt');
+        log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
+        const tempDictPath = tempPath('words.txt');
+        const tempDictPathNotFound = tempPath('not-found.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const weightMap = undefined;
@@ -152,7 +195,7 @@ describe('Validate getDictionary', () => {
             },
             {
                 name: 'not_found',
-                path: tempDictPath,
+                path: tempDictPathNotFound,
                 weightMap,
                 __source: undefined,
             },
@@ -190,10 +233,13 @@ describe('Validate getDictionary', () => {
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
+        log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
 
     test('Refresh Dictionary Cache Sync', async () => {
-        const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words42.txt');
+        log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
+        dictionaryLoadDebugLog.length = 0;
+        const tempDictPath = tempPath('words_sync.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const weightMap = undefined;
@@ -205,21 +251,15 @@ describe('Validate getDictionary', () => {
                 weightMap,
                 __source: undefined,
             },
-            {
-                name: 'not_found',
-                path: tempDictPath,
-                weightMap,
-                __source: undefined,
-            },
         ]);
-        const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
+        const toLoad = ['node', 'html', 'css', 'temp'];
         const defsToLoad = filterDictDefsToLoad(toLoad, defs);
-        expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
         const dicts = Dictionaries.loadDictionaryDefsSync(defsToLoad);
 
         expect(dicts[3].has('one')).toBe(true);
         expect(dicts[3].has('four')).toBe(false);
-        expect(dicts.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        expect(dicts.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
 
         await Dictionaries.refreshDictionaryCache(0);
         const dicts2 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
@@ -230,53 +270,34 @@ describe('Validate getDictionary', () => {
         dicts.forEach((d, i) => expect(dicts2[i]).toEqual(d));
 
         // Update one of the dictionaries to see if it loads.
+        await sleep(50);
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
+        await sleep(50); // Give the system a chance to breath (needed for linux systems mixing sync and async isn't ideal)
 
         const dicts3 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
         // Should be using cache and will not contain the new words.
         expect(dicts3[3].has('one')).toBe(true);
         expect(dicts3[3].has('four')).toBe(false);
-        expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
 
         await Dictionaries.refreshDictionaryCache(0);
-        await sleep(2); // Give the system a chance to breath (needed for linux systems)
 
         const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
-        expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+
+        log(dictionaryLoadDebugLog.join('\n'));
+
+        expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
+        log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
-
-    interface TestLoadFromConfig {
-        configFile: string;
-        expectedErrors: Error[];
-    }
-
-    test.each`
-        configFile                              | expectedErrors
-        ${sample('yaml-config/cspell.yaml')}    | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
-        ${sample('.cspell.json')}               | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
-        ${sample('js-config/cspell.config.js')} | ${[]}
-    `(
-        'Load related dictionaries for config $configFile',
-        async ({ configFile, expectedErrors }: TestLoadFromConfig) => {
-            const settings = await loadConfig(configFile);
-            if (!settings) {
-                // eslint-disable-next-line jest/no-conditional-expect
-                expect(settings).toBeDefined();
-                return;
-            }
-            // Enable ALL dictionaries
-            settings.dictionaries = getAllDictionaryNames(settings);
-            const d = await Dictionaries.getDictionaryInternal(settings);
-            const errors = d.getErrors();
-            expect(errors).toHaveLength(expectedErrors.length);
-            errors.forEach((e) => expect(isSpellingDictionaryLoadError(e)).toBe(true));
-            expect(errors).toEqual(expect.arrayContaining(expectedErrors.map((e) => expect.objectContaining(e))));
-        }
-    );
 });
+
+function tempPath(file: string) {
+    const testState = expect.getState();
+    return path.join(__dirname, '../../temp', testState.currentTestName, file);
+}
 
 function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => {
