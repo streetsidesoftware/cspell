@@ -270,8 +270,9 @@ describe('Validate Refresh', () => {
         dicts.forEach((d, i) => expect(dicts2[i]).toEqual(d));
 
         // Update one of the dictionaries to see if it loads.
+        await sleep(50);
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
-        await sleep(50); // Give the system a chance to breath (needed for linux systems)
+        await sleep(50); // Give the system a chance to breath (needed for linux systems mixing sync and async isn't ideal)
 
         const dicts3 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
         // Should be using cache and will not contain the new words.
