@@ -12,6 +12,14 @@ import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 const root = path.resolve(__dirname, '../..');
 const samples = path.join(root, 'samples');
 
+const debug = true;
+
+function log(msg: string): void {
+    if (debug) {
+        console.log(msg);
+    }
+}
+
 describe('Validate getDictionary', () => {
     const ignoreCaseFalse = { ignoreCase: false };
     const ignoreCaseTrue = { ignoreCase: true };
@@ -169,7 +177,7 @@ describe('Validate getDictionary', () => {
 
 describe('Validate Refresh', () => {
     test('Refresh Dictionary Cache', async () => {
-        console.log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
+        log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
         const tempDictPath = tempPath('words.txt');
         const tempDictPathNotFound = tempPath('not-found.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
@@ -223,11 +231,11 @@ describe('Validate Refresh', () => {
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
-        console.log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
+        log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
 
     test('Refresh Dictionary Cache Sync', async () => {
-        console.log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
+        log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
         const tempDictPath = tempPath('words_sync.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
@@ -275,7 +283,7 @@ describe('Validate Refresh', () => {
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
-        console.log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
+        log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
 });
 

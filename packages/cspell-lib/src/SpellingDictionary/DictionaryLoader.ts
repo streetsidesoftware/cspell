@@ -88,14 +88,14 @@ export function loadDictionarySync(uri: string, options: DictionaryDefinitionInt
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
-        if (entry.options.name === 'temp') {
-            console.log(
-                `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
-                    process.cwd(),
-                    entry.uri
-                )}`
-            );
-        }
+        // if (entry.options.name === 'temp') {
+        //     console.log(
+        //         `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
+        //             process.cwd(),
+        //             entry.uri
+        //         )}`
+        //     );
+        // }
         return entry.dictionary;
     }
     const loadedEntry = loadEntrySync(uri, options);
@@ -132,21 +132,21 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const [newStat] = await Promise.all([pStat, entry.pending]);
         const hasChanged = !isEqual(newStat, entry.stat);
         const sigMatches = entry.sig === sig;
-        if (entry.options.name === 'temp') {
-            const processedAt = Date.now();
-            setTimeout(
-                () =>
-                    console.log(
-                        `Refresh ${entry.options.name}; sig: ${sig.toFixed(
-                            2
-                        )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
-                            process.cwd(),
-                            entry.uri
-                        )}`
-                    ),
-                0
-            );
-        }
+        // if (entry.options.name === 'temp') {
+        //     const processedAt = Date.now();
+        //     setTimeout(
+        //         () =>
+        //             console.log(
+        //                 `Refresh ${entry.options.name}; sig: ${sig.toFixed(
+        //                     2
+        //                 )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
+        //                     process.cwd(),
+        //                     entry.uri
+        //                 )}`
+        //             ),
+        //         0
+        //     );
+        // }
         if (sigMatches && hasChanged) {
             entry.loadingState = LoadingState.Loading;
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
