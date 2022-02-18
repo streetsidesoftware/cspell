@@ -138,7 +138,8 @@ describe('Validate getDictionary', () => {
     });
 
     test('Refresh Dictionary Cache', async () => {
-        const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words.txt');
+        const tempDictPath = tempPath('words.txt');
+        const tempDictPathNotFound = tempPath('not-found.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const weightMap = undefined;
@@ -152,7 +153,7 @@ describe('Validate getDictionary', () => {
             },
             {
                 name: 'not_found',
-                path: tempDictPath,
+                path: tempDictPathNotFound,
                 weightMap,
                 __source: undefined,
             },
@@ -193,7 +194,7 @@ describe('Validate getDictionary', () => {
     });
 
     test('Refresh Dictionary Cache Sync', async () => {
-        const tempDictPath = path.join(__dirname, '..', '..', 'temp', 'words42.txt');
+        const tempDictPath = tempPath('words.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const weightMap = undefined;
@@ -205,21 +206,15 @@ describe('Validate getDictionary', () => {
                 weightMap,
                 __source: undefined,
             },
-            {
-                name: 'not_found',
-                path: tempDictPath,
-                weightMap,
-                __source: undefined,
-            },
         ]);
-        const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
+        const toLoad = ['node', 'html', 'css', 'temp'];
         const defsToLoad = filterDictDefsToLoad(toLoad, defs);
-        expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
         const dicts = Dictionaries.loadDictionaryDefsSync(defsToLoad);
 
         expect(dicts[3].has('one')).toBe(true);
         expect(dicts[3].has('four')).toBe(false);
-        expect(dicts.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        expect(dicts.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
 
         await Dictionaries.refreshDictionaryCache(0);
         const dicts2 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
@@ -236,13 +231,13 @@ describe('Validate getDictionary', () => {
         // Should be using cache and will not contain the new words.
         expect(dicts3[3].has('one')).toBe(true);
         expect(dicts3[3].has('four')).toBe(false);
-        expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
 
         await Dictionaries.refreshDictionaryCache(0);
         await sleep(2); // Give the system a chance to breath (needed for linux systems)
 
         const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
-        expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
+        expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
@@ -277,6 +272,11 @@ describe('Validate getDictionary', () => {
         }
     );
 });
+
+function tempPath(file: string) {
+    const testState = expect.getState();
+    return path.join(__dirname, '../../temp', testState.currentTestName, file);
+}
 
 function sleep(ms: number): Promise<void> {
     return new Promise((resolve) => {
