@@ -1,5 +1,6 @@
+import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
 import type { TextOffset } from '@cspell/cspell-types';
-import { Sequence } from 'gensequence';
+import { genSequence, Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
 import { HasOptions, SpellingDictionary } from './SpellingDictionary/SpellingDictionary';
 import * as Text from './util/text';
@@ -57,18 +58,21 @@ export function validateText(
 
     const validator = lineValidator(dict, options);
 
-    return Text.extractLinesOfText(text)
-        .concatMap(mapTextOffsetsAgainstRanges(includeRanges))
-        .concatMap(validator)
-        .filter((wo) => {
-            const word = wo.text;
-            // Keep track of the number of times we have seen the same problem
-            const n = (mapOfProblems.get(word) || 0) + 1;
-            mapOfProblems.set(word, n);
-            // Filter out if there is too many
-            return n <= maxDuplicateProblems;
-        })
-        .take(maxNumberOfProblems);
+    return genSequence(
+        pipe(
+            Text.extractLinesOfText(text),
+            opConcatMap(mapTextOffsetsAgainstRanges(includeRanges)),
+            opConcatMap(validator),
+            opFilter((wo) => {
+                const word = wo.text;
+                // Keep track of the number of times we have seen the same problem
+                const n = (mapOfProblems.get(word) || 0) + 1;
+                mapOfProblems.set(word, n);
+                // Filter out if there is too many
+                return n <= maxDuplicateProblems;
+            })
+        )
+    ).take(maxNumberOfProblems);
 }
 
 export function calcTextInclusionRanges(text: string, options: IncludeExcludeOptions): TextRange.MatchRange[] {
@@ -155,20 +159,23 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 return [vr];
             }
 
-            const codeWordResults = Text.extractWordsFromCodeTextOffset(vr)
-                .filter(filterAlreadyChecked)
-                .map((t) => ({ ...t, line: vr.line }))
-                .map(checkFlagWords)
-                .filter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged))
-                .map((wo) => (wo.isFlagged ? wo : checkWord(wo, hasWordOptions)))
-                .filter(rememberFilter((wo) => wo.isFlagged || !wo.isFound))
-                .filter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))) // Filter out any repeated characters like xxxxxxxxxx
-                // get back the original text.
-                .map((wo) => ({
-                    ...wo,
-                    text: Text.extractText(lineSegment, wo.offset, wo.offset + wo.text.length),
-                }))
-                .toArray();
+            const codeWordResults = toArray(
+                pipe(
+                    Text.extractWordsFromCodeTextOffset(vr),
+                    opFilter(filterAlreadyChecked),
+                    opMap((t) => ({ ...t, line: vr.line })),
+                    opMap(checkFlagWords),
+                    opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
+                    opMap((wo) => (wo.isFlagged ? wo : checkWord(wo, hasWordOptions))),
+                    opFilter(rememberFilter((wo) => wo.isFlagged || !wo.isFound)),
+                    opFilter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))), // Filter out any repeated characters like xxxxxxxxxx
+                    // get back the original text.
+                    opMap((wo) => ({
+                        ...wo,
+                        text: Text.extractText(lineSegment, wo.offset, wo.offset + wo.text.length),
+                    }))
+                )
+            );
 
             if (!codeWordResults.length || isWordIgnored(vr.text) || checkWord(vr, hasWordOptions).isFound) {
                 rememberFilter((_) => false)(vr);
@@ -188,13 +195,16 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 return [vr];
             }
 
-            const mismatches: ValidationResult[] = Text.extractWordsFromTextOffset(possibleWord)
-                .filter(filterAlreadyChecked)
-                .map((wo) => ({ ...wo, line: lineSegment }))
-                .map(checkFlagWords)
-                .filter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged))
-                .concatMap(checkFullWord)
-                .toArray();
+            const mismatches: ValidationResult[] = toArray(
+                pipe(
+                    Text.extractWordsFromTextOffset(possibleWord),
+                    opFilter(filterAlreadyChecked),
+                    opMap((wo) => ({ ...wo, line: lineSegment })),
+                    opMap(checkFlagWords),
+                    opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
+                    opConcatMap(checkFullWord)
+                )
+            );
             if (mismatches.length) {
                 // Try the more expensive word splitter
                 const splitResult = split(lineSegment, possibleWord.offset, splitterIsValid);
@@ -206,9 +216,13 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
             return mismatches;
         }
 
-        const checkedPossibleWords: Sequence<ValidationResult> = Text.extractPossibleWordsFromTextOffset(lineSegment)
-            .filter(filterAlreadyChecked)
-            .concatMap(checkPossibleWords);
+        const checkedPossibleWords: Sequence<ValidationResult> = genSequence(
+            pipe(
+                Text.extractPossibleWordsFromTextOffset(lineSegment),
+                opFilter(filterAlreadyChecked),
+                opConcatMap(checkPossibleWords)
+            )
+        );
         return checkedPossibleWords;
     };
 

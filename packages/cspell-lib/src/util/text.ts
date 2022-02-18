@@ -1,5 +1,6 @@
+import { opConcatMap, opMap, pipeSync as pipe } from '@cspell/cspell-pipe';
 import type { TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
-import { Sequence, sequenceFromRegExpMatch } from 'gensequence';
+import { sequenceFromRegExpMatch } from 'gensequence';
 import { binarySearch } from './search';
 import {
     regExAccents,
@@ -32,7 +33,7 @@ export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> 
  * Split camelCase words into an array of strings.
  */
 export function splitCamelCaseWord(word: string): string[] {
-    const wPrime = word.replace(regExUpperSOrIng, (s) => s[0] + s.substr(1).toLowerCase());
+    const wPrime = word.replace(regExUpperSOrIng, (s) => s[0] + s.slice(1).toLowerCase());
     const separator = '_<^*_*^>_';
     const pass1 = wPrime.replace(regExSplitWords, '$1' + separator + '$2');
     const pass2 = pass1.replace(regExSplitWords2, '$1' + separator + '$2');
@@ -42,35 +43,39 @@ export function splitCamelCaseWord(word: string): string[] {
 /**
  * This function lets you iterate over regular expression matches.
  */
-export function match(reg: RegExp, text: string): Sequence<RegExpExecArray> {
+export function match(reg: RegExp, text: string): Iterable<RegExpExecArray> {
     return sequenceFromRegExpMatch(reg, text);
 }
 
-export function matchStringToTextOffset(reg: RegExp, text: string): Sequence<TextOffset> {
+export function matchStringToTextOffset(reg: RegExp, text: string): Iterable<TextOffset> {
     return matchToTextOffset(reg, { text, offset: 0 });
 }
 
-export function matchToTextOffset(reg: RegExp, text: TextOffset): Sequence<TextOffset> {
+export function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextOffset> {
     const textOffset = text;
     const fnOffsetMap = offsetMap(textOffset.offset);
-    return match(reg, textOffset.text).map((m) => fnOffsetMap({ text: m[0], offset: m.index }));
+    textOffset.text.matchAll(reg);
+    return pipe(
+        match(reg, textOffset.text),
+        opMap((m) => fnOffsetMap<TextOffset>({ text: m[0], offset: m.index || 0 }))
+    );
 }
 
-export function extractLinesOfText(text: string): Sequence<TextOffset> {
+export function extractLinesOfText(text: string): Iterable<TextOffset> {
     return matchStringToTextOffset(regExLines, text);
 }
 
 /**
  * Extract out whole words from a string of text.
  */
-export function extractWordsFromText(text: string): Sequence<TextOffset> {
+export function extractWordsFromText(text: string): Iterable<TextOffset> {
     return extractWordsFromTextOffset(textOffset(text));
 }
 
 /**
  * Extract out whole words from a string of text.
  */
-export function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffset> {
+export function extractWordsFromTextOffset(text: TextOffset): Iterable<TextOffset> {
     const reg = new RegExp(regExWords);
     return matchToTextOffset(reg, cleanTextOffset(text));
 }
@@ -90,17 +95,17 @@ export function cleanTextOffset(text: TextOffset): TextOffset {
 /**
  * Extract out whole words and words containing numbers from a string of text.
  */
-export function extractPossibleWordsFromTextOffset(text: TextOffset): Sequence<TextOffset> {
+export function extractPossibleWordsFromTextOffset(text: TextOffset): Iterable<TextOffset> {
     const reg = new RegExp(regExWordsAndDigits);
     return matchToTextOffset(reg, text);
 }
 
-export function extractWordsFromCode(text: string): Sequence<TextOffset> {
+export function extractWordsFromCode(text: string): Iterable<TextOffset> {
     return extractWordsFromCodeTextOffset(textOffset(text));
 }
 
-export function extractWordsFromCodeTextOffset(textOffset: TextOffset): Sequence<TextOffset> {
-    return extractWordsFromTextOffset(textOffset).concatMap(splitCamelCaseWordWithOffset);
+export function extractWordsFromCodeTextOffset(textOffset: TextOffset): Iterable<TextOffset> {
+    return pipe(extractWordsFromTextOffset(textOffset), opConcatMap(splitCamelCaseWordWithOffset));
 }
 
 export function isUpperCase(word: string): boolean {
@@ -198,7 +203,14 @@ export function calculateTextDocumentOffsets<T extends TextOffset>(
     doc: string,
     wordOffsets: T[]
 ): (TextDocumentOffset & T)[] {
-    const lines = [-1, ...match(/\n/g, doc).map((a) => a.index), doc.length];
+    const lines = [
+        -1,
+        ...pipe(
+            match(/\n/g, doc),
+            opMap((a) => a.index)
+        ),
+        doc.length,
+    ];
 
     let lastRow = -1;
     let lastOffset = doc.length + 1;

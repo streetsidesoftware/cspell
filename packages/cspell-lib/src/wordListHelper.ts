@@ -1,8 +1,8 @@
 // cSpell:enableCompoundWords
-import * as Text from './util/text';
 import { readLines } from './util/fileReader';
-import { toIterableIterator, concatIterables } from './util/iterableIteratorLib';
+import { concatIterables, toIterableIterator } from './util/iterableIteratorLib';
 import { logError } from './util/logger';
+import * as Text from './util/text';
 
 const regExpWordsWithSpaces = /^\s*\p{L}+(?:\s+\p{L}+){0,3}$/u;
 
@@ -21,9 +21,7 @@ export function loadWordsNoError(filename: string): Promise<IterableIterator<str
 }
 
 export function splitLine(line: string): string[] {
-    return Text.extractWordsFromText(line)
-        .map(({ text }) => text)
-        .toArray();
+    return [...Text.extractWordsFromText(line)].map(({ text }) => text);
 }
 
 export function splitCodeWords(words: string[]): string[] {

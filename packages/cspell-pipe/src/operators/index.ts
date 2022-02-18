@@ -1,4 +1,5 @@
 export { opAwaitAsync } from './await';
+export { opConcatMap, opConcatMapAsync, opConcatMapSync } from './concatMap';
 export { opFilter as opFilter, opFilterAsync, opFilterSync } from './filter';
 export { opFlatten, opFlattenAsync, opFlattenSync } from './flatten';
 export { opJoinStrings, opJoinStringsAsync, opJoinStringsSync } from './joinStrings';
