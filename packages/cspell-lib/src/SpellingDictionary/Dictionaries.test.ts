@@ -137,7 +137,43 @@ describe('Validate getDictionary', () => {
         expect(dict.dictionaries.map((d) => d.name)).toEqual(['my-words', '[words]', '[ignoreWords]', '[flagWords]']);
     });
 
+    interface TestLoadFromConfig {
+        configFile: string;
+        expectedErrors: Error[];
+    }
+
+    test.each`
+        configFile                              | expectedErrors
+        ${sample('yaml-config/cspell.yaml')}    | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
+        ${sample('.cspell.json')}               | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
+        ${sample('js-config/cspell.config.js')} | ${[]}
+    `(
+        'Load related dictionaries for config $configFile',
+        async ({ configFile, expectedErrors }: TestLoadFromConfig) => {
+            const settings = await loadConfig(configFile);
+            if (!settings) {
+                // eslint-disable-next-line jest/no-conditional-expect
+                expect(settings).toBeDefined();
+                return;
+            }
+            // Enable ALL dictionaries
+            settings.dictionaries = getAllDictionaryNames(settings);
+            const d = await Dictionaries.getDictionaryInternal(settings);
+            const errors = d.getErrors();
+            expect(errors).toHaveLength(expectedErrors.length);
+            errors.forEach((e) => expect(isSpellingDictionaryLoadError(e)).toBe(true));
+            expect(errors).toEqual(expect.arrayContaining(expectedErrors.map((e) => expect.objectContaining(e))));
+        }
+    );
+});
+
+describe('Validate Refresh', () => {
+    beforeEach(() => {
+        console.log(`ts: ${Date.now()}`);
+    });
+
     test('Refresh Dictionary Cache', async () => {
+        console.log(`Start: ${expect.getState().currentTestName}`);
         const tempDictPath = tempPath('words.txt');
         const tempDictPathNotFound = tempPath('not-found.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
@@ -191,9 +227,11 @@ describe('Validate getDictionary', () => {
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
+        console.log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
 
     test('Refresh Dictionary Cache Sync', async () => {
+        console.log(`Start: ${expect.getState().currentTestName}`);
         const tempDictPath = tempPath('words.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
@@ -241,36 +279,8 @@ describe('Validate getDictionary', () => {
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);
         expect(dicts4[3].has('four')).toBe(true);
+        console.log(`End: ${expect.getState().currentTestName} at ${Date.now()}`);
     });
-
-    interface TestLoadFromConfig {
-        configFile: string;
-        expectedErrors: Error[];
-    }
-
-    test.each`
-        configFile                              | expectedErrors
-        ${sample('yaml-config/cspell.yaml')}    | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
-        ${sample('.cspell.json')}               | ${[{ name: 'missing dictionary file', message: 'failed to load' }]}
-        ${sample('js-config/cspell.config.js')} | ${[]}
-    `(
-        'Load related dictionaries for config $configFile',
-        async ({ configFile, expectedErrors }: TestLoadFromConfig) => {
-            const settings = await loadConfig(configFile);
-            if (!settings) {
-                // eslint-disable-next-line jest/no-conditional-expect
-                expect(settings).toBeDefined();
-                return;
-            }
-            // Enable ALL dictionaries
-            settings.dictionaries = getAllDictionaryNames(settings);
-            const d = await Dictionaries.getDictionaryInternal(settings);
-            const errors = d.getErrors();
-            expect(errors).toHaveLength(expectedErrors.length);
-            errors.forEach((e) => expect(isSpellingDictionaryLoadError(e)).toBe(true));
-            expect(errors).toEqual(expect.arrayContaining(expectedErrors.map((e) => expect.objectContaining(e))));
-        }
-    );
 });
 
 function tempPath(file: string) {

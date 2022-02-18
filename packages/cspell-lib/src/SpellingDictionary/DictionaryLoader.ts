@@ -88,6 +88,14 @@ export function loadDictionarySync(uri: string, options: DictionaryDefinitionInt
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
+        if (entry.options.name === 'temp') {
+            console.log(
+                `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
+                    process.cwd(),
+                    entry.uri
+                )}`
+            );
+        }
         return entry.dictionary;
     }
     const loadedEntry = loadEntrySync(uri, options);
@@ -111,7 +119,7 @@ function calcKey(uri: string, options: DictionaryDefinitionInternal) {
  * @param now - optional timestamp representing now. (Mostly used in testing)
  */
 export async function refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()): Promise<void> {
-    await Promise.all([...dictionaryCache].map(([, entry]) => refreshEntry(entry, maxAge, now)));
+    await Promise.all([...dictionaryCache.values()].map((entry) => refreshEntry(entry, maxAge, now)));
 }
 
 async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Promise<void> {
@@ -125,12 +133,13 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const hasChanged = !isEqual(newStat, entry.stat);
         const sigMatches = entry.sig === sig;
         if (entry.options.name === 'temp') {
+            const processedAt = Date.now();
             setTimeout(
                 () =>
                     console.log(
-                        `Refresh ${entry.options.name} sig: ${sig.toFixed(
+                        `Refresh ${entry.options.name}; sig: ${sig.toFixed(
                             2
-                        )} Sig Matches: ${sigMatches.toString()} changed: ${hasChanged.toString()} file: ${path.relative(
+                        )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
                             process.cwd(),
                             entry.uri
                         )}`
