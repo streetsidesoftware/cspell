@@ -87,9 +87,6 @@ export function loadDictionary(uri: string, options: DictionaryDefinitionInterna
 export function loadDictionarySync(uri: string, options: DictionaryDefinitionInternal): SpellingDictionary {
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
-    if (entry?.dictionary && entry.loadingState !== LoadingState.Loaded) {
-        console.log(`Must Load: ${options.name}: ${uri}`);
-    }
     if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
         return entry.dictionary;
     }
