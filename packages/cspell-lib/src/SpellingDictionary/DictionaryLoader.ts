@@ -31,14 +31,19 @@ const loadersSync: SyncLoaders = {
 
 export type LoadOptions = DictionaryDefinitionInternal;
 
+enum LoadingState {
+    Loaded = 0,
+    Loading = 1,
+}
+
 interface CacheEntry {
     uri: string;
     options: LoadOptions;
     ts: number;
-    pStat: Promise<Stats | Error>;
     stat: Stats | Error | undefined;
-    pDictionary: Promise<SpellingDictionary>;
     dictionary: SpellingDictionary | undefined;
+    pending: Promise<readonly [SpellingDictionary, Stats | Error]>;
+    loadingState: LoadingState;
 }
 
 interface CacheEntrySync extends CacheEntry {
@@ -71,17 +76,17 @@ export function loadDictionary(uri: string, options: DictionaryDefinitionInterna
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry) {
-        return entry.pDictionary;
+        return entry.pending.then(([dictionary]) => dictionary);
     }
     const loadedEntry = loadEntry(uri, options);
     dictionaryCache.set(key, loadedEntry);
-    return loadedEntry.pDictionary;
+    return loadedEntry.pending.then(([dictionary]) => dictionary);
 }
 
 export function loadDictionarySync(uri: string, options: DictionaryDefinitionInternal): SpellingDictionary {
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
-    if (entry?.dictionary && entry.stat) {
+    if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
         return entry.dictionary;
     }
     const loadedEntry = loadEntrySync(uri, options);
@@ -113,7 +118,7 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         // Write to the ts, so the next one will not do it.
         entry.ts = now;
         const pStat = getStat(entry.uri);
-        const [newStat] = await Promise.all([pStat, entry.pStat]);
+        const [newStat] = await Promise.all([pStat, entry.pending]);
         if (entry.ts === now && !isEqual(newStat, entry.stat)) {
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
         }
@@ -136,18 +141,27 @@ function isError(e: StatsOrError): e is Error {
 }
 
 function loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
-    const dictionary = load(uri, options).catch((e) =>
+    const pDictionary = load(uri, options).catch((e) =>
         createFailedToLoadDictionary(new SpellingDictionaryLoadError(uri, options, e, 'failed to load'))
     );
+    const pStat = getStat(uri);
+    const pending = Promise.all([pDictionary, pStat]);
     const entry: CacheEntry = {
         uri,
         options,
         ts: now,
-        pStat: getStat(uri).then((s) => (entry.stat = s)),
         stat: undefined,
-        pDictionary: dictionary.then((d) => (entry.dictionary = d)),
         dictionary: undefined,
+        pending,
+        loadingState: LoadingState.Loading,
     };
+    // eslint-disable-next-line promise/catch-or-return
+    pending.then(([dictionary, stat]) => {
+        entry.stat = stat;
+        entry.dictionary = dictionary;
+        entry.loadingState = LoadingState.Loaded;
+        return;
+    });
     return entry;
 }
 
@@ -155,28 +169,30 @@ function loadEntrySync(uri: string, options: LoadOptions, now = Date.now()): Cac
     const stat = getStatSync(uri);
     try {
         const dictionary = loadSync(uri, options);
+        const pending = Promise.resolve([dictionary, stat] as const);
         return {
             uri,
             options,
             ts: now,
-            pStat: Promise.resolve(stat),
             stat,
-            pDictionary: Promise.resolve(dictionary),
             dictionary,
+            pending,
+            loadingState: LoadingState.Loaded,
         };
     } catch (e) {
         const error = e instanceof Error ? e : new Error(format(e));
         const dictionary = createFailedToLoadDictionary(
             new SpellingDictionaryLoadError(uri, options, error, 'failed to load')
         );
+        const pending = Promise.resolve([dictionary, stat] as const);
         return {
             uri,
             options,
             ts: now,
-            pStat: Promise.resolve(stat),
             stat,
-            pDictionary: Promise.resolve(dictionary),
             dictionary,
+            pending,
+            loadingState: LoadingState.Loaded,
         };
     }
 }

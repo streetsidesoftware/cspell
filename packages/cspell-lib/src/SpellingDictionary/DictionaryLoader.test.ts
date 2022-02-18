@@ -45,8 +45,10 @@ describe('Validate DictionaryLoader', () => {
         });
         const entry = testing.loadEntry(filename, def);
 
-        await expect(entry.pStat).resolves.toEqual(expect.objectContaining(expectedError));
-        await expect(entry.pDictionary).resolves.not.toBe(undefined);
+        const [dictionary, stat] = await entry.pending;
+
+        expect(stat).toEqual(expect.objectContaining(expectedError));
+        expect(dictionary).not.toBe(undefined);
     });
 
     test.each`
