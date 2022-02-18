@@ -44,19 +44,7 @@ export function splitCamelCaseWord(word: string): string[] {
  * This function lets you iterate over regular expression matches.
  */
 export function match(reg: RegExp, text: string): Iterable<RegExpExecArray> {
-    if (!reg.global) {
-        return sequenceFromRegExpMatch(reg, text);
-    }
-    return pipe(
-        text.matchAll(reg),
-        opMap((m) => mapRegExpMatchArray(m, text, 0))
-    );
-}
-
-function mapRegExpMatchArray(r: RegExpMatchArray, input: string, index: number): RegExpExecArray {
-    r.input = r.input ?? input;
-    r.index = r.index || index;
-    return r as RegExpExecArray;
+    return sequenceFromRegExpMatch(reg, text);
 }
 
 export function matchStringToTextOffset(reg: RegExp, text: string): Iterable<TextOffset> {
