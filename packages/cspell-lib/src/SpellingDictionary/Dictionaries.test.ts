@@ -1,10 +1,11 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { getDefaultSettings, loadConfig } from '../Settings';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
+import { getDefaultSettings, loadConfig } from '../Settings';
 import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
+import { __testing__ } from './DictionaryLoader';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 // cspell:ignore café rhône
@@ -13,6 +14,7 @@ const root = path.resolve(__dirname, '../..');
 const samples = path.join(root, 'samples');
 
 const debug = true;
+const dictionaryLoadDebugLog = __testing__.debugLog;
 
 function log(msg: string): void {
     if (debug) {
@@ -236,6 +238,7 @@ describe('Validate Refresh', () => {
 
     test('Refresh Dictionary Cache Sync', async () => {
         log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
+        dictionaryLoadDebugLog.length = 0;
         const tempDictPath = tempPath('words_sync.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
@@ -279,6 +282,9 @@ describe('Validate Refresh', () => {
         await sleep(2); // Give the system a chance to breath (needed for linux systems)
 
         const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
+
+        log(dictionaryLoadDebugLog.join('\n'));
+
         expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
         // Should be using the latest copy of the words.
         expect(dicts4[3].has('one')).toBe(true);

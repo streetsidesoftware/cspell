@@ -51,6 +51,13 @@ interface CacheEntrySync extends CacheEntry {
     dictionary: SpellingDictionary;
 }
 
+const debugLog: string[] = [];
+const debugMode = true;
+
+function log(msg: string): void {
+    debugMode && debugLog.push(msg);
+}
+
 export type LoaderType = keyof Loaders;
 export type Loader = (filename: string, options: LoadOptions) => Promise<SpellingDictionary>;
 export type LoaderSync = (filename: string, options: LoadOptions) => SpellingDictionary;
@@ -88,15 +95,23 @@ export function loadDictionarySync(uri: string, options: DictionaryDefinitionInt
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
-        // if (entry.options.name === 'temp') {
-        //     console.log(
-        //         `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
-        //             process.cwd(),
-        //             entry.uri
-        //         )}`
-        //     );
-        // }
+        if (entry.options.name === 'temp') {
+            log(
+                `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
+                    process.cwd(),
+                    entry.uri
+                )}`
+            );
+        }
         return entry.dictionary;
+    }
+    if (options.name === 'temp') {
+        log(
+            `Cache Miss ${options.name}; ts: ${entry?.sig.toFixed(2) || Date.now()}; file: ${path.relative(
+                process.cwd(),
+                uri
+            )}`
+        );
     }
     const loadedEntry = loadEntrySync(uri, options);
     dictionaryCache.set(key, loadedEntry);
@@ -132,21 +147,17 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const [newStat] = await Promise.all([pStat, entry.pending]);
         const hasChanged = !isEqual(newStat, entry.stat);
         const sigMatches = entry.sig === sig;
-        // if (entry.options.name === 'temp') {
-        //     const processedAt = Date.now();
-        //     setTimeout(
-        //         () =>
-        //             console.log(
-        //                 `Refresh ${entry.options.name}; sig: ${sig.toFixed(
-        //                     2
-        //                 )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
-        //                     process.cwd(),
-        //                     entry.uri
-        //                 )}`
-        //             ),
-        //         0
-        //     );
-        // }
+        if (entry.options.name === 'temp') {
+            const processedAt = Date.now();
+            log(
+                `Refresh ${entry.options.name}; sig: ${sig.toFixed(
+                    2
+                )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
+                    process.cwd(),
+                    entry.uri
+                )}`
+            );
+        }
         if (sigMatches && hasChanged) {
             entry.loadingState = LoadingState.Loading;
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
@@ -373,3 +384,7 @@ function getStatSync(uri: string): Stats | Error {
 }
 
 export type Stats = StatsBase<number>;
+
+export const __testing__ = {
+    debugLog,
+};

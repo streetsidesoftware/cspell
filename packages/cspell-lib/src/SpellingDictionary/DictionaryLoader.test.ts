@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
-import { loadDictionary, LoadOptions, refreshCacheEntries, testing, loadDictionarySync } from './DictionaryLoader';
+import { loadDictionary, loadDictionarySync, LoadOptions, refreshCacheEntries, testing } from './DictionaryLoader';
 jest.mock('../util/logger');
 
 const root = path.join(__dirname, '..', '..');
