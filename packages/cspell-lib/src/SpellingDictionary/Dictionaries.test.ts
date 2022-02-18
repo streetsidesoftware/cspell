@@ -168,12 +168,8 @@ describe('Validate getDictionary', () => {
 });
 
 describe('Validate Refresh', () => {
-    beforeEach(() => {
-        console.log(`ts: ${Date.now()}`);
-    });
-
     test('Refresh Dictionary Cache', async () => {
-        console.log(`Start: ${expect.getState().currentTestName}`);
+        console.log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
         const tempDictPath = tempPath('words.txt');
         const tempDictPathNotFound = tempPath('not-found.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
@@ -231,8 +227,8 @@ describe('Validate Refresh', () => {
     });
 
     test('Refresh Dictionary Cache Sync', async () => {
-        console.log(`Start: ${expect.getState().currentTestName}`);
-        const tempDictPath = tempPath('words.txt');
+        console.log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
+        const tempDictPath = tempPath('words_sync.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
         const weightMap = undefined;
