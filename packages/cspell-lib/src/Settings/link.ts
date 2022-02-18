@@ -1,6 +1,7 @@
 import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import * as fs from 'fs';
 import * as Path from 'path';
+import { clean } from '../util/util';
 import { readRawSettings } from './configLoader';
 import { getRawGlobalSettings, writeRawGlobalSettings } from './GlobalSettings';
 
@@ -163,12 +164,12 @@ function resolveSettings(filename: string): ResolveSettingsResult {
     const resolvedToFilename = ref?.filename;
     const error = ref?.error?.message || (!resolvedToFilename && 'File not Found') || undefined;
 
-    return {
+    return clean({
         filename,
         resolvedToFilename,
         error,
         settings,
-    };
+    });
 }
 
 function normalizeImports(imports: CSpellSettingsWithSourceTrace['import']): string[] {

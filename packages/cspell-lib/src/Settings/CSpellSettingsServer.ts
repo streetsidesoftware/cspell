@@ -13,11 +13,14 @@ import {
     CSpellSettingsInternal,
     isCSpellSettingsInternal,
 } from '../Models/CSpellSettingsInternalDef';
+import { OptionalOrUndefined } from '../util/types';
 import * as util from '../util/util';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';
 import { resolvePatterns } from './patterns';
 
+// cspell:ignore CSpellSettingsWSTO
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
+type CSpellSettingsWSTO = OptionalOrUndefined<CSpellSettingsWithSourceTrace>;
 type CSpellSettingsI = CSpellSettingsInternal;
 
 export const configSettingsFileVersion0_1 = '0.1';
@@ -104,8 +107,8 @@ function replaceIfNotEmpty<T>(left: Array<T> = [], right: Array<T> = []) {
 }
 
 export function mergeSettings(
-    left: CSpellSettingsWST | CSpellSettingsI,
-    ...settings: (CSpellSettingsWST | CSpellSettingsI)[]
+    left: CSpellSettingsWSTO | CSpellSettingsI,
+    ...settings: (CSpellSettingsWSTO | CSpellSettingsI)[]
 ): CSpellSettingsI {
     const rawSettings = settings.reduce<CSpellSettingsI>(merge, toInternalSettings(left));
     return util.clean(rawSettings);
@@ -116,7 +119,10 @@ function isEmpty(obj: Object) {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
 
-function merge(left: CSpellSettingsWST | CSpellSettingsI, right: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI {
+function merge(
+    left: CSpellSettingsWSTO | CSpellSettingsI,
+    right: CSpellSettingsWSTO | CSpellSettingsI
+): CSpellSettingsI {
     const _left = toInternalSettings(left);
     const _right = toInternalSettings(right);
     if (left === right) {
@@ -196,7 +202,7 @@ function versionBasedMergeList<T>(
  * @param left - setting on the left side of a merge
  * @param right - setting on the right side of a merge
  */
-function isLeftAncestorOfRight(left: CSpellSettingsWST, right: CSpellSettingsWST): boolean {
+function isLeftAncestorOfRight(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): boolean {
     return hasAncestor(right, left, 0);
 }
 
@@ -206,11 +212,11 @@ function isLeftAncestorOfRight(left: CSpellSettingsWST, right: CSpellSettingsWST
  * @param left - setting on the left side of a merge
  * @param right - setting on the right side of a merge
  */
-function doesLeftHaveRightAncestor(left: CSpellSettingsWST, right: CSpellSettingsWST): boolean {
+function doesLeftHaveRightAncestor(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): boolean {
     return hasAncestor(left, right, 1);
 }
 
-function hasAncestor(s: CSpellSettingsWST, ancestor: CSpellSettingsWST, side: number): boolean {
+function hasAncestor(s: CSpellSettingsWSTO, ancestor: CSpellSettingsWSTO, side: number): boolean {
     const sources = s.source?.sources;
     if (!sources) return false;
     // calc the first or last index of the source array.
@@ -219,12 +225,12 @@ function hasAncestor(s: CSpellSettingsWST, ancestor: CSpellSettingsWST, side: nu
     return src === ancestor || (src && hasAncestor(src, ancestor, side)) || false;
 }
 
-export function mergeInDocSettings(left: CSpellSettingsWST, right: CSpellSettingsWST): CSpellSettingsWST {
+export function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST {
     const merged = {
         ...mergeSettings(left, right),
         includeRegExpList: mergeListUnique(left.includeRegExpList, right.includeRegExpList),
     };
-    return merged;
+    return util.clean(merged);
 }
 
 /**
@@ -243,7 +249,7 @@ function takeRightOtherwiseLeft<T>(left: T[] | undefined, right: T[] | undefined
     return left || right;
 }
 
-export function calcOverrideSettings(settings: CSpellSettingsWST, filename: string): CSpellSettingsI {
+export function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI {
     const _settings = toInternalSettings(settings);
     const overrides = _settings.overrides || [];
 
@@ -258,7 +264,7 @@ export function calcOverrideSettings(settings: CSpellSettingsWST, filename: stri
  * @param settings - settings to finalize
  * @returns settings where all globs and file paths have been resolved.
  */
-export function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI {
+export function finalizeSettings(settings: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsI {
     return _finalizeSettings(toInternalSettings(settings));
 }
 
@@ -278,9 +284,9 @@ function _finalizeSettings(settings: CSpellSettingsI): CSpellSettingsI {
 }
 
 export function toInternalSettings(settings: undefined): undefined;
-export function toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWST): CSpellSettingsI;
-export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWST): CSpellSettingsI | undefined;
-export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWST): CSpellSettingsI | undefined {
+export function toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI;
+export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI | undefined;
+export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI | undefined {
     if (settings === undefined) return undefined;
     if (isCSpellSettingsInternal(settings)) return settings;
 
@@ -310,12 +316,12 @@ export function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[])
     return m.match(filename);
 }
 
-function mergeSources(left: CSpellSettingsWST, right: CSpellSettingsWST): Source {
+function mergeSources(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): Source {
     const { source: a = { name: 'left' } } = left;
     const { source: b = { name: 'right' } } = right;
     return {
         name: [left.name || a.name, right.name || b.name].join('|'),
-        sources: [left, right],
+        sources: [left as CSpellSettingsWithSourceTrace, right as CSpellSettingsWithSourceTrace],
     };
 }
 
@@ -333,11 +339,11 @@ function max<T>(a: T | undefined, b: T | undefined): T | undefined {
  * Return a list of Setting Sources used to create this Setting.
  * @param settings the settings to search
  */
-export function getSources(settings: CSpellSettingsWST): CSpellSettingsWST[] {
-    const visited = new Set<CSpellSettingsWST>();
-    const sources: CSpellSettingsWST[] = [];
+export function getSources(settings: CSpellSettingsWSTO): CSpellSettingsWSTO[] {
+    const visited = new Set<CSpellSettingsWSTO>();
+    const sources: CSpellSettingsWSTO[] = [];
 
-    function _walkSourcesTree(settings: CSpellSettingsWST | undefined): void {
+    function _walkSourcesTree(settings: CSpellSettingsWSTO | undefined): void {
         if (!settings || visited.has(settings)) return;
         visited.add(settings);
         if (!settings.source?.sources?.length) {
@@ -352,9 +358,9 @@ export function getSources(settings: CSpellSettingsWST): CSpellSettingsWST[] {
     return sources;
 }
 
-type Imports = CSpellSettingsWST['__imports'];
+type Imports = CSpellSettingsWSTO['__imports'];
 
-function mergeImportRefs(left: CSpellSettingsWST, right: CSpellSettingsWST = {}): Imports {
+function mergeImportRefs(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO = {}): Imports {
     const imports = new Map(left.__imports || []);
     if (left.__importRef) {
         imports.set(left.__importRef.filename, left.__importRef);
@@ -378,7 +384,7 @@ export interface ConfigurationDependencies {
     dictionaryFiles: string[];
 }
 
-export function extractDependencies(settings: CSpellSettingsWST | CSpellSettingsI): ConfigurationDependencies {
+export function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI): ConfigurationDependencies {
     const settingsI = toInternalSettings(settings);
     const configFiles = [...(mergeImportRefs(settingsI) || [])].map(([filename]) => filename);
     const dictionaryFiles = calcDictionaryDefsToLoad(settingsI).map((dict) => dict.path);

@@ -1,6 +1,7 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { genSequence, Sequence } from 'gensequence';
 import * as Text from '../util/text';
+import { clean } from '../util/util';
 import { mergeInDocSettings } from './CSpellSettingsServer';
 
 // cspell:ignore gimuy
@@ -70,7 +71,7 @@ function parseLocale(match: string): CSpellUserSettings {
 
 function parseIgnoreWords(match: string): CSpellUserSettings {
     const wordsSetting = parseWords(match);
-    return { id: 'in-doc-ignore', ignoreWords: wordsSetting.words };
+    return clean({ id: 'in-doc-ignore', ignoreWords: wordsSetting.words });
 }
 
 function parseRegEx(match: string): string[] {

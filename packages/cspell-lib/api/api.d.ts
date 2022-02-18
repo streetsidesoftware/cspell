@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -208,6 +208,19 @@ declare class SpellingDictionaryCollection implements SpellingDictionary {
     private _isNoSuggestWord;
 }
 
+/**
+ * The keys of an object where the values cannot be undefined.
+ */
+declare type OptionalKeys<T> = Exclude<{
+    [P in keyof T]: T[P] extends Exclude<T[P], undefined> ? never : P;
+}[keyof T], undefined>;
+/**
+ * Allow undefined in optional fields
+ */
+declare type OptionalOrUndefined<T> = {
+    [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P];
+};
+
 declare const SymbolCSpellSettingsInternal: unique symbol;
 interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
     [SymbolCSpellSettingsInternal]: true;
@@ -361,6 +374,7 @@ declare type LoaderResult = URI | undefined;
 
 declare type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
 declare type CSpellSettingsI$1 = CSpellSettingsInternal;
+declare type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
 declare const defaultConfigFilenames: readonly string[];
@@ -395,18 +409,19 @@ interface ImportFileRefWithError$1 extends ImportFileRef {
 declare function extractImportErrors(settings: CSpellSettingsWST$1): ImportFileRefWithError$1[];
 
 declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
+declare type CSpellSettingsWSTO = OptionalOrUndefined<CSpellSettingsWithSourceTrace>;
 declare type CSpellSettingsI = CSpellSettingsInternal;
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-declare function mergeSettings(left: CSpellSettingsWST | CSpellSettingsI, ...settings: (CSpellSettingsWST | CSpellSettingsI)[]): CSpellSettingsI;
-declare function mergeInDocSettings(left: CSpellSettingsWST, right: CSpellSettingsWST): CSpellSettingsWST;
-declare function calcOverrideSettings(settings: CSpellSettingsWST, filename: string): CSpellSettingsI;
+declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI, ...settings: (CSpellSettingsWSTO | CSpellSettingsI)[]): CSpellSettingsI;
+declare function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST;
+declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI;
 /**
  *
  * @param settings - settings to finalize
  * @returns settings where all globs and file paths have been resolved.
  */
-declare function finalizeSettings(settings: CSpellSettingsWST | CSpellSettingsI): CSpellSettingsI;
+declare function finalizeSettings(settings: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsI;
 /**
  * @param filename - filename
  * @param globs - globs
@@ -419,7 +434,7 @@ declare function checkFilenameMatchesGlob(filename: string, globs: Glob | Glob[]
  * Return a list of Setting Sources used to create this Setting.
  * @param settings the settings to search
  */
-declare function getSources(settings: CSpellSettingsWST): CSpellSettingsWST[];
+declare function getSources(settings: CSpellSettingsWSTO): CSpellSettingsWSTO[];
 interface ImportFileRefWithError extends ImportFileRef {
     error: Error;
 }
@@ -427,12 +442,12 @@ interface ConfigurationDependencies {
     configFiles: string[];
     dictionaryFiles: string[];
 }
-declare function extractDependencies(settings: CSpellSettingsWST | CSpellSettingsI): ConfigurationDependencies;
+declare function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI): ConfigurationDependencies;
 
 declare function getDefaultSettings(): CSpellSettingsInternal;
 
 declare class ImportError extends Error {
-    readonly cause?: Error;
+    readonly cause: Error | undefined;
     constructor(msg: string, cause?: Error | unknown);
 }
 

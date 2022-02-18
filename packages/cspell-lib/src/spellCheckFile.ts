@@ -15,6 +15,7 @@ import {
 import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
 import { isError } from './util/errors';
 import { memorizer } from './util/Memorizer';
+import { clean } from './util/util';
 import { validateText, ValidateTextOptions, ValidationIssue } from './validator';
 
 const getLanguagesForExt = memorizer(_getLanguagesForExt);
@@ -170,7 +171,7 @@ async function spellCheckFullDocument(
 
     const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.settings.enabled ?? true);
     const { generateSuggestions, numSuggestions } = options;
-    const validateOptions = { generateSuggestions, numSuggestions };
+    const validateOptions = clean({ generateSuggestions, numSuggestions });
 
     const issues = shouldCheck ? await validateText(document.text, docSettings.settings, validateOptions) : [];
 
@@ -303,10 +304,10 @@ export function fileToDocument(
     languageId?: string,
     locale?: string
 ): Document | DocumentWithText {
-    return {
+    return clean({
         uri: URI.file(file).toString(),
         text,
         languageId,
         locale,
-    };
+    });
 }

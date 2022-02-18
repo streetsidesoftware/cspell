@@ -9,6 +9,7 @@ import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspe
 import { getDefaultSettings } from '../Settings';
 import { memorizer } from '../util/Memorizer';
 import { createMapper } from '../util/repMap';
+import { clean } from '../util/util';
 import {
     FindResult,
     HasOptions,
@@ -161,15 +162,18 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         function filter(_word: string): boolean {
             return true;
         }
-        const collector = suggestionCollector(word, {
-            numSuggestions,
-            filter,
-            changeLimit: numChanges,
-            includeTies,
-            ignoreCase,
-            timeout,
-            weightMap: this.weightMap,
-        });
+        const collector = suggestionCollector(
+            word,
+            clean({
+                numSuggestions,
+                filter,
+                changeLimit: numChanges,
+                includeTies,
+                ignoreCase,
+                timeout,
+                weightMap: this.weightMap,
+            })
+        );
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }

@@ -2,6 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Settings from './Settings';
 import { CompoundWordsMethod, getDictionaryInternal } from './SpellingDictionary';
 import * as TV from './textValidator';
+import { clean } from './util/util';
 
 export const diagSource = 'cSpell Checker';
 
@@ -31,14 +32,17 @@ export async function validateText(
     }
     const withSugs = issues.map((t) => {
         const suggestions = dict
-            .suggest(t.text, {
-                numSuggestions: options.numSuggestions,
-                compoundMethod: CompoundWordsMethod.NONE,
-                includeTies: false,
-                ignoreCase: !(settings.caseSensitive ?? false),
-                timeout: settings.suggestionsTimeout,
-                numChanges: settings.suggestionNumChanges,
-            })
+            .suggest(
+                t.text,
+                clean({
+                    numSuggestions: options.numSuggestions,
+                    compoundMethod: CompoundWordsMethod.NONE,
+                    includeTies: false,
+                    ignoreCase: !(settings.caseSensitive ?? false),
+                    timeout: settings.suggestionsTimeout,
+                    numChanges: settings.suggestionNumChanges,
+                })
+            )
             .map((r) => r.word);
         return { ...t, suggestions };
     });

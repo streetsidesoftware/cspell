@@ -57,10 +57,13 @@ export async function* traceWordsAsync(
         config: CSpellSettings;
         dicts: SpellingDictionaryCollection;
     }> {
-        const withLocale = mergeSettings(config, {
-            language: language || config.language,
-            allowCompoundWords: allowCompoundWords ?? config.allowCompoundWords,
-        });
+        const withLocale = mergeSettings(
+            config,
+            util.clean({
+                language: language || config.language,
+                allowCompoundWords: allowCompoundWords ?? config.allowCompoundWords,
+            })
+        );
         const withLanguageId = calcSettingsForLanguageId(
             withLocale,
             languageId ?? withLocale.languageId ?? 'plaintext'
@@ -83,7 +86,7 @@ export async function* traceWordsAsync(
     await refreshDictionaryCache();
     const { config, dicts, activeDictionaries } = await finalize(settings);
     const setOfActiveDicts = new Set(activeDictionaries);
-    const opts: HasOptions = { ignoreCase, useCompounds: config.allowCompoundWords };
+    const opts: HasOptions = util.clean({ ignoreCase, useCompounds: config.allowCompoundWords });
 
     function normalizeErrors(errors: Error[] | undefined): Error[] | undefined {
         if (!errors?.length) return undefined;

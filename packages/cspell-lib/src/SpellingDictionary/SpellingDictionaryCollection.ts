@@ -2,7 +2,7 @@ import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
 import { getDefaultSettings } from '../Settings';
 import { memorizer, memorizerKeyBy } from '../util/Memorizer';
-import { isDefined } from '../util/util';
+import { clean, isDefined } from '../util/util';
 import {
     CompoundWordsMethod,
     FindResult,
@@ -80,16 +80,13 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
     }
 
     public _suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[] {
-        const _suggestOptions = { ...suggestOptions };
         const {
             numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
             numChanges,
-            compoundMethod,
             ignoreCase,
             includeTies,
             timeout,
         } = suggestOptions;
-        _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
         const prefixNoCase = CASE_INSENSITIVE_PREFIX;
         const filter = (word: string, _cost: number) => {
             return (
@@ -98,14 +95,17 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
                 !this.isNoSuggestWord(word, suggestOptions)
             );
         };
-        const collector = suggestionCollector(word, {
-            numSuggestions,
-            filter,
-            changeLimit: numChanges,
-            includeTies,
-            ignoreCase,
-            timeout,
-        });
+        const collector = suggestionCollector(
+            word,
+            clean({
+                numSuggestions,
+                filter,
+                changeLimit: numChanges,
+                includeTies,
+                ignoreCase,
+                timeout,
+            })
+        );
         this.genSuggestions(collector, suggestOptions);
         return collector.suggestions.map((r) => ({ ...r, word: r.word }));
     }
