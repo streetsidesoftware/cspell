@@ -124,18 +124,20 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const [newStat] = await Promise.all([pStat, entry.pending]);
         const hasChanged = !isEqual(newStat, entry.stat);
         const sigMatches = entry.sig === sig;
-        setTimeout(
-            () =>
-                console.log(
-                    `Refresh ${
-                        entry.options.name
-                    } Sig Matches: ${sigMatches.toString()} changed: ${hasChanged.toString()} file: ${path.relative(
-                        process.cwd(),
-                        entry.uri
-                    )}`
-                ),
-            0
-        );
+        if (entry.options.name === 'temp') {
+            setTimeout(
+                () =>
+                    console.log(
+                        `Refresh ${entry.options.name} sig: ${sig.toFixed(
+                            2
+                        )} Sig Matches: ${sigMatches.toString()} changed: ${hasChanged.toString()} file: ${path.relative(
+                            process.cwd(),
+                            entry.uri
+                        )}`
+                    ),
+                0
+            );
+        }
         if (sigMatches && hasChanged) {
             entry.loadingState = LoadingState.Loading;
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
