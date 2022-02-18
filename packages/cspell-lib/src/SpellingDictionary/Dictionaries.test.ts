@@ -239,6 +239,7 @@ describe('Validate getDictionary', () => {
         expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
 
         await Dictionaries.refreshDictionaryCache(0);
+        await sleep(2); // Give the system a chance to breath (needed for linux systems)
 
         const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
         expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
@@ -276,6 +277,12 @@ describe('Validate getDictionary', () => {
         }
     );
 });
+
+function sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
 
 function sample(file: string): string {
     return path.join(samples, file);
