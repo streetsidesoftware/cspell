@@ -15,6 +15,7 @@
 - [col](Issue.md#col)
 - [context](Issue.md#context)
 - [isFlagged](Issue.md#isflagged)
+- [length](Issue.md#length)
 - [line](Issue.md#line)
 - [offset](Issue.md#offset)
 - [row](Issue.md#row)
@@ -34,7 +35,7 @@ Omit.col
 
 #### Defined in
 
-[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L10)
+[TextOffset.ts:21](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L21)
 
 ___
 
@@ -46,7 +47,7 @@ text surrounding the issue text
 
 #### Defined in
 
-[CSpellReporter.ts:5](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/CSpellReporter.ts#L5)
+[CSpellReporter.ts:5](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/CSpellReporter.ts#L5)
 
 ___
 
@@ -56,7 +57,23 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:6](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/CSpellReporter.ts#L6)
+[CSpellReporter.ts:6](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/CSpellReporter.ts#L6)
+
+___
+
+### length
+
+• `Optional` **length**: `number`
+
+Assumed to match `text.length` if the text has not been transformed.
+
+#### Inherited from
+
+Omit.length
+
+#### Defined in
+
+[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L14)
 
 ___
 
@@ -70,7 +87,7 @@ Omit.line
 
 #### Defined in
 
-[TextOffset.ts:11](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L11)
+[TextOffset.ts:22](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L22)
 
 ___
 
@@ -78,13 +95,15 @@ ___
 
 • **offset**: `number`
 
+The offset into the document.
+
 #### Inherited from
 
 Omit.offset
 
 #### Defined in
 
-[TextOffset.ts:3](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L3)
+[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L10)
 
 ___
 
@@ -98,7 +117,7 @@ Omit.row
 
 #### Defined in
 
-[TextOffset.ts:9](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L9)
+[TextOffset.ts:20](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L20)
 
 ___
 
@@ -108,7 +127,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:7](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/CSpellReporter.ts#L7)
+[CSpellReporter.ts:7](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/CSpellReporter.ts#L7)
 
 ___
 
@@ -116,13 +135,16 @@ ___
 
 • **text**: `string`
 
+The text found at the offset. If the text has been transformed, then the length might not match `length`.
+Example: Original: `cafe\u0301`, text: `café`
+
 #### Inherited from
 
 Omit.text
 
 #### Defined in
 
-[TextOffset.ts:2](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L2)
+[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L6)
 
 ___
 
@@ -136,4 +158,4 @@ Omit.uri
 
 #### Defined in
 
-[TextOffset.ts:7](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L7)
+[TextOffset.ts:18](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L18)

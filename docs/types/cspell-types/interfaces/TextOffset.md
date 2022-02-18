@@ -12,18 +12,33 @@
 
 ### Properties
 
+- [length](TextOffset.md#length)
 - [offset](TextOffset.md#offset)
 - [text](TextOffset.md#text)
 
 ## Properties
 
+### length
+
+• `Optional` **length**: `number`
+
+Assumed to match `text.length` if the text has not been transformed.
+
+#### Defined in
+
+[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L14)
+
+___
+
 ### offset
 
 • **offset**: `number`
 
+The offset into the document.
+
 #### Defined in
 
-[TextOffset.ts:3](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L3)
+[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L10)
 
 ___
 
@@ -31,6 +46,9 @@ ___
 
 • **text**: `string`
 
+The text found at the offset. If the text has been transformed, then the length might not match `length`.
+Example: Original: `cafe\u0301`, text: `café`
+
 #### Defined in
 
-[TextOffset.ts:2](https://github.com/streetsidesoftware/cspell/blob/51d5a71/packages/cspell-types/src/TextOffset.ts#L2)
+[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L6)
