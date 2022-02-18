@@ -3,7 +3,6 @@ import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation,
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
-import { Sequence } from 'gensequence';
 export * from 'cspell-io';
 import { URI } from 'vscode-uri';
 
@@ -251,26 +250,26 @@ declare function splitCamelCaseWord(word: string): string[];
 /**
  * This function lets you iterate over regular expression matches.
  */
-declare function match(reg: RegExp, text: string): Sequence<RegExpExecArray>;
-declare function matchStringToTextOffset(reg: RegExp, text: string): Sequence<TextOffset>;
-declare function matchToTextOffset(reg: RegExp, text: TextOffset): Sequence<TextOffset>;
-declare function extractLinesOfText(text: string): Sequence<TextOffset>;
+declare function match(reg: RegExp, text: string): Iterable<RegExpExecArray>;
+declare function matchStringToTextOffset(reg: RegExp, text: string): Iterable<TextOffset>;
+declare function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextOffset>;
+declare function extractLinesOfText(text: string): Iterable<TextOffset>;
 /**
  * Extract out whole words from a string of text.
  */
-declare function extractWordsFromText(text: string): Sequence<TextOffset>;
+declare function extractWordsFromText(text: string): Iterable<TextOffset>;
 /**
  * Extract out whole words from a string of text.
  */
-declare function extractWordsFromTextOffset(text: TextOffset): Sequence<TextOffset>;
+declare function extractWordsFromTextOffset(text: TextOffset): Iterable<TextOffset>;
 declare function cleanText(text: string): string;
 declare function cleanTextOffset(text: TextOffset): TextOffset;
 /**
  * Extract out whole words and words containing numbers from a string of text.
  */
-declare function extractPossibleWordsFromTextOffset(text: TextOffset): Sequence<TextOffset>;
-declare function extractWordsFromCode(text: string): Sequence<TextOffset>;
-declare function extractWordsFromCodeTextOffset(textOffset: TextOffset): Sequence<TextOffset>;
+declare function extractPossibleWordsFromTextOffset(text: TextOffset): Iterable<TextOffset>;
+declare function extractWordsFromCode(text: string): Iterable<TextOffset>;
+declare function extractWordsFromCodeTextOffset(textOffset: TextOffset): Iterable<TextOffset>;
 declare function isUpperCase(word: string): boolean;
 declare function isLowerCase(word: string): boolean;
 declare function isFirstCharacterUpper(word: string): boolean;

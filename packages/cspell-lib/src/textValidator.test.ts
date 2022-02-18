@@ -1,17 +1,18 @@
-import {
-    validateText,
-    hasWordCheck,
-    calcTextInclusionRanges,
-    _testMethods,
-    HasWordOptions,
-    ValidationOptions,
-} from './textValidator';
+import { opConcatMap, pipeSync } from '@cspell/cspell-pipe';
+import { genSequence } from 'gensequence';
 import { createCSpellSettingsInternal as csi } from './Models/CSpellSettingsInternalDef';
 import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from './SpellingDictionary';
 import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
+import {
+    calcTextInclusionRanges,
+    hasWordCheck,
+    HasWordOptions,
+    validateText,
+    ValidationOptions,
+    _testMethods,
+} from './textValidator';
 import { FreqCounter } from './util/FreqCounter';
 import * as Text from './util/text';
-import { genSequence } from 'gensequence';
 import { settingsToValidateOptions as sToV } from './validator';
 
 // cspell:ignore whiteberry redmango lightbrown redberry
@@ -198,7 +199,7 @@ describe('Validate textValidator functions', () => {
         const text = '_Test the _line_breaks___from __begin to end__ _eol_';
         const inclusionRanges = calcTextInclusionRanges(text, { ignoreRegExpList: [/_/g] });
         const mapper = _testMethods.mapWordsAgainstRanges(inclusionRanges);
-        const results = Text.matchStringToTextOffset(/\w+/g, text).concatMap(mapper).toArray();
+        const results = [...pipeSync(Text.matchStringToTextOffset(/\w+/g, text), opConcatMap(mapper))];
         const words = results.map((r) => r.text);
         expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
     });

@@ -1,3 +1,4 @@
+import { opConcatMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
 import type { TextOffset } from '@cspell/cspell-types';
 import * as Text from './text';
 import { splitCamelCaseWord } from './text';
@@ -32,11 +33,13 @@ describe('Util Text', () => {
 
     test('extract word from text', () => {
         expect(
-            Text.extractWordsFromText(
-                `
+            toArray(
+                Text.extractWordsFromText(
+                    `
             // could've, would've, couldn't've, wasn't, y'all, 'twas, shouldn’t
         `
-            ).toArray()
+                )
+            )
         ).toEqual([
             { text: "could've", offset: 16 },
             { text: "would've", offset: 26 },
@@ -50,11 +53,13 @@ describe('Util Text', () => {
 
     test('extract words', () => {
         expect(
-            Text.extractWordsFromText(
-                `
+            toArray(
+                Text.extractWordsFromText(
+                    `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
         `
-            ).toArray()
+                )
+            )
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'splitCamelCaseWord', offset: 20 },
@@ -65,11 +70,13 @@ describe('Util Text', () => {
             { text: 'hello', offset: 65 },
         ]);
         expect(
-            Text.extractWordsFromText(
-                `
+            toArray(
+                Text.extractWordsFromText(
+                    `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
         `
-            ).toArray()
+                )
+            )
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'splitCamelCaseWord', offset: 20 },
@@ -80,11 +87,13 @@ describe('Util Text', () => {
             { text: 'hello', offset: 65 },
         ]);
         expect(
-            Text.extractWordsFromText(
-                `
+            toArray(
+                Text.extractWordsFromText(
+                    `
             expect(splitCamelCaseWord('hello'));
         `
-            ).toArray()
+                )
+            )
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'splitCamelCaseWord', offset: 20 },
@@ -94,11 +103,13 @@ describe('Util Text', () => {
 
     test('extract words from code', () => {
         expect(
-            Text.extractWordsFromCode(
-                `
+            toArray(
+                Text.extractWordsFromCode(
+                    `
             expect(splitCamelCaseWord('hello')).to.deep.equal(['hello']);
         `
-            ).toArray()
+                )
+            )
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'split', offset: 20 },
@@ -112,11 +123,13 @@ describe('Util Text', () => {
             { text: 'hello', offset: 65 },
         ]);
         expect(
-            Text.extractWordsFromCode(
-                `
+            toArray(
+                Text.extractWordsFromCode(
+                    `
             expect(regExp.match(first_line));
         `
-            ).toArray()
+                )
+            )
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'reg', offset: 20 },
@@ -126,11 +139,13 @@ describe('Util Text', () => {
             { text: 'line', offset: 39 },
         ]);
         expect(
-            Text.extractWordsFromCode(
-                `
+            toArray(
+                Text.extractWordsFromCode(
+                    `
             expect(aHELLO);
         `
-            ).toArray()
+                )
+            )
         ).toEqual([
             { text: 'expect', offset: 13 },
             { text: 'a', offset: 20 },
@@ -139,7 +154,7 @@ describe('Util Text', () => {
         // cspell:ignore shouldn
         const t = "\n            const x = 'shouldn\\'t';\n        ";
 
-        expect(Text.extractWordsFromCode(t).toArray()).toEqual([
+        expect(toArray(Text.extractWordsFromCode(t))).toEqual([
             { text: 'const', offset: 13 },
             { text: 'x', offset: 19 },
             { text: "shouldn\\'t", offset: 24 },
@@ -147,9 +162,7 @@ describe('Util Text', () => {
     });
 
     test('splits words like HTMLInput', () => {
-        const words = Text.extractWordsFromCode('var value = HTMLInput.value;')
-            .map(({ text }) => text)
-            .toArray();
+        const words = toArray(Text.extractWordsFromCode('var value = HTMLInput.value;')).map(({ text }) => text);
         expect(words).toEqual(['var', 'value', 'HTML', 'Input', 'value']);
     });
 
@@ -164,39 +177,39 @@ describe('Util Text', () => {
 
     test('tests skipping Chinese characters', () => {
         expect(
-            Text.extractWordsFromCode(
-                `
+            toArray(
+                Text.extractWordsFromCode(
+                    `
             <a href="http://www.ctrip.com" title="携程旅行网">携程旅行网</a>
         `
-            )
-                .map((wo) => wo.text)
-                .toArray()
+                )
+            ).map((wo) => wo.text)
         ).toEqual(['a', 'href', 'http', 'www', 'ctrip', 'com', 'title', 'a']);
     });
 
     test('tests skipping Japanese characters', () => {
         expect(
-            Text.extractWordsFromCode(
-                `
+            toArray(
+                Text.extractWordsFromCode(
+                    `
             Example text: gitのpackageのみ際インストール
             gitのpackageのみ際インストール
             title="携程旅行网"
         `
-            )
-                .map((wo) => wo.text)
-                .toArray()
+                )
+            ).map((wo) => wo.text)
         ).toEqual(['Example', 'text', 'git', 'package', 'git', 'package', 'title']);
     });
 
     test('tests Greek characters', () => {
         expect(
-            Text.extractWordsFromCode(
-                `
+            toArray(
+                Text.extractWordsFromCode(
+                    `
             Γ γ	gamma, γάμμα
         `
-            )
-                .map((wo) => wo.text)
-                .toArray()
+                )
+            ).map((wo) => wo.text)
         ).toEqual(['Γ', 'γ', 'gamma', 'γάμμα']);
     });
 
@@ -209,9 +222,7 @@ describe('Util Text', () => {
         ${nfc('caféÁ')}     | ${[nfc('café'), nfc('Á')]}
         ${nfd('caféÁ')}     | ${[nfd('café'), nfd('Á')]}
     `('extractWordsFromCode "$text"', ({ text, expected }) => {
-        const r = Text.extractWordsFromCode(text)
-            .map((wo) => wo.text)
-            .toArray();
+        const r = toArray(Text.extractWordsFromCode(text)).map((wo) => wo.text);
         expect(r).toEqual(expected);
     });
 
@@ -223,9 +234,7 @@ describe('Util Text', () => {
     test('tests breaking up text into lines', () => {
         const parts = ['', '/*', ' * this is a comment.\r', ' */', ''];
         const sampleText = parts.join('\n');
-        const r = Text.extractLinesOfText(sampleText)
-            .map((a) => a.text)
-            .toArray();
+        const r = toArray(Text.extractLinesOfText(sampleText)).map((a) => a.text);
         expect(r.join('')).toBe(parts.join('\n'));
         const lines = [...Text.extractLinesOfText(sampleCode)].map((m) => m.text);
         expect(lines.length).toBe(sampleCode.split('\n').length);
@@ -234,9 +243,7 @@ describe('Util Text', () => {
     test('tests breaking up text into lines (single line)', () => {
         const parts = ['There is only one line.'];
         const sampleText = parts.join('\n');
-        const r = Text.extractLinesOfText(sampleText)
-            .map((a) => a.text)
-            .toArray();
+        const r = toArray(Text.extractLinesOfText(sampleText)).map((a) => a.text);
         const rText = r.join('');
         expect(rText).toBe(parts.join('\n'));
         expect(rText).toBe(sampleText);
@@ -244,17 +251,15 @@ describe('Util Text', () => {
 
     test('tests extractLinesOfText', () => {
         const linesA = [...Text.extractLinesOfText(sampleCode)].map((m) => m.text);
-        const linesB = Text.extractLinesOfText(sampleCode)
-            .map((m) => m.text)
-            .toArray();
+        const linesB = toArray(Text.extractLinesOfText(sampleCode)).map((m) => m.text);
         expect(linesB).toEqual(linesA);
     });
 
     test('extractText', () => {
         const line = Text.textOffset('This is a line of text to be processed.');
-        const words = Text.extractWordsFromTextOffset(line);
-        const results = words.map((wo) => Text.extractText(line, wo.offset, wo.offset + wo.text.length)).toArray();
-        const expected = words.map((wo) => wo.text).toArray();
+        const words = toArray(Text.extractWordsFromTextOffset(line));
+        const results = words.map((wo) => Text.extractText(line, wo.offset, wo.offset + wo.text.length));
+        const expected = words.map((wo) => wo.text);
         expect(results).toEqual(expected);
     });
 });
@@ -377,9 +382,12 @@ function nfd(s: string): string {
 }
 
 function match(regexp: RegExp, text: string): (string | number)[] {
-    const x = Text.matchStringToTextOffset(regexp, text)
-        .concatMap((t) => [t.text, t.offset])
-        .toArray();
+    const x = toArray(
+        pipe(
+            Text.matchStringToTextOffset(regexp, text),
+            opConcatMap((t) => [t.text, t.offset])
+        )
+    );
     return x;
 }
 
