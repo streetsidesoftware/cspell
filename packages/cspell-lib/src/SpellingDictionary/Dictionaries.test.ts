@@ -271,6 +271,7 @@ describe('Validate Refresh', () => {
 
         // Update one of the dictionaries to see if it loads.
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
+        await sleep(2); // Give the system a chance to breath (needed for linux systems)
 
         const dicts3 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
         // Should be using cache and will not contain the new words.
@@ -279,7 +280,6 @@ describe('Validate Refresh', () => {
         expect(dicts3.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
 
         await Dictionaries.refreshDictionaryCache(0);
-        await sleep(2); // Give the system a chance to breath (needed for linux systems)
 
         const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
 
