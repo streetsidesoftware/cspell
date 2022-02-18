@@ -271,7 +271,7 @@ describe('Validate Refresh', () => {
 
         // Update one of the dictionaries to see if it loads.
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\nfour\n');
-        await sleep(2); // Give the system a chance to breath (needed for linux systems)
+        await sleep(50); // Give the system a chance to breath (needed for linux systems)
 
         const dicts3 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
         // Should be using cache and will not contain the new words.
