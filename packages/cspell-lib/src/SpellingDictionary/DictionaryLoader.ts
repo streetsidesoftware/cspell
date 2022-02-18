@@ -52,9 +52,9 @@ interface CacheEntrySync extends CacheEntry {
 }
 
 const debugLog: string[] = [];
-const debugMode = true;
+const debugMode = false;
 
-function log(msg: string): void {
+function __log(msg: string): void {
     debugMode && debugLog.push(msg);
 }
 
@@ -95,24 +95,24 @@ export function loadDictionarySync(uri: string, options: DictionaryDefinitionInt
     const key = calcKey(uri, options);
     const entry = dictionaryCache.get(key);
     if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
-        if (entry.options.name === 'temp') {
-            log(
-                `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
-                    process.cwd(),
-                    entry.uri
-                )}`
-            );
-        }
+        // if (entry.options.name === 'temp') {
+        //     __log(
+        //         `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
+        //             process.cwd(),
+        //             entry.uri
+        //         )}`
+        //     );
+        // }
         return entry.dictionary;
     }
-    if (options.name === 'temp') {
-        log(
-            `Cache Miss ${options.name}; ts: ${entry?.sig.toFixed(2) || Date.now()}; file: ${path.relative(
-                process.cwd(),
-                uri
-            )}`
-        );
-    }
+    // if (options.name === 'temp') {
+    //     __log(
+    //         `Cache Miss ${options.name}; ts: ${entry?.sig.toFixed(2) || Date.now()}; file: ${path.relative(
+    //             process.cwd(),
+    //             uri
+    //         )}`
+    //     );
+    // }
     const loadedEntry = loadEntrySync(uri, options);
     dictionaryCache.set(key, loadedEntry);
     return loadedEntry.dictionary;
@@ -147,17 +147,17 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         const [newStat] = await Promise.all([pStat, entry.pending]);
         const hasChanged = !isEqual(newStat, entry.stat);
         const sigMatches = entry.sig === sig;
-        if (entry.options.name === 'temp') {
-            const processedAt = Date.now();
-            log(
-                `Refresh ${entry.options.name}; sig: ${sig.toFixed(
-                    2
-                )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
-                    process.cwd(),
-                    entry.uri
-                )}`
-            );
-        }
+        // if (entry.options.name === 'temp') {
+        //     const processedAt = Date.now();
+        //     __log(
+        //         `Refresh ${entry.options.name}; sig: ${sig.toFixed(
+        //             2
+        //         )} at ${processedAt}; Sig Matches: ${sigMatches.toString()}; changed: ${hasChanged.toString()}; file: ${path.relative(
+        //             process.cwd(),
+        //             entry.uri
+        //         )}`
+        //     );
+        // }
         if (sigMatches && hasChanged) {
             entry.loadingState = LoadingState.Loading;
             dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));

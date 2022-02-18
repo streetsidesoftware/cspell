@@ -13,7 +13,7 @@ import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 const root = path.resolve(__dirname, '../..');
 const samples = path.join(root, 'samples');
 
-const debug = true;
+const debug = false;
 const dictionaryLoadDebugLog = __testing__.debugLog;
 
 function log(msg: string): void {
