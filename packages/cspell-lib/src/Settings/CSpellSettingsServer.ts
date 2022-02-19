@@ -18,7 +18,6 @@ import * as util from '../util/util';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';
 import { resolvePatterns } from './patterns';
 
-// cspell:ignore CSpellSettingsWSTO
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<CSpellSettingsWithSourceTrace>;
 type CSpellSettingsI = CSpellSettingsInternal;
