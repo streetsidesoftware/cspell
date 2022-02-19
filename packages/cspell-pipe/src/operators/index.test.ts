@@ -20,6 +20,12 @@ describe('Operators', () => {
         expect(operators.opMap).toBeInstanceOf(Function);
         expect(operators.opMapAsync).toBeInstanceOf(Function);
         expect(operators.opMapSync).toBeInstanceOf(Function);
+        expect(operators.opSkip).toBeInstanceOf(Function);
+        expect(operators.opSkipAsync).toBeInstanceOf(Function);
+        expect(operators.opSkipSync).toBeInstanceOf(Function);
+        expect(operators.opTake).toBeInstanceOf(Function);
+        expect(operators.opTakeAsync).toBeInstanceOf(Function);
+        expect(operators.opTakeSync).toBeInstanceOf(Function);
         expect(operators.opUnique).toBeInstanceOf(Function);
         expect(operators.opUniqueAsync).toBeInstanceOf(Function);
         expect(operators.opUniqueSync).toBeInstanceOf(Function);

@@ -1,4 +1,4 @@
-import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
+import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray, opTake } from '@cspell/cspell-pipe';
 import type { TextOffset } from '@cspell/cspell-types';
 import { genSequence, Sequence } from 'gensequence';
 import * as RxPat from './Settings/RegExpPatterns';
@@ -59,21 +59,22 @@ export function validateText(
 
     const validator = lineValidator(dict, options);
 
-    return genSequence(
-        pipe(
-            Text.extractLinesOfText(text),
-            opConcatMap(mapTextOffsetsAgainstRanges(includeRanges)),
-            opConcatMap(validator),
-            opFilter((wo) => {
-                const word = wo.text;
-                // Keep track of the number of times we have seen the same problem
-                const n = (mapOfProblems.get(word) || 0) + 1;
-                mapOfProblems.set(word, n);
-                // Filter out if there is too many
-                return n <= maxDuplicateProblems;
-            })
-        )
-    ).take(maxNumberOfProblems);
+    const iter = pipe(
+        Text.extractLinesOfText(text),
+        opConcatMap(mapLineToLineSegments(includeRanges)),
+        opConcatMap(validator),
+        opFilter((wo) => {
+            const word = wo.text;
+            // Keep track of the number of times we have seen the same problem
+            const n = (mapOfProblems.get(word) || 0) + 1;
+            mapOfProblems.set(word, n);
+            // Filter out if there is too many
+            return n <= maxDuplicateProblems;
+        }),
+        opTake(maxNumberOfProblems)
+    );
+
+    return genSequence(iter);
 }
 
 export function calcTextInclusionRanges(text: string, options: IncludeExcludeOptions): TextRange.MatchRange[] {
@@ -89,7 +90,12 @@ export function calcTextInclusionRanges(text: string, options: IncludeExcludeOpt
     return includeRanges;
 }
 
-type LineValidator = (line: TextOffset) => Sequence<ValidationResult>;
+interface LineSegment {
+    line: TextOffset;
+    segment: TextOffset;
+}
+
+type LineValidator = (line: LineSegment) => Sequence<ValidationResult>;
 
 function lineValidator(dict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
@@ -147,11 +153,11 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         return clean({ ...word, isFlagged, isFound });
     }
 
-    const fn: LineValidator = (lineSegment: TextOffset) => {
+    const fn: LineValidator = (lineSegment: LineSegment) => {
         function splitterIsValid(word: TextOffset): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
-                (!testForFlaggedWord(word) && isWordValid(dictCol, word, lineSegment, hasWordOptions))
+                (!testForFlaggedWord(word) && isWordValid(dictCol, word, lineSegment.line, hasWordOptions))
             );
         }
 
@@ -173,7 +179,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                     // get back the original text.
                     opMap((wo) => ({
                         ...wo,
-                        text: Text.extractText(lineSegment, wo.offset, wo.offset + wo.text.length),
+                        text: Text.extractText(lineSegment.segment, wo.offset, wo.offset + wo.text.length),
                     }))
                 )
             );
@@ -190,7 +196,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
             if (isWordFlagged(possibleWord)) {
                 const vr: ValidationResult = {
                     ...possibleWord,
-                    line: lineSegment,
+                    line: lineSegment.line,
                     isFlagged: true,
                 };
                 return [vr];
@@ -200,7 +206,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
                 pipe(
                     Text.extractWordsFromTextOffset(possibleWord),
                     opFilter(filterAlreadyChecked),
-                    opMap((wo) => ({ ...wo, line: lineSegment })),
+                    opMap((wo) => ({ ...wo, line: lineSegment.line })),
                     opMap(checkFlagWords),
                     opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
                     opConcatMap(checkFullWord)
@@ -208,10 +214,10 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
             );
             if (mismatches.length) {
                 // Try the more expensive word splitter
-                const splitResult = split(lineSegment, possibleWord.offset, splitterIsValid);
+                const splitResult = split(lineSegment.segment, possibleWord.offset, splitterIsValid);
                 const nonMatching = splitResult.words.filter((w) => !w.isFound);
                 if (nonMatching.length < mismatches.length) {
-                    return nonMatching.map((w) => ({ ...w, line: lineSegment })).map(checkFlagWords);
+                    return nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(checkFlagWords);
                 }
             }
             return mismatches;
@@ -219,7 +225,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
 
         const checkedPossibleWords: Sequence<ValidationResult> = genSequence(
             pipe(
-                Text.extractPossibleWordsFromTextOffset(lineSegment),
+                Text.extractPossibleWordsFromTextOffset(lineSegment.segment),
                 opFilter(filterAlreadyChecked),
                 opConcatMap(checkPossibleWords)
             )
@@ -263,11 +269,19 @@ function convertCheckOptionsToHasOptions(opt: HasWordOptions): HasOptions {
     });
 }
 
+function mapLineToLineSegments(includeRanges: TextRange.MatchRange[]): (line: TextOffset) => LineSegment[] {
+    const mapAgainstRanges = mapTextOffsetsAgainstRanges(includeRanges);
+
+    return (line: TextOffset) => {
+        return mapAgainstRanges(line).map((segment) => ({ line, segment }));
+    };
+}
+
 /**
  * Returns a mapper function that will
  * @param includeRanges Allowed ranges for words.
  */
-function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (wo: TextOffset) => Iterable<TextOffset> {
+function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (wo: TextOffset) => TextOffset[] {
     let rangePos = 0;
 
     const mapper = (textOffset: TextOffset) => {
@@ -275,8 +289,8 @@ function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (wo
             return [];
         }
         const parts: TextOffset[] = [];
-        const { text, offset } = textOffset;
-        const wordEndPos = offset + text.length;
+        const { text, offset, length } = textOffset;
+        const wordEndPos = offset + (length ?? text.length);
         let wordStartPos = offset;
         while (rangePos && (rangePos >= includeRanges.length || includeRanges[rangePos].startPos > wordStartPos)) {
             rangePos -= 1;
