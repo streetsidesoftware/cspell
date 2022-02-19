@@ -1,3 +1,5 @@
+import { RemoveUndefined } from './types';
+
 // alias for uniqueFilterFnGenerator
 export const uniqueFn = uniqueFilterFnGenerator;
 
@@ -22,7 +24,7 @@ export function unique<T>(src: T[]): T[] {
  * Delete all `undefined` fields from an object.
  * @param src - object to be cleaned
  */
-export function clean<T>(src: T): T {
+export function clean<T>(src: T): RemoveUndefined<T> {
     const r = src;
     type keyOfT = keyof T;
     type keysOfT = keyOfT[];
@@ -31,7 +33,7 @@ export function clean<T>(src: T): T {
             delete r[key];
         }
     }
-    return r;
+    return r as RemoveUndefined<T>;
 }
 
 /**

@@ -106,12 +106,11 @@ describe('Validate Link.ts', () => {
 
         expect(r.resolvedSettings).toHaveLength(3);
         expect(r).toEqual({
-            error: undefined,
             success: true,
             resolvedSettings: [
-                expect.objectContaining({ filename: pathCpp, error: undefined }),
-                expect.objectContaining({ filename: pathPython, error: undefined }),
-                expect.objectContaining({ filename: pathHtml, error: undefined }),
+                expect.objectContaining({ filename: pathCpp }),
+                expect.objectContaining({ filename: pathPython }),
+                expect.objectContaining({ filename: pathHtml }),
             ],
         });
         expect(mockSetData).toHaveBeenCalledWith({
@@ -133,8 +132,8 @@ describe('Validate Link.ts', () => {
             error: 'Unable to resolve files.',
             success: false,
             resolvedSettings: [
-                expect.objectContaining({ filename: pathCpp, error: undefined }),
-                expect.objectContaining({ filename: pathPython, error: undefined }),
+                expect.objectContaining({ filename: pathCpp }),
+                expect.objectContaining({ filename: pathPython }),
                 expect.objectContaining({
                     filename: pathNotFound,
                     error: expect.stringContaining('Failed to read config'),

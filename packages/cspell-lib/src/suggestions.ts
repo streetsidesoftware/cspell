@@ -100,16 +100,19 @@ export async function suggestionsForWord(
         dictionaryCollection: SpellingDictionaryCollection;
         allDictionaryCollection: SpellingDictionaryCollection;
     }> {
-        const withLocale = mergeSettings(config, {
-            language: language || config.language,
-            // dictionaries: dictionaries?.length ? dictionaries : config.dictionaries,
-        });
+        const withLocale = mergeSettings(
+            config,
+            util.clean({
+                language: language || config.language,
+                // dictionaries: dictionaries?.length ? dictionaries : config.dictionaries,
+            })
+        );
         const withLanguageId = calcSettingsForLanguageId(
             withLocale,
             languageId ?? withLocale.languageId ?? 'plaintext'
         );
         const settings = finalizeSettings(withLanguageId);
-        settings.dictionaries = dictionaries?.length ? dictionaries : settings.dictionaries;
+        settings.dictionaries = dictionaries?.length ? dictionaries : settings.dictionaries || [];
         validateDictionaries(settings, dictionaries);
         const dictionaryCollection = await getDictionaryInternal(settings);
         settings.dictionaries = settings.dictionaryDefinitions?.map((def) => def.name) || [];

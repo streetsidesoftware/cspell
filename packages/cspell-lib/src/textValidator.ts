@@ -5,6 +5,7 @@ import * as RxPat from './Settings/RegExpPatterns';
 import { HasOptions, SpellingDictionary } from './SpellingDictionary/SpellingDictionary';
 import * as Text from './util/text';
 import * as TextRange from './util/TextRange';
+import { clean } from './util/util';
 import { split } from './util/wordSplitter';
 
 export interface ValidationOptions extends IncludeExcludeOptions {
@@ -143,7 +144,7 @@ function lineValidator(dict: SpellingDictionary, options: ValidationOptions): Li
         const isIgnored = isWordIgnored(word.text);
         const { isFlagged = !isIgnored && testForFlaggedWord(word) } = word;
         const isFound = isFlagged ? undefined : isIgnored || isWordValid(dictCol, word, word.line, options);
-        return { ...word, isFlagged, isFound };
+        return clean({ ...word, isFlagged, isFound });
     }
 
     const fn: LineValidator = (lineSegment: TextOffset) => {
@@ -256,10 +257,10 @@ export function hasWordCheck(dict: SpellingDictionary, word: string, options: Ha
 
 function convertCheckOptionsToHasOptions(opt: HasWordOptions): HasOptions {
     const { ignoreCase, useCompounds } = opt;
-    return {
+    return clean({
         ignoreCase,
         useCompounds,
-    };
+    });
 }
 
 /**

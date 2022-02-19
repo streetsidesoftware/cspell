@@ -21,12 +21,12 @@ export interface CSpellSettings extends FileSettings, LegacySettings {
 
 export interface ImportFileRef {
     filename: string;
-    error?: Error;
+    error?: Error | undefined;
     referencedBy?: Source[];
 }
 
 export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
-    source?: Source;
+    source?: Source | undefined;
     __importRef?: ImportFileRef;
     __imports?: Map<string, ImportFileRef>;
 }

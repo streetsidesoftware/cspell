@@ -1,7 +1,7 @@
 import { genSequence, Sequence } from 'gensequence';
 import { defaultTrieOptions } from './constants';
 import { ChildMap, FLAG_WORD, PartialTrieOptions, TrieNode, TrieOptions, TrieRoot } from './TrieNode';
-import type { Mandatory, PartialWithUndefined } from './types';
+import type { PartialWithUndefined, RemoveUndefined } from './types';
 import { walker, YieldResult } from './walker';
 
 export function insert(text: string, node: TrieNode = {}): TrieNode {
@@ -230,12 +230,12 @@ export function isDefined<T>(t: T | undefined): t is T {
     return t !== undefined;
 }
 
-export function clean<T>(t: T): Mandatory<T> {
+export function clean<T>(t: T): RemoveUndefined<T> {
     const copy = { ...t };
     for (const key of Object.keys(copy) as (keyof T)[]) {
         if (copy[key] === undefined) {
             delete copy[key];
         }
     }
-    return copy as Mandatory<T>;
+    return copy as RemoveUndefined<T>;
 }

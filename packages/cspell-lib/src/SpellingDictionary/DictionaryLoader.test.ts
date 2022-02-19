@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
+import { clean } from '../util/util';
 import { loadDictionary, loadDictionarySync, LoadOptions, refreshCacheEntries, testing } from './DictionaryLoader';
 jest.mock('../util/logger');
 
@@ -155,7 +156,7 @@ describe('Validate DictionaryLoader', () => {
         async ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
             const file = sample('words.txt');
             const d = await loadDictionary(file, dDef({ name: 'words', path: file }));
-            expect(d.has(word, { ignoreCase })).toBe(hasWord);
+            expect(d.has(word, clean({ ignoreCase }))).toBe(hasWord);
         }
     );
 

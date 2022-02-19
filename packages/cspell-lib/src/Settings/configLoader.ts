@@ -5,7 +5,7 @@ import type {
     GlobDef,
     ImportFileRef,
     LanguageSetting,
-    PnPSettings,
+    PnPSettings as PnPSettingsStrict,
     ReporterSettings,
     Source,
 } from '@cspell/cspell-types';
@@ -16,6 +16,7 @@ import { URI } from 'vscode-uri';
 import { createCSpellSettingsInternal as csi, CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { logError, logWarning } from '../util/logger';
 import { resolveFile } from '../util/resolveFile';
+import { OptionalOrUndefined } from '../util/types';
 import * as util from '../util/util';
 import {
     configSettingsFileVersion0_1,
@@ -32,6 +33,7 @@ import { LoaderResult, pnpLoader } from './pnpLoader';
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI = CSpellSettingsInternal;
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
+type PnPSettings = OptionalOrUndefined<PnPSettingsStrict>;
 
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = [configSettingsFileVersion0_2];
 
@@ -465,14 +467,11 @@ function toGlobDef(
         return g.map((g) => toGlobDef(g, root, source));
     }
     if (typeof g === 'string') {
-        return toGlobDef(
-            {
-                glob: g,
-                root,
-            },
-            root,
-            source
-        );
+        const glob: GlobDef = { glob: g };
+        if (root !== undefined) {
+            glob.root = root;
+        }
+        return toGlobDef(glob, root, source);
     }
     if (source) {
         return { ...g, source };
@@ -480,7 +479,9 @@ function toGlobDef(
     return g;
 }
 
-type NormalizeDictionaryDefsParams = Pick<CSpellUserSettings, 'dictionaryDefinitions' | 'languageSettings'>;
+type NormalizeDictionaryDefsParams = OptionalOrUndefined<
+    Pick<CSpellUserSettings, 'dictionaryDefinitions' | 'languageSettings'>
+>;
 
 function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathToSettingsFile: string) {
     const dictionaryDefinitions = mapDictDefsToInternal(settings.dictionaryDefinitions, pathToSettingsFile);
@@ -550,7 +551,7 @@ function normalizeLanguageSettings(languageSettings: LanguageSetting[] | undefin
 
     function fixLocale(s: LanguageSetting): LanguageSetting {
         const { local: locale, ...rest } = s;
-        return { locale, ...rest };
+        return util.clean({ locale, ...rest });
     }
 
     return languageSettings.map(fixLocale);

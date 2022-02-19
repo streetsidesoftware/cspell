@@ -19,6 +19,7 @@ import { createDictionaryReferenceCollection } from './DictionaryReferenceCollec
 import { mapDictionaryInformationToWeightMap, WeightMap } from 'cspell-trie-lib';
 import { DictionaryInformation } from '@cspell/cspell-types';
 import { RequireOptional, UnionFields } from '../util/types';
+import { clean } from '../util/util';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
 
@@ -116,19 +117,19 @@ type DictDef = Partial<
     UnionFields<UnionFields<DictionaryDefinition, DictionaryDefinitionAugmented>, DictionaryDefinitionCustom>
 >;
 
-class _DictionaryDefinitionInternalWithSource implements RequireOptional<DictionaryDefinitionInternalWithSource> {
+class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInternalWithSource {
     private _weightMap: WeightMap | undefined;
     readonly name: string;
     readonly path: string;
-    readonly addWords: boolean | undefined;
-    readonly description: string | undefined;
-    readonly dictionaryInformation: DictionaryInformation | undefined;
-    readonly type: DictionaryFileTypes | undefined;
-    readonly file: undefined;
-    readonly repMap: ReplaceMap | undefined;
-    readonly useCompounds: boolean | undefined;
-    readonly noSuggest: boolean | undefined;
-    readonly scope: CustomDictionaryScope | CustomDictionaryScope[] | undefined;
+    readonly addWords?: boolean;
+    readonly description?: string;
+    readonly dictionaryInformation?: DictionaryInformation;
+    readonly type?: DictionaryFileTypes;
+    readonly file?: undefined;
+    readonly repMap?: ReplaceMap;
+    readonly useCompounds?: boolean;
+    readonly noSuggest?: boolean;
+    readonly scope?: CustomDictionaryScope | CustomDictionaryScope[];
     constructor(def: DictionaryDefinition, readonly __source: string) {
         // this bit of assignment is to have the compiler help use if any new fields are added.
         const defAll: DictDef = def;
@@ -164,17 +165,10 @@ class _DictionaryDefinitionInternalWithSource implements RequireOptional<Diction
             useCompounds,
         };
 
+        Object.assign(this, clean(ddi));
         this.name = ddi.name;
         this.file = ddi.file;
         this.path = ddi.path;
-        this.addWords = ddi.addWords;
-        this.description = ddi.description;
-        this.dictionaryInformation = ddi.dictionaryInformation;
-        this.type = ddi.type;
-        this.repMap = ddi.repMap;
-        this.noSuggest = ddi.noSuggest;
-        this.scope = ddi.scope;
-        this.useCompounds = ddi.useCompounds;
         this._weightMap = this.dictionaryInformation
             ? mapDictionaryInformationToWeightMap(this.dictionaryInformation)
             : undefined;

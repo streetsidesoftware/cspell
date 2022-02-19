@@ -5,6 +5,8 @@ import {
     DictionaryDefinitionPreferred,
 } from '@cspell/cspell-types';
 import { WeightMap } from 'cspell-trie-lib';
+import { OptionalOrUndefined } from '../util/types';
+import { clean } from '../util/util';
 
 export const SymbolCSpellSettingsInternal = Symbol('CSpellSettingsInternal');
 
@@ -31,15 +33,20 @@ export interface DictionaryDefinitionInternalWithSource extends DictionaryDefini
     readonly __source: string;
 }
 
-export function createCSpellSettingsInternal(parts: Partial<CSpellSettingsInternal> = {}): CSpellSettingsInternal {
-    return {
+export function createCSpellSettingsInternal(
+    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {}
+): CSpellSettingsInternal {
+    return clean({
         ...parts,
         [SymbolCSpellSettingsInternal]: true,
-    };
+    });
 }
 
 export function isCSpellSettingsInternal(
-    cs: CSpellSettingsInternal | CSpellSettingsWithSourceTrace
+    cs:
+        | CSpellSettingsInternal
+        | CSpellSettingsWithSourceTrace
+        | OptionalOrUndefined<CSpellSettingsInternal | CSpellSettingsWithSourceTrace>
 ): cs is CSpellSettingsInternal {
     return !!(<CSpellSettingsInternal>cs)[SymbolCSpellSettingsInternal];
 }

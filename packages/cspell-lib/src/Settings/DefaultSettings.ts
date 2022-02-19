@@ -136,7 +136,11 @@ const getSettings = (function () {
         if (!settings) {
             const jsonSettings = readSettings(defaultConfigFile);
             settings = mergeSettings(_defaultSettings, jsonSettings);
-            settings.name = jsonSettings.name;
+            if (jsonSettings.name !== undefined) {
+                settings.name = jsonSettings.name;
+            } else {
+                delete settings.name;
+            }
         }
         return settings;
     };
