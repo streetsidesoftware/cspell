@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 105
   filesWithIssues: 98
-  issues: 3332
+  issues: 3324
   errors: 0
 Errors: []
 
@@ -463,7 +463,6 @@ issues:
   - "Engine/neo-api-windows.ads:786:24   	hinst               	U   	function LoadImageW (hinst : Ptr;"
   - "Engine/neo-api-windows.ads:823:53   	LPPOINT             	U   	lpPoint : access POINT) -- LPPOINT"
   - "Engine/neo-api-windows.ads:863:63   	HMENU               	U   	Int_Ptr; -- HMENU"
-  - "Engine/neo-api-windows.ads:875:18   	Mutex               	U   	function CreateMutexW (lpMutexAttributes"
   - "Engine/neo-api-windows.ads:905:29   	lpmi                	U   	lpmi : access MONITORINFO"
   - "Engine/neo-api-windows.ads:905:63   	LPMONITORINFO       	U   	access MONITORINFO) -- LPMONITORINFO"
   - "Engine/neo-api-windows.ads:911:57   	LPCRECT             	U   	lprcClip : Ptr_RECT; -- LPCRECT"
@@ -583,11 +582,10 @@ issues:
   - "Engine/neo-data.adb:1063:37 	rendevous   	U   	Set the locals via a rendevous"
   - "Engine/neo-data.adb:1287:36 	dimensinal  	U   	-- Parse multi-dimensinal"
   - "Engine/neo-data.adb:1431:91 	doesn       	U   	the property map if it doesn't exist"
-  - "Engine/neo-data.ads:35:78   	SPIR            	U   	in bytes (needed for SPIR-V shaders among other"
-  - "Engine/neo-data.ads:46:88   	repetative      	U   	cetera), and \"* #\" for repetative items."
-  - "Engine/neo-data.ads:88:82   	listeral        	U   	list] \"}\" | \"[\" integer-listeral \"]\" [name] \"{\" data"
-  - "Engine/neo-data.ads:89:35   	indentifier     	U   	| (indentifier [name] [\"(\" [property"
-  - "Engine/neo-data.ads:93:89   	multithreading  	U   	point), so we deploy multithreading for the extra large"
+  - "Engine/neo-data.ads:35:78   	SPIR        	U   	in bytes (needed for SPIR-V shaders among other"
+  - "Engine/neo-data.ads:46:88   	repetative  	U   	cetera), and \"* #\" for repetative items."
+  - "Engine/neo-data.ads:88:82   	listeral    	U   	list] \"}\" | \"[\" integer-listeral \"]\" [name] \"{\" data"
+  - "Engine/neo-data.ads:89:35   	indentifier 	U   	| (indentifier [name] [\"(\" [property"
   - "Engine/neo-engine.adb:232:22    	Altivec     	U   	if CPU.Has_Altivec_Additional_Registers"
   - "Engine/neo-engine.adb:256:88    	INVPCID     	U   	then Put_Into_Result (\"INVPCID\"); end if;"
   - "Engine/neo-engine.adb:258:88    	LZCNT       	U   	then Put_Into_Result (\"LZCNT\"); end if;"
@@ -600,7 +598,6 @@ issues:
   - "Engine/neo-engine.ads:219:25    	Junja       	U   	Junja_Key, Final"
   - "Engine/neo-engine.ads:219:67    	Hanja       	U   	Final_Key, Hanja_Key, Accept"
   - "Engine/neo-engine.ads:232:86    	Exsel       	U   	Process_Key, Exsel_Key,"
-  - "Engine/neo-engine.ads:269:6     	Mutexes     	U   	-- Mutexes for extra task safety"
   - "Engine/neo-engine.ads:278:6     	Virbrate    	U   	-- Virbrate a player's set of gamepad"
   - "Engine/neo-engine.ads:278:33    	gamepad     	U   	Virbrate a player's set of gamepad devices"
   - "Engine/neo-engine.ads:311:46    	primaryfire 	U   	Fire is new Impulse (\"primaryfire\", Callback_Shoot);"
@@ -841,7 +838,6 @@ issues:
   - "Engine/neo.adb:40:25    	Tracebacks  	U   	Traces : Tracebacks_Array (1..128);"
   - "Engine/neo.adb:49:32    	Traceback   	U   	for Item of Symbolic_Traceback (Traces) loop"
   - "Engine/neo.ads:41:18    	Superbounded	U   	with Ada.Strings.Superbounded; use Ada.Strings"
-  - "Engine/neo.ads:391:8    	mutex       	U   	-- A mutex or task-safe flag, however"
   - "Engine/Runtime/a-comutr.adb:466:29  	multiway    	U   	Implement Vet for multiway tree???"
   - "Engine/Runtime/a-comutr.adb:765:19  	represention	U   	-- Restore represention invariants before attempting"
   - "Engine/Runtime/a-comutr.adb:964:7   	Unbusy      	U   	Unbusy (Object.Container.TC"
