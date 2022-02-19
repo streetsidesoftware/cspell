@@ -35,7 +35,7 @@ Omit.col
 
 #### Defined in
 
-[TextOffset.ts:21](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L21)
+[TextOffset.ts:21](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L21)
 
 ___
 
@@ -47,7 +47,7 @@ text surrounding the issue text
 
 #### Defined in
 
-[CSpellReporter.ts:5](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/CSpellReporter.ts#L5)
+[CSpellReporter.ts:5](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/CSpellReporter.ts#L5)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:6](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/CSpellReporter.ts#L6)
+[CSpellReporter.ts:6](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/CSpellReporter.ts#L6)
 
 ___
 
@@ -73,7 +73,7 @@ Omit.length
 
 #### Defined in
 
-[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L14)
+[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L14)
 
 ___
 
@@ -87,7 +87,7 @@ Omit.line
 
 #### Defined in
 
-[TextOffset.ts:22](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L22)
+[TextOffset.ts:22](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L22)
 
 ___
 
@@ -103,7 +103,7 @@ Omit.offset
 
 #### Defined in
 
-[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L10)
+[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L10)
 
 ___
 
@@ -117,7 +117,7 @@ Omit.row
 
 #### Defined in
 
-[TextOffset.ts:20](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L20)
+[TextOffset.ts:20](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L20)
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:7](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/CSpellReporter.ts#L7)
+[CSpellReporter.ts:7](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/CSpellReporter.ts#L7)
 
 ___
 
@@ -144,7 +144,7 @@ Omit.text
 
 #### Defined in
 
-[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L6)
+[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L6)
 
 ___
 
@@ -158,4 +158,4 @@ Omit.uri
 
 #### Defined in
 
-[TextOffset.ts:18](https://github.com/streetsidesoftware/cspell/blob/5497bd3/packages/cspell-types/src/TextOffset.ts#L18)
+[TextOffset.ts:18](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L18)
