@@ -183,6 +183,9 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'latex', extensions: ['.tex'] },
     { id: 'map', extensions: ['.map'] },
     { id: 'pdf', extensions: ['.pdf'] },
+    { id: 'pub', extensions: ['.pub'] },
+    { id: 'pem', extensions: ['.private-key.pem', '.pem'] },
+    { id: 'pem-private-key', extensions: ['.private-key.pem'] },
 
     //
     // Special file types used to prevent spell checking.
@@ -218,7 +221,7 @@ export type LanguageId = string;
 
 export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts']);
 
-export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files']);
+export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'pub', 'pem']);
 
 export const languageIds: LanguageId[] = languageExtensionDefinitions.map(({ id }) => id);
 
@@ -296,7 +299,11 @@ export function getLanguagesForExt(ext: string): string[] {
 export function getLanguagesForFilename(basename: string): string[] {
     const found = mapExtensionToLanguageIds.get(basename);
     if (found) return found;
-    const pos = basename.lastIndexOf('.');
-    if (pos < 1) return [];
-    return getLanguagesForExt(basename.slice(pos));
+
+    for (let pos = basename.indexOf('.'); pos >= 0; pos = basename.indexOf('.', pos + 1)) {
+        const ids = mapExtensionToLanguageIds.get(basename.slice(pos));
+        if (ids) return ids;
+    }
+
+    return [];
 }

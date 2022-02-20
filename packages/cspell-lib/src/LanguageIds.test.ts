@@ -14,16 +14,18 @@ describe('Validate LanguageIds', () => {
     });
 
     test.each`
-        filename                      | expected
-        ${'code.ts'}                  | ${['typescript']}
-        ${'base.r'}                   | ${['r']}
-        ${'base.R'}                   | ${['r']}
-        ${'doc.tex'}                  | ${['latex']}
-        ${'image.jpg'}                | ${['image']}
-        ${'workspace.code-workspace'} | ${['jsonc']}
-        ${'.cspellcache'}             | ${['cache_files']}
-        ${'Gemfile'}                  | ${['ruby']}
-        ${'path/Gemfile'}             | ${[]}
+        filename                             | expected
+        ${'code.ts'}                         | ${['typescript']}
+        ${'base.r'}                          | ${['r']}
+        ${'base.R'}                          | ${['r']}
+        ${'doc.tex'}                         | ${['latex']}
+        ${'image.jpg'}                       | ${['image']}
+        ${'workspace.code-workspace'}        | ${['jsonc']}
+        ${'.cspellcache'}                    | ${['cache_files']}
+        ${'Gemfile'}                         | ${['ruby']}
+        ${'path/Gemfile'}                    | ${[]}
+        ${'my-cert.pem'}                     | ${['pem']}
+        ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
     `('getLanguagesForExt $filename', ({ filename, expected }) => {
         expect(LangId.getLanguagesForFilename(filename)).toEqual(expected);
     });
