@@ -5,7 +5,7 @@ describe('Uri', () => {
         uri                                | expected
         ${'https://google.com'}            | ${Uri.parse('https://google.com')}
         ${Uri.parse('https://google.com')} | ${Uri.parse('https://google.com')}
-        ${Uri.file(__filename)}            | ${Uri.file(__filename)}
+        ${Uri.file(__filename)}            | ${Uri.parse(Uri.file(__filename).toString())}
         ${Uri.file(__filename).toString()} | ${Uri.file(__filename)}
         ${'file.txt'}                      | ${Uri.file('file.txt')}
         ${'uri://example.com/'}            | ${Uri.parse('uri://example.com/')}
