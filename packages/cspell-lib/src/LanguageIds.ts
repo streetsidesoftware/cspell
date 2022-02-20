@@ -183,7 +183,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'latex', extensions: ['.tex'] },
     { id: 'map', extensions: ['.map'] },
     { id: 'pdf', extensions: ['.pdf'] },
-    { id: 'pub', extensions: ['.pub'] },
+    { id: 'rsa', extensions: ['.pub'], filenames: ['id_rsa', 'id_rsa.pub'] },
     { id: 'pem', extensions: ['.private-key.pem', '.pem'] },
     { id: 'pem-private-key', extensions: ['.private-key.pem'] },
 
@@ -221,7 +221,7 @@ export type LanguageId = string;
 
 export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts']);
 
-export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'pub', 'pem']);
+export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'rsa', 'pem']);
 
 export const languageIds: LanguageId[] = languageExtensionDefinitions.map(({ id }) => id);
 
