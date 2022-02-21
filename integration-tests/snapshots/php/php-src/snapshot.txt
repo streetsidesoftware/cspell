@@ -66,7 +66,7 @@ Lines:
 ./Zend/Optimizer/block_pass.c:62:24     - Unknown word (Tsource)    -- define VAR_SOURCE(op) Tsource[VAR_NUM(op.var)]
 ./Zend/Optimizer/compact_vars.c:32:24     - Unknown word (tmps)       -- uint32_t num_cvs, num_tmps;
 ./Zend/Optimizer/dce.c:37:38     - Unknown word (Cytron)     -- algorithm described by Cytron et al., however it requires
-./Zend/Optimizer/dfa_pass.c:1601:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
+./Zend/Optimizer/dfa_pass.c:1603:43   - Unknown word (foat)       -- .CV [undef,null,int,foat] ->#v.CV, int(1) =>
 ./Zend/Optimizer/dfa_pass.c:392:19    - Unknown word (needly)     -- zend_op *send_needly;
 ./Zend/Optimizer/dfa_pass.c:693:30    - Unknown word (jmps)       -- int zend_dfa_optimize_jmps(zend_op_array *op_array
 ./Zend/Optimizer/escape_analysis.c:28:7      - Unknown word (Kotzmann)   -- * T. Kotzmann and H. Mossenbock. Escape
@@ -1574,8 +1574,8 @@ Lines:
 ./ext/intl/ERROR_CONVENTIONS.md:43:29     - Unknown word (structed)   -- store an intl_error structed in their private data
 ./ext/intl/breakiterator/breakiterator_class.h:61:33     - Unknown word (unconstructed) -- throw_error(NULL, "Found unconstructed BreakIterator"); \
 ./ext/intl/breakiterator/breakiterator_iterators.h:36:3      - Unknown word (CFUNC)      -- U_CFUNC zend_object_iterator
-./ext/intl/calendar/calendar.stub.php:12:15     - Unknown word (intlcal)    -- * @alias intlcal_create_instance
-./ext/intl/calendar/calendar.stub.php:298:15    - Unknown word (intlgregcal) -- * @alias intlgregcal_set_gregorian_change
+./ext/intl/calendar/calendar.stub.php:13:15     - Unknown word (intlcal)    -- * @alias intlcal_create_instance
+./ext/intl/calendar/calendar.stub.php:300:15    - Unknown word (intlgregcal) -- * @alias intlgregcal_set_gregorian_change
 ./ext/intl/calendar/calendar_class.h:36:12     - Unknown word (ucal)       -- Calendar* ucal;
 ./ext/intl/collator/collator.c:40:113    - Unknown word (UCOL)       -- ZEND_STRS( #x ) - 1, UCOL_##x );
 ./ext/intl/collator/collator.c:73:25     - Unknown word (ULOC)       -- COLLATOR_EXPOSE_CONST( ULOC_ACTUAL_LOCALE );
@@ -1606,7 +1606,7 @@ Lines:
 ./ext/intl/converter/converter.c:997:18    - Unknown word (LMBCS)      -- CONV_TYPE_CONST(LMBCS_1);
 ./ext/intl/dateformat/dateformat.c:36:127    - Unknown word (UDAT)       -- ZEND_STRS( #x ) - 1, UDAT_##x );
 ./ext/intl/dateformat/dateformat.c:53:56     - Unknown word (DATEF)      -- CONST( "GREGORIAN", DATEF_GREGORIAN );
-./ext/intl/dateformat/dateformat.stub.php:42:27     - Unknown word (timetype)   -- @alias datefmt_get_timetype
+./ext/intl/dateformat/dateformat.stub.php:43:27     - Unknown word (timetype)   -- @alias datefmt_get_timetype
 ./ext/intl/dateformat/dateformat_attr.c:107:14    - Unknown word (slength)    -- int32_t slength = 0;
 ./ext/intl/dateformat/dateformat_attr.c:108:13    - Unknown word (svalue)     -- UChar* svalue = NULL;
 ./ext/intl/dateformat/dateformat_attr.c:11:31     - Unknown word (kirtig)     -- Authors: Kirti Velankar <kirtig@yahoo-inc.com>
@@ -1658,7 +1658,7 @@ Lines:
 ./ext/intl/locale/locale_methods.c:65:7      - Unknown word (lojban)     -- "art-lojban",
 ./ext/intl/locale/locale_methods.c:75:5      - Unknown word (mingo)      -- "i-mingo",
 ./ext/intl/locale/locale_methods.c:767:21    - Unknown word (uenum)      -- while( ( kw_key = uenum_next( e, &kw_key_len
-./ext/intl/msgformat/msgformat.stub.php:11:15     - Unknown word (msgfmt)     -- * @alias msgfmt_create
+./ext/intl/msgformat/msgformat.stub.php:12:15     - Unknown word (msgfmt)     -- * @alias msgfmt_create
 ./ext/intl/msgformat/msgformat_attr.c:79:2      - Unknown word (umsg)       -- umsg_applyPattern(MSG_FORMAT
 ./ext/intl/msgformat/msgformat_class.h:53:49     - Unknown word (umsgf)      -- mfo) (mfo)->mf_data.umsgf
 ./ext/intl/msgformat/msgformat_data.c:84:10     - Unknown word (npattern)   -- UChar *npattern = safe_emalloc(sizeof
@@ -2076,16 +2076,16 @@ Lines:
 ./ext/odbc/php_odbc_includes.h:256:37    - Unknown word (phstmt)       -- ODBC_SQLALLOCSTMT(hdbc, phstmt) SQLAllocHandle(SQL
 ./ext/odbc/php_odbc_includes.h:270:9     - Unknown word (ODBCG)        -- #define ODBCG(v) ZEND_MODULE_GLOBALS
 ./ext/odbc/php_odbc_includes.h:46:22     - Unknown word (UWORD)      -- define SQLUSMALLINT UWORD
-./ext/opcache/ZendAccelerator.c:2461:16   - Unknown word (UNLEN)      -- wchar_t uname[UNLEN + 1];
-./ext/opcache/ZendAccelerator.c:2462:8    - Unknown word (unsize)     -- DWORD unsize = UNLEN;
-./ext/opcache/ZendAccelerator.c:2726:12   - Unknown word (reseted)    -- ZCG(pcre_reseted) = 0;
-./ext/opcache/ZendAccelerator.c:2808:4    - Unknown word (fpmi)       -- "fpmi-fcgi",
-./ext/opcache/ZendAccelerator.c:2811:4    - Unknown word (uwsgi)      -- "uwsgi",
-./ext/opcache/ZendAccelerator.c:2812:4    - Unknown word (fuzzer)     -- "fuzzer",
-./ext/opcache/ZendAccelerator.c:3046:47   - Unknown word (VMMAP)      -- KERN_PROC, KERN_PROC_VMMAP, getpid()};
-./ext/opcache/ZendAccelerator.c:3056:19   - Unknown word (vmentry)    -- struct kinfo_vmentry *entry = (struct kinfo
-./ext/opcache/ZendAccelerator.c:3062:23   - Unknown word (KVME)       -- if ((permflags & KVME_PROT_READ) && !(permflags
-./ext/opcache/ZendAccelerator.c:3324:33   - Unknown word (callbaks)   -- Override inheritance cache callbaks */
+./ext/opcache/ZendAccelerator.c:2463:16   - Unknown word (UNLEN)      -- wchar_t uname[UNLEN + 1];
+./ext/opcache/ZendAccelerator.c:2464:8    - Unknown word (unsize)     -- DWORD unsize = UNLEN;
+./ext/opcache/ZendAccelerator.c:2728:12   - Unknown word (reseted)    -- ZCG(pcre_reseted) = 0;
+./ext/opcache/ZendAccelerator.c:2810:4    - Unknown word (fpmi)       -- "fpmi-fcgi",
+./ext/opcache/ZendAccelerator.c:2813:4    - Unknown word (uwsgi)      -- "uwsgi",
+./ext/opcache/ZendAccelerator.c:2814:4    - Unknown word (fuzzer)     -- "fuzzer",
+./ext/opcache/ZendAccelerator.c:3048:47   - Unknown word (VMMAP)      -- KERN_PROC, KERN_PROC_VMMAP, getpid()};
+./ext/opcache/ZendAccelerator.c:3058:19   - Unknown word (vmentry)    -- struct kinfo_vmentry *entry = (struct kinfo
+./ext/opcache/ZendAccelerator.c:3064:23   - Unknown word (KVME)       -- if ((permflags & KVME_PROT_READ) && !(permflags
+./ext/opcache/ZendAccelerator.c:3326:33   - Unknown word (callbaks)   -- Override inheritance cache callbaks */
 ./ext/opcache/ZendAccelerator.c:923:28    - Unknown word (fdata)      -- FILE_ATTRIBUTE_DATA fdata;
 ./ext/opcache/jit/README.md:109:8     - Unknown word (LDFLAGS)      -- export LDFLAGS=-L/usr/lib/i386-linux
 ./ext/opcache/jit/README.md:110:8     - Unknown word (CFLAGS)       -- export CFLAGS='-m32'
@@ -2403,11 +2403,11 @@ Lines:
 ./ext/opcache/jit/zend_elf.h:41:12     - Unknown word (phofs)       -- uintptr_t phofs;
 ./ext/opcache/jit/zend_elf.h:44:12     - Unknown word (ehsize)      -- uint16_t ehsize;
 ./ext/opcache/jit/zend_elf.h:49:12     - Unknown word (shstridx)    -- uint16_t shstridx;
-./ext/opcache/jit/zend_jit.c:1321:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
+./ext/opcache/jit/zend_jit.c:1325:17   - Unknown word (sccs)          -- zend_ssa_find_sccs(op_array, ssa);
 ./ext/opcache/jit/zend_jit.c:154:17    - Unknown word (idom)       -- b = blocks[b].idom;
-./ext/opcache/jit/zend_jit.c:1673:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
-./ext/opcache/jit/zend_jit.c:4658:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
-./ext/opcache/jit/zend_jit.c:751:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
+./ext/opcache/jit/zend_jit.c:1677:65   - Unknown word (Wimmer)        -- SSA Form", Christian Wimmer and
+./ext/opcache/jit/zend_jit.c:4662:51   - Unknown word (lbhybrid)      -- handler = dasm_labels[zend_lbhybrid_runtime_jit];
+./ext/opcache/jit/zend_jit.c:755:37    - Unknown word (Wtautological) -- diagnostic ignored "-Wtautological-compare"
 ./ext/opcache/jit/zend_jit.h:41:73     - Unknown word (caled)      -- the most frequently caled on first request functions
 ./ext/opcache/jit/zend_jit_arm64.h:131:14    - Unknown word (FPTMP)          -- #define ZREG_FPTMP ZREG_V16
 ./ext/opcache/jit/zend_jit_arm64.h:24:2      - Unknown word (ZREG)       -- ZREG_NONE = -1,
