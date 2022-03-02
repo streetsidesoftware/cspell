@@ -17,7 +17,7 @@ jobs:
         run: |
           echo "${{ toJson(github.event.inputs) }}"
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
       - name: Use Node.js
