@@ -1,4 +1,4 @@
-import { getLanguagesForFilename } from '../LanguageIds';
+import { getLanguagesForBasename } from '../LanguageIds';
 import * as Uri from './Uri';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
@@ -40,6 +40,11 @@ export interface TextDocument {
      */
     readonly text: string;
 
+    /**
+     * The natural language locale.
+     */
+    readonly locale?: string | undefined;
+
     positionAt(offset: number): Position;
     offsetAt(position: Position): number;
     lineAt(offset: number): TextDocumentLine;
@@ -52,6 +57,7 @@ class TextDocumentImpl implements TextDocument {
         readonly uri: DocumentUri,
         readonly text: string,
         readonly languageId: string | string[],
+        readonly locale: string | undefined,
         readonly version: number
     ) {
         const primaryLanguageId = typeof languageId === 'string' ? languageId : languageId[0] || 'plaintext';
@@ -90,11 +96,12 @@ export function createTextDocument(
     uri: DocumentUri | string,
     content: string,
     languageId?: string | string[],
+    locale?: string,
     version?: number
 ): TextDocument {
     version = version ?? 1;
     uri = Uri.toUri(uri);
-    languageId = languageId ?? getLanguagesForFilename(Uri.basename(uri));
+    languageId = languageId ?? getLanguagesForBasename(Uri.basename(uri));
     languageId = languageId.length === 0 ? 'text' : languageId;
-    return new TextDocumentImpl(uri, content, languageId, version);
+    return new TextDocumentImpl(uri, content, languageId, locale, version);
 }

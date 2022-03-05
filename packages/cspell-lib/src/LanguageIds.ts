@@ -235,7 +235,7 @@ export function isBinaryExt(ext: string): boolean {
 }
 
 export function isBinaryFile(basename: string): boolean {
-    return isBinary(getLanguagesForFilename(basename));
+    return isBinary(getLanguagesForBasename(basename));
 }
 
 export function isBinary(languageId: LanguageId | LanguageId[] | Iterable<LanguageId>): boolean {
@@ -247,7 +247,7 @@ export function isGeneratedExt(ext: string): boolean {
 }
 
 export function isGeneratedFile(basename: string): boolean {
-    return isGenerated(getLanguagesForFilename(basename));
+    return isGenerated(getLanguagesForBasename(basename));
 }
 
 export function isGenerated(languageId: LanguageId | LanguageId[] | Iterable<LanguageId>): boolean {
@@ -296,7 +296,7 @@ export function getLanguagesForExt(ext: string): string[] {
     return mapExtensionToLanguageIds.get(ext) || mapExtensionToLanguageIds.get('.' + ext) || [];
 }
 
-export function getLanguagesForFilename(basename: string): string[] {
+export function getLanguagesForBasename(basename: string): string[] {
     const found = mapExtensionToLanguageIds.get(basename);
     if (found) return found;
 

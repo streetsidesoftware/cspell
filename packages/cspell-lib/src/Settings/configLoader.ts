@@ -267,18 +267,28 @@ interface NormalizeSearchForConfigResult {
     error: ImportError | undefined;
 }
 
-async function normalizeSearchForConfigResult(
+async function normalizeSearchForConfigResultAsync(
     searchPath: string,
     searchResult: Promise<SearchForConfigResult | null>,
     pnpSettings: PnPSettings
 ): Promise<NormalizeSearchForConfigResult> {
-    let result: SearchForConfigResult | undefined;
-    let error: ImportError | undefined;
+    let result: SearchForConfigResult | ImportError | undefined;
     try {
         result = (await searchResult) || undefined;
     } catch (cause) {
-        error = new ImportError(`Failed to find config file at: "${searchPath}"`, cause);
+        result = new ImportError(`Failed to find config file at: "${searchPath}"`, cause);
     }
+
+    return normalizeSearchForConfigResult(searchPath, result, pnpSettings);
+}
+
+function normalizeSearchForConfigResult(
+    searchPath: string,
+    searchResult: SearchForConfigResult | ImportError | undefined,
+    pnpSettings: PnPSettings
+): NormalizeSearchForConfigResult {
+    const error = searchResult instanceof ImportError ? searchResult : undefined;
+    const result = searchResult instanceof ImportError ? undefined : searchResult;
 
     const filepath = result?.filepath;
     if (filepath) {
@@ -314,7 +324,7 @@ export function searchForConfig(
     searchFrom: string | undefined,
     pnpSettings: PnPSettings = defaultPnPSettings
 ): Promise<CSpellSettingsI | undefined> {
-    return normalizeSearchForConfigResult(
+    return normalizeSearchForConfigResultAsync(
         searchFrom || process.cwd(),
         cspellConfigExplorer.search(searchFrom),
         pnpSettings
@@ -332,7 +342,9 @@ export function loadConfig(file: string, pnpSettings: PnPSettings = defaultPnPSe
     if (cached) {
         return Promise.resolve(cached);
     }
-    return normalizeSearchForConfigResult(file, cspellConfigExplorer.load(file), pnpSettings).then((r) => r.config);
+    return normalizeSearchForConfigResultAsync(file, cspellConfigExplorer.load(file), pnpSettings).then(
+        (r) => r.config
+    );
 }
 
 export function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult> {
