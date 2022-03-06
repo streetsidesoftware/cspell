@@ -1,12 +1,12 @@
 import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray, opTake } from '@cspell/cspell-pipe';
 import type { TextOffset as TextOffsetRW } from '@cspell/cspell-types';
 import { genSequence, Sequence } from 'gensequence';
-import * as RxPat from './Settings/RegExpPatterns';
-import { HasOptions, SpellingDictionary } from './SpellingDictionary/SpellingDictionary';
-import * as Text from './util/text';
-import * as TextRange from './util/TextRange';
-import { clean } from './util/util';
-import { split } from './util/wordSplitter';
+import * as RxPat from '../Settings/RegExpPatterns';
+import { HasOptions, SpellingDictionary } from '../SpellingDictionary/SpellingDictionary';
+import * as Text from '../util/text';
+import * as TextRange from '../util/TextRange';
+import { clean } from '../util/util';
+import { split } from '../util/wordSplitter';
 
 type TextOffsetRO = Readonly<TextOffsetRW>;
 
@@ -282,10 +282,11 @@ function mapLineToLineSegments(includeRanges: TextRange.MatchRange[]): (line: Te
 }
 
 /**
- * Returns a mapper function that will
+ * Returns a mapper function that will segment a TextOffset based upon the includeRanges.
+ * This function is optimized for forward scanning. It will perform poorly for randomly ordered offsets.
  * @param includeRanges Allowed ranges for words.
  */
-function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (wo: TextOffsetRO) => TextOffsetRO[] {
+function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (textOff: TextOffsetRO) => TextOffsetRO[] {
     let rangePos = 0;
 
     const mapper = (textOffset: TextOffsetRO) => {
@@ -294,34 +295,34 @@ function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (wo
         }
         const parts: TextOffsetRO[] = [];
         const { text, offset, length } = textOffset;
-        const wordEndPos = offset + (length ?? text.length);
-        let wordStartPos = offset;
-        while (rangePos && (rangePos >= includeRanges.length || includeRanges[rangePos].startPos > wordStartPos)) {
+        const textEndPos = offset + (length ?? text.length);
+        let textStartPos = offset;
+        while (rangePos && (rangePos >= includeRanges.length || includeRanges[rangePos].startPos > textStartPos)) {
             rangePos -= 1;
         }
 
         const cur = includeRanges[rangePos];
-        if (wordEndPos <= cur.endPos && wordStartPos >= cur.startPos) {
+        if (textEndPos <= cur.endPos && textStartPos >= cur.startPos) {
             return [textOffset];
         }
 
-        while (wordStartPos < wordEndPos) {
-            while (includeRanges[rangePos] && includeRanges[rangePos].endPos <= wordStartPos) {
+        while (textStartPos < textEndPos) {
+            while (includeRanges[rangePos] && includeRanges[rangePos].endPos <= textStartPos) {
                 rangePos += 1;
             }
             if (!includeRanges[rangePos]) {
                 break;
             }
             const { startPos, endPos } = includeRanges[rangePos];
-            if (wordEndPos < startPos) {
+            if (textEndPos < startPos) {
                 break;
             }
-            const a = Math.max(wordStartPos, startPos);
-            const b = Math.min(wordEndPos, endPos);
+            const a = Math.max(textStartPos, startPos);
+            const b = Math.min(textEndPos, endPos);
             if (a !== b) {
                 parts.push({ offset: a, text: text.slice(a - offset, b - offset) });
             }
-            wordStartPos = b;
+            textStartPos = b;
         }
 
         return parts;

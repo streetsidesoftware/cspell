@@ -1,8 +1,11 @@
 import { opConcatMap, pipeSync } from '@cspell/cspell-pipe';
 import { genSequence } from 'gensequence';
-import { createCSpellSettingsInternal as csi } from './Models/CSpellSettingsInternalDef';
-import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from './SpellingDictionary';
-import { createSpellingDictionary } from './SpellingDictionary/createSpellingDictionary';
+import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
+import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from '../SpellingDictionary';
+import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary';
+import { FreqCounter } from '../util/FreqCounter';
+import * as Text from '../util/text';
+import { settingsToValidateOptions as sToV } from './validator';
 import {
     calcTextInclusionRanges,
     hasWordCheck,
@@ -11,9 +14,6 @@ import {
     ValidationOptions,
     _testMethods,
 } from './textValidator';
-import { FreqCounter } from './util/FreqCounter';
-import * as Text from './util/text';
-import { settingsToValidateOptions as sToV } from './validator';
 
 // cspell:ignore whiteberry redmango lightbrown redberry
 

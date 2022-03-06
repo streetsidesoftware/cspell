@@ -1,8 +1,8 @@
-import { DocumentValidator } from './docValidator';
-import { TextDocument, createTextDocument } from './Models/TextDocument';
-import { AutoCache } from './util/simpleCache';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import { createTextDocument, TextDocument } from '../Models/TextDocument';
+import { AutoCache } from '../util/simpleCache';
+import { DocumentValidator } from './docValidator';
 
 const docCache = new AutoCache(_loadDoc, 100);
 
@@ -18,7 +18,7 @@ describe('docValidator', () => {
     test.each`
         filename
         ${__filename}
-        ${path.join(__dirname, '../package.json')}
+        ${path.join(__dirname, '../../package.json')}
     `('DocumentValidator prepare $filename', async ({ filename }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, {}, {});
