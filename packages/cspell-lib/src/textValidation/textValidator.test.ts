@@ -5,7 +5,7 @@ import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } fr
 import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from '../util/FreqCounter';
 import * as Text from '../util/text';
-import { settingsToValidateOptions as sToV } from '../validator';
+import { settingsToValidateOptions as sToV } from './validator';
 import {
     calcTextInclusionRanges,
     hasWordCheck,

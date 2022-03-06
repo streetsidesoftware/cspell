@@ -1,10 +1,10 @@
 import { CSpellUserSettings } from '@cspell/cspell-types';
 import * as path from 'path';
-import { getLanguagesForExt as _getLanguagesForExt, getLanguagesForBasename } from './LanguageIds';
-import { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
-import { TextDocument } from './Models/TextDocument';
-import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from './Settings';
-import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
+import { getLanguagesForBasename } from '../LanguageIds';
+import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+import { TextDocument } from '../Models/TextDocument';
+import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings';
+import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings';
 
 /**
  * Combines all relevant setting values into a final configuration to be used for spell checking.

@@ -1,7 +1,7 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { loremIpsum } from 'lorem-ipsum';
-import { getDefaultSettings } from './Settings/DefaultSettings';
-import * as tds from './Settings/TextDocumentSettings';
+import { getDefaultSettings } from '../Settings/DefaultSettings';
+import * as tds from '../Settings/TextDocumentSettings';
 import * as Validator from './validator';
 import { IncludeExcludeFlag } from './validator';
 

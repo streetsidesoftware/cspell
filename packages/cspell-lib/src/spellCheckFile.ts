@@ -2,7 +2,7 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } f
 import { GlobMatcher } from 'cspell-glob';
 import { readFile } from 'fs-extra';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { determineTextDocumentSettings } from './determineTextDocumentSettings';
+import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
 import { isGenerated, isGeneratedFile } from './LanguageIds';
 import { createTextDocument } from './Models/TextDocument';
 import { loadConfig as loadConfigFile, mergeSettings, searchForConfig } from './Settings';

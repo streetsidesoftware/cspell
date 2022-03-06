@@ -1,10 +1,10 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import assert from 'assert';
+import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+import { TextDocument } from '../Models/TextDocument';
+import { loadConfig, mergeSettings, searchForConfig } from '../Settings';
+import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
-import { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
-import { TextDocument } from './Models/TextDocument';
-import { loadConfig, mergeSettings, searchForConfig } from './Settings';
-import { clean } from './util/util';
 import { ValidateTextOptions, ValidationIssue } from './validator';
 
 export interface DocumentValidatorOptions extends ValidateTextOptions {
