@@ -1,14 +1,15 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Settings from './Settings';
 import { CompoundWordsMethod, getDictionaryInternal } from './SpellingDictionary';
-import * as TV from './textValidator';
+import type { ValidationOptions, ValidationResult } from './textValidation';
+import { calcTextInclusionRanges, validateText as validateFullText } from './textValidation';
 import { clean } from './util/util';
 
 export const diagSource = 'cSpell Checker';
 
-export { IncludeExcludeOptions } from './textValidator';
+export type { IncludeExcludeOptions } from './textValidation';
 
-export interface ValidationIssue extends TV.ValidationResult {
+export interface ValidationIssue extends ValidationResult {
     suggestions?: string[];
 }
 
@@ -26,7 +27,7 @@ export async function validateText(
 ): Promise<ValidationIssue[]> {
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = await getDictionaryInternal(finalSettings);
-    const issues = [...TV.validateText(text, dict, settingsToValidateOptions(finalSettings))];
+    const issues = [...validateFullText(text, dict, settingsToValidateOptions(finalSettings))];
     if (!options.generateSuggestions) {
         return issues;
     }
@@ -50,8 +51,8 @@ export async function validateText(
     return withSugs;
 }
 
-export function settingsToValidateOptions(settings: CSpellUserSettings): TV.ValidationOptions {
-    const opt: TV.ValidationOptions = {
+export function settingsToValidateOptions(settings: CSpellUserSettings): ValidationOptions {
+    const opt: ValidationOptions = {
         ...settings,
         ignoreCase: !(settings.caseSensitive ?? false),
     };
@@ -82,7 +83,7 @@ export enum IncludeExcludeFlag {
 export async function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo> {
     const validationResult = validateText(text, settings);
     const finalSettings = Settings.finalizeSettings(settings);
-    const includeRanges = TV.calcTextInclusionRanges(text, finalSettings);
+    const includeRanges = calcTextInclusionRanges(text, finalSettings);
     const result: TextInfoItem[] = [];
     let lastPos = 0;
     for (const { startPos, endPos } of includeRanges) {
