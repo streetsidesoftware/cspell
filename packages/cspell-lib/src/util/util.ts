@@ -77,3 +77,18 @@ export async function asyncIterableToArray<T>(iter: Iterable<T> | AsyncIterable<
     }
     return acc;
 }
+
+/**
+ * Shallow is Equal test.
+ * @param a - array of values
+ * @param b - array of values
+ * @returns true if the values of `a` are exactly equal to the values of `b`
+ */
+export function isArrayEqual<K>(a: K[], b: K[]): boolean {
+    if (a === b) return true;
+    let isMatch = a.length === b.length;
+    for (let i = 0; i < a.length && isMatch; ++i) {
+        isMatch = a[i] === b[i];
+    }
+    return isMatch;
+}

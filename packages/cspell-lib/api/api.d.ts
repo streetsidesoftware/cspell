@@ -451,7 +451,7 @@ declare class ImportError extends Error {
     constructor(msg: string, cause?: Error | unknown);
 }
 
-declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellUserSettings;
+declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
 interface IncludeExcludeOptions {
     ignoreRegExpList?: (RegExp | string)[];

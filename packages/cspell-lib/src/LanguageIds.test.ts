@@ -26,8 +26,8 @@ describe('Validate LanguageIds', () => {
         ${'path/Gemfile'}                    | ${[]}
         ${'my-cert.pem'}                     | ${['pem']}
         ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
-    `('getLanguagesForExt $filename', ({ filename, expected }) => {
-        expect(LangId.getLanguagesForFilename(filename)).toEqual(expected);
+    `('getLanguagesForBasename $filename', ({ filename, expected }) => {
+        expect(LangId.getLanguagesForBasename(filename)).toEqual(expected);
     });
 
     test('that all extensions start with a .', () => {

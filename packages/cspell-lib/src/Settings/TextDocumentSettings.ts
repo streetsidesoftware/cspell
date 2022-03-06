@@ -1,4 +1,5 @@
 import type { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import * as CSpellSettingsServer from './CSpellSettingsServer';
 import { getInDocumentSettings } from './InDocSettings';
 import { calcSettingsForLanguageId } from './LanguageSettings';
@@ -7,7 +8,7 @@ export function combineTextAndLanguageSettings(
     settings: CSpellUserSettings,
     text: string,
     languageId: string | string[]
-): CSpellUserSettings {
+): CSpellSettingsInternal {
     const docSettings = extractSettingsFromText(text);
     const settingsForText = CSpellSettingsServer.mergeSettings(settings, docSettings);
     const langSettings = calcSettingsForLanguageId(settingsForText, languageId);

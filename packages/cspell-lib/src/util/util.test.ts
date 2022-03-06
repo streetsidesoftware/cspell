@@ -41,4 +41,24 @@ describe('Validate util', () => {
         expect(r).toEqual(v);
         expect(sum).toBe(5);
     });
+
+    const obj = { v: 'hello' };
+    const arr = [1, 2, 3];
+
+    test.each`
+        a              | b              | expected
+        ${[]}          | ${[]}          | ${true}
+        ${[1, 2, 3]}   | ${[1, 2, 3]}   | ${true}
+        ${[3, 2, 1]}   | ${[1, 2, 3]}   | ${false}
+        ${[]}          | ${[1, 2, 3]}   | ${false}
+        ${[3, 2, 1]}   | ${[]}          | ${false}
+        ${[1, '2', 3]} | ${[1, '2', 3]} | ${true}
+        ${[1, {}, 3]}  | ${[1, {}, 3]}  | ${false}
+        ${[1, [], 3]}  | ${[1, [], 3]}  | ${false}
+        ${[1, obj, 3]} | ${[1, obj, 3]} | ${true}
+        ${[1, arr, 3]} | ${[1, arr, 3]} | ${true}
+        ${arr}         | ${arr}         | ${true}
+    `('isArrayEqual $a $b', ({ a, b, expected }) => {
+        expect(util.isArrayEqual(a, b)).toBe(expected);
+    });
 });

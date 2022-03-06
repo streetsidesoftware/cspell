@@ -1,24 +1,14 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import { GlobMatcher } from 'cspell-glob';
 import { readFile } from 'fs-extra';
-import * as path from 'path';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { getLanguagesForExt as _getLanguagesForExt, isGenerated, isGeneratedFile } from './LanguageIds';
-import {
-    calcOverrideSettings,
-    getDefaultSettings,
-    getGlobalSettings,
-    loadConfig,
-    mergeSettings,
-    searchForConfig,
-} from './Settings';
-import { combineTextAndLanguageSettings } from './Settings/TextDocumentSettings';
+import { determineTextDocumentSettings } from './determineTextDocumentSettings';
+import { isGenerated, isGeneratedFile } from './LanguageIds';
+import { createTextDocument } from './Models/TextDocument';
+import { loadConfig as loadConfigFile, mergeSettings, searchForConfig } from './Settings';
 import { isError } from './util/errors';
-import { memorizer } from './util/Memorizer';
 import { clean } from './util/util';
 import { validateText, ValidateTextOptions, ValidationIssue } from './validator';
-
-const getLanguagesForExt = memorizer(_getLanguagesForExt);
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
@@ -199,10 +189,6 @@ async function searchForDocumentConfig(
     return searchForConfig(u.fsPath, pnpSettings).then((s) => s || defaultConfig);
 }
 
-async function loadConfigFile(filename: string, pnpSettings: PnPSettings) {
-    return loadConfig(filename, pnpSettings);
-}
-
 async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<DocumentWithText> {
     const text = await readFile(filename, encoding);
     const uri = URI.file(filename).toString();
@@ -247,22 +233,10 @@ export function determineFinalDocumentSettings(
     document: DocumentWithText,
     settings: CSpellUserSettings
 ): DetermineFinalDocumentSettingsResult {
-    const uri = URI.parse(document.uri);
-    const filename = uri.fsPath;
-    const settingsWithDefaults = mergeSettings(getDefaultSettings(), getGlobalSettings(), settings);
-    const fileSettings = calcOverrideSettings(settingsWithDefaults, filename);
-    const languageIds = fileSettings?.languageId?.length
-        ? fileSettings.languageId
-        : document.languageId
-        ? document.languageId
-        : getLanguageForFilename(filename);
-    if (document.locale) {
-        fileSettings.language = document.locale;
-    }
-    const config = combineTextAndLanguageSettings(fileSettings, document.text, languageIds);
+    const doc = createTextDocument(document.uri, document.text, document.languageId, document.locale);
     return {
         document,
-        settings: config,
+        settings: determineTextDocumentSettings(doc, settings),
     };
 }
 
@@ -277,13 +251,6 @@ export function isBinaryFile(filenameUri: URI, languageId?: string | string[]): 
     }
     const filename = UriUtils.basename(filenameUri);
     return isGeneratedFile(filename);
-}
-
-function getLanguageForFilename(filename: string): string[] {
-    const basename = path.basename(filename);
-    const ext = path.extname(basename);
-    const languagesExt = getLanguagesForExt(ext);
-    return languagesExt.length ? languagesExt : _getLanguagesForExt(basename);
 }
 
 function normalizeLanguageIds(languageId: string | string[]): string[] {
