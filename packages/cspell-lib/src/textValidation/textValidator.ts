@@ -61,7 +61,7 @@ export function validateText(
     const mapOfProblems = new Map<string, number>();
     const includeRanges = calcTextInclusionRanges(text, options);
 
-    const validator = lineValidator(dict, options);
+    const validator = lineValidatorFactory(dict, options);
 
     const iter = pipe(
         Text.extractLinesOfText(text),
@@ -94,14 +94,14 @@ export function calcTextInclusionRanges(text: string, options: IncludeExcludeOpt
     return includeRanges;
 }
 
-interface LineSegment {
+export interface LineSegment {
     line: TextOffsetRO;
     segment: TextOffsetRO;
 }
 
-type LineValidator = (line: LineSegment) => Sequence<ValidationResult>;
+export type LineValidator = (line: LineSegment) => Iterable<ValidationResult>;
 
-function lineValidator(dict: SpellingDictionary, options: ValidationOptions): LineValidator {
+export function lineValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
         minWordLength = defaultMinWordLength,
         flagWords = [],
@@ -274,10 +274,11 @@ function convertCheckOptionsToHasOptions(opt: HasWordOptions): HasOptions {
 }
 
 function mapLineToLineSegments(includeRanges: TextRange.MatchRange[]): (line: TextOffsetRO) => LineSegment[] {
-    const mapAgainstRanges = mapTextOffsetsAgainstRanges(includeRanges);
+    const mapAgainstRanges = mapLineSegmentAgainstRangesFactory(includeRanges);
 
     return (line: TextOffsetRO) => {
-        return mapAgainstRanges(line).map((segment) => ({ line, segment }));
+        const segment = { line, segment: line };
+        return mapAgainstRanges(segment);
     };
 }
 
@@ -286,15 +287,18 @@ function mapLineToLineSegments(includeRanges: TextRange.MatchRange[]): (line: Te
  * This function is optimized for forward scanning. It will perform poorly for randomly ordered offsets.
  * @param includeRanges Allowed ranges for words.
  */
-function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (textOff: TextOffsetRO) => TextOffsetRO[] {
+export function mapLineSegmentAgainstRangesFactory(
+    includeRanges: TextRange.MatchRange[]
+): (lineSeg: LineSegment) => LineSegment[] {
     let rangePos = 0;
 
-    const mapper = (textOffset: TextOffsetRO) => {
+    const mapper = (lineSeg: LineSegment) => {
         if (!includeRanges.length) {
             return [];
         }
-        const parts: TextOffsetRO[] = [];
-        const { text, offset, length } = textOffset;
+        const parts: LineSegment[] = [];
+        const { segment, line } = lineSeg;
+        const { text, offset, length } = segment;
         const textEndPos = offset + (length ?? text.length);
         let textStartPos = offset;
         while (rangePos && (rangePos >= includeRanges.length || includeRanges[rangePos].startPos > textStartPos)) {
@@ -303,7 +307,7 @@ function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (te
 
         const cur = includeRanges[rangePos];
         if (textEndPos <= cur.endPos && textStartPos >= cur.startPos) {
-            return [textOffset];
+            return [lineSeg];
         }
 
         while (textStartPos < textEndPos) {
@@ -320,7 +324,7 @@ function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (te
             const a = Math.max(textStartPos, startPos);
             const b = Math.min(textEndPos, endPos);
             if (a !== b) {
-                parts.push({ offset: a, text: text.slice(a - offset, b - offset) });
+                parts.push({ line, segment: { offset: a, text: text.slice(a - offset, b - offset) } });
             }
             textStartPos = b;
         }
@@ -332,5 +336,5 @@ function mapTextOffsetsAgainstRanges(includeRanges: TextRange.MatchRange[]): (te
 }
 
 export const _testMethods = {
-    mapWordsAgainstRanges: mapTextOffsetsAgainstRanges,
+    mapWordsAgainstRanges: mapLineSegmentAgainstRangesFactory,
 };
