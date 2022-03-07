@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 74
   filesWithIssues: 34
-  issues: 464
+  issues: 462
   errors: 0
 Errors: []
 
@@ -65,7 +65,6 @@ issues:
   - "constraints.txt:215:1   	xmlrunner       	U   	xmlrunner==1.7.7"
   - "constraints.txt:217:1   	yanc            	U   	yanc==0.3.3"
   - "constraints.txt:219:1   	zipp            	U   	zipp==3.6.0"
-  - "constraints.txt:223:3   	setuptools      	U   	# setuptools"
   - "docs/api.rst:14:4       	automodule      	U   	.. automodule:: jira.client"
   - "docs/api.rst:16:5       	undoc           	U   	:undoc-members:"
   - "docs/api.rst:35:6       	jirashell       	U   	jira.jirashell module"
@@ -139,6 +138,7 @@ issues:
   - "jira/resources.py:992:14    	categorised 	U   	\"categorisedActors\": {"
   - "jira/resources.py:1347:5    	seqs        	U   	seqs = tuple, list, set,"
   - "MANIFEST.in:14:23   	pycache 	U   	recursive-exclude * __pycache__"
+  - "pyproject.toml:3:4      	setuptools  	U   	\"setuptools >= 41.0.0\","
   - "README.rst:15:22    	pycontribs  	U   	:target: irc:///#pycontribs"
   - "README.rst:91:11    	pyenv       	U   	* Install pyenv_"
   - "README.rst:94:54    	addono      	U   	90:2990 --name jira addono/jira-software-standalone"
@@ -147,17 +147,17 @@ issues:
   - "README.rst:146:94   	Greenhopper 	U   	include: Jira Agile, Greenhopper)"
   - "README.rst:165:3    	Navicat     	U   	* Navicat_ for providing us free"
   - "setup.cfg:40:17     	atlassian       	U   	keywords = api, atlassian, jira, rest, web"
-  - "setup.cfg:121:10    	pylint          	U   	format = pylint"
-  - "setup.cfg:133:2     	isort           	U   	[isort]"
-  - "setup.cfg:147:1     	norecursedirs   	U   	norecursedirs = . jira _build tmp"
-  - "setup.cfg:147:60    	distutils       	U   	third lib *.egg bin distutils build docs demo"
-  - "setup.cfg:149:1     	addopts         	U   	addopts = -p no:xdist --durations"
-  - "setup.cfg:149:70    	junitxml        	U   	rxX -v --color=yes --junitxml=build/results.xml -"
-  - "setup.cfg:151:1     	testpaths       	U   	testpaths = tests"
-  - "setup.cfg:154:1     	rsyncdirs       	U   	rsyncdirs = . jira demo docs"
-  - "setup.cfg:155:1     	rsyncignore     	U   	rsyncignore = .git"
-  - "setup.cfg:161:1     	filterwarnings  	U   	filterwarnings ="
-  - "setup.cfg:167:2     	mypy            	U   	[mypy]"
+  - "setup.cfg:120:10    	pylint          	U   	format = pylint"
+  - "setup.cfg:132:2     	isort           	U   	[isort]"
+  - "setup.cfg:146:1     	norecursedirs   	U   	norecursedirs = . jira _build tmp"
+  - "setup.cfg:146:60    	distutils       	U   	third lib *.egg bin distutils build docs demo"
+  - "setup.cfg:148:1     	addopts         	U   	addopts = -p no:xdist --durations"
+  - "setup.cfg:148:70    	junitxml        	U   	rxX -v --color=yes --junitxml=build/results.xml -"
+  - "setup.cfg:150:1     	testpaths       	U   	testpaths = tests"
+  - "setup.cfg:153:1     	rsyncdirs       	U   	rsyncdirs = . jira demo docs"
+  - "setup.cfg:154:1     	rsyncignore     	U   	rsyncignore = .git"
+  - "setup.cfg:160:1     	filterwarnings  	U   	filterwarnings ="
+  - "setup.cfg:166:2     	mypy            	U   	[mypy]"
   - "tests/conftest.py:84:5      	rndstr      	U   	def rndstr():"
   - "tests/conftest.py:88:5      	rndpassword 	U   	def rndpassword():"
   - "tests/conftest.py:99:5      	hashify     	U   	def hashify(some_string, max_len"
