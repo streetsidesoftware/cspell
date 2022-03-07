@@ -331,6 +331,19 @@ export function searchForConfig(
     ).then((r) => (r.filepath ? r.config : undefined));
 }
 
+export function searchForConfigSync(
+    searchFrom: string | undefined,
+    pnpSettings: PnPSettings = defaultPnPSettings
+): CSpellSettingsI | undefined {
+    let searchResult: SearchForConfigResult | ImportError | undefined;
+    try {
+        searchResult = cspellConfigExplorerSync.search(searchFrom) || undefined;
+    } catch (err) {
+        searchResult = new ImportError(`Failed to find config file from: "${searchFrom}"`, err);
+    }
+    return normalizeSearchForConfigResult(searchFrom || process.cwd(), searchResult, pnpSettings).config;
+}
+
 /**
  * Load a CSpell configuration files.
  * @param file - path or package reference to load.
@@ -345,6 +358,26 @@ export function loadConfig(file: string, pnpSettings: PnPSettings = defaultPnPSe
     return normalizeSearchForConfigResultAsync(file, cspellConfigExplorer.load(file), pnpSettings).then(
         (r) => r.config
     );
+}
+
+/**
+ * Load a CSpell configuration files.
+ * @param filename - path or package reference to load.
+ * @param pnpSettings - PnP settings
+ * @returns normalized CSpellSettings
+ */
+export function loadConfigSync(filename: string, pnpSettings: PnPSettings = defaultPnPSettings): CSpellSettingsI {
+    const cached = cachedFiles.get(path.resolve(filename));
+    if (cached) {
+        return cached;
+    }
+    let searchResult: SearchForConfigResult | ImportError | undefined;
+    try {
+        searchResult = cspellConfigExplorerSync.load(filename) || undefined;
+    } catch (err) {
+        searchResult = new ImportError(`Failed to find config file at: "${filename}"`, err);
+    }
+    return normalizeSearchForConfigResult(filename, searchResult, pnpSettings).config;
 }
 
 export function loadPnP(pnpSettings: PnPSettings, searchFrom: URI): Promise<LoaderResult> {

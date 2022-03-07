@@ -3,7 +3,9 @@ import assert from 'assert';
 import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { TextDocument } from '../Models/TextDocument';
 import { loadConfig, mergeSettings, searchForConfig } from '../Settings';
-import { getDictionaryInternal } from '../SpellingDictionary';
+import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
+import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary';
+import { toError } from '../util/errors';
 import { MatchRange } from '../util/TextRange';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import {
@@ -57,6 +59,40 @@ export class DocumentValidator {
         // Determine doc settings.
         // Calc include ranges
         // Load dictionaries
+        assert(!this._ready);
+
+        const { options, settings } = this;
+
+        const useSearchForConfig =
+            (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
+        const optionsConfigFile = options.configFile;
+        const localConfig = optionsConfigFile
+            ? this.errorCatcherWrapper(() => loadConfigSync(optionsConfigFile, settings))
+            : useSearchForConfig
+            ? this.errorCatcherWrapper(() => searchForDocumentConfigSync(this._document, settings, settings))
+            : undefined;
+
+        this.addPossibleError(localConfig?.__importRef?.error);
+
+        const config = localConfig ? mergeSettings(settings, localConfig) : settings;
+        const docSettings = determineTextDocumentSettings(this._document, config);
+        const dict = getDictionaryInternalSync(docSettings);
+
+        const shouldCheck = docSettings.enabled ?? true;
+        const validateOptions = settingsToValidateOptions(docSettings);
+        const includeRanges = calcTextInclusionRanges(this._document.text, docSettings);
+        const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
+        const lineValidator = lineValidatorFactory(dict, validateOptions);
+
+        this._preparations = {
+            docSettings,
+            shouldCheck,
+            validateOptions,
+            includeRanges,
+            segmenter,
+            lineValidator,
+        };
+
         this._ready = true;
     }
 
@@ -129,9 +165,9 @@ export class DocumentValidator {
         return this._document;
     }
 
-    private addPossibleError(error: Error | undefined) {
+    private addPossibleError(error: Error | undefined | unknown) {
         if (!error) return;
-        this.errors.push(error);
+        error = this.errors.push(toError(error));
     }
 
     private catchError<P>(p: Promise<P>): Promise<P | undefined> {
@@ -139,6 +175,14 @@ export class DocumentValidator {
             this.addPossibleError(error);
             return undefined;
         });
+    }
+    private errorCatcherWrapper<P>(fn: () => P): P | undefined {
+        try {
+            return fn();
+        } catch (error) {
+            this.addPossibleError(error);
+        }
+        return undefined;
     }
 }
 
@@ -163,4 +207,14 @@ async function searchForDocumentConfig(
     const { uri } = document;
     if (uri.scheme !== 'file') return Promise.resolve(defaultConfig);
     return searchForConfig(uri.fsPath, pnpSettings).then((s) => s || defaultConfig);
+}
+
+function searchForDocumentConfigSync(
+    document: TextDocument,
+    defaultConfig: CSpellSettingsWithSourceTrace,
+    pnpSettings: PnPSettings
+): CSpellSettingsWithSourceTrace {
+    const { uri } = document;
+    if (uri.scheme !== 'file') defaultConfig;
+    return searchForConfigSync(uri.fsPath, pnpSettings) || defaultConfig;
 }
