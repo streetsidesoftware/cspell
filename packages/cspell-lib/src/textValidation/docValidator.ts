@@ -3,8 +3,10 @@ import assert from 'assert';
 import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { TextDocument } from '../Models/TextDocument';
 import { loadConfig, mergeSettings, searchForConfig } from '../Settings';
+import { MatchRange } from '../util/TextRange';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
+import { calcTextInclusionRanges } from './textValidator';
 import { ValidateTextOptions, ValidationIssue } from './validator';
 
 export interface DocumentValidatorOptions extends ValidateTextOptions {
@@ -54,11 +56,11 @@ export class DocumentValidator {
     async prepare(): Promise<void> {
         if (this._ready) return;
         if (this._prepared) return this._prepared;
-        this._prepared = this._prepare();
+        this._prepared = this._prepareAsync();
         return this._prepared;
     }
 
-    private async _prepare(): Promise<void> {
+    private async _prepareAsync(): Promise<void> {
         assert(!this._ready);
 
         const { options, settings } = this;
@@ -80,11 +82,13 @@ export class DocumentValidator {
         const shouldCheck = docSettings.enabled ?? true;
         const { generateSuggestions, numSuggestions } = options;
         const validateOptions = clean({ generateSuggestions, numSuggestions });
+        const includeRanges = calcTextInclusionRanges(this._document.text, docSettings);
 
         this._preparations = {
             docSettings,
             shouldCheck,
             validateOptions,
+            includeRanges,
         };
 
         this._ready = true;
@@ -123,6 +127,7 @@ interface Preparations {
     docSettings: CSpellSettingsInternal;
     shouldCheck: boolean;
     validateOptions: ValidateTextOptions;
+    includeRanges: MatchRange[];
 }
 
 async function searchForDocumentConfig(

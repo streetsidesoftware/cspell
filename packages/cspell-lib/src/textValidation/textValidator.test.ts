@@ -1,11 +1,10 @@
-import { opConcatMap, pipeSync } from '@cspell/cspell-pipe';
-import { genSequence } from 'gensequence';
+import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe';
+import { TextOffset } from '@cspell/cspell-types';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from '../SpellingDictionary';
 import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from '../util/FreqCounter';
 import * as Text from '../util/text';
-import { settingsToValidateOptions as sToV } from './validator';
 import {
     calcTextInclusionRanges,
     hasWordCheck,
@@ -14,6 +13,7 @@ import {
     ValidationOptions,
     _testMethods,
 } from './textValidator';
+import { settingsToValidateOptions as sToV } from './validator';
 
 // cspell:ignore whiteberry redmango lightbrown redberry
 
@@ -197,10 +197,17 @@ describe('Validate textValidator functions', () => {
 
     test('tests words crossing exclude boundaries', async () => {
         const text = '_Test the _line_breaks___from __begin to end__ _eol_';
+        const line: TextOffset = { text, offset: 0 };
         const inclusionRanges = calcTextInclusionRanges(text, { ignoreRegExpList: [/_/g] });
         const mapper = _testMethods.mapWordsAgainstRanges(inclusionRanges);
-        const results = [...pipeSync(Text.matchStringToTextOffset(/\w+/g, text), opConcatMap(mapper))];
-        const words = results.map((r) => r.text);
+        const results = [
+            ...pipeSync(
+                Text.matchStringToTextOffset(/\w+/g, text),
+                opMap((segment) => ({ line, segment })),
+                opConcatMap(mapper)
+            ),
+        ];
+        const words = results.map((r) => r.segment.text);
         expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
     });
 
@@ -220,13 +227,20 @@ describe('Validate textValidator functions', () => {
 
     test('tests words crossing exclude boundaries out of order', async () => {
         const text = '_Test the _line_breaks___from __begin to end__ _eol_';
+        const line: TextOffset = { text, offset: 0 };
         const inclusionRanges = calcTextInclusionRanges(text, { ignoreRegExpList: [/_/g] });
         const mapper = _testMethods.mapWordsAgainstRanges(inclusionRanges);
         // sort the texts by the word so it is out of order.
         const texts = [...Text.matchStringToTextOffset(/\w+/g, text)].sort((a, b) =>
             a.text < b.text ? -1 : a.text > b.text ? 1 : 0
         );
-        const results = genSequence(texts).concatMap(mapper).toArray();
+        const results = [
+            ...pipeSync(
+                texts,
+                opMap((segment) => ({ line, segment })),
+                opConcatMap(mapper)
+            ),
+        ].map((r) => r.segment);
         const words = results.sort((a, b) => a.offset - b.offset).map((r) => r.text);
         expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
     });
