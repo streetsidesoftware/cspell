@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1828, Issues found: 21967 in 1089 files
+ CSpell: Files checked: 1828, Issues found: 21968 in 1089 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -171,7 +171,7 @@ Lines:
 ./Zend/zend_multiply.h:249:27    - Unknown word (tumulh)     -- asm__ ("mul %0,%2,%3\n\tumulh %1,%2,%3\n\tadds %0
 ./Zend/zend_multiply.h:271:19    - Unknown word (mulhdu)     -- "mulhdu %1,%2,%3\n\t"
 ./Zend/zend_multiply.h:273:19    - Unknown word (addze)      -- "addze %1,%1\n"
-./Zend/zend_object_handlers.c:1156:12   - Unknown word (unseter)    -- /* have unseter - try with it! */
+./Zend/zend_object_handlers.c:1162:12   - Unknown word (unseter)    -- /* have unseter - try with it! */
 ./Zend/zend_object_handlers.h:92:5      - Unknown word (Unserialization) -- * Unserialization will use __wakeup()
 ./Zend/zend_operators.c:3080:41   - Unknown word (streq)      -- FASTCALL zendi_smart_streq(zend_string *s1, zend
 ./Zend/zend_operators.c:63:16     - Unknown word (blconv)     -- const __m128i blconv_start_minus_1 = _mm
@@ -1682,8 +1682,8 @@ Lines:
 ./ext/intl/resourcebundle/resourcebundle.c:33:25     - Unknown word (lfield)     -- zend_long lfield;
 ./ext/intl/resourcebundle/resourcebundle.c:34:25     - Unknown word (newrb)      -- ResourceBundle_object* newrb;
 ./ext/intl/resourcebundle/resourcebundle_class.c:11:26     - Unknown word (Oeri)       -- Authors: Hans-Peter Oeri (University of St.Gallen
-./ext/intl/resourcebundle/resourcebundle_class.c:168:14    - Unknown word (meindex)    -- int32_t meindex = 0;
-./ext/intl/resourcebundle/resourcebundle_class.c:169:14    - Unknown word (mekey)      -- char *      mekey = NULL;
+./ext/intl/resourcebundle/resourcebundle_class.c:175:14    - Unknown word (meindex)    -- int32_t meindex = 0;
+./ext/intl/resourcebundle/resourcebundle_class.c:176:14    - Unknown word (mekey)      -- char *      mekey = NULL;
 ./ext/intl/resourcebundle/resourcebundle_iterator.c:165:40    - Unknown word (URES)       -- rb can only be either URES_TABLE or URES_ARRAY
 ./ext/intl/spoofchecker/spoofchecker_create.c:44:46     - Unknown word (suspiction) -- the object for further suspiction check comparison. *
 ./ext/intl/spoofchecker/spoofchecker_main.c:146:11    - Unknown word (UNRESTRICTIVE) -- USPOOF_UNRESTRICTIVE != level) {
@@ -2414,7 +2414,7 @@ Lines:
 ./ext/opcache/jit/zend_jit_arm64.h:94:44     - Unknown word (deoptimization) -- for delayed FETCH_THIS deoptimization */
 ./ext/opcache/jit/zend_jit_arm64.h:96:30     - Unknown word (deoptimizer)    -- pseudo constants used by deoptimizer */
 ./ext/opcache/jit/zend_jit_disasm.c:607:39    - Unknown word (metod)      -- zend_jit_push_static_metod_call_frame);
-./ext/opcache/jit/zend_jit_disasm.c:715:27    - Unknown word (UCALL)      -- opline.opcode = ZEND_DO_UCALL;
+./ext/opcache/jit/zend_jit_disasm.c:716:27    - Unknown word (UCALL)      -- opline.opcode = ZEND_DO_UCALL;
 ./ext/opcache/jit/zend_jit_gdb.c:108:14    - Unknown word (shstrtab)   -- GDBJIT_SECT_shstrtab,
 ./ext/opcache/jit/zend_jit_gdb.c:187:11    - Unknown word (startp)     -- uint8_t *startp; /* Pointer
 ./ext/opcache/jit/zend_jit_gdb.c:188:12    - Unknown word (mcaddr)     -- uintptr_t mcaddr; /* Machine code
@@ -2445,10 +2445,11 @@ Lines:
 ./ext/opcache/jit/zend_jit_trace.c:4110:7    - Unknown word (Deoptimization) -- /* Deoptimization */
 ./ext/opcache/jit/zend_jit_trace.c:4379:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
 ./ext/opcache/jit/zend_jit_trace.c:64:3      - Unknown word (ZCSG)       -- ZCSG(jit_traces) = zend_jit
-./ext/opcache/jit/zend_jit_trace.c:6750:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
-./ext/opcache/jit/zend_jit_trace.c:6909:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
-./ext/opcache/jit/zend_jit_trace.c:7190:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
-./ext/opcache/jit/zend_jit_trace.c:8134:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
+./ext/opcache/jit/zend_jit_trace.c:6734:51   - Unknown word (alredy)         -- we may try to update alredy generated deoptimization
+./ext/opcache/jit/zend_jit_trace.c:6766:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
+./ext/opcache/jit/zend_jit_trace.c:6925:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
+./ext/opcache/jit/zend_jit_trace.c:7206:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
+./ext/opcache/jit/zend_jit_trace.c:8150:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
 ./ext/opcache/jit/zend_jit_trace.c:947:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
 ./ext/opcache/jit/zend_jit_vm_helpers.c:1095:39   - Unknown word (unroling)   -- doesn't work try loop unroling. */
 ./ext/opcache/jit/zend_jit_vm_helpers.c:40:35     - Unknown word (Wvolatile)  -- diagnostic ignored "-Wvolatile-register-var"
@@ -4037,10 +4038,10 @@ Lines:
 ./ext/standard/exec.c:84:59     - Unknown word (bufl)       -- whitespace(char *buf, size_t bufl) {
 ./ext/standard/file.c:2083:9    - Unknown word (tptr)       -- char *tptr = temp;
 ./ext/standard/file.c:2337:4    - Unknown word (Tokenizes)  -- Tokenizes an HTML file for get
-./ext/standard/filestat.c:110:26    - Unknown word (pathw)      -- GetDiskFreeSpaceExW(pathw, &FreeBytesAvailableToCaller
-./ext/standard/filestat.c:129:2     - Unknown word (FSALLOCATE) -- FSALLOCATE fsinfo;
-./ext/standard/filestat.c:132:46    - Unknown word (FSIL)       -- drive ? drive - 64 : 0, FSIL_ALLOC, &fsinfo, sizeof
-./ext/standard/filestat.c:882:15    - Unknown word (IXROOT)     -- xmask = S_IXROOT;
+./ext/standard/filestat.c:120:26    - Unknown word (pathw)      -- GetDiskFreeSpaceExW(pathw, &FreeBytesAvailableToCaller
+./ext/standard/filestat.c:139:2     - Unknown word (FSALLOCATE) -- FSALLOCATE fsinfo;
+./ext/standard/filestat.c:142:46    - Unknown word (FSIL)       -- drive ? drive - 64 : 0, FSIL_ALLOC, &fsinfo, sizeof
+./ext/standard/filestat.c:892:15    - Unknown word (IXROOT)     -- xmask = S_IXROOT;
 ./ext/standard/filters.c:198:14    - Unknown word (lbchars)                    -- const char *lbchars;
 ./ext/standard/filters.c:200:9     - Unknown word (erem)                       -- size_t erem_len;
 ./ext/standard/filters.c:201:20    - Unknown word (ccnt)                       -- unsigned int line_ccnt;
@@ -4282,13 +4283,13 @@ Lines:
 ./ext/standard/user_filters.c:462:8     - Unknown word (pbuffer)    -- char *pbuffer;
 ./ext/standard/user_filters.stub.php:7:20      - Unknown word (filtername) -- public string $filtername = "";
 ./ext/standard/uuencode.c:216:17    - Unknown word (uuencoded)  -- /* {{{ decode a uuencoded string */
-./ext/standard/var.c:1186:35   - Unknown word (rebulding)      -- Optimized version without rebulding properties HashTable
 ./ext/standard/var.c:118:27    - Unknown word (sfloat)         -- php_printf_unchecked("%sfloat(%.*H)\n", COMMON, (int
+./ext/standard/var.c:1190:35   - Unknown word (rebulding)      -- Optimized version without rebulding properties HashTable
 ./ext/standard/var.c:136:17    - Unknown word (sarray)         -- php_printf("%sarray(%d) {\n", COMMON, count
 ./ext/standard/var.c:153:18    - Unknown word (senum)          -- php_printf("%senum(%s::%s)\n", COMMON,
 ./ext/standard/var.c:198:17    - Unknown word (sresource)      -- php_printf("%sresource(" ZEND_LONG_FMT ") of
 ./ext/standard/var.c:80:17     - Unknown word (cuninitialized) -- php_printf("%*cuninitialized(%s)\n",
-./ext/standard/var.c:858:10    - Unknown word (manglings)      -- * name manglings? */
+./ext/standard/var.c:862:10    - Unknown word (manglings)      -- * name manglings? */
 ./ext/standard/versioning.c:48:9      - Unknown word (isdig)      -- #define isdig(x) (isdigit(x)&&(x)
 ./ext/sysvmsg/sysvmsg.c:245:63    - Unknown word (XLONG)      -- Failed for key 0x" ZEND_XLONG_FMT ": %s", key, strerror
 ./ext/sysvmsg/sysvmsg.c:276:44    - Unknown word (zerrcode)   -- queue, *out_msgtype, *zerrcode = NULL;
