@@ -1,3 +1,5 @@
+import { format } from 'util';
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function getTypeOf(t: unknown) {
     return typeof t;
@@ -32,6 +34,23 @@ export function isError(e: unknown): e is Error {
     if (!e || typeof e !== 'object') return false;
     const ex = <Error>e;
     return typeof ex.name == 'string' && typeof ex.message == 'string' && typeof ex.stack in allowStringOrUndefined;
+}
+
+export function toError(e: unknown, errorFactory: UnknownErrorConstructor = UnknownError): Error {
+    if (isError(e)) return e;
+    return new errorFactory(e);
+}
+
+interface UnknownErrorConstructor {
+    new (cause: unknown): Error;
+}
+
+export class UnknownError extends Error {
+    readonly cause: unknown;
+    constructor(cause: unknown) {
+        super(format(cause));
+        this.cause = cause;
+    }
 }
 
 export const __testing__ = {

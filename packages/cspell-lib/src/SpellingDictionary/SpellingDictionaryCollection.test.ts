@@ -6,7 +6,7 @@ import {
     createSpellingDictionary,
 } from './createSpellingDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';
-import { createCollection, createCollectionP, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
+import { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
@@ -339,22 +339,6 @@ describe('Verify using multiple dictionaries', () => {
         expect(sugsForCellipede).toHaveLength(2);
         expect(sugsForCellipede.map((s) => s.word)).toContain('centipede');
         expect(sugsForCellipede.map((s) => s.word)).toContain('millipede');
-    });
-
-    test('creates using createCollectionP', async () => {
-        const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
-            createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
-            createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-        ];
-
-        const dictCollection = await createCollectionP(dicts, 'test');
-        expect(dictCollection.has('mango')).toBe(true);
-        expect(dictCollection.has('tree')).toBe(false);
-        const sugs = dictCollection.suggest('mangos', 4);
-        const sugWords = sugs.map((s) => s.word);
-        expect(sugWords[0]).toBe('mango');
-        expect(dictCollection.getErrors?.()).toHaveLength(0);
     });
 });
 

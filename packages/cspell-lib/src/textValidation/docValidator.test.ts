@@ -47,6 +47,21 @@ describe('docValidator', () => {
         const range = [offset, offset + text.length] as const;
         expect(dVal.checkText(range, text, [])).toEqual(expected);
     });
+
+    test.each`
+        filename                        | text            | expected
+        ${__filename}                   | ${'__filename'} | ${[]}
+        ${fix('sample-with-errors.ts')} | ${'Helllo'}     | ${[oc({ text: 'Helllo' })]}
+        ${fix('sample-with-errors.ts')} | ${'main'}       | ${[]}
+    `('checkText sync $filename "$text"', async ({ filename, text, expected }) => {
+        const doc = await loadDoc(filename);
+        const dVal = new DocumentValidator(doc, {}, {});
+        dVal.prepareSync();
+        const offset = doc.text.indexOf(text);
+        assert(offset >= 0);
+        const range = [offset, offset + text.length] as const;
+        expect(dVal.checkText(range, text, [])).toEqual(expected);
+    });
 });
 
 function td(uri: string, content: string, languageId?: string, locale?: string, version = 1): TextDocument {

@@ -1,4 +1,4 @@
-import { isErrnoException, isError, __testing__ } from './errors';
+import { isErrnoException, isError, toError, UnknownError, __testing__ } from './errors';
 
 class MyError extends Error {
     constructor(msg: string) {
@@ -45,5 +45,14 @@ describe('errors', () => {
         ${{ name: '', message: '' }}                  | ${true}
     `('isError $value', ({ value, expected }) => {
         expect(isError(value)).toBe(expected);
+    });
+
+    test.each`
+        err               | expected
+        ${Error('hello')} | ${Error('hello')}
+        ${'hello'}        | ${Error('hello')}
+        ${'hello'}        | ${expect.any(UnknownError)}
+    `('toError', ({ err, expected }) => {
+        expect(toError(err)).toEqual(expected);
     });
 });

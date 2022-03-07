@@ -181,13 +181,6 @@ function isWordForbiddenInAnyDictionary(dicts: SpellingDictionary[], word: strin
     return genSequence(dicts).first((dict) => dict.isForbidden(word));
 }
 
-export function createCollectionP(
-    dicts: (Promise<SpellingDictionary> | SpellingDictionary)[],
-    name: string
-): Promise<SpellingDictionaryCollection> {
-    return Promise.all(dicts).then((dicts) => new SpellingDictionaryCollection(dicts, name));
-}
-
 export const __testing__ = {
     isWordInAnyDictionary,
     isWordForbiddenInAnyDictionary,
