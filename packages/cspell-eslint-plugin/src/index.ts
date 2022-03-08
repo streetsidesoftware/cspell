@@ -5,6 +5,7 @@ import type { Rule } from 'eslint';
 // eslint-disable-next-line node/no-missing-import
 import type { Comment, Identifier, Literal, Node, TemplateElement } from 'estree';
 import { format } from 'util';
+import { createTextDocument, DocumentValidator, ValidationIssue } from 'cspell-lib';
 
 interface PluginRules {
     ['cspell']: Rule.RuleModule;
@@ -16,10 +17,18 @@ const meta: Rule.RuleMetaData = {
     },
 };
 
+const isDebugMode = false;
+
+const log: typeof console.log = isDebugMode ? console.log : () => undefined;
+
 function create(context: Rule.RuleContext): Rule.RuleListener {
-    console.log('Source code: \n ************************ \n\n');
-    console.log(context.getSourceCode().getText());
-    console.log(`
+    const doc = createTextDocument({ uri: context.getFilename(), content: context.getSourceCode().getText() });
+    const validator = new DocumentValidator(doc, {}, {});
+    validator.prepareSync();
+
+    log('Source code: \n ************************ \n\n');
+    log(doc.text);
+    log(`
 
 id: ${context.id}
 cwd: ${context.getCwd()}
@@ -29,23 +38,50 @@ scope: ${context.getScope().type}
 `);
 
     function checkLiteral(node: Literal & Rule.NodeParentExtension) {
-        const val = format('%o', node.value);
-        console.log(`${inheritance(node)}: ${val}`);
+        if (typeof node.value === 'string') {
+            checkNodeText(node, node.value);
+        }
+        debugNode(node, node.value);
     }
 
     function checkTemplateElement(node: TemplateElement & Rule.NodeParentExtension) {
-        const val = format('%o', node.value);
-        console.log(`${inheritance(node)}: ${val}`);
+        debugNode(node, node.value);
     }
 
     function checkIdentifier(node: Identifier & Rule.NodeParentExtension) {
-        const val = format('%o', node.name);
-        console.log(`${inheritance(node)}: ${val}`);
+        debugNode(node, node.name);
     }
 
     function checkComment(node: Comment) {
         const val = format('%o', node);
-        console.log(`Comment: ${val}`);
+        log(`Comment: ${val}`);
+    }
+
+    function checkNodeText(node: Node, text: string) {
+        if (!node.range || !node.loc) return;
+
+        const scope = inheritance(node);
+        const result = validator.checkText(node.range, text, scope);
+        if (result.length) {
+            console.error('%o', result);
+        }
+        result.forEach((issue) => reportIssue(node, issue));
+    }
+
+    function reportIssue(node: Node, issue: ValidationIssue) {
+        // const messageId = issue.isFlagged ? 'cspell-forbidden-word' : 'cspell-unknown-word';
+        const messageType = issue.isFlagged ? 'Forbidden' : 'Unknown';
+        const message = `${messageType} word: "${issue.text}"`;
+        const code = context.getSourceCode();
+        const start = code.getLocFromIndex(issue.offset);
+        const end = code.getLocFromIndex(issue.offset + (issue.length || issue.text.length));
+        const loc = { start, end };
+
+        const des: Rule.ReportDescriptor = {
+            message,
+            loc,
+        };
+        context.report(des);
     }
 
     context
@@ -99,7 +135,17 @@ scope: ${context.getScope().type}
 
     function inheritance(node: Node) {
         const a = [...context.getAncestors(), node];
-        return a.map(mapNode).join(' ');
+        return a.map(mapNode);
+    }
+
+    function inheritanceSummary(node: Node) {
+        return inheritance(node).join(' ');
+    }
+
+    function debugNode(node: Node, value: unknown) {
+        if (!isDebugMode) return;
+        const val = format('%o', value);
+        log(`${inheritanceSummary(node)}: ${val}`);
     }
 }
 

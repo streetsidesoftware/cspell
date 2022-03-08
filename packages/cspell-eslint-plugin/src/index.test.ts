@@ -3,18 +3,14 @@ import * as rule from './index';
 import * as fs from 'fs';
 import * as path from 'path';
 
-let _sampleTs: string | undefined;
 const root = path.resolve(__dirname, '..');
-const samplesDir = path.join(root, 'samples');
+const fixturesDir = path.join(root, 'fixtures');
 
 const parsers: Record<string, string | undefined> = {
     '.ts': resolveFromMonoRepo('node_modules/@typescript-eslint/parser'),
 };
-interface CachedSample {
-    code: string;
-    filename: string;
-    parser?: string;
-}
+
+type CachedSample = RuleTester.ValidTestCase;
 
 const sampleFiles = new Map<string, CachedSample>();
 
@@ -47,23 +43,24 @@ ruleTester.run('cspell', rule.rules.cspell, {
         // 'async function* values(iter) { yield* iter; }',
         // 'var foo = true',
         // 'const x = `It is now time to add everything up: \\` ${y} + ${x}`',
-        // readSample('sample.js'),
+        readSample('sample.js'),
         readSample('sample.ts'),
         readSample('sampleESM.mjs'),
         // readSample('sample.json'),
     ],
-    invalid: [],
+    // cspell:ignore Guuide Gallaxy
+    invalid: [readInvalid('with-errors/sampleESM.mjs', ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"'])],
 });
 
 function resolveFromMonoRepo(file: string): string {
     return path.resolve(root, file);
 }
 
-function readSample(_filename: string): CachedSample {
+function readFix(_filename: string): CachedSample {
     const s = sampleFiles.get(_filename);
     if (s) return s;
 
-    const filename = path.resolve(samplesDir, _filename);
+    const filename = path.resolve(fixturesDir, _filename);
     const code = fs.readFileSync(filename, 'utf-8');
 
     const sample: CachedSample = {
@@ -77,4 +74,16 @@ function readSample(_filename: string): CachedSample {
     }
 
     return sample;
+}
+
+function readSample(sampleFile: string) {
+    return readFix(path.join('samples', sampleFile));
+}
+
+function readInvalid(filename: string, errors: RuleTester.InvalidTestCase['errors']) {
+    const sample = readFix(filename);
+    return {
+        ...sample,
+        errors,
+    };
 }
