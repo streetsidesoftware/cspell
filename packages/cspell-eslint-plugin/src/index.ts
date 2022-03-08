@@ -38,37 +38,40 @@ scope: ${context.getScope().type}
 `);
 
     function checkLiteral(node: Literal & Rule.NodeParentExtension) {
+        debugNode(node, node.value);
         if (typeof node.value === 'string') {
             checkNodeText(node, node.value);
         }
-        debugNode(node, node.value);
     }
 
     function checkTemplateElement(node: TemplateElement & Rule.NodeParentExtension) {
         debugNode(node, node.value);
+        checkNodeText(node, node.value.cooked || node.value.raw);
     }
 
     function checkIdentifier(node: Identifier & Rule.NodeParentExtension) {
         debugNode(node, node.name);
+        checkNodeText(node, node.name);
     }
 
     function checkComment(node: Comment) {
+        checkNodeText(node, node.value);
         const val = format('%o', node);
         log(`Comment: ${val}`);
     }
 
-    function checkNodeText(node: Node, text: string) {
-        if (!node.range || !node.loc) return;
+    function checkNodeText(node: Node | Comment, text: string) {
+        if (!node.range) return;
 
         const scope = inheritance(node);
         const result = validator.checkText(node.range, text, scope);
         if (result.length) {
             console.error('%o', result);
         }
-        result.forEach((issue) => reportIssue(node, issue));
+        result.forEach((issue) => reportIssue(issue));
     }
 
-    function reportIssue(node: Node, issue: ValidationIssue) {
+    function reportIssue(issue: ValidationIssue) {
         // const messageId = issue.isFlagged ? 'cspell-forbidden-word' : 'cspell-unknown-word';
         const messageType = issue.isFlagged ? 'Forbidden' : 'Unknown';
         const message = `${messageType} word: "${issue.text}"`;
@@ -97,7 +100,7 @@ scope: ${context.getScope().type}
         Identifier: checkIdentifier,
     };
 
-    function mapNode(node: Node | TSESTree.Node, index: number, nodes: Node[]): string {
+    function mapNode(node: Node | TSESTree.Node | Comment, index: number, nodes: (Node | Comment)[]): string {
         const child = nodes[index + 1];
         if (node.type === 'ImportSpecifier') {
             const extra = node.imported === child ? '.imported' : node.local === child ? '.local' : '';
@@ -133,16 +136,16 @@ scope: ${context.getScope().type}
         return node.type;
     }
 
-    function inheritance(node: Node) {
+    function inheritance(node: Node | Comment) {
         const a = [...context.getAncestors(), node];
         return a.map(mapNode);
     }
 
-    function inheritanceSummary(node: Node) {
+    function inheritanceSummary(node: Node | Comment) {
         return inheritance(node).join(' ');
     }
 
-    function debugNode(node: Node, value: unknown) {
+    function debugNode(node: Node | Comment, value: unknown) {
         if (!isDebugMode) return;
         const val = format('%o', value);
         log(`${inheritanceSummary(node)}: ${val}`);
