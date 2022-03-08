@@ -48,8 +48,15 @@ ruleTester.run('cspell', rule.rules.cspell, {
         readSample('sampleESM.mjs'),
         // readSample('sample.json'),
     ],
-    // cspell:ignore Guuide Gallaxy
-    invalid: [readInvalid('with-errors/sampleESM.mjs', ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"'])],
+    // cspell:ignore Guuide Gallaxy BADD functionn
+    invalid: [
+        readInvalid('with-errors/sampleESM.mjs', [
+            'Unknown word: "Guuide"',
+            'Unknown word: "Gallaxy"',
+            'Unknown word: "BADD"',
+            'Unknown word: "functionn"',
+        ]),
+    ],
 });
 
 function resolveFromMonoRepo(file: string): string {
