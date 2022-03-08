@@ -366,6 +366,57 @@ declare namespace text_d {
 declare type LanguageId = string;
 declare function getLanguagesForExt(ext: string): string[];
 
+declare type DocumentUri = URI;
+interface Position {
+    line: number;
+    character: number;
+}
+interface TextDocumentLine {
+    readonly text: string;
+    readonly offset: number;
+    readonly position: Position;
+}
+/**
+ * A simple text document. Not to be implemented. The document keeps the content
+ * as string.
+ */
+interface TextDocument {
+    /**
+     * The associated URI for this document. Most documents have the __file__-scheme, indicating that they
+     * represent files on disk. However, some documents may have other schemes indicating that they are not
+     * available on disk.
+     */
+    readonly uri: DocumentUri;
+    /**
+     * The identifier of the language associated with this document.
+     */
+    readonly languageId: string | string[];
+    /**
+     * The version number of this document (it will increase after each
+     * change, including undo/redo).
+     */
+    readonly version: number;
+    /**
+     * the raw Document Text
+     */
+    readonly text: string;
+    /**
+     * The natural language locale.
+     */
+    readonly locale?: string | undefined;
+    positionAt(offset: number): Position;
+    offsetAt(position: Position): number;
+    lineAt(offset: number): TextDocumentLine;
+}
+interface CreateTextDocumentParams {
+    uri: DocumentUri | string;
+    content: string;
+    languageId?: string | string[] | undefined;
+    locale?: string | undefined;
+    version?: number | undefined;
+}
+declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
+
 /**
  * Handles loading of `.pnp.js` and `.pnp.js` files.
  */
@@ -490,6 +541,48 @@ declare enum IncludeExcludeFlag {
 }
 declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
 
+interface DocumentValidatorOptions extends ValidateTextOptions {
+    /**
+     * Optional path to a configuration file.
+     * If given, it will be used instead of searching for a configuration file.
+     */
+    configFile?: string;
+    /**
+     * Prevents searching for local configuration files
+     * By default the spell checker looks for configuration files
+     * starting at the location of given filename.
+     * If `configFile` is defined it will still be loaded instead of searching.
+     * `false` will override the value in `settings.noConfigSearch`.
+     * @defaultValue undefined
+     */
+    noConfigSearch?: boolean;
+}
+declare class DocumentValidator {
+    readonly options: DocumentValidatorOptions;
+    readonly settings: CSpellUserSettings;
+    private _document;
+    private _ready;
+    readonly errors: Error[];
+    private _prepared;
+    private _preparations;
+    /**
+     * @param doc - Document to validate
+     * @param config - configuration to use (not finalized).
+     */
+    constructor(doc: TextDocument, options: DocumentValidatorOptions, settings: CSpellUserSettings);
+    get ready(): boolean;
+    prepareSync(): void;
+    prepare(): Promise<void>;
+    private _prepareAsync;
+    checkText(range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[];
+    get document(): TextDocument;
+    private addPossibleError;
+    private catchError;
+    private errorCatcherWrapper;
+}
+declare type Offset = number;
+declare type SimpleRange = readonly [Offset, Offset];
+
 interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
      * Optional path to a configuration file.
@@ -566,27 +659,6 @@ declare function fileToDocument(file: string): Document;
 declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
 declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
 
-interface TraceResult {
-    word: string;
-    found: boolean;
-    foundWord: string | undefined;
-    forbidden: boolean;
-    noSuggest: boolean;
-    dictName: string;
-    dictSource: string;
-    dictActive: boolean;
-    configSource: string;
-    errors: Error[] | undefined;
-}
-interface TraceOptions {
-    languageId?: LanguageId | LanguageId[];
-    locale?: LocaleId;
-    ignoreCase?: boolean;
-    allowCompoundWords?: boolean;
-}
-declare function traceWords(words: string[], settings: CSpellSettings, options: TraceOptions | undefined): Promise<TraceResult[]>;
-declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settings: CSpellSettings, options: TraceOptions | undefined): AsyncIterableIterator<TraceResult[]>;
-
 interface SuggestedWordBase extends SuggestionResult {
     dictionaries: string[];
 }
@@ -646,6 +718,27 @@ declare class SuggestionError extends Error {
     constructor(message: string, code: string);
 }
 
+interface TraceResult {
+    word: string;
+    found: boolean;
+    foundWord: string | undefined;
+    forbidden: boolean;
+    noSuggest: boolean;
+    dictName: string;
+    dictSource: string;
+    dictActive: boolean;
+    configSource: string;
+    errors: Error[] | undefined;
+}
+interface TraceOptions {
+    languageId?: LanguageId | LanguageId[];
+    locale?: LocaleId;
+    ignoreCase?: boolean;
+    allowCompoundWords?: boolean;
+}
+declare function traceWords(words: string[], settings: CSpellSettings, options: TraceOptions | undefined): Promise<TraceResult[]>;
+declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settings: CSpellSettings, options: TraceOptions | undefined): AsyncIterableIterator<TraceResult[]>;
+
 declare type Console = typeof console;
 interface Logger {
     log: Console['log'];
@@ -680,4 +773,4 @@ declare function resolveFile(filename: string, relativeTo: string): ResolveFileR
 declare function clearCachedFiles(): Promise<void>;
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { CheckTextInfo, ConfigurationDependencies, DetermineFinalDocumentSettingsResult, Document, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, finalizeSettings, getCachedFileSize, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, validateText };
+export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, finalizeSettings, getCachedFileSize, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, validateText };

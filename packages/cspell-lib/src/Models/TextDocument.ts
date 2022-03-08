@@ -92,13 +92,21 @@ class TextDocumentImpl implements TextDocument {
     }
 }
 
-export function createTextDocument(
-    uri: DocumentUri | string,
-    content: string,
-    languageId?: string | string[],
-    locale?: string,
-    version?: number
-): TextDocument {
+export interface CreateTextDocumentParams {
+    uri: DocumentUri | string;
+    content: string;
+    languageId?: string | string[] | undefined;
+    locale?: string | undefined;
+    version?: number | undefined;
+}
+
+export function createTextDocument({
+    uri,
+    content,
+    languageId,
+    locale,
+    version,
+}: CreateTextDocumentParams): TextDocument {
     version = version ?? 1;
     uri = Uri.toUri(uri);
     languageId = languageId ?? getLanguagesForBasename(Uri.basename(uri));

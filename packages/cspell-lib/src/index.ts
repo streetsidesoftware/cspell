@@ -1,16 +1,18 @@
+import { CSpellUserSettings } from '@cspell/cspell-types';
 import * as ExclusionHelper from './exclusionHelper';
 import { clearCachedSettingsFiles } from './Settings';
-import { CSpellUserSettings } from '@cspell/cspell-types';
 import { toInternalSettings } from './Settings/CSpellSettingsServer';
 import * as Link from './Settings/index.link';
-import { refreshDictionaryCache, getDictionaryInternal, SpellingDictionaryCollection } from './SpellingDictionary';
+import { getDictionaryInternal, refreshDictionaryCache, SpellingDictionaryCollection } from './SpellingDictionary';
 import * as Text from './util/text';
 
+export * from '@cspell/cspell-types';
 export * from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { getLanguagesForExt } from './LanguageIds';
+export { createTextDocument } from './Models/TextDocument';
+export type { CreateTextDocumentParams, TextDocument, TextDocumentLine } from './Models/TextDocument';
 export * from './Settings';
-export * from '@cspell/cspell-types';
 export { defaultFileName as defaultSettingsFilename } from './Settings';
 export {
     combineTextAndLanguageSettings,
@@ -39,10 +41,11 @@ export {
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
+export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
+export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
+export { DocumentValidator, DocumentValidatorOptions } from './textValidation';
 export { traceWords, traceWordsAsync } from './trace';
 export type { TraceOptions, TraceResult } from './trace';
-export { suggestionsForWord, suggestionsForWords, SuggestionError } from './suggestions';
-export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
 export { getLogger, Logger, setLogger } from './util/logger';
 export { resolveFile } from './util/resolveFile';
 export {

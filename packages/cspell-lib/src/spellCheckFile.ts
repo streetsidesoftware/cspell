@@ -233,7 +233,12 @@ export function determineFinalDocumentSettings(
     document: DocumentWithText,
     settings: CSpellUserSettings
 ): DetermineFinalDocumentSettingsResult {
-    const doc = createTextDocument(document.uri, document.text, document.languageId, document.locale);
+    const doc = createTextDocument({
+        uri: document.uri,
+        content: document.text,
+        languageId: document.languageId,
+        locale: document.locale,
+    });
     return {
         document,
         settings: determineTextDocumentSettings(doc, settings),
