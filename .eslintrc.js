@@ -24,6 +24,7 @@ const config = {
         '**/node_modules/**',
         'docs/_site/**',
         'integration-tests/repositories/**',
+        'packages/*/fixtures/**',
         'test-fixtures/**',
         'test-packages/yarn2/**',
     ],
