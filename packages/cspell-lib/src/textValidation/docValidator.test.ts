@@ -65,13 +65,13 @@ describe('docValidator', () => {
 });
 
 function td(uri: string, content: string, languageId?: string, locale?: string, version = 1): TextDocument {
-    return createTextDocument(uri, content, languageId, locale, version);
+    return createTextDocument({ uri, content, languageId, locale, version });
 }
 
 async function _loadDoc(filename: string): Promise<TextDocument> {
     const content = await fs.readFile(filename, 'utf8');
 
-    return createTextDocument(filename, content);
+    return createTextDocument({ uri: filename, content });
 }
 
 function loadDoc(filename: string) {

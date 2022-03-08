@@ -59,7 +59,7 @@ export class DocumentValidator {
         // Determine doc settings.
         // Calc include ranges
         // Load dictionaries
-        assert(!this._ready);
+        if (this._ready) return;
 
         const { options, settings } = this;
 
