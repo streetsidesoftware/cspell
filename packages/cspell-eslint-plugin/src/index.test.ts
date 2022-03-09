@@ -36,25 +36,24 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('cspell', rule.rules.cspell, {
-    valid: [
-        // "import * as jest from 'jest'",
-        // "import { jestFn as jestFunc} from 'jest'",
-        // 'const mocha = require("mocha");',
-        // 'async function* values(iter) { yield* iter; }',
-        // 'var foo = true',
-        // 'const x = `It is now time to add everything up: \\` ${y} + ${x}`',
-        readSample('sample.js'),
-        readSample('sample.ts'),
-        readSample('sampleESM.mjs'),
-        // readSample('sample.json'),
-    ],
-    // cspell:ignore Guuide Gallaxy BADD functionn
+    valid: [readSample('sample.js'), readSample('sample.ts'), readSample('sampleESM.mjs')],
     invalid: [
+        // cspell:ignore Guuide Gallaxy BADD functionn
         readInvalid('with-errors/sampleESM.mjs', [
             'Unknown word: "Guuide"',
             'Unknown word: "Gallaxy"',
             'Unknown word: "BADD"',
             'Unknown word: "functionn"',
+        ]),
+        // cspell:ignore Montj Todayy Yaar Aprill Februarry gooo weeek
+        readInvalid('with-errors/sampleTemplateString.mjs', [
+            { message: 'Unknown word: "Todayy"' },
+            'Unknown word: "Montj"',
+            'Unknown word: "Yaar"',
+            'Unknown word: "Februarry"',
+            'Unknown word: "Aprill"',
+            'Unknown word: "gooo"',
+            'Unknown word: "weeek"',
         ]),
     ],
 });
