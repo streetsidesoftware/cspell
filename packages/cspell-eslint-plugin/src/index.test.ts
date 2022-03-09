@@ -35,7 +35,7 @@ const ruleTester = new RuleTester({
     ],
 });
 
-ruleTester.run('cspell', rule.rules.cspell, {
+ruleTester.run('cspell', rule.rules.spellchecker, {
     valid: [readSample('sample.js'), readSample('sample.ts'), readSample('sampleESM.mjs')],
     invalid: [
         // cspell:ignore Guuide Gallaxy BADD functionn
