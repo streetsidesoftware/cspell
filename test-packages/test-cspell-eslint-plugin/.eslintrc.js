@@ -2,7 +2,6 @@
  * @type { import("eslint").Linter.Config }
  */
 const config = {
-    root: true,
     env: {
         es2020: true,
         node: true,
@@ -15,22 +14,7 @@ const config = {
         'plugin:promise/recommended',
         'plugin:prettier/recommended',
     ],
-    ignorePatterns: [
-        '**/[Ss]amples/**', // cspell:disable-line
-        '**/[Tt]emp/**',
-        '**/*.d.ts',
-        '**/*.map',
-        '**/coverage/**',
-        '**/dist/**',
-        '**/node_modules/**',
-        'docs/_site/**',
-        'integration-tests/repositories/**',
-        'packages/*/fixtures/**',
-        'test-fixtures/**',
-        'test-packages/test-cspell-eslint-plugin',
-        'test-packages/test-cspell-eslint-plugin/**',
-        'test-packages/yarn2/**',
-    ],
+    ignorePatterns: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
@@ -64,7 +48,15 @@ const config = {
                 jest: true,
             },
         },
+        {
+            files: ['**/*.ts', '**/*.js'],
+            plugins: ['@cspell'],
+            rules: {
+                '@cspell/cspell': 'warn',
+            },
+        },
     ],
+    root: true,
 };
 
 module.exports = config;
