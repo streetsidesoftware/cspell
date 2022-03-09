@@ -27,6 +27,7 @@ const config = {
         'integration-tests/repositories/**',
         'packages/*/fixtures/**',
         'test-fixtures/**',
+        'test-packages/test-cspell-eslint-plugin',
         'test-packages/test-cspell-eslint-plugin/**',
         'test-packages/yarn2/**',
     ],
