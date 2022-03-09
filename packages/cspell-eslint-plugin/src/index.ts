@@ -8,7 +8,7 @@ import { format } from 'util';
 import { createTextDocument, DocumentValidator, ValidationIssue, CSpellSettings } from 'cspell-lib';
 
 interface PluginRules {
-    ['cspell']: Rule.RuleModule;
+    ['spellchecker']: Rule.RuleModule;
 }
 
 const meta: Rule.RuleMetaData = {
@@ -184,7 +184,7 @@ function tagLiteral(node: ASTNode | TSESTree.Node): string {
 }
 
 export const rules: PluginRules = {
-    cspell: {
+    spellchecker: {
         meta,
         create,
     },

@@ -52,7 +52,7 @@ const config = {
             files: ['**/*.ts', '**/*.js'],
             plugins: ['@cspell'],
             rules: {
-                '@cspell/cspell': 'warn',
+                '@cspell/spellchecker': 'warn',
             },
         },
     ],
