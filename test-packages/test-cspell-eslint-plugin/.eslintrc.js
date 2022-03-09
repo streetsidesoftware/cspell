@@ -14,13 +14,7 @@ const config = {
         'plugin:promise/recommended',
         'plugin:prettier/recommended',
     ],
-    ignorePatterns: [
-        '**/*.d.ts',
-        '**/*.map',
-        '**/coverage/**',
-        '**/dist/**',
-        '**/node_modules/**',
-    ],
+    ignorePatterns: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',

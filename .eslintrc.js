@@ -2,6 +2,7 @@
  * @type { import("eslint").Linter.Config }
  */
 const config = {
+    root: true,
     env: {
         es2020: true,
         node: true,
@@ -26,6 +27,7 @@ const config = {
         'integration-tests/repositories/**',
         'packages/*/fixtures/**',
         'test-fixtures/**',
+        'test-packages/test-cspell-eslint-plugin/**',
         'test-packages/yarn2/**',
     ],
     parserOptions: {
