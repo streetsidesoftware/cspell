@@ -189,3 +189,12 @@ export const rules: PluginRules = {
         create,
     },
 };
+
+export const configs = {
+    recommended: {
+        plugins: ['@cspell'],
+        rules: {
+            '@cspell/spellchecker': 'warn',
+        },
+    },
+};

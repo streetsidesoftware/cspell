@@ -13,6 +13,7 @@ const config = {
         'plugin:import/warnings',
         'plugin:promise/recommended',
         'plugin:prettier/recommended',
+        'plugin:@cspell/recommended',
     ],
     ignorePatterns: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
     parserOptions: {
@@ -46,13 +47,6 @@ const config = {
             extends: 'plugin:jest/recommended',
             env: {
                 jest: true,
-            },
-        },
-        {
-            files: ['**/*.ts', '**/*.js'],
-            plugins: ['@cspell'],
-            rules: {
-                '@cspell/spellchecker': 'warn',
             },
         },
     ],
