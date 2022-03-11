@@ -7,7 +7,7 @@ import type { Rule } from 'eslint';
 import type { Comment, Identifier, Literal, Node, TemplateElement } from 'estree';
 import { format } from 'util';
 import { defaultOptions, type Options } from './options';
-import optionsSchema from './options.schema.json';
+import optionsSchema from './_auto_generated_/options.schema.json';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 

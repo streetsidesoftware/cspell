@@ -35,7 +35,7 @@
   "scripts": {
     "build": "npm run build-schema && npm run build-rollup",
     "build-rollup": "rollup --config rollup.config.ts --configPlugin typescript",
-    "build-schema": "ts-json-schema-generator --no-top-ref --path src/options.ts --type Options  -o  ./src/options.schema.json",
+    "build-schema": "ts-json-schema-generator --no-top-ref --path src/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
     "watch": "npm run build-rollup -- --watch",
     "clean": "rimraf dist coverage .tsbuildinfo",
     "clean-build": "npm run clean && npm run build",
