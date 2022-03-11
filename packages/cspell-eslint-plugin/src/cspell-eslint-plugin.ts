@@ -16,8 +16,8 @@ interface PluginRules {
 }
 
 const messages = {
-    wordUnknown: 'Unknown word: {{word}}',
-    wordForbidden: 'Forbidden word: {{word}}',
+    wordUnknown: 'Unknown word: "{{word}}"',
+    wordForbidden: 'Forbidden word: "{{word}}"',
     suggestWord: '{{word}}',
 } as const;
 
