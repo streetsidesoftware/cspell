@@ -29,20 +29,16 @@ export async function validateText(
     if (!options.generateSuggestions) {
         return issues;
     }
+    const sugOptions = clean({
+        numSuggestions: options.numSuggestions,
+        compoundMethod: CompoundWordsMethod.NONE,
+        includeTies: false,
+        ignoreCase: !(settings.caseSensitive ?? false),
+        timeout: settings.suggestionsTimeout,
+        numChanges: settings.suggestionNumChanges,
+    });
     const withSugs = issues.map((t) => {
-        const suggestions = dict
-            .suggest(
-                t.text,
-                clean({
-                    numSuggestions: options.numSuggestions,
-                    compoundMethod: CompoundWordsMethod.NONE,
-                    includeTies: false,
-                    ignoreCase: !(settings.caseSensitive ?? false),
-                    timeout: settings.suggestionsTimeout,
-                    numChanges: settings.suggestionNumChanges,
-                })
-            )
-            .map((r) => r.word);
+        const suggestions = dict.suggest(t.text, sugOptions).map((r) => r.word);
         return { ...t, suggestions };
     });
 

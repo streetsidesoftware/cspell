@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "definitions": {},
+  "properties": {
+    "debugMode": {
+      "default": false,
+      "description": "Output debug logs",
+      "type": "boolean"
+    },
+    "generateSuggestions": {
+      "default": true,
+      "description": "Generate suggestions",
+      "type": "boolean"
+    },
+    "numSuggestions": {
+      "default": 8,
+      "description": "Number of spelling suggestions to make.",
+      "type": "number"
+    }
+  },
+  "required": [
+    "numSuggestions",
+    "generateSuggestions",
+    "debugMode"
+  ],
+  "type": "object"
+}
