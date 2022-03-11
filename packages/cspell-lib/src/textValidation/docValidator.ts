@@ -169,6 +169,7 @@ export class DocumentValidator {
         const settings = this._preparations.docSettings;
         const dict = this._preparations.dictionary;
         const sugOptions = clean({
+            compoundMethod: 0,
             numSuggestions: this.options.numSuggestions,
             includeTies: false,
             ignoreCase: !(settings.caseSensitive ?? false),

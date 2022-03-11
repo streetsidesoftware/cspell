@@ -1,5 +1,5 @@
 import { RuleTester } from 'eslint';
-import * as rule from './index';
+import * as Rule from './index';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -11,6 +11,7 @@ const parsers: Record<string, string | undefined> = {
 };
 
 type CachedSample = RuleTester.ValidTestCase;
+type Options = Partial<Rule.Options>;
 
 const sampleFiles = new Map<string, CachedSample>();
 
@@ -35,16 +36,33 @@ const ruleTester = new RuleTester({
     ],
 });
 
-ruleTester.run('cspell', rule.rules.spellchecker, {
-    valid: [readSample('sample.js'), readSample('sample.ts'), readSample('sampleESM.mjs')],
+ruleTester.run('cspell', Rule.rules.spellchecker, {
+    valid: [
+        readSample('sample.js'),
+        readSample('sample.ts'),
+        readSample('sampleESM.mjs'),
+        readFix('with-errors/strings.ts', { checkStrings: false, checkStringTemplates: false }),
+    ],
     invalid: [
-        // cspell:ignore Guuide Gallaxy BADD functionn
+        // cspell:ignore Guuide Gallaxy BADD functionn coool
         readInvalid('with-errors/sampleESM.mjs', [
             'Unknown word: "Guuide"',
             'Unknown word: "Gallaxy"',
             'Unknown word: "BADD"',
             'Unknown word: "functionn"',
+            'Unknown word: "coool"',
+            'Unknown word: "coool"',
         ]),
+        readInvalid(
+            'with-errors/sampleESM.mjs',
+            ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"', 'Unknown word: "functionn"', 'Unknown word: "coool"'],
+            { checkIdentifiers: false }
+        ),
+        readInvalid(
+            'with-errors/sampleESM.mjs',
+            ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"', 'Unknown word: "BADD"', 'Unknown word: "coool"'],
+            { checkComments: false }
+        ),
         // cspell:ignore Montj Todayy Yaar Aprill Februarry gooo weeek
         readInvalid('with-errors/sampleTemplateString.mjs', [
             { message: 'Unknown word: "Todayy"' },
@@ -55,6 +73,19 @@ ruleTester.run('cspell', rule.rules.spellchecker, {
             'Unknown word: "gooo"',
             'Unknown word: "weeek"',
         ]),
+        // cspell:ignore naaame doen't isssues playy
+        readInvalid('with-errors/strings.ts', [
+            'Unknown word: "naaame"',
+            'Unknown word: "doen\'t"',
+            'Unknown word: "isssues"',
+            'Unknown word: "playy"',
+        ]),
+        readInvalid('with-errors/strings.ts', ['Unknown word: "isssues"', 'Unknown word: "playy"'], {
+            checkStrings: false,
+        }),
+        readInvalid('with-errors/strings.ts', ['Unknown word: "naaame"', 'Unknown word: "doen\'t"'], {
+            checkStringTemplates: false,
+        }),
     ],
 });
 
@@ -62,7 +93,7 @@ function resolveFromMonoRepo(file: string): string {
     return path.resolve(root, file);
 }
 
-function readFix(_filename: string): CachedSample {
+function readFix(_filename: string, options?: Options): CachedSample {
     const s = sampleFiles.get(_filename);
     if (s) return s;
 
@@ -73,6 +104,9 @@ function readFix(_filename: string): CachedSample {
         code,
         filename,
     };
+    if (options) {
+        sample.options = [options];
+    }
 
     const parser = parsers[path.extname(filename)];
     if (parser) {
@@ -82,12 +116,12 @@ function readFix(_filename: string): CachedSample {
     return sample;
 }
 
-function readSample(sampleFile: string) {
-    return readFix(path.join('samples', sampleFile));
+function readSample(sampleFile: string, options?: Options) {
+    return readFix(path.join('samples', sampleFile), options);
 }
 
-function readInvalid(filename: string, errors: RuleTester.InvalidTestCase['errors']) {
-    const sample = readFix(filename);
+function readInvalid(filename: string, errors: RuleTester.InvalidTestCase['errors'], options?: Options) {
+    const sample = readFix(filename, options);
     return {
         ...sample,
         errors,

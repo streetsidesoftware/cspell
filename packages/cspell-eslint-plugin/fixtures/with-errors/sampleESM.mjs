@@ -21,3 +21,10 @@ export async function listFiles() {
     const entries = dirs.map(mapDir);
     console.log(entries.join('\n'));
 }
+
+/**
+ * This function will coool the beans.
+ */
+export function cooolBeans() {
+    return 'ice cubes';
+}

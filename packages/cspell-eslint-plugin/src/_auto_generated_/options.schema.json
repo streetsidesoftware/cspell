@@ -3,6 +3,26 @@
   "additionalProperties": false,
   "definitions": {},
   "properties": {
+    "checkComments": {
+      "default": true,
+      "description": "Spell check comments",
+      "type": "boolean"
+    },
+    "checkIdentifiers": {
+      "default": true,
+      "description": "Spell check identifiers (variables names, function names, and class names)",
+      "type": "boolean"
+    },
+    "checkStringTemplates": {
+      "default": true,
+      "description": "Spell check template strings",
+      "type": "boolean"
+    },
+    "checkStrings": {
+      "default": true,
+      "description": "Spell check strings",
+      "type": "boolean"
+    },
     "debugMode": {
       "default": false,
       "description": "Output debug logs",
@@ -13,6 +33,11 @@
       "description": "Generate suggestions",
       "type": "boolean"
     },
+    "ignoreImports": {
+      "default": true,
+      "description": "Ignore import and require names",
+      "type": "boolean"
+    },
     "numSuggestions": {
       "default": 8,
       "description": "Number of spelling suggestions to make.",
@@ -21,8 +46,7 @@
   },
   "required": [
     "numSuggestions",
-    "generateSuggestions",
-    "debugMode"
+    "generateSuggestions"
   ],
   "type": "object"
 }
