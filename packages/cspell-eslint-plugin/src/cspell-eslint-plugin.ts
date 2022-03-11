@@ -6,7 +6,7 @@ import type { Rule } from 'eslint';
 // eslint-disable-next-line node/no-missing-import
 import type { Comment, Identifier, Literal, Node, TemplateElement } from 'estree';
 import { format } from 'util';
-import { defaultOptions, type Options } from './options';
+import { normalizeOptions } from './options';
 import optionsSchema from './_auto_generated_/options.schema.json';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
@@ -35,7 +35,7 @@ const meta: Rule.RuleMetaData = {
     schema: [schema],
 };
 
-type ASTNode = Node | Comment;
+type ASTNode = (Node | Comment) & Partial<Rule.NodeParentExtension>;
 
 const defaultSettings: CSpellSettings = {
     patterns: [
@@ -55,32 +55,43 @@ function log(...args: Parameters<typeof console.log>) {
 }
 
 function create(context: Rule.RuleContext): Rule.RuleListener {
-    const options: Options = context.options[0] || defaultOptions;
-    isDebugMode = options.debugMode;
+    const options = normalizeOptions(context.options[0]);
+    const importedIdentifiers = new Set<string>();
+    isDebugMode = options.debugMode || false;
     isDebugMode && logContext(context);
     const doc = createTextDocument({ uri: context.getFilename(), content: context.getSourceCode().getText() });
     const validator = new DocumentValidator(doc, options, defaultSettings);
     validator.prepareSync();
 
     function checkLiteral(node: Literal & Rule.NodeParentExtension) {
-        debugNode(node, node.value);
+        if (!options.checkStrings) return;
         if (typeof node.value === 'string') {
+            if (options.ignoreImports && isImportOrRequired(node)) return;
+            debugNode(node, node.value);
             checkNodeText(node, node.value);
         }
     }
 
     function checkTemplateElement(node: TemplateElement & Rule.NodeParentExtension) {
+        if (!options.checkStringTemplates) return;
         debugNode(node, node.value);
         // console.log('Template: %o', node.value);
         checkNodeText(node, node.value.cooked || node.value.raw);
     }
 
     function checkIdentifier(node: Identifier & Rule.NodeParentExtension) {
+        if (options.ignoreImports && isImportIdentifier(node)) {
+            importedIdentifiers.add(node.name);
+            return;
+        }
+        if (!options.checkIdentifiers) return;
+        if (importedIdentifiers.has(node.name)) return;
         debugNode(node, node.name);
         checkNodeText(node, node.name);
     }
 
     function checkComment(node: Comment) {
+        if (!options.checkComments) return;
         debugNode(node, node.value);
         checkNodeText(node, node.value);
     }
@@ -91,26 +102,39 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         const adj = node.type === 'Literal' ? 1 : 0;
         const range = [node.range[0] + adj, node.range[1] - adj] as const;
 
-        const scope = inheritance(node);
+        const scope: string[] = calcScope(node);
         const result = validator.checkText(range, text, scope);
         result.forEach((issue) => reportIssue(issue));
     }
 
+    function calcScope(_node: ASTNode): string[] {
+        // inheritance(node);
+        return [];
+    }
+
+    function isImportIdentifier(node: ASTNode): boolean {
+        const parent = node.parent;
+        if (node.type !== 'Identifier' || !parent) return false;
+        return (
+            (parent.type === 'ImportSpecifier' && parent.imported === node) ||
+            (parent.type === 'ExportSpecifier' && parent.local === node)
+        );
+    }
+
     function reportIssue(issue: ValidationIssue) {
-        // const messageId = issue.isFlagged ? 'cspell-forbidden-word' : 'cspell-unknown-word';
         const messageId: MessageIds = issue.isFlagged ? 'wordForbidden' : 'wordUnknown';
         const data = {
             word: issue.text,
         };
         const code = context.getSourceCode();
-        const a = issue.offset;
-        const b = issue.offset + (issue.length || issue.text.length);
-        const start = code.getLocFromIndex(a);
-        const end = code.getLocFromIndex(b);
-        const loc = { start, end };
+        const start = issue.offset;
+        const end = issue.offset + (issue.length || issue.text.length);
+        const startPos = code.getLocFromIndex(start);
+        const endPos = code.getLocFromIndex(end);
+        const loc = { start: startPos, end: endPos };
 
         function fixFactory(word: string): Rule.ReportFixer {
-            return (fixer) => fixer.replaceTextRange([a, b], word);
+            return (fixer) => fixer.replaceTextRange([start, end], word);
         }
 
         function createSug(word: string): Rule.SuggestionReportDescriptor {
@@ -159,6 +183,14 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             const extra = node.source === child ? '.source' : '';
             return node.type + extra;
         }
+        if (node.type === 'ExportSpecifier') {
+            const extra = node.exported === child ? '.exported' : node.local === child ? '.local' : '';
+            return node.type + extra;
+        }
+        if (node.type === 'ExportNamedDeclaration') {
+            const extra = node.source === child ? '.source' : '';
+            return node.type + extra;
+        }
         if (node.type === 'Property') {
             const extra = node.key === child ? 'key' : node.value === child ? 'value' : '';
             return [node.type, node.kind, extra].join('.');
@@ -177,6 +209,10 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         }
         if (node.type === 'ClassDeclaration' || node.type === 'ClassExpression') {
             const extra = node.id === child ? 'id' : node.body === child ? 'body' : 'superClass';
+            return node.type + '.' + extra;
+        }
+        if (node.type === 'CallExpression') {
+            const extra = node.callee === child ? 'callee' : 'arguments';
             return node.type + '.' + extra;
         }
         if (node.type === 'Literal') {
@@ -198,6 +234,18 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
 
     function inheritanceSummary(node: ASTNode) {
         return inheritance(node).join(' ');
+    }
+
+    function isFunctionCall(node: ASTNode | undefined, name: string): boolean {
+        return node?.type === 'CallExpression' && node.callee.type === 'Identifier' && node.callee.name === name;
+    }
+
+    function isRequireCall(node: ASTNode | undefined) {
+        return isFunctionCall(node, 'require');
+    }
+
+    function isImportOrRequired(node: ASTNode) {
+        return isRequireCall(node.parent) || (node.parent?.type === 'ImportDeclaration' && node.parent.source === node);
     }
 
     function debugNode(node: ASTNode, value: unknown) {
@@ -229,8 +277,8 @@ export const rules: PluginRules = {
 };
 
 function logContext(context: Rule.RuleContext) {
-    log('Source code: \n ************************ \n\n');
-    log(context.getSourceCode().text);
+    log('\n\n************************');
+    // log(context.getSourceCode().text);
     log(`
 
 id: ${context.id}
