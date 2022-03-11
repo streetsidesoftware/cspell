@@ -4,6 +4,7 @@
 
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
+import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginDts from 'rollup-plugin-dts';
 import type { RollupOptions } from 'rollup';
 
@@ -39,6 +40,7 @@ function getPlugins(tsconfig = 'tsconfig.build.json') {
         rollupPluginTypescript({
             tsconfig,
         }),
+        rollupPluginJson(),
     ];
 }
 

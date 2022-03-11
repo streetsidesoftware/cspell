@@ -4,9 +4,10 @@ import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { TextDocument } from '../Models/TextDocument';
 import { loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
-import { getDictionaryInternal, getDictionaryInternalSync } from '../SpellingDictionary';
+import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
 import { toError } from '../util/errors';
 import { MatchRange } from '../util/TextRange';
+import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import {
     calcTextInclusionRanges,
@@ -85,6 +86,7 @@ export class DocumentValidator {
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
         this._preparations = {
+            dictionary: dict,
             docSettings,
             shouldCheck,
             validateOptions,
@@ -130,6 +132,7 @@ export class DocumentValidator {
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
         this._preparations = {
+            dictionary: dict,
             docSettings,
             shouldCheck,
             validateOptions,
@@ -158,7 +161,26 @@ export class DocumentValidator {
                 offset,
             },
         };
-        return [...this._preparations.lineValidator(lineSeg)];
+        const issues = [...this._preparations.lineValidator(lineSeg)];
+
+        if (!this.options.generateSuggestions) {
+            return issues;
+        }
+        const settings = this._preparations.docSettings;
+        const dict = this._preparations.dictionary;
+        const sugOptions = clean({
+            numSuggestions: this.options.numSuggestions,
+            includeTies: false,
+            ignoreCase: !(settings.caseSensitive ?? false),
+            timeout: settings.suggestionsTimeout,
+            numChanges: settings.suggestionNumChanges,
+        });
+        const withSugs = issues.map((t) => {
+            const suggestions = dict.suggest(t.text, sugOptions).map((r) => r.word);
+            return { ...t, suggestions };
+        });
+
+        return withSugs;
     }
 
     get document() {
@@ -191,12 +213,13 @@ export type Offset = number;
 export type SimpleRange = readonly [Offset, Offset];
 
 interface Preparations {
+    dictionary: SpellingDictionaryCollection;
     docSettings: CSpellSettingsInternal;
+    includeRanges: MatchRange[];
+    lineValidator: LineValidator;
+    segmenter: (lineSegment: LineSegment) => LineSegment[];
     shouldCheck: boolean;
     validateOptions: ValidationOptions;
-    includeRanges: MatchRange[];
-    segmenter: (lineSegment: LineSegment) => LineSegment[];
-    lineValidator: LineValidator;
 }
 
 async function searchForDocumentConfig(
