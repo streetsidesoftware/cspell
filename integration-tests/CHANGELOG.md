@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/streetsidesoftware/cspell/compare/v5.18.5...v5.19.0) (2022-03-12)
+
+
+### Bug Fixes
+
+* integration-tests/package.json & integration-tests/package-lock.json to reduce vulnerabilities ([#2567](https://github.com/streetsidesoftware/cspell/issues/2567)) ([19f5c37](https://github.com/streetsidesoftware/cspell/commit/19f5c371fec18e4de2e3ffc7bc4a3fca22a161bb))
+
+
+
+
+
 ## [5.18.5](https://github.com/streetsidesoftware/cspell/compare/v5.18.4...v5.18.5) (2022-02-15)
 
 **Note:** Version bump only for package cspell-integration-tests

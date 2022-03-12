@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.19.0](https://github.com/streetsidesoftware/cspell/compare/v5.18.5...v5.19.0) (2022-03-12)
+
+
+### Bug Fixes
+
+* integration-tests/package.json & integration-tests/package-lock.json to reduce vulnerabilities ([#2567](https://github.com/streetsidesoftware/cspell/issues/2567)) ([19f5c37](https://github.com/streetsidesoftware/cspell/commit/19f5c371fec18e4de2e3ffc7bc4a3fca22a161bb))
+* Use `exactOptionalPropertyTypes` ([#2493](https://github.com/streetsidesoftware/cspell/issues/2493)) ([ffde5ac](https://github.com/streetsidesoftware/cspell/commit/ffde5ac27e5354fa660c3e3d1cf5d6b48c53f22b))
+
+
+### Features
+
+* Use pipe instead of GenSequence ([#2491](https://github.com/streetsidesoftware/cspell/issues/2491)) ([65cb6f0](https://github.com/streetsidesoftware/cspell/commit/65cb6f0da255f68ab1858b2b4a9c108670103ca5))
+
+
+
+
+
 ## [5.18.5](https://github.com/streetsidesoftware/cspell/compare/v5.18.4...v5.18.5) (2022-02-15)
 
 
