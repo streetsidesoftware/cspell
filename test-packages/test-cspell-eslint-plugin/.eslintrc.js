@@ -13,8 +13,7 @@ const config = {
         'plugin:import/warnings',
         'plugin:promise/recommended',
         'plugin:prettier/recommended',
-        // 'plugin:@cspell/recommended',
-        'plugin:@cspell/debug',
+        'plugin:@cspell/recommended',
     ],
     ignorePatterns: ['**/*.d.ts', '**/*.map', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
     parserOptions: {

@@ -42,6 +42,7 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readSample('sample.ts'),
         readSample('sampleESM.mjs'),
         readFix('with-errors/strings.ts', { checkStrings: false, checkStringTemplates: false }),
+        readFix('with-errors/imports.ts'),
     ],
     invalid: [
         // cspell:ignore Guuide Gallaxy BADD functionn coool
@@ -86,6 +87,38 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readInvalid('with-errors/strings.ts', ['Unknown word: "naaame"', 'Unknown word: "doen\'t"'], {
             checkStringTemplates: false,
         }),
+        // cspell:ignore muawhahaha grrrrr uuuug
+        readInvalid(
+            'with-errors/imports.ts',
+            [
+                'Unknown word: "muawhahaha"',
+                'Unknown word: "grrrrr"',
+                'Unknown word: "muawhahaha"',
+                'Unknown word: "muawhahaha"',
+                'Unknown word: "uuuug"',
+            ],
+            { ignoreImports: false }
+        ),
+        readInvalid(
+            'with-errors/imports.ts',
+            ['Unknown word: "grrrrr"', 'Unknown word: "muawhahaha"', 'Unknown word: "uuuug"'],
+            { ignoreImportProperties: false }
+        ),
+        // cspell:ignore uuug grrr
+        readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"']),
+        readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"'], { ignoreImportProperties: false }),
+        readInvalid(
+            'with-errors/importAlias.ts',
+            [
+                'Unknown word: "uuug"',
+                'Unknown word: "uuug"',
+                'Unknown word: "muawhahaha"',
+                'Unknown word: "grrr"',
+                'Unknown word: "uuug"',
+                'Unknown word: "grrr"',
+            ],
+            { ignoreImports: false }
+        ),
     ],
 });
 

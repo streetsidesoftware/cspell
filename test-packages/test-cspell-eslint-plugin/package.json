@@ -4,10 +4,7 @@
   "description": "Pure testing package for @cspell/eslint-plugin-cspell.",
   "private": true,
   "scripts": {
-    "clean": "rimraf dist .tsbuildinfo",
-    "build": "tsc -p .",
-    "eslint": "eslint -c .eslintrc.js",
-    "clean-build": "npm run clean && npm run build",
+    "eslint": "eslint -c .eslintrc.js .",
     "test": "npm run eslint"
   },
   "engines": {

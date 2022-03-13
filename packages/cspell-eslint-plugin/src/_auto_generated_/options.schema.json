@@ -10,7 +10,7 @@
     },
     "checkIdentifiers": {
       "default": true,
-      "description": "Spell check identifiers (variables names, function names, and class names)",
+      "description": "Spell check identifiers (variables names, function names, class names, etc.)",
       "type": "boolean"
     },
     "checkStringTemplates": {
@@ -31,6 +31,11 @@
     "generateSuggestions": {
       "default": true,
       "description": "Generate suggestions",
+      "type": "boolean"
+    },
+    "ignoreImportProperties": {
+      "default": true,
+      "description": "Ignore the properties of imported variables, structures, and types.\n\nExample: ``` import { example } from 'third-party';\n\nconst msg = example.property; // `property` is not spell checked. ```",
       "type": "boolean"
     },
     "ignoreImports": {
