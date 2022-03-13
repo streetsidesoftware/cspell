@@ -97,16 +97,27 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 'Unknown word: "muawhahaha"',
                 'Unknown word: "uuuug"',
             ],
-            {
-                ignoreImports: false,
-            }
+            { ignoreImports: false }
         ),
         readInvalid(
             'with-errors/imports.ts',
             ['Unknown word: "grrrrr"', 'Unknown word: "muawhahaha"', 'Unknown word: "uuuug"'],
-            {
-                ignoreImportProperties: false,
-            }
+            { ignoreImportProperties: false }
+        ),
+        // cspell:ignore uuug
+        readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"']),
+        readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"'], { ignoreImportProperties: false }),
+        readInvalid(
+            'with-errors/importAlias.ts',
+            [
+                'Unknown word: "uuug"',
+                'Unknown word: "uuug"',
+                'Unknown word: "muawhahaha"',
+                'Unknown word: "grrr"',
+                'Unknown word: "uuug"',
+                'Unknown word: "grrr"',
+            ],
+            { ignoreImports: false }
         ),
     ],
 });

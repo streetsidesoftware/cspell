@@ -11,6 +11,8 @@ export const expressions: CreepyExpressions = {
 };
 
 export const muawhahaha = expressions.muawhahaha;
+export const uuug = expressions.uuuug;
+export const grrr = expressions.grrrrr;
 
 export enum ExpressionCategory {
     MUAWHAHAHA = 0,

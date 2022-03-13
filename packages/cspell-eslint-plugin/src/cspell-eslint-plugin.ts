@@ -4,7 +4,7 @@ import assert from 'assert';
 import { createTextDocument, CSpellSettings, DocumentValidator, ValidationIssue } from 'cspell-lib';
 import type { Rule } from 'eslint';
 // eslint-disable-next-line node/no-missing-import
-import type { Comment, Identifier, Literal, Node, TemplateElement } from 'estree';
+import type { Comment, Identifier, Literal, Node, TemplateElement, ImportSpecifier } from 'estree';
 import { format } from 'util';
 import { normalizeOptions } from './options';
 import optionsSchema from './_auto_generated_/options.schema.json';
@@ -90,6 +90,10 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             }
             if (isImportIdentifier(node)) {
                 importedIdentifiers.add(node.name);
+                if (isLocalImportIdentifierUnique(node)) {
+                    checkNodeText(node, node.name);
+                }
+                return;
             } else if (options.ignoreImportProperties && isImportedProperty(node)) {
                 return;
             }
@@ -142,11 +146,23 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         );
     }
 
+    function isLocalImportIdentifierUnique(node: ASTNode): boolean {
+        const parent = getImportParent(node);
+        if (!parent) return true;
+        const { imported, local } = parent;
+        if (imported.name !== local.name) return true;
+        return imported.range?.[0] !== local.range?.[0] && imported.range?.[1] !== local.range?.[1];
+    }
+
+    function getImportParent(node: ASTNode): ImportSpecifier | undefined {
+        const parent = node.parent;
+        return parent?.type === 'ImportSpecifier' ? parent : undefined;
+    }
+
     function skipCheckForRawImportIdentifiers(node: ASTNode): boolean {
         if (options.ignoreImports) return false;
-        const parent = node.parent;
-        if (parent?.type !== 'ImportSpecifier') return false;
-        return parent.imported === node && parent.imported.name === parent.local.name;
+        const parent = getImportParent(node);
+        return !!parent && parent.imported === node && !isLocalImportIdentifierUnique(node);
     }
 
     function isImportedProperty(node: ASTNode): boolean {
