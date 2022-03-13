@@ -56,6 +56,7 @@ function log(...args: Parameters<typeof console.log>) {
 
 function create(context: Rule.RuleContext): Rule.RuleListener {
     const options = normalizeOptions(context.options[0]);
+    const toIgnore = new Set<string>();
     const importedIdentifiers = new Set<string>();
     isDebugMode = options.debugMode || false;
     isDebugMode && logContext(context);
@@ -66,8 +67,9 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
     function checkLiteral(node: Literal & Rule.NodeParentExtension) {
         if (!options.checkStrings) return;
         if (typeof node.value === 'string') {
-            if (options.ignoreImports && isImportOrRequired(node)) return;
             debugNode(node, node.value);
+            if (options.ignoreImports && isImportOrRequired(node)) return;
+            if (isImportedProperty(node)) return;
             checkNodeText(node, node.value);
         }
     }
@@ -80,13 +82,20 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
     }
 
     function checkIdentifier(node: Identifier & Rule.NodeParentExtension) {
-        if (options.ignoreImports && isImportIdentifier(node)) {
-            importedIdentifiers.add(node.name);
-            return;
+        debugNode(node, node.name);
+        if (options.ignoreImports) {
+            if (isRawImportIdentifier(node)) {
+                toIgnore.add(node.name);
+                return;
+            }
+            if (isImportIdentifier(node)) {
+                importedIdentifiers.add(node.name);
+            } else if (isImportedProperty(node)) {
+                return;
+            }
         }
         if (!options.checkIdentifiers) return;
-        if (importedIdentifiers.has(node.name)) return;
-        debugNode(node, node.name);
+        if (toIgnore.has(node.name)) return;
         checkNodeText(node, node.name);
     }
 
@@ -116,9 +125,25 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         const parent = node.parent;
         if (node.type !== 'Identifier' || !parent) return false;
         return (
+            (parent.type === 'ImportSpecifier' ||
+                parent.type === 'ImportNamespaceSpecifier' ||
+                parent.type === 'ImportDefaultSpecifier') &&
+            parent.local === node
+        );
+    }
+
+    function isRawImportIdentifier(node: ASTNode): boolean {
+        const parent = node.parent;
+        if (node.type !== 'Identifier' || !parent) return false;
+        return (
             (parent.type === 'ImportSpecifier' && parent.imported === node) ||
             (parent.type === 'ExportSpecifier' && parent.local === node)
         );
+    }
+
+    function isImportedProperty(node: ASTNode): boolean {
+        const obj = findOriginObject(node);
+        return !!obj && obj.type === 'Identifier' && importedIdentifiers.has(obj.name);
     }
 
     function reportIssue(issue: ValidationIssue) {
@@ -234,6 +259,19 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
 
     function inheritanceSummary(node: ASTNode) {
         return inheritance(node).join(' ');
+    }
+
+    /**
+     * find the origin of a member expression
+     */
+    function findOriginObject(node: ASTNode): ASTNode | undefined {
+        const parent = node.parent;
+        if (parent?.type !== 'MemberExpression' || parent.property !== node) return undefined;
+        let obj = parent.object;
+        while (obj.type === 'MemberExpression') {
+            obj = obj.object;
+        }
+        return obj;
     }
 
     function isFunctionCall(node: ASTNode | undefined, name: string): boolean {

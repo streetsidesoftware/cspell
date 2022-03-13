@@ -1,5 +1,6 @@
 import { reader as myreader, reeder } from './reader';
 import { expressions, muawhahaha } from './creepyData';
+import * as creepy from './creepyData';
 
 /**
  * This is some sample code to test cspell's eslint-plugin.
@@ -21,6 +22,7 @@ function main() {
     console.log(expressions.grrrrr);
     console.log(expressions['uuuug']);
     console.log(muawhahaha);
+    console.log(creepy.expressions.grrrrr);
 }
 
 main();
