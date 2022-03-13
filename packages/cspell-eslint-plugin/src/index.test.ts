@@ -104,7 +104,7 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             ['Unknown word: "grrrrr"', 'Unknown word: "muawhahaha"', 'Unknown word: "uuuug"'],
             { ignoreImportProperties: false }
         ),
-        // cspell:ignore uuug
+        // cspell:ignore uuug grrr
         readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"']),
         readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"'], { ignoreImportProperties: false }),
         readInvalid(
