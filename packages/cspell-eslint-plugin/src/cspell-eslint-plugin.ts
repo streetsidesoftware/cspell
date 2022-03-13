@@ -69,7 +69,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         if (typeof node.value === 'string') {
             debugNode(node, node.value);
             if (options.ignoreImports && isImportOrRequired(node)) return;
-            if (isImportedProperty(node)) return;
+            if (options.ignoreImportProperties && isImportedProperty(node)) return;
             checkNodeText(node, node.value);
         }
     }
@@ -90,12 +90,13 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             }
             if (isImportIdentifier(node)) {
                 importedIdentifiers.add(node.name);
-            } else if (isImportedProperty(node)) {
+            } else if (options.ignoreImportProperties && isImportedProperty(node)) {
                 return;
             }
         }
         if (!options.checkIdentifiers) return;
-        if (toIgnore.has(node.name)) return;
+        if (toIgnore.has(node.name) && !isObjectProperty(node)) return;
+        if (skipCheckForRawImportIdentifiers(node)) return;
         checkNodeText(node, node.name);
     }
 
@@ -141,9 +142,20 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         );
     }
 
+    function skipCheckForRawImportIdentifiers(node: ASTNode): boolean {
+        if (options.ignoreImports) return false;
+        const parent = node.parent;
+        if (parent?.type !== 'ImportSpecifier') return false;
+        return parent.imported === node && parent.imported.name === parent.local.name;
+    }
+
     function isImportedProperty(node: ASTNode): boolean {
         const obj = findOriginObject(node);
         return !!obj && obj.type === 'Identifier' && importedIdentifiers.has(obj.name);
+    }
+
+    function isObjectProperty(node: ASTNode): boolean {
+        return node.parent?.type === 'MemberExpression';
     }
 
     function reportIssue(issue: ValidationIssue) {

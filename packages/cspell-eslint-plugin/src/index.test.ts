@@ -94,10 +94,18 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 'Unknown word: "muawhahaha"',
                 'Unknown word: "grrrrr"',
                 'Unknown word: "muawhahaha"',
+                'Unknown word: "muawhahaha"',
                 'Unknown word: "uuuug"',
             ],
             {
                 ignoreImports: false,
+            }
+        ),
+        readInvalid(
+            'with-errors/imports.ts',
+            ['Unknown word: "grrrrr"', 'Unknown word: "muawhahaha"', 'Unknown word: "uuuug"'],
+            {
+                ignoreImportProperties: false,
             }
         ),
     ],

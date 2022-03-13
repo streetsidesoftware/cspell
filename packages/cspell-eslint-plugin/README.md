@@ -21,30 +21,36 @@ This plugin is still in active development. Due to the nature of how files are p
 
 ## Options
 
-```ts
+````ts
 interface Options {
   /**
    * Number of spelling suggestions to make.
    * @default 8
    */
   numSuggestions: number;
-
   /**
    * Generate suggestions
    * @default true
    */
   generateSuggestions: boolean;
-
-  /**
-   * Output debug logs
-   * @default false
-   */
-  debugMode?: boolean;
   /**
    * Ignore import and require names
    * @default true
    */
   ignoreImports?: boolean;
+  /**
+   * Ignore the properties of imported variables, structures, and types.
+   *
+   * Example:
+   * ```
+   * import { example } from 'third-party';
+   *
+   * const msg = example.property; // `property` is not spell checked.
+   * ```
+   *
+   * @default true
+   */
+  ignoreImportProperties?: boolean;
   /**
    * Spell check identifiers (variables names, function names, and class names)
    * @default true
@@ -65,8 +71,13 @@ interface Options {
    * @default true
    */
   checkComments?: boolean;
+  /**
+   * Output debug logs
+   * @default false
+   */
+  debugMode?: boolean;
 }
-```
+````
 
 Example:
 
