@@ -39,7 +39,7 @@ describe('DiskCache', () => {
     };
 
     beforeEach(() => {
-        diskCache = new DiskCache('.foobar', false);
+        diskCache = new DiskCache('.foobar', false, 'version');
         fileEntryCache = mockCreateFileEntryCache.mock.results[0].value;
     });
 
@@ -173,6 +173,7 @@ function entry(result: CachedFileResult, dependencies: string[] = [], size = 100
             data: {
                 r: result,
                 d: dependencies,
+                v: 'version',
             },
         },
     };

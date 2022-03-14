@@ -1,14 +1,16 @@
-import { calcCacheSettings, createCache } from './createCache';
-import { DiskCache } from './DiskCache';
-import { CacheOptions } from './CacheOptions';
 import * as path from 'path';
 import { resolve as r } from 'path';
 import { CreateCacheSettings } from '.';
+import { CacheOptions } from './CacheOptions';
+import { calcCacheSettings, createCache, __testing__ } from './createCache';
+import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';
 
 jest.mock('./DiskCache');
 
 const mockedDiskCache = jest.mocked(DiskCache);
+
+const version = '5.20.0-alpha.192';
 
 const U = undefined;
 const T = true;
@@ -30,8 +32,11 @@ describe('Validate calcCacheSettings', () => {
         ${{}}                  | ${{ cacheStrategy: 'content' }} | ${'.'}           | ${cco(F, U, 'content')}                 | ${'override default strategy'}
         ${{}}                  | ${co(T, U, 'content')}          | ${'.'}           | ${cco(T, U, 'content')}                 | ${'override strategy'}
         ${cs(U, U, 'content')} | ${co(T, U, 'metadata')}         | ${'.'}           | ${cco(T, U, 'metadata')}                | ${'override config strategy'}
-        ${cs(T, U, 'content')} | ${{}}                           | ${'.'}           | ${cco(T, U, 'content')}                 | ${'override default strategy'}
+        ${cs(T, U, 'content')} | ${{ version }}                  | ${'.'}           | ${cco(T, U, 'content')}                 | ${'override default strategy'}
     `('calcCacheSettings $comment - $config $options $root', async ({ config, options, root, expected }) => {
+        if (!options.version) {
+            options.version = version;
+        }
         expect(await calcCacheSettings({ cache: config }, options, root)).toEqual(expected);
     });
 });
@@ -52,6 +57,26 @@ describe('Validate createCache', () => {
     });
 });
 
+describe('validate normalizeVersion', () => {
+    test.each`
+        version              | expected
+        ${'5.8'}             | ${'5.8'}
+        ${'5.8.30'}          | ${'5.8'}
+        ${'5.8.30-alpha.2'}  | ${'5.8'}
+        ${'5.28.30-alpha.2'} | ${'5.28'}
+        ${'6.0.30-alpha.2'}  | ${'6.0'}
+    `('normalizeVersion $version', ({ version, expected }) => {
+        expect(__testing__.normalizeVersion(version)).toBe(expected + __testing__.versionSuffix);
+    });
+    test.each`
+        version
+        ${'5'}
+        ${''}
+    `('normalizeVersion bad "$version"', ({ version }) => {
+        expect(() => __testing__.normalizeVersion(version)).toThrow();
+    });
+});
+
 /**
  * CreateCacheSettings
  */
@@ -63,13 +88,13 @@ function cco(
     if (cacheLocation) {
         cacheLocation = path.resolve(process.cwd(), cacheLocation);
     }
-    return { useCache, cacheLocation, cacheStrategy };
+    return { useCache, cacheLocation, cacheStrategy, version };
 }
 
 function cs(useCache?: boolean, cacheLocation?: string, cacheStrategy?: CacheOptions['cacheStrategy']) {
-    return { useCache, cacheLocation, cacheStrategy };
+    return { useCache, cacheLocation, cacheStrategy, version };
 }
 
 function co(cache?: boolean, cacheLocation?: string, cacheStrategy?: CacheOptions['cacheStrategy']) {
-    return { cache, cacheLocation, cacheStrategy };
+    return { cache, cacheLocation, cacheStrategy, version };
 }
