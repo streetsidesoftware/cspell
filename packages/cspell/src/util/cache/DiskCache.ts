@@ -16,6 +16,8 @@ interface CachedData {
     r: CachedFileResult;
     /** dependencies */
     d: string[];
+    /** meta version */
+    v: string;
 }
 
 interface CSpellCachedMetaData {
@@ -32,7 +34,7 @@ export class DiskCache implements CSpellLintResultCache {
     private changedDependencies: Set<string> = new Set();
     private knownDependencies: Set<string> = new Set();
 
-    constructor(cacheFileLocation: string, useCheckSum: boolean) {
+    constructor(cacheFileLocation: string, useCheckSum: boolean, readonly version: string) {
         this.fileEntryCache = fileEntryCache.createFromFile(resolvePath(cacheFileLocation), useCheckSum);
     }
 
@@ -41,13 +43,21 @@ export class DiskCache implements CSpellLintResultCache {
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         const data = meta?.data;
         const result = data?.r;
+        const versionMatches = this.version === data?.v;
 
         // Cached lint results are valid if and only if:
         // 1. The file is present in the filesystem
         // 2. The file has not changed since the time it was previously linted
         // 3. The CSpell configuration has not changed since the time the file was previously linted
         // If any of these are not true, we will not reuse the lint results.
-        if (fileDescriptor.notFound || fileDescriptor.changed || !meta || !result || !this.checkDependencies(data.d)) {
+        if (
+            fileDescriptor.notFound ||
+            fileDescriptor.changed ||
+            !meta ||
+            !result ||
+            !versionMatches ||
+            !this.checkDependencies(data.d)
+        ) {
             return undefined;
         }
 
@@ -77,6 +87,7 @@ export class DiskCache implements CSpellLintResultCache {
         const data: CachedData = {
             r: result,
             d: dependsUponFiles,
+            v: this.version,
         };
 
         meta.data = data;

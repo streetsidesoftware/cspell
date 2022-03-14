@@ -2,6 +2,11 @@ import type { CacheStrategy } from '@cspell/cspell-types';
 
 export interface CacheOptions {
     /**
+     * The version of `cspell` that made the cache entry.
+     * Cache entries must match the `major.minor` version.
+     */
+    version: string;
+    /**
      * Store the info about processed files in order to only operate on the changed ones.
      */
     cache?: boolean;

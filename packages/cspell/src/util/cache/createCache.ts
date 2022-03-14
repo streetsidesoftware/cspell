@@ -1,24 +1,33 @@
 import { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
+import assert from 'assert';
+import { stat } from 'fs-extra';
 import path from 'path';
 import { CacheOptions } from '.';
+import { isError } from '../errors';
 import { CSpellLintResultCache } from './CSpellLintResultCache';
 import { DiskCache } from './DiskCache';
 import { DummyCache } from './DummyCache';
-import { stat } from 'fs-extra';
-import { isError } from '../errors';
 
 // cspell:word cspellcache
 export const DEFAULT_CACHE_LOCATION = '.cspellcache';
 
-export type CreateCacheSettings = Required<CacheSettings>;
+export interface CreateCacheSettings extends Required<CacheSettings> {
+    /**
+     * cspell version used to validate cache entries.
+     */
+    version: string;
+}
+
+const versionSuffix = '';
 
 /**
  * Creates CSpellLintResultCache (disk cache if caching is enabled in config or dummy otherwise)
  */
-
 export function createCache(options: CreateCacheSettings): CSpellLintResultCache {
     const { useCache, cacheLocation, cacheStrategy } = options;
-    return useCache ? new DiskCache(path.resolve(cacheLocation), cacheStrategy === 'content') : new DummyCache();
+    return useCache
+        ? new DiskCache(path.resolve(cacheLocation), cacheStrategy === 'content', normalizeVersion(options.version))
+        : new DummyCache();
 }
 
 export async function calcCacheSettings(
@@ -37,6 +46,7 @@ export async function calcCacheSettings(
         useCache,
         cacheLocation,
         cacheStrategy,
+        version: cacheOptions.version,
     };
 }
 
@@ -52,3 +62,18 @@ async function resolveCacheLocation(cacheLocation: string): Promise<string> {
         throw err;
     }
 }
+
+/**
+ * Normalizes the version and return only `major.minor + versionSuffix`
+ * @param version The cspell semantic version.
+ */
+function normalizeVersion(version: string): string {
+    const parts = version.split('.').slice(0, 2);
+    assert(parts.length === 2);
+    return parts.join('.') + versionSuffix;
+}
+
+export const __testing__ = {
+    normalizeVersion,
+    versionSuffix,
+};

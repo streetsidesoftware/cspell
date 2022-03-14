@@ -1,6 +1,5 @@
 import type { Command } from 'commander';
 import { program } from 'commander';
-import * as path from 'path';
 import { satisfies as semverSatisfies } from 'semver';
 import { commandCheck } from './commandCheck';
 import { commandLink } from './commandLink';
@@ -9,7 +8,7 @@ import { commandSuggestion } from './commandSuggestion';
 import { commandTrace } from './commandTrace';
 import { ApplicationError } from './util/errors';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const npmPackage = require(path.join(__dirname, '..', 'package.json'));
+const npmPackage = require('../package.json');
 
 export { LinterCliOptions as Options } from './options';
 export { CheckFailed } from './util/errors';

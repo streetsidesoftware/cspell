@@ -1,6 +1,6 @@
 import type { CacheOptions } from './util/cache';
 
-export interface LinterOptions extends BaseOptions, CacheOptions {
+export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'> {
     /**
      * Display verbose information
      */

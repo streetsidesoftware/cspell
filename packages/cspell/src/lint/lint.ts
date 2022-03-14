@@ -28,6 +28,9 @@ import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
 import { LintRequest } from './LintRequest';
 import chalk = require('chalk');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const npmPackage = require('../../package.json');
+const version = npmPackage.version;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     let { reporter } = cfg;
@@ -253,7 +256,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const { root } = cfg;
 
         try {
-            const cacheSettings = await calcCacheSettings(configInfo.config, cfg.options, root);
+            const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
             const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
 
             return await processFiles(files, configInfo, cacheSettings);
