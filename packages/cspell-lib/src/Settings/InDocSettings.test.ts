@@ -1,5 +1,6 @@
 import * as Text from '../util/text';
 import * as TextRange from '../util/TextRange';
+import { isDefined } from '../util/util';
 import * as InDoc from './InDocSettings';
 
 const oc = expect.objectContaining;
@@ -133,7 +134,7 @@ describe('Validate InDocSettings', () => {
         expect(matches).toEqual(['/\\/\\/\\/.*/', 'w\\w+berry', '/', '\\w+s{4}\\w+', '/faullts[/]?/ */']);
         const regExpList = matches.map((s) => Text.stringToRegExp(s));
         expect(regExpList).toEqual([/\/\/\/.*/g, /w\w+berry/gimu, /\//gimu, /\w+s{4}\w+/gimu, /faullts[/]?\/ */g]);
-        const ranges = TextRange.findMatchingRangesForPatterns(matches, sampleCode);
+        const ranges = TextRange.findMatchingRangesForPatterns(regExpList.filter(isDefined), sampleCode);
         expect(ranges.length).toBe(39);
     });
 

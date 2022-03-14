@@ -1,4 +1,5 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import * as Settings from '../Settings';
 import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
 import { clean } from '../util/util';
@@ -45,7 +46,7 @@ export async function validateText(
     return withSugs;
 }
 
-export function settingsToValidateOptions(settings: CSpellUserSettings): ValidationOptions {
+export function settingsToValidateOptions(settings: CSpellSettingsInternalFinalized): ValidationOptions {
     const opt: ValidationOptions = {
         ...settings,
         ignoreCase: !(settings.caseSensitive ?? false),

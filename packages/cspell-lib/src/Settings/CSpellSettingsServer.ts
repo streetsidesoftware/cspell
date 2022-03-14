@@ -11,6 +11,7 @@ import * as path from 'path';
 import {
     createCSpellSettingsInternal as csi,
     CSpellSettingsInternal,
+    CSpellSettingsInternalFinalized,
     isCSpellSettingsInternal,
 } from '../Models/CSpellSettingsInternalDef';
 import { OptionalOrUndefined } from '../util/types';
@@ -263,15 +264,16 @@ export function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: str
  * @param settings - settings to finalize
  * @returns settings where all globs and file paths have been resolved.
  */
-export function finalizeSettings(settings: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsI {
+export function finalizeSettings(settings: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsInternalFinalized {
     return _finalizeSettings(toInternalSettings(settings));
 }
 
-function _finalizeSettings(settings: CSpellSettingsI): CSpellSettingsI {
+function _finalizeSettings(settings: CSpellSettingsI): CSpellSettingsInternalFinalized {
     // apply patterns to any RegExpLists.
 
-    const finalized: CSpellSettingsI = {
+    const finalized: CSpellSettingsInternalFinalized = {
         ...settings,
+        finalized: true,
         ignoreRegExpList: resolvePatterns(settings.ignoreRegExpList, settings.patterns),
         includeRegExpList: resolvePatterns(settings.includeRegExpList, settings.patterns),
     };

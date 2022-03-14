@@ -6,8 +6,8 @@ import * as TextRange from '../util/TextRange';
 import * as RegPat from './RegExpPatterns';
 import { regExMatchCommonHexFormats, regExMatchUrls } from './RegExpPatterns';
 
-const matchUrl = regExMatchUrls.source;
-const matchHexValues = regExMatchCommonHexFormats.source;
+const matchUrl = regExMatchUrls;
+const matchHexValues = regExMatchCommonHexFormats;
 
 describe('Validate InDocSettings', () => {
     test('tests regExSpellingGuardBlock', () => {

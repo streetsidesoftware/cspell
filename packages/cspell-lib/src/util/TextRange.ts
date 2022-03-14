@@ -1,5 +1,4 @@
 import * as GS from 'gensequence';
-import * as Text from './text';
 
 export interface MatchRange {
     startPos: number;
@@ -24,27 +23,18 @@ function toMatchRangeWithText(m: RegExpMatchArray): MatchRangeWithText {
     };
 }
 
-export function findMatchingRanges(pattern: string | RegExp, text: string): MatchRangeOptionalText[] {
-    if (pattern === '.*') {
+export function findMatchingRanges(pattern: RegExp, text: string): MatchRangeOptionalText[] {
+    if (pattern.source === '.*') {
         return [{ startPos: 0, endPos: text.length }];
     }
 
-    try {
-        const regex = pattern instanceof RegExp ? new RegExp(pattern) : Text.stringToRegExp(pattern, 'gim', 'g');
-        if (regex) {
-            if (!regex.global) {
-                const m = text.match(regex);
-                if (!m) return [];
-                return [toMatchRangeWithText(m)];
-            }
-            return [...text.matchAll(regex)].map(toMatchRangeWithText);
-        }
-    } catch (e) {
-        // ignore any malformed regexp from the user.
-        // console.log(e.message);
+    const regex = new RegExp(pattern);
+    if (!regex.global) {
+        const m = text.match(regex);
+        if (!m) return [];
+        return [toMatchRangeWithText(m)];
     }
-
-    return [];
+    return [...text.matchAll(regex)].map(toMatchRangeWithText);
 }
 
 function compareRanges(a: MatchRange, b: MatchRange) {
@@ -76,7 +66,7 @@ function* _unionRanges(ranges: MatchRange[]): Generator<MatchRange> {
     }
 }
 
-export function findMatchingRangesForPatterns(patterns: (string | RegExp)[], text: string): MatchRange[] {
+export function findMatchingRangesForPatterns(patterns: RegExp[], text: string): MatchRange[] {
     const matchedPatterns = GS.genSequence(patterns).concatMap((pattern) => findMatchingRanges(pattern, text));
     return unionRanges(matchedPatterns.toArray());
 }

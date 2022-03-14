@@ -15,6 +15,12 @@ export interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTra
     dictionaryDefinitions?: DictionaryDefinitionInternal[];
 }
 
+export interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
+    finalized: true;
+    ignoreRegExpList: RegExp[];
+    includeRegExpList: RegExp[];
+}
+
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 
 export interface DictionaryDefinitionInternal

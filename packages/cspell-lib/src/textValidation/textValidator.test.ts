@@ -1,6 +1,7 @@
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe';
-import { TextOffset } from '@cspell/cspell-types';
+import { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
+import { finalizeSettings } from '../Settings';
 import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from '../SpellingDictionary';
 import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from '../util/FreqCounter';
@@ -13,7 +14,11 @@ import {
     ValidationOptions,
     _testMethods,
 } from './textValidator';
-import { settingsToValidateOptions as sToV } from './validator';
+import { settingsToValidateOptions } from './validator';
+
+function sToV(settings: CSpellUserSettings) {
+    return settingsToValidateOptions(finalizeSettings(settings));
+}
 
 // cspell:ignore whiteberry redmango lightbrown redberry
 

@@ -31,9 +31,9 @@ describe('patterns', () => {
     test.each`
         regExpList                | patternDefinitions         | expected
         ${[]}                     | ${[]}                      | ${[]}
-        ${['string', 'hello']}    | ${p('string', 'comments')} | ${['".*?"', 'hello']}
-        ${['string', 'comments']} | ${patterns}                | ${['".*?"', /#.*/g, /(?:\/\*[\s\S]*?\*\/)/g]}
-        ${['a', 'b']}             | ${patterns}                | ${['c']}
+        ${['string', 'hello']}    | ${p('string', 'comments')} | ${[/".*?"/gim, /hello/gim]}
+        ${['string', 'comments']} | ${patterns}                | ${[/".*?"/gim, /#.*/g, /(?:\/\*[\s\S]*?\*\/)/g]}
+        ${['a', 'b']}             | ${patterns}                | ${[/c/gim]}
     `('resolvePatterns $regExpList', ({ regExpList, patternDefinitions, expected }) => {
         expect(resolvePatterns(regExpList, patternDefinitions)).toEqual(expected);
     });

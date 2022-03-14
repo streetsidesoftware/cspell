@@ -31,13 +31,14 @@ describe('docValidator', () => {
         expect(dVal.ready).toBe(true);
     });
 
-    // cspell:ignore Helllo
+    // cspell:ignore Helllo grrrr
 
     test.each`
-        filename                        | text            | expected
-        ${__filename}                   | ${'__filename'} | ${[]}
-        ${fix('sample-with-errors.ts')} | ${'Helllo'}     | ${[oc({ text: 'Helllo' })]}
-        ${fix('sample-with-errors.ts')} | ${'main'}       | ${[]}
+        filename                                   | text            | expected
+        ${__filename}                              | ${'__filename'} | ${[]}
+        ${fix('sample-with-errors.ts')}            | ${'Helllo'}     | ${[oc({ text: 'Helllo' })]}
+        ${fix('sample-with-errors.ts')}            | ${'main'}       | ${[]}
+        ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${[]}
     `('checkText async $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, {}, {});
@@ -46,13 +47,15 @@ describe('docValidator', () => {
         assert(offset >= 0);
         const range = [offset, offset + text.length] as const;
         expect(dVal.checkText(range, text, [])).toEqual(expected);
+        expect(dVal.prepTime).toBeGreaterThan(0);
     });
 
     test.each`
-        filename                        | text            | expected
-        ${__filename}                   | ${'__filename'} | ${[]}
-        ${fix('sample-with-errors.ts')} | ${'Helllo'}     | ${[oc({ text: 'Helllo' })]}
-        ${fix('sample-with-errors.ts')} | ${'main'}       | ${[]}
+        filename                                   | text            | expected
+        ${__filename}                              | ${'__filename'} | ${[]}
+        ${fix('sample-with-errors.ts')}            | ${'Helllo'}     | ${[oc({ text: 'Helllo' })]}
+        ${fix('sample-with-errors.ts')}            | ${'main'}       | ${[]}
+        ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${[]}
     `('checkText sync $filename "$text"', async ({ filename, text, expected }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, {}, {});
@@ -61,6 +64,7 @@ describe('docValidator', () => {
         assert(offset >= 0);
         const range = [offset, offset + text.length] as const;
         expect(dVal.checkText(range, text, [])).toEqual(expected);
+        expect(dVal.prepTime).toBeGreaterThan(0);
     });
 });
 
