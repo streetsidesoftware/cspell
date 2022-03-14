@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.19.2](https://github.com/streetsidesoftware/cspell/compare/v5.19.1...v5.19.2) (2022-03-14)
+
+
+### Bug Fixes
+
+* eslint-plugin - fix issue with document directives ([#2576](https://github.com/streetsidesoftware/cspell/issues/2576)) ([54cb12c](https://github.com/streetsidesoftware/cspell/commit/54cb12ca2cc103738900e7d422d5740f1e17d020))
+
+
+
+
+
 ## [5.19.1](https://github.com/streetsidesoftware/cspell/compare/v5.19.0...v5.19.1) (2022-03-13)
 
 **Note:** Version bump only for package cspell-lib
