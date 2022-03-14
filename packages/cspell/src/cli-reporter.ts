@@ -80,18 +80,14 @@ function reportProgressFileBegin(p: ProgressFileBegin) {
     const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
     const idx = fn + '/' + fc;
     const filename = chalk.gray(relativeFilename(p.filename));
-    process.stderr.write(`\r${idx} ${filename} ...`);
+    process.stderr.write(`\r${idx} ${filename}`);
 }
 
 function reportProgressFileComplete(p: ProgressFileComplete) {
-    const fc = '' + p.fileCount;
-    const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
-    const idx = fn + '/' + fc;
-    const filename = chalk.gray(relativeFilename(p.filename));
     const time = reportTime(p.elapsedTimeMs, !!p.cached);
     const skipped = p.processed === false ? ' skipped' : '';
     const hasErrors = p.numErrors ? chalk.red` X` : '';
-    console.error(`\r${idx} ${filename} ${time}${skipped}${hasErrors}`);
+    console.error(` ${time}${skipped}${hasErrors}`);
 }
 
 function reportTime(elapsedTimeMs: number | undefined, cached: boolean): string {
