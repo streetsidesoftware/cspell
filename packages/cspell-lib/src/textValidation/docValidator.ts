@@ -1,12 +1,14 @@
+import { opConcatMap, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { TextDocument } from '../Models/TextDocument';
-import { loadConfig, mergeSettings, searchForConfig } from '../Settings';
+import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
 import { toError } from '../util/errors';
 import { MatchRange } from '../util/TextRange';
+import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import {
@@ -42,6 +44,7 @@ export class DocumentValidator {
     readonly errors: Error[] = [];
     private _prepared: Promise<void> | undefined;
     private _preparations: Preparations | undefined;
+    private _preparationTime = -1;
 
     /**
      * @param doc - Document to validate
@@ -49,6 +52,7 @@ export class DocumentValidator {
      */
     constructor(doc: TextDocument, readonly options: DocumentValidatorOptions, readonly settings: CSpellUserSettings) {
         this._document = doc;
+        // console.error(`DocumentValidator: ${doc.uri}`);
     }
 
     get ready() {
@@ -61,6 +65,8 @@ export class DocumentValidator {
         // Calc include ranges
         // Load dictionaries
         if (this._ready) return;
+
+        const timer = createTimer();
 
         const { options, settings } = this;
 
@@ -81,7 +87,8 @@ export class DocumentValidator {
 
         const shouldCheck = docSettings.enabled ?? true;
         const validateOptions = settingsToValidateOptions(docSettings);
-        const includeRanges = calcTextInclusionRanges(this._document.text, docSettings);
+        const finalSettings = finalizeSettings(docSettings);
+        const includeRanges = calcTextInclusionRanges(this._document.text, finalSettings);
         const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
@@ -96,6 +103,7 @@ export class DocumentValidator {
         };
 
         this._ready = true;
+        this._preparationTime = timer.elapsed();
     }
 
     async prepare(): Promise<void> {
@@ -107,6 +115,8 @@ export class DocumentValidator {
 
     private async _prepareAsync(): Promise<void> {
         assert(!this._ready);
+
+        const timer = createTimer();
 
         const { options, settings } = this;
 
@@ -127,7 +137,8 @@ export class DocumentValidator {
 
         const shouldCheck = docSettings.enabled ?? true;
         const validateOptions = settingsToValidateOptions(docSettings);
-        const includeRanges = calcTextInclusionRanges(this._document.text, docSettings);
+        const finalSettings = finalizeSettings(docSettings);
+        const includeRanges = calcTextInclusionRanges(this._document.text, finalSettings);
         const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
@@ -142,11 +153,20 @@ export class DocumentValidator {
         };
 
         this._ready = true;
+        this._preparationTime = timer.elapsed();
+    }
+
+    /**
+     * The amount of time in ms to prepare for validation.
+     */
+    get prepTime(): number {
+        return this._preparationTime;
     }
 
     checkText(range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations);
+        const { segmenter, lineValidator } = this._preparations;
         // Determine settings for text range
         // Slice text based upon include ranges
         // Check text against dictionaries.
@@ -161,7 +181,8 @@ export class DocumentValidator {
                 offset,
             },
         };
-        const issues = [...this._preparations.lineValidator(lineSeg)];
+        const aIssues = pipeSync(segmenter(lineSeg), opConcatMap(lineValidator));
+        const issues = [...aIssues];
 
         if (!this.options.generateSuggestions) {
             return issues;
