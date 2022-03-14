@@ -4,8 +4,8 @@ import { regExMatchCommonHexFormats, regExMatchUrls } from '../Settings/RegExpPa
 import { calculateTextDocumentOffsets } from './text';
 import * as TextRange from './TextRange';
 
-const matchUrl = regExMatchUrls.source;
-const matchHexValues = regExMatchCommonHexFormats.source;
+const matchUrl = regExMatchUrls;
+const matchHexValues = regExMatchCommonHexFormats;
 
 describe('Validate Text Ranges using Regexp', () => {
     test('tests finding a set of matching positions', () => {

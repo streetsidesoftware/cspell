@@ -226,6 +226,11 @@ interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'di
     [SymbolCSpellSettingsInternal]: true;
     dictionaryDefinitions?: DictionaryDefinitionInternal[];
 }
+interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
+    finalized: true;
+    ignoreRegExpList: RegExp[];
+    includeRegExpList: RegExp[];
+}
 declare type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
     /**
@@ -472,7 +477,7 @@ declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: st
  * @param settings - settings to finalize
  * @returns settings where all globs and file paths have been resolved.
  */
-declare function finalizeSettings(settings: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsI;
+declare function finalizeSettings(settings: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsInternalFinalized;
 /**
  * @param filename - filename
  * @param globs - globs
@@ -505,8 +510,8 @@ declare class ImportError extends Error {
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
 interface IncludeExcludeOptions {
-    ignoreRegExpList?: (RegExp | string)[];
-    includeRegExpList?: (RegExp | string)[];
+    ignoreRegExpList?: RegExp[];
+    includeRegExpList?: RegExp[];
 }
 interface ValidationResult extends TextOffset {
     line: TextOffset;

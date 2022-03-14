@@ -86,9 +86,9 @@ export class DocumentValidator {
         const dict = getDictionaryInternalSync(docSettings);
 
         const shouldCheck = docSettings.enabled ?? true;
-        const validateOptions = settingsToValidateOptions(docSettings);
         const finalSettings = finalizeSettings(docSettings);
-        const includeRanges = calcTextInclusionRanges(this._document.text, finalSettings);
+        const validateOptions = settingsToValidateOptions(finalSettings);
+        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
         const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
@@ -136,9 +136,9 @@ export class DocumentValidator {
         const dict = await getDictionaryInternal(docSettings);
 
         const shouldCheck = docSettings.enabled ?? true;
-        const validateOptions = settingsToValidateOptions(docSettings);
         const finalSettings = finalizeSettings(docSettings);
-        const includeRanges = calcTextInclusionRanges(this._document.text, finalSettings);
+        const validateOptions = settingsToValidateOptions(finalSettings);
+        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
         const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 

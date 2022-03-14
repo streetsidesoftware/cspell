@@ -1,10 +1,11 @@
 import type { Pattern, RegExpPatternDefinition } from '@cspell/cspell-types';
+import { stringToRegExp } from '../util/text';
 import { isDefined } from '../util/util';
 
 export function resolvePatterns(
     regExpList: (string | RegExp)[] = [],
     patternDefinitions: RegExpPatternDefinition[] = []
-): (string | RegExp)[] {
+): RegExp[] {
     const patternMap = new Map(patternDefinitions.map((def) => [def.name.toLowerCase(), def.pattern]));
 
     const resolved = new Set<string | RegExp>();
@@ -26,5 +27,9 @@ export function resolvePatterns(
     }
     const patternList = regExpList.map(resolvePattern).filter(isDefined);
 
-    return [...flatten(patternList)];
+    return [...flatten(patternList)].map(toRegExp).filter(isDefined);
+}
+
+function toRegExp(pattern: RegExp | string): RegExp | undefined {
+    return pattern instanceof RegExp ? new RegExp(pattern) : stringToRegExp(pattern, 'gim', 'g');
 }

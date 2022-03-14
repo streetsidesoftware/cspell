@@ -27,8 +27,8 @@ export interface CheckOptions extends ValidationOptions {
 }
 
 export interface IncludeExcludeOptions {
-    ignoreRegExpList?: (RegExp | string)[];
-    includeRegExpList?: (RegExp | string)[];
+    ignoreRegExpList?: RegExp[];
+    includeRegExpList?: RegExp[];
 }
 
 export interface WordRangeAcc {
@@ -85,7 +85,7 @@ export function calcTextInclusionRanges(text: string, options: IncludeExcludeOpt
     const { ignoreRegExpList = [], includeRegExpList = [] } = options;
 
     const filteredIncludeList = includeRegExpList.filter((a) => !!a);
-    const finalIncludeList = filteredIncludeList.length ? filteredIncludeList : ['.*'];
+    const finalIncludeList = filteredIncludeList.length ? filteredIncludeList : [/.*/gim];
 
     const includeRanges = TextRange.excludeRanges(
         TextRange.findMatchingRangesForPatterns(finalIncludeList, text),
