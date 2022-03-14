@@ -565,6 +565,7 @@ declare class DocumentValidator {
     readonly errors: Error[];
     private _prepared;
     private _preparations;
+    private _preparationTime;
     /**
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
@@ -574,6 +575,10 @@ declare class DocumentValidator {
     prepareSync(): void;
     prepare(): Promise<void>;
     private _prepareAsync;
+    /**
+     * The amount of time in ms to prepare for validation.
+     */
+    get prepTime(): number;
     checkText(range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[];
     get document(): TextDocument;
     private addPossibleError;
