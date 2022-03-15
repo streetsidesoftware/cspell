@@ -1,5 +1,6 @@
 import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryOptions } from '.';
+import { mapDictDefToInternal } from '../Settings/DictionarySettings';
 import {
     createFailedToLoadDictionary,
     createForbiddenWordsDictionary,
@@ -9,6 +10,8 @@ import { CompoundWordsMethod } from './SpellingDictionary';
 import { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
+
+const di = mapDictDefToInternal;
 
 describe('Verify using multiple dictionaries', () => {
     const wordsA = [
@@ -75,7 +78,7 @@ describe('Verify using multiple dictionaries', () => {
             createFailedToLoadDictionary(
                 new SpellingDictionaryLoadError(
                     './missing.txt',
-                    { name: 'error', path: './missing.txt', weightMap: undefined, __source: '' },
+                    di({ name: 'error', path: './missing.txt' }, __filename),
                     new Error('error'),
                     'failed to load'
                 )

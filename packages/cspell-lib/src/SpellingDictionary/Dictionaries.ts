@@ -7,11 +7,11 @@ import { SpellingDictionary } from './SpellingDictionary';
 import { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 
 export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
-    return defsToLoad.map((def) => loadDictionary(def.path, def));
+    return defsToLoad.map(loadDictionary);
 }
 
 export function loadDictionaryDefsSync(defsToLoad: DictionaryDefinitionInternal[]): SpellingDictionary[] {
-    return defsToLoad.map((def) => loadDictionarySync(def.path, def));
+    return defsToLoad.map(loadDictionarySync);
 }
 
 export function refreshDictionaryCache(maxAge?: number): Promise<void> {

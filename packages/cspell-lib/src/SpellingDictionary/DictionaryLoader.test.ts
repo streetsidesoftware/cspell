@@ -1,5 +1,6 @@
 import * as path from 'path';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
+import { mapDictDefToInternal } from '../Settings/DictionarySettings';
 import { clean } from '../util/util';
 import { loadDictionary, loadDictionarySync, LoadOptions, refreshCacheEntries, testing } from './DictionaryLoader';
 jest.mock('../util/logger');
@@ -8,6 +9,8 @@ const root = path.join(__dirname, '..', '..');
 const samples = path.join(root, 'samples');
 
 type ErrorResults = Record<string, unknown> | Error;
+
+const di = mapDictDefToInternal;
 
 describe('Validate DictionaryLoader', () => {
     const errorENOENT = { code: 'ENOENT' };
@@ -63,7 +66,7 @@ describe('Validate DictionaryLoader', () => {
             path: filename,
             name: filename,
         });
-        const dict = await loadDictionary(filename, def);
+        const dict = await loadDictionary(def);
         expect(dict.getErrors?.()).toHaveLength(1);
     });
 
@@ -130,7 +133,8 @@ describe('Validate DictionaryLoader', () => {
             hasErrors: boolean;
         }) => {
             await refreshCacheEntries(maxAge, Date.now());
-            const d = await loadDictionary(file, options);
+            const def = { ...options, path: file };
+            const d = await loadDictionary(def);
             expect(d.has(word)).toBe(hasWord);
             expect(!!d.getErrors?.().length).toBe(hasErrors);
         }
@@ -155,7 +159,7 @@ describe('Validate DictionaryLoader', () => {
         'dict has word $testCase $word',
         async ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
             const file = sample('words.txt');
-            const d = await loadDictionary(file, dDef({ name: 'words', path: file }));
+            const d = await loadDictionary(dDef({ name: 'words', path: file }));
             expect(d.has(word, clean({ ignoreCase }))).toBe(hasWord);
         }
     );
@@ -173,7 +177,7 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
     `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
-        const d = loadDictionarySync(def.path, def);
+        const d = loadDictionarySync(def);
         expect(d.has(word)).toBe(hasWord);
     });
 
@@ -185,7 +189,7 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'S' })} | ${[expect.any(Error)]}
         ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'W' })} | ${[expect.any(Error)]}
     `('sync load dict with error $def', ({ def, expected }) => {
-        const d = loadDictionarySync(def.path, def);
+        const d = loadDictionarySync(def);
         expect(d.getErrors?.()).toEqual(expected);
     });
 
@@ -207,9 +211,5 @@ interface DDef extends Partial<DictionaryDefinitionInternal> {
 }
 
 function dDef(opts: DDef): DictionaryDefinitionInternal {
-    return {
-        weightMap: undefined,
-        __source: '',
-        ...opts,
-    };
+    return di(opts, __filename);
 }

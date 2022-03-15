@@ -7,6 +7,7 @@ import { getDefaultSettings } from './DefaultSettings';
 import * as DictSettings from './DictionarySettings';
 
 const defaultSettings = getDefaultSettings();
+const oc = expect.objectContaining;
 
 describe('Validate DictionarySettings', () => {
     test('expects default to not be empty', () => {
@@ -79,11 +80,13 @@ describe('Validate DictionarySettings', () => {
         };
 
         const nDef = DictSettings.mapDictDefToInternal(def, pathToConfig);
-        expect(nDef).toEqual({
-            name: 'words',
-            path: absolutePath,
-            __source: pathToConfig,
-        });
+        expect(nDef).toEqual(
+            oc({
+                name: 'words',
+                path: absolutePath,
+                __source: pathToConfig,
+            })
+        );
 
         const legacyDef: DictionaryDefinitionLegacy = {
             name: 'words',
@@ -113,5 +116,13 @@ describe('Validate DictionarySettings', () => {
         expect(() => DictSettings.mapDictDefToInternal(normalizedDef, './different.config.json')).toThrowError(
             'Trying to normalize a dictionary definition with a different source.'
         );
+    });
+
+    test.each`
+        def                                                                                   | expected
+        ${{}}                                                                                 | ${false}
+        ${DictSettings.mapDictDefToInternal({ name: 'def', path: './dict.txt' }, __filename)} | ${true}
+    `('isDictionaryDefinitionInternal', ({ def, expected }) => {
+        expect(DictSettings.isDictionaryDefinitionInternal(def)).toBe(expected);
     });
 });

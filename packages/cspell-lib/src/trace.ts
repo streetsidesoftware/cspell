@@ -2,7 +2,7 @@ import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-type
 import { genSequence } from 'gensequence';
 import { LanguageId } from './LanguageIds';
 import { finalizeSettings, mergeSettings } from './Settings';
-import { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef';
+import { toInternalSettings } from './Settings/CSpellSettingsServer';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings';
 import {
     getDictionaryInternal,
@@ -72,7 +72,7 @@ export async function* traceWordsAsync(
         const dictionaries = (settings.dictionaries || [])
             .concat((settings.dictionaryDefinitions || []).map((d) => d.name))
             .filter(util.uniqueFn);
-        const dictSettings: CSpellSettingsInternal = { ...settings, dictionaries };
+        const dictSettings = toInternalSettings({ ...settings, dictionaries });
         const dictBase = await getDictionaryInternal(settings);
         const dicts = await getDictionaryInternal(dictSettings);
         const activeDictionaries = dictBase.dictionaries.map((d) => d.name);

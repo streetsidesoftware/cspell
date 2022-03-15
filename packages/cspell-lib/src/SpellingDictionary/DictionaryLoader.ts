@@ -79,51 +79,54 @@ export interface SyncLoaders {
 }
 
 const dictionaryCache = new Map<string, CacheEntry>();
+const dictionaryCacheByDef = new Map<DictionaryDefinitionInternal, { key: string; entry: CacheEntry }>();
 
-export function loadDictionary(uri: string, options: DictionaryDefinitionInternal): Promise<SpellingDictionary> {
-    const key = calcKey(uri, options);
+function getCacheEntry(def: DictionaryDefinitionInternal): { key: string; entry: CacheEntry | undefined } {
+    const defEntry = dictionaryCacheByDef.get(def);
+    if (defEntry) {
+        return defEntry;
+    }
+    const key = calcKey(def);
     const entry = dictionaryCache.get(key);
+    if (entry) {
+        // replace old entry so it can be released.
+        entry.options = def;
+    }
+    return { key, entry };
+}
+
+function setCacheEntry(key: string, entry: CacheEntry, def: DictionaryDefinitionInternal) {
+    dictionaryCache.set(key, entry);
+    dictionaryCacheByDef.set(def, { key, entry });
+}
+
+export function loadDictionary(def: DictionaryDefinitionInternal): Promise<SpellingDictionary> {
+    const { key, entry } = getCacheEntry(def);
     if (entry) {
         return entry.pending.then(([dictionary]) => dictionary);
     }
-    const loadedEntry = loadEntry(uri, options);
-    dictionaryCache.set(key, loadedEntry);
+    const loadedEntry = loadEntry(def.path, def);
+    setCacheEntry(key, loadedEntry, def);
     return loadedEntry.pending.then(([dictionary]) => dictionary);
 }
 
-export function loadDictionarySync(uri: string, options: DictionaryDefinitionInternal): SpellingDictionary {
-    const key = calcKey(uri, options);
-    const entry = dictionaryCache.get(key);
+export function loadDictionarySync(def: DictionaryDefinitionInternal): SpellingDictionary {
+    const { key, entry } = getCacheEntry(def);
     if (entry?.dictionary && entry.loadingState === LoadingState.Loaded) {
-        // if (entry.options.name === 'temp') {
-        //     __log(
-        //         `Cache Found ${entry.options.name}; ts: ${entry.sig.toFixed(2)}; file: ${path.relative(
-        //             process.cwd(),
-        //             entry.uri
-        //         )}`
-        //     );
-        // }
         return entry.dictionary;
     }
-    // if (options.name === 'temp') {
-    //     __log(
-    //         `Cache Miss ${options.name}; ts: ${entry?.sig.toFixed(2) || Date.now()}; file: ${path.relative(
-    //             process.cwd(),
-    //             uri
-    //         )}`
-    //     );
-    // }
-    const loadedEntry = loadEntrySync(uri, options);
-    dictionaryCache.set(key, loadedEntry);
+    const loadedEntry = loadEntrySync(def.path, def);
+    setCacheEntry(key, loadedEntry, def);
     return loadedEntry.dictionary;
 }
 
 const importantOptionKeys: (keyof DictionaryDefinitionInternal)[] = ['name', 'noSuggest', 'useCompounds', 'type'];
 
-function calcKey(uri: string, options: DictionaryDefinitionInternal) {
-    const loaderType = determineType(uri, options);
-    const optValues = importantOptionKeys.map((k) => options[k]?.toString() || '');
-    const parts = [uri, loaderType].concat(optValues);
+function calcKey(def: DictionaryDefinitionInternal) {
+    const path = def.path;
+    const loaderType = determineType(path, def);
+    const optValues = importantOptionKeys.map((k) => def[k]?.toString() || '');
+    const parts = [path, loaderType].concat(optValues);
 
     return parts.join('|');
 }
@@ -160,7 +163,10 @@ async function refreshEntry(entry: CacheEntry, maxAge: number, now: number): Pro
         // }
         if (sigMatches && hasChanged) {
             entry.loadingState = LoadingState.Loading;
-            dictionaryCache.set(calcKey(entry.uri, entry.options), loadEntry(entry.uri, entry.options));
+            const key = calcKey(entry.options);
+            const newEntry = loadEntry(entry.uri, entry.options);
+            dictionaryCache.set(key, newEntry);
+            dictionaryCacheByDef.set(entry.options, { key, entry: newEntry });
         }
     }
 }
