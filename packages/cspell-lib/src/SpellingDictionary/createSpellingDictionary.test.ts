@@ -1,14 +1,17 @@
 import { SpellingDictionaryOptions } from '.';
 import { DictionaryInformation } from '..';
+import { mapDictDefToInternal } from '../Settings/DictionarySettings';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
+
+const di = mapDictDefToInternal;
 
 describe('Validate createSpellingDictionary', () => {
     test('createFailedToLoadDictionary', () => {
         const error = new Error('error');
         const loaderError = new SpellingDictionaryLoadError(
             './missing.txt',
-            { name: 'failed dict', path: './missing.txt', weightMap: undefined, __source: undefined },
+            di({ name: 'failed dict', path: './missing.txt' }, __filename),
             error,
             'Failed to load'
         );

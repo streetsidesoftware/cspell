@@ -3,7 +3,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { getDefaultSettings, loadConfig } from '../Settings';
-import { filterDictDefsToLoad } from '../Settings/DictionarySettings';
+import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
 import { __testing__ } from './DictionaryLoader';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
@@ -21,6 +21,8 @@ function log(msg: string): void {
         console.log(msg);
     }
 }
+
+const di = mapDictDefToInternal;
 
 describe('Validate getDictionary', () => {
     const ignoreCaseFalse = { ignoreCase: false };
@@ -136,9 +138,8 @@ describe('Validate getDictionary', () => {
     });
 
     test('Dictionary NOT Found', async () => {
-        const weightMap = undefined;
         const settings = csi({
-            dictionaryDefinitions: [{ name: 'my-words', path: './not-found.txt', weightMap, __source: undefined }],
+            dictionaryDefinitions: [di({ name: 'my-words', path: './not-found.txt' }, __filename)],
             dictionaries: ['my-words'],
         });
 
@@ -184,21 +185,10 @@ describe('Validate Refresh', () => {
         const tempDictPathNotFound = tempPath('not-found.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
-        const weightMap = undefined;
         const settings = getDefaultSettings();
         const defs = (settings.dictionaryDefinitions || []).concat([
-            {
-                name: 'temp',
-                path: tempDictPath,
-                weightMap,
-                __source: undefined,
-            },
-            {
-                name: 'not_found',
-                path: tempDictPathNotFound,
-                weightMap,
-                __source: undefined,
-            },
+            di({ name: 'temp', path: tempDictPath }, __filename),
+            di({ name: 'not_found', path: tempDictPathNotFound }, __filename),
         ]);
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
         const defsToLoad = filterDictDefsToLoad(toLoad, defs);
@@ -242,15 +232,9 @@ describe('Validate Refresh', () => {
         const tempDictPath = tempPath('words_sync.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
-        const weightMap = undefined;
         const settings = getDefaultSettings();
         const defs = (settings.dictionaryDefinitions || []).concat([
-            {
-                name: 'temp',
-                path: tempDictPath,
-                weightMap,
-                __source: undefined,
-            },
+            di({ name: 'temp', path: tempDictPath }, __filename),
         ]);
         const toLoad = ['node', 'html', 'css', 'temp'];
         const defsToLoad = filterDictDefsToLoad(toLoad, defs);

@@ -78,6 +78,7 @@ export function memorizerKeyBy<
  * @param fn - function to memorize
  * @returns a new function.
  */
+export function memorizeLastCall<T>(fn: (...p: []) => T): (...p: []) => T;
 export function memorizeLastCall<T, K0>(fn: (...p: [K0]) => T): (...p: [K0]) => T;
 export function memorizeLastCall<T, K0, K1>(fn: (...p: [K0, K1]) => T): (...p: [K0, K1]) => T;
 export function memorizeLastCall<T, K0, K1, K2>(fn: (...p: [K0, K1, K2]) => T): (...p: [K0, K1, K2]) => T;
@@ -93,5 +94,23 @@ export function memorizeLastCall<T, K>(fn: (...p: [...K[]]) => T): (...p: [...K[
         const value = fn(...args);
         last = { args, value };
         return value;
+    };
+}
+
+/**
+ * calls a function exactly once and always returns the same value.
+ * @param fn - function to call
+ * @returns a new function
+ */
+export function callOnce<T>(fn: () => T): () => T {
+    let last: { value: T } | undefined;
+    return () => {
+        if (last) {
+            return last.value;
+        }
+        last = {
+            value: fn(),
+        };
+        return last.value;
     };
 }

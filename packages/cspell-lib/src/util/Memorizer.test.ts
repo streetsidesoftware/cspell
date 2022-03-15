@@ -1,4 +1,4 @@
-import { memorizer, memorizeLastCall } from './Memorizer';
+import { memorizer, memorizeLastCall, callOnce } from './Memorizer';
 
 describe('Validate Memorizer', () => {
     test('the memorizer works', () => {
@@ -108,5 +108,25 @@ describe('memorizeLastCall', () => {
             ['a', 3],
             ['a', 2],
         ]);
+    });
+});
+
+describe('callOnce', () => {
+    test.each`
+        value
+        ${undefined}
+        ${'hello'}
+        ${42}
+        ${null}
+        ${0}
+    `('callOnce "$value"', ({ value }) => {
+        let calls = 0;
+        const calc = () => (++calls, value);
+        const fn = callOnce(calc);
+        expect(fn()).toBe(value);
+        expect(fn()).toBe(value);
+        expect(fn()).toBe(value);
+        expect(fn()).toBe(value);
+        expect(calls).toBe(1);
     });
 });

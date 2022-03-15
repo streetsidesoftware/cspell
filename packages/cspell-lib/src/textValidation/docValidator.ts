@@ -7,6 +7,7 @@ import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '..
 import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
 import { toError } from '../util/errors';
+import { callOnce } from '../util/Memorizer';
 import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
@@ -198,8 +199,10 @@ export class DocumentValidator {
             numChanges: settings.suggestionNumChanges,
         });
         const withSugs = issues.map((t) => {
-            const suggestions = dict.suggest(t.text, sugOptions).map((r) => r.word);
-            return { ...t, suggestions };
+            // lazy suggestion calculation.
+            const text = t.text;
+            const suggestions = callOnce(() => dict.suggest(text, sugOptions).map((r) => r.word));
+            return Object.defineProperty({ ...t }, 'suggestions', { enumerable: true, get: suggestions });
         });
 
         return withSugs;

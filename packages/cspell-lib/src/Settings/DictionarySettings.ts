@@ -1,7 +1,6 @@
 import type {
     CustomDictionaryScope,
     DictionaryDefinition,
-    DictionaryDefinitionPreferred,
     DictionaryDefinitionAugmented,
     DictionaryDefinitionCustom,
     DictionaryFileTypes,
@@ -39,26 +38,23 @@ export function filterDictDefsToLoad(
     dictRefIds: DictionaryReference[],
     defs: DictionaryDefinitionInternal[]
 ): DictionaryDefinitionInternal[] {
-    function isDefP(def: DictionaryDefinition): def is DictionaryDefinitionPreferred {
-        return !!def.path;
-    }
-
     const col = createDictionaryReferenceCollection(dictRefIds);
     const dictIdSet = new Set(col.enabled());
-    const allActiveDefs = defs
-        .filter(({ name }) => dictIdSet.has(name))
-        .map((def) => ({ ...def, path: getFullPathName(def) }))
-        // Remove any empty paths.
-        .filter(isDefP);
+    const allActiveDefs = defs.filter(({ name }) => dictIdSet.has(name)).map(fixPath);
     return [...new Map(allActiveDefs.map((d) => [d.name, d])).values()];
 }
 
-function getFullPathName(def: DictionaryDefinition) {
-    const { path: filePath = '', file = '' } = def;
-    if (!filePath && !file) {
-        return '';
+function fixPath(def: DictionaryDefinitionInternal): DictionaryDefinitionInternal {
+    if (def instanceof _DictionaryDefinitionInternalWithSource) {
+        return def;
     }
-    return path.join(filePath, file);
+    const { path: filePath = '', file = '' } = def;
+    const newPath = !filePath && !file ? '' : path.join(filePath, file);
+    return {
+        ...def,
+        file: undefined,
+        path: newPath,
+    };
 }
 
 export function mapDictDefsToInternal(defs: undefined, pathToSettingsFile: string): undefined;
@@ -116,6 +112,12 @@ export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): Dict
 type DictDef = Partial<
     UnionFields<UnionFields<DictionaryDefinition, DictionaryDefinitionAugmented>, DictionaryDefinitionCustom>
 >;
+
+export function isDictionaryDefinitionInternal(
+    def: DictionaryDefinition | DictionaryDefinitionInternal
+): def is DictionaryDefinitionInternal {
+    return def instanceof _DictionaryDefinitionInternalWithSource;
+}
 
 class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInternalWithSource {
     private _weightMap: WeightMap | undefined;

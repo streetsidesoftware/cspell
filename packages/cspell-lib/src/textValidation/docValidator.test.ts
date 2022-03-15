@@ -9,6 +9,7 @@ const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = path.join(__dirname, '../../fixtures');
 
 const oc = expect.objectContaining;
+const ac = expect.arrayContaining;
 
 describe('docValidator', () => {
     test('DocumentValidator', () => {
@@ -64,6 +65,24 @@ describe('docValidator', () => {
         assert(offset >= 0);
         const range = [offset, offset + text.length] as const;
         expect(dVal.checkText(range, text, [])).toEqual(expected);
+        expect(dVal.prepTime).toBeGreaterThan(0);
+    });
+
+    test.each`
+        filename                        | text        | expected
+        ${fix('sample-with-errors.ts')} | ${'Helllo'} | ${[oc({ text: 'Helllo', suggestions: ac(['hello']) })]}
+    `('checkText suggestions $filename "$text"', async ({ filename, text, expected }) => {
+        const doc = await loadDoc(filename);
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true }, {});
+        dVal.prepareSync();
+        const offset = doc.text.indexOf(text);
+        assert(offset >= 0);
+        const range = [offset, offset + text.length] as const;
+        const result = dVal.checkText(range, text, []);
+        expect(result).toEqual(expected);
+        for (const r of result) {
+            expect(r.suggestions).toBe(r.suggestions);
+        }
         expect(dVal.prepTime).toBeGreaterThan(0);
     });
 });

@@ -2,6 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import * as Settings from '../Settings';
 import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
+import { callOnce } from '../util/Memorizer';
 import { clean } from '../util/util';
 import type { ValidationOptions, ValidationResult } from './textValidator';
 import { calcTextInclusionRanges, validateText as validateFullText } from './textValidator';
@@ -39,8 +40,10 @@ export async function validateText(
         numChanges: settings.suggestionNumChanges,
     });
     const withSugs = issues.map((t) => {
-        const suggestions = dict.suggest(t.text, sugOptions).map((r) => r.word);
-        return { ...t, suggestions };
+        const text = t.text;
+        // lazy suggestion calculation.
+        const suggestions = callOnce(() => dict.suggest(text, sugOptions).map((r) => r.word));
+        return Object.defineProperty({ ...t }, 'suggestions', { enumerable: true, get: suggestions });
     });
 
     return withSugs;
