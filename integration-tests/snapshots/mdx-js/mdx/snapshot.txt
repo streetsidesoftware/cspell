@@ -3,7 +3,7 @@ Repository: mdx-js/mdx
 Url: "https://github.com/mdx-js/mdx"
 Args: ["--config=../../../../config/repositories/mdx-js/mdx/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 160, Issues found: 1386 in 99 files
+ CSpell: Files checked: 160, Issues found: 1408 in 99 files
  exit code: 1
 ./docs/_asset/index.client.js:16:9      - Unknown word (nljson)     -- const nljson = document.querySelector
 ./docs/_asset/index.css:286:21    - Unknown word (squircle)           -- mask-image: paint(squircle);
@@ -306,13 +306,13 @@ Lines:
 ./docs/packages/rollup.server.md:94:11     - Unknown word (picomatch)  -- List of [`picomatch`][pico] patterns to
 ./docs/packages/vue.server.md:23:33     - Unknown word (usemdxcomponents) -- useMDXComponents()`](#usemdxcomponents)
 ./docs/table-of-components.server.mdx:106:15    - Unknown word (backticks)  -- Some `backticks` for inline.
-./packages/esbuild/lib/index.js:24:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
-./packages/esbuild/lib/index.js:73:62     - Unknown word (onloadremote) -- namespace: remoteNamespace}, onloadremote)
+./packages/esbuild/lib/index.js:23:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
+./packages/esbuild/lib/index.js:72:62     - Unknown word (onloadremote) -- namespace: remoteNamespace}, onloadremote)
 ./packages/mdx/lib/core.js:3:32      - Unknown word (Pluggable)  -- typedef {import('unified').PluggableList} PluggableList
 ./packages/mdx/lib/core.js:4:51      - Unknown word (Recma)      -- recma-document.js').RecmaDocumentOptions} RecmaDocument
 ./packages/mdx/lib/evaluate.js:22:10     - Unknown word (compiletime) -- const {compiletime, runtime} = resolveEvaluateOp
-./packages/mdx/lib/plugin/recma-document.js:431:17    - Unknown word (declarators) -- const declarators = node.specifiers
-./packages/mdx/lib/plugin/recma-document.js:45:21     - Unknown word (Estree)     -- import {positionFromEstree} from 'unist-util-position
+./packages/mdx/lib/plugin/recma-document.js:430:17    - Unknown word (declarators) -- const declarators = node.specifiers
+./packages/mdx/lib/plugin/recma-document.js:44:21     - Unknown word (Estree)     -- import {positionFromEstree} from 'unist-util-position
 ./packages/mdx/lib/plugin/recma-stringify.js:173:63    - Unknown word (curlies)    -- ionContainer`, which does the curlies)
 ./packages/mdx/test/compile.js:1377:21   - Unknown word (rexporting)  -- 'should support rexporting something as a default
 ./packages/mdx/test/compile.js:31:21     - Unknown word (userland)   -- // So instead use a userland module.
@@ -322,7 +322,18 @@ Lines:
 ./packages/remark-mdx/index.js:3:59      - Unknown word (Micromark)  -- extension-mdxjs').Options} MicromarkOptions
 ./packages/remark-mdx/test/index.js:317:15    - Unknown word (onvisit)    -- visit(tree, onvisit)
 ./packages/rollup/lib/index.js:2:30      - Unknown word (pluginutils) -- typedef {import('@rollup/pluginutils').FilterPattern} FilterPatter
-./packages/rollup/test/index.test.js:37:15     - Unknown word (UAAU)       -- ';;;MAAaA,UAAU;YAAQ;;;;;;;;;;;;iBAE
+./packages/rollup/test/index.test.js:37:109    - Unknown word (CAAA)       -- AAE7B,MAAA,QAAA,EAAA,CAAA,SAAA,EAAAD,GAAA,CAAA
+./packages/rollup/test/index.test.js:37:114    - Unknown word (SAAA)       -- MAAA,QAAA,EAAA,CAAA,SAAA,EAAAD,GAAA,CAAA,OAAA
+./packages/rollup/test/index.test.js:37:119    - Unknown word (EAAAD)      -- QAAA,EAAA,CAAA,SAAA,EAAAD,GAAA,CAAA,OAAA,EAAA
+./packages/rollup/test/index.test.js:37:135    - Unknown word (OAAA)       -- SAAA,EAAAD,GAAA,CAAA,OAAA,EAAA,EAAA,CAAA,CAAA
+./packages/rollup/test/index.test.js:37:15     - Unknown word (OAAU)       -- ';;;MAAaA,OAAU,GAAA,MAAAC,GAAA,CAAAC
+./packages/rollup/test/index.test.js:37:20     - Unknown word (GAAA)       -- ';;;MAAaA,OAAU,GAAA,MAAAC,GAAA,CAAAC,QAAA
+./packages/rollup/test/index.test.js:37:25     - Unknown word (MAAAC)      -- ';;;MAAaA,OAAU,GAAA,MAAAC,GAAA,CAAAC,QAAA,EAAA
+./packages/rollup/test/index.test.js:37:36     - Unknown word (CAAAC)      -- OAAU,GAAA,MAAAC,GAAA,CAAAC,QAAA,EAAA;AAAQ,EAAA
+./packages/rollup/test/index.test.js:37:42     - Unknown word (QAAA)       -- GAAA,MAAAC,GAAA,CAAAC,QAAA,EAAA;AAAQ,EAAA,QAAA
+./packages/rollup/test/index.test.js:37:47     - Unknown word (EAAA)       -- MAAAC,GAAA,CAAAC,QAAA,EAAA;AAAQ,EAAA,QAAA,EAAA
+./packages/rollup/test/index.test.js:37:52     - Unknown word (AAAQ)       -- GAAA,CAAAC,QAAA,EAAA;AAAQ,EAAA,QAAA,EAAA,QAAA
+./packages/rollup/test/index.test.js:37:94     - Unknown word (MAAA)       -- QAAA;;;;;;;;;;;;AAE7B,MAAA,QAAA,EAAA,CAAA,SAAA
 ./patches/react-server-dom-webpack+0.0.0-experimental-7ec4c5597.patch:13:10     - Unknown word (typeof)     -- $$typeof: MODULE_REFERENCE,
 ./patches/react-server-dom-webpack+0.0.0-experimental-7ec4c5597.patch:43:31     - Unknown word (deps)       -- // TODO: Hook into deps instead of the target
 ./website/generate.server.js:10:24     - Unknown word (xast)       -- import {sitemap} from 'xast-util-sitemap'

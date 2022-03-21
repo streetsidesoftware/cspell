@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2743, Issues found: 7676 in 858 files
+ CSpell: Files checked: 2743, Issues found: 7680 in 858 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -216,8 +216,8 @@ Lines:
 ./django/contrib/gis/gdal/geometries.py:7:55      - Unknown word (pythonic)   -- present yet, the API is "pythonic" unlike
 ./django/contrib/gis/gdal/libgdal.py:4:20      - Unknown word (CDLL)       -- from ctypes import CDLL, CFUNCTYPE, c_char_p
 ./django/contrib/gis/gdal/libgdal.py:4:26      - Unknown word (CFUNCTYPE)  -- ctypes import CDLL, CFUNCTYPE, c_char_p, c_int
-./django/contrib/gis/gdal/libgdal.py:65:1      - Unknown word (lgdal)      -- lgdal = CDLL(lib_path)
-./django/contrib/gis/gdal/libgdal.py:74:5      - Unknown word (lwingdal)   -- lwingdal = WinDLL(lib_path)
+./django/contrib/gis/gdal/libgdal.py:67:1      - Unknown word (lgdal)      -- lgdal = CDLL(lib_path)
+./django/contrib/gis/gdal/libgdal.py:76:5      - Unknown word (lwingdal)   -- lwingdal = WinDLL(lib_path)
 ./django/contrib/gis/gdal/prototypes/ds.py:19:5      - Unknown word (voidptr)    -- voidptr_output,
 ./django/contrib/gis/gdal/prototypes/ds.py:49:53     - Unknown word (Defn)       -- lgdal.OGR_L_GetLayerDefn, [c_void_p])
 ./django/contrib/gis/gdal/prototypes/errcheck.py:24:38     - Unknown word (cargs)      -- string(result, func, cargs, offset=None, cpl=False
@@ -302,7 +302,7 @@ Lines:
 ./django/contrib/postgres/aggregates/statistics.py:36:32     - Unknown word (SAMP)       -- self.function = "COVAR_SAMP" if sample else "COVAR
 ./django/contrib/postgres/aggregates/statistics.py:41:22     - Unknown word (AVGX)       -- function = "REGR_AVGX"
 ./django/contrib/postgres/aggregates/statistics.py:45:22     - Unknown word (AVGY)       -- function = "REGR_AVGY"
-./django/contrib/postgres/constraints.py:37:63     - Unknown word (spgist)     -- lower() not in {"gist", "spgist"}:
+./django/contrib/postgres/constraints.py:36:63     - Unknown word (spgist)     -- lower() not in {"gist", "spgist"}:
 ./django/contrib/postgres/fields/hstore.py:104:17    - Unknown word (akeys)      -- function = "akeys"
 ./django/contrib/postgres/fields/hstore.py:111:17    - Unknown word (avals)      -- function = "avals"
 ./django/contrib/postgres/fields/ranges.py:192:17    - Unknown word (tstzrange)  -- return "tstzrange"
@@ -372,7 +372,7 @@ Lines:
 ./django/core/management/__init__.py:311:13    - Unknown word (curr)       -- curr = cwords[cword - 1]
 ./django/core/management/__init__.py:396:49    - Unknown word (noreload)   -- "runserver" and "--noreload" not in self.argv:
 ./django/core/management/base.py:510:30    - Unknown word (CRITICALS)  -- (criticals, "CRITICALS"),
-./django/core/management/color.py:38:45     - Unknown word (HKEY)       -- winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Console
+./django/core/management/color.py:39:49     - Unknown word (HKEY)       -- winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Console
 ./django/core/management/color.py:78:11     - Unknown word (nocolor)    -- # The nocolor palette has all available
 ./django/core/management/color.py:81:48     - Unknown word (NOCOLOR)    -- PALETTES[termcolors.NOCOLOR_PALETTE]:
 ./django/core/management/commands/compilemessages.py:131:17    - Unknown word (ldir)       -- for ldir in dirs:
@@ -520,7 +520,8 @@ Lines:
 ./django/db/backends/sqlite3/base.py:343:8     - Unknown word (QMARK)      -- FORMAT_QMARK_REGEX = _lazy_re_compile
 ./django/db/backends/sqlite3/base.py:348:66    - Unknown word (qmark)      -- but pysqlite2 uses "qmark" style.
 ./django/db/backends/sqlite3/base.py:7:21      - Unknown word (dbapi)      -- from sqlite3 import dbapi2 as Database
-./django/db/backends/sqlite3/creation.py:19:26     - Unknown word (memorydb)   -- return "file:memorydb_%s?mode=memory&cache
+./django/db/backends/sqlite3/creation.py:105:13    - Unknown word (ondisk)     -- ondisk_db = sqlite3.connect
+./django/db/backends/sqlite3/creation.py:22:26     - Unknown word (memorydb)   -- return "file:memorydb_%s?mode=memory&cache
 ./django/db/backends/sqlite3/features.py:49:16     - Unknown word (nocase)     -- "ci": "nocase",
 ./django/db/backends/sqlite3/features.py:70:43     - Unknown word (doesnt)     -- alter_field_default_doesnt_perform_queries",
 ./django/db/backends/sqlite3/operations.py:95:28     - Unknown word (tznames)    -- *self._convert_tznames_to_sql(tzname),
@@ -563,21 +564,21 @@ Lines:
 ./django/db/models/query.py:837:80    - Unknown word (fset)       -- getattr(self.model, param).fset):
 ./django/db/models/query.py:92:21     - Unknown word (populator)  -- for rel_populator in related_populators
 ./django/db/models/query_utils.py:92:19     - Unknown word (subq)       -- split_subq=False,
-./django/db/models/sql/compiler.py:1310:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
-./django/db/models/sql/compiler.py:1712:9    - Unknown word (innerq)     -- innerq = self.query.clone(
-./django/db/models/sql/compiler.py:1717:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
-./django/db/models/sql/compiler.py:1816:61   - Unknown word (munge)      -- results from other tables, munge the "where"
-./django/db/models/sql/compiler.py:1845:38   - Unknown word (idents)     -- Either we're using the idents in multiple update queries
+./django/db/models/sql/compiler.py:1315:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
+./django/db/models/sql/compiler.py:1717:9    - Unknown word (innerq)     -- innerq = self.query.clone(
+./django/db/models/sql/compiler.py:1722:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
+./django/db/models/sql/compiler.py:1821:61   - Unknown word (munge)      -- results from other tables, munge the "where"
+./django/db/models/sql/compiler.py:1850:38   - Unknown word (idents)     -- Either we're using the idents in multiple update queries
 ./django/db/models/sql/compiler.py:448:36    - Unknown word (orderbycol) -- col_name = f"__orderbycol{order_by_idx}"
-./django/db/models/sql/compiler.py:770:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
+./django/db/models/sql/compiler.py:774:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
 ./django/db/models/sql/datastructures.py:183:35    - Unknown word (somecond)   -- SELECT * FROM "foo" WHERE somecond
 ./django/db/models/sql/datastructures.py:66:24     - Unknown word (nullabled)  -- # Is this join nullabled?
-./django/db/models/sql/query.py:1346:28   - Unknown word (unreffing)     -- is responsible for unreffing the joins used.
-./django/db/models/sql/query.py:2002:29   - Unknown word (Pythonic)      -- as it makes it more Pythonic to read and write. When
-./django/db/models/sql/query.py:2543:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
-./django/db/models/sql/query.py:268:58    - Unknown word (unsubstituted) -- params() to see the unsubstituted string).
-./django/db/models/sql/query.py:655:58    - Unknown word (Unref)         -- unused in the rhs query. Unref it so that it
-./django/db/models/sql/query.py:657:19    - Unknown word (unref)         -- # unref the alias so that join
+./django/db/models/sql/query.py:1351:28   - Unknown word (unreffing)     -- is responsible for unreffing the joins used.
+./django/db/models/sql/query.py:2009:29   - Unknown word (Pythonic)      -- as it makes it more Pythonic to read and write. When
+./django/db/models/sql/query.py:2550:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+./django/db/models/sql/query.py:270:58    - Unknown word (unsubstituted) -- params() to see the unsubstituted string).
+./django/db/models/sql/query.py:658:58    - Unknown word (Unref)         -- unused in the rhs query. Unref it so that it
+./django/db/models/sql/query.py:660:19    - Unknown word (unref)         -- # unref the alias so that join
 ./django/db/models/sql/where.py:176:38    - Unknown word (Childs)     -- empty subtree_parents). Childs must be either (Constraint
 ./django/db/transaction.py:161:17    - Unknown word (reentrancy) -- This allows reentrancy even if the same AtomicWrappe
 ./django/db/utils.py:121:26    - Unknown word (ispkg)      -- for _, name, ispkg in pkgutil.iter_modules
@@ -620,10 +621,10 @@ Lines:
 ./django/template/library.py:43:40     - Unknown word (somefunc)   -- register.tag('somename', somefunc)
 ./django/template/loader_tags.py:310:49    - Unknown word (BAZZ)       -- some_include" with bar="BAZZ!" baz="BING!" %}
 ./django/test/client.py:429:49    - Unknown word (doseq)      -- STRING": urlencode(data, doseq=True),
-./django/test/runner.py:183:16    - Unknown word (unpicklable) -- def _print_unpicklable_subtest(self, test,
-./django/test/runner.py:33:12     - Unknown word (ipdb)       -- import ipdb as pdb
-./django/test/runner.py:345:36    - Unknown word (unpythonic)  -- implementation matches the unpythonic coding style of unittest
-./django/test/runner.py:38:12     - Unknown word (tblib)      -- import tblib.pickling_support
+./django/test/runner.py:188:16    - Unknown word (unpicklable) -- def _print_unpicklable_subtest(self, test,
+./django/test/runner.py:350:36    - Unknown word (unpythonic)  -- implementation matches the unpythonic coding style of unittest
+./django/test/runner.py:38:12     - Unknown word (ipdb)       -- import ipdb as pdb
+./django/test/runner.py:43:12     - Unknown word (tblib)      -- import tblib.pickling_support
 ./django/test/signals.py:223:54    - Unknown word (modwsgi)    -- auth.handlers import modwsgi
 ./django/test/testcases.py:949:25    - Unknown word (ndiff)      -- difflib.ndiff(
 ./django/urls/base.py:17:16     - Unknown word (Lconfs)     -- # Overridden URLconfs for each thread are
@@ -1069,8 +1070,8 @@ Lines:
 ./tests/check_framework/tests.py:275:36    - Unknown word (mywarningcheck) -- Warning("Warning", id="mywarningcheck.E001")]
 ./tests/constraints/models.py:85:23     - Unknown word (sheld)      -- name="sheld_init_immediate_uniq
 ./tests/constraints/tests.py:593:33    - Unknown word (opclass)    -- name="test_func_opclass",
-./tests/contenttypes_tests/test_models.py:273:19    - Unknown word (Multidb)    -- class ContentTypesMultidbTests(TestCase):
-./tests/contenttypes_tests/test_models.py:276:14    - Unknown word (multidb)    -- def test_multidb(self):
+./tests/contenttypes_tests/test_models.py:293:19    - Unknown word (Multidb)    -- class ContentTypesMultidbTests(TestCase):
+./tests/contenttypes_tests/test_models.py:296:14    - Unknown word (multidb)    -- def test_multidb(self):
 ./tests/csrf_tests/tests.py:41:16     - Unknown word (lccccccc)   -- TEST_SECRET = "lcccccccX2kcccccccY2jcccccccssIC
 ./tests/csrf_tests/tests.py:41:26     - Unknown word (kccccccc)   -- SECRET = "lcccccccX2kcccccccY2jcccccccssIC"
 ./tests/csrf_tests/tests.py:41:36     - Unknown word (jcccccccss) -- lcccccccX2kcccccccY2jcccccccssIC"
@@ -1104,8 +1105,8 @@ Lines:
 ./tests/db_functions/text/test_substr.py:25:51     - Unknown word (rhond)      -- name"), ["smithj", "rhond"], lambda a: a.alias
 ./tests/db_functions/window/test_validation.py:36:35     - Unknown word (ntile)      -- negative_num_buckets_ntile(self):
 ./tests/db_typecasts/tests.py:77:17     - Unknown word (inpt)       -- for inpt, expected in v:
-./tests/db_utils/tests.py:76:14     - Unknown word (reraising)  -- def test_reraising_backend_specific_database
-./tests/db_utils/tests.py:84:53     - Unknown word (pgerror)    -- exception.__cause__.pgerror)
+./tests/db_utils/tests.py:56:14     - Unknown word (reraising)  -- def test_reraising_backend_specific_database
+./tests/db_utils/tests.py:64:53     - Unknown word (pgerror)    -- exception.__cause__.pgerror)
 ./tests/dbshell/test_mysql.py:158:23    - Unknown word (sslca)                  -- "--ssl-ca=sslca",
 ./tests/dbshell/test_mysql.py:26:14     - Unknown word (somedbname) -- "somedbname",
 ./tests/dbshell/test_mysql.py:52:14     - Unknown word (optiondbname) -- "optiondbname",
@@ -1152,15 +1153,15 @@ Lines:
 ./tests/fixtures/tests.py:1314:34   - Unknown word (circularb)  -- {"model": "fixtures.circularb", "pk": 1, '
 ./tests/fixtures/tests.py:308:25    - Unknown word (Stephane)   -- "<Visa: Stephane Grappelli Can add user
 ./tests/fixtures/tests.py:308:34    - Unknown word (Grappelli)  -- "<Visa: Stephane Grappelli Can add user>",
-./tests/fixtures_regress/tests.py:213:50    - Unknown word (ture)       -- installing fixture 'bad_fix.ture1': unkn is not a known
-./tests/fixtures_regress/tests.py:213:58    - Unknown word (unkn)       -- fixture 'bad_fix.ture1': unkn is not a known "
-./tests/fixtures_regress/tests.py:223:56    - Unknown word (unexistent) -- RIALIZATION_MODULES={"unkn": "unexistent.path"})
-./tests/fixtures_regress/tests.py:224:14    - Unknown word (unimportable) -- def test_unimportable_serializer(self):
-./tests/fixtures_regress/tests.py:406:40    - Unknown word (Dromaius)     -- "latin_name": "Dromaius novaehollandiae",
-./tests/fixtures_regress/tests.py:406:49    - Unknown word (novaehollandiae) -- latin_name": "Dromaius novaehollandiae",
-./tests/fixtures_regress/tests.py:537:16    - Unknown word (mtoself)         -- "m2mtoself.json",
-./tests/fixtures_regress/tests.py:787:50    - Unknown word (Egan)            -- Permutation City by Greg Egan (available at Angus
-./tests/fixtures_regress/tests.py:85:41     - Unknown word (anatinus)   -- name="Ornithorhynchus anatinus",
+./tests/fixtures_regress/tests.py:214:50    - Unknown word (ture)       -- installing fixture 'bad_fix.ture1': unkn is not a known
+./tests/fixtures_regress/tests.py:214:58    - Unknown word (unkn)       -- fixture 'bad_fix.ture1': unkn is not a known "
+./tests/fixtures_regress/tests.py:224:56    - Unknown word (unexistent) -- RIALIZATION_MODULES={"unkn": "unexistent.path"})
+./tests/fixtures_regress/tests.py:225:14    - Unknown word (unimportable) -- def test_unimportable_serializer(self):
+./tests/fixtures_regress/tests.py:407:40    - Unknown word (Dromaius)     -- "latin_name": "Dromaius novaehollandiae",
+./tests/fixtures_regress/tests.py:407:49    - Unknown word (novaehollandiae) -- latin_name": "Dromaius novaehollandiae",
+./tests/fixtures_regress/tests.py:538:16    - Unknown word (mtoself)         -- "m2mtoself.json",
+./tests/fixtures_regress/tests.py:788:50    - Unknown word (Egan)            -- Permutation City by Greg Egan (available at Angus
+./tests/fixtures_regress/tests.py:86:41     - Unknown word (anatinus)   -- name="Ornithorhynchus anatinus",
 ./tests/flatpages_tests/test_csrf.py:49:19     - Unknown word (sekrit)     -- url="/sekrit/",
 ./tests/flatpages_tests/test_csrf.py:50:20     - Unknown word (Sekrit)     -- title="Sekrit Flatpage",
 ./tests/flatpages_tests/test_csrf.py:89:76     - Unknown word (krit)       -- test@example.com", "s3krit")
@@ -1282,8 +1283,8 @@ Lines:
 ./tests/gis_tests/gdal_tests/test_raster.py:70:47     - Unknown word (gtvalues)   -- memory rasters and change gtvalues
 ./tests/gis_tests/gdal_tests/test_raster.py:71:9      - Unknown word (rsmem)      -- rsmem = GDALRaster(JSON_RASTER
 ./tests/gis_tests/gdal_tests/test_raster.py:768:34    - Unknown word (loadtxt)      -- assert_array = numpy.loadtxt(
-./tests/gis_tests/gdal_tests/test_raster.py:836:39    - Unknown word (arange)       -- bandmem.data(), numpy.arange(100).reshape(10, 10
-./tests/gis_tests/gdal_tests/test_raster.py:894:9     - Unknown word (rsmemjson)    -- rsmemjson = GDALRaster(JSON_RASTER
+./tests/gis_tests/gdal_tests/test_raster.py:841:39    - Unknown word (arange)       -- bandmem.data(), numpy.arange(100).reshape(10, 10
+./tests/gis_tests/gdal_tests/test_raster.py:899:9     - Unknown word (rsmemjson)    -- rsmemjson = GDALRaster(JSON_RASTER
 ./tests/gis_tests/gdal_tests/test_srs.py:171:18    - Unknown word (NZGD)       -- 'PROJCS["NZGD49 / Karamea Circuit
 ./tests/gis_tests/gdal_tests/test_srs.py:196:6     - Unknown word (OOJCS)      -- 'OOJCS["NAD83 / Texas South
 ./tests/gis_tests/gdal_tests/test_srs.py:243:15    - Unknown word (towgs)      -- "+towgs84=0,0,0,0,0,0,0",
@@ -1777,9 +1778,9 @@ Lines:
 ./tests/responses/tests.py:154:19    - Unknown word (textiowrapper) -- def test_wrap_textiowrapper(self):
 ./tests/responses/tests.py:32:38     - Unknown word (qwer)       -- writelines(["asdf\n", "qwer\n"])
 ./tests/responses/tests.py:84:34     - Unknown word (J'attendrai) -- HttpResponse(status="J'attendrai")
-./tests/runtests.py:124:9     - Unknown word (subdirs)    -- subdirs_to_skip = SUBDIRS_TO
-./tests/runtests.py:322:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
-./tests/runtests.py:75:1      - Unknown word (SUBDIRS)    -- SUBDIRS_TO_SKIP = {
+./tests/runtests.py:126:9     - Unknown word (subdirs)    -- subdirs_to_skip = SUBDIRS_TO
+./tests/runtests.py:324:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
+./tests/runtests.py:77:1      - Unknown word (SUBDIRS)    -- SUBDIRS_TO_SKIP = {
 ./tests/schema/models.py:156:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
 ./tests/schema/tests.py:1835:22   - Unknown word (tagm)       -- columns["tagm2mtest_id"][0],
 ./tests/schema/tests.py:1835:27   - Unknown word (mtest)      -- columns["tagm2mtest_id"][0],
@@ -1939,7 +1940,7 @@ Lines:
 ./tests/test_client_regress/tests.py:1511:22   - Unknown word (собака)         -- text = "dog: собака"
 ./tests/test_client_regress/tests.py:666:14    - Unknown word (noerror)    -- def test_noerror_field(self):
 ./tests/test_client_regress/views.py:56:38     - Unknown word (unescapes)  -- the test framework unescapes the %20 before passing
-./tests/test_runner/test_discover_runner.py:363:13    - Unknown word (dups)       -- dups = runner.build_suite
+./tests/test_runner/test_discover_runner.py:373:13    - Unknown word (dups)       -- dups = runner.build_suite
 ./tests/test_runner/tests.py:361:17    - Unknown word (sigs)       -- ordered_sigs = [sig for sig, value
 ./tests/test_runner_apps/sample/tests_sample.py:20:11     - Unknown word (Zimple)     -- class TestZimpleTestCase(SimpleTestCase
 ./tests/test_utils/test_simpletestcase.py:72:30     - Unknown word (teardwn)    -- pre-setup and post-teardwn are called.
