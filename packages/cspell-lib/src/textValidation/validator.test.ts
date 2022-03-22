@@ -170,7 +170,7 @@ describe('Validator', () => {
     const isFlaggedTrue = { isFlagged: true };
     const isFlaggedFalse = { isFlagged: false };
 
-    // cspell:ignore grappes
+    // cspell:ignore grappes colour
     test.each`
         text              | expected
         ${'hello'}        | ${[]}

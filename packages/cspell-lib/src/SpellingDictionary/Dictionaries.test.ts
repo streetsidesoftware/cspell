@@ -68,7 +68,7 @@ describe('Validate getDictionary', () => {
         expect(dict.has(word, opts)).toBe(expected);
     });
 
-    // cspell:ignore zeromq hte
+    // cspell:ignore zeromq hte colour
     test.each`
         word        | expected
         ${'zero'}   | ${{ found: false, forbidden: false, noSuggest: false }}

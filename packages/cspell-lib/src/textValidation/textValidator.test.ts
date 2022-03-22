@@ -250,6 +250,7 @@ describe('Validate textValidator functions', () => {
         expect(words.join(' ')).toBe('Test the line breaks from begin to end eol');
     });
 
+    // cspell:ignore colour
     test.each`
         text                            | ignoreWords   | flagWords        | expected
         ${'red'}                        | ${[]}         | ${undefined}     | ${[]}
