@@ -46,7 +46,7 @@ jobs:
       - run: npm -v
 
       - name: Restore CSpell cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: cspell-cache-${{ runner.os }}-test-${{ hashFiles('**/*.ts', '**/*.md') }}
           path: |
