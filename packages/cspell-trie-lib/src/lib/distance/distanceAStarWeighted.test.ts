@@ -34,7 +34,7 @@ describe('distanceAStar', () => {
         expect(formatExResult(distanceAStarWeightedEx(wordB, wordA, createWeightMap()))).toMatchSnapshot();
     });
 
-    // cspell:ignore aeiou
+    // cspell:ignore aeiou aeroplane
     test.each`
         wordA         | wordB                                    | map                                                  | expected
         ${''}         | ${''}                                    | ${undefined}                                         | ${0}
