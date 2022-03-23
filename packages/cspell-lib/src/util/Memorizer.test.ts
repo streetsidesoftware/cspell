@@ -1,4 +1,4 @@
-import { memorizer, memorizeLastCall, callOnce } from './Memorizer';
+import { memorizer, memorizeLastCall, callOnce, memorizerAll } from './Memorizer';
 
 describe('Validate Memorizer', () => {
     test('the memorizer works', () => {
@@ -128,5 +128,26 @@ describe('callOnce', () => {
         expect(fn()).toBe(value);
         expect(fn()).toBe(value);
         expect(calls).toBe(1);
+    });
+});
+
+describe('memorizerAll', () => {
+    it('memorizerAll', () => {
+        function echo(...a: (string | number | undefined)[]): (string | number | undefined)[] {
+            return a;
+        }
+
+        const mock = jest.fn(echo);
+        const fn = memorizerAll(mock);
+        expect(fn('a')).toEqual(['a']);
+        expect(fn('b')).toEqual(['b']);
+        expect(fn('a', 'b')).toEqual(['a', 'b']);
+        expect(fn('a', 'b')).toEqual(['a', 'b']);
+        expect(fn(undefined)).toEqual([undefined]);
+        expect(fn('b')).toEqual(['b']);
+        expect(fn(undefined)).toEqual([undefined]);
+        expect(fn('a')).toEqual(['a']);
+        expect(mock).toHaveBeenCalledTimes(4);
+        expect(mock).toHaveBeenLastCalledWith(undefined);
     });
 });
