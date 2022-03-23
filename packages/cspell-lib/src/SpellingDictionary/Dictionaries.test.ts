@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { getDefaultSettings, loadConfig } from '../Settings';
+import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection';
 import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
 import { __testing__ } from './DictionaryLoader';
@@ -191,7 +192,8 @@ describe('Validate Refresh', () => {
             di({ name: 'not_found', path: tempDictPathNotFound }, __filename),
         ]);
         const toLoad = ['node', 'html', 'css', 'not_found', 'temp'];
-        const defsToLoad = filterDictDefsToLoad(toLoad, defs);
+        const col = createDictionaryReferenceCollection(toLoad);
+        const defsToLoad = filterDictDefsToLoad(col, defs);
         expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp', 'not_found']);
         const dicts = await Promise.all(Dictionaries.loadDictionaryDefs(defsToLoad));
 
@@ -237,7 +239,8 @@ describe('Validate Refresh', () => {
             di({ name: 'temp', path: tempDictPath }, __filename),
         ]);
         const toLoad = ['node', 'html', 'css', 'temp'];
-        const defsToLoad = filterDictDefsToLoad(toLoad, defs);
+        const col = createDictionaryReferenceCollection(toLoad);
+        const defsToLoad = filterDictDefsToLoad(col, defs);
         expect(defsToLoad.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
         const dicts = Dictionaries.loadDictionaryDefsSync(defsToLoad);
 

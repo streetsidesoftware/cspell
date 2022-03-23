@@ -4,6 +4,7 @@ import * as fsp from 'fs-extra';
 import * as os from 'os';
 import * as path from 'path';
 import { getDefaultSettings } from './DefaultSettings';
+import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection';
 import * as DictSettings from './DictionarySettings';
 
 const defaultSettings = getDefaultSettings();
@@ -12,7 +13,7 @@ const oc = expect.objectContaining;
 describe('Validate DictionarySettings', () => {
     test('expects default to not be empty', () => {
         const mapDefs = DictSettings.filterDictDefsToLoad(
-            ['php', 'wordsEn', 'unknown', 'en_us'],
+            createRefCol(['php', 'wordsEn', 'unknown', 'en_us']),
             defaultSettings.dictionaryDefinitions!
         );
         const files = mapDefs.map((def) => def.name!);
@@ -34,7 +35,7 @@ describe('Validate DictionarySettings', () => {
             'en_us',
         ];
         const expected = ['php', 'en_us'].sort();
-        const mapDefs = DictSettings.filterDictDefsToLoad(ids, defaultSettings.dictionaryDefinitions!);
+        const mapDefs = DictSettings.filterDictDefsToLoad(createRefCol(ids), defaultSettings.dictionaryDefinitions!);
         const dicts = mapDefs.map((def) => def.name!).sort();
         expect(dicts).toEqual(expected);
     });
@@ -45,7 +46,7 @@ describe('Validate DictionarySettings', () => {
         ${'!php, php, !!php, !!cpp'} | ${'cpp, php'}
         ${'!!!!!!!!!!cpp, !cpp'}     | ${'cpp'}
     `('validate dictionary exclusions $ids', ({ ids, expected }: { ids: string; expected: string }) => {
-        const dictIds = ids.split(',');
+        const dictIds = createRefCol(ids.split(','));
         const expectedIds = expected.split(',').map((id) => id.trim());
         const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
         const dicts = mapDefs.map((def) => def.name!).sort();
@@ -54,7 +55,7 @@ describe('Validate DictionarySettings', () => {
 
     test('tests that the files exist', () => {
         const defaultDicts = defaultSettings.dictionaryDefinitions!;
-        const dictIds = defaultDicts.map((def) => def.name);
+        const dictIds = createRefCol(defaultDicts.map((def) => def.name));
         const mapDefs = DictSettings.filterDictDefsToLoad(dictIds, defaultSettings.dictionaryDefinitions!);
         const access = mapDefs.map((def) => def.path!).map((path) => fsp.access(path));
         expect(mapDefs.length).toBeGreaterThan(0);
