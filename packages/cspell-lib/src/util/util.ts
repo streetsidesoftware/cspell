@@ -92,3 +92,19 @@ export function isArrayEqual<K>(a: K[], b: K[]): boolean {
     }
     return isMatch;
 }
+
+/**
+ * Determine if two sets intersect
+ * @param a - first Set
+ * @param b - second Set
+ * @returns true iff any element of `a` is in `b`
+ */
+export function doSetsIntersect<T>(a: Set<T>, b: Set<T>): boolean {
+    function compare(a: Set<T>, b: Set<T>) {
+        for (const item of a) {
+            if (b.has(item)) return true;
+        }
+        return false;
+    }
+    return a.size <= b.size ? compare(a, b) : compare(b, a);
+}

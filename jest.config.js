@@ -3,7 +3,7 @@ module.exports = {
     transform: {
         '^.+\\.tsx?$': 'ts-jest',
     },
-    testRegex: '(/__tests__/.*|(\\.|/)(test|spec|perf))\\.[jt]sx?$',
+    testRegex: '(/__tests__/.*|\\.(test|spec|perf))\\.[jt]sx?$',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     coverageReporters: ['html', 'json', ['lcov', { projectRoot: __dirname }], 'text'],
     // "coverageProvider": "v8",

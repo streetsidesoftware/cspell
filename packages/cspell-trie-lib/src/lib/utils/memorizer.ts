@@ -1,13 +1,9 @@
-export function memorizer<T, K>(fn: (...p: [...K[]]) => T): (...p: [...K[]]) => T;
-export function memorizer<T, K0, K1, K2, K3>(fn: (...p: [K0, K1, K2, K3]) => T): (...p: [K0, K1, K2, K3]) => T;
-export function memorizer<T, K0, K1, K2>(fn: (...p: [K0, K1, K2]) => T): (...p: [K0, K1, K2]) => T;
-export function memorizer<T, K0, K1>(fn: (...p: [K0, K1]) => T): (...p: [K0, K1]) => T;
-export function memorizer<T, K0>(fn: (...p: [K0]) => T): (...p: [K0]) => T;
-export function memorizer<T, K>(fn: (...p: [...K[]]) => T): (...p: [...K[]]) => T {
-    type N = M<T, K>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function memorizer<K extends any[], T>(fn: (...p: K) => T): (...p: K) => T {
+    type N = M<K, T>;
     const r: N = {};
 
-    function find(p: [...K[]]): N | undefined {
+    function find(p: K): N | undefined {
         let n: N | undefined = r;
         for (const k of p) {
             if (!n) break;
@@ -16,7 +12,7 @@ export function memorizer<T, K>(fn: (...p: [...K[]]) => T): (...p: [...K[]]) => 
         return n;
     }
 
-    function set(p: [...K[]], v: T) {
+    function set(p: K, v: T) {
         let n = r;
         for (const k of p) {
             const c = n.c?.get(k);
@@ -32,7 +28,7 @@ export function memorizer<T, K>(fn: (...p: [...K[]]) => T): (...p: [...K[]]) => 
         n.v = v;
     }
 
-    return (...p: [...K[]]): T => {
+    return (...p: K): T => {
         const f = find(p);
         if (f && 'v' in f) {
             return f.v;
@@ -43,7 +39,7 @@ export function memorizer<T, K>(fn: (...p: [...K[]]) => T): (...p: [...K[]]) => 
     };
 }
 
-interface M<T, K> {
-    v?: T;
-    c?: Map<K, M<T, K>>;
+interface M<Key, Value> {
+    v?: Value;
+    c?: Map<Key, M<Key, Value>>;
 }

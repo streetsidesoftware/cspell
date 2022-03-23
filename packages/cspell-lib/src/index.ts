@@ -10,7 +10,7 @@ export * from '@cspell/cspell-types';
 export * from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { getLanguagesForExt } from './LanguageIds';
-export { createTextDocument } from './Models/TextDocument';
+export { createTextDocument, updateTextDocument } from './Models/TextDocument';
 export type { CreateTextDocumentParams, TextDocument, TextDocumentLine } from './Models/TextDocument';
 export * from './Settings';
 export { defaultFileName as defaultSettingsFilename } from './Settings';

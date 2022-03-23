@@ -1,7 +1,7 @@
 // cspell:ignore TSESTree
 import type { TSESTree } from '@typescript-eslint/types';
 import assert from 'assert';
-import { createTextDocument, CSpellSettings, DocumentValidator, ValidationIssue } from 'cspell-lib';
+import { createTextDocument, CSpellSettings, DocumentValidator, ValidationIssue, TextDocument } from 'cspell-lib';
 import type { Rule } from 'eslint';
 // eslint-disable-next-line node/no-missing-import
 import type { Comment, Identifier, Literal, Node, TemplateElement, ImportSpecifier } from 'estree';
@@ -60,8 +60,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
     const importedIdentifiers = new Set<string>();
     isDebugMode = options.debugMode || false;
     isDebugMode && logContext(context);
-    const doc = createTextDocument({ uri: context.getFilename(), content: context.getSourceCode().getText() });
-    const validator = new DocumentValidator(doc, options, defaultSettings);
+    const validator = getDocValidator(context);
     validator.prepareSync();
 
     function checkLiteral(node: Literal & Rule.NodeParentExtension) {
@@ -369,3 +368,40 @@ export const configs = {
         },
     },
 };
+
+interface CachedDoc {
+    filename: string;
+    doc: TextDocument;
+}
+
+const cache: { lastDoc: CachedDoc | undefined } = { lastDoc: undefined };
+
+const docValCache = new WeakMap<TextDocument, DocumentValidator>();
+
+function getDocValidator(context: Rule.RuleContext): DocumentValidator {
+    const text = context.getSourceCode().getText();
+    const doc = getTextDocument(context.getFilename(), text);
+    const cachedValidator = docValCache.get(doc);
+    if (cachedValidator) {
+        cachedValidator.updateDocumentText(text);
+        return cachedValidator;
+    }
+
+    const options = normalizeOptions(context.options[0]);
+    isDebugMode = options.debugMode || false;
+    isDebugMode && logContext(context);
+    const validator = new DocumentValidator(doc, options, defaultSettings);
+    docValCache.set(doc, validator);
+    return validator;
+}
+
+function getTextDocument(filename: string, content: string): TextDocument {
+    if (cache.lastDoc?.filename === filename) {
+        return cache.lastDoc.doc;
+    }
+
+    const doc = createTextDocument({ uri: filename, content });
+    // console.error(`CreateTextDocument: ${doc.uri}`);
+    cache.lastDoc = { filename, doc };
+    return doc;
+}

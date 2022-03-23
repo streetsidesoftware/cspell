@@ -61,4 +61,14 @@ describe('Validate util', () => {
     `('isArrayEqual $a $b', ({ a, b, expected }) => {
         expect(util.isArrayEqual(a, b)).toBe(expected);
     });
+
+    test.each`
+        a              | b              | expected
+        ${[]}          | ${[]}          | ${false}
+        ${[1, 2]}      | ${['1']}       | ${false}
+        ${['1', 2, 4]} | ${['1']}       | ${true}
+        ${['1']}       | ${['1', 2, 4]} | ${true}
+    `('doSetsIntersect $a vs $b', ({ a, b, expected }) => {
+        expect(util.doSetsIntersect(new Set(a), new Set(b))).toBe(expected);
+    });
 });

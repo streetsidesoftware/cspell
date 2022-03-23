@@ -1,6 +1,7 @@
 import { getLanguagesForBasename } from '../LanguageIds';
 import * as Uri from './Uri';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
+import assert from 'assert';
 
 export type DocumentUri = Uri.Uri;
 
@@ -8,6 +9,11 @@ export interface Position {
     line: number;
     character: number;
 }
+
+/**
+ * Range offset tuple.
+ */
+export type SimpleRange = [start: number, end: number];
 
 export interface TextDocumentLine {
     readonly text: string;
@@ -55,13 +61,21 @@ class TextDocumentImpl implements TextDocument {
 
     constructor(
         readonly uri: DocumentUri,
-        readonly text: string,
+        text: string,
         readonly languageId: string | string[],
         readonly locale: string | undefined,
-        readonly version: number
+        version: number
     ) {
         const primaryLanguageId = typeof languageId === 'string' ? languageId : languageId[0] || 'plaintext';
         this.vsTextDoc = VsTextDocument.create(uri.toString(), primaryLanguageId, version, text);
+    }
+
+    get version(): number {
+        return this.vsTextDoc.version;
+    }
+
+    get text(): string {
+        return this.vsTextDoc.getText();
     }
 
     positionAt(offset: number): Position {
@@ -90,6 +104,27 @@ class TextDocumentImpl implements TextDocument {
             position,
         };
     }
+
+    /**
+     * Apply edits to the text.
+     * Note: the edits are applied one after the other.
+     * @param edits - changes to the text
+     * @param version - optional version to use.
+     * @returns this
+     */
+    update(edits: TextDocumentContentChangeEvent[], version?: number): this {
+        version = version ?? this.version + 1;
+        for (const edit of edits) {
+            const vsEdit = edit.range
+                ? {
+                      range: { start: this.positionAt(edit.range[0]), end: this.positionAt(edit.range[1]) },
+                      text: edit.text,
+                  }
+                : edit;
+            VsTextDocument.update(this.vsTextDoc, [vsEdit], version);
+        }
+        return this;
+    }
 }
 
 export interface CreateTextDocumentParams {
@@ -98,6 +133,11 @@ export interface CreateTextDocumentParams {
     languageId?: string | string[] | undefined;
     locale?: string | undefined;
     version?: number | undefined;
+}
+
+export interface TextDocumentContentChangeEvent {
+    range?: SimpleRange;
+    text: string;
 }
 
 export function createTextDocument({
@@ -112,4 +152,13 @@ export function createTextDocument({
     languageId = languageId ?? getLanguagesForBasename(Uri.basename(uri));
     languageId = languageId.length === 0 ? 'text' : languageId;
     return new TextDocumentImpl(uri, content, languageId, locale, version);
+}
+
+export function updateTextDocument(
+    doc: TextDocument,
+    edits: TextDocumentContentChangeEvent[],
+    version?: number
+): TextDocument {
+    assert(doc instanceof TextDocumentImpl, 'Unknown TextDocument type');
+    return doc.update(edits, version);
 }

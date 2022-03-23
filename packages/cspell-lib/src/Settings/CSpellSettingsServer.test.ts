@@ -27,7 +27,6 @@ describe('Validate CSpellSettingsServer', () => {
                 name: 'Left|Right',
                 id: '|',
                 enabledLanguageIds: [],
-                languageSettings: [],
                 source: { name: 'Left|Right', sources: [left, right] },
             })
         );
@@ -42,7 +41,6 @@ describe('Validate CSpellSettingsServer', () => {
                 name: '|enabledName',
                 id: 'left|enabledId',
                 enabledLanguageIds: [],
-                languageSettings: [],
                 source: { name: 'left|enabledName', sources: [csi(left), csi(enabled)] },
             })
         );
@@ -59,7 +57,6 @@ describe('Validate CSpellSettingsServer', () => {
                 name: '|',
                 id: [left.id, right.id].join('|'),
                 enabledLanguageIds: [],
-                languageSettings: [],
                 source: { name: 'left|right', sources: [left, right] },
             })
         );
@@ -74,7 +71,6 @@ describe('Validate CSpellSettingsServer', () => {
                 name: '|',
                 id: '|',
                 enabledLanguageIds: [],
-                languageSettings: [],
                 source: { name: 'left|right', sources: [csi(a), csi(b)] },
             })
         );
@@ -106,7 +102,6 @@ describe('Validate CSpellSettingsServer', () => {
                 name: '|',
                 id: [left.id, right.id].join('|'),
                 enabledLanguageIds: [],
-                languageSettings: [],
                 files: left.files?.concat(right.files || []),
                 ignorePaths: left.ignorePaths?.concat(right.ignorePaths || []),
                 overrides: left.overrides?.concat(right.overrides || []),
@@ -144,7 +139,6 @@ describe('Validate CSpellSettingsServer', () => {
                 id: [left.id, right.id].join('|'),
                 version: right.version,
                 enabledLanguageIds: [],
-                languageSettings: [],
                 files: left.files?.concat(right.files || []),
                 ignorePaths: right.ignorePaths,
                 overrides: right.overrides,

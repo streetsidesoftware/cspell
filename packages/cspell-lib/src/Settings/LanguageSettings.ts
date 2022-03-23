@@ -1,4 +1,13 @@
-import type { LanguageSetting, CSpellUserSettings, LocaleId, LanguageId, BaseSetting } from '@cspell/cspell-types';
+import type {
+    BaseSetting,
+    CSpellUserSettings,
+    LanguageId,
+    LanguageSetting,
+    LocaleId,
+    Settings,
+} from '@cspell/cspell-types';
+import { memorizerAll } from '../util/Memorizer';
+import { doSetsIntersect } from '../util/util';
 import * as SpellSettings from './CSpellSettingsServer';
 
 // LanguageSettings are a collection of LanguageSetting.  They are applied in order, matching against the languageId.
@@ -13,69 +22,79 @@ export function getDefaultLanguageSettings(): LanguageSettings {
     return defaultLanguageSettings;
 }
 
-function localesToList(locales: string | string[]): string[] {
-    locales = typeof locales !== 'string' ? locales.join(',') : locales;
+function localesToList(locales: string): string[] {
     return stringToList(locales.replace(/\s+/g, ','));
 }
 
-function stringToList(sList: string | string[]): string[] {
-    if (typeof sList !== 'string') {
-        sList = sList.join(',');
-    }
-    sList = sList
+function stringToList(sList: string): string[] {
+    return sList
         .replace(/[|;]/g, ',')
         .split(',')
         .map((s) => s.trim())
         .filter((s) => !!s);
-    return sList;
 }
 
-export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<LanguageId> {
+const _normalizeLanguageId = memorizerAll(__normalizeLanguageId);
+function __normalizeLanguageId(langId: LanguageId): Set<LanguageId> {
     const langIds = stringToList(langId);
     return new Set<LanguageId>(langIds.map((a) => a.toLowerCase()));
 }
 
-function normalizeLanguageIdToString(langId: LanguageId | LanguageId[]): string {
-    return [...normalizeLanguageId(langId)].join(',');
+export function normalizeLanguageId(langId: LanguageId | LanguageId[]): Set<LanguageId> {
+    return _normalizeLanguageId(typeof langId === 'string' ? langId : langId.join(','));
+}
+
+const _normalizeLocale = memorizerAll(__normalizeLocale);
+function __normalizeLocale(locale: LocaleId): Set<LocaleId> {
+    const locales = localesToList(locale);
+    return new Set<LocaleId>(locales.map((locale) => locale.toLowerCase().replace(/[^a-z]/g, '')));
 }
 
 export function normalizeLocale(locale: LocaleId | LocaleId[]): Set<LocaleId> {
-    locale = localesToList(locale);
-    return new Set<LocaleId>(locale.map((locale) => locale.toLowerCase().replace(/[^a-z]/g, '')));
+    locale = typeof locale === 'string' ? locale : locale.join(',');
+    return _normalizeLocale(locale);
 }
 
 export function isLocaleInSet(locale: LocaleId | LocaleId[], setOfLocals: Set<LocaleId>): boolean {
     const locales = normalizeLocale(locale);
-    return [...locales.values()].filter((locale) => setOfLocals.has(locale)).length > 0;
+    return doSetsIntersect(locales, setOfLocals);
 }
 
 export function calcSettingsForLanguage(
     languageSettings: LanguageSettings,
     languageId: LanguageId,
-    locale: LocaleId | LocaleId[]
+    locale: LocaleId
 ): BaseSetting {
     languageId = languageId.toLowerCase();
     const allowedLocals = normalizeLocale(locale);
-    return defaultLanguageSettings
-        .concat(languageSettings)
+    const ls: Settings & { languageId?: LanguageId; locale?: LocaleId } = languageSettings
         .filter((s) => doesLanguageSettingMatchLanguageId(s, languageId))
         .filter((s) => !s.locale || s.locale === '*' || isLocaleInSet(s.locale, allowedLocals))
         .map((langSetting) => {
-            const id = normalizeLanguageIdToString(langSetting.locale || langSetting.languageId || 'language');
-            const { languageId: _languageId, locale: _local, ...s } = { id, ...langSetting };
+            const { languageId: _languageId, locale: _locale, ...s } = langSetting;
             return s;
         })
-        .reduce(
-            (langSetting, setting) => ({
-                ...SpellSettings.mergeSettings(langSetting, setting),
-                languageId,
-                locale,
-            }),
-            {}
-        );
+        .reduce((langSetting, setting) => SpellSettings.mergeSettings(langSetting, setting), {});
+    ls.languageId = languageId;
+    ls.locale = locale;
+    return ls;
 }
 
+const cacheDoesLanguageSettingMatchLanguageId: WeakMap<LanguageSetting, Map<LanguageId, boolean>> = new WeakMap();
+
 function doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: LanguageId): boolean {
+    const r = cacheDoesLanguageSettingMatchLanguageId.get(s) ?? new Map<LanguageId, boolean>();
+    const f = r.get(languageId);
+    if (f !== undefined) {
+        return f;
+    }
+    const v = _doesLanguageSettingMatchLanguageId(s, languageId);
+    r.set(languageId, v);
+    cacheDoesLanguageSettingMatchLanguageId.set(s, r);
+    return v;
+}
+
+function _doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: LanguageId): boolean {
     const languageSettingsLanguageIds = s.languageId;
     if (!languageSettingsLanguageIds || languageSettingsLanguageIds === '*') return true;
     const ids = normalizeLanguageId(languageSettingsLanguageIds);
@@ -87,16 +106,13 @@ function doesLanguageSettingMatchLanguageId(s: LanguageSetting, languageId: Lang
 }
 
 export function calcUserSettingsForLanguage(settings: CSpellUserSettings, languageId: string): CSpellUserSettings {
-    const { languageSettings = [], language: locale = defaultLocale } = settings;
-    const defaults = {
-        allowCompoundWords: settings.allowCompoundWords,
-        enabled: settings.enabled,
-    };
+    const { languageSettings = [], language: locale = defaultLocale, allowCompoundWords, enabled } = settings;
     const langSettings = {
-        ...defaults,
+        allowCompoundWords,
+        enabled,
         ...calcSettingsForLanguage(languageSettings, languageId, locale),
     };
-    return SpellSettings.mergeSettings(settings, langSettings as CSpellUserSettings);
+    return SpellSettings.mergeSettings(settings, langSettings);
 }
 
 export function calcSettingsForLanguageId(

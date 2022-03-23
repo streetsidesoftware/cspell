@@ -376,6 +376,10 @@ interface Position {
     line: number;
     character: number;
 }
+/**
+ * Range offset tuple.
+ */
+declare type SimpleRange$1 = [start: number, end: number];
 interface TextDocumentLine {
     readonly text: string;
     readonly offset: number;
@@ -420,7 +424,12 @@ interface CreateTextDocumentParams {
     locale?: string | undefined;
     version?: number | undefined;
 }
+interface TextDocumentContentChangeEvent {
+    range?: SimpleRange$1;
+    text: string;
+}
 declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
+declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
 
 /**
  * Handles loading of `.pnp.js` and `.pnp.js` files.
@@ -469,7 +478,7 @@ declare type CSpellSettingsWSTO = OptionalOrUndefined<CSpellSettingsWithSourceTr
 declare type CSpellSettingsI = CSpellSettingsInternal;
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI, ...settings: (CSpellSettingsWSTO | CSpellSettingsI)[]): CSpellSettingsI;
+declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI, ...settings: (CSpellSettingsWSTO | CSpellSettingsI | undefined)[]): CSpellSettingsI;
 declare function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST;
 declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI;
 /**
@@ -571,6 +580,7 @@ declare class DocumentValidator {
     private _prepared;
     private _preparations;
     private _preparationTime;
+    private _suggestions;
     /**
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
@@ -580,15 +590,19 @@ declare class DocumentValidator {
     prepareSync(): void;
     prepare(): Promise<void>;
     private _prepareAsync;
+    private _updatePrep;
     /**
      * The amount of time in ms to prepare for validation.
      */
     get prepTime(): number;
     checkText(range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[];
     get document(): TextDocument;
+    updateDocumentText(text: string): void;
     private addPossibleError;
     private catchError;
     private errorCatcherWrapper;
+    private suggest;
+    private genSuggestions;
 }
 declare type Offset = number;
 declare type SimpleRange = readonly [Offset, Offset];
@@ -783,4 +797,4 @@ declare function resolveFile(filename: string, relativeTo: string): ResolveFileR
 declare function clearCachedFiles(): Promise<void>;
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, finalizeSettings, getCachedFileSize, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, validateText };
+export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, finalizeSettings, getCachedFileSize, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

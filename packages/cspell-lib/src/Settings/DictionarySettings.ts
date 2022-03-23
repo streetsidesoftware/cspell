@@ -4,7 +4,6 @@ import type {
     DictionaryDefinitionAugmented,
     DictionaryDefinitionCustom,
     DictionaryFileTypes,
-    DictionaryReference,
     ReplaceMap,
 } from '@cspell/cspell-types';
 import * as path from 'path';
@@ -14,7 +13,7 @@ import {
     DictionaryDefinitionInternal,
     DictionaryDefinitionInternalWithSource,
 } from '../Models/CSpellSettingsInternalDef';
-import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection';
+import { createDictionaryReferenceCollection, DictionaryReferenceCollection } from './DictionaryReferenceCollection';
 import { mapDictionaryInformationToWeightMap, WeightMap } from 'cspell-trie-lib';
 import { DictionaryInformation } from '@cspell/cspell-types';
 import { RequireOptional, UnionFields } from '../util/types';
@@ -30,17 +29,15 @@ export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
  * - Adding `!` to a dictId will remove the dictionary.
  * - Adding `!!` will add it back.
  *
- * @param dictIds - dictionaries desired
+ * @param dictRefCol - dictionaries desired
  * @param defs - dictionary definitions
  * @returns map from dictIds to definitions
  */
 export function filterDictDefsToLoad(
-    dictRefIds: DictionaryReference[],
+    dictRefCol: DictionaryReferenceCollection,
     defs: DictionaryDefinitionInternal[]
 ): DictionaryDefinitionInternal[] {
-    const col = createDictionaryReferenceCollection(dictRefIds);
-    const dictIdSet = new Set(col.enabled());
-    const allActiveDefs = defs.filter(({ name }) => dictIdSet.has(name)).map(fixPath);
+    const allActiveDefs = defs.filter(({ name }) => dictRefCol.isEnabled(name)).map(fixPath);
     return [...new Map(allActiveDefs.map((d) => [d.name, d])).values()];
 }
 
@@ -106,7 +103,7 @@ export function calcDictionaryDefsToLoad(settings: CSpellSettingsInternal): Dict
         if (enabled === undefined) return def;
         return { ...def, noSuggest: enabled };
     });
-    return filterDictDefsToLoad(colDicts.enabled(), modDefs);
+    return filterDictDefsToLoad(colDicts, modDefs);
 }
 
 type DictDef = Partial<

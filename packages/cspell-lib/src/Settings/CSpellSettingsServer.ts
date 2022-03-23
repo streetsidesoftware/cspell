@@ -3,7 +3,6 @@ import type {
     CSpellUserSettings,
     Glob,
     ImportFileRef,
-    LanguageSetting,
     Source,
 } from '@cspell/cspell-types';
 import { GlobMatcher } from 'cspell-glob';
@@ -28,6 +27,10 @@ export const configSettingsFileVersion0_2 = '0.2';
 export const currentSettingsFileVersion = configSettingsFileVersion0_2;
 export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
 
+function _unique<T>(a: T[]): T[] {
+    return [...new Set(a)];
+}
+
 /**
  * Merges two lists and removes duplicates.  Order is NOT preserved.
  */
@@ -39,8 +42,9 @@ function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] 
 function mergeListUnique<T>(left: T[] | undefined, right: T[] | undefined): T[] | undefined {
     if (left === undefined) return right;
     if (right === undefined) return left;
-    const uniqueItems = new Set([...left, ...right]);
-    return [...uniqueItems.keys()];
+    if (!right.length) return left;
+    if (!left.length) return right;
+    return _unique([...left, ...right]);
 }
 
 /**
@@ -91,13 +95,6 @@ function mergeObjects<T>(left?: T, right?: T): T | undefined {
     return { ...left, ...right };
 }
 
-function tagLanguageSettings(tag: string, settings: LanguageSetting[] = []): LanguageSetting[] {
-    return settings.map((s) => ({
-        id: tag + '.' + (s.id || s.locale || s.languageId),
-        ...s,
-    }));
-}
-
 function replaceIfNotEmpty<T>(left: Array<T> = [], right: Array<T> = []) {
     const filtered = right.filter((a) => !!a);
     if (filtered.length) {
@@ -108,9 +105,9 @@ function replaceIfNotEmpty<T>(left: Array<T> = [], right: Array<T> = []) {
 
 export function mergeSettings(
     left: CSpellSettingsWSTO | CSpellSettingsI,
-    ...settings: (CSpellSettingsWSTO | CSpellSettingsI)[]
+    ...settings: (CSpellSettingsWSTO | CSpellSettingsI | undefined)[]
 ): CSpellSettingsI {
-    const rawSettings = settings.reduce<CSpellSettingsI>(merge, toInternalSettings(left));
+    const rawSettings = settings.filter((a) => !!a).reduce<CSpellSettingsI>(merge, toInternalSettings(left));
     return util.clean(rawSettings);
 }
 
@@ -166,10 +163,7 @@ function merge(
         dictionaryDefinitions: mergeListUnique(_left.dictionaryDefinitions, _right.dictionaryDefinitions),
         dictionaries: mergeListUnique(_left.dictionaries, _right.dictionaries),
         noSuggestDictionaries: mergeListUnique(_left.noSuggestDictionaries, _right.noSuggestDictionaries),
-        languageSettings: mergeList(
-            tagLanguageSettings(leftId, _left.languageSettings),
-            tagLanguageSettings(rightId, _right.languageSettings)
-        ),
+        languageSettings: mergeList(_left.languageSettings, _right.languageSettings),
         enabled: _right.enabled !== undefined ? _right.enabled : _left.enabled,
         files: mergeListUnique(_left.files, _right.files),
         ignorePaths: versionBasedMergeList(_left.ignorePaths, _right.ignorePaths, version),

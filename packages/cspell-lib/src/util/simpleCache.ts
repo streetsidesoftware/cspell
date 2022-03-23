@@ -1,7 +1,8 @@
+type Box<T> = { v: T };
 export class SimpleWeakCache<K extends object, T> {
-    private L0 = new WeakMap<K, T>();
-    private L1 = new WeakMap<K, T>();
-    private L2 = new WeakMap<K, T>();
+    private L0 = new WeakMap<K, Box<T>>();
+    private L1 = new WeakMap<K, Box<T>>();
+    private L2 = new WeakMap<K, Box<T>>();
     private sizeL0 = 0;
 
     constructor(readonly size: number) {}
@@ -15,21 +16,24 @@ export class SimpleWeakCache<K extends object, T> {
 
     get(key: K): T | undefined {
         for (const c of this.caches()) {
-            if (c.has(key)) {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const v = c.get(key)!;
+            const entry = c.get(key);
+            if (entry) {
                 if (c !== this.L0) {
-                    this.set(key, v);
+                    this._set(key, entry);
                 }
-                return v;
+                return entry.v;
             }
         }
         return undefined;
     }
 
     set(key: K, value: T) {
+        this._set(key, { v: value });
+    }
+
+    private _set(key: K, entry: Box<T>) {
         if (this.L0.has(key)) {
-            this.L0.set(key, value);
+            this.L0.set(key, entry);
             return this;
         }
 
@@ -38,7 +42,7 @@ export class SimpleWeakCache<K extends object, T> {
         }
 
         this.sizeL0 += 1;
-        this.L0.set(key, value);
+        this.L0.set(key, entry);
     }
 
     private caches() {
@@ -48,7 +52,7 @@ export class SimpleWeakCache<K extends object, T> {
     private rotate() {
         this.L2 = this.L1;
         this.L1 = this.L0;
-        this.L0 = new WeakMap<K, T>();
+        this.L0 = new WeakMap<K, Box<T>>();
         this.sizeL0 = 0;
     }
 }
@@ -77,9 +81,9 @@ export class AutoWeakCache<K extends object, T> extends SimpleWeakCache<K, T> {
  * promoted to L0.
  */
 export class SimpleCache<K, T> {
-    private L0 = new Map<K, T>();
-    private L1 = new Map<K, T>();
-    private L2 = new Map<K, T>();
+    private L0 = new Map<K, Box<T>>();
+    private L1 = new Map<K, Box<T>>();
+    private L2 = new Map<K, Box<T>>();
 
     constructor(readonly size: number) {}
 
@@ -92,21 +96,24 @@ export class SimpleCache<K, T> {
 
     get(key: K): T | undefined {
         for (const c of this.caches()) {
-            if (c.has(key)) {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const v = c.get(key)!;
+            const entry = c.get(key);
+            if (entry) {
                 if (c !== this.L0) {
-                    this.set(key, v);
+                    this._set(key, entry);
                 }
-                return v;
+                return entry.v;
             }
         }
         return undefined;
     }
 
     set(key: K, value: T) {
+        this._set(key, { v: value });
+    }
+
+    private _set(key: K, entry: Box<T>) {
         if (this.L0.has(key)) {
-            this.L0.set(key, value);
+            this.L0.set(key, entry);
             return this;
         }
 
@@ -114,7 +121,7 @@ export class SimpleCache<K, T> {
             this.rotate();
         }
 
-        this.L0.set(key, value);
+        this.L0.set(key, entry);
     }
 
     private caches() {
@@ -122,10 +129,9 @@ export class SimpleCache<K, T> {
     }
 
     private rotate() {
-        this.L2.clear();
         this.L2 = this.L1;
         this.L1 = this.L0;
-        this.L0 = new Map<K, T>();
+        this.L0 = new Map<K, Box<T>>();
     }
 }
 

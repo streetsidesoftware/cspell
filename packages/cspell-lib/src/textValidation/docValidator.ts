@@ -2,12 +2,13 @@ import { opConcatMap, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import { TextDocument } from '../Models/TextDocument';
+import { TextDocument, updateTextDocument } from '../Models/TextDocument';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
 import { toError } from '../util/errors';
 import { callOnce } from '../util/Memorizer';
+import { AutoCache } from '../util/simpleCache';
 import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
@@ -46,6 +47,7 @@ export class DocumentValidator {
     private _prepared: Promise<void> | undefined;
     private _preparations: Preparations | undefined;
     private _preparationTime = -1;
+    private _suggestions = new AutoCache((text: string) => this.genSuggestions(text), 1000);
 
     /**
      * @param doc - Document to validate
@@ -82,7 +84,7 @@ export class DocumentValidator {
 
         this.addPossibleError(localConfig?.__importRef?.error);
 
-        const config = localConfig ? mergeSettings(settings, localConfig) : settings;
+        const config = mergeSettings(settings, localConfig);
         const docSettings = determineTextDocumentSettings(this._document, config);
         const dict = getDictionaryInternalSync(docSettings);
 
@@ -94,6 +96,7 @@ export class DocumentValidator {
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
         this._preparations = {
+            config,
             dictionary: dict,
             docSettings,
             shouldCheck,
@@ -105,6 +108,7 @@ export class DocumentValidator {
 
         this._ready = true;
         this._preparationTime = timer.elapsed();
+        console.error(`prepareSync ${this._preparationTime.toFixed(2)}ms`);
     }
 
     async prepare(): Promise<void> {
@@ -128,11 +132,11 @@ export class DocumentValidator {
             : useSearchForConfig
             ? this.catchError(searchForDocumentConfig(this._document, settings, settings))
             : undefined;
-        const localConfig = await pLocalConfig;
+        const localConfig = (await pLocalConfig) || {};
 
         this.addPossibleError(localConfig?.__importRef?.error);
 
-        const config = localConfig ? mergeSettings(settings, localConfig) : settings;
+        const config = mergeSettings(settings, localConfig);
         const docSettings = determineTextDocumentSettings(this._document, config);
         const dict = await getDictionaryInternal(docSettings);
 
@@ -144,6 +148,7 @@ export class DocumentValidator {
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
         this._preparations = {
+            config,
             dictionary: dict,
             docSettings,
             shouldCheck,
@@ -154,6 +159,32 @@ export class DocumentValidator {
         };
 
         this._ready = true;
+        this._preparationTime = timer.elapsed();
+    }
+
+    private _updatePrep() {
+        assert(this._preparations);
+        const timer = createTimer();
+        const { config } = this._preparations;
+        const docSettings = determineTextDocumentSettings(this._document, config);
+        const dict = getDictionaryInternalSync(docSettings);
+        const shouldCheck = docSettings.enabled ?? true;
+        const finalSettings = finalizeSettings(docSettings);
+        const validateOptions = settingsToValidateOptions(finalSettings);
+        const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
+        const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
+        const lineValidator = lineValidatorFactory(dict, validateOptions);
+
+        this._preparations = {
+            config,
+            dictionary: dict,
+            docSettings,
+            shouldCheck,
+            validateOptions,
+            includeRanges,
+            segmenter,
+            lineValidator,
+        };
         this._preparationTime = timer.elapsed();
     }
 
@@ -188,20 +219,10 @@ export class DocumentValidator {
         if (!this.options.generateSuggestions) {
             return issues;
         }
-        const settings = this._preparations.docSettings;
-        const dict = this._preparations.dictionary;
-        const sugOptions = clean({
-            compoundMethod: 0,
-            numSuggestions: this.options.numSuggestions,
-            includeTies: false,
-            ignoreCase: !(settings.caseSensitive ?? false),
-            timeout: settings.suggestionsTimeout,
-            numChanges: settings.suggestionNumChanges,
-        });
         const withSugs = issues.map((t) => {
             // lazy suggestion calculation.
             const text = t.text;
-            const suggestions = callOnce(() => dict.suggest(text, sugOptions).map((r) => r.word));
+            const suggestions = callOnce(() => this.suggest(text));
             return Object.defineProperty({ ...t }, 'suggestions', { enumerable: true, get: suggestions });
         });
 
@@ -210,6 +231,11 @@ export class DocumentValidator {
 
     get document() {
         return this._document;
+    }
+
+    public updateDocumentText(text: string) {
+        updateTextDocument(this._document, [{ text }]);
+        this._updatePrep();
     }
 
     private addPossibleError(error: Error | undefined | unknown) {
@@ -231,6 +257,25 @@ export class DocumentValidator {
         }
         return undefined;
     }
+
+    private suggest(text: string) {
+        return this._suggestions.get(text);
+    }
+
+    private genSuggestions(text: string): string[] {
+        assert(this._preparations);
+        const settings = this._preparations.docSettings;
+        const dict = this._preparations.dictionary;
+        const sugOptions = clean({
+            compoundMethod: 0,
+            numSuggestions: this.options.numSuggestions,
+            includeTies: false,
+            ignoreCase: !(settings.caseSensitive ?? false),
+            timeout: settings.suggestionsTimeout,
+            numChanges: settings.suggestionNumChanges,
+        });
+        return dict.suggest(text, sugOptions).map((r) => r.word);
+    }
 }
 
 export type Offset = number;
@@ -238,7 +283,10 @@ export type Offset = number;
 export type SimpleRange = readonly [Offset, Offset];
 
 interface Preparations {
+    /** loaded config */
+    config: CSpellSettingsInternal;
     dictionary: SpellingDictionaryCollection;
+    /** configuration after applying in-doc settings */
     docSettings: CSpellSettingsInternal;
     includeRanges: MatchRange[];
     lineValidator: LineValidator;
