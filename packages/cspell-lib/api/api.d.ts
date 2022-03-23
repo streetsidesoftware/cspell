@@ -478,7 +478,7 @@ declare type CSpellSettingsWSTO = OptionalOrUndefined<CSpellSettingsWithSourceTr
 declare type CSpellSettingsI = CSpellSettingsInternal;
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI, ...settings: (CSpellSettingsWSTO | CSpellSettingsI)[]): CSpellSettingsI;
+declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI, ...settings: (CSpellSettingsWSTO | CSpellSettingsI | undefined)[]): CSpellSettingsI;
 declare function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST;
 declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI;
 /**
@@ -580,6 +580,7 @@ declare class DocumentValidator {
     private _prepared;
     private _preparations;
     private _preparationTime;
+    private _suggestions;
     /**
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
@@ -589,15 +590,19 @@ declare class DocumentValidator {
     prepareSync(): void;
     prepare(): Promise<void>;
     private _prepareAsync;
+    private _updatePrep;
     /**
      * The amount of time in ms to prepare for validation.
      */
     get prepTime(): number;
     checkText(range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[];
     get document(): TextDocument;
+    updateDocumentText(text: string): void;
     private addPossibleError;
     private catchError;
     private errorCatcherWrapper;
+    private suggest;
+    private genSuggestions;
 }
 declare type Offset = number;
 declare type SimpleRange = readonly [Offset, Offset];
