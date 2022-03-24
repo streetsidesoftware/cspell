@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.19.3](https://github.com/streetsidesoftware/cspell/compare/v5.19.2...v5.19.3) (2022-03-24)
+
+
+### Bug Fixes
+
+* eslint-plugin improve performance ([#2616](https://github.com/streetsidesoftware/cspell/issues/2616)) ([b1a9bed](https://github.com/streetsidesoftware/cspell/commit/b1a9bede6ccb7dd9b381cd11ea3889577fb1bb45))
+* prepare to publish eslint-plugin ([#2620](https://github.com/streetsidesoftware/cspell/issues/2620)) ([e5495c4](https://github.com/streetsidesoftware/cspell/commit/e5495c4be9734461f37d31155c10fc2075de888c))
+* Update English dictionary to remove British words ([#2612](https://github.com/streetsidesoftware/cspell/issues/2612)) ([5a6f143](https://github.com/streetsidesoftware/cspell/commit/5a6f143565b78b2062f6304c4c35499be35c71a4))
+
+
+
+
+
 ## [5.19.2](https://github.com/streetsidesoftware/cspell/compare/v5.19.1...v5.19.2) (2022-03-14)
 
 
