@@ -1,10 +1,16 @@
-# [WIP] CSpell ESLint Plugin
+# CSpell ESLint Plugin
 
 A spell checker plugin for ESLint based upon CSpell.
 
-## [WIP] - Work In Progress
+## Feedback Welcome
 
-This plugin is still in active development. Due to the nature of how files are parsed, the `cspell` command line tool and this ESLint plugin will give different results. It is recommended that ESLint or `cspell` checks a file, but not both. Use `ignorePaths` setting in `cspell.json` to tell the `cspell` command line tool to ignore files checked by ESLint.
+This plugin is still in active development as part of the CSpell suite of tools and applications.
+
+## In Combination with CSpell
+
+Due to the nature of how files are parsed, the `cspell` command line tool and this ESLint plugin will give different results.
+It is recommended that either ESLint or `cspell` checks a file, but not both. Use `ignorePaths` setting in `cspell.json` to
+tell the `cspell` command line tool to ignore files checked by ESLint.
 
 ## Quick Setup
 

@@ -108,7 +108,7 @@ export class DocumentValidator {
 
         this._ready = true;
         this._preparationTime = timer.elapsed();
-        console.error(`prepareSync ${this._preparationTime.toFixed(2)}ms`);
+        // console.error(`prepareSync ${this._preparationTime.toFixed(2)}ms`);
     }
 
     async prepare(): Promise<void> {
