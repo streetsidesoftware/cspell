@@ -2078,7 +2078,7 @@ Lines:
 ./ext/odbc/php_odbc_includes.h:46:22     - Unknown word (UWORD)      -- define SQLUSMALLINT UWORD
 ./ext/opcache/ZendAccelerator.c:2458:16   - Unknown word (UNLEN)      -- wchar_t uname[UNLEN + 1];
 ./ext/opcache/ZendAccelerator.c:2459:8    - Unknown word (unsize)     -- DWORD unsize = UNLEN;
-./ext/opcache/ZendAccelerator.c:2723:12   - Unknown word (reseted)    -- ZCG(pcre_reseted) = 0;
+./ext/opcache/ZendAccelerator.c:2723:12   - Unknown word (reseted)    -- ZCG(pcre_reseted) = false;
 ./ext/opcache/ZendAccelerator.c:2805:4    - Unknown word (fpmi)       -- "fpmi-fcgi",
 ./ext/opcache/ZendAccelerator.c:2808:4    - Unknown word (uwsgi)      -- "uwsgi",
 ./ext/opcache/ZendAccelerator.c:2809:4    - Unknown word (fuzzer)     -- "fuzzer",
@@ -2425,8 +2425,8 @@ Lines:
 ./ext/opcache/jit/zend_jit_gdb.c:310:11    - Unknown word (framep)     -- uint8_t *framep = p;
 ./ext/opcache/jit/zend_jit_gdb.c:404:9     - Unknown word (DLNE)       -- #define DLNE(op, s) (DB(DW_LNS_extended
 ./ext/opcache/jit/zend_jit_gdb.c:451:28    - Unknown word (initf)      -- typedef void (*zend_gdbjit_initf) (zend_gdbjit_ctx *ctx
-./ext/opcache/jit/zend_jit_helpers.c:1972:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
-./ext/opcache/jit/zend_jit_helpers.c:2053:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
+./ext/opcache/jit/zend_jit_helpers.c:1976:38   - Unknown word (unmangled)  -- ce->name), zend_get_unmangled_property_name(prop-
+./ext/opcache/jit/zend_jit_helpers.c:2057:26   - Unknown word (ISERROR)    -- else if (UNEXPECTED(Z_ISERROR_P(retval))) {
 ./ext/opcache/jit/zend_jit_internal.h:348:32    - Unknown word (prcessed)   -- DONE, "already prcessed") \
 ./ext/opcache/jit/zend_jit_internal.h:399:24    - Unknown word (JITED)      -- define ZEND_JIT_TRACE_JITED (1<<4)
 ./ext/opcache/jit/zend_jit_internal.h:443:20    - Unknown word (ICALL)      -- ZEND_JIT_TRACE_DO_ICALL,
@@ -2445,11 +2445,11 @@ Lines:
 ./ext/opcache/jit/zend_jit_trace.c:4116:7    - Unknown word (Deoptimization) -- /* Deoptimization */
 ./ext/opcache/jit/zend_jit_trace.c:4385:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
 ./ext/opcache/jit/zend_jit_trace.c:64:3      - Unknown word (ZCSG)       -- ZCSG(jit_traces) = zend_jit
-./ext/opcache/jit/zend_jit_trace.c:6747:51   - Unknown word (alredy)         -- we may try to update alredy generated deoptimization
-./ext/opcache/jit/zend_jit_trace.c:6779:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
-./ext/opcache/jit/zend_jit_trace.c:6938:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
-./ext/opcache/jit/zend_jit_trace.c:7219:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
-./ext/opcache/jit/zend_jit_trace.c:8163:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
+./ext/opcache/jit/zend_jit_trace.c:6754:51   - Unknown word (alredy)         -- we may try to update alredy generated deoptimization
+./ext/opcache/jit/zend_jit_trace.c:6786:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
+./ext/opcache/jit/zend_jit_trace.c:6945:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
+./ext/opcache/jit/zend_jit_trace.c:7226:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
+./ext/opcache/jit/zend_jit_trace.c:8170:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
 ./ext/opcache/jit/zend_jit_trace.c:947:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
 ./ext/opcache/jit/zend_jit_vm_helpers.c:1095:39   - Unknown word (unroling)   -- doesn't work try loop unroling. */
 ./ext/opcache/jit/zend_jit_vm_helpers.c:40:35     - Unknown word (Wvolatile)  -- diagnostic ignored "-Wvolatile-register-var"
@@ -2460,8 +2460,8 @@ Lines:
 ./ext/opcache/zend_accelerator_hash.c:27:20     - Unknown word (Octa)       -- /* Generated on an Octa-ALPHA 300MHz CPU &
 ./ext/opcache/zend_accelerator_hash.h:30:8      - Unknown word (sizen)      -- fixed sizen selected during construction
 ./ext/opcache/zend_accelerator_module.c:468:47    - Unknown word (ZSMMG)      -- buf), ZEND_ULONG_FMT, ZSMMG(memory_exhausted)?ZCSG
-./ext/opcache/zend_file_cache.c:1020:17   - Unknown word (jited)      -- /* FIXME: dump jited codes out to file cache
-./ext/opcache/zend_file_cache.c:1076:9    - Unknown word (unpoison)   -- __msan_unpoison(&info, sizeof(info)
+./ext/opcache/zend_file_cache.c:1043:17   - Unknown word (jited)      -- /* FIXME: dump jited codes out to file cache
+./ext/opcache/zend_file_cache.c:1101:9    - Unknown word (unpoison)   -- __msan_unpoison(&info, sizeof(info)
 ./ext/opcache/zend_file_cache.c:59:22     - Unknown word (msan)       -- include <sanitizer/msan_interface.h>
 ./ext/opcache/zend_shared_alloc.c:370:66    - Unknown word (rotr)       -- ) - 3)); /* key  = _rotr(key, 3);*/
 ./ext/openssl/openssl.c:1023:10   - Unknown word (mdtype)     -- EVP_MD *mdtype;
@@ -3834,9 +3834,9 @@ Lines:
 ./ext/sodium/sodium_pwhash.c:50:13     - Unknown word (smemlimit)  -- zend_long smemlimit = zval_get_long(opt
 ./ext/spl/php_spl.c:220:52    - Unknown word (clsses)     -- containing the names of all clsses and interfaces defined
 ./ext/spl/php_spl.c:671:8     - Unknown word (strg)       -- char *strg;
-./ext/spl/spl_array.c:1229:12   - Unknown word (opos)       -- zend_long opos, position;
-./ext/spl/spl_array.c:1566:18   - Unknown word (zflags)     -- zval *members, *zflags, *array;
-./ext/spl/spl_array.c:679:8     - Unknown word (Unsets)     -- /* {{{ Unsets the value at the specified
+./ext/spl/spl_array.c:1230:12   - Unknown word (opos)       -- zend_long opos, position;
+./ext/spl/spl_array.c:1567:18   - Unknown word (zflags)     -- zval *members, *zflags, *array;
+./ext/spl/spl_array.c:682:8     - Unknown word (Unsets)     -- /* {{{ Unsets the value at the specified
 ./ext/spl/spl_directory.c:1379:16   - Unknown word (dpath)      -- zend_string *dpath = zend_string_init(ZSTR
 ./ext/spl/spl_directory.c:1474:34   - Unknown word (LPERMS)     -- intern->file_name, FS_LPERMS, return_value);
 ./ext/spl/spl_directory.c:1493:7    - Unknown word (zpath)      -- zval zpath, zflags;
@@ -4266,7 +4266,7 @@ Lines:
 ./ext/standard/string.c:4158:10   - Unknown word (isnewline)  -- #define _isnewline(c) (((((unsigned char
 ./ext/standard/string.c:4706:9    - Unknown word (locp)       -- char *locp = ZSTR_VAL(loc);
 ./ext/standard/string.c:5328:12   - Unknown word (mymode)     -- zend_long mymode=0;
-./ext/standard/string.c:5705:13   - Unknown word (cmplt)      -- lt = _mm_cmplt_epi8(in, m_plus_1);
+./ext/standard/string.c:5679:13   - Unknown word (cmplt)      -- lt = _mm_cmplt_epi8(in, m_plus_1);
 ./ext/standard/string.c:893:7     - Unknown word (docut)      -- bool docut = 0;
 ./ext/standard/strnatcmp.c:34:43     - Unknown word (aend)       -- const **a, char const *aend, char const **b, char
 ./ext/standard/syslog.c:131:16    - Unknown word (nettopp)    -- ** OpenLog("nettopp", $LOG_PID, $LOG_LOCAL
@@ -4615,7 +4615,7 @@ Lines:
 ./sapi/fpm/fpm/fpm_trace_ptrace.c:58:24     - Unknown word (ptio)       -- struct ptrace_io_desc ptio = {
 ./sapi/fpm/fpm/fpm_trace_ptrace.c:59:14     - Unknown word (PIOD)       -- .piod_op = PIOD_READ_D,
 ./sapi/fpm/fpm/fpm_trace_ptrace.c:59:4      - Unknown word (piod)       -- .piod_op = PIOD_READ_D,
-./sapi/fpm/fpm/zlog.c:712:21    - Unknown word (vformat)    -- ssize_t zlog_stream_vformat(struct zlog_stream
+./sapi/fpm/fpm/zlog.c:706:21    - Unknown word (vformat)    -- ssize_t zlog_stream_vformat(struct zlog_stream
 ./sapi/fuzzer/README.md:22:61     - Unknown word (fsanitize)  -- that supports the `-fsanitize=fuzzer-no-link` option
 ./sapi/fuzzer/README.md:27:13     - Unknown word (unserialize) -- * `php-fuzz-unserialize`: Fuzzing unserialize
 ./sapi/fuzzer/README.md:31:36     - Unknown word (ereg)        -- mbstring`: Fuzzing `mb_ereg[i]()` (requires --enable
