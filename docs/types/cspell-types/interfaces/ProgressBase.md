@@ -22,4 +22,4 @@
 
 #### Defined in
 
-[CSpellReporter.ts:36](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/CSpellReporter.ts#L36)
+[CSpellReporter.ts:36](https://github.com/streetsidesoftware/cspell/blob/a151ccc/packages/cspell-types/src/CSpellReporter.ts#L36)
