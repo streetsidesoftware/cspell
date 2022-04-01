@@ -1,6 +1,6 @@
+import { isAsyncIterable, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
-import * as commentJson from 'comment-json';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
 import type { Logger, ValidationIssue } from 'cspell-lib';
@@ -8,7 +8,6 @@ import * as cspell from 'cspell-lib';
 import * as path from 'path';
 import { format } from 'util';
 import { URI } from 'vscode-uri';
-import { opFilter, isAsyncIterable, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellLintResultCache } from '../util/cache';
 import { calcCacheSettings, createCache, CreateCacheSettings } from '../util/cache';
 import { CheckFailed, toApplicationError, toError } from '../util/errors';
@@ -100,8 +99,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         result.configErrors += await reportConfigurationErrors(config);
 
-        const debugCfg = { config: { ...config, source: null }, source: spellResult.localConfigFilepath };
-        reporter.debug(commentJson.stringify(debugCfg, undefined, 2));
+        if (cfg.options.debug) {
+            const { id: _id, name: _name, ...cfg } = config;
+            const debugCfg = { config: { ...cfg, source: null }, source: spellResult.localConfigFilepath };
+            reporter.debug(JSON.stringify(debugCfg, undefined, 2));
+        }
+
         const elapsed = result.elapsedTimeMs / 1000.0;
         const dictionaries = config.dictionaries || [];
         reporter.info(
