@@ -26,5 +26,5 @@ export {
     mergeSettings,
 } from './CSpellSettingsServer';
 export type { ConfigurationDependencies, ImportFileRefWithError } from './CSpellSettingsServer';
-export { getDefaultSettings } from './DefaultSettings';
+export { getDefaultSettings, getDefaultBundledSettings } from './DefaultSettings';
 export { ImportError } from './ImportError';

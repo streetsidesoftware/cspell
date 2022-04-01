@@ -125,7 +125,9 @@ export async function suggestionsForWord(
 
     await refreshDictionaryCache();
 
-    const config = includeDefaultConfig ? mergeSettings(getDefaultSettings(), getGlobalSettings(), settings) : settings;
+    const config = includeDefaultConfig
+        ? mergeSettings(getDefaultSettings(settings.loadDefaultConfiguration ?? true), getGlobalSettings(), settings)
+        : settings;
     const { dictionaryCollection, allDictionaryCollection } = await determineDictionaries(config);
     const opts: SuggestOptions = { ignoreCase, numChanges, numSuggestions, includeTies };
     const suggestionsByDictionary = dictionaryCollection.dictionaries.map((dict) =>

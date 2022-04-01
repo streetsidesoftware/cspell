@@ -1,4 +1,4 @@
-import { Command } from 'commander';
+import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { checkText } from './application';
 import { BaseOptions } from './options';
@@ -17,6 +17,15 @@ export function commandCheck(prog: Command): Command {
         )
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
+        .addOption(
+            new CommanderOption(
+                '--default-configuration',
+                'Load the default configuration and dictionaries.'
+            ).hideHelp()
+        )
+        .addOption(
+            new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
+        )
         .action(async (files: string[], options: CheckCommandOptions) => {
             let issueCount = 0;
             for (const filename of files) {

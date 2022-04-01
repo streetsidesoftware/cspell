@@ -7,7 +7,11 @@ describe('Validate Default Settings', () => {
     });
 
     test('tests the default setting file is loaded', () => {
-        const defaultSetting = DefaultSettings.getDefaultSettings();
+        const defaultSetting = DefaultSettings.getDefaultBundledSettings();
         expect(defaultSetting.name).toBe('cspell default settings');
+    });
+
+    test('default', () => {
+        expect(DefaultSettings.getDefaultBundledSettings()).toEqual(DefaultSettings.getDefaultSettings(undefined));
     });
 });

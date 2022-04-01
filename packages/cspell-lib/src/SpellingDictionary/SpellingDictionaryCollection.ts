@@ -81,7 +81,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
 
     public _suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[] {
         const {
-            numSuggestions = getDefaultSettings().numSuggestions || defaultNumSuggestions,
+            numSuggestions = getDefaultSettings(false).numSuggestions || defaultNumSuggestions,
             numChanges,
             ignoreCase,
             includeTies,

@@ -12,7 +12,7 @@ describe('Validate that Go files are correctly checked.', () => {
         expect(Object.keys(text)).not.toHaveLength(0);
         const ext = '.go';
         const languageIds = cspell.getLanguagesForExt(ext);
-        const settings = cspell.getDefaultSettings();
+        const settings = cspell.getDefaultBundledSettings();
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
         // cspell:ignore weirdd garbbage
         const results1 = await cspell.validateText('some weirdd garbbage', fileSettings);

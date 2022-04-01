@@ -21,7 +21,11 @@ import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings
 
 export function determineTextDocumentSettings(doc: TextDocument, settings: CSpellUserSettings): CSpellSettingsInternal {
     const filename = doc.uri.fsPath;
-    const settingsWithDefaults = mergeSettings(getDefaultSettings(), getGlobalSettings(), settings);
+    const settingsWithDefaults = mergeSettings(
+        getDefaultSettings(settings.loadDefaultConfiguration ?? true),
+        getGlobalSettings(),
+        settings
+    );
     const fileSettings = calcOverrideSettings(settingsWithDefaults, filename);
     const languageIds = fileSettings?.languageId?.length
         ? fileSettings.languageId

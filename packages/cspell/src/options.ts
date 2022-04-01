@@ -134,6 +134,12 @@ export interface BaseOptions {
      * Locale to use.
      */
     locale?: string;
+
+    /**
+     * Load the default configuration
+     * @default true
+     */
+    defaultConfiguration?: boolean;
 }
 
 export interface LinterCliOptions extends Omit<LinterOptions, 'fileLists'> {

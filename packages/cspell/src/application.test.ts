@@ -36,7 +36,7 @@ describe('Validate the Application', () => {
         return lint.then((result) => {
             expect(reporter.errorCount).toBe(0);
             expect(reporter.infoCount).toBeGreaterThan(0);
-            expect(reporter.debugCount).toBeGreaterThan(0);
+            expect(reporter.debugCount).toBe(0);
             expect(reporter.runResult).toEqual(result);
             expect(result.files).toBe(1);
             return;
@@ -51,7 +51,7 @@ describe('Validate the Application', () => {
         return lint.then((result) => {
             expect(reporter.errorCount).toBe(0);
             expect(reporter.infoCount).toBeGreaterThan(0);
-            expect(reporter.debugCount).toBeGreaterThan(0);
+            expect(reporter.debugCount).toBe(0);
             expect(reporter.runResult).toEqual(result);
             expect(result.files).toBe(1);
             return;
@@ -66,7 +66,7 @@ describe('Validate the Application', () => {
         return lint.then((result) => {
             expect(reporter.errorCount).toBe(0);
             expect(reporter.infoCount).toBeGreaterThan(0);
-            expect(reporter.debugCount).toBeGreaterThan(0);
+            expect(reporter.debugCount).toBe(0);
             expect(reporter.runResult).toEqual(result);
             expect(result.files).toBe(1);
             return;
@@ -114,7 +114,7 @@ describe('Validate the Application', () => {
 
     test('running the application from stdin', async () => {
         const files = ['stdin'];
-        const options = { ...sampleOptions, wordsOnly: true, unique: true };
+        const options = { ...sampleOptions, wordsOnly: true, unique: true, debug: true };
         const reporter = new InMemoryReporter();
         // cspell:ignore texxt
         getStdinResult.value = `

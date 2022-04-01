@@ -250,7 +250,7 @@ const ignoreWords = ['ignored', 'crazzzy-code'];
 const words = sampleWords.concat(rejectWords).concat(['hyphen-wordz']);
 
 const sampleCSpell: CSpellSettings = {
-    ...getDefaultSettings(),
+    ...getDefaultSettings(true),
     version: '0.2',
     flagWords,
     words,
@@ -258,7 +258,7 @@ const sampleCSpell: CSpellSettings = {
 };
 
 const defaultSettings: CSpellSettings = {
-    ...getDefaultSettings(),
+    ...getDefaultSettings(true),
     enabledLanguageIds: ['plaintext', 'javascript'],
 };
 

@@ -31,6 +31,15 @@ export function commandTrace(prog: Command): Command {
         .option('--stdin', 'Read words from stdin.')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
+        .addOption(
+            new CommanderOption(
+                '--default-configuration',
+                'Load the default configuration and dictionaries.'
+            ).hideHelp()
+        )
+        .addOption(
+            new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
+        )
         .arguments('[words...]')
         .action(async (words: string[], options: TraceCommandOptions) => {
             let numFound = 0;

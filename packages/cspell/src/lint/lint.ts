@@ -75,7 +75,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
         const { text } = fileInfo;
-        reporter.debug(`Filename: ${filename}, LanguageIds: ${doc.languageId ?? 'default'}`);
         result.fileInfo = fileInfo;
 
         let spellResult: Partial<cspell.SpellCheckFileResult> = {};
@@ -99,12 +98,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         result.configErrors += await reportConfigurationErrors(config);
 
-        if (cfg.options.debug) {
-            const { id: _id, name: _name, ...cfg } = config;
-            const debugCfg = { config: { ...cfg, source: null }, source: spellResult.localConfigFilepath };
-            reporter.debug(JSON.stringify(debugCfg, undefined, 2));
-        }
-
         const elapsed = result.elapsedTimeMs / 1000.0;
         const dictionaries = config.dictionaries || [];
         reporter.info(
@@ -113,6 +106,17 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         );
         reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, MessageTypes.Info);
         reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
+
+        if (cfg.options.debug) {
+            const { id: _id, name: _name, __imports, __importRef, ...cfg } = config;
+            const debugCfg = {
+                filename,
+                languageId: doc.languageId ?? cfg.languageId ?? 'default',
+                config: { ...cfg, source: null },
+                source: spellResult.localConfigFilepath,
+            };
+            reporter.debug(JSON.stringify(debugCfg, undefined, 2));
+        }
 
         const dep = calcDependencies(config);
 
@@ -236,6 +240,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
+        if (cfg.options.defaultConfiguration !== undefined) {
+            configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
+        }
         reporter = mergeReporters(cfg.reporter, ...loadReporters(configInfo.config));
         cspell.setLogger(getLoggerFromReporter(reporter));
 
