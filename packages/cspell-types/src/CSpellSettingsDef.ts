@@ -165,7 +165,7 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     /**
      * By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
      * will prevent ALL default configuration from being loaded.
-     * @default true;
+     * @default true
      */
     loadDefaultConfiguration?: boolean;
 }
