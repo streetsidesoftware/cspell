@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[TextOffset.ts:21](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L21)
+[TextOffset.ts:21](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L21)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:19](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L19)
+[TextOffset.ts:19](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L19)
 
 ___
 
@@ -55,7 +55,7 @@ Assumed to match `text.length` if the text has not been transformed.
 
 #### Defined in
 
-[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L14)
+[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L14)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:22](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L22)
+[TextOffset.ts:22](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L22)
 
 ___
 
@@ -81,7 +81,7 @@ The offset into the document.
 
 #### Defined in
 
-[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L10)
+[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L10)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:20](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L20)
+[TextOffset.ts:20](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L20)
 
 ___
 
@@ -108,7 +108,7 @@ Example: Original: `cafe\u0301`, text: `café`
 
 #### Defined in
 
-[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L6)
+[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L6)
 
 ___
 
@@ -118,4 +118,4 @@ ___
 
 #### Defined in
 
-[TextOffset.ts:18](https://github.com/streetsidesoftware/cspell/blob/ffde5ac/packages/cspell-types/src/TextOffset.ts#L18)
+[TextOffset.ts:18](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L18)
