@@ -161,6 +161,13 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
 
     /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
     languageId?: LanguageId;
+
+    /**
+     * By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
+     * will prevent ALL default configuration from being loaded.
+     * @default true;
+     */
+    loadDefaultConfiguration?: boolean;
 }
 
 export interface ReportingConfiguration extends SuggestionsConfiguration {
@@ -788,7 +795,7 @@ export interface RegExpPatternDefinition {
     /**
      * Description of the pattern.
      */
-    description?: string;
+    description?: string | undefined;
 }
 
 export type CSpellUserSettingsWithComments = CSpellUserSettings;

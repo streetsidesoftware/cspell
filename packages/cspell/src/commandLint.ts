@@ -97,6 +97,15 @@ export function commandLint(prog: Command): Command {
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color.')
+        .addOption(
+            new CommanderOption(
+                '--default-configuration',
+                'Load the default configuration and dictionaries.'
+            ).hideHelp()
+        )
+        .addOption(
+            new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
+        )
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .addHelpText('after', usage)
         .arguments('[globs...]')

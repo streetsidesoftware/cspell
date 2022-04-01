@@ -15,7 +15,7 @@ describe('Validate that French text is correctly checked.', () => {
         const ext = path.extname(sampleFilename);
         const languageIds = cspell.getLanguagesForExt(ext);
         const frenchSettings = cspell.readSettings(frenchConfig);
-        const settings = cspell.mergeSettings(cspell.getDefaultSettings(), frenchSettings, {
+        const settings = cspell.mergeSettings(cspell.getDefaultBundledSettings(), frenchSettings, {
             language: 'en,fr',
         });
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);

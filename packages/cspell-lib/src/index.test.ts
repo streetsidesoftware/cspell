@@ -4,7 +4,7 @@ describe('Validate the cspell API', () => {
     test('Tests the default configuration', () => {
         const ext = '.json';
         const languageIds = cspell.getLanguagesForExt(ext);
-        const settings = cspell.getDefaultSettings();
+        const settings = cspell.getDefaultBundledSettings();
         // cspell:ignore jansons
         const text = '{ "name": "Jansons"}';
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);

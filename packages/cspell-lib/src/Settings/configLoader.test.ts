@@ -25,7 +25,7 @@ import {
     ImportFileRefWithError,
     mergeSettings,
 } from './CSpellSettingsServer';
-import { getDefaultSettings, _defaultSettings } from './DefaultSettings';
+import { getDefaultBundledSettings, _defaultSettings } from './DefaultSettings';
 
 const { normalizeCacheSettings, normalizeSettings, validateRawConfigExports, validateRawConfigVersion } =
     __configLoader_testing__;
@@ -103,19 +103,19 @@ describe('Validate CSpellSettingsServer', () => {
     test('makes sure global settings is an object', () => {
         const settings = getGlobalSettings();
         expect(Object.keys(settings)).not.toHaveLength(0);
-        const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
+        const merged = mergeSettings(getDefaultBundledSettings(), getGlobalSettings());
         expect(Object.keys(merged)).not.toHaveLength(0);
     });
 
     test('verify clearing the file cache works', () => {
-        mergeSettings(getDefaultSettings(), getGlobalSettings());
+        mergeSettings(getDefaultBundledSettings(), getGlobalSettings());
         expect(getCachedFileSize()).toBeGreaterThan(0);
         clearCachedSettingsFiles();
         expect(getCachedFileSize()).toBe(0);
     });
 
     test('the loaded defaults contain expected settings', () => {
-        const settings = getDefaultSettings();
+        const settings = getDefaultBundledSettings();
         const sources = getSources(settings);
         const sourceNames = sources.map((s) => s.name || '?');
         expect(sourceNames).toEqual(expect.arrayContaining([_defaultSettings.name]));

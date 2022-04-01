@@ -13,7 +13,7 @@ describe('Validate that Python files are correctly checked.', () => {
         expect(Object.keys(text)).not.toHaveLength(0);
         const ext = path.extname(sampleFilename);
         const languageIds = cspell.getLanguagesForExt(ext);
-        const settings = cspell.mergeSettings(cspell.getDefaultSettings(), cspell.readSettings(sampleConfig));
+        const settings = cspell.mergeSettings(cspell.getDefaultBundledSettings(), cspell.readSettings(sampleConfig));
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
         return cspell.validateText(text, fileSettings).then((results) => {
             expect(results).toHaveLength(1);

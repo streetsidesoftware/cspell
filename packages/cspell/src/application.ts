@@ -35,7 +35,9 @@ export async function* trace(words: string[], options: TraceOptions): AsyncItera
     const iWords = options.stdin ? toAsyncIterable(words, readStdin()) : words;
     const { languageId, locale, allowCompoundWords, ignoreCase } = options;
     const configFile = await readConfig(options.config, undefined);
-    const config = mergeSettings(getDefaultSettings(), getGlobalSettings(), configFile.config);
+    const loadDefault = options.defaultConfiguration ?? configFile.config.loadDefaultConfiguration ?? true;
+
+    const config = mergeSettings(getDefaultSettings(loadDefault), getGlobalSettings(), configFile.config);
     yield* traceWordsAsync(iWords, config, { languageId, locale, ignoreCase, allowCompoundWords });
 }
 
@@ -48,6 +50,7 @@ export async function checkText(filename: string, options: BaseOptions & LegacyO
     const settingsFromCommandLine = util.clean({
         languageId: options.languageId || undefined,
         language: options.locale || options.local || undefined,
+        loadDefaultConfiguration: options.defaultConfiguration,
     });
     const info = calcFinalConfigInfo(foundSettings, settingsFromCommandLine, filename, text);
     return cspellLibCheckText(text, info.configInfo.config);

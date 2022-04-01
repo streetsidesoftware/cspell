@@ -3,11 +3,11 @@ import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/c
 import * as fsp from 'fs-extra';
 import * as os from 'os';
 import * as path from 'path';
-import { getDefaultSettings } from './DefaultSettings';
+import { getDefaultBundledSettings } from './DefaultSettings';
 import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection';
 import * as DictSettings from './DictionarySettings';
 
-const defaultSettings = getDefaultSettings();
+const defaultSettings = getDefaultBundledSettings();
 const oc = expect.objectContaining;
 
 describe('Validate DictionarySettings', () => {

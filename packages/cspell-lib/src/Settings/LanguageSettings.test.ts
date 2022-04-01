@@ -2,7 +2,7 @@
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { getGlobalSettings } from './configLoader';
 import { mergeSettings } from './CSpellSettingsServer';
-import { getDefaultSettings } from './DefaultSettings';
+import { getDefaultBundledSettings } from './DefaultSettings';
 import * as LS from './LanguageSettings';
 import { calcSettingsForLanguage, calcUserSettingsForLanguage } from './LanguageSettings';
 
@@ -25,12 +25,12 @@ const extraSettings: CSpellUserSettings = {
     ],
 };
 
-const defaultSettings = getDefaultSettings();
+const defaultSettings = getDefaultBundledSettings();
 const defaultLanguageSettings = defaultSettings.languageSettings;
 
 describe('Validate LanguageSettings', () => {
     test('tests merging language settings', () => {
-        const defaultSettings = getDefaultSettings();
+        const defaultSettings = getDefaultBundledSettings();
         const languageSettings = defaultSettings.languageSettings || [];
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
         expect(sPython.allowCompoundWords).toBe(true);
@@ -100,7 +100,7 @@ describe('Validate LanguageSettings', () => {
     );
 
     test('merged settings with global', () => {
-        const merged = mergeSettings(getDefaultSettings(), getGlobalSettings());
+        const merged = mergeSettings(getDefaultBundledSettings(), getGlobalSettings());
         const sPHP = calcSettingsForLanguage(merged.languageSettings || [], 'php', 'en');
         expect(Object.keys(sPHP)).not.toHaveLength(0);
     });

@@ -114,8 +114,13 @@ export function calcFinalConfigInfo(
 ): FileConfigInfo {
     const ext = path.extname(filename);
     const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
+    const loadDefault =
+        settingsFromCommandLine.loadDefaultConfiguration ??
+        configInfo.config.loadDefaultConfiguration ??
+        fileSettings.loadDefaultConfiguration ??
+        true;
     const settings = cspell.mergeSettings(
-        cspell.getDefaultSettings(),
+        cspell.getDefaultSettings(loadDefault),
         cspell.getGlobalSettings(),
         fileSettings,
         settingsFromCommandLine

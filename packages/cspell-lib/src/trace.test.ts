@@ -110,5 +110,5 @@ function oc<T>(t: T): T {
 }
 
 function getSettings(...settings: CSpellSettings[]): CSpellSettings {
-    return settings.reduce((a, b) => mergeSettings(a, b), getDefaultSettings());
+    return settings.reduce((a, b) => mergeSettings(a, b), getDefaultSettings(true));
 }

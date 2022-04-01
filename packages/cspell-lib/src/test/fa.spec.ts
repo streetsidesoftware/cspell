@@ -15,7 +15,7 @@ describe('Validate that Persian text is correctly checked.', () => {
         const ext = path.extname(sampleFilename);
         const languageIds = cspell.getLanguagesForExt(ext);
         const frenchSettings = cspell.readSettings(frenchConfig);
-        const settings = cspell.mergeSettings(cspell.getDefaultSettings(), frenchSettings, {
+        const settings = cspell.mergeSettings(cspell.getDefaultBundledSettings(), frenchSettings, {
             language: 'en,fa',
         });
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
