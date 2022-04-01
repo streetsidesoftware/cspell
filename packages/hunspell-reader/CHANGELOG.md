@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.19.4](https://github.com/Jason-Rev/hunspell-reader/compare/v5.19.3...v5.19.4) (2022-04-01)
+
+**Note:** Version bump only for package hunspell-reader
+
+
+
+
+
 ## [5.19.3](https://github.com/Jason-Rev/hunspell-reader/compare/v5.19.2...v5.19.3) (2022-03-24)
 
 **Note:** Version bump only for package hunspell-reader
