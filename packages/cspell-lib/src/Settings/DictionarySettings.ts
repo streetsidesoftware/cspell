@@ -116,6 +116,8 @@ export function isDictionaryDefinitionInternal(
     return def instanceof _DictionaryDefinitionInternalWithSource;
 }
 
+type DDI = Omit<RequireOptional<DictionaryDefinitionInternalWithSource>, '__source' | 'weightMap' | 'toJSON'>;
+
 class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInternalWithSource {
     private _weightMap: WeightMap | undefined;
     readonly name: string;
@@ -129,6 +131,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInt
     readonly useCompounds?: boolean;
     readonly noSuggest?: boolean;
     readonly scope?: CustomDictionaryScope | CustomDictionaryScope[];
+    private ddi: DDI;
     constructor(def: DictionaryDefinition, readonly __source: string) {
         // this bit of assignment is to have the compiler help use if any new fields are added.
         const defAll: DictDef = def;
@@ -150,7 +153,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInt
 
         const r = resolveFile(filePath, defaultPath);
 
-        const ddi: Omit<RequireOptional<DictionaryDefinitionInternalWithSource>, '__source' | 'weightMap'> = {
+        const ddi: DDI = {
             name,
             file: undefined,
             path: r.filename,
@@ -165,6 +168,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInt
         };
 
         Object.assign(this, clean(ddi));
+        this.ddi = ddi;
         this.name = ddi.name;
         this.file = ddi.file;
         this.path = ddi.path;
@@ -175,5 +179,9 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInt
 
     get weightMap() {
         return this._weightMap;
+    }
+
+    toJSON() {
+        return this.ddi;
     }
 }

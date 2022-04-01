@@ -100,8 +100,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         result.configErrors += await reportConfigurationErrors(config);
 
-        const debugCfg = { config: { ...config, source: null }, source: spellResult.localConfigFilepath };
-        reporter.debug(commentJson.stringify(debugCfg, undefined, 2));
+        if (cfg.options.debug) {
+            const debugCfg = { config: { ...config, source: null }, source: spellResult.localConfigFilepath };
+            reporter.debug(JSON.stringify(debugCfg, undefined, 2));
+        }
+
         const elapsed = result.elapsedTimeMs / 1000.0;
         const dictionaries = config.dictionaries || [];
         reporter.info(
