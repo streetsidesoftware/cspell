@@ -26,7 +26,7 @@ Assumed to match `text.length` if the text has not been transformed.
 
 #### Defined in
 
-[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L14)
+[TextOffset.ts:14](https://github.com/streetsidesoftware/cspell/blob/a151ccc/packages/cspell-types/src/TextOffset.ts#L14)
 
 ___
 
@@ -38,7 +38,7 @@ The offset into the document.
 
 #### Defined in
 
-[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L10)
+[TextOffset.ts:10](https://github.com/streetsidesoftware/cspell/blob/a151ccc/packages/cspell-types/src/TextOffset.ts#L10)
 
 ___
 
@@ -51,4 +51,4 @@ Example: Original: `cafe\u0301`, text: `café`
 
 #### Defined in
 
-[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/46c1e4f/packages/cspell-types/src/TextOffset.ts#L6)
+[TextOffset.ts:6](https://github.com/streetsidesoftware/cspell/blob/a151ccc/packages/cspell-types/src/TextOffset.ts#L6)
