@@ -3,6 +3,9 @@ on: # rebuild any PRs and main branch changes
   pull_request:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   cspell:
     runs-on: ubuntu-latest

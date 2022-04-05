@@ -6,6 +6,9 @@ on:
       - master
       - cspell4
 
+permissions:
+  contents: read
+
 jobs:
   test-node-lts:
     runs-on: ${{ matrix.os }}
