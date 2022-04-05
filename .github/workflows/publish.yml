@@ -18,8 +18,13 @@ on:
         default: next
         required: true
 
+permissions:
+  contents: read
+
 jobs:
   stub:
+    permissions:
+      contents: none
     runs-on: ubuntu-latest
     steps:
       - run: echo "Publish Stub"

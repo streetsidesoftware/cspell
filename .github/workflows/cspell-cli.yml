@@ -7,6 +7,9 @@ on:
   # Run on demand
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   cspell:
     runs-on: ubuntu-latest

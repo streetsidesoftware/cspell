@@ -8,6 +8,9 @@ on:
       - "packages/cspell-types/**/*.ts"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   update-dependencies:
     if: github.repository_owner == 'streetsidesoftware'
