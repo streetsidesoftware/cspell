@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 9 * * 1"
 
+permissions:
+  contents: read
+
 jobs:
   update-dependencies:
     if: github.repository_owner == 'streetsidesoftware'

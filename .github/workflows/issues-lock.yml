@@ -5,8 +5,13 @@ on:
     - cron: "30 5 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   stale:
+    permissions:
+      issues: write  # for dessant/lock-threads to lock issues
     runs-on: ubuntu-latest
     steps:
       - uses: dessant/lock-threads@v3.0.0
