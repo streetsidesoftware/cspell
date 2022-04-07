@@ -55,13 +55,13 @@ jobs:
       - run: npm run coverage
 
       - name: Upload coverage Coveralls
-        uses: coverallsapp/github-action@1.1.3
+        uses: coverallsapp/github-action@9ba913c152ae4be1327bfb9085dc806cedb44057 # 1.1.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./lcov.info
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@e3c560433a6cc60aec8812599b7844a7b4fa0d71 # v3
         with:
           directory: "."
           files: ./lcov.info
