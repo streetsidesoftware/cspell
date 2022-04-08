@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.19.6](https://github.com/streetsidesoftware/cspell/compare/v5.19.5...v5.19.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* add --cache-reset option ([#2677](https://github.com/streetsidesoftware/cspell/issues/2677)) ([631073b](https://github.com/streetsidesoftware/cspell/commit/631073b42f24dec00eed9740cb8ee2e5bce4b07f))
+* add configuration for git commit messages ([#2674](https://github.com/streetsidesoftware/cspell/issues/2674)) ([42740a9](https://github.com/streetsidesoftware/cspell/commit/42740a98d0b33dc762baafc6d08ad8264524b305))
+* fix issue with stale cache entries ([#2673](https://github.com/streetsidesoftware/cspell/issues/2673)) ([15995a8](https://github.com/streetsidesoftware/cspell/commit/15995a898cf4284e33e5a48fd4cfa9ef0d329d6e))
+* fix minor typo. ([#2647](https://github.com/streetsidesoftware/cspell/issues/2647)) ([a151ccc](https://github.com/streetsidesoftware/cspell/commit/a151ccc3e89ec4b1dd2f88a6bbdfbd43070aa058))
+* relative path name ([#2675](https://github.com/streetsidesoftware/cspell/issues/2675)) ([51fc55b](https://github.com/streetsidesoftware/cspell/commit/51fc55b72374b46d5fdf165d5ed1ac3b6bf9f1d6))
+
+
+
+
+
 ## [5.19.5](https://github.com/streetsidesoftware/cspell/compare/v5.19.4...v5.19.5) (2022-04-01)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.19.6](https://github.com/streetsidesoftware/cspell/compare/v5.19.5...v5.19.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* fix issue with stale cache entries ([#2673](https://github.com/streetsidesoftware/cspell/issues/2673)) ([15995a8](https://github.com/streetsidesoftware/cspell/commit/15995a898cf4284e33e5a48fd4cfa9ef0d329d6e))
+
+
+
+
+
 ## [5.19.5](https://github.com/streetsidesoftware/cspell/compare/v5.19.4...v5.19.5) (2022-04-01)
 
 **Note:** Version bump only for package cspell-gitignore

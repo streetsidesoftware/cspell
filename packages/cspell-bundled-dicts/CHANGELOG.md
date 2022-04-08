@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.19.6](https://github.com/streetsidesoftware/cspell/compare/v5.19.5...v5.19.6) (2022-04-08)
+
+
+### Bug Fixes
+
+* add configuration for git commit messages ([#2674](https://github.com/streetsidesoftware/cspell/issues/2674)) ([42740a9](https://github.com/streetsidesoftware/cspell/commit/42740a98d0b33dc762baafc6d08ad8264524b305))
+
+
+
+
+
 ## [5.19.5](https://github.com/streetsidesoftware/cspell/compare/v5.19.4...v5.19.5) (2022-04-01)
 
 **Note:** Version bump only for package @cspell/cspell-bundled-dicts
