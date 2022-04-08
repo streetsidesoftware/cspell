@@ -97,11 +97,11 @@ export class GitIgnore {
         const parent = path.dirname(directory);
         const parentHierarchy =
             parent !== directory && contains(root, parent) ? await this.findGitIgnoreHierarchy(parent) : undefined;
-        const gif = await loadGitIgnore(directory);
-        if (!gif) {
+        const git = await loadGitIgnore(directory);
+        if (!git) {
             return parentHierarchy || new GitIgnoreHierarchy([]);
         }
-        const chain = parentHierarchy?.gitIgnoreChain.concat([gif]) ?? [gif];
+        const chain = parentHierarchy?.gitIgnoreChain.concat([git]) ?? [git];
         return new GitIgnoreHierarchy(chain);
     }
 

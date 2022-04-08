@@ -1,7 +1,9 @@
 import * as FileEntryCacheModule from 'file-entry-cache';
 import * as path from 'path';
 import * as fileHelper from '../../util/fileHelper';
-import { CachedFileResult, DiskCache, CSpellCacheMeta } from './DiskCache';
+import { CachedFileResult, DiskCache, CSpellCacheMeta, __testing__ } from './DiskCache';
+
+const { calcVersion } = __testing__;
 
 jest.mock('./getConfigHash', () => ({
     getConfigHash: jest.fn().mockReturnValue('TEST_CONFIG_HASH'),
@@ -172,8 +174,8 @@ function entry(result: CachedFileResult, dependencies: string[] = [], size = 100
             size,
             data: {
                 r: result,
-                d: dependencies,
-                v: 'version',
+                d: dependencies.map((f) => ({ f, h: 'hash' })),
+                v: calcVersion('version'),
             },
         },
     };

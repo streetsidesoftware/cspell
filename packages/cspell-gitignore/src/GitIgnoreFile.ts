@@ -58,8 +58,8 @@ export class GitIgnoreHierarchy {
     }
 
     isIgnored(file: string): boolean {
-        for (const gif of this.gitIgnoreChain) {
-            if (gif.isIgnored(file)) return true;
+        for (const git of this.gitIgnoreChain) {
+            if (git.isIgnored(file)) return true;
         }
 
         return false;
@@ -71,8 +71,8 @@ export class GitIgnoreHierarchy {
      * @returns IsIgnoredExResult of the match or undefined if there was no match.
      */
     isIgnoredEx(file: string): IsIgnoredExResult | undefined {
-        for (const gif of this.gitIgnoreChain) {
-            const r = gif.isIgnoredEx(file);
+        for (const git of this.gitIgnoreChain) {
+            const r = git.isIgnoredEx(file);
             if (r.matched) return r;
         }
 
