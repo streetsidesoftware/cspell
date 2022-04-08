@@ -5,7 +5,7 @@ import { GlobOptions, globP } from './glob';
 import * as path from 'path';
 import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
 import { IOError, toApplicationError, toError } from './errors';
-import { mergeAsyncIterables } from './async';
+import { mergeAsyncIterables, asyncMap } from './async';
 import { readStdin } from './stdin';
 
 const UTF8: BufferEncoding = 'utf8';
@@ -135,6 +135,12 @@ export function calcFinalConfigInfo(
     };
 }
 
+function resolveFilename(filename: string): string {
+    return path.resolve(filename);
+}
+
+const resolveFilenames = asyncMap(resolveFilename);
+
 /**
  * Read
  * @param listFiles - array of file paths to read that will contain a list of files. Paths contained in each
@@ -150,7 +156,7 @@ export async function readFileListFiles(listFiles: string[]): Promise<string[] |
     });
     const found = flatten(await Promise.all(files.map(readFileListFile)));
     // Move `stdin` to the end.
-    return useStdin ? mergeAsyncIterables(found, readStdin()) : found;
+    return useStdin ? resolveFilenames(mergeAsyncIterables(found, readStdin())) : found;
 }
 
 /**

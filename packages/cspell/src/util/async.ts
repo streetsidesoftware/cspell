@@ -1,1 +1,5 @@
-export { toAsyncIterable as mergeAsyncIterables, toArray as asyncIterableToArray } from '@cspell/cspell-pipe';
+export {
+    toAsyncIterable as mergeAsyncIterables,
+    toArray as asyncIterableToArray,
+    opMap as asyncMap,
+} from '@cspell/cspell-pipe';
