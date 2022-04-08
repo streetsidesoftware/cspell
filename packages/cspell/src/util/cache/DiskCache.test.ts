@@ -5,10 +5,6 @@ import { CachedFileResult, DiskCache, CSpellCacheMeta, __testing__ } from './Dis
 
 const { calcVersion } = __testing__;
 
-jest.mock('./getConfigHash', () => ({
-    getConfigHash: jest.fn().mockReturnValue('TEST_CONFIG_HASH'),
-}));
-
 const mockCreateFileEntryCache = jest.spyOn(FileEntryCacheModule, 'createFromFile');
 jest.mock('file-entry-cache', () => ({
     createFromFile: jest.fn().mockReturnValue({
@@ -19,6 +15,7 @@ jest.mock('file-entry-cache', () => ({
             notFoundFiles: [],
             notChangedFiles: [],
         }),
+        destroy: jest.fn(),
     }),
 }));
 
@@ -38,6 +35,7 @@ describe('DiskCache', () => {
         getFileDescriptor: jest.Mock;
         reconcile: jest.Mock;
         analyzeFiles: jest.Mock;
+        destroy: jest.Mock;
     };
 
     beforeEach(() => {
@@ -160,6 +158,13 @@ describe('DiskCache', () => {
         it('call cache.reconcile()', () => {
             diskCache.reconcile();
             expect(fileEntryCache.reconcile).toBeCalledTimes(1);
+        });
+    });
+
+    describe('reset', () => {
+        it('resets', () => {
+            diskCache.reset();
+            expect(fileEntryCache.destroy).toHaveBeenCalledTimes(1);
         });
     });
 

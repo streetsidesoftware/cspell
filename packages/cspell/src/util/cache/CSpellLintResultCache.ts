@@ -12,4 +12,8 @@ export interface CSpellLintResultCache {
      * Persists the in-memory cache to disk.
      */
     reconcile(): void;
+    /**
+     * Resets the cache.
+     */
+    reset(): void;
 }

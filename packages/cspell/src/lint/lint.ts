@@ -139,6 +139,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const fileCount = files instanceof Array ? files.length : undefined;
         const status: RunResult = runResult();
         const cache = createCache(cacheSettings);
+        if (cfg.options.cacheReset) {
+            cache.reset();
+        }
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
         const emitProgressBegin = (filename: string, fileNum: number, fileCount: number) =>

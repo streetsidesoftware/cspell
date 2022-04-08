@@ -13,4 +13,7 @@ export class DummyCache implements CSpellLintResultCache {
     reconcile(): void {
         return;
     }
+    reset(): void {
+        return;
+    }
 }

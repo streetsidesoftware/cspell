@@ -81,6 +81,7 @@ export function commandLint(prog: Command): Command {
         .addOption(new CommanderOption('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
         .option('--cache', 'Use cache to only check changed files.')
         .option('--no-cache', 'Do not use cache.')
+        .option('--cache-reset', 'Reset the cache file.')
         .addOption(
             new CommanderOption('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
                 'metadata',

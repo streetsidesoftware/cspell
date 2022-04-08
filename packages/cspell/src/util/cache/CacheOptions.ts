@@ -23,4 +23,9 @@ export interface CacheOptions {
      * Strategy to use for detecting changed files, default: metadata
      */
     cacheStrategy?: CacheStrategy;
+
+    /**
+     * Resets the cache
+     */
+    cacheReset?: boolean;
 }

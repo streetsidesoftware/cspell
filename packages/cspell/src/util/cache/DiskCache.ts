@@ -143,6 +143,14 @@ export class DiskCache implements CSpellLintResultCache {
         this.fileEntryCache.reconcile();
     }
 
+    public reset(): void {
+        this.fileEntryCache.destroy();
+        this.dependencyCache.clear();
+        this.dependencyCacheTree = {};
+        this.objectCollection = new ShallowObjectCollection<CachedData>();
+        this.ocCacheFileResult = new ShallowObjectCollection<CachedFileResult>();
+    }
+
     private normalizeResult(result: CachedFileResult): CachedFileResult {
         const { issues, processed, errors, configErrors, ...rest } = result;
         if (!Object.keys(rest).length) {
