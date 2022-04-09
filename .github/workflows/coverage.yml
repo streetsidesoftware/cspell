@@ -2,10 +2,14 @@ name: Coverage
 on:
   pull_request:
     paths:
-      - "**/package.json"
-      - "**/package-lock.json"
-      - "**/*.ts"
-      - "**/*.js"
+      - "/*.js"
+      - "/*.ts"
+      - "/package-lock.json"
+      - "/package.json"
+      - "/packages/**/*.js"
+      - "/packages/**/*.ts"
+      - "/packages/**/package-lock.json"
+      - "/packages/**/package.json"
       - ".github/workflows/coverage.yml"
       - "!docs/**"
   push:
