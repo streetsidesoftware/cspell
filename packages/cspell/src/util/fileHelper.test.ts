@@ -1,6 +1,7 @@
-import { readFileInfo, readFileListFile, readFileListFiles } from './fileHelper';
+import { isDir, isFile, isNotDir, readFileInfo, readFileListFile, readFileListFiles } from './fileHelper';
 import * as path from 'path';
 import { IOError } from './errors';
+import { asyncIterableToArray } from './async';
 
 const packageRoot = path.join(__dirname, '../..');
 const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
@@ -28,12 +29,12 @@ describe('fileHelper', () => {
 
     test('readFileListFiles', async () => {
         const files = ['file1', '../file2', 'dir/file3', 'nested/file2.txt'];
-        const r = await readFileListFiles([fileListFile, fileListFile2]);
+        const r = await asyncIterableToArray(readFileListFiles([fileListFile, fileListFile2]));
         expect(r).toEqual(files.map((f) => path.resolve(fixtures, f)));
     });
 
     test('readFileListFiles Error', () => {
-        const r = readFileListFiles(['not-found.txt']);
+        const r = asyncIterableToArray(readFileListFiles(['not-found.txt']));
         return expect(r).rejects.toEqual(oc({ message: 'Error reading file list from: "not-found.txt"' }));
     });
 
@@ -55,5 +56,35 @@ describe('fileHelper', () => {
     `('readFile errors $filename', async ({ filename, expected }) => {
         filename = r(__dirname, filename);
         await expect(readFileInfo(filename, undefined, false)).rejects.toThrow(expected);
+    });
+
+    test.each`
+        filename       | expected
+        ${__filename}  | ${true}
+        ${__dirname}   | ${false}
+        ${'not_found'} | ${false}
+    `('isFile $filename', async ({ filename, expected }) => {
+        filename = r(__dirname, filename);
+        expect(await isFile(filename)).toBe(expected);
+    });
+
+    test.each`
+        filename       | expected
+        ${__filename}  | ${false}
+        ${__dirname}   | ${true}
+        ${'not_found'} | ${false}
+    `('isDir $filename', async ({ filename, expected }) => {
+        filename = r(__dirname, filename);
+        expect(await isDir(filename)).toBe(expected);
+    });
+
+    test.each`
+        filename       | expected
+        ${__filename}  | ${true}
+        ${__dirname}   | ${false}
+        ${'not_found'} | ${true}
+    `('isDir $filename', async ({ filename, expected }) => {
+        filename = r(__dirname, filename);
+        expect(await isNotDir(filename)).toBe(expected);
     });
 });

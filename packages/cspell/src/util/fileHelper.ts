@@ -1,16 +1,15 @@
 import * as cspell from 'cspell-lib';
-import * as fsp from 'fs-extra';
-import getStdin from 'get-stdin';
-import { GlobOptions, globP } from './glob';
-import * as path from 'path';
 import { CSpellUserSettings, Document, fileToDocument, Issue } from 'cspell-lib';
+import { promises as fsp } from 'fs';
+import getStdin from 'get-stdin';
+import * as path from 'path';
+import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async';
 import { IOError, toApplicationError, toError } from './errors';
-import { mergeAsyncIterables, asyncMap } from './async';
+import { GlobOptions, globP } from './glob';
 import { readStdin } from './stdin';
 
 const UTF8: BufferEncoding = 'utf8';
 const STDIN = 'stdin';
-
 export interface ConfigInfo {
     source: string;
     config: CSpellUserSettings;
@@ -73,7 +72,7 @@ interface ReadFileInfoResult extends FileInfo {
 
 export function readFileInfo(
     filename: string,
-    encoding: string = UTF8,
+    encoding: BufferEncoding = UTF8,
     handleNotFound = false
 ): Promise<ReadFileInfoResult> {
     const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
@@ -90,7 +89,7 @@ export function readFileInfo(
     );
 }
 
-export function readFile(filename: string, encoding: string = UTF8): Promise<string> {
+export function readFile(filename: string, encoding: BufferEncoding = UTF8): Promise<string> {
     return readFileInfo(filename, encoding).then((info) => info.text);
 }
 
@@ -147,16 +146,22 @@ const resolveFilenames = asyncMap(resolveFilename);
  *   file will be resolved relative to the containing file.
  * @returns - a list of files to be processed.
  */
-export async function readFileListFiles(listFiles: string[]): Promise<string[] | AsyncIterable<string>> {
+export function readFileListFiles(listFiles: string[]): AsyncIterable<string> {
     let useStdin = false;
     const files = listFiles.filter((file) => {
         const isStdin = file === 'stdin';
         useStdin = useStdin || isStdin;
         return !isStdin;
     });
-    const found = flatten(await Promise.all(files.map(readFileListFile)));
+    const found = asyncPipe(
+        files,
+        asyncMap((file) => readFileListFile(file)),
+        asyncAwait(),
+        asyncFlatten()
+    );
     // Move `stdin` to the end.
-    return useStdin ? resolveFilenames(mergeAsyncIterables(found, readStdin())) : found;
+    const stdin = useStdin ? readStdin() : [];
+    return asyncPipe(mergeAsyncIterables(found, stdin), resolveFilenames);
 }
 
 /**
@@ -180,12 +185,24 @@ export async function readFileListFile(listFile: string): Promise<string[]> {
     }
 }
 
-function flatten(fileLists: string[][]): string[] {
-    function* f() {
-        for (const list of fileLists) {
-            yield* list;
-        }
+export async function isFile(filename: string): Promise<boolean> {
+    try {
+        const stat = await fsp.stat(filename);
+        return stat.isFile();
+    } catch (e) {
+        return false;
     }
+}
 
-    return [...f()];
+export async function isDir(filename: string): Promise<boolean> {
+    try {
+        const stat = await fsp.stat(filename);
+        return stat.isDirectory();
+    } catch (e) {
+        return false;
+    }
+}
+
+export function isNotDir(filename: string): Promise<boolean> {
+    return isDir(filename).then((a) => !a);
 }
