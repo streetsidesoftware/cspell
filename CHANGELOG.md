@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.19.7](https://github.com/streetsidesoftware/cspell/compare/v5.19.6...v5.19.7) (2022-04-09)
+
+
+### Bug Fixes
+
+* Ignore directories when checking files ([#2680](https://github.com/streetsidesoftware/cspell/issues/2680)) ([fa777f0](https://github.com/streetsidesoftware/cspell/commit/fa777f04981b8814b827721eaa8b9278ae95effb))
+
+
+
+
+
 ## [5.19.6](https://github.com/streetsidesoftware/cspell/compare/v5.19.5...v5.19.6) (2022-04-08)
 
 
