@@ -2,10 +2,18 @@ name: Test
 on:
   pull_request:
     paths:
-      - "**/*.js"
-      - "**/*.ts"
-      - "**/package-lock.json"
-      - "**/package.json"
+      - "/*.js"
+      - "/*.ts"
+      - "/package-lock.json"
+      - "/package.json"
+      - "/packages/**/*.js"
+      - "/packages/**/*.ts"
+      - "/packages/**/package-lock.json"
+      - "/packages/**/package.json"
+      - "/test-packages/**/*.js"
+      - "/test-packages/**/*.ts"
+      - "/test-packages/**/package-lock.json"
+      - "/test-packages/**/package.json"
       - "**/tsconfig.json"
       - "!docs/**"
   push:

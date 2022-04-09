@@ -2,20 +2,24 @@ name: Integration Tests
 on:
   pull_request:
     paths:
-      - "**/*.ts"
-      - "**/package-lock.json"
-      - "**/package.json"
+      - "packages/**/package.json"
+      - "packages/**/package-lock.json"
+      - "packages/**/*.ts"
       - "integration-tests/**"
+      - "/package.json"
+      - "/package-lock.json"
       - ".github/workflows/integration-test.yml"
       - "!docs/**"
   push:
     branches:
       - main
     paths:
-      - "**/*.ts"
-      - "**/package-lock.json"
-      - "**/package.json"
+      - "packages/**/package.json"
+      - "packages/**/package-lock.json"
+      - "packages/**/*.ts"
       - "integration-tests/**"
+      - "/package.json"
+      - "/package-lock.json"
       - ".github/workflows/integration-test.yml"
       - "!docs/**"
   # Run on demand
