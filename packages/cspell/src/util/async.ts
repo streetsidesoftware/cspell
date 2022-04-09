@@ -1,5 +1,16 @@
+import { operators } from '@cspell/cspell-pipe';
+
 export {
-    toAsyncIterable as mergeAsyncIterables,
+    helpers as asyncHelpers,
+    operators as asyncOperators,
+    pipeAsync as asyncPipe,
     toArray as asyncIterableToArray,
-    opMap as asyncMap,
+    toAsyncIterable as mergeAsyncIterables,
 } from '@cspell/cspell-pipe';
+
+export const {
+    opMapAsync: asyncMap,
+    opFilterAsync: asyncFilter,
+    opAwaitAsync: asyncAwait,
+    opFlattenAsync: asyncFlatten,
+} = operators;

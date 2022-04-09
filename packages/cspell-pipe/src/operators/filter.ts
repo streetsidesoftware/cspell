@@ -1,12 +1,20 @@
 import { isAsyncIterable } from '../helpers/util';
 import { PipeFn } from '../internalTypes';
 
+// prettier-ignore
 export function opFilterAsync<T, S extends T>(filterFn: (v: T) => v is S): (iter: AsyncIterable<T>) => AsyncIterable<S>;
-export function opFilterAsync<T>(filterFn: (v: T) => boolean): (iter: AsyncIterable<T>) => AsyncIterable<T>;
-export function opFilterAsync<T>(filterFn: (v: T) => boolean): (iter: AsyncIterable<T>) => AsyncIterable<T> {
+// prettier-ignore
+export function opFilterAsync<T, S extends Awaited<T>>(filterFn: (v: Awaited<T>) => v is S): (iter: AsyncIterable<T>) => AsyncIterable<S>;
+// prettier-ignore
+export function opFilterAsync<T>(filterFn: (v: Awaited<T>) => boolean): (iter: AsyncIterable<T>) => AsyncIterable<Awaited<T>>;
+// prettier-ignore
+export function opFilterAsync<T>(filterFn: (v: Awaited<T>) => Promise<boolean>): (iter: AsyncIterable<T>) => AsyncIterable<Awaited<T>>;
+// prettier-ignore
+export function opFilterAsync<T>(filterFn: (v: Awaited<T>) => boolean | Promise<boolean>): (iter: AsyncIterable<T>) => AsyncIterable<Awaited<T>> {
     async function* fn(iter: Iterable<T> | AsyncIterable<T>) {
         for await (const v of iter) {
-            if (filterFn(v)) yield v;
+            const pass = await filterFn(v);
+            if (pass) yield v;
         }
     }
 

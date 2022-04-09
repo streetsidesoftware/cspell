@@ -1,6 +1,6 @@
-import { opFilter } from '.';
 import { toArray, toAsyncIterable } from '../helpers';
 import { pipeAsync, pipeSync } from '../pipe';
+import { opFilter, opFilterAsync } from './filter';
 
 describe('Validate filter', () => {
     test('filter', async () => {
@@ -13,13 +13,65 @@ describe('Validate filter', () => {
         const filterToLen = opFilter(filterFn);
 
         const s = pipeSync(values, filterToLen);
-        const a = pipeAsync(toAsyncIterable(values), filterToLen);
+        const a = pipeAsync(values, filterToLen);
 
         const sync = toArray(s);
         const async = await toArray(a);
 
         expect(sync).toEqual(expected);
         expect(async).toEqual(expected);
+    });
+
+    type Primitives = string | number | boolean;
+    type PromisePrim = Promise<string> | Promise<number> | Promise<boolean>;
+
+    test.each`
+        values                                                          | expected
+        ${[]}                                                           | ${[]}
+        ${[true, Promise.resolve(false), Promise.resolve(''), 'hello']} | ${[true, 'hello']}
+        ${[0, Promise.resolve('hey')]}                                  | ${['hey']}
+    `(
+        'filter async',
+        async ({ values, expected }: { values: (Primitives | PromisePrim)[]; expected: Primitives[] }) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const isTruthy = async (v: Primitives) => !!(await v);
+            const aValues = pipeAsync(values, opFilterAsync<Primitives | PromisePrim>(isTruthy));
+            const result = await toArray(aValues);
+            expect(result).toEqual(expected);
+        }
+    );
+
+    test('is a', async () => {
+        function isString(a: unknown): a is string {
+            return typeof a === 'string';
+        }
+        const filtered = pipeAsync(['string', 4, {}, 'hello', undefined], opFilterAsync(isString));
+
+        expect(await toArray(filtered)).toEqual(['string', 'hello']);
+    });
+
+    test('async filter', async () => {
+        function isString(a: unknown): a is string {
+            return typeof a === 'string';
+        }
+        async function truthyAsync(a: unknown): Promise<boolean> {
+            return !!(await a);
+        }
+        const filtered = pipeAsync(
+            [
+                Promise.resolve('string'),
+                '',
+                4,
+                {},
+                'hello',
+                Promise.resolve(undefined),
+                Promise.resolve(Promise.resolve(Promise.resolve('deep'))),
+            ],
+            opFilterAsync(truthyAsync),
+            opFilter(isString)
+        );
+
+        expect(await toArray(filtered)).toEqual(['string', 'hello', 'deep']);
     });
 
     test('filter isDefined', async () => {

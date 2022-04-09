@@ -1,4 +1,4 @@
-import { isAsyncIterable, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
+import { isAsyncIterable, operators, opFilter, pipeAsync, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellReporter, CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
@@ -16,6 +16,7 @@ import {
     fileInfoToDocument,
     FileResult,
     findFiles,
+    isNotDir,
     readConfig,
     readFileInfo,
     readFileListFiles,
@@ -30,6 +31,8 @@ import chalk = require('chalk');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require('../../package.json');
 const version = npmPackage.version;
+
+const { opFilterAsync } = operators;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
     let { reporter } = cfg;
@@ -515,7 +518,7 @@ async function useFileLists(
     }
     const globMatcher = new GlobMatcher(includeGlobPatterns, options);
 
-    const files = await readFileListFiles(fileListFiles);
     const filterFiles = (file: string) => globMatcher.match(file);
-    return files instanceof Array ? files.filter(filterFiles) : pipeAsync(files, opFilter(filterFiles));
+    const files = readFileListFiles(fileListFiles);
+    return pipeAsync(files, opFilter(filterFiles), opFilterAsync(isNotDir));
 }
