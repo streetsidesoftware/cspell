@@ -1,6 +1,15 @@
 export interface ParsedText {
+    /**
+     * The text extracted and possibly transformed
+     */
     text: string;
+    /**
+     * the starting offset in the original text.
+     */
     start: number;
+    /**
+     * ending offset in the original text.
+     */
     end: number;
     /**
      * The source map is used to support text transformations.
@@ -8,6 +17,9 @@ export interface ParsedText {
      * See: {@link SourceMap}
      */
     map?: SourceMap;
+    /**
+     * Used to delegate parsing the contents of `text` to another parser.
+     */
     delegate?: DelegateInfo;
 }
 

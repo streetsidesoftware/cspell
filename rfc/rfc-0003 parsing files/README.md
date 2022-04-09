@@ -19,11 +19,42 @@ Parsers transform the document text to prepare it for spell checking. This is a 
 - [Latex special character codes · Issue #361 · streetsidesoftware/cspell](https://github.com/streetsidesoftware/cspell/issues/361)
 
 By providing the context / scope of the transformed text, powerful configurations become possible, see [Context and Scope](#context-and-scope).
-In addition, parsers will enable the spell checker to work on a wider range of documents than the existing spell checker, possibly unlocking PDF and other proprietary formats.
+In addition, parsers will enable the spell checker to work on a wider range of documents than the existing spell checker, possibly unlocking PDF and other proprietary formats. Jupyter Notebooks are another perfect example of a file format that could benefit from a parser.
+
+The parser extracts and if necessary transforms text from the document into parsed segments to be checked.
+
+Parsed text has the following format: See [`types.ts`](./src/types.ts)
+
+```ts
+interface ParsedText {
+  /**
+   * The text extracted and possibly transformed
+   */
+  text: string;
+  /**
+   * the starting offset in the original text.
+   */
+  start: number;
+  /**
+   * ending offset in the original text.
+   */
+  end: number;
+  /**
+   * The source map is used to support text transformations.
+   *
+   * See: {@link SourceMap}
+   */
+  map?: SourceMap;
+  /**
+   * Used to delegate parsing the contents of `text` to another parser.
+   */
+  delegate?: DelegateInfo;
+}
+```
 
 ## Source Maps
 
-A SourceMap is used to map transform a piece of text back to its original text.
+A SourceMap is used to map a piece of transformed text back to its original text.
 This is necessary in order to report the correct location of a spelling issue.
 
 An empty source map indicates that it was a 1:1 transformation.
