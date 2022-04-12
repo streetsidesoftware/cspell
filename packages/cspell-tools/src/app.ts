@@ -12,6 +12,8 @@ import { ReaderOptions } from './compiler/Reader';
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
 function globP(pattern: string): Promise<string[]> {
+    // Convert windows separators.
+    pattern = pattern.replace(/\\/g, '/');
     return new Promise((resolve, reject) => {
         glob(pattern, (err, result) => {
             err ? reject(err) : resolve(result);
