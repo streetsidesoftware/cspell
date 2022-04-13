@@ -48,7 +48,7 @@ export interface NPatternPatterns extends NPatternBase {
  */
 export interface NPatternMatch extends NPatternBase {
     match: Match;
-    captures?: NCaptures;
+    captures?: NCaptures | undefined;
     contentName?: undefined;
 }
 
@@ -57,11 +57,11 @@ export interface NPatternMatch extends NPatternBase {
  */
 export interface NPatternBeginEnd extends NPatternBase {
     begin: Match;
-    end?: Match;
-    contentName?: NScope;
-    captures?: NCaptures;
-    beginCaptures?: NCaptures;
-    endCaptures?: NCaptures;
+    end?: Match | undefined;
+    contentName?: NScope | undefined;
+    captures?: NCaptures | undefined;
+    beginCaptures?: NCaptures | undefined;
+    endCaptures?: NCaptures | undefined;
 }
 
 /**
@@ -110,7 +110,7 @@ export interface Rule {
     depth: number;
     findMatch: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
     findNext?: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
-    end?: (line: LineOffsetAnchored) => MatchResult | undefined;
+    end?: ((line: LineOffsetAnchored) => MatchResult | undefined) | undefined;
 }
 
 export interface MatchRuleResult {
@@ -121,10 +121,10 @@ export interface MatchRuleResult {
 
 export interface NPatternBase {
     bind(rule: Rule): Rule;
-    name?: NScope;
-    contentName?: NScope;
-    comment?: string;
-    disabled?: boolean;
-    patterns?: NPattern[];
-    repository?: NRepository;
+    name?: NScope | undefined;
+    contentName?: NScope | undefined;
+    comment?: string | undefined;
+    disabled?: boolean | undefined;
+    patterns?: NPattern[] | undefined;
+    repository?: NRepository | undefined;
 }

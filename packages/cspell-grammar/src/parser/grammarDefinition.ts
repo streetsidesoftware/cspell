@@ -40,15 +40,15 @@ export interface PatternPatterns extends PatternBase {
 }
 
 interface PatternMatchBase extends PatternBase {
-    begin?: Match;
-    beginCaptures?: Captures;
-    captures?: Captures;
-    contentName?: Scope;
-    end?: Match;
-    endCaptures?: Captures;
-    match?: Match;
-    while?: Match;
-    whileCaptures?: Captures;
+    begin?: Match | undefined;
+    beginCaptures?: Captures | undefined;
+    captures?: Captures | undefined;
+    contentName?: Scope | undefined;
+    end?: Match | undefined;
+    endCaptures?: Captures | undefined;
+    match?: Match | undefined;
+    while?: Match | undefined;
+    whileCaptures?: Captures | undefined;
 }
 
 /**
@@ -56,7 +56,7 @@ interface PatternMatchBase extends PatternBase {
  */
 export interface PatternMatch extends PatternMatchBase {
     match: Match;
-    captures?: Captures;
+    captures?: Captures | undefined;
     patterns?: undefined;
     begin?: undefined;
     end?: undefined;
@@ -72,26 +72,26 @@ export interface PatternMatch extends PatternMatchBase {
  */
 export interface PatternBeginEnd extends PatternMatchBase {
     begin: Match;
-    end?: Match;
+    end?: Match | undefined;
     match?: undefined;
     contentName?: Scope;
-    captures?: Captures;
-    beginCaptures?: Captures;
-    endCaptures?: Captures;
+    captures?: Captures | undefined;
+    beginCaptures?: Captures | undefined;
+    endCaptures?: Captures | undefined;
     while?: undefined;
     whileCaptures?: undefined;
 }
 
 export interface PatternBeginWhile extends PatternMatchBase {
     begin: Match;
-    end?: Match;
+    end?: Match | undefined;
     match?: undefined;
-    contentName?: Scope;
-    captures?: Captures;
-    beginCaptures?: Captures;
+    contentName?: Scope | undefined;
+    captures?: Captures | undefined;
+    beginCaptures?: Captures | undefined;
     endCaptures?: undefined;
     while: Match;
-    whileCaptures?: Captures;
+    whileCaptures?: Captures | undefined;
 }
 
 /**
@@ -124,11 +124,11 @@ export type Captures = Scope | Record<string | number, PatternName | Scope>;
 
 export interface PatternBase {
     /** Optional name scope */
-    name?: Scope;
+    name?: Scope | undefined;
     /** Optional comment */
-    comment?: string;
+    comment?: string | undefined;
     /** Used to disable a rule. */
-    disabled?: boolean;
-    patterns?: PatternList;
-    repository?: Repository;
+    disabled?: boolean | undefined;
+    patterns?: PatternList | undefined;
+    repository?: Repository | undefined;
 }

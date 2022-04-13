@@ -285,8 +285,8 @@ function findInPatterns(patterns: NPattern[], line: LineOffsetAnchored, rule: Ru
 
 function normalizePatternPatterns(p: { patterns: PatternList }): { patterns: NPattern[] };
 function normalizePatternPatterns(p: { patterns: undefined }): { patterns: undefined };
-function normalizePatternPatterns(p: { patterns?: PatternList }): { patterns?: NPattern[] };
-function normalizePatternPatterns(p: { patterns?: PatternList }): { patterns?: NPattern[] } {
+function normalizePatternPatterns(p: { patterns?: PatternList | undefined }): { patterns?: NPattern[] };
+function normalizePatternPatterns(p: { patterns?: PatternList | undefined }): { patterns?: NPattern[] | undefined } {
     const patterns = p.patterns ? normalizePatterns(p.patterns) : undefined;
     return { patterns };
 }
@@ -295,7 +295,7 @@ function normalizePatterns(patterns: PatternList): NPattern[] {
     return patterns.map((p) => (typeof p === 'string' ? { include: p } : p)).map(nPattern);
 }
 
-function normalizePatternRepository(p: { repository?: Repository }): { repository?: NRepository } {
+function normalizePatternRepository(p: { repository?: Repository | undefined }): { repository?: NRepository } {
     const rep = p.repository;
     if (!rep) return {};
 
