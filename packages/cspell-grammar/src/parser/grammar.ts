@@ -1,1 +1,0 @@
-export { validate } from './validateGrammar';

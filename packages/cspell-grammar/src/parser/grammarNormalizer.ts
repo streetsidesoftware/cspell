@@ -20,6 +20,7 @@ import {
     NPatternPatterns,
     NPatternRepositoryReference,
     NRepository,
+    NScopeSource,
     Rule,
 } from './grammarNormalized';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
@@ -27,42 +28,7 @@ import { createMatchResult, createSimpleMatchResult } from './matchResult';
 import type { LineOffsetAnchored, MatchResult } from './types';
 
 export function normalizeGrammar(grammar: Grammar): NGrammar {
-    const { scopeName, name, ...rest } = grammar;
-
-    const root = nPattern({
-        name: grammar.scopeName,
-        patterns: [{ patterns: grammar.patterns, repository: grammar.repository }],
-    });
-    const selfPattern = root.patterns[0] as NPatternPatterns;
-    const repository = root.repository ?? Object.create(null);
-    root.repository = repository;
-    const g: NGrammar = {
-        ...rest,
-        scopeName,
-        name,
-        patterns: root.patterns,
-        repository,
-        bind,
-    };
-
-    function bind(rule: Rule | undefined): Rule {
-        const grammarRule: Rule = {
-            ...grammarToRule(g, root, selfPattern, rule),
-            findMatch,
-            findNext: findMatch,
-            end() {
-                // Grammars never end.
-                return undefined;
-            },
-        };
-
-        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
-            return findInPatterns(root.patterns, line, grammarRule);
-        }
-        return grammarRule;
-    }
-
-    return g;
+    return new ImplNGrammar(grammar);
 }
 
 const SpecialRepositoryReferences: Record<string, true | undefined> = {
@@ -85,10 +51,8 @@ export function nPattern(p: Pattern): NPattern {
 }
 
 function normalizePatternMatch(p: PatternMatch): NPatternMatch {
-    const { repository } = normalizePatternRepository(p);
     const self: NPatternMatch = {
         ...p,
-        repository,
         captures: normalizeCapture(p.captures),
         bind,
     };
@@ -114,14 +78,12 @@ function normalizePatternMatch(p: PatternMatch): NPatternMatch {
 }
 
 function normalizePatternBeginEnd(p: PatternBeginEnd): NPatternBeginEnd {
-    const { repository } = normalizePatternRepository(p);
     const { patterns } = normalizePatternPatterns(p);
     const self: NPatternBeginEnd = {
         ...p,
         captures: normalizeCapture(p.captures),
         beginCaptures: normalizeCapture(p.beginCaptures),
         endCaptures: normalizeCapture(p.endCaptures),
-        repository,
         patterns,
         bind,
     };
@@ -158,11 +120,9 @@ function normalizePatternBeginEnd(p: PatternBeginEnd): NPatternBeginEnd {
 }
 
 function normalizePatternName(p: PatternName): NPatternName {
-    const repository = undefined;
     const patterns = undefined;
     const self: NPatternName = {
         ...p,
-        repository,
         patterns,
         bind,
     };
@@ -246,11 +206,13 @@ function normalizePatternIncludeExt(p: PatternInclude): NPatternInclude | NPatte
 }
 
 function normalizePatternsPatterns(p: PatternPatterns): NPatternPatterns {
-    const { repository } = normalizePatternRepository(p);
     const { patterns } = normalizePatternPatterns(p);
+    return bindPatternsPatterns(p, patterns);
+}
+
+function bindPatternsPatterns(p: Omit<PatternPatterns, 'patterns'>, patterns: NPattern[]): NPatternPatterns {
     const self: NPatternPatterns = {
         ...p,
-        repository,
         patterns,
         bind,
     };
@@ -295,16 +257,16 @@ function normalizePatterns(patterns: PatternList): NPattern[] {
     return patterns.map((p) => (typeof p === 'string' ? { include: p } : p)).map(nPattern);
 }
 
-function normalizePatternRepository(p: { repository?: Repository | undefined }): { repository?: NRepository } {
-    const rep = p.repository;
-    if (!rep) return {};
+const emptyRepository: NRepository = Object.freeze(Object.create(null));
 
-    const repository = normalizeRepository(rep);
-    return { repository };
+function normalizePatternRepository(rep: Repository | undefined): NRepository {
+    if (!rep) return emptyRepository;
+
+    return normalizeRepository(rep);
 }
 
 function normalizeRepository(rep: Repository): NRepository {
-    const repository: NRepository = {};
+    const repository: NRepository = Object.create(null);
     for (const [key, pat] of Object.entries(rep)) {
         repository[key] = nPattern(pat);
     }
@@ -314,34 +276,13 @@ function normalizeRepository(rep: Repository): NRepository {
 type AppendRuleResult = Pick<Rule, 'grammar' | 'pattern' | 'parent' | 'depth' | 'repository'>;
 
 function appendRule(parent: Rule, pattern: NPattern): AppendRuleResult {
-    const { repository, depth } = parent;
-    const rep = !pattern.repository ? repository : Object.assign(Object.create(null), repository, pattern.repository);
+    const { repository: rep, depth } = parent;
     return {
         grammar: parent.grammar,
         pattern,
         parent,
         repository: rep,
         depth: depth + 1,
-    };
-}
-
-function grammarToRule(
-    grammar: NGrammar,
-    rootPattern: NPatternPatterns,
-    selfPattern: NPatternPatterns,
-    parent: Rule | undefined
-): AppendRuleResult {
-    const depth = 0;
-    const repository = Object.create(null);
-    selfPattern.repository && Object.assign(repository, selfPattern.repository);
-    repository['$self'] = selfPattern;
-    repository['$base'] = repository['$base'] || rootPattern;
-    return {
-        grammar,
-        pattern: rootPattern,
-        parent,
-        repository,
-        depth,
     };
 }
 
@@ -396,4 +337,65 @@ export function extractScope(er: Rule, isContent = true): string[] {
     }
 
     return scope;
+}
+
+function grammarToRule(grammar: NGrammar, baseGrammar: NGrammar, parent: Rule | undefined): AppendRuleResult {
+    const depth = 0;
+    const repository: NRepository = Object.create(null);
+    Object.assign(repository, grammar.repository);
+    repository['$self'] = grammar.self;
+    repository['$base'] = repository['$base'] || baseGrammar.self;
+    return {
+        grammar,
+        pattern: baseGrammar,
+        parent,
+        repository,
+        depth,
+    };
+}
+
+class ImplNGrammar implements NGrammar {
+    readonly scopeName: NScopeSource;
+    readonly name: NScopeSource;
+    readonly comment: string | undefined;
+    readonly disabled: boolean | undefined;
+    readonly patterns: NPattern[];
+    readonly repository: NRepository;
+    readonly grammarName: string | undefined;
+    readonly self: NPatternPatterns;
+
+    constructor(grammar: Grammar) {
+        this.scopeName = grammar.scopeName;
+        this.name = grammar.scopeName;
+        this.comment = grammar.comment;
+        this.disabled = grammar.disabled;
+        this.grammarName = grammar.name;
+
+        const self = nPattern({
+            patterns: [{ patterns: grammar.patterns }],
+        });
+        const repository = normalizePatternRepository(grammar.repository);
+
+        this.patterns = self.patterns;
+        this.repository = repository;
+        this.self = self;
+    }
+
+    bind(rule: Rule | undefined): Rule {
+        const patterns = this.patterns;
+        const grammarRule: Rule = {
+            ...grammarToRule(this, rule?.grammar ?? this, rule),
+            findMatch,
+            findNext: findMatch,
+            end() {
+                // Grammars never end.
+                return undefined;
+            },
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            return findInPatterns(patterns, line, grammarRule);
+        }
+        return grammarRule;
+    }
 }

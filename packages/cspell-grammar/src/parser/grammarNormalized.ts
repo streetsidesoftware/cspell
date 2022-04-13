@@ -1,8 +1,15 @@
 import type { LineOffsetAnchored, MatchResult } from './types';
 
-export interface NGrammar extends NPatternBase {
+export interface NGrammar {
     scopeName: NScopeSource;
     patterns: NPattern[];
+    repository: NRepository;
+    self: NPatternPatterns;
+    name: NScope;
+    contentName?: NScope | undefined;
+    comment?: string | undefined;
+    disabled?: boolean | undefined;
+
     bind(rule?: Rule): Rule;
 }
 
@@ -71,7 +78,6 @@ export interface NPatternRepositoryReference extends NPatternBase {
     reference: NRepositoryReference;
     name?: undefined;
     patterns?: undefined;
-    repository?: undefined;
 }
 
 /**
@@ -81,7 +87,6 @@ export interface NPatternInclude extends NPatternBase {
     include: IncludeExternalRef;
     name?: undefined;
     patterns?: undefined;
-    repository?: undefined;
 }
 
 /**
@@ -126,5 +131,4 @@ export interface NPatternBase {
     comment?: string | undefined;
     disabled?: boolean | undefined;
     patterns?: NPattern[] | undefined;
-    repository?: NRepository | undefined;
 }

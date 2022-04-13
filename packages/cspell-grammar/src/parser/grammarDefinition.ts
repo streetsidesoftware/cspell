@@ -1,5 +1,6 @@
 export interface Grammar extends PatternPatterns {
     scopeName: ScopeSource;
+    repository?: Repository | undefined;
 }
 
 /**
@@ -29,7 +30,6 @@ export type Match = string | RegExp;
 export interface PatternName extends PatternBase {
     name: Scope;
     patterns?: undefined;
-    repository?: undefined;
 }
 
 /**
@@ -101,7 +101,6 @@ export interface PatternInclude extends PatternBase {
     include: PatternRef;
     name?: undefined;
     patterns?: undefined;
-    repository?: undefined;
 }
 
 /**
@@ -130,5 +129,4 @@ export interface PatternBase {
     /** Used to disable a rule. */
     disabled?: boolean | undefined;
     patterns?: PatternList | undefined;
-    repository?: Repository | undefined;
 }
