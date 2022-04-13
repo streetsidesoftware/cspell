@@ -20,6 +20,7 @@ import {
     NPatternPatterns,
     NPatternRepositoryReference,
     NRepository,
+    NScope,
     NScopeSource,
     Rule,
 } from './grammarNormalized';
@@ -206,30 +207,7 @@ function normalizePatternIncludeExt(p: PatternInclude): NPatternInclude | NPatte
 }
 
 function normalizePatternsPatterns(p: PatternPatterns): NPatternPatterns {
-    const { patterns } = normalizePatternPatterns(p);
-    return bindPatternsPatterns(p, patterns);
-}
-
-function bindPatternsPatterns(p: Omit<PatternPatterns, 'patterns'>, patterns: NPattern[]): NPatternPatterns {
-    const self: NPatternPatterns = {
-        ...p,
-        patterns,
-        bind,
-    };
-
-    function bind(parentRule: Rule): Rule {
-        const rule: Rule = {
-            ...appendRule(parentRule, self),
-            findMatch,
-        };
-
-        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
-            return findInPatterns(self.patterns, line, rule);
-        }
-        return rule;
-    }
-
-    return self;
+    return new ImplNPatternPatterns(p);
 }
 
 function findInPatterns(patterns: NPattern[], line: LineOffsetAnchored, rule: Rule): MatchRuleResult | undefined {
@@ -397,5 +375,33 @@ class ImplNGrammar implements NGrammar {
             return findInPatterns(patterns, line, grammarRule);
         }
         return grammarRule;
+    }
+}
+
+class ImplNPatternPatterns implements NPatternPatterns {
+    readonly name: NScope | undefined;
+    readonly comment: string | undefined;
+    readonly disabled: boolean | undefined;
+    readonly patterns: NPattern[];
+
+    constructor(p: PatternPatterns) {
+        const { name, comment, disabled, ...rest } = p;
+        this.patterns = normalizePatterns(rest.patterns);
+        this.name = name;
+        this.comment = comment;
+        this.disabled = disabled;
+    }
+
+    bind(parentRule: Rule): Rule {
+        const patterns = this.patterns;
+        const rule: Rule = {
+            ...appendRule(parentRule, this),
+            findMatch,
+        };
+
+        function findMatch(line: LineOffsetAnchored): MatchRuleResult | undefined {
+            return findInPatterns(patterns, line, rule);
+        }
+        return rule;
     }
 }
