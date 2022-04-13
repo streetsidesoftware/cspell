@@ -79,7 +79,7 @@ function normalizePatternMatch(p: PatternMatch): NPatternMatch {
 }
 
 function normalizePatternBeginEnd(p: PatternBeginEnd): NPatternBeginEnd {
-    const { patterns } = normalizePatternPatterns(p);
+    const patterns = normalizePatterns(p.patterns);
     const self: NPatternBeginEnd = {
         ...p,
         captures: normalizeCapture(p.captures),
@@ -223,15 +223,11 @@ function findInPatterns(patterns: NPattern[], line: LineOffsetAnchored, rule: Ru
     return r;
 }
 
-function normalizePatternPatterns(p: { patterns: PatternList }): { patterns: NPattern[] };
-function normalizePatternPatterns(p: { patterns: undefined }): { patterns: undefined };
-function normalizePatternPatterns(p: { patterns?: PatternList | undefined }): { patterns?: NPattern[] };
-function normalizePatternPatterns(p: { patterns?: PatternList | undefined }): { patterns?: NPattern[] | undefined } {
-    const patterns = p.patterns ? normalizePatterns(p.patterns) : undefined;
-    return { patterns };
-}
-
-function normalizePatterns(patterns: PatternList): NPattern[] {
+function normalizePatterns(patterns: undefined): undefined;
+function normalizePatterns(patterns: PatternList): NPattern[];
+function normalizePatterns(patterns: PatternList | undefined): NPattern[] | undefined;
+function normalizePatterns(patterns: PatternList | undefined): NPattern[] | undefined {
+    if (!patterns) return undefined;
     return patterns.map((p) => (typeof p === 'string' ? { include: p } : p)).map(nPattern);
 }
 
