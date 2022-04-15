@@ -168,7 +168,7 @@ function findInPatterns(patterns: NPattern[], line: LineOffsetAnchored, rule: Ru
         if (pat.disabled) continue;
         const er = pat.findMatch(line, rule);
         if (er?.match !== undefined && !er.rule.pattern.disabled) {
-            r = (r && r.match && r.match.index < er.match.index && r) || er;
+            r = (r && r.match && r.match.index <= er.match.index && r) || er;
         }
     }
     return r;
