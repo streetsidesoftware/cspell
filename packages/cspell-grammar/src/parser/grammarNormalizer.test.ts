@@ -6,7 +6,7 @@ describe('grammarNormalizer', () => {
     test('normalizeGrammar', () => {
         const r = normalizeGrammar(grammarTS);
         expect(r).toBeDefined();
-        expect(typeof r.bind).toBe('function');
+        expect(typeof r.begin).toBe('function');
     });
 
     test.each`
@@ -19,8 +19,8 @@ describe('grammarNormalizer', () => {
     `('normalizeGrammar.exec', ({ line, offset, expectedScope, expectedMatch }) => {
         const grammar = normalizeGrammar(grammarTS);
         const lineOff: LineOffsetAnchored = { text: line, offset, lineNumber: 5, anchor: -1 };
-        const rule = grammar.bind(undefined);
-        const m = rule.findMatch(lineOff);
+        const rule = grammar.begin(undefined);
+        const m = rule.findNext(lineOff);
         const scope = m && extractScope(m.rule);
         expect(scope).toEqual(expectedScope);
         expect(m?.match).toEqual(expectedMatch);

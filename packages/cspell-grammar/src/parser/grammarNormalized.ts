@@ -10,7 +10,7 @@ export interface NGrammar {
     comment?: string | undefined;
     disabled?: boolean | undefined;
 
-    bind(rule?: Rule): Rule;
+    begin(rule?: Rule): GrammarRule;
 }
 
 /**
@@ -109,13 +109,21 @@ export type NCaptures = Record<string | number, NScope>;
 
 export interface Rule {
     grammar: NGrammar;
-    pattern: NPattern;
+    pattern: NPattern | NGrammar;
     parent: Rule | undefined;
     repository: NRepository;
     depth: number;
-    findMatch: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
-    findNext?: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
+    findNext?: ((line: LineOffsetAnchored) => MatchRuleResult | undefined) | undefined;
     end?: ((line: LineOffsetAnchored) => MatchResult | undefined) | undefined;
+}
+
+export interface GrammarRule extends Rule {
+    pattern: NGrammar;
+    parent: Rule | undefined;
+    repository: NRepository;
+    depth: number;
+    findNext: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
+    end: (line: LineOffsetAnchored) => MatchResult | undefined;
 }
 
 export interface MatchRuleResult {
@@ -125,7 +133,7 @@ export interface MatchRuleResult {
 }
 
 export interface NPatternBase {
-    bind(rule: Rule): Rule;
+    findMatch(line: LineOffsetAnchored, rule: Rule): MatchRuleResult | undefined;
     name?: NScope | undefined;
     contentName?: NScope | undefined;
     comment?: string | undefined;

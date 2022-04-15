@@ -55,7 +55,7 @@ export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
 
 export function tokenizeText(text: string, grammar: NGrammar): TokenizedLine[] {
     const lines = text.split(/(?<=\n)/);
-    const rule = grammar.bind();
+    const rule = grammar.begin();
     const r: TokenizedLine[] = [];
     let tr = tokenizeLine({ text: lines[0], lineNumber: 0 }, rule);
     r.push(toParsedLine(tr));
