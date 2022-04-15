@@ -108,6 +108,7 @@ export type NRepository = Record<string, NPattern>;
 export type NCaptures = Record<string | number, NScope>;
 
 export interface Rule {
+    id: number;
     grammar: NGrammar;
     pattern: NPattern | NGrammar;
     parent: Rule | undefined;
@@ -119,9 +120,6 @@ export interface Rule {
 
 export interface GrammarRule extends Rule {
     pattern: NGrammar;
-    parent: Rule | undefined;
-    repository: NRepository;
-    depth: number;
     findNext: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
     end: (line: LineOffsetAnchored) => MatchResult | undefined;
 }

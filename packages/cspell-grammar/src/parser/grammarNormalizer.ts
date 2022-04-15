@@ -198,22 +198,52 @@ function normalizeRepository(rep: Repository): NRepository {
     return repository;
 }
 
+let ruleCounter = 0;
+
+function factoryRuleBase(
+    parent: Rule | undefined,
+    pattern: NGrammar,
+    repository: NRepository,
+    grammar: NGrammar,
+    findNext: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
+    end: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
+): GrammarRule;
+function factoryRuleBase(
+    parent: Rule | undefined,
+    pattern: NPattern | NGrammar,
+    repository: NRepository,
+    grammar: NGrammar,
+    findNext?: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
+    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
+): Rule;
+function factoryRuleBase(
+    parent: Rule | undefined,
+    pattern: NPattern | NGrammar,
+    repository: NRepository,
+    grammar: NGrammar,
+    findNext?: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
+    end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
+): Rule {
+    const depth = parent ? parent.depth + 1 : 0;
+    return {
+        id: ruleCounter++,
+        grammar,
+        pattern,
+        parent,
+        repository,
+        depth,
+        findNext,
+        end,
+    };
+}
+
 function factoryRule(
     parent: Rule,
     pattern: NPattern,
     findNext?: (this: Rule, line: LineOffsetAnchored) => MatchRuleResult | undefined,
     end?: (this: Rule, line: LineOffsetAnchored) => MatchResult | undefined
 ): Rule {
-    const { repository: rep, depth } = parent;
-    return {
-        grammar: parent.grammar,
-        pattern,
-        parent,
-        repository: rep,
-        depth: depth + 1,
-        findNext,
-        end,
-    };
+    return factoryRuleBase(parent, pattern, parent.repository, parent.grammar, findNext, end);
 }
 
 function normalizeCapture(cap: Captures | undefined): NCaptures | undefined {
@@ -300,24 +330,19 @@ class ImplNGrammar implements NGrammar {
         const patterns = this.patterns;
 
         function grammarToRule(grammar: NGrammar, baseGrammar: NGrammar, parent: Rule | undefined): GrammarRule {
-            const depth = 0;
             const repository: NRepository = Object.create(null);
             Object.assign(repository, grammar.repository);
             repository['$self'] = grammar.self;
             repository['$base'] = repository['$base'] || baseGrammar.self;
-            return {
-                grammar,
-                pattern: grammar,
-                parent,
-                repository,
-                depth,
-                findNext(line: LineOffsetAnchored): MatchRuleResult | undefined {
-                    return findInPatterns(patterns, line, this);
-                },
-                end(_line: LineOffsetAnchored) {
-                    return undefined;
-                },
-            };
+
+            function findNext(this: Rule, line: LineOffsetAnchored): MatchRuleResult | undefined {
+                return findInPatterns(patterns, line, this);
+            }
+            function end(_line: LineOffsetAnchored) {
+                return undefined;
+            }
+
+            return factoryRuleBase(parent, grammar, repository, grammar, findNext, end);
         }
 
         return grammarToRule(this, parentRule?.grammar ?? this, parentRule);
