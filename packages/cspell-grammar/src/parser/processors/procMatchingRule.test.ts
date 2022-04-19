@@ -70,8 +70,8 @@ function s(scope: string[]): TokenizedText {
 
 function match(text: string, offset = 0, lineNumber = 42, anchor = -1) {
     const g = normalizeGrammar(grammar);
-    const rule = g.bind(undefined);
-    return rule.findMatch({ text, offset, anchor, lineNumber });
+    const rule = g.begin(undefined);
+    return rule.findNext({ text, offset, anchor, lineNumber });
 }
 
 function oc<T>(t: Partial<T>): T {

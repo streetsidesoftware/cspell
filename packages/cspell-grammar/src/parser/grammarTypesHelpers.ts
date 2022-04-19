@@ -1,4 +1,4 @@
-import { Pattern, PatternBeginEnd, PatternInclude, PatternMatch, PatternPatterns } from './grammarDefinition';
+import { Grammar, Pattern, PatternBeginEnd, PatternInclude, PatternMatch, PatternPatterns } from './grammarDefinition';
 
 export function isPatternInclude(p: Pattern): p is PatternInclude {
     return !!(<PatternInclude>p).include;
@@ -24,4 +24,8 @@ export function isPatternBeginEnd(pattern: Pattern): pattern is PatternBeginEnd 
 
 export function isPatternPatterns(p: Pattern): p is PatternPatterns {
     return Array.isArray(p.patterns);
+}
+
+export function isGrammar(g: Grammar | Pattern): g is Grammar {
+    return (<Grammar>g).scopeName !== undefined;
 }

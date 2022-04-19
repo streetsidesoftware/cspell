@@ -1,10 +1,10 @@
 # `cspell-grammar`
 
-CSpell Grammar is used define the parts of a document that is spell checked.
+CSpell Grammar is used to generate a parser. The Parser is used to add context / scope to parts of a document, making it easier to define the parts to spell spell checked.
 
-In addition to being the cause of performance issues by end users, the existing `ignoreRegExpList` and `includeRegExpList` is too limited.
+This is to address the issues and limitations related to `ignoreRegExpList` and `includeRegExpList`.
 
-The grammar is use to add `scope` to sections of a document. The `scope` can then be used to apply spell checking rules.
+The parser is use to add `scope` to sections of a document. The `scope` can then be used to apply spell checking rules.
 
 Example: Only check comments and strings
 

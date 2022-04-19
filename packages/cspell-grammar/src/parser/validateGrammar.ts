@@ -17,7 +17,7 @@ export function validate(grammar: Grammar): asserts grammar {
         scopeExt,
     };
     validatePatterns(grammar.patterns, context);
-    validatePatternRepository(grammar, context);
+    validateGrammarRepository(grammar, context);
 }
 
 export function validatePatterns(patterns: PatternList, context: GrammarContext): asserts patterns {
@@ -46,10 +46,9 @@ export function validatePattern(pattern: Pattern, context: GrammarContext): asse
         format('Pattern must be a Match pattern or a Begin/End pattern, but not both: %o', pattern)
     );
     validatePatternName(pattern, context);
-    validatePatternRepository(pattern, context);
 }
 
-export function validatePatternRepository(p: Pattern | Grammar, context: GrammarContext): asserts p {
+export function validateGrammarRepository(p: Grammar, context: GrammarContext): asserts p {
     p.repository && validateRepository(p.repository, context);
 }
 

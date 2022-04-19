@@ -3,10 +3,33 @@ import { Grammar, Repository } from '..';
 const repository: Repository = {
     statements: {
         name: 'code.ts',
-        patterns: ['#string', '#comment', '#braces'],
+        patterns: [
+            '#keyword',
+            '#string',
+            '#comment',
+            '#braces',
+            '#punctuation',
+            '#space',
+            { name: 'identifier', match: /[^\s;,!|&:^%{}[\]()*/+=<>]+/ },
+        ],
+    },
+    keyword: {
+        patterns: ['#keywordBase', '#standardTypes', '#standardLib'],
+    },
+    keywordBase: {
+        name: 'keyword.typescript.ts',
+        match: /\b(?:any|as|async|await|bigint|boolean|break|case|catch|const|continue|do|else|enum|export|extends|false|finally|for|from|function|get|if|implements|in|instanceof|interface|import|let|map|module|new|new|null|number|of|package|private|public|require|return|set|static|string|super|switch|this|throw|true|try|type|typeof|unknown|undefined|var|void|while|yield)\b/,
+    },
+    standardTypes: {
+        name: 'keyword.type.ts',
+        match: /\b(?:Promise|Record|Omit|Extract|Exclude|BigInt|Array)\b/,
+    },
+    standardLib: {
+        name: 'keyword.lib.ts',
+        match: /\b(?:console|process|window)\b/,
     },
     string: {
-        patterns: [{ include: '#string_q_single' }, { include: '#string_q_double' }, { include: '#string_template' }],
+        patterns: ['#string_q_single', '#string_q_double', '#string_template'],
     },
     string_q_single: {
         name: 'string.quoted.single.ts',
@@ -50,23 +73,34 @@ const repository: Repository = {
                 end: ')',
                 captures: 'punctuation.meta.brace.ts',
                 patterns: ['#statements'],
-                contentName: 'meta.brace.ts',
+                name: 'meta.brace.ts',
+                contentName: 'code.ts',
             },
             {
                 begin: '{',
                 end: '}',
                 captures: 'punctuation.meta.brace.ts',
                 patterns: ['#statements'],
-                contentName: 'meta.brace.ts',
+                name: 'meta.brace.ts',
+                contentName: 'code.ts',
             },
             {
                 begin: '[',
                 end: ']',
                 captures: 'punctuation.meta.brace.ts',
                 patterns: ['#statements'],
-                contentName: 'meta.brace.ts',
+                name: 'meta.brace.ts',
+                contentName: 'code.ts',
             },
         ],
+    },
+    punctuation: {
+        name: 'punctuation.ts',
+        match: /[-;:,!|&^%*/+=<>\n\r]/,
+    },
+    space: {
+        name: 'punctuation.space.ts',
+        match: /\s+/,
     },
     comment: {
         patterns: [
@@ -80,7 +114,7 @@ const repository: Repository = {
             {
                 name: 'comment.block.documentation.ts',
                 comment: 'DocBlock',
-                begin: /\*\*(?!\/)/,
+                begin: /\/\*\*(?!\/)/,
                 captures: 'punctuation.definition.comment.ts',
                 end: '*/',
             },

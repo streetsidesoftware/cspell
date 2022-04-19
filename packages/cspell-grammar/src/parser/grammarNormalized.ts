@@ -1,9 +1,16 @@
 import type { LineOffsetAnchored, MatchResult } from './types';
 
-export interface NGrammar extends NPatternBase {
+export interface NGrammar {
     scopeName: NScopeSource;
     patterns: NPattern[];
-    bind(rule?: Rule): Rule;
+    repository: NRepository;
+    self: NPatternPatterns;
+    name: NScope;
+    contentName?: NScope | undefined;
+    comment?: string | undefined;
+    disabled?: boolean | undefined;
+
+    begin(rule?: Rule): GrammarRule;
 }
 
 /**
@@ -48,7 +55,7 @@ export interface NPatternPatterns extends NPatternBase {
  */
 export interface NPatternMatch extends NPatternBase {
     match: Match;
-    captures?: NCaptures;
+    captures?: NCaptures | undefined;
     contentName?: undefined;
 }
 
@@ -57,11 +64,11 @@ export interface NPatternMatch extends NPatternBase {
  */
 export interface NPatternBeginEnd extends NPatternBase {
     begin: Match;
-    end?: Match;
-    contentName?: NScope;
-    captures?: NCaptures;
-    beginCaptures?: NCaptures;
-    endCaptures?: NCaptures;
+    end?: Match | undefined;
+    contentName?: NScope | undefined;
+    captures?: NCaptures | undefined;
+    beginCaptures?: NCaptures | undefined;
+    endCaptures?: NCaptures | undefined;
 }
 
 /**
@@ -71,7 +78,6 @@ export interface NPatternRepositoryReference extends NPatternBase {
     reference: NRepositoryReference;
     name?: undefined;
     patterns?: undefined;
-    repository?: undefined;
 }
 
 /**
@@ -81,7 +87,6 @@ export interface NPatternInclude extends NPatternBase {
     include: IncludeExternalRef;
     name?: undefined;
     patterns?: undefined;
-    repository?: undefined;
 }
 
 /**
@@ -103,14 +108,20 @@ export type NRepository = Record<string, NPattern>;
 export type NCaptures = Record<string | number, NScope>;
 
 export interface Rule {
+    id: number;
     grammar: NGrammar;
-    pattern: NPattern;
+    pattern: NPattern | NGrammar;
     parent: Rule | undefined;
     repository: NRepository;
     depth: number;
-    findMatch: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
-    findNext?: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
-    end?: (line: LineOffsetAnchored) => MatchResult | undefined;
+    findNext?: ((line: LineOffsetAnchored) => MatchRuleResult | undefined) | undefined;
+    end?: ((line: LineOffsetAnchored) => MatchResult | undefined) | undefined;
+}
+
+export interface GrammarRule extends Rule {
+    pattern: NGrammar;
+    findNext: (line: LineOffsetAnchored) => MatchRuleResult | undefined;
+    end: (line: LineOffsetAnchored) => MatchResult | undefined;
 }
 
 export interface MatchRuleResult {
@@ -120,11 +131,10 @@ export interface MatchRuleResult {
 }
 
 export interface NPatternBase {
-    bind(rule: Rule): Rule;
-    name?: NScope;
-    contentName?: NScope;
-    comment?: string;
-    disabled?: boolean;
-    patterns?: NPattern[];
-    repository?: NRepository;
+    findMatch(line: LineOffsetAnchored, rule: Rule): MatchRuleResult | undefined;
+    name?: NScope | undefined;
+    contentName?: NScope | undefined;
+    comment?: string | undefined;
+    disabled?: boolean | undefined;
+    patterns?: NPattern[] | undefined;
 }

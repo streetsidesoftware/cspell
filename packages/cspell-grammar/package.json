@@ -10,6 +10,9 @@
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-gitignore#readme",
   "license": "MIT",
+  "bin": {
+    "cspell-grammar": "bin.js"
+  },
   "main": "dist/index.js",
   "directories": {
     "dist": "dist"
@@ -17,6 +20,7 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
+    "bin.js",
     "!**/__mocks__",
     "!**/*.test.*",
     "!**/*.spec.*",
@@ -46,5 +50,8 @@
     "@types/node": "^17.0.25",
     "jest": "^27.5.1",
     "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "@cspell/cspell-pipe": "^5.19.7"
   }
 }
