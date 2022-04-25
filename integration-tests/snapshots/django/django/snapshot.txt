@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2744, Issues found: 7698 in 860 files
+ CSpell: Files checked: 2746, Issues found: 7700 in 860 files
  exit code: 1
 ./django/apps/config.py:128:76    - Unknown word (isclass)    -- getmembers(mod, inspect.isclass)
 ./django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -152,7 +152,7 @@ Lines:
 ./django/contrib/auth/password_validation.py:223:31    - Unknown word (deduplicated) -- passwords (lowercased and deduplicated), created by Royce Williams
 ./django/contrib/auth/urls.py:27:17     - Unknown word (uidb)       -- "reset/<uidb64>/<token>/",
 ./django/contrib/auth/validators.py:4:38      - Unknown word (deconstructible) -- utils.deconstruct import deconstructible
-./django/contrib/auth/views.py:311:28    - Unknown word (Referer)    -- # HTTP Referer header.
+./django/contrib/auth/views.py:301:28    - Unknown word (Referer)    -- # HTTP Referer header.
 ./django/contrib/contenttypes/admin.py:25:9      - Unknown word (gfks)       -- gfks = [
 ./django/contrib/contenttypes/fields.py:194:20    - Unknown word (fkeys)      -- for ct_id, fkeys in fk_dict.items():
 ./django/contrib/gis/db/backends/base/features.py:10:9      - Unknown word (spatialrefsys) -- has_spatialrefsys_table = True
@@ -532,7 +532,7 @@ Lines:
 ./django/db/migrations/autodetector.py:887:44    - Unknown word (deduping)   -- make the operation, deduping any dependencies
 ./django/db/migrations/executor.py:179:15    - Unknown word (unapplying) -- Since unapplying a migration requires
 ./django/db/migrations/executor.py:32:62     - Unknown word (unmigrate)  -- label, None), that means unmigrate everything
-./django/db/migrations/migration.py:130:26    - Unknown word (behaviour)  -- # Normal behaviour
+./django/db/migrations/migration.py:129:26    - Unknown word (behaviour)  -- # Normal behaviour
 ./django/db/migrations/operations/base.py:32:5      - Unknown word (elidable)   -- elidable = False
 ./django/db/migrations/operations/models.py:104:25    - Unknown word (smodel)     -- return "Create %smodel %s" % (
 ./django/db/migrations/operations/special.py:45:13     - Unknown word (dbop)       -- for dbop in self.database_operations
@@ -566,10 +566,10 @@ Lines:
 ./django/db/models/query.py:92:21     - Unknown word (populator)  -- for rel_populator in related_populators
 ./django/db/models/query_utils.py:92:19     - Unknown word (subq)       -- split_subq=False,
 ./django/db/models/sql/compiler.py:1320:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
-./django/db/models/sql/compiler.py:1722:9    - Unknown word (innerq)     -- innerq = self.query.clone(
-./django/db/models/sql/compiler.py:1727:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
-./django/db/models/sql/compiler.py:1826:61   - Unknown word (munge)      -- results from other tables, munge the "where"
-./django/db/models/sql/compiler.py:1871:38   - Unknown word (idents)     -- Either we're using the idents in multiple update queries
+./django/db/models/sql/compiler.py:1721:9    - Unknown word (innerq)     -- innerq = self.query.clone(
+./django/db/models/sql/compiler.py:1726:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
+./django/db/models/sql/compiler.py:1825:61   - Unknown word (munge)      -- results from other tables, munge the "where"
+./django/db/models/sql/compiler.py:1870:38   - Unknown word (idents)     -- Either we're using the idents in multiple update queries
 ./django/db/models/sql/compiler.py:448:36    - Unknown word (orderbycol) -- col_name = f"__orderbycol{order_by_idx}"
 ./django/db/models/sql/compiler.py:779:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
 ./django/db/models/sql/datastructures.py:183:35    - Unknown word (somecond)   -- SELECT * FROM "foo" WHERE somecond
@@ -804,8 +804,8 @@ Lines:
 ./django/utils/regex_helper.py:5:60      - Unknown word (decompiler) -- a complete reg-exp decompiler. It
 ./django/utils/termcolors.py:37:10     - Unknown word (noreset)    -- 'noreset' - string will not be
 ./django/utils/text.py:332:72    - Unknown word (zfile)      -- fileobj=buf, mtime=0) as zfile:
-./django/utils/timezone.py:312:59    - Unknown word (Ganssle)    -- with thanks to Paul Ganssle.
-./django/utils/timezone.py:63:5      - Unknown word (hhmm)       -- hhmm = "%02d%02d" % divmod
+./django/utils/timezone.py:313:59    - Unknown word (Ganssle)    -- with thanks to Paul Ganssle.
+./django/utils/timezone.py:64:5      - Unknown word (hhmm)       -- hhmm = "%02d%02d" % divmod
 ./django/utils/translation/template.py:143:31    - Unknown word (sline)      -- "%s (%sline %d)" % (t.contents,
 ./django/utils/translation/template.py:181:17    - Unknown word (imatch)     -- imatch = inline_re.match(t
 ./django/utils/translation/template.py:182:17    - Unknown word (bmatch)     -- bmatch = block_re.match(t.contents
@@ -1042,7 +1042,7 @@ Lines:
 ./tests/auth_tests/test_validators.py:261:44    - Unknown word (ᴮᴵᴳᴮᴵᴿᴰ)    -- usernames = ["joe", "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
 ./tests/auth_tests/test_validators.py:261:55    - Unknown word (أحمد)       -- "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
 ./tests/auth_tests/test_validators.py:265:28    - Unknown word (Bspace)     -- "zerowidth\u200Bspace",
-./tests/auth_tests/test_views.py:432:9     - Unknown word (uuidb)      -- uuidb64 = response.resolver
+./tests/auth_tests/test_views.py:447:9     - Unknown word (uuidb)      -- uuidb64 = response.resolver
 ./tests/backends/base/test_creation.py:34:22     - Unknown word (hodor)      -- prod_name = "hodor"
 ./tests/backends/oracle/test_introspection.py:15:13     - Unknown word (seqs)       -- seqs = connection.introspection
 ./tests/backends/oracle/test_operations.py:142:33    - Unknown word (VERYLONGMODELN) -- self.assertIn("BACKENDS_VERYLONGMODELN7BE2_SQ", statements
@@ -1237,10 +1237,10 @@ Lines:
 ./tests/forms_tests/widget_tests/test_selectmultiple.py:128:14    - Unknown word (nums)       -- "nums",
 ./tests/forms_tests/widget_tests/test_textarea.py:48:30     - Unknown word (ampersanded) -- 'some "quoted" & ampersanded value',
 ./tests/generic_relations/models.py:123:60    - Unknown word (manualpk)   -- related_query_name="manualpk")
-./tests/generic_relations/tests.py:137:9     - Unknown word (clearish)   -- clearish = TaggedItem.objects
+./tests/generic_relations/tests.py:136:9     - Unknown word (clearish)   -- clearish = TaggedItem.objects
 ./tests/generic_relations_regress/models.py:82:5      - Unknown word (tlinks)     -- tlinks = GenericRelation(TextLink
-./tests/generic_relations_regress/tests.py:156:51    - Unknown word (devs)       -- create(name="Backend devs")
-./tests/generic_relations_regress/tests.py:73:52     - Unknown word (tlink)      -- objects.create(name="tlink")
+./tests/generic_relations_regress/tests.py:146:51    - Unknown word (devs)       -- create(name="Backend devs")
+./tests/generic_relations_regress/tests.py:71:52     - Unknown word (tlink)      -- objects.create(name="tlink")
 ./tests/generic_views/test_dates.py:180:45    - Unknown word (sortedbyname) -- client.get("/dates/books/sortedbyname/")
 ./tests/generic_views/test_dates.py:195:45    - Unknown word (sortedbynamedec) -- client.get("/dates/books/sortedbynamedec/")
 ./tests/generic_views/test_dates.py:255:31    - Unknown word (Testement)       -- name="The New New Testement", pages=600, pubdate
@@ -1553,7 +1553,8 @@ Lines:
 ./tests/migrations/test_autodetector.py:3478:19   - Unknown word (Uninstantiated) -- #22951 -- Uninstantiated classes with deconstruct
 ./tests/migrations/test_autodetector.py:4274:9    - Unknown word (apackage)       -- apackage = ModelState(
 ./tests/migrations/test_autodetector.py:583:30    - Unknown word (Authi)      -- "verbose_name": "Authi",
-./tests/migrations/test_commands.py:2973:14   - Unknown word (ambigious)   -- def test_ambigious_prefix(self):
+./tests/migrations/test_commands.py:1052:25   - Unknown word (unrepresentable) -- def test_sqlmigrate_unrepresentable(self):
+./tests/migrations/test_commands.py:3044:14   - Unknown word (ambigious)       -- def test_ambigious_prefix(self):
 ./tests/migrations/test_commands.py:397:20    - Unknown word (mmigrations) -- "\x1b[1mmigrations\n\x1b[0m [ ] 0001_initial
 ./tests/migrations/test_commands.py:430:22    - Unknown word (unmigrating) -- # Cleanup by unmigrating everything
 ./tests/migrations/test_commands.py:571:70    - Unknown word (salamand)    -- SELECT * FROM migrations_salamand…\n",
@@ -1733,10 +1734,10 @@ Lines:
 ./tests/queries/models.py:733:5     - Unknown word (modela)       -- modela_fk = models.ForeignKey
 ./tests/queries/models.py:734:5     - Unknown word (modelc)       -- modelc_fk = models.ForeignKey
 ./tests/queries/test_bulk_update.py:198:14    - Unknown word (falsey)     -- def test_falsey_pk_value(self):
-./tests/queries/test_explain.py:108:14    - Unknown word (o'ption)    -- "o'ption",
-./tests/queries/test_explain.py:109:17    - Unknown word (tion)       -- "op`tion",
-./tests/queries/test_explain.py:110:14    - Unknown word (opti)       -- "opti on",
-./tests/queries/test_explain.py:113:16    - Unknown word (nption)     -- "o\nption",
+./tests/queries/test_explain.py:110:14    - Unknown word (o'ption)    -- "o'ption",
+./tests/queries/test_explain.py:111:17    - Unknown word (tion)       -- "op`tion",
+./tests/queries/test_explain.py:112:14    - Unknown word (opti)       -- "opti on",
+./tests/queries/test_explain.py:115:16    - Unknown word (nption)     -- "o\nption",
 ./tests/queries/tests.py:1467:45   - Unknown word (ANTH)       -- note_set.create(note="ANTH", misc="100")
 ./tests/queries/tests.py:1467:9    - Unknown word (anth)       -- anth100 = tag.note_set.create
 ./tests/queries/tests.py:1712:23   - Unknown word (onetoonecategory) -- category__onetoonecategory__isnull=False
