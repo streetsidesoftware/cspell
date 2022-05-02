@@ -88,7 +88,7 @@ describe('Validate English', () => {
         const finalSettings = cspell.finalizeSettings(fileSettings);
 
         const r = await validateText(text, finalSettings);
-        expect(r).toEqual([]);
+        expect(r.map((a) => a.text)).toEqual(['setsid', 'setsid']);
     });
 });
 
