@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]
 Summary:
   files: 1830
   filesWithIssues: 1089
-  issues: 21978
+  issues: 21969
   errors: 0
 Errors: []
 
@@ -775,7 +775,6 @@ issues:
   - "ext/fileinfo/libmagic/compress.c:76:17      	XZLIB               	U   	#define BUILTIN_XZLIB"
   - "ext/fileinfo/libmagic/compress.c:135:9      	lrzip               	U   	#define lrzip_flags \"-do\""
   - "ext/fileinfo/libmagic/compress.c:136:9      	lzip                	U   	#define lzip_flags gzip_flags"
-  - "ext/fileinfo/libmagic/compress.c:159:20     	zstd                	U   	static const char *zstd_args[] = {"
   - "ext/fileinfo/libmagic/compress.c:174:3      	compr               	U   	} compr[] = {"
   - "ext/fileinfo/libmagic/compress.c:184:62     	gzipped             	U   	args, do_zlib },/* 2, gzipped */"
   - "ext/fileinfo/libmagic/compress.c:189:58     	pkziped             	U   	args, NULL }, /* 6, pkziped */"
@@ -4156,7 +4155,6 @@ issues:
   - "ext/zip/php_zip.c:147:37    	mydir       	U   	relative to cwd (../../mydir/foo.txt > mydir/foo"
   - "ext/zip/php_zip.c:1848:48   	slll        	U   	ZEND_NUM_ARGS(), \"P|slll\","
   - "ext/zip/php_zip.c:3122:36   	NOCASE      	U   	CLASS_CONST_LONG(\"FL_NOCASE\", ZIP_FL_NOCASE);"
-  - "ext/zip/php_zip.c:3155:15   	ZSTD        	U   	#ifdef ZIP_CM_ZSTD"
   - "ext/zip/php_zip.c:3163:36   	WAVPACK     	U   	CLASS_CONST_LONG(\"CM_WAVPACK\", ZIP_CM_WAVPACK);"
   - "ext/zip/php_zip.c:3164:36   	PPMD        	U   	CLASS_CONST_LONG(\"CM_PPMD\", ZIP_CM_PPMD);"
   - "ext/zip/php_zip.c:3186:36   	NOZIP       	U   	CLASS_CONST_LONG(\"ER_NOZIP\", ZIP_ER_NOZIP);"
