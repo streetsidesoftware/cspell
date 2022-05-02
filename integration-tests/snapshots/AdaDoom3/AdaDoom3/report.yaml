@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 105
   filesWithIssues: 98
-  issues: 3324
+  issues: 3286
   errors: 0
 Errors: []
 
@@ -903,7 +903,6 @@ issues:
   - "Tools/compile-idmap.py:333:6    	bboxes              	U   	## bboxes"
   - "Tools/compile-idmap.py:340:15   	Reachabilities      	U   	## allowSwimReachabilities = 0"
   - "Tools/compile-idmap.py:534:29   	sanatize            	U   	Get the material and sanatize it"
-  - "Tools/compile-idmap.py:705:7    	classname           	U   	## \"classname\" \"worldspawn\""
   - "Tools/compile-idmap.py:705:19   	worldspawn          	U   	## \"classname\" \"worldspawn\""
   - "Tools/compile-idmap.py:706:19   	locationseparator   	U   	## \"name\" \"info_locationseparator_4\""
   - "Tools/compile-idmap.py:713:80   	nodraw              	U   	) \"textures/common/nodraw\" 0 0 0"
@@ -930,7 +929,6 @@ issues:
   - "Tools/spm_export.py:561:19  	tessface        	U   	mesh.calc_tessface()"
   - "Tools/spm_export.py:562:21  	tessfaces       	U   	if len(mesh.tessfaces) == 0:"
   - "Tools/spm_export.py:600:74  	bitangent       	U   	tan[2], mesh.loops[li].bitangent_sign))"
-  - "Tools/spm_export.py:609:61  	abspath         	U   	path.basename(bpy.path.abspath(mesh.tessface_uv_textures"
   - "Tools/spm_export.py:729:59  	uvmap           	U   	in the list) have no uvmap'.format(exp_obj[0].name"
   - "Tools/spm_export.py:756:35  	SPMS            	U   	version, 3 bit type : SPMS SPMA SPMN"
   - "Tools/spm_export.py:756:40  	SPMA            	U   	version, 3 bit type : SPMS SPMA SPMN"
@@ -955,7 +953,6 @@ issues:
   - "Tools/stk_kart.py:223:20    	WHEELFRONT  	U   	#if name==\"WHEELFRONT.R\":"
   - "Tools/stk_kart.py:227:22    	WHEELREAR   	U   	#elif name==\"WHEELREAR.R\":"
   - "Tools/stk_kart.py:270:6     	Anims       	U   	lAnims = []"
-  - "Tools/stk_kart.py:275:13    	curr        	U   	for curr in the_scene.timeline"
   - "Tools/stk_kart.py:309:30    	plase       	U   	ll leave the code in plase"
   - "Tools/stk_kart.py:369:9     	stktype     	U   	stktype = getProperty(obj,"
   - "Tools/stk_kart.py:418:9     	karttype    	U   	if 'karttype' in the_scene:"
@@ -968,7 +965,6 @@ issues:
   - "Tools/stk_material_export.py:129:13     	colorizable 	U   	'colorizable' : {'default"
   - "Tools/stk_material_export.py:135:19     	bsys        	U   	#start_time = bsys.time()"
   - "Tools/stk_material_export.py:143:5      	blendfile   	U   	blendfile_dir = os.path.dirname"
-  - "Tools/stk_material_export.py:152:28     	subdir      	U   	if not bpy.path.is_subdir(abs_texture_path, blendfile"
   - "Tools/stk_material_export.py:160:12     	Soundeffect 	U   	hasSoundeffect = (convertTextToYN(getIdPrope"
   - "Tools/stk_material_export.py:185:41     	soundeffects	U   	items pertain to the soundeffects (starting with sfx_"
   - "Tools/stk_material_export.py:189:50     	rolloff     	U   	strippedName in ['filename', 'rolloff', 'min_speed', 'max"
@@ -986,7 +982,6 @@ issues:
   - "Tools/stk_panel.py:682:17   	currcol         	U   	currcol = [1.0, 1.0, 1.0]"
   - "Tools/stk_panel.py:737:46   	idprefix        	U   	valueNodes, contextLevel, idprefix):"
   - "Tools/stk_panel.py:769:13   	defaultval      	U   	defaultval = e.getAttribute(\"default"
-  - "Tools/stk_panel.py:771:38   	getuser         	U   	defaultval = getpass.getuser()"
   - "Tools/stk_panel.py:938:1    	datapath        	U   	datapath = None"
   - "Tools/stk_panel.py:940:53   	stkdata         	U   	join(curr, \"addons\", \"stkdata\")):"
   - "Tools/stk_panel.py:983:25   	TRIA            	U   	icon = 'TRIA_DOWN'"
@@ -1016,7 +1011,6 @@ issues:
   - "Tools/stk_track.py:398:69   	SHERRING            	U   	RHERRING\", \"YHERRING\", \"SHERRING\"] \\"
   - "Tools/stk_track.py:449:48   	dropitem            	U   	getObjectProperty(obj, \"dropitem\", \"true\").lower()"
   - "Tools/stk_track.py:512:53   	dupli               	U   	systems[0].settings.dupli_object is not None)"
-  - "Tools/stk_track.py:535:41   	randint             	U   	choice = random.randint(0, len(object_group"
   - "Tools/stk_track.py:789:19   	calcul              	U   	# calcul the size and the position"
   - "Tools/stk_track.py:862:48   	LIGHTSHAFT          	U   	LAMP\" and stktype == \"LIGHTSHAFT_EMITTER\":"
   - "Tools/stk_track.py:870:25   	lightshaft          	U   	f.write(' <lightshaft %s id=\\\"%s\\\" opacity"
@@ -1031,12 +1025,10 @@ issues:
   - "Tools/stk_track.py:976:27   	MAINDRIVELINE       	U   	stktype==\"MAINDRIVELINE\" or \\"
   - "Tools/stk_track.py:977:27   	MAINDL              	U   	stktype==\"MAINDL\":"
   - "Tools/stk_track.py:994:12   	cutscene            	U   	is_cutscene = getSceneProperty(bpy"
-  - "Tools/stk_track.py:1271:22  	checklines          	U   	# Writes out all checklines."
   - "Tools/stk_track.py:1288:25  	cannonstart         	U   	if type == \"cannonstart\" or type == \"cannonend"
   - "Tools/stk_track.py:1288:50  	cannonend           	U   	cannonstart\" or type == \"cannonend\":"
   - "Tools/stk_track.py:1304:20  	lapline             	U   	strict_lapline = mainDriveline.isStrictLapli"
   - "Tools/stk_track.py:1304:52  	Lapline             	U   	mainDriveline.isStrictLapline()"
-  - "Tools/stk_track.py:1335:81  	checkline           	U   	does not activate any checkline. Lap counting and kart"
   - "Tools/stk_track.py:1415:34  	sother              	U   	kind = \"%sother-ids=\\\"%s\\\" \"% (kind"
   - "Tools/stk_track.py:1457:48  	sxyz                	U   	write(\" <check-sphere%sxyz=\\\"%.2f %.2f %.2f\\\" radius"
   - "Tools/stk_track.py:1505:9   	curvename           	U   	curvename = getObjectProperty"
@@ -1070,7 +1062,6 @@ issues:
   - "Tools/stk_track.py:2298:36  	shadowpass          	U   	getObjectProperty(obj, \"shadowpass\", \"true\") == \"false"
   - "Tools/stk_track.py:2307:37  	skyboxobject        	U   	getObjectProperty(obj, \"skyboxobject\", \"false\") == \"true"
   - "Tools/stk_track.py:2308:40  	skybox              	U   	append('renderpass=\"skybox\"')"
-  - "Tools/stk_track.py:2390:149 	groupname           	U   	'distance'], props['groupname'], spm_name, getXYZHPRString"
   - "Tools/stk_track.py:2480:36  	nophysics           	U   	either 'movable' or 'nophysics'."
   - "Tools/stk_track.py:2609:44  	easteregg           	U   	getObjectProperty(obj, \"easteregg_easy\", \"false\"))"
   - "Tools/stk_track.py:2706:17  	loddistance         	U   	loddistance = getObjectProperty"
@@ -1079,7 +1070,6 @@ issues:
   - "Tools/stk_track.py:2862:37  	ambientmap          	U   	getSceneProperty(scene, \"ambientmap\", \"false\") == \"true"
   - "Tools/stk_track.py:2891:17  	hori                	U   	hori = getSceneProperty"
   - "Tools/stk_track.py:2892:17  	verti               	U   	verti = getSceneProperty"
-  - "Tools/stk_track.py:2937:16  	chdir               	U   	os.chdir(sPath)"
   - "Tools/stk_track.py:2993:26  	EASTEREGG           	U   	if stktype==\"EASTEREGG\":"
   - "Tools/stk_track.py:3008:53  	CUTSCENE            	U   	CAMERA\" and stktype == 'CUTSCENE_CAMERA':"
   - "Tools/stk_track.py:3017:28  	CANNONEND           	U   	elif stktype==\"CANNONEND\":"
@@ -1102,7 +1092,9 @@ issues:
   - "Tools/stkdata/stk_object_parameters.xml:386:14  	Cutscene        	U   	<!-- Cutscene camera -->"
   - "Tools/stkdata/stk_object_parameters.xml:387:83  	cutscenes       	U   	camera\" doc=\"Use only in cutscenes\" >"
   - "Tools/stkdata/stk_object_parameters.xml:449:49  	triggerable     	U   	to make it always re-triggerable, 999999.9 to make it"
+  - "Tools/stkdata/stk_object_parameters.xml:472:29  	checklines      	U   	<!-- Drivelines and checklines -->"
   - "Tools/stkdata/stk_object_parameters.xml:473:39  	Checkline       	U   	EnumChoice id=\"check\" label=\"Checkline\" doc=\"A checkline that"
+  - "Tools/stkdata/stk_object_parameters.xml:473:57  	checkline       	U   	label=\"Checkline\" doc=\"A checkline that the player must"
   - "Tools/stkdata/stk_object_parameters.xml:489:25  	maindriveline   	U   	<EnumChoice id=\"maindriveline\" label=\"Driveline (main"
   - "Tools/stkdata/stk_panel_parameters.xml:25:75    	genericskybox   	U   	Texture Top\" default=\"genericskybox_top.jpg\"/>"
   - "Tools/stkdata/stk_panel_parameters.xml:66:30    	kartstart       	U   	PropGroup id=\"propgroup_kartstart\" name=\"Start line positions"
