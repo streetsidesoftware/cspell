@@ -33,7 +33,7 @@ describe('Validate LanguageSettings', () => {
         const defaultSettings = getDefaultBundledSettings();
         const languageSettings = defaultSettings.languageSettings || [];
         const sPython = calcSettingsForLanguage(languageSettings, 'python', 'en');
-        expect(sPython.allowCompoundWords).toBe(true);
+        expect(sPython.allowCompoundWords).toBeUndefined();
         expect(sPython.dictionaries).not.toHaveLength(0);
         expect(sPython.dictionaries!).toEqual(expect.arrayContaining(['en_us', 'python', 'django']));
 
@@ -76,7 +76,6 @@ describe('Validate LanguageSettings', () => {
         const sPython = calcUserSettingsForLanguage(settings, 'python');
         expect(sPython).toBeDefined();
         expect(sPython.enabled).toBe(true);
-        expect(sPython.allowCompoundWords).toBe(true);
     });
 
     test.each`
