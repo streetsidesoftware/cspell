@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 105
   filesWithIssues: 98
-  issues: 3286
+  issues: 3270
   errors: 0
 Errors: []
 
@@ -507,14 +507,11 @@ issues:
   - "Engine/neo-api-zdelta.ads:182:25    	tsize       	U   	tsize : ; -- uLong"
   - "Engine/neo-api-zdelta.ads:184:25    	dsize       	U   	dsize : ) -- uLongf*"
   - "Engine/neo-api-zdelta.ads:210:15    	uncompress  	U   	function zd_uncompress (ref : ; -- const"
-  - "Engine/neo-api-zstandard.ads:33:8       	ZSTD    	U   	type ZSTD_inBuffer_s is record"
-  - "Engine/neo-api-zstandard.ads:77:45      	Zstd    	U   	return Zstd_uint64v"
   - "Engine/neo-api-zstandard.ads:90:27      	cctx    	U   	function ZSTD_freeCCtx (cctx : Ptr) --"
   - "Engine/neo-api-zstandard.ads:106:27     	dctx    	U   	function ZSTD_freeDCtx (dctx : Ptr) --"
   - "Engine/neo-api-zstandard.ads:175:67     	zdict   	U   	Dictionary (see dictBuilder/zdict.h)."
   - "Engine/neo-api-zstandard.ads:224:29     	ddict   	U   	function ZSTD_freeDDict (ddict : ZSTD_DDict_ptr) return"
   - "Engine/neo-core-compression.adb:19:9    	Decompressor	U   	type Decompressor is tagged private;"
-  - "Engine/neo-core-compression.adb:22:10   	zstd        	U   	zstd_stream : Thin.ZSTD"
   - "Engine/neo-core-compression.adb:74:7    	inbuffer    	U   	inbuffer : aliased Thin.ZSTD"
   - "Engine/neo-core-compression.adb:78:7    	outbuffer   	U   	outbuffer : aliased Thin.ZSTD"
   - "Engine/neo-core-compression.adb:118:7   	dondx       	U   	dondx : Thin.IC.size_t;"
