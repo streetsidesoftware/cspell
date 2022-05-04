@@ -36,7 +36,8 @@ describe('Verify trace', () => {
         ${'café'}      | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'café'}
         ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
         ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${true}            | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'error+code'}
-        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${undefined}       | ${'cpp'}           | ${true}    | ${true}  | ${false}  | ${false}  | ${'error+code'}
+        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${true}            | ${'cpp'}           | ${true}    | ${true}  | ${false}  | ${false}  | ${'error+code'}
+        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${undefined}       | ${'cpp'}           | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
         ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
         ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[flagWords]'}   | ${true}    | ${true}  | ${true}   | ${false}  | ${'hte'}
         ${'Colour'}    | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[ignoreWords]'} | ${true}    | ${true}  | ${false}  | ${true}   | ${'colour'}
