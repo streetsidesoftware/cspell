@@ -50,6 +50,7 @@ jobs:
           - aws-amplify/docs
           - Azure/azure-rest-api-specs
           - bitjson/typescript-starter
+          - caddyserver/caddy
           - canada-ca/open-source-logiciel-libre
           - django/django
           - exonum/exonum
@@ -156,8 +157,9 @@ jobs:
           && npm ci
           && npm run integration-tests -- ${{ matrix.repo }}
 
-# cspell:ignore MartinThoma googleapis
-# cspell:ignore plasticrake tplink smarthome
-# cspell:ignore logiciel twbs
 # cspell:ignore apollographql
 # cspell:ignore aspnetboilerplate
+# cspell:ignore caddyserver
+# cspell:ignore logiciel twbs
+# cspell:ignore MartinThoma googleapis
+# cspell:ignore plasticrake tplink smarthome
