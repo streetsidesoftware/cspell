@@ -14,12 +14,12 @@ describe('Validate that Go files are correctly checked.', () => {
         const languageIds = cspell.getLanguagesForExt(ext);
         const settings = cspell.getDefaultBundledSettings();
         const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-        // cspell:ignore weirdd garbbage
+        // cspell:ignore weirdd garbbage longname
         const results1 = await cspell.validateText('some weirdd garbbage', fileSettings);
         expect(results1.map((t) => t.text)).toEqual(expect.arrayContaining(['weirdd']));
         expect(results1.map((t) => t.text)).toEqual(expect.arrayContaining(['garbbage']));
         const results = await cspell.validateText(text, fileSettings);
-        expect(results).toHaveLength(1);
-        expect(results.map((t) => t.text)).toEqual(expect.arrayContaining(['garbbage']));
+        expect(results).toHaveLength(3);
+        expect(results.map((t) => t.text)).toEqual(expect.arrayContaining(['longname', 'garbbage']));
     });
 });
