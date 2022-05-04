@@ -1,11 +1,11 @@
 ---
 Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
-Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=WebhookPublisher_Tests.cs"]
+Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Summary:
-  files: 2475
-  filesWithIssues: 1254
-  issues: 4853
+  files: 2467
+  filesWithIssues: 1247
+  issues: 4831
   errors: 0
 Errors: []
 
@@ -597,10 +597,6 @@ issues:
   - "test/Abp.Zero.SampleApp.Tests/Users/UserAccountSynchronizer_Tests.cs:148:32     	Emre    	U   	Surname = \"Emre\","
   - "test/Abp.Zero.SampleApp.Tests/Users/UserLogin_Tests.cs:54:80    	asdfgh  	U   	LoginAsync(\"wrongUserName\", \"asdfgh\");"
   - "test/Abp.Zero.SampleApp.Tests/Users/UserManager_Update_Tests.cs:29:39   	tuana   	U   	adminUser.UserName = \"tuana\";"
-  - "test/Abp.Zero.SampleApp.Tests/WebHooks/WebhookManager_Tests.cs:69:82    	mysecret	U   	payload.ToJsonString(), \"mysecret\");"
-  - "test/Abp.Zero.SampleApp.Tests/WebHooks/WebhookSendAttemptStore_Tests.cs:131:91  	webhookevent	U   	DbUpdateException)},//webhookevent not exists"
-  - "test/Abp.Zero.SampleApp.Tests/WebHooks/WebhookSubscriptionManager_Tests.cs:23:35    	mywebhook   	U   	WebhookUri = \"www.mywebhook.com\","
-  - "test/Abp.Zero.SampleApp.Tests/WebHooks/WebhookSubscriptionManager_Tests.cs:96:38    	mynewwebhook	U   	newWebhookUri = \"www.mynewwebhook.com\";"
   - "test/Abp.Zero.SampleApp/Features/AppFeatureProvider.cs:23:24    	Frature 	U   	var numericFrature = boolFeature.CreateChildFeat"
   - "test/Abp.Zero.SampleApp/Linq/FakeAsyncQueryableExecuter.cs:9:55     	langword	U   	syncQueryableExecuter\"/> <see langword=\"await\"/>s an asynchronous"
   - "test/Abp.Zero.SampleApp/Users/UserAppService.cs:80:15   	Becasue 	U   	//Becasue of the validation error"
