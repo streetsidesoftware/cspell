@@ -78,7 +78,8 @@ describe('Validate DictionaryLoader', () => {
         return s.normalize('NFC');
     }
     // cspell:ignore aujourd’hui
-    const csharp = require.resolve('@cspell/dict-csharp/csharp.txt.gz');
+    const csharpDictExt = require.resolve('@cspell/dict-csharp/cspell-ext.json');
+    const csharp = path.join(path.dirname(csharpDictExt), 'csharp.txt.gz');
     test.each`
         testCase            | file                          | options          | word               | maxAge       | hasWord  | hasErrors
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}         | ${1}         | ${true}  | ${false}
