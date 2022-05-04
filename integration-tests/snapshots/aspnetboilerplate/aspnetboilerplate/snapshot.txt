@@ -1,9 +1,9 @@
 
 Repository: aspnetboilerplate/aspnetboilerplate
 Url: "https://github.com/aspnetboilerplate/aspnetboilerplate"
-Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=WebhookPublisher_Tests.cs"]
+Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Lines:
- CSpell: Files checked: 2475, Issues found: 3318 in 1058 files
+ CSpell: Files checked: 2467, Issues found: 4831 in 1247 files
  exit code: 1
 ./CONTRIBUTING.md:28:30     - Unknown word (aspnetboilerplate) -- Documents are located in [/aspnetboilerplate/doc](https://github
 ./LICENSE.md:3:25      - Unknown word (Volosoft)   -- Copyright (c) 2013-2021 Volosoft (https://volosoft.com
@@ -169,17 +169,36 @@ Lines:
 ./doc/WebSite/Zero/User-Management.md:126:62    - Unknown word (userfriendlyexception) -- Handling-Exceptions#userfriendlyexception))
 ./doc/WebSite/Zero/User-Management.md:176:17    - Unknown word (authenciation)         -- To register our authenciation source, we can use some
 ./doc/WebSite/Zero/User-Management.md:41:48     - Unknown word (imayhavetenant) -- Documents/Data-Filters#imayhavetenant) filter
+./src/Abp.AspNetCore.OData/Properties/AssemblyInfo.cs:21:44     - Unknown word (typelib)    -- is for the ID of the typelib if this project is exposed
+./src/Abp.AspNetCore.SignalR/AspNetCore/SignalR/AbpAspNetCoreSignalRModule.cs:13:14     - Unknown word (inheritdoc) -- /// <inheritdoc/>
+./src/Abp.AspNetCore.TestBase/AbpAspNetCoreIntegratedTestBase.cs:59:14     - Unknown word (typeparam)  -- /// <typeparam name="TController">The
+./src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:5:25      - Unknown word (Combobox)   -- public static class ComboboxItemDtoExtensions
+./src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:7:76      - Unknown word (combobox)   -- this ComboboxItemDto comboboxItem)
+./src/Abp.AspNetCore/AspNetCore/Configuration/AbpControllerAssemblySettingBuilder.cs:21:101    - Unknown word (configurer) -- Action<ControllerModel> configurer)
 ./src/Abp.AspNetCore/AspNetCore/EntityHistory/HttpRequestEntityChangeSetReasonProvider.cs:17:42     - Unknown word (Overrided)  -- override string Reason => OverridedValue != null
 ./src/Abp.AspNetCore/AspNetCore/ExceptionHandling/AbpAuthorizationExceptionHandlingMiddleware.cs:63:61     - Unknown word (Localizaion) -- GetString(AbpWebConsts.LocalizaionSourceName, "DefaultError
 ./src/Abp.AspNetCore/AspNetCore/MultiTenancy/DomainTenantResolveContributor.cs:9:43      - Unknown word (Extracter)  -- FormattedStringValueExtracter;
+./src/Abp.AspNetCore/AspNetCore/Mvc/Proxying/AbpServiceProxiesController.cs:8:30      - Unknown word (Proxying)   -- namespace Abp.AspNetCore.Mvc.Proxying
+./src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:18:74     - Unknown word (nosniff)    -- Content-Type-Options", "nosniff");
 ./src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:155    - Unknown word (iframe)     -- page in a <frame>, <iframe> or <object>. SAMEORIGIN
+./src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:176    - Unknown word (SAMEORIGIN) -- iframe> or <object>. SAMEORIGIN makes it being displayed
+./src/Abp.AspNetCore/Json/AbpMvcContractResolver.cs:21:25     - Unknown word (datetime)   -- private string _datetimeFormat { get; set; }
+./src/Abp.AutoMapper/AutoMapper/AbpAutoMapperConfiguration.cs:11:20     - Unknown word (Automapper) -- [Obsolete("Automapper will remove static API
+./src/Abp.AutoMapper/AutoMapper/AutoMapExtensions.cs:18:94     - Unknown word (typeparamref) -- Creates a new object of <typeparamref name="TDestination"
 ./src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:42:63     - Unknown word (exemple)    -- represent the source exemple : (source) => ...
 ./src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:51:58     - Unknown word (specfic)    -- expression represent a specfic property of a parameter
 ./src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:138    - Unknown word (agaisnt)    -- the target to compare agaisnt
 ./src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:23     - Unknown word (Exemple)    -- //Exemple if we have in source
 ./src/Abp.AutoMapper/AutoMapper/AutoMapperConfigurationExtensions.cs:55:56     - Unknown word (attribut)   -- we have in source the attribut AutoMapKey on the Property
 ./src/Abp.Dapper/Dapper/AbpDapperModule.cs:26:62     - Unknown word (Orms)       -- OrmContextKey == AbpConsts.Orms.EntityFramework)
+./src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:173:27    - Unknown word (startswith) -- case "startswith":
+./src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:176:27    - Unknown word (endswith)   -- case "endswith":
+./src/Abp.Dapper/Dapper/Expressions/DapperExpressionVisitor.cs:17:10     - Unknown word (seealso)    -- /// <seealso cref="System.Linq.Expressions
+./src/Abp.Dapper/Dapper/Utils/TypeExtensions.cs:11:33     - Unknown word (paramref)   -- Checks whether <paramref name="child" /> implements
+./src/Abp.EntityFramework.Common/DbContextTypeMatcher.cs:39:122    - Unknown word (Contexes)   -- ideAttribute attributes for DbContexes.
 ./src/Abp.EntityFramework.Common/DbContextTypeMatcher.cs:43:66     - Unknown word (dbcontexes) -- MultiTenancySide to filter dbcontexes
+./src/Abp.EntityFramework.Common/IShouldInitializeDcontext.cs:3:39      - Unknown word (Dcontext)   -- interface IShouldInitializeDcontext
+./src/Abp.EntityFramework.GraphDiff/GraphDiff/Mapping/EntityMappingManager.cs:33:24     - Unknown word (Exptession) -- var mappingExptession = entityMapping?.MappingExpre
 ./src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:61:13     - Unknown word (Nolockings) -- /// Nolockings the specified queryable
 ./src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:68:31     - Unknown word (Nolocking)  -- public static TResult Nolocking<TEntity, TResult>(this
 ./src/Abp.EntityFramework/EntityFramework/Extensions/QueryableExtensions.cs:74:24     - Unknown word (nolock)     -- using (var nolockInterceptor = repository
@@ -187,75 +206,109 @@ Lines:
 ./src/Abp.EntityFramework/EntityFramework/Interceptors/WithNolockInterceptor.cs:13:110    - Unknown word (NOLOCK)     -- Extent\d+\](?! WITH \(NOLOCK\)))", RegexOptions.Multiline
 ./src/Abp.EntityFrameworkCore/EntityFrameworkCore/Extensions/QueryableExtensions.cs:51:34     - Unknown word (Includable) -- Func<IQueryable<T>, IIncludableQueryable<T, object>
 ./src/Abp.HangFire/Hangfire/Configuration/IAbpHangfireConfiguration.cs:13:30     - Unknown word (Hanfgire's) -- // Gets or sets the Hanfgire's <see cref="BackgroundJobServe
+./src/Abp.NHibernate/NHibernate/EntityMappings/NhMappingExtensions.cs:8:55      - Unknown word (standart)   -- make mapping easier for standart columns.
 ./src/Abp.Quartz/Quartz/IQuartzScheduleJobManager.cs:31:13     - Unknown word (Unschedules) -- /// Unschedules a job.
+./src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:11:34     - Unknown word (Seperator)  -- private const string TypeSeperator = "|";
+./src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:17:26     - Unknown word (objbyte)    -- /// <param name="objbyte">String representation
 ./src/Abp.RedisCache/Runtime/Caching/Redis/RedisDatabaseExtensions.cs:42:64     - Unknown word (getn)       -- ScriptEvaluate("return table.getn(redis.call('keys', ARGV
+./src/Abp.Web.Api/WebApi/Controllers/Dynamic/Builders/ApiControllerActionBuilder.cs:17:41     - Unknown word (proxied)    -- name="T">Type of the proxied object</typeparam>
 ./src/Abp.Web.Api/WebApi/Controllers/Dynamic/Builders/ApiControllerBuilder.cs:71:150    - Unknown word (myapplication) -- least! For example: 'myapplication/myservice'.", "serviceName
 ./src/Abp.Web.Api/WebApi/Controllers/Dynamic/Builders/ApiControllerBuilder.cs:71:164    - Unknown word (myservice)     -- example: 'myapplication/myservice'.", "serviceName");
+./src/Abp.Web.Api/WebApi/Controllers/Dynamic/DynamicApiControllerInfo.cs:77:68     - Unknown word (initialzing) -- { }; //Assigning or initialzing the action filters.
 ./src/Abp.Web.Api/WebApi/Controllers/Dynamic/DynamicApiMethodInfo.cs:38:13     - Unknown word (Createa)    -- /// Createa a new <see cref="DynamicApiAc
 ./src/Abp.Web.Api/WebApi/Controllers/Dynamic/Formatters/PlainTextFormatter.cs:13:49     - Unknown word (reponse)    -- to return plain text reponse from <see cref="ApiController
 ./src/Abp.Web.Api/WebApi/Controllers/Dynamic/Scripting/TypeScript/TypeScriptDefinitionProxyGenerator.cs:112:17    - Unknown word (myscript)   -- var myscript = new StringBuilder
+./src/Abp.Web.Api/WebApi/Controllers/Dynamic/Scripting/TypeScript/TypeScriptHelper.cs:22:27     - Unknown word (aggregateexception) -- "exception", "aggregateexception","module","object"
 ./src/Abp.Web.Api/WebApi/Runtime/Caching/ClearCacheSettingProvider.cs:12:76     - Unknown word (qweasd)     -- cheSettingNames.Password, "123qweasdZXC")
 ./src/Abp.Web.Api/WebApi/Validation/AbpApiValidationFilter.cs:39:48     - Unknown word (catched)    -- of errors can not be catched from application layer
 ./src/Abp.Web.Common/Web/Api/ProxyScripting/Generators/ProxyScriptingJsFuncHelper.cs:13:58     - Unknown word (abcdefghijklmnopqrstuxwvyz) -- ValidJsVariableNameChars = "abcdefghijklmnopqrstuxwvyzABCDEFGHIJKLMNOPQRSTUXWVYZ
 ./src/Abp.Web.Common/Web/Api/ProxyScripting/Generators/ProxyScriptingJsFuncHelper.cs:13:84     - Unknown word (ABCDEFGHIJKLMNOPQRSTUXWVYZ) -- abcdefghijklmnopqrstuxwvyzABCDEFGHIJKLMNOPQRSTUXWVYZ0123456789_";
 ./src/Abp.Web.Common/Web/Api/ProxyScripting/Generators/ProxyScriptingJsFuncHelper.cs:18:14     - Unknown word (instanceof)                 -- "instanceof",
+./src/Abp.Web.Common/Web/Http/HttpEncode.cs:18:199    - Unknown word (backcompat) -- unless turned off by backcompat switch)
 ./src/Abp.Web.Common/Web/Models/DefaultErrorInfoConverter.cs:15:76     - Unknown word (wlll)       -- ErrorInfo this way. It works wlll but I think we should
 ./src/Abp.Web.Common/Web/Mvc/Alerts/PageAlertMessageRenderer.cs:18:142    - Unknown word (dismisable) -- Dismissible ? "alert-dismisable" : "")} role=\"alert
 ./src/Abp.Web.Mvc/Web/Mvc/Resources/Embedded/EmbeddedResourceVirtualPathProvider.cs:33:17     - Unknown word (dependecy)  -- var dependecyFilenames = new StringCollecti
+./src/Abp.Web.Mvc/Web/Security/AntiForgery/AbpAntiForgeryManagerMvcExtensions.cs:41:78     - Unknown word (cookine)    -- tpContextBase context, string cookineName)
+./src/Abp.Zero.Common/Application/Editions/EditionfeatureCacheItem.cs:7:18      - Unknown word (Editionfeature) -- public class EditionfeatureCacheItem
 ./src/Abp.Zero.Common/Auditing/AuditLog.cs:128:47    - Unknown word (occured)    -- object, if an exception occured during execution of
 ./src/Abp.Zero.Common/Auditing/AuditingStore.cs:8:66      - Unknown word (informations) -- /> to save auditing informations to database.
+./src/Abp.Zero.Common/MultiTenancy/AbpTenant.cs:32:30     - Unknown word (deleter)    -- // Reference to the deleter user of this entity
 ./src/Abp.Zero.Common/Zero/Configuration/AbpZeroSettingProvider.cs:72:56     - Unknown word (Maxumum)    -- FixedLocalizableString("Maxumum Failed access attempt
 ./src/Abp.Zero.Ldap/Ldap/Configuration/LdapSettingNames.cs:4:18      - Unknown word (consts)     -- /// Contains consts for LDAP setting names
 ./src/Abp.Zero.NHibernate/Zero/FluentMigrator/Migrations/_20150312_01_Add_DeleteAuidit_To_AbpTenants_Tables.cs:7:41      - Unknown word (Auidit)     -- 150312_01_Add_DeleteAuidit_To_AbpTenants_Tables
+./src/Abp.Zero/Authorization/AbpLoginManager.cs:179:66    - Unknown word (Hasher)     -- UserManager.PasswordHasher.VerifyHashedPassword
 ./src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:47    - Unknown word (Unproxied)  -- typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity
 ./src/Abp.ZeroCore.IdentityServer4.EntityFrameworkCore/IdentityServer4/AbpZeroCoreIdentityServerEntityFrameworkCoreConfigurationExtensions.cs:31:60     - Unknown word (nvarchar)   -- over 4K converts to nvarchar(max) on SqlServer
 ./src/Abp.ZeroCore.IdentityServer4.vNext/IdentityServer4vNext/AbpResourceOwnerPasswordValidator.cs:52:73     - Unknown word (Oidc)       -- GrantValidationResult(sub, OidcConstants.AuthenticationMethod
+./src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2227:34   - Unknown word (userclaims) -- var query = from userclaims in _userClaimRepository
+./src/Abp.ZeroCore/Authorization/Users/AbpUserStore.cs:2293:34   - Unknown word (userrole)   -- var query = from userrole in _userRoleRepository
 ./src/Abp/Aspects/AbpCrossCuttingConcerns.cs:68:35     - Unknown word (Applieds)   -- public static string[] GetApplieds(object obj)
 ./src/Abp/Authorization/Permission.cs:51:66     - Unknown word (mykey)      -- indexer like Permission["mykey"]=data; </para>
 ./src/Abp/Authorization/Permission.cs:52:26     - Unknown word (mydata)     -- /// <para>object mydata=Permission["mykey"]
+./src/Abp/BackgroundJobs/BackgroundJobInfo.cs:43:28     - Unknown word (multiplated) -- /// This amount is multiplated by last wait time to
 ./src/Abp/BackgroundJobs/BackgroundJobInfo.cs:81:41     - Unknown word (continously) -- true if this job is continously failed and will not
 ./src/Abp/Collections/Extensions/ListExtensions.cs:41:48     - Unknown word (sortet)     -- sorted">List with the sortet items</param>
 ./src/Abp/Configuration/SettingDefinitionGroup.cs:9:56      - Unknown word (togehter)   -- group some settings togehter.
+./src/Abp/Configuration/Startup/ILocalizationConfiguration.cs:45:84     - Unknown word (Sentense)   -- from 'PascalCase' to a 'Sentense case'
 ./src/Abp/Configuration/Startup/ILocalizationSourceList.cs:12:28     - Unknown word (dictionay)  -- /// Extensions for dictionay based localization sources
 ./src/Abp/Configuration/Startup/IModuleConfigurations.cs:5:16      - Unknown word (entension)  -- /// Create entension methods to this class
+./src/Abp/Configuration/Startup/SettingEncryptionConfiguration.cs:8:52      - Unknown word (keysize)    -- used to determine the keysize of the encryption algorithm
 ./src/Abp/Dependency/IScopedIocResolver.cs:6:62      - Unknown word (resolvings) -- wrap a scope for batch resolvings in a single <c>using
+./src/Abp/Dependency/IocManager.cs:25:13     - Unknown word (Singletone) -- /// Singletone instance for Castle
+./src/Abp/Dependency/IocManager.cs:26:118    - Unknown word (memoryleaks) -- ProxyGenerator to avoid memoryleaks and performance issues
 ./src/Abp/Dependency/IocManager.cs:26:57     - Unknown word (recomended) -- documentation it is highly recomended to use single instance
 ./src/Abp/DisposeAction.cs:9:9       - Unknown word (Dipose)     -- /// Dipose method is called.
 ./src/Abp/Domain/Entities/EntityExtensions.cs:22:13     - Unknown word (Undeletes)  -- /// Undeletes this entity by setting
+./src/Abp/Domain/Uow/UnitOfWorkBase.cs:226:17    - Unknown word (newfilter)  -- var newfilter = new DataFilterConfiguration
 ./src/Abp/Events/Bus/EventBus.cs:102:31    - Unknown word (Unregistrar) -- return new FactoryUnregistrar(this, eventType, factory
+./src/Abp/Events/Bus/EventBus.cs:44:39     - Unknown word (instace)    -- Instead of creating a new instace, you can use <see cref
 ./src/Abp/Events/Bus/Handlers/IAsyncEventHandlerOfTEventData.cs:6:61      - Unknown word (asynchrounously) -- that handles events asynchrounously of type <see cref="IAsyncEven
 ./src/Abp/Events/Bus/Handlers/IEventHandler.cs:4:9       - Unknown word (Undirect)   -- /// Undirect base interface for all
 ./src/Abp/Events/Bus/IEventBus.cs:83:13     - Unknown word (Unregisters) -- /// Unregisters from an event.
 ./src/Abp/Extensions/StringExtensions.cs:151:31    - Unknown word (occurence)  -- / Gets index of nth occurence of a char in a string
 ./src/Abp/IShouldInitialize.cs:7:72      - Unknown word (Initializable) -- injection, <see cref="IInitializable.Initialize"/>
-./src/Abp/Linq/Expressions/PredicateBuilder.cs:210:27    - Unknown word (Lamda)      -- #region Implement LamdaExpression methods and
+./src/Abp/Linq/Expressions/PredicateBuilder.cs:167:38    - Unknown word (implicitely) -- Allows this object to be implicitely converted to an Expression
+./src/Abp/Linq/Expressions/PredicateBuilder.cs:194:39    - Unknown word (Delagate)    -- Implement Expression<TDelagate> methods and properties
+./src/Abp/Linq/Expressions/PredicateBuilder.cs:201:31    - Unknown word (NETSTANDARD) -- 5 || WINDOWS_APP || NETSTANDARD || PORTABLE || PORTABLE
+./src/Abp/Linq/Expressions/PredicateBuilder.cs:210:27    - Unknown word (Lamda)       -- #region Implement LamdaExpression methods and
 ./src/Abp/Localization/Dictionaries/Json/JsonEmbeddedFileLocalizationDictionaryProvider.cs:39:76     - Unknown word (resouce)    -- ManifestResourceNames().Where(resouceName =>
 ./src/Abp/Localization/Dictionaries/Json/JsonLocalizationDictionary.cs:73:17     - Unknown word (dublicate)  -- var dublicateNames = new List<string
-./src/Abp/MimeTypes/MimeTypeMap.cs:100:20    - Unknown word (avif)       -- {".avif", "image/avif"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:101:20    - Unknown word (avifs)      -- {".avifs", "image/avif-sequence
-./src/Abp/MimeTypes/MimeTypeMap.cs:106:20    - Unknown word (bcpio)      -- {".bcpio", "application/x-bcpio
-./src/Abp/MimeTypes/MimeTypeMap.cs:116:20    - Unknown word (cdda)       -- {".cdda", "audio/aiff"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:122:41    - Unknown word (msclip)     -- clp", "application/x-msclip"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:130:20    - Unknown word (cpio)       -- {".cpio", "application/x-cpio
-./src/Abp/MimeTypes/MimeTypeMap.cs:132:41    - Unknown word (mscardfile) -- crd", "application/x-mscardfile"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:133:39    - Unknown word (pkix)       -- .crl", "application/pkix-crl"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:136:20    - Unknown word (csdproj)    -- {".csdproj", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:146:20    - Unknown word (dbproj)     -- {".dbproj", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:151:20    - Unknown word (dgml)       -- {".dgml", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:156:20    - Unknown word (divx)       -- {".divx", "video/divx"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:157:41    - Unknown word (msdownload) -- dll", "application/x-msdownload"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:100:20    - Unknown word (avif)           -- {".avif", "image/avif"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:101:20    - Unknown word (avifs)          -- {".avifs", "image/avif-sequence
+./src/Abp/MimeTypes/MimeTypeMap.cs:103:39    - Unknown word (olescript)      -- .axs", "application/olescript"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:106:20    - Unknown word (bcpio)          -- {".bcpio", "application/x-bcpio
+./src/Abp/MimeTypes/MimeTypeMap.cs:113:50    - Unknown word (seccat)         -- application/vnd.ms-pki.seccat"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:116:20    - Unknown word (cdda)           -- {".cdda", "audio/aiff"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:122:41    - Unknown word (msclip)         -- clp", "application/x-msclip"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:130:20    - Unknown word (cpio)           -- {".cpio", "application/x-cpio
+./src/Abp/MimeTypes/MimeTypeMap.cs:132:41    - Unknown word (mscardfile)     -- crd", "application/x-mscardfile"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:133:39    - Unknown word (pkix)           -- .crl", "application/pkix-crl"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:136:20    - Unknown word (csdproj)        -- {".csdproj", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:146:20    - Unknown word (dbproj)         -- {".dbproj", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:151:20    - Unknown word (dgml)           -- {".dgml", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:156:20    - Unknown word (divx)           -- {".divx", "video/divx"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:157:41    - Unknown word (msdownload)     -- dll", "application/x-msdownload"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:160:39    - Unknown word (msword)         -- .doc", "application/msword"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:162:44    - Unknown word (openxmlformats) -- docx", "application/vnd.openxmlformats-officedocument.wordprocessing
+./src/Abp/MimeTypes/MimeTypeMap.cs:162:59    - Unknown word (officedocument) -- pplication/vnd.openxmlformats-officedocument.wordprocessingml.document
 ./src/Abp/MimeTypes/MimeTypeMap.cs:162:74    - Unknown word (wordprocessingml) -- openxmlformats-officedocument.wordprocessingml.document"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:164:20    - Unknown word (dotm)             -- {".dotm", "application/vnd.ms
 ./src/Abp/MimeTypes/MimeTypeMap.cs:173:39    - Unknown word (acad)             -- .dwg", "application/acad"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:180:46    - Unknown word (fontobject)       -- "application/vnd.ms-fontobject"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:184:34    - Unknown word (setext)           -- {".etx", "text/x-setext"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:193:20    - Unknown word (flac)             -- {".flac", "audio/flac"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:194:37    - Unknown word (vrml)             -- {".flr", "x-world/x-vrml"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:198:20    - Unknown word (generictest)      -- {".generictest", "application/xml"
 ./src/Abp/MimeTypes/MimeTypeMap.cs:203:20    - Unknown word (gtar)             -- {".gtar", "application/x-gtar
 ./src/Abp/MimeTypes/MimeTypeMap.cs:207:20    - Unknown word (hdml)             -- {".hdml", "text/x-hdml"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:208:20    - Unknown word (heic)             -- {".heic", "image/heic"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:209:20    - Unknown word (heics)            -- {".heics", "image/heic-sequence
 ./src/Abp/MimeTypes/MimeTypeMap.cs:210:20    - Unknown word (heif)             -- {".heif", "image/heif"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:211:20    - Unknown word (heifs)            -- {".heifs", "image/heif-sequence
+./src/Abp/MimeTypes/MimeTypeMap.cs:212:41    - Unknown word (oleobject)        -- hhc", "application/x-oleobject"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:215:39    - Unknown word (winhlp)           -- .hlp", "application/winhlp"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:217:43    - Unknown word (binhex)           -- hqx", "application/mac-binhex40"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:222:32    - Unknown word (webviewhtml)      -- {".htt", "text/webviewhtml"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:239:20    - Unknown word (ical)             -- {".ical", "text/calendar"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:240:20    - Unknown word (icalendar)        -- {".icalendar", "text/calendar"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:254:20    - Unknown word (ipproj)           -- {".ipproj", "text/plain"},
@@ -265,110 +318,151 @@ Lines:
 ./src/Abp/MimeTypes/MimeTypeMap.cs:261:20    - Unknown word (itlp)             -- {".itlp", "application/x-itunes
 ./src/Abp/MimeTypes/MimeTypeMap.cs:262:20    - Unknown word (itms)             -- {".itms", "application/x-itunes
 ./src/Abp/MimeTypes/MimeTypeMap.cs:263:20    - Unknown word (itpc)             -- {".itpc", "application/x-itunes
+./src/Abp/MimeTypes/MimeTypeMap.cs:267:39    - Unknown word (liquidmotion)     -- .jck", "application/liquidmotion"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:269:20    - Unknown word (jfif)             -- {".jfif", "image/pjpeg"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:269:34    - Unknown word (pjpeg)            -- {".jfif", "image/pjpeg"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:270:20    - Unknown word (jnlp)             -- {".jnlp", "application/x-java
 ./src/Abp/MimeTypes/MimeTypeMap.cs:277:32    - Unknown word (jscript)          -- {".jsx", "text/jscript"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:278:20    - Unknown word (jsxbin)           -- {".jsxbin", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:282:20    - Unknown word (loadtest)         -- {".loadtest", "application/xml"
 ./src/Abp/MimeTypes/MimeTypeMap.cs:288:41    - Unknown word (msmediaview)      -- m13", "application/x-msmediaview"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:294:35    - Unknown word (mpegurl)          -- {".m3u", "audio/x-mpegurl"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:301:35    - Unknown word (macpaint)         -- {".mac", "image/x-macpaint"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:303:41    - Unknown word (troff)            -- man", "application/x-troff-man"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:307:20    - Unknown word (mbox)             -- {".mbox", "application/mbox
 ./src/Abp/MimeTypes/MimeTypeMap.cs:315:20    - Unknown word (mhtml)            -- {".mhtml", "message/rfc822"}
 ./src/Abp/MimeTypes/MimeTypeMap.cs:320:36    - Unknown word (matroska)         -- {".mk3d", "video/x-matroska-3d"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:323:41    - Unknown word (smaf)             -- mmf", "application/x-smaf"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:325:41    - Unknown word (msmoney)          -- mny", "application/x-msmoney"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:327:33    - Unknown word (quicktime)        -- {".mov", "video/quicktime"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:349:41    - Unknown word (miva)             -- mvc", "application/x-miva-compiled"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:351:41    - Unknown word (mmxp)             -- mxp", "application/x-mmxp"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:357:49    - Unknown word (opendocument)     -- application/vnd.oasis.opendocument.database"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:372:39    - Unknown word (onenote)          -- .one", "application/onenote"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:373:20    - Unknown word (onea)             -- {".onea", "application/onenote
+./src/Abp/MimeTypes/MimeTypeMap.cs:374:20    - Unknown word (onepkg)           -- {".onepkg", "application/onenote
 ./src/Abp/MimeTypes/MimeTypeMap.cs:375:20    - Unknown word (onetmp)           -- {".onetmp", "application/onenote
 ./src/Abp/MimeTypes/MimeTypeMap.cs:376:20    - Unknown word (onetoc)           -- {".onetoc", "application/onenote
+./src/Abp/MimeTypes/MimeTypeMap.cs:379:20    - Unknown word (orderedtest)      -- {".orderedtest", "application/xml"
 ./src/Abp/MimeTypes/MimeTypeMap.cs:380:20    - Unknown word (osdx)             -- {".osdx", "application/opensearchdesc
-./src/Abp/MimeTypes/MimeTypeMap.cs:381:44    - Unknown word (sfnt)             -- , "application/font-sfnt"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:387:20    - Unknown word (oxps)             -- {".oxps", "application/oxps
-./src/Abp/MimeTypes/MimeTypeMap.cs:389:39    - Unknown word (pkcs)             -- .p10", "application/pkcs10"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:380:40    - Unknown word (opensearchdescription) -- osdx", "application/opensearchdescription+xml"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:381:44    - Unknown word (sfnt)                  -- , "application/font-sfnt"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:387:20    - Unknown word (oxps)                  -- {".oxps", "application/oxps
+./src/Abp/MimeTypes/MimeTypeMap.cs:388:43    - Unknown word (openofficeorg)         -- oxt", "application/vnd.openofficeorg.extension"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:389:39    - Unknown word (pkcs)                  -- .p10", "application/pkcs10"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:38:45     - Unknown word (inetsrv)    -- C:\Windows\System32\inetsrv\config\applicationHost
-./src/Abp/MimeTypes/MimeTypeMap.cs:397:20    - Unknown word (pcast)            -- {".pcast", "application/x-podcast
-./src/Abp/MimeTypes/MimeTypeMap.cs:409:20    - Unknown word (pkgundef)         -- {".pkgundef", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:411:33    - Unknown word (scpls)            -- {".pls", "audio/scpls"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:412:41    - Unknown word (perfmon)          -- pma", "application/x-perfmon"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:420:20    - Unknown word (pntg)             -- {".pntg", "image/x-macpaint
-./src/Abp/MimeTypes/MimeTypeMap.cs:424:74    - Unknown word (presentationml)   -- openxmlformats-officedocument.presentationml.template"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:440:20    - Unknown word (psess)            -- {".psess", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:444:41    - Unknown word (mspublisher)      -- pub", "application/x-mspublisher"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:447:20    - Unknown word (qhtm)             -- {".qhtm", "text/x-html-insertion
-./src/Abp/MimeTypes/MimeTypeMap.cs:450:20    - Unknown word (qtif)             -- {".qtif", "image/x-quicktime
-./src/Abp/MimeTypes/MimeTypeMap.cs:461:20    - Unknown word (rdlc)             -- {".rdlc", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:470:20    - Unknown word (rmvb)             -- {".rmvb", "application/vnd.rn
-./src/Abp/MimeTypes/MimeTypeMap.cs:471:20    - Unknown word (roff)             -- {".roff", "application/x-troff
-./src/Abp/MimeTypes/MimeTypeMap.cs:479:20    - Unknown word (safariextz)       -- {".safariextz", "application/x-safari
-./src/Abp/MimeTypes/MimeTypeMap.cs:480:41    - Unknown word (msschedule)       -- scd", "application/x-msschedule"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:490:20    - Unknown word (sgimb)            -- {".sgimb", "application/x-sgimb
-./src/Abp/MimeTypes/MimeTypeMap.cs:493:20    - Unknown word (shar)             -- {".shar", "application/x-shar
-./src/Abp/MimeTypes/MimeTypeMap.cs:495:41    - Unknown word (stuffit)          -- sit", "application/x-stuffit"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:503:20    - Unknown word (slupkg)           -- {".slupkg-ms", "application/x
-./src/Abp/MimeTypes/MimeTypeMap.cs:517:41    - Unknown word (wais)             -- src", "application/x-wais-source"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:519:20    - Unknown word (SSIS)             -- {".SSISDeploymentManifest",
-./src/Abp/MimeTypes/MimeTypeMap.cs:536:20    - Unknown word (texi)             -- {".texi", "application/x-texinfo
-./src/Abp/MimeTypes/MimeTypeMap.cs:539:20    - Unknown word (thmx)             -- {".thmx", "application/vnd.ms
-./src/Abp/MimeTypes/MimeTypeMap.cs:547:41    - Unknown word (msterminal)       -- trm", "application/x-msterminal"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:555:32    - Unknown word (iuls)            -- {".uls", "text/iuls"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:557:20    - Unknown word (ustar)           -- {".ustar", "application/x-ustar
-./src/Abp/MimeTypes/MimeTypeMap.cs:559:20    - Unknown word (vbdproj)         -- {".vbdproj", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:563:34    - Unknown word (vcard)           -- {".vcf", "text/x-vcard"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:564:20    - Unknown word (vcproj)          -- {".vcproj", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:567:20    - Unknown word (vddproj)         -- {".vddproj", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:569:20    - Unknown word (vdproj)          -- {".vdproj", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:394:47    - Unknown word (certreqresp)           -- application/x-pkcs7-certreqresp"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:397:20    - Unknown word (pcast)                 -- {".pcast", "application/x-podcast
+./src/Abp/MimeTypes/MimeTypeMap.cs:405:44    - Unknown word (graymap)               -- , "image/x-portable-graymap"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:408:20    - Unknown word (pkgdef)                -- {".pkgdef", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:409:20    - Unknown word (pkgundef)              -- {".pkgundef", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:411:33    - Unknown word (scpls)                 -- {".pls", "audio/scpls"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:412:41    - Unknown word (perfmon)               -- pma", "application/x-perfmon"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:418:44    - Unknown word (anymap)                -- , "image/x-portable-anymap"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:420:20    - Unknown word (pntg)                  -- {".pntg", "image/x-macpaint
+./src/Abp/MimeTypes/MimeTypeMap.cs:424:74    - Unknown word (presentationml)        -- openxmlformats-officedocument.presentationml.template"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:427:44    - Unknown word (pixmap)                -- , "image/x-portable-pixmap"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:440:20    - Unknown word (psess)                 -- {".psess", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:444:41    - Unknown word (mspublisher)           -- pub", "application/x-mspublisher"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:447:20    - Unknown word (qhtm)                  -- {".qhtm", "text/x-html-insertion
+./src/Abp/MimeTypes/MimeTypeMap.cs:450:20    - Unknown word (qtif)                  -- {".qtif", "image/x-quicktime
+./src/Abp/MimeTypes/MimeTypeMap.cs:451:41    - Unknown word (quicktimeplayer)       -- qtl", "application/x-quicktimeplayer"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:453:37    - Unknown word (realaudio)             -- {".ra", "audio/x-pn-realaudio"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:461:20    - Unknown word (rdlc)                  -- {".rdlc", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:464:39    - Unknown word (realflash)             -- .rf", "image/vnd.rn-realflash"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:467:45    - Unknown word (realmedia)             -- "application/vnd.rn-realmedia"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:470:20    - Unknown word (rmvb)                  -- {".rmvb", "application/vnd.rn
+./src/Abp/MimeTypes/MimeTypeMap.cs:471:20    - Unknown word (roff)                  -- {".roff", "application/x-troff
+./src/Abp/MimeTypes/MimeTypeMap.cs:475:32    - Unknown word (richtext)              -- {".rtx", "text/richtext"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:477:20    - Unknown word (ruleset)               -- {".ruleset", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:479:20    - Unknown word (safariextz)            -- {".safariextz", "application/x-safari
+./src/Abp/MimeTypes/MimeTypeMap.cs:480:41    - Unknown word (msschedule)            -- scd", "application/x-msschedule"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:482:32    - Unknown word (scriptlet)             -- {".sct", "text/scriptlet"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:487:20    - Unknown word (setpay)                -- {".setpay", "application/set-payment
+./src/Abp/MimeTypes/MimeTypeMap.cs:488:20    - Unknown word (setreg)                -- {".setreg", "application/set-registrati
+./src/Abp/MimeTypes/MimeTypeMap.cs:490:20    - Unknown word (sgimb)                 -- {".sgimb", "application/x-sgimb
+./src/Abp/MimeTypes/MimeTypeMap.cs:493:20    - Unknown word (shar)                  -- {".shar", "application/x-shar
+./src/Abp/MimeTypes/MimeTypeMap.cs:495:41    - Unknown word (stuffit)               -- sit", "application/x-stuffit"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:503:20    - Unknown word (slupkg)                -- {".slupkg-ms", "application/x
+./src/Abp/MimeTypes/MimeTypeMap.cs:515:39    - Unknown word (futuresplash)          -- .spl", "application/futuresplash"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:517:41    - Unknown word (wais)                  -- src", "application/x-wais-source"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:519:20    - Unknown word (SSIS)                  -- {".SSISDeploymentManifest",
+./src/Abp/MimeTypes/MimeTypeMap.cs:520:39    - Unknown word (streamingmedia)        -- .ssm", "application/streamingmedia"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:521:50    - Unknown word (certstore)             -- application/vnd.ms-pki.certstore"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:533:20    - Unknown word (testrunconfig)         -- {".testrunconfig", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:534:20    - Unknown word (testsettings)          -- {".testsettings", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:536:20    - Unknown word (texi)                  -- {".texi", "application/x-texinfo
+./src/Abp/MimeTypes/MimeTypeMap.cs:536:42    - Unknown word (texinfo)               -- texi", "application/x-texinfo"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:539:20    - Unknown word (thmx)                  -- {".thmx", "application/vnd.ms
+./src/Abp/MimeTypes/MimeTypeMap.cs:539:47    - Unknown word (officetheme)           -- "application/vnd.ms-officetheme"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:547:41    - Unknown word (msterminal)           -- trm", "application/x-msterminal"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:555:32    - Unknown word (iuls)                 -- {".uls", "text/iuls"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:557:20    - Unknown word (ustar)                -- {".ustar", "application/x-ustar
+./src/Abp/MimeTypes/MimeTypeMap.cs:559:20    - Unknown word (vbdproj)              -- {".vbdproj", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:563:34    - Unknown word (vcard)                -- {".vcf", "text/x-vcard"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:564:20    - Unknown word (vcproj)               -- {".vcproj", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:567:20    - Unknown word (vddproj)              -- {".vddproj", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:569:20    - Unknown word (vdproj)               -- {".vdproj", "text/plain"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:56:20     - Unknown word (accda)      -- {".accda", "application/msaccess
 ./src/Abp/MimeTypes/MimeTypeMap.cs:56:41     - Unknown word (msaccess)   -- accda", "application/msaccess.addin"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:56:50     - Unknown word (addin)      -- application/msaccess.addin"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:570:46    - Unknown word (visio)           -- "application/vnd.ms-visio.viewer"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:572:20    - Unknown word (vscontent)       -- {".vscontent", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:573:20    - Unknown word (vsct)            -- {".vsct", "text/xml"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:576:20    - Unknown word (vsix)            -- {".vsix", "application/vsix
-./src/Abp/MimeTypes/MimeTypeMap.cs:577:20    - Unknown word (vsixlangpack)    -- {".vsixlangpack", "text/xml"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:578:20    - Unknown word (vsixmanifest)    -- {".vsixmanifest", "text/xml"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:579:20    - Unknown word (vsmdi)           -- {".vsmdi", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:580:20    - Unknown word (vspscc)          -- {".vspscc", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:582:20    - Unknown word (vsscc)           -- {".vsscc", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:583:20    - Unknown word (vssettings)      -- {".vssettings", "text/xml"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:584:20    - Unknown word (vssscc)          -- {".vssscc", "text/plain"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:586:20    - Unknown word (vstemplate)      -- {".vstemplate", "text/xml"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:587:20    - Unknown word (vsto)            -- {".vsto", "application/x-ms
+./src/Abp/MimeTypes/MimeTypeMap.cs:570:46    - Unknown word (visio)                -- "application/vnd.ms-visio.viewer"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:572:20    - Unknown word (vscontent)            -- {".vscontent", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:573:20    - Unknown word (vsct)                 -- {".vsct", "text/xml"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:576:20    - Unknown word (vsix)                 -- {".vsix", "application/vsix
+./src/Abp/MimeTypes/MimeTypeMap.cs:577:20    - Unknown word (vsixlangpack)         -- {".vsixlangpack", "text/xml"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:578:20    - Unknown word (vsixmanifest)         -- {".vsixmanifest", "text/xml"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:579:20    - Unknown word (vsmdi)                -- {".vsmdi", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:580:20    - Unknown word (vspscc)               -- {".vspscc", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:582:20    - Unknown word (vsscc)                -- {".vsscc", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:583:20    - Unknown word (vssettings)           -- {".vssettings", "text/xml"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:584:20    - Unknown word (vssscc)               -- {".vssscc", "text/plain"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:586:20    - Unknown word (vstemplate)           -- {".vstemplate", "text/xml"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:587:20    - Unknown word (vsto)                 -- {".vsto", "application/x-ms
 ./src/Abp/MimeTypes/MimeTypeMap.cs:58:20     - Unknown word (accdc)      -- {".accdc", "application/msaccess
-./src/Abp/MimeTypes/MimeTypeMap.cs:597:20    - Unknown word (wbmp)            -- {".wbmp", "image/vnd.wap.wbmp
-./src/Abp/MimeTypes/MimeTypeMap.cs:608:20    - Unknown word (WLMP)            -- {".WLMP", "application/wlmoviemaker
-./src/Abp/MimeTypes/MimeTypeMap.cs:608:40    - Unknown word (wlmoviemaker)    -- WLMP", "application/wlmoviemaker"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:609:20    - Unknown word (wlpginstall)     -- {".wlpginstall", "application/x-wlpg
-./src/Abp/MimeTypes/MimeTypeMap.cs:609:49    - Unknown word (wlpg)            -- wlpginstall", "application/x-wlpg-detect"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:614:41    - Unknown word (msmetafile)      -- wmf", "application/x-msmetafile"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:616:20    - Unknown word (wmlc)            -- {".wmlc", "application/vnd.wap
-./src/Abp/MimeTypes/MimeTypeMap.cs:617:20    - Unknown word (wmls)            -- {".wmls", "text/vnd.wap.wmlscript
-./src/Abp/MimeTypes/MimeTypeMap.cs:617:41    - Unknown word (wmlscript)       -- wmls", "text/vnd.wap.wmlscript"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:618:20    - Unknown word (wmlsc)           -- {".wmlsc", "application/vnd.wap
-./src/Abp/MimeTypes/MimeTypeMap.cs:618:49    - Unknown word (wmlscriptc)      -- application/vnd.wap.wmlscriptc"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:597:20    - Unknown word (wbmp)                 -- {".wbmp", "image/vnd.wap.wbmp
+./src/Abp/MimeTypes/MimeTypeMap.cs:601:20    - Unknown word (webarchive)           -- {".webarchive", "application/x-safari
+./src/Abp/MimeTypes/MimeTypeMap.cs:604:20    - Unknown word (webtest)              -- {".webtest", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:608:20    - Unknown word (WLMP)                 -- {".WLMP", "application/wlmoviemaker
+./src/Abp/MimeTypes/MimeTypeMap.cs:608:40    - Unknown word (wlmoviemaker)         -- WLMP", "application/wlmoviemaker"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:609:20    - Unknown word (wlpginstall)          -- {".wlpginstall", "application/x-wlpg
+./src/Abp/MimeTypes/MimeTypeMap.cs:609:49    - Unknown word (wlpg)                 -- wlpginstall", "application/x-wlpg-detect"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:614:41    - Unknown word (msmetafile)           -- wmf", "application/x-msmetafile"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:616:20    - Unknown word (wmlc)                 -- {".wmlc", "application/vnd.wap
+./src/Abp/MimeTypes/MimeTypeMap.cs:617:20    - Unknown word (wmls)                 -- {".wmls", "text/vnd.wap.wmlscript
+./src/Abp/MimeTypes/MimeTypeMap.cs:617:41    - Unknown word (wmlscript)            -- wmls", "text/vnd.wap.wmlscript"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:618:20    - Unknown word (wmlsc)                -- {".wmlsc", "application/vnd.wap
+./src/Abp/MimeTypes/MimeTypeMap.cs:618:49    - Unknown word (wmlscriptc)           -- application/vnd.wap.wmlscriptc"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:627:41    - Unknown word (mswrite)              -- wri", "application/x-mswrite"},
 ./src/Abp/MimeTypes/MimeTypeMap.cs:62:20     - Unknown word (accdw)      -- {".accdw", "application/msaccess
-./src/Abp/MimeTypes/MimeTypeMap.cs:633:37    - Unknown word (directx)         -- {".x", "application/directx"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:637:20    - Unknown word (xbap)            -- {".xbap", "application/x-ms
-./src/Abp/MimeTypes/MimeTypeMap.cs:638:35    - Unknown word (xbitmap)         -- {".xbm", "image/x-xbitmap"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:63:20     - Unknown word (accft)      -- {".accft", "application/msaccess
-./src/Abp/MimeTypes/MimeTypeMap.cs:63:50     - Unknown word (ftemplate)  -- application/msaccess.ftemplate"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:650:20    - Unknown word (xlsb)            -- {".xlsb", "application/vnd.ms
-./src/Abp/MimeTypes/MimeTypeMap.cs:652:74    - Unknown word (spreadsheetml)   -- openxmlformats-officedocument.spreadsheetml.sheet"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:659:20    - Unknown word (xmta)            -- {".xmta", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:662:35    - Unknown word (xpixmap)         -- {".xpm", "image/x-xpixmap"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:672:20    - Unknown word (xspf)            -- {".xspf", "application/xspf
-./src/Abp/MimeTypes/MimeTypeMap.cs:674:35    - Unknown word (xwindowdump)     -- {".xwd", "image/x-xwindowdump"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:690:33    - Unknown word (msdos)           -- {"application/x-msdos-program", ".exe"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:69:37     - Unknown word (dlna)       -- {".ADT", "audio/vnd.dlna.adts"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:78:39     - Unknown word (annodex)    -- .anx", "application/annodex"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:80:20     - Unknown word (apng)       -- {".apng", "image/apng"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:88:20     - Unknown word (ashx)       -- {".ashx", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:91:20     - Unknown word (asmx)       -- {".asmx", "application/xml"
-./src/Abp/MimeTypes/MimeTypeMap.cs:97:20     - Unknown word (avci)       -- {".avci", "image/avci"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:98:20     - Unknown word (avcs)       -- {".avcs", "image/avcs"},
-./src/Abp/MimeTypes/MimeTypeMap.cs:99:35     - Unknown word (msvideo)    -- {".avi", "video/x-msvideo"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:62:50     - Unknown word (webapplication) -- application/msaccess.webapplication"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:633:37    - Unknown word (directx)              -- {".x", "application/directx"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:636:41    - Unknown word (silverlight)          -- xap", "application/x-silverlight-app"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:637:20    - Unknown word (xbap)                 -- {".xbap", "application/x-ms
+./src/Abp/MimeTypes/MimeTypeMap.cs:638:35    - Unknown word (xbitmap)              -- {".xbm", "image/x-xbitmap"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:63:20     - Unknown word (accft)          -- {".accft", "application/msaccess
+./src/Abp/MimeTypes/MimeTypeMap.cs:63:50     - Unknown word (ftemplate)      -- application/msaccess.ftemplate"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:650:20    - Unknown word (xlsb)                 -- {".xlsb", "application/vnd.ms
+./src/Abp/MimeTypes/MimeTypeMap.cs:652:74    - Unknown word (spreadsheetml)        -- openxmlformats-officedocument.spreadsheetml.sheet"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:659:20    - Unknown word (xmta)                 -- {".xmta", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:662:35    - Unknown word (xpixmap)              -- {".xpm", "image/x-xpixmap"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:663:46    - Unknown word (xpsdocument)          -- "application/vnd.ms-xpsdocument"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:672:20    - Unknown word (xspf)                 -- {".xspf", "application/xspf
+./src/Abp/MimeTypes/MimeTypeMap.cs:674:35    - Unknown word (xwindowdump)          -- {".xwd", "image/x-xwindowdump"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:67:20     - Unknown word (adobebridge)    -- {".adobebridge", "application/x-bridge
+./src/Abp/MimeTypes/MimeTypeMap.cs:690:33    - Unknown word (msdos)                -- {"application/x-msdos-program", ".exe"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:69:37     - Unknown word (dlna)           -- {".ADT", "audio/vnd.dlna.adts"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:78:39     - Unknown word (annodex)        -- .anx", "application/annodex"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:80:20     - Unknown word (apng)           -- {".apng", "image/apng"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:88:20     - Unknown word (ashx)           -- {".ashx", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:91:20     - Unknown word (asmx)           -- {".asmx", "application/xml"
+./src/Abp/MimeTypes/MimeTypeMap.cs:97:20     - Unknown word (avci)           -- {".avci", "image/avci"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:98:20     - Unknown word (avcs)           -- {".avcs", "image/avcs"},
+./src/Abp/MimeTypes/MimeTypeMap.cs:99:35     - Unknown word (msvideo)        -- {".avi", "video/x-msvideo"},
 ./src/Abp/Notifications/DefaultNotificationDistributer.cs:150:62    - Unknown word (euid)       -- excludedUserIds.Any(euid => euid.Equals(uid)
 ./src/Abp/Notifications/INotificationSubscriptionManager.cs:59:22     - Unknown word (subscribtions) -- /// Gets all subscribtions for given notification
 ./src/Abp/Notifications/NotificationConfiguration.cs:9:52      - Unknown word (Distributers) -- INotificationDistributer> Distributers { get; private set;
+./src/Abp/Notifications/NotificationData.cs:43:94     - Unknown word (compability) -- required for backward compability. */
 ./src/Abp/Runtime/Caching/AbpCacheData.cs:15:97     - Unknown word (mscorlib)   -- new List<string> { "mscorlib", "System.Private.CoreLib
 ./src/Abp/Runtime/Caching/CacheManagerBase.cs:53:21     - Unknown word (configurators) -- var configurators = Configuration.Configurators
 ./src/Abp/Runtime/Caching/IAbpCache.cs:111:98    - Unknown word (Othewise)   -- used if it's not null. Othewise, <see cref="ICacheOptions
@@ -381,39 +475,63 @@ Lines:
 ./src/Abp/Specifications/AndNotSpecification.cs:8:16      - Unknown word (satisifed)  -- /// can be satisifed by the given object
 ./src/Abp/Specifications/ExpressionFuncExtender.cs:22:39     - Unknown word (Rebinder)   -- secondBody = ParameterRebinder.ReplaceParameters(map
 ./src/Abp/Specifications/ParameterRebinder.cs:7:34      - Unknown word (rebinder)   -- Represents the parameter rebinder used for rebinding the
+./src/Abp/Text/FormattedStringValueExtracter.cs:26:26     - Unknown word (splitformat) -- /// <param name="splitformatCharacter">format is
+./src/Abp/Text/Formatting/FormatStringTokenizer.cs:46:110    - Unknown word (containt)   -- ! Brackets does not containt any chars.");
 ./src/Abp/Threading/AsyncHelper.cs:4:7       - Unknown word (Nito)       -- using Nito.AsyncEx;
 ./src/Abp/Threading/Extensions/LockExtensions.cs:59:43     - Unknown word (paramnref)  -- Return value of the <paramnref name="func"/></returns
 ./src/Abp/Threading/Timers/AbpAsyncTimer.cs:27:54     - Unknown word (spesified)  -- to perfom the task at spesified intervals.
+./src/Abp/Threading/Timers/AbpTimer.cs:8:11      - Unknown word (roboust)    -- /// A roboust timer implementation
+./src/Abp/Timing/Timezone/TimezoneHelper.cs:103:45    - Unknown word (datetimeoffset) -- utc datetime in to a datetimeoffset
+./src/Abp/UI/Inputs/ComboboxInputType.cs:10:17     - Unknown word (COMBOBOX)   -- [InputType("COMBOBOX")]
 ./test/Abp.AspNetCore.Tests/App/MultiTenancy/TestTenantStore.cs:13:33     - Unknown word (vlsft)      -- new TenantInfo(43, "vlsft")
+./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:56:64     - Unknown word (aspnetcore) -- local/site?id=1")] //aspnetcore can only bind the first
+./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:58:34     - Unknown word (Flocalhost) -- InlineData("http%3A%2F%2Flocalhost%2Fpage", "/")]
 ./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:58:46     - Unknown word (Fpage)      -- http%3A%2F%2Flocalhost%2Fpage", "/")]
+./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:59:24     - Unknown word (Flocal)     -- [InlineData("%2Flocal%2Fsite%3Fid%3D1%26value
 ./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:59:32     - Unknown word (Fsite)      -- InlineData("%2Flocal%2Fsite%3Fid%3D1%26value%3D
 ./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:5:7       - Unknown word (Shouldly)   -- using Shouldly;
 ./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:60:75     - Unknown word (Dbusiness)  -- %E4%BA%8B%E5%A0%B4%3Dbusiness%26ID%3D1", "/経営?仕事場
 ./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:6:7       - Unknown word (Xunit)      -- using Xunit;
 ./test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:81:34     - Unknown word (Fwww)       -- InlineData("http%3A%2F%2Fwww.example.com%2F%E7%B
 ./test/Abp.AspNetCore.Tests/Tests/Utils/ArrayMacther_Tests.cs:6:23      - Unknown word (Macther)    -- public class ArrayMacther_Tests
+./test/Abp.AutoMapper.Tests/AutoMapper_Inheritance_Tests.cs:34:57     - Unknown word (fortytwo)   -- MyDerivedClass { Value = "fortytwo" };
 ./test/Abp.AutoMapper.Tests/AutoMapper_Inheritance_Tests.cs:56:64     - Unknown word (Drived)     -- To_EntityDto_And_To_DrivedEntityDto()
 ./test/Abp.Dapper.NHibernate.Tests/DapperNhBasedRepository_Tests.cs:22:62     - Unknown word (Oguzhan)    -- session.Save(new Person("Oguzhan_Initial")));
+./test/Abp.Dapper.Tests/DapperRepository_Tests.cs:87:77     - Unknown word (Deletable)  -- InsertAsync(new Product("SoftDeletableProduct"));
 ./test/Abp.EntityFramework.GraphDiff.Tests/Mapping/EntityMappingManager_Tests.cs:34:86     - Unknown word (Exrepssion) -- object>> expectedMainExrepssion =
+./test/Abp.EntityFramework.Tests/Utils/DateTimePropertyInfoFinder_Tests.cs:15:25     - Unknown word (Propert)    -- var dateTimePropertInfos = DateTimePropertyInfoHe
 ./test/Abp.EntityFrameworkCore.Dapper.Tests/Tests/Repository_Tests.cs:215:51    - Unknown word (sqls)       -- execute_method_for_void_sqls_should_work(CommandType
 ./test/Abp.EntityFrameworkCore.Dapper.Tests/Tests/Transaction_Tests.cs:70:59     - Unknown word (oguzhansoykan) -- Oguzhan_Same_Uow", "www.oguzhansoykan.com")
 ./test/Abp.MailKit.Tests/MailKitEmailSender_Tests.cs:50:38     - Unknown word (stmp)       -- mailConfig.Host.Returns("stmp_server_name");
+./test/Abp.NHibernate.Tests/AbpNHibernateInterceptor_Tests.cs:70:33     - Unknown word (Parfume)    -- ItemName = "Parfume",
 ./test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:25:73     - Unknown word (emre)       -- new Person() { Name = "emre" }));
 ./test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:43:61     - Unknown word (halil)      -- new Person() { Name = "halil" });
 ./test/Abp.NHibernate.Tests/Basic_Repository_Tests.cs:92:92     - Unknown word (yunus)      -- user => user.Name = "yunus");
+./test/Abp.NHibernate.Tests/Transaction_Tests.cs:24:49     - Unknown word (Transation) -- Complete_Uow_Without_Transation()
 ./test/Abp.RedisCache.Tests/ProtoBufRedisCacheSerializer_Test.cs:25:17     - Unknown word (proto)      -- var protoBufSerializer = new ProtoBufRe
-./test/Abp.TestBase.SampleApplication.Tests/EntityFramework/ObjectMaterialize_Tests.cs:87:40     - Unknown word (Herkimer)   -- FullAddress = "Herkimer St, Brooklyn, NY",
+./test/Abp.TestBase.SampleApplication.Tests/EntityFramework/GraphDiff/GraphDiffExtensions_Tests.cs:47:21     - Unknown word (Disattached) -- public void Disattached_Entity_Can_Be_Attached
+./test/Abp.TestBase.SampleApplication.Tests/EntityFramework/GraphDiff/GraphDiffExtensions_Tests.cs:66:142    - Unknown word (disattached) -- a new entity as it's disattached);
+./test/Abp.TestBase.SampleApplication.Tests/EntityFramework/GraphDiff/GraphDiffExtensions_Tests.cs:67:33     - Unknown word (Beeing)      -- var johnDoeAfterBeeingAttached = _peopleRepository
+./test/Abp.TestBase.SampleApplication.Tests/EntityFramework/ObjectMaterialize_Tests.cs:28:134    - Unknown word (Materialition) -- Normalized_On_Ef_ObjectMaterialition test.
+./test/Abp.TestBase.SampleApplication.Tests/EntityFramework/ObjectMaterialize_Tests.cs:87:40     - Unknown word (Herkimer)      -- FullAddress = "Herkimer St, Brooklyn, NY",
 ./test/Abp.TestBase.SampleApplication.Tests/People/NestedTransaction_Test.cs:53:71     - Unknown word (thown)      -- nException("This exception is thown to rollback outer transaction
+./test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:21:46     - Unknown word (Deleteds)   -- Should_Not_Retrieve_Soft_Deleteds_As_Default()
+./test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:27:28     - Unknown word (Retrive)    -- public void Should_Retrive_Soft_Deleteds_If_Filter
 ./test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:57:143    - Unknown word (enabed)     -- effect since it's already enabed
 ./test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_SoftDelete_Tests.cs:75:53     - Unknown word (Informations) -- Should_Set_Deletion_Audit_Informations()
 ./test/Abp.TestBase.SampleApplication.Tests/People/PersonRepository_Tests_For_EntityChangeEvents.cs:275:83    - Unknown word (Tuana)      -- new Person { Name = "Tuana", ContactListId = 1
+./test/Abp.TestBase.SampleApplication.Tests/Reflection/ProxyHelper_Tests.cs:20:71     - Unknown word (Proxied)    -- Original_Object_For_Not_Proxied_Object()
 ./test/Abp.TestBase.SampleApplication.Tests/SampleApplicationTestBase.cs:121:24    - Unknown word (Denizkoskler) -- "Denizkoskler Mah. Avcilar",
 ./test/Abp.TestBase.SampleApplication.Tests/SampleApplicationTestBase.cs:121:42    - Unknown word (Avcilar)      -- "Denizkoskler Mah. Avcilar",
+./test/Abp.TestBase.SampleApplication.Tests/SampleApplicationTestBase.cs:123:24    - Unknown word (Gumuspala)    -- "Gumuspala Mah. Avcilar",
 ./test/Abp.TestBase.SampleApplication.Tests/Uow/UnitOfWork_Event_Tests.cs:127:69    - Unknown word (Uows)       -- Outer_Uow_On_Nested_Uows()
+./test/Abp.TestBase.SampleApplication.Tests/Uow/UnitOfWork_Event_Tests.cs:86:65     - Unknown word (throwed)    -- ApplicationException("This is throwed to make uow failed"
 ./test/Abp.TestBase.SampleApplication.Tests/Uow/UnitOfWork_Nested_Tests.cs:35:121    - Unknown word (uow's)      -- transaction copies outer uow's filters.
 ./test/Abp.TestBase.SampleApplication/EntityFramework/SecondDbContext.cs:8:63      - Unknown word (dbcontextes) -- demonstrate usage of 2 dbcontextes in same UOW.
 ./test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:133:45    - Unknown word (Dtos)       -- Should_Normalize_Nested_Dtos()
+./test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:284:75    - Unknown word (greather)   -- "MyIntValue must be greather than or equal to 18
 ./test/Abp.TestBase.Tests/Application/Services/Validation_Tests.cs:38:44     - Unknown word (Nesned)     -- Should_Work_With_Right_Nesned_Inputs()
+./test/Abp.Tests/Auditing/AuditingHelper_Tests.cs:20:33     - Unknown word (Crosswell)  -- Name = "Crosswell Secondary",
 ./test/Abp.Tests/Authorization/PermissionDefinitionTests.cs:133:21    - Unknown word (Manegement) -- var roleManegement = administration.CreateChildP
 ./test/Abp.Tests/Configuration/SettingManager_Tests.cs:315:46    - Unknown word (QDCA)       -- Value.ShouldBe("oKPqQDCAHhz+AEnl/r0fsw==");
 ./test/Abp.Tests/Configuration/SettingManager_Tests.cs:328:46    - Unknown word (Twbu)       -- Value.ShouldBe("YX+MTwbuOwXgL7tnKw+oxw==");
@@ -430,40 +548,52 @@ Lines:
 ./test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:23     - Unknown word (Isparta)    -- "HelloIsparta".ToSentenceCase().ShouldBe
 ./test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:65     - Unknown word (isparta)    -- entenceCase().ShouldBe("Hello isparta");
 ./test/Abp.Tests/Extensions/StringExtensions_Tests.cs:77:85     - Unknown word (ısparta)    -- TR")).ShouldBe("Hello ısparta");
+./test/Abp.Tests/Localization/DefaultLanguageProvider_Test.cs:15:17     - Unknown word (bootstrapper) -- var bootstrapper = AbpBootstrapper.Create
 ./test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:29:51     - Unknown word (amet)       -- Lorem ipsum dolor sit amet", new CultureInfo("en
+./test/Abp.Tests/Localization/HumanizerOfUndefinedLocalizationSource_Tests.cs:34:47     - Unknown word (Amet)       -- GetString("LoremIpsumDolorSitAmet", new CultureInfo("en
+./test/Abp.Tests/Localization/Json/JsonAndXmlSourceMixing_Tests.cs:33:17     - Unknown word (mananger)   -- var mananger = LocalIocManager.Resolve
 ./test/Abp.Tests/Localization/ResourceFileLocalizationSource_Tests.cs:39:108    - Unknown word (Merhaba)    -- tCultureInfo("tr")).ShouldBe("Merhaba!");
+./test/Abp.Tests/Localization/TestResourceFiles/MyTestResource.Designer.cs:37:46     - Unknown word (Browsable)  -- ComponentModel.EditorBrowsableAttribute(global::System
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:100:28    - Unknown word (Dünya)      -- {"world", "Dünya"}
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:29:27     - Unknown word (Yeryüzü)    -- Assert.Equal("Yeryüzü", _localizationSource
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:41:27     - Unknown word (Fourty)     -- Assert.Equal("Fourty Two (42)", _localizationSourc
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:41:76     - Unknown word (fourty)     -- localizationSource.GetString("fourtyTwo", new CultureInfo
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:61:32     - Unknown word (Selam)      -- {"hello", "Selam"},
 ./test/Abp.Tests/Localization/Test_DictionaryBasedLocalizationSource.cs:77:100    - Unknown word (localed)    -- ShouldBe("World"); //not localed into french
+./test/Abp.Tests/Localization/Test_XmlLocalizationDictionaryBuilder.cs:34:34     - Unknown word (Merhabalar) -- name=""hello"" value=""Merhabalar""></text>
+./test/Abp.Tests/ObjectComparators/DateTimeObjectComparator_Tests.cs:50:36     - Unknown word (Datetime)   -- void Should_Compare_Datetime(string date1, string
 ./test/Abp.Tests/ObjectComparators/ObjectComparatorManager_Tests.cs:15:46     - Unknown word (Equalto)    -- string ReverseOfSecondIsEqualtoFirstCompareType = "ReverseOfS
 ./test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:24:50     - Unknown word (BCHF)       -- initVectorString = "1234BCHF9876skd*";
 ./test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:25:37     - Unknown word (ncpa)       -- const string myKey = "84ncpaKMC_!TuAna";
 ./test/Abp.Tests/Runtime/Security/SimpleStringCipher_Tests.cs:33:17     - Unknown word (enrypted)   -- var enryptedText = cipher.Encrypt
 ./test/Abp.Tests/Specifications/Specification_Tests.cs:26:31     - Unknown word (Daan)       -- new Customer("Daan", 39, 6000, "Netherlands
 ./test/Abp.Tests/Specifications/Specification_Tests.cs:27:31     - Unknown word (Alessandro) -- new Customer("Alessandro", 22, 8271, "Italy"
+./test/Abp.Tests/Startup/AbpBootstraper_Tester.cs:7:21      - Unknown word (Bootstraper) -- public class AbpBootstraper_Tester : TestBaseWithLocalIoc
 ./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:129:111   - Unknown word (Offsests)    -- Return_Correct_DateTimeOffsests_With_No_DaylightSavings
+./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:145:84    - Unknown word (timespan)    -- should be the same timespan as previous date
 ./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:25:60     - Unknown word (Kuala)      -- Standard Time", "Asia/Kuala_Lumpur")]
 ./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:25:66     - Unknown word (Lumpur)     -- Standard Time", "Asia/Kuala_Lumpur")]
 ./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:26:22     - Unknown word (Qyzylorda)  -- [InlineData("Qyzylorda Standard Time", "Asia
 ./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:42:27     - Unknown word (Choibalsan) -- [InlineData("Asia/Choibalsan", "Ulaanbaatar Standard
 ./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:42:41     - Unknown word (Ulaanbaatar) -- "Asia/Choibalsan", "Ulaanbaatar Standard Time")]
+./test/Abp.Tests/Timing/TimezoneHelper_Tests.cs:49:53     - Unknown word (Convertable) -- Timezones_Should_Be_Convertable_To_Iana()
 ./test/Abp.Web.Api.Tests/AbpWebApiTestModule.cs:28:80     - Unknown word (myapp)      -- GetExecutingAssembly(), "myapp")
+./test/Abp.Web.Api.Tests/DynamicApiController/ServiceNameValidation_Tests.cs:11:73     - Unknown word (taskever)   -- IsValidServiceName("taskever/task"));
+./test/Abp.Web.Api.Tests/DynamicApiController/ServiceNameValidation_Tests.cs:16:108    - Unknown word (mynamespace) -- myNameSpace1/MyNameSpace2/mynamespace3/myserviceName"));
 ./test/Abp.Web.Common.Tests/Configuration/AbpUserConfigurationBuilder_Tests.cs:52:96     - Unknown word (Authanticated) -- RequiresAuthentication_For_Authanticated_User()
 ./test/Abp.Web.Tests/Localization/AbpWebLocalizationTests.cs:27:73     - Unknown word (Evet)       -- "tr-TR")).ShouldBe("Evet");
 ./test/Abp.Zero.SampleApp.NHibernateTests/NHibernate/NHibernateTestBase.cs:9:41      - Unknown word (Datas)      -- SampleApp.NHibernate.TestDatas;
+./test/Abp.Zero.SampleApp.NHibernateTests/Organizations/OrganizationUnitManager_NHibernate_Tests.cs:137:49    - Unknown word (diplay)     -- OrganizationUnit GetOU(string diplayName)
+./test/Abp.Zero.SampleApp.Tests/Ldap/LdapAuthenticationSource_Tests.cs:71:84     - Unknown word (testuser)   -- logInManager.LoginAsync("testuser", "testpass", Tenant
+./test/Abp.Zero.SampleApp.Tests/Ldap/LdapAuthenticationSource_Tests.cs:71:96     - Unknown word (testpass)   -- LoginAsync("testuser", "testpass", Tenant.DefaultTenantName
 ./test/Abp.Zero.SampleApp.Tests/PrimaryKey_Guid_Generation_Tests.cs:68:29     - Unknown word (Tesk)       -- Name = "Tesk book store"
 ./test/Abp.Zero.SampleApp.Tests/Roles/RoleManager_StaticRole_Tests.cs:90:72     - Unknown word (Chil)       -- adminRole.Id, "FirstLevelChilPermission1")).ShouldBe
 ./test/Abp.Zero.SampleApp.Tests/Users/UserAccountSynchronizer_Tests.cs:147:29    - Unknown word (Yunus)      -- Name = "Yunus",
 ./test/Abp.Zero.SampleApp.Tests/Users/UserAccountSynchronizer_Tests.cs:148:32    - Unknown word (Emre)       -- Surname = "Emre",
 ./test/Abp.Zero.SampleApp.Tests/Users/UserLogin_Tests.cs:54:80     - Unknown word (asdfgh)     -- LoginAsync("wrongUserName", "asdfgh");
 ./test/Abp.Zero.SampleApp.Tests/Users/UserManager_Update_Tests.cs:29:39     - Unknown word (tuana)      -- adminUser.UserName = "tuana";
-./test/Abp.Zero.SampleApp.Tests/WebHooks/WebhookManager_Tests.cs:69:82     - Unknown word (mysecret)   -- payload.ToJsonString(), "mysecret");
-./test/Abp.Zero.SampleApp.Tests/WebHooks/WebhookSubscriptionManager_Tests.cs:23:35     - Unknown word (mywebhook)  -- WebhookUri = "www.mywebhook.com",
-./test/Abp.Zero.SampleApp.Tests/WebHooks/WebhookSubscriptionManager_Tests.cs:96:38     - Unknown word (mynewwebhook) -- newWebhookUri = "www.mynewwebhook.com";
 ./test/Abp.Zero.SampleApp/Features/AppFeatureProvider.cs:23:24     - Unknown word (Frature)    -- var numericFrature = boolFeature.CreateChildFeat
+./test/Abp.Zero.SampleApp/Linq/FakeAsyncQueryableExecuter.cs:9:55      - Unknown word (langword)   -- syncQueryableExecuter"/> <see langword="await"/>s an asynchronous
 ./test/Abp.Zero.SampleApp/Users/UserAppService.cs:80:15     - Unknown word (Becasue)    -- //Becasue of the validation error
 ./test/Abp.ZeroCore.SampleApp/AbpZeroCoreSampleAppModule.cs:51:34     - Unknown word (Registarar) -- var genericRepositoryRegistarar = IocManager.Resolve
 ./test/Abp.ZeroCore.Tests/Zero/AbpZeroTestBase.cs:106:111   - Unknown word (Saat)       -- Language = "tr", Name = "Saat" };
