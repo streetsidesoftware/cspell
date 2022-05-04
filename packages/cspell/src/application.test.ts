@@ -20,6 +20,7 @@ const featuresRoot = r(fixturesRoot, 'features');
 const sampleOptions = { root: samplesRoot };
 
 const oc = expect.objectContaining;
+const ac = expect.arrayContaining;
 
 jest.mock('get-stdin', () => {
     return jest.fn(() => Promise.resolve(getStdinResult.value));
@@ -251,10 +252,12 @@ function sampleTests(): SampleTest[] {
             file: 'samples/src/sample.go',
             options: { showSuggestions: true, showContext: true },
             issues: [
+                { text: 'longname' },
+                { text: 'longname' },
                 {
                     text: 'garbbage',
-                    suggestions: expect.arrayContaining(['garbage', 'garage']),
-                    context: expect.objectContaining({ text: 'Deliberate misspelling: garbbage. */' }),
+                    suggestions: ac(['garbage', 'garage']),
+                    context: oc({ text: 'Deliberate misspelling: garbbage. */' }),
                 },
             ],
         },
