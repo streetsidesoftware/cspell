@@ -54,11 +54,11 @@ jobs:
         run: |
           npm run update-packages
       - name: Build
-        if: github.event.inputs.updateSnapshots == 'yes'
+        if: env.UPDATE_SNAPSHOTS == 'true'
         run: |
           npm run build
       - name: Update Integration Test Snapshots
-        if: github.event.inputs.updateSnapshots == 'yes'
+        if: env.UPDATE_SNAPSHOTS == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
