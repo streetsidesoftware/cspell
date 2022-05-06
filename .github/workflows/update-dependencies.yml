@@ -27,10 +27,12 @@ jobs:
     env:
       NEW_BRANCH: "update-dependencies-main"
       REF_BRANCH: main
+      UPDATE_SNAPSHOTS: ${{ github.event.inputs.updateSnapshots == 'yes' || github.event.inputs.updateSnapshots == 'y' }}
     steps:
       - name: Start
         run: |
           echo "${{ toJson(github.event.inputs) }}"
+          echo "Update Snapshots: $UPDATE_SNAPSHOTS"
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -52,6 +54,7 @@ jobs:
         run: |
           npm run update-packages
       - name: Build
+        if: github.event.inputs.updateSnapshots == 'yes'
         run: |
           npm run build
       - name: Update Integration Test Snapshots
