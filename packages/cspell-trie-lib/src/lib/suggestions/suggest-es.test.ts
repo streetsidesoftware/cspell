@@ -16,14 +16,14 @@ describe('Validate Spanish Suggestions', () => {
     // cspell:ignore barcelona carmjen nino
     test.each`
         word           | ignoreCase | expectedWords
-        ${'carmjen'}   | ${false}   | ${['carmen', 'carmene', 'carmena', 'carmená', 'carmené', 'carmeno', 'carmenó', 'carmenen']}
-        ${'carmjen'}   | ${true}    | ${['carmen', 'carmene', 'carmena', 'carmená', 'carmené', 'carmeno', 'carmenó', 'carmenen']}
-        ${'carmen'}    | ${true}    | ${['carmen', 'carmene', 'carmena', 'carmená', 'carmené', 'carmeno', 'carmenó']}
-        ${'carmen'}    | ${false}   | ${['carmen', 'carmene', 'carmena', 'carmená', 'carmené', 'carmeno', 'carmenó']}
-        ${'cafe'}      | ${false}   | ${['café', 'cafés', 'cafre', 'cabe', 'cace', 'cale', 'cañe', 'cape', 'case', 'cate', 'cave']}
+        ${'carmjen'}   | ${false}   | ${['carmen', 'carmene', 'carmena', 'carmené', 'carmeno', 'carmenó', 'carmenen']}
+        ${'carmjen'}   | ${true}    | ${['carmen', 'carmene', 'carmena', 'carmené', 'carmeno', 'carmenó', 'carmenen']}
+        ${'carmen'}    | ${true}    | ${['carmen', 'carmene', 'carmena', 'carmené', 'carmeno', 'carmenó']}
+        ${'carmen'}    | ${false}   | ${['carmen', 'carmene', 'carmena', 'carmené', 'carmeno', 'carmenó']}
+        ${'cafe'}      | ${false}   | ${['café', 'cafés', 'cafre', 'cabe', 'cace', 'cale', 'cape', 'case', 'cate', 'cave']}
         ${'niño'}      | ${false}   | ${['niño', 'niños', 'niña', 'niñeo']}
         ${'nino'}      | ${false}   | ${['niño', 'ninfo', 'niños', 'nido', 'niña', 'nito', 'niñeo']}
-        ${'barcelona'} | ${false}   | ${['Barcelona', 'Bárcena', 'parcelan', 'abretona']}
+        ${'barcelona'} | ${false}   | ${['Barcelona', 'parcelan', 'abretona', 'barceos', 'barcarola']}
         ${'Mexico'}    | ${false}   | ${['México', 'mexica', 'medico', 'medicó', 'médico']}
     `('Tests suggestions "$word" ignoreCase: $ignoreCase', async ({ word, ignoreCase, expectedWords }) => {
         jest.setTimeout(5000);
