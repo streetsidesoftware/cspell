@@ -1,4 +1,4 @@
-name: Update Integration Test Snapshots
+name: Update Integration Test Repositories
 
 on:
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-snapshots"
+      NEW_BRANCH: "update-integration-repositories"
       REF_BRANCH: main
     steps:
       - name: Start

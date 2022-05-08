@@ -11,62 +11,95 @@ function processParallelArg(value: string): number {
     return v < 1 ? defaultParallel : v;
 }
 
+function validateParallelArg(value: string) {
+    // parseInt takes a string and a radix
+    const parsedValue = parseInt(value, 10);
+    if (isNaN(parsedValue) || parsedValue < 1) {
+        throw new commander.InvalidArgumentError('Must be a number >= 1');
+    }
+    return value;
+}
+
 function run(program: commander.Command) {
     program
-        .command('check [patterns...]')
-        .option('-u, --update', 'Update Repository and Snapshots', false)
-        .option('--update-snapshots', 'Update Snapshots', false)
+        .command('check')
+        .argument('[patterns...]', 'Only check repositories whose name contain the pattern.')
+        .option('--update-repositories', 'Update Repositories and Snapshots', false)
+        .option('-u, --update-snapshots', 'Update Snapshots', false)
         .option('-f, --fail', 'Fail on first error.', false)
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
-        .option('-p, --parallelLimit <number>', 'Max number of parallel checks.', /^[1-9][0-9]?$/, `${defaultParallel}`)
-        .description('Run the integration tests, checking the spelling results against the various repositories', {
-            pattern: 'Only check repositories whose name contain the pattern.',
-        })
+        .option('-t, --githubToken <token>', 'GitHub Personal Access Token')
+        .option(
+            '-p, --parallelLimit <number>',
+            'Max number of parallel checks.',
+            validateParallelArg,
+            `${defaultParallel}`
+        )
+        .description('Run the integration tests, checking the spelling results against the various repositories')
         .action(
             (
                 patterns: string[],
                 options: {
-                    update?: boolean;
+                    updateRepositories?: boolean;
                     updateSnapshots?: boolean;
                     fail?: boolean;
                     exclude?: string[];
                     parallelLimit: string;
+                    githubToken?: string | undefined;
                 }
             ) => {
-                const { update = false, fail = false, exclude = [], updateSnapshots = false } = options;
+                const {
+                    updateRepositories: update = false,
+                    fail = false,
+                    exclude = [],
+                    updateSnapshots = false,
+                } = options;
                 const parallelLimit = processParallelArg(options.parallelLimit);
+                registerToken(options.githubToken);
                 return check(patterns || [], { update, updateSnapshots, fail, exclude, parallelLimit });
             }
         );
 
     program
-        .command('list [patterns...]')
+        .command('list')
+        .argument('[patterns...]', 'Only repositories whose name contain the pattern.')
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
-        .description('List configured repositories.', {
-            pattern: 'GitHub Url',
-        })
-        .action((patterns: string[] = [], options: { exclude?: string[] }) => {
+        .option('-t, --githubToken <token>', 'GitHub Personal Access Token')
+        .description('List configured repositories.')
+        .action((patterns: string[] = [], options: { exclude?: string[]; githubToken?: string | undefined }) => {
             const opts = {
                 patterns,
                 exclude: options?.exclude || [],
             };
+            registerToken(options.githubToken);
             return listRepositories(opts);
         });
 
     program
-        .command('add <url>')
+        .command('add')
+        .argument('<url>', 'GitHub Url')
         .option('-b, --branch <branch>', 'Optional branch to use.')
+        .option('-t, --githubToken <token>', 'GitHub Personal Access Token')
         .description(
-            'Add a repository to be checked. Example: add "https://github.com/streetsidesoftware/cspell.git". Note: to adjust the arguments, the configuration is found in `config/config.json`',
-            {
-                url: 'GitHub Url',
-            }
+            'Add a repository to be checked.\n' +
+                '  Example: add "https://github.com/streetsidesoftware/cspell.git".\n' +
+                '  Note: to adjust the arguments, the configuration is found in `config/config.json`'
         )
-        .action(async (url: string, options: { branch?: string }) => {
+        .action(async (url: string, options: { branch?: string; githubToken?: string | undefined }) => {
+            registerToken(options.githubToken);
             await addRepository(console, url, options.branch);
         });
 
     program.parseAsync(process.argv);
 }
 
-run(createCommand('tester'));
+function registerToken(token: string | undefined) {
+    if (!token) return;
+    process.env['GITHUB_TOKEN'] = token;
+}
+
+const cmd = createCommand('tester').description(`Validate CSpell results against various GitHub repositories.
+Note: A GitHub Personal Access Token is needed.
+  This can be supplied as a command line option or in the $GITHUB_TOKEN environment variable.
+`);
+run(cmd);
