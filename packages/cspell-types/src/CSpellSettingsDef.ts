@@ -34,6 +34,9 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
 export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
      * Configuration format version of the settings file.
+     *
+     * This controls how the settings in the configuration file behave.
+     *
      * @default "0.2"
      */
     version?: Version;
@@ -41,7 +44,11 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /** Words to add to global dictionary -- should only be in the user config file. */
     userWords?: string[];
 
-    /** Other settings files to be included. */
+    /**
+     * Allows this configuration to inherit configuration for one or more other files.
+     *
+     * See [the documentation](https://cspell.org/docs/configuration/imports/) for more details.
+     */
     import?: FsPath | FsPath[];
 
     /**
@@ -63,12 +70,14 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
 
     /**
      * Glob patterns of files to be checked.
+     *
      * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
      */
     files?: Glob[];
 
     /**
      * Enable scanning files and directories beginning with `.` (period).
+     *
      * By default, CSpell does not scan `hidden` files.
      *
      * @default false
@@ -77,12 +86,14 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
 
     /**
      * Glob patterns of files to be ignored.
+     *
      * Glob patterns are relative to the `globRoot` of the configuration file that defines them.
      */
     ignorePaths?: Glob[];
 
     /**
      * Prevents searching for local configuration when checking individual documents.
+     *
      * @default false
      */
     noConfigSearch?: boolean;
@@ -91,6 +102,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      * Indicate that the configuration file should not be modified.
      * This is used to prevent tools like the VS Code Spell Checker from
      * modifying the file to add words and other configuration.
+     *
      * @default false
      */
     readonly?: boolean;
@@ -119,18 +131,49 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     features?: Features;
 }
 
+/* eslint-disable no-irregular-whitespace */
+/**
+ * In the below JSDoc comment, we helpfully specify an example configuration for the end-user to
+ * reference. And this example will get captured by the automatic documentation generator.
+ *
+ * However, specifying the glob pattern inside of a JSDoc is tricky, because the glob contains the
+ * same symbol as the end-of-JSDoc symbol. To work around this, we insert a zero-width space in
+ * between the "*" and the "/" symbols.
+ */
 export interface ExtendableSettings extends Settings {
-    /** Overrides to apply based upon the file path. */
+    /**
+     * Overrides are used to apply settings for specific files in your project.
+     *
+     * For example:
+     *
+     * ```javascript
+     * "overrides": [
+     *   // Force `*.hrr` and `*.crr` files to be treated as `cpp` files:
+     *   {
+     *     "filename": "**​/{*.hrr,*.crr}",
+     *     "languageId": "cpp"
+     *   },
+     *   // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
+     *   {
+     *     "language": "nl",
+     *     "filename": "**​/dutch/**​/.txt"
+     *   }
+     * ]
+     * ```
+     */
     overrides?: OverrideSettings[];
 }
 
 export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettings {
     /**
-     * Current active spelling language.
+     * Current active spelling language. This specifies the language locale to use in choosing the
+     * general dictionary.
      *
-     * Example: "en-GB" for British English.
+     * For example:
      *
-     * Example: "en,nl" to enable both English and Dutch.
+     * - "en-GB" for British English.
+     * - "en,nl" to enable both English and Dutch.
+     *
      * @default "en"
      */
     language?: LocaleId;
@@ -156,7 +199,11 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
      */
     enableFiletypes?: LanguageIdSingle[];
 
-    /** Additional settings for individual languages. */
+    /**
+     * Additional settings for individual languages.
+     *
+     * See the [language settings documentation](https://cspell.org/docs/configuration/language-settings/) for more details.
+     */
     languageSettings?: LanguageSetting[];
 
     /** Forces the spell checker to assume a give language id. Used mainly as an Override. */
@@ -165,6 +212,7 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     /**
      * By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`
      * will prevent ALL default configuration from being loaded.
+     *
      * @default true
      */
     loadDefaultConfiguration?: boolean;
@@ -173,18 +221,21 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
 export interface ReportingConfiguration extends SuggestionsConfiguration {
     /**
      * The maximum number of problems to report in a file.
+     *
      * @default 100
      */
     maxNumberOfProblems?: number;
 
     /**
      * The maximum number of times the same word can be flagged as an error in a file.
+     *
      * @default 5
      */
     maxDuplicateProblems?: number;
 
     /**
      * The minimum length of a word before checking it against a dictionary.
+     *
      * @default 4
      */
     minWordLength?: number;
@@ -193,12 +244,14 @@ export interface ReportingConfiguration extends SuggestionsConfiguration {
 export interface SuggestionsConfiguration {
     /**
      * Number of suggestions to make.
+     *
      * @default 10
      */
     numSuggestions?: number;
 
     /**
      * The maximum amount of time in milliseconds to generate suggestions for a word.
+     *
      * @default 500
      */
     suggestionsTimeout?: number;
@@ -209,6 +262,7 @@ export interface SuggestionsConfiguration {
      * For example, appending an `s` onto `example` -> `examples` is considered 1 change.
      *
      * Range: between 1 and 5.
+     *
      * @default 3
      */
     suggestionNumChanges?: number;
@@ -366,11 +420,15 @@ export interface BaseSetting {
     /** List of words to always be considered incorrect. */
     flagWords?: string[];
 
-    /** List of words to be ignored. An Ignored word will not show up as an error even if it is also in the `flagWords`. */
+    /**
+     * List of words to be ignored. An ignored word will not show up as an error, even if it is
+     * also in the `flagWords`.
+     */
     ignoreWords?: string[];
 
     /**
-     * True to enable compound word checking.
+     * True to enable compound word checking. See [the documentation](https://cspell.org/docs/configuration/case-and-accent-sensitivity/) for more details.
+     *
      * @default false
      */
     allowCompoundWords?: boolean;
@@ -386,14 +444,29 @@ export interface BaseSetting {
      */
     caseSensitive?: boolean;
 
-    /** Define additional available dictionaries. */
+    /**
+     * Define additional available dictionaries.
+     *
+     * For example, you can use this to enable both English and Spanish spell-checking at the same
+     * time:
+     *
+     * ```json
+     * "language": "en-US",
+     * "dictionaryDefinitions": [
+     *   { "name": "spanish", "path": "./spanish-words.txt"},
+     * ]
+     * ```
+     */
     dictionaryDefinitions?: DictionaryDefinition[];
 
     /**
-     * Optional list of dictionaries to use.
-     * Each entry should match the name of the dictionary.
-     * To remove a dictionary from the list add `!` before the name.
-     * i.e. `!typescript` will turn off the dictionary with the name `typescript`.
+     * Optional list of dictionaries to use. Each entry should match the name of the dictionary.
+     *
+     * To remove a dictionary from the list, add `!` before the name.
+     *
+     * For example, `!typescript` will turn off the dictionary with the name `typescript`.
+     *
+     * See the [dictionaries documentation](https://cspell.org/docs/dictionaries/) for more details.
      */
     dictionaries?: DictionaryReference[];
 
@@ -409,19 +482,53 @@ export interface BaseSetting {
     noSuggestDictionaries?: DictionaryReference[];
 
     /**
-     * List of RegExp patterns or Pattern names to exclude from spell checking.
+     * List of regular expression patterns or pattern names to exclude from spell checking.
      *
      * Example: ["href"] - to exclude html href.
+     *
+     * By default, several patterns are excluded. See
+     * [the documentation](https://cspell.org/docs/configuration/) for more details.
+     *
+     * While you can create your own patterns, you can also leverage
+     * [several patterns that are built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts.).
      */
     ignoreRegExpList?: RegExpPatternList;
 
     /**
-     * List of RegExp patterns or defined Pattern names to define the text to be included for spell checking.
-     * If includeRegExpList is defined, ONLY, text matching the included patterns will be checked.
+     * List of regular expression patterns or defined pattern names to match for spell checking.
+     *
+     * If this property is defined, only text matching the included patterns will be checked.
+     *
+     * While you can create your own patterns, you can also leverage
+     * [several patterns that are built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts.).
      */
     includeRegExpList?: RegExpPatternList;
 
-    /** Defines a list of patterns that can be used in ignoreRegExpList and includeRegExpList. */
+    /**
+     * Defines a list of patterns that can be used with the `ignoreRegExpList` and
+     * `includeRegExpList` options.
+     *
+     * For example:
+     *
+     * ```javascript
+     * "ignoreRegExpList": ["comments"],
+     * "patterns": [
+     *   {
+     *     "name": "comment-single-line",
+     *     "pattern": "/#.*\/g"
+     *   },
+     *   {
+     *     "name": "comment-multi-line",
+     *     "pattern": "/(?:\\/\\*[\\s\\S]*?\\*\\/)/g"
+     *   },
+     *   // You can also combine multiple named patterns into one single named pattern
+     *   {
+     *     "name": "comments",
+     *     "pattern": ["comment-single-line", "comment-multi-line"]
+     *   }
+     * ]
+     * ```
+     */
     patterns?: RegExpPatternDefinition[];
 }
 
