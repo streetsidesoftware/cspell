@@ -156,7 +156,7 @@ export interface ExtendableSettings extends Settings {
      *   // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
      *   {
      *     "language": "nl",
-     *     "filename": "**​/dutch/**​/.txt"
+     *     "filename": "**​/dutch/**​/*.txt"
      *   }
      * ]
      * ```
