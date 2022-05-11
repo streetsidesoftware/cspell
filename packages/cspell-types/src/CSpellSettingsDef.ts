@@ -427,7 +427,7 @@ export interface BaseSetting {
     ignoreWords?: string[];
 
     /**
-     * True to enable compound word checking. See [the documentation](https://cspell.org/docs/configuration/case-and-accent-sensitivity/) for more details.
+     * True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
      *
      * @default false
      */
