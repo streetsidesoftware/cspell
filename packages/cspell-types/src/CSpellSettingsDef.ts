@@ -487,7 +487,7 @@ export interface BaseSetting {
      * Example: ["href"] - to exclude html href.
      *
      * By default, several patterns are excluded. See
-     * [the documentation](https://cspell.org/docs/configuration/) for more details.
+     * [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.
      *
      * While you can create your own patterns, you can also leverage
      * [several patterns that are built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts.).
