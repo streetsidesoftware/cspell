@@ -451,10 +451,10 @@ export interface BaseSetting {
      * time:
      *
      * ```json
-     * "language": "en-US",
      * "dictionaryDefinitions": [
-     *   { "name": "spanish", "path": "./spanish-words.txt"},
-     * ]
+     *   { "name": "custom-words", "path": "./custom-words.txt"}
+     * ],
+     * "dictionaries": ["custom-words"]
      * ```
      */
     dictionaryDefinitions?: DictionaryDefinition[];
