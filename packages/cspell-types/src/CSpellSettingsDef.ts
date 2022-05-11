@@ -466,7 +466,7 @@ export interface BaseSetting {
      *
      * For example, `!typescript` will turn off the dictionary with the name `typescript`.
      *
-     * See the [dictionaries documentation](https://cspell.org/docs/dictionaries/) for more details.
+     * See the [Dictionaries](https://cspell.org/docs/dictionaries/) and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
      */
     dictionaries?: DictionaryReference[];
 
