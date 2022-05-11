@@ -1,6 +1,6 @@
 # Cspell Types
 
-Contains cspell types and json-schema.
+Contains CSpell types and json-schema.
 
 This package contains no dependencies to avoid any security issues.
 
@@ -8,7 +8,7 @@ This package contains no dependencies to avoid any security issues.
 
 - Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
 
-## cspell for enterprise
+## CSpell for Enterprise
 
 Available as part of the Tidelift Subscription.
 
@@ -16,8 +16,8 @@ The maintainers of cspell and thousands of other packages are working with Tidel
 
 ## Installation
 
-```
-npm i -SD @cspell/cspell-types
+```sh
+npm i --save-dev @cspell/cspell-types
 ```
 
 ## Usage

@@ -29,6 +29,7 @@ import { mapDictDefsToInternal } from './DictionarySettings';
 import { getRawGlobalSettings } from './GlobalSettings';
 import { ImportError } from './ImportError';
 import { LoaderResult, pnpLoader } from './pnpLoader';
+import { CONFIG_SEARCH_PLACES } from './configSearchPlaces';
 
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI = CSpellSettingsInternal;
@@ -43,42 +44,8 @@ export const sectionCSpell = 'cSpell';
 
 export const defaultFileName = 'cspell.json';
 
-/**
- * Logic of the locations:
- * - Support backward compatibility with the VS Code Spell Checker
- *   the spell checker extension can only write to `.json` files because
- *   it would be too difficult to automatically modify a `.js` or `.cjs` file.
- * - To support `cspell.config.js` in a VS Code environment, have a `cspell.json` import
- *   the `cspell.config.js`.
- */
-const searchPlaces = [
-    'package.json',
-    // Original locations
-    '.cspell.json',
-    'cspell.json',
-    '.cSpell.json',
-    'cSpell.json',
-    // Original locations jsonc
-    '.cspell.jsonc',
-    'cspell.jsonc',
-    // Alternate locations
-    '.vscode/cspell.json',
-    '.vscode/cSpell.json',
-    '.vscode/.cspell.json',
-    // Standard Locations
-    'cspell.config.json',
-    'cspell.config.jsonc',
-    'cspell.config.yaml',
-    'cspell.config.yml',
-    'cspell.yaml',
-    'cspell.yml',
-    // Dynamic config is looked for last
-    'cspell.config.js',
-    'cspell.config.cjs',
-];
-
 const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
-    searchPlaces,
+    searchPlaces: CONFIG_SEARCH_PLACES,
     loaders: {
         '.json': parseJson,
         '.jsonc': parseJson,
@@ -89,7 +56,7 @@ function parseJson(_filename: string, content: string) {
     return json.parse(content);
 }
 
-export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
+export const defaultConfigFilenames = Object.freeze(CONFIG_SEARCH_PLACES.concat());
 
 const cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
 const cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);

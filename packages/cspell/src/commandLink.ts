@@ -12,7 +12,7 @@ import { tableToLines } from './util/table';
 export function commandLink(prog: Command): Command {
     const linkCommand = prog
         .command('link')
-        .description('Link dictionaries and other settings to the cspell global config.');
+        .description('Links dictionaries and other settings to the cspell global config.');
 
     linkCommand
         .command('list', { isDefault: true })

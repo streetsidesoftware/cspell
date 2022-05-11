@@ -13,7 +13,7 @@ import {
 import * as path from 'path';
 import { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
 import { LintRequest, runLint } from './lint';
-import { BaseOptions, fixLegacy, LegacyOptions, LinterOptions, SuggestionOptions, TraceOptions } from './options';
+import { BaseOptions, fixLegacy, LegacyOptions, LinterOptions, SuggestionsOptions, TraceOptions } from './options';
 import { simpleRepl } from './repl';
 import { calcFinalConfigInfo, readConfig, readFile } from './util/fileHelper';
 import { readStdin } from './util/stdin';
@@ -58,7 +58,7 @@ export async function checkText(filename: string, options: BaseOptions & LegacyO
 
 export async function* suggestions(
     words: string[],
-    options: SuggestionOptions
+    options: SuggestionsOptions
 ): AsyncIterable<TimedSuggestionsForWordResult> {
     options = fixLegacy(options);
     const configFile = await readConfig(options.config, undefined);

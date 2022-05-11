@@ -1,9 +1,5 @@
 ---
-layout: default
-title: Custom Dictionaries
-categories: docs
-# parent: Docs
-nav_order: 4
+nav_order: 9
 ---
 
 # Custom Dictionaries
@@ -15,7 +11,7 @@ Creating custom dictionaries is rather straight forward. It requires two parts:
 1. A word list
 1. A dictionary definition in a configuration file.
 
-### Example 1:
+## Example 1
 
 **`custom-words.txt`**
 

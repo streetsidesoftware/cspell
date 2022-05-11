@@ -1,18 +1,14 @@
 ---
-layout: default
-title: <Fill in Title>
-categories: docs
-parent: Docs
-nav_order: 4
+nav_order: 99
 published: false
 ---
 
-<!--- Remove published when the page is ready  --->
+<!--- Remove the "published: false" line when the page is ready. --->
 
 # Title
 
-stuff here
+Lorem ipsum.
 
-## More Detail
+## Section
 
-## Examples
+Lorem ipsum.

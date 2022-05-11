@@ -6,7 +6,7 @@ This library is used for dynamically loading `cspell` or `cspell-lib` from `node
 
 - Become a [<img src="https://github.githubassets.com/images/modules/site/icons/funding_platforms/patreon.svg" width="16" height="16" alt="Patreon">Patreon!](https://patreon.com/streetsidesoftware)
 
-## cspell for enterprise
+## CSpell for Enterprise
 
 Available as part of the Tidelift Subscription.
 
@@ -14,6 +14,6 @@ The maintainers of cspell and thousands of other packages are working with Tidel
 
 ## Installation
 
-```
-npm i -SD @cspell/cspell-dynamic-loader
+```sh
+npm i --save-dev @cspell/cspell-dynamic-loader
 ```

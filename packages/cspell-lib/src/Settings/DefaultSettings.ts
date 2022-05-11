@@ -3,6 +3,7 @@ import { createCSpellSettingsInternal, CSpellSettingsInternal } from '../Models/
 import { PatternRegExp } from '../Models/PatternRegExp';
 import { resolveFile } from '../util/resolveFile';
 import { readSettings } from './configLoader';
+import { DEFAULT_IGNORE_REG_EXP_LIST } from './defaultIgnoreRegExpList';
 import { mergeSettings } from './index';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';
@@ -18,39 +19,38 @@ const regExpSpellCheckerDisable = [
     new PatternRegExp(RegPat.regExSpellingGuardNext),
 ];
 
-// cspell:ignore filetypes
 const predefinedPatterns = [
-    // Exclude patterns
+    // Exclude patterns, alphabetically sorted
+    { name: 'Base64', pattern: RegPat.regExBase64 },
+    { name: 'Base64MultiLine', pattern: RegPat.regExBase64MultiLine },
+    { name: 'Base64SingleLine', pattern: RegPat.regExBase64SingleLine },
     { name: 'CommitHash', pattern: RegPat.regExCommitHash },
     { name: 'CommitHashLink', pattern: RegPat.regExCommitHashLink },
-    { name: 'CStyleHexValue', pattern: RegPat.regExCStyleHexValue },
     { name: 'CSSHexValue', pattern: RegPat.regExCSSHexValue },
-    { name: 'Urls', pattern: RegPat.regExMatchUrls },
+    { name: 'CStyleHexValue', pattern: RegPat.regExCStyleHexValue },
+    { name: 'Email', pattern: RegPat.regExEmail },
+    { name: 'EscapeCharacters', pattern: RegPat.regExEscapeCharacters },
+    { name: 'HashStrings', pattern: RegPat.regExHashStrings },
     { name: 'HexValues', pattern: RegPat.regExMatchCommonHexFormats },
-    { name: 'SpellCheckerDisable', pattern: regExpSpellCheckerDisable },
+    { name: 'href', pattern: RegPat.regExHRef },
     { name: 'PublicKey', pattern: RegPat.regExPublicKey },
     { name: 'RsaCert', pattern: RegPat.regExCert },
-    { name: 'SshRsa', pattern: RegPat.regExSshRSA },
-    { name: 'EscapeCharacters', pattern: RegPat.regExEscapeCharacters },
-    { name: 'Base64', pattern: RegPat.regExBase64 },
-    { name: 'Base64SingleLine', pattern: RegPat.regExBase64SingleLine },
-    { name: 'Base64MultiLine', pattern: RegPat.regExBase64MultiLine },
-    { name: 'Email', pattern: RegPat.regExEmail },
     { name: 'SHA', pattern: RegPat.regExSha },
-    { name: 'HashStrings', pattern: RegPat.regExHashStrings },
-    { name: 'UnicodeRef', pattern: RegPat.regExUnicodeRef },
-    { name: 'UUID', pattern: RegPat.regExUUID },
-    { name: 'href', pattern: RegPat.regExHRef },
+    { name: 'SpellCheckerDisable', pattern: regExpSpellCheckerDisable },
     { name: 'SpellCheckerDisableBlock', pattern: RegPat.regExSpellingGuardBlock },
     { name: 'SpellCheckerDisableLine', pattern: RegPat.regExSpellingGuardLine },
     { name: 'SpellCheckerDisableNext', pattern: RegPat.regExSpellingGuardNext },
     { name: 'SpellCheckerIgnoreInDocSetting', pattern: RegPat.regExIgnoreSpellingDirectives },
+    { name: 'SshRsa', pattern: RegPat.regExSshRSA },
+    { name: 'UnicodeRef', pattern: RegPat.regExUnicodeRef },
+    { name: 'Urls', pattern: RegPat.regExMatchUrls },
+    { name: 'UUID', pattern: RegPat.regExUUID },
 
-    // Include Patterns
-    { name: 'PhpHereDoc', pattern: RegPat.regExPhpHereDoc },
-    { name: 'string', pattern: RegPat.regExString },
+    // Include patterns, alphabetically sorted
     { name: 'CStyleComment', pattern: RegPat.regExCStyleComments },
     { name: 'Everything', pattern: '.*' },
+    { name: 'PhpHereDoc', pattern: RegPat.regExPhpHereDoc },
+    { name: 'string', pattern: RegPat.regExString },
 ] as const;
 
 type NameType<T> = T extends readonly { name: infer U }[] ? U : never;
@@ -61,27 +61,8 @@ type PredefinedPatternNames = ExtendsType<NameType<typeof predefinedPatterns>, P
 
 const defaultRegExpPatterns: RegExpPatternDefinition[] = [...predefinedPatterns].map(normalizePattern);
 
-const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
-    'SpellCheckerDisable',
-    'SpellCheckerIgnoreInDocSetting',
-    'Urls',
-    'Email',
-    'RsaCert',
-    'SshRsa',
-    'Base64MultiLine',
-    'Base64SingleLine',
-    'CommitHash',
-    'CommitHashLink',
-    'CStyleHexValue',
-    'CSSHexValue',
-    'SHA',
-    'HashStrings',
-    'UnicodeRef',
-    'UUID',
-];
-
 // This bit of copying is done to have the complier ensure that the defaults exist.
-const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
+const ignoreRegExpList: PredefinedPatternNames[] = DEFAULT_IGNORE_REG_EXP_LIST;
 
 export const _defaultSettingsBasis: Readonly<CSpellSettingsInternal> = Object.freeze(
     createCSpellSettingsInternal({
@@ -135,7 +116,7 @@ export const _defaultSettings: Readonly<CSpellSettingsInternal> = Object.freeze(
             'shellscript',
             'toml',
         ],
-        ignoreRegExpList: defaultRegExpExcludeList,
+        ignoreRegExpList,
         languageSettings: LanguageSettings.getDefaultLanguageSettings(),
     })
 );

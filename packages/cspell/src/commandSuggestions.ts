@@ -1,12 +1,12 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { emitSuggestionResult } from './emitters/suggestionsEmitter';
-import { SuggestionOptions } from './options';
+import { SuggestionsOptions } from './options';
 import { CheckFailed } from './util/errors';
 
 // interface InitOptions extends Options {}
 
-interface SuggestionCommandOptions extends SuggestionOptions {
+interface SuggestionsCommandOptions extends SuggestionsOptions {
     dictionary?: string[];
     verbose?: number;
     color?: boolean;
@@ -30,9 +30,9 @@ function asNumber(value: string, prev: number | undefined): number {
     return parseInt(value, 10) ?? prev;
 }
 
-export function commandSuggestion(prog: Command): Command {
-    const suggestionCommand = prog.command('suggestions');
-    suggestionCommand
+export function commandSuggestions(prog: Command): Command {
+    const suggestionsCommand = prog.command('suggestions');
+    suggestionsCommand
         .aliases(['sug', 'suggest'])
         .description('Spelling Suggestions for words.')
         .option(
@@ -73,12 +73,12 @@ export function commandSuggestion(prog: Command): Command {
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
         .arguments('[words...]')
-        .action(async (words: string[], options: SuggestionCommandOptions) => {
+        .action(async (words: string[], options: SuggestionsCommandOptions) => {
             options.useStdin = options.stdin;
             options.dictionaries = mergeArrays(options.dictionaries, options.dictionary);
 
             if (!words.length && !options.useStdin && !options.repl) {
-                suggestionCommand.outputHelp();
+                suggestionsCommand.outputHelp();
                 throw new CheckFailed('outputHelp', 1);
             }
 
@@ -86,7 +86,7 @@ export function commandSuggestion(prog: Command): Command {
                 emitSuggestionResult(r, options);
             }
         });
-    return suggestionCommand;
+    return suggestionsCommand;
 }
 
 function mergeArrays(a: string[] | undefined, b: string[] | undefined) {

@@ -1,9 +1,5 @@
 ---
-layout: default
-title: How to Forbid Words
-categories: docs
-# parent: Docs
-nav_order: 4
+parent: Other Info
 ---
 
 # How to Forbid Words
@@ -14,7 +10,8 @@ There are several ways to mark a word as forbidden:
 
 1. In a custom word list with words beginning with `!`.
 
-   ```
+   <!-- cspell:ignore companyname projectname -->
+   ```text
    !forbiddenWord
    companyname
    jQuery
@@ -25,7 +22,7 @@ There are several ways to mark a word as forbidden:
 
 2. In `words` section of `cspell` configuration:
 
-   ```
+   ```json
    "words": [
        "!forbiddenWord",
        "configstore"
@@ -33,15 +30,16 @@ There are several ways to mark a word as forbidden:
    ```
 
 3. In `flagWords` section of `cspell` configuration:
-   ```
+
+   ```json
    "flagWords": ["forbiddenWord"]
    ```
 
-## Overriding Forbidden words
+## Overriding Forbidden Words
 
 Sometimes it is necessary to allow a word even if it is forbidden.
 
-### In a comment
+### In a Comment
 
 ```js
 /**
@@ -50,7 +48,7 @@ Sometimes it is necessary to allow a word even if it is forbidden.
  */
 ```
 
-### In the `cspell` configuration
+### In the `cspell` Configuration
 
 ```jsonc
 {
@@ -58,6 +56,4 @@ Sometimes it is necessary to allow a word even if it is forbidden.
 }
 ```
 
-<!---
-cspell:ignore companyname projectname
---->
+<!-- markdownlint-disable-file MD031 -->
