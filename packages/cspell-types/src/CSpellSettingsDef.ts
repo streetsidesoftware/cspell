@@ -448,7 +448,6 @@ export interface BaseSetting {
      * Define additional available dictionaries.
      *
      * For example, you can use the following to add a custom dictionary:
-     * time:
      *
      * ```json
      * "dictionaryDefinitions": [
@@ -466,7 +465,8 @@ export interface BaseSetting {
      *
      * For example, `!typescript` will turn off the dictionary with the name `typescript`.
      *
-     * See the [Dictionaries](https://cspell.org/docs/dictionaries/) and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+     * See the [Dictionaries](https://cspell.org/docs/dictionaries/)
+     * and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
      */
     dictionaries?: DictionaryReference[];
 
@@ -489,8 +489,8 @@ export interface BaseSetting {
      * By default, several patterns are excluded. See
      * [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.
      *
-     * While you can create your own patterns, you can also leverage
-     * [several patterns that are built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts.).
+     * While you can create your own patterns, you can also leverage several patterns that are
+     * [built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts#L22).
      */
     ignoreRegExpList?: RegExpPatternList;
 
@@ -499,8 +499,8 @@ export interface BaseSetting {
      *
      * If this property is defined, only text matching the included patterns will be checked.
      *
-     * While you can create your own patterns, you can also leverage
-     * [several patterns that are built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts.).
+     * While you can create your own patterns, you can also leverage several patterns that are
+     * [built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts#L22).
      */
     includeRegExpList?: RegExpPatternList;
 
@@ -515,7 +515,7 @@ export interface BaseSetting {
      * "patterns": [
      *   {
      *     "name": "comment-single-line",
-     *     "pattern": "/#.*\/g"
+     *     "pattern": "/#.*​/g"
      *   },
      *   {
      *     "name": "comment-multi-line",
