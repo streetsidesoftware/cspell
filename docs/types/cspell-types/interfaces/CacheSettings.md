@@ -25,7 +25,7 @@ A prefix of `${cwd}` is replaced with the current working directory.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:317](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L317)
+[CSpellSettingsDef.ts:317](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L317)
 
 ___
 
@@ -39,7 +39,7 @@ Strategy to use for detecting changed files, default: metadata
 
 #### Defined in
 
-[CSpellSettingsDef.ts:323](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L323)
+[CSpellSettingsDef.ts:323](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L323)
 
 ___
 
@@ -53,4 +53,4 @@ Store the results of processed files in order to only operate on the changed one
 
 #### Defined in
 
-[CSpellSettingsDef.ts:306](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L306)
+[CSpellSettingsDef.ts:306](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L306)

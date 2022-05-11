@@ -49,7 +49,7 @@ True to enable compound word checking. See [Case Sensitivity](https://cspell.org
 
 #### Defined in
 
-[CSpellSettingsDef.ts:434](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L434)
+[CSpellSettingsDef.ts:434](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L434)
 
 ___
 
@@ -71,7 +71,7 @@ Determines if words must match case and accent rules.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:445](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L445)
+[CSpellSettingsDef.ts:445](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L445)
 
 ___
 
@@ -87,7 +87,7 @@ Optional description of configuration.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:409](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L409)
+[CSpellSettingsDef.ts:409](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L409)
 
 ___
 
@@ -101,7 +101,8 @@ To remove a dictionary from the list, add `!` before the name.
 
 For example, `!typescript` will turn off the dictionary with the name `typescript`.
 
-See the [Dictionaries](https://cspell.org/docs/dictionaries/) and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+See the [Dictionaries](https://cspell.org/docs/dictionaries/)
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
 
 #### Inherited from
 
@@ -109,7 +110,7 @@ See the [Dictionaries](https://cspell.org/docs/dictionaries/) and [Custom Dictio
 
 #### Defined in
 
-[CSpellSettingsDef.ts:471](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L471)
+[CSpellSettingsDef.ts:471](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L471)
 
 ___
 
@@ -120,7 +121,6 @@ ___
 Define additional available dictionaries.
 
 For example, you can use the following to add a custom dictionary:
-time:
 
 ```json
 "dictionaryDefinitions": [
@@ -135,7 +135,7 @@ time:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:460](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L460)
+[CSpellSettingsDef.ts:459](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L459)
 
 ___
 
@@ -153,7 +153,7 @@ Is the spell checker enabled.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:415](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L415)
+[CSpellSettingsDef.ts:415](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L415)
 
 ___
 
@@ -169,7 +169,7 @@ List of words to always be considered incorrect.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:421](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L421)
+[CSpellSettingsDef.ts:421](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L421)
 
 ___
 
@@ -185,7 +185,7 @@ Optional identifier.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:403](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L403)
+[CSpellSettingsDef.ts:403](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L403)
 
 ___
 
@@ -200,8 +200,8 @@ Example: ["href"] - to exclude html href.
 By default, several patterns are excluded. See
 [Configuration](https://cspell.org/configuration/#cspelljson-sections) for more details.
 
-While you can create your own patterns, you can also leverage
-[several patterns that are built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts.).
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts#L22).
 
 #### Inherited from
 
@@ -209,7 +209,7 @@ While you can create your own patterns, you can also leverage
 
 #### Defined in
 
-[CSpellSettingsDef.ts:495](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L495)
+[CSpellSettingsDef.ts:495](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L495)
 
 ___
 
@@ -226,7 +226,7 @@ also in the `flagWords`.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:427](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L427)
+[CSpellSettingsDef.ts:427](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L427)
 
 ___
 
@@ -238,8 +238,8 @@ List of regular expression patterns or defined pattern names to match for spell 
 
 If this property is defined, only text matching the included patterns will be checked.
 
-While you can create your own patterns, you can also leverage
-[several patterns that are built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts.).
+While you can create your own patterns, you can also leverage several patterns that are
+[built-in to CSpell](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/Settings/DefaultSettings.ts#L22).
 
 #### Inherited from
 
@@ -247,7 +247,7 @@ While you can create your own patterns, you can also leverage
 
 #### Defined in
 
-[CSpellSettingsDef.ts:505](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L505)
+[CSpellSettingsDef.ts:505](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L505)
 
 ___
 
@@ -263,7 +263,7 @@ The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all lan
 
 #### Defined in
 
-[CSpellSettingsDef.ts:690](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L690)
+[CSpellSettingsDef.ts:690](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L690)
 
 ___
 
@@ -283,7 +283,7 @@ Deprecated - The locale filter, matches against the language. This can be a comm
 
 #### Defined in
 
-[CSpellSettingsDef.ts:703](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L703)
+[CSpellSettingsDef.ts:703](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L703)
 
 ___
 
@@ -299,7 +299,7 @@ The locale filter, matches against the language. This can be a comma separated l
 
 #### Defined in
 
-[CSpellSettingsDef.ts:692](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L692)
+[CSpellSettingsDef.ts:692](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L692)
 
 ___
 
@@ -315,7 +315,7 @@ Optional name of configuration.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:406](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L406)
+[CSpellSettingsDef.ts:406](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L406)
 
 ___
 
@@ -337,7 +337,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:482](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L482)
+[CSpellSettingsDef.ts:482](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L482)
 
 ___
 
@@ -355,7 +355,7 @@ For example:
 "patterns": [
   {
     "name": "comment-single-line",
-    "pattern": "/#.*\/g"
+    "pattern": "/#.*​/g"
   },
   {
     "name": "comment-multi-line",
@@ -375,7 +375,7 @@ For example:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:532](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L532)
+[CSpellSettingsDef.ts:532](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L532)
 
 ___
 
@@ -391,4 +391,4 @@ List of words to be always considered correct.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:418](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L418)
+[CSpellSettingsDef.ts:418](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L418)

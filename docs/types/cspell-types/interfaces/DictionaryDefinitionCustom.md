@@ -38,7 +38,7 @@ When `true`, let's the spell checker know that words can be added to this dictio
 
 #### Defined in
 
-[CSpellSettingsDef.ts:679](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L679)
+[CSpellSettingsDef.ts:679](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L679)
 
 ___
 
@@ -54,7 +54,7 @@ Optional description.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:557](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L557)
+[CSpellSettingsDef.ts:557](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L557)
 
 ___
 
@@ -77,7 +77,7 @@ Name Format:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:555](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L555)
+[CSpellSettingsDef.ts:555](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L555)
 
 ___
 
@@ -99,7 +99,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:571](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L571)
+[CSpellSettingsDef.ts:571](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L571)
 
 ___
 
@@ -115,7 +115,7 @@ Path to custom dictionary text file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:668](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L668)
+[CSpellSettingsDef.ts:668](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L668)
 
 ___
 
@@ -131,7 +131,7 @@ Replacement pairs.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:559](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L559)
+[CSpellSettingsDef.ts:559](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L559)
 
 ___
 
@@ -144,7 +144,7 @@ Scope values: `user`, `workspace`, `folder`.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:674](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L674)
+[CSpellSettingsDef.ts:674](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L674)
 
 ___
 
@@ -167,7 +167,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[CSpellSettingsDef.ts:581](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L581)
+[CSpellSettingsDef.ts:581](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L581)
 
 ___
 
@@ -183,4 +183,4 @@ Use Compounds.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:561](https://github.com/streetsidesoftware/cspell/blob/6b23893/packages/cspell-types/src/CSpellSettingsDef.ts#L561)
+[CSpellSettingsDef.ts:561](https://github.com/streetsidesoftware/cspell/blob/b1f296d/packages/cspell-types/src/CSpellSettingsDef.ts#L561)
