@@ -202,7 +202,7 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     /**
      * Additional settings for individual languages.
      *
-     * See the [Language Settings](https://cspell.org/configuration/language-settings/) for more details.
+     * See [Language Settings](https://cspell.org/configuration/language-settings/) for more details.
      */
     languageSettings?: LanguageSetting[];
 
