@@ -88,7 +88,7 @@ As an example configuration file to get started, you can create the following fi
 
 - The `$schema` field is to get auto-complete on the properties inside of your IDE (e.g. VSCode).
 - The `version` field specifies what version of the configuration format you are using. The latest version at the time of this writing is 0.2, so you should always specify that in your configuration files.
-- The `language` field specifies the current language, which in turn determines what dictionaries that CSpell will load. For a full list of languages, see [TODO](https://cspell.org/configuration/language-settings/).
+- The `language` field specifies the current natural language, which in turn determines what dictionaries that CSpell will load. The possible languages that you can choose from is based upon which dictionaries you currently have imported. By default, you can choose from "en", "en-US", and "en-GB".
 - The `words` field specifies an array of project-specific words that should not be flagged as spelling errors.
 
 CSpell has [many more configuration options](../../docs/types/cspell-types/interfaces/CSpellSettings.md) than just this! And for more information on the configuration file itself, see the full [configuration file documentation](https://cspell.org/docs/configuration-file/).
