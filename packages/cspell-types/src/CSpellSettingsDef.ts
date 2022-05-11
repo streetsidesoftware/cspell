@@ -47,7 +47,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
      * Allows this configuration to inherit configuration for one or more other files.
      *
-     * See [the documentation](https://cspell.org/docs/configuration/imports/) for more details.
+     * See [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details.
      */
     import?: FsPath | FsPath[];
 
