@@ -447,7 +447,7 @@ export interface BaseSetting {
     /**
      * Define additional available dictionaries.
      *
-     * For example, you can use this to enable both English and Spanish spell-checking at the same
+     * For example, you can use the following to add a custom dictionary:
      * time:
      *
      * ```json
