@@ -2,21 +2,22 @@ name: Test
 on:
   pull_request:
     paths:
-      - "*.js"
-      - "*.ts"
-      - ".github/workflows/test.yml"
+      # - ".github/workflows/test.yml"
       - "package-lock.json"
       - "package.json"
       - "packages/**/*.js"
       - "packages/**/*.ts"
       - "packages/**/package-lock.json"
       - "packages/**/package.json"
+      - "packages/**/tsconfig.json"
       - "test-packages/**/*.js"
       - "test-packages/**/*.ts"
       - "test-packages/**/package-lock.json"
       - "test-packages/**/package.json"
-      - "**/tsconfig.json"
+      - "test-packages/**/tsconfig.json"
+      - "test-fixtures/**"
       - "!docs/**"
+      - "!documentation/**"
   push:
     branches:
       - main
