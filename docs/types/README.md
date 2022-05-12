@@ -7,5 +7,5 @@ The files contained in `cspell-types` directory are generated.
 Execute from `packages/cspell-types`:
 
 ```sh
-npm run build-docs
+npm run build-cspell-types-docs
 ```

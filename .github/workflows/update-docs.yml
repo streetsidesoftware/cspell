@@ -30,7 +30,7 @@ jobs:
         run: npm install
       - name: Build Docs
         run: |
-          npm run build-docs
+          npm run build-cspell-types-docs
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
