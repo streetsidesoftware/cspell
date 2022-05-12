@@ -24,7 +24,7 @@
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
     "eslint-fix": "eslint . --fix --cache",
     "ibt": "npm install && npm run build && npm test",
-    "install": "lerna bootstrap --ci",
+    "install": "lerna bootstrap --ci && npm run install-docs",
     "install-docs": "cd documentation && npm ci",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "lint-docs-ci": "prettier -c \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
