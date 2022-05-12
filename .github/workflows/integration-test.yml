@@ -110,8 +110,8 @@ jobs:
             'integration-tests/snapshots/${{ matrix.repo }}/*',
             'integration-tests/repositories/*',
             'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-            'packages/**/package-lock.json', 'packages/**/src/**/*.ts', 'packages/**/tsconfig.json')
-          }}"
+            'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+          ) }}"
 
       - name: Cache Integration Run
         id: step-cache-run
@@ -128,8 +128,8 @@ jobs:
           key: |
             int-build-${{ hashFiles(
               'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              'packages/*/package-lock.json', 'packages/**/src/**/*.ts', 'packages/*/tsconfig.json')
-            }}
+              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+            ) }}
           path: |
             packages/*/dist
             integration-tests/dist
