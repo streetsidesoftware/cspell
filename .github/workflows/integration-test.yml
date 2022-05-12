@@ -104,7 +104,14 @@ jobs:
         id: step-repo-info
         run: |
           echo "::set-output name=repo-info::$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)"
-          echo "::set-output name=repo-hash::${{ hashFiles('integration-tests/tsconfig.json', 'integration-tests/config/repositories/${{matrix.repo}}/**', 'integration-tests/snapshots/${{ matrix.repo }}/*', 'integration-tests/repositories/*', '**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}"
+          echo "::set-output name=repo-hash::${{ hashFiles(
+            'integration-tests/tsconfig.json',
+            'integration-tests/config/repositories/${{matrix.repo}}/**',
+            'integration-tests/snapshots/${{ matrix.repo }}/*',
+            'integration-tests/repositories/*',
+            'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+            'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+          ) }}"
 
       - name: Cache Integration Run
         id: step-cache-run
@@ -118,7 +125,11 @@ jobs:
         id: step-cache-build
         uses: actions/cache@v3
         with:
-          key: int-build-${{ hashFiles('**/package-lock.json', '**/src/**/*.ts', '**/tsconfig.json') }}
+          key: |
+            int-build-${{ hashFiles(
+              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+            ) }}
           path: |
             packages/*/dist
             integration-tests/dist

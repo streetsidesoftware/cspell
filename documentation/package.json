@@ -12,6 +12,7 @@
     "serve": "docusaurus serve --dir ../docs/docsV2",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
+    "update-packages": "npx npm-check-updates -t minor -u && rimraf node_modules package-lock.json && npm i",
     "typecheck": "tsc"
   },
   "dependencies": {
