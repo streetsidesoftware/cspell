@@ -14,8 +14,8 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
+  build:
+    name: Build Website
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,6 +29,21 @@ jobs:
           cd documentation
           npm ci
           npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: website
+          path: docs
+          retention-days: 1
+  deploy:
+    name: Deploy to GitHub Pages
+    permissions:
+      contents: write
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: website
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
