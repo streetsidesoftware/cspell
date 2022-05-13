@@ -10,6 +10,9 @@ on:
   # Run on demand
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     name: Deploy to GitHub Pages
@@ -21,11 +24,11 @@ jobs:
           node-version: 16.x
           cache: npm
 
-      # - name: Build website
-      #   run: |
-      #     cd documentation
-      #     npm ci
-      #     npm run build
+      - name: Build website
+        run: |
+          cd documentation
+          npm ci
+          npm run build
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
@@ -41,5 +44,5 @@ jobs:
           # https://github.com/actions/checkout/issues/13#issuecomment-724415212
           # The GH actions bot is used by default if you didn't specify the two fields.
           # You can swap them out with your own user credentials.
-          # user_name: github-actions[bot]
-          # user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
