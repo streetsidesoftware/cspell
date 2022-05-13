@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "docs/**"
-      - "documentation/**"
+      - "website/**"
   # Run on demand
   workflow_dispatch:
 
@@ -26,7 +26,7 @@ jobs:
 
       - name: Build website
         run: |
-          cd documentation
+          cd website
           npm ci
           npm run build
       - uses: actions/upload-artifact@v3
