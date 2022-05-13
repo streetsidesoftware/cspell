@@ -79,10 +79,7 @@ As an example configuration file to get started, you can create the following fi
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
   "language": "en-US",
-  "words": [
-    "foo",
-    "bar"
-  ]
+  "words": ["foo", "bar"]
 }
 ```
 
