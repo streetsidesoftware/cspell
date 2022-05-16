@@ -3,16 +3,15 @@ Repository: TheAlgorithms/Python
 Url: https://github.com/TheAlgorithms/Python.git
 Args: ["**/*.{md,py}"]
 Summary:
-  files: 1031
-  filesWithIssues: 396
-  issues: 2779
+  files: 1032
+  filesWithIssues: 393
+  issues: 2763
   errors: 0
 Errors: []
 
 issues: 
-  - "arithmetic_analysis/gaussian_elimination.py:10:64   	ndarray 	U   	np.matrix, vector: np.ndarray) -> np.ndarray:"
-  - "arithmetic_analysis/gaussian_elimination.py:30:29   	dtype   	U   	np.zeros((rows, 1), dtype=float)"
-  - "arithmetic_analysis/gaussian_elimination.py:64:35   	astype  	U   	mat = augmented_mat.astype(\"float64\")"
+  - "arithmetic_analysis/gaussian_elimination.py:34:47   	dtype   	U   	np.zeros((rows, 1), dtype=float)"
+  - "arithmetic_analysis/gaussian_elimination.py:70:35   	astype  	U   	mat = augmented_mat.astype(\"float64\")"
   - "arithmetic_analysis/newton_forward_interpolation.py:8:5     	ucal	U   	def ucal(u: float, p: int) -"
   - "arithmetic_analysis/newton_forward_interpolation.py:49:5    	summ	U   	summ = y[0][0]"
   - "arithmetic_analysis/newton_raphson.py:1:23      	Raphson 	U   	Implementing Newton Raphson method in Python"
@@ -29,6 +28,7 @@ issues:
   - "audio_filters/iir_filter.py:40:37   	scipy's 	U   	method works well with scipy's filter design functions"
   - "audio_filters/iir_filter.py:44:58   	btype   	U   	btype='lowpass',"
   - "audio_filters/show_response.py:6:19     	pyplot  	U   	import matplotlib.pyplot as plt"
+  - "audio_filters/show_response.py:22:21    	ndarray 	U   	fft_results: np.ndarray, samplerate: int"
   - "audio_filters/show_response.py:55:43    	nyquist 	U   	log scale from 24 to nyquist frequency"
   - "audio_filters/show_response.py:56:9     	xlim    	U   	plt.xlim(24, samplerate / 2"
   - "audio_filters/show_response.py:57:9     	xlabel  	U   	plt.xlabel(\"Frequency (Hz)\")"
@@ -708,8 +708,7 @@ issues:
   - "maths/fibonacci.py:7:42     	Binet       	U   	function because the Binet formula function uses"
   - "maths/fibonacci.py:16:5     	binet       	U   	fib_binet runtime: 0.0174 ms"
   - "maths/fibonacci.py:113:29   	recursuive  	U   	Cache must be outside recursuive function"
-  - "maths/integration_by_simpson_approx.py:29:19    	fxdx        	U   	1. integration of fxdx with limit a to b is"
-  - "maths/integration_by_simpson_approx.py:43:28    	integraion  	U   	b : upper limit of integraion"
+  - "maths/integration_by_simpson_approx.py:29:19    	fxdx	U   	1. integration of fxdx with limit a to b is"
   - "maths/is_square_free.py:18:26   	repition	U   	it simply checks for repition in the numbers."
   - "maths/jaccard_similarity.py:8:38    	MMDS        	U   	of Massive Datasets [MMDS 2nd Edition, Chapter"
   - "maths/jaccard_similarity.py:17:5    	jaccard     	U   	def jaccard_similariy(setA, setB"
@@ -946,9 +945,9 @@ issues:
   - "strings/anagrams.py:29:17   	bysig       	U   	return word_bysig[signature(my_word)]"
   - "strings/can_string_be_rearranged_as_palindrome.py:1:14      	susmith 	U   	# Created by susmith98"
   - "strings/can_string_be_rearranged_as_palindrome.py:17:57     	Momo    	U   	palindrome_counter(\"Momo\")"
-  - "strings/detecting_english_programmatically.py:48:20     	llold   	U   	>>> isEnglish('llold HorWd')"
-  - "strings/frequency_finder.py:32:1    	ETAOIN                      	U   	ETAOIN = \"ETAOINSHRDLCUMWFGYPBVKJXQZ"
-  - "strings/frequency_finder.py:32:11   	ETAOINSHRDLCUMWFGYPBVKJXQZ  	U   	ETAOIN = \"ETAOINSHRDLCUMWFGYPBVKJXQZ\""
+  - "strings/detecting_english_programmatically.py:49:21     	llold   	U   	>>> is_english('llold HorWd')"
+  - "strings/frequency_finder.py:34:1    	ETAOIN                      	U   	ETAOIN = \"ETAOINSHRDLCUMWFGYPBVKJXQZ"
+  - "strings/frequency_finder.py:34:11   	ETAOINSHRDLCUMWFGYPBVKJXQZ  	U   	ETAOIN = \"ETAOINSHRDLCUMWFGYPBVKJXQZ\""
   - "strings/is_contains_unique_chars.py:10:11   	compexity   	U   	Space compexity: O(1) 19320 bytes as"
   - "strings/jaro_winkler.py:4:5     	jaro    	U   	def jaro_winkler(str1: str, str"
   - "strings/jaro_winkler.py:4:10    	winkler 	U   	def jaro_winkler(str1: str, str2: str"
@@ -992,7 +991,7 @@ issues:
   - "strings/word_occurrence.py:1:14     	sarathkaul  	U   	# Created by sarathkaul on 17/11/19"
   - "strings/word_occurrence.py:2:15     	Arkadip     	U   	# Modified by Arkadip Bhattacharya(@darkmatter"
   - "strings/word_occurrence.py:2:23     	Bhattacharya	U   	Modified by Arkadip Bhattacharya(@darkmatter18) on 2"
-  - "strings/word_occurrence.py:6:10     	occurence   	U   	def word_occurence(sentence: str) -> dict"
+  - "strings/word_occurrence.py:7:10     	occurence   	U   	def word_occurence(sentence: str) -> dict"
   - "strings/z_function.py:27:21     	zxxzxxz 	U   	>>> z_function(\"zxxzxxz\")"
   - "web_programming/covid_stats_via_xpath.py:2:51       	worldometers	U   	info fetching from worldometers site using lxml"
   - "web_programming/covid_stats_via_xpath.py:2:75       	lxml        	U   	worldometers site using lxml"
