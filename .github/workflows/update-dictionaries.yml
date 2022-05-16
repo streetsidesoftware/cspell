@@ -50,11 +50,11 @@ jobs:
         run: echo ${{ env.git_status }}
 
       - name: Store Updated Package Info
-        if: env.git_status == 'dirty'
+        # if: env.git_status == 'dirty'
         uses: actions/upload-artifact@v3
         with:
           path: |
-            /integration-tests/package*.json
+            integration-tests/package*.json
           retention-days: 1
 
   update-dictionaries-x:
@@ -62,7 +62,33 @@ jobs:
     needs: check-dictionaries
     steps:
       - run: |
-          echo ${{ toJSON(needs.check-dictionaries.outputs) }}
+          echo ${{ toJSON(toJSON(needs.check-dictionaries.outputs)) }}
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3.1.1
+        with:
+          cache: npm
+
+      - name: Setup NPM
+        run: |
+          npm i -g npm@8
+
+      - name: Restore Packages
+        uses: actions/download-artifact@v3
+        with:
+          path: integration-tests
+
+      - name: Display structure of downloaded files
+        run: ls -alF
+        working-directory: integration-tests
+
+      - name: Install
+        run: npm install
+
 
   update-dictionaries:
     needs: check-dictionaries
@@ -85,6 +111,9 @@ jobs:
 
       - name: Restore Packages
         uses: actions/download-artifact@v3
+        with:
+          path: integration-tests
+
 
       - name: Install
         run: npm install
