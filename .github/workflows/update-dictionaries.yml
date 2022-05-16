@@ -60,7 +60,7 @@ jobs:
 
   update-dictionaries:
     needs: check-dictionaries
-    # if: ${{ needs.check-dictionaries.outputs.dirty == 'true' }}
+    if: ${{ needs.check-dictionaries.outputs.dirty == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
