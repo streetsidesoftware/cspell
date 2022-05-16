@@ -49,17 +49,12 @@ jobs:
       - name: Echo git_status
         run: echo ${{ env.git_status }}
 
-      - name: Build
-        if: env.git_status == 'dirty'
-        run: |
-          npm run build
-
-      - name: Store Build
+      - name: Store Updated Package Info
         if: env.git_status == 'dirty'
         uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: .
+          path: |
+            /integration-tests/package*.json
           retention-days: 1
 
   update-dictionaries-x:
@@ -85,12 +80,18 @@ jobs:
           cache: npm
 
       - name: Setup NPM
-        run: npm i -g npm@8
+        run: |
+          npm i -g npm@8
 
-      - name: Restore Build
+      - name: Restore Packages
         uses: actions/download-artifact@v3
-        with:
-          name: build
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: |
+          npm run build
 
       - name: Update Integration Test Snapshots
         env:
