@@ -53,9 +53,9 @@ jobs:
         # if: env.git_status == 'dirty'
         uses: actions/upload-artifact@v3
         with:
-          name: integration-tests
+          name: cspell-bundled-dicts
           path: |
-            integration-tests/package*.json
+            packages/cspell-bundled-dicts/package*.json
           retention-days: 1
 
   update-dictionaries-x:
@@ -64,6 +64,7 @@ jobs:
     steps:
       - run: |
           echo ${{ toJSON(toJSON(needs.check-dictionaries.outputs)) }}
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -81,16 +82,16 @@ jobs:
       - name: Restore Packages
         uses: actions/download-artifact@v3
         with:
-          path: integration-tests
-          name: integration-tests
+          name: cspell-bundled-dicts
+          path: |
+            packages/cspell-bundled-dicts
 
       - name: Display structure of downloaded files
         run: ls -alF
-        working-directory: integration-tests
+        working-directory: packages/cspell-bundled-dicts
 
       - name: Install
         run: npm install
-
 
   update-dictionaries:
     needs: check-dictionaries
@@ -114,8 +115,9 @@ jobs:
       - name: Restore Packages
         uses: actions/download-artifact@v3
         with:
-          path: integration-tests
-
+          name: cspell-bundled-dicts
+          path: |
+            packages/cspell-bundled-dicts
 
       - name: Install
         run: npm install
