@@ -53,6 +53,7 @@ jobs:
         # if: env.git_status == 'dirty'
         uses: actions/upload-artifact@v3
         with:
+          name: integration-tests
           path: |
             integration-tests/package*.json
           retention-days: 1
@@ -81,6 +82,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           path: integration-tests
+          name: integration-tests
 
       - name: Display structure of downloaded files
         run: ls -alF
