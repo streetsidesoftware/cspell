@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.21.0](https://github.com/streetsidesoftware/cspell/compare/v5.20.0...v5.21.0) (2022-05-17)
+
+
+### Bug Fixes
+
+* comments in CSpellSettingsDef.ts ([#2821](https://github.com/streetsidesoftware/cspell/issues/2821)) ([b1f296d](https://github.com/streetsidesoftware/cspell/commit/b1f296d82a71dda1bd4cb6ed6f7b20829d4b3383))
+
+
+
+
+
 # [5.20.0](https://github.com/streetsidesoftware/cspell/compare/v5.19.7...v5.20.0) (2022-05-02)
 
 **Note:** Version bump only for package @cspell/cspell-types

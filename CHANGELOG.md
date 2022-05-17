@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.21.0](https://github.com/streetsidesoftware/cspell/compare/v5.20.0...v5.21.0) (2022-05-17)
+
+
+### Bug Fixes
+
+* comments in CSpellSettingsDef.ts ([#2821](https://github.com/streetsidesoftware/cspell/issues/2821)) ([b1f296d](https://github.com/streetsidesoftware/cspell/commit/b1f296d82a71dda1bd4cb6ed6f7b20829d4b3383))
+
+
+### Features
+
+* Upgrade `cpp` dictionary ([#2794](https://github.com/streetsidesoftware/cspell/issues/2794)) ([e51f7f4](https://github.com/streetsidesoftware/cspell/commit/e51f7f49fd70399ff13d9703bde772302b0782a3))
+* Upgrade `go` dictionary ([#2792](https://github.com/streetsidesoftware/cspell/issues/2792)) ([778b8fe](https://github.com/streetsidesoftware/cspell/commit/778b8fe7dd1cecf0546a6affadef78435e88a1aa))
+* Upgrade C# dictionary ([#2791](https://github.com/streetsidesoftware/cspell/issues/2791)) ([64c11da](https://github.com/streetsidesoftware/cspell/commit/64c11da76e1b7eabf834dbbd661128e9e8e5b4d1))
+
+
+
+
+
 # [5.20.0](https://github.com/streetsidesoftware/cspell/compare/v5.19.7...v5.20.0) (2022-05-02)
 
 
