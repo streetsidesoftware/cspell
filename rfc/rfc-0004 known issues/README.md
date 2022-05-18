@@ -8,7 +8,16 @@ This feature would allow users to ignore known issues while focusing on ensuring
 
 Explicitly adding files to the `overrides` section containing words to be ignored.
 
-## Possible Solutions
+## Possible Solution
+
+One solution is to enable defining known issues in two places, the configuration and a known issues file.
+
+The reason for allowing two places in based upon different use cases.
+
+1. A project with only a few legacy known issues. These can be added to the configuration without much bloat.
+1. A legacy project with a lots of known issues. Having them in a separate file keeps the configuration clean.
+
+For convenience, it should also be possible to specify a known issues file on the command line.
 
 ### Using an Known Issue File
 
@@ -100,6 +109,33 @@ tests/aggregation_regress/tests.py:915:102 (grep)
 ```
 
 <!--- cspell:enable --->
+
+## Keeping Known Issues Up-to-date
+
+Ideally known issues are used for static files that rarely change, but there are many reasons a known issue might not be correct:
+
+- the issue was fixed 🎉.
+- the file has been edited and the line or character offset has changed.
+- the dictionary was changed and it is no-longer considered an issue.
+- the portion of the document is no-longer checked.
+- the document is no-longer checked (this is a bit harder to detect).
+
+### Command-line Options
+
+- `--update-known-issues-file` - Reads the known issues file and checks each entry in the file, updating as necessary. It will also add any new issues.
+
+  Format: `--update-known-issues-file=path/to/file.txt`
+
+- `--update-known-issues` - Updates all known issues files. Issues in new files are added to the closest known issue file (the one resulting in the shortest relative path without `../`).
+- `--known-issues-file=path/to/file.txt` - be able to specify a know issues file on the command-line.
+
+**_Note:_** it is possible to have multiple known issues files.
+**_Note:_** preserving comments in files can be very difficult.
+
+## Reporting on Stale Known issues
+
+If the spell checker encounters a stale known issue, it should report on it. By default, it is a warning and not
+It can happen that a known issue gets fixed.
 
 <!---
 cspell:ignore Luxembourgish octobre realiased referer
