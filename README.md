@@ -41,6 +41,15 @@ The cspell mono-repo, a spell checker for code.
 
   This will add the `cspell-cli` command, which is an alias of the `cspell` command.
 
+## RFCs
+
+| Link                                                           | Description                     | Status      |
+| -------------------------------------------------------------- | ------------------------------- | ----------- |
+| [rfc-0001](rfc/rfc-0001%20suggestions/)                        | Fixing common misspellings      | No started  |
+| [rfc-0002](rfc/rfc-0002%20improve%20dictionary%20suggestions/) | Improving Generated Suggestions | Done        |
+| [rfc-0003](rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress |
+| [rfc-0004](rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | No started  |
+
 ## CSpell for enterprise
 
 Available as part of the Tidelift Subscription.
