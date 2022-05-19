@@ -4,7 +4,7 @@ import { satisfies as semverSatisfies } from 'semver';
 import { commandCheck } from './commandCheck';
 import { commandLink } from './commandLink';
 import { commandLint } from './commandLint';
-import { commandSuggestion } from './commandSuggestion';
+import { commandSuggestions } from './commandSuggestions';
 import { commandTrace } from './commandTrace';
 import { ApplicationError } from './util/errors';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -31,7 +31,7 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
     commandTrace(prog);
     commandCheck(prog);
     commandLink(prog);
-    commandSuggestion(prog);
+    commandSuggestions(prog);
 
     /*
         program

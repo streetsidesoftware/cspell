@@ -1,50 +1,88 @@
 ---
-title: 'Getting Started with CSpell'
-categories: docs
-# parent: Docs
-nav_order: 2
+nav_order: 4
 ---
 
-# Spell Checking
+# Getting Started
 
-## Installation
+## Running
 
-See: [Installation](./installation.md)
+If you have CSpell installed globally, you can run it like this:
+
+```sh
+cspell --version
+```
+
+If you have CSpell installed locally in a JavaScript/TypeScript project:
+
+```sh
+# If you use NPM
+npx cspell --version
+
+# If you use Yarn
+yarn cspell --version
+```
 
 ## Basic Usage
 
-Example: recursively spell check all JavaScript files in `src`
-
-**JavaScript files**
-
-```sh
-cspell "src/**/*.js"
-# or
-cspell lint "src/**/*.js"
-```
-
-**Check everything**
+### Check Every File
 
 ```sh
 cspell "**"
 ```
 
-# Adding CSpell to an existing project
+This will recursively check every file in the current directory.
 
-In the steps below we will create a cspell configuration file and setup a single custom dictionary for the project.
+Note that by default, CSpell will use the "lint" command, which means that `cspell "**"` is the same thing as `cspell lint "**"`.
 
-Steps:
+### Check Some Files
 
-1. [Create a configuration file](#1-create-a-configuration-file)
-1. [Add words to the project dictionary](#2-add-words-to-the-project-dictionary)
+```sh
+cspell "src/**/*.js"
+```
 
-## 1. Create a configuration file.
+This will only check files in the "src" directory with a ".js" extension (i.e. JavaScript files).
 
-CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatically searches for one of the following: `cspell.json`, `cspell.config.yaml`, `cspell.config.cjs`.
+### Check a Specific File In-Depth
 
-For now choose to use either JSON or Yaml. Below are examples of each that include a custom dictionary definition. Both of them are equivalent. If you have both, CSpell will look for the `.json` file first.
+```sh
+cspell check "README.md"
+```
 
-**`cspell.json`**
+This will output the text in the "README.md" file and show the misspelled words in red.
+
+### Search Through Currently Installed Dictionaries for a Word
+
+```sh
+cspell trace "poop"
+```
+
+This will output what the currently installed dictionaries are, which dictionaries are currently enabled (in yellow), and which dictionaries contain the specified word (with an asterisk in the "F" column).
+
+### Get a Suggestion for a Word
+
+<!-- cspell:ignore absense -->
+
+```sh
+cspell suggestions "absense"
+```
+
+This will attempt to guess what the right spelling is for the specified word.
+
+## Adding CSpell to an Existing Project
+
+If you run CSpell on all the files of an existing project, it will probably find a bunch of false positives. So, the first step is to get rid of all the false positives. We can do that by adding some words to a custom dictionary for the project.
+
+In the steps below, we will create a CSpell configuration file and set up a single custom dictionary.
+
+1. [Creating a Configuration File](#create-a-configuration-file)
+1. [Add words to the project dictionary](#add-words-to-the-project-dictionary)
+1. [Fine-tuning](#fine-tuning)
+
+### Creating a Configuration File
+
+Create the following file at the root of your repository:
+
+#### **`.cspell.json`**
 
 ```json
 {
@@ -62,7 +100,9 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
 }
 ```
 
-**`cspell.config.yaml`**
+Alternatively, if you don't want to use JSON for whatever reason, you can also use YAML:
+
+#### **`cspell.config.yaml`**
 
 ```yaml
 ---
@@ -81,152 +121,53 @@ ignorePaths:
 
 These configuration files do three things:
 
-1. Define the custom dictionary `project-words`.
+1. Define the custom dictionary of `project-words`.
 1. Tell the spell checker to use the custom dictionary.
 1. Tell the spell checker to ignore any files inside of `node_modules` and the file `project-words.txt`.
 
-## 2. Add words to the project dictionary
+Finally, create the dictionary file as well.
 
-It might take a few iterations to get fully setup, but the process in the same.
+```sh
+touch project-words.txt
+```
 
-Steps:
+The dictionary is simply a text file that contains each word on a separate line.
 
-1. Create the dictionary file
+## Add words to the project dictionary
 
-   ```sh
-   touch project-words.txt
-   ```
+Now, we have to start filtering out the false positives. It might take a few iterations to get everything filtered out.
 
-1. Choose a set of files to start with, like all Markdown files, `**/*.md` and run the spell checker.
+1. Choose a set of files to start with, like all Markdown files. Then, run CSpell.
 
    ```sh
    cspell "**/*.md"
    ```
 
-1. Look for any directories that need to be ignored and add them to `ignorePaths`. Example:
+   This will give you a baseline idea about what to do in the next steps.
 
-   - `"bin"` - to ignore any directory / file called `bin`.
-   - `"translations/**"` - to ignore all files under the `translations` directory.
-   - `"packages/*/dist"` - to ignore the `dist` directory in each _package_.
+1. Based on the results on the spell check, you might see that there are some false positives from files that you don't care about (like transpiled files in a "dist" directory). If this is the case, then add those paths to the `ignorePaths` section of the configuration file. For example:
 
-   Once you have finished identifying directories and files to be ignored, it is now time to add words to the custom dictionary.
+   - `"bin"` - Ignores any directory or file called `bin`.
+   - `"translations/**"` - Ignores all files under the `translations` directory.
+   - `"packages/*/dist"` - Ignores the `dist` subdirectory in each `package` directory.
 
-1. Have CSpell populate it with the words from your project.
+1. From here, run CSpell again, and depending on how many false positives there are, you can proceed in two different ways. First, if there are only a handful of false positives remaining, then you can just manually add them to the dictionary file, and then you are done!
+
+1. If there are a lot of false positives, then you can programmatically add every misspelled word to the custom dictionary:
 
    ```sh
-   echo "# New Words" >> project-words.txt
    cspell --words-only --unique "**/*.md" | sort --ignore-case >> project-words.txt
    ```
 
-   This will append all new issues to the end of `project-words.txt`
-
-1. Review the words in `project-words.txt` to check for any actual misspellings and remove them (the spell checker already thinks they are wrong).
-
-1. Fix spelling issues.
-
-   To show the issues and suggestions, use:
-
-   ```sh
-   cspell --no-progress --show-suggestions --show-context "**/*.md"
-   ```
+1. Go through all of the words that were added to `project-words.txt` to ensure that there were no real spelling errors that were copied over. If you found a real misspelled word, then delete it from the dictionary, and fix the spelling error in the source code.
 
 1. Repeat the process with the other file types you want to check.
 
-## 3. Fine-tuning
+## Fine-Tuning
 
 The following resources can help you with fine-tuning your configurations:
 
 - [Making words forbidden](./forbidden-words.md)
-- [Defining Custom Dictionaries](./dictionaries-custom.md)
+- [Defining Custom Dictionaries](./custom-dictionaries.md)
 - [About Dictionaries](./dictionaries.md)
 - [Understanding CSpell Globs](./globs.md)
-
-# Help
-
-## Command: `lint` -- Spell Checking
-
-The `lint` command is used for spell checking files.
-
-### Help
-
-```sh
-cspell lint --help
-```
-
-### Options
-
-```text
-Usage: cspell lint [options] [globs...]
-
-Check spelling
-
-Options:
-  -c, --config <cspell.json>   Configuration file to use.  By default cspell
-                               looks for cspell.json in the current directory.
-
-  -v, --verbose                Display more information about the files being
-                               checked and the configuration.
-
-  --locale <locale>            Set language locales. i.e. "en,fr" for English
-                               and French, or "en-GB" for British English.
-
-  --language-id <language>     Force programming language for unknown
-                               extensions. i.e. "php" or "scala"
-
-  --words-only                 Only output the words not found in the
-                               dictionaries.
-
-  -u, --unique                 Only output the first instance of a word not
-                               found in the dictionaries.
-
-  -e, --exclude <glob>         Exclude files matching the glob pattern. This
-                               option can be used multiple times to add
-                               multiple globs.
-
-  --file-list <path or stdin>  Specify a list of files to be spell checked. The
-                               list is filtered against the glob file patterns.
-                               Note: the format is 1 file path per line.
-
-  --no-issues                  Do not show the spelling errors.
-  --no-progress                Turn off progress messages
-  --no-summary                 Turn off summary message in console.
-  -s, --silent                 Silent mode, suppress error messages.
-  -r, --root <root folder>     Root directory, defaults to current directory.
-  --relative                   Issues are displayed relative to root.
-  --show-context               Show the surrounding text around an issue.
-  --show-suggestions           Show spelling suggestions.
-  --no-must-find-files         Do not error if no files are found.
-
-  --cache                      Only check changed files. (default: false)
-
-  --cache-strategy <strategy>  Strategy to use for detecting changed files.
-                               (choices: "metadata", "content")
-
-  --cache-location <path>      Path to the cache file or directory. (default:
-                               ".cspellcache")
-
-  --dot                        Include files and directories starting with `.`
-                               (period) when matching globs.
-
-  --gitignore                  Ignore files matching glob patterns found in
-                               .gitignore files.
-
-  --no-gitignore               Do NOT use .gitignore files.
-  --gitignore-root <path>      Prevent searching for .gitignore files past
-                               root.
-
-  --no-color                   Turn off color.
-  --color                      Force color.
-  --debug                      Output information useful for debugging
-                               cspell.json files.
-  -h, --help                   display help for command
-
-
-Examples:
-    cspell "*.js"                   Check all .js files in the current directory
-    cspell "**/*.js"                Check all .js files from the current directory
-    cspell "src/**/*.js"            Only check .js under src
-    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
-    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
-    cat LICENSE | cspell stdin      Check stdin
-```

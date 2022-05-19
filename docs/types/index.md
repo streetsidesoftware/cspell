@@ -1,9 +1,7 @@
 ---
-title: '@cspell'
-has_children: true
-nav_order: 5
+nav_order: 50
 ---
 
-# @cspell
+# cspell-types
 
-[@cspell/cspell-types](./cspell-types/README.md)
+See: [@cspell/cspell-types](./cspell-types/README.md)

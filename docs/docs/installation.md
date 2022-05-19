@@ -1,62 +1,35 @@
 ---
-title: 'Installing CSpell'
-categories: docs
-# parent: Docs
-nav_order: 2
+nav_order: 3
 ---
 
 # Installation
 
-## Node
+## Install Node
 
-CSpell requires Node JS to run. Most likely it is already install.
+Since it is written in TypeScript, CSpell requires [NodeJS](https://nodejs.org/en/) to run. Many people will already have it installed. If you don't have it installed already, download and install it from the [Node.js download page](https://nodejs.org/en/download/).
 
-### **Check the node version**
+### Minimum Required Version
 
-```sh
-node -v
-```
-
-It should be greater than `14.x`.
-
-### Resources:
-
-- [Downloading and installing Node.js and npm - npm Docs](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [Download - Node.js](https://nodejs.org/en/download/)
-- [Releases - Node.js](https://nodejs.org/en/about/releases/)
-
-## CSpell
-
-### **NPM Global**
+CSpell requires a version of `node` that is >= `12.0.0`. You can check your `node` version like this:
 
 ```sh
-npm install -g cspell@latest
+node --version
 ```
 
-### **NPM Package**
+## Install CSpell
+
+In a JavaScript/TypeScript project, it is recommended to install CSpell as a development dependency:
 
 ```sh
-npm install --save-dev cspell@latest
+# If you use NPM
+npm install --save-dev cspell
+
+# Or, if you use Yarn
+yarn add --dev cspell
 ```
 
-### **Yarn Package**
+Otherwise, you can install CSpell globally so that you can use it on the command-line from anywhere you want:
 
 ```sh
-yarn add --dev cspell@latest
+npm install --global cspell
 ```
-
-## Running CSpell
-
-- ```sh
-  cspell "**"
-  ```
-- ```sh
-  npx cspell "**"
-  ```
-- ```sh
-  yarn cspell "**"
-  ```
-
-# See Also
-
-- [Getting Started](./getting-started.md)

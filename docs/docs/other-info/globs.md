@@ -1,9 +1,5 @@
 ---
-layout: default
-title: Globs
-categories: docs
-# parent: Docs
-nav_order: 4
+parent: Other Info
 ---
 
 # Globs

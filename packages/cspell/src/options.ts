@@ -75,7 +75,7 @@ export interface TraceOptions extends BaseOptions {
     ignoreCase?: boolean;
 }
 
-export interface SuggestionOptions extends BaseOptions {
+export interface SuggestionsOptions extends BaseOptions {
     /**
      * Strict case and accent checking
      * @default true

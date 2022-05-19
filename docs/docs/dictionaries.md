@@ -1,18 +1,12 @@
 ---
-layout: default
-title: Dictionaries
-categories: docs
-# parent: Docs
-nav_order: 4
+nav_order: 8
 ---
-
-<!--- Remove published when the page is ready  --->
 
 # Dictionaries
 
 The spell checker includes a set of default dictionaries.
 
-Use the `trace` command to see a list of dictionaries: See [Searching Dictionaries](./command-trace.md)
+Hint: You can use the `[trace](commands/trace.md)` command to see a list of the dictionaries that are currently installed on your system.
 
 ## General Dictionaries
 
@@ -71,7 +65,7 @@ Use the `trace` command to see a list of dictionaries: See [Searching Dictionari
 It is possible to prevent a dictionary from being loaded. This is useful if you want to use your own dictionary or just
 turn off an existing dictionary.
 
-#### Disable Default cpp Dictionary
+### Disable Default cpp Dictionary
 
 ```javascript
 "dictionaries": ["!cpp"],
@@ -88,3 +82,5 @@ The number of `!`'s is important.
 - `!cpp` remove `cpp` dictionary
 - `!!cpp` add it back
 - `!!!cpp` remove it again.
+
+<!-- markdownlint-disable-file MD031 -->
