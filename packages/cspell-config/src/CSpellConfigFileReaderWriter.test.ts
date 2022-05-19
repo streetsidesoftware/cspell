@@ -45,6 +45,7 @@ describe('CSpellConfigFileReaderWriter', () => {
             uri,
             settings: {},
             serialize: jest.fn(() => content),
+            addWords: jest.fn(),
         };
         await expect(rw.writeConfig(cf)).resolves.toBeUndefined();
         expect(io.writeFile).toHaveBeenCalledWith(uri, content);
