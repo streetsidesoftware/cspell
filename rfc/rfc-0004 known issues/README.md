@@ -134,8 +134,7 @@ Ideally known issues are used for static files that rarely change, but there are
 
 ## Reporting on Stale Known issues
 
-If the spell checker encounters a stale known issue, it should report on it. By default, it is a warning and not
-It can happen that a known issue gets fixed.
+If the spell checker encounters a stale known issue, it should report on it. By default, it is an error, but an enhancement would allow this to be configurable.
 
 <!---
 cspell:ignore Luxembourgish octobre realiased referer
