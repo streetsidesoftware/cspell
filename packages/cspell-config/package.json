@@ -1,0 +1,53 @@
+{
+  "name": "cspell-config",
+  "version": "5.21.0",
+  "description": "CSpell config library",
+  "private": true,
+  "keywords": [
+    "cspell",
+    "config"
+  ],
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-config#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "directories": {
+    "dist": "dist"
+  },
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
+    "watch": "tsc -p . -w",
+    "clean": "rimraf dist coverage .tsbuildinfo",
+    "clean-build": "npm run clean && npm run build",
+    "coverage": "jest --coverage",
+    "test-watch": "jest --watch",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-config"
+  },
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "dependencies": {
+    "@cspell/cspell-types": "^5.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.34",
+    "jest": "^28.1.0",
+    "rimraf": "^3.0.2"
+  }
+}
