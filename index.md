@@ -68,11 +68,14 @@ See: [Getting Started](./docs/getting-started.md)
 
 ## Requirements
 
-|        | version | Node |
-| :----- | :------ | :--- |
-| cspell | 5.x     | 12.x |
-| cspell | 4.x     | 10.x |
+|        | version | Node | Support                     |
+| :----- | :------ | :--- | :-------------------------- |
+| cspell | 6.x     | 14.x | In Active Development       |
+| cspell | 5.x     | 12.x | Security and bug fixes      |
+| cspell | 4.x     | 10.x | Paid support only[^support] |
 
 <!---
 cspell:ignore compoundwords paypal
 --->
+
+[^support]: [Support - Street Side Software](https://streetsidesoftware.com/support/#maintenance-agreements)
