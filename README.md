@@ -61,3 +61,13 @@ The maintainers of CSpell and thousands of other packages are working with Tidel
 To report a security vulnerability, please use the
 [Tidelift security contact](https://tidelift.com/security).
 Tidelift will coordinate the fix and disclosure.
+
+## Versions
+
+|        | version | Node | Support                | End-Of-Life |
+| :----- | :------ | :--- | :--------------------- | :---------- |
+| cspell | 6.x     | 14.x | In Active Development  | TBD         |
+| cspell | 5.x     | 12.x | Security and bug fixes | 2023-05-01  |
+| cspell | 4.x     | 10.x | Paid support only[^1]  | 2022-05-01  |
+
+[^1]: [Support - Street Side Software](https://streetsidesoftware.com/support/#maintenance-agreements)
