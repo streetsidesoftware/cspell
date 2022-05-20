@@ -17,7 +17,7 @@ permissions:
 
 jobs:
   update_pr_labels:
-    if: github.ref != 'refs/heads/main'
+    if: github.ref != 'refs/heads/cspell5'
     permissions:
       pull-requests: write # for release-drafter/release-drafter to add label to PR
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   update_release_draft:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/cspell5'
     permissions:
       contents: write # needed by release-drafter/release-drafter to write to the draft release.
     runs-on: ubuntu-latest
