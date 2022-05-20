@@ -1,7 +1,7 @@
 name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 filter-by-commitish: true
-commitish: main
+commitish: cspell5
 
 categories:
   - title: "Features"
@@ -58,7 +58,6 @@ version-resolver:
   default: patch
 exclude-labels:
   - "hide-from-release"
-  - "cspell5"
 autolabeler:
   - label: "Update Dictionaries"
     title:
@@ -92,7 +91,7 @@ autolabeler:
       - "/^feat[!]/i"
   - label: cspell5
     branch:
-      - "/cspell5/i"
+      - "/./i" # only cspell5 commits are in this branch
 
 template: |
   ## Changes
