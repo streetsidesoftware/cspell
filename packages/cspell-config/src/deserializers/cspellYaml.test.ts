@@ -43,5 +43,9 @@ words:
 });
 
 function toYaml(obj: unknown, indent: string | number = 2): string {
-    return stringify(obj, null, indent);
+    if (typeof indent === 'string') {
+        indent = indent.replace(/\t/g, '    ').replace(/[^ ]/g, '');
+        indent = indent.length;
+    }
+    return stringify(obj, { indent });
 }
