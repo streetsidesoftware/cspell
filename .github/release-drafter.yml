@@ -14,6 +14,9 @@ categories:
       - "fix"
       - "bugfix"
       - "bug"
+  - title: "Dictionary Updates"
+    labels:
+      - "Update Dictionaries"
   - title: "Documentation"
     labels:
       - "documentation"
@@ -24,6 +27,7 @@ categories:
   - title: "Maintenance"
     labels:
       - "chore"
+      - "dependencies"
 
 change-template: |
   <details>
@@ -52,9 +56,12 @@ version-resolver:
 exclude-labels:
   - "hide-from-release"
 autolabeler:
+  - label: "Update Dictionaries"
+    title:
+      - "/Update Dictionaries/i"
   - label: "dependencies"
     title:
-      - "/ci: Workflow Bot/i"
+      - "/^ci: Workflow Bot/i"
   - label: "chore"
     title:
       - "/chore/i"
@@ -63,12 +70,12 @@ autolabeler:
     files:
       - "/docs/**/*.md"
     title:
-      - "/docs?/i"
+      - "/^docs?/i"
   - label: "fix"
     title:
-      - "/fix/i"
-      - "/dev:/i"
-      - "/refactor/i"
+      - "/^fix/i"
+      - "/^dev:/i"
+      - "/^refactor/i"
   - label: "feature"
     title:
       - "/^feat/i"
