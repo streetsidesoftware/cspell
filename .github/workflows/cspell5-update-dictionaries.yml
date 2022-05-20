@@ -1,23 +1,16 @@
-name: Update Dictionaries Main
+name: CSpell5 - Update Dictionaries Main
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "docs/**"
-      - "website/**"
-
   workflow_dispatch:
   schedule:
-    - cron: "0 7 * * *"
+    - cron: "5 7 * * *"
 
 permissions:
   contents: read
 
 env:
-  NEW_BRANCH: "update-dictionaries-main"
-  REF_BRANCH: main
+  NEW_BRANCH: "cspell5-update-dictionaries-main"
+  REF_BRANCH: cspell5
 
 jobs:
   check-dictionaries:
