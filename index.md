@@ -68,11 +68,11 @@ See: [Getting Started](./docs/getting-started.md)
 
 ## Requirements
 
-|        | version | Node | Support                     |
-| :----- | :------ | :--- | :-------------------------- |
-| cspell | 6.x     | 14.x | In Active Development       |
-| cspell | 5.x     | 12.x | Security and bug fixes      |
-| cspell | 4.x     | 10.x | Paid support only[^support] |
+|        | version | Node | Support                     | End-Of-Life |
+| :----- | :------ | :--- | :-------------------------- | :---------- |
+| cspell | 6.x     | 14.x | In Active Development       | TBD         |
+| cspell | 5.x     | 12.x | Security and bug fixes      | 2023-05-01  |
+| cspell | 4.x     | 10.x | Paid support only[^support] | 2022-05-01  |
 
 <!---
 cspell:ignore compoundwords paypal
