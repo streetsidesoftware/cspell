@@ -1,20 +1,20 @@
-name: CSpell 4 - Integration Update Repositories
+name: CSpell5 - Update Integration Test Repositories
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 * * 1"
+    - cron: "5 8 * * 1" # Monday at 8 UTC
 
 permissions:
   contents: read
 
 jobs:
-  update-dependencies:
+  update:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "cspell4-integration-update"
-      REF_BRANCH: cspell4
+      NEW_BRANCH: "cspell5-update-integration-repositories"
+      REF_BRANCH: cspell5
     steps:
       - name: Start
         run: |
@@ -27,11 +27,18 @@ jobs:
         uses: actions/setup-node@v3.2.0
         with:
           cache: npm
+      - name: Setup NPM
+        run: npm i -g npm@8
       - name: Install
         run: npm install
-      - name: Update Integration Test Snapshots
+      - name: Build
         run: |
-          npm run update-snapshots
+          npm run build
+      - name: Update Integration Test Snapshots
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run update-integrations-and-snapshots
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
@@ -56,7 +63,7 @@ jobs:
           commit-message: "ci: Workflow Bot -- Update Integration Snapshots"
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
-          title: "ci: Workflow Bot -- CSpell4 - Integration Update Snapshots (${{ env.REF_BRANCH }})"
+          title: "ci: Workflow Bot -- Update Integration Snapshots (${{ env.REF_BRANCH }})"
           token: ${{ steps.generate-token.outputs.token }}
           body: ${{ env.git_body }}
           delete-branch: true
