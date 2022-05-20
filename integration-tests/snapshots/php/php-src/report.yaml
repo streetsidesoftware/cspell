@@ -4,8 +4,8 @@ Url: https://github.com/php/php-src.git
 Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]
 Summary:
   files: 1837
-  filesWithIssues: 1239
-  issues: 39252
+  filesWithIssues: 1238
+  issues: 39178
   errors: 0
 Errors: []
 
@@ -1050,15 +1050,11 @@ issues:
   - "ext/ffi/ffi_parser.c:38:15      	cpos        	U   	#define YYPOS cpos"
   - "ext/ffi/ffi_parser.c:39:9       	YYEND       	U   	#define YYEND cend"
   - "ext/ffi/ffi_parser.c:45:13      	RPAREN      	U   	#define YY__RPAREN 4"
-  - "ext/ffi/ffi_parser.c:99:14      	THISCALL    	U   	#define YY___THISCALL 58"
-  - "ext/ffi/ffi_parser.c:100:14     	VECTORCALL  	U   	#define YY___VECTORCALL 59"
   - "ext/ffi/ffi_parser.c:129:14     	RESTICT     	U   	#define YY___RESTICT 88"
   - "ext/ffi/ffi_parser.c:131:12     	OCTNUMBER   	U   	#define YY_OCTNUMBER 90"
   - "ext/ffi/ffi_parser.c:132:12     	DECNUMBER   	U   	#define YY_DECNUMBER 91"
   - "ext/ffi/ffi_parser.c:133:12     	HEXNUMBER   	U   	#define YY_HEXNUMBER 92"
   - "ext/ffi/ffi_parser.c:134:12     	FLOATNUMBER 	U   	#define YY_FLOATNUMBER 93"
-  - "ext/ffi/ffi_parser.c:201:5      	thiscall    	U   	\"__thiscall\","
-  - "ext/ffi/ffi_parser.c:202:5      	vectorcall  	U   	\"__vectorcall\","
   - "ext/ffi/ffi_parser.c:231:5      	restict     	U   	\"__restict\","
   - "ext/ffi/ffi_parser.c:274:36     	declarators 	U   	parse_array_or_function_declarators(int sym, zend_ffi_dcl"
   - "ext/ffi/ffi_parser.c:305:12     	synpred     	U   	static int synpred_1(int sym);"
@@ -1951,7 +1947,6 @@ issues:
   - "ext/gmp/gmp_arginfo.h:88:52     	powm        	U   	INFO_EX(arginfo_gmp_powm, 0, 3, GMP, 0)"
   - "ext/gmp/gmp_arginfo.h:107:53    	gcdext      	U   	INFO_EX(arginfo_gmp_gcdext, 0, 2, IS_ARRAY, 0)"
   - "ext/gmp/gmp_arginfo.h:164:53    	testbit     	U   	INFO_EX(arginfo_gmp_testbit, 0, 2, _IS_BOOL, 0)"
-  - "ext/gmp/gmp_arginfo.h:176:21    	popcount    	U   	#define arginfo_gmp_popcount arginfo_gmp_intval"
   - "ext/gmp/gmp_arginfo.h:178:21    	hamdist     	U   	#define arginfo_gmp_hamdist arginfo_gmp_jacobi"
   - "ext/gmp/gmp_arginfo.h:180:21    	nextprime   	U   	#define arginfo_gmp_nextprime arginfo_gmp_neg"
   - "ext/gmp/gmp.c:79:19     	PLUSINF     	U   	#define GMP_ROUND_PLUSINF 1"
@@ -1982,7 +1977,6 @@ issues:
   - "ext/hash/hash_crc32.c:32:24     	PCLMUL  	U   	if ZEND_INTRIN_SSE4_2_PCLMUL_NATIVE || ZEND_INTRIN"
   - "ext/hash/hash_gost.c:23:43      	Juhani      	U   	compress() by Markku-Juhani Saarinen <mjos@ssh.fi"
   - "ext/hash/hash_gost.c:307:37     	hashcontext 	U   	gost_unserialize(php_hashcontext_object *hash, zend_long"
-  - "ext/hash/hash_haval.c:135:9     	ROTR    	U   	#define ROTR(x,n) (((x) >> (n))"
   - "ext/hash/hash_haval.c:166:5     	Zeroize 	U   	/* Zeroize sensitive information"
   - "ext/hash/hash_md.c:242:27   	zeroizing   	U   	the message digest and zeroizing the context."
   - "ext/hash/hash_ripemd.c:198:9    	ROLS    	U   	#define ROLS(j, x) (((x) << S[j]"
@@ -2130,7 +2124,6 @@ issues:
   - "ext/hash/xxhash/xxhash.h:3199:60    	allmul              	U   	it tends to call `__allmul` when it doesn't"
   - "ext/hash/xxhash/xxhash.h:3246:26    	MULQ                	U   	* multiply, such as MULQ on x86_64 or MUL + UMULH"
   - "ext/hash/xxhash/xxhash.h:3246:50    	UMULH               	U   	MULQ on x86_64 or MUL + UMULH on aarch64."
-  - "ext/hash/xxhash/xxhash.h:3250:52    	emscripten          	U   	platform, Clang (and emscripten) define this type"
   - "ext/hash/xxhash/xxhash.h:3251:68    	laggy               	U   	it. This results in a laggy"
   - "ext/hash/xxhash/xxhash.h:3286:27    	umulh               	U   	MSVC for ARM64's __umulh method."
   - "ext/hash/xxhash/xxhash.h:3325:66    	UMAAL               	U   	compiles to, the powerful UMAAL"
@@ -4127,7 +4120,6 @@ issues:
   - "ext/opcache/zend_file_cache.c:1043:17   	jited       	U   	/* FIXME: dump jited codes out to file cache"
   - "ext/opcache/zend_file_cache.c:1101:9    	unpoison    	U   	__msan_unpoison(&info, sizeof(info)"
   - "ext/opcache/zend_persist.c:1128:92  	getiterator 	U   	ce->function_table, \"getiterator\", sizeof(\"getiterator"
-  - "ext/opcache/zend_shared_alloc.c:370:66  	rotr	U   	) - 3)); /* key = _rotr(key, 3);*/"
   - "ext/opcache/ZendAccelerator.c:139:10    	LOCKVAL     	U   	# define LOCKVAL(v) (ZCSG(v))"
   - "ext/opcache/ZendAccelerator.c:152:24    	setzero     	U   	m256i ymm0 = _mm256_setzero_si256();"
   - "ext/opcache/ZendAccelerator.c:955:28    	fdata       	U   	FILE_ATTRIBUTE_DATA fdata;"
@@ -6617,7 +6609,6 @@ issues:
   - "ext/standard/base64.c:329:21    	SSSE        	U   	# undef ZEND_INTRIN_SSSE3_NATIVE"
   - "ext/standard/base64.c:340:82    	ssse        	U   	attribute__((target(\"ssse3\")))"
   - "ext/standard/base64.c:360:12    	tmmintrin   	U   	# include <tmmintrin.h>"
-  - "ext/standard/base64.c:383:95    	ifunc       	U   	length) __attribute__((ifunc(\"resolve_base64_encode"
   - "ext/standard/base64.c:482:14    	mulhi       	U   	t1 = _mm256_mulhi_epu16(t0, _mm256_set"
   - "ext/standard/base64.c:486:14    	mullo       	U   	t3 = _mm256_mullo_epi16(t2, _mm256_set"
   - "ext/standard/base64.c:503:15    	setr        	U   	lut = _mm256_setr_epi8("
@@ -7778,7 +7769,6 @@ issues:
   - "sapi/fpm/fpm/fpm_unix.c:441:42  	setpflags   	U   	process_dumpable && 0 > setpflags(__PROC_PROTECT, 0))"
   - "sapi/fpm/fpm/fpm_unix.c:454:10  	getcon      	U   	if (aa_getcon(&con, NULL) == -1)"
   - "sapi/fpm/fpm/fpm_unix.c:572:10  	readval     	U   	int readval;"
-  - "sapi/fpm/fpm/zlog.c:706:21  	vformat 	U   	ssize_t zlog_stream_vformat(struct zlog_stream"
   - "sapi/fuzzer/fuzzer-execute.c:19:9       	Fuzzer      	U   	int LLVMFuzzerTestOneInput(const uint"
   - "sapi/fuzzer/fuzzer-execute.c:22:52      	codepaths   	U   	necessary to reach new codepaths. */"
   - "sapi/fuzzer/fuzzer-sapi.c:38:36     	libfuzzer   	U   	timeout be enforced by libfuzzer, not PHP. */"
@@ -8345,7 +8335,6 @@ issues:
   - "Zend/zend_operators.h:543:12    	llresult	U   	long long llresult;"
   - "Zend/zend_operators.h:922:37    	strnieq 	U   	always_inline bool zend_strnieq(const char *ptr1, const"
   - "Zend/zend_portability.h:242:51  	Ofast       	U   	attribute__((optimize(\"Ofast\")))"
-  - "Zend/zend_portability.h:484:29  	IFUNC       	U   	HAVE_FUNC_ATTRIBUTE_IFUNC"
   - "Zend/zend_portability.h:495:19  	TMMINTRIN   	U   	# if defined(HAVE_TMMINTRIN_H)"
   - "Zend/zend_portability.h:499:19  	NMMINTRIN   	U   	# if defined(HAVE_NMMINTRIN_H)"
   - "Zend/zend_portability.h:503:19  	WMMINTRIN   	U   	# if defined(HAVE_WMMINTRIN_H)"
