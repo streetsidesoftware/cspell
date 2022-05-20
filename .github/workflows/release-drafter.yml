@@ -37,6 +37,7 @@ jobs:
           # See [Release Drafter is *sometimes* including unmerged PRs · Issue #917 · release-drafter/release-drafter](https://github.com/release-drafter/release-drafter/issues/917)
           disable-releaser: true
           disable-autolabeler: false
+          config-name: release-drafter-cspell5.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -61,6 +62,7 @@ jobs:
           # See [Release Drafter is *sometimes* including unmerged PRs · Issue #917 · release-drafter/release-drafter](https://github.com/release-drafter/release-drafter/issues/917)
           disable-releaser: false
           disable-autolabeler: true
+          config-name: release-drafter-cspell5.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 # cspell:ignore auto* *labeler
