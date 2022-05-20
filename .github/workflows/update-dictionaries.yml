@@ -1,13 +1,6 @@
 name: Update Dictionaries Main
 
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "docs/**"
-      - "website/**"
-
   workflow_dispatch:
   schedule:
     - cron: "0 7 * * *"
