@@ -55,6 +55,7 @@ version-resolver:
   default: patch
 exclude-labels:
   - "hide-from-release"
+  - "cspell5"
 autolabeler:
   - label: "Update Dictionaries"
     title:
@@ -86,6 +87,9 @@ autolabeler:
     title:
       - "/^fix[!]/i"
       - "/^feat[!]/i"
+  - label: cspell5
+    branch:
+      - "/cspell5/i"
 
 template: |
   ## Changes
