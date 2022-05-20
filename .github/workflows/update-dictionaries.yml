@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "docs/**"
+      - "website/**"
+
 
   workflow_dispatch:
   schedule:
