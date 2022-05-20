@@ -3,10 +3,10 @@ import { ImplCSpellConfigFile } from '../CSpellConfigFile';
 import { detectIndent } from './util';
 import { CSpellSettings } from '@cspell/cspell-types';
 
-const isPackageJsonFile = /package\.json(?=$|[?#])/;
+const isSupportedFormat = /package\.json(?=$|[?#])/;
 
 function _deserializerPackageJson(uri: string, content: string): ImplCSpellConfigFile | undefined {
-    if (!isPackageJsonFile.test(uri)) return undefined;
+    if (!isSupportedFormat.test(uri)) return undefined;
 
     const packageJson = JSON.parse(content);
     if (!packageJson || typeof packageJson !== 'object' || Array.isArray(packageJson)) {

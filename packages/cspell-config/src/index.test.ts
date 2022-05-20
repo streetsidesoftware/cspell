@@ -24,11 +24,10 @@ describe('cspell-config', () => {
         ${'package/with-value/package.json'}    | ${['apple']}
         ${'package/without-value/package.json'} | ${['apple']}
         ${'cspell.jsonc'}                       | ${['apple', 'cache']}
+        ${'cspell.yaml'}                        | ${['apple', 'cache']}
     `('edit config', async ({ fixture, addWords }) => {
         const fixtureFile = fixtures(fixture);
-        console.log('Fixture file: %s', fixtureFile);
         const tempFile = tempPath(fixture);
-        console.log('temp file: %s', tempFile);
         await copyFile(fixtureFile, tempFile);
         const rw = createReaderWriter();
         const uri = URI.file(tempFile).toString();
