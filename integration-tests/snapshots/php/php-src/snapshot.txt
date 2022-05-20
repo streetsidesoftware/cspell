@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1837, Issues found: 39252 in 1239 files
+ CSpell: Files checked: 1837, Issues found: 39178 in 1238 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -248,7 +248,6 @@ Lines:
 ./Zend/zend_operators.h:543:12    - Unknown word (llresult)   -- long long llresult;
 ./Zend/zend_operators.h:922:37    - Unknown word (strnieq)    -- always_inline bool zend_strnieq(const char *ptr1, const
 ./Zend/zend_portability.h:242:51    - Unknown word (Ofast)      -- attribute__((optimize("Ofast")))
-./Zend/zend_portability.h:484:29    - Unknown word (IFUNC)      -- HAVE_FUNC_ATTRIBUTE_IFUNC
 ./Zend/zend_portability.h:495:19    - Unknown word (TMMINTRIN)  -- # if defined(HAVE_TMMINTRIN_H)
 ./Zend/zend_portability.h:499:19    - Unknown word (NMMINTRIN)  -- # if defined(HAVE_NMMINTRIN_H)
 ./Zend/zend_portability.h:503:19    - Unknown word (WMMINTRIN)  -- # if defined(HAVE_WMMINTRIN_H)
@@ -1359,14 +1358,11 @@ Lines:
 ./ext/ffi/ffi.c:6549:16   - Unknown word (declarartion)  -- /* useless declarartion */
 ./ext/ffi/ffi.c:6744:4    - Unknown word (regparam)      -- _(regparam) \
 ./ext/ffi/ffi_arginfo.h:4:58      - Unknown word (cdef)       -- EX(arginfo_class_FFI_cdef, 0, 0, FFI, 0)
-./ext/ffi/ffi_parser.c:100:14    - Unknown word (VECTORCALL) -- #define YY___VECTORCALL 59
 ./ext/ffi/ffi_parser.c:129:14    - Unknown word (RESTICT)    -- #define YY___RESTICT 88
 ./ext/ffi/ffi_parser.c:131:12    - Unknown word (OCTNUMBER)  -- #define YY_OCTNUMBER 90
 ./ext/ffi/ffi_parser.c:132:12    - Unknown word (DECNUMBER)  -- #define YY_DECNUMBER 91
 ./ext/ffi/ffi_parser.c:133:12    - Unknown word (HEXNUMBER)  -- #define YY_HEXNUMBER 92
 ./ext/ffi/ffi_parser.c:134:12    - Unknown word (FLOATNUMBER) -- #define YY_FLOATNUMBER 93
-./ext/ffi/ffi_parser.c:201:5     - Unknown word (thiscall)    -- "__thiscall",
-./ext/ffi/ffi_parser.c:202:5     - Unknown word (vectorcall)  -- "__vectorcall",
 ./ext/ffi/ffi_parser.c:231:5     - Unknown word (restict)     -- "__restict",
 ./ext/ffi/ffi_parser.c:274:36    - Unknown word (declarators) -- parse_array_or_function_declarators(int sym, zend_ffi_dcl
 ./ext/ffi/ffi_parser.c:305:12    - Unknown word (synpred)     -- static int synpred_1(int sym);
@@ -1374,7 +1370,6 @@ Lines:
 ./ext/ffi/ffi_parser.c:38:9      - Unknown word (YYPOS)      -- #define YYPOS cpos
 ./ext/ffi/ffi_parser.c:39:9      - Unknown word (YYEND)      -- #define YYEND cend
 ./ext/ffi/ffi_parser.c:45:13     - Unknown word (RPAREN)     -- #define YY__RPAREN 4
-./ext/ffi/ffi_parser.c:99:14     - Unknown word (THISCALL)   -- #define YY___THISCALL 58
 ./ext/fileinfo/libmagic/apprentice.c:1021:29   - Unknown word (mstart)     -- test_type(struct magic *mstart, struct magic *m)
 ./ext/fileinfo/libmagic/apprentice.c:121:11    - Unknown word (nmagic)     -- uint32_t nmagic[MAGIC_SETS];
 ./ext/fileinfo/libmagic/apprentice.c:1223:1    - Unknown word (cmpstrp)    -- cmpstrp(const void *p1, const
@@ -2278,7 +2273,6 @@ Lines:
 ./ext/gmp/gmp.c:80:19     - Unknown word (MINUSINF)   -- #define GMP_ROUND_MINUSINF 2
 ./ext/gmp/gmp_arginfo.h:107:53    - Unknown word (gcdext)     -- INFO_EX(arginfo_gmp_gcdext, 0, 2, IS_ARRAY, 0)
 ./ext/gmp/gmp_arginfo.h:164:53    - Unknown word (testbit)    -- INFO_EX(arginfo_gmp_testbit, 0, 2, _IS_BOOL, 0)
-./ext/gmp/gmp_arginfo.h:176:21    - Unknown word (popcount)   -- #define arginfo_gmp_popcount arginfo_gmp_intval
 ./ext/gmp/gmp_arginfo.h:178:21    - Unknown word (hamdist)    -- #define arginfo_gmp_hamdist arginfo_gmp_jacobi
 ./ext/gmp/gmp_arginfo.h:180:21    - Unknown word (nextprime)  -- #define arginfo_gmp_nextprime arginfo_gmp_neg
 ./ext/gmp/gmp_arginfo.h:57:21     - Unknown word (divexact)   -- #define arginfo_gmp_divexact arginfo_gmp_add
@@ -2303,7 +2297,6 @@ Lines:
 ./ext/hash/hash_crc32.c:32:24     - Unknown word (PCLMUL)     -- if ZEND_INTRIN_SSE4_2_PCLMUL_NATIVE || ZEND_INTRIN
 ./ext/hash/hash_gost.c:23:43     - Unknown word (Juhani)     -- compress() by Markku-Juhani Saarinen <mjos@ssh.fi
 ./ext/hash/hash_gost.c:307:37    - Unknown word (hashcontext) -- gost_unserialize(php_hashcontext_object *hash, zend_long
-./ext/hash/hash_haval.c:135:9     - Unknown word (ROTR)       -- #define ROTR(x,n) (((x) >> (n))
 ./ext/hash/hash_haval.c:166:5     - Unknown word (Zeroize)    -- /* Zeroize sensitive information
 ./ext/hash/hash_md.c:242:27    - Unknown word (zeroizing)  -- the message digest and zeroizing the context.
 ./ext/hash/hash_ripemd.c:198:9     - Unknown word (ROLS)       -- #define ROLS(j, x)	(((x) << S[j]
@@ -2433,7 +2426,6 @@ Lines:
 ./ext/hash/xxhash/xxhash.h:3199:60   - Unknown word (allmul)            -- it tends to call `__allmul` when it doesn't
 ./ext/hash/xxhash/xxhash.h:3246:26   - Unknown word (MULQ)              -- * multiply, such as MULQ on x86_64 or MUL + UMULH
 ./ext/hash/xxhash/xxhash.h:3246:50   - Unknown word (UMULH)             -- MULQ on x86_64 or MUL + UMULH on aarch64.
-./ext/hash/xxhash/xxhash.h:3250:52   - Unknown word (emscripten)        -- platform, Clang (and emscripten) define this type
 ./ext/hash/xxhash/xxhash.h:3251:68   - Unknown word (laggy)             -- it. This results in a laggy
 ./ext/hash/xxhash/xxhash.h:3286:27   - Unknown word (umulh)             -- MSVC for ARM64's __umulh method.
 ./ext/hash/xxhash/xxhash.h:3325:66   - Unknown word (UMAAL)             -- compiles to, the powerful UMAAL
@@ -2446,7 +2438,7 @@ Lines:
 ./ext/hash/xxhash/xxhash.h:3523:24   - Unknown word (UMAC)              -- Compared to classic UMAC where a 1 in 2^31 chance
 ./ext/hash/xxhash/xxhash.h:3547:29   - Unknown word (autovectorize)     -- GCC for x86 tends to autovectorize the 128-bit multiply
 ./ext/hash/xxhash/xxhash.h:3551:20   - Unknown word (scalarize)         -- * cause it to scalarize. See `XXH32_round()
-./ext/hash/xxhash/xxhash.h:3553:66   - Unknown word (Ryzen)            -- faster -- On an AMD Ryzen 3600,
+./ext/hash/xxhash/xxhash.h:3553:66   - Unknown word (Ryzen)             -- faster -- On an AMD Ryzen 3600,
 ./ext/hash/xxhash/xxhash.h:3558:44   - Unknown word (codepath)         -- finding a more optimal codepath is an interest.
 ./ext/hash/xxhash/xxhash.h:3610:26   - Unknown word (STARTOFFSET)      -- define XXH3_MIDSIZE_STARTOFFSET 3
 ./ext/hash/xxhash/xxhash.h:3611:26   - Unknown word (LASTOFFSET)       -- define XXH3_MIDSIZE_LASTOFFSET 17
@@ -4459,7 +4451,6 @@ Lines:
 ./ext/opcache/zend_file_cache.c:885:47    - Unknown word (offsetexists) -- arrayaccess_funcs_ptr->zf_offsetexists);
 ./ext/opcache/zend_file_cache.c:887:47    - Unknown word (offsetunset)  -- arrayaccess_funcs_ptr->zf_offsetunset);
 ./ext/opcache/zend_persist.c:1128:92   - Unknown word (getiterator) -- ce->function_table, "getiterator", sizeof("getiterator
-./ext/opcache/zend_shared_alloc.c:370:66    - Unknown word (rotr)       -- ) - 3)); /* key  = _rotr(key, 3);*/
 ./ext/openssl/openssl.c:1023:10   - Unknown word (mdtype)          -- EVP_MD *mdtype;
 ./ext/openssl/openssl.c:1201:32   - Unknown word (NOINTERN)        -- LONG_CONSTANT("PKCS7_NOINTERN", PKCS7_NOINTERN, CONST
 ./ext/openssl/openssl.c:1203:32   - Unknown word (NOCHAIN)         -- LONG_CONSTANT("PKCS7_NOCHAIN", PKCS7_NOCHAIN, CONST
@@ -6918,7 +6909,6 @@ Lines:
 ./ext/standard/base64.c:329:21    - Unknown word (SSSE)       -- # undef ZEND_INTRIN_SSSE3_NATIVE
 ./ext/standard/base64.c:340:82    - Unknown word (ssse)       -- attribute__((target("ssse3")))
 ./ext/standard/base64.c:360:12    - Unknown word (tmmintrin)  -- # include <tmmintrin.h>
-./ext/standard/base64.c:383:95    - Unknown word (ifunc)      -- length) __attribute__((ifunc("resolve_base64_encode
 ./ext/standard/base64.c:482:14    - Unknown word (mulhi)      -- t1 = _mm256_mulhi_epu16(t0, _mm256_set
 ./ext/standard/base64.c:486:14    - Unknown word (mullo)      -- t3 = _mm256_mullo_epi16(t2, _mm256_set
 ./ext/standard/base64.c:503:15    - Unknown word (setr)       -- lut = _mm256_setr_epi8(
@@ -8083,7 +8073,6 @@ Lines:
 ./sapi/fpm/fpm/fpm_unix.c:441:42    - Unknown word (setpflags)  -- process_dumpable && 0 > setpflags(__PROC_PROTECT, 0))
 ./sapi/fpm/fpm/fpm_unix.c:454:10    - Unknown word (getcon)     -- if (aa_getcon(&con, NULL) == -1)
 ./sapi/fpm/fpm/fpm_unix.c:572:10    - Unknown word (readval)    -- int readval;
-./sapi/fpm/fpm/zlog.c:706:21    - Unknown word (vformat)    -- ssize_t zlog_stream_vformat(struct zlog_stream
 ./sapi/fuzzer/README.md:22:61     - Unknown word (fsanitize)  -- that supports the `-fsanitize=fuzzer-no-link` option
 ./sapi/fuzzer/README.md:27:13     - Unknown word (unserialize) -- * `php-fuzz-unserialize`: Fuzzing unserialize
 ./sapi/fuzzer/README.md:32:13     - Unknown word (mbregex)     -- * `php-fuzz-mbregex`: Fuzzing `mb_ereg[i
