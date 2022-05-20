@@ -1,12 +1,13 @@
-name: CSpell 4 - Update Dependencies
+name: CSpell5 - Update Dependencies Main
 
 on:
   push:
     branches:
-      - cspell4
+      - cspell5
     paths:
       - "**/package.json"
       - "**/package-lock.json"
+
   workflow_dispatch:
     inputs:
       updateSnapshots:
@@ -24,12 +25,14 @@ jobs:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "update-dependencies-cspell4"
-      REF_BRANCH: cspell4
+      NEW_BRANCH: "cspell5-update-dependencies-main"
+      REF_BRANCH: cspell5
+      UPDATE_SNAPSHOTS: ${{ github.event.inputs.updateSnapshots == 'yes' || github.event.inputs.updateSnapshots == 'y' }}
     steps:
       - name: Start
         run: |
           echo "${{ toJson(github.event.inputs) }}"
+          echo "Update Snapshots: $UPDATE_SNAPSHOTS"
       - name: Checkout code
         uses: actions/checkout@v3
         with:
@@ -38,6 +41,8 @@ jobs:
         uses: actions/setup-node@v3.2.0
         with:
           cache: npm
+      - name: Setup NPM
+        run: npm i -g npm@8
       - name: Update Root
         run: |
           npm i
@@ -48,8 +53,14 @@ jobs:
       - name: Update packages
         run: |
           npm run update-packages
+      - name: Build
+        if: env.UPDATE_SNAPSHOTS == 'true'
+        run: |
+          npm run build
       - name: Update Integration Test Snapshots
-        if: github.event.inputs.updateSnapshots == 'yes'
+        if: env.UPDATE_SNAPSHOTS == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run update-snapshots
       - name: Has changes
@@ -76,7 +87,7 @@ jobs:
           commit-message: "ci: Workflow Bot -- Update ALL Dependencies"
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
-          title: "ci: Workflow Bot -- CSpell 4 - Update ALL Dependencies (${{ env.REF_BRANCH }})"
+          title: "ci: Workflow Bot -- Update ALL Dependencies (${{ env.REF_BRANCH }})"
           token: ${{ steps.generate-token.outputs.token }}
           body: ${{ env.git_body }}
           delete-branch: true
