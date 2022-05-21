@@ -27,8 +27,6 @@
     "install": "lerna bootstrap --ci && npm run install-docs",
     "install-docs": "cd website && npm ci",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
-    "lint-docs-ci": "prettier -c \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
-    "lint-docs": "prettier -w \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
     "lint": "npm run eslint-fix && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "prepare-cspell-action": "npm i && lerna run prepare-cspell-action",
     "pre-pub": "npm run clean-dist && npm run ibt",
