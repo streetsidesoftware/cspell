@@ -25,7 +25,7 @@ jobs:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     env:
-      NEW_BRANCH: "cspell5-update-dependencies-main"
+      NEW_BRANCH: "cspell5-update-dependencies"
       REF_BRANCH: cspell5
       UPDATE_SNAPSHOTS: ${{ github.event.inputs.updateSnapshots == 'yes' || github.event.inputs.updateSnapshots == 'y' }}
     steps:
