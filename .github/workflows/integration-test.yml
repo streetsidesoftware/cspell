@@ -167,7 +167,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
-          && npm ci
+          && npm i
           && npm run integration-tests -- ${{ matrix.repo }}
 
 # cspell:ignore apollographql
