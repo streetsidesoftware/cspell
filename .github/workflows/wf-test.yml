@@ -96,10 +96,11 @@ jobs:
           mkdir temp
           echo "${{ matrix.repo }}"
           echo "${{ matrix.repo }}" > temp/repo-name.txt
+          echo "::set-output name=repo::${{ matrix.repo }}" | sed "s/[/]/-/g"
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.repo }}
+          name: ${{ steps.step-repo-info.outputs.repo }}
           path: temp/repo-name.txt
 
   pr:
