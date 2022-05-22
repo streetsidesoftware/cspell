@@ -38,6 +38,12 @@ jobs:
       key: ${{ env.CACHE_KEY }}
       path: ${{ env.CACHE_PATH }}
     steps:
+      - name: Inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+        run: |
+          echo "inputs: $INPUTS"
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
