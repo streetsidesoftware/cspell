@@ -16,9 +16,10 @@ env:
   NPM_VERSION: "8"
 
 jobs:
-  build:
+  load-integrations:
     runs-on: ubuntu-latest
-
+    outputs:
+      repos: ${{ steps.read-integrations.repos }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,12 +38,6 @@ jobs:
 
       - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
-
-  load-integrations:
-    runs-on: ubuntu-latest
-    outputs:
-      repos: ${{ steps.read-integrations.repos }}
-    steps:
       - id: read-integrations
         run: |
           echo "::set-output name=repos::$(cat .github/integrations.json)"
@@ -50,7 +45,6 @@ jobs:
   integrations:
     runs-on: ubuntu-latest
     needs:
-      - build
       - load-integrations
     outputs:
       repo: ${{ matrix.repo }}
