@@ -19,7 +19,7 @@ jobs:
   load-integrations:
     runs-on: ubuntu-latest
     outputs:
-      repos: ${{ steps.read-integrations.repos }}
+      repos: ${{ steps.read-integrations.outputs.repos }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
