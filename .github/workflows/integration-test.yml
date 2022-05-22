@@ -24,6 +24,10 @@ on:
       - "!docs/**"
   # Run on demand
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch or hash
+        required: false
 
 permissions:
   contents: read
@@ -37,7 +41,7 @@ jobs:
   calc-ref:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ github.action_ref }}
+      REF_BRANCH: ${{ github.event.inputs.ref || github.action_ref }}
     outputs:
       ref: ${{ env.REF_BRANCH }}
       runs_on: ${{ env.RUNS_ON }}
