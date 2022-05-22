@@ -66,7 +66,7 @@ jobs:
     uses: "./.github/workflows/build-dist-cache.yml"
     with:
       ref: ${{ needs.calc-ref.outputs.ref || 'cspell5' }}
-      username: mona
+      extra: mona
 
   debug:
     runs-on: ubuntu-latest
