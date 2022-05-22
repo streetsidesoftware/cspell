@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       ref: ${{ env.REF_BRANCH }}
+    steps:
+      - name: Ref Branch
+        run: |
+          echo "${{ env.REF_BRANCH }}"
 
   load-integrations:
     runs-on: ubuntu-latest
