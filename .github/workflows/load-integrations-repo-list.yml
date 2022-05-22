@@ -33,7 +33,7 @@ jobs:
   load:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ github.event.inputs.ref || 'main' }}
+      REF_BRANCH: ${{ github.event.inputs.ref }}
     outputs:
       repos: ${{ steps.read-integrations.outputs.repos }}
       ref: ${{ env.REF_BRANCH }}
