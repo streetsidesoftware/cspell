@@ -65,7 +65,7 @@ jobs:
       - calc-ref
     uses: "./.github/workflows/build-dist-cache.yml"
     with:
-      ref: ${{ needs.calc-ref.outputs.ref }}
+      ref: ${{ needs.calc-ref.outputs.ref || 'cspell5' }}
 
   debug:
     runs-on: ubuntu-latest
