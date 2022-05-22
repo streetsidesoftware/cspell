@@ -41,6 +41,8 @@ jobs:
 
   build:
     uses: "./.github/workflows/build-dist-cache.yml"
+    with:
+      ref: ${{ env.REF_BRANCH }}
 
   integrations:
     runs-on: ubuntu-latest
