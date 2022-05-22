@@ -2,6 +2,10 @@ name: Build and Cache Dist
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch or hash
+        required: false
   workflow_call:
     inputs:
       ref:
@@ -27,6 +31,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      REF_BRANCH: ${{ inputs.ref || 'main' }}
     outputs:
       key: ${{ env.CACHE_KEY }}
       path: ${{ env.CACHE_PATH }}
