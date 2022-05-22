@@ -1,0 +1,58 @@
+name: Build and Cache Dist
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch or hash
+        required: false
+        default: main
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
+        default: main
+    outputs:
+      repos:
+        description: JSON list of integration test repositories
+        value: ${{ jobs.load.outputs.repos }}
+      ref:
+        description: Branch or ref used
+        value: ${{ jobs.load.outputs.ref }}
+
+permissions:
+  contents: read
+
+env:
+  RUNS_ON: ubuntu-latest
+  NODE_VERSION: "16.x"
+  NPM_VERSION: "8"
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    env:
+      REF_BRANCH: ${{ github.event.inputs.ref || 'main' }}
+    outputs:
+      repos: ${{ steps.read-integrations.outputs.repos }}
+      ref: ${{ env.REF_BRANCH }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+      - run: npm -v
+      - id: read-integrations
+        run: |
+          REPOS=$(tr "\n" " " < .github/integrations.json)
+          echo ::set-output name=repos::$REPOS
