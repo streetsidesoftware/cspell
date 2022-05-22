@@ -23,7 +23,6 @@ permissions:
   contents: read
 
 env:
-  REF_BRANCH: main
   RUNS_ON: ubuntu-latest
   NODE_VERSION: "16.x"
   NPM_VERSION: "8"
@@ -32,7 +31,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ inputs.ref || env.REF_BRANCH }}
+      REF_BRANCH: ${{ inputs.ref || 'main' }}
     outputs:
       key: ${{ env.CACHE_KEY }}
       path: ${{ env.CACHE_PATH }}
