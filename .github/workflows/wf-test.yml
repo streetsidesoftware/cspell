@@ -78,6 +78,7 @@ jobs:
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
       - name: Npm CI
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
         run: npm ci
 
       - name: Has Npm has failed?
@@ -148,6 +149,11 @@ jobs:
         run: |
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
+      #############
+      # ^^^^^^^^^^^^^^^^^^^^^^^^
+      # Duplicate of build above
+      #############
+
       - name: Npm CI
         run: npm ci
 
@@ -160,11 +166,6 @@ jobs:
       - name: Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
         run: npm run build
-
-      #############
-      # ^^^^^^^^^^^^^^^^^^^^^^^^
-      # Duplicate of build above
-      #############
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
