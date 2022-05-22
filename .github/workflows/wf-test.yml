@@ -93,6 +93,7 @@ jobs:
       - name: Repo Info
         id: step-repo-info
         run: |
+          mkdir temp
           echo "${{ matrix.repo }}"
           echo "${{ matrix.repo }}" > temp/repo-name.txt
       - name: store diff
