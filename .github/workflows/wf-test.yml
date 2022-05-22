@@ -78,7 +78,7 @@ jobs:
           mkdir temp
           echo "${{ matrix.repo }}"
           echo "${{ matrix.repo }}" > temp/repo-name.txt
-          echo "::set-output name=repo::${{ matrix.repo }}" | sed "s/[/:]/-_-/g"
+          echo "::set-output name=repo::${{ matrix.repo }}" | sed "s/[/]/__/g"
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
