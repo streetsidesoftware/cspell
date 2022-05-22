@@ -58,9 +58,12 @@ jobs:
 
     steps:
       - name: Build Results
+        env:
+          REPOS: ${{ needs.load-integrations.outputs.repos }}
         run: |
           echo "key: ${{ needs.build.outputs.key }}"
           echo "path: ${{ needs.build.outputs.path }}"
+          echo repos: $REPOS
 
       - name: Checkout
         uses: actions/checkout@v3
