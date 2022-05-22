@@ -33,14 +33,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ inputs.ref || 'main' }}
+      REF_BRANCH: ${{ github.event.inputs.ref || 'main' }}
     outputs:
       key: ${{ env.CACHE_KEY }}
       path: ${{ env.CACHE_PATH }}
     steps:
       - name: Inputs
         env:
-          INPUTS: ${{ toJSON(inputs) }}
+          INPUTS: ${{ toJSON(github.event.inputs) }}
         run: |
           echo "inputs: $INPUTS"
 
