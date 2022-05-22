@@ -1,11 +1,11 @@
 name: Build and Cache Dist
 
 on:
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: Branch or hash
-        required: false
+  # workflow_dispatch:
+  #   inputs:
+  #     ref:
+  #       description: Branch or hash
+  #       required: false
   workflow_call:
     inputs:
       ref:
@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Inputs
         env:
-          INPUTS: ${{ toJSON(github.event.inputs) }}
+          INPUTS: ${{ toJSON(github) }}
         run: |
           echo "inputs: $INPUTS"
 
