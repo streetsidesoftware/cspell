@@ -60,11 +60,22 @@ jobs:
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
 
+  build:
+    needs:
+      - calc-ref
+    uses: "./.github/workflows/build-dist-cache.yml"
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+
   integration-tests:
     needs:
       - calc-ref
       - load-integrations
+      - build
     runs-on: ${{ matrix.os }}
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
 
     strategy:
       # the integration tests are independent, so we want to run them all.
@@ -125,14 +136,8 @@ jobs:
         id: step-cache-build
         uses: actions/cache@v3
         with:
-          key: |
-            int-build-${{ hashFiles(
-              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
-            ) }}
-          path: |
-            packages/*/dist
-            integration-tests/dist
+          key: ${{ needs.build.outputs.key }}
+          path: ${{ needs.build.outputs.path }}
 
       - name: Cached Results
         run: |
