@@ -40,9 +40,15 @@ jobs:
           echo ::set-output name=repos::$REPOS
 
   build:
-    uses: "./.github/workflows/build-dist-cache.yml"
-    with:
-      ref: ${{ env.REF_BRANCH }}
+    runs-on: ubuntu-latest
+    outputs:
+      key: ${{ steps.build.outputs.key }}
+      path: ${{ steps.build.outputs.path }}
+    steps:
+      - id: build
+        uses: "./.github/workflows/build-dist-cache.yml"
+        with:
+          ref: ${{ env.REF_BRANCH }}
 
   integrations:
     runs-on: ubuntu-latest
