@@ -20,6 +20,9 @@ on:
       path:
         description: Cache Path
         value: ${{ jobs.build.outputs.path }}
+      ref:
+        description: Ref Used
+        value: ${{ jobs.build.outputs.ref }}
 
 permissions:
   contents: read
