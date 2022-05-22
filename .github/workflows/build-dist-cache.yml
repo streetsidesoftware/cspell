@@ -42,7 +42,7 @@ jobs:
     steps:
       - name: Inputs
         env:
-          INPUTS: ${{ toJSON(inputs) }}
+          INPUTS: ${{ toJSON(inputs || github.event.inputs) }}
         run: |
           echo "inputs: $INPUTS"
 
