@@ -8,37 +8,157 @@ on:
 permissions:
   contents: read
 
+env:
+  NEW_BRANCH: "update-integration-repositories"
+  REF_BRANCH: main
+  RUNS_ON: ubuntu-latest
+  NODE_VERSION: "16.x"
+  NPM_VERSION: "8"
+
 jobs:
-  update:
-    if: github.repository_owner == 'streetsidesoftware'
+  load-integrations:
     runs-on: ubuntu-latest
-    env:
-      NEW_BRANCH: "update-integration-repositories"
-      REF_BRANCH: main
+    outputs:
+      repos: ${{ steps.read-integrations.outputs.repos }}
+      ref: ${{ env.REF_BRANCH }}
+
     steps:
-      - name: Start
-        run: |
-          echo "${{ toJson(github.event.inputs) }}"
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
-      - name: Use Node.js
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3.2.0
         with:
-          cache: npm
-      - name: Setup NPM
-        run: npm i -g npm@8
-      - name: Install
-        run: npm install
-      - name: Build
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+      - run: npm -v
+      - id: read-integrations
         run: |
-          npm run build
-      - name: Update Integration Test Snapshots
+          REPOS=$(tr "\n" " " < .github/integrations.json)
+          echo ::set-output name=repos::$REPOS
+
+  build:
+    needs:
+      - load-integrations
+    uses: "./.github/workflows/build-dist-cache.yml"
+    with:
+      ref: ${{ needs.load-integrations.outputs.ref }}
+
+  integrations:
+    runs-on: ubuntu-latest
+    needs:
+      - load-integrations
+      - build
+
+    strategy:
+      # the integration tests are independent, so we want to run them all.
+      fail-fast: false
+      matrix:
+        # List of repositories to check.
+        # Use `repo-list.sh` in `integration-tests` to generate.
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   - prettier/prettier
+        #   - typescript-eslint/typescript-eslint
+
+    steps:
+      - name: Build Results
+        run: |
+          echo "key: ${{ needs.build.outputs.key }}"
+          echo "path: ${{ needs.build.outputs.path }}"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
+
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+      - run: npm -v
+
+      - name: Cache Build
+        id: step-cache-build
+        uses: actions/cache@v3
+        with:
+          key: ${{ needs.build.outputs.key }}
+          path: ${{ needs.build.outputs.path }}
+
+      - name: Cached Results
+        run: |
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+      - name: Npm CI
+        run: npm ci
+
+      - name: Has Npm has failed?
+        if: ${{ failure() }}
+        run: |
+          ls -alF /home/runner/.npm/_logs/*.log
+          cat /home/runner/.npm/_logs/*.log
+
+      - name: Check Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        run: exit 1
+
+      - name: Run Integration Tests ${{ matrix.repo }}
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          cd integration-tests
+          && npm i
+          && npm run update-repositories -- ${{ matrix.repo }}
+
+      - name: Store Repo Diff
+        id: step-repo-info
         run: |
-          npm run update-integrations-and-snapshots
+          mkdir temp
+          REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
+          echo "${{ matrix.repo }} =>" $REPO
+          git diff > temp/$REPO.diff
+      - name: store diff
+        uses: actions/upload-artifact@v3
+        with:
+          name: diffs
+          path: temp/*.diff
+          retention-days: 1
+
+  pr:
+    runs-on: ubuntu-latest
+    needs: integrations
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: restore repos
+        uses: actions/download-artifact@v3
+        with:
+          name: diffs
+          path: temp
+      - name: show downloaded
+        run: ls -alF temp
+      - name: show diff
+        run: cat temp/*.diff
+
+      - name: apply diff
+        run: git apply --allow-empty temp/*.diff
+
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
