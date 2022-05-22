@@ -42,6 +42,18 @@ jobs:
         run: |
           echo "::set-output name=repos::$(cat .github/integrations.json)"
 
+  integrations-x:
+    runs-on: ubuntu-latest
+    needs:
+      - load-integrations
+    env:
+      LOAD_INTEGRATIONS: ${{ needs.load-integrations.outputs.repos }}
+      OUTPUTS: ${{ toJSON(needs.load-integrations.outputs) }}
+    steps:
+      - run: |
+          echo $LOAD_INTEGRATIONS
+          echo $OUTPUTS
+
   integrations:
     runs-on: ubuntu-latest
     needs:
@@ -55,7 +67,9 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        repo:
+          - googleapis/google-cloud-cpp
 
     steps:
       - name: Repo Info
