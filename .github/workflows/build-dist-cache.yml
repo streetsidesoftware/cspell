@@ -1,18 +1,13 @@
 name: Build and Cache Dist
 
 on:
-  # workflow_dispatch:
-  #   inputs:
-  #     ref:
-  #       description: Branch or hash
-  #       required: false
   workflow_call:
     inputs:
       ref:
         required: true
         type: string
       extra:
-        required: true
+        required: false
         type: string
     outputs:
       key:
@@ -37,7 +32,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ github.event.inputs.ref }}
+      REF_BRANCH: ${{ inputs.ref }}
     outputs:
       key: ${{ env.CACHE_KEY }}
       path: ${{ env.CACHE_PATH }}
@@ -45,7 +40,7 @@ jobs:
     steps:
       - name: Inputs
         env:
-          INPUTS: ${{ toJSON(github) }}
+          INPUTS: ${{ toJSON(inputs) }}
         run: |
           echo "inputs: $INPUTS"
 
