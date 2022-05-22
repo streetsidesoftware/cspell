@@ -104,7 +104,6 @@ jobs:
         # Use `repo-list.sh` in `integration-tests` to generate.
         # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
         repo:
-          - googleapis/google-cloud-cpp
           - prettier/prettier
           - typescript-eslint/typescript-eslint
 
@@ -241,4 +240,3 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           body: ${{ env.git_body }}
           delete-branch: true
-# cspell:ignore googleapis
