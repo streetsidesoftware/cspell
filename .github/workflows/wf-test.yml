@@ -54,17 +54,12 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
-        repo:
-          - prettier/prettier
-          - typescript-eslint/typescript-eslint
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   - prettier/prettier
+        #   - typescript-eslint/typescript-eslint
 
     steps:
-      #############
-      # Duplicate of build above
-      # VVVVVVVVVVVVVVVVVVVVVVVV
-      #############
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -100,11 +95,6 @@ jobs:
         run: |
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      #############
-      # ^^^^^^^^^^^^^^^^^^^^^^^^
-      # Duplicate of build above
-      #############
-
       - name: Npm CI
         run: npm ci
 
@@ -114,9 +104,9 @@ jobs:
           ls -alF /home/runner/.npm/_logs/*.log
           cat /home/runner/.npm/_logs/*.log
 
-      - name: Build
+      - name: Check Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: npm run build
+        run: exit 1
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
