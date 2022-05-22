@@ -211,7 +211,7 @@ jobs:
         run: cat temp/*.diff
 
       - name: apply diff
-        run: git apply temp/*.diff
+        run: git apply --allow-empty temp/*.diff
 
       - name: Has changes
         run: |
