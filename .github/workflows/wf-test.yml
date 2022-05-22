@@ -68,9 +68,9 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
-        repo:
-          - googleapis/google-cloud-cpp
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   - googleapis/google-cloud-cpp
 
     steps:
       - name: Repo Info
