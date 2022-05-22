@@ -63,6 +63,7 @@ jobs:
   integration-tests:
     needs:
       - calc-ref
+      - load-integrations
     runs-on: ${{ matrix.os }}
 
     strategy:
