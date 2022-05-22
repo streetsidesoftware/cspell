@@ -38,9 +38,20 @@ jobs:
       - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
 
+  load-integrations:
+    runs-on: ubuntu-latest
+    outputs:
+      repos: ${{ steps.read-integrations.repos }}
+    steps:
+      - id: read-integrations
+        run: |
+          echo "::set-output name=repos::$(cat .github/integrations.json)"
+
   integrations:
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - build
+      - load-integrations
     outputs:
       repo: ${{ matrix.repo }}
 
@@ -50,44 +61,7 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo:
-          - AdaDoom3/AdaDoom3
-          - alexiosc/megistos
-          - apollographql/apollo-server
-          - aspnetboilerplate/aspnetboilerplate
-          - aws-amplify/docs
-          - Azure/azure-rest-api-specs
-          - bitjson/typescript-starter
-          - caddyserver/caddy
-          - canada-ca/open-source-logiciel-libre
-          - django/django
-          - exonum/exonum
-          - googleapis/google-cloud-cpp
-          - graphql/express-graphql
-          - graphql/graphql-js
-          - graphql/graphql-relay-js
-          - graphql/graphql-spec
-          - liriliri/licia
-          - MartinThoma/LaTeX-examples
-          - mdx-js/mdx
-          - microsoft/TypeScript-Website
-          - pagekit/pagekit
-          - php/php-src
-          - plasticrake/tplink-smarthome-api
-          - prettier/prettier
-          - pycontribs/jira
-          - shoelace-style/shoelace
-          - SoftwareBrothers/admin-bro
-          - TheAlgorithms/Python
-          - twbs/bootstrap
-          - typescript-cheatsheets/react
-          - typescript-eslint/typescript-eslint
-          - w3c/aria-practices
-          - w3c/specberus
-          - webdeveric/webpack-assets-manifest
-          - webpack/webpack
-          - wireapp/wire-desktop
-          - wireapp/wire-webapp
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
 
     steps:
       - name: Repo Info
@@ -96,7 +70,7 @@ jobs:
           mkdir temp
           echo "${{ matrix.repo }}"
           echo "${{ matrix.repo }}" > temp/repo-name.txt
-          echo "::set-output name=repo::${{ matrix.repo }}" | sed "s/[/]/-/g"
+          echo "::set-output name=repo::${{ matrix.repo }}" | sed "s/[/:]/-_-/g"
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
