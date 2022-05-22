@@ -40,7 +40,7 @@ jobs:
           echo ::set-output name=repos::$REPOS
 
   build:
-    uses: ".github/workflows/build-dist-cache.yml"
+    uses: "./.github/workflows/build-dist-cache.yml"
 
   integrations:
     runs-on: ubuntu-latest
