@@ -52,10 +52,10 @@ jobs:
       - name: Calc Key and Path
         id: key-and-path
         run: |
-          echo 'CACHE_PATH<<CACHE_PATH' >> $GITHUB_ENV
-          echo packages/*/dist >> $GITHUB_ENV
-          echo integration-tests/dist >> $GITHUB_ENV
-          echo 'CACHE_PATH' >> $GITHUB_ENV
+          echo "CACHE_PATH<<CACHE_PATH
+          packages/*/dist
+          integration-tests/dist
+          CACHE_PATH" >> $GITHUB_ENV
           echo "CACHE_KEY=int-build-${{ hashFiles(
               'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
               'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
@@ -63,19 +63,14 @@ jobs:
 
       - run: |
           echo key: ${{ env.CACHE_KEY }}
+          echo "path: ${{ env.CACHE_PATH }}"
 
       - name: Cache Build
         id: step-cache-build
         uses: actions/cache@v3
         with:
-          key: |
-            int-build-${{ hashFiles(
-              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
-            ) }}
-          path: |
-            packages/*/dist
-            integration-tests/dist
+          key: ${{ env.CACHE_KEY }}
+          path: ${{ env.CACHE_PATH }}
 
       - name: Cached Results
         run: |
