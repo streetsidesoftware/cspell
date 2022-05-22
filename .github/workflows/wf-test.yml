@@ -94,6 +94,12 @@ jobs:
         id: step-repo-info
         run: |
           echo "${{ matrix.repo }}"
+          echo "${{ matrix.repo }}" > temp/repo-name.txt
+      - name: store diff
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.repo }}
+          path: temp/repo-name.txt
 
   pr:
     runs-on: ubuntu-latest
@@ -106,7 +112,13 @@ jobs:
       - name: echo
         run: |
           echo "$OUTPUT"
-
+      - name: restore repos
+        uses: actions/download-artifact@v3
+        with:
+          path: temp
+      - name: show downloaded
+        run: ls -alFR
+        working-directory: temp
 # cspell:ignore apollographql
 # cspell:ignore aspnetboilerplate
 # cspell:ignore caddyserver
