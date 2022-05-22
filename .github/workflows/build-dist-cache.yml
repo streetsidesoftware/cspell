@@ -33,10 +33,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ github.event.inputs.ref || 'main' }}
+      REF_BRANCH: ${{ github.event.inputs.ref }}
     outputs:
       key: ${{ env.CACHE_KEY }}
       path: ${{ env.CACHE_PATH }}
+      ref: ${{ env.REF_BRANCH }}
     steps:
       - name: Inputs
         env:
