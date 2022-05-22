@@ -40,7 +40,8 @@ jobs:
       - run: npm -v
       - id: read-integrations
         run: |
-          echo "::set-output name=repos::$(tr \"\\n\" " " < .github/integrations.json)"
+          REPOS=$(tr "\n" " " < .github/integrations.json)
+          echo ::set-output name=repos::$REPOS
 
   integrations-x:
     runs-on: ubuntu-latest
