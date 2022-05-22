@@ -70,8 +70,8 @@ jobs:
     steps:
       - name: Build Results
         run: |
-          echo "key: ${{ jobs.build.outputs.key }}"
-          echo "path: ${{ jobs.build.outputs.path }}"
+          echo "key: ${{ needs.build.outputs.key }}"
+          echo "path: ${{ needs.build.outputs.path }}"
 
       - name: Checkout
         uses: actions/checkout@v3
