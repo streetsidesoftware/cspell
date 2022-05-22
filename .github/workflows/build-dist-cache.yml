@@ -6,13 +6,14 @@ on:
       ref:
         description: Branch or hash
         required: false
-        default: main
   workflow_call:
     inputs:
       ref:
         required: false
         type: string
-        default: main
+      extra:
+        required: false
+        type: string
     outputs:
       key:
         description: Cache Key
