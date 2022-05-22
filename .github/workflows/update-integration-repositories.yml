@@ -16,6 +16,11 @@ env:
   NPM_VERSION: "8"
 
 jobs:
+  calc-ref:
+    runs-on: ubuntu-latest
+    outputs:
+      ref: ${{ env.REF_BRANCH }}
+
   load-integrations:
     runs-on: ubuntu-latest
     outputs:
@@ -43,10 +48,10 @@ jobs:
 
   build:
     needs:
-      - load-integrations
+      - calc-ref
     uses: "./.github/workflows/build-dist-cache.yml"
     with:
-      ref: ${{ needs.load-integrations.outputs.ref }}
+      ref: ${{ needs.calc-ref.outputs.ref }}
 
   integrations:
     runs-on: ubuntu-latest
@@ -60,10 +65,10 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
-        # repo:
-        #   - prettier/prettier
-        #   - typescript-eslint/typescript-eslint
+        # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        repo:
+          - prettier/prettier
+          - typescript-eslint/typescript-eslint
 
     steps:
       - name: Build Results
