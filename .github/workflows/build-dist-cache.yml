@@ -7,6 +7,13 @@ on:
       ref:
         required: false
         type: string
+    outputs:
+      key:
+        description: Cache Key
+        value: ${{ jobs.build.outputs.key }}
+      path:
+        description: Cache Path
+        value: ${{ jobs.build.outputs.path }}
 
 permissions:
   contents: read
@@ -20,6 +27,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      key: ${{ env.CACHE_KEY }}
+      path: ${{ env.CACHE_PATH }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -38,6 +48,21 @@ jobs:
 
       - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
+
+      - name: Calc Key and Path
+        id: key-and-path
+        run: |
+          echo 'CACHE_PATH<<CACHE_PATH' >> $GITHUB_ENV
+          echo packages/*/dist >> $GITHUB_ENV
+          echo integration-tests/dist >> $GITHUB_ENV
+          echo 'CACHE_PATH' >> $GITHUB_ENV
+          echo "CACHE_KEY=int-build-${{ hashFiles(
+              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+            ) }}" >> $GITHUB_ENV
+
+      - run: |
+          echo key: ${{ env.CACHE_KEY }}
 
       - name: Cache Build
         id: step-cache-build
