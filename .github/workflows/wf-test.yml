@@ -31,10 +31,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
-          cache-dependency-path: |
-            package-lock.json
-            packages/*/package-lock.json
-            integration-tests/package-lock.json
 
       - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
@@ -43,22 +39,62 @@ jobs:
           REPOS=$(tr "\n" " " < .github/integrations.json)
           echo ::set-output name=repos::$REPOS
 
-  integrations-x:
+  build:
     runs-on: ubuntu-latest
-    needs:
-      - load-integrations
-    env:
-      LOAD_INTEGRATIONS: ${{ needs.load-integrations.outputs.repos }}
-      OUTPUTS: ${{ toJSON(needs.load-integrations.outputs) }}
     steps:
-      - run: |
-          echo $LOAD_INTEGRATIONS
-          echo $OUTPUTS
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
+
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+      - run: npm -v
+
+      - name: Cache Build
+        id: step-cache-build
+        uses: actions/cache@v3
+        with:
+          key: |
+            int-build-${{ hashFiles(
+              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+            ) }}
+          path: |
+            packages/*/dist
+            integration-tests/dist
+
+      - name: Cached Results
+        run: |
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+      - name: Npm CI
+        run: npm ci
+
+      - name: Has Npm has failed?
+        if: ${{ failure() }}
+        run: |
+          ls -alF /home/runner/.npm/_logs/*.log
+          cat /home/runner/.npm/_logs/*.log
+
+      - name: Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        run: npm run build
 
   integrations:
     runs-on: ubuntu-latest
     needs:
       - load-integrations
+      - build
 
     strategy:
       # the integration tests are independent, so we want to run them all.
@@ -66,18 +102,87 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
-        # repo:
-        #   - googleapis/google-cloud-cpp
+        # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        repo:
+          - googleapis/google-cloud-cpp
+          - prettier/prettier
+          - typescript-eslint/typescript-eslint
 
     steps:
-      - name: Repo Info
+      #############
+      # Duplicate of build above
+      # VVVVVVVVVVVVVVVVVVVVVVVV
+      #############
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
+
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+      - run: npm -v
+
+      - name: Cache Build
+        id: step-cache-build
+        uses: actions/cache@v3
+        with:
+          key: |
+            int-build-${{ hashFiles(
+              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+            ) }}
+          path: |
+            packages/*/dist
+            integration-tests/dist
+
+      - name: Cached Results
+        run: |
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+      - name: Npm CI
+        run: npm ci
+
+      - name: Has Npm has failed?
+        if: ${{ failure() }}
+        run: |
+          ls -alF /home/runner/.npm/_logs/*.log
+          cat /home/runner/.npm/_logs/*.log
+
+      - name: Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        run: npm run build
+
+      #############
+      # ^^^^^^^^^^^^^^^^^^^^^^^^
+      # Duplicate of build above
+      #############
+
+      - name: Run Integration Tests ${{ matrix.repo }}
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          cd integration-tests
+          && npm i
+          && npm run update-repositories -- ${{ matrix.repo }}
+
+      - name: Store Repo Diff
         id: step-repo-info
         run: |
           mkdir temp
           REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
           echo "${{ matrix.repo }} =>" $REPO
-          echo "${{ matrix.repo }}" > temp/$REPO.diff
+          git diff > temp/$REPO.diff
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
@@ -96,6 +201,8 @@ jobs:
           path: temp
       - name: show downloaded
         run: ls -alF temp
+      - name: show diff
+        run: cat temp/*.diff
 # cspell:ignore apollographql
 # cspell:ignore aspnetboilerplate
 # cspell:ignore caddyserver
