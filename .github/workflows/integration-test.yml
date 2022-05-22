@@ -28,8 +28,37 @@ on:
 permissions:
   contents: read
 
+env:
+  RUNS_ON: ubuntu-latest
+  NODE_VERSION: "16.x"
+  NPM_VERSION: "8"
+
 jobs:
+  calc-ref:
+    runs-on: ubuntu-latest
+    env:
+      REF_BRANCH: ${{ github.action_ref }}
+    outputs:
+      ref: ${{ env.REF_BRANCH }}
+      runs_on: ${{ env.RUNS_ON }}
+      node_version: ${{ env.NODE_VERSION }}
+    steps:
+      - name: Refs
+        run: |
+          echo ref: "${{ env.REF_BRANCH }}"
+          echo runs_on: "${{ env.RUNS_ON }}"
+          echo node_version: ${{ env.NODE_VERSION }}
+
+  load-integrations:
+    needs:
+      - calc-ref
+    uses: ./.github/workflows/load-integrations-repo-list.yml
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+
   integration-tests:
+    needs:
+      - calc-ref
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -37,51 +66,17 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 16.x
+          - ${{ needs.calc-ref.outputs.node_version }}
 
         os:
-          - ubuntu-latest
+          - ${{ needs.calc-ref.outputs.runs_on }}
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo:
-          - AdaDoom3/AdaDoom3
-          - alexiosc/megistos
-          - apollographql/apollo-server
-          - aspnetboilerplate/aspnetboilerplate
-          - aws-amplify/docs
-          - Azure/azure-rest-api-specs
-          - bitjson/typescript-starter
-          - caddyserver/caddy
-          - canada-ca/open-source-logiciel-libre
-          - django/django
-          - exonum/exonum
-          - googleapis/google-cloud-cpp
-          - graphql/express-graphql
-          - graphql/graphql-js
-          - graphql/graphql-relay-js
-          - graphql/graphql-spec
-          - liriliri/licia
-          - MartinThoma/LaTeX-examples
-          - mdx-js/mdx
-          - microsoft/TypeScript-Website
-          - pagekit/pagekit
-          - php/php-src
-          - plasticrake/tplink-smarthome-api
-          - prettier/prettier
-          - pycontribs/jira
-          - shoelace-style/shoelace
-          - SoftwareBrothers/admin-bro
-          - TheAlgorithms/Python
-          - twbs/bootstrap
-          - typescript-cheatsheets/react
-          - typescript-eslint/typescript-eslint
-          - w3c/aria-practices
-          - w3c/specberus
-          - webdeveric/webpack-assets-manifest
-          - webpack/webpack
-          - wireapp/wire-desktop
-          - wireapp/wire-webapp
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   - prettier/prettier
+        #   - typescript-eslint/typescript-eslint
 
     steps:
       - name: Checkout
