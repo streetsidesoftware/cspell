@@ -24,64 +24,75 @@ on:
       - "!docs/**"
   # Run on demand
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Optional Branch or hash
+        required: false
 
 permissions:
   contents: read
 
+env:
+  RUNS_ON: ubuntu-latest
+  NODE_VERSION: "16.x"
+  NPM_VERSION: "8"
+
 jobs:
+  calc-ref:
+    runs-on: ubuntu-latest
+    env:
+      REF_BRANCH: ${{ github.event.inputs.ref || github.ref }}
+    outputs:
+      ref: ${{ env.REF_BRANCH }}
+      runs_on: ${{ env.RUNS_ON }}
+      node_version: ${{ env.NODE_VERSION }}
+    steps:
+      - name: Refs
+        run: |
+          echo ref: "${{ env.REF_BRANCH }}"
+          echo runs_on: "${{ env.RUNS_ON }}"
+          echo node_version: ${{ env.NODE_VERSION }}
+
+  load-integrations:
+    needs:
+      - calc-ref
+    uses: ./.github/workflows/load-integrations-repo-list.yml
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+
+  build:
+    needs:
+      - calc-ref
+    uses: "./.github/workflows/build-dist-cache.yml"
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+
   integration-tests:
+    needs:
+      - calc-ref
+      - load-integrations
+      - build
     runs-on: ${{ matrix.os }}
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
 
     strategy:
       # the integration tests are independent, so we want to run them all.
       fail-fast: false
       matrix:
         node-version:
-          - 16.x
+          - ${{ needs.calc-ref.outputs.node_version }}
 
         os:
-          - ubuntu-latest
+          - ${{ needs.calc-ref.outputs.runs_on }}
 
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo:
-          - AdaDoom3/AdaDoom3
-          - alexiosc/megistos
-          - apollographql/apollo-server
-          - aspnetboilerplate/aspnetboilerplate
-          - aws-amplify/docs
-          - Azure/azure-rest-api-specs
-          - bitjson/typescript-starter
-          - caddyserver/caddy
-          - canada-ca/open-source-logiciel-libre
-          - django/django
-          - exonum/exonum
-          - googleapis/google-cloud-cpp
-          - graphql/express-graphql
-          - graphql/graphql-js
-          - graphql/graphql-relay-js
-          - graphql/graphql-spec
-          - liriliri/licia
-          - MartinThoma/LaTeX-examples
-          - mdx-js/mdx
-          - microsoft/TypeScript-Website
-          - pagekit/pagekit
-          - php/php-src
-          - plasticrake/tplink-smarthome-api
-          - prettier/prettier
-          - pycontribs/jira
-          - shoelace-style/shoelace
-          - SoftwareBrothers/admin-bro
-          - TheAlgorithms/Python
-          - twbs/bootstrap
-          - typescript-cheatsheets/react
-          - typescript-eslint/typescript-eslint
-          - w3c/aria-practices
-          - w3c/specberus
-          - webdeveric/webpack-assets-manifest
-          - webpack/webpack
-          - wireapp/wire-desktop
-          - wireapp/wire-webapp
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   - prettier/prettier
+        #   - typescript-eslint/typescript-eslint
 
     steps:
       - name: Checkout
@@ -125,14 +136,8 @@ jobs:
         id: step-cache-build
         uses: actions/cache@v3
         with:
-          key: |
-            int-build-${{ hashFiles(
-              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
-            ) }}
-          path: |
-            packages/*/dist
-            integration-tests/dist
+          key: ${{ needs.build.outputs.key }}
+          path: ${{ needs.build.outputs.path }}
 
       - name: Cached Results
         run: |

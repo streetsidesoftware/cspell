@@ -6,13 +6,11 @@ on:
       ref:
         description: Branch or hash
         required: false
-        default: main
   workflow_call:
     inputs:
       ref:
-        required: false
+        required: true
         type: string
-        default: main
     outputs:
       key:
         description: Cache Key
@@ -20,6 +18,9 @@ on:
       path:
         description: Cache Path
         value: ${{ jobs.build.outputs.path }}
+      ref:
+        description: Ref Used
+        value: ${{ jobs.build.outputs.ref }}
 
 permissions:
   contents: read
@@ -33,14 +34,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ github.event.inputs.ref || 'main' }}
+      REF_BRANCH: ${{ inputs.ref || github.event.inputs.ref }}
     outputs:
       key: ${{ env.CACHE_KEY }}
       path: ${{ env.CACHE_PATH }}
+      ref: ${{ env.REF_BRANCH }}
     steps:
       - name: Inputs
         env:
-          INPUTS: ${{ toJSON(github.event.inputs) }}
+          INPUTS: ${{ toJSON(inputs || github.event.inputs) }}
         run: |
           echo "inputs: $INPUTS"
 

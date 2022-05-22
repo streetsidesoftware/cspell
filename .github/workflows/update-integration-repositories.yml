@@ -16,37 +16,28 @@ env:
   NPM_VERSION: "8"
 
 jobs:
-  load-integrations:
+  calc-ref:
     runs-on: ubuntu-latest
     outputs:
-      repos: ${{ steps.read-integrations.outputs.repos }}
       ref: ${{ env.REF_BRANCH }}
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ env.REF_BRANCH }}
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3.2.0
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-
-      - run: npm i -g npm@${{ env.NPM_VERSION }}
-      - run: npm -v
-      - id: read-integrations
+      - name: Ref Branch
         run: |
-          REPOS=$(tr "\n" " " < .github/integrations.json)
-          echo ::set-output name=repos::$REPOS
+          echo "${{ env.REF_BRANCH }}"
+
+  load-integrations:
+    needs:
+      - calc-ref
+    uses: ./.github/workflows/load-integrations-repo-list.yml
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
 
   build:
     needs:
-      - load-integrations
+      - calc-ref
     uses: "./.github/workflows/build-dist-cache.yml"
     with:
-      ref: ${{ needs.load-integrations.outputs.ref }}
+      ref: ${{ needs.calc-ref.outputs.ref }}
 
   integrations:
     runs-on: ubuntu-latest
