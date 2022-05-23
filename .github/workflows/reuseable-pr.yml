@@ -88,7 +88,7 @@ jobs:
         if: env.git_status == 'dirty'
         uses: peter-evans/create-pull-request@f094b77505fb89581e68a1163fbd2fffece39da1 # v4
         with:
-          commit-message: ${{ input.commit-message }}
+          commit-message: ${{ inputs.commit-message }}
           branch: ${{ inputs.branch }}
           base: ${{ inputs.base }}
           title: ${{ inputs.title || inputs.commit-message }}
