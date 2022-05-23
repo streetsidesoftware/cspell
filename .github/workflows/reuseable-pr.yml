@@ -27,6 +27,11 @@ on:
         description: PR title - defaults to commit-message
         required: false
         type: string
+    secrets:
+      app_id:
+        required: true
+      private_key:
+        required: true
 
 permissions:
   contents: read
@@ -54,7 +59,6 @@ jobs:
         env:
           PATCH: ${{ inputs.patch }}
         run: |
-          echo "$PATCH"
           echo "$PATCH" | git apply --allow-empty
 
       - name: Has changes
@@ -78,14 +82,13 @@ jobs:
         run: |
           echo "$git_body"
 
-      # - run: exit 1
-
       - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
         if: env.git_status == 'dirty'
         id: generate-token
         with:
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
       - name: Create Pull Request
         if: env.git_status == 'dirty'
         uses: peter-evans/create-pull-request@f094b77505fb89581e68a1163fbd2fffece39da1 # v4

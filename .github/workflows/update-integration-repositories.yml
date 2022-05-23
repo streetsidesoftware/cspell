@@ -195,3 +195,6 @@ jobs:
       commit-message: ${{ needs.pr-setup.outputs.commit-message }}
       branch: ${{ needs.pr-setup.outputs.branch }}
       title: ${{ needs.pr-setup.outputs.title }}
+    secrets:
+      app_id: ${{ secrets.AUTOMATION_APP_ID }}
+      private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
