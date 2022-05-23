@@ -55,8 +55,10 @@ jobs:
           PATCH: ${{ inputs.patch }}
         run: |
           mkdir -p temp
+          echo $PATCH
           echo $PATCH > temp/patch.diff
           git apply --allow-empty temp/patch.diff
+          cat temp/patch.diff
 
       - name: Has changes
         run: |

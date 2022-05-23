@@ -60,11 +60,11 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
-        # repo:
-        #   - prettier/prettier
-        #   - typescript-eslint/typescript-eslint
-        #   - wireapp/wire-webapp
+        # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        repo:
+          - prettier/prettier
+          - typescript-eslint/typescript-eslint
+          - wireapp/wire-webapp
 
     steps:
       - name: Build Results
@@ -180,9 +180,9 @@ jobs:
 
       - name: Build Patch
         run: |
-          echo 'PATCH<<DIFF' >> $GITHUB_ENV
+          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
           git --no-pager diff >> $GITHUB_ENV
-          echo 'DIFF' >> $GITHUB_ENV
+          echo '__DIFF__' >> $GITHUB_ENV
 
   pr:
     uses: ./.github/workflows/reuseable-pr.yml
