@@ -56,14 +56,14 @@ jobs:
   load-integrations:
     needs:
       - calc-ref
-    uses: ./.github/workflows/load-integrations-repo-list.yml
+    uses: ./.github/workflows/reuseable-load-integrations-repo-list.yml
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
 
   build:
     needs:
       - calc-ref
-    uses: "./.github/workflows/build-dist-cache.yml"
+    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
 
