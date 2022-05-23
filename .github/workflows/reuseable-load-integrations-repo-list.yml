@@ -6,16 +6,15 @@ name: R - Load Integrations Repo List
 # Use `repo-list.sh` in `integration-tests` to generate.
 
 on:
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: Branch or hash
-        required: false
   workflow_call:
     inputs:
       ref:
         required: false
         type: string
+      dirty:
+        description: Only include dirty repos
+        required: false
+        type: boolean
     outputs:
       repos:
         description: JSON list of integration test repositories
@@ -36,7 +35,8 @@ jobs:
   load:
     runs-on: ubuntu-latest
     env:
-      REF_BRANCH: ${{ inputs.ref || github.event.inputs.ref }}
+      REF_BRANCH: ${{ inputs.ref }}
+      dirty: ${{ (inputs.dirty && '--dirty') || '' }}
     outputs:
       repos: ${{ env.REPOS }}
       ref: ${{ env.REF_BRANCH }}
@@ -44,9 +44,11 @@ jobs:
     steps:
       - name: Inputs
         env:
-          INPUTS: ${{ toJSON(inputs || github.event.inputs) }}
+          INPUTS: ${{ toJSON(inputs) }}
+          DIRTY: ${{ env.dirty }}
         run: |
           echo "inputs: $INPUTS"
+          echo "dirty: $DIRTY"
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -62,14 +64,17 @@ jobs:
       - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
 
-      - name: Update Integrations List
-        run: |
-          npm run update-integrations-list
+      - run: npm ci
 
-      - id: read-integrations
+      - name: Update Integrations List
+        env:
+          DIRTY: ${{ env.dirty }}
         run: |
+          cd integration-tests
+          npm ci
+          npm run build
           echo "REPOS<<HEREDOC" >> $GITHUB_ENV
-          echo "$(cat .github/integrations.json)" >> $GITHUB_ENV
+          ./tester.js list --json $DIRTY -t ${{ secrets.GITHUB_TOKEN }} >> $GITHUB_ENV
           echo HEREDOC >> $GITHUB_ENV
 
       - name: Show List
