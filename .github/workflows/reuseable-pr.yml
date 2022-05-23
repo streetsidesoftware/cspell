@@ -76,7 +76,7 @@ jobs:
         run: |
           echo $git_body
 
-      - run: exit 1
+      # - run: exit 1
 
       - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
         if: env.git_status == 'dirty'
