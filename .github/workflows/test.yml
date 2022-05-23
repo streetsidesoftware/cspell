@@ -157,7 +157,7 @@ jobs:
 
       - name: Display Config
         run: |
-          echo $(cat tsconfig.json)
+          echo "$(cat tsconfig.json)"
 
       - run: npm ci
       - run: npm run build

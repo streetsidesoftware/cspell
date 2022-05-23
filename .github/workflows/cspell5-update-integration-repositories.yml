@@ -49,7 +49,7 @@ jobs:
           git --no-pager diff --compact-summary >> $GITHUB_ENV
           echo 'DIFF' >> $GITHUB_ENV
       - name: Echo git_status
-        run: echo ${{ env.git_status }}
+        run: echo "${{ env.git_status }}"
       - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
         if: env.git_status == 'dirty'
         id: generate-token

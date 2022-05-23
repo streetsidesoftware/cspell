@@ -43,7 +43,7 @@ jobs:
         env:
           INPUT: ${{ toJSON(inputs) }}
         run: |
-          echo $INPUT
+          echo "$INPUT"
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -53,13 +53,9 @@ jobs:
       - name: apply diff
         env:
           PATCH: ${{ inputs.patch }}
-        # cspell:ignore hexdump
         run: |
-          mkdir -p temp
-          echo $PATCH
-          echo $PATCH > temp/patch.diff
-          git apply --allow-empty temp/patch.diff
-          cat temp/patch.diff | hexdump -C
+          echo "$PATCH"
+          echo "$PATCH" | git apply --allow-empty
 
       - name: Has changes
         run: |
@@ -71,16 +67,16 @@ jobs:
           BODY: ${{ inputs.body }}
         run: |
           echo 'git_body<<DIFF' >> $GITHUB_ENV
-          echo $BODY >> $GITHUB_ENV
+          echo "$BODY" >> $GITHUB_ENV
           git --no-pager diff --compact-summary >> $GITHUB_ENV
           echo 'DIFF' >> $GITHUB_ENV
 
       - name: Echo git_status
-        run: echo ${{ env.git_status }}
+        run: echo "${{ env.git_status }}"
 
       - name: Body
         run: |
-          echo $git_body
+          echo "$git_body"
 
       # - run: exit 1
 

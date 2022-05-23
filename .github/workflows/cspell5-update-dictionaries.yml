@@ -45,7 +45,7 @@ jobs:
           git --no-pager diff --compact-summary
 
       - name: Echo git_status
-        run: echo ${{ env.git_status }}
+        run: echo "${{ env.git_status }}"
 
       - name: Store Updated Package Info
         # if: env.git_status == 'dirty'
