@@ -32,6 +32,7 @@ const config = {
         'test-packages/test-cspell-eslint-plugin',
         'test-packages/test-cspell-eslint-plugin/**',
         'test-packages/yarn2/**',
+        'website',
         'website/**', // checked with a different config
     ],
     parserOptions: {
@@ -49,7 +50,13 @@ const config = {
                 'node/no-missing-import': [
                     'error',
                     {
-                        tryExtensions: ['.js', '.d.ts', '.ts', '.tsx'],
+                        tryExtensions: ['.js', '.d.ts', '.ts'],
+                    },
+                ],
+                'node/no-unsupported-features/es-syntax': [
+                    'error',
+                    {
+                        ignores: ['modules'],
                     },
                 ],
             },
