@@ -16,6 +16,7 @@ on:
       - "test-packages/**/package.json"
       - "test-packages/**/tsconfig.json"
       - "test-fixtures/**"
+      - "tsconfig*.json"
       - "!docs/**"
       - "!website/**"
   push:
@@ -123,3 +124,41 @@ jobs:
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
+
+  test-full-build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+
+        os:
+          - ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
+      - run: npm i -g npm@8
+      - run: npm -v
+
+      - name: Swap tsconfig.json
+        run: |
+          cp tsconfig-full.json tsconfig.json
+
+      - name: Display Config
+        run: |
+          echo $(cat tsconfig.json)
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
