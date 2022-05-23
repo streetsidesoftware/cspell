@@ -60,10 +60,10 @@ jobs:
       matrix:
         # List of repositories to check.
         # Use `repo-list.sh` in `integration-tests` to generate.
-        # repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
-        repo:
-          - prettier/prettier
-          - typescript-eslint/typescript-eslint
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   - prettier/prettier
+        #   - typescript-eslint/typescript-eslint
 
     steps:
       - name: Build Results
