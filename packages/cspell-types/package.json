@@ -24,7 +24,7 @@
     "compile": "tsc -p .",
     "test-schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
     "test": "jest && npm run test-schema",
-    "prepare": "npm run build"
+    "prepare": "echo Skip Building Types"
   },
   "repository": {
     "type": "git",

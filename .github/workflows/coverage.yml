@@ -12,6 +12,7 @@ on:
       - "packages/**/package.json"
       - ".github/workflows/coverage.yml"
       - "!docs/**"
+      - "!website/**"
   push:
     branches:
       - main
@@ -22,6 +23,7 @@ on:
       - "**/*.js"
       - ".github/workflows/coverage.yml"
       - "!docs/**"
+      - "!website/**"
 
 permissions:
   contents: read
@@ -43,16 +45,6 @@ jobs:
 
       - run: npm i -g npm@8
       - run: npm -v
-
-      - name: Restore CSpell cache
-        uses: actions/cache@v3
-        with:
-          key: cspell-cache-${{ runner.os }}-coverage-${{ hashFiles('**/*.ts', '**/*.md') }}
-          path: |
-            .cspell/.cspellcache
-          restore-keys: |
-            cspell-cache-${{ runner.os }}-coverage-
-            cspell-cache-${{ runner.os }}-
 
       - run: npm ci
       - run: npm run build

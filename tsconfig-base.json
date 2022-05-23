@@ -1,0 +1,27 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "CSpell Monorepo Base Config",
+    "extends": "@tsconfig/node12/tsconfig.json",
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "declaration": true,
+        "declarationMap": true,
+        "esModuleInterop": true,
+        "exactOptionalPropertyTypes": true,
+        "moduleResolution": "node",
+        "newLine": "LF",
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": false, // This is picked up by eslint
+        "noUnusedParameters": false, // This is picked up by eslint
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strict": true,
+        "types": [
+            "node",
+            "jest"
+        ]
+    }
+}

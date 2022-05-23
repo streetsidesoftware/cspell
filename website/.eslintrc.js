@@ -9,7 +9,7 @@ const config = {
     },
     extends: [
         'eslint:recommended',
-        'plugin:node/recommended',
+        // 'plugin:node/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:promise/recommended',
@@ -24,16 +24,6 @@ const config = {
         '**/dist/**',
         '**/node_modules/**',
         '**/.docusaurus/**',
-        'docs/_site/**',
-        'docs/docsV2/**',
-        'integration-tests/repositories/**',
-        'packages/*/fixtures/**',
-        'test-fixtures/**',
-        'test-packages/test-cspell-eslint-plugin',
-        'test-packages/test-cspell-eslint-plugin/**',
-        'test-packages/yarn2/**',
-        'website',
-        'website/**', // checked with a different config
     ],
     parserOptions: {
         ecmaVersion: 2020,
@@ -50,15 +40,20 @@ const config = {
                 'node/no-missing-import': [
                     'error',
                     {
-                        tryExtensions: ['.js', '.d.ts', '.ts'],
+                        tryExtensions: ['.js', '.d.ts', '.ts', '.tsx'],
                     },
                 ],
-                'node/no-unsupported-features/es-syntax': [
-                    'error',
-                    {
-                        ignores: ['modules'],
-                    },
-                ],
+            },
+        },
+        {
+            files: '**/*.tsx',
+            extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript'],
+            parser: '@typescript-eslint/parser',
+            plugins: ['@typescript-eslint'],
+            rules: {
+                '@typescript-eslint/no-var-requires': 'warn',
+                '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+                'import/no-unresolved': [2, { ignore: ['^@theme', '^@docusaurus', '^@site'] }],
             },
         },
         {

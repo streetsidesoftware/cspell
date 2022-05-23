@@ -1,14 +1,12 @@
-name: Lint
+name: Website - Lint
 on:
   pull_request:
-    paths-ignore:
-      - "docs/**"
+    paths:
       - "website/**"
   push:
     branches:
       - main
-    paths-ignore:
-      - "docs/**"
+    paths:
       - "website/**"
 
 permissions:
@@ -25,5 +23,5 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
-      - run: npm run lint-ci
+      - run: npm run install-website
+      - run: npm run website-lint-ci
