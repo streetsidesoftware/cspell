@@ -36,6 +36,7 @@ jobs:
     uses: ./.github/workflows/reuseable-load-integrations-repo-list.yml
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
+      dirty: true
 
   build:
     needs:
