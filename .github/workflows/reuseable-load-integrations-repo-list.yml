@@ -68,9 +68,9 @@ jobs:
 
       - id: read-integrations
         run: |
-          echo REPOS<<REPOS >> $GITHUB_ENV
+          echo "REPOS<<HEREDOC" >> $GITHUB_ENV
           echo $(cat .github/integrations.json) >> $GITHUB_ENV
-          echo REPOS >> $GITHUB_ENV
+          echo HEREDOC >> $GITHUB_ENV
 
       - name: Show List
         run: |
