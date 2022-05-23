@@ -67,6 +67,8 @@ jobs:
       - run: npm ci
 
       - name: Update Integrations List
+        env:
+          DIRTY: ${{ env.dirty }}
         run: |
           cd integration-tests
           npm ci
