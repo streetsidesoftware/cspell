@@ -1,5 +1,5 @@
 import { check } from './check';
-import { addRepository, listRepositories } from './repositoryHelper';
+import { addRepository, listRepositories, ListRepositoryOptions } from './repositoryHelper';
 import { createCommand } from 'commander';
 import * as commander from 'commander';
 import os from 'os';
@@ -60,14 +60,23 @@ function run(program: commander.Command) {
             }
         );
 
+    interface ListOptions extends Omit<ListRepositoryOptions, 'exclude' | 'patterns'> {
+        exclude?: string[];
+        githubToken?: string | undefined;
+    }
+
     program
         .command('list')
         .argument('[patterns...]', 'Only repositories whose name contain the pattern.')
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
-        .option('-t, --githubToken <token>', 'GitHub Personal Access Token')
+        .option('-t, --githubToken <token>', 'GitHub Personal Access Token.')
+        .option('--dirty', 'Only list dirty repositories.')
+        .option('--no-show-is-dirty', 'Do not highlight dirty Repositories.')
+        .option('--json', 'Write the output in JSON format.')
         .description('List configured repositories.')
-        .action((patterns: string[] = [], options: { exclude?: string[]; githubToken?: string | undefined }) => {
+        .action((patterns: string[] = [], options: ListOptions) => {
             const opts = {
+                ...options,
                 patterns,
                 exclude: options?.exclude || [],
             };

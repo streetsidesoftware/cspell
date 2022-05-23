@@ -134,9 +134,25 @@ async function cloneRepo(
     return true;
 }
 
-export type ListRepositoryOptions = ShouldCheckOptions;
+export interface ListRepositoryOptions extends ShouldCheckOptions {
+    /**
+     * Output in JSON List format
+     */
+    json?: boolean;
+
+    /**
+     * List ONLY dirty
+     */
+    dirty?: boolean;
+
+    /**
+     * Indicate that a repository is stale.
+     */
+    showIsDirty?: boolean;
+}
 
 export async function listRepositories(options: ListRepositoryOptions): Promise<void> {
+    const showDirty = options.showIsDirty ?? true;
     const config = Config.readConfig();
     const pValues = config.repositories
         .filter((rep) => shouldCheckRepo(rep, options))
@@ -152,11 +168,19 @@ export async function listRepositories(options: ListRepositoryOptions): Promise<
     const compare = new Intl.Collator().compare;
     const values = (await Promise.all(pValues)).sort((a, b) => compare(a.path, b.path));
 
-    values.forEach((rep) => {
-        if (rep.dirty) {
-            console.log(Chalk.red`${rep.path} *`);
+    const dirty = new Set(values.filter((r) => r.dirty).map((r) => r.path));
+    const paths = options.dirty ? [...dirty] : values.map((r) => r.path);
+
+    if (options.json) {
+        console.log(JSON.stringify(paths));
+        return;
+    }
+
+    paths.forEach((path) => {
+        if (showDirty && dirty.has(path)) {
+            console.log(Chalk.red`${path} *`);
         } else {
-            console.log(rep.path);
+            console.log(path);
         }
     });
 }
