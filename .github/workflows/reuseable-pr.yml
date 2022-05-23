@@ -1,4 +1,4 @@
-name: Build Docs
+name: R - Create PR
 
 on:
   workflow_call:
@@ -36,12 +36,12 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      REF_BRANCH: ${{ input.base }}
+      REF_BRANCH: ${{ inputs.base }}
 
     steps:
       - name: Input
         env:
-          INPUT: ${{ toJSON(input) }}
+          INPUT: ${{ toJSON(inputs) }}
         run: |
           echo $INPUT
 
@@ -52,7 +52,7 @@ jobs:
 
       - name: apply diff
         env:
-          PATCH: ${{ input.patch }}
+          PATCH: ${{ inputs.patch }}
         run: echo $PATCH | git apply --allow-empty -
 
       - name: Has changes
@@ -62,7 +62,7 @@ jobs:
 
       - name: Gen Body
         env:
-          BODY: ${{ input.body }}
+          BODY: ${{ inputs.body }}
         run: |
           echo 'git_body<<DIFF' >> $GITHUB_ENV
           echo $BODY >> $GITHUB_ENV
@@ -89,9 +89,9 @@ jobs:
         uses: peter-evans/create-pull-request@f094b77505fb89581e68a1163fbd2fffece39da1 # v4
         with:
           commit-message: ${{ input.commit-message }}
-          branch: ${{ input.branch }}
-          base: ${{ input.base }}
-          title: ${{ input.title || input.commit-message }}
+          branch: ${{ inputs.branch }}
+          base: ${{ inputs.base }}
+          title: ${{ inputs.title || inputs.commit-message }}
           token: ${{ steps.generate-token.outputs.token }}
           body: ${{ env.git_body }}
           delete-branch: true
