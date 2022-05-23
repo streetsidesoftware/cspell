@@ -1,0 +1,38 @@
+name: Website - Build and Test
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "website/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - "website/**"
+  # Run on demand
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3.2.0
+        with:
+          node-version: 16.x
+          cache: npm
+
+      - name: Build website
+        run: |
+          cd website
+          npm ci
+          npm run build
+
+      # Ensure the repository is clean after build & test
+      - run: git --no-pager diff --compact-summary --exit-code
