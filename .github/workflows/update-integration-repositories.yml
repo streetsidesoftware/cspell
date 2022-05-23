@@ -2,6 +2,10 @@ name: Update Integration Test Repositories
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch or hash
+        required: false
   schedule:
     - cron: "0 8 * * 1" # Monday at 8 UTC
 
@@ -19,11 +23,12 @@ jobs:
   calc-ref:
     runs-on: ubuntu-latest
     outputs:
-      ref: ${{ env.REF_BRANCH }}
+      ref: ${{ github.event.inputs.ref || env.REF_BRANCH }}
     steps:
       - name: Ref Branch
         run: |
-          echo "${{ env.REF_BRANCH }}"
+          echo Ref: "${{ env.REF_BRANCH }}"
+          echo Input: "${{ github.event.inputs.ref }}"
 
   load-integrations:
     needs:
