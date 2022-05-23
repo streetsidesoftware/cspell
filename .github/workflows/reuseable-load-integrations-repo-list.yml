@@ -64,6 +64,8 @@ jobs:
       - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
 
+      - run: npm ci
+
       - name: Update Integrations List
         run: |
           cd integration-tests
