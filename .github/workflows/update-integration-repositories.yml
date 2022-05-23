@@ -134,7 +134,11 @@ jobs:
 
   pr:
     runs-on: ubuntu-latest
-    needs: integrations
+    needs:
+      - integrations
+
+    env:
+      REF_BRANCH: ${{ needs.integrations.outputs.ref }}
 
     steps:
       - name: Checkout
