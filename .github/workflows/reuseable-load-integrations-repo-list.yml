@@ -1,6 +1,10 @@
 # Reusable Workflow
 name: R - Load Integrations Repo List
 
+# Export list of repositories to check.
+# Reads the list of integrations from ./.github/integrations.json
+# Use `repo-list.sh` in `integration-tests` to generate.
+
 on:
   workflow_dispatch:
     inputs:
@@ -34,7 +38,7 @@ jobs:
     env:
       REF_BRANCH: ${{ inputs.ref || github.event.inputs.ref }}
     outputs:
-      repos: ${{ steps.read-integrations.outputs.repos }}
+      repos: ${{ env.REPOS }}
       ref: ${{ env.REF_BRANCH }}
 
     steps:
@@ -57,7 +61,17 @@ jobs:
 
       - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
+
+      - name: Update Integrations List
+        run: |
+          npm run update-integrations-list
+
       - id: read-integrations
         run: |
-          REPOS=$(tr "\n" " " < .github/integrations.json)
-          echo ::set-output name=repos::$REPOS
+          echo REPOS<<REPOS >> $GITHUB_ENV
+          echo $(cat .github/integrations.json) >> $GITHUB_ENV
+          echo REPOS >> $GITHUB_ENV
+
+      - name: Show List
+        run: |
+          echo $REPOS
