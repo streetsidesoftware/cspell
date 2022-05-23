@@ -24,8 +24,8 @@
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
     "eslint-fix": "eslint . --fix --cache",
     "ibt": "npm install && npm run build && npm test",
-    "install": "lerna bootstrap --ci && npm run install-docs",
-    "install-docs": "cd website && npm ci",
+    "install": "lerna bootstrap --ci",
+    "install-website": "cd website && npm ci",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\"",
     "lint-docs-ci": "prettier -c \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
     "lint-docs": "prettier -w \"docs/**/*.{md,markdown,yaml,yml,json,html,htm}\"",
@@ -57,6 +57,7 @@
     "update-dictionary-packages": "lerna exec \"npx npm-check-updates -t minor -u \\\"/@cspell\\\\/dict/\\\" && npm i\" --scope \"@cspell/cspell-bundled-dicts\" && lerna bootstrap",
     "update-integrations-and-snapshots": "lerna run update-repositories --scope cspell-integration-tests",
     "update-integrations-list": "cd integration-tests && ./repo-list.sh",
+    "update-schema": "cd packages/cspell-types && npm i && npm run build",
     "update-snapshots": "lerna run update-snapshots-only --scope cspell-integration-tests"
   },
   "repository": {
