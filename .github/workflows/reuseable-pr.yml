@@ -53,12 +53,13 @@ jobs:
       - name: apply diff
         env:
           PATCH: ${{ inputs.patch }}
+        # cspell:ignore hexdump
         run: |
           mkdir -p temp
           echo $PATCH
           echo $PATCH > temp/patch.diff
           git apply --allow-empty temp/patch.diff
-          cat temp/patch.diff
+          cat temp/patch.diff | hexdump -C
 
       - name: Has changes
         run: |
