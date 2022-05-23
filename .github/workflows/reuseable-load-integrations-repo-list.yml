@@ -72,7 +72,7 @@ jobs:
           npm ci
           npm run build
           echo "REPOS<<HEREDOC" >> $GITHUB_ENV
-          ./tester list --json $DIRTY -t ${{ secrets.GITHUB_TOKEN }} >> $GITHUB_ENV
+          ./tester.js list --json $DIRTY -t ${{ secrets.GITHUB_TOKEN }} >> $GITHUB_ENV
           echo HEREDOC >> $GITHUB_ENV
 
       - name: Show List
