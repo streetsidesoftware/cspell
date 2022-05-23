@@ -2,6 +2,10 @@ name: Update Integration Test Repositories
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Branch or hash
+        required: false
   schedule:
     - cron: "0 8 * * 1" # Monday at 8 UTC
 
@@ -10,7 +14,7 @@ permissions:
 
 env:
   NEW_BRANCH: "update-integration-repositories"
-  REF_BRANCH: main
+  REF_BRANCH_G: main
   RUNS_ON: ubuntu-latest
   NODE_VERSION: "16.x"
   NPM_VERSION: "8"
@@ -19,11 +23,12 @@ jobs:
   calc-ref:
     runs-on: ubuntu-latest
     outputs:
-      ref: ${{ env.REF_BRANCH }}
+      ref: ${{ github.event.inputs.ref || env.REF_BRANCH_G }}
     steps:
       - name: Ref Branch
         run: |
-          echo "${{ env.REF_BRANCH }}"
+          echo Ref: "${{ env.REF_BRANCH_G }}"
+          echo Input: "${{ github.event.inputs.ref }}"
 
   load-integrations:
     needs:
@@ -44,6 +49,10 @@ jobs:
     needs:
       - load-integrations
       - build
+      - calc-ref
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
 
     strategy:
       # the integration tests are independent, so we want to run them all.
@@ -129,7 +138,12 @@ jobs:
 
   pr:
     runs-on: ubuntu-latest
-    needs: integrations
+    needs:
+      - integrations
+      - calc-ref
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
 
     steps:
       - name: Checkout
@@ -149,6 +163,10 @@ jobs:
 
       - name: apply diff
         run: git apply --allow-empty temp/*.diff
+
+      - name: Update Integrations List
+        run: |
+          npm run update-integrations-list
 
       - name: Has changes
         run: |

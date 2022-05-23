@@ -56,6 +56,7 @@
     "update-packages-lerna": "lerna exec \"npx npm-check-updates -t minor -u && rimraf node_modules package-lock.json && npm i\" && lerna bootstrap --no-ci",
     "update-dictionary-packages": "lerna exec \"npx npm-check-updates -t minor -u \\\"/@cspell\\\\/dict/\\\" && npm i\" --scope \"@cspell/cspell-bundled-dicts\" && lerna bootstrap",
     "update-integrations-and-snapshots": "lerna run update-repositories --scope cspell-integration-tests",
+    "update-integrations-list": "cd integration-tests && ./repo-list.sh",
     "update-snapshots": "lerna run update-snapshots-only --scope cspell-integration-tests"
   },
   "repository": {
