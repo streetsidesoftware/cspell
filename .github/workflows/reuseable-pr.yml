@@ -53,7 +53,10 @@ jobs:
       - name: apply diff
         env:
           PATCH: ${{ inputs.patch }}
-        run: echo $PATCH | git apply --allow-empty
+        run: |
+          mkdir -p temp
+          echo $PATCH > temp/patch.diff
+          git apply --allow-empty temp/patch.diff
 
       - name: Has changes
         run: |
