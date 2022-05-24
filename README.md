@@ -24,7 +24,7 @@ The cspell mono-repo, a spell checker for code.
 ## Packages
 
 - [cspell](packages/cspell) [![Rate this package](https://badges.openbase.com/js/rating/cspell.svg?token=NCd/K4EgKKMIWnT0qBcs+gL4sv2mA/IYQQFOGOPx/IA=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) -- cspell command-line application
-- [@cspell/eslint-plugin](packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=9dPBKKWiTxr/FwtYOfX+WzQcZhrBr99xtLKwtxKCxMQ=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&utm_medium=badge&utm_campaign=verified-badge&utm_term=js/@cspell/eslint-plugin) -- CSpell ESLint Plugin
+- [@cspell/eslint-plugin](packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) -- CSpell ESLint Plugin
 - [cspell-bundled-dicts](packages/cspell-bundled-dicts) -- collection of dictionaries bundled with cspell.
 - [cspell-glob](packages/cspell-glob) -- glob library.
 - [cspell-io](packages/cspell-io) -- i/o library.
