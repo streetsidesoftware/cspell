@@ -17,6 +17,9 @@ Parsers transform the document text to prepare it for spell checking. This is a 
 
 - [Markdown > ignore formatting when spell checking Markdown · Issue #2672 · streetsidesoftware/cspell](https://github.com/streetsidesoftware/cspell/issues/2672)
 - [Latex special character codes · Issue #361 · streetsidesoftware/cspell](https://github.com/streetsidesoftware/cspell/issues/361)
+- [Feat: Only check spelling at declaration · Issue #87 · streetsidesoftware/vscode-spell-checker](https://github.com/streetsidesoftware/vscode-spell-checker/issues/87)
+- [Add general setting to restrict the scope to comments and strings only · Issue #116 · streetsidesoftware/vscode-spell-checker](https://github.com/streetsidesoftware/vscode-spell-checker/issues/116)
+- [Checker should have option to check code comments and strings only. · Issue #150 · streetsidesoftware/vscode-spell-checker](https://github.com/streetsidesoftware/vscode-spell-checker/issues/150)
 
 By providing the context / scope of the transformed text, powerful configurations become possible, see [Context and Scope](#context-and-scope).
 In addition, parsers will enable the spell checker to work on a wider range of documents than the existing spell checker, possibly unlocking PDF and other proprietary formats. Jupyter Notebooks are another perfect example of a file format that could benefit from a parser.
