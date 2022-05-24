@@ -7,7 +7,7 @@
 
 [![codecov](https://codecov.io/gh/streetsidesoftware/cspell/branch/main/graph/badge.svg?token=Dr4fi2Sy08)](https://codecov.io/gh/streetsidesoftware/cspell)
 [![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=main)](https://coveralls.io/github/streetsidesoftware/cspell)
-[![Rate this package](https://badges.openbase.com/js/rating/cspell.svg?token=NCd/K4EgKKMIWnT0qBcs+gL4sv2mA/IYQQFOGOPx/IA=)](https://openbase.com/js/cspell?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge)
+[![Rate this package](https://badges.openbase.com/js/rating/cspell.svg?token=NCd/K4EgKKMIWnT0qBcs+gL4sv2mA/IYQQFOGOPx/IA=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 The cspell mono-repo, a spell checker for code.
 
