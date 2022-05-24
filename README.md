@@ -8,7 +8,6 @@
 [![codecov](https://codecov.io/gh/streetsidesoftware/cspell/branch/main/graph/badge.svg?token=Dr4fi2Sy08)](https://codecov.io/gh/streetsidesoftware/cspell)
 [![Coverage Status](https://coveralls.io/repos/github/streetsidesoftware/cspell/badge.svg?branch=main)](https://coveralls.io/github/streetsidesoftware/cspell)
 
-
 The cspell mono-repo, a spell checker for code.
 
 ## Support Future Development
@@ -24,7 +23,7 @@ The cspell mono-repo, a spell checker for code.
 ## Packages
 
 - [cspell](packages/cspell) [![Verified on Openbase](https://badges.openbase.com/js/verified/cspell.svg?token=N5IXZIAqMY+0I+KuQhPpfoZYw0QUz/LiSYlOerD8Pio=)](https://openbase.com/js/cspell?utm_source=embedded&utm_medium=badge&utm_campaign=verified-badge&utm_term=js/cspell) -- cspell command-line application
-- [@cspell/eslint-plugin](packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&amp;utm_medium=badge&amp;utm_campaign=rate-badge) -- CSpell ESLint Plugin
+- [@cspell/eslint-plugin](packages/cspell-eslint-plugin) [![Verified on Openbase](https://badges.openbase.com/js/verified/@cspell/eslint-plugin.svg?token=SVzjSaHtOWCFmjBOgw1W6CuYHDw29Vx77pNj7v5lPRE=)](https://openbase.com/js/@cspell/eslint-plugin?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge) -- CSpell ESLint Plugin
 - [cspell-bundled-dicts](packages/cspell-bundled-dicts) -- collection of dictionaries bundled with cspell.
 - [cspell-glob](packages/cspell-glob) -- glob library.
 - [cspell-io](packages/cspell-io) -- i/o library.
