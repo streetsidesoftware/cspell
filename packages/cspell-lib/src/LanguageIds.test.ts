@@ -26,6 +26,7 @@ describe('Validate LanguageIds', () => {
         ${'path/Gemfile'}                    | ${[]}
         ${'my-cert.pem'}                     | ${['pem']}
         ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
+        ${'Dockerfile'}                      | ${['dockerfile']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.getLanguagesForBasename(filename)).toEqual(expected);
     });
