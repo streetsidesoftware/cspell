@@ -155,13 +155,12 @@ jobs:
         run: exit 1
 
       - name: Run Integration Tests ${{ matrix.repo }}
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
           && npm i
-          && npm run update-repositories -- ${{ matrix.repo }}
+          && npm run update-snapshots-only -- ${{ matrix.repo }}
 
       - name: Store Repo Diff
         id: step-repo-info
