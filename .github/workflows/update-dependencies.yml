@@ -102,6 +102,13 @@ jobs:
           mkdir temp
           git diff integration-tests > ${{ env.patch_path }}
 
+      - name: Store Patch
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.patch_artifact }}
+          path: ${{ env.patch_path }}
+          retention-days: 1
+
   pr:
     uses: ./.github/workflows/reuseable-pr-from-artifact.yml
     needs:
