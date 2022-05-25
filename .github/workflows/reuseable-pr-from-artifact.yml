@@ -63,7 +63,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ inputs.patch_artifact }}
-          path: ${{ inputs.patch_path }}
+          path: temp
+
+      - name: show downloaded
+        run: ls -alFR temp
+      - name: show diff
+        run: cat temp/*.diff
 
       - name: apply diff
         run: |

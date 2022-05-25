@@ -27,7 +27,7 @@ permissions:
 env:
   NEW_BRANCH: "update-dependencies-main"
   REF_BRANCH: main
-  patch_path: temp/patch.diff
+  patch_path: patch.diff
   patch_artifact: patch
 
 jobs:
@@ -47,8 +47,6 @@ jobs:
 
     env:
       UPDATE_SNAPSHOTS: ${{ github.event.inputs.updateSnapshots == 'yes' || github.event.inputs.updateSnapshots == 'y' }}
-      patch_path: temp/patch.diff
-      patch_artifact: patch
 
     steps:
       - name: Start
@@ -102,13 +100,13 @@ jobs:
         run: |
           mkdir temp
           git add .
-          git diff HEAD > ${{ env.patch_path }}
+          git diff HEAD > temp/${{ env.patch_path }}
 
       - name: Store Patch
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.patch_artifact }}
-          path: ${{ env.patch_path }}
+          path: temp/${{ env.patch_path }}
           retention-days: 1
 
   pr:
