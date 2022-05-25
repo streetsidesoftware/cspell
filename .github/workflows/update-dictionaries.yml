@@ -16,12 +16,11 @@ jobs:
   calc-ref:
     runs-on: ubuntu-latest
     outputs:
-      ref: ${{ github.event.inputs.ref || env.REF_BRANCH_G }}
+      ref: ${{ env.REF_BRANCH }}
     steps:
       - name: Ref Branch
         run: |
-          echo Ref: "${{ env.REF_BRANCH_G }}"
-          echo Input: "${{ github.event.inputs.ref }}"
+          echo Ref: "${{ env.REF_BRANCH }}"
 
   load-integrations:
     needs:
@@ -66,6 +65,9 @@ jobs:
           echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
           git --no-pager diff >> $GITHUB_ENV
           echo '__DIFF__' >> $GITHUB_ENV
+
+      - name: Show Patch
+        run: echo "$PATCH"
 
   build:
     needs:
