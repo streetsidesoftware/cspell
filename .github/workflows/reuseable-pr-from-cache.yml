@@ -60,6 +60,7 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Restore Cache
+        id: restore-cache
         env:
           patch_key: ${{ inputs.patch_cache_key }}
           patch_path: ${{ inputs.patch_cache_path }}
@@ -67,6 +68,10 @@ jobs:
         with:
           key: ${{ env.patch_key }}
           path: ${{ env.patch_path }}
+
+      - name: Check Build
+        if: ${{ !steps.restore-cache.outputs.cache-hit }}
+        run: exit 1
 
       - name: apply diff
         env:
