@@ -66,23 +66,23 @@ jobs:
       - name: Setup NPM
         run: npm i -g npm@8
 
-      # - name: Update Root
-      #   run: |
-      #     npm i
-      #     npx npm-check-updates -t minor -u
-      #     rm -rf node_modules package-lock.json
-
-      # - name: Install
-      #   run: npm install
-
-      # - name: Update packages
-      #   run: |
-      #     npm run update-packages
-
-      - name: Debug
+      - name: Update Root
         run: |
-          echo "Test File" > test_file.txt
-          echo "Append change" >> CHANGELOG.md
+          npm i
+          npx npm-check-updates -t minor -u
+          rm -rf node_modules package-lock.json
+
+      - name: Install
+        run: npm install
+
+      - name: Update packages
+        run: |
+          npm run update-packages
+
+      # - name: Debug
+      #   run: |
+      #     echo "Test File" > test_file.txt
+      #     echo "Append change" >> CHANGELOG.md
 
       - name: Build
         if: env.UPDATE_SNAPSHOTS == 'true'
