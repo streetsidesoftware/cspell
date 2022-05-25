@@ -71,6 +71,17 @@ jobs:
         run: |
           echo "$PATCH_DIFF"
 
+  check-result:
+    runs-on: ubuntu-latest
+    needs:
+      - calc-ref
+      - check-dictionaries
+      - load-integrations
+    steps:
+      - name: Show Needs
+        run: |
+          echo "Needs: ${{ toJSON(needs) }}"
+
   build:
     needs:
       - calc-ref
