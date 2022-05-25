@@ -169,6 +169,18 @@ jobs:
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
         run: exit 1
 
+      - name: Repo Info
+        id: step-repo-info
+        run: |
+          echo "::set-output name=repo-info::$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)"
+
+      - name: Cache Integration Test Repository Files
+        uses: actions/cache@v3
+        with:
+          key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
+          path: |
+            integration-tests/repositories/temp/${{ matrix.repo }}
+
       - name: Run Integration Tests ${{ matrix.repo }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
