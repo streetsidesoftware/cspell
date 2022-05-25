@@ -1,0 +1,20 @@
+{
+  "name": "cspell-doc-generator",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Document Generation Tools and Scripts",
+  "scripts": {
+    "build-cspell-types-docs": "rimraf ../docs/types/cspell-types && typedoc",
+    "test-build-docs": "typedoc --out ./temp/docs ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "typedoc-plugin-markdown": "^3.12.1",
+    "typedoc": "^0.22.15"
+  }
+}
