@@ -54,40 +54,57 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
+
       - name: Use Node.js
         uses: actions/setup-node@v3.2.0
         with:
           cache: npm
+
       - name: Setup NPM
         run: npm i -g npm@8
+
       - name: Update Root
         run: |
           npm i
           npx npm-check-updates -t minor -u
           rm -rf node_modules package-lock.json
+
       - name: Install
         run: npm install
+
       - name: Update packages
         run: |
           npm run update-packages
+
       - name: Build
         if: env.UPDATE_SNAPSHOTS == 'true'
         run: |
           npm run build
+
       - name: Update Integration Test Snapshots
         if: env.UPDATE_SNAPSHOTS == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run update-snapshots
+
       - name: Build Patch
+        env:
+          patch_path: temp/patch.diff
         run: |
-          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
-          git --no-pager diff >> $GITHUB_ENV
-          echo '__DIFF__' >> $GITHUB_ENV
+          mkdir temp
+          git diff integration-tests > ${{ env.patch_path }}
+
+      - name: Cache Patch
+        env:
+          patch_key: patch-cache-${{ hashFiles(env.patch_path) }}
+        uses: actions/cache@v3
+        with:
+          key: ${{ env.patch_key }}
+          path: ${{ env.patch_path }}
 
   pr:
-    uses: ./.github/workflows/reuseable-pr.yml
+    uses: ./.github/workflows/reuseable-pr-from-cache.yml
     needs:
       - update-dependencies
     with:
