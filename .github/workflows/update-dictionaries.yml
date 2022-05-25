@@ -89,10 +89,10 @@ jobs:
     uses: "./.github/workflows/reuseable-build-dist-cache.yml"
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
-      patch: ${{ needs.check-dictionaries.patch }}
+      patch: ${{ needs.check-dictionaries.outputs.patch }}
 
   integrations:
-    if: ${{ needs.check-dictionaries.patch }}
+    if: ${{ needs.check-dictionaries.outputs.patch }}
     runs-on: ubuntu-latest
     needs:
       - load-integrations
@@ -102,7 +102,7 @@ jobs:
 
     env:
       REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
-      PATCH: ${{ needs.check-dictionaries.patch }}
+      PATCH: ${{ needs.check-dictionaries.outputs.patch }}
 
     strategy:
       # the integration tests are independent, so we want to run them all.
