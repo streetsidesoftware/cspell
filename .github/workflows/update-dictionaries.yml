@@ -38,7 +38,7 @@ jobs:
       REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
     runs-on: ubuntu-latest
     outputs:
-      patch: ${{ env.PATCH }}
+      patch: ${{ env.PATCH_DIFF }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -62,12 +62,14 @@ jobs:
 
       - name: Build Patch
         run: |
-          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
+          echo 'PATCH_DIFF<<__DIFF__' >> $GITHUB_ENV
           git --no-pager diff >> $GITHUB_ENV
           echo '__DIFF__' >> $GITHUB_ENV
 
       - name: Show Patch
-        run: echo "$PATCH"
+        id: patch
+        run: |
+          echo "$PATCH_DIFF"
 
   build:
     needs:
