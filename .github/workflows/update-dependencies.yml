@@ -1,4 +1,4 @@
-name: Update Dependencies Main
+name: Update Dependencies
 
 on:
   push:
@@ -27,6 +27,8 @@ permissions:
 env:
   NEW_BRANCH: "update-dependencies-main"
   REF_BRANCH: main
+  patch_path: temp/patch.diff
+  patch_artifact: patch
 
 jobs:
   update-dependencies:
@@ -34,8 +36,6 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      patch_key: ${{ env.patch_key }}
-      patch_path: ${{ env.patch_path }}
       base: ${{ env.REF_BRANCH }}
       body: |
         ## Update ALL Dependencies (${{ env.REF_BRANCH }})
@@ -46,6 +46,7 @@ jobs:
     env:
       UPDATE_SNAPSHOTS: ${{ github.event.inputs.updateSnapshots == 'yes' || github.event.inputs.updateSnapshots == 'y' }}
       patch_path: temp/patch.diff
+      patch_artifact: patch
 
     steps:
       - name: Start
@@ -95,21 +96,13 @@ jobs:
           mkdir temp
           git diff integration-tests > ${{ env.patch_path }}
 
-      - name: Cache Patch
-        env:
-          patch_key: patch-cache-${{ hashFiles(env.patch_path) }}
-        uses: actions/cache@v3
-        with:
-          key: ${{ env.patch_key }}
-          path: ${{ env.patch_path }}
-
   pr:
-    uses: ./.github/workflows/reuseable-pr-from-cache.yml
+    uses: ./.github/workflows/reuseable-pr-from-artifact.yml
     needs:
       - update-dependencies
     with:
-      patch_cache_key: ${{ needs.update-dependencies.outputs.patch_key }}
-      patch_path: ${{ needs.update-dependencies.outputs.patch_path }}
+      patch_artifact: ${{ env.patch_artifact }}
+      patch_path: ${{ env.patch_path }}
       base: ${{ needs.update-dependencies.outputs.base }}
       body: ${{ needs.update-dependencies.outputs.body }}
       commit-message: ${{ needs.update-dependencies.outputs.commit-message }}
