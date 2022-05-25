@@ -1,0 +1,110 @@
+name: R - Create PR from Cache
+
+on:
+  workflow_call:
+    inputs:
+      patch_artifact:
+        description: Name of the Artifact
+        required: true
+        type: string
+      patch_path:
+        description: Path to path file stored in the Artifact
+        required: true
+        type: string
+      base:
+        description: The Base Ref to apply the diff
+        required: true
+        type: string
+      body:
+        description: Optional body of the PR
+        required: false
+        type: string
+      commit-message:
+        description: Commit Message for the PR
+        required: true
+        type: string
+      branch:
+        description: The Branch to create for the PR
+        required: true
+        type: string
+      title:
+        description: PR title - defaults to commit-message
+        required: false
+        type: string
+    secrets:
+      app_id:
+        required: true
+      private_key:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+
+    env:
+      REF_BRANCH: ${{ inputs.base }}
+
+    steps:
+      - name: Input
+        env:
+          INPUT: ${{ toJSON(inputs) }}
+        run: |
+          echo "$INPUT"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Restore Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.patch_artifact }}
+          path: ${{ inputs.patch_path }}
+
+      - name: apply diff
+        run: |
+          git apply --allow-empty ${{ env.patch_path }}
+
+      - name: Has changes
+        run: |
+          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
+          git --no-pager diff --compact-summary
+
+      - name: Gen Body
+        env:
+          BODY: ${{ inputs.body }}
+        run: |
+          echo 'git_body<<DIFF' >> $GITHUB_ENV
+          echo "$BODY" >> $GITHUB_ENV
+          git --no-pager diff --compact-summary >> $GITHUB_ENV
+          echo 'DIFF' >> $GITHUB_ENV
+
+      - name: Echo git_status
+        run: echo "${{ env.git_status }}"
+
+      - name: Body
+        run: |
+          echo "$git_body"
+
+      - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
+        if: env.git_status == 'dirty'
+        id: generate-token
+        with:
+          app_id: ${{ secrets.app_id }}
+          private_key: ${{ secrets.private_key }}
+
+      - name: Create Pull Request
+        if: env.git_status == 'dirty'
+        uses: peter-evans/create-pull-request@f094b77505fb89581e68a1163fbd2fffece39da1 # v4
+        with:
+          commit-message: ${{ inputs.commit-message }}
+          branch: ${{ inputs.branch }}
+          base: ${{ inputs.base }}
+          title: ${{ inputs.title || inputs.commit-message }}
+          token: ${{ steps.generate-token.outputs.token }}
+          body: ${{ env.git_body }}
+          delete-branch: true
