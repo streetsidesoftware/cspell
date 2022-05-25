@@ -1,4 +1,4 @@
-name: Update Dependencies Main
+name: Update Dependencies
 
 on:
   push:
@@ -27,6 +27,8 @@ permissions:
 env:
   NEW_BRANCH: "update-dependencies-main"
   REF_BRANCH: main
+  patch_path: patch.diff
+  patch_artifact: patch
 
 jobs:
   update-dependencies:
@@ -34,7 +36,8 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      patch: ${{ env.PATCH }}
+      patch_artifact: ${{ env.patch_artifact }}
+      patch_path: ${{ env.patch_path }}
       base: ${{ env.REF_BRANCH }}
       body: |
         ## Update ALL Dependencies (${{ env.REF_BRANCH }})
@@ -54,44 +57,60 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
+
       - name: Use Node.js
         uses: actions/setup-node@v3.2.0
         with:
           cache: npm
+
       - name: Setup NPM
         run: npm i -g npm@8
+
       - name: Update Root
         run: |
           npm i
           npx npm-check-updates -t minor -u
           rm -rf node_modules package-lock.json
+
       - name: Install
         run: npm install
+
       - name: Update packages
         run: |
           npm run update-packages
+
       - name: Build
         if: env.UPDATE_SNAPSHOTS == 'true'
         run: |
           npm run build
+
       - name: Update Integration Test Snapshots
         if: env.UPDATE_SNAPSHOTS == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run update-snapshots
+
       - name: Build Patch
         run: |
-          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
-          git --no-pager diff >> $GITHUB_ENV
-          echo '__DIFF__' >> $GITHUB_ENV
+          mkdir temp
+          git add .
+          git diff HEAD > temp/${{ env.patch_path }}
+
+      - name: Store Patch
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.patch_artifact }}
+          path: temp/${{ env.patch_path }}
+          retention-days: 1
 
   pr:
-    uses: ./.github/workflows/reuseable-pr.yml
+    uses: ./.github/workflows/reuseable-pr-from-artifact.yml
     needs:
       - update-dependencies
     with:
-      patch: ${{ needs.update-dependencies.outputs.patch }}
+      patch_artifact: ${{ needs.update-dependencies.outputs.patch_artifact }}
+      patch_path: ${{ needs.update-dependencies.outputs.patch_path }}
       base: ${{ needs.update-dependencies.outputs.base }}
       body: ${{ needs.update-dependencies.outputs.body }}
       commit-message: ${{ needs.update-dependencies.outputs.commit-message }}

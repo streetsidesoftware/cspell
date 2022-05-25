@@ -1,12 +1,17 @@
-name: R - Create PR
+name: R - Create PR from Artifact
 
 on:
   workflow_call:
     inputs:
-      patch:
-        description: Patch to apply
+      patch_artifact:
+        description: Name of the Artifact
         required: true
         type: string
+      patch_path:
+        description: Patch diff files
+        required: false
+        type: string
+        default: "*.diff"
       base:
         description: The Base Ref to apply the diff
         required: true
@@ -44,22 +49,31 @@ jobs:
       REF_BRANCH: ${{ inputs.base }}
 
     steps:
-      # - name: Input
-      #   env:
-      #     INPUT: ${{ toJSON(inputs) }}
-      #   run: |
-      #     echo "$INPUT"
+      - name: Input
+        env:
+          INPUT: ${{ toJSON(inputs) }}
+        run: |
+          echo "$INPUT"
 
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
 
+      - name: Restore Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.patch_artifact }}
+          path: temp
+
+      - name: show downloaded
+        run: ls -alFR temp
+      # - name: show diff
+      #   run: cat temp/*.diff
+
       - name: apply diff
-        env:
-          PATCH: ${{ inputs.patch }}
         run: |
-          echo "$PATCH" | git apply --allow-empty
+          git apply --allow-empty temp/${{ inputs.patch_path }}
 
       - name: Has changes
         run: |
