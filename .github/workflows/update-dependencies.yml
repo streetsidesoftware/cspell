@@ -100,7 +100,7 @@ jobs:
       - name: Build Patch
         run: |
           mkdir temp
-          git diff integration-tests > ${{ env.patch_path }}
+          git diff > ${{ env.patch_path }}
 
       - name: Store Patch
         uses: actions/upload-artifact@v3
