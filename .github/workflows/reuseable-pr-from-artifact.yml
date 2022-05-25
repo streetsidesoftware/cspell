@@ -73,7 +73,6 @@ jobs:
       - name: apply diff
         run: |
           git apply --allow-empty temp/${{ inputs.patch_path }}
-          git add .
 
       - name: Has changes
         run: |
