@@ -183,7 +183,7 @@ jobs:
           mkdir temp
           REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
           echo "${{ matrix.repo }} =>" $REPO
-          git diff > temp/$REPO.diff
+          git diff integration-tests > temp/$REPO.diff
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
@@ -196,9 +196,11 @@ jobs:
     needs:
       - integrations
       - calc-ref
+      - check-dictionaries
 
     env:
       REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+      PATCH_DICTS: ${{ needs.check-dictionaries.outputs.patch }}
 
     outputs:
       patch: ${{ env.PATCH }}
@@ -226,7 +228,9 @@ jobs:
         run: cat temp/*.diff
 
       - name: apply diff
-        run: git apply --allow-empty temp/*.diff
+        run: |
+          echo "$PATCH_DICTS" | git apply
+          git apply --allow-empty temp/*.diff
 
       - name: Update Integrations List
         run: |
