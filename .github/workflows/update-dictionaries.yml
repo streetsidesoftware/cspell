@@ -190,7 +190,6 @@ jobs:
           && npm run update-snapshots-only -- ${{ matrix.repo }}
 
       - name: Store Repo Diff
-        id: step-repo-info
         run: |
           mkdir temp
           REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
