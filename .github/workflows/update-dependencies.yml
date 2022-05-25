@@ -45,6 +45,7 @@ jobs:
 
     env:
       UPDATE_SNAPSHOTS: ${{ github.event.inputs.updateSnapshots == 'yes' || github.event.inputs.updateSnapshots == 'y' }}
+      patch_path: temp/patch.diff
 
     steps:
       - name: Start
@@ -90,8 +91,6 @@ jobs:
           npm run update-snapshots
 
       - name: Build Patch
-        env:
-          patch_path: temp/patch.diff
         run: |
           mkdir temp
           git diff integration-tests > ${{ env.patch_path }}
