@@ -7,7 +7,7 @@ on:
         description: Cache Key
         required: true
         type: string
-      patch_cache_path:
+      patch_path:
         description: Path to path file
         required: true
         type: string
@@ -74,8 +74,6 @@ jobs:
         run: exit 1
 
       - name: apply diff
-        env:
-          PATCH: ${{ inputs.patch }}
         run: |
           git apply --allow-empty ${{ env.patch_path }}
 

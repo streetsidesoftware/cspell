@@ -109,7 +109,7 @@ jobs:
       - update-dependencies
     with:
       patch_cache_key: ${{ needs.update-dependencies.outputs.patch_key }}
-      patch_cache_path: ${{ needs.update-dependencies.outputs.patch_path }}
+      patch_path: ${{ needs.update-dependencies.outputs.patch_path }}
       base: ${{ needs.update-dependencies.outputs.base }}
       body: ${{ needs.update-dependencies.outputs.body }}
       commit-message: ${{ needs.update-dependencies.outputs.commit-message }}
