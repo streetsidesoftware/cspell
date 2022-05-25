@@ -13,11 +13,17 @@ env:
   REF_BRANCH: main
 
 jobs:
-  check-dictionaries:
+  update-dictionaries:
     if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     outputs:
-      dirty: ${{ env.git_status == 'dirty' }}
+      patch: ${{ env.PATCH }}
+      base: ${{ env.REF_BRANCH }}
+      body: |
+        ## Update Dictionaries (${{ env.REF_BRANCH }})
+      commit-message: "ci: Workflow Bot -- Update Dictionaries"
+      branch: ${{ env.NEW_BRANCH }}
+      title: "ci: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -39,85 +45,24 @@ jobs:
         run: |
           npm run update-dictionary-packages
 
-      - name: Has changes
+      - name: Build Patch
         run: |
-          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
-          git --no-pager diff --compact-summary
+          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
+          git --no-pager diff >> $GITHUB_ENV
+          echo '__DIFF__' >> $GITHUB_ENV
 
-      - name: Echo git_status
-        run: echo "${{ env.git_status }}"
-
-      - name: Store Updated Package Info
-        # if: env.git_status == 'dirty'
-        uses: actions/upload-artifact@v3
-        with:
-          name: cspell-bundled-dicts
-          path: |
-            packages/cspell-bundled-dicts/package*.json
-          retention-days: 1
-
-  update-dictionaries:
-    needs: check-dictionaries
-    if: ${{ needs.check-dictionaries.outputs.dirty == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ env.REF_BRANCH }}
-
-      - name: Use Node.js
-        uses: actions/setup-node@v3.2.0
-        with:
-          cache: npm
-
-      - name: Setup NPM
-        run: |
-          npm i -g npm@8
-
-      - name: Restore Packages
-        uses: actions/download-artifact@v3
-        with:
-          name: cspell-bundled-dicts
-          path: |
-            packages/cspell-bundled-dicts
-
-      - name: Display structure of downloaded files
-        run: ls -alF
-        working-directory: packages/cspell-bundled-dicts
-
-      - name: Install
-        run: npm install
-
-      - name: Build
-        run: |
-          npm run build
-
-      - name: Update Integration Test Snapshots
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm run update-snapshots
-
-      - name: Gen Body
-        run: |
-          echo 'git_body<<DIFF' >> $GITHUB_ENV
-          git --no-pager diff --compact-summary >> $GITHUB_ENV
-          echo 'DIFF' >> $GITHUB_ENV
-
-      - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
-        id: generate-token
-        with:
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@f094b77505fb89581e68a1163fbd2fffece39da1 # v4
-        with:
-          commit-message: "ci: Workflow Bot -- Update Dictionaries"
-          branch: ${{ env.NEW_BRANCH }}
-          base: ${{ env.REF_BRANCH }}
-          title: "ci: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
-          token: ${{ steps.generate-token.outputs.token }}
-          body: ${{ env.git_body }}
-          delete-branch: true
+  pr:
+    uses: ./.github/workflows/reuseable-pr.yml
+    if: ${{ needs.update-dictionaries.outputs.patch }}
+    needs:
+      - update-dictionaries
+    with:
+      patch: ${{ needs.update-dictionaries.outputs.patch }}
+      base: ${{ needs.update-dictionaries.outputs.base }}
+      body: ${{ needs.update-dictionaries.outputs.body }}
+      commit-message: ${{ needs.update-dictionaries.outputs.commit-message }}
+      branch: ${{ needs.update-dictionaries.outputs.branch }}
+      title: ${{ needs.update-dictionaries.outputs.title }}
+    secrets:
+      app_id: ${{ secrets.AUTOMATION_APP_ID }}
+      private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
