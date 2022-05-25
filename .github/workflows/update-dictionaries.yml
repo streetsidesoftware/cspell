@@ -13,17 +13,33 @@ env:
   REF_BRANCH: main
 
 jobs:
-  update-dictionaries:
+  calc-ref:
+    runs-on: ubuntu-latest
+    outputs:
+      ref: ${{ github.event.inputs.ref || env.REF_BRANCH_G }}
+    steps:
+      - name: Ref Branch
+        run: |
+          echo Ref: "${{ env.REF_BRANCH_G }}"
+          echo Input: "${{ github.event.inputs.ref }}"
+
+  load-integrations:
+    needs:
+      - calc-ref
+    uses: ./.github/workflows/reuseable-load-integrations-repo-list.yml
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+      dirty: false
+
+  check-dictionaries:
     if: github.repository_owner == 'streetsidesoftware'
+    needs:
+      - calc-ref
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
     runs-on: ubuntu-latest
     outputs:
       patch: ${{ env.PATCH }}
-      base: ${{ env.REF_BRANCH }}
-      body: |
-        ## Update Dictionaries (${{ env.REF_BRANCH }})
-      commit-message: "ci: Workflow Bot -- Update Dictionaries"
-      branch: ${{ env.NEW_BRANCH }}
-      title: "ci: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -51,18 +67,174 @@ jobs:
           git --no-pager diff >> $GITHUB_ENV
           echo '__DIFF__' >> $GITHUB_ENV
 
+  build:
+    needs:
+      - calc-ref
+      - check-dictionaries
+    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+      patch: ${{ needs.check-dictionaries.patch }}
+
+  integrations:
+    if: ${{ needs.check-dictionaries.patch }}
+    runs-on: ubuntu-latest
+    needs:
+      - load-integrations
+      - build
+      - calc-ref
+      - check-dictionaries
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+      PATCH: ${{ needs.check-dictionaries.patch }}
+
+    strategy:
+      # the integration tests are independent, so we want to run them all.
+      fail-fast: false
+      matrix:
+        # List of repositories to check.
+        # Use `repo-list.sh` in `integration-tests` to generate.
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   # - prettier/prettier
+        #   # - typescript-eslint/typescript-eslint
+        #   - wireapp/wire-webapp
+
+    steps:
+      - name: Build Results
+        run: |
+          echo "key: ${{ needs.build.outputs.key }}"
+          echo "path: ${{ needs.build.outputs.path }}"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+
+      - name: Patch
+        run: |
+          echo "$PATCH" | git apply
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3.2.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
+
+      - run: npm -v
+
+      - name: Cache Build
+        id: step-cache-build
+        uses: actions/cache@v3
+        with:
+          key: ${{ needs.build.outputs.key }}
+          path: ${{ needs.build.outputs.path }}
+
+      - name: Cached Results
+        run: |
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+
+      - name: Npm CI
+        run: npm ci
+
+      - name: Has Npm has failed?
+        if: ${{ failure() }}
+        run: |
+          ls -alF /home/runner/.npm/_logs/*.log
+          cat /home/runner/.npm/_logs/*.log
+
+      - name: Check Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        run: exit 1
+
+      - name: Run Integration Tests ${{ matrix.repo }}
+        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          cd integration-tests
+          && npm i
+          && npm run update-repositories -- ${{ matrix.repo }}
+
+      - name: Store Repo Diff
+        id: step-repo-info
+        run: |
+          mkdir temp
+          REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
+          echo "${{ matrix.repo }} =>" $REPO
+          git diff > temp/$REPO.diff
+      - name: store diff
+        uses: actions/upload-artifact@v3
+        with:
+          name: diffs
+          path: temp/*.diff
+          retention-days: 1
+
+  pr-setup:
+    runs-on: ubuntu-latest
+    needs:
+      - integrations
+      - calc-ref
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+
+    outputs:
+      patch: ${{ env.PATCH }}
+      base: ${{ env.REF_BRANCH }}
+      body: |
+        ## Update Dictionaries (${{ env.REF_BRANCH }})
+      commit-message: "ci: Workflow Bot -- Update Dictionaries"
+      branch: ${{ env.NEW_BRANCH }}
+      title: "ci: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: restore repos
+        uses: actions/download-artifact@v3
+        with:
+          name: diffs
+          path: temp
+      - name: show downloaded
+        run: ls -alF temp
+      - name: show diff
+        run: cat temp/*.diff
+
+      - name: apply diff
+        run: git apply --allow-empty temp/*.diff
+
+      - name: Update Integrations List
+        run: |
+          npm run update-integrations-list
+
+      - name: Build Patch
+        run: |
+          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
+          git --no-pager diff >> $GITHUB_ENV
+          echo '__DIFF__' >> $GITHUB_ENV
+
   pr:
     uses: ./.github/workflows/reuseable-pr.yml
-    if: ${{ needs.update-dictionaries.outputs.patch }}
     needs:
-      - update-dictionaries
+      - pr-setup
     with:
-      patch: ${{ needs.update-dictionaries.outputs.patch }}
-      base: ${{ needs.update-dictionaries.outputs.base }}
-      body: ${{ needs.update-dictionaries.outputs.body }}
-      commit-message: ${{ needs.update-dictionaries.outputs.commit-message }}
-      branch: ${{ needs.update-dictionaries.outputs.branch }}
-      title: ${{ needs.update-dictionaries.outputs.title }}
+      patch: ${{ needs.pr-setup.outputs.patch }}
+      base: ${{ needs.pr-setup.outputs.base }}
+      body: ${{ needs.pr-setup.outputs.body }}
+      commit-message: ${{ needs.pr-setup.outputs.commit-message }}
+      branch: ${{ needs.pr-setup.outputs.branch }}
+      title: ${{ needs.pr-setup.outputs.title }}
     secrets:
       app_id: ${{ secrets.AUTOMATION_APP_ID }}
       private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
