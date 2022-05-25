@@ -36,6 +36,8 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
+      patch_artifact: ${{ env.patch_artifact }}
+      patch_path: ${{ env.patch_path }}
       base: ${{ env.REF_BRANCH }}
       body: |
         ## Update ALL Dependencies (${{ env.REF_BRANCH }})
@@ -101,8 +103,8 @@ jobs:
     needs:
       - update-dependencies
     with:
-      patch_artifact: ${{ env.patch_artifact }}
-      patch_path: ${{ env.patch_path }}
+      patch_artifact: ${{ needs.update-dependencies.outputs.patch_artifact }}
+      patch_path: ${{ needs.update-dependencies.outputs.patch_path }}
       base: ${{ needs.update-dependencies.outputs.base }}
       body: ${{ needs.update-dependencies.outputs.body }}
       commit-message: ${{ needs.update-dependencies.outputs.commit-message }}
