@@ -12,6 +12,10 @@ on:
       ref:
         required: true
         type: string
+      patch:
+        description: Optional patch to apply before building.
+        required: false
+        type: string
     outputs:
       key:
         description: Cache Key
@@ -47,10 +51,20 @@ jobs:
         run: |
           echo "inputs: $INPUTS"
 
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+      - run: npm -v
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
+
+      - name: Patch
+        if: ${{ inputs.patch }}
+        env:
+          PATCH: ${{ inputs.patch }}
+        run: |
+          echo "$PATCH" | git apply
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3.2.0
@@ -62,7 +76,6 @@ jobs:
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
-      - run: npm i -g npm@${{ env.NPM_VERSION }}
       - run: npm -v
 
       - name: Calc Key and Path

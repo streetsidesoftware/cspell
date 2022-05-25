@@ -13,11 +13,32 @@ env:
   REF_BRANCH: main
 
 jobs:
-  check-dictionaries:
-    if: github.repository_owner == 'streetsidesoftware'
+  calc-ref:
     runs-on: ubuntu-latest
     outputs:
-      dirty: ${{ env.git_status == 'dirty' }}
+      ref: ${{ env.REF_BRANCH }}
+    steps:
+      - name: Ref Branch
+        run: |
+          echo Ref: "${{ env.REF_BRANCH }}"
+
+  load-integrations:
+    needs:
+      - calc-ref
+    uses: ./.github/workflows/reuseable-load-integrations-repo-list.yml
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+      dirty: false
+
+  check-dictionaries:
+    if: github.repository_owner == 'streetsidesoftware'
+    needs:
+      - calc-ref
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+    runs-on: ubuntu-latest
+    outputs:
+      patch: ${{ env.PATCH_DIFF }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -39,85 +60,199 @@ jobs:
         run: |
           npm run update-dictionary-packages
 
-      - name: Has changes
+      - name: Build Patch
         run: |
-          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
-          git --no-pager diff --compact-summary
+          echo 'PATCH_DIFF<<__DIFF__' >> $GITHUB_ENV
+          git --no-pager diff >> $GITHUB_ENV
+          echo '__DIFF__' >> $GITHUB_ENV
 
-      - name: Echo git_status
-        run: echo "${{ env.git_status }}"
+      - name: Show Patch
+        id: patch
+        run: |
+          echo "$PATCH_DIFF"
 
-      - name: Store Updated Package Info
-        # if: env.git_status == 'dirty'
-        uses: actions/upload-artifact@v3
-        with:
-          name: cspell-bundled-dicts
-          path: |
-            packages/cspell-bundled-dicts/package*.json
-          retention-days: 1
-
-  update-dictionaries:
-    needs: check-dictionaries
-    if: ${{ needs.check-dictionaries.outputs.dirty == 'true' }}
+  check-result:
     runs-on: ubuntu-latest
+    needs:
+      - calc-ref
+      - check-dictionaries
+      - load-integrations
     steps:
-      - name: Checkout code
+      - name: Show Needs
+        run: |
+          echo "Needs: ${{ toJSON(needs) }}"
+
+  build:
+    needs:
+      - calc-ref
+      - check-dictionaries
+    uses: "./.github/workflows/reuseable-build-dist-cache.yml"
+    with:
+      ref: ${{ needs.calc-ref.outputs.ref }}
+      patch: ${{ needs.check-dictionaries.outputs.patch }}
+
+  integrations:
+    if: ${{ needs.check-dictionaries.outputs.patch }}
+    runs-on: ubuntu-latest
+    needs:
+      - load-integrations
+      - build
+      - calc-ref
+      - check-dictionaries
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+      PATCH: ${{ needs.check-dictionaries.outputs.patch }}
+
+    strategy:
+      # the integration tests are independent, so we want to run them all.
+      fail-fast: false
+      matrix:
+        # List of repositories to check.
+        # Use `repo-list.sh` in `integration-tests` to generate.
+        repo: ${{ fromJSON(needs.load-integrations.outputs.repos) }}
+        # repo:
+        #   # - prettier/prettier
+        #   # - typescript-eslint/typescript-eslint
+        #   - wireapp/wire-webapp
+
+    steps:
+      - name: Build Results
+        run: |
+          echo "key: ${{ needs.build.outputs.key }}"
+          echo "path: ${{ needs.build.outputs.path }}"
+
+      - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Use Node.js
+      - run: npm i -g npm@${{ env.NPM_VERSION }}
+
+      - name: Patch
+        run: |
+          echo "$PATCH" | git apply
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3.2.0
         with:
-          cache: npm
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: |
+            package-lock.json
+            packages/*/package-lock.json
+            integration-tests/package-lock.json
 
-      - name: Setup NPM
-        run: |
-          npm i -g npm@8
+      - run: npm -v
 
-      - name: Restore Packages
-        uses: actions/download-artifact@v3
+      - name: Cache Build
+        id: step-cache-build
+        uses: actions/cache@v3
         with:
-          name: cspell-bundled-dicts
-          path: |
-            packages/cspell-bundled-dicts
+          key: ${{ needs.build.outputs.key }}
+          path: ${{ needs.build.outputs.path }}
 
-      - name: Display structure of downloaded files
-        run: ls -alF
-        working-directory: packages/cspell-bundled-dicts
-
-      - name: Install
-        run: npm install
-
-      - name: Build
+      - name: Cached Results
         run: |
-          npm run build
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      - name: Update Integration Test Snapshots
+      - name: Npm CI
+        run: npm ci
+
+      - name: Has Npm has failed?
+        if: ${{ failure() }}
+        run: |
+          ls -alF /home/runner/.npm/_logs/*.log
+          cat /home/runner/.npm/_logs/*.log
+
+      - name: Check Build
+        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        run: exit 1
+
+      - name: Run Integration Tests ${{ matrix.repo }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          cd integration-tests
+          && npm i
+          && npm run update-snapshots-only -- ${{ matrix.repo }}
+
+      - name: Store Repo Diff
+        id: step-repo-info
         run: |
-          npm run update-snapshots
+          mkdir temp
+          REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
+          echo "${{ matrix.repo }} =>" $REPO
+          git diff integration-tests > temp/$REPO.diff
+      - name: store diff
+        uses: actions/upload-artifact@v3
+        with:
+          name: diffs
+          path: temp/*.diff
+          retention-days: 1
 
-      - name: Gen Body
+  pr-setup:
+    runs-on: ubuntu-latest
+    needs:
+      - integrations
+      - calc-ref
+      - check-dictionaries
+
+    env:
+      REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
+      PATCH_DICTS: ${{ needs.check-dictionaries.outputs.patch }}
+
+    outputs:
+      patch: ${{ env.PATCH }}
+      base: ${{ env.REF_BRANCH }}
+      body: |
+        ## Update Dictionaries (${{ env.REF_BRANCH }})
+      commit-message: "ci: Workflow Bot -- Update Dictionaries"
+      branch: ${{ env.NEW_BRANCH }}
+      title: "ci: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: restore repos
+        uses: actions/download-artifact@v3
+        with:
+          name: diffs
+          path: temp
+      - name: show downloaded
+        run: ls -alF temp
+      - name: show diff
+        run: cat temp/*.diff
+
+      - name: apply diff
         run: |
-          echo 'git_body<<DIFF' >> $GITHUB_ENV
-          git --no-pager diff --compact-summary >> $GITHUB_ENV
-          echo 'DIFF' >> $GITHUB_ENV
+          echo "$PATCH_DICTS" | git apply
+          git apply --allow-empty temp/*.diff
 
-      - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
-        id: generate-token
-        with:
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Update Integrations List
+        run: |
+          npm run update-integrations-list
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@f094b77505fb89581e68a1163fbd2fffece39da1 # v4
-        with:
-          commit-message: "ci: Workflow Bot -- Update Dictionaries"
-          branch: ${{ env.NEW_BRANCH }}
-          base: ${{ env.REF_BRANCH }}
-          title: "ci: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
-          token: ${{ steps.generate-token.outputs.token }}
-          body: ${{ env.git_body }}
-          delete-branch: true
+      - name: Build Patch
+        run: |
+          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
+          git --no-pager diff >> $GITHUB_ENV
+          echo '__DIFF__' >> $GITHUB_ENV
+
+  pr:
+    uses: ./.github/workflows/reuseable-pr.yml
+    needs:
+      - pr-setup
+    with:
+      patch: ${{ needs.pr-setup.outputs.patch }}
+      base: ${{ needs.pr-setup.outputs.base }}
+      body: ${{ needs.pr-setup.outputs.body }}
+      commit-message: ${{ needs.pr-setup.outputs.commit-message }}
+      branch: ${{ needs.pr-setup.outputs.branch }}
+      title: ${{ needs.pr-setup.outputs.title }}
+    secrets:
+      app_id: ${{ secrets.AUTOMATION_APP_ID }}
+      private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
