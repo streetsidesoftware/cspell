@@ -44,11 +44,11 @@ jobs:
       REF_BRANCH: ${{ inputs.base }}
 
     steps:
-      - name: Input
-        env:
-          INPUT: ${{ toJSON(inputs) }}
-        run: |
-          echo "$INPUT"
+      # - name: Input
+      #   env:
+      #     INPUT: ${{ toJSON(inputs) }}
+      #   run: |
+      #     echo "$INPUT"
 
       - name: Checkout
         uses: actions/checkout@v3
