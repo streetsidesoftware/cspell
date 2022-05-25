@@ -84,6 +84,7 @@ jobs:
       - name: Debug
         run: |
           echo "Test File" > test_file.txt
+          echo "Append change" >> CHANGELOG.md
 
       - name: Build
         if: env.UPDATE_SNAPSHOTS == 'true'
