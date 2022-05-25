@@ -1,4 +1,4 @@
-name: R - Create PR from Cache
+name: R - Create PR from Artifact
 
 on:
   workflow_call:
@@ -8,9 +8,10 @@ on:
         required: true
         type: string
       patch_path:
-        description: Path to path file stored in the Artifact
-        required: true
+        description: Patch diff files
+        required: false
         type: string
+        default: "*.diff"
       base:
         description: The Base Ref to apply the diff
         required: true
@@ -67,8 +68,8 @@ jobs:
 
       - name: show downloaded
         run: ls -alFR temp
-      - name: show diff
-        run: cat temp/*.diff
+      # - name: show diff
+      #   run: cat temp/*.diff
 
       - name: apply diff
         run: |
