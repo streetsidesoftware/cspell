@@ -68,6 +68,7 @@ jobs:
       - name: apply diff
         run: |
           git apply --allow-empty ${{ env.patch_path }}
+          git add .
 
       - name: Has changes
         run: |
