@@ -101,6 +101,7 @@ const settings = {
         '@cspell/dict-css/cspell-ext.json',
         '@cspell/dict-dart/cspell-ext.json',
         '@cspell/dict-django/cspell-ext.json',
+        '@cspell/dict-docker/cspell-ext.json',
         '@cspell/dict-dotnet/cspell-ext.json',
         '@cspell/dict-elixir/cspell-ext.json',
         '@cspell/dict-en_us/cspell-ext.json',
