@@ -4,8 +4,8 @@ Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Summary:
   files: 2467
-  filesWithIssues: 1247
-  issues: 4829
+  filesWithIssues: 1251
+  issues: 4864
   errors: 0
 Errors: []
 
@@ -182,6 +182,7 @@ issues:
   - "src/Abp.AspNetCore/AspNetCore/EntityHistory/HttpRequestEntityChangeSetReasonProvider.cs:17:42   	Overrided   	U   	override string Reason => OverridedValue != null"
   - "src/Abp.AspNetCore/AspNetCore/ExceptionHandling/AbpAuthorizationExceptionHandlingMiddleware.cs:63:61    	Localizaion 	U   	GetString(AbpWebConsts.LocalizaionSourceName, \"DefaultError"
   - "src/Abp.AspNetCore/AspNetCore/MultiTenancy/DomainTenantResolveContributor.cs:9:43       	Extracter   	U   	FormattedStringValueExtracter;"
+  - "src/Abp.AspNetCore/AspNetCore/Mvc/Controllers/AbpScriptsController.cs:12:15     	Minifier	U   	using Abp.Web.Minifier;"
   - "src/Abp.AspNetCore/AspNetCore/Mvc/Proxying/AbpServiceProxiesController.cs:8:30      	Proxying	U   	namespace Abp.AspNetCore.Mvc.Proxying"
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:18:74    	nosniff     	U   	Content-Type-Options\", \"nosniff\");"
   - "src/Abp.AspNetCore/AspNetCore/Security/AbpSecurityHeadersMiddleware.cs:23:155   	iframe      	U   	page in a <frame>, <iframe> or <object>. SAMEORIGIN"
@@ -548,6 +549,7 @@ issues:
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:23:52   	Turke   	U   	EnsureEndsWith('y').ShouldBe(\"TurkeYy\");"
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:27:14   	TAKSİ   	U   	\"TAKSİ\".EnsureEndsWith('i'"
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:28:84   	TAKS    	U   	\"tr-TR\")).ShouldBe(\"TAKSİi\");"
+  - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:43:14   	İstanbul	U   	\"İstanbul\".EnsureStartsWith('i"
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:62:72   	ıstanbul	U   	\"tr-TR\")).ShouldBe(\"ıstanbul\");"
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:23   	Isparta 	U   	\"HelloIsparta\".ToSentenceCase().ShouldBe"
   - "test/Abp.Tests/Extensions/StringExtensions_Tests.cs:74:65   	isparta 	U   	entenceCase().ShouldBe(\"Hello isparta\");"

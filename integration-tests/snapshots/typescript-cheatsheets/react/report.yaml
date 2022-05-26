@@ -5,7 +5,7 @@ Args: ["**/*.{ts,js,md}"]
 Summary:
   files: 50
   filesWithIssues: 42
-  issues: 532
+  issues: 544
   errors: 0
 Errors: []
 
@@ -13,6 +13,7 @@ issues:
   - "CONTRIBUTING.md:7:15    	CHEATSHEET  	U   	1. **We are a CHEATSHEET above all**: all examples"
   - "CONTRIBUTING.md:20:39   	swyx's      	U   	deployed to Netlify on swyx's personal account."
   - "CONTRIBUTING.md:22:12   	docsite     	U   	To run the docsite locally:"
+  - "CONTRIBUTING.md:25:16   	deps        	U   	yarn # install deps"
   - "CONTRIBUTING.md:43:57   	wanshawn    	U   	is served from /Users/wanshawn/Work/react-typescript"
   - "CONTRIBUTING.md:43:88   	cheatsheet  	U   	Work/react-typescript-cheatsheet/website"
   - "CONTRIBUTORS.md:8:164   	Ferdy           	U   	alt=\"\"/><br /><sub><b>Ferdy Budhidharma</b></sub"
@@ -76,6 +77,7 @@ issues:
   - "docs/advanced/patterns_by_version.md:128:186    	codebases           	U   	files. This lets large codebases scale without recompiling"
   - "docs/advanced/patterns_by_version.md:135:45     	subproject          	U   	/ tells TSC it is a subproject of a larger project"
   - "docs/advanced/patterns_by_version.md:136:83     	dont                	U   	since project references dont have access to source"
+  - "docs/advanced/patterns_by_version.md:137:32     	sourcemaps          	U   	declarationMap\": true, // sourcemaps for .d.ts"
   - "docs/advanced/patterns_by_version.md:142:28     	subprojects         	U   	(optional) array of subprojects your subproject depends"
   - "docs/advanced/patterns_by_version.md:144:19     	myreferencedproject 	U   	\"path\": \"../myreferencedproject\", // must have tsconfig"
   - "docs/advanced/patterns_by_version.md:288:86     	falsiness           	U   	unless you truly mean falsiness:"
@@ -119,9 +121,11 @@ issues:
   - "docs/basic/getting-started/portals.md:87:37     	papyawhip   	U   	style={{ background: \"papyawhip\" }}"
   - "docs/basic/linting.md:6:211     	azdanov         	U   	check this PR from [@azdanov](https://github.com"
   - "docs/basic/linting.md:42:6      	linebreak       	U   	\"linebreak-style\": [\"error\", \"unix"
+  - "docs/basic/linting.md:63:6      	airbnb          	U   	\"airbnb\","
   - "docs/basic/linting.md:103:173   	robertcoopercode	U   	typescript-project-53jb) by @robertcoopercode."
   - "docs/basic/recommended/codebases.md:4:16    	Codebases   	U   	sidebar_label: Codebases"
   - "docs/basic/recommended/codebases.md:9:57    	livestream  	U   	codeponder (with [coding livestream!](https://www.youtube"
+  - "docs/basic/recommended/codebases.md:24:13   	ui's        	U   	- [@reach/ui's community typings](https"
   - "docs/basic/recommended/codebases.md:32:7    	Boilerplates	U   	React Boilerplates:"
   - "docs/basic/recommended/codebases.md:39:46   	spoeck      	U   	ilerplates: _contributed by [@spoeck](https://github.com"
   - "docs/basic/recommended/resources.md:18:23   	nonboolean  	U   	8. Non-boolean `if (nonboolean)` checks"
@@ -175,10 +179,12 @@ issues:
   - "docs/migration/from-flow.md:7:7     	Airtable's  	U   	- Try Airtable's codemod: https://github"
   - "docs/migration/from-flow.md:8:45    	Flowtype    	U   	Migration to TypeScript on a Flowtype codebase][entria] at"
   - "docs/migration/from-flow.md:8:75    	Entria      	U   	codebase][entria] at Entria"
+  - "docs/migration/from-flow.md:10:10   	UI's        	U   	- Retail-UI's Codemod: https://github"
   - "docs/migration/from-flow.md:10:15   	Codemod     	U   	- Retail-UI's Codemod: https://github.com"
   - "docs/migration/from-flow.md:12:4    	Ecobee's    	U   	- [Ecobee's brief experience](https"
   - "docs/migration/from-flow.md:13:20   	SLOC        	U   	- [Migrating a 50K SLOC Flow + React Native"
   - "docs/migration/from-js.md:8:69      	Codecademy  	U   	TypeStat) ([used by Codecademy](https://mobile.twitter"
+  - "docs/migration/from-js.md:11:63     	Airbnb's    	U   	ts-migrate) used in [Airbnb's conversion](https:/"
   - "docs/migration/from-js.md:64:11     	TYPEME      	U   	type TODO_TYPEME = any;"
   - "docs/migration/from-js.md:93:4      	Hootsuite   	U   	- [Hootsuite][hootsuite]"
   - "docs/migration/index.md:21:34   	clayallsop  	U   	allowJS` (Experiences: [clayallsop][clayallsop], [pleo"
@@ -199,6 +205,7 @@ issues:
   - "README.md:72:19     	usereducer              	U   	- [useReducer](#usereducer)"
   - "README.md:73:18     	useeffect               	U   	- [useEffect](#useeffect--uselayouteffect)"
   - "README.md:73:29     	uselayouteffect         	U   	useEffect](#useeffect--uselayouteffect)"
+  - "README.md:74:15     	useref                  	U   	- [useRef](#useref)"
   - "README.md:75:28     	useimperativehandle     	U   	useImperativeHandle](#useimperativehandle)"
   - "README.md:78:57     	defaultprops            	U   	](#you-may-not-need-defaultprops)"
   - "README.md:86:33     	getderivedstatefromprops	U   	getDerivedStateFromProps](#getderivedstatefromprops)"
