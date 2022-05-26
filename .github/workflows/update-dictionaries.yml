@@ -71,6 +71,18 @@ jobs:
         run: |
           echo "$PATCH_DIFF"
 
+      - name: Store Repo Diff
+        run: |
+          mkdir temp
+          echo "$PATCH_DIFF" > temp/patch.diff
+
+      - name: store diff
+        uses: actions/upload-artifact@v3
+        with:
+          name: diffs
+          path: temp/*.diff
+          retention-days: 1
+
   check-result:
     runs-on: ubuntu-latest
     needs:
@@ -79,8 +91,10 @@ jobs:
       - load-integrations
     steps:
       - name: Show Needs
+        env:
+          NEEDS: ${{ toJSON(needs) }}
         run: |
-          echo "Needs: ${{ toJSON(needs) }}"
+          echo "Needs: $NEEDS"
 
   build:
     needs:
@@ -211,10 +225,8 @@ jobs:
 
     env:
       REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
-      PATCH_DICTS: ${{ needs.check-dictionaries.outputs.patch }}
 
     outputs:
-      patch: ${{ env.PATCH }}
       base: ${{ env.REF_BRANCH }}
       body: |
         ## Update Dictionaries (${{ env.REF_BRANCH }})
@@ -235,12 +247,9 @@ jobs:
           path: temp
       - name: show downloaded
         run: ls -alF temp
-      - name: show diff
-        run: cat temp/*.diff
 
       - name: apply diff
         run: |
-          echo "$PATCH_DICTS" | git apply
           git apply --allow-empty temp/*.diff
 
       - name: Update Integrations List
@@ -249,16 +258,21 @@ jobs:
 
       - name: Build Patch
         run: |
-          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
-          git --no-pager diff >> $GITHUB_ENV
-          echo '__DIFF__' >> $GITHUB_ENV
+          git --no-pager diff > temp/patch.diff
+
+      - name: store patch
+        uses: actions/upload-artifact@v3
+        with:
+          name: patch
+          path: temp/patch.diff
+          retention-days: 1
 
   pr:
-    uses: ./.github/workflows/reuseable-pr.yml
+    uses: ./.github/workflows/reuseable-pr-from-artifact.yml
     needs:
       - pr-setup
     with:
-      patch: ${{ needs.pr-setup.outputs.patch }}
+      patch_artifact: patch
       base: ${{ needs.pr-setup.outputs.base }}
       body: ${{ needs.pr-setup.outputs.body }}
       commit-message: ${{ needs.pr-setup.outputs.commit-message }}
