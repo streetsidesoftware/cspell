@@ -39,7 +39,7 @@ describe('Validate English Suggestions', () => {
     const JOIN_WORDS = { compoundMethod: CompoundWordsMethod.JOIN_WORDS };
     const NONE = { compoundMethod: CompoundWordsMethod.NONE };
 
-    // cspell:ignore emplode ballence catagory
+    // cspell:ignore emplode ballence catagory dont
     test.each`
         word          | expected
         ${'hello'}    | ${sr({ word: 'hello', cost: 0 })}

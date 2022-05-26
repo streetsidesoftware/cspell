@@ -27,7 +27,7 @@ describe('Validate English Suggestions', () => {
         expected: ExpectedSuggestion[];
     }
 
-    // cspell:ignore emplode ballence catagory cateogry
+    // cspell:ignore emplode ballence catagory cateogry dont
     test.each`
         word          | expected
         ${'hello'}    | ${sr({ word: 'hello', cost: 0 })}
