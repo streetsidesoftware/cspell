@@ -7,7 +7,7 @@ ignorePaths:
   - "*.ktx"
   - "*.idmap" # DOOM, cspell:ignore idmap
   - "*.ogex" # DOOM, cspell:ignore ogex
-  - "**/prettier/"
+  - "**/eslint/eslint/**/*.svg"
 import:
   - ./cspell-reporter.json
   - ./cspell-latex.json
@@ -23,6 +23,14 @@ overrides:
   - filename: temp/pagekit/pagekit/**
     dictionaries:
       - lorem-ipsum
+  - filename: temp/eslint/eslint/**
+    ignoreRegExpList:
+      - "/\\*\\s+@author\\s.*/gm"
+  - filename: temp/eslint/eslint/**/*.md
+    ignoreRegExpList:
+      - "/\\]\\[.*?\\]/g"
+      - "/\\]\\(.*?\\)/g"
+      - "/^\\[.*?\\]:\\s+(#|http|\\.\\.?\\/).*/gm"
 dictionaries:
   - custom-dictionary
 dictionaryDefinitions:
