@@ -1484,5 +1484,5 @@ Sometimes it is necessary to allow a word even if it is forbidden.
 **Note:** Version bump only for package cspell-monorepo
 
 <!---
-cspell: ignore abcdefa Dhall
+cspell: ignore abcdefa Dhall deps
 --->
