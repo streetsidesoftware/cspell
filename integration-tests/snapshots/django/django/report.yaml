@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: ["**/*.{md,py}"]
 Summary:
   files: 2750
-  filesWithIssues: 935
-  issues: 8320
+  filesWithIssues: 930
+  issues: 8299
   errors: 0
 Errors: []
 
@@ -162,8 +162,6 @@ issues:
   - "django/contrib/auth/hashers.py:491:27   	algostr 	U   	algorithm, empty, algostr, work_factor, data"
   - "django/contrib/auth/hashers.py:556:5    	maxmem  	U   	maxmem = 0"
   - "django/contrib/auth/hashers.py:572:13   	dklen   	U   	dklen=64,"
-  - "django/contrib/auth/management/__init__.py:117:41   	getpwuid	U   	will be raised by os.getpwuid() (called by getuser"
-  - "django/contrib/auth/management/__init__.py:145:36   	NFKD    	U   	unicodedata.normalize(\"NFKD\", default_username)"
   - "django/contrib/auth/models.py:11:19     	itercompat  	U   	from django.utils.itercompat import is_iterable"
   - "django/contrib/auth/password_validation.py:223:31   	deduplicated	U   	passwords (lowercased and deduplicated), created by Royce Williams"
   - "django/contrib/auth/urls.py:27:17   	uidb	U   	\"reset/<uidb64>/<token>/\","
@@ -178,7 +176,6 @@ issues:
   - "django/contrib/gis/db/backends/base/models.py:44:26     	semiminor   	U   	(semimajor axis, semiminor axis, and inverse flattening"
   - "django/contrib/gis/db/backends/base/operations.py:13:5      	spatialite  	U   	spatialite = False"
   - "django/contrib/gis/db/backends/mysql/base.py:6:23       	SQLGIS  	U   	from .schema import MySQLGISSchemaEditor"
-  - "django/contrib/gis/db/backends/mysql/introspection.py:31:42     	Inno	U   	with MyISAM/Aria, or InnoDB on MySQL 5.7.5+/MariaDB"
   - "django/contrib/gis/db/backends/oracle/adapter.py:1:23       	CLOB	U   	from cx_Oracle import CLOB"
   - "django/contrib/gis/db/backends/oracle/introspection.py:8:23     	OBJECTVAR   	U   	# Associating any OBJECTVAR instances with GeometryField"
   - "django/contrib/gis/db/backends/oracle/introspection.py:9:43     	MDSYS       	U   	objects that aren't MDSYS.SDO_GEOMETRY, but it"
@@ -242,7 +239,6 @@ issues:
   - "django/contrib/gis/gdal/error.py:33:1       	CPLERR  	U   	CPLERR_DICT = {"
   - "django/contrib/gis/gdal/feature.py:86:52    	defn	U   	name(capi.get_field_defn(self._layer._ldefn,"
   - "django/contrib/gis/gdal/field.py:253:1      	ROGR	U   	ROGRFieldTypes = {cls: num"
-  - "django/contrib/gis/gdal/geometries.py:7:55      	pythonic    	U   	present yet, the API is \"pythonic\" unlike"
   - "django/contrib/gis/gdal/geometries.py:26:18     	ellps       	U   	+proj=longlat +ellps=WGS84 +datum=WGS84"
   - "django/contrib/gis/gdal/geometries.py:29:24     	clrk        	U   	proj=longlat +ellps=clrk66 +datum=NAD27 +no_defs"
   - "django/contrib/gis/gdal/geometries.py:82:46     	LINEARRING  	U   	\"type\"].upper() == \"LINEARRING\":"
@@ -691,7 +687,6 @@ issues:
   - "django/db/models/sql/query.py:861:20    	louter          	U   	parent_louter = ("
   - "django/db/models/sql/query.py:1383:28   	unreffing       	U   	is responsible for unreffing the joins used."
   - "django/db/models/sql/query.py:1495:40   	someval         	U   	is null, then col != someval will result in SQL"
-  - "django/db/models/sql/query.py:2058:29   	Pythonic        	U   	as it makes it more Pythonic to read and write. When"
   - "django/db/models/sql/query.py:2325:44   	datastructure   	U   	that we can use a set datastructure. We do the foo__bar"
   - "django/db/models/sql/query.py:2577:5    	dirn            	U   	dirn = ORDER_DIR[default"
   - "django/db/models/sql/where.py:176:38    	Childs  	U   	empty subtree_parents). Childs must be either (Constraint"
