@@ -121,7 +121,8 @@ jobs:
             'integration-tests/snapshots/${{ matrix.repo }}/*',
             'integration-tests/repositories/*',
             'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-            'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+            'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
+            'package-lock.json'
           ) }}"
 
       - name: Cache Integration Run
