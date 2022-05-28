@@ -122,8 +122,12 @@ export function mapRawString(text: string): MappedText {
         ++j;
     }
 
-    if (i !== j || map.length) {
-        map.push(i, j);
+    if (map.length) {
+        const ii = map[map.length - 2];
+        const jj = map[map.length - 1];
+        if (ii !== i || jj !== j) {
+            map.push(i, j);
+        }
     }
 
     return {

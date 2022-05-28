@@ -22,6 +22,8 @@ describe('mappers typescript', () => {
         text                    | expected
         ${''}                   | ${''}
         ${'hello'}              | ${'hello'}
+        ${'caf\\xe9'}           | ${'café'}
+        ${'caf\\u00e9'}         | ${'café'}
         ${'hello\\x20there'}    | ${'hello\x20there'}
         ${'hello\\u0020there'}  | ${'hello\u0020there'}
         ${'hello\\u{020}there'} | ${'hello\u{020}there'}
@@ -47,12 +49,16 @@ describe('mappers typescript', () => {
     });
 
     test.each`
-        text                    | expected
-        ${''}                   | ${[]}
-        ${'hello'}              | ${[]}
-        ${'hello\\x20there'}    | ${[5, 5, 9, 6, 14, 11]}
-        ${'hello\\u0020there'}  | ${[5, 5, 11, 6, 16, 11]}
-        ${'hello\\u{020}there'} | ${[5, 5, 12, 6, 17, 11]}
+        text                                      | expected
+        ${''}                                     | ${[]}
+        ${'hello'}                                | ${[]}
+        ${'caf\\xe9'}                             | ${[3, 3, 7, 4]}
+        ${'caf\\u00e9'}                           | ${[3, 3, 9, 4]}
+        ${'caf\\xe9 '}                            | ${[3, 3, 7, 4, 8, 5]}
+        ${'\\u00e9 is an "e" with an accent "`"'} | ${[0, 0, 6, 1, 35, 30]}
+        ${'hello\\x20there'}                      | ${[5, 5, 9, 6, 14, 11]}
+        ${'hello\\u0020there'}                    | ${[5, 5, 11, 6, 16, 11]}
+        ${'hello\\u{020}there'}                   | ${[5, 5, 12, 6, 17, 11]}
     `('mapRawString map $# [$text]', ({ text, expected }) => {
         const r = mapRawString(text);
         expect(r.map).toEqual(expected);
