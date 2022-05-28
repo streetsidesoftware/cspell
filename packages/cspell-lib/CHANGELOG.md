@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v6.0.0...v6.1.0-alpha.0) (2022-05-28)
+
+
+### Bug Fixes
+
+* be able to identify Docker files ([#2924](https://github.com/streetsidesoftware/cspell/issues/2924)) ([6561c3e](https://github.com/streetsidesoftware/cspell/commit/6561c3ec1a9b6052f5db9a8fe842ec68b834ee5c))
+
+
+
+
+
 # [6.0.0](https://github.com/streetsidesoftware/cspell/compare/v6.0.0-alpha.0...v6.0.0) (2022-05-21)
 
 **Note:** Version bump only for package cspell-lib

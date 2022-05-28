@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v6.0.0...v6.1.0-alpha.0) (2022-05-28)
+
+
+### Features
+
+* Upgrade npm and node dictionaries ([#2949](https://github.com/streetsidesoftware/cspell/issues/2949)) ([bedc60c](https://github.com/streetsidesoftware/cspell/commit/bedc60cfe0c8665f296592c196156c22032c59c9))
+
+
+
+
+
 # [6.0.0](https://github.com/streetsidesoftware/cspell/compare/v6.0.0-alpha.0...v6.0.0) (2022-05-21)
 
 **Note:** Version bump only for package cspell-trie-lib

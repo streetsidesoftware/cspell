@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v6.0.0...v6.1.0-alpha.0) (2022-05-28)
+
+
+### Bug Fixes
+
+* add docker by default ([#2931](https://github.com/streetsidesoftware/cspell/issues/2931)) ([15e8e17](https://github.com/streetsidesoftware/cspell/commit/15e8e17d9c78ed356f3f2eb7baa4ebb87beb6e38))
+* be able to identify Docker files ([#2924](https://github.com/streetsidesoftware/cspell/issues/2924)) ([6561c3e](https://github.com/streetsidesoftware/cspell/commit/6561c3ec1a9b6052f5db9a8fe842ec68b834ee5c))
+* integrations list - add json format ([#2908](https://github.com/streetsidesoftware/cspell/issues/2908)) ([d98f9e2](https://github.com/streetsidesoftware/cspell/commit/d98f9e2f6078d8f272fd96f82aa27a3fe7e94404))
+
+
+### Features
+
+* Upgrade npm and node dictionaries ([#2949](https://github.com/streetsidesoftware/cspell/issues/2949)) ([bedc60c](https://github.com/streetsidesoftware/cspell/commit/bedc60cfe0c8665f296592c196156c22032c59c9))
+
+
+### Reverts
+
+* Revert "ci: Move reusable workflows to `reusable`" ([55a7121](https://github.com/streetsidesoftware/cspell/commit/55a7121a63fd77af721f5c4b73de8da8b4b97468))
+
+
+
+
+
 # [6.0.0](https://github.com/streetsidesoftware/cspell/compare/v6.0.0-alpha.0...v6.0.0) (2022-05-21)
 
 **Note:** Version bump only for package cspell-monorepo
