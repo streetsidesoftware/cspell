@@ -599,6 +599,33 @@ declare class DocumentValidator {
     private errorCatcherWrapper;
     private suggest;
     private genSuggestions;
+    getFinalizedDocSettings(): CSpellSettingsInternal;
+    /**
+     * Returns true if the final result of the configuration calculation results
+     * in the document being enabled. Note: in some cases, checking the document
+     * might still make sense, for example, the `@cspell/eslint-plugin` relies on
+     * `eslint` configuration to make that determination.
+     * @returns true if the document settings have resolved to be `enabled`
+     */
+    shouldCheckDocument(): boolean;
+    /**
+     * Internal `cspell-lib` use.
+     */
+    _getPreparations(): Preparations | undefined;
+}
+interface Preparations {
+    /** loaded config */
+    config: CSpellSettingsInternal;
+    dictionary: SpellingDictionaryCollection;
+    /** configuration after applying in-doc settings */
+    docSettings: CSpellSettingsInternal;
+    includeRanges: MatchRange[];
+    lineValidator: LineValidator;
+    segmenter: (lineSegment: LineSegment) => LineSegment[];
+    shouldCheck: boolean;
+    validateOptions: ValidationOptions;
+    localConfig: CSpellUserSettings | undefined;
+    localConfigFilepath: string | undefined;
 }
 
 interface SpellCheckFileOptions extends ValidateTextOptions {

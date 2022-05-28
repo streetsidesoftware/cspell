@@ -1,6 +1,7 @@
 import { opConcatMap, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
 import assert from 'assert';
+import { GlobMatcher } from 'cspell-glob';
 import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { TextDocument, updateTextDocument } from '../Models/TextDocument';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
@@ -40,6 +41,8 @@ export interface DocumentValidatorOptions extends ValidateTextOptions {
      */
     noConfigSearch?: boolean;
 }
+
+const ERROR_NOT_PREPARED = 'Validator Must be prepared before calling this function.';
 
 export class DocumentValidator {
     private _document: TextDocument;
@@ -89,7 +92,10 @@ export class DocumentValidator {
         const docSettings = determineTextDocumentSettings(this._document, config);
         const dict = getDictionaryInternalSync(docSettings);
 
-        const shouldCheck = docSettings.enabled ?? true;
+        const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
+        const uri = this._document.uri;
+
+        const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.enabled ?? true);
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
@@ -105,6 +111,8 @@ export class DocumentValidator {
             includeRanges,
             segmenter,
             lineValidator,
+            localConfig,
+            localConfigFilepath: localConfig?.__importRef?.filename,
         };
 
         this._ready = true;
@@ -141,7 +149,11 @@ export class DocumentValidator {
         const docSettings = determineTextDocumentSettings(this._document, config);
         const dict = await getDictionaryInternal(docSettings);
 
-        const shouldCheck = docSettings.enabled ?? true;
+        const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
+        const uri = this._document.uri;
+
+        const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.enabled ?? true);
+
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
@@ -157,6 +169,8 @@ export class DocumentValidator {
             includeRanges,
             segmenter,
             lineValidator,
+            localConfig,
+            localConfigFilepath: localConfig?.__importRef?.filename,
         };
 
         this._ready = true;
@@ -164,10 +178,10 @@ export class DocumentValidator {
     }
 
     private _updatePrep() {
-        assert(this._preparations);
+        assert(this._preparations, ERROR_NOT_PREPARED);
         const timer = createTimer();
-        const { config } = this._preparations;
-        const docSettings = determineTextDocumentSettings(this._document, config);
+        const prep = this._preparations;
+        const docSettings = determineTextDocumentSettings(this._document, prep.config);
         const dict = getDictionaryInternalSync(docSettings);
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
@@ -177,7 +191,7 @@ export class DocumentValidator {
         const lineValidator = lineValidatorFactory(dict, validateOptions);
 
         this._preparations = {
-            config,
+            ...prep,
             dictionary: dict,
             docSettings,
             shouldCheck,
@@ -203,7 +217,7 @@ export class DocumentValidator {
 
     check(parsedText: ParsedText): ValidationIssue[] {
         assert(this._ready);
-        assert(this._preparations);
+        assert(this._preparations, ERROR_NOT_PREPARED);
         const { range, text } = parsedText;
         const { segmenter, lineValidator } = this._preparations;
         // Determine settings for text range
@@ -236,7 +250,7 @@ export class DocumentValidator {
 
     checkDocument(): ValidationIssue[] {
         assert(this._ready);
-        assert(this._preparations);
+        assert(this._preparations, ERROR_NOT_PREPARED);
 
         return [...this.checkDocumentLines()];
     }
@@ -283,7 +297,7 @@ export class DocumentValidator {
     }
 
     private genSuggestions(text: string): string[] {
-        assert(this._preparations);
+        assert(this._preparations, ERROR_NOT_PREPARED);
         const settings = this._preparations.docSettings;
         const dict = this._preparations.dictionary;
         const sugOptions = clean({
@@ -295,6 +309,31 @@ export class DocumentValidator {
             numChanges: settings.suggestionNumChanges,
         });
         return dict.suggest(text, sugOptions).map((r) => r.word);
+    }
+
+    public getFinalizedDocSettings(): CSpellSettingsInternal {
+        assert(this._ready);
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        return this._preparations.docSettings;
+    }
+
+    /**
+     * Returns true if the final result of the configuration calculation results
+     * in the document being enabled. Note: in some cases, checking the document
+     * might still make sense, for example, the `@cspell/eslint-plugin` relies on
+     * `eslint` configuration to make that determination.
+     * @returns true if the document settings have resolved to be `enabled`
+     */
+    public shouldCheckDocument(): boolean {
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        return this._preparations.shouldCheck;
+    }
+
+    /**
+     * Internal `cspell-lib` use.
+     */
+    public _getPreparations(): Preparations | undefined {
+        return this._preparations;
     }
 }
 
@@ -309,6 +348,8 @@ interface Preparations {
     segmenter: (lineSegment: LineSegment) => LineSegment[];
     shouldCheck: boolean;
     validateOptions: ValidationOptions;
+    localConfig: CSpellUserSettings | undefined;
+    localConfigFilepath: string | undefined;
 }
 
 async function searchForDocumentConfig(

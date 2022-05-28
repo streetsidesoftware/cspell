@@ -1,14 +1,13 @@
-import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
-import { GlobMatcher } from 'cspell-glob';
+import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
 import { readFile } from 'fs-extra';
 import { URI, Utils as UriUtils } from 'vscode-uri';
-import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
 import { isGenerated, isGeneratedFile } from './LanguageIds';
 import { createTextDocument } from './Models/TextDocument';
-import { loadConfig as loadConfigFile, mergeSettings, searchForConfig } from './Settings';
+import { DocumentValidator, DocumentValidatorOptions } from './textValidation';
+import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
 import { isError } from './util/errors';
 import { clean } from './util/util';
-import { validateText, ValidateTextOptions, ValidationIssue } from './validator';
+import { ValidateTextOptions, ValidationIssue } from './validator';
 
 export interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
@@ -116,85 +115,39 @@ async function spellCheckFullDocument(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
-    const errors: Error[] = [];
-    function addPossibleError(error: Error | undefined) {
-        if (!error) return;
-        errors.push(error);
-    }
+    const { uri, text: content } = document;
+    const doc = createTextDocument({ uri, content });
+    const docValOptions: DocumentValidatorOptions = options;
+    const docValidator = new DocumentValidator(doc, docValOptions, settings);
+    await docValidator.prepare();
 
-    function catchError<P>(p: Promise<P>): Promise<P | undefined> {
-        return p.catch((error) => {
-            addPossibleError(error);
-            return undefined;
-        });
-    }
+    const prep = docValidator._getPreparations();
 
-    const useSearchForConfig =
-        (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
-    const pLocalConfig = options.configFile
-        ? catchError(loadConfigFile(options.configFile, settings))
-        : useSearchForConfig
-        ? catchError(searchForDocumentConfig(document, settings, settings))
-        : undefined;
-    const localConfig = await pLocalConfig;
-
-    addPossibleError(localConfig?.__importRef?.error);
-
-    if (errors.length) {
+    if (docValidator.errors.length) {
         return {
             document,
             options,
-            settingsUsed: localConfig || settings,
-            localConfigFilepath: localConfig?.__importRef?.filename,
+            settingsUsed: prep?.localConfig || settings,
+            localConfigFilepath: prep?.localConfigFilepath,
             issues: [],
             checked: false,
-            errors,
+            errors: docValidator.errors,
         };
     }
 
-    const matcher = new GlobMatcher(localConfig?.ignorePaths || [], { root: process.cwd(), dot: true });
-
-    const config = localConfig ? mergeSettings(settings, localConfig) : settings;
-    const docSettings = determineFinalDocumentSettings(document, config);
-
-    const uri = URI.parse(document.uri);
-
-    const shouldCheck = !matcher.match(uri.fsPath) && (docSettings.settings.enabled ?? true);
-    const { generateSuggestions, numSuggestions } = options;
-    const validateOptions = clean({ generateSuggestions, numSuggestions });
-
-    const issues = shouldCheck ? await validateDocument(document, docSettings.settings, validateOptions) : [];
+    const issues = docValidator.checkDocument();
 
     const result: SpellCheckFileResult = {
         document,
         options,
-        settingsUsed: docSettings.settings,
-        localConfigFilepath: localConfig?.__importRef?.filename,
+        settingsUsed: docValidator.getFinalizedDocSettings(),
+        localConfigFilepath: prep?.localConfigFilepath,
         issues,
-        checked: shouldCheck,
+        checked: docValidator.shouldCheckDocument(),
         errors: undefined,
     };
 
     return result;
-}
-
-function validateDocument(
-    document: DocumentWithText,
-    settings: CSpellUserSettings,
-    validateOptions: ValidateTextOptions
-): Promise<ValidationIssue[]> {
-    return validateText(document.text, settings, validateOptions);
-}
-
-async function searchForDocumentConfig(
-    document: DocumentWithText,
-    defaultConfig: CSpellSettingsWithSourceTrace,
-    pnpSettings: PnPSettings
-): Promise<CSpellSettingsWithSourceTrace> {
-    const { uri } = document;
-    const u = URI.parse(uri);
-    if (u.scheme !== 'file') return Promise.resolve(defaultConfig);
-    return searchForConfig(u.fsPath, pnpSettings).then((s) => s || defaultConfig);
 }
 
 async function readDocument(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<DocumentWithText> {
