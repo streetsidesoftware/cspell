@@ -82,7 +82,7 @@ jobs:
         run: npm run test-bin-check
 
       # Ensure the repository is clean after build & test
-      - run: git --no-pager diff --compact-summary --exit-code
+      - run: git --no-pager diff --exit-code
 
   test-os:
     runs-on: ${{ matrix.os }}
