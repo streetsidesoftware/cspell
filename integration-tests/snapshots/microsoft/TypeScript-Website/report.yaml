@@ -4,8 +4,8 @@ Url: https://github.com/microsoft/TypeScript-Website.git
 Args: ["--config=${repoConfig}/cspell.json","**/*.*"]
 Summary:
   files: 746
-  filesWithIssues: 196
-  issues: 769
+  filesWithIssues: 195
+  issues: 753
   errors: 0
 Errors: []
 
@@ -133,7 +133,6 @@ issues:
   - "packages/documentation/copy/en/tutorials/ASP.NET%20Core.md:92:37    	diaglogue           	U   	showing the new file diaglogue with TypeScript JSON"
   - "packages/documentation/copy/en/tutorials/ASP.NET%20Core.md:175:82   	taskrunnerrefresh   	U   	images/tutorials/aspnet/taskrunnerrefresh.png)"
   - "packages/documentation/scripts/generateDocsNavigationPerLanguage.js:221:9   	navigations 	U   	const navigations: Record<string, SidebarNavIte"
-  - "packages/documentation/scripts/generateDocsNavigationPerLanguage.js:239:33  	dont        	U   	Lots of 2nd level navs dont have subnav, bail for"
   - "packages/documentation/scripts/generateTypesForFilesInDocs.js:24:20     	ortatherox  	U   	// From: '/Users/ortatherox/dev/typescript/new-website"
   - "packages/glossary/copy/en/index-signatures.md:18:3      	taniguchi   	U   	taniguchi: 0.6782344919;"
   - "packages/glossary/copy/en/index-signatures.md:19:3      	raabe       	U   	raabe: 0.9189385332;"
@@ -230,6 +229,7 @@ issues:
   - "packages/typescriptlang-org/src/dom.d.ts:83:5       	samplerate                  	U   	samplerate?: number;"
   - "packages/typescriptlang-org/src/dom.d.ts:147:5      	timecode                    	U   	timecode?: DOMHighResTimeStamp"
   - "packages/typescriptlang-org/src/dom.d.ts:482:5      	fontfaces                   	U   	fontfaces?: FontFace[];"
+  - "packages/typescriptlang-org/src/dom.d.ts:1437:31    	chainable                   	U   	Provides a convenient, chainable way of piping this readable"
   - "packages/typescriptlang-org/src/dom.d.ts:1996:5     	onremove                    	U   	onremove: ((this: Animation,"
   - "packages/typescriptlang-org/src/dom.d.ts:2154:106   	spatialization              	U   	and is used in audio spatialization. All PannerNodes spatialize"
   - "packages/typescriptlang-org/src/dom.d.ts:2154:138   	spatialize                  	U   	atialization. All PannerNodes spatialize in relation to the AudioListe"
@@ -237,6 +237,7 @@ issues:
   - "packages/typescriptlang-org/src/dom.d.ts:4796:35    	rgtc                        	U   	texture_compression_rgtc {"
   - "packages/typescriptlang-org/src/dom.d.ts:4797:35    	RGTC                        	U   	COMPRESSED_RED_GREEN_RGTC2_EXT: GLenum;"
   - "packages/typescriptlang-org/src/dom.d.ts:4863:25    	uppercased                  	U   	* Returns the HTML-uppercased qualified name."
+  - "packages/typescriptlang-org/src/dom.d.ts:5021:78    	cancelation                 	U   	successfully to indicate cancelation, and false otherwise"
   - "packages/typescriptlang-org/src/dom.d.ts:5328:6     	loadingdone                 	U   	\"loadingdone\": Event;"
   - "packages/typescriptlang-org/src/dom.d.ts:5329:6     	loadingerror                	U   	\"loadingerror\": Event;"
   - "packages/typescriptlang-org/src/dom.d.ts:5333:5     	onloading                   	U   	onloading: ((this: FontFaceSet"
@@ -267,6 +268,7 @@ issues:
   - "packages/typescriptlang-org/src/dom.d.ts:9815:6     	dataavailable               	U   	\"dataavailable\": BlobEvent;"
   - "packages/typescriptlang-org/src/dom.d.ts:9826:5     	ondataavailable             	U   	ondataavailable: ((this: MediaRecorder"
   - "packages/typescriptlang-org/src/dom.d.ts:9838:11    	timeslice                   	U   	start(timeslice?: number): void;"
+  - "packages/typescriptlang-org/src/dom.d.ts:10425:18   	bitmask                     	U   	* Returns a bitmask indicating the position"
   - "packages/typescriptlang-org/src/dom.d.ts:10688:82   	GLSL                        	U   	WebGL API and adds the GLSL derivative functions"
   - "packages/typescriptlang-org/src/dom.d.ts:10718:15   	multiview                   	U   	interface OVR_multiview2 {"
   - "packages/typescriptlang-org/src/dom.d.ts:10719:23   	Multiview                   	U   	framebufferTextureMultiviewOVR(target: GLenum, attachment"
@@ -287,10 +289,10 @@ issues:
   - "packages/typescriptlang-org/src/dom.d.ts:15016:36   	pvrtc                       	U   	WEBGL_compressed_texture_pvrtc {"
   - "packages/typescriptlang-org/src/dom.d.ts:15017:30   	PVRTC                       	U   	readonly COMPRESSED_RGBA_PVRTC_2BPPV1_IMG: GLenum;"
   - "packages/typescriptlang-org/src/dom.d.ts:15017:37   	BPPV                        	U   	COMPRESSED_RGBA_PVRTC_2BPPV1_IMG: GLenum;"
-  - "packages/typescriptlang-org/src/dom.d.ts:15438:14   	DONT                        	U   	readonly DONT_CARE: GLenum;"
   - "packages/typescriptlang-org/src/dom.d.ts:17019:20   	subprotocol                 	U   	* Returns the subprotocol selected by the server"
   - "packages/typescriptlang-org/src/dom.d.ts:17248:5    	ongamepadconnected          	U   	ongamepadconnected: ((this: WindowEventHandlers"
   - "packages/typescriptlang-org/src/dom.d.ts:17249:5    	ongamepaddisconnected       	U   	ongamepaddisconnected: ((this: WindowEventHandlers"
+  - "packages/typescriptlang-org/src/dom.d.ts:17342:158  	backpressure                	U   	comes with built-in backpressure and queuing. */"
   - "packages/typescriptlang-org/src/dom.d.ts:17784:35   	externref                   	U   	TableKind = \"anyfunc\" | \"externref\";"
   - "packages/typescriptlang-org/src/dom.d.ts:18111:6    	mpath                       	U   	\"mpath\": SVGMPathElement;"
   - "packages/typescriptlang-org/src/dom.d.ts:18665:129  	unicase                     	U   	| \"titling-caps\" | \"unicase\";"
@@ -341,8 +343,6 @@ issues:
   - "packages/typescriptlang-org/src/templates/pages/index.tsx:64:23     	ikey	U   	const P = (props: { ikey: keyof typeof indexCopy"
   - "packages/typescriptlang-org/src/templates/pages/why-create-typescript.tsx:165:71    	behaviour   	U   	file can affect the behaviour of any number of other"
   - "packages/typescriptlang-org/src/templates/tsconfigReference.tsx:97:11   	subnavs 	U   	const subnavs = document.querySelectorAll"
-  - "packages/typescriptlang-org/static/js/docsearch.js:2:1642       	Msie            	U   	map:null,mixin:null,isMsie:function(agentString"
-  - "packages/typescriptlang-org/static/js/docsearch.js:2:1734       	msie            	U   	navigator.userAgent}if(/(msie|trident)/i.test(agentString"
   - "packages/typescriptlang-org/static/js/docsearch.js:2:3184       	clazz           	U   	className:function(prefix,clazz,skipDot){return(skipDot"
   - "packages/typescriptlang-org/static/js/docsearch.js:2:6920       	darkorchid      	U   	goldenrod\",\"dodgerblue\",\"darkorchid\",\"crimson\"];function"
   - "packages/typescriptlang-org/static/js/docsearch.js:2:16164      	Zepto           	U   	function(window){var Zepto=function(){var undefined"
