@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Summary:
   files: 1798
-  filesWithIssues: 1218
-  issues: 5464
+  filesWithIssues: 1216
+  issues: 5337
   errors: 0
 Errors: []
 
@@ -223,7 +223,6 @@ issues:
   - "docs/src/user-guide/command-line-interface.md:376:21    	customformat	U   	npx eslint -f ./customformat.js file.js"
   - "docs/src/user-guide/command-line-interface.md:442:11    	Autofixed   	U   	**Note:** Autofixed files are not placed"
   - "docs/src/user-guide/configuring/configuration-files.md:48:29    	myfiletotest	U   	eslint -c myconfig.json myfiletotest.js"
-  - "docs/src/user-guide/configuring/configuration-files.md:221:87   	airbnb      	U   	name. For example, `airbnb` resolves as `eslint"
   - "docs/src/user-guide/configuring/ignoring-code.md:36:186     	subdir      	U   	foo.js` but not `lib/subdir/foo.js`."
   - "docs/src/user-guide/configuring/ignoring-code.md:102:200    	jshintignore	U   	example, you can use `.jshintignore` file because it has"
   - "docs/src/user-guide/configuring/ignoring-code.md:110:186    	globbing    	U   	not be used. Note that globbing rules in `.eslintignore"
@@ -264,7 +263,6 @@ issues:
   - "docs/src/user-guide/migrating-to-7.0.0.md:121:3     	Dotfiles    	U   	* Dotfiles (`.*`)"
   - "docs/src/user-guide/migrating-to-7.0.0.md:212:23    	cliengine   	U   	<a name=\"deprecate-cliengine\"></a> The `CLIEngine"
   - "docs/src/user-guide/migrating-to-8.0.0.md:22:13     	codeframe   	U   	* [Removed `codeframe` and `table` formatters"
-  - "karma.conf.js:49:22     	preprocessors   	U   	* available preprocessors: https://npmjs.org/browse"
   - "lib/cli-engine/cli-engine.js:47:4       	Typedefs	U   	// Typedefs"
   - "lib/cli-engine/formatters/html.js:46:47     	Neue        	U   	family:Arial, \"Helvetica Neue\", Helvetica, sans-serif"
   - "lib/cli-engine/formatters/html.js:222:66    	noopener    	U   	target=\"_blank\" rel=\"noopener noreferrer\">${ruleId"
@@ -281,8 +279,6 @@ issues:
   - "lib/config/rule-validator.js:130:16     	Precompile  	U   	// Precompile and cache validator"
   - "lib/eslint/eslint.js:107:52     	stringss    	U   	an array of non-empty stringss or not."
   - "lib/eslint/eslint.js:602:12     	thirdparty  	U   	* - A thirdparty formatter name:"
-  - "lib/linter/code-path-analysis/code-path-analyzer.js:329:31  	finalizer   	U   	} else if (parent.finalizer === node) {"
-  - "lib/linter/code-path-analysis/code-path-state.js:95:24      	Finalizer   	U   	if (context.hasFinalizer && context.position"
   - "lib/linter/code-path-analysis/code-path-state.js:159:31     	unflattened 	U   	{CodePathSegment[]} unflattenedFromSegments Segments"
   - "lib/linter/code-path-analysis/code-path-state.js:913:23     	Segs        	U   	const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/code-path.js:138:34   	Omittable   	U   	param {Object} [options] Omittable."
@@ -406,7 +402,6 @@ issues:
   - "README.md:286:1     	Yeon            	U   	YeonJuan"
   - "README.md:290:5     	teamend         	U   	<!--teamend-->"
   - "README.md:297:5     	sponsorsstart   	U   	<!--sponsorsstart-->"
-  - "README.md:300:256   	Airbnb          	U   	7d66/logo.png\" alt=\"Airbnb\" height=\"96\"></a> <a"
   - "README.md:300:522   	Substack        	U   	u/53023767?v=4\" alt=\"Substack\" height=\"96\"></a></p"
   - "README.md:302:119   	launchdarkly    	U   	bb9e/logo.png\" alt=\"launchdarkly\" height=\"32\"></a> <a"
   - "README.md:302:252   	Nrwl            	U   	logo.png\" alt=\"Nx (by Nrwl)\" height=\"32\"></a>"
@@ -635,7 +630,6 @@ issues:
   - "tests/performance/jshint.js:1237:4      	maxparams               	U   	maxparams : false, // {int"
   - "tests/performance/jshint.js:1238:4      	maxcomplexity           	U   	maxcomplexity: false, // {int} max"
   - "tests/performance/jshint.js:1244:4      	latedef                 	U   	latedef : false // warn"
-  - "tests/performance/jshint.js:1271:4      	eqeq                    	U   	eqeq : \"eqeqeq\","
   - "tests/performance/jshint.js:1280:3      	functionicity           	U   	functionicity = ["
   - "tests/performance/jshint.js:1285:3      	funct                   	U   	funct, // The current function"
   - "tests/performance/jshint.js:1290:3      	inblock                 	U   	inblock,"
@@ -719,7 +713,6 @@ issues:
   - "tests/performance/jshint.js:7919:42     	gzipped                 	U   	the minified (but not gzipped) version:"
   - "tests/performance/jshint.js:8006:10     	foldl                   	U   	// or `foldl`. Delegates to **ECMAScript"
   - "tests/performance/jshint.js:8026:62     	foldr                   	U   	reduce, also known as `foldr`."
-  - "tests/performance/jshint.js:8417:75     	MSIE                    	U   	m looking at you, **MSIE**),"
   - "tests/performance/jshint.js:8506:30     	hasher                  	U   	memoize = function(func, hasher) {"
   - "tests/performance/jshint.js:8726:25     	egal                    	U   	// See the Harmony `egal` proposal: http://wiki"
   - "tests/performance/jshint.js:8852:22     	inspectable             	U   	// there isn't any inspectable \"Arguments\" type."

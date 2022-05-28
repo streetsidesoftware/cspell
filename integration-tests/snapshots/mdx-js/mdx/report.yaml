@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.*"]
 Summary:
   files: 160
   filesWithIssues: 100
-  issues: 1380
+  issues: 1349
   errors: 0
 Errors: []
 
@@ -212,7 +212,6 @@ issues:
   - "docs/docs/extending-mdx.server.mdx:107:14   	Katex               	U   	import rehypeKatex from 'rehype-katex'"
   - "docs/docs/extending-mdx.server.mdx:107:33   	katex               	U   	rehypeKatex from 'rehype-katex' // Render math with"
   - "docs/docs/extending-mdx.server.mdx:108:14   	Frontmatter         	U   	import remarkFrontmatter from 'remark-frontmatter"
-  - "docs/docs/extending-mdx.server.mdx:109:58   	strikethrough       	U   	Tables, footnotes, strikethrough, task lists, literal"
   - "docs/docs/extending-mdx.server.mdx:142:2    	unifiedjs           	U   	`unifiedjs.com`][learn]."
   - "docs/docs/extending-mdx.server.mdx:166:42   	optionsremarkplugins	U   	plugins]: /packages/mdx/#optionsremarkplugins"
   - "docs/docs/extending-mdx.server.mdx:168:42   	optionsrehypeplugins	U   	plugins]: /packages/mdx/#optionsrehypeplugins"
@@ -245,15 +244,9 @@ issues:
   - "docs/docs/what-is-mdx.server.mdx:349:26     	optionsformat   	U   	format]: /packages/mdx/#optionsformat"
   - "docs/docs/what-is-mdx.server.mdx:359:2      	iife            	U   	[iife]: https://developer"
   - "docs/guides/embed.server.mdx:12:63      	codepens	U   	like tweets, gists or codepens in"
-  - "docs/guides/embed.server.mdx:27:23      	embedder	U   	You can use [`@remark-embedder/core`][remark-embedder"
-  - "docs/guides/embed.server.mdx:33:18      	Embedder	U   	import fauxRemarkEmbedder from '@remark-embedder"
   - "docs/guides/embed.server.mdx:34:12      	Oembed  	U   	import fauxOembedTransformer from '@remark"
   - "docs/guides/embed.server.mdx:34:65      	oembed  	U   	embedder/transformer-oembed'"
   - "docs/guides/embed.server.mdx:74:10      	codepen 	U   	Here’s a codepen, and some other blog"
-  - "docs/guides/gfm.server.mdx:36:4     	Strikethrough   	U   	## Strikethrough"
-  - "docs/guides/gfm.server.mdx:45:4     	Tasklist        	U   	## Tasklist"
-  - "docs/guides/gfm.server.mdx:82:65    	fnref           	U   	1\" id=\"user-content-fnref-1\" data-footnote-ref"
-  - "docs/guides/gfm.server.mdx:113:57   	backref         	U   	fnref-1\" data-footnote-backref className=\"data-footnote"
   - "docs/guides/math.server.mdx:18:52   	mathjax 	U   	(KaTeX) or [`rehype-mathjax`][rehype-mathjax]"
   - "docs/guides/math.server.mdx:61:34   	mathml  	U   	span className=\"katex-mathml\">"
   - "docs/guides/mdx-on-demand.server.mdx:97:27      	compilefile     	U   	compile]: /packages/mdx/#compilefile-options"
@@ -284,6 +277,7 @@ issues:
   - "docs/packages/mdx.server.md:25:42   	evaluatesyncfile        	U   	valuateSync(file, options)`](#evaluatesyncfile-options)"
   - "docs/packages/mdx.server.md:27:45   	runsyncfunctionbody     	U   	functionBody, options)`](#runsyncfunctionbody-options)"
   - "docs/packages/mdx.server.md:28:39   	createprocessoroptions  	U   	createProcessor(options)`](#createprocessoroptions)"
+  - "docs/packages/mdx.server.md:158:58  	strikethrough           	U   	Tables, footnotes, strikethrough, task lists, literal"
   - "docs/packages/mdx.server.md:196:23  	Rehype                  	U   	#### `options.remarkRehypeOptions`"
   - "docs/packages/mdx.server.md:216:26  	mkdn                    	U   	markdown', '.mdown', '.mkdn', '.mkd', '.mdwn',"
   - "docs/packages/mdx.server.md:216:43  	mdwn                    	U   	'.mkdn', '.mkd', '.mdwn', '.mkdown', '.ron'"
@@ -317,7 +311,6 @@ issues:
   - "packages/mdx/lib/plugin/recma-document.js:45:21     	Estree      	U   	import {positionFromEstree} from 'unist-util-position"
   - "packages/mdx/lib/plugin/recma-document.js:454:17    	declarators 	U   	const declarators = node.specifiers"
   - "packages/mdx/lib/plugin/recma-stringify.js:173:63   	curlies 	U   	ionContainer`, which does the curlies)"
-  - "packages/mdx/test/compile.js:31:21      	userland    	U   	// So instead use a userland module."
   - "packages/mdx/test/compile.js:995:31     	setext      	U   	should support headings (setext) (`=` -> `<h1>`)'"
   - "packages/mdx/test/compile.js:1040:99    	describedby 	U   	footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
   - "packages/mdx/test/compile.js:1421:21    	rexporting  	U   	'should support rexporting something as a default"

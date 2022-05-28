@@ -3,7 +3,7 @@ Repository: microsoft/TypeScript-Website
 Url: "https://github.com/microsoft/TypeScript-Website.git"
 Args: ["--config=../../../../config/repositories/microsoft/TypeScript-Website/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 746, Issues found: 753 in 195 files
+ CSpell: Files checked: 746, Issues found: 759 in 196 files
  exit code: 1
 ./docs/Deprecating a page.md:3:109     - Unknown word (Dont)       -- deleting because [Cool URIs Dont Change](https://www
 ./docs/New TypeScript Version.md:118:3     - Unknown word (Shippit)    -- # Shippit
@@ -128,6 +128,7 @@ Lines:
 ./packages/documentation/copy/en/tutorials/ASP.NET Core.md:39:64     - Unknown word (downloaddependency) -- images/tutorials/aspnet/downloaddependency.png)
 ./packages/documentation/copy/en/tutorials/ASP.NET Core.md:92:37     - Unknown word (diaglogue)          -- showing the new file diaglogue with TypeScript JSON
 ./packages/documentation/scripts/generateDocsNavigationPerLanguage.js:221:9     - Unknown word (navigations) -- const navigations: Record<string, SidebarNavIte
+./packages/documentation/scripts/generateDocsNavigationPerLanguage.js:239:33    - Unknown word (dont)        -- Lots of 2nd level navs dont have subnav, bail for
 ./packages/documentation/scripts/generateTypesForFilesInDocs.js:24:20     - Unknown word (ortatherox) -- // From:   '/Users/ortatherox/dev/typescript/new-website
 ./packages/glossary/copy/en/index-signatures.md:18:3      - Unknown word (taniguchi)  -- taniguchi: 0.6782344919;
 ./packages/glossary/copy/en/index-signatures.md:19:3      - Unknown word (raabe)      -- raabe: 0.9189385332;
@@ -221,7 +222,6 @@ Lines:
 ./packages/typescriptlang-org/src/copy/en/dt.ts:7:8       - Unknown word (matchs)     -- dt_s_matchs: "matches",
 ./packages/typescriptlang-org/src/copy/en/footer.ts:3:30      - Unknown word (Colours)    -- site_colours: "Site Colours",
 ./packages/typescriptlang-org/src/copy/en/playground.ts:49:15     - Unknown word (bugworkbench) -- play_export_bugworkbench: "Open in Bug Workbench
-./packages/typescriptlang-org/src/dom.d.ts:10425:18  - Unknown word (bitmask)                    -- * Returns a bitmask indicating the position
 ./packages/typescriptlang-org/src/dom.d.ts:10688:82  - Unknown word (GLSL)                       -- WebGL API and adds the GLSL derivative functions
 ./packages/typescriptlang-org/src/dom.d.ts:10718:15  - Unknown word (multiview)                  -- interface OVR_multiview2 {
 ./packages/typescriptlang-org/src/dom.d.ts:10719:23  - Unknown word (Multiview)                  -- framebufferTextureMultiviewOVR(target: GLenum, attachment
@@ -236,7 +236,6 @@ Lines:
 ./packages/typescriptlang-org/src/dom.d.ts:11927:26  - Unknown word (subresource)                -- * Returns request's subresource integrity metadata,
 ./packages/typescriptlang-org/src/dom.d.ts:13123:11  - Unknown word (SVGM)                       -- interface SVGMPathElement extends SVGElement
 ./packages/typescriptlang-org/src/dom.d.ts:14189:30  - Unknown word (unitless)                   -- pan property takes a unitless value between -1 (full
-./packages/typescriptlang-org/src/dom.d.ts:1437:31   - Unknown word (chainable)  -- Provides a convenient, chainable way of piping this readable
 ./packages/typescriptlang-org/src/dom.d.ts:14390:33  - Unknown word (lowercased)                 -- Returns encoding's name, lowercased.
 ./packages/typescriptlang-org/src/dom.d.ts:14664:145  - Unknown word (trackpad)                   -- be a touchscreen or trackpad. */
 ./packages/typescriptlang-org/src/dom.d.ts:147:5     - Unknown word (timecode)   -- timecode?: DOMHighResTimeStamp
@@ -244,14 +243,14 @@ Lines:
 ./packages/typescriptlang-org/src/dom.d.ts:15016:36  - Unknown word (pvrtc)                      -- WEBGL_compressed_texture_pvrtc {
 ./packages/typescriptlang-org/src/dom.d.ts:15017:30  - Unknown word (PVRTC)                      -- readonly COMPRESSED_RGBA_PVRTC_2BPPV1_IMG: GLenum;
 ./packages/typescriptlang-org/src/dom.d.ts:15017:37  - Unknown word (BPPV)                       -- COMPRESSED_RGBA_PVRTC_2BPPV1_IMG: GLenum;
+./packages/typescriptlang-org/src/dom.d.ts:15438:14  - Unknown word (DONT)                       -- readonly DONT_CARE: GLenum;
 ./packages/typescriptlang-org/src/dom.d.ts:17019:20  - Unknown word (subprotocol)                -- * Returns the subprotocol selected by the server
 ./packages/typescriptlang-org/src/dom.d.ts:17248:5   - Unknown word (ongamepadconnected)         -- ongamepadconnected: ((this: WindowEventHandlers
 ./packages/typescriptlang-org/src/dom.d.ts:17249:5   - Unknown word (ongamepaddisconnected)      -- ongamepaddisconnected: ((this: WindowEventHandlers
-./packages/typescriptlang-org/src/dom.d.ts:17342:158  - Unknown word (backpressure)               -- comes with built-in backpressure and queuing. */
 ./packages/typescriptlang-org/src/dom.d.ts:17784:35  - Unknown word (externref)                  -- TableKind = "anyfunc" | "externref";
 ./packages/typescriptlang-org/src/dom.d.ts:18111:6   - Unknown word (mpath)                      -- "mpath": SVGMPathElement;
 ./packages/typescriptlang-org/src/dom.d.ts:18665:129  - Unknown word (unicase)                    -- | "titling-caps" | "unicase";
-./packages/typescriptlang-org/src/dom.d.ts:18693:25  - Unknown word (smpte)                     -- type HdrMetadataType = "smpteSt2086" | "smpteSt20
+./packages/typescriptlang-org/src/dom.d.ts:18693:25  - Unknown word (smpte)                      -- type HdrMetadataType = "smpteSt2086" | "smpteSt20
 ./packages/typescriptlang-org/src/dom.d.ts:18704:53  - Unknown word (webrtc)                    -- | "media-source" | "webrtc";
 ./packages/typescriptlang-org/src/dom.d.ts:18711:107  - Unknown word (seekforward)               -- | "seekbackward" | "seekforward" | "seekto" | "skipad
 ./packages/typescriptlang-org/src/dom.d.ts:18711:123  - Unknown word (seekto)                    -- | "seekforward" | "seekto" | "skipad" | "stop
@@ -269,7 +268,6 @@ Lines:
 ./packages/typescriptlang-org/src/dom.d.ts:4797:35   - Unknown word (RGTC)           -- COMPRESSED_RED_GREEN_RGTC2_EXT: GLenum;
 ./packages/typescriptlang-org/src/dom.d.ts:482:5     - Unknown word (fontfaces)  -- fontfaces?: FontFace[];
 ./packages/typescriptlang-org/src/dom.d.ts:4863:25   - Unknown word (uppercased)     -- * Returns the HTML-uppercased qualified name.
-./packages/typescriptlang-org/src/dom.d.ts:5021:78   - Unknown word (cancelation)    -- successfully to indicate cancelation, and false otherwise
 ./packages/typescriptlang-org/src/dom.d.ts:5328:6    - Unknown word (loadingdone)    -- "loadingdone": Event;
 ./packages/typescriptlang-org/src/dom.d.ts:5329:6    - Unknown word (loadingerror)   -- "loadingerror": Event;
 ./packages/typescriptlang-org/src/dom.d.ts:5333:5    - Unknown word (onloading)      -- onloading: ((this: FontFaceSet
