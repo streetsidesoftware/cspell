@@ -163,7 +163,7 @@ async function spellCheckFullDocument(
     const { generateSuggestions, numSuggestions } = options;
     const validateOptions = clean({ generateSuggestions, numSuggestions });
 
-    const issues = shouldCheck ? await validateText(document.text, docSettings.settings, validateOptions) : [];
+    const issues = shouldCheck ? await validateDocument(document, docSettings.settings, validateOptions) : [];
 
     const result: SpellCheckFileResult = {
         document,
@@ -176,6 +176,14 @@ async function spellCheckFullDocument(
     };
 
     return result;
+}
+
+function validateDocument(
+    document: DocumentWithText,
+    settings: CSpellUserSettings,
+    validateOptions: ValidateTextOptions
+): Promise<ValidationIssue[]> {
+    return validateText(document.text, settings, validateOptions);
 }
 
 async function searchForDocumentConfig(

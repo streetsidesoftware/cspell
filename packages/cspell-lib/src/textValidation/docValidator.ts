@@ -13,6 +13,7 @@ import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
+import { ParsedText, SimpleRange } from './parsedText';
 import {
     calcTextInclusionRanges,
     LineValidator,
@@ -195,16 +196,20 @@ export class DocumentValidator {
         return this._preparationTime;
     }
 
-    checkText(range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[] {
+    checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[] {
+        const text = this._document.text.slice(range[0], range[1]);
+        return this.check({ text, range, scope });
+    }
+
+    check(parsedText: ParsedText): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations);
+        const { range, text } = parsedText;
         const { segmenter, lineValidator } = this._preparations;
         // Determine settings for text range
         // Slice text based upon include ranges
         // Check text against dictionaries.
         const offset = range[0];
-        const offsetEnd = range[1];
-        const text = this._document.text.slice(offset, offsetEnd);
         const line = this._document.lineAt(offset);
         const lineSeg: LineSegment = {
             line,
@@ -229,6 +234,13 @@ export class DocumentValidator {
         return withSugs;
     }
 
+    checkDocument(): ValidationIssue[] {
+        assert(this._ready);
+        assert(this._preparations);
+
+        return [...this.checkDocumentLines()];
+    }
+
     get document() {
         return this._document;
     }
@@ -236,6 +248,14 @@ export class DocumentValidator {
     public updateDocumentText(text: string) {
         updateTextDocument(this._document, [{ text }]);
         this._updatePrep();
+    }
+
+    private *checkDocumentLines() {
+        for (const line of this.document.getLines()) {
+            const { text, offset } = line;
+            const range = [offset, offset + text.length] as const;
+            yield* this.check({ text, range });
+        }
     }
 
     private addPossibleError(error: Error | undefined | unknown) {
@@ -277,10 +297,6 @@ export class DocumentValidator {
         return dict.suggest(text, sugOptions).map((r) => r.word);
     }
 }
-
-export type Offset = number;
-
-export type SimpleRange = readonly [Offset, Offset];
 
 interface Preparations {
     /** loaded config */

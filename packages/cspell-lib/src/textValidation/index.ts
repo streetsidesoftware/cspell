@@ -4,3 +4,4 @@ export { checkText, IncludeExcludeFlag, validateText } from './validator';
 export type { CheckTextInfo, TextInfoItem, ValidateTextOptions, ValidationIssue } from './validator';
 export { DocumentValidator } from './docValidator';
 export type { DocumentValidatorOptions } from './docValidator';
+export type { Offset, SimpleRange, ParsedText } from './parsedText';
