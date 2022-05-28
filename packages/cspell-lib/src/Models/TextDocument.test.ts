@@ -1,4 +1,4 @@
-import { createTextDocument, updateTextDocument } from './TextDocument';
+import { createTextDocument, isTextDocument, TextDocument, updateTextDocument } from './TextDocument';
 import { Uri } from './Uri';
 
 describe('TextDocument', () => {
@@ -23,6 +23,25 @@ describe('TextDocument', () => {
         expect(doc.text.startsWith('showSelf', offset)).toBe(true);
         updateTextDocument(doc, [{ text: textCopy }]);
         expect(doc.text).toBe(textCopy);
+    });
+
+    test.each`
+        doc            | expected
+        ${''}          | ${false}
+        ${{}}          | ${false}
+        ${sampleDoc()} | ${true}
+    `('isTextDocument $doc', ({ doc, expected }) => {
+        expect(isTextDocument(doc)).toBe(expected);
+    });
+
+    test.each`
+        doc
+        ${''}
+        ${sampleDoc()}
+    `('getLines', ({ doc }: { doc: string | TextDocument }) => {
+        doc = typeof doc === 'string' ? sampleDoc(undefined, doc) : doc;
+        const lines = [...doc.getLines()];
+        expect(lines.map((t) => t.text).join('')).toBe(doc.text);
     });
 });
 
