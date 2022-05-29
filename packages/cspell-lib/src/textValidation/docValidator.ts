@@ -17,6 +17,8 @@ import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import { ParsedText, SimpleRange } from './parsedText';
 import {
     calcTextInclusionRanges,
+    defaultMaxDuplicateProblems,
+    defaultMaxNumberOfProblems,
     LineValidator,
     lineValidatorFactory,
     mapLineSegmentAgainstRangesFactory,
@@ -265,10 +267,24 @@ export class DocumentValidator {
     }
 
     private *checkDocumentLines() {
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        const { maxNumberOfProblems = defaultMaxNumberOfProblems, maxDuplicateProblems = defaultMaxDuplicateProblems } =
+            this._preparations.validateOptions;
+
+        let numProblems = 0;
+        const mapOfProblems = new Map<string, number>();
+
         for (const line of this.document.getLines()) {
             const { text, offset } = line;
             const range = [offset, offset + text.length] as const;
-            yield* this.check({ text, range });
+            for (const issue of this.check({ text, range })) {
+                const { text } = issue;
+                const n = (mapOfProblems.get(text) || 0) + 1;
+                mapOfProblems.set(text, n);
+                if (n > maxDuplicateProblems) continue;
+                yield issue;
+                if (++numProblems >= maxNumberOfProblems) return;
+            }
         }
     }
 
