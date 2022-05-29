@@ -590,7 +590,7 @@ declare class DocumentValidator {
     get prepTime(): number;
     checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[];
     check(parsedText: ParsedText): ValidationIssue[];
-    checkDocument(): ValidationIssue[];
+    checkDocument(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
     updateDocumentText(text: string): void;
     private checkDocumentLines;

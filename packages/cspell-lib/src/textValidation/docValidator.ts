@@ -250,11 +250,11 @@ export class DocumentValidator {
         return withSugs;
     }
 
-    checkDocument(): ValidationIssue[] {
+    checkDocument(forceCheck = false): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
 
-        return [...this.checkDocumentLines()];
+        return forceCheck || this.shouldCheckDocument() ? [...this.checkDocumentLines()] : [];
     }
 
     get document() {
