@@ -1,7 +1,7 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, TextOffset, TextDocumentOffset, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
-import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
+import { CompoundWordsMethod, SuggestionResult, SuggestionCollector } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 export * from 'cspell-io';
 import { URI } from 'vscode-uri';
@@ -208,20 +208,6 @@ declare class SpellingDictionaryCollection implements SpellingDictionary {
     private _isNoSuggestWord;
 }
 
-/**
- * The keys of an object where the values cannot be undefined.
- */
-declare type OptionalKeys<T> = Exclude<{
-    [P in keyof T]: T[P] extends Exclude<T[P], undefined> ? never : P;
-}[keyof T], undefined>;
-/**
- * Allow undefined in optional fields
- */
-declare type OptionalOrUndefined<T> = {
-    [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P];
-};
-
-declare const SymbolCSpellSettingsInternal: unique symbol;
 interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
     [SymbolCSpellSettingsInternal]: true;
     dictionaryDefinitions?: DictionaryDefinitionInternal[];
@@ -230,15 +216,6 @@ interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
     finalized: true;
     ignoreRegExpList: RegExp[];
     includeRegExpList: RegExp[];
-}
-declare type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
-interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
-    /**
-     * Optional weight map used to improve suggestions.
-     */
-    readonly weightMap?: WeightMap | undefined;
-    /** The path to the config file that contains this dictionary definition */
-    readonly __source?: string | undefined;
 }
 
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
@@ -371,15 +348,11 @@ declare namespace text_d {
 declare type LanguageId = string;
 declare function getLanguagesForExt(ext: string): string[];
 
-declare type DocumentUri = URI;
+declare type DocumentUri = Uri.Uri;
 interface Position {
     line: number;
     character: number;
 }
-/**
- * Range offset tuple.
- */
-declare type SimpleRange$1 = [start: number, end: number];
 interface TextDocumentLine {
     readonly text: string;
     readonly offset: number;
@@ -425,7 +398,7 @@ interface CreateTextDocumentParams {
     version?: number | undefined;
 }
 interface TextDocumentContentChangeEvent {
-    range?: SimpleRange$1;
+    range?: SimpleRange;
     text: string;
 }
 declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
@@ -439,7 +412,7 @@ declare type LoaderResult = URI | undefined;
 
 declare type CSpellSettingsWST$1 = CSpellSettingsWithSourceTrace;
 declare type CSpellSettingsI$1 = CSpellSettingsInternal;
-declare type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
+declare type PnPSettings = OptionalOrUndefined<PnPSettingsStrict>;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
 declare const defaultConfigFilenames: readonly string[];
@@ -523,8 +496,8 @@ interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];
     includeRegExpList?: RegExp[];
 }
-interface ValidationResult extends TextOffset {
-    line: TextOffset;
+interface ValidationResult extends TextOffsetRW {
+    line: TextOffsetRW;
     isFlagged?: boolean;
     isFound?: boolean;
 }
@@ -605,7 +578,6 @@ declare class DocumentValidator {
     private suggest;
     private genSuggestions;
 }
-declare type Offset = number;
 declare type SimpleRange = readonly [Offset, Offset];
 
 interface SpellCheckFileOptions extends ValidateTextOptions {
