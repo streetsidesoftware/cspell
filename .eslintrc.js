@@ -66,6 +66,9 @@ const config = {
             env: {
                 jest: true,
             },
+            rules: {
+                'jest/valid-title': 'warn',
+            },
         },
     ],
 };
