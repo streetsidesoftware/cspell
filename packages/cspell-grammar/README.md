@@ -31,11 +31,15 @@ rules:
 
 Rules are applied in the order they match the scope of the text.
 
-When checking JavaScript files:
+When checking JavaScript files with the above example rules:
 
-- strings will use the locale `en,fr`
-- the `marketing-terms` dictionary will be enabled
-- `caseSensitive` will be `false`
+- strings will:
+  - use the locale `en,fr`
+  - the `marketing-terms` dictionary will be enabled
+  - `caseSensitive` will be `true`
+- everything else:
+  - locale: `en`
+  - `caseSensitive` will be `false`
 
 At its core, `cspell-grammar` uses a simplified form of the TextMate grammar.
 
@@ -44,7 +48,7 @@ At its core, `cspell-grammar` uses a simplified form of the TextMate grammar.
 Why use a grammar parser? Couldn't a colorizer / highlighter or a language AST be used?
 At one level, needs of the spell checker are simpler and different from colorizers or language AST parsers.
 The goal of a spell checker is to spell check **_relevant_** text. The spell check does not need to care about
-the syntactical correctness of a document or things like punctuation.
+the syntactical correctness of a document or presentation.
 
 The goal of a grammar parser for the spell checker is to allow the user to decide:
 

@@ -389,6 +389,8 @@ interface TextDocument {
     positionAt(offset: number): Position;
     offsetAt(position: Position): number;
     lineAt(offset: number): TextDocumentLine;
+    getLine(lineNum: number): TextDocumentLine;
+    getLines(): Iterable<TextDocumentLine>;
 }
 interface CreateTextDocumentParams {
     uri: DocumentUri | string;
@@ -529,6 +531,23 @@ declare enum IncludeExcludeFlag {
 }
 declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
 
+declare type SimpleRange = readonly [Offset, Offset];
+interface ParsedText {
+    /**
+     * Transformed text
+     */
+    text: string;
+    /**
+     * Offset pair of the original text
+     */
+    range: SimpleRange;
+    /**
+     * Relative map to the original text.
+     */
+    map?: number[];
+    scope?: string[];
+}
+
 interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
      * Optional path to a configuration file.
@@ -569,16 +588,45 @@ declare class DocumentValidator {
      * The amount of time in ms to prepare for validation.
      */
     get prepTime(): number;
-    checkText(range: SimpleRange, _text: string, _scope: string[]): ValidationIssue[];
+    checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[];
+    check(parsedText: ParsedText): ValidationIssue[];
+    checkDocument(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
     updateDocumentText(text: string): void;
+    private checkDocumentLines;
     private addPossibleError;
     private catchError;
     private errorCatcherWrapper;
     private suggest;
     private genSuggestions;
+    getFinalizedDocSettings(): CSpellSettingsInternal;
+    /**
+     * Returns true if the final result of the configuration calculation results
+     * in the document being enabled. Note: in some cases, checking the document
+     * might still make sense, for example, the `@cspell/eslint-plugin` relies on
+     * `eslint` configuration to make that determination.
+     * @returns true if the document settings have resolved to be `enabled`
+     */
+    shouldCheckDocument(): boolean;
+    /**
+     * Internal `cspell-lib` use.
+     */
+    _getPreparations(): Preparations | undefined;
 }
-declare type SimpleRange = readonly [Offset, Offset];
+interface Preparations {
+    /** loaded config */
+    config: CSpellSettingsInternal;
+    dictionary: SpellingDictionaryCollection;
+    /** configuration after applying in-doc settings */
+    docSettings: CSpellSettingsInternal;
+    includeRanges: MatchRange[];
+    lineValidator: LineValidator;
+    segmenter: (lineSegment: LineSegment) => LineSegment[];
+    shouldCheck: boolean;
+    validateOptions: ValidationOptions;
+    localConfig: CSpellUserSettings | undefined;
+    localConfigFilepath: string | undefined;
+}
 
 interface SpellCheckFileOptions extends ValidateTextOptions {
     /**

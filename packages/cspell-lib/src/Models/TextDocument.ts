@@ -54,6 +54,8 @@ export interface TextDocument {
     positionAt(offset: number): Position;
     offsetAt(position: Position): number;
     lineAt(offset: number): TextDocumentLine;
+    getLine(lineNum: number): TextDocumentLine;
+    getLines(): Iterable<TextDocumentLine>;
 }
 
 class TextDocumentImpl implements TextDocument {
@@ -88,21 +90,44 @@ class TextDocumentImpl implements TextDocument {
 
     lineAt(offset: number): TextDocumentLine {
         const position = this.vsTextDoc.positionAt(offset);
-        position.character = 0;
-        const lineOffset = this.vsTextDoc.offsetAt(position);
+        return this.getLine(position.line);
+    }
+
+    getLine(lineNum: number): TextDocumentLine {
+        const position = { line: lineNum, character: 0 };
+        const end = { line: lineNum + 1, character: 0 };
         const range = {
             start: position,
-            end: { line: position.line + 1, character: 0 },
+            end,
         };
-        let _text: string | undefined;
-        const getText = () => this.vsTextDoc.getText(range);
+        const lineOffset = this.vsTextDoc.offsetAt(position);
+        const text = this.vsTextDoc.getText(range);
         return {
-            get text() {
-                return _text ?? (_text = getText());
-            },
+            text,
             offset: lineOffset,
             position,
         };
+    }
+
+    /**
+     * Iterate over the lines of a document one-by-one.
+     * Changing the document between iterations can change the result
+     */
+    *getLines(): Iterable<TextDocumentLine> {
+        const range = {
+            start: { line: 0, character: 0 },
+            end: { line: 1, character: 0 },
+        };
+        while (this.vsTextDoc.offsetAt(range.end) > this.vsTextDoc.offsetAt(range.start)) {
+            const offset = this.vsTextDoc.offsetAt(range.start);
+            yield {
+                text: this.vsTextDoc.getText(range),
+                offset,
+                position: range.start,
+            };
+            ++range.start.line;
+            ++range.end.line;
+        }
     }
 
     /**
@@ -159,6 +184,12 @@ export function updateTextDocument(
     edits: TextDocumentContentChangeEvent[],
     version?: number
 ): TextDocument {
-    assert(doc instanceof TextDocumentImpl, 'Unknown TextDocument type');
+    assert(isTextDocumentImpl(doc), 'Unknown TextDocument type');
     return doc.update(edits, version);
 }
+
+function isTextDocumentImpl(doc: TextDocument | unknown): doc is TextDocumentImpl {
+    return doc instanceof TextDocumentImpl;
+}
+
+export const isTextDocument: (doc: TextDocument | unknown) => doc is TextDocument = isTextDocumentImpl;

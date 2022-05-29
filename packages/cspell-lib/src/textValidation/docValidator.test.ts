@@ -85,6 +85,20 @@ describe('docValidator', () => {
         }
         expect(dVal.prepTime).toBeGreaterThan(0);
     });
+
+    // cspell:ignore kount naame colector Reciever reciever recievers
+    test.each`
+        filename                             | maxDuplicateProblems | expectedIssues
+        ${fix('sample-with-errors.ts')}      | ${undefined}         | ${['Helllo']}
+        ${fix('sample-with-many-errors.ts')} | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']}
+        ${fix('sample-with-many-errors.ts')} | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}
+    `('checkDocument $filename $maxDuplicateProblems', async ({ filename, maxDuplicateProblems, expectedIssues }) => {
+        const doc = await loadDoc(filename);
+        const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
+        await dVal.prepare();
+        const r = dVal.checkDocument();
+        expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
+    });
 });
 
 function td(uri: string, content: string, languageId?: string, locale?: string, version = 1): TextDocument {
