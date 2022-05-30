@@ -148,7 +148,6 @@ jobs:
       REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
 
     outputs:
-      patch: ${{ env.PATCH }}
       base: ${{ env.REF_BRANCH }}
       body: |
         ## Update Integration Repositories
@@ -181,16 +180,21 @@ jobs:
 
       - name: Build Patch
         run: |
-          echo 'PATCH<<__DIFF__' >> $GITHUB_ENV
-          git --no-pager diff >> $GITHUB_ENV
-          echo '__DIFF__' >> $GITHUB_ENV
+          git --no-pager diff > temp/patch.diff
+
+      - name: Store Patch
+        uses: actions/upload-artifact@v3
+        with:
+          name: patch
+          path: temp/patch.diff
+          retention-days: 1
 
   pr:
-    uses: ./.github/workflows/reuseable-pr.yml
+    uses: ./.github/workflows/reuseable-pr-from-artifact.yml
     needs:
       - pr-setup
     with:
-      patch: ${{ needs.pr-setup.outputs.patch }}
+      patch_artifact: patch
       base: ${{ needs.pr-setup.outputs.base }}
       body: ${{ needs.pr-setup.outputs.body }}
       commit-message: ${{ needs.pr-setup.outputs.commit-message }}
