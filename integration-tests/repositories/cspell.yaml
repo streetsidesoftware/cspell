@@ -8,6 +8,8 @@ ignorePaths:
   - "*.idmap" # DOOM, cspell:ignore idmap
   - "*.ogex" # DOOM, cspell:ignore ogex
   - "*.spv" # DOOM, binary file
+  - "*.jar"
+  - "**/java-design-patterns/**/localization/**" # do not spell check localization files
   - "**/eslint/eslint/**/*.svg"
 import:
   - ./cspell-reporter.json
@@ -32,6 +34,9 @@ overrides:
       - "/\\]\\[.*?\\]/g"
       - "/\\]\\(.*?\\)/g"
       - "/^\\[.*?\\]:\\s+(#|http|\\.\\.?\\/).*/gm"
+  - filename: temp/**/java-design-patterns/**/*.md
+    dictionaries:
+      - java
 dictionaries:
   - custom-dictionary
 dictionaryDefinitions:

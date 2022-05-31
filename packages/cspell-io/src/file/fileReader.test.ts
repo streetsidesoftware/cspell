@@ -20,7 +20,7 @@ describe('Validate the fileReader', () => {
         file                       | contains
         ${'samples/cities.txt'}    | ${'San Francisco'}
         ${'samples/cities.txt.gz'} | ${'San Francisco'}
-    `('test reading sync files $file', ({ file, contains }) => {
+    `('reading sync files $file', ({ file, contains }) => {
         const filename = path.resolve(root, file);
         const content = fReader.readFileSync(filename);
         expect(content).toContain(contains);
@@ -30,7 +30,7 @@ describe('Validate the fileReader', () => {
         file                       | contains
         ${'samples/cities.txt'}    | ${'San Francisco'}
         ${'samples/cities.txt.gz'} | ${'San Francisco'}
-    `('test reading async files $file', async ({ file, contains }) => {
+    `('reading async files $file', async ({ file, contains }) => {
         const filename = path.resolve(root, file);
         const content = await fReader.readFile(filename);
         expect(content).toContain(contains);
