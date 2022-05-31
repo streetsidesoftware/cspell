@@ -20,7 +20,7 @@ describe('Verify Exclusion Helper functions', () => {
         ${'file:///project/myProject/node_modules/test/test.js'}        | ${true}
         ${'file:///project/myProject/.vscode/cSpell.json'}              | ${true}
         ${'file:///project/myProject/.github/node_modules/cSpell.json'} | ${true}
-    `('test generated matching function "$uri" expected: $expected', ({ uri, expected }) => {
+    `('generated matching function "$uri" expected: $expected', ({ uri, expected }) => {
         expect(fnExcludeGlobs(uri)).toBe(expected);
     });
 
