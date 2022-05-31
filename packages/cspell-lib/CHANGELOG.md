@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/streetsidesoftware/cspell/compare/v6.1.0-alpha.0...v6.1.0) (2022-05-31)
+
+
+### Features
+
+* Upgrade Java Dictionary ([#2992](https://github.com/streetsidesoftware/cspell/issues/2992)) ([e3059aa](https://github.com/streetsidesoftware/cspell/commit/e3059aaf440bd41b1613c4516397cd7a6411c9dd))
+
+
+
+
+
 # [6.1.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v6.0.0...v6.1.0-alpha.0) (2022-05-28)
 
 
