@@ -5,7 +5,7 @@ Args: ["**/*.md","**/*.java"]
 Summary:
   files: 1687
   filesWithIssues: 1641
-  issues: 8408
+  issues: 8376
   errors: 0
 Errors: []
 
@@ -70,9 +70,9 @@ issues:
   - "circuit-breaker/src/test/java/com/iluwatar/circuitbreaker/DefaultCircuitBreakerTest.java:77:21      	paramater   	U   	//Call with the paramater start_time set to huge"
   - "cloud-claim-check-pattern/call-usage-app/src/main/java/com/iluwatar/claimcheckpattern/consumer/callcostprocessor/functions/UsageCostProcessorFunction.java:24:22    	claimcheckpattern   	U   	package com.iluwatar.claimcheckpattern.consumer.callcostprocessor"
   - "cloud-claim-check-pattern/call-usage-app/src/main/java/com/iluwatar/claimcheckpattern/consumer/callcostprocessor/functions/UsageCostProcessorFunction.java:24:49    	callcostprocessor   	U   	claimcheckpattern.consumer.callcostprocessor.functions;"
-  - "cloud-claim-check-pattern/call-usage-app/src/main/java/com/iluwatar/claimcheckpattern/consumer/callcostprocessor/functions/UsageCostProcessorFunction.java:105:24   	Persistant          	U   	.readFromPersistantStorage(messageReference"
   - "cloud-claim-check-pattern/call-usage-app/src/main/java/com/iluwatar/claimcheckpattern/producer/calldetails/functions/UsageDetailPublisherFunction.java:24:49    	calldetails                 	U   	claimcheckpattern.producer.calldetails.functions;"
   - "cloud-claim-check-pattern/call-usage-app/src/main/java/com/iluwatar/claimcheckpattern/producer/calldetails/functions/UsageDetailPublisherFunction.java:117:35   	usagecostprocessorfunction  	U   	messageHeader.setTopic(\"usagecostprocessorfunction-topic\");"
+  - "cloud-claim-check-pattern/call-usage-app/src/main/java/com/iluwatar/claimcheckpattern/utility/MessageHandlerUtility.java:69:29      	Persistant  	U   	public Message<T> readFromPersistantStorage(MessageReference"
   - "cloud-claim-check-pattern/README.md:77:64   	callusageapp	U   	storage in the container `callusageapp`. For every trigger"
   - "cloud-static-content-hosting/README.md:67:128   	programmic  	U   	cliv1.html) to gain programmic access to AWS cloud"
   - "cloud-static-content-hosting/README.md:69:54    	desribed    	U   	command `aws configure` as desribed in the [instructions"
@@ -664,7 +664,6 @@ issues:
   - "serverless/src/main/java/com/iluwatar/serverless/baas/api/FindPersonApiHandler.java:35:59   	mummar  	U   	collection Created by dheeraj.mummar on 3/5/18."
   - "serverless/src/main/java/com/iluwatar/serverless/baas/model/Address.java:35:37      	mummarareddy	U   	class Created by dheeraj.mummarareddy on 3/4/18."
   - "serverless/src/main/java/com/iluwatar/serverless/faas/api/LambdaInfoApiHandler.java:24:33   	faas	U   	iluwatar.serverless.faas.api;"
-  - "serverless/src/test/java/com/iluwatar/serverless/baas/api/FindPersonApiHandlerTest.java:67:28   	Paramters   	U   	return request.withPathParamters(Map.of(\"id\", \"37e7a"
   - "service-layer/README.md:27:54   	spellbooks  	U   	that tracks wizards, spellbooks and spells. Wizards"
   - "service-layer/README.md:48:52   	Spellbook   	U   	not shown here are `Spellbook` and `Spell`."
   - "service-layer/README.md:90:28   	Spellbooks  	U   	public Set<Spellbook> getSpellbooks() {"
