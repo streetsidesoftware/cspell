@@ -8,9 +8,13 @@ The configuration used when spell checking a file is calculated by loading the r
 
 Using this technique, nearly every default configuration setting can be overridden when spell checking a specific file.
 
-Order of imports does make a difference. `overrides` are applied in order, followed by `languageSettings`. The means that multiple `overrides` can change the same configuration setting with the last one winning.
+Order of imports does make a difference. `overrides` are applied in order, followed by `languageSettings`. This means that multiple `overrides` can change the same configuration setting with the last one winning.
+
+Even though it is possible to apply settings based upon conditions in `overrides` and `languageSettings`, it is not possible to conditionally _import_ configuration. An automatic workaround is enabled by dynamically searching for the nearest configuration when checking a file. It is possible to disable dynamically loading the nearest configuration by setting `noConfigSearch` to `true`. Despite this limitation, it is not desireable to allow for _conditional imports_. _Conditional imports_ would introduce a destabilizing effect on configuration calculation and optimization.
 
 ## Problem
+
+It is not currently possible to provide groups of settings that can be defined in one configuration file and used conditionally in another.
 
 There are times when a dictionary / plug-in might want to publish multiple configurations or provide the ability to reuse part of a configuration.
 
