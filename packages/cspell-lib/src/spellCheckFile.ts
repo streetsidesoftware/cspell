@@ -115,8 +115,8 @@ async function spellCheckFullDocument(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
-    const { uri, text: content } = document;
-    const doc = createTextDocument({ uri, content });
+    const { uri, text: content, languageId, locale } = document;
+    const doc = createTextDocument({ uri, content, languageId, locale });
     const docValOptions: DocumentValidatorOptions = options;
     const docValidator = new DocumentValidator(doc, docValOptions, settings);
     await docValidator.prepare();
