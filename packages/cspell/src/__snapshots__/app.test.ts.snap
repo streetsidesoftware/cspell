@@ -373,7 +373,28 @@ exports[`Validate cli app current_file languageId Expect Error: undefined 3`] = 
 exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 1`] = `Array []`;
 
 exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 2`] = `
-"error	 0.00ms
+"info	
+info	cspell;
+info	Date: Sat, 03 Apr 2021 11:25:33 GMT
+info	Options:
+info	    verbose:   Yes
+info	    config:    default
+info	    exclude:   node_modules/**
+info	    files:     fix-words.txt
+info	    wordsOnly: No
+info	    unique:    No
+info	
+info	Config Files Found:
+info	    ./fixtures/issue-2998/cspell.json
+info	
+info	Exclusion Globs: 
+info	    Glob: node_modules/** from command line
+info	
+info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
+info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00S
+info	Config file Used: ./fixtures/issue-2998/cspell.json
+info	Dictionaries Used: backwards-compatibility, companies, filetypes, public-licenses, softwareTerms, aws, cryptocurrencies, en_us, fixture
+error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files"
 `;
 
