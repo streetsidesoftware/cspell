@@ -1,9 +1,14 @@
-interface CSpellSettings {
-    // From types
+export interface CSpellSettings {
+    id?: string;
+    configDefinitions?: ConfigDefinitions;
+    useConfigs: UseConfigs;
 }
 
-export interface DefineConfig {
-    [name: string]: CSpellSettings;
+export interface ConfigDefinition {
+    dictionaries?: string[];
+}
+export interface ConfigDefinitions {
+    [name: string]: ConfigDefinition;
 }
 
-export type UseConfig = string[];
+export type UseConfigs = string[];
