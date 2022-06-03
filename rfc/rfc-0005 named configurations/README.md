@@ -2,7 +2,7 @@
 
 ## Background
 
-CSpell is highly flexible with it configuration, as a result some configurations can be quite complex. CSpell allows layering configuration by importing multiple config files in addition to using conditional configuration provided by `languageSettings` and `overrides`.
+CSpell is highly flexible with its configuration, as a result some configurations can be quite complex. CSpell allows layering configuration by importing multiple config files in addition to using conditional configuration provided by `languageSettings` and `overrides`.
 
 The configuration used when spell checking a file is calculated by loading the relevant config files merging them at the top level configuration and then applying matching `overrides` followed by matching `languageSettings`.
 
@@ -14,7 +14,7 @@ Even though it is possible to apply settings based upon conditions in `overrides
 
 ## Problem
 
-It is not currently possible to provide groups of settings that can be defined in one configuration file and used conditionally in another.
+It is not currently possible to provide groups of settings that can be defined in one configuration file and used conditionally within the same or in another configuration file.
 
 There are times when a dictionary / plug-in might want to publish multiple configurations or provide the ability to reuse part of a configuration.
 
