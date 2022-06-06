@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 210, Issues found: 3269 in 197 files
+ CSpell: Files checked: 210, Issues found: 3270 in 197 files
  exit code: 1
 ./admin.go:1009:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1045:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -154,9 +154,10 @@ Lines:
 ./modules/caddyhttp/app.go:141:8     - Unknown word (Iface)      -- tlsAppIface, err := ctx.App("tls
 ./modules/caddyhttp/app.go:367:16    - Unknown word (errcheck)   -- //nolint:errcheck
 ./modules/caddyhttp/autohttps.go:141:40    - Unknown word (deduplicated) -- qualifying domain names (deduplicated) in this server
-./modules/caddyhttp/autohttps.go:155:77    - Unknown word (Tailscale)    -- skipped and it's not a Tailscale domain
-./modules/caddyhttp/autohttps.go:632:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
-./modules/caddyhttp/autohttps.go:649:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
+./modules/caddyhttp/autohttps.go:182:21    - Unknown word (Tailscale)    -- // the implicit Tailscale manager module will
+./modules/caddyhttp/autohttps.go:492:12    - Unknown word (reprovision)  -- // must reprovision the automation policy
+./modules/caddyhttp/autohttps.go:644:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
+./modules/caddyhttp/autohttps.go:661:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
 ./modules/caddyhttp/caddyauth/basicauth.go:15:9      - Unknown word (caddyauth)  -- package caddyauth
 ./modules/caddyhttp/caddyauth/basicauth.go:22:2      - Unknown word (weakrand)   -- weakrand "math/rand"
 ./modules/caddyhttp/caddyauth/basicauth.go:84:19     - Unknown word (hasher)     -- // load password hasher
@@ -267,8 +268,8 @@ Lines:
 ./modules/caddyhttp/reverseproxy/healthchecks.go:47:35     - Unknown word (proxied)    -- health checks monitor proxied requests for errors
 ./modules/caddyhttp/reverseproxy/httptransport.go:124:27    - Unknown word (cleartext)  -- does not "HTTP/2 over cleartext TCP")
 ./modules/caddyhttp/reverseproxy/httptransport.go:91:46     - Unknown word (Cleartext)  -- use H2C (HTTP/2 over Cleartext) to the
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1257:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1261:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1262:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1266:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:153:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:537:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:575:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
@@ -336,10 +337,10 @@ Lines:
 ./modules/caddytls/certmanagers.go:15:14     - Unknown word (tailscale)  -- "github.com/tailscale/tscert"
 ./modules/caddytls/certmanagers.go:15:24     - Unknown word (tscert)     -- github.com/tailscale/tscert"
 ./modules/caddytls/certselection.go:124:34    - Unknown word (interops)   -- a big.Int type that interops with JSON encodings
-./modules/caddytls/connpolicy.go:234:17    - Unknown word (ACMETLS)    -- if a == acmez.ACMETLS1Protocol {
-./modules/caddytls/connpolicy.go:320:27    - Unknown word (clientauth) -- Active returns true if clientauth has an actionable configurati
-./modules/caddytls/connpolicy.go:328:46    - Unknown word (clientauth's) -- sets up cfg to enforce clientauth's configuration.
-./modules/caddytls/connpolicy.go:464:33    - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
+./modules/caddytls/connpolicy.go:249:17    - Unknown word (ACMETLS)    -- if a == acmez.ACMETLS1Protocol {
+./modules/caddytls/connpolicy.go:344:27    - Unknown word (clientauth) -- Active returns true if clientauth has an actionable configurati
+./modules/caddytls/connpolicy.go:353:46    - Unknown word (clientauth's) -- sets up cfg to enforce clientauth's configuration.
+./modules/caddytls/connpolicy.go:514:33    - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
 ./modules/caddytls/distributedstek/distributedstek.go:15:12     - Unknown word (distributedstek) -- // Package distributedstek provides TLS session
 ./modules/caddytls/distributedstek/distributedstek.go:229:18    - Unknown word (godocs)          -- // again, see godocs for why timer is stopped
 ./modules/caddytls/distributedstek/distributedstek.go:45:38     - Unknown word (STEK)            -- implements a distributed STEK provider. This

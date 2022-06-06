@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 210
   filesWithIssues: 197
-  issues: 3269
+  issues: 3270
   errors: 0
 Errors: []
 
@@ -159,9 +159,10 @@ issues:
   - "modules/caddyhttp/app.go:141:8      	Iface   	U   	tlsAppIface, err := ctx.App(\"tls"
   - "modules/caddyhttp/app.go:367:16     	errcheck	U   	//nolint:errcheck"
   - "modules/caddyhttp/autohttps.go:141:40   	deduplicated    	U   	qualifying domain names (deduplicated) in this server"
-  - "modules/caddyhttp/autohttps.go:155:77   	Tailscale       	U   	skipped and it's not a Tailscale domain"
-  - "modules/caddyhttp/autohttps.go:632:4    	reprovisioned   	U   	// reprovisioned. acmeIssuer must not"
-  - "modules/caddyhttp/autohttps.go:649:28   	TLSALPN         	U   	acmeIssuer.Challenges.TLSALPN == nil {"
+  - "modules/caddyhttp/autohttps.go:182:21   	Tailscale       	U   	// the implicit Tailscale manager module will"
+  - "modules/caddyhttp/autohttps.go:492:12   	reprovision     	U   	// must reprovision the automation policy"
+  - "modules/caddyhttp/autohttps.go:644:4    	reprovisioned   	U   	// reprovisioned. acmeIssuer must not"
+  - "modules/caddyhttp/autohttps.go:661:28   	TLSALPN         	U   	acmeIssuer.Challenges.TLSALPN == nil {"
   - "modules/caddyhttp/caddyauth/basicauth.go:15:9       	caddyauth   	U   	package caddyauth"
   - "modules/caddyhttp/caddyauth/basicauth.go:22:2       	weakrand    	U   	weakrand \"math/rand\""
   - "modules/caddyhttp/caddyauth/basicauth.go:84:19      	hasher      	U   	// load password hasher"
@@ -277,8 +278,8 @@ issues:
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:575:26   	gunicorn        	U   	with \"slow clients\" (gunicorn, etc.) - this obviously"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:577:47   	slowloris       	U   	more susceptible to slowloris"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:617:50   	websockets      	U   	upgrades, such as for websockets."
-  - "modules/caddyhttp/reverseproxy/reverseproxy.go:1257:56  	libcurl         	U   	standard but still sent by libcurl and rejected by e.g"
-  - "modules/caddyhttp/reverseproxy/reverseproxy.go:1261:16  	canonicalized   	U   	\"Te\", // canonicalized version of \"TE\""
+  - "modules/caddyhttp/reverseproxy/reverseproxy.go:1262:56  	libcurl         	U   	standard but still sent by libcurl and rejected by e.g"
+  - "modules/caddyhttp/reverseproxy/reverseproxy.go:1266:16  	canonicalized   	U   	\"Te\", // canonicalized version of \"TE\""
   - "modules/caddyhttp/reverseproxy/selectionpolicies.go:168:7   	Reqs    	U   	leastReqs := -1"
   - "modules/caddyhttp/reverseproxy/selectionpolicies.go:517:65  	hashable	U   	from pool based on a hashable string s."
   - "modules/caddyhttp/reverseproxy/streaming.go:64:22   	cancelation 	U   	// Ensure that the cancelation of a request closes"
@@ -341,10 +342,10 @@ issues:
   - "modules/caddytls/certmanagers.go:15:24      	tscert      	U   	github.com/tailscale/tscert\""
   - "modules/caddytls/certmanagers.go:133:2      	sigs        	U   	sigs := make([]string, len"
   - "modules/caddytls/certselection.go:124:34    	interops	U   	a big.Int type that interops with JSON encodings"
-  - "modules/caddytls/connpolicy.go:234:17   	ACMETLS         	U   	if a == acmez.ACMETLS1Protocol {"
-  - "modules/caddytls/connpolicy.go:320:27   	clientauth      	U   	Active returns true if clientauth has an actionable configurati"
-  - "modules/caddytls/connpolicy.go:328:46   	clientauth's    	U   	sets up cfg to enforce clientauth's configuration."
-  - "modules/caddytls/connpolicy.go:464:33   	unmarshalable   	U   	PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
+  - "modules/caddytls/connpolicy.go:249:17   	ACMETLS         	U   	if a == acmez.ACMETLS1Protocol {"
+  - "modules/caddytls/connpolicy.go:344:27   	clientauth      	U   	Active returns true if clientauth has an actionable configurati"
+  - "modules/caddytls/connpolicy.go:353:46   	clientauth's    	U   	sets up cfg to enforce clientauth's configuration."
+  - "modules/caddytls/connpolicy.go:514:33   	unmarshalable   	U   	PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
   - "modules/caddytls/distributedstek/distributedstek.go:15:12   	distributedstek 	U   	// Package distributedstek provides TLS session"
   - "modules/caddytls/distributedstek/distributedstek.go:45:38   	STEK            	U   	implements a distributed STEK provider. This"
   - "modules/caddytls/distributedstek/distributedstek.go:56:2    	stek            	U   	stekConfig *caddytls.SessionTicket"
