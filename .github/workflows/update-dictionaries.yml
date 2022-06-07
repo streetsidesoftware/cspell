@@ -46,7 +46,7 @@ jobs:
           ref: ${{ env.REF_BRANCH }}
 
       - name: Use Node.js
-        uses: actions/setup-node@v3.2.0
+        uses: actions/setup-node@v3.3.0
         with:
           cache: npm
 
@@ -148,7 +148,7 @@ jobs:
           echo "$PATCH" | git apply
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3.2.0
+        uses: actions/setup-node@v3.3.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
