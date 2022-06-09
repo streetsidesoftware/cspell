@@ -885,9 +885,8 @@ export type DictionaryPath = string;
 
 /**
  * A File System Path to a dictionary file.
- * @pattern ^.*\.txt$
  */
-export type CustomDictionaryPath = string;
+export type CustomDictionaryPath = FsPath;
 
 export interface RegExpPatternDefinition {
     /**

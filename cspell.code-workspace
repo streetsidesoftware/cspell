@@ -73,10 +73,7 @@
                 "name": "Test: Jest current-file",
                 "program": "${fileWorkspaceFolder}/node_modules/.bin/jest",
                 "cwd": "${fileWorkspaceFolder}",
-                "args": [
-                    "--runInBand",
-                    "${fileBasename}"
-                ],
+                "args": ["--runInBand", "${fileBasename}"],
                 "console": "integratedTerminal",
                 "internalConsoleOptions": "neverOpen",
                 "disableOptimisticBPs": true,
@@ -90,9 +87,7 @@
                 "name": "Test: Jest Entire Folder",
                 "program": "${fileWorkspaceFolder}/node_modules/.bin/jest",
                 "cwd": "${fileWorkspaceFolder}",
-                "args": [
-                    "--runInBand"
-                ],
+                "args": ["--runInBand"],
                 "console": "integratedTerminal",
                 "internalConsoleOptions": "neverOpen",
                 "disableOptimisticBPs": true,
@@ -108,15 +103,10 @@
         "cSpell.customDictionaries": {
             "workspace": true
         },
-        "cSpell.enableFiletypes": [
-            "shellscript"
-        ]
+        "cSpell.enableFiletypes": ["shellscript"],
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "extensions": {
-        "recommendations": [
-            "streetsidesoftware.code-spell-checker",
-            "dbaeumer.vscode-eslint",
-            "esbenp.prettier-vscode"
-        ]
+        "recommendations": ["streetsidesoftware.code-spell-checker", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
     }
 }

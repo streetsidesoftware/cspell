@@ -159,9 +159,8 @@
       "type": "object"
     },
     "CustomDictionaryPath": {
-      "description": "A File System Path to a dictionary file.",
-      "pattern": "^.*\\.txt$",
-      "type": "string"
+      "$ref": "#/definitions/FsPath",
+      "description": "A File System Path to a dictionary file."
     },
     "CustomDictionaryScope": {
       "description": "Specifies the scope of a dictionary.",
