@@ -1,0 +1,55 @@
+# Reusable Workflow
+name: R - List Integrations
+
+# Export list of repositories to check.
+# Reads the list of integrations from ./.github/integrations.json
+# Use `repo-list.sh` in `integration-tests` to generate.
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
+    outputs:
+      repos:
+        description: JSON list of integration test repositories
+        value: ${{ jobs.load.outputs.repos }}
+      ref:
+        description: Branch or ref used
+        value: ${{ jobs.load.outputs.ref }}
+
+permissions:
+  contents: read
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    env:
+      REF_BRANCH: ${{ inputs.ref }}
+    outputs:
+      repos: ${{ env.REPOS }}
+      ref: ${{ env.REF_BRANCH }}
+
+    steps:
+      - name: Inputs
+        env:
+          INPUTS: ${{ toJSON(inputs) }}
+        run: |
+          echo "inputs: $INPUTS"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Gen List
+        run: |
+          cd integration-tests
+          echo "REPOS<<HEREDOC" >> $GITHUB_ENV
+          ./repo-list.sh >> $GITHUB_ENV
+          echo HEREDOC >> $GITHUB_ENV
+
+      - name: Show List
+        run: |
+          echo "$REPOS"

@@ -56,7 +56,7 @@ jobs:
   load-integrations:
     needs:
       - calc-ref
-    uses: ./.github/workflows/reuseable-load-integrations-repo-list.yml
+    uses: ./.github/workflows/reuseable-list-integration-repos.yml
     with:
       ref: ${{ needs.calc-ref.outputs.ref }}
 
