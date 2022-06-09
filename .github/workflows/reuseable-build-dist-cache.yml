@@ -67,7 +67,7 @@ jobs:
           echo "$PATCH" | git apply
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v3.3.0
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
