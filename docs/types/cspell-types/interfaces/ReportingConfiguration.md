@@ -33,7 +33,7 @@ The maximum number of times the same word can be flagged as an error in a file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:234](https://github.com/streetsidesoftware/cspell/blob/c27229b/packages/cspell-types/src/CSpellSettingsDef.ts#L234)
+[CSpellSettingsDef.ts:234](https://github.com/streetsidesoftware/cspell/blob/59a0fe3/packages/cspell-types/src/CSpellSettingsDef.ts#L234)
 
 ___
 
@@ -47,7 +47,7 @@ The maximum number of problems to report in a file.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:227](https://github.com/streetsidesoftware/cspell/blob/c27229b/packages/cspell-types/src/CSpellSettingsDef.ts#L227)
+[CSpellSettingsDef.ts:227](https://github.com/streetsidesoftware/cspell/blob/59a0fe3/packages/cspell-types/src/CSpellSettingsDef.ts#L227)
 
 ___
 
@@ -61,7 +61,7 @@ The minimum length of a word before checking it against a dictionary.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:241](https://github.com/streetsidesoftware/cspell/blob/c27229b/packages/cspell-types/src/CSpellSettingsDef.ts#L241)
+[CSpellSettingsDef.ts:241](https://github.com/streetsidesoftware/cspell/blob/59a0fe3/packages/cspell-types/src/CSpellSettingsDef.ts#L241)
 
 ___
 
@@ -79,7 +79,7 @@ Number of suggestions to make.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:250](https://github.com/streetsidesoftware/cspell/blob/c27229b/packages/cspell-types/src/CSpellSettingsDef.ts#L250)
+[CSpellSettingsDef.ts:250](https://github.com/streetsidesoftware/cspell/blob/59a0fe3/packages/cspell-types/src/CSpellSettingsDef.ts#L250)
 
 ___
 
@@ -101,7 +101,7 @@ Range: between 1 and 5.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:268](https://github.com/streetsidesoftware/cspell/blob/c27229b/packages/cspell-types/src/CSpellSettingsDef.ts#L268)
+[CSpellSettingsDef.ts:268](https://github.com/streetsidesoftware/cspell/blob/59a0fe3/packages/cspell-types/src/CSpellSettingsDef.ts#L268)
 
 ___
 
@@ -119,4 +119,4 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:257](https://github.com/streetsidesoftware/cspell/blob/c27229b/packages/cspell-types/src/CSpellSettingsDef.ts#L257)
+[CSpellSettingsDef.ts:257](https://github.com/streetsidesoftware/cspell/blob/59a0fe3/packages/cspell-types/src/CSpellSettingsDef.ts#L257)
