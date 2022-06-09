@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.1.2](https://github.com/streetsidesoftware/cspell/compare/v6.1.1...v6.1.2) (2022-06-09)
+
+
+### Bug Fixes
+
+* Remove `.txt` restriction from dictionary files. ([#3033](https://github.com/streetsidesoftware/cspell/issues/3033)) ([ee706be](https://github.com/streetsidesoftware/cspell/commit/ee706be7c2f02b2dfc33457a995b9b2390d8fd34)), closes [#2001](https://github.com/streetsidesoftware/cspell/issues/2001)
+
+
+
+
+
 ## [6.1.1](https://github.com/streetsidesoftware/cspell/compare/v6.1.0...v6.1.1) (2022-06-02)
 
 
