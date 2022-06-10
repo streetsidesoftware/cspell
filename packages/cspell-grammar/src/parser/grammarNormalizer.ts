@@ -27,6 +27,7 @@ import {
 } from './grammarNormalized';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
 import { createMatchResult, createSimpleMatchResult } from './matchResult';
+import { Scope, ScopePool } from './scope';
 import type { LineOffsetAnchored, MatchResult } from './types';
 
 export function normalizeGrammar(grammar: Grammar): NGrammar {
@@ -281,7 +282,7 @@ function matchRegExp(r: RegExp): (line: LineOffsetAnchored) => MatchResult | und
     };
 }
 
-export function extractScope(er: Rule, isContent = true): string[] {
+export function extractScope(er: Rule, isContent = true): Scope {
     const scope: string[] = [];
 
     for (let rule: Rule | undefined = er; rule; rule = rule.parent) {
@@ -296,7 +297,7 @@ export function extractScope(er: Rule, isContent = true): string[] {
         isContent = true;
     }
 
-    return scope;
+    return er.grammar.scopePool.parseScope(scope);
 }
 
 class ImplNGrammar implements NGrammar {
@@ -308,6 +309,7 @@ class ImplNGrammar implements NGrammar {
     readonly repository: NRepository;
     readonly grammarName: string | undefined;
     readonly self: NPatternPatterns;
+    readonly scopePool: ScopePool;
 
     constructor(grammar: Grammar) {
         this.scopeName = grammar.scopeName;
@@ -324,6 +326,7 @@ class ImplNGrammar implements NGrammar {
         this.patterns = self.patterns;
         this.repository = repository;
         this.self = self;
+        this.scopePool = new ScopePool();
     }
 
     begin(parentRule?: Rule): GrammarRule {

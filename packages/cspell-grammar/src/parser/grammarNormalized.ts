@@ -1,3 +1,4 @@
+import { Scope, ScopePool } from './scope';
 import type { LineOffsetAnchored, MatchResult } from './types';
 
 export interface NGrammar {
@@ -9,6 +10,7 @@ export interface NGrammar {
     contentName?: NScope | undefined;
     comment?: string | undefined;
     disabled?: boolean | undefined;
+    scopePool: ScopePool;
 
     begin(rule?: Rule): GrammarRule;
 }

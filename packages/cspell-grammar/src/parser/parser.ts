@@ -18,12 +18,12 @@ export function parseDocument(
         r,
         opMap((tl) => tl.tokens.map((t) => ({ t, l: tl.line }))),
         opFlatten(),
-        opFilter((t) => !t.t.scope[0].startsWith('punctuation'))
+        opFilter((t) => !t.t.scope.value.startsWith('punctuation'))
     );
 
     for (const { t: token, l: line } of tokens) {
         emitter(
-            `${line.lineNumber + 1}:${token.offset + 1}\t ${JSON.stringify(token.text)}\t ${token.scope.join(' ')}`
+            `${line.lineNumber + 1}:${token.offset + 1}\t ${JSON.stringify(token.text)}\t ${token.scope.toString()}`
         );
     }
 }

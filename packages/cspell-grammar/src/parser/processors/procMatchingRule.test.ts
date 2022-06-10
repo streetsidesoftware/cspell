@@ -1,8 +1,11 @@
 import assert from 'assert';
 import { Grammar } from '../grammarDefinition';
 import { normalizeGrammar } from '../grammarNormalizer';
+import { ScopePool } from '../scope';
 import type { TokenizedText } from '../types';
 import { applyCaptureToBeginOrMatch } from './procMatchingRule';
+
+const pool = new ScopePool();
 
 const grammar: Grammar = {
     scopeName: 'source.tst',
@@ -65,7 +68,7 @@ describe('procMatchingRule', () => {
 });
 
 function s(scope: string[]): TokenizedText {
-    return oc<TokenizedText>({ scope });
+    return oc<TokenizedText>({ scope: pool.parseScope(scope) });
 }
 
 function match(text: string, offset = 0, lineNumber = 42, anchor = -1) {

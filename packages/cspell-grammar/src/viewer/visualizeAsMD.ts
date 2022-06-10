@@ -10,13 +10,13 @@ export function _tokenizedLineToMarkdown(line: TokenizedLine, indentation = ''):
   | --------- | -------------------------------------------------------- |`;
 
     markdownLines.push(...header.split('\n'));
-    markdownLines.push(...line.tokens.map((t) => `  | ${toInlineCode(t.text)} | ${t.scope.join(' ')} |`));
+    markdownLines.push(...line.tokens.map((t) => `  | ${toInlineCode(t.text)} | ${t.scope} |`));
 
     return markdownLines.map((line) => indentation + line).join('\n') + '\n\n';
 }
 
 export function tokenizedLineToMarkdown(line: TokenizedLine, indentation = ''): string {
-    const rows = line.tokens.map((t) => `| ${toInlineCode(t.text)} | ${t.scope.join(' ')} |`);
+    const rows = line.tokens.map((t) => `| ${toInlineCode(t.text)} | ${t.scope} |`);
 
     const detail = `<details>
 <summary><code>${line.line.lineNumber + 1}</code>: ${toInlineCode(line.line.text)}</summary>
