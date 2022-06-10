@@ -19,6 +19,7 @@ export interface ParsedText {
     map?: SourceMap;
     /**
      * Used to delegate parsing the contents of `text` to another parser.
+     *
      */
     delegate?: DelegateInfo;
 }
@@ -67,9 +68,15 @@ export type SourceMap = number[];
 export interface DelegateInfo {
     /**
      * Proposed virtual file name including the extension.
-     * Example: `./README.md.js`
+     * Format: `./${source_filename}/${block_number}.${ext}
+     * Example: `./README.md/1.js`
      */
     filename: string;
+    /**
+     * The filename of the origin of the virtual file block.
+     * Example: `./README.md`
+     */
+    originFilename: string;
     /**
      * Proposed file extension
      * Example: `.js`
