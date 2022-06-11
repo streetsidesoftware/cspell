@@ -1,4 +1,4 @@
-import { Scope, ScopePool } from './scope';
+import { ScopePool } from './scope';
 import type { LineOffsetAnchored, MatchResult } from './types';
 
 export interface NGrammar {
