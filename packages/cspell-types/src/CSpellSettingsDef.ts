@@ -972,7 +972,7 @@ export interface ExperimentalFileSettings {
      * @experimental
      * @version 6.2.0
      */
-    plugins?: Plugin[];
+    plugins?: Plugin[] | undefined;
 }
 
 /**
@@ -988,7 +988,7 @@ export interface ExperimentalBaseSettings {
      * @experimental
      * @version 6.2.0
      */
-    parser: ParserName | Parser;
+    parser?: ParserName | Parser | undefined;
 }
 
 /**
@@ -997,5 +997,5 @@ export interface ExperimentalBaseSettings {
  * @version 6.2.0
  */
 export interface Plugin {
-    parsers?: Parser[];
+    parsers?: Parser[] | undefined;
 }
