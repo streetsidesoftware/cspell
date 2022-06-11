@@ -35,13 +35,9 @@ interface ParsedText {
    */
   text: string;
   /**
-   * the starting offset in the original text.
+   * [start, end] - offsets of the text
    */
-  start: number;
-  /**
-   * ending offset in the original text.
-   */
-  end: number;
+  range: [start: number, end: number];
   /**
    * The source map is used to support text transformations.
    *
@@ -94,15 +90,14 @@ Notice that the starting `0, 0` and ending `29, 19` pairs were not necessary.
 Parsers provide context by adding scope to the text they transform. This is similar to the scope added by colorizer parsers.
 The scope is used by the spell checker to select appropriate configuration.
 
-Scope is a list of strings from global to local:
+Scope is a list of strings from local to global:
 
 **Example Scopes**
 
-- `['source.ts', 'meta.var.expr.ts', 'string.quoted.single.ts', 'text.transformed']`
-- `'source.ts meta.var.expr.ts string.quoted.single.ts text.transformed'` - as a string separated by spaces
+- `'text.transformed string.quoted.single.ts meta.var.expr.ts source.ts'` - as a string separated by spaces
 - `'text'`
-- `'text.html.markdown meta.paragraph.markdown markup.bold.markdown'`
-- `'text.html.markdown markup.heading.markdown heading.1.markdown entity.name.section.markdown'`
+- `'markup.bold.markdown meta.paragraph.markdown text.html.markdown'`
+- `'entity.name.section.markdown heading.1.markdown markup.heading.markdown text.html.markdown'`
 
 In a CSS selector like fashion, scope is used to apply matching configuration. This is a very powerful option. It allows the end user to apply different configuration based upon the context. For example, in an i18n translation file, the translations keys use the code splitter and English, while to strings would be case sensitive and use the word splitter.
 
