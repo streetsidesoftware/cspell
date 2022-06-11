@@ -1,6 +1,7 @@
 import { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNormalized';
 import { extractScope } from '../grammarNormalizer';
 import { segmentMatch } from '../matchResult';
+import { Scope } from '../scope';
 import type { MatchResult, MatchSegment, TokenizedText } from '../types';
 import { isDefined } from '../util';
 
@@ -41,6 +42,7 @@ export function applyCaptureToEnd(rule: Rule, match: MatchResult): TokenizedText
  */
 export function applyCaptures(rule: Rule, match: MatchResult, captures: NCaptures | undefined): TokenizedText[] {
     const scope = extractScope(rule, false);
+    const pool = rule.grammar.scopePool;
     const text = match.match;
     const input = match.input;
     // Do not emit empty captures.
@@ -62,7 +64,7 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
     // Handle the simple case.
     if (captureScopes.size === 1 && cap0) {
         const tokenized: TokenizedText = {
-            scope: [cap0].concat(scope),
+            scope: rule.grammar.scopePool.getScope(cap0, scope),
             text,
             offset: match.index,
         };
@@ -137,7 +139,7 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
         return root;
     }
 
-    function segChainToScope(chain: SegmentChain | undefined): string[] {
+    function segChainToScope(chain: SegmentChain | undefined): Scope {
         function* _chain(chain: SegmentChain | undefined): Generator<string, void, undefined> {
             while (chain) {
                 const seg = chain.seg;
@@ -153,10 +155,12 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
             }
         }
 
-        return [..._chain(chain)]
+        const scopeValues = [..._chain(chain)]
             .map((cap) => captureScopes.get(cap))
             .filter(isDefined)
-            .concat(scope);
+            .reverse();
+
+        return scopeValues.reduce((s, v) => pool.getScope(v, s), scope);
     }
 
     const merged = processSegments(segments);

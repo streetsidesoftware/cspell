@@ -1,3 +1,5 @@
+import { Scope } from './scope';
+
 export interface LineOffset extends Line {
     /**
      * offset in characters from the beginning of the line.
@@ -44,8 +46,6 @@ export interface MatchSegment {
     groupName: string | string[] | undefined;
 }
 
-export type Scope = string;
-
 export type AppliedScopes = Scope[];
 
 export interface TokenRange {
@@ -63,13 +63,11 @@ export interface TokenizedLineResult extends TokenizedLine {
     parse: (nextLine: Line) => TokenizedLineResult;
 }
 
-export type TextScope = string;
-
 export interface TokenizedText {
     /**
      * Scopes that were applied
      */
-    scope: TextScope[];
+    scope: Scope;
     /**
      * The parsed text
      */

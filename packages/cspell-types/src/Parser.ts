@@ -1,12 +1,39 @@
+export type ParserOptions = Record<string, unknown>;
+
+export type ParserName = string;
+
+export interface Parser {
+    /** Name of parser */
+    name: ParserName;
+    /**
+     * Parse Method
+     * @param content - full content of the file
+     * @param filename - filename
+     */
+    parse(content: string, filename: string): ParseResult;
+}
+
+export interface ParseResult {
+    content: string;
+    filename: string;
+    parsedTexts: Iterable<ParsedText>;
+}
+
 export interface ParsedText {
     /**
      * The text extracted and possibly transformed
      */
     text: string;
     /**
-     * [start, end] - offsets of the text
+     * start and end offsets of the text
      */
     range: Range;
+    /**
+     * The Scope annotation for a segment of text.
+     * Used by the spell checker to apply spell checking options
+     * based upon the value of the scope.
+     */
+    scope?: Scope;
     /**
      * The source map is used to support text transformations.
      *
@@ -18,17 +45,6 @@ export interface ParsedText {
      *
      */
     delegate?: DelegateInfo;
-}
-
-export interface TextSegment {
-    /**
-     * Extracted text
-     */
-    text: string;
-    /**
-     * [start, end] - offsets of the text
-     */
-    range: Range;
 }
 
 /**
@@ -61,9 +77,6 @@ export interface TextSegment {
  */
 export type SourceMap = number[];
 
-/**
- * start and end offset of a segment of text
- */
 export type Range = [start: number, end: number];
 
 /**
@@ -94,3 +107,25 @@ export interface DelegateInfo {
      */
     fileType: string;
 }
+
+/**
+ * Scope - chain of scope going from local to global
+ *
+ * Example:
+ * ```
+ * `comment.block.documentation.ts` -> `meta.interface.ts` -> `source.ts`
+ * ```
+ */
+export interface ScopeChain {
+    readonly value: string;
+    readonly parent?: ScopeChain;
+}
+
+/**
+ * A string representing a scope chain separated by spaces
+ *
+ * Example: `comment.block.documentation.ts meta.interface.ts source.ts`
+ */
+export type ScopeString = string;
+
+export type Scope = ScopeChain | ScopeString;

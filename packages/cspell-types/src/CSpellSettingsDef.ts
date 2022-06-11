@@ -1,5 +1,6 @@
 import type { DictionaryInformation } from './DictionaryInformation';
 import type { Features } from './features';
+import { Parser, ParserName } from './Parser';
 
 export type ReplaceEntry = [string, string];
 export type ReplaceMap = ReplaceEntry[];
@@ -31,7 +32,7 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
     __imports?: Map<string, ImportFileRef>;
 }
 
-export interface FileSettings extends ExtendableSettings, CommandLineSettings {
+export interface FileSettings extends ExtendableSettings, CommandLineSettings, ExperimentalFileSettings {
     /**
      * Configuration format version of the settings file.
      *
@@ -398,7 +399,7 @@ export interface OverrideFilterFields {
     filename: Glob | Glob[];
 }
 
-export interface BaseSetting {
+export interface BaseSetting extends ExperimentalBaseSettings {
     /** Optional identifier. */
     id?: string;
 
@@ -957,3 +958,44 @@ interface BaseSource {
  * Reporter name or reporter name + reporter config.
  */
 export type ReporterSettings = string | [string] | [string, unknown];
+
+/**
+ * Experimental Configuration / Options
+ *
+ * This Configuration is subject to change without warning.
+ * @experimental
+ * @hidden
+ */
+export interface ExperimentalFileSettings {
+    /**
+     * Future Plugin support
+     * @experimental
+     * @version 6.2.0
+     */
+    plugins?: Plugin[] | undefined;
+}
+
+/**
+ * Experimental Configuration / Options
+ *
+ * This Configuration is subject to change without warning.
+ * @experimental
+ * @hidden
+ */
+export interface ExperimentalBaseSettings {
+    /**
+     * Parser to use for the file content
+     * @experimental
+     * @version 6.2.0
+     */
+    parser?: ParserName | Parser | undefined;
+}
+
+/**
+ * Plugin API
+ * @experimental
+ * @version 6.2.0
+ */
+export interface Plugin {
+    parsers?: Parser[] | undefined;
+}

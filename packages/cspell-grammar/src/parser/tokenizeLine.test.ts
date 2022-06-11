@@ -139,7 +139,7 @@ function serializeTokenizedLine(
     const { line, tokens: parsedText } = val;
     const textAndScope = parsedText.map((t) => [
         `${t.offset}: ${JSON.stringify(t.text.replace(/\r/g, '↤').replace(/\n/g, '↩'))}`,
-        `${t.scope.join(' ')}`,
+        `${t.scope.toString()}`,
     ]);
 
     const maxLen = textAndScope.reduce((a, ts) => Math.max(a, ts[0].length), 0);

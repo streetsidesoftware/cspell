@@ -6,7 +6,7 @@ export interface Grammar extends PatternPatterns {
 /**
  * @pattern ^[-\w.]+$
  */
-export type Scope = string;
+export type ScopeName = string;
 
 /**
  * @pattern ^source\.[-\w.]+$
@@ -28,7 +28,7 @@ export type Match = string | RegExp;
  * Used in Capture
  */
 export interface PatternName extends PatternBase {
-    name: Scope;
+    name: ScopeName;
     patterns?: undefined;
 }
 
@@ -43,7 +43,7 @@ interface PatternMatchBase extends PatternBase {
     begin?: Match | undefined;
     beginCaptures?: Captures | undefined;
     captures?: Captures | undefined;
-    contentName?: Scope | undefined;
+    contentName?: ScopeName | undefined;
     end?: Match | undefined;
     endCaptures?: Captures | undefined;
     match?: Match | undefined;
@@ -74,7 +74,7 @@ export interface PatternBeginEnd extends PatternMatchBase {
     begin: Match;
     end?: Match | undefined;
     match?: undefined;
-    contentName?: Scope;
+    contentName?: ScopeName;
     captures?: Captures | undefined;
     beginCaptures?: Captures | undefined;
     endCaptures?: Captures | undefined;
@@ -86,7 +86,7 @@ export interface PatternBeginWhile extends PatternMatchBase {
     begin: Match;
     end?: Match | undefined;
     match?: undefined;
-    contentName?: Scope | undefined;
+    contentName?: ScopeName | undefined;
     captures?: Captures | undefined;
     beginCaptures?: Captures | undefined;
     endCaptures?: undefined;
@@ -119,11 +119,11 @@ export type PatternRef = RepositoryReference | ExternalGrammarReference;
 
 export type Repository = Record<string, Pattern>;
 
-export type Captures = Scope | Record<string | number, PatternName | Scope>;
+export type Captures = ScopeName | Record<string | number, PatternName | ScopeName>;
 
 export interface PatternBase {
     /** Optional name scope */
-    name?: Scope | undefined;
+    name?: ScopeName | undefined;
     /** Optional comment */
     comment?: string | undefined;
     /** Used to disable a rule. */

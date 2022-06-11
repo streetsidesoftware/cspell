@@ -1,6 +1,9 @@
 import { grammar as grammarTS } from '../grammars/typescript';
 import type { LineOffsetAnchored } from './types';
 import { extractScope, normalizeGrammar } from './grammarNormalizer';
+import { ScopePool } from './scope';
+
+const scopePool = new ScopePool();
 
 describe('grammarNormalizer', () => {
     test('normalizeGrammar', () => {
@@ -22,7 +25,7 @@ describe('grammarNormalizer', () => {
         const rule = grammar.begin(undefined);
         const m = rule.findNext(lineOff);
         const scope = m && extractScope(m.rule);
-        expect(scope).toEqual(expectedScope);
+        expect(scope).toEqual(expectedScope && scopePool.parseScope(expectedScope));
         expect(m?.match).toEqual(expectedMatch);
     });
 });
