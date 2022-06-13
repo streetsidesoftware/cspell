@@ -37,6 +37,7 @@ const escapeChars: Record<string, string | undefined> = {
     '\\': '\\',
     '"': '"',
     "'": "'",
+    '\n': '',
 };
 
 export function mapRawString(text: string): MappedText {
@@ -109,6 +110,13 @@ export function mapRawString(text: string): MappedText {
                     // Deprecated in ES5
                     t += '0';
                     j += 1;
+                    break;
+                case '\r':
+                    i += text[i + 1] === '\n' ? 1 : 0;
+                    break;
+                case '\n':
+                    break;
+                case undefined:
                     break;
                 default:
                     t += tc;

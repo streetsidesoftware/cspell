@@ -11,6 +11,10 @@ export class Scope {
         if (!this.parent) return this.value;
         return ltr ? this.parent.toString(ltr) + ' ' + this.value : this.value + ' ' + this.parent.toString(ltr);
     }
+
+    static isScope(value: unknown): value is Scope {
+        return value instanceof Scope;
+    }
 }
 
 interface Box<T> {
@@ -48,7 +52,19 @@ export class ScopePool {
      *   i.e. `
      * @param ltr - left-to-right ancestry
      */
-    parseScope(scopes: string | string[], ltr = false): Scope {
+    parseScope(scopes: Scope | ScopeLike): Scope;
+    parseScope(scopes: string | ScopeLike): Scope;
+    parseScope(scopes: string | string[], ltr?: boolean): Scope;
+    parseScope(scopes: string | string[] | Scope | ScopeLike, ltr = false): Scope {
+        if (Scope.isScope(scopes)) return scopes;
+        if (isScopeLike(scopes)) {
+            const parent = scopes.parent ? this.parseScope(scopes.parent) : undefined;
+            return this.getScope(scopes.value, parent);
+        }
+        return this.parseScopeString(scopes, ltr);
+    }
+
+    private parseScopeString(scopes: string | string[], ltr?: boolean): Scope {
         scopes = Array.isArray(scopes) ? scopes : scopes.split(' ');
         const parentToChild = ltr ? scopes : scopes.reverse();
         let parent: Scope | undefined = undefined;
@@ -58,4 +74,13 @@ export class ScopePool {
         assert(parent, 'Empty scope is not allowed.');
         return parent;
     }
+}
+
+interface ScopeLike {
+    readonly value: string;
+    readonly parent?: ScopeLike | undefined;
+}
+
+function isScopeLike(value: string | string[] | ScopeLike): value is ScopeLike {
+    return typeof value === 'object' && !Array.isArray(value) && value.value !== undefined;
 }

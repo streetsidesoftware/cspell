@@ -21,6 +21,10 @@ describe('mappers typescript', () => {
     test.each`
         text                    | expected
         ${''}                   | ${''}
+        ${'\\'}                 | ${''}
+        ${'\\\n'}               | ${''}
+        ${'\\\r'}               | ${''}
+        ${'\\\r\n'}             | ${''}
         ${'hello'}              | ${'hello'}
         ${'caf\\xe9'}           | ${'café'}
         ${'caf\\u00e9'}         | ${'café'}
