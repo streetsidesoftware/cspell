@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { Grammar, Repository } from '..';
+import { GrammarDef, Repository } from '..';
 
 const repository: Repository = {
     statements: {
@@ -104,7 +104,7 @@ const repository: Repository = {
     },
 };
 
-export const grammar: Grammar = {
+export const grammar: GrammarDef = {
     name: 'Simple',
     scopeName: 'source.s',
     patterns: ['#statements'],

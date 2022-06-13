@@ -1,7 +1,9 @@
 import { NGrammar } from './grammarNormalized';
-import { tokenizeText } from './tokenizeLine';
-import type { TokenizedLineResult } from './types';
+import { tokenizeText, tokenizeTextIterable } from './tokenizeLine';
+import type { TokenizedLine, TokenizedLineResult } from './types';
 import { pipeSync as pipe, opFlatten, opMap, opFilter } from '@cspell/cspell-pipe';
+import type { Parser, ParseResult } from '@cspell/cspell-types/Parser';
+import { Grammar } from './grammar';
 
 export interface DocumentParser {
     parse: (firstLine: string) => TokenizedLineResult;
@@ -28,4 +30,25 @@ export function parseDocument(
             )}\t ${token.scope.toString()}`
         );
     }
+}
+
+function mapTokenizedLine(tl: TokenizedLine): ParseResult['parsedTexts'] {
+    return tl.tokens.map((t) => ({
+        text: t.text,
+        range: [tl.offset + t.range[0], tl.offset + t.range[1]] as const,
+        scope: t.scope,
+    }));
+}
+
+export function createParser(grammar: Grammar, name: string): Parser {
+    function parse(content: string, filename: string): ParseResult {
+        const parsedTexts: ParseResult['parsedTexts'] = pipe(
+            tokenizeTextIterable(content, grammar),
+            opMap(mapTokenizedLine),
+            opFlatten()
+        );
+        return { content, filename, parsedTexts };
+    }
+
+    return { name, parse };
 }

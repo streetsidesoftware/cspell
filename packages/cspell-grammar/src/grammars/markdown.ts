@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { Grammar, Repository } from '..';
+import { GrammarDef, Repository } from '..';
 
 const repository: Repository = {
     frontMatter: { patterns: [] },
@@ -29,7 +29,7 @@ const repository: Repository = {
     },
 };
 
-export const grammar: Grammar = {
+export const grammar: GrammarDef = {
     name: 'Markdown',
     scopeName: 'text.html.markdown',
     patterns: ['#frontMatter', '#block'],

@@ -1,2 +1,2 @@
-export type { Grammar, Pattern, Repository } from './parser';
-export { tokenizeLine, tokenizeText } from './parser';
+export { compileGrammar, tokenizeLine, tokenizeText } from './parser';
+export type { Grammar, GrammarDef, Pattern, Repository } from './parser';

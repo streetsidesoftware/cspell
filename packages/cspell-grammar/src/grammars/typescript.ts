@@ -1,4 +1,4 @@
-import { Grammar, Repository } from '..';
+import { GrammarDef, Repository } from '..';
 
 const repository: Repository = {
     statements: {
@@ -128,7 +128,7 @@ const repository: Repository = {
     },
 };
 
-export const grammar: Grammar = {
+export const grammar: GrammarDef = {
     name: 'TypeScript',
     scopeName: 'source.ts',
     patterns: [

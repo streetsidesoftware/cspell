@@ -1,4 +1,4 @@
-import { Grammar, Pattern, Repository } from '..';
+import { GrammarDef, Pattern, Repository } from '..';
 import {
     Captures,
     PatternBeginEnd,
@@ -30,7 +30,7 @@ import { createMatchResult, createSimpleMatchResult } from './matchResult';
 import { Scope, ScopePool } from './scope';
 import type { LineOffsetAnchored, MatchResult } from './types';
 
-export function normalizeGrammar(grammar: Grammar): NGrammar {
+export function normalizeGrammar(grammar: GrammarDef): NGrammar {
     return new ImplNGrammar(grammar);
 }
 
@@ -311,7 +311,7 @@ class ImplNGrammar implements NGrammar {
     readonly self: NPatternPatterns;
     readonly scopePool: ScopePool;
 
-    constructor(grammar: Grammar) {
+    constructor(grammar: GrammarDef) {
         this.scopeName = grammar.scopeName;
         this.name = grammar.scopeName;
         this.comment = grammar.comment;

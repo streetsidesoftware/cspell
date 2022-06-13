@@ -13,6 +13,24 @@ export interface Line {
     lineNumber: number;
 }
 
+/**
+ * A line of a document
+ */
+export interface DocumentLine {
+    /**
+     * The text at that line number
+     */
+    text: string;
+    /**
+     * The 0 based line number
+     */
+    lineNumber: number;
+    /**
+     * The absolute offset from the beginning of the document
+     */
+    documentOffset: number;
+}
+
 export interface LineOffsetAnchored extends LineOffset {
     /** The anchor is the position at the end of the last match */
     anchor: number;
@@ -55,10 +73,11 @@ export type AppliedScopes = Scope[];
 export interface TokenizedLine {
     tokens: TokenizedText[];
     line: Line;
+    offset: number;
 }
 
 export interface TokenizedLineResult extends TokenizedLine {
-    parse: (nextLine: Line) => TokenizedLineResult;
+    parse: (nextLine: DocumentLine) => TokenizedLineResult;
 }
 
 export interface TokenizedText {

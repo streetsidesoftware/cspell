@@ -33,18 +33,18 @@ export interface ParsedText {
      * Used by the spell checker to apply spell checking options
      * based upon the value of the scope.
      */
-    scope?: Scope;
+    scope?: Scope | undefined;
     /**
      * The source map is used to support text transformations.
      *
      * See: {@link SourceMap}
      */
-    map?: SourceMap;
+    map?: SourceMap | undefined;
     /**
      * Used to delegate parsing the contents of `text` to another parser.
      *
      */
-    delegate?: DelegateInfo;
+    delegate?: DelegateInfo | undefined;
 }
 
 /**
@@ -77,7 +77,7 @@ export interface ParsedText {
  */
 export type SourceMap = number[];
 
-export type Range = [start: number, end: number];
+export type Range = readonly [start: number, end: number];
 
 /**
  * DelegateInfo is used by a parser to delegate parsing a subsection of a document to
@@ -118,7 +118,7 @@ export interface DelegateInfo {
  */
 export interface ScopeChain {
     readonly value: string;
-    readonly parent?: ScopeChain;
+    readonly parent?: ScopeChain | undefined;
 }
 
 /**

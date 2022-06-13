@@ -1,14 +1,14 @@
 import { strict as assert } from 'assert';
 import { format } from 'util';
-import { Grammar, Pattern, PatternList, Repository, PatternRef } from './grammarDefinition';
+import { GrammarDef, Pattern, PatternList, Repository, PatternRef } from './grammarDefinition';
 import { isPatternBeginEnd, isPatternInclude, isPatternMatch, isPatternPatterns } from './grammarTypesHelpers';
 
 interface GrammarContext {
-    grammar: Grammar;
+    grammar: GrammarDef;
     scopeExt: string;
 }
 
-export function validate(grammar: Grammar): asserts grammar {
+export function validate(grammar: GrammarDef): asserts grammar {
     assert(grammar.scopeName);
     assert(/^[\w.]*\.\w+$/.test(grammar.scopeName));
     const scopeExt = '.' + grammar.scopeName.split('.').pop();
@@ -48,7 +48,7 @@ export function validatePattern(pattern: Pattern, context: GrammarContext): asse
     validatePatternName(pattern, context);
 }
 
-export function validateGrammarRepository(p: Grammar, context: GrammarContext): asserts p {
+export function validateGrammarRepository(p: GrammarDef, context: GrammarContext): asserts p {
     p.repository && validateRepository(p.repository, context);
 }
 

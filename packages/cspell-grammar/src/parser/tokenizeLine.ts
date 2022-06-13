@@ -2,9 +2,9 @@ import assert from 'assert';
 import { NGrammar, Rule } from './grammarNormalized';
 import { extractScope } from './grammarNormalizer';
 import { applyCaptureToBeginOrMatch, applyCaptureToEnd } from './processors/procMatchingRule';
-import type { Line, LineOffsetAnchored, TokenizedLine, TokenizedLineResult, TokenizedText } from './types';
+import type { DocumentLine, LineOffsetAnchored, TokenizedLine, TokenizedLineResult, TokenizedText } from './types';
 
-export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
+export function tokenizeLine(line: DocumentLine, rule: Rule): TokenizedLineResult {
     const text = line.text;
     const lineLen = line.text.length;
     const parsedText: TokenizedText[] = [];
@@ -56,29 +56,35 @@ export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
 }
 
 export function tokenizeText(text: string, grammar: NGrammar): TokenizedLine[] {
-    const lines = text.split(/(?<=\n)/);
+    return [...tokenizeTextIterable(text, grammar)];
+}
+
+export function* tokenizeTextIterable(text: string, grammar: NGrammar): Iterable<TokenizedLine> {
+    const lines = text.split(/(?<=\r\n|\n|\r(?!\n))/);
     const rule = grammar.begin();
-    const r: TokenizedLine[] = [];
-    let tr = tokenizeLine({ text: lines[0], lineNumber: 0 }, rule);
-    r.push(toParsedLine(tr));
+    let documentOffset = 0;
+    let tr = tokenizeLine({ text: lines[0], lineNumber: 0, documentOffset }, rule);
+    documentOffset += lines[0].length;
+    yield toParsedLine(tr);
     for (let i = 1; i < lines.length; ++i) {
-        const line = { text: lines[i], lineNumber: i };
+        const line = { text: lines[i], lineNumber: i, documentOffset };
+        documentOffset += line.text.length;
         tr = tr.parse(line);
-        r.push(toParsedLine(tr));
+        yield toParsedLine(tr);
     }
-    return r;
 }
 
 function toParsedLine(pr: TokenizedLineResult): TokenizedLine {
-    const { tokens: parsedText, line } = pr;
-    return { tokens: parsedText, line };
+    const { tokens: parsedText, line, offset } = pr;
+    return { tokens: parsedText, line, offset };
 }
 
-function toParseLineResult(line: Line, rule: Rule, parsedText: TokenizedText[]): TokenizedLineResult {
+function toParseLineResult(line: DocumentLine, rule: Rule, parsedText: TokenizedText[]): TokenizedLineResult {
     return {
         tokens: parsedText,
         line,
-        parse: (line: Line) => tokenizeLine(line, rule),
+        offset: line.documentOffset,
+        parse: (line: DocumentLine) => tokenizeLine(line, rule),
     };
 }
 
