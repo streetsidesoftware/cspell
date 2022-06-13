@@ -64,7 +64,7 @@ const repository: Repository = {
     },
     string_character_escape: {
         name: 'constant.character.escape.ts',
-        match: /\\(x[0-9A-Fa-f]{2}|[0-3][0-7]{0,2}|[4-7][0-7]?|.|$)/,
+        match: /\\(x[0-9A-Fa-f]{2}|[0-3][0-7]{0,2}|[4-7][0-7]?|u[0-9A-Fa-f]{4}|.|$)/,
     },
     braces: {
         patterns: [
