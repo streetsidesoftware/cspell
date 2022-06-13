@@ -40,11 +40,11 @@ function mapTokenizedLine(tl: TokenizedLine): ParseResult['parsedTexts'] {
     }));
 }
 
-export function createParser(grammar: Grammar, name: string): Parser {
+export function createParser(grammar: Grammar, name: string, transform = mapTokenizedLine): Parser {
     function parse(content: string, filename: string): ParseResult {
         const parsedTexts: ParseResult['parsedTexts'] = pipe(
             tokenizeTextIterable(content, grammar),
-            opMap(mapTokenizedLine),
+            opMap(transform),
             opFlatten()
         );
         return { content, filename, parsedTexts };
