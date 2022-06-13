@@ -122,7 +122,7 @@ function assertParsedLineIsValid(pLine: TokenizedLine): asserts pLine {
     const text = pLine.line.text;
     const joined = pLine.tokens.map((pt) => pt.text).join('');
     assert(text === joined);
-    pLine.tokens.forEach((pt) => assert(text.startsWith(pt.text, pt.offset)));
+    pLine.tokens.forEach((pt) => assert(text.startsWith(pt.text, pt.range[0])));
 }
 
 /**
@@ -138,7 +138,7 @@ function serializeTokenizedLine(
 ) {
     const { line, tokens: parsedText } = val;
     const textAndScope = parsedText.map((t) => [
-        `${t.offset}: ${JSON.stringify(t.text.replace(/\r/g, '↤').replace(/\n/g, '↩'))}`,
+        `${t.range[0]}: ${JSON.stringify(t.text.replace(/\r/g, '↤').replace(/\n/g, '↩'))}`,
         `${t.scope.toString()}`,
     ]);
 

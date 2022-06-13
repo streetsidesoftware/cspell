@@ -114,7 +114,7 @@ function normalizePatternName(p: PatternName): NPatternName {
     function findMatch(line: LineOffsetAnchored, parentRule: Rule): MatchRuleResult | undefined {
         const rule = factoryRule(parentRule, self);
         const input = line.text.slice(line.offset);
-        const match = createSimpleMatchResult(input, input, line.offset);
+        const match = createSimpleMatchResult(input, input, line.offset, line.lineNumber);
         return { rule, match, line };
     }
 
@@ -269,7 +269,7 @@ function matchString(s: string): (line: LineOffsetAnchored) => MatchResult | und
         const input = line.text;
         const index = input.indexOf(s, line.offset);
         if (index < 0) return undefined;
-        return createSimpleMatchResult(s, input, index);
+        return createSimpleMatchResult(s, input, index, line.lineNumber);
     };
 }
 
@@ -278,7 +278,7 @@ function matchRegExp(r: RegExp): (line: LineOffsetAnchored) => MatchResult | und
         const rg = RegExp(r, 'gm');
         rg.lastIndex = line.offset;
         const m = rg.exec(line.text);
-        return (m && createMatchResult(m)) ?? undefined;
+        return (m && createMatchResult(m, line.lineNumber)) ?? undefined;
     };
 }
 

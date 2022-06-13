@@ -40,16 +40,16 @@ export function segmentMatch(mr: MatchResult): MatchSegment[] {
     return segments;
 }
 
-export function createMatchResult(r: RegExpExecArray): MatchResult {
+export function createMatchResult(r: RegExpExecArray, lineNumber: number): MatchResult {
     const groups: MatchResult['groups'] = Object.create(null);
     r.groups && Object.assign(groups, r.groups);
     const matches = r;
     const match = r[0];
 
-    return { index: r.index, input: r.input, match, matches, groups };
+    return { index: r.index, input: r.input, match, matches, groups, lineNumber: lineNumber };
 }
 
-export function createSimpleMatchResult(match: string, input: string, index: number): MatchResult {
+export function createSimpleMatchResult(match: string, input: string, index: number, lineNumber: number): MatchResult {
     const groups: MatchResult['groups'] = Object.create(null);
-    return { index, input, match, matches: [match], groups };
+    return { index, input, match, matches: [match], groups, lineNumber };
 }

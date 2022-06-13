@@ -33,10 +33,12 @@ export function tokenizeLine(line: Line, rule: Rule): TokenizedLineResult {
         const emitTil = match ? Math.min(match.match.index, limit) : limit;
         if (offset < emitTil) {
             const scope = extractScope(rule);
+            const start = offset;
+            const end = emitTil;
             parsedText.push({
                 scope,
-                text: text.slice(offset, emitTil),
-                offset,
+                text: text.slice(start, end),
+                range: [start, end, line.lineNumber],
             });
             ctx.line.offset = emitTil;
         }

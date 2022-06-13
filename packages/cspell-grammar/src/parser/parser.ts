@@ -23,7 +23,9 @@ export function parseDocument(
 
     for (const { t: token, l: line } of tokens) {
         emitter(
-            `${line.lineNumber + 1}:${token.offset + 1}\t ${JSON.stringify(token.text)}\t ${token.scope.toString()}`
+            `${(token.range[2] ?? line.lineNumber) + 1}:${token.range[0] + 1}\t ${JSON.stringify(
+                token.text
+            )}\t ${token.scope.toString()}`
         );
     }
 }
