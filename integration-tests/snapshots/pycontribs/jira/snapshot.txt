@@ -3,7 +3,7 @@ Repository: pycontribs/jira
 Url: "https://github.com/pycontribs/jira.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 75, Issues found: 483 in 39 files
+ CSpell: Files checked: 75, Issues found: 490 in 39 files
  exit code: 1
 ./AUTHORS.rst:3:21      - Unknown word (Contribs)   -- Development Team (PyContribs)
 ./AUTHORS.rst:5:7       - Unknown word (Speakmon)   -- - Ben Speakmon <ben.speakmon@gmail
@@ -75,22 +75,23 @@ Lines:
 ./docs/api.rst:43:6      - Unknown word (resilientsession) -- jira.resilientsession module
 ./docs/api.rst:54:4      - Unknown word (autodata)         -- .. autodata:: jira.client.ResourceType
 ./docs/api.rst:63:4      - Unknown word (autoclass)        -- .. autoclass:: jira.resources.StatusCatego
-./docs/conf.py:123:12    - Unknown word (sectionauthor) -- # If true, sectionauthor and moduleauthor directives
-./docs/conf.py:123:30    - Unknown word (moduleauthor)  -- true, sectionauthor and moduleauthor directives will be shown
-./docs/conf.py:131:3     - Unknown word (modindex)      -- # modindex_common_prefix = []
-./docs/conf.py:197:11    - Unknown word (sourcelink)    -- html_show_sourcelink = True
-./docs/conf.py:208:10    - Unknown word (opensearch)    -- html_use_opensearch = ""
-./docs/conf.py:214:22    - Unknown word (jirapythondoc) -- htmlhelp_basename = "jirapythondoc"
-./docs/conf.py:219:20    - Unknown word (papersize)     -- latex_elements = {"papersize": "a4paper", "pointsize
-./docs/conf.py:219:44    - Unknown word (pointsize)     -- papersize": "a4paper", "pointsize": "10pt"}
-./docs/conf.py:222:51    - Unknown word (documentclass) -- name, title, author, documentclass [howto/manual]).
-./docs/conf.py:222:66    - Unknown word (howto)         -- author, documentclass [howto/manual]).
-./docs/conf.py:242:14    - Unknown word (pagerefs)      -- # latex_show_pagerefs = False
+./docs/conf.py:126:12    - Unknown word (sectionauthor) -- # If true, sectionauthor and moduleauthor directives
+./docs/conf.py:126:30    - Unknown word (moduleauthor)  -- true, sectionauthor and moduleauthor directives will be shown
+./docs/conf.py:134:3     - Unknown word (modindex)      -- # modindex_common_prefix = []
+./docs/conf.py:200:11    - Unknown word (sourcelink)    -- html_show_sourcelink = True
+./docs/conf.py:211:10    - Unknown word (opensearch)    -- html_use_opensearch = ""
+./docs/conf.py:217:22    - Unknown word (jirapythondoc) -- htmlhelp_basename = "jirapythondoc"
+./docs/conf.py:222:20    - Unknown word (papersize)     -- latex_elements = {"papersize": "a4paper", "pointsize
+./docs/conf.py:222:44    - Unknown word (pointsize)     -- papersize": "a4paper", "pointsize": "10pt"}
+./docs/conf.py:225:51    - Unknown word (documentclass) -- name, title, author, documentclass [howto/manual]).
+./docs/conf.py:225:66    - Unknown word (howto)         -- author, documentclass [howto/manual]).
+./docs/conf.py:245:14    - Unknown word (pagerefs)      -- # latex_show_pagerefs = False
 ./docs/conf.py:33:17     - Unknown word (intersphinx) -- "sphinx.ext.intersphinx",
 ./docs/conf.py:35:17     - Unknown word (viewcode)    -- "sphinx.ext.viewcode",
 ./docs/conf.py:47:22     - Unknown word (bysource)    -- "member-order": "bysource",
 ./docs/conf.py:53:17     - Unknown word (docstrings)  -- autodoc_inherit_docstrings = False
-./docs/conf.py:83:14     - Unknown word (toctree)     -- # The master toctree document.
+./docs/conf.py:73:78     - Unknown word (typehint)    -- not happy with this typehint
+./docs/conf.py:86:14     - Unknown word (toctree)     -- # The master toctree document.
 ./docs/examples.rst:193:31    - Unknown word (newassignee)    -- assign_issue(issue, 'newassignee')
 ./docs/examples.rst:202:69    - Unknown word (issuetype)      -- Look into this one', issuetype={'name': 'Bug'})
 ./docs/examples.rst:20:1      - Unknown word (Quickstart)     -- Quickstart
@@ -127,39 +128,42 @@ Lines:
 ./examples/maintenance.py:56:12     - Unknown word (projectcategories) -- for s in j.projectcategories():
 ./examples/maintenance.py:77:12     - Unknown word (notificationschemes) -- for s in j.notificationschemes():
 ./examples/maintenance.py:80:8      - Unknown word (ssbarnea)            -- # TODO(ssbarnea): "Default Issue Security
-./jira/client.py:1131:45   - Unknown word (favourite)       -- Optional[str]): either "favourite" or "my", the type of
-./jira/client.py:1181:57   - Unknown word (favourites)      -- Resources which are the favourites of the currently authenticate
-./jira/client.py:1801:10   - Unknown word (rtype)           -- :rtype: List[Comment]
-./jira/client.py:2041:14   - Unknown word (transitionid)    -- def find_transitionid_by_name(
-./jira/client.py:2506:65   - Unknown word (requesttype)     -- servicedesk/{service_desk}/requesttype"
-./jira/client.py:2554:32   - Unknown word (mypermissions)   -- return self._get_json("mypermissions", params=params)
-./jira/client.py:2805:10   - Unknown word (rolesdict)       -- _rolesdict: Dict[str, str] = self
-./jira/client.py:3293:31   - Unknown word (viewissue)       -- User, None, "user/viewissue/search", startAt, maxResults
-./jira/client.py:3774:66   - Unknown word (jspa)            -- admin/user/EditUser.jspa"
-./jira/client.py:3802:52   - Unknown word (reindexing)      -- indexing. Returns True if reindexing is in progress or not
-./jira/client.py:3815:61   - Unknown word (stoptheworld)    -- if background else "stoptheworld"
-./jira/client.py:3849:60   - Unknown word (runbackup)       -- rest/backup/1/export/runbackup"
-./jira/client.py:3871:52   - Unknown word (getprogress)     -- url + "/rest/obm/1.0/getprogress?_=%i" % epoch_time
-./jira/client.py:3901:9    - Unknown word (perc)            -- perc_search = re.search(r
-./jira/client.py:3915:35   - Unknown word (webdav)          -- self.server_url + "/webdav/backupmanager/" + remote
-./jira/client.py:3915:42   - Unknown word (backupmanager)   -- server_url + "/webdav/backupmanager/" + remote_file
-./jira/client.py:4101:30   - Unknown word (workflowschemes) -- url = self._get_url("workflowschemes")
-./jira/client.py:4429:33   - Unknown word (Dalko)           -- Experimental support for iDalko Grid, expect API to
-./jira/client.py:4431:13   - Unknown word (igrid)           -- def get_igrid(self, issueid: str,
-./jira/client.py:4431:25   - Unknown word (issueid)         -- def get_igrid(self, issueid: str, customfield: str
-./jira/client.py:4431:57   - Unknown word (schemeid)        -- str, customfield: str, schemeid: str):
-./jira/client.py:4432:40   - Unknown word (idalko)          -- server_url + "/rest/idalko-igrid/1.0/datagrid/data
-./jira/client.py:4550:9    - Unknown word (incompleted)     -- def incompletedIssuesEstimateSum(self
-./jira/client.py:4553:28   - Unknown word (sprintreport)    -- f"rapid/charts/sprintreport?rapidViewId={board_id
-./jira/client.py:4773:59   - Unknown word (lexo)            -- greenhopper.jira:gh-lexo-rank"
-./jira/client.py:541:28    - Unknown word (verif)      -- self._add_ssl_cert_verif_strategy_to_session
-./jira/client.py:903:66    - Unknown word (applicationlink) -- rest/applinks/latest/applicationlink'
+./jira/client.py:1123:45   - Unknown word (favourite)        -- Optional[str]): either "favourite" or "my", the type of
+./jira/client.py:1173:57   - Unknown word (favourites)       -- Resources which are the favourites of the currently authenticate
+./jira/client.py:1792:10   - Unknown word (rtype)            -- :rtype: List[Comment]
+./jira/client.py:2032:14   - Unknown word (transitionid)     -- def find_transitionid_by_name(
+./jira/client.py:2497:65   - Unknown word (requesttype)      -- servicedesk/{service_desk}/requesttype"
+./jira/client.py:2545:32   - Unknown word (mypermissions)    -- return self._get_json("mypermissions", params=params)
+./jira/client.py:2796:10   - Unknown word (rolesdict)        -- _rolesdict: Dict[str, str] = self
+./jira/client.py:3288:31   - Unknown word (viewissue)        -- User, None, "user/viewissue/search", startAt, maxResults
+./jira/client.py:3768:66   - Unknown word (jspa)             -- admin/user/EditUser.jspa"
+./jira/client.py:3796:52   - Unknown word (reindexing)       -- indexing. Returns True if reindexing is in progress or not
+./jira/client.py:3809:61   - Unknown word (stoptheworld)     -- if background else "stoptheworld"
+./jira/client.py:3843:60   - Unknown word (runbackup)        -- rest/backup/1/export/runbackup"
+./jira/client.py:3865:52   - Unknown word (getprogress)      -- url + "/rest/obm/1.0/getprogress?_=%i" % epoch_time
+./jira/client.py:3895:9    - Unknown word (perc)             -- perc_search = re.search(r
+./jira/client.py:3909:35   - Unknown word (webdav)           -- self.server_url + "/webdav/backupmanager/" + remote
+./jira/client.py:3909:42   - Unknown word (backupmanager)    -- server_url + "/webdav/backupmanager/" + remote_file
+./jira/client.py:4095:30   - Unknown word (workflowschemes)  -- url = self._get_url("workflowschemes")
+./jira/client.py:4423:33   - Unknown word (Dalko)            -- Experimental support for iDalko Grid, expect API to
+./jira/client.py:4425:13   - Unknown word (igrid)            -- def get_igrid(self, issueid: str,
+./jira/client.py:4425:25   - Unknown word (issueid)          -- def get_igrid(self, issueid: str, customfield: str
+./jira/client.py:4425:57   - Unknown word (schemeid)         -- str, customfield: str, schemeid: str):
+./jira/client.py:4426:40   - Unknown word (idalko)           -- server_url + "/rest/idalko-igrid/1.0/datagrid/data
+./jira/client.py:4544:9    - Unknown word (incompleted)      -- def incompletedIssuesEstimateSum(self
+./jira/client.py:4547:28   - Unknown word (sprintreport)     -- f"rapid/charts/sprintreport?rapidViewId={board_id
+./jira/client.py:4767:59   - Unknown word (lexo)             -- greenhopper.jira:gh-lexo-rank"
+./jira/client.py:535:28    - Unknown word (verif)      -- self._add_ssl_cert_verif_strategy_to_session
+./jira/client.py:897:66    - Unknown word (applicationlink) -- rest/applinks/latest/applicationlink'
+./jira/client.py:965:22    - Unknown word (multipartencoded) -- def generate_multipartencoded_request_args() -> Tuple
+./jira/client.py:981:15    - Unknown word (Retryable)        -- class RetryableMultipartEncoder(PrepareReques
 ./jira/config.py:64:9      - Unknown word (findfile)   -- def findfile(path):
 ./jira/exceptions.py:35:33     - Unknown word (PYJIRA)     -- self.log_to_tempfile = "PYJIRA_LOG_TO_TEMPFILE" in
 ./jira/exceptions.py:59:68     - Unknown word (jiraerror)  -- suffix=".tmp", prefix="jiraerror-")
 ./jira/jirashell.py:33:28     - Unknown word (servlet)    -- server + "/plugins/servlet/oauth/request-token
 ./jira/jirashell.py:67:51     - Unknown word (faceplants) -- dance. Your partner faceplants. The audience boos.
-./jira/resilientsession.py:143:23    - Unknown word (backoff)    -- # Exponential backoff with full jitter.
+./jira/resilientsession.py:165:65    - Unknown word (behaviour)  -- should preserve old behaviour
+./jira/resilientsession.py:304:27    - Unknown word (backoff)    -- # Exponential backoff with full jitter.
 ./jira/resources.py:1107:14   - Unknown word (categorised)              -- "categorisedActors": {
 ./jira/resources.py:1162:34   - Unknown word (securitylevel)            -- Resource.__init__(self, "securitylevel/{0}", options, session
 ./jira/resources.py:607:18    - Unknown word (duedate)    -- self.duedate: Optional[str] = None
@@ -187,7 +191,6 @@ Lines:
 ./tests/resources/test_issue.py:355:35    - Unknown word (projectkeys) -- createmeta_filter_by_projectkeys_and_name(self):
 ./tests/resources/test_issue.py:365:9     - Unknown word (proja)       -- proja = find_by_key_value
 ./tests/resources/test_issue.py:366:9     - Unknown word (projb)       -- projb = find_by_key_value
-./tests/resources/test_issue.py:39:35     - Unknown word (behaviour)  -- issue_search_default_behaviour_included_fields(self
 ./tests/resources/test_issue.py:415:73    - Unknown word (notauser)    -- assign_issue, "NOPE-1", "notauser")
 ./tests/resources/test_issue.py:99:32     - Unknown word (fielddict)  -- test_create_issue_with_fielddict(self):
 ./tests/resources/test_issue_link.py:22:9      - Unknown word (inwardissue) -- inwardissue = self.test_manager

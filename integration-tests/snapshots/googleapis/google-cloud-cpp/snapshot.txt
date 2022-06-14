@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 7268, Issues found: 56813 in 5689 files
+ CSpell: Files checked: 7294, Issues found: 56922 in 5704 files
  exit code: 1
 ./ARCHITECTURE.md:100:19    - Unknown word (bigtable)   -- - Bigtable has a [bigtable::Table](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [bigtable::Table
@@ -285,7 +285,7 @@ Lines:
 ./generator/internal/auth_decorator_generator.cc:81:11     - Unknown word (Bidir)      -- if (IsBidirStreaming(method)) {
 ./generator/internal/codegen_utils_test.cc:58:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
 ./generator/internal/codegen_utils_test.cc:58:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
-./generator/internal/connection_impl_generator.cc:303:43    - Unknown word (bidir)      -- generate definitions for bidir streaming RPCs. Their
+./generator/internal/connection_impl_generator.cc:305:43    - Unknown word (bidir)      -- generate definitions for bidir streaming RPCs. Their
 ./generator/internal/descriptor_utils.cc:54:27     - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_INT32:
 ./generator/internal/descriptor_utils.cc:75:5      - Unknown word (NOTREACHED) -- /*NOTREACHED*/
 ./generator/internal/descriptor_utils_test.cc:834:10    - Unknown word (endcond)    -- /// @endcond
@@ -301,7 +301,7 @@ Lines:
 ./generator/internal/scaffold_generator.cc:889:8     - Unknown word (CXXLDFLAGS)   -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 ./generator/internal/scaffold_generator_test.cc:247:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
 ./generator/internal/scaffold_generator_test.cc:268:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
-./generator/internal/service_code_generator.cc:321:20    - Unknown word (nspace)     -- for (auto const& nspace : namespaces_) {
+./generator/internal/service_code_generator.cc:328:20    - Unknown word (nspace)     -- for (auto const& nspace : namespaces_) {
 ./google/cloud/BUILD.bazel:199:15    - Unknown word (DWIN)       -- "/DWIN32_LEAN_AND_MEAN",
 ./google/cloud/BUILD.bazel:25:5      - Unknown word (toolchains) -- toolchains = [
 ./google/cloud/accessapproval/CMakeLists.txt:26:30     - Unknown word (DEPS)       -- GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::accessappro
@@ -345,7 +345,7 @@ Lines:
 ./google/cloud/bigquery/doc/bigquery-read-mock.dox:3:75      - Unknown word (googlemock) -- BigQueryRead application with googlemock
 ./google/cloud/bigquery/samples/bigquery_read_samples.cc:190:47    - Unknown word (bugprone)   -- argv[]) {  // NOLINT(bugprone-exception-escape)
 ./google/cloud/bigtable/BUILD.bazel:98:22     - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
-./google/cloud/bigtable/CMakeLists.txt:415:18    - Unknown word (DBIGTABLE)  -- PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC
+./google/cloud/bigtable/CMakeLists.txt:423:18    - Unknown word (DBIGTABLE)  -- PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC
 ./google/cloud/bigtable/README.md:44:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
 ./google/cloud/bigtable/admin/integration_tests/admin_backup_integration_test.cc:41:11     - Unknown word (btadmin)    -- namespace btadmin = ::google::bigtable
 ./google/cloud/bigtable/admin/integration_tests/table_admin_integration_test.cc:219:19    - Unknown word (newfam)     -- mods[0].set_id("newfam");
@@ -363,9 +363,9 @@ Lines:
 ./google/cloud/bigtable/benchmarks/mutation_batcher_throughput_benchmark.cc:140:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
 ./google/cloud/bigtable/benchmarks/random_mutation.cc:31:33     - Unknown word (Zabcdefghijlkmnopqrstuvwxyz) -- ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_");
 ./google/cloud/bigtable/benchmarks/random_mutation.cc:31:8      - Unknown word (ABCDEFGHIJLKMNOPQRSTUVWXY) -- "ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz
-./google/cloud/bigtable/bigtable_client_unit_tests.bzl:76:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
-./google/cloud/bigtable/bigtable_client_unit_tests.bzl:77:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
-./google/cloud/bigtable/bigtable_client_unit_tests.bzl:78:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
+./google/cloud/bigtable/bigtable_client_unit_tests.bzl:79:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
+./google/cloud/bigtable/bigtable_client_unit_tests.bzl:80:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
+./google/cloud/bigtable/bigtable_client_unit_tests.bzl:81:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
 ./google/cloud/bigtable/client_options_test.cc:145:34    - Unknown word (testendpoint)      -- "testendpoint.googleapis.com"),
 ./google/cloud/bigtable/client_options_test.cc:245:60    - Unknown word (customendpoint)    -- .set_data_endpoint("customendpoint.com");
 ./google/cloud/bigtable/client_options_test.cc:311:28    - Unknown word (Grpclb)            -- ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {
@@ -405,15 +405,15 @@ Lines:
 ./google/cloud/bigtable/row_range_test.cc:219:20    - Unknown word (AFFFF)      -- std::string const kAFFFF00 = std::string("a\xFF
 ./google/cloud/bigtable/row_set.h:62:32     - Unknown word (rowkeys)    -- function removes any rowkeys outside @p range, it
 ./google/cloud/bigtable/rpc_backoff_policy.h:31:4      - Unknown word (backsoff)   -- * backsoff from failed RPC operations
-./google/cloud/bigtable/table.cc:432:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
+./google/cloud/bigtable/table.cc:453:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
 ./google/cloud/bigtable/table_config_test.cc:39:49     - Unknown word (MILLIS)     -- granularity(TableConfig::MILLIS);
 ./google/cloud/bigtable/table_readmodifywriterow_test.cc:70:35     - Unknown word (colid)      -- const column_id1 = "colid1";
 ./google/cloud/bigtable/testing/inprocess_data_client.h:34:41     - Unknown word (dataclient) -- multiple test cases. This dataclient uses a pre-defined channel
 ./google/cloud/bigtable/testing/mock_async_failing_rpc_factory.h:71:74     - Unknown word (nooo)       -- PERMISSION_DENIED, "nooo");
 ./google/cloud/bigtable/testing/random_names.cc:47:41     - Unknown word (abcdefghijlkmnopqrstuvwxyz) -- generator, size, "abcdefghijlkmnopqrstuvwxyz0123456789");
 ./google/cloud/bigtable/testing/table_test_fixture.cc:37:24     - Unknown word (repr)       -- std::string const& repr) {
-./google/cloud/bigtable/tests/data_async_future_integration_test.cc:170:37    - Unknown word (newrecord)  -- const add_suffix3 = "-newrecord";
-./google/cloud/bigtable/tests/mutations_integration_test.cc:119:16    - Unknown word (decodeable) -- // *will* be decodeable to in int64_t. I don
+./google/cloud/bigtable/tests/data_async_future_integration_test.cc:180:37    - Unknown word (newrecord)  -- const add_suffix3 = "-newrecord";
+./google/cloud/bigtable/tests/mutations_integration_test.cc:120:16    - Unknown word (decodeable) -- // *will* be decodeable to in int64_t. I don
 ./google/cloud/bigtable/version.h:70:51     - Unknown word (gitrev)     -- in MAJOR.MINOR.PATCH+gitrev format.
 ./google/cloud/billing/cloud_billing_client.h:223:16    - Unknown word (subaccounts) -- /// [billing subaccounts](https://cloud.google
 ./google/cloud/billing/cloud_billing_client.h:225:23    - Unknown word (subaccount)  -- /// When creating a subaccount, the current authenticated
@@ -517,9 +517,9 @@ Lines:
 ./google/cloud/internal/binary_data_as_debug_string.h:31:37     - Unknown word (hexdump)    -- wide and contains the hexdump of the data.  The columns
 ./google/cloud/internal/build_info.cc.in:18:11     - Unknown word (cctype)     -- #include <cctype>
 ./google/cloud/internal/build_info.cc.in:25:4      - Unknown word (NOLINTNEXTLINE) -- // NOLINTNEXTLINE(readability-identifier
-./google/cloud/internal/curl_rest_client_integration_test.cc:38:10     - Unknown word (httpbin)    -- auto httpbin_endpoint = google::cloud
-./google/cloud/internal/curl_rest_client_integration_test.cc:38:62     - Unknown word (HTTPBIN)    -- cloud::internal::GetEnv("HTTPBIN_ENDPOINT");
-./google/cloud/internal/curl_rest_client_integration_test.cc:99:21     - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
+./google/cloud/internal/curl_rest_client_integration_test.cc:101:21    - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
+./google/cloud/internal/curl_rest_client_integration_test.cc:40:10     - Unknown word (httpbin)    -- auto httpbin_endpoint = google::cloud
+./google/cloud/internal/curl_rest_client_integration_test.cc:40:62     - Unknown word (HTTPBIN)    -- cloud::internal::GetEnv("HTTPBIN_ENDPOINT");
 ./google/cloud/internal/diagnostics_pop.inc:17:2      - Unknown word (elif)       -- #elif __clang__
 ./google/cloud/internal/diagnostics_pop.inc:19:9      - Unknown word (GNUC)       -- #elif __GNUC__
 ./google/cloud/internal/disable_deprecation_warnings.inc:19:36     - Unknown word (Wdeprecated) -- diagnostic ignored "-Wdeprecated-declarations"
@@ -529,8 +529,8 @@ Lines:
 ./google/cloud/internal/getenv.cc:17:13     - Unknown word (dupenv)     -- // We need _dupenv_s()
 ./google/cloud/internal/make_jwt_assertion.cc:27:7      - Unknown word (Urlsafe)    -- UrlsafeBase64Encode(header)
 ./google/cloud/internal/oauth2_authorized_user_credentials_test.cc:91:58     - Unknown word (THETOKEN)   -- "refresh_token", "1/THETOKEN")));
-./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:69:24     - Unknown word (mysupersecrettoken) -- "access_token": "mysupersecrettoken",
-./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:71:22     - Unknown word (tokentype)          -- "token_type": "tokentype"
+./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:70:24     - Unknown word (mysupersecrettoken) -- "access_token": "mysupersecrettoken",
+./google/cloud/internal/oauth2_compute_engine_credentials_test.cc:72:22     - Unknown word (tokentype)          -- "token_type": "tokentype"
 ./google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:32:16     - Unknown word (refreshable) -- * Wrapper for refreshable parts of a Credentials
 ./google/cloud/internal/oauth2_service_account_credentials_test.cc:533:5     - Unknown word (CNHKF)      -- rmYdCNHKFXam78uCt7xQLw==
 ./google/cloud/internal/oauth2_service_account_credentials_test.cc:553:13    - Unknown word (SCCV)       -- "hRW9bSCCV8w1Ex+"
@@ -680,14 +680,14 @@ Lines:
 ./google/cloud/spanner/benchmarks/README.md:145:29    - Unknown word (srtp)       -- experiment=read | tee srtp-read.csv
 ./google/cloud/spanner/benchmarks/README.md:83:49     - Unknown word (mrcb)       -- experiment=read-string | tee mrcb-read-string.csv
 ./google/cloud/spanner/benchmarks/single_row_throughput_plots.py:23:8      - Unknown word (plotnine)   -- import plotnine as p9
-./google/cloud/spanner/client_test.cc:319:68    - Unknown word (epdp)       -- tePartitionedDmlParams const& epdp) {
-./google/cloud/spanner/client_test.cc:591:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
+./google/cloud/spanner/client_test.cc:321:68    - Unknown word (epdp)       -- tePartitionedDmlParams const& epdp) {
+./google/cloud/spanner/client_test.cc:593:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
 ./google/cloud/spanner/database_admin_client_test.cc:32:11     - Unknown word (gsad)       -- namespace gsad = ::google::spanner
 ./google/cloud/spanner/instance_admin_client_test.cc:29:11     - Unknown word (gsai)       -- namespace gsai = ::google::spanner
-./google/cloud/spanner/internal/connection_impl_test.cc:2460:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
-./google/cloud/spanner/internal/connection_impl_test.cc:2462:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
-./google/cloud/spanner/internal/connection_impl_test.cc:60:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
-./google/cloud/spanner/internal/connection_impl_test.cc:84:27     - Unknown word (Pointwise)  -- ::testing::UnorderedPointwise;
+./google/cloud/spanner/internal/connection_impl_test.cc:2463:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
+./google/cloud/spanner/internal/connection_impl_test.cc:2465:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
+./google/cloud/spanner/internal/connection_impl_test.cc:61:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
+./google/cloud/spanner/internal/connection_impl_test.cc:87:27     - Unknown word (Pointwise)  -- ::testing::UnorderedPointwise;
 ./google/cloud/spanner/internal/merge_chunk_test.cc:175:29    - Unknown word (Bools)      -- MergeChunk, CannotMergeBools) {
 ./google/cloud/spanner/internal/partial_result_set_source_test.cc:501:31    - Unknown word (chunksecond) -- not_chunked", "first_chunksecond_chunkthird_chunk",
 ./google/cloud/spanner/internal/partial_result_set_source_test.cc:501:43    - Unknown word (chunkthird)  -- "first_chunksecond_chunkthird_chunk",
@@ -724,16 +724,16 @@ Lines:
 ./google/cloud/storage/bucket_metadata_test.cc:124:30    - Unknown word (NEARLINE)   -- "storageClass": "NEARLINE"
 ./google/cloud/storage/bucket_metadata_test.cc:143:8     - Unknown word (metageneration) -- "metageneration": "4",
 ./google/cloud/storage/bucket_metadata_test.cc:227:55    - Unknown word (Nearline)       -- LifecycleRule::SetStorageClassNearline()},
-./google/cloud/storage/client.h:3526:8    - Unknown word (tmpobject)  -- auto tmpobject_name_gen = [&num_tmp
+./google/cloud/storage/client.h:3662:8    - Unknown word (tmpobject)  -- auto tmpobject_name_gen = [&num_tmp
 ./google/cloud/storage/client_options.cc:115:26    - Unknown word (iamapi)     -- (emulator) return "/iamapi";
 ./google/cloud/storage/client_options.h:308:33    - Unknown word (prefx)      -- ClientOptions& add_user_agent_prefx(std::string const& v
 ./google/cloud/storage/client_options_test.cc:41:38     - Unknown word (TESTBENCH)  -- endpoint_("CLOUD_STORAGE_TESTBENCH_ENDPOINT", {}),
-./google/cloud/storage/client_sign_policy_document_test.cc:126:55    - Unknown word (Ymxv)       -- blob = "dGVzdC1zaWduZWQtYmxvYg==";
-./google/cloud/storage/client_sign_url_test.cc:168:40    - Unknown word (Fauto)      -- erviceaccount.com%2F20190201%2Fauto%2Fstorage%2Fgoog4_request
-./google/cloud/storage/client_sign_url_test.cc:168:47    - Unknown word (Fstorage)   -- com%2F20190201%2Fauto%2Fstorage%2Fgoog4_request"
-./google/cloud/storage/client_sign_url_test.cc:168:57    - Unknown word (Fgoog)      -- 1%2Fauto%2Fstorage%2Fgoog4_request"
-./google/cloud/storage/client_sign_url_test.cc:82:41     - Unknown word (Bobject)    -- actual, HasSubstr("test%2Bobject"));
-./google/cloud/storage/client_write_object_test.cc:103:55    - Unknown word (ooops)      -- StatusCode::kDataLoss, "ooops")));
+./google/cloud/storage/client_sign_policy_document_test.cc:127:55    - Unknown word (Ymxv)       -- blob = "dGVzdC1zaWduZWQtYmxvYg==";
+./google/cloud/storage/client_sign_url_test.cc:172:40    - Unknown word (Fauto)      -- erviceaccount.com%2F20190201%2Fauto%2Fstorage%2Fgoog4_request
+./google/cloud/storage/client_sign_url_test.cc:172:47    - Unknown word (Fstorage)   -- com%2F20190201%2Fauto%2Fstorage%2Fgoog4_request"
+./google/cloud/storage/client_sign_url_test.cc:172:57    - Unknown word (Fgoog)      -- 1%2Fauto%2Fstorage%2Fgoog4_request"
+./google/cloud/storage/client_sign_url_test.cc:83:41     - Unknown word (Bobject)    -- actual, HasSubstr("test%2Bobject"));
+./google/cloud/storage/client_write_object_test.cc:139:55    - Unknown word (ooops)      -- StatusCode::kDataLoss, "ooops")));
 ./google/cloud/storage/doc/parallel-uploads-design.md:178:30    - Unknown word (Streambuf)  -- `ParallelObjectWriteStreambuf` for every shard
 ./google/cloud/storage/doc/parallel-uploads-design.md:180:23    - Unknown word (Streambufs) -- `ParallelObjectWriteStreambufs`
 ./google/cloud/storage/doc/parallel-uploads-design.md:221:68    - Unknown word (intiating)  -- has two versions - intiating the
@@ -786,7 +786,7 @@ Lines:
 ./google/cloud/storage/examples/storage_grpc_samples.cc:33:50     - Unknown word (mollit)        -- qui officia deserunt mollit anim id est laborum
 ./google/cloud/storage/examples/storage_grpc_samples.cc:33:69     - Unknown word (laborum)       -- deserunt mollit anim id est laborum.
 ./google/cloud/storage/examples/storage_object_samples.cc:539:56    - Unknown word (tmpfiles)   -- CreateRandomPrefixName(".tmpfiles");
-./google/cloud/storage/google_cloud_cpp_storage.bzl:78:27     - Unknown word (streambuf)  -- internal/object_read_streambuf.h",
+./google/cloud/storage/google_cloud_cpp_storage.bzl:79:27     - Unknown word (streambuf)  -- internal/object_read_streambuf.h",
 ./google/cloud/storage/hashing_options_test.cc:37:19     - Unknown word (Tcrto)      -- EXPECT_EQ("nhB9nTcrtoJr2B01QqQZ1g==", actual
 ./google/cloud/storage/hashing_options_test.cc:53:16     - Unknown word (IEBA)       -- EXPECT_EQ("ImIEBA==", actual);
 ./google/cloud/storage/internal/access_control_common_test.cc:25:6      - Unknown word (ccess)      -- TEST(ccessControlCommonTest, WellKnownVa
@@ -795,7 +795,7 @@ Lines:
 ./google/cloud/storage/internal/curl_download_request_test.cc:100:56    - Unknown word (gunzipped)  -- body-transformations", "gunzipped"}},
 ./google/cloud/storage/internal/curl_download_request_test.cc:99:9      - Unknown word (guploader)  -- {"guploader",
 ./google/cloud/storage/internal/grpc_bucket_request_parser.cc:271:13    - Unknown word (subobject)  -- // subobject.
-./google/cloud/storage/internal/grpc_client.cc:115:14    - Unknown word (testbench)  -- auto const testbench =
+./google/cloud/storage/internal/grpc_client.cc:124:14    - Unknown word (testbench)  -- auto const testbench =
 ./google/cloud/storage/internal/grpc_object_request_parser_test.cc:61:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 ./google/cloud/storage/internal/object_requests_test.cc:237:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 ./google/cloud/storage/internal/object_requests_test.cc:257:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
@@ -816,7 +816,7 @@ Lines:
 ./google/cloud/storage/policy_document_test.cc:158:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
 ./google/cloud/storage/policy_document_test.cc:199:14    - Unknown word (rsaposttest)  -- "rsaposttest, access_id=foo@foo.com
 ./google/cloud/storage/quickstart/README.md:127:31    - Unknown word (Tbits)      -- large workloads (several Tbits/s of upload and/or download
-./google/cloud/storage/storage_client_unit_tests.bzl:51:37     - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc",
+./google/cloud/storage/storage_client_unit_tests.bzl:54:37     - Unknown word (sigpipe)    -- curl_wrappers_disable_sigpipe_handler_test.cc",
 ./google/cloud/storage/testing/retry_tests.h:54:47     - Unknown word (oncall)     -- TypedExpectation<F>& oncall,
 ./google/cloud/storage/tests/conformance_tests.proto:116:38    - Unknown word (prepending)    -- expectedDecodedPolicy before prepending the PolicyInput.fields
 ./google/cloud/storage/tests/conformance_tests.proto:82:24     - Unknown word (lexigraphical) -- E.1: Order them in lexigraphical order so it's the
