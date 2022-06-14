@@ -40,13 +40,13 @@ function mapTokenizedLine(tl: TokenizedLine): ParseResult['parsedTexts'] {
     }));
 }
 
-export function createParser(grammar: Grammar, name: string, transform = mapTokenizedLine): Parser {
+function mapTokenizedLines(itl: Iterable<TokenizedLine>): ParseResult['parsedTexts'] {
+    return pipe(itl, opMap(mapTokenizedLine), opFlatten());
+}
+
+export function createParser(grammar: Grammar, name: string, transform = mapTokenizedLines): Parser {
     function parse(content: string, filename: string): ParseResult {
-        const parsedTexts: ParseResult['parsedTexts'] = pipe(
-            tokenizeTextIterable(content, grammar),
-            opMap(transform),
-            opFlatten()
-        );
+        const parsedTexts: ParseResult['parsedTexts'] = pipe(tokenizeTextIterable(content, grammar), transform);
         return { content, filename, parsedTexts };
     }
 

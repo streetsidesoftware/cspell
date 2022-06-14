@@ -1,4 +1,4 @@
-import { parser } from '.';
+import { parser } from './TypeScriptParser';
 import { promises as fs } from 'fs';
 import * as path from 'path';
 import { ParseResult } from '@cspell/cspell-types/Parser';
