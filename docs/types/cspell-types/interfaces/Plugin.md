@@ -18,8 +18,8 @@ Plugin API
 
 ### parsers
 
-• `Optional` **parsers**: `Parser`[]
+• `Optional` **parsers**: [`Parser`](Parser.md)[]
 
 #### Defined in
 
-[CSpellSettingsDef.ts:1000](https://github.com/streetsidesoftware/cspell/blob/6bd2f0c/packages/cspell-types/src/CSpellSettingsDef.ts#L1000)
+[CSpellSettingsDef.ts:1000](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/CSpellSettingsDef.ts#L1000)

@@ -27,7 +27,7 @@ Define cache settings.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:334](https://github.com/streetsidesoftware/cspell/blob/6bd2f0c/packages/cspell-types/src/CSpellSettingsDef.ts#L334)
+[CSpellSettingsDef.ts:334](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/CSpellSettingsDef.ts#L334)
 
 ___
 
@@ -41,4 +41,4 @@ Exit with non-zero code as soon as an issue/error is encountered (useful for CI 
 
 #### Defined in
 
-[CSpellSettingsDef.ts:339](https://github.com/streetsidesoftware/cspell/blob/6bd2f0c/packages/cspell-types/src/CSpellSettingsDef.ts#L339)
+[CSpellSettingsDef.ts:339](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/CSpellSettingsDef.ts#L339)
