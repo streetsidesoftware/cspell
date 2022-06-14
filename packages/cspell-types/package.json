@@ -7,8 +7,17 @@
   "description": "Types for cspell and cspell-lib",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ]
+    }
+  },
   "exports": {
     ".": "./dist/index.js",
+    "./Parser": "./dist/Parser.js",
+    "./Parser.js": "./dist/Parser.js",
     "./cspell.schema.json": "./cspell.schema.json",
     "./ajv.config": "./ajv.config.js",
     "./ajv.config.js": "./ajv.config.js"

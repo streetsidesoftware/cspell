@@ -2,7 +2,7 @@ import { MatchRuleResult, NCaptures, NPatternBeginEnd, Rule } from '../grammarNo
 import { extractScope } from '../grammarNormalizer';
 import { segmentMatch } from '../matchResult';
 import { Scope } from '../scope';
-import type { MatchResult, MatchSegment, TokenizedText } from '../types';
+import type { MatchResult, MatchSegment, Range, TokenizedText } from '../types';
 import { isDefined } from '../util';
 
 /**
@@ -45,6 +45,8 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
     const pool = rule.grammar.scopePool;
     const text = match.match;
     const input = match.input;
+    const range: Range = [match.index, match.index + text.length, match.lineNumber];
+
     // Do not emit empty captures.
     if (!text && !captures) return [];
 
@@ -52,7 +54,7 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
         const tokenized: TokenizedText = {
             scope,
             text,
-            offset: match.index,
+            range,
         };
         return [tokenized];
     }
@@ -66,7 +68,7 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
         const tokenized: TokenizedText = {
             scope: rule.grammar.scopePool.getScope(cap0, scope),
             text,
-            offset: match.index,
+            range,
         };
         return [tokenized];
     }
@@ -169,7 +171,7 @@ export function applyCaptures(rule: Rule, match: MatchResult, captures: NCapture
         while (m) {
             const t: TokenizedText = {
                 text: input.slice(m.a, m.b),
-                offset: m.a,
+                range: [m.a, m.b, match.lineNumber],
                 scope: segChainToScope(m.s),
             };
             yield t;

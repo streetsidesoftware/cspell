@@ -12,5 +12,5 @@ export interface MappedText {
      *   where the `[0, 0]` is unnecessary.
      *
      */
-    map: number[];
+    map?: number[] | undefined;
 }

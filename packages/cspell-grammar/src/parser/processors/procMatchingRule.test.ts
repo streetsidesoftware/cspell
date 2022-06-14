@@ -1,5 +1,5 @@
 import assert from 'assert';
-import { Grammar } from '../grammarDefinition';
+import { GrammarDef } from '../grammarDefinition';
 import { normalizeGrammar } from '../grammarNormalizer';
 import { ScopePool } from '../scope';
 import type { TokenizedText } from '../types';
@@ -7,7 +7,7 @@ import { applyCaptureToBeginOrMatch } from './procMatchingRule';
 
 const pool = new ScopePool();
 
-const grammar: Grammar = {
+const grammar: GrammarDef = {
     scopeName: 'source.tst',
     patterns: [
         {

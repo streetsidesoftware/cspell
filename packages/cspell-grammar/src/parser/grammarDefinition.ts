@@ -1,4 +1,4 @@
-export interface Grammar extends PatternPatterns {
+export interface GrammarDef extends PatternPatterns {
     scopeName: ScopeSource;
     repository?: Repository | undefined;
 }

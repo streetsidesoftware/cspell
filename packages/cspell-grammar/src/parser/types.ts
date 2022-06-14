@@ -13,6 +13,24 @@ export interface Line {
     lineNumber: number;
 }
 
+/**
+ * A line of a document
+ */
+export interface DocumentLine {
+    /**
+     * The text at that line number
+     */
+    text: string;
+    /**
+     * The 0 based line number
+     */
+    lineNumber: number;
+    /**
+     * The absolute offset from the beginning of the document
+     */
+    documentOffset: number;
+}
+
 export interface LineOffsetAnchored extends LineOffset {
     /** The anchor is the position at the end of the last match */
     anchor: number;
@@ -25,6 +43,10 @@ export interface MatchResult {
     index: number;
     /** the input string matched against */
     input: string;
+    /**
+     * line number of the input string.
+     */
+    lineNumber: number;
     /**
      * This is the full match
      */
@@ -48,19 +70,14 @@ export interface MatchSegment {
 
 export type AppliedScopes = Scope[];
 
-export interface TokenRange {
-    scope: AppliedScopes;
-    start: number;
-    end: number;
-}
-
 export interface TokenizedLine {
     tokens: TokenizedText[];
     line: Line;
+    offset: number;
 }
 
 export interface TokenizedLineResult extends TokenizedLine {
-    parse: (nextLine: Line) => TokenizedLineResult;
+    parse: (nextLine: DocumentLine) => TokenizedLineResult;
 }
 
 export interface TokenizedText {
@@ -73,7 +90,19 @@ export interface TokenizedText {
      */
     text: string;
     /**
-     * Offset from the beginning of the line
+     * start and end offset of the text.
      */
-    offset: number;
+    range: Range;
 }
+
+/**
+ * A Range that is relative to the beginning of a line.
+ */
+export type RangeRelativeToLine = [start: number, end: number, line: number];
+
+/**
+ * A Range where the start and end are relative to the beginning of the document.
+ */
+export type RangeAbsolute = [start: number, end: number];
+
+export type Range = RangeAbsolute | RangeRelativeToLine;

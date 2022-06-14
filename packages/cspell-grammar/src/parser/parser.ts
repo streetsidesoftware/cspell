@@ -1,7 +1,9 @@
 import { NGrammar } from './grammarNormalized';
-import { tokenizeText } from './tokenizeLine';
-import type { TokenizedLineResult } from './types';
+import { tokenizeText, tokenizeTextIterable } from './tokenizeLine';
+import type { TokenizedLine, TokenizedLineResult } from './types';
 import { pipeSync as pipe, opFlatten, opMap, opFilter } from '@cspell/cspell-pipe';
+import type { Parser, ParseResult } from '@cspell/cspell-types/Parser';
+import { Grammar } from './grammar';
 
 export interface DocumentParser {
     parse: (firstLine: string) => TokenizedLineResult;
@@ -23,7 +25,30 @@ export function parseDocument(
 
     for (const { t: token, l: line } of tokens) {
         emitter(
-            `${line.lineNumber + 1}:${token.offset + 1}\t ${JSON.stringify(token.text)}\t ${token.scope.toString()}`
+            `${(token.range[2] ?? line.lineNumber) + 1}:${token.range[0] + 1}\t ${JSON.stringify(
+                token.text
+            )}\t ${token.scope.toString()}`
         );
     }
+}
+
+function mapTokenizedLine(tl: TokenizedLine): ParseResult['parsedTexts'] {
+    return tl.tokens.map((t) => ({
+        text: t.text,
+        range: [tl.offset + t.range[0], tl.offset + t.range[1]] as const,
+        scope: t.scope,
+    }));
+}
+
+function mapTokenizedLines(itl: Iterable<TokenizedLine>): ParseResult['parsedTexts'] {
+    return pipe(itl, opMap(mapTokenizedLine), opFlatten());
+}
+
+export function createParser(grammar: Grammar, name: string, transform = mapTokenizedLines): Parser {
+    function parse(content: string, filename: string): ParseResult {
+        const parsedTexts: ParseResult['parsedTexts'] = pipe(tokenizeTextIterable(content, grammar), transform);
+        return { content, filename, parsedTexts };
+    }
+
+    return { name, parse };
 }

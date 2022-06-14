@@ -22,19 +22,19 @@ describe('matchResult', () => {
     });
 });
 
-function cr(regexp: RegExp, text: string, lastIndex = 0) {
+function cr(regexp: RegExp, text: string, lastIndex = 0, lineNumber = 0) {
     const rx = RegExp(regexp, regexp.flags + 'g');
     rx.lastIndex = lastIndex;
 
     const r = rx.exec(text);
     if (!r) throw new Error(`Text "${text}" failed to match RegExp ${rx}`);
-    return createMatchResult(r);
+    return createMatchResult(r, lineNumber);
 }
 
-function crs(input: string, match: string) {
+function crs(input: string, match: string, lineNumber = 0) {
     const index = input.indexOf(match);
     if (index < 0) throw new Error(`Failed to find "$match" in "$input"`);
-    return createSimpleMatchResult(match, input, index);
+    return createSimpleMatchResult(match, input, index, lineNumber);
 }
 
 function oc<T>(t: Partial<T>): T {

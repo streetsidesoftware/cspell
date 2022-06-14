@@ -1,4 +1,4 @@
-import { Grammar, Repository } from '..';
+import { GrammarDef, Repository } from '..';
 
 const repository: Repository = {
     statements: {
@@ -64,7 +64,7 @@ const repository: Repository = {
     },
     string_character_escape: {
         name: 'constant.character.escape.ts',
-        match: /\\(x[0-9A-Fa-f]{2}|[0-3][0-7]{0,2}|[4-7][0-7]?|.|$)/,
+        match: /\\(x[0-9A-Fa-f]{2}|[0-3][0-7]{0,2}|[4-7][0-7]?|u[0-9A-Fa-f]{4}|.|\r?\n?$)/,
     },
     braces: {
         patterns: [
@@ -128,7 +128,7 @@ const repository: Repository = {
     },
 };
 
-export const grammar: Grammar = {
+export const grammar: GrammarDef = {
     name: 'TypeScript',
     scopeName: 'source.ts',
     patterns: [
