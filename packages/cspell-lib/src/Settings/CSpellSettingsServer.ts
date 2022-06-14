@@ -173,6 +173,7 @@ function merge(
         description: undefined,
         globRoot: undefined,
         import: undefined,
+        plugins: mergeList(_left.plugins, _right.plugins),
         __imports: mergeImportRefs(_left, _right),
         __importRef: undefined,
     });
