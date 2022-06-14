@@ -6,6 +6,7 @@ const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
 
 describe('suggestions', () => {
+    jest.setTimeout(20000);
     test.each`
         word       | options                                 | settings                       | expected
         ${'apple'} | ${undefined}                            | ${undefined}                   | ${ac([sug('apple', 0, ['en_us']), sug('Apple', 1, ['en_us', 'companies'])])}
