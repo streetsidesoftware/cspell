@@ -21,6 +21,6 @@ jobs:
       - run: npm i -g npm@8
       - run: npm -v
 
-      - run: npx lerna run build --scope "@cspell/cspell-bundled-dicts" --include-dependencies
       - run: npm run prepare-cspell-action
+      - run: npx lerna run build --scope "@cspell/cspell-bundled-dicts" --include-dependencies
       - uses: streetsidesoftware/cspell-action@a18452ec4795d191ffb187d6969cddd5b527dbf0 # v1
