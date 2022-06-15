@@ -1,3 +1,5 @@
+/* eslint-disable node/no-missing-import */
+/* eslint-disable import/no-unresolved */
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { parser as parserTypeScript } from 'cspell-grammar/parsers/typescript/index.js';
 
