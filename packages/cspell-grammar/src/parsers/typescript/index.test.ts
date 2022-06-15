@@ -6,14 +6,17 @@ import { ParseResult } from '@cspell/cspell-types/Parser';
 const fixtures = path.join(__dirname, '../../../fixtures');
 
 describe('TypeScript Parser', () => {
-    const sample1File = 'TypeScript/escape-codes.ts';
     test('parser', () => {
         expect(parser.name).toBe('typescript');
     });
 
-    test('parse sample', async () => {
-        const content = await readSample(sample1File);
-        const p = parser.parse(content, sample1File);
+    test.each`
+        filename
+        ${'TypeScript/escape-codes.ts'}
+        ${'TypeScript/sample1.ts'}
+    `('parse $filename', async ({ filename }) => {
+        const content = await readSample(filename);
+        const p = parser.parse(content, filename);
         expect(stringifyResult(p)).toMatchSnapshot();
     });
 });

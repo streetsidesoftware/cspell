@@ -1,12 +1,10 @@
-import { TypeScript } from './grammars';
-import { NGrammar } from './parser/grammarNormalized';
-import { normalizeGrammar } from './parser/grammarNormalizer';
-import * as path from 'path';
+import type { ParsedText, Parser } from '@cspell/cspell-types/Parser';
 import { promises as fs } from 'fs';
-import { parseDocument } from './parser/parser';
+import * as path from 'path';
+import { parser as parserTypeScript } from './parsers/typescript';
 
-const grammars: Record<string, NGrammar | undefined> = {
-    '.ts': normalizeGrammar(TypeScript.grammar),
+const parsers: Record<string, Parser> = {
+    '.ts': parserTypeScript,
 };
 
 /**
@@ -29,14 +27,22 @@ export async function run(args: string[]): Promise<void> {
     }
 
     const ext = path.extname(filename);
-    const g = grammars[ext];
-    if (!g) {
-        console.log(`No grammar for ${path.basename(filename)}`);
+    const parser = parsers[ext];
+    if (!parser) {
+        console.log(`No parser for ${path.basename(filename)}`);
         return;
     }
 
-    console.log(`File: ${path.basename(filename)} Grammar: ${g.name || g.scopeName}`);
+    console.log(`File: ${path.basename(filename)} Parser: ${parser.name}`);
     const content = await fs.readFile(filename, 'utf-8');
 
-    parseDocument(g, filename, content);
+    const result = parser.parse(content, filename);
+    for (const pt of result.parsedTexts) {
+        emit(pt);
+    }
+}
+
+function emit(pt: ParsedText) {
+    const t = pt.text.replace(/\t/g, '↦').replace(/\r?\n/g, '↩︎').replace(/\r/g, '⇠');
+    console.log(`${pt.range[0]}-${pt.range[1]}\t${t}\t${pt.scope?.toString() || ''}`);
 }

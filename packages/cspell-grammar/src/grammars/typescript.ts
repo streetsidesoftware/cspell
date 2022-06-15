@@ -5,6 +5,7 @@ const repository: Repository = {
         name: 'code.ts',
         patterns: [
             '#keyword',
+            '#regexp',
             '#string',
             '#comment',
             '#braces',
@@ -125,6 +126,25 @@ const repository: Repository = {
                 captures: 'punctuation.definition.comment.ts',
             },
         ],
+    },
+    regexp: {
+        name: 'regexp.ts',
+        begin: /\/(?![/*])/,
+        end: /\/([a-z]*)/i,
+        beginCaptures: 'punctuation.begin.regexp.ts',
+        endCaptures: 'punctuation.end.regexp.ts',
+        patterns: ['#regexp_escape', '#regexp_brace'],
+    },
+    regexp_escape: {
+        name: 'escape.regexp.ts',
+        match: /\\./,
+    },
+    regexp_brace: {
+        name: 'brace.regexp.ts',
+        begin: '[',
+        end: ']',
+        contentName: 'character-class.regexp.ts',
+        patterns: ['#regexp_escape'],
     },
 };
 
