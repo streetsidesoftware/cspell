@@ -13,7 +13,6 @@ const parsers: Record<string, Parser> = {
  * @returns Promise
  */
 export async function run(args: string[]): Promise<void> {
-    console.log('args: %o', args);
     // early out if there are not enough arguments
     if (args.length < 3) {
         console.log('usage...');
