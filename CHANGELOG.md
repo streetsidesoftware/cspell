@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.1.3-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v6.1.2...v6.1.3-alpha.0) (2022-06-15)
+
+
+### Bug Fixes
+
+* fix cspell-types ([#3067](https://github.com/streetsidesoftware/cspell/issues/3067)) ([71a9fc7](https://github.com/streetsidesoftware/cspell/commit/71a9fc71bfca26b4f65b5019fd055987cba36609))
+* Update grammar app ([#3070](https://github.com/streetsidesoftware/cspell/issues/3070)) ([9e0860f](https://github.com/streetsidesoftware/cspell/commit/9e0860f45c9a47d7e068384978ad83379776863a))
+
+
+
+
+
 ## [6.1.2](https://github.com/streetsidesoftware/cspell/compare/v6.1.1...v6.1.2) (2022-06-09)
 
 
