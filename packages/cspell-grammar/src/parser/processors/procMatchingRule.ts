@@ -30,7 +30,7 @@ export function applyCaptureToEnd(rule: Rule, match: MatchResult): TokenizedText
 
     const bePattern = <NPatternBeginEnd>pattern;
 
-    const captures = bePattern.beginCaptures ?? bePattern.captures;
+    const captures = bePattern.endCaptures ?? bePattern.captures;
 
     return applyCaptures(rule, match, captures);
 }

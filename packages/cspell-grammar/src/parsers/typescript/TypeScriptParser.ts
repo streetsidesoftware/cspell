@@ -1,16 +1,18 @@
-import { grammar } from '../../grammars/typescript';
-import { compileGrammar } from '../..';
-import { createParser } from '../../parser/parser';
-import { TokenizedLine } from '../../parser/types';
-import { ParsedText, ParseResult, Scope } from '@cspell/cspell-types/Parser';
 import { opFlatten, opMap, pipeSync as pipe } from '@cspell/cspell-pipe';
-import { mapRawString } from '../../mappers/typescript';
-import { ScopePool } from '../../parser/scope';
+import { ParsedText, ParseResult, Scope, ScopeChain } from '@cspell/cspell-types/Parser';
+import { compileGrammar } from '../..';
+import { grammar } from '../../grammars/typescript';
 import { appendMappedText } from '../../mappers/appendMappedText';
+import { mapRawString } from '../../mappers/typescript';
+import { createParser } from '../../parser/parser';
+import { ScopePool } from '../../parser/scope';
+import { TokenizedLine } from '../../parser/types';
 
 const tsGrammar = compileGrammar(grammar);
 
 const pool = new ScopePool();
+
+const useScope = new WeakMap<ScopeChain, boolean>();
 
 function* transform(texts: ParseResult['parsedTexts']): ParseResult['parsedTexts'] {
     for (const parsed of texts) {
@@ -67,9 +69,18 @@ function mergeParsedText(a: ParsedText, b: ParsedText): ParsedText {
     return ab;
 }
 
+function filterScope(scope: ScopeChain): boolean {
+    const cached = useScope.get(scope);
+    if (cached !== undefined) return cached;
+    const value = scope.value;
+    const use = !value.startsWith('punctuation') && !value.startsWith('keyword.');
+    useScope.set(scope, use);
+    return use;
+}
+
 function mapTokenizedLine(tl: TokenizedLine): ParseResult['parsedTexts'] {
     return tl.tokens
-        .filter((t) => !t.scope.value.startsWith('punctuation'))
+        .filter((t) => filterScope(t.scope))
         .map((t) => ({
             text: t.text,
             range: [tl.offset + t.range[0], tl.offset + t.range[1]] as const,
