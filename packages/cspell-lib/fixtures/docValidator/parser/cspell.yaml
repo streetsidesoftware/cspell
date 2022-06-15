@@ -1,7 +1,11 @@
 ---
 patterns:
   - name: js-hex-escape
-    pattern: ""
+    pattern: "$^"
+  - name: js-unicode-escape
+    pattern: "$^"
+  - name: js-regexp-flags
+    pattern: "$^"
 overrides:
   - filename: "**/*.ts"
     parser: typescript
