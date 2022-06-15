@@ -28,6 +28,7 @@ const config = {
         'docs/docsV2/**',
         'integration-tests/repositories/**',
         'packages/*/fixtures/**',
+        'packages/cspell-bundled-dicts/cspell-default.config.js',
         'test-fixtures/**',
         'test-packages/test-cspell-eslint-plugin',
         'test-packages/test-cspell-eslint-plugin/**',
