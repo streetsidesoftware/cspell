@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -580,21 +580,6 @@ declare function checkText(text: string, settings: CSpellUserSettings): Promise<
 
 declare type Offset = number;
 declare type SimpleRange = readonly [Offset, Offset];
-interface ParsedText {
-    /**
-     * Transformed text
-     */
-    text: string;
-    /**
-     * Offset pair of the original text
-     */
-    range: SimpleRange;
-    /**
-     * Relative map to the original text.
-     */
-    map?: number[];
-    scope?: string[];
-}
 
 interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
@@ -641,10 +626,12 @@ declare class DocumentValidator {
     checkDocument(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
     updateDocumentText(text: string): void;
-    private checkDocumentLines;
+    private defaultParser;
+    private _checkParsedText;
     private addPossibleError;
     private catchError;
     private errorCatcherWrapper;
+    private _parse;
     private suggest;
     private genSuggestions;
     getFinalizedDocSettings(): CSpellSettingsInternal;
@@ -667,6 +654,7 @@ interface Preparations {
     dictionary: SpellingDictionaryCollection;
     /** configuration after applying in-doc settings */
     docSettings: CSpellSettingsInternal;
+    finalSettings: CSpellSettingsInternalFinalized;
     includeRanges: MatchRange[];
     lineValidator: LineValidator;
     segmenter: (lineSegment: LineSegment) => LineSegment[];
