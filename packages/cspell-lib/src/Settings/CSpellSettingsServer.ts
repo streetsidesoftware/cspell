@@ -3,8 +3,11 @@ import type {
     CSpellUserSettings,
     Glob,
     ImportFileRef,
+    Parser,
+    Plugin,
     Source,
 } from '@cspell/cspell-types';
+import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
 import * as path from 'path';
 import {
@@ -271,11 +274,11 @@ function _finalizeSettings(settings: CSpellSettingsI): CSpellSettingsInternalFin
         finalized: true,
         ignoreRegExpList: resolvePatterns(settings.ignoreRegExpList, settings.patterns),
         includeRegExpList: resolvePatterns(settings.includeRegExpList, settings.patterns),
+        parser: resolveParser(settings),
     };
 
     finalized.name = 'Finalized ' + (finalized.name || '');
     finalized.source = { name: settings.name || 'src', sources: [settings] };
-
     return finalized;
 }
 
@@ -395,6 +398,41 @@ function resolveCwd(): string {
     const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
     const cwd = envGlobRoot || process.cwd();
     return cwd;
+}
+
+function resolveParser(settings: CSpellSettingsI): Parser | undefined {
+    if (!settings.parser) return undefined;
+    if (typeof settings.parser === 'function') return settings.parser;
+
+    const parserName = settings.parser;
+    assert(typeof parserName === 'string');
+
+    const parsers = extractParsers(settings.plugins);
+    const parser = parsers.get(parserName);
+    assert(parser, `Parser "${parserName}" not found.`);
+    return parser;
+}
+
+const parserCache = new WeakMap<Exclude<CSpellSettingsI['plugins'], undefined>, Map<string, Parser>>();
+const emptyParserMap = new Map<string, Parser>();
+
+function extractParsers(plugins: CSpellSettingsI['plugins']): Map<string, Parser> {
+    if (!plugins || !plugins.length) return emptyParserMap;
+    const found = parserCache.get(plugins);
+    if (found) return found;
+
+    function* parsers(plugins: Plugin[]) {
+        for (const plugin of plugins) {
+            if (!plugin.parsers) continue;
+            for (const parser of plugin.parsers) {
+                yield [parser.name, parser] as const;
+            }
+        }
+    }
+
+    const map = new Map(parsers(plugins));
+    parserCache.set(plugins, map);
+    return map;
 }
 
 export const __testing__ = {

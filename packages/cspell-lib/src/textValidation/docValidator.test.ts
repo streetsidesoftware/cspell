@@ -86,12 +86,13 @@ describe('docValidator', () => {
         expect(dVal.prepTime).toBeGreaterThan(0);
     });
 
-    // cspell:ignore kount naame colector Reciever reciever recievers
+    // cspell:ignore kount naame colector Reciever reciever recievers serrors
     test.each`
         filename                             | maxDuplicateProblems | expectedIssues
         ${fix('sample-with-errors.ts')}      | ${undefined}         | ${['Helllo']}
         ${fix('sample-with-many-errors.ts')} | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']}
         ${fix('sample-with-many-errors.ts')} | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}
+        ${fix('parser/sample.ts')}           | ${1}                 | ${['serrors']}
     `('checkDocument $filename $maxDuplicateProblems', async ({ filename, maxDuplicateProblems, expectedIssues }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });

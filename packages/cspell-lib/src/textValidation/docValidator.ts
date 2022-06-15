@@ -1,8 +1,8 @@
-import { opConcatMap, pipeSync } from '@cspell/cspell-pipe';
-import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, PnPSettings } from '@cspell/cspell-types';
+import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe';
+import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ParsedText, PnPSettings } from '@cspell/cspell-types';
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
-import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+import { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import { TextDocument, updateTextDocument } from '../Models/TextDocument';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
@@ -14,7 +14,7 @@ import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
-import { ParsedText, SimpleRange } from './parsedText';
+import { SimpleRange } from './parsedText';
 import {
     calcTextInclusionRanges,
     defaultMaxDuplicateProblems,
@@ -108,6 +108,7 @@ export class DocumentValidator {
             config,
             dictionary: dict,
             docSettings,
+            finalSettings,
             shouldCheck,
             validateOptions,
             includeRanges,
@@ -166,6 +167,7 @@ export class DocumentValidator {
             config,
             dictionary: dict,
             docSettings,
+            finalSettings,
             shouldCheck,
             validateOptions,
             includeRanges,
@@ -214,7 +216,7 @@ export class DocumentValidator {
 
     checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[] {
         const text = this._document.text.slice(range[0], range[1]);
-        return this.check({ text, range, scope });
+        return this.check({ text, range, scope: scope.join(' ') });
     }
 
     check(parsedText: ParsedText): ValidationIssue[] {
@@ -254,7 +256,7 @@ export class DocumentValidator {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
 
-        return forceCheck || this.shouldCheckDocument() ? [...this.checkDocumentLines()] : [];
+        return forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
     }
 
     get document() {
@@ -266,7 +268,18 @@ export class DocumentValidator {
         this._updatePrep();
     }
 
-    private *checkDocumentLines() {
+    private defaultParser(): Iterable<ParsedText> {
+        return pipeSync(
+            this.document.getLines(),
+            opMap((line) => {
+                const { text, offset } = line;
+                const range = [offset, offset + text.length] as const;
+                return { text, range };
+            })
+        );
+    }
+
+    private *_checkParsedText(parsedTexts: Iterable<ParsedText>): Iterable<ValidationIssue> {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const { maxNumberOfProblems = defaultMaxNumberOfProblems, maxDuplicateProblems = defaultMaxDuplicateProblems } =
             this._preparations.validateOptions;
@@ -274,10 +287,8 @@ export class DocumentValidator {
         let numProblems = 0;
         const mapOfProblems = new Map<string, number>();
 
-        for (const line of this.document.getLines()) {
-            const { text, offset } = line;
-            const range = [offset, offset + text.length] as const;
-            for (const issue of this.check({ text, range })) {
+        for (const pText of parsedTexts) {
+            for (const issue of this.check(pText)) {
                 const { text } = issue;
                 const n = (mapOfProblems.get(text) || 0) + 1;
                 mapOfProblems.set(text, n);
@@ -306,6 +317,13 @@ export class DocumentValidator {
             this.addPossibleError(error);
         }
         return undefined;
+    }
+
+    private _parse(): Iterable<ParsedText> {
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        const parser = this._preparations.finalSettings.parser;
+        if (typeof parser !== 'object') return this.defaultParser();
+        return parser.parse(this.document.text, this.document.uri.path).parsedTexts;
     }
 
     private suggest(text: string) {
@@ -359,6 +377,7 @@ interface Preparations {
     dictionary: SpellingDictionaryCollection;
     /** configuration after applying in-doc settings */
     docSettings: CSpellSettingsInternal;
+    finalSettings: CSpellSettingsInternalFinalized;
     includeRanges: MatchRange[];
     lineValidator: LineValidator;
     segmenter: (lineSegment: LineSegment) => LineSegment[];

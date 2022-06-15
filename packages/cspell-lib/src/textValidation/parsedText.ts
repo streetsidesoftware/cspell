@@ -1,25 +1,9 @@
-import { TextOffset } from '@cspell/cspell-types';
+import { TextOffset, ParsedText } from '@cspell/cspell-types';
 import { ValidationIssue } from './validator';
 
 export type Offset = number;
 
 export type SimpleRange = readonly [Offset, Offset];
-
-export interface ParsedText {
-    /**
-     * Transformed text
-     */
-    text: string;
-    /**
-     * Offset pair of the original text
-     */
-    range: SimpleRange;
-    /**
-     * Relative map to the original text.
-     */
-    map?: number[];
-    scope?: string[];
-}
 
 export function mapIssueBackToOriginalPos(parsedText: ParsedText, issue: ValidationIssue): ValidationIssue {
     if (!parsedText.map || parsedText.map.length === 0) return issue;

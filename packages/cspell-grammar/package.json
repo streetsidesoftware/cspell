@@ -16,7 +16,25 @@
   "directories": {
     "dist": "dist"
   },
-  "typings": "dist/index.d.ts",
+  "typings": "index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*"
+      ],
+      "parsers/*": [
+        "dist/parsers/*"
+      ],
+      "index.d.ts": [
+        "dist/index.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./parsers/typescript": "./dist/parsers/typescript/index.js",
+    "./parsers/typescript/index.js": "./dist/parsers/typescript/index.js"
+  },
   "files": [
     "dist",
     "bin.js",
