@@ -1,4 +1,5 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
+import { parser as parserTypeScript } from 'cspell-grammar/parsers/typescript/index.js';
 
 const settings: CSpellSettings = {
     version: '0.2',
@@ -134,6 +135,11 @@ const settings: CSpellSettings = {
         '@cspell/dict-swift/cspell-ext.json',
         '@cspell/dict-typescript/cspell-ext.json',
         '@cspell/dict-vue/cspell-ext.json',
+    ],
+    plugins: [
+        {
+            parsers: [parserTypeScript],
+        },
     ],
 };
 
