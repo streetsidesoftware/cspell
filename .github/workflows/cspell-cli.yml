@@ -26,6 +26,7 @@ jobs:
       - # It is necessary to run `npm i` in order install some dictionaries.
         name: prepare-cspell-action
         run: npm i
+      - run: npx lerna run build --scope "@cspell/cspell-bundled-dicts" --include-dependencies
 
       - name: Restore CSpell cache
         uses: actions/cache@v3
