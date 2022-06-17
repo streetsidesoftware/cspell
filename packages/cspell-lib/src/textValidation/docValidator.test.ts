@@ -4,6 +4,7 @@ import * as path from 'path';
 import { createTextDocument, TextDocument } from '../Models/TextDocument';
 import { AutoCache } from '../util/simpleCache';
 import { DocumentValidator } from './docValidator';
+import { ValidationIssue } from './validator';
 
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = path.join(__dirname, '../../fixtures');
@@ -88,19 +89,32 @@ describe('docValidator', () => {
 
     // cspell:ignore kount naame colector Reciever reciever recievers serrors
     test.each`
-        filename                             | maxDuplicateProblems | expectedIssues
-        ${fix('sample-with-errors.ts')}      | ${undefined}         | ${['Helllo']}
-        ${fix('sample-with-many-errors.ts')} | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']}
-        ${fix('sample-with-many-errors.ts')} | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}
-        ${fix('parser/sample.ts')}           | ${1}                 | ${['serrors']}
-    `('checkDocument $filename $maxDuplicateProblems', async ({ filename, maxDuplicateProblems, expectedIssues }) => {
-        const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
-        await dVal.prepare();
-        const r = dVal.checkDocument();
-        expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
-    });
+        filename                             | maxDuplicateProblems | expectedIssues                                                                                                                                                                                | expectedRawIssues
+        ${fix('sample-with-errors.ts')}      | ${undefined}         | ${['Helllo']}                                                                                                                                                                                 | ${['Helllo']}
+        ${fix('sample-with-many-errors.ts')} | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']} | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']}
+        ${fix('sample-with-many-errors.ts')} | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}                                                                                                                        | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}
+        ${fix('parser/sample.ts')}           | ${1}                 | ${['serrors']}                                                                                                                                                                                | ${['\\x73err' /* should be '\\x73errors' */]}
+    `(
+        'checkDocument $filename $maxDuplicateProblems',
+        async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
+            const doc = await loadDoc(filename);
+            const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
+            await dVal.prepare();
+            const r = dVal.checkDocument();
+
+            expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
+            expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues);
+        }
+    );
 });
+
+function extractRawText(text: string, issues: ValidationIssue[]): string[] {
+    return issues.map((issue) => {
+        const start = issue.offset;
+        const end = start + (issue.length ?? issue.text.length);
+        return text.slice(start, end);
+    });
+}
 
 function td(uri: string, content: string, languageId?: string, locale?: string, version = 1): TextDocument {
     return createTextDocument({ uri, content, languageId, locale, version });
