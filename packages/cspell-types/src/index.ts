@@ -6,5 +6,5 @@ export * from './CSpellSettingsDef';
 export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts } from './DictionaryInformation';
 export type { Feature, Features } from './features';
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef';
-export type { TextDocumentOffset, TextOffset } from './TextOffset';
+export type { TextDocumentOffset, TextOffset, TextMap } from './TextOffset';
 export type { ParseResult, ParsedText, Parser, ParserName, ParserOptions } from './Parser';

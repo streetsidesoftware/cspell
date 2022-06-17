@@ -14,6 +14,24 @@ export interface TextOffset {
     length?: number;
 }
 
+export type Range = readonly [start: number, end: number];
+
+export interface TextMap {
+    /**
+     * The text found at the offset. If the text has been transformed, then the length might not match `end - start`.
+     * Example: Original: `cafe\u0301`, text: `café`
+     */
+    readonly srcTxt: string;
+    /**
+     * The start and end offset of the text in the document.
+     */
+    readonly srcRange: Range;
+    /**
+     * Optional mapping from the raw text in the document.
+     */
+    readonly srcMap?: readonly number[] | undefined;
+}
+
 export interface TextDocumentOffset extends TextOffset {
     uri?: string;
     doc: string;
