@@ -98,7 +98,8 @@ export function memorizeLastCall<T, K>(fn: (...p: [...K[]]) => T): (...p: [...K[
 }
 
 /**
- * calls a function exactly once and always returns the same value.
+ * Creates a function that will call `fn` exactly once when invoked and remember the value returned.
+ * All subsequent calls will return exactly same value.
  * @param fn - function to call
  * @returns a new function
  */
@@ -115,7 +116,12 @@ export function callOnce<T>(fn: () => T): () => T {
     };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/**
+ * Create a function that will memorize all calls to `fn` to ensure that `fn` is
+ * called exactly once for each unique set of arguments.
+ * @param fn - function to memorize
+ * @returns a function
+ */
 export function memorizerAll<K extends any[], T>(fn: (...p: K) => T): (...p: K) => T {
     type N = M<K, T>;
     const r: N = {};
