@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 210
   filesWithIssues: 197
-  issues: 3270
+  issues: 3286
   errors: 0
 Errors: []
 
@@ -123,6 +123,7 @@ issues:
   - "caddytest/integration/reverseproxy_test.go:319:23   	Healthcheck 	U   	func TestSRVWithActiveHealthcheck(t *testing.T) {"
   - "caddytest/integration/stream_test.go:152:3      	rstring     	U   	rstring, err := httputil.DumpRequest"
   - "caddytest/integration/stream_test.go:332:31     	automaticlly	U   	underlying transport will automaticlly add gzip"
+  - "cmd/caddy/main.go:27:19     	xcaddy  	U   	// Or you can use xcaddy which does it all for"
   - "cmd/commandfuncs.go:45:10   	Pidfile     	U   	startCmdPidfileFlag := fl.String(\"pidfile"
   - "cmd/commandfuncs.go:47:10   	Envfile     	U   	startCmdEnvfileFlag := fl.String(\"envfile"
   - "cmd/commandfuncs.go:47:36   	envfile     	U   	tCmdEnvfileFlag := fl.String(\"envfile\")"
@@ -225,8 +226,10 @@ issues:
   - "modules/caddyhttp/fileserver/staticfiles.go:401:31  	Backoff         	U   	:= weakrand.Intn(maxBackoff-minBackoff) + minBackoff"
   - "modules/caddyhttp/fileserver/staticfiles.go:412:74  	Caza            	U   	written by Nathaniel Caza."
   - "modules/caddyhttp/fileserver/staticfiles.go:514:36  	etag            	U   	lculateEtag produces a strong etag by default, although"
-  - "modules/caddyhttp/headers/headers_test.go:196:11    	hdrs	U   	for k, hdrs := range tc.respHeader"
-  - "modules/caddyhttp/headers/headers.go:181:27     	Superceded  	U   	they are written out. Superceded if Require is set."
+  - "modules/caddyhttp/headers/headers_test.go:93:32     	lalala      	U   	Header-Suffix\": []string{\"lalala\"},"
+  - "modules/caddyhttp/headers/headers_test.go:96:32     	foofoofoo   	U   	Me\": []string{\"foofoofoo\"},"
+  - "modules/caddyhttp/headers/headers_test.go:216:11    	hdrs        	U   	for k, hdrs := range tc.respHeader"
+  - "modules/caddyhttp/headers/headers.go:187:27     	Superceded  	U   	they are written out. Superceded if Require is set."
   - "modules/caddyhttp/httpredirectlistener.go:147:44    	OPTIO   	U   	\"POST \", \"PUT /\", \"OPTIO\":"
   - "modules/caddyhttp/map/caddyfile.go:15:9     	maphandler  	U   	package maphandler"
   - "modules/caddyhttp/map/map_test.go:53:16     	Cxyz    	U   	reqURI: \"/ABCxyzDEF\","
@@ -271,8 +274,11 @@ issues:
   - "modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9    	forwardauth 	U   	package forwardauth"
   - "modules/caddyhttp/reverseproxy/healthchecks.go:47:35    	proxied     	U   	health checks monitor proxied requests for errors"
   - "modules/caddyhttp/reverseproxy/healthchecks.go:382:71   	forgetter   	U   	health check failure forgetter panicked\","
-  - "modules/caddyhttp/reverseproxy/httptransport.go:91:46   	Cleartext   	U   	use H2C (HTTP/2 over Cleartext) to the"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:124:27  	cleartext   	U   	does not \"HTTP/2 over cleartext TCP\")"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:92:46   	Cleartext   	U   	use H2C (HTTP/2 over Cleartext) to the"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:125:27  	cleartext   	U   	does not \"HTTP/2 over cleartext TCP\")"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:246:14  	Servername  	U   	// replaceTLSServername checks TLS servername"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:246:36  	servername  	U   	placeTLSServername checks TLS servername to see if it needs replacing"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:254:3   	newtransport	U   	newtransport := &HTTPTransport{"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:153:22   	roundtrips      	U   	// after successful roundtrips. The first handler that"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:537:5    	succ            	U   	if succ, ok := proxyErr.(roundtripSuc"
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:575:26   	gunicorn        	U   	with \"slow clients\" (gunicorn, etc.) - this obviously"
