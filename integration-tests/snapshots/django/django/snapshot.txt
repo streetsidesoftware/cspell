@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2750, Issues found: 8300 in 929 files
+ CSpell: Files checked: 2750, Issues found: 8303 in 929 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -240,9 +240,9 @@ Lines:
 ./django/contrib/gis/gdal/geometries.py:409:13    - Unknown word (klone)      -- klone = self.clone()
 ./django/contrib/gis/gdal/geometries.py:474:10    - Unknown word (geomgen)    -- def _geomgen(self, gen_func, other
 ./django/contrib/gis/gdal/geometries.py:82:46     - Unknown word (LINEARRING) -- "type"].upper() == "LINEARRING":
-./django/contrib/gis/gdal/libgdal.py:67:1      - Unknown word (lgdal)      -- lgdal = CDLL(lib_path)
-./django/contrib/gis/gdal/libgdal.py:70:3      - Unknown word (STDCALL)    -- # STDCALL, while others are not
-./django/contrib/gis/gdal/libgdal.py:76:5      - Unknown word (lwingdal)   -- lwingdal = WinDLL(lib_path)
+./django/contrib/gis/gdal/libgdal.py:69:1      - Unknown word (lgdal)      -- lgdal = CDLL(lib_path)
+./django/contrib/gis/gdal/libgdal.py:72:3      - Unknown word (STDCALL)    -- # STDCALL, while others are not
+./django/contrib/gis/gdal/libgdal.py:78:5      - Unknown word (lwingdal)   -- lwingdal = WinDLL(lib_path)
 ./django/contrib/gis/gdal/prototypes/ds.py:19:5      - Unknown word (voidptr)    -- voidptr_output,
 ./django/contrib/gis/gdal/prototypes/ds.py:49:53     - Unknown word (Defn)       -- lgdal.OGR_L_GetLayerDefn, [c_void_p])
 ./django/contrib/gis/gdal/prototypes/errcheck.py:24:38     - Unknown word (cargs)      -- string(result, func, cargs, offset=None, cpl=False
@@ -438,7 +438,7 @@ Lines:
 ./django/core/management/commands/makemessages.py:716:9     - Unknown word (pofile)      -- pofile = os.path.join(basedir
 ./django/core/management/commands/makemessages.py:82:12     - Unknown word (templatized) -- def is_templatized(self):
 ./django/core/management/commands/makemessages.py:83:28     - Unknown word (djangojs)    -- if self.domain == "djangojs":
-./django/core/management/commands/makemigrations.py:341:15    - Unknown word (mergeable)  -- # mergeable. For now, we always
+./django/core/management/commands/makemigrations.py:449:15    - Unknown word (mergeable)  -- # mergeable. For now, we always
 ./django/core/management/commands/runserver.py:14:1      - Unknown word (naiveip)    -- naiveip_re = _lazy_re_compile
 ./django/core/management/commands/runserver.py:167:58    - Unknown word (tracebacks)  -- messages instead of ugly tracebacks.
 ./django/core/management/commands/runserver.py:170:23    - Unknown word (EADDRINUSE)  -- errno.EADDRINUSE: "That port is already
@@ -644,11 +644,11 @@ Lines:
 ./django/db/models/options.py:522:33    - Unknown word (longwinded) -- The third lambda is a longwinded way of checking f.related
 ./django/db/models/query.py:1018:15   - Unknown word (aearliest)  -- async def aearliest(self, *fields):
 ./django/db/models/query.py:1030:15   - Unknown word (alatest)    -- async def alatest(self, *fields):
-./django/db/models/query.py:1038:15   - Unknown word (afirst)     -- async def afirst(self):
-./django/db/models/query.py:1046:15   - Unknown word (alast)      -- async def alast(self):
-./django/db/models/query.py:1203:15   - Unknown word (aexists)    -- async def aexists(self):
-./django/db/models/query.py:1227:15   - Unknown word (acontains)  -- async def acontains(self, obj):
-./django/db/models/query.py:1242:15   - Unknown word (aexplain)   -- async def aexplain(self, *, format=None
+./django/db/models/query.py:1043:15   - Unknown word (afirst)     -- async def afirst(self):
+./django/db/models/query.py:1056:15   - Unknown word (alast)      -- async def alast(self):
+./django/db/models/query.py:1227:15   - Unknown word (aexists)    -- async def aexists(self):
+./django/db/models/query.py:1251:15   - Unknown word (acontains)  -- async def acontains(self, obj):
+./django/db/models/query.py:1266:15   - Unknown word (aexplain)   -- async def aexplain(self, *, format=None
 ./django/db/models/query.py:235:17    - Unknown word (rowfactory) -- rowfactory = operator.itemgetter
 ./django/db/models/query.py:546:15    - Unknown word (aiterator)  -- async def aiterator(self, chunk_size=20
 ./django/db/models/query.py:607:15    - Unknown word (aaggregate) -- async def aaggregate(self, *args, **kwargs
@@ -1000,7 +1000,7 @@ Lines:
 ./django/utils/translation/trans_real.py:390:14    - Unknown word (ctxt)         -- msg_with_ctxt = "%s%s%s" % (context
 ./django/utils/translation/trans_real.py:410:8     - Unknown word (ntranslate)   -- def do_ntranslate(singular, plural, number
 ./django/utils/translation/trans_real.py:446:5     - Unknown word (globalpath)   -- globalpath = os.path.join(
-./django/utils/translation/trans_real.py:544:28    - Unknown word (sublanguage)  -- the user requests a sublanguage where we have a main
+./django/utils/translation/trans_real.py:545:28    - Unknown word (sublanguage)  -- the user requests a sublanguage where we have a main
 ./django/utils/version.py:9:57      - Unknown word (PYXY)       -- the Python version. PYXY means "Python X.Y
 ./django/views/csrf.py:132:22    - Unknown word (noreferrer) -- '<a rel="noreferrer" …> for links to third
 ./django/views/debug.py:389:16    - Unknown word (lastframe)  -- c["lastframe"] = frames[-1]
@@ -1998,23 +1998,23 @@ Lines:
 ./tests/i18n/tests.py:135:39    - Unknown word (subcatalogs) -- Internal _catalog can query subcatalogs (from different po files
 ./tests/i18n/tests.py:1549:46   - Unknown word (Dezember)    -- localized = "1.455/3,14/31. Dezember 2016"
 ./tests/i18n/tests.py:1697:45   - Unknown word (Bild)        -- ssertEqual(gettext("Image"), "Bild")
-./tests/i18n/tests.py:1954:17   - Unknown word (mingo)       -- ("i-mingo", "Mingo"),
-./tests/i18n/tests.py:1954:26   - Unknown word (Mingo)       -- ("i-mingo", "Mingo"),
-./tests/i18n/tests.py:1955:18   - Unknown word (tunumiit)    -- ("kl-tunumiit", "Tunumiisiut"),
-./tests/i18n/tests.py:1955:30   - Unknown word (Tunumiisiut) -- ("kl-tunumiit", "Tunumiisiut"),
-./tests/i18n/tests.py:1956:19   - Unknown word (hani)        -- ("nan-hani-tw", "Hanji"),
-./tests/i18n/tests.py:1956:30   - Unknown word (Hanji)       -- ("nan-hani-tw", "Hanji"),
+./tests/i18n/tests.py:1957:17   - Unknown word (mingo)       -- ("i-mingo", "Mingo"),
+./tests/i18n/tests.py:1957:26   - Unknown word (Mingo)       -- ("i-mingo", "Mingo"),
+./tests/i18n/tests.py:1958:18   - Unknown word (tunumiit)    -- ("kl-tunumiit", "Tunumiisiut"),
+./tests/i18n/tests.py:1958:30   - Unknown word (Tunumiisiut) -- ("kl-tunumiit", "Tunumiisiut"),
+./tests/i18n/tests.py:1959:19   - Unknown word (hani)        -- ("nan-hani-tw", "Hanji"),
+./tests/i18n/tests.py:1959:30   - Unknown word (Hanji)       -- ("nan-hani-tw", "Hanji"),
 ./tests/i18n/tests.py:200:37    - Unknown word (hinzuf)      -- self.assertEqual("Ringo hinzuf\xfcgen", s % d)
 ./tests/i18n/tests.py:200:44    - Unknown word (xfcgen)      -- assertEqual("Ringo hinzuf\xfcgen", s % d)
 ./tests/i18n/tests.py:202:35    - Unknown word (Dodaj)       -- self.assertEqual("Dodaj Ringo", s % d)
-./tests/i18n/tests.py:2086:14   - Unknown word (safestr)     -- def test_safestr(self):
-./tests/i18n/tests.py:2286:57   - Unknown word (unparseable) -- default language is unparseable."""
+./tests/i18n/tests.py:2090:14   - Unknown word (safestr)     -- def test_safestr(self):
 ./tests/i18n/tests.py:228:57    - Unknown word (gutes)       -- with_format % 1, "1 gutes Resultat")
 ./tests/i18n/tests.py:228:63    - Unknown word (Resultat)    -- format % 1, "1 gutes Resultat")
+./tests/i18n/tests.py:2290:57   - Unknown word (unparseable) -- default language is unparseable."""
 ./tests/i18n/tests.py:229:57    - Unknown word (guten)       -- with_format % 4, "4 guten Resultate")
 ./tests/i18n/tests.py:229:63    - Unknown word (Resultate)   -- format % 4, "4 guten Resultate")
-./tests/i18n/tests.py:2303:22   - Unknown word (Somelanguage) -- ("xxx", "Somelanguage"),
-./tests/i18n/tests.py:2310:44   - Unknown word (reay)         -- assertEqual(gettext("year"), "reay")
+./tests/i18n/tests.py:2307:22   - Unknown word (Somelanguage) -- ("xxx", "Somelanguage"),
+./tests/i18n/tests.py:2314:44   - Unknown word (reay)         -- assertEqual(gettext("year"), "reay")
 ./tests/i18n/tests.py:272:18    - Unknown word (Willkommen)  -- "Willkommen Jim, 4 guten Resultate
 ./tests/i18n/tests.py:363:40    - Unknown word (unexisting)  -- assertEqual(pgettext("unexisting", "May"), "May")
 ./tests/i18n/tests.py:365:56    - Unknown word (Kann)        -- pgettext("verb", "May"), "Kann")
@@ -2163,8 +2163,9 @@ Lines:
 ./tests/migrations/test_commands.py:1790:42   - Unknown word (sillymodel)      -- silly_int' on model 'sillymodel' not migrated: it is
 ./tests/migrations/test_commands.py:2013:14   - Unknown word (makemigration)   -- def test_makemigration_merge_dry_run(self)
 ./tests/migrations/test_commands.py:2442:37   - Unknown word (getdefaultencoding) -- MagicMock(encoding=sys.getdefaultencoding()),
-./tests/migrations/test_commands.py:2892:14   - Unknown word (optimizemigration)  -- def test_optimizemigration_nonexistent_app_label
-./tests/migrations/test_commands.py:3044:14   - Unknown word (ambigious)          -- def test_ambigious_prefix(self):
+./tests/migrations/test_commands.py:2606:52   - Unknown word (modelwithcustombase) -- tribble_author_rating_modelwithcustombase_and_more.py",
+./tests/migrations/test_commands.py:2994:14   - Unknown word (optimizemigration)   -- def test_optimizemigration_nonexistent_app_label
+./tests/migrations/test_commands.py:3146:14   - Unknown word (ambigious)           -- def test_ambigious_prefix(self):
 ./tests/migrations/test_commands.py:397:20    - Unknown word (mmigrations) -- "\x1b[1mmigrations\n\x1b[0m [ ] 0001_initial
 ./tests/migrations/test_commands.py:571:70    - Unknown word (salamand)    -- SELECT * FROM migrations_salamand…\n",
 ./tests/migrations/test_executor.py:198:26    - Unknown word (unmigrations) -- perform spurious unmigrations and remigrations.
@@ -2429,8 +2430,8 @@ Lines:
 ./tests/postgres_tests/test_search.py:67:9      - Unknown word (bedemir)    -- bedemir = Character.objects
 ./tests/postgres_tests/test_search.py:95:79     - Unknown word (Ramper)     -- Master Ruiz' de lu la Ramper"
 ./tests/postgres_tests/test_signals.py:12:13     - Unknown word (pyscogp)    -- pass # pyscogp2 isn't installed.
-./tests/postgres_tests/test_trigram.py:40:20     - Unknown word (Gumby)      -- field="Gumby rides on the path of
-./tests/postgres_tests/test_trigram.py:43:68     - Unknown word (Middlesborough) -- trigram_word_similar="Middlesborough"),
+./tests/postgres_tests/test_trigram.py:42:20     - Unknown word (Gumby)      -- field="Gumby rides on the path of
+./tests/postgres_tests/test_trigram.py:45:68     - Unknown word (Middlesborough) -- trigram_word_similar="Middlesborough"),
 ./tests/prefetch_related/test_prefetch_related_objects.py:17:48     - Unknown word (Wuthering)  -- objects.create(title="Wuthering Heights")
 ./tests/prefetch_related/test_uuid.py:32:34     - Unknown word (Bobo)       -- objects.create(name="Bobo").fleas_hosted.add(
 ./tests/prefetch_related/test_uuid.py:59:63     - Unknown word (Arcata)     -- "Redwood", address="Arcata")

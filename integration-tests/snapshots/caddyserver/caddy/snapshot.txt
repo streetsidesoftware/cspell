@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 210, Issues found: 3270 in 197 files
+ CSpell: Files checked: 210, Issues found: 3286 in 197 files
  exit code: 1
 ./admin.go:1009:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1045:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -118,6 +118,7 @@ Lines:
 ./caddytest/integration/reverseproxy_test.go:31:8      - Unknown word (upstreams)  -- "upstreams": [
 ./caddytest/integration/stream_test.go:152:3     - Unknown word (rstring)    -- rstring, err := httputil.DumpRequest
 ./caddytest/integration/stream_test.go:332:31    - Unknown word (automaticlly) -- underlying transport will automaticlly add gzip
+./cmd/caddy/main.go:27:19     - Unknown word (xcaddy)     -- // Or you can use xcaddy which does it all for
 ./cmd/commandfuncs.go:128:16    - Unknown word (Pingback)   -- err = handlePingbackConn(conn, expect)
 ./cmd/commandfuncs.go:262:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
 ./cmd/commandfuncs.go:45:10     - Unknown word (Pidfile)    -- startCmdPidfileFlag := fl.String("pidfile
@@ -220,8 +221,10 @@ Lines:
 ./modules/caddyhttp/fileserver/staticfiles.go:61:51     - Unknown word (explictness) -- maximum clarity and explictness, use complete,
 ./modules/caddyhttp/fileserver/staticfiles.go:75:5      - Unknown word (Canonicalization) -- // Canonicalization will not happen if the
 ./modules/caddyhttp/fileserver/staticfiles.go:99:2      - Unknown word (precompressors)   -- precompressors map[string]encode.Precompress
-./modules/caddyhttp/headers/headers.go:181:27    - Unknown word (Superceded) -- they are written out. Superceded if Require is set.
-./modules/caddyhttp/headers/headers_test.go:196:11    - Unknown word (hdrs)       -- for k, hdrs := range tc.respHeader
+./modules/caddyhttp/headers/headers.go:187:27    - Unknown word (Superceded) -- they are written out. Superceded if Require is set.
+./modules/caddyhttp/headers/headers_test.go:216:11    - Unknown word (hdrs)       -- for k, hdrs := range tc.respHeader
+./modules/caddyhttp/headers/headers_test.go:93:32     - Unknown word (lalala)     -- Header-Suffix": []string{"lalala"},
+./modules/caddyhttp/headers/headers_test.go:96:32     - Unknown word (foofoofoo)  -- Me": []string{"foofoofoo"},
 ./modules/caddyhttp/httpredirectlistener.go:147:44    - Unknown word (OPTIO)      -- "POST ", "PUT /", "OPTIO":
 ./modules/caddyhttp/map/caddyfile.go:15:9      - Unknown word (maphandler) -- package maphandler
 ./modules/caddyhttp/map/map_test.go:53:16     - Unknown word (Cxyz)       -- reqURI: "/ABCxyzDEF",
@@ -266,8 +269,11 @@ Lines:
 ./modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9      - Unknown word (forwardauth) -- package forwardauth
 ./modules/caddyhttp/reverseproxy/healthchecks.go:382:71    - Unknown word (forgetter)  -- health check failure forgetter panicked",
 ./modules/caddyhttp/reverseproxy/healthchecks.go:47:35     - Unknown word (proxied)    -- health checks monitor proxied requests for errors
-./modules/caddyhttp/reverseproxy/httptransport.go:124:27    - Unknown word (cleartext)  -- does not "HTTP/2 over cleartext TCP")
-./modules/caddyhttp/reverseproxy/httptransport.go:91:46     - Unknown word (Cleartext)  -- use H2C (HTTP/2 over Cleartext) to the
+./modules/caddyhttp/reverseproxy/httptransport.go:125:27    - Unknown word (cleartext)  -- does not "HTTP/2 over cleartext TCP")
+./modules/caddyhttp/reverseproxy/httptransport.go:246:14    - Unknown word (Servername) -- // replaceTLSServername checks TLS servername
+./modules/caddyhttp/reverseproxy/httptransport.go:246:36    - Unknown word (servername) -- placeTLSServername checks TLS servername to see if it needs replacing
+./modules/caddyhttp/reverseproxy/httptransport.go:254:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
+./modules/caddyhttp/reverseproxy/httptransport.go:92:46     - Unknown word (Cleartext)  -- use H2C (HTTP/2 over Cleartext) to the
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:1262:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:1266:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:153:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
