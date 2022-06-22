@@ -23,7 +23,7 @@ export type SuggestArgs =
 
 export const defaultNumSuggestions = 10;
 
-export function wordSearchFormsArray(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
+function wordSearchFormsArray(word: string, isDictionaryCaseSensitive: boolean, ignoreCase: boolean): string[] {
     return [...wordSearchForms(word, isDictionaryCaseSensitive, ignoreCase)];
 }
 
@@ -100,8 +100,10 @@ export function wordDictionaryFormsCollector(prefixNoCase: string): (word: strin
     };
 }
 
+const DEFAULT_HAS_OPTIONS: HasOptions = Object.freeze({});
+
 export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
-    return !opt ? {} : opt;
+    return !opt ? DEFAULT_HAS_OPTIONS : opt;
 }
 
 export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
@@ -126,7 +128,7 @@ export function createWeightMapFromDictionaryInformation(di: DictionaryInformati
     return di ? mapDictionaryInformationToWeightMap(di) : undefined;
 }
 
-export const __testMethods = {
+export const __testMethods__ = {
     wordSearchForms,
     wordSearchFormsArray,
     wordDictionaryForms,

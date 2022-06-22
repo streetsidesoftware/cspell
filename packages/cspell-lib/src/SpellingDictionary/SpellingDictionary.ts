@@ -4,8 +4,8 @@ import { CompoundWordsMethod, SuggestionCollector, SuggestionResult, WeightMap }
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 
 export interface SearchOptions {
-    useCompounds?: boolean | number;
-    ignoreCase?: boolean;
+    useCompounds?: boolean | number | undefined;
+    ignoreCase?: boolean | undefined;
 }
 
 export interface SuggestOptions {

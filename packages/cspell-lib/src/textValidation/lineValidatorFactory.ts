@@ -6,7 +6,7 @@ import * as Text from '../util/text';
 import { clean } from '../util/util';
 import { split } from '../util/wordSplitter';
 import { defaultMinWordLength } from './textValidator';
-import { IsWordValidOptions, isWordValid } from './isWordValid';
+import { IsWordValidOptions, isWordValidWithEscapeRetry } from './isWordValid';
 import type {
     LineSegment,
     LineValidator,
@@ -68,7 +68,9 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
     function checkWord(word: ValidationResultRO, options: IsWordValidOptions): ValidationResultRO {
         const isIgnored = isWordIgnored(word.text);
         const { isFlagged = !isIgnored && testForFlaggedWord(word) } = word;
-        const isFound = isFlagged ? undefined : isIgnored || isWordValid(dictCol, word, word.line, options);
+        const isFound = isFlagged
+            ? undefined
+            : isIgnored || isWordValidWithEscapeRetry(dictCol, word, word.line, options);
         return clean({ ...word, isFlagged, isFound });
     }
 
@@ -76,7 +78,8 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
         function splitterIsValid(word: TextOffsetRO): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
-                (!testForFlaggedWord(word) && isWordValid(dictCol, word, lineSegment.line, hasWordOptions))
+                (!testForFlaggedWord(word) &&
+                    isWordValidWithEscapeRetry(dictCol, word, lineSegment.line, hasWordOptions))
             );
         }
 

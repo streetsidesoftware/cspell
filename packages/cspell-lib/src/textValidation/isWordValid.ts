@@ -1,5 +1,4 @@
-import { HasOptions, SpellingDictionary } from '../SpellingDictionary/SpellingDictionary';
-import { clean } from '../util/util';
+import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionary';
 import { TextOffsetRO } from './ValidationTypes';
 
 export interface IsWordValidOptions {
@@ -7,20 +6,12 @@ export interface IsWordValidOptions {
     useCompounds: boolean | undefined;
 }
 
-function hasWordCheck(dict: SpellingDictionary, word: string, options: IsWordValidOptions): boolean {
+export function hasWordCheck(dict: SpellingDictionary, word: string, options: IsWordValidOptions): boolean {
     word = word.replace(/\\/g, '');
-    // Do not pass allowCompounds down if it is false, that allows for the dictionary to override the value based upon its own settings.
-    return dict.has(word, convertCheckOptionsToHasOptions(options));
-}
-function convertCheckOptionsToHasOptions(opt: IsWordValidOptions): HasOptions {
-    const { ignoreCase, useCompounds } = opt;
-    return clean({
-        ignoreCase,
-        useCompounds,
-    });
+    return dict.has(word, options);
 }
 
-export function isWordValid(
+export function isWordValidWithEscapeRetry(
     dict: SpellingDictionary,
     wo: TextOffsetRO,
     line: TextOffsetRO,

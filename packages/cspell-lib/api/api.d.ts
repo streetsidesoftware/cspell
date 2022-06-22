@@ -113,8 +113,8 @@ declare namespace index_link_d {
 }
 
 interface SearchOptions {
-    useCompounds?: boolean | number;
-    ignoreCase?: boolean;
+    useCompounds?: boolean | number | undefined;
+    ignoreCase?: boolean | undefined;
 }
 interface SuggestOptions {
     /**
