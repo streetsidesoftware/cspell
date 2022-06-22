@@ -4,7 +4,7 @@ export type ParserName = string;
 
 export interface Parser {
     /** Name of parser */
-    name: ParserName;
+    readonly name: ParserName;
     /**
      * Parse Method
      * @param content - full content of the file
@@ -14,37 +14,37 @@ export interface Parser {
 }
 
 export interface ParseResult {
-    content: string;
-    filename: string;
-    parsedTexts: Iterable<ParsedText>;
+    readonly content: string;
+    readonly filename: string;
+    readonly parsedTexts: Iterable<ParsedText>;
 }
 
 export interface ParsedText {
     /**
      * The text extracted and possibly transformed
      */
-    text: string;
+    readonly text: string;
     /**
      * start and end offsets of the text
      */
-    range: Range;
+    readonly range: Range;
     /**
      * The Scope annotation for a segment of text.
      * Used by the spell checker to apply spell checking options
      * based upon the value of the scope.
      */
-    scope?: Scope | undefined;
+    readonly scope?: Scope | undefined;
     /**
      * The source map is used to support text transformations.
      *
      * See: {@link SourceMap}
      */
-    map?: SourceMap | undefined;
+    readonly map?: SourceMap | undefined;
     /**
      * Used to delegate parsing the contents of `text` to another parser.
      *
      */
-    delegate?: DelegateInfo | undefined;
+    readonly delegate?: DelegateInfo | undefined;
 }
 
 /**
@@ -90,22 +90,22 @@ export interface DelegateInfo {
      * Format: `./${source_filename}/${block_number}.${ext}
      * Example: `./README.md/1.js`
      */
-    filename: string;
+    readonly filename: string;
     /**
      * The filename of the origin of the virtual file block.
      * Example: `./README.md`
      */
-    originFilename: string;
+    readonly originFilename: string;
     /**
      * Proposed file extension
      * Example: `.js`
      */
-    extension: string;
+    readonly extension: string;
     /**
      * Filetype to use
      * Example: `javascript`
      */
-    fileType: string;
+    readonly fileType?: string;
 }
 
 /**
