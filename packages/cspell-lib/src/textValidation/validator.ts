@@ -4,8 +4,8 @@ import * as Settings from '../Settings';
 import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
 import { callOnce } from '../util/Memorizer';
 import { clean } from '../util/util';
-import type { ValidationOptions, ValidationResult } from './textValidator';
 import { calcTextInclusionRanges, validateText as validateFullText } from './textValidator';
+import type { ValidationOptions, ValidationResult } from './ValidationTypes';
 
 export const diagSource = 'cSpell Checker';
 

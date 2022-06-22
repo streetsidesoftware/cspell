@@ -545,11 +545,11 @@ interface ValidationResult extends TextOffset {
     isFlagged?: boolean;
     isFound?: boolean;
 }
+declare type LineValidator = (line: LineSegment) => Iterable<ValidationResult>;
 interface LineSegment {
     line: TextOffsetRO;
     segment: TextOffsetRO;
 }
-declare type LineValidator = (line: LineSegment) => Iterable<ValidationResult>;
 
 interface ValidationIssue extends ValidationResult {
     suggestions?: string[];

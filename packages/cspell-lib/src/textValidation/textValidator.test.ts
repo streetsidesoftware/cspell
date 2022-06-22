@@ -6,14 +6,8 @@ import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } fr
 import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary';
 import { FreqCounter } from '../util/FreqCounter';
 import * as Text from '../util/text';
-import {
-    calcTextInclusionRanges,
-    hasWordCheck,
-    HasWordOptions,
-    validateText,
-    ValidationOptions,
-    _testMethods,
-} from './textValidator';
+import { calcTextInclusionRanges, validateText, _testMethods } from './textValidator';
+import { ValidationOptions } from './ValidationTypes';
 import { settingsToValidateOptions } from './validator';
 
 function sToV(settings: CSpellUserSettings) {
@@ -23,25 +17,6 @@ function sToV(settings: CSpellUserSettings) {
 // cspell:ignore whiteberry redmango lightbrown redberry
 
 describe('Validate textValidator functions', () => {
-    test('tests hasWordCheck', async () => {
-        // cspell:ignore redgreenblueyellow strawberrymangobanana redwhiteblue
-        const dictCol = await getSpellingDictionaryCollection();
-        const opt: HasWordOptions = {
-            useCompounds: true,
-            ignoreCase: true,
-        };
-        expect(hasWordCheck(dictCol, 'brown', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'white', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'berry', opt)).toBe(true);
-        // compound words do not cross dictionary boundaries
-        expect(hasWordCheck(dictCol, 'whiteberry', opt)).toBe(false);
-        expect(hasWordCheck(dictCol, 'redmango', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'strawberrymangobanana', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'lightbrown', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'redgreenblueyellow', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'redwhiteblue', opt)).toBe(true);
-    });
-
     test('tests textValidator no word compounds', async () => {
         const dictCol = await getSpellingDictionaryCollection();
         const result = validateText(sampleText, dictCol, sToV({}));

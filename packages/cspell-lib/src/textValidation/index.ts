@@ -1,5 +1,5 @@
 export { calcTextInclusionRanges } from './textValidator';
-export type { CheckOptions, IncludeExcludeOptions, ValidationOptions, ValidationResult } from './textValidator';
+export type { CheckOptions, IncludeExcludeOptions, ValidationOptions, ValidationResult } from './ValidationTypes';
 export { checkText, IncludeExcludeFlag, validateText } from './validator';
 export type { CheckTextInfo, TextInfoItem, ValidateTextOptions, ValidationIssue } from './validator';
 export { DocumentValidator } from './docValidator';
