@@ -25,7 +25,7 @@ function mapTextOffsetBackToOriginalPos(parsedText: ParsedText, textOff: TextOff
     };
 }
 
-export function mapRangeBackToOriginalPos(offRange: SimpleRange, map: number[]): SimpleRange {
+export function mapRangeBackToOriginalPos(offRange: SimpleRange, map: number[] | undefined): SimpleRange {
     if (!map || !map.length) return offRange;
 
     const [start, end] = offRange;
@@ -51,4 +51,32 @@ export function mapRangeBackToOriginalPos(offRange: SimpleRange, map: number[]):
     const iB = end - j + i;
 
     return [iA, iB];
+}
+
+export function mapRangeToLocal(rangeOrig: SimpleRange, map: number[] | undefined): SimpleRange {
+    if (!map || !map.length) return rangeOrig;
+
+    const [start, end] = rangeOrig;
+
+    let i = 0,
+        j = 0,
+        p = 0;
+
+    while (p < map.length && map[p] < start) {
+        i = map[p];
+        j = map[p + 1];
+        p += 2;
+    }
+
+    const jA = start - i + j;
+
+    while (p < map.length && map[p] < end) {
+        i = map[p];
+        j = map[p + 1];
+        p += 2;
+    }
+
+    const jB = end - i + j;
+
+    return [jA, jB];
 }

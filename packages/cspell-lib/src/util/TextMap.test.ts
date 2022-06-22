@@ -1,5 +1,5 @@
 import { TextMap } from '@cspell/cspell-types';
-import { extractTextMapRangeOrigin } from './TextMap';
+import { extractTextMapRangeOrigin, doesIntersect } from './TextMap';
 
 describe('TextMap', () => {
     test.each`
@@ -12,6 +12,16 @@ describe('TextMap', () => {
         const tm = { text, range, map };
         const r = extractTextMapRangeOrigin(tm, extRange);
         expect(r).toEqual(expected);
+    });
+
+    test.each`
+        range         | intersectRange | expected
+        ${[0, 100]}   | ${[50, 200]}   | ${true}
+        ${[100, 110]} | ${[50, 200]}   | ${true}
+        ${[190, 210]} | ${[50, 200]}   | ${true}
+        ${[200, 210]} | ${[50, 200]}   | ${false}
+    `('doesIntersect $range <> $intersectRange', ({ range, intersectRange, expected }) => {
+        expect(doesIntersect({ range }, intersectRange)).toBe(expected);
     });
 });
 

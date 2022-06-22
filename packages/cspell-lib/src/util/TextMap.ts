@@ -54,3 +54,12 @@ export function extractTextMapRangeOrigin(textMap: TextMap, extractRange: Range)
 
     return { text, range, map };
 }
+
+interface WithRange {
+    readonly range: Range;
+}
+
+export function doesIntersect(textMap: WithRange, rangeOrigin: Range): boolean {
+    const r = textMap.range;
+    return r[0] < rangeOrigin[1] && r[1] > rangeOrigin[0];
+}
