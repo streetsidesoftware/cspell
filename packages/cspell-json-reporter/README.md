@@ -2,14 +2,28 @@
 
 > CSpell reporter with JSON output
 
+## Installation
+
+Install it as a development package in the repository that will use it.
+
+```sh
+npm install -SD @cspell/cspell-json-reporter
+```
+
 ## Usage
 
-Add this to cSpell.json:
+Add this to `cspell.yaml`:
 
+```yaml
+reporters: [['@cspell/cspell-json-reporter', { outFile: 'out.json' }]]
 ```
-reporters: [
-    ['@cspell/cspell-json-reporter', { outFile: 'out.json' }]
-]
+
+or `cspell.json`
+
+```json
+{
+  "reporters": [["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]
+}
 ```
 
 ## Output file format
@@ -23,7 +37,7 @@ reporters: [
 - `info` - CSpell execution logs if `settings.verbose` is enabled
 - `debug` - CSpell debug logs if `settings.debug` is enabled
 
-See [CSpellJSONReporterOutput](src/CSpellJSONReporterOutput.ts) for more info.
+See [CSpellJSONReporterOutput](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-json-reporter/src/CSpellJSONReporterOutput.ts) for more info.
 
 ## Settings
 
@@ -34,4 +48,4 @@ Possible settings:
 - `debug` (default: false) - enable saving of debug logs
 - `progress` (default: false) - enable saving of file progress logs
 
-See [CSpellJSONReporterSettings](src/CSpellJSONReporterSettings.ts) for more info.
+See [CSpellJSONReporterSettings](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-json-reporter/src/CSpellJSONReporterSettings.ts) for more info.
