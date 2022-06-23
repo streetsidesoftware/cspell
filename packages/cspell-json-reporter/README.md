@@ -2,14 +2,28 @@
 
 > CSpell reporter with JSON output
 
+## Installation
+
+Install it as a development package in the repository that will use it.
+
+```sh
+npm install -SD @cspell/cspell-json-reporter
+```
+
 ## Usage
 
-Add this to cSpell.json:
+Add this to `cspell.yaml`:
 
+```yaml
+reporters: [['@cspell/cspell-json-reporter', { outFile: 'out.json' }]]
 ```
-reporters: [
-    ['@cspell/cspell-json-reporter', { outFile: 'out.json' }]
-]
+
+or `cspell.json`
+
+```json
+{
+  "reporters": [["@cspell/cspell-json-reporter", { "outFile": "out.json" }]]
+}
 ```
 
 ## Output file format
