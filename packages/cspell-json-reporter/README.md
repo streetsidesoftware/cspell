@@ -37,7 +37,7 @@ or `cspell.json`
 - `info` - CSpell execution logs if `settings.verbose` is enabled
 - `debug` - CSpell debug logs if `settings.debug` is enabled
 
-See [CSpellJSONReporterOutput](src/CSpellJSONReporterOutput.ts) for more info.
+See [CSpellJSONReporterOutput](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-json-reporter/src/CSpellJSONReporterOutput.ts) for more info.
 
 ## Settings
 
@@ -48,4 +48,4 @@ Possible settings:
 - `debug` (default: false) - enable saving of debug logs
 - `progress` (default: false) - enable saving of file progress logs
 
-See [CSpellJSONReporterSettings](src/CSpellJSONReporterSettings.ts) for more info.
+See [CSpellJSONReporterSettings](https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-json-reporter/src/CSpellJSONReporterSettings.ts) for more info.
