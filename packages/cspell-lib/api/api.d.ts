@@ -113,8 +113,8 @@ declare namespace index_link_d {
 }
 
 interface SearchOptions {
-    useCompounds?: boolean | number;
-    ignoreCase?: boolean;
+    useCompounds?: boolean | number | undefined;
+    ignoreCase?: boolean | undefined;
 }
 interface SuggestOptions {
     /**
@@ -545,11 +545,11 @@ interface ValidationResult extends TextOffset {
     isFlagged?: boolean;
     isFound?: boolean;
 }
+declare type LineValidator = (line: LineSegment) => Iterable<ValidationResult>;
 interface LineSegment {
     line: TextOffsetRO;
     segment: TextOffsetRO;
 }
-declare type LineValidator = (line: LineSegment) => Iterable<ValidationResult>;
 
 interface ValidationIssue extends ValidationResult {
     suggestions?: string[];

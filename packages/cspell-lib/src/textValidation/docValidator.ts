@@ -14,17 +14,16 @@ import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
+import type { LineSegment, LineValidator } from './ValidationTypes';
+import { lineValidatorFactory } from './lineValidatorFactory';
 import { SimpleRange } from './parsedText';
 import {
     calcTextInclusionRanges,
     defaultMaxDuplicateProblems,
     defaultMaxNumberOfProblems,
-    LineValidator,
-    lineValidatorFactory,
     mapLineSegmentAgainstRangesFactory,
-    ValidationOptions,
-    type LineSegment,
 } from './textValidator';
+import { ValidationOptions } from './ValidationTypes';
 import { settingsToValidateOptions, ValidateTextOptions, ValidationIssue } from './validator';
 
 export interface DocumentValidatorOptions extends ValidateTextOptions {

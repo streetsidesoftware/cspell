@@ -1,4 +1,4 @@
-import { __testMethods } from './SpellingDictionaryMethods';
+import { __testMethods__ } from './SpellingDictionaryMethods';
 import { createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { Trie } from 'cspell-trie-lib';
@@ -136,7 +136,7 @@ describe('Verify building Dictionary', () => {
     test.each(tests)(
         'wordDictionaryFormsCollector %s %o %o',
         (word: string, isCaseSensitive: boolean, expected: string[]) => {
-            const collector = __testMethods.wordDictionaryFormsCollector(isCaseSensitive ? '~' : '');
+            const collector = __testMethods__.wordDictionaryFormsCollector(isCaseSensitive ? '~' : '');
             expect([...collector(word)].sort()).toEqual(expected.sort());
             expect([...collector(word)]).toEqual([]);
         }
@@ -168,7 +168,7 @@ describe('Validate wordSearchForms', () => {
         ${'café'.normalize('NFKC')} | ${false}        | ${false}   | ${['café']}
         ${'café'.normalize('NFKD')} | ${false}        | ${false}   | ${['café']}
     `('$word $isCaseSensitive $ignoreCase $expected', ({ word, isCaseSensitive, ignoreCase, expected }) => {
-        const words = __testMethods.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
+        const words = __testMethods__.wordSearchFormsArray(word, isCaseSensitive, ignoreCase);
         expect(words.sort()).toEqual(expected.sort());
     });
 });
