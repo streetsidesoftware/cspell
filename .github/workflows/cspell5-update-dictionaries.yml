@@ -30,7 +30,7 @@ jobs:
           cache: npm
 
       - name: Setup NPM
-        run: npm i -g npm@8
+        run: npm i -g npm@8.12
 
       - name: Install
         run: npm install
@@ -73,7 +73,7 @@ jobs:
 
       - name: Setup NPM
         run: |
-          npm i -g npm@8
+          npm i -g npm@8.12
 
       - name: Restore Packages
         uses: actions/download-artifact@v3

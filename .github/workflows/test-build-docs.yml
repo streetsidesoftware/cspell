@@ -33,7 +33,7 @@ jobs:
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
-      - run: npm i -g npm@8
+      - run: npm i -g npm@8.12
       - run: npm -v
       - run: npm ci
       - run: npm run test-build-docs
