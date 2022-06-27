@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 210, Issues found: 3286 in 197 files
+ CSpell: Files checked: 210, Issues found: 3327 in 197 files
  exit code: 1
 ./admin.go:1009:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1045:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -169,11 +169,17 @@ Lines:
 ./modules/caddyhttp/caddyhttp.go:122:26    - Unknown word (routse)     -- Provision sets up the routse in rh.
 ./modules/caddyhttp/caddyhttp.go:133:30    - Unknown word (unmarshals) -- WeakString is a type that unmarshals any JSON value
 ./modules/caddyhttp/caddyhttp_test.go:55:21     - Unknown word (fbar)       -- inputPath: "/..%2fbar",
-./modules/caddyhttp/celmatcher.go:37:2      - Unknown word (exprpb)     -- exprpb "google.golang.org/genproto
-./modules/caddyhttp/celmatcher.go:37:28     - Unknown word (genproto)   -- exprpb "google.golang.org/genproto/googleapis/api/expr
-./modules/caddyhttp/celmatcher.go:37:37     - Unknown word (googleapis) -- golang.org/genproto/googleapis/api/expr/v1alpha1"
-./modules/caddyhttp/celmatcher.go:38:21     - Unknown word (protobuf)   -- "google.golang.org/protobuf/proto"
-./modules/caddyhttp/celmatcher_test.go:84:60     - Unknown word (localdomain) -- subject} == 'CN=client.localdomain'",
+./modules/caddyhttp/celmatcher.go:334:15    - Unknown word (CELJSON)    -- } else if isCELJSONType(matcherDataType
+./modules/caddyhttp/celmatcher.go:388:16    - Unknown word (Libary)     -- type matcherCELLibary struct {
+./modules/caddyhttp/celmatcher.go:393:62    - Unknown word (setes)      -- matcherLibrary from option setes.
+./modules/caddyhttp/celmatcher.go:410:70    - Unknown word (precompile) -- the implementation to precompile
+./modules/caddyhttp/celmatcher.go:411:58    - Unknown word (precompiled) -- that references the precompiled and
+./modules/caddyhttp/celmatcher.go:42:2      - Unknown word (exprpb)     -- exprpb "google.golang.org/genproto
+./modules/caddyhttp/celmatcher.go:42:28     - Unknown word (genproto)   -- exprpb "google.golang.org/genproto/googleapis/api/expr
+./modules/caddyhttp/celmatcher.go:42:37     - Unknown word (googleapis) -- golang.org/genproto/googleapis/api/expr/v1alpha1"
+./modules/caddyhttp/celmatcher.go:43:21     - Unknown word (protobuf)   -- "google.golang.org/protobuf/proto"
+./modules/caddyhttp/celmatcher.go:597:4     - Unknown word (conv)        -- convVals := make([]string
+./modules/caddyhttp/celmatcher_test.go:57:60     - Unknown word (localdomain) -- subject} == 'CN=client.localdomain'",
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:62     - Unknown word (precompressed) -- extension for files precompressed with brotli encoding
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:81     - Unknown word (brotli)        -- files precompressed with brotli encoding.
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:1:9       - Unknown word (caddybrotli) -- package caddybrotli
@@ -206,11 +212,11 @@ Lines:
 ./modules/caddyhttp/fileserver/caddyfile.go:100:46    - Unknown word (precompressor) -- "module %s is not a precompressor; is %T", modID, inst
 ./modules/caddyhttp/fileserver/caddyfile.go:98:6      - Unknown word (precompress) -- precompress, ok := inst.(encode
 ./modules/caddyhttp/fileserver/command.go:28:2      - Unknown word (caddytpl)   -- caddytpl "github.com/caddyserver
-./modules/caddyhttp/fileserver/matcher.go:188:48    - Unknown word (fullpath)   -- file string) (suffix, fullpath, remainder string)
-./modules/caddyhttp/fileserver/matcher.go:353:2     - Unknown word (nlen)       -- nlen := len(needle)
-./modules/caddyhttp/fileserver/matcher_test.go:183:20    - Unknown word (notphp)      -- path: "/notphp.php.txt",
-./modules/caddyhttp/fileserver/matcher_test.go:64:20     - Unknown word (foodir)     -- path: "/foodir",
-./modules/caddyhttp/fileserver/matcher_test.go:82:15     - Unknown word (missingfile) -- path: "/missingfile.php",
+./modules/caddyhttp/fileserver/matcher.go:300:48    - Unknown word (fullpath)   -- file string) (suffix, fullpath, remainder string)
+./modules/caddyhttp/fileserver/matcher.go:465:2     - Unknown word (nlen)       -- nlen := len(needle)
+./modules/caddyhttp/fileserver/matcher_test.go:186:20    - Unknown word (notphp)      -- path: "/notphp.php.txt",
+./modules/caddyhttp/fileserver/matcher_test.go:67:20     - Unknown word (foodir)     -- path: "/foodir",
+./modules/caddyhttp/fileserver/matcher_test.go:85:15     - Unknown word (missingfile) -- path: "/missingfile.php",
 ./modules/caddyhttp/fileserver/staticfiles.go:255:12    - Unknown word (canonicalization) -- // if URL canonicalization is enabled, we need
 ./modules/caddyhttp/fileserver/staticfiles.go:331:34    - Unknown word (Etag)             -- Set("ETag", calculateEtag(info))
 ./modules/caddyhttp/fileserver/staticfiles.go:334:3     - Unknown word (mtyp)             -- mtyp := mime.TypeByExtension
@@ -231,8 +237,8 @@ Lines:
 ./modules/caddyhttp/map/map_test.go:93:32     - Unknown word (testvar)    -- Outputs: []interface{}{"{testvar}"},
 ./modules/caddyhttp/marshalers.go:26:4      - Unknown word (Loggable)   -- // LoggableHTTPRequest makes an
 ./modules/caddyhttp/marshalers.go:83:49     - Unknown word (marshalable) -- makes a slice of strings marshalable for logging.
-./modules/caddyhttp/matchers.go:936:15    - Unknown word (Adresses)   -- // Some IPv6-Adresses can contain zone identifiers
-./modules/caddyhttp/matchers.go:973:22    - Unknown word (embedable)  -- / MatchRegexp is an embedable type for matching
+./modules/caddyhttp/matchers.go:1210:15   - Unknown word (Adresses)   -- // Some IPv6-Adresses can contain zone identifiers
+./modules/caddyhttp/matchers.go:1247:22   - Unknown word (embedable)  -- / MatchRegexp is an embedable type for matching
 ./modules/caddyhttp/matchers_test.go:252:14    - Unknown word (FOOOO)      -- input: "/FOOOO",
 ./modules/caddyhttp/matchers_test.go:385:60    - Unknown word (myparam)    -- Pattern: "^/foo/(?P<myparam>.*)/baz$", Name: "name
 ./modules/caddyhttp/matchers_test.go:451:25    - Unknown word (Alakazam)   -- input: http.Header{"Alakazam": []string{"kapow"}
@@ -274,8 +280,8 @@ Lines:
 ./modules/caddyhttp/reverseproxy/httptransport.go:246:36    - Unknown word (servername) -- placeTLSServername checks TLS servername to see if it needs replacing
 ./modules/caddyhttp/reverseproxy/httptransport.go:254:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
 ./modules/caddyhttp/reverseproxy/httptransport.go:92:46     - Unknown word (Cleartext)  -- use H2C (HTTP/2 over Cleartext) to the
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1262:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1266:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1245:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1249:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:153:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:537:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
 ./modules/caddyhttp/reverseproxy/reverseproxy.go:575:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
