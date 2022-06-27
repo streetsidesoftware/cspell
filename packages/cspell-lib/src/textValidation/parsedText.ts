@@ -1,5 +1,7 @@
 import { TextOffset, ParsedText } from '@cspell/cspell-types';
 import { ValidationIssue } from './validator';
+import * as TextRange from '../util/TextRange';
+import { extractTextMapRangeOrigin } from '../util/TextMap';
 
 export type Offset = number;
 
@@ -79,4 +81,55 @@ export function mapRangeToLocal(rangeOrig: SimpleRange, map: number[] | undefine
     const jB = end - i + j;
 
     return [jA, jB];
+}
+
+/**
+ * Factory to create a segmentation function that will segment ParsedText against a set of includeRanges.
+ * The function produced is optimized for forward scanning. It will perform poorly for randomly ordered offsets.
+ * @param includeRanges Allowed ranges for words.
+ */
+export function createParsedTextSegmenter(
+    includeRanges: TextRange.MatchRange[]
+): (text: ParsedText) => Iterable<ParsedText> {
+    let rangePos = 0;
+
+    function* segmenter(pText: ParsedText): Iterable<ParsedText> {
+        if (!includeRanges.length) {
+            return;
+        }
+
+        const range = pText.range;
+        const textEndPos = range[1];
+        let textStartPos = range[0];
+        while (rangePos && (rangePos >= includeRanges.length || includeRanges[rangePos].startPos > textStartPos)) {
+            rangePos -= 1;
+        }
+
+        const cur = includeRanges[rangePos];
+        if (textEndPos <= cur.endPos && textStartPos >= cur.startPos) {
+            yield pText;
+            return;
+        }
+
+        while (textStartPos < textEndPos) {
+            while (includeRanges[rangePos] && includeRanges[rangePos].endPos <= textStartPos) {
+                rangePos += 1;
+            }
+            if (!includeRanges[rangePos]) {
+                break;
+            }
+            const { startPos, endPos } = includeRanges[rangePos];
+            if (textEndPos < startPos) {
+                break;
+            }
+            const a = Math.max(textStartPos, startPos);
+            const b = Math.min(textEndPos, endPos);
+            if (a !== b) {
+                yield extractTextMapRangeOrigin(pText, [a, b]);
+            }
+            textStartPos = b;
+        }
+    }
+
+    return segmenter;
 }

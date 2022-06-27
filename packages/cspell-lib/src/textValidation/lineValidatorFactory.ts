@@ -10,11 +10,15 @@ import { IsWordValidOptions, isWordValidWithEscapeRetry } from './isWordValid';
 import type {
     LineSegment,
     LineValidator,
+    ParsedTextValidationResult,
     TextOffsetRO,
+    TextValidator,
     ValidationOptions,
     ValidationResult,
     ValidationResultRO,
 } from './ValidationTypes';
+import { ParsedText } from '@cspell/cspell-types';
+import { mapRangeBackToOriginalPos } from './parsedText';
 
 export function lineValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
@@ -157,4 +161,24 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
     };
 
     return fn;
+}
+
+export function textValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): TextValidator {
+    const lineValidator = lineValidatorFactory(dict, options);
+
+    function validator(pText: ParsedText): Iterable<ParsedTextValidationResult> {
+        const { text, range: srcRange, map } = pText;
+        const srcOffset = srcRange[0];
+        const segment = { text, offset: 0 };
+        const lineSegment: LineSegment = { line: segment, segment };
+        function mapBackToOriginSimple(vr: ValidationResult): ParsedTextValidationResult {
+            const { text, offset, isFlagged, isFound } = vr;
+            const r = mapRangeBackToOriginalPos([offset, offset + text.length], map);
+            const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
+            return { text, range, isFlagged, isFound };
+        }
+        return [...lineValidator(lineSegment)].map(mapBackToOriginSimple);
+    }
+
+    return validator;
 }
