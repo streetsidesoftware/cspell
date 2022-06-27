@@ -29,7 +29,7 @@
 
 #### Defined in
 
-[CSpellReporter.ts:42](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/CSpellReporter.ts#L42)
+[CSpellReporter.ts:42](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/CSpellReporter.ts#L42)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:41](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/CSpellReporter.ts#L41)
+[CSpellReporter.ts:41](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/CSpellReporter.ts#L41)
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:43](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/CSpellReporter.ts#L43)
+[CSpellReporter.ts:43](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/CSpellReporter.ts#L43)
 
 ___
 
@@ -63,4 +63,4 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:40](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/CSpellReporter.ts#L40)
+[CSpellReporter.ts:40](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/CSpellReporter.ts#L40)
