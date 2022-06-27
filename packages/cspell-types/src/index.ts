@@ -7,5 +7,5 @@ export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts 
 export type { Feature, Features } from './features';
 export type { ParsedText, Parser, ParseResult, ParserName, ParserOptions } from './Parser';
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef';
-export type { TextMap } from './TextMap';
+export type { MappedText } from './TextMap';
 export type { TextDocumentOffset, TextOffset } from './TextOffset';

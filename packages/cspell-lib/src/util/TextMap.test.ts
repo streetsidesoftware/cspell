@@ -1,4 +1,4 @@
-import { TextMap } from '@cspell/cspell-types';
+import { MappedText } from '@cspell/cspell-types';
 import { extractTextMapRangeOrigin, doesIntersect } from './TextMap';
 
 describe('TextMap', () => {
@@ -25,6 +25,6 @@ describe('TextMap', () => {
     });
 });
 
-function tm(text: string, range: [number, number], map?: number[]): TextMap {
+function tm(text: string, range: [number, number], map?: number[]): MappedText {
     return map ? { text, range, map } : { text, range };
 }

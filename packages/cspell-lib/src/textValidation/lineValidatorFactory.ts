@@ -10,7 +10,7 @@ import { IsWordValidOptions, isWordValidWithEscapeRetry } from './isWordValid';
 import type {
     LineSegment,
     LineValidator,
-    ParsedTextValidationResult,
+    MappedTextValidationResult,
     TextOffsetRO,
     TextValidator,
     ValidationOptions,
@@ -166,12 +166,12 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
 export function textValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): TextValidator {
     const lineValidator = lineValidatorFactory(dict, options);
 
-    function validator(pText: ParsedText): Iterable<ParsedTextValidationResult> {
+    function validator(pText: ParsedText): Iterable<MappedTextValidationResult> {
         const { text, range: srcRange, map } = pText;
         const srcOffset = srcRange[0];
         const segment = { text, offset: 0 };
         const lineSegment: LineSegment = { line: segment, segment };
-        function mapBackToOriginSimple(vr: ValidationResult): ParsedTextValidationResult {
+        function mapBackToOriginSimple(vr: ValidationResult): MappedTextValidationResult {
             const { text, offset, isFlagged, isFound } = vr;
             const r = mapRangeBackToOriginalPos([offset, offset + text.length], map);
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
