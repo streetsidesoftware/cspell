@@ -25,6 +25,10 @@ export interface ParsedText {
      */
     readonly text: string;
     /**
+     * The raw text before it has been transformed
+     */
+    readonly rawText?: string | undefined;
+    /**
      * start and end offsets of the text
      */
     readonly range: Range;

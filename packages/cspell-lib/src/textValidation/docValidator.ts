@@ -14,15 +14,10 @@ import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
-import type { LineSegment, LineValidator } from './ValidationTypes';
-import { lineValidatorFactory } from './lineValidatorFactory';
-import { SimpleRange } from './parsedText';
-import {
-    calcTextInclusionRanges,
-    defaultMaxDuplicateProblems,
-    defaultMaxNumberOfProblems,
-    mapLineSegmentAgainstRangesFactory,
-} from './textValidator';
+import { textValidatorFactory } from './lineValidatorFactory';
+import { createParsedTextSegmenter, SimpleRange } from './parsedText';
+import { calcTextInclusionRanges, defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './textValidator';
+import type { ParsedTextValidationResult, TextValidator } from './ValidationTypes';
 import { ValidationOptions } from './ValidationTypes';
 import { settingsToValidateOptions, ValidateTextOptions, ValidationIssue } from './validator';
 
@@ -100,8 +95,8 @@ export class DocumentValidator {
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
-        const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
-        const lineValidator = lineValidatorFactory(dict, validateOptions);
+        const segmenter = createParsedTextSegmenter(includeRanges);
+        const textValidator = textValidatorFactory(dict, validateOptions);
 
         this._preparations = {
             config,
@@ -112,7 +107,7 @@ export class DocumentValidator {
             validateOptions,
             includeRanges,
             segmenter,
-            lineValidator,
+            textValidator,
             localConfig,
             localConfigFilepath: localConfig?.__importRef?.filename,
         };
@@ -159,8 +154,8 @@ export class DocumentValidator {
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
-        const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
-        const lineValidator = lineValidatorFactory(dict, validateOptions);
+        const segmenter = createParsedTextSegmenter(includeRanges);
+        const textValidator = textValidatorFactory(dict, validateOptions);
 
         this._preparations = {
             config,
@@ -171,7 +166,7 @@ export class DocumentValidator {
             validateOptions,
             includeRanges,
             segmenter,
-            lineValidator,
+            textValidator,
             localConfig,
             localConfigFilepath: localConfig?.__importRef?.filename,
         };
@@ -190,8 +185,8 @@ export class DocumentValidator {
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
-        const segmenter = mapLineSegmentAgainstRangesFactory(includeRanges);
-        const lineValidator = lineValidatorFactory(dict, validateOptions);
+        const segmenter = createParsedTextSegmenter(includeRanges);
+        const textValidator = textValidatorFactory(dict, validateOptions);
 
         this._preparations = {
             ...prep,
@@ -201,7 +196,7 @@ export class DocumentValidator {
             validateOptions,
             includeRanges,
             segmenter,
-            lineValidator,
+            textValidator,
         };
         this._preparationTime = timer.elapsed();
     }
@@ -221,22 +216,19 @@ export class DocumentValidator {
     check(parsedText: ParsedText): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
-        const { range, text } = parsedText;
-        const { segmenter, lineValidator } = this._preparations;
+        const { segmenter, textValidator: lineValidator } = this._preparations;
         // Determine settings for text range
         // Slice text based upon include ranges
         // Check text against dictionaries.
-        const offset = range[0];
-        const line = this._document.lineAt(offset);
-        const lineSeg: LineSegment = {
-            line,
-            segment: {
-                text,
-                offset,
-            },
-        };
-        const aIssues = pipeSync(segmenter(lineSeg), opConcatMap(lineValidator));
-        const issues = [...aIssues];
+        const line = this._document.lineAt(parsedText.range[0]);
+        function mapToIssue(issue: ParsedTextValidationResult): ValidationIssue {
+            const { range, text, isFlagged, isFound } = issue;
+            const offset = range[0];
+            const length = range[1] - range[0];
+            return { text, offset, line, length, isFlagged, isFound };
+        }
+        const aIssues = pipeSync(segmenter(parsedText), opConcatMap(lineValidator));
+        const issues = [...aIssues].map(mapToIssue);
 
         if (!this.options.generateSuggestions) {
             return issues;
@@ -378,8 +370,8 @@ interface Preparations {
     docSettings: CSpellSettingsInternal;
     finalSettings: CSpellSettingsInternalFinalized;
     includeRanges: MatchRange[];
-    lineValidator: LineValidator;
-    segmenter: (lineSegment: LineSegment) => LineSegment[];
+    textValidator: TextValidator;
+    segmenter: (texts: ParsedText) => Iterable<ParsedText>;
     shouldCheck: boolean;
     validateOptions: ValidationOptions;
     localConfig: CSpellUserSettings | undefined;

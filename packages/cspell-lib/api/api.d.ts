@@ -526,7 +526,6 @@ interface MatchRange {
     endPos: number;
 }
 
-declare type TextOffsetRO = Readonly<TextOffset>;
 interface ValidationOptions extends IncludeExcludeOptions {
     maxNumberOfProblems?: number;
     maxDuplicateProblems?: number;
@@ -542,14 +541,14 @@ interface IncludeExcludeOptions {
 }
 interface ValidationResult extends TextOffset {
     line: TextOffset;
-    isFlagged?: boolean;
-    isFound?: boolean;
+    isFlagged?: boolean | undefined;
+    isFound?: boolean | undefined;
 }
-declare type LineValidator = (line: LineSegment) => Iterable<ValidationResult>;
-interface LineSegment {
-    line: TextOffsetRO;
-    segment: TextOffsetRO;
+interface ParsedTextValidationResult extends ParsedText {
+    isFlagged?: boolean | undefined;
+    isFound?: boolean | undefined;
 }
+declare type TextValidator = (text: ParsedText) => Iterable<ParsedTextValidationResult>;
 
 interface ValidationIssue extends ValidationResult {
     suggestions?: string[];
@@ -656,8 +655,8 @@ interface Preparations {
     docSettings: CSpellSettingsInternal;
     finalSettings: CSpellSettingsInternalFinalized;
     includeRanges: MatchRange[];
-    lineValidator: LineValidator;
-    segmenter: (lineSegment: LineSegment) => LineSegment[];
+    textValidator: TextValidator;
+    segmenter: (texts: ParsedText) => Iterable<ParsedText>;
     shouldCheck: boolean;
     validateOptions: ValidationOptions;
     localConfig: CSpellUserSettings | undefined;
