@@ -17,6 +17,10 @@ export const defaultMaxDuplicateProblems = 5;
 export const defaultMinWordLength = 4;
 export const minWordSplitLen = 3;
 
+/**
+ * @deprecated
+ * @deprecation Use spellCheckDocument
+ */
 export function validateText(
     text: string,
     dict: SpellingDictionary,

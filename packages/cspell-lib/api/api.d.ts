@@ -559,6 +559,10 @@ interface ValidateTextOptions {
     /** The number of suggestions to generate. The higher the number the longer it takes. */
     numSuggestions?: number;
 }
+/**
+ * @deprecated
+ * @deprecationMessage Use spellCheckDocument
+ */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
 interface CheckTextInfo {
     text: string;

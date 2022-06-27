@@ -20,6 +20,10 @@ export interface ValidateTextOptions {
     numSuggestions?: number;
 }
 
+/**
+ * @deprecated
+ * @deprecationMessage Use spellCheckDocument
+ */
 export async function validateText(
     text: string,
     settings: CSpellUserSettings,
