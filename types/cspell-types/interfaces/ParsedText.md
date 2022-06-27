@@ -9,6 +9,7 @@
 - [delegate](ParsedText.md#delegate)
 - [map](ParsedText.md#map)
 - [range](ParsedText.md#range)
+- [rawText](ParsedText.md#rawtext)
 - [scope](ParsedText.md#scope)
 - [text](ParsedText.md#text)
 
@@ -22,7 +23,7 @@ Used to delegate parsing the contents of `text` to another parser.
 
 #### Defined in
 
-[Parser.ts:47](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L47)
+[Parser.ts:51](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/Parser.ts#L51)
 
 ___
 
@@ -36,7 +37,7 @@ See: {@link SourceMap}
 
 #### Defined in
 
-[Parser.ts:42](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L42)
+[Parser.ts:46](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/Parser.ts#L46)
 
 ___
 
@@ -48,7 +49,19 @@ start and end offsets of the text
 
 #### Defined in
 
-[Parser.ts:30](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L30)
+[Parser.ts:34](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/Parser.ts#L34)
+
+___
+
+### rawText
+
+• `Optional` `Readonly` **rawText**: `string`
+
+The raw text before it has been transformed
+
+#### Defined in
+
+[Parser.ts:30](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/Parser.ts#L30)
 
 ___
 
@@ -62,7 +75,7 @@ based upon the value of the scope.
 
 #### Defined in
 
-[Parser.ts:36](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L36)
+[Parser.ts:40](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/Parser.ts#L40)
 
 ___
 
@@ -74,4 +87,4 @@ The text extracted and possibly transformed
 
 #### Defined in
 
-[Parser.ts:26](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L26)
+[Parser.ts:26](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/Parser.ts#L26)
