@@ -33,34 +33,40 @@ describe('docValidator', () => {
         expect(dVal.ready).toBe(true);
     });
 
-    // cspell:ignore Helllo grrrr
+    // cspell:ignore Helllo grrrr dockblock
 
     test.each`
-        filename                                   | text            | expected
-        ${__filename}                              | ${'__filename'} | ${[]}
-        ${fix('sample-with-errors.ts')}            | ${'Helllo'}     | ${[oc({ text: 'Helllo' })]}
-        ${fix('sample-with-errors.ts')}            | ${'main'}       | ${[]}
-        ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${[]}
-    `('checkText async $filename "$text"', async ({ filename, text, expected }) => {
+        filename                                   | startText       | endText      | expected
+        ${__filename}                              | ${'__filename'} | ${undefined} | ${[]}
+        ${fix('sample-with-errors.ts')}            | ${"'H"}         | ${"'"}       | ${[oc({ text: 'Helllo' })]}
+        ${fix('sample-with-errors.ts')}            | ${'/**'}        | ${'*/'}      | ${[oc({ text: 'dockblock' })]}
+        ${fix('sample-with-errors.ts')}            | ${'main'}       | ${undefined} | ${[]}
+        ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${undefined} | ${[]}
+    `('checkText async $filename "$startText"', async ({ filename, startText, endText, expected }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, {}, {});
         await dVal.prepare();
-        const offset = doc.text.indexOf(text);
-        assert(offset >= 0);
-        const range = [offset, offset + text.length] as const;
+        const startOffset = doc.text.indexOf(startText);
+        const endOffset = endText
+            ? doc.text.indexOf(endText, startOffset + startText.length) + endText.length
+            : startOffset + startText.length;
+        assert(startOffset >= 0);
+        const range = [startOffset, endOffset] as const;
+        const text = doc.text.slice(startOffset, endOffset);
         expect(dVal.checkText(range, text, [])).toEqual(expected);
         expect(dVal.prepTime).toBeGreaterThan(0);
     });
 
     test.each`
-        filename                                   | text            | expected
-        ${__filename}                              | ${'__filename'} | ${[]}
-        ${fix('sample-with-errors.ts')}            | ${'Helllo'}     | ${[oc({ text: 'Helllo' })]}
-        ${fix('sample-with-errors.ts')}            | ${'main'}       | ${[]}
-        ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${[]}
-    `('checkText sync $filename "$text"', async ({ filename, text, expected }) => {
+        filename                                   | text            | configFile            | expected
+        ${__filename}                              | ${'__filename'} | ${undefined}          | ${[]}
+        ${fix('sample-with-errors.ts')}            | ${'Helllo'}     | ${undefined}          | ${[oc({ text: 'Helllo' })]}
+        ${fix('sample-with-errors.ts')}            | ${'Helllo'}     | ${fix('cspell.json')} | ${[oc({ text: 'Helllo' })]}
+        ${fix('sample-with-errors.ts')}            | ${'main'}       | ${undefined}          | ${[]}
+        ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${undefined}          | ${[]}
+    `('checkText sync $filename "$text"', async ({ filename, text, expected, configFile }) => {
         const doc = await loadDoc(filename);
-        const dVal = new DocumentValidator(doc, {}, {});
+        const dVal = new DocumentValidator(doc, { configFile }, {});
         dVal.prepareSync();
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
@@ -87,13 +93,13 @@ describe('docValidator', () => {
         expect(dVal.prepTime).toBeGreaterThan(0);
     });
 
-    // cspell:ignore kount naame colector Reciever reciever recievers serrors
+    // cspell:ignore kount naame colector Reciever reciever recievers serrors dockblock
     test.each`
         filename                             | maxDuplicateProblems | expectedIssues                                                                                                                                                                                | expectedRawIssues
-        ${fix('sample-with-errors.ts')}      | ${undefined}         | ${['Helllo']}                                                                                                                                                                                 | ${['Helllo']}
-        ${fix('sample-with-many-errors.ts')} | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']} | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']}
-        ${fix('sample-with-many-errors.ts')} | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}                                                                                                                        | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}
-        ${fix('parser/sample.ts')}           | ${1}                 | ${['serrors']}                                                                                                                                                                                | ${['\\x73errors' /* should be '\\x73errors' */]}
+        ${fix('sample-with-errors.ts')}      | ${undefined}         | ${['dockblock', 'Helllo']}                                                                                                                                                                    | ${undefined}
+        ${fix('sample-with-many-errors.ts')} | ${undefined}         | ${['reciever', 'naame', 'naame', 'naame', 'reciever', 'Reciever', 'naame', 'Reciever', 'naame', 'kount', 'Reciever', 'kount', 'colector', 'recievers', 'Reciever', 'recievers', 'recievers']} | ${undefined}
+        ${fix('sample-with-many-errors.ts')} | ${1}                 | ${['reciever', 'naame', 'Reciever', 'kount', 'colector', 'recievers']}                                                                                                                        | ${undefined}
+        ${fix('parser/sample.ts')}           | ${1}                 | ${['serrors']}                                                                                                                                                                                | ${['\\x73errors']}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
@@ -103,9 +109,28 @@ describe('docValidator', () => {
             const r = dVal.checkDocument();
 
             expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
-            expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues);
+            expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
         }
     );
+
+    test('updateDocumentText', () => {
+        // cspell:ignore foor
+        const expectedIssues = [
+            oc({
+                text: 'foor',
+                isFound: false,
+                isFlagged: false,
+                line: { text: 'foor\n', offset: 14, position: { character: 0, line: 3 } },
+            }),
+        ];
+        const doc = td('files://words.txt', 'one\ntwo\nthree\nfoor\n', 'plaintext');
+        const dVal = new DocumentValidator(doc, { generateSuggestions: false }, {});
+        dVal.prepareSync();
+        const r = dVal.checkDocument();
+        expect(r).toEqual(expectedIssues);
+        dVal.updateDocumentText(doc.text + '# cspell:ignore foor\n');
+        expect(dVal.checkDocument()).toEqual([]);
+    });
 });
 
 function extractRawText(text: string, issues: ValidationIssue[]): string[] {

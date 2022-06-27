@@ -227,19 +227,18 @@ export class DocumentValidator {
         // Slice text based upon include ranges
         // Check text against dictionaries.
         const document = this._document;
-        const line = document.lineAt(parsedText.range[0]);
+        let line = document.lineAt(parsedText.range[0]);
         function mapToIssue(issue: MappedTextValidationResult): ValidationIssue {
             const { range, text, isFlagged, isFound } = issue;
             const offset = range[0];
             const length = range[1] - range[0];
-            assert(line.offset + line.text.length > offset);
-            // if (line.offset + line.text.length <= offset) {
-            //     line = document.lineAt(offset);
-            // }
+            assert(line.offset <= offset);
+            if (line.offset + line.text.length <= offset) {
+                line = document.lineAt(offset);
+            }
             return { text, offset, line, length, isFlagged, isFound };
         }
-        const aIssues = pipeSync(segmenter(parsedText), opConcatMap(textValidator));
-        const issues = [...aIssues].map(mapToIssue);
+        const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator), opMap(mapToIssue))];
 
         if (!this.options.generateSuggestions) {
             return issues;
