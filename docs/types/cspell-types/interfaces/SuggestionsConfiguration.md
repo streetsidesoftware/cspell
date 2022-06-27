@@ -28,7 +28,7 @@ Number of suggestions to make.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:251](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/CSpellSettingsDef.ts#L251)
+[CSpellSettingsDef.ts:251](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/CSpellSettingsDef.ts#L251)
 
 ___
 
@@ -46,7 +46,7 @@ Range: between 1 and 5.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:269](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/CSpellSettingsDef.ts#L269)
+[CSpellSettingsDef.ts:269](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/CSpellSettingsDef.ts#L269)
 
 ___
 
@@ -60,4 +60,4 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:258](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/CSpellSettingsDef.ts#L258)
+[CSpellSettingsDef.ts:258](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/CSpellSettingsDef.ts#L258)
