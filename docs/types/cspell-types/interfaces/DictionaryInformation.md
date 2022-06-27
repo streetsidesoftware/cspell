@@ -31,7 +31,7 @@ Default: `"\u0300-\u0341"`
 
 #### Defined in
 
-[DictionaryInformation.ts:27](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/DictionaryInformation.ts#L27)
+[DictionaryInformation.ts:27](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/DictionaryInformation.ts#L27)
 
 ___
 
@@ -44,7 +44,7 @@ If the word matches the pattern, then the penalty is applied.
 
 #### Defined in
 
-[DictionaryInformation.ts:49](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/DictionaryInformation.ts#L49)
+[DictionaryInformation.ts:49](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/DictionaryInformation.ts#L49)
 
 ___
 
@@ -58,7 +58,7 @@ The alphabet to use.
 
 #### Defined in
 
-[DictionaryInformation.ts:20](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/DictionaryInformation.ts#L20)
+[DictionaryInformation.ts:20](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/DictionaryInformation.ts#L20)
 
 ___
 
@@ -70,7 +70,7 @@ Define edit costs.
 
 #### Defined in
 
-[DictionaryInformation.ts:32](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/DictionaryInformation.ts#L32)
+[DictionaryInformation.ts:32](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/DictionaryInformation.ts#L32)
 
 ___
 
@@ -82,7 +82,7 @@ Used by dictionary authors
 
 #### Defined in
 
-[DictionaryInformation.ts:43](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/DictionaryInformation.ts#L43)
+[DictionaryInformation.ts:43](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/DictionaryInformation.ts#L43)
 
 ___
 
@@ -95,7 +95,7 @@ Example: `nl,nl-be`
 
 #### Defined in
 
-[DictionaryInformation.ts:14](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/DictionaryInformation.ts#L14)
+[DictionaryInformation.ts:14](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/DictionaryInformation.ts#L14)
 
 ___
 
@@ -108,4 +108,4 @@ will be near the top of the suggestion list.
 
 #### Defined in
 
-[DictionaryInformation.ts:38](https://github.com/streetsidesoftware/cspell/blob/7a5f2ef/packages/cspell-types/src/DictionaryInformation.ts#L38)
+[DictionaryInformation.ts:38](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/DictionaryInformation.ts#L38)
