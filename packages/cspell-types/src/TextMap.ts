@@ -1,4 +1,4 @@
-export type TextMap = Readonly<TransformedText>;
+export type MappedText = Readonly<TransformedText>;
 
 export type Range = readonly [start: number, end: number];
 
@@ -34,6 +34,7 @@ interface TransformedText extends PartialOrUndefined<Mapped> {
      */
     range: Range;
 }
+
 type PartialOrUndefined<T> = {
     [P in keyof T]?: T[P] | undefined;
 };

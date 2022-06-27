@@ -1,4 +1,4 @@
-import { TextMap } from '@cspell/cspell-types';
+import { MappedText } from '@cspell/cspell-types';
 import { Range } from '@cspell/cspell-types/Parser';
 import assert from 'assert';
 
@@ -8,7 +8,7 @@ import assert from 'assert';
  * @param extractRange - The range in the original document to extract
  * @returns The TextMap covering extractRange
  */
-export function extractTextMapRangeOrigin(textMap: TextMap, extractRange: Range): TextMap {
+export function extractTextMapRangeOrigin(textMap: MappedText, extractRange: Range): MappedText {
     const { text: srcTxt, range: srcRange, map: srcMap } = textMap;
     const [r0, r1] = srcRange;
     const startOrig = Math.min(Math.max(extractRange[0], r0), r1);

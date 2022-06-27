@@ -1,4 +1,4 @@
-import { TextOffset, ParsedText } from '@cspell/cspell-types';
+import { TextOffset, MappedText } from '@cspell/cspell-types';
 import { ValidationIssue } from './validator';
 import * as TextRange from '../util/TextRange';
 import { extractTextMapRangeOrigin } from '../util/TextMap';
@@ -7,22 +7,22 @@ export type Offset = number;
 
 export type SimpleRange = readonly [Offset, Offset];
 
-export function mapIssueBackToOriginalPos(parsedText: ParsedText, issue: ValidationIssue): ValidationIssue {
-    if (!parsedText.map || parsedText.map.length === 0) return issue;
-    const textOff = mapTextOffsetBackToOriginalPos(parsedText, issue);
+export function mapIssueBackToOriginalPos(mappedText: MappedText, issue: ValidationIssue): ValidationIssue {
+    if (!mappedText.map || mappedText.map.length === 0) return issue;
+    const textOff = mapTextOffsetBackToOriginalPos(mappedText, issue);
     return {
         ...issue,
         ...textOff,
     };
 }
 
-function mapTextOffsetBackToOriginalPos(parsedText: ParsedText, textOff: TextOffset): TextOffset {
-    if (!parsedText.map || !parsedText.map.length) return textOff;
-    const off = textOff.offset - parsedText.range[0];
-    const range = mapRangeBackToOriginalPos([off, off + (textOff.length ?? textOff.text.length)], parsedText.map);
+function mapTextOffsetBackToOriginalPos(mappedText: MappedText, textOff: TextOffset): TextOffset {
+    if (!mappedText.map || !mappedText.map.length) return textOff;
+    const off = textOff.offset - mappedText.range[0];
+    const range = mapRangeBackToOriginalPos([off, off + (textOff.length ?? textOff.text.length)], mappedText.map);
     return {
         text: textOff.text,
-        offset: parsedText.range[0] + range[0],
+        offset: mappedText.range[0] + range[0],
         length: range[1] - range[0],
     };
 }
@@ -84,16 +84,16 @@ export function mapRangeToLocal(rangeOrig: SimpleRange, map: number[] | undefine
 }
 
 /**
- * Factory to create a segmentation function that will segment ParsedText against a set of includeRanges.
+ * Factory to create a segmentation function that will segment MappedText against a set of includeRanges.
  * The function produced is optimized for forward scanning. It will perform poorly for randomly ordered offsets.
  * @param includeRanges Allowed ranges for words.
  */
-export function createParsedTextSegmenter(
+export function createMappedTextSegmenter(
     includeRanges: TextRange.MatchRange[]
-): (text: ParsedText) => Iterable<ParsedText> {
+): (text: MappedText) => Iterable<MappedText> {
     let rangePos = 0;
 
-    function* segmenter(pText: ParsedText): Iterable<ParsedText> {
+    function* segmenter(pText: MappedText): Iterable<MappedText> {
         if (!includeRanges.length) {
             return;
         }

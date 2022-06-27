@@ -1,4 +1,4 @@
-import { ParsedText, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
+import { MappedText, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
 
 export type TextOffsetRO = Readonly<TextOffsetRW>;
 
@@ -44,9 +44,9 @@ export interface LineSegment {
     segment: TextOffsetRO;
 }
 
-export interface ParsedTextValidationResult extends ParsedText {
+export interface MappedTextValidationResult extends MappedText {
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
 }
 
-export type TextValidator = (text: ParsedText) => Iterable<ParsedTextValidationResult>;
+export type TextValidator = (text: MappedText) => Iterable<MappedTextValidationResult>;

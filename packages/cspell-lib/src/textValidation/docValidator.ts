@@ -1,9 +1,15 @@
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe';
-import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ParsedText, PnPSettings } from '@cspell/cspell-types';
+import type {
+    CSpellSettingsWithSourceTrace,
+    CSpellUserSettings,
+    MappedText,
+    ParsedText,
+    PnPSettings,
+} from '@cspell/cspell-types';
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
 import { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
-import { TextDocument, updateTextDocument } from '../Models/TextDocument';
+import { TextDocument, TextDocumentLine, updateTextDocument } from '../Models/TextDocument';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
@@ -15,9 +21,9 @@ import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
 import { textValidatorFactory } from './lineValidatorFactory';
-import { createParsedTextSegmenter, SimpleRange } from './parsedText';
+import { createMappedTextSegmenter, SimpleRange } from './parsedText';
 import { calcTextInclusionRanges, defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './textValidator';
-import type { ParsedTextValidationResult, TextValidator } from './ValidationTypes';
+import type { MappedTextValidationResult, TextValidator } from './ValidationTypes';
 import { ValidationOptions } from './ValidationTypes';
 import { settingsToValidateOptions, ValidateTextOptions, ValidationIssue } from './validator';
 
@@ -95,7 +101,7 @@ export class DocumentValidator {
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
-        const segmenter = createParsedTextSegmenter(includeRanges);
+        const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
         this._preparations = {
@@ -154,7 +160,7 @@ export class DocumentValidator {
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
-        const segmenter = createParsedTextSegmenter(includeRanges);
+        const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
         this._preparations = {
@@ -185,7 +191,7 @@ export class DocumentValidator {
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
-        const segmenter = createParsedTextSegmenter(includeRanges);
+        const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
         this._preparations = {
@@ -216,19 +222,23 @@ export class DocumentValidator {
     check(parsedText: ParsedText): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
-        const { segmenter, textValidator: lineValidator } = this._preparations;
+        const { segmenter, textValidator } = this._preparations;
         // Determine settings for text range
         // Slice text based upon include ranges
         // Check text against dictionaries.
-        const line = this._document.lineAt(parsedText.range[0]);
-        function mapToIssue(issue: ParsedTextValidationResult): ValidationIssue {
+        const document = this._document;
+        let line: TextDocumentLine | undefined = undefined;
+        function mapToIssue(issue: MappedTextValidationResult): ValidationIssue {
             const { range, text, isFlagged, isFound } = issue;
             const offset = range[0];
             const length = range[1] - range[0];
+            assert(!line || line.offset <= offset);
+            if (!line || line.offset + line.text.length <= offset) {
+                line = document.lineAt(offset);
+            }
             return { text, offset, line, length, isFlagged, isFound };
         }
-        const aIssues = pipeSync(segmenter(parsedText), opConcatMap(lineValidator));
-        const issues = [...aIssues].map(mapToIssue);
+        const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator), opMap(mapToIssue))];
 
         if (!this.options.generateSuggestions) {
             return issues;
@@ -371,7 +381,7 @@ interface Preparations {
     finalSettings: CSpellSettingsInternalFinalized;
     includeRanges: MatchRange[];
     textValidator: TextValidator;
-    segmenter: (texts: ParsedText) => Iterable<ParsedText>;
+    segmenter: (texts: MappedText) => Iterable<MappedText>;
     shouldCheck: boolean;
     validateOptions: ValidationOptions;
     localConfig: CSpellUserSettings | undefined;

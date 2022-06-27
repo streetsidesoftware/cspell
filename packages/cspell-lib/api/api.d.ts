@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -544,11 +544,11 @@ interface ValidationResult extends TextOffset {
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
 }
-interface ParsedTextValidationResult extends ParsedText {
+interface MappedTextValidationResult extends MappedText {
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
 }
-declare type TextValidator = (text: ParsedText) => Iterable<ParsedTextValidationResult>;
+declare type TextValidator = (text: MappedText) => Iterable<MappedTextValidationResult>;
 
 interface ValidationIssue extends ValidationResult {
     suggestions?: string[];
@@ -559,6 +559,10 @@ interface ValidateTextOptions {
     /** The number of suggestions to generate. The higher the number the longer it takes. */
     numSuggestions?: number;
 }
+/**
+ * @deprecated
+ * @deprecationMessage Use spellCheckDocument
+ */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
 interface CheckTextInfo {
     text: string;
@@ -656,7 +660,7 @@ interface Preparations {
     finalSettings: CSpellSettingsInternalFinalized;
     includeRanges: MatchRange[];
     textValidator: TextValidator;
-    segmenter: (texts: ParsedText) => Iterable<ParsedText>;
+    segmenter: (texts: MappedText) => Iterable<MappedText>;
     shouldCheck: boolean;
     validateOptions: ValidationOptions;
     localConfig: CSpellUserSettings | undefined;
