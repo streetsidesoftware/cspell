@@ -16,19 +16,19 @@
 
 ### delegate
 
-• `Optional` **delegate**: `DelegateInfo`
+• `Optional` `Readonly` **delegate**: `DelegateInfo`
 
 Used to delegate parsing the contents of `text` to another parser.
 
 #### Defined in
 
-[Parser.ts:47](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L47)
+[Parser.ts:47](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L47)
 
 ___
 
 ### map
 
-• `Optional` **map**: `SourceMap`
+• `Optional` `Readonly` **map**: `SourceMap`
 
 The source map is used to support text transformations.
 
@@ -36,25 +36,25 @@ See: {@link SourceMap}
 
 #### Defined in
 
-[Parser.ts:42](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L42)
+[Parser.ts:42](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L42)
 
 ___
 
 ### range
 
-• **range**: `Range`
+• `Readonly` **range**: `Range`
 
 start and end offsets of the text
 
 #### Defined in
 
-[Parser.ts:30](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L30)
+[Parser.ts:30](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L30)
 
 ___
 
 ### scope
 
-• `Optional` **scope**: `Scope`
+• `Optional` `Readonly` **scope**: `Scope`
 
 The Scope annotation for a segment of text.
 Used by the spell checker to apply spell checking options
@@ -62,16 +62,16 @@ based upon the value of the scope.
 
 #### Defined in
 
-[Parser.ts:36](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L36)
+[Parser.ts:36](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L36)
 
 ___
 
 ### text
 
-• **text**: `string`
+• `Readonly` **text**: `string`
 
 The text extracted and possibly transformed
 
 #### Defined in
 
-[Parser.ts:26](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L26)
+[Parser.ts:26](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L26)

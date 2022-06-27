@@ -14,28 +14,28 @@
 
 ### content
 
-• **content**: `string`
+• `Readonly` **content**: `string`
 
 #### Defined in
 
-[Parser.ts:17](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L17)
+[Parser.ts:17](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L17)
 
 ___
 
 ### filename
 
-• **filename**: `string`
+• `Readonly` **filename**: `string`
 
 #### Defined in
 
-[Parser.ts:18](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L18)
+[Parser.ts:18](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L18)
 
 ___
 
 ### parsedTexts
 
-• **parsedTexts**: `Iterable`<[`ParsedText`](ParsedText.md)\>
+• `Readonly` **parsedTexts**: `Iterable`<[`ParsedText`](ParsedText.md)\>
 
 #### Defined in
 
-[Parser.ts:19](https://github.com/streetsidesoftware/cspell/blob/1835228/packages/cspell-types/src/Parser.ts#L19)
+[Parser.ts:19](https://github.com/streetsidesoftware/cspell/blob/dadce5a/packages/cspell-types/src/Parser.ts#L19)
