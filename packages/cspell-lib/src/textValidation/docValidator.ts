@@ -9,7 +9,7 @@ import type {
 import assert from 'assert';
 import { GlobMatcher } from 'cspell-glob';
 import { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
-import { TextDocument, updateTextDocument } from '../Models/TextDocument';
+import { TextDocument, TextDocumentLine, updateTextDocument } from '../Models/TextDocument';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
@@ -227,13 +227,13 @@ export class DocumentValidator {
         // Slice text based upon include ranges
         // Check text against dictionaries.
         const document = this._document;
-        let line = document.lineAt(parsedText.range[0]);
+        let line: TextDocumentLine | undefined = undefined;
         function mapToIssue(issue: MappedTextValidationResult): ValidationIssue {
             const { range, text, isFlagged, isFound } = issue;
             const offset = range[0];
             const length = range[1] - range[0];
-            assert(line.offset <= offset);
-            if (line.offset + line.text.length <= offset) {
+            assert(!line || line.offset <= offset);
+            if (!line || line.offset + line.text.length <= offset) {
                 line = document.lineAt(offset);
             }
             return { text, offset, line, length, isFlagged, isFound };
