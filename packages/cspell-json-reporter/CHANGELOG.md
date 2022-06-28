@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.1.3](https://github.com/streetsidesoftware/cspell/compare/v6.1.3-alpha.1...v6.1.3) (2022-06-28)
+
+
+### Bug Fixes
+
+* Update reporter README ([#3113](https://github.com/streetsidesoftware/cspell/issues/3113)) ([bdaf3a8](https://github.com/streetsidesoftware/cspell/commit/bdaf3a80078a582a494d88e1f591400a555ba4f5)), closes [#3111](https://github.com/streetsidesoftware/cspell/issues/3111)
+
+
+
+
+
 ## [6.1.3-alpha.1](https://github.com/streetsidesoftware/cspell/compare/v6.1.3-alpha.0...v6.1.3-alpha.1) (2022-06-15)
 
 **Note:** Version bump only for package @cspell/cspell-json-reporter
