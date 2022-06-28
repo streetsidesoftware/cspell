@@ -45,13 +45,17 @@ function fixPath(def: DictionaryDefinitionInternal): DictionaryDefinitionInterna
     if (def instanceof _DictionaryDefinitionInternalWithSource) {
         return def;
     }
-    const { path: filePath = '', file = '' } = def;
-    const newPath = !filePath && !file ? '' : path.join(filePath, file);
+    const newPath = fixDicPath(def.path, def.file);
     return {
         ...def,
         file: undefined,
         path: newPath,
     };
+}
+
+function fixDicPath(defPath: string | undefined, defFile: string | undefined): string {
+    const parts = [defPath || '', defFile || ''].filter((p) => !!p);
+    return parts.length > 1 ? path.join(...parts) : parts[0] || '';
 }
 
 export function mapDictDefsToInternal(defs: undefined, pathToSettingsFile: string): undefined;
@@ -148,7 +152,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryDefinitionInt
             useCompounds,
         } = defAll;
         const defaultPath = path.dirname(__source);
-        const filePath = path.join(relPath, file);
+        const filePath = fixDicPath(relPath, file);
         const name = determineName(filePath, def);
 
         const r = resolveFile(filePath, defaultPath);

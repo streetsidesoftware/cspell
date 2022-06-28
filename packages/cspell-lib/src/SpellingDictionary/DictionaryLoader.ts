@@ -1,10 +1,9 @@
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
-import { promises as fs, statSync } from 'fs';
+import { getStat, getStatSync, Stats } from 'cspell-io';
 import { genSequence } from 'gensequence';
 import * as path from 'path';
 import { format } from 'util';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
-import { isErrnoException } from '../util/errors';
 import { readLines, readLinesSync } from '../util/fileReader';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { SpellingDictionary } from './SpellingDictionary';
@@ -178,7 +177,7 @@ function isEqual(a: StatsOrError, b: StatsOrError | undefined): boolean {
     if (isError(a)) {
         return isError(b) && a.message === b.message && a.name === b.name;
     }
-    return !isError(b) && (a.mtimeMs === b.mtimeMs || a.size === b.size);
+    return !isError(b) && a.mtimeMs === b.mtimeMs && a.size === b.size && a.eTag === b.eTag;
 }
 
 function isError(e: StatsOrError): e is Error {
@@ -338,58 +337,6 @@ export const testing = {
     loadEntry,
     load,
 };
-
-function toError(e: unknown): Error {
-    if (isErrnoException(e)) return e;
-    if (e instanceof Error) return e;
-    return new Error(format(e));
-}
-
-/**
- * Copied from the Node definition to avoid a dependency upon a specific version of Node
- */
-interface StatsBase<T> {
-    isFile(): boolean;
-    isDirectory(): boolean;
-    isBlockDevice(): boolean;
-    isCharacterDevice(): boolean;
-    isSymbolicLink(): boolean;
-    isFIFO(): boolean;
-    isSocket(): boolean;
-
-    dev: T;
-    ino: T;
-    mode: T;
-    nlink: T;
-    uid: T;
-    gid: T;
-    rdev: T;
-    size: T;
-    blksize: T;
-    blocks: T;
-    atimeMs: T;
-    mtimeMs: T;
-    ctimeMs: T;
-    birthtimeMs: T;
-    atime: Date;
-    mtime: Date;
-    ctime: Date;
-    birthtime: Date;
-}
-
-function getStat(uri: string): Promise<Stats | Error> {
-    return fs.stat(uri).catch((e) => toError(e));
-}
-
-function getStatSync(uri: string): Stats | Error {
-    try {
-        return statSync(uri);
-    } catch (e) {
-        return toError(e);
-    }
-}
-
-export type Stats = StatsBase<number>;
 
 export const __testing__ = {
     debugLog,

@@ -21,13 +21,14 @@ const testNodeModules = /^node_modules\//;
 export function resolveFile(filename: string, relativeTo: string): ResolveFileResult {
     filename = filename.replace(/^~/, os.homedir());
     const steps: { filename: string; fn: (f: string, r: string) => ResolveFileResult }[] = [
-        { filename: filename, fn: tryNodeResolve },
+        { filename, fn: tryUrl },
+        { filename, fn: tryNodeResolve },
         { filename: path.resolve(relativeTo, filename), fn: tryResolveExists },
         { filename: path.resolve(filename), fn: tryResolveExists },
-        { filename: filename, fn: tryNodeResolveDefaultPaths },
-        { filename: filename, fn: tryResolveFrom },
+        { filename, fn: tryNodeResolveDefaultPaths },
+        { filename, fn: tryResolveFrom },
         { filename: filename.replace(testNodeModules, ''), fn: tryResolveFrom },
-        { filename: filename, fn: tryResolveGlobal },
+        { filename, fn: tryResolveGlobal },
     ];
 
     for (const step of steps) {
@@ -35,6 +36,27 @@ export function resolveFile(filename: string, relativeTo: string): ResolveFileRe
         if (r.found) return r;
     }
     return { filename: path.resolve(relativeTo, filename), relativeTo, found: false };
+}
+
+const isUrlRegExp = /^\w+:\/\//i;
+
+/**
+ * Check to see if it is a URL.
+ * Note: URLs are absolute!
+ * @param filename - url string
+ * @returns ResolveFileResult
+ */
+function tryUrl(filename: string, relativeTo: string): ResolveFileResult {
+    if (isUrlRegExp.test(filename)) {
+        return { filename, relativeTo: undefined, found: true };
+    }
+
+    if (isUrlRegExp.test(relativeTo)) {
+        const url = new URL(filename, relativeTo);
+        return { filename: url.href, relativeTo, found: true };
+    }
+
+    return { filename, relativeTo: undefined, found: false };
 }
 
 function tryNodeResolveDefaultPaths(filename: string): ResolveFileResult {

@@ -95,7 +95,7 @@ describe('Verify trace', () => {
         expect(resultsWithErrors).toContainEqual(
             expect.objectContaining({
                 dictName: 'bad dict',
-                dictSource: 'missing.txt',
+                dictSource: './missing.txt',
                 errors: expect.arrayContaining([
                     expect.objectContaining({
                         message: expect.stringContaining('failed to load'),

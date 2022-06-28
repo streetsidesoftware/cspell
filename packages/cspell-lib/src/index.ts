@@ -7,7 +7,14 @@ import { getDictionaryInternal, refreshDictionaryCache, SpellingDictionaryCollec
 import * as Text from './util/text';
 
 export * from '@cspell/cspell-types';
-export * from 'cspell-io';
+export {
+    asyncIterableToArray,
+    readFile,
+    readFileSync,
+    writeToFile,
+    writeToFileIterable,
+    writeToFileIterableP,
+} from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
 export { getLanguagesForExt } from './LanguageIds';
 export { createTextDocument, updateTextDocument } from './Models/TextDocument';
