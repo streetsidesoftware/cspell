@@ -42,6 +42,7 @@ describe('docValidator', () => {
         ${fix('sample-with-errors.ts')}            | ${'/**'}        | ${'*/'}      | ${[oc({ text: 'dockblock' })]}
         ${fix('sample-with-errors.ts')}            | ${'main'}       | ${undefined} | ${[]}
         ${fix('sample-with-cspell-directives.ts')} | ${'grrrr'}      | ${undefined} | ${[]}
+        ${fixDict('remote/test.txt')}              | ${'New'}        | ${'Paris'}   | ${[]}
     `('checkText async $filename "$startText"', async ({ filename, startText, endText, expected }) => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, {}, {});
@@ -155,6 +156,10 @@ function loadDoc(filename: string) {
     return docCache.get(filename);
 }
 
-function fix(fixtureFile: string): string {
-    return path.resolve(path.join(fixturesDir, 'docValidator'), fixtureFile);
+function fix(...fixtureFile: string[]): string {
+    return path.resolve(path.join(fixturesDir, 'docValidator'), ...fixtureFile);
+}
+
+function fixDict(...fixtureFile: string[]): string {
+    return fix('../dictionaries', ...fixtureFile);
 }
