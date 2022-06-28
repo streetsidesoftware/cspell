@@ -1,4 +1,5 @@
 import { getStat } from './stat';
+import { join } from 'path';
 
 const oc = expect.objectContaining;
 const sc = expect.stringContaining;
@@ -16,8 +17,7 @@ describe('stat', () => {
     test.each`
         url                                                                              | expected
         ${'https://raw.gitubusrcotent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ code: 'ENOTFOUND' })}
-        ${__filename + '/not-found'}                                                     | ${oc({ code: 'ENOTDIR' })}
-        ${__dirname + '/not-found'}                                                      | ${oc({ code: 'ENOENT' })}
+        ${join(__dirname, 'not-found.nf')}                                               | ${oc({ code: 'ENOENT' })}
     `('getStat with error $url', async ({ url, expected }) => {
         const r = await getStat(url);
         expect(r).toEqual(expected);
