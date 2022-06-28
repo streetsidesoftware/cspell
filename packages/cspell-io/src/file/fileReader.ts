@@ -2,13 +2,43 @@
 // cSpell:words zlib iconv
 import * as fs from 'fs';
 import * as zlib from 'zlib';
+import { fetch } from './fetch';
+import { FetchUrlError } from './FetchError';
+import { toURL, isSupportedURL, isFileURL, isZipped } from './util';
+import { fileURLToPath } from 'url';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 
-export function readFile(filename: string, encoding: BufferEncoding = defaultEncoding): Promise<string> {
+export async function readFile(filename: string | URL, encoding?: BufferEncoding): Promise<string> {
+    const url = toURL(filename);
+    if (!isSupportedURL(url)) {
+        throw new Error('Unsupported network protocol');
+    }
+    return isFileURL(url) ? _readFile(url, encoding) : _fetchURL(url, encoding);
+}
+
+function _readFile(url: URL, encoding?: BufferEncoding): Promise<string> {
+    // Convert it to a string because Yarn2 cannot handle URLs.
+    const filename = fileURLToPath(url);
+    return _read(() => fs.createReadStream(filename), isZipped(filename), encoding);
+}
+
+async function _fetchURL(url: URL, encoding?: BufferEncoding): Promise<string> {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw FetchUrlError.create(url, response.status);
+    }
+    return _read(() => response.body, isZipped(url), encoding);
+}
+
+function _read(
+    getStream: () => NodeJS.ReadableStream,
+    isZipped: boolean,
+    encoding: BufferEncoding = defaultEncoding
+): Promise<string> {
     return new Promise((resolve, reject) => {
         const data: string[] = [];
-        const stream = prepareFileStream(filename, encoding, reject);
+        const stream = prepareFileStream(getStream, isZipped, encoding, reject);
         let resolved = false;
         function complete() {
             resolve(data.join(''));
@@ -21,14 +51,17 @@ export function readFile(filename: string, encoding: BufferEncoding = defaultEnc
     });
 }
 
-const isZipped = /\.gz$/i;
-
-function prepareFileStream(filename: string, encoding: BufferEncoding, fnError: (e: Error) => void) {
+function prepareFileStream(
+    getStream: () => NodeJS.ReadableStream,
+    isZipped: boolean,
+    encoding: BufferEncoding,
+    fnError: (e: Error) => void
+) {
     const pipes: NodeJS.ReadWriteStream[] = [];
-    if (isZipped.test(filename)) {
+    if (isZipped) {
         pipes.push(zlib.createGunzip());
     }
-    const fileStream = fs.createReadStream(filename);
+    const fileStream = getStream();
     fileStream.on('error', fnError);
     const stream = pipes.reduce<NodeJS.ReadableStream>((s, p) => s.pipe(p).on('error', fnError), fileStream);
     stream.setEncoding(encoding);
@@ -37,6 +70,6 @@ function prepareFileStream(filename: string, encoding: BufferEncoding, fnError: 
 
 export function readFileSync(filename: string, encoding: BufferEncoding = defaultEncoding): string {
     const rawData = fs.readFileSync(filename);
-    const data = isZipped.test(filename) ? zlib.gunzipSync(rawData) : rawData;
+    const data = isZipped(filename) ? zlib.gunzipSync(rawData) : rawData;
     return data.toString(encoding);
 }

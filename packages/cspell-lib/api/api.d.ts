@@ -3,7 +3,7 @@ import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation,
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
-export * from 'cspell-io';
+export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { URI } from 'vscode-uri';
 
 declare type ExclusionFunction = (fileUri: string) => boolean;
