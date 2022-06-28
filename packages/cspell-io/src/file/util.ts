@@ -2,7 +2,7 @@ import { pathToFileURL, URL } from 'url';
 
 const isZippedRegExp = /\.gz($|[?#])/i;
 
-const isURLRegExp = /^\w+:\/\//i;
+const isURLRegExp = /^\w{2,64}:\/\//i;
 const supportedProtocols: Record<string, true | undefined> = { 'file:': true, 'http:': true, 'https:': true };
 
 export function isZipped(filename: string | URL): boolean {
