@@ -5,6 +5,7 @@ import * as zlib from 'zlib';
 import { fetch } from './fetch';
 import { FetchUrlError } from './FetchError';
 import { toURL, isSupportedURL, isFileURL, isZipped } from './util';
+import { fileURLToPath } from 'url';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 
@@ -16,7 +17,9 @@ export async function readFile(filename: string | URL, encoding?: BufferEncoding
     return isFileURL(url) ? _readFile(url, encoding) : _fetchURL(url, encoding);
 }
 
-function _readFile(filename: URL, encoding?: BufferEncoding): Promise<string> {
+function _readFile(url: URL, encoding?: BufferEncoding): Promise<string> {
+    // Convert it to a string because Yarn2 cannot handle URLs.
+    const filename = fileURLToPath(url);
     return _read(() => fs.createReadStream(filename), isZipped(filename), encoding);
 }
 
