@@ -10,6 +10,8 @@ import {
 
 const { posix } = Path;
 const relRegExp = /^\.[\\/]/;
+/** test for glob patterns starting with `**` */
+const isGlobalPatternRegExp = /^!*[*]{2}/;
 
 /**
  * This function tries its best to determine if `fileOrGlob` is a path to a file or a glob pattern.
@@ -24,22 +26,20 @@ export function fileOrGlobToGlob(
 ): GlobPatternWithRoot {
     const pathToGlob = path.sep === '\\' ? (p: string) => p.replace(/\\/g, '/') : (p: string) => p;
 
-    if (typeof fileOrGlob !== 'string') {
+    const isGlobalPattern = false;
+    if (isGlobPatternWithOptionalRoot(fileOrGlob)) {
         const useRoot = fileOrGlob.root ?? root;
-        return { ...fileOrGlob, root: useRoot };
+        const isGlobalPattern = isGlobPatternWithRoot(fileOrGlob)
+            ? fileOrGlob.isGlobalPattern
+            : isGlobalGlob(fileOrGlob.glob);
+        return { ...fileOrGlob, root: useRoot, isGlobalPattern };
     }
 
     if (doesRootContainPath(root, fileOrGlob, path) || relRegExp.test(fileOrGlob)) {
         const rel = path.relative(root, path.resolve(root, fileOrGlob));
-        return {
-            glob: pathToGlob(rel),
-            root,
-        };
+        return { glob: pathToGlob(rel), root, isGlobalPattern };
     }
-    return {
-        glob: pathToGlob(fileOrGlob),
-        root,
-    };
+    return { glob: pathToGlob(fileOrGlob), root, isGlobalPattern };
 }
 
 /**
@@ -58,7 +58,7 @@ export function isGlobPatternWithOptionalRoot(g: GlobPattern): g is GlobPatternW
 }
 
 export function isGlobPatternWithRoot(g: GlobPatternWithRoot | GlobPatternWithOptionalRoot): g is GlobPatternWithRoot {
-    return !!g.root;
+    return typeof g.root === 'string' && 'isGlobalPattern' in g;
 }
 
 export function isGlobPatternNormalized(g: GlobPattern | GlobPatternNormalized): g is GlobPatternNormalized {
@@ -170,10 +170,11 @@ export function normalizeGlobPattern(g: GlobPattern, options: NormalizeOptions):
     if (gr.root.startsWith('${cwd}')) {
         gr.root = path.resolve(gr.root.replace('${cwd}', cwd));
     }
+    const isGlobalPattern = isGlobalGlob(gr.glob);
     gr.root = path.resolve(root, path.normalize(gr.root));
 
     const globs = normalizePattern(gr.glob, nested);
-    return globs.map((glob) => ({ ...gr, glob, rawGlob, rawRoot }));
+    return globs.map((glob) => ({ ...gr, glob, rawGlob, rawRoot, isGlobalPattern }));
 }
 
 /**
@@ -201,6 +202,10 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
 
     if (!relFromRootToGlob) {
         return glob;
+    }
+
+    if (glob.isGlobalPattern) {
+        return { ...glob, root };
     }
 
     const relFromGlobToRoot = path.relative(glob.root, root);
@@ -318,7 +323,12 @@ function trimGlobLeft(glob: string): string {
     return glob.slice(i);
 }
 
+function isGlobalGlob(glob: string): boolean {
+    return isGlobalPatternRegExp.test(glob);
+}
+
 export const __testing__ = {
     rebaseGlob,
     trimGlob,
+    isGlobalGlob,
 };

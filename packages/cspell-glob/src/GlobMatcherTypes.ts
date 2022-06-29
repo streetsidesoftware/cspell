@@ -50,6 +50,10 @@ export interface GlobPatternWithOptionalRoot {
 
 export interface GlobPatternWithRoot extends GlobPatternWithOptionalRoot {
     root: string;
+    /**
+     * Global patterns do not need to be relative to the root.
+     */
+    isGlobalPattern: boolean;
 }
 
 export interface GlobPatternNormalized extends GlobPatternWithRoot {

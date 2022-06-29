@@ -1,7 +1,7 @@
 import mm = require('micromatch');
 import * as Path from 'path';
 import { normalizeGlobPatterns, doesRootContainPath, normalizeGlobToRoot } from './globHelper';
-import { PathInterface, GlobMatch, GlobPattern, GlobPatternWithRoot } from './GlobMatcherTypes';
+import { PathInterface, GlobMatch, GlobPattern, GlobPatternWithRoot, GlobPatternNormalized } from './GlobMatcherTypes';
 
 // cspell:ignore fname
 
@@ -80,7 +80,7 @@ export class GlobMatcher {
     readonly matchEx: (filename: string) => GlobMatch;
     readonly path: PathInterface;
     readonly patterns: GlobPatternWithRoot[];
-    readonly patternsNormalizedToRoot: GlobPatternWithRoot[];
+    readonly patternsNormalizedToRoot: GlobPatternNormalized[];
     readonly root: string;
     readonly dot: boolean;
     readonly options: NormalizedGlobMatchOptions;
@@ -119,7 +119,7 @@ export class GlobMatcher {
             nested = isExcludeMode,
             cwd = process.cwd(),
             nobrace,
-        } = clean(options);
+        } = options;
 
         const normalizedRoot = nodePath.resolve(nodePath.normalize(root));
         this.options = { root: normalizedRoot, dot, nodePath, nested, mode, nobrace, cwd };
@@ -157,9 +157,19 @@ export class GlobMatcher {
 type GlobMatchFn = (filename: string) => GlobMatch;
 
 interface GlobRule {
+    /** The pattern */
     pattern: GlobPatternWithRoot;
+    /**
+     * Index of the glob in the list.
+     */
     index: number;
+    /**
+     * Is a negated pattern
+     */
     isNeg: boolean;
+    /**
+     * the glob converted to a regexp.
+     */
     reg: RegExp;
     fn: (filename: string) => boolean;
 }
@@ -204,10 +214,11 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
             for (const rule of rules) {
                 const pattern = rule.pattern;
                 const root = pattern.root;
-                if (!doesRootContainPath(root, filename, path)) {
+                const isRelPat = !pattern.isGlobalPattern;
+                if (isRelPat && !doesRootContainPath(root, filename, path)) {
                     continue;
                 }
-                const relName = path.relative(root, filename);
+                const relName = isRelPat ? path.relative(root, filename) : filename;
                 const fname = path.sep === '\\' ? relName.replace(/\\/g, '/') : relName;
                 if (rule.fn(fname)) {
                     return {
@@ -225,15 +236,4 @@ function buildMatcherFn(patterns: GlobPatternWithRoot[], options: NormalizedGlob
         return testRules(negRules, false) || testRules(posRules, true) || { matched: false };
     };
     return fn;
-}
-
-function clean<T>(obj: T): T {
-    if (typeof obj !== 'object') return obj;
-    const r = <Record<string, unknown>>obj;
-    for (const key of Object.keys(r)) {
-        if (r[key] === undefined) {
-            delete r[key];
-        }
-    }
-    return obj;
 }

@@ -315,7 +315,8 @@ describe('Validate Overrides', () => {
         ${'nested/dir/spell.test.ts'}      | ${['**/dir/**/*.ts']}                     | ${true}
         ${'nested/dir/spell.test.js'}      | ${['**/*.ts']}                            | ${false}
         ${'nested/dir/spell.test.js'}      | ${['*.ts', '*.test.js']}                  | ${true}
-        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'**/nl_NL/**'}                          | ${false /* the file is a root filename */}
+        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'**/nl_NL/**'}                          | ${true /* the file is a root filename but the glob is global */}
+        ${'/cspell-dicts/nl_NL/Dutch.txt'} | ${'/**/nl_NL/**'}                         | ${false /* the file is a root filename */}
         ${'cspell-dicts/nl_NL/Dutch.txt'}  | ${'**/nl_NL/**'}                          | ${true}
     `('checkFilenameMatchesGlob "$file" against "$glob" expect: $expected', ({ file, glob, expected }) => {
         file = path.resolve(__dirname, file);
