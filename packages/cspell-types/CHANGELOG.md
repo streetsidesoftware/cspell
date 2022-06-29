@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0-alpha.1](https://github.com/streetsidesoftware/cspell/compare/v6.2.0-alpha.0...v6.2.0-alpha.1) (2022-06-29)
+
+
+### Bug Fixes
+
+* Do not allow nested Parser functions. ([#3155](https://github.com/streetsidesoftware/cspell/issues/3155)) ([8083c95](https://github.com/streetsidesoftware/cspell/commit/8083c95ce4b01aa887b9521f088ec8e537a929b6))
+
+
+
+
+
 ## [6.1.3](https://github.com/streetsidesoftware/cspell/compare/v6.1.3-alpha.1...v6.1.3) (2022-06-28)
 
 **Note:** Version bump only for package @cspell/cspell-types
