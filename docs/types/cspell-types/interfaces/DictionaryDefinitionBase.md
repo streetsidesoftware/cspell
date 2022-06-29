@@ -31,7 +31,7 @@ Optional description.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:558](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/CSpellSettingsDef.ts#L558)
+[CSpellSettingsDef.ts:558](https://github.com/streetsidesoftware/cspell/blob/8083c95/packages/cspell-types/src/CSpellSettingsDef.ts#L558)
 
 ___
 
@@ -50,7 +50,7 @@ Name Format:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:556](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/CSpellSettingsDef.ts#L556)
+[CSpellSettingsDef.ts:556](https://github.com/streetsidesoftware/cspell/blob/8083c95/packages/cspell-types/src/CSpellSettingsDef.ts#L556)
 
 ___
 
@@ -68,7 +68,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:572](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/CSpellSettingsDef.ts#L572)
+[CSpellSettingsDef.ts:572](https://github.com/streetsidesoftware/cspell/blob/8083c95/packages/cspell-types/src/CSpellSettingsDef.ts#L572)
 
 ___
 
@@ -80,7 +80,7 @@ Replacement pairs.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:560](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/CSpellSettingsDef.ts#L560)
+[CSpellSettingsDef.ts:560](https://github.com/streetsidesoftware/cspell/blob/8083c95/packages/cspell-types/src/CSpellSettingsDef.ts#L560)
 
 ___
 
@@ -99,7 +99,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[CSpellSettingsDef.ts:582](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/CSpellSettingsDef.ts#L582)
+[CSpellSettingsDef.ts:582](https://github.com/streetsidesoftware/cspell/blob/8083c95/packages/cspell-types/src/CSpellSettingsDef.ts#L582)
 
 ___
 
@@ -111,4 +111,4 @@ Use Compounds.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:562](https://github.com/streetsidesoftware/cspell/blob/8074600/packages/cspell-types/src/CSpellSettingsDef.ts#L562)
+[CSpellSettingsDef.ts:562](https://github.com/streetsidesoftware/cspell/blob/8083c95/packages/cspell-types/src/CSpellSettingsDef.ts#L562)
