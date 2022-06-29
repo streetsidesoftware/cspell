@@ -41,7 +41,7 @@ describe('Verify Exclusion Helper functions', () => {
     });
 
     test('the generated matching function for nested projects', () => {
-        const globs = ['**/node_modules', '**/typings', '.vscode'];
+        const globs = ['/**/node_modules', '**/typings', '.vscode'];
         const filesMatching = [
             'file:///User/projects/myProject/node_modules/test/test.js',
             'file:///User/projects/myProject/node_modules/test/test.json',
