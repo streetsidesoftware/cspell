@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import Chalk from 'chalk';
 import { ShouldCheckOptions, shouldCheckRepo } from './shouldCheckRepo';
 import { Logger } from './types';
-import simpleGit from 'simple-git';
+import { simpleGit } from 'simple-git';
 import mkdirp from 'mkdirp';
 import { Octokit } from '@octokit/rest';
 import { Repository } from './configDef';
