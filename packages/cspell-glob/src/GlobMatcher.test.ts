@@ -5,7 +5,6 @@ import {
     GlobPattern,
     GlobPatternNormalized,
     GlobPatternWithOptionalRoot,
-    GlobPatternWithRoot,
     PathInterface,
 } from './GlobMatcherTypes';
 

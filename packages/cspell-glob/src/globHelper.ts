@@ -1,5 +1,4 @@
 /* eslint-disable no-irregular-whitespace */
-import assert from 'assert';
 import * as Path from 'path';
 import {
     GlobPattern,
@@ -28,9 +27,11 @@ export function fileOrGlobToGlob(
     const pathToGlob = path.sep === '\\' ? (p: string) => p.replace(/\\/g, '/') : (p: string) => p;
 
     const isGlobalPattern = false;
-    if (typeof fileOrGlob !== 'string') {
+    if (isGlobPatternWithOptionalRoot(fileOrGlob)) {
         const useRoot = fileOrGlob.root ?? root;
-        const isGlobalPattern = isGlobalPatternRegExp.test(fileOrGlob.glob);
+        const isGlobalPattern = isGlobPatternWithRoot(fileOrGlob)
+            ? fileOrGlob.isGlobalPattern
+            : isGlobalGlob(fileOrGlob.glob);
         return { ...fileOrGlob, root: useRoot, isGlobalPattern };
     }
 
@@ -193,7 +194,7 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
         return path.sep === '\\' ? relativePath.replace(/\\/g, '/') : relativePath;
     }
 
-    if (glob.root === root || glob.isGlobalPattern) {
+    if (glob.root === root) {
         return glob;
     }
 
@@ -201,6 +202,10 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
 
     if (!relFromRootToGlob) {
         return glob;
+    }
+
+    if (glob.isGlobalPattern) {
+        return { ...glob, root };
     }
 
     const relFromGlobToRoot = path.relative(glob.root, root);

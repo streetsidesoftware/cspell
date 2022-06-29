@@ -210,24 +210,24 @@ describe('Validate Glob Normalization to root', () => {
     }
 
     test.each`
-        globPath                                                  | file                      | root                             | expected                                                                      | comment
-        ${gp('*.json')}                                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.', ...relGlob }, path)}                        | ${'matching root'}
-        ${gp('*.json', '.', pathPosix)}                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.' }, pathPosix)}                               | ${'matching root'}
-        ${gp('*.json', '.', pathWin32)}                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.' }, pathWin32)}                               | ${'matching root'}
-        ${gp('*.json')}                                           | ${'cspell-glob/cfg.json'} | ${'..'}                          | ${eg({ glob: 'cspell-glob/*.json', root: '..' }, path)}                       | ${'root above'}
-        ${gp('*.json', '.', pathPosix)}                           | ${'cspell/cfg.json'}      | ${'..'}                          | ${eg({ glob: 'cspell/*.json', root: '..' }, pathPosix)}                       | ${'root above'}
-        ${gp('*.json', '.', pathWin32)}                           | ${'cspell/cfg.json'}      | ${'..'}                          | ${eg({ glob: 'cspell/*.json', root: '..' }, pathWin32)}                       | ${'root above'}
-        ${gp('*.json')}                                           | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: '.' }, path)}                                    | ${'root below, cannot change'}
-        ${gp('*.json', '.', pathPosix)}                           | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: '.' }, pathPosix)}                               | ${'root below, cannot change'}
-        ${gp('**/*.json', '.', pathWin32)}                        | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '**/*.json', root: '.', ...globalGlob }, pathWin32)}             | ${'root below, globstar'}
-        ${gp('deeper/*.json')}                                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, path)}                               | ${'root below, matching'}
-        ${gp('deeper/*.json', '.', pathPosix)}                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, pathPosix)}                          | ${'root below, matching'}
-        ${gp('deeper/*.json', '.', pathWin32)}                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, pathWin32)}                          | ${'root below, matching'}
-        ${gp('deeper/*.json', 'e:/user/Test/project', pathWin32)} | ${'cfg.json'}             | ${'E:/user/test/project/deeper'} | ${eg({ glob: '*.json', root: 'E:/user/test/project/deeper' }, pathWin32)}     | ${'root below, matching'}
-        ${gp('**/deeper/*.json')}                                 | ${'deeper/cfg.json'}      | ${'deeper'}                      | ${eg({ glob: '**/deeper/*.json', root: '.', ...globalGlob }, path)}           | ${'root below, not matching'}
-        ${gp('**/deeper/*.json', 'proj/nested')}                  | ${'deeper/cfg.json'}      | ${'proj'}                        | ${eg({ glob: '**/deeper/*.json', root: 'proj/nested', ...globalGlob }, path)} | ${'root below, not matching'}
-        ${gp('**/deeper/*.json')}                                 | ${'!cfg.json'}            | ${'deeper'}                      | ${eg({ glob: '**/deeper/*.json', root: '.', ...globalGlob }, path)}           | ${'root below, not matching'}
-        ${gp('deeper/project/*/*.json')}                          | ${'cfg.json'}             | ${'deeper/project/a'}            | ${eg({ glob: '*.json', root: 'deeper/project/a' }, path)}                     | ${'root below, not matching'}
+        globPath                                                  | file                      | root                             | expected                                                                  | comment
+        ${gp('*.json')}                                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.', ...relGlob }, path)}                    | ${'matching root'}
+        ${gp('*.json', '.', pathPosix)}                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.' }, pathPosix)}                           | ${'matching root'}
+        ${gp('*.json', '.', pathWin32)}                           | ${'cfg.json'}             | ${'.'}                           | ${eg({ glob: '*.json', root: '.' }, pathWin32)}                           | ${'matching root'}
+        ${gp('*.json')}                                           | ${'cspell-glob/cfg.json'} | ${'..'}                          | ${eg({ glob: 'cspell-glob/*.json', root: '..' }, path)}                   | ${'root above'}
+        ${gp('*.json', '.', pathPosix)}                           | ${'cspell/cfg.json'}      | ${'..'}                          | ${eg({ glob: 'cspell/*.json', root: '..' }, pathPosix)}                   | ${'root above'}
+        ${gp('*.json', '.', pathWin32)}                           | ${'cspell/cfg.json'}      | ${'..'}                          | ${eg({ glob: 'cspell/*.json', root: '..' }, pathWin32)}                   | ${'root above'}
+        ${gp('*.json')}                                           | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: '.' }, path)}                                | ${'root below, cannot change'}
+        ${gp('*.json', '.', pathPosix)}                           | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: '.' }, pathPosix)}                           | ${'root below, cannot change'}
+        ${gp('**/*.json', '.', pathWin32)}                        | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '**/*.json', root: 'deeper', ...globalGlob }, pathWin32)}    | ${'root below, globstar'}
+        ${gp('deeper/*.json')}                                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, path)}                           | ${'root below, matching'}
+        ${gp('deeper/*.json', '.', pathPosix)}                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, pathPosix)}                      | ${'root below, matching'}
+        ${gp('deeper/*.json', '.', pathWin32)}                    | ${'cfg.json'}             | ${'deeper'}                      | ${eg({ glob: '*.json', root: 'deeper' }, pathWin32)}                      | ${'root below, matching'}
+        ${gp('deeper/*.json', 'e:/user/Test/project', pathWin32)} | ${'cfg.json'}             | ${'E:/user/test/project/deeper'} | ${eg({ glob: '*.json', root: 'E:/user/test/project/deeper' }, pathWin32)} | ${'root below, matching'}
+        ${gp('**/deeper/*.json')}                                 | ${'deeper/cfg.json'}      | ${'deeper'}                      | ${eg({ glob: '**/deeper/*.json', root: 'deeper', ...globalGlob }, path)}  | ${'root below, not matching'}
+        ${gp('**/deeper/*.json', 'proj/nested')}                  | ${'deeper/cfg.json'}      | ${'proj'}                        | ${eg({ glob: '**/deeper/*.json', root: 'proj', ...globalGlob }, path)}    | ${'root below, not matching'}
+        ${gp('**/deeper/*.json')}                                 | ${'!cfg.json'}            | ${'deeper'}                      | ${eg({ glob: '**/deeper/*.json', root: 'deeper', ...globalGlob }, path)}  | ${'root below, not matching'}
+        ${gp('deeper/project/*/*.json')}                          | ${'cfg.json'}             | ${'deeper/project/a'}            | ${eg({ glob: '*.json', root: 'deeper/project/a' }, path)}                 | ${'root below, not matching'}
     `(
         'normalizeGlobToRoot orig {$globPath.glob.glob, $globPath.glob.root} $root $comment',
         ({ globPath, file, root, expected }: TestNormalizeGlobToRoot) => {
@@ -308,7 +308,7 @@ describe('Validate Glob Normalization to root', () => {
         ${j(mg('*.json', 'project/a'))}                   | ${'project'}     | ${e(mGlob(gg('a/*.json'), { rawGlob: '*.json' }))}                     | ${'Root in the middle.'}
         ${j(mg('/node_modules', 'project/a'))}            | ${'project'}     | ${e(mGlob(gg('a/node_modules'), { rawGlob: '/node_modules' }))}        | ${'Root in the middle. /node_modules'}
         ${j(mg('*.json', '../tests/a'))}                  | ${'project'}     | ${e({ glob: '*.json', root: '../tests/a' })}                           | ${'Glob not in root is not changed.'}
-        ${j(mg('**/*.ts', '.'))}                          | ${'project'}     | ${e({ glob: '**/*.ts', root: '.' })}                                   | ${'Glob not in root is not changed.'}
+        ${j(mg('**/*.ts', '.'))}                          | ${'project'}     | ${e({ glob: '**/*.ts', root: 'project' })}                             | ${'Glob not in root is not changed.'}
         ${j(mg('/**/*.ts', '.'))}                         | ${'project'}     | ${e({ glob: '**/*.ts', root: 'project' })}                             | ${'Glob not in root is not changed.'}
         ${j(mg('*/*.json', '../tests/a'))}                | ${'project'}     | ${e({ glob: '*/*.json', root: '../tests/a' })}                         | ${'Glob not in root is not changed.'}
         ${j(mg('*/*.json', 'project/a'))}                 | ${'project'}     | ${e({ glob: 'a/*/*.json', root: 'project' })}                          | ${'nested a/*/*.json'}
