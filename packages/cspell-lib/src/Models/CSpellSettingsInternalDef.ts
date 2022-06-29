@@ -3,6 +3,7 @@ import {
     DictionaryDefinitionAugmented,
     DictionaryDefinitionCustom,
     DictionaryDefinitionPreferred,
+    Parser,
 } from '@cspell/cspell-types';
 import { WeightMap } from 'cspell-trie-lib';
 import { OptionalOrUndefined } from '../util/types';
@@ -16,6 +17,7 @@ export interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTra
 }
 
 export interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
+    parserFn: Parser | undefined;
     finalized: true;
     ignoreRegExpList: RegExp[];
     includeRegExpList: RegExp[];
