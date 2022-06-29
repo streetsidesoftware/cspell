@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
   files: 7363
-  filesWithIssues: 5739
-  issues: 57263
+  filesWithIssues: 5729
+  issues: 57205
   errors: 0
 Errors: []
 
@@ -351,7 +351,6 @@ issues:
   - "google/cloud/bigtable/admin/integration_tests/admin_backup_integration_test.cc:41:11    	btadmin 	U   	namespace btadmin = ::google::bigtable"
   - "google/cloud/bigtable/admin/integration_tests/table_admin_integration_test.cc:219:19    	newfam  	U   	mods[0].set_id(\"newfam\");"
   - "google/cloud/bigtable/admin/internal/bigtable_instance_admin_option_defaults.cc:40:8    	bigtableadmin   	U   	\"bigtableadmin.googleapis.com\");"
-  - "google/cloud/bigtable/app_profile_config_test.cc:33:45      	declval 	U   	decltype(std::move(std::declval<AppProfileConfig>()"
   - "google/cloud/bigtable/app_profile_config_test.cc:101:51     	xyzzy   	U   	ofileUpdateConfig().set_etag(\"xyzzy\").as_proto();"
   - "google/cloud/bigtable/async_read_stream_test.cc:29:11   	btproto     	U   	namespace btproto = ::google::bigtable"
   - "google/cloud/bigtable/async_read_stream_test.cc:153:24  	callables   	U   	streaming read RPC callables."
@@ -620,7 +619,6 @@ issues:
   - "google/cloud/pubsub/internal/subscription_session_test.cc:154:37    	acking  	U   	Increment the counter before acking, as the ack() may trigger"
   - "google/cloud/pubsub/message.cc:51:34    	Differencer 	U   	protobuf::util::MessageDifferencer diff;"
   - "google/cloud/pubsub/samples/samples.cc:773:36   	pfile   	U   	constexpr kDefinition = R\"pfile("
-  - "google/cloud/pubsub/schema_admin_connection.h:38:38     	cppref  	U   	models an [input range][cppref-input-range] of"
   - "google/cloud/pubsub/subscription_builder_test.cc:31:31      	Oidc	U   	SubscriptionBuilder, MakeOidcToken) {"
   - "google/cloud/pubsub/subscription_builder_test.cc:152:9      	oidc	U   	oidc_token {"
   - "google/cloud/pubsublite/admin_client.h:19:39    	PUBSUBLITE  	U   	CLOUD_CPP_GOOGLE_CLOUD_PUBSUBLITE_ADMIN_CLIENT_H"
