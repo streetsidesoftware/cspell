@@ -193,9 +193,7 @@ export function normalizeGlobToRoot<Glob extends GlobPatternWithRoot>(
         return path.sep === '\\' ? relativePath.replace(/\\/g, '/') : relativePath;
     }
 
-    assert('isGlobalPattern' in glob);
-
-    if (glob.root === root) {
+    if (glob.root === root || glob.isGlobalPattern) {
         return glob;
     }
 
