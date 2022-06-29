@@ -322,7 +322,7 @@ export class DocumentValidator {
 
     private _parse(): Iterable<ParsedText> {
         assert(this._preparations, ERROR_NOT_PREPARED);
-        const parser = this._preparations.finalSettings.parser;
+        const parser = this._preparations.finalSettings.parserFn;
         if (typeof parser !== 'object') return this.defaultParser();
         return parser.parse(this.document.text, this.document.uri.path).parsedTexts;
     }

@@ -988,7 +988,7 @@ export interface ExperimentalBaseSettings {
      * @experimental
      * @version 6.2.0
      */
-    parser?: ParserName | Parser | undefined;
+    parser?: ParserName | undefined;
 }
 
 /**

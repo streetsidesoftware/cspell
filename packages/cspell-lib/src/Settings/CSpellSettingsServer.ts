@@ -274,7 +274,7 @@ function _finalizeSettings(settings: CSpellSettingsI): CSpellSettingsInternalFin
         finalized: true,
         ignoreRegExpList: resolvePatterns(settings.ignoreRegExpList, settings.patterns),
         includeRegExpList: resolvePatterns(settings.includeRegExpList, settings.patterns),
-        parser: resolveParser(settings),
+        parserFn: resolveParser(settings),
     };
 
     finalized.name = 'Finalized ' + (finalized.name || '');
