@@ -1,7 +1,7 @@
 import type { DictionaryInformation } from './DictionaryInformation';
 import type { Features } from './features';
 import { Parser, ParserName } from './Parser';
-import { Serialize, Serializable } from './types';
+import { Serializable } from './types';
 
 export type ReplaceEntry = [string, string];
 export type ReplaceMap = ReplaceEntry[];
