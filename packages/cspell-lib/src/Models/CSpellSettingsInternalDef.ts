@@ -1,4 +1,5 @@
 import {
+    AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
     DictionaryDefinitionAugmented,
     DictionaryDefinitionCustom,
@@ -11,7 +12,7 @@ import { clean } from '../util/util';
 
 export const SymbolCSpellSettingsInternal = Symbol('CSpellSettingsInternal');
 
-export interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
+export interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
     [SymbolCSpellSettingsInternal]: true;
     dictionaryDefinitions?: DictionaryDefinitionInternal[];
 }

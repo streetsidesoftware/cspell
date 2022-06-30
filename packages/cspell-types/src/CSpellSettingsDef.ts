@@ -1,6 +1,7 @@
 import type { DictionaryInformation } from './DictionaryInformation';
 import type { Features } from './features';
 import { Parser, ParserName } from './Parser';
+import { Serialize, Serializable } from './types';
 
 export type ReplaceEntry = [string, string];
 export type ReplaceMap = ReplaceEntry[];
@@ -12,13 +13,7 @@ export type CSpellPackageSettings = CSpellUserSettings;
 
 export type CSpellUserSettings = CSpellSettings;
 
-export interface CSpellSettings extends FileSettings, LegacySettings {
-    /**
-     * Url to JSON Schema
-     * @default "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json"
-     */
-    $schema?: string;
-}
+export interface CSpellSettings extends FileSettings, LegacySettings {}
 
 export interface ImportFileRef {
     filename: string;
@@ -32,7 +27,17 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
     __imports?: Map<string, ImportFileRef>;
 }
 
-export interface FileSettings extends ExtendableSettings, CommandLineSettings, ExperimentalFileSettings {
+export interface AdvancedCSpellSettingsWithSourceTrace
+    extends CSpellSettingsWithSourceTrace,
+        ExperimentalFileSettings {}
+
+export interface FileSettings extends ExtendableSettings, CommandLineSettings {
+    /**
+     * Url to JSON Schema
+     * @default "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json"
+     */
+    $schema?: string;
+
     /**
      * Configuration format version of the settings file.
      *
@@ -957,7 +962,7 @@ interface BaseSource {
 /**
  * Reporter name or reporter name + reporter config.
  */
-export type ReporterSettings = string | [string] | [string, unknown];
+export type ReporterSettings = string | [string] | [string, Serializable];
 
 /**
  * Experimental Configuration / Options
@@ -972,8 +977,15 @@ export interface ExperimentalFileSettings {
      * @experimental
      * @version 6.2.0
      */
-    plugins?: Plugin[] | undefined;
+    plugins?: Plugin[];
 }
+
+/**
+ * Extends CSpellSettings with ExperimentalFileSettings
+ * @experimental
+ * @hidden
+ */
+export interface AdvancedCSpellSettings extends CSpellSettings, ExperimentalFileSettings {}
 
 /**
  * Experimental Configuration / Options
@@ -988,7 +1000,7 @@ export interface ExperimentalBaseSettings {
      * @experimental
      * @version 6.2.0
      */
-    parser?: ParserName | undefined;
+    parser?: ParserName;
 }
 
 /**
@@ -997,5 +1009,5 @@ export interface ExperimentalBaseSettings {
  * @version 6.2.0
  */
 export interface Plugin {
-    parsers?: Parser[] | undefined;
+    parsers?: Parser[];
 }

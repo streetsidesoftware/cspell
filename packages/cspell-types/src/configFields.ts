@@ -55,7 +55,6 @@ export const ConfigFields: CSpellUserSettingsFields = {
 
     // Experimental
     parser: 'parser',
-    plugins: 'plugins',
 };
 
 // export const ConfigKeysNames = Object.values(ConfigKeysByField);
