@@ -1,70 +1,72 @@
-[@cspell/cspell-types](../README.md) / [Exports](../modules.md) / CSpellSettings
+[@cspell/cspell-types](../README.md) / [Exports](../modules.md) / AdvancedCSpellSettingsWithSourceTrace
 
-# Interface: CSpellSettings
+# Interface: AdvancedCSpellSettingsWithSourceTrace
 
 ## Hierarchy
 
-- [`FileSettings`](FileSettings.md)
+- [`CSpellSettingsWithSourceTrace`](CSpellSettingsWithSourceTrace.md)
 
-- [`LegacySettings`](LegacySettings.md)
+- `ExperimentalFileSettings`
 
-  ↳ **`CSpellSettings`**
-
-  ↳↳ [`CSpellSettingsWithSourceTrace`](CSpellSettingsWithSourceTrace.md)
+  ↳ **`AdvancedCSpellSettingsWithSourceTrace`**
 
 ## Table of contents
 
 ### Properties
 
-- [$schema](CSpellSettings.md#$schema)
-- [allowCompoundWords](CSpellSettings.md#allowcompoundwords)
-- [cache](CSpellSettings.md#cache)
-- [caseSensitive](CSpellSettings.md#casesensitive)
-- [description](CSpellSettings.md#description)
-- [dictionaries](CSpellSettings.md#dictionaries)
-- [dictionaryDefinitions](CSpellSettings.md#dictionarydefinitions)
-- [enableFiletypes](CSpellSettings.md#enablefiletypes)
-- [enableGlobDot](CSpellSettings.md#enableglobdot)
-- [enabled](CSpellSettings.md#enabled)
-- [enabledLanguageIds](CSpellSettings.md#enabledlanguageids)
-- [failFast](CSpellSettings.md#failfast)
-- [features](CSpellSettings.md#features)
-- [files](CSpellSettings.md#files)
-- [flagWords](CSpellSettings.md#flagwords)
-- [gitignoreRoot](CSpellSettings.md#gitignoreroot)
-- [globRoot](CSpellSettings.md#globroot)
-- [id](CSpellSettings.md#id)
-- [ignorePaths](CSpellSettings.md#ignorepaths)
-- [ignoreRegExpList](CSpellSettings.md#ignoreregexplist)
-- [ignoreWords](CSpellSettings.md#ignorewords)
-- [import](CSpellSettings.md#import)
-- [includeRegExpList](CSpellSettings.md#includeregexplist)
-- [language](CSpellSettings.md#language)
-- [languageId](CSpellSettings.md#languageid)
-- [languageSettings](CSpellSettings.md#languagesettings)
-- [loadDefaultConfiguration](CSpellSettings.md#loaddefaultconfiguration)
-- [maxDuplicateProblems](CSpellSettings.md#maxduplicateproblems)
-- [maxNumberOfProblems](CSpellSettings.md#maxnumberofproblems)
-- [minWordLength](CSpellSettings.md#minwordlength)
-- [name](CSpellSettings.md#name)
-- [noConfigSearch](CSpellSettings.md#noconfigsearch)
-- [noSuggestDictionaries](CSpellSettings.md#nosuggestdictionaries)
-- [numSuggestions](CSpellSettings.md#numsuggestions)
-- [overrides](CSpellSettings.md#overrides)
-- [parser](CSpellSettings.md#parser)
-- [patterns](CSpellSettings.md#patterns)
-- [pnpFiles](CSpellSettings.md#pnpfiles)
-- [readonly](CSpellSettings.md#readonly)
-- [reporters](CSpellSettings.md#reporters)
-- [showStatus](CSpellSettings.md#showstatus)
-- [spellCheckDelayMs](CSpellSettings.md#spellcheckdelayms)
-- [suggestionNumChanges](CSpellSettings.md#suggestionnumchanges)
-- [suggestionsTimeout](CSpellSettings.md#suggestionstimeout)
-- [useGitignore](CSpellSettings.md#usegitignore)
-- [usePnP](CSpellSettings.md#usepnp)
-- [userWords](CSpellSettings.md#userwords)
-- [version](CSpellSettings.md#version)
-- [words](CSpellSettings.md#words)
+- [$schema](AdvancedCSpellSettingsWithSourceTrace.md#$schema)
+- [\_\_importRef](AdvancedCSpellSettingsWithSourceTrace.md#__importref)
+- [\_\_imports](AdvancedCSpellSettingsWithSourceTrace.md#__imports)
+- [allowCompoundWords](AdvancedCSpellSettingsWithSourceTrace.md#allowcompoundwords)
+- [cache](AdvancedCSpellSettingsWithSourceTrace.md#cache)
+- [caseSensitive](AdvancedCSpellSettingsWithSourceTrace.md#casesensitive)
+- [description](AdvancedCSpellSettingsWithSourceTrace.md#description)
+- [dictionaries](AdvancedCSpellSettingsWithSourceTrace.md#dictionaries)
+- [dictionaryDefinitions](AdvancedCSpellSettingsWithSourceTrace.md#dictionarydefinitions)
+- [enableFiletypes](AdvancedCSpellSettingsWithSourceTrace.md#enablefiletypes)
+- [enableGlobDot](AdvancedCSpellSettingsWithSourceTrace.md#enableglobdot)
+- [enabled](AdvancedCSpellSettingsWithSourceTrace.md#enabled)
+- [enabledLanguageIds](AdvancedCSpellSettingsWithSourceTrace.md#enabledlanguageids)
+- [failFast](AdvancedCSpellSettingsWithSourceTrace.md#failfast)
+- [features](AdvancedCSpellSettingsWithSourceTrace.md#features)
+- [files](AdvancedCSpellSettingsWithSourceTrace.md#files)
+- [flagWords](AdvancedCSpellSettingsWithSourceTrace.md#flagwords)
+- [gitignoreRoot](AdvancedCSpellSettingsWithSourceTrace.md#gitignoreroot)
+- [globRoot](AdvancedCSpellSettingsWithSourceTrace.md#globroot)
+- [id](AdvancedCSpellSettingsWithSourceTrace.md#id)
+- [ignorePaths](AdvancedCSpellSettingsWithSourceTrace.md#ignorepaths)
+- [ignoreRegExpList](AdvancedCSpellSettingsWithSourceTrace.md#ignoreregexplist)
+- [ignoreWords](AdvancedCSpellSettingsWithSourceTrace.md#ignorewords)
+- [import](AdvancedCSpellSettingsWithSourceTrace.md#import)
+- [includeRegExpList](AdvancedCSpellSettingsWithSourceTrace.md#includeregexplist)
+- [language](AdvancedCSpellSettingsWithSourceTrace.md#language)
+- [languageId](AdvancedCSpellSettingsWithSourceTrace.md#languageid)
+- [languageSettings](AdvancedCSpellSettingsWithSourceTrace.md#languagesettings)
+- [loadDefaultConfiguration](AdvancedCSpellSettingsWithSourceTrace.md#loaddefaultconfiguration)
+- [maxDuplicateProblems](AdvancedCSpellSettingsWithSourceTrace.md#maxduplicateproblems)
+- [maxNumberOfProblems](AdvancedCSpellSettingsWithSourceTrace.md#maxnumberofproblems)
+- [minWordLength](AdvancedCSpellSettingsWithSourceTrace.md#minwordlength)
+- [name](AdvancedCSpellSettingsWithSourceTrace.md#name)
+- [noConfigSearch](AdvancedCSpellSettingsWithSourceTrace.md#noconfigsearch)
+- [noSuggestDictionaries](AdvancedCSpellSettingsWithSourceTrace.md#nosuggestdictionaries)
+- [numSuggestions](AdvancedCSpellSettingsWithSourceTrace.md#numsuggestions)
+- [overrides](AdvancedCSpellSettingsWithSourceTrace.md#overrides)
+- [parser](AdvancedCSpellSettingsWithSourceTrace.md#parser)
+- [patterns](AdvancedCSpellSettingsWithSourceTrace.md#patterns)
+- [plugins](AdvancedCSpellSettingsWithSourceTrace.md#plugins)
+- [pnpFiles](AdvancedCSpellSettingsWithSourceTrace.md#pnpfiles)
+- [readonly](AdvancedCSpellSettingsWithSourceTrace.md#readonly)
+- [reporters](AdvancedCSpellSettingsWithSourceTrace.md#reporters)
+- [showStatus](AdvancedCSpellSettingsWithSourceTrace.md#showstatus)
+- [source](AdvancedCSpellSettingsWithSourceTrace.md#source)
+- [spellCheckDelayMs](AdvancedCSpellSettingsWithSourceTrace.md#spellcheckdelayms)
+- [suggestionNumChanges](AdvancedCSpellSettingsWithSourceTrace.md#suggestionnumchanges)
+- [suggestionsTimeout](AdvancedCSpellSettingsWithSourceTrace.md#suggestionstimeout)
+- [useGitignore](AdvancedCSpellSettingsWithSourceTrace.md#usegitignore)
+- [usePnP](AdvancedCSpellSettingsWithSourceTrace.md#usepnp)
+- [userWords](AdvancedCSpellSettingsWithSourceTrace.md#userwords)
+- [version](AdvancedCSpellSettingsWithSourceTrace.md#version)
+- [words](AdvancedCSpellSettingsWithSourceTrace.md#words)
 
 ## Properties
 
@@ -78,11 +80,39 @@ Url to JSON Schema
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[$schema](FileSettings.md#$schema)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[$schema](CSpellSettingsWithSourceTrace.md#$schema)
 
 #### Defined in
 
 [CSpellSettingsDef.ts:39](https://github.com/streetsidesoftware/cspell/blob/e5b7f09/packages/cspell-types/src/CSpellSettingsDef.ts#L39)
+
+___
+
+### \_\_importRef
+
+• `Optional` **\_\_importRef**: [`ImportFileRef`](ImportFileRef.md)
+
+#### Inherited from
+
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[__importRef](CSpellSettingsWithSourceTrace.md#__importref)
+
+#### Defined in
+
+[CSpellSettingsDef.ts:26](https://github.com/streetsidesoftware/cspell/blob/e5b7f09/packages/cspell-types/src/CSpellSettingsDef.ts#L26)
+
+___
+
+### \_\_imports
+
+• `Optional` **\_\_imports**: `Map`<`string`, [`ImportFileRef`](ImportFileRef.md)\>
+
+#### Inherited from
+
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[__imports](CSpellSettingsWithSourceTrace.md#__imports)
+
+#### Defined in
+
+[CSpellSettingsDef.ts:27](https://github.com/streetsidesoftware/cspell/blob/e5b7f09/packages/cspell-types/src/CSpellSettingsDef.ts#L27)
 
 ___
 
@@ -96,7 +126,7 @@ True to enable compound word checking. See [Case Sensitivity](https://cspell.org
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[allowCompoundWords](FileSettings.md#allowcompoundwords)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[allowCompoundWords](CSpellSettingsWithSourceTrace.md#allowcompoundwords)
 
 #### Defined in
 
@@ -112,7 +142,7 @@ Define cache settings.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[cache](FileSettings.md#cache)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[cache](CSpellSettingsWithSourceTrace.md#cache)
 
 #### Defined in
 
@@ -134,7 +164,7 @@ Determines if words must match case and accent rules.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[caseSensitive](FileSettings.md#casesensitive)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[caseSensitive](CSpellSettingsWithSourceTrace.md#casesensitive)
 
 #### Defined in
 
@@ -150,7 +180,7 @@ Optional description of configuration.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[description](FileSettings.md#description)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[description](CSpellSettingsWithSourceTrace.md#description)
 
 #### Defined in
 
@@ -173,7 +203,7 @@ and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[dictionaries](FileSettings.md#dictionaries)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[dictionaries](CSpellSettingsWithSourceTrace.md#dictionaries)
 
 #### Defined in
 
@@ -198,7 +228,7 @@ For example, you can use the following to add a custom dictionary:
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[dictionaryDefinitions](FileSettings.md#dictionarydefinitions)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[dictionaryDefinitions](CSpellSettingsWithSourceTrace.md#dictionarydefinitions)
 
 #### Defined in
 
@@ -230,7 +260,7 @@ kotlin      // enable checking for kotlin
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[enableFiletypes](FileSettings.md#enablefiletypes)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[enableFiletypes](CSpellSettingsWithSourceTrace.md#enablefiletypes)
 
 #### Defined in
 
@@ -250,7 +280,7 @@ By default, CSpell does not scan `hidden` files.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[enableGlobDot](FileSettings.md#enableglobdot)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[enableGlobDot](CSpellSettingsWithSourceTrace.md#enableglobdot)
 
 #### Defined in
 
@@ -268,7 +298,7 @@ Is the spell checker enabled.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[enabled](FileSettings.md#enabled)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[enabled](CSpellSettingsWithSourceTrace.md#enabled)
 
 #### Defined in
 
@@ -284,7 +314,7 @@ languageIds for the files to spell check.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[enabledLanguageIds](FileSettings.md#enabledlanguageids)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[enabledLanguageIds](CSpellSettingsWithSourceTrace.md#enabledlanguageids)
 
 #### Defined in
 
@@ -302,7 +332,7 @@ Exit with non-zero code as soon as an issue/error is encountered (useful for CI 
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[failFast](FileSettings.md#failfast)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[failFast](CSpellSettingsWithSourceTrace.md#failfast)
 
 #### Defined in
 
@@ -320,7 +350,7 @@ Configure CSpell features.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[features](FileSettings.md#features)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[features](CSpellSettingsWithSourceTrace.md#features)
 
 #### Defined in
 
@@ -338,7 +368,7 @@ Glob patterns are relative to the `globRoot` of the configuration file that defi
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[files](FileSettings.md#files)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[files](CSpellSettingsWithSourceTrace.md#files)
 
 #### Defined in
 
@@ -354,7 +384,7 @@ List of words to always be considered incorrect.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[flagWords](FileSettings.md#flagwords)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[flagWords](CSpellSettingsWithSourceTrace.md#flagwords)
 
 #### Defined in
 
@@ -370,7 +400,7 @@ Tells the spell checker to searching for `.gitignore` files when it reaches a ma
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[gitignoreRoot](FileSettings.md#gitignoreroot)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[gitignoreRoot](CSpellSettingsWithSourceTrace.md#gitignoreroot)
 
 #### Defined in
 
@@ -397,7 +427,7 @@ Special Values:
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[globRoot](FileSettings.md#globroot)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[globRoot](CSpellSettingsWithSourceTrace.md#globroot)
 
 #### Defined in
 
@@ -413,7 +443,7 @@ Optional identifier.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[id](FileSettings.md#id)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[id](CSpellSettingsWithSourceTrace.md#id)
 
 #### Defined in
 
@@ -431,7 +461,7 @@ Glob patterns are relative to the `globRoot` of the configuration file that defi
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[ignorePaths](FileSettings.md#ignorepaths)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[ignorePaths](CSpellSettingsWithSourceTrace.md#ignorepaths)
 
 #### Defined in
 
@@ -455,7 +485,7 @@ While you can create your own patterns, you can also leverage several patterns t
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[ignoreRegExpList](FileSettings.md#ignoreregexplist)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[ignoreRegExpList](CSpellSettingsWithSourceTrace.md#ignoreregexplist)
 
 #### Defined in
 
@@ -472,7 +502,7 @@ also in the `flagWords`.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[ignoreWords](FileSettings.md#ignorewords)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[ignoreWords](CSpellSettingsWithSourceTrace.md#ignorewords)
 
 #### Defined in
 
@@ -490,7 +520,7 @@ See [Importing / Extending Configuration](https://cspell.org/configuration/impor
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[import](FileSettings.md#import)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[import](CSpellSettingsWithSourceTrace.md#import)
 
 #### Defined in
 
@@ -511,7 +541,7 @@ While you can create your own patterns, you can also leverage several patterns t
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[includeRegExpList](FileSettings.md#includeregexplist)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[includeRegExpList](CSpellSettingsWithSourceTrace.md#includeregexplist)
 
 #### Defined in
 
@@ -535,7 +565,7 @@ For example:
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[language](FileSettings.md#language)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[language](CSpellSettingsWithSourceTrace.md#language)
 
 #### Defined in
 
@@ -551,7 +581,7 @@ Forces the spell checker to assume a give language id. Used mainly as an Overrid
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[languageId](FileSettings.md#languageid)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[languageId](CSpellSettingsWithSourceTrace.md#languageid)
 
 #### Defined in
 
@@ -569,7 +599,7 @@ See [Language Settings](https://cspell.org/configuration/language-settings/) for
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[languageSettings](FileSettings.md#languagesettings)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[languageSettings](CSpellSettingsWithSourceTrace.md#languagesettings)
 
 #### Defined in
 
@@ -588,7 +618,7 @@ will prevent ALL default configuration from being loaded.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[loadDefaultConfiguration](FileSettings.md#loaddefaultconfiguration)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[loadDefaultConfiguration](CSpellSettingsWithSourceTrace.md#loaddefaultconfiguration)
 
 #### Defined in
 
@@ -606,7 +636,7 @@ The maximum number of times the same word can be flagged as an error in a file.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[maxDuplicateProblems](FileSettings.md#maxduplicateproblems)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[maxDuplicateProblems](CSpellSettingsWithSourceTrace.md#maxduplicateproblems)
 
 #### Defined in
 
@@ -624,7 +654,7 @@ The maximum number of problems to report in a file.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[maxNumberOfProblems](FileSettings.md#maxnumberofproblems)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[maxNumberOfProblems](CSpellSettingsWithSourceTrace.md#maxnumberofproblems)
 
 #### Defined in
 
@@ -642,7 +672,7 @@ The minimum length of a word before checking it against a dictionary.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[minWordLength](FileSettings.md#minwordlength)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[minWordLength](CSpellSettingsWithSourceTrace.md#minwordlength)
 
 #### Defined in
 
@@ -658,7 +688,7 @@ Optional name of configuration.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[name](FileSettings.md#name)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[name](CSpellSettingsWithSourceTrace.md#name)
 
 #### Defined in
 
@@ -676,7 +706,7 @@ Prevents searching for local configuration when checking individual documents.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[noConfigSearch](FileSettings.md#noconfigsearch)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[noConfigSearch](CSpellSettingsWithSourceTrace.md#noconfigsearch)
 
 #### Defined in
 
@@ -698,7 +728,7 @@ possible suggestions.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[noSuggestDictionaries](FileSettings.md#nosuggestdictionaries)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[noSuggestDictionaries](CSpellSettingsWithSourceTrace.md#nosuggestdictionaries)
 
 #### Defined in
 
@@ -716,7 +746,7 @@ Number of suggestions to make.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[numSuggestions](FileSettings.md#numsuggestions)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[numSuggestions](CSpellSettingsWithSourceTrace.md#numsuggestions)
 
 #### Defined in
 
@@ -749,7 +779,7 @@ For example:
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[overrides](FileSettings.md#overrides)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[overrides](CSpellSettingsWithSourceTrace.md#overrides)
 
 #### Defined in
 
@@ -769,7 +799,7 @@ Parser to use for the file content
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[parser](FileSettings.md#parser)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[parser](CSpellSettingsWithSourceTrace.md#parser)
 
 #### Defined in
 
@@ -807,11 +837,31 @@ For example:
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[patterns](FileSettings.md#patterns)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[patterns](CSpellSettingsWithSourceTrace.md#patterns)
 
 #### Defined in
 
 [CSpellSettingsDef.ts:538](https://github.com/streetsidesoftware/cspell/blob/e5b7f09/packages/cspell-types/src/CSpellSettingsDef.ts#L538)
+
+___
+
+### plugins
+
+• `Optional` **plugins**: [`Plugin`](Plugin.md)[]
+
+Future Plugin support
+
+**`experimental`**
+
+**`version`** 6.2.0
+
+#### Inherited from
+
+ExperimentalFileSettings.plugins
+
+#### Defined in
+
+[CSpellSettingsDef.ts:980](https://github.com/streetsidesoftware/cspell/blob/e5b7f09/packages/cspell-types/src/CSpellSettingsDef.ts#L980)
 
 ___
 
@@ -825,7 +875,7 @@ The PnP files to search for. Note: `.mjs` files are not currently supported.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[pnpFiles](FileSettings.md#pnpfiles)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[pnpFiles](CSpellSettingsWithSourceTrace.md#pnpfiles)
 
 #### Defined in
 
@@ -845,7 +895,7 @@ modifying the file to add words and other configuration.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[readonly](FileSettings.md#readonly)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[readonly](CSpellSettingsWithSourceTrace.md#readonly)
 
 #### Defined in
 
@@ -861,7 +911,7 @@ Custom reporters configuration.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[reporters](FileSettings.md#reporters)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[reporters](CSpellSettingsWithSourceTrace.md#reporters)
 
 #### Defined in
 
@@ -879,11 +929,25 @@ Show status.
 
 #### Inherited from
 
-[LegacySettings](LegacySettings.md).[showStatus](LegacySettings.md#showstatus)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[showStatus](CSpellSettingsWithSourceTrace.md#showstatus)
 
 #### Defined in
 
 [CSpellSettingsDef.ts:384](https://github.com/streetsidesoftware/cspell/blob/e5b7f09/packages/cspell-types/src/CSpellSettingsDef.ts#L384)
+
+___
+
+### source
+
+• `Optional` **source**: [`Source`](../modules.md#source)
+
+#### Inherited from
+
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[source](CSpellSettingsWithSourceTrace.md#source)
+
+#### Defined in
+
+[CSpellSettingsDef.ts:25](https://github.com/streetsidesoftware/cspell/blob/e5b7f09/packages/cspell-types/src/CSpellSettingsDef.ts#L25)
 
 ___
 
@@ -897,7 +961,7 @@ Delay in ms after a document has changed before checking it for spelling errors.
 
 #### Inherited from
 
-[LegacySettings](LegacySettings.md).[spellCheckDelayMs](LegacySettings.md#spellcheckdelayms)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[spellCheckDelayMs](CSpellSettingsWithSourceTrace.md#spellcheckdelayms)
 
 #### Defined in
 
@@ -919,7 +983,7 @@ Range: between 1 and 5.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[suggestionNumChanges](FileSettings.md#suggestionnumchanges)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[suggestionNumChanges](CSpellSettingsWithSourceTrace.md#suggestionnumchanges)
 
 #### Defined in
 
@@ -937,7 +1001,7 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[suggestionsTimeout](FileSettings.md#suggestionstimeout)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[suggestionsTimeout](CSpellSettingsWithSourceTrace.md#suggestionstimeout)
 
 #### Defined in
 
@@ -955,7 +1019,7 @@ Tells the spell checker to load `.gitignore` files and skip files that match the
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[useGitignore](FileSettings.md#usegitignore)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[useGitignore](CSpellSettingsWithSourceTrace.md#usegitignore)
 
 #### Defined in
 
@@ -977,7 +1041,7 @@ of a PnP file and load it.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[usePnP](FileSettings.md#usepnp)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[usePnP](CSpellSettingsWithSourceTrace.md#usepnp)
 
 #### Defined in
 
@@ -993,7 +1057,7 @@ Words to add to global dictionary -- should only be in the user config file.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[userWords](FileSettings.md#userwords)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[userWords](CSpellSettingsWithSourceTrace.md#userwords)
 
 #### Defined in
 
@@ -1013,7 +1077,7 @@ This controls how the settings in the configuration file behave.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[version](FileSettings.md#version)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[version](CSpellSettingsWithSourceTrace.md#version)
 
 #### Defined in
 
@@ -1029,7 +1093,7 @@ List of words to be always considered correct.
 
 #### Inherited from
 
-[FileSettings](FileSettings.md).[words](FileSettings.md#words)
+[CSpellSettingsWithSourceTrace](CSpellSettingsWithSourceTrace.md).[words](CSpellSettingsWithSourceTrace.md#words)
 
 #### Defined in
 
