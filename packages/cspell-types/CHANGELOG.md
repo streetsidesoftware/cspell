@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/streetsidesoftware/cspell/compare/v6.2.0-alpha.1...v6.2.0) (2022-06-30)
+
+
+### Bug Fixes
+
+* Pull out `plugins` to avoid conflict ([#3169](https://github.com/streetsidesoftware/cspell/issues/3169)) ([e5b7f09](https://github.com/streetsidesoftware/cspell/commit/e5b7f09a47ebcfb0a56df497644307cb6504acfc))
+
+
+
+
+
 # [6.2.0-alpha.1](https://github.com/streetsidesoftware/cspell/compare/v6.2.0-alpha.0...v6.2.0-alpha.1) (2022-06-29)
 
 
