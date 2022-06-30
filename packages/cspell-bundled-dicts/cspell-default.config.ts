@@ -1,9 +1,9 @@
 /* eslint-disable node/no-missing-import */
 /* eslint-disable import/no-unresolved */
-import type { CSpellSettings } from '@cspell/cspell-types';
+import type { AdvancedCSpellSettings } from '@cspell/cspell-types';
 import { parser as parserTypeScript } from 'cspell-grammar/parsers/typescript/index.js';
 
-const settings: CSpellSettings = {
+const settings: AdvancedCSpellSettings = {
     version: '0.2',
     name: 'cspell default settings .js',
     id: 'cspell-default-js',

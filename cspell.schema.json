@@ -1103,7 +1103,9 @@
             {
               "type": "string"
             },
-            {}
+            {
+              "$ref": "#/definitions/Serializable"
+            }
           ],
           "maxItems": 2,
           "minItems": 2,
@@ -1111,6 +1113,25 @@
         }
       ],
       "description": "Reporter name or reporter name + reporter config."
+    },
+    "Serializable": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "SimpleGlob": {
       "description": "Simple Glob string, the root will be globRoot.",

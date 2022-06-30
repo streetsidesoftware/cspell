@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -222,7 +222,7 @@ declare type OptionalOrUndefined<T> = {
 };
 
 declare const SymbolCSpellSettingsInternal: unique symbol;
-interface CSpellSettingsInternal extends Omit<CSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
+interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
     [SymbolCSpellSettingsInternal]: true;
     dictionaryDefinitions?: DictionaryDefinitionInternal[];
 }
@@ -476,8 +476,8 @@ interface ImportFileRefWithError$1 extends ImportFileRef {
 }
 declare function extractImportErrors(settings: CSpellSettingsWST$1): ImportFileRefWithError$1[];
 
-declare type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
-declare type CSpellSettingsWSTO = OptionalOrUndefined<CSpellSettingsWithSourceTrace>;
+declare type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
+declare type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 declare type CSpellSettingsI = CSpellSettingsInternal;
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";

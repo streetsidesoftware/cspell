@@ -1,4 +1,5 @@
 import type {
+    AdvancedCSpellSettingsWithSourceTrace,
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
     Glob,
@@ -21,8 +22,8 @@ import * as util from '../util/util';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';
 import { resolvePatterns } from './patterns';
 
-type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
-type CSpellSettingsWSTO = OptionalOrUndefined<CSpellSettingsWithSourceTrace>;
+type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
+type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 type CSpellSettingsI = CSpellSettingsInternal;
 
 export const configSettingsFileVersion0_1 = '0.1';
