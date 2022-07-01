@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.2.2](https://github.com/streetsidesoftware/cspell/compare/v6.2.1...v6.2.2) (2022-07-01)
+
+
+### Bug Fixes
+
+* Do not late bind parsers ([#3175](https://github.com/streetsidesoftware/cspell/issues/3175)) ([d71607c](https://github.com/streetsidesoftware/cspell/commit/d71607caf7b12c813b01eb80b11376c465f03369))
+
+
+
+
+
 ## [6.2.1](https://github.com/streetsidesoftware/cspell/compare/v6.2.0...v6.2.1) (2022-07-01)
 
 **Note:** Version bump only for package cspell-grammar
