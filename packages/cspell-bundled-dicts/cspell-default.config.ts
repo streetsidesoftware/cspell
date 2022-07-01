@@ -1,7 +1,4 @@
-/* eslint-disable node/no-missing-import */
-/* eslint-disable import/no-unresolved */
 import type { AdvancedCSpellSettings } from '@cspell/cspell-types';
-import { parser as parserTypeScript } from 'cspell-grammar/parsers/typescript/index.js';
 
 const settings: AdvancedCSpellSettings = {
     version: '0.2',
@@ -137,11 +134,6 @@ const settings: AdvancedCSpellSettings = {
         '@cspell/dict-swift/cspell-ext.json',
         '@cspell/dict-typescript/cspell-ext.json',
         '@cspell/dict-vue/cspell-ext.json',
-    ],
-    plugins: [
-        {
-            parsers: [parserTypeScript],
-        },
     ],
 };
 
