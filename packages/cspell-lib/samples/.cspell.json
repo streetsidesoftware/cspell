@@ -7,26 +7,13 @@
     "language": "en",
     "allowCompoundWords": false,
     // words - list of words to be always considered correct
-    "words": [
-        "gensequence",
-        "xregexp",
-        "sampletrace",
-        "findall"
-    ],
+    "words": ["gensequence", "xregexp", "sampletrace", "findall"],
     "maxNumberOfProblems": 10000,
-    "ignorePaths": [
-        "dictionaries/**",
-        "node_modules/**",
-        "vscode-extension/**",
-        ".git/**",
-        ".vscode/**"
-    ],
+    "ignorePaths": ["dictionaries/**", "node_modules/**", "vscode-extension/**", ".git/**", ".vscode/**"],
     // flagWords - list of words to be always considered incorrect
     // This is useful for offensive words and common spelling errors.
     // For example "hte" should be "the"
-    "flagWords": [
-        "hte"
-    ],
+    "flagWords": ["hte"],
     "dictionaryDefinitions": [
         {
             "name": "local words",
@@ -37,9 +24,7 @@
             "path": "./.missing.txt"
         }
     ],
-    "dictionaries": [
-        "local words"
-    ],
+    "dictionaries": ["local words"],
     "languageSettings": [
         {
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
@@ -50,14 +35,9 @@
             "locale": "*",
             // By default the whole text of a file is included for spell checking
             // Adding patterns to the "includeRegExpList" to only include matching patterns
-            "includeRegExpList": [
-                "CStyleComment",
-                "string"
-            ],
+            "includeRegExpList": ["CStyleComment", "string"],
             // To exclude patterns, add them to "ignoreRegExpList"
-            "ignoreRegExpList": [
-                "/#include.*/"
-            ],
+            "ignoreRegExpList": ["/#include.*/"],
             // regex patterns than can be used with ignoreRegExpList or includeRegExpList
             // Example: "pattern": [{ "name": "mdash", "pattern": "&mdash;" }]
             // This could be included in "ignoreRegExpList": ["mdash"]
@@ -68,9 +48,7 @@
                 }
             ],
             // List of dictionaries to enable by name in `dictionaryDefinitions`
-            "dictionaries": [
-                "cpp"
-            ],
+            "dictionaries": ["cpp"],
             // Dictionary definitions can also be supplied here. They are only used iff "languageId" and "local" match.
             "dictionaryDefinitions": []
         },
@@ -83,15 +61,11 @@
     "overrides": [
         {
             "filename": "**/{*.py}",
-            "ignoreRegExpList": [
-                "/'s\\b/"
-            ]
+            "ignoreRegExpList": ["/'s\\b/"]
         },
         {
             "filename": "**/{*.c,*.cpp}",
-            "ignoreRegExpList": [
-                "/'s\\b/"
-            ]
+            "ignoreRegExpList": ["/'s\\b/"]
         },
         // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
         {
@@ -99,7 +73,6 @@
             "filename": "**/dutch/*.txt"
         }
     ],
-    "import": [
-        "@cspell/dict-nl-nl/cspell-ext.json"
-    ]
+    "import": ["@cspell/dict-nl-nl/cspell-ext.json", "./overrides/cspell.json"]
 }
+// cspell:ignore hte mdash

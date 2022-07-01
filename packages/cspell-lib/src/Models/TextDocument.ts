@@ -2,6 +2,7 @@ import { getLanguagesForBasename } from '../LanguageIds';
 import * as Uri from './Uri';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 import assert from 'assert';
+import { promises as fs } from 'fs';
 
 export type DocumentUri = Uri.Uri;
 
@@ -190,6 +191,13 @@ export function updateTextDocument(
 
 function isTextDocumentImpl(doc: TextDocument | unknown): doc is TextDocumentImpl {
     return doc instanceof TextDocumentImpl;
+}
+
+export async function loadTextDocument(filename: string | DocumentUri, languageId?: string): Promise<TextDocument> {
+    const uri = Uri.toUri(filename);
+    const content = await fs.readFile(uri.fsPath, 'utf8');
+
+    return createTextDocument({ uri, languageId, content });
 }
 
 export const isTextDocument: (doc: TextDocument | unknown) => doc is TextDocument = isTextDocumentImpl;
