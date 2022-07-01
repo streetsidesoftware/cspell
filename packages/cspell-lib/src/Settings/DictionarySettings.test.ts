@@ -113,10 +113,6 @@ describe('Validate DictionarySettings', () => {
 
         const normalizedDef2 = DictSettings.mapDictDefToInternal(normalizedDef, configFile);
         expect(normalizedDef2).toBe(normalizedDef);
-
-        expect(() => DictSettings.mapDictDefToInternal(normalizedDef, './different.config.json')).toThrowError(
-            'Trying to normalize a dictionary definition with a different source.'
-        );
     });
 
     test.each`
