@@ -79,9 +79,6 @@ export function mapDictDefToInternal(
     pathToSettingsFile: string
 ): DictionaryDefinitionInternalWithSource {
     if (isDictionaryDefinitionWithSource(def)) {
-        if (def.__source !== pathToSettingsFile) {
-            throw new Error('Trying to normalize a dictionary definition with a different source.');
-        }
         return def;
     }
 
