@@ -1,5 +1,4 @@
 "use strict";
-const index_js_1 = require("cspell-grammar/parsers/typescript/index.js");
 const settings = {
     version: '0.2',
     name: 'cspell default settings .js',
@@ -133,11 +132,6 @@ const settings = {
         '@cspell/dict-swift/cspell-ext.json',
         '@cspell/dict-typescript/cspell-ext.json',
         '@cspell/dict-vue/cspell-ext.json',
-    ],
-    plugins: [
-        {
-            parsers: [index_js_1.parser],
-        },
     ],
 };
 module.exports = settings;

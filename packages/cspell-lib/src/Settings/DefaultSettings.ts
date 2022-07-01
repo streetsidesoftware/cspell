@@ -1,4 +1,5 @@
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
+import { parsers } from 'cspell-grammar';
 import { createCSpellSettingsInternal, CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { PatternRegExp } from '../Models/PatternRegExp';
 import { resolveFile } from '../util/resolveFile';
@@ -103,6 +104,7 @@ export const _defaultSettingsBasis: Readonly<CSpellSettingsInternal> = Object.fr
         languageSettings: [],
         source: { name: 'defaultSettings' },
         reporters: [],
+        plugins: [{ parsers }],
     })
 );
 
