@@ -3,7 +3,9 @@ Repository: wireapp/wire-desktop
 Url: "https://github.com/wireapp/wire-desktop.git"
 Args: ["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]
 Lines:
- CSpell: Files checked: 53, Issues found: 2 in 2 files
+ CSpell: Files checked: 53, Issues found: 4 in 3 files
  exit code: 1
 ./electron/renderer/src/components/Webview.jsx:244:9     - Unknown word (allowpopups) -- allowpopups="true"
-./electron/src/preload/preload-webview.ts:230:37    - Unknown word (polyfilling) -- This can be improved by polyfilling getDisplayMedia function
+./electron/src/main.ts:150:15    - Unknown word (mdns)       -- // do not use mdns for local ip obfuscation
+./electron/src/main.ts:151:73    - Unknown word (Mdns)       -- WebRtcHideLocalIpsWithMdns');
+./electron/src/preload/preload-webview.ts:229:37    - Unknown word (polyfilling) -- This can be improved by polyfilling getDisplayMedia function
