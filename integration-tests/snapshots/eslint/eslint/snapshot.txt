@@ -3,20 +3,20 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1756, Issues found: 5272 in 1210 files
+ CSpell: Files checked: 1756, Issues found: 5261 in 1210 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
-./Makefile.js:138:88    - Unknown word (ined)               -- followed by the string "ined".
-./Makefile.js:144:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
-./Makefile.js:280:12    - Unknown word (gensite)            -- target.gensite();
-./Makefile.js:306:8     - Unknown word (Premajor)           -- * Premajor release should have
-./Makefile.js:307:21    - Unknown word (prepatch)           -- * Preminor and prepatch release will not.
-./Makefile.js:307:8     - Unknown word (Preminor)           -- * Preminor and prepatch release
-./Makefile.js:315:56    - Unknown word (preminor)           -- a major release (not preminor/prepatch).
-./Makefile.js:547:11    - Unknown word (fuzzer)             -- const fuzzerRunner = require("./tools
-./Makefile.js:75:73     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8").split("
-./Makefile.js:79:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
-./Makefile.js:897:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
+./Makefile.js:139:88    - Unknown word (ined)               -- followed by the string "ined".
+./Makefile.js:145:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
+./Makefile.js:281:12    - Unknown word (gensite)            -- target.gensite();
+./Makefile.js:307:8     - Unknown word (Premajor)           -- * Premajor release should have
+./Makefile.js:308:21    - Unknown word (prepatch)           -- * Preminor and prepatch release will not.
+./Makefile.js:308:8     - Unknown word (Preminor)           -- * Preminor and prepatch release
+./Makefile.js:316:56    - Unknown word (preminor)           -- a major release (not preminor/prepatch).
+./Makefile.js:548:11    - Unknown word (fuzzer)             -- const fuzzerRunner = require("./tools
+./Makefile.js:76:88     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8")),
+./Makefile.js:80:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
+./Makefile.js:898:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
 ./README.md:210:5     - Unknown word (teamstart)  -- <!--teamstart-->
 ./README.md:216:38    - Unknown word (valign)     -- tr><td align="center" valign="top" width="11%">
 ./README.md:229:7     - Unknown word (Djermanovic) -- Milos Djermanovic
@@ -43,7 +43,7 @@ Lines:
 ./docs/README.md:23:4      - Unknown word (autofix)    -- To autofix JS files, run this from
 ./docs/package.json:25:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
 ./docs/package.json:26:10     - Unknown word (algoliasearch)   -- "algoliasearch": "^4.12.1",
-./docs/package.json:34:10     - Unknown word (luxon)           -- "luxon": "^2.4.0",
+./docs/package.json:35:10     - Unknown word (luxon)           -- "luxon": "^2.4.0",
 ./docs/src/about/index.md:12:146    - Unknown word (pluggable)  -- all rules completely pluggable. The default rules are
 ./docs/src/about/index.md:8:87      - Unknown word (Zakas)      -- created by Nicholas C. Zakas in June 2013. Code
 ./docs/src/assets/js/components-index.js:17:14     - Unknown word (toggleindex) -- function toggleindex(e) {
@@ -66,7 +66,7 @@ Lines:
 ./docs/src/assets/js/tabs.js:97:59     - Unknown word (tabpanel)   -- querySelectorAll("[data-tabpanel]"));
 ./docs/src/assets/js/tabs.js:97:9      - Unknown word (tabpanels)  -- var tabpanels = Array.from(el.querySelector
 ./docs/src/assets/scss/carbon-ads.scss:7:2       - Unknown word (carbonads)  -- #carbonads * {
-./docs/src/assets/scss/carbon-ads.scss:83:20     - Unknown word (poweredby)  -- #carbonads .carbon-poweredby {
+./docs/src/assets/scss/carbon-ads.scss:81:20     - Unknown word (poweredby)  -- #carbonads .carbon-poweredby {
 ./docs/src/assets/scss/components/docs-navigation.scss:28:6      - Unknown word (flexer)     -- .flexer {
 ./docs/src/assets/scss/components/search.scss:150:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
 ./docs/src/assets/scss/components/search.scss:73:15     - Unknown word (rekative)   -- position: rekative;
@@ -121,111 +121,110 @@ Lines:
 ./docs/src/maintainer-guide/releases.md:69:135    - Unknown word (errored)     -- pushed a release that errored for everyone because
 ./docs/src/pages/component-library.html:7:45      - Unknown word (shortcodes) -- on the left includes shortcodes, macros and partials
 ./docs/src/pages/rules.md:49:9      - Unknown word (endfor)     -- {%- endfor -%}
-./docs/src/rules/accessor-pairs.md:270:7     - Unknown word (Quux)       -- const Quux = class {
-./docs/src/rules/array-bracket-newline.md:26:138    - Unknown word (linebreak)  -- bracket in the pair has a linebreak inside it and the other
-./docs/src/rules/array-bracket-newline.md:26:47     - Unknown word (linebreaks) -- consistent usage of linebreaks for each pair of brackets
-./docs/src/rules/array-bracket-newline.md:48:5      - Unknown word (dosomething) -- dosomething();
-./docs/src/rules/arrow-body-style.md:54:12     - Unknown word (retv)       -- let foo = (retv, name) => {
-./docs/src/rules/arrow-parens.md:140:15    - Unknown word (falsey)     -- console.log('falsey value returned');
-./docs/src/rules/arrow-parens.md:19:79     - Unknown word (arity)      -- parameters regardless of arity. For example:
-./docs/src/rules/brace-style.md:29:54     - Unknown word (Stroustrup) -- brace style is called Stroustrup, in which the `else
-./docs/src/rules/brace-style.md:40:26     - Unknown word (Allman)     -- Another style is called [Allman](https://en.wikipedia
-./docs/src/rules/brace-style.md:64:5      - Unknown word (stroustrup) -- * `"stroustrup"` enforces Stroustrup
-./docs/src/rules/brace-style.md:65:5      - Unknown word (allman)     -- * `"allman"` enforces Allman style
-./docs/src/rules/callback-return.md:155:163   - Unknown word (IIFE)       -- function expression (IIFE).
-./docs/src/rules/camelcase.md:39:13     - Unknown word (camelcased) -- import { no_camelcased } from "external-module
-./docs/src/rules/camelcase.md:55:18     - Unknown word (Camelcased) -- function foo({ isCamelcased: no_camelcased }) {
-./docs/src/rules/capitalized-comments.md:276:84    - Unknown word (blockignore) -- { "ignorePattern": "blockignore" } }] */
-./docs/src/rules/capitalized-comments.md:279:4     - Unknown word (lowercased)  -- /* lowercased block comment, this
-./docs/src/rules/comma-dangle.md:17:11     - Unknown word (quux)       -- qux: "quux",
-./docs/src/rules/complexity.md:22:20     - Unknown word (cyclomatic) -- Enforces a maximum cyclomatic complexity.
-./docs/src/rules/complexity.md:24:1      - Unknown word (Cyclomatic) -- Cyclomatic complexity measures
-./docs/src/rules/consistent-return.md:79:16     - Unknown word (instanceof) -- if (!(this instanceof Foo)) {
+./docs/src/rules/accessor-pairs.md:269:7     - Unknown word (Quux)       -- const Quux = class {
+./docs/src/rules/array-bracket-newline.md:24:138    - Unknown word (linebreak)  -- bracket in the pair has a linebreak inside it and the other
+./docs/src/rules/array-bracket-newline.md:24:47     - Unknown word (linebreaks) -- consistent usage of linebreaks for each pair of brackets
+./docs/src/rules/array-bracket-newline.md:46:5      - Unknown word (dosomething) -- dosomething();
+./docs/src/rules/arrow-body-style.md:52:12     - Unknown word (retv)       -- let foo = (retv, name) => {
+./docs/src/rules/arrow-parens.md:138:15    - Unknown word (falsey)     -- console.log('falsey value returned');
+./docs/src/rules/arrow-parens.md:17:79     - Unknown word (arity)      -- parameters regardless of arity. For example:
+./docs/src/rules/brace-style.md:27:54     - Unknown word (Stroustrup) -- brace style is called Stroustrup, in which the `else
+./docs/src/rules/brace-style.md:38:26     - Unknown word (Allman)     -- Another style is called [Allman](https://en.wikipedia
+./docs/src/rules/brace-style.md:62:5      - Unknown word (stroustrup) -- * `"stroustrup"` enforces Stroustrup
+./docs/src/rules/brace-style.md:63:5      - Unknown word (allman)     -- * `"allman"` enforces Allman style
+./docs/src/rules/callback-return.md:154:163   - Unknown word (IIFE)       -- function expression (IIFE).
+./docs/src/rules/camelcase.md:38:13     - Unknown word (camelcased) -- import { no_camelcased } from "external-module
+./docs/src/rules/camelcase.md:54:18     - Unknown word (Camelcased) -- function foo({ isCamelcased: no_camelcased }) {
+./docs/src/rules/capitalized-comments.md:274:84    - Unknown word (blockignore) -- { "ignorePattern": "blockignore" } }] */
+./docs/src/rules/capitalized-comments.md:277:4     - Unknown word (lowercased)  -- /* lowercased block comment, this
+./docs/src/rules/comma-dangle.md:15:11     - Unknown word (quux)       -- qux: "quux",
+./docs/src/rules/complexity.md:23:1      - Unknown word (Cyclomatic) -- Cyclomatic complexity measures
+./docs/src/rules/complexity.md:23:133    - Unknown word (cyclomatic) -- rule allows setting a cyclomatic complexity threshold
+./docs/src/rules/consistent-return.md:78:16     - Unknown word (instanceof) -- if (!(this instanceof Foo)) {
 ./docs/src/rules/eqeqeq.md:2:8       - Unknown word (eqeqeq)     -- title: eqeqeq
-./docs/src/rules/eqeqeq.md:43:150    - Unknown word (typeof)     -- of the operands is a `typeof` expression, or if both
-./docs/src/rules/generator-star-spacing.md:89:40     - Unknown word (configurability) -- rule allows further configurability via overrides per function
+./docs/src/rules/eqeqeq.md:41:150    - Unknown word (typeof)     -- of the operands is a `typeof` expression, or if both
+./docs/src/rules/generator-star-spacing.md:87:40     - Unknown word (configurability) -- rule allows further configurability via overrides per function
 ./docs/src/rules/guard-for-in.md:7:16      - Unknown word (builtins)   -- - no-prototype-builtins
-./docs/src/rules/id-denylist.md:10:102    - Unknown word (Karlton)    -- naming things." — Phil Karlton
-./docs/src/rules/indent-legacy.md:32:16     - Unknown word (Crockford)  -- * Four spaces: Crockford
-./docs/src/rules/indent-legacy.md:406:8     - Unknown word (boop)        -- qux, boop) {
-./docs/src/rules/indent-legacy.md:95:76     - Unknown word (declarators) -- indentation level for `var` declarators; can also take an object
-./docs/src/rules/indent-legacy.md:96:76     - Unknown word (IIFEs)       -- level for file-level IIFEs.
-./docs/src/rules/key-spacing.md:198:5     - Unknown word (bcde)       -- bcde: 42,
-./docs/src/rules/key-spacing.md:220:5     - Unknown word (ijkl)       -- ijkl: 'Non-consecutive lines
-./docs/src/rules/max-lines-per-function.md:34:45     - Unknown word (dbname)     -- return m("tr", {key: db.dbname}, [
-./docs/src/rules/no-buffer-constructor.md:16:407    - Unknown word (alloc)      -- Buffer.from`, `Buffer.alloc`, and `Buffer.allocUnsafe
+./docs/src/rules/id-denylist.md:9:102     - Unknown word (Karlton)    -- naming things." — Phil Karlton
+./docs/src/rules/indent-legacy.md:30:16     - Unknown word (Crockford)  -- * Four spaces: Crockford
+./docs/src/rules/indent-legacy.md:404:8     - Unknown word (boop)        -- qux, boop) {
+./docs/src/rules/indent-legacy.md:93:76     - Unknown word (declarators) -- indentation level for `var` declarators; can also take an object
+./docs/src/rules/indent-legacy.md:94:76     - Unknown word (IIFEs)       -- level for file-level IIFEs.
+./docs/src/rules/key-spacing.md:196:5     - Unknown word (bcde)       -- bcde: 42,
+./docs/src/rules/key-spacing.md:218:5     - Unknown word (ijkl)       -- ijkl: 'Non-consecutive lines
+./docs/src/rules/max-lines-per-function.md:33:45     - Unknown word (dbname)     -- return m("tr", {key: db.dbname}, [
+./docs/src/rules/no-buffer-constructor.md:15:407    - Unknown word (alloc)      -- Buffer.from`, `Buffer.alloc`, and `Buffer.allocUnsafe
 ./docs/src/rules/no-cond-assign.md:2:11      - Unknown word (cond)       -- title: no-cond-assign
-./docs/src/rules/no-confusing-arrow.md:72:21     - Unknown word (Parens)     -- { "allowParens": true, "onlyOneSimpleParam
-./docs/src/rules/no-dupe-else-if.md:67:5      - Unknown word (quuux)      -- quuux();
-./docs/src/rules/no-dupe-keys.md:59:5      - Unknown word (quxx)       -- quxx: "qux"
-./docs/src/rules/no-duplicate-imports.md:58:8      - Unknown word (mergeable)  -- // not mergeable
-./docs/src/rules/no-eq-null.md:64:41     - Unknown word (eqnull)     -- rule corresponds to `eqnull` rule of JSHint.
-./docs/src/rules/no-extend-native.md:77:34     - Unknown word (muhahaha)   -- prototype.forEach = 'muhahaha'");
-./docs/src/rules/no-extra-parens.md:25:172    - Unknown word (iife)       -- conflicts with the [wrap-iife](wrap-iife) rule
-./docs/src/rules/no-fallthrough.md:12:26     - Unknown word (fallthroughs) -- Disallows case statement fallthroughs.
-./docs/src/rules/no-fallthrough.md:63:12     - Unknown word (fallsthrough) -- // fallsthrough
-./docs/src/rules/no-implicit-globals.md:121:26    - Unknown word (redeclarations) -- rule also disallows redeclarations of read-only global
-./docs/src/rules/no-implicit-globals.md:26:3      - Unknown word (Redeclarations) -- * Redeclarations of read-only global
-./docs/src/rules/no-irregular-whitespace.md:42:2      - Unknown word (ufeff)      -- \ufeff - Zero Width No-Break
-./docs/src/rules/no-irregular-whitespace.md:54:30     - Unknown word (ZWSP)       -- Zero Width Space - <ZWSP>
-./docs/src/rules/no-loop-func.md:14:5      - Unknown word (funcs)      -- funcs[i] = function() {
-./docs/src/rules/no-param-reassign.md:167:14    - Unknown word (barrito)    -- function foo(barrito) {
+./docs/src/rules/no-confusing-arrow.md:70:21     - Unknown word (Parens)     -- { "allowParens": true, "onlyOneSimpleParam
+./docs/src/rules/no-dupe-else-if.md:65:5      - Unknown word (quuux)      -- quuux();
+./docs/src/rules/no-dupe-keys.md:57:5      - Unknown word (quxx)       -- quxx: "qux"
+./docs/src/rules/no-duplicate-imports.md:57:8      - Unknown word (mergeable)  -- // not mergeable
+./docs/src/rules/no-eq-null.md:63:41     - Unknown word (eqnull)     -- rule corresponds to `eqnull` rule of JSHint.
+./docs/src/rules/no-extend-native.md:76:34     - Unknown word (muhahaha)   -- prototype.forEach = 'muhahaha'");
+./docs/src/rules/no-extra-parens.md:23:172    - Unknown word (iife)       -- conflicts with the [wrap-iife](wrap-iife) rule
+./docs/src/rules/no-fallthrough.md:61:12     - Unknown word (fallsthrough) -- // fallsthrough
+./docs/src/rules/no-implicit-globals.md:120:26    - Unknown word (redeclarations) -- rule also disallows redeclarations of read-only global
+./docs/src/rules/no-implicit-globals.md:25:3      - Unknown word (Redeclarations) -- * Redeclarations of read-only global
+./docs/src/rules/no-irregular-whitespace.md:40:2      - Unknown word (ufeff)      -- \ufeff - Zero Width No-Break
+./docs/src/rules/no-irregular-whitespace.md:52:30     - Unknown word (ZWSP)       -- Zero Width Space - <ZWSP>
+./docs/src/rules/no-loop-func.md:13:5      - Unknown word (funcs)      -- funcs[i] = function() {
+./docs/src/rules/no-param-reassign.md:166:14    - Unknown word (barrito)    -- function foo(barrito) {
 ./docs/src/rules/no-plusplus.md:2:11      - Unknown word (plusplus)   -- title: no-plusplus
 ./docs/src/rules/no-proto.md:2:11      - Unknown word (proto)      -- title: no-proto
-./docs/src/rules/no-prototype-builtins.md:14:216    - Unknown word (webserver)  -- would be unsafe for a webserver to parse JSON input
-./docs/src/rules/no-redeclare.md:74:41     - Unknown word (redeclaration) -- this rule also checks redeclaration of built-in globals
-./docs/src/rules/no-restricted-globals.md:31:54     - Unknown word (fdescribe)  -- ["error", "event", "fdescribe"]
-./docs/src/rules/no-restricted-imports.md:116:154   - Unknown word (punycode)   -- ,"net","os","path","punycode","querystring","readline
-./docs/src/rules/no-restricted-imports.md:116:165   - Unknown word (querystring) -- ,"path","punycode","querystring","readline","repl",
-./docs/src/rules/no-restricted-imports.md:116:179   - Unknown word (readline)    -- punycode","querystring","readline","repl","smalloc","stream
-./docs/src/rules/no-restricted-imports.md:116:197   - Unknown word (smalloc)     -- ,"readline","repl","smalloc","stream","string_decoder
-./docs/src/rules/no-restricted-imports.md:116:64    - Unknown word (dgram)      -- "cluster","crypto","dgram","dns","domain","events
-./docs/src/rules/no-restricted-imports.md:116:96    - Unknown word (freelist)   -- ,"domain","events","freelist","fs","http","https
-./docs/src/rules/no-restricted-syntax.md:69:5      - Unknown word (dont)       -- dontMess();
-./docs/src/rules/no-return-await.md:13:172    - Unknown word (microtask)  -- the cost of an extra microtask before resolving the
-./docs/src/rules/no-script-url.md:32:41     - Unknown word (scripturl)  -- rule corresponds to `scripturl` rule of JSHint.
-./docs/src/rules/no-unexpected-multiline.md:18:78     - Unknown word (Schlueter)  -- once described by Isaac Schlueter, a newline character
-./docs/src/rules/no-unsafe-finally.md:119:22    - Unknown word (hola)       -- console.log("hola!");
-./docs/src/rules/no-unsafe-finally.md:48:69     - Unknown word (rethrown)   -- block is caught and rethrown
-./docs/src/rules/no-unused-vars.md:164:67    - Unknown word (gnored)       -- varsIgnorePattern": "[iI]gnored" }` option:
-./docs/src/rules/no-unused-vars.md:59:31     - Unknown word (destructures) -- function definition destructures an array, unused entries
-./docs/src/rules/no-use-before-define.md:163:21    - Unknown word (nofunc)     -- This rule accepts `"nofunc"` string as an option
-./docs/src/rules/no-useless-backreference.md:16:19     - Unknown word (backreferences) -- Disallows useless backreferences in regular expressions
-./docs/src/rules/no-useless-backreference.md:18:337    - Unknown word (lookaround)     -- is inside a negative lookaround. However, by the specificatio
-./docs/src/rules/no-useless-backreference.md:20:1      - Unknown word (Backreferences) -- Backreferences that always successfully
-./docs/src/rules/no-useless-backreference.md:42:3      - Unknown word (Backreference)  -- * Backreference to a group that is in
-./docs/src/rules/no-useless-backreference.md:43:178    - Unknown word (lookbehinds)    -- forward references. Inside lookbehinds, which match backward
+./docs/src/rules/no-prototype-builtins.md:12:216    - Unknown word (webserver)  -- would be unsafe for a webserver to parse JSON input
+./docs/src/rules/no-redeclare.md:72:41     - Unknown word (redeclaration) -- this rule also checks redeclaration of built-in globals
+./docs/src/rules/no-restricted-globals.md:30:54     - Unknown word (fdescribe)  -- ["error", "event", "fdescribe"]
+./docs/src/rules/no-restricted-imports.md:127:154   - Unknown word (punycode)   -- ,"net","os","path","punycode","querystring","readline
+./docs/src/rules/no-restricted-imports.md:127:165   - Unknown word (querystring) -- ,"path","punycode","querystring","readline","repl",
+./docs/src/rules/no-restricted-imports.md:127:179   - Unknown word (readline)    -- punycode","querystring","readline","repl","smalloc","stream
+./docs/src/rules/no-restricted-imports.md:127:197   - Unknown word (smalloc)     -- ,"readline","repl","smalloc","stream","string_decoder
+./docs/src/rules/no-restricted-imports.md:127:64    - Unknown word (dgram)      -- "cluster","crypto","dgram","dns","domain","events
+./docs/src/rules/no-restricted-imports.md:127:96    - Unknown word (freelist)   -- ,"domain","events","freelist","fs","http","https
+./docs/src/rules/no-restricted-syntax.md:68:5      - Unknown word (dont)       -- dontMess();
+./docs/src/rules/no-return-await.md:12:172    - Unknown word (microtask)  -- the cost of an extra microtask before resolving the
+./docs/src/rules/no-script-url.md:31:41     - Unknown word (scripturl)  -- rule corresponds to `scripturl` rule of JSHint.
+./docs/src/rules/no-unexpected-multiline.md:16:78     - Unknown word (Schlueter)  -- once described by Isaac Schlueter, a newline character
+./docs/src/rules/no-unsafe-finally.md:117:22    - Unknown word (hola)       -- console.log("hola!");
+./docs/src/rules/no-unsafe-finally.md:46:69     - Unknown word (rethrown)   -- block is caught and rethrown
+./docs/src/rules/no-unused-vars.md:162:67    - Unknown word (gnored)       -- varsIgnorePattern": "[iI]gnored" }` option:
+./docs/src/rules/no-unused-vars.md:57:31     - Unknown word (destructures) -- function definition destructures an array, unused entries
+./docs/src/rules/no-use-before-define.md:162:21    - Unknown word (nofunc)     -- This rule accepts `"nofunc"` string as an option
+./docs/src/rules/no-useless-backreference.md:16:337    - Unknown word (lookaround) -- is inside a negative lookaround. However, by the specificatio
+./docs/src/rules/no-useless-backreference.md:18:1      - Unknown word (Backreferences) -- Backreferences that always successfully
+./docs/src/rules/no-useless-backreference.md:38:53     - Unknown word (backreferences) -- disallow the following backreferences in regular expression
+./docs/src/rules/no-useless-backreference.md:40:3      - Unknown word (Backreference)  -- * Backreference to a group that is in
+./docs/src/rules/no-useless-backreference.md:41:178    - Unknown word (lookbehinds)    -- forward references. Inside lookbehinds, which match backward
 ./docs/src/rules/nonblock-statement-body-position.md:2:8       - Unknown word (nonblock)   -- title: nonblock-statement-body-position
-./docs/src/rules/object-property-newline.md:128:24    - Unknown word (colocation) -- The rule prohibits the colocation on any line of at least
-./docs/src/rules/object-property-newline.md:132:31    - Unknown word (Europese)   -- Officiële website van de Europese Unie',
-./docs/src/rules/object-property-newline.md:132:40    - Unknown word (Unie)       -- website van de Europese Unie',
-./docs/src/rules/object-property-newline.md:132:6     - Unknown word (Officiële)  -- 'Officiële website van de Europese
-./docs/src/rules/object-property-newline.md:133:16    - Unknown word (уебсайт)    -- 'Официален уебсайт на Европейския съюз
-./docs/src/rules/object-property-newline.md:133:27    - Unknown word (Европейския) -- фициален уебсайт на Европейския съюз'
-./docs/src/rules/object-property-newline.md:133:39    - Unknown word (съюз)        -- сайт на Европейския съюз'
-./docs/src/rules/object-property-newline.md:133:6     - Unknown word (Официален)  -- 'Официален уебсайт на Европейс
-./docs/src/rules/object-property-newline.md:216:12    - Unknown word (antidisestablishmentarianistically) -- const a = "antidisestablishmentarianistically";
-./docs/src/rules/object-property-newline.md:217:12    - Unknown word (yugoslavyalılaştırabildiklerimizdenmişsiniz) -- const b = "yugoslavyalılaştırabildiklerimizdenmişsiniz";
-./docs/src/rules/object-property-newline.md:223:29    - Unknown word (complexdomain)                               -- domain.includes(":") ? "complexdomain" : "simpledomain"
-./docs/src/rules/object-property-newline.md:223:47    - Unknown word (simpledomain)                                -- "complexdomain" : "simpledomain"
-./docs/src/rules/object-property-newline.md:78:12     - Unknown word (bazz)       -- + bar: "bazz",
-./docs/src/rules/one-var.md:721:38    - Unknown word (onevar)     -- This rule maps to the `onevar` JSHint rule, but allows
-./docs/src/rules/one-var.md:85:9      - Unknown word (norf)       -- let norf;
-./docs/src/rules/padding-line-between-statements.md:41:24     - Unknown word (LINEBREAK)  -- { "blankLine": LINEBREAK_TYPE, "prev": STATEMENT
-./docs/src/rules/padding-line-between-statements.md:85:9      - Unknown word (singleline) -- * `"singleline-const"` is single-line
-./docs/src/rules/prefer-named-capture-group.md:24:19     - Unknown word (cauli)      -- const regex = /(?:cauli|sun)flower/;
-./docs/src/rules/quotes.md:10:39     - Unknown word (backticks)  -- consistent use of either backticks, double, or single quotes
-./docs/src/rules/quotes.md:24:6      - Unknown word (codebases)  -- Many codebases require strings to be
-./docs/src/rules/radix.md:14:305    - Unknown word (autodetected) -- , `parseInt()` also autodetected octal literals, which
-./docs/src/rules/radix.md:28:72     - Unknown word (autodetects)  -- so that it no longer autodetects octal literals and instead
-./docs/src/rules/space-unary-ops.md:16:101    - Unknown word (nonwords)   -- operators and after/before `nonwords` unary operators.
-./docs/src/rules/spaced-comment.md:43:69     - Unknown word (doxygen)    -- documentation read by doxygen, vsdoc, etc. which must
-./docs/src/rules/spaced-comment.md:43:78     - Unknown word (vsdoc)      -- ocumentation read by doxygen, vsdoc, etc. which must have
-./docs/src/rules/valid-typeof.md:35:17     - Unknown word (strnig)     -- typeof foo === "strnig"
-./docs/src/rules/valid-typeof.md:36:16     - Unknown word (undefimed)  -- typeof foo == "undefimed"
-./docs/src/rules/valid-typeof.md:37:16     - Unknown word (nunber)     -- typeof bar != "nunber"
-./docs/src/rules/valid-typeof.md:38:17     - Unknown word (fucntion)   -- typeof bar !== "fucntion"
-./docs/src/rules/yoda.md:84:22     - Unknown word (substr)     -- if (-1 < str.indexOf(substr)) {
+./docs/src/rules/object-property-newline.md:126:24    - Unknown word (colocation) -- The rule prohibits the colocation on any line of at least
+./docs/src/rules/object-property-newline.md:130:31    - Unknown word (Europese)   -- Officiële website van de Europese Unie',
+./docs/src/rules/object-property-newline.md:130:40    - Unknown word (Unie)       -- website van de Europese Unie',
+./docs/src/rules/object-property-newline.md:130:6     - Unknown word (Officiële)  -- 'Officiële website van de Europese
+./docs/src/rules/object-property-newline.md:131:16    - Unknown word (уебсайт)    -- 'Официален уебсайт на Европейския съюз
+./docs/src/rules/object-property-newline.md:131:27    - Unknown word (Европейския) -- фициален уебсайт на Европейския съюз'
+./docs/src/rules/object-property-newline.md:131:39    - Unknown word (съюз)        -- сайт на Европейския съюз'
+./docs/src/rules/object-property-newline.md:131:6     - Unknown word (Официален)  -- 'Официален уебсайт на Европейс
+./docs/src/rules/object-property-newline.md:214:12    - Unknown word (antidisestablishmentarianistically) -- const a = "antidisestablishmentarianistically";
+./docs/src/rules/object-property-newline.md:215:12    - Unknown word (yugoslavyalılaştırabildiklerimizdenmişsiniz) -- const b = "yugoslavyalılaştırabildiklerimizdenmişsiniz";
+./docs/src/rules/object-property-newline.md:221:29    - Unknown word (complexdomain)                               -- domain.includes(":") ? "complexdomain" : "simpledomain"
+./docs/src/rules/object-property-newline.md:221:47    - Unknown word (simpledomain)                                -- "complexdomain" : "simpledomain"
+./docs/src/rules/object-property-newline.md:76:12     - Unknown word (bazz)       -- + bar: "bazz",
+./docs/src/rules/one-var.md:719:38    - Unknown word (onevar)     -- This rule maps to the `onevar` JSHint rule, but allows
+./docs/src/rules/one-var.md:83:9      - Unknown word (norf)       -- let norf;
+./docs/src/rules/padding-line-between-statements.md:39:24     - Unknown word (LINEBREAK)  -- { "blankLine": LINEBREAK_TYPE, "prev": STATEMENT
+./docs/src/rules/padding-line-between-statements.md:83:9      - Unknown word (singleline) -- * `"singleline-const"` is single-line
+./docs/src/rules/prefer-named-capture-group.md:23:19     - Unknown word (cauli)      -- const regex = /(?:cauli|sun)flower/;
+./docs/src/rules/quotes.md:10:97     - Unknown word (backticks)  -- single quotes, and backticks (as of ECMAScript 6
+./docs/src/rules/quotes.md:22:6      - Unknown word (codebases)  -- Many codebases require strings to be
+./docs/src/rules/radix.md:12:305    - Unknown word (autodetected) -- , `parseInt()` also autodetected octal literals, which
+./docs/src/rules/radix.md:26:72     - Unknown word (autodetects)  -- so that it no longer autodetects octal literals and instead
+./docs/src/rules/space-unary-ops.md:14:101    - Unknown word (nonwords)   -- operators and after/before `nonwords` unary operators.
+./docs/src/rules/spaced-comment.md:41:69     - Unknown word (doxygen)    -- documentation read by doxygen, vsdoc, etc. which must
+./docs/src/rules/spaced-comment.md:41:78     - Unknown word (vsdoc)      -- ocumentation read by doxygen, vsdoc, etc. which must have
+./docs/src/rules/valid-typeof.md:33:17     - Unknown word (strnig)     -- typeof foo === "strnig"
+./docs/src/rules/valid-typeof.md:34:16     - Unknown word (undefimed)  -- typeof foo == "undefimed"
+./docs/src/rules/valid-typeof.md:35:16     - Unknown word (nunber)     -- typeof bar != "nunber"
+./docs/src/rules/valid-typeof.md:36:17     - Unknown word (fucntion)   -- typeof bar !== "fucntion"
+./docs/src/rules/yoda.md:82:22     - Unknown word (substr)     -- if (-1 < str.indexOf(substr)) {
 ./docs/src/static/feed.njk:30:79     - Unknown word (endset)     -- bsoluteUrl(metadata.url) }}{% endset %}
 ./docs/src/static/feed.njk:4:4       - Unknown word (eleventy)   -- "eleventyExcludeFromCollections
 ./docs/src/static/sitemap.njk:10:14     - Unknown word (lastmod)    -- <lastmod>{{ page.date.toISOString
@@ -255,11 +254,10 @@ Lines:
 ./docs/src/user-guide/configuring/language-options.md:48:4      - Unknown word (greasemonkey)  -- * `greasemonkey` - GreaseMonkey globals
 ./docs/src/user-guide/configuring/plugins.md:116:156   - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 ./docs/src/user-guide/configuring/plugins.md:15:26     - Unknown word (Espree)     -- default, ESLint uses [Espree](https://github.com
-./docs/src/user-guide/formatters/html-formatter-example.html:103:22    - Unknown word (nzaka)      -- [+] C:\Users\nzaka\projects\eslint\eslint
 ./docs/src/user-guide/formatters/index.md:110:5     - Unknown word (testsuites) -- &lt;testsuites&gt;
 ./docs/src/user-guide/formatters/index.md:111:5     - Unknown word (testsuite)  -- &lt;testsuite package=&#34;org.eslint
 ./docs/src/user-guide/formatters/index.md:112:5     - Unknown word (testcase)   -- &lt;testcase time=&#34;0&#34; name
-./docs/src/user-guide/formatters/index.md:112:72    - Unknown word (classname)  -- no-unused-vars&#34; classname=&#34;C:\Users\nzaka
+./docs/src/user-guide/formatters/index.md:112:72    - Unknown word (classname)  -- no-unused-vars&#34; classname=&#34;/var/lib/jenkins
 ./docs/src/user-guide/getting-started.md:48:12     - Unknown word (yourfile)   -- npx eslint yourfile.js
 ./docs/src/user-guide/getting-started.md:88:220    - Unknown word (npmjs)      -- "eslint-config" on [npmjs.com](https://www.npmjs
 ./docs/src/user-guide/integrations.md:20:8      - Unknown word (Syntastic)  -- * [Syntastic](https://github.com
@@ -348,7 +346,7 @@ Lines:
 ./lib/rules/no-misleading-character-class.js:15:7      - Unknown word (REGEXPP)    -- const REGEXPP_LATEST_ECMA_VERSION
 ./lib/rules/no-mixed-requires.js:182:62    - Unknown word (Declarators) -- The list of VariableDeclarators.
 ./lib/rules/no-mixed-requires.js:78:66     - Unknown word (iojs)       -- per nodejs v0.12.2 and iojs v0.7.1
-./lib/rules/no-restricted-imports.js:163:57    - Unknown word (ignorecase) -- allowRelativePaths: true, ignorecase: !caseSensitive }).add
+./lib/rules/no-restricted-imports.js:179:57    - Unknown word (ignorecase) -- allowRelativePaths: true, ignorecase: !caseSensitive }).add
 ./lib/rules/no-trailing-spaces.js:57:13     - Unknown word (NONBLANK)   -- NONBLANK = `${BLANK_CLASS}+$
 ./lib/rules/no-useless-backreference.js:112:37    - Unknown word (bref's)     -- // group is bref's ancestor => bref is
 ./lib/rules/no-useless-backreference.js:43:12     - Unknown word (Lookaround) -- function isLookaround(node) {
@@ -384,7 +382,7 @@ Lines:
 ./packages/eslint-config-eslint/default.yml:5:15      - Unknown word (jsdoc)      -- - "plugin:jsdoc/recommended"
 ./templates/blogpost.md.ejs:17:10     - Unknown word (linkify)    -- function linkify(line) {
 ./templates/blogpost.md.ejs:7:5       - Unknown word (eslintbot)  -- - eslintbot
-./templates/formatter-examples.md.ejs:62:2      - Unknown word (iframe)     -- <iframe src="html-formatter
+./templates/formatter-examples.md.ejs:63:2      - Unknown word (iframe)     -- <iframe src="html-formatter
 ./tests/fixtures/autofix-integration/left-pad-expected-quiet.js:17:18     - Unknown word (leftpad)    -- module.exports = leftpad;
 ./tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 ./tests/fixtures/config-extends/deep.json:10:26     - Unknown word (subsubdir)  -- extends": "./subdir/subsubdir/deeper.json"
@@ -472,10 +470,10 @@ Lines:
 ./tests/lib/rules/indent-legacy.js:1662:26   - Unknown word (bazqux)     -- " barqux, bazqux);",
 ./tests/lib/rules/indent-legacy.js:324:16    - Unknown word (otherdata)  -- " otherdata.forEach(function(zero
 ./tests/lib/rules/indent-legacy.js:935:46    - Unknown word (xfilter)    -- function create (id, xfilter, rawType,\n" +
-./tests/lib/rules/indent.js:3011:21   - Unknown word (curlies)    -- // Template curlies
-./tests/lib/rules/indent.js:3676:30   - Unknown word (foop)       -- var x = function foop(bar)
+./tests/lib/rules/indent.js:3026:21   - Unknown word (curlies)    -- // Template curlies
+./tests/lib/rules/indent.js:3691:30   - Unknown word (foop)       -- var x = function foop(bar)
 ./tests/lib/rules/indent.js:401:17    - Unknown word (lmnn)       -- lmnn = [{
-./tests/lib/rules/indent.js:5240:34   - Unknown word (unindented) -- // Intentionally unindented comment
+./tests/lib/rules/indent.js:5255:34   - Unknown word (unindented) -- // Intentionally unindented comment
 ./tests/lib/rules/key-spacing.js:767:47    - Unknown word (longlonglong) -- 'bar' : 2, baz : 3, longlonglong : 4",
 ./tests/lib/rules/line-comment-position.js:45:23     - Unknown word (Meep)       -- code: "// Meep\nconsole.log('Meep'
 ./tests/lib/rules/lines-between-class-members.js:50:37     - Unknown word (nccc)       -- C {\naaa;\n\n#bbb;\n\nccc(){}\n\n#ddd(){}\n}"
@@ -493,7 +491,7 @@ Lines:
 ./tests/lib/rules/no-inline-comments.js:127:37    - Unknown word (otherthing) -- ignorePattern: "otherthing"
 ./tests/lib/rules/no-invalid-regexp.js:64:35     - Unknown word (Nandinagari) -- RegExp('\\\\p{Script=Nandinagari}', 'u');",
 ./tests/lib/rules/no-prototype-builtins.js:44:35     - Unknown word (Enumerabl)  -- code: "foo?.['propertyIsEnumerabl']('bar')", parserOptions
-./tests/lib/rules/no-restricted-imports.js:339:84    - Unknown word (subimports) -- message: "some foo subimports are restricted" }]
+./tests/lib/rules/no-restricted-imports.js:359:84    - Unknown word (subimports) -- message: "some foo subimports are restricted" }]
 ./tests/lib/rules/no-restricted-imports.js:50:31     - Unknown word (Gitignores) -- code: "import withGitignores from \"foo/bar\";",
 ./tests/lib/rules/no-script-url.js:25:21     - Unknown word (xjavascript) -- "var url = 'xjavascript:'",
 ./tests/lib/rules/no-tabs.js:24:17     - Unknown word (sdfdsf)     -- " //   sdfdsf \n" +
