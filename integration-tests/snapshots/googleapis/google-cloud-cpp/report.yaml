@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELO
 Summary:
   files: 7363
   filesWithIssues: 5729
-  issues: 57202
+  issues: 56055
   errors: 0
 Errors: []
 
@@ -18,7 +18,6 @@ issues:
   - "ARCHITECTURE.md:186:1   	discoverability 	U   	discoverability of available option"
   - "bazel/BUILD.bazel:17:37     	subpackages 	U   	visibility = [\"//:__subpackages__\"])"
   - "bazel/configure_template.bzl:18:106     	libcurl 	U   	support Bazel: crc32c and libcurl."
-  - "bazel/google_cloud_cpp_deps.bzl:19:22   	deps        	U   	def google_cloud_cpp_deps():"
   - "bazel/google_cloud_cpp_deps.bzl:40:30   	googletest  	U   	Load rules_cc, used by googletest"
   - "bazel/google_cloud_cpp_deps.bzl:83:16   	googleapis  	U   	# Load the googleapis dependency."
   - "bazel/google_cloud_cpp_deps.bzl:96:15   	protobuf    	U   	# protobuf message. No changes"
@@ -311,7 +310,6 @@ issues:
   - "generator/internal/scaffold_generator.cc:1024:15    	cxxopt      	U   	build:linux --cxxopt=-std=c++14"
   - "generator/internal/service_code_generator.cc:328:20     	nspace  	U   	for (auto const& nspace : namespaces_) {"
   - "google/cloud/accessapproval/access_approval_client.h:19:39      	ACCESSAPPROVAL  	U   	CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT"
-  - "google/cloud/accessapproval/CMakeLists.txt:26:30    	DEPS	U   	GOOGLE_CLOUD_CPP_DOXYGEN_DEPS google-cloud-cpp::accessappro"
   - "google/cloud/accessapproval/doc/main.dox:33:15      	Quickstart  	U   	@par Example: Quickstart"
   - "google/cloud/accessapproval/doc/main.dox:88:12      	Backoff     	U   	### Retry, Backoff, and Idempotency Policies"
   - "google/cloud/accessapproval/doc/main.dox:95:110     	Quickstarts 	U   	approval/docs/quickstart 'Quickstarts'"
