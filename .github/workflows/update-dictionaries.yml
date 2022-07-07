@@ -170,8 +170,8 @@ jobs:
         run: |
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      - name: Npm CI
-        run: npm ci
+      - name: Npm Install
+        run: npm i
 
       - name: Has Npm has failed?
         if: ${{ failure() }}
