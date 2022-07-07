@@ -230,9 +230,9 @@ jobs:
       base: ${{ env.REF_BRANCH }}
       body: |
         ## Update Dictionaries (${{ env.REF_BRANCH }})
-      commit-message: "ci: Workflow Bot -- Update Dictionaries"
+      commit-message: "fix: Workflow Bot -- Update Dictionaries"
       branch: ${{ env.NEW_BRANCH }}
-      title: "ci: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
+      title: "fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})"
 
     steps:
       - name: Checkout
