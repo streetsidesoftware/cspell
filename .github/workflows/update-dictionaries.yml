@@ -208,7 +208,7 @@ jobs:
           mkdir temp
           REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
           echo "${{ matrix.repo }} =>" $REPO
-          git diff integration-tests > temp/$REPO.diff
+          git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/$REPO.diff
       - name: store diff
         uses: actions/upload-artifact@v3
         with:
