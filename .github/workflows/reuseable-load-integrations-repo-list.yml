@@ -71,7 +71,7 @@ jobs:
           DIRTY: ${{ env.dirty }}
         run: |
           cd integration-tests
-          npm ci
+          npm i
           npm run build
           echo "REPOS<<HEREDOC" >> $GITHUB_ENV
           ./tester.js list --json $DIRTY -t ${{ secrets.GITHUB_TOKEN }} >> $GITHUB_ENV
