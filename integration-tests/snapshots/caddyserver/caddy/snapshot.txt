@@ -3,30 +3,33 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 210, Issues found: 3323 in 197 files
+ CSpell: Files checked: 210, Issues found: 3337 in 197 files
  exit code: 1
-./admin.go:1009:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
-./admin.go:1045:31   - Unknown word (elems)          -- array = append(array, elems...)
-./admin.go:1276:21   - Unknown word (pidfile)        -- // PIDFile writes a pidfile to the file at filename
-./admin.go:411:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
-./admin.go:41:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/notify"
-./admin.go:428:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
-./admin.go:42:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-./admin.go:431:33    - Unknown word (zerossl)     -- RawMessage(`{"module": "zerossl"}`),
-./admin.go:45:19     - Unknown word (zapcore)     -- "go.uber.org/zap/zapcore"
-./admin.go:524:16    - Unknown word (Protos)      -- tlsConfig.NextProtos = nil // this server
-./admin.go:528:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
-./admin.go:794:23    - Unknown word (Redir)       -- if err == errInternalRedir {
-./admin_test.go:106:10    - Unknown word (unsynced)   -- err := unsyncedConfigAccess(tc.method
-./admin_test.go:119:23    - Unknown word (Unmarshaling) -- t.Fatalf("Test %d: Unmarshaling expected config: %v
-./admin_test.go:28:8      - Unknown word (myserver)   -- "myserver": {
-./admin_test.go:32:8      - Unknown word (yourserver) -- "yourserver": {
-./admin_test.go:42:10     - Unknown word (Unsynced)   -- func TestUnsyncedConfigAccess(t *testing
-./caddy.go:294:5     - Unknown word (autosave)   -- // autosave a non-nil config, if
-./caddy.go:301:29    - Unknown word (Autosave)   -- filepath.Dir(ConfigAutosavePath)
-./caddy.go:310:17    - Unknown word (autosaved)  -- Log().Info("autosaved config (load with -
-./caddy.go:60:30     - Unknown word (encodable)  -- to populate the JSON-encodable fields of the struct
-./caddy.go:628:24    - Unknown word (byeee)      -- logger.Warn("exiting; byeee!! 👋")
+./admin.go:1026:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
+./admin.go:1062:31   - Unknown word (elems)          -- array = append(array, elems...)
+./admin.go:1293:21   - Unknown word (pidfile)        -- // PIDFile writes a pidfile to the file at filename
+./admin.go:414:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
+./admin.go:431:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
+./admin.go:434:33    - Unknown word (zerossl)     -- RawMessage(`{"module": "zerossl"}`),
+./admin.go:44:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/notify"
+./admin.go:45:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
+./admin.go:48:19     - Unknown word (zapcore)     -- "go.uber.org/zap/zapcore"
+./admin.go:527:16    - Unknown word (Protos)      -- tlsConfig.NextProtos = nil // this server
+./admin.go:531:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
+./admin.go:797:23    - Unknown word (Redir)       -- if err == errInternalRedir {
+./admin.go:900:29    - Unknown word (hasher)      -- etagHasher returns a the hasher we used on the config
+./admin_test.go:108:10    - Unknown word (unsynced)   -- err := unsyncedConfigAccess(tc.method
+./admin_test.go:121:23    - Unknown word (Unmarshaling) -- t.Fatalf("Test %d: Unmarshaling expected config: %v
+./admin_test.go:170:42    - Unknown word (etag)         -- config with the wrong etag
+./admin_test.go:177:14    - Unknown word (Hasher)       -- hash := etagHasher()
+./admin_test.go:30:8      - Unknown word (myserver)   -- "myserver": {
+./admin_test.go:34:8      - Unknown word (yourserver) -- "yourserver": {
+./admin_test.go:44:10     - Unknown word (Unsynced)   -- func TestUnsyncedConfigAccess(t *testing
+./caddy.go:326:5     - Unknown word (autosave)   -- // autosave a non-nil config, if
+./caddy.go:333:29    - Unknown word (Autosave)   -- filepath.Dir(ConfigAutosavePath)
+./caddy.go:342:17    - Unknown word (autosaved)  -- Log().Info("autosaved config (load with -
+./caddy.go:61:30     - Unknown word (encodable)  -- to populate the JSON-encodable fields of the struct
+./caddy.go:660:24    - Unknown word (byeee)      -- logger.Warn("exiting; byeee!! 👋")
 ./caddyconfig/caddyfile/adapter.go:100:25    - Unknown word (unmarshaled) -- into JSON. Caddyfile-unmarshaled values
 ./caddyconfig/caddyfile/adapter.go:134:17    - Unknown word (Errf)        -- return nil, d.Errf("getting module named
 ./caddyconfig/caddyfile/adapter.go:15:9      - Unknown word (caddyfile)  -- package caddyfile
@@ -151,7 +154,7 @@ Lines:
 ./metrics.go:9:50      - Unknown word (promauto)   -- client_golang/prometheus/promauto"
 ./modules.go:312:56    - Unknown word (provisionings) -- cleaning up from partial provisionings.
 ./modules/caddyhttp/app.go:141:8     - Unknown word (Iface)      -- tlsAppIface, err := ctx.App("tls
-./modules/caddyhttp/app.go:367:16    - Unknown word (errcheck)   -- //nolint:errcheck
+./modules/caddyhttp/app.go:365:16    - Unknown word (errcheck)   -- //nolint:errcheck
 ./modules/caddyhttp/autohttps.go:141:40    - Unknown word (deduplicated) -- qualifying domain names (deduplicated) in this server
 ./modules/caddyhttp/autohttps.go:182:21    - Unknown word (Tailscale)    -- // the implicit Tailscale manager module will
 ./modules/caddyhttp/autohttps.go:492:12    - Unknown word (reprovision)  -- // must reprovision the automation policy
@@ -159,8 +162,6 @@ Lines:
 ./modules/caddyhttp/autohttps.go:661:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
 ./modules/caddyhttp/caddyauth/basicauth.go:15:9      - Unknown word (caddyauth)  -- package caddyauth
 ./modules/caddyhttp/caddyauth/basicauth.go:22:2      - Unknown word (weakrand)   -- weakrand "math/rand"
-./modules/caddyhttp/caddyauth/basicauth.go:84:19     - Unknown word (hasher)     -- // load password hasher
-./modules/caddyhttp/caddyauth/basicauth.go:96:29     - Unknown word (Hasher)     -- hasher, ok := hba.Hash.(Hasher); ok {
 ./modules/caddyhttp/caddyauth/basicauth.go:97:47     - Unknown word (antitiming) -- hasher.Hash([]byte("antitiming"), []byte("fakesalt
 ./modules/caddyhttp/caddyauth/basicauth.go:97:69     - Unknown word (fakesalt)   -- antitiming"), []byte("fakesalt"))
 ./modules/caddyhttp/caddyauth/caddyauth.go:73:6      - Unknown word (authed)     -- var authed bool
@@ -221,7 +222,6 @@ Lines:
 ./modules/caddyhttp/fileserver/staticfiles.go:401:3     - Unknown word (backoff)          -- backoff := weakrand.Intn(maxBackoff
 ./modules/caddyhttp/fileserver/staticfiles.go:401:31    - Unknown word (Backoff)          -- := weakrand.Intn(maxBackoff-minBackoff) + minBackoff
 ./modules/caddyhttp/fileserver/staticfiles.go:412:74    - Unknown word (Caza)             -- written by Nathaniel Caza.
-./modules/caddyhttp/fileserver/staticfiles.go:514:36    - Unknown word (etag)             -- lculateEtag produces a strong etag by default, although
 ./modules/caddyhttp/fileserver/staticfiles.go:61:51     - Unknown word (explictness) -- maximum clarity and explictness, use complete,
 ./modules/caddyhttp/fileserver/staticfiles.go:75:5      - Unknown word (Canonicalization) -- // Canonicalization will not happen if the
 ./modules/caddyhttp/fileserver/staticfiles.go:99:2      - Unknown word (precompressors)   -- precompressors map[string]encode.Precompress
@@ -339,8 +339,8 @@ Lines:
 ./modules/caddypki/ca.go:184:31    - Unknown word (Smallstep)  -- NewAuthority returns a new Smallstep-powered signing authority
 ./modules/caddypki/ca.go:32:24     - Unknown word (truststore) -- github.com/smallstep/truststore"
 ./modules/caddypki/pki.go:94:69     - Unknown word (unconfigured) -- installation disabled; unconfigured clients may show warnings
-./modules/caddytls/acmeissuer.go:139:45    - Unknown word (libdns)     -- implemented for the libdns APIs instead.
-./modules/caddytls/acmeissuer.go:260:20    - Unknown word (tlsalpn)    -- // disable_tlsalpn_challenge
+./modules/caddytls/acmeissuer.go:141:45    - Unknown word (libdns)     -- implemented for the libdns APIs instead.
+./modules/caddytls/acmeissuer.go:259:20    - Unknown word (tlsalpn)    -- // disable_tlsalpn_challenge
 ./modules/caddytls/acmeissuer.go:54:27     - Unknown word (mothership) -- not sent to any Caddy mothership or used for any purpose
 ./modules/caddytls/automation.go:88:54     - Unknown word (othewise)   -- public certificates; othewise acme and
 ./modules/caddytls/certmanagers.go:133:2     - Unknown word (sigs)       -- sigs := make([]string, len
