@@ -1,20 +1,15 @@
 {
-  "name": "@cspell/cspell-pipe",
+  "name": "@cspell/cspell-service-bus",
   "publishConfig": {
     "access": "public"
   },
   "version": "6.2.3",
-  "description": "Library to make working with Iterators/AsyncIterators easier.",
+  "description": "A Library for connecting requests to services that can fulfill them.",
   "keywords": [
-    "cspell",
-    "pipe",
-    "Iterator",
-    "Iterable",
-    "AsyncIterator",
-    "AsyncIterable"
+    "cspell"
   ],
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-pipe#readme",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-service-bus#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "directories": {
@@ -29,16 +24,7 @@
     },
     "./index": "./dist/index.js",
     "./index.js": "./dist/index.js",
-    "./index.d.ts": "./dist/index.d.ts",
-    "./operators": {
-      "require": "./dist/operators/index.js"
-    },
-    "./operators/index.js": {
-      "require": "./dist/operators/index.js"
-    },
-    "./operators/index.d.ts": {
-      "require": "./dist/operators/index.js"
-    }
+    "./index.d.ts": "./dist/index.d.ts"
   },
   "typings": "dist/index.d.ts",
   "typesVersions": {
@@ -48,15 +34,6 @@
       ],
       "dist/index.d.ts": [
         "dist/index.d.ts"
-      ],
-      "operators": [
-        "dist/operators/index.d.ts"
-      ],
-      "operators/*.js": [
-        "dist/operators/*.d.ts"
-      ],
-      "operators/index.d.ts": [
-        "dist/operators/index.d.ts"
       ],
       "*": [
         "dist/*",
@@ -87,7 +64,7 @@
     "url": "git+https://github.com/streetsidesoftware/cspell.git"
   },
   "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-pipe"
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-service-bus"
   },
   "engines": {
     "node": ">=14"
