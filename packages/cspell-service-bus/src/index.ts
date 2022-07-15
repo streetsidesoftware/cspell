@@ -1,2 +1,2 @@
-export { ServiceRequest, ServiceRequestAsync, ServiceRequestSync } from './request';
+export { ServiceRequest } from './request';
 export { ServiceBus, createServiceBus } from './bus';

@@ -2,10 +2,11 @@ import {
     isServiceResponseFailure,
     isServiceResponseSuccess,
     isInstanceOfFn,
-    ServiceRequestAsync,
-    ServiceRequestSync,
-    BaseServiceRequest,
+    ServiceRequest,
+    __testing__,
 } from './request';
+
+const { BaseServiceRequest } = __testing__;
 
 describe('request', () => {
     test.each`
@@ -30,14 +31,10 @@ describe('request', () => {
     });
 
     test.each`
-        request                                           | kind                   | expected
-        ${new ServiceRequestAsync('ServiceRequestAsync')} | ${BaseServiceRequest}  | ${true}
-        ${new ServiceRequestSync('ServiceRequestSync')}   | ${BaseServiceRequest}  | ${true}
-        ${new ServiceRequestAsync('ServiceRequestAsync')} | ${ServiceRequestAsync} | ${true}
-        ${new ServiceRequestSync('ServiceRequestSync')}   | ${ServiceRequestSync}  | ${true}
-        ${new ServiceRequestAsync('ServiceRequestAsync')} | ${ServiceRequestSync}  | ${false}
-        ${new ServiceRequestSync('ServiceRequestSync')}   | ${ServiceRequestAsync} | ${false}
-        ${{ type: 'static' }}                             | ${BaseServiceRequest}  | ${false}
+        request                                     | kind                  | expected
+        ${new ServiceRequest('ServiceRequestSync')} | ${BaseServiceRequest} | ${true}
+        ${new ServiceRequest('ServiceRequestSync')} | ${ServiceRequest}     | ${true}
+        ${{ type: 'static' }}                       | ${BaseServiceRequest} | ${false}
     `('isInstanceOfFn $request.type', ({ request, kind, expected }) => {
         const fn = isInstanceOfFn(kind);
         expect(fn(request)).toEqual(expected);

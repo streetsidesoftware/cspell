@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SystemServiceBus ServiceRequestFactory Compliance 1`] = `
+Array [
+  Array [
+    "System:RegisterHandler",
+    "System:RegisterHandler",
+  ],
+  Array [
+    "System:CreateSubsystem",
+    "System:CreateSubsystem",
+  ],
+  Array [
+    "fs:readFile",
+    "fs:readFile",
+  ],
+  Array [
+    "zlib:inflate",
+    "zlib:inflate",
+  ],
+]
+`;
+
+exports[`SystemServiceBus createSystemServiceBus 1`] = `
+Array [
+  SubsystemServiceBusImpl {
+    "canHandleType": [Function],
+    "handler": Object {
+      "description": "Process Requests Matching: <>",
+      "fn": [Function],
+      "name": "Subsystem: Default Subsystem",
+    },
+    "handlers": Array [
+      Object {
+        "description": "Matches against: <>",
+        "fn": [Function],
+        "name": "Subsystem Register Handlers for Default Subsystem",
+      },
+    ],
+    "name": "Default Subsystem",
+    "requestPattern": "",
+  },
+  SubsystemServiceBusImpl {
+    "canHandleType": [Function],
+    "handler": Object {
+      "description": "Process Requests Matching: <fs:>",
+      "fn": [Function],
+      "name": "Subsystem: File System",
+    },
+    "handlers": Array [
+      Object {
+        "description": "Matches against: <fs:>",
+        "fn": [Function],
+        "name": "Subsystem Register Handlers for File System",
+      },
+    ],
+    "name": "File System",
+    "requestPattern": "fs:",
+  },
+  SubsystemServiceBusImpl {
+    "canHandleType": [Function],
+    "handler": Object {
+      "description": "Process Requests Matching: <zlib:>",
+      "fn": [Function],
+      "name": "Subsystem: ZLib",
+    },
+    "handlers": Array [
+      Object {
+        "description": "Matches against: <zlib:>",
+        "fn": [Function],
+        "name": "Subsystem Register Handlers for ZLib",
+      },
+    ],
+    "name": "ZLib",
+    "requestPattern": "zlib:",
+  },
+  SubsystemServiceBusImpl {
+    "canHandleType": [Function],
+    "handler": Object {
+      "description": "Process Requests Matching: <path:>",
+      "fn": [Function],
+      "name": "Subsystem: Path",
+    },
+    "handlers": Array [
+      Object {
+        "description": "Matches against: <path:>",
+        "fn": [Function],
+        "name": "Subsystem Register Handlers for Path",
+      },
+    ],
+    "name": "Path",
+    "requestPattern": "path:",
+  },
+]
+`;
