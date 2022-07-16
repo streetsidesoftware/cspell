@@ -1,4 +1,4 @@
-import { createIsRequestHandler, createRequestHandler, createServiceBus, Dispatcher, Handler, HandlerFn } from './bus';
+import { createIsRequestHandler, createRequestHandler, createServiceBus, Dispatcher, Handler } from './bus';
 import { createResponse as response, ServiceRequest, ServiceResponse } from './request';
 
 function calcFib(request: FibRequest): ServiceResponse<number> {
