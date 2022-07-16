@@ -1,5 +1,5 @@
-import { createRequestHandler, createServiceBus, Dispatcher, Handler } from './bus';
-import { createResponse as response, ServiceRequest, ServiceRequestSync, ServiceResponse } from './request';
+import { createIsRequestHandler, createRequestHandler, createServiceBus, Dispatcher, Handler } from './bus';
+import { createResponse as response, ServiceRequest, ServiceResponse } from './request';
 
 function calcFib(request: FibRequest): ServiceResponse<number> {
     let a = 0,
@@ -17,16 +17,21 @@ function calcFib(request: FibRequest): ServiceResponse<number> {
     };
 }
 
-class FibRequest extends ServiceRequestSync<'calc-fib', number> {
-    constructor(readonly fib: number) {
-        super('calc-fib');
+const TypeRequestFib = 'Computations:calc-fib' as const;
+class FibRequest extends ServiceRequest<typeof TypeRequestFib, number> {
+    static type = TypeRequestFib;
+    private constructor(readonly fib: number) {
+        super(TypeRequestFib);
     }
     static is(req: ServiceRequest): req is FibRequest {
         return req instanceof FibRequest;
     }
+    static create(fib: number) {
+        return new FibRequest(fib);
+    }
 }
 
-class StringLengthRequest extends ServiceRequestSync<'calc-string-length', number> {
+class StringLengthRequest extends ServiceRequest<'calc-string-length', number> {
     constructor(readonly str: string) {
         super('calc-string-length');
     }
@@ -35,7 +40,7 @@ class StringLengthRequest extends ServiceRequestSync<'calc-string-length', numbe
     }
 }
 
-class StringToUpperRequest extends ServiceRequestSync<'toUpper', string> {
+class StringToUpperRequest extends ServiceRequest<'toUpper', string> {
     constructor(readonly str: string) {
         super('toUpper');
     }
@@ -44,13 +49,13 @@ class StringToUpperRequest extends ServiceRequestSync<'toUpper', string> {
     }
 }
 
-class DoNotHandleRequest extends ServiceRequestSync<'Do Not Handle', undefined> {
+class DoNotHandleRequest extends ServiceRequest<'Do Not Handle', undefined> {
     constructor() {
         super('Do Not Handle');
     }
 }
 
-class RetryAgainRequest extends ServiceRequestSync<'Retry Again Request', undefined> {
+class RetryAgainRequest extends ServiceRequest<'Retry Again Request', undefined> {
     constructor() {
         super('Retry Again Request');
     }
@@ -59,25 +64,33 @@ class RetryAgainRequest extends ServiceRequestSync<'Retry Again Request', undefi
     }
 }
 
-const handlerStringLengthRequest = createRequestHandler(StringLengthRequest.is, (r) => response(r.str.length));
-const handlerStringToUpperRequest = createRequestHandler(StringToUpperRequest.is, (r) =>
-    response(r.str.toLocaleUpperCase())
+const handlerStringLengthRequest = createIsRequestHandler(
+    StringLengthRequest.is,
+    (r) => response(r.str.length),
+    'handlerStringLengthRequest'
 );
-const handlerRetryAgainRequest: Handler = (service: Dispatcher) => (next) => (request) =>
-    RetryAgainRequest.is(request) ? service.dispatch(request) : next(request);
-
+const handlerStringToUpperRequest = createIsRequestHandler(
+    StringToUpperRequest.is,
+    (r) => response(r.str.toLocaleUpperCase()),
+    'handlerStringToUpperRequest'
+);
+const handlerRetryAgainRequest: Handler = {
+    fn: (service: Dispatcher) => (next) => (request) =>
+        RetryAgainRequest.is(request) ? service.dispatch(request) : next(request),
+    name: 'handlerRetryAgainRequest',
+};
 describe('Service Bus', () => {
     const bus = createServiceBus();
-    bus.addHandler(createRequestHandler(FibRequest.is, calcFib));
+    bus.addHandler(createRequestHandler(FibRequest, calcFib));
     bus.addHandler(handlerStringLengthRequest);
     bus.addHandler(handlerStringToUpperRequest);
     bus.addHandler(handlerRetryAgainRequest);
 
     test.each`
         request                              | expected
-        ${new FibRequest(6)}                 | ${response(8)}
-        ${new FibRequest(5)}                 | ${response(5)}
-        ${new FibRequest(7)}                 | ${response(13)}
+        ${FibRequest.create(6)}              | ${response(8)}
+        ${FibRequest.create(5)}              | ${response(5)}
+        ${FibRequest.create(7)}              | ${response(13)}
         ${new StringLengthRequest('hello')}  | ${response(5)}
         ${new StringToUpperRequest('hello')} | ${response('HELLO')}
         ${new DoNotHandleRequest()}          | ${{ error: Error('Unhandled Request: Do Not Handle') }}

@@ -1,28 +1,23 @@
-export interface ServiceRequest<T = string, R = unknown> {
+export interface ServiceRequest<T extends string = string, R = unknown> {
     readonly type: T;
     __r?: ServiceResponseBase<R>;
 }
 
-export class BaseServiceRequest<T extends string, R> implements ServiceRequest<T, R> {
+class BaseServiceRequest<T extends string, R> implements ServiceRequest<T, R> {
     readonly __r?: ServiceResponseBase<R>;
     constructor(readonly type: T) {}
 }
 
-export class ServiceRequestSync<T extends string, R> extends BaseServiceRequest<T, R> {
-    readonly sync = true;
-    constructor(type: T) {
-        super(type);
-    }
-}
-
-export class ServiceRequestAsync<T extends string, R> extends BaseServiceRequest<T, R> {
-    constructor(type: T) {
+export class ServiceRequest<T extends string, R> extends BaseServiceRequest<T, R> {
+    constructor(readonly type: T) {
         super(type);
     }
 }
 
 interface ServiceResponseBase<T> {
     ___T?: T;
+    value?: T;
+    error?: Error | undefined;
 }
 
 export interface ServiceResponseSuccess<T> extends ServiceResponseBase<T> {
@@ -64,3 +59,14 @@ export function isServiceResponseFailure<T>(res: ServiceResponseBase<T>): res is
 export function isInstanceOfFn<T>(constructor: { new (): T }): (t: unknown) => t is T {
     return (t): t is T => t instanceof constructor;
 }
+
+export interface ServiceRequestFactory<R extends ServiceRequest, T extends string = R['type']> {
+    type: T;
+    is: (r: ServiceRequest | R) => r is R;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    create(...params: any[]): R;
+}
+
+export const __testing__ = {
+    BaseServiceRequest,
+};
