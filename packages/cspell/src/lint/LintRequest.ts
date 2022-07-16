@@ -6,6 +6,10 @@ import * as util from '../util/util';
 
 const defaultContextRange = 20;
 
+interface Deprecated {
+    fileLists?: LinterOptions['fileList'];
+}
+
 export class LintRequest {
     readonly uniqueFilter: (issue: Issue) => boolean;
     readonly locale: string;
@@ -17,7 +21,11 @@ export class LintRequest {
     readonly enableGlobDot: boolean | undefined;
     readonly fileLists: string[];
 
-    constructor(readonly fileGlobs: string[], readonly options: LinterOptions, readonly reporter: CSpellReporter) {
+    constructor(
+        readonly fileGlobs: string[],
+        readonly options: LinterOptions & Deprecated,
+        readonly reporter: CSpellReporter
+    ) {
         this.root = path.resolve(options.root || process.cwd());
         this.configFile = options.config;
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
@@ -26,6 +34,6 @@ export class LintRequest {
         this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
         this.showContext =
             options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0;
-        this.fileLists = options.fileLists || [];
+        this.fileLists = (options.fileList ?? options.fileLists) || [];
     }
 }

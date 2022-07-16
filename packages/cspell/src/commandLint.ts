@@ -1,7 +1,6 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
-import { getReporter } from './cli-reporter';
-import { LinterCliOptions, LinterOptions } from './options';
+import { LinterCliOptions } from './options';
 import { DEFAULT_CACHE_LOCATION } from './util/cache';
 import { CheckFailed } from './util/errors';
 
@@ -112,9 +111,7 @@ export function commandLint(prog: Command): Command {
         .arguments('[globs...]')
         .action((fileGlobs: string[], options: LinterCliOptions) => {
             const { mustFindFiles, fileList } = options;
-            const cliReporter = getReporter({ ...options, fileGlobs });
-            const lintOptions: LinterOptions = { ...options, fileLists: fileList };
-            return App.lint(fileGlobs, lintOptions, cliReporter).then((result) => {
+            return App.lint(fileGlobs, options).then((result) => {
                 if (!fileGlobs.length && !result.files && !result.errors && !fileList) {
                     spellCheckCommand.outputHelp();
                     throw new CheckFailed('outputHelp', 1);

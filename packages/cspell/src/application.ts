@@ -1,4 +1,4 @@
-import { pipeAsync, toAsyncIterable, opTap, opMap } from '@cspell/cspell-pipe';
+import { opMap, opTap, pipeAsync, toAsyncIterable } from '@cspell/cspell-pipe';
 import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import type { CheckTextInfo, SuggestionsForWordResult, TraceResult } from 'cspell-lib';
 import {
@@ -11,9 +11,10 @@ import {
     traceWordsAsync,
 } from 'cspell-lib';
 import * as path from 'path';
+import { getReporter } from './cli-reporter';
 import { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
 import { LintRequest, runLint } from './lint';
-import { BaseOptions, fixLegacy, LegacyOptions, LinterOptions, SuggestionOptions, TraceOptions } from './options';
+import { BaseOptions, fixLegacy, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options';
 import { simpleRepl } from './repl';
 import { calcFinalConfigInfo, readConfig, readFile } from './util/fileHelper';
 import { readStdin } from './util/stdin';
@@ -24,9 +25,9 @@ export type { TraceResult } from 'cspell-lib';
 
 export type AppError = NodeJS.ErrnoException;
 
-export function lint(fileGlobs: string[], options: LinterOptions, emitters: CSpellReporter): Promise<RunResult> {
+export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: CSpellReporter): Promise<RunResult> {
     options = fixLegacy(options);
-    const cfg = new LintRequest(fileGlobs, options, emitters);
+    const cfg = new LintRequest(fileGlobs, options, reporter ?? getReporter({ ...options, fileGlobs }));
     return runLint(cfg);
 }
 
