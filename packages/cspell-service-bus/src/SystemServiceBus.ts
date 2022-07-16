@@ -9,13 +9,15 @@ import {
     HandlerNext,
     ServiceBus,
 } from './bus';
-import { createResponse, ServiceRequest, ServiceRequestFactory } from './request';
+import { createResponse, RequestResponseType, ServiceRequest, ServiceRequestFactory } from './request';
 
 export interface SystemServiceBus extends Dispatcher {
     registerHandler(requestPrefix: string, handler: Handler): void;
     registerRequestHandler<T extends ServiceRequest>(
         requestDef: ServiceRequestFactory<T>,
-        fn: HandleRequestFn<T>
+        fn: HandleRequestFn<T>,
+        name?: string | undefined,
+        description?: string | undefined
     ): void;
     createSubsystem(name: string, requestPattern: string | RegExp): SubsystemServiceBus;
     readonly subsystems: SubsystemServiceBus[];
@@ -35,7 +37,6 @@ class SystemServiceBusImpl implements SystemServiceBus {
         this.serviceBus.addHandler(
             createRequestHandler(RequestCreateSubsystemFactory, (req) => {
                 const { name, requestPattern } = req;
-                console.log(`%o`, req);
                 const sub = createSubsystemServiceBus(name, requestPattern);
                 this._subsystems.push(sub);
                 this.serviceBus.addHandler(sub.handler);
@@ -44,7 +45,7 @@ class SystemServiceBusImpl implements SystemServiceBus {
         );
     }
 
-    dispatch<R extends ServiceRequest<string, unknown>>(request: R): R['__r'] {
+    dispatch<R extends ServiceRequest<string, unknown>>(request: R): RequestResponseType<R> {
         return this.serviceBus.dispatch(request);
     }
 
@@ -61,9 +62,11 @@ class SystemServiceBusImpl implements SystemServiceBus {
 
     registerRequestHandler<T extends ServiceRequest>(
         requestDef: ServiceRequestFactory<T>,
-        fn: HandleRequestFn<T>
+        fn: HandleRequestFn<T>,
+        name?: string | undefined,
+        description?: string | undefined
     ): void {
-        this.registerHandler(requestDef.type, createRequestHandler(requestDef, fn));
+        this.registerHandler(requestDef.type, createRequestHandler(requestDef, fn, name, description));
     }
 
     get subsystems() {
@@ -145,12 +148,12 @@ class SubsystemServiceBusImpl extends ServiceBus implements SubsystemServiceBus 
         request: RequestRegisterHandlerFactory,
         next: HandleRequestKnown<RequestRegisterHandlerFactory>
     ) {
-        console.log(`${this.name}.handleRegistrationReq %o`, request);
+        // console.log(`${this.name}.handleRegistrationReq %o`, request);
         if (!this.canHandleType(request.requestPrefix)) {
-            console.log(`${this.name}.handleRegistrationReq skip`);
+            // console.log(`${this.name}.handleRegistrationReq skip`);
             return next(request);
         }
-        console.log(`${this.name}.handleRegistrationReq add ***`);
+        // console.log(`${this.name}.handleRegistrationReq add ***`);
         this.addHandler(request.handler);
         return createResponse(this);
     }

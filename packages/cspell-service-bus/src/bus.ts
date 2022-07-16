@@ -1,7 +1,7 @@
 import { createResponseFail, IsARequest, RequestResponseType, ServiceRequest, ServiceRequestFactory } from './request';
 
 export interface Dispatcher {
-    dispatch<R extends ServiceRequest>(request: R): R['__r'];
+    dispatch<R extends ServiceRequest>(request: R): RequestResponseType<R>;
 }
 
 const MAX_DEPTH = 10;
@@ -21,12 +21,12 @@ export class ServiceBus implements Dispatcher {
     }
 
     dispatch<R extends ServiceRequest>(request: R): RequestResponseType<R> {
-        type RR = RequestResponseType<R>;
         let depth = 0;
         const dispatcher: Dispatcher = { dispatch };
         const handler = this.reduceHandlers(this.handlers, request, dispatcher, this.defaultHandler);
 
-        function dispatch<R extends ServiceRequest>(request: R): RR {
+        function dispatch<R extends ServiceRequest>(request: R): RequestResponseType<R> {
+            type RR = R extends { __r?: infer R } ? R : never;
             ++depth;
             if (depth >= MAX_DEPTH) {
                 return createResponseFail(request, new ErrorServiceRequestDepthExceeded(request, depth)) as RR;

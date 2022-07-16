@@ -1,4 +1,12 @@
-import { createResponse, ServiceRequest, ServiceRequestFactory } from './request';
+import { assert } from './assert';
+import {
+    createResponse,
+    createResponseFail,
+    isServiceResponseFailure,
+    isServiceResponseSuccess,
+    ServiceRequest,
+    ServiceRequestFactory,
+} from './request';
 import {
     createSystemServiceBus,
     RequestCreateSubsystemFactory,
@@ -65,11 +73,31 @@ describe('SystemServiceBus Behavior', () => {
     serviceBus.registerRequestHandler(RequestFsReadFile, (req, next) =>
         /https?:/.test(req.uri) ? createResponse(`fetch http: ${req.uri}`) : next(req)
     );
+    serviceBus.registerRequestHandler(
+        RequestFsReadFile,
+        (req, next, dispatcher) => {
+            if (!req.uri.endsWith('.gz')) {
+                return next(req);
+            }
+            const fileRes = next(req);
+            if (!isServiceResponseSuccess(fileRes)) return fileRes;
+            const decompressRes = dispatcher.dispatch(RequestZlibInflate.create(fileRes.value));
+            if (isServiceResponseFailure(decompressRes)) {
+                return createResponseFail(RequestFsReadFile, decompressRes.error);
+            }
+            assert(decompressRes.value);
+            return createResponse(decompressRes.value);
+        },
+        RequestFsReadFile.type + '/zip'
+    );
     serviceBus.registerRequestHandler(RequestZlibInflate, (req) => createResponse(`Inflate: ${req.data}`));
 
     test.each`
-        request                                           | expected
-        ${RequestFsReadFile.create('file://my_file.txt')} | ${{ value: 'read file: file://my_file.txt' }}
+        request                                                                | expected
+        ${RequestFsReadFile.create('file://my_file.txt')}                      | ${{ value: 'read file: file://my_file.txt' }}
+        ${RequestFsReadFile.create('https://www.example.com/my_file.txt')}     | ${{ value: 'fetch http: https://www.example.com/my_file.txt' }}
+        ${RequestFsReadFile.create('https://www.example.com/my_dict.trie.gz')} | ${{ value: 'Inflate: fetch http: https://www.example.com/my_dict.trie.gz' }}
+        ${{ type: 'zlib:compress' }}                                           | ${{ error: Error('Unhandled Request: zlib:compress') }}
     `('dispatch requests', ({ request, expected }) => {
         expect(serviceBus.dispatch(request)).toEqual(expected);
     });
