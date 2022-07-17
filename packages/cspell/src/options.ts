@@ -56,7 +56,7 @@ export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'
      * The files in the lists will be filtered against the glob patterns.
      * - an entry of `stdin` means to read the file list from **`stdin`**
      */
-    fileLists?: string[] | undefined;
+    fileList?: string[] | undefined;
 
     /**
      * Files must be found and processed otherwise it is considered an error.
@@ -142,21 +142,36 @@ export interface BaseOptions {
     defaultConfiguration?: boolean;
 }
 
-export interface LinterCliOptions extends Omit<LinterOptions, 'fileLists'> {
+export interface LinterCliOptions extends LinterOptions {
+    /**
+     * Show legacy output
+     */
     legacy?: boolean;
-    summary: boolean;
-    issues: boolean;
-    silent: boolean;
-    mustFindFiles: boolean;
+    /**
+     * Show summary at the end
+     */
+    summary?: boolean;
+    /**
+     * Show issues
+     */
+    issues?: boolean;
+    /**
+     * Run in silent mode.
+     * @default false
+     */
+    silent?: boolean;
+    /**
+     * Show progress
+     */
     progress?: boolean;
     /**
      * issues are shown with a relative path to the root or `cwd`
      */
     relative?: boolean;
     /**
-     * List of file paths to files that contains a list of files to be spell checked.
+     * Files must be found or cli will exit with an error.
      */
-    fileList?: string[];
+    mustFindFiles?: boolean;
 }
 
 export function fixLegacy<T extends BaseOptions>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {
