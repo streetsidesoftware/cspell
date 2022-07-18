@@ -13,8 +13,6 @@ const parsers: Record<string, string | undefined> = {
 type CachedSample = RuleTester.ValidTestCase;
 type Options = Partial<Rule.Options>;
 
-const sampleFiles = new Map<string, CachedSample>();
-
 const ruleTester = new RuleTester({
     env: {
         es6: true,
@@ -119,6 +117,12 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             ],
             { ignoreImports: false }
         ),
+        // cspell:ignore GRRRRRR UUUUUG
+        readInvalid(
+            'with-errors/creepyData.ts',
+            ['Unknown word: "uuug"', 'Unknown word: "grrr"', 'Unknown word: "GRRRRRR"', 'Unknown word: "UUUUUG"'],
+            { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') }
+        ),
     ],
 });
 
@@ -126,11 +130,12 @@ function resolveFromMonoRepo(file: string): string {
     return path.resolve(root, file);
 }
 
-function readFix(_filename: string, options?: Options): CachedSample {
-    const s = sampleFiles.get(_filename);
-    if (s) return s;
+function resolveFix(filename: string): string {
+    return path.resolve(fixturesDir, filename);
+}
 
-    const filename = path.resolve(fixturesDir, _filename);
+function readFix(_filename: string, options?: Options): CachedSample {
+    const filename = resolveFix(_filename);
     const code = fs.readFileSync(filename, 'utf-8');
 
     const sample: CachedSample = {
