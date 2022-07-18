@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.4.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v6.3.0...v6.4.0-alpha.0) (2022-07-18)
+
+
+### Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#3239](https://github.com/streetsidesoftware/cspell/issues/3239)) ([384e4c9](https://github.com/streetsidesoftware/cspell/commit/384e4c93ef833568dc550d7eee78c849d384b372))
+
+
+### Features
+
+* **cspell-eslint-plugin:** Experimental Add word to dictionary ([#3247](https://github.com/streetsidesoftware/cspell/issues/3247)) ([22a514b](https://github.com/streetsidesoftware/cspell/commit/22a514b67291cbcfcb1a2917c099f0c4c606a9ef))
+
+
+
+
+
 # [6.3.0](https://github.com/streetsidesoftware/cspell/compare/v6.2.4-alpha.0...v6.3.0) (2022-07-17)
 
 
