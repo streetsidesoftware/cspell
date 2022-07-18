@@ -1,12 +1,21 @@
 // cspell:ignore TSESTree
 import type { TSESTree } from '@typescript-eslint/types';
 import assert from 'assert';
-import { createTextDocument, CSpellSettings, DocumentValidator, ValidationIssue, TextDocument } from 'cspell-lib';
+import {
+    createTextDocument,
+    CSpellSettings,
+    DocumentValidator,
+    refreshDictionaryCache,
+    TextDocument,
+    ValidationIssue,
+} from 'cspell-lib';
 import type { Rule } from 'eslint';
 // eslint-disable-next-line node/no-missing-import
-import type { Comment, Identifier, Literal, Node, TemplateElement, ImportSpecifier } from 'estree';
+import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
+import * as path from 'path';
 import { format } from 'util';
-import { normalizeOptions } from './options';
+import { addWordToCustomWordList } from './customWordList';
+import { normalizeOptions, Options } from './options';
 import optionsSchema from './_auto_generated_/options.schema.json';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
@@ -19,6 +28,7 @@ const messages = {
     wordUnknown: 'Unknown word: "{{word}}"',
     wordForbidden: 'Forbidden word: "{{word}}"',
     suggestWord: '{{word}}',
+    addWordToDictionary: 'Add "{{word}}" to {{dictionary}}',
 } as const;
 
 type Messages = typeof messages;
@@ -76,7 +86,6 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
     function checkTemplateElement(node: TemplateElement & Rule.NodeParentExtension) {
         if (!options.checkStringTemplates) return;
         debugNode(node, node.value);
-        // console.log('Template: %o', node.value);
         checkNodeText(node, node.value.cooked || node.value.raw);
     }
 
@@ -200,8 +209,35 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
             };
         }
 
+        function createAddWordToDictionaryFix(word: string): Rule.SuggestionReportDescriptor | undefined {
+            if (!options.customWordListFile) return undefined;
+
+            const dictFile = path.resolve(context.getCwd(), options.customWordListFile);
+
+            const data = { word, dictionary: path.basename(dictFile) };
+            const messageId: MessageIds = 'addWordToDictionary';
+
+            return {
+                messageId,
+                data,
+                fix: (_fixer) => {
+                    // This wrapper is a hack to delay applying the fix until it is actually used.
+                    // But it is not reliable, since ESLint + extension will randomly read the value.
+                    return new WrapFix({ range: [start, end], text: word }, () => {
+                        refreshDictionaryCache(0);
+                        addWordToCustomWordList(dictFile, word);
+                        validator.updateDocumentText(context.getSourceCode().getText());
+                    });
+                },
+            };
+        }
+
         log('Suggestions: %o', issue.suggestions);
-        const suggest: Rule.ReportDescriptorOptions['suggest'] = issue.suggestions?.map(createSug);
+        const suggestions: Rule.ReportDescriptorOptions['suggest'] = issue.suggestions?.map(createSug);
+        const addWordFix = createAddWordToDictionaryFix(issue.text);
+
+        const suggest =
+            suggestions || addWordFix ? (suggestions || []).concat(addWordFix ? [addWordFix] : []) : undefined;
 
         const des: Rule.ReportDescriptor = {
             messageId,
@@ -383,16 +419,32 @@ function getDocValidator(context: Rule.RuleContext): DocumentValidator {
     const doc = getTextDocument(context.getFilename(), text);
     const cachedValidator = docValCache.get(doc);
     if (cachedValidator) {
+        refreshDictionaryCache(0);
         cachedValidator.updateDocumentText(text);
         return cachedValidator;
     }
 
     const options = normalizeOptions(context.options[0]);
+    const settings = calcInitialSettings(options, context.getCwd());
     isDebugMode = options.debugMode || false;
     isDebugMode && logContext(context);
-    const validator = new DocumentValidator(doc, options, defaultSettings);
+    const validator = new DocumentValidator(doc, options, settings);
     docValCache.set(doc, validator);
     return validator;
+}
+
+function calcInitialSettings(options: Options, cwd: string): CSpellSettings {
+    if (!options.customWordListFile) return defaultSettings;
+
+    const dictFile = path.resolve(cwd, options.customWordListFile);
+
+    const settings: CSpellSettings = {
+        ...defaultSettings,
+        dictionaryDefinitions: [{ name: 'eslint-plugin-custom-words', path: dictFile }],
+        dictionaries: ['eslint-plugin-custom-words'],
+    };
+
+    return settings;
 }
 
 function getTextDocument(filename: string, content: string): TextDocument {
@@ -401,7 +453,31 @@ function getTextDocument(filename: string, content: string): TextDocument {
     }
 
     const doc = createTextDocument({ uri: filename, content });
-    // console.error(`CreateTextDocument: ${doc.uri}`);
     cache.lastDoc = { filename, doc };
     return doc;
+}
+
+/**
+ * This wrapper is used to add a
+ */
+class WrapFix implements Rule.Fix {
+    /**
+     *
+     * @param fix - the example Fix
+     * @param onGetText - called when `fix.text` is accessed
+     * @param limit - limit the number of times onGetText is called. Set it to `-1` for infinite.
+     */
+    constructor(private fix: Rule.Fix, private onGetText: () => void, private limit = 1) {}
+
+    get range() {
+        return this.fix.range;
+    }
+
+    get text() {
+        if (this.limit) {
+            this.limit--;
+            this.onGetText();
+        }
+        return this.fix.text;
+    }
 }

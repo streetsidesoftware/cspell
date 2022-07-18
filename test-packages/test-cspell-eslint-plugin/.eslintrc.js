@@ -40,6 +40,7 @@ const config = {
                         ignores: ['modules'],
                     },
                 ],
+                '@cspell/spellchecker': ['warn', { customWordListFile: 'words.txt' }],
             },
         },
         {

@@ -57,6 +57,11 @@ export interface Check {
      * @default true
      */
     checkComments?: boolean;
+    /**
+     * **Experimental**: Specify a path to a custom word list file. A utf-8 text file with one word per line.
+     * This file is used to present the option to add words.
+     */
+    customWordListFile?: string | undefined;
 }
 
 export const defaultCheckOptions: Required<Check> = {
@@ -64,8 +69,9 @@ export const defaultCheckOptions: Required<Check> = {
     checkIdentifiers: true,
     checkStrings: true,
     checkStringTemplates: true,
-    ignoreImports: true,
+    customWordListFile: undefined,
     ignoreImportProperties: true,
+    ignoreImports: true,
 };
 
 export const defaultOptions: Required<Options> = {
