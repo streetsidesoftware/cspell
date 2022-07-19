@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.4.0](https://github.com/streetsidesoftware/cspell/compare/v6.4.0-alpha.0...v6.4.0) (2022-07-19)
+
+
+### Bug Fixes
+
+* Mark adding words to custom dictionary experimental ([#3266](https://github.com/streetsidesoftware/cspell/issues/3266)) ([ec0dcd8](https://github.com/streetsidesoftware/cspell/commit/ec0dcd8c5df01ff3a038df0df11041902306555a))
+
+
+
+
+
 # [6.4.0-alpha.0](https://github.com/streetsidesoftware/cspell/compare/v6.3.0...v6.4.0-alpha.0) (2022-07-18)
 
 
