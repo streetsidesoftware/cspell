@@ -15,7 +15,7 @@ import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateEleme
 import * as path from 'path';
 import { format } from 'util';
 import { addWordToCustomWordList } from './customWordList';
-import { normalizeOptions, Options } from './options';
+import { CustomWordListFile, normalizeOptions, Options } from './options';
 import optionsSchema from './_auto_generated_/options.schema.json';
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
@@ -210,9 +210,11 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         }
 
         function createAddWordToDictionaryFix(word: string): Rule.SuggestionReportDescriptor | undefined {
-            if (!options.customWordListFile) return undefined;
+            if (!isCustomWordListFile(options.customWordListFile) || !options.customWordListFile.addWords) {
+                return undefined;
+            }
 
-            const dictFile = path.resolve(context.getCwd(), options.customWordListFile);
+            const dictFile = path.resolve(context.getCwd(), options.customWordListFile.path);
 
             const data = { word, dictionary: path.basename(dictFile) };
             const messageId: MessageIds = 'addWordToDictionary';
@@ -434,9 +436,11 @@ function getDocValidator(context: Rule.RuleContext): DocumentValidator {
 }
 
 function calcInitialSettings(options: Options, cwd: string): CSpellSettings {
-    if (!options.customWordListFile) return defaultSettings;
+    const { customWordListFile } = options;
+    if (!customWordListFile) return defaultSettings;
 
-    const dictFile = path.resolve(cwd, options.customWordListFile);
+    const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
+    const dictFile = path.resolve(cwd, filePath);
 
     const settings: CSpellSettings = {
         ...defaultSettings,
@@ -480,4 +484,8 @@ class WrapFix implements Rule.Fix {
         }
         return this.fix.text;
     }
+}
+
+function isCustomWordListFile(value: string | CustomWordListFile | undefined): value is CustomWordListFile {
+    return !!value && typeof value === 'object';
 }

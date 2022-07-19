@@ -1,7 +1,30 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "definitions": {},
+  "definitions": {
+    "CustomWordListFile": {
+      "additionalProperties": false,
+      "properties": {
+        "addWords": {
+          "description": "**Experimental**: Provide a fix option to add words to the file.\n\nNote: this does not yet work perfectly.",
+          "type": "boolean"
+        },
+        "path": {
+          "$ref": "#/definitions/CustomWordListFilePath",
+          "description": "Path to word list file. File format: 1 word per line"
+        }
+      },
+      "required": [
+        "path",
+        "addWords"
+      ],
+      "type": "object"
+    },
+    "CustomWordListFilePath": {
+      "description": "Specify a path to a custom word list file",
+      "type": "string"
+    }
+  },
   "properties": {
     "checkComments": {
       "default": true,
@@ -24,8 +47,15 @@
       "type": "boolean"
     },
     "customWordListFile": {
-      "description": "**Experimental**: Specify a path to a custom word list file. A utf-8 text file with one word per line. This file is used to present the option to add words.",
-      "type": "string"
+      "anyOf": [
+        {
+          "$ref": "#/definitions/CustomWordListFilePath"
+        },
+        {
+          "$ref": "#/definitions/CustomWordListFile"
+        }
+      ],
+      "description": "Specify a path to a custom word list file"
     },
     "debugMode": {
       "default": false,

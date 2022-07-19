@@ -58,10 +58,28 @@ export interface Check {
      */
     checkComments?: boolean;
     /**
-     * **Experimental**: Specify a path to a custom word list file. A utf-8 text file with one word per line.
-     * This file is used to present the option to add words.
+     * Specify a path to a custom word list file
      */
-    customWordListFile?: string | undefined;
+    customWordListFile?: CustomWordListFilePath | CustomWordListFile | undefined;
+}
+
+/**
+ * Specify a path to a custom word list file
+ */
+export type CustomWordListFilePath = string;
+
+export interface CustomWordListFile {
+    /**
+     * Path to word list file.
+     * File format: 1 word per line
+     */
+    path: CustomWordListFilePath;
+    /**
+     * **Experimental**: Provide a fix option to add words to the file.
+     *
+     * Note: this does not yet work perfectly.
+     */
+    addWords: boolean;
 }
 
 export const defaultCheckOptions: Required<Check> = {
