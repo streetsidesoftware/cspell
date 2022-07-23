@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2758, Issues found: 8328 in 930 files
+ CSpell: Files checked: 2758, Issues found: 8317 in 928 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -144,7 +144,6 @@ Lines:
 ./django/contrib/admindocs/utils.py:9:6       - Unknown word (asgiref)    -- from asgiref.local import Local
 ./django/contrib/admindocs/views.py:173:35    - Unknown word (myview)     -- # 'mymodule.views.myview' -> 'mymodule.views
 ./django/contrib/admindocs/views.py:487:25    - Unknown word (regexes)    -- Clean up urlpattern regexes into something more
-./django/contrib/auth/base_user.py:24:40     - Unknown word (lowercasing) -- the email address by lowercasing the domain part of it
 ./django/contrib/auth/base_user.py:38:24     - Unknown word (abcdefghjkmnpqrstuvwxyz) -- allowed_chars="abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ
 ./django/contrib/auth/base_user.py:38:47     - Unknown word (ABCDEFGHJKLMNPQRSTUVWXYZ) -- abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789",
 ./django/contrib/auth/context_processors.py:16:33     - Unknown word (someapp)    -- To fix 'item in perms.someapp' and __getitem__ interaction
@@ -158,7 +157,6 @@ Lines:
 ./django/contrib/auth/hashers.py:556:5     - Unknown word (maxmem)     -- maxmem = 0
 ./django/contrib/auth/hashers.py:572:13    - Unknown word (dklen)      -- dklen=64,
 ./django/contrib/auth/models.py:11:19     - Unknown word (itercompat) -- from django.utils.itercompat import is_iterable
-./django/contrib/auth/password_validation.py:223:31    - Unknown word (deduplicated) -- passwords (lowercased and deduplicated), created by Royce Williams
 ./django/contrib/auth/urls.py:27:17     - Unknown word (uidb)       -- "reset/<uidb64>/<token>/",
 ./django/contrib/auth/views.py:301:28    - Unknown word (Referer)    -- # HTTP Referer header.
 ./django/contrib/contenttypes/admin.py:25:9      - Unknown word (gfks)       -- gfks = [
@@ -371,7 +369,6 @@ Lines:
 ./django/contrib/sites/management.py:39:60     - Unknown word (incrementation) -- instead of relying on auto-incrementation,
 ./django/contrib/staticfiles/handlers.py:9:27      - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIHandler
 ./django/contrib/staticfiles/handlers.py:9:39      - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler
-./django/contrib/staticfiles/management/commands/collectstatic.py:352:22    - Unknown word (Symlinking) -- "Symlinking is not supported in
 ./django/contrib/staticfiles/management/commands/findstatic.py:9:14      - Unknown word (staticfile) -- label = "staticfile"
 ./django/contrib/staticfiles/management/commands/runserver.py:14:16     - Unknown word (nostatic)   -- "--nostatic",
 ./django/contrib/staticfiles/storage.py:132:58    - Unknown word (myfont)     -- face hack, like url(myfont.eot?#iefix")
@@ -615,7 +612,6 @@ Lines:
 ./django/db/migrations/serializer.py:164:51    - Unknown word (Qualname)        -- value.__qualname__: # Qualname can include <locals
 ./django/db/migrations/serializer.py:237:24    - Unknown word (fspath)          -- return repr(os.fspath(self.value)), {}
 ./django/db/migrations/serializer.py:81:7      - Unknown word (Deconstructable) -- class DeconstructableSerializer(BaseSerializer
-./django/db/migrations/utils.py:32:5      - Unknown word (unscoped)   -- unscoped model relationship.
 ./django/db/models/base.py:1005:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
 ./django/db/models/base.py:112:9     - Unknown word (contributable) -- contributable_attrs = {}
 ./django/db/models/base.py:701:40    - Unknown word (attnames)      -- an iterable of field attnames. If fields is None,
@@ -799,7 +795,6 @@ Lines:
 ./django/utils/encoding.py:151:66    - Unknown word (multibyte)  -- bytes ≥ 128 are part of multibyte
 ./django/utils/encoding.py:153:2     - Unknown word (hexdig)     -- _hexdig = "0123456789ABCDEFabcdef
 ./django/utils/encoding.py:203:23    - Unknown word (alphanum)   -- # unreserved  = alphanum | mark
-./django/utils/encoding.py:246:28    - Unknown word (hardcoding) -- some flexibility for hardcoding separators.
 ./django/utils/feedgenerator.py:8:16      - Unknown word (Poynter)    -- ... title="Poynter E-Media Tidbits",
 ./django/utils/formats.py:276:33    - Unknown word (CFGY)       -- ?:^|[^%])(?:%%)*)%([CFGY])",
 ./django/utils/functional.py:338:66    - Unknown word (unpickler)  -- _ method and custom unpickler. We
@@ -1693,7 +1688,6 @@ Lines:
 ./tests/forms_tests/tests/test_forms.py:882:15    - Unknown word (Beatle)           -- class BeatleForm(Form):
 ./tests/forms_tests/tests/test_formsets.py:1025:66   - Unknown word (Fernet)       -- inkFormSet(initial=[{"name": "Fernet and Coke"}])
 ./tests/forms_tests/tests/test_formsets.py:1320:40   - Unknown word (mgmt)         -- someone fiddles with the mgmt form data...
-./tests/forms_tests/tests/test_formsets.py:239:26    - Unknown word (prefilled)  -- A FormSet can be prefilled with existing data by
 ./tests/forms_tests/tests/test_formsets.py:271:41    - Unknown word (Decemberists) -- Calexico", "100"), ("The Decemberists", "")], initial_forms
 ./tests/forms_tests/tests/test_formsets.py:593:25    - Unknown word (Fergie)       -- {"choice": "Fergie", "votes": 900},
 ./tests/forms_tests/tests/test_formsets.py:826:34    - Unknown word (Basia)        -- choices-3-choice": "Basia Bulat",
@@ -2564,7 +2558,6 @@ Lines:
 ./tests/schema/tests.py:2144:50   - Unknown word (uniquetest) -- remote_field.through, "uniquetest_id", "schema_uniquetest
 ./tests/schema/tests.py:2983:55   - Unknown word (tagindexed) -- constraints("schema_tagindexed").values()
 ./tests/schema/tests.py:325:48    - Unknown word (repointing) -- out of FK order, then repointing, works"
-./tests/schema/tests.py:3702:81   - Unknown word (upcase)     -- and, for Oracle, un-upcase
 ./tests/schema/tests.py:4346:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
 ./tests/schema/tests.py:696:38    - Unknown word (TINYINT)    -- BooleanField are stored as TINYINT(1) on MySQL.
 ./tests/select_for_update/tests.py:158:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
