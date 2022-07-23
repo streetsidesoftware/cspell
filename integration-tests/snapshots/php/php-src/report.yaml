@@ -4,8 +4,8 @@ Url: https://github.com/php/php-src.git
 Args: ["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]
 Summary:
   files: 1843
-  filesWithIssues: 1256
-  issues: 40411
+  filesWithIssues: 1255
+  issues: 40389
   errors: 0
 Errors: []
 
@@ -94,7 +94,6 @@ issues:
   - "docs/output-api.md:15:32    	zhandler    	U   	php_start_ob_buffer(zhandler, chunk_size, erase)"
   - "docs/output-api.md:66:30    	zstring     	U   	/ php_ob_get_buffer(zstring);"
   - "docs/output-api.md:70:30    	zlength     	U   	/ php_ob_get_length(zlength);"
-  - "docs/output-api.md:82:46    	hardcoding  	U   	with old API, unless hardcoding into output.c"
   - "docs/output-api.md:91:61    	OPAQ        	U   	OUTPUT_HANDLER_HOOK_GET_OPAQ, (void *) &custom_ctx"
   - "docs/output-api.md:132:14   	userland    	U   	* Should the userland API be adjusted and"
   - "docs/output-api.md:135:1    	behaviour   	U   	behaviour of the current (to be"
@@ -3139,7 +3138,6 @@ issues:
   - "ext/oci8/oci8_interface.c:1505:9    	errh        	U   	dvoid *errh = NULL;"
   - "ext/oci8/oci8_interface.c:1507:8    	sqltext     	U   	text *sqltext = NULL;"
   - "ext/oci8/oci8_interface.c:1533:76   	pconnection 	U   	resource_ex(arg, NULL, le_pconnection);"
-  - "ext/oci8/oci8_interface.c:1610:38   	prefetched  	U   	number of rows to be prefetched on execute to prefetch"
   - "ext/oci8/oci8_interface.c:1835:8    	dbop        	U   	char *dbop_name;"
   - "ext/oci8/oci8_interface.c:1848:164  	DBOP        	U   	len, (ub4) OCI_ATTR_DBOP, OCI_G(err)));"
   - "ext/oci8/oci8_interface.c:1878:94   	SVCCTX      	U   	svc, (ub4) OCI_HTYPE_SVCCTX, (ub4 *) &call_timeout"
@@ -3178,7 +3176,6 @@ issues:
   - "ext/oci8/oci8_statement.c:762:18    	IBFLOAT         	U   	#if defined(SQLT_IBFLOAT) && defined(SQLT_IBDOUBLE"
   - "ext/oci8/oci8_statement.c:762:43    	IBDOUBLE        	U   	IBFLOAT) && defined(SQLT_IBDOUBLE)"
   - "ext/oci8/oci8_statement.c:787:60    	valuep          	U   	IN The size of each valuep buffer in bytes */"
-  - "ext/oci8/oci8_statement.c:821:23    	prefetching     	U   	/* Enable LOB data prefetching. */"
   - "ext/oci8/oci8_statement.c:826:113   	LOBPREFETCH     	U   	lob_len, 0, OCI_ATTR_LOBPREFETCH_LENGTH, statement->err"
   - "ext/oci8/oci8_statement.c:949:13    	BFILEE          	U   	case SQLT_BFILEE:"
   - "ext/oci8/oci8_statement.c:950:13    	CFILEE          	U   	case SQLT_CFILEE:"
@@ -6319,7 +6316,6 @@ issues:
   - "ext/pdo/pdo.c:148:6     	optstart    	U   	int optstart = 0;"
   - "ext/pdo/pdo.c:151:8     	semicolumns 	U   	int n_semicolumns = 0;"
   - "ext/pdo/pdo.c:274:25    	ldrivers    	U   	char *drivers = NULL, *ldrivers = estrdup(\"\");"
-  - "ext/pdo/php_pdo_driver.h:38:13      	hardcodes   	U   	/* Doctrine hardcodes these constants, avoid"
   - "ext/pgsql/pgsql_arginfo.h:25:20     	errormessage    	U   	#define arginfo_pg_errormessage arginfo_pg_dbname"
   - "ext/pgsql/pgsql_arginfo.h:79:20     	numfields       	U   	#define arginfo_pg_numfields arginfo_pg_num_rows"
   - "ext/pgsql/pgsql_arginfo.h:83:20     	cmdtuples       	U   	#define arginfo_pg_cmdtuples arginfo_pg_num_rows"
@@ -6593,9 +6589,6 @@ issues:
   - "ext/session/session.c:312:54    	CSPRNG      	U   	RAND_BYTES just in case CSPRNG is not safe enough"
   - "ext/session/session.c:634:17    	safemode    	U   	/* Only do the safemode/open_basedir check at"
   - "ext/session/session.c:803:51    	PHPSESSID   	U   	name\", \"PHPSESSID\", PHP_INI_ALL, OnUpdateName"
-  - "ext/session/session.c:846:6     	Serializers 	U   	* Serializers *"
-  - "ext/session/session.c:1039:13   	SERIALIZERS 	U   	#define MAX_SERIALIZERS 32"
-  - "ext/session/session.c:1042:25   	serializers 	U   	static ps_serializer ps_serializers[MAX_SERIALIZERS + 1"
   - "ext/session/session.c:1309:12   	ncookie     	U   	smart_str ncookie = {0};"
   - "ext/session/session.c:1378:38   	SAMESITE    	U   	appends(&ncookie, COOKIE_SAMESITE);"
   - "ext/session/session.c:1512:9    	lensess     	U   	size_t lensess;"
@@ -7202,7 +7195,6 @@ issues:
   - "ext/standard/crypt_sha512.c:757:33  	Msbe    	U   	1000$roundstoolow$kUMsbe306n21p9R.FRkW3IGn.S"
   - "ext/standard/crypt_sha512.c:758:35  	dqbp    	U   	sPuWGsUSklZt58jaTfF4ZEQpyUNGc0dqbpBYYBaHHrsX.\" },"
   - "ext/standard/crypt.c:91:57      	libxcrypt   	U   	stripped down version of libxcrypt and"
-  - "ext/standard/css.c:23:37    	monospace   	U   	margin: 0; font-family: monospace;}\\n\");"
   - "ext/standard/dir.c:52:9     	DIRG        	U   	#define DIRG(v) ZEND_TSRMG(dir_globals"
   - "ext/standard/dir.c:118:14   	dirsep      	U   	static char dirsep_str[2], pathsep_str"
   - "ext/standard/dir.c:118:29   	pathsep     	U   	char dirsep_str[2], pathsep_str[2];"
@@ -8069,7 +8061,6 @@ issues:
   - "sapi/cli/php_http_parser.c:44:18    	NOCLEAR         	U   	#define CALLBACK_NOCLEAR(FOR)"
   - "sapi/cli/php_http_parser.c:92:6     	MKCALENDAR      	U   	, \"MKCALENDAR\""
   - "sapi/cli/php_http_parser.c:105:6    	NOTIMPLEMENTED  	U   	, \"NOTIMPLEMENTED\""
-  - "sapi/cli/php_http_parser.c:109:40   	lowercases      	U   	defined by rfc 2616. Also lowercases them."
   - "sapi/cli/php_http_parser.c:151:21   	unhex           	U   	static const int8_t unhex[256] ="
   - "sapi/cli/php_http_parser.c:234:7    	SKIPBODY        	U   	, F_SKIPBODY = 1 <<"
   - "sapi/cli/php_http_parser.c:546:16   	nada            	U   	; /* nada */"
@@ -8654,7 +8645,6 @@ issues:
   - "Zend/zend_API.c:3602:6  	Callables   	U   	\"Callables of the form [\\\"%s\\\""
   - "Zend/zend_API.c:3918:15 	callability 	U   	/* Determine callability at the first parent"
   - "Zend/zend_API.h:99:67   	evaluable   	U   	function is compile-time evaluable, you are asserting that"
-  - "Zend/zend_ast.c:586:35  	errored 	U   	ASSERT(0 && \"Should have errored during compilation\""
   - "Zend/zend_ast.c:1131:39 	qstr    	U   	void zend_ast_export_qstr(smart_str *str, char"
   - "Zend/zend_ast.c:1290:39 	encaps  	U   	void zend_ast_export_encaps_list(smart_str *str"
   - "Zend/zend_ast.c:1750:17 	ENCAPS  	U   	case ZEND_AST_ENCAPS_LIST:"
@@ -8670,7 +8660,6 @@ issues:
   - "Zend/zend_closures.c:68:32      	newthis 	U   	closure *closure, zval *newthis, zend_class_entry *scope"
   - "Zend/zend_closures.c:126:20     	newclass	U   	zend_class_entry *newclass;"
   - "Zend/zend_closures.c:197:55     	zclosure	U   	return_value, zval *zclosure, zval *newthis, zend"
-  - "Zend/zend_closures.c:764:23     	unscoped	U   	* If the closure is unscoped or static, it has no"
   - "Zend/zend_compile.c:186:14  	uqname          	U   	const char *uqname = ZSTR_VAL(name);"
   - "Zend/zend_compile.c:285:11  	oparray         	U   	void zend_oparray_context_begin(zend_oparray"
   - "Zend/zend_compile.c:373:39  	opnums          	U   	CG(short_circuiting_opnums), sizeof(uint32_t))"
