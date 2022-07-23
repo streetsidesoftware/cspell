@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.4.1](https://github.com/streetsidesoftware/cspell/compare/v6.4.0...v6.4.1) (2022-07-23)
+
+
+### Bug Fixes
+
+* Fix ESLint schema ([#3272](https://github.com/streetsidesoftware/cspell/issues/3272)) ([05bb8ed](https://github.com/streetsidesoftware/cspell/commit/05bb8edd73b7423d3a7f8ae19862b1c658329b63)), closes [#3269](https://github.com/streetsidesoftware/cspell/issues/3269)
+
+
+
+
+
 # [6.4.0](https://github.com/streetsidesoftware/cspell/compare/v6.4.0-alpha.0...v6.4.0) (2022-07-19)
 
 
