@@ -1,30 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
-  "definitions": {
-    "CustomWordListFile": {
-      "additionalProperties": false,
-      "properties": {
-        "addWords": {
-          "description": "**Experimental**: Provide a fix option to add words to the file.\n\nNote: this does not yet work perfectly.",
-          "type": "boolean"
-        },
-        "path": {
-          "$ref": "#/definitions/CustomWordListFilePath",
-          "description": "Path to word list file. File format: 1 word per line"
-        }
-      },
-      "required": [
-        "path",
-        "addWords"
-      ],
-      "type": "object"
-    },
-    "CustomWordListFilePath": {
-      "description": "Specify a path to a custom word list file",
-      "type": "string"
-    }
-  },
+  "definitions": {},
   "properties": {
     "checkComments": {
       "default": true,
@@ -49,10 +26,26 @@
     "customWordListFile": {
       "anyOf": [
         {
-          "$ref": "#/definitions/CustomWordListFilePath"
+          "description": "Specify a path to a custom word list file",
+          "type": "string"
         },
         {
-          "$ref": "#/definitions/CustomWordListFile"
+          "additionalProperties": false,
+          "properties": {
+            "addWords": {
+              "description": "**Experimental**: Provide a fix option to add words to the file.\n\nNote: this does not yet work perfectly.",
+              "type": "boolean"
+            },
+            "path": {
+              "description": "Path to word list file. File format: 1 word per line",
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "addWords"
+          ],
+          "type": "object"
         }
       ],
       "description": "Specify a path to a custom word list file"
