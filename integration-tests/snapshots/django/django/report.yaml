@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: ["**/*.{md,py}"]
 Summary:
   files: 2758
-  filesWithIssues: 930
-  issues: 8328
+  filesWithIssues: 928
+  issues: 8317
   errors: 0
 Errors: []
 
@@ -149,7 +149,6 @@ issues:
   - "django/contrib/admindocs/utils.py:249:14    	calback 	U   	# The active calback_strs are stored by thread"
   - "django/contrib/admindocs/views.py:173:35    	myview  	U   	# 'mymodule.views.myview' -> 'mymodule.views"
   - "django/contrib/admindocs/views.py:487:25    	regexes 	U   	Clean up urlpattern regexes into something more"
-  - "django/contrib/auth/base_user.py:24:40      	lowercasing             	U   	the email address by lowercasing the domain part of it"
   - "django/contrib/auth/base_user.py:38:24      	abcdefghjkmnpqrstuvwxyz 	U   	allowed_chars=\"abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
   - "django/contrib/auth/base_user.py:38:47      	ABCDEFGHJKLMNPQRSTUVWXYZ	U   	abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789\","
   - "django/contrib/auth/context_processors.py:16:33     	someapp 	U   	To fix 'item in perms.someapp' and __getitem__ interaction"
@@ -163,7 +162,6 @@ issues:
   - "django/contrib/auth/hashers.py:556:5    	maxmem  	U   	maxmem = 0"
   - "django/contrib/auth/hashers.py:572:13   	dklen   	U   	dklen=64,"
   - "django/contrib/auth/models.py:11:19     	itercompat  	U   	from django.utils.itercompat import is_iterable"
-  - "django/contrib/auth/password_validation.py:223:31   	deduplicated	U   	passwords (lowercased and deduplicated), created by Royce Williams"
   - "django/contrib/auth/urls.py:27:17   	uidb	U   	\"reset/<uidb64>/<token>/\","
   - "django/contrib/auth/views.py:301:28     	Referer 	U   	# HTTP Referer header."
   - "django/contrib/contenttypes/admin.py:25:9       	gfks	U   	gfks = ["
@@ -376,7 +374,6 @@ issues:
   - "django/contrib/sites/management.py:39:60    	incrementation  	U   	instead of relying on auto-incrementation,"
   - "django/contrib/staticfiles/handlers.py:9:27     	asgi	U   	django.core.handlers.asgi import ASGIHandler"
   - "django/contrib/staticfiles/handlers.py:9:39     	ASGI	U   	handlers.asgi import ASGIHandler"
-  - "django/contrib/staticfiles/management/commands/collectstatic.py:352:22  	Symlinking  	U   	\"Symlinking is not supported in"
   - "django/contrib/staticfiles/management/commands/findstatic.py:9:14       	staticfile  	U   	label = \"staticfile\""
   - "django/contrib/staticfiles/management/commands/runserver.py:14:16   	nostatic	U   	\"--nostatic\","
   - "django/contrib/staticfiles/storage.py:132:58    	myfont  	U   	face hack, like url(myfont.eot?#iefix\")"
@@ -620,7 +617,6 @@ issues:
   - "django/db/migrations/serializer.py:81:7     	Deconstructable 	U   	class DeconstructableSerializer(BaseSerializer"
   - "django/db/migrations/serializer.py:164:51   	Qualname        	U   	value.__qualname__: # Qualname can include <locals"
   - "django/db/migrations/serializer.py:237:24   	fspath          	U   	return repr(os.fspath(self.value)), {}"
-  - "django/db/migrations/utils.py:32:5      	unscoped	U   	unscoped model relationship."
   - "django/db/models/base.py:112:9      	contributable   	U   	contributable_attrs = {}"
   - "django/db/models/base.py:701:40     	attnames        	U   	an iterable of field attnames. If fields is None,"
   - "django/db/models/base.py:1005:19    	autopopulate    	U   	# autopopulate the _order field"
@@ -804,7 +800,6 @@ issues:
   - "django/utils/encoding.py:151:66     	multibyte   	U   	bytes ≥ 128 are part of multibyte"
   - "django/utils/encoding.py:153:2      	hexdig      	U   	_hexdig = \"0123456789ABCDEFabcdef"
   - "django/utils/encoding.py:203:23     	alphanum    	U   	# unreserved = alphanum | mark"
-  - "django/utils/encoding.py:246:28     	hardcoding  	U   	some flexibility for hardcoding separators."
   - "django/utils/feedgenerator.py:8:16      	Poynter 	U   	... title=\"Poynter E-Media Tidbits\","
   - "django/utils/formats.py:276:33  	CFGY	U   	?:^|[^%])(?:%%)*)%([CFGY])\","
   - "django/utils/functional.py:338:66   	unpickler   	U   	_ method and custom unpickler. We"
@@ -1696,7 +1691,6 @@ issues:
   - "tests/forms_tests/tests/test_forms.py:4626:26   	myradio         	U   	'<div class=\"myradio\">{{ radio }}</div>'"
   - "tests/forms_tests/tests/test_forms.py:4643:26   	mycheckbox      	U   	'<div class=\"mycheckbox\">{{ checkbox }}</div"
   - "tests/forms_tests/tests/test_forms.py:4834:48   	doesn           	U   	picking a username that doesn&#x27;t already exist"
-  - "tests/forms_tests/tests/test_formsets.py:239:26     	prefilled   	U   	A FormSet can be prefilled with existing data by"
   - "tests/forms_tests/tests/test_formsets.py:271:41     	Decemberists	U   	Calexico\", \"100\"), (\"The Decemberists\", \"\")], initial_forms"
   - "tests/forms_tests/tests/test_formsets.py:593:25     	Fergie      	U   	{\"choice\": \"Fergie\", \"votes\": 900},"
   - "tests/forms_tests/tests/test_formsets.py:826:34     	Basia       	U   	choices-3-choice\": \"Basia Bulat\","
@@ -2570,7 +2564,6 @@ issues:
   - "tests/schema/tests.py:1883:22   	tagm        	U   	columns[\"tagm2mtest_id\"][0],"
   - "tests/schema/tests.py:2144:50   	uniquetest  	U   	remote_field.through, \"uniquetest_id\", \"schema_uniquetest"
   - "tests/schema/tests.py:2983:55   	tagindexed  	U   	constraints(\"schema_tagindexed\").values()"
-  - "tests/schema/tests.py:3702:81   	upcase      	U   	and, for Oracle, un-upcase"
   - "tests/schema/tests.py:4346:27   	dtob        	U   	self.assertNotIn(\"dtob_auto_now\", columns)"
   - "tests/select_for_update/tests.py:44:48      	Liberchies  	U   	objects.create(name=\"Liberchies\", country=self.country"
   - "tests/select_for_update/tests.py:45:48      	Samois      	U   	objects.create(name=\"Samois-sur-Seine\", country"

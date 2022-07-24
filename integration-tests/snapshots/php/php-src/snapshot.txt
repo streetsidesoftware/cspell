@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1843, Issues found: 40411 in 1256 files
+ CSpell: Files checked: 1843, Issues found: 40389 in 1255 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -163,7 +163,6 @@ Lines:
 ./Zend/zend_ast.c:1131:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
 ./Zend/zend_ast.c:1290:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
 ./Zend/zend_ast.c:1750:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
-./Zend/zend_ast.c:586:35    - Unknown word (errored)    -- ASSERT(0 && "Should have errored during compilation"
 ./Zend/zend_atomic.h:66:44     - Unknown word (Iterlocked) -- is non-const due to Iterlocked API*/
 ./Zend/zend_attributes.c:16:22     - Unknown word (Schröder)   -- | Martin Schröder <m.schroeder2007@gmail
 ./Zend/zend_bitset.h:81:51     - Unknown word (clzl)       -- has_builtin(__builtin_clzl)) \
@@ -176,7 +175,6 @@ Lines:
 ./Zend/zend_closures.c:126:20    - Unknown word (newclass)   -- zend_class_entry *newclass;
 ./Zend/zend_closures.c:197:55    - Unknown word (zclosure)   -- return_value, zval *zclosure, zval *newthis, zend
 ./Zend/zend_closures.c:68:32     - Unknown word (newthis)    -- closure *closure, zval *newthis, zend_class_entry *scope
-./Zend/zend_closures.c:764:23    - Unknown word (unscoped)   -- * If the closure is unscoped or static, it has no
 ./Zend/zend_compile.c:1378:9    - Unknown word (anonclass)  -- size_t anonclass_src_len;
 ./Zend/zend_compile.c:186:14    - Unknown word (uqname)     -- const char *uqname = ZSTR_VAL(name);
 ./Zend/zend_compile.c:2494:28   - Unknown word (unticked)   -- inline bool zend_is_unticked_stmt(zend_ast *ast)
@@ -407,7 +405,6 @@ Lines:
 ./docs/output-api.md:15:32     - Unknown word (zhandler)   -- php_start_ob_buffer(zhandler, chunk_size, erase)
 ./docs/output-api.md:66:30     - Unknown word (zstring)    -- / php_ob_get_buffer(zstring);
 ./docs/output-api.md:70:30     - Unknown word (zlength)    -- / php_ob_get_length(zlength);
-./docs/output-api.md:82:46     - Unknown word (hardcoding) -- with old API, unless hardcoding into output.c
 ./docs/output-api.md:91:61     - Unknown word (OPAQ)       -- OUTPUT_HANDLER_HOOK_GET_OPAQ, (void *) &custom_ctx
 ./docs/parameter-parsing-api.md:200:31    - Unknown word (varargs)    -- Function that accepts only varargs (0 or more) */
 ./docs/parameter-parsing-api.md:74:11     - Unknown word (fcall)      -- zend_fcall_info and zend_fcall
@@ -3480,7 +3477,6 @@ Lines:
 ./ext/oci8/oci8_interface.c:1505:9    - Unknown word (errh)       -- dvoid *errh = NULL;
 ./ext/oci8/oci8_interface.c:1507:8    - Unknown word (sqltext)    -- text *sqltext = NULL;
 ./ext/oci8/oci8_interface.c:1533:76   - Unknown word (pconnection) -- resource_ex(arg, NULL, le_pconnection);
-./ext/oci8/oci8_interface.c:1610:38   - Unknown word (prefetched)  -- number of rows to be prefetched on execute to prefetch
 ./ext/oci8/oci8_interface.c:1835:8    - Unknown word (dbop)        -- char *dbop_name;
 ./ext/oci8/oci8_interface.c:1848:164  - Unknown word (DBOP)        -- len, (ub4) OCI_ATTR_DBOP, OCI_G(err)));
 ./ext/oci8/oci8_interface.c:1878:94   - Unknown word (SVCCTX)      -- svc, (ub4) OCI_HTYPE_SVCCTX, (ub4 *) &call_timeout
@@ -3530,7 +3526,6 @@ Lines:
 ./ext/oci8/oci8_statement.c:762:43    - Unknown word (IBDOUBLE)      -- IBFLOAT) && defined(SQLT_IBDOUBLE)
 ./ext/oci8/oci8_statement.c:787:60    - Unknown word (valuep)        -- IN The size of each valuep buffer in bytes */
 ./ext/oci8/oci8_statement.c:78:19     - Unknown word (SQLTEXT)    -- if (DTRACE_OCI8_SQLTEXT_ENABLED()) {
-./ext/oci8/oci8_statement.c:821:23    - Unknown word (prefetching)   -- /* Enable LOB data prefetching. */
 ./ext/oci8/oci8_statement.c:826:113   - Unknown word (LOBPREFETCH)   -- lob_len, 0, OCI_ATTR_LOBPREFETCH_LENGTH, statement->err
 ./ext/oci8/oci8_statement.c:86:80     - Unknown word (STRLS)      -- statement->err, NULL, 0, OCI_STRLS_CACHE_DELETE));
 ./ext/oci8/oci8_statement.c:949:13    - Unknown word (BFILEE)        -- case SQLT_BFILEE:
@@ -6350,7 +6345,6 @@ Lines:
 ./ext/pdo/pdo_stmt.c:421:21    - Unknown word (unsignend)  -- /* num_index is unsignend */
 ./ext/pdo/pdo_stmt.c:511:8     - Unknown word (stringification) -- /* If stringification is requested, override
 ./ext/pdo/pdo_stmt.c:691:65    - Unknown word (agrs)            -- stmt, int free_ctor_agrs) /* {{{ */
-./ext/pdo/php_pdo_driver.h:38:13     - Unknown word (hardcodes)  -- /* Doctrine hardcodes these constants, avoid
 ./ext/pdo_dblib/dblib_driver.c:112:15    - Unknown word (resret)      -- RETCODE ret, resret;
 ./ext/pdo_dblib/dblib_driver.c:114:2     - Unknown word (dbsetuserdata) -- dbsetuserdata(H->link, (BYTE*)&H-
 ./ext/pdo_dblib/dblib_driver.c:116:14    - Unknown word (dbcmd)         -- if (FAIL == dbcmd(H->link, ZSTR_VAL(sql
@@ -6899,19 +6893,16 @@ Lines:
 ./ext/session/mod_user_class.c:13:14     - Unknown word (Arpad)      -- | Author: Arpad Ray <arpad@php.net>
 ./ext/session/mod_user_class.c:69:43     - Unknown word (nasties)    -- memory leaks or other nasties
 ./ext/session/php_session.h:153:15    - Unknown word (samesite)   -- char *cookie_samesite;
-./ext/session/session.c:1039:13   - Unknown word (SERIALIZERS) -- #define MAX_SERIALIZERS 32
-./ext/session/session.c:1042:25   - Unknown word (serializers) -- static ps_serializer ps_serializers[MAX_SERIALIZERS + 1
-./ext/session/session.c:1309:12   - Unknown word (ncookie)     -- smart_str ncookie = {0};
-./ext/session/session.c:1378:38   - Unknown word (SAMESITE)    -- appends(&ncookie, COOKIE_SAMESITE);
-./ext/session/session.c:1512:9    - Unknown word (lensess)     -- size_t lensess;
-./ext/session/session.c:1553:17   - Unknown word (strice)      -- * session.use_strice_mode=On prevents session
-./ext/session/session.c:2166:42   - Unknown word (newid)       -- current session id. If newid is given, the session
+./ext/session/session.c:1309:12   - Unknown word (ncookie)    -- smart_str ncookie = {0};
+./ext/session/session.c:1378:38   - Unknown word (SAMESITE)   -- appends(&ncookie, COOKIE_SAMESITE);
+./ext/session/session.c:1512:9    - Unknown word (lensess)    -- size_t lensess;
+./ext/session/session.c:1553:17   - Unknown word (strice)     -- * session.use_strice_mode=On prevents session
+./ext/session/session.c:2166:42   - Unknown word (newid)      -- current session id. If newid is given, the session
 ./ext/session/session.c:265:19    - Unknown word (hexconvtab) -- static const char hexconvtab[] = "0123456789abcdefghijklmn
 ./ext/session/session.c:308:15    - Unknown word (outid)      -- zend_string *outid;
 ./ext/session/session.c:312:54    - Unknown word (CSPRNG)     -- RAND_BYTES just in case CSPRNG is not safe enough
 ./ext/session/session.c:634:17    - Unknown word (safemode)   -- /* Only do the safemode/open_basedir check at
 ./ext/session/session.c:803:51    - Unknown word (PHPSESSID)  -- name", "PHPSESSID", PHP_INI_ALL, OnUpdateName
-./ext/session/session.c:846:6     - Unknown word (Serializers) -- * Serializers *
 ./ext/session/session.stub.php:72:143    - Unknown word (httponly)   -- secure = null, ?bool $httponly = null): bool {}
 ./ext/shmop/shmop.c:142:46    - Unknown word (lsll)       -- parameters(ZEND_NUM_ARGS(), "lsll", &key, &flags, &flags
 ./ext/shmop/shmop.c:223:8     - Unknown word (startaddr)  -- char *startaddr;
@@ -7513,7 +7504,6 @@ Lines:
 ./ext/standard/crypt_sha512.c:755:50    - Unknown word (Jeonj)      -- fs2xXgMNrCzIMVcgEJAstJeonj1" },
 ./ext/standard/crypt_sha512.c:757:33    - Unknown word (Msbe)       -- 1000$roundstoolow$kUMsbe306n21p9R.FRkW3IGn.S
 ./ext/standard/crypt_sha512.c:758:35    - Unknown word (dqbp)       -- sPuWGsUSklZt58jaTfF4ZEQpyUNGc0dqbpBYYBaHHrsX." },
-./ext/standard/css.c:23:37     - Unknown word (monospace)  -- margin: 0; font-family: monospace;}\n");
 ./ext/standard/dir.c:118:14    - Unknown word (dirsep)     -- static char dirsep_str[2], pathsep_str
 ./ext/standard/dir.c:118:29    - Unknown word (pathsep)    -- char dirsep_str[2], pathsep_str[2];
 ./ext/standard/dir.c:176:14    - Unknown word (ONLYDIR)    -- #ifndef GLOB_ONLYDIR
@@ -8374,7 +8364,6 @@ Lines:
 ./sapi/cli/php_cli_server.c:2567:45   - Unknown word (realise)       -- compiler somehow doesn't realise that the switch block
 ./sapi/cli/php_cli_server.c:2603:15   - Unknown word (rhandler)      -- zend_result(*rhandler)(php_cli_server*, php
 ./sapi/cli/php_http_parser.c:105:6     - Unknown word (NOTIMPLEMENTED) -- , "NOTIMPLEMENTED"
-./sapi/cli/php_http_parser.c:109:40    - Unknown word (lowercases)     -- defined by rfc 2616. Also lowercases them.
 ./sapi/cli/php_http_parser.c:151:21    - Unknown word (unhex)          -- static const int8_t unhex[256] =
 ./sapi/cli/php_http_parser.c:234:7     - Unknown word (SKIPBODY)       -- , F_SKIPBODY = 1 <<
 ./sapi/cli/php_http_parser.c:44:18     - Unknown word (NOCLEAR)    -- #define CALLBACK_NOCLEAR(FOR)

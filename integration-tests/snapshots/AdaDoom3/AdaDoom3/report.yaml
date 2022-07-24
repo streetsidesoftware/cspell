@@ -5,7 +5,7 @@ Args: ["**/*.*"]
 Summary:
   files: 105
   filesWithIssues: 98
-  issues: 3270
+  issues: 3256
   errors: 0
 Errors: []
 
@@ -578,7 +578,6 @@ issues:
   - "Engine/neo-data.adb:1020:52 	curlies     	U   	dimensionals are wrapped in curlies"
   - "Engine/neo-data.adb:1063:37 	rendevous   	U   	Set the locals via a rendevous"
   - "Engine/neo-data.adb:1287:36 	dimensinal  	U   	-- Parse multi-dimensinal"
-  - "Engine/neo-data.adb:1431:91 	doesn       	U   	the property map if it doesn't exist"
   - "Engine/neo-data.ads:35:78   	SPIR        	U   	in bytes (needed for SPIR-V shaders among other"
   - "Engine/neo-data.ads:46:88   	repetative  	U   	cetera), and \"* #\" for repetative items."
   - "Engine/neo-data.ads:88:82   	listeral    	U   	list] \"}\" | \"[\" integer-listeral \"]\" [name] \"{\" data"
@@ -620,7 +619,6 @@ issues:
   - "Engine/neo-world-commands.adb:96:12     	strncpyz    	U   	-- Q_strncpyz(mapname, map, sizeof"
   - "Engine/neo-world-commands.adb:100:49    	levelname   	U   	was started with \"map <levelname>\", then"
   - "Engine/neo-world-commands.adb:149:18    	netchan     	U   	-- if( cl->netchan.remoteAddress.type"
-  - "Engine/neo-world-commands.adb:157:27    	Couldn      	U   	Com_Printf( \"Couldn't resolve address\\n"
   - "Engine/neo-world-commands.adb:230:24    	Contraint   	U   	exception when Contraint_Error =>"
   - "Engine/neo-world-commands.adb:286:8     	helpmenu    	U   	--!helpmenu -- This brings up a"
   - "Engine/neo-world-commands.adb:287:3     	maprate     	U   	--maprate -- This brings up specific"
@@ -672,7 +670,6 @@ issues:
   - "Engine/neo-world-graphics-renderer.adb:250:59   	qsort           	U   	-- A simple C qsort call. C++ sort would"
   - "Engine/neo-world-graphics-renderer.adb:318:16   	Additve         	U   	-- -- Additve lights with no stage"
   - "Engine/neo-world-graphics-renderer.adb:320:15   	Outter          	U   	-- Outter: for Stage of Light"
-  - "Engine/neo-world-graphics-renderer.adb:335:11   	didn            	U   	-- -- We didn't find any addition"
   - "Engine/neo-world-graphics-renderer.adb:359:56   	edef            	U   	entityInteractionState[ edef.index ] /= viewLight"
   - "Engine/neo-world-graphics-renderer.adb:367:27   	parms           	U   	light.parms.allowLightInViewID"
   - "Engine/neo-world-graphics-renderer.adb:367:83   	Parms           	U   	parms.pointLight && !eParms.weaponDepthHack or else"
@@ -683,7 +680,6 @@ issues:
   - "Engine/neo-world-graphics-renderer.adb:671:16   	Textur          	U   	-- Light_To_Textur : Matrix_4D := ZERO"
   - "Engine/neo-world-graphics-renderer.adb:700:9    	Overbright      	U   	-- Overbright.Set (lightScale"
   - "Engine/neo-world-graphics-renderer.adb:763:28   	Skybox          	U   	when Skybox_Cube_Map => SkyBox_Pass"
-  - "Engine/neo-world-graphics-renderer.adb:888:24   	Preload         	U   	-- Preload plus Z-pass"
   - "Engine/neo-world-graphics-renderer.adb:889:103  	ZFAIL           	U   	KEEP | GLS_STENCIL_OP_ZFAIL_DECR | GLS_STENCIL_OP"
   - "Engine/neo-world-graphics-renderer.adb:889:109  	DECR            	U   	GLS_STENCIL_OP_ZFAIL_DECR | GLS_STENCIL_OP_PASS"
   - "Engine/neo-world-graphics-renderer.adb:892:69   	VERTCACHE       	U   	(int)( vbHandle >> VERTCACHE_OFFSET_SHIFT ) & VERTCACHE"
@@ -703,11 +699,9 @@ issues:
   - "Engine/neo-world-graphics-renderer.adb:1082:110 	DSTBLEND        	U   	estination_Blend_Factor = GLS_DSTBLEND_ONE then"
   - "Engine/neo-world-graphics-renderer.adb:1119:49  	Modifer         	U   	Light.Material.Color_Modifer);"
   - "Engine/neo-world-graphics-renderer.adb:1125:131 	unrotated       	U   	which is always \"top\" on unrotated lights"
-  - "Engine/neo-world-graphics-renderer.adb:1135:53  	aren            	U   	frustum bounding planes aren't in the depth buffer"
   - "Engine/neo-world-graphics-renderer.adb:1135:88  	depthfunc       	U   	depth buffer, so use depthfunc_less instead of depthfunc"
   - "Engine/neo-world-graphics-renderer.adb:1193:44  	Depthbuffer     	U   	currentDepthImage.CopyDepthbuffer( viewport.x1, viewport"
   - "Engine/neo-world-graphics.adb:49:6      	Samper          	U   	-- Samper --"
-  - "Engine/neo-world-graphics.adb:177:15    	shouldn         	U   	-- We shouldn't reach here since a"
   - "Engine/neo-world-graphics.adb:206:67    	renderpass      	U   	instead of having the renderpass do the transition to"
   - "Engine/neo-world-graphics.adb:371:74    	avaliable       	U   	the staging buffer is avaliable"
   - "Engine/neo-world-graphics.adb:837:24    	sepcial         	U   	-- Fetch our sepcial \"handle\" used to Id"
@@ -718,6 +712,7 @@ issues:
   - "Engine/neo-world-graphics.adb:1342:20   	VRAM            	U   	function Guess_VRAM (Memory : VkPhysicalDeviceMem"
   - "Engine/neo-world-graphics.adb:1379:54   	ppenabled       	U   	ppenabledExtensionNames => Instance"
   - "Engine/neo-world-graphics.adb:1380:103  	DEBUGING        	U   	if Is_Debugging then DEBUGING_EXTENSIONS'Length else"
+  - "Engine/neo-world-graphics.adb:1450:22   	Vulkan's        	U   	Info (\"Using Vulkan's debugging layer requires"
   - "Engine/neo-world-graphics.adb:1473:75   	aquire          	U   	surface support; then aquire it"
   - "Engine/neo-world-graphics.adb:1804:27   	reponsible      	U   	Main drawing routine reponsible for managing pipelines"
   - "Engine/neo-world-graphics.adb:1816:15   	meterial        	U   	-- Flag a meterial texture and setup a"
@@ -757,7 +752,6 @@ issues:
   - "Engine/neo-world-network.adb:381:22     	numglobalservers    	U   	if (cls.numglobalservers == -1) {"
   - "Engine/neo-world-network.adb:386:22     	nummplayerservers   	U   	if (cls.nummplayerservers == -1) {"
   - "Engine/neo-world-network.adb:440:95     	mplayer             	U   	globalServers[count] : &cls.mplayerServers[count];"
-  - "Engine/neo-world-network.adb:448:27     	couldn              	U   	-- if we couldn't store the servers"
   - "Engine/neo-world-network.adb:470:32     	connectionless      	U   	Com_DPrintf (\"Unknown connectionless packet command.\\n\")"
   - "Engine/neo-world-network.adb:477:51     	Stringfrom          	U   	Runt packet\\n\",NET_AdrToStringfrom ));"
   - "Engine/neo-world-network.adb:481:23     	Adrfrom             	U   	if !NET_CompareAdrfrom, clc.netchan.remoteAddress"

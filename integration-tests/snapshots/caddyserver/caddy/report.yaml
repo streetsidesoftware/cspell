@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 210
   filesWithIssues: 197
-  issues: 3348
+  issues: 3314
   errors: 0
 Errors: []
 
@@ -32,9 +32,6 @@ issues:
   - "admin.go:1067:31    	elems           	U   	array = append(array, elems...)"
   - "admin.go:1298:21    	pidfile         	U   	// PIDFile writes a pidfile to the file at filename"
   - "caddy.go:61:30      	encodable   	U   	to populate the JSON-encodable fields of the struct"
-  - "caddy.go:334:5      	autosave    	U   	// autosave a non-nil config, if"
-  - "caddy.go:341:29     	Autosave    	U   	filepath.Dir(ConfigAutosavePath)"
-  - "caddy.go:350:17     	autosaved   	U   	Log().Info(\"autosaved config (load with -"
   - "caddy.go:668:24     	byeee       	U   	logger.Warn(\"exiting; byeee!! 👋\")"
   - "caddyconfig/caddyfile/adapter.go:15:9       	caddyfile   	U   	package caddyfile"
   - "caddyconfig/caddyfile/adapter.go:23:35      	caddyconfig 	U   	caddyserver/caddy/v2/caddyconfig\""
@@ -71,7 +68,6 @@ issues:
   - "caddyconfig/httpcaddyfile/addresses.go:163:23   	Sblocks     	U   	for otherAddr, otherSblocks := range addrToServerBlocks"
   - "caddyconfig/httpcaddyfile/addresses.go:197:5    	hport       	U   	if hport, ok := options[\"http"
   - "caddyconfig/httpcaddyfile/addresses.go:200:5    	hsport      	U   	if hsport, ok := options[\"https"
-  - "caddyconfig/httpcaddyfile/addresses.go:368:28   	lowercases  	U   	lowerExceptPlaceholders lowercases s except within"
   - "caddyconfig/httpcaddyfile/builtins_test.go:174:31   	htlm	U   	/old.html /new.html htlm"
   - "caddyconfig/httpcaddyfile/builtins.go:34:14     	mholt           	U   	\"github.com/mholt/acmez/acme\""
   - "caddyconfig/httpcaddyfile/builtins.go:34:20     	acmez           	U   	\"github.com/mholt/acmez/acme\""
@@ -161,7 +157,6 @@ issues:
   - "modules.go:312:56   	provisionings   	U   	cleaning up from partial provisionings."
   - "modules/caddyhttp/app.go:141:8      	Iface   	U   	tlsAppIface, err := ctx.App(\"tls"
   - "modules/caddyhttp/app.go:365:16     	errcheck	U   	//nolint:errcheck"
-  - "modules/caddyhttp/autohttps.go:141:40   	deduplicated    	U   	qualifying domain names (deduplicated) in this server"
   - "modules/caddyhttp/autohttps.go:182:21   	Tailscale       	U   	// the implicit Tailscale manager module will"
   - "modules/caddyhttp/autohttps.go:492:12   	reprovision     	U   	// must reprovision the automation policy"
   - "modules/caddyhttp/autohttps.go:644:4    	reprovisioned   	U   	// reprovisioned. acmeIssuer must not"
@@ -182,8 +177,6 @@ issues:
   - "modules/caddyhttp/celmatcher.go:334:15  	CELJSON     	U   	} else if isCELJSONType(matcherDataType"
   - "modules/caddyhttp/celmatcher.go:388:16  	Libary      	U   	type matcherCELLibary struct {"
   - "modules/caddyhttp/celmatcher.go:393:62  	setes       	U   	matcherLibrary from option setes."
-  - "modules/caddyhttp/celmatcher.go:410:70  	precompile  	U   	the implementation to precompile"
-  - "modules/caddyhttp/celmatcher.go:411:58  	precompiled 	U   	that references the precompiled and"
   - "modules/caddyhttp/celmatcher.go:597:4   	conv        	U   	convVals := make([]string"
   - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:1:9     	caddybrotli     	U   	package caddybrotli"
   - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:9:23    	Brotli          	U   	caddy.RegisterModule(BrotliPrecompressed{})"
@@ -258,7 +251,6 @@ issues:
   - "modules/caddyhttp/metrics.go:124:26     	behaviour   	U   	Effectively the same behaviour as promhttp.InstrumentHandler"
   - "modules/caddyhttp/metrics.go:127:3      	ttfb        	U   	ttfb := time.Since(start"
   - "modules/caddyhttp/metrics.go:131:2      	wrec        	U   	wrec := NewResponseRecorder"
-  - "modules/caddyhttp/push/handler.go:143:9     	Preload 	U   	// servePreloadLinks parses Link headers"
   - "modules/caddyhttp/requestbody/caddyfile.go:15:9     	requestbody 	U   	package requestbody"
   - "modules/caddyhttp/responsewriter.go:89:15   	middlewares 	U   	// useful for middlewares which need to buffer"
   - "modules/caddyhttp/reverseproxy/addresses.go:15:9    	reverseproxy	U   	package reverseproxy"
@@ -309,8 +301,7 @@ issues:
   - "modules/caddyhttp/routes.go:159:10  	midhandler  	U   	for _, midhandler := range routes[i].Handlers"
   - "modules/caddyhttp/routes.go:283:16  	mset        	U   	// matchers in mset or if there are no matchers"
   - "modules/caddyhttp/routes.go:316:19  	Ifaces      	U   	for _, matcherSetIfaces := range matcherSets"
-  - "modules/caddyhttp/server.go:80:21   	unrouted    	U   	// By default, all unrouted requests receive a"
-  - "modules/caddyhttp/server.go:126:34  	unencrypted 	U   	setting applies only to unencrypted HTTP listeners."
+  - "modules/caddyhttp/server.go:80:21   	unrouted	U   	// By default, all unrouted requests receive a"
   - "modules/caddyhttp/subroute.go:55:22     	subrouting  	U   	/ Provision sets up subrouting."
   - "modules/caddyhttp/templates/templates.go:60:15      	cookiename      	U   	// {{.Cookie \"cookiename\"}}"
   - "modules/caddyhttp/templates/templates.go:99:114     	defitions       	U   	stack. If there are no defitions, the filepath will be"

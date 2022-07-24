@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 210, Issues found: 3348 in 197 files
+ CSpell: Files checked: 210, Issues found: 3314 in 197 files
  exit code: 1
 ./admin.go:1031:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1067:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -26,9 +26,6 @@ Lines:
 ./admin_test.go:30:8      - Unknown word (myserver)   -- "myserver": {
 ./admin_test.go:34:8      - Unknown word (yourserver) -- "yourserver": {
 ./admin_test.go:44:10     - Unknown word (Unsynced)   -- func TestUnsyncedConfigAccess(t *testing
-./caddy.go:334:5     - Unknown word (autosave)   -- // autosave a non-nil config, if
-./caddy.go:341:29    - Unknown word (Autosave)   -- filepath.Dir(ConfigAutosavePath)
-./caddy.go:350:17    - Unknown word (autosaved)  -- Log().Info("autosaved config (load with -
 ./caddy.go:61:30     - Unknown word (encodable)  -- to populate the JSON-encodable fields of the struct
 ./caddy.go:668:24    - Unknown word (byeee)      -- logger.Warn("exiting; byeee!! 👋")
 ./caddyconfig/caddyfile/adapter.go:100:25    - Unknown word (unmarshaled) -- into JSON. Caddyfile-unmarshaled values
@@ -63,7 +60,6 @@ Lines:
 ./caddyconfig/httpcaddyfile/addresses.go:197:5     - Unknown word (hport)      -- if hport, ok := options["http
 ./caddyconfig/httpcaddyfile/addresses.go:200:5     - Unknown word (hsport)     -- if hsport, ok := options["https
 ./caddyconfig/httpcaddyfile/addresses.go:28:43     - Unknown word (caddyhttp)  -- caddyserver/caddy/v2/modules/caddyhttp"
-./caddyconfig/httpcaddyfile/addresses.go:368:28    - Unknown word (lowercases) -- lowerExceptPlaceholders lowercases s except within
 ./caddyconfig/httpcaddyfile/addresses.go:80:2      - Unknown word (sbmap)      -- sbmap := make(map[string]
 ./caddyconfig/httpcaddyfile/addresses.go:82:9      - Unknown word (sblock)     -- for i, sblock := range originalServerBlocks
 ./caddyconfig/httpcaddyfile/addresses_fuzz.go:18:9      - Unknown word (httpcaddyfile) -- package httpcaddyfile
@@ -156,9 +152,8 @@ Lines:
 ./modules.go:312:56    - Unknown word (provisionings) -- cleaning up from partial provisionings.
 ./modules/caddyhttp/app.go:141:8     - Unknown word (Iface)      -- tlsAppIface, err := ctx.App("tls
 ./modules/caddyhttp/app.go:365:16    - Unknown word (errcheck)   -- //nolint:errcheck
-./modules/caddyhttp/autohttps.go:141:40    - Unknown word (deduplicated) -- qualifying domain names (deduplicated) in this server
-./modules/caddyhttp/autohttps.go:182:21    - Unknown word (Tailscale)    -- // the implicit Tailscale manager module will
-./modules/caddyhttp/autohttps.go:492:12    - Unknown word (reprovision)  -- // must reprovision the automation policy
+./modules/caddyhttp/autohttps.go:182:21    - Unknown word (Tailscale)  -- // the implicit Tailscale manager module will
+./modules/caddyhttp/autohttps.go:492:12    - Unknown word (reprovision) -- // must reprovision the automation policy
 ./modules/caddyhttp/autohttps.go:644:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
 ./modules/caddyhttp/autohttps.go:661:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
 ./modules/caddyhttp/caddyauth/basicauth.go:15:9      - Unknown word (caddyauth)  -- package caddyauth
@@ -172,13 +167,11 @@ Lines:
 ./modules/caddyhttp/celmatcher.go:334:15    - Unknown word (CELJSON)    -- } else if isCELJSONType(matcherDataType
 ./modules/caddyhttp/celmatcher.go:388:16    - Unknown word (Libary)     -- type matcherCELLibary struct {
 ./modules/caddyhttp/celmatcher.go:393:62    - Unknown word (setes)      -- matcherLibrary from option setes.
-./modules/caddyhttp/celmatcher.go:410:70    - Unknown word (precompile) -- the implementation to precompile
-./modules/caddyhttp/celmatcher.go:411:58    - Unknown word (precompiled) -- that references the precompiled and
 ./modules/caddyhttp/celmatcher.go:42:2      - Unknown word (exprpb)     -- exprpb "google.golang.org/genproto
 ./modules/caddyhttp/celmatcher.go:42:28     - Unknown word (genproto)   -- exprpb "google.golang.org/genproto/googleapis/api/expr
 ./modules/caddyhttp/celmatcher.go:42:37     - Unknown word (googleapis) -- golang.org/genproto/googleapis/api/expr/v1alpha1"
 ./modules/caddyhttp/celmatcher.go:43:21     - Unknown word (protobuf)   -- "google.golang.org/protobuf/proto"
-./modules/caddyhttp/celmatcher.go:597:4     - Unknown word (conv)        -- convVals := make([]string
+./modules/caddyhttp/celmatcher.go:597:4     - Unknown word (conv)       -- convVals := make([]string
 ./modules/caddyhttp/celmatcher_test.go:57:60     - Unknown word (localdomain) -- subject} == 'CN=client.localdomain'",
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:62     - Unknown word (precompressed) -- extension for files precompressed with brotli encoding
 ./modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:81     - Unknown word (brotli)        -- files precompressed with brotli encoding.
@@ -253,7 +246,6 @@ Lines:
 ./modules/caddyhttp/metrics.go:127:3     - Unknown word (ttfb)       -- ttfb := time.Since(start
 ./modules/caddyhttp/metrics.go:131:2     - Unknown word (wrec)       -- wrec := NewResponseRecorder
 ./modules/caddyhttp/metrics_test.go:10:50     - Unknown word (testutil)   -- client_golang/prometheus/testutil"
-./modules/caddyhttp/push/handler.go:143:9     - Unknown word (Preload)    -- // servePreloadLinks parses Link headers
 ./modules/caddyhttp/requestbody/caddyfile.go:15:9      - Unknown word (requestbody) -- package requestbody
 ./modules/caddyhttp/responsewriter.go:89:15     - Unknown word (middlewares) -- // useful for middlewares which need to buffer
 ./modules/caddyhttp/reverseproxy/addresses.go:15:9      - Unknown word (reverseproxy) -- package reverseproxy
@@ -304,7 +296,6 @@ Lines:
 ./modules/caddyhttp/routes.go:159:10    - Unknown word (midhandler) -- for _, midhandler := range routes[i].Handlers
 ./modules/caddyhttp/routes.go:283:16    - Unknown word (mset)       -- // matchers in mset or if there are no matchers
 ./modules/caddyhttp/routes.go:316:19    - Unknown word (Ifaces)     -- for _, matcherSetIfaces := range matcherSets
-./modules/caddyhttp/server.go:126:34    - Unknown word (unencrypted) -- setting applies only to unencrypted HTTP listeners.
 ./modules/caddyhttp/server.go:80:21     - Unknown word (unrouted)   -- // By default, all unrouted requests receive a
 ./modules/caddyhttp/subroute.go:55:22     - Unknown word (subrouting) -- / Provision sets up subrouting.
 ./modules/caddyhttp/templates/templates.go:128:18    - Unknown word (mydir)      -- // {{listFiles "/mydir"}}
