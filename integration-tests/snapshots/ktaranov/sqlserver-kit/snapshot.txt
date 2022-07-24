@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 508, Issues found: 19042 in 492 files
+ CSpell: Files checked: 508, Issues found: 17283 in 484 files
  exit code: 1
 ./ADS/README.md:25:88     - Unknown word (vsix)       -- Release Date | Version  | .vsix download link
 ./ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
@@ -510,7 +510,6 @@ Lines:
 ./CLR/Regex/Fill_Factor/RegexSQLCLR.vb:97:70     - Unknown word (atring)         -- so you can pass any atring into
 ./CLR/Regex/Fill_Factor/installRegexAssembly.sql:134:6     - Unknown word (Repacement) -- @Repacement NVARCHAR(MAX)
 ./CLR/Regex/Fill_Factor/installRegexAssembly.sql:29:55     - Unknown word (Replacex)   -- OBJECT_ID(N'dbo.RegExReplacex') )
-./CLR/Regex/Fill_Factor/installRegexAssembly.sql:7:44      - Unknown word (N'dbo)      -- object_id = OBJECT_ID(N'dbo.RegExOptionEnumeration
 ./CLR/Regex/Fill_Factor/installRegexSample.sql:58:37     - Unknown word (asms)       -- FROM sys.assemblies asms
 ./CLR/SplitStrings_CLR.cs:12:32     - Unknown word (nvarchar)   -- TableDefinition = "item nvarchar(4000)"
 ./CLR/SplitterB_CLR.sql:126:10    - Unknown word (endregion)  -- #endregion
@@ -991,25 +990,18 @@ Lines:
 ./Extended_Events/CheckpointTracking.sql:7:31      - Unknown word (inadvertant) -- to prevent inadvertant loss of events.
 ./Extended_Events/ConfigurationItemsChanged.sql:10:32     - Unknown word (SYSDATETIMEOFFSET) -- DateName(TzOffset, SYSDATETIMEOFFSET()))) AS datetime_local
 ./Extended_Events/ConfigurationItemsChanged.sql:32:37     - Unknown word (Procs)             -- configure 'Scan for Startup Procs',1;
-./Extended_Events/ConfigurationItemsChanged.sql:9:34      - Unknown word (datetimeoffset) -- SwitchOffset(CONVERT(datetimeoffset,xed.event_data.value
 ./Extended_Events/ConvertingSQLTracetoExtendedEvents.sql:125:39    - Unknown word (Xact)       -- transaction_sequence — XactSequence from SQLTrace
 ./Extended_Events/ConvertingSQLTracetoExtendedEvents.sql:14:10     - Unknown word (Addlogin)   -- /* Audit Addlogin Event is not implemented
 ./Extended_Events/ConvertingSQLTracetoExtendedEvents.sql:322:56    - Unknown word (MSSQL)      -- Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL
-./Extended_Events/ConvertingSQLTracetoExtendedEvents.sql:39:29     - Unknown word (SPID)       -- sqlserver.session_id — SPID from SQLTrace
 ./Extended_Events/DBRecoveryProgress.sql:104:46    - Unknown word (XEDB)       -- Windows\Temp\DatabaseXEDBRecoveryProgress.xel
-./Extended_Events/Deadlocks.sql:82:78     - Unknown word (sysname)    -- name"]/value)[1]', 'sysname') AS DBName,
 ./Extended_Events/Deadlocks.sql:9:19      - Unknown word (subdir)     -- EXECUTE xp_create_subdir 'C:\SQL\XE_Out';
 ./Extended_Events/FileSizeChanges.sql:10:14     - Unknown word (xmlsrc)     -- SELECT xmlsrc.data.value(N'(@name
-./Extended_Events/FileSizeChanges.sql:10:47     - Unknown word (N'nvarchar) -- value(N'(@name)[1]', N'nvarchar(max)'), SessName
 ./Extended_Events/FileSizeChanges.sql:18:12     - Unknown word (xefile)     -- ) AS xefile (TargetData, SessName
-./Extended_Events/FileSizeChanges.sql:32:85     - Unknown word (N'sysname)  -- value)[1]', N'sysname'),
-./Extended_Events/FileSizeChanges.sql:59:26     - Unknown word (N'SSMS)     -- THEN N'SSMS - Query Window'
 ./Extended_Events/FileSizeChanges.sql:7:52      - Unknown word (Sess)       -- COALESCE(NULLIF(CHARINDEX(SessName,BasePath)-1,-1)
 ./Extended_Events/InvestigateWaitsMaxDop.sql:6:97      - Unknown word (QUERYTRACEON) -- 0 OPTION (MAXDOP 8, QUERYTRACEON 8649);
-./Extended_Events/LinkedServerMonitor.sql:122:33    - Unknown word (N'sqlserver) -- filtering_event_name = N'sqlserver.oledb_data_read'
 ./Extended_Events/LinkedServerMonitor.sql:19:25     - Unknown word (oledb)      -- ADD EVENT sqlserver.oledb_data_read
 ./Extended_Events/MonitorPageSplits.sql:33:5      - Unknown word (rowset)     -- , rowset_id = XEvent
-./Extended_Events/SchemaQueryByUser.sql:18:108    - Unknown word (N'EZCORP)   -- server_principal_name],N'EZCORP\Y%')))
+./Extended_Events/SchemaQueryByUser.sql:18:110    - Unknown word (EZCORP)     -- server_principal_name],N'EZCORP\Y%')))
 ./Extended_Events/SchemaQueryByUser.sql:21:92     - Unknown word (dbaccess)   -- SELECT CASE WHEN has_dbaccess%END%'))))
 ./Extended_Events/SchemaQueryByUser.sql:26:75     - Unknown word (SHOWPLAN)   -- [batch_text],N'%SET SHOWPLAN%')))))
 ./Extended_Events/System_Health_Addition.sql:41:34     - Unknown word (ondisk)     -- sqlserver.window_spool_ondisk_warning
@@ -1023,17 +1015,12 @@ Lines:
 ./Extended_Events/XE_Truncate.sql:3:4       - Unknown word (Evgeny)     -- by Evgeny Garaev 2018-06-28
 ./Extended_Events/system_health.sql:17:48     - Unknown word (iocp)       -- monitor_non_yielding_iocp_ring_buffer_recorded
 ./Extended_Events/system_health.sql:7:11      - Unknown word (sqlclr)     -- ADD EVENT sqlclr.clr_allocation_failure
-./Extended_Events/system_health_azure.sql:41:26     - Unknown word (N'PAGELATCH) -- ( wait_type >= N'PAGELATCH_NL'
-./Extended_Events/system_health_azure.sql:42:37     - Unknown word (PAGELATCH)   -- N'PAGELATCH_DT') --PAGELATCH_NL;PAGELATCH_KP;PAGELATCH
-./Extended_Events/system_health_azure.sql:44:21     - Unknown word (N'PAGEIOLATCH) -- OR (   wait_type >= N'PAGEIOLATCH_NL'
-./Extended_Events/system_health_azure.sql:45:39     - Unknown word (PAGEIOLATCH)   -- N'PAGEIOLATCH_DT') --PAGEIOLATCH_NL;PAGEIOLATCH_KP;PAGEIOLATCH
-./Extended_Events/system_health_azure.sql:50:21     - Unknown word (N'FCB)         -- OR (   wait_type >= N'FCB_REPLICA_WRITE'
-./Extended_Events/system_health_azure.sql:51:18     - Unknown word (N'WRITELOG)    -- AND wait_type <= N'WRITELOG') --FCB_REPLICA_WRITE
-./Extended_Events/system_health_azure.sql:51:68     - Unknown word (WRITELOG)      -- WRITE;FCB_REPLICA_READ;WRITELOG
-./Extended_Events/system_health_azure.sql:52:17     - Unknown word (N'CMEMTHREAD)  -- OR (wait_type = N'CMEMTHREAD')
-./Extended_Events/system_health_azure.sql:53:17     - Unknown word (N'TRACEWRITE)  -- OR (wait_type = N'TRACEWRITE')
-./Extended_Events/system_health_azure.sql:56:18     - Unknown word (N'LCK)         -- AND wait_type <= N'LCK_M_RX_X' -- all lock
-./Extended_Events/system_health_azure.sql:63:34     - Unknown word (GENERICOPS)    -- type >= N'PREEMPTIVE_OS_GENERICOPS'
+./Extended_Events/system_health_azure.sql:41:28     - Unknown word (PAGELATCH)  -- ( wait_type >= N'PAGELATCH_NL'
+./Extended_Events/system_health_azure.sql:44:23     - Unknown word (PAGEIOLATCH) -- OR (   wait_type >= N'PAGEIOLATCH_NL'
+./Extended_Events/system_health_azure.sql:51:20     - Unknown word (WRITELOG)    -- AND wait_type <= N'WRITELOG') --FCB_REPLICA_WRITE
+./Extended_Events/system_health_azure.sql:52:19     - Unknown word (CMEMTHREAD)  -- OR (wait_type = N'CMEMTHREAD')
+./Extended_Events/system_health_azure.sql:53:19     - Unknown word (TRACEWRITE)  -- OR (wait_type = N'TRACEWRITE')
+./Extended_Events/system_health_azure.sql:63:34     - Unknown word (GENERICOPS)  -- type >= N'PREEMPTIVE_OS_GENERICOPS'
 ./Extended_Events/system_health_azure.sql:64:124    - Unknown word (ACCEPTSECURITYCONTEXT) -- THENTICATIONOPS;PREEMPTIVE_OS_ACCEPTSECURITYCONTEXT;PREEMPTIVE_OS_ACQUIRECREDENTI
 ./Extended_Events/system_health_azure.sql:64:160    - Unknown word (ACQUIRECREDENTIALSHANDLE) -- SECURITYCONTEXT;PREEMPTIVE_OS_ACQUIRECREDENTIALSHANDLE;PREEMPTIVE_OS_COMPLETEAUTHTOK
 ./Extended_Events/system_health_azure.sql:64:199    - Unknown word (COMPLETEAUTHTOKEN)        -- EDENTIALSHANDLE;PREEMPTIVE_OS_COMPLETEAUTHTOKEN;PREEMPTIVE_OS_DECRYPTMESSAGE
@@ -1248,6 +1235,7 @@ Lines:
 ./PowerShell/CsvSqlimport.ps1:702:4     - Unknown word (sqlcheckconn)    -- $sqlcheckconn = New-Object System
 ./PowerShell/CsvSqlimport.ps1:714:4     - Unknown word (sqlcheckcmd)     -- $sqlcheckcmd = New-Object System
 ./PowerShell/CsvSqlimport.ps1:715:4     - Unknown word (dbexists)        -- $dbexists = $sqlcheckcmd.ExecuteScalar
+./PowerShell/CsvSqlimport.ps1:723:60    - Unknown word (sysname)         -- table') and t.name != 'sysname'"
 ./PowerShell/CsvSqlimport.ps1:725:4     - Unknown word (sqlcolumns)      -- $sqlcolumns = New-Object System
 ./PowerShell/CsvSqlimport.ps1:737:5     - Unknown word (filesize)        -- $filesize = (Get-ChildItem $file
 ./PowerShell/CsvSqlimport.ps1:738:31    - Unknown word (jetonly)         -- filesize -gt 1.99) { $jetonly = $true }
@@ -1926,16 +1914,18 @@ Lines:
 ./SQL Server DBCC List.md:93:6      - Unknown word (dbtable)              -- DBCC dbtable [({'dbname' | dbid}
 ./SQL Server DBCC List.md:95:6      - Unknown word (debugbreak)           -- DBCC debugbreak
 ./SQL Server DBCC List.md:97:6      - Unknown word (deleteinstance)       -- DBCC deleteinstance (objectname, instancename
-./SQL Server Data Types.md:135:44    - Unknown word (DBDATE)     -- Object | DT_DBDATE | DBDATE
-./SQL Server Data Types.md:136:44    - Unknown word (DBTIMESTAMP) -- DateTime | DT_DBTIMESTAMP | DATE
-./SQL Server Data Types.md:137:64    - Unknown word (DBTIME)      -- DBTIMESTAMP2 | DBTIME2 | DateTime
+./SQL Server Data Types.md:135:44    - Unknown word (DBDATE)           -- Object | DT_DBDATE | DBDATE
+./SQL Server Data Types.md:136:44    - Unknown word (DBTIMESTAMP)      -- DateTime | DT_DBTIMESTAMP | DATE
+./SQL Server Data Types.md:137:64    - Unknown word (DBTIME)           -- DBTIMESTAMP2 | DBTIME2 | DateTime
 ./SQL Server Data Types.md:138:44    - Unknown word (DBTIMESTAMPOFFSET) -- Object | DT_DBTIMESTAMPOFFSET | DBTIMESTAMPOFFSET
 ./SQL Server Data Types.md:143:4     - Unknown word (hierarchyid)       -- | [hierarchyid] | -
 ./SQL Server Data Types.md:147:44    - Unknown word (WSTR)              -- String | DT_WSTR | NVARCHAR
+./SQL Server Data Types.md:148:44    - Unknown word (NTEXT)             -- String | DT_NTEXT | -
 ./SQL Server Data Types.md:193:125   - Unknown word (anuary)            -- | anuary 1, 1753 through December
 ./SQL Server Data Types.md:194:253   - Unknown word (throuth)           -- .9999999<br/>-14:00 throuth +14:00 |
 ./SQL Server Data Types.md:237:58    - Unknown word (Sybase)            -- SQL Server, Oracle, Sybase ASE, and DB2.
 ./SQL Server Data Types.md:244:17    - Unknown word (SYBASE)            -- | MSSQLSERVER | SYBASE |
+./SQL Server Data Types.md:24:5      - Unknown word (datetimeoffset) -- 3. [datetimeoffset]
 ./SQL Server Data Types.md:257:13    - Unknown word (helpdatatypemap)   -- FROM sys.fn_helpdatatypemap (
 ./SQL Server Data Types.md:270:56    - Unknown word (TINYINT)           -- | No   | [TINYINT(1)][20] | NUMBER
 ./SQL Server Data Types.md:271:99    - Unknown word (SMALLINT)          -- ] | NUMBER(3)     | SMALLINT
@@ -1945,9 +1935,11 @@ Lines:
 ./SQL Server Data Types.md:295:99    - Unknown word (BYTEA)             -- | LONG RAW      | BYTEA
 ./SQL Server Data Types.md:305:84    - Unknown word (XMLTYPE)           -- LONGTEXT][25] | [XMLTYPE] | XML
 ./SQL Server Data Types.md:335:88    - Unknown word (POSI)              -- date | ?       | POSIXct |
-./SQL Server Data Types.md:37:6      - Unknown word (smallint)   -- 16. [smallint][1]
-./SQL Server Data Types.md:38:6      - Unknown word (tinyint)    -- 17. [tinyint][1]
-./SQL Server Data Types.md:46:6      - Unknown word (nchar)      -- 25. [nchar][5]
+./SQL Server Data Types.md:34:6      - Unknown word (smallmoney)     -- 13. [smallmoney][3]
+./SQL Server Data Types.md:37:6      - Unknown word (smallint)       -- 16. [smallint][1]
+./SQL Server Data Types.md:38:6      - Unknown word (tinyint)        -- 17. [tinyint][1]
+./SQL Server Data Types.md:44:6      - Unknown word (uniqueidentifier) -- 23. [uniqueidentifier]
+./SQL Server Data Types.md:46:6      - Unknown word (nchar)            -- 25. [nchar][5]
 ./SQL Server Drivers.md:100:5     - Unknown word (RSQL)       -- - [RSQLServer - an R package
 ./SQL Server Drivers.md:29:5      - Unknown word (JDBC)       -- ### JDBC
 ./SQL Server Drivers.md:54:5      - Unknown word (pymssql)    -- The pymssql module is a Python implementa
@@ -2017,7 +2009,6 @@ Lines:
 ./SQL Server People.md:36:87     - Unknown word (grrl)          -- NULL | [@grrl_geek] | NULL
 ./SQL Server People.md:38:87     - Unknown word (Jorriss)       -- NULL | [@Jorriss] | NULL
 ./SQL Server People.md:43:26     - Unknown word (Kenda)         -- Kendal Van Dyke     | [KendaL Blog]
-./SQL Server People.md:43:87     - Unknown word (SQLDBA)        -- NULL | [@SQLDBA] | NULL
 ./SQL Server People.md:44:87     - Unknown word (sqlagentman)   -- NULL | [@sqlagentman] | NULL
 ./SQL Server People.md:45:91     - Unknown word (utwest)        -- | [@way0utwest] | NULL
 ./SQL Server People.md:46:87     - Unknown word (sqlrockstar)   -- NULL | [@sqlrockstar] | NULL
@@ -2063,6 +2054,7 @@ Lines:
 ./SQL Server Trace Flag.md:1587:55   - Unknown word (PROCHDR)       -- maybe the plan as well? “PROCHDR”), as well as
 ./SQL Server Trace Flag.md:1594:113  - Unknown word (HEURISTICJOINREORDER) -- Optimization Stage: HEURISTICJOINREORDER”. Maybe useful in combo
 ./SQL Server Trace Flag.md:168:3     - Unknown word (LASJ)         -- | LASJNtoSM | Left Anti Semi
+./SQL Server Trace Flag.md:184:239   - Unknown word (SPID)         -- flag is lost when the SPID that opened the session
 ./SQL Server Trace Flag.md:1982:47   - Unknown word (Sqlservr)             -- Facilitates capturing a Sqlservr.exe user-mode crash
 ./SQL Server Trace Flag.md:202:71    - Unknown word (taranov)      -- issue or contact me (taranov.pro).
 ./SQL Server Trace Flag.md:2377:110  - Unknown word (Backedup)             -- Causes LogMgr::ValidateBackedupBlock to be skipped during
@@ -2095,7 +2087,6 @@ Lines:
 ./SQL Server Trace Flag.md:3624:56   - Unknown word (nonstatic)            -- behavior of closing nonstatic cursors regardless of
 ./SQL Server Trace Flag.md:3654:137  - Unknown word (docidfilter)          -- caused by blocking on the docidfilter internal table.<br
 ./SQL Server Trace Flag.md:372:29    - Unknown word (bucketization) -- Function: Force server side bucketization.
-./SQL Server Trace Flag.md:3921:195  - Unknown word (CMEMTHREAD)           -- partition memory if `CMEMTHREAD` contention is detected
 ./SQL Server Trace Flag.md:3953:81   - Unknown word (TOPLEVELBLOCKALLOCATOR) -- and the `SOS_MEMORY_TOPLEVELBLOCKALLOCATOR` wait occurs.<br />
 ./SQL Server Trace Flag.md:3986:65   - Unknown word (Logreader)              -- DELETE/INSERT," the Logreader send UDPATE command
 ./SQL Server Trace Flag.md:3986:80   - Unknown word (UDPATE)                 -- the Logreader send UDPATE command to the subscriber
@@ -2321,12 +2312,11 @@ Lines:
 ./SSMS/SSMS_vssettings/ktaranov_18.7.1.vssettings:58:22     - Unknown word (Untabify)   -- <Alias Name="Untabify" Definition="Edit.UntabifySel
 ./SSMS/SSMS_vssettings/ktaranov_18.7.1.vssettings:6:8128    - Unknown word (Artboard)   -- ToolsOptionsSubCategory name="Artboard" RegisteredName="Artboard
 ./SSMS/SSMS_vssettings/ktaranov_18.7.1.vssettings:78:22     - Unknown word (disasm)     -- <Alias Name="disasm" Definition="Debug.Disassembl
-./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:182:3     - Unknown word (NEWID)            -- NEWID(), DATEADD(dd, number
-./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:210:6     - Unknown word (Randomizer)       -- ) AS Randomizer
-./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:67:10     - Unknown word (uniqueidentifier) -- rowguid uniqueidentifier NOT NULL ROWGUIDCOL
+./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:182:3     - Unknown word (NEWID)       -- NEWID(), DATEADD(dd, number
+./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:210:6     - Unknown word (Randomizer)  -- ) AS Randomizer
 ./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:67:2      - Unknown word (rowguid)    -- rowguid uniqueidentifier NOT
-./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:76:44     - Unknown word (TABLOCKX)         -- lesOrderHeader WITH (HOLDLOCK TABLOCKX)
-./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:85:21     - Unknown word (NORECOMPUTE)      -- ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY
+./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:76:44     - Unknown word (TABLOCKX)   -- lesOrderHeader WITH (HOLDLOCK TABLOCKX)
+./Sample_Databases/Create_Enlarged_Adventureworks_Tables.sql:85:21     - Unknown word (NORECOMPUTE) -- ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY
 ./Sample_Databases/Database_script.sql:6:59      - Unknown word (modeldev)   -- master', 'tempdev', 'modeldev', 'MSDBData')
 ./Sample_Databases/Database_script.sql:6:71      - Unknown word (MSDB)       -- tempdev', 'modeldev', 'MSDBData')
 ./Sample_Databases/Oracle_Employee_Database.sql:30:50     - Unknown word (cheief)     -- CONSTRAINT fk_employee__cheief_id FOREIGN KEY (chief
@@ -2342,12 +2332,12 @@ Lines:
 ./Sample_Databases/PerformanceV3.sql:59:4      - Unknown word (startdate)   -- @startdate AS DATE     = '20
 ./Sample_Databases/PerformanceV3.sql:64:3      - Unknown word (custid)      -- custid CHAR(11)     NOT NULL
 ./Sample_Databases/PerformanceV3.sql:65:3      - Unknown word (custname)    -- custname NVARCHAR(50) NOT NULL
-./Sample_Databases/PerformanceV3.sql:71:5      - Unknown word (N'Cust)      -- N'Cust_' + CAST(n AS VARCHAR
+./Sample_Databases/PerformanceV3.sql:71:7      - Unknown word (Cust)        -- N'Cust_' + CAST(n AS VARCHAR
 ./Sample_Databases/PerformanceV3.sql:80:3      - Unknown word (empid)       -- empid INT          NOT
 ./Sample_Databases/PerformanceV3.sql:81:3      - Unknown word (firstname)   -- firstname NVARCHAR(25) NOT NULL
 ./Sample_Databases/PerformanceV3.sql:82:3      - Unknown word (lastname)    -- lastname NVARCHAR(25) NOT NULL
-./Sample_Databases/PerformanceV3.sql:87:5      - Unknown word (N'Fname)     -- N'Fname_' + CAST(n AS NVARCHAR
-./Sample_Databases/PerformanceV3.sql:88:5      - Unknown word (N'Lname)     -- N'Lname_' + CAST(n AS NVARCHAR
+./Sample_Databases/PerformanceV3.sql:87:7      - Unknown word (Fname)       -- N'Fname_' + CAST(n AS NVARCHAR
+./Sample_Databases/PerformanceV3.sql:88:7      - Unknown word (Lname)       -- N'Lname_' + CAST(n AS NVARCHAR
 ./Sample_Databases/PerformanceV3.sql:97:3      - Unknown word (shipperid)   -- shipperid VARCHAR(5)   NOT NULL
 ./Sample_Databases/PerformanceV3.sql:98:3      - Unknown word (shippername) -- shippername NVARCHAR(50) NOT NULL
 ./Sample_Databases/README.md:27:4      - Unknown word (Northwind)  -- | [Northwind Database][1]
@@ -2382,25 +2372,22 @@ Lines:
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:256:8     - Unknown word (usecounts)     -- AND cp.usecounts = 1
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:275:22    - Unknown word (FILEPROPERTY)  -- SELECT CAST(SUM(CAST(FILEPROPERTY(name, 'SpaceUsed') AS
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:294:7     - Unknown word (autogrow)      -- fg.is_autogrow_all_files
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:42:10     - Unknown word (SERVERNAME) -- SELECT @@SERVERNAME AS [Server Name], @
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:463:18    - Unknown word (EVENTHANDLER)  -- N'BROKER_EVENTHANDLER', N'BROKER_RECEIVE_WAITFOR
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:465:19    - Unknown word (N'CLR)         -- N'CHKPT', N'CLR_AUTO_EVENT', N'CLR_MANUAL
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:465:9     - Unknown word (N'CHKPT)       -- N'CHKPT', N'CLR_AUTO_EVENT'
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:466:9     - Unknown word (N'DBMIRROR)    -- N'DBMIRROR_DBM_EVENT', N'DBMIRROR
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:467:3     - Unknown word (N'DBMIRRORING) -- N'DBMIRRORING_CMD', N'DIRTY_PAGE_POLL
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:468:22    - Unknown word (N'FSAGENT)     -- N'EXECSYNC', N'FSAGENT', N'FT_IFTS_SCHEDULER
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:465:11    - Unknown word (CHKPT)         -- N'CHKPT', N'CLR_AUTO_EVENT'
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:466:11    - Unknown word (DBMIRROR)      -- N'DBMIRROR_DBM_EVENT', N'DBMIRROR
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:467:5     - Unknown word (DBMIRRORING)   -- N'DBMIRRORING_CMD', N'DIRTY_PAGE_POLL
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:468:11    - Unknown word (EXECSYNC)      -- N'EXECSYNC', N'FSAGENT', N'FT_IFTS
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:468:24    - Unknown word (FSAGENT)       -- N'EXECSYNC', N'FSAGENT', N'FT_IFTS_SCHEDULER
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:468:39    - Unknown word (IFTS)          -- EXECSYNC', N'FSAGENT', N'FT_IFTS_SCHEDULER_IDLE_WAIT
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:468:71    - Unknown word (IFTSHC)        -- SCHEDULER_IDLE_WAIT', N'FT_IFTSHC_MUTEX',
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:468:9     - Unknown word (N'EXECSYNC)    -- N'EXECSYNC', N'FSAGENT', N'FT_IFTS
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:469:49    - Unknown word (IOMGR)         -- , N'HADR_FILESTREAM_IOMGR_IOCOMPLETION', N'HADR
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:469:55    - Unknown word (IOCOMPLETION)  -- HADR_FILESTREAM_IOMGR_IOCOMPLETION', N'HADR_LOGCAPTURE
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:469:77    - Unknown word (LOGCAPTURE)    -- IOCOMPLETION', N'HADR_LOGCAPTURE_WAIT',
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:469:9     - Unknown word (N'HADR)        -- N'HADR_CLUSAPI_CALL', N'HADR
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:471:11    - Unknown word (KSOURCE)       -- N'KSOURCE_WAKEUP', N'LAZYWRITER
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:471:19    - Unknown word (WAKEUP)        -- N'KSOURCE_WAKEUP', N'LAZYWRITER_SLEEP
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:471:28    - Unknown word (N'LAZYWRITER)  -- N'KSOURCE_WAKEUP', N'LAZYWRITER_SLEEP', N'LOGMGR_QUEUE
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:471:49    - Unknown word (N'LOGMGR)      -- N'LAZYWRITER_SLEEP', N'LOGMGR_QUEUE',
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:471:9     - Unknown word (N'KSOURCE)     -- N'KSOURCE_WAKEUP', N'LAZYWRITER
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:472:29    - Unknown word (N'ONDEMAND)    -- MEMORY_ALLOCATION_EXT', N'ONDEMAND_TASK_QUEUE',
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:471:30    - Unknown word (LAZYWRITER)    -- N'KSOURCE_WAKEUP', N'LAZYWRITER_SLEEP', N'LOGMGR_QUEUE
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:471:51    - Unknown word (LOGMGR)        -- LAZYWRITER_SLEEP', N'LOGMGR_QUEUE',
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:472:31    - Unknown word (ONDEMAND)      -- MEMORY_ALLOCATION_EXT', N'ONDEMAND_TASK_QUEUE',
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:475:48    - Unknown word (COMOPS)        -- LIBRARYOPS', N'PREEMPTIVE_OS_COMOPS', N'PREEMPTIVE_OS_CRYPTOPS
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:475:73    - Unknown word (CRYPTOPS)      -- COMOPS', N'PREEMPTIVE_OS_CRYPTOPS',
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:476:19    - Unknown word (PIPEOPS)       -- N'PREEMPTIVE_OS_PIPEOPS', N'PREEMPTIVE_OS_AUTHENTICAT
@@ -2412,10 +2399,9 @@ Lines:
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:482:19    - Unknown word (TARGETINIT)      -- N'PREEMPTIVE_XE_TARGETINIT', N'PREEMPTIVE_XE_TARGETFINAL
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:482:48    - Unknown word (TARGETFINALIZE)  -- TARGETINIT', N'PREEMPTIVE_XE_TARGETFINALIZE',
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:483:16    - Unknown word (XHTTP)           -- N'PREEMPTIVE_XHTTP',
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:484:11    - Unknown word (PWAIT)           -- N'PWAIT_ALL_COMPONENTS_INITIALIZED
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:484:54    - Unknown word (DIRECTLOGCONSUMER) -- INITIALIZED', N'PWAIT_DIRECTLOGCONSUMER_GETNEXT',
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:484:72    - Unknown word (GETNEXT)           -- PWAIT_DIRECTLOGCONSUMER_GETNEXT',
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:484:9     - Unknown word (N'PWAIT)         -- N'PWAIT_ALL_COMPONENTS_INITIALIZED
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:485:3     - Unknown word (N'QDS)             -- N'QDS_PERSIST_TASK_MAIN_LOOP
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:489:52    - Unknown word (BPOOL)             -- IDLE_CHECK', N'SLEEP_BPOOL_FLUSH', N'SLEEP_DBSTARTUP
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:489:74    - Unknown word (DBSTARTUP)         -- BPOOL_FLUSH', N'SLEEP_DBSTARTUP',
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:490:11    - Unknown word (DCOMSTARTUP)       -- N'SLEEP_DCOMSTARTUP', N'SLEEP_MASTERDBREADY
@@ -2425,19 +2411,17 @@ Lines:
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:491:42    - Unknown word (MSDBSTARTUP)       -- MASTERUPGRADED', N'SLEEP_MSDBSTARTUP', N'SLEEP_SYSTEMTASK
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:491:64    - Unknown word (SYSTEMTASK)        -- MSDBSTARTUP', N'SLEEP_SYSTEMTASK', N'SLEEP_TASK',
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:492:17    - Unknown word (TEMPDBSTARTUP)     -- N'SLEEP_TEMPDBSTARTUP', N'SNI_HTTP_ACCEPT
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:492:33    - Unknown word (N'SNI)             -- SLEEP_TEMPDBSTARTUP', N'SNI_HTTP_ACCEPT', N'SP_SERVER
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:493:3     - Unknown word (N'SQLTRACE)        -- N'SQLTRACE_BUFFER_FLUSH', N'SQLTRACE
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:493:5     - Unknown word (SQLTRACE)          -- N'SQLTRACE_BUFFER_FLUSH', N'SQLTRACE
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:494:46    - Unknown word (TASKSHUTDOWN)      -- WAITFOR', N'WAITFOR_TASKSHUTDOWN', N'WAIT_XTP_HOST_WAIT
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:495:22    - Unknown word (CKPT)              -- N'WAIT_XTP_OFFLINE_CKPT_NEW_LOG', N'WAIT_XTP
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:496:18    - Unknown word (ALLPROCESSED)      -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT', N'XE_DISPATCHER
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:496:8     - Unknown word (BUFFERMGR)         -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT'
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:806:7     - Unknown word (OBJECTPROPERTY)    -- WHERE OBJECTPROPERTY(s.[object_id],'IsUserTable
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:867:23    - Unknown word (hobt)              -- ON a.container_id = p.hobt_id
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:891:39    - Unknown word (N'spt)             -- object_id) NOT LIKE N'spt_%'
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:893:39    - Unknown word (N'filestream)      -- object_id) NOT LIKE N'filestream_tombstone%'
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:895:39    - Unknown word (N'ifts)            -- object_id) NOT LIKE N'ifts_comp_fragment%'
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:896:39    - Unknown word (N'filetable)       -- object_id) NOT LIKE N'filetable_updates%'
-./Scripts/Azure SQL Database Diagnostic Information Queries.sql:898:39    - Unknown word (N'sqlagent)        -- object_id) NOT LIKE N'sqlagent_job%'
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:893:41    - Unknown word (filestream)        -- object_id) NOT LIKE N'filestream_tombstone%'
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:895:41    - Unknown word (ifts)              -- object_id) NOT LIKE N'ifts_comp_fragment%'
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:896:41    - Unknown word (filetable)         -- object_id) NOT LIKE N'filetable_updates%'
+./Scripts/Azure SQL Database Diagnostic Information Queries.sql:898:41    - Unknown word (sqlagent)          -- object_id) NOT LIKE N'sqlagent_job%'
 ./Scripts/Azure SQL Database Diagnostic Information Queries.sql:993:37    - Unknown word (framentation)      -- determine whether you have framentation in your relational indexes
 ./Scripts/Benchmark_TSQL.R:103:3     - Unknown word (tsqlstatement) -- tsqlstatement_guid <-
 ./Scripts/Benchmark_TSQL.R:119:3     - Unknown word (timetemp)      -- timetemp <- NULL
@@ -2468,7 +2452,6 @@ Lines:
 ./Scripts/CPU_Utilization_Graphical_form.sql:2:9       - Unknown word (Slava)      -- Author: Slava Murygin
 ./Scripts/Change_NonDefault_Collation_for_all_tables.sql:129:42    - Unknown word (colation)        -- the code to update the colation for all affected columns
 ./Scripts/Change_NonDefault_Collation_for_all_tables.sql:12:3      - Unknown word (Jayakumaur) -- * Jayakumaur R who created scripts
-./Scripts/Change_NonDefault_Collation_for_all_tables.sql:136:39    - Unknown word (N'ntext)         -- CASE WHEN ty.name = N'ntext'
 ./Scripts/Change_NonDefault_Collation_for_all_tables.sql:173:45    - Unknown word (INDEXPROPERTY)   -- END + CASE WHEN INDEXPROPERTY(ix.object_id, ix.name
 ./Scripts/Change_NonDefault_Collation_for_all_tables.sql:185:17    - Unknown word (FILEGROUP)       -- FILEGROUP_NAME(ix.data_space_id
 ./Scripts/Change_NonDefault_Collation_for_all_tables.sql:19:109    - Unknown word (clsutered)  -- primary key is most often clsutered index)
@@ -2489,20 +2472,13 @@ Lines:
 ./Scripts/CheckSpectreMeltdownStatus.sql:230:11    - Unknown word (linkedservers) -- --EXEC sp_linkedservers;
 ./Scripts/CheckSpectreMeltdownStatus.sql:234:17    - Unknown word (sysjobsteps)   -- --FROM msdb.dbo.sysjobsteps AS s
 ./Scripts/CheckSpectreMeltdownStatus.sql:30:50     - Unknown word (decribed)   -- hardware patch status as decribed in this Microsoft KB
-./Scripts/Check_Reserved_Words_For_Object_Names.sql:21:46     - Unknown word (SECURITYAUDIT) -- CLUSTERED'), ('IN'), ('SECURITYAUDIT'), ('COALESCE'),
-./Scripts/Check_Reserved_Words_For_Object_Names.sql:23:11     - Unknown word (SEMANTICKEYPHRASETABLE) -- ('SEMANTICKEYPHRASETABLE'), ('COLUMN'), ('INSERT
-./Scripts/Check_Reserved_Words_For_Object_Names.sql:24:11     - Unknown word (SEMANTICSIMILARITYDETAILSTABLE) -- ('SEMANTICSIMILARITYDETAILSTABLE'), ('COMMIT'), ('INTERSECT
-./Scripts/Check_Reserved_Words_For_Object_Names.sql:25:11     - Unknown word (SEMANTICSIMILARITYTABLE)        -- ('SEMANTICSIMILARITYTABLE'), ('COMPUTE'), ('INTO
 ./Scripts/Checking_Your_Backup_Paths_Exist_and_Automatically_Create_it.sql:28:23     - Unknown word (existance)  -- --perform another existance check to make sure that
-./Scripts/Checkpoint_XE.sql:23:70     - Unknown word (N'uniqueidentifier) -- activity_id"]/value)[1]', N'uniqueidentifier')
-./Scripts/Checkpoint_XE.sql:36:5      - Unknown word (dbname)             -- dbname = DB_NAME(db),
+./Scripts/Checkpoint_XE.sql:36:5      - Unknown word (dbname)      -- dbname = DB_NAME(db),
 ./Scripts/Checkpoint_XE.sql:3:24      - Unknown word (checploints) -- returns>1 data set: checploints info.</returns>
 ./Scripts/Code_Reuse_With_Dynamic_SQL_and_Temp_Procedures_Example.sql:33:10     - Unknown word (enddate)    -- , @enddate DATETIME2(7)
 ./Scripts/Code_Reuse_With_Dynamic_SQL_and_Temp_Procedures_Example.sql:5:35      - Unknown word (getted)     -- PRINT variables values getted from temporary stored
-./Scripts/Compress_Tables_And_Indexes.sql:109:23    - Unknown word (filestream) -- AND p.filestream_filegroup_id = 0 --no
 ./Scripts/Compress_Tables_And_Indexes.sql:53:26     - Unknown word (explicity)  -- --hasn't explicity configured the value
-./Scripts/Compress_Tables_And_Indexes.sql:59:14     - Unknown word (N'tempdb)   -- IF OBJECT_ID(N'tempdb..#estimated_results
-./Scripts/Configure_SQL_Agent_Alerts.sql:24:33     - Unknown word (N'SQLDBA)   -- OperatorName sysname = N'SQLDBAGroup';
+./Scripts/Configure_SQL_Agent_Alerts.sql:24:35     - Unknown word (SQLDBA)     -- OperatorName sysname = N'SQLDBAGroup';
 ./Scripts/Configure_SQL_Agent_Alerts.sql:30:38     - Unknown word (sysoperators) -- SELECT * FROM msdb.dbo.sysoperators WHERE name = @OperatorName
 ./Scripts/Configure_SQL_Agent_Alerts.sql:38:30     - Unknown word (syscategories) -- FROM msdb.dbo.syscategories
 ./Scripts/Configure_SQL_Agent_Alerts.sql:68:42     - Unknown word (sysalerts)     -- SELECT name FROM msdb.dbo.sysalerts WHERE name = @Sev19AlertName
@@ -2524,7 +2500,6 @@ Lines:
 ./Scripts/Current_Running_Tasks_and_Server_Info.sql:25:14     - Unknown word (juristiction) -- your juristiction does not allow for this
 ./Scripts/Current_Running_Tasks_and_Server_Info.sql:298:8     - Unknown word (arithabort)    -- 'arithabort '+(CASE [arithabort
 ./Scripts/Current_Running_Tasks_and_Server_Info.sql:404:5     - Unknown word (dupl)          -- dupl int NOT NULL,
-./Scripts/Current_Running_Tasks_and_Server_Info.sql:442:5     - Unknown word (servicename)   -- servicename nvarchar(51
 ./Scripts/Current_Running_Tasks_and_Server_Info.sql:446:13    - Unknown word (nodename)      -- cluster_nodename nvarchar(512) NULL
 ./Scripts/Current_Running_Tasks_and_Server_Info.sql:4:30      - Unknown word (recordsets) -- Server. It returns 6 recordsets, in the following order
 ./Scripts/Current_Running_Tasks_and_Server_Info.sql:691:15    - Unknown word (spids)         -- --- Chains of spids that are being blocked
@@ -2550,14 +2525,12 @@ Lines:
 ./Scripts/Database_Mail_Configuration.sql:18:6      - Unknown word (mailserver) -- @mailserver_name = '<mailserver
 ./Scripts/Database_Mail_Configuration.sql:36:30     - Unknown word (profileaccount) -- msdb.dbo.sysmail_add_profileaccount_sp
 ./Scripts/Database_Mail_Configuration.sql:42:30     - Unknown word (principalprofile) -- msdb.dbo.sysmail_add_principalprofile_sp
-./Scripts/Database_Mail_Configuration.sql:68:22     - Unknown word (sqlagent)         -- EXEC msdb.dbo.sp_set_sqlagent_properties @email_save
 ./Scripts/Database_Mail_Configuration.sql:88:24     - Unknown word (dbmail)           -- EXEC msdb.dbo.[sp_send_dbmail]
 ./Scripts/Database_Mail_Problems.sql:68:23     - Unknown word (allitems)   -- FROM msdb.dbo.sysmail_allitems
 ./Scripts/Database_Mail_Problems.sql:74:23     - Unknown word (sentitems)  -- FROM msdb.dbo.sysmail_sentitems
 ./Scripts/Database_Mail_Problems.sql:80:23     - Unknown word (faileditems) -- FROM msdb.dbo.sysmail_faileditems
 ./Scripts/Database_Mail_Problems.sql:88:30     - Unknown word (mailitems)   -- msdb.dbo.sysmail_delete_mailitems_sp
 ./Scripts/Date_Calendar_Cross-Reference_Table.sql:115:6     - Unknown word (MAXRECURSION) -- (MAXRECURSION 0);
-./Scripts/Date_Calendar_Cross-Reference_Table.sql:38:5      - Unknown word (DATEFIRST)  -- SET DATEFIRST 1; /* https://docs.microsoft
 ./Scripts/Decrypt T-SQL module.sql:16:41     - Unknown word (Whos)       -- login_name,'???') as WhosGotTheDAC,
 ./Scripts/Decrypt T-SQL module.sql:28:49     - Unknown word (someprocedure) -- , @name sysname='sp_someprocedure';
 ./Scripts/Decrypt T-SQL module.sql:67:32     - Unknown word (imageval)      -- 1 @encrypted_object=imageval
@@ -2576,24 +2549,22 @@ Lines:
 ./Scripts/DetermineSpaceWithinSQLDatabaseFiles.sql:9:39      - Unknown word (groupid)     -- AS [Segment Name], groupid AS [Group Id], filename
 ./Scripts/Disable_Enable_All_Triggers_In_Database.sql:24:4      - Unknown word (Perpare)    -- -- Perpare Variable Script for
 ./Scripts/Disable_Enable_All_Triggers_In_Database.sql:6:20      - Unknown word (Minca)      -- <author>Federico Minca</author>
-./Scripts/Disabling_Jobs_Schedules.sql:103:18    - Unknown word (jobid)            -- DECLARE @jobid UNIQUEIDENTIFIER;
-./Scripts/Disabling_Jobs_Schedules.sql:104:18    - Unknown word (scheduleid)       -- DECLARE @scheduleid BIGINT;
-./Scripts/Disabling_Jobs_Schedules.sql:24:16     - Unknown word (UNIQUEIDENTIFIER) -- [job_id] [UNIQUEIDENTIFIER] NULL,
+./Scripts/Disabling_Jobs_Schedules.sql:103:18    - Unknown word (jobid)           -- DECLARE @jobid UNIQUEIDENTIFIER;
+./Scripts/Disabling_Jobs_Schedules.sql:104:18    - Unknown word (scheduleid)      -- DECLARE @scheduleid BIGINT;
 ./Scripts/Disabling_Jobs_Schedules.sql:3:27      - Unknown word (Shedules)   -- summary>Disabling Jobs Shedules.</summary>
 ./Scripts/Disabling_Jobs_Schedules.sql:5:30      - Unknown word (Shaulis)    -- created>2018-12-11 by Jon Shaulis</created>
-./Scripts/Disabling_Jobs_Schedules.sql:67:28     - Unknown word (sysschedules)     -- FROM [msdb].[dbo].[sysschedules] AS [ss]
-./Scripts/Disabling_Jobs_Schedules.sql:68:39     - Unknown word (sysjobschedules)  -- INNER JOIN [msdb].[dbo].[sysjobschedules] AS [jss] ON [jss].
+./Scripts/Disabling_Jobs_Schedules.sql:67:28     - Unknown word (sysschedules) -- FROM [msdb].[dbo].[sysschedules] AS [ss]
+./Scripts/Disabling_Jobs_Schedules.sql:68:39     - Unknown word (sysjobschedules) -- INNER JOIN [msdb].[dbo].[sysjobschedules] AS [jss] ON [jss].
 ./Scripts/Drop_all_objects_in_schema.sql:70:30     - Unknown word (Sche)       -- SELECT '' AS ScheName
 ./Scripts/Drop_all_objects_in_schema.sql:7:36      - Unknown word (dropschema) -- OBJECT_ID('tempdb.dbo.#dropschema')
 ./Scripts/Failed_SQL_Server_Agent_Jobs_With_Restart_Command.sql:13:19     - Unknown word (sysjobhistory) -- FROM msdb.dbo.sysjobhistory sjh
 ./Scripts/Failed_SQL_Server_Agent_Jobs_With_Restart_Command.sql:28:41     - Unknown word (sjsch)         -- dbo.sysjobschedules sjsch ON sj.job_id = sjsch
-./Scripts/FindDBConnectionLeaks.sql:24:32     - Unknown word (N'SERV)     -- host_name sysname = N'SERV4102';
+./Scripts/FindDBConnectionLeaks.sql:24:34     - Unknown word (SERV)       -- host_name sysname = N'SERV4102';
 ./Scripts/FindLongRunningJobSteps.sql:75:52     - Unknown word (stdevp)     -- secs_duration*1.) + 2*stdevp(secs_duration)
 ./Scripts/FindLongRunningJobSteps.sql:83:28     - Unknown word (CTE's)      -- need to select from the CTE's, and join to msdb for
 ./Scripts/FindLongRunningJobSteps.sql:90:30     - Unknown word (Threshhold) -- AvgPlus2StDev AS [Min Threshhold (secs)]
 ./Scripts/FindLongRunningJobSteps.sql:96:12     - Unknown word (sysjobactivity) -- JOIN msdb..sysjobactivity AS act ON act.job_id
 ./Scripts/FindTablesWithSimilarTableStructure.sql:60:35     - Unknown word (atleast)    -- 50 --Require atleast 50% of the columns to
-./Scripts/Find_Non_Sargable_Queries.sql:11:8      - Unknown word (XMLNAMESPACES) -- --WITH XMLNAMESPACES (DEFAULT 'http://schemas
 ./Scripts/Find_Not_Used_Legacy_Tables.sql:11:25     - Unknown word (myplans)    -- OBJECT_ID(N'tempdb..#myplans', 'U') IS NOT NULL DROP
 ./Scripts/Find_Object_Dependecy.sql:1964:43   - Unknown word (tabletypes) -- hemaCollections referenced by tabletypes
 ./Scripts/Find_Object_Dependecy.sql:199:38    - Unknown word (uddts)      -- tables that reference uddts or udts
@@ -2650,14 +2621,13 @@ Lines:
 ./Scripts/FindingSpecificColumns.sql:44:69     - Unknown word (xusertype)  -- c.user_type_ID = st.xusertype
 ./Scripts/FindingSpecificColumns.sql:54:26     - Unknown word (exluded)    -- c.OBJECT_ID > 100 -- exluded system objects
 ./Scripts/Finding_Host_Names_for_Failed_login_attempts.sql:3:122     - Unknown word (nslookup)   -- machine name by running nslookup against the IP address
-./Scripts/Finding_Host_Names_for_Failed_login_attempts.sql:62:59     - Unknown word (N'errorlogfilename) -- 00), SERVERPROPERTY(N'errorlogfilename'));
-./Scripts/Finding_Host_Names_for_Failed_login_attempts.sql:79:17     - Unknown word (readerrorlog)       -- EXEC sys.sp_readerrorlog @FileNum, 1;
+./Scripts/Finding_Host_Names_for_Failed_login_attempts.sql:62:61     - Unknown word (errorlogfilename) -- ), SERVERPROPERTY(N'errorlogfilename'));
+./Scripts/Finding_Host_Names_for_Failed_login_attempts.sql:79:17     - Unknown word (readerrorlog)     -- EXEC sys.sp_readerrorlog @FileNum, 1;
 ./Scripts/Fix_The_Broken_Dependencies_On_All_Objects.sql:2:10      - Unknown word (Karthick)   -- Author: Karthick P.K.
 ./Scripts/Fix_The_Broken_Dependencies_On_All_Objects.sql:66:45     - Unknown word (objectproperty) -- quotename(schema_name(objectproperty(@module, 'schemaid'
 ./Scripts/Fix_The_Broken_Dependencies_On_All_Objects.sql:66:70     - Unknown word (schemaid)       -- objectproperty(@module, 'schemaid'))) + '.' + quotename
 ./Scripts/Fix_The_Broken_Dependencies_On_All_Objects.sql:69:21     - Unknown word (refreshsqlmodule) -- exec sys.sp_refreshsqlmodule @str
 ./Scripts/GenerateTSQLTimeSlices.sql:15:9      - Unknown word (TIMEFROMPARTS) -- , TIMEFROMPARTS(0,0,0,0,0)
-./Scripts/Generate_BIML_Script.sql:42:20     - Unknown word (smallmoney) -- WHEN t.[SQL DT] = 'smallmoney' THEN 'Currency'
 ./Scripts/Generate_BIML_Script.sql:78:8      - Unknown word (Delmited)   -- , 'Delmited' "@FlatFileType"
 ./Scripts/GetResourceNameFromBlockedProcessReport.sql:113:25    - Unknown word (pagedata)   -- OBJECT_ID(''tempdb..#pagedata'') IS NOT NULL
 ./Scripts/GetResourceNameFromBlockedProcessReport.sql:124:11    - Unknown word (traceon)    -- 'DBCC traceon (3604); ' + CHAR(13
@@ -2667,16 +2637,12 @@ Lines:
 ./Scripts/GetResourceNameFromBlockedProcessReport.sql:172:13    - Unknown word (ROUNDABORT)  -- SET NUMERIC_ROUNDABORT OFF;
 ./Scripts/GetResourceNameFromBlockedProcessReport.sql:176:2     - Unknown word (setvar)      -- :setvar DatabaseName "<your
 ./Scripts/GetResourceNameFromBlockedProcessReport.sql:187:5     - Unknown word (NOEXEC)      -- SET NOEXEC OFF;
-./Scripts/GetResourceNameFromBlockedProcessReport.sql:193:15    - Unknown word (N'SQLCMD)    -- PRINT N'SQLCMD mode must be enabled
 ./Scripts/GetResourceNameFromBlockedProcessReport.sql:28:12     - Unknown word (blockin)    -- --type of blockin KEY,OBJECT,PAGE
 ./Scripts/GetResourceNameFromBlockedProcessReport.sql:2:15      - Unknown word (Martinovic) -- Author: Darko Martinovic
-./Scripts/GetResourceNameFromBlockedProcessReport.sql:9:16      - Unknown word (N'FN)       -- AND type IN (N'FN', N'IF', N'TF', N'FS
-./Scripts/GetResourceNameFromBlockedProcessReport.sql:9:30      - Unknown word (N'TF)       -- type IN (N'FN', N'IF', N'TF', N'FS', N'FT'))
 ./Scripts/Get_Amazon_RDS_Instance_Size.sql:28:6      - Unknown word (rdsadmin)   -- EXEC rdsadmin.dbo.rds_read_error_log
 ./Scripts/Get_CPU_Usage_Per_Database.sql:21:44     - Unknown word (Mili)       -- DECIMAL (6, 3), [CPUTimeInMiliSeconds] * 1.0 /
 ./Scripts/Get_CPU_Usage_Per_Database.sql:25:14     - Unknown word (execplanattr) -- dm_execplanattr.DatabaseID,
 ./Scripts/Get_CPU_Usage_Per_Database.sql:27:19     - Unknown word (execquerystats) -- SUM (dm_execquerystats.total_worker_time) AS
-./Scripts/Get_CPU_Usage_Per_Database.sql:33:28     - Unknown word (N'dbid)         -- WHERE attribute = N'dbid'
 ./Scripts/Get_CPU_Usage_Per_Database.sql:6:15      - Unknown word (Leiba)      -- <author>Eli Leiba</author>
 ./Scripts/Get_Coulmn_Statistics_By_Name.sql:33:28     - Unknown word (allc)       -- OBJECT_NAME(allc.object_id) + ''' AS
 ./Scripts/Get_Create_or_Alter_Index_Progress.sql:3:18      - Unknown word (progrees)   -- <summary>Track progrees CREATE or ALTER Index
@@ -2738,16 +2704,13 @@ Lines:
 ./Scripts/Identify_All_Logins_With_No_Associated_Default_Database_User.sql:60:46     - Unknown word (DDUT)       -- default_db_users_table AS DDUT
 ./Scripts/Identifying_In-Memory_Objects_When_Querying_the_Transaction_Log.sql:18:10     - Unknown word (datasize)   -- f.newrow_datasize,
 ./Scripts/Identifying_In-Memory_Objects_When_Querying_the_Transaction_Log.sql:19:3      - Unknown word (oldrow)     -- f.oldrow_begin_timestamp,
-./Scripts/Index Breakdown.sql:143:113   - Unknown word (N'datetimeoffset) -- datetime', N'datetime2', N'datetimeoffset', N'decimal', N'float
-./Scripts/Index Breakdown.sql:143:193   - Unknown word (N'smalldatetime)  -- N'numeric', N'real', N'smalldatetime', N'smallint', N'smallmoney
-./Scripts/Index Breakdown.sql:143:224   - Unknown word (N'smallmoney)     -- smalldatetime', N'smallint', N'smallmoney', N'time', N'tinyint
-./Scripts/Index Breakdown.sql:144:81    - Unknown word (COLUMNPROPERTY)   -- CONVERT (VARCHAR (11), COLUMNPROPERTY (C.[object_id], C.name
-./Scripts/Index Breakdown.sql:209:3     - Unknown word (DDPS)             -- DDPS.[object_id]
-./Scripts/Index Breakdown.sql:255:36    - Unknown word (MDKL)             -- row_filter = 1 THEN caMDKL.modify_date
-./Scripts/Index Breakdown.sql:347:13    - Unknown word (IBKF)             -- ,ISNULL (ttIBKF.index_key, N'') AS index
-./Scripts/Index Breakdown.sql:486:10    - Unknown word (IBSI)             -- ttIBSI.[object_id]
-./Scripts/Index Breakdown.sql:531:13    - Unknown word (DDIUS)            -- WHEN DDIUS.[object_id] IS NOT NULL
-./Scripts/Index Breakdown.sql:597:19    - Unknown word (N'sysdiagrams)    -- AND O.name = N'sysdiagrams'
+./Scripts/Index Breakdown.sql:144:81    - Unknown word (COLUMNPROPERTY) -- CONVERT (VARCHAR (11), COLUMNPROPERTY (C.[object_id], C.name
+./Scripts/Index Breakdown.sql:209:3     - Unknown word (DDPS)           -- DDPS.[object_id]
+./Scripts/Index Breakdown.sql:255:36    - Unknown word (MDKL)           -- row_filter = 1 THEN caMDKL.modify_date
+./Scripts/Index Breakdown.sql:347:13    - Unknown word (IBKF)           -- ,ISNULL (ttIBKF.index_key, N'') AS index
+./Scripts/Index Breakdown.sql:486:10    - Unknown word (IBSI)           -- ttIBSI.[object_id]
+./Scripts/Index Breakdown.sql:531:13    - Unknown word (DDIUS)          -- WHEN DDIUS.[object_id] IS NOT NULL
+./Scripts/Index Breakdown.sql:597:21    - Unknown word (sysdiagrams)    -- AND O.name = N'sysdiagrams'
 ./Scripts/Index Breakdown.sql:5:5       - Unknown word (ARITHIGNORE) -- SET ARITHIGNORE ON
 ./Scripts/Job_AG_Resume_Data_Movement.sql:103:10    - Unknown word (alertname)    -- DECLARE @alertname sysname = N'AG Data
 ./Scripts/Job_AG_Resume_Data_Movement.sql:19:33     - Unknown word (jobname)    -- ReturnCode = 0;DECLARE @jobname sysname = N'AG - Resume
@@ -2757,7 +2720,6 @@ Lines:
 ./Scripts/Job_AG_Resume_Data_Movement.sql:49:39     - Unknown word (jobserver)    -- ReturnCode = msdb.dbo.sp_add_jobserver @job_name=@jobname,
 ./Scripts/Job_AG_Resume_Data_Movement.sql:52:39     - Unknown word (jobstep)      -- ReturnCode = msdb.dbo.sp_add_jobstep
 ./Scripts/Job_AG_Resume_Data_Movement.sql:56:2      - Unknown word (cmdexec)      -- @cmdexec_success_code=0,
-./Scripts/Job_AG_Resume_Data_Movement.sql:62:12     - Unknown word (N'TSQL)       -- @subsystem=N'TSQL',
 ./Scripts/Jobs_Detailed_History.sql:114:19    - Unknown word (sysproxies)   -- LEFT JOIN dbo.sysproxies spr
 ./Scripts/Jobs_Detailed_History.sql:15:6      - Unknown word (jobhist)    -- WITH jobhist
 ./Scripts/Jobs_Detailed_History.sql:23:6      - Unknown word (agglastsixty) -- agglastsixty
@@ -2777,12 +2739,10 @@ Lines:
 ./Scripts/MaxDop_2016_and_higher.sql:16:10     - Unknown word (Numa)       -- DECLARE @NumaNodeCount INT;
 ./Scripts/MaxDop_2016_and_higher.sql:50:35     - Unknown word (numa)       -- logical processors per numa node
 ./Scripts/MaxDop_2016_and_higher.sql:65:19     - Unknown word (Logi)       -- --If NUMA = 1 and LogiProcs <= 8 THEN ASSERT
-./Scripts/MaxDop_2016_and_higher.sql:70:26     - Unknown word (N'MAXDOP)   -- SET @ResultMessage = N'MAXDOP should be less than
 ./Scripts/MaxServerMemoryCalculator.sql:107:48    - Unknown word (MICROSOFTVERSION) -- INT = CONVERT(INT, (@@MICROSOFTVERSION / 0x1000000) & 0xff
 ./Scripts/MaxServerMemoryCalculator.sql:22:28     - Unknown word (sqlstudent) -- Thanks to @sqlEmt and @sqlstudent144 for testing.
 ./Scripts/MaxServerMemoryCalculator.sql:38:19     - Unknown word (Afinned)    -- DECLARE @numaNodesAfinned TINYINT;
 ./Scripts/Memory_Consumption_By_Object.sql:75:25     - Unknown word (allocunits) -- OBJECT_ID(N'tempdb..#allocunits', N'U') IS NOT NULL
-./Scripts/Move_tempdb.sql:15:49     - Unknown word (SERVICENAME) -- nvarchar(512) = N'T:\' + @@SERVICENAME + '\';
 ./Scripts/Objects_Size_In_Database.sql:3:32      - Unknown word (veiws)      -- Count size in bytes veiws, triggers, procedures
 ./Scripts/Objects_Size_In_Database.sql:4:24      - Unknown word (Routin)     -- returns>1 data set: RoutinType, SUM LENGTH of objects
 ./Scripts/Overview_HADR_AlwaysOn_Local_Replica_Server.sql:10:1      - Unknown word (Сreated)     -- Сreated вфеу: 2018-09-05
@@ -2801,7 +2761,6 @@ Lines:
 ./Scripts/QueryActiveDirectory.sql:23:15     - Unknown word (mydomain)      -- FROM ''LDAP://mydomainFQDN.com/ou=mySubOU,ou
 ./Scripts/QueryActiveDirectory.sql:23:57     - Unknown word (mychilddomain) -- mySubOU,ou=myTopOU,dc=mychilddomain,dc=myTLdomain,dc=com
 ./Scripts/QueryActiveDirectory.sql:28:133    - Unknown word (datasrc)         -- provider=N'ADsDSOObject', @datasrc=N'adsdatasource'
-./Scripts/QueryActiveDirectory.sql:28:141    - Unknown word (N'adsdatasource) -- ADsDSOObject', @datasrc=N'adsdatasource'
 ./Scripts/QueryActiveDirectory.sql:28:20     - Unknown word (addlinkedserver) -- EXEC master.dbo.sp_addlinkedserver @server = N'AD', @srvproduct
 ./Scripts/QueryActiveDirectory.sql:28:54     - Unknown word (srvproduct)      -- inkedserver @server = N'AD', @srvproduct=N'Active Directory Services
 ./Scripts/QueryActiveDirectory.sql:31:20     - Unknown word (addlinkedsrvlogin) -- EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname = N'AD'
@@ -2815,7 +2774,6 @@ Lines:
 ./Scripts/README.md:1:3       - Unknown word (Usefull)    -- # Usefull SQL Server Scripts
 ./Scripts/Read_Default_Trace.sql:17:6      - Unknown word (filesrc)    -- WITH filesrc ([path]) AS
 ./Scripts/Read_Default_Trace.sql:22:1      - Unknown word (tracedata)  -- tracedata AS
-./Scripts/Read_Default_Trace.sql:28:47     - Unknown word (N'UQ)       -- ObjectName,2) IN (N'PK', N'UQ', N'IX') AND ObjectName
 ./Scripts/Read_Default_Trace.sql:34:34     - Unknown word (checkdb)    -- WHEN TextData LIKE N'%checkdb%' THEN 'DBCC CHECKDB
 ./Scripts/Read_Error_Log_File.sql:26:19     - Unknown word (dbghelp)    -- VALUES ('%Using ''dbghelp.dll'' version ''4.0
 ./Scripts/Read_Error_Log_File.sql:55:25     - Unknown word (mverrlog)   -- OBJECT_ID(N'tempdb..#mverrlog', N'U') IS NOT NULL
@@ -2836,10 +2794,10 @@ Lines:
 ./Scripts/Restore_script_for_Ola_Hallengren_backup.sql:69:41     - Unknown word (Olas)         -- variables to match that of Olas maintenance script
 ./Scripts/Restore_script_for_Ola_Hallengren_backup.sql:84:6      - Unknown word (isfile)       -- , isfile bit
 ./Scripts/Ring_Bufer_Analyze.sql:2:17      - Unknown word (Ivanov)     -- Author: Dmitriy Ivanov
+./Scripts/Run_scripts.bat:13:35     - Unknown word (SERVERNAME) -- SQL) DO ( sqlcmd -S SERVERNAME -d DATABASE1 -U username
 ./Scripts/Run_scripts.bat:1:14      - Unknown word (Manu)       -- REM Author: Manu Mohanan
 ./Scripts/Run_scripts.bat:1:19      - Unknown word (Mohanan)    -- REM Author: Manu Mohanan
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:135:44    - Unknown word (LPIM)       -- allocations_kb > 0, then LPIM is enabled
-./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:1369:58   - Unknown word (filetable)       -- escalation_desc, t.is_filetable,
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:149:17    - Unknown word (Sched)      -- s.[enabled] AS [Sched Enabled], js.next_run
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:1561:60   - Unknown word (Inlineable)      -- lineable (Query 64) (Inlineable UDFs)
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:1562:58   - Unknown word (inlineable)      -- Function Name], m.is_inlineable, m.inline_type, m.definition
@@ -2847,7 +2805,7 @@ Lines:
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:218:8     - Unknown word (softnuma)   -- softnuma_configuration_desc AS
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:284:8     - Unknown word (Deallocated) -- -- 7 = Deallocated by DBCC
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:616:9     - Unknown word (SQLPERF)     -- -- DBCC SQLPERF('sys.dm_os_wait_stats
-./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:630:77    - Unknown word (N'CXCONSUMER) -- , N'CLR_SEMAPHORE', N'CXCONSUMER',
+./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:630:79    - Unknown word (CXCONSUMER)  -- N'CLR_SEMAPHORE', N'CXCONSUMER',
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:78:17     - Unknown word (Filestream) -- SERVERPROPERTY('FilestreamConfiguredLevel') AS
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:866:17    - Unknown word (FREESYSTEMCACHE) -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 ./Scripts/SQL Managed Instance Diagnostic Information Queries.sql:960:4     - Unknown word (Showplan)        -- -- Showplan Enhancements for UDFs
@@ -2867,8 +2825,6 @@ Lines:
 ./Scripts/SQLServer_Memory_Information.sql:308:24    - Unknown word (msver)      -- OBJECT_ID('tempdb..#msver') IS NOT NULL
 ./Scripts/SQLServer_Memory_Information.sql:347:35    - Unknown word (Perc)       -- AS decimal(20, 4)) AS Perc,
 ./Scripts/SQLServer_Memory_Information.sql:4:28      - Unknown word (countes)    -- returns>3 row sets: 1 - countes info; 2 - min, max,
-./Scripts/SQL_Azure_Approximate_Datetime_Restart.sql:17:10     - Unknown word (LAZYWRITER) -- 'LAZYWRITER_SLEEP',
-./Scripts/SQL_Azure_Approximate_Datetime_Restart.sql:18:10     - Unknown word (LOGMGR)     -- 'LOGMGR_QUEUE',
 ./Scripts/SQL_Azure_Approximate_Datetime_Restart.sql:36:61     - Unknown word (seqnum)     -- by wait_time_ms) as seqnum,
 ./Scripts/SQL_Server_Defaults.sql:69:40     - Unknown word (Defragmentation) -- Global', 'Index', 'Index Defragmentation', 'Enable Index Defragmentati
 ./Scripts/SQL_Server_Defaults.sql:72:78     - Unknown word (Defrag)          -- 'Maximum Concurrent Defrag Operations', '1' UNION
@@ -2991,7 +2947,6 @@ Lines:
 ./Scripts/Table_Parameters.sql:68:16     - Unknown word (stbl)       -- ,ISNULL(stbl.name, N'') AS [Owner
 ./Scripts/Table_Parameters.sql:82:14     - Unknown word (Objectproperty) -- ,CAST(Objectproperty(tbl.object_id, N'HasAfterTrig
 ./Scripts/Table_Parameters.sql:94:16     - Unknown word (dstext)         -- ,ISNULL(dstext.name, N'') AS [TextFileGroup
-./Scripts/Tempdb_Contention.sql:14:14     - Unknown word (N'CXPACKET) -- WHEN N'CXPACKET' THEN
 ./Scripts/Temporal_Table_Maker.sql:139:43    - Unknown word (FROMPARTS)   -- SysEndTime DEFAULT DATETIME2FROMPARTS(9999, 12, 31, 23,59
 ./Scripts/Temporal_Table_Maker.sql:53:21     - Unknown word (DEDFRS)     -- , DEDFRS.name
 ./Scripts/Temporal_Table_Maker.sql:80:31     - Unknown word (COLUMNSTORE) -- 'CREATE CLUSTERED COLUMNSTORE INDEX CCI_'
@@ -3025,7 +2980,6 @@ Lines:
 ./Scripts/Uppercase_All_String_Columns.sql:232:42    - Unknown word (XJIS)              -- ELSE N'Japanese_XJIS_140_BIN2' -- 2017 and
 ./Scripts/Uppercase_All_String_Columns.sql:60:9      - Unknown word (Kahr)       -- [InTharKahr] NVARCHAR(50) COLLATE
 ./Scripts/Uppercase_All_String_Columns.sql:61:10     - Unknown word (Texxed)     -- [💣EnTexxed💥] NTEXT COLLATE Latin
-./Scripts/Uppercase_All_String_Columns.sql:61:20     - Unknown word (NTEXT)      -- [💣EnTexxed💥] NTEXT COLLATE Latin1_General
 ./Scripts/Using_OPENROWSET_to_Query_Excel.sql:31:23     - Unknown word (decoupagpro) -- , 'SELECT * FROM [decoupagpro$]') AS op;
 ./Scripts/VLF_Info.sql:40:9      - Unknown word (fileid)     -- fileid smallint
 ./Scripts/VLF_Info.sql:43:9      - Unknown word (fseqno)     -- fseqno int
@@ -3035,7 +2989,6 @@ Lines:
 ./Scripts/Visualizing_Agent_Jobs_in_SSMS.sql:89:62     - Unknown word (hhmiss)     -- duration" column (int, hhmiss) to the
 ./Scripts/Visualizing_VLF.sql:19:43     - Unknown word (INFOMSGS)   -- DBCC LOGINFO WITH NO_INFOMSGS';
 ./Scripts/Wait_Statistics.sql:70:25     - Unknown word (FLUSHFILEBUFFERS) -- N'PREEMPTIVE_OS_FLUSHFILEBUFFERS', -- https://www.sqlskills
-./Scripts/Wait_Statistics.sql:99:9      - Unknown word (N'VDI)            -- N'VDI_CLIENT_OTHER', -- https
 ./Scripts/Wait_Statistics_Snapshot.sql:53:6      - Unknown word (eqmg)       -- [eqmg].[dop] AS [DOP],
 ./Scripts/When_SQL_Server_Was_Installed.sql:6:11      - Unknown word (Rebecca)    -- <author>Rebecca Lewis</author>
 ./Scripts/WhiteListIPTable.sql:28:10     - Unknown word (ECHOBASE)   -- ('*','ECHOBASE1','*','Any user from
@@ -3079,28 +3032,23 @@ Lines:
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:25:16     - Unknown word (Instancename) -- () SetupLog: Instancename 'MSSQLSERVER' in case
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:3183:21   - Unknown word (mrdbi)                       -- /* sql 2008+ */ [mrdbi].[is_cdc_enabled] <
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:3519:26   - Unknown word (Standardmode)                -- SELECT N'Column used in Standardmode (exclude)', N'[is_excluded
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:384:113   - Unknown word (N'MSSQLSERVER) -- RVERPROPERTY('InstanceName'), N'MSSQLSERVER') AS nvarchar)
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:3878:39   - Unknown word (lenght)                      -- SQLCommand) AS [command_lenght]
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:3899:42   - Unknown word (mrfi)                        -- N' (DATEDIFF(HOUR,[mrfi].[mr_capture_date],SYSDATETIM
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:39:28     - Unknown word (Confiugre)    -- Procedures: [dbo].[sp_ConfiugreBCS]
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:4042:40   - Unknown word (ncdbf)                       -- collected_db_files AS [ncdbf] ON [ncdbf].[database
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:4434:20   - Unknown word (N'iovf)                      -- SET @DestTable = N'iovf_stats'
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:4600:11   - Unknown word (iovfs)                       -- SELECT [iovfs].[database_id], [iovfs
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:463:19    - Unknown word (Directoy)      -- Leave @OutputFileDirectoy = NULL and set @LocateSQLErro
+./Solution/BaselineCollector/BaselineCollectorSolution.sql:463:19    - Unknown word (Directoy)     -- Leave @OutputFileDirectoy = NULL and set @LocateSQLErro
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:47:36     - Unknown word (CSUT)         -- ChangedSpaceUsedThreshold /@CSUTExcludeLog/
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:484:55    - Unknown word (NNNNNNNEEEEEEEEEEEEEEEEEEE) -- OOOOOOOO NNNNNNN        NNNNNNNEEEEEEEEEEEEEEEEEEE
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:499:56    - Unknown word (NNNNNNEEEEEEEEEEEEEEEEEEE)  -- OOOOOOOO NNNNNNN         NNNNNNEEEEEEEEEEEEEEEEEEE
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:5088:20   - Unknown word (N'perfmon)                   -- SET @DestTable = N'perfmon_data'
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:5212:56   - Unknown word (perfcounters)                -- N'INSERT INTO #temp_perfcounters
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:5875:46   - Unknown word (tfsu)                        -- AS [capture_date], [tfsu].[file_id], LEFT([mf
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:591:5     - Unknown word (csut)                       -- [csut_exclude_log] BIT,
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:6109:13   - Unknown word (SQLTRACE)                    -- DECLARE @AI_SQLTRACE_INCREMENTAL_FLUSH_SLEEP
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6394:25   - Unknown word (getapplock)                  -- EXEC @LockResult = sp_getapplock @Resource= N'WaitStatsData
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6400:212  - Unknown word (parralel)                    -- lectWaitStatsData can not run parralel itself with parameter
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6423:46   - Unknown word (APPLOCK)                     -- Acquired AppLock: ' + APPLOCK_MODE(N'public', N'WaitStatsDa
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6429:13   - Unknown word (waitstats)                   -- -- Collect waitstats
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6513:18   - Unknown word (werent)                      -- /* Waits that werent in the first snapshot
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:6573:23   - Unknown word (N'DMV)                       -- SET @InfoMessage = N'DMV [sys].[dm_os_wait_stats
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6573:63   - Unknown word (reseted)                     -- wait_stats] has been reseted.'
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6579:24   - Unknown word (releaseapplock)              -- EXEC @LockResult = sp_releaseapplock
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6746:38   - Unknown word (SQUOTE)                      -- okenServer = N'$' + N'(ESCAPE_SQUOTE(SRVR))'
@@ -3111,13 +3059,11 @@ Lines:
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:674:56    - Unknown word (collectinstanceinfo)        -- Default config for sp_collectinstanceinfo') --1
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6750:43   - Unknown word (STRTTM)                      -- + N'(ESCAPE_SQUOTE(STRTTM))'
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6755:51   - Unknown word (SQLLOGDIR)                   -- + N'(ESCAPE_SQUOTE(SQLLOGDIR))'
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:6771:32   - Unknown word (N'sqlcmd)                    -- JobName01Step1Command = N'sqlcmd -E -S ' + @TokenServer
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:6790:120  - Unknown word (N'CMDEXEC)                   -- InstanceInfo', @subsystem = N'CMDEXEC', @command = @JobName
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:6805:132  - Unknown word (N'msdb)                      -- TSQL', @database_name=N'msdb', @command = @JobCheckStepCom
+./Solution/BaselineCollector/BaselineCollectorSolution.sql:6790:122  - Unknown word (CMDEXEC)                     -- InstanceInfo', @subsystem = N'CMDEXEC', @command = @JobName
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:680:56    - Unknown word (collectdatabaseinfo)        -- Default config for sp_collectdatabaseinfo') --1
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:687:56    - Unknown word (collectconfigdata)          -- Default config for sp_collectconfigdata') --2
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:6903:54   - Unknown word (outputfiles)                 -- is not specified. No outputfiles are generated by the
-./Solution/BaselineCollector/BaselineCollectorSolution.sql:6904:40   - Unknown word (delims)                     -- c "For /F "tokens=1 delims=" %v In (''ForFiles
+./Solution/BaselineCollector/BaselineCollectorSolution.sql:6904:40   - Unknown word (delims)                      -- c "For /F "tokens=1 delims=" %v In (''ForFiles
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:701:56    - Unknown word (collectfileinfo)            -- Default config for sp_collectfileinfo') --3
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:713:56    - Unknown word (collecttempdbusage)         -- Default config for sp_collecttempdbusage') --4
 ./Solution/BaselineCollector/BaselineCollectorSolution.sql:725:56    - Unknown word (collectiovfstats)           -- Default config for sp_collectiovfstats') --4
@@ -3173,7 +3119,6 @@ Lines:
 ./Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:42:7      - Unknown word (SRVROLEMEMBER) -- IF IS_SRVROLEMEMBER('sysadmin') = 0
 ./Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:4858:31   - Unknown word (backuphistory) -- JobName08 = 'sp_delete_backuphistory'
 ./Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:4864:30   - Unknown word (jobhistory)    -- JobName09 = 'sp_purge_jobhistory'
-./Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:4885:100  - Unknown word (CMDEXEC)       -- JobName01, @subsystem = 'CMDEXEC', @command = @JobCommand
 ./Solution/Ola_Maintenance_Solution/README.md:3:19      - Unknown word (hallengren) -- Source link: [ola.hallengren.com](https://ola.hallengren
 ./Solution/SysJobHistory/DBA_sp_jobhistory_row_limiter.sql:9:95      - Unknown word (sysstat)    -- jobhistory_row_limiter') and sysstat & 0xf = 4)
 ./Solution/SysJobHistory/DBA_sysjobhistory_driver_Tests.sql:125:14    - Unknown word (nums)       -- 4001 + nums.number --4001 to 6
@@ -3255,7 +3200,7 @@ Lines:
 ./Solution/dbWarden/dbWarden.sql:515:51    - Unknown word (WAITTIME)         -- TEMP WHERE CAST(BLOCKED_WAITTIME_SECONDS AS DECIMAL)
 ./Solution/dbWarden/dbWarden.sql:52:87     - Unknown word (behaviour)        -- now. BCP has different behaviour in 2012 that needs tweaking
 ./Solution/dbWarden/dbWarden.sql:59:184    - Unknown word (FILESTATS)        -- FileMBUsed, FileMBEmpty in #FILESTATS
-./Solution/dbWarden/dbWarden.sql:6174:67   - Unknown word (N'perfstats)                -- job_id=@jobId, @name=N'perfstats schedule',
+./Solution/dbWarden/dbWarden.sql:6174:69   - Unknown word (perfstats)                  -- job_id=@jobId, @name=N'perfstats schedule',
 ./Solution/dbWarden/dbWarden.sql:62:83     - Unknown word (DMV's)            -- LongRunningQueries to use DMV's to gather session information
 ./Solution/dbWarden/dbWarden.sql:6338:79   - Unknown word (inforamtion)                -- Contains statistical inforamtion on SQL Jobs' WHERE TableName
 ./Solution/dbWarden/dbWarden.sql:6342:99   - Unknown word (reindexing)                 -- off schema tracking, reindexing and alerts on specific
@@ -3393,7 +3338,7 @@ Lines:
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:162:149   - Unknown word (PAGEIOLATC) -- MemGrantWait,DOP,query_cost,PAGEIOLATCHms,PAGELATCHms,RunnableCount
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:162:163   - Unknown word (PAGELATC)   -- query_cost,PAGEIOLATCHms,PAGELATCHms,RunnableCount,SpinLoopFlag
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:162:77    - Unknown word (Maint)      -- RuntimeSec,BlockedBy,DatabaseMaint,EstFinishTime,MemRequestMB
-./Stored_Procedure/dbo.sp_PerfSQ.sql:211:65    - Unknown word (N'SPINLOOP) -- WHEN ot.task_state = N'SPINLOOP'
+./Stored_Procedure/dbo.sp_PerfSQ.sql:211:67    - Unknown word (SPINLOOP)   -- WHEN ot.task_state = N'SPINLOOP'
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:271:29    - Unknown word (Waitms)     -- cteTempdb (SPID,TempdbWaitms,CursorOpen,CursorDormantms
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:271:53    - Unknown word (Dormantms)  -- TempdbWaitms,CursorOpen,CursorDormantms,TempdbDeallocMB,TempdbAllocMB
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:271:69    - Unknown word (Dealloc)    -- CursorDormantms,TempdbDeallocMB,TempdbAllocMB,VerActive
@@ -3402,8 +3347,6 @@ Lines:
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:336:84    - Unknown word (nojoin)     -- NoJoinPredicate[.="1"])]') nojoin(p))
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:341:103   - Unknown word (Highms)     -- MaxRows,AvgCpuLowms,CpuHighms,AvgLogicalReadsMB,[PhyReads
 ./Stored_Procedure/dbo.sp_PerfSQ.sql:341:94    - Unknown word (Lowms)      -- MinRows,MaxRows,AvgCpuLowms,CpuHighms,AvgLogicalReadsMB
-./Stored_Procedure/dbo.sp_PerfSQ.sql:404:44    - Unknown word (N'Idx)      -- CONVERT(nvarchar(7),N'IdxGap ')
-./Stored_Procedure/dbo.sp_PerfSQ.sql:454:45    - Unknown word (N'Tempdb)   -- CONVERT(nvarchar(27),N'Tempdb')
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:181:6     - Unknown word (backupmediasetid) -- ,backupmediasetid
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:183:6     - Unknown word (backupstartdate)  -- ,backupstartdate
 ./Stored_Procedure/dbo.sp_RestoreGene.sql:31:71     - Unknown word (analysier)  -- when called from query analysier, set to No when called
@@ -3531,7 +3474,6 @@ Lines:
 ./Stored_Procedure/dbo.sp_help_permissions.sql:516:5     - Unknown word (Securables) -- --- Securables
 ./Stored_Procedure/dbo.sp_help_permissions.sql:530:59    - Unknown word (agrs)       -- vailability_replica_states AS agrs ON agrs.replica_id=agr
 ./Stored_Procedure/dbo.sp_help_permissions.sql:607:17    - Unknown word (STOPLIST)   -- -- FULLTEXT STOPLIST
-./Stored_Procedure/dbo.sp_help_permissions.sql:608:126   - Unknown word (N'STOPLIST) -- FULLTEXT STOPLIST', N'STOPLIST::'+QUOTENAME([name]
 ./Stored_Procedure/dbo.sp_help_permissions.sql:608:66    - Unknown word (stoplist)   -- major_id, 23 AS class, stoplist_id AS major_id, principal
 ./Stored_Procedure/dbo.sp_help_permissions.sql:609:23    - Unknown word (stoplists)  -- FROM sys.fulltext_stoplists
 ./Stored_Procedure/dbo.sp_help_permissions.sql:890:40    - Unknown word (resultset)  -- 0, return a tabular resultset with all inherited permutatio
@@ -3558,10 +3500,7 @@ Lines:
 ./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1051:22   - Unknown word (perc)          -- [threshold_null_perc] TINYINT NOT NULL);
 ./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1053:27   - Unknown word (cidx)          -- CREATE CLUSTERED INDEX cidx_#sparsetypes ON #SparseTypes
 ./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1053:33   - Unknown word (sparsetypes)   -- CLUSTERED INDEX cidx_#sparsetypes ON #SparseTypes([ID
-./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1069:8    - Unknown word (SMALLDATETIME) -- ('SMALLDATETIME',58, 0,0, 64),
-./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1077:8    - Unknown word (DATETIMEOFFSET) -- ('DATETIMEOFFSET',43, 0,0, 52),
-./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1086:8    - Unknown word (HIERARCHYID)    -- ('HIERARCHYID',128, 0,0, 60),
-./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1145:16   - Unknown word (DBCCSQL)        -- DECLARE @DBCCSQL NVARCHAR(MAX) 		= N
+./Stored_Procedure/dbo.sp_sizeoptimiser.sql:1145:16   - Unknown word (DBCCSQL)       -- DECLARE @DBCCSQL NVARCHAR(MAX) 		= N
 ./Stored_Procedure/dbo.sp_sizeoptimiser.sql:199:43    - Unknown word (UPDATEABILITY) -- ABASEPROPERTYEX([sd].[name], 'UPDATEABILITY') = N'READ_WRITE'
 ./Stored_Procedure/dbo.sp_sizeoptimiser.sql:200:43    - Unknown word (USERACCESS)    -- ABASEPROPERTYEX([sd].[name], 'USERACCESS') = N'MULTI_USER'
 ./Stored_Procedure/dbo.sp_sizeoptimiser.sql:364:13    - Unknown word (boop)          -- ,N'beep boop'
@@ -3693,7 +3632,6 @@ Lines:
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:1848:28   - Unknown word (LRDT)        -- CONVERT (VARCHAR (19), caLRDT.last_run_date_time,
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:1863:57   - Unknown word (NRDT)        -- CONVERT (VARCHAR (19), sqNRDT.next_run_date_time,
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:2147:8    - Unknown word (DDIPS)       -- ,DDIPS.avg_fragmentation_in
-./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:2168:26   - Unknown word (sysdiagrams) -- AND O.name = N''sysdiagrams''
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:246:34    - Unknown word (sssr)       -- (N'tempdb.dbo.#temp_sssr_databases', N'U') IS
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:2475:74   - Unknown word (DDMIGS)      -- 3), CONVERT (MONEY, DDMIGS.unique_compiles), 1
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:2500:47   - Unknown word (DDMIG)       -- missing_index_groups DDMIG ON DDMIG.index_handle
@@ -3703,7 +3641,7 @@ Lines:
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:581:11    - Unknown word (nowrap)      -- <th nowrap>NetBIOS Name</th>
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:64:25     - Unknown word (Ouputs)     -- : "Index" Ouputs Now Include Indexed
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:670:7     - Unknown word (dateformat)  -- ,SL.[dateformat] AS date_format
-./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:788:28    - Unknown word (N'LCID)      -- lcid = SERVERPROPERTY (N'LCID')
+./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:788:30    - Unknown word (LCID)        -- = SERVERPROPERTY (N'LCID')
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:853:34    - Unknown word (Hocs)        -- nowrap>Optimize For Ad Hocs</th>
 ./Stored_Procedure/dbo.usp_SQL_Server_System_Report.sql:887:66    - Unknown word (hocs)        -- enabled AS optimize_for_ad_hocs
 ./Stored_Procedure/dbo.usp_SQLskillsAnalyzeLog.sql:204:21    - Unknown word (subtransactions) -- -- Look for subtransactions of this one
@@ -3725,8 +3663,6 @@ Lines:
 ./Stored_Procedure/dbo.usp_SetFileGrowth.sql:31:28     - Unknown word (HERVOUET)     -- Author : Samuel HERVOUET
 ./Stored_Procedure/dbo.usp_SetFileGrowth.sql:44:29     - Unknown word (Datafiles)    -- For Datafiles less than 400 MB, set
 ./Stored_Procedure/dbo.usp_String_Search.sql:348:22    - Unknown word (UNPV)       -- ,UNPV.column_name
-./Stored_Procedure/dbo.usp_TableUnpivot.sql:82:23     - Unknown word (N'UNPIVOT)  -- N'UNPIVOT'
-./Stored_Procedure/dbo.usp_TableUnpivot.sql:9:6       - Unknown word (unpivot)    -- @unpivotColumns nvarchar(max
 ./Stored_Procedure/dbo.usp_TransliterationEN2RU.sql:11:15     - Unknown word (транслитерации) -- Процедура транслитерации кирилицы в латински
 ./Stored_Procedure/dbo.usp_TransliterationEN2RU.sql:11:30     - Unknown word (кирилицы)       -- дура транслитерации кирилицы в латинский и франц
 ./Stored_Procedure/dbo.usp_TransliterationEN2RU.sql:11:41     - Unknown word (латинский)      -- итерации кирилицы в латинский и французский алфав
@@ -3851,16 +3787,10 @@ Lines:
 ./Stored_Procedure/dbo.usp_bcpUnloadSelect.sql:18:56     - Unknown word (SCHEMANAME) -- names: DATABASENAME.SCHEMANAME.TABLENAME
 ./Stored_Procedure/dbo.usp_generateIdentifier.sql:26:22     - Unknown word (qwertyuiopasdfghjklzxcvbnm) -- select @alpha = 'qwertyuiopasdfghjklzxcvbnm'
 ./Stored_Procedure/dbo.usp_generateIdentifier.sql:59:22     - Unknown word (preseed)                    -- declare @preseed int = @seed;
-./Stored_Procedure/dbo.usp_who5.sql:1204:50   - Unknown word (N'PRECONNECT) -- session IN (N'PENDING', N'PRECONNECT', N'RUNNABLE', N'SPINLOOP
-./Stored_Procedure/dbo.usp_who5.sql:1281:45   - Unknown word (N'mssqlsystemresource) -- database_id = 32767 THEN N'mssqlsystemresource (Hidden Resource Database
-./Stored_Procedure/dbo.usp_who5.sql:1379:20   - Unknown word (N'IU)                  -- WHEN 7 THEN N'IU (Intent Update)'
-./Stored_Procedure/dbo.usp_who5.sql:1381:20   - Unknown word (N'SIU)                 -- WHEN 9 THEN N'SIU (Shared Intent Update
-./Stored_Procedure/dbo.usp_who5.sql:1383:21   - Unknown word (N'UIX)                 -- WHEN 11 THEN N'UIX (Update Intent Exclusive
-./Stored_Procedure/dbo.usp_who5.sql:1402:20   - Unknown word (N'RELN)                -- WHEN 4 THEN N'RELN'
-./Stored_Procedure/dbo.usp_who5.sql:1403:20   - Unknown word (N'BLCKN)               -- WHEN 5 THEN N'BLCKN'
-./Stored_Procedure/dbo.usp_who5.sql:1414:20   - Unknown word (N'WFR)                 -- WHEN 6 THEN N'WFR'
-./Stored_Procedure/dbo.usp_who5.sql:1418:8    - Unknown word (N'ECID)                -- + N'ECID: ' + CONVERT (NVARCHAR
-./Stored_Procedure/dbo.usp_who5.sql:186:47    - Unknown word (SPIDs)      -- only (includes sleeping SPIDs with open transactions
+./Stored_Procedure/dbo.usp_who5.sql:1204:52   - Unknown word (PRECONNECT)  -- session IN (N'PENDING', N'PRECONNECT', N'RUNNABLE', N'SPINLOOP
+./Stored_Procedure/dbo.usp_who5.sql:1281:47   - Unknown word (mssqlsystemresource) -- database_id = 32767 THEN N'mssqlsystemresource (Hidden Resource Database
+./Stored_Procedure/dbo.usp_who5.sql:1402:22   - Unknown word (RELN)                -- WHEN 4 THEN N'RELN'
+./Stored_Procedure/dbo.usp_who5.sql:1403:22   - Unknown word (BLCKN)               -- WHEN 5 THEN N'BLCKN'
 ./Stored_Procedure/dbo.usp_who5.sql:368:8     - Unknown word (ownertype)  -- ,req_ownertype SMALLINT NULL
 ./Stored_Procedure/dbo.usp_who5.sql:370:8     - Unknown word (refcnt)     -- ,req_refcnt INT NULL
 ./Stored_Procedure/dbo.usp_who5.sql:536:6     - Unknown word (DDSSU)      -- DDSSU.session_id
@@ -3973,10 +3903,9 @@ Lines:
 ./User_Defined_Function/udf_PatternSplitLoop.sql:35:35     - Unknown word (meaninful)  -- This means that no meaninful patterns are found in
 ./User_Defined_Function/udf_QueriesWithParameterizationProblems.sql:23:18     - Unknown word (stdev)      -- max(qsrs.stdev_duration) stdev_duration
 ./User_Defined_Function/udf_RTF2Text.sql:12:14     - Unknown word (Wizzard)    -- Author: NightWizzard
-./User_Defined_Function/udf_RemoveNonAlphaCharacters.sql:12:41     - Unknown word (N'Тестовая) -- RemoveNonAlphaCharacters(N'Тестовая строка - Test string
+./User_Defined_Function/udf_RemoveNonAlphaCharacters.sql:12:43     - Unknown word (Тестовая)   -- RemoveNonAlphaCharacters(N'Тестовая строка - Test string
 ./User_Defined_Function/udf_RemoveNonAlphaCharacters.sql:12:52     - Unknown word (строка)     -- NonAlphaCharacters(N'Тестовая строка - Test string 123_4
 ./User_Defined_Function/udf_RenderXMLToString.sql:2:24      - Unknown word (Solntsev)   -- Author: Andrei Solntsev
-./User_Defined_Function/udf_StringComparisonsLevenshteinString-based.sql:8:17      - Unknown word (Nvarchar)   -- DECLARE @Matrix Nvarchar(4000), @LD int, @TargetString
 ./User_Defined_Function/udf_StringComparisonsLongestCommonSubsequence.sql:56:54     - Unknown word (jjmax)      -- substring(@Array,@index-@jjmax-2,1))+1)--increment
 ./User_Defined_Function/udf_StringComparisonsLongestCommonSubsequence.sql:66:13     - Unknown word (iimax)      -- Select @ii=@iimax+1,@jj=@jjmax+1
 ./User_Defined_Function/udf_StringComparisonsLongestCommonSubsequence.sql:70:18     - Unknown word (firststring) -- if (substring(@firststring,@ii-1,1) = substring
