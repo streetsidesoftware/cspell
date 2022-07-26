@@ -1,13 +1,32 @@
+import { isServiceResponseSuccess, ServiceBus } from '@cspell/cspell-service-bus';
+import { compareStats } from './common/stat';
 import { CSpellIO } from './CSpellIO';
 import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
-import { compareStats } from './common/stat';
+import { registerHandlers } from './handlers/node/file';
 import { Stats } from './models/Stats';
+import { toURL } from './node/file/util';
+import { RequestFsReadFile, RequestFsReadFileSync } from './requests';
 
 export class CSpellIONode implements CSpellIO {
-    readFile(_uriOrFilename: string): Promise<string> {
-        throw new ErrorNotImplemented('readFile');
+    constructor(readonly serviceBus = new ServiceBus()) {
+        registerHandlers(serviceBus);
     }
-    readFileSync(_uriOrFilename: string): string {
+
+    readFile(uriOrFilename: string): Promise<string> {
+        const url = toURL(uriOrFilename);
+        const res = this.serviceBus.dispatch(RequestFsReadFile.create({ url }));
+        if (!isServiceResponseSuccess(res)) {
+            throw res.error || new ErrorNotImplemented('readFile');
+        }
+        return res.value;
+    }
+    readFileSync(uriOrFilename: string): string {
+        const url = toURL(uriOrFilename);
+        const res = this.serviceBus.dispatch(RequestFsReadFileSync.create({ url }));
+        if (!isServiceResponseSuccess(res)) {
+            throw res.error || new ErrorNotImplemented('readFileSync');
+        }
+        return res.value;
         throw new ErrorNotImplemented('readFileSync');
     }
     writeFile(_uriOrFilename: string, _content: string): Promise<void> {

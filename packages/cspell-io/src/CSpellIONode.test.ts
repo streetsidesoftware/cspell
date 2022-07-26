@@ -1,6 +1,6 @@
 import { CSpellIONode } from './CSpellIONode';
 
-// const sc = expect.stringContaining;
+const sc = expect.stringContaining;
 
 describe('CSpellIONode', () => {
     test('constructor', () => {
@@ -10,10 +10,18 @@ describe('CSpellIONode', () => {
 
     test.each`
         filename      | expected
-        ${__filename} | ${'Method readFile is not supported.'}
+        ${__filename} | ${sc('This bit of text')}
     `('readFile', async ({ filename, expected }) => {
         const cspellIo = new CSpellIONode();
-        await expect(() => cspellIo.readFile(filename)).toThrow(expected);
+        await expect(cspellIo.readFile(filename)).resolves.toEqual(expected);
+    });
+
+    test.each`
+        filename      | expected
+        ${__filename} | ${'Unhandled Request: fs:readFileSync' /* sc('This bit of text') */}
+    `('readFileSync', ({ filename, expected }) => {
+        const cspellIo = new CSpellIONode();
+        expect(() => cspellIo.readFileSync(filename)).toThrow(expected);
     });
 
     // readFile(_uriOrFilename: string): Promise<string> {
