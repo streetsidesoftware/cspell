@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.4.2](https://github.com/streetsidesoftware/cspell/compare/v6.4.1...v6.4.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* Add SQL dictionary ([#3277](https://github.com/streetsidesoftware/cspell/issues/3277)) ([ee716b8](https://github.com/streetsidesoftware/cspell/commit/ee716b867d583c58f5f31aeb867fc3ace25a1062))
+
+
+
+
+
 ## [6.4.1](https://github.com/streetsidesoftware/cspell/compare/v6.4.0...v6.4.1) (2022-07-23)
 
 **Note:** Version bump only for package cspell

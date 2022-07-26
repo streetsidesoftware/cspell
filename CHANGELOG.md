@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.4.2](https://github.com/streetsidesoftware/cspell/compare/v6.4.1...v6.4.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* Add SQL dictionary ([#3277](https://github.com/streetsidesoftware/cspell/issues/3277)) ([ee716b8](https://github.com/streetsidesoftware/cspell/commit/ee716b867d583c58f5f31aeb867fc3ace25a1062))
+* Add SQL integration test ([#3279](https://github.com/streetsidesoftware/cspell/issues/3279)) ([da7d1ba](https://github.com/streetsidesoftware/cspell/commit/da7d1baf2a0f666061069c40b6236ddc0bb235db))
+* Workflow Bot -- Update Dictionaries ([#3276](https://github.com/streetsidesoftware/cspell/issues/3276)) ([e5fdc72](https://github.com/streetsidesoftware/cspell/commit/e5fdc725a497c91a9374e88bb7e52d2e243528dd))
+* Workflow Bot -- Update Dictionaries ([#3278](https://github.com/streetsidesoftware/cspell/issues/3278)) ([47afb2b](https://github.com/streetsidesoftware/cspell/commit/47afb2b1ad5a85758755639c0093364baeb7afa5))
+* Workflow Bot -- Update Dictionaries ([#3282](https://github.com/streetsidesoftware/cspell/issues/3282)) ([4ade361](https://github.com/streetsidesoftware/cspell/commit/4ade36169efad728dcb7dc411c431619f9ca4e2f))
+
+
+
+
+
 ## [6.4.1](https://github.com/streetsidesoftware/cspell/compare/v6.4.0...v6.4.1) (2022-07-23)
 
 
