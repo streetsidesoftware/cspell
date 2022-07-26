@@ -3,8 +3,11 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 1869, Issues found: 2179 in 699 files
+ CSpell: Files checked: 1880, Issues found: 2205 in 706 files
  exit code: 1
+./CONTRIBUTING.md:23:6      - Unknown word (tocstop)    -- <!-- tocstop -->
+./CONTRIBUTING.md:85:3      - Unknown word (Poli)       -- - PoliCheck -
+./CONTRIBUTING.md:9:29      - Unknown word (maxdepth)   -- npx markdown-toc -i --maxdepth 4 CONTRIBUTING.md
 ./README.md:101:28    - Unknown word (Playfab)    -- +---Microsoft.Playfab
 ./README.md:113:191   - Unknown word (collaboaration) -- multiple service teams collaboaration, especially supporting
 ./README.md:149:23    - Unknown word (sharedgallery)  -- | |     +---sharedgallery
@@ -14,7 +17,7 @@ Lines:
 ./SECURITY.md:13:72     - Unknown word (MSRC)       -- Security Response Center (MSRC) at [https://msrc.microsoft
 ./SECURITY.md:17:205    - Unknown word (msrc)       -- found at [microsoft.com/msrc](https://aka.ms/opensource
 ./arm-compute/quickstart-templates/README.md:3:107     - Unknown word (quickstart) -- specification/compute/quickstart-templates`. However
-./dev/cognitiveservices/data-plane/Language/readme.md:33:1      - Unknown word (modelerfour) -- modelerfour:
+./dev/cognitiveservices/data-plane/Language/readme.md:35:1      - Unknown word (modelerfour) -- modelerfour:
 ./documentation/FAQ.md:9:40      - Unknown word (examplegen) -- generate swagger examples](#examplegen)
 ./documentation/Semantic-and-Model-Violations-Reference.md:15:14     - Unknown word (OPERATIONID) -- | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID
 ./documentation/Semantic-and-Model-Violations-Reference.md:647:39    - Unknown word (dicriminator) -- : The value of x-ms-dicriminator-value is not in the
@@ -108,7 +111,7 @@ Lines:
 ./specification/apimanagement/resource-manager/readme.md:84:56     - Unknown word (apimsettings)           -- preview/2021-12-01-preview/apimsettings.json
 ./specification/apimanagement/resource-manager/readme.md:85:56     - Unknown word (apimskus)               -- preview/2021-12-01-preview/apimskus.json
 ./specification/app/resource-manager/readme.python.md:9:26      - Unknown word (appcontainers) -- package-name: azure-mgmt-appcontainers
-./specification/appconfiguration/resource-manager/readme.md:166:50    - Unknown word (proxied)    -- plane level information proxied through the RP and cannot
+./specification/appconfiguration/resource-manager/readme.md:176:50    - Unknown word (proxied)    -- plane level information proxied through the RP and cannot
 ./specification/applicationinsights/data-plane/Monitor.Exporters/readme.md:29:39     - Unknown word (schemaregistry) -- global settings for the schemaregistry.
 ./specification/applicationinsights/resource-manager/readme.go.md:19:165    - Unknown word (livetoken)  -- preview/2020-06-02-preview/livetoken_API.json
 ./specification/appplatform/resource-manager/readme.go.md:8:14      - Unknown word (appplatform) -- namespace: appplatform
@@ -127,6 +130,7 @@ Lines:
 ./specification/chaos/resource-manager/readme.go.md:8:40      - Unknown word (armchaos)   -- resourcemanager/chaos/armchaos
 ./specification/chaos/resource-manager/readme.md:129:22    - Unknown word (toplevelresourcelistbysubscription) -- we defined the toplevelresourcelistbysubscription here:
 ./specification/cloudshell/resource-manager/readme.md:58:67     - Unknown word (cloudshell) -- profiles['azure_mgmt_cloudshell']
+./specification/cognitiveservices/data-plane/AzureOpenAI/authoring/readme.md:21:40     - Unknown word (azureopenai) -- preview/2022-03-01-preview/azureopenai.json
 ./specification/cognitiveservices/data-plane/Face/readme.python.md:27:62     - Unknown word (cognitives) -- cognitiveservices/azure-cognitives
 ./specification/cognitiveservices/data-plane/FormRecognizer/preview/v1.0/feedback.md:45:5      - Unknown word (johanste)     -- 4. [johanste] /TrainCustomModel operation
 ./specification/cognitiveservices/data-plane/FormRecognizer/preview/v1.0/feedback.md:7:5       - Unknown word (shahabhijeet) -- 1. [shahabhijeet] Don't specify x-nullable
@@ -139,8 +143,8 @@ Lines:
 ./specification/cognitiveservices/data-plane/TextAnalytics/readme.md:21:21     - Unknown word (Quickstart) -- See Text Analytics [Quickstart guide](https://docs
 ./specification/communication/data-plane/CallingServer/readme.md:1:3       - Unknown word (communicationservices) -- # communicationservices
 ./specification/communication/data-plane/Chat/readme.md:38:33     - Unknown word (communicationserviceschat) -- 2020-09-21-preview2/communicationserviceschat.json
-./specification/communication/data-plane/JobRouter/readme.md:29:14     - Unknown word (jobrouter)  -- tag: package-jobrouter-2021-10-20-preview2
-./specification/communication/data-plane/JobRouter/readme.md:38:33     - Unknown word (communicationservicejobrouter) -- 2021-10-20-preview2/communicationservicejobrouter.json
+./specification/communication/data-plane/JobRouter/readme.md:29:14     - Unknown word (jobrouter)  -- tag: package-jobrouter-2022-07-18-preview
+./specification/communication/data-plane/JobRouter/readme.md:38:32     - Unknown word (communicationservicejobrouter) -- preview/2022-07-18-preview/communicationservicejobrouter.json
 ./specification/communication/data-plane/OperatorConnect/readme.md:43:4      - Unknown word (Supression) -- ## Supression
 ./specification/communication/data-plane/PhoneNumbers/readme.md:32:18     - Unknown word (phonenumber) -- ### Tag: package-phonenumber-2021-03-07
 ./specification/communication/data-plane/PhoneNumbers/readme.md:38:23     - Unknown word (phonenumbers) -- - stable/2021-03-07/phonenumbers.json
@@ -376,7 +380,6 @@ Lines:
 ./specification/search/data-plane/Azure.Search/readme.md:356:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
 ./specification/search/resource-manager/readme.go.md:14:41     - Unknown word (armsearch)  -- resourcemanager/search/armsearch
 ./specification/security/resource-manager/readme.csharp.md:18:40     - Unknown word (securitycenter) -- csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management
-./specification/security/resource-manager/readme.md:190:60    - Unknown word (Whitelistings) -- -preview/applicationWhitelistings.json
 ./specification/securityinsights/resource-manager/readme.md:307:152   - Unknown word (reviewr)    -- supress this by Swagger reviewr.'
 ./specification/servicebus/resource-manager/readme.md:41:51     - Unknown word (migrationconfigs) -- preview/2021-01-01-preview/migrationconfigs.json
 ./specification/servicebus/resource-manager/readme.md:42:51     - Unknown word (networksets)      -- preview/2021-01-01-preview/networksets.json
@@ -387,10 +390,11 @@ Lines:
 ./specification/servicelinker/resource-manager/readme.csharp.md:14:40     - Unknown word (servicelinker) -- csharp-sdks-folder)/servicelinker/management/Microsoft
 ./specification/signalr/resource-manager/readme.go.md:14:42     - Unknown word (armsignalr) -- resourcemanager/signalr/armsignalr
 ./specification/sql/resource-manager/readme.go.md:7:38      - Unknown word (armsql)     -- resourcemanager/sql/armsql
-./specification/sql/resource-manager/readme.md:1806:40   - Unknown word (sqlmanagement) -- csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management
+./specification/sql/resource-manager/readme.md:1948:40   - Unknown word (sqlmanagement) -- csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management
 ./specification/storage/data-plane/Azure.Storage.Files.DataLake/readme.md:82:34     - Unknown word (predfined)  -- These parameters are predfined by storage specifications
 ./specification/storage/resource-manager/readme.go.md:14:42     - Unknown word (armstorage) -- resourcemanager/storage/armstorage
 ./specification/storagecache/resource-manager/readme.az.md:7:15      - Unknown word (storagecache) -- extensions: storagecache
+./specification/storagemover/resource-manager/readme.az.md:9:17      - Unknown word (storagemover) -- extensions: storagemover
 ./specification/support/resource-manager/readme.go.md:14:42     - Unknown word (armsupport) -- resourcemanager/support/armsupport
 ./specification/synapse/data-plane/readme.go.md:59:12     - Unknown word (accesscontrol) -- namespace: accesscontrol
 ./specification/synapse/data-plane/readme.go.md:89:12     - Unknown word (managedvirtualnetwork) -- namespace: managedvirtualnetwork
