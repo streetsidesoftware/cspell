@@ -5,7 +5,13 @@ import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
 import { registerHandlers } from './handlers/node/file';
 import { Stats } from './models/Stats';
 import { toURL } from './node/file/util';
-import { RequestFsReadFile, RequestFsReadFileSync } from './requests';
+import {
+    RequestFsReadFile,
+    RequestFsReadFileSync,
+    RequestFsStat,
+    RequestFsStatSync,
+    RequestFsWriteFile,
+} from './requests';
 
 export class CSpellIONode implements CSpellIO {
     constructor(readonly serviceBus = new ServiceBus()) {
@@ -16,7 +22,7 @@ export class CSpellIONode implements CSpellIO {
         const url = toURL(uriOrFilename);
         const res = this.serviceBus.dispatch(RequestFsReadFile.create({ url }));
         if (!isServiceResponseSuccess(res)) {
-            throw res.error || new ErrorNotImplemented('readFile');
+            throw genError(res.error, 'readFile');
         }
         return res.value;
     }
@@ -24,21 +30,39 @@ export class CSpellIONode implements CSpellIO {
         const url = toURL(uriOrFilename);
         const res = this.serviceBus.dispatch(RequestFsReadFileSync.create({ url }));
         if (!isServiceResponseSuccess(res)) {
-            throw res.error || new ErrorNotImplemented('readFileSync');
+            throw genError(res.error, 'readFileSync');
         }
         return res.value;
-        throw new ErrorNotImplemented('readFileSync');
     }
-    writeFile(_uriOrFilename: string, _content: string): Promise<void> {
-        throw new ErrorNotImplemented('writeFile');
+    writeFile(uriOrFilename: string, _content: string): Promise<void> {
+        const url = toURL(uriOrFilename);
+        const res = this.serviceBus.dispatch(RequestFsWriteFile.create({ url }));
+        if (!isServiceResponseSuccess(res)) {
+            throw genError(res.error, 'writeFile');
+        }
+        return res.value;
     }
-    getStat(_uriOrFilename: string): Promise<Stats> {
-        throw new ErrorNotImplemented('getStat');
+    getStat(uriOrFilename: string): Promise<Stats> {
+        const url = toURL(uriOrFilename);
+        const res = this.serviceBus.dispatch(RequestFsStat.create({ url }));
+        if (!isServiceResponseSuccess(res)) {
+            throw genError(res.error, 'getStat');
+        }
+        return res.value;
     }
-    getStatSync(_uriOrFilename: string): Stats {
-        throw new ErrorNotImplemented('getStatSync');
+    getStatSync(uriOrFilename: string): Stats {
+        const url = toURL(uriOrFilename);
+        const res = this.serviceBus.dispatch(RequestFsStatSync.create({ url }));
+        if (!isServiceResponseSuccess(res)) {
+            throw genError(res.error, 'getStatSync');
+        }
+        return res.value;
     }
     compareStats(left: Stats, right: Stats): number {
         return compareStats(left, right);
     }
+}
+
+function genError(err: Error | undefined, alt: string): Error {
+    return err || new ErrorNotImplemented(alt);
 }
