@@ -1,4 +1,4 @@
-import { pathToFileURL, URL } from 'url';
+import { pathToFileURL } from 'url';
 
 const isZippedRegExp = /\.gz($|[?#])/i;
 
@@ -19,5 +19,9 @@ export function isFileURL(url: URL): boolean {
     return url.protocol === 'file:';
 }
 export function toURL(filename: string | URL): URL {
-    return filename instanceof URL ? filename : isUrlLike(filename) ? new URL(filename) : pathToFileURL(filename);
+    return filename instanceof URL || typeof filename !== 'string'
+        ? filename
+        : isUrlLike(filename)
+        ? new URL(filename)
+        : pathToFileURL(filename);
 }

@@ -1,4 +1,3 @@
-export { readFile, readFileSync } from './fileReader';
-export { writeToFile, writeToFileIterable, writeToFileIterableP } from './fileWriter';
-export { getStat, getStatSync } from './stat';
-export type { Stats } from './stat';
+export { readFile, readFileSync } from './../node/file';
+export { writeToFile, writeToFileIterable, writeToFileIterableP } from './../node/file';
+export { getStat, getStatSync } from './../node/file';

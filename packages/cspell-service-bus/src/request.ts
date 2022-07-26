@@ -1,16 +1,17 @@
-export interface ServiceRequest<T extends string = string, R = unknown> {
+export interface ServiceRequest<T extends string = string, P = unknown, R = unknown> {
     readonly type: T;
+    readonly params: P;
     __r?: ServiceResponseBase<R>;
 }
 
-class BaseServiceRequest<T extends string, R> implements ServiceRequest<T, R> {
+class BaseServiceRequest<T extends string, P, R> implements ServiceRequest<T, P, R> {
     readonly __r?: ServiceResponseBase<R>;
-    constructor(readonly type: T) {}
+    constructor(readonly type: T, readonly params: P) {}
 }
 
-export class ServiceRequest<T extends string, R> extends BaseServiceRequest<T, R> {
-    constructor(readonly type: T) {
-        super(type);
+export class ServiceRequest<T extends string, P, R> extends BaseServiceRequest<T, P, R> {
+    constructor(type: T, params: P) {
+        super(type, params);
     }
 }
 
@@ -60,12 +61,15 @@ export function isInstanceOfFn<T>(constructor: { new (): T }): (t: unknown) => t
     return (t): t is T => t instanceof constructor;
 }
 
-export interface ServiceRequestFactory<R extends ServiceRequest, T extends string = R['type']> {
+export interface ServiceRequestFactory<R extends ServiceRequest, P = R['params'], T extends string = R['type']> {
     type: T;
     is: (r: ServiceRequest | R) => r is R;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    create(...params: any[]): R;
+    create(params: P): R;
+    __request?: R;
 }
+
+export type ServiceRequestFactoryRequestType<T> = T extends { __request?: infer R } ? R : never;
 
 export const __testing__ = {
     BaseServiceRequest,

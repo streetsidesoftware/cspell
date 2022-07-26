@@ -1,4 +1,11 @@
-import { createResponseFail, IsARequest, RequestResponseType, ServiceRequest, ServiceRequestFactory } from './request';
+import {
+    createResponseFail,
+    IsARequest,
+    RequestResponseType,
+    ServiceRequest,
+    ServiceRequestFactory,
+    ServiceRequestFactoryRequestType,
+} from './request';
 
 export interface Dispatcher {
     dispatch<R extends ServiceRequest>(request: R): RequestResponseType<R>;
@@ -69,7 +76,7 @@ export function createServiceBus(handlers: Handler[] = []): ServiceBus {
 
 export type HandleRequestFn<R extends ServiceRequest> = (
     request: R,
-    next: HandleRequestKnown<R>,
+    next: HandleRequest,
     dispatch: Dispatcher
 ) => RequestResponseType<R>;
 
@@ -79,9 +86,13 @@ export interface HandleRequest {
 }
 
 export interface HandleRequestKnown<R extends ServiceRequest> {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (request: R): RequestResponseType<R>;
 }
+
+export type FactoryRequestHandler<
+    T extends ServiceRequestFactory<ServiceRequest>,
+    R extends ServiceRequest = ServiceRequestFactoryRequestType<T>
+> = HandleRequestKnown<R>;
 
 export interface HandlerNext {
     (next: HandleRequest): HandleRequest;

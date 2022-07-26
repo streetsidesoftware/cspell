@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import * as path from 'path';
 import { isUrlLike, toURL } from './util';
 
-const root = path.join(__dirname, '../..');
+const root = path.join(__dirname, '../../..');
 const oc = expect.objectContaining;
 
 describe('Validate the fileReader', () => {

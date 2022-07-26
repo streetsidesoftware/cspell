@@ -4,12 +4,19 @@ import {
     createServiceBus,
     Dispatcher,
     Handler,
+    HandleRequest,
     HandleRequestFn,
-    HandleRequestKnown,
     HandlerNext,
     ServiceBus,
 } from './bus';
-import { createResponse, RequestResponseType, ServiceRequest, ServiceRequestFactory } from './request';
+import {
+    createResponse,
+    RequestResponseType,
+    ServiceRequest,
+    ServiceRequestFactory,
+    ServiceRequestFactoryRequestType,
+} from './request';
+import { requestFactory } from './requestFactory';
 
 export interface SystemServiceBus extends Dispatcher {
     registerHandler(requestPrefix: string, handler: Handler): void;
@@ -36,7 +43,7 @@ class SystemServiceBusImpl implements SystemServiceBus {
     private bindDefaultHandlers() {
         this.serviceBus.addHandler(
             createRequestHandler(RequestCreateSubsystemFactory, (req) => {
-                const { name, requestPattern } = req;
+                const { name, requestPattern } = req.params;
                 const sub = createSubsystemServiceBus(name, requestPattern);
                 this._subsystems.push(sub);
                 this.serviceBus.addHandler(sub.handler);
@@ -50,13 +57,13 @@ class SystemServiceBusImpl implements SystemServiceBus {
     }
 
     createSubsystem(name: string, requestPattern: string | RegExp): SubsystemServiceBus {
-        const res = this.dispatch(RequestCreateSubsystemFactory.create(name, requestPattern));
+        const res = this.dispatch(RequestCreateSubsystemFactory.create({ name, requestPattern }));
         assert(res?.value);
         return res.value;
     }
 
     registerHandler(requestPrefix: string, handler: Handler): void {
-        const request = RequestRegisterHandlerFactory.create(requestPrefix, handler);
+        const request = RequestRegisterHandlerFactory.create({ requestPrefix, handler });
         this.serviceBus.dispatch(request);
     }
 
@@ -79,38 +86,18 @@ export function createSystemServiceBus(): SystemServiceBus {
 }
 
 const TypeRequestRegisterHandler = 'System:RegisterHandler' as const;
-export class RequestRegisterHandlerFactory extends ServiceRequest<
+export const RequestRegisterHandlerFactory = requestFactory<
     typeof TypeRequestRegisterHandler,
+    { readonly requestPrefix: string; readonly handler: Handler },
     SubsystemServiceBus
-> {
-    static type = TypeRequestRegisterHandler;
-    private constructor(readonly requestPrefix: string, readonly handler: Handler) {
-        super(RequestRegisterHandlerFactory.type);
-    }
-    static is(req: ServiceRequest): req is RequestRegisterHandlerFactory {
-        return req instanceof RequestRegisterHandlerFactory;
-    }
-    static create(requestPrefix: string, handler: Handler) {
-        return new RequestRegisterHandlerFactory(requestPrefix, handler);
-    }
-}
+>(TypeRequestRegisterHandler);
 
 const TypeRequestCreateSubsystem = 'System:CreateSubsystem' as const;
-export class RequestCreateSubsystemFactory extends ServiceRequest<
+export const RequestCreateSubsystemFactory = requestFactory<
     typeof TypeRequestCreateSubsystem,
+    { readonly name: string; readonly requestPattern: string | RegExp },
     SubsystemServiceBus
-> {
-    static type = TypeRequestCreateSubsystem;
-    private constructor(readonly name: string, readonly requestPattern: string | RegExp) {
-        super(RequestCreateSubsystemFactory.type);
-    }
-    static is(req: ServiceRequest): req is RequestCreateSubsystemFactory {
-        return req instanceof RequestCreateSubsystemFactory;
-    }
-    static create(name: string, requestPattern: string | RegExp) {
-        return new RequestCreateSubsystemFactory(name, requestPattern);
-    }
-}
+>(TypeRequestCreateSubsystem);
 
 interface SubsystemServiceBus extends Dispatcher {
     readonly name: string;
@@ -145,16 +132,16 @@ class SubsystemServiceBusImpl extends ServiceBus implements SubsystemServiceBus 
     }
 
     handleRegistrationReq(
-        request: RequestRegisterHandlerFactory,
-        next: HandleRequestKnown<RequestRegisterHandlerFactory>
+        request: ServiceRequestFactoryRequestType<typeof RequestRegisterHandlerFactory>,
+        next: HandleRequest
     ) {
         // console.log(`${this.name}.handleRegistrationReq %o`, request);
-        if (!this.canHandleType(request.requestPrefix)) {
+        if (!this.canHandleType(request.params.requestPrefix)) {
             // console.log(`${this.name}.handleRegistrationReq skip`);
             return next(request);
         }
         // console.log(`${this.name}.handleRegistrationReq add ***`);
-        this.addHandler(request.handler);
+        this.addHandler(request.params.handler);
         return createResponse(this);
     }
 

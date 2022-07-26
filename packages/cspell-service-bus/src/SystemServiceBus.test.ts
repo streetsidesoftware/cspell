@@ -4,9 +4,10 @@ import {
     createResponseFail,
     isServiceResponseFailure,
     isServiceResponseSuccess,
-    ServiceRequest,
+    RequestResponseType,
     ServiceRequestFactory,
 } from './request';
+import { requestFactory } from './requestFactory';
 import {
     createSystemServiceBus,
     RequestCreateSubsystemFactory,
@@ -14,39 +15,21 @@ import {
 } from './SystemServiceBus';
 
 const TypeRequestFsReadFile = 'fs:readFile' as const;
-class RequestFsReadFile extends ServiceRequest<typeof TypeRequestFsReadFile, string> {
-    static type = TypeRequestFsReadFile;
-    private constructor(readonly uri: string) {
-        super(TypeRequestFsReadFile);
-    }
-    static is(req: ServiceRequest): req is RequestFsReadFile {
-        return req instanceof RequestFsReadFile;
-    }
-    static create(uri: string) {
-        return new RequestFsReadFile(uri);
-    }
-}
+const RequestFsReadFile = requestFactory<typeof TypeRequestFsReadFile, { readonly uri: string }, string>(
+    TypeRequestFsReadFile
+);
 
 const TypeRequestZlibInflate = 'zlib:inflate' as const;
-class RequestZlibInflate extends ServiceRequest<typeof TypeRequestZlibInflate, string> {
-    static type = TypeRequestZlibInflate;
-    private constructor(readonly data: string) {
-        super(TypeRequestZlibInflate);
-    }
-    static is(req: ServiceRequest): req is RequestZlibInflate {
-        return req instanceof RequestZlibInflate;
-    }
-    static create(data: string) {
-        return new RequestZlibInflate(data);
-    }
-}
+const RequestZlibInflate = requestFactory<typeof TypeRequestZlibInflate, { readonly data: string }, string>(
+    TypeRequestZlibInflate
+);
 
 const knownRequestTypes = {
     [RequestRegisterHandlerFactory.type]: RequestRegisterHandlerFactory,
     [RequestCreateSubsystemFactory.type]: RequestCreateSubsystemFactory,
     [RequestFsReadFile.type]: RequestFsReadFile,
     [RequestZlibInflate.type]: RequestZlibInflate,
-};
+} as const;
 
 describe('SystemServiceBus', () => {
     test('createSystemServiceBus', () => {
@@ -69,35 +52,35 @@ describe('SystemServiceBus Behavior', () => {
     serviceBus.createSubsystem('File System', 'fs:');
     serviceBus.createSubsystem('ZLib', 'zlib:');
     serviceBus.createSubsystem('Path', 'path:');
-    serviceBus.registerRequestHandler(RequestFsReadFile, (req) => createResponse(`read file: ${req.uri}`));
+    serviceBus.registerRequestHandler(RequestFsReadFile, (req) => createResponse(`read file: ${req.params.uri}`));
     serviceBus.registerRequestHandler(RequestFsReadFile, (req, next) =>
-        /https?:/.test(req.uri) ? createResponse(`fetch http: ${req.uri}`) : next(req)
+        /https?:/.test(req.params.uri) ? createResponse(`fetch http: ${req.params.uri}`) : next(req)
     );
     serviceBus.registerRequestHandler(
         RequestFsReadFile,
         (req, next, dispatcher) => {
-            if (!req.uri.endsWith('.gz')) {
+            if (!req.params.uri.endsWith('.gz')) {
                 return next(req);
             }
             const fileRes = next(req);
-            if (!isServiceResponseSuccess(fileRes)) return fileRes;
-            const decompressRes = dispatcher.dispatch(RequestZlibInflate.create(fileRes.value));
+            if (!isServiceResponseSuccess<RequestResponseType<typeof RequestFsReadFile>>(fileRes)) return fileRes;
+            const decompressRes = dispatcher.dispatch(RequestZlibInflate.create({ data: fileRes.value }));
             if (isServiceResponseFailure(decompressRes)) {
-                return createResponseFail(RequestFsReadFile, decompressRes.error);
+                return createResponseFail(req, decompressRes.error);
             }
             assert(decompressRes.value);
             return createResponse(decompressRes.value);
         },
         RequestFsReadFile.type + '/zip'
     );
-    serviceBus.registerRequestHandler(RequestZlibInflate, (req) => createResponse(`Inflate: ${req.data}`));
+    serviceBus.registerRequestHandler(RequestZlibInflate, (req) => createResponse(`Inflate: ${req.params.data}`));
 
     test.each`
-        request                                                                | expected
-        ${RequestFsReadFile.create('file://my_file.txt')}                      | ${{ value: 'read file: file://my_file.txt' }}
-        ${RequestFsReadFile.create('https://www.example.com/my_file.txt')}     | ${{ value: 'fetch http: https://www.example.com/my_file.txt' }}
-        ${RequestFsReadFile.create('https://www.example.com/my_dict.trie.gz')} | ${{ value: 'Inflate: fetch http: https://www.example.com/my_dict.trie.gz' }}
-        ${{ type: 'zlib:compress' }}                                           | ${{ error: Error('Unhandled Request: zlib:compress') }}
+        request                                                                         | expected
+        ${RequestFsReadFile.create({ uri: 'file://my_file.txt' })}                      | ${{ value: 'read file: file://my_file.txt' }}
+        ${RequestFsReadFile.create({ uri: 'https://www.example.com/my_file.txt' })}     | ${{ value: 'fetch http: https://www.example.com/my_file.txt' }}
+        ${RequestFsReadFile.create({ uri: 'https://www.example.com/my_dict.trie.gz' })} | ${{ value: 'Inflate: fetch http: https://www.example.com/my_dict.trie.gz' }}
+        ${{ type: 'zlib:compress' }}                                                    | ${{ error: Error('Unhandled Request: zlib:compress') }}
     `('dispatch requests', ({ request, expected }) => {
         expect(serviceBus.dispatch(request)).toEqual(expected);
     });
