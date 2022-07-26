@@ -2,6 +2,6 @@ import { requestFactory } from '@cspell/cspell-service-bus';
 
 const RequestType = 'fs:readFileSync' as const;
 interface RequestParams {
-    readonly filename: string;
+    readonly url: URL;
 }
-export const RequestFsReadFile = requestFactory<typeof RequestType, RequestParams, string>(RequestType);
+export const RequestFsReadFileSync = requestFactory<typeof RequestType, RequestParams, string>(RequestType);
