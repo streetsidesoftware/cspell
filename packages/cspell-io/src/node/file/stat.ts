@@ -1,32 +1,8 @@
 import { promises as fs, statSync } from 'fs';
 import { format } from 'util';
 import { fetchHead } from './fetch';
+import { Stats } from '../../models/Stats';
 import { isFileURL, isUrlLike, toURL } from './util';
-
-/**
- * Copied from the Node definition to avoid a dependency upon a specific version of Node
- */
-interface StatsBase<T> {
-    // dev: T;
-    // ino: T;
-    // mode: T;
-    // nlink: T;
-    // uid: T;
-    // gid: T;
-    // rdev: T;
-    size: T;
-    // blksize: T;
-    // blocks: T;
-    // atimeMs: T;
-    mtimeMs: T;
-    // ctimeMs: T;
-    // birthtimeMs: T;
-    // atime: Date;
-    // mtime: Date;
-    // ctime: Date;
-    // birthtime: Date;
-    eTag?: string | undefined;
-}
 
 export async function getStat(filenameOrUri: string): Promise<Stats | Error> {
     if (isUrlLike(filenameOrUri)) {
@@ -34,10 +10,12 @@ export async function getStat(filenameOrUri: string): Promise<Stats | Error> {
         if (!isFileURL(url)) {
             try {
                 const headers = await fetchHead(url);
+                const eTag = headers.get('etag') || undefined;
+                const guessSize = Number.parseInt(headers.get('content-length') || '0', 10);
                 return {
-                    size: Number.parseInt(headers.get('content-length') || '0', 10),
+                    size: eTag ? -1 : guessSize,
                     mtimeMs: 0,
-                    eTag: headers.get('etag') || undefined,
+                    eTag,
                 };
             } catch (e) {
                 return toError(e);
@@ -65,5 +43,3 @@ function isErrnoException(e: unknown | NodeJS.ErrnoException): e is NodeJS.Errno
     const err = e as NodeJS.ErrnoException;
     return err.message !== undefined && err.name !== undefined;
 }
-
-export type Stats = StatsBase<number>;

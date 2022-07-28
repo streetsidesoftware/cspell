@@ -1,9 +1,8 @@
 import * as fReader from './fileReader';
 import { promises as fs } from 'fs';
-import * as path from 'path';
 import { isUrlLike, toURL } from './util';
+import { pathToRoot } from '../../test/helper';
 
-const root = path.join(__dirname, '../..');
 const oc = expect.objectContaining;
 
 describe('Validate the fileReader', () => {
@@ -23,7 +22,7 @@ describe('Validate the fileReader', () => {
         ${'samples/cities.txt'}    | ${'San Francisco'}
         ${'samples/cities.txt.gz'} | ${'San Francisco'}
     `('reading sync files $file', ({ file, contains }) => {
-        const filename = path.resolve(root, file);
+        const filename = pathToRoot(file);
         const content = fReader.readFileSync(filename);
         expect(content).toContain(contains);
     });
@@ -33,7 +32,7 @@ describe('Validate the fileReader', () => {
         ${'samples/cities.txt'}    | ${'San Francisco'}
         ${'samples/cities.txt.gz'} | ${'San Francisco'}
     `('reading async files $file', async ({ file, contains }) => {
-        const filename = path.resolve(root, file);
+        const filename = pathToRoot(file);
         const content = await fReader.readFile(filename);
         expect(content).toContain(contains);
     });
@@ -45,7 +44,7 @@ describe('Validate the fileReader', () => {
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${'San Francisco'}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${'San Francisco'}
     `('reading URLs files $file', async ({ file, contains }) => {
-        const filename = isUrlLike(file) ? file : path.resolve(root, file);
+        const filename = isUrlLike(file) ? file : pathToRoot(file);
         const url = toURL(filename);
         const content = await fReader.readFile(url);
         expect(content).toContain(contains);

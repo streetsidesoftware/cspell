@@ -31,10 +31,10 @@ describe('request', () => {
     });
 
     test.each`
-        request                                     | kind                  | expected
-        ${new ServiceRequest('ServiceRequestSync')} | ${BaseServiceRequest} | ${true}
-        ${new ServiceRequest('ServiceRequestSync')} | ${ServiceRequest}     | ${true}
-        ${{ type: 'static' }}                       | ${BaseServiceRequest} | ${false}
+        request                                                | kind                  | expected
+        ${new ServiceRequest('ServiceRequestSync', undefined)} | ${BaseServiceRequest} | ${true}
+        ${new ServiceRequest('ServiceRequestSync', undefined)} | ${ServiceRequest}     | ${true}
+        ${{ type: 'static' }}                                  | ${BaseServiceRequest} | ${false}
     `('isInstanceOfFn $request.type', ({ request, kind, expected }) => {
         const fn = isInstanceOfFn(kind);
         expect(fn(request)).toEqual(expected);

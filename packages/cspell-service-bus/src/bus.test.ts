@@ -4,7 +4,7 @@ import { createResponse as response, ServiceRequest, ServiceResponse } from './r
 function calcFib(request: FibRequest): ServiceResponse<number> {
     let a = 0,
         b = 1;
-    let n = request.fib;
+    let n = request.params.fib;
 
     while (--n >= 0) {
         const c = a + b;
@@ -18,46 +18,46 @@ function calcFib(request: FibRequest): ServiceResponse<number> {
 }
 
 const TypeRequestFib = 'Computations:calc-fib' as const;
-class FibRequest extends ServiceRequest<typeof TypeRequestFib, number> {
+class FibRequest extends ServiceRequest<typeof TypeRequestFib, { readonly fib: number }, number> {
     static type = TypeRequestFib;
-    private constructor(readonly fib: number) {
-        super(TypeRequestFib);
+    private constructor(params: { fib: number }) {
+        super(TypeRequestFib, params);
     }
     static is(req: ServiceRequest): req is FibRequest {
         return req instanceof FibRequest;
     }
-    static create(fib: number) {
-        return new FibRequest(fib);
+    static create(params: { fib: number }) {
+        return new FibRequest(params);
     }
 }
 
-class StringLengthRequest extends ServiceRequest<'calc-string-length', number> {
+class StringLengthRequest extends ServiceRequest<'calc-string-length', { readonly str: string }, number> {
     constructor(readonly str: string) {
-        super('calc-string-length');
+        super('calc-string-length', { str });
     }
     static is(req: ServiceRequest): req is StringLengthRequest {
         return req instanceof StringLengthRequest;
     }
 }
 
-class StringToUpperRequest extends ServiceRequest<'toUpper', string> {
+class StringToUpperRequest extends ServiceRequest<'toUpper', { readonly str: string }, string> {
     constructor(readonly str: string) {
-        super('toUpper');
+        super('toUpper', { str });
     }
     static is(req: ServiceRequest): req is StringToUpperRequest {
         return req instanceof StringToUpperRequest;
     }
 }
 
-class DoNotHandleRequest extends ServiceRequest<'Do Not Handle', undefined> {
+class DoNotHandleRequest extends ServiceRequest<'Do Not Handle', undefined, undefined> {
     constructor() {
-        super('Do Not Handle');
+        super('Do Not Handle', undefined);
     }
 }
 
-class RetryAgainRequest extends ServiceRequest<'Retry Again Request', undefined> {
+class RetryAgainRequest extends ServiceRequest<'Retry Again Request', undefined, undefined> {
     constructor() {
-        super('Retry Again Request');
+        super('Retry Again Request', undefined);
     }
     static is(req: ServiceRequest): req is RetryAgainRequest {
         return req instanceof RetryAgainRequest;
@@ -88,9 +88,9 @@ describe('Service Bus', () => {
 
     test.each`
         request                              | expected
-        ${FibRequest.create(6)}              | ${response(8)}
-        ${FibRequest.create(5)}              | ${response(5)}
-        ${FibRequest.create(7)}              | ${response(13)}
+        ${FibRequest.create({ fib: 6 })}     | ${response(8)}
+        ${FibRequest.create({ fib: 5 })}     | ${response(5)}
+        ${FibRequest.create({ fib: 7 })}     | ${response(13)}
         ${new StringLengthRequest('hello')}  | ${response(5)}
         ${new StringToUpperRequest('hello')} | ${response('HELLO')}
         ${new DoNotHandleRequest()}          | ${{ error: Error('Unhandled Request: Do Not Handle') }}
