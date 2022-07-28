@@ -9,14 +9,7 @@ export async function getStat(filenameOrUri: string): Promise<Stats | Error> {
         const url = toURL(filenameOrUri);
         if (!isFileURL(url)) {
             try {
-                const headers = await fetchHead(url);
-                const eTag = headers.get('etag') || undefined;
-                const guessSize = Number.parseInt(headers.get('content-length') || '0', 10);
-                return {
-                    size: eTag ? -1 : guessSize,
-                    mtimeMs: 0,
-                    eTag,
-                };
+                return await getStatHttp(url);
             } catch (e) {
                 return toError(e);
             }
@@ -31,6 +24,17 @@ export function getStatSync(uri: string): Stats | Error {
     } catch (e) {
         return toError(e);
     }
+}
+
+export async function getStatHttp(url: URL): Promise<Stats> {
+    const headers = await fetchHead(url);
+    const eTag = headers.get('etag') || undefined;
+    const guessSize = Number.parseInt(headers.get('content-length') || '0', 10);
+    return {
+        size: eTag ? -1 : guessSize,
+        mtimeMs: 0,
+        eTag,
+    };
 }
 
 function toError(e: unknown): Error {

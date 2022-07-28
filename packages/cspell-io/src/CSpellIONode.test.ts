@@ -1,5 +1,6 @@
 import { CSpellIONode } from './CSpellIONode';
-import { pathToSample as ps } from './test/helper';
+import { makePathToFile, pathToSample as ps, pathToTemp } from './test/helper';
+import { promises as fs } from 'fs';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
@@ -63,13 +64,56 @@ describe('CSpellIONode', () => {
         expect(r).toEqual(expected);
     });
 
-    // writeFile(_uriOrFilename: string, _content: string): Promise<void> {
-    //     throw new ErrorNotImplemented('writeFile');
-    // }
-    // getStat(_uriOrFilename: string): Promise<Stats> {
-    //     throw new ErrorNotImplemented('getStat');
-    // }
-    // getStatSync(_uriOrFilename: string): Stats {
-    //     throw new ErrorNotImplemented('getStatSync');
-    // }
+    test.each`
+        url                                                                                 | expected
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ eTag: sc('W/') })}
+        ${__filename}                                                                       | ${oc({ mtimeMs: expect.any(Number) })}
+    `('getStat $url', async ({ url, expected }) => {
+        const cspellIo = new CSpellIONode();
+        const r = await cspellIo.getStat(url);
+        expect(r).toEqual(expected);
+    });
+
+    test.each`
+        url                                                                              | expected
+        ${'https://raw.gitubusrcotent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ code: 'ENOTFOUND' })}
+        ${ps(__dirname, 'not-found.nf')}                                                 | ${oc({ code: 'ENOENT' })}
+    `('getStat with error $url', async ({ url, expected }) => {
+        const cspellIo = new CSpellIONode();
+        const r = cspellIo.getStat(url);
+        await expect(r).rejects.toEqual(expected);
+    });
+
+    test.each`
+        url           | expected
+        ${__filename} | ${oc({ mtimeMs: expect.any(Number) })}
+    `('getStatSync $url', ({ url, expected }) => {
+        const cspellIo = new CSpellIONode();
+        const r = cspellIo.getStatSync(url);
+        expect(r).toEqual(expected);
+    });
+
+    test.each`
+        url                                                                                 | expected
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${'The URL must be of scheme file'}
+        ${ps(__dirname, 'not-found.nf')}                                                    | ${oc({ code: 'ENOENT' })}
+    `('getStatSync with error $url', async ({ url, expected }) => {
+        const cspellIo = new CSpellIONode();
+        expect(() => cspellIo.getStatSync(url)).toThrow(expected);
+    });
+
+    test.each`
+        filename
+        ${pathToTemp('cities.txt')}
+        ${pathToTemp('cities.txt.gz')}
+    `('writeFile $filename', async ({ filename }) => {
+        const content = await fs.readFile(ps('cities.txt'), 'utf-8');
+        const cspellIo = new CSpellIONode();
+        await makePathToFile(filename);
+        await cspellIo.writeFile(filename, content);
+        expect(await cspellIo.readFile(filename)).toEqual(content);
+    });
 });
+
+// '/Users/jason/projects/cspell6/packages/cspell-io/temp/src/CSpellIONode.test.ts/test_._test/cities.txt'
+// '/Users/jason/projects/cspell6/packages/cspell-io/temp/src/CSpellIONode.test.ts/test_._test/cities.txt'

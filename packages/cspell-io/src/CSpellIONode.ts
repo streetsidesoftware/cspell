@@ -34,9 +34,9 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    writeFile(uriOrFilename: string, _content: string): Promise<void> {
+    writeFile(uriOrFilename: string, content: string): Promise<void> {
         const url = toURL(uriOrFilename);
-        const res = this.serviceBus.dispatch(RequestFsWriteFile.create({ url }));
+        const res = this.serviceBus.dispatch(RequestFsWriteFile.create({ url, content }));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'writeFile');
         }

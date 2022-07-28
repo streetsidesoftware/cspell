@@ -7,16 +7,27 @@ import {
     ServiceBus,
 } from '@cspell/cspell-service-bus';
 import assert from 'assert';
-import { promises as fs, readFileSync } from 'fs';
-import { gunzipSync } from 'zlib';
+import { promises as fs, readFileSync, statSync } from 'fs';
+import { gunzipSync, gzipSync } from 'zlib';
+import { toError } from '../../errors';
 import { fetchURL } from '../../node/file/fetch';
+import { getStatHttp } from '../../node/file/stat';
 import {
     RequestFsReadBinaryFile,
     RequestFsReadBinaryFileSync,
     RequestFsReadFile,
     RequestFsReadFileSync,
+    RequestFsStat,
+    RequestFsStatSync,
+    RequestFsWriteFile,
     RequestZlibInflate,
 } from '../../requests';
+
+const isGzFileRegExp = /\.gz($|[?#])/;
+
+function isGzFile(url: URL): boolean {
+    return isGzFileRegExp.test(url.pathname);
+}
 
 /**
  * Handle Binary File Reads
@@ -104,18 +115,88 @@ function bufferToText(buf: Buffer): string {
     return buf[0] === 0x1f && buf[1] === 0x8b ? bufferToText(gunzipSync(buf)) : buf.toString('utf-8');
 }
 
+/**
+ * Handle fs:stat
+ */
+const handleRequestFsStat = createRequestHandler(
+    RequestFsStat,
+    ({ params }) => createResponse(fs.stat(params.url)),
+    undefined,
+    'Node: fs.stat.'
+);
+
+/**
+ * Handle fs:statSync
+ */
+const handleRequestFsStatSync = createRequestHandler(
+    RequestFsStatSync,
+    (req) => {
+        const { params } = req;
+        try {
+            return createResponse(statSync(params.url));
+        } catch (e) {
+            return createResponseFail(req, toError(e));
+        }
+    },
+    undefined,
+    'Node: fs.stat.'
+);
+
+/**
+ * Handle deflating gzip data
+ */
+const handleRequestFsStatHttp = createRequestHandler(
+    RequestFsStat,
+    (req, next) => {
+        const { url } = req.params;
+        if (!(url.protocol in supportedFetchProtocols)) return next(req);
+        return createResponse(getStatHttp(url));
+    },
+    undefined,
+    'Node: http get stat'
+);
+
+/**
+ * Handle fs:writeFile
+ */
+const handleRequestFsWriteFile = createRequestHandler(
+    RequestFsWriteFile,
+    ({ params }) => createResponse(fs.writeFile(params.url, params.content)),
+    undefined,
+    'Node: fs.writeFile'
+);
+
+/**
+ * Handle fs:writeFile compressed
+ */
+const handleRequestFsWriteFileGz = createRequestHandler(
+    RequestFsWriteFile,
+    (req, next) => {
+        const { url, content } = req.params;
+        if (!isGzFile(url)) return next(req);
+        return createResponse(fs.writeFile(url, gzipSync(content)));
+    },
+    undefined,
+    'Node: http get stat'
+);
+
 export function registerHandlers(serviceBus: ServiceBus) {
     /**
      * Handlers are in order of low to high level
      * Order is VERY important.
      */
     const handlers = [
+        handleRequestFsWriteFile,
+        handleRequestFsWriteFileGz,
         handleRequestFsReadBinaryFile,
         handleRequestFsReadBinaryFileSync,
         handleRequestFsReadBinaryFileHttp,
         handleRequestFsReadFile,
         handleRequestFsReadFileSync,
         handleRequestZlibInflate,
+        handleRequestFsStatSync,
+        handleRequestFsStat,
+        handleRequestFsStatHttp,
     ];
 
     handlers.forEach((handler) => serviceBus.addHandler(handler));
