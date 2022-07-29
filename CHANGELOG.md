@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/streetsidesoftware/cspell/compare/v6.4.2...v6.5.0) (2022-07-29)
+
+
+### Bug Fixes
+
+* Workflow Bot -- Update Dictionaries ([#3307](https://github.com/streetsidesoftware/cspell/issues/3307)) ([252c738](https://github.com/streetsidesoftware/cspell/commit/252c7384e6b8aa68d4f75c24b95fe4bbde2edb0c))
+
+
+### Features
+
+* Support Ignoring characters before checking ([#3311](https://github.com/streetsidesoftware/cspell/issues/3311)) ([d3fbe6c](https://github.com/streetsidesoftware/cspell/commit/d3fbe6cea5307c72dd9b2b94564b5f93e5560b1e))
+
+
+
+
+
 ## [6.4.2](https://github.com/streetsidesoftware/cspell/compare/v6.4.1...v6.4.2) (2022-07-26)
 
 
