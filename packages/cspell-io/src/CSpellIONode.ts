@@ -18,17 +18,17 @@ export class CSpellIONode implements CSpellIO {
         registerHandlers(serviceBus);
     }
 
-    readFile(uriOrFilename: string): Promise<string> {
+    readFile(uriOrFilename: string, encoding: BufferEncoding = 'utf8'): Promise<string> {
         const url = toURL(uriOrFilename);
-        const res = this.serviceBus.dispatch(RequestFsReadFile.create({ url }));
+        const res = this.serviceBus.dispatch(RequestFsReadFile.create({ url, encoding }));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'readFile');
         }
         return res.value;
     }
-    readFileSync(uriOrFilename: string): string {
+    readFileSync(uriOrFilename: string, encoding: BufferEncoding = 'utf8'): string {
         const url = toURL(uriOrFilename);
-        const res = this.serviceBus.dispatch(RequestFsReadFileSync.create({ url }));
+        const res = this.serviceBus.dispatch(RequestFsReadFileSync.create({ url, encoding }));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'readFileSync');
         }

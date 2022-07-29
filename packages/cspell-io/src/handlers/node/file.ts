@@ -55,13 +55,13 @@ const handleRequestFsReadBinaryFileSync = createRequestHandler(
 const handleRequestFsReadFile = createRequestHandler(
     RequestFsReadFile,
     (req, _, dispatcher) => {
-        const { url } = req.params;
+        const { url, encoding } = req.params;
         const res = dispatcher.dispatch(RequestFsReadBinaryFile.create({ url }));
         if (!isServiceResponseSuccess(res)) {
             assert(isServiceResponseFailure(res));
             return createResponseFail(req, res.error);
         }
-        return createResponse(res.value.then((buf) => bufferToText(buf)));
+        return createResponse(res.value.then((buf) => bufferToText(buf, encoding)));
     },
     undefined,
     'Node: Read Text File.'
@@ -73,13 +73,13 @@ const handleRequestFsReadFile = createRequestHandler(
 const handleRequestFsReadFileSync = createRequestHandler(
     RequestFsReadFileSync,
     (req, _, dispatcher) => {
-        const { url } = req.params;
+        const { url, encoding } = req.params;
         const res = dispatcher.dispatch(RequestFsReadBinaryFileSync.create({ url }));
         if (!isServiceResponseSuccess(res)) {
             assert(isServiceResponseFailure(res));
             return createResponseFail(req, res.error);
         }
-        return createResponse(bufferToText(res.value));
+        return createResponse(bufferToText(res.value, encoding));
     },
     undefined,
     'Node: Sync Read Text File.'
@@ -111,8 +111,8 @@ const handleRequestFsReadBinaryFileHttp = createRequestHandler(
     'Node: Read Http(s) file.'
 );
 
-function bufferToText(buf: Buffer): string {
-    return buf[0] === 0x1f && buf[1] === 0x8b ? bufferToText(gunzipSync(buf)) : buf.toString('utf-8');
+function bufferToText(buf: Buffer, encoding: BufferEncoding): string {
+    return buf[0] === 0x1f && buf[1] === 0x8b ? bufferToText(gunzipSync(buf), encoding) : buf.toString(encoding);
 }
 
 /**
