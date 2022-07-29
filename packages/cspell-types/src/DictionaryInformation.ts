@@ -47,6 +47,16 @@ export interface DictionaryInformation {
      * If the word matches the pattern, then the penalty is applied.
      */
     adjustments?: PatternAdjustment[];
+
+    /**
+     * An optional set of characters that can possibly be removed from a word before
+     * checking it.
+     *
+     * This is useful in languages like Arabic where Harakat accents are optional.
+     *
+     * Note: All matching characters are removed or none. Partial removal is not supported.
+     */
+    ignore?: CharacterSet;
 }
 
 // cspell:ignore aeistlunkodmrvpgjhäõbüoöfcwzxðqþ aàâä eéèêë iîïy

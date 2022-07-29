@@ -434,6 +434,10 @@
           "$ref": "#/definitions/HunspellInformation",
           "description": "Used by dictionary authors"
         },
+        "ignore": {
+          "$ref": "#/definitions/CharacterSet",
+          "description": "An optional set of characters that can possibly be removed from a word before checking it.\n\nThis is useful in languages like Arabic where Harakat accents are optional.\n\nNote: All matching characters are removed or none. Partial removal is not supported."
+        },
         "locale": {
           "description": "The locale of the dictionary. Example: `nl,nl-be`",
           "type": "string"
