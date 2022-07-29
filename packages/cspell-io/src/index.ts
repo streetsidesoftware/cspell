@@ -11,3 +11,4 @@ export {
 export type { Stats } from './models/Stats';
 export type { CSpellIO } from './CSpellIO';
 export { CSpellIONode } from './CSpellIONode';
+export { encodeDataUrl, toDataUrl } from './node/dataUrl';
