@@ -55,7 +55,7 @@ function encodeAttributes(attributes: Iterable<readonly [string, string]>): stri
     return [...attributes].map(([key, value]) => `;${key}=${encodeURIComponent(value)}`).join('');
 }
 
-const dataUrlRegExHead = /^data:(?<mediaType>[^;,]*)(?<attributes>(?:;[^;,]+=[^;,]*)*)(?<base64>;base64)?$/;
+const dataUrlRegExHead = /^data:(?<mediaType>[^;,]*)(?<attributes>(?:;[^=]+=[^;,]*)*)(?<base64>;base64)?$/;
 
 export function decodeDataUrl(url: string): DecodedDataUrl {
     const [head, encodedData] = url.split(',', 2);
