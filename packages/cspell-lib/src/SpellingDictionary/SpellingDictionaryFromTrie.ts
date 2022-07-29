@@ -10,6 +10,7 @@ import { getDefaultSettings } from '../Settings';
 import { memorizer } from '../util/Memorizer';
 import { createMapper } from '../util/repMap';
 import { clean } from '../util/util';
+import { charsetToRegExp } from './charset';
 import {
     FindResult,
     HasOptions,
@@ -36,6 +37,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
+    readonly ignoreCharactersRegExp: RegExp | undefined;
 
     private weightMap: WeightMap | undefined;
 
@@ -51,6 +53,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
         this.weightMap = options.weightMap || createWeightMapFromDictionaryInformation(options.dictionaryInformation);
+        this.ignoreCharactersRegExp = charsetToRegExp(this.options.dictionaryInformation?.ignore);
     }
 
     public get size(): number {
@@ -100,6 +103,24 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     );
 
     private findAnyForm(
+        word: string,
+        useCompounds: number | boolean | undefined,
+        ignoreCase: boolean
+    ): FindAnyFormResult | undefined {
+        const outerForms = new Set([word]);
+        if (this.ignoreCharactersRegExp) {
+            outerForms.add(word.replace(this.ignoreCharactersRegExp, ''));
+            outerForms.add(word.normalize('NFD').replace(this.ignoreCharactersRegExp, ''));
+            outerForms.add(word.normalize('NFC').replace(this.ignoreCharactersRegExp, ''));
+        }
+        for (const form of outerForms) {
+            const r = this._findAnyForm(form, useCompounds, ignoreCase);
+            if (r) return r;
+        }
+        return undefined;
+    }
+
+    private _findAnyForm(
         word: string,
         useCompounds: number | boolean | undefined,
         ignoreCase: boolean

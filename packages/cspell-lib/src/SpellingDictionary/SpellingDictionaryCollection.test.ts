@@ -32,6 +32,7 @@ describe('Verify using multiple dictionaries', () => {
     const wordsC = ['ant', 'snail', 'beetle', 'worm', 'stink bug', 'centipede', 'millipede', 'flea', 'fly'];
     const wordsD = ['red*', 'green*', 'blue*', 'pink*', 'black*', '*berry', '+-fruit', '*bug', 'pinkie'];
     const wordsF = ['!pink*', '+berry', '+bug', '!stinkbug'];
+    const wordsG = ['café', 'accent'];
 
     const wordsLegacy = ['error', 'code', 'system', 'ctrl'];
 
@@ -181,24 +182,35 @@ describe('Verify using multiple dictionaries', () => {
     });
 
     test.each`
-        word            | expected
-        ${'redberry'}   | ${true}
-        ${'pink'}       | ${false}
-        ${'bug'}        | ${true}
-        ${'blackberry'} | ${true}
-        ${'pinkbug'}    | ${true}
+        word              | expected
+        ${'redberry'}     | ${true}
+        ${'pink'}         | ${false}
+        ${'bug'}          | ${true}
+        ${'blackberry'}   | ${true}
+        ${'pinkbug'}      | ${true}
+        ${'cafe'}         | ${false}
+        ${'café'}         | ${true}
+        ${'cafe\u0301'}   | ${true}
+        ${'accent'}       | ${true}
+        ${'áccent'}       | ${true /* ignore the accent. cspell:disable-line */}
+        ${'a\u0301ccent'} | ${true /* ignore the accent. cspell:disable-line */}
+        ${'applé'}        | ${true /* ignore the accent. cspell:disable-line */}
     `('checks has word: "$word"', ({ word, expected }) => {
         const dicts = [
-            createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
+            createSpellingDictionary(wordsA, 'wordsA', 'test', { dictionaryInformation: { ignore: '\u0300-\u0362' } }),
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
+            createSpellingDictionary(wordsG, 'wordsA', 'test', {
+                dictionaryInformation: { ignore: '\u0300-\u0362' },
+                caseSensitive: true,
+            }),
             createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ];
 
         const dictCollection = createCollection(dicts, 'test');
-        expect(dictCollection.has(word)).toEqual(expected);
+        expect(dictCollection.has(word, { ignoreCase: false })).toEqual(expected);
     });
 
     test.each`
