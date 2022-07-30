@@ -1,6 +1,7 @@
 import { CSpellIONode } from './CSpellIONode';
 import { makePathToFile, pathToSample as ps, pathToTemp } from './test/helper';
 import { promises as fs } from 'fs';
+import { toURL } from './node/file/util';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
@@ -12,15 +13,18 @@ describe('CSpellIONode', () => {
     });
 
     test.each`
-        filename                                                                                                       | expected
+        filename                                                                                                       | content
         ${__filename}                                                                                                  | ${sc('This bit of text')}
         ${ps('cities.txt')}                                                                                            | ${sc('San Francisco\n')}
         ${ps('cities.txt.gz')}                                                                                         | ${sc('San Francisco\n')}
         ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt'}    | ${sc('San Francisco\n')}
         ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'} | ${sc('San Francisco\n')}
-    `('readFile $filename', async ({ filename, expected }) => {
+    `('readFile $filename', async ({ filename, content }) => {
         const cspellIo = new CSpellIONode();
-        await expect(cspellIo.readFile(filename)).resolves.toEqual(expected);
+        const expected = oc({ url: toURL(filename), content });
+        const result = cspellIo.readFile(filename);
+        result.catch((e) => console.log(e));
+        await expect(result).resolves.toEqual(expected);
     });
 
     test.each`
@@ -35,12 +39,13 @@ describe('CSpellIONode', () => {
     });
 
     test.each`
-        filename               | expected
+        filename               | content
         ${__filename}          | ${sc('This bit of text')}
         ${ps('cities.txt')}    | ${sc('San Francisco\n')}
         ${ps('cities.txt.gz')} | ${sc('San Francisco\n')}
-    `('readFileSync $filename', ({ filename, expected }) => {
+    `('readFileSync $filename', ({ filename, content }) => {
         const cspellIo = new CSpellIONode();
+        const expected = oc({ url: toURL(filename), content });
         expect(cspellIo.readFileSync(filename)).toEqual(expected);
     });
 
@@ -111,9 +116,6 @@ describe('CSpellIONode', () => {
         const cspellIo = new CSpellIONode();
         await makePathToFile(filename);
         await cspellIo.writeFile(filename, content);
-        expect(await cspellIo.readFile(filename)).toEqual(content);
+        expect(await cspellIo.readFile(filename)).toEqual(oc({ content }));
     });
 });
-
-// '/Users/jason/projects/cspell6/packages/cspell-io/temp/src/CSpellIONode.test.ts/test_._test/cities.txt'
-// '/Users/jason/projects/cspell6/packages/cspell-io/temp/src/CSpellIONode.test.ts/test_._test/cities.txt'
