@@ -3,7 +3,8 @@ import { compareStats } from './common/stat';
 import { CSpellIO } from './CSpellIO';
 import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
 import { registerHandlers } from './handlers/node/file';
-import { Stats } from './models/Stats';
+import type { TextFileResource } from './models/FileResource';
+import type { Stats } from './models/Stats';
 import { toURL } from './node/file/util';
 import {
     RequestFsReadFile,
@@ -18,7 +19,7 @@ export class CSpellIONode implements CSpellIO {
         registerHandlers(serviceBus);
     }
 
-    readFile(uriOrFilename: string, encoding: BufferEncoding = 'utf8'): Promise<string> {
+    readFile(uriOrFilename: string | URL, encoding: BufferEncoding = 'utf8'): Promise<TextFileResource> {
         const url = toURL(uriOrFilename);
         const res = this.serviceBus.dispatch(RequestFsReadFile.create({ url, encoding }));
         if (!isServiceResponseSuccess(res)) {
@@ -26,7 +27,7 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    readFileSync(uriOrFilename: string, encoding: BufferEncoding = 'utf8'): string {
+    readFileSync(uriOrFilename: string | URL, encoding: BufferEncoding = 'utf8'): TextFileResource {
         const url = toURL(uriOrFilename);
         const res = this.serviceBus.dispatch(RequestFsReadFileSync.create({ url, encoding }));
         if (!isServiceResponseSuccess(res)) {
@@ -34,7 +35,7 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    writeFile(uriOrFilename: string, content: string): Promise<void> {
+    writeFile(uriOrFilename: string | URL, content: string): Promise<void> {
         const url = toURL(uriOrFilename);
         const res = this.serviceBus.dispatch(RequestFsWriteFile.create({ url, content }));
         if (!isServiceResponseSuccess(res)) {
@@ -42,7 +43,7 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    getStat(uriOrFilename: string): Promise<Stats> {
+    getStat(uriOrFilename: string | URL): Promise<Stats> {
         const url = toURL(uriOrFilename);
         const res = this.serviceBus.dispatch(RequestFsStat.create({ url }));
         if (!isServiceResponseSuccess(res)) {
@@ -50,7 +51,7 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    getStatSync(uriOrFilename: string): Stats {
+    getStatSync(uriOrFilename: string | URL): Stats {
         const url = toURL(uriOrFilename);
         const res = this.serviceBus.dispatch(RequestFsStatSync.create({ url }));
         if (!isServiceResponseSuccess(res)) {

@@ -1,4 +1,5 @@
-export { createRequestHandler, createServiceBus, ServiceBus } from './bus';
+export { createServiceBus, ServiceBus } from './bus';
+export { createRequestHandler } from './createRequestHandler';
 export {
     createResponse,
     createResponseFail,
@@ -7,3 +8,4 @@ export {
     ServiceRequest,
 } from './request';
 export { requestFactory } from './requestFactory';
+export type { ServiceRequestFactoryRequestType } from './ServiceRequestFactory';

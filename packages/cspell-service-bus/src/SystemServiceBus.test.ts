@@ -5,8 +5,8 @@ import {
     isServiceResponseFailure,
     isServiceResponseSuccess,
     RequestResponseType,
-    ServiceRequestFactory,
 } from './request';
+import { ServiceRequestFactory } from './ServiceRequestFactory';
 import { requestFactory } from './requestFactory';
 import {
     createSystemServiceBus,
