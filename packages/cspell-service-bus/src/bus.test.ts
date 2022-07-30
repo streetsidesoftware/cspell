@@ -1,11 +1,10 @@
 import { createServiceBus } from './bus';
+import { createIsRequestHandler } from './createRequestHandler';
 import { Dispatcher } from './Dispatcher';
 import { Handler } from './handlers';
-import { createIsRequestHandler } from './createRequestHandler';
 import { createResponse as response, ServiceRequest, ServiceResponse } from './request';
 import { requestFactory } from './requestFactory';
 import { ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
-import { nextTick } from 'process';
 
 function calcFib(request: FibRequest): ServiceResponse<number> {
     let a = 0,
