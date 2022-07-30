@@ -1,41 +1,31 @@
 import { assert } from './assert';
-import {
-    createRequestHandler,
-    createServiceBus,
-    Dispatcher,
-    Handler,
-    HandleRequest,
-    HandleRequestFn,
-    HandlerNext,
-    ServiceBus,
-} from './bus';
-import {
-    createResponse,
-    RequestResponseType,
-    ServiceRequest,
-    ServiceRequestFactory,
-    ServiceRequestFactoryRequestType,
-} from './request';
+import { createServiceBus, ServiceBus } from './bus';
+import { Dispatcher } from './Dispatcher';
+import { Handler, HandleRequest, HandleRequestFn, HandlerNext } from './handlers';
+import { createRequestHandler } from './createRequestHandler';
+import { createResponse, RequestResponseType, ServiceRequest } from './request';
+import { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory';
 import { requestFactory } from './requestFactory';
+import { ErrorDuplicateSubsystem } from './errors';
 
 export interface SystemServiceBus extends Dispatcher {
-    registerHandler(requestPrefix: string, handler: Handler): void;
+    registerHandler(requestPrefix: string, handler: Handler): this;
     registerRequestHandler<T extends ServiceRequest>(
         requestDef: ServiceRequestFactory<T>,
         fn: HandleRequestFn<T>,
         name?: string | undefined,
         description?: string | undefined
-    ): void;
+    ): this;
     createSubsystem(name: string, requestPattern: string | RegExp): SubsystemServiceBus;
-    readonly subsystems: SubsystemServiceBus[];
+    readonly subsystems: Map<string, SubsystemServiceBus>;
 }
 
 class SystemServiceBusImpl implements SystemServiceBus {
     private serviceBus: ServiceBus;
-    private _subsystems: SubsystemServiceBus[];
+    private _subsystems: Map<string, SubsystemServiceBus>;
     constructor() {
         this.serviceBus = createServiceBus();
-        this._subsystems = [];
+        this._subsystems = new Map();
         this.bindDefaultHandlers();
         this.createSubsystem('Default Subsystem', '' /* match everything */);
     }
@@ -44,8 +34,11 @@ class SystemServiceBusImpl implements SystemServiceBus {
         this.serviceBus.addHandler(
             createRequestHandler(RequestCreateSubsystemFactory, (req) => {
                 const { name, requestPattern } = req.params;
+                if (this._subsystems.has(name)) {
+                    throw new ErrorDuplicateSubsystem(name);
+                }
                 const sub = createSubsystemServiceBus(name, requestPattern);
-                this._subsystems.push(sub);
+                this._subsystems.set(name, sub);
                 this.serviceBus.addHandler(sub.handler);
                 return createResponse(sub);
             })
@@ -62,9 +55,10 @@ class SystemServiceBusImpl implements SystemServiceBus {
         return res.value;
     }
 
-    registerHandler(requestPrefix: string, handler: Handler): void {
+    registerHandler(requestPrefix: string, handler: Handler): this {
         const request = RequestRegisterHandlerFactory.create({ requestPrefix, handler });
         this.serviceBus.dispatch(request);
+        return this;
     }
 
     registerRequestHandler<T extends ServiceRequest>(
@@ -72,12 +66,13 @@ class SystemServiceBusImpl implements SystemServiceBus {
         fn: HandleRequestFn<T>,
         name?: string | undefined,
         description?: string | undefined
-    ): void {
+    ): this {
         this.registerHandler(requestDef.type, createRequestHandler(requestDef, fn, name, description));
+        return this;
     }
 
     get subsystems() {
-        return [...this._subsystems];
+        return new Map(this._subsystems);
     }
 }
 

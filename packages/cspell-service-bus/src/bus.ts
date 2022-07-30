@@ -1,15 +1,7 @@
-import {
-    createResponseFail,
-    IsARequest,
-    RequestResponseType,
-    ServiceRequest,
-    ServiceRequestFactory,
-    ServiceRequestFactoryRequestType,
-} from './request';
-
-export interface Dispatcher {
-    dispatch<R extends ServiceRequest>(request: R): RequestResponseType<R>;
-}
+import { Dispatcher } from './Dispatcher';
+import { ErrorServiceRequestDepthExceeded, ErrorUnhandledRequest, UnhandledHandlerError } from './errors';
+import type { Handler, HandlerFn, HandleRequest } from './handlers';
+import { createResponseFail, RequestResponseType, ServiceRequest } from './request';
 
 const MAX_DEPTH = 10;
 
@@ -19,12 +11,13 @@ export class ServiceBus implements Dispatcher {
         handlers.forEach((h) => this.addHandler(h));
     }
 
-    addHandler(handler: HandlerFn, name: string, description?: string): void;
-    addHandler(handler: Handler): void;
-    addHandler(handler: HandlerFn | Handler, name = 'anonymous', description?: string): void {
+    addHandler(handler: HandlerFn, name: string, description?: string): this;
+    addHandler(handler: Handler): this;
+    addHandler(handler: HandlerFn | Handler, name = 'anonymous', description?: string): this {
         const h = typeof handler === 'function' ? { fn: handler, name, description } : handler;
         const { fn, name: _name, description: _description } = h;
         this.handlers.push({ fn, name: _name, description: _description });
+        return this;
     }
 
     dispatch<R extends ServiceRequest>(request: R): RequestResponseType<R> {
@@ -45,7 +38,7 @@ export class ServiceBus implements Dispatcher {
         return dispatch(request);
     }
 
-    defaultHandler(request: ServiceRequest) {
+    defaultHandler<T extends ServiceRequest>(request: T) {
         return createResponseFail(request, new ErrorUnhandledRequest(request));
     }
 
@@ -72,96 +65,4 @@ export class ServiceBus implements Dispatcher {
 
 export function createServiceBus(handlers: Handler[] = []): ServiceBus {
     return new ServiceBus(handlers);
-}
-
-export type HandleRequestFn<R extends ServiceRequest> = (
-    request: R,
-    next: HandleRequest,
-    dispatch: Dispatcher
-) => RequestResponseType<R>;
-
-export interface HandleRequest {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <R extends ServiceRequest>(request: R): any;
-}
-
-export interface HandleRequestKnown<R extends ServiceRequest> {
-    (request: R): RequestResponseType<R>;
-}
-
-export type FactoryRequestHandler<
-    T extends ServiceRequestFactory<ServiceRequest>,
-    R extends ServiceRequest = ServiceRequestFactoryRequestType<T>
-> = HandleRequestKnown<R>;
-
-export interface HandlerNext {
-    (next: HandleRequest): HandleRequest;
-}
-
-export interface HandlerFn {
-    (dispatcher: Dispatcher): HandlerNext;
-}
-
-export interface Handler {
-    /**
-     * Name of the Handler.
-     * Useful for debugging and uncaught exceptions.
-     */
-    readonly name: string;
-    /**
-     * Optional description of the Handler.
-     */
-    readonly description?: string | undefined;
-    readonly fn: HandlerFn;
-}
-
-export function createIsRequestHandlerFn<T extends ServiceRequest>(
-    isA: IsARequest<T>,
-    fn: HandleRequestFn<T>
-): HandlerFn {
-    return (dispatcher) => (next) => (request) => isA(request) ? fn(request, next, dispatcher) : next(request);
-}
-
-export function createIsRequestHandler<T extends ServiceRequest>(
-    isA: IsARequest<T>,
-    fn: HandleRequestFn<T>,
-    name: string,
-    description?: string
-): Handler {
-    return {
-        fn: createIsRequestHandlerFn<T>(isA, fn),
-        name,
-        description,
-    };
-}
-
-export function createRequestHandler<T extends ServiceRequest>(
-    requestDef: ServiceRequestFactory<T>,
-    fn: HandleRequestFn<T>,
-    name?: string,
-    description?: string
-): Handler {
-    return createIsRequestHandler(requestDef.is, fn, name ?? requestDef.type, description);
-}
-
-export class ErrorUnhandledRequest extends Error {
-    constructor(readonly request: ServiceRequest) {
-        super(`Unhandled Request: ${request.type}`);
-    }
-}
-
-export class ErrorServiceRequestDepthExceeded extends Error {
-    constructor(readonly request: ServiceRequest, readonly depth: number) {
-        super(`Service Request Depth ${depth} Exceeded: ${request.type}`);
-    }
-}
-
-export class UnhandledHandlerError extends Error {
-    constructor(
-        readonly handlerName: string,
-        readonly handlerDescription: string | undefined,
-        readonly cause: unknown
-    ) {
-        super(`Unhandled Error in Handler: ${handlerName}`);
-    }
 }

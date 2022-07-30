@@ -1,4 +1,7 @@
-import { ServiceRequest, ServiceRequestFactory } from './request';
+import { createRequestHandler } from './createRequestHandler';
+import { Handler, HandleRequestFn } from './handlers';
+import { ServiceRequest } from './request';
+import { ServiceRequestFactory } from './ServiceRequestFactory';
 
 export function requestFactory<T extends string, P, R>(requestType: T): ServiceRequestFactory<ServiceRequest<T, P, R>> {
     type Request = ServiceRequest<T, P, R>;
@@ -13,7 +16,10 @@ export function requestFactory<T extends string, P, R>(requestType: T): ServiceR
         static create(params: P) {
             return new RequestClass(params);
         }
-        static __request__?: Request;
+        static createRequestHandler(fn: HandleRequestFn<Request>, name?: string, description?: string): Handler {
+            return createRequestHandler(RequestClass, fn, name, description);
+        }
+        static __request?: Request;
     }
     return RequestClass;
 }

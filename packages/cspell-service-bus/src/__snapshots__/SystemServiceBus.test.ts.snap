@@ -22,8 +22,8 @@ Array [
 `;
 
 exports[`SystemServiceBus createSystemServiceBus 1`] = `
-Array [
-  SubsystemServiceBusImpl {
+Map {
+  "Default Subsystem" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
     "handler": Object {
       "description": "Process Requests Matching: <>",
@@ -40,7 +40,7 @@ Array [
     "name": "Default Subsystem",
     "requestPattern": "",
   },
-  SubsystemServiceBusImpl {
+  "File System" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
     "handler": Object {
       "description": "Process Requests Matching: <fs:>",
@@ -57,7 +57,7 @@ Array [
     "name": "File System",
     "requestPattern": "fs:",
   },
-  SubsystemServiceBusImpl {
+  "ZLib" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
     "handler": Object {
       "description": "Process Requests Matching: <zlib:>",
@@ -74,7 +74,7 @@ Array [
     "name": "ZLib",
     "requestPattern": "zlib:",
   },
-  SubsystemServiceBusImpl {
+  "Path" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
     "handler": Object {
       "description": "Process Requests Matching: <path:>",
@@ -91,5 +91,5 @@ Array [
     "name": "Path",
     "requestPattern": "path:",
   },
-]
+}
 `;

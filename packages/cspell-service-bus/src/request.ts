@@ -34,7 +34,10 @@ export type ServiceResponse<T> = ServiceResponseSuccess<T> | ServiceResponseFail
 
 export type IsARequest<T extends ServiceRequest> = (r: ServiceRequest) => r is T;
 
-export function createResponse<T>(value: T): ServiceResponseSuccess<T> {
+export function createResponse<R extends ServiceRequest, T = RequestResponseType<R>>(
+    value: T,
+    _req?: R
+): ServiceResponseSuccess<T> {
     return { value };
 }
 
@@ -60,16 +63,6 @@ export function isServiceResponseFailure<T>(res: ServiceResponseBase<T>): res is
 export function isInstanceOfFn<T>(constructor: { new (): T }): (t: unknown) => t is T {
     return (t): t is T => t instanceof constructor;
 }
-
-export interface ServiceRequestFactory<R extends ServiceRequest, P = R['params'], T extends string = R['type']> {
-    type: T;
-    is: (r: ServiceRequest | R) => r is R;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    create(params: P): R;
-    __request?: R;
-}
-
-export type ServiceRequestFactoryRequestType<T> = T extends { __request?: infer R } ? R : never;
 
 export const __testing__ = {
     BaseServiceRequest,
