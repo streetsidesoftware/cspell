@@ -1,3 +1,7 @@
+import * as fsPath from 'path';
+import { toURL } from './file/util';
+import { promises as fs } from 'fs';
+
 /**
  * Generates a string of the following format:
  *
@@ -73,4 +77,27 @@ export function decodeDataUrl(url: string): DecodedDataUrl {
     const isBase64 = !!match.groups['base64'];
     const data = isBase64 ? Buffer.from(encodedData, 'base64url') : Buffer.from(decodeURIComponent(encodedData));
     return { mediaType, data, encoding, attributes };
+}
+
+export async function encodeDataUrlFromFile(
+    path: string | URL,
+    mediaType?: string,
+    attributes?: Iterable<readonly [string, string]> | undefined
+): Promise<string> {
+    const url = toURL(path);
+    const filename = fsPath.basename(url.pathname);
+    mediaType = mediaType || guessMimeType(filename) || 'text/plain';
+    const _attributes = new Map(attributes || []);
+    filename && _attributes.set('filename', filename);
+    const content = await fs.readFile(url);
+
+    return encodeDataUrl(content, mediaType, _attributes);
+}
+
+export function guessMimeType(filename: string): string | undefined {
+    if (filename.endsWith('.trie')) return 'application/vnd.cspell.dictionary+trie';
+    if (filename.endsWith('.trie.gz')) return 'application/vnd.cspell.dictionary+trie.gz';
+    if (filename.endsWith('.txt')) return 'text/plain';
+    if (filename.endsWith('.gz')) return 'application/gzip';
+    return undefined;
 }
