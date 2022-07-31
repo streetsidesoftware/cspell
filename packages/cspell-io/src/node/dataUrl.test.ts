@@ -1,4 +1,7 @@
-import { toDataUrl, encodeDataUrl, decodeDataUrl } from './dataUrl';
+import { pathToSample } from '../test/helper';
+import { decodeDataUrl, encodeDataUrl, encodeDataUrlFromFile, toDataUrl, guessMimeType } from './dataUrl';
+
+const sc = expect.stringContaining;
 
 describe('dataUrl', () => {
     test.each`
@@ -26,5 +29,25 @@ describe('dataUrl', () => {
     `('encodeDataUrl $url', ({ url, expected }) => {
         const data = decodeDataUrl(url);
         expect(data).toEqual(expected);
+    });
+
+    test.each`
+        file               | expected
+        ${'cities.txt'}    | ${sc('data:text/plain;filename=cities.txt;base64,')}
+        ${'cities.txt.gz'} | ${sc('data:application/gzip;filename=cities.txt.gz;base64,H')}
+    `('encodeDataUrl $file', async ({ file, expected }) => {
+        file = pathToSample(file);
+        const dataUrl = await encodeDataUrlFromFile(file);
+        expect(dataUrl).toEqual(expected);
+    });
+
+    test.each`
+        file                | expected
+        ${'cities.txt'}     | ${'text/plain'}
+        ${'cities.txt.gz'}  | ${'application/gzip'}
+        ${'cities.trie'}    | ${'application/vnd.cspell.dictionary+trie'}
+        ${'cities.trie.gz'} | ${'application/vnd.cspell.dictionary+trie.gz'}
+    `('encodeDataUrl $file', ({ file, expected }) => {
+        expect(guessMimeType(file)).toEqual(expected);
     });
 });
