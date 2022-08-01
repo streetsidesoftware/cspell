@@ -5,12 +5,20 @@
   "description": "Tests for dictionaries included by a Yarn 2 repository",
   "main": "index.js",
   "scripts": {
-    "prepare-cspell-action": "npm run prepare-yarn2-med && npm run prepare-yarn2-sci",
+    "prepare-cspell-action": "npm run prepare-yarn2 && npm run prepare-yarn3",
+    "prepare-yarn2": "npm run prepare-yarn2-med && npm run prepare-yarn2-sci",
     "prepare-yarn2-med": "cd test-yarn2-med && yarn",
     "prepare-yarn2-sci": "cd test-yarn2-sci && yarn",
-    "test": "npm run test-yarn2-med && npm run test-yarn2-sci",
+    "prepare-yarn3": "npm run prepare-yarn3-med && npm run prepare-yarn3-sci",
+    "prepare-yarn3-med": "cd test-yarn3-med && yarn",
+    "prepare-yarn3-sci": "cd test-yarn3-sci && yarn",
+    "test": "npm run test-yarn2 && npm run test-yarn3 ",
+    "test-yarn2": "npm run test-yarn2-med && npm run test-yarn2-sci",
+    "test-yarn3": "npm run test-yarn3-med && npm run test-yarn3-sci",
     "test-yarn2-med": "cd test-yarn2-med && yarn && yarn test",
-    "test-yarn2-sci": "cd test-yarn2-sci && yarn && yarn test"
+    "test-yarn2-sci": "cd test-yarn2-sci && yarn && yarn test",
+    "test-yarn3-med": "cd test-yarn3-med && yarn && yarn test",
+    "test-yarn3-sci": "cd test-yarn3-sci && yarn && yarn test"
   },
   "author": "",
   "license": "MIT"
