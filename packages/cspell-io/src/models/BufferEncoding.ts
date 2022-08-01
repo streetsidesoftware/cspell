@@ -7,5 +7,6 @@ export type BufferEncoding =
     | 'ucs-2'
     | 'base64'
     | 'base64url'
+    | 'binary'
     | 'latin1'
     | 'hex';
