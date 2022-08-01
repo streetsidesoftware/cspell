@@ -14,6 +14,8 @@ import {
     RequestFsWriteFile,
 } from './requests';
 
+let defaultCSpellIONode: CSpellIO | undefined = undefined;
+
 export class CSpellIONode implements CSpellIO {
     constructor(readonly serviceBus = new ServiceBus()) {
         registerHandlers(serviceBus);
@@ -66,4 +68,14 @@ export class CSpellIONode implements CSpellIO {
 
 function genError(err: Error | undefined, alt: string): Error {
     return err || new ErrorNotImplemented(alt);
+}
+
+export function getDefaultCSpellIO(): CSpellIO {
+    if (defaultCSpellIONode) return defaultCSpellIONode;
+
+    const cspellIO = new CSpellIONode();
+
+    defaultCSpellIONode = cspellIO;
+
+    return cspellIO;
 }
