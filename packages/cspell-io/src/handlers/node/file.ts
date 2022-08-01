@@ -9,6 +9,7 @@ import assert from 'assert';
 import { promises as fs, readFileSync, statSync } from 'fs';
 import { gunzipSync, gzipSync } from 'zlib';
 import { toError } from '../../errors';
+import { decodeDataUrl } from '../../node/dataUrl';
 import { fetchURL } from '../../node/file/fetch';
 import { getStatHttp } from '../../node/file/stat';
 import {
@@ -101,13 +102,42 @@ const handleRequestZlibInflate = RequestZlibInflate.createRequestHandler(
 const supportedFetchProtocols: Record<string, true | undefined> = { 'http:': true, 'https:': true };
 
 /**
- * Handle reading gzip'ed text files.
+ * Handle fetching a file from http
  */
 const handleRequestFsReadBinaryFileHttp = RequestFsReadBinaryFile.createRequestHandler(
     (req: RequestFsReadBinaryFile, next) => {
         const { url } = req.params;
         if (!(url.protocol in supportedFetchProtocols)) return next(req);
         return createResponse(fetchURL(url).then((content) => ({ url, content })));
+    },
+    undefined,
+    'Node: Read Http(s) file.'
+);
+
+/**
+ * Handle decoding a data url
+ */
+const handleRequestFsReadBinaryFileSyncData = RequestFsReadBinaryFileSync.createRequestHandler(
+    (req: RequestFsReadBinaryFileSync, next) => {
+        const { url } = req.params;
+        if (url.protocol !== 'data:') return next(req);
+        const data = decodeDataUrl(url);
+        return createResponse({ url, content: data.data, baseFilename: data.attributes.get('filename') });
+    },
+    undefined,
+    'Node: Read Http(s) file.'
+);
+
+/**
+ * Handle decoding a data url
+ */
+const handleRequestFsReadBinaryFileData = RequestFsReadBinaryFile.createRequestHandler(
+    (req: RequestFsReadBinaryFile, next, dispatcher) => {
+        const { url } = req.params;
+        if (url.protocol !== 'data:') return next(req);
+        const res = dispatcher.dispatch(RequestFsReadBinaryFileSync.create(req.params));
+        if (!isServiceResponseSuccess(res)) return res;
+        return createResponse(Promise.resolve(res.value));
     },
     undefined,
     'Node: Read Http(s) file.'
@@ -188,6 +218,8 @@ export function registerHandlers(serviceBus: ServiceBus) {
         handleRequestFsReadBinaryFile,
         handleRequestFsReadBinaryFileSync,
         handleRequestFsReadBinaryFileHttp,
+        handleRequestFsReadBinaryFileData,
+        handleRequestFsReadBinaryFileSyncData,
         handleRequestFsReadFile,
         handleRequestFsReadFileSync,
         handleRequestZlibInflate,

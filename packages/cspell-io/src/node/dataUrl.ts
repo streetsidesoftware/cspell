@@ -61,7 +61,8 @@ function encodeAttributes(attributes: Iterable<readonly [string, string]>): stri
 
 const dataUrlRegExHead = /^data:(?<mediaType>[^;,]*)(?<attributes>(?:;[^=]+=[^;,]*)*)(?<base64>;base64)?$/;
 
-export function decodeDataUrl(url: string): DecodedDataUrl {
+export function decodeDataUrl(url: string | URL): DecodedDataUrl {
+    url = url.toString();
     const [head, encodedData] = url.split(',', 2);
     if (!head || encodedData === undefined) throw Error('Not a data url');
     const match = head.match(dataUrlRegExHead);

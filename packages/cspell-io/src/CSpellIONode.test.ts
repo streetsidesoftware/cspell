@@ -13,15 +13,18 @@ describe('CSpellIONode', () => {
     });
 
     test.each`
-        filename                                                                                                       | content
-        ${__filename}                                                                                                  | ${sc('This bit of text')}
-        ${ps('cities.txt')}                                                                                            | ${sc('San Francisco\n')}
-        ${ps('cities.txt.gz')}                                                                                         | ${sc('San Francisco\n')}
-        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt'}    | ${sc('San Francisco\n')}
-        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'} | ${sc('San Francisco\n')}
-    `('readFile $filename', async ({ filename, content }) => {
+        filename                                                                                                       | baseFilename   | content
+        ${__filename}                                                                                                  | ${undefined}   | ${sc('This bit of text')}
+        ${ps('cities.txt')}                                                                                            | ${undefined}   | ${sc('San Francisco\n')}
+        ${ps('cities.txt.gz')}                                                                                         | ${undefined}   | ${sc('San Francisco\n')}
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt'}    | ${undefined}   | ${sc('San Francisco\n')}
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'} | ${undefined}   | ${sc('San Francisco\n')}
+        ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}                                         | ${'hello.txt'} | ${sc('Hello, World!')}
+        ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}                                   | ${undefined}   | ${sc('Hello, World!')}
+    `('readFile $filename', async ({ filename, content, baseFilename }) => {
         const cspellIo = new CSpellIONode();
-        const expected = oc({ url: toURL(filename), content });
+        const url = toURL(filename);
+        const expected = oc({ url, content, baseFilename });
         const result = cspellIo.readFile(filename);
         result.catch((e) => console.log(e));
         await expect(result).resolves.toEqual(expected);
@@ -39,10 +42,12 @@ describe('CSpellIONode', () => {
     });
 
     test.each`
-        filename               | content
-        ${__filename}          | ${sc('This bit of text')}
-        ${ps('cities.txt')}    | ${sc('San Francisco\n')}
-        ${ps('cities.txt.gz')} | ${sc('San Francisco\n')}
+        filename                                                                     | content
+        ${__filename}                                                                | ${sc('This bit of text')}
+        ${ps('cities.txt')}                                                          | ${sc('San Francisco\n')}
+        ${ps('cities.txt.gz')}                                                       | ${sc('San Francisco\n')}
+        ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}       | ${sc('Hello, World!')}
+        ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'} | ${sc('Hello, World!')}
     `('readFileSync $filename', ({ filename, content }) => {
         const cspellIo = new CSpellIONode();
         const expected = oc({ url: toURL(filename), content });
