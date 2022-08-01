@@ -22,6 +22,7 @@ import {
     RequestFsWriteFile,
     RequestZlibInflate,
 } from '../../requests';
+import { URL, fileURLToPath } from 'url';
 
 const isGzFileRegExp = /\.gz($|[?#])/;
 
@@ -29,11 +30,16 @@ function isGzFile(url: URL): boolean {
     return isGzFileRegExp.test(url.pathname);
 }
 
+/*
+ * NOTE: fileURLToPath is used because of yarn bug https://github.com/yarnpkg/berry/issues/899
+ */
+
 /**
  * Handle Binary File Reads
  */
 const handleRequestFsReadBinaryFile = RequestFsReadBinaryFile.createRequestHandler(
-    ({ params }) => createResponse(fs.readFile(params.url).then((content) => ({ url: params.url, content }))),
+    ({ params }) =>
+        createResponse(fs.readFile(fileURLToPath(params.url)).then((content) => ({ url: params.url, content }))),
     undefined,
     'Node: Read Binary File.'
 );
@@ -42,7 +48,7 @@ const handleRequestFsReadBinaryFile = RequestFsReadBinaryFile.createRequestHandl
  * Handle Binary File Sync Reads
  */
 const handleRequestFsReadBinaryFileSync = RequestFsReadBinaryFileSync.createRequestHandler(
-    ({ params }) => createResponse({ url: params.url, content: readFileSync(params.url) }),
+    ({ params }) => createResponse({ url: params.url, content: readFileSync(fileURLToPath(params.url)) }),
     undefined,
     'Node: Sync Read Binary File.'
 );
@@ -151,7 +157,7 @@ function bufferToText(buf: Buffer, encoding: BufferEncoding): string {
  * Handle fs:stat
  */
 const handleRequestFsStat = RequestFsStat.createRequestHandler(
-    ({ params }) => createResponse(fs.stat(params.url)),
+    ({ params }) => createResponse(fs.stat(fileURLToPath(params.url))),
     undefined,
     'Node: fs.stat.'
 );
@@ -163,7 +169,7 @@ const handleRequestFsStatSync = RequestFsStatSync.createRequestHandler(
     (req) => {
         const { params } = req;
         try {
-            return createResponse(statSync(params.url));
+            return createResponse(statSync(fileURLToPath(params.url)));
         } catch (e) {
             return createResponseFail(req, toError(e));
         }

@@ -1,4 +1,5 @@
 import { getDefaultCSpellIO } from '../CSpellIONode';
+import { toError } from '../errors';
 import { Stats } from '../models';
 import type { BufferEncoding } from '../models/BufferEncoding';
 import type {
@@ -24,10 +25,16 @@ export const readFileSync: typeof ReadFileSyncFn = function (
     return getDefaultCSpellIO().readFileSync(filename, encoding).content;
 };
 
-export const getStat: typeof GetStatFn = function (filenameOrUri: string): Promise<Stats> {
-    return getDefaultCSpellIO().getStat(filenameOrUri);
+export const getStat: typeof GetStatFn = function (filenameOrUri: string): Promise<Stats | Error> {
+    return getDefaultCSpellIO()
+        .getStat(filenameOrUri)
+        .catch((e) => toError(e));
 };
 
-export const getStatSync: typeof GetStatSyncFn = function (filenameOrUri: string): Stats {
-    return getDefaultCSpellIO().getStatSync(filenameOrUri);
+export const getStatSync: typeof GetStatSyncFn = function (filenameOrUri: string): Stats | Error {
+    try {
+        return getDefaultCSpellIO().getStatSync(filenameOrUri);
+    } catch (e) {
+        return toError(e);
+    }
 };
