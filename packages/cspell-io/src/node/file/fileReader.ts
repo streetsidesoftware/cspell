@@ -6,6 +6,7 @@ import { fetch } from './fetch';
 import { FetchUrlError } from './FetchError';
 import { toURL, isSupportedURL, isFileURL, isZipped } from './util';
 import { fileURLToPath } from 'url';
+import type { BufferEncoding } from '../../models/BufferEncoding';
 
 const defaultEncoding: BufferEncoding = 'utf8';
 
