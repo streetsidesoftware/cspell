@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1756, Issues found: 5255 in 1209 files
+ CSpell: Files checked: 1775, Issues found: 5353 in 1215 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:139:88    - Unknown word (ined)               -- followed by the string "ined".
@@ -42,8 +42,8 @@ Lines:
 ./docs/README.md:20:14     - Unknown word (docsjs)     -- npm run lint:docsjs
 ./docs/README.md:23:4      - Unknown word (autofix)    -- To autofix JS files, run this from
 ./docs/package.json:25:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
-./docs/package.json:26:10     - Unknown word (algoliasearch)   -- "algoliasearch": "^4.12.1",
-./docs/package.json:35:10     - Unknown word (luxon)           -- "luxon": "^2.4.0",
+./docs/package.json:27:10     - Unknown word (algoliasearch)   -- "algoliasearch": "^4.12.1",
+./docs/package.json:36:10     - Unknown word (luxon)           -- "luxon": "^2.4.0",
 ./docs/src/about/index.md:12:146    - Unknown word (pluggable)  -- all rules completely pluggable. The default rules are
 ./docs/src/about/index.md:8:87      - Unknown word (Zakas)      -- created by Nicholas C. Zakas in June 2013. Code
 ./docs/src/assets/js/components-index.js:17:14     - Unknown word (toggleindex) -- function toggleindex(e) {
@@ -234,6 +234,8 @@ Lines:
 ./docs/src/user-guide/command-line-interface.md:395:4     - Unknown word (checkstyle) -- * [checkstyle](formatters/#checkstyle
 ./docs/src/user-guide/command-line-interface.md:417:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
 ./docs/src/user-guide/command-line-interface.md:494:11    - Unknown word (Autofixed)    -- **Note:** Autofixed files are not placed
+./docs/src/user-guide/configuring/configuration-files-new.md:218:564   - Unknown word (runtimes)   -- example, some older runtimes might only allow ECMAScript
+./docs/src/user-guide/configuring/configuration-files-new.md:236:68    - Unknown word (nonstrict)  -- function scope and runs in nonstrict mode.
 ./docs/src/user-guide/configuring/configuration-files.md:41:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 ./docs/src/user-guide/configuring/ignoring-code.md:110:186   - Unknown word (globbing)     -- not be used. Note that globbing rules in `.eslintignore
 ./docs/src/user-guide/configuring/ignoring-code.md:118:14    - Unknown word (mypackage)    -- "name": "mypackage",
@@ -286,7 +288,13 @@ Lines:
 ./lib/cli-engine/hash.js:12:25     - Unknown word (imurmurhash) -- const murmur = require("imurmurhash");
 ./lib/cli-engine/lint-result-cache.js:14:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
 ./lib/cli-engine/xml-escape.js:29:26     - Unknown word (apos)       -- return "&apos;";
+./lib/config/default-config.js:59:61     - Unknown word (globbed)    -- ensure these files are globbed by default
 ./lib/config/flat-config-array.js:12:54     - Unknown word (humanwhocodes) -- nfigArraySymbol } = require("@humanwhocodes/config-array");
+./lib/config/flat-config-array.js:73:16     - Unknown word (baes)          -- * The baes config used to build
+./lib/eslint/eslint-helpers.js:16:7      - Unknown word (globby)     -- const globby = require("globby")
+./lib/eslint/eslint-helpers.js:69:52     - Unknown word (stringss)   -- an array of non-empty stringss or not.
+./lib/eslint/flat-eslint.js:1041:12   - Unknown word (thirdparty) -- * - A thirdparty formatter name:
+./lib/eslint/flat-eslint.js:865:37    - Unknown word (fixtypes)   -- // set up fixer for fixtypes if necessary
 ./lib/linter/code-path-analysis/code-path-state.js:159:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
 ./lib/linter/code-path-analysis/code-path-state.js:913:23    - Unknown word (Segs)        -- const prevSegsOfLeavingSegment = [headOfLeav
 ./lib/linter/code-path-analysis/code-path.js:138:34    - Unknown word (Omittable)  -- param {Object} [options] Omittable.
@@ -303,7 +311,7 @@ Lines:
 ./lib/linter/linter.js:946:29    - Unknown word (PASSTHROUGHS)  -- DEPRECATED_SOURCECODE_PASSTHROUGHS = {
 ./lib/options.js:2:44      - Unknown word (optionator) -- Options configuration for optionator.
 ./lib/rule-tester/flat-rule-tester.js:225:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
-./lib/rule-tester/flat-rule-tester.js:714:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
+./lib/rule-tester/flat-rule-tester.js:717:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 ./lib/rule-tester/rule-tester.js:10:52     - Unknown word (unittests)  -- mocha to allow for DRY unittests for eslint
 ./lib/rules/array-bracket-newline.js:204:24    - Unknown word (Linebreaks) -- const needsLinebreaks = (
 ./lib/rules/array-bracket-newline.js:51:30     - Unknown word (Linebreak)  -- unexpectedOpeningLinebreak: "There should be no
@@ -368,9 +376,9 @@ Lines:
 ./lib/rules/utils/ast-utils.js:395:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 ./lib/rules/utils/patterns/letters.js:12:24     - Unknown word (Dulin)      -- Copyright 2013-2016 Dulin Marat and other contributors
 ./lib/shared/config-validator.js:286:55    - Unknown word (ECMAFEATURES) -- source, "ESLINT_LEGACY_ECMAFEATURES");
-./package.json:111:6     - Unknown word (eslump)       -- "eslump": "^3.0.0",
-./package.json:129:6     - Unknown word (memfs)        -- "memfs": "^3.0.1",
-./package.json:130:6     - Unknown word (metascraper)  -- "metascraper": "^5.25.7",
+./package.json:115:6     - Unknown word (eslump)       -- "eslump": "^3.0.0",
+./package.json:133:6     - Unknown word (memfs)        -- "memfs": "^3.0.1",
+./package.json:134:6     - Unknown word (metascraper)  -- "metascraper": "^5.25.7",
 ./package.json:24:15     - Unknown word (alpharelease) -- "generate-alpharelease": "node Makefile.js
 ./package.json:25:15     - Unknown word (betarelease)  -- "generate-betarelease": "node Makefile.js
 ./package.json:26:15     - Unknown word (rcrelease)    -- "generate-rcrelease": "node Makefile.js
@@ -410,10 +418,12 @@ Lines:
 ./tests/lib/cli-engine/cli-engine.js:6350:87   - Unknown word (myconf)              -- config node_modules/myconf/.eslintrc.json',",
 ./tests/lib/cli-engine/cli-engine.js:6578:52   - Unknown word (extendees)           -- config file and linear extendees.", () => {
 ./tests/lib/cli.js:267:48    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath}`);
-./tests/lib/config/flat-config-array.js:1336:29   - Unknown word (foox)        -- foox: [1, "bar"]
-./tests/lib/config/flat-config-array.js:1358:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
+./tests/lib/config/flat-config-array.js:1335:29   - Unknown word (foox)        -- foox: [1, "bar"]
+./tests/lib/config/flat-config-array.js:1357:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 ./tests/lib/config/flat-config-array.js:146:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
-./tests/lib/config/flat-config-array.js:826:43    - Unknown word (truex)       -- foo: "truex"
+./tests/lib/config/flat-config-array.js:825:43    - Unknown word (truex)       -- foo: "truex"
+./tests/lib/eslint/flat-eslint.js:1473:9    - Unknown word (xdescribe)  -- xdescribe("cache", () => {
+./tests/lib/eslint/flat-eslint.js:4084:50   - Unknown word (flob)       -- due to a bug in fast-flob that doesn't allow
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:2767:72   - Unknown word (hashbang)   -- comment is of the type hashbang", () => {
@@ -437,6 +447,7 @@ Lines:
 ./tests/lib/rule-tester/flat-rule-tester.js:2227:33   - Unknown word (outpt)      -- outpt: "var baz;"
 ./tests/lib/rule-tester/flat-rule-tester.js:2580:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
 ./tests/lib/rule-tester/flat-rule-tester.js:987:22    - Unknown word (noeval)     -- "noeval('foo')"
+./tests/lib/rule-tester/rule-tester.js:2335:65   - Unknown word (intentioally) -- line no-undefined -- intentioally added for test case
 ./tests/lib/rules/array-bracket-newline.js:57:50     - Unknown word (ndosomething) -- [\nfunction foo() {\ndosomething();\n}\n];",
 ./tests/lib/rules/array-bracket-spacing.js:51:47     - Unknown word (n'qux)      -- [{\n'bar': 'baz', \n'qux': [{ 'bar': 'baz' }
 ./tests/lib/rules/array-bracket-spacing.js:51:76     - Unknown word (n'quxx)     -- { 'bar': 'baz' }], \n'quxx': 1 \n}]", options:
@@ -514,6 +525,7 @@ Lines:
 ./tests/lib/rules/require-unicode-regexp.js:33:25     - Unknown word (gimu)       -- "const flags = 'gimu'; new RegExp('foo',
 ./tests/lib/rules/require-unicode-regexp.js:52:25     - Unknown word (gimy)       -- code: "/foo/gimy",
 ./tests/lib/rules/semi.js:119:66    - Unknown word (mylib)      -- named2 } from 'src/mylib';", parserOptions:
+./tests/lib/rules/sort-keys.js:261:24    - Unknown word (abce)       -- // abce
 ./tests/lib/rules/spaced-comment.js:115:54    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<
 ./tests/lib/rules/spaced-comment.js:318:23    - Unknown word (endregion)  -- code: "//#endregion",
 ./tests/lib/rules/spaced-comment.js:649:23    - Unknown word (endregionfoo) -- code: "//#endregionfoo",

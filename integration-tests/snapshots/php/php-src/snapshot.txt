@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1848, Issues found: 40919 in 1279 files
+ CSpell: Files checked: 1848, Issues found: 41139 in 1284 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -106,11 +106,11 @@ Lines:
 ./Zend/Optimizer/zend_dump.c:362:22    - Unknown word (NOVAL)         -- fprintf(stderr, " NOVAL");
 ./Zend/Optimizer/zend_dump.c:365:22    - Unknown word (NOESC)         -- fprintf(stderr, " NOESC");
 ./Zend/Optimizer/zend_dump.c:3:28      - Unknown word (Visualisation) -- Zend Engine, Bytecode Visualisation
-./Zend/Optimizer/zend_inference.c:2270:12   - Unknown word (analize)    -- /* TODO: analize instructions between
+./Zend/Optimizer/zend_inference.c:2273:12   - Unknown word (analize)    -- /* TODO: analize instructions between
 ./Zend/Optimizer/zend_inference.c:29:22     - Unknown word (Rodrigues)  -- * V. Campos, R. Rodrigues, I. de Assis Costa and
 ./Zend/Optimizer/zend_inference.c:29:39     - Unknown word (Assis)      -- R. Rodrigues, I. de Assis Costa and F. Pereira
 ./Zend/Optimizer/zend_inference.c:29:58     - Unknown word (Pereira)    -- de Assis Costa and F. Pereira.
-./Zend/Optimizer/zend_inference.c:3003:7    - Unknown word (Typehinting) -- /* Typehinting */
+./Zend/Optimizer/zend_inference.c:3006:7    - Unknown word (Typehinting) -- /* Typehinting */
 ./Zend/Optimizer/zend_inference.c:30:49     - Unknown word (SBLP)       -- in Range Analysis", SBLP'12.
 ./Zend/Optimizer/zend_inference.h:233:46    - Unknown word (raena)      -- inference(zend_arena **raena, const zend_op_array
 ./Zend/Optimizer/zend_optimizer.c:1341:8    - Unknown word (recalc)     -- zend_recalc_live_ranges(op_array
@@ -140,11 +140,11 @@ Lines:
 ./Zend/micro_bench.php:205:10    - Unknown word (issetor)     -- function issetor($n) {
 ./Zend/zend.c:589:20    - Unknown word (OSVERSIONINFO) -- if(!GetVersionEx((OSVERSIONINFO *) osvi)) {
 ./Zend/zend.c:879:2     - Unknown word (fpsetmask)     -- fpsetmask(0);
-./Zend/zend_API.c:2823:14   - Unknown word (arginfos)   -- /* Rebuild arginfos if parameter/property
-./Zend/zend_API.c:3424:50   - Unknown word (callables)  -- "Use of \"self\" in callables is deprecated");
-./Zend/zend_API.c:3516:15   - Unknown word (lmname)     -- zend_string *lmname;
-./Zend/zend_API.c:3610:6    - Unknown word (Callables)  -- "Callables of the form [\"%s\"
-./Zend/zend_API.c:3926:15   - Unknown word (callability) -- /* Determine callability at the first parent
+./Zend/zend_API.c:2828:14   - Unknown word (arginfos)   -- /* Rebuild arginfos if parameter/property
+./Zend/zend_API.c:3429:50   - Unknown word (callables)  -- "Use of \"self\" in callables is deprecated");
+./Zend/zend_API.c:3521:15   - Unknown word (lmname)     -- zend_string *lmname;
+./Zend/zend_API.c:3615:6    - Unknown word (Callables)  -- "Callables of the form [\"%s\"
+./Zend/zend_API.c:3931:15   - Unknown word (callability) -- /* Determine callability at the first parent
 ./Zend/zend_API.c:514:45    - Unknown word (sideeffect) -- scalar_type_hint_no_sideeffect() */
 ./Zend/zend_API.c:616:6     - Unknown word (SSTH)       -- /* SSTH Exception: IS_LONG may
 ./Zend/zend_API.h:99:67     - Unknown word (evaluable)  -- function is compile-time evaluable, you are asserting that
@@ -162,7 +162,7 @@ Lines:
 ./Zend/zend_alloc.c:789:25    - Unknown word (MAYMOVE)    -- We don't use MREMAP_MAYMOVE due to alignment requirements
 ./Zend/zend_ast.c:1206:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
 ./Zend/zend_ast.c:1365:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
-./Zend/zend_ast.c:1825:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
+./Zend/zend_ast.c:1828:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
 ./Zend/zend_atomic.h:66:44     - Unknown word (Iterlocked) -- is non-const due to Iterlocked API*/
 ./Zend/zend_attributes.c:16:22     - Unknown word (Schröder)   -- | Martin Schröder <m.schroeder2007@gmail
 ./Zend/zend_bitset.h:81:51     - Unknown word (clzl)       -- has_builtin(__builtin_clzl)) \
@@ -172,24 +172,24 @@ Lines:
 ./Zend/zend_builtin_functions.c:1709:14   - Unknown word (frameno)            -- int lineno, frameno = 0;
 ./Zend/zend_builtin_functions.c:1762:58   - Unknown word (elsewise)           -- FCALL was just made - elsewise we're in the middle
 ./Zend/zend_builtin_functions.c:861:8     - Unknown word (klass)      -- zval *klass;
-./Zend/zend_closures.c:126:20    - Unknown word (newclass)   -- zend_class_entry *newclass;
-./Zend/zend_closures.c:197:55    - Unknown word (zclosure)   -- return_value, zval *zclosure, zval *newthis, zend
+./Zend/zend_closures.c:125:20    - Unknown word (newclass)   -- zend_class_entry *newclass;
+./Zend/zend_closures.c:212:55    - Unknown word (zclosure)   -- return_value, zval *zclosure, zval *newthis, zend
 ./Zend/zend_closures.c:68:32     - Unknown word (newthis)    -- closure *closure, zval *newthis, zend_class_entry *scope
-./Zend/zend_compile.c:1378:9    - Unknown word (anonclass)  -- size_t anonclass_src_len;
-./Zend/zend_compile.c:186:14    - Unknown word (uqname)     -- const char *uqname = ZSTR_VAL(name);
-./Zend/zend_compile.c:2494:28   - Unknown word (unticked)   -- inline bool zend_is_unticked_stmt(zend_ast *ast)
-./Zend/zend_compile.c:2850:7    - Unknown word (nullsafe)   -- bool nullsafe = ast->kind == ZEND
-./Zend/zend_compile.c:285:11    - Unknown word (oparray)    -- void zend_oparray_context_begin(zend_oparray
-./Zend/zend_compile.c:3057:28   - Unknown word (unkeyed)    -- Cannot mix keyed and unkeyed array entries in assignments
-./Zend/zend_compile.c:373:39    - Unknown word (opnums)     -- CG(short_circuiting_opnums), sizeof(uint32_t))
-./Zend/zend_compile.c:3980:4    - Unknown word (cufa)       -- /* cufa = call_user_func_array
-./Zend/zend_compile.c:411:13    - Unknown word (autoloads)  -- CG(delayed_autoloads) = NULL;
-./Zend/zend_compile.c:4331:63   - Unknown word (redeclared) -- functions, it may be redeclared as a userland
-./Zend/zend_compile.c:4847:25   - Unknown word (freeable)   -- * Loop doesn't have freeable variable */
-./Zend/zend_compile.c:5451:45   - Unknown word (JUMPTABLES) -- options) & ZEND_COMPILE_NO_JUMPTABLES) {
-./Zend/zend_compile.c:5886:17   - Unknown word (multicatch) -- uint32_t *jmp_multicatch = safe_emalloc(sizeof
-./Zend/zend_compile.c:6966:7    - Unknown word (varvars)    -- bool varvars_used;
-./Zend/zend_compile.c:8935:7    - Unknown word (Unparenthesized) -- "Unparenthesized `a ? b : c ? d : e`
+./Zend/zend_compile.c:1379:9    - Unknown word (anonclass)  -- size_t anonclass_src_len;
+./Zend/zend_compile.c:187:14    - Unknown word (uqname)     -- const char *uqname = ZSTR_VAL(name);
+./Zend/zend_compile.c:2495:28   - Unknown word (unticked)   -- inline bool zend_is_unticked_stmt(zend_ast *ast)
+./Zend/zend_compile.c:2851:7    - Unknown word (nullsafe)   -- bool nullsafe = ast->kind == ZEND
+./Zend/zend_compile.c:286:11    - Unknown word (oparray)    -- void zend_oparray_context_begin(zend_oparray
+./Zend/zend_compile.c:3058:28   - Unknown word (unkeyed)    -- Cannot mix keyed and unkeyed array entries in assignments
+./Zend/zend_compile.c:374:39    - Unknown word (opnums)     -- CG(short_circuiting_opnums), sizeof(uint32_t))
+./Zend/zend_compile.c:3981:4    - Unknown word (cufa)       -- /* cufa = call_user_func_array
+./Zend/zend_compile.c:412:13    - Unknown word (autoloads)  -- CG(delayed_autoloads) = NULL;
+./Zend/zend_compile.c:4332:63   - Unknown word (redeclared) -- functions, it may be redeclared as a userland
+./Zend/zend_compile.c:4848:25   - Unknown word (freeable)   -- * Loop doesn't have freeable variable */
+./Zend/zend_compile.c:5452:45   - Unknown word (JUMPTABLES) -- options) & ZEND_COMPILE_NO_JUMPTABLES) {
+./Zend/zend_compile.c:5887:17   - Unknown word (multicatch) -- uint32_t *jmp_multicatch = safe_emalloc(sizeof
+./Zend/zend_compile.c:6967:7    - Unknown word (varvars)    -- bool varvars_used;
+./Zend/zend_compile.c:8949:7    - Unknown word (Unparenthesized) -- "Unparenthesized `a ? b : c ? d : e`
 ./Zend/zend_constants.c:204:16    - Unknown word (haltname)   -- zend_string *haltname;
 ./Zend/zend_cpuinfo.c:34:50     - Unknown word (subfunc)    -- uint32_t func, uint32_t subfunc, zend_cpu_info *cpuinfo
 ./Zend/zend_cpuinfo.c:63:4      - Unknown word (cpuidex)    -- __cpuidex(regs, func, subfunc
@@ -205,15 +205,15 @@ Lines:
 ./Zend/zend_cpuinfo.h:78:19     - Unknown word (MTRR)       -- ZEND_CPU_FEATURE_MTRR = (1<<12 | ZEND_CPU
 ./Zend/zend_enum.c:15:15     - Unknown word (Ilija)      -- | Authors: Ilija Tovilo <ilutov@php.net
 ./Zend/zend_enum.c:15:21     - Unknown word (Tovilo)     -- | Authors: Ilija Tovilo <ilutov@php.net>
-./Zend/zend_enum.c:179:73    - Unknown word (unitenum)   -- = zend_string_init("unitenum", sizeof("unitenum"
-./Zend/zend_enum.c:183:78    - Unknown word (backedenum) -- = zend_string_init("backedenum", sizeof("backedenum
-./Zend/zend_enum.c:446:58    - Unknown word (TRYFROM)    -- ZSTR_KNOWN(ZEND_STR_TRYFROM);
+./Zend/zend_enum.c:180:73    - Unknown word (unitenum)   -- = zend_string_init("unitenum", sizeof("unitenum"
+./Zend/zend_enum.c:184:78    - Unknown word (backedenum) -- = zend_string_init("backedenum", sizeof("backedenum
+./Zend/zend_enum.c:441:58    - Unknown word (TRYFROM)    -- ZSTR_KNOWN(ZEND_STR_TRYFROM);
 ./Zend/zend_execute.c:60:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
-./Zend/zend_execute.c:660:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
-./Zend/zend_execute.c:660:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
-./Zend/zend_execute_API.c:1000:24   - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
-./Zend/zend_execute_API.c:1450:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
-./Zend/zend_execute_API.c:1450:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
+./Zend/zend_execute.c:661:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
+./Zend/zend_execute.c:661:55    - Unknown word (fclass)     -- *fsep, const char **fclass,
+./Zend/zend_execute_API.c:1002:24   - Unknown word (fcic)       -- zend_fcall_info_cache fcic;
+./Zend/zend_execute_API.c:1452:111  - Unknown word (EXECUTEONLYONCE)     -- seconds*1000, 0, WT_EXECUTEONLYONCE)) {
+./Zend/zend_execute_API.c:1452:47   - Unknown word (WAITORTIMERCALLBACK) -- rQueueTimer(&tq_timer, NULL, (WAITORTIMERCALLBACK)tq_timer_cb, (VOID*
 ./Zend/zend_fibers.c:129:33    - Unknown word (fcontext)   -- by boost.context in fcontext.hpp:
 ./Zend/zend_gc.c:1468:26   - Unknown word (tmpvars)    -- static void zend_gc_root_tmpvars(void);
 ./Zend/zend_gdb.c:34:14     - Unknown word (NOACTION)   -- ZEND_GDBJIT_NOACTION,
@@ -249,10 +249,10 @@ Lines:
 ./Zend/zend_operators.h:538:7     - Unknown word (lresult)    -- long lresult;
 ./Zend/zend_operators.h:546:12    - Unknown word (llresult)   -- long long llresult;
 ./Zend/zend_operators.h:925:37    - Unknown word (strnieq)    -- always_inline bool zend_strnieq(const char *ptr1, const
-./Zend/zend_portability.h:260:51    - Unknown word (Ofast)      -- attribute__((optimize("Ofast")))
-./Zend/zend_portability.h:500:19    - Unknown word (TMMINTRIN)  -- # if defined(HAVE_TMMINTRIN_H)
-./Zend/zend_portability.h:504:19    - Unknown word (NMMINTRIN)  -- # if defined(HAVE_NMMINTRIN_H)
-./Zend/zend_portability.h:508:19    - Unknown word (WMMINTRIN)  -- # if defined(HAVE_WMMINTRIN_H)
+./Zend/zend_portability.h:262:51    - Unknown word (Ofast)      -- attribute__((optimize("Ofast")))
+./Zend/zend_portability.h:502:19    - Unknown word (TMMINTRIN)  -- # if defined(HAVE_TMMINTRIN_H)
+./Zend/zend_portability.h:506:19    - Unknown word (NMMINTRIN)  -- # if defined(HAVE_NMMINTRIN_H)
+./Zend/zend_portability.h:510:19    - Unknown word (WMMINTRIN)  -- # if defined(HAVE_WMMINTRIN_H)
 ./Zend/zend_range_check.h:26:4      - Unknown word (overcomplicate) -- overcomplicate things. */
 ./Zend/zend_range_check.h:42:29     - Unknown word (zlong)          -- define ZEND_LONG_INT_OVFL(zlong) UNEXPECTED((zlong)
 ./Zend/zend_range_check.h:43:24     - Unknown word (UDFL)           -- define ZEND_LONG_INT_UDFL(zlong) UNEXPECTED((zlong
@@ -344,7 +344,7 @@ Lines:
 ./Zend/zend_vm_def.h:47:13     - Unknown word (NOCONSTCONST) -- ZEND_VM_HOT_NOCONSTCONST_HANDLER(1, ZEND_ADD
 ./Zend/zend_vm_def.h:47:53     - Unknown word (TMPVARCV)     -- HANDLER(1, ZEND_ADD, CONST|TMPVARCV, CONST|TMPVARCV)
 ./Zend/zend_vm_def.h:944:13    - Unknown word (NOCONST)      -- ZEND_VM_HOT_NOCONST_HANDLER(13, ZEND_BW
-./Zend/zend_vm_def.h:9519:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
+./Zend/zend_vm_def.h:9527:53   - Unknown word (uncatchable)  -- comparing arrays is an uncatchable fatal error) */
 ./Zend/zend_vm_gen.php:1151:23   - Unknown word (fastcall)   -- $zend_fastcall = "";
 ./Zend/zend_vm_gen.php:1407:52   - Unknown word (devnull)    -- extra as $extra => $devnull) {
 ./Zend/zend_vm_gen.php:1519:6    - Unknown word (lastdef)    -- $lastdef = array_pop($specs)
@@ -366,28 +366,28 @@ Lines:
 ./Zend/zend_vm_gen.php:778:25    - Unknown word (FCALL)      -- "/ZEND_OBSERVER_FCALL_BEGIN\(\s*(.*)\s*\)
 ./Zend/zend_weakrefs.h:17:14     - Unknown word (WEAKREFS)   -- #ifndef ZEND_WEAKREFS_H
 ./appveyor/setup_hmailserver.php:5:2       - Unknown word (hmail)      -- $hmail = new COM("hMailServer
-./build/gen_stub.php:1355:33   - Unknown word (MALIAS)     -- "\tZEND_MALIAS(%s, %s, %s, %s, %s)
-./build/gen_stub.php:1390:33   - Unknown word (FALIAS)     -- "\tZEND_DEP_FALIAS(%s, %s, %s)\n",
-./build/gen_stub.php:1512:30   - Unknown word (constructorsynopsis) -- $synopsisType = "constructorsynopsis";
-./build/gen_stub.php:1514:30   - Unknown word (destructorsynopsis)  -- $synopsisType = "destructorsynopsis";
-./build/gen_stub.php:1516:30   - Unknown word (methodsynopsis)      -- $synopsisType = "methodsynopsis";
-./build/gen_stub.php:1774:86   - Unknown word (fieldsynopsis)       -- DOMDocument $doc, DOMElement $fieldsynopsisElement): void;
-./build/gen_stub.php:1776:56   - Unknown word (Linkend)             -- getFieldSynopsisDefaultLinkend(): string;
-./build/gen_stub.php:1820:44   - Unknown word (linkend)             -- varnameElement->setAttribute("linkend", $this->link);
-./build/gen_stub.php:1987:90   - Unknown word (cvalue)              -- toString() . " must have a @cvalue annotation");
-./build/gen_stub.php:2393:47   - Unknown word (SENSITIVEPARAMETER)  -- sitiveParameter" => "ZEND_STR_SENSITIVEPARAMETER",
-./build/gen_stub.php:2398:133  - Unknown word (ZSTR)                -- "") . "$invocation, ZSTR_KNOWN({$knowns[$escapedAttrib
-./build/gen_stub.php:2706:47   - Unknown word (classsynopsis)       -- doc->createElement("classsynopsis");
-./build/gen_stub.php:2716:51   - Unknown word (classsynopsisinfo)   -- doc->createElement("classsynopsisinfo");
-./build/gen_stub.php:2831:108  - Unknown word (refsect)             -- assReference')/db:refentry/db:refsect1[@role='description
-./build/gen_stub.php:2831:62   - Unknown word (xpointer)            -- docbook.org/ns/docbook) xpointer(id('$classReference
-./build/gen_stub.php:3063:93   - Unknown word (partintro)           -- parentReference')/db:partintro/db:section/db:classsynopsis
-./build/gen_stub.php:3485:24   - Unknown word (consts)              -- @param ConstInfo[] $consts
-./build/gen_stub.php:3582:47   - Unknown word (conds)               -- reprocessorConditions(array &$conds, Stmt $stmt): ?string
-./build/gen_stub.php:4294:41   - Unknown word (exceptionref)        -- "/<phpdoc:(classref|exceptionref)\s+xmlns:phpdoc=\"(
-./build/gen_stub.php:4589:2    - Unknown word (optind)              -- $optind = null;
-./build/gen_stub.php:4593:78   - Unknown word (classsynopses)       -- "verify", "generate-classsynopses", "replace-classsynopses
-./build/gen_stub.php:4594:19   - Unknown word (methodsynopses)      -- "generate-methodsynopses", "replace-methodsynopses
+./build/gen_stub.php:1352:33   - Unknown word (MALIAS)     -- "\tZEND_MALIAS(%s, %s, %s, %s, %s)
+./build/gen_stub.php:1387:33   - Unknown word (FALIAS)     -- "\tZEND_DEP_FALIAS(%s, %s, %s)\n",
+./build/gen_stub.php:1509:30   - Unknown word (constructorsynopsis) -- $synopsisType = "constructorsynopsis";
+./build/gen_stub.php:1511:30   - Unknown word (destructorsynopsis)  -- $synopsisType = "destructorsynopsis";
+./build/gen_stub.php:1513:30   - Unknown word (methodsynopsis)      -- $synopsisType = "methodsynopsis";
+./build/gen_stub.php:1771:86   - Unknown word (fieldsynopsis)       -- DOMDocument $doc, DOMElement $fieldsynopsisElement): void;
+./build/gen_stub.php:1773:56   - Unknown word (Linkend)             -- getFieldSynopsisDefaultLinkend(): string;
+./build/gen_stub.php:1817:44   - Unknown word (linkend)             -- varnameElement->setAttribute("linkend", $this->link);
+./build/gen_stub.php:1984:90   - Unknown word (cvalue)              -- toString() . " must have a @cvalue annotation");
+./build/gen_stub.php:2390:47   - Unknown word (SENSITIVEPARAMETER)  -- sitiveParameter" => "ZEND_STR_SENSITIVEPARAMETER",
+./build/gen_stub.php:2395:133  - Unknown word (ZSTR)                -- "") . "$invocation, ZSTR_KNOWN({$knowns[$escapedAttrib
+./build/gen_stub.php:2703:47   - Unknown word (classsynopsis)       -- doc->createElement("classsynopsis");
+./build/gen_stub.php:2713:51   - Unknown word (classsynopsisinfo)   -- doc->createElement("classsynopsisinfo");
+./build/gen_stub.php:2828:108  - Unknown word (refsect)             -- assReference')/db:refentry/db:refsect1[@role='description
+./build/gen_stub.php:2828:62   - Unknown word (xpointer)            -- docbook.org/ns/docbook) xpointer(id('$classReference
+./build/gen_stub.php:3060:93   - Unknown word (partintro)           -- parentReference')/db:partintro/db:section/db:classsynopsis
+./build/gen_stub.php:3482:24   - Unknown word (consts)              -- @param ConstInfo[] $consts
+./build/gen_stub.php:3579:47   - Unknown word (conds)               -- reprocessorConditions(array &$conds, Stmt $stmt): ?string
+./build/gen_stub.php:4291:41   - Unknown word (exceptionref)        -- "/<phpdoc:(classref|exceptionref)\s+xmlns:phpdoc=\"(
+./build/gen_stub.php:4586:2    - Unknown word (optind)              -- $optind = null;
+./build/gen_stub.php:4590:78   - Unknown word (classsynopses)       -- "verify", "generate-classsynopses", "replace-classsynopses
+./build/gen_stub.php:4591:19   - Unknown word (methodsynopses)      -- "generate-methodsynopses", "replace-methodsynopses
 ./docs/input-filter.md:105:17    - Unknown word (ALLOC)      -- ALLOC_ZVAL(array_ptr);
 ./docs/input-filter.md:105:23    - Unknown word (ZVAL)       -- ALLOC_ZVAL(array_ptr);
 ./docs/input-filter.md:107:22    - Unknown word (PZVAL)      -- INIT_PZVAL(array_ptr);
@@ -1033,35 +1033,35 @@ Lines:
 ./ext/date/php_date.c:148:10    - Unknown word (secfrac)    -- * time-secfrac = "." 1*DIGIT
 ./ext/date/php_date.c:149:10    - Unknown word (numoffset)  -- * time-numoffset = ("+" / "-") time
 ./ext/date/php_date.c:1525:31   - Unknown word (PHPPERIOD)   -- period_obj *object   = Z_PHPPERIOD_P(&iterator->intern
-./ext/date/php_date.c:1545:18   - Unknown word (newdateobj)  -- php_date_obj *newdateobj;
-./ext/date/php_date.c:1789:56   - Unknown word (timelime)    -- a new `timelib_time *timelime_time_clone(timelib_time
-./ext/date/php_date.c:1819:15   - Unknown word (UNCOMPARABLE) -- return ZEND_UNCOMPARABLE;
-./ext/date/php_date.c:1863:18   - Unknown word (tmpstr)       -- zend_string *tmpstr = zend_string_alloc
-./ext/date/php_date.c:1955:9    - Unknown word (PHPTIMEZONE)  -- o1 = Z_PHPTIMEZONE_P(tz1);
-./ext/date/php_date.c:2100:60   - Unknown word (intervalobj)  -- hash(php_interval_obj *intervalobj, HashTable *props)
-./ext/date/php_date.c:2519:8    - Unknown word (datetimeimmutable) -- zval *datetimeimmutable_object = NULL;
-./ext/date/php_date.c:2540:8    - Unknown word (datetimeinterface) -- zval *datetimeinterface_object = NULL;
-./ext/date/php_date.c:2600:78   - Unknown word (myht)              -- dateobj, HashTable *myht)
-./ext/date/php_date.c:3086:20   - Unknown word (intobj)            -- php_interval_obj *intobj;
-./ext/date/php_date.c:3397:64   - Unknown word (Olll)              -- ARGS(), getThis(), "Olll", &object, date_ce_date
+./ext/date/php_date.c:1556:18   - Unknown word (newdateobj)  -- php_date_obj *newdateobj;
+./ext/date/php_date.c:1800:56   - Unknown word (timelime)    -- a new `timelib_time *timelime_time_clone(timelib_time
+./ext/date/php_date.c:1830:15   - Unknown word (UNCOMPARABLE) -- return ZEND_UNCOMPARABLE;
+./ext/date/php_date.c:1874:18   - Unknown word (tmpstr)       -- zend_string *tmpstr = zend_string_alloc
+./ext/date/php_date.c:1966:9    - Unknown word (PHPTIMEZONE)  -- o1 = Z_PHPTIMEZONE_P(tz1);
+./ext/date/php_date.c:2111:60   - Unknown word (intervalobj)  -- hash(php_interval_obj *intervalobj, HashTable *props)
+./ext/date/php_date.c:2530:8    - Unknown word (datetimeimmutable) -- zval *datetimeimmutable_object = NULL;
+./ext/date/php_date.c:2551:8    - Unknown word (datetimeinterface) -- zval *datetimeinterface_object = NULL;
+./ext/date/php_date.c:2611:78   - Unknown word (myht)              -- dateobj, HashTable *myht)
+./ext/date/php_date.c:3097:20   - Unknown word (intobj)            -- php_interval_obj *intobj;
+./ext/date/php_date.c:3408:64   - Unknown word (Olll)              -- ARGS(), getThis(), "Olll", &object, date_ce_date
 ./ext/date/php_date.c:340:54    - Unknown word (tzobj)      -- string(php_timezone_obj *tzobj, zval *zv);
-./ext/date/php_date.c:3790:32   - Unknown word (dateobject)        -- *object, *dateobject;
-./ext/date/php_date.c:4031:14   - Unknown word (fvalue)            -- double fvalue = -1;
-./ext/date/php_date.c:4144:20   - Unknown word (reltime)           -- timelib_rel_time *reltime;
-./ext/date/php_date.c:4154:20   - Unknown word (diobj)             -- php_interval_obj *diobj = Z_PHPINTERVAL_P(ZEND
-./ext/date/php_date.c:4179:59   - Unknown word (unserializing)     -- position %d (%c) while unserializing: %s",
-./ext/date/php_date.c:4200:58   - Unknown word (itype)             -- PROPERTY(element, member, itype, def) \
-./ext/date/php_date.c:4519:20   - Unknown word (dpobj)             -- php_period_obj *dpobj;
-./ext/date/php_date.c:4523:8    - Unknown word (isostr)            -- char *isostr = NULL;
-./ext/date/php_date.c:4623:5    - Unknown word (recurrrences)      -- /* recurrrences */
-./ext/date/php_date.c:4874:18   - Unknown word (retformat)         -- zend_long time, retformat = SUNFUNCS_RET_STRING
-./ext/date/php_date.c:4878:18   - Unknown word (retstr)            -- zend_string *retstr;
-./ext/date/php_date.c:4981:18   - Unknown word (ddummy)            -- double ddummy;
+./ext/date/php_date.c:3801:32   - Unknown word (dateobject)        -- *object, *dateobject;
+./ext/date/php_date.c:4042:14   - Unknown word (fvalue)            -- double fvalue = -1;
+./ext/date/php_date.c:4155:20   - Unknown word (reltime)           -- timelib_rel_time *reltime;
+./ext/date/php_date.c:4165:20   - Unknown word (diobj)             -- php_interval_obj *diobj = Z_PHPINTERVAL_P(ZEND
+./ext/date/php_date.c:4190:59   - Unknown word (unserializing)     -- position %d (%c) while unserializing: %s",
+./ext/date/php_date.c:4211:58   - Unknown word (itype)             -- PROPERTY(element, member, itype, def) \
+./ext/date/php_date.c:4530:20   - Unknown word (dpobj)             -- php_period_obj *dpobj;
+./ext/date/php_date.c:4534:8    - Unknown word (isostr)            -- char *isostr = NULL;
+./ext/date/php_date.c:4620:5    - Unknown word (recurrrences)      -- /* recurrrences */
+./ext/date/php_date.c:4871:18   - Unknown word (retformat)         -- zend_long time, retformat = SUNFUNCS_RET_STRING
+./ext/date/php_date.c:4875:18   - Unknown word (retstr)            -- zend_string *retstr;
+./ext/date/php_date.c:4978:18   - Unknown word (ddummy)            -- double ddummy;
 ./ext/date/php_date.c:635:32    - Unknown word (isoyear)    -- sll isoweek, isoyear;
 ./ext/date/php_date_arginfo.h:213:70    - Unknown word (SUNFUNCS)   -- returnFormat, IS_LONG, 0, "SUNFUNCS_RET_STRING")
-./ext/dba/dba.c:1009:8    - Unknown word (zkey)        -- zval *zkey;
-./ext/dba/dba.c:1069:15   - Unknown word (nkey)        -- zend_string *nkey = info->hnd->nextkey
-./ext/dba/dba.c:1110:20   - Unknown word (vakue)       -- If inifile: Add vakue as key (next instance
+./ext/dba/dba.c:1008:8    - Unknown word (zkey)        -- zval *zkey;
+./ext/dba/dba.c:1068:15   - Unknown word (nkey)        -- zend_string *nkey = info->hnd->nextkey
+./ext/dba/dba.c:1109:20   - Unknown word (vakue)       -- If inifile: Add vakue as key (next instance
 ./ext/dba/dba.c:170:79    - Unknown word (ENFMT)      -- filemode = 0644 + S_ENFMT */
 ./ext/dba/dba.c:220:19    - Unknown word (NBBM)       -- #elif defined(DBA_NBBM)
 ./ext/dba/dba.c:438:12    - Unknown word (numitems)   -- zend_long numitems, i;
@@ -1377,10 +1377,10 @@ Lines:
 ./ext/ext_skel.php:246:29    - Unknown word (EXTNAMECAPS) -- source = str_replace('%EXTNAMECAPS%', strtoupper($options
 ./ext/ext_skel.php:97:46     - Unknown word (onlyunix)   -- dir <path>] [--std] [--onlyunix]
 ./ext/ext_skel.php:98:23     - Unknown word (onlywindows) -- [--onlywindows] [--help]
-./ext/ffi/ffi.c:4089:75   - Unknown word (undimensioned) -- leftmost array can be undimensioned");
-./ext/ffi/ffi.c:5139:9    - Unknown word (globbuf)       -- glob_t globbuf;
-./ext/ffi/ffi.c:6502:16   - Unknown word (declarartion)  -- /* useless declarartion */
-./ext/ffi/ffi.c:6697:4    - Unknown word (regparam)      -- _(regparam) \
+./ext/ffi/ffi.c:4136:75   - Unknown word (undimensioned) -- leftmost array can be undimensioned");
+./ext/ffi/ffi.c:5186:9    - Unknown word (globbuf)       -- glob_t globbuf;
+./ext/ffi/ffi.c:6549:16   - Unknown word (declarartion)  -- /* useless declarartion */
+./ext/ffi/ffi.c:6744:4    - Unknown word (regparam)      -- _(regparam) \
 ./ext/ffi/ffi.stub.php:235:33    - Unknown word (CDECL)      -- cvalue ZEND_FFI_ABI_CDECL
 ./ext/ffi/ffi.stub.php:240:33    - Unknown word (FASTCALL)   -- cvalue ZEND_FFI_ABI_FASTCALL
 ./ext/ffi/ffi.stub.php:245:33    - Unknown word (THISCALL)   -- cvalue ZEND_FFI_ABI_THISCALL
@@ -1826,51 +1826,54 @@ Lines:
 ./ext/ftp/php_ftp.c:823:44    - Unknown word (nbronously)  -- retrieving/sending a file nbronously */
 ./ext/ftp/php_ftp.c:836:41    - Unknown word (nbronous)    -- NULL, E_WARNING, "No nbronous transfer to continue
 ./ext/ftp/php_ftp.c:906:58    - Unknown word (nbronly)     -- file to the FTP server nbronly */
-./ext/gd/gd.c:1086:46   - Unknown word (Ollll)         -- parameters(ZEND_NUM_ARGS(), "Ollll", &IM, gd_image_ce,
-./ext/gd/gd.c:118:22    - Unknown word (EDGEDETECT) -- define IMAGE_FILTER_EDGEDETECT 5
-./ext/gd/gd.c:1202:65   - Unknown word (HWND)          -- using a windows handle (HWND property in COM instance
-./ext/gd/gd.c:1211:2    - Unknown word (HBITMAP)       -- HBITMAP memBM;
-./ext/gd/gd.c:1213:12   - Unknown word (lwindow)       -- zend_long lwindow_handle;
-./ext/gd/gd.c:1301:62   - Unknown word (SRCCOPY)       -- hdc, rc.left, rc.top , SRCCOPY );
-./ext/gd/gd.c:133:30    - Unknown word (edgedetect) -- void php_image_filter_edgedetect(INTERNAL_FUNCTION_PARAMETERS
-./ext/gd/gd.c:1556:6    - Unknown word (imtype)        -- int imtype;
-./ext/gd/gd.c:1645:47   - Unknown word (pllll)         -- parameters(ZEND_NUM_ARGS(), "pllll", &file, &file_len,
-./ext/gd/gd.c:179:55    - Unknown word (exgdimage)  -- image_object* php_gd_exgdimage_from_zobj_p(zend_object
-./ext/gd/gd.c:1864:8    - Unknown word (imgind)        -- zval *imgind;
-./ext/gd/gd.c:188:30    - Unknown word (libgdimageptr) -- API gdImagePtr php_gd_libgdimageptr_from_zval_p(zval* zp
-./ext/gd/gd.c:2186:16   - Unknown word (srcim)         -- zval *dstim, *srcim;
-./ext/gd/gd.c:2186:8    - Unknown word (dstim)         -- zval *dstim, *srcim;
-./ext/gd/gd.c:222:37    - Unknown word (extgdimage)    -- assign_libgdimageptr_as_extgdimage(zval *val, gdImagePtr
-./ext/gd/gd.c:2568:46   - Unknown word (Olllllll)      -- parameters(ZEND_NUM_ARGS(), "Olllllll", &IM, gd_image_ce,
-./ext/gd/gd.c:2711:12   - Unknown word (NPOINTS)       -- zend_long NPOINTS, COL;
-./ext/gd/gd.c:2716:6    - Unknown word (npoints)       -- int npoints, col, nelem, i;
-./ext/gd/gd.c:2821:12   - Unknown word (imagefontsize) -- /* {{{ php_imagefontsize
-./ext/gd/gd.c:2854:12   - Unknown word (gdimagecharup) -- /* {{{ php_gdimagecharup
-./ext/gd/gd.c:2989:47   - Unknown word (Ollllll)       -- parameters(ZEND_NUM_ARGS(), "OOllllll", &DIM, gd_image_ce
-./ext/gd/gd.c:3186:9    - Unknown word (TTFTEXT)       -- #define TTFTEXT_DRAW 0
-./ext/gd/gd.c:3210:18   - Unknown word (fontname)      -- size_t str_len, fontname_len;
-./ext/gd/gd.c:3218:47   - Unknown word (ddss)          -- parameters(ZEND_NUM_ARGS(), "ddss|a", &ptsize, &angle
-./ext/gd/gd.c:3222:47   - Unknown word (Oddlllss)      -- parameters(ZEND_NUM_ARGS(), "Oddlllss|a", &IM, gd_image_ce
-./ext/gd/gd.c:3510:12   - Unknown word (filtertype)    -- zend_long filtertype;
-./ext/gd/gd.c:3550:46   - Unknown word (Oadd)          -- parameters(ZEND_NUM_ARGS(), "Oadd", &SIM, gd_image_ce
-./ext/gd/gd.c:3799:46   - Unknown word (tramsformed)   -- containing the affine tramsformed src image, using an
-./ext/gd/gd.c:3811:9    - Unknown word (nelems)        -- int i, nelems;
-./ext/gd/gd.c:390:36    - Unknown word (STYLEDBRUSHED) -- CONSTANT("IMG_COLOR_STYLEDBRUSHED", gdStyledBrushed, CONST
-./ext/gd/gd.c:397:34    - Unknown word (NOFILL)        -- LONG_CONSTANT("IMG_ARC_NOFILL", gdNoFill, CONST_CS
-./ext/gd/gd.c:407:37    - Unknown word (ALPHABLEND)    -- CONSTANT("IMG_EFFECT_ALPHABLEND", gdEffectAlphaBlend
-./ext/gd/gd.c:4126:30   - Unknown word (putbuf)        -- int _php_image_output_putbuf(struct gdIOCtx *ctx
-./ext/gd/gd.c:4131:31   - Unknown word (ctxfree)       -- void _php_image_output_ctxfree(struct gdIOCtx *ctx
-./ext/gd/gd.c:4160:31   - Unknown word (ctxfreeandclose) -- void _php_image_stream_ctxfreeandclose(struct gdIOCtx *ctx
-./ext/gd/gd.c:488:18    - Unknown word (pngconf)       -- * /usr/include/pngconf.h:310:2: error: #error
-./ext/gd/gd.c:496:37    - Unknown word (PAETH)         -- CONSTANT("PNG_FILTER_PAETH", 0x80, CONST_CS |
+./ext/gd/gd.c:1052:65   - Unknown word (HWND)          -- using a windows handle (HWND property in COM instance
+./ext/gd/gd.c:1061:2    - Unknown word (HBITMAP)       -- HBITMAP memBM;
+./ext/gd/gd.c:1063:12   - Unknown word (lwindow)       -- zend_long lwindow_handle;
+./ext/gd/gd.c:111:30    - Unknown word (edgedetect) -- void php_image_filter_edgedetect(INTERNAL_FUNCTION_PARAMETERS
+./ext/gd/gd.c:1151:62   - Unknown word (SRCCOPY)       -- hdc, rc.left, rc.top , SRCCOPY );
+./ext/gd/gd.c:1406:6    - Unknown word (imtype)        -- int imtype;
+./ext/gd/gd.c:1495:47   - Unknown word (pllll)         -- parameters(ZEND_NUM_ARGS(), "pllll", &file, &file_len,
+./ext/gd/gd.c:157:55    - Unknown word (exgdimage)  -- image_object* php_gd_exgdimage_from_zobj_p(zend_object
+./ext/gd/gd.c:166:30    - Unknown word (libgdimageptr) -- API gdImagePtr php_gd_libgdimageptr_from_zval_p(zval* zp
+./ext/gd/gd.c:1714:8    - Unknown word (imgind)        -- zval *imgind;
+./ext/gd/gd.c:200:37    - Unknown word (extgdimage)    -- assign_libgdimageptr_as_extgdimage(zval *val, gdImagePtr
+./ext/gd/gd.c:2036:16   - Unknown word (srcim)         -- zval *dstim, *srcim;
+./ext/gd/gd.c:2036:8    - Unknown word (dstim)         -- zval *dstim, *srcim;
+./ext/gd/gd.c:2418:46   - Unknown word (Olllllll)      -- parameters(ZEND_NUM_ARGS(), "Olllllll", &IM, gd_image_ce,
+./ext/gd/gd.c:2561:12   - Unknown word (NPOINTS)       -- zend_long NPOINTS, COL;
+./ext/gd/gd.c:2566:6    - Unknown word (npoints)       -- int npoints, col, nelem, i;
+./ext/gd/gd.c:2671:12   - Unknown word (imagefontsize) -- /* {{{ php_imagefontsize
+./ext/gd/gd.c:2704:12   - Unknown word (gdimagecharup) -- /* {{{ php_gdimagecharup
+./ext/gd/gd.c:2839:47   - Unknown word (Ollllll)       -- parameters(ZEND_NUM_ARGS(), "OOllllll", &DIM, gd_image_ce
+./ext/gd/gd.c:3036:9    - Unknown word (TTFTEXT)       -- #define TTFTEXT_DRAW 0
+./ext/gd/gd.c:3060:18   - Unknown word (fontname)      -- size_t str_len, fontname_len;
+./ext/gd/gd.c:3068:47   - Unknown word (ddss)          -- parameters(ZEND_NUM_ARGS(), "ddss|a", &ptsize, &angle
+./ext/gd/gd.c:3072:47   - Unknown word (Oddlllss)      -- parameters(ZEND_NUM_ARGS(), "Oddlllss|a", &IM, gd_image_ce
+./ext/gd/gd.c:3360:12   - Unknown word (filtertype)    -- zend_long filtertype;
+./ext/gd/gd.c:3400:46   - Unknown word (Oadd)          -- parameters(ZEND_NUM_ARGS(), "Oadd", &SIM, gd_image_ce
+./ext/gd/gd.c:3649:46   - Unknown word (tramsformed)   -- containing the affine tramsformed src image, using an
+./ext/gd/gd.c:3661:9    - Unknown word (nelems)        -- int i, nelems;
+./ext/gd/gd.c:3976:30   - Unknown word (putbuf)        -- int _php_image_output_putbuf(struct gdIOCtx *ctx
+./ext/gd/gd.c:3981:31   - Unknown word (ctxfree)       -- void _php_image_output_ctxfree(struct gdIOCtx *ctx
+./ext/gd/gd.c:4010:31   - Unknown word (ctxfreeandclose) -- void _php_image_stream_ctxfreeandclose(struct gdIOCtx *ctx
 ./ext/gd/gd.c:50:12     - Unknown word (Winuser)    -- # include <Winuser.h>
 ./ext/gd/gd.c:51:12     - Unknown word (Wingdi)     -- # include <Wingdi.h>
-./ext/gd/gd.c:681:9     - Unknown word (FLIPWORD)      -- #define FLIPWORD(a) (((a & 0xff00000
-./ext/gd/gd.c:785:7     - Unknown word (stylearr)      -- int *stylearr;
-./ext/gd/gd.c:867:12    - Unknown word (ncolors)       -- zend_long ncolors;
-./ext/gd/gd.c:974:46    - Unknown word (Olllll)        -- parameters(ZEND_NUM_ARGS(), "Olllll", &IM, gd_image_ce,
-./ext/gd/gd.c:993:46    - Unknown word (Ollllllll)     -- parameters(ZEND_NUM_ARGS(), "Ollllllll", &IM, gd_image_ce,
-./ext/gd/gd.stub.php:265:16    - Unknown word (FREETYPE)   -- #ifdef HAVE_GD_FREETYPE
+./ext/gd/gd.c:531:9     - Unknown word (FLIPWORD)      -- #define FLIPWORD(a) (((a & 0xff00000
+./ext/gd/gd.c:635:7     - Unknown word (stylearr)      -- int *stylearr;
+./ext/gd/gd.c:717:12    - Unknown word (ncolors)       -- zend_long ncolors;
+./ext/gd/gd.c:824:46    - Unknown word (Olllll)        -- parameters(ZEND_NUM_ARGS(), "Olllll", &IM, gd_image_ce,
+./ext/gd/gd.c:843:46    - Unknown word (Ollllllll)     -- parameters(ZEND_NUM_ARGS(), "Ollllllll", &IM, gd_image_ce,
+./ext/gd/gd.c:936:46    - Unknown word (Ollll)         -- parameters(ZEND_NUM_ARGS(), "Ollll", &IM, gd_image_ce,
+./ext/gd/gd.stub.php:236:15    - Unknown word (BLACKMAN)   -- * @cvalue GD_BLACKMAN
+./ext/gd/gd.stub.php:246:15    - Unknown word (BSPLINE)    -- * @cvalue GD_BSPLINE
+./ext/gd/gd.stub.php:251:15    - Unknown word (CATMULLROM) -- * @cvalue GD_CATMULLROM
+./ext/gd/gd.stub.php:276:15    - Unknown word (HANNING)    -- * @cvalue GD_HANNING
+./ext/gd/gd.stub.php:296:15    - Unknown word (SINC)       -- * @cvalue GD_SINC
+./ext/gd/gd.stub.php:301:23    - Unknown word (NEIGHBOUR)  -- @cvalue GD_NEAREST_NEIGHBOUR
+./ext/gd/gd.stub.php:449:17    - Unknown word (pngconf)    -- * /usr/include/pngconf.h:310:2: error: #error
+./ext/gd/gd.stub.php:449:71    - Unknown word (setjmp)     -- png.h already includes setjmp.h with some additional
+./ext/gd/gd.stub.php:66:12     - Unknown word (colours)    -- /* special colours for gd */
+./ext/gd/gd.stub.php:728:16    - Unknown word (FREETYPE)   -- #ifdef HAVE_GD_FREETYPE
 ./ext/gd/gd_arginfo.h:148:53    - Unknown word (imagecreatefromavif) -- TYPE_MASK_EX(arginfo_imagecreatefromavif, 0, 1, GdImage, MAY
 ./ext/gd/gd_arginfo.h:198:53    - Unknown word (imagecreatefrombmp)  -- TYPE_MASK_EX(arginfo_imagecreatefrombmp, 0, 1, GdImage, MAY
 ./ext/gd/gd_arginfo.h:204:53    - Unknown word (imagecreatefromtga)  -- TYPE_MASK_EX(arginfo_imagecreatefromtga, 0, 1, GdImage, MAY
@@ -1881,6 +1884,11 @@ Lines:
 ./ext/gd/gd_arginfo.h:475:49    - Unknown word (imagegetclip)        -- TYPE_INFO_EX(arginfo_imagegetclip, 0, 1, IS_ARRAY, 0)
 ./ext/gd/gd_arginfo.h:566:17    - Unknown word (imagegetinterpolation) -- #define arginfo_imagegetinterpolation arginfo_imagecolorstotal
 ./ext/gd/gd_arginfo.h:573:49    - Unknown word (imageresolution)       -- TYPE_MASK_EX(arginfo_imageresolution, 0, 1, MAY_BE_ARRAY
+./ext/gd/gd_arginfo.h:896:36    - Unknown word (STYLEDBRUSHED)         -- CONSTANT("IMG_COLOR_STYLEDBRUSHED", gdStyledBrushed, CONST
+./ext/gd/gd_arginfo.h:901:34    - Unknown word (NOFILL)                -- LONG_CONSTANT("IMG_ARC_NOFILL", gdNoFill, CONST_CS
+./ext/gd/gd_arginfo.h:909:37    - Unknown word (ALPHABLEND)            -- CONSTANT("IMG_EFFECT_ALPHABLEND", gdEffectAlphaBlend
+./ext/gd/gd_arginfo.h:953:37    - Unknown word (EDGEDETECT)            -- CONSTANT("IMG_FILTER_EDGEDETECT", IMAGE_FILTER_EDGEDETECT
+./ext/gd/gd_arginfo.h:992:37    - Unknown word (PAETH)                 -- CONSTANT("PNG_FILTER_PAETH", 128, CONST_CS | CONST
 ./ext/gd/libgd/bmp.h:101:14    - Unknown word (numcolors)   -- signed int numcolors;
 ./ext/gd/libgd/bmp.h:104:14    - Unknown word (mincolors)   -- signed int mincolors;
 ./ext/gd/libgd/bmp.h:43:17     - Unknown word (ENDOFBITMAP) -- #define BMP_RLE_ENDOFBITMAP 1
@@ -2856,6 +2864,7 @@ Lines:
 ./ext/intl/intl_cppshims.h:28:58     - Unknown word (pwin)       -- also defined in unicode/pwin32.h */
 ./ext/intl/intl_data.h:33:31     - Unknown word (oclass)     -- INTL_METHOD_INIT_VARS(oclass, obj)		\
 ./ext/intl/intl_error.h:41:16     - Unknown word (synchonize) -- // Wrappers to synchonize object's and global
+./ext/intl/locale/locale_arginfo.h:140:13    - Unknown word (EXTLANG)    -- zval const_EXTLANG_TAG_value;
 ./ext/intl/locale/locale_arginfo.h:37:24     - Unknown word (subtags)    -- ZEND_ARG_TYPE_INFO(0, subtags, IS_ARRAY, 0)
 ./ext/intl/locale/locale_class.h:29:15     - Unknown word (uloc)       -- char* uloc1;
 ./ext/intl/locale/locale_methods.c:109:6     - Unknown word (guoyu)      -- "zh-guoyu",
@@ -2869,7 +2878,6 @@ Lines:
 ./ext/intl/locale/locale_methods.c:255:19    - Unknown word (inavlid)    -- /* Just in case inavlid locale e.g. '-x-xyz
 ./ext/intl/locale/locale_methods.c:366:54    - Unknown word (retutn)     -- value , do nothing , retutn NULL */
 ./ext/intl/locale/locale_methods.c:38:50     - Unknown word (extlang)    -- strings "variant15" , "extlang11", "private12" etc
-./ext/intl/locale/locale_methods.c:42:9      - Unknown word (EXTLANG)    -- #define EXTLANG_PREFIX "a"
 ./ext/intl/locale/locale_methods.c:58:31     - Unknown word (subtag)     -- on the IANA language subtag registry (File-Date
 ./ext/intl/locale/locale_methods.c:65:7      - Unknown word (lojban)     -- "art-lojban",
 ./ext/intl/locale/locale_methods.c:71:5      - Unknown word (enochian)   -- "i-enochian",
@@ -2892,9 +2900,9 @@ Lines:
 ./ext/intl/normalizer/normalizer_normalize.c:46:21     - Unknown word (NFKD)       -- return unorm2_getNFKDInstance(err);
 ./ext/intl/normalizer/normalizer_normalize.c:67:62     - Unknown word (uinput)     -- long form, const UChar *uinput, int32_t uinput_len
 ./ext/intl/normalizer/normalizer_normalize.c:92:11     - Unknown word (uret)       -- UChar* uret_buf = NULL;
-./ext/intl/php_intl.c:215:15    - Unknown word (Spoofchecker) -- /* Register 'Spoofchecker' PHP class */
-./ext/intl/php_intl.c:289:9     - Unknown word (UCONFIG)      -- #ifndef UCONFIG_NO_FORMATTING
-./ext/intl/php_intl.c:291:14    - Unknown word (tzdata)       -- const char *tzdata_ver = NULL;
+./ext/intl/php_intl.c:212:15    - Unknown word (Spoofchecker) -- /* Register 'Spoofchecker' PHP class */
+./ext/intl/php_intl.c:286:9     - Unknown word (UCONFIG)      -- #ifndef UCONFIG_NO_FORMATTING
+./ext/intl/php_intl.c:288:14    - Unknown word (tzdata)       -- const char *tzdata_ver = NULL;
 ./ext/intl/php_intl.c:67:12     - Unknown word (spoofchecker) -- # include "spoofchecker/spoofchecker_class.h
 ./ext/intl/php_intl.stub.php:375:4     - Unknown word (resourceboundle) -- /* resourceboundle */
 ./ext/intl/php_intl_arginfo.h:627:48    - Unknown word (resourcebundle) -- OBJ_INFO_EX(arginfo_resourcebundle_create, 0, 2, ResourceBundle
@@ -4481,15 +4489,15 @@ Lines:
 ./ext/opcache/jit/zend_jit_trace.c:3951:13   - Unknown word (refcounting) -- bool avoid_refcounting = 0;
 ./ext/opcache/jit/zend_jit_trace.c:402:82    - Unknown word (tssa)       -- zend_ssa *tssa,
 ./ext/opcache/jit/zend_jit_trace.c:4120:7    - Unknown word (Deoptimization) -- /* Deoptimization */
-./ext/opcache/jit/zend_jit_trace.c:4389:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
+./ext/opcache/jit/zend_jit_trace.c:4391:66   - Unknown word (FCARG)          -- REG(op2_addr) != ZREG_FCARG1)
 ./ext/opcache/jit/zend_jit_trace.c:64:3      - Unknown word (ZCSG)       -- ZCSG(jit_traces) = zend_jit
-./ext/opcache/jit/zend_jit_trace.c:6764:51   - Unknown word (alredy)         -- we may try to update alredy generated deoptimization
-./ext/opcache/jit/zend_jit_trace.c:6796:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
-./ext/opcache/jit/zend_jit_trace.c:6955:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
-./ext/opcache/jit/zend_jit_trace.c:7015:12   - Unknown word (unprotect)      -- zend_jit_unprotect();
-./ext/opcache/jit/zend_jit_trace.c:7237:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
-./ext/opcache/jit/zend_jit_trace.c:7772:14   - Unknown word (megamorphic)    -- uint32_t is_megamorphic = 0;
-./ext/opcache/jit/zend_jit_trace.c:8210:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
+./ext/opcache/jit/zend_jit_trace.c:6767:51   - Unknown word (alredy)         -- we may try to update alredy generated deoptimization
+./ext/opcache/jit/zend_jit_trace.c:6799:43   - Unknown word (lbinterrupt)    -- addr = dasm_labels[zend_lbinterrupt_handler];
+./ext/opcache/jit/zend_jit_trace.c:6958:27   - Unknown word (lbtrace)        -- return dasm_labels[zend_lbtrace_escape];
+./ext/opcache/jit/zend_jit_trace.c:7018:12   - Unknown word (unprotect)      -- zend_jit_unprotect();
+./ext/opcache/jit/zend_jit_trace.c:7240:30   - Unknown word (sobject)        -- fprintf(stderr, " op1(%sobject of class %s)", ref,
+./ext/opcache/jit/zend_jit_trace.c:7775:14   - Unknown word (megamorphic)    -- uint32_t is_megamorphic = 0;
+./ext/opcache/jit/zend_jit_trace.c:8213:29   - Unknown word (xlat)           -- shared_alloc_register_xlat_entry(op_array->opcodes
 ./ext/opcache/jit/zend_jit_trace.c:947:16    - Unknown word (TSSA)       -- // TODO: TSSA may miss Pi() functions
 ./ext/opcache/jit/zend_jit_trace.c:94:30     - Unknown word (MAXSECTION) -- init(&dasm_state, DASM_MAXSECTION);
 ./ext/opcache/jit/zend_jit_vm_helpers.c:1095:39   - Unknown word (unroling)    -- doesn't work try loop unroling. */
@@ -4621,7 +4629,7 @@ Lines:
 ./ext/openssl/openssl.c:7345:31   - Unknown word (poutlen)            -- string **poutbuf, int *poutlen, const char *data, size
 ./ext/openssl/openssl.c:7368:43   - Unknown word (verifycation)       -- NULL, E_WARNING, "Tag verifycation failed");
 ./ext/openssl/openssl.c:7485:50   - Unknown word (lszsl)              -- ZEND_NUM_ARGS(), "sss|lszsl", &data, &data_len,
-./ext/openssl/openssl.c:7683:8    - Unknown word (zstrong)            -- zval *zstrong_result_returned = NULL
+./ext/openssl/openssl.c:7673:8    - Unknown word (zstrong)            -- zval *zstrong_result_returned = NULL
 ./ext/openssl/openssl.c:795:65    - Unknown word (overcorrect)     -- Otherwise, we need to overcorrect and
 ./ext/openssl/openssl.c:813:13    - Unknown word (nconf)           -- X509V3_set_nconf(&ctx, config);
 ./ext/openssl/openssl.c:830:14    - Unknown word (NCONF)           -- char *str = NCONF_get_string(conf, group
@@ -4675,10 +4683,10 @@ Lines:
 ./ext/openssl/xp_ssl.c:736:64    - Unknown word (UNTRUSTEDROOT) -- status.dwError == CERT_E_UNTRUSTEDROOT
 ./ext/pcntl/pcntl.c:133:8     - Unknown word (SIGSTKFLT)  -- #ifdef SIGSTKFLT
 ./ext/pcntl/pcntl.c:136:8     - Unknown word (SIGCLD)     -- #ifdef SIGCLD
-./ext/pcntl/pcntl.c:1555:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
-./ext/pcntl/pcntl.c:1560:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
-./ext/pcntl/pcntl.c:1577:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
+./ext/pcntl/pcntl.c:1588:15   - Unknown word (RFMEM)       -- if ((flags & RFMEM) != 0) {
+./ext/pcntl/pcntl.c:1593:15   - Unknown word (RFSIGSHARE)  -- if ((flags & RFSIGSHARE) != 0) {
 ./ext/pcntl/pcntl.c:159:8     - Unknown word (SIGPWR)     -- #ifdef SIGPWR
+./ext/pcntl/pcntl.c:1610:12   - Unknown word (RFTSIGFLAGS) -- flags |= RFTSIGFLAGS(csignal);
 ./ext/pcntl/pcntl.c:164:26    - Unknown word (SIGBABY)    -- REGISTER_LONG_CONSTANT("SIGBABY", (zend_long) SIGSYS
 ./ext/pcntl/pcntl.c:166:8     - Unknown word (SIGRTMIN)   -- #ifdef SIGRTMIN
 ./ext/pcntl/pcntl.c:169:8     - Unknown word (SIGRTMAX)   -- #ifdef SIGRTMAX
@@ -6646,56 +6654,57 @@ Lines:
 ./ext/pdo_sqlite/php_pdo_sqlite_int.h:42:31     - Unknown word (astep)      -- pdo_sqlite_fci afunc, astep, afini;
 ./ext/pdo_sqlite/php_pdo_sqlite_int.h:42:38     - Unknown word (afini)      -- sqlite_fci afunc, astep, afini;
 ./ext/pdo_sqlite/sqlite_driver.c:574:36    - Unknown word (rownumber)  -- mixed $context, int $rownumber, $value [, $value2
-./ext/pdo_sqlite/sqlite_driver.c:763:29    - Unknown word (autharg)    -- int authorizer(void *autharg, int access_type, const
-./ext/pgsql/pgsql.c:1260:16   - Unknown word (stmtname)     -- char *query, *stmtname;
-./ext/pgsql/pgsql.c:1557:47   - Unknown word (typname)      -- PQexec(pgsql, "select oid,typname from pg_type");
-./ext/pgsql/pgsql.c:1566:20   - Unknown word (Qfnumber)     -- int oid_offset = PQfnumber(result,"oid");
-./ext/pgsql/pgsql.c:1598:12   - Unknown word (fnum)         -- zend_long fnum = -1;
+./ext/pdo_sqlite/sqlite_driver.c:766:29    - Unknown word (autharg)    -- int authorizer(void *autharg, int access_type, const
+./ext/pgsql/pgsql.c:1160:16   - Unknown word (stmtname)   -- char *query, *stmtname;
+./ext/pgsql/pgsql.c:1457:47   - Unknown word (typname)    -- PQexec(pgsql, "select oid,typname from pg_type");
+./ext/pgsql/pgsql.c:1466:20   - Unknown word (Qfnumber)   -- int oid_offset = PQfnumber(result,"oid");
+./ext/pgsql/pgsql.c:1498:12   - Unknown word (fnum)       -- zend_long fnum = -1;
 ./ext/pgsql/pgsql.c:16:15     - Unknown word (Youichi)    -- | Youichi Iwakiri <yiwakiri@st
 ./ext/pgsql/pgsql.c:16:23     - Unknown word (Iwakiri)    -- | Youichi Iwakiri <yiwakiri@st.rim.or
-./ext/pgsql/pgsql.c:2302:3    - Unknown word (Quntrace)     -- PQuntrace(pgsql);
-./ext/pgsql/pgsql.c:240:17    - Unknown word (Lofp)       -- static inline pgLofp *pgsql_lob_from_obj
-./ext/pgsql/pgsql.c:2450:26   - Unknown word (lofd)         -- pgsql_mode=0, pgsql_lofd;
-./ext/pgsql/pgsql.c:263:10    - Unknown word (lofp)       -- pgLofp *lofp = pgsql_lob_from_obj
-./ext/pgsql/pgsql.c:3024:12   - Unknown word (Qendcopy)     -- result = PQendcopy(pgsql);
-./ext/pgsql/pgsql.c:3060:12   - Unknown word (Qputline)     -- result = PQputline(pgsql, query);
-./ext/pgsql/pgsql.c:3126:9    - Unknown word (copydone)     -- int copydone = 0;
-./ext/pgsql/pgsql.c:3245:20   - Unknown word (putcopyend)   -- PHP_PQ_ERROR("putcopyend failed: %s", pgsql)
-./ext/pgsql/pgsql.c:3453:12   - Unknown word (fieldcode)    -- zend_long fieldcode;
-./ext/pgsql/pgsql.c:3659:21   - Unknown word (Qisnonblocking) -- is_non_blocking = PQisnonblocking(pgsql);
-./ext/pgsql/pgsql.c:3876:17   - Unknown word (prevriously)    -- /* {{{ Executes prevriously prepared stmtname asynchronou
-./ext/pgsql/pgsql.c:4280:100  - Unknown word (typtype)        -- atthasdef, a.attndims, t.typtype, "
-./ext/pgsql/pgsql.c:4280:30   - Unknown word (attnum)         -- SELECT a.attname, a.attnum, t.typname, a.attlen
-./ext/pgsql/pgsql.c:4280:51   - Unknown word (attlen)         -- attnum, t.typname, a.attlen, a.attnotNULL, a.atthasdef
-./ext/pgsql/pgsql.c:4280:61   - Unknown word (attnot)         -- typname, a.attlen, a.attnotNULL, a.atthasdef, a
-./ext/pgsql/pgsql.c:4280:75   - Unknown word (atthasdef)      -- attlen, a.attnotNULL, a.atthasdef, a.attndims, t.typtype
-./ext/pgsql/pgsql.c:4280:88   - Unknown word (attndims)       -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
-./ext/pgsql/pgsql.c:4283:37   - Unknown word (attrelid)       -- pg_attribute a ON (a.attrelid = c.oid) "
-./ext/pgsql/pgsql.c:4284:32   - Unknown word (atttypid)       -- JOIN pg_type t ON (a.atttypid = t.oid) "
-./ext/pgsql/pgsql.c:4285:37   - Unknown word (relnamespace)   -- pg_namespace n ON (c.relnamespace = n.oid) "
-./ext/pgsql/pgsql.c:4286:44   - Unknown word (objoid)         -- description d ON (d.objoid=a.attrelid AND d.objsubid
-./ext/pgsql/pgsql.c:4286:68   - Unknown word (objsubid)       -- objoid=a.attrelid AND d.objsubid=a.attnum AND c.oid=d
-./ext/pgsql/pgsql.c:4290:61   - Unknown word (attnotnull)     -- typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims
-./ext/pgsql/pgsql.c:4304:40   - Unknown word (nspname)        -- &querystr, "' AND n.nspname = '");
-./ext/pgsql/pgsql.c:4334:19   - Unknown word (attnonull)      -- /* pg_attribute.attnonull */
-./ext/pgsql/pgsql.c:4346:33   - Unknown word (pesudo)         -- assoc_bool_ex(&elem, "is pesudo", sizeof("is pesudo
-./ext/pgsql/pgsql.c:4424:45   - Unknown word (bpchar)         -- literal(type_name, "bpchar") || zend_string_equals
-./ext/pgsql/pgsql.c:4433:45   - Unknown word (tinterval)      -- literal(type_name, "tinterval"))
-./ext/pgsql/pgsql.c:4439:109  - Unknown word (timetz)         -- literal(type_name, "timetz"))
-./ext/pgsql/pgsql.c:4443:114  - Unknown word (timestamptz)    -- literal(type_name, "timestamptz"))
-./ext/pgsql/pgsql.c:4461:13   - Unknown word (VARBIT)         -- return PG_VARBIT;
-./ext/pgsql/pgsql.c:4465:45   - Unknown word (lseg)           -- literal(type_name, "lseg"))
-./ext/pgsql/pgsql.c:4466:13   - Unknown word (LSEG)           -- return PG_LSEG;
-./ext/pgsql/pgsql.c:4690:70   - Unknown word (boolelan)       -- string, null, long or boolelan value for PostgreSQL
-./ext/pgsql/pgsql.c:4749:33   - Unknown word (inity)          -- REGEX1 "^[+-]{0,1}(inf)(inity){0,1}$"
-./ext/pgsql/pgsql.c:4788:37   - Unknown word (valitions)      -- feel free to add more valitions. Invalid query fails
-./ext/pgsql/pgsql.c:4850:22   - Unknown word (actallay)       -- /* these are the actallay a integer */
-./ext/pgsql/pgsql.c:509:47    - Unknown word (PQERRORS)   -- PGSQL_ERRORS_TERSE", PQERRORS_TERSE, CONST_CS | CONST
-./ext/pgsql/pgsql.c:5271:26   - Unknown word (tablename)      -- static inline void build_tablename(smart_str *querystr
-./ext/pgsql/pgsql.c:560:25    - Unknown word (NONLOCALIZED) -- ifdef PG_DIAG_SEVERITY_NONLOCALIZED
-./ext/pgsql/pgsql.c:631:8     - Unknown word (connstring)   -- char *connstring;
-./ext/pgsql/pgsql.c:918:31    - Unknown word (protorol)     -- or grater supports protorol version 3 */
-./ext/pgsql/pgsql.c:933:32    - Unknown word (datetimes)    -- COPY_PARAM("integer_datetimes");
+./ext/pgsql/pgsql.c:2202:3    - Unknown word (Quntrace)   -- PQuntrace(pgsql);
+./ext/pgsql/pgsql.c:2350:26   - Unknown word (lofd)       -- pgsql_mode=0, pgsql_lofd;
+./ext/pgsql/pgsql.c:243:17    - Unknown word (Lofp)       -- static inline pgLofp *pgsql_lob_from_obj
+./ext/pgsql/pgsql.c:266:10    - Unknown word (lofp)       -- pgLofp *lofp = pgsql_lob_from_obj
+./ext/pgsql/pgsql.c:2924:12   - Unknown word (Qendcopy)   -- result = PQendcopy(pgsql);
+./ext/pgsql/pgsql.c:2960:12   - Unknown word (Qputline)   -- result = PQputline(pgsql, query);
+./ext/pgsql/pgsql.c:3026:9    - Unknown word (copydone)   -- int copydone = 0;
+./ext/pgsql/pgsql.c:3145:20   - Unknown word (putcopyend) -- PHP_PQ_ERROR("putcopyend failed: %s", pgsql)
+./ext/pgsql/pgsql.c:3353:12   - Unknown word (fieldcode)  -- zend_long fieldcode;
+./ext/pgsql/pgsql.c:3559:21   - Unknown word (Qisnonblocking) -- is_non_blocking = PQisnonblocking(pgsql);
+./ext/pgsql/pgsql.c:3776:17   - Unknown word (prevriously)    -- /* {{{ Executes prevriously prepared stmtname asynchronou
+./ext/pgsql/pgsql.c:4180:100  - Unknown word (typtype)        -- atthasdef, a.attndims, t.typtype, "
+./ext/pgsql/pgsql.c:4180:30   - Unknown word (attnum)         -- SELECT a.attname, a.attnum, t.typname, a.attlen
+./ext/pgsql/pgsql.c:4180:51   - Unknown word (attlen)         -- attnum, t.typname, a.attlen, a.attnotNULL, a.atthasdef
+./ext/pgsql/pgsql.c:4180:61   - Unknown word (attnot)         -- typname, a.attlen, a.attnotNULL, a.atthasdef, a
+./ext/pgsql/pgsql.c:4180:75   - Unknown word (atthasdef)      -- attlen, a.attnotNULL, a.atthasdef, a.attndims, t.typtype
+./ext/pgsql/pgsql.c:4180:88   - Unknown word (attndims)       -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
+./ext/pgsql/pgsql.c:4183:37   - Unknown word (attrelid)       -- pg_attribute a ON (a.attrelid = c.oid) "
+./ext/pgsql/pgsql.c:4184:32   - Unknown word (atttypid)       -- JOIN pg_type t ON (a.atttypid = t.oid) "
+./ext/pgsql/pgsql.c:4185:37   - Unknown word (relnamespace)   -- pg_namespace n ON (c.relnamespace = n.oid) "
+./ext/pgsql/pgsql.c:4186:44   - Unknown word (objoid)         -- description d ON (d.objoid=a.attrelid AND d.objsubid
+./ext/pgsql/pgsql.c:4186:68   - Unknown word (objsubid)       -- objoid=a.attrelid AND d.objsubid=a.attnum AND c.oid=d
+./ext/pgsql/pgsql.c:4190:61   - Unknown word (attnotnull)     -- typname, a.attlen, a.attnotnull, a.atthasdef, a.attndims
+./ext/pgsql/pgsql.c:4204:40   - Unknown word (nspname)        -- &querystr, "' AND n.nspname = '");
+./ext/pgsql/pgsql.c:4234:19   - Unknown word (attnonull)      -- /* pg_attribute.attnonull */
+./ext/pgsql/pgsql.c:4246:33   - Unknown word (pesudo)         -- assoc_bool_ex(&elem, "is pesudo", sizeof("is pesudo
+./ext/pgsql/pgsql.c:4324:45   - Unknown word (bpchar)         -- literal(type_name, "bpchar") || zend_string_equals
+./ext/pgsql/pgsql.c:4333:45   - Unknown word (tinterval)      -- literal(type_name, "tinterval"))
+./ext/pgsql/pgsql.c:4339:109  - Unknown word (timetz)         -- literal(type_name, "timetz"))
+./ext/pgsql/pgsql.c:4343:114  - Unknown word (timestamptz)    -- literal(type_name, "timestamptz"))
+./ext/pgsql/pgsql.c:4361:13   - Unknown word (VARBIT)         -- return PG_VARBIT;
+./ext/pgsql/pgsql.c:4365:45   - Unknown word (lseg)           -- literal(type_name, "lseg"))
+./ext/pgsql/pgsql.c:4366:13   - Unknown word (LSEG)           -- return PG_LSEG;
+./ext/pgsql/pgsql.c:4590:70   - Unknown word (boolelan)       -- string, null, long or boolelan value for PostgreSQL
+./ext/pgsql/pgsql.c:4649:33   - Unknown word (inity)          -- REGEX1 "^[+-]{0,1}(inf)(inity){0,1}$"
+./ext/pgsql/pgsql.c:4688:37   - Unknown word (valitions)      -- feel free to add more valitions. Invalid query fails
+./ext/pgsql/pgsql.c:4750:22   - Unknown word (actallay)       -- /* these are the actallay a integer */
+./ext/pgsql/pgsql.c:5171:26   - Unknown word (tablename)      -- static inline void build_tablename(smart_str *querystr
+./ext/pgsql/pgsql.c:533:8     - Unknown word (connstring) -- char *connstring;
+./ext/pgsql/pgsql.c:818:31    - Unknown word (protorol)   -- or grater supports protorol version 3 */
+./ext/pgsql/pgsql.c:833:32    - Unknown word (datetimes)  -- COPY_PARAM("integer_datetimes");
+./ext/pgsql/pgsql.stub.php:12:17     - Unknown word (LIBPQ)      -- const PGSQL_LIBPQ_VERSION = UNKNOWN;
+./ext/pgsql/pgsql.stub.php:374:22    - Unknown word (CONV)       -- * @cvalue PGSQL_CONV_IGNORE_DEFAULT
+./ext/pgsql/pgsql.stub.php:6:8       - Unknown word (libpq)      -- /* libpq version */
 ./ext/pgsql/pgsql_arginfo.h:101:20    - Unknown word (fieldname)    -- #define arginfo_pg_fieldname arginfo_pg_field_name
 ./ext/pgsql/pgsql_arginfo.h:173:58    - Unknown word (prtlen)       -- EX(arginfo_pg_field_prtlen, 0, 2, MAY_BE_LONG|MAY
 ./ext/pgsql/pgsql_arginfo.h:179:20    - Unknown word (fieldprtlen)  -- #define arginfo_pg_fieldprtlen arginfo_pg_field_prtlen
@@ -6711,6 +6720,8 @@ Lines:
 ./ext/pgsql/pgsql_arginfo.h:260:20    - Unknown word (loimport)     -- #define arginfo_pg_loimport arginfo_pg_lo_import
 ./ext/pgsql/pgsql_arginfo.h:268:20    - Unknown word (loexport)     -- #define arginfo_pg_loexport arginfo_pg_lo_export
 ./ext/pgsql/pgsql_arginfo.h:297:20    - Unknown word (clientencoding) -- #define arginfo_pg_clientencoding arginfo_pg_dbname
+./ext/pgsql/pgsql_arginfo.h:709:47    - Unknown word (PQERRORS)       -- PGSQL_ERRORS_TERSE", PQERRORS_TERSE, CONST_CS | CONST
+./ext/pgsql/pgsql_arginfo.h:756:30    - Unknown word (NONLOCALIZED)   -- defined(PG_DIAG_SEVERITY_NONLOCALIZED)
 ./ext/pgsql/pgsql_arginfo.h:79:20     - Unknown word (numfields)    -- #define arginfo_pg_numfields arginfo_pg_num_rows
 ./ext/pgsql/pgsql_arginfo.h:83:20     - Unknown word (cmdtuples)    -- #define arginfo_pg_cmdtuples arginfo_pg_num_rows
 ./ext/pgsql/php_pgsql.h:134:5     - Unknown word (geometoric) -- /* geometoric */
@@ -6910,17 +6921,17 @@ Lines:
 ./ext/random/engine_xoshiro256starstar.c:170:22    - Unknown word (Xoshiro)    -- * {{{ Random\Engine\Xoshiro256StarStar::jump()
 ./ext/random/engine_xoshiro256starstar.c:30:24     - Unknown word (splitmix)   -- static inline uint64_t splitmix64(uint64_t *seed)
 ./ext/random/engine_xoshiro256starstar.c:45:63     - Unknown word (xoshiro)    -- random_status_state_xoshiro256starstar *s)
-./ext/random/php_random.h:254:28    - Unknown word (randomizer) -- typedef struct _php_random_randomizer {
-./ext/random/php_random.h:268:50    - Unknown word (Randomizer) -- entry *random_ce_Random_Randomizer;
-./ext/random/php_random.h:280:19    - Unknown word (RANDOMIZER) -- # define Z_RANDOM_RANDOMIZER_P(zval) php_random_randomizer
-./ext/random/php_random.h:293:48    - Unknown word (hexstr)     -- bin_le(zend_string *hexstr, void *dest);
-./ext/random/random.c:346:40    - Unknown word (hexconvtab)   -- , static const char hexconvtab[]) = "0123456789abcdef
-./ext/random/random.c:485:18    - Unknown word (silented)     -- * a status but silented to respect the "no fail
-./ext/random/random.c:499:41    - Unknown word (getrandom)    -- linux__) && defined(SYS_getrandom)) || (defined(__FreeBSD
-./ext/random/random.c:557:11    - Unknown word (ISNAM)        -- # ifdef S_ISNAM
+./ext/random/php_random.h:253:28    - Unknown word (randomizer) -- typedef struct _php_random_randomizer {
+./ext/random/php_random.h:267:50    - Unknown word (Randomizer) -- entry *random_ce_Random_Randomizer;
+./ext/random/php_random.h:279:19    - Unknown word (RANDOMIZER) -- # define Z_RANDOM_RANDOMIZER_P(zval) php_random_randomizer
+./ext/random/php_random.h:292:48    - Unknown word (hexstr)     -- bin_le(zend_string *hexstr, void *dest);
+./ext/random/random.c:342:40    - Unknown word (hexconvtab)   -- , static const char hexconvtab[]) = "0123456789abcdef
+./ext/random/random.c:481:18    - Unknown word (silented)     -- * a status but silented to respect the "no fail
+./ext/random/random.c:495:41    - Unknown word (getrandom)    -- linux__) && defined(SYS_getrandom)) || (defined(__FreeBSD
+./ext/random/random.c:562:11    - Unknown word (ISNAM)        -- # ifdef S_ISNAM
 ./ext/random/random.c:57:23     - Unknown word (COMMONRANDOM) -- if HAVE_COMMONCRYPTO_COMMONRANDOM_H
-./ext/random/random.c:677:6     - Unknown word (genrand)      -- /* genrand_int31 in mt19937ar.c
-./ext/random/random.c:829:22    - Unknown word (Onseq)        -- /* Random\Engine\PcgOnseq128XslRr64 */
+./ext/random/random.c:691:6     - Unknown word (genrand)      -- /* genrand_int31 in mt19937ar.c
+./ext/random/random.c:843:22    - Unknown word (Onseq)        -- /* Random\Engine\PcgOnseq128XslRr64 */
 ./ext/random/randomizer.c:66:7      - Unknown word (zengine)    -- zval zengine_object;
 ./ext/readline/README.md:11:48     - Unknown word (libedit)    -- to variables from the libedit library).
 ./ext/readline/README.md:1:1       - Unknown word (readline)   -- readline
@@ -6988,18 +6999,22 @@ Lines:
 ./ext/snmp/php_snmp.h:18:20     - Unknown word (Lytockin)   -- | Boris Lytockin <lytboris@gmail.com
 ./ext/snmp/php_snmp.h:50:6      - Unknown word (valueretrieval) -- int valueretrieval;
 ./ext/snmp/php_snmp.h:77:17     - Unknown word (snmpobjarg)     -- typedef struct _snmpobjarg {
-./ext/snmp/snmp.c:1066:24   - Unknown word (eout)        -- size_t ebuf_len = 32, eout_len = 0;
-./ext/snmp/snmp.c:1155:11   - Unknown word (orignames)   -- bool use_orignames = 0, suffix_keys =
-./ext/snmp/snmp.c:1944:7    - Unknown word (ztmp)        -- zval ztmp; \
-./ext/snmp/snmp.c:2020:13   - Unknown word (snmpapp)     -- init_snmp("snmpapp");
-./ext/snmp/snmp.c:2029:53   - Unknown word (variabled)   -- status'es and related variabled to detect errors */
-./ext/snmp/snmp.c:257:65    - Unknown word (snmpval)    -- variable_list *vars, zval *snmpval, int valueretrieval
-./ext/snmp/snmp.c:262:8     - Unknown word (dbuf)       -- char *dbuf = (char *)NULL;
-./ext/snmp/snmp.c:406:9     - Unknown word (rootlen)    -- size_t rootlen = 0;
-./ext/snmp/snmp.c:410:7     - Unknown word (keepwalking) -- bool keepwalking = true;
-./ext/snmp/snmp.c:818:20    - Unknown word (psal)        -- struct sockaddr **psal;
-./ext/snmp/snmp.c:929:100   - Unknown word (nanp)        -- equals_literal_ci(level, "nanp")) {
-./ext/snmp/snmp.stub.php:80:22     - Unknown word (oids)       -- public ?int $max_oids;
+./ext/snmp/snmp.c:1046:24   - Unknown word (eout)        -- size_t ebuf_len = 32, eout_len = 0;
+./ext/snmp/snmp.c:1135:11   - Unknown word (orignames)   -- bool use_orignames = 0, suffix_keys =
+./ext/snmp/snmp.c:1924:7    - Unknown word (ztmp)        -- zval ztmp; \
+./ext/snmp/snmp.c:2000:13   - Unknown word (snmpapp)     -- init_snmp("snmpapp");
+./ext/snmp/snmp.c:2009:53   - Unknown word (variabled)   -- status'es and related variabled to detect errors */
+./ext/snmp/snmp.c:237:65    - Unknown word (snmpval)    -- variable_list *vars, zval *snmpval, int valueretrieval
+./ext/snmp/snmp.c:242:8     - Unknown word (dbuf)       -- char *dbuf = (char *)NULL;
+./ext/snmp/snmp.c:386:9     - Unknown word (rootlen)    -- size_t rootlen = 0;
+./ext/snmp/snmp.c:390:7     - Unknown word (keepwalking) -- bool keepwalking = true;
+./ext/snmp/snmp.c:798:20    - Unknown word (psal)        -- struct sockaddr **psal;
+./ext/snmp/snmp.c:909:100   - Unknown word (nanp)        -- equals_literal_ci(level, "nanp")) {
+./ext/snmp/snmp.stub.php:250:22    - Unknown word (oids)       -- public ?int $max_oids;
+./ext/snmp/snmp.stub.php:79:16     - Unknown word (IPADDRESS)  -- * @cvalue ASN_IPADDRESS
+./ext/snmp/snmp.stub.php:7:12      - Unknown word (NETSNMP)    -- * @cvalue NETSNMP_OID_OUTPUT_SUFFIX
+./ext/snmp/snmp.stub.php:94:16     - Unknown word (TIMETICKS)  -- * @cvalue ASN_TIMETICKS
+./ext/snmp/snmp.stub.php:99:16     - Unknown word (UINTEGER)   -- * @cvalue ASN_UINTEGER
 ./ext/snmp/snmp_arginfo.h:12:17     - Unknown word (snmpgetnext) -- #define arginfo_snmpgetnext arginfo_snmpget
 ./ext/snmp/snmp_arginfo.h:14:49     - Unknown word (snmpwalk)    -- TYPE_MASK_EX(arginfo_snmpwalk, 0, 3, MAY_BE_ARRAY
 ./ext/snmp/snmp_arginfo.h:22:17     - Unknown word (snmprealwalk) -- #define arginfo_snmprealwalk arginfo_snmpwalk
@@ -7090,21 +7105,31 @@ Lines:
 ./ext/soap/php_xml.h:44:37     - Unknown word (FOREACHATTRNODEEX) -- FOREACHATTRNODE(n,c,i) FOREACHATTRNODEEX(n,c,NULL,i)
 ./ext/soap/php_xml.h:44:9      - Unknown word (FOREACHATTRNODE) -- #define FOREACHATTRNODE(n,c,i) FOREACHATTRNODEEX
 ./ext/soap/php_xml.h:58:33     - Unknown word (FOREACHNODEEX)     -- FOREACHNODE(n,c,i) FOREACHNODEEX(n,c,NULL,i)
-./ext/soap/soap.c:1425:40   - Unknown word (happned)          -- session or something weird happned */
+./ext/soap/soap.c:1329:40   - Unknown word (happned)          -- session or something weird happned */
 ./ext/soap/soap.c:158:17    - Unknown word (CODENS)     -- #define Z_FAULT_CODENS_P(zv) php_soap_deref
 ./ext/soap/soap.c:162:17    - Unknown word (HEADERFAULT) -- #define Z_FAULT_HEADERFAULT_P(zv) php_soap_deref
-./ext/soap/soap.c:1856:44   - Unknown word (detials)          -- buffer and send as fault detials */
-./ext/soap/soap.c:1857:10   - Unknown word (outbuflen)        -- zval outbuflen;
-./ext/soap/soap.c:2057:50   - Unknown word (gzdeflate)        -- EG(function_table), "gzdeflate", sizeof("gzdeflate
-./ext/soap/soap.c:2714:20   - Unknown word (thet)             -- /* {{{ Sets cookie thet will sent with SOAP
-./ext/soap/soap.c:3552:16   - Unknown word (sparam)           -- sdlParamPtr sparam;
-./ext/soap/soap.c:3794:17   - Unknown word (zuse)             -- zval *zstyle, *zuse;
-./ext/soap/soap.c:3794:8    - Unknown word (zstyle)           -- zval *zstyle, *zuse;
-./ext/soap/soap.c:687:52    - Unknown word (gettraceasstring) -- P(ZEND_THIS), NULL, "gettraceasstring", &trace);
-./ext/soap/soap.stub.php:100:14    - Unknown word (typemap)    -- private $typemap = null;
-./ext/soap/soap.stub.php:47:25     - Unknown word (stype)      -- public ?string $enc_stype = null;
-./ext/soap/soap_arginfo.h:317:16    - Unknown word (faultcodens) -- zval property_faultcodens_default_value;
-./ext/soap/soap_arginfo.h:468:16    - Unknown word (httpsocket)  -- zval property_httpsocket_default_value;
+./ext/soap/soap.c:1760:44   - Unknown word (detials)          -- buffer and send as fault detials */
+./ext/soap/soap.c:1761:10   - Unknown word (outbuflen)        -- zval outbuflen;
+./ext/soap/soap.c:1961:50   - Unknown word (gzdeflate)        -- EG(function_table), "gzdeflate", sizeof("gzdeflate
+./ext/soap/soap.c:2618:20   - Unknown word (thet)             -- /* {{{ Sets cookie thet will sent with SOAP
+./ext/soap/soap.c:3456:16   - Unknown word (sparam)           -- sdlParamPtr sparam;
+./ext/soap/soap.c:3698:17   - Unknown word (zuse)             -- zval *zstyle, *zuse;
+./ext/soap/soap.c:3698:8    - Unknown word (zstyle)           -- zval *zstyle, *zuse;
+./ext/soap/soap.c:591:52    - Unknown word (gettraceasstring) -- P(ZEND_THIS), NULL, "gettraceasstring", &trace);
+./ext/soap/soap.stub.php:149:16    - Unknown word (GYEARMONTH) -- * @cvalue XSD_GYEARMONTH
+./ext/soap/soap.stub.php:154:16    - Unknown word (GYEAR)      -- * @cvalue XSD_GYEAR
+./ext/soap/soap.stub.php:159:16    - Unknown word (GMONTHDAY)  -- * @cvalue XSD_GMONTHDAY
+./ext/soap/soap.stub.php:164:16    - Unknown word (GDAY)       -- * @cvalue XSD_GDAY
+./ext/soap/soap.stub.php:169:16    - Unknown word (GMONTH)     -- * @cvalue XSD_GMONTH
+./ext/soap/soap.stub.php:174:16    - Unknown word (HEXBINARY)  -- * @cvalue XSD_HEXBINARY
+./ext/soap/soap.stub.php:184:16    - Unknown word (ANYURI)     -- * @cvalue XSD_ANYURI
+./ext/soap/soap.stub.php:189:16    - Unknown word (QNAME)      -- * @cvalue XSD_QNAME
+./ext/soap/soap.stub.php:225:16    - Unknown word (NCNAME)     -- * @cvalue XSD_NCNAME
+./ext/soap/soap.stub.php:325:16    - Unknown word (ANYTYPE)    -- * @cvalue XSD_ANYTYPE
+./ext/soap/soap.stub.php:470:25    - Unknown word (stype)      -- public ?string $enc_stype = null;
+./ext/soap/soap.stub.php:523:14    - Unknown word (typemap)    -- private $typemap = null;
+./ext/soap/soap_arginfo.h:402:16    - Unknown word (faultcodens) -- zval property_faultcodens_default_value;
+./ext/soap/soap_arginfo.h:553:16    - Unknown word (httpsocket)  -- zval property_httpsocket_default_value;
 ./ext/sockets/conversions.c:1159:13   - Unknown word (falsev)     -- const int		falsev = 0,
 ./ext/sockets/conversions.c:1160:7    - Unknown word (falsevp)    -- *falsevp = &falsev;
 ./ext/sockets/conversions.c:1253:15   - Unknown word (SIOCGIFINDEX) -- #elif defined(SIOCGIFINDEX)
@@ -7141,28 +7166,28 @@ Lines:
 ./ext/sockets/sendrecvmsg.c:87:23     - Unknown word (registery)  -- static void ancillary_registery_free_elem(zval *el)
 ./ext/sockets/sendrecvmsg.h:1:13      - Unknown word (SENDRECVMSG) -- #ifndef PHP_SENDRECVMSG_H
 ./ext/sockets/sockaddr_conv.h:1:13      - Unknown word (SOCKADR)    -- #ifndef PHP_SOCKADR_CONV_H
-./ext/sockets/sockets.c:1194:11   - Unknown word (addrbuf)      -- char addrbuf[INET6_ADDRSTRLEN];
-./ext/sockets/sockets.c:1574:46   - Unknown word (Ozll)         -- parameters(ZEND_NUM_ARGS(), "Ozll", &php_sock_res, socket
-./ext/sockets/sockets.c:1615:46   - Unknown word (Osll)         -- parameters(ZEND_NUM_ARGS(), "Osll", &arg1, socket_ce,
-./ext/sockets/sockets.c:1657:46   - Unknown word (Ozllz)        -- parameters(ZEND_NUM_ARGS(), "Ozllz|z", &arg1, socket_ce
-./ext/sockets/sockets.c:1665:5    - Unknown word (Shouldthrow)  -- /* Shouldthrow ? */
-./ext/sockets/sockets.c:1776:46   - Unknown word (Oslls)        -- parameters(ZEND_NUM_ARGS(), "Oslls|l!", &arg1, socket_ce
-./ext/sockets/sockets.c:1975:35   - Unknown word (rmem)         -- long(return_value, "rmem_alloc", minfo[SK_MEMINFO
-./ext/sockets/sockets.c:1975:65   - Unknown word (RMEM)         -- alloc", minfo[SK_MEMINFO_RMEM_ALLOC]);
-./ext/sockets/sockets.c:1977:35   - Unknown word (wmem)         -- long(return_value, "wmem_alloc", minfo[SK_MEMINFO
-./ext/sockets/sockets.c:1977:65   - Unknown word (WMEM)         -- alloc", minfo[SK_MEMINFO_WMEM_ALLOC]);
-./ext/sockets/sockets.c:1981:35   - Unknown word (optmem)       -- long(return_value, "optmem", minfo[SK_MEMINFO_OPTMEM
-./ext/sockets/sockets.c:1981:61   - Unknown word (OPTMEM)       -- optmem", minfo[SK_MEMINFO_OPTMEM]);
-./ext/sockets/sockets.c:2040:46   - Unknown word (Ollz)         -- parameters(ZEND_NUM_ARGS(), "Ollz", &arg1, socket_ce,
-./ext/sockets/sockets.c:2049:16   - Unknown word (SUBCALL)      -- #define HANDLE_SUBCALL(res) \
-./ext/sockets/sockets.c:2209:46   - Unknown word (lllz)         -- parameters(ZEND_NUM_ARGS(), "lllz", &domain, &type, &protocol
-./ext/sockets/sockets.c:2429:9    - Unknown word (protocollen)  -- size_t protocollen = 0;
-./ext/sockets/sockets.c:2451:7    - Unknown word (protoid)      -- int protoid;
-./ext/sockets/sockets.c:2452:13   - Unknown word (protoidlen)   -- socklen_t protoidlen = sizeof(protoid);
-./ext/sockets/sockets.c:2488:45   - Unknown word (sockops)      -- with the registered sockops for the protocol in
-./ext/sockets/sockets.c:2523:15   - Unknown word (zhints)       -- zval *hint, *zhints = NULL;
-./ext/sockets/sockets.c:2617:28   - Unknown word (getaddrino)   -- AF_UNIX sockets via getaddrino are not implemented
-./ext/sockets/sockets.c:2767:2    - Unknown word (WSAPROTOCOL)  -- WSAPROTOCOL_INFO wi;
+./ext/sockets/sockets.c:1199:11   - Unknown word (addrbuf)      -- char addrbuf[INET6_ADDRSTRLEN];
+./ext/sockets/sockets.c:1579:46   - Unknown word (Ozll)         -- parameters(ZEND_NUM_ARGS(), "Ozll", &php_sock_res, socket
+./ext/sockets/sockets.c:1620:46   - Unknown word (Osll)         -- parameters(ZEND_NUM_ARGS(), "Osll", &arg1, socket_ce,
+./ext/sockets/sockets.c:1662:46   - Unknown word (Ozllz)        -- parameters(ZEND_NUM_ARGS(), "Ozllz|z", &arg1, socket_ce
+./ext/sockets/sockets.c:1670:5    - Unknown word (Shouldthrow)  -- /* Shouldthrow ? */
+./ext/sockets/sockets.c:1781:46   - Unknown word (Oslls)        -- parameters(ZEND_NUM_ARGS(), "Oslls|l!", &arg1, socket_ce
+./ext/sockets/sockets.c:1980:35   - Unknown word (rmem)         -- long(return_value, "rmem_alloc", minfo[SK_MEMINFO
+./ext/sockets/sockets.c:1980:65   - Unknown word (RMEM)         -- alloc", minfo[SK_MEMINFO_RMEM_ALLOC]);
+./ext/sockets/sockets.c:1982:35   - Unknown word (wmem)         -- long(return_value, "wmem_alloc", minfo[SK_MEMINFO
+./ext/sockets/sockets.c:1982:65   - Unknown word (WMEM)         -- alloc", minfo[SK_MEMINFO_WMEM_ALLOC]);
+./ext/sockets/sockets.c:1986:35   - Unknown word (optmem)       -- long(return_value, "optmem", minfo[SK_MEMINFO_OPTMEM
+./ext/sockets/sockets.c:1986:61   - Unknown word (OPTMEM)       -- optmem", minfo[SK_MEMINFO_OPTMEM]);
+./ext/sockets/sockets.c:2071:46   - Unknown word (Ollz)         -- parameters(ZEND_NUM_ARGS(), "Ollz", &arg1, socket_ce,
+./ext/sockets/sockets.c:2080:16   - Unknown word (SUBCALL)      -- #define HANDLE_SUBCALL(res) \
+./ext/sockets/sockets.c:2257:46   - Unknown word (lllz)         -- parameters(ZEND_NUM_ARGS(), "lllz", &domain, &type, &protocol
+./ext/sockets/sockets.c:2477:9    - Unknown word (protocollen)  -- size_t protocollen = 0;
+./ext/sockets/sockets.c:2499:7    - Unknown word (protoid)      -- int protoid;
+./ext/sockets/sockets.c:2500:13   - Unknown word (protoidlen)   -- socklen_t protoidlen = sizeof(protoid);
+./ext/sockets/sockets.c:2536:45   - Unknown word (sockops)      -- with the registered sockops for the protocol in
+./ext/sockets/sockets.c:2571:15   - Unknown word (zhints)       -- zval *hint, *zhints = NULL;
+./ext/sockets/sockets.c:2665:28   - Unknown word (getaddrino)   -- AF_UNIX sockets via getaddrino are not implemented
+./ext/sockets/sockets.c:2815:2    - Unknown word (WSAPROTOCOL)  -- WSAPROTOCOL_INFO wi;
 ./ext/sockets/sockets.c:496:12    - Unknown word (ERRQUEUE)   -- #ifdef MSG_ERRQUEUE
 ./ext/sockets/sockets.c:508:12    - Unknown word (WAITFORONE) -- #ifdef MSG_WAITFORONE
 ./ext/sockets/sockets.c:514:12    - Unknown word (ZEROCOPY)   -- #ifdef MSG_ZEROCOPY
@@ -7170,10 +7195,10 @@ Lines:
 ./ext/sockets/sockets.c:545:29    - Unknown word (LISTENQLIMIT) -- REGISTER_LONG_CONSTANT("SO_LISTENQLIMIT", SO_LISTENQLIMIT
 ./ext/sockets/sockets.c:546:29    - Unknown word (LISTENQLEN)   -- REGISTER_LONG_CONSTANT("SO_LISTENQLEN", SO_LISTENQLEN
 ./ext/sockets/sockets.c:549:11    - Unknown word (SETFIB)       -- #ifdef SO_SETFIB
-./ext/sockets/sockets.c:590:15    - Unknown word (NLATTR)       -- #ifdef SKF_AD_NLATTR
-./ext/sockets/sockets.c:605:15    - Unknown word (RXHASH)       -- #ifdef SKF_AD_RXHASH
-./ext/sockets/sockets.c:626:20    - Unknown word (TPID)         -- #ifdef SKF_AD_VLAN_TPID
-./ext/sockets/sockets.c:711:29    - Unknown word (CANONIDN)     -- REGISTER_LONG_CONSTANT("AI_CANONIDN", AI_CANONIDN,		CONST
+./ext/sockets/sockets.c:595:15    - Unknown word (NLATTR)       -- #ifdef SKF_AD_NLATTR
+./ext/sockets/sockets.c:610:15    - Unknown word (RXHASH)       -- #ifdef SKF_AD_RXHASH
+./ext/sockets/sockets.c:631:20    - Unknown word (TPID)         -- #ifdef SKF_AD_VLAN_TPID
+./ext/sockets/sockets.c:716:29    - Unknown word (CANONIDN)     -- REGISTER_LONG_CONSTANT("AI_CANONIDN", AI_CANONIDN,		CONST
 ./ext/sockets/sockets.stub.php:123:17    - Unknown word (addrinfo)   -- function socket_addrinfo_lookup(string $host
 ./ext/sockets/sockets.stub.php:94:13     - Unknown word (SOCKETPAIR) -- #ifdef HAVE_SOCKETPAIR
 ./ext/sockets/sockets_arginfo.h:194:56    - Unknown word (wsaprotocol) -- MASK_EX(arginfo_socket_wsaprotocol_info_export, 0, 2, MAY
@@ -7302,9 +7327,9 @@ Lines:
 ./ext/spl/spl_directory.c:1402:16   - Unknown word (dpath)          -- zend_string *dpath = zend_string_init(ZSTR
 ./ext/spl/spl_directory.c:1501:34   - Unknown word (LPERMS)         -- intern->file_name, FS_LPERMS, return_value);
 ./ext/spl/spl_directory.c:1520:7    - Unknown word (zpath)          -- zval zpath, zflags;
-./ext/spl/spl_directory.c:2146:46   - Unknown word (maxmemory)      -- strpprintf(0, "php://temp/maxmemory:" ZEND_LONG_FMT, max
-./ext/spl/spl_directory.c:2356:23   - Unknown word (enclo)          -- char *delim = NULL, *enclo = NULL, *esc = NULL
-./ext/spl/spl_directory.c:2525:8    - Unknown word (wouldblock)     -- zval *wouldblock = NULL;
+./ext/spl/spl_directory.c:2152:46   - Unknown word (maxmemory)      -- strpprintf(0, "php://temp/maxmemory:" ZEND_LONG_FMT, max
+./ext/spl/spl_directory.c:2363:23   - Unknown word (enclo)          -- char *delim = NULL, *enclo = NULL, *esc = NULL
+./ext/spl/spl_directory.c:2532:8    - Unknown word (wouldblock)     -- zval *wouldblock = NULL;
 ./ext/spl/spl_directory.c:392:89    - Unknown word (getcurrentline) -- ce->function_table, "getcurrentline", sizeof("getcurrentline
 ./ext/spl/spl_directory.c:46:4      - Unknown word (decalre)    -- /* decalre the class entry */
 ./ext/spl/spl_directory.c:628:15    - Unknown word (pnstr)          -- zend_string *pnstr;
@@ -7358,8 +7383,10 @@ Lines:
 ./ext/sqlite3/sqlite3.c:1146:99   - Unknown word (newoffs)    -- whence, zend_off_t *newoffs)
 ./ext/sqlite3/sqlite3.c:1597:82   - Unknown word (binded)     -- If expanded is true, binded parameters and values
 ./ext/sqlite3/sqlite3.c:209:8     - Unknown word (errtext)    -- char *errtext = NULL;
-./ext/sqlite3/sqlite3.c:2129:6    - Unknown word (authreturn) -- int authreturn = SQLITE_DENY;
-./ext/sqlite3/sqlite3.c:2356:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
+./ext/sqlite3/sqlite3.c:2132:6    - Unknown word (authreturn) -- int authreturn = SQLITE_DENY;
+./ext/sqlite3/sqlite3.c:2359:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
+./ext/sqlite3/sqlite3.stub.php:227:23    - Unknown word (REINDEX)    -- * @cvalue SQLITE_REINDEX
+./ext/sqlite3/sqlite3.stub.php:237:30    - Unknown word (VTABLE)     -- cvalue SQLITE_CREATE_VTABLE
 ./ext/standard/array.c:1384:15   - Unknown word (thash)      -- HashTable *thash;
 ./ext/standard/array.c:2694:57   - Unknown word (lstep)      -- ulong) start - end) / lstep; \
 ./ext/standard/array.c:2708:15   - Unknown word (zhigh)      -- zval *zlow, *zhigh, *zstep = NULL, tmp
@@ -7976,11 +8003,11 @@ Lines:
 ./ext/standard/string.c:3752:61   - Unknown word (SIDD)         -- w128, 4, s128, 16, _SIDD_UBYTE_OPS | _SIDD_CMP
 ./ext/standard/string.c:4143:9    - Unknown word (isheb)        -- #define isheb(c) (((((unsigned
 ./ext/standard/string.c:4145:10   - Unknown word (isnewline)    -- #define _isnewline(c) (((((unsigned char
-./ext/standard/string.c:4570:20   - Unknown word (reallocing)   -- and constantly reallocing */
-./ext/standard/string.c:4693:9    - Unknown word (locp)         -- char *locp = ZSTR_VAL(loc);
-./ext/standard/string.c:5320:12   - Unknown word (mymode)       -- zend_long mymode=0;
-./ext/standard/string.c:5428:16   - Unknown word (currlocdata)  -- struct lconv currlocdata;
-./ext/standard/string.c:5671:13   - Unknown word (cmplt)        -- lt = _mm_cmplt_epi8(in, m_plus_1);
+./ext/standard/string.c:4566:20   - Unknown word (reallocing)   -- and constantly reallocing */
+./ext/standard/string.c:4689:9    - Unknown word (locp)         -- char *locp = ZSTR_VAL(loc);
+./ext/standard/string.c:5316:12   - Unknown word (mymode)       -- zend_long mymode=0;
+./ext/standard/string.c:5424:16   - Unknown word (currlocdata)  -- struct lconv currlocdata;
+./ext/standard/string.c:5667:13   - Unknown word (cmplt)        -- lt = _mm_cmplt_epi8(in, m_plus_1);
 ./ext/standard/string.c:692:21    - Unknown word (bytemask)   -- * Fills a 256-byte bytemask with input. You can
 ./ext/standard/string.c:886:8     - Unknown word (breakchar)  -- char *breakchar = "\n";
 ./ext/standard/string.c:887:9     - Unknown word (newtextlen) -- size_t newtextlen, chk, breakchar_len
@@ -8020,14 +8047,16 @@ Lines:
 ./ext/standard/versioning.c:48:9      - Unknown word (isdig)      -- #define isdig(x) (isdigit(x)&&(x)
 ./ext/standard/versioning.c:49:9      - Unknown word (isndig)     -- #define isndig(x) (!isdigit(x)&&(x
 ./ext/standard/versioning.c:50:9      - Unknown word (isspecialver) -- #define isspecialver(x) ((x)=='-'||(x)==
-./ext/sysvmsg/sysvmsg.c:245:63    - Unknown word (XLONG)      -- Failed for key 0x" ZEND_XLONG_FMT ": %s", key, strerror
-./ext/sysvmsg/sysvmsg.c:276:44    - Unknown word (zerrcode)   -- queue, *out_msgtype, *zerrcode = NULL;
-./ext/sysvmsg/sysvmsg.c:277:12    - Unknown word (desiredmsgtype) -- zend_long desiredmsgtype, maxsize, flags = 0
-./ext/sysvmsg/sysvmsg.c:278:12    - Unknown word (realflags)      -- zend_long realflags = 0;
-./ext/sysvmsg/sysvmsg.c:281:21    - Unknown word (messagebuffer)  -- struct php_msgbuf *messagebuffer = NULL; /* buffer to
-./ext/sysvmsg/sysvmsg.c:286:46    - Unknown word (Olzlz)          -- parameters(ZEND_NUM_ARGS(), "Olzlz|blz",
-./ext/sysvmsg/sysvmsg.c:359:26    - Unknown word (zerror)         -- zval *message, *queue, *zerror=NULL;
-./ext/sysvmsg/sysvmsg.stub.php:9:13      - Unknown word (Sysv)       -- final class SysvMessageQueue
+./ext/sysvmsg/sysvmsg.c:235:63    - Unknown word (XLONG)      -- Failed for key 0x" ZEND_XLONG_FMT ": %s", key, strerror
+./ext/sysvmsg/sysvmsg.c:266:44    - Unknown word (zerrcode)   -- queue, *out_msgtype, *zerrcode = NULL;
+./ext/sysvmsg/sysvmsg.c:267:12    - Unknown word (desiredmsgtype) -- zend_long desiredmsgtype, maxsize, flags = 0
+./ext/sysvmsg/sysvmsg.c:268:12    - Unknown word (realflags)      -- zend_long realflags = 0;
+./ext/sysvmsg/sysvmsg.c:271:21    - Unknown word (messagebuffer)  -- struct php_msgbuf *messagebuffer = NULL; /* buffer to
+./ext/sysvmsg/sysvmsg.c:276:46    - Unknown word (Olzlz)          -- parameters(ZEND_NUM_ARGS(), "Olzlz|blz",
+./ext/sysvmsg/sysvmsg.c:349:26    - Unknown word (zerror)         -- zval *message, *queue, *zerror=NULL;
+./ext/sysvmsg/sysvmsg.stub.php:12:12     - Unknown word (EAGAIN)     -- * @cvalue EAGAIN
+./ext/sysvmsg/sysvmsg.stub.php:17:12     - Unknown word (ENOMSG)     -- * @cvalue ENOMSG
+./ext/sysvmsg/sysvmsg.stub.php:35:13     - Unknown word (Sysv)       -- final class SysvMessageQueue
 ./ext/sysvsem/sysvsem.c:117:6     - Unknown word (opcount)    -- int opcount = 1;
 ./ext/sysvsem/sysvsem.c:252:15    - Unknown word (semarg)     -- union semun semarg;
 ./ext/sysvshm/sysvshm.c:153:76    - Unknown word (memorysize) -- x" ZEND_XLONG_FMT ": memorysize too small", shm_key
@@ -8061,29 +8090,34 @@ Lines:
 ./ext/tokenizer/tokenizer_data_gen.php:60:69     - Unknown word (NEKUDOTAYIM) -- COLON\", T_PAAMAYIM_NEKUDOTAYIM, CONST_CS | CONST_PERSISTENT
 ./ext/xml/compat.c:139:65    - Unknown word (valueend)   -- value, *att_prefix, *att_valueend;
 ./ext/xml/compat.c:55:8      - Unknown word (attno)      -- int attno = 0;
-./ext/xml/xml.c:1073:15   - Unknown word (mythis)     -- zval *pind, *mythis;
-./ext/xml/xml.c:1073:8    - Unknown word (pind)       -- zval *pind, *mythis;
-./ext/xml/xml.c:1092:15   - Unknown word (shdl)       -- zval *pind, *shdl, *ehdl;
-./ext/xml/xml.c:1092:22   - Unknown word (ehdl)       -- zval *pind, *shdl, *ehdl;
-./ext/xml/xml.c:165:18    - Unknown word (xmlchar)    -- static void _xml_xmlchar_zval(const XML_Char
-./ext/xml/xml.c:166:17    - Unknown word (xmlcharlen) -- static int _xml_xmlcharlen(const XML_Char *);
-./ext/xml/xml.c:222:46    - Unknown word (hdlrs)      -- Handling_Suite php_xml_mem_hdlrs;
-./ext/xml/xml.c:342:11    - Unknown word (XMLPARSER)  -- #define Z_XMLPARSER_P(zv) xml_parser_from
-./ext/xml/xml.c:659:9     - Unknown word (atcnt)      -- int atcnt = 0;
-./ext/xml/xml.c:773:8     - Unknown word (doprint)    -- int doprint = 0;
-./ext/xml/xml.c:814:20    - Unknown word (mytype)     -- zval *curtag, *mytype, *myval;
+./ext/xml/xml.c:1039:15   - Unknown word (mythis)     -- zval *pind, *mythis;
+./ext/xml/xml.c:1039:8    - Unknown word (pind)       -- zval *pind, *mythis;
+./ext/xml/xml.c:1058:15   - Unknown word (shdl)       -- zval *pind, *shdl, *ehdl;
+./ext/xml/xml.c:1058:22   - Unknown word (ehdl)       -- zval *pind, *shdl, *ehdl;
+./ext/xml/xml.c:157:18    - Unknown word (xmlchar)    -- static void _xml_xmlchar_zval(const XML_Char
+./ext/xml/xml.c:158:17    - Unknown word (xmlcharlen) -- static int _xml_xmlcharlen(const XML_Char *);
+./ext/xml/xml.c:214:46    - Unknown word (hdlrs)      -- Handling_Suite php_xml_mem_hdlrs;
+./ext/xml/xml.c:308:11    - Unknown word (XMLPARSER)  -- #define Z_XMLPARSER_P(zv) xml_parser_from
+./ext/xml/xml.c:625:9     - Unknown word (atcnt)      -- int atcnt = 0;
+./ext/xml/xml.c:739:8     - Unknown word (doprint)    -- int doprint = 0;
+./ext/xml/xml.c:780:20    - Unknown word (mytype)     -- zval *curtag, *mytype, *myval;
+./ext/xml/xml.stub.php:128:32    - Unknown word (TAGSTART)   -- PHP_XML_OPTION_SKIP_TAGSTART
 ./ext/xmlreader/php_xmlreader.c:1021:26   - Unknown word (inputbfr)    -- xmlParserInputBufferPtr inputbfr;
 ./ext/xmlreader/php_xmlreader.c:1104:18   - Unknown word (nodec)       -- xmlNode *node, *nodec;
 ./ext/xmlreader/php_xmlreader.c:532:15    - Unknown word (segfaulting) -- /* libxml is segfaulting in versions up to 2
 ./ext/xmlreader/php_xmlreader.c:712:38    - Unknown word (spcified)    -- reader at attribute spcified by name and namespaceURI
 ./ext/xmlreader/php_xmlreader.c:78:17     - Unknown word (retchar)    -- const xmlChar *retchar = NULL;
 ./ext/xmlreader/php_xmlreader.c:79:6      - Unknown word (retint)     -- int retint = 0;
+./ext/xmlreader/php_xmlreader.stub.php:104:27    - Unknown word (LOADDTD)    -- @cvalue XML_PARSER_LOADDTD
+./ext/xmlreader/php_xmlreader.stub.php:109:27    - Unknown word (DEFAULTATTRS) -- @cvalue XML_PARSER_DEFAULTATTRS
 ./ext/xmlwriter/php_xmlwriter.c:468:19    - Unknown word (namesapced) -- /* {{{ Write full namesapced element tag - returns
 ./ext/xmlwriter/php_xmlwriter.c:817:7     - Unknown word (isparm)     -- bool isparm;
 ./ext/xmlwriter/php_xmlwriter.stub.php:5:10      - Unknown word (xmlwriter)  -- function xmlwriter_open_uri(string $uri
 ./ext/xmlwriter/php_xmlwriter.stub.php:94:19     - Unknown word (Behaviour)  -- * @no-verify Behaviour differs from the aliased
-./ext/xsl/php_xsl.c:240:21    - Unknown word (subminor)      -- int major, minor, subminor;
+./ext/xsl/php_xsl.c:222:21    - Unknown word (subminor)      -- int major, minor, subminor;
 ./ext/xsl/php_xsl.c:27:23     - Unknown word (xsltprocessor) -- zend_class_entry *xsl_xsltprocessor_class_entry;
+./ext/xsl/php_xsl.stub.php:14:16     - Unknown word (SECPREF)    -- * @cvalue XSL_SECPREF_NONE
+./ext/xsl/php_xsl.stub.php:62:12     - Unknown word (LIBEXSLT)   -- * @cvalue LIBEXSLT_VERSION
 ./ext/xsl/xsltprocessor.c:172:18    - Unknown word (domintern)  -- dom_object *domintern = (dom_object *)intern
 ./ext/xsl/xsltprocessor.c:26:31     - Unknown word (xpathexpr)  -- php_xsl_xslt_string_to_xpathexpr()
 ./ext/xsl/xsltprocessor.c:309:20    - Unknown word (sheetp)     -- xsltStylesheetPtr sheetp, oldsheetp;
@@ -8099,9 +8133,10 @@ Lines:
 ./ext/xsl/xsltprocessor.c:96:26     - Unknown word (tctxt)      -- xsltTransformContextPtr tctxt;
 ./ext/zend_test/fiber.c:13:20     - Unknown word (Piotrowski) -- | Authors: Aaron Piotrowski <aaron@trowski.com>
 ./ext/zend_test/php_test.h:51:19     - Unknown word (weakmap)    -- HashTable global_weakmap;
-./ext/zend_test/test.c:130:12    - Unknown word (leakbytes)  -- zend_long leakbytes = 3;
-./ext/zend_test/test.c:273:11    - Unknown word (weakrefs)   -- if (zend_weakrefs_hash_add(&ZT_G(global
-./ext/zend_test/test.c:488:30    - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute(zend_attribute *attr
+./ext/zend_test/test.c:131:12    - Unknown word (leakbytes)  -- zend_long leakbytes = 3;
+./ext/zend_test/test.c:274:11    - Unknown word (weakrefs)   -- if (zend_weakrefs_hash_add(&ZT_G(global
+./ext/zend_test/test.c:489:30    - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute(zend_attribute *attr
+./ext/zend_test/test_arginfo.h:134:116   - Unknown word (nlikely)    -- 0, ZendTestNS\\\125nlikelyCompileError, 1)
 ./ext/zend_test/test_arginfo.h:47:68     - Unknown word (stdclass)   -- arginfo_zend_string_or_stdclass, 0, 1, stdClass, MAY
 ./ext/zend_test/test_arginfo.h:92:42     - Unknown word (uquantity)  -- test_zend_ini_parse_uquantity arginfo_zend_test_zend
 ./ext/zip/examples/addglob.php:4:19      - Unknown word (ZIPARCHIVE) -- $z->open('a.zip', ZIPARCHIVE::CREATE);
@@ -8157,6 +8192,7 @@ Lines:
 ./ext/zlib/zlib.c:463:30    - Unknown word (zpipe)      -- HACK: See zlib/examples/zpipe.c inf() function for
 ./ext/zlib/zlib.c:791:84    - Unknown word (dictlen)    -- char **dict, size_t *dictlen) {
 ./ext/zlib/zlib.c:808:12    - Unknown word (dictptr)    -- char *dictptr;
+./ext/zlib/zlib.stub.php:96:17     - Unknown word (VERNUM)     -- * @cvalue ZLIB_VERNUM
 ./ext/zlib/zlib_arginfo.h:12:49     - Unknown word (gzfile)     -- TYPE_MASK_EX(arginfo_gzfile, 0, 1, MAY_BE_ARRAY
 ./ext/zlib/zlib_arginfo.h:23:49     - Unknown word (readgzfile) -- TYPE_MASK_EX(arginfo_readgzfile, 0, 1, MAY_BE_LONG|MAY
 ./ext/zlib/zlib_arginfo.h:59:17     - Unknown word (gzdecode)   -- #define arginfo_gzdecode arginfo_zlib_decode
@@ -8266,8 +8302,9 @@ Lines:
 ./main/streams/cast.c:278:10    - Unknown word (retcast)    -- int retcast = php_stream_cast(newstream
 ./main/streams/filter.c:234:9     - Unknown word (wildname)   -- char *wildname;
 ./main/streams/filter.c:254:31    - Unknown word (docrefs)    -- these need correct docrefs */
-./main/streams/glob_wrapper.c:102:20    - Unknown word (gpath)      -- const char *pos, *gpath = path;
-./main/streams/glob_wrapper.c:48:12     - Unknown word (pglob)      -- glob_s_t *pglob = (glob_s_t *)stream
+./main/streams/glob_wrapper.c:110:20    - Unknown word (gpath)      -- const char *pos, *gpath = path;
+./main/streams/glob_wrapper.c:44:25     - Unknown word (indexmap)   -- size_t *open_basedir_indexmap;
+./main/streams/glob_wrapper.c:51:12     - Unknown word (pglob)      -- glob_s_t *pglob = (glob_s_t *)stream
 ./main/streams/plain_wrapper.c:1576:3    - Unknown word (plainfile)  -- "plainfile",
 ./main/streams/plain_wrapper.c:1584:70   - Unknown word (SWOOLE)     -- writable to support SWOOLE */
 ./main/streams/plain_wrapper.c:159:13    - Unknown word (STDIOP)     -- #define PHP_STDIOP_GET_FD(anfd, data)	anfd
@@ -8333,37 +8370,37 @@ Lines:
 ./run-tests.php:19:22     - Unknown word (Roobol)      -- | Sander Roobol <sander@php.net>
 ./run-tests.php:2020:101  - Unknown word (SHLIB)        -- req_ext . '.' . PHP_SHLIB_SUFFIX;
 ./run-tests.php:212:74    - Unknown word (GPCS)         -- set variables_order="GPCS"
-./run-tests.php:2133:33   - Unknown word (xfail)        -- elseif (!strncasecmp('xfail', $output, 5)) {
-./run-tests.php:2158:28   - Unknown word (REDIRECTTEST) -- ($test->hasSection('REDIRECTTEST')) {
-./run-tests.php:2184:14   - Unknown word (redirenv)     -- $redirenv = array_merge($environment
+./run-tests.php:2136:33   - Unknown word (xfail)        -- elseif (!strncasecmp('xfail', $output, 5)) {
+./run-tests.php:2161:28   - Unknown word (REDIRECTTEST) -- ($test->hasSection('REDIRECTTEST')) {
+./run-tests.php:2187:14   - Unknown word (redirenv)     -- $redirenv = array_merge($environment
 ./run-tests.php:21:28     - Unknown word (Stig)        -- based on version by: Stig Bakken <ssb@php.net
 ./run-tests.php:21:33     - Unknown word (Bakken)      -- on version by: Stig Bakken <ssb@php.net>)
 ./run-tests.php:22:44     - Unknown word (Rasmus)      -- 3 test framework by Rasmus Lerdorf)
 ./run-tests.php:22:51     - Unknown word (Lerdorf)     -- framework by Rasmus Lerdorf) |
-./run-tests.php:2493:28   - Unknown word (EXPECTHEADERS) -- ($test->hasSection('EXPECTHEADERS')) {
+./run-tests.php:2496:28   - Unknown word (EXPECTHEADERS) -- ($test->hasSection('EXPECTHEADERS')) {
 ./run-tests.php:252:24    - Unknown word (LEODS)        -- $log_format = 'LEODS';
-./run-tests.php:2530:32   - Unknown word (EXPECTF)       -- test->hasAnySections('EXPECTF', 'EXPECTREGEX')) {
-./run-tests.php:2530:43   - Unknown word (EXPECTREGEX)   -- hasAnySections('EXPECTF', 'EXPECTREGEX')) {
-./run-tests.php:2723:2    - Unknown word (lldb)          -- "lldb")
-./run-tests.php:2735:1    - Unknown word (esac)          -- esac
+./run-tests.php:2533:32   - Unknown word (EXPECTF)       -- test->hasAnySections('EXPECTF', 'EXPECTREGEX')) {
+./run-tests.php:2533:43   - Unknown word (EXPECTREGEX)   -- hasAnySections('EXPECTF', 'EXPECTREGEX')) {
+./run-tests.php:2728:2    - Unknown word (lldb)          -- "lldb")
+./run-tests.php:2740:1    - Unknown word (esac)          -- esac
 ./run-tests.php:289:17    - Unknown word (memleaks)     -- 'report_memleaks=1',
 ./run-tests.php:291:10    - Unknown word (docref)       -- 'docref_root=',
-./run-tests.php:3050:12   - Unknown word (xfailed)       -- $x_xfailed = (100.0 * $sum_results
-./run-tests.php:3051:12   - Unknown word (xleaked)       -- $x_xleaked = (100.0 * $sum_results
-./run-tests.php:3197:45   - Unknown word (PHPTEST)       -- summary && !getenv('NO_PHPTEST_SUMMARY')) {
+./run-tests.php:3055:12   - Unknown word (xfailed)       -- $x_xfailed = (100.0 * $sum_results
+./run-tests.php:3056:12   - Unknown word (xleaked)       -- $x_xleaked = (100.0 * $sum_results
+./run-tests.php:3202:45   - Unknown word (PHPTEST)       -- summary && !getenv('NO_PHPTEST_SUMMARY')) {
 ./run-tests.php:324:10    - Unknown word (BORKED)       -- 'BORKED' => [],
 ./run-tests.php:328:10    - Unknown word (XFAILED)      -- 'XFAILED' => [],
 ./run-tests.php:329:10    - Unknown word (XLEAKED)      -- 'XLEAKED' => [],
-./run-tests.php:3363:15   - Unknown word (testsuites)    -- '<testsuites name="%s" tests="%s
-./run-tests.php:3383:19   - Unknown word (testsuite)     -- '<testsuite name="%s" tests="%s
-./run-tests.php:3430:58   - Unknown word (testcase)      -- file_name]['xml'] = "<testcase name='$escaped_test
-./run-tests.php:3721:10   - Unknown word (vcmd)          -- $vcmd = "valgrind -q --tool
-./run-tests.php:3726:18   - Unknown word (iropt)         -- /* --vex-iropt-register-updates=allregs
-./run-tests.php:3726:41   - Unknown word (allregs)       -- iropt-register-updates=allregs-at-mem-access is necessary
-./run-tests.php:3726:87   - Unknown word (watchpoint)    -- necessary for phpdbg watchpoint tests */
-./run-tests.php:3730:50   - Unknown word (exns)          -- iropt-precise-memory-exns=yes --log-file=$memcheck
-./run-tests.php:3852:10   - Unknown word (secfile)       -- $secfile = false;
-./run-tests.php:3853:10   - Unknown word (secdone)       -- $secdone = false;
+./run-tests.php:3368:15   - Unknown word (testsuites)    -- '<testsuites name="%s" tests="%s
+./run-tests.php:3388:19   - Unknown word (testsuite)     -- '<testsuite name="%s" tests="%s
+./run-tests.php:3435:58   - Unknown word (testcase)      -- file_name]['xml'] = "<testcase name='$escaped_test
+./run-tests.php:3726:10   - Unknown word (vcmd)          -- $vcmd = "valgrind -q --tool
+./run-tests.php:3731:18   - Unknown word (iropt)         -- /* --vex-iropt-register-updates=allregs
+./run-tests.php:3731:41   - Unknown word (allregs)       -- iropt-register-updates=allregs-at-mem-access is necessary
+./run-tests.php:3731:87   - Unknown word (watchpoint)    -- necessary for phpdbg watchpoint tests */
+./run-tests.php:3735:50   - Unknown word (exns)          -- iropt-precise-memory-exns=yes --log-file=$memcheck
+./run-tests.php:3857:10   - Unknown word (secfile)       -- $secfile = false;
+./run-tests.php:3858:10   - Unknown word (secdone)       -- $secdone = false;
 ./run-tests.php:475:37    - Unknown word (Runtests)     -- $valgrind = new RuntestsValgrind($environment
 ./run-tests.php:51:26     - Unknown word (testfiles)   -- l <file>   Read the testfiles to be executed from
 ./run-tests.php:579:44    - Unknown word (MSAN)         -- $environment['SKIP_MSAN'] = 1;
