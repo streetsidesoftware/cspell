@@ -33,7 +33,7 @@ describe('dataUrl', () => {
 
     test.each`
         file               | expected
-        ${'cities.txt'}    | ${sc('data:text/plain;filename=cities.txt;base64,')}
+        ${'cities.txt'}    | ${sc('data:text/plain;charset=utf8;filename=cities.txt,New%20York')}
         ${'cities.txt.gz'} | ${sc('data:application/gzip;filename=cities.txt.gz;base64,H')}
     `('encodeDataUrl $file', async ({ file, expected }) => {
         file = pathToSample(file);
@@ -43,10 +43,13 @@ describe('dataUrl', () => {
 
     test.each`
         file                | expected
-        ${'cities.txt'}     | ${'text/plain'}
-        ${'cities.txt.gz'}  | ${'application/gzip'}
-        ${'cities.trie'}    | ${'application/vnd.cspell.dictionary+trie'}
-        ${'cities.trie.gz'} | ${'application/vnd.cspell.dictionary+trie.gz'}
+        ${'cities.txt'}     | ${{ mimeType: 'text/plain', encoding: 'utf-8' }}
+        ${'cities.txt.gz'}  | ${{ mimeType: 'application/gzip' }}
+        ${'cities.trie'}    | ${{ mimeType: 'application/vnd.cspell.dictionary+trie', encoding: 'utf-8' }}
+        ${'cities.trie.gz'} | ${{ mimeType: 'application/vnd.cspell.dictionary+trie.gz' }}
+        ${'package.json'}   | ${{ mimeType: 'application/json', encoding: 'utf-8' }}
+        ${'workflow.yml'}   | ${{ mimeType: 'application/x-yaml', encoding: 'utf-8' }}
+        ${'workflow.yaml'}  | ${{ mimeType: 'application/x-yaml', encoding: 'utf-8' }}
     `('encodeDataUrl $file', ({ file, expected }) => {
         expect(guessMimeType(file)).toEqual(expected);
     });

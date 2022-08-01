@@ -86,18 +86,26 @@ export async function encodeDataUrlFromFile(
 ): Promise<string> {
     const url = toURL(path);
     const filename = fsPath.basename(url.pathname);
-    mediaType = mediaType || guessMimeType(filename) || 'text/plain';
+    const guess = guessMimeType(filename);
+    mediaType = mediaType || guess?.mimeType || 'text/plain';
     const _attributes = new Map(attributes || []);
     filename && _attributes.set('filename', filename);
-    const content = await fs.readFile(url);
-
+    const content = guess?.encoding ? await fs.readFile(url, guess?.encoding) : await fs.readFile(url);
     return encodeDataUrl(content, mediaType, _attributes);
 }
 
-export function guessMimeType(filename: string): string | undefined {
-    if (filename.endsWith('.trie')) return 'application/vnd.cspell.dictionary+trie';
-    if (filename.endsWith('.trie.gz')) return 'application/vnd.cspell.dictionary+trie.gz';
-    if (filename.endsWith('.txt')) return 'text/plain';
-    if (filename.endsWith('.gz')) return 'application/gzip';
+export interface GuessMimeTypeResult {
+    mimeType: string;
+    encoding?: 'utf-8' | undefined;
+}
+
+export function guessMimeType(filename: string): GuessMimeTypeResult | undefined {
+    if (filename.endsWith('.trie')) return { mimeType: 'application/vnd.cspell.dictionary+trie', encoding: 'utf-8' };
+    if (filename.endsWith('.trie.gz')) return { mimeType: 'application/vnd.cspell.dictionary+trie.gz' };
+    if (filename.endsWith('.txt')) return { mimeType: 'text/plain', encoding: 'utf-8' };
+    if (filename.endsWith('.gz')) return { mimeType: 'application/gzip' };
+    if (filename.endsWith('.json')) return { mimeType: 'application/json', encoding: 'utf-8' };
+    if (filename.endsWith('.yaml') || filename.endsWith('.yml'))
+        return { mimeType: 'application/x-yaml', encoding: 'utf-8' };
     return undefined;
 }
