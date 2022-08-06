@@ -44,12 +44,12 @@ The cspell mono-repo, a spell checker for code.
 
 ## RFCs
 
-| Link                                                           | Description                     | Status       |
-| -------------------------------------------------------------- | ------------------------------- | ------------ |
-| [rfc-0001](rfc/rfc-0001%20suggestions/)                        | Fixing common misspellings      | Not started  |
-| [rfc-0002](rfc/rfc-0002%20improve%20dictionary%20suggestions/) | Improving Generated Suggestions | Done         |
-| [rfc-0003](rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress  |
-| [rfc-0004](rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | Not started  |
+| Link                                                           | Description                     | Status      |
+| -------------------------------------------------------------- | ------------------------------- | ----------- |
+| [rfc-0001](rfc/rfc-0001%20suggestions/)                        | Fixing common misspellings      | Not started |
+| [rfc-0002](rfc/rfc-0002%20improve%20dictionary%20suggestions/) | Improving Generated Suggestions | Done        |
+| [rfc-0003](rfc/rfc-0003%20parsing%20files/)                    | Plug-ins: Adding file parsers   | In Progress |
+| [rfc-0004](rfc/rfc-0004%20known%20issues/)                     | Support Marking Issues as Known | Not started |
 
 ## CSpell for enterprise
 
