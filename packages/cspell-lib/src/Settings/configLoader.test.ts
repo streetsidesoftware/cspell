@@ -457,8 +457,7 @@ describe('Validate search/load config files', () => {
         ${s('js-config/cspell-bad.js')}       | ${cfg(readError(s('js-config/cspell-bad.js')))}
     `('ReadRawSettings from $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         const searchResult = await readRawSettings(file);
-        const expected = expectedConfig ? oc(expectedConfig) : undefined;
-        expect(searchResult).toEqual(expected);
+        expect(searchResult).toEqual(oc(expectedConfig));
         expect(mockedLogWarning).toHaveBeenCalledTimes(0);
         expect(mockedLogError).toHaveBeenCalledTimes(0);
     });

@@ -23,6 +23,7 @@
     "coverage-collect": "globcat packages/*/coverage/lcov.info > lcov.info",
     "coverage": "lerna run coverage --stream && npm run coverage-collect",
     "eslint-fix": "eslint . --fix --cache",
+    "eslint-fix-no-cache": "eslint . --fix",
     "ibt": "npm install && npm run build && npm test",
     "install": "lerna bootstrap --ci",
     "install-website": "npm run website-install",
