@@ -83,6 +83,14 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         }
     }
 
+    function checkJSXText(node: Literal & Rule.NodeParentExtension) {
+        if (!options.checkJSXText) return;
+        if (typeof node.value === 'string') {
+            debugNode(node, node.value);
+            checkNodeText(node, node.value);
+        }
+    }
+
     function checkTemplateElement(node: TemplateElement & Rule.NodeParentExtension) {
         if (!options.checkStringTemplates) return;
         debugNode(node, node.value);
@@ -261,6 +269,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         Literal: checkLiteral,
         TemplateElement: checkTemplateElement,
         Identifier: checkIdentifier,
+        JSXText: checkJSXText,
     };
 
     function mapNode(node: ASTNode | TSESTree.Node, index: number, nodes: ASTNode[]): string {

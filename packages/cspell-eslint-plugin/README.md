@@ -73,10 +73,24 @@ interface Options {
    */
   checkStringTemplates?: boolean;
   /**
+   * Spell check JSX Text
+   * @default true
+   */
+  checkJSXText?: boolean;
+  /**
    * Spell check comments
    * @default true
    */
   checkComments?: boolean;
+  /**
+   * Specify a path to a custom word list file.
+   *
+   * example:
+   * ```js
+   * customWordListFile: "./myWords.txt"
+   * ```
+   */
+  customWordListFile?: string | { path: string };
   /**
    * Output debug logs
    * @default false

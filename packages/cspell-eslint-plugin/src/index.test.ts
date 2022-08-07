@@ -126,6 +126,42 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
     ],
 });
 
+const ruleTesterReact = new RuleTester({
+    env: {
+        es6: true,
+    },
+
+    parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true,
+        },
+    },
+    overrides: [
+        {
+            files: '**/*.tsx',
+            extends: ['plugin:@typescript-eslint/recommended', 'plugin:import/typescript', 'plugin:react/recommended'],
+            parser: '@typescript-eslint/parser',
+        },
+        {
+            files: '**/*.jsx',
+            extends: ['eslint:recommended', 'plugin:react/recommended'],
+        },
+    ],
+});
+
+ruleTesterReact.run('cspell with React', Rule.rules.spellchecker, {
+    valid: [readSample('react/sample.jsx'), readSample('react/sample.tsx')],
+    invalid: [
+        // cspell:ignore Welcomeeeee Summmer
+        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
+        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Welcomeeeee"', 'Unknown word: "Summmer"']),
+        readInvalid('with-errors/react/sample.tsx', ['Unknown word: "Summmer"'], { checkJSXText: false }),
+        readInvalid('with-errors/react/sample.jsx', ['Unknown word: "Summmer"'], { checkJSXText: false }),
+    ],
+});
+
 function resolveFromMonoRepo(file: string): string {
     return path.resolve(root, file);
 }

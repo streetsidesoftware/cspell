@@ -53,12 +53,22 @@ export interface Check {
      */
     checkStringTemplates?: boolean;
     /**
+     * Spell check JSX Text
+     * @default true
+     */
+    checkJSXText?: boolean;
+    /**
      * Spell check comments
      * @default true
      */
     checkComments?: boolean;
     /**
-     * Specify a path to a custom word list file
+     * Specify a path to a custom word list file.
+     *
+     * example:
+     * ```js
+     * customWordListFile: "./myWords.txt"
+     * ```
      */
     customWordListFile?: CustomWordListFilePath | CustomWordListFile | undefined;
 }
@@ -79,12 +89,13 @@ export interface CustomWordListFile {
      *
      * Note: this does not yet work perfectly.
      */
-    addWords: boolean;
+    addWords?: boolean;
 }
 
 export const defaultCheckOptions: Required<Check> = {
     checkComments: true,
     checkIdentifiers: true,
+    checkJSXText: true,
     checkStrings: true,
     checkStringTemplates: true,
     customWordListFile: undefined,

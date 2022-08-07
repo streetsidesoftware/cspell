@@ -13,6 +13,11 @@
       "description": "Spell check identifiers (variables names, function names, class names, etc.)",
       "type": "boolean"
     },
+    "checkJSXText": {
+      "default": true,
+      "description": "Spell check JSX Text",
+      "type": "boolean"
+    },
     "checkStringTemplates": {
       "default": true,
       "description": "Spell check template strings",
@@ -42,13 +47,12 @@
             }
           },
           "required": [
-            "path",
-            "addWords"
+            "path"
           ],
           "type": "object"
         }
       ],
-      "description": "Specify a path to a custom word list file"
+      "description": "Specify a path to a custom word list file.\n\nexample: ```js customWordListFile: \"./myWords.txt\" ```"
     },
     "debugMode": {
       "default": false,
