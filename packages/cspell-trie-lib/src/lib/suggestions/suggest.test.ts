@@ -211,7 +211,7 @@ describe('Validate Suggest', () => {
         ${'walkingstick'} | ${undefined} | ${2}           | ${undefined} | ${[sr('walkingstick', 0), sr('talkingstick', 99)]}
         ${'walkingtree'}  | ${undefined} | ${2}           | ${undefined} | ${[sr('talkingtree', 99), sr('walkingstick', 359)]}
         ${'running'}      | ${undefined} | ${2}           | ${undefined} | ${[sr('running', 0), sr('Running', 1)]}
-    `('test suggestion results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
+    `('suggestion results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
         const trie = parseDictionary(`
             walk
             Running*
@@ -241,7 +241,7 @@ describe('Validate Suggest', () => {
         ${'running'}      | ${undefined} | ${2}           | ${3}        | ${[sr('running', 0), sr('Running', 1)]}
         ${'free'}         | ${undefined} | ${2}           | ${2}        | ${[sr('tree', 99)]}
         ${'stock'}        | ${undefined} | ${2}           | ${2}        | ${[sr('stick', 97)]}
-    `('test suggestWithCost results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
+    `('suggestWithCost results $word', ({ word, ignoreCase, numSuggestions, changeLimit, expected }) => {
         const trie = parseDictionary(`
             walk
             Running*

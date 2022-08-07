@@ -47,7 +47,7 @@ describe('Validate the wordListCompiler', () => {
         ${'CURLcode'}                                                  | ${['cur', 'lcode']}
         ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
         ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
-    `('test legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
+    `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
         expect(legacyLineToWords(line).filter(distinct()).toArray()).toEqual(expectedResult);
     });
 
@@ -70,7 +70,7 @@ describe('Validate the wordListCompiler', () => {
         ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
         ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
     `(
-        'test normalizer uses legacy line splitting $lines',
+        'normalizer uses legacy line splitting $lines',
         ({ lines, expectedResult }: { lines: string; expectedResult: string[] }) => {
             const normalizer = __testing__.createNormalizer({
                 skipNormalization: false,
@@ -124,7 +124,7 @@ describe('Validate the wordListCompiler', () => {
         ${'CURLcode'}                               | ${['CURLcode']}                               | ${true}    | ${true}
         ${'kDNSServiceErr_BadSig'}                  | ${['kDNSServiceErr_BadSig']}                  | ${true}    | ${true}
         ${'apd_get_active_symbols'}                 | ${['apd_get_active_symbols']}                 | ${true}    | ${true}
-    `('test normalizer line splitting "$text" $splitWords $keepRawCase', (testCase: NormalizeTestCase) => {
+    `('normalizer line splitting "$text" $splitWords $keepRawCase', (testCase: NormalizeTestCase) => {
         const {
             skipNormalization = false,
             splitWords = false,

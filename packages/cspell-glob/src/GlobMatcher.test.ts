@@ -74,7 +74,7 @@ describe('Validate Micromatch assumptions', () => {
         ${'src/*.(test|spec).ts'}  | ${'src/deep.code.test.ts'}    | ${true}
         ${'src/*.(test|spec).ts'}  | ${'src/test.ts'}              | ${false}
     `(
-        `Test Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`,
+        `Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`,
         ({ glob, filename, expectedToMatch }) => {
             const reg1 = mm.makeRe(glob);
             expect(reg1.test(filename)).toEqual(expectedToMatch);
@@ -270,7 +270,7 @@ describe('Validate Options', () => {
         ${'i18/nl_NL'}             | ${'i18/nl_NL/file.txt'}                  | ${undefined}     | ${{ mode: 'exclude' }} | ${{ matched: true }}
         ${'i18/nl_NL'}             | ${'code/i18/nl_NL/file.txt'}             | ${undefined}     | ${{ mode: 'exclude' }} | ${{ matched: false }}
         ${'${cwd}/**/i18/nl_NL'}   | ${'code/i18/nl_NL/file.txt'}             | ${process.cwd()} | ${{ mode: 'exclude' }} | ${{ matched: true }}
-    `('Test options: $pattern, $file, $options, root', ({ pattern, file, options, root, expected }: TestCase) => {
+    `('options: $pattern, $file, $options, root', ({ pattern, file, options, root, expected }: TestCase) => {
         root = root || '/Users/code/project/cspell/';
         const filename = path.join(root, file);
         const patterns = pattern.split('|');
