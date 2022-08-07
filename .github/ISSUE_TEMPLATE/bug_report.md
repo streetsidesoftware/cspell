@@ -19,6 +19,7 @@ assignees: ''
 **Which Tool or library**
 
 - [ ] cspell -- the command-line spelling tool
+- [ ] cspell/eslint-plugin -- the plugin for ESLint
 - [ ] cspell-tools -- used for building dictionary files
 - [ ] cspell-lib -- library that does the actual spell checking.
 - [ ] cspell-trie -- tool for working with trie files.
