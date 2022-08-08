@@ -446,8 +446,25 @@ declare type PnPSettings = OptionalOrUndefined<PnPSettings$1>;
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
 declare const defaultConfigFilenames: readonly string[];
+/**
+ * Read / import a cspell configuration file.
+ * @param filename - the path to the file.
+ *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
+ *   - absolute path `/absolute/path/to/file`
+ *   - relative path `./path/to/file` (relative to the current working directory)
+ *   - package `@cspell/dict-typescript/cspell-ext.json`
+ */
 declare function readSettings(filename: string): CSpellSettingsI$1;
 declare function readSettings(filename: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
+/**
+ * Read / import a cspell configuration file.
+ * @param filename - the path to the file.
+ *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
+ *   - absolute path `/absolute/path/to/file`
+ *   - relative path `./path/to/file` (relative to `relativeTo`)
+ *   - package `@cspell/dict-typescript/cspell-ext.json` searches for node_modules relative to `relativeTo`
+ * @param relativeTo - absolute path to start searching for relative files or node_modules.
+ */
 declare function readSettings(filename: string, relativeTo: string): CSpellSettingsI$1;
 declare function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST$1): CSpellSettingsI$1;
 declare function searchForConfig(searchFrom: string | undefined, pnpSettings?: PnPSettings): Promise<CSpellSettingsI$1 | undefined>;
