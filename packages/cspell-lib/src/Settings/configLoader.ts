@@ -111,7 +111,12 @@ const cachedFiles = new Map<string, CSpellSettingsI>();
  */
 function readConfig(fileRef: ImportFileRef): CSpellSettingsWST {
     // cspellConfigExplorerSync
-    const { filename } = fileRef;
+    const { filename, error } = fileRef;
+    if (error) {
+        fileRef.error =
+            error instanceof ImportError ? error : new ImportError(`Failed to read config file: "${filename}"`, error);
+        return { __importRef: fileRef };
+    }
     const s: CSpellSettingsWST = {};
     try {
         const r = cspellConfigExplorerSync.load(filename);
@@ -217,9 +222,8 @@ function importSettings(
     pnpSettings: PnPSettings
 ): CSpellSettingsI {
     defaultValues = defaultValues ?? defaultSettings;
-    let { filename } = fileRef;
-    filename = path.resolve(filename);
-    const importRef: ImportFileRef = { ...fileRef, filename };
+    const { filename } = fileRef;
+    const importRef: ImportFileRef = { ...fileRef };
     const cached = cachedFiles.get(filename);
     if (cached) {
         const cachedImportRef = cached.__importRef || importRef;
@@ -240,8 +244,25 @@ function importSettings(
     return finalizeSettings;
 }
 
+/**
+ * Read / import a cspell configuration file.
+ * @param filename - the path to the file.
+ *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
+ *   - absolute path `/absolute/path/to/file`
+ *   - relative path `./path/to/file` (relative to the current working directory)
+ *   - package `@cspell/dict-typescript/cspell-ext.json`
+ */
 export function readSettings(filename: string): CSpellSettingsI;
 export function readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
+/**
+ * Read / import a cspell configuration file.
+ * @param filename - the path to the file.
+ *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
+ *   - absolute path `/absolute/path/to/file`
+ *   - relative path `./path/to/file` (relative to `relativeTo`)
+ *   - package `@cspell/dict-typescript/cspell-ext.json` searches for node_modules relative to `relativeTo`
+ * @param relativeTo - absolute path to start searching for relative files or node_modules.
+ */
 export function readSettings(filename: string, relativeTo: string): CSpellSettingsI;
 export function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
 export function readSettings(

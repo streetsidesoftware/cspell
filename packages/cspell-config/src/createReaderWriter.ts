@@ -1,4 +1,4 @@
-import { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter';
+import { CSpellConfigFileReaderWriter, CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
 import { promises as fs } from 'fs';
 import { IO } from './IO';
 import { Deserializer } from './Deserializer';
@@ -13,7 +13,7 @@ export function createReaderWriter(
     deserializers: Deserializer[] = [],
     io: IO = defaultIO
 ): CSpellConfigFileReaderWriter {
-    return new CSpellConfigFileReaderWriter(io, deserializers.concat(defaultDeserializers));
+    return new CSpellConfigFileReaderWriterImpl(io, deserializers.concat(defaultDeserializers));
 }
 
 function readFile(uriFile: string): Promise<string> {

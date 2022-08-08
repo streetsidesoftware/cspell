@@ -1,13 +1,14 @@
-import { Deserializer } from '../Deserializer';
-import { ImplCSpellConfigFile } from '../CSpellConfigFile';
+import { Deserializer, DeserializerParams, DeserializerNext } from '../Deserializer';
+import { CSpellConfigFile, ImplCSpellConfigFile } from '../CSpellConfigFile';
 import { detectIndent } from './util';
 import { CSpellSettings } from '@cspell/cspell-types';
 import { parse, stringify } from 'comment-json';
 
 const isSupportedFormat = /\.jsonc?(?=$|[?#])/;
 
-function _deserializerCSpellJson(uri: string, content: string): ImplCSpellConfigFile | undefined {
-    if (!isSupportedFormat.test(uri)) return undefined;
+function _deserializerCSpellJson(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
+    const { uri, content } = params;
+    if (!isSupportedFormat.test(params.uri)) return next(params);
 
     const cspell = parse(content);
     if (!cspell || typeof cspell !== 'object' || Array.isArray(cspell)) {

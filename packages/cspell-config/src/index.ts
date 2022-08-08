@@ -1,6 +1,6 @@
 export { createReaderWriter } from './createReaderWriter';
-export { CSpellConfigFile } from './CSpellConfigFile';
-export { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter';
-export { Deserializer } from './Deserializer';
-export { IO } from './IO';
-export { Serializer } from './Serializer';
+export type { CSpellConfigFile } from './CSpellConfigFile';
+export type { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter';
+export type { Deserializer, DeserializerNext, DeserializerParams } from './Deserializer';
+export type { IO } from './IO';
+export type { Serializer } from './Serializer';

@@ -1,13 +1,14 @@
 import { CSpellSettings } from '@cspell/cspell-types';
 import { parse, stringify } from 'yaml';
-import { ImplCSpellConfigFile } from '../CSpellConfigFile';
-import { Deserializer } from '../Deserializer';
+import { CSpellConfigFile, ImplCSpellConfigFile } from '../CSpellConfigFile';
+import { Deserializer, DeserializerParams, DeserializerNext } from '../Deserializer';
 import { detectIndentAsNum } from './util';
 
 const isSupportedFormat = /\.ya?ml(?=$|[?#])/;
 
-function _deserializerCSpellYaml(uri: string, content: string): ImplCSpellConfigFile | undefined {
-    if (!isSupportedFormat.test(uri)) return undefined;
+function _deserializerCSpellYaml(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
+    const { uri, content } = params;
+    if (!isSupportedFormat.test(uri)) return next(params);
 
     const cspell = parse(content) || {};
     if (!cspell || typeof cspell !== 'object' || Array.isArray(cspell)) {

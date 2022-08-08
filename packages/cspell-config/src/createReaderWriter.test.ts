@@ -1,11 +1,11 @@
 import { createReaderWriter } from './createReaderWriter';
-import { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter';
+import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
 import { defaultDeserializers } from './deserializers';
 import { IO } from './IO';
 
 describe('createReaderWriter', () => {
     test('createReaderWriter default', () => {
-        expect(createReaderWriter()).toBeInstanceOf(CSpellConfigFileReaderWriter);
+        expect(createReaderWriter()).toBeInstanceOf(CSpellConfigFileReaderWriterImpl);
     });
 
     test('createReaderWriter', () => {
@@ -14,7 +14,7 @@ describe('createReaderWriter', () => {
             writeFile: jest.fn(),
         };
         const rw = createReaderWriter([], io);
-        expect(rw).toBeInstanceOf(CSpellConfigFileReaderWriter);
+        expect(rw).toBeInstanceOf(CSpellConfigFileReaderWriterImpl);
         expect(rw.deserializers).toHaveLength(defaultDeserializers.length);
     });
 });
