@@ -1,7 +1,9 @@
 import { deserializerCSpellYaml } from './cspellYaml';
 import { stringify } from 'yaml';
+import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter';
 
 const oc = expect.objectContaining;
+const next = defaultNextDeserializer;
 
 describe('cspellYaml', () => {
     const sampleCSpellYaml = `\
@@ -12,23 +14,23 @@ words:
 
     test.each`
         uri                 | content                    | expected
-        ${''}               | ${''}                      | ${undefined}
         ${'cspell.yaml'}    | ${''}                      | ${oc({ settings: {} })}
         ${'cspell.yaml'}    | ${'---\n{}\n'}             | ${oc({ settings: {} })}
-        ${'cspell.js'}      | ${''}                      | ${undefined}
-        ${'cspell.json'}    | ${''}                      | ${undefined}
         ${'cspell-ext.yml'} | ${'---\nversion: "0.2"\n'} | ${oc({ settings: { version: '0.2' } })}
         ${'.cspell.yml'}    | ${'\nwords: []\n'}         | ${oc({ settings: { words: [] } })}
     `('success $uri', ({ uri, content, expected }) => {
-        expect(deserializerCSpellYaml(uri, content)).toEqual(expected);
+        expect(deserializerCSpellYaml({ uri, content }, next)).toEqual(expected);
     });
 
     test.each`
         uri              | content       | expected
+        ${''}            | ${''}         | ${'Unable to parse config file: ""'}
+        ${'cspell.js'}   | ${''}         | ${'Unable to parse config file: "cspell.js"'}
+        ${'cspell.json'} | ${''}         | ${'Unable to parse config file: "cspell.json"'}
         ${'cspell.yaml'} | ${'"version'} | ${'Missing closing'}
         ${'cspell.yaml'} | ${'[]'}       | ${'Unable to parse cspell.yaml'}
     `('fail $uri', ({ uri, content, expected }) => {
-        expect(() => deserializerCSpellYaml(uri, content)).toThrowError(expected);
+        expect(() => deserializerCSpellYaml({ uri, content }, next)).toThrowError(expected);
     });
 
     test.each`
@@ -37,7 +39,7 @@ words:
         ${'cspell.yaml?x=5'} | ${'{\n  "words":[]}'}     | ${toYaml({ words: [] }, 2)}
         ${'cspell.yml'}      | ${sampleCSpellYaml}       | ${sampleCSpellYaml}
     `('serialize $uri', ({ uri, content, expected }) => {
-        const file = deserializerCSpellYaml(uri, content);
+        const file = deserializerCSpellYaml({ uri, content }, next);
         expect(file?.serialize()).toEqual(expected);
     });
 });

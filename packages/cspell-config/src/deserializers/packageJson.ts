@@ -1,12 +1,13 @@
-import { Deserializer } from '../Deserializer';
-import { ImplCSpellConfigFile } from '../CSpellConfigFile';
+import { Deserializer, DeserializerParams, DeserializerNext } from '../Deserializer';
+import { CSpellConfigFile, ImplCSpellConfigFile } from '../CSpellConfigFile';
 import { detectIndent } from './util';
 import { CSpellSettings } from '@cspell/cspell-types';
 
 const isSupportedFormat = /package\.json(?=$|[?#])/;
 
-function _deserializerPackageJson(uri: string, content: string): ImplCSpellConfigFile | undefined {
-    if (!isSupportedFormat.test(uri)) return undefined;
+function _deserializerPackageJson(params: DeserializerParams, next: DeserializerNext): CSpellConfigFile {
+    const { uri, content } = params;
+    if (!isSupportedFormat.test(uri)) return next(params);
 
     const packageJson = JSON.parse(content);
     if (!packageJson || typeof packageJson !== 'object' || Array.isArray(packageJson)) {

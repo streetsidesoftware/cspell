@@ -1,25 +1,41 @@
 import { CSpellConfigFile } from './CSpellConfigFile';
-import { Deserializer } from './Deserializer';
+import { Deserializer, DeserializerParams, DeserializerNext } from './Deserializer';
 import { IO } from './IO';
 
-export class CSpellConfigFileReaderWriter {
+export const defaultNextDeserializer: DeserializerNext = (content: DeserializerParams) => {
+    throw new Error(`Unable to parse config file: "${content.uri}"`);
+};
+
+export interface CSpellConfigFileReaderWriter {
+    readonly io: IO;
+    readonly deserializers: Deserializer[];
+    readConfig(uri: string): Promise<CSpellConfigFile>;
+    writeConfig(configFile: CSpellConfigFile): Promise<void>;
+}
+
+export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderWriter {
     constructor(readonly io: IO, readonly deserializers: Deserializer[]) {}
 
     async readConfig(uri: string): Promise<CSpellConfigFile> {
         const content = await this.io.readFile(uri);
 
-        for (const des of this.deserializers) {
-            const config = des(uri, content);
-            if (config) {
-                return config;
-            }
+        let next: DeserializerNext = defaultNextDeserializer;
+
+        const desContent: DeserializerParams = { uri, content };
+
+        for (const des of [...this.deserializers].reverse()) {
+            next = curry(des, next);
         }
 
-        throw new Error(`Unable to parse config file: "${uri}"`);
+        return next(desContent);
     }
 
     writeConfig(configFile: CSpellConfigFile): Promise<void> {
         const content = configFile.serialize();
         return this.io.writeFile(configFile.uri, content);
     }
+}
+
+function curry(des: Deserializer, next: DeserializerNext): DeserializerNext {
+    return (content) => des(content, next);
 }

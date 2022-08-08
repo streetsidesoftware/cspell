@@ -1,7 +1,10 @@
 import { deserializerCSpellJson } from './cspellJson';
 import { json } from '../test-helpers/util';
+import { defaultNextDeserializer } from '../CSpellConfigFileReaderWriter';
 
 const oc = expect.objectContaining;
+
+const next = defaultNextDeserializer;
 
 describe('cspellJson', () => {
     const sampleCSpellJson = `{
@@ -15,22 +18,22 @@ describe('cspellJson', () => {
 
     test.each`
         uri                  | content                                    | expected
-        ${''}                | ${''}                                      | ${undefined}
         ${'cspell.json'}     | ${'{}'}                                    | ${oc({ settings: {} })}
-        ${'cspell.js'}       | ${''}                                      | ${undefined}
-        ${'cspell.yaml'}     | ${''}                                      | ${undefined}
         ${'cspell-ext.json'} | ${'{}'}                                    | ${oc({ settings: {} })}
         ${'.cspell.json'}    | ${'{\n  // add words here\n  "words":[]}'} | ${oc({ settings: { words: [] } })}
     `('success $uri', ({ uri, content, expected }) => {
-        expect(deserializerCSpellJson(uri, content)).toEqual(expected);
+        expect(deserializerCSpellJson({ uri, content }, next)).toEqual(expected);
     });
 
     test.each`
         uri              | content | expected
+        ${''}            | ${''}   | ${'Unable to parse config file: ""'}
+        ${'cspell.js'}   | ${''}   | ${'Unable to parse config file: "cspell.js"'}
+        ${'cspell.yaml'} | ${''}   | ${'Unable to parse config file: "cspell.yaml"'}
         ${'cspell.json'} | ${''}   | ${'Unexpected end of JSON input'}
         ${'cspell.json'} | ${'[]'} | ${'Unable to parse cspell.json'}
     `('fail $uri', ({ uri, content, expected }) => {
-        expect(() => deserializerCSpellJson(uri, content)).toThrowError(expected);
+        expect(() => deserializerCSpellJson({ uri, content }, next)).toThrowError(expected);
     });
 
     test.each`
@@ -39,7 +42,7 @@ describe('cspellJson', () => {
         ${'cspell.json?x=5'} | ${'{\n  "words":[]}'}     | ${json({ words: [] }, 2)}
         ${'cspell.jsonc'}    | ${sampleCSpellJson}       | ${sampleCSpellJson}
     `('serialize $uri', ({ uri, content, expected }) => {
-        const file = deserializerCSpellJson(uri, content);
+        const file = deserializerCSpellJson({ uri, content }, next);
         expect(file?.serialize()).toEqual(expected);
     });
 });

@@ -1,5 +1,5 @@
 import { CSpellConfigFile } from './CSpellConfigFile';
-import { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter';
+import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter';
 import { defaultDeserializers } from './deserializers';
 import { IO } from './IO';
 import { json } from './test-helpers/util';
@@ -15,7 +15,7 @@ describe('CSpellConfigFileReaderWriter', () => {
             readFile: jest.fn(() => content),
             writeFile: jest.fn(),
         };
-        const rw = new CSpellConfigFileReaderWriter(io, defaultDeserializers);
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         expect(await rw.readConfig(uri)).toEqual(expected);
     });
 
@@ -27,7 +27,7 @@ describe('CSpellConfigFileReaderWriter', () => {
             readFile: jest.fn(() => content),
             writeFile: jest.fn(),
         };
-        const rw = new CSpellConfigFileReaderWriter(io, defaultDeserializers);
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         await expect(rw.readConfig(uri)).rejects.toEqual(expected);
     });
 
@@ -40,7 +40,7 @@ describe('CSpellConfigFileReaderWriter', () => {
             writeFile: jest.fn(() => Promise.resolve()),
         };
 
-        const rw = new CSpellConfigFileReaderWriter(io, defaultDeserializers);
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers);
         const cf: CSpellConfigFile = {
             uri,
             settings: {},

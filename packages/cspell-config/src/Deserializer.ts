@@ -1,8 +1,17 @@
 import { CSpellConfigFile } from './CSpellConfigFile';
 
+export interface DeserializerParams {
+    uri: string;
+    content: string;
+}
+
+export interface DeserializerNext {
+    (content: DeserializerParams): CSpellConfigFile;
+}
+
 export interface Deserializer {
     /**
-     * If a Deserializer can handle a given uri, it returns a CSpellConfigFile, otherwise it returns undefined.
+     * If a Deserializer can handle a given request, it returns a CSpellConfigFile, otherwise it calls `next`.
      */
-    (uri: string, content: string): CSpellConfigFile | undefined;
+    (params: DeserializerParams, next: DeserializerNext): CSpellConfigFile;
 }

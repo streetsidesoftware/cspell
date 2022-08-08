@@ -1,5 +1,5 @@
 import * as index from './index';
-import { CSpellConfigFileReaderWriter, createReaderWriter } from './index';
+import { createReaderWriter } from './index';
 import { fixtures } from './test-helpers/fixtures';
 import { copyFile, tempPath } from './test-helpers/util';
 import { URI } from 'vscode-uri';
@@ -10,9 +10,8 @@ describe('index', () => {
         expect(index).toBeDefined();
     });
     test.each`
-        value                                  | expected
-        ${typeof CSpellConfigFileReaderWriter} | ${'function'}
-        ${typeof createReaderWriter}           | ${'function'}
+        value                        | expected
+        ${typeof createReaderWriter} | ${'function'}
     `('exports', ({ value, expected }) => {
         expect(value).toEqual(expected);
     });
