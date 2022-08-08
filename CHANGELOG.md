@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.6.0](https://github.com/streetsidesoftware/cspell/compare/v6.5.0...v6.6.0) (2022-08-08)
+
+
+### Bug Fixes
+
+* add tests for yarn3 ([#3324](https://github.com/streetsidesoftware/cspell/issues/3324)) ([3a86e26](https://github.com/streetsidesoftware/cspell/commit/3a86e265c0758b8e919f3cb69af74d2ac6d3918f))
+* Workflow Bot -- Update Dictionaries ([#3337](https://github.com/streetsidesoftware/cspell/issues/3337)) ([cf0b465](https://github.com/streetsidesoftware/cspell/commit/cf0b4651cc6f9ddcdda3c770b14493312fbb0169))
+
+
+### Features
+
+* Support spell checking of JSX/TSX Text ([#3346](https://github.com/streetsidesoftware/cspell/issues/3346)) ([943932e](https://github.com/streetsidesoftware/cspell/commit/943932e5b0b592fc69f156115612d4ea367bbb97)), closes [#3342](https://github.com/streetsidesoftware/cspell/issues/3342)
+* Use CSpellIO as the default file read layer. ([#3323](https://github.com/streetsidesoftware/cspell/issues/3323)) ([c1ebd70](https://github.com/streetsidesoftware/cspell/commit/c1ebd70d17055706db0ad806ccea064dc5e272b9))
+
+
+
+
+
 # [6.5.0](https://github.com/streetsidesoftware/cspell/compare/v6.4.2...v6.5.0) (2022-07-29)
 
 

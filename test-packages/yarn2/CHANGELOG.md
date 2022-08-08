@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.6.0](https://github.com/streetsidesoftware/cspell/compare/v6.5.0...v6.6.0) (2022-08-08)
+
+
+### Bug Fixes
+
+* add tests for yarn3 ([#3324](https://github.com/streetsidesoftware/cspell/issues/3324)) ([3a86e26](https://github.com/streetsidesoftware/cspell/commit/3a86e265c0758b8e919f3cb69af74d2ac6d3918f))
+
+
+
+
+
 ## [6.1.3](https://github.com/streetsidesoftware/cspell/compare/v6.1.3-alpha.1...v6.1.3) (2022-06-28)
 
 **Note:** Version bump only for package test-yarn2

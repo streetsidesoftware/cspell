@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.6.0](https://github.com/streetsidesoftware/cspell/compare/v6.5.0...v6.6.0) (2022-08-08)
+
+
+### Features
+
+* Use CSpellIO as the default file read layer. ([#3323](https://github.com/streetsidesoftware/cspell/issues/3323)) ([c1ebd70](https://github.com/streetsidesoftware/cspell/commit/c1ebd70d17055706db0ad806ccea064dc5e272b9))
+
+
+
+
+
 # [6.5.0](https://github.com/streetsidesoftware/cspell/compare/v6.4.2...v6.5.0) (2022-07-29)
 
 **Note:** Version bump only for package cspell-io

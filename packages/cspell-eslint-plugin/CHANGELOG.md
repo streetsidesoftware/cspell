@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.6.0](https://github.com/streetsidesoftware/cspell/compare/v6.5.0...v6.6.0) (2022-08-08)
+
+
+### Features
+
+* Support spell checking of JSX/TSX Text ([#3346](https://github.com/streetsidesoftware/cspell/issues/3346)) ([943932e](https://github.com/streetsidesoftware/cspell/commit/943932e5b0b592fc69f156115612d4ea367bbb97)), closes [#3342](https://github.com/streetsidesoftware/cspell/issues/3342)
+
+
+
+
+
 # [6.5.0](https://github.com/streetsidesoftware/cspell/compare/v6.4.2...v6.5.0) (2022-07-29)
 
 **Note:** Version bump only for package @cspell/eslint-plugin
