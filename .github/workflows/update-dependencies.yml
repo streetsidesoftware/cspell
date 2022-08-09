@@ -93,7 +93,7 @@ jobs:
 
       - name: Build Patch
         run: |
-          mkdir temp
+          mkdir temp || echo temp already exists
           git add .
           git diff HEAD > temp/${{ env.patch_path }}
 
