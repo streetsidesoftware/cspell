@@ -205,7 +205,7 @@ jobs:
 
       - name: Store Repo Diff
         run: |
-          mkdir temp
+          mkdir temp || echo temp already exists
           REPO=$(echo "${{ matrix.repo }}" | sed "s/[/]/__/g")
           echo "${{ matrix.repo }} =>" $REPO
           git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/$REPO.diff
