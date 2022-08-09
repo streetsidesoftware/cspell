@@ -55,7 +55,23 @@ jobs:
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
-      - run: npm i -g npm@8.12
+
+      - name: NX Cache
+        uses: actions/cache@v3
+        env:
+          CALC_HASH_TS: ${{ hashFiles('**/*.ts') }}
+          CALC_HASH_PKG: ${{ hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json') }}
+        with:
+          key: >
+            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-${{ runner.os }}
+          path: |
+            temp/nxCache
+          restore-keys: |
+            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-
+            nx-cache-${{ env.CALC_HASH_TS }}-
+            nx-cache-
+
+      - run: npm i -g npm@8
       - run: npm -v
 
       - name: Restore CSpell cache
@@ -106,7 +122,22 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
 
-      - run: npm i -g npm@8.12
+      - name: NX Cache
+        uses: actions/cache@v3
+        env:
+          CALC_HASH_TS: ${{ hashFiles('**/*.ts') }}
+          CALC_HASH_PKG: ${{ hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json') }}
+        with:
+          key: >
+            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-${{ runner.os }}
+          path: |
+            temp/nxCache
+          restore-keys: |
+            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-
+            nx-cache-${{ env.CALC_HASH_TS }}-
+            nx-cache-
+
+      - run: npm i -g npm@8
       - run: npm -v
 
       - run: npm ci
@@ -148,7 +179,23 @@ jobs:
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
-      - run: npm i -g npm@8.12
+
+      - name: NX Cache
+        uses: actions/cache@v3
+        env:
+          CALC_HASH_TS: ${{ hashFiles('**/*.ts') }}
+          CALC_HASH_PKG: ${{ hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json') }}
+        with:
+          key: >
+            nx-cache-full-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-${{ runner.os }}
+          path: |
+            temp/nxCache
+          restore-keys: |
+            nx-cache-full-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-
+            nx-cache-full-${{ env.CALC_HASH_TS }}-
+            nx-cache-full-
+
+      - run: npm i -g npm@8
       - run: npm -v
 
       - name: Swap tsconfig.json
