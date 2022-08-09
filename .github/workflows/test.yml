@@ -59,17 +59,16 @@ jobs:
       - name: NX Cache
         uses: actions/cache@v3
         env:
-          CALC_HASH: ${{ hashFiles('**/*.ts') }}
+          CALC_HASH_TS: ${{ hashFiles('**/*.ts') }}
+          CALC_HASH_PKG: ${{ hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json') }}
         with:
           key: >
-            nx-cache-${{ runner.os }}-${{ hashFiles('**/*.ts') }}-${{
-              hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json')
-            }}-${{ env.CALC_HASH }}-${{ runner.os }}
+            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-${{ runner.os }}
           path: |
             temp/nxCache
           restore-keys: |
-            nx-cache-${{ runner.os }}-${{ hashFiles('**/*.ts') }}
-            nx-cache-${{ runner.os }}-
+            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-
+            nx-cache-${{ env.CALC_HASH_TS }}-
             nx-cache-
 
       - run: npm i -g npm@8.12
