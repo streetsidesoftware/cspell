@@ -21,7 +21,7 @@
     "clean-dist": "rimraf \"packages/*/dist\"",
     "clean": "rimraf \"{*,*/*}/{.tsbuildinfo,temp,coverage}\" lcov.info && pnpm -r run clean",
     "coverage-collect": "globcat packages/*/coverage/lcov.info > lcov.info",
-    "coverage": "pnpm -r run coverage --stream && pnpm run coverage-collect",
+    "coverage": "pnpm --stream -r run coverage && pnpm run coverage-collect",
     "eslint-fix": "eslint . --fix --cache",
     "eslint-fix-no-cache": "eslint . --fix",
     "ibt": "pnpm install && pnpm run build && pnpm test",
