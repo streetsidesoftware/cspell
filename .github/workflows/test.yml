@@ -55,6 +55,21 @@ jobs:
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
+
+      - name: NX Cache
+        uses: actions/cache@v3
+        with:
+          key: >
+            nx-cache-${{ runner.os }}-${{ hashFiles('**/*.ts') }}-${{
+              hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json')
+            }}
+          path: |
+            temp/nxCache
+          restore-keys: |
+            nx-cache-${{ runner.os }}-${{ hashFiles('**/*.ts') }}
+            nx-cache-${{ runner.os }}-
+            nx-cache-
+
       - run: npm i -g npm@8.12
       - run: npm -v
 
