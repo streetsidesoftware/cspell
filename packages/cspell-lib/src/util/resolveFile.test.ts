@@ -36,7 +36,7 @@ describe('Validate resolveFile', () => {
         ${'cspell-ext.json'}                          | ${__dirname}            | ${path.resolve(__dirname, 'cspell-ext.json')}          | ${false}
         ${`./resolveFile${ext}`}                      | ${__dirname}            | ${require.resolve('./resolveFile')}                    | ${true}
         ${`resolveFile${ext}`}                        | ${__dirname}            | ${require.resolve('./resolveFile')}                    | ${true}
-        ${'lerna'}                                    | ${__dirname}            | ${require.resolve('lerna')}                            | ${true}
+        ${'jest'}                                     | ${__dirname}            | ${require.resolve('jest')}                             | ${true}
         ${userNotFound}                               | ${__dirname}            | ${path.resolve(path.join(os.homedir(), notFound))}     | ${false}
         ${'https://google.com/file.txt'}              | ${__dirname}            | ${'https://google.com/file.txt'}                       | ${true}
         ${'file.txt'}                                 | ${'https://google.com'} | ${'https://google.com/file.txt'}                       | ${true}
