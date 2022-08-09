@@ -8,12 +8,6 @@
     "symlink": "build_tools/bin/symlink.js"
   },
   "private": true,
-  "workspaces": [
-    "./packages/*",
-    "./rfc/*",
-    "./test-packages/*",
-    "./integration-tests"
-  ],
   "scripts": {
     "bootstrap": "lerna bootstrap --no-ci",
     "bt": "npm run build && npm run test",
@@ -44,7 +38,7 @@
     "pub-next": "npm run pre-pub && lerna publish --conventional-commits --conventional-prerelease --dist-tag next",
     "symlink": "node build_tools/bin/symlink.js packages test-packages",
     "test-watch": "lerna run --parallel test-watch",
-    "test": "lerna run test && npm run test-schema",
+    "test": "lerna run test --concurrency=1 && npm run test-schema",
     "test-bin": "npm run test-bin-spell && npm run test-bin-spell-cache-content && npm run test-bin-spell-cache-metadata && npm run test-bin-trace && npm run test-bin-check",
     "test-bin-check": "node ./bin.js check README.md",
     "test-bin-spell": "node ./bin.js -c cspellrc.json --no-progress",
