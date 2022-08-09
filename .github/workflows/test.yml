@@ -54,10 +54,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-          cache-dependency-path: |
-            package-lock.json
-            packages/*/package-lock.json
-            integration-tests/package-lock.json
 
       - name: NX Cache
         uses: actions/cache@v3
@@ -167,10 +163,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
-          cache-dependency-path: |
-            package-lock.json
-            packages/*/package-lock.json
-            integration-tests/package-lock.json
 
       - run: pnpm -v
 
