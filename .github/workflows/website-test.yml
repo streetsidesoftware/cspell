@@ -32,11 +32,12 @@ jobs:
           node-version: 16.x
           cache: pnpm
 
+      - run: |
+          pnpm i
+
       - name: Build website
         run: |
-          cd website
-          pnpm i
-          pnpm run build
+          pnpm --filter website run build:site
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code

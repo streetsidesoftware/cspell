@@ -15,7 +15,7 @@
     "build-cspell-types-docs": "cd doc-generator && pnpm i && pnpm run build-cspell-types-docs",
     "build-integration-tests": "cd ./integration-tests && pnpm i",
     "build-schema": "pnpm -r run build-schema",
-    "build": "pnpm run  --filter \\!website build && pnpm -r run prepare-cspell-action",
+    "build": "pnpm -r run build && pnpm -r run prepare-cspell-action",
     "check-spelling": "npx cspell -c cspellrc.json",
     "clean-build": "pnpm run clean && pnpm -r run clean-build",
     "clean-dist": "rimraf \"packages/*/dist\"",
