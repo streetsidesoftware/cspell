@@ -98,18 +98,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "pnpm"
           cache-dependency-path: |
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
-      - run: npm i -g npm@8
-      - run: npm -v
+      - run: pnpm -v
 
       - name: Repo Info
         id: step-repo-info
@@ -153,19 +155,19 @@ jobs:
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
 
-      - name: Npm CI
+      - name: pnpm CI
         if: ${{ !steps.step-cache-build.outputs.cache-hit || !steps.step-cache-run.outputs.cache-hit }}
-        run: npm ci
+        run: pnpm i
 
-      - name: Has Npm has failed?
+      - name: Has pnpm has failed?
         if: ${{ failure() }}
         run: |
-          ls -alF /home/runner/.npm/_logs/*.log
-          cat /home/runner/.npm/_logs/*.log
+          ls -alF /home/runner/.pnpm/_logs/*.log
+          cat /home/runner/.pnpm/_logs/*.log
 
       - name: Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: npm run build
+        run: pnpm run build
 
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ !steps.step-cache-run.outputs.cache-hit }}
@@ -173,8 +175,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
-          && npm i
-          && npm run integration-tests -- ${{ matrix.repo }}
+          && pnpm i
+          && pnpm run integration-tests -- ${{ matrix.repo }}
 
 # cspell:ignore apollographql
 # cspell:ignore aspnetboilerplate

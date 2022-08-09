@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "clean": "rimraf dist .tsbuildinfo",
-    "build": "npm run compile",
+    "build": "pnpm run compile",
     "build-dev": "webpack --mode=development",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "pnpm run clean && pnpm run build",
     "compile": "webpack --mode=production",
     "test": "node dist/main.js"
   },

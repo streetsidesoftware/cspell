@@ -78,18 +78,20 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
+          cache: "pnpm"
           cache-dependency-path: |
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
-      - run: npm i -g npm@${{ env.NPM_VERSION }}
-      - run: npm -v
+      - run: pnpm -v
 
       - name: Cache Build
         id: step-cache-build
@@ -102,14 +104,14 @@ jobs:
         run: |
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      - name: Npm CI
-        run: npm ci
+      - name: pnpm CI
+        run: pnpm i
 
-      - name: Has Npm has failed?
+      - name: Has pnpm has failed?
         if: ${{ failure() }}
         run: |
-          ls -alF /home/runner/.npm/_logs/*.log
-          cat /home/runner/.npm/_logs/*.log
+          ls -alF /home/runner/.pnpm/_logs/*.log
+          cat /home/runner/.pnpm/_logs/*.log
 
       - name: Check Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
@@ -121,8 +123,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
-          && npm i
-          && npm run update-repositories -- ${{ matrix.repo }}
+          && pnpm i
+          && pnpm run update-repositories -- ${{ matrix.repo }}
 
       - name: Store Repo Diff
         id: step-repo-info
@@ -176,7 +178,7 @@ jobs:
 
       - name: Update Integrations List
         run: |
-          npm run update-integrations-list
+          pnpm run update-integrations-list
 
       - name: Build Patch
         run: |

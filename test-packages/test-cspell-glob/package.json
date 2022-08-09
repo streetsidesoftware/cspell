@@ -5,9 +5,9 @@
   "private": true,
   "scripts": {
     "clean": "rimraf dist .tsbuildinfo",
-    "build": "npm run compile",
+    "build": "pnpm run compile",
     "build-dev": "tsc -p tsconfig.dev.json",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "test": "node dist"
   },

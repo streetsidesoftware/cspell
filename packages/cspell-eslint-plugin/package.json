@@ -33,14 +33,14 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "npm run build-schema && npm run build-rollup",
+    "build": "pnpm run build-schema && pnpm run build-rollup",
     "build-rollup": "rollup --config rollup.config.ts --configPlugin typescript",
     "build-schema": "ts-json-schema-generator --no-top-ref --expose none --path src/options.ts --type Options  -o  ./src/_auto_generated_/options.schema.json",
-    "watch": "npm run build-rollup -- --watch",
+    "watch": "pnpm run build-rollup -- --watch",
     "clean": "rimraf dist coverage .tsbuildinfo",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "echo coverage",
-    "test-watch": "npm run test -- --watch",
+    "test-watch": "pnpm run test -- --watch",
     "test": "npx mocha --timeout 10000 \"dist/**/*.test.js\""
   },
   "repository": {

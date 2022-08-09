@@ -23,16 +23,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: npm
+          cache: pnpm
 
       - name: Build website
         run: |
           cd website
-          npm ci
-          npm run build
+          pnpm i
+          pnpm run build
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code

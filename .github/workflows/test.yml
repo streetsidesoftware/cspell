@@ -46,11 +46,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "pnpm"
           cache-dependency-path: |
             package-lock.json
             packages/*/package-lock.json
@@ -71,8 +74,7 @@ jobs:
             nx-cache-${{ env.CALC_HASH_TS }}-
             nx-cache-
 
-      - run: npm i -g npm@8
-      - run: npm -v
+      - run: pnpm -v
 
       - name: Restore CSpell cache
         uses: actions/cache@v3
@@ -84,18 +86,18 @@ jobs:
             cspell-cache-${{ runner.os }}-test-
             cspell-cache-${{ runner.os }}-
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+      - run: pnpm i
+      - run: pnpm run build
+      - run: pnpm test
 
       - name: verify trace command
-        run: npm run test-bin-trace
+        run: pnpm run test-bin-trace
 
       - name: verify the spell checker runs
-        run: npm run test-bin-spell
+        run: pnpm run test-bin-spell
 
       - name: verify the check command
-        run: npm run test-bin-check
+        run: pnpm run test-bin-check
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code
@@ -116,42 +118,29 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
+          cache: pnpm
 
-      - name: NX Cache
-        uses: actions/cache@v3
-        env:
-          CALC_HASH_TS: ${{ hashFiles('**/*.ts') }}
-          CALC_HASH_PKG: ${{ hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json') }}
-        with:
-          key: >
-            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-${{ runner.os }}
-          path: |
-            temp/nxCache
-          restore-keys: |
-            nx-cache-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-
-            nx-cache-${{ env.CALC_HASH_TS }}-
-            nx-cache-
+      - run: pnpm -v
 
-      - run: npm i -g npm@8
-      - run: npm -v
-
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+      - run: pnpm i
+      - run: pnpm run build
+      - run: pnpm test
 
       - name: verify trace command
-        run: npm run test-bin-trace
+        run: pnpm run test-bin-trace
 
       - name: verify the spell checker runs
-        run: npm run test-bin-spell
+        run: pnpm run test-bin-spell
 
       - name: verify the check command
-        run: npm run test-bin-check
+        run: pnpm run test-bin-check
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
@@ -170,33 +159,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "pnpm"
           cache-dependency-path: |
             package-lock.json
             packages/*/package-lock.json
             integration-tests/package-lock.json
 
-      - name: NX Cache
-        uses: actions/cache@v3
-        env:
-          CALC_HASH_TS: ${{ hashFiles('**/*.ts') }}
-          CALC_HASH_PKG: ${{ hashFiles('package*.json', 'packages/*/package*.json', 'integration-tests/*/package*.json') }}
-        with:
-          key: >
-            nx-cache-full-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-${{ runner.os }}
-          path: |
-            temp/nxCache
-          restore-keys: |
-            nx-cache-full-${{ env.CALC_HASH_TS }}-${{ env.CALC_HASH_PKG }}-
-            nx-cache-full-${{ env.CALC_HASH_TS }}-
-            nx-cache-full-
-
-      - run: npm i -g npm@8
-      - run: npm -v
+      - run: pnpm -v
 
       - name: Swap tsconfig.json
         run: |
@@ -206,6 +182,6 @@ jobs:
         run: |
           echo "$(cat tsconfig.json)"
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
+      - run: pnpm i
+      - run: pnpm run build
+      - run: pnpm test

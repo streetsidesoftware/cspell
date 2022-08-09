@@ -22,8 +22,8 @@
     "build-dev": "tsc -p tsconfig.dev.json",
     "build-dict": "cspell-tools-cli compile compatibility-words.txt",
     "clean": "echo clean",
-    "clean-build": "npm run clean && npm run build",
-    "watch": "npm run build -- --watch",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "watch": "pnpm run build -- --watch",
     "test": "node ../../bin.js \"*.{txt,md,ts}\""
   },
   "repository": {

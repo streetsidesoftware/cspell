@@ -15,18 +15,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          cache: npm
+          cache: pnpm
 
-      - run: npm i -g npm@8
-      - run: npm -v
+      - run: pnpm -v
 
-      - # It is necessary to run `npm i` in order install some dictionaries.
+      - # It is necessary to run `pnpm i` in order install some dictionaries.
         name: prepare-cspell-action
-        run: npm i
-      - run: npx lerna run build --scope "@cspell/cspell-bundled-dicts" --include-dependencies
+        run: pnpm i
+      - run: pnpm --filter "@cspell/cspell-bundled-dicts" run build
 
       - name: Restore CSpell cache
         uses: actions/cache@v3
