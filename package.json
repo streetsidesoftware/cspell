@@ -8,6 +8,12 @@
     "symlink": "build_tools/bin/symlink.js"
   },
   "private": true,
+  "workspaces": [
+    "./packages/*",
+    "./rfc/*",
+    "./test-packages/*",
+    "./integration-tests"
+  ],
   "scripts": {
     "bootstrap": "lerna bootstrap --no-ci",
     "bt": "npm run build && npm run test",

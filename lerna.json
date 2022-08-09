@@ -1,10 +1,11 @@
 {
   "useNx": true,
-  "packages": [
-    "packages/*",
-    "rfc/*",
-    "test-packages/*",
-    "integration-tests"
-  ],
-  "version": "6.6.0"
+  "useWorkspaces": true,
+  "version": "6.6.0",
+  "command": {
+    "version": {
+      "allowBranch": "main",
+      "conventionalCommits": true
+    }
+  }
 }
