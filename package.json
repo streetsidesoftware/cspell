@@ -11,11 +11,11 @@
   "private": true,
   "scripts": {
     "bt": "pnpm run build && pnpm run test",
-    "build-dev": "pnpm -r run build-dev",
+    "build-dev": "pnpm run --filter \\!website build-dev",
     "build-cspell-types-docs": "cd doc-generator && pnpm i && pnpm run build-cspell-types-docs",
     "build-integration-tests": "cd ./integration-tests && pnpm i",
     "build-schema": "pnpm -r run build-schema",
-    "build": "pnpm -r run build && pnpm -r run prepare-cspell-action",
+    "build": "pnpm run  --filter \\!website build && pnpm -r run prepare-cspell-action",
     "check-spelling": "npx cspell -c cspellrc.json",
     "clean-build": "pnpm run clean && pnpm -r run clean-build",
     "clean-dist": "rimraf \"packages/*/dist\"",
