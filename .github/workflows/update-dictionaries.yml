@@ -153,10 +153,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "pnpm"
-          cache-dependency-path: |
-            package-lock.json
-            packages/*/package-lock.json
-            integration-tests/package-lock.json
 
       - run: pnpm -v
 
