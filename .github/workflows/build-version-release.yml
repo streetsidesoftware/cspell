@@ -39,10 +39,22 @@ jobs:
   release_version:
     runs-on: ubuntu-latest
     steps:
+      - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
+        if: ${{ !env.DRY_RUN && !inputs.token }}
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
+      - name: Setup Token
+        env:
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
+        run: echo GITHUB_TOKEN=$GITHUB_TOKEN >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          persist-credentials: false
+          token: ${{ env.GITHUB_TOKEN }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.2
@@ -56,7 +68,7 @@ jobs:
 
       - name: Version
         run: |
-          echo "VERSION=$(jq -r .version lerna.json)" >> $GITHUB_ENV
+          echo VERSION=$(jq -r .version lerna.json) >> $GITHUB_ENV
 
       - name: Mode
         env:
@@ -68,34 +80,22 @@ jobs:
         run: |
           echo MODE=$MODE >> $GITHUB_ENV
 
-      - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
-        if: ${{ !env.DRY_RUN && !inputs.token }}
-        id: generate-token
-        with:
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
-
       - name: Setup Git
-        env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         run: |
           git config user.name streetsidesoftware[bot]
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
-          git remote add gh-token "https://$GH_TOKEN@github.com/streetsidesoftware/cspell.git"
+          git remote add gh-token "https://${{ env.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
 
       - name: Install
         run: pnpm i
 
       - name: Push Version
-        env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }} --no-push
+        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
 
-      - name: Trigger Workflows
-        env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-        run: |
-          git commit --allow-empty -m "chore: release $(jq -r .version lerna.json)" -m "Mark Release $(jq -r .version lerna.json)"
-          git push origin main --follow-tags
+      # - name: Trigger Workflows
+      #   env:
+      #     GH_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
+      #     GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     git commit --allow-empty -m "chore: release $(jq -r .version lerna.json)" -m "Mark Release $(jq -r .version lerna.json)"
+      #     git push origin main --follow-tags
