@@ -11,6 +11,15 @@ on:
           - "next"
         default: "next"
         required: true
+      bump:
+        description: "Version Bump"
+        type: choice
+        options:
+          - "patch"
+          - "minor"
+          - ""
+        default: ""
+        required: false
 
   workflow_call:
     secrets:
@@ -22,6 +31,7 @@ permissions:
 
 env:
   USE_NEXT: ${{ inputs.tag == 'next' }}
+  BUMP: ${{ inputs.bump }}
 
 jobs:
   publish:
@@ -58,4 +68,4 @@ jobs:
         run: pnpm i
 
       - name: Push Version
-        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }}
+        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.BUMP }}
