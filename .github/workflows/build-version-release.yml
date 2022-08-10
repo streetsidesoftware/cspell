@@ -75,8 +75,8 @@ jobs:
 
       - name: Setup Git
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name streetsidesoftware[bot]
+          git config user.email streetsidesoftware[bot]@users.noreply.github.com
           git remote add gh-token "https://${{ inputs.token || steps.generate-token.outputs.token }}@github.com/streetsidesoftware/cspell.git"
 
       - name: Install
