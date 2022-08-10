@@ -16,14 +16,9 @@
 
 • **characters**: `string`
 
-This is a set of characters that can include `-` or `|`
-- `-` - indicates a range of characters: `a-c` => `abc`
-- `|` - is a group separator, indicating that the characters on either side
-   are not related.
-
 #### Defined in
 
-[DictionaryInformation.ts:218](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L218)
+[DictionaryInformation.ts:218](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/DictionaryInformation.ts#L218)
 
 ___
 
@@ -31,11 +26,9 @@ ___
 
 • **cost**: `number`
 
-the cost to insert / delete / replace / swap the characters in a group
-
 #### Defined in
 
-[DictionaryInformation.ts:221](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L221)
+[DictionaryInformation.ts:221](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/DictionaryInformation.ts#L221)
 
 ___
 
@@ -43,9 +36,6 @@ ___
 
 • `Optional` **penalty**: `number`
 
-The penalty cost to apply if the accent is used.
-This is used to discourage
-
 #### Defined in
 
-[DictionaryInformation.ts:227](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L227)
+[DictionaryInformation.ts:227](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/DictionaryInformation.ts#L227)

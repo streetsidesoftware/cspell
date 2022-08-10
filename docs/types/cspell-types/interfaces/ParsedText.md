@@ -19,11 +19,9 @@
 
 • `Optional` `Readonly` **delegate**: `DelegateInfo`
 
-Used to delegate parsing the contents of `text` to another parser.
-
 #### Defined in
 
-[Parser.ts:51](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L51)
+[Parser.ts:51](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L51)
 
 ___
 
@@ -31,13 +29,9 @@ ___
 
 • `Optional` `Readonly` **map**: `SourceMap`
 
-The source map is used to support text transformations.
-
-See: {@link SourceMap}
-
 #### Defined in
 
-[Parser.ts:46](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L46)
+[Parser.ts:46](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L46)
 
 ___
 
@@ -45,11 +39,9 @@ ___
 
 • `Readonly` **range**: `Range`
 
-start and end offsets of the text
-
 #### Defined in
 
-[Parser.ts:34](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L34)
+[Parser.ts:34](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L34)
 
 ___
 
@@ -57,11 +49,9 @@ ___
 
 • `Optional` `Readonly` **rawText**: `string`
 
-The raw text before it has been transformed
-
 #### Defined in
 
-[Parser.ts:30](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L30)
+[Parser.ts:30](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L30)
 
 ___
 
@@ -69,13 +59,9 @@ ___
 
 • `Optional` `Readonly` **scope**: `Scope`
 
-The Scope annotation for a segment of text.
-Used by the spell checker to apply spell checking options
-based upon the value of the scope.
-
 #### Defined in
 
-[Parser.ts:40](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L40)
+[Parser.ts:40](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L40)
 
 ___
 
@@ -83,8 +69,6 @@ ___
 
 • `Readonly` **text**: `string`
 
-The text extracted and possibly transformed
-
 #### Defined in
 
-[Parser.ts:26](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L26)
+[Parser.ts:26](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L26)

@@ -18,11 +18,9 @@
 
 • `Optional` **cachedFiles**: `number`
 
-Number files that used results from the cache.
-
 #### Defined in
 
-[CSpellReporter.ts:73](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellReporter.ts#L73)
+[CSpellReporter.ts:73](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellReporter.ts#L73)
 
 ___
 
@@ -30,11 +28,9 @@ ___
 
 • **errors**: `number`
 
-Number of processing errors.
-
 #### Defined in
 
-[CSpellReporter.ts:71](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellReporter.ts#L71)
+[CSpellReporter.ts:71](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellReporter.ts#L71)
 
 ___
 
@@ -42,11 +38,9 @@ ___
 
 • **files**: `number`
 
-Number of files processed.
-
 #### Defined in
 
-[CSpellReporter.ts:65](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellReporter.ts#L65)
+[CSpellReporter.ts:65](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellReporter.ts#L65)
 
 ___
 
@@ -54,11 +48,9 @@ ___
 
 • **filesWithIssues**: `Set`<`string`\>
 
-Set of files where issues were found.
-
 #### Defined in
 
-[CSpellReporter.ts:67](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellReporter.ts#L67)
+[CSpellReporter.ts:67](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellReporter.ts#L67)
 
 ___
 
@@ -66,8 +58,6 @@ ___
 
 • **issues**: `number`
 
-Number of issues found.
-
 #### Defined in
 
-[CSpellReporter.ts:69](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellReporter.ts#L69)
+[CSpellReporter.ts:69](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellReporter.ts#L69)

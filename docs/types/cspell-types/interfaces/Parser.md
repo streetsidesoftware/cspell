@@ -18,11 +18,9 @@
 
 • `Readonly` **name**: `string`
 
-Name of parser
-
 #### Defined in
 
-[Parser.ts:7](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L7)
+[Parser.ts:7](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L7)
 
 ## Methods
 
@@ -30,14 +28,12 @@ Name of parser
 
 ▸ **parse**(`content`, `filename`): [`ParseResult`](ParseResult.md)
 
-Parse Method
-
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `content` | `string` | full content of the file |
-| `filename` | `string` | filename |
+| `content` | `string` |  |
+| `filename` | `string` |  |
 
 #### Returns
 
@@ -45,4 +41,4 @@ Parse Method
 
 #### Defined in
 
-[Parser.ts:13](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/Parser.ts#L13)
+[Parser.ts:13](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/Parser.ts#L13)

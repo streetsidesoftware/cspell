@@ -16,16 +16,9 @@
 
 • `Optional` **cacheLocation**: `string`
 
-Path to the cache location. Can be a file or a directory.
-If none specified `.cspellcache` will be used.
-Relative paths are relative to the config file in which it
-is defined.
-
-A prefix of `${cwd}` is replaced with the current working directory.
-
 #### Defined in
 
-[CSpellSettingsDef.ts:323](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L323)
+[CSpellSettingsDef.ts:323](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L323)
 
 ___
 
@@ -33,13 +26,9 @@ ___
 
 • `Optional` **cacheStrategy**: [`CacheStrategy`](../modules.md#cachestrategy)
 
-Strategy to use for detecting changed files, default: metadata
-
-**`default`** 'metadata'
-
 #### Defined in
 
-[CSpellSettingsDef.ts:329](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L329)
+[CSpellSettingsDef.ts:329](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L329)
 
 ___
 
@@ -47,10 +36,6 @@ ___
 
 • `Optional` **useCache**: `boolean`
 
-Store the results of processed files in order to only operate on the changed ones.
-
-**`default`** false
-
 #### Defined in
 
-[CSpellSettingsDef.ts:312](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L312)
+[CSpellSettingsDef.ts:312](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L312)

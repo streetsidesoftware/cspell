@@ -2,11 +2,6 @@
 
 # Interface: LegacySettings
 
-VS Code Spell Checker Settings.
-To be Removed.
-
-**`deprecated`** true
-
 ## Hierarchy
 
 - **`LegacySettings`**
@@ -26,13 +21,9 @@ To be Removed.
 
 • `Optional` **showStatus**: `boolean`
 
-Show status.
-
-**`deprecated`** true
-
 #### Defined in
 
-[CSpellSettingsDef.ts:384](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L384)
+[CSpellSettingsDef.ts:384](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L384)
 
 ___
 
@@ -40,10 +31,6 @@ ___
 
 • `Optional` **spellCheckDelayMs**: `number`
 
-Delay in ms after a document has changed before checking it for spelling errors.
-
-**`deprecated`** true
-
 #### Defined in
 
-[CSpellSettingsDef.ts:390](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L390)
+[CSpellSettingsDef.ts:390](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L390)

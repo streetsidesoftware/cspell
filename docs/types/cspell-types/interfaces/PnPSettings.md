@@ -2,8 +2,6 @@
 
 # Interface: PnPSettings
 
-Plug N Play settings to support package systems like Yarn 2.
-
 ## Hierarchy
 
 - **`PnPSettings`**
@@ -23,13 +21,9 @@ Plug N Play settings to support package systems like Yarn 2.
 
 • `Optional` **pnpFiles**: `string`[]
 
-The PnP files to search for. Note: `.mjs` files are not currently supported.
-
-**`default`** [".pnp.js", ".pnp.cjs"]
-
 #### Defined in
 
-[CSpellSettingsDef.ts:297](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L297)
+[CSpellSettingsDef.ts:297](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L297)
 
 ___
 
@@ -37,14 +31,6 @@ ___
 
 • `Optional` **usePnP**: `boolean`
 
-Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading
-packages stored in the repository.
-
-When true, the spell checker will search up the directory structure for the existence
-of a PnP file and load it.
-
-**`default`** false
-
 #### Defined in
 
-[CSpellSettingsDef.ts:290](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L290)
+[CSpellSettingsDef.ts:290](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L290)

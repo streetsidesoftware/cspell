@@ -21,11 +21,9 @@
 
 • **languageId**: `string` \| `string`[]
 
-The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.
-
 #### Defined in
 
-[CSpellSettingsDef.ts:696](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L696)
+[CSpellSettingsDef.ts:696](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L696)
 
 ___
 
@@ -33,8 +31,6 @@ ___
 
 • `Optional` **locale**: `string` \| `string`[]
 
-The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
-
 #### Defined in
 
-[CSpellSettingsDef.ts:698](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L698)
+[CSpellSettingsDef.ts:698](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L698)

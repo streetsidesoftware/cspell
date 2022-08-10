@@ -22,13 +22,9 @@
 
 • `Optional` **numSuggestions**: `number`
 
-Number of suggestions to make.
-
-**`default`** 10
-
 #### Defined in
 
-[CSpellSettingsDef.ts:256](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L256)
+[CSpellSettingsDef.ts:256](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L256)
 
 ___
 
@@ -36,17 +32,9 @@ ___
 
 • `Optional` **suggestionNumChanges**: `number`
 
-The maximum number of changes allowed on a word to be considered a suggestions.
-
-For example, appending an `s` onto `example` -> `examples` is considered 1 change.
-
-Range: between 1 and 5.
-
-**`default`** 3
-
 #### Defined in
 
-[CSpellSettingsDef.ts:274](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L274)
+[CSpellSettingsDef.ts:274](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L274)
 
 ___
 
@@ -54,10 +42,6 @@ ___
 
 • `Optional` **suggestionsTimeout**: `number`
 
-The maximum amount of time in milliseconds to generate suggestions for a word.
-
-**`default`** 500
-
 #### Defined in
 
-[CSpellSettingsDef.ts:263](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L263)
+[CSpellSettingsDef.ts:263](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L263)

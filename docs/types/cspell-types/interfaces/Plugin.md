@@ -2,12 +2,6 @@
 
 # Interface: Plugin
 
-Plugin API
-
-**`experimental`**
-
-**`version`** 6.2.0
-
 ## Table of contents
 
 ### Properties
@@ -22,4 +16,4 @@ Plugin API
 
 #### Defined in
 
-[CSpellSettingsDef.ts:1012](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L1012)
+[CSpellSettingsDef.ts:1012](https://github.com/streetsidesoftware/cspell/blob/6865ad5/packages/cspell-types/src/CSpellSettingsDef.ts#L1012)
