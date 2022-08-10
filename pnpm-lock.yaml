@@ -52,11 +52,11 @@ importers:
 
   doc-generator:
     specifiers:
-      typedoc: ^0.22.18
+      typedoc: ^0.23.10
       typedoc-plugin-markdown: ^3.13.4
     dependencies:
-      typedoc: 0.22.18_typescript@4.7.4
-      typedoc-plugin-markdown: 3.13.4_typedoc@0.22.18
+      typedoc: 0.23.10_typescript@4.7.4
+      typedoc-plugin-markdown: 3.13.4_typedoc@0.23.10
 
   integration-tests:
     specifiers:
@@ -12983,23 +12983,22 @@ packages:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
-  /typedoc-plugin-markdown/3.13.4_typedoc@0.22.18:
+  /typedoc-plugin-markdown/3.13.4_typedoc@0.23.10:
     resolution: {integrity: sha512-E/EBBmu6ARtnbswZGtBVBB/BfukZiGMOlqPc0RXCI/NFitONBahFqbCAF5fKQlijlcfipJj5pw5AMFH3NytrAw==}
     peerDependencies:
       typedoc: '>=0.23.0'
     dependencies:
       handlebars: 4.7.7
-      typedoc: 0.22.18_typescript@4.7.4
+      typedoc: 0.23.10_typescript@4.7.4
     dev: false
 
-  /typedoc/0.22.18_typescript@4.7.4:
-    resolution: {integrity: sha512-NK9RlLhRUGMvc6Rw5USEYgT4DVAUFk7IF7Q6MYfpJ88KnTZP7EneEa4RcP+tX1auAcz7QT1Iy0bUSZBYYHdoyA==}
-    engines: {node: '>= 12.10.0'}
+  /typedoc/0.23.10_typescript@4.7.4:
+    resolution: {integrity: sha512-03EUiu/ZuScUBMnY6p0lY+HTH8SwhzvRE3gImoemdPDWXPXlks83UGTx++lyquWeB1MTwm9D9Ca8RIjkK3AFfQ==}
+    engines: {node: '>= 14.14'}
     hasBin: true
     peerDependencies:
-      typescript: 4.0.x || 4.1.x || 4.2.x || 4.3.x || 4.4.x || 4.5.x || 4.6.x || 4.7.x
+      typescript: 4.6.x || 4.7.x
     dependencies:
-      glob: 8.0.3
       lunr: 2.3.9
       marked: 4.0.18
       minimatch: 5.1.0
