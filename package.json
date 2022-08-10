@@ -32,7 +32,7 @@
     "lint": "pnpm run eslint-fix && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "prepare-cspell-action": "pnpm i && pnpm -r run prepare-cspell-action",
     "pre-pub": "pnpm run clean-dist && pnpm run ibt",
-    "pub": "pnpm run pre-pub && lerna publish --conventional-commits",
+    "pub": "pnpm run pre-pub && lerna publish --conventional-commits --sync-workspace-lock",
     "pub-grad": "pnpm run pre-pub && lerna publish --conventional-commits --conventional-graduate  --sync-workspace-lock",
     "pub-next": "pnpm run pre-pub && lerna publish --conventional-commits --conventional-prerelease  --sync-workspace-lock --dist-tag next",
     "symlink": "node build_tools/bin/symlink.js packages test-packages",

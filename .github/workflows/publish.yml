@@ -32,10 +32,15 @@ jobs:
           pnpm i
           pnpm run pre-pub
 
+      - name: Version
+        run: |
+          echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_ENV
+
       # Release Please has already incremented versions and published tags, so we just
       # need to publish all unpublished versions to NPM here
       # See: https://github.com/lerna/lerna/tree/main/commands/publish#bump-from-package
       - name: Publish to NPM
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
-        run: pnpm lerna publish from-package --no-push --no-private --yes
+          DIST_TAG: ${{ contains(env.VERSION, 'alpha') && '--dist-tag next' || '' }}
+        run: echo pnpm lerna publish from-package --no-push --no-private --yes ${{ env.DIST_TAG }}
