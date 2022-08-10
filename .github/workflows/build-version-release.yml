@@ -3,30 +3,23 @@ name: Create Version Release
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: "Publish As (latest/next)"
-        type: choice
-        options:
-          - "latest"
-          - "next"
-        default: "next"
-        required: true
       bump:
         description: "Version Bump"
         type: choice
         options:
+          - "alpha"
           - "patch"
           - "minor"
           - "auto"
         default: "auto"
-        required: false
+        required: true
       dry_run:
         description: "Dry Run"
         type: choice
         options:
           - "yes"
           - "no"
-        default: "no"
+        default: "yes"
         required: false
 
   workflow_call:
@@ -38,8 +31,8 @@ permissions:
   contents: write
 
 env:
-  USE_NEXT: ${{ inputs.tag == 'next' }}
-  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
+  USE_NEXT: ${{ inputs.bump == 'alpha' }}
+  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump != 'alpha' && inputs.bump) || '' }}
   DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--git-dry-run') || '' }}
 
 jobs:
