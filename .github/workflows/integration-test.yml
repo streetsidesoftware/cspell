@@ -3,11 +3,11 @@ on:
   pull_request:
     paths:
       - "packages/**/package.json"
-      - "packages/**/package-lock.json"
+      - "packages/**/*-lock.yaml"
       - "packages/**/*.ts"
       - "integration-tests/**"
       - "package.json"
-      - "package-lock.json"
+      - "*-lock.yaml"
       - ".github/workflows/integration-test.yml"
       - "!docs/**"
   push:
@@ -15,11 +15,11 @@ on:
       - main
     paths:
       - "packages/**/package.json"
-      - "packages/**/package-lock.json"
+      - "packages/**/*-lock.yaml"
       - "packages/**/*.ts"
       - "integration-tests/**"
       - "package.json"
-      - "package-lock.json"
+      - "*-lock.yaml"
       - ".github/workflows/integration-test.yml"
       - "!docs/**"
   # Run on demand
@@ -118,9 +118,9 @@ jobs:
             'integration-tests/config/repositories/${{matrix.repo}}/**',
             'integration-tests/snapshots/${{ matrix.repo }}/*',
             'integration-tests/repositories/*',
-            'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-            'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
-            'package-lock.json'
+            'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+            'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
+            '*-lock.yaml'
           ) }}"
 
       - name: Cache Integration Run

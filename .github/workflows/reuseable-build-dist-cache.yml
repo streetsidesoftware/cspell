@@ -83,8 +83,8 @@ jobs:
           integration-tests/dist
           CACHE_PATH" >> $GITHUB_ENV
           echo "CACHE_KEY=int-build-${{ hashFiles(
-              'integration-tests/package-lock.json', 'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              'packages/*/package-lock.json', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
+              'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
+              '*-lock.yaml', 'packages/*/src/**/*.ts', 'packages/*/tsconfig.json'
             ) }}" >> $GITHUB_ENV
 
       - run: |

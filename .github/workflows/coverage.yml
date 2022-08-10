@@ -4,11 +4,11 @@ on:
     paths:
       - "*.js"
       - "*.ts"
-      - "package-lock.json"
+      - "*-lock.yaml"
       - "package.json"
+      - "packages/**/*-lock.yaml"
       - "packages/**/*.js"
       - "packages/**/*.ts"
-      - "packages/**/package-lock.json"
       - "packages/**/package.json"
       - ".github/workflows/coverage.yml"
       - "!docs/**"
@@ -18,7 +18,7 @@ on:
       - main
     paths:
       - "**/package.json"
-      - "**/package-lock.json"
+      - "**/*-lock.yaml"
       - "**/*.ts"
       - "**/*.js"
       - ".github/workflows/coverage.yml"
