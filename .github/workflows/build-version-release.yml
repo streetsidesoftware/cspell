@@ -36,7 +36,7 @@ env:
   DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--git-dry-run') || '' }}
 
 jobs:
-  publish:
+  release_version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
