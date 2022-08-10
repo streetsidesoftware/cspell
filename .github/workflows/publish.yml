@@ -1,0 +1,41 @@
+name: Publish to NPM
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    secrets:
+      PUBLISH_NPM:
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: "https://registry.npmjs.org"
+          cache: pnpm
+
+      - name: Install / Build
+        run: |
+          pnpm i
+          pnpm run pre-pub
+
+      # Release Please has already incremented versions and published tags, so we just
+      # need to publish all unpublished versions to NPM here
+      # See: https://github.com/lerna/lerna/tree/main/commands/publish#bump-from-package
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
+        run: pnpm lerna publish from-package --no-push --no-private --yes
