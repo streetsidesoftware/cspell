@@ -44,17 +44,18 @@ body:
     validations:
       required: false
 
-  - type: checkboxes
+  - type: dropdown
     id: component-library
     attributes:
       label: Supporting Library
       description: Issue with supporting library?
+      multiple: true
       options:
-        - label: "**No**"
-        - label: "**cspell-glob** - library for matching glob patterns."
-        - label: "**cspell-io** - thin file i/o library."
-        - label: "**cspell-trie-lib** - trie lib."
-        - label: "**Other** - one fo the other libraries."
+        - "N/A"
+        - "cspell-glob - library for matching glob patterns."
+        - "cspell-io - thin file i/o library."
+        - "cspell-trie-lib - trie lib."
+        - "Other - one fo the other libraries."
 
   - type: checkboxes
     id: os-type
