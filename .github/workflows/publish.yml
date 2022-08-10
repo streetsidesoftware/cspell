@@ -31,10 +31,11 @@ jobs:
         run: |
           echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_ENV
 
-      - name: Install / Build
-        run: |
-          pnpm i
-          pnpm run pre-pub
+      - name: Install
+        run: pnpm i
+
+      - name: Build
+        run: pnpm run build
 
       # Release Please has already incremented versions and published tags, so we just
       # need to publish all unpublished versions to NPM here
@@ -43,4 +44,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
           DIST_TAG: ${{ contains(env.VERSION, 'alpha') && '--dist-tag next' || '' }}
-        run: echo pnpm lerna publish from-package --no-push --no-private --yes ${{ env.DIST_TAG }}
+        run: pnpm lerna publish from-package --no-push --no-private --yes ${{ env.DIST_TAG }}
