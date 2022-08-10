@@ -68,7 +68,7 @@ jobs:
 
       - name: Update Root
         run: |
-          pnpm i --no-frozen-lockfile
+          pnpm i --fix-lockfile
           pnpm up
           pnpm -r up
 
