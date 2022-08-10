@@ -54,7 +54,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          token: ${{ env.GITHUB_TOKEN }}
+          token: ${{ env.GITHUB_TOKEN }} # needed to trigger workflows
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.2
@@ -91,11 +91,3 @@ jobs:
 
       - name: Push Version
         run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
-
-      # - name: Trigger Workflows
-      #   env:
-      #     GH_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-      #     GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     git commit --allow-empty -m "chore: release $(jq -r .version lerna.json)" -m "Mark Release $(jq -r .version lerna.json)"
-      #     git push origin main --follow-tags
