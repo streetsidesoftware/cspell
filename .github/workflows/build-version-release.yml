@@ -88,13 +88,12 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
+        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }} --no-push
 
       - name: Trigger Workflows
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         run: |
-          git pull
           git commit --allow-empty -m "chore: release $(jq -r .version lerna.json)" -m "Mark Release $(jq -r .version lerna.json)"
-          git push
+          git push origin main --follow-tags
