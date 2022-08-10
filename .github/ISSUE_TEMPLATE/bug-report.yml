@@ -10,30 +10,32 @@ body:
 
         ## Information
 
-  - type: checkboxes
+  - type: dropdown
     id: kind_of_issue
     attributes:
       label: Kind of Issue
       description: What type of issues are you having
+      multiple: true
       options:
-        - label: "Runtime - command-line tools"
-        - label: "Building / Compiling"
-        - label: "Security"
-        - label: "Change in behavior or regression."
-        - label: "Crash / Error"
+        - Runtime - command-line tools
+        - Building / Compiling
+        - Security
+        - Change in behavior or regression.
+        - Crash / Error
 
-  - type: checkboxes
+  - type: dropdown
     id: component
     attributes:
       label: Tool or Library
       description: Which Tool or Library is causing the issue?
+      multiple: true
       options:
-        - label: "**cspell** - the command-line spelling tool."
-        - label: "**cspell/eslint-plugin** - the plugin for ESLint."
-        - label: "**cspell-tools** - used for building dictionary files."
-        - label: "**cspell-lib** - library that does the actual spell checking."
-        - label: "**cspell-trie** - tool for working with trie files."
-        - label: other
+        - cspell # - the command-line spelling tool.
+        - cspell/eslint-plugin # - the plugin for ESLint.
+        - cspell-tools # - used for building dictionary files.
+        - cspell-lib # - library that does the actual spell checking.
+        - cspell-trie # - tool for working with trie files.
+        - other
 
   - type: input
     id: cspell-version
@@ -121,14 +123,14 @@ body:
   - type: textarea
     id: cspell-json
     attributes:
-      label: "**`cspell.json`**"
+      label: "cspell.json"
       description: Please provide a copy of your `cspell.json` file.
       render: js
 
   - type: textarea
     id: cspell-yaml
     attributes:
-      label: "**`cspell.config.yaml`**"
+      label: "cspell.config.yaml"
       description: Please provide a copy of your `cspell.config.yaml` file.
       render: yml
 
