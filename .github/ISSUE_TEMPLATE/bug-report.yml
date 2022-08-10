@@ -8,7 +8,7 @@ body:
       value: |
         Thank you for taking the time to fill out this bug report!
 
-        ## Information
+        # Information
 
   - type: dropdown
     id: kind_of_issue
@@ -84,7 +84,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## Bug Description
+        # Bug Description
 
   - type: textarea
     id: description
@@ -119,6 +119,11 @@ body:
       label: Additional Information
       description: Please provide any additional information that would help to understand the issue.
       placeholder: Add any other context about the problem here.
+
+  - type: markdown
+    attributes:
+      value: |
+        # Configuration
 
   - type: textarea
     id: cspell-json
