@@ -70,8 +70,8 @@ jobs:
         if: ${{ !env.DRY_RUN && !inputs.token }}
         id: generate-token
         with:
-          app_id: ${{ secrets.app_id }}
-          private_key: ${{ secrets.private_key }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
 
       - name: Setup Git
         run: |
