@@ -51,23 +51,25 @@ body:
       description: Issue with supporting library?
       multiple: true
       options:
-        - "N/A"
-        - "cspell-glob - library for matching glob patterns."
-        - "cspell-io - thin file i/o library."
-        - "cspell-trie-lib - trie lib."
-        - "Other - one fo the other libraries."
+        - "Not sure"
+        - "cspell-glob" # - library for matching glob patterns."
+        - "cspell-io" # - thin file i/o library."
+        - "cspell-trie-lib" # - trie lib."
+        - "Other" # - one fo the other libraries."
 
-  - type: checkboxes
+  - type: dropdown
     id: os-type
     attributes:
       label: OS
       description: Which OS has the issue?
+      multiple: true
       options:
-        - label: "**ALL**"
-        - label: "Macos"
-        - label: "Linux"
-        - label: "Windows"
-        - label: "Other"
+        - "ALL"
+        - "Macos"
+        - "Linux"
+        - "Windows"
+        - "Other"
+        - "N/A"
 
   - type: input
     id: on-version
