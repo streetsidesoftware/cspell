@@ -66,6 +66,12 @@ jobs:
         run: |
           echo MODE=$MODE >> $GITHUB_ENV
 
+      - name: Setup Git
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
+
       - name: Install
         run: pnpm i
 
