@@ -7,6 +7,9 @@ body:
     attributes:
       value: |
         Thank you for taking the time to fill out this bug report!
+
+        ## Information
+
   - type: checkboxes
     id: kind_of_issue
     attributes:
@@ -25,11 +28,11 @@ body:
       label: Tool or Library
       description: Which Tool or Library is causing the issue?
       options:
-        - label: "**cspell** -- the command-line spelling tool."
-        - label: "**cspell/eslint-plugin** -- the plugin for ESLint."
-        - label: "**cspell-tools** -- used for building dictionary files."
-        - label: "**cspell-lib** -- library that does the actual spell checking."
-        - label: "**cspell-trie** -- tool for working with trie files."
+        - label: "**cspell** - the command-line spelling tool."
+        - label: "**cspell/eslint-plugin** - the plugin for ESLint."
+        - label: "**cspell-tools** - used for building dictionary files."
+        - label: "**cspell-lib** - library that does the actual spell checking."
+        - label: "**cspell-trie** - tool for working with trie files."
         - label: other
 
   - type: input
@@ -41,43 +44,52 @@ body:
     validations:
       required: false
 
-  - type: input
-    id: contact
+  - type: checkboxes
+    id: component-library
     attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
+      label: Supporting Library
+      description: Issue with supporting library?
+      options:
+        - label: "**No**"
+        - label: "**cspell-glob** - library for matching glob patterns."
+        - label: "**cspell-io** - thin file i/o library."
+        - label: "**cspell-trie-lib** - trie lib."
+        - label: "**Other** - one fo the other libraries."
+
+  - type: checkboxes
+    id: os-type
+    attributes:
+      label: OS
+      description: Which OS has the issue?
+      options:
+        - label: "**ALL**"
+        - label: "Macos"
+        - label: "Linux"
+        - label: "Windows"
+        - label: "Other"
+
+  - type: input
+    id: on-version
+    attributes:
+      label: OS Version
+      description: Which version of the OS?
     validations:
       required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Description
+
   - type: textarea
-    id: what-happened
+    id: description
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
+      label: Description
+      description: A clear and concise description of what is happening.
+      placeholder: Please tell us about the issue.
     validations:
       required: true
-  - type: dropdown
-    id: version
-    attributes:
-      label: Version
-      description: What version of our software are you running?
-      options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
-    validations:
-      required: true
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
+
   - type: textarea
     id: logs
     attributes:
