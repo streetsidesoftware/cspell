@@ -49,7 +49,7 @@
     "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./packages/cspell-types/ajv.config.js",
     "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs",
     "update-packages-docs": "cd website && pnpm run update-packages",
-    "update-packages-src": "pnpm up",
+    "update-packages-src": "pnpm -r up",
     "update-dictionary-packages": "pnpm --filter \"@cspell/cspell-bundled-dicts\" up \"@cspell/dict*\"",
     "update-integrations-and-snapshots": "pnpm -r run update-repositories --scope cspell-integration-tests",
     "update-integrations-list": "cd integration-tests && ./repo-list.sh",
