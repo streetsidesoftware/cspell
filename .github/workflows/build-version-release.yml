@@ -17,8 +17,8 @@ on:
         options:
           - "patch"
           - "minor"
-          - ""
-        default: ""
+          - "auto"
+        default: "auto"
         required: false
 
   workflow_call:
@@ -31,7 +31,7 @@ permissions:
 
 env:
   USE_NEXT: ${{ inputs.tag == 'next' }}
-  BUMP: ${{ inputs.bump }}
+  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
 
 jobs:
   publish:
