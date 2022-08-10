@@ -1,4 +1,4 @@
-name: Build Release Version
+name: Create Version Release
 
 on:
   workflow_dispatch:
@@ -11,6 +11,23 @@ on:
           - "next"
         default: "next"
         required: true
+      bump:
+        description: "Version Bump"
+        type: choice
+        options:
+          - "patch"
+          - "minor"
+          - "auto"
+        default: "auto"
+        required: false
+      dry_run:
+        description: "Dry Run"
+        type: choice
+        options:
+          - "yes"
+          - "no"
+        default: "no"
+        required: false
 
   workflow_call:
     secrets:
@@ -22,6 +39,8 @@ permissions:
 
 env:
   USE_NEXT: ${{ inputs.tag == 'next' }}
+  BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
+  DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--git-dry-run') || '' }}
 
 jobs:
   publish:
@@ -47,7 +66,7 @@ jobs:
       - name: Mode
         env:
           MODE: >
-            ${{ (env.USE_NEXT && '--conventional-prerelease --dist-tag next')
+            ${{ (env.USE_NEXT && '--conventional-prerelease')
             || (contains(env.VERSION, 'alpha') && '--conventional-graduate')
             || ''
             }}
@@ -58,4 +77,4 @@ jobs:
         run: pnpm i
 
       - name: Push Version
-        run: echo pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }}
+        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
