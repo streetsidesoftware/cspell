@@ -27,14 +27,14 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           cache: pnpm
 
+      - name: Version
+        run: |
+          echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_ENV
+
       - name: Install / Build
         run: |
           pnpm i
           pnpm run pre-pub
-
-      - name: Version
-        run: |
-          echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_ENV
 
       # Release Please has already incremented versions and published tags, so we just
       # need to publish all unpublished versions to NPM here
