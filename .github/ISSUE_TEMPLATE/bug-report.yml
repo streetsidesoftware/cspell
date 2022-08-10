@@ -7,7 +7,19 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
+        Thank you for taking the time to fill out this bug report!
+  - type: checkboxes
+    id: kind_of_issue
+    attributes:
+      label: Kind of Issue
+      description: What type of issues are you having
+      options:
+        - label: **Runtime** - command-line tools
+        - label: **Building / Compiling**
+        - label: **Security**
+        - label: **Change in behavior** or **regression**.
+        - label: **Crash / Error**
+        
   - type: input
     id: contact
     attributes:
