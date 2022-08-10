@@ -32,7 +32,7 @@ jobs:
         run: |
           cd website
           pnpm i
-          pnpm run build
+          pnpm run build:site
       - uses: actions/upload-artifact@v3
         with:
           name: website
