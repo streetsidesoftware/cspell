@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
-  files: 7645
-  filesWithIssues: 5849
-  issues: 57483
+  files: 7646
+  filesWithIssues: 5850
+  issues: 57490
   errors: 0
 Errors: []
 
@@ -253,7 +253,8 @@ issues:
   - "external/googleapis/protolists/monitoring.list:7:56     	drilldowns  	U   	monitoring/dashboard/v1:drilldowns.proto"
   - "external/googleapis/protolists/monitoring.list:17:56    	xychart     	U   	monitoring/dashboard/v1:xychart.proto"
   - "external/googleapis/protolists/scheduler.list:1:51      	cloudscheduler  	U   	google/cloud/scheduler/v1:cloudscheduler.proto"
-  - "external/googleapis/protolists/securitycenter.list:7:56     	exfiltration	U   	cloud/securitycenter/v1:exfiltration.proto"
+  - "external/googleapis/protolists/securitycenter.list:8:56     	exfiltration	U   	cloud/securitycenter/v1:exfiltration.proto"
+  - "external/googleapis/protolists/securitycenter.list:15:56    	kubernetes  	U   	cloud/securitycenter/v1:kubernetes.proto"
   - "external/googleapis/protolists/servicemanagement.list:2:57      	servicemanager  	U   	servicemanagement/v1:servicemanager.proto"
   - "external/googleapis/protolists/shell.list:1:47      	cloudshell  	U   	google/cloud/shell/v1:cloudshell.proto"
   - "external/googleapis/protolists/tasks.list:1:47      	cloudtasks  	U   	google/cloud/tasks/v2:cloudtasks.proto"
@@ -338,7 +339,8 @@ issues:
   - "google/cloud/appengine/firewall_client.h:114:36     	ruleset     	U   	the entire firewall ruleset in one bulk operation"
   - "google/cloud/appengine/instances_client.h:90:8      	Stackdriver 	U   	/// [Stackdriver Monitoring"
   - "google/cloud/artifactregistry/artifact_registry_client.h:19:39      	ARTIFACTREGISTRY	U   	CLOUD_CPP_GOOGLE_CLOUD_ARTIFACTREGISTRY_ARTIFACT_REGISTRY_CLIENT"
-  - "google/cloud/asset/asset_client.h:406:20    	Impor   	U   	/// contains \"Impor\" as a prefix of any"
+  - "google/cloud/asset/asset_client.h:406:20    	Impor           	U   	/// contains \"Impor\" as a prefix of any"
+  - "google/cloud/asset/asset_client.h:421:50    	INSTANCEGROUP   	U   	of type \"INSTANCE_TO_INSTANCEGROUP\"."
   - "google/cloud/asset/doc/main.dox:7:18    	Anthos      	U   	all your GCP and Anthos assets across projects"
   - "google/cloud/asset/doc/main.dox:45:40   	cloudasset  	U   	(which defaults to \"cloudasset.googleapis.com\")"
   - "google/cloud/assuredworkloads/assured_workloads_client.h:19:39      	ASSUREDWORKLOADS	U   	CLOUD_CPP_GOOGLE_CLOUD_ASSUREDWORKLOADS_ASSURED_WORKLOADS_CLIENT"
@@ -392,12 +394,12 @@ issues:
   - "google/cloud/bigtable/examples/data_snippets.cc:644:21  	rowkey  	U   	std::cerr << \"rowkey[\" << f.original_index"
   - "google/cloud/bigtable/examples/howto_mock_data_api.cc:32:11     	cbtm	U   	namespace cbtm = ::google::cloud::bigtable"
   - "google/cloud/bigtable/filters.h:623:6   	subfilters  	U   	* subfilters S1, S2, and S3, the"
-  - "google/cloud/bigtable/instance_admin_test.cc:46:11      	iamproto	U   	namespace iamproto = ::google::iam::v1"
+  - "google/cloud/bigtable/instance_admin_test.cc:47:11      	iamproto	U   	namespace iamproto = ::google::iam::v1"
   - "google/cloud/bigtable/internal/async_row_reader_test.cc:331:35  	Doesnt  	U   	AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
   - "google/cloud/bigtable/internal/async_row_reader.cc:69:31    	cntr	U   	explicit CountFrames(int& cntr) : cntr(++cntr) {}"
   - "google/cloud/bigtable/internal/bigtable_channel_refresh_test.cc:40:50   	deregistering   	U   	once per channel when deregistering them."
   - "google/cloud/bigtable/internal/bulk_mutator.cc:113:10   	Retryable   	U   	// Retryable requests are saved in"
-  - "google/cloud/bigtable/internal/data_connection_impl.cc:375:24   	satisying   	U   	// sure of that, satisying the `promise<>` is deferred"
+  - "google/cloud/bigtable/internal/data_connection_impl.cc:402:24   	satisying   	U   	// sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/defaults_test.cc:153:38  	tableadmin      	U   	AdminEndpointOption>(\"tableadmin.googleapis.com\")"
   - "google/cloud/bigtable/internal/defaults_test.cc:154:46  	instanceadmin   	U   	InstanceAdminEndpointOption>(\"instanceadmin.googleapis.com\");"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:143:22   	corresponse 	U   	* Future at idx i corresponse to i-th expected row"
@@ -456,7 +458,6 @@ issues:
   - "google/cloud/container/cluster_manager_client.cc:483:42     	Subnetwork  	U   	container::v1::UsableSubnetwork>"
   - "google/cloud/container/cluster_manager_client.cc:484:33     	Subnetworks 	U   	usterManagerClient::ListUsableSubnetworks("
   - "google/cloud/container/cluster_manager_client.h:176:11  	Kubelet     	U   	/// the Kubelet creates routes for each"
-  - "google/cloud/container/cluster_manager_client.h:370:37  	kubernetes  	U   	monitoring.googleapis.com/kubernetes\" - The Cloud Monitoring"
   - "google/cloud/container/cluster_manager_client.h:1025:31 	ABAC        	U   	Enables or disables the ABAC authorization mechanism"
   - "google/cloud/container/cluster_manager_client.h:1029:8  	abac        	U   	/// abac. Specified in the format"
   - "google/cloud/container/cluster_manager_client.h:1277:13 	subnetworks 	U   	/// Lists subnetworks that are usable for"
@@ -659,8 +660,8 @@ issues:
   - "google/cloud/spanner/instance_admin_client_test.cc:29:11    	gsai	U   	namespace gsai = ::google::spanner"
   - "google/cloud/spanner/internal/connection_impl_test.cc:61:34     	Wmissing    	U   	diagnostic ignored \"-Wmissing-field-initializers\""
   - "google/cloud/spanner/internal/connection_impl_test.cc:87:27     	Pointwise   	U   	::testing::UnorderedPointwise;"
-  - "google/cloud/spanner/internal/connection_impl_test.cc:2414:37   	BADDECAF    	U   	{ partition_token: \"BADDECAF\" }"
-  - "google/cloud/spanner/internal/connection_impl_test.cc:2416:25   	CAFEDEAD    	U   	transaction: { id: \"CAFEDEAD\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:2488:37   	BADDECAF    	U   	{ partition_token: \"BADDECAF\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:2490:25   	CAFEDEAD    	U   	transaction: { id: \"CAFEDEAD\" }"
   - "google/cloud/spanner/internal/logging_result_set_reader.cc:37:43    	unresumable 	U   	__func__ << \"() << (unresumable)\";"
   - "google/cloud/spanner/internal/merge_chunk_test.cc:175:29    	Bools   	U   	MergeChunk, CannotMergeBools) {"
   - "google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39  	Resumability	U   	set<spanner::StreamingResumabilityBufferSizeOption>(0)"
@@ -685,16 +686,16 @@ issues:
   - "google/cloud/spanner/value.h:346:6      	Metafunction	U   	// Metafunction that returns true if"
   - "google/cloud/status.cc:183:8    	keyspace    	U   	// The keyspace used here is separate"
   - "google/cloud/status.cc:183:50   	keyspaces   	U   	separate from other keyspaces (e.g.,"
-  - "google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:439:18   	Gbit	U   	<< \" Gbit/s=\" << bandwidth <<"
+  - "google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:424:18   	Gbit	U   	<< \" Gbit/s=\" << bandwidth <<"
   - "google/cloud/storage/benchmarks/README.md:10:61     	TTFB	U   	time to first byte (TTFB) is high, so"
   - "google/cloud/storage/benchmarks/README.md:35:17     	ttfb	U   	tee tp-vs-cpu.ttfb.txt"
   - "google/cloud/storage/benchmarks/README.md:108:53    	venv	U   	and assume that the `venv` module is"
   - "google/cloud/storage/benchmarks/README.md:116:14    	vebm	U   	We will use `vebm` (for Virtual Environment"
-  - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:362:8    	uploaders   	U   	auto uploaders = gcs_bm::CreateUploadExperim"
-  - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:369:8    	downloaders 	U   	auto downloaders ="
+  - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:317:8    	uploaders   	U   	auto uploaders = gcs_bm::CreateUploadExperim"
+  - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:324:8    	downloaders 	U   	auto downloaders ="
   - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:19:61    	Spyder  	U   	load this script in Spyder"
   - "google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:37:12    	Nanos   	U   	df[\"CpuNanosPerByte\"] = (df.CpuTimeUs"
-  - "google/cloud/storage/benchmarks/throughput_options_test.cc:198:25   	Readoffset  	U   	TEST(ThroughputOptions, Readoffset) {"
+  - "google/cloud/storage/benchmarks/throughput_options_test.cc:212:25   	Readoffset  	U   	TEST(ThroughputOptions, Readoffset) {"
   - "google/cloud/storage/bucket_metadata_test.cc:124:30     	NEARLINE        	U   	\"storageClass\": \"NEARLINE\""
   - "google/cloud/storage/bucket_metadata_test.cc:143:8      	metageneration  	U   	\"metageneration\": \"4\","
   - "google/cloud/storage/bucket_metadata_test.cc:230:55     	Nearline        	U   	LifecycleRule::SetStorageClassNearline()},"

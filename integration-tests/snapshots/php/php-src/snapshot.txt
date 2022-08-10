@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 1847, Issues found: 41824 in 1292 files
+ CSpell: Files checked: 1838, Issues found: 42493 in 1293 files
  exit code: 1
 ./CODING_STANDARDS.md:105:8     - Unknown word (setclientencoding) -- pg_setclientencoding
 ./CODING_STANDARDS.md:126:5     - Unknown word (fooselect)         -- fooselect_bar
@@ -163,7 +163,7 @@ Lines:
 ./Zend/zend_ast.c:1206:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
 ./Zend/zend_ast.c:1365:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
 ./Zend/zend_ast.c:1828:17   - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
-./Zend/zend_atomic.h:66:44     - Unknown word (Iterlocked) -- is non-const due to Iterlocked API*/
+./Zend/zend_atomic.h:73:44     - Unknown word (Iterlocked) -- is non-const due to Iterlocked API*/
 ./Zend/zend_attributes.c:16:22     - Unknown word (Schröder)   -- | Martin Schröder <m.schroeder2007@gmail
 ./Zend/zend_bitset.h:81:51     - Unknown word (clzl)       -- has_builtin(__builtin_clzl)) \
 ./Zend/zend_bitset.h:82:65     - Unknown word (CLZL)       -- defined(PHP_HAVE_BUILTIN_CLZL)
@@ -192,7 +192,7 @@ Lines:
 ./Zend/zend_compile.c:8949:7    - Unknown word (Unparenthesized) -- "Unparenthesized `a ? b : c ? d : e`
 ./Zend/zend_constants.c:204:16    - Unknown word (haltname)   -- zend_string *haltname;
 ./Zend/zend_cpuinfo.c:34:50     - Unknown word (subfunc)    -- uint32_t func, uint32_t subfunc, zend_cpu_info *cpuinfo
-./Zend/zend_cpuinfo.c:63:4      - Unknown word (cpuidex)    -- __cpuidex(regs, func, subfunc
+./Zend/zend_cpuinfo.c:58:103    - Unknown word (cpuidex)    -- IX86)) /* use MSVC __cpuidex intrin */
 ./Zend/zend_cpuinfo.c:86:44     - Unknown word (XFEATURE)   -- WIN32) && defined(_XCR_XFEATURE_ENABLED_MASK)
 ./Zend/zend_cpuinfo.c:98:39     - Unknown word (OSXSAVE)    -- ecx & ZEND_CPU_FEATURE_OSXSAVE)) {
 ./Zend/zend_cpuinfo.h:31:19     - Unknown word (DTES)       -- ZEND_CPU_FEATURE_DTES64 = (1<<2),
@@ -229,14 +229,15 @@ Lines:
 ./Zend/zend_inheritance.c:2996:17   - Unknown word (explicilty)           -- * we need to explicilty add the interface here
 ./Zend/zend_inheritance.c:917:15    - Unknown word (precv)      -- zend_op *precv = NULL;
 ./Zend/zend_ini.c:650:14    - Unknown word (sretval)    -- zend_long sretval = (zend_long)retval
-./Zend/zend_multiply.h:114:11    - Unknown word (mulld)      -- __asm__("mulld %0,%2,%3\n\t"					\
-./Zend/zend_multiply.h:115:4     - Unknown word (mulhd)      -- "mulhd %1,%2,%3\n"					\
-./Zend/zend_multiply.h:163:23    - Unknown word (tadcl)      -- __asm__ ("mull %3\n\tadcl $0,%1"
-./Zend/zend_multiply.h:191:13    - Unknown word (SUFF)       -- # define LP_SUFF "l"
-./Zend/zend_multiply.h:227:12    - Unknown word (umlal)      -- __asm__ ("umlal %0,%1,%2,%3"
-./Zend/zend_multiply.h:249:27    - Unknown word (tumulh)     -- asm__ ("mul %0,%2,%3\n\tumulh %1,%2,%3\n\tadds %0
-./Zend/zend_multiply.h:271:19    - Unknown word (mulhdu)     -- "mulhdu %1,%2,%3\n\t"
-./Zend/zend_multiply.h:273:19    - Unknown word (addze)      -- "addze %1,%1\n"
+./Zend/zend_multiply.h:127:11    - Unknown word (mulld)      -- __asm__("mulld %0,%2,%3\n\t"					\
+./Zend/zend_multiply.h:128:4     - Unknown word (mulhd)      -- "mulhd %1,%2,%3\n"					\
+./Zend/zend_multiply.h:176:23    - Unknown word (tadcl)      -- __asm__ ("mull %3\n\tadcl $0,%1"
+./Zend/zend_multiply.h:204:13    - Unknown word (SUFF)       -- # define LP_SUFF "l"
+./Zend/zend_multiply.h:240:12    - Unknown word (umlal)      -- __asm__ ("umlal %0,%1,%2,%3"
+./Zend/zend_multiply.h:262:27    - Unknown word (tumulh)     -- asm__ ("mul %0,%2,%3\n\tumulh %1,%2,%3\n\tadds %0
+./Zend/zend_multiply.h:284:19    - Unknown word (mulhdu)     -- "mulhdu %1,%2,%3\n\t"
+./Zend/zend_multiply.h:286:19    - Unknown word (addze)      -- "addze %1,%1\n"
+./Zend/zend_multiply.h:98:23     - Unknown word (mulh)       -- pragma intrinsic(__mulh)
 ./Zend/zend_object_handlers.c:1177:12   - Unknown word (unseter)    -- /* have unseter - try with it! */
 ./Zend/zend_object_handlers.c:209:27    - Unknown word (unsetter)   -- static void zend_std_call_unsetter(zend_object *zobj, zend
 ./Zend/zend_object_handlers.c:217:27    - Unknown word (issetter)   -- static void zend_std_call_issetter(zend_object *zobj, zend
@@ -2741,14 +2742,17 @@ Lines:
 ./ext/imap/tests/README.md:7:50      - Unknown word (mailserver) -- changed to match the local mailserver configuration.
 ./ext/intl/ERROR_CONVENTIONS.md:107:22    - Unknown word (breakiter)  -- U_CFUNC PHP_FUNCTION(breakiter_set_text)
 ./ext/intl/ERROR_CONVENTIONS.md:43:29     - Unknown word (structed)   -- store an intl_error structed in their private data
+./ext/intl/breakiterator/breakiterator_arginfo.h:174:36    - Unknown word (UBRK)       -- const_WORD_NONE_value, UBRK_WORD_NONE);
 ./ext/intl/breakiterator/breakiterator_class.h:15:9      - Unknown word (BREAKITERATOR) -- #ifndef BREAKITERATOR_CLASS_H
 ./ext/intl/breakiterator/breakiterator_class.h:44:46     - Unknown word (breakiterator) -- reakIterator_object *php_intl_breakiterator_fetch_object(zend_object
 ./ext/intl/breakiterator/breakiterator_class.h:49:9      - Unknown word (BREAKITER)     -- #define BREAKITER_ERROR(bio) (bio)->err
 ./ext/intl/breakiterator/breakiterator_class.h:61:33     - Unknown word (unconstructed) -- throw_error(NULL, "Found unconstructed BreakIterator"); \
 ./ext/intl/breakiterator/breakiterator_iterators.h:36:3      - Unknown word (CFUNC)      -- U_CFUNC zend_object_iterator
 ./ext/intl/breakiterator/codepointiterator_internal.h:15:9      - Unknown word (CODEPOINTITERATOR) -- #ifndef CODEPOINTITERATOR_INTERNAL_H
+./ext/intl/calendar/calendar.stub.php:193:21    - Unknown word (WALLTIME)   -- * @cvalue UCAL_WALLTIME_FIRST
 ./ext/intl/calendar/calendar_arginfo.h:178:15    - Unknown word (intlcal)    -- ZEND_FUNCTION(intlcal_create_instance);
 ./ext/intl/calendar/calendar_arginfo.h:224:15    - Unknown word (intlgregcal) -- ZEND_FUNCTION(intlgregcal_set_gregorian_change
+./ext/intl/calendar/calendar_arginfo.h:297:36    - Unknown word (UCAL)        -- const_FIELD_ERA_value, UCAL_ERA);
 ./ext/intl/calendar/calendar_class.h:36:12     - Unknown word (ucal)       -- Calendar* ucal;
 ./ext/intl/collator/collator_arginfo.h:108:40    - Unknown word (UCOL)       -- DEFAULT_VALUE_value, UCOL_DEFAULT);
 ./ext/intl/collator/collator_arginfo.h:95:26     - Unknown word (ULOC)       -- REGISTER_LONG_CONSTANT("ULOC_ACTUAL_LOCALE", ULOC
@@ -2775,11 +2779,6 @@ Lines:
 ./ext/intl/common/common_error.c:228:66    - Unknown word (IDNA)        -- ff are reserved for IDNA related error codes
 ./ext/intl/common/common_error.c:242:23    - Unknown word (STRINGPREP)  -- INTL_EXPOSE_CONST( U_STRINGPREP_PROHIBITED_ERROR );
 ./ext/intl/common/common_error.c:94:23     - Unknown word (SAFECLONE)  -- INTL_EXPOSE_CONST( U_SAFECLONE_ALLOCATED_WARNING )
-./ext/intl/converter/converter.c:1005:18   - Unknown word (LMBCS)      -- CONV_TYPE_CONST(LMBCS_1);
-./ext/intl/converter/converter.c:1019:18   - Unknown word (SCSU)       -- CONV_TYPE_CONST(SCSU);
-./ext/intl/converter/converter.c:1020:18   - Unknown word (ISCII)      -- CONV_TYPE_CONST(ISCII);
-./ext/intl/converter/converter.c:1023:18   - Unknown word (BOCU)       -- CONV_TYPE_CONST(BOCU1);
-./ext/intl/converter/converter.c:1026:18   - Unknown word (CESU)       -- CONV_TYPE_CONST(CESU8);
 ./ext/intl/converter/converter.c:127:46    - Unknown word (lalz)       -- parameters(ZEND_NUM_ARGS(), "lalz",
 ./ext/intl/converter/converter.c:146:22    - Unknown word (cnvargs)    -- define TARGET_CHECK(cnvargs, needed) php_converter
 ./ext/intl/converter/converter.c:170:11    - Unknown word (suggogate)  -- /* Non-suggogate BMP codepoint */
@@ -2788,13 +2787,20 @@ Lines:
 ./ext/intl/converter/converter.c:367:53    - Unknown word (pcnv)       -- UConverter **pcnv,
 ./ext/intl/converter/converter.c:46:15     - Unknown word (UFAILURE)   -- #define THROW_UFAILURE(obj, fname, error) php
 ./ext/intl/converter/converter.c:510:67    - Unknown word (fcache)     -- zend_fcall_info_cache *fcache) {
-./ext/intl/converter/converter.c:67:8      - Unknown word (UCNV)       -- case UCNV_UNASSIGNED:
 ./ext/intl/converter/converter.c:74:15     - Unknown word (uerror)     -- UErrorCode uerror = U_ZERO_ERROR;
 ./ext/intl/converter/converter.c:905:92    - Unknown word (pobjval)    -- php_converter_object **pobjval) {
 ./ext/intl/converter/converter.c:92:4      - Unknown word (ucnv)       -- ucnv_getSubstChars(objval
+./ext/intl/converter/converter.stub.php:50:21     - Unknown word (SBCS)       -- * @cvalue UCNV_SBCS
+./ext/intl/converter/converter.stub.php:55:21     - Unknown word (DBCS)       -- * @cvalue UCNV_DBCS
+./ext/intl/converter/converter.stub.php:60:21     - Unknown word (MBCS)       -- * @cvalue UCNV_MBCS
+./ext/intl/converter/converter_arginfo.h:131:44    - Unknown word (UCNV)       -- REASON_UNASSIGNED_value, UCNV_UNASSIGNED);
+./ext/intl/converter/converter_arginfo.h:238:13    - Unknown word (LMBCS)      -- zval const_LMBCS_1_value;
+./ext/intl/converter/converter_arginfo.h:322:13    - Unknown word (SCSU)       -- zval const_SCSU_value;
+./ext/intl/converter/converter_arginfo.h:328:13    - Unknown word (ISCII)      -- zval const_ISCII_value;
+./ext/intl/converter/converter_arginfo.h:346:13    - Unknown word (BOCU)       -- zval const_BOCU1_value;
+./ext/intl/converter/converter_arginfo.h:364:13    - Unknown word (CESU)       -- zval const_CESU8_value;
 ./ext/intl/dateformat/dateformat.h:21:9      - Unknown word (DATEF)      -- #define DATEF_GREGORIAN 1
 ./ext/intl/dateformat/dateformat_arginfo.h:147:31    - Unknown word (UDAT)       -- LONG(&const_FULL_value, UDAT_FULL);
-./ext/intl/dateformat/dateformat_arginfo.h:201:36    - Unknown word (UCAL)       -- const_GREGORIAN_value, UCAL_GREGORIAN);
 ./ext/intl/dateformat/dateformat_arginfo.h:93:27     - Unknown word (timetype)   -- FUNCTION(datefmt_get_timetype);
 ./ext/intl/dateformat/dateformat_attr.c:107:14    - Unknown word (slength)    -- int32_t slength = 0;
 ./ext/intl/dateformat/dateformat_attr.c:108:13    - Unknown word (svalue)     -- UChar* svalue = NULL;
@@ -2838,7 +2844,6 @@ Lines:
 ./ext/intl/grapheme/grapheme_string.c:34:31     - Unknown word (MAXCHARS)   -- GRAPHEME_EXTRACT_TYPE_MAXCHARS 2
 ./ext/intl/grapheme/grapheme_string.c:371:11    - Unknown word (asub)       -- int32_t asub_str_len;
 ./ext/intl/grapheme/grapheme_string.c:406:2     - Unknown word (ubrk)       -- ubrk_setText(bi, ustr, ustr
-./ext/intl/grapheme/grapheme_string.c:423:8     - Unknown word (UBRK)       -- if ( UBRK_DONE == sub_str_start
 ./ext/intl/grapheme/grapheme_string.c:44:35     - Unknown word (EXTR)       -- LONG_CONSTANT("GRAPHEME_EXTR_COUNT", GRAPHEME_EXTRACT
 ./ext/intl/grapheme/grapheme_string.c:611:25    - Unknown word (charcount)  -- {{ grapheme_extract_charcount_iter - grapheme iterator
 ./ext/intl/grapheme/grapheme_string.c:711:13    - Unknown word (UTEXT)      -- UText ut = UTEXT_INITIALIZER;
@@ -2896,14 +2901,14 @@ Lines:
 ./ext/intl/msgformat/msgformat_parse.c:30:8      - Unknown word (fargs)      -- zval *fargs;
 ./ext/intl/msgformat/msgformat_parse.c:33:9      - Unknown word (usource)    -- UChar *usource = NULL;
 ./ext/intl/msgformat/msgformat_parse.c:34:6      - Unknown word (usrc)       -- int usrc_len = 0;
-./ext/intl/normalizer/normalizer_normalize.c:43:21     - Unknown word (NFKC)       -- return unorm2_getNFKCInstance(err);
-./ext/intl/normalizer/normalizer_normalize.c:46:21     - Unknown word (NFKD)       -- return unorm2_getNFKDInstance(err);
+./ext/intl/normalizer/normalizer_arginfo.h:63:13     - Unknown word (NFKD)       -- zval const_NFKD_value;
+./ext/intl/normalizer/normalizer_arginfo.h:87:13     - Unknown word (NFKC)       -- zval const_NFKC_value;
 ./ext/intl/normalizer/normalizer_normalize.c:67:62     - Unknown word (uinput)     -- long form, const UChar *uinput, int32_t uinput_len
 ./ext/intl/normalizer/normalizer_normalize.c:92:11     - Unknown word (uret)       -- UChar* uret_buf = NULL;
-./ext/intl/php_intl.c:199:15    - Unknown word (Spoofchecker) -- /* Register 'Spoofchecker' PHP class */
-./ext/intl/php_intl.c:273:9     - Unknown word (UCONFIG)      -- #ifndef UCONFIG_NO_FORMATTING
-./ext/intl/php_intl.c:275:14    - Unknown word (tzdata)       -- const char *tzdata_ver = NULL;
-./ext/intl/php_intl.c:65:12     - Unknown word (spoofchecker) -- # include "spoofchecker/spoofchecker_class.h
+./ext/intl/php_intl.c:191:15    - Unknown word (Spoofchecker) -- /* Register 'Spoofchecker' PHP class */
+./ext/intl/php_intl.c:262:9     - Unknown word (UCONFIG)      -- #ifndef UCONFIG_NO_FORMATTING
+./ext/intl/php_intl.c:264:14    - Unknown word (tzdata)       -- const char *tzdata_ver = NULL;
+./ext/intl/php_intl.c:64:12     - Unknown word (spoofchecker) -- # include "spoofchecker/spoofchecker_class.h
 ./ext/intl/php_intl.stub.php:393:4     - Unknown word (resourceboundle) -- /* resourceboundle */
 ./ext/intl/php_intl_arginfo.h:627:48    - Unknown word (resourcebundle) -- OBJ_INFO_EX(arginfo_resourcebundle_create, 0, 2, ResourceBundle
 ./ext/intl/php_intl_arginfo.h:653:49    - Unknown word (intltz)         -- TYPE_MASK_EX(arginfo_intltz_count_equivalent_ids
@@ -2924,11 +2929,11 @@ Lines:
 ./ext/intl/resourcebundle/resourcebundle_iterator.c:165:40    - Unknown word (URES)       -- rb can only be either URES_TABLE or URES_ARRAY
 ./ext/intl/resourcebundle/resourcebundle_iterator.c:24:13     - Unknown word (libicu)     -- * Although libicu offers iterator functions
 ./ext/intl/resourcebundle/resourcebundle_iterator.c:40:14     - Unknown word (currentkey) -- iterator->currentkey = estrdup( ures_getKey
+./ext/intl/spoofchecker/spoofchecker_arginfo.h:138:13    - Unknown word (UNRESTRICTIVE) -- zval const_UNRESTRICTIVE_value;
+./ext/intl/spoofchecker/spoofchecker_arginfo.h:64:51     - Unknown word (USPOOF)     -- SCRIPT_CONFUSABLE_value, USPOOF_SINGLE_SCRIPT_CONFUSABLE
 ./ext/intl/spoofchecker/spoofchecker_class.c:46:18     - Unknown word (SPOOFCHECKER) -- intl_error_init(SPOOFCHECKER_ERROR_P(intern));
 ./ext/intl/spoofchecker/spoofchecker_class.c:77:11     - Unknown word (uspoof)       -- new_sfo->uspoof = uspoof_clone(sfo-
-./ext/intl/spoofchecker/spoofchecker_class.h:78:48     - Unknown word (USPOOF)     -- DEFAULT_RESTRICTION_LEVEL USPOOF_HIGHLY_RESTRICTIVE
 ./ext/intl/spoofchecker/spoofchecker_create.c:44:46     - Unknown word (suspiction) -- the object for further suspiction check comparison. *
-./ext/intl/spoofchecker/spoofchecker_main.c:146:11    - Unknown word (UNRESTRICTIVE) -- USPOOF_UNRESTRICTIVE != level) {
 ./ext/intl/timezone/timezone_class.h:39:18     - Unknown word (utimezone)  -- const TimeZone	*utimezone;
 ./ext/intl/transliterator/transliterator_class.c:172:27    - Unknown word (Unconstructed) -- zend_throw_error(NULL, "Unconstructed Transliterator object
 ./ext/intl/transliterator/transliterator_class.c:28:76     - Unknown word (utrans)     -- object, UTransliterator *utrans, UErrorCode *status
@@ -2936,107 +2941,117 @@ Lines:
 ./ext/intl/transliterator/transliterator_methods.c:235:57    - Unknown word (transliterators) -- to obtain registered transliterators" );
 ./ext/intl/transliterator/transliterator_methods.c:238:23    - Unknown word (unext)           -- while( (elem = uenum_unext( en, &elem_len, &status
 ./ext/intl/transliterator/transliterator_methods.c:269:6     - Unknown word (uresult)         -- *uresult = NULL;
-./ext/intl/uchar/ublockcode-enum.h:133:12    - Unknown word (BUGINESE)   -- UBLOCKCODE(BUGINESE)
-./ext/intl/uchar/ublockcode-enum.h:141:12    - Unknown word (KHAROSHTHI) -- UBLOCKCODE(KHAROSHTHI)
-./ext/intl/uchar/ublockcode-enum.h:147:12    - Unknown word (SYLOTI)     -- UBLOCKCODE(SYLOTI_NAGRI)
-./ext/intl/uchar/ublockcode-enum.h:147:19    - Unknown word (NAGRI)      -- UBLOCKCODE(SYLOTI_NAGRI)
-./ext/intl/uchar/ublockcode-enum.h:148:12    - Unknown word (TIFINAGH)   -- UBLOCKCODE(TIFINAGH)
-./ext/intl/uchar/ublockcode-enum.h:154:12    - Unknown word (PHAGS)      -- UBLOCKCODE(PHAGS_PA)
-./ext/intl/uchar/ublockcode-enum.h:160:12    - Unknown word (LEPCHA)     -- UBLOCKCODE(LEPCHA)
-./ext/intl/uchar/ublockcode-enum.h:161:15    - Unknown word (CHIKI)      -- UBLOCKCODE(OL_CHIKI)
-./ext/intl/uchar/ublockcode-enum.h:165:12    - Unknown word (SAURASHTRA) -- UBLOCKCODE(SAURASHTRA)
-./ext/intl/uchar/ublockcode-enum.h:166:12    - Unknown word (KAYAH)      -- UBLOCKCODE(KAYAH_LI)
-./ext/intl/uchar/ublockcode-enum.h:167:12    - Unknown word (REJANG)     -- UBLOCKCODE(REJANG)
-./ext/intl/uchar/ublockcode-enum.h:170:12    - Unknown word (PHAISTOS)   -- UBLOCKCODE(PHAISTOS_DISC)
-./ext/intl/uchar/ublockcode-enum.h:172:12    - Unknown word (CARIAN)     -- UBLOCKCODE(CARIAN)
-./ext/intl/uchar/ublockcode-enum.h:178:16    - Unknown word (THAM)       -- UBLOCKCODE(TAI_THAM)
-./ext/intl/uchar/ublockcode-enum.h:180:12    - Unknown word (LISU)       -- UBLOCKCODE(LISU)
-./ext/intl/uchar/ublockcode-enum.h:181:12    - Unknown word (BAMUM)      -- UBLOCKCODE(BAMUM)
-./ext/intl/uchar/ublockcode-enum.h:187:16    - Unknown word (VIET)       -- UBLOCKCODE(TAI_VIET)
-./ext/intl/uchar/ublockcode-enum.h:188:12    - Unknown word (MEETEI)     -- UBLOCKCODE(MEETEI_MAYEK)
-./ext/intl/uchar/ublockcode-enum.h:188:19    - Unknown word (MAYEK)      -- UBLOCKCODE(MEETEI_MAYEK)
-./ext/intl/uchar/ublockcode-enum.h:196:12    - Unknown word (RUMI)       -- UBLOCKCODE(RUMI_NUMERAL_SYMBOLS)
-./ext/intl/uchar/ublockcode-enum.h:197:12    - Unknown word (KAITHI)     -- UBLOCKCODE(KAITHI)
-./ext/intl/uchar/ublockcode-enum.h:202:12    - Unknown word (MANDAIC)    -- UBLOCKCODE(MANDAIC)
-./ext/intl/uchar/ublockcode-enum.h:203:12    - Unknown word (BATAK)      -- UBLOCKCODE(BATAK)
-./ext/intl/uchar/ublockcode-enum.h:216:12    - Unknown word (CHAKMA)     -- UBLOCKCODE(CHAKMA)
-./ext/intl/uchar/ublockcode-enum.h:218:12    - Unknown word (MEROITIC)   -- UBLOCKCODE(MEROITIC_CURSIVE)
-./ext/intl/uchar/ublockcode-enum.h:220:12    - Unknown word (MIAO)       -- UBLOCKCODE(MIAO)
-./ext/intl/uchar/ublockcode-enum.h:221:12    - Unknown word (SHARADA)    -- UBLOCKCODE(SHARADA)
-./ext/intl/uchar/ublockcode-enum.h:222:17    - Unknown word (SOMPENG)    -- UBLOCKCODE(SORA_SOMPENG)
-./ext/intl/uchar/ublockcode-enum.h:224:12    - Unknown word (TAKRI)      -- UBLOCKCODE(TAKRI)
-./ext/intl/uchar/ublockcode-enum.h:226:12    - Unknown word (BASSA)      -- UBLOCKCODE(BASSA_VAH)
-./ext/intl/uchar/ublockcode-enum.h:230:12    - Unknown word (DUPLOYAN)   -- UBLOCKCODE(DUPLOYAN)
-./ext/intl/uchar/ublockcode-enum.h:231:12    - Unknown word (ELBASAN)    -- UBLOCKCODE(ELBASAN)
-./ext/intl/uchar/ublockcode-enum.h:233:12    - Unknown word (GRANTHA)    -- UBLOCKCODE(GRANTHA)
-./ext/intl/uchar/ublockcode-enum.h:234:12    - Unknown word (KHOJKI)     -- UBLOCKCODE(KHOJKI)
-./ext/intl/uchar/ublockcode-enum.h:235:12    - Unknown word (KHUDAWADI)  -- UBLOCKCODE(KHUDAWADI)
-./ext/intl/uchar/ublockcode-enum.h:238:12    - Unknown word (MAHAJANI)   -- UBLOCKCODE(MAHAJANI)
-./ext/intl/uchar/ublockcode-enum.h:239:12    - Unknown word (MANICHAEAN) -- UBLOCKCODE(MANICHAEAN)
-./ext/intl/uchar/ublockcode-enum.h:240:12    - Unknown word (MENDE)      -- UBLOCKCODE(MENDE_KIKAKUI)
-./ext/intl/uchar/ublockcode-enum.h:240:18    - Unknown word (KIKAKUI)    -- UBLOCKCODE(MENDE_KIKAKUI)
-./ext/intl/uchar/ublockcode-enum.h:246:16    - Unknown word (PERMIC)     -- UBLOCKCODE(OLD_PERMIC)
-./ext/intl/uchar/ublockcode-enum.h:248:12    - Unknown word (PAHAWH)     -- UBLOCKCODE(PAHAWH_HMONG)
-./ext/intl/uchar/ublockcode-enum.h:249:12    - Unknown word (PALMYRENE)  -- UBLOCKCODE(PALMYRENE)
-./ext/intl/uchar/ublockcode-enum.h:253:12    - Unknown word (SIDDHAM)    -- UBLOCKCODE(SIDDHAM)
-./ext/intl/uchar/ublockcode-enum.h:256:12    - Unknown word (TIRHUTA)    -- UBLOCKCODE(TIRHUTA)
-./ext/intl/uchar/ublockcode-enum.h:257:12    - Unknown word (WARANG)     -- UBLOCKCODE(WARANG_CITI)
-./ext/intl/uchar/ublockcode-enum.h:257:19    - Unknown word (CITI)       -- UBLOCKCODE(WARANG_CITI)
-./ext/intl/uchar/ublockcode-enum.h:2:1       - Unknown word (UBLOCKCODE) -- UBLOCKCODE(NO_BLOCK)
-./ext/intl/uchar/ublockcode-enum.h:90:12     - Unknown word (HALFWIDTH)  -- UBLOCKCODE(HALFWIDTH_AND_FULLWIDTH_FORMS
-./ext/intl/uchar/uchar.c:208:14    - Unknown word (ublock)     -- RETURN_LONG(ublock_getCode(cp));
-./ext/intl/uchar/uchar.c:619:12    - Unknown word (CONSTL)     -- #define IC_CONSTL(name, val) \
-./ext/intl/uchar/uchar.c:622:76    - Unknown word (VERISON)    -- VERSION", sizeof("UNICODE_VERISON")-1, U_UNICODE_VERSION
-./ext/intl/uchar/uchar.c:631:9     - Unknown word (UPROPERTY)  -- #define UPROPERTY(name) IC_CONSTL("PROPERTY
-./ext/intl/uchar/uchar.c:635:9     - Unknown word (UCHARCATEGORY) -- #define UCHARCATEGORY(name) IC_CONSTL("CHAR
-./ext/intl/uchar/uchar.c:639:9     - Unknown word (UCHARDIRECTION) -- #define UCHARDIRECTION(name) IC_CONSTL("CHAR
-./ext/intl/uchar/uchar.c:643:57    - Unknown word (UBLOCK)         -- BLOCK_CODE_" #name, UBLOCK_##name)
-./ext/intl/uchar/uchar.c:647:19    - Unknown word (destribing)     -- /* Smaller, self-destribing enums */
-./ext/intl/uchar/uchar.c:648:9     - Unknown word (UOTHER)         -- #define UOTHER(name) IC_CONSTL(#name
-./ext/intl/uchar/uchar.stub.php:8:58      - Unknown word (codepoint)  -- hasBinaryProperty(int|string $codepoint, int $property): ?bool
+./ext/intl/uchar/uchar.c:209:14    - Unknown word (ublock)     -- RETURN_LONG(ublock_getCode(cp));
+./ext/intl/uchar/uchar.stub.php:1014:30   - Unknown word (JAMO)       -- cvalue UBLOCK_HANGUL_JAMO
+./ext/intl/uchar/uchar.stub.php:1084:23   - Unknown word (LETTERLIKE) -- * @cvalue UBLOCK_LETTERLIKE_SYMBOLS
+./ext/intl/uchar/uchar.stub.php:1159:23   - Unknown word (KANGXI)     -- * @cvalue UBLOCK_KANGXI_RADICALS
+./ext/intl/uchar/uchar.stub.php:1184:23   - Unknown word (BOPOMOFO)   -- * @cvalue UBLOCK_BOPOMOFO
+./ext/intl/uchar/uchar.stub.php:1194:23   - Unknown word (KANBUN)     -- * @cvalue UBLOCK_KANBUN
+./ext/intl/uchar/uchar.stub.php:1304:37   - Unknown word (FULLWIDTH)  -- UBLOCK_HALFWIDTH_AND_FULLWIDTH_FORMS
+./ext/intl/uchar/uchar.stub.php:1319:23   - Unknown word (DESERET)    -- * @cvalue UBLOCK_DESERET
+./ext/intl/uchar/uchar.stub.php:1369:23   - Unknown word (HANUNOO)    -- * @cvalue UBLOCK_HANUNOO
+./ext/intl/uchar/uchar.stub.php:1374:23   - Unknown word (BUHID)      -- * @cvalue UBLOCK_BUHID
+./ext/intl/uchar/uchar.stub.php:1379:23   - Unknown word (TAGBANWA)   -- * @cvalue UBLOCK_TAGBANWA
+./ext/intl/uchar/uchar.stub.php:1429:23   - Unknown word (LIMBU)      -- * @cvalue UBLOCK_LIMBU
+./ext/intl/uchar/uchar.stub.php:1454:23   - Unknown word (YIJING)     -- * @cvalue UBLOCK_YIJING_HEXAGRAM_SYMBOLS
+./ext/intl/uchar/uchar.stub.php:1484:23   - Unknown word (OSMANYA)    -- * @cvalue UBLOCK_OSMANYA
+./ext/intl/uchar/uchar.stub.php:1494:27   - Unknown word (XUAN)       -- @cvalue UBLOCK_TAI_XUAN_JING_SYMBOLS
+./ext/intl/uchar/uchar.stub.php:1494:32   - Unknown word (JING)       -- cvalue UBLOCK_TAI_XUAN_JING_SYMBOLS
+./ext/intl/uchar/uchar.stub.php:16:18     - Unknown word (CODEPOINT)  -- public const CODEPOINT_MIN = UNKNOWN;
+./ext/intl/uchar/uchar.stub.php:3384:58   - Unknown word (codepoint)  -- hasBinaryProperty(int|string $codepoint, int $property): ?bool
+./ext/intl/uchar/uchar.stub.php:934:23    - Unknown word (THAANA)     -- * @cvalue UBLOCK_THAANA
+./ext/intl/uchar/uchar.stub.php:984:23    - Unknown word (SINHALA)    -- * @cvalue UBLOCK_SINHALA
 ./ext/intl/uchar/uchar_arginfo.h:123:32    - Unknown word (isbase)     -- arginfo_class_IntlChar_isbase arginfo_class_IntlChar
 ./ext/intl/uchar/uchar_arginfo.h:129:32    - Unknown word (isdefined)  -- arginfo_class_IntlChar_isdefined arginfo_class_IntlChar
+./ext/intl/uchar/uchar_arginfo.h:1349:46   - Unknown word (UBLOCK)       -- CODE_NO_BLOCK_value, UBLOCK_NO_BLOCK);
 ./ext/intl/uchar/uchar_arginfo.h:159:32    - Unknown word (istitle)    -- arginfo_class_IntlChar_istitle arginfo_class_IntlChar
 ./ext/intl/uchar/uchar_arginfo.h:181:32    - Unknown word (totitle)    -- arginfo_class_IntlChar_totitle arginfo_class_IntlChar
-./ext/intl/uchar/ucharcategory-enum.h:6:15      - Unknown word (TITLECASE)  -- UCHARCATEGORY(TITLECASE_LETTER)
-./ext/intl/uchar/uother-enum.h:108:15    - Unknown word (BARREE)     -- UOTHER(JG_YEH_BARREE)
-./ext/intl/uchar/uother-enum.h:110:11    - Unknown word (YUDH)       -- UOTHER(JG_YUDH)
-./ext/intl/uchar/uother-enum.h:112:11    - Unknown word (ZAIN)       -- UOTHER(JG_ZAIN)
-./ext/intl/uchar/uother-enum.h:114:11    - Unknown word (KHAPH)      -- UOTHER(JG_KHAPH)
-./ext/intl/uchar/uother-enum.h:115:11    - Unknown word (ZHAIN)      -- UOTHER(JG_ZHAIN)
-./ext/intl/uchar/uother-enum.h:119:11    - Unknown word (ROHINGYA)   -- UOTHER(JG_ROHINGYA_YEH)
-./ext/intl/uchar/uother-enum.h:125:22    - Unknown word (DHAMEDH)    -- UOTHER(JG_MANICHAEAN_DHAMEDH)
-./ext/intl/uchar/uother-enum.h:131:22    - Unknown word (LAMEDH)     -- UOTHER(JG_MANICHAEAN_LAMEDH)
-./ext/intl/uchar/uother-enum.h:137:22    - Unknown word (RESH)       -- UOTHER(JG_MANICHAEAN_RESH)
-./ext/intl/uchar/uother-enum.h:143:22    - Unknown word (THAMEDH)    -- UOTHER(JG_MANICHAEAN_THAMEDH)
-./ext/intl/uchar/uother-enum.h:146:22    - Unknown word (YODH)       -- UOTHER(JG_MANICHAEAN_YODH)
-./ext/intl/uchar/uother-enum.h:170:11    - Unknown word (ALETTER)    -- UOTHER(WB_ALETTER)
-./ext/intl/uchar/uother-enum.h:173:11    - Unknown word (MIDLETTER)  -- UOTHER(WB_MIDLETTER)
-./ext/intl/uchar/uother-enum.h:174:11    - Unknown word (MIDNUM)     -- UOTHER(WB_MIDNUM)
-./ext/intl/uchar/uother-enum.h:176:11    - Unknown word (EXTENDNUMLET) -- UOTHER(WB_EXTENDNUMLET)
-./ext/intl/uchar/uother-enum.h:180:11    - Unknown word (MIDNUMLET)    -- UOTHER(WB_MIDNUMLET)
-./ext/intl/uchar/uother-enum.h:192:11    - Unknown word (ATERM)        -- UOTHER(SB_ATERM)
-./ext/intl/uchar/uother-enum.h:197:11    - Unknown word (OLETTER)      -- UOTHER(SB_OLETTER)
-./ext/intl/uchar/uother-enum.h:200:11    - Unknown word (STERM)        -- UOTHER(SB_STERM)
-./ext/intl/uchar/uother-enum.h:205:11    - Unknown word (SCONTINUE)    -- UOTHER(SB_SCONTINUE)
-./ext/intl/uchar/uother-enum.h:225:11    - Unknown word (INSEPERABLE)  -- UOTHER(LB_INSEPERABLE)
-./ext/intl/uchar/uother-enum.h:238:11    - Unknown word (ZWSPACE)      -- UOTHER(LB_ZWSPACE)
-./ext/intl/uchar/uother-enum.h:63:11     - Unknown word (ALAPH)      -- UOTHER(JG_ALAPH)
-./ext/intl/uchar/uother-enum.h:64:11     - Unknown word (ALEF)       -- UOTHER(JG_ALEF)
-./ext/intl/uchar/uother-enum.h:68:11     - Unknown word (DALATH)     -- UOTHER(JG_DALATH_RISH)
-./ext/intl/uchar/uother-enum.h:68:18     - Unknown word (RISH)       -- UOTHER(JG_DALATH_RISH)
-./ext/intl/uchar/uother-enum.h:71:17     - Unknown word (SEMKATH)    -- UOTHER(JG_FINAL_SEMKATH)
-./ext/intl/uchar/uother-enum.h:73:11     - Unknown word (GAMAL)      -- UOTHER(JG_GAMAL)
-./ext/intl/uchar/uother-enum.h:75:15     - Unknown word (MARBUTA)    -- UOTHER(JG_TEH_MARBUTA_GOAL)
-./ext/intl/uchar/uother-enum.h:85:11     - Unknown word (LAMADH)     -- UOTHER(JG_LAMADH)
-./ext/intl/uchar/uother-enum.h:86:11     - Unknown word (MEEM)       -- UOTHER(JG_MEEM)
-./ext/intl/uchar/uother-enum.h:92:11     - Unknown word (QAPH)       -- UOTHER(JG_QAPH)
-./ext/intl/uchar/uother-enum.h:96:11     - Unknown word (SADHE)      -- UOTHER(JG_SADHE)
-./ext/intl/uchar/uproperty-enum.h:27:11     - Unknown word (NONCHARACTER) -- UPROPERTY(NONCHARACTER_CODE_POINT)
-./ext/intl/uchar/uproperty-enum.h:55:24     - Unknown word (UPPERCASED)   -- UPROPERTY(CHANGES_WHEN_UPPERCASED)
-./ext/intl/uchar/uproperty-enum.h:56:24     - Unknown word (TITLECASED)   -- UPROPERTY(CHANGES_WHEN_TITLECASED)
-./ext/intl/uchar/uproperty-enum.h:57:24     - Unknown word (CASEFOLDED)   -- UPROPERTY(CHANGES_WHEN_CASEFOLDED)
-./ext/intl/uchar/uproperty-enum.h:58:24     - Unknown word (CASEMAPPED)   -- UPROPERTY(CHANGES_WHEN_CASEMAPPED)
+./ext/intl/uchar/uchar_arginfo.h:1876:24   - Unknown word (HALFWIDTH)    -- zval const_BLOCK_CODE_HALFWIDTH_AND_FULLWIDTH_FORMS
+./ext/intl/uchar/uchar_arginfo.h:2134:24   - Unknown word (BUGINESE)     -- zval const_BLOCK_CODE_BUGINESE_value;
+./ext/intl/uchar/uchar_arginfo.h:2182:24   - Unknown word (KHAROSHTHI)   -- zval const_BLOCK_CODE_KHAROSHTHI_value;
+./ext/intl/uchar/uchar_arginfo.h:2218:24   - Unknown word (SYLOTI)       -- zval const_BLOCK_CODE_SYLOTI_NAGRI_value;
+./ext/intl/uchar/uchar_arginfo.h:2218:31   - Unknown word (NAGRI)        -- const_BLOCK_CODE_SYLOTI_NAGRI_value;
+./ext/intl/uchar/uchar_arginfo.h:2224:24   - Unknown word (TIFINAGH)     -- zval const_BLOCK_CODE_TIFINAGH_value;
+./ext/intl/uchar/uchar_arginfo.h:2260:24   - Unknown word (PHAGS)        -- zval const_BLOCK_CODE_PHAGS_PA_value;
+./ext/intl/uchar/uchar_arginfo.h:2296:24   - Unknown word (LEPCHA)       -- zval const_BLOCK_CODE_LEPCHA_value;
+./ext/intl/uchar/uchar_arginfo.h:2302:27   - Unknown word (CHIKI)        -- const_BLOCK_CODE_OL_CHIKI_value;
+./ext/intl/uchar/uchar_arginfo.h:2326:24   - Unknown word (SAURASHTRA)   -- zval const_BLOCK_CODE_SAURASHTRA_value;
+./ext/intl/uchar/uchar_arginfo.h:2332:24   - Unknown word (KAYAH)        -- zval const_BLOCK_CODE_KAYAH_LI_value;
+./ext/intl/uchar/uchar_arginfo.h:2338:24   - Unknown word (REJANG)       -- zval const_BLOCK_CODE_REJANG_value;
+./ext/intl/uchar/uchar_arginfo.h:2356:24   - Unknown word (PHAISTOS)     -- zval const_BLOCK_CODE_PHAISTOS_DISC_value;
+./ext/intl/uchar/uchar_arginfo.h:2368:24   - Unknown word (CARIAN)       -- zval const_BLOCK_CODE_CARIAN_value;
+./ext/intl/uchar/uchar_arginfo.h:2404:28   - Unknown word (THAM)         -- const_BLOCK_CODE_TAI_THAM_value;
+./ext/intl/uchar/uchar_arginfo.h:2416:24   - Unknown word (LISU)         -- zval const_BLOCK_CODE_LISU_value;
+./ext/intl/uchar/uchar_arginfo.h:2422:24   - Unknown word (BAMUM)        -- zval const_BLOCK_CODE_BAMUM_value;
+./ext/intl/uchar/uchar_arginfo.h:2458:28   - Unknown word (VIET)         -- const_BLOCK_CODE_TAI_VIET_value;
+./ext/intl/uchar/uchar_arginfo.h:2464:24   - Unknown word (MEETEI)       -- zval const_BLOCK_CODE_MEETEI_MAYEK_value;
+./ext/intl/uchar/uchar_arginfo.h:2464:31   - Unknown word (MAYEK)        -- const_BLOCK_CODE_MEETEI_MAYEK_value;
+./ext/intl/uchar/uchar_arginfo.h:2512:24   - Unknown word (RUMI)         -- zval const_BLOCK_CODE_RUMI_NUMERAL_SYMBOLS_value
+./ext/intl/uchar/uchar_arginfo.h:2518:24   - Unknown word (KAITHI)       -- zval const_BLOCK_CODE_KAITHI_value;
+./ext/intl/uchar/uchar_arginfo.h:2548:24   - Unknown word (MANDAIC)      -- zval const_BLOCK_CODE_MANDAIC_value;
+./ext/intl/uchar/uchar_arginfo.h:2554:24   - Unknown word (BATAK)        -- zval const_BLOCK_CODE_BATAK_value;
+./ext/intl/uchar/uchar_arginfo.h:2632:24   - Unknown word (CHAKMA)       -- zval const_BLOCK_CODE_CHAKMA_value;
+./ext/intl/uchar/uchar_arginfo.h:2644:24   - Unknown word (MEROITIC)     -- zval const_BLOCK_CODE_MEROITIC_CURSIVE_value;
+./ext/intl/uchar/uchar_arginfo.h:2656:24   - Unknown word (MIAO)         -- zval const_BLOCK_CODE_MIAO_value;
+./ext/intl/uchar/uchar_arginfo.h:2662:24   - Unknown word (SHARADA)      -- zval const_BLOCK_CODE_SHARADA_value;
+./ext/intl/uchar/uchar_arginfo.h:2668:29   - Unknown word (SOMPENG)      -- const_BLOCK_CODE_SORA_SOMPENG_value;
+./ext/intl/uchar/uchar_arginfo.h:2680:24   - Unknown word (TAKRI)        -- zval const_BLOCK_CODE_TAKRI_value;
+./ext/intl/uchar/uchar_arginfo.h:2687:24   - Unknown word (BASSA)        -- zval const_BLOCK_CODE_BASSA_VAH_value;
+./ext/intl/uchar/uchar_arginfo.h:2719:24   - Unknown word (DUPLOYAN)     -- zval const_BLOCK_CODE_DUPLOYAN_value;
+./ext/intl/uchar/uchar_arginfo.h:2727:24   - Unknown word (ELBASAN)      -- zval const_BLOCK_CODE_ELBASAN_value;
+./ext/intl/uchar/uchar_arginfo.h:2743:24   - Unknown word (GRANTHA)      -- zval const_BLOCK_CODE_GRANTHA_value;
+./ext/intl/uchar/uchar_arginfo.h:2751:24   - Unknown word (KHOJKI)       -- zval const_BLOCK_CODE_KHOJKI_value;
+./ext/intl/uchar/uchar_arginfo.h:2759:24   - Unknown word (KHUDAWADI)    -- zval const_BLOCK_CODE_KHUDAWADI_value;
+./ext/intl/uchar/uchar_arginfo.h:2783:24   - Unknown word (MAHAJANI)     -- zval const_BLOCK_CODE_MAHAJANI_value;
+./ext/intl/uchar/uchar_arginfo.h:2791:24   - Unknown word (MANICHAEAN)   -- zval const_BLOCK_CODE_MANICHAEAN_value;
+./ext/intl/uchar/uchar_arginfo.h:2799:24   - Unknown word (MENDE)        -- zval const_BLOCK_CODE_MENDE_KIKAKUI_value;
+./ext/intl/uchar/uchar_arginfo.h:2799:30   - Unknown word (KIKAKUI)      -- const_BLOCK_CODE_MENDE_KIKAKUI_value;
+./ext/intl/uchar/uchar_arginfo.h:2847:28   - Unknown word (PERMIC)       -- const_BLOCK_CODE_OLD_PERMIC_value;
+./ext/intl/uchar/uchar_arginfo.h:2863:24   - Unknown word (PAHAWH)       -- zval const_BLOCK_CODE_PAHAWH_HMONG_value;
+./ext/intl/uchar/uchar_arginfo.h:2871:24   - Unknown word (PALMYRENE)    -- zval const_BLOCK_CODE_PALMYRENE_value;
+./ext/intl/uchar/uchar_arginfo.h:2903:24   - Unknown word (SIDDHAM)      -- zval const_BLOCK_CODE_SIDDHAM_value;
+./ext/intl/uchar/uchar_arginfo.h:2927:24   - Unknown word (TIRHUTA)      -- zval const_BLOCK_CODE_TIRHUTA_value;
+./ext/intl/uchar/uchar_arginfo.h:2935:24   - Unknown word (WARANG)       -- zval const_BLOCK_CODE_WARANG_CITI_value;
+./ext/intl/uchar/uchar_arginfo.h:2935:31   - Unknown word (CITI)         -- const_BLOCK_CODE_WARANG_CITI_value;
+./ext/intl/uchar/uchar_arginfo.h:3244:16   - Unknown word (ALAPH)        -- zval const_JG_ALAPH_value;
+./ext/intl/uchar/uchar_arginfo.h:3250:16   - Unknown word (ALEF)         -- zval const_JG_ALEF_value;
+./ext/intl/uchar/uchar_arginfo.h:3274:16   - Unknown word (DALATH)       -- zval const_JG_DALATH_RISH_value;
+./ext/intl/uchar/uchar_arginfo.h:3274:23   - Unknown word (RISH)         -- zval const_JG_DALATH_RISH_value;
+./ext/intl/uchar/uchar_arginfo.h:3292:22   - Unknown word (SEMKATH)      -- zval const_JG_FINAL_SEMKATH_value;
+./ext/intl/uchar/uchar_arginfo.h:3304:16   - Unknown word (GAMAL)        -- zval const_JG_GAMAL_value;
+./ext/intl/uchar/uchar_arginfo.h:3316:20   - Unknown word (MARBUTA)      -- zval const_JG_TEH_MARBUTA_GOAL_value;
+./ext/intl/uchar/uchar_arginfo.h:3376:16   - Unknown word (LAMADH)       -- zval const_JG_LAMADH_value;
+./ext/intl/uchar/uchar_arginfo.h:3382:16   - Unknown word (MEEM)         -- zval const_JG_MEEM_value;
+./ext/intl/uchar/uchar_arginfo.h:3418:16   - Unknown word (QAPH)         -- zval const_JG_QAPH_value;
+./ext/intl/uchar/uchar_arginfo.h:3442:16   - Unknown word (SADHE)        -- zval const_JG_SADHE_value;
+./ext/intl/uchar/uchar_arginfo.h:3514:20   - Unknown word (BARREE)       -- zval const_JG_YEH_BARREE_value;
+./ext/intl/uchar/uchar_arginfo.h:3526:16   - Unknown word (YUDH)         -- zval const_JG_YUDH_value;
+./ext/intl/uchar/uchar_arginfo.h:3538:16   - Unknown word (ZAIN)         -- zval const_JG_ZAIN_value;
+./ext/intl/uchar/uchar_arginfo.h:3550:16   - Unknown word (KHAPH)        -- zval const_JG_KHAPH_value;
+./ext/intl/uchar/uchar_arginfo.h:3556:16   - Unknown word (ZHAIN)        -- zval const_JG_ZHAIN_value;
+./ext/intl/uchar/uchar_arginfo.h:3580:16   - Unknown word (ROHINGYA)     -- zval const_JG_ROHINGYA_YEH_value;
+./ext/intl/uchar/uchar_arginfo.h:3619:27   - Unknown word (DHAMEDH)      -- const_JG_MANICHAEAN_DHAMEDH_value;
+./ext/intl/uchar/uchar_arginfo.h:3667:27   - Unknown word (LAMEDH)       -- const_JG_MANICHAEAN_LAMEDH_value;
+./ext/intl/uchar/uchar_arginfo.h:3715:27   - Unknown word (RESH)         -- const_JG_MANICHAEAN_RESH_value;
+./ext/intl/uchar/uchar_arginfo.h:3763:27   - Unknown word (THAMEDH)      -- const_JG_MANICHAEAN_THAMEDH_value;
+./ext/intl/uchar/uchar_arginfo.h:3787:27   - Unknown word (YODH)         -- const_JG_MANICHAEAN_YODH_value;
+./ext/intl/uchar/uchar_arginfo.h:3906:16   - Unknown word (ALETTER)      -- zval const_WB_ALETTER_value;
+./ext/intl/uchar/uchar_arginfo.h:3924:16   - Unknown word (MIDLETTER)    -- zval const_WB_MIDLETTER_value;
+./ext/intl/uchar/uchar_arginfo.h:3930:16   - Unknown word (MIDNUM)       -- zval const_WB_MIDNUM_value;
+./ext/intl/uchar/uchar_arginfo.h:3942:16   - Unknown word (EXTENDNUMLET) -- zval const_WB_EXTENDNUMLET_value;
+./ext/intl/uchar/uchar_arginfo.h:3966:16   - Unknown word (MIDNUMLET)    -- zval const_WB_MIDNUMLET_value;
+./ext/intl/uchar/uchar_arginfo.h:4020:16   - Unknown word (ATERM)        -- zval const_SB_ATERM_value;
+./ext/intl/uchar/uchar_arginfo.h:4050:16   - Unknown word (OLETTER)      -- zval const_SB_OLETTER_value;
+./ext/intl/uchar/uchar_arginfo.h:4068:16   - Unknown word (STERM)        -- zval const_SB_STERM_value;
+./ext/intl/uchar/uchar_arginfo.h:4098:16   - Unknown word (SCONTINUE)    -- zval const_SB_SCONTINUE_value;
+./ext/intl/uchar/uchar_arginfo.h:4206:16   - Unknown word (INSEPERABLE)  -- zval const_LB_INSEPERABLE_value;
+./ext/intl/uchar/uchar_arginfo.h:4284:16   - Unknown word (ZWSPACE)      -- zval const_LB_ZWSPACE_value;
+./ext/intl/uchar/uchar_arginfo.h:496:22    - Unknown word (NONCHARACTER) -- zval const_PROPERTY_NONCHARACTER_CODE_POINT_value;
+./ext/intl/uchar/uchar_arginfo.h:664:35    - Unknown word (UPPERCASED)   -- PROPERTY_CHANGES_WHEN_UPPERCASED_value;
+./ext/intl/uchar/uchar_arginfo.h:670:35    - Unknown word (TITLECASED)   -- PROPERTY_CHANGES_WHEN_TITLECASED_value;
+./ext/intl/uchar/uchar_arginfo.h:676:35    - Unknown word (CASEFOLDED)   -- PROPERTY_CHANGES_WHEN_CASEFOLDED_value;
+./ext/intl/uchar/uchar_arginfo.h:682:35    - Unknown word (CASEMAPPED)   -- PROPERTY_CHANGES_WHEN_CASEMAPPED_value;
+./ext/intl/uchar/uchar_arginfo.h:936:29    - Unknown word (TITLECASE)    -- const_PROPERTY_SIMPLE_TITLECASE_MAPPING_value;
 ./ext/json/json.c:166:15    - Unknown word (yyparse)    -- if (php_json_yyparse(&parser)) {
 ./ext/json/json_encoder.c:14:19     - Unknown word (Zelenka)    -- | Jakub Zelenka <bukka@php.net>
 ./ext/json/php_json_scanner.h:30:18     - Unknown word (ctxmarker)  -- php_json_ctype *ctxmarker; /* marker position
@@ -3270,7 +3285,7 @@ Lines:
 ./ext/mbstring/mb_gpc.c:184:22    - Unknown word (resvar)     -- mbfl_string string, resvar, resval;
 ./ext/mbstring/mbstring.c:1515:8    - Unknown word (encstr)     -- char *encstr;
 ./ext/mbstring/mbstring.c:1667:39   - Unknown word (widechar)   -- filter *next_filter; /* widechar to encoding converter
-./ext/mbstring/mbstring.c:2505:21   - Unknown word (trimmarker) -- zend_string *str, *trimmarker, *encoding = NULL;
+./ext/mbstring/mbstring.c:2505:21   - Unknown word (trimmarker) -- zend_string *str, *trimmarker = zend_empty_string
 ./ext/mbstring/mbstring.c:2603:22   - Unknown word (chash)      -- HashTable *output, *chash;
 ./ext/mbstring/mbstring.c:3056:26   - Unknown word (zenkaku)    -- if we are converting zenkaku kana to hankaku kana
 ./ext/mbstring/mbstring.c:3128:8    - Unknown word (optstr)     -- char *optstr = NULL;
@@ -3319,7 +3334,6 @@ Lines:
 ./ext/mbstring/ucgendat/ucgendat.php:586:17    - Unknown word (Botelho)     -- * Belazzougui, Botelho and Dietzfelbinger.
 ./ext/mbstring/ucgendat/ucgendat.php:586:29    - Unknown word (Dietzfelbinger) -- Belazzougui, Botelho and Dietzfelbinger.
 ./ext/mbstring/ucgendat/ucgendat.php:586:4     - Unknown word (Belazzougui) -- * Belazzougui, Botelho and Dietzfelbinger
-./ext/mbstring/ucgendat/ucgendat.php:722:45    - Unknown word (CODEPOINT)      -- define FIRST_DOUBLEWIDTH_CODEPOINT 0x" . dechex($wideRanges
 ./ext/mbstring/ucgendat/ucgendat.php:724:20    - Unknown word (TABLESTART)     -- $result .= <<<'TABLESTART'
 ./ext/mbstring/ucgendat/ucgendat.php:76:35     - Unknown word (mbfl)       -- DIR__ . "/../libmbfl/mbfl/eaw_table.h";
 ./ext/mysqli/mysqli.c:683:15    - Unknown word (resmode)    -- zend_long resmode = MYSQLI_STORE_RESULT
@@ -8075,18 +8089,18 @@ Lines:
 ./ext/standard/string.c:3061:30   - Unknown word (shortcircuit) -- Needle doesn't occur, shortcircuit the actual replacement
 ./ext/standard/string.c:3380:27   - Unknown word (vrev)         -- const uint8x16_t rev = vrev64q_u8(str);
 ./ext/standard/string.c:343:8     - Unknown word (ABMON)      -- #ifdef ABMON_1
-./ext/standard/string.c:3551:7    - Unknown word (numtmp)       -- char numtmp[4];
-./ext/standard/string.c:3609:95   - Unknown word (wlength)      -- const char *what, size_t wlength)
-./ext/standard/string.c:3732:41   - Unknown word (slashchars)   -- , static const char slashchars[16]) = "\'\"\\\0";
-./ext/standard/string.c:3752:32   - Unknown word (cmpestrm)     -- mm_cvtsi128_si32(_mm_cmpestrm(w128, 4, s128, 16,
-./ext/standard/string.c:3752:61   - Unknown word (SIDD)         -- w128, 4, s128, 16, _SIDD_UBYTE_OPS | _SIDD_CMP
-./ext/standard/string.c:4143:9    - Unknown word (isheb)        -- #define isheb(c) (((((unsigned
-./ext/standard/string.c:4145:10   - Unknown word (isnewline)    -- #define _isnewline(c) (((((unsigned char
-./ext/standard/string.c:4566:20   - Unknown word (reallocing)   -- and constantly reallocing */
-./ext/standard/string.c:4689:9    - Unknown word (locp)         -- char *locp = ZSTR_VAL(loc);
-./ext/standard/string.c:5316:12   - Unknown word (mymode)       -- zend_long mymode=0;
-./ext/standard/string.c:5424:16   - Unknown word (currlocdata)  -- struct lconv currlocdata;
-./ext/standard/string.c:5667:13   - Unknown word (cmplt)        -- lt = _mm_cmplt_epi8(in, m_plus_1);
+./ext/standard/string.c:3564:7    - Unknown word (numtmp)       -- char numtmp[4];
+./ext/standard/string.c:3622:95   - Unknown word (wlength)      -- const char *what, size_t wlength)
+./ext/standard/string.c:3745:41   - Unknown word (slashchars)   -- , static const char slashchars[16]) = "\'\"\\\0";
+./ext/standard/string.c:3765:32   - Unknown word (cmpestrm)     -- mm_cvtsi128_si32(_mm_cmpestrm(w128, 4, s128, 16,
+./ext/standard/string.c:3765:61   - Unknown word (SIDD)         -- w128, 4, s128, 16, _SIDD_UBYTE_OPS | _SIDD_CMP
+./ext/standard/string.c:4156:9    - Unknown word (isheb)        -- #define isheb(c) (((((unsigned
+./ext/standard/string.c:4158:10   - Unknown word (isnewline)    -- #define _isnewline(c) (((((unsigned char
+./ext/standard/string.c:4579:20   - Unknown word (reallocing)   -- and constantly reallocing */
+./ext/standard/string.c:4702:9    - Unknown word (locp)         -- char *locp = ZSTR_VAL(loc);
+./ext/standard/string.c:5329:12   - Unknown word (mymode)       -- zend_long mymode=0;
+./ext/standard/string.c:5437:16   - Unknown word (currlocdata)  -- struct lconv currlocdata;
+./ext/standard/string.c:5680:13   - Unknown word (cmplt)        -- lt = _mm_cmplt_epi8(in, m_plus_1);
 ./ext/standard/string.c:692:21    - Unknown word (bytemask)   -- * Fills a 256-byte bytemask with input. You can
 ./ext/standard/string.c:886:8     - Unknown word (breakchar)  -- char *breakchar = "\n";
 ./ext/standard/string.c:887:9     - Unknown word (newtextlen) -- size_t newtextlen, chk, breakchar_len
