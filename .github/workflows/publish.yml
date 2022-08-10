@@ -32,12 +32,10 @@ jobs:
           echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_ENV
 
       - name: Install
-        run: |
-          pnpm i
+        run: pnpm i
 
       - name: Build
-        run: |
-          pnpm run pre-pub
+        run: pnpm run build
 
       # Release Please has already incremented versions and published tags, so we just
       # need to publish all unpublished versions to NPM here
