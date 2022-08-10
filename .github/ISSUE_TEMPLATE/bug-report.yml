@@ -13,11 +13,24 @@ body:
       label: Kind of Issue
       description: What type of issues are you having
       options:
-        - label: "**Runtime** - command-line tools"
-        - label: "**Building / Compiling**"
-        - label: "**Security**"
-        - label: "**Change in behavior** or **regression**."
-        - label: "**Crash / Error**"
+        - label: "Runtime - command-line tools"
+        - label: "Building / Compiling"
+        - label: "Security"
+        - label: "Change in behavior or regression."
+        - label: "Crash / Error"
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Tool or Library
+      description: Which Tool or Library is causing the issue?
+      multiple: true
+      options:
+        - "**cspell** -- the command-line spelling tool."
+        - "**cspell/eslint-plugin** -- the plugin for ESLint."
+        - "**cspell-tools** -- used for building dictionary files."
+        - "**cspell-lib** -- library that does the actual spell checking."
+        - "**cspell-trie** -- tool for working with trie files."
 
   - type: input
     id: contact
