@@ -68,6 +68,9 @@ jobs:
 
       - run: pnpm i
 
+      - name: Build Dependencies
+        run: pnpm run --filter @cspell/cspell-types build
+
       - name: Update Integrations List
         env:
           DIRTY: ${{ env.dirty }}
