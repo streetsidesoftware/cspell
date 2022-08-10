@@ -19,18 +19,27 @@ body:
         - label: "Change in behavior or regression."
         - label: "Crash / Error"
 
-  - type: dropdown
+  - type: checkboxes
     id: component
     attributes:
       label: Tool or Library
       description: Which Tool or Library is causing the issue?
-      multiple: true
       options:
-        - "**cspell** -- the command-line spelling tool."
-        - "**cspell/eslint-plugin** -- the plugin for ESLint."
-        - "**cspell-tools** -- used for building dictionary files."
-        - "**cspell-lib** -- library that does the actual spell checking."
-        - "**cspell-trie** -- tool for working with trie files."
+        - label: "**cspell** -- the command-line spelling tool."
+        - label: "**cspell/eslint-plugin** -- the plugin for ESLint."
+        - label: "**cspell-tools** -- used for building dictionary files."
+        - label: "**cspell-lib** -- library that does the actual spell checking."
+        - label: "**cspell-trie** -- tool for working with trie files."
+        - label: other
+
+  - type: input
+    id: cspell-version
+    attributes:
+      label: Version
+      description: Which version of CSpell?
+      placeholder: ex. 6.6.0
+    validations:
+      required: false
 
   - type: input
     id: contact
