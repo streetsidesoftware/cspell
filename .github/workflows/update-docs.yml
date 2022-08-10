@@ -20,17 +20,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          cache: npm
-      - name: Setup NPM
-        run: npm i -g npm@8
+          cache: pnpm
+
       - name: Install
-        run: npm install
+        run: pnpm install
       - name: Build Docs
         run: |
-          npm run build-cspell-types-docs
+          pnpm run build-cspell-types-docs
       - name: Has changes
         run: |
           git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV

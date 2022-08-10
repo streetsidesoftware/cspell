@@ -51,13 +51,13 @@ jobs:
         run: |
           echo "inputs: $INPUTS"
 
-      - run: npm i -g npm@${{ env.NPM_VERSION }}
-      - run: npm -v
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ env.REF_BRANCH }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
 
       - name: Patch
         if: ${{ inputs.patch }}
@@ -70,13 +70,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-          cache-dependency-path: |
-            package-lock.json
-            packages/*/package-lock.json
-            integration-tests/package-lock.json
+          cache: "pnpm"
 
-      - run: npm -v
+      - run: pnpm -v
+      - run: pnpm i
 
       - name: Calc Key and Path
         id: key-and-path
@@ -105,16 +102,16 @@ jobs:
         run: |
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      - name: Npm CI
+      - name: Pnpm CI
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: npm ci
+        run: pnpm i
 
-      - name: Has Npm has failed?
+      - name: Has Pnpm has failed?
         if: ${{ failure() }}
         run: |
-          ls -alF /home/runner/.npm/_logs/*.log
-          cat /home/runner/.npm/_logs/*.log
+          ls -alF /home/runner/.pnpm/_logs/*.log
+          cat /home/runner/.pnpm/_logs/*.log
 
       - name: Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
-        run: npm run build
+        run: pnpm run build

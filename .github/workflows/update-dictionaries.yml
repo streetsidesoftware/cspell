@@ -45,20 +45,20 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          cache: npm
-
-      - name: Setup NPM
-        run: npm i -g npm@8
+          cache: pnpm
 
       - name: Install
-        run: npm install
+        run: pnpm install
 
       - name: Update Dictionaries
         run: |
-          npm run update-dictionary-packages
+          pnpm run update-dictionary-packages
 
       - name: Build Patch
         run: |
@@ -141,7 +141,8 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - run: npm i -g npm@${{ env.NPM_VERSION }}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
 
       - name: Patch
         run: |
@@ -151,13 +152,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-          cache-dependency-path: |
-            package-lock.json
-            packages/*/package-lock.json
-            integration-tests/package-lock.json
+          cache: "pnpm"
 
-      - run: npm -v
+      - run: pnpm -v
 
       - name: Cache Build
         id: step-cache-build
@@ -170,14 +167,14 @@ jobs:
         run: |
           echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-      - name: Npm Install
-        run: npm i
+      - name: Install
+        run: pnpm i
 
-      - name: Has Npm has failed?
+      - name: Has pnpm has failed?
         if: ${{ failure() }}
         run: |
-          ls -alF /home/runner/.npm/_logs/*.log
-          cat /home/runner/.npm/_logs/*.log
+          ls -alF /home/runner/.pnpm/_logs/*.log
+          cat /home/runner/.pnpm/_logs/*.log
 
       - name: Check Build
         if: ${{ !steps.step-cache-build.outputs.cache-hit }}
@@ -200,8 +197,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
-          && npm i
-          && npm run update-snapshots-only -- ${{ matrix.repo }}
+          && pnpm i
+          && pnpm run update-snapshots-only -- ${{ matrix.repo }}
 
       - name: Store Repo Diff
         run: |
@@ -254,7 +251,7 @@ jobs:
 
       - name: Update Integrations List
         run: |
-          npm run update-integrations-list
+          pnpm run update-integrations-list
 
       - name: Build Patch
         run: |

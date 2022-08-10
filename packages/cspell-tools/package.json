@@ -13,7 +13,7 @@
     "build": "tsc -p .",
     "build-dev": "tsc -p tsconfig.dev.json",
     "watch": "tsc -p . -w",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "pnpm run clean && pnpm run build",
     "clean": "rimraf dist temp coverage .tsbuildinfo",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",

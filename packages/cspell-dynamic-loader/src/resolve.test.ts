@@ -10,7 +10,6 @@ describe('resolve', () => {
     test.each`
         moduleId             | relativeTo                                    | expected
         ${'cspell'}          | ${__dirname}                                  | ${oc({ ...found, moduleId: 'cspell' })}
-        ${'lerna'}           | ${__dirname}                                  | ${oc({ ...found, moduleId: 'lerna' })}
         ${'jest'}            | ${__dirname}                                  | ${oc({ ...found, moduleId: 'jest' })}
         ${'hunspell-reader'} | ${Path.join(__dirname, '../../cspell-tools')} | ${oc({ ...found, moduleId: 'hunspell-reader' })}
     `('resolveModule $moduleId', ({ moduleId, relativeTo, expected }) => {

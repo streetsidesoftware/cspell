@@ -58,38 +58,33 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          cache: npm
-
-      - name: Setup NPM
-        run: npm i -g npm@8
+          cache: pnpm
 
       - name: Update Root
         run: |
-          npm i
-          npx npm-check-updates -t minor -u
-          rm -rf node_modules package-lock.json
+          pnpm i
+          pnpm up
 
       - name: Install
-        run: npm install
-
-      - name: Update packages
-        run: |
-          npm run update-packages
+        run: pnpm install
 
       - name: Build
         if: env.UPDATE_SNAPSHOTS == 'true'
         run: |
-          npm run build
+          pnpm run build
 
       - name: Update Integration Test Snapshots
         if: env.UPDATE_SNAPSHOTS == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm run update-snapshots
+          pnpm run update-snapshots
 
       - name: Build Patch
         run: |

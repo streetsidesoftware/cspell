@@ -5,14 +5,14 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build --out-dir ../docs/docsV2",
+    "build:site": "docusaurus build --out-dir ../docs/docsV2",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve --dir ../docs/docsV2",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "update-packages": "npx npm-check-updates -t minor -u && rimraf node_modules package-lock.json && npm i",
+    "update-packages": "pnpm up",
     "typecheck": "tsc",
     "lint": "eslint . --fix --cache && prettier -w \"**/*.{md,yaml,yml,json}\"",
     "lint-ci": "eslint . && prettier -c \"**/*.{md,yaml,yml,json}\""

@@ -55,24 +55,26 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
+          cache: "pnpm"
 
-      - run: npm i -g npm@${{ env.NPM_VERSION }}
-      - run: npm -v
+      - run: pnpm -v
 
-      - run: npm ci
+      - run: pnpm i
 
       - name: Update Integrations List
         env:
           DIRTY: ${{ env.dirty }}
         run: |
           cd integration-tests
-          npm i
-          npm run build
+          pnpm i
+          pnpm run build
           echo "REPOS<<HEREDOC" >> $GITHUB_ENV
           ./tester.js list --json $DIRTY -t ${{ secrets.GITHUB_TOKEN }} >> $GITHUB_ENV
           echo HEREDOC >> $GITHUB_ENV

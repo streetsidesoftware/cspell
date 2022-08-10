@@ -31,13 +31,13 @@
   },
   "scripts": {
     "clean": "rimraf dist coverage .tsbuildinfo",
-    "build": "npm run compile && npm run build-schema",
+    "build": "pnpm run compile && pnpm run build-schema",
     "build-dev": "tsc -p tsconfig.dev.json",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/CSpellSettingsDef.ts --type CSpellSettings --validation-keywords markdownDescription  --validation-keywords scope --validation-keywords deprecated --validation-keywords deprecationMessage -o  ./cspell.schema.json && cp ./cspell.schema.json ../..",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "test-schema": "ajv -s ./cspell.schema.json -d \"cspell.test.{json,yaml}\" -c ./ajv.config.js",
-    "test": "jest && npm run test-schema",
+    "test": "jest && pnpm run test-schema",
     "prepare": "echo Skip Building Types"
   },
   "repository": {

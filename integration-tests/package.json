@@ -12,10 +12,10 @@
   "scripts": {
     "build": "tsc -p .",
     "build-dev": "tsc -p tsconfig.dev.json",
-    "clean": "npm run clean-dist && npm run clean-repos",
+    "clean": "pnpm run clean-dist && pnpm run clean-repos",
     "clean-dist": "rimraf dist .tsbuildinfo",
     "clean-repos": "rimraf repositories/temp temp",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "pnpm run clean && pnpm run build",
     "integration-tests": "node tester.js check -f",
     "test-jest": "jest",
     "update-snapshots-only": "node tester.js check --update-snapshots",

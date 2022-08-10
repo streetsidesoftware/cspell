@@ -19,11 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          cache: npm
+          cache: pnpm
 
-      - run: npm ci
-      - run: npm run build
-      - run: npm run lint-ci
+      - run: pnpm i
+      - run: pnpm run build
+      - run: pnpm run lint-ci

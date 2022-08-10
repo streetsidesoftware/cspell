@@ -14,15 +14,15 @@
   ],
   "scripts": {
     "clean": "rimraf dist temp coverage .tsbuildinfo",
-    "build": "npm run compile && npm run build-api",
+    "build": "pnpm run compile && pnpm run build-api",
     "build-dev": "tsc -p tsconfig.dev.json",
     "build-api": "rollup -c api/rollup.config.mjs",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "pnpm run clean && pnpm run build",
     "compile": "tsc -p .",
     "watch": "tsc --watch -p .",
     "coverage": "jest --coverage",
     "test-watch": "jest --watch",
-    "prepublishOnly": "npm run clean-build && npm test",
+    "prepublishOnly": "pnpm run clean-build && pnpm test",
     "test": "jest",
     "update-snapshot": "jest --updateSnapshot"
   },

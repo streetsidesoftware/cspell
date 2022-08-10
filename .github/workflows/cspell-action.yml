@@ -13,14 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          cache: npm
+          cache: pnpm
 
-      - run: npm i -g npm@8
-      - run: npm -v
+      - run: pnpm -v
 
-      - run: npm run prepare-cspell-action
+      - run: pnpm run prepare-cspell-action
       - run: npx lerna run build --scope "@cspell/cspell-bundled-dicts" --include-dependencies
       - uses: streetsidesoftware/cspell-action@3b1c4d9fdd550509f5c2f13f2d64c1364e458373 # v1
