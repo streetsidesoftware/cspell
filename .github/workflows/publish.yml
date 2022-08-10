@@ -31,9 +31,12 @@ jobs:
         run: |
           echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_ENV
 
-      - name: Install / Build
+      - name: Install
         run: |
           pnpm i
+
+      - name: Build
+        run: |
           pnpm run pre-pub
 
       # Release Please has already incremented versions and published tags, so we just
