@@ -77,7 +77,7 @@ jobs:
         run: |
           git config user.name streetsidesoftware[bot]
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
-          git remote add gh-token "https://${{ inputs.token || steps.generate-token.outputs.token }}@github.com/streetsidesoftware/cspell.git"
+          git remote add gh-token "https://${{ steps.generate-token.outputs.token }}@github.com/streetsidesoftware/cspell.git"
 
       - name: Install
         run: pnpm i
