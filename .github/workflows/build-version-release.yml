@@ -47,7 +47,7 @@ jobs:
       - name: Mode
         env:
           MODE: >
-            ${{ (env.USE_NEXT && '--conventional-prerelease --dist-tag next')
+            ${{ (env.USE_NEXT && '--conventional-prerelease')
             || (contains(env.VERSION, 'alpha') && '--conventional-graduate')
             || ''
             }}
