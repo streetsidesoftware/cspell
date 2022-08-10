@@ -20,6 +20,14 @@ on:
           - "auto"
         default: "auto"
         required: false
+      dry_run:
+        description: "Dry Run"
+        type: choice
+        options:
+          - "yes"
+          - "no"
+        default: "no"
+        required: false
 
   workflow_call:
     secrets:
@@ -32,6 +40,7 @@ permissions:
 env:
   USE_NEXT: ${{ inputs.tag == 'next' }}
   BUMP: ${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
+  DRY_RUN: ${{ (inputs.dry_run == 'yes' && '--git-dry-run') || '' }}
 
 jobs:
   publish:
@@ -68,4 +77,4 @@ jobs:
         run: pnpm i
 
       - name: Push Version
-        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.BUMP }}
+        run: pnpm lerna version --conventional-commits --sync-workspace-lock --yes ${{ env.MODE }} ${{ env.DRY_RUN }} ${{ env.BUMP }}
