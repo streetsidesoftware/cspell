@@ -237,6 +237,15 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.2
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "pnpm"
+
       - name: restore repos
         uses: actions/download-artifact@v3
         with:
