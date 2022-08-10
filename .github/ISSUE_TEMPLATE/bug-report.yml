@@ -94,16 +94,49 @@ body:
       required: true
 
   - type: textarea
-    id: logs
+    id: steps-to-reproduce
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
+      label: Steps to Reproduce
+      description: Description of the steps necessary to reproduce the behavior.
+      placeholder: |
+        1. Command line '...'
+        2.
+        3. Scroll down to '....'
+        4. See error
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+
+  - type: textarea
+    id: more-info
+    attributes:
+      label: Additional Information
+      description: Please provide any additional information that would help to understand the issue.
+      value: |
+        **Screenshots**
+
+        If applicable, add screenshots to help explain your problem.
+
+        **Additional context**
+
+        Add any other context about the problem here.
+
+        **`cspell.json`**
+
+        If applicable, attach a copy of the `cspell.json` file.
+
+        **Example Repository (Optional)**
+
+        An example repository makes things easier to debug.
+
   - type: checkboxes
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/streetsidesoftware/cspell/blob/main/CODE_OF_CONDUCT.md)
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
