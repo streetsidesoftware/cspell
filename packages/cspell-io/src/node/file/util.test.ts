@@ -1,4 +1,4 @@
-import { isUrlLike, toURL, urlBasename, urlDirname } from './util';
+import { isUrlLike, toURL, urlBasename, urlDirname, basename } from './util';
 import * as path from 'path';
 
 const root = path.join(__dirname, '../..');
@@ -63,5 +63,20 @@ describe('util', () => {
     `('urlDirname $file', async ({ file, expected }) => {
         const filename = isUrlLike(file) ? file : path.resolve(root, file);
         expect(urlDirname(filename).toString()).toEqual(expected);
+    });
+
+    test.each`
+        file                                                                                                | expected
+        ${'/'}                                                                                              | ${''}
+        ${'samples/cities.txt'}                                                                             | ${'cities.txt'}
+        ${'samples/cities.txt.gz'}                                                                          | ${'cities.txt.gz'}
+        ${'samples/code/'}                                                                                  | ${'code'}
+        ${'file://samples/code/'}                                                                           | ${'code'}
+        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${'cities.txt'}
+        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${'cities.txt.gz'}
+        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/code/'}         | ${'code'}
+    `('basename $file', async ({ file, expected }) => {
+        expect(basename(file)).toEqual(expected);
+        expect(basename(file)).toEqual(path.basename(file));
     });
 });

@@ -1,4 +1,3 @@
-import { basename } from 'path/posix';
 import { pathToFileURL } from 'url';
 
 const isZippedRegExp = /\.gz($|[?#])/i;
@@ -44,7 +43,6 @@ export function urlBasename(url: string | URL): string {
     if (url.protocol === 'data:') {
         return guessDataUrlName(url.pathname.split(',', 1)[0]);
     }
-
     return basename(url.pathname);
 }
 
@@ -58,4 +56,10 @@ export function urlDirname(url: string | URL): URL {
     }
 
     return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
+}
+
+export function basename(path: string): string {
+    path = path.endsWith('/') ? path.slice(0, path.length - 1) : path;
+    const idx = path.lastIndexOf('/');
+    return idx >= 0 ? path.slice(idx + 1) || '' : path;
 }
