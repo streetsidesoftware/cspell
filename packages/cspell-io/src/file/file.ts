@@ -26,9 +26,7 @@ export const readFileSync: typeof ReadFileSyncFn = function (
 };
 
 export const getStat: typeof GetStatFn = function (filenameOrUri: string): Promise<Stats | Error> {
-    return getDefaultCSpellIO()
-        .getStat(filenameOrUri)
-        .catch((e) => toError(e));
+    return getDefaultCSpellIO().getStat(filenameOrUri).catch(toError);
 };
 
 export const getStatSync: typeof GetStatSyncFn = function (filenameOrUri: string): Stats | Error {

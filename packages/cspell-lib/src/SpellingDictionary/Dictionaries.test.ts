@@ -6,7 +6,6 @@ import { getDefaultBundledSettings, loadConfig } from '../Settings';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection';
 import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings';
 import * as Dictionaries from './Dictionaries';
-import { __testing__ } from './DictionaryLoader';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError';
 
 // cspell:ignore café rhône
@@ -15,7 +14,6 @@ const root = path.resolve(__dirname, '../..');
 const samples = path.join(root, 'samples');
 
 const debug = false;
-const dictionaryLoadDebugLog = __testing__.debugLog;
 
 function log(msg: string): void {
     if (debug) {
@@ -230,7 +228,6 @@ describe('Validate Refresh', () => {
 
     test('Refresh Dictionary Cache Sync', async () => {
         log(`Start: ${expect.getState().currentTestName}; ts: ${Date.now()}`);
-        dictionaryLoadDebugLog.length = 0;
         const tempDictPath = tempPath('words_sync.txt');
         await fs.mkdirp(path.dirname(tempDictPath));
         await fs.writeFile(tempDictPath, 'one\ntwo\nthree\n');
@@ -270,8 +267,6 @@ describe('Validate Refresh', () => {
         await Dictionaries.refreshDictionaryCache(0);
 
         const dicts4 = Dictionaries.loadDictionaryDefsSync(defsToLoad);
-
-        log(dictionaryLoadDebugLog.join('\n'));
 
         expect(dicts4.map((d) => d.name)).toEqual(['css', 'html', 'node', 'temp']);
         // Should be using the latest copy of the words.

@@ -1,4 +1,6 @@
 export { toArray as asyncIterableToArray } from './async/asyncIterable';
+export type { CSpellIO } from './CSpellIO';
+export { CSpellIONode } from './CSpellIONode';
 export {
     getStat,
     getStatSync,
@@ -9,6 +11,4 @@ export {
     writeToFileIterableP,
 } from './file';
 export type { Stats } from './models/Stats';
-export type { CSpellIO } from './CSpellIO';
-export { CSpellIONode } from './CSpellIONode';
 export { encodeDataUrl, toDataUrl } from './node/dataUrl';

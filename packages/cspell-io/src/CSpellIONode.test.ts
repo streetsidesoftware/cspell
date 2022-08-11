@@ -123,4 +123,37 @@ describe('CSpellIONode', () => {
         await cspellIo.writeFile(filename, content);
         expect(await cspellIo.readFile(filename)).toEqual(oc({ content }));
     });
+
+    test.each`
+        filename                                                                                                       | expected
+        ${ps('samples/cities.txt')}                                                                                    | ${sc('samples/cities.txt')}
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'} | ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'}
+        ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}                                         | ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}
+        ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}                                   | ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}
+    `('toUrl $filename', ({ filename, expected }) => {
+        const cspellIo = new CSpellIONode();
+        expect(cspellIo.toURL(filename).toString()).toEqual(expected);
+    });
+
+    test.each`
+        filename                                                                                                       | expected
+        ${ps('samples/cities.txt')}                                                                                    | ${'cities.txt'}
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'} | ${'cities.txt.gz'}
+        ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}                                         | ${'hello.txt'}
+        ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}                                   | ${'text.plain'}
+    `('uriBasename $filename', ({ filename, expected }) => {
+        const cspellIo = new CSpellIONode();
+        expect(cspellIo.uriBasename(filename)).toEqual(expected);
+    });
+
+    test.each`
+        filename                                                                                                       | expected
+        ${ps('samples/cities.txt')}                                                                                    | ${sc('samples/')}
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'} | ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/'}
+        ${'data:text/plain;charset=utf8;filename=hello.txt,Hello%2C%20World!'}                                         | ${'data:'}
+        ${'data:text/plain;charset=utf8;base64,SGVsbG8sIFdvcmxkISAlJSUlJCQkJCwsLCw'}                                   | ${'data:'}
+    `('uriDirname $filename', ({ filename, expected }) => {
+        const cspellIo = new CSpellIONode();
+        expect(cspellIo.uriDirname(filename).toString()).toEqual(expected);
+    });
 });

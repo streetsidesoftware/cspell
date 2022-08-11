@@ -25,3 +25,41 @@ export function toURL(filename: string | URL): URL {
         ? new URL(filename)
         : pathToFileURL(filename);
 }
+
+const regMatchFilename = /filename=([^;,]*)/;
+
+export function urlBasename(url: string | URL): string {
+    function guessDataUrlName(header: string): string {
+        const filenameMatch = header.match(regMatchFilename);
+        if (filenameMatch) return filenameMatch[1];
+        const mime = header.split(';', 1)[0];
+        return mime.replace(/\W/g, '.');
+    }
+
+    if (typeof url === 'string' && url.startsWith('data:')) {
+        return guessDataUrlName(url.split(',', 1)[0].split(':', 2)[1]);
+    }
+    url = toURL(url);
+    if (url.protocol === 'data:') {
+        return guessDataUrlName(url.pathname.split(',', 1)[0]);
+    }
+    return basename(url.pathname);
+}
+
+export function urlDirname(url: string | URL): URL {
+    if (typeof url === 'string' && url.startsWith('data:')) {
+        return toURL('data:');
+    }
+    url = toURL(url);
+    if (url.protocol === 'data:') {
+        return toURL('data:');
+    }
+
+    return new URL(url.pathname.endsWith('/') ? '..' : '.', url);
+}
+
+export function basename(path: string): string {
+    path = path.endsWith('/') ? path.slice(0, path.length - 1) : path;
+    const idx = path.lastIndexOf('/');
+    return idx >= 0 ? path.slice(idx + 1) || '' : path;
+}
