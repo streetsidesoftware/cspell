@@ -5,7 +5,6 @@ import { toURL } from './node/file/util';
 
 const sc = expect.stringContaining;
 const oc = expect.objectContaining;
-const sm = expect.stringMatching;
 
 describe('CSpellIONode', () => {
     test('constructor', () => {
