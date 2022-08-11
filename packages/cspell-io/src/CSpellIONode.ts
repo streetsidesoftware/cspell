@@ -5,7 +5,7 @@ import { ErrorNotImplemented } from './errors/ErrorNotImplemented';
 import { registerHandlers } from './handlers/node/file';
 import type { TextFileResource } from './models/FileResource';
 import type { Stats } from './models/Stats';
-import { toURL } from './node/file/util';
+import { toURL, urlBasename, urlDirname } from './node/file/util';
 import {
     RequestFsReadFile,
     RequestFsReadFileSync,
@@ -63,6 +63,15 @@ export class CSpellIONode implements CSpellIO {
     }
     compareStats(left: Stats, right: Stats): number {
         return compareStats(left, right);
+    }
+    toURL(uriOrFilename: string | URL): URL {
+        return toURL(uriOrFilename);
+    }
+    uriBasename(uriOrFilename: string | URL): string {
+        return urlBasename(uriOrFilename);
+    }
+    uriDirname(uriOrFilename: string | URL): URL {
+        return urlDirname(uriOrFilename);
     }
 }
 

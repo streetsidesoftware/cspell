@@ -131,7 +131,7 @@ const handleRequestFsReadBinaryFileSyncData = RequestFsReadBinaryFileSync.create
         return createResponse({ url, content: data.data, baseFilename: data.attributes.get('filename') });
     },
     undefined,
-    'Node: Read Http(s) file.'
+    'Node: Read data: urls.'
 );
 
 /**
@@ -146,7 +146,7 @@ const handleRequestFsReadBinaryFileData = RequestFsReadBinaryFile.createRequestH
         return createResponse(Promise.resolve(res.value));
     },
     undefined,
-    'Node: Read Http(s) file.'
+    'Node: Read data: urls.'
 );
 
 function bufferToText(buf: Buffer, encoding: BufferEncoding): string {

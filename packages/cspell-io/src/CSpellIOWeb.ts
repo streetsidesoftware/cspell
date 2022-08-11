@@ -23,4 +23,13 @@ export class CSpellIOWeb implements CSpellIO {
     compareStats(left: Stats, right: Stats): number {
         return compareStats(left, right);
     }
+    toURL(_uriOrFilename: string | URL): URL {
+        throw new ErrorNotImplemented('toURL');
+    }
+    uriBasename(_uriOrFilename: string | URL): string {
+        throw new ErrorNotImplemented('uriBasename');
+    }
+    uriDirname(_uriOrFilename: string | URL): URL {
+        throw new ErrorNotImplemented('uriDirname');
+    }
 }
