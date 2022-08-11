@@ -1,16 +1,49 @@
 import * as path from 'path';
-import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
-import { mapDictDefToInternal } from '../Settings/DictionarySettings';
-import { clean } from '../util/util';
-import { loadDictionary, loadDictionarySync, LoadOptions, refreshCacheEntries } from './DictionaryLoader';
-jest.mock('../util/logger');
+import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
+import { mapDictDefToInternal } from '../../Settings/DictionarySettings';
+import { clean } from '../../util/util';
+import { LoadOptions, DictionaryLoader } from './DictionaryLoader';
+import { getCSpellIO } from '../../static';
+jest.mock('../../util/logger');
 
-const root = path.join(__dirname, '..', '..');
+const root = path.join(__dirname, '../../..');
 const samples = path.join(root, 'samples');
+
+const cspellIO = getCSpellIO();
+
+type ErrorResults = Record<string, unknown> | Error;
 
 const di = mapDictDefToInternal;
 
+const oc = expect.objectContaining;
+
 describe('Validate DictionaryLoader', () => {
+    const errorENOENT = { code: 'ENOENT' };
+    const unknownFormatError = new Error('Unknown file format');
+
+    const dictionaryLoader = new DictionaryLoader(cspellIO);
+
+    interface TestLoadEntryNotFound {
+        filename: string;
+        expectedError: ErrorResults;
+    }
+
+    test.each`
+        filename                | expectedError
+        ${'./notfound.txt'}     | ${oc({ message: 'failed to load', cause: oc(errorENOENT) })}
+        ${'./notfound.txt.gz'}  | ${oc({ message: 'failed to load', cause: oc(errorENOENT) })}
+        ${'./notfound.trie'}    | ${oc({ message: 'failed to load', cause: oc(unknownFormatError) })}
+        ${'./notfound.trie.gz'} | ${oc({ message: 'failed to load', cause: oc(unknownFormatError) })}
+    `('load not found $filename', async ({ filename, expectedError }: TestLoadEntryNotFound) => {
+        const def: LoadOptions = dDef({
+            path: filename,
+            name: filename,
+        });
+        const dictionary = await dictionaryLoader.loadDictionary(def);
+        const errors = dictionary.getErrors?.();
+        expect(errors).toEqual([expectedError]);
+    });
+
     test.each`
         filename
         ${'./notfound.txt'}
@@ -22,7 +55,7 @@ describe('Validate DictionaryLoader', () => {
             path: filename,
             name: filename,
         });
-        const dict = await loadDictionary(def);
+        const dict = await dictionaryLoader.loadDictionary(def);
         expect(dict.getErrors?.()).toHaveLength(1);
     });
 
@@ -89,9 +122,9 @@ describe('Validate DictionaryLoader', () => {
             hasWord: boolean;
             hasErrors: boolean;
         }) => {
-            await refreshCacheEntries(maxAge, Date.now());
+            await dictionaryLoader.refreshCacheEntries(maxAge, Date.now());
             const def = { ...options, path: file };
-            const d = await loadDictionary(def);
+            const d = await dictionaryLoader.loadDictionary(def);
             expect(d.has(word)).toBe(hasWord);
             expect(!!d.getErrors?.().length).toBe(hasErrors);
         }
@@ -116,7 +149,7 @@ describe('Validate DictionaryLoader', () => {
         'dict has word $testCase $word',
         async ({ word, hasWord, ignoreCase }: { word: string; hasWord: boolean; ignoreCase?: boolean }) => {
             const file = sample('words.txt');
-            const d = await loadDictionary(dDef({ name: 'words', path: file }));
+            const d = await dictionaryLoader.loadDictionary(dDef({ name: 'words', path: file }));
             expect(d.has(word, clean({ ignoreCase }))).toBe(hasWord);
         }
     );
@@ -134,7 +167,7 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'New York'} | ${false}
         ${dDef({ name: 'words', path: dict('cities.txt'), type: 'W' })} | ${'York'}     | ${true}
     `('sync load dict has word $def $word', ({ def, word, hasWord }) => {
-        const d = loadDictionarySync(def);
+        const d = dictionaryLoader.loadDictionarySync(def);
         expect(d.has(word)).toBe(hasWord);
     });
 
@@ -146,7 +179,7 @@ describe('Validate DictionaryLoader', () => {
         ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'S' })} | ${[expect.any(Error)]}
         ${dDef({ name: 'words', path: dict('cities.missing.txt'), type: 'W' })} | ${[expect.any(Error)]}
     `('sync load dict with error $def', ({ def, expected }) => {
-        const d = loadDictionarySync(def);
+        const d = dictionaryLoader.loadDictionarySync(def);
         expect(d.getErrors?.()).toEqual(expected);
     });
 
