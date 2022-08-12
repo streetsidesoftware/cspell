@@ -1,7 +1,7 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
-import { logError, logWarning } from '../util/logger';
+import { logError, logWarning } from '../../util/logger';
 import {
     clearCachedSettingsFiles,
     extractImportErrors,
@@ -24,20 +24,20 @@ import {
     getSources,
     ImportFileRefWithError,
     mergeSettings,
-} from './CSpellSettingsServer';
-import { getDefaultBundledSettings, _defaultSettings } from './DefaultSettings';
+} from '../CSpellSettingsServer';
+import { getDefaultBundledSettings, _defaultSettings } from '../DefaultSettings';
 
 const { normalizeCacheSettings, normalizeSettings, validateRawConfigExports, validateRawConfigVersion } =
     __configLoader_testing__;
 
-const rootCspellLib = path.resolve(path.join(__dirname, '../..'));
+const rootCspellLib = path.resolve(path.join(__dirname, '../../..'));
 const root = path.resolve(rootCspellLib, '../..');
 const samplesDir = path.resolve(rootCspellLib, 'samples');
 const samplesSrc = path.join(samplesDir, 'src');
-const testFixtures = path.join(rootCspellLib, '../../test-fixtures');
+const testFixtures = path.join(root, 'test-fixtures');
 const oc = expect.objectContaining;
 
-jest.mock('../util/logger');
+jest.mock('../../util/logger');
 
 const mockedLogError = jest.mocked(logError);
 const mockedLogWarning = jest.mocked(logWarning);
@@ -45,8 +45,8 @@ const mockedLogWarning = jest.mocked(logWarning);
 describe('Validate CSpellSettingsServer', () => {
     test.each`
         filename                                              | relativeTo   | refFilename
-        ${r('../../cspell.config.json')}                      | ${undefined} | ${r('../../cspell.config.json')}
-        ${r('../../cspell.config.json')}                      | ${__dirname} | ${r('../../cspell.config.json')}
+        ${r('../../../cspell.config.json')}                   | ${undefined} | ${r('../../../cspell.config.json')}
+        ${r('../../../cspell.config.json')}                   | ${__dirname} | ${r('../../../cspell.config.json')}
         ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${__dirname} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
         ${'@cspell/cspell-bundled-dicts/cspell-default.json'} | ${undefined} | ${require.resolve('@cspell/cspell-bundled-dicts/cspell-default.json')}
     `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, refFilename }) => {
@@ -57,28 +57,28 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests loading project cspell.json file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-missing.json');
+        const filename = path.join(samplesDir, 'linked/cspell-missing.json');
         const settings = readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toBeUndefined();
     });
 
     test('tests loading a cSpell.json file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import.json');
+        const filename = path.join(samplesDir, 'linked/cspell-import.json');
         const settings = readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
     test('readSettingsFiles cSpell.json', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import.json');
+        const filename = path.join(samplesDir, 'linked/cspell-import.json');
         const settings = readSettingsFiles([filename]);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
     });
 
     test('tests loading a cSpell.json with multiple imports file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-imports.json');
+        const filename = path.join(samplesDir, 'linked/cspell-imports.json');
         const settings = readSettings(filename);
         expect(Object.keys(settings)).not.toHaveLength(0);
         expect(settings.words).toEqual(expect.arrayContaining(['import']));
@@ -88,7 +88,7 @@ describe('Validate CSpellSettingsServer', () => {
     });
 
     test('tests loading a cSpell.json with a missing import file', () => {
-        const filename = path.join(__dirname, '..', '..', 'samples', 'linked', 'cspell-import-missing.json');
+        const filename = path.join(samplesDir, 'linked/cspell-import-missing.json');
         const settings = readSettings(filename);
         expect(settings.__importRef?.filename).toBe(path.resolve(filename));
         expect(settings.__imports?.size).toBe(2);
@@ -286,14 +286,14 @@ describe('Validate Glob resolution', () => {
     });
 
     test.each`
-        settings                                    | file                | expected
-        ${{}}                                       | ${r('cspell.json')} | ${oc({ name: 'Settings/cspell.json' })}
-        ${{ gitignoreRoot: '.' }}                   | ${r('cspell.json')} | ${oc({ name: 'Settings/cspell.json', gitignoreRoot: [__dirname] })}
-        ${{ gitignoreRoot: '..' }}                  | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('..')] })}
-        ${{ gitignoreRoot: ['.', '..'] }}           | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('.'), r('..')] })}
-        ${{ reporters: ['../../README.md'] }}       | ${r('cspell.json')} | ${oc({ reporters: [r('../../README.md')] })}
-        ${{ reporters: [['../../README.md']] }}     | ${r('cspell.json')} | ${oc({ reporters: [[r('../../README.md')]] })}
-        ${{ reporters: [['../../README.md', {}]] }} | ${r('cspell.json')} | ${oc({ reporters: [[r('../../README.md'), {}]] })}
+        settings                                       | file                | expected
+        ${{}}                                          | ${r('cspell.json')} | ${oc({ name: 'Controller/cspell.json' })}
+        ${{ gitignoreRoot: '.' }}                      | ${r('cspell.json')} | ${oc({ name: 'Controller/cspell.json', gitignoreRoot: [__dirname] })}
+        ${{ gitignoreRoot: '..' }}                     | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('..')] })}
+        ${{ gitignoreRoot: ['.', '..'] }}              | ${r('cspell.json')} | ${oc({ gitignoreRoot: [r('.'), r('..')] })}
+        ${{ reporters: ['../../../README.md'] }}       | ${r('cspell.json')} | ${oc({ reporters: [r('../../../README.md')] })}
+        ${{ reporters: [['../../../README.md']] }}     | ${r('cspell.json')} | ${oc({ reporters: [[r('../../../README.md')]] })}
+        ${{ reporters: [['../../../README.md', {}]] }} | ${r('cspell.json')} | ${oc({ reporters: [[r('../../../README.md'), {}]] })}
     `('normalizeSettings $settings', ({ settings, file, expected }) => {
         expect(normalizeSettings(settings, file, {})).toEqual(expected);
     });
@@ -486,7 +486,7 @@ describe('Validate search/load config files', () => {
     });
 
     test('config needing PnP', async () => {
-        const uriTestPackages = path.join(__dirname, '../../../../test-packages');
+        const uriTestPackages = path.join(root, 'test-packages');
         const uriYarn2TestMedCspell = path.join(uriTestPackages, 'yarn2/test-yarn2-med/cspell.json');
         const result = await loadConfig(uriYarn2TestMedCspell, {});
         expect(result.dictionaries).toEqual(['medical terms']);
@@ -540,8 +540,8 @@ describe('Validate Normalize Settings', () => {
 
 describe('Validate Dependencies', () => {
     test.each`
-        filename                         | relativeTo   | expected
-        ${r('../../cspell.config.json')} | ${undefined} | ${{ configFiles: [r(root, 'cspell.json'), r('../../cspell.config.json')], dictionaryFiles: [r(root, 'cspell-dict.txt'), r(root, 'cspell-ignore-words.txt')] }}
+        filename                            | relativeTo   | expected
+        ${r('../../../cspell.config.json')} | ${undefined} | ${{ configFiles: [r(root, 'cspell.json'), r('../../../cspell.config.json')], dictionaryFiles: [r(root, 'cspell-dict.txt'), r(root, 'cspell-ignore-words.txt')] }}
     `('tests readSettings $filename $relativeTo', ({ filename, relativeTo, expected }) => {
         const settings = readSettings(filename, relativeTo);
         const dependencies = extractDependencies(settings);

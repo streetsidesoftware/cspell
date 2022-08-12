@@ -1,13 +1,16 @@
-import { clearPnPGlobalCache, pnpLoader, UnsupportedPnpFile, UnsupportedSchema } from './pnpLoader';
+import { clearPnPGlobalCache, pnpLoader } from './pnpLoader';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import resolveFrom from 'resolve-from';
 import path from 'path';
+import { UnsupportedPnpFile } from './ImportError';
 
-const uriTestPackages = URI.file(path.join(__dirname, '../../../../test-packages'));
+const rootCspellLib = path.resolve(path.join(__dirname, '../../..'));
+const root = path.resolve(rootCspellLib, '../..');
+const uriTestPackages = URI.file(path.join(root, 'test-packages'));
 const uriDirectory = URI.file(__dirname);
 const uriYarn2TestMed = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-med');
 const uriYarn2TestSci = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-sci');
-const uriBadPnp = UriUtils.joinPath(uriDirectory, '../../samples/bad-pnp');
+const uriBadPnp = UriUtils.joinPath(uriDirectory, '../../../samples/bad-pnp');
 const uriYarn2TestMedPnp = UriUtils.joinPath(uriYarn2TestMed, '.pnp.js');
 const uriYarn2TestSciPnp = UriUtils.joinPath(uriYarn2TestSci, '.pnp.js');
 
@@ -153,7 +156,6 @@ describe('Validate PnPLoader', () => {
         const loader = pnpLoader();
         const uri = uriYarn2TestMed.with({ scheme: 'ftp' });
         const r = loader.load(uri);
-        await expect(r).rejects.toEqual(new Error('Unsupported schema for PNP: "ftp"'));
-        await expect(r).rejects.toBeInstanceOf(UnsupportedSchema);
+        await expect(r).resolves.toEqual(undefined);
     });
 });

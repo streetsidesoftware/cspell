@@ -2,7 +2,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import * as Path from 'path';
 import { posix } from 'path';
 import { URI } from 'vscode-uri';
-import { ImportError } from './Settings/ImportError';
+import { ImportError } from './Settings/Controller/ImportError';
 import {
     determineFinalDocumentSettings,
     Document,

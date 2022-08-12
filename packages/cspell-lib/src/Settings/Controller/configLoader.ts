@@ -13,20 +13,20 @@ import * as json from 'comment-json';
 import { cosmiconfig, cosmiconfigSync, Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
-import { createCSpellSettingsInternal as csi, CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
-import { logError, logWarning } from '../util/logger';
-import { resolveFile } from '../util/resolveFile';
-import { OptionalOrUndefined } from '../util/types';
-import * as util from '../util/util';
+import { createCSpellSettingsInternal as csi, CSpellSettingsInternal } from '../../Models/CSpellSettingsInternalDef';
+import { logError, logWarning } from '../../util/logger';
+import { resolveFile } from '../../util/resolveFile';
+import { OptionalOrUndefined } from '../../util/types';
+import * as util from '../../util/util';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
     currentSettingsFileVersion,
     ENV_CSPELL_GLOB_ROOT,
     mergeSettings,
-} from './CSpellSettingsServer';
-import { mapDictDefsToInternal } from './DictionarySettings';
-import { getRawGlobalSettings } from './GlobalSettings';
+} from '../CSpellSettingsServer';
+import { mapDictDefsToInternal } from '../DictionarySettings';
+import { getRawGlobalSettings } from '../GlobalSettings';
 import { ImportError } from './ImportError';
 import { LoaderResult, pnpLoader } from './pnpLoader';
 

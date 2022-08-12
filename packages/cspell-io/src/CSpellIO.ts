@@ -2,6 +2,8 @@ import type { Stats } from './models';
 import { BufferEncoding } from './models/BufferEncoding';
 import type { TextFileResource } from './models/FileResource';
 
+export type UrlOrFilename = string | URL;
+
 export interface CSpellIO {
     /**
      * Read a file
@@ -9,7 +11,7 @@ export interface CSpellIO {
      * @param encoding - optional encoding.
      * @returns A TextFileResource.
      */
-    readFile(uriOrFilename: string | URL, encoding?: BufferEncoding): Promise<TextFileResource>;
+    readFile(uriOrFilename: UrlOrFilename, encoding?: BufferEncoding): Promise<TextFileResource>;
     /**
      * Read a file in Sync mode.
      * Note: `http` requests will fail.
@@ -17,26 +19,26 @@ export interface CSpellIO {
      * @param encoding - optional encoding.
      * @returns A TextFileResource.
      */
-    readFileSync(uriOrFilename: string | URL, encoding?: BufferEncoding): TextFileResource;
+    readFileSync(uriOrFilename: UrlOrFilename, encoding?: BufferEncoding): TextFileResource;
     /**
      * Write content to a file using utf-8 encoding.
      * It will fail to write to non-file uris.
      * @param uriOrFilename - uri
      * @param content - string to write.
      */
-    writeFile(uriOrFilename: string | URL, content: string): Promise<void>;
+    writeFile(uriOrFilename: UrlOrFilename, content: string): Promise<void>;
     /**
      * Get Stats on a uri.
      * @param uriOrFilename - uri to fetch stats on
      * @returns Stats if successful.
      */
-    getStat(uriOrFilename: string | URL): Promise<Stats>;
+    getStat(uriOrFilename: UrlOrFilename): Promise<Stats>;
     /**
      * Get Stats on a uri.
      * @param uriOrFilename - uri to fetch stats on
      * @returns Stats if successful, otherwise it throws an error.
      */
-    getStatSync(uriOrFilename: string | URL): Stats;
+    getStatSync(uriOrFilename: UrlOrFilename): Stats;
     /**
      * Compare two Stats.
      * @param left - left stat
@@ -49,7 +51,7 @@ export interface CSpellIO {
      * @param uriOrFilename - string or URL to convert.
      *   If it is a URL, then it is just returned as is.
      */
-    toURL(uriOrFilename: string | URL): URL;
+    toURL(uriOrFilename: UrlOrFilename): URL;
     /**
      * Try to determine the base name of a URL.
      *
@@ -58,11 +60,18 @@ export interface CSpellIO {
      * Example: `data:text/plain;charset=utf8;filename=hello.txt,Hello` would have a filename of `hello.txt`
      * @param uriOrFilename - string or URL to extract the basename from.
      */
-    uriBasename(uriOrFilename: string | URL): string;
+    uriBasename(uriOrFilename: UrlOrFilename): string;
     /**
      * Try to determine the directory URL of the uri.
      *
      * @param uriOrFilename - string or URL to extract the basename from.
      */
-    uriDirname(uriOrFilename: string | URL): URL;
+    uriDirname(uriOrFilename: UrlOrFilename): URL;
+
+    // /**
+    //  *
+    //  * @param uriOrFilename
+    //  * @param relativeTo -
+    //  */
+    // resolveUrl(uriOrFilename: UrlOrFilename, relativeTo: UrlOrFilename): URL;
 }

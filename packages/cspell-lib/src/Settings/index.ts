@@ -13,7 +13,7 @@ export {
     readSettingsFiles,
     searchForConfig,
     sectionCSpell,
-} from './configLoader';
+} from './Controller/configLoader';
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
@@ -27,4 +27,4 @@ export {
 } from './CSpellSettingsServer';
 export type { ConfigurationDependencies, ImportFileRefWithError } from './CSpellSettingsServer';
 export { getDefaultSettings, getDefaultBundledSettings } from './DefaultSettings';
-export { ImportError } from './ImportError';
+export { ImportError } from './Controller/ImportError';
