@@ -11,7 +11,7 @@ import { GlobMatcher } from 'cspell-glob';
 import { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
 import { TextDocument, TextDocumentLine, updateTextDocument } from '../Models/TextDocument';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
-import { loadConfigSync, searchForConfigSync } from '../Settings/configLoader';
+import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/configLoader';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
 import { toError } from '../util/errors';
 import { callOnce } from '../util/Memorizer';

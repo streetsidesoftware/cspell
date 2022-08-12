@@ -3,7 +3,7 @@ import { parsers } from 'cspell-grammar';
 import { createCSpellSettingsInternal, CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
 import { PatternRegExp } from '../Models/PatternRegExp';
 import { resolveFile } from '../util/resolveFile';
-import { readSettings } from './configLoader';
+import { readSettings } from './Controller/configLoader';
 import { mergeSettings } from './index';
 import * as LanguageSettings from './LanguageSettings';
 import * as RegPat from './RegExpPatterns';

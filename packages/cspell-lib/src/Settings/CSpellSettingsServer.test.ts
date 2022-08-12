@@ -10,7 +10,7 @@ import {
     readSettings,
     readSettingsFiles,
     __testing__ as __configLoader_testing__,
-} from './configLoader';
+} from './Controller/configLoader';
 import { calcOverrideSettings, checkFilenameMatchesGlob, getSources, mergeSettings } from './CSpellSettingsServer';
 import { getDefaultBundledSettings, _defaultSettings } from './DefaultSettings';
 

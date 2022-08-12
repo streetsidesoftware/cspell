@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { CSpellUserSettings } from '@cspell/cspell-types';
-import { getGlobalSettings } from './configLoader';
+import { getGlobalSettings } from './Controller/configLoader';
 import { mergeSettings } from './CSpellSettingsServer';
 import { getDefaultBundledSettings } from './DefaultSettings';
 import * as LS from './LanguageSettings';
