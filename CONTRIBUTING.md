@@ -18,15 +18,14 @@ These are some notes about contributing.
 
 ## Development
 
-Node JS version 8 or higher is required.
+Node JS version 14 or higher is required.
 
 ### Commands
 
-| Command                  | Description                                                                                   |
-| ------------------------ | --------------------------------------------------------------------------------------------- |
-| `npm install`            | Installs all the dependencies for all packages                                                |
-| `npm run build`          | To compile the typescript into javascript                                                     |
-| `npm test`               | Runs the unit tests for all packages                                                          |
-| `npm run check-spelling` | Checks the spelling for all sources files                                                     |
-| `npm run coverage`       | Generates coverage information for all projects. Open `coverage/index.html` to view coverage. |
-| `npx lerna publish`      | To publish the packages (must have permissions)                                               |
+| Command                   | Description                                                                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------- |
+| `pnpm install`            | Installs all the dependencies for all packages                                                |
+| `pnpm run build`          | To compile the typescript into javascript                                                     |
+| `pnpm test`               | Runs the unit tests for all packages                                                          |
+| `pnpm run check-spelling` | Checks the spelling for all sources files                                                     |
+| `pnpm run coverage`       | Generates coverage information for all projects. Open `coverage/index.html` to view coverage. |
