@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2750, Issues found: 8325 in 928 files
+ CSpell: Files checked: 2750, Issues found: 8326 in 928 files
  exit code: 1
 ./django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 ./django/apps/config.py:217:40    - Unknown word (qualname)   -- app_config_class.__qualname__,
@@ -189,6 +189,7 @@ Lines:
 ./django/contrib/gis/db/backends/postgis/adapter.py:30:52     - Unknown word (Psycopg)    -- protocol conform to what Psycopg2 expects?"""
 ./django/contrib/gis/db/backends/postgis/adapter.py:4:6       - Unknown word (psycopg)    -- from psycopg2 import Binary
 ./django/contrib/gis/db/backends/postgis/adapter.py:5:33      - Unknown word (ISQL)       -- psycopg2.extensions import ISQLQuote
+./django/contrib/gis/db/backends/postgis/base.py:26:62     - Unknown word (extname)    -- FROM pg_extension WHERE extname = %s", ["postgis"])
 ./django/contrib/gis/db/backends/postgis/const.py:13:3      - Unknown word (Endianness) -- # Endianness, PostGIS raster version
 ./django/contrib/gis/db/backends/postgis/const.py:17:11     - Unknown word (endianness) -- # a fixed endianness (1) and there is only
 ./django/contrib/gis/db/backends/postgis/const.py:61:10     - Unknown word (PIXTYPE)    -- BANDTYPE_PIXTYPE_MASK = 0x0F
@@ -343,12 +344,11 @@ Lines:
 ./django/contrib/postgres/fields/__init__.py:2:7       - Unknown word (citext)     -- from .citext import *  # NOQA
 ./django/contrib/postgres/fields/hstore.py:104:17    - Unknown word (akeys)      -- function = "akeys"
 ./django/contrib/postgres/fields/hstore.py:111:17    - Unknown word (avals)      -- function = "avals"
-./django/contrib/postgres/fields/ranges.py:183:17    - Unknown word (numrange)   -- return "numrange"
-./django/contrib/postgres/fields/ranges.py:192:17    - Unknown word (tstzrange)  -- return "tstzrange"
-./django/contrib/postgres/fields/ranges.py:201:17    - Unknown word (daterange)  -- return "daterange"
+./django/contrib/postgres/fields/ranges.py:186:17    - Unknown word (numrange)   -- return "numrange"
+./django/contrib/postgres/fields/ranges.py:195:17    - Unknown word (tstzrange)  -- return "tstzrange"
+./django/contrib/postgres/fields/ranges.py:204:17    - Unknown word (daterange)  -- return "daterange"
 ./django/contrib/postgres/operations.py:166:51    - Unknown word (libc)       -- locale, *, provider="libc", deterministic=True
 ./django/contrib/postgres/operations.py:2:16      - Unknown word (oids)       -- get_citext_oids,
-./django/contrib/postgres/operations.py:53:51     - Unknown word (extname)    -- FROM pg_extension WHERE extname = %s",
 ./django/contrib/postgres/operations.py:88:22     - Unknown word (pgcrypto)   -- self.name = "pgcrypto"
 ./django/contrib/postgres/operations.py:98:25     - Unknown word (trgm)       -- self.name = "pg_trgm"
 ./django/contrib/postgres/search.py:142:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
@@ -475,7 +475,7 @@ Lines:
 ./django/db/backends/base/operations.py:500:18    - Unknown word (autopk)     -- def validate_autopk_value(self, value):
 ./django/db/backends/base/operations.py:657:27    - Unknown word (subexpressions) -- Combine a list of subexpressions into a single expression
 ./django/db/backends/base/operations.py:660:9     - Unknown word (subexpression)  -- subexpression types (e.g., date expressions
-./django/db/backends/base/schema.py:1059:9    - Unknown word (rels)         -- rels_to_update = []
+./django/db/backends/base/schema.py:1061:9    - Unknown word (rels)         -- rels_to_update = []
 ./django/db/backends/base/schema.py:211:37    - Unknown word (deferreds)    -- Create column SQL, add FK deferreds if needed.
 ./django/db/backends/base/schema.py:212:16    - Unknown word (sqls)         -- column_sqls = []
 ./django/db/backends/base/schema.py:82:7      - Unknown word (Overrideable) -- # Overrideable SQL templates
@@ -655,14 +655,14 @@ Lines:
 ./django/db/models/query.py:969:15    - Unknown word (aupdate)    -- async def aupdate_or_create(self, defaults
 ./django/db/models/query_utils.py:20:49     - Unknown word (somecol)    -- converting lookups (fk__somecol). The contents
 ./django/db/models/query_utils.py:91:19     - Unknown word (subq)       -- split_subq=False,
-./django/db/models/sql/compiler.py:1243:49   - Unknown word (popleft)    -- klass_info = queue.popleft()
-./django/db/models/sql/compiler.py:1331:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
-./django/db/models/sql/compiler.py:1732:9    - Unknown word (innerq)     -- innerq = self.query.clone(
-./django/db/models/sql/compiler.py:1737:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
-./django/db/models/sql/compiler.py:1836:61   - Unknown word (munge)      -- results from other tables, munge the "where"
-./django/db/models/sql/compiler.py:358:23    - Unknown word (combinated) -- # combinated queries might define
-./django/db/models/sql/compiler.py:449:36    - Unknown word (orderbycol) -- col_name = f"__orderbycol{order_by_idx}"
-./django/db/models/sql/compiler.py:785:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
+./django/db/models/sql/compiler.py:1316:49   - Unknown word (popleft)    -- klass_info = queue.popleft()
+./django/db/models/sql/compiler.py:1404:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
+./django/db/models/sql/compiler.py:1805:9    - Unknown word (innerq)     -- innerq = self.query.clone(
+./django/db/models/sql/compiler.py:1810:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
+./django/db/models/sql/compiler.py:1909:61   - Unknown word (munge)      -- results from other tables, munge the "where"
+./django/db/models/sql/compiler.py:367:23    - Unknown word (combinated) -- # combinated queries might define
+./django/db/models/sql/compiler.py:458:36    - Unknown word (orderbycol) -- col_name = f"__orderbycol{order_by_idx}"
+./django/db/models/sql/compiler.py:858:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
 ./django/db/models/sql/constants.py:24:1      - Unknown word (LOUTER)      -- LOUTER = "LEFT OUTER JOIN"
 ./django/db/models/sql/constants.py:9:3       - Unknown word (Namedtuples) -- # Namedtuples for sql.* internal use
 ./django/db/models/sql/datastructures.py:17:20     - Unknown word (travelled)  -- # The path travelled, this includes the path
@@ -689,7 +689,7 @@ Lines:
 ./django/forms/boundfield.py:304:21    - Unknown word (myform)     -- {% for radio in myform.beatles %}
 ./django/forms/fields.py:768:19    - Unknown word (misformatted) -- # misformatted URLs.
 ./django/forms/forms.py:11:54     - Unknown word (Renderable) -- ErrorDict, ErrorList, RenderableFormMixin
-./django/forms/models.py:818:13    - Unknown word (uclass)     -- for uclass, unique_check in all
+./django/forms/models.py:811:13    - Unknown word (uclass)     -- for uclass, unique_check in all
 ./django/forms/renderers.py:42:26     - Unknown word (djangoforms) -- "NAME": "djangoforms",
 ./django/forms/utils.py:147:24    - Unknown word (initlist)   -- def __init__(self, initlist=None, error_class=None
 ./django/forms/widgets.py:1002:43   - Unknown word (splithiddendatetime) -- django/forms/widgets/splithiddendatetime.html"
@@ -768,7 +768,7 @@ Lines:
 ./django/utils/autoreload.py:181:21    - Unknown word (Werkzeug)   -- # Inspired from Werkzeug:
 ./django/utils/autoreload.py:388:9     - Unknown word (mtimes)     -- mtimes = {}
 ./django/utils/autoreload.py:483:14    - Unknown word (dedup)      -- "dedup_results": True,
-./django/utils/autoreload.py:673:26    - Unknown word (SIGTERM)    -- signal.signal(signal.SIGTERM, lambda *args: sys.exit
+./django/utils/autoreload.py:664:26    - Unknown word (SIGTERM)    -- signal.signal(signal.SIGTERM, lambda *args: sys.exit
 ./django/utils/autoreload.py:97:25     - Unknown word (tcgetattr)  -- attr_list = termios.tcgetattr(sys.stdin)
 ./django/utils/baseconv.py:24:41     - Unknown word (abcdefghij) -- BaseConverter('0123456789abcdefghij')
 ./django/utils/baseconv.py:2:22      - Unknown word (Guilherme)  -- Copyright (c) 2010 Guilherme Gondim. All rights reserved
@@ -1583,11 +1583,11 @@ Lines:
 ./tests/expressions/tests.py:2312:46   - Unknown word (anothercol)     -- ExpressionList(F("col"), F("anothercol"))),
 ./tests/expressions/tests.py:306:36    - Unknown word (Funcs)      -- should be able to use Funcs when inserting new data
 ./tests/expressions/tests.py:446:9     - Unknown word (mustermanns) -- mustermanns_by_seniority = Employee
-./tests/expressions_case/tests.py:463:44    - Unknown word (somecase)   -- aseTestModel.objects.annotate(somecase=SOME_CASE).order_by
-./tests/expressions_window/tests.py:1143:60   - Unknown word (Nowak)      -- department": "IT", "name": "Nowak", "salary": 32000})
-./tests/expressions_window/tests.py:581:14    - Unknown word (cume)       -- def test_cume_dist(self):
-./tests/expressions_window/tests.py:617:14    - Unknown word (nthvalue)   -- def test_nthvalue(self):
-./tests/expressions_window/tests.py:72:23     - Unknown word (Jenson)     -- ("Jenson", 45000, "Accounting
+./tests/expressions_case/tests.py:473:44    - Unknown word (somecase)   -- aseTestModel.objects.annotate(somecase=SOME_CASE).order_by
+./tests/expressions_window/tests.py:1409:60   - Unknown word (Nowak)      -- department": "IT", "name": "Nowak", "salary": 32000})
+./tests/expressions_window/tests.py:590:14    - Unknown word (cume)       -- def test_cume_dist(self):
+./tests/expressions_window/tests.py:626:14    - Unknown word (nthvalue)   -- def test_nthvalue(self):
+./tests/expressions_window/tests.py:74:23     - Unknown word (Jenson)     -- ("Jenson", 45000, "Accounting
 ./tests/extra_regress/models.py:8:7       - Unknown word (Revisionable) -- class RevisionableModel(models.Model):
 ./tests/field_deconstruction/tests.py:432:28    - Unknown word (barness)    -- upload_to="foo/barness", width_field="width
 ./tests/file_storage/test_generate_filename.py:10:7      - Unknown word (AWSS)       -- class AWSS3Storage(Storage):
@@ -1909,13 +1909,13 @@ Lines:
 ./tests/gis_tests/relatedapp/tests.py:43:9      - Unknown word (txpa)       -- txpa_extent = (-97.51611
 ./tests/gis_tests/test_data.py:14:5      - Unknown word (tuplize)    -- def tuplize(seq):
 ./tests/gis_tests/test_data.py:21:5      - Unknown word (strconvert) -- def strconvert(d):
-./tests/gis_tests/test_geoforms.py:275:14    - Unknown word (pointfield) -- def test_pointfield(self):
-./tests/gis_tests/test_geoforms.py:291:14    - Unknown word (multipointfield) -- def test_multipointfield(self):
-./tests/gis_tests/test_geoforms.py:306:14    - Unknown word (linestringfield) -- def test_linestringfield(self):
-./tests/gis_tests/test_geoforms.py:321:14    - Unknown word (multilinestringfield) -- def test_multilinestringfield(self):
-./tests/gis_tests/test_geoforms.py:336:14    - Unknown word (polygonfield)         -- def test_polygonfield(self):
-./tests/gis_tests/test_geoforms.py:351:14    - Unknown word (multipolygonfield)    -- def test_multipolygonfield(self):
-./tests/gis_tests/test_geoforms.py:366:14    - Unknown word (geometrycollectionfield) -- def test_geometrycollectionfield(self):
+./tests/gis_tests/test_geoforms.py:276:14    - Unknown word (pointfield) -- def test_pointfield(self):
+./tests/gis_tests/test_geoforms.py:292:14    - Unknown word (multipointfield) -- def test_multipointfield(self):
+./tests/gis_tests/test_geoforms.py:307:14    - Unknown word (linestringfield) -- def test_linestringfield(self):
+./tests/gis_tests/test_geoforms.py:322:14    - Unknown word (multilinestringfield) -- def test_multilinestringfield(self):
+./tests/gis_tests/test_geoforms.py:337:14    - Unknown word (polygonfield)         -- def test_polygonfield(self):
+./tests/gis_tests/test_geoforms.py:352:14    - Unknown word (multipolygonfield)    -- def test_multipolygonfield(self):
+./tests/gis_tests/test_geoforms.py:367:14    - Unknown word (geometrycollectionfield) -- def test_geometrycollectionfield(self):
 ./tests/gis_tests/test_geoip2.py:44:9      - Unknown word (cntry)      -- cntry = os.path.join(path
 ./tests/gis_tests/test_ptr.py:42:20     - Unknown word (ptrs)       -- # (in `bad_ptrs`) aren't allowed.
 ./tests/gis_tests/test_spatialrefsys.py:26:10     - Unknown word (eprec)      -- "eprec": (1, 1, 9),
@@ -2409,10 +2409,10 @@ Lines:
 ./tests/postgres_tests/test_array.py:290:20    - Unknown word (mogrify)    -- # psycopg2 mogrify method that generates
 ./tests/postgres_tests/test_array.py:858:38    - Unknown word (chartextarrayindexmodel) -- name = "postgres_tests_chartextarrayindexmodel"
 ./tests/postgres_tests/test_array.py:890:35    - Unknown word (integerarraymodel)       -- model": "postgres_tests.integerarraymodel", "pk": null}]'
-./tests/postgres_tests/test_constraints.py:1111:35   - Unknown word (Depracation) -- ExclusionConstraintOpclassesDepracationTests(PostgreSQLTestCase
-./tests/postgres_tests/test_constraints.py:157:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
-./tests/postgres_tests/test_constraints.py:508:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
-./tests/postgres_tests/test_constraints.py:723:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
+./tests/postgres_tests/test_constraints.py:1156:35   - Unknown word (Depracation) -- ExclusionConstraintOpclassesDepracationTests(PostgreSQLTestCase
+./tests/postgres_tests/test_constraints.py:202:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
+./tests/postgres_tests/test_constraints.py:553:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
+./tests/postgres_tests/test_constraints.py:768:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
 ./tests/postgres_tests/test_hstore.py:303:42    - Unknown word (hstoremodel) -- model": "postgres_tests.hstoremodel",
 ./tests/postgres_tests/test_hstore.py:81:44     - Unknown word (Tigr)       -- HStoreModel(field={"cat": "TigrOu", "breed": "birman
 ./tests/postgres_tests/test_hstore.py:81:63     - Unknown word (birman)     -- "TigrOu", "breed": "birman"}),
@@ -2554,11 +2554,11 @@ Lines:
 ./tests/runtests.py:60:58     - Unknown word (deallocations) -- of 700 allocations + deallocations without
 ./tests/schema/fields.py:104:17    - Unknown word (MEDIUMBLOB) -- return "MEDIUMBLOB"
 ./tests/schema/models.py:147:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
-./tests/schema/tests.py:1943:22   - Unknown word (tagm)       -- columns["tagm2mtest_id"][0],
-./tests/schema/tests.py:2204:50   - Unknown word (uniquetest) -- remote_field.through, "uniquetest_id", "schema_uniquetest
-./tests/schema/tests.py:3043:55   - Unknown word (tagindexed) -- constraints("schema_tagindexed").values()
+./tests/schema/tests.py:2004:22   - Unknown word (tagm)       -- columns["tagm2mtest_id"][0],
+./tests/schema/tests.py:2265:50   - Unknown word (uniquetest) -- remote_field.through, "uniquetest_id", "schema_uniquetest
+./tests/schema/tests.py:3104:55   - Unknown word (tagindexed) -- constraints("schema_tagindexed").values()
 ./tests/schema/tests.py:325:48    - Unknown word (repointing) -- out of FK order, then repointing, works"
-./tests/schema/tests.py:4406:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
+./tests/schema/tests.py:4467:27   - Unknown word (dtob)       -- self.assertNotIn("dtob_auto_now", columns)
 ./tests/schema/tests.py:696:38    - Unknown word (TINYINT)    -- BooleanField are stored as TINYINT(1) on MySQL.
 ./tests/select_for_update/tests.py:158:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
 ./tests/select_for_update/tests.py:195:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',

@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 212, Issues found: 3328 in 198 files
+ CSpell: Files checked: 212, Issues found: 3347 in 198 files
  exit code: 1
 ./admin.go:1031:33   - Unknown word (unsynchronized) -- This is a low-level, unsynchronized function; most callers
 ./admin.go:1067:31   - Unknown word (elems)          -- array = append(array, elems...)
@@ -71,8 +71,8 @@ Lines:
 ./caddyconfig/httpcaddyfile/builtins.go:34:20     - Unknown word (acmez)      -- "github.com/mholt/acmez/acme"
 ./caddyconfig/httpcaddyfile/builtins.go:410:8     - Unknown word (Vals)         -- configVals := []ConfigValue{}
 ./caddyconfig/httpcaddyfile/builtins.go:426:14    - Unknown word (subdirectives) -- // some tls subdirectives are shortcuts that implicitly
-./caddyconfig/httpcaddyfile/builtins.go:642:22    - Unknown word (Subroute)      -- sr := new(caddyhttp.Subroute)
-./caddyconfig/httpcaddyfile/builtins.go:654:41    - Unknown word (subroute)      -- which return a literal subroute instead of a route
+./caddyconfig/httpcaddyfile/builtins.go:653:22    - Unknown word (Subroute)      -- sr := new(caddyhttp.Subroute)
+./caddyconfig/httpcaddyfile/builtins.go:665:41    - Unknown word (subroute)      -- which return a literal subroute instead of a route
 ./caddyconfig/httpcaddyfile/builtins.go:78:12     - Unknown word (alpn)       -- // alpn <values...>
 ./caddyconfig/httpcaddyfile/builtins_test.go:174:31    - Unknown word (htlm)       -- /old.html /new.html htlm
 ./caddyconfig/httpcaddyfile/directives.go:242:58    - Unknown word (vals)         -- caddyhttp.Route type) in vals to the
@@ -213,10 +213,10 @@ Lines:
 ./modules/caddyhttp/fileserver/staticfiles.go:118:51    - Unknown word (explictness)      -- maximum clarity and explictness, use complete,
 ./modules/caddyhttp/fileserver/staticfiles.go:156:2     - Unknown word (precompressors)   -- precompressors map[string]encode
 ./modules/caddyhttp/fileserver/staticfiles.go:325:12    - Unknown word (canonicalization) -- // if URL canonicalization is enabled, we need
-./modules/caddyhttp/fileserver/staticfiles.go:404:3     - Unknown word (mtyp)             -- mtyp := mime.TypeByExtension
-./modules/caddyhttp/fileserver/staticfiles.go:469:3     - Unknown word (backoff)          -- backoff := weakrand.Intn(maxBackoff
-./modules/caddyhttp/fileserver/staticfiles.go:469:31    - Unknown word (Backoff)          -- := weakrand.Intn(maxBackoff-minBackoff) + minBackoff
-./modules/caddyhttp/fileserver/staticfiles.go:480:74    - Unknown word (Caza)             -- written by Nathaniel Caza.
+./modules/caddyhttp/fileserver/staticfiles.go:414:3     - Unknown word (mtyp)             -- mtyp := mime.TypeByExtension
+./modules/caddyhttp/fileserver/staticfiles.go:479:3     - Unknown word (backoff)          -- backoff := weakrand.Intn(maxBackoff
+./modules/caddyhttp/fileserver/staticfiles.go:479:31    - Unknown word (Backoff)          -- := weakrand.Intn(maxBackoff-minBackoff) + minBackoff
+./modules/caddyhttp/fileserver/staticfiles.go:490:74    - Unknown word (Caza)             -- written by Nathaniel Caza.
 ./modules/caddyhttp/fileserver/staticfiles.go:67:34     - Unknown word (canonicalize) -- default, this handler will canonicalize URIs so that requests
 ./modules/caddyhttp/fileserver/staticfiles.go:70:4      - Unknown word (Canonicalization) -- // Canonicalization redirects are not issued
 ./modules/caddyhttp/headers/headers.go:187:27    - Unknown word (Superceded) -- they are written out. Superceded if Require is set.
@@ -270,18 +270,19 @@ Lines:
 ./modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9      - Unknown word (forwardauth) -- package forwardauth
 ./modules/caddyhttp/reverseproxy/healthchecks.go:382:71    - Unknown word (forgetter)  -- health check failure forgetter panicked",
 ./modules/caddyhttp/reverseproxy/healthchecks.go:47:35     - Unknown word (proxied)    -- health checks monitor proxied requests for errors
-./modules/caddyhttp/reverseproxy/httptransport.go:132:27    - Unknown word (cleartext)  -- does not "HTTP/2 over cleartext TCP")
-./modules/caddyhttp/reverseproxy/httptransport.go:266:14    - Unknown word (Servername) -- // replaceTLSServername checks TLS servername
-./modules/caddyhttp/reverseproxy/httptransport.go:266:36    - Unknown word (servername) -- placeTLSServername checks TLS servername to see if it needs replacing
-./modules/caddyhttp/reverseproxy/httptransport.go:274:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
+./modules/caddyhttp/reverseproxy/httptransport.go:245:27    - Unknown word (cleartext)  -- does not "HTTP/2 over cleartext TCP")
+./modules/caddyhttp/reverseproxy/httptransport.go:268:14    - Unknown word (Servername) -- // replaceTLSServername checks TLS servername
+./modules/caddyhttp/reverseproxy/httptransport.go:268:36    - Unknown word (servername) -- placeTLSServername checks TLS servername to see if it needs replacing
+./modules/caddyhttp/reverseproxy/httptransport.go:276:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
 ./modules/caddyhttp/reverseproxy/httptransport.go:99:46     - Unknown word (Cleartext)  -- use H2C (HTTP/2 over Cleartext) to the
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1271:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
-./modules/caddyhttp/reverseproxy/reverseproxy.go:1275:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
-./modules/caddyhttp/reverseproxy/reverseproxy.go:153:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
-./modules/caddyhttp/reverseproxy/reverseproxy.go:539:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
-./modules/caddyhttp/reverseproxy/reverseproxy.go:577:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
-./modules/caddyhttp/reverseproxy/reverseproxy.go:579:47    - Unknown word (slowloris)  -- more susceptible to slowloris
-./modules/caddyhttp/reverseproxy/reverseproxy.go:619:50    - Unknown word (websockets) -- upgrades, such as for websockets.
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1310:56   - Unknown word (libcurl)    -- standard but still sent by libcurl and rejected by e.g
+./modules/caddyhttp/reverseproxy/reverseproxy.go:1314:16   - Unknown word (canonicalized) -- "Te", // canonicalized version of "TE"
+./modules/caddyhttp/reverseproxy/reverseproxy.go:164:22    - Unknown word (roundtrips) -- // after successful roundtrips. The first handler that
+./modules/caddyhttp/reverseproxy/reverseproxy.go:550:5     - Unknown word (succ)       -- if succ, ok := proxyErr.(roundtripSuc
+./modules/caddyhttp/reverseproxy/reverseproxy.go:588:26    - Unknown word (gunicorn)   -- with "slow clients" (gunicorn, etc.) - this obviously
+./modules/caddyhttp/reverseproxy/reverseproxy.go:590:47    - Unknown word (slowloris)  -- more susceptible to slowloris
+./modules/caddyhttp/reverseproxy/reverseproxy.go:630:50    - Unknown word (websockets) -- upgrades, such as for websockets.
+./modules/caddyhttp/reverseproxy/reverseproxy.go:747:32    - Unknown word (backported) -- Forward 1xx status codes, backported from https://github
 ./modules/caddyhttp/reverseproxy/selectionpolicies.go:168:7     - Unknown word (Reqs)       -- leastReqs := -1
 ./modules/caddyhttp/reverseproxy/selectionpolicies.go:517:65    - Unknown word (hashable)   -- from pool based on a hashable string s.
 ./modules/caddyhttp/reverseproxy/streaming.go:100:2     - Unknown word (errc)        -- errc := make(chan error,
@@ -362,16 +363,17 @@ Lines:
 ./modules/caddytls/values.go:23:24     - Unknown word (cpuid)      -- github.com/klauspost/cpuid/v2"
 ./modules/caddytls/values.go:52:28     - Unknown word (AESNI)      -- defaultCipherSuitesWithAESNI = []uint16{
 ./modules/caddytls/values.go:88:3      - Unknown word (secp)       -- "secp256r1": tls.CurveP25
-./modules/caddytls/zerosslissuer.go:101:82    - Unknown word (compat)     -- preserves backwards-compat, but which black-holes
-./modules/caddytls/zerosslissuer.go:133:3     - Unknown word (EABKID)     -- EABKID string `json:"eab
-./modules/caddytls/zerosslissuer.go:134:3     - Unknown word (EABHMAC)    -- EABHMACKey string `json:"eab
+./modules/caddytls/zerosslissuer.go:109:82    - Unknown word (compat)     -- preserves backwards-compat, but which black-holes
+./modules/caddytls/zerosslissuer.go:141:3     - Unknown word (EABKID)     -- EABKID string `json:"eab
+./modules/caddytls/zerosslissuer.go:142:3     - Unknown word (EABHMAC)    -- EABHMACKey string `json:"eab
 ./modules/filestorage/filestorage.go:15:9      - Unknown word (filestorage) -- package filestorage
 ./modules/logging/encoders.go:213:32    - Unknown word (Millis)     -- timeFormatter = zapcore.EpochMillisTimeEncoder
 ./modules/logging/encoders.go:215:32    - Unknown word (Nanos)      -- timeFormatter = zapcore.EpochNanosTimeEncoder
 ./modules/logging/encoders.go:267:5     - Unknown word (bufferpool) -- var bufferpool = buffer.NewPool()
 ./modules/logging/encoders.go:48:44     - Unknown word (Zapcore)    -- NewConsoleEncoder(ce.ZapcoreEncoderConfig())
 ./modules/logging/filewriter.go:28:12     - Unknown word (natefinch)  -- "gopkg.in/natefinch/lumberjack.v2"
-./modules/logging/filters_test.go:13:20     - Unknown word (notexist)   -- {replaceAction, "notexist", "REDACTED"},
+./modules/logging/filters_test.go:14:20     - Unknown word (notexist)   -- {replaceAction, "notexist", "REDACTED"},
+./modules/logging/filters_test.go:56:2      - Unknown word (outval)     -- outval := out.Interface.(caddyhttp
 ./modules/logging/netwriter.go:89:13     - Unknown word (redialer)   -- reconn := &redialerConn{
 ./modules/logging/netwriter.go:89:2      - Unknown word (reconn)     -- reconn := &redialerConn{
 ./modules/metrics/metrics.go:120:14    - Unknown word (quantile)   -- // except quantile/le label values always
