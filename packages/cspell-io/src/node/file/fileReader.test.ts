@@ -6,6 +6,8 @@ import { pathToRoot } from '../../test/helper';
 const oc = expect.objectContaining;
 
 describe('Validate the fileReader', () => {
+    jest.setTimeout(10000);
+
     test('tests reading a file', async () => {
         const expected = await fs.readFile(__filename, 'utf8');
         const result = await fReader.readFile(__filename, 'utf8');
