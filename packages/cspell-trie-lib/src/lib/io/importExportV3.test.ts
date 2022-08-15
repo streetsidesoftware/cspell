@@ -9,7 +9,7 @@ import { importTrie, serializeTrie } from './importExportV3';
 const sampleFile = resolveSample('sampleV3.trie');
 
 describe('Import/Export', () => {
-    test('tests serialize / deserialize small sample', async () => {
+    test('tests serialize / deserialize small sample', () => {
         const trie = Trie.buildTrie(smallSample).root;
         const expected = toTree(trie);
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
@@ -25,7 +25,7 @@ describe('Import/Export', () => {
         expect(result).toBe(expected);
     });
 
-    test('tests serialize / deserialize specialCharacters', async () => {
+    test('tests serialize / deserialize specialCharacters', () => {
         const trie = Trie.buildTrie(specialCharacters).root;
         const data = [...serializeTrie(consolidate(trie), 10)];
         const root = importTrie(data);
@@ -54,7 +54,7 @@ describe('Import/Export', () => {
         expect(words).toEqual([...sampleWords].sort());
     });
 
-    test('tests serialize / deserialize trie', async () => {
+    test('tests serialize / deserialize trie', () => {
         const trie = Trie.buildTrie(sampleWords).root;
         const data = serializeTrie(trie, 10);
         const root = importTrie(data);
@@ -62,13 +62,20 @@ describe('Import/Export', () => {
         expect(words).toEqual([...sampleWords].sort());
     });
 
-    test('tests serialize DAWG', async () => {
+    test.each`
+        options
+        ${10}
+        ${{ base: 10 }}
+        ${{ base: 10, optimizeSimpleReferences: true }}
+        ${{ base: 10, optimizeSimpleReferences: false }}
+    `('serialize DAWG $options', ({ options }) => {
         const trie = Trie.createTriFromList(sampleWords);
         const trieDawg = consolidate(trie);
-        const data = [...serializeTrie(trieDawg, 10)];
+        const data = [...serializeTrie(trieDawg, options)];
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
+        expect(data.join('')).toMatchSnapshot();
     });
 });
 
