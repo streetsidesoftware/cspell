@@ -5,7 +5,7 @@ Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exc
 Summary:
   files: 1775
   filesWithIssues: 1215
-  issues: 5340
+  issues: 5347
   errors: 0
 Errors: []
 
@@ -269,8 +269,8 @@ issues:
   - "lib/config/flat-config-array.js:73:16   	baes            	U   	* The baes config used to build"
   - "lib/eslint/eslint-helpers.js:16:7       	globby  	U   	const globby = require(\"globby\")"
   - "lib/eslint/eslint-helpers.js:69:52      	stringss	U   	an array of non-empty stringss or not."
-  - "lib/eslint/flat-eslint.js:865:37    	fixtypes    	U   	// set up fixer for fixtypes if necessary"
-  - "lib/eslint/flat-eslint.js:1041:12   	thirdparty  	U   	* - A thirdparty formatter name:"
+  - "lib/eslint/flat-eslint.js:880:37    	fixtypes    	U   	// set up fixer for fixtypes if necessary"
+  - "lib/eslint/flat-eslint.js:1056:12   	thirdparty  	U   	* - A thirdparty formatter name:"
   - "lib/linter/code-path-analysis/code-path-state.js:159:31     	unflattened 	U   	{CodePathSegment[]} unflattenedFromSegments Segments"
   - "lib/linter/code-path-analysis/code-path-state.js:913:23     	Segs        	U   	const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/code-path.js:138:34   	Omittable   	U   	param {Object} [options] Omittable."
@@ -338,8 +338,8 @@ issues:
   - "lib/rules/no-useless-escape.js:29:17    	CHARCLASS   	U   	const REGEX_NON_CHARCLASS_ESCAPES = union(REGEX"
   - "lib/rules/no-useless-return.js:200:26   	pushs   	U   	// Makes and pushs a new scope information"
   - "lib/rules/no-var.js:102:12  	Redeclared  	U   	function isRedeclared(variable) {"
-  - "lib/rules/object-shorthand.js:99:34     	Longform	U   	expectedLiteralMethodLongform: \"Expected longform"
-  - "lib/rules/object-shorthand.js:99:54     	longform	U   	eralMethodLongform: \"Expected longform method syntax for string"
+  - "lib/rules/object-shorthand.js:102:34    	Longform	U   	expectedLiteralMethodLongform: \"Expected longform"
+  - "lib/rules/object-shorthand.js:102:54    	longform	U   	eralMethodLongform: \"Expected longform method syntax for string"
   - "lib/rules/prefer-object-spread.js:62:42     	sourcecode  	U   	sourceCode in context sourcecode object"
   - "lib/rules/prefer-object-spread.js:129:46    	whitespaces 	U   	given token and around whitespaces."
   - "lib/rules/prefer-object-spread.js:174:4     	Autofixes   	U   	* Autofixes the Object.assign call"
@@ -367,9 +367,9 @@ issues:
   - "package.json:24:15      	alpharelease	U   	\"generate-alpharelease\": \"node Makefile.js"
   - "package.json:25:15      	betarelease 	U   	\"generate-betarelease\": \"node Makefile.js"
   - "package.json:26:15      	rcrelease   	U   	\"generate-rcrelease\": \"node Makefile.js"
-  - "package.json:115:6      	eslump      	U   	\"eslump\": \"^3.0.0\","
-  - "package.json:133:6      	memfs       	U   	\"memfs\": \"^3.0.1\","
-  - "package.json:134:6      	metascraper 	U   	\"metascraper\": \"^5.25.7\","
+  - "package.json:116:6      	eslump      	U   	\"eslump\": \"^3.0.0\","
+  - "package.json:134:6      	memfs       	U   	\"memfs\": \"^3.0.1\","
+  - "package.json:135:6      	metascraper 	U   	\"metascraper\": \"^5.25.7\","
   - "packages/eslint-config-eslint/default.yml:5:15      	jsdoc   	U   	- \"plugin:jsdoc/recommended\""
   - "packages/eslint-config-eslint/default.yml:23:50     	namepath	U   	Point to a `@callback` namepath or `GenericCallback"
   - "README.md:204:5     	teamstart       	U   	<!--teamstart-->"
@@ -420,12 +420,12 @@ issues:
   - "tests/lib/cli-engine/cli-engine.js:6350:87  	myconf              	U   	config node_modules/myconf/.eslintrc.json',\","
   - "tests/lib/cli-engine/cli-engine.js:6578:52  	extendees           	U   	config file and linear extendees.\", () => {"
   - "tests/lib/cli.js:267:48     	fakeformatter   	U   	await cli.execute(`-f fakeformatter ${filePath}`);"
-  - "tests/lib/config/flat-config-array.js:146:22    	noniterable 	U   	it(\"should allow noniterable baseConfig objects\""
-  - "tests/lib/config/flat-config-array.js:825:43    	truex       	U   	foo: \"truex\""
-  - "tests/lib/config/flat-config-array.js:1335:29   	foox        	U   	foox: [1, \"bar\"]"
-  - "tests/lib/config/flat-config-array.js:1357:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
-  - "tests/lib/eslint/flat-eslint.js:1473:9  	xdescribe   	U   	xdescribe(\"cache\", () => {"
-  - "tests/lib/eslint/flat-eslint.js:4084:50 	flob        	U   	due to a bug in fast-flob that doesn't allow"
+  - "tests/lib/config/flat-config-array.js:147:22    	noniterable 	U   	it(\"should allow noniterable baseConfig objects\""
+  - "tests/lib/config/flat-config-array.js:898:43    	truex       	U   	foo: \"truex\""
+  - "tests/lib/config/flat-config-array.js:1408:29   	foox        	U   	foox: [1, \"bar\"]"
+  - "tests/lib/config/flat-config-array.js:1430:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
+  - "tests/lib/eslint/flat-eslint.js:4094:50 	flob        	U   	due to a bug in fast-flob that doesn't allow"
+  - "tests/lib/eslint/flat-eslint.js:4099:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     	ESQUERY 	U   	const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41    	ELEVENTEEN  	U   	code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:2767:72  	hashbang        	U   	comment is of the type hashbang\", () => {"
@@ -513,6 +513,7 @@ issues:
   - "tests/lib/rules/no-warning-comments.js:37:92    	aeiou   	U   	options: [{ terms: [\"[aeiou]\"], location: \"anywhere"
   - "tests/lib/rules/no-warning-comments.js:151:30   	litera  	U   	code: \"// regex [litera|$]\","
   - "tests/lib/rules/object-shorthand.js:22:7    	LONGFORM	U   	const LONGFORM_PROPERTY_ERROR = { messageId"
+  - "tests/lib/rules/object-shorthand.js:222:30  	afoob   	U   	code: \"var x = { afoob: function() {} }\","
   - "tests/lib/rules/prefer-object-spread.js:213:112 	butwhy          	U   	{}, { superNested: 'butwhy' })))\","
   - "tests/lib/rules/prefer-object-spread.js:700:39  	somethingelse   	U   	import { Something as somethingelse } from 'foo';"
   - "tests/lib/rules/prefer-regex-literals.js:1268:65    	blahblah        	U   	instanceof RegExp(String.raw`blahblah`, 'g') ? typeof new"
