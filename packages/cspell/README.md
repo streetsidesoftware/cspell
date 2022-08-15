@@ -41,6 +41,18 @@ The maintainers of cspell and thousands of other packages are working with Tidel
 npm install -g cspell
 ```
 
+### Docker
+
+There is a docker image at [Packages for cspell](https://github.com/streetsidesoftware/cspell-cli/pkgs/container/cspell).
+
+`cspell` commands below can be run by replacing `cspell` with: `docker run -v -i -t $PWD:/workdir ghcr.io/streetsidesoftware/cspell:latest`
+
+Example:
+
+```sh
+docker run -v -i -t $PWD:/workdir ghcr.io/streetsidesoftware/cspell:latest lint --help
+```
+
 ## Basic Usage
 
 Example: recursively spell check all JavaScript files in `src`
