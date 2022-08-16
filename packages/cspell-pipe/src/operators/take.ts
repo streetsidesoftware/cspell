@@ -24,4 +24,8 @@ export function opTakeSync<T>(count: number): (iter: Iterable<T>) => Iterable<T>
     return fn;
 }
 
+/**
+ * Consume only the first `count` number from the iterable.
+ * @param count - number to take
+ */
 export const opTake = <T>(count: number) => toPipeFn(opTakeSync<T>(count), opTakeAsync<T>(count));

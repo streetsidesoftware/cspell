@@ -1,3 +1,4 @@
+export { opAppend, opAppendAsync, opAppendSync } from './append';
 export { opAwaitAsync } from './await';
 export { opConcatMap, opConcatMapAsync, opConcatMapSync } from './concatMap';
 export { opFilter as opFilter, opFilterAsync, opFilterSync } from './filter';

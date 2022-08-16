@@ -25,5 +25,5 @@ export function opJoinStringsSync(joinCharacter = ','): (iter: Iterable<Iterable
     return fn;
 }
 
-export const opJoinStrings = (joinCharacter = ',') =>
+export const opJoinStrings = (joinCharacter?: string) =>
     toPipeFn(opJoinStringsSync(joinCharacter), opJoinStringsAsync(joinCharacter));

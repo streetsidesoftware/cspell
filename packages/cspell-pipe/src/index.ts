@@ -1,8 +1,9 @@
 import * as _helpers from './helpers';
 import * as _operators from './operators';
 
-export { isAsyncIterable, toArray, toAsyncIterable } from './helpers';
+export { interleave, isAsyncIterable, toArray, toAsyncIterable, toDistributableIterable } from './helpers';
 export {
+    opAppend,
     opAwaitAsync,
     opConcatMap,
     opFilter,

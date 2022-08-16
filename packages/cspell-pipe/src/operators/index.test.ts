@@ -4,6 +4,9 @@ describe('Operators', () => {
     test('operators', () => {
         expect(Object.keys(operators).sort()).toMatchSnapshot();
 
+        expect(operators.opAppend).toBeInstanceOf(Function);
+        expect(operators.opAppendAsync).toBeInstanceOf(Function);
+        expect(operators.opAppendSync).toBeInstanceOf(Function);
         expect(operators.opAwaitAsync).toBeInstanceOf(Function);
         expect(operators.opConcatMap).toBeInstanceOf(Function);
         expect(operators.opConcatMapAsync).toBeInstanceOf(Function);
