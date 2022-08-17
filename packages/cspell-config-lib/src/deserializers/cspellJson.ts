@@ -10,8 +10,8 @@ function _deserializerCSpellJson(params: DeserializerParams, next: DeserializerN
     const { uri, content } = params;
     if (!isSupportedFormat.test(params.uri)) return next(params);
 
-    const cspell = parse(content);
-    if (!cspell || typeof cspell !== 'object' || Array.isArray(cspell)) {
+    const cspell: CSpellSettings | unknown = parse(content);
+    if (!isCSpellSettings(cspell)) {
         throw new Error(`Unable to parse ${uri}`);
     }
 
@@ -22,6 +22,10 @@ function _deserializerCSpellJson(params: DeserializerParams, next: DeserializerN
     }
 
     return new ImplCSpellConfigFile(uri, cspell, serialize);
+}
+
+function isCSpellSettings(cfg: unknown): cfg is CSpellSettings {
+    return !(!cfg || typeof cfg !== 'object' || Array.isArray(cfg));
 }
 
 export const deserializerCSpellJson: Deserializer = _deserializerCSpellJson;
