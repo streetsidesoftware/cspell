@@ -196,6 +196,7 @@ function sort(words: Iterable<string>): Iterable<string> {
 export interface TrieOptions {
     base?: number;
     trie3?: boolean;
+    trie4?: boolean;
 }
 
 export interface CompileTrieOptions extends CompileOptions, TrieOptions {}
@@ -219,7 +220,7 @@ export function createTrieTarget(
     return async (words: Sequence<string>) => {
         log('Reading Words into Trie');
         const base = options.base ?? 32;
-        const version = options.trie3 ? 3 : 1;
+        const version = options.trie4 ? 4 : options.trie3 ? 3 : 1;
         const root = Trie.buildTrie(words).root;
         log('Reduce duplicate word endings');
         const trie = consolidate(root);

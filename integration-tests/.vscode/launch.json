@@ -11,45 +11,30 @@
             "cwd": "${workspaceFolder}/repositories/temp/TheAlgorithms/Python",
             "console": "integratedTerminal",
             "stopOnEntry": true,
-            "args": [
-                "-u",
-                "--no-progress",
-                "--relative",
-                "--show-context",
-                "**/*.{md,py}"
-            ],
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
+            "args": ["-u", "--no-progress", "--relative", "--show-context", "**/*.{md,py}"],
+            "skipFiles": ["<node_internals>/**"],
             "type": "pwa-node"
         },
         {
             "type": "node",
             "request": "launch",
             "name": "integration-tests: Jest current-file",
-            "program": "${workspaceFolder}/../node_modules/.bin/jest",
-            "args": [
-                "--runInBand",
-                "${file}"
-            ],
+            "program": "${workspaceFolder}/../node_modules/jest/bin/jest.js",
+            "args": ["--runInBand", "${file}"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "windows": {
-                "program": "${workspaceFolder}/../node_modules/jest/bin/jest",
+                "program": "${workspaceFolder}/../node_modules/jest/bin/jest"
             }
         },
         {
             "type": "node",
             "request": "launch",
             "name": "integration-tests: tester",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
+            "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/tester.js",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
+            "outFiles": ["${workspaceFolder}/**/*.js"]
         }
     ]
 }

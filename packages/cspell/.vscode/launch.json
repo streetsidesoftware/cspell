@@ -9,15 +9,9 @@
             "request": "launch",
             "name": "cspell: Run",
             "program": "${workspaceRoot}/bin.js",
-            "args": [
-                "--cache",
-                "--no-progress",
-                "**"
-            ],
+            "args": ["--cache", "--no-progress", "**"],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true
         },
         {
@@ -27,9 +21,7 @@
             "program": "${workspaceRoot}/bin.js",
             "args": [],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true
         },
         {
@@ -37,14 +29,9 @@
             "request": "launch",
             "name": "cspell: Run CSpell against current file",
             "program": "${workspaceRoot}/bin.js",
-            "args": [
-                "-v",
-                "${file}"
-            ],
+            "args": ["-v", "${file}"],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true,
             "preLaunchTask": "npm: build"
         },
@@ -53,14 +40,9 @@
             "request": "launch",
             "name": "cspell: Run CSpell against stdin",
             "program": "${workspaceRoot}/bin.js",
-            "args": [
-                "-v",
-                "stdin"
-            ],
+            "args": ["-v", "stdin"],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true,
             "preLaunchTask": "npm: build",
             "console": "integratedTerminal"
@@ -70,14 +52,9 @@
             "request": "launch",
             "name": "cspell: Run Trace",
             "program": "${workspaceRoot}/bin.js",
-            "args": [
-                "trace",
-                "about"
-            ],
+            "args": ["trace", "about"],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true
         },
         {
@@ -92,9 +69,7 @@
                 "${workspaceRoot}/samples/src/sample.c"
             ],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true
         },
         {
@@ -102,13 +77,9 @@
             "request": "launch",
             "name": "cspell: Run Link",
             "program": "${workspaceRoot}/bin.js",
-            "args": [
-                "link"
-            ],
+            "args": ["link"],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true
         },
         {
@@ -116,15 +87,9 @@
             "request": "launch",
             "name": "cspell: Run Link Add",
             "program": "${workspaceRoot}/bin.js",
-            "args": [
-                "link",
-                "add",
-                "cspell-dict-nl-nl/cspell-ext.json"
-            ],
+            "args": ["link", "add", "cspell-dict-nl-nl/cspell-ext.json"],
             "cwd": "${workspaceRoot}/../cspell-lib",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true
         },
         {
@@ -132,46 +97,35 @@
             "request": "launch",
             "name": "cspell: Run bad glob",
             "program": "${workspaceRoot}/dist/app.js",
-            "args": [
-                "-v",
-                "src",
-                "**/*.test.ts"
-            ],
+            "args": ["-v", "src", "**/*.test.ts"],
             "cwd": "${workspaceRoot}",
-            "outFiles": [
-                "${workspaceRoot}/dist/**/*.js"
-            ],
+            "outFiles": ["${workspaceRoot}/dist/**/*.js"],
             "sourceMaps": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell: Jest current-file",
-            "program": "${workspaceFolder}/../../node_modules/.bin/jest",
-            "args": [
-                "--runInBand",
-                "${file}"
-            ],
+            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
+            "args": ["--runInBand", "${file}"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest",
+                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
             }
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell: Jest All",
-            "program": "${workspaceFolder}/../../node_modules/.bin/jest",
-            "args": [
-                "--runInBand"
-            ],
+            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
+            "args": ["--runInBand"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest",
+                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
             }
         }
     ]

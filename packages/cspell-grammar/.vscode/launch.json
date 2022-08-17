@@ -8,31 +8,26 @@
             "type": "node",
             "request": "launch",
             "name": "cspell-gitignore: Jest current-file",
-            "program": "${workspaceFolder}/../../node_modules/.bin/jest",
-            "args": [
-                "--runInBand",
-                "${fileBasename}"
-            ],
+            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
+            "args": ["--runInBand", "${fileBasename}"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest",
+                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
             }
         },
         {
             "type": "node",
             "request": "launch",
             "name": "cspell-gitignore: Jest All",
-            "program": "${workspaceFolder}/../../node_modules/.bin/jest",
-            "args": [
-                "--runInBand"
-            ],
+            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
+            "args": ["--runInBand"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest",
+                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
             }
         }
     ]

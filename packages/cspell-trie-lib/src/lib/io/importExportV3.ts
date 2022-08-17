@@ -3,12 +3,12 @@ import { Sequence, genSequence } from 'gensequence';
 import { bufferLines } from '../utils/bufferLines';
 import { trieNodeToRoot } from '../trie-util';
 
-const EOW = '$';
-const BACK = '<';
-const EOL = '\n';
-const LF = '\r';
-const REF = '#';
-const EOR = ';';
+const EOW = '$'; // End of word
+const BACK = '<'; // Move up the tree
+const EOL = '\n'; // End of Line (ignored)
+const LF = '\r'; // Line Feed (ignored)
+const REF = '#'; // Start of Reference
+const EOR = ';'; // End of Reference
 const ESCAPE = '\\';
 
 const specialCharacters = new Set(
@@ -24,6 +24,8 @@ const specialCharacterMap = new Map([
 ]);
 const characterMap = new Map([...specialCharacterMap].map((a) => [a[1], a[0]]));
 
+const WORDS_PER_LINE = 50;
+
 export const DATA = '__DATA__';
 
 function generateHeader(base: number, comment: string): Sequence<string> {
@@ -36,6 +38,11 @@ function generateHeader(base: number, comment: string): Sequence<string> {
 export interface ExportOptions {
     base?: number;
     comment?: string;
+    /**
+     * This will reduce the size of the `.trie` file by removing references to short suffixes.
+     * But it does increase the size of the trie when loaded into memory.
+     */
+    optimizeSimpleReferences?: boolean;
 }
 
 /**
@@ -46,8 +53,10 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     const { base = 16, comment = '' } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
     const cache = new Map<TrieNode, number>();
+    const cacheShouldRef = new Map<TrieNode, boolean>();
     let count = 0;
-    const backBuffer = { last: '', count: 0 };
+    const backBuffer = { last: '', count: 0, words: 0, eol: false };
+    const optimizeSimpleReferences = options.optimizeSimpleReferences ?? false;
 
     function ref(n: number): string {
         return '#' + n.toString(radix) + ';';
@@ -64,6 +73,11 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
             backBuffer.last = BACK;
             backBuffer.count -= n;
         }
+        if (backBuffer.eol) {
+            yield EOL;
+            backBuffer.eol = false;
+            backBuffer.words = 0;
+        }
     }
 
     function* emit(s: string): Generator<string> {
@@ -72,11 +86,19 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                 yield* flush();
                 backBuffer.last = EOW;
                 backBuffer.count = 0;
+                backBuffer.words++;
                 break;
             case BACK:
                 backBuffer.count++;
+                backBuffer.words++;
+                break;
+            case EOL:
+                backBuffer.eol = true;
                 break;
             default:
+                if (backBuffer.words >= WORDS_PER_LINE) {
+                    emit(EOL);
+                }
                 yield* flush();
                 yield s;
         }
@@ -84,7 +106,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
 
     function* walk(node: TrieNode, depth: number): Generator<string> {
         const r = cache.get(node);
-        if (r !== undefined) {
+        if (r !== undefined && (!optimizeSimpleReferences || !shouldSimpleRef(node))) {
             yield* emit(ref(r));
             return;
         }
@@ -102,6 +124,9 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         if (node.f) {
             yield* emit(EOW);
         }
+        if (depth === 2) {
+            yield* emit(EOL);
+        }
     }
 
     function* serialize(node: TrieNode): Generator<string> {
@@ -109,7 +134,21 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         yield* flush();
     }
 
-    return generateHeader(radix, comment).concat(bufferLines(bufferLines(serialize(root), 120, '\n'), 10, ''));
+    function _calcShouldSimpleRef(node: TrieNode): boolean {
+        if (node.c?.size !== 1) return false;
+        const [n] = [...node.c.values()];
+        return !!n.f && (n.c === undefined || n.c.size === 0);
+    }
+
+    function shouldSimpleRef(node: TrieNode): boolean {
+        const r = cacheShouldRef.get(node);
+        if (r !== undefined) return r;
+        const rr = _calcShouldSimpleRef(node);
+        cacheShouldRef.set(node, rr);
+        return rr;
+    }
+
+    return generateHeader(radix, comment).concat(bufferLines(serialize(root), 1200, ''));
 }
 
 function* toIterableIterator<T>(iter: Iterable<T>): IterableIterator<T> {

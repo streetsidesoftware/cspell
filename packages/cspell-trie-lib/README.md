@@ -14,7 +14,117 @@ The resulting trie can then be compressed into a
 npm install -S cspell-trie-lib
 ```
 
-## File Format
+## File Format V3
+
+### Header
+
+```
+TrieXv3
+base=10
+# Comments
+__DATA__
+```
+
+The header has two parts.
+
+- `TrieXv3` -- the format identifier.
+- base -- references are stored using the base (10, 16, 32) are common.
+  higher the base, the smaller the file. Max is 36
+
+### Data
+
+The data is a stream of characters and operators. Each character represents a node in the Trie. The operators adjust the position in the Trie.
+
+### Conceptual Format
+
+Given a sorted list of words:
+
+```text
+joust
+jouster
+jousting
+joy
+joyful
+joyfuller
+joyfullest
+```
+
+It is possible to think of the same list stored as a series of operations.
+
+| op    | Meaning             |
+| ----- | ------------------- |
+| `<`   | remove 1 character  |
+| `<<`  | remove 2 characters |
+| `<<<` | remove 3 characters |
+| `<2`  | remove 2 characters |
+| `<3`  | remove 3 characters |
+| `$`   | end of word         |
+| `_`   | visual place holder |
+
+```text
+joust$
+_____er$
+_____<<
+_____ing$
+__<<<<<<
+__y$
+___ful$
+______ler$
+________<
+________st$
+```
+
+Becomes:
+
+```text
+joust$er$<2ing$<6y$ful$ler$<st$
+```
+
+Trie:
+
+```text
+j─o┬u─s─t┬$
+   │     ├e─r─$
+   │     └i─n─g─$
+   └y┬$
+     └f─u─l┬$
+           └l─e┬r─$
+               └s─t─$
+```
+
+### Data Format
+
+| op    | Meaning                                                                                                   |
+| ----- | --------------------------------------------------------------------------------------------------------- |
+| `<`   | remove 1 character                                                                                        |
+| `<n`  | remove n characters where `n` is `[2-9]` to remove 12 characters use `<9<3`                               |
+| `$`   | end of word                                                                                               |
+| `\`   | escape next character. All characters can be escaped. <br/> `\\` -> `\` <br/>`\#` -> `#` <br/>`\a` -> `a` |
+| `#n;` | reference to an already imported trie node where `n` is the node number                                   |
+
+**Sample Data**
+
+<!--- cspell:disable --->
+
+```text
+Big Apple$8races\: \{\}\[\]\(\)$9<5
+New York$7umbers \0\1\2\3\4\5\6\7\8\9$9<9
+ap#6;<rrow \<$7
+big a#5;<4urned$r$2ing$3s$$4
+chalk#56;<3u#54;<3
+eol \\n$3w \$$4scape \\\$8
+fun journey$7wal#27;<7
+journalism$tic$2$3s$$2eyer$2man$2e#103;<2$4ste#101;<i#58;<$3vialit#85;<2$4wly$$2yfuller$st$4ness$4$3lessn#120;<$4ou#125;<2ridde#103;<2er$$i#58;<3od#8;<3
+stic#27;<4$3
+lift#56;<3ong w#86;<6
+ref \#$5
+t#61;<
+wa#62;<2
+```
+
+<!--- cspell:enable --->
+
+## File Format V1
 
 ### Header
 

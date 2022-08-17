@@ -4,21 +4,17 @@ import * as Trie from '..';
 import { resolveSample } from '../../test/samples';
 import { consolidate } from '../consolidate';
 import { TrieNode } from '../TrieNode';
-import { importTrie, serializeTrie } from './importExportV3';
+import { importTrie, serializeTrie, __testing__ } from './importExportV4';
+import * as v3 from './importExportV3';
 
-const sampleFile = resolveSample('sampleV3.trie');
+const sampleFile = resolveSample('sampleV4.trie');
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize small sample', () => {
         const trie = Trie.buildTrie(smallSample).root;
         const expected = toTree(trie);
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
-        const root = importTrie(
-            data
-                .replace(/\[\d+\]/g, '')
-                .split('\n')
-                .map((a) => (a ? a + '\r\n' : a))
-        );
+        const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...smallSample].sort());
         const result = toTree(root);
@@ -41,15 +37,15 @@ describe('Import/Export', () => {
                 comment: 'Sample Words',
             }),
         ].join('');
-        const root = importTrie(data.split('\n').map((a) => (a ? a + '\n' : a)));
+        const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
         await writeFile(sampleFile, data);
     });
 
     test('tests deserialize from file', async () => {
-        const sample = (await readFile(sampleFile, 'utf8')).replace(/\r?\n/g, '\n');
-        const root = importTrie(sample.split('\n'));
+        const sample = await readFile(sampleFile, 'utf8');
+        const root = importTrie(sample);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
     });
@@ -76,6 +72,33 @@ describe('Import/Export', () => {
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
         expect(data.join('')).toMatchSnapshot();
+    });
+
+    test.each`
+        options
+        ${10}
+        ${{ base: 10 }}
+        ${{ base: 10, optimizeSimpleReferences: true }}
+        ${{ base: 10, optimizeSimpleReferences: false }}
+        ${16}
+        ${{ base: 16 }}
+        ${{ base: 16, optimizeSimpleReferences: true }}
+        ${{ base: 16, optimizeSimpleReferences: false }}
+    `('serialize with V3 DAWG $options', ({ options }) => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const trieDawg = consolidate(trie);
+        const data = [...v3.serializeTrie(trieDawg, options)];
+        const root = importTrie(data);
+        const words = [...Trie.iteratorTrieWords(root)];
+        expect(words).toEqual([...sampleWords].sort());
+    });
+
+    test('buildReferenceMap', () => {
+        const trie = Trie.createTriFromList(sampleWords);
+        const trieDawg = consolidate(trie);
+        const refMap = __testing__.buildReferenceMap(trieDawg, 10);
+        const counts = refMap.refCounts.map(([_, count]) => count);
+        expect(counts.length).toBeGreaterThan(10);
     });
 });
 
