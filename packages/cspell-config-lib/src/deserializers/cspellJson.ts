@@ -25,7 +25,7 @@ function _deserializerCSpellJson(params: DeserializerParams, next: DeserializerN
 }
 
 function isCSpellSettings(cfg: unknown): cfg is CSpellSettings {
-    return !(cfg || typeof cfg !== 'object' || Array.isArray(cfg));
+    return !(!cfg || typeof cfg !== 'object' || Array.isArray(cfg));
 }
 
 export const deserializerCSpellJson: Deserializer = _deserializerCSpellJson;
