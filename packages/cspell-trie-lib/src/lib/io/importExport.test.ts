@@ -5,10 +5,17 @@ import { importTrie, serializeTrie } from './importExport';
 
 describe('Import/Export', () => {
     const pSampleWords = readFile(resolveSample('sample.txt'), 'utf8');
-    test('tests serialize / deserialize V1', async () => {
+
+    test.each`
+        version | base
+        ${1}    | ${10}
+        ${2}    | ${10}
+        ${3}    | ${10}
+        ${4}    | ${10}
+    `('tests serialize / deserialize version: $version, base: $base', async ({ version, base }) => {
         const sampleWords = (await pSampleWords).split('\n').filter((a) => !!a);
         const trie = Trie.createTriFromList(sampleWords);
-        const data = [...serializeTrie(trie, 10)];
+        const data = [...serializeTrie(trie, { version, base })];
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
