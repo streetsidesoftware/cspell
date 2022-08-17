@@ -86,7 +86,7 @@ const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
 };
 
 function parseJson(_filename: string, content: string) {
-    return json.parse(content);
+    return json.parse(content) as unknown;
 }
 
 export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
