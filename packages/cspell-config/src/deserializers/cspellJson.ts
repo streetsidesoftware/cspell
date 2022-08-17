@@ -9,7 +9,7 @@ const isSupportedFormat = /\.jsonc?(?=$|[?#])/;
 function _deserializerCSpellJson(uri: string, content: string): ImplCSpellConfigFile | undefined {
     if (!isSupportedFormat.test(uri)) return undefined;
 
-    const cspell = parse(content);
+    const cspell = parse(content) as unknown;
     if (!cspell || typeof cspell !== 'object' || Array.isArray(cspell)) {
         throw new Error(`Unable to parse ${uri}`);
     }
