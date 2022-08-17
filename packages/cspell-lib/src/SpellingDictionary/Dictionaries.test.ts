@@ -278,7 +278,7 @@ describe('Validate Refresh', () => {
 
 function tempPath(file: string) {
     const testState = expect.getState();
-    return path.join(__dirname, '../../temp', testState.currentTestName, file);
+    return path.join(__dirname, '../../temp', testState.currentTestName || 'test', file);
 }
 
 function sleep(ms: number): Promise<void> {
