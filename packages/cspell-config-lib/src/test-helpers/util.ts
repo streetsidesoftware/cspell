@@ -7,7 +7,7 @@ export function json(obj: unknown, indent: string | number = 2): string {
 
 export function tempPath(file: string): string {
     const testState = expect.getState();
-    return path.join(__dirname, '../../temp', testState.currentTestName, file);
+    return path.join(__dirname, '../../temp', testState.currentTestName || 'test', file);
 }
 
 export async function createPathForFile(file: string): Promise<void> {
