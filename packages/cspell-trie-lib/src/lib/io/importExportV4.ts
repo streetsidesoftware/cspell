@@ -147,7 +147,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
             return;
         }
         if (node.c) {
-            if (depth === 2) {
+            if (depth > 0 && depth <= 2) {
                 const chars = wordChars.slice(0, depth).map(escape).join('');
                 yield* emit(`${EOL}${INLINE_DATA_COMMENT_LINE}* ${chars} *${INLINE_DATA_COMMENT_LINE}${EOL}`);
                 backBuffer.words = 0;
