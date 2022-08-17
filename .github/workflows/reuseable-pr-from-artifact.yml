@@ -105,7 +105,7 @@ jobs:
 
       - name: Create Pull Request
         if: env.git_status == 'dirty'
-        uses: peter-evans/create-pull-request@923ad837f191474af6b1721408744feb989a4c27 # v4
+        uses: peter-evans/create-pull-request@20dac2ed4875a1a8422d233a68f69088637446df # v4
         with:
           commit-message: ${{ inputs.commit-message }}
           branch: ${{ inputs.branch }}
