@@ -80,29 +80,24 @@
                 "type": "node",
                 "request": "launch",
                 "name": "Test: Jest current-file",
-                "program": "${fileWorkspaceFolder}/node_modules/.bin/jest",
+
+                "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest.js",
                 "cwd": "${fileWorkspaceFolder}",
                 "args": ["--runInBand", "${fileBasename}"],
                 "console": "integratedTerminal",
                 "internalConsoleOptions": "neverOpen",
-                "disableOptimisticBPs": true,
-                "windows": {
-                    "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest"
-                }
+                "disableOptimisticBPs": true
             },
             {
                 "type": "node",
                 "request": "launch",
                 "name": "Test: Jest Entire Folder",
-                "program": "${fileWorkspaceFolder}/node_modules/.bin/jest",
+                "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest.js",
                 "cwd": "${fileWorkspaceFolder}",
                 "args": ["--runInBand"],
                 "console": "integratedTerminal",
                 "internalConsoleOptions": "neverOpen",
-                "disableOptimisticBPs": true,
-                "windows": {
-                    "program": "${fileWorkspaceFolder}/node_modules/jest/bin/jest"
-                }
+                "disableOptimisticBPs": true
             }
         ],
         "compounds": []

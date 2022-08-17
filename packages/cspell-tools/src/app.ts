@@ -32,6 +32,7 @@ interface CompileCommonOptions {
     keepRawCase?: boolean;
     trie?: boolean;
     trie3?: boolean;
+    trie4?: boolean;
     trieBase?: string;
     useLegacySplitter?: boolean;
 }
@@ -43,6 +44,7 @@ interface CompileOptions extends CompileCommonOptions {
 
 interface CompileTrieOptions extends CompileCommonOptions {
     trie3: boolean;
+    trie4: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,7 +77,8 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
             collect,
             []
         )
-        .option('--trie3', '[Beta] Use file format trie3', false)
+        .option('--trie3', 'Use file format trie3', false)
+        .option('--trie4', 'Use file format trie4', false)
         .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36');
 }
 
@@ -133,7 +136,7 @@ function parseNumber(s: string | undefined): number | undefined {
 type ActionFn = (words: Sequence<string>, dst: string) => Promise<unknown>;
 
 async function processAction(src: string[], options: CompileCommonOptions): Promise<void> {
-    const useTrie = options.trie || options.trie3;
+    const useTrie = options.trie || options.trie3 || options.trie4 || false;
     const fileExt = useTrie ? '.trie' : '.txt';
     console.log(
         'Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',

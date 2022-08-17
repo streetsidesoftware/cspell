@@ -8,33 +8,28 @@
             "type": "node",
             "request": "launch",
             "name": "trie-lib: Jest current-file",
-            "program": "${workspaceFolder}/../../node_modules/.bin/jest",
+            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
             "cwd": "${workspaceFolder}",
-            "args": [
-                "--runInBand",
-                "${fileBasename}"
-            ],
+            "args": ["--runInBand", "${fileBasename}"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest",
+                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
             }
         },
         {
             "type": "node",
             "request": "launch",
             "name": "trie-lib: Jest All",
-            "program": "${workspaceFolder}/../../node_modules/.bin/jest",
+            "program": "${workspaceFolder}/../../node_modules/jest/bin/jest.js",
             "cwd": "${workspaceFolder}",
-            "args": [
-                "--runInBand"
-            ],
+            "args": ["--runInBand"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "windows": {
-                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest",
+                "program": "${workspaceFolder}/../../node_modules/jest/bin/jest"
             }
         }
     ]
