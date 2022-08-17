@@ -55,7 +55,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     const cache = new Map<TrieNode, number>();
     const cacheShouldRef = new Map<TrieNode, boolean>();
     let count = 0;
-    const backBuffer = { last: '', count: 0, words: 0 };
+    const backBuffer = { last: '', count: 0, words: 0, eol: false };
     const optimizeSimpleReferences = options.optimizeSimpleReferences ?? false;
 
     function ref(n: number): string {
@@ -73,6 +73,11 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
             backBuffer.last = BACK;
             backBuffer.count -= n;
         }
+        if (backBuffer.eol) {
+            yield EOL;
+            backBuffer.eol = false;
+            backBuffer.words = 0;
+        }
     }
 
     function* emit(s: string): Generator<string> {
@@ -88,15 +93,13 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                 backBuffer.words++;
                 break;
             case EOL:
-                yield* flush();
-                yield s;
-                backBuffer.words = 0;
+                backBuffer.eol = true;
                 break;
             default:
-                yield* flush();
                 if (backBuffer.words >= WORDS_PER_LINE) {
                     emit(EOL);
                 }
+                yield* flush();
                 yield s;
         }
     }

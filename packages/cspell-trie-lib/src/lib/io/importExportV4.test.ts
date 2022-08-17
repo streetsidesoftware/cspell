@@ -91,7 +91,6 @@ describe('Import/Export', () => {
         const root = importTrie(data);
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
-        expect(data.join('')).toMatchSnapshot();
     });
 
     test('buildReferenceMap', () => {
