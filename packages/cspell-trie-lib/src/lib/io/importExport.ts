@@ -24,6 +24,8 @@ const serializers: readonly Serializer[] = [
 
 const deserializers = [iv1.importTrie, iv1.importTrie, iv2.importTrie, iv3.importTrie, iv4.importTrie] as const;
 
+const DEFAULT_VERSION = 3;
+
 /**
  * Serialize a TrieNode.
  * Note: This is destructive.  The node will no longer be usable.
@@ -31,7 +33,7 @@ const deserializers = [iv1.importTrie, iv1.importTrie, iv2.importTrie, iv3.impor
  * Considering this is the last step before exporting, it was decided to let this be destructive.
  */
 export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
-    const version = typeof options !== 'number' && options.version ? options.version : 4;
+    const version = typeof options !== 'number' && options.version ? options.version : DEFAULT_VERSION;
     const method = serializers[version];
     if (!method) {
         throw new Error(`Unknown version: ${version}`);

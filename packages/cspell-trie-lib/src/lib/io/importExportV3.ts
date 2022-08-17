@@ -24,6 +24,8 @@ const specialCharacterMap = new Map([
 ]);
 const characterMap = new Map([...specialCharacterMap].map((a) => [a[1], a[0]]));
 
+const WORDS_PER_LINE = 50;
+
 export const DATA = '__DATA__';
 
 function generateHeader(base: number, comment: string): Sequence<string> {
@@ -53,7 +55,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     const cache = new Map<TrieNode, number>();
     const cacheShouldRef = new Map<TrieNode, boolean>();
     let count = 0;
-    const backBuffer = { last: '', count: 0 };
+    const backBuffer = { last: '', count: 0, words: 0 };
     const optimizeSimpleReferences = options.optimizeSimpleReferences ?? false;
 
     function ref(n: number): string {
@@ -79,12 +81,22 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                 yield* flush();
                 backBuffer.last = EOW;
                 backBuffer.count = 0;
+                backBuffer.words++;
                 break;
             case BACK:
                 backBuffer.count++;
+                backBuffer.words++;
+                break;
+            case EOL:
+                yield* flush();
+                yield s;
+                backBuffer.words = 0;
                 break;
             default:
                 yield* flush();
+                if (backBuffer.words >= WORDS_PER_LINE) {
+                    emit(EOL);
+                }
                 yield s;
         }
     }
@@ -109,6 +121,9 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         if (node.f) {
             yield* emit(EOW);
         }
+        if (depth === 2) {
+            yield* emit(EOL);
+        }
     }
 
     function* serialize(node: TrieNode): Generator<string> {
@@ -130,7 +145,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         return rr;
     }
 
-    return generateHeader(radix, comment).concat(bufferLines(bufferLines(serialize(root), 120, '\n'), 10, ''));
+    return generateHeader(radix, comment).concat(bufferLines(serialize(root), 1200, ''));
 }
 
 function* toIterableIterator<T>(iter: Iterable<T>): IterableIterator<T> {

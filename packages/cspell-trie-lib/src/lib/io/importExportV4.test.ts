@@ -7,7 +7,7 @@ import { TrieNode } from '../TrieNode';
 import { importTrie, serializeTrie, __testing__ } from './importExportV4';
 import * as v3 from './importExportV3';
 
-const sampleFile = resolveSample('sampleV3.trie');
+const sampleFile = resolveSample('sampleV4.trie');
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize small sample', () => {

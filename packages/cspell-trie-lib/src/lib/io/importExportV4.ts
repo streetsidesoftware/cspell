@@ -147,13 +147,13 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
             return;
         }
         if (node.c) {
-            cache.set(node, count++);
-            const c = [...node.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
             if (depth === 2) {
                 const chars = wordChars.slice(0, depth).map(escape).join('');
                 yield* emit(`${EOL}${INLINE_DATA_COMMENT_LINE}* ${chars} *${INLINE_DATA_COMMENT_LINE}${EOL}`);
                 backBuffer.words = 0;
             }
+            cache.set(node, count++);
+            const c = [...node.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
             for (const [s, n] of c) {
                 wordChars[depth] = s;
                 yield* emit(escape(s));
@@ -165,6 +165,10 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         // Output EOW after children so it can be optimized on read
         if (node.f) {
             yield* emit(EOW);
+        }
+        if (depth === 2) {
+            yield* emit(EOL);
+            backBuffer.words = 0;
         }
     }
 
