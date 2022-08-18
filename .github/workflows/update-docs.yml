@@ -53,7 +53,7 @@ jobs:
           private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Create Pull Request
         if: env.git_status == 'dirty'
-        uses: peter-evans/create-pull-request@20dac2ed4875a1a8422d233a68f69088637446df # v4
+        uses: peter-evans/create-pull-request@18f90432bedd2afd6a825469ffd38aa24712a91d # v4
         with:
           commit-message: "ci: Workflow Bot -- Build Docs"
           branch: ${{ env.NEW_BRANCH }}
