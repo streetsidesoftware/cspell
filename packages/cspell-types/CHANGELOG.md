@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.7.0 (2022-08-18)
+
+### Features
+
+* Adjust `.trie` formatting ([e2643c0](https://github.com/streetsidesoftware/cspell/commit/e2643c0bf508aa566823d2c697e5b94c77e6b874)), closes [#3443](https://github.com/streetsidesoftware/cspell/issues/3443) [#3430](https://github.com/streetsidesoftware/cspell/issues/3430)
+
 ## 6.6.1 (2022-08-10)
 
 **Note:** Version bump only for package @cspell/cspell-types
