@@ -39,6 +39,7 @@ describe('Import/Export', () => {
             ...serializeTrie(consolidate(trie), {
                 base: 10,
                 comment: 'Sample Words',
+                addTrieBreaksToImproveDiffs: false,
             }),
         ].join('');
         const root = importTrie(data.split('\n').map((a) => (a ? a + '\n' : a)));
@@ -65,7 +66,9 @@ describe('Import/Export', () => {
     test.each`
         options
         ${10}
-        ${{ base: 10 }}
+        ${{ base: 10, addTrieBreaksToImproveDiffs: false }}
+        ${{ base: 10, optimizeSimpleReferences: true, addTrieBreaksToImproveDiffs: false }}
+        ${{ base: 10, optimizeSimpleReferences: false, addTrieBreaksToImproveDiffs: false }}
         ${{ base: 10, optimizeSimpleReferences: true }}
         ${{ base: 10, optimizeSimpleReferences: false }}
     `('serialize DAWG $options', ({ options }) => {
@@ -96,7 +99,16 @@ function toTree(root: TrieNode): string {
     return ['\n', ...walk(root, '')].join('');
 }
 
-const specialCharacters = ['arrow <', 'escape \\', 'eol \n', 'eow $', 'ref #', 'Numbers 0123456789', 'Braces: {}[]()'];
+const specialCharacters = [
+    'arrow <',
+    'escape \\',
+    '\\\\\\',
+    'eol \n',
+    'eow $',
+    'ref #',
+    'Numbers 0123456789',
+    'Braces: {}[]()',
+];
 
 const smallSample = genSequence(['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'])
     .concatMap(applyEndings)

@@ -119,7 +119,18 @@ function toTree(root: TrieNode): string {
     return ['\n', ...walk(root, '')].join('');
 }
 
-const specialCharacters = ['arrow <', 'escape \\', 'eol \n', 'eow $', 'ref #', 'Numbers 0123456789', 'Braces: {}[]()'];
+const specialCharacters = [
+    'arrow <',
+    'escape \\',
+    'eol \n',
+    'eow $',
+    'ref #',
+    'Numbers 0123456789',
+    'Braces: {}[]()',
+    'slash /',
+    'a/b',
+    'a/c',
+];
 
 const smallSample = genSequence(['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'])
     .concatMap(applyEndings)
