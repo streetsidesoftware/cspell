@@ -49,15 +49,15 @@ export interface ExportOptions {
      * To improve diffs, an EOL is added before each double letter prefix.
      * @default true
      */
-    addTrieBreaksToImproveDiffs?: boolean;
+    addLineBreaksToImproveDiffs?: boolean;
 }
 
 /**
  * Serialize a TrieRoot.
  */
 export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
-    options = typeof options === 'number' ? { base: options, addTrieBreaksToImproveDiffs: false } : options;
-    const { base = 16, comment = '', addTrieBreaksToImproveDiffs: addBreaks = true } = options;
+    options = typeof options === 'number' ? { base: options, addLineBreaksToImproveDiffs: false } : options;
+    const { base = 16, comment = '', addLineBreaksToImproveDiffs: addBreaks = true } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
     const cache = new Map<TrieNode, number>();
     const cacheShouldRef = new Map<TrieNode, boolean>();
@@ -183,7 +183,8 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importTrie(linesX: Iterable<string>): TrieRoot {
+export function importTrie(linesX: Iterable<string> | string): TrieRoot {
+    linesX = typeof linesX === 'string' ? linesX.split(/(?<=\n)/) : linesX;
     const root: TrieRoot = trieNodeToRoot({}, {});
 
     let radix = 16;

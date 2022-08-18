@@ -1,13 +1,13 @@
 import { readFile, writeFile } from 'fs-extra';
 import { genSequence } from 'gensequence';
 import * as Trie from '..';
-import { resolveSample } from '../../test/samples';
+import { resolveSample as resolveSamplePath } from '../../test/samples';
 import { consolidate } from '../consolidate';
 import { TrieNode } from '../TrieNode';
 import { importTrie, serializeTrie, __testing__ } from './importExportV4';
 import * as v3 from './importExportV3';
 
-const sampleFile = resolveSample('sampleV4.trie');
+const sampleFile = resolveSamplePath('sampleV4.trie');
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize small sample', () => {
@@ -72,6 +72,29 @@ describe('Import/Export', () => {
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
         expect(data.join('')).toMatchSnapshot();
+    });
+
+    test.each`
+        sampleWordList   | options
+        ${'sample.txt'}  | ${{ addTrieBreaksToImproveDiffs: false }}
+        ${'sample2.txt'} | ${{ addTrieBreaksToImproveDiffs: false }}
+        ${'sample.txt'}  | ${{}}
+        ${'sample2.txt'} | ${{}}
+    `('Read sample and ensure results match $sampleWordList $options', async ({ sampleWordList, options }) => {
+        const path = resolveSamplePath(sampleWordList);
+        const content = await readFile(path, 'utf-8');
+        const wordList = content
+            .split('\n')
+            .map((a) => a.trim())
+            .filter((a) => !!a);
+
+        const trie = Trie.buildTrie(wordList);
+        wordList.sort();
+        const data = [...serializeTrie(trie.root, options)].join('');
+        const trie2 = importTrie(data);
+        const wordsTrie = [...Trie.iteratorTrieWords(trie2)];
+        expect(wordsTrie).toEqual(wordList);
+        expect(data).toMatchSnapshot();
     });
 
     test.each`

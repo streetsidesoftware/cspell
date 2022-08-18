@@ -10,6 +10,7 @@ export interface ExportOptions {
     base?: number;
     comment?: string;
     version?: number;
+    addLineBreaksToImproveDiffs?: boolean;
 }
 
 type Serializer = (root: TrieRoot, options?: number | ExportOptions) => Sequence<string>;
