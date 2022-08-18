@@ -25,13 +25,14 @@ describe('Experiment with Tries', () => {
         const trie = Trie.createTriFromList(words);
         const asString = [...Trie.serializeTrie(trie, 10)].join('');
         const trie2 = Trie.createTriFromList(words);
-        const asString2 = [...Trie.serializeTrie(trie2, { base: 10 })].join('');
+        const asString2 = [...Trie.serializeTrie(trie2, { base: 10, addLineBreaksToImproveDiffs: false })].join('');
         expect(asString2).toBe(asString);
         const trie3 = Trie.createTriFromList(words);
         const asString3 = [
             ...Trie.serializeTrie(trie3, {
                 base: 10,
                 comment: 'one\ntwo\nthree',
+                addLineBreaksToImproveDiffs: false,
             }),
         ].join('');
         expect(asString3).not.toBe(asString);

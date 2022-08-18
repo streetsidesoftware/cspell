@@ -24,7 +24,9 @@ const specialCharacterMap = new Map([
 ]);
 const characterMap = new Map([...specialCharacterMap].map((a) => [a[1], a[0]]));
 
-const WORDS_PER_LINE = 50;
+const specialPrefix = stringToCharSet('~!');
+
+const WORDS_PER_LINE = 20;
 
 export const DATA = '__DATA__';
 
@@ -43,20 +45,26 @@ export interface ExportOptions {
      * But it does increase the size of the trie when loaded into memory.
      */
     optimizeSimpleReferences?: boolean;
+    /**
+     * To improve diffs, an EOL is added before each double letter prefix.
+     * @default true
+     */
+    addLineBreaksToImproveDiffs?: boolean;
 }
 
 /**
  * Serialize a TrieRoot.
  */
 export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 16): Sequence<string> {
-    options = typeof options === 'number' ? { base: options } : options;
-    const { base = 16, comment = '' } = options;
+    options = typeof options === 'number' ? { base: options, addLineBreaksToImproveDiffs: false } : options;
+    const { base = 16, comment = '', addLineBreaksToImproveDiffs: addBreaks = true } = options;
     const radix = base > 36 ? 36 : base < 10 ? 10 : base;
     const cache = new Map<TrieNode, number>();
     const cacheShouldRef = new Map<TrieNode, boolean>();
     let count = 0;
     const backBuffer = { last: '', count: 0, words: 0, eol: false };
     const optimizeSimpleReferences = options.optimizeSimpleReferences ?? false;
+    const wordChars: string[] = [];
 
     function ref(n: number): string {
         return '#' + n.toString(radix) + ';';
@@ -90,16 +98,18 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                 break;
             case BACK:
                 backBuffer.count++;
-                backBuffer.words++;
                 break;
             case EOL:
                 backBuffer.eol = true;
                 break;
             default:
                 if (backBuffer.words >= WORDS_PER_LINE) {
-                    emit(EOL);
+                    backBuffer.eol = true;
                 }
                 yield* flush();
+                if (s.startsWith(REF)) {
+                    backBuffer.words++;
+                }
                 yield s;
         }
     }
@@ -111,9 +121,13 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
             return;
         }
         if (node.c) {
+            if (addBreaks && depth > 0 && depth <= 2) {
+                yield* emit(EOL);
+            }
             cache.set(node, count++);
             const c = [...node.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
             for (const [s, n] of c) {
+                wordChars[depth] = s;
                 yield* emit(escape(s));
                 yield* walk(n, depth + 1);
                 yield* emit(BACK);
@@ -124,7 +138,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         if (node.f) {
             yield* emit(EOW);
         }
-        if (depth === 2) {
+        if (addBreaks && (depth === 2 || (depth === 3 && wordChars[0] in specialPrefix))) {
             yield* emit(EOL);
         }
     }
@@ -169,7 +183,8 @@ interface ReduceResults {
 
 type Reducer = (acc: ReduceResults, s: string) => ReduceResults;
 
-export function importTrie(linesX: Iterable<string>): TrieRoot {
+export function importTrie(linesX: Iterable<string> | string): TrieRoot {
+    linesX = typeof linesX === 'string' ? linesX.split(/(?<=\n)/) : linesX;
     const root: TrieRoot = trieNodeToRoot({}, {});
 
     let radix = 16;
@@ -317,4 +332,13 @@ function parseStream(radix: number): Reducer {
         return parser(acc, s);
     }
     return parserMain;
+}
+
+function stringToCharSet(values: string): Record<string, boolean | undefined> {
+    const set: Record<string, boolean | undefined> = Object.create(null);
+    const len = values.length;
+    for (let i = 0; i < len; ++i) {
+        set[values[i]] = true;
+    }
+    return set;
 }

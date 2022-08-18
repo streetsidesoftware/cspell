@@ -55,7 +55,9 @@ const SPECIAL_CHARACTERS_MAP = [
 const specialCharacterMap = stringToCharMap(SPECIAL_CHARACTERS_MAP);
 const characterMap = stringToCharMap(SPECIAL_CHARACTERS_MAP.map((a) => [a[1], a[0]]));
 
-const WORDS_PER_LINE = 50;
+const specialPrefix = stringToCharSet('~!');
+
+const WORDS_PER_LINE = 20;
 
 export const DATA = '__DATA__';
 
@@ -96,7 +98,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
     const refMap = buildReferenceMap(root, base);
     const nodeToIndexMap = new Map(refMap.refCounts.map(([node], index) => [node, index]));
     let count = 0;
-    const backBuffer = { last: '', count: 0, words: 0 };
+    const backBuffer = { last: '', count: 0, words: 0, eol: false };
     const wordChars: string[] = [];
 
     function ref(n: number, idx: number | undefined): string {
@@ -115,6 +117,11 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
             backBuffer.last = BACK;
             backBuffer.count -= n;
         }
+        if (backBuffer.eol) {
+            yield EOL;
+            backBuffer.eol = false;
+            backBuffer.words = 0;
+        }
     }
 
     function* emit(s: string): Generator<string> {
@@ -127,17 +134,24 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
                 break;
             case BACK:
                 backBuffer.count++;
-                backBuffer.words++;
+                break;
+            case EOL:
+                backBuffer.eol = true;
                 break;
             default:
-                yield* flush();
                 if (backBuffer.words >= WORDS_PER_LINE) {
-                    backBuffer.words = 0;
-                    yield '\n';
+                    backBuffer.eol = true;
+                }
+                yield* flush();
+                if (s.startsWith(REF) || s.startsWith(REF_REL)) {
+                    backBuffer.words++;
                 }
                 yield s;
         }
     }
+
+    const comment_begin = `${EOL}${INLINE_DATA_COMMENT_LINE}* `;
+    const comment_end = ` *${INLINE_DATA_COMMENT_LINE}${EOL}`;
 
     function* walk(node: TrieNode, depth: number): Generator<string> {
         const nodeNumber = cache.get(node);
@@ -149,8 +163,7 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         if (node.c) {
             if (depth > 0 && depth <= 2) {
                 const chars = wordChars.slice(0, depth).map(escape).join('');
-                yield* emit(`${EOL}${INLINE_DATA_COMMENT_LINE}* ${chars} *${INLINE_DATA_COMMENT_LINE}${EOL}`);
-                backBuffer.words = 0;
+                yield* emit(comment_begin + chars + comment_end);
             }
             cache.set(node, count++);
             const c = [...node.c].sort((a, b) => (a[0] < b[0] ? -1 : 1));
@@ -166,9 +179,8 @@ export function serializeTrie(root: TrieRoot, options: ExportOptions | number = 
         if (node.f) {
             yield* emit(EOW);
         }
-        if (depth === 2) {
+        if (depth === 2 || (depth === 3 && wordChars[0] in specialPrefix)) {
             yield* emit(EOL);
-            backBuffer.words = 0;
         }
     }
 
@@ -350,8 +362,17 @@ function parseStream(radix: number, iter: Iterable<string>): TrieRoot {
 
     function parseComment(acc: ReduceResults, s: string): ReduceResults {
         const endOfComment = s;
+        let isEscaped = false;
 
         function parser(acc: ReduceResults, s: string): ReduceResults {
+            if (isEscaped) {
+                isEscaped = false;
+                return acc;
+            }
+            if (s === ESCAPE) {
+                isEscaped = true;
+                return acc;
+            }
             if (s === endOfComment) {
                 return { ...acc, parser: undefined };
             }
