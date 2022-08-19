@@ -25,7 +25,7 @@ The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all lan
 
 #### Defined in
 
-[CSpellSettingsDef.ts:703](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L703)
+[CSpellSettingsDef.ts:708](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L708)
 
 ___
 
@@ -35,10 +35,14 @@ ___
 
 Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
 
-**`deprecated`** true
+**`Deprecated`**
 
-**`deprecationmessage`** Use `locale` instead.
+true
+
+**`Deprecation Message`**
+
+Use `locale` instead.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:709](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L709)
+[CSpellSettingsDef.ts:714](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L714)

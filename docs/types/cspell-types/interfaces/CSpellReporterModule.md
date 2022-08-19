@@ -4,26 +4,30 @@
 
 ## Table of contents
 
-### Methods
+### Properties
 
 - [getReporter](CSpellReporterModule.md#getreporter)
 
-## Methods
+## Properties
 
 ### getReporter
 
-▸ **getReporter**(`settings`): [`CSpellReporter`](CSpellReporter.md)
+• **getReporter**: (`settings`: `unknown`) => [`CSpellReporter`](CSpellReporter.md)
 
-#### Parameters
+#### Type declaration
+
+▸ (`settings`): [`CSpellReporter`](CSpellReporter.md)
+
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `settings` | `unknown` |
 
-#### Returns
+##### Returns
 
 [`CSpellReporter`](CSpellReporter.md)
 
 #### Defined in
 
-[CSpellReporter.ts:88](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellReporter.ts#L88)
+[CSpellReporter.ts:107](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellReporter.ts#L107)

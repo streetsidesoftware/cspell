@@ -4,9 +4,13 @@
 
 Only for legacy dictionary definitions.
 
-**`deprecated`** true
+**`Deprecated`**
 
-**`deprecationmessage`** Use `DictionaryDefinitionPreferred` instead.
+true
+
+**`Deprecation Message`**
+
+Use `DictionaryDefinitionPreferred` instead.
 
 ## Hierarchy
 
@@ -40,7 +44,7 @@ Optional description.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:563](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L563)
+[CSpellSettingsDef.ts:568](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L568)
 
 ___
 
@@ -50,13 +54,17 @@ ___
 
 Path to the file, only for legacy dictionary definitions.
 
-**`deprecated`** true
+**`Deprecated`**
 
-**`deprecationmessage`** Use `path` instead.
+true
+
+**`Deprecation Message`**
+
+Use `path` instead.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:624](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L624)
+[CSpellSettingsDef.ts:629](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L629)
 
 ___
 
@@ -79,7 +87,7 @@ Name Format:
 
 #### Defined in
 
-[CSpellSettingsDef.ts:561](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L561)
+[CSpellSettingsDef.ts:566](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L566)
 
 ___
 
@@ -101,7 +109,7 @@ possible suggestions.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:577](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L577)
+[CSpellSettingsDef.ts:582](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L582)
 
 ___
 
@@ -117,7 +125,7 @@ Replacement pairs.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:565](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L565)
+[CSpellSettingsDef.ts:570](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L570)
 
 ___
 
@@ -132,7 +140,9 @@ C - each line is treated like code (Camel Case is allowed).
 Default is S.
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
-**`default`** "S"
+**`Default`**
+
+"S"
 
 #### Inherited from
 
@@ -140,7 +150,7 @@ C is the slowest to load due to the need to split each line based upon code spli
 
 #### Defined in
 
-[CSpellSettingsDef.ts:587](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L587)
+[CSpellSettingsDef.ts:592](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L592)
 
 ___
 
@@ -156,4 +166,4 @@ Use Compounds.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:567](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L567)
+[CSpellSettingsDef.ts:572](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L572)
