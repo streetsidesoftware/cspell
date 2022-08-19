@@ -52,7 +52,8 @@ export function createSpellingDictionary(
 function _createSpellingDictionary(params: CreateSpellingDictionaryParams): SpellingDictionary {
     const [wordList, name, source, options] = params;
     // console.log(`createSpellingDictionary ${name} ${source}`);
-    const words = parseDictionaryLines(wordList);
+    const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true };
+    const words = parseDictionaryLines(wordList, parseOptions);
     const trie = buildTrieFast(words);
     const opts = { ...(options || defaultOptions) };
     if (opts.weightMap === undefined && opts.dictionaryInformation) {

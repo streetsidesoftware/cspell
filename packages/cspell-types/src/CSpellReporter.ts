@@ -3,8 +3,27 @@ import { TextDocumentOffset, TextOffset } from './TextOffset';
 export interface Issue extends Omit<TextDocumentOffset, 'doc'> {
     /** text surrounding the issue text */
     context: TextOffset;
+    /**
+     * true if the issue has been flagged as a forbidden word.
+     */
     isFlagged?: boolean;
+    /**
+     * An optional array of replacement strings.
+     */
     suggestions?: string[];
+    /**
+     * Issues are spelling issues unless otherwise specified.
+     */
+    issueType?: IssueType;
+    /**
+     * Optional message to show.
+     */
+    message?: string;
+}
+
+export enum IssueType {
+    spelling = 0,
+    directive = 1,
 }
 
 export type MessageType = 'Debug' | 'Info' | 'Warning';

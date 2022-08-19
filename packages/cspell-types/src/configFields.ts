@@ -51,6 +51,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     useGitignore: 'useGitignore',
     usePnP: 'usePnP',
     userWords: 'userWords',
+    validateDirectives: 'validateDirectives',
     words: 'words',
 
     // Experimental

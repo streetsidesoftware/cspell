@@ -1,7 +1,8 @@
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe';
-import type {
+import {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
+    IssueType,
     MappedText,
     ParsedText,
     PnPSettings,
@@ -12,6 +13,7 @@ import { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Mode
 import { TextDocument, TextDocumentLine, updateTextDocument } from '../Models/TextDocument';
 import { finalizeSettings, loadConfig, mergeSettings, searchForConfig } from '../Settings';
 import { loadConfigSync, searchForConfigSync } from '../Settings/Controller/configLoader';
+import { DirectiveIssue, validateInDocumentSettings } from '../Settings/InDocSettings';
 import { getDictionaryInternal, getDictionaryInternalSync, SpellingDictionaryCollection } from '../SpellingDictionary';
 import { toError } from '../util/errors';
 import { callOnce } from '../util/Memorizer';
@@ -214,12 +216,12 @@ export class DocumentValidator {
         return this._preparationTime;
     }
 
-    checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[] {
+    public checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[] {
         const text = this._document.text.slice(range[0], range[1]);
         return this.check({ text, range, scope: scope.join(' ') });
     }
 
-    check(parsedText: ParsedText): ValidationIssue[] {
+    public check(parsedText: ParsedText): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
         const { segmenter, textValidator } = this._preparations;
@@ -253,11 +255,37 @@ export class DocumentValidator {
         return withSugs;
     }
 
-    checkDocument(forceCheck = false): ValidationIssue[] {
+    public checkDocument(forceCheck = false): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
 
-        return forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
+        const spellingIssues =
+            forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
+        const directiveIssues = this.checkDocumentDirectives();
+        const allIssues = spellingIssues.concat(directiveIssues).sort((a, b) => a.offset - b.offset);
+        return allIssues;
+    }
+
+    public checkDocumentDirectives(forceCheck = false): ValidationIssue[] {
+        assert(this._ready);
+        assert(this._preparations);
+
+        const validateDirectives = forceCheck || this._preparations.config.validateDirectives;
+        if (!validateDirectives) return [];
+
+        const document = this.document;
+        const issueType = IssueType.directive;
+
+        function toValidationIssue(dirIssue: DirectiveIssue): ValidationIssue {
+            const { text, range, suggestions, message } = dirIssue;
+            const offset = range[0];
+            const pos = document.positionAt(offset);
+            const line = document.getLine(pos.line);
+            const issue: ValidationIssue = { text, offset, line, suggestions, message, issueType };
+            return issue;
+        }
+
+        return [...validateInDocumentSettings(this.document.text, this._preparations.config)].map(toValidationIssue);
     }
 
     get document() {

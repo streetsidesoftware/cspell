@@ -4,6 +4,7 @@ import { isDefined } from '../util/util';
 import * as InDoc from './InDocSettings';
 
 const oc = expect.objectContaining;
+const ac = expect.arrayContaining;
 
 // cSpell:ignore faullts straange
 // cSpell:ignoreRegExp \w+s{4}\w+
@@ -155,6 +156,19 @@ describe('Validate InDocSettings', () => {
                 ignoreRegExpList: [`"(foobar|foo_baz)"');`],
             })
         );
+    });
+
+    test.each`
+        text                          | settings | expected
+        ${''}                         | ${{}}    | ${[]}
+        ${'cspell: */'}               | ${{}}    | ${[]}
+        ${'cspell: ignore x */'}      | ${{}}    | ${[]}
+        ${'cspell:dictionary dutch'}  | ${{}}    | ${[oc({ range: [7, 17], suggestions: ac(['dictionaries']), text: 'dictionary' })]}
+        ${'cspell::dictionary dutch'} | ${{}}    | ${[oc({ range: [8, 18], suggestions: ac(['dictionaries']), text: 'dictionary' })]}
+        ${'cspell: ignored */'}       | ${{}}    | ${[oc({ range: [8, 15], suggestions: ac(['ignore', 'ignoreWord']), text: 'ignored' })]}
+    `('validateInDocumentSettings', ({ text, settings, expected }) => {
+        const result = [...InDoc.validateInDocumentSettings(text, settings)];
+        expect(result).toEqual(expected);
     });
 });
 

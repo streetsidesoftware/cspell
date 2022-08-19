@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -158,10 +158,23 @@ declare type HasOptions = SearchOptions;
 interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
     useCompounds?: boolean;
+    /**
+     * The dictionary is case aware.
+     */
     caseSensitive?: boolean;
     noSuggest?: boolean;
     weightMap?: WeightMap | undefined;
     dictionaryInformation?: DictionaryInformation;
+    /**
+     * Strip Case and Accents to allow for case insensitive searches and
+     * words without accents.
+     *
+     * Note: this setting only applies to word lists. It has no-impact on trie
+     * dictionaries.
+     *
+     * @default true
+     */
+    supportNonStrictSearches?: boolean;
 }
 interface SpellingDictionary {
     readonly name: string;
@@ -539,6 +552,23 @@ declare class ImportError extends Error {
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
+declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
+interface CheckTextInfo {
+    text: string;
+    items: TextInfoItem[];
+}
+interface TextInfoItem {
+    text: string;
+    startPos: number;
+    endPos: number;
+    flagIE: IncludeExcludeFlag;
+    isError?: boolean;
+}
+declare enum IncludeExcludeFlag {
+    INCLUDE = "I",
+    EXCLUDE = "E"
+}
+
 interface MatchRange {
     startPos: number;
     endPos: number;
@@ -557,7 +587,7 @@ interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];
     includeRegExpList?: RegExp[];
 }
-interface ValidationResult extends TextOffset {
+interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
     line: TextOffset;
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
@@ -572,32 +602,24 @@ interface ValidationIssue extends ValidationResult {
     suggestions?: string[];
 }
 interface ValidateTextOptions {
-    /** Generate suggestions where there are spelling issues. */
+    /**
+     * Generate suggestions where there are spelling issues.
+     */
     generateSuggestions?: boolean;
-    /** The number of suggestions to generate. The higher the number the longer it takes. */
+    /**
+     * The number of suggestions to generate. The higher the number the longer it takes.
+     */
     numSuggestions?: number;
+    /**
+     * Verify that the in-document directives are correct.
+     */
+    validateDirectives?: boolean;
 }
 /**
  * @deprecated
  * @deprecationMessage Use spellCheckDocument
  */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-interface CheckTextInfo {
-    text: string;
-    items: TextInfoItem[];
-}
-interface TextInfoItem {
-    text: string;
-    startPos: number;
-    endPos: number;
-    flagIE: IncludeExcludeFlag;
-    isError?: boolean;
-}
-declare enum IncludeExcludeFlag {
-    INCLUDE = "I",
-    EXCLUDE = "E"
-}
-declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
 
 declare type Offset = number;
 declare type SimpleRange = readonly [Offset, Offset];
@@ -645,6 +667,7 @@ declare class DocumentValidator {
     checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[];
     check(parsedText: ParsedText): ValidationIssue[];
     checkDocument(forceCheck?: boolean): ValidationIssue[];
+    checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
     updateDocumentText(text: string): void;
     private defaultParser;
