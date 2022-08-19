@@ -199,7 +199,7 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
     const colText = col.toString();
     const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
     const suggestions = issue.suggestions?.join(', ') || '';
-    const msg = issue.message || (issue.isFlagged ? 'Forbidden word' : 'Unknown Word');
+    const msg = issue.message || (issue.isFlagged ? 'Forbidden word' : 'Unknown word');
     const message = issue.isFlagged ? `{yellow ${msg}}` : msg;
 
     const substitutions = {
