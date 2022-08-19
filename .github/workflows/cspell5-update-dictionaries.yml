@@ -105,7 +105,7 @@ jobs:
           git --no-pager diff --compact-summary >> $GITHUB_ENV
           echo 'DIFF' >> $GITHUB_ENV
 
-      - uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5 # cspell:ignore tibdex
+      - uses: tibdex/github-app-token@f717b5ecd4534d3c4df4ce9b5c1c2214f0f7cd06 # v1.5 # cspell:ignore tibdex
         id: generate-token
         with:
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
