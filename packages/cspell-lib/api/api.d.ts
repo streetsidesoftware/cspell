@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
@@ -158,10 +158,23 @@ declare type HasOptions = SearchOptions;
 interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
     useCompounds?: boolean;
+    /**
+     * The dictionary is case aware.
+     */
     caseSensitive?: boolean;
     noSuggest?: boolean;
     weightMap?: WeightMap | undefined;
     dictionaryInformation?: DictionaryInformation;
+    /**
+     * Strip Case and Accents to allow for case insensitive searches and
+     * words without accents.
+     *
+     * Note: this setting only applies to word lists. It has no-impact on trie
+     * dictionaries.
+     *
+     * @default true
+     */
+    supportNonStrictSearches?: boolean;
 }
 interface SpellingDictionary {
     readonly name: string;
@@ -557,7 +570,7 @@ interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];
     includeRegExpList?: RegExp[];
 }
-interface ValidationResult extends TextOffset {
+interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
     line: TextOffset;
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
@@ -572,10 +585,18 @@ interface ValidationIssue extends ValidationResult {
     suggestions?: string[];
 }
 interface ValidateTextOptions {
-    /** Generate suggestions where there are spelling issues. */
+    /**
+     * Generate suggestions where there are spelling issues.
+     */
     generateSuggestions?: boolean;
-    /** The number of suggestions to generate. The higher the number the longer it takes. */
+    /**
+     * The number of suggestions to generate. The higher the number the longer it takes.
+     */
     numSuggestions?: number;
+    /**
+     * Verify that the in-document directives are correct.
+     */
+    validateDirectives?: boolean;
 }
 /**
  * @deprecated
@@ -645,6 +666,7 @@ declare class DocumentValidator {
     checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[];
     check(parsedText: ParsedText): ValidationIssue[];
     checkDocument(forceCheck?: boolean): ValidationIssue[];
+    checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
     updateDocumentText(text: string): void;
     private defaultParser;

@@ -130,6 +130,11 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     gitignoreRoot?: FsPath | FsPath[];
 
     /**
+     * Verify that the in-document directives are correct.
+     */
+    validateDirectives?: boolean;
+
+    /**
      * Configure CSpell features.
      *
      * - Added with `v5.16.0`.

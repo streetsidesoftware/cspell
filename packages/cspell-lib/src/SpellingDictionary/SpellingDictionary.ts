@@ -55,10 +55,23 @@ export type HasOptions = SearchOptions;
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
     useCompounds?: boolean;
+    /**
+     * The dictionary is case aware.
+     */
     caseSensitive?: boolean;
     noSuggest?: boolean;
     weightMap?: WeightMap | undefined;
     dictionaryInformation?: DictionaryInformation;
+    /**
+     * Strip Case and Accents to allow for case insensitive searches and
+     * words without accents.
+     *
+     * Note: this setting only applies to word lists. It has no-impact on trie
+     * dictionaries.
+     *
+     * @default true
+     */
+    supportNonStrictSearches?: boolean;
 }
 
 export interface SpellingDictionary {
