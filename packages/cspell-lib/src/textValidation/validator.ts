@@ -1,6 +1,8 @@
-import type { CSpellUserSettings } from '@cspell/cspell-types';
+import { CSpellUserSettings, IssueType } from '@cspell/cspell-types';
 import { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef';
+import { createTextDocument } from '../Models/TextDocument';
 import * as Settings from '../Settings';
+import { DirectiveIssue, validateInDocumentSettings } from '../Settings/InDocSettings';
 import { CompoundWordsMethod, getDictionaryInternal } from '../SpellingDictionary';
 import { callOnce } from '../util/Memorizer';
 import { clean } from '../util/util';
@@ -40,7 +42,12 @@ export async function validateText(
 ): Promise<ValidationIssue[]> {
     const finalSettings = Settings.finalizeSettings(settings);
     const dict = await getDictionaryInternal(finalSettings);
-    const issues = [...validateFullText(text, dict, settingsToValidateOptions(finalSettings))];
+    const spellingIssues = [...validateFullText(text, dict, settingsToValidateOptions(finalSettings))];
+    const validationIssues =
+        options.validateDirectives || finalSettings.validateDirectives
+            ? validateInDocumentSettings(text, settings)
+            : [];
+    const issues = spellingIssues.concat(mapValidationIssues(text, validationIssues));
     if (!options.generateSuggestions) {
         return issues;
     }
@@ -60,6 +67,26 @@ export async function validateText(
     });
 
     return withSugs;
+}
+
+function mapValidationIssues(text: string, valIssues: Iterable<DirectiveIssue>): ValidationResult[] {
+    const issues = [...valIssues];
+    if (!issues.length) return [];
+
+    const document = createTextDocument({ uri: '', content: text });
+    const issueType = IssueType.directive;
+
+    function toValidationIssue(dirIssue: DirectiveIssue): ValidationIssue {
+        const { text, range, suggestions, message } = dirIssue;
+        const offset = range[0];
+        const pos = document.positionAt(offset);
+        const line = document.getLine(pos.line);
+        const issue: ValidationIssue = { text, offset, line, suggestions, message, issueType };
+
+        return issue;
+    }
+
+    return issues.map(toValidationIssue);
 }
 
 export function settingsToValidateOptions(settings: CSpellSettingsInternalFinalized): ValidationOptions {

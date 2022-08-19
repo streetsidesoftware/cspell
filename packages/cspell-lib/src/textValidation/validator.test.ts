@@ -1,11 +1,15 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { loremIpsum } from 'lorem-ipsum';
+import { mergeSettings } from '../Settings';
 import { getDefaultSettings } from '../Settings/DefaultSettings';
 import * as tds from '../Settings/TextDocumentSettings';
 import * as Validator from './validator';
 import { IncludeExcludeFlag } from './validator';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
+
+const ac = expect.arrayContaining;
+const notAc = expect.not.arrayContaining;
 
 describe('Validator', () => {
     test('validates the validator', async () => {
@@ -81,14 +85,18 @@ describe('Validator', () => {
         expect(words).toEqual(expect.arrayContaining(['mischecked']));
     });
 
-    test('validates malformed ignoreRegExpList', async () => {
-        const results = await Validator.validateText(sampleCode, {
-            ignoreRegExpList: ['/wrong[/gim', 'mis.*led'],
-        });
+    test.each`
+        settings                                             | expected                        | message
+        ${{ ignoreRegExpList: ['/wrong[/gim', 'mis.*led'] }} | ${ac(['wrongg', 'mischecked'])} | ${'malformed ignoreRegExpList'}
+        ${{ ignoreRegExpList: ['/wrong[/gim', 'mis.*led'] }} | ${notAc(['mispelled'])}         | ${'malformed ignoreRegExpList'}
+        ${{}}                                                | ${notAc(['worlds'])}            | ${''}
+        ${{ validateDirectives: true }}                      | ${ac(['worlds'])}               | ${'Invalid directive'}
+    `('validates $message', async ({ settings, expected }) => {
+        const langSettings = getSettings(sampleCode, 'plaintext');
+        const finalSettings = mergeSettings(langSettings, settings);
+        const results = await Validator.validateText(sampleCode, finalSettings);
         const words = results.map((wo) => wo.text);
-        expect(words).toEqual(expect.arrayContaining(['wrongg']));
-        expect(words).toEqual(expect.not.arrayContaining(['mispelled']));
-        expect(words).toEqual(expect.arrayContaining(['mischecked']));
+        expect(words).toEqual(expected);
     });
 
     // cspell:ignore hellosd applesq bananasa respectss
@@ -204,6 +212,8 @@ const value = 0xaccd;
 const weirdWords = ['ctrip', 'xebia', 'zando', 'zooloo'];
 
 /* spell-checker:enable */
+
+// spell:worlds
 
 const wrongg = 'mispelled';
 const check = 'mischecked';

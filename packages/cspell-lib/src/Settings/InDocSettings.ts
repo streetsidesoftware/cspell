@@ -111,7 +111,7 @@ export const regExSpellingGuardNext = /\bc?spell(?:-?checker)?::?\s*disable-next
 export const regExSpellingGuardLine = /^.*\bc?spell(?:-?checker)?::?\s*disable-line\b.*/gim;
 
 const issueMessages = {
-    unknownDirective: 'Unknown CSpell document directive.',
+    unknownDirective: 'Unknown CSpell directive',
 } as const;
 
 function parseSettingMatchValidation(matchArray: RegExpMatchArray): DirectiveIssue | undefined {

@@ -273,22 +273,17 @@ export class DocumentValidator {
         const validateDirectives = forceCheck || this._preparations.config.validateDirectives;
         if (!validateDirectives) return [];
 
-        const toValidationIssue = (dirIssue: DirectiveIssue): ValidationIssue => {
+        const document = this.document;
+        const issueType = IssueType.directive;
+
+        function toValidationIssue(dirIssue: DirectiveIssue): ValidationIssue {
             const { text, range, suggestions, message } = dirIssue;
             const offset = range[0];
-            const pos = this.document.positionAt(offset);
-            const line = this.document.getLine(pos.line);
-            const issue: ValidationIssue = {
-                text,
-                offset,
-                line,
-                suggestions,
-                message,
-                issueType: IssueType.directive,
-            };
-
+            const pos = document.positionAt(offset);
+            const line = document.getLine(pos.line);
+            const issue: ValidationIssue = { text, offset, line, suggestions, message, issueType };
             return issue;
-        };
+        }
 
         return [...validateInDocumentSettings(this.document.text, this._preparations.config)].map(toValidationIssue);
     }
