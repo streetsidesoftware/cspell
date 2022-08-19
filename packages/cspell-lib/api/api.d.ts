@@ -552,6 +552,23 @@ declare class ImportError extends Error {
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
+declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
+interface CheckTextInfo {
+    text: string;
+    items: TextInfoItem[];
+}
+interface TextInfoItem {
+    text: string;
+    startPos: number;
+    endPos: number;
+    flagIE: IncludeExcludeFlag;
+    isError?: boolean;
+}
+declare enum IncludeExcludeFlag {
+    INCLUDE = "I",
+    EXCLUDE = "E"
+}
+
 interface MatchRange {
     startPos: number;
     endPos: number;
@@ -603,22 +620,6 @@ interface ValidateTextOptions {
  * @deprecationMessage Use spellCheckDocument
  */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-interface CheckTextInfo {
-    text: string;
-    items: TextInfoItem[];
-}
-interface TextInfoItem {
-    text: string;
-    startPos: number;
-    endPos: number;
-    flagIE: IncludeExcludeFlag;
-    isError?: boolean;
-}
-declare enum IncludeExcludeFlag {
-    INCLUDE = "I",
-    EXCLUDE = "E"
-}
-declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
 
 declare type Offset = number;
 declare type SimpleRange = readonly [Offset, Offset];

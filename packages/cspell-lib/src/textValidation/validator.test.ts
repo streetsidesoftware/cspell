@@ -4,7 +4,6 @@ import { mergeSettings } from '../Settings';
 import { getDefaultSettings } from '../Settings/DefaultSettings';
 import * as tds from '../Settings/TextDocumentSettings';
 import * as Validator from './validator';
-import { IncludeExcludeFlag } from './validator';
 
 // cSpell:ignore brouwn jumpped lazzy wrongg mispelled ctrip nmove mischecked
 
@@ -126,20 +125,6 @@ describe('Validator', () => {
         const words = results.map(({ text }) => text);
         expect(words.sort()).toEqual([]);
     });
-    test('tests calcIncludeExcludeInfo', async () => {
-        const words = sampleWords;
-        const info = await Validator.checkText(sampleText, { words, ignoreRegExpList: [/The/g] });
-        const strings = info.items.map((a) => a.text);
-        expect(strings).toHaveLength(17);
-        expect(strings.join('')).toBe(sampleText);
-
-        let last = 0;
-        info.items.forEach((i) => {
-            expect(i.startPos).toBe(last);
-            last = i.endPos;
-        });
-        expect(last).toBe(sampleText.length);
-    });
 
     // cspell:ignore witth feww mistaks
     test('validateText with suggestions', async () => {
@@ -150,27 +135,6 @@ describe('Validator', () => {
         const settings = getSettings(text, languageId);
         const result = await Validator.validateText(text, settings, { generateSuggestions: true, numSuggestions: 5 });
         expect(result).toMatchSnapshot();
-    });
-
-    test('tests calcIncludeExcludeInfo exclude everything', async () => {
-        const words = sampleWords;
-        const info = await Validator.checkText(sampleText, {
-            words,
-            ignoreRegExpList: [/(.|\s)+/],
-        });
-        const result = info.items.map((a) => a.text);
-        expect(result).toHaveLength(1);
-        expect(result.join('')).toBe(sampleText);
-        expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.EXCLUDE);
-    });
-
-    test('tests calcIncludeExcludeInfo include everything', async () => {
-        const words = sampleWords;
-        const info = await Validator.checkText(sampleText, { words });
-        const result = info.items.map((a) => a.text);
-        expect(result).toHaveLength(9);
-        expect(result.join('')).toBe(sampleText);
-        expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.INCLUDE);
     });
 
     // const isFoundTrue = { isFound: true };
@@ -221,14 +185,6 @@ const message = "\\nmove to next line";
 
 const hex = 0xBADC0FFEE;
 
-`;
-
-// cspell:ignore lightbrown whiteberry redberry
-const sampleText = `
-    The elephant and giraffe
-    The lightbrown worm ate the apple, mango, and, strawberry.
-    The little ant ate the big purple grape.
-    The orange tiger ate the whiteberry and the redberry.
 `;
 
 const sampleWords = [
