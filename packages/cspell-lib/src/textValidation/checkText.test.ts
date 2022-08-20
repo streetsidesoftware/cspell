@@ -34,9 +34,11 @@ describe('checkText', () => {
     test('tests calcIncludeExcludeInfo include everything', async () => {
         const words = sampleWords;
         const info = await checkText.checkText(sampleText, { words });
+        const infoOld = await checkText.checkTextOld(sampleText, { words });
+        expect(info).toEqual(infoOld);
         const result = info.items.map((a) => a.text);
-        expect(result).toHaveLength(9);
         expect(result.join('')).toBe(sampleText);
+        expect(result).toHaveLength(9);
         expect(info.items[0].flagIE).toBe(IncludeExcludeFlag.INCLUDE);
     });
 });

@@ -7,6 +7,7 @@ import {
     determineFinalDocumentSettings,
     Document,
     fileToDocument,
+    fileToTextDocument,
     spellCheckDocument,
     spellCheckFile,
     SpellCheckFileOptions,
@@ -18,16 +19,15 @@ const testFixtures = Path.resolve(__dirname, '../../../test-fixtures');
 const isWindows = process.platform === 'win32';
 const hasDriveLetter = /^[A-Z]:\\/;
 
+const oc = expect.objectContaining;
+const sc = expect.stringContaining;
+
 describe('Validate Spell Checking Files', () => {
     interface TestSpellCheckFile {
         filename: string;
         settings: CSpellUserSettings;
         options: SpellCheckFileOptions;
         expected: Partial<SpellCheckFileResult>;
-    }
-
-    function oc<T>(t: T): T {
-        return expect.objectContaining(t);
     }
 
     function err(msg: string): Error {
@@ -242,6 +242,16 @@ describe('Validate Uri assumptions', () => {
     `('URI assumptions uri: "$uri" $comment -- $expected', ({ uri, expected }: UriTestCase) => {
         const u = URI.parse(uri);
         expect(u).toEqual(expect.objectContaining(expected));
+    });
+});
+
+describe('fileToTextDocument', () => {
+    test.each`
+        file          | expected
+        ${__filename} | ${sc('This bit of text')}
+    `('fileToTextDocument', async ({ file, expected }) => {
+        const doc = await fileToTextDocument(file);
+        expect(doc.text).toEqual(expected);
     });
 });
 

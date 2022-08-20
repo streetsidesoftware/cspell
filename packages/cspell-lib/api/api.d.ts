@@ -552,23 +552,6 @@ declare class ImportError extends Error {
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string, languageId: string | string[]): CSpellSettingsInternal;
 
-declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
-interface CheckTextInfo {
-    text: string;
-    items: TextInfoItem[];
-}
-interface TextInfoItem {
-    text: string;
-    startPos: number;
-    endPos: number;
-    flagIE: IncludeExcludeFlag;
-    isError?: boolean;
-}
-declare enum IncludeExcludeFlag {
-    INCLUDE = "I",
-    EXCLUDE = "E"
-}
-
 interface MatchRange {
     startPos: number;
     endPos: number;
@@ -666,6 +649,19 @@ declare class DocumentValidator {
     get prepTime(): number;
     checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[];
     check(parsedText: ParsedText): ValidationIssue[];
+    /**
+     * Check a Document for Validation Issues.
+     * @param forceCheck - force a check even if the document would normally be excluded.
+     * @returns the validation issues.
+     */
+    checkDocumentAsync(forceCheck?: boolean): Promise<ValidationIssue[]>;
+    /**
+     * Check a Document for Validation Issues.
+     *
+     * Note: The validator must be prepared before calling this method.
+     * @param forceCheck - force a check even if the document would normally be excluded.
+     * @returns the validation issues.
+     */
     checkDocument(forceCheck?: boolean): ValidationIssue[];
     checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
     get document(): TextDocument;
@@ -707,6 +703,40 @@ interface Preparations {
     localConfig: CSpellUserSettings | undefined;
     localConfigFilepath: string | undefined;
 }
+
+/**
+ * Annotate text with issues and include / exclude zones.
+ * @param text - the text to annotate.
+ * @param settings - the settings to use.
+ * @returns the Check Text result
+ * @deprecated
+ */
+declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
+interface CheckTextInfo {
+    text: string;
+    items: TextInfoItem[];
+}
+interface TextInfoItem {
+    text: string;
+    startPos: number;
+    endPos: number;
+    flagIE: IncludeExcludeFlag;
+    isError?: boolean;
+}
+declare enum IncludeExcludeFlag {
+    INCLUDE = "I",
+    EXCLUDE = "E"
+}
+interface CheckTextOptions extends DocumentValidatorOptions {
+}
+/**
+ * Calculate document issues and include / exclude zones.
+ * @param doc - document to check
+ * @param options - check options
+ * @param settings - optional settings
+ * @returns
+ */
+declare function checkTextDocument(doc: TextDocument | Document, options: CheckTextOptions, settings?: CSpellUserSettings): Promise<CheckTextInfo>;
 
 interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
@@ -783,6 +813,7 @@ declare function isBinaryFile(filenameUri: URI, languageId?: string | string[]):
 declare function fileToDocument(file: string): Document;
 declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
 declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
+declare function fileToTextDocument(file: string): Promise<TextDocument>;
 
 interface SuggestedWordBase extends SuggestionResult {
     dictionaries: string[];
@@ -898,4 +929,4 @@ declare function resolveFile(filename: string, relativeTo: string): ResolveFileR
 declare function clearCachedFiles(): Promise<void>;
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
 
-export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForExt, getLogger, getSources, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

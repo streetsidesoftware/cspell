@@ -255,6 +255,23 @@ export class DocumentValidator {
         return withSugs;
     }
 
+    /**
+     * Check a Document for Validation Issues.
+     * @param forceCheck - force a check even if the document would normally be excluded.
+     * @returns the validation issues.
+     */
+    public async checkDocumentAsync(forceCheck?: boolean): Promise<ValidationIssue[]> {
+        await this.prepare();
+        return this.checkDocument(forceCheck);
+    }
+
+    /**
+     * Check a Document for Validation Issues.
+     *
+     * Note: The validator must be prepared before calling this method.
+     * @param forceCheck - force a check even if the document would normally be excluded.
+     * @returns the validation issues.
+     */
     public checkDocument(forceCheck = false): ValidationIssue[] {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
@@ -268,7 +285,7 @@ export class DocumentValidator {
 
     public checkDocumentDirectives(forceCheck = false): ValidationIssue[] {
         assert(this._ready);
-        assert(this._preparations);
+        assert(this._preparations, ERROR_NOT_PREPARED);
 
         const validateDirectives = forceCheck || this._preparations.config.validateDirectives;
         if (!validateDirectives) return [];
