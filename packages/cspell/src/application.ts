@@ -3,7 +3,6 @@ import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import {
     checkTextDocument,
     CheckTextInfo,
-    fileToDocument,
     getDefaultSettings,
     getGlobalSettings,
     mergeSettings,
