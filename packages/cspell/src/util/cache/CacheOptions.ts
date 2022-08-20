@@ -1,4 +1,4 @@
-import type { CacheStrategy } from '@cspell/cspell-types';
+import type { CacheStrategy, CacheFormat } from '@cspell/cspell-types';
 
 export interface CacheOptions {
     /**
@@ -28,4 +28,12 @@ export interface CacheOptions {
      * Resets the cache
      */
     cacheReset?: boolean;
+
+    /**
+     * Format of the cache file.
+     * - `legacy` - use absolute paths in the cache file
+     * - `universal` - use a sharable format.
+     * @default 'legacy'
+     */
+    cacheFormat?: CacheFormat;
 }

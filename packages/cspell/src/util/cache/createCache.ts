@@ -31,9 +31,11 @@ const versionSuffix = '';
  */
 export function createCache(options: CreateCacheSettings): CSpellLintResultCache {
     const { useCache, cacheLocation, cacheStrategy, reset } = options;
-    const cache = useCache
-        ? new DiskCache(path.resolve(cacheLocation), cacheStrategy === 'content', normalizeVersion(options.version))
-        : new DummyCache();
+    const location = path.resolve(cacheLocation);
+    const useChecksum = cacheStrategy === 'content';
+    const version = normalizeVersion(options.version);
+    const useUniversal = options.cacheFormat === 'universal';
+    const cache = useCache ? new DiskCache(location, useChecksum, version, useUniversal) : new DummyCache();
     reset && cache.reset();
     return cache;
 }
@@ -60,6 +62,7 @@ export async function calcCacheSettings(
         cacheLocation,
         cacheStrategy,
         version: cacheOptions.version,
+        cacheFormat: cacheOptions.cacheFormat || 'legacy',
     };
 }
 

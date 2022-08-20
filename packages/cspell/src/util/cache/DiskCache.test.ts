@@ -39,7 +39,7 @@ describe('DiskCache', () => {
     };
 
     beforeEach(() => {
-        diskCache = new DiskCache('.foobar', false, 'version');
+        diskCache = new DiskCache('.foobar', false, 'version', false);
         fileEntryCache = mockCreateFileEntryCache.mock.results[0].value;
     });
 

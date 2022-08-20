@@ -1,13 +1,12 @@
+import assert from 'assert';
 import * as crypto from 'crypto';
-import type { FileDescriptor, FileEntryCache } from './fileEntryCache';
-import * as fileEntryCache from './fileEntryCache';
 import * as fs from 'fs';
-import { resolve as resolvePath, dirname, isAbsolute as isAbsolutePath, relative as relativePath } from 'path';
+import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'path';
 import type { FileResult } from '../../util/fileHelper';
 import { readFileInfo } from '../../util/fileHelper';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
+import { createFromFile, FileDescriptor, FileEntryCache, normalizePath } from './fileEntryCache';
 import { ShallowObjectCollection } from './ObjectCollection';
-import assert from 'assert';
 
 export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs' | 'cached'>;
 
@@ -74,14 +73,20 @@ export class DiskCache implements CSpellLintResultCache {
     private ocCacheFileResult = new ShallowObjectCollection<CachedFileResult>();
     readonly version: string;
 
-    constructor(cacheFileLocation: string, readonly useCheckSum: boolean, readonly cspellVersion: string) {
+    constructor(
+        cacheFileLocation: string,
+        readonly useCheckSum: boolean,
+        readonly cspellVersion: string,
+        readonly useUniversalCache: boolean
+    ) {
         this.cacheFileLocation = resolvePath(cacheFileLocation);
         this.cacheDir = dirname(this.cacheFileLocation);
-        this.fileEntryCache = fileEntryCache.createFromFile(this.cacheFileLocation, useCheckSum);
+        this.fileEntryCache = createFromFile(this.cacheFileLocation, useCheckSum, useUniversalCache);
         this.version = calcVersion(cspellVersion);
     }
 
     public async getCachedLintResults(filename: string): Promise<FileResult | undefined> {
+        filename = normalizePath(filename);
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         const data = meta?.data;
@@ -229,11 +234,11 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     private resolveFile(file: string): string {
-        return resolvePath(this.cacheDir, file);
+        return normalizePath(resolvePath(this.cacheDir, file));
     }
 
     private toRelFile(file: string): string {
-        return relativePath(this.cacheDir, file);
+        return normalizePath(this.useUniversalCache ? relativePath(this.cacheDir, file) : file);
     }
 }
 

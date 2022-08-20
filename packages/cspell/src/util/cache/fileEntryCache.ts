@@ -2,13 +2,15 @@
  * This is a wrapper for 'file-entry-cache'
  */
 
-export type { FileDescriptor, FileEntryCache } from 'file-entry-cache';
-import type { FileEntryCache } from 'file-entry-cache';
+export type { FileDescriptor } from 'file-entry-cache';
+import type { FileEntryCache as FecFileEntryCache } from 'file-entry-cache';
 import * as file_entry_cache from 'file-entry-cache';
 import * as path from 'path';
 import * as fs from 'fs-extra';
 
-export function createFromFile(pathToCache: string, useCheckSum?: boolean): FileEntryCache {
+export type FileEntryCache = FecFileEntryCache;
+
+export function createFromFile(pathToCache: string, useCheckSum: boolean, useRelative: boolean): FileEntryCache {
     const absPathToCache = path.resolve(pathToCache);
     const relDir = path.dirname(absPathToCache);
     fs.mkdirpSync(relDir);
@@ -30,7 +32,6 @@ export function createFromFile(pathToCache: string, useCheckSum?: boolean): File
         }),
 
         getFileDescriptor: wrap((cwd, file: string) => {
-            console.log(file);
             return feCache.getFileDescriptor(resolveFile(cwd, file));
         }),
         getUpdatedFiles: wrap((cwd, files?: string[]) => {
@@ -57,7 +58,9 @@ export function createFromFile(pathToCache: string, useCheckSum?: boolean): File
     return cacheWrapper;
 
     function resolveFile(cwd: string, file: string): string {
-        return path.relative(relDir, path.resolve(cwd, file));
+        if (!useRelative) return file;
+        const r = path.relative(relDir, path.resolve(cwd, file));
+        return normalizePath(r);
     }
 
     function resolveFiles(cwd: string, files: string[] | undefined): string[] | undefined {
@@ -75,4 +78,9 @@ export function createFromFile(pathToCache: string, useCheckSum?: boolean): File
             }
         };
     }
+}
+
+export function normalizePath(filePath: string): string {
+    if (path.sep !== '\\') return filePath;
+    return filePath.replace(/\\/g, '/');
 }
