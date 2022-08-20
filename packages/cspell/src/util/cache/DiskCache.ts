@@ -1,11 +1,11 @@
+import assert from 'assert';
 import * as crypto from 'crypto';
-import type { FileDescriptor, FileEntryCache } from 'file-entry-cache';
-import * as fileEntryCache from 'file-entry-cache';
 import * as fs from 'fs';
-import { resolve as resolvePath } from 'path';
+import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'path';
 import type { FileResult } from '../../util/fileHelper';
 import { readFileInfo } from '../../util/fileHelper';
 import type { CSpellLintResultCache } from './CSpellLintResultCache';
+import { createFromFile, FileDescriptor, FileEntryCache, normalizePath } from './fileEntryCache';
 import { ShallowObjectCollection } from './ObjectCollection';
 
 export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs' | 'cached'>;
@@ -64,6 +64,8 @@ interface DependencyCacheTree {
  * Caches cspell results on disk
  */
 export class DiskCache implements CSpellLintResultCache {
+    public readonly cacheFileLocation: string;
+    private cacheDir: string;
     private fileEntryCache: FileEntryCache;
     private dependencyCache: Map<string, Dependency> = new Map();
     private dependencyCacheTree: DependencyCacheTree = {};
@@ -71,12 +73,20 @@ export class DiskCache implements CSpellLintResultCache {
     private ocCacheFileResult = new ShallowObjectCollection<CachedFileResult>();
     readonly version: string;
 
-    constructor(cacheFileLocation: string, readonly useCheckSum: boolean, readonly cspellVersion: string) {
-        this.fileEntryCache = fileEntryCache.createFromFile(resolvePath(cacheFileLocation), useCheckSum);
+    constructor(
+        cacheFileLocation: string,
+        readonly useCheckSum: boolean,
+        readonly cspellVersion: string,
+        readonly useUniversalCache: boolean
+    ) {
+        this.cacheFileLocation = resolvePath(cacheFileLocation);
+        this.cacheDir = dirname(this.cacheFileLocation);
+        this.fileEntryCache = createFromFile(this.cacheFileLocation, useCheckSum, useUniversalCache);
         this.version = calcVersion(cspellVersion);
     }
 
     public async getCachedLintResults(filename: string): Promise<FileResult | undefined> {
+        filename = normalizePath(filename);
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         const data = meta?.data;
@@ -173,17 +183,18 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     private checkDependency(dep: Dependency): boolean {
-        const cDep = this.dependencyCache.get(dep.f);
+        const depFile = this.resolveFile(dep.f);
+        const cDep = this.dependencyCache.get(depFile);
 
         if (cDep && compDep(dep, cDep)) return true;
         if (cDep) return false;
 
-        const d = this.getFileDep(dep.f);
+        const d = this.getFileDep(depFile);
         if (compDep(dep, d)) {
-            this.dependencyCache.set(dep.f, dep);
+            this.dependencyCache.set(depFile, dep);
             return true;
         }
-        this.dependencyCache.set(d.f, d);
+        this.dependencyCache.set(depFile, d);
         return false;
     }
 
@@ -196,14 +207,16 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     private getFileDep(file: string): Dependency {
+        assert(isAbsolutePath(file));
+        const f = this.toRelFile(file);
         let h: string;
         try {
             const buffer = fs.readFileSync(file);
             h = this.getHash(buffer);
         } catch (e) {
-            return { f: file };
+            return { f };
         }
-        return { f: file, h };
+        return { f, h };
     }
 
     private checkDependencies(dependencies: Dependency[] | undefined): boolean {
@@ -218,6 +231,14 @@ export class DiskCache implements CSpellLintResultCache {
 
     private getHash(buffer: Buffer): string {
         return crypto.createHash('md5').update(buffer).digest('hex');
+    }
+
+    private resolveFile(file: string): string {
+        return normalizePath(resolvePath(this.cacheDir, file));
+    }
+
+    private toRelFile(file: string): string {
+        return normalizePath(this.useUniversalCache ? relativePath(this.cacheDir, file) : file);
     }
 }
 

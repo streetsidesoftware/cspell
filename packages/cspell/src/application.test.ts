@@ -16,6 +16,7 @@ const packageRoot = r(__dirname, '..');
 const samplesRoot = r(packageRoot, 'samples');
 const fixturesRoot = r(packageRoot, 'fixtures');
 const featuresRoot = r(fixturesRoot, 'features');
+const tempRoot = r(packageRoot, 'temp');
 
 const sampleOptions = { root: samplesRoot };
 
@@ -204,23 +205,27 @@ describe('Linter File Caching', () => {
     const NoCache: LinterOptions = { cache: false };
     const Config: LinterOptions = {};
     const WithCache: LinterOptions = { cache: true, cacheStrategy: 'metadata' };
+    const WithCacheReset: LinterOptions = { cache: true, cacheStrategy: 'metadata', cacheReset: true };
     const CacheContent: LinterOptions = { cache: true, cacheStrategy: 'content' };
 
     test.each`
-        runs                                                                                                                         | root            | comment
-        ${[run([], Config, fc(0, 0)), run([], Config, fc(0, 0))]}                                                                    | ${packageRoot}  | ${'No files'}
-        ${[run(['*.md'], Config, fc(1, 0)), run(['*.md'], Config, fc(1, 1))]}                                                        | ${fr('cached')} | ${'Config based caching'}
-        ${[run(['*.md'], NoCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1))]}                | ${fr('cached')} | ${'Single .md file not cached then cached, result is not cached.'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1)), run(['*.md'], WithCache, fc(1, 1))]}              | ${fr('cached')} | ${'Single .md file cached three runs'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}    | ${fr('cached')} | ${'cached changing glob three runs'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], CacheContent, fc(2, 0))]} | ${fr('cached')} | ${'with cache rebuild'}
+        runs                                                                                                                           | root            | comment
+        ${[run([], Config, fc(0, 0)), run([], Config, fc(0, 0))]}                                                                      | ${packageRoot}  | ${'No files'}
+        ${[run(['*.md'], Config, fc(1, 0)), run(['*.md'], Config, fc(1, 1))]}                                                          | ${fr('cached')} | ${'Config based caching'}
+        ${[run(['*.md'], NoCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1))]}                  | ${fr('cached')} | ${'Single .md file not cached then cached, result is not cached.'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1)), run(['*.md'], WithCache, fc(1, 1))]}                | ${fr('cached')} | ${'Single .md file cached three runs'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}      | ${fr('cached')} | ${'cached changing glob three runs'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0))]} | ${fr('cached')} | ${'cached changing glob three runs'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], CacheContent, fc(2, 0))]}   | ${fr('cached')} | ${'with cache rebuild'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0)), run(['*.{md,ts}'], WithCache, fc(2, 2))]} | ${fr('cached')} | ${'cached changing glob three runs'}
     `('lint caching with $root $comment', async ({ runs, root }: TestCase) => {
         const reporter = new InMemoryReporter();
-        await fs.remove(r(root, '.cspellcache')).catch(() => undefined);
+        const cacheLocation = tempLocation('.cspellcache');
+        await fs.remove(cacheLocation).catch(() => undefined);
 
         for (const run of runs) {
             const { fileGlobs, options, expected } = run;
-            const useOptions = { ...options };
+            const useOptions = { ...options, cacheLocation };
             useOptions.root = root;
             const result = await App.lint(fileGlobs, useOptions, reporter);
             expect(reporter.errors).toEqual([]);
@@ -228,6 +233,12 @@ describe('Linter File Caching', () => {
         }
     });
 });
+
+function tempLocation(...parts: string[]): string {
+    const currTestName = expect.getState().currentTestName || 'test';
+    const testName = currTestName.replace(/\W/g, '_');
+    return r(tempRoot, testName, ...parts);
+}
 
 interface SampleTest {
     file: string;

@@ -83,18 +83,29 @@ describe('validate normalizeVersion', () => {
 function cco(
     useCache = false,
     cacheLocation = '.cspellcache',
-    cacheStrategy: CreateCacheSettings['cacheStrategy'] = 'metadata'
+    cacheStrategy: CreateCacheSettings['cacheStrategy'] = 'metadata',
+    cacheFormat: CreateCacheSettings['cacheFormat'] = 'legacy'
 ): CreateCacheSettings {
     if (cacheLocation) {
         cacheLocation = path.resolve(process.cwd(), cacheLocation);
     }
-    return { useCache, cacheLocation, cacheStrategy, version };
+    return { useCache, cacheLocation, cacheStrategy, version, cacheFormat };
 }
 
-function cs(useCache?: boolean, cacheLocation?: string, cacheStrategy?: CacheOptions['cacheStrategy']) {
-    return { useCache, cacheLocation, cacheStrategy, version };
+function cs(
+    useCache?: boolean,
+    cacheLocation?: string,
+    cacheStrategy?: CacheOptions['cacheStrategy'],
+    cacheFormat?: CacheOptions['cacheFormat']
+) {
+    return { useCache, cacheLocation, cacheStrategy, version, cacheFormat };
 }
 
-function co(cache?: boolean, cacheLocation?: string, cacheStrategy?: CacheOptions['cacheStrategy']) {
-    return { cache, cacheLocation, cacheStrategy, version };
+function co(
+    cache?: boolean,
+    cacheLocation?: string,
+    cacheStrategy?: CacheOptions['cacheStrategy'],
+    cacheFormat?: CacheOptions['cacheFormat']
+) {
+    return { cache, cacheLocation, cacheStrategy, version, cacheFormat };
 }

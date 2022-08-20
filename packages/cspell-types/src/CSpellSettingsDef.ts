@@ -309,6 +309,8 @@ export interface PnPSettings {
  */
 export type CacheStrategy = 'metadata' | 'content';
 
+export type CacheFormat = 'legacy' | 'universal';
+
 export interface CacheSettings {
     /**
      * Store the results of processed files in order to only operate on the changed ones.
@@ -332,6 +334,14 @@ export interface CacheSettings {
      * @default 'metadata'
      */
     cacheStrategy?: CacheStrategy;
+
+    /**
+     * Format of the cache file.
+     * - `legacy` - use absolute paths in the cache file
+     * - `universal` - use a sharable format.
+     * @default 'legacy'
+     */
+    cacheFormat?: CacheFormat | undefined;
 }
 
 /**

@@ -12,6 +12,8 @@ import { mergeAsyncIterables } from './util/async';
 jest.mock('readline');
 const mockCreateInterface = jest.mocked(readline.createInterface);
 
+const hideOutput = true;
+
 const projectRoot = Path.join(__dirname, '..');
 const projectRootUri = URI.file(projectRoot);
 
@@ -73,7 +75,6 @@ class RecordStdStream {
     private capture(buffer: Uint8Array | string, cb?: Callback): boolean;
     private capture(str: Uint8Array | string, encoding?: BufferEncoding, cb?: Callback): boolean;
     private capture(str: Uint8Array | string, encodingOrCb?: BufferEncoding | Callback, cb?: Callback): boolean {
-        const encoding = typeof encodingOrCb === 'string' ? encodingOrCb : undefined;
         cb = cb || (typeof encodingOrCb === 'function' ? encodingOrCb : undefined);
         if (typeof str === 'string') {
             const t = this.text.pop() || '';
@@ -81,7 +82,9 @@ class RecordStdStream {
             lines[0] = t + lines[0];
             this.text.push(...lines);
         }
-        return encoding ? this.write(str, encoding, cb) : this.write(str, cb);
+        const encoding = typeof encodingOrCb === 'string' ? encodingOrCb : undefined;
+        hideOutput && cb && cb();
+        return hideOutput || (encoding ? this.write(str, encoding, cb) : this.write(str, cb));
     }
 
     clear() {

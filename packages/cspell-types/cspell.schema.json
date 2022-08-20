@@ -2,9 +2,21 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
   "definitions": {
+    "CacheFormat": {
+      "enum": [
+        "legacy",
+        "universal"
+      ],
+      "type": "string"
+    },
     "CacheSettings": {
       "additionalProperties": false,
       "properties": {
+        "cacheFormat": {
+          "$ref": "#/definitions/CacheFormat",
+          "default": "legacy",
+          "description": "Format of the cache file.\n- `legacy` - use absolute paths in the cache file\n- `universal` - use a sharable format."
+        },
         "cacheLocation": {
           "$ref": "#/definitions/FSPathResolvable",
           "description": "Path to the cache location. Can be a file or a directory. If none specified `.cspellcache` will be used. Relative paths are relative to the config file in which it is defined.\n\nA prefix of `${cwd}` is replaced with the current working directory."
