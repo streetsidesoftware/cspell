@@ -42,7 +42,7 @@
     "test-bin-check": "node ./bin.js check README.md",
     "test-bin-spell": "node ./bin.js -c cspellrc.json --no-progress",
     "test-bin-spell-cache-content": "node ./bin.js -c cspellrc.json --cache --cache-strategy content --cache-location temp/.cspellcache-content",
-    "test-bin-spell-cache-metadata": "node ./bin.js -c cspellrc.json --cache --cache-strategy metadata temp/.cspellcache-meta",
+    "test-bin-spell-cache-metadata": "node ./bin.js -c cspellrc.json --cache --cache-strategy metadata --cache-location temp/.cspellcache-meta",
     "test-bin-trace": "node ./bin.js trace test",
     "test-build-docs": "cd doc-generator && pnpm i && pnpm run test-build-docs",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
