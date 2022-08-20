@@ -4,9 +4,9 @@
 
 Plugin API
 
-**`experimental`**
+**`Version`**
 
-**`version`** 6.2.0
+6.2.0
 
 ## Table of contents
 
@@ -22,4 +22,4 @@ Plugin API
 
 #### Defined in
 
-[CSpellSettingsDef.ts:1012](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L1012)
+[CSpellSettingsDef.ts:1017](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L1017)

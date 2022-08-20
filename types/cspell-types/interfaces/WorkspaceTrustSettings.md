@@ -26,11 +26,13 @@ This will also prevent any associated plugins from being loaded.
 
 Sets the default trust level.
 
-**`default`** "trusted"
+**`Default`**
+
+"trusted"
 
 #### Defined in
 
-[CSpellSettingsDef.ts:371](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L371)
+[CSpellSettingsDef.ts:376](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L376)
 
 ___
 
@@ -42,7 +44,7 @@ Glob patterns of locations that contain ALWAYS trusted files.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:360](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L360)
+[CSpellSettingsDef.ts:365](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L365)
 
 ___
 
@@ -54,4 +56,4 @@ Glob patterns of locations that contain NEVER trusted files.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:365](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L365)
+[CSpellSettingsDef.ts:370](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L370)

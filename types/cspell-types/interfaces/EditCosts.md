@@ -21,11 +21,13 @@
 The cost to add / remove an accent
 This should be very cheap, it helps with fixing accent issues.
 
-**`default`** 1
+**`Default`**
+
+1
 
 #### Defined in
 
-[DictionaryInformation.ts:200](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L200)
+[DictionaryInformation.ts:200](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/DictionaryInformation.ts#L200)
 
 ___
 
@@ -35,11 +37,13 @@ ___
 
 This is the base cost for making an edit.
 
-**`default`** 100
+**`Default`**
+
+100
 
 #### Defined in
 
-[DictionaryInformation.ts:173](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L173)
+[DictionaryInformation.ts:173](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/DictionaryInformation.ts#L173)
 
 ___
 
@@ -50,11 +54,13 @@ ___
 The cost to change capitalization.
 This should be very cheap, it helps with fixing capitalization issues.
 
-**`default`** 1
+**`Default`**
+
+1
 
 #### Defined in
 
-[DictionaryInformation.ts:193](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L193)
+[DictionaryInformation.ts:193](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/DictionaryInformation.ts#L193)
 
 ___
 
@@ -65,11 +71,13 @@ ___
 The extra cost incurred for changing the first letter of a word.
 This value should be less than `100 - baseCost`.
 
-**`default`** 4
+**`Default`**
+
+4
 
 #### Defined in
 
-[DictionaryInformation.ts:186](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L186)
+[DictionaryInformation.ts:186](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/DictionaryInformation.ts#L186)
 
 ___
 
@@ -79,8 +87,10 @@ ___
 
 This is the cost for characters not in the alphabet.
 
-**`default`** 110
+**`Default`**
+
+110
 
 #### Defined in
 
-[DictionaryInformation.ts:179](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/DictionaryInformation.ts#L179)
+[DictionaryInformation.ts:179](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/DictionaryInformation.ts#L179)

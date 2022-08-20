@@ -29,11 +29,13 @@
 
 The maximum number of times the same word can be flagged as an error in a file.
 
-**`default`** 5
+**`Default`**
+
+5
 
 #### Defined in
 
-[CSpellSettingsDef.ts:240](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L240)
+[CSpellSettingsDef.ts:245](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L245)
 
 ___
 
@@ -43,11 +45,13 @@ ___
 
 The maximum number of problems to report in a file.
 
-**`default`** 100
+**`Default`**
+
+100
 
 #### Defined in
 
-[CSpellSettingsDef.ts:233](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L233)
+[CSpellSettingsDef.ts:238](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L238)
 
 ___
 
@@ -57,11 +61,13 @@ ___
 
 The minimum length of a word before checking it against a dictionary.
 
-**`default`** 4
+**`Default`**
+
+4
 
 #### Defined in
 
-[CSpellSettingsDef.ts:247](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L247)
+[CSpellSettingsDef.ts:252](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L252)
 
 ___
 
@@ -71,7 +77,9 @@ ___
 
 Number of suggestions to make.
 
-**`default`** 10
+**`Default`**
+
+10
 
 #### Inherited from
 
@@ -79,7 +87,7 @@ Number of suggestions to make.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:256](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L256)
+[CSpellSettingsDef.ts:261](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L261)
 
 ___
 
@@ -93,7 +101,9 @@ For example, appending an `s` onto `example` -> `examples` is considered 1 chang
 
 Range: between 1 and 5.
 
-**`default`** 3
+**`Default`**
+
+3
 
 #### Inherited from
 
@@ -101,7 +111,7 @@ Range: between 1 and 5.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:274](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L274)
+[CSpellSettingsDef.ts:279](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L279)
 
 ___
 
@@ -111,7 +121,9 @@ ___
 
 The maximum amount of time in milliseconds to generate suggestions for a word.
 
-**`default`** 500
+**`Default`**
+
+500
 
 #### Inherited from
 
@@ -119,4 +131,4 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:263](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L263)
+[CSpellSettingsDef.ts:268](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L268)
