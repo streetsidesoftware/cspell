@@ -31,7 +31,7 @@ Notification sent just before processing a file.
 
 #### Defined in
 
-[CSpellReporter.ts:61](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellReporter.ts#L61)
+[CSpellReporter.ts:61](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L61)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:60](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellReporter.ts#L60)
+[CSpellReporter.ts:60](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L60)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:62](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellReporter.ts#L62)
+[CSpellReporter.ts:62](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L62)
 
 ___
 
@@ -73,4 +73,4 @@ ___
 
 #### Defined in
 
-[CSpellReporter.ts:77](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellReporter.ts#L77)
+[CSpellReporter.ts:77](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L77)
