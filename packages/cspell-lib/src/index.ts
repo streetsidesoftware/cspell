@@ -30,6 +30,7 @@ export {
     DetermineFinalDocumentSettingsResult,
     Document,
     fileToDocument,
+    fileToTextDocument,
     isBinaryFile,
     spellCheckDocument,
     spellCheckFile,
@@ -57,6 +58,7 @@ export { getLogger, Logger, setLogger } from './util/logger';
 export { resolveFile } from './util/resolveFile';
 export {
     checkText,
+    checkTextDocument,
     CheckTextInfo,
     IncludeExcludeFlag,
     IncludeExcludeOptions,

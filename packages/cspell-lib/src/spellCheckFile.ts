@@ -2,7 +2,7 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/
 import { readFile } from 'fs-extra';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 import { isGenerated, isGeneratedFile } from './LanguageIds';
-import { createTextDocument } from './Models/TextDocument';
+import { createTextDocument, TextDocument } from './Models/TextDocument';
 import { DocumentValidator, DocumentValidatorOptions } from './textValidation';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings';
 import { isError } from './util/errors';
@@ -115,8 +115,7 @@ async function spellCheckFullDocument(
     options: SpellCheckFileOptions,
     settings: CSpellUserSettings
 ): Promise<SpellCheckFileResult> {
-    const { uri, text: content, languageId, locale } = document;
-    const doc = createTextDocument({ uri, content, languageId, locale });
+    const doc = documentToTextDocument(document);
     const docValOptions: DocumentValidatorOptions = options;
     const docValidator = new DocumentValidator(doc, docValOptions, settings);
     await docValidator.prepare();
@@ -243,4 +242,17 @@ export function fileToDocument(
         languageId,
         locale,
     });
+}
+
+export async function fileToTextDocument(file: string): Promise<TextDocument> {
+    return documentToTextDocument(await resolveDocument(fileToDocument(file)));
+}
+
+function documentToTextDocument(document: DocumentWithText): TextDocument {
+    const { uri, text: content, languageId, locale } = document;
+    return createTextDocument({ uri, content, languageId, locale });
+}
+
+export async function resolveDocumentToTextDocument(doc: Document): Promise<TextDocument> {
+    return documentToTextDocument(await resolveDocument(doc));
 }

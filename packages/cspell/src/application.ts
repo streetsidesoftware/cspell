@@ -1,22 +1,23 @@
 import { opMap, opTap, pipeAsync, toAsyncIterable } from '@cspell/cspell-pipe';
 import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
-import type { CheckTextInfo, SuggestionsForWordResult, TraceResult } from 'cspell-lib';
 import {
-    checkText as cspellLibCheckText,
+    checkTextDocument,
+    CheckTextInfo,
     getDefaultSettings,
     getGlobalSettings,
     mergeSettings,
     SuggestionError,
+    SuggestionsForWordResult,
     suggestionsForWords,
+    TraceResult,
     traceWordsAsync,
 } from 'cspell-lib';
-import * as path from 'path';
 import { getReporter } from './cli-reporter';
 import { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
 import { LintRequest, runLint } from './lint';
 import { BaseOptions, fixLegacy, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options';
 import { simpleRepl } from './repl';
-import { calcFinalConfigInfo, readConfig, readFile } from './util/fileHelper';
+import { fileInfoToDocument, readConfig, readFileInfo } from './util/fileHelper';
 import { readStdin } from './util/stdin';
 import { getTimeMeasurer } from './util/timer';
 import * as util from './util/util';
@@ -46,15 +47,18 @@ export type CheckTextResult = CheckTextInfo;
 
 export async function checkText(filename: string, options: BaseOptions & LegacyOptions): Promise<CheckTextResult> {
     options = fixLegacy(options);
-    const pSettings = readConfig(options.config, path.dirname(filename));
-    const [foundSettings, text] = await Promise.all([pSettings, readFile(filename)]);
+    const fileInfo = await readFileInfo(filename);
+    const { locale, languageId } = options;
+    const doc = fileInfoToDocument(fileInfo, languageId, locale);
+    const checkOptions = {
+        configFile: options.config,
+    };
     const settingsFromCommandLine = util.clean({
-        languageId: options.languageId || undefined,
-        language: options.locale || options.local || undefined,
+        languageId,
+        language: locale,
         loadDefaultConfiguration: options.defaultConfiguration,
     });
-    const info = calcFinalConfigInfo(foundSettings, settingsFromCommandLine, filename, text);
-    return cspellLibCheckText(text, info.configInfo.config);
+    return checkTextDocument(doc, checkOptions, settingsFromCommandLine);
 }
 
 export async function* suggestions(
