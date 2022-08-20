@@ -54,7 +54,7 @@
     "update-integrations-and-snapshots": "pnpm -r run update-repositories --scope cspell-integration-tests",
     "update-integrations-list": "cd integration-tests && ./repo-list.sh",
     "update-schema": "cd packages/cspell-types && pnpm i && pnpm run build",
-    "update-snapshots": "pnpm -r run update-snapshots-only --scope cspell-integration-tests",
+    "update-snapshots": "pnpm --filter cspell-integration-tests run update-snapshots-only",
     "website-install": "cd website && pnpm i",
     "website-lint": "cd website && pnpm run lint",
     "website-lint-ci": "cd website && pnpm run lint-ci"
