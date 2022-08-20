@@ -75,6 +75,7 @@ export function readFileInfo(
     encoding: BufferEncoding = UTF8,
     handleNotFound = false
 ): Promise<ReadFileInfoResult> {
+    filename = filename !== STDIN ? path.resolve(filename) : filename;
     const pText = filename === STDIN ? getStdin() : fsp.readFile(filename, encoding);
     return pText.then(
         (text) => ({ text, filename }),
