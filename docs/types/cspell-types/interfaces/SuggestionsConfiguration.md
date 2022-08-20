@@ -24,11 +24,13 @@
 
 Number of suggestions to make.
 
-**`default`** 10
+**`Default`**
+
+10
 
 #### Defined in
 
-[CSpellSettingsDef.ts:256](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L256)
+[CSpellSettingsDef.ts:261](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L261)
 
 ___
 
@@ -42,11 +44,13 @@ For example, appending an `s` onto `example` -> `examples` is considered 1 chang
 
 Range: between 1 and 5.
 
-**`default`** 3
+**`Default`**
+
+3
 
 #### Defined in
 
-[CSpellSettingsDef.ts:274](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L274)
+[CSpellSettingsDef.ts:279](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L279)
 
 ___
 
@@ -56,8 +60,10 @@ ___
 
 The maximum amount of time in milliseconds to generate suggestions for a word.
 
-**`default`** 500
+**`Default`**
+
+500
 
 #### Defined in
 
-[CSpellSettingsDef.ts:263](https://github.com/streetsidesoftware/cspell/blob/d3fbe6c/packages/cspell-types/src/CSpellSettingsDef.ts#L263)
+[CSpellSettingsDef.ts:268](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L268)
