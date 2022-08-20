@@ -36,7 +36,7 @@ true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:389](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L389)
+[CSpellSettingsDef.ts:399](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L399)
 
 ___
 
@@ -52,4 +52,4 @@ true
 
 #### Defined in
 
-[CSpellSettingsDef.ts:395](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L395)
+[CSpellSettingsDef.ts:405](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L405)

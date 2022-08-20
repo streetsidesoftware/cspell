@@ -6,11 +6,30 @@
 
 ### Properties
 
+- [cacheFormat](CacheSettings.md#cacheformat)
 - [cacheLocation](CacheSettings.md#cachelocation)
 - [cacheStrategy](CacheSettings.md#cachestrategy)
 - [useCache](CacheSettings.md#usecache)
 
 ## Properties
+
+### cacheFormat
+
+• `Optional` **cacheFormat**: [`CacheFormat`](../modules.md#cacheformat)
+
+Format of the cache file.
+- `legacy` - use absolute paths in the cache file
+- `universal` - use a sharable format.
+
+**`Default`**
+
+'legacy'
+
+#### Defined in
+
+[CSpellSettingsDef.ts:344](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L344)
+
+___
 
 ### cacheLocation
 
@@ -25,7 +44,7 @@ A prefix of `${cwd}` is replaced with the current working directory.
 
 #### Defined in
 
-[CSpellSettingsDef.ts:328](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L328)
+[CSpellSettingsDef.ts:330](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L330)
 
 ___
 
@@ -41,7 +60,7 @@ Strategy to use for detecting changed files, default: metadata
 
 #### Defined in
 
-[CSpellSettingsDef.ts:334](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L334)
+[CSpellSettingsDef.ts:336](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L336)
 
 ___
 
@@ -57,4 +76,4 @@ false
 
 #### Defined in
 
-[CSpellSettingsDef.ts:317](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellSettingsDef.ts#L317)
+[CSpellSettingsDef.ts:319](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellSettingsDef.ts#L319)

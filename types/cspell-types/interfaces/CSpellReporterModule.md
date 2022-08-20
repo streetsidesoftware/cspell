@@ -30,4 +30,4 @@
 
 #### Defined in
 
-[CSpellReporter.ts:107](https://github.com/streetsidesoftware/cspell/blob/aeb24c4/packages/cspell-types/src/CSpellReporter.ts#L107)
+[CSpellReporter.ts:107](https://github.com/streetsidesoftware/cspell/blob/875a61f/packages/cspell-types/src/CSpellReporter.ts#L107)
