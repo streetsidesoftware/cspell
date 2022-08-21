@@ -15,6 +15,8 @@ export function commandCheck(prog: Command): Command {
             '-c, --config <cspell.json>',
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.'
         )
+        .option('--validate-directives', 'Validate in-document CSpell directives.')
+        .option('--no-validate-directives', 'Do not validate in-document CSpell directives.')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color')
         .addOption(

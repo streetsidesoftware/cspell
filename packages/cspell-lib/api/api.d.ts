@@ -647,6 +647,7 @@ declare class DocumentValidator {
      * The amount of time in ms to prepare for validation.
      */
     get prepTime(): number;
+    get validateDirectives(): boolean;
     checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[];
     check(parsedText: ParsedText): ValidationIssue[];
     /**

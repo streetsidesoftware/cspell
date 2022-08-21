@@ -95,6 +95,8 @@ export function commandLint(prog: Command): Command {
         .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
         .option('--no-gitignore', 'Do NOT use .gitignore files.')
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
+        .option('--validate-directives', 'Validate in-document CSpell directives.')
+        .option('--no-validate-directives', 'Do not validate in-document CSpell directives.')
         .option('--no-color', 'Turn off color.')
         .option('--color', 'Force color.')
         .addOption(

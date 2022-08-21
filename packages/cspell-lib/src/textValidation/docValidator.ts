@@ -216,6 +216,10 @@ export class DocumentValidator {
         return this._preparationTime;
     }
 
+    get validateDirectives(): boolean {
+        return this.options.validateDirectives ?? this._preparations?.config.validateDirectives ?? false;
+    }
+
     public checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[] {
         const text = this._document.text.slice(range[0], range[1]);
         return this.check({ text, range, scope: scope.join(' ') });
@@ -287,7 +291,7 @@ export class DocumentValidator {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
 
-        const validateDirectives = forceCheck || this._preparations.config.validateDirectives;
+        const validateDirectives = forceCheck || this.validateDirectives;
         if (!validateDirectives) return [];
 
         const document = this.document;
