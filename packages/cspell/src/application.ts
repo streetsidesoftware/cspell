@@ -48,10 +48,11 @@ export type CheckTextResult = CheckTextInfo;
 export async function checkText(filename: string, options: BaseOptions & LegacyOptions): Promise<CheckTextResult> {
     options = fixLegacy(options);
     const fileInfo = await readFileInfo(filename);
-    const { locale, languageId } = options;
+    const { locale, languageId, validateDirectives } = options;
     const doc = fileInfoToDocument(fileInfo, languageId, locale);
     const checkOptions = {
         configFile: options.config,
+        validateDirectives,
     };
     const settingsFromCommandLine = util.clean({
         languageId,

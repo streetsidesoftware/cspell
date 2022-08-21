@@ -140,6 +140,11 @@ export interface BaseOptions {
      * @default true
      */
     defaultConfiguration?: boolean;
+
+    /**
+     * Check In-Document CSpell directives for correctness.
+     */
+    validateDirectives?: boolean;
 }
 
 export interface LinterCliOptions extends LinterOptions {

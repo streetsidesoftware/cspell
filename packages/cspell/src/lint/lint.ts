@@ -86,7 +86,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             MessageTypes.Info
         );
         try {
-            const validateOptions = { generateSuggestions: cfg.options.showSuggestions, numSuggestions: 5 };
+            const { showSuggestions: generateSuggestions, validateDirectives } = cfg.options;
+            const validateOptions = { generateSuggestions, numSuggestions: 5, validateDirectives };
             const r = await cspell.spellCheckDocument(doc, validateOptions, configInfo.config);
             spellResult = r;
             result.processed = r.checked;
