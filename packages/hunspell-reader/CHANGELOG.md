@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.8.0 (2022-08-21)
+
+### Bug Fixes
+
+* Enable cli option `--validate-directives` ([#3461](https://github.com/Jason-Rev/hunspell-reader/issues/3461)) ([52a5337](https://github.com/Jason-Rev/hunspell-reader/commit/52a5337fb4090394342b45e31423752cda268559))
+
 # 6.7.0 (2022-08-18)
 
 ### Features
