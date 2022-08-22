@@ -106,11 +106,12 @@ describe('Validate InDocSettings', () => {
         ${'sampleText'}                                              | ${sampleText}                                                | ${oc({ allowCompoundWords: true })}
         ${'sampleCode'}                                              | ${sampleCode}                                                | ${oc({ allowCompoundWords: true })}
         ${'cSpell:word apple'}                                       | ${USE_TEST}                                                  | ${oc({ words: ['apple'] })}
-        ${'/*cSpell:word apple*/'}                                   | ${USE_TEST}                                                  | ${oc({ words: ['apple'] })}
+        ${'/*cSpell:word apple*/'}                                   | ${USE_TEST}                                                  | ${oc({ words: ['apple*'] })}
         ${'<!--- cSpell:word apple -->'}                             | ${USE_TEST}                                                  | ${oc({ words: ['apple', '-->'] })}
         ${'<!--- cSpell:ignoreWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ ignoreWords: ['apple', '-->'] })}
         ${'<!--- cSpell:forbidWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ flagWords: ['apple', '-->'] })}
         ${'<!--- cSpell:flag-words apple -->'}                       | ${USE_TEST}                                                  | ${oc({ flagWords: ['apple', '-->'] })}
+        ${'# cspell:ignore auto* *labeler'}                          | ${USE_TEST}                                                  | ${oc({ ignoreWords: ['auto*', '*labeler'] })}
     `('detect compound words setting: $test', ({ test, text, expected }) => {
         expect(InDoc.getInDocumentSettings(text == USE_TEST ? test : text)).toEqual(expected);
         expect([...InDoc.validateInDocumentSettings(text, {})]).toEqual([]);
@@ -136,7 +137,7 @@ describe('Validate InDocSettings', () => {
     test('tests finding words to ignore', () => {
         const words = InDoc.getIgnoreWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
-        expect(words).toEqual(['tripe', 'comment', 'tooo', 'faullts']);
+        expect(words).toEqual(['tripe', 'comment', '*', 'tooo', 'faullts']);
         expect(InDoc.getIgnoreWordsFromDocument('Hello')).toEqual([]);
     });
 
