@@ -25,11 +25,21 @@ const officialDirectives = [
     'ignore',
     'ignoreWord',
     'ignoreWords',
+    'ignore-word',
+    'ignore-words',
     'includeRegExp',
     'ignoreRegExp',
+    'local', // Do not suggest.
     'locale',
     'language',
     'dictionaries',
+    'dictionary',
+    'forbid',
+    'forbidWord',
+    'forbid-word',
+    'flag',
+    'flagWord',
+    'flag-word',
     'enableCompoundWords',
     'enableAllowCompoundWords',
     'disableCompoundWords',
@@ -38,6 +48,8 @@ const officialDirectives = [
     'disableCaseSensitive',
 ];
 
+const noSuggestDirectives = new Set(['local']);
+
 const preferredDirectives = [
     'enable',
     'disable',
@@ -45,7 +57,9 @@ const preferredDirectives = [
     'disable-next-line',
     'words',
     'ignore',
+    'forbid',
     'locale',
+    'dictionary',
     'dictionaries',
     'enableCaseSensitive',
     'disableCaseSensitive',
@@ -95,14 +109,15 @@ const settingParsers: readonly (readonly [RegExp, (m: string) => CSpellUserSetti
     [/^(?:enable|disable)CaseSensitive\b/i, parseCaseSensitive],
     [/^enable\b(?!-)/i, parseEnable],
     [/^disable(-line|-next(-line)?)?\b(?!-)/i, parseDisable],
-    [/^words?\s/i, parseWords],
-    [/^ignore(?:words?)?\s/i, parseIgnoreWords],
+    [/^words?\b/i, parseWords],
+    [/^ignore(?:-?words?)?\b/i, parseIgnoreWords],
+    [/^(?:flag|forbid)(?:-?words?)?\b/i, parseFlagWords],
     [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
     [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp],
-    [/^locale?\s/i, parseLocale],
+    [/^locale?\b/i, parseLocale],
     [/^language\s/i, parseLocale],
-    [/^dictionaries\s/i, parseDictionaries],
-    [/^LocalWords:/, (w) => parseWords(w.replace(/LocalWords:?/gi, ' '))],
+    [/^dictionar(?:y|ies)\b/i, parseDictionaries], // cspell:disable-line
+    [/^LocalWords:/, (w) => parseWords(w.replace(/^LocalWords:?/gi, ' '))],
 ] as const;
 
 export const regExSpellingGuardBlock =
@@ -134,7 +149,10 @@ function parseSettingMatchValidation(matchArray: RegExpMatchArray): DirectiveIss
     if (matchingParsers.length > 0) return undefined;
 
     // No matches were found, let make some suggestions.
-    const dictSugs = dictInDocSettings.suggest(text, { ignoreCase: false }).map((sug) => sug.word);
+    const dictSugs = dictInDocSettings
+        .suggest(text, { ignoreCase: false })
+        .map((sug) => sug.word)
+        .filter((a) => !noSuggestDirectives.has(a));
     const sugs = new Set(pipeSync(dictSugs, opAppend(allDirectives)));
     const suggestions = [...sugs].slice(0, 8);
 
@@ -169,7 +187,11 @@ function parseCaseSensitive(match: string): CSpellUserSettings {
 }
 
 function parseWords(match: string): CSpellUserSettings {
-    const words = match.split(/[,\s]+/g).slice(1);
+    const words = match
+        .replace(/[@#$%^&={}/"]/g, ' ')
+        .split(/[,\s;]+/g)
+        .slice(1)
+        .filter((a) => !!a);
     return { id: 'in-doc-words', words };
 }
 
@@ -182,6 +204,11 @@ function parseLocale(match: string): CSpellUserSettings {
 function parseIgnoreWords(match: string): CSpellUserSettings {
     const wordsSetting = parseWords(match);
     return clean({ id: 'in-doc-ignore', ignoreWords: wordsSetting.words });
+}
+
+function parseFlagWords(match: string): CSpellUserSettings {
+    const wordsSetting = parseWords(match);
+    return clean({ id: 'in-doc-forbid', flagWords: wordsSetting.words });
 }
 
 function parseRegEx(match: string): string[] {

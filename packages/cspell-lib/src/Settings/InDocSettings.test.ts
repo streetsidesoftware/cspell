@@ -5,6 +5,7 @@ import * as InDoc from './InDocSettings';
 
 const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
+const nac = expect.not.arrayContaining;
 
 // cSpell:ignore faullts straange
 // cSpell:ignoreRegExp \w+s{4}\w+
@@ -91,6 +92,8 @@ describe('Validate InDocSettings', () => {
         ]);
     });
 
+    const USE_TEST = undefined;
+
     test.each`
         test                                                         | text                                                         | expected
         ${'Empty Doc'}                                               | ${''}                                                        | ${{ id: 'in-doc-settings' }}
@@ -102,8 +105,16 @@ describe('Validate InDocSettings', () => {
         ${'cSpell:disableCompoundWords\ncSpell:enableCompoundWords'} | ${'cSpell:disableCompoundWords\ncSpell:enableCompoundWords'} | ${oc({ allowCompoundWords: true })}
         ${'sampleText'}                                              | ${sampleText}                                                | ${oc({ allowCompoundWords: true })}
         ${'sampleCode'}                                              | ${sampleCode}                                                | ${oc({ allowCompoundWords: true })}
-    `('detect compound words setting: $test', ({ text, expected }) => {
-        expect(InDoc.getInDocumentSettings(text)).toEqual(expected);
+        ${'cSpell:word apple'}                                       | ${USE_TEST}                                                  | ${oc({ words: ['apple'] })}
+        ${'/*cSpell:word apple*/'}                                   | ${USE_TEST}                                                  | ${oc({ words: ['apple*'] })}
+        ${'<!--- cSpell:word apple -->'}                             | ${USE_TEST}                                                  | ${oc({ words: ['apple', '-->'] })}
+        ${'<!--- cSpell:ignoreWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ ignoreWords: ['apple', '-->'] })}
+        ${'<!--- cSpell:forbidWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ flagWords: ['apple', '-->'] })}
+        ${'<!--- cSpell:flag-words apple -->'}                       | ${USE_TEST}                                                  | ${oc({ flagWords: ['apple', '-->'] })}
+        ${'# cspell:ignore auto* *labeler'}                          | ${USE_TEST}                                                  | ${oc({ ignoreWords: ['auto*', '*labeler'] })}
+    `('detect compound words setting: $test', ({ test, text, expected }) => {
+        expect(InDoc.getInDocumentSettings(text == USE_TEST ? test : text)).toEqual(expected);
+        expect([...InDoc.validateInDocumentSettings(text, {})]).toEqual([]);
     });
 
     test.each`
@@ -126,7 +137,7 @@ describe('Validate InDocSettings', () => {
     test('tests finding words to ignore', () => {
         const words = InDoc.getIgnoreWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
-        expect(words).toEqual(['tripe', 'comment', '*/', 'tooo', 'faullts']);
+        expect(words).toEqual(['tripe', 'comment', '*', 'tooo', 'faullts']);
         expect(InDoc.getIgnoreWordsFromDocument('Hello')).toEqual([]);
     });
 
@@ -158,14 +169,19 @@ describe('Validate InDocSettings', () => {
         );
     });
 
+    // cspell:ignore dictionar lokal
+
     test.each`
-        text                          | settings | expected
-        ${''}                         | ${{}}    | ${[]}
-        ${'cspell: */'}               | ${{}}    | ${[]}
-        ${'cspell: ignore x */'}      | ${{}}    | ${[]}
-        ${'cspell:dictionary dutch'}  | ${{}}    | ${[oc({ range: [7, 17], suggestions: ac(['dictionaries']), text: 'dictionary' })]}
-        ${'cspell::dictionary dutch'} | ${{}}    | ${[oc({ range: [8, 18], suggestions: ac(['dictionaries']), text: 'dictionary' })]}
-        ${'cspell: ignored */'}       | ${{}}    | ${[oc({ range: [8, 15], suggestions: ac(['ignore', 'ignoreWord']), text: 'ignored' })]}
+        text                         | settings | expected
+        ${''}                        | ${{}}    | ${[]}
+        ${'cspell: */'}              | ${{}}    | ${[]}
+        ${'cspell: ignore x */'}     | ${{}}    | ${[]}
+        ${'cspell: word*/'}          | ${{}}    | ${[]}
+        ${'cspell:dictionar dutch'}  | ${{}}    | ${[oc({ range: [7, 16], suggestions: ac(['dictionary', 'dictionaries']), text: 'dictionar' })]}
+        ${'cspell::dictionar dutch'} | ${{}}    | ${[oc({ range: [8, 17], suggestions: ac(['dictionary', 'dictionaries']), text: 'dictionar' })]}
+        ${'cspell: ignored */'}      | ${{}}    | ${[oc({ range: [8, 15], suggestions: ac(['ignore', 'ignoreWord']), text: 'ignored' })]}
+        ${'cspell:lokal en'}         | ${{}}    | ${[oc({ suggestions: ac(['locale']) })]}
+        ${'cspell:lokal en'}         | ${{}}    | ${[oc({ suggestions: nac(['local']) })]}
     `('validateInDocumentSettings', ({ text, settings, expected }) => {
         const result = [...InDoc.validateInDocumentSettings(text, settings)];
         expect(result).toEqual(expected);
