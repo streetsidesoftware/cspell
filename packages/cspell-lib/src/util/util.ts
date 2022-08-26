@@ -24,6 +24,7 @@ export function unique<T>(src: T[]): T[] {
  * Delete all `undefined` fields from an object.
  * @param src - object to be cleaned
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function clean<T extends {}>(src: T): RemoveUndefined<T> {
     const r = src;
     type keyOfT = keyof T;

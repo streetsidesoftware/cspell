@@ -20,6 +20,7 @@ export function unique<T>(src: T[]): T[] {
     return [...new Set(src)];
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function clean<T extends {}>(src: T): T {
     const r = src;
     type keyOfT = keyof T;
