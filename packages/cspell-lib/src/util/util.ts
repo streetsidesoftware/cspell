@@ -24,7 +24,7 @@ export function unique<T>(src: T[]): T[] {
  * Delete all `undefined` fields from an object.
  * @param src - object to be cleaned
  */
-export function clean<T>(src: T): RemoveUndefined<T> {
+export function clean<T extends object>(src: T): RemoveUndefined<T> {
     const r = src;
     type keyOfT = keyof T;
     type keysOfT = keyOfT[];
