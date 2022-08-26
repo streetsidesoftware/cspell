@@ -41,7 +41,7 @@
     "test": "pnpm -r run test && pnpm run test-schema",
     "test-bin": "pnpm run test-bin-spell && pnpm run test-bin-spell-cache-content && pnpm run test-bin-spell-cache-metadata && pnpm run test-bin-trace && pnpm run test-bin-check",
     "test-bin-check": "node ./bin.js check README.md",
-    "test-bin-spell": "node ./bin.js -c cspellrc.json --no-progress",
+    "test-bin-spell": "node ./bin.js -c cspellrc.json --no-progress --no-cache",
     "test-bin-spell-cache-content": "node ./bin.js -c cspellrc.json --cache --cache-strategy content --cache-location temp/.cspellcache-content",
     "test-bin-spell-cache-metadata": "node ./bin.js -c cspellrc.json --cache --cache-strategy metadata --cache-location temp/.cspellcache-meta",
     "test-bin-trace": "node ./bin.js trace test",
