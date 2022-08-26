@@ -188,7 +188,7 @@ function parseCaseSensitive(match: string): CSpellUserSettings {
 
 function parseWords(match: string): CSpellUserSettings {
     const words = match
-        .replace(/[@#$%^&={}/"]/g, ' ')
+        // .replace(/[@#$%^&={}/"]/g, ' ')
         .split(/[,\s;]+/g)
         .slice(1)
         .filter((a) => !!a);

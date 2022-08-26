@@ -106,7 +106,7 @@ describe('Validate InDocSettings', () => {
         ${'sampleText'}                                              | ${sampleText}                                                | ${oc({ allowCompoundWords: true })}
         ${'sampleCode'}                                              | ${sampleCode}                                                | ${oc({ allowCompoundWords: true })}
         ${'cSpell:word apple'}                                       | ${USE_TEST}                                                  | ${oc({ words: ['apple'] })}
-        ${'/*cSpell:word apple*/'}                                   | ${USE_TEST}                                                  | ${oc({ words: ['apple*'] })}
+        ${'/*cSpell:word apple*/'}                                   | ${USE_TEST}                                                  | ${oc({ words: ['apple*/'] })}
         ${'<!--- cSpell:word apple -->'}                             | ${USE_TEST}                                                  | ${oc({ words: ['apple', '-->'] })}
         ${'<!--- cSpell:ignoreWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ ignoreWords: ['apple', '-->'] })}
         ${'<!--- cSpell:forbidWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ flagWords: ['apple', '-->'] })}
@@ -137,7 +137,7 @@ describe('Validate InDocSettings', () => {
     test('tests finding words to ignore', () => {
         const words = InDoc.getIgnoreWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
-        expect(words).toEqual(['tripe', 'comment', '*', 'tooo', 'faullts']);
+        expect(words).toEqual(['tripe', 'comment', '*/', 'tooo', 'faullts']);
         expect(InDoc.getIgnoreWordsFromDocument('Hello')).toEqual([]);
     });
 
