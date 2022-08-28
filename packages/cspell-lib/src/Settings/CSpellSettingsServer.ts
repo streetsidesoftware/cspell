@@ -325,8 +325,8 @@ function max<T>(a: T, b: undefined): T;
 function max<T>(a: undefined, b: T): T;
 function max<T>(a: T | undefined, b: T | undefined): T | undefined;
 function max<T>(a: T | undefined, b: T | undefined): T | undefined {
-    if (a === undefined) return b;
-    if (b === undefined) return a;
+    if (a === undefined || a === null) return b;
+    if (b === undefined || b === null) return a;
     return a > b ? a : b;
 }
 
