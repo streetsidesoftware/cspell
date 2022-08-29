@@ -1,5 +1,6 @@
 name: cspell-action
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -26,4 +27,4 @@ jobs:
 
       - run: pnpm run prepare-cspell-action
       - run: npx lerna run build --scope "@cspell/cspell-bundled-dicts" --include-dependencies
-      - uses: streetsidesoftware/cspell-action@b88ea4a807ea2d641cebf2a52f667038015ad711 # v1
+      - uses: streetsidesoftware/cspell-action@v2
