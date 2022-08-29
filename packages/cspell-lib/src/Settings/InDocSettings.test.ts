@@ -7,35 +7,35 @@ const oc = expect.objectContaining;
 const ac = expect.arrayContaining;
 const nac = expect.not.arrayContaining;
 
-// cSpell:ignore faullts straange
+// cSpell:ignore faullts straange tooo
 // cSpell:ignoreRegExp \w+s{4}\w+
 // cSpell:ignoreRegExp /\/\/\/.*/
 // cSpell:ignoreRegExp  weird
 const sampleCode = `
-    // cSpell:enableCompoundWords
-    // cSpell:disableCompoundWords
-    // cSpell: enableCOMPOUNDWords
+    // cSpell\x3aenableCompoundWords
+    // cSpell\x3adisableCompoundWords
+    // cSpell\x3a enableCOMPOUNDWords
     // cSpell:words whiteberry, redberry, lightbrown
-    // cSpell: ignoreRegExp /\\/\\/\\/.*/
-    // cSpell:ignoreRegexp w\\w+berry
-    // cSpell::ignoreRegExp  /
-    /* cSpell:ignoreRegExp \\w+s{4}\\w+ */
-    /* cSpell:ignoreRegExp /faullts[/]?/ */
+    // cSpell\x3a ignoreRegExp /\\/\\/\\/.*/
+    // cSpell\x3aignoreRegexp w\\w+berry
+    // cSpell\x3a:ignoreRegExp  /
+    /* cSpell\x3aignoreRegExp \\w+s{4}\\w+ */
+    /* cSpell\x3aignoreRegExp /faullts[/]?/ */
     const berries = ['whiteberry', 'redberry', 'blueberry'];
 
-    /* cSpell:ignore tripe, comment */
-    // cSpell:: ignoreWords tooo faullts
+    /* cSpell\x3aignore tripe, comment */
+    // cSpell\x3a: ignoreWords tooo faullts
     /// ignore triple comment, with misssspellings and faullts
     /// mooree prooobleems onn thisss line tooo with wordberry
     // misssspellings faullts
 
     // weirdberry can be straange.
-    // cSpell:language en-US
-    // cspell:local
-    // cspell:locale es-ES
-    // cspell:local en, nl
+    // cSpell\x3alanguage en-US
+    // cspell\x3alocal
+    // cspell\x3alocale es-ES
+    // cspell\x3alocal en, nl
 
-    // cspell:dictionaries lorem-ipsum
+    // cspell\x3adictionaries lorem-ipsum
     // LocalWords: one two three
     // LocalWords:four five six
     // localwords: seven eight nine
@@ -43,19 +43,19 @@ const sampleCode = `
 
 // cspell:ignore againxx
 const sampleText = `
-# cSpell:disableCompoundWords
-# cSpell:enableCOMPOUNDWords
+# cSpell\x3adisableCompoundWords
+# cSpell\x3aenableCOMPOUNDWords
 # happydays arehere againxx
 `;
 
 // cspell:ignore popoutlist
 const sampleTextWithIncompleteInDocSetting = `
-// spell:dictionaries php
-// spell:words const
-// cspell:
-// cspell:ignore popoutlist
+// spell\x3adictionaries php
+// spell\x3awords const
+// cspell\x3a
+// cspell\x3aignore popoutlist
 const x = imp.popoutlist;
-// cspell:ignore again
+// cspell\x3aignore again
 `;
 
 // cspell:disable
@@ -95,23 +95,23 @@ describe('Validate InDocSettings', () => {
     const USE_TEST = undefined;
 
     test.each`
-        test                                                         | text                                                         | expected
-        ${'Empty Doc'}                                               | ${''}                                                        | ${{ id: 'in-doc-settings' }}
-        ${'cSpell:enableCompoundWords'}                              | ${'cSpell:enableCompoundWords'}                              | ${oc({ allowCompoundWords: true })}
-        ${'cSpell:ENABLECompoundWords'}                              | ${'cSpell:ENABLECompoundWords'}                              | ${oc({ allowCompoundWords: true })}
-        ${'cSpell:disableCompoundWords'}                             | ${'cSpell:disableCompoundWords'}                             | ${oc({ allowCompoundWords: false })}
-        ${'cSpell:disableCompoundWORDS'}                             | ${'cSpell:disableCompoundWORDS'}                             | ${oc({ allowCompoundWords: false })}
-        ${'cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords'} | ${'cSpell:ENABLECompoundWords\ncSpell:disableCompoundWords'} | ${oc({ allowCompoundWords: false })}
-        ${'cSpell:disableCompoundWords\ncSpell:enableCompoundWords'} | ${'cSpell:disableCompoundWords\ncSpell:enableCompoundWords'} | ${oc({ allowCompoundWords: true })}
-        ${'sampleText'}                                              | ${sampleText}                                                | ${oc({ allowCompoundWords: true })}
-        ${'sampleCode'}                                              | ${sampleCode}                                                | ${oc({ allowCompoundWords: true })}
-        ${'cSpell:word apple'}                                       | ${USE_TEST}                                                  | ${oc({ words: ['apple'] })}
-        ${'/*cSpell:word apple*/'}                                   | ${USE_TEST}                                                  | ${oc({ words: ['apple*/'] })}
-        ${'<!--- cSpell:word apple -->'}                             | ${USE_TEST}                                                  | ${oc({ words: ['apple', '-->'] })}
-        ${'<!--- cSpell:ignoreWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ ignoreWords: ['apple', '-->'] })}
-        ${'<!--- cSpell:forbidWords apple -->'}                      | ${USE_TEST}                                                  | ${oc({ flagWords: ['apple', '-->'] })}
-        ${'<!--- cSpell:flag-words apple -->'}                       | ${USE_TEST}                                                  | ${oc({ flagWords: ['apple', '-->'] })}
-        ${'# cspell:ignore auto* *labeler'}                          | ${USE_TEST}                                                  | ${oc({ ignoreWords: ['auto*', '*labeler'] })}
+        test                                                               | text                                                               | expected
+        ${'Empty Doc'}                                                     | ${''}                                                              | ${{ id: 'in-doc-settings' }}
+        ${'cSpell\x3aenableCompoundWords'}                                 | ${'cSpell\x3aenableCompoundWords'}                                 | ${oc({ allowCompoundWords: true })}
+        ${'cSpell\x3aENABLECompoundWords'}                                 | ${'cSpell\x3aENABLECompoundWords'}                                 | ${oc({ allowCompoundWords: true })}
+        ${'cSpell\x3adisableCompoundWords'}                                | ${'cSpell\x3adisableCompoundWords'}                                | ${oc({ allowCompoundWords: false })}
+        ${'cSpell\x3adisableCompoundWORDS'}                                | ${'cSpell\x3adisableCompoundWORDS'}                                | ${oc({ allowCompoundWords: false })}
+        ${'cSpell\x3aENABLECompoundWords\ncSpell\x3adisableCompoundWords'} | ${'cSpell\x3aENABLECompoundWords\ncSpell\x3adisableCompoundWords'} | ${oc({ allowCompoundWords: false })}
+        ${'cSpell\x3adisableCompoundWords\ncSpell\x3aenableCompoundWords'} | ${'cSpell\x3adisableCompoundWords\ncSpell\x3aenableCompoundWords'} | ${oc({ allowCompoundWords: true })}
+        ${'sampleText'}                                                    | ${sampleText}                                                      | ${oc({ allowCompoundWords: true })}
+        ${'sampleCode'}                                                    | ${sampleCode}                                                      | ${oc({ allowCompoundWords: true })}
+        ${'cSpell\x3aword apple'}                                          | ${USE_TEST}                                                        | ${oc({ words: ['apple'] })}
+        ${'/*cSpell\x3aword apple*/'}                                      | ${USE_TEST}                                                        | ${oc({ words: ['apple*/'] })}
+        ${'<!--- cSpell\x3aword apple -->'}                                | ${USE_TEST}                                                        | ${oc({ words: ['apple', '-->'] })}
+        ${'<!--- cSpell\x3aignoreWords apple -->'}                         | ${USE_TEST}                                                        | ${oc({ ignoreWords: ['apple', '-->'] })}
+        ${'<!--- cSpell\x3aforbidWords apple -->'}                         | ${USE_TEST}                                                        | ${oc({ flagWords: ['apple', '-->'] })}
+        ${'<!--- cSpell\x3aflag-words apple -->'}                          | ${USE_TEST}                                                        | ${oc({ flagWords: ['apple', '-->'] })}
+        ${'# cspell\x3aignore auto* *labeler'}                             | ${USE_TEST}                                                        | ${oc({ ignoreWords: ['auto*', '*labeler'] })}
     `('detect compound words setting: $test', ({ test, text, expected }) => {
         expect(InDoc.getInDocumentSettings(text == USE_TEST ? test : text)).toEqual(expected);
         expect([...InDoc.validateInDocumentSettings(text, {})]).toEqual([]);
@@ -121,8 +121,8 @@ describe('Validate InDocSettings', () => {
         test                                      | text                                    | expected
         ${'Empty Doc'}                            | ${''}                                   | ${{ id: 'in-doc-settings' }}
         ${'sampleTextWithIncompleteInDocSetting'} | ${sampleTextWithIncompleteInDocSetting} | ${oc({ words: ['const'], ignoreWords: ['popoutlist', 'again'], dictionaries: ['php'] })}
-        ${'enableCaseSensitive'}                  | ${'// cspell:enableCaseSensitive'}      | ${oc({ caseSensitive: true })}
-        ${'disableCaseSensitive'}                 | ${'// cspell:disableCaseSensitive'}     | ${oc({ caseSensitive: false })}
+        ${'enableCaseSensitive'}                  | ${'// cspell\x3aenableCaseSensitive'}   | ${oc({ caseSensitive: true })}
+        ${'disableCaseSensitive'}                 | ${'// cspell\x3adisableCaseSensitive'}  | ${oc({ caseSensitive: false })}
     `('extract setting: $test', ({ text, expected }) => {
         expect(InDoc.getInDocumentSettings(text)).toEqual(expected);
     });
@@ -172,16 +172,20 @@ describe('Validate InDocSettings', () => {
     // cspell:ignore dictionar lokal
 
     test.each`
-        text                         | settings | expected
-        ${''}                        | ${{}}    | ${[]}
-        ${'cspell: */'}              | ${{}}    | ${[]}
-        ${'cspell: ignore x */'}     | ${{}}    | ${[]}
-        ${'cspell: word*/'}          | ${{}}    | ${[]}
-        ${'cspell:dictionar dutch'}  | ${{}}    | ${[oc({ range: [7, 16], suggestions: ac(['dictionary', 'dictionaries']), text: 'dictionar' })]}
-        ${'cspell::dictionar dutch'} | ${{}}    | ${[oc({ range: [8, 17], suggestions: ac(['dictionary', 'dictionaries']), text: 'dictionar' })]}
-        ${'cspell: ignored */'}      | ${{}}    | ${[oc({ range: [8, 15], suggestions: ac(['ignore', 'ignoreWord']), text: 'ignored' })]}
-        ${'cspell:lokal en'}         | ${{}}    | ${[oc({ suggestions: ac(['locale']) })]}
-        ${'cspell:lokal en'}         | ${{}}    | ${[oc({ suggestions: nac(['local']) })]}
+        text                                     | settings | expected
+        ${''}                                    | ${{}}    | ${[]}
+        ${'cspell\x3a */'}                       | ${{}}    | ${[]}
+        ${'cspell\x3a ignore x */'}              | ${{}}    | ${[]}
+        ${'cspell\x3a word*/'}                   | ${{}}    | ${[]}
+        ${'cspell\x3a word-*/'}                  | ${{}}    | ${[oc({ message: 'Unknown CSpell directive', text: 'word-' })]}
+        ${'spell-checker\x3a word-*/'}           | ${{}}    | ${[oc({ message: 'Unknown CSpell directive', text: 'word-' })]}
+        ${'spellchecker\x3a word-*/'}            | ${{}}    | ${[oc({ message: 'Unknown CSpell directive', text: 'word-' })]}
+        ${'spell\x3a ignore-next-occurrence */'} | ${{}}    | ${[oc({ message: 'Unknown CSpell directive', text: 'ignore-next-occurrence' })]}
+        ${'cspell\x3adictionar dutch'}           | ${{}}    | ${[oc({ range: [7, 16], suggestions: ac(['dictionary', 'dictionaries']), text: 'dictionar' })]}
+        ${'cspell\x3a:dictionar dutch'}          | ${{}}    | ${[oc({ range: [8, 17], suggestions: ac(['dictionary', 'dictionaries']), text: 'dictionar' })]}
+        ${'cspell\x3a ignored */'}               | ${{}}    | ${[oc({ range: [8, 15], suggestions: ac(['ignore', 'ignoreWord']), text: 'ignored' })]}
+        ${'cspell\x3alokal en'}                  | ${{}}    | ${[oc({ suggestions: ac(['locale']) })]}
+        ${'cspell\x3alokal en'}                  | ${{}}    | ${[oc({ suggestions: nac(['local']) })]}
     `('validateInDocumentSettings', ({ text, settings, expected }) => {
         const result = [...InDoc.validateInDocumentSettings(text, settings)];
         expect(result).toEqual(expected);

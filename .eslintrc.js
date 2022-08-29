@@ -3,6 +3,7 @@
  */
 const config = {
     root: true,
+    reportUnusedDisableDirectives: true,
     env: {
         es2020: true,
         node: true,

@@ -105,18 +105,18 @@ export function validateInDocumentSettings(docText: string, _settings: CSpellUse
 }
 
 const settingParsers: readonly (readonly [RegExp, (m: string) => CSpellUserSettings])[] = [
-    [/^(?:enable|disable)(?:allow)?CompoundWords\b/i, parseCompoundWords],
-    [/^(?:enable|disable)CaseSensitive\b/i, parseCaseSensitive],
+    [/^(?:enable|disable)(?:allow)?CompoundWords\b(?!-)/i, parseCompoundWords],
+    [/^(?:enable|disable)CaseSensitive\b(?!-)/i, parseCaseSensitive],
     [/^enable\b(?!-)/i, parseEnable],
     [/^disable(-line|-next(-line)?)?\b(?!-)/i, parseDisable],
-    [/^words?\b/i, parseWords],
-    [/^ignore(?:-?words?)?\b/i, parseIgnoreWords],
-    [/^(?:flag|forbid)(?:-?words?)?\b/i, parseFlagWords],
+    [/^words?\b(?!-)/i, parseWords],
+    [/^ignore(?:-?words?)?\b(?!-)/i, parseIgnoreWords],
+    [/^(?:flag|forbid)(?:-?words?)?\b(?!-)/i, parseFlagWords],
     [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
     [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp],
-    [/^locale?\b/i, parseLocale],
-    [/^language\s/i, parseLocale],
-    [/^dictionar(?:y|ies)\b/i, parseDictionaries], // cspell:disable-line
+    [/^locale?\b(?!-)/i, parseLocale],
+    [/^language\s\b(?!-)/i, parseLocale],
+    [/^dictionar(?:y|ies)\b(?!-)/i, parseDictionaries], // cspell:disable-line
     [/^LocalWords:/, (w) => parseWords(w.replace(/^LocalWords:?/gi, ' '))],
 ] as const;
 
