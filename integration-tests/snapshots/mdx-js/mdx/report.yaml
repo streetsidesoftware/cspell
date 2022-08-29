@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*.*"]
 Summary:
   files: 160
   filesWithIssues: 100
-  issues: 1328
+  issues: 1329
   errors: 0
 Errors: []
 
@@ -251,7 +251,8 @@ issues:
   - "docs/guides/mdx-on-demand.server.mdx:99:23      	runfunctionbody 	U   	run]: /packages/mdx/#runfunctionbody-options"
   - "docs/guides/syntax-highlighting.server.mdx:65:40    	cdnjs       	U   	get GitHub Dark from cdnjs:"
   - "docs/guides/syntax-highlighting.server.mdx:138:54   	thise       	U   	after the language (in thise case, `js`)."
-  - "docs/guides/syntax-highlighting.server.mdx:188:2    	onelement   	U   	`onelement` handler:"
+  - "docs/guides/syntax-highlighting.server.mdx:156:22   	unist       	U   	import {visit} from 'unist-util-visit'"
+  - "docs/guides/syntax-highlighting.server.mdx:190:2    	onelement   	U   	`onelement` handler:"
   - "docs/index.server.mdx:135:12    	Blazingly   	U   	* 🔥 **Blazingly blazing fast**: MDX"
   - "docs/migrating/v1.server.mdx:64:28      	usecases	U   	shouldn’t affect most usecases, however if you’re nesting"
   - "docs/migrating/v2.server.mdx:17:33      	jsloader            	U   	mdx-js/loader`](#mdx-jsloader)"
@@ -286,7 +287,6 @@ issues:
   - "docs/packages/mdx.server.md:796:10  	OMDX                    	U   	`Promise<OMDXModule>` — Promise that"
   - "docs/packages/mdx.server.md:944:33  	mdxjs                   	U   	micromark-extension-mdxjs`][micromark-extension"
   - "docs/packages/mdx.server.md:970:3   	rehypejs                	U   	[`rehypejs/rehype-highlight`][rehype"
-  - "docs/packages/mdx.server.md:976:69  	unist                   	U   	bit more like other unist ASTs)."
   - "docs/packages/mdx.server.md:985:29  	astring                 	U   	final step is done by [astring][], a"
   - "docs/packages/mdx.server.md:1071:18 	optionsoutputformat     	U   	[outputformat]: #optionsoutputformat"
   - "docs/packages/mdx.server.md:1073:13 	optionsbaseurl          	U   	[baseurl]: #optionsbaseurl"
@@ -307,9 +307,9 @@ issues:
   - "packages/mdx/lib/evaluate.js:22:10      	compiletime 	U   	const {compiletime, runtime} = resolveEvaluateOp"
   - "packages/mdx/lib/plugin/recma-document.js:45:21     	Estree      	U   	import {positionFromEstree} from 'unist-util-position"
   - "packages/mdx/lib/plugin/recma-document.js:452:17    	declarators 	U   	const declarators = node.specifiers"
-  - "packages/mdx/test/compile.js:1022:31    	setext      	U   	should support headings (setext) (`=` -> `<h1>`)'"
-  - "packages/mdx/test/compile.js:1067:99    	describedby 	U   	footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
-  - "packages/mdx/test/compile.js:1448:21    	rexporting  	U   	'should support rexporting something as a default"
+  - "packages/mdx/test/compile.js:1017:31    	setext      	U   	should support headings (setext) (`=` -> `<h1>`)'"
+  - "packages/mdx/test/compile.js:1062:99    	describedby 	U   	footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
+  - "packages/mdx/test/compile.js:1443:21    	rexporting  	U   	'should support rexporting something as a default"
   - "packages/register/lib/index.cjs:4:7     	deasync 	U   	const deasync = require('deasync'"
   - "packages/remark-mdx/index.js:3:59       	Micromark   	U   	extension-mdxjs').Options} MicromarkOptions"
   - "packages/remark-mdx/test/index.js:317:15    	onvisit 	U   	visit(tree, onvisit)"
