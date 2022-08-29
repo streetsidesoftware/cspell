@@ -3,9 +3,9 @@ Repository: ktaranov/sqlserver-kit
 Url: https://github.com/ktaranov/sqlserver-kit.git
 Args: ["**","--exclude=**/Backup/**"]
 Summary:
-  files: 508
-  filesWithIssues: 484
-  issues: 17287
+  files: 509
+  filesWithIssues: 485
+  issues: 17291
   errors: 0
 Errors: []
 
@@ -1928,6 +1928,7 @@ issues:
   - "Scripts/CheckSpectreMeltdownStatus.sql:234:17   	sysjobsteps     	U   	--FROM msdb.dbo.sysjobsteps AS s"
   - "Scripts/Code_Reuse_With_Dynamic_SQL_and_Temp_Procedures_Example.sql:5:35    	getted  	U   	PRINT variables values getted from temporary stored"
   - "Scripts/Code_Reuse_With_Dynamic_SQL_and_Temp_Procedures_Example.sql:33:10   	enddate 	U   	, @enddate DATETIME2(7)"
+  - "Scripts/Compare_Tables_With_Matching_Columns.sql:104:7      	CREATEDBY   	U   	, 'CREATEDBY'"
   - "Scripts/Compress_Tables_And_Indexes.sql:53:26   	explicity   	U   	--hasn't explicity configured the value"
   - "Scripts/Configure_SQL_Agent_Alerts.sql:24:35    	SQLDBA          	U   	OperatorName sysname = N'SQLDBAGroup';"
   - "Scripts/Configure_SQL_Agent_Alerts.sql:30:38    	sysoperators    	U   	SELECT * FROM msdb.dbo.sysoperators WHERE name = @OperatorName"
@@ -2895,16 +2896,16 @@ issues:
   - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:336:105 	autocommit          	U   	transactions] over [autocommit]."
   - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:344:216 	realise             	U   	restore one database, then realise you don’t have log backups"
   - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:346:40  	trafic              	U   	tables to reduce network trafic, decrease query complexity"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:442:83  	DFLT                	U   	table. The [`ANSI_NULL_DFLT_ON`](https://docs.microsoft"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:474:122 	statemnets          	U   	locking behavior of this statemnets becomes more restrictive"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:481:71  	perfomance          	U   	EXISTS` and `EXCEPT` for perfomance reasons and code readanlity"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:481:99  	readanlity          	U   	perfomance reasons and code readanlity.More details [here]"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:491:13  	nvcmax              	U   	DECLARE @nvcmaxVariable nvarchar(max"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:499:19  	Varchar             	U   	DECLARE @myBadVarcharVariable varchar;"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:505:20  	Varchare            	U   	DECLARE @myGoodVarchareVariable varchar(50"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:690:30  	parameterizing      	U   	sp_executesql`] can parameterizing your dynamic statement"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:775:60  	Holywell            	U   	sqlstyle.guide/) (by Simon Holywell)"
-  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:791:139 	Behara              	U   	developers/) (by Samir Behara)"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:441:83  	DFLT                	U   	table. The [`ANSI_NULL_DFLT_ON`](https://docs.microsoft"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:473:122 	statemnets          	U   	locking behavior of this statemnets becomes more restrictive"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:480:71  	perfomance          	U   	EXISTS` and `EXCEPT` for perfomance reasons and code readanlity"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:480:99  	readanlity          	U   	perfomance reasons and code readanlity.More details [here]"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:490:13  	nvcmax              	U   	DECLARE @nvcmaxVariable nvarchar(max"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:498:19  	Varchar             	U   	DECLARE @myBadVarcharVariable varchar;"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:504:20  	Varchare            	U   	DECLARE @myGoodVarchareVariable varchar(50"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:689:30  	parameterizing      	U   	sp_executesql`] can parameterizing your dynamic statement"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:774:60  	Holywell            	U   	sqlstyle.guide/) (by Simon Holywell)"
+  - "SQL%20Server%20Name%20Convention%20and%20T-SQL%20Programming%20Style.md:790:139 	Behara              	U   	developers/) (by Samir Behara)"
   - "SQL%20Server%20People.md:6:87       	loriedwards     	U   	Tucson | [@loriedwards] | NULL"
   - "SQL%20Server%20People.md:7:8        	Ballantyne      	U   	| Dave Ballantyne | [Dave Ballantyne"
   - "SQL%20Server%20People.md:7:87       	davebally       	U   	England | [@davebally] | NULL"
