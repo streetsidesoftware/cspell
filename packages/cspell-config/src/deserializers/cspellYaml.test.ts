@@ -28,7 +28,7 @@ words:
         ${'cspell.yaml'} | ${'"version'} | ${'Missing closing'}
         ${'cspell.yaml'} | ${'[]'}       | ${'Unable to parse cspell.yaml'}
     `('fail $uri', ({ uri, content, expected }) => {
-        expect(() => deserializerCSpellYaml(uri, content)).toThrowError(expected);
+        expect(() => deserializerCSpellYaml(uri, content)).toThrow(expected);
     });
 
     test.each`

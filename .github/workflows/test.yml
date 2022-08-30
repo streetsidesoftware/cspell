@@ -81,6 +81,10 @@ jobs:
       - name: verify the check command
         run: npm run test-bin-check
 
+      - name: verify cspell-eslint-plugin
+        run: npm run test-eslint-plugin
+        if: ${{  matrix.node-version > '14' }}
+
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
 
@@ -121,6 +125,9 @@ jobs:
 
       - name: verify the check command
         run: npm run test-bin-check
+
+      - name: verify cspell-eslint-plugin
+        run: npm run test-eslint-plugin
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code

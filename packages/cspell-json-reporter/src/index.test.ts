@@ -26,7 +26,7 @@ describe('getReporter', () => {
     it('saves json to file', async () => {
         const reporter = getReporter({ outFile: 'out.json' });
         await runReporter(reporter);
-        expect(mockWriteFile).toBeCalledTimes(1);
+        expect(mockWriteFile).toHaveBeenCalledTimes(1);
 
         expect(mockWriteFile.mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
         expect(mockWriteFile.mock.calls[0][1]).toMatchSnapshot();
@@ -35,7 +35,7 @@ describe('getReporter', () => {
     it('saves additional data', async () => {
         const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
         await runReporter(reporter);
-        expect(fs.writeFile).toBeCalledTimes(1);
+        expect(fs.writeFile).toHaveBeenCalledTimes(1);
         expect(mockWriteFile.mock.calls[0][0]).toEqual(path.join(process.cwd(), 'out.json'));
         expect(mockWriteFile.mock.calls[0][1]).toMatchSnapshot();
     });
