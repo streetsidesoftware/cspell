@@ -304,7 +304,7 @@ describe('Validate Glob resolution', () => {
         ${{ reporters: [{}] }}              | ${r('cspell.json')} | ${'Invalid Reporter'}
         ${{ reporters: [[{}]] }}            | ${r('cspell.json')} | ${'Invalid Reporter'}
     `('normalizeSettings with Error $settings', ({ settings, file, expected }) => {
-        expect(() => normalizeSettings(settings, file, {})).toThrowError(expected);
+        expect(() => normalizeSettings(settings, file, {})).toThrow(expected);
     });
 });
 
@@ -518,7 +518,7 @@ describe('Validate search/load config files', () => {
     test('validateRawConfigExports', () => {
         const d = { default: {}, name: '' };
         const c: CSpellUserSettings = d;
-        expect(() => validateRawConfigExports(c, { filename: 'filename' })).toThrowError(
+        expect(() => validateRawConfigExports(c, { filename: 'filename' })).toThrow(
             'Module `export default` is not supported.\n  Use `module.exports =` instead.\n  File: "filename"'
         );
     });

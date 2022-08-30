@@ -34,7 +34,7 @@ describe('mergeReporters', () => {
     `('loadReporters fail $reporter', ({ reporter, expected }) => {
         const reporters: ReporterSettings[] = [reporter];
         const fn = () => loadReporters({ reporters });
-        expect(fn).toThrowError(expected);
+        expect(fn).toThrow(expected);
     });
 });
 

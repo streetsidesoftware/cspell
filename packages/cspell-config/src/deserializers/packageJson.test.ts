@@ -22,7 +22,7 @@ describe('packageJson', () => {
         ${'package.json'} | ${'[]'}             | ${'Unable to parse package.json'}
         ${'package.json'} | ${'{"cspell": []}'} | ${'Unable to parse package.json'}
     `('fail $uri', ({ uri, content, expected }) => {
-        expect(() => deserializerPackageJson(uri, content)).toThrowError(expected);
+        expect(() => deserializerPackageJson(uri, content)).toThrow(expected);
     });
 
     test.each`
