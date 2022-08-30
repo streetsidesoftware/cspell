@@ -1,6 +1,6 @@
 'use strict';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-require('./.pnp.js').setup();
+require('./.pnp.cjs').setup();
 
 /** @type { import("@cspell/cspell-types").CSpellUserSettings } */
 const cspell = {
