@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELO
 Summary:
   files: 7683
   filesWithIssues: 5886
-  issues: 58033
+  issues: 57991
   errors: 0
 Errors: []
 
@@ -189,7 +189,6 @@ issues:
   - "doc/cpp-style-guide.md:54:11    	grpcpp  	U   	#include <grpcpp/blorg.h>"
   - "doc/cpp-style-guide.md:54:18    	blorg   	U   	#include <grpcpp/blorg.h>"
   - "doc/cpp-style-guide.md:58:11    	unistd  	U   	#include <unistd.h>"
-  - "doc/packaging.md:35:1       	mkdir           	U   	mkdir -p $HOME/google-cloud"
   - "doc/packaging.md:54:24      	DBUILD          	U   	cmake -H. -Bcmake-out -DBUILD_TESTING=OFF -DGOOGLE"
   - "doc/packaging.md:68:68      	msbuild         	U   	generator from `make` (or msbuild on"
   - "doc/packaging.md:70:16      	multicore       	U   	advantage of multicore machines. Be aware that"
@@ -256,7 +255,6 @@ issues:
   - "external/googleapis/protolists/monitoring.list:17:56    	xychart     	U   	monitoring/dashboard/v1:xychart.proto"
   - "external/googleapis/protolists/scheduler.list:1:51      	cloudscheduler  	U   	google/cloud/scheduler/v1:cloudscheduler.proto"
   - "external/googleapis/protolists/securitycenter.list:9:56     	exfiltration	U   	cloud/securitycenter/v1:exfiltration.proto"
-  - "external/googleapis/protolists/securitycenter.list:16:56    	kubernetes  	U   	cloud/securitycenter/v1:kubernetes.proto"
   - "external/googleapis/protolists/servicemanagement.list:2:57      	servicemanager  	U   	servicemanagement/v1:servicemanager.proto"
   - "external/googleapis/protolists/shell.list:1:47      	cloudshell  	U   	google/cloud/shell/v1:cloudshell.proto"
   - "external/googleapis/protolists/tasks.list:1:47      	cloudtasks  	U   	google/cloud/tasks/v2:cloudtasks.proto"
@@ -333,7 +331,6 @@ issues:
   - "google/cloud/accessapproval/README.md:52:10     	cout        	U   	std::cout << a->DebugString()"
   - "google/cloud/accesscontextmanager/access_context_manager_client.h:19:39     	ACCESSCONTEXTMANAGER	U   	CLOUD_CPP_GOOGLE_CLOUD_ACCESSCONTEXTMANAGER_ACCESS_CONTEXT_MANAGER"
   - "google/cloud/apigeeconnect/connection_client.h:19:39    	APIGEECONNECT   	U   	CLOUD_CPP_GOOGLE_CLOUD_APIGEECONNECT_CONNECTION_CLIENT_H"
-  - "google/cloud/apigeeconnect/doc/main.dox:10:12   	Kubernetes  	U   	[supported Kubernetes platforms](https://cloud"
   - "google/cloud/apikeys/api_keys_client.h:19:39    	APIKEYS 	U   	CLOUD_CPP_GOOGLE_CLOUD_APIKEYS_API_KEYS_CLIENT_H"
   - "google/cloud/appengine/applications_client.h:19:39      	APPENGINE   	U   	CLOUD_CPP_GOOGLE_CLOUD_APPENGINE_APPLICATIONS_CLIENT"
   - "google/cloud/appengine/applications_client.h:189:127    	Fservice    	U   	name\"%3A\"projects%2F-%2FserviceAccounts%2Funique_id"
