@@ -33,7 +33,6 @@ describe('Validate filter', () => {
     `(
         'filter async',
         async ({ values, expected }: { values: (Primitives | PromisePrim)[]; expected: Primitives[] }) => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const isTruthy = async (v: Primitives) => !!(await v);
             const aValues = pipeAsync(values, opFilterAsync<Primitives | PromisePrim>(isTruthy));
             const result = await toArray(aValues);

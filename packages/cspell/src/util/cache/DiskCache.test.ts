@@ -45,8 +45,8 @@ describe('DiskCache', () => {
 
     describe('constructor', () => {
         it('creates file-entry-cache in specified location', () => {
-            expect(mockCreateFileEntryCache).toBeCalledTimes(1);
-            expect(mockCreateFileEntryCache).toBeCalledWith(path.resolve('.foobar'), false);
+            expect(mockCreateFileEntryCache).toHaveBeenCalledTimes(1);
+            expect(mockCreateFileEntryCache).toHaveBeenCalledWith(path.resolve('.foobar'), false);
         });
     });
 
@@ -149,7 +149,7 @@ describe('DiskCache', () => {
             };
             diskCache.setCachedLintResults({ ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 }, []);
 
-            expect(fileEntryCache.getFileDescriptor).toBeCalledWith('some-file');
+            expect(fileEntryCache.getFileDescriptor).toHaveBeenCalledWith('some-file');
             expect(descriptor.meta.data.r).toEqual(result);
         });
     });
@@ -157,7 +157,7 @@ describe('DiskCache', () => {
     describe('reconcile', () => {
         it('call cache.reconcile()', () => {
             diskCache.reconcile();
-            expect(fileEntryCache.reconcile).toBeCalledTimes(1);
+            expect(fileEntryCache.reconcile).toHaveBeenCalledTimes(1);
         });
     });
 

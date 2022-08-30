@@ -132,7 +132,6 @@ function parseNumber(s: string | undefined): number | undefined {
     return isNaN(n) ? undefined : n;
 }
 
-// eslint-disable-next-line no-unused-vars
 type ActionFn = (words: Sequence<string>, dst: string) => Promise<unknown>;
 
 async function processAction(src: string[], options: CompileCommonOptions): Promise<void> {

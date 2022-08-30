@@ -176,7 +176,7 @@ describe('Validate cli', () => {
             await expect(result).resolves.toBeUndefined();
         } else {
             // eslint-disable-next-line jest/no-conditional-expect
-            await expect(result).rejects.toThrowError(errorCheck);
+            await expect(result).rejects.toThrow(errorCheck);
         }
         // eslint-disable-next-line jest/no-conditional-expect
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
@@ -208,7 +208,7 @@ describe('Validate cli', () => {
             await expect(result).resolves.toBeUndefined();
         } else {
             // eslint-disable-next-line jest/no-conditional-expect
-            await expect(result).rejects.toThrowError(errorCheck);
+            await expect(result).rejects.toThrow(errorCheck);
         }
         // eslint-disable-next-line jest/no-conditional-expect
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
@@ -254,7 +254,7 @@ describe('Validate cli', () => {
             await expect(result).resolves.toBeUndefined();
         } else {
             // eslint-disable-next-line jest/no-conditional-expect
-            await expect(result).rejects.toThrowError(errorCheck);
+            await expect(result).rejects.toThrow(errorCheck);
         }
         // eslint-disable-next-line jest/no-conditional-expect
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
@@ -295,7 +295,7 @@ describe('Validate cli', () => {
             await expect(result).resolves.toBeUndefined();
         } else {
             // eslint-disable-next-line jest/no-conditional-expect
-            await expect(result).rejects.toThrowError(errorCheck);
+            await expect(result).rejects.toThrow(errorCheck);
         }
         expect(captureStdout.text).toMatchSnapshot();
         expect(log.mock.calls.join('\n')).toMatchSnapshot();

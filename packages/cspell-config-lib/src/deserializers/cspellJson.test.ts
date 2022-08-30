@@ -33,7 +33,7 @@ describe('cspellJson', () => {
         ${'cspell.json'} | ${''}   | ${'Unexpected end of JSON input'}
         ${'cspell.json'} | ${'[]'} | ${'Unable to parse cspell.json'}
     `('fail $uri', ({ uri, content, expected }) => {
-        expect(() => deserializerCSpellJson({ uri, content }, next)).toThrowError(expected);
+        expect(() => deserializerCSpellJson({ uri, content }, next)).toThrow(expected);
     });
 
     test.each`
