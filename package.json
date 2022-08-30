@@ -45,6 +45,7 @@
     "test-bin-spell-cache-content": "node ./bin.js -c cspellrc.json --cache --cache-strategy content --cache-location temp/.cspellcache-content",
     "test-bin-spell-cache-metadata": "node ./bin.js -c cspellrc.json --cache --cache-strategy metadata temp/.cspellcache-meta",
     "test-bin-trace": "node ./bin.js trace test",
+    "test-eslint-plugin": "lerna run test-eslint-plugin",
     "test-integrations": "cd ./integration-tests && npm run integration-tests",
     "test-schema": "ajv -s ./cspell.schema.json -d cspell.json -c ./packages/cspell-types/ajv.config.js",
     "update-packages": "npm run update-packages-lerna",
