@@ -388,7 +388,7 @@ describe('Validate GlobMatcher', () => {
                 patterns = resolvePattern(patterns, pathInstance);
                 // console.log(`root: ${root}, filename: ${filename}, pattern: ${JSON.stringify(patterns)}`);
                 const matcher = new GlobMatcher(patterns, { mode, root, nodePath: pathInstance });
-                // eslint-disable-next-line jest/no-standalone-expect
+
                 expect(matcher.match(filename)).toEqual(expected);
             }
         );

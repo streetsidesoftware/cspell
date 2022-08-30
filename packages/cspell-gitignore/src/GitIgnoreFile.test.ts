@@ -53,7 +53,7 @@ describe('GitIgnoreHierarchy', () => {
                 new GitIgnoreFile(new GlobMatcher('', __dirname), ''),
                 new GitIgnoreFile(new GlobMatcher('', path.join(__dirname, '..')), ''),
             ])
-        ).toThrowError('Hierarchy violation - files are not nested');
+        ).toThrow('Hierarchy violation - files are not nested');
     });
 
     test.each`

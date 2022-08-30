@@ -1,7 +1,6 @@
 import { AnyIterable, PaFn, PipeAsyncTx, PipeSyncTx, PsFn } from './internalTypes';
 import { toAsyncIterable } from './helpers';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 // type Rest = [...any];
 
 export function pipeAsync<T>(i: AnyIterable<T>): AsyncIterable<T>; // prettier-ignore

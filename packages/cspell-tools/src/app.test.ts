@@ -200,7 +200,7 @@ describe('Validate the application', () => {
         const commander = getCommander();
         const mock = jest.fn();
         commander.on('--help', mock);
-        await expect(app.run(commander, argv())).rejects.toThrowError(Commander.CommanderError);
+        await expect(app.run(commander, argv())).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
     });
 
@@ -208,7 +208,7 @@ describe('Validate the application', () => {
         const commander = getCommander();
         const mock = jest.fn();
         commander.on('--help', mock);
-        await expect(app.run(commander, argv('--help'))).rejects.toThrowError(Commander.CommanderError);
+        await expect(app.run(commander, argv('--help'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
     });
 
@@ -216,7 +216,7 @@ describe('Validate the application', () => {
         const commander = getCommander();
         const mock = jest.fn();
         commander.on('option:version', mock);
-        await expect(app.run(commander, argv('-V'))).rejects.toThrowError(Commander.CommanderError);
+        await expect(app.run(commander, argv('-V'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
     });
 });
