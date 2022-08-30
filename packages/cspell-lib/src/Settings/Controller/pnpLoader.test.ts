@@ -8,11 +8,11 @@ const rootCspellLib = path.resolve(path.join(__dirname, '../../..'));
 const root = path.resolve(rootCspellLib, '../..');
 const uriTestPackages = URI.file(path.join(root, 'test-packages'));
 const uriDirectory = URI.file(__dirname);
-const uriYarn2TestMed = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-med');
-const uriYarn2TestSci = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn2-sci');
+const uriYarn2TestMed = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn3-med');
+const uriYarn2TestSci = UriUtils.joinPath(uriTestPackages, 'yarn2/test-yarn3-sci');
 const uriBadPnp = UriUtils.joinPath(uriDirectory, '../../../samples/bad-pnp');
-const uriYarn2TestMedPnp = UriUtils.joinPath(uriYarn2TestMed, '.pnp.js');
-const uriYarn2TestSciPnp = UriUtils.joinPath(uriYarn2TestSci, '.pnp.js');
+const uriYarn2TestMedPnp = UriUtils.joinPath(uriYarn2TestMed, '.pnp.cjs');
+const uriYarn2TestSciPnp = UriUtils.joinPath(uriYarn2TestSci, '.pnp.cjs');
 
 describe('Validate PnPLoader', () => {
     test('pnpLoader bad pnp', async () => {
