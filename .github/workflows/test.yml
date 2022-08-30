@@ -83,7 +83,7 @@ jobs:
 
       - name: verify cspell-eslint-plugin
         run: npm run test-eslint-plugin
-        if: ${{ runner.os > '14' }}
+        if: ${{  matrix.node-version > '14' }}
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --compact-summary --exit-code
