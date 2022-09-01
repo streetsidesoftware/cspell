@@ -364,4 +364,7 @@ const rawSampleSettings: CSpellUserSettings = {
 };
 
 const sampleSettingsFilename = __filename;
-const sampleSettings = __configLoader_testing__.normalizeSettings(rawSampleSettings, sampleSettingsFilename, {});
+
+const sampleSettings = __configLoader_testing__
+    .getDefaultConfigLoaderInternal()
+    ._normalizeSettings(rawSampleSettings, sampleSettingsFilename, {});

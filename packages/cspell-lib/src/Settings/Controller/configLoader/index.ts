@@ -4,7 +4,6 @@ export {
     createConfigLoader,
     defaultConfigFilenames,
     defaultFileName,
-    extractImportErrors,
     getCachedFileSize,
     getGlobalSettings,
     loadConfig,
@@ -18,4 +17,5 @@ export {
     sectionCSpell,
     __testing__,
 } from './configLoader';
+export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors';
 export { readSettings } from './readSettings';

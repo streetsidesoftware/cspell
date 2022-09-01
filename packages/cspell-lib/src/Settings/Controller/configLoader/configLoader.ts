@@ -1,12 +1,8 @@
 import type {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,
-    Glob,
-    GlobDef,
     ImportFileRef,
-    LanguageSetting,
     PnPSettings as PnPSettingsStrict,
-    ReporterSettings,
     Source,
 } from '@cspell/cspell-types';
 import * as json from 'comment-json';
@@ -18,18 +14,26 @@ import { createCSpellSettingsInternal as csi, CSpellSettingsInternal } from '../
 import { logError, logWarning } from '../../../util/logger';
 import { resolveFile } from '../../../util/resolveFile';
 import { OptionalOrUndefined } from '../../../util/types';
-import * as util from '../../../util/util';
-import { mergeSettings } from '../../CSpellSettingsServer';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
     currentSettingsFileVersion,
     ENV_CSPELL_GLOB_ROOT,
 } from '../../constants';
-import { mapDictDefsToInternal } from '../../DictionarySettings';
+import { mergeSettings } from '../../CSpellSettingsServer';
 import { getRawGlobalSettings } from '../../GlobalSettings';
 import { ImportError } from '../ImportError';
 import { LoaderResult, pnpLoader } from '../pnpLoader';
+import {
+    normalizeCacheSettings,
+    normalizeDictionaryDefs,
+    normalizeGitignoreRoot,
+    normalizeLanguageSettings,
+    normalizeOverrides,
+    normalizeRawConfig,
+    normalizeReporters,
+    normalizeSettingsGlobs,
+} from './normalizeRawSettings';
 import { readSettings } from './readSettings';
 
 export type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
@@ -39,7 +43,7 @@ type PnPSettings = OptionalOrUndefined<PnPSettingsStrict>;
 
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = [configSettingsFileVersion0_2];
 
-const setOfSupportedConfigVersions = new Set<string>(supportedCSpellConfigVersions);
+const setOfSupportedConfigVersions = Object.freeze(new Set<string>(supportedCSpellConfigVersions));
 
 export const sectionCSpell = 'cSpell';
 
@@ -53,7 +57,7 @@ export const defaultFileName = 'cspell.json';
  * - To support `cspell.config.js` in a VS Code environment, have a `cspell.json` import
  *   the `cspell.config.js`.
  */
-const searchPlaces = [
+const searchPlaces = Object.freeze([
     'package.json',
     // Original locations
     '.cspell.json',
@@ -77,10 +81,10 @@ const searchPlaces = [
     // Dynamic config is looked for last
     'cspell.config.js',
     'cspell.config.cjs',
-];
+]);
 
 const cspellCosmiconfig: CosmicOptions & CosmicOptionsSync = {
-    searchPlaces,
+    searchPlaces: searchPlaces.concat(),
     loaders: {
         '.json': parseJson,
         '.jsonc': parseJson,
@@ -93,8 +97,6 @@ function parseJson(_filename: string, content: string) {
 
 export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
 
-let globalSettings: CSpellSettingsI | undefined;
-
 const defaultSettings: CSpellSettingsI = csi({
     id: 'default',
     name: 'default',
@@ -106,7 +108,16 @@ const defaultPnPSettings: PnPSettings = {};
 let defaultConfigLoader: ConfigLoaderInternal | undefined = undefined;
 
 export class ConfigLoader {
+    /**
+     * Use `createConfigLoader`
+     * @param cspellIO - CSpellIO interface for reading files.
+     */
     protected constructor(readonly cspellIO: CSpellIO) {}
+
+    protected cachedFiles = new Map<string, CSpellSettingsI>();
+    protected cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
+    protected cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);
+    protected globalSettings: CSpellSettingsI | undefined;
 
     /**
      * Read / import a cspell configuration file.
@@ -138,12 +149,27 @@ export class ConfigLoader {
         const relativeTo = typeof relativeToOrDefault === 'string' ? relativeToOrDefault : process.cwd();
         defaultValue = defaultValue || (typeof relativeToOrDefault !== 'string' ? relativeToOrDefault : undefined);
         const ref = resolveFilename(filename, relativeTo);
-        return importSettings(ref, defaultValue, defaultValue || defaultPnPSettings);
+        return this.importSettings(ref, defaultValue, defaultValue || defaultPnPSettings);
     }
 
-    protected cachedFiles = new Map<string, CSpellSettingsI>();
-    protected cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
-    protected cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);
+    public getGlobalSettings(): CSpellSettingsI {
+        if (!this.globalSettings) {
+            const globalConf = getRawGlobalSettings();
+
+            this.globalSettings = {
+                id: 'global_config',
+                ...this.normalizeSettings(globalConf || {}, './global_config', {}),
+            };
+        }
+        return this.globalSettings;
+    }
+
+    public clearCachedSettingsFiles(): void {
+        this.globalSettings = undefined;
+        this.cachedFiles.clear();
+        this.cspellConfigExplorer.clearCaches();
+        this.cspellConfigExplorerSync.clearCaches();
+    }
 
     /**
      * Read a config file and inject the fileRef.
@@ -173,6 +199,105 @@ export class ConfigLoader {
         s.__importRef = fileRef;
         return s;
     }
+
+    protected importSettings(
+        fileRef: ImportFileRef,
+        defaultValues: CSpellSettingsWST | undefined,
+        pnpSettings: PnPSettings
+    ): CSpellSettingsI {
+        defaultValues = defaultValues ?? defaultSettings;
+        const { filename } = fileRef;
+        const importRef: ImportFileRef = { ...fileRef };
+        const cached = this.cachedFiles.get(filename);
+        if (cached) {
+            const cachedImportRef = cached.__importRef || importRef;
+            cachedImportRef.referencedBy = mergeSourceList(cachedImportRef.referencedBy || [], importRef.referencedBy);
+            cached.__importRef = cachedImportRef;
+            return cached;
+        }
+        const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
+        const name = id;
+        const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
+        this.cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
+        const settings: CSpellSettingsWST = { ...defaultValues, id, name, ...this.readConfig(importRef) };
+
+        Object.assign(finalizeSettings, this.normalizeSettings(settings, filename, pnpSettings));
+        const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
+        finalizeSettings.source = { ...finalizeSrc, filename };
+        this.cachedFiles.set(filename, finalizeSettings);
+        return finalizeSettings;
+    }
+
+    /**
+     * normalizeSettings handles correcting all relative paths, anchoring globs, and importing other config files.
+     * @param rawSettings - raw configuration settings
+     * @param pathToSettingsFile - path to the source file of the configuration settings.
+     */
+    protected normalizeSettings(
+        rawSettings: CSpellSettingsWST,
+        pathToSettingsFile: string,
+        pnpSettings: PnPSettings
+    ): CSpellSettingsI {
+        const id =
+            rawSettings.id ||
+            [path.basename(path.dirname(pathToSettingsFile)), path.basename(pathToSettingsFile)].join('/');
+        const name = rawSettings.name || id;
+
+        // Try to load any .pnp files before reading dictionaries or other config files.
+        const { usePnP = pnpSettings.usePnP, pnpFiles = pnpSettings.pnpFiles } = rawSettings;
+        const pnpSettingsToUse: PnPSettings = {
+            usePnP,
+            pnpFiles,
+        };
+        const pathToSettingsDir = path.dirname(pathToSettingsFile);
+        loadPnPSync(pnpSettingsToUse, URI.file(pathToSettingsDir));
+
+        // Fix up dictionaryDefinitions
+        const settings = {
+            version: defaultSettings.version,
+            ...rawSettings,
+            id,
+            name,
+            globRoot: resolveGlobRoot(rawSettings, pathToSettingsFile),
+            languageSettings: normalizeLanguageSettings(rawSettings.languageSettings),
+        };
+        const pathToSettings = path.dirname(pathToSettingsFile);
+        const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, pathToSettingsFile);
+        const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
+        const normalizedOverrides = normalizeOverrides(settings, pathToSettingsFile);
+        const normalizedReporters = normalizeReporters(settings, pathToSettingsFile);
+        const normalizedGitignoreRoot = normalizeGitignoreRoot(settings, pathToSettingsFile);
+        const normalizedCacheSettings = normalizeCacheSettings(settings, pathToSettingsDir);
+
+        const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
+        const source: Source = settings.source || {
+            name: settings.name,
+            filename: pathToSettingsFile,
+        };
+
+        const fileSettings: CSpellSettingsI = csi({
+            ...settings,
+            source,
+            ...normalizedDictionaryDefs,
+            ...normalizedSettingsGlobs,
+            ...normalizedOverrides,
+            ...normalizedReporters,
+            ...normalizedGitignoreRoot,
+            ...normalizedCacheSettings,
+        });
+        if (!imports.length) {
+            return fileSettings;
+        }
+        const importedSettings: CSpellSettingsI = imports
+            .map((name) => resolveFilename(name, pathToSettings))
+            .map((ref) => ((ref.referencedBy = [source]), ref))
+            .map((ref) => this.importSettings(ref, undefined, pnpSettingsToUse))
+            .reduce((a, b) => mergeSettings(a, b));
+        const finalizeSettings = mergeSettings(importedSettings, fileSettings);
+        finalizeSettings.name = settings.name || finalizeSettings.name || '';
+        finalizeSettings.id = settings.id || finalizeSettings.id || '';
+        return finalizeSettings;
+    }
 }
 
 class ConfigLoaderInternal extends ConfigLoader {
@@ -192,78 +317,8 @@ class ConfigLoaderInternal extends ConfigLoader {
         return this.cspellConfigExplorerSync;
     }
 
-    readonly _readConfig = this.readConfig;
-}
-
-/**
- * normalizeSettings handles correcting all relative paths, anchoring globs, and importing other config files.
- * @param rawSettings - raw configuration settings
- * @param pathToSettingsFile - path to the source file of the configuration settings.
- */
-function normalizeSettings(
-    rawSettings: CSpellSettingsWST,
-    pathToSettingsFile: string,
-    pnpSettings: PnPSettings
-): CSpellSettingsI {
-    const id =
-        rawSettings.id ||
-        [path.basename(path.dirname(pathToSettingsFile)), path.basename(pathToSettingsFile)].join('/');
-    const name = rawSettings.name || id;
-
-    // Try to load any .pnp files before reading dictionaries or other config files.
-    const { usePnP = pnpSettings.usePnP, pnpFiles = pnpSettings.pnpFiles } = rawSettings;
-    const pnpSettingsToUse: PnPSettings = {
-        usePnP,
-        pnpFiles,
-    };
-    const pathToSettingsDir = path.dirname(pathToSettingsFile);
-    loadPnPSync(pnpSettingsToUse, URI.file(pathToSettingsDir));
-
-    // Fix up dictionaryDefinitions
-    const settings = {
-        version: defaultSettings.version,
-        ...rawSettings,
-        id,
-        name,
-        globRoot: resolveGlobRoot(rawSettings, pathToSettingsFile),
-        languageSettings: normalizeLanguageSettings(rawSettings.languageSettings),
-    };
-    const pathToSettings = path.dirname(pathToSettingsFile);
-    const normalizedDictionaryDefs = normalizeDictionaryDefs(settings, pathToSettingsFile);
-    const normalizedSettingsGlobs = normalizeSettingsGlobs(settings, pathToSettingsFile);
-    const normalizedOverrides = normalizeOverrides(settings, pathToSettingsFile);
-    const normalizedReporters = normalizeReporters(settings, pathToSettingsFile);
-    const normalizedGitignoreRoot = normalizeGitignoreRoot(settings, pathToSettingsFile);
-    const normalizedCacheSettings = normalizeCacheSettings(settings, pathToSettingsDir);
-
-    const imports = typeof settings.import === 'string' ? [settings.import] : settings.import || [];
-    const source: Source = settings.source || {
-        name: settings.name,
-        filename: pathToSettingsFile,
-    };
-
-    const fileSettings: CSpellSettingsI = csi({
-        ...settings,
-        source,
-        ...normalizedDictionaryDefs,
-        ...normalizedSettingsGlobs,
-        ...normalizedOverrides,
-        ...normalizedReporters,
-        ...normalizedGitignoreRoot,
-        ...normalizedCacheSettings,
-    });
-    if (!imports.length) {
-        return fileSettings;
-    }
-    const importedSettings: CSpellSettingsI = imports
-        .map((name) => resolveFilename(name, pathToSettings))
-        .map((ref) => ((ref.referencedBy = [source]), ref))
-        .map((ref) => importSettings(ref, undefined, pnpSettingsToUse))
-        .reduce((a, b) => mergeSettings(a, b));
-    const finalizeSettings = mergeSettings(importedSettings, fileSettings);
-    finalizeSettings.name = settings.name || finalizeSettings.name || '';
-    finalizeSettings.id = settings.id || finalizeSettings.id || '';
-    return finalizeSettings;
+    readonly _readConfig = this.readConfig.bind(this);
+    readonly _normalizeSettings = this.normalizeSettings.bind(this);
 }
 
 function mergeSourceList(orig: Source[], append: Source[] | undefined): Source[] {
@@ -277,34 +332,6 @@ function mergeSourceList(orig: Source[], append: Source[] | undefined): Source[]
     }
 
     return [...collection.values()];
-}
-
-function importSettings(
-    fileRef: ImportFileRef,
-    defaultValues: CSpellSettingsWST | undefined,
-    pnpSettings: PnPSettings
-): CSpellSettingsI {
-    defaultValues = defaultValues ?? defaultSettings;
-    const { filename } = fileRef;
-    const importRef: ImportFileRef = { ...fileRef };
-    const cached = cachedFiles().get(filename);
-    if (cached) {
-        const cachedImportRef = cached.__importRef || importRef;
-        cachedImportRef.referencedBy = mergeSourceList(cachedImportRef.referencedBy || [], importRef.referencedBy);
-        cached.__importRef = cachedImportRef;
-        return cached;
-    }
-    const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
-    const name = id;
-    const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
-    cachedFiles().set(filename, finalizeSettings); // add an empty entry to prevent circular references.
-    const settings: CSpellSettingsWST = { ...defaultValues, id, name, ...gcl()._readConfig(importRef) };
-
-    Object.assign(finalizeSettings, normalizeSettings(settings, filename, pnpSettings));
-    const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
-    finalizeSettings.source = { ...finalizeSrc, filename };
-    cachedFiles().set(filename, finalizeSettings);
-    return finalizeSettings;
 }
 
 interface SearchForConfigResult {
@@ -363,7 +390,7 @@ function normalizeSearchForConfigResult(
     const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
     const settings: CSpellSettingsI = { id, ...config };
     cachedFiles().set(filename, finalizeSettings); // add an empty entry to prevent circular references.
-    Object.assign(finalizeSettings, normalizeSettings(settings, filename, pnpSettings));
+    Object.assign(finalizeSettings, gcl()._normalizeSettings(settings, filename, pnpSettings));
 
     return {
         config: finalizeSettings,
@@ -474,15 +501,7 @@ function resolveFilename(filename: string, relativeTo: string): ImportFileRef {
 }
 
 export function getGlobalSettings(): CSpellSettingsI {
-    if (!globalSettings) {
-        const globalConf = getRawGlobalSettings();
-
-        globalSettings = {
-            id: 'global_config',
-            ...normalizeSettings(globalConf || {}, './global_config', {}),
-        };
-    }
-    return globalSettings;
+    return gcl().getGlobalSettings();
 }
 
 export function getCachedFileSize(): number {
@@ -490,40 +509,7 @@ export function getCachedFileSize(): number {
 }
 
 export function clearCachedSettingsFiles(): void {
-    globalSettings = undefined;
-    cachedFiles().clear();
-    cspellConfigExplorer().clearCaches();
-    cspellConfigExplorerSync().clearCaches();
-}
-
-type Imports = CSpellSettingsWST['__imports'];
-
-function mergeImportRefs(left: CSpellSettingsWST, right: CSpellSettingsWST = {}): Imports {
-    const imports = new Map(left.__imports || []);
-    if (left.__importRef) {
-        imports.set(left.__importRef.filename, left.__importRef);
-    }
-    if (right.__importRef) {
-        imports.set(right.__importRef.filename, right.__importRef);
-    }
-    const rightImports = right.__imports?.values() || [];
-    for (const ref of rightImports) {
-        imports.set(ref.filename, ref);
-    }
-    return imports.size ? imports : undefined;
-}
-
-export interface ImportFileRefWithError extends ImportFileRef {
-    error: Error;
-}
-
-function isImportFileRefWithError(ref: ImportFileRef): ref is ImportFileRefWithError {
-    return !!ref.error;
-}
-
-export function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[] {
-    const imports = mergeImportRefs(settings);
-    return !imports ? [] : [...imports.values()].filter(isImportFileRefWithError);
+    return gcl().clearCachedSettingsFiles();
 }
 
 function resolveGlobRoot(settings: CSpellSettingsWST, pathToSettingsFile: string): string {
@@ -542,163 +528,6 @@ function resolveGlobRoot(settings: CSpellSettingsWST, pathToSettingsFile: string
 
     const globRoot = rawRoot.startsWith('${cwd}') ? rawRoot : path.resolve(settingsFileDir, rawRoot);
     return globRoot;
-}
-
-function resolveFilePath(filename: string, pathToSettingsFile: string): string {
-    const cwd = process.cwd();
-
-    return path.resolve(pathToSettingsFile, filename.replace('${cwd}', cwd));
-}
-
-function toGlobDef(g: undefined, root: string | undefined, source: string | undefined): undefined;
-function toGlobDef(g: Glob, root: string | undefined, source: string | undefined): GlobDef;
-function toGlobDef(g: Glob[], root: string | undefined, source: string | undefined): GlobDef[];
-function toGlobDef(g: Glob | Glob[], root: string | undefined, source: string | undefined): GlobDef | GlobDef[];
-function toGlobDef(
-    g: Glob | Glob[] | undefined,
-    root: string | undefined,
-    source: string | undefined
-): GlobDef | GlobDef[] | undefined {
-    if (g === undefined) return undefined;
-    if (Array.isArray(g)) {
-        return g.map((g) => toGlobDef(g, root, source));
-    }
-    if (typeof g === 'string') {
-        const glob: GlobDef = { glob: g };
-        if (root !== undefined) {
-            glob.root = root;
-        }
-        return toGlobDef(glob, root, source);
-    }
-    if (source) {
-        return { ...g, source };
-    }
-    return g;
-}
-
-type NormalizeDictionaryDefsParams = OptionalOrUndefined<
-    Pick<CSpellUserSettings, 'dictionaryDefinitions' | 'languageSettings'>
->;
-
-function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, pathToSettingsFile: string) {
-    const dictionaryDefinitions = mapDictDefsToInternal(settings.dictionaryDefinitions, pathToSettingsFile);
-    const languageSettings = settings.languageSettings?.map((langSetting) =>
-        util.clean({
-            ...langSetting,
-            dictionaryDefinitions: mapDictDefsToInternal(langSetting.dictionaryDefinitions, pathToSettingsFile),
-        })
-    );
-
-    return util.clean({
-        dictionaryDefinitions,
-        languageSettings,
-    });
-}
-
-type NormalizeOverrides = Pick<CSpellUserSettings, 'globRoot' | 'overrides'>;
-type NormalizeOverridesResult = Pick<CSpellUserSettings, 'overrides'>;
-
-function normalizeOverrides(settings: NormalizeOverrides, pathToSettingsFile: string): NormalizeOverridesResult {
-    const { globRoot = path.dirname(pathToSettingsFile) } = settings;
-    const overrides = settings.overrides?.map((override) => {
-        const filename = toGlobDef(override.filename, globRoot, pathToSettingsFile);
-        const { dictionaryDefinitions, languageSettings } = normalizeDictionaryDefs(override, pathToSettingsFile);
-        return util.clean({
-            ...override,
-            filename,
-            dictionaryDefinitions,
-            languageSettings: normalizeLanguageSettings(languageSettings),
-        });
-    });
-
-    return overrides ? { overrides } : {};
-}
-
-type NormalizeReporters = Pick<CSpellUserSettings, 'reporters'>;
-
-function normalizeReporters(settings: NormalizeReporters, pathToSettingsFile: string): NormalizeReporters {
-    if (settings.reporters === undefined) return {};
-    const folder = path.dirname(pathToSettingsFile);
-
-    function resolve(s: string): string {
-        const r = resolveFile(s, folder);
-        if (!r.found) {
-            throw new Error(`Not found: "${s}"`);
-        }
-        return r.filename;
-    }
-
-    function resolveReporter(s: ReporterSettings): ReporterSettings {
-        if (typeof s === 'string') {
-            return resolve(s);
-        }
-        if (!Array.isArray(s) || typeof s[0] !== 'string') throw new Error('Invalid Reporter');
-        // Preserve the shape of Reporter Setting while resolving the reporter file.
-        const [r, ...rest] = s;
-        return [resolve(r), ...rest];
-    }
-
-    return {
-        reporters: settings.reporters.map(resolveReporter),
-    };
-}
-
-function normalizeLanguageSettings(languageSettings: LanguageSetting[] | undefined): LanguageSetting[] | undefined {
-    if (!languageSettings) return undefined;
-
-    function fixLocale(s: LanguageSetting): LanguageSetting {
-        const { local: locale, ...rest } = s;
-        return util.clean({ locale, ...rest });
-    }
-
-    return languageSettings.map(fixLocale);
-}
-
-type NormalizeGitignoreRoot = Pick<CSpellUserSettings, 'gitignoreRoot'>;
-
-function normalizeGitignoreRoot(settings: NormalizeGitignoreRoot, pathToSettingsFile: string): NormalizeGitignoreRoot {
-    const { gitignoreRoot } = settings;
-    if (!gitignoreRoot) return {};
-
-    const dir = path.dirname(pathToSettingsFile);
-    const roots = Array.isArray(gitignoreRoot) ? gitignoreRoot : [gitignoreRoot];
-
-    return {
-        gitignoreRoot: roots.map((p) => path.resolve(dir, p)),
-    };
-}
-
-interface NormalizeSettingsGlobs {
-    globRoot?: CSpellUserSettings['globRoot'];
-    ignorePaths?: CSpellUserSettings['ignorePaths'];
-}
-
-interface NormalizeSettingsGlobsResult {
-    ignorePaths?: GlobDef[];
-}
-
-function normalizeSettingsGlobs(
-    settings: NormalizeSettingsGlobs,
-    pathToSettingsFile: string
-): NormalizeSettingsGlobsResult {
-    const { globRoot } = settings;
-    if (settings.ignorePaths === undefined) return {};
-
-    const ignorePaths = toGlobDef(settings.ignorePaths, globRoot, pathToSettingsFile);
-    return {
-        ignorePaths,
-    };
-}
-
-function normalizeCacheSettings(
-    settings: Pick<CSpellUserSettings, 'cache'>,
-    pathToSettingsDir: string
-): Pick<CSpellUserSettings, 'cache'> {
-    const { cache } = settings;
-    if (cache === undefined) return {};
-    const { cacheLocation } = cache;
-    if (cacheLocation === undefined) return { cache };
-    return { cache: { ...cache, cacheLocation: resolveFilePath(cacheLocation, pathToSettingsDir) } };
 }
 
 function validationMessage(msg: string, fileRef: ImportFileRef) {
@@ -735,16 +564,6 @@ function validateRawConfigExports(config: CSpellUserSettings, fileRef: ImportFil
         throw new ImportError(
             validationMessage('Module `export default` is not supported.\n  Use `module.exports =` instead.', fileRef)
         );
-    }
-}
-
-interface NormalizableFields {
-    version?: string | number;
-}
-
-function normalizeRawConfig(config: CSpellUserSettings | NormalizableFields) {
-    if (typeof config.version === 'number') {
-        config.version = config.version.toString();
     }
 }
 
@@ -786,8 +605,8 @@ function cspellConfigExplorerSync() {
 }
 
 export const __testing__ = {
+    getDefaultConfigLoaderInternal,
     normalizeCacheSettings,
-    normalizeSettings,
     validateRawConfigExports,
     validateRawConfigVersion,
 };
