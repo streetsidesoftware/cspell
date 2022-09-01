@@ -480,10 +480,11 @@ declare function readSettingsFiles(filenames: string[]): CSpellSettingsI$1;
 declare function getGlobalSettings(): CSpellSettingsI$1;
 declare function getCachedFileSize(): number;
 declare function clearCachedSettingsFiles(): void;
+
+declare function extractImportErrors(settings: CSpellSettingsWST$1): ImportFileRefWithError$1[];
 interface ImportFileRefWithError$1 extends ImportFileRef {
     error: Error;
 }
-declare function extractImportErrors(settings: CSpellSettingsWST$1): ImportFileRefWithError$1[];
 
 /**
  * Read / import a cspell configuration file.

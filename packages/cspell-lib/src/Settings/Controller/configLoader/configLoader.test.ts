@@ -7,7 +7,6 @@ import { extractDependencies, getSources, ImportFileRefWithError, mergeSettings 
 import { getDefaultBundledSettings, _defaultSettings } from '../../DefaultSettings';
 import {
     clearCachedSettingsFiles,
-    extractImportErrors,
     getCachedFileSize,
     getGlobalSettings,
     loadConfig,
@@ -19,6 +18,7 @@ import {
     searchForConfig,
     __testing__ as __configLoader_testing__,
 } from './configLoader';
+import { extractImportErrors } from './extractImportErrors';
 import { readSettings } from './readSettings';
 
 const { normalizeCacheSettings, validateRawConfigExports, validateRawConfigVersion, getDefaultConfigLoaderInternal } =
