@@ -1,5 +1,7 @@
 export {
     clearCachedSettingsFiles,
+    ConfigLoader,
+    createConfigLoader,
     defaultConfigFilenames,
     defaultFileName,
     extractImportErrors,

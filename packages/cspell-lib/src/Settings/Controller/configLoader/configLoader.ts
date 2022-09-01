@@ -93,8 +93,6 @@ function parseJson(_filename: string, content: string) {
 
 export const defaultConfigFilenames = Object.freeze(searchPlaces.concat());
 
-const cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
-const cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);
 let globalSettings: CSpellSettingsI | undefined;
 
 const defaultSettings: CSpellSettingsI = csi({
@@ -105,12 +103,10 @@ const defaultSettings: CSpellSettingsI = csi({
 
 const defaultPnPSettings: PnPSettings = {};
 
-const cachedFiles = new Map<string, CSpellSettingsI>();
-
-let defaultConfigLoader: ConfigLoader | undefined = undefined;
+let defaultConfigLoader: ConfigLoaderInternal | undefined = undefined;
 
 export class ConfigLoader {
-    constructor(readonly cspellIO: CSpellIO) {}
+    protected constructor(readonly cspellIO: CSpellIO) {}
 
     /**
      * Read / import a cspell configuration file.
@@ -144,33 +140,59 @@ export class ConfigLoader {
         const ref = resolveFilename(filename, relativeTo);
         return importSettings(ref, defaultValue, defaultValue || defaultPnPSettings);
     }
+
+    protected cachedFiles = new Map<string, CSpellSettingsI>();
+    protected cspellConfigExplorer = cosmiconfig('cspell', cspellCosmiconfig);
+    protected cspellConfigExplorerSync = cosmiconfigSync('cspell', cspellCosmiconfig);
+
+    /**
+     * Read a config file and inject the fileRef.
+     * @param fileRef - filename plus context, injected into the resulting config.
+     */
+    protected readConfig(fileRef: ImportFileRef): CSpellSettingsWST {
+        // cspellConfigExplorerSync
+        const { filename, error } = fileRef;
+        if (error) {
+            fileRef.error =
+                error instanceof ImportError
+                    ? error
+                    : new ImportError(`Failed to read config file: "${filename}"`, error);
+            return { __importRef: fileRef };
+        }
+        const s: CSpellSettingsWST = {};
+        try {
+            const r = this.cspellConfigExplorerSync.load(filename);
+            if (!r?.config) throw new Error(`not found: "${filename}"`);
+            Object.assign(s, r.config);
+            normalizeRawConfig(s);
+            validateRawConfig(s, fileRef);
+        } catch (err) {
+            fileRef.error =
+                err instanceof ImportError ? err : new ImportError(`Failed to read config file: "${filename}"`, err);
+        }
+        s.__importRef = fileRef;
+        return s;
+    }
 }
 
-/**
- * Read a config file and inject the fileRef.
- * @param fileRef - filename plus context, injected into the resulting config.
- */
-function readConfig(fileRef: ImportFileRef): CSpellSettingsWST {
-    // cspellConfigExplorerSync
-    const { filename, error } = fileRef;
-    if (error) {
-        fileRef.error =
-            error instanceof ImportError ? error : new ImportError(`Failed to read config file: "${filename}"`, error);
-        return { __importRef: fileRef };
+class ConfigLoaderInternal extends ConfigLoader {
+    constructor(cspellIO: CSpellIO) {
+        super(cspellIO);
     }
-    const s: CSpellSettingsWST = {};
-    try {
-        const r = cspellConfigExplorerSync.load(filename);
-        if (!r?.config) throw new Error(`not found: "${filename}"`);
-        Object.assign(s, r.config);
-        normalizeRawConfig(s);
-        validateRawConfig(s, fileRef);
-    } catch (err) {
-        fileRef.error =
-            err instanceof ImportError ? err : new ImportError(`Failed to read config file: "${filename}"`, err);
+
+    get _cachedFiles() {
+        return this.cachedFiles;
     }
-    s.__importRef = fileRef;
-    return s;
+
+    get _cspellConfigExplorer() {
+        return this.cspellConfigExplorer;
+    }
+
+    get _cspellConfigExplorerSync() {
+        return this.cspellConfigExplorerSync;
+    }
+
+    readonly _readConfig = this.readConfig;
 }
 
 /**
@@ -265,7 +287,7 @@ function importSettings(
     defaultValues = defaultValues ?? defaultSettings;
     const { filename } = fileRef;
     const importRef: ImportFileRef = { ...fileRef };
-    const cached = cachedFiles.get(filename);
+    const cached = cachedFiles().get(filename);
     if (cached) {
         const cachedImportRef = cached.__importRef || importRef;
         cachedImportRef.referencedBy = mergeSourceList(cachedImportRef.referencedBy || [], importRef.referencedBy);
@@ -275,13 +297,13 @@ function importSettings(
     const id = [path.basename(path.dirname(filename)), path.basename(filename)].join('/');
     const name = id;
     const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
-    cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
-    const settings: CSpellSettingsWST = { ...defaultValues, id, name, ...readConfig(importRef) };
+    cachedFiles().set(filename, finalizeSettings); // add an empty entry to prevent circular references.
+    const settings: CSpellSettingsWST = { ...defaultValues, id, name, ...gcl()._readConfig(importRef) };
 
     Object.assign(finalizeSettings, normalizeSettings(settings, filename, pnpSettings));
     const finalizeSrc: Source = { name: path.basename(filename), ...finalizeSettings.source };
     finalizeSettings.source = { ...finalizeSrc, filename };
-    cachedFiles.set(filename, finalizeSettings);
+    cachedFiles().set(filename, finalizeSettings);
     return finalizeSettings;
 }
 
@@ -322,7 +344,7 @@ function normalizeSearchForConfigResult(
 
     const filepath = result?.filepath;
     if (filepath) {
-        const cached = cachedFiles.get(filepath);
+        const cached = cachedFiles().get(filepath);
         if (cached) {
             return {
                 config: cached,
@@ -340,7 +362,7 @@ function normalizeSearchForConfigResult(
     const name = result?.filepath ? id : `Config not found: ${id}`;
     const finalizeSettings: CSpellSettingsI = csi({ id, name, __importRef: importRef });
     const settings: CSpellSettingsI = { id, ...config };
-    cachedFiles.set(filename, finalizeSettings); // add an empty entry to prevent circular references.
+    cachedFiles().set(filename, finalizeSettings); // add an empty entry to prevent circular references.
     Object.assign(finalizeSettings, normalizeSettings(settings, filename, pnpSettings));
 
     return {
@@ -356,7 +378,7 @@ export function searchForConfig(
 ): Promise<CSpellSettingsI | undefined> {
     return normalizeSearchForConfigResultAsync(
         searchFrom || process.cwd(),
-        cspellConfigExplorer.search(searchFrom),
+        cspellConfigExplorer().search(searchFrom),
         pnpSettings
     ).then((r) => (r.filepath ? r.config : undefined));
 }
@@ -367,7 +389,7 @@ export function searchForConfigSync(
 ): CSpellSettingsI | undefined {
     let searchResult: SearchForConfigResult | ImportError | undefined;
     try {
-        searchResult = cspellConfigExplorerSync.search(searchFrom) || undefined;
+        searchResult = cspellConfigExplorerSync().search(searchFrom) || undefined;
     } catch (err) {
         searchResult = new ImportError(`Failed to find config file from: "${searchFrom}"`, err);
     }
@@ -381,11 +403,11 @@ export function searchForConfigSync(
  * @returns normalized CSpellSettings
  */
 export function loadConfig(file: string, pnpSettings: PnPSettings = defaultPnPSettings): Promise<CSpellSettingsI> {
-    const cached = cachedFiles.get(path.resolve(file));
+    const cached = cachedFiles().get(path.resolve(file));
     if (cached) {
         return Promise.resolve(cached);
     }
-    return normalizeSearchForConfigResultAsync(file, cspellConfigExplorer.load(file), pnpSettings).then(
+    return normalizeSearchForConfigResultAsync(file, cspellConfigExplorer().load(file), pnpSettings).then(
         (r) => r.config
     );
 }
@@ -397,13 +419,13 @@ export function loadConfig(file: string, pnpSettings: PnPSettings = defaultPnPSe
  * @returns normalized CSpellSettings
  */
 export function loadConfigSync(filename: string, pnpSettings: PnPSettings = defaultPnPSettings): CSpellSettingsI {
-    const cached = cachedFiles.get(path.resolve(filename));
+    const cached = cachedFiles().get(path.resolve(filename));
     if (cached) {
         return cached;
     }
     let searchResult: SearchForConfigResult | ImportError | undefined;
     try {
-        searchResult = cspellConfigExplorerSync.load(filename) || undefined;
+        searchResult = cspellConfigExplorerSync().load(filename) || undefined;
     } catch (err) {
         searchResult = new ImportError(`Failed to find config file at: "${filename}"`, err);
     }
@@ -429,7 +451,7 @@ export function loadPnPSync(pnpSettings: PnPSettings, searchFrom: URI): LoaderRe
 export function readRawSettings(filename: string, relativeTo?: string): CSpellSettingsWST {
     relativeTo = relativeTo || process.cwd();
     const ref = resolveFilename(filename, relativeTo);
-    return readConfig(ref);
+    return gcl()._readConfig(ref);
 }
 
 /**
@@ -464,14 +486,14 @@ export function getGlobalSettings(): CSpellSettingsI {
 }
 
 export function getCachedFileSize(): number {
-    return cachedFiles.size;
+    return cachedFiles().size;
 }
 
 export function clearCachedSettingsFiles(): void {
     globalSettings = undefined;
-    cachedFiles.clear();
-    cspellConfigExplorer.clearCaches();
-    cspellConfigExplorerSync.clearCaches();
+    cachedFiles().clear();
+    cspellConfigExplorer().clearCaches();
+    cspellConfigExplorerSync().clearCaches();
 }
 
 type Imports = CSpellSettingsWST['__imports'];
@@ -731,10 +753,36 @@ function validateRawConfig(config: CSpellUserSettings, fileRef: ImportFileRef): 
     validations.forEach((fn) => fn(config, fileRef));
 }
 
-export function getDefaultConfigLoader(): ConfigLoader {
+function createConfigLoaderInternal(cspellIO?: CSpellIO) {
+    return new ConfigLoaderInternal(cspellIO ?? getDefaultCSpellIO());
+}
+
+export function createConfigLoader(cspellIO?: CSpellIO): ConfigLoader {
+    return createConfigLoaderInternal(cspellIO);
+}
+
+function getDefaultConfigLoaderInternal(): ConfigLoaderInternal {
     if (defaultConfigLoader) return defaultConfigLoader;
 
-    return (defaultConfigLoader = new ConfigLoader(getDefaultCSpellIO()));
+    return (defaultConfigLoader = createConfigLoaderInternal());
+}
+
+export function getDefaultConfigLoader(): ConfigLoader {
+    return getDefaultConfigLoaderInternal();
+}
+
+const gcl = getDefaultConfigLoaderInternal;
+
+function cachedFiles() {
+    return gcl()._cachedFiles;
+}
+
+function cspellConfigExplorer() {
+    return gcl()._cspellConfigExplorer;
+}
+
+function cspellConfigExplorerSync() {
+    return gcl()._cspellConfigExplorerSync;
 }
 
 export const __testing__ = {
