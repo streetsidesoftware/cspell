@@ -1,6 +1,6 @@
 export { toArray as asyncIterableToArray } from './async/asyncIterable';
 export type { CSpellIO } from './CSpellIO';
-export { CSpellIONode } from './CSpellIONode';
+export { CSpellIONode, getDefaultCSpellIO } from './CSpellIONode';
 export {
     getStat,
     getStatSync,

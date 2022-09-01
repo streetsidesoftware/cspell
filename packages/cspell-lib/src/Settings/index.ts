@@ -17,14 +17,13 @@ export {
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
-    currentSettingsFileVersion,
-    ENV_CSPELL_GLOB_ROOT,
     extractDependencies,
     finalizeSettings,
     getSources,
     mergeInDocSettings,
     mergeSettings,
 } from './CSpellSettingsServer';
+export { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from './constants';
 export type { ConfigurationDependencies, ImportFileRefWithError } from './CSpellSettingsServer';
 export { getDefaultSettings, getDefaultBundledSettings } from './DefaultSettings';
 export { ImportError } from './Controller/ImportError';
