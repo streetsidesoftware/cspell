@@ -11,27 +11,29 @@ import type {
 } from '@cspell/cspell-types';
 import * as json from 'comment-json';
 import { cosmiconfig, cosmiconfigSync, Options as CosmicOptions, OptionsSync as CosmicOptionsSync } from 'cosmiconfig';
+import { CSpellIO, getDefaultCSpellIO } from 'cspell-io';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
-import { createCSpellSettingsInternal as csi, CSpellSettingsInternal } from '../../Models/CSpellSettingsInternalDef';
-import { logError, logWarning } from '../../util/logger';
-import { resolveFile } from '../../util/resolveFile';
-import { OptionalOrUndefined } from '../../util/types';
-import * as util from '../../util/util';
+import { createCSpellSettingsInternal as csi, CSpellSettingsInternal } from '../../../Models/CSpellSettingsInternalDef';
+import { logError, logWarning } from '../../../util/logger';
+import { resolveFile } from '../../../util/resolveFile';
+import { OptionalOrUndefined } from '../../../util/types';
+import * as util from '../../../util/util';
+import { mergeSettings } from '../../CSpellSettingsServer';
 import {
     configSettingsFileVersion0_1,
     configSettingsFileVersion0_2,
     currentSettingsFileVersion,
     ENV_CSPELL_GLOB_ROOT,
-    mergeSettings,
-} from '../CSpellSettingsServer';
-import { mapDictDefsToInternal } from '../DictionarySettings';
-import { getRawGlobalSettings } from '../GlobalSettings';
-import { ImportError } from './ImportError';
-import { LoaderResult, pnpLoader } from './pnpLoader';
+} from '../../constants';
+import { mapDictDefsToInternal } from '../../DictionarySettings';
+import { getRawGlobalSettings } from '../../GlobalSettings';
+import { ImportError } from '../ImportError';
+import { LoaderResult, pnpLoader } from '../pnpLoader';
+import { readSettings } from './readSettings';
 
-type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
-type CSpellSettingsI = CSpellSettingsInternal;
+export type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
+export type CSpellSettingsI = CSpellSettingsInternal;
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
 type PnPSettings = OptionalOrUndefined<PnPSettingsStrict>;
 
@@ -104,6 +106,45 @@ const defaultSettings: CSpellSettingsI = csi({
 const defaultPnPSettings: PnPSettings = {};
 
 const cachedFiles = new Map<string, CSpellSettingsI>();
+
+let defaultConfigLoader: ConfigLoader | undefined = undefined;
+
+export class ConfigLoader {
+    constructor(readonly cspellIO: CSpellIO) {}
+
+    /**
+     * Read / import a cspell configuration file.
+     * @param filename - the path to the file.
+     *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
+     *   - absolute path `/absolute/path/to/file`
+     *   - relative path `./path/to/file` (relative to the current working directory)
+     *   - package `@cspell/dict-typescript/cspell-ext.json`
+     */
+    public readSettings(filename: string): CSpellSettingsI;
+    public readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
+    /**
+     * Read / import a cspell configuration file.
+     * @param filename - the path to the file.
+     *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
+     *   - absolute path `/absolute/path/to/file`
+     *   - relative path `./path/to/file` (relative to `relativeTo`)
+     *   - package `@cspell/dict-typescript/cspell-ext.json` searches for node_modules relative to `relativeTo`
+     * @param relativeTo - absolute path to start searching for relative files or node_modules.
+     */
+    public readSettings(filename: string, relativeTo?: string): CSpellSettingsI;
+    public readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
+    public readSettings(filename: string, relativeToOrDefault?: CSpellSettingsWST | string): CSpellSettingsI;
+    public readSettings(
+        filename: string,
+        relativeToOrDefault?: CSpellSettingsWST | string,
+        defaultValue?: CSpellSettingsWST
+    ): CSpellSettingsI {
+        const relativeTo = typeof relativeToOrDefault === 'string' ? relativeToOrDefault : process.cwd();
+        defaultValue = defaultValue || (typeof relativeToOrDefault !== 'string' ? relativeToOrDefault : undefined);
+        const ref = resolveFilename(filename, relativeTo);
+        return importSettings(ref, defaultValue, defaultValue || defaultPnPSettings);
+    }
+}
 
 /**
  * Read a config file and inject the fileRef.
@@ -242,38 +283,6 @@ function importSettings(
     finalizeSettings.source = { ...finalizeSrc, filename };
     cachedFiles.set(filename, finalizeSettings);
     return finalizeSettings;
-}
-
-/**
- * Read / import a cspell configuration file.
- * @param filename - the path to the file.
- *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
- *   - absolute path `/absolute/path/to/file`
- *   - relative path `./path/to/file` (relative to the current working directory)
- *   - package `@cspell/dict-typescript/cspell-ext.json`
- */
-export function readSettings(filename: string): CSpellSettingsI;
-export function readSettings(filename: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
-/**
- * Read / import a cspell configuration file.
- * @param filename - the path to the file.
- *   Supported types: json, yaml, js, and cjs. ES Modules are not supported.
- *   - absolute path `/absolute/path/to/file`
- *   - relative path `./path/to/file` (relative to `relativeTo`)
- *   - package `@cspell/dict-typescript/cspell-ext.json` searches for node_modules relative to `relativeTo`
- * @param relativeTo - absolute path to start searching for relative files or node_modules.
- */
-export function readSettings(filename: string, relativeTo: string): CSpellSettingsI;
-export function readSettings(filename: string, relativeTo: string, defaultValues: CSpellSettingsWST): CSpellSettingsI;
-export function readSettings(
-    filename: string,
-    relativeToOrDefault?: CSpellSettingsWST | string,
-    defaultValue?: CSpellSettingsWST
-): CSpellSettingsI {
-    const relativeTo = typeof relativeToOrDefault === 'string' ? relativeToOrDefault : process.cwd();
-    defaultValue = defaultValue || (typeof relativeToOrDefault !== 'string' ? relativeToOrDefault : undefined);
-    const ref = resolveFilename(filename, relativeTo);
-    return importSettings(ref, defaultValue, defaultValue || defaultPnPSettings);
 }
 
 interface SearchForConfigResult {
@@ -720,6 +729,12 @@ function normalizeRawConfig(config: CSpellUserSettings | NormalizableFields) {
 function validateRawConfig(config: CSpellUserSettings, fileRef: ImportFileRef): void {
     const validations = [validateRawConfigExports, validateRawConfigVersion];
     validations.forEach((fn) => fn(config, fileRef));
+}
+
+export function getDefaultConfigLoader(): ConfigLoader {
+    if (defaultConfigLoader) return defaultConfigLoader;
+
+    return (defaultConfigLoader = new ConfigLoader(getDefaultCSpellIO()));
 }
 
 export const __testing__ = {

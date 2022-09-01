@@ -19,17 +19,13 @@ import {
 } from '../Models/CSpellSettingsInternalDef';
 import { OptionalOrUndefined } from '../util/types';
 import * as util from '../util/util';
+import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants';
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings';
 import { resolvePatterns } from './patterns';
 
 type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
 type CSpellSettingsI = CSpellSettingsInternal;
-
-export const configSettingsFileVersion0_1 = '0.1';
-export const configSettingsFileVersion0_2 = '0.2';
-export const currentSettingsFileVersion = configSettingsFileVersion0_2;
-export const ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
 
 function _unique<T>(a: T[]): T[] {
     return [...new Set(a)];

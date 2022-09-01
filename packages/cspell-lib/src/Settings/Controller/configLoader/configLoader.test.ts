@@ -1,7 +1,7 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import * as path from 'path';
 import { URI } from 'vscode-uri';
-import { logError, logWarning } from '../../util/logger';
+import { logError, logWarning } from '../../../util/logger';
 import {
     clearCachedSettingsFiles,
     extractImportErrors,
@@ -12,20 +12,14 @@ import {
     loadPnP,
     loadPnPSync,
     readRawSettings,
-    readSettings,
     readSettingsFiles,
     searchForConfig,
     __testing__ as __configLoader_testing__,
 } from './configLoader';
-import {
-    currentSettingsFileVersion,
-    ENV_CSPELL_GLOB_ROOT,
-    extractDependencies,
-    getSources,
-    ImportFileRefWithError,
-    mergeSettings,
-} from '../CSpellSettingsServer';
-import { getDefaultBundledSettings, _defaultSettings } from '../DefaultSettings';
+import { readSettings } from './readSettings';
+import { extractDependencies, getSources, ImportFileRefWithError, mergeSettings } from '../../CSpellSettingsServer';
+import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
+import { getDefaultBundledSettings, _defaultSettings } from '../../DefaultSettings';
 
 const { normalizeCacheSettings, normalizeSettings, validateRawConfigExports, validateRawConfigVersion } =
     __configLoader_testing__;
