@@ -2,6 +2,9 @@ import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef }
 import * as path from 'path';
 import { URI } from 'vscode-uri';
 import { logError, logWarning } from '../../../util/logger';
+import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
+import { extractDependencies, getSources, ImportFileRefWithError, mergeSettings } from '../../CSpellSettingsServer';
+import { getDefaultBundledSettings, _defaultSettings } from '../../DefaultSettings';
 import {
     clearCachedSettingsFiles,
     extractImportErrors,
@@ -17,12 +20,12 @@ import {
     __testing__ as __configLoader_testing__,
 } from './configLoader';
 import { readSettings } from './readSettings';
-import { extractDependencies, getSources, ImportFileRefWithError, mergeSettings } from '../../CSpellSettingsServer';
-import { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from '../../constants';
-import { getDefaultBundledSettings, _defaultSettings } from '../../DefaultSettings';
 
-const { normalizeCacheSettings, normalizeSettings, validateRawConfigExports, validateRawConfigVersion } =
+const { normalizeCacheSettings, validateRawConfigExports, validateRawConfigVersion, getDefaultConfigLoaderInternal } =
     __configLoader_testing__;
+
+const loader = getDefaultConfigLoaderInternal();
+const normalizeSettings = loader._normalizeSettings.bind(loader);
 
 const rootCspellLib = path.resolve(path.join(__dirname, '../../../..'));
 const root = path.resolve(rootCspellLib, '../..');
