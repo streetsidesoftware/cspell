@@ -313,7 +313,7 @@ importers:
       '@typescript-eslint/typescript-estree': ^5.36.1
       cspell-lib: workspace:^
       eslint: ^8.23.0
-      eslint-plugin-react: ^7.31.6
+      eslint-plugin-react: ^7.31.7
       mocha: ^10.0.0
       rimraf: ^3.0.2
       rollup: ^2.79.0
@@ -333,7 +333,7 @@ importers:
       '@typescript-eslint/types': 5.36.1
       '@typescript-eslint/typescript-estree': 5.36.1_typescript@4.8.2
       eslint: 8.23.0
-      eslint-plugin-react: 7.31.6_eslint@8.23.0
+      eslint-plugin-react: 7.31.7_eslint@8.23.0
       mocha: 10.0.0
       rimraf: 3.0.2
       rollup: 2.79.0
@@ -4975,8 +4975,10 @@ packages:
       minimist: 1.2.6
     dev: true
 
-  /ajv-formats/2.1.1:
+  /ajv-formats/2.1.1_ajv@8.11.0:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -7121,8 +7123,8 @@ packages:
       eslint: 8.23.0
     dev: true
 
-  /eslint-plugin-react/7.31.6_eslint@8.23.0:
-    resolution: {integrity: sha512-CXu4eu28sb8Sd2+cyUYsJVyDvpTlaXPG+bOzzpS9IzZKtye96AYX3ZmHQ6ayn/OAIQ/ufDJP8ElPWd63Pepn9w==}
+  /eslint-plugin-react/7.31.7_eslint@8.23.0:
+    resolution: {integrity: sha512-8NldBTeYp/kQoTV1uT0XF6HcmDqbgZ0lNPkN0wlRw8DJKXEnaWu+oh/6gt3xIhzvQ35wB2Y545fJhIbJSZ2NNw==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -11488,6 +11490,12 @@ packages:
   /react-dev-utils/12.0.1_j7mri6brqo6jqc4rzvyyrslsmu:
     resolution: {integrity: sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==}
     engines: {node: '>=14'}
+    peerDependencies:
+      typescript: '>=2.7'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
     dependencies:
       '@babel/code-frame': 7.18.6
       address: 1.2.0
@@ -11518,9 +11526,7 @@ packages:
     transitivePeerDependencies:
       - eslint
       - supports-color
-      - typescript
       - vue-template-compiler
-      - webpack
     dev: false
 
   /react-dom/17.0.2_react@17.0.2:
@@ -12124,7 +12130,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.11
       ajv: 8.11.0
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1_ajv@8.11.0
       ajv-keywords: 5.1.0_ajv@8.11.0
     dev: false
 
