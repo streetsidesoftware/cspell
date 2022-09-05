@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 7683, Issues found: 57989 in 5886 files
+ CSpell: Files checked: 7685, Issues found: 57996 in 5886 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -524,12 +524,12 @@ Lines:
 ./google/cloud/internal/base64_transforms_test.cc:49:9      - Unknown word (abcdefghijklmnopqrstuv) -- {"abcdefghijklmnopqrstuv", "YWJjZGVmZ2hpamtsbW
 ./google/cloud/internal/base64_transforms_test.cc:50:9      - Unknown word (abcdefghijklmnopqrstuvw) -- {"abcdefghijklmnopqrstuvw", "YWJjZGVmZ2hpamtsbW
 ./google/cloud/internal/base64_transforms_test.cc:51:9      - Unknown word (abcdefghijklmnopqrstuvwx) -- {"abcdefghijklmnopqrstuvwx", "YWJjZGVmZ2hpamtsbW
-./google/cloud/internal/binary_data_as_debug_string.h:31:37     - Unknown word (hexdump)    -- wide and contains the hexdump of the data.  The columns
 ./google/cloud/internal/build_info.cc.in:18:11     - Unknown word (cctype)     -- #include <cctype>
 ./google/cloud/internal/build_info.cc.in:25:4      - Unknown word (NOLINTNEXTLINE) -- // NOLINTNEXTLINE(readability-identifier
 ./google/cloud/internal/curl_rest_client_integration_test.cc:101:21    - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
 ./google/cloud/internal/curl_rest_client_integration_test.cc:40:10     - Unknown word (httpbin)    -- auto httpbin_endpoint = google::cloud
 ./google/cloud/internal/curl_rest_client_integration_test.cc:40:62     - Unknown word (HTTPBIN)    -- cloud::internal::GetEnv("HTTPBIN_ENDPOINT");
+./google/cloud/internal/curl_wrappers_test.cc:50:14     - Unknown word (Casse)      -- struct TestCasse {
 ./google/cloud/internal/diagnostics_pop.inc:17:2      - Unknown word (elif)       -- #elif __clang__
 ./google/cloud/internal/diagnostics_pop.inc:19:9      - Unknown word (GNUC)       -- #elif __GNUC__
 ./google/cloud/internal/disable_deprecation_warnings.inc:19:36     - Unknown word (Wdeprecated) -- diagnostic ignored "-Wdeprecated-declarations"
@@ -646,7 +646,7 @@ Lines:
 ./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:143:69    - Unknown word (lreq)       -- ListBackupOperationsRequest lreq;
 ./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:206:73    - Unknown word (dreq)       -- ListDatabaseOperationsRequest dreq;
 ./google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:240:61    - Unknown word (ureq)       -- UpdateBackupRequest ureq;
-./google/cloud/spanner/admin/integration_tests/database_admin_integration_test.cc:560:52    - Unknown word (ceci)       -- kKeyRing, "ceci-n-est-pas-une-cle")
+./google/cloud/spanner/admin/integration_tests/database_admin_integration_test.cc:538:52    - Unknown word (ceci)       -- kKeyRing, "ceci-n-est-pas-une-cle")
 ./google/cloud/spanner/benchmarks/README.md:104:9     - Unknown word (ggplot)     -- require(ggplot2) # may require install
 ./google/cloud/spanner/benchmarks/README.md:110:11    - Unknown word (rbind)      -- df <- rbind(df, t);
 ./google/cloud/spanner/benchmarks/README.md:117:71    - Unknown word (boxplot)    -- y=CpuTime)) + geom_boxplot()
@@ -658,6 +658,7 @@ Lines:
 ./google/cloud/spanner/client_test.cc:557:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
 ./google/cloud/spanner/database_admin_client_test.cc:32:11     - Unknown word (gsad)       -- namespace gsad = ::google::spanner
 ./google/cloud/spanner/instance_admin_client_test.cc:29:11     - Unknown word (gsai)       -- namespace gsai = ::google::spanner
+./google/cloud/spanner/integration_tests/data_types_integration_test.cc:69:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
 ./google/cloud/spanner/internal/connection_impl_test.cc:2492:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
 ./google/cloud/spanner/internal/connection_impl_test.cc:2494:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 ./google/cloud/spanner/internal/connection_impl_test.cc:61:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
@@ -690,12 +691,12 @@ Lines:
 ./google/cloud/storage/benchmarks/README.md:10:61     - Unknown word (TTFB)       -- time to first byte (TTFB) is high, so
 ./google/cloud/storage/benchmarks/README.md:116:14    - Unknown word (vebm)       -- We will use `vebm` (for Virtual Environment
 ./google/cloud/storage/benchmarks/README.md:35:17     - Unknown word (ttfb)       -- tee tp-vs-cpu.ttfb.txt
-./google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:426:18    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
-./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:317:8     - Unknown word (uploaders)  -- auto uploaders = gcs_bm::CreateUploadExperim
-./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:324:8     - Unknown word (downloaders) -- auto downloaders =
+./google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:428:18    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
+./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:320:8     - Unknown word (uploaders)  -- auto uploaders = gcs_bm::CreateUploadExperim
+./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:327:8     - Unknown word (downloaders) -- auto downloaders =
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:19:61     - Unknown word (Spyder)     -- load this script in Spyder
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:37:12     - Unknown word (Nanos)      -- df["CpuNanosPerByte"] = (df.CpuTimeUs
-./google/cloud/storage/benchmarks/throughput_options_test.cc:214:25    - Unknown word (Readoffset) -- TEST(ThroughputOptions, Readoffset) {
+./google/cloud/storage/benchmarks/throughput_options_test.cc:216:25    - Unknown word (Readoffset) -- TEST(ThroughputOptions, Readoffset) {
 ./google/cloud/storage/bucket_metadata.cc:266:14    - Unknown word (subpatch)   -- if (labels_subpatch_dirty_) {
 ./google/cloud/storage/bucket_metadata.h:527:69    - Unknown word (Multiregion) -- regions within the same Multiregion.
 ./google/cloud/storage/bucket_metadata_test.cc:1149:37   - Unknown word (Coldline)       -- LifecycleRule::SetStorageClassColdline());
@@ -773,12 +774,13 @@ Lines:
 ./google/cloud/storage/internal/curl_download_request_test.cc:100:56    - Unknown word (gunzipped)  -- body-transformations", "gunzipped"}},
 ./google/cloud/storage/internal/curl_download_request_test.cc:99:9      - Unknown word (guploader)  -- {"guploader",
 ./google/cloud/storage/internal/grpc_bucket_request_parser.cc:56:6      - Unknown word (subobject)  -- // subobject.
-./google/cloud/storage/internal/grpc_client.cc:199:14    - Unknown word (testbench)  -- auto const testbench =
+./google/cloud/storage/internal/grpc_client.cc:200:14    - Unknown word (testbench)  -- auto const testbench =
 ./google/cloud/storage/internal/grpc_object_request_parser_test.cc:62:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 ./google/cloud/storage/internal/object_requests_test.cc:239:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 ./google/cloud/storage/internal/object_requests_test.cc:259:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 ./google/cloud/storage/internal/object_requests_test.cc:533:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
 ./google/cloud/storage/internal/object_write_streambuf_test.cc:363:39    - Unknown word (Putn)       -- ectWriteStreambufTest, MixPutcPutn) {
+./google/cloud/storage/internal/policy_document_request.cc:94:37     - Unknown word (LIBCPP)     -- 1900) && !defined(_LIBCPP_VERSION)
 ./google/cloud/storage/internal/retry_client_test.cc:432:40    - Unknown word (Overcommit) -- yClientTest, UploadChunkHandleOvercommit) {
 ./google/cloud/storage/internal/signed_url_requests_test.cc:111:62    - Unknown word (Bbar)       -- -object?marker=foo%2Bbar)""";
 ./google/cloud/storage/internal/signed_url_requests_test.cc:225:58    - Unknown word (Fhtml)      -- response-content-type=text%2Fhtml)""";
@@ -787,12 +789,12 @@ Lines:
 ./google/cloud/storage/internal/signed_url_requests_test.cc:426:43    - Unknown word (Ffoo)       -- object/path/to/object_%3Ffoo%3D%26bar?acl
 ./google/cloud/storage/internal/storage_stub_factory.cc:38:31     - Unknown word (subchannel) -- SetInt("grpc.use_local_subchannel_pool", 1);
 ./google/cloud/storage/internal/tuple_filter_test.cc:63:25     - Unknown word (rvalues)    -- Test that forwarding rvalues works.
-./google/cloud/storage/oauth2/service_account_credentials.h:64:62     - Unknown word (keyfiles)   -- applications use JSON keyfiles instead.
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:85:11     - Unknown word (Aietf)      -- "urn%3Aietf%3Aparams%3Aoauth%3Agrant
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:85:18     - Unknown word (Aparams)    -- "urn%3Aietf%3Aparams%3Aoauth%3Agrant-type
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:85:27     - Unknown word (Aoauth)     -- urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:85:35     - Unknown word (Agrant)     -- Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer";
-./google/cloud/storage/oauth2/service_account_credentials_test.cc:85:48     - Unknown word (Ajwt)       -- Aoauth%3Agrant-type%3Ajwt-bearer";
+./google/cloud/storage/oauth2/service_account_credentials.h:65:62     - Unknown word (keyfiles)   -- applications use JSON keyfiles instead.
+./google/cloud/storage/oauth2/service_account_credentials_test.cc:79:11     - Unknown word (Aietf)      -- "urn%3Aietf%3Aparams%3Aoauth%3Agrant
+./google/cloud/storage/oauth2/service_account_credentials_test.cc:79:18     - Unknown word (Aparams)    -- "urn%3Aietf%3Aparams%3Aoauth%3Agrant-type
+./google/cloud/storage/oauth2/service_account_credentials_test.cc:79:27     - Unknown word (Aoauth)     -- urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer
+./google/cloud/storage/oauth2/service_account_credentials_test.cc:79:35     - Unknown word (Agrant)     -- Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer";
+./google/cloud/storage/oauth2/service_account_credentials_test.cc:79:48     - Unknown word (Ajwt)       -- Aoauth%3Agrant-type%3Ajwt-bearer";
 ./google/cloud/storage/parallel_uploads_test.cc:1133:40   - Unknown word (blahblah)   -- ParseResumableSessionId("blahblah"),
 ./google/cloud/storage/parallel_uploads_test.cc:753:50    - Unknown word (Cration)    -- FileOneStreamFailsUponCration) {
 ./google/cloud/storage/policy_document_test.cc:158:8     - Unknown word (asdfasdfasdf) -- "asdfasdfasdf", "asdfasdfasdf"};
