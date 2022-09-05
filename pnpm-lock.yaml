@@ -448,7 +448,7 @@ importers:
       fast-equals: ^4.0.3
       find-up: ^5.0.0
       fs-extra: ^10.1.0
-      gensequence: ^3.1.1
+      gensequence: ^4.0.2
       import-fresh: ^3.3.0
       jest: ^28.1.3
       lorem-ipsum: ^2.0.8
@@ -475,7 +475,7 @@ importers:
       fast-equals: 4.0.3
       find-up: 5.0.0
       fs-extra: 10.1.0
-      gensequence: 3.1.1
+      gensequence: 4.0.2
       import-fresh: 3.3.0
       resolve-from: 5.0.0
       resolve-global: 1.0.0
@@ -534,7 +534,7 @@ importers:
       cspell-io: workspace:^
       cspell-trie-lib: workspace:^
       fs-extra: ^10.1.0
-      gensequence: ^3.1.1
+      gensequence: ^4.0.2
       glob: ^8.0.3
       hunspell-reader: workspace:^
       jest: ^28.1.3
@@ -546,7 +546,7 @@ importers:
       cspell-io: link:../cspell-io
       cspell-trie-lib: link:../cspell-trie-lib
       fs-extra: 10.1.0
-      gensequence: 3.1.1
+      gensequence: 4.0.2
       glob: 8.0.3
       hunspell-reader: link:../hunspell-reader
     devDependencies:
@@ -568,14 +568,14 @@ importers:
       commander: ^9.4.0
       cspell-trie-lib: workspace:^
       fs-extra: ^10.1.0
-      gensequence: ^3.1.1
+      gensequence: ^4.0.2
       jest: ^28.1.3
       rimraf: ^3.0.2
     dependencies:
       commander: 9.4.0
       cspell-trie-lib: link:../cspell-trie-lib
       fs-extra: 10.1.0
-      gensequence: 3.1.1
+      gensequence: 4.0.2
     devDependencies:
       '@types/fs-extra': 9.0.13
       '@types/node': 18.7.14
@@ -591,14 +591,14 @@ importers:
       '@types/fs-extra': ^9.0.13
       '@types/node': ^18.7.14
       fs-extra: ^10.1.0
-      gensequence: ^3.1.1
+      gensequence: ^4.0.2
       jest: ^28.1.3
       rimraf: ^3.0.2
     dependencies:
       '@cspell/cspell-pipe': link:../cspell-pipe
       '@cspell/cspell-types': link:../cspell-types
       fs-extra: 10.1.0
-      gensequence: 3.1.1
+      gensequence: 4.0.2
     devDependencies:
       '@cspell/dict-en_us': 2.3.3
       '@cspell/dict-es-es': 2.2.1
@@ -636,7 +636,7 @@ importers:
       '@types/node': ^18.7.14
       commander: ^9.4.0
       fs-extra: ^10.1.0
-      gensequence: ^3.1.1
+      gensequence: ^4.0.2
       iconv-lite: ^0.6.3
       jest: ^28.1.3
       rimraf: ^3.0.2
@@ -645,7 +645,7 @@ importers:
     dependencies:
       commander: 9.4.0
       fs-extra: 10.1.0
-      gensequence: 3.1.1
+      gensequence: 4.0.2
       iconv-lite: 0.6.3
     devDependencies:
       '@types/fs-extra': 9.0.13
@@ -4975,8 +4975,10 @@ packages:
       minimist: 1.2.6
     dev: true
 
-  /ajv-formats/2.1.1:
+  /ajv-formats/2.1.1_ajv@8.11.0:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -7752,9 +7754,9 @@ packages:
       wide-align: 1.1.5
     dev: true
 
-  /gensequence/3.1.1:
-    resolution: {integrity: sha512-ys3h0hiteRwmY6BsvSttPmkhC0vEQHPJduANBRtH/dlDPZ0UBIb/dXy80IcckXyuQ6LKg+PloRqvGER9IS7F7g==}
-    engines: {node: '>=10.0.0'}
+  /gensequence/4.0.2:
+    resolution: {integrity: sha512-mQiFskYFPFDSUpBJ/n3ebAV2Ufu6DZGvUPXzyWYzFfJr6/DyOOZVnjx6VTWE4y0RLvYWnc5tZq5sCjzEWhRjqQ==}
+    engines: {node: '>=14'}
     dev: false
 
   /gensync/1.0.0-beta.2:
@@ -11488,6 +11490,12 @@ packages:
   /react-dev-utils/12.0.1_j7mri6brqo6jqc4rzvyyrslsmu:
     resolution: {integrity: sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ==}
     engines: {node: '>=14'}
+    peerDependencies:
+      typescript: '>=2.7'
+      webpack: '>=4'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
     dependencies:
       '@babel/code-frame': 7.18.6
       address: 1.2.0
@@ -11518,9 +11526,7 @@ packages:
     transitivePeerDependencies:
       - eslint
       - supports-color
-      - typescript
       - vue-template-compiler
-      - webpack
     dev: false
 
   /react-dom/17.0.2_react@17.0.2:
@@ -12124,7 +12130,7 @@ packages:
     dependencies:
       '@types/json-schema': 7.0.11
       ajv: 8.11.0
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1_ajv@8.11.0
       ajv-keywords: 5.1.0_ajv@8.11.0
     dev: false
 
