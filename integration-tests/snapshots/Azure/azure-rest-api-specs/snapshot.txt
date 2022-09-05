@@ -3,7 +3,7 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 1897, Issues found: 2285 in 718 files
+ CSpell: Files checked: 1907, Issues found: 2312 in 724 files
  exit code: 1
 ./CONTRIBUTING.md:23:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 ./CONTRIBUTING.md:85:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -22,10 +22,10 @@ Lines:
 ./documentation/Semantic-and-Model-Violations-Reference.md:15:14     - Unknown word (OPERATIONID) -- | [DUPLICATE_OPERATIONID](#DUPLICATE_OPERATIONID
 ./documentation/Semantic-and-Model-Violations-Reference.md:647:39    - Unknown word (dicriminator) -- : The value of x-ms-dicriminator-value is not in the
 ./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:16:48     - Unknown word (Restler)    -- dependencies.json with Restler.
-./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:136    - Unknown word (Tler)          -- restler:v8.6.0 dotnet /RESTler/restler/Restler.dll
-./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:189    - Unknown word (appconfiguration) -- --api_spec /swagger/appconfiguration/resource-manager/Microsoft
+./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:129    - Unknown word (Tler)          -- tlerfuzzer/restler dotnet /RESTler/restler/Restler.dll
+./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:182    - Unknown word (appconfiguration) -- --api_spec /swagger/appconfiguration/resource-manager/Microsoft
 ./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:63     - Unknown word (restler)    -- swagger -w /swagger/.restler_output mcr.microsoft
-./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:96     - Unknown word (restlerfuzzer) -- output mcr.microsoft.com/restlerfuzzer/restler:v8.6.0 dotnet
+./documentation/api-scenario/how-to/GenerateABasicApiScenario.md:19:96     - Unknown word (restlerfuzzer) -- output mcr.microsoft.com/restlerfuzzer/restler dotnet /RESTler
 ./documentation/api-scenario/how-to/QuickStart.md:125:83    - Unknown word (apitest)    -- and postman env in `.apitest/<apiScenarioFile>/<runId
 ./documentation/api-scenario/how-to/QuickStart.md:20:71     - Unknown word (Dogfood)    -- API Scenario with ARM Dogfood/Canary/Production environment
 ./documentation/api-scenario/how-to/QuickStart.md:54:13     - Unknown word (configstor) -- prefix: configstor
@@ -142,7 +142,7 @@ Lines:
 ./specification/billing/resource-manager/readme.go.md:15:42     - Unknown word (armbilling) -- resourcemanager/billing/armbilling
 ./specification/botservice/resource-manager/readme.md:43:36     - Unknown word (systemdata) -- don not yet support systemdata
 ./specification/cdn/resource-manager/readme.go.md:14:38     - Unknown word (armcdn)     -- resourcemanager/cdn/armcdn
-./specification/cdn/resource-manager/readme.md:43:37     - Unknown word (cdnwebapplicationfirewall) -- Cdn/stable/2021-06-01/cdnwebapplicationfirewall.json
+./specification/cdn/resource-manager/readme.md:43:46     - Unknown word (cdnwebapplicationfirewall) -- preview/2022-05-01-preview/cdnwebapplicationfirewall.json
 ./specification/changeanalysis/resource-manager/readme.csharp.md:14:40     - Unknown word (changeanalysis) -- csharp-sdks-folder)/changeanalysis/management/Microsoft
 ./specification/chaos/resource-manager/readme.go.md:8:40      - Unknown word (armchaos)   -- resourcemanager/chaos/armchaos
 ./specification/chaos/resource-manager/readme.md:129:22    - Unknown word (toplevelresourcelistbysubscription) -- we defined the toplevelresourcelistbysubscription here:
@@ -162,6 +162,7 @@ Lines:
 ./specification/communication/data-plane/Chat/readme.md:38:33     - Unknown word (communicationserviceschat) -- 2020-09-21-preview2/communicationserviceschat.json
 ./specification/communication/data-plane/JobRouter/readme.md:29:14     - Unknown word (jobrouter)  -- tag: package-jobrouter-2022-07-18-preview
 ./specification/communication/data-plane/JobRouter/readme.md:38:32     - Unknown word (communicationservicejobrouter) -- preview/2022-07-18-preview/communicationservicejobrouter.json
+./specification/communication/data-plane/MediaComposition/readme.md:38:32     - Unknown word (mediacomposition) -- preview/2022-07-16-preview/mediacomposition.json
 ./specification/communication/data-plane/OperatorConnect/readme.md:43:4      - Unknown word (Supression) -- ## Supression
 ./specification/communication/data-plane/PhoneNumbers/readme.md:32:18     - Unknown word (phonenumber) -- ### Tag: package-phonenumber-2021-03-07
 ./specification/communication/data-plane/PhoneNumbers/readme.md:38:23     - Unknown word (phonenumbers) -- - stable/2021-03-07/phonenumbers.json
@@ -180,7 +181,7 @@ Lines:
 ./specification/cosmos-db/data-plane/readme.go.md:8:14      - Unknown word (storagetables) -- namespace: storagetables
 ./specification/cosmos-db/data-plane/readme.md:49:46     - Unknown word (outputm)    -- only supports XML input/outputm which is not supported
 ./specification/cosmos-db/resource-manager/readme.go.md:14:41     - Unknown word (armcosmos)  -- resourcemanager/cosmos/armcosmos
-./specification/cosmos-db/resource-manager/readme.md:42:53     - Unknown word (mongorbac)  -- preview/2022-05-15-preview/mongorbac.json
+./specification/cosmos-db/resource-manager/readme.md:45:44     - Unknown word (mongorbac)  -- DocumentDB/stable/2022-08-15/mongorbac.json
 ./specification/cost-management/resource-manager/readme.md:129:57    - Unknown word (costallocation)             -- preview/2020-03-01-preview/costallocation.json
 ./specification/cost-management/resource-manager/readme.md:218:52    - Unknown word (Operatio)                   -- Response schema of OperatioAPI does not match Arm
 ./specification/cost-management/resource-manager/readme.md:41:63     - Unknown word (generatecostdetailsreport) -- 5-01/costmanagement.generatecostdetailsreport.json
@@ -233,6 +234,8 @@ Lines:
 ./specification/healthcareapis/resource-manager/readme.cli.md:14:18     - Unknown word (corsconfiguration)           -- "/properties/corsconfiguration": "Cors*/"
 ./specification/healthcareapis/resource-manager/readme.cli.md:15:18     - Unknown word (cosmosdbconfiguration)       -- "/properties/cosmosdbconfiguration": "CosmosDb*/"
 ./specification/healthcareapis/resource-manager/readme.cli.md:16:18     - Unknown word (accesspolicies)              -- "/properties/accesspolicies": "AccessPolicies*/
+./specification/hybridaks/resource-manager/readme.az.md:10:14     - Unknown word (hybridaks)  -- group: hybridaks provisionedcluster
+./specification/hybridaks/resource-manager/readme.az.md:10:24     - Unknown word (provisionedcluster) -- group: hybridaks provisionedcluster
 ./specification/hybridcompute/resource-manager/readme.az.md:7:17      - Unknown word (connectedmachine) -- extensions: connectedmachine
 ./specification/hybridcompute/resource-manager/readme.go.md:9:14      - Unknown word (hybridcompute) -- namespace: hybridcompute
 ./specification/hybridconnectivity/resource-manager/readme.az.md:9:17      - Unknown word (hybridconnectivity) -- extensions: hybridconnectivity
@@ -397,7 +400,7 @@ Lines:
 ./specification/search/data-plane/Azure.Search/readme.md:356:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
 ./specification/search/resource-manager/readme.go.md:14:41     - Unknown word (armsearch)  -- resourcemanager/search/armsearch
 ./specification/security/resource-manager/readme.csharp.md:18:40     - Unknown word (securitycenter) -- csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management
-./specification/securityinsights/resource-manager/readme.md:350:152   - Unknown word (reviewr)    -- supress this by Swagger reviewr.'
+./specification/securityinsights/resource-manager/readme.md:377:152   - Unknown word (reviewr)    -- supress this by Swagger reviewr.'
 ./specification/servicebus/resource-manager/readme.md:41:51     - Unknown word (migrationconfigs) -- preview/2021-01-01-preview/migrationconfigs.json
 ./specification/servicebus/resource-manager/readme.md:42:51     - Unknown word (networksets)      -- preview/2021-01-01-preview/networksets.json
 ./specification/servicefabric/resource-manager/readme.md:98:54     - Unknown word (managedcluster) -- preview/2020-01-01-preview/managedcluster.json
