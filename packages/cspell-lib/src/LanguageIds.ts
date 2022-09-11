@@ -32,6 +32,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'clojure', extensions: ['.clj', '.cljs', '.cljx', '.clojure', '.edn'] },
     { id: 'coffeescript', extensions: ['.coffee', '.cson'] },
     { id: 'c', extensions: ['.c'] },
+    { id: 'cmake', extensions: ['.cmake'], filenames: ['CMakeLists.txt'] },
     {
         id: 'cpp',
         extensions: ['.cpp', '.cc', '.cxx', '.hpp', '.hh', '.hxx', '.h', '.mm', '.ino', '.inl'],
