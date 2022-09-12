@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SystemServiceBus ServiceRequestFactory Compliance 1`] = `
-Array [
-  Array [
+[
+  [
     "System:RegisterHandler",
     "System:RegisterHandler",
   ],
-  Array [
+  [
     "System:CreateSubsystem",
     "System:CreateSubsystem",
   ],
-  Array [
+  [
     "fs:readFile",
     "fs:readFile",
   ],
-  Array [
+  [
     "zlib:inflate",
     "zlib:inflate",
   ],
@@ -25,13 +25,13 @@ exports[`SystemServiceBus createSystemServiceBus 1`] = `
 Map {
   "Default Subsystem" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
-    "handler": Object {
+    "handler": {
       "description": "Process Requests Matching: <>",
       "fn": [Function],
       "name": "Subsystem: Default Subsystem",
     },
-    "handlers": Array [
-      Object {
+    "handlers": [
+      {
         "description": "Matches against: <>",
         "fn": [Function],
         "name": "Subsystem Register Handlers for Default Subsystem",
@@ -42,13 +42,13 @@ Map {
   },
   "File System" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
-    "handler": Object {
+    "handler": {
       "description": "Process Requests Matching: <fs:>",
       "fn": [Function],
       "name": "Subsystem: File System",
     },
-    "handlers": Array [
-      Object {
+    "handlers": [
+      {
         "description": "Matches against: <fs:>",
         "fn": [Function],
         "name": "Subsystem Register Handlers for File System",
@@ -59,13 +59,13 @@ Map {
   },
   "ZLib" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
-    "handler": Object {
+    "handler": {
       "description": "Process Requests Matching: <zlib:>",
       "fn": [Function],
       "name": "Subsystem: ZLib",
     },
-    "handlers": Array [
-      Object {
+    "handlers": [
+      {
         "description": "Matches against: <zlib:>",
         "fn": [Function],
         "name": "Subsystem Register Handlers for ZLib",
@@ -76,13 +76,13 @@ Map {
   },
   "Path" => SubsystemServiceBusImpl {
     "canHandleType": [Function],
-    "handler": Object {
+    "handler": {
       "description": "Process Requests Matching: <path:>",
       "fn": [Function],
       "name": "Subsystem: Path",
     },
-    "handlers": Array [
-      Object {
+    "handlers": [
+      {
         "description": "Matches against: <path:>",
         "fn": [Function],
         "name": "Subsystem Register Handlers for Path",

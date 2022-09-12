@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`tokenizeLine tokenizeText "line # comment." -  1`] = `
-Array [
+[
   0: "line # comment.":
     0: "line "         -- source.s
     5: "#"             -- punctuation.s comment.line.s source.s
@@ -10,7 +10,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText "line # comment.\\n" -  1`] = `
-Array [
+[
   0: "line # comment.↩":
     0: "line "          -- source.s
     5: "#"              -- punctuation.s comment.line.s source.s
@@ -19,7 +19,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText "line ( a (b))" -  1`] = `
-Array [
+[
   0: "line ( a (b))":
     0: "line "     -- source.s
     5: "("         -- paren.braces.s braces.s source.s
@@ -32,7 +32,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText "line ( a { b } c)" -  1`] = `
-Array [
+[
   0: "line ( a { b } c)":
     0: "line "     -- source.s
     5: "("         -- paren.braces.s braces.s source.s
@@ -46,7 +46,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText TypeScript "n = 42; // comment." -  1`] = `
-Array [
+[
   0: "n = 42; // comment.":
     0: "n"              -- identifier code.ts source.ts
     1: " "              -- punctuation.space.ts code.ts source.ts
@@ -62,7 +62,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText TypeScript "n = 42; // comment.\\n\\n" -  1`] = `
-Array [
+[
   0: "n = 42; // comment.↩":
     0: "n"              -- identifier code.ts source.ts
     1: " "              -- punctuation.space.ts code.ts source.ts
@@ -81,7 +81,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText TypeScript "n = 42; // comment.\\nq = n + 1;\\n" -  1`] = `
-Array [
+[
   0: "n = 42; // comment.↩":
     0: "n"              -- identifier code.ts source.ts
     1: " "              -- punctuation.space.ts code.ts source.ts
@@ -110,7 +110,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText TypeScript sampleCode -  1`] = `
-Array [
+[
   0: "import { tokenizedLinesToMarkdown } from './visualizeAsMD';↩":
     0: "import"                       -- keyword.typescript.ts code.ts source.ts
     6: " "                            -- punctuation.space.ts code.ts source.ts
@@ -317,7 +317,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText TypeScript sampleTemplate -  1`] = `
-Array [
+[
   0: "msg = \`↩":
     0: "msg"     -- identifier code.ts source.ts
     3: " "       -- punctuation.space.ts code.ts source.ts
@@ -349,7 +349,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText TypeScript sampleTemplate2 -  1`] = `
-Array [
+[
   0: "↩":
     0: "↩"     -- punctuation.ts code.ts source.ts,
   1: "const sampleText = \`↩":
@@ -427,7 +427,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText complex sample -  1`] = `
-Array [
+[
   0: "↩":
     0: "↩"     -- source.s,
   1: "    const x = 'The auto\\\\'s left wheel.';↩":
@@ -485,7 +485,7 @@ Array [
 `;
 
 exports[`tokenizeLine tokenizeText sampleNestedParen -  1`] = `
-Array [
+[
   0: "↩":
     0: "↩"     -- source.s,
   1: "(↩":
