@@ -3,20 +3,20 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1779, Issues found: 5357 in 1215 files
+ CSpell: Files checked: 1784, Issues found: 5364 in 1216 files
  exit code: 1
 ./LICENSE:1:58      - Unknown word (openjsf)    -- other contributors, <www.openjsf.org>
 ./Makefile.js:144:88    - Unknown word (ined)               -- followed by the string "ined".
 ./Makefile.js:150:48    - Unknown word (blogpost)           -- render(cat("./templates/blogpost.md.ejs"), renderContext
 ./Makefile.js:286:12    - Unknown word (gensite)            -- target.gensite();
-./Makefile.js:312:8     - Unknown word (Premajor)           -- * Premajor release should have
-./Makefile.js:313:21    - Unknown word (prepatch)           -- * Preminor and prepatch release will not.
-./Makefile.js:313:8     - Unknown word (Preminor)           -- * Preminor and prepatch release
-./Makefile.js:321:56    - Unknown word (preminor)           -- a major release (not preminor/prepatch).
-./Makefile.js:553:11    - Unknown word (fuzzer)             -- const fuzzerRunner = require("./tools
+./Makefile.js:319:8     - Unknown word (Premajor)           -- * Premajor release should have
+./Makefile.js:320:21    - Unknown word (prepatch)           -- * Preminor and prepatch release will not.
+./Makefile.js:320:8     - Unknown word (Preminor)           -- * Preminor and prepatch release
+./Makefile.js:328:56    - Unknown word (preminor)           -- a major release (not preminor/prepatch).
+./Makefile.js:560:11    - Unknown word (fuzzer)             -- const fuzzerRunner = require("./tools
 ./Makefile.js:76:88     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8")),
 ./Makefile.js:80:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
-./Makefile.js:903:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
+./Makefile.js:910:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
 ./README.md:204:5     - Unknown word (teamstart)  -- <!--teamstart-->
 ./README.md:223:7     - Unknown word (Djermanovic) -- Milos Djermanovic
 ./README.md:239:1     - Unknown word (Nitin)       -- Nitin Kumar
@@ -55,6 +55,7 @@ Lines:
 ./docs/src/assets/js/main.js:244:27    - Unknown word (labelledby) -- "aria-labelledby",
 ./docs/src/assets/js/main.js:253:17    - Unknown word (thepanel)   -- var thepanel = toggleButton.nextElementSib
 ./docs/src/assets/js/main.js:66:51     - Unknown word (togglenav)  -- addEventListener("click", togglenav, false);
+./docs/src/assets/js/search.js:167:60    - Unknown word (behaviour)  -- search').scrollIntoView({ behaviour: "smooth", block: "start
 ./docs/src/assets/js/tabs.js:164:10    - Unknown word (unactivate) -- // unactivate all other tabs
 ./docs/src/assets/js/tabs.js:167:27    - Unknown word (tabindex)   -- tab.setAttribute('tabindex', '-1');
 ./docs/src/assets/js/tabs.js:174:11    - Unknown word (Tabpanel)   -- showTabpanel(tab);
@@ -66,14 +67,15 @@ Lines:
 ./docs/src/assets/scss/carbon-ads.scss:7:2       - Unknown word (carbonads)  -- #carbonads * {
 ./docs/src/assets/scss/carbon-ads.scss:81:20     - Unknown word (poweredby)  -- #carbonads .carbon-poweredby {
 ./docs/src/assets/scss/components/docs-navigation.scss:28:6      - Unknown word (flexer)     -- .flexer {
-./docs/src/assets/scss/components/search.scss:150:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
+./docs/src/assets/scss/components/search.scss:154:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
 ./docs/src/assets/scss/components/search.scss:73:15     - Unknown word (rekative)   -- position: rekative;
 ./docs/src/assets/scss/docs.scss:124:216   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
 ./docs/src/assets/scss/docs.scss:124:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
 ./docs/src/assets/scss/docs.scss:124:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
+./docs/src/assets/scss/docs.scss:152:6     - Unknown word (anchorjs)   -- .anchorjs-link {
 ./docs/src/assets/scss/print.scss:187:29    - Unknown word (mywebsite)  -- 'http']:not([href*='mywebsite.com'])::after {
-./docs/src/assets/scss/syntax-highlighter.scss:122:35    - Unknown word (nums)       -- variant-numeric: tabular-nums;
-./docs/src/assets/scss/syntax-highlighter.scss:89:8      - Unknown word (atrule)     -- .token.atrule,
+./docs/src/assets/scss/syntax-highlighter.scss:123:35    - Unknown word (nums)       -- variant-numeric: tabular-nums;
+./docs/src/assets/scss/syntax-highlighter.scss:90:8      - Unknown word (atrule)     -- .token.atrule,
 ./docs/src/developer-guide/architecture/index.md:65:264    - Unknown word (espree)     -- the given text with `espree` (or whatever the configured
 ./docs/src/developer-guide/architecture/index.md:67:29     - Unknown word (estraverse) -- the AST is available, `estraverse` is used to traverse
 ./docs/src/developer-guide/code-path-analysis.md:362:5     - Unknown word (hoge)       -- hoge();
@@ -293,7 +295,7 @@ Lines:
 ./lib/config/default-config.js:59:61     - Unknown word (globbed)    -- ensure these files are globbed by default
 ./lib/config/flat-config-array.js:73:16     - Unknown word (baes)       -- * The baes config used to build
 ./lib/eslint/eslint-helpers.js:16:7      - Unknown word (globby)     -- const globby = require("globby")
-./lib/eslint/eslint-helpers.js:69:52     - Unknown word (stringss)   -- an array of non-empty stringss or not.
+./lib/eslint/eslint-helpers.js:70:52     - Unknown word (stringss)   -- an array of non-empty stringss or not.
 ./lib/eslint/flat-eslint.js:1051:12   - Unknown word (thirdparty) -- * - A thirdparty formatter name:
 ./lib/eslint/flat-eslint.js:875:37    - Unknown word (fixtypes)   -- // set up fixer for fixtypes if necessary
 ./lib/linter/code-path-analysis/code-path-state.js:159:31    - Unknown word (unflattened) -- {CodePathSegment[]} unflattenedFromSegments Segments
@@ -326,7 +328,8 @@ Lines:
 ./lib/rules/indent-legacy.js:4:48      - Unknown word (nodeca)     -- ported and modified from nodeca.
 ./lib/rules/indent-legacy.js:573:43    - Unknown word (IIEF)       -- that the node is an IIEF
 ./lib/rules/indent-legacy.js:918:66    - Unknown word (blockless)  -- for indentation for blockless nodes
-./lib/rules/indent.js:903:21    - Unknown word (Blockless)  -- function addBlocklessNodeIndent(node) {
+./lib/rules/indent.js:15:36     - Unknown word (sdsl)       -- OrderedMap } = require("js-sdsl");
+./lib/rules/indent.js:911:21    - Unknown word (Blockless)  -- function addBlocklessNodeIndent(node) {
 ./lib/rules/jsx-quotes.js:21:23     - Unknown word (singlequote) -- description: "singlequote",
 ./lib/rules/keyword-spacing.js:148:18    - Unknown word (unexpect)   -- function unexpectSpaceBefore(token, pattern
 ./lib/rules/lines-around-comment.js:22:22     - Unknown word (Nums)       -- function getEmptyLineNums(lines) {
@@ -382,9 +385,9 @@ Lines:
 ./lib/rules/utils/ast-utils.js:395:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 ./lib/rules/utils/patterns/letters.js:12:24     - Unknown word (Dulin)      -- Copyright 2013-2016 Dulin Marat and other contributors
 ./lib/shared/config-validator.js:286:55    - Unknown word (ECMAFEATURES) -- source, "ESLINT_LEGACY_ECMAFEATURES");
-./package.json:116:6     - Unknown word (eslump)       -- "eslump": "^3.0.0",
-./package.json:134:6     - Unknown word (memfs)        -- "memfs": "^3.0.1",
-./package.json:135:6     - Unknown word (metascraper)  -- "metascraper": "^5.25.7",
+./package.json:117:6     - Unknown word (eslump)       -- "eslump": "^3.0.0",
+./package.json:135:6     - Unknown word (memfs)        -- "memfs": "^3.0.1",
+./package.json:136:6     - Unknown word (metascraper)  -- "metascraper": "^5.25.7",
 ./package.json:24:15     - Unknown word (alpharelease) -- "generate-alpharelease": "node Makefile.js
 ./package.json:25:15     - Unknown word (betarelease)  -- "generate-betarelease": "node Makefile.js
 ./package.json:26:15     - Unknown word (rcrelease)    -- "generate-rcrelease": "node Makefile.js
@@ -423,13 +426,13 @@ Lines:
 ./tests/lib/cli-engine/cli-engine.js:589:44    - Unknown word (foothis)    -- output: "var bar = foothis is a syntax error."
 ./tests/lib/cli-engine/cli-engine.js:6350:87   - Unknown word (myconf)              -- config node_modules/myconf/.eslintrc.json',",
 ./tests/lib/cli-engine/cli-engine.js:6578:52   - Unknown word (extendees)           -- config file and linear extendees.", () => {
-./tests/lib/cli.js:238:56    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath}`);
+./tests/lib/cli.js:250:56    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath}`);
 ./tests/lib/config/flat-config-array.js:1408:29   - Unknown word (foox)        -- foox: [1, "bar"]
 ./tests/lib/config/flat-config-array.js:1430:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 ./tests/lib/config/flat-config-array.js:147:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 ./tests/lib/config/flat-config-array.js:898:43    - Unknown word (truex)       -- foo: "truex"
-./tests/lib/eslint/flat-eslint.js:4090:50   - Unknown word (flob)       -- due to a bug in fast-flob that doesn't allow
-./tests/lib/eslint/flat-eslint.js:4095:9    - Unknown word (xdescribe)  -- xdescribe("ignorePatterns can
+./tests/lib/eslint/flat-eslint.js:4179:50   - Unknown word (flob)       -- due to a bug in fast-flob that doesn't allow
+./tests/lib/eslint/flat-eslint.js:4184:9    - Unknown word (xdescribe)  -- xdescribe("ignorePatterns can
 ./tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     - Unknown word (ESQUERY)    -- const STANDARD_ESQUERY_OPTION = { visitorKeys
 ./tests/lib/linter/config-comment-parser.js:165:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 ./tests/lib/linter/linter.js:3229:1    - Unknown word (consolexlog) -- consolexlog("test2");
