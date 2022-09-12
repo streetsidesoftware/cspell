@@ -3,7 +3,7 @@ Repository: pycontribs/jira
 Url: "https://github.com/pycontribs/jira.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 76, Issues found: 513 in 40 files
+ CSpell: Files checked: 74, Issues found: 514 in 39 files
  exit code: 1
 ./AUTHORS.rst:3:21      - Unknown word (Contribs)   -- Development Team (PyContribs)
 ./AUTHORS.rst:5:7       - Unknown word (Speakmon)   -- - Ben Speakmon <ben.speakmon@gmail
@@ -15,7 +15,6 @@ Lines:
 ./README.rst:129:94    - Unknown word (Greenhopper) -- include: Jira Agile, Greenhopper)
 ./README.rst:148:3     - Unknown word (Navicat)     -- * Navicat_ for providing us free
 ./README.rst:15:22     - Unknown word (pycontribs) -- :target: irc:///#pycontribs
-./bindep.txt:2:6       - Unknown word (devel)      -- krb5-devel [platform:rpm]
 ./constraints.txt:109:1     - Unknown word (pycparser)     -- pycparser==2.21
 ./constraints.txt:111:1     - Unknown word (pygments)      -- pygments==2.13.0
 ./constraints.txt:116:1     - Unknown word (pyjwt)         -- pyjwt==2.4.0
@@ -178,18 +177,19 @@ Lines:
 ./jira/resources.py:633:18    - Unknown word (statuscategorychangedate) -- self.statuscategorychangedate: Optional[str] = None
 ./jira/resources.py:760:42    - Unknown word (browsable)                -- URL of the issue, the browsable one not the REST one
 ./jira/resources.py:890:32    - Unknown word (issuesecuritylevelscheme) -- self, "project/{0}/issuesecuritylevelscheme?expand=user", options
-./pyproject.toml:3:4       - Unknown word (setuptools) -- "setuptools >= 41.0.0",
-./setup.cfg:123:10    - Unknown word (pylint)     -- format = pylint
-./setup.cfg:135:2     - Unknown word (isort)      -- [isort]
-./setup.cfg:149:1     - Unknown word (norecursedirs) -- norecursedirs = . jira _build tmp
-./setup.cfg:149:60    - Unknown word (distutils)     -- third lib *.egg bin distutils build docs demo
-./setup.cfg:151:1     - Unknown word (addopts)       -- addopts = -p no:xdist --durations
-./setup.cfg:151:70    - Unknown word (junitxml)      -- rxX -v --color=yes --junitxml=build/results.xml -
-./setup.cfg:153:1     - Unknown word (testpaths)     -- testpaths = tests
-./setup.cfg:156:1     - Unknown word (rsyncdirs)     -- rsyncdirs = . jira demo docs
-./setup.cfg:157:1     - Unknown word (rsyncignore)   -- rsyncignore = .git
-./setup.cfg:163:1     - Unknown word (filterwarnings) -- filterwarnings =
-./setup.cfg:169:2     - Unknown word (mypy)           -- [mypy]
+./pyproject.toml:10:7      - Unknown word (isort)      -- [tool.isort]
+./pyproject.toml:16:1      - Unknown word (minversion) -- minversion = "6.0"
+./pyproject.toml:17:1      - Unknown word (testpaths)  -- testpaths = ["tests"]
+./pyproject.toml:19:1      - Unknown word (addopts)    -- addopts = '''-p no:xdist --durations
+./pyproject.toml:20:16     - Unknown word (junitxml)   -- --junitxml=build/results.xml
+./pyproject.toml:24:1      - Unknown word (rsyncdirs)  -- rsyncdirs = ". jira demo docs
+./pyproject.toml:25:1      - Unknown word (rsyncignore) -- rsyncignore = ".git"
+./pyproject.toml:2:14      - Unknown word (setuptools) -- requires = ["setuptools >= 60.0.0", "setuptools
+./pyproject.toml:31:1      - Unknown word (filterwarnings) -- filterwarnings = ["ignore::pytest.PytestWarn
+./pyproject.toml:36:7      - Unknown word (mypy)           -- [tool.mypy]
+./pyproject.toml:5:3       - Unknown word (Setuptools) -- # Setuptools config
+./setup.cfg:103:6     - Unknown word (pyproject)  -- # No pyproject support: https://github
+./setup.cfg:105:10    - Unknown word (pylint)     -- format = pylint
 ./tests/conftest.py:84:5      - Unknown word (rndstr)     -- def rndstr():
 ./tests/conftest.py:88:5      - Unknown word (rndpassword) -- def rndpassword():
 ./tests/conftest.py:99:5      - Unknown word (hashify)     -- def hashify(some_string, max_len
@@ -217,29 +217,28 @@ Lines:
 ./tests/tests.py:128:31    - Unknown word (headingcolour) -- key="jira.lf.text.headingcolour"
 ./tests/tests.py:39:29     - Unknown word (woopsydoodle) -- self.jira.find("woopsydoodle/{0}", "666")
 ./tests/tests.py:409:26    - Unknown word (kall)          -- actual_calls = [[kall[1], kall[2]] for kall
-./tox.ini:106:21    - Unknown word (sdist)             -- # build wheel and sdist using PEP-517
-./tox.ini:107:35    - Unknown word (shutil)            -- -c 'import os.path, shutil, sys; \
-./tox.ini:109:11    - Unknown word (isdir)             -- os.path.isdir(dist_dir) or sys.exit
-./tox.ini:10:8      - Unknown word (basepython) -- ignore_basepython_conflict = True
-./tox.ini:111:10    - Unknown word (rmtree)            -- shutil.rmtree(dist_dir)'
-./tox.ini:113:7     - Unknown word (outdir)            -- --outdir {toxinidir}/dist/ \
-./tox.ini:12:1      - Unknown word (skipdist)   -- skipdist = True
-./tox.ini:21:2      - Unknown word (testenv)    -- [testenv]
-./tox.ini:22:1      - Unknown word (usedevelop) -- usedevelop = True
-./tox.ini:29:1      - Unknown word (sitepackages) -- sitepackages=False
-./tox.ini:2:1       - Unknown word (minversion) -- minversion = 3.8.0
-./tox.ini:34:23     - Unknown word (posargs)      -- python -m pytest {posargs}
-./tox.ini:35:1      - Unknown word (setenv)       -- setenv =
-./tox.ini:36:21     - Unknown word (toxinidir)    -- PIP_CONSTRAINT={toxinidir}/constraints.txt
-./tox.ini:37:14     - Unknown word (envdir)       -- PIP_LOG={envdir}/pip.log
-./tox.ini:40:5      - Unknown word (PYTHONWARNINGS) -- PYTHONWARNINGS=ignore:DEPRECATION:
-./tox.ini:48:1      - Unknown word (passenv)        -- passenv =
-./tox.ini:57:26     - Unknown word (getpass)        -- For Windows users, getpass.get_user() needs USERNAME
-./tox.ini:6:1       - Unknown word (envlist)    -- envlist =
-./tox.ini:73:31     - Unknown word (autoupdate)     -- envpython} -m pre_commit autoupdate
-./tox.ini:73:6      - Unknown word (envpython)      -- {envpython} -m pre_commit autoupdate
-./tox.ini:79:3      - Unknown word (changedir)      -- # changedir=docs
-./tox.ini:83:5      - Unknown word (PYTHONHTTPSVERIFY) -- PYTHONHTTPSVERIFY=0
-./tox.ini:88:12     - Unknown word (toxworkdir)        -- -d "{toxworkdir}/docs_doctree" \
-./tox.ini:88:29     - Unknown word (doctree)           -- d "{toxworkdir}/docs_doctree" \
-./tox.ini:93:13     - Unknown word (pathlib)           -- 'import pathlib; '\
+./tox.ini:107:21    - Unknown word (sdist)             -- # build wheel and sdist using PEP-517
+./tox.ini:108:35    - Unknown word (shutil)            -- -c 'import os.path, shutil, sys; \
+./tox.ini:110:11    - Unknown word (isdir)             -- os.path.isdir(dist_dir) or sys.exit
+./tox.ini:112:10    - Unknown word (rmtree)            -- shutil.rmtree(dist_dir)'
+./tox.ini:114:7     - Unknown word (outdir)            -- --outdir {toxinidir}/dist/ \
+./tox.ini:11:8      - Unknown word (basepython) -- ignore_basepython_conflict = True
+./tox.ini:13:1      - Unknown word (skipdist)   -- skipdist = True
+./tox.ini:22:2      - Unknown word (testenv)    -- [testenv]
+./tox.ini:23:1      - Unknown word (usedevelop) -- usedevelop = True
+./tox.ini:30:1      - Unknown word (sitepackages) -- sitepackages=False
+./tox.ini:35:23     - Unknown word (posargs)      -- python -m pytest {posargs}
+./tox.ini:36:1      - Unknown word (setenv)       -- setenv =
+./tox.ini:37:21     - Unknown word (toxinidir)    -- PIP_CONSTRAINT={toxinidir}/constraints.txt
+./tox.ini:38:14     - Unknown word (envdir)       -- PIP_LOG={envdir}/pip.log
+./tox.ini:41:5      - Unknown word (PYTHONWARNINGS) -- PYTHONWARNINGS=ignore:DEPRECATION:
+./tox.ini:49:1      - Unknown word (passenv)        -- passenv =
+./tox.ini:58:26     - Unknown word (getpass)        -- For Windows users, getpass.get_user() needs USERNAME
+./tox.ini:74:31     - Unknown word (autoupdate)     -- envpython} -m pre_commit autoupdate
+./tox.ini:74:6      - Unknown word (envpython)      -- {envpython} -m pre_commit autoupdate
+./tox.ini:7:1       - Unknown word (envlist)    -- envlist =
+./tox.ini:80:3      - Unknown word (changedir)      -- # changedir=docs
+./tox.ini:84:5      - Unknown word (PYTHONHTTPSVERIFY) -- PYTHONHTTPSVERIFY=0
+./tox.ini:89:12     - Unknown word (toxworkdir)        -- -d "{toxworkdir}/docs_doctree" \
+./tox.ini:89:29     - Unknown word (doctree)           -- d "{toxworkdir}/docs_doctree" \
+./tox.ini:94:13     - Unknown word (pathlib)           -- 'import pathlib; '\

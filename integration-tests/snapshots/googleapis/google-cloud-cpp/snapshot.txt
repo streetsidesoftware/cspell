@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 7685, Issues found: 56108 in 5883 files
+ CSpell: Files checked: 7688, Issues found: 56132 in 5884 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -67,7 +67,6 @@ Lines:
 ./CMakeLists.txt:202:20    - Unknown word (TOUPPER)    -- string(TOUPPER "GOOGLE_CLOUD_CPP_ENABLE
 ./CMakeLists.txt:20:13     - Unknown word (BUGREPORT)  -- set(PACKAGE_BUGREPORT "https://github.com
 ./CMakeLists.txt:244:39    - Unknown word (protobufs)  -- target results in all protobufs being compiled.
-./CMakeLists.txt:245:36    - Unknown word (protos)     -- target(google-cloud-cpp-protos)
 ./CMakeLists.txt:247:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
 ./CMakeLists.txt:253:18    - Unknown word (Protobuf)   -- find_package(ProtobufWithTargets REQUIRED
 ./CMakeLists.txt:293:64    - Unknown word (gmock)      -- GTest::gtest and GTest::gmock libraries.
@@ -111,6 +110,14 @@ Lines:
 ./ci/cloudbuild/notifiers/logs/function/generate_svg_badge.h:15:29     - Unknown word (CLOUDBUILD) -- GOOGLE_CLOUD_CPP_CI_CLOUDBUILD_NOTIFIERS_LOGS_FUNCTION
 ./ci/etc/README.md:13:40     - Unknown word (createinstance) -- GOOGLE_CLOUD_PROJECT}" createinstance \
 ./ci/etc/README.md:22:5      - Unknown word (createtable)    -- createtable quickstart families
+./ci/etc/docuploader-requirements.in:12:19     - Unknown word (protos)     -- googleapis-common-protos==1.56.4
+./ci/etc/docuploader-requirements.in:13:1      - Unknown word (idna)       -- idna==3.3
+./ci/etc/docuploader-requirements.in:15:1      - Unknown word (pyasn)      -- pyasn1==0.4.8
+./ci/etc/docuploader-requirements.in:1:1       - Unknown word (cachetools) -- cachetools==5.2.0
+./ci/etc/docuploader-requirements.in:20:1      - Unknown word (urllib)     -- urllib3==1.26.12
+./ci/etc/docuploader-requirements.in:2:1       - Unknown word (certifi)    -- certifi==2022.6.15
+./ci/etc/docuploader-requirements.in:5:1       - Unknown word (colorlog)   -- colorlog==6.7.0
+./ci/etc/docuploader-requirements.txt:5:43      - Unknown word (docuploader) -- generate-hashes ci/etc/docuploader-requirements.in
 ./ci/etc/expected_install_directories:110:24    - Unknown word (clouddms)                -- include/google/cloud/clouddms
 ./ci/etc/expected_install_directories:241:33    - Unknown word (agentendpoint)           -- google/cloud/osconfig/agentendpoint
 ./ci/etc/expected_install_directories:357:30    - Unknown word (livestream)              -- include/google/cloud/video/livestream
@@ -124,6 +131,7 @@ Lines:
 ./ci/etc/expected_install_directories:71:35     - Unknown word (clientconnectorservices) -- google/cloud/beyondcorp/clientconnectorservices
 ./ci/etc/expected_install_directories:73:35     - Unknown word (clientgateways)          -- google/cloud/beyondcorp/clientgateways
 ./ci/etc/expected_install_directories:80:33     - Unknown word (datatransfer)            -- google/cloud/bigquery/datatransfer
+./ci/etc/pip-tooling-requirements.txt:10:1      - Unknown word (tomli)      -- tomli==2.0.1 \
 ./ci/generate-markdown/README.md:12:4      - Unknown word (HOWTO)      -- ## HOWTO: Generate the markdown
 ./ci/kokoro/README.md:13:46     - Unknown word (Googlers)   -- Kokoro is available to Googlers only (sorry) at go/kokoro
 ./ci/kokoro/README.md:14:21     - Unknown word (codelabs)   -- there are extensive codelabs and detailed descriptions
@@ -482,9 +490,9 @@ Lines:
 ./google/cloud/dlp/dlp_client.cc:49:36     - Unknown word (Deidentify) -- google::privacy::dlp::v2::DeidentifyContentResponse>
 ./google/cloud/dlp/dlp_client.cc:57:36     - Unknown word (Reidentify) -- google::privacy::dlp::v2::ReidentifyContentResponse>
 ./google/cloud/documentai/CMakeLists.txt:117:30    - Unknown word (DOCUMENTAI) -- GOOGLE_CLOUD_CPP_DOCUMENTAI_TEST_LOCATION_ID
-./google/cloud/documentai/README.md:38:11     - Unknown word (fstream)    -- #include <fstream>
-./google/cloud/documentai/README.md:72:8      - Unknown word (ifstream)   -- std::ifstream is(argv[4]);
-./google/cloud/documentai/README.md:73:36     - Unknown word (istreambuf) -- content(std::string{std::istreambuf_iterator<char>(is),
+./google/cloud/documentai/README.md:37:11     - Unknown word (fstream)    -- #include <fstream>
+./google/cloud/documentai/README.md:65:8      - Unknown word (ifstream)   -- std::ifstream is(argv[4]);
+./google/cloud/documentai/README.md:66:36     - Unknown word (istreambuf) -- content(std::string{std::istreambuf_iterator<char>(is),
 ./google/cloud/eventarc/doc/main.dox:45:21     - Unknown word (EVENTARC)   -- - `GOOGLE_CLOUD_CPP_EVENTARC_ENDPOINT=...` overrides
 ./google/cloud/eventarc/doc/main.dox:50:40     - Unknown word (eventarcpublishing) -- (which defaults to "eventarcpublishing.googleapis.com")
 ./google/cloud/filestore/cloud_filestore_manager_client.h:19:39     - Unknown word (FILESTORE)  -- CLOUD_CPP_GOOGLE_CLOUD_FILESTORE_CLOUD_FILESTORE_MANAGER
@@ -528,7 +536,7 @@ Lines:
 ./google/cloud/internal/curl_rest_client_integration_test.cc:101:21    - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
 ./google/cloud/internal/curl_rest_client_integration_test.cc:40:10     - Unknown word (httpbin)    -- auto httpbin_endpoint = google::cloud
 ./google/cloud/internal/curl_rest_client_integration_test.cc:40:62     - Unknown word (HTTPBIN)    -- cloud::internal::GetEnv("HTTPBIN_ENDPOINT");
-./google/cloud/internal/curl_wrappers_test.cc:50:14     - Unknown word (Casse)      -- struct TestCasse {
+./google/cloud/internal/curl_wrappers_test.cc:51:14     - Unknown word (Casse)      -- struct TestCasse {
 ./google/cloud/internal/diagnostics_pop.inc:17:2      - Unknown word (elif)       -- #elif __clang__
 ./google/cloud/internal/diagnostics_pop.inc:19:9      - Unknown word (GNUC)       -- #elif __GNUC__
 ./google/cloud/internal/disable_deprecation_warnings.inc:19:36     - Unknown word (Wdeprecated) -- diagnostic ignored "-Wdeprecated-declarations"
@@ -691,11 +699,11 @@ Lines:
 ./google/cloud/storage/benchmarks/README.md:116:14    - Unknown word (vebm)       -- We will use `vebm` (for Virtual Environment
 ./google/cloud/storage/benchmarks/README.md:35:17     - Unknown word (ttfb)       -- tee tp-vs-cpu.ttfb.txt
 ./google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:428:18    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
-./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:320:8     - Unknown word (uploaders)  -- auto uploaders = gcs_bm::CreateUploadExperim
-./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:327:8     - Unknown word (downloaders) -- auto downloaders =
+./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:330:8     - Unknown word (uploaders)  -- auto uploaders = gcs_bm::CreateUploadExperim
+./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_benchmark.cc:337:8     - Unknown word (downloaders) -- auto downloaders =
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:19:61     - Unknown word (Spyder)     -- load this script in Spyder
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:37:12     - Unknown word (Nanos)      -- df["CpuNanosPerByte"] = (df.CpuTimeUs
-./google/cloud/storage/benchmarks/throughput_options_test.cc:216:25    - Unknown word (Readoffset) -- TEST(ThroughputOptions, Readoffset) {
+./google/cloud/storage/benchmarks/throughput_options_test.cc:213:25    - Unknown word (Readoffset) -- TEST(ThroughputOptions, Readoffset) {
 ./google/cloud/storage/bucket_metadata.cc:266:14    - Unknown word (subpatch)   -- if (labels_subpatch_dirty_) {
 ./google/cloud/storage/bucket_metadata.h:527:69    - Unknown word (Multiregion) -- regions within the same Multiregion.
 ./google/cloud/storage/bucket_metadata_test.cc:1149:37   - Unknown word (Coldline)       -- LifecycleRule::SetStorageClassColdline());
@@ -706,7 +714,7 @@ Lines:
 ./google/cloud/storage/client.h:3662:8    - Unknown word (tmpobject)  -- auto tmpobject_name_gen = [&num_tmp
 ./google/cloud/storage/client_options.cc:118:26    - Unknown word (iamapi)     -- (emulator) return "/iamapi";
 ./google/cloud/storage/client_options.h:308:33    - Unknown word (prefx)      -- ClientOptions& add_user_agent_prefx(std::string const& v
-./google/cloud/storage/client_options_test.cc:441:27    - Unknown word (Projec)     -- F(ClientOptionsTest, ProjecIdtWithEnv) {
+./google/cloud/storage/client_options_test.cc:439:27    - Unknown word (Projec)     -- F(ClientOptionsTest, ProjecIdtWithEnv) {
 ./google/cloud/storage/client_options_test.cc:46:38     - Unknown word (TESTBENCH)  -- endpoint_("CLOUD_STORAGE_TESTBENCH_ENDPOINT", {}),
 ./google/cloud/storage/client_sign_policy_document_test.cc:127:55    - Unknown word (Ymxv)       -- blob = "dGVzdC1zaWduZWQtYmxvYg==";
 ./google/cloud/storage/client_sign_url_test.cc:172:40    - Unknown word (Fauto)      -- erviceaccount.com%2F20190201%2Fauto%2Fstorage%2Fgoog4_request
@@ -772,7 +780,7 @@ Lines:
 ./google/cloud/storage/internal/bucket_acl_requests_test.cc:115:53    - Unknown word (testuser)   -- request("my-bucket", "user-testuser", "READER");
 ./google/cloud/storage/internal/curl_download_request_test.cc:100:56    - Unknown word (gunzipped)  -- body-transformations", "gunzipped"}},
 ./google/cloud/storage/internal/curl_download_request_test.cc:99:9      - Unknown word (guploader)  -- {"guploader",
-./google/cloud/storage/internal/grpc_bucket_request_parser.cc:56:6      - Unknown word (subobject)  -- // subobject.
+./google/cloud/storage/internal/grpc_bucket_request_parser.cc:79:6      - Unknown word (subobject)  -- // subobject.
 ./google/cloud/storage/internal/grpc_client.cc:200:14    - Unknown word (testbench)  -- auto const testbench =
 ./google/cloud/storage/internal/grpc_object_request_parser_test.cc:62:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 ./google/cloud/storage/internal/object_requests_test.cc:239:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));

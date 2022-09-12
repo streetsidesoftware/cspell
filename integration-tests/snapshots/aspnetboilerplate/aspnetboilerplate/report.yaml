@@ -3,9 +3,9 @@ Repository: aspnetboilerplate/aspnetboilerplate
 Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: ["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]
 Summary:
-  files: 2480
-  filesWithIssues: 1249
-  issues: 4820
+  files: 2568
+  filesWithIssues: 1277
+  issues: 4872
   errors: 0
 Errors: []
 
@@ -240,6 +240,7 @@ issues:
   - "src/Abp.Zero.Common/Zero/Configuration/AbpZeroSettingProvider.cs:72:56      	Maxumum 	U   	FixedLocalizableString(\"Maxumum Failed access attempt"
   - "src/Abp.Zero.Ldap/Ldap/Configuration/LdapSettingNames.cs:4:18       	consts  	U   	/// Contains consts for LDAP setting names"
   - "src/Abp.Zero.NHibernate/Zero/FluentMigrator/Migrations/_20150312_01_Add_DeleteAuidit_To_AbpTenants_Tables.cs:7:41       	Auidit  	U   	150312_01_Add_DeleteAuidit_To_AbpTenants_Tables"
+  - "src/Abp.Zero.NHibernate/Zero/NHibernate/EntityMappings/AuditLogMap.cs:36:36     	Nvarchar	U   	.Length(Extensions.NvarcharMax);"
   - "src/Abp.Zero/Authorization/AbpLoginManager.cs:179:66    	Hasher  	U   	UserManager.PasswordHasher.VerifyHashedPassword"
   - "src/Abp.ZeroCore.EntityFrameworkCore/EntityHistory/EntityHistoryHelper.cs:135:47    	Unproxied   	U   	typeOfEntity = ProxyHelper.GetUnproxiedType(entityEntry.Entity"
   - "src/Abp.ZeroCore.IdentityServer4.EntityFrameworkCore/IdentityServer4/AbpZeroCoreIdentityServerEntityFrameworkCoreConfigurationExtensions.cs:31:60   	nvarchar	U   	over 4K converts to nvarchar(max) on SqlServer"
