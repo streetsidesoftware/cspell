@@ -32,6 +32,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     { id: 'clojure', extensions: ['.clj', '.cljs', '.cljx', '.clojure', '.edn'] },
     { id: 'coffeescript', extensions: ['.coffee', '.cson'] },
     { id: 'c', extensions: ['.c'] },
+    // cspell:ignore cmake
     { id: 'cmake', extensions: ['.cmake'], filenames: ['CMakeLists.txt'] },
     {
         id: 'cpp',
