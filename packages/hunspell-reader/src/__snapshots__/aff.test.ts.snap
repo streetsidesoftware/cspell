@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test Aff tests applying rules for es 1`] = `
-Array [
-  Array [
+[
+  [
     "ababillar/RED -> ababilla (E) [|] --> 'ababilla'",
     "ababillar/RED -> ababilla (R) [|ba] --> 'ababillaba'",
     "ababillar/RED -> ababill (R) [|abais] --> 'ababillabais'",
@@ -66,19 +66,19 @@ Array [
 `;
 
 exports[`Test Aff tests applying rules for nl 1`] = `
-Array [
-  Array [
+[
+  [
     "dc/ClCwKc -> dc (Kc Cw Cb Cc Cp) [-|] --> '-dc/CompoundEnd:CompoundMiddle:CompoundPermitted:KeepCase'",
     "dc/ClCwKc -> dc (Kc Cw Cb Cc Cp Cl Ca Cb Cp) [-|-] --> '-dc-/CompoundBegin:CompoundEnd:CompoundMiddle:CompoundPermitted:KeepCase'",
     "dc/ClCwKc -> dc (Kc) [|] --> 'dc/KeepCase'",
     "dc/ClCwKc -> dc (Kc Cl Ca Cb Cp) [|-] --> 'dc-/CompoundBegin:CompoundMiddle:CompoundPermitted:KeepCase'",
   ],
-  Array [
+  [
     "aak/Zf -> aak () [|] --> 'aak'",
     "aak/Zf -> a (Zf Ca Cb Cp) [|ken] --> 'aken/CompoundBegin:CompoundMiddle:CompoundPermitted'",
     "aak/Zf -> a (Zf Ca Cb Cp) [|ken-] --> 'aken-/CompoundBegin:CompoundMiddle:CompoundPermitted'",
   ],
-  Array [
+  [
     "huis/CACcYbCQZhC0 -> huis (Cc CA Ca Cp) [|] --> 'huis/CompoundBegin:CompoundEnd:CompoundPermitted'",
     "huis/CACcYbCQZhC0 -> huis (Cc) [|] --> 'huis/CompoundEnd'",
     "huis/CACcYbCQZhC0 -> huis (Cc CA Ca Cp) [|-] --> 'huis-/CompoundBegin:CompoundEnd:CompoundPermitted'",
@@ -88,7 +88,7 @@ Array [
     "huis/CACcYbCQZhC0 -> hui (Cc Zh Ca Cb Cp) [|zen] --> 'huizen/CompoundBegin:CompoundEnd:CompoundMiddle:CompoundPermitted'",
     "huis/CACcYbCQZhC0 -> hui (Cc Zh Ca Cb Cp) [|zen-] --> 'huizen-/CompoundBegin:CompoundEnd:CompoundMiddle:CompoundPermitted'",
   ],
-  Array [
+  [
     "pannenkoek/ZbCACcC0 -> pannenkoek (Cc CA Ca Cp) [|] --> 'pannenkoek/CompoundBegin:CompoundEnd:CompoundPermitted'",
     "pannenkoek/ZbCACcC0 -> pannenkoek (Cc) [|] --> 'pannenkoek/CompoundEnd'",
     "pannenkoek/ZbCACcC0 -> pannenkoek (Cc CA Ca Cp) [|-] --> 'pannenkoek-/CompoundBegin:CompoundEnd:CompoundPermitted'",

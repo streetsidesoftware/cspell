@@ -2,115 +2,115 @@
 
 exports[`getReporter saves additional data 1`] = `
 "{
-    \\"issues\\": [
+    "issues": [
         {
-            \\"text\\": \\"fulll\\",
-            \\"offset\\": 13,
-            \\"line\\": {
-                \\"text\\": \\"This text is fulll of errrorrrs.\\",
-                \\"offset\\": 0
+            "text": "fulll",
+            "offset": 13,
+            "line": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
             },
-            \\"row\\": 1,
-            \\"col\\": 14,
-            \\"uri\\": \\"text.txt\\",
-            \\"context\\": {
-                \\"text\\": \\"This text is fulll of errrorrrs.\\",
-                \\"offset\\": 0
+            "row": 1,
+            "col": 14,
+            "uri": "text.txt",
+            "context": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
             }
         }
     ],
-    \\"info\\": [
+    "info": [
         {
-            \\"message\\": \\"some logs\\",
-            \\"msgType\\": \\"Info\\"
+            "message": "some logs",
+            "msgType": "Info"
         },
         {
-            \\"message\\": \\"some warnings\\",
-            \\"msgType\\": \\"Warning\\"
+            "message": "some warnings",
+            "msgType": "Warning"
         },
         {
-            \\"message\\": \\"some debug logs\\",
-            \\"msgType\\": \\"Debug\\"
+            "message": "some debug logs",
+            "msgType": "Debug"
         }
     ],
-    \\"debug\\": [
+    "debug": [
         {
-            \\"message\\": \\"foo\\"
+            "message": "foo"
         },
         {
-            \\"message\\": \\"bar\\"
+            "message": "bar"
         }
     ],
-    \\"error\\": [
+    "error": [
         {
-            \\"message\\": \\"something went wrong\\",
-            \\"error\\": {}
+            "message": "something went wrong",
+            "error": {}
         }
     ],
-    \\"progress\\": [
+    "progress": [
         {
-            \\"type\\": \\"ProgressFileComplete\\",
-            \\"fileNum\\": 1,
-            \\"fileCount\\": 1,
-            \\"filename\\": \\"text.txt\\",
-            \\"elapsedTimeMs\\": 349.058747,
-            \\"processed\\": true,
-            \\"numErrors\\": 2
+            "type": "ProgressFileComplete",
+            "fileNum": 1,
+            "fileCount": 1,
+            "filename": "text.txt",
+            "elapsedTimeMs": 349.058747,
+            "processed": true,
+            "numErrors": 2
         }
     ],
-    \\"result\\": {
-        \\"files\\": 1,
-        \\"filesWithIssues\\": [
-            \\"text.txt\\"
+    "result": {
+        "files": 1,
+        "filesWithIssues": [
+            "text.txt"
         ],
-        \\"issues\\": 2,
-        \\"errors\\": 1,
-        \\"cachedFiles\\": 0
+        "issues": 2,
+        "errors": 1,
+        "cachedFiles": 0
     }
 }"
 `;
 
 exports[`getReporter saves json to file 1`] = `
 "{
-    \\"issues\\": [
+    "issues": [
         {
-            \\"text\\": \\"fulll\\",
-            \\"offset\\": 13,
-            \\"line\\": {
-                \\"text\\": \\"This text is fulll of errrorrrs.\\",
-                \\"offset\\": 0
+            "text": "fulll",
+            "offset": 13,
+            "line": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
             },
-            \\"row\\": 1,
-            \\"col\\": 14,
-            \\"uri\\": \\"text.txt\\",
-            \\"context\\": {
-                \\"text\\": \\"This text is fulll of errrorrrs.\\",
-                \\"offset\\": 0
+            "row": 1,
+            "col": 14,
+            "uri": "text.txt",
+            "context": {
+                "text": "This text is fulll of errrorrrs.",
+                "offset": 0
             }
         }
     ],
-    \\"info\\": [
+    "info": [
         {
-            \\"message\\": \\"some warnings\\",
-            \\"msgType\\": \\"Warning\\"
+            "message": "some warnings",
+            "msgType": "Warning"
         }
     ],
-    \\"debug\\": [],
-    \\"error\\": [
+    "debug": [],
+    "error": [
         {
-            \\"message\\": \\"something went wrong\\",
-            \\"error\\": {}
+            "message": "something went wrong",
+            "error": {}
         }
     ],
-    \\"progress\\": [],
-    \\"result\\": {
-        \\"files\\": 1,
-        \\"filesWithIssues\\": [
-            \\"text.txt\\"
+    "progress": [],
+    "result": {
+        "files": 1,
+        "filesWithIssues": [
+            "text.txt"
         ],
-        \\"issues\\": 2,
-        \\"errors\\": 1,
-        \\"cachedFiles\\": 0
+        "issues": 2,
+        "errors": 1,
+        "cachedFiles": 0
     }
 }"
 `;

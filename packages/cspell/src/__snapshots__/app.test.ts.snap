@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -16,7 +16,7 @@ exports[`Validate cli app --fail-fast no option Expect Error: [Function CheckFai
 2/2 [90m./samples/fail-fast/second-fail.txt[39m"
 `;
 
-exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -29,7 +29,7 @@ exports[`Validate cli app --fail-fast with config Expect Error: [Function CheckF
 1/2 [90m./samples/fail-fast/first-fail.txt[39m"
 `;
 
-exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -43,7 +43,7 @@ exports[`Validate cli app --fail-fast with option Expect Error: [Function CheckF
 `;
 
 exports[`Validate cli app --help Expect Error: outputHelp 1`] = `
-Array [
+[
   "Usage: cspell [options] [command]",
   "",
   "Spelling Checker for Code",
@@ -71,7 +71,7 @@ exports[`Validate cli app --help Expect Error: outputHelp 2`] = `""`;
 
 exports[`Validate cli app --help Expect Error: outputHelp 3`] = `""`;
 
-exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app --no-fail-fast with config Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -87,7 +87,7 @@ exports[`Validate cli app --no-fail-fast with config Expect Error: [Function Che
 2/2 [90m./samples/fail-fast/second-fail.txt[39m"
 `;
 
-exports[`Validate cli app LICENSE Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app LICENSE Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app LICENSE Expect Error: undefined 2`] = `
 "error	 0.00ms
@@ -99,23 +99,23 @@ exports[`Validate cli app LICENSE Expect Error: undefined 3`] = `
 1/1 [90m./LICENSE[39m"
 `;
 
-exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to find config file at: \\"./src/app.test.ts\\"
+"error	Configuration Error: Failed to find config file at: "./src/app.test.ts"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
 
 exports[`Validate cli app bad config Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli app check LICENSE Expect Error: undefined 1`] = `
-Array [
+[
   "[97mMIT License[39m",
   "[97m[39m",
   "[97mCopyright (c) 2017 Jason Dent[39m",
   "[97m[39m",
   "[97mPermission is hereby granted, free of charge, to any person obtaining a copy[39m",
-  "[97mof this software and associated documentation files (the \\"Software\\"), to deal[39m",
+  "[97mof this software and associated documentation files (the "Software"), to deal[39m",
   "[97min the Software without restriction, including without limitation the rights[39m",
   "[97mto use, copy, modify, merge, publish, distribute, sublicense, and/or sell[39m",
   "[97mcopies of the Software, and to permit persons to whom the Software is[39m",
@@ -124,7 +124,7 @@ Array [
   "[97mThe above copyright notice and this permission notice shall be included in all[39m",
   "[97mcopies or substantial portions of the Software.[39m",
   "[97m[39m",
-  "[97mTHE SOFTWARE IS PROVIDED \\"AS IS\\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR[39m",
+  "[97mTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR[39m",
   "[97mIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,[39m",
   "[97mFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE[39m",
   "[97mAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER[39m",
@@ -145,7 +145,7 @@ log	"
 exports[`Validate cli app check LICENSE Expect Error: undefined 3`] = `""`;
 
 exports[`Validate cli app check help Expect Error: outputHelp 1`] = `
-Array [
+[
   "Usage: cspell check [options] <files...>",
   "",
   "Spell check file(s) and display the result. The full file is displayed in color.",
@@ -168,20 +168,20 @@ exports[`Validate cli app check help Expect Error: outputHelp 2`] = `""`;
 
 exports[`Validate cli app check help Expect Error: outputHelp 3`] = `""`;
 
-exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 2`] = `
 "log	Check file: ./missing-file.txt
 log	
-error	File not found \\"./missing-file.txt\\""
+error	File not found "./missing-file.txt""
 `;
 
 exports[`Validate cli app check missing Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli app check with spelling errors Expect Error: [Function CheckFailed] 1`] = `
-Array [
+[
   "[97m                              [[39m[31mNEDERLANDS[39m[97m][39m",
-  "[97m        U [39m[31mwordt[39m[97m [39m[31mvriendelijk[39m[97m [39m[31mverzocht[39m[97m om dit [39m[31mbestand[39m[97m (\\"README_nl_NL.txt\\")[39m",
+  "[97m        U [39m[31mwordt[39m[97m [39m[31mvriendelijk[39m[97m [39m[31mverzocht[39m[97m om dit [39m[31mbestand[39m[97m ("README_nl_NL.txt")[39m",
   "[97m      te [39m[31mlezen[39m[97m en mee te [39m[31mleveren[39m[97m bij [39m[31miedere[39m[97m [39m[31mkopie[39m[97m van dit [39m[31mtaalhulpbestand[39m[97m.[39m",
   "[97m[39m",
   "[97m1. [39m[31mNaam[39m[97m: [39m[31mNederlandstalige[39m[97m [39m[31mwoordenlijst[39m[97m [39m[31mvoor[39m[97m [39m[31mspellingcontrole[39m[97m - OpenTaal[39m",
@@ -209,7 +209,7 @@ Array [
   "[97m   en het project [39m[31mprofessionaliseren[39m[97m. Uw [39m[31mdonatie[39m[97m is van harte [39m[31mwelkom[39m[97m op[39m",
   "[97m   [39m[31mrekeningnummer[39m[97m 15.62.32.782 t.n.v. [39m[31mStichting[39m[97m OpenTaal. Uw [39m[31mgiften[39m[97m [39m[31mzijn[39m[97m[39m",
   "[97m   [39m[31maftrekbaar[39m[97m van de [39m[31mbelasting[39m[97m. [39m[31mStichting[39m[97m OpenTaal is [39m[31mnamelijk[39m[97m door de[39m",
-  "[97m   [39m[31mBelastingdienst[39m[97m [39m[31merkend[39m[97m als [39m[31mANBI[39m[97m, [39m[31moftewel[39m[97m \\"[39m[31mAlgemeen[39m[97m Nut [39m[31mBeogende[39m[97m [39m[31mInstelling[39m[97m\\".[39m",
+  "[97m   [39m[31mBelastingdienst[39m[97m [39m[31merkend[39m[97m als [39m[31mANBI[39m[97m, [39m[31moftewel[39m[97m "[39m[31mAlgemeen[39m[97m Nut [39m[31mBeogende[39m[97m [39m[31mInstelling[39m[97m".[39m",
   "[97m   Zie: [39m[90mhttp://belastingdienst.nl/anbi/[39m[97m[39m",
   "[97m8. [39m[31mMeedoen[39m[97m: [39m[31mIedereen[39m[97m is [39m[31mwelkom[39m[97m om mee te [39m[31mdoen[39m[97m. Meld [39m[31mfouten[39m[97m, [39m[31mdiscussieer[39m[97m mee op[39m",
   "[97m   de [39m[31mmailinglijst[39m[97m of [39m[31mdraai[39m[97m Harvester. Door bij te [39m[31mdragen[39m[97m aan het project [39m[31mstemt[39m[97m[39m",
@@ -228,7 +228,7 @@ Array [
   "[97m10.Contact: [39m[31mStichting[39m[97m OpenTaal, [39m[90mhttp://www.opentaal.org,[39m[97m [39m[90mbestuur@opentaal.org[39m[97m[39m",
   "[97m_________________________________________________________________________________[39m",
   "[97m                                [ENGLISH][39m",
-  "[97m        You are kindly requested to read this file \\"README_nl_NL.txt\\"[39m",
+  "[97m        You are kindly requested to read this file "README_nl_NL.txt"[39m",
   "[97m     and to keep a copy of it with every copy you make of this language file.[39m",
   "[97m[39m",
   "[97m1. Name: Dutch word list for spell checking - OpenTaal[39m",
@@ -286,7 +286,7 @@ log	"
 
 exports[`Validate cli app check with spelling errors Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app cspell-bad.json Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app cspell-bad.json Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app cspell-bad.json Expect Error: undefined 2`] = `
 "error	 0.00ms
@@ -298,16 +298,16 @@ exports[`Validate cli app cspell-bad.json Expect Error: undefined 3`] = `
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to read config file: \\"./samples/intentionally-missing-file.json\\"
+"error	Configuration Error: Failed to read config file: "./samples/intentionally-missing-file.json"
 error	CSpell: Files checked: 0, Issues found: 0 in 0 files"
 `;
 
 exports[`Validate cli app cspell-import-missing.json Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app current_file --verbose Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app current_file --verbose Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app current_file --verbose Expect Error: undefined 2`] = `
 "info	
@@ -348,7 +348,7 @@ exports[`Validate cli app current_file --verbose Expect Error: undefined 3`] = `
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app current_file Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app current_file Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app current_file Expect Error: undefined 2`] = `
 "error	 0.00ms
@@ -360,7 +360,7 @@ exports[`Validate cli app current_file Expect Error: undefined 3`] = `
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app current_file languageId Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app current_file languageId Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app current_file languageId Expect Error: undefined 2`] = `
 "error	 0.00ms
@@ -372,7 +372,7 @@ exports[`Validate cli app current_file languageId Expect Error: undefined 3`] = 
 1/1 [90m./src/app.test.ts[39m"
 `;
 
-exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app issue-2998 --language-id Expect Error: undefined 2`] = `
 "info	
@@ -415,20 +415,20 @@ exports[`Validate cli app link ls 1`] = `""`;
 
 exports[`Validate cli app link remove 1`] = `""`;
 
-exports[`Validate cli app must find force no error Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app must find force no error Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app must find force no error Expect Error: undefined 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
 
 exports[`Validate cli app must find force no error Expect Error: undefined 3`] = `""`;
 
-exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
 
 exports[`Validate cli app must find with error Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli app no-args Expect Error: outputHelp 1`] = `
-Array [
+[
   "Usage: cspell lint [options] [globs...]",
   "",
   "Check spelling",
@@ -438,10 +438,10 @@ Array [
   "                               looks for cspell.json in the current directory.",
   "  -v, --verbose                Display more information about the files being",
   "                               checked and the configuration.",
-  "  --locale <locale>            Set language locales. i.e. \\"en,fr\\" for English",
-  "                               and French, or \\"en-GB\\" for British English.",
+  "  --locale <locale>            Set language locales. i.e. "en,fr" for English",
+  "                               and French, or "en-GB" for British English.",
   "  --language-id <language>     Force programming language for unknown",
-  "                               extensions. i.e. \\"php\\" or \\"scala\\"",
+  "                               extensions. i.e. "php" or "scala"",
   "  --words-only                 Only output the words not found in the",
   "                               dictionaries.",
   "  -u, --unique                 Only output the first instance of a word not",
@@ -466,9 +466,9 @@ Array [
   "  --no-cache                   Do not use cache.",
   "  --cache-reset                Reset the cache file.",
   "  --cache-strategy <strategy>  Strategy to use for detecting changed files.",
-  "                               (choices: \\"metadata\\", \\"content\\")",
+  "                               (choices: "metadata", "content")",
   "  --cache-location <path>      Path to the cache file or directory. (default:",
-  "                               \\".cspellcache\\")",
+  "                               ".cspellcache")",
   "  --dot                        Include files and directories starting with \`.\`",
   "                               (period) when matching globs.",
   "  --gitignore                  Ignore files matching glob patterns found in",
@@ -488,11 +488,11 @@ Array [
   "",
   "",
   "Examples:",
-  "    cspell \\"*.js\\"                   Check all .js files in the current directory",
-  "    cspell \\"**/*.js\\"                Check all .js files from the current directory",
-  "    cspell \\"src/**/*.js\\"            Only check .js under src",
-  "    cspell \\"**/*.txt\\" \\"**/*.js\\"     Check both .js and .txt files.",
-  "    cspell \\"**/*.{txt,js,md}\\"       Check .txt, .js, and .md files.",
+  "    cspell "*.js"                   Check all .js files in the current directory",
+  "    cspell "**/*.js"                Check all .js files from the current directory",
+  "    cspell "src/**/*.js"            Only check .js under src",
+  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
+  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
   "    cat LICENSE | cspell stdin      Check stdin",
   "",
   "",
@@ -503,13 +503,13 @@ exports[`Validate cli app no-args Expect Error: outputHelp 2`] = `""`;
 
 exports[`Validate cli app no-args Expect Error: outputHelp 3`] = `""`;
 
-exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 2`] = `"error	CSpell: Files checked: 0, Issues found: 0 in 0 files"`;
 
 exports[`Validate cli app not found error by default Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -710,14 +710,14 @@ exports[`Validate cli app samples/Dutch.txt Expect Error: [Function CheckFailed]
 1/1 [90m./samples/Dutch.txt[39m"
 `;
 
-exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 1`] = `Array []`;
+exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 1`] = `[]`;
 
 exports[`Validate cli app success suggest run with ["suggest", "café", "--num-suggestions=1", "--no-include-ties"] 2`] = `
 "café:
  - café"
 `;
 
-exports[`Validate cli app success trace café run with ["trace", "café"] 1`] = `Array []`;
+exports[`Validate cli app success trace café run with ["trace", "café"] 1`] = `[]`;
 
 exports[`Validate cli app success trace café run with ["trace", "café"] 2`] = `
 "Word F Dictionary           Dictionary Location           
@@ -771,7 +771,7 @@ café - typescript           ../../node_modules/.pnpm...escript/typescript.txt.
 café - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app success trace hello run with ["trace", "--locale=en-gb", "hello"] 1`] = `Array []`;
+exports[`Validate cli app success trace hello run with ["trace", "--locale=en-gb", "hello"] 1`] = `[]`;
 
 exports[`Validate cli app success trace hello run with ["trace", "--locale=en-gb", "hello"] 2`] = `
 "Word  F Dictionary           Dictionary Location           
@@ -825,7 +825,7 @@ hello - typescript           ../../node_modules/.pnpm...script/typescript.txt.gz
 hello - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app success trace hello run with ["trace", "hello"] 1`] = `Array []`;
+exports[`Validate cli app success trace hello run with ["trace", "hello"] 1`] = `[]`;
 
 exports[`Validate cli app success trace hello run with ["trace", "hello"] 2`] = `
 "Word  F Dictionary           Dictionary Location           
@@ -879,7 +879,7 @@ hello - typescript           ../../node_modules/.pnpm...script/typescript.txt.gz
 hello - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 2`] = `
 "mexico:
@@ -895,7 +895,7 @@ exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 2`] = `
 
 exports[`Validate cli app suggest ["sug", "--stdin", "-d=en_us", "-v"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 2`] = `
 "dutch:
@@ -905,7 +905,7 @@ exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--di
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "--dictionary=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 2`] = `
 "dutch:
@@ -915,7 +915,7 @@ exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v",
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 4`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 4`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 5`] = `
 "dutch:
@@ -925,7 +925,7 @@ exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v",
 
 exports[`Validate cli app suggest ["sug", "dutch", "--dictionaries=en_us", "-v", "--num-suggestions=2"] 6`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 2`] = `
 "dutch:
@@ -935,7 +935,7 @@ exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v",
 
 exports[`Validate cli app suggest ["sug", "dutch", "-d=en_us", "-d=en-gb", "-v", "--num-suggestions=2"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 2`] = `
 "mexico:
@@ -944,7 +944,7 @@ exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-sug
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v", "--num-suggestions=0"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 2`] = `
 "mexico:
@@ -960,7 +960,7 @@ exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 2`] = `
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us", "-v"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 2`] = `
 "mexico:
@@ -976,7 +976,7 @@ exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 2`] = `
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en_us"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 2`] = `
 "mexico:
@@ -993,14 +993,14 @@ exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 2`] = `
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en-gb"] 3`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 1`] = `Array []`;
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 1`] = `[]`;
 
 exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 2`] = `""`;
 
-exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 3`] = `"Unknown dictionary: \\"en-us\\""`;
+exports[`Validate cli app suggest ["sug", "mexico", "-d=en-us"] 3`] = `"Unknown dictionary: "en-us""`;
 
 exports[`Validate cli app suggest ["sug"] 1`] = `
-Array [
+[
   "Usage: cspell suggestions|sug [options] [words...]",
   "",
   "Spelling Suggestions for words.",
@@ -1009,11 +1009,11 @@ Array [
   "  -c, --config <cspell.json>            Configuration file to use.  By default",
   "                                        cspell looks for cspell.json in the",
   "                                        current directory.",
-  "  --locale <locale>                     Set language locales. i.e. \\"en,fr\\" for",
-  "                                        English and French, or \\"en-GB\\" for",
+  "  --locale <locale>                     Set language locales. i.e. "en,fr" for",
+  "                                        English and French, or "en-GB" for",
   "                                        British English.",
-  "  --language-id <language>              Use programming language. i.e. \\"php\\" or",
-  "                                        \\"scala\\".",
+  "  --language-id <language>              Use programming language. i.e. "php" or",
+  "                                        "scala".",
   "  -s, --no-strict                       Ignore case and accents when searching",
   "                                        for words.",
   "  --ignore-case                         Alias of --no-strict.",
@@ -1040,7 +1040,7 @@ exports[`Validate cli app suggest ["sug"] 2`] = `""`;
 
 exports[`Validate cli app suggest ["sug"] 3`] = `""`;
 
-exports[`Validate cli app trace café Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app trace café Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app trace café Expect Error: undefined 2`] = `
 "Word F Dictionary           Dictionary Location           
@@ -1094,7 +1094,7 @@ café - typescript           ../../node_modules/.pnpm...escript/typescript.txt.
 café - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app trace hello Expect Error: undefined 1`] = `Array []`;
+exports[`Validate cli app trace hello Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli app trace hello Expect Error: undefined 2`] = `
 "Word  F Dictionary           Dictionary Location           
@@ -1148,7 +1148,7 @@ hello - typescript           ../../node_modules/.pnpm...script/typescript.txt.gz
 hello - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app trace hello Expect Error: undefined 3`] = `Array []`;
+exports[`Validate cli app trace hello Expect Error: undefined 3`] = `[]`;
 
 exports[`Validate cli app trace hello Expect Error: undefined 4`] = `
 "Word  F Dictionary           Dictionary Location           
@@ -1203,7 +1203,7 @@ hello - workspace*           ../../cspell-dict.txt"
 `;
 
 exports[`Validate cli app trace help Expect Error: outputHelp 1`] = `
-Array [
+[
   "Usage: cspell trace [options] [words...]",
   "",
   "Trace words -- Search for words in the configuration and dictionaries.",
@@ -1211,9 +1211,9 @@ Array [
   "Options:",
   "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",
   "                              looks for cspell.json in the current directory.",
-  "  --locale <locale>           Set language locales. i.e. \\"en,fr\\" for English",
-  "                              and French, or \\"en-GB\\" for British English.",
-  "  --language-id <language>    Use programming language. i.e. \\"php\\" or \\"scala\\"",
+  "  --locale <locale>           Set language locales. i.e. "en,fr" for English",
+  "                              and French, or "en-GB" for British English.",
+  "  --language-id <language>    Use programming language. i.e. "php" or "scala"",
   "  --allow-compound-words      Turn on allowCompoundWords",
   "  --no-allow-compound-words   Turn off allowCompoundWords",
   "  --no-ignore-case            Do not ignore case and accents when searching for",
@@ -1230,7 +1230,7 @@ Array [
 
 exports[`Validate cli app trace help Expect Error: outputHelp 2`] = `""`;
 
-exports[`Validate cli app trace missing dictionary Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app trace missing dictionary Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app trace missing dictionary Expect Error: [Function CheckFailed] 2`] = `
 "Word  F Dictionary           Dictionary Location           
@@ -1286,7 +1286,7 @@ hello - typescript           ../../node_modules/.pnpm...script/typescript.txt.gz
 hello - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app trace not-in-any-dictionary Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app trace not-in-any-dictionary Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app trace not-in-any-dictionary Expect Error: [Function CheckFailed] 2`] = `
 "Word                  F Dictionary           Dictionary Location           
@@ -1340,7 +1340,7 @@ not-in-any-dictionary - typescript           ../../node_modul...ypescript.txt.gz
 not-in-any-dictionary - workspace*           ../../cspell-dict.txt"
 `;
 
-exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app with errors and excludes Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms
@@ -1369,7 +1369,7 @@ exports[`Validate cli app with errors and excludes Expect Error: [Function Check
 6/6 [90m./samples/text.txt[39m"
 `;
 
-exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app with forbidden words Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -1384,7 +1384,7 @@ exports[`Validate cli app with forbidden words Expect Error: [Function CheckFail
 1/1 [90m./samples/src/sample-with-forbidden-words.md[39m"
 `;
 
-exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [Function CheckFailed] 2`] = `
 "./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
@@ -1578,13 +1578,13 @@ exports[`Validate cli app with spelling errors --debug Dutch.txt Expect Error: [
 ./samples/Dutch.txt:78:18 - Unknown word (ANBI)"
 `;
 
-exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 2`] = `""`;
 
 exports[`Validate cli app with spelling errors --silent Dutch.txt Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -1785,7 +1785,7 @@ exports[`Validate cli app with spelling errors Dutch.txt --legacy Expect Error: 
 1/1 [90m./samples/Dutch.txt[39m"
 `;
 
-exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
@@ -1986,7 +1986,7 @@ exports[`Validate cli app with spelling errors Dutch.txt Expect Error: [Function
 1/1 [90m./samples/Dutch.txt[39m"
 `;
 
-exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 1`] = `Array []`;
+exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli app with spelling errors Dutch.txt words only Expect Error: [Function CheckFailed] 2`] = `
 "error	 0.00ms X
