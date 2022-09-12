@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
   files: 7685
-  filesWithIssues: 5886
-  issues: 57998
+  filesWithIssues: 5883
+  issues: 56108
   errors: 0
 Errors: []
 
@@ -75,7 +75,6 @@ issues:
   - "ci/check-include-guards.gawk:34:5       	gsub        	U   	gsub(\"[/\\\\.]\", \"_\", guard"
   - "ci/check-include-guards.gawk:40:1       	ENDFILE     	U   	ENDFILE {"
   - "ci/check-include-guards.gawk:47:37      	ifndef      	U   	lines that start with #ifndef, #define, or #endif"
-  - "ci/cloudbuild/notifiers/alerts/function/CMakeLists.txt:17:5     	CMAKE   	U   	set(CMAKE_CXX_STANDARD 17)"
   - "ci/cloudbuild/notifiers/alerts/function/function.cc:46:21   	cppcodec	U   	auto const data = cppcodec::base64_rfc4648::decode"
   - "ci/cloudbuild/notifiers/logs/function/CMakeLists.txt:26:40      	stdc	U   	google-cloud-cpp::storage stdc++fs)"
   - "ci/cloudbuild/notifiers/logs/function/function.cc:57:38     	brightgreen 	U   	\"SUCCESS\") return \"brightgreen\";"
@@ -109,7 +108,6 @@ issues:
   - "ci/etc/expected_install_directories:403:27  	cloudprofiler           	U   	include/google/devtools/cloudprofiler"
   - "ci/etc/expected_install_directories:405:27  	cloudtrace              	U   	include/google/devtools/cloudtrace"
   - "ci/etc/expected_install_directories:423:29  	metricsscope            	U   	include/google/monitoring/metricsscope"
-  - "ci/etc/expected_install_directories:440:9   	cmake                   	U   	./lib64/cmake"
   - "ci/etc/README.md:13:40      	createinstance  	U   	GOOGLE_CLOUD_PROJECT}\" createinstance \\"
   - "ci/etc/README.md:22:5       	createtable     	U   	createtable quickstart families"
   - "ci/generate-markdown/README.md:12:4     	HOWTO   	U   	## HOWTO: Generate the markdown"
