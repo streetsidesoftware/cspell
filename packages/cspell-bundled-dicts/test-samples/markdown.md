@@ -11,6 +11,8 @@ Ignore link references: [This is a link][*`fileerror`*]
 
 Ignore html: &rarr; &dash; &larr;
 
+Another link to ignore: [See Below](#seebelow).
+
 Some text with [a link][1] and
 another [link][2].
 
