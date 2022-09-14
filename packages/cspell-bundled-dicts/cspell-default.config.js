@@ -27,13 +27,18 @@ const settings = {
         },
         {
             name: 'MARKDOWN-link-footer',
-            description: 'Markdown referenced link: `[reference]: https://www.google.com`, matches `[reference]`',
-            pattern: /\[[-\w.`'"*&;#@ ]+\]:/g,
+            description: 'Markdown referenced link: `[reference]: https://www.google.com`, matches the entire reference.',
+            pattern: /\[[-\w.`'"*&;#@ ]+\]:( [^\s]*)?/g,
         },
         {
             name: 'MARKDOWN-link',
             description: 'Markdown link: `[link text](link)`, matches `link`',
             pattern: /(?<=\]\()[^)\s]+/g,
+        },
+        {
+            name: 'MARKDOWN-anchor',
+            description: 'Markdown Anchors: `<a id="my_link"></a>`, matches `my_link`',
+            pattern: /(?<=<a\s+id=")[^"\s]+/g,
         },
     ],
     languageSettings: [
@@ -91,7 +96,7 @@ const settings = {
         },
         {
             languageId: 'markdown',
-            ignoreRegExpList: ['MARKDOWN-link-reference', 'MARKDOWN-link-footer', 'MARKDOWN-link'],
+            ignoreRegExpList: ['MARKDOWN-link-reference', 'MARKDOWN-link-footer', 'MARKDOWN-link', 'MARKDOWN-anchor'],
         },
     ],
     import: [

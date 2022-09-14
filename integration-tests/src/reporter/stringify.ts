@@ -22,7 +22,7 @@ Errors: ${toYamlArray(errors, '  ')}
 
 function toYamlArray(lines: string[], indent: string): string {
     if (!lines.length) return '[]\n';
-    const escapedLines = lines.map((a) => JSON.stringify(a)).map((a) => a.replace(/\\t/g, '\t'));
+    const escapedLines = lines.map((a) => JSON.stringify(a)).map((a) => a.replace(/(?<!\\)\\t/g, '\t'));
     const pfx = '\n' + indent + '- ';
     return pfx + escapedLines.join(pfx) + '\n';
 }

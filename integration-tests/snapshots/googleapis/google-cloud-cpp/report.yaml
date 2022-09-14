@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELO
 Summary:
   files: 7688
   filesWithIssues: 5884
-  issues: 56018
+  issues: 55836
   errors: 0
 Errors: []
 
@@ -220,7 +220,6 @@ issues:
   - "doc/packaging.md:1512:46    	rhscl           	U   	-enable rhel-server-rhscl-7-rpms"
   - "doc/packaging.md:1512:54    	rpms            	U   	rhel-server-rhscl-7-rpms"
   - "doc/packaging.md:1514:55    	devtoolset      	U   	ccache cmake3 curl-devel devtoolset-7 gcc gcc-c++ \\"
-  - "doc/packaging.md:1761:49    	howto           	U   	orkstation]: /doc/contributor/howto-guide-setup-development"
   - "examples/BUILD.bazel:84:14      	GENDIR  	U   	\"-I$(GENDIR)/examples\","
   - "examples/CMakeLists.txt:27:13   	Findg   	U   	include(FindgRPC)"
   - "examples/CMakeLists.txt:31:9    	PROTO   	U   	PROTO_PATH_DIRECTORIES ${CMAKE"
@@ -311,7 +310,7 @@ issues:
   - "generator/internal/predicate_utils_test.cc:678:46   	Repated         	U   	PaginationExactlyOneRepatedStringResponse) {"
   - "generator/internal/predicate_utils_test.cc:953:44   	falsefragment   	U   	std::string(\"fragment0_falsefragment1_true\"));"
   - "generator/internal/printer_test.cc:37:33    	Inigo   	U   	VarsDictionary vars{{\"name\", \"Inigo Montoya\"}};"
-  - "generator/internal/scaffold_generator_test.cc:247:38    	CXXLD   	U   	actual, HasSubstr(\"\	$(CXXLD) \"));"
+  - "generator/internal/scaffold_generator_test.cc:247:38    	CXXLD   	U   	actual, HasSubstr(\"\\t$(CXXLD) \"));"
   - "generator/internal/scaffold_generator_test.cc:268:37    	Bazelrc 	U   	ScaffoldGenerator, QuickstartBazelrc) {"
   - "generator/internal/scaffold_generator.cc:116:21     	bazelrc         	U   	{\"quickstart/.bazelrc\", GenerateQuickstartBazelrc"
   - "generator/internal/scaffold_generator.cc:496:2      	mainpage        	U   	@mainpage $title$ C++ Client Library"
@@ -391,6 +390,7 @@ issues:
   - "google/cloud/bigtable/CMakeLists.txt:428:18     	DBIGTABLE   	U   	PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC"
   - "google/cloud/bigtable/column_family.h:154:43    	Differencer 	U   	protobuf::util::MessageDifferencer::Equivalent(a.gc_rule"
   - "google/cloud/bigtable/data_client.h:45:22   	Bigtable's  	U   	* Connects to Cloud Bigtable's data manipulation APIs"
+  - "google/cloud/bigtable/doc/bigtable-mocking.dox:15:10    	howto   	U   	@snippet howto_mock_data_api.cc required"
   - "google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:41:33   	googleusercontent   	U   	client_id\": \"XXXXXX.apps.googleusercontent.com\","
   - "google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:57:71   	endl                	U   	< ex.what() << std::endl;"
   - "google/cloud/bigtable/doc/migrating-from-dataclient.dox:3:22    	dataclient  	U   	page migrating-from-dataclient Migrating from `DataClient"
