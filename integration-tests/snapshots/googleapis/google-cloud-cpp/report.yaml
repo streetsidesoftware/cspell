@@ -5,7 +5,7 @@ Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELO
 Summary:
   files: 7688
   filesWithIssues: 5884
-  issues: 56130
+  issues: 55836
   errors: 0
 Errors: []
 
@@ -172,7 +172,6 @@ issues:
   - "doc/contributor/howto-guide-declare-a-library-ga.md:47:1    	mapfile     	U   	mapfile -t ga < <(bazel --batch"
   - "doc/contributor/howto-guide-declare-a-library-ga.md:113:36  	quickstarts 	U   	the GA targets in the quickstarts"
   - "doc/contributor/howto-guide-forks-and-pull-requests.md:116:14   	Googler 	U   	If you are a Googler, when you submit your"
-  - "doc/contributor/howto-guide-forks-and-pull-requests.md:125:9    	howto   	U   	[guide](howto-guide-running-ci-builds"
   - "doc/contributor/howto-guide-setup-cmake-environment.md:49:5     	VCPKG       	U   	env VCPKG_ROOT=\"${vcpkg_dir}\""
   - "doc/contributor/howto-guide-setup-cmake-environment.md:59:12    	Bcmake      	U   	cmake -H. -Bcmake-out/home -DCMAKE_TOOLCHAIN"
   - "doc/contributor/howto-guide-setup-cmake-environment.md:59:71    	buildsystems	U   	$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake"
@@ -311,7 +310,7 @@ issues:
   - "generator/internal/predicate_utils_test.cc:678:46   	Repated         	U   	PaginationExactlyOneRepatedStringResponse) {"
   - "generator/internal/predicate_utils_test.cc:953:44   	falsefragment   	U   	std::string(\"fragment0_falsefragment1_true\"));"
   - "generator/internal/printer_test.cc:37:33    	Inigo   	U   	VarsDictionary vars{{\"name\", \"Inigo Montoya\"}};"
-  - "generator/internal/scaffold_generator_test.cc:247:38    	CXXLD   	U   	actual, HasSubstr(\"\	$(CXXLD) \"));"
+  - "generator/internal/scaffold_generator_test.cc:247:38    	CXXLD   	U   	actual, HasSubstr(\"\\t$(CXXLD) \"));"
   - "generator/internal/scaffold_generator_test.cc:268:37    	Bazelrc 	U   	ScaffoldGenerator, QuickstartBazelrc) {"
   - "generator/internal/scaffold_generator.cc:116:21     	bazelrc         	U   	{\"quickstart/.bazelrc\", GenerateQuickstartBazelrc"
   - "generator/internal/scaffold_generator.cc:496:2      	mainpage        	U   	@mainpage $title$ C++ Client Library"
@@ -391,6 +390,7 @@ issues:
   - "google/cloud/bigtable/CMakeLists.txt:428:18     	DBIGTABLE   	U   	PRIVATE -DBIGTABLE_CLIENT_FORCE_STATIC"
   - "google/cloud/bigtable/column_family.h:154:43    	Differencer 	U   	protobuf::util::MessageDifferencer::Equivalent(a.gc_rule"
   - "google/cloud/bigtable/data_client.h:45:22   	Bigtable's  	U   	* Connects to Cloud Bigtable's data manipulation APIs"
+  - "google/cloud/bigtable/doc/bigtable-mocking.dox:15:10    	howto   	U   	@snippet howto_mock_data_api.cc required"
   - "google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:41:33   	googleusercontent   	U   	client_id\": \"XXXXXX.apps.googleusercontent.com\","
   - "google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:57:71   	endl                	U   	< ex.what() << std::endl;"
   - "google/cloud/bigtable/doc/migrating-from-dataclient.dox:3:22    	dataclient  	U   	page migrating-from-dataclient Migrating from `DataClient"
