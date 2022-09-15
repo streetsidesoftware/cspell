@@ -9,7 +9,6 @@ import {
     regExFirstUpper,
     regExIgnoreCharacters,
     regExLines,
-    regExMatchRegExParts,
     regExSplitWords,
     regExSplitWords2,
     regExUpperSOrIng,
@@ -17,6 +16,8 @@ import {
     regExWordsAndDigits,
 } from './textRegex';
 import { scanMap } from './util';
+
+export { stringToRegExp } from './textRegex';
 
 // CSpell:ignore ings ning gimuy tsmerge
 
@@ -178,24 +179,6 @@ interface OffsetMap {
 }
 function offsetMap(offset: number) {
     return <T extends OffsetMap>(xo: T) => ({ ...xo, offset: xo.offset + offset } as T);
-}
-
-export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', forceFlags = 'g'): RegExp | undefined {
-    if (pattern instanceof RegExp) {
-        return pattern;
-    }
-    try {
-        const [, pat, flag] = [...(pattern.match(regExMatchRegExParts) || ['', pattern, defaultFlags]), forceFlags];
-        // Make sure the flags are unique.
-        const flags = [...new Set(forceFlags + flag)].join('').replace(/[^gimuy]/g, '');
-        if (pat) {
-            const regex = new RegExp(pat, flags);
-            return regex;
-        }
-    } catch (e) {
-        /* empty */
-    }
-    return undefined;
 }
 
 export function calculateTextDocumentOffsets<T extends TextOffset>(

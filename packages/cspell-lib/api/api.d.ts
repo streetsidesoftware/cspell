@@ -274,6 +274,8 @@ declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionar
 
 declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options: SpellingDictionaryOptions | undefined): SpellingDictionary;
 
+declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
+
 declare function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset>;
 /**
  * Split camelCase words into an array of strings.
@@ -313,7 +315,6 @@ declare function camelToSnake(word: string): string;
 declare function matchCase(example: string, word: string): string;
 declare function textOffset(text: string, offset?: number): TextOffset;
 declare function extractText(textOffset: TextOffset, startPos: number, endPos: number): string;
-declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
 declare function calculateTextDocumentOffsets<T extends TextOffset>(uri: string, doc: string, wordOffsets: T[]): (TextDocumentOffset & T)[];
 declare function removeAccents(text: string): string;
 declare const __testing__: {
@@ -345,10 +346,10 @@ declare const text_d_camelToSnake: typeof camelToSnake;
 declare const text_d_matchCase: typeof matchCase;
 declare const text_d_textOffset: typeof textOffset;
 declare const text_d_extractText: typeof extractText;
-declare const text_d_stringToRegExp: typeof stringToRegExp;
 declare const text_d_calculateTextDocumentOffsets: typeof calculateTextDocumentOffsets;
 declare const text_d_removeAccents: typeof removeAccents;
 declare const text_d___testing__: typeof __testing__;
+declare const text_d_stringToRegExp: typeof stringToRegExp;
 declare namespace text_d {
   export {
     text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset,
@@ -375,10 +376,10 @@ declare namespace text_d {
     text_d_matchCase as matchCase,
     text_d_textOffset as textOffset,
     text_d_extractText as extractText,
-    text_d_stringToRegExp as stringToRegExp,
     text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets,
     text_d_removeAccents as removeAccents,
     text_d___testing__ as __testing__,
+    text_d_stringToRegExp as stringToRegExp,
   };
 }
 

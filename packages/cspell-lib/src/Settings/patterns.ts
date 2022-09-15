@@ -1,5 +1,5 @@
 import type { Pattern, RegExpPatternDefinition } from '@cspell/cspell-types';
-import { stringToRegExp } from '../util/text';
+import { stringToRegExp } from '../util/textRegex';
 import { isDefined } from '../util/util';
 
 export function resolvePatterns(

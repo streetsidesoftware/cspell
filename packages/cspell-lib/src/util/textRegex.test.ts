@@ -4,9 +4,11 @@ import {
     regExAllUpper,
     regExDanglingQuote,
     regExFirstUpper,
+    regExMatchRegExParts,
     regExSplitWords,
     regExSplitWords2,
     regExTrailingEndings,
+    stringToRegExp,
 } from './textRegex';
 
 describe('Validate textRegex', () => {
@@ -124,6 +126,37 @@ describe('Validate textRegex', () => {
     `('regExSplitWords2 on "$text"', ({ text, expected }: { text: string; expected: string[] }) => {
         const m = [...text.matchAll(regExSplitWords2)].map((m) => Array.from(m));
         expect(m).toEqual(expected);
+    });
+
+    test.each`
+        value           | expected
+        ${''}           | ${null}
+        ${'/pat/gm'}    | ${['/pat/gm', 'pat', 'gm']}
+        ${' /pat/gm\n'} | ${[' /pat/gm\n', 'pat', 'gm']}
+    `('regExMatchRegExParts "$value"', ({ value, expected }) => {
+        const r = value.match(regExMatchRegExParts);
+        expect(r ? [...r] : r).toEqual(expected);
+    });
+
+    const examplePattern = `/
+    ^                           # start of url
+    https?:\\/\\/([^?#\n]*?)    # path
+    (\\?[^#\n]*?)?              # query
+    (\\#.*?)?                   # hash
+    $                           # end of string
+    /gmx`;
+
+    test.each`
+        pattern                            | expected
+        ${''}                              | ${undefined}
+        ${'/pat/gm'}                       | ${/pat/gm}
+        ${' /pat/gm\n'}                    | ${/pat/gm}
+        ${' /\npat # the pattern\n/gmx\n'} | ${/pat/gm}
+        ${' /\npat # the pattern\n/gm\n'}  | ${/\npat # the pattern\n/gm}
+        ${examplePattern}                  | ${/^https?:\/\/([^?#\n]*?)(\?[^#\n]*?)?(#.*?)?$/gm}
+    `('stringToRegExp "$pattern"', ({ pattern, expected }) => {
+        const r = stringToRegExp(pattern);
+        expect(r).toEqual(expected);
     });
 });
 
