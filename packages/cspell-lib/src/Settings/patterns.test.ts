@@ -29,11 +29,14 @@ describe('patterns', () => {
     const p = selectPatterns;
 
     test.each`
-        regExpList                | patternDefinitions         | expected
-        ${[]}                     | ${[]}                      | ${[]}
-        ${['string', 'hello']}    | ${p('string', 'comments')} | ${[/".*?"/gim, /hello/gim]}
-        ${['string', 'comments']} | ${patterns}                | ${[/".*?"/gim, /#.*/g, /(?:\/\*[\s\S]*?\*\/)/g]}
-        ${['a', 'b']}             | ${patterns}                | ${[/c/gim]}
+        regExpList                | patternDefinitions                         | expected
+        ${[]}                     | ${[]}                                      | ${[]}
+        ${['string', 'hello']}    | ${p('string', 'comments')}                 | ${[/".*?"/gim, /hello/gim]}
+        ${['string', 'comments']} | ${patterns}                                | ${[/".*?"/gim, /#.*/g, /(?:\/\*[\s\S]*?\*\/)/g]}
+        ${['a', 'b']}             | ${patterns}                                | ${[/c/gim]}
+        ${[' /\\b.*==/g\n']}      | ${patterns}                                | ${[/\b.*==/g]}
+        ${['pat']}                | ${[{ name: 'pat', pattern: ' /pat.*/g' }]} | ${[/pat.*/g]}
+        ${['pat\n']}              | ${[{ name: 'pat', pattern: ' /pat.*/g' }]} | ${[/pat/gim]}
     `('resolvePatterns $regExpList', ({ regExpList, patternDefinitions, expected }) => {
         expect(resolvePatterns(regExpList, patternDefinitions)).toEqual(expected);
     });

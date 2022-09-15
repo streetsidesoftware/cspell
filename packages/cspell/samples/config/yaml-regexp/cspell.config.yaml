@@ -1,0 +1,10 @@
+patterns:
+  - name: code_block
+    pattern: |
+      /
+          ^(\s*`{3,}).*     # match the ```
+          [\s\S]*?          # the block of code
+          ^\1               # end of the block
+      /gmx
+ignoreRegExpList:
+  - code_block

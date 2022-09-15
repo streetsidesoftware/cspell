@@ -11,6 +11,7 @@ const failFastSamples = path.resolve(samples, 'fail-fast');
 const hiddenSamples = path.resolve(samples, 'hidden-test');
 const filesToCheck = path.resolve(root, 'fixtures/features/file-list/files-to-check.txt');
 const filesToCheckWithMissing = path.resolve(root, 'fixtures/features/file-list/files-to-check-missing.txt');
+const configSamples = path.resolve(samples, 'config');
 
 const oc = expect.objectContaining;
 const j = path.join;
@@ -25,7 +26,7 @@ describe('Linter Validation Tests', () => {
         expect(rWithFiles.files).toBe(1);
     });
 
-    // cspell:ignore Tufte
+    // cspell:ignore Tufte checkedd
     test.each`
         files               | options                                                                                                | expectedRunResult              | expectedReport
         ${[]}               | ${{ root: latexSamples }}                                                                              | ${oc({ errors: 0, files: 4 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'Tufte' })] })}
@@ -51,6 +52,7 @@ describe('Linter Validation Tests', () => {
         ${['**']}           | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing] }}                      | ${oc({ errors: 0, files: 3 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**']}           | ${{ root, config: j(root, 'cspell.json'), fileLists: [filesToCheckWithMissing], mustFindFiles: true }} | ${oc({ errors: 1, files: 3 })} | ${oc({ errorCount: 1, errors: [expect.anything()], issues: [] })}
         ${["'**'"]}         | ${{ root, config: j(root, 'cspell.json'), mustFindFiles: true }}                                       | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 1, errors: [expect.any(CheckFailed)], issues: [] })}
+        ${['**']}           | ${{ root: j(configSamples, 'yaml-regexp') }}                                                           | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'checkedd' })] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));
