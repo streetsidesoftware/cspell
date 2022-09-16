@@ -192,7 +192,25 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     //
     // Special file types used to prevent spell checking.
     //
-    { id: 'image', extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif', '.ico'] },
+    {
+        id: 'image',
+        extensions: [
+            '.jpg',
+            '.JPG',
+            '.png',
+            '.PNG',
+            '.jpeg',
+            '.JPEG',
+            '.tiff',
+            '.TIFF',
+            '.bmp',
+            '.BMP',
+            '.gif',
+            '.GIF',
+            '.ico',
+            '.ICO',
+        ],
+    },
     // cspell:ignore woff
     {
         id: 'binary',
