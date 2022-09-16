@@ -99,9 +99,39 @@ Validation:
 
 ```yaml
 dictionaryDefinitions:
-  - name: en-us-suggestions
-    path: ./en-us-suggestions.txt.gz
-    type: suggestions
+  - name: en-us-typo-suggestions
+    path: ./en-us-typos.txt
+    type: suggestions # alternatively we could call it a `typo` file.
 ```
 
 <!--- cspell:ignore acadmic accension -->
+
+# Terminology
+
+Having 3 different list for words can be a bit painful.
+
+- `words` and `userWords`
+- `ignoreWords`
+- `flagWords`
+
+To make it more painful, VS Code doesn't provide a way to merge "lists" in its settings. To help with the issue, `userWords` was created, but
+that was an incomplete solution.
+
+This is a proposed data structure that merges all three concepts and is compatible with how VS Code merges configuration.
+
+Example Term definition:
+
+**`cspell.config.yaml`**
+
+```yaml
+terms:
+  crap: false # forbid this word
+  incase:
+    - in case # forbid this word and suggest `in case`
+  ignoreX: null # ignore this word
+  abandoning: true # this word is an acceptable term
+  abondoning: # cspell:disable-line
+    - abandoning
+  accesories: ['accessories'] # cspell:disable-line
+  accidant: ['accident'] # cspell:disable-line
+```

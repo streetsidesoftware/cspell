@@ -37,9 +37,36 @@ const exampleFlagWords: NewBaseSettings = {
     flagWords: ['crap', ['hte', 'the']],
 };
 
+type TermForbid = false;
+type TermIgnore = null;
+type TermWord = true;
+type TermTypo = string[];
+
+const TermForbid: TermForbid = false;
+const TermWord: TermWord = true;
+const TermIgnore: TermIgnore = null;
+
+type Term = TermWord | TermForbid | TermIgnore | TermTypo;
+type Terms = Record<string, Term>;
+
+// cspell:ignore abondoning abondons aborigene accesories accidant abortificant
+const exampleTerms: Terms = {
+    crap: TermForbid,
+    incase: ['in case'],
+    ignoreX: TermIgnore,
+    abandoning: TermWord,
+    abondoning: ['abandoning'],
+    abondons: ['abandons'],
+    aborigene: ['aborigine'],
+    accesories: ['accessories'],
+    accidant: ['accident'],
+    abortificant: ['abortifacient'],
+};
+
 /*********************/
 
 export const __testing__ = {
     exampleDef,
     exampleFlagWords,
+    exampleTerms,
 };
