@@ -19,6 +19,6 @@ describe('timer', () => {
         expect(a1).toBeGreaterThanOrEqual(10);
         expect(b1).toBeGreaterThanOrEqual(10);
 
-        expect(Math.abs(b1 - a1)).toBeLessThan(2);
+        expect(Math.abs(b1 - a1)).toBeLessThan(10);
     });
 });
