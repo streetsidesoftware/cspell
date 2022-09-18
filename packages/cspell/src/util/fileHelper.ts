@@ -112,7 +112,7 @@ export function calcFinalConfigInfo(
     filename: string,
     text: string
 ): FileConfigInfo {
-    const ext = path.extname(filename);
+    const basename = path.basename(filename);
     const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
     const loadDefault =
         settingsFromCommandLine.loadDefaultConfiguration ??
@@ -125,7 +125,7 @@ export function calcFinalConfigInfo(
         fileSettings,
         settingsFromCommandLine
     );
-    const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
+    const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguageIdsForBaseFilename(basename);
     const config = cspell.constructSettingsForText(settings, text, languageIds);
     return {
         configInfo: { ...configInfo, config },
