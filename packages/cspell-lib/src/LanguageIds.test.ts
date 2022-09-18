@@ -9,6 +9,7 @@ describe('Validate LanguageIds', () => {
         ${'.jsonc'} | ${['json', 'jsonc']}
         ${'tex'}    | ${['latex']}
         ${'hs'}     | ${['haskell']}
+        ${'PNG'}    | ${['image']}
     `('getLanguagesForExt $ext', ({ ext, expected }) => {
         expect(LangId.getLanguagesForExt(ext)).toEqual(expected);
     });
@@ -105,6 +106,8 @@ describe('Validate LanguageIds', () => {
         ${'lib.obj'}      | ${true}
         ${'lib.dll'}      | ${true}
         ${'lib.o'}        | ${true}
+        ${'image.PNG'}    | ${true}
+        ${'image.JPG'}    | ${true}
         ${'image.gif'}    | ${true}
         ${'picture.jpeg'} | ${true}
         ${'picture.jpg'}  | ${true}

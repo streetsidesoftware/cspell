@@ -194,22 +194,7 @@ export const languageExtensionDefinitions: LanguageDefinitions = [
     //
     {
         id: 'image',
-        extensions: [
-            '.jpg',
-            '.JPG',
-            '.png',
-            '.PNG',
-            '.jpeg',
-            '.JPEG',
-            '.tiff',
-            '.TIFF',
-            '.bmp',
-            '.BMP',
-            '.gif',
-            '.GIF',
-            '.ico',
-            '.ICO',
-        ],
+        extensions: ['.jpg', '.png', '.jpeg', '.tiff', '.bmp', '.gif', '.ico'],
     },
     // cspell:ignore woff
     {
@@ -312,11 +297,15 @@ function buildExtensionToLanguageIdMap(map: ExtensionToLanguageIdMapSet): Extens
     return new Map([...map].map(([k, s]) => [k, [...s]]));
 }
 
-export function getLanguagesForExt(ext: string): string[] {
-    return mapExtensionToLanguageIds.get(ext) || mapExtensionToLanguageIds.get('.' + ext) || [];
+function _getLanguagesForExt(ext: string): string[] | undefined {
+    return mapExtensionToLanguageIds.get(ext) || mapExtensionToLanguageIds.get('.' + ext);
 }
 
-export function getLanguagesForBasename(basename: string): string[] {
+export function getLanguagesForExt(ext: string): string[] {
+    return _getLanguagesForExt(ext) || _getLanguagesForExt(ext.toLowerCase()) || [];
+}
+
+function _getLanguagesForBasename(basename: string): string[] | undefined {
     const found = mapExtensionToLanguageIds.get(basename);
     if (found) return found;
 
@@ -325,5 +314,9 @@ export function getLanguagesForBasename(basename: string): string[] {
         if (ids) return ids;
     }
 
-    return [];
+    return undefined;
+}
+
+export function getLanguagesForBasename(basename: string): string[] {
+    return _getLanguagesForBasename(basename) || _getLanguagesForBasename(basename.toLowerCase()) || [];
 }
