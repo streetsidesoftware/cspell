@@ -13,7 +13,7 @@ import { getGlobalConfigPath, getRawGlobalSettings, writeRawGlobalSettings } fro
 const logger = getLogger();
 const mockLog = jest.spyOn(logger, 'log').mockImplementation();
 const mockError = jest.spyOn(logger, 'error').mockImplementation();
-const mockConfigstore = jest.mocked(Configstore, true);
+const mockConfigstore = jest.mocked(Configstore, { shallow: true });
 
 describe('Validate GlobalSettings', () => {
     beforeEach(() => {
