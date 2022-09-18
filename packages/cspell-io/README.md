@@ -1,3 +1,3 @@
-# cspell-lib
+# cspell-io
 
-A library of useful functions used across various cspell tools.
+A library for reading and writing files.

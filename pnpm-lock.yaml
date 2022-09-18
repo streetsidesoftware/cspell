@@ -284,6 +284,20 @@ importers:
       jest: 29.0.3_@types+node@18.7.18
       rimraf: 3.0.2
 
+  packages/cspell-dictionary:
+    specifiers:
+      '@cspell/cspell-pipe': workspace:^
+      '@cspell/cspell-types': workspace:^
+      cspell-trie-lib: workspace:^
+      fast-equals: ^4.0.3
+      gensequence: ^4.0.2
+    dependencies:
+      '@cspell/cspell-pipe': link:../cspell-pipe
+      '@cspell/cspell-types': link:../cspell-types
+      cspell-trie-lib: link:../cspell-trie-lib
+      fast-equals: 4.0.3
+      gensequence: 4.0.2
+
   packages/cspell-dynamic-loader:
     specifiers:
       cspell: workspace:^

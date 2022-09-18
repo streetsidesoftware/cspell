@@ -37,6 +37,12 @@ export interface SuggestionResultBase {
 
     /** The edit cost 100 = 1 edit */
     cost: Cost;
+
+    /**
+     * This suggestion is the preferred suggestion.
+     * Setting this to `true` implies that an auto fix is possible.
+     */
+    isPreferred?: boolean | undefined;
 }
 
 export interface SuggestionResult extends SuggestionResultBase {
@@ -216,17 +222,18 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         const extraCost =
             words.map((w) => wordLengthCost[w.length] || 0).reduce((a, b) => a + b, 0) +
             (words.length - 1) * EXTRA_WORD_COST;
-        return { word: sug.word, cost: sug.cost + extraCost };
+        return { word: sug.word, cost: sug.cost + extraCost, isPreferred: sug.isPreferred };
     }
 
     function collectSuggestion(suggestion: SuggestionResultBase): MaxCost {
-        const { word, cost } = adjustCost(suggestion);
+        const { word, cost, isPreferred } = adjustCost(suggestion);
         if (cost <= maxCost && filter(suggestion.word, cost)) {
             const known = sugs.get(word);
             if (known) {
                 known.cost = Math.min(known.cost, cost);
+                known.isPreferred = known.isPreferred || isPreferred;
             } else {
-                sugs.set(word, { word, cost });
+                sugs.set(word, { word, cost, isPreferred });
                 if (cost < maxCost && sugs.size > numSugToHold) {
                     dropMax();
                 }
@@ -274,6 +281,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
                 word: cWord,
                 cost,
                 compoundWord: word,
+                isPreferred: undefined,
             };
         }
         return { ...sr };
@@ -285,9 +293,10 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         const nWordToMatch = wordToMatch.normalize(NF);
         const rawValues = [...sugs.values()];
         const values = weightMap
-            ? rawValues.map(({ word }) => ({
+            ? rawValues.map(({ word, isPreferred }) => ({
                   word,
                   cost: editDistanceWeighted(nWordToMatch, word.normalize(NF), weightMap, 110),
+                  isPreferred,
               }))
             : rawValues;
 

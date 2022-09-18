@@ -1,0 +1,47 @@
+{
+  "name": "cspell-dictionary",
+  "version": "6.9.0",
+  "description": "A spelling dictionary library useful for checking words and getting suggestions.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
+    "watch": "tsc -p . -w",
+    "clean": "rimraf dist temp coverage .tsbuildinfo",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "coverage": "jest --coverage",
+    "test-watch": "jest --watch",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "keywords": [
+    "cspell"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-dictionary"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell#readme",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@cspell/cspell-pipe": "workspace:^",
+    "@cspell/cspell-types": "workspace:^",
+    "cspell-trie-lib": "workspace:^",
+    "fast-equals": "^4.0.3",
+    "gensequence": "^4.0.2"
+  }
+}
