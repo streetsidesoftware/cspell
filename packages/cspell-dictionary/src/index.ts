@@ -1,4 +1,9 @@
-export { createCollection, createForbiddenWordsDictionary, createSpellingDictionary } from './SpellingDictionary';
+export {
+    createCollection,
+    createForbiddenWordsDictionary,
+    createSpellingDictionary,
+    createSpellingDictionaryFromTrieFile,
+} from './SpellingDictionary';
 export type {
     FindOptions,
     FindResult,

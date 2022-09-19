@@ -1,28 +1,14 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
 import type { SpellingDictionaryOptions } from '.';
-import {
-    createFailedToLoadDictionary,
-    createSpellingDictionary,
-    createSpellingDictionaryLoadError,
-} from './createSpellingDictionary';
+import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 
 describe('Validate createSpellingDictionary', () => {
     test('createFailedToLoadDictionary', () => {
         const error = new Error('error');
-        const loaderError = createSpellingDictionaryLoadError(
-            'Dictionary Load Error',
-            'Failed to Load',
-            {
-                name: 'failed dict',
-                source: './missing.txt',
-                options: {},
-            },
-            error
-        );
-        const d = createFailedToLoadDictionary(loaderError);
+        const d = createFailedToLoadDictionary('failed dict', './missing.txt', error, {});
         expect(d).toBeTruthy();
 
-        expect(d.getErrors?.()).toEqual([loaderError]);
+        expect(d.getErrors?.()).toEqual([error]);
         expect(d.suggest('error')).toEqual([]);
         expect(d.mapWord('café')).toBe('café');
         expect(d.has('fun')).toBe(false);

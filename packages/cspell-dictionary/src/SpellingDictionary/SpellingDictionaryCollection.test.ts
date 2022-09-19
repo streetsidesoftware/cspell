@@ -1,11 +1,7 @@
 import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryOptions } from '.';
-import {
-    createFailedToLoadDictionary,
-    createForbiddenWordsDictionary,
-    createSpellingDictionary,
-    createSpellingDictionaryLoadError,
-} from './createSpellingDictionary';
+import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
+import { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';
 import { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
@@ -21,6 +17,7 @@ describe('Verify using multiple dictionaries', () => {
         'mango',
         'avocado',
         'grape',
+        'guava',
         'strawberry',
         'blueberry',
         'blackberry',
@@ -39,24 +36,62 @@ describe('Verify using multiple dictionaries', () => {
     const dictNoSug = createSpellingDictionary(wordsNoSug, 'words-no-suggest', 'test', opts({ noSuggest: true }));
     const dictLegacy = createSpellingDictionary(wordsLegacy, 'legacy-dict', 'test', opts({ useCompounds: true }));
 
-    test('checks for existence', async () => {
+    test.each`
+        word            | expected
+        ${'mango'}      | ${true}
+        ${'tree'}       | ${false}
+        ${'avocado'}    | ${true}
+        ${'Avocado'}    | ${false}
+        ${''}           | ${false}
+        ${'red-fruit'}  | ${true}
+        ${'-fruit'}     | ${false}
+        ${'blackberry'} | ${true}
+        ${'guava'}      | ${false}
+        ${'Guava'}      | ${false}
+    `('checks for existence of "$word"', async ({ word, expected }) => {
         const dicts = await Promise.all([
             createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
             createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
             createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
             createSpellingDictionary(wordsD, 'wordsD', 'test', opts()),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
         ]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
-        expect(dictCollection.has('mango')).toBe(true);
-        expect(dictCollection.has('tree')).toBe(false);
-        expect(dictCollection.has('avocado')).toBe(false);
-        expect(dictCollection.has('')).toBe(false);
-        expect(dictCollection.has('red-fruit')).toBe(true);
-        expect(dictCollection.has('-fruit')).toBe(false);
-        expect(dictCollection.has('blackberry')).toBe(true);
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.size).toBeGreaterThanOrEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
+        expect(dictCollection.has(word)).toEqual(expected);
+    });
+
+    test('has for forbidden word.', () => {
+        const word = 'guava';
+        const expected = false;
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', opts()),
+            createForbiddenWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
+        ];
+
+        const dictCollection = createCollection(dicts, 'test');
+        expect(dictCollection.size).toBeGreaterThanOrEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
+        expect(dictCollection.has(word)).toEqual(expected);
+    });
+
+    test('find forbidden word.', () => {
+        const word = 'guava';
+        const expected = false;
+        const dicts = [
+            createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
+            createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
+            createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
+            createSpellingDictionary(wordsD, 'wordsD', 'test', opts()),
+            createForbiddenWordsDictionary(['Avocado', 'guava'], 'flag_words', 'test'),
+        ];
+
+        const dictCollection = createCollection(dicts, 'test');
+        expect(dictCollection.size).toBeGreaterThanOrEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
+        expect(dictCollection.has(word)).toEqual(expected);
     });
 
     test('checks mapWord is identity', async () => {
@@ -73,19 +108,8 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', opts()),
             createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
             createSpellingDictionary(wordsC, 'wordsC', 'test', opts()),
-            createFailedToLoadDictionary(
-                createSpellingDictionaryLoadError(
-                    'Dictionary Load Error',
-                    'Failed to Load',
-                    {
-                        name: 'failed dict',
-                        source: './missing.txt',
-                        options: {},
-                    },
-                    new Error('error')
-                )
-            ),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createFailedToLoadDictionary('failed dict', './missing.txt', new Error('error')),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         const dictCollection = createCollection(dicts, 'test');
@@ -106,7 +130,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -126,7 +150,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -148,7 +172,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -170,7 +194,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         // cspell:ignore appletango applemango
@@ -207,7 +231,7 @@ describe('Verify using multiple dictionaries', () => {
                 dictionaryInformation: { ignore: '\u0300-\u0362' },
                 caseSensitive: true,
             }),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -231,7 +255,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictNoSug,
         ];
 
@@ -260,7 +284,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictNoSug,
             dictLegacy,
         ];
@@ -286,7 +310,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -311,7 +335,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -324,12 +348,12 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
-            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+            createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
         ]);
 
         const dictCollection = createCollection(dicts, 'test');
         const sugs = dictCollection.suggest('avocado', 10);
-        expect(sugs.map((r) => r.word)).not.toContain('avocado');
+        expect(sugs.map((r) => r.word)).not.toContain('Avocado');
     });
 
     test('checks for suggestions from mixed sources', async () => {
@@ -384,7 +408,7 @@ describe('Validate looking up words', () => {
         createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
         createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
         createSpellingDictionary(cities, 'cities', 'test', undefined),
-        createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
+        createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
     ];
 
     const testDictCollection = new SpellingDictionaryCollection(testDicts, 'test');

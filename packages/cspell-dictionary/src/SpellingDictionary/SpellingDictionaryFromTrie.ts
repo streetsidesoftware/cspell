@@ -205,12 +205,21 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
 
 type FindAnyFormResult = FindFullResult;
 
-export function createSpellingDictionaryTrie(
-    data: Iterable<string>,
+/**
+ * Create a dictionary from a trie file.
+ * @param data - contents of a trie file.
+ * @param name - name of dictionary
+ * @param source - filename or uri
+ * @param options - options.
+ * @returns SpellingDictionary
+ */
+export function createSpellingDictionaryFromTrieFile(
+    data: Iterable<string> | string,
     name: string,
     source: string,
     options: SpellingDictionaryOptions
 ): SpellingDictionary {
+    data = typeof data === 'string' ? data.split('\n') : data;
     const trieNode = importTrie(data);
     const trie = new Trie(trieNode);
     return new SpellingDictionaryFromTrie(trie, name, options, source);

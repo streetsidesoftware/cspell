@@ -54,13 +54,18 @@ export type HasOptions = SearchOptions;
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
-    useCompounds?: boolean;
     /**
      * The dictionary is case aware.
      */
     caseSensitive?: boolean;
+    /**
+     * This is a NO Suggest dictionary used for words to be ignored.
+     */
     noSuggest?: boolean;
-    weightMap?: WeightMap | undefined;
+    /**
+     * Extra dictionary information used in improving suggestions
+     * based upon locale.
+     */
     dictionaryInformation?: DictionaryInformation;
     /**
      * Strip Case and Accents to allow for case insensitive searches and
@@ -72,6 +77,15 @@ export interface SpellingDictionaryOptions {
      * @default true
      */
     supportNonStrictSearches?: boolean;
+    /**
+     * Turns on legacy word compounds.
+     * @deprecated
+     */
+    useCompounds?: boolean;
+    /**
+     * Optional WeightMap used to improve suggestions.
+     */
+    weightMap?: WeightMap | undefined;
 }
 
 export interface DictionaryInfo {
