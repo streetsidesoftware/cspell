@@ -1,4 +1,5 @@
-export { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
+export { createSpellingDictionary } from './createSpellingDictionary';
+export { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
 export type {
     FindOptions,
     FindResult,
@@ -11,3 +12,4 @@ export type {
     SuggestOptions,
 } from './SpellingDictionary';
 export { createCollection } from './SpellingDictionaryCollection';
+export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie';

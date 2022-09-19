@@ -29,7 +29,7 @@ export interface ParseDictionaryOptions {
     keepExactPrefix: string;
 
     /**
-     * Tell the parser to automatically strip case and accents.
+     * Tell the parser to automatically create case / accents insensitive forms.
      * @default true
      */
     stripCaseAndAccents: boolean;

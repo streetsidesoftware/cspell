@@ -1,13 +1,12 @@
 import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
-import { operators } from 'gensequence';
 import { IterableLike } from '../util/IterableLike';
 import { AutoWeakCache, SimpleCache } from '../util/simpleCache';
-import { SpellingDictionary, SpellingDictionaryOptions, DictionaryInfo } from './SpellingDictionary';
+import type { DictionaryInfo, SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { createWeightMapFromDictionaryInformation } from './SpellingDictionaryMethods';
 
-const defaultOptions: SpellingDictionaryOptions = Object.freeze({
+export const defaultOptions: SpellingDictionaryOptions = Object.freeze({
     weightMap: undefined,
 });
 
@@ -21,11 +20,19 @@ const cachedDictionaries = new AutoWeakCache<CreateSpellingDictionaryParams, Spe
 const maxSetSize = 3;
 const cachedParamsByWordList = new SimpleCache<string, Set<CreateSpellingDictionaryParams>>(64);
 
+/**
+ * Create a SpellingDictionary
+ * @param wordList - list of words
+ * @param name - name of dictionary
+ * @param source - filename or uri
+ * @param options - dictionary options
+ * @returns a Spelling Dictionary
+ */
 export function createSpellingDictionary(
     wordList: readonly string[] | IterableLike<string>,
     name: string,
     source: string,
-    options: SpellingDictionaryOptions | undefined
+    options?: SpellingDictionaryOptions | undefined
 ): SpellingDictionary {
     const params: CreateSpellingDictionaryParams = [wordList, name, source, options];
 
@@ -61,21 +68,6 @@ function _createSpellingDictionary(params: CreateSpellingDictionaryParams): Spel
     return new SpellingDictionaryFromTrie(trie, name, opts, source);
 }
 
-export function createForbiddenWordsDictionary(
-    wordList: readonly string[],
-    name: string,
-    source: string,
-    options: SpellingDictionaryOptions | undefined
-): SpellingDictionary {
-    // console.log(`createSpellingDictionary ${name} ${source}`);
-    const words = parseDictionaryLines(wordList.concat(wordList.map((a) => a.toLowerCase())), {
-        stripCaseAndAccents: !options?.noSuggest,
-    });
-    const forbidWords = operators.map((w: string) => '!' + w)(words);
-    const trie = buildTrieFast(forbidWords);
-    return new SpellingDictionaryFromTrie(trie, name, options || defaultOptions, source);
-}
-
 export interface SpellingDictionaryLoadError extends Error {
     /** The Error Name */
     readonly name: string;
@@ -87,9 +79,13 @@ export interface SpellingDictionaryLoadError extends Error {
     readonly info: DictionaryInfo;
 }
 
-export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError): SpellingDictionary {
-    const { name, source, options } = error.info;
-
+export function createFailedToLoadDictionary(
+    name: string,
+    source: string,
+    error: Error,
+    options?: SpellingDictionaryOptions | undefined
+): SpellingDictionary {
+    options = options || {};
     return {
         name,
         source,
@@ -109,23 +105,4 @@ export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError)
         isDictionaryCaseSensitive: false,
         getErrors: () => [error],
     };
-}
-
-export function createSpellingDictionaryLoadError(
-    errorName: string,
-    message: string,
-    info: DictionaryInfo,
-    cause?: Error
-): SpellingDictionaryLoadError {
-    const err: SpellingDictionaryLoadError = {
-        name: errorName,
-        message,
-        info,
-        cause,
-    };
-
-    const stack = cause?.stack;
-    stack && (err.stack = stack);
-
-    return err;
 }
