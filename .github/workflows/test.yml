@@ -67,7 +67,7 @@ jobs:
 
       - run: pnpm i
       - run: pnpm run build
-      - run: pnpm test
+      - run: pnpm --workspace-concurrency 1 test
 
       - name: verify trace command
         run: pnpm run test-bin-trace
@@ -110,7 +110,9 @@ jobs:
 
       - run: pnpm i
       - run: pnpm run build
-      - run: pnpm test
+      # macos has started to fail if concurrency is not set to 1
+      # both jest and pnpm run in parallel overloading the machine.
+      - run: pnpm --workspace-concurrency 1 test
 
       - name: verify trace command
         run: pnpm run test-bin-trace
@@ -159,4 +161,4 @@ jobs:
 
       - run: pnpm i
       - run: pnpm run build
-      - run: pnpm test
+      - run: pnpm --workspace-concurrency 1 test
