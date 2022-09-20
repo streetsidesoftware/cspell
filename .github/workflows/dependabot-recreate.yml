@@ -1,0 +1,23 @@
+# https://github.com/dependabot/dependabot-core/issues/1736
+name: Dependabot - Recreate Pull Requests
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+permissions: read-all
+jobs:
+  add-comment-recreate:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
+    steps:
+      - name: Show Open PRs
+        run: |
+          gh pr list -S "-label:cspell5 author:app/dependabot"
+      - name: Get Open PRs and apply comment
+        run: >
+          gh pr list -S "-label:cspell5 author:app/dependabot" --json number
+          | jq '.[].number'
+          | xargs -n1 gh pr comment -b "@dependabot recreate"
