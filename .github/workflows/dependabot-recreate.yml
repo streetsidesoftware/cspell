@@ -9,18 +9,18 @@ permissions: read-all
 jobs:
   add-comment-recreate:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    permissions:
-      pull-requests: write
-      contents: write
     steps:
       - uses: actions/checkout@v3
 
       - name: Show Open PRs
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
         run: |
           gh pr list -S "-label:cspell5 author:app/dependabot"
+
       - name: Get Open PRs and apply comment
+        env:
+          GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
         run: >
           gh pr list -S "-label:cspell5 author:app/dependabot" --json number
           | jq '.[].number'
