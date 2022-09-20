@@ -9,6 +9,8 @@ permissions: read-all
 jobs:
   add-comment-recreate:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       pull-requests: write
       contents: write
