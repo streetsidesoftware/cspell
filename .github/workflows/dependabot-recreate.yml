@@ -14,11 +14,18 @@ jobs:
 
       - name: Show Open PRs
         env:
-          GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr list -S "-label:cspell5 author:app/dependabot"
 
+      - name: Get List of tokens
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo PR_SUMMARY=$(gh pr list -S "-label:cspell5 author:app/dependabot") >> $GITHUB_ENV
+
       - name: Get Open PRs and apply comment
+        if: ${{ env.PR_SUMMARY }}
         env:
           GH_TOKEN: ${{ secrets.TOKEN_UPDATE_DEPENDABOT }}
         run: >
