@@ -3,10 +3,13 @@ import type { DictionaryFileTypes } from '@cspell/cspell-types';
 import { CSpellIO, Stats } from 'cspell-io';
 import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
 import { toError } from '../../util/errors';
-import { createFailedToLoadDictionary, createSpellingDictionary } from '../createSpellingDictionary';
-import { SpellingDictionary } from '../SpellingDictionary';
+import {
+    createFailedToLoadDictionary,
+    createSpellingDictionary,
+} from '../SpellingDictionaryLibOld/createSpellingDictionary';
+import { SpellingDictionary } from '../SpellingDictionaryLibOld/SpellingDictionary';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
-import { createSpellingDictionaryTrie } from '../SpellingDictionaryFromTrie';
+import { createSpellingDictionaryTrie } from '../SpellingDictionaryLibOld/SpellingDictionaryFromTrie';
 
 const MAX_AGE = 10000;
 

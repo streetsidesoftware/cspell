@@ -2,7 +2,7 @@ import { DictionaryInformation } from '@cspell/cspell-types';
 import { CompoundWordsMethod, mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { clean } from 'cspell-trie-lib/dist/lib/trie-util';
 import { genSequence } from 'gensequence';
-import { isUpperCase, removeAccents, ucFirst } from '../util/text';
+import { isUpperCase, removeAccents, ucFirst } from '../../util/text';
 import { HasOptions, SearchOptions, SpellingDictionary, SuggestOptions } from './SpellingDictionary';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';

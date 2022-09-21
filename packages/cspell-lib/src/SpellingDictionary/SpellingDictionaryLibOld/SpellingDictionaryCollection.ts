@@ -1,8 +1,8 @@
 import { CASE_INSENSITIVE_PREFIX } from 'cspell-trie-lib';
 import { genSequence } from 'gensequence';
-import { getDefaultSettings } from '../Settings';
-import { memorizer, memorizerKeyBy } from '../util/Memorizer';
-import { clean, isDefined } from '../util/util';
+import { getDefaultSettings } from '../../Settings';
+import { memorizer, memorizerKeyBy } from '../../util/Memorizer';
+import { clean, isDefined } from '../../util/util';
 import {
     CompoundWordsMethod,
     FindResult,

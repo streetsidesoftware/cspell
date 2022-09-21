@@ -2,7 +2,7 @@ import { CSpellIO } from 'cspell-io';
 import { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { getCSpellIO } from '../static';
 import { DictionaryLoader } from './DictionaryController';
-import { SpellingDictionary } from './SpellingDictionary';
+import { SpellingDictionary } from './SpellingDictionaryLibOld/SpellingDictionary';
 export type { LoadOptions } from './DictionaryController';
 
 let loader: DictionaryLoader | undefined;

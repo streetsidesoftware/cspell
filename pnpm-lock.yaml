@@ -464,6 +464,7 @@ importers:
       configstore: ^5.0.1
       cosmiconfig: ^7.0.1
       cspell-dict-nl-nl: ^1.1.2
+      cspell-dictionary: workspace:^
       cspell-glob: workspace:^
       cspell-grammar: workspace:^
       cspell-io: workspace:^
@@ -491,6 +492,7 @@ importers:
       comment-json: 4.2.3
       configstore: 5.0.1
       cosmiconfig: 7.0.1
+      cspell-dictionary: link:../cspell-dictionary
       cspell-glob: link:../cspell-glob
       cspell-grammar: link:../cspell-grammar
       cspell-io: link:../cspell-io
@@ -523,7 +525,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.79.0
       rollup-plugin-dts: 4.2.2_ihkqvyh37tzxtjmovjyy2yrv7m
-      ts-jest: 29.0.1_jksntdpmkmo5cthob65gehuuvi
+      ts-jest: 29.0.1_3v2of4mknskhifwzp4doj5a3fa
 
   packages/cspell-pipe:
     specifiers:
@@ -12885,6 +12887,40 @@ packages:
   /trough/1.0.5:
     resolution: {integrity: sha512-rvuRbTarPXmMb79SmzEp8aqXNKcK+y0XaB298IXueQ8I2PsrATcPBCSPyK/dDNa2iWOhKlfNnOjdAOTBU/nkFA==}
     dev: false
+
+  /ts-jest/29.0.1_3v2of4mknskhifwzp4doj5a3fa:
+    resolution: {integrity: sha512-htQOHshgvhn93QLxrmxpiQPk69+M1g7govO1g6kf6GsjCv4uvRV0znVmDrrvjUrVCnTYeY4FBxTYYYD4airyJA==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+    hasBin: true
+    peerDependencies:
+      '@babel/core': '>=7.0.0-beta.0 <8'
+      '@jest/types': ^29.0.0
+      babel-jest: ^29.0.0
+      esbuild: '*'
+      jest: ^29.0.0
+      typescript: '>=4.3'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@jest/types':
+        optional: true
+      babel-jest:
+        optional: true
+      esbuild:
+        optional: true
+    dependencies:
+      '@babel/core': 7.19.1
+      bs-logger: 0.2.6
+      fast-json-stable-stringify: 2.1.0
+      jest: 29.0.3_@types+node@18.7.18
+      jest-util: 29.0.3
+      json5: 2.2.1
+      lodash.memoize: 4.1.2
+      make-error: 1.3.6
+      semver: 7.3.7
+      typescript: 4.8.3
+      yargs-parser: 21.1.1
+    dev: true
 
   /ts-jest/29.0.1_jksntdpmkmo5cthob65gehuuvi:
     resolution: {integrity: sha512-htQOHshgvhn93QLxrmxpiQPk69+M1g7govO1g6kf6GsjCv4uvRV0znVmDrrvjUrVCnTYeY4FBxTYYYD4airyJA==}

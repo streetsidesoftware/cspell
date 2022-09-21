@@ -1,7 +1,7 @@
 import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
 import { genSequence, Sequence } from 'gensequence';
 import * as RxPat from '../Settings/RegExpPatterns';
-import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionary';
+import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionary';
 import * as Text from '../util/text';
 import { clean } from '../util/util';
 import { split } from '../util/wordSplitter';

@@ -6,10 +6,10 @@ import type {
     WeightMap,
 } from 'cspell-trie-lib';
 import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
-import { getDefaultSettings } from '../Settings';
-import { memorizer } from '../util/Memorizer';
-import { createMapper } from '../util/repMap';
-import { clean } from '../util/util';
+import { getDefaultSettings } from '../../Settings';
+import { memorizer } from '../../util/Memorizer';
+import { createMapper } from '../../util/repMap';
+import { clean } from '../../util/util';
 import { charsetToRegExp } from './charset';
 import {
     FindResult,
