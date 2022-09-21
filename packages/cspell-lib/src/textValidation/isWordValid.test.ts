@@ -1,5 +1,5 @@
 import { createCollection, SpellingDictionaryOptions } from '../SpellingDictionary';
-import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary';
+import { createSpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/createSpellingDictionary';
 import { __testing__, IsWordValidOptions } from './isWordValid';
 
 const { hasWordCheck } = __testing__;

@@ -1,8 +1,8 @@
-import { SpellingDictionaryOptions } from '.';
-import { DictionaryInformation } from '..';
-import { mapDictDefToInternal } from '../Settings/DictionarySettings';
+import { SpellingDictionaryOptions } from './SpellingDictionary';
+import { DictionaryInformation } from '../..';
+import { mapDictDefToInternal } from '../../Settings/DictionarySettings';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
-import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
+import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 
 const di = mapDictDefToInternal;
 

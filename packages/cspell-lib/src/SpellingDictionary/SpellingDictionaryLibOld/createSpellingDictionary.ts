@@ -1,10 +1,10 @@
 import { buildTrieFast, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
 import { operators } from 'gensequence';
-import { IterableLike } from '../util/IterableLike';
-import { AutoWeakCache, SimpleCache } from '../util/simpleCache';
+import { IterableLike } from '../../util/IterableLike';
+import { AutoWeakCache, SimpleCache } from '../../util/simpleCache';
 import { SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary';
-import { SpellingDictionaryLoadError } from './SpellingDictionaryError';
+import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { createWeightMapFromDictionaryInformation } from './SpellingDictionaryMethods';
 

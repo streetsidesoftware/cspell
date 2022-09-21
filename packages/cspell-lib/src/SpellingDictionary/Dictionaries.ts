@@ -1,10 +1,16 @@
 import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { isDefined } from '../util/util';
-import { createForbiddenWordsDictionary, createSpellingDictionary } from './createSpellingDictionary';
+import {
+    createForbiddenWordsDictionary,
+    createSpellingDictionary,
+} from './SpellingDictionaryLibOld/createSpellingDictionary';
 import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';
-import { SpellingDictionary } from './SpellingDictionary';
-import { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
+import { SpellingDictionary } from './SpellingDictionaryLibOld/SpellingDictionary';
+import {
+    createCollection,
+    SpellingDictionaryCollection,
+} from './SpellingDictionaryLibOld/SpellingDictionaryCollection';
 
 export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map(loadDictionary);

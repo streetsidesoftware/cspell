@@ -1,4 +1,4 @@
-import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionary';
+import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionary';
 import { TextOffsetRO } from './ValidationTypes';
 
 export interface IsWordValidOptions {

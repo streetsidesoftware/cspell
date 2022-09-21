@@ -3,7 +3,7 @@ import { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { finalizeSettings } from '../Settings';
 import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from '../SpellingDictionary';
-import { createSpellingDictionary } from '../SpellingDictionary/createSpellingDictionary';
+import { createSpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/createSpellingDictionary';
 import { FreqCounter } from '../util/FreqCounter';
 import * as Text from '../util/text';
 import { calcTextInclusionRanges, validateText, _testMethods } from './textValidator';
