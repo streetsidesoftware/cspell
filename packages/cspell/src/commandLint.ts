@@ -1,5 +1,6 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
+import { parseFeatureFlags } from './featureFlags';
 import { LinterCliOptions } from './options';
 import { DEFAULT_CACHE_LOCATION } from './util/cache';
 import { CheckFailed } from './util/errors';
@@ -112,6 +113,7 @@ export function commandLint(prog: Command): Command {
         .addHelpText('after', usage)
         .arguments('[globs...]')
         .action((fileGlobs: string[], options: LinterCliOptions) => {
+            parseFeatureFlags(options.flag);
             const { mustFindFiles, fileList } = options;
             return App.lint(fileGlobs, options).then((result) => {
                 if (!fileGlobs.length && !result.files && !result.errors && !fileList) {

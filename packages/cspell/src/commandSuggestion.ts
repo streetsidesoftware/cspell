@@ -1,6 +1,7 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
 import { emitSuggestionResult } from './emitters/suggestionsEmitter';
+import { parseFeatureFlags } from './featureFlags';
 import { SuggestionOptions } from './options';
 import { CheckFailed } from './util/errors';
 
@@ -74,6 +75,7 @@ export function commandSuggestion(prog: Command): Command {
         .option('--color', 'Force color')
         .arguments('[words...]')
         .action(async (words: string[], options: SuggestionCommandOptions) => {
+            parseFeatureFlags(options.flag);
             options.useStdin = options.stdin;
             options.dictionaries = mergeArrays(options.dictionaries, options.dictionary);
 

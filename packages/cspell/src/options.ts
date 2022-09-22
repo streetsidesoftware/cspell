@@ -145,6 +145,13 @@ export interface BaseOptions {
      * Check In-Document CSpell directives for correctness.
      */
     validateDirectives?: boolean;
+
+    /**
+     * Execution flags.
+     * Used primarily for releasing experimental features.
+     * Flags are of the form key:value
+     */
+    flag?: string[];
 }
 
 export interface LinterCliOptions extends LinterOptions {
