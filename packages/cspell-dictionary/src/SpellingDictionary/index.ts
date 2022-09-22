@@ -11,5 +11,5 @@ export type {
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
-export { createCollection } from './SpellingDictionaryCollection';
+export { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
 export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie';

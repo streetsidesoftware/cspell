@@ -1,8 +1,11 @@
 /// <reference types="node" />
-import { Glob, CSpellSettingsWithSourceTrace, ReplaceMap, DictionaryInformation, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
+import { Glob, CSpellSettingsWithSourceTrace, AdvancedCSpellSettingsWithSourceTrace, Parser, DictionaryDefinitionPreferred, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, TextOffset, TextDocumentOffset, PnPSettings as PnPSettings$1, ImportFileRef, CSpellUserSettings, Issue, MappedText, ParsedText, LocaleId, CSpellSettings } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
+import * as cspellDictModule from 'cspell-dictionary';
+import { SpellingDictionary, SpellingDictionaryOptions, HasOptions, FindResult, SuggestOptions, SpellingDictionaryCollection as SpellingDictionaryCollection$1, SuggestionResult as SuggestionResult$1 } from 'cspell-dictionary';
+export { SpellingDictionary, SuggestOptions, SuggestionCollector, SuggestionResult } from 'cspell-dictionary';
 import { CompoundWordsMethod, SuggestionResult, SuggestionCollector, WeightMap } from 'cspell-trie-lib';
-export { CompoundWordsMethod, SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
+export { CompoundWordsMethod } from 'cspell-trie-lib';
 export { asyncIterableToArray, readFile, readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { URI } from 'vscode-uri';
 
@@ -112,90 +115,6 @@ declare namespace index_link_d {
   };
 }
 
-interface SearchOptions {
-    useCompounds?: boolean | number | undefined;
-    ignoreCase?: boolean | undefined;
-}
-interface SuggestOptions {
-    /**
-     * Compounding Mode.
-     * `NONE` is the best option.
-     */
-    compoundMethod?: CompoundWordsMethod;
-    /**
-     * The limit on the number of suggestions to generate. If `allowTies` is true, it is possible
-     * for more suggestions to be generated.
-     */
-    numSuggestions?: number;
-    /**
-     * Max number of changes / edits to the word to get to a suggestion matching suggestion.
-     */
-    numChanges?: number;
-    /**
-     * Allow for case-ingestive checking.
-     */
-    ignoreCase?: boolean;
-    /**
-     * If multiple suggestions have the same edit / change "cost", then included them even if
-     * it causes more than `numSuggestions` to be returned.
-     * @default false
-     */
-    includeTies?: boolean;
-    /**
-     * Maximum amount of time to allow for generating suggestions.
-     */
-    timeout?: number;
-}
-interface FindResult {
-    /** the text found, otherwise `false` */
-    found: string | false;
-    /** `true` if it is considered a forbidden word. */
-    forbidden: boolean;
-    /** `true` if it is a no-suggest word. */
-    noSuggest: boolean;
-}
-declare type HasOptions = SearchOptions;
-interface SpellingDictionaryOptions {
-    repMap?: ReplaceMap;
-    useCompounds?: boolean;
-    /**
-     * The dictionary is case aware.
-     */
-    caseSensitive?: boolean;
-    noSuggest?: boolean;
-    weightMap?: WeightMap | undefined;
-    dictionaryInformation?: DictionaryInformation;
-    /**
-     * Strip Case and Accents to allow for case insensitive searches and
-     * words without accents.
-     *
-     * Note: this setting only applies to word lists. It has no-impact on trie
-     * dictionaries.
-     *
-     * @default true
-     */
-    supportNonStrictSearches?: boolean;
-}
-interface SpellingDictionary {
-    readonly name: string;
-    readonly type: string;
-    readonly source: string;
-    readonly containsNoSuggestWords: boolean;
-    has(word: string, options?: HasOptions): boolean;
-    /** A more detailed search for a word, might take longer than `has` */
-    find(word: string, options?: SearchOptions): FindResult | undefined;
-    isForbidden(word: string): boolean;
-    isNoSuggestWord(word: string, options: HasOptions): boolean;
-    suggest(word: string, numSuggestions?: number, compoundMethod?: CompoundWordsMethod, numChanges?: number, ignoreCase?: boolean): SuggestionResult[];
-    suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
-    genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
-    mapWord(word: string): string;
-    readonly size: number;
-    readonly options: SpellingDictionaryOptions;
-    readonly isDictionaryCaseSensitive: boolean;
-    getErrors?(): Error[];
-}
-
 declare function identityString(w: string): string;
 declare class SpellingDictionaryCollection implements SpellingDictionary {
     readonly dictionaries: SpellingDictionary[];
@@ -219,6 +138,10 @@ declare class SpellingDictionaryCollection implements SpellingDictionary {
     getErrors(): Error[];
     private _isForbiddenInDict;
     private _isNoSuggestWord;
+}
+
+interface IterableLike<T> {
+    [Symbol.iterator]: () => Iterator<T> | IterableIterator<T>;
 }
 
 /**
@@ -255,12 +178,6 @@ interface DictionaryDefinitionInternal extends Readonly<DictionaryDefinitionPref
     readonly __source?: string | undefined;
 }
 
-declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
-
-interface IterableLike<T> {
-    [Symbol.iterator]: () => Iterator<T> | IterableIterator<T>;
-}
-
 declare type LoadOptions = DictionaryDefinitionInternal;
 
 declare class SpellingDictionaryLoadError extends Error {
@@ -272,7 +189,11 @@ declare class SpellingDictionaryLoadError extends Error {
 }
 declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
 
-declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options: SpellingDictionaryOptions | undefined): SpellingDictionary;
+declare function createSpellingDictionary$1(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options: SpellingDictionaryOptions | undefined): SpellingDictionary;
+
+declare const createSpellingDictionary: typeof createSpellingDictionary$1 | typeof cspellDictModule.createSpellingDictionary;
+
+declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
 
 declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
 
@@ -399,6 +320,7 @@ declare class FeatureFlags {
     register(flag: FeatureFlag): this;
     register(name: string, description: string): this;
     getFlag(flag: string): FlagTypes | undefined;
+    getFlagBool(flag: string): boolean | undefined;
     setFlag(flag: string, value?: FlagTypes): this;
     getFlagInfo(flag: string): FeatureFlag | undefined;
     getFlags(): FeatureFlag[];
@@ -725,7 +647,7 @@ declare class DocumentValidator {
 interface Preparations {
     /** loaded config */
     config: CSpellSettingsInternal;
-    dictionary: SpellingDictionaryCollection;
+    dictionary: SpellingDictionaryCollection$1;
     /** configuration after applying in-doc settings */
     docSettings: CSpellSettingsInternal;
     finalSettings: CSpellSettingsInternalFinalized;
@@ -849,7 +771,7 @@ declare function fileToDocument(file: string, text: string, languageId?: string,
 declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
 declare function fileToTextDocument(file: string): Promise<TextDocument>;
 
-interface SuggestedWordBase extends SuggestionResult {
+interface SuggestedWordBase extends SuggestionResult$1 {
     dictionaries: string[];
 }
 interface SuggestedWord extends SuggestedWordBase {
@@ -961,6 +883,6 @@ interface ResolveFileResult {
 declare function resolveFile(filename: string, relativeTo: string): ResolveFileResult;
 
 declare function clearCachedFiles(): Promise<void>;
-declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
+declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection$1>;
 
-export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, FeatureFlags, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestOptions, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, UnknownFeatureFlagError, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d as ExclusionHelper, FeatureFlag, FeatureFlags, ImportError, ImportFileRefWithError, IncludeExcludeFlag, IncludeExcludeOptions, index_link_d as Link, Logger, SpellCheckFileOptions, SpellCheckFileResult, SpellingDictionaryCollection, SpellingDictionaryLoadError, SuggestedWord, SuggestionError, SuggestionOptions, SuggestionsForWordResult, text_d as Text, TextDocument, TextDocumentLine, TextInfoItem, TraceOptions, TraceResult, UnknownFeatureFlagError, ValidationIssue, calcOverrideSettings, checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCachedSettingsFiles, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createSpellingDictionary, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettings, getDefaultSettings, getDictionary, getGlobalSettings, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, loadPnPSync, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

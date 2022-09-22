@@ -1,16 +1,8 @@
 import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { isDefined } from '../util/util';
-import {
-    createForbiddenWordsDictionary,
-    createSpellingDictionary,
-} from './SpellingDictionaryLibOld/createSpellingDictionary';
 import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';
-import { SpellingDictionary } from './SpellingDictionaryLibOld/SpellingDictionary';
-import {
-    createCollection,
-    SpellingDictionaryCollection,
-} from './SpellingDictionaryLibOld/SpellingDictionaryCollection';
+import { getSpellDictInterface, SpellingDictionary, SpellingDictionaryCollection } from './SpellingDictionary';
 
 export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map(loadDictionary);
@@ -41,6 +33,7 @@ function _getDictionaryInternal(
     spellDictionaries: SpellingDictionary[]
 ): SpellingDictionaryCollection {
     const { words = emptyWords, userWords = emptyWords, flagWords = emptyWords, ignoreWords = emptyWords } = settings;
+    const { createSpellingDictionary, createCollection, createForbiddenWordsDictionary } = getSpellDictInterface();
 
     const settingsWordsDictionary = createSpellingDictionary(words, '[words]', 'From Settings `words`', {
         caseSensitive: true,

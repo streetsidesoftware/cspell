@@ -33,6 +33,10 @@ export class FeatureFlags {
         return this.flagValues.get(flag);
     }
 
+    getFlagBool(flag: string): boolean | undefined {
+        return toBool(this.getFlag(flag));
+    }
+
     setFlag(flag: string, value: FlagTypes = true): this {
         if (!this.flags.has(flag)) {
             throw new UnknownFeatureFlagError(flag);
@@ -68,4 +72,22 @@ export class UnknownFeatureFlagError extends Error {
 
 export function getSystemFeatureFlags(): FeatureFlags {
     return systemFeatureFlags || (systemFeatureFlags = new FeatureFlags());
+}
+
+const boolValues: Record<string, boolean | undefined> = {
+    0: false,
+    1: true,
+    f: false,
+    false: false,
+    n: false,
+    no: false,
+    t: true,
+    true: true,
+    y: true,
+    yes: true,
+};
+
+function toBool(value: boolean | string | undefined): boolean | undefined {
+    if (typeof value !== 'string') return value;
+    return boolValues[value.toLowerCase()];
 }

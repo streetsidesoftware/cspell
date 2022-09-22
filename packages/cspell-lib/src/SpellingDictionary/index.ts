@@ -1,5 +1,3 @@
-export * from './SpellingDictionaryLibOld/SpellingDictionary';
-export * from './SpellingDictionaryLibOld/SpellingDictionaryCollection';
+export * from './SpellingDictionary';
 export * from './Dictionaries';
-export * from './SpellingDictionaryLibOld/createSpellingDictionary';
 export * from './SpellingDictionaryError';

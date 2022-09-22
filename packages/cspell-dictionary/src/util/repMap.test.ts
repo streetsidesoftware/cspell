@@ -71,4 +71,17 @@ describe('ReMap Tests', () => {
         ]);
         expect(mapper('(apple)')).toBe('(Apple)');
     });
+
+    // cspell:ignore strasse straße
+
+    test.each`
+        map                             | word         | expected
+        ${[]}                           | ${'word'}    | ${'word'}
+        ${[['ae', 'ä'], ['ss', 'ß']]}   | ${'strasse'} | ${'straße'}
+        ${[['ae', 'ä'], ['s{2}', 'ß']]} | ${'strasse'} | ${'straße'}
+        ${[['ae', 'ä'], ['ss', 'ß']]}   | ${'STRASSE'} | ${'STRASSE'}
+    `('map with word $map / $word', ({ map, word, expected }) => {
+        const mapper = repMap.createMapper(map);
+        expect(mapper(word)).toBe(expected);
+    });
 });
