@@ -16,7 +16,8 @@ export {
     writeToFileIterableP,
 } from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
-export { getLanguagesForExt, getLanguagesForBasename as getLanguageIdsForBaseFilename } from './LanguageIds';
+export { FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
+export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
 export { createTextDocument, updateTextDocument } from './Models/TextDocument';
 export type { CreateTextDocumentParams, TextDocument, TextDocumentLine } from './Models/TextDocument';
 export * from './Settings';

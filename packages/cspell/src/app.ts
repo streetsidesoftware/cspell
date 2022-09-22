@@ -1,5 +1,4 @@
-import type { Command } from 'commander';
-import { program } from 'commander';
+import { Command, Option as CommanderOption, program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
 import { commandCheck } from './commandCheck';
 import { commandLink } from './commandLink';
@@ -27,11 +26,15 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
         );
     }
 
-    commandLint(prog);
-    commandTrace(prog);
-    commandCheck(prog);
+    const optionFlags = new CommanderOption('-f,--flag <flag:value>', 'Declare an execution flag value')
+        .hideHelp()
+        .argParser((value: string, prev: undefined | string[]) => prev?.concat(value) || [value]);
+
+    commandLint(prog).addOption(optionFlags);
+    commandTrace(prog).addOption(optionFlags);
+    commandCheck(prog).addOption(optionFlags);
+    commandSuggestion(prog).addOption(optionFlags);
     commandLink(prog);
-    commandSuggestion(prog);
 
     /*
         program
@@ -48,6 +51,7 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
                 console.log('Init');
             });
     */
+
     prog.exitOverride();
     await prog.parseAsync(args);
 }
