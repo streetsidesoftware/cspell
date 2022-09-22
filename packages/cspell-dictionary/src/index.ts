@@ -3,6 +3,7 @@ export {
     createForbiddenWordsDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
+    SpellingDictionaryCollection,
 } from './SpellingDictionary';
 export type {
     FindOptions,

@@ -1,9 +1,8 @@
 import { Command, Option as CommanderOption } from 'commander';
 import * as App from './application';
-import { TraceOptions } from './options';
 import { emitTraceResults } from './emitters/traceEmitter';
+import { TraceOptions } from './options';
 import { CheckFailed } from './util/errors';
-import { parseFeatureFlags } from './featureFlags';
 
 // interface InitOptions extends Options {}
 
@@ -43,7 +42,7 @@ export function commandTrace(prog: Command): Command {
         )
         .arguments('[words...]')
         .action(async (words: string[], options: TraceCommandOptions) => {
-            parseFeatureFlags(options.flag);
+            App.parseApplicationFeatureFlags(options.flag);
             let numFound = 0;
             for await (const results of App.trace(words, options)) {
                 emitTraceResults(results, { cwd: process.cwd() });

@@ -16,7 +16,7 @@ export {
     writeToFileIterableP,
 } from 'cspell-io';
 export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper';
-export { FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
+export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds';
 export { createTextDocument, updateTextDocument } from './Models/TextDocument';
 export type { CreateTextDocumentParams, TextDocument, TextDocumentLine } from './Models/TextDocument';
@@ -44,12 +44,13 @@ export {
     isSpellingDictionaryLoadError,
     refreshDictionaryCache,
     SpellingDictionary,
-    SpellingDictionaryCollection,
+    // SpellingDictionaryCollection,
     SpellingDictionaryLoadError,
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
+export { SpellingDictionaryCollection } from './SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionaryCollection';
 export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
 export { DocumentValidator, DocumentValidatorOptions } from './textValidation';

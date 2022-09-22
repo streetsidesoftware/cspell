@@ -4,7 +4,6 @@ import { checkText } from './application';
 import { BaseOptions } from './options';
 import { CheckFailed } from './util/errors';
 import chalk = require('chalk');
-import { parseFeatureFlags } from './featureFlags';
 
 export function commandCheck(prog: Command): Command {
     type CheckCommandOptions = BaseOptions;
@@ -30,7 +29,7 @@ export function commandCheck(prog: Command): Command {
             new CommanderOption('--no-default-configuration', 'Do not load the default configuration and dictionaries.')
         )
         .action(async (files: string[], options: CheckCommandOptions) => {
-            parseFeatureFlags(options.flag);
+            App.parseApplicationFeatureFlags(options.flag);
             let issueCount = 0;
             for (const filename of files) {
                 console.log(chalk.yellowBright(`Check file: ${filename}`));

@@ -3,7 +3,7 @@ import { SpellingDictionaryOptions } from '.';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';
-import { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
+import { createCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
 describe('Verify using multiple dictionaries', () => {
@@ -97,7 +97,7 @@ describe('Verify using multiple dictionaries', () => {
     test('checks mapWord is identity', async () => {
         const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test', opts())]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.mapWord('Hello')).toBe('Hello');
     });
 
@@ -363,7 +363,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
         ]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.has('mango')).toBe(true);
         expect(dictCollection.has('lion')).toBe(true);
         expect(dictCollection.has('ant')).toBe(true);
@@ -411,7 +411,7 @@ describe('Validate looking up words', () => {
         createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
     ];
 
-    const testDictCollection = new SpellingDictionaryCollection(testDicts, 'test');
+    const testDictCollection = createCollection(testDicts, 'test');
 
     interface HasWordTest {
         word: string;

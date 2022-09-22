@@ -1,7 +1,7 @@
 import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { genSequence, Sequence } from 'gensequence';
-import { createSpellingDictionary } from '../SpellingDictionary';
+import { getSpellDictInterface } from '../SpellingDictionary';
 import * as Text from '../util/text';
 import { clean, isDefined } from '../util/util';
 import { mergeInDocSettings } from './CSpellSettingsServer';
@@ -67,9 +67,14 @@ const preferredDirectives = [
 
 const allDirectives = new Set(preferredDirectives.concat(officialDirectives));
 
-const dictInDocSettings = createSpellingDictionary(allDirectives, 'Directives', 'Directive List', {
-    supportNonStrictSearches: false,
-});
+const dictInDocSettings = getSpellDictInterface().createSpellingDictionary(
+    allDirectives,
+    'Directives',
+    'Directive List',
+    {
+        supportNonStrictSearches: false,
+    }
+);
 
 const EmptyWords: string[] = [];
 Object.freeze(EmptyWords);

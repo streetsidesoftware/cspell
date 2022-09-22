@@ -28,6 +28,7 @@ import { getTimeMeasurer } from '../util/timer';
 import * as util from '../util/util';
 import { LintRequest } from './LintRequest';
 import chalk = require('chalk');
+import { getFeatureFlags } from '../featureFlags';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require('../../package.json');
 const version = npmPackage.version;
@@ -39,8 +40,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     cspell.setLogger(getLoggerFromReporter(reporter));
     const configErrors = new Set<string>();
 
+    const timer = getTimeMeasurer();
+
     const lintResult = await run();
     await reporter.result(lintResult);
+    const elapsed = timer();
+    if (getFeatureFlags().getFlag('timer')) {
+        console.log(`Elapsed Time: ${elapsed.toFixed(2)}ms`);
+    }
     return lintResult;
 
     async function processFile(

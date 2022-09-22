@@ -25,7 +25,13 @@ function identityString(w: string): string {
     return w;
 }
 
-export class SpellingDictionaryCollection implements SpellingDictionary {
+export interface SpellingDictionaryCollection extends SpellingDictionary {
+    readonly type: 'SpellingDictionaryCollection';
+    readonly dictionaries: SpellingDictionary[];
+    getErrors(): Error[];
+}
+
+class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     readonly options: SpellingDictionaryOptions = { weightMap: undefined };
     readonly mapWord = identityString;
     readonly type = 'SpellingDictionaryCollection';
@@ -126,7 +132,7 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
 }
 
 export function createCollection(dictionaries: SpellingDictionary[], name: string): SpellingDictionaryCollection {
-    return new SpellingDictionaryCollection(dictionaries, name);
+    return new SpellingDictionaryCollectionImpl(dictionaries, name);
 }
 
 function isWordInAnyDictionary(

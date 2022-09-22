@@ -3,6 +3,7 @@ import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
 import {
     checkTextDocument,
     CheckTextInfo,
+    FeatureFlags,
     getDefaultSettings,
     getGlobalSettings,
     mergeSettings,
@@ -14,6 +15,7 @@ import {
 } from 'cspell-lib';
 import { getReporter } from './cli-reporter';
 import { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter';
+import { getFeatureFlags, parseFeatureFlags } from './featureFlags';
 import { LintRequest, runLint } from './lint';
 import { BaseOptions, fixLegacy, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options';
 import { simpleRepl } from './repl';
@@ -97,4 +99,16 @@ export async function* suggestions(
 
 export function createInit(): Promise<void> {
     return Promise.reject();
+}
+
+function registerApplicationFeatureFlags(): FeatureFlags {
+    const ff = getFeatureFlags();
+    const flags = [{ name: 'timer', description: 'Display elapsed time for command.' }];
+    flags.forEach((flag) => ff.register(flag));
+    return ff;
+}
+
+export function parseApplicationFeatureFlags(flags: string[] | undefined): FeatureFlags {
+    const ff = registerApplicationFeatureFlags();
+    return parseFeatureFlags(flags, ff);
 }

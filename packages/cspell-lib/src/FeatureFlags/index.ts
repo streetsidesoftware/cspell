@@ -1,1 +1,1 @@
-export { getSystemFeatureFlags, FeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
+export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
