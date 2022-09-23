@@ -50,7 +50,7 @@ export {
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
-export { SpellingDictionaryCollection } from './SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionaryCollection';
+export { SpellingDictionaryCollectionLegacy as SpellingDictionaryCollection } from './SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionaryCollection';
 export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
 export { DocumentValidator, DocumentValidatorOptions } from './textValidation';

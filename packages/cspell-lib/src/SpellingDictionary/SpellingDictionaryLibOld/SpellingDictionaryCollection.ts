@@ -27,7 +27,7 @@ function identityString(w: string): string {
     return w;
 }
 
-export class SpellingDictionaryCollection implements SpellingDictionary {
+class SpellingDictionaryCollection implements SpellingDictionary {
     readonly options: SpellingDictionaryOptions = { weightMap: undefined };
     readonly mapWord = identityString;
     readonly type = 'SpellingDictionaryCollection';
@@ -142,6 +142,8 @@ export class SpellingDictionaryCollection implements SpellingDictionary {
         SpellingDictionaryFromTrie.cachedWordsLimit
     );
 }
+
+export const SpellingDictionaryCollectionLegacy = SpellingDictionaryCollection;
 
 export function createCollection(dictionaries: SpellingDictionary[], name: string): SpellingDictionaryCollection {
     return new SpellingDictionaryCollection(dictionaries, name);

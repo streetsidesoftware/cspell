@@ -1,6 +1,7 @@
 import { createCollection, SpellingDictionaryOptions } from '../SpellingDictionary';
 import { createSpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/createSpellingDictionary';
-import { __testing__, IsWordValidOptions } from './isWordValid';
+import { createDictCache } from './CachedDict';
+import { __testing__ } from './isWordValid';
 
 const { hasWordCheck } = __testing__;
 
@@ -9,21 +10,20 @@ const { hasWordCheck } = __testing__;
 describe('Validate textValidator functions', () => {
     test('tests hasWordCheck', async () => {
         // cspell:ignore redgreenblueyellow strawberrymangobanana redwhiteblue
-        const dictCol = await getSpellingDictionaryCollection();
-        const opt: IsWordValidOptions = {
+        const dictCol = createDictCache(await getSpellingDictionaryCollection(), {
             useCompounds: true,
             ignoreCase: true,
-        };
-        expect(hasWordCheck(dictCol, 'brown', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'white', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'berry', opt)).toBe(true);
+        });
+        expect(hasWordCheck(dictCol, 'brown')).toBe(true);
+        expect(hasWordCheck(dictCol, 'white')).toBe(true);
+        expect(hasWordCheck(dictCol, 'berry')).toBe(true);
         // compound words do not cross dictionary boundaries
-        expect(hasWordCheck(dictCol, 'whiteberry', opt)).toBe(false);
-        expect(hasWordCheck(dictCol, 'redmango', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'strawberrymangobanana', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'lightbrown', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'redgreenblueyellow', opt)).toBe(true);
-        expect(hasWordCheck(dictCol, 'redwhiteblue', opt)).toBe(true);
+        expect(hasWordCheck(dictCol, 'whiteberry')).toBe(false);
+        expect(hasWordCheck(dictCol, 'redmango')).toBe(true);
+        expect(hasWordCheck(dictCol, 'strawberrymangobanana')).toBe(true);
+        expect(hasWordCheck(dictCol, 'lightbrown')).toBe(true);
+        expect(hasWordCheck(dictCol, 'redgreenblueyellow')).toBe(true);
+        expect(hasWordCheck(dictCol, 'redwhiteblue')).toBe(true);
     });
 });
 
