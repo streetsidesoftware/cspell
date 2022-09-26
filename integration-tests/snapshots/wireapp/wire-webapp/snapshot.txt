@@ -3,10 +3,11 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 788, Issues found: 240 in 77 files
+ CSpell: Files checked: 791, Issues found: 260 in 81 files
  exit code: 1
+./src/script/assets/AssetRepository.ts:175:59    - Unknown word (DECRPYT)    -- TransferState.DOWNLOAD_FAILED_DECRPYT);
 ./src/script/auth/component/AccountForm.tsx:233:9     - Unknown word (aligncenter) -- aligncenter
-./src/script/auth/component/ClientList.tsx:64:15     - Unknown word (Acode)      -- const SFAcode = (await getLocalStorage
+./src/script/auth/component/ClientList.tsx:65:15     - Unknown word (Acode)      -- const SFAcode = (await getLocalStorage
 ./src/script/auth/component/EntropyCanvas.tsx:47:60     - Unknown word (Pausable)   -- pauseInterval} = usePausableInterval(() => {
 ./src/script/auth/component/ProgressBar.tsx:33:30     - Unknown word (progess)    -- data-uie-name="element-progess-bar"
 ./src/script/auth/component/UnsupportedBrowser.test.tsx:47:13     - Unknown word (Unsupprted) -- getGeneralUnsupprtedMessage = () => this
@@ -60,7 +61,7 @@ Lines:
 ./src/script/components/Giphy/index.tsx:184:38    - Unknown word (giphs)      -- data-uie-name="do-open-giphs"
 ./src/script/components/MessagesList/Message/CallMessage.test.tsx:27:29     - Unknown word (hangupicon) -- return <span className="hangupicon"></span>;
 ./src/script/components/MessagesList/Message/CallMessage.test.tsx:30:29     - Unknown word (pickupicon) -- return <span className="pickupicon"></span>;
-./src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:123:40    - Unknown word (nocase)     -- li className="label-nocase-xs" data-uie-name="file
+./src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:127:40    - Unknown word (nocase)     -- li className="label-nocase-xs" data-uie-name="file
 ./src/script/components/MessagesList/Message/ReadReceiptStatus.test.tsx:63:30     - Unknown word (noone)      -- shows "delivered" when noone read the message',
 ./src/script/components/MessagesList/Message/SystemMessage.test.tsx:31:29     - Unknown word (editicon)   -- return <span className="editicon"></span>;
 ./src/script/components/MessagesList/Message/SystemMessage.test.tsx:34:29     - Unknown word (readicon)   -- return <span className="readicon"></span>;
@@ -74,17 +75,22 @@ Lines:
 ./src/script/components/calling/FullscreenVideoCallStyles.tsx:32:52     - Unknown word (inversed)   -- accent-color-highlight-inversed);
 ./src/script/components/modal.ts:36:145    - Unknown word (labelledby) -- {} : {id: id, 'aria-labelledby': ariaLabelBy, 'aria
 ./src/script/components/modal.ts:36:177    - Unknown word (describedby) -- ariaLabelBy, 'aria-describedby': ariaDescribedBy}"
+./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:25:3      - Unknown word (Ciphersuite) -- Ciphersuite,
+./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:40:40     - Unknown word (DHKEMP)      -- Ciphersuite.MLS_128_DHKEMP256_AES128GCM_SHA256
+./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.tsx:31:11     - Unknown word (DHKEMX)     -- MLS_128_DHKEMX25519_AES128GCM_SHA2
+./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.tsx:37:22     - Unknown word (Chacha)     -- * DH KEM x25519 | Chacha20Poly1305 | SHA2-25
+./src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.tsx:39:23     - Unknown word (CHACHA)     -- MLS_128_DHKEMX25519_CHACHA20POLY1305_SHA256_Ed
 ./src/script/conversation/ConversationAccessPermission.ts:137:53    - Unknown word (sigfigs)    -- feature with the correct sigfigs
-./src/script/conversation/ConversationFilter.test.ts:58:16     - Unknown word (Florian)    -- name: 'Florian@Staging11',
+./src/script/conversation/ConversationFilter.test.ts:59:16     - Unknown word (Florian)    -- name: 'Florian@Staging11',
 ./src/script/conversation/ConversationLabelRepository.ts:83:88     - Unknown word (favorited)  -- type: 'conversation-favorited'}> {
 ./src/script/conversation/ConversationMapper.test.ts:51:25     - Unknown word (Emtpy)      -- const functionCallEmtpyArray = () => ConversationMapp
-./src/script/conversation/ConversationMapper.ts:279:15    - Unknown word (convo)      -- const convo = localConversations
+./src/script/conversation/ConversationMapper.ts:282:15    - Unknown word (convo)      -- const convo = localConversations
 ./src/script/conversation/ConversationRepository.test.ts:266:34    - Unknown word (Gregor)     -- b.name('René, Benny, Gregor, Lipis');
 ./src/script/conversation/ConversationRepository.test.ts:266:42    - Unknown word (Lipis)      -- René, Benny, Gregor, Lipis');
 ./src/script/conversation/ConversationRepository.test.ts:572:42    - Unknown word (msdownload) -- type: 'application/x-msdownload',
 ./src/script/conversation/ConversationRepository.test.ts:58:10     - Unknown word (Unmock)     -- jest.deepUnmock('axios');
 ./src/script/conversation/ConversationRepository.ts:180:46    - Unknown word (agains)     -- client mismatch handler agains the message repository
-./src/script/conversation/MessageRepository.test.ts:50:28     - Unknown word (selfid)     -- selfUser = new User('selfid', '');
+./src/script/conversation/MessageRepository.test.ts:51:28     - Unknown word (selfid)     -- selfUser = new User('selfid', '');
 ./src/script/conversation/MessageRepository.ts:337:55    - Unknown word (explicitely) -- ), // We set the id explicitely in order to be able
 ./src/script/conversation/linkPreviews/blackList.test.ts:23:18     - Unknown word (youtu)      -- it('blacklists youtu.be links', () => {
 ./src/script/conversation/linkPreviews/helpers.test.ts:41:42     - Unknown word (whitespaces) -- leading and trailing whitespaces', () => {
@@ -117,7 +123,7 @@ Lines:
 ./src/script/page/message-list/MentionSuggestions/MentionSuggestions.test.tsx:35:53     - Unknown word (Arjita)       -- patrykarjita', 'Patryk Arjita');
 ./src/script/service/CoreSingleton.ts:50:17     - Unknown word (Crypo)      -- coreCrypoWasmFilePath: '/min/core
 ./src/script/service/StoreEngineProvider.ts:37:3      - Unknown word (EFFEMERAL)  -- EFFEMERAL,
-./src/script/team/TeamService.ts:77:80     - Unknown word (webapps)    -- to ensure that modern webapps work with legacy backends
+./src/script/team/TeamService.ts:73:80     - Unknown word (webapps)    -- to ensure that modern webapps work with legacy backends
 ./src/script/ui/ContextMenu.tsx:80:53     - Unknown word (begings)    -- such as 10 seconds etc begings with digit which is
 ./src/script/ui/fadingScrollbar.ts:33:66     - Unknown word (thiselementdoesnotexist) -- document.createElement('thiselementdoesnotexist'));
 ./src/script/user/AvailabilityModal.ts:38:20     - Unknown word (dont)       -- action: (dontShowAgain?: boolean)
@@ -127,6 +133,7 @@ Lines:
 ./src/script/util/Entropy.test.ts:77:22     - Unknown word (dimensonial) -- ])('Calculate %d-dimensonial entropy on: %s', (dimension
 ./src/script/util/Entropy.ts:44:83     - Unknown word (multipe)    -- differences on, containing a multipe of `n` elements
 ./src/script/util/conversationMessages.ts:40:31     - Unknown word (rigth)      -- previousMessage The rigth before in the conversation
+./src/script/util/localStorage.ts:21:41     - Unknown word (localstorage) -- browser's instance of localstorage if present.
 ./src/script/util/test/mock/WebRTCMock.ts:20:24     - Unknown word (koush)      -- const wrtc = require('@koush/wrtc');
 ./src/script/util/util.ts:352:112   - Unknown word (tabindex)   -- textarea:not([disabled]), [tabindex]:not([tabindex="-1"
 ./src/script/view_model/panel/NotificationsPanel.test.ts:63:41     - Unknown word (ative)      -- correct new value on the ative conversation', () =
