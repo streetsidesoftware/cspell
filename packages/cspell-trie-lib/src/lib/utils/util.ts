@@ -63,3 +63,19 @@ export function replaceAllFactory(match: string, replaceWithText: string): (text
 
     return (text: string) => text.replace(r, replaceWithText);
 }
+
+/**
+ * Shallow is Equal test.
+ * @param a - array of values
+ * @param b - array of values
+ * @returns true if the values of `a` are exactly equal to the values of `b`
+ */
+export function isArrayEqual<K>(a: K[], b: K[]): boolean {
+    if (a === b) return true;
+    let isMatch = a.length === b.length;
+    const len = a.length;
+    for (let i = 0; isMatch && i < len; ++i) {
+        isMatch = a[i] === b[i];
+    }
+    return isMatch;
+}

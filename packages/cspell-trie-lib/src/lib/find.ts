@@ -1,4 +1,5 @@
 import { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, FORBID_PREFIX } from './constants';
+import { memorizeLastCall } from './utils/memorizeLastCall';
 import { mergeDefaults } from './trie-util';
 import { FLAG_WORD, TrieNode, TrieRoot } from './TrieNode';
 import type { PartialWithUndefined } from './types';
@@ -386,7 +387,9 @@ export function isForbiddenWord(root: Root | TrieNode | undefined, word: string,
     return findWordExact(root?.c?.get(forbiddenPrefix), word);
 }
 
-export function createFindOptions(options: PartialFindOptions | undefined): FindOptions {
+export const createFindOptions = memorizeLastCall(_createFindOptions);
+
+function _createFindOptions(options: PartialFindOptions | undefined): FindOptions {
     return mergeDefaults(options, _defaultFindOptions);
 }
 
