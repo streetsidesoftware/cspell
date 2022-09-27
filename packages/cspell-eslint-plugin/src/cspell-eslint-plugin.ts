@@ -10,7 +10,6 @@ import {
     ValidationIssue,
 } from 'cspell-lib';
 import type { Rule } from 'eslint';
-// eslint-disable-next-line node/no-missing-import
 import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 import * as path from 'path';
 import { format } from 'util';

@@ -1,5 +1,4 @@
 import { memorizer, callOnce, memorizerAll } from './Memorizer';
-import { memorizeLastCall } from './memorizeLastCall';
 
 describe('Validate Memorizer', () => {
     test('the memorizer works', () => {

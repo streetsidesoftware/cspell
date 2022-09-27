@@ -41,6 +41,7 @@ const config = {
         ecmaVersion: 2020,
         sourceType: 'module',
     },
+    plugins: ['import'],
     overrides: [
         {
             files: '**/*.ts',
@@ -49,8 +50,9 @@ const config = {
             plugins: ['@typescript-eslint'],
             rules: {
                 '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+                // This is caught by 'import/no-unresolved'
                 'node/no-missing-import': [
-                    'error',
+                    'off',
                     {
                         tryExtensions: ['.js', '.d.ts', '.ts'],
                     },
@@ -74,6 +76,23 @@ const config = {
             },
         },
     ],
+    settings: {
+        'import/parsers': {
+            '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+        'import/resolver': {
+            typescript: {
+                alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+
+                // use an array of glob patterns
+                project: ['packages/*/tsconfig.json', 'integration-tests/tsconfig.json'],
+            },
+        },
+    },
+    rules: {
+        // turn on errors for missing imports
+        'import/no-unresolved': 'error',
+    },
 };
 
 module.exports = config;

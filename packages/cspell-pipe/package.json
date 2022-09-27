@@ -24,9 +24,6 @@
     ".": {
       "require": "./dist/index.js"
     },
-    "./*": {
-      "require": "./dist/*.js"
-    },
     "./index": "./dist/index.js",
     "./index.js": "./dist/index.js",
     "./index.d.ts": "./dist/index.d.ts",
@@ -40,7 +37,9 @@
       "require": "./dist/operators/index.js"
     },
     "./sync": {
-      "require": "./dist/sync/index.js"
+      "require": "./dist/sync/index.js",
+      "types": "./dist/sync/index.d.ts",
+      "default": "./dist/sync/index.js"
     },
     "./sync/index": {
       "require": "./dist/sync/index.js"
