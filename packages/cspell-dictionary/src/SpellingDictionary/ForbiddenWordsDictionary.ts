@@ -1,4 +1,4 @@
-import { buildTrieFast, CompoundWordsMethod, parseDictionaryLines, SuggestionResult } from 'cspell-trie-lib';
+import { buildTrieFast, CompoundWordsMethod, parseDictionaryLines, SuggestionResult, Trie } from 'cspell-trie-lib';
 import {
     SpellingDictionary,
     SpellingDictionaryOptions,
@@ -10,15 +10,48 @@ import {
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 import { defaultOptions } from './createSpellingDictionary';
 
+class ForbiddenWordsDictionaryTrie extends SpellingDictionaryFromTrie {
+    readonly containsNoSuggestWords = false;
+    readonly options: SpellingDictionaryOptions = {};
+    constructor(trie: Trie, readonly name: string, readonly source: string) {
+        super(trie, name, defaultOptions, source);
+    }
+
+    /**
+     * A Forbidden word list does not "have" valid words.
+     * Therefore it always returns false.
+     * @param _word - the word
+     * @param _options - options
+     * @returns always false
+     */
+    has(_word: string, _options?: HasOptions): boolean {
+        return false;
+    }
+
+    suggest(
+        word: string,
+        numSuggestions?: number,
+        compoundMethod?: CompoundWordsMethod,
+        numChanges?: number,
+        ignoreCase?: boolean
+    ): SuggestionResult[];
+    suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[];
+    suggest() {
+        return [];
+    }
+    genSuggestions(): void {
+        return;
+    }
+    readonly isDictionaryCaseSensitive: boolean = true;
+}
+
 class ForbiddenWordsDictionary implements SpellingDictionary {
-    private dict: SpellingDictionaryFromTrie;
+    private dict: Set<string>;
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'forbidden';
-    constructor(readonly name: string, readonly source: string, wordList: Iterable<string>) {
-        const words = parseDictionaryLines(wordList, { stripCaseAndAccents: false });
-        const trie = buildTrieFast(words);
-        this.dict = new SpellingDictionaryFromTrie(trie, name, defaultOptions, source);
+    constructor(readonly name: string, readonly source: string, words: Iterable<string>) {
+        this.dict = new Set(words);
     }
 
     /**
@@ -33,16 +66,13 @@ class ForbiddenWordsDictionary implements SpellingDictionary {
     }
 
     /** A more detailed search for a word, might take longer than `has` */
-    find(word: string, options?: SearchOptions): FindResult | undefined {
-        const r = this.dict.find(word, options);
-        if (!r || r.found === false || r.forbidden) return undefined;
-        return { ...r, forbidden: true };
+    find(word: string, _options?: SearchOptions): FindResult | undefined {
+        const forbidden = this.isForbidden(word);
+        return { found: forbidden && word, forbidden, noSuggest: false };
     }
 
     isForbidden(word: string): boolean {
-        const r = this.find(word);
-        if (!r) return false;
-        return r.forbidden && r.found !== false;
+        return this.dict.has(word) && !this.dict.has('!' + word);
     }
 
     isNoSuggestWord(_word: string, _options: HasOptions): boolean {
@@ -89,5 +119,16 @@ export function createForbiddenWordsDictionary(
     name: string,
     source: string
 ): SpellingDictionary {
-    return new ForbiddenWordsDictionary(name, source, wordList);
+    const testSpecialCharacters = /[~*+]/;
+
+    const words = [...parseDictionaryLines(wordList, { stripCaseAndAccents: false })];
+
+    const hasSpecial = words.findIndex((word) => testSpecialCharacters.test(word)) >= 0;
+
+    if (hasSpecial) {
+        const trie = buildTrieFast(words.map((w) => '!' + w));
+        return new ForbiddenWordsDictionaryTrie(trie, name, source);
+    }
+
+    return new ForbiddenWordsDictionary(name, source, words);
 }
