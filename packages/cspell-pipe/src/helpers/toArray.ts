@@ -7,11 +7,11 @@ export function toArray<T>(i: Iterable<T> | AsyncIterable<T>): T[] | Promise<Awa
     return isAsyncIterable(i) ? toArrayAsync(i) : toArraySync(i);
 }
 
-function toArraySync<T>(iter: Iterable<T>): T[] {
+export function toArraySync<T>(iter: Iterable<T>): T[] {
     return [...iter];
 }
 
-async function toArrayAsync<T>(iter: AsyncIterable<T>): Promise<Awaited<T>[]> {
+export async function toArrayAsync<T>(iter: AsyncIterable<T>): Promise<Awaited<T>[]> {
     const collection: Awaited<T>[] = [];
     for await (const i of iter) {
         collection.push(i);

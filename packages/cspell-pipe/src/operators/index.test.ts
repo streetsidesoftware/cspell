@@ -14,12 +14,18 @@ describe('Operators', () => {
         expect(operators.opFilter).toBeInstanceOf(Function);
         expect(operators.opFilterAsync).toBeInstanceOf(Function);
         expect(operators.opFilterSync).toBeInstanceOf(Function);
+        expect(operators.opFirst).toBeInstanceOf(Function);
+        expect(operators.opFirstAsync).toBeInstanceOf(Function);
+        expect(operators.opFirstSync).toBeInstanceOf(Function);
         expect(operators.opFlatten).toBeInstanceOf(Function);
         expect(operators.opFlattenAsync).toBeInstanceOf(Function);
         expect(operators.opFlattenSync).toBeInstanceOf(Function);
         expect(operators.opJoinStrings).toBeInstanceOf(Function);
         expect(operators.opJoinStringsAsync).toBeInstanceOf(Function);
         expect(operators.opJoinStringsSync).toBeInstanceOf(Function);
+        expect(operators.opLast).toBeInstanceOf(Function);
+        expect(operators.opLastAsync).toBeInstanceOf(Function);
+        expect(operators.opLastSync).toBeInstanceOf(Function);
         expect(operators.opMap).toBeInstanceOf(Function);
         expect(operators.opMapAsync).toBeInstanceOf(Function);
         expect(operators.opMapSync).toBeInstanceOf(Function);

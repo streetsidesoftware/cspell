@@ -1,9 +1,11 @@
 export { opAppend, opAppendAsync, opAppendSync } from './append';
 export { opAwaitAsync } from './await';
 export { opConcatMap, opConcatMapAsync, opConcatMapSync } from './concatMap';
-export { opFilter as opFilter, opFilterAsync, opFilterSync } from './filter';
+export { opFilter, opFilterAsync, opFilterSync } from './filter';
+export { opFirst, opFirstAsync, opFirstSync } from './first';
 export { opFlatten, opFlattenAsync, opFlattenSync } from './flatten';
 export { opJoinStrings, opJoinStringsAsync, opJoinStringsSync } from './joinStrings';
+export { opLast, opLastAsync, opLastSync } from './last';
 export { opMap, opMapAsync, opMapSync } from './map';
 export { opSkip, opSkipAsync, opSkipSync } from './skip';
 export { opTake, opTakeAsync, opTakeSync } from './take';
