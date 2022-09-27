@@ -27,6 +27,10 @@ import {
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
 import { autoCache, createCache01 } from '../util/AutoCache';
+
+const findWordOptionsCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: true });
+const findWordOptionsNotCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: false });
+
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly cachedWordsLimit = 50000;
     private _size = 0;
@@ -123,7 +127,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         ignoreCase: boolean
     ): FindAnyFormResult | undefined {
         const mWord = this.mapWord(word.normalize('NFC'));
-        const opts: FindWordOptions = { caseSensitive: !ignoreCase };
+        const opts: FindWordOptions = ignoreCase ? findWordOptionsNotCaseSensitive : findWordOptionsCaseSensitive;
         const findResult = this.trie.findWord(mWord, opts);
         if (findResult.found !== false) {
             return findResult;
@@ -136,9 +140,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             }
         }
         if (useCompounds) {
-            opts.useLegacyWordCompounds = useCompounds;
+            const optsUseCompounds = { ...opts, useLegacyWordCompounds: useCompounds };
             for (const w of forms) {
-                const findResult = this.trie.findWord(w, opts);
+                const findResult = this.trie.findWord(w, optsUseCompounds);
                 if (findResult.found !== false) {
                     return findResult;
                 }
@@ -253,7 +257,7 @@ function findCache(fn: FindFunction, size = 2000): FindFunction {
     ): FindAnyFormResult | undefined {
         const r = cache.get(word);
         if (r !== undefined) {
-            if (r.useCompounds === useCompounds && r.ignoreCase === r.ignoreCase) {
+            if (r.useCompounds === useCompounds && r.ignoreCase === ignoreCase) {
                 return r.findResult;
             }
         }
