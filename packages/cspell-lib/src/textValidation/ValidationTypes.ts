@@ -37,7 +37,7 @@ export interface ValidationResult extends TextOffsetRW, Pick<Issue, 'message' | 
 
 export type ValidationResultRO = Readonly<ValidationResult>;
 
-export type LineValidator = (line: LineSegment) => Iterable<ValidationResult>;
+export type LineValidatorFn = (line: LineSegment) => Iterable<ValidationResult>;
 
 export interface LineSegment {
     line: TextOffsetRO;
@@ -49,4 +49,4 @@ export interface MappedTextValidationResult extends MappedText {
     isFound?: boolean | undefined;
 }
 
-export type TextValidator = (text: MappedText) => Iterable<MappedTextValidationResult>;
+export type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;

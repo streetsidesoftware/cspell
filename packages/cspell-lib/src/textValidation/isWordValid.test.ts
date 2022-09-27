@@ -1,6 +1,6 @@
+import { createCachingDictionary } from 'cspell-dictionary';
 import { createCollection, SpellingDictionaryOptions } from '../SpellingDictionary';
 import { createSpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/createSpellingDictionary';
-import { createDictCache } from './CachedDict';
 import { __testing__ } from './isWordValid';
 
 const { hasWordCheck } = __testing__;
@@ -10,7 +10,7 @@ const { hasWordCheck } = __testing__;
 describe('Validate textValidator functions', () => {
     test('tests hasWordCheck', async () => {
         // cspell:ignore redgreenblueyellow strawberrymangobanana redwhiteblue
-        const dictCol = createDictCache(await getSpellingDictionaryCollection(), {
+        const dictCol = createCachingDictionary(await getSpellingDictionaryCollection(), {
             useCompounds: true,
             ignoreCase: true,
         });

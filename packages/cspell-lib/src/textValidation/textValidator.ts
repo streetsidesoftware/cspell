@@ -32,7 +32,8 @@ export function validateText(
     const mapOfProblems = new Map<string, number>();
     const includeRanges = calcTextInclusionRanges(text, options);
 
-    const validator = lineValidatorFactory(dict, options);
+    const lineValidator = lineValidatorFactory(dict, options);
+    const validator = lineValidator.fn;
 
     const iter = pipe(
         Text.extractLinesOfText(text),
@@ -49,7 +50,12 @@ export function validateText(
         opTake(maxNumberOfProblems)
     );
 
-    return genSequence(iter);
+    function* values() {
+        yield* iter;
+        console.log('Stats: %o', lineValidator.dict.stats());
+    }
+
+    return genSequence(values());
 }
 
 export function calcTextInclusionRanges(text: string, options: IncludeExcludeOptions): TextRange.MatchRange[] {

@@ -1,25 +1,29 @@
 import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
+import { ParsedText } from '@cspell/cspell-types';
+import { CachingDictionary, createCachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { genSequence, Sequence } from 'gensequence';
 import * as RxPat from '../Settings/RegExpPatterns';
-import { SpellingDictionary } from 'cspell-dictionary';
 import * as Text from '../util/text';
 import { clean } from '../util/util';
 import { split } from '../util/wordSplitter';
-import { defaultMinWordLength } from './textValidator';
 import { isWordValidWithEscapeRetry } from './isWordValid';
+import { mapRangeBackToOriginalPos } from './parsedText';
+import { defaultMinWordLength } from './textValidator';
 import type {
     LineSegment,
-    LineValidator,
+    LineValidatorFn,
     MappedTextValidationResult,
     TextOffsetRO,
-    TextValidator,
+    TextValidatorFn,
     ValidationOptions,
     ValidationResult,
     ValidationResultRO,
 } from './ValidationTypes';
-import { ParsedText } from '@cspell/cspell-types';
-import { mapRangeBackToOriginalPos } from './parsedText';
-import { createDictCache, DictionaryHasOptions } from './CachedDict';
+
+interface LineValidator {
+    fn: LineValidatorFn;
+    dict: CachingDictionary;
+}
 
 export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
@@ -28,12 +32,12 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         allowCompoundWords = false,
         ignoreCase = true,
     } = options;
-    const hasWordOptions: DictionaryHasOptions = {
+    const hasWordOptions: SearchOptions = {
         ignoreCase,
         useCompounds: allowCompoundWords || undefined, // let the dictionaries decide on useCompounds if allow is false
     };
 
-    const dictCol = createDictCache(sDict, hasWordOptions);
+    const dictCol = createCachingDictionary(sDict, hasWordOptions);
 
     const setOfFlagWords = new Set(flagWords);
     const setOfKnownSuccessfulWords = new Set<string>();
@@ -77,7 +81,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return clean({ ...word, isFlagged, isFound });
     }
 
-    const fn: LineValidator = (lineSegment: LineSegment) => {
+    const fn: LineValidatorFn = (lineSegment: LineSegment) => {
         function splitterIsValid(word: TextOffsetRO): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
@@ -158,13 +162,19 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return checkedPossibleWords;
     };
 
-    return fn;
+    return { fn, dict: dictCol };
+}
+
+export interface TextValidator {
+    validate: TextValidatorFn;
+    lineValidator: LineValidator;
 }
 
 export function textValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): TextValidator {
     const lineValidator = lineValidatorFactory(dict, options);
+    const lineValidatorFn = lineValidator.fn;
 
-    function validator(pText: ParsedText): Iterable<MappedTextValidationResult> {
+    function validate(pText: ParsedText): Iterable<MappedTextValidationResult> {
         const { text, range: srcRange, map } = pText;
         const srcOffset = srcRange[0];
         const segment = { text, offset: 0 };
@@ -175,8 +185,11 @@ export function textValidatorFactory(dict: SpellingDictionary, options: Validati
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
             return { text, range, isFlagged, isFound };
         }
-        return [...lineValidator(lineSegment)].map(mapBackToOriginSimple);
+        return [...lineValidatorFn(lineSegment)].map(mapBackToOriginSimple);
     }
 
-    return validator;
+    return {
+        validate,
+        lineValidator,
+    };
 }

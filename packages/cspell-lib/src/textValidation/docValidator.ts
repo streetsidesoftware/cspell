@@ -22,10 +22,10 @@ import { MatchRange } from '../util/TextRange';
 import { createTimer } from '../util/timer';
 import { clean } from '../util/util';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings';
-import { textValidatorFactory } from './lineValidatorFactory';
+import { TextValidator, textValidatorFactory } from './lineValidatorFactory';
 import { createMappedTextSegmenter, SimpleRange } from './parsedText';
 import { calcTextInclusionRanges, defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './textValidator';
-import type { MappedTextValidationResult, TextValidator } from './ValidationTypes';
+import type { MappedTextValidationResult } from './ValidationTypes';
 import { ValidationOptions } from './ValidationTypes';
 import { settingsToValidateOptions, ValidateTextOptions, ValidationIssue } from './validator';
 
@@ -244,7 +244,7 @@ export class DocumentValidator {
             }
             return { text, offset, line, length, isFlagged, isFound };
         }
-        const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator), opMap(mapToIssue))];
+        const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator.validate), opMap(mapToIssue))];
 
         if (!this.options.generateSuggestions) {
             return issues;
@@ -283,6 +283,7 @@ export class DocumentValidator {
         const spellingIssues =
             forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
         const directiveIssues = this.checkDocumentDirectives();
+        // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
         const allIssues = spellingIssues.concat(directiveIssues).sort((a, b) => a.offset - b.offset);
         return allIssues;
     }

@@ -1,12 +1,12 @@
+import { CachingDictionary } from 'cspell-dictionary';
 import { TextOffsetRO } from './ValidationTypes';
-import { CachedDict } from './CachedDict';
 
-export function hasWordCheck(dict: CachedDict, word: string): boolean {
+export function hasWordCheck(dict: CachingDictionary, word: string): boolean {
     word = word.replace(/\\/g, '');
     return dict.has(word);
 }
 
-export function isWordValidWithEscapeRetry(dict: CachedDict, wo: TextOffsetRO, line: TextOffsetRO): boolean {
+export function isWordValidWithEscapeRetry(dict: CachingDictionary, wo: TextOffsetRO, line: TextOffsetRO): boolean {
     const firstTry = hasWordCheck(dict, wo.text);
     return (
         firstTry ||
