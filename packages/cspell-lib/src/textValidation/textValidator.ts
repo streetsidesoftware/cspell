@@ -1,4 +1,4 @@
-import { opConcatMap, opFilter, opTake, pipeSync as pipe } from '@cspell/cspell-pipe';
+import { opConcatMap, opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { genSequence, Sequence } from 'gensequence';
 import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionary';
 import * as Text from '../util/text';

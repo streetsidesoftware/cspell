@@ -1,4 +1,4 @@
-import { opConcatMap, opMap, pipeSync as pipe } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
 import { sequenceFromRegExpMatch } from 'gensequence';
 import { binarySearch } from './search';
