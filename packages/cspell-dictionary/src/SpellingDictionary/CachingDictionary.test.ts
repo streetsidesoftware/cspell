@@ -1,6 +1,8 @@
 import { createCachingDictionary } from './CachingDictionary';
 import { createSpellingDictionary } from './createSpellingDictionary';
 
+const oc = expect.objectContaining;
+
 describe('CachingDictionary', () => {
     const words = ['apple', 'banana', 'orange', 'grape', 'mango'];
     const dict = createSpellingDictionary(words, '[words]', 'source');
@@ -13,6 +15,6 @@ describe('CachingDictionary', () => {
         expect(cd.has('apple')).toBe(true);
         expect(cd.has('apple')).toBe(true);
         expect(cd.has('apple')).toBe(true);
-        expect(cd.stats()).toEqual({ has: { hits: 1 } });
+        expect(cd.stats()).toEqual(oc({ has: { hits: 4, misses: 2, swaps: 0 } }));
     });
 });
