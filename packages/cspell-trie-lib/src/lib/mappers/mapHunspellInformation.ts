@@ -1,4 +1,4 @@
-import { opFilter, opFlatten, opMap, pipeSync as pipe } from '@cspell/cspell-pipe';
+import { opFilter, opFlatten, opMap, pipeSync as pipe } from '@cspell/cspell-pipe/sync';
 import type { HunspellCosts, HunspellInformation } from '../models/DictionaryInformation';
 import { Locale } from '../models/locale';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';

@@ -1,4 +1,4 @@
-import { opFilter, opFlatten, opMap, opUnique, pipeSync as pipe } from '@cspell/cspell-pipe';
+import { opFilter, opFlatten, opMap, opUnique, pipeSync as pipe } from '@cspell/cspell-pipe/sync';
 import { map } from 'gensequence/dist/operators';
 import type { CharacterSetCosts } from '../models/DictionaryInformation';
 import type { SuggestionCostMapDef } from '../models/suggestionCostsDef';

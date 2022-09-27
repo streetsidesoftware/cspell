@@ -1,4 +1,4 @@
-import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe';
+import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { genSequence, Sequence } from 'gensequence';
 import { getSpellDictInterface } from '../SpellingDictionary';

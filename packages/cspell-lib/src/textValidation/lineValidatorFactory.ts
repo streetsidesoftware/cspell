@@ -1,4 +1,4 @@
-import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
+import { opConcatMap, opFilter, opMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import { ParsedText } from '@cspell/cspell-types';
 import { CachingDictionary, createCachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { genSequence, Sequence } from 'gensequence';

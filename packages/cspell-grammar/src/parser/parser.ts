@@ -1,7 +1,7 @@
 import { NGrammar } from './grammarNormalized';
 import { tokenizeText, tokenizeTextIterable } from './tokenizeLine';
 import type { TokenizedLine, TokenizedLineResult } from './types';
-import { pipeSync as pipe, opFlatten, opMap, opFilter } from '@cspell/cspell-pipe';
+import { pipe, opFlatten, opMap, opFilter } from '@cspell/cspell-pipe/sync';
 import type { Parser, ParseResult } from '@cspell/cspell-types/Parser';
 import { Grammar } from './grammar';
 

@@ -1,4 +1,4 @@
-import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe';
+import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import {
     CSpellSettingsWithSourceTrace,
     CSpellUserSettings,

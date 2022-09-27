@@ -50,12 +50,7 @@ export function validateText(
         opTake(maxNumberOfProblems)
     );
 
-    function* values() {
-        yield* iter;
-        console.log('Stats: %o', lineValidator.dict.stats());
-    }
-
-    return genSequence(values());
+    return genSequence(iter);
 }
 
 export function calcTextInclusionRanges(text: string, options: IncludeExcludeOptions): TextRange.MatchRange[] {

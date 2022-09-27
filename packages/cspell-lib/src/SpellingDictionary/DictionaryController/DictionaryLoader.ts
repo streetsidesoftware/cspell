@@ -1,4 +1,4 @@
-import { opConcatMap, opFilter, opMap, pipeSync as pipe } from '@cspell/cspell-pipe';
+import { opConcatMap, opFilter, opMap, pipeSync as pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
 import { CSpellIO, Stats } from 'cspell-io';
 import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
