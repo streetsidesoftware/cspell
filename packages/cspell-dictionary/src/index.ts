@@ -1,4 +1,5 @@
 export {
+    createCachingDictionary,
     createCollection,
     createForbiddenWordsDictionary,
     createSpellingDictionary,
@@ -6,6 +7,7 @@ export {
     SpellingDictionaryCollection,
 } from './SpellingDictionary';
 export type {
+    CachingDictionary,
     FindOptions,
     FindResult,
     HasOptions,

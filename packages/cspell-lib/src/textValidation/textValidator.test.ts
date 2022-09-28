@@ -1,4 +1,4 @@
-import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe';
+import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { finalizeSettings } from '../Settings';

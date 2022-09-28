@@ -1,4 +1,4 @@
-import { impersonateCollector, suggestionCollector } from './SpellingDictionaryMethods';
+import { impersonateCollector, suggestionCollector, hasOptionToSearchOption } from './SpellingDictionaryMethods';
 
 describe('SpellingDictionaryMethods', () => {
     test('impersonateCollector', () => {
@@ -11,5 +11,22 @@ describe('SpellingDictionaryMethods', () => {
         expect(ic.maxNumSuggestions).toBe(1);
         expect(ic.word).toBe('Hello');
         expect(collector.word).toBe('hello');
+    });
+
+    test.each`
+        prime                                        | copy                                              | expected
+        ${undefined}                                 | ${undefined}                                      | ${{}}
+        ${undefined}                                 | ${{}}                                             | ${{}}
+        ${undefined}                                 | ${{ ignoreCase: undefined }}                      | ${{}}
+        ${{ ignoreCase: true }}                      | ${{ ignoreCase: true }}                           | ${{ ignoreCase: true, useCompounds: undefined }}
+        ${{ ignoreCase: true }}                      | ${{ ignoreCase: true, useCompounds: undefined }}  | ${{ ignoreCase: true, useCompounds: undefined }}
+        ${{ ignoreCase: false }}                     | ${{ ignoreCase: false, useCompounds: undefined }} | ${{ ignoreCase: false, useCompounds: undefined }}
+        ${{ ignoreCase: false, useCompounds: 3 }}    | ${{ ignoreCase: false, useCompounds: 3 }}         | ${{ ignoreCase: false, useCompounds: 3 }}
+        ${{ ignoreCase: false, useCompounds: true }} | ${{ ignoreCase: false, useCompounds: true }}      | ${{ ignoreCase: false, useCompounds: true }}
+    `('hasOptionToSearchOption $prime / $copy', ({ prime, copy, expected }) => {
+        const a = hasOptionToSearchOption(prime);
+        expect(a).toEqual(expected);
+        const a1 = hasOptionToSearchOption(copy);
+        expect(a1).toBe(a);
     });
 });

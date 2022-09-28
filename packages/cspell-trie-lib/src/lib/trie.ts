@@ -49,12 +49,20 @@ const defaultLegacyMinCompoundLength = 3;
 
 export class Trie {
     private _options: TrieOptions;
+    private _findOptionsDefaults: PartialFindOptions;
+    private _findOptionsExact: FindOptions;
     readonly isLegacy: boolean;
     private hasForbidden: boolean;
     constructor(readonly root: TrieRoot, private count?: number) {
         this._options = mergeOptionalWithDefaults(root);
         this.isLegacy = this.calcIsLegacy();
         this.hasForbidden = !!root.c.get(root.forbiddenWordPrefix);
+        this._findOptionsDefaults = {
+            caseInsensitivePrefix: this._options.stripCaseAndAccentsPrefix,
+            compoundFix: this._options.compoundCharacter,
+            forbidPrefix: this._options.forbiddenWordPrefix,
+        };
+        this._findOptionsExact = this.createFindOptions({ compoundMode: 'none' });
     }
 
     /**
@@ -103,8 +111,7 @@ export class Trie {
     }
 
     findExact(text: string): TrieNode | undefined {
-        const options = this.createFindOptions({ compoundMode: 'none' });
-        return findWordNode(this.root, text, options).node;
+        return findWordNode(this.root, text, this._findOptionsExact).node;
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
@@ -139,7 +146,7 @@ export class Trie {
             });
             return findLegacyCompound(this.root, word, findOptions);
         }
-        const findOptions = this.createFindOptions({ matchCase: options?.caseSensitive });
+        const findOptions = this.createFindOptionsMatchCase(options?.caseSensitive);
         return findWord(this.root, word, findOptions);
     }
 
@@ -241,17 +248,19 @@ export class Trie {
     }
 
     private createFindOptions(options: PartialFindOptions = {}): FindOptions {
-        const {
-            caseInsensitivePrefix = this._options.stripCaseAndAccentsPrefix,
-            compoundFix = this._options.compoundCharacter,
-            forbidPrefix = this._options.forbiddenWordPrefix,
-        } = clean(options);
         const findOptions = createFindOptions({
+            ...this._findOptionsDefaults,
             ...options,
-            caseInsensitivePrefix,
-            compoundFix,
-            forbidPrefix,
         });
+        return findOptions;
+    }
+
+    private lastCreateFindOptionsMatchCaseMap = new Map<boolean | undefined, FindOptions>();
+    private createFindOptionsMatchCase(matchCase: boolean | undefined) {
+        const f = this.lastCreateFindOptionsMatchCaseMap.get(matchCase);
+        if (f !== undefined) return f;
+        const findOptions = this.createFindOptions({ matchCase });
+        this.lastCreateFindOptionsMatchCaseMap.set(matchCase, findOptions);
         return findOptions;
     }
 }

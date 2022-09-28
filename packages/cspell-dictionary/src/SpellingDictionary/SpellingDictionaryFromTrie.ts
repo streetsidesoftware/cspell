@@ -26,6 +26,11 @@ import {
     wordSearchForms,
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
+import { autoCache, createCache01 } from '../util/AutoCache';
+
+const findWordOptionsCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: true });
+const findWordOptionsNotCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: false });
+
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     static readonly cachedWordsLimit = 50000;
     private _size = 0;
@@ -94,8 +99,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return { useCompounds, ignoreCase };
     }
 
-    private _find = (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
-        this.findAnyForm(word, useCompounds, ignoreCase);
+    private _find = findCache((word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
+        this.findAnyForm(word, useCompounds, ignoreCase)
+    );
 
     private findAnyForm(
         word: string,
@@ -121,7 +127,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         ignoreCase: boolean
     ): FindAnyFormResult | undefined {
         const mWord = this.mapWord(word.normalize('NFC'));
-        const opts: FindWordOptions = { caseSensitive: !ignoreCase };
+        const opts: FindWordOptions = ignoreCase ? findWordOptionsNotCaseSensitive : findWordOptionsCaseSensitive;
         const findResult = this.trie.findWord(mWord, opts);
         if (findResult.found !== false) {
             return findResult;
@@ -134,9 +140,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
             }
         }
         if (useCompounds) {
-            opts.useLegacyWordCompounds = useCompounds;
+            const optsUseCompounds = { ...opts, useLegacyWordCompounds: useCompounds };
             for (const w of forms) {
-                const findResult = this.trie.findWord(w, opts);
+                const findResult = this.trie.findWord(w, optsUseCompounds);
                 if (findResult.found !== false) {
                     return findResult;
                 }
@@ -150,8 +156,12 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 
     public isForbidden(word: string): boolean {
-        return this.trie.isForbiddenWord(word);
+        return this._isForbidden(word);
     }
+
+    private _isForbidden = autoCache((word: string): boolean => {
+        return this.trie.isForbiddenWord(word);
+    });
 
     public suggest(
         word: string,
@@ -223,4 +233,38 @@ export function createSpellingDictionaryFromTrieFile(
     const trieNode = importTrie(data);
     const trie = new Trie(trieNode);
     return new SpellingDictionaryFromTrie(trie, name, options, source);
+}
+
+type FindFunction = (
+    word: string,
+    useCompounds: number | boolean | undefined,
+    ignoreCase: boolean
+) => FindAnyFormResult | undefined;
+
+interface CachedFind {
+    useCompounds: number | boolean | undefined;
+    ignoreCase: boolean;
+    findResult: FindAnyFormResult | undefined;
+}
+
+function findCache(fn: FindFunction, size = 2000): FindFunction {
+    const cache = createCache01<CachedFind>(size);
+
+    function find(
+        word: string,
+        useCompounds: number | boolean | undefined,
+        ignoreCase: boolean
+    ): FindAnyFormResult | undefined {
+        const r = cache.get(word);
+        if (r !== undefined) {
+            if (r.useCompounds === useCompounds && r.ignoreCase === ignoreCase) {
+                return r.findResult;
+            }
+        }
+        const findResult = fn(word, useCompounds, ignoreCase);
+        cache.set(word, { useCompounds, ignoreCase, findResult });
+        return findResult;
+    }
+
+    return find;
 }

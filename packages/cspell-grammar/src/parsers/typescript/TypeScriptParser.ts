@@ -1,4 +1,4 @@
-import { opFlatten, opMap, pipeSync as pipe } from '@cspell/cspell-pipe';
+import { pipe, opFlatten, opMap } from '@cspell/cspell-pipe/sync';
 import { ParsedText, ParseResult, Scope, ScopeChain } from '@cspell/cspell-types/Parser';
 import { compileGrammar } from '../..';
 import { grammar } from '../../grammars/typescript';

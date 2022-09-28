@@ -1,4 +1,4 @@
-import { opConcatMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
+import { opConcatMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import type { TextOffset } from '@cspell/cspell-types';
 import * as Text from './text';
 import { splitCamelCaseWord } from './text';

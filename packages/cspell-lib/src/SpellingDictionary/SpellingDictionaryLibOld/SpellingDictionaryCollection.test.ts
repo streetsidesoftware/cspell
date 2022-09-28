@@ -6,7 +6,7 @@ import {
     createSpellingDictionary,
 } from './createSpellingDictionary';
 import { CompoundWordsMethod, SpellingDictionaryOptions } from './SpellingDictionary';
-import { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection';
+import { createCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
 
@@ -50,7 +50,7 @@ describe('Verify using multiple dictionaries', () => {
             createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
         ]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.has('mango')).toBe(true);
         expect(dictCollection.has('tree')).toBe(false);
         expect(dictCollection.has('avocado')).toBe(false);
@@ -64,7 +64,7 @@ describe('Verify using multiple dictionaries', () => {
     test('checks mapWord is identity', async () => {
         const dicts = await Promise.all([createSpellingDictionary(wordsA, 'wordsA', 'test', opts())]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.mapWord('Hello')).toBe('Hello');
     });
 
@@ -337,7 +337,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsC, 'wordsC', 'test', undefined),
         ]);
 
-        const dictCollection = new SpellingDictionaryCollection(dicts, 'test');
+        const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.has('mango')).toBe(true);
         expect(dictCollection.has('lion')).toBe(true);
         expect(dictCollection.has('ant')).toBe(true);
@@ -385,7 +385,7 @@ describe('Validate looking up words', () => {
         createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test', undefined),
     ];
 
-    const testDictCollection = new SpellingDictionaryCollection(testDicts, 'test');
+    const testDictCollection = createCollection(testDicts, 'test');
 
     interface HasWordTest {
         word: string;

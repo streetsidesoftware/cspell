@@ -1,27 +1,17 @@
-import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionary';
+import { CachingDictionary } from 'cspell-dictionary';
 import { TextOffsetRO } from './ValidationTypes';
 
-export interface IsWordValidOptions {
-    ignoreCase: boolean;
-    useCompounds: boolean | undefined;
-}
-
-export function hasWordCheck(dict: SpellingDictionary, word: string, options: IsWordValidOptions): boolean {
+export function hasWordCheck(dict: CachingDictionary, word: string): boolean {
     word = word.replace(/\\/g, '');
-    return dict.has(word, options);
+    return dict.has(word);
 }
 
-export function isWordValidWithEscapeRetry(
-    dict: SpellingDictionary,
-    wo: TextOffsetRO,
-    line: TextOffsetRO,
-    options: IsWordValidOptions
-): boolean {
-    const firstTry = hasWordCheck(dict, wo.text, options);
+export function isWordValidWithEscapeRetry(dict: CachingDictionary, wo: TextOffsetRO, line: TextOffsetRO): boolean {
+    const firstTry = hasWordCheck(dict, wo.text);
     return (
         firstTry ||
         // Drop the first letter if it is preceded by a '\'.
-        (line.text[wo.offset - line.offset - 1] === '\\' && hasWordCheck(dict, wo.text.slice(1), options))
+        (line.text[wo.offset - line.offset - 1] === '\\' && hasWordCheck(dict, wo.text.slice(1)))
     );
 }
 

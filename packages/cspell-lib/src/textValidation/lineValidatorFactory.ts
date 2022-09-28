@@ -1,38 +1,43 @@
-import { opConcatMap, opFilter, opMap, pipeSync as pipe, toArray } from '@cspell/cspell-pipe';
+import { opConcatMap, opFilter, opMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
+import { ParsedText } from '@cspell/cspell-types';
+import { CachingDictionary, createCachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { genSequence, Sequence } from 'gensequence';
 import * as RxPat from '../Settings/RegExpPatterns';
-import { SpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionary';
 import * as Text from '../util/text';
 import { clean } from '../util/util';
 import { split } from '../util/wordSplitter';
+import { isWordValidWithEscapeRetry } from './isWordValid';
+import { mapRangeBackToOriginalPos } from './parsedText';
 import { defaultMinWordLength } from './textValidator';
-import { IsWordValidOptions, isWordValidWithEscapeRetry } from './isWordValid';
 import type {
     LineSegment,
-    LineValidator,
+    LineValidatorFn,
     MappedTextValidationResult,
     TextOffsetRO,
-    TextValidator,
+    TextValidatorFn,
     ValidationOptions,
     ValidationResult,
     ValidationResultRO,
 } from './ValidationTypes';
-import { ParsedText } from '@cspell/cspell-types';
-import { mapRangeBackToOriginalPos } from './parsedText';
 
-export function lineValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): LineValidator {
+interface LineValidator {
+    fn: LineValidatorFn;
+    dict: CachingDictionary;
+}
+
+export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
         minWordLength = defaultMinWordLength,
         flagWords = [],
         allowCompoundWords = false,
         ignoreCase = true,
     } = options;
-    const hasWordOptions: IsWordValidOptions = {
+    const hasWordOptions: SearchOptions = {
         ignoreCase,
         useCompounds: allowCompoundWords || undefined, // let the dictionaries decide on useCompounds if allow is false
     };
 
-    const dictCol = dict;
+    const dictCol = createCachingDictionary(sDict, hasWordOptions);
 
     const setOfFlagWords = new Set(flagWords);
     const setOfKnownSuccessfulWords = new Set<string>();
@@ -55,7 +60,7 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
     }
 
     function isWordIgnored(word: string): boolean {
-        return dict.isNoSuggestWord(word, options);
+        return dictCol.isNoSuggestWord(word);
     }
 
     function isWordFlagged(word: TextOffsetRO): boolean {
@@ -69,21 +74,18 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
         return word;
     }
 
-    function checkWord(word: ValidationResultRO, options: IsWordValidOptions): ValidationResultRO {
+    function checkWord(word: ValidationResultRO): ValidationResultRO {
         const isIgnored = isWordIgnored(word.text);
         const { isFlagged = !isIgnored && testForFlaggedWord(word) } = word;
-        const isFound = isFlagged
-            ? undefined
-            : isIgnored || isWordValidWithEscapeRetry(dictCol, word, word.line, options);
+        const isFound = isFlagged ? undefined : isIgnored || isWordValidWithEscapeRetry(dictCol, word, word.line);
         return clean({ ...word, isFlagged, isFound });
     }
 
-    const fn: LineValidator = (lineSegment: LineSegment) => {
+    const fn: LineValidatorFn = (lineSegment: LineSegment) => {
         function splitterIsValid(word: TextOffsetRO): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
-                (!testForFlaggedWord(word) &&
-                    isWordValidWithEscapeRetry(dictCol, word, lineSegment.line, hasWordOptions))
+                (!testForFlaggedWord(word) && isWordValidWithEscapeRetry(dictCol, word, lineSegment.line))
             );
         }
 
@@ -99,7 +101,7 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
                     opMap((t) => ({ ...t, line: vr.line })),
                     opMap(checkFlagWords),
                     opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
-                    opMap((wo) => (wo.isFlagged ? wo : checkWord(wo, hasWordOptions))),
+                    opMap((wo) => (wo.isFlagged ? wo : checkWord(wo))),
                     opFilter(rememberFilter((wo) => wo.isFlagged || !wo.isFound)),
                     opFilter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))),
 
@@ -111,7 +113,7 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
                 )
             );
 
-            if (!codeWordResults.length || isWordIgnored(vr.text) || checkWord(vr, hasWordOptions).isFound) {
+            if (!codeWordResults.length || isWordIgnored(vr.text) || checkWord(vr).isFound) {
                 rememberFilter((_) => false)(vr);
                 return [];
             }
@@ -160,13 +162,19 @@ export function lineValidatorFactory(dict: SpellingDictionary, options: Validati
         return checkedPossibleWords;
     };
 
-    return fn;
+    return { fn, dict: dictCol };
+}
+
+export interface TextValidator {
+    validate: TextValidatorFn;
+    lineValidator: LineValidator;
 }
 
 export function textValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): TextValidator {
     const lineValidator = lineValidatorFactory(dict, options);
+    const lineValidatorFn = lineValidator.fn;
 
-    function validator(pText: ParsedText): Iterable<MappedTextValidationResult> {
+    function validate(pText: ParsedText): Iterable<MappedTextValidationResult> {
         const { text, range: srcRange, map } = pText;
         const srcOffset = srcRange[0];
         const segment = { text, offset: 0 };
@@ -177,8 +185,11 @@ export function textValidatorFactory(dict: SpellingDictionary, options: Validati
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
             return { text, range, isFlagged, isFound };
         }
-        return [...lineValidator(lineSegment)].map(mapBackToOriginSimple);
+        return [...lineValidatorFn(lineSegment)].map(mapBackToOriginSimple);
     }
 
-    return validator;
+    return {
+        validate,
+        lineValidator,
+    };
 }

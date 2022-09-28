@@ -21,7 +21,7 @@
  * ```
  */
 
-import { opConcatMap, opFilter, pipeSync as pipe } from '@cspell/cspell-pipe';
+import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import { genSequence, Sequence } from 'gensequence';
 import { trieNodeToRoot } from '../trie-util';
 import { FLAG_WORD, TrieNode, TrieRoot } from '../TrieNode';

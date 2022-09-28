@@ -68,7 +68,7 @@ export function createForbiddenWordsDictionary(
     source: string,
     options: SpellingDictionaryOptions | undefined
 ): SpellingDictionary {
-    // console.log(`createSpellingDictionary ${name} ${source}`);
+    // console.log(`createForbiddenWordsDictionary ${name} ${source}`);
     const words = parseDictionaryLines(wordList.concat(wordList.map((a) => a.toLowerCase())), {
         stripCaseAndAccents: !options?.noSuggest,
     });

@@ -169,6 +169,10 @@ function isWordForbiddenInAnyDictionary(dicts: SpellingDictionary[], word: strin
     return genSequence(dicts).first((dict) => dict.isForbidden(word));
 }
 
+export function isSpellingDictionaryCollection(dict: SpellingDictionary): dict is SpellingDictionaryCollection {
+    return dict instanceof SpellingDictionaryCollectionImpl;
+}
+
 export const __testing__ = {
     isWordInAnyDictionary,
     isWordForbiddenInAnyDictionary,

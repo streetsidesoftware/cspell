@@ -103,7 +103,36 @@ export function wordDictionaryFormsCollector(prefixNoCase: string): (word: strin
 const DEFAULT_HAS_OPTIONS: HasOptions = Object.freeze({});
 
 export function hasOptionToSearchOption(opt: HasOptions | undefined): SearchOptions {
-    return !opt ? DEFAULT_HAS_OPTIONS : opt;
+    return canonicalSearchOptions(!opt ? DEFAULT_HAS_OPTIONS : opt);
+}
+
+const canonicalSearchOptionsMap = new Map<
+    SearchOptions['ignoreCase'],
+    Map<SearchOptions['useCompounds'], SearchOptions>
+>();
+const knownCanonicalOptions = new WeakMap<SearchOptions, SearchOptions>();
+
+/**
+ * Find the canonical form for SearchOptions. Useful Maps and WeakMaps.
+ * @param opt - options to normalize
+ * @returns SearchOptions - the canonical form
+ */
+export function canonicalSearchOptions(opt: SearchOptions): SearchOptions {
+    const known = knownCanonicalOptions.get(opt);
+    if (known) return known;
+    const { ignoreCase, useCompounds } = opt;
+    const foundLevel1Map = canonicalSearchOptionsMap.get(ignoreCase);
+    const useLevel1Map = foundLevel1Map || new Map();
+    if (!foundLevel1Map) {
+        canonicalSearchOptionsMap.set(ignoreCase, useLevel1Map);
+    }
+    const foundCanOpts = useLevel1Map.get(useCompounds);
+    const canOpts = foundCanOpts || Object.freeze({ ignoreCase, useCompounds });
+    if (!foundCanOpts) {
+        useLevel1Map.set(useCompounds, canOpts);
+    }
+    knownCanonicalOptions.set(opt, canOpts);
+    return canOpts;
 }
 
 export function suggestArgsToSuggestOptions(args: SuggestArgs): SuggestOptions {
