@@ -28,7 +28,7 @@ export type {
 } from 'cspell-dictionary';
 
 export function getSpellDictInterface(): SpellDictInterface {
-    const useModule = getSystemFeatureFlags().getFlagBool(flagUseCSpellDictionary);
+    const useModule = getSystemFeatureFlags().getFlagBool(flagUseCSpellDictionary) ?? true;
     return useModule ? SpellingDictionaryModule : SpellingDictionaryLibOld;
 }
 
