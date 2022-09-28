@@ -1,4 +1,4 @@
-const CACHE_SIZE = 2000;
+const CACHE_SIZE = 100;
 
 interface AutoCache<R> extends CacheStats {
     (word: string): R;
@@ -19,7 +19,7 @@ class Cache01<R> implements CacheStats {
     misses = 0;
     swaps = 0;
 
-    constructor(readonly maxSize = CACHE_SIZE) {}
+    constructor(readonly maxSize: number) {}
 
     get(key: string): R | undefined {
         const cache0 = this.cache0;
@@ -42,7 +42,7 @@ class Cache01<R> implements CacheStats {
     set(key: string, value: R): this {
         if (this.count >= this.maxSize) {
             this.cache1 = this.cache0;
-            this.cache1 = Object.create(null);
+            this.cache0 = Object.create(null);
             this.swaps++;
             this.count = 0;
         }
@@ -52,12 +52,12 @@ class Cache01<R> implements CacheStats {
     }
 }
 
-export function createCache01<R>(size?: number): Cache01<R> {
+export function createCache01<R>(size: number): Cache01<R> {
     return new Cache01(size);
 }
 
-export function autoCache<R>(fn: (p: string) => R): AutoCache<R> {
-    const cache = createCache01<R>();
+export function autoCache<R>(fn: (p: string) => R, size = CACHE_SIZE): AutoCache<R> {
+    const cache = createCache01<R>(size);
 
     const ac: AutoCache<R> = get as AutoCache<R>;
     ac.hits = 0;
@@ -80,7 +80,8 @@ export function autoCache<R>(fn: (p: string) => R): AutoCache<R> {
 
     return ac;
 }
-export function extractStats(ac: AutoCache<unknown>): CacheStats {
+
+export function extractStats(ac: AutoCache<unknown> | CacheStats): CacheStats {
     const { hits, misses, swaps } = ac;
     return { hits, misses, swaps };
 }

@@ -1,8 +1,7 @@
 import { DictionaryInformation } from '@cspell/cspell-types';
 import { CompoundWordsMethod, mapDictionaryInformationToWeightMap, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 import { clean } from '../util/clean';
-import { genSequence } from 'gensequence';
-import { isUpperCase, removeAccents, ucFirst } from '../util/text';
+import { isUpperCase, removeUnboundAccents, ucFirst } from '../util/text';
 import { HasOptions, SearchOptions, SpellingDictionary, SuggestOptions } from './SpellingDictionary';
 
 export { impersonateCollector, suggestionCollector } from 'cspell-trie-lib';
@@ -37,7 +36,7 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
         } else {
             forms.add(wordLc);
             // Legacy remove any unbound accents
-            forms.add(wordLc.replace(/\p{M}/gu, ''));
+            forms.add(removeUnboundAccents(wordLc));
         }
     } else {
         if (isDictionaryCaseSensitive) {
@@ -50,7 +49,7 @@ export function wordSearchForms(word: string, isDictionaryCaseSensitive: boolean
         } else {
             forms.add(wordLc);
             // Legacy remove any unbound accents
-            forms.add(wordLc.replace(/\p{M}/gu, ''));
+            forms.add(removeUnboundAccents(wordLc));
         }
     }
     return forms;
@@ -66,38 +65,6 @@ export function wordSuggestForms(word: string): Set<string> {
     const wordLc = word.toLowerCase();
     forms.add(wordLc);
     return forms;
-}
-
-interface DictionaryWordForm {
-    w: string; // the word
-    p: string; // prefix to add
-}
-function* wordDictionaryForms(word: string, prefixNoCase: string): IterableIterator<DictionaryWordForm> {
-    word = word.normalize('NFC');
-    const wordLc = word.toLowerCase();
-    const wordNa = removeAccents(word);
-    const wordLcNa = removeAccents(wordLc);
-    function wf(w: string, p = '') {
-        return { w, p };
-    }
-
-    const prefix = prefixNoCase;
-    yield wf(word);
-    yield wf(wordNa, prefix);
-    yield wf(wordLc, prefix);
-    yield wf(wordLcNa, prefix);
-}
-
-export function wordDictionaryFormsCollector(prefixNoCase: string): (word: string) => Iterable<string> {
-    const knownWords = new Set<string>();
-
-    return (word: string) => {
-        return genSequence(wordDictionaryForms(word, prefixNoCase))
-            .filter((w) => !knownWords.has(w.w))
-            .map((w) => w.p + w.w)
-            .filter((w) => !knownWords.has(w))
-            .map((w) => (knownWords.add(w), w));
-    };
 }
 
 const DEFAULT_HAS_OPTIONS: HasOptions = Object.freeze({});
@@ -160,6 +127,4 @@ export function createWeightMapFromDictionaryInformation(di: DictionaryInformati
 export const __testMethods__ = {
     wordSearchForms,
     wordSearchFormsArray,
-    wordDictionaryForms,
-    wordDictionaryFormsCollector,
 };
