@@ -82,7 +82,7 @@ const config = {
         },
         'import/resolver': {
             typescript: {
-                alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+                alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code
 
                 // use an array of glob patterns
                 project: ['packages/*/tsconfig.json', 'integration-tests/tsconfig.json'],
