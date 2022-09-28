@@ -116,31 +116,6 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).toEqual(expect.arrayContaining(['ape']));
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
-
-    type Test = [string, boolean, string[]];
-    // cspell:ignore café
-    const tests: Test[] = [
-        ['house', false, ['house']],
-        ['House', false, ['House', 'house']],
-        ['café', false, ['cafe', 'café']],
-        ['Café', false, ['Cafe', 'Café', 'cafe', 'café']],
-        ['House', true, ['House', '~house']],
-        ['HOUSE', true, ['HOUSE', '~house']],
-        ['Café', true, ['Café', '~Cafe', '~cafe', '~café']],
-        // Make sure all accent forms work.
-        ['café'.normalize(), false, ['cafe', 'café']],
-        ['café'.normalize('NFD'), false, ['cafe', 'café']],
-        ['café'.normalize('NFKC'), false, ['cafe', 'café']],
-        ['café'.normalize('NFKD'), false, ['cafe', 'café']],
-    ];
-    test.each(tests)(
-        'wordDictionaryFormsCollector %s %o %o',
-        (word: string, isCaseSensitive: boolean, expected: string[]) => {
-            const collector = __testMethods__.wordDictionaryFormsCollector(isCaseSensitive ? '~' : '');
-            expect([...collector(word)].sort()).toEqual(expected.sort());
-            expect([...collector(word)]).toEqual([]);
-        }
-    );
 });
 
 describe('Validate wordSearchForms', () => {

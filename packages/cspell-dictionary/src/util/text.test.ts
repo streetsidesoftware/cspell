@@ -3,13 +3,18 @@ import * as Text from './text';
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 
 describe('Util Text', () => {
-    test('tests matchCase', () => {
-        expect(Text.matchCase('Apple', 'orange')).toBe('Orange');
-        expect(Text.matchCase('apple', 'ORANGE')).toBe('orange');
-        expect(Text.matchCase('apple', 'orange')).toBe('orange');
-        expect(Text.matchCase('APPLE', 'orange')).toBe('ORANGE');
-        expect(Text.matchCase('ApPlE', 'OrangE')).toBe('OrangE');
-        expect(Text.matchCase('apPlE', 'OrangE')).toBe('orangE');
+    test.each`
+        example     | word        | expected
+        ${'Apple'}  | ${'orange'} | ${'Orange'}
+        ${'apple'}  | ${'ORANGE'} | ${'orange'}
+        ${'apple'}  | ${'orange'} | ${'orange'}
+        ${'APPLE'}  | ${'orange'} | ${'ORANGE'}
+        ${'ApPlE'}  | ${'OrangE'} | ${'OrangE'}
+        ${'apPlE'}  | ${'OrangE'} | ${'orangE'}
+        ${'_Apple'} | ${'orange'} | ${'orange'}
+        ${'_Apple'} | ${'Orange'} | ${'Orange'}
+    `('tests matchCase', ({ example, word, expected }) => {
+        expect(Text.matchCase(example, word)).toBe(expected);
     });
 
     test('case of Chinese characters', () => {
@@ -50,5 +55,25 @@ describe('Test the text matching functions', () => {
         expect(Text.lcFirst('Hello')).toBe('hello');
         expect(Text.lcFirst('áello')).toBe('áello');
         expect(Text.lcFirst('Áello')).toBe('áello');
+    });
+});
+
+describe('accents', () => {
+    test.each`
+        word                              | expected
+        ${'hello'}                        | ${'hello'}
+        ${'café résumé'.normalize('NFC')} | ${'cafe resume'}
+        ${'café résumé'.normalize('NFD')} | ${'cafe resume'}
+    `('removeAccents $word', ({ word, expected }) => {
+        expect(Text.removeAccents(word)).toBe(expected);
+    });
+
+    test.each`
+        word                              | expected
+        ${'hello'}                        | ${'hello'}
+        ${'café résumé'.normalize('NFC')} | ${'café résumé'}
+        ${'café résumé'.normalize('NFD')} | ${'cafe resume'}
+    `('removeUnboundAccents $word', ({ word, expected }) => {
+        expect(Text.removeUnboundAccents(word)).toBe(expected);
     });
 });
