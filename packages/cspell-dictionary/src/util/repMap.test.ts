@@ -1,19 +1,21 @@
-import * as repMap from './repMap';
+import { __testing__, createMapper } from './repMap';
+
+const { createMapperRegExp, charsetToRepMap } = __testing__;
 
 describe('ReMap Tests', () => {
     test('empty replace map', () => {
-        const mapper = repMap.createMapper([]);
+        const mapper = createMapper([]);
         expect(mapper('hello')).toBe('hello');
     });
 
     test('punctuation replacement', () => {
-        const mapper = repMap.createMapper([['`', "'"]]);
+        const mapper = createMapper([['`', "'"]]);
         expect(mapper('hello')).toBe('hello');
         expect(mapper('don`t')).toBe("don't");
     });
 
     test('multiple replacements', () => {
-        const mapper = repMap.createMapper([
+        const mapper = createMapper([
             ['a', 'A'],
             ['b', 'B'],
         ]);
@@ -22,7 +24,7 @@ describe('ReMap Tests', () => {
     });
 
     test('empty replacements', () => {
-        const mapper = repMap.createMapper([
+        const mapper = createMapper([
             ['a', 'A'],
             ['b', 'B'],
             ['', ''],
@@ -32,7 +34,7 @@ describe('ReMap Tests', () => {
     });
 
     test('regex replacements', () => {
-        const mapper = repMap.createMapper([
+        const mapper = createMapper([
             ['!|@|#|\\$', '_'],
             ['a', 'A'],
         ]);
@@ -40,7 +42,7 @@ describe('ReMap Tests', () => {
     });
 
     test('repeated replacements', () => {
-        const mapper = repMap.createMapper([
+        const mapper = createMapper([
             ['a', 'A'],
             ['a', 'X'],
         ]);
@@ -48,7 +50,7 @@ describe('ReMap Tests', () => {
     });
 
     test('nested regex replacements', () => {
-        const mapper = repMap.createMapper([
+        const mapper = createMapper([
             ['(!)', '_'],
             ['((\\$))', '#'],
             ['a', 'A'],
@@ -57,7 +59,7 @@ describe('ReMap Tests', () => {
     });
 
     test('bad regex replacements', () => {
-        const mapper = repMap.createMapper([
+        const mapper = createMapper([
             ['(', '_'],
             ['a', 'A'],
         ]);
@@ -65,7 +67,7 @@ describe('ReMap Tests', () => {
     });
 
     test('empty regex replacements', () => {
-        const mapper = repMap.createMapper([
+        const mapper = createMapper([
             ['', '_'],
             ['a', 'A'],
         ]);
@@ -81,7 +83,29 @@ describe('ReMap Tests', () => {
         ${[['ae', 'ä'], ['s{2}', 'ß']]} | ${'strasse'} | ${'straße'}
         ${[['ae', 'ä'], ['ss', 'ß']]}   | ${'STRASSE'} | ${'STRASSE'}
     `('map with word $map / $word', ({ map, word, expected }) => {
-        const mapper = repMap.createMapper(map);
+        const mapper = createMapper(map);
         expect(mapper(word)).toBe(expected);
+    });
+
+    test.each`
+        map                             | expected
+        ${[]}                           | ${/$^/}
+        ${[['ae', 'ä'], ['s{2}', 'ß']]} | ${/(ae)|(s{2})/g}
+        ${[['ae', 'ä'], ['ss', 'ß']]}   | ${/(ae)|(ss)/g}
+    `('createMapperRegExp $map', ({ map, expected }) => {
+        const reg = createMapperRegExp(map);
+        expect(reg).toEqual(expected);
+    });
+
+    test.each`
+        charset              | expected
+        ${undefined}         | ${undefined}
+        ${''}                | ${undefined}
+        ${'a-z'}             | ${[['[a-z]', '']]}
+        ${'0x300-0x308'}     | ${[['[0x300-0x308]', '']]}
+        ${'0x300-0x308|a-z'} | ${[['[0x300-0x308]', ''], ['[a-z]', '']]}
+    `('charsetToRepMap $charset', ({ charset, expected }) => {
+        const reg = charsetToRepMap(charset);
+        expect(reg).toEqual(expected);
     });
 });

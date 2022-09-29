@@ -8,7 +8,6 @@ import type {
 import { CompoundWordsMethod, importTrie, suggestionCollector, Trie } from 'cspell-trie-lib';
 import { createMapper } from '../util/repMap';
 import { clean } from '../util/clean';
-import { charsetToRegExp } from './charset';
 import {
     FindResult,
     HasOptions,
@@ -27,6 +26,8 @@ import {
     wordSuggestFormsArray,
 } from './SpellingDictionaryMethods';
 import { autoCache, createCache01 } from '../util/AutoCache';
+import { pipe, opConcatMap } from '@cspell/cspell-pipe/sync';
+import * as Defaults from './defaults';
 
 const findWordOptionsCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: true });
 const findWordOptionsNotCaseSensitive: FindWordOptions = Object.freeze({ caseSensitive: false });
@@ -40,7 +41,6 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
-    readonly ignoreCharactersRegExp: RegExp | undefined;
 
     private weightMap: WeightMap | undefined;
 
@@ -51,12 +51,11 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         readonly source = 'from trie',
         size?: number
     ) {
-        this.mapWord = createMapper(options.repMap || []);
+        this.mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
         this.isDictionaryCaseSensitive = options.caseSensitive ?? !trie.isLegacy;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
         this.weightMap = options.weightMap || createWeightMapFromDictionaryInformation(options.dictionaryInformation);
-        this.ignoreCharactersRegExp = charsetToRegExp(this.options.dictionaryInformation?.ignore);
     }
 
     public get size(): number {
@@ -95,7 +94,8 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         useCompounds: HasOptions['useCompounds'] | undefined;
         ignoreCase: boolean;
     } {
-        const { useCompounds = this.options.useCompounds, ignoreCase = true } = hasOptionToSearchOption(hasOptions);
+        const { useCompounds = this.options.useCompounds, ignoreCase = Defaults.ignoreCase } =
+            hasOptionToSearchOption(hasOptions);
         return { useCompounds, ignoreCase };
     }
 
@@ -108,12 +108,8 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         useCompounds: number | boolean | undefined,
         ignoreCase: boolean
     ): FindAnyFormResult | undefined {
-        const outerForms = new Set([word]);
-        if (this.ignoreCharactersRegExp) {
-            outerForms.add(word.replace(this.ignoreCharactersRegExp, ''));
-            outerForms.add(word.normalize('NFD').replace(this.ignoreCharactersRegExp, ''));
-            outerForms.add(word.normalize('NFC').replace(this.ignoreCharactersRegExp, ''));
-        }
+        const outerForms = outerWordForms(word, this.mapWord);
+
         for (const form of outerForms) {
             const r = this._findAnyForm(form, useCompounds, ignoreCase);
             if (r) return r;
@@ -122,11 +118,10 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
 
     private _findAnyForm(
-        word: string,
+        mWord: string,
         useCompounds: number | boolean | undefined,
         ignoreCase: boolean
     ): FindAnyFormResult | undefined {
-        const mWord = this.mapWord(word.normalize('NFC'));
         const opts: FindWordOptions = ignoreCase ? findWordOptionsNotCaseSensitive : findWordOptionsCaseSensitive;
         const findResult = this.trie.findWord(mWord, opts);
         if (findResult.found !== false) {
@@ -268,3 +263,15 @@ function findCache(fn: FindFunction, size = 2000): FindFunction {
 
     return find;
 }
+
+function outerWordForms(word: string, mapWord: (word: string) => string): Set<string> {
+    const forms = pipe(
+        [word],
+        opConcatMap((word) => [word, word.normalize('NFC'), word.normalize('NFD')]),
+        opConcatMap((word) => [word, mapWord(word)])
+    );
+
+    return new Set(forms);
+}
+
+export const __testing__ = { outerWordForms };

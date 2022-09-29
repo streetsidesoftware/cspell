@@ -2,6 +2,7 @@ export {
     createCachingDictionary,
     createCollection,
     createForbiddenWordsDictionary,
+    createIgnoreWordsDictionary,
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
     SpellingDictionaryCollection,
