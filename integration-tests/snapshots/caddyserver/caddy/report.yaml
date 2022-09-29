@@ -5,7 +5,7 @@ Args: ["**/*.go"]
 Summary:
   files: 224
   filesWithIssues: 211
-  issues: 3520
+  issues: 3519
   errors: 0
 Errors: []
 
@@ -31,10 +31,9 @@ issues:
   - "admin.go:1028:33    	unsynchronized  	U   	This is a low-level, unsynchronized function; most callers"
   - "admin.go:1064:31    	elems           	U   	array = append(array, elems...)"
   - "admin.go:1295:21    	pidfile         	U   	// PIDFile writes a pidfile to the file at filename"
-  - "caddy.go:62:30      	encodable   	U   	to populate the JSON-encodable fields of the struct"
-  - "caddy.go:691:24     	byeee       	U   	logger.Warn(\"exiting; byeee!! 👋\")"
-  - "caddy.go:836:28     	devel       	U   	this function returns \"(devel)\" becaise Go uses that"
-  - "caddy.go:836:36     	becaise     	U   	function returns \"(devel)\" becaise Go uses that, but for"
+  - "caddy.go:691:24     	byeee   	U   	logger.Warn(\"exiting; byeee!! 👋\")"
+  - "caddy.go:836:28     	devel   	U   	this function returns \"(devel)\" becaise Go uses that"
+  - "caddy.go:836:36     	becaise 	U   	function returns \"(devel)\" becaise Go uses that, but for"
   - "caddyconfig/caddyfile/adapter.go:15:9       	caddyfile   	U   	package caddyfile"
   - "caddyconfig/caddyfile/adapter.go:23:35      	caddyconfig 	U   	caddyserver/caddy/v2/caddyconfig\""
   - "caddyconfig/caddyfile/adapter.go:26:19      	Caddyfile   	U   	// Adapter adapts Caddyfile to Caddy JSON."
