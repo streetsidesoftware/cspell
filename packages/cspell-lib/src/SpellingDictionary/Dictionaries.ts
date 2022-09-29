@@ -33,7 +33,8 @@ function _getDictionaryInternal(
     spellDictionaries: SpellingDictionary[]
 ): SpellingDictionaryCollection {
     const { words = emptyWords, userWords = emptyWords, flagWords = emptyWords, ignoreWords = emptyWords } = settings;
-    const { createSpellingDictionary, createCollection, createForbiddenWordsDictionary } = getSpellDictInterface();
+    const { createSpellingDictionary, createIgnoreWordsDictionary, createCollection, createForbiddenWordsDictionary } =
+        getSpellDictInterface();
 
     const settingsWordsDictionary = createSpellingDictionary(words, '[words]', 'From Settings `words`', {
         caseSensitive: true,
@@ -45,15 +46,10 @@ function _getDictionaryInternal(
               weightMap: undefined,
           })
         : undefined;
-    const ignoreWordsDictionary = createSpellingDictionary(
+    const ignoreWordsDictionary = createIgnoreWordsDictionary(
         ignoreWords,
         '[ignoreWords]',
-        'From Settings `ignoreWords`',
-        {
-            caseSensitive: true,
-            noSuggest: true,
-            weightMap: undefined,
-        }
+        'From Settings `ignoreWords`'
     );
     const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '[flagWords]', 'From Settings `flagWords`', {
         weightMap: undefined,

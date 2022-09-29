@@ -8,9 +8,9 @@ import { mergeInDocSettings } from './CSpellSettingsServer';
 
 // cspell:ignore gimuy
 const regExMatchRegEx = /\/.*\/[gimuy]*/;
-const regExCSpellInDocDirective = /(?:spell-?checker|c?spell)::?(.*)/gi;
-const regExCSpellDirectiveKey = /(?<=(?:spell-?checker|c?spell)::?)(?!:)(.*)/i;
-const regExInFileSettings = [regExCSpellInDocDirective, /(LocalWords:?.*)/g];
+const regExCSpellInDocDirective = /\b(?:spell-?checker|c?spell)::?(.*)/gi;
+const regExCSpellDirectiveKey = /(?<=\b(?:spell-?checker|c?spell)::?)(?!:)(.*)/i;
+const regExInFileSettings = [regExCSpellInDocDirective, /\b(LocalWords:?.*)/g];
 
 export type CSpellUserSettingsKeys = keyof CSpellUserSettings;
 

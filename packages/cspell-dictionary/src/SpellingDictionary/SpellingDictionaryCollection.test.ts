@@ -2,6 +2,7 @@ import * as Trie from 'cspell-trie-lib';
 import { SpellingDictionaryOptions } from '.';
 import { createFailedToLoadDictionary, createSpellingDictionary } from './createSpellingDictionary';
 import { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
+import { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
 import { CompoundWordsMethod } from './SpellingDictionary';
 import { createCollection } from './SpellingDictionaryCollection';
 import { SpellingDictionaryFromTrie } from './SpellingDictionaryFromTrie';
@@ -29,12 +30,14 @@ describe('Verify using multiple dictionaries', () => {
     const wordsG = ['café', 'accent'];
 
     const wordsLegacy = ['error', 'code', 'system', 'ctrl'];
+    const wordsIgnore = ['ignored'];
 
     // cspell:ignore pinkberry behaviour colour
     const wordsNoSug = ['colour', 'behaviour', 'favour', 'pinkberry'];
 
     const dictNoSug = createSpellingDictionary(wordsNoSug, 'words-no-suggest', 'test', opts({ noSuggest: true }));
     const dictLegacy = createSpellingDictionary(wordsLegacy, 'legacy-dict', 'test', opts({ useCompounds: true }));
+    const dictIgnore = createIgnoreWordsDictionary(wordsIgnore, '[ignore]', 'test');
 
     test.each`
         word            | expected
@@ -60,6 +63,28 @@ describe('Verify using multiple dictionaries', () => {
         const dictCollection = createCollection(dicts, 'test');
         expect(dictCollection.size).toBeGreaterThanOrEqual(wordsA.length - 1 + wordsB.length + wordsC.length);
         expect(dictCollection.has(word)).toEqual(expected);
+    });
+
+    test.each`
+        word           | expected
+        ${'colour'}    | ${true}
+        ${'Colour'}    | ${true}
+        ${'tree'}      | ${false}
+        ${''}          | ${false}
+        ${'ignored'}   | ${true}
+        ${'Ignored'}   | ${true}
+        ${'behaviour'} | ${true}
+        ${'guava'}     | ${false}
+    `('isNoSuggestWord "$word"', async ({ word, expected }) => {
+        const dicts = await Promise.all([
+            createSpellingDictionary(wordsA, 'wordsA', 'test', opts()),
+            createForbiddenWordsDictionary(['behaviour', 'guava', 'Ignored', 'Colour'], 'flag_words', 'test'),
+            dictNoSug,
+            dictIgnore,
+        ]);
+
+        const dictCollection = createCollection(dicts, 'test');
+        expect(dictCollection.isNoSuggestWord(word, {})).toEqual(expected);
     });
 
     test('has for forbidden word.', () => {
@@ -220,6 +245,7 @@ describe('Verify using multiple dictionaries', () => {
         ${'áccent'}       | ${true /* ignore the accent. cspell:disable-line */}
         ${'a\u0301ccent'} | ${true /* ignore the accent. cspell:disable-line */}
         ${'applé'}        | ${true /* ignore the accent. cspell:disable-line */}
+        ${'ignored'}      | ${true}
     `('checks has word: "$word"', ({ word, expected }) => {
         const dicts = [
             createSpellingDictionary(wordsA, 'wordsA', 'test', { dictionaryInformation: { ignore: '\u0300-\u0362' } }),
@@ -232,6 +258,7 @@ describe('Verify using multiple dictionaries', () => {
                 caseSensitive: true,
             }),
             createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            dictIgnore,
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -248,6 +275,7 @@ describe('Verify using multiple dictionaries', () => {
         ${'pinkbug'}    | ${{ found: 'pinkbug', forbidden: false, noSuggest: false }}
         ${'colour'}     | ${{ found: 'colour', forbidden: false, noSuggest: true }}
         ${'behaviour'}  | ${{ found: 'behaviour', forbidden: false, noSuggest: true }}
+        ${'ignored'}    | ${{ found: 'ignored', forbidden: false, noSuggest: true }}
     `('find: "$word"', ({ word, expected }) => {
         const dicts = [
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
@@ -257,6 +285,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
             createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictNoSug,
+            dictIgnore,
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -287,6 +316,7 @@ describe('Verify using multiple dictionaries', () => {
             createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
             dictNoSug,
             dictLegacy,
+            dictIgnore,
         ];
 
         const dictCollection = createCollection(dicts, 'test');
@@ -328,6 +358,7 @@ describe('Verify using multiple dictionaries', () => {
         ${'bug'}        | ${[sr('bug', 5)]}
         ${'blackberry'} | ${[sr('blackberry', 0), sr('black berry', 98)]}
         ${'stinkbug'}   | ${[sr('stink bug', 103), sr('pinkbug', 198)]}
+        ${'ignored'}    | ${[]}
     `('checks suggestions word: "$word"', ({ word, expected }) => {
         const dicts = [
             createSpellingDictionary(wordsA, 'wordsA', 'test', undefined),
@@ -336,6 +367,7 @@ describe('Verify using multiple dictionaries', () => {
             createSpellingDictionary(wordsD, 'wordsD', 'test', undefined),
             createSpellingDictionary(wordsF, 'wordsF', 'test', undefined),
             createForbiddenWordsDictionary(['Avocado'], 'flag_words', 'test'),
+            dictIgnore,
         ];
 
         const dictCollection = createCollection(dicts, 'test');

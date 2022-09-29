@@ -7,6 +7,7 @@ const SpellingDictionaryModule = {
     createCollection: cspellDictModule.createCollection,
     createForbiddenWordsDictionary: cspellDictModule.createForbiddenWordsDictionary,
     createSpellingDictionary: cspellDictModule.createSpellingDictionary,
+    createIgnoreWordsDictionary: cspellDictModule.createIgnoreWordsDictionary,
 } as const;
 
 type SpellDictInterface = typeof SpellingDictionaryModule | typeof SpellingDictionaryLibOld;
