@@ -16,7 +16,7 @@ const NormalizeForm = 'NFC' as const;
 class IgnoreWordsDictionary implements SpellingDictionary {
     private dict: Set<string>;
     private dictNonStrict: Set<string>;
-    readonly containsNoSuggestWords = false;
+    readonly containsNoSuggestWords = true;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'forbidden';
     constructor(readonly name: string, readonly source: string, words: Iterable<string>) {
@@ -112,6 +112,7 @@ export function createIgnoreWordsDictionary(
     const words = [...parseDictionaryLines(wordList, { stripCaseAndAccents: true })].map((w) =>
         w.normalize(NormalizeForm)
     );
+
     const hasSpecial = words.findIndex((word) => testSpecialCharacters.test(word)) >= 0;
 
     if (hasSpecial) {
