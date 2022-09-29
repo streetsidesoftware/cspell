@@ -7,6 +7,7 @@ const SpellingDictionaryModule = {
     createCollection: cspellDictModule.createCollection,
     createForbiddenWordsDictionary: cspellDictModule.createForbiddenWordsDictionary,
     createSpellingDictionary: cspellDictModule.createSpellingDictionary,
+    createIgnoreWordsDictionary: cspellDictModule.createIgnoreWordsDictionary,
 } as const;
 
 type SpellDictInterface = typeof SpellingDictionaryModule | typeof SpellingDictionaryLibOld;
@@ -28,7 +29,7 @@ export type {
 } from 'cspell-dictionary';
 
 export function getSpellDictInterface(): SpellDictInterface {
-    const useModule = getSystemFeatureFlags().getFlagBool(flagUseCSpellDictionary) ?? true;
+    const useModule = getSystemFeatureFlags().getFlagBool(flagUseCSpellDictionary) ?? false;
     return useModule ? SpellingDictionaryModule : SpellingDictionaryLibOld;
 }
 

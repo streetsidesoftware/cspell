@@ -100,3 +100,18 @@ export function createFailedToLoadDictionary(error: SpellingDictionaryLoadError)
         getErrors: () => errors,
     };
 }
+
+export function createIgnoreWordsDictionary(
+    wordList: readonly string[],
+    name: string,
+    source: string
+): SpellingDictionary {
+    // console.log('createIgnoreWordsDictionary %o', wordList);
+
+    return createSpellingDictionary(wordList, name, source, {
+        caseSensitive: true,
+        noSuggest: true,
+        weightMap: undefined,
+        supportNonStrictSearches: true,
+    });
+}
