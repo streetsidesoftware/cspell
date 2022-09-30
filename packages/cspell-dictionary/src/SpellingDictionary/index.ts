@@ -1,5 +1,5 @@
 export { CachingDictionary, createCachingDictionary } from './CachingDictionary';
-export { createSpellingDictionary } from './createSpellingDictionary';
+export { createSpellingDictionary, createFailedToLoadDictionary } from './createSpellingDictionary';
 export { createForbiddenWordsDictionary } from './ForbiddenWordsDictionary';
 export { createIgnoreWordsDictionary } from './IgnoreWordsDictionary';
 export type {

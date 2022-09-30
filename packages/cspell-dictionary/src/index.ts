@@ -1,6 +1,7 @@
 export {
     createCachingDictionary,
     createCollection,
+    createFailedToLoadDictionary,
     createForbiddenWordsDictionary,
     createIgnoreWordsDictionary,
     createSpellingDictionary,

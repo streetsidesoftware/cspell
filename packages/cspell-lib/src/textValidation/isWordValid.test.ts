@@ -1,6 +1,5 @@
-import { createCachingDictionary } from 'cspell-dictionary';
+import { createCachingDictionary, createSpellingDictionary } from 'cspell-dictionary';
 import { createCollection, SpellingDictionaryOptions } from '../SpellingDictionary';
-import { createSpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/createSpellingDictionary';
 import { __testing__ } from './isWordValid';
 
 const { hasWordCheck } = __testing__;
