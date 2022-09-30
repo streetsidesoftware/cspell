@@ -1,6 +1,4 @@
 import * as cspellDictModule from 'cspell-dictionary';
-import { getSystemFeatureFlags } from '../FeatureFlags';
-import { SpellingDictionaryLibOld } from './SpellingDictionaryLibOld';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
 
 const SpellingDictionaryModule = {
@@ -8,12 +6,10 @@ const SpellingDictionaryModule = {
     createForbiddenWordsDictionary: cspellDictModule.createForbiddenWordsDictionary,
     createSpellingDictionary: cspellDictModule.createSpellingDictionary,
     createIgnoreWordsDictionary: cspellDictModule.createIgnoreWordsDictionary,
+    createSpellingDictionaryFromTrieFile: cspellDictModule.createSpellingDictionaryFromTrieFile,
 } as const;
 
-type SpellDictInterface = typeof SpellingDictionaryModule | typeof SpellingDictionaryLibOld;
-
-const flagUseCSpellDictionary = 'use-cspell-dictionary';
-getSystemFeatureFlags().register(flagUseCSpellDictionary, 'Use the CSpell Dictionary module.');
+type SpellDictInterface = typeof SpellingDictionaryModule;
 
 export type {
     FindOptions,
@@ -29,8 +25,7 @@ export type {
 } from 'cspell-dictionary';
 
 export function getSpellDictInterface(): SpellDictInterface {
-    const useModule = getSystemFeatureFlags().getFlagBool(flagUseCSpellDictionary) ?? true;
-    return useModule ? SpellingDictionaryModule : SpellingDictionaryLibOld;
+    return SpellingDictionaryModule;
 }
 
 export const createSpellingDictionary = getSpellDictInterface().createSpellingDictionary;

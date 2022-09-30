@@ -2,8 +2,12 @@ import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef';
 import { finalizeSettings } from '../Settings';
-import { createCollection, getDictionaryInternal, SpellingDictionaryOptions } from '../SpellingDictionary';
-import { createSpellingDictionary } from '../SpellingDictionary/SpellingDictionaryLibOld/createSpellingDictionary';
+import {
+    createCollection,
+    createSpellingDictionary,
+    getDictionaryInternal,
+    SpellingDictionaryOptions,
+} from '../SpellingDictionary';
 import { FreqCounter } from '../util/FreqCounter';
 import * as Text from '../util/text';
 import { calcTextInclusionRanges, validateText, _testMethods } from './textValidator';

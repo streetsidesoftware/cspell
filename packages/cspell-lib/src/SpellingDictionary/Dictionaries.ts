@@ -1,8 +1,15 @@
+import {
+    createCollection,
+    createForbiddenWordsDictionary,
+    createIgnoreWordsDictionary,
+    createSpellingDictionary,
+    SpellingDictionary,
+    SpellingDictionaryCollection,
+} from 'cspell-dictionary';
 import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
 import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings';
 import { isDefined } from '../util/util';
 import { loadDictionary, loadDictionarySync, refreshCacheEntries } from './DictionaryLoader';
-import { getSpellDictInterface, SpellingDictionary, SpellingDictionaryCollection } from './SpellingDictionary';
 
 export function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[] {
     return defsToLoad.map(loadDictionary);
@@ -33,8 +40,6 @@ function _getDictionaryInternal(
     spellDictionaries: SpellingDictionary[]
 ): SpellingDictionaryCollection {
     const { words = emptyWords, userWords = emptyWords, flagWords = emptyWords, ignoreWords = emptyWords } = settings;
-    const { createSpellingDictionary, createIgnoreWordsDictionary, createCollection, createForbiddenWordsDictionary } =
-        getSpellDictInterface();
 
     const settingsWordsDictionary = createSpellingDictionary(words, '[words]', 'From Settings `words`', {
         caseSensitive: true,
@@ -51,9 +56,7 @@ function _getDictionaryInternal(
         '[ignoreWords]',
         'From Settings `ignoreWords`'
     );
-    const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '[flagWords]', 'From Settings `flagWords`', {
-        weightMap: undefined,
-    });
+    const flagWordsDictionary = createForbiddenWordsDictionary(flagWords, '[flagWords]', 'From Settings `flagWords`');
     const dictionaries = [
         ...spellDictionaries,
         settingsWordsDictionary,

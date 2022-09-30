@@ -1,15 +1,15 @@
 import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { DictionaryFileTypes } from '@cspell/cspell-types';
-import { CSpellIO, Stats } from 'cspell-io';
-import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
-import { toError } from '../../util/errors';
 import {
     createFailedToLoadDictionary,
     createSpellingDictionary,
-} from '../SpellingDictionaryLibOld/createSpellingDictionary';
-import { SpellingDictionary } from '../SpellingDictionaryLibOld/SpellingDictionary';
+    createSpellingDictionaryFromTrieFile,
+    SpellingDictionary,
+} from 'cspell-dictionary';
+import { CSpellIO, Stats } from 'cspell-io';
+import { DictionaryDefinitionInternal } from '../../Models/CSpellSettingsInternalDef';
+import { toError } from '../../util/errors';
 import { SpellingDictionaryLoadError } from '../SpellingDictionaryError';
-import { createSpellingDictionaryTrie } from '../SpellingDictionaryLibOld/SpellingDictionaryFromTrie';
 
 const MAX_AGE = 10000;
 
@@ -156,7 +156,12 @@ export class DictionaryLoader {
     private loadEntry(uri: string, options: LoadOptions, now = Date.now()): CacheEntry {
         options = this.normalizeOptions(uri, options);
         const pDictionary = load(this.reader, uri, options).catch((e) =>
-            createFailedToLoadDictionary(new SpellingDictionaryLoadError(uri, options, e, 'failed to load'))
+            createFailedToLoadDictionary(
+                options.name,
+                uri,
+                new SpellingDictionaryLoadError(uri, options, e, 'failed to load'),
+                options
+            )
         );
         const pStat = this.getStat(uri);
         const pending = Promise.all([pDictionary, pStat]);
@@ -201,7 +206,10 @@ export class DictionaryLoader {
         } catch (e) {
             const error = toError(e);
             const dictionary = createFailedToLoadDictionary(
-                new SpellingDictionaryLoadError(uri, options, error, 'failed to load')
+                options.name,
+                uri,
+                new SpellingDictionaryLoadError(uri, options, error, 'failed to load'),
+                options
             );
             const pending = Promise.resolve([dictionary, stat] as const);
             return {
@@ -351,10 +359,10 @@ function loadSimpleWordListSync(readLinesSync: ReaderSync, filename: string, opt
 
 async function loadTrie(readLines: Reader, filename: string, options: LoadOptions) {
     const lines = await readLines(filename);
-    return createSpellingDictionaryTrie(lines, options.name, filename, options);
+    return createSpellingDictionaryFromTrieFile(lines, options.name, filename, options);
 }
 
 function loadTrieSync(readLinesSync: ReaderSync, filename: string, options: LoadOptions) {
     const lines = readLinesSync(filename);
-    return createSpellingDictionaryTrie(lines, options.name, filename, options);
+    return createSpellingDictionaryFromTrieFile(lines, options.name, filename, options);
 }
