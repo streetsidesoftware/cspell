@@ -41,16 +41,16 @@ export {
 export {
     CompoundWordsMethod,
     createSpellingDictionary,
+    createCollection as createSpellingDictionaryCollection,
     isSpellingDictionaryLoadError,
     refreshDictionaryCache,
     SpellingDictionary,
-    // SpellingDictionaryCollection,
+    SpellingDictionaryCollection,
     SpellingDictionaryLoadError,
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
 } from './SpellingDictionary';
-export { SpellingDictionaryCollectionLegacy as SpellingDictionaryCollection } from './SpellingDictionary/SpellingDictionaryLibOld/SpellingDictionaryCollection';
 export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions';
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions';
 export { DocumentValidator, DocumentValidatorOptions } from './textValidation';
