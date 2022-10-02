@@ -18,6 +18,7 @@ import { readFile } from 'cspell-io';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { isCircular, iteratorTrieWords, serializeTrie, importTrie } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
+import { spyOnConsole } from '../test/console';
 
 const testSuiteName = path.basename(__filename);
 const UTF8: BufferEncoding = 'utf8';
@@ -28,7 +29,13 @@ const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 
 const wordListHeader = __testing__.wordListHeader;
 
+const { consoleOutput } = spyOnConsole();
+
 describe('Validate the wordListCompiler', () => {
+    beforeEach(() => {
+        jest.resetAllMocks();
+    });
+
     test.each`
         line                                                           | expectedResult
         ${'hello'}                                                     | ${['hello']}
@@ -49,6 +56,7 @@ describe('Validate the wordListCompiler', () => {
         ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
         expect(legacyLineToWords(line).filter(distinct()).toArray()).toEqual(expectedResult);
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test.each`
@@ -81,6 +89,7 @@ describe('Validate the wordListCompiler', () => {
             });
             const r = normalizer(genSequence(lines.split('\n'))).toArray();
             expect(r).toEqual(expectedResult.sort());
+            expect(consoleOutput()).toMatchSnapshot();
         }
     );
 
@@ -142,6 +151,7 @@ describe('Validate the wordListCompiler', () => {
         });
         const r = normalizer(genSequence(text.split('\n'))).toArray();
         expect(r).toEqual(expectedResult.sort());
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('reading and normalizing a file', async () => {
@@ -156,6 +166,7 @@ describe('Validate the wordListCompiler', () => {
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(wordListHeader + '\n' + citiesResultSorted);
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('compiling to a file without split', async () => {
@@ -181,6 +192,7 @@ describe('Validate the wordListCompiler', () => {
                     .join('\n') +
                 '\n'
         );
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('tests normalized to a trie', () => {
@@ -192,6 +204,7 @@ describe('Validate the wordListCompiler', () => {
             ),
         ];
         expect(tWords.sort()).toEqual([...new Set(nWords.sort())]);
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('reading and normalizing to a trie file', async () => {
@@ -212,6 +225,7 @@ describe('Validate the wordListCompiler', () => {
             .sort();
         const words = [...Trie.iteratorTrieWords(node)].sort();
         expect(words).toEqual(expected);
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('reading and normalizing to a trie gz file', async () => {
@@ -233,6 +247,7 @@ describe('Validate the wordListCompiler', () => {
             .sort();
         const words = [...Trie.iteratorTrieWords(node)].sort();
         expect(words).toEqual(expected);
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('a simple hunspell dictionary depth 0', async () => {
@@ -249,6 +264,7 @@ describe('Validate the wordListCompiler', () => {
         });
         const output = await fsp.readFile(destName, 'utf8');
         expect(output).toBe(__testing__.wordListHeader + '\n' + 'hello\ntry\nwork\n');
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('a simple hunspell dictionary depth 1', async () => {
@@ -276,6 +292,7 @@ describe('Validate the wordListCompiler', () => {
             'worked',
             '',
         ]);
+        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test.each`
@@ -295,6 +312,7 @@ describe('Validate the wordListCompiler', () => {
     `('splitLine $testCase', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
         const r = __testing__.splitLine(line);
         expect(r).toEqual(expectedResult);
+        expect(consoleOutput()).toMatchSnapshot();
     });
 });
 
