@@ -2,7 +2,7 @@
 
 import * as program from 'commander';
 import * as path from 'path';
-import type { CompileOptions, CompileTrieOptions } from './CompileOptions';
+import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions';
 import * as compiler from './compiler';
 import { logWithTimestamp } from './compiler/logWithTimestamp';
 import { processCompileAction } from './compiler/processCompileAction';
@@ -51,7 +51,7 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
         )
             .option('--trie', 'Compile into a trie file.', false)
             .option('--no-sort', 'Do not sort the result')
-            .action((src: string[], options: CompileOptions) => {
+            .action((src: string[], options: CompileAppOptions) => {
                 const result = processCompileAction(src, options);
                 resolve(result);
             });
@@ -62,7 +62,7 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
                 .description(
                     'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`'
                 )
-        ).action((src: string[], options: CompileTrieOptions) => {
+        ).action((src: string[], options: CompileTrieAppOptions) => {
             const result = processCompileAction(src, { ...options, trie: true });
             resolve(result);
         });

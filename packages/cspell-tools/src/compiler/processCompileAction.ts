@@ -3,11 +3,11 @@ import * as path from 'path';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { ReaderOptions } from './Reader';
-import { CompileCommonOptions } from '../CompileOptions';
+import { CompileCommonAppOptions } from '../AppOptions';
 import { logWithTimestamp } from './logWithTimestamp';
 import { globP } from './globP';
 
-export async function processCompileAction(src: string[], options: CompileCommonOptions): Promise<void> {
+export async function processCompileAction(src: string[], options: CompileCommonAppOptions): Promise<void> {
     const useTrie = options.trie || options.trie3 || options.trie4 || false;
     const fileExt = useTrie ? '.trie' : '.txt';
     console.log(

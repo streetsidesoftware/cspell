@@ -1,4 +1,4 @@
-export interface CompileCommonOptions {
+export interface CompileCommonAppOptions {
     output?: string;
     compress: boolean;
     /**
@@ -17,11 +17,11 @@ export interface CompileCommonOptions {
     trieBase?: string;
     useLegacySplitter?: boolean;
 }
-export interface CompileOptions extends CompileCommonOptions {
+export interface CompileAppOptions extends CompileCommonAppOptions {
     sort: boolean;
     keepRawCase: boolean;
 }
-export interface CompileTrieOptions extends CompileCommonOptions {
+export interface CompileTrieAppOptions extends CompileCommonAppOptions {
     trie3: boolean;
     trie4: boolean;
 }
