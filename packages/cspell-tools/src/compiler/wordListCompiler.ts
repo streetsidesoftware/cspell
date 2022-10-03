@@ -6,6 +6,7 @@ import * as Trie from 'cspell-trie-lib';
 import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { extractInlineSettings, InlineSettings } from './inlineSettings';
+import { getLogger } from './logger';
 
 const regNonWordOrSpace = /[^\p{L}\p{M}' ]+/giu;
 const regNonWordOrDigit = /[^\p{L}\p{M}'\w-]+/giu;
@@ -17,19 +18,6 @@ const wordListHeader = `
 # cspell-tools: keep-case no-split
 `;
 const wordListHeaderLines = wordListHeader.split('\n').map((a) => a.trim());
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Logger = (message?: any, ...optionalParams: any[]) => void;
-
-let log: Logger = defaultLogger;
-
-export function setLogger(logger?: Logger): void {
-    log = logger ?? defaultLogger;
-}
-
-function defaultLogger(message?: unknown, ...optionalParams: unknown[]) {
-    console.log(message, ...optionalParams);
-}
 
 type Normalizer = (lines: Sequence<string>) => Sequence<string>;
 type LineProcessor = (line: string) => Iterable<string>;
@@ -218,6 +206,7 @@ export function createTrieTarget(
 ): (words: Sequence<string>) => Promise<void> {
     const target = createTarget(destFilename);
     return async (words: Sequence<string>) => {
+        const log = getLogger();
         log('Reading Words into Trie');
         const base = options.base ?? 32;
         const version = options.trie4 ? 4 : options.trie3 ? 3 : 1;

@@ -19,6 +19,7 @@ import { streamWordsFromFile } from './iterateWordsFromFile';
 import { isCircular, iteratorTrieWords, serializeTrie, importTrie } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { spyOnConsole } from '../test/console';
+import { setLogger } from './logger';
 
 const testSuiteName = path.basename(__filename);
 const UTF8: BufferEncoding = 'utf8';
@@ -30,6 +31,7 @@ const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 const wordListHeader = __testing__.wordListHeader;
 
 const { consoleOutput } = spyOnConsole();
+setLogger(console.log);
 
 describe('Validate the wordListCompiler', () => {
     beforeEach(() => {
