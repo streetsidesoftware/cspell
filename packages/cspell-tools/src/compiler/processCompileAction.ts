@@ -6,7 +6,7 @@ import { ReaderOptions } from './Reader';
 import { CompileCommonAppOptions } from '../AppOptions';
 import { logWithTimestamp } from './logWithTimestamp';
 import { globP } from './globP';
-import { getSystemFeatureFlags, parseFlags } from '../FeatureFlags';
+import { FeatureFlags, getSystemFeatureFlags, parseFlags } from '../FeatureFlags';
 import { compile } from './compile';
 import { createCompileRequest } from './createCompileRequest';
 import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
@@ -15,8 +15,13 @@ getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources
 getSystemFeatureFlags().register('enable-config', 'Enable enable using a run config.');
 // getSystemFeatureFlags().setFlag('enable-config');
 
-export async function processCompileAction(src: string[], options: CompileCommonAppOptions): Promise<void> {
-    const ff = parseFlags(options.experimental);
+export async function processCompileAction(
+    src: string[],
+    options: CompileCommonAppOptions,
+    featureFlags: FeatureFlags | undefined
+): Promise<void> {
+    const ff = featureFlags || getSystemFeatureFlags();
+    parseFlags(ff, options.experimental);
 
     return ff.getFlag('enable-config') ? useCompile(src, options) : _processCompileAction(src, options);
 }

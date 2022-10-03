@@ -72,6 +72,14 @@ export class FeatureFlags {
         const text = `Validate Flags:\n${entries.join('\n')}`;
         return text;
     }
+
+    fork(): FeatureFlags {
+        const fork = new FeatureFlags([...this.flags.values()]);
+        for (const [key, value] of this.flagValues) {
+            fork.flagValues.set(key, value);
+        }
+        return fork;
+    }
 }
 
 export class UnknownFeatureFlagError extends Error {

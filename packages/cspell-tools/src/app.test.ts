@@ -6,8 +6,14 @@ import * as app from './app';
 import { spyOnConsole } from './test/console';
 
 const projectRoot = path.join(__dirname, '..');
-const pathTemp = path.join(projectRoot, 'temp', 'cspell-tools', path.basename(__filename));
+const _pathTemp = path.join(projectRoot, 'temp/cspell-tools', path.basename(__filename));
 const relPathTemp = 'app-out';
+const pathSamples = path.join(projectRoot, '../Samples/dicts');
+
+function pathTemp() {
+    const test = expect.getState().currentTestName || '';
+    return path.join(_pathTemp, test.replace(/[^\w_.-]/, '_'));
+}
 
 function argv(...args: string[]): string[] {
     return [...process.argv.slice(0, 2), ...args];
@@ -21,13 +27,14 @@ const { consoleOutput } = spyOnConsole();
 
 describe('Validate the application', () => {
     beforeAll(() => {
-        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
-        shell.mkdir('-p', pathTemp);
-        shell.cp(path.join(pathSamples, 'cities.txt'), pathTemp);
+        shell.rm('rf', _pathTemp);
     });
 
     beforeEach(() => {
-        shell.cd(pathTemp);
+        const pTemp = pathTemp();
+        shell.mkdir('-p', pTemp);
+        shell.cp(path.join(pathSamples, 'cities.txt'), pTemp);
+        shell.cd(pTemp);
         jest.resetAllMocks();
     });
 
@@ -77,7 +84,7 @@ describe('Validate the application', () => {
             '--merge',
             path.join('temp', 'cities.compound'),
             '-o',
-            path.dirname(pathTemp),
+            pathTemp(),
             'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
@@ -92,7 +99,7 @@ describe('Validate the application', () => {
             '--experimental',
             'compound',
             '--merge',
-            path.join(pathTemp, 'cities.compound'),
+            path.join(pathTemp(), 'cities.compound'),
             'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();

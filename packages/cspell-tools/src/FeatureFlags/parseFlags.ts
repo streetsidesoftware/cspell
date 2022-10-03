@@ -1,10 +1,8 @@
-import { FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
+import { FeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
 
 const splitFlag = /[:=]/;
 
-export function parseFlags(flags: string[]): FeatureFlags {
-    const ff = getSystemFeatureFlags();
-
+export function parseFlags(ff: FeatureFlags, flags: string[]): FeatureFlags {
     for (const flag of flags) {
         const [name, value] = flag.split(splitFlag, 2);
 

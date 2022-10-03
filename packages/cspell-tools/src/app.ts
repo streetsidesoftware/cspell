@@ -6,6 +6,7 @@ import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions';
 import * as compiler from './compiler';
 import { logWithTimestamp } from './compiler/logWithTimestamp';
 import { processCompileAction } from './compiler/processCompileAction';
+import { FeatureFlags } from './FeatureFlags';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
@@ -40,7 +41,7 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36');
 }
 
-export function run(program: program.Command, argv: string[]): Promise<void> {
+export function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
     program.exitOverride();
 
     return new Promise((resolve, reject) => {
@@ -52,7 +53,7 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
             .option('--trie', 'Compile into a trie file.', false)
             .option('--no-sort', 'Do not sort the result')
             .action((src: string[], options: CompileAppOptions) => {
-                const result = processCompileAction(src, options);
+                const result = processCompileAction(src, options, flags);
                 resolve(result);
             });
 
@@ -63,7 +64,7 @@ export function run(program: program.Command, argv: string[]): Promise<void> {
                     'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`'
                 )
         ).action((src: string[], options: CompileTrieAppOptions) => {
-            const result = processCompileAction(src, { ...options, trie: true });
+            const result = processCompileAction(src, { ...options, trie: true }, flags);
             resolve(result);
         });
 
