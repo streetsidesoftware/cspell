@@ -22,14 +22,15 @@ export function createCompileRequest(sources: string[], options: CompileCommonAp
     return req;
 }
 function calcTargets(sources: string[], options: CompileCommonAppOptions): Target[] {
-    const { merge } = options;
+    const { merge, output = '.' } = options;
 
     const format = calcFormat(options);
     const useTrie = format.startsWith('trie');
     const fileExt = useTrie ? '.trie' : '.txt';
 
     if (merge) {
-        const filename = toFilename(merge, fileExt);
+        const targetFilename = toFilename(merge, fileExt);
+        const filename = path.join(output, targetFilename);
         const target: Target = {
             filename,
             compress: options.compress,
@@ -42,7 +43,8 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
     }
 
     const targets: Target[] = sources.map((source) => {
-        const filename = toFilename(source, fileExt);
+        const targetFilename = toFilename(source, fileExt);
+        const filename = path.join(output, targetFilename);
         const target: Target = {
             filename,
             compress: options.compress,

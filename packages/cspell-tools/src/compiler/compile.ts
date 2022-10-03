@@ -104,7 +104,7 @@ interface FileToProcess {
 type ActionFn = (words: Iterable<string>, dst: string) => Promise<void>;
 
 function resolveTarget(filename: string, useTrie: boolean, useGzCompress: boolean | boolean): string {
-    const ext = ((useTrie && '.trie') || '.txt') + ((useGzCompress && '.txt') || '');
+    const ext = ((useTrie && '.trie') || '.txt') + ((useGzCompress && '.gz') || '');
     filename = filename.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
     return path.resolve(filename);
 }

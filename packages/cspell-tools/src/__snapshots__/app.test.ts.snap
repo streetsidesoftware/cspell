@@ -14,6 +14,29 @@ exports[`Validate the application app -V 1`] = `
 }
 `;
 
+exports[`Validate the application app compile compound 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+London
+Los Angeles
+Mexico City
+New Amsterdam
+New Delhi
+New York
+Paris
+San Francisco
+~london
+~los angeles
+~mexico city
+~new amsterdam
+~new delhi
+~new york
+~paris
+~san francisco
+"
+`;
+
 exports[`Validate the application app compile merge 1`] = `
 "
 # cspell-tools: keep-case no-split
@@ -133,6 +156,63 @@ worked
 ~new york
 ~paris
 ~san francisco
+"
+`;
+
+exports[`Validate the application app compile with compression 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+London
+Los Angeles
+Mexico City
+New Amsterdam
+New Delhi
+New York
+Paris
+San Francisco
+~london
+~los angeles
+~mexico city
+~new amsterdam
+~new delhi
+~new york
+~paris
+~san francisco
+"
+`;
+
+exports[`Validate the application app compile-trie compound 1`] = `
+"#!/usr/bin/env cspell-trie reader
+TrieXv3
+base=10
+# Built by cspell-tools.
+# Data:
+__DATA__
+L
+o
+ndon$4s Angeles$9<2
+M
+e
+xico City$9<2
+N
+e
+w Amsterdam$9Delhi$5York$8
+P
+a
+ri#13;<4
+S
+a
+n Francisco$9<4
+\\~
+l
+on#3;<s a#8;<5
+m
+exico c#21;<8
+n
+ew a#28;<d#36;<y#40;<5
+p#43;<s
+an f#50;<6
 "
 `;
 

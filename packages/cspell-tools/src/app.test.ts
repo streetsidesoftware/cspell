@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as shell from 'shelljs';
 import * as app from './app';
+import { readTextFile } from './compiler/readTextFile';
 import { getSystemFeatureFlags } from './FeatureFlags';
 import { spyOnConsole } from './test/console';
 
@@ -26,11 +27,12 @@ function getCommander() {
 
 const { consoleOutput } = spyOnConsole();
 
+getSystemFeatureFlags().setFlag('enable-config', true);
 getSystemFeatureFlags().setFlag('enable-config', false);
 
 describe('Validate the application', () => {
     beforeAll(() => {
-        shell.rm('rf', _pathTemp);
+        shell.rm('-rf', _pathTemp);
     });
 
     beforeEach(() => {
@@ -77,15 +79,18 @@ describe('Validate the application', () => {
             'compile-trie',
             '-n',
             '--trie3',
+            '--trie-base=10',
             '--experimental',
             'compound',
             '--merge',
-            path.join('temp', 'cities.compound'),
+            'out/cities.compound',
             '-o',
             pathTemp(),
             'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.trie'));
+        expect(words).toMatchSnapshot();
     });
 
     test('app compile compound', async () => {
@@ -96,16 +101,20 @@ describe('Validate the application', () => {
             '--experimental',
             'compound',
             '--merge',
-            path.join(pathTemp(), 'cities.compound'),
+            'out/cities.compound',
             'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.txt'));
+        expect(words).toMatchSnapshot();
     });
 
     test('app compile with compression', async () => {
         const commander = getCommander();
         const args = argv('compile', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const words = await readTextFile(path.join(relPathTemp, 'cities.txt.gz'));
+        expect(words).toMatchSnapshot();
     });
 
     test('app compile merge legacy', async () => {

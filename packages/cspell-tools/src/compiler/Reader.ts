@@ -1,16 +1,15 @@
-import { Sequence, genSequence, operators } from 'gensequence';
-import * as HR from 'hunspell-reader';
-import * as fs from 'fs-extra';
 import {
-    Trie,
-    importTrie,
-    COMPOUND_FIX,
-    OPTIONAL_COMPOUND_FIX,
-    FORBID_PREFIX,
     CASE_INSENSITIVE_PREFIX,
+    COMPOUND_FIX,
+    FORBID_PREFIX,
+    importTrie,
+    OPTIONAL_COMPOUND_FIX,
+    Trie,
 } from 'cspell-trie-lib';
-import * as zlib from 'zlib';
+import { genSequence, operators, Sequence } from 'gensequence';
+import * as HR from 'hunspell-reader';
 import { AffWord } from 'hunspell-reader';
+import { readTextFile, readTextFileLines } from './readTextFile';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
@@ -108,17 +107,8 @@ async function trieFileReader(filename: string): Promise<BaseReader> {
     };
 }
 
-function readTextFile(filename: string): Promise<string[]> {
-    const lines = fs
-        .readFile(filename)
-        .then((buffer) => (/\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer))
-        .then((buffer) => buffer.toString('utf8'))
-        .then((content) => content.split(/\r?\n/g));
-    return lines;
-}
-
 async function textFileReader(filename: string, _options: ReaderOptions): Promise<BaseReader> {
-    const lines = await readTextFile(filename);
+    const lines = await readTextFileLines(filename);
     return createArrayReader(lines);
 }
 
