@@ -80,7 +80,7 @@ function createNormalizer(options: CompileOptions): Normalizer {
 
     const fnNormalizeLines = (lines: Iterable<string>) =>
         pipe(
-            normalizeWordListSeq(lines, initialState),
+            normalizeWordListGen(lines, initialState),
             opFilter((a) => !!a),
             createInlineBufferedSort(),
             opFilter(uniqueFilter(10000))
@@ -134,10 +134,6 @@ interface CompilerState {
     inlineSettings: InlineSettings;
     lineProcessor: LineProcessor;
     wordMapper: WordMapper;
-}
-
-function normalizeWordListSeq(lines: Iterable<string>, initialState: CompilerState): Iterable<string> {
-    return genSequence(normalizeWordListGen(lines, initialState));
 }
 
 function* normalizeWordListGen(lines: Iterable<string>, initialState: CompilerState): Iterable<string> {
