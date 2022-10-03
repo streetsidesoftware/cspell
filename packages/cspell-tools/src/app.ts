@@ -2,7 +2,7 @@
 
 import * as program from 'commander';
 import * as path from 'path';
-import type { CompileOptions, CompileTrieOptions } from './compiler/CompileOptions';
+import type { CompileOptions, CompileTrieOptions } from './CompileOptions';
 import * as compiler from './compiler';
 import { logWithTimestamp } from './compiler/logWithTimestamp';
 import { processCompileAction } from './compiler/processCompileAction';

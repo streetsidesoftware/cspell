@@ -3,7 +3,7 @@ import * as path from 'path';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { ReaderOptions } from './Reader';
-import { CompileCommonOptions } from './CompileOptions';
+import { CompileCommonOptions } from '../CompileOptions';
 import { logWithTimestamp } from './logWithTimestamp';
 import { globP } from './globP';
 
