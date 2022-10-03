@@ -6,8 +6,41 @@ import { ReaderOptions } from './Reader';
 import { CompileCommonAppOptions } from '../AppOptions';
 import { logWithTimestamp } from './logWithTimestamp';
 import { globP } from './globP';
+import { getSystemFeatureFlags, parseFlags } from '../FeatureFlags';
+import { compile } from './compile';
+import { createCompileRequest } from './createCompileRequest';
+import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
+
+getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
+getSystemFeatureFlags().register('enable-config', 'Enable enable using a run config.');
+// getSystemFeatureFlags().setFlag('enable-config');
 
 export async function processCompileAction(src: string[], options: CompileCommonAppOptions): Promise<void> {
+    const ff = parseFlags(options.experimental);
+
+    return ff.getFlag('enable-config') ? useCompile(src, options) : _processCompileAction(src, options);
+}
+
+async function useCompile(src: string[], options: CompileCommonAppOptions): Promise<void> {
+    console.log(
+        'Compile:\n output: %s\n compress: %s\n files:\n  %s \n\n',
+        options.output || 'default',
+        options.compress ? 'true' : 'false',
+        src.join('\n  ')
+    );
+
+    const globResults = await Promise.all(src.map((s) => globP(s)));
+    const sources = [
+        ...pipe(
+            globResults,
+            opConcatMap((a) => a)
+        ),
+    ];
+
+    return compile(createCompileRequest(sources, options));
+}
+
+async function _processCompileAction(src: string[], options: CompileCommonAppOptions): Promise<void> {
     const useTrie = options.trie || options.trie3 || options.trie4 || false;
     const fileExt = useTrie ? '.trie' : '.txt';
     console.log(
@@ -66,14 +99,17 @@ export async function processCompileAction(src: string[], options: CompileCommon
     await r;
     logWithTimestamp(`Complete.`);
 }
+
 function toFilename(name: string, ext: string) {
     return path.basename(name).replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
 }
+
 function toTargetFile(filename: string, destination: string | undefined, ext: string) {
     const outFileName = toFilename(filename, ext);
     const dir = destination ?? path.dirname(filename);
     return path.join(dir, outFileName);
 }
+
 function toMergeTargetFile(filename: string, destination: string | undefined, ext: string) {
     const outFileName = path.join(path.dirname(filename), toFilename(filename, ext));
     return path.resolve(destination ?? '.', outFileName);
