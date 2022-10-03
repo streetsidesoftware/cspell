@@ -1,7 +1,11 @@
 export interface CompileCommonOptions {
     output?: string;
     compress: boolean;
+    /**
+     * @deprecated Use maxDepth
+     */
     max_depth?: string;
+    maxDepth?: string;
     merge?: string;
     experimental: string[];
     split?: boolean;

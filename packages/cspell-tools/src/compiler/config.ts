@@ -16,24 +16,24 @@ export interface CompileTargetOptions {
     /**
      * Experimental flags
      */
-    experimental?: string[];
+    experimental?: string[] | undefined;
 
     // Optional Source Config Defaults
     /**
      * Maximum number of nested Hunspell Rules to apply.
      * This is needed for recursive dictionaries like Hebrew.
      */
-    maxDepth?: number;
+    maxDepth?: number | undefined;
     /**
      * Split lines into words.
      * @default false
      */
-    split?: boolean | 'legacy';
+    split?: boolean | 'legacy' | undefined;
     /**
      * Do not generate lower case / accent free versions of words.
      * @default false
      */
-    keepRawCase?: boolean;
+    keepRawCase?: boolean | undefined;
 }
 
 export interface Target {
@@ -59,12 +59,12 @@ export interface Target {
      * Does not apply to `trie` based formats.
      * @default: true
      */
-    sort?: boolean;
+    sort?: boolean | undefined;
     /**
      * Words from the sources that are found in `excludeWordsFrom` files
      * will not be added to the dictionary.
      */
-    excludeWordsFrom?: FilePath[];
+    excludeWordsFrom?: FilePath[] | undefined;
 
     /**
      * Advanced: Set the trie base number. A value between 10 and 36
@@ -73,7 +73,7 @@ export interface Target {
      * 16 is common hex format.
      * 36 is the most compact.
      */
-    trieBase?: number;
+    trieBase?: number | undefined;
 }
 
 export type DictionaryFormats = 'plaintext' | 'trie' | 'trie3' | 'trie4';
@@ -98,15 +98,15 @@ export interface SourceConfig {
      * Maximum number of nested Hunspell Rules to apply.
      * This is needed for recursive dictionaries like Hebrew.
      */
-    maxDepth?: number;
+    maxDepth?: number | undefined;
     /**
      * Split lines into words.
      * @default false
      */
-    split?: boolean | 'legacy';
+    split?: boolean | 'legacy' | undefined;
     /**
      * Do not generate lower case / accent free versions of words.
      * @default false
      */
-    keepRawCase?: boolean;
+    keepRawCase?: boolean | undefined;
 }
