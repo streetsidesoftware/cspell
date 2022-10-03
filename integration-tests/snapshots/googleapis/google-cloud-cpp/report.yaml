@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: ["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Summary:
-  files: 7785
-  filesWithIssues: 5977
-  issues: 56801
+  files: 7786
+  filesWithIssues: 5979
+  issues: 56805
   errors: 0
 Errors: []
 
@@ -516,6 +516,7 @@ issues:
   - "google/cloud/iam/integration_tests/iam_credentials_integration_test.cc:121:26   	somebytes   	U   	std::string payload = \"somebytes\";"
   - "google/cloud/idempotency.h:28:48    	idempotence 	U   	idempotent][wikipedia-idempotence]."
   - "google/cloud/ids/doc/main.dox:9:12      	Palo	U   	built with Palo Alto Networks technologies"
+  - "google/cloud/internal/async_connection_ready_test.cc:75:39      	SUBCHANNEL  	U   	SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);"
   - "google/cloud/internal/base64_transforms_test.cc:36:9    	abcdefghi               	U   	{\"abcdefghi\", \"YWJjZGVmZ2hp\"},"
   - "google/cloud/internal/base64_transforms_test.cc:37:9    	abcdefghij              	U   	{\"abcdefghij\", \"YWJjZGVmZ2hpag=="
   - "google/cloud/internal/base64_transforms_test.cc:37:33   	hpag                    	U   	abcdefghij\", \"YWJjZGVmZ2hpag==\"},"
@@ -682,8 +683,8 @@ issues:
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31  	chunksecond 	U   	not_chunked\", \"first_chunksecond_chunkthird_chunk\","
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43  	chunkthird  	U   	\"first_chunksecond_chunkthird_chunk\","
   - "google/cloud/spanner/internal/partial_result_set_source.cc:208:64   	resumability	U   	again so as to maintain resumability."
-  - "google/cloud/spanner/internal/session_pool_test.cc:426:29   	Stubless	U   	SessionPool, GetStubForStublessSession) {"
-  - "google/cloud/spanner/internal/session_pool.cc:327:60    	robining	U   	stub to use by round-robining between"
+  - "google/cloud/spanner/internal/session_pool_test.cc:427:29   	Stubless	U   	SessionPool, GetStubForStublessSession) {"
+  - "google/cloud/spanner/internal/session_pool.cc:350:60    	robining	U   	stub to use by round-robining between"
   - "google/cloud/spanner/keys.cc:58:46      	differencer 	U   	:MessageDifferencer differencer;"
   - "google/cloud/spanner/mutations_test.cc:352:37   	ZXMA	U   	string_value: \"Ynl0ZXMA\" }"
   - "google/cloud/spanner/samples/postgresql_samples.cc:197:56   	Trentor     	U   	cloud::spanner::Value(\"Trentor\")}}),"
@@ -716,7 +717,7 @@ issues:
   - "google/cloud/storage/bucket_metadata_test.cc:1149:37    	Coldline        	U   	LifecycleRule::SetStorageClassColdline());"
   - "google/cloud/storage/bucket_metadata_test.cc:1163:65    	COLDLINE        	U   	orageClass\", \"storageClass\": \"COLDLINE\"},"
   - "google/cloud/storage/bucket_metadata.cc:279:14  	subpatch	U   	if (labels_subpatch_dirty_) {"
-  - "google/cloud/storage/bucket_metadata.h:525:69   	Multiregion 	U   	regions within the same Multiregion."
+  - "google/cloud/storage/bucket_metadata.h:522:69   	Multiregion 	U   	regions within the same Multiregion."
   - "google/cloud/storage/client_options_test.cc:46:38   	TESTBENCH   	U   	endpoint_(\"CLOUD_STORAGE_TESTBENCH_ENDPOINT\", {}),"
   - "google/cloud/storage/client_options_test.cc:439:27  	Projec      	U   	F(ClientOptionsTest, ProjecIdtWithEnv) {"
   - "google/cloud/storage/client_options.cc:118:26   	iamapi  	U   	(emulator) return \"/iamapi\";"
@@ -785,9 +786,9 @@ issues:
   - "google/cloud/storage/internal/bucket_acl_requests_test.cc:115:53    	testuser	U   	request(\"my-bucket\", \"user-testuser\", \"READER\");"
   - "google/cloud/storage/internal/curl_download_request_test.cc:99:9    	guploader   	U   	{\"guploader\","
   - "google/cloud/storage/internal/curl_download_request_test.cc:100:56  	gunzipped   	U   	body-transformations\", \"gunzipped\"}},"
-  - "google/cloud/storage/internal/grpc_bucket_request_parser.cc:79:6    	subobject   	U   	// subobject."
+  - "google/cloud/storage/internal/grpc_bucket_request_parser.cc:78:6    	subobject   	U   	// subobject."
   - "google/cloud/storage/internal/grpc_client.cc:200:14     	testbench   	U   	auto const testbench ="
-  - "google/cloud/storage/internal/grpc_object_request_parser_test.cc:62:33      	Cuakt   	U   	md5) : StEvo2V/qoDCuaktZSw3IQ=="
+  - "google/cloud/storage/internal/grpc_object_request_parser_test.cc:61:33      	Cuakt   	U   	md5) : StEvo2V/qoDCuaktZSw3IQ=="
   - "google/cloud/storage/internal/object_requests_test.cc:239:61    	NEFCQ   	U   	encryption-key: MTIzNEFCQ0Q=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:259:61    	QUJDRD  	U   	source-encryption-key: QUJDRDEyMzQ=\"));"
   - "google/cloud/storage/internal/object_requests_test.cc:533:27    	sdlkj   	U   	\"&upload_id=xa298sd_sdlkj2\";"
@@ -800,7 +801,6 @@ issues:
   - "google/cloud/storage/internal/signed_url_requests_test.cc:375:195   	Bcontent	U   	SignedHeaders=cache-control%3Bcontent-type&generation=7&userProject"
   - "google/cloud/storage/internal/signed_url_requests_test.cc:426:43    	Ffoo    	U   	object/path/to/object_%3Ffoo%3D%26bar?acl"
   - "google/cloud/storage/internal/storage_stub_factory.cc:37:18     	subchannel  	U   	// Use a local subchannel pool to avoid contention"
-  - "google/cloud/storage/internal/storage_stub_factory.cc:38:34     	SUBCHANNEL  	U   	SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);"
   - "google/cloud/storage/internal/tuple_filter_test.cc:63:25    	rvalues 	U   	Test that forwarding rvalues works."
   - "google/cloud/storage/oauth2/service_account_credentials_test.cc:79:11   	Aietf   	U   	\"urn%3Aietf%3Aparams%3Aoauth%3Agrant"
   - "google/cloud/storage/oauth2/service_account_credentials_test.cc:79:18   	Aparams 	U   	\"urn%3Aietf%3Aparams%3Aoauth%3Agrant-type"

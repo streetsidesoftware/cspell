@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 7785, Issues found: 56801 in 5977 files
+ CSpell: Files checked: 7786, Issues found: 56805 in 5979 files
  exit code: 1
 ./ARCHITECTURE.md:100:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::Table`](/google/cloud
 ./ARCHITECTURE.md:100:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::Table
@@ -515,6 +515,7 @@ Lines:
 ./google/cloud/idempotency.h:28:48     - Unknown word (idempotence) -- idempotent][wikipedia-idempotence].
 ./google/cloud/ids/doc/main.dox:9:12      - Unknown word (Palo)       -- built with Palo Alto Networks technologies
 ./google/cloud/internal/README.md:1:30      - Unknown word (gogle)      -- Implementation Details for gogle/cloud/\*.{h,cc}
+./google/cloud/internal/async_connection_ready_test.cc:75:39     - Unknown word (SUBCHANNEL) -- SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);
 ./google/cloud/internal/base64_transforms_test.cc:36:9      - Unknown word (abcdefghi)  -- {"abcdefghi", "YWJjZGVmZ2hp"},
 ./google/cloud/internal/base64_transforms_test.cc:37:33     - Unknown word (hpag)       -- abcdefghij", "YWJjZGVmZ2hpag=="},
 ./google/cloud/internal/base64_transforms_test.cc:37:9      - Unknown word (abcdefghij) -- {"abcdefghij", "YWJjZGVmZ2hpag==
@@ -680,8 +681,8 @@ Lines:
 ./google/cloud/spanner/internal/partial_result_set_source.cc:208:64    - Unknown word (resumability) -- again so as to maintain resumability.
 ./google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31    - Unknown word (chunksecond) -- not_chunked", "first_chunksecond_chunkthird_chunk",
 ./google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43    - Unknown word (chunkthird)  -- "first_chunksecond_chunkthird_chunk",
-./google/cloud/spanner/internal/session_pool.cc:327:60    - Unknown word (robining)   -- stub to use by round-robining between
-./google/cloud/spanner/internal/session_pool_test.cc:426:29    - Unknown word (Stubless)   -- SessionPool, GetStubForStublessSession) {
+./google/cloud/spanner/internal/session_pool.cc:350:60    - Unknown word (robining)   -- stub to use by round-robining between
+./google/cloud/spanner/internal/session_pool_test.cc:427:29    - Unknown word (Stubless)   -- SessionPool, GetStubForStublessSession) {
 ./google/cloud/spanner/keys.cc:58:46     - Unknown word (differencer) -- :MessageDifferencer differencer;
 ./google/cloud/spanner/mutations_test.cc:352:37    - Unknown word (ZXMA)       -- string_value: "Ynl0ZXMA" }
 ./google/cloud/spanner/samples/README.md:21:16     - Unknown word (bazelbuild) -- to workaround [bazelbuild/bazel#10621](https:
@@ -709,7 +710,7 @@ Lines:
 ./google/cloud/storage/benchmarks/storage_throughput_vs_cpu_plots.py:37:12     - Unknown word (Nanos)      -- df["CpuNanosPerByte"] = (df.CpuTimeUs
 ./google/cloud/storage/benchmarks/throughput_options_test.cc:213:25    - Unknown word (Readoffset) -- TEST(ThroughputOptions, Readoffset) {
 ./google/cloud/storage/bucket_metadata.cc:279:14    - Unknown word (subpatch)   -- if (labels_subpatch_dirty_) {
-./google/cloud/storage/bucket_metadata.h:525:69    - Unknown word (Multiregion) -- regions within the same Multiregion.
+./google/cloud/storage/bucket_metadata.h:522:69    - Unknown word (Multiregion) -- regions within the same Multiregion.
 ./google/cloud/storage/bucket_metadata_test.cc:1149:37   - Unknown word (Coldline)       -- LifecycleRule::SetStorageClassColdline());
 ./google/cloud/storage/bucket_metadata_test.cc:1163:65   - Unknown word (COLDLINE)       -- orageClass", "storageClass": "COLDLINE"},
 ./google/cloud/storage/bucket_metadata_test.cc:124:30    - Unknown word (NEARLINE)   -- "storageClass": "NEARLINE"
@@ -783,9 +784,9 @@ Lines:
 ./google/cloud/storage/internal/bucket_acl_requests_test.cc:115:53    - Unknown word (testuser)   -- request("my-bucket", "user-testuser", "READER");
 ./google/cloud/storage/internal/curl_download_request_test.cc:100:56    - Unknown word (gunzipped)  -- body-transformations", "gunzipped"}},
 ./google/cloud/storage/internal/curl_download_request_test.cc:99:9      - Unknown word (guploader)  -- {"guploader",
-./google/cloud/storage/internal/grpc_bucket_request_parser.cc:79:6      - Unknown word (subobject)  -- // subobject.
+./google/cloud/storage/internal/grpc_bucket_request_parser.cc:78:6      - Unknown word (subobject)  -- // subobject.
 ./google/cloud/storage/internal/grpc_client.cc:200:14    - Unknown word (testbench)  -- auto const testbench =
-./google/cloud/storage/internal/grpc_object_request_parser_test.cc:62:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
+./google/cloud/storage/internal/grpc_object_request_parser_test.cc:61:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 ./google/cloud/storage/internal/object_requests_test.cc:239:61    - Unknown word (NEFCQ)      -- encryption-key: MTIzNEFCQ0Q="));
 ./google/cloud/storage/internal/object_requests_test.cc:259:61    - Unknown word (QUJDRD)     -- source-encryption-key: QUJDRDEyMzQ="));
 ./google/cloud/storage/internal/object_requests_test.cc:533:27    - Unknown word (sdlkj)      -- "&upload_id=xa298sd_sdlkj2";
@@ -798,7 +799,6 @@ Lines:
 ./google/cloud/storage/internal/signed_url_requests_test.cc:375:195   - Unknown word (Bcontent)   -- SignedHeaders=cache-control%3Bcontent-type&generation=7&userProject
 ./google/cloud/storage/internal/signed_url_requests_test.cc:426:43    - Unknown word (Ffoo)       -- object/path/to/object_%3Ffoo%3D%26bar?acl
 ./google/cloud/storage/internal/storage_stub_factory.cc:37:18     - Unknown word (subchannel) -- // Use a local subchannel pool to avoid contention
-./google/cloud/storage/internal/storage_stub_factory.cc:38:34     - Unknown word (SUBCHANNEL) -- SetInt(GRPC_ARG_USE_LOCAL_SUBCHANNEL_POOL, 1);
 ./google/cloud/storage/internal/tuple_filter_test.cc:63:25     - Unknown word (rvalues)    -- Test that forwarding rvalues works.
 ./google/cloud/storage/oauth2/service_account_credentials.h:65:62     - Unknown word (keyfiles)   -- applications use JSON keyfiles instead.
 ./google/cloud/storage/oauth2/service_account_credentials_test.cc:79:11     - Unknown word (Aietf)      -- "urn%3Aietf%3Aparams%3Aoauth%3Agrant
