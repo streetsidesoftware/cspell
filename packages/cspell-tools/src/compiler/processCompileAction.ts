@@ -1,4 +1,4 @@
-import { compileWordList, compileTrie } from '.';
+import { compileWordList, compileTrie } from './wordListCompiler';
 import * as path from 'path';
 import { genSequence, Sequence } from 'gensequence';
 import { streamWordsFromFile } from './iterateWordsFromFile';

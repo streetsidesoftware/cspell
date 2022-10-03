@@ -1,25 +1,24 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
+import { opFilter, pipe, toArray } from '@cspell/cspell-pipe/sync';
+import { readFile } from 'cspell-io';
+import * as Trie from 'cspell-trie-lib';
+import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell-trie-lib';
+import * as fsp from 'fs-extra';
+import { uniqueFilter } from 'hunspell-reader/dist/util';
+import * as path from 'path';
+import { spyOnConsole } from '../test/console';
+import { streamWordsFromFile } from './iterateWordsFromFile';
+import { setLogger } from './logger';
 import {
-    legacyLineToWords,
-    compileWordList,
+    CompileOptions,
     compileTrie,
+    compileWordList,
     consolidate,
+    legacyLineToWords,
     legacyNormalizeWords,
     __testing__,
-    CompileOptions,
 } from './wordListCompiler';
-
-import * as fsp from 'fs-extra';
-import * as Trie from 'cspell-trie-lib';
-import * as path from 'path';
-import { genSequence, Sequence } from 'gensequence';
-import { readFile } from 'cspell-io';
-import { streamWordsFromFile } from './iterateWordsFromFile';
-import { isCircular, iteratorTrieWords, serializeTrie, importTrie } from 'cspell-trie-lib';
-import { uniqueFilter } from 'hunspell-reader/dist/util';
-import { spyOnConsole } from '../test/console';
-import { setLogger } from './logger';
 
 const testSuiteName = path.basename(__filename);
 const UTF8: BufferEncoding = 'utf8';
@@ -57,7 +56,7 @@ describe('Validate the wordListCompiler', () => {
         ${'kDNSServiceErr_BadSig'}                                     | ${['k', 'dns', 'service', 'err', 'bad', 'sig']}
         ${'apd_get_active_symbols'}                                    | ${['apd', 'get', 'active', 'symbols']}
     `('legacy splitting lines $line', ({ line, expectedResult }: { line: string; expectedResult: string[] }) => {
-        expect(legacyLineToWords(line).filter(distinct()).toArray()).toEqual(expectedResult);
+        expect([...pipe(legacyLineToWords(line), opFilter(distinct()))]).toEqual(expectedResult);
         expect(consoleOutput()).toMatchSnapshot();
     });
 
@@ -89,7 +88,7 @@ describe('Validate the wordListCompiler', () => {
                 sort: false,
                 legacy: true,
             });
-            const r = normalizer(genSequence(lines.split('\n'))).toArray();
+            const r = toArray(normalizer(lines.split('\n')));
             expect(r).toEqual(expectedResult.sort());
             expect(consoleOutput()).toMatchSnapshot();
         }
@@ -151,7 +150,7 @@ describe('Validate the wordListCompiler', () => {
             sort,
             legacy: false,
         });
-        const r = normalizer(genSequence(text.split('\n'))).toArray();
+        const r = toArray(normalizer(text.split('\n')));
         expect(r).toEqual(expectedResult.sort());
         expect(consoleOutput()).toMatchSnapshot();
     });
@@ -199,12 +198,8 @@ describe('Validate the wordListCompiler', () => {
 
     test('tests normalized to a trie', () => {
         const words = citiesResult.split('\n');
-        const nWords = legacyNormalizeWords(genSequence(words)).toArray();
-        const tWords = [
-            ...genSequence([normalizeWordsToTrie(genSequence(words))]).concatMap((node) =>
-                Trie.iteratorTrieWords(node)
-            ),
-        ];
+        const nWords = toArray(legacyNormalizeWords(words));
+        const tWords = [...Trie.iteratorTrieWords(normalizeWordsToTrie(words))];
         expect(tWords.sort()).toEqual([...new Set(nWords.sort())]);
         expect(consoleOutput()).toMatchSnapshot();
     });
@@ -322,9 +317,9 @@ describe('Validate Larger Dictionary', () => {
     test('en_US hunspell', async () => {
         const source = await streamWordsFromFile(sampleDictEnUS, {});
         const words = source.take(5000).toArray();
-        const trie = normalizeWordsToTrie(genSequence(words));
+        const trie = normalizeWordsToTrie(words);
         expect(isCircular(trie)).toBe(false);
-        const nWords = legacyNormalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
+        const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort().filter(uniqueFilter(1000));
         expect(results).toEqual(nWords);
     }, 60000);
@@ -332,9 +327,9 @@ describe('Validate Larger Dictionary', () => {
     test('en_US word list', async () => {
         const source = await streamWordsFromFile(sampleDictEn, {});
         const words = source.toArray();
-        const trie = consolidate(normalizeWordsToTrie(genSequence(words)));
+        const trie = consolidate(normalizeWordsToTrie(words));
         expect(isCircular(trie)).toBe(false);
-        const nWords = legacyNormalizeWords(genSequence(words)).toArray().sort().filter(uniqueFilter(1000));
+        const nWords = toArray(legacyNormalizeWords(words)).sort().filter(uniqueFilter(1000));
         const results = iteratorTrieWords(trie).toArray().sort();
         expect(results).toEqual(nWords);
         const data = serializeTrie(trie, { base: 40 });
@@ -344,7 +339,7 @@ describe('Validate Larger Dictionary', () => {
     }, 60000);
 });
 
-function normalizeWordsToTrie(words: Sequence<string>): Trie.TrieRoot {
+function normalizeWordsToTrie(words: Iterable<string>): Trie.TrieRoot {
     return Trie.buildTrie(legacyNormalizeWords(words)).root;
 }
 

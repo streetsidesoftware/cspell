@@ -1,4 +1,4 @@
-import { genSequence, Sequence } from 'gensequence';
+import { genSequence } from 'gensequence';
 import * as Text from './text';
 import * as path from 'path';
 import { mkdirp } from 'fs-extra';
@@ -7,6 +7,7 @@ import { writeSeqToFile } from './fileWriter';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import { extractInlineSettings, InlineSettings } from './inlineSettings';
 import { getLogger } from './logger';
+import { pipe, opConcatMap, opMap, opFilter } from '@cspell/cspell-pipe/sync';
 
 const regNonWordOrSpace = /[^\p{L}\p{M}' ]+/giu;
 const regNonWordOrDigit = /[^\p{L}\p{M}'\w-]+/giu;
@@ -19,15 +20,18 @@ const wordListHeader = `
 `;
 const wordListHeaderLines = wordListHeader.split('\n').map((a) => a.trim());
 
-type Normalizer = (lines: Sequence<string>) => Sequence<string>;
+type Normalizer = (lines: Iterable<string>) => Iterable<string>;
 type LineProcessor = (line: string) => Iterable<string>;
 type WordMapper = (word: string) => Iterable<string>;
 
-export function legacyNormalizeWords(lines: Sequence<string>): Sequence<string> {
-    return lines.concatMap((line) => legacyLineToWords(line));
+export function legacyNormalizeWords(lines: Iterable<string>): Iterable<string> {
+    return pipe(
+        lines,
+        opConcatMap((line) => legacyLineToWords(line))
+    );
 }
 
-export function legacyLineToWords(line: string): Sequence<string> {
+export function legacyLineToWords(line: string): Iterable<string> {
     // Remove punctuation and non-letters.
     const filteredLine = line.replace(regNonWordOrSpace, '|');
     const wordGroups = filteredLine.split('|');
@@ -43,7 +47,7 @@ export function legacyLineToWords(line: string): Sequence<string> {
     return words;
 }
 
-function splitCamelCase(word: string): Sequence<string> | string[] {
+function splitCamelCase(word: string): Iterable<string> {
     const splitWords = Text.splitCamelCaseWord(word);
     // We only want to preserve this: "New York" and not "Namespace DNSLookup"
     if (splitWords.length > 1 && regExpSpaceOrDash.test(word)) {
@@ -63,7 +67,7 @@ export interface CompileOptions {
 function createNormalizer(options: CompileOptions): Normalizer {
     const { skipNormalization = false, splitWords, keepRawCase, legacy } = options;
     if (skipNormalization) {
-        return (lines: Sequence<string>) => lines;
+        return (lines: Iterable<string>) => lines;
     }
     const lineProcessor = legacy ? legacyLineToWords : splitWords ? splitLine : noSplit;
     const wordMapper = keepRawCase ? mapWordIdentity : mapWordToDictionaryEntries;
@@ -75,16 +79,18 @@ function createNormalizer(options: CompileOptions): Normalizer {
     };
 
     const fnNormalizeLines = (lines: Iterable<string>) =>
-        normalizeWordListSeq(lines, initialState)
-            .filter((a) => !!a)
-            .pipe(createInlineBufferedSort())
-            .filter(uniqueFilter(10000));
+        pipe(
+            normalizeWordListSeq(lines, initialState),
+            opFilter((a) => !!a),
+            createInlineBufferedSort(),
+            opFilter(uniqueFilter(10000))
+        );
 
     return fnNormalizeLines;
 }
 
 export async function compileWordList(
-    lines: Sequence<string>,
+    lines: Iterable<string>,
     destFilename: string,
     options: CompileOptions
 ): Promise<void> {
@@ -97,15 +103,21 @@ export async function compileWordList(
     return createWordListTarget(destFilename)(finalSeq);
 }
 
-export function createWordListTarget(destFilename: string): (seq: Sequence<string>) => Promise<void> {
+export function createWordListTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
     const target = createTarget(destFilename);
-    return (seq: Sequence<string>) => target(seq.map((a) => a + '\n'));
+    return (seq: Iterable<string>) =>
+        target(
+            pipe(
+                seq,
+                opMap((a) => a + '\n')
+            )
+        );
 }
 
-function createTarget(destFilename: string): (seq: Sequence<string>) => Promise<void> {
+function createTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
     const destDir = path.dirname(destFilename);
     const pDir = mkdirp(destDir);
-    return async (seq: Sequence<string>) => {
+    return async (seq: Iterable<string>) => {
         await pDir;
         return writeSeqToFile(seq, destFilename);
     };
@@ -124,7 +136,7 @@ interface CompilerState {
     wordMapper: WordMapper;
 }
 
-function normalizeWordListSeq(lines: Iterable<string>, initialState: CompilerState): Sequence<string> {
+function normalizeWordListSeq(lines: Iterable<string>, initialState: CompilerState): Iterable<string> {
     return genSequence(normalizeWordListGen(lines, initialState));
 }
 
@@ -192,7 +204,7 @@ export interface CompileTrieOptions extends CompileOptions, TrieOptions {}
 export const consolidate = Trie.consolidate;
 
 export async function compileTrie(
-    words: Sequence<string>,
+    words: Iterable<string>,
     destFilename: string,
     options: CompileTrieOptions
 ): Promise<void> {
@@ -203,9 +215,9 @@ export async function compileTrie(
 export function createTrieTarget(
     destFilename: string,
     options: TrieOptions
-): (words: Sequence<string>) => Promise<void> {
+): (words: Iterable<string>) => Promise<void> {
     const target = createTarget(destFilename);
-    return async (words: Sequence<string>) => {
+    return async (words: Iterable<string>) => {
         const log = getLogger();
         log('Reading Words into Trie');
         const base = options.base ?? 32;
