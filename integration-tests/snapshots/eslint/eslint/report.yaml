@@ -5,7 +5,7 @@ Args: ["**","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exc
 Summary:
   files: 1787
   filesWithIssues: 1218
-  issues: 5369
+  issues: 5358
   errors: 0
 Errors: []
 
@@ -20,8 +20,8 @@ issues:
   - "docs/package.json:25:32     	syntaxhighlight 	U   	1ty/eleventy-plugin-syntaxhighlight\": \"^3.1.2\","
   - "docs/package.json:27:10     	algoliasearch   	U   	\"algoliasearch\": \"^4.12.1\","
   - "docs/package.json:36:10     	luxon           	U   	\"luxon\": \"^2.4.0\","
-  - "docs/README.md:20:14    	docsjs  	U   	npm run lint:docsjs"
-  - "docs/README.md:23:4     	autofix 	U   	To autofix JS files, run this from"
+  - "docs/README.md:34:14    	docsjs  	U   	npm run lint:docsjs"
+  - "docs/README.md:37:4     	autofix 	U   	To autofix JS files, run this from"
   - "docs/src/about/index.md:7:87    	Zakas       	U   	created by Nicholas C. Zakas in June 2013. Code"
   - "docs/src/about/index.md:11:146  	pluggable   	U   	all rules completely pluggable. The default rules are"
   - "docs/src/assets/js/components-index.js:17:14    	toggleindex 	U   	function toggleindex(e) {"
@@ -35,7 +35,6 @@ issues:
   - "docs/src/assets/js/main.js:215:13   	setupindex  	U   	setupindexToggles(indexToggles"
   - "docs/src/assets/js/main.js:244:27   	labelledby  	U   	\"aria-labelledby\","
   - "docs/src/assets/js/main.js:253:17   	thepanel    	U   	var thepanel = toggleButton.nextElementSib"
-  - "docs/src/assets/js/search.js:167:60     	behaviour   	U   	search').scrollIntoView({ behaviour: \"smooth\", block: \"start"
   - "docs/src/assets/js/tabs.js:95:9     	tablist         	U   	var tablist = el.querySelector("
   - "docs/src/assets/js/tabs.js:97:9     	tabpanels       	U   	var tabpanels = Array.from(el.querySelector"
   - "docs/src/assets/js/tabs.js:97:59    	tabpanel        	U   	querySelectorAll(\"[data-tabpanel]\"));"
@@ -47,7 +46,6 @@ issues:
   - "docs/src/assets/scss/carbon-ads.scss:7:2        	carbonads   	U   	#carbonads * {"
   - "docs/src/assets/scss/carbon-ads.scss:81:20      	poweredby   	U   	#carbonads .carbon-poweredby {"
   - "docs/src/assets/scss/components/docs-navigation.scss:28:6       	flexer  	U   	.flexer {"
-  - "docs/src/assets/scss/components/search.scss:73:15   	rekative    	U   	position: rekative;"
   - "docs/src/assets/scss/components/search.scss:154:10  	docsearch   	U   	.algolia-docsearch-suggestion--highlight"
   - "docs/src/assets/scss/docs.scss:124:44   	Csvg    	U   	data:image/svg+xml,%3Csvg width='45' height='"
   - "docs/src/assets/scss/docs.scss:124:216  	Cpath   	U   	fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L"
@@ -217,8 +215,7 @@ issues:
   - "docs/src/user-guide/command-line-interface.md:394:4     	checkstyle  	U   	* [checkstyle](formatters/#checkstyle"
   - "docs/src/user-guide/command-line-interface.md:416:17    	customformat	U   	npx eslint -f ./customformat.js file.js"
   - "docs/src/user-guide/command-line-interface.md:493:11    	Autofixed   	U   	**Note:** Autofixed files are not placed"
-  - "docs/src/user-guide/configuring/configuration-files-new.md:217:564  	runtimes    	U   	example, some older runtimes might only allow ECMAScript"
-  - "docs/src/user-guide/configuring/configuration-files-new.md:235:68   	nonstrict   	U   	function scope and runs in nonstrict mode."
+  - "docs/src/user-guide/configuring/configuration-files-new.md:217:564  	runtimes	U   	example, some older runtimes might only allow ECMAScript"
   - "docs/src/user-guide/configuring/configuration-files.md:40:25    	myfiletotest	U   	eslint -c myconfig.json myfiletotest.js"
   - "docs/src/user-guide/configuring/ignoring-code.md:29:186     	subdir      	U   	foo.js` but not `lib/subdir/foo.js`."
   - "docs/src/user-guide/configuring/ignoring-code.md:97:200     	jshintignore	U   	example, you can use `.jshintignore` file because it has"
@@ -273,11 +270,7 @@ issues:
   - "lib/cli-engine/xml-escape.js:29:26      	apos	U   	return \"&apos;\";"
   - "lib/cli.js:28:44    	humanwhocodes   	U   	noreToMinimatch } = require(\"@humanwhocodes/gitignore-to-minimatch"
   - "lib/config/default-config.js:59:61      	globbed 	U   	ensure these files are globbed by default"
-  - "lib/config/flat-config-array.js:73:16   	baes	U   	* The baes config used to build"
   - "lib/eslint/eslint-helpers.js:16:7       	globby  	U   	const globby = require(\"globby\")"
-  - "lib/eslint/eslint-helpers.js:70:52      	stringss	U   	an array of non-empty stringss or not."
-  - "lib/eslint/flat-eslint.js:875:37    	fixtypes    	U   	// set up fixer for fixtypes if necessary"
-  - "lib/eslint/flat-eslint.js:1051:12   	thirdparty  	U   	* - A thirdparty formatter name:"
   - "lib/linter/code-path-analysis/code-path-state.js:159:31     	unflattened 	U   	{CodePathSegment[]} unflattenedFromSegments Segments"
   - "lib/linter/code-path-analysis/code-path-state.js:913:23     	Segs        	U   	const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/code-path.js:138:34   	Omittable   	U   	param {Object} [options] Omittable."
@@ -293,7 +286,6 @@ issues:
   - "lib/linter/linter.js:946:18     	SOURCECODE      	U   	const DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
   - "lib/linter/linter.js:946:29     	PASSTHROUGHS    	U   	DEPRECATED_SOURCECODE_PASSTHROUGHS = {"
   - "lib/options.js:2:44     	optionator  	U   	Options configuration for optionator."
-  - "lib/options.js:70:26    	opinionator 	U   	returns {Object} The opinionator instance."
   - "lib/rule-tester/flat-rule-tester.js:225:42  	errorize	U   	ast The root node to errorize `start`/`end` properties"
   - "lib/rule-tester/flat-rule-tester.js:717:27  	Didnt   	U   	function assertASTDidntChange(beforeAST, afterAST"
   - "lib/rule-tester/rule-tester.js:10:52    	unittests   	U   	mocha to allow for DRY unittests for eslint"
@@ -437,7 +429,6 @@ issues:
   - "tests/lib/config/flat-config-array.js:898:43    	truex       	U   	foo: \"truex\""
   - "tests/lib/config/flat-config-array.js:1408:29   	foox        	U   	foox: [1, \"bar\"]"
   - "tests/lib/config/flat-config-array.js:1430:30   	doesnt      	U   	\"doesnt-exist/match\": \"error"
-  - "tests/lib/eslint/flat-eslint.js:4179:50 	flob        	U   	due to a bug in fast-flob that doesn't allow"
   - "tests/lib/eslint/flat-eslint.js:4184:9  	xdescribe   	U   	xdescribe(\"ignorePatterns can"
   - "tests/lib/linter/code-path-analysis/code-path-analyzer.js:30:16     	ESQUERY 	U   	const STANDARD_ESQUERY_OPTION = { visitorKeys"
   - "tests/lib/linter/config-comment-parser.js:165:41    	ELEVENTEEN  	U   	code = \"a: seventy, b:ELEVENTEEN\";"
@@ -461,7 +452,6 @@ issues:
   - "tests/lib/rule-tester/flat-rule-tester.js:1102:36   	somefile    	U   	filename: \"somefile.js\""
   - "tests/lib/rule-tester/flat-rule-tester.js:2227:33   	outpt       	U   	outpt: \"var baz;\""
   - "tests/lib/rule-tester/flat-rule-tester.js:2580:15   	Subclassing 	U   	describe(\"Subclassing\", () => {"
-  - "tests/lib/rule-tester/rule-tester.js:2335:65    	intentioally	U   	line no-undefined -- intentioally added for test case"
   - "tests/lib/rules/array-bracket-newline.js:57:50      	ndosomething	U   	[\\nfunction foo() {\\ndosomething();\\n}\\n];\","
   - "tests/lib/rules/array-bracket-spacing.js:51:47      	n'qux   	U   	[{\\n'bar': 'baz', \\n'qux': [{ 'bar': 'baz' }"
   - "tests/lib/rules/array-bracket-spacing.js:51:76      	n'quxx  	U   	{ 'bar': 'baz' }], \\n'quxx': 1 \\n}]\", options:"
@@ -482,7 +472,7 @@ issues:
   - "tests/lib/rules/id-blacklist.js:136:51  	myarray     	U   	\"date\", \"mydate\", \"myarray\", \"new\", \"var\"]"
   - "tests/lib/rules/id-blacklist.js:189:47  	writability 	U   	myGlobal } = foo);\", // writability doesn't affect the logic"
   - "tests/lib/rules/id-length.js:50:22      	lalala      	U   	{ code: \"var lalala = Foo(42)\", options"
-  - "tests/lib/rules/id-length.js:508:29     	NOTMATCHED  	U   	code: \"function NOTMATCHED_send() {};\","
+  - "tests/lib/rules/id-length.js:625:29     	NOTMATCHED  	U   	code: \"function NOTMATCHED_send() {};\","
   - "tests/lib/rules/id-match.js:25:30   	Matthieu    	U   	code: \"__foo = \\\"Matthieu\\\"\","
   - "tests/lib/rules/id-match.js:34:20   	firstname   	U   	code: \"firstname = \\\"Matthieu\\\"\","
   - "tests/lib/rules/id-match.js:46:34   	Larcher     	U   	code: \"last_Name = \\\"Larcher\\\"\","
