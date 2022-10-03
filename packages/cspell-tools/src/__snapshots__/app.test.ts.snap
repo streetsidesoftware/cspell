@@ -14,42 +14,6 @@ exports[`Validate the application app -V 1`] = `
 }
 `;
 
-exports[`Validate the application app compile 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,false,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,app-out/cities.txt
-2022-01-01T00:00:00.000Z Done "%s" to "%s",cities.txt,app-out/cities.txt
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
-exports[`Validate the application app compile compound 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,default,false,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,{cwd}/cities.compound.txt
-2022-01-01T00:00:00.000Z Done "%s",{cwd}/cities.compound.txt
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
 exports[`Validate the application app compile merge 1`] = `
 "
 # cspell-tools: keep-case no-split
@@ -88,28 +52,6 @@ worked
 "
 `;
 
-exports[`Validate the application app compile merge 2`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,false,{repo-root}/packages/Samples/dicts/cities.txt
-  {repo-root}/packages/Samples/dicts/hunspell/example.dic
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Reading example.dic
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Done reading example.dic
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/cities.txt,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/hunspell/example.dic,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Done "%s",{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
 exports[`Validate the application app compile merge legacy 1`] = `
 "
 # cspell-tools: keep-case no-split
@@ -142,28 +84,6 @@ york
 "
 `;
 
-exports[`Validate the application app compile merge legacy 2`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,false,{repo-root}/packages/Samples/dicts/cities.txt
-  {repo-root}/packages/Samples/dicts/hunspell/example.dic
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Reading example.dic
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Done reading example.dic
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/cities.txt,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/hunspell/example.dic,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Done "%s",{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
 exports[`Validate the application app compile merge with defaults --keep-raw-case 1`] = `
 "
 # cspell-tools: keep-case no-split
@@ -184,28 +104,6 @@ try
 work
 worked
 "
-`;
-
-exports[`Validate the application app compile merge with defaults --keep-raw-case 2`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,false,{repo-root}/packages/Samples/dicts/cities.txt
-  {repo-root}/packages/Samples/dicts/hunspell/example.dic
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Reading example.dic
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Done reading example.dic
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/cities.txt,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/hunspell/example.dic,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Done "%s",{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Complete.",
-}
 `;
 
 exports[`Validate the application app compile merge with defaults 1`] = `
@@ -236,156 +134,6 @@ worked
 ~paris
 ~san francisco
 "
-`;
-
-exports[`Validate the application app compile merge with defaults 2`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,false,{repo-root}/packages/Samples/dicts/cities.txt
-  {repo-root}/packages/Samples/dicts/hunspell/example.dic
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Reading example.dic
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Done reading example.dic
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/cities.txt,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",{repo-root}/packages/Samples/dicts/hunspell/example.dic,{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Done "%s",{cwd}/app-out/merge.txt
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
-exports[`Validate the application app compile with compression 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,true,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,app-out/cities.txt.gz
-2022-01-01T00:00:00.000Z Done "%s" to "%s",cities.txt,app-out/cities.txt.gz
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
-exports[`Validate the application app compile-trie -o 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,false,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,app-out/cities.trie
-2022-01-01T00:00:00.000Z Reading Words into Trie
-2022-01-01T00:00:00.000Z Reduce duplicate word endings
-2022-01-01T00:00:00.000Z Writing to file cities.trie
-2022-01-01T00:00:00.000Z Done writing to file cities.trie
-2022-01-01T00:00:00.000Z Done "%s" to "%s",cities.txt,app-out/cities.trie
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
-exports[`Validate the application app compile-trie 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,default,false,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,cities.trie
-2022-01-01T00:00:00.000Z Reading Words into Trie
-2022-01-01T00:00:00.000Z Reduce duplicate word endings
-2022-01-01T00:00:00.000Z Writing to file cities.trie
-2022-01-01T00:00:00.000Z Done writing to file cities.trie
-2022-01-01T00:00:00.000Z Done "%s" to "%s",cities.txt,cities.trie
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
-exports[`Validate the application app compile-trie compound 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,{cwd},false,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Reading Words into Trie
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,{cwd}/temp/cities.compound.trie
-2022-01-01T00:00:00.000Z Reduce duplicate word endings
-2022-01-01T00:00:00.000Z Writing to file cities.compound.trie
-2022-01-01T00:00:00.000Z Done writing to file cities.compound.trie
-2022-01-01T00:00:00.000Z Done "%s",{cwd}/temp/cities.compound.trie
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
-exports[`Validate the application app compile-trie compress 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,default,true,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,cities.trie.gz
-2022-01-01T00:00:00.000Z Reading Words into Trie
-2022-01-01T00:00:00.000Z Reduce duplicate word endings
-2022-01-01T00:00:00.000Z Writing to file cities.trie.gz
-2022-01-01T00:00:00.000Z Done writing to file cities.trie.gz
-2022-01-01T00:00:00.000Z Done "%s" to "%s",cities.txt,cities.trie.gz
-2022-01-01T00:00:00.000Z Complete.",
-}
-`;
-
-exports[`Validate the application app compile-trie max depth 1`] = `
-{
-  "error": "",
-  "log": "Compile:
- output: %s
- compress: %s
- files:
-  %s 
-
-,app-out,false,cities.txt
-2022-01-01T00:00:00.000Z Reading cities.txt
-2022-01-01T00:00:00.000Z Done reading cities.txt
-2022-01-01T00:00:00.000Z Process "%s" to "%s",cities.txt,app-out/cities.trie
-2022-01-01T00:00:00.000Z Reading Words into Trie
-2022-01-01T00:00:00.000Z Reduce duplicate word endings
-2022-01-01T00:00:00.000Z Writing to file cities.trie
-2022-01-01T00:00:00.000Z Done writing to file cities.trie
-2022-01-01T00:00:00.000Z Done "%s" to "%s",cities.txt,app-out/cities.trie
-2022-01-01T00:00:00.000Z Complete.",
-}
 `;
 
 exports[`Validate the application app no args 1`] = `

@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as shell from 'shelljs';
 import * as app from './app';
+import { getSystemFeatureFlags } from './FeatureFlags';
 import { spyOnConsole } from './test/console';
 
 const projectRoot = path.join(__dirname, '..');
@@ -25,6 +26,8 @@ function getCommander() {
 
 const { consoleOutput } = spyOnConsole();
 
+getSystemFeatureFlags().setFlag('enable-config', false);
+
 describe('Validate the application', () => {
     beforeAll(() => {
         shell.rm('rf', _pathTemp);
@@ -42,35 +45,30 @@ describe('Validate the application', () => {
         const commander = getCommander();
         const args = argv('compile-trie', '-n', 'cities.txt');
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile-trie compress', async () => {
         const commander = getCommander();
         const args = argv('compile-trie', 'cities.txt');
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile-trie -o', async () => {
         const commander = getCommander();
         const args = argv('compile-trie', '-n', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile', async () => {
         const commander = getCommander();
         const args = argv('compile', '-n', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile-trie max depth', async () => {
         const commander = getCommander();
         const args = argv('compile-trie', '-n', '-m', '0', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile-trie compound', async () => {
@@ -88,7 +86,6 @@ describe('Validate the application', () => {
             'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile compound', async () => {
@@ -103,14 +100,12 @@ describe('Validate the application', () => {
             'cities.txt'
         );
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile with compression', async () => {
         const commander = getCommander();
         const args = argv('compile', 'cities.txt', '-o', relPathTemp);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile merge legacy', async () => {
@@ -134,7 +129,6 @@ describe('Validate the application', () => {
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile merge', async () => {
@@ -148,7 +142,6 @@ describe('Validate the application', () => {
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile merge with defaults', async () => {
@@ -162,7 +155,6 @@ describe('Validate the application', () => {
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app compile merge with defaults --keep-raw-case', async () => {
@@ -176,7 +168,6 @@ describe('Validate the application', () => {
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
         expect(words).toMatchSnapshot();
-        expect(consoleOutput()).toMatchSnapshot();
     });
 
     test('app no args', async () => {
