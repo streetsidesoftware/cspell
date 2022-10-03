@@ -1,9 +1,11 @@
-import { compileWordList, compileTrie } from './compiler';
+import { compileWordList, compileTrie } from '.';
 import * as path from 'path';
 import { genSequence, Sequence } from 'gensequence';
-import { streamWordsFromFile } from './compiler/iterateWordsFromFile';
-import { ReaderOptions } from './compiler/Reader';
-import { CompileCommonOptions, globP, log } from './app';
+import { streamWordsFromFile } from './iterateWordsFromFile';
+import { ReaderOptions } from './Reader';
+import { CompileCommonOptions } from './CompileOptions';
+import { logWithTimestamp } from './logWithTimestamp';
+import { globP } from './globP';
 
 export async function processCompileAction(src: string[], options: CompileCommonOptions): Promise<void> {
     const useTrie = options.trie || options.trie3 || options.trie4 || false;
@@ -48,9 +50,9 @@ export async function processCompileAction(src: string[], options: CompileCommon
     const filesToProcess = genSequence(globResults)
         .concatMap((files) => files)
         .map(async (filename) => {
-            log(`Reading ${path.basename(filename)}`);
+            logWithTimestamp(`Reading ${path.basename(filename)}`);
             const words = await streamWordsFromFile(filename, readerOptions);
-            log(`Done reading ${path.basename(filename)}`);
+            logWithTimestamp(`Done reading ${path.basename(filename)}`);
             const f: FileToProcess = {
                 src: filename,
                 words,
@@ -62,7 +64,7 @@ export async function processCompileAction(src: string[], options: CompileCommon
         ? processFiles(action, filesToProcess, toMergeTargetFile(options.merge, options.output, ext))
         : processFilesIndividually(action, filesToProcess, (s) => toTargetFile(s, options.output, ext));
     await r;
-    log(`Complete.`);
+    logWithTimestamp(`Complete.`);
 }
 function toFilename(name: string, ext: string) {
     return path.basename(name).replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
@@ -85,9 +87,9 @@ async function processFilesIndividually(
     const toProcess = filesToProcess.map(async (pFtp) => {
         const { src, words } = await pFtp;
         const dst = srcToTarget(src);
-        log('Process "%s" to "%s"', src, dst);
+        logWithTimestamp('Process "%s" to "%s"', src, dst);
         await action(words, dst);
-        log('Done "%s" to "%s"', src, dst);
+        logWithTimestamp('Done "%s" to "%s"', src, dst);
     });
 
     for (const p of toProcess) {
@@ -102,12 +104,12 @@ async function processFiles(action: ActionFn, filesToProcess: Sequence<Promise<F
     const words = genSequence(toProcess)
         .map((ftp) => {
             const { src } = ftp;
-            log('Process "%s" to "%s"', src, dst);
+            logWithTimestamp('Process "%s" to "%s"', src, dst);
             return ftp;
         })
         .concatMap((ftp) => ftp.words);
     await action(words, dst);
-    log('Done "%s"', dst);
+    logWithTimestamp('Done "%s"', dst);
 }
 interface FileToProcess {
     src: string;

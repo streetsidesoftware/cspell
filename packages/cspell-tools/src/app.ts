@@ -1,56 +1,16 @@
 // For large dictionaries, it is necessary to increase the memory limit.
 
-import { Logger } from './compiler';
-import * as compiler from './compiler';
-import * as path from 'path';
 import * as program from 'commander';
-import glob from 'glob';
-import { processCompileAction } from './processCompileAction';
+import * as path from 'path';
+import type { CompileOptions, CompileTrieOptions } from './compiler/CompileOptions';
+import * as compiler from './compiler';
+import { logWithTimestamp } from './compiler/logWithTimestamp';
+import { processCompileAction } from './compiler/processCompileAction';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const npmPackage = require(path.join(__dirname, '..', 'package.json'));
 
-export function globP(pattern: string): Promise<string[]> {
-    // Convert windows separators.
-    pattern = pattern.replace(/\\/g, '/');
-    return new Promise((resolve, reject) => {
-        glob(pattern, (err, result) => {
-            err ? reject(err) : resolve(result);
-        });
-    });
-}
-
-export interface CompileCommonOptions {
-    output?: string;
-    compress: boolean;
-    max_depth?: string;
-    merge?: string;
-    experimental: string[];
-    split?: boolean;
-    sort?: boolean;
-    keepRawCase?: boolean;
-    trie?: boolean;
-    trie3?: boolean;
-    trie4?: boolean;
-    trieBase?: string;
-    useLegacySplitter?: boolean;
-}
-
-interface CompileOptions extends CompileCommonOptions {
-    sort: boolean;
-    keepRawCase: boolean;
-}
-
-interface CompileTrieOptions extends CompileCommonOptions {
-    trie3: boolean;
-    trie4: boolean;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const log: Logger = (message?: any, ...optionalParams: any[]) => {
-    console.log(`${new Date().toISOString()} ${message}`, ...optionalParams);
-};
-
-compiler.setLogger(log);
+compiler.setLogger(logWithTimestamp);
 
 function collect(value: string, previous: string[]) {
     return previous.concat([value]);

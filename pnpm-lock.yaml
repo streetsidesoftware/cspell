@@ -551,6 +551,7 @@ importers:
 
   packages/cspell-tools:
     specifiers:
+      '@cspell/cspell-pipe': workspace:*
       '@types/fs-extra': ^9.0.13
       '@types/glob': ^8.0.0
       '@types/jest': ^29.1.1
@@ -559,17 +560,18 @@ importers:
       '@types/shelljs': ^0.8.11
       commander: ^9.4.1
       cosmiconfig: ^7.0.1
-      cspell-io: workspace:^
-      cspell-trie-lib: workspace:^
+      cspell-io: workspace:*
+      cspell-trie-lib: workspace:*
       fs-extra: ^10.1.0
       gensequence: ^4.0.2
       glob: ^8.0.3
-      hunspell-reader: workspace:^
+      hunspell-reader: workspace:*
       jest: ^29.1.2
       lorem-ipsum: ^2.0.8
       rimraf: ^3.0.2
       shelljs: ^0.8.5
     dependencies:
+      '@cspell/cspell-pipe': link:../cspell-pipe
       commander: 9.4.1
       cosmiconfig: 7.0.1
       cspell-io: link:../cspell-io

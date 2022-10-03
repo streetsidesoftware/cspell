@@ -1,9 +1,18 @@
-export interface RunConfig {
+export interface RunConfig extends CompileTargetOptions {
     /**
      * Optional Target Dictionaries to create.
      */
     targets?: Target[];
+}
 
+export interface CompileRequest extends CompileTargetOptions {
+    /**
+     * Target Dictionaries to create.
+     */
+    targets: Target[];
+}
+
+export interface CompileTargetOptions {
     /**
      * Experimental flags
      */
