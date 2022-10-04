@@ -1,7 +1,6 @@
 import * as Commander from 'commander';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as shell from 'shelljs';
 import * as app from './app';
 import { readTextFile } from './compiler/readTextFile';
 import { getSystemFeatureFlags } from './FeatureFlags';
