@@ -10,10 +10,11 @@ export function parseFlags(ff: FeatureFlags, flags: string[]): FeatureFlags {
         try {
             ff.setFlag(name, value);
         } catch (e) {
-            if (!(e instanceof UnknownFeatureFlagError)) {
-                throw e;
+            if (e instanceof UnknownFeatureFlagError) {
+                console.error(e.message);
+                console.error(ff.help());
             }
-            console.error(e.message);
+            throw e;
         }
     }
 

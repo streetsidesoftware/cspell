@@ -116,11 +116,11 @@ export function isFilePath(source: DictionarySource): source is FilePath {
 }
 
 export function isFileSource(source: DictionarySource): source is FileSource {
-    if (isFilePath(source)) return false;
+    if (!source || isFilePath(source)) return false;
     return (<FileSource>source).filename !== undefined;
 }
 
 export function isFileListSource(source: DictionarySource): source is FileListSource {
-    if (isFilePath(source)) return false;
+    if (!source || isFilePath(source)) return false;
     return (<FileListSource>source).listFile !== undefined;
 }
