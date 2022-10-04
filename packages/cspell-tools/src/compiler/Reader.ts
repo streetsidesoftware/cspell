@@ -9,7 +9,7 @@ import {
 import { genSequence, operators, Sequence } from 'gensequence';
 import * as HR from 'hunspell-reader';
 import { AffWord } from 'hunspell-reader';
-import { readTextFile, readTextFileLines } from './readTextFile';
+import { readTextFileLines } from './readTextFile';
 
 const regHunspellFile = /\.(dic|aff)$/i;
 
@@ -95,7 +95,7 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
 }
 
 async function trieFileReader(filename: string): Promise<BaseReader> {
-    const trieRoot = importTrie(await readTextFile(filename));
+    const trieRoot = importTrie(await readTextFileLines(filename));
     const trie = new Trie(trieRoot);
     const rawWords = () => trie.words();
     return {
