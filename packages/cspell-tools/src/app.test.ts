@@ -28,9 +28,6 @@ function getCommander() {
 
 const { consoleOutput } = spyOnConsole();
 
-getSystemFeatureFlags().setFlag('enable-config', false);
-getSystemFeatureFlags().setFlag('enable-config', true);
-
 describe('Validate the application', () => {
     beforeAll(() => {
         testHelper.clearTempDir();
@@ -75,26 +72,21 @@ describe('Validate the application', () => {
 
     test('app compile-trie compound', async () => {
         const commander = getCommander();
-        const argsBase = argv(
+        const args = argv(
             'compile-trie',
             '-n',
             '--trie3',
             '--trie-base=10',
             '--experimental=compound',
+            '--merge=out/cities.compound',
             '-o',
             pathTemp(),
             'cities.txt'
         );
-        const args = argsBase.concat(['--experimental=enable-config:false', '--merge=out/cities.compound']);
         const ff = getSystemFeatureFlags().fork();
         await expect(app.run(commander, args, ff)).resolves.toBeUndefined();
         const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.trie'));
         expect(words).toMatchSnapshot();
-
-        const args2 = argsBase.concat(['--experimental=enable-config:true', '--merge=out/cities.compound2']);
-        await expect(app.run(commander, args2, ff)).resolves.toBeUndefined();
-        const words2 = await readTextFile(path.join(pathTemp(), 'out/cities.compound2.trie'));
-        expect(words2).toEqual(words);
     });
 
     test('app compile compound', async () => {
