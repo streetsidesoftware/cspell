@@ -29,7 +29,7 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
     const fileExt = useTrie ? '.trie' : '.txt';
 
     if (merge) {
-        const targetFilename = toFilename(merge, fileExt);
+        const targetFilename = toTargetFilename(merge, fileExt);
         const filename = path.join(output, targetFilename);
         const target: Target = {
             filename,
@@ -43,7 +43,7 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
     }
 
     const targets: Target[] = sources.map((source) => {
-        const targetFilename = toFilename(source, fileExt);
+        const targetFilename = toTargetFilename(source, fileExt);
         const filename = path.join(output, targetFilename);
         const target: Target = {
             filename,
@@ -62,8 +62,8 @@ function calcFormat(options: CompileCommonAppOptions): DictionaryFormats {
     return (options.trie4 && 'trie4') || (options.trie3 && 'trie3') || (options.trie && 'trie') || 'plaintext';
 }
 
-function toFilename(name: string, ext: string) {
-    return path.basename(name).replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
+function toTargetFilename(name: string, ext: string) {
+    return name.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
 }
 
 function parseNumber(s: string | undefined): number | undefined {

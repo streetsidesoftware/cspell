@@ -23,7 +23,7 @@ export async function processCompileAction(
     const ff = featureFlags || getSystemFeatureFlags();
     parseFlags(ff, options.experimental);
 
-    return ff.getFlag('enable-config') ? useCompile(src, options) : _processCompileAction(src, options);
+    return ff.getFlagBool('enable-config') ? useCompile(src, options) : _processCompileAction(src, options);
 }
 
 async function useCompile(src: string[], options: CompileCommonAppOptions): Promise<void> {

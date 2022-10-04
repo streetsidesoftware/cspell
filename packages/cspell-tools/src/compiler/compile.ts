@@ -56,13 +56,14 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
               return compileTrie(words, dst, {
-                  ...options,
                   skipNormalization,
                   splitWords,
                   keepRawCase,
                   legacy,
                   base: trieBase,
                   sort: false,
+                  trie3: format === 'trie3',
+                  trie4: format === 'trie4',
               });
           }
         : async (src: Iterable<string>, dst: string) => {
@@ -77,7 +78,7 @@ export async function compileTarget(target: Target, options: CompileTargetOption
 
     await processFiles(action, filesToProcess, filename);
 
-    logWithTimestamp(`Done compile: ${filename}`);
+    logWithTimestamp(`Done compile: ${target.filename}`);
 }
 
 async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], mergeTarget: string) {
@@ -91,7 +92,10 @@ async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], m
             logWithTimestamp('Process "%s" to "%s"', src, dst);
             return ftp;
         }),
-        opConcatMap((ftp) => ftp.words)
+        opConcatMap(function* (ftp) {
+            yield* ftp.words;
+            logWithTimestamp('Done processing %s', ftp.src);
+        })
     );
     await action(words, dst);
     logWithTimestamp('Done "%s"', dst);

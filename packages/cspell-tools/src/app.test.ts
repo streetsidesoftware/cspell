@@ -2,6 +2,7 @@ import * as Commander from 'commander';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as shell from 'shelljs';
+import { promisify } from 'util';
 import * as app from './app';
 import { readTextFile } from './compiler/readTextFile';
 import { getSystemFeatureFlags } from './FeatureFlags';
@@ -12,9 +13,11 @@ const _pathTemp = path.join(projectRoot, 'temp/cspell-tools', path.basename(__fi
 const relPathTemp = 'app-out';
 const pathSamples = path.join(projectRoot, '../Samples/dicts');
 
+const sleep = promisify(setTimeout);
+
 function pathTemp() {
-    const test = expect.getState().currentTestName || '';
-    return path.join(_pathTemp, test.replace(/[^\w_.-]/, '_'));
+    const testName = expect.getState().currentTestName || '';
+    return path.join(_pathTemp, testName.replace(/[^\w_.-]/g, '_'));
 }
 
 function argv(...args: string[]): string[] {
@@ -27,8 +30,8 @@ function getCommander() {
 
 const { consoleOutput } = spyOnConsole();
 
-getSystemFeatureFlags().setFlag('enable-config', true);
 getSystemFeatureFlags().setFlag('enable-config', false);
+getSystemFeatureFlags().setFlag('enable-config', true);
 
 describe('Validate the application', () => {
     beforeAll(() => {
@@ -75,22 +78,26 @@ describe('Validate the application', () => {
 
     test('app compile-trie compound', async () => {
         const commander = getCommander();
-        const args = argv(
+        const argsBase = argv(
             'compile-trie',
             '-n',
             '--trie3',
             '--trie-base=10',
-            '--experimental',
-            'compound',
-            '--merge',
-            'out/cities.compound',
+            '--experimental=compound',
             '-o',
             pathTemp(),
             'cities.txt'
         );
-        await expect(app.run(commander, args)).resolves.toBeUndefined();
+        const args = argsBase.concat(['--experimental=enable-config:false', '--merge=out/cities.compound']);
+        const ff = getSystemFeatureFlags().fork();
+        await expect(app.run(commander, args, ff)).resolves.toBeUndefined();
         const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.trie'));
         expect(words).toMatchSnapshot();
+
+        const args2 = argsBase.concat(['--experimental=enable-config:true', '--merge=out/cities.compound2']);
+        await expect(app.run(commander, args2, ff)).resolves.toBeUndefined();
+        const words2 = await readTextFile(path.join(pathTemp(), 'out/cities.compound2.trie'));
+        expect(words2).toEqual(words);
     });
 
     test('app compile compound', async () => {

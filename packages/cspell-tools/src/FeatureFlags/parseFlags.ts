@@ -1,10 +1,11 @@
 import { FeatureFlags, UnknownFeatureFlagError } from './FeatureFlags';
 
 const splitFlag = /[:=]/;
+const leadingEql = /^=/;
 
 export function parseFlags(ff: FeatureFlags, flags: string[]): FeatureFlags {
     for (const flag of flags) {
-        const [name, value] = flag.split(splitFlag, 2);
+        const [name, value] = flag.replace(leadingEql, '').split(splitFlag, 2);
 
         try {
             ff.setFlag(name, value);

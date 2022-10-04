@@ -44,7 +44,7 @@ function createTarget(destFilename: string): (seq: Iterable<string>) => Promise<
     const pDir = mkdirp(destDir);
     return async (seq: Iterable<string>) => {
         await pDir;
-        return writeSeqToFile(seq, destFilename);
+        await writeSeqToFile(seq, destFilename);
     };
 }
 

@@ -41,42 +41,30 @@ function addCompileOptions(compileCommand: program.Command): program.Command {
         .option('--trie-base <number>', 'Advanced: Set the trie base number. A value between 10 and 36');
 }
 
-export function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
+export async function run(program: program.Command, argv: string[], flags?: FeatureFlags): Promise<void> {
     program.exitOverride();
 
-    return new Promise((resolve, reject) => {
-        program.version(npmPackage.version);
+    program.version(npmPackage.version);
 
-        addCompileOptions(
-            program.command('compile <src...>').description('Compile words into a cspell dictionary files.')
-        )
-            .option('--trie', 'Compile into a trie file.', false)
-            .option('--no-sort', 'Do not sort the result')
-            .action((src: string[], options: CompileAppOptions) => {
-                const result = processCompileAction(src, options, flags);
-                resolve(result);
-            });
-
-        addCompileOptions(
-            program
-                .command('compile-trie <src...>')
-                .description(
-                    'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`'
-                )
-        ).action((src: string[], options: CompileTrieAppOptions) => {
-            const result = processCompileAction(src, { ...options, trie: true }, flags);
-            resolve(result);
+    addCompileOptions(program.command('compile <src...>').description('Compile words into a cspell dictionary files.'))
+        .option('--trie', 'Compile into a trie file.', false)
+        .option('--no-sort', 'Do not sort the result')
+        .action((src: string[], options: CompileAppOptions) => {
+            return processCompileAction(src, options, flags);
         });
 
-        try {
-            program.parse(argv);
-            if (!argv.slice(2).length) {
-                program.help();
-            }
-        } catch (e) {
-            reject(e);
-        }
-
-        resolve();
+    addCompileOptions(
+        program
+            .command('compile-trie <src...>')
+            .description(
+                'Compile words lists or Hunspell dictionary into trie files used by cspell.\nAlias of `compile --trie`'
+            )
+    ).action((src: string[], options: CompileTrieAppOptions) => {
+        return processCompileAction(src, { ...options, trie: true }, flags);
     });
+
+    await program.parseAsync(argv);
+    // if (!argv.slice(2).length) {
+    //     program.help();
+    // }
 }

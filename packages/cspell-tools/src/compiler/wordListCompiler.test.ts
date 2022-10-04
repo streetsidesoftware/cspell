@@ -1,7 +1,6 @@
 // cSpell:ignore jpegs outing dirs lcode outring outrings
 
 import { opConcatMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
-import { readFile } from 'cspell-io';
 import * as Trie from 'cspell-trie-lib';
 import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell-trie-lib';
 import * as fsp from 'fs-extra';
@@ -10,11 +9,11 @@ import * as path from 'path';
 import { spyOnConsole } from '../test/console';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { setLogger } from './logger';
+import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList, consolidate, __testing__ } from './wordListCompiler';
 import { legacyLineToWords } from './wordListParser';
 
 const testSuiteName = path.basename(__filename);
-const UTF8: BufferEncoding = 'utf8';
 const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
 const sampleDictEn = path.join(samples, 'en_US.txt');
@@ -110,7 +109,7 @@ describe('Validate the wordListCompiler', () => {
             sort: false,
             legacy: true,
         });
-        const resultFile = await readFile(destName, UTF8);
+        const resultFile = await readTextFile(destName);
         const srcWords = resultFile.split('\n');
         const node = Trie.importTrie(srcWords);
         const expected = citiesResult
