@@ -2,7 +2,6 @@ import * as Commander from 'commander';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as shell from 'shelljs';
-import { promisify } from 'util';
 import * as app from './app';
 import { readTextFile } from './compiler/readTextFile';
 import { getSystemFeatureFlags } from './FeatureFlags';
@@ -12,8 +11,6 @@ const projectRoot = path.join(__dirname, '..');
 const _pathTemp = path.join(projectRoot, 'temp/cspell-tools', path.basename(__filename));
 const relPathTemp = 'app-out';
 const pathSamples = path.join(projectRoot, '../Samples/dicts');
-
-const sleep = promisify(setTimeout);
 
 function pathTemp() {
     const testName = expect.getState().currentTestName || '';
