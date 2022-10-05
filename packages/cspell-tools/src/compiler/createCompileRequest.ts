@@ -43,7 +43,7 @@ function calcTargets(sources: string[], options: CompileCommonAppOptions): Targe
     }
 
     const targets: Target[] = sources.map((source) => {
-        const targetFilename = toTargetFilename(source, fileExt);
+        const targetFilename = toTargetFilename(path.basename(source), fileExt);
         const filename = path.join(output, targetFilename);
         const target: Target = {
             filename,

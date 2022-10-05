@@ -29,6 +29,11 @@ export class FeatureFlags {
         return this;
     }
 
+    registerFeatures(flags: FeatureFlag[]): this {
+        flags.forEach((flag) => this.register(flag));
+        return this;
+    }
+
     getFlag(flag: string): FlagTypes | undefined {
         return this.flagValues.get(flag);
     }
@@ -42,7 +47,7 @@ export class FeatureFlags {
             throw new UnknownFeatureFlagError(flag);
         }
 
-        this.flagValues.set(flag, value);
+        this.flagValues.set(flag, toBool(value) ?? value);
         return this;
     }
 
@@ -64,12 +69,14 @@ export class FeatureFlags {
     }
 
     help(): string {
-        const flags = [...this.flags.values()].sort((a, b) => (a.name < b.name ? -1 : 1));
+        const flags = [{ name: 'Name', description: 'Description' }, ...this.flags.values()].sort((a, b) =>
+            a.name < b.name ? -1 : 1
+        );
 
         const nameColWidth = flags.map((f) => f.name.length).reduce((a, b) => Math.max(a, b), 0) + 1;
         const entries = flags.map((f) => `- ${f.name}${' '.repeat(nameColWidth - f.name.length)} ${f.description}`);
 
-        const text = `Validate Flags:\n${entries.join('\n')}`;
+        const text = `Valid Flags:\n${entries.join('\n')}`;
         return text;
     }
 
@@ -89,7 +96,11 @@ export class UnknownFeatureFlagError extends Error {
 }
 
 export function getSystemFeatureFlags(): FeatureFlags {
-    return systemFeatureFlags || (systemFeatureFlags = new FeatureFlags());
+    return systemFeatureFlags || (systemFeatureFlags = createFeatureFlags());
+}
+
+export function createFeatureFlags(): FeatureFlags {
+    return new FeatureFlags();
 }
 
 const boolValues: Record<string, boolean | undefined> = {

@@ -1,20 +1,20 @@
 import * as Commander from 'commander';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as shell from 'shelljs';
 import * as app from './app';
 import { readTextFile } from './compiler/readTextFile';
 import { getSystemFeatureFlags } from './FeatureFlags';
 import { spyOnConsole } from './test/console';
+import { createTestHelper } from './test/TestHelper';
 
-const projectRoot = path.join(__dirname, '..');
-const _pathTemp = path.join(projectRoot, 'temp/cspell-tools', path.basename(__filename));
+const testHelper = createTestHelper(__filename);
+
+const projectRoot = testHelper.packageRoot;
 const relPathTemp = 'app-out';
 const pathSamples = path.join(projectRoot, '../Samples/dicts');
 
-function pathTemp() {
-    const testName = expect.getState().currentTestName || '';
-    return path.join(_pathTemp, testName.replace(/[^\w_.-]/g, '_'));
+function pathTemp(...parts: string[]) {
+    return testHelper.resolveTemp(...parts);
 }
 
 function argv(...args: string[]): string[] {
@@ -27,19 +27,15 @@ function getCommander() {
 
 const { consoleOutput } = spyOnConsole();
 
-getSystemFeatureFlags().setFlag('enable-config', false);
-getSystemFeatureFlags().setFlag('enable-config', true);
-
 describe('Validate the application', () => {
     beforeAll(() => {
-        shell.rm('-rf', _pathTemp);
+        testHelper.clearTempDir();
     });
 
     beforeEach(() => {
-        const pTemp = pathTemp();
-        shell.mkdir('-p', pTemp);
-        shell.cp(path.join(pathSamples, 'cities.txt'), pTemp);
-        shell.cd(pTemp);
+        testHelper.createTempDir();
+        testHelper.cp(path.join(pathSamples, 'cities.txt'), '.');
+        testHelper.cd('.');
         jest.resetAllMocks();
     });
 
@@ -75,26 +71,21 @@ describe('Validate the application', () => {
 
     test('app compile-trie compound', async () => {
         const commander = getCommander();
-        const argsBase = argv(
+        const args = argv(
             'compile-trie',
             '-n',
             '--trie3',
             '--trie-base=10',
             '--experimental=compound',
+            '--merge=out/cities.compound',
             '-o',
             pathTemp(),
             'cities.txt'
         );
-        const args = argsBase.concat(['--experimental=enable-config:false', '--merge=out/cities.compound']);
         const ff = getSystemFeatureFlags().fork();
         await expect(app.run(commander, args, ff)).resolves.toBeUndefined();
         const words = await readTextFile(path.join(pathTemp(), 'out/cities.compound.trie'));
         expect(words).toMatchSnapshot();
-
-        const args2 = argsBase.concat(['--experimental=enable-config:true', '--merge=out/cities.compound2']);
-        await expect(app.run(commander, args2, ff)).resolves.toBeUndefined();
-        const words2 = await readTextFile(path.join(pathTemp(), 'out/cities.compound2.trie'));
-        expect(words2).toEqual(words);
     });
 
     test('app compile compound', async () => {

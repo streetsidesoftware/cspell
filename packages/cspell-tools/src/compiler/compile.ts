@@ -1,7 +1,6 @@
 import { pipeAsync, toArray } from '@cspell/cspell-pipe';
 import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
-import { promises as fs } from 'fs';
 import * as path from 'path';
 import { getSystemFeatureFlags } from '../FeatureFlags';
 import {
@@ -18,6 +17,7 @@ import {
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';
+import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList } from './wordListCompiler';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
@@ -42,8 +42,8 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     const useTrie = format.startsWith('trie');
     const filename = resolveTarget(target.filename, useTrie, target.compress);
     const experimental = new Set(options.experimental);
-    const skipNormalization = experimental.has('compound');
-    const useAnnotation = experimental.has('compound');
+    const useAnnotation = (useTrie && format >= 'trie3') || experimental.has('compound');
+    const skipNormalization = useAnnotation;
     const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
 
     const filesToProcessAsync = pipeAsync(
@@ -138,7 +138,7 @@ function readSourceList(sources: DictionarySource[]): AsyncIterable<FileSource> 
 }
 
 async function readFileList(fileList: FilePath): Promise<string[]> {
-    const content = await fs.readFile(fileList, 'utf-8');
+    const content = await readTextFile(fileList);
     return content
         .split('\n')
         .map((a) => a.trim())

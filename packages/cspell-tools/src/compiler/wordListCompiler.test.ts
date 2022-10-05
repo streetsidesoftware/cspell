@@ -7,17 +7,18 @@ import * as fsp from 'fs-extra';
 import { uniqueFilter } from 'hunspell-reader/dist/util';
 import * as path from 'path';
 import { spyOnConsole } from '../test/console';
+import { createTestHelper } from '../test/TestHelper';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { setLogger } from './logger';
 import { readTextFile } from './readTextFile';
 import { compileTrie, compileWordList, consolidate, __testing__ } from './wordListCompiler';
 import { legacyLineToWords } from './wordListParser';
 
-const testSuiteName = path.basename(__filename);
-const samples = path.join(__dirname, '..', '..', '..', 'Samples', 'dicts');
+const testHelper = createTestHelper(__filename);
+
+const samples = path.join(testHelper.packageRoot, '../Samples/dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
 const sampleDictEn = path.join(samples, 'en_US.txt');
-const temp = path.join(__dirname, '..', '..', 'temp', testSuiteName);
 
 const wordListHeader = __testing__.wordListHeader;
 
@@ -25,7 +26,10 @@ const { consoleOutput } = spyOnConsole();
 setLogger(console.log);
 
 describe('Validate the wordListCompiler', () => {
+    let temp = '.';
     beforeEach(() => {
+        testHelper.cdToTempDir();
+        temp = testHelper.resolveTemp();
         jest.resetAllMocks();
     });
 

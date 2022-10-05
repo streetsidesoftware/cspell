@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseFlags parseFlags 1`] = `Map {}`;
+
+exports[`parseFlags parseFlags 2`] = `
+Map {
+  "compress" => true,
+  "advanced" => false,
+  "flag1" => true,
+}
+`;
+
+exports[`parseFlags parseFlags 3`] = `
+Map {
+  "compress" => "level1",
+  "advanced" => true,
+  "flag1" => false,
+}
+`;
+
+exports[`parseFlags parseFlags 4`] = `
+Map {
+  "compress" => ""yes"",
+}
+`;
+
+exports[`parseFlags unknown flag 1`] = `
+{
+  "error": "Unknown feature flag: mistaken
+Valid Flags:
+- Name      Description
+- advanced  advanced desc
+- compress  compress desc
+- flag1     flag1 desc",
+  "log": "",
+}
+`;

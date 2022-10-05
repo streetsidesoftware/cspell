@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createCompileRequest createCompileRequest 1`] = `
+{
+  "experimental": [],
+  "targets": [],
+}
+`;
+
+exports[`createCompileRequest createCompileRequest 2`] = `
+{
+  "experimental": [],
+  "targets": [
+    {
+      "compress": false,
+      "filename": "words.txt",
+      "format": "plaintext",
+      "sources": [
+        "src/words.txt",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`createCompileRequest createCompileRequest 3`] = `
+{
+  "experimental": [],
+  "targets": [
+    {
+      "compress": false,
+      "filename": "out/words.txt",
+      "format": "plaintext",
+      "sources": [
+        "src/words.txt",
+      ],
+    },
+    {
+      "compress": false,
+      "filename": "out/cities.txt",
+      "format": "plaintext",
+      "sources": [
+        "src/cities.txt",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`createCompileRequest createCompileRequest 4`] = `
+{
+  "experimental": [],
+  "targets": [
+    {
+      "compress": false,
+      "filename": "out/combo.txt",
+      "format": "plaintext",
+      "sources": [
+        "src/words.txt",
+        "src/cities.txt",
+      ],
+    },
+  ],
+}
+`;
