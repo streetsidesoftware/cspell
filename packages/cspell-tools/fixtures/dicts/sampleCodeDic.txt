@@ -1,0 +1,15 @@
+# Sample Dictionary
+
+# It possible to group the dictionary into sections.
+Error*
++error*
+Code*
++code*
+*msg    # `Errormsg` is allowed, but `msgerror` is not.
+!err    # forbid `err`
+!Errorerror # forbid
+!Codemsg
+
+Café    # will get normalized and will only match if case sensitive matching is turned off.
+
+!codecode # Do not allow `codecode` or `Codecode` when using case insensitive matching.

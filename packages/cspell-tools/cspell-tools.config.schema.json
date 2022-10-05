@@ -111,13 +111,13 @@
           },
           "type": "array"
         },
-        "filename": {
-          "$ref": "#/definitions/FilePath",
-          "description": "The target filename"
-        },
         "format": {
           "$ref": "#/definitions/DictionaryFormats",
           "description": "Format of the dictionary."
+        },
+        "name": {
+          "description": "Name of target, used as the basis of target file name.",
+          "type": "string"
         },
         "sort": {
           "default": ": true",
@@ -131,14 +131,18 @@
           },
           "type": "array"
         },
+        "targetDirectory": {
+          "$ref": "#/definitions/FilePath",
+          "description": "The target directory"
+        },
         "trieBase": {
           "description": "Advanced: Set the trie base number. A value between 10 and 36 Set numeric base to use. 10 is the easiest to read. 16 is common hex format. 36 is the most compact.",
           "type": "number"
         }
       },
       "required": [
-        "filename",
-        "compress",
+        "name",
+        "targetDirectory",
         "format",
         "sources"
       ],

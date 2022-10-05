@@ -10,3 +10,4 @@ export {
     SourceConfig,
     Target,
 } from './config';
+export { normalizeConfig } from './normalizeConfig';

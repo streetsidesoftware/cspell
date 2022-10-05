@@ -31,7 +31,7 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     const splitWords = legacy ? false : split;
 
     const useTrie = format.startsWith('trie');
-    const filename = resolveTarget(target.name, target.targetDirectory, useTrie, target.compress);
+    const filename = resolveTarget(target.name, target.targetDirectory, useTrie, target.compress ?? false);
     const experimental = new Set(options.experimental);
     const useAnnotation = (useTrie && format >= 'trie3') || experimental.has('compound');
     const skipNormalization = useAnnotation;

@@ -46,25 +46,30 @@ export interface Target {
      * The target directory
      */
     targetDirectory: FilePath;
+
     /**
      * gzip the file?
      * @default: false
      */
-    compress: boolean;
+    compress?: boolean;
+
     /**
      * Format of the dictionary.
      */
     format: DictionaryFormats;
+
     /**
      * File sources used to build the dictionary.
      */
     sources: DictionarySource[];
+
     /**
      * Sort the words in the resulting dictionary.
      * Does not apply to `trie` based formats.
      * @default: true
      */
     sort?: boolean | undefined;
+
     /**
      * Words from the sources that are found in `excludeWordsFrom` files
      * will not be added to the dictionary.
