@@ -9,7 +9,10 @@ describe('createCompileRequest', () => {
         ${['src/words.txt', 'src/cities.txt']} | ${comp({ output: 'out' })}
         ${['src/words.txt', 'src/cities.txt']} | ${comp({ output: 'out', merge: 'combo' })}
     `('createCompileRequest', ({ source, options }) => {
-        expect(createCompileRequest(source, options)).toMatchSnapshot();
+        const req = createCompileRequest(source, options);
+        // Make sure the test passes on Windows.
+        const reqClean = JSON.parse(JSON.stringify(req, null, 2).replace(/\\/g, '/'));
+        expect(reqClean).toMatchSnapshot();
     });
 });
 
