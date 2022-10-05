@@ -16,29 +16,32 @@ getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources
 export async function compile(request: CompileRequest): Promise<void> {
     const { targets } = request;
 
+    const rootDir = path.resolve(request.rootDir || '.');
+
     for (const target of targets) {
-        await compileTarget(target, request);
+        await compileTarget(target, request, rootDir);
     }
     logWithTimestamp(`Complete.`);
 }
 
-export async function compileTarget(target: Target, options: CompileTargetOptions): Promise<void> {
+export async function compileTarget(target: Target, options: CompileTargetOptions, rootDir: string): Promise<void> {
     logWithTimestamp(`Start compile: ${target.name}`);
 
     const { format, sources, trieBase, sort = true } = target;
     const { keepRawCase = false, maxDepth, split = false } = options;
     const legacy = split === 'legacy';
     const splitWords = legacy ? false : split;
+    const targetDirectory = path.resolve(rootDir, target.targetDirectory);
 
     const useTrie = format.startsWith('trie');
-    const filename = resolveTarget(target.name, target.targetDirectory, useTrie, target.compress ?? false);
+    const filename = resolveTarget(target.name, targetDirectory, useTrie, target.compress ?? false);
     const experimental = new Set(options.experimental);
     const useAnnotation = (useTrie && format >= 'trie3') || experimental.has('compound');
     const skipNormalization = useAnnotation;
     const readerOptions: ReaderOptions = { maxDepth, useAnnotation };
 
     const filesToProcessAsync = pipeAsync(
-        readSourceList(sources),
+        readSourceList(sources, rootDir),
         opMapAsync((src) => readFileSource(src, readerOptions)),
         opAwaitAsync()
     );
@@ -104,22 +107,24 @@ function resolveTarget(name: string, directory: string, useTrie: boolean, useGzC
     return path.resolve(directory, filename);
 }
 
-function readSourceList(sources: DictionarySource[]): AsyncIterable<FileSource> {
+function readSourceList(sources: DictionarySource[], rootDir: string): AsyncIterable<FileSource> {
     async function* mapSrc(): AsyncIterable<FileSource> {
         for (const src of sources) {
             if (isFilePath(src)) {
-                yield { filename: src };
+                yield { filename: path.resolve(rootDir, src) };
                 continue;
             }
             if (isFileSource(src)) {
-                yield src;
+                yield { ...src, filename: path.resolve(rootDir, src.filename) };
                 continue;
             }
             if (isFileListSource(src)) {
                 const { listFile, ...rest } = src;
-                const files = await readFileList(listFile);
+                const absListFile = path.resolve(rootDir, listFile);
+                const listFileDir = path.dirname(absListFile);
+                const files = await readFileList(absListFile);
                 for (const filename of files) {
-                    yield { ...rest, filename };
+                    yield { ...rest, filename: path.resolve(listFileDir, filename) };
                 }
             }
         }

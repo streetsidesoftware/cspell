@@ -3,9 +3,22 @@ export interface RunConfig extends CompileTargetOptions {
      * Optional Target Dictionaries to create.
      */
     targets?: Target[];
+
+    /**
+     * Specify the directory where all relative paths will resolved against.
+     * By default, all relative paths are relative to the location of the
+     * config file.
+     */
+    rootDir?: string;
 }
 
 export interface CompileRequest extends CompileTargetOptions {
+    /**
+     * Specify the directory where all relative paths will resolved against.
+     * By default, all relative paths are relative to the current directory.
+     */
+    rootDir?: string;
+
     /**
      * Target Dictionaries to create.
      */
