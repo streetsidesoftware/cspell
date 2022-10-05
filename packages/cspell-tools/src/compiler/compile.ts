@@ -75,6 +75,10 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     logWithTimestamp(`Done compile: ${target.name}`);
 }
 
+function rel(filePath: string): string {
+    return path.relative(process.cwd(), filePath);
+}
+
 async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], mergeTarget: string) {
     const toProcess = filesToProcess;
     const dst = mergeTarget;
@@ -83,16 +87,16 @@ async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], m
         toProcess,
         opMap((ftp) => {
             const { src } = ftp;
-            logWithTimestamp('Process "%s" to "%s"', src, dst);
+            logWithTimestamp('Process "%s" to "%s"', rel(src), rel(dst));
             return ftp;
         }),
         opConcatMap(function* (ftp) {
             yield* ftp.words;
-            logWithTimestamp('Done processing %s', ftp.src);
+            logWithTimestamp('Done processing %s', rel(ftp.src));
         })
     );
     await action(words, dst);
-    logWithTimestamp('Done "%s"', dst);
+    logWithTimestamp('Done "%s"', rel(dst));
 }
 interface FileToProcess {
     src: string;

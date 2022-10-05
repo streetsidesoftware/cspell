@@ -68,6 +68,7 @@ export async function run(program: program.Command, argv: string[], flags?: Feat
         .command('build [targets]')
         .description('Build the targets defined in the run configuration.')
         .option('-c, --config <path to run configuration>', 'Specify the run configuration file.')
+        .option('-r, --root <directory>', 'Specify the run directory')
         .action(build);
 
     await program.parseAsync(argv);
