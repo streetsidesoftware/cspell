@@ -23,7 +23,7 @@ export async function compile(request: CompileRequest): Promise<void> {
 }
 
 export async function compileTarget(target: Target, options: CompileTargetOptions): Promise<void> {
-    logWithTimestamp(`Start compile: ${target.filename}`);
+    logWithTimestamp(`Start compile: ${target.name}`);
 
     const { format, sources, trieBase, sort = true } = target;
     const { keepRawCase = false, maxDepth, split = false } = options;
@@ -31,7 +31,7 @@ export async function compileTarget(target: Target, options: CompileTargetOption
     const splitWords = legacy ? false : split;
 
     const useTrie = format.startsWith('trie');
-    const filename = resolveTarget(target.filename, useTrie, target.compress);
+    const filename = resolveTarget(target.name, target.targetDirectory, useTrie, target.compress);
     const experimental = new Set(options.experimental);
     const useAnnotation = (useTrie && format >= 'trie3') || experimental.has('compound');
     const skipNormalization = useAnnotation;
@@ -69,7 +69,7 @@ export async function compileTarget(target: Target, options: CompileTargetOption
 
     await processFiles(action, filesToProcess, filename);
 
-    logWithTimestamp(`Done compile: ${target.filename}`);
+    logWithTimestamp(`Done compile: ${target.name}`);
 }
 
 async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], mergeTarget: string) {
@@ -98,10 +98,10 @@ interface FileToProcess {
 
 type ActionFn = (words: Iterable<string>, dst: string) => Promise<void>;
 
-function resolveTarget(filename: string, useTrie: boolean, useGzCompress: boolean | boolean): string {
+function resolveTarget(name: string, directory: string, useTrie: boolean, useGzCompress: boolean | boolean): string {
     const ext = ((useTrie && '.trie') || '.txt') + ((useGzCompress && '.gz') || '');
-    filename = filename.replace(/((\.txt|\.dic|\.aff|\.trie)(\.gz)?)?$/, '') + ext;
-    return path.resolve(filename);
+    const filename = name + ext;
+    return path.resolve(directory, filename);
 }
 
 function readSourceList(sources: DictionarySource[]): AsyncIterable<FileSource> {

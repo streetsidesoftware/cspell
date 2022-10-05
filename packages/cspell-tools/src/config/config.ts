@@ -38,14 +38,14 @@ export interface CompileTargetOptions {
 
 export interface Target {
     /**
-     * Optional Name of the target.
+     * Name of target, used as the basis of target file name.
      */
-    name?: string;
+    name: string;
 
     /**
-     * The target filename
+     * The target directory
      */
-    filename: FilePath;
+    targetDirectory: FilePath;
     /**
      * gzip the file?
      * @default: false

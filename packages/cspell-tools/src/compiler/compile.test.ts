@@ -30,7 +30,8 @@ describe('compile', () => {
         ${'plaintext'} | ${true}
     `('compile', async ({ format, compress }) => {
         const target: Target = {
-            filename: 'myDictionary',
+            name: 'myDictionary',
+            targetDirectory: '.',
             format,
             sources: [sample('cities.txt')],
             compress,
