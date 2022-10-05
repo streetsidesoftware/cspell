@@ -11,7 +11,7 @@ describe('createCompileRequest', () => {
     `('createCompileRequest', ({ source, options }) => {
         const req = createCompileRequest(source, options);
         // Make sure the test passes on Windows.
-        const reqClean = JSON.parse(JSON.stringify(req, null, 2).replace(/\\/g, '/'));
+        const reqClean = JSON.parse(JSON.stringify(req, null, 2).replace(/\\\\/g, '/'));
         expect(reqClean).toMatchSnapshot();
     });
 });
