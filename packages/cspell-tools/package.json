@@ -12,7 +12,7 @@
   "scripts": {
     "build": "pnpm run build-schema && pnpm run compile",
     "build-dev": "tsc -p tsconfig.dev.json",
-    "build-schema": "ts-json-schema-generator --no-top-ref --path src/config/index.ts --type RunConfig --validation-keywords deprecated  -o  ./cspell-tools.config.schema.json",
+    "build-schema": "ts-json-schema-generator --no-top-ref --path src/config/config.ts --type RunConfig --validation-keywords deprecated  -o  ./cspell-tools.config.schema.json",
     "compile": "tsc -p .",
     "watch": "tsc -p . -w",
     "clean-build": "pnpm run clean && pnpm run build",
