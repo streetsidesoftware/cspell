@@ -3,17 +3,8 @@ import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as path from 'path';
 import { getSystemFeatureFlags } from '../FeatureFlags';
-import {
-    CompileRequest,
-    CompileTargetOptions,
-    DictionarySource,
-    FilePath,
-    FileSource,
-    isFileListSource,
-    isFilePath,
-    isFileSource,
-    Target,
-} from './config';
+import { CompileRequest, CompileTargetOptions, DictionarySource, FilePath, FileSource, Target } from '../config';
+import { isFileListSource, isFilePath, isFileSource } from './configUtils';
 import { streamWordsFromFile } from './iterateWordsFromFile';
 import { logWithTimestamp } from './logWithTimestamp';
 import { ReaderOptions } from './Reader';

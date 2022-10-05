@@ -1,9 +1,9 @@
 import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
-import { CompileCommonAppOptions } from '../AppOptions';
-import { FeatureFlags, getSystemFeatureFlags, parseFlags } from '../FeatureFlags';
-import { compile } from './compile';
-import { createCompileRequest } from './createCompileRequest';
-import { globP } from './globP';
+import { CompileCommonAppOptions } from './AppOptions';
+import { FeatureFlags, getSystemFeatureFlags, parseFlags } from './FeatureFlags';
+import { compile } from './compiler/compile';
+import { createCompileRequest } from './compiler/createCompileRequest';
+import { globP } from './compiler/globP';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 

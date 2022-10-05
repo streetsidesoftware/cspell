@@ -1,4 +1,4 @@
-import { isFileListSource, isFilePath, isFileSource } from './config';
+import { isFileListSource, isFilePath, isFileSource } from './configUtils';
 
 describe('config', () => {
     test.each`
